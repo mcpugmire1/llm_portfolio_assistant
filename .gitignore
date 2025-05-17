@@ -1,0 +1,17 @@
+echo "__pycache__/
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env
+
+# FAISS and vector indexes
+faiss_index/
+vectorstore/
+
+# VSCode and macOS system files
+.vscode/
+.DS_Store
