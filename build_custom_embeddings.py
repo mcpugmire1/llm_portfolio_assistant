@@ -7,6 +7,7 @@ from sentence_transformers import SentenceTransformer
 # Load enriched STAR stories
 with open("star_stories_llm_enriched_with_search.json", "r") as f:
     stories = json.load(f)
+    print(f"🔍 Total stories found: {len(stories)}")
 
 # Initialize the embedding model
 model = SentenceTransformer("all-MiniLM-L6-v2")
@@ -33,15 +34,22 @@ for story in stories:
 # Generate embeddings
 embeddings = model.encode(texts, show_progress_bar=True)
 
-# Build FAISS index
-dimension = embeddings[0].shape[0]
-index = faiss.IndexFlatL2(dimension)
-index.add(np.array(embeddings))
+if VECTOR_BACKEND == "pinecone":
+    pinecone_index.upsert([
+        (f"story-{i}", embedding.tolist(), metadata[i])
+        for i, embedding in enumerate(embeddings)
+    ])
+    print("✅ Pinecone index updated successfully.")
+else:
+    # Build FAISS index
+    dimension = embeddings[0].shape[0]
+    index = faiss.IndexFlatL2(dimension)
+    index.add(np.array(embeddings))
 
-# Save index and metadata
-os.makedirs("faiss_index", exist_ok=True)
-faiss.write_index(index, "faiss_index/index.faiss")
-with open("faiss_index/story_metadata.json", "w") as f:
-    json.dump(metadata, f, indent=2)
+    # Save index and metadata
+    os.makedirs("faiss_index", exist_ok=True)
+    faiss.write_index(index, "faiss_index/index.faiss")
+    with open("faiss_index/story_metadata.json", "w") as f:
+        json.dump(metadata, f, indent=2)
 
-print("✅ Custom embeddings built and saved to faiss_index/")
+    print("✅ Custom embeddings built and saved to faiss_index/")
