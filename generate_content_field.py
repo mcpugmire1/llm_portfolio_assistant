@@ -10,10 +10,10 @@ api_key = os.getenv("OPENAI_API_KEY")
 project_id = os.getenv("OPENAI_PROJECT_ID")
 org_id = os.getenv("OPENAI_ORG_ID")
 
-print("🔍 DEBUG")
-print(f"API Key: '{api_key}' (len={len(api_key)})")
-print(f"Project ID: '{project_id}'")
-print(f"Org ID: '{org_id}'")
+#print("🔍 DEBUG")
+#print(f"API Key: '{api_key}' (len={len(api_key)})")
+#print(f"Project ID: '{project_id}'")
+#print(f"Org ID: '{org_id}'")
 
 from openai import OpenAI
 client = OpenAI(
