@@ -4,7 +4,7 @@ openai
 faiss-cpu
 python-dotenv
 sentence-transformers==2.2.2
-torch==2.7.1
+torch==2.0.1
 pinecone
 
 --extra-index-url https://download.pytorch.org/whl/cpu
