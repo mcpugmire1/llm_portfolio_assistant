@@ -30,16 +30,16 @@ if VECTOR_BACKEND == "pinecone":
     pc = Pinecone(api_key=PINECONE_API_KEY)
     pinecone_index = pc.Index(PINECONE_INDEX_NAME)
 
-    model = SentenceTransformer("all-MiniLM-L6-v2")
-    model.to("cpu")  # Explicitly move model to CPU
+    # Disable CUDA explicitly by setting device
+    model = SentenceTransformer("all-MiniLM-L6-v2", device="cpu")
     metadata = None  # Will be loaded per query from Pinecone
 
 else:
     import faiss
     import numpy as np
 
-    model = SentenceTransformer("all-MiniLM-L6-v2")
-    model.to("cpu")  # Explicitly move model to CPU
+    model = SentenceTransformer("all-MiniLM-L6-v2", device="cpu")
+    
     index = faiss.read_index("faiss_index/index.faiss")
     with open("faiss_index/story_metadata.json", "r") as f:
         metadata = json.load(f)
