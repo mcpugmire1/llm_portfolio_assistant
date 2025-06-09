@@ -3,5 +3,8 @@ langchain
 openai
 faiss-cpu
 python-dotenv
-sentence-transformers
+sentence-transformers==2.2.2
+torch==2.1.0+cpu
 pinecone-client
+
+--extra-index-url https://download.pytorch.org/whl/cpu
