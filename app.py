@@ -31,6 +31,7 @@ if VECTOR_BACKEND == "pinecone":
     pinecone_index = pc.Index(PINECONE_INDEX_NAME)
 
     model = SentenceTransformer("all-MiniLM-L6-v2")
+    model.to("cpu")  # Explicitly move model to CPU
     metadata = None  # Will be loaded per query from Pinecone
 
 else:
@@ -38,6 +39,7 @@ else:
     import numpy as np
 
     model = SentenceTransformer("all-MiniLM-L6-v2")
+    model.to("cpu")  # Explicitly move model to CPU
     index = faiss.read_index("faiss_index/index.faiss")
     with open("faiss_index/story_metadata.json", "r") as f:
         metadata = json.load(f)
