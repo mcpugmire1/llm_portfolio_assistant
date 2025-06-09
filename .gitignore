@@ -14,3 +14,32 @@ vectorstore/
 # VSCode and macOS system files
 .vscode/
 .DS_Storellm_portfolio_assistant_backup.zip
+
+
+# Ignore Mac system files
+.DS_Store
+
+# Ignore Python cache and venv
+__pycache__/
+*.py[cod]
+*.egg-info/
+venv/
+
+# Ignore dotenv and backups
+.env
+.env.*
+*.backup
+
+# Ignore Excel/JSON backup or raw data files
+*.xlsx
+*backup*.jsonl
+*pretty.json
+star_stories_no_content.jsonl
+count_faiss_file
+
+# Ignore test or scratch files
+test_*.py
+yourfile_pretty.json
+
+# Ignore local Streamlit config (only if unnecessary to deploy)
+.streamlit/config.toml
