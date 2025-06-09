@@ -43,9 +43,28 @@ else:
         metadata = json.load(f)
 
 # Streamlit UI setup
-st.set_page_config(page_title="Echo – Matt's Career Assistant", page_icon="🧠")
-st.title("🧠 Echo – Matt's LLM-Powered STAR Story Assistant")
-st.markdown("Ask natural questions to explore real experiences from Matt's career.")
+st.set_page_config(page_title="MattGPT – Matt's Career Assistant", page_icon="🤖")
+st.title("🤖 MattGPT – Matt's LLM-Powered STAR Story Assistant")
+st.markdown("""
+Welcome to **MattGPT** – my interactive portfolio assistant.
+
+Use this tool to explore my STAR stories, technical projects, and leadership experiences.  
+Ask a question like **“Tell me about a time you led a global delivery”** or browse by category.
+
+This app was built using OpenAI + Pinecone to showcase my experience in a conversational, AI-powered format.
+""")
+# Optional RAG explainer
+with st.expander("ℹ️ How does MattGPT work?"):
+    st.markdown("""
+    **MattGPT uses Retrieval-Augmented Generation (RAG)** – a technique that retrieves relevant examples from my actual experience before answering your question.
+
+    This means:
+    - You get responses grounded in real work I’ve done.
+    - The assistant can reference STAR stories aligned with your query.
+    - It behaves like the enterprise-grade GenAI tools I’ve helped architect.
+
+    Ask anything — from leadership in Agile transformations to global payments modernization.
+    """)
 
 query = st.text_input("Ask about Matt's experience (e.g., 'cloud modernization', 'capability building', 'payments')")
 show_star = st.checkbox("Show full STAR details", value=True)
