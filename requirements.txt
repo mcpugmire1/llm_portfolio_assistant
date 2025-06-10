@@ -4,7 +4,7 @@ openai
 faiss-cpu
 python-dotenv
 keras==2.11.0
-torch==2.0.1
+torch>=2.2.0
 sentence-transformers==2.2.2
 pinecone
 watchdog
