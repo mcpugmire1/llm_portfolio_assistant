@@ -1,0 +1,10 @@
+streamlit
+langchain
+openai
+faiss-cpu
+python-dotenv
+torch==1.13.1
+sentence-transformers==2.2.2
+pinecone
+watchdog
+huggingface-hub==0.16.4
