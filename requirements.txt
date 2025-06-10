@@ -1,3 +1,5 @@
+--force-reinstall
+--no-cache-dir
 --upgrade-strategy eager
 streamlit
 langchain
