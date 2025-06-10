@@ -1,5 +1,3 @@
---force-reinstall
---no-cache-dir
 --upgrade-strategy eager
 streamlit
 langchain
@@ -8,7 +6,8 @@ faiss-cpu
 python-dotenv
 torch==1.13.1
 sentence-transformers==2.2.0
-pinecone
+pinecone-client
 watchdog
 huggingface-hub==0.13.4
+transformers==4.27.4
 keras==2.11.0
