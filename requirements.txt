@@ -1,3 +1,4 @@
+--upgrade-strategy eager
 streamlit
 langchain
 openai
