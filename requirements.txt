@@ -1,12 +1,20 @@
 --upgrade-strategy eager
-streamlit
-langchain
-openai
-faiss-cpu
-python-dotenv
-torch==1.13.1
-sentence-transformers==2.2.0
-pinecone
-watchdog
-huggingface-hub==0.10.1
-keras==2.11.0
+ streamlit
+ langchain
+ openai
+ faiss-cpu
+ python-dotenv
+-torch==1.13.1
+-sentence-transformers==2.2.2
+-pinecone
+-watchdog
+-huggingface-hub<1.0.0
+-keras==2.11.0
++torch==1.13.1          # fine for CPU builds; bump later if you need GPU
++sentence-transformers==4.1.0
++transformers==4.52.4   # pulled in transitively, but pin for reproducibility
++huggingface-hub==0.32.4
++tokenizers==0.21.1     # matches transformers 4.52 wheels
++pinecone-client
++watchdog
++keras==2.11.0
