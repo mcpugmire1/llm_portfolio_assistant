@@ -1,7 +1,7 @@
 [server]
-folderWatchBlacklist = ["*/torch/**"]
 headless = true
-enableCORS = true
+enableCORS = false
+enableXsrfProtection = false
 port = 8501
 runOnSave = false
-TOKENIZERS_PARALLELISM = false
+folderWatchBlacklist = ["*/torch/**"]
