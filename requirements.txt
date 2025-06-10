@@ -3,8 +3,8 @@ langchain
 openai
 faiss-cpu
 python-dotenv
-keras==2.11.0
-torch>=2.2.0
+torch==1.13.1
 sentence-transformers==2.2.2
 pinecone
 watchdog
+huggingface-hub==0.16.4
