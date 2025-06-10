@@ -22,13 +22,23 @@ client = OpenAI(api_key=OPENAI_API_KEY)
 VECTOR_BACKEND = os.getenv("VECTOR_BACKEND", "faiss").lower()
 
 if VECTOR_BACKEND == "pinecone":
-    from pinecone import Pinecone
+    
+    
+    #from pinecone import Pinecone
+    import pinecone
 
     PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+    PINECONE_ENV = os.getenv("PINECONE_ENVIRONMENT")  # you need to add this in .env or Streamlit secrets
     PINECONE_INDEX_NAME = os.getenv("PINECONE_INDEX_NAME")
 
-    pc = Pinecone(api_key=PINECONE_API_KEY)
-    pinecone_index = pc.Index(PINECONE_INDEX_NAME)
+    pinecone.init(api_key=PINECONE_API_KEY, environment=PINECONE_ENV)
+    pinecone_index = pinecone.Index(PINECONE_INDEX_NAME)
+   # pinecone_index = pinecone.Index(PINECONE_INDEX_NAME)
+    #PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+    #PINECONE_INDEX_NAME = os.getenv("PINECONE_INDEX_NAME")
+
+    #pc = Pinecone(api_key=PINECONE_API_KEY)
+    #pinecone_index = pc.Index(PINECONE_INDEX_NAME)
 
     # Disable CUDA explicitly by setting device
     model = SentenceTransformer("models/all-MiniLM-L6-v2")
