@@ -1,3 +1,5 @@
+import subprocess
+
 import streamlit as st
 import json
 from pathlib import Path
@@ -5,6 +7,27 @@ from sentence_transformers import SentenceTransformer
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
+
+FAISS_INDEX_PATH = Path("faiss_index/index.faiss")
+
+def ensure_faiss_index():
+    """
+    Guarantee that faiss_index/index.faiss and story_metadata.json exist.
+    If they don't, rebuild them by calling scripts/build_custom_embeddings.py.
+    """
+    if FAISS_INDEX_PATH.exists():
+        return  # Nothing to do
+
+    st.warning("🔨 FAISS index missing – building once. This may take ≈45 s.")
+    try:
+        subprocess.check_call(
+            ["python", "scripts/build_custom_embeddings.py"],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.STDOUT,
+        )
+    except subprocess.CalledProcessError:
+        st.error("Failed to build FAISS index. Check the server log.")
+        st.stop()
 
 # Load environment variables
 load_dotenv()
@@ -41,7 +64,7 @@ if VECTOR_BACKEND == "pinecone":
     #pinecone_index = pc.Index(PINECONE_INDEX_NAME)
 
     # Disable CUDA explicitly by setting device
-    model = SentenceTransformer("models/all-MiniLM-L6-v2")
+    model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
     metadata = None  # Will be loaded per query from Pinecone
 
 else:
@@ -49,7 +72,8 @@ else:
     import numpy as np
 
 
-    model = SentenceTransformer("models/all-MiniLM-L6-v2")
+    model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+    ensure_faiss_index()                      # ← NEW LINE
 
     
     index = faiss.read_index("faiss_index/index.faiss")
