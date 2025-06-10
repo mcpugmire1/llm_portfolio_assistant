@@ -1,8 +1,18 @@
-# postinstall.sh  (make it executable:  chmod +x postinstall.sh)
 #!/usr/bin/env bash
 set -e
-if command -v git-lfs >/dev/null 2>&1; then
-  echo "Fetching Git-LFS assets…"
-  git lfs install --local
-  git lfs pull
+
+echo "🧩 postinstall canary – script is running"
+
+# 1 · Remove any cached copy of the deprecated SDK (harmless if not present)
+pip uninstall -y pinecone-client || true
+
+# 2 · Install Git LFS if the build image doesn’t have it
+if ! command -v git-lfs >/dev/null 2>&1 ; then
+  echo "Installing git-lfs…"
+  apt-get update -qq && apt-get install -y git-lfs
 fi
+
+# 3 · Fetch large files (your FAISS index)
+echo "Fetching Git-LFS assets…"
+git lfs install --local
+git lfs pull
