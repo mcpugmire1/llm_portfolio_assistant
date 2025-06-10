@@ -6,8 +6,7 @@ faiss-cpu
 python-dotenv
 torch==1.13.1
 sentence-transformers==2.2.0
-pinecone-client
+pinecone
 watchdog
 huggingface-hub==0.13.4
-transformers==4.27.4
 keras==2.11.0
