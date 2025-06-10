@@ -1,5 +1,5 @@
 streamlit
-langchain
+langchain>=0.1.17
 openai
 faiss-cpu
 python-dotenv
@@ -8,6 +8,6 @@ sentence-transformers==4.1.0
 transformers==4.52.4
 huggingface-hub==0.32.4
 tokenizers==0.21.1
-pinecone-client           # current package name
+pinecone           # current package name
 watchdog
 keras==2.11.0
