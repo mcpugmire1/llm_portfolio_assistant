@@ -189,34 +189,35 @@ stories = load_star_stories("echo_star_stories.jsonl")
 # Sidebar styling to enhance sample question button layout
 st.markdown("""
     <style>
-    /* Ensure full-width sidebar buttons and consistent alignment */
     section[data-testid="stSidebar"] button {
         width: 100% !important;
         white-space: normal !important;
         text-align: left !important;
         justify-content: flex-start !important;
-        border: 1px solid #ddd !important;
         border-radius: 6px !important;
         padding: 0.5rem 0.75rem !important;
         font-size: 0.95rem !important;
-        margin-bottom: 0.5rem !important;
-        background-color: #f8f9fa !important;
-        transition: background-color 0.2s ease;
+        margin-bottom: 0.25rem !important;
     }
 
-    /* Hover effect */
-    section[data-testid="stSidebar"] button:hover {
-        background-color: #e2e6ea !important;
-    }
-
-    /* Active (clicked) effect */
-    section[data-testid="stSidebar"] button:active {
-        background-color: #d0d4d8 !important;
+    /* Highlight selected button */
+    .selected-sample-question {
+        background-color: #e0f0ff !important;
+        font-weight: 600 !important;
     }
     </style>
 """, unsafe_allow_html=True)
 
-st.sidebar.markdown("### 💬 Sample Questions")
+#st.sidebar.markdown("### 💬 Sample Questions")
+
+#st.sidebar.markdown("### 🤔 Curious where to start?")
+#st.sidebar.markdown("Here are a few sample questions to try:")
+st.sidebar.markdown("""
+### 💬 Sample Questions  
+<span style='font-weight: 600; font-size: 0.9rem;'>🤔 Curious where to start?</span><br>
+<span style='font-size: 0.85rem;'>Here are a few sample questions to try:</span>
+""", unsafe_allow_html=True)
+
 
 sample_questions = [
     "What’s your experience with platform strategy?",
@@ -226,13 +227,26 @@ sample_questions = [
     "What’s your leadership approach for tech teams?"
 ]
 
-selected_question = None
-for i, question in enumerate(sample_questions):
-    if st.sidebar.button(question, key=f"sample_question_{i}"):  # ✅ unique and semantic key
-        selected_question = question
+# 1. Initialize it if missing
+if "selected_sample_index" not in st.session_state:
+    st.session_state.selected_sample_index = None
 
-if selected_question and not st.session_state.query:
-    st.session_state.query = selected_question
+# 2. Render sidebar buttons with tracking
+for i, question in enumerate(sample_questions):
+    button_label = question
+    is_selected = st.session_state.selected_sample_index == i
+
+    # Create a unique container so we can wrap with a div
+    with st.sidebar.container():
+        html_id = f"sample-question-{i}"
+        st.markdown(
+            f"""<div id="{html_id}" class="{'selected-sample-question' if is_selected else ''}">""",
+            unsafe_allow_html=True,
+        )
+        if st.button(button_label, key=f"sample_question_{i}"):
+            st.session_state.query = question
+            st.session_state.selected_sample_index = i
+        st.markdown("</div>", unsafe_allow_html=True)
 
 # -------------------
 # Input + Prompt Guidance
