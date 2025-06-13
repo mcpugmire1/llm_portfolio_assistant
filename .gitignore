@@ -43,3 +43,8 @@ yourfile_pretty.json
 
 # Ignore local Streamlit config (only if unnecessary to deploy)
 .streamlit/config.toml
+
+# Local development scratch files
+LLM_Portfolio_Asst_theme_tag_map.py
+app_dev.py
+app_dev_car.py

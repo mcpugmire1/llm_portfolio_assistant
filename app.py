@@ -43,6 +43,7 @@ client = OpenAI(api_key=OPENAI_API_KEY)
 
 # Determine vector backend
 VECTOR_BACKEND = os.getenv("VECTOR_BACKEND", "faiss").lower()
+print(f"[INFO] Using vector backend: {VECTOR_BACKEND.upper()}")
 
 if VECTOR_BACKEND == "pinecone":
     
@@ -72,49 +73,197 @@ else:
     with open("faiss_index/story_metadata.json", "r") as f:
         metadata = json.load(f)
 
+# -------------------
+# Utility Functions
+# -------------------
+def load_star_stories(file_path):
+    with open(file_path, "r", encoding="utf-8") as f:
+        return [json.loads(line.strip()) for line in f.readlines()]
+
+def match_user_query(query, stories):
+    return [story for story in stories if query.lower() in story['content'].lower()]
+
+def fmt(value):
+    return ', '.join(value) if isinstance(value, list) else value
+
+def render_story_block(story):
+    title = story.get("Title", "Untitled")
+    client = story.get("Client", "Unknown")
+    role = story.get("Role", "Unknown")
+    category = story.get("Category", "Uncategorized")
+    use_cases = story.get("Use Case(s)", [])
+    situation = story.get("Situation", [])
+    task = story.get("Task", [])
+    action = story.get("Action", [])
+    result = story.get("Result", [])
+
+    return f"""
+        <div style="margin-bottom: 2rem; line-height: 1.6;">
+            <p>📘 <strong>{title}</strong><br>
+            <strong>Client</strong>: {client} | <strong>Role</strong>: {role} | <strong>Category</strong>: {category}</p>
+            <p><strong>Use Cases</strong>: {fmt(use_cases)}</p>
+            <p>🟦 <strong>Situation</strong>: {fmt(situation)}</p>
+            <p>🟨 <strong>Task</strong>: {fmt(task)}</p>
+            <p>🟧 <strong>Action</strong>: {fmt(action)}</p>
+            <p>🟩 <strong>Result</strong>: {fmt(result)}</p>
+        </div>
+    """.strip()
+
 # Streamlit UI setup
-st.set_page_config(page_title="MattGPT – Matt's Career Assistant", page_icon="🤖")
-st.title("🤖 MattGPT – Matt's LLM-Powered STAR Story Assistant")
+
+# -------------------
+# Page Configuration
+# -------------------
+st.set_page_config(
+    page_title="MattGPT – STAR Story Assistant",
+    page_icon="🤖"
+)
+
+if "query" not in st.session_state:
+    st.session_state.query = ""
+
+# -------------------
+# Hero Title & Summary
+# -------------------
+st.markdown("# 🤖 MattGPT – Matt's LLM-Powered STAR Story Assistant")
+
 st.markdown("""
 Welcome to **MattGPT** – my interactive portfolio assistant.
 
 Use this tool to explore my STAR stories, technical projects, and leadership experiences.  
-Ask a question like **“Tell me about a time you led a global delivery”** or browse by category.
+Ask a question like “Tell me about a time you led a global delivery” or browse by category.
 
-This app was built using OpenAI + Pinecone to showcase my experience in a conversational, AI-powered format.
-""")
-# Optional RAG explainer
-with st.expander("ℹ️ How does MattGPT work?"):
+This app was built using **OpenAI + Pinecone** to showcase my experience in a conversational, AI-powered format.
+""", unsafe_allow_html=True)
+
+# -------------------
+# Expanders for About + How it Works
+# -------------------
+with st.expander("👋 About Matt"):
     st.markdown("""
-    **MattGPT uses Retrieval-Augmented Generation (RAG)** – a technique that retrieves relevant examples from my actual experience before answering your question.
+Technology isn’t just a tool—it’s a force for unlocking entirely new possibilities.  
+I believe in harnessing cloud-native platforms, applied AI, and product-centric delivery to drive transformation that creates meaningful, measurable outcomes for organizations navigating disruption and scale.
 
-    This means:
-    - You get responses grounded in real work I’ve done.
-    - The assistant can reference STAR stories aligned with your query.
-    - It behaves like the enterprise-grade GenAI tools I’ve helped architect.
+As a technology leader, I focus on aligning digital strategy with business growth—whether that means accelerating time-to-market, enabling responsible GenAI experimentation, or scaling modern engineering practices across global teams.  
+I bridge execution and strategy to build secure, scalable platforms designed for change.
 
-    Ask anything — from leadership in Agile transformations to global payments modernization.
-    """)
+I help organizations move faster and smarter by:  
+🔹 Architecting cloud platforms that fuel innovation and global reach  
+🔹 Shaping technology strategy to align with customer needs and business priorities  
+🔹 Advancing agility through Lean delivery, scaled DevOps, and intelligent automation  
+🔹 Driving product transformations while mentoring high-performing, cross-functional teams
 
-query = st.text_input("Ask about Matt's experience (e.g., 'cloud modernization', 'capability building', 'payments')")
+Career highlights include launching platforms across 12+ countries, improving operational efficiency by 15%, and accelerating innovation cycles by 4x.  My expertise spans platform architecture, GenAI enablement, and scaling modern engineering practices in complex, regulated environments.
+
+I’m currently exploring Director or VP-level opportunities where I can shape platform strategy, AI enablement, and enterprise modernization.
+                
+**Matt Pugmire**  
+Technology & Transformation Leader | Platform Strategy | AI-Enabled Product Innovation | Driving Cloud-Native Transformation
+
+---
+
+**Contact**  
+📧 [mcpugmire@gmail.com](mailto:mcpugmire@gmail.com)  
+🔗 [linkedin.com/in/matt-pugmire](https://www.linkedin.com/in/matt-pugmire)    
+""", unsafe_allow_html=True)
+    
+with st.expander("🤖 How does MattGPT work?"):
+    st.markdown("""
+**MattGPT uses _Retrieval-Augmented Generation (RAG)_** – a technique that retrieves relevant examples from my actual experience before answering your question.
+This means:
+                
+• You get responses grounded in real work I’ve done.  
+• The assistant can reference STAR stories aligned with your query.  
+• It behaves like the enterprise-grade GenAI tools I’ve helped architect.
+
+Ask anything — from leadership in Agile transformations to global payments modernization.
+
+""")
+
+# Load STAR stories dataset early so it's available for all logic
+stories = load_star_stories("echo_star_stories.jsonl")
+
+# -------------------
+# Sidebar: Filters + Clickable Sample Questions
+# -------------------
+# Sidebar styling to enhance sample question button layout
+st.markdown("""
+    <style>
+    /* Ensure full-width sidebar buttons and consistent alignment */
+    section[data-testid="stSidebar"] button {
+        width: 100% !important;
+        white-space: normal !important;
+        text-align: left !important;
+        justify-content: flex-start !important;
+        border: 1px solid #ddd !important;
+        border-radius: 6px !important;
+        padding: 0.5rem 0.75rem !important;
+        font-size: 0.95rem !important;
+        margin-bottom: 0.5rem !important;
+        background-color: #f8f9fa !important;
+        transition: background-color 0.2s ease;
+    }
+
+    /* Hover effect */
+    section[data-testid="stSidebar"] button:hover {
+        background-color: #e2e6ea !important;
+    }
+
+    /* Active (clicked) effect */
+    section[data-testid="stSidebar"] button:active {
+        background-color: #d0d4d8 !important;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+st.sidebar.markdown("### 💬 Sample Questions")
+
+sample_questions = [
+    "What’s your experience with platform strategy?",
+    "How did you lead a $500M payments transformation?",
+    "Describe a GenAI project you led.",
+    "How do you enable developer upskilling?",
+    "What’s your leadership approach for tech teams?"
+]
+
+selected_question = None
+for i, question in enumerate(sample_questions):
+    if st.sidebar.button(question, key=f"sample_question_{i}"):  # ✅ unique and semantic key
+        selected_question = question
+
+if selected_question and not st.session_state.query:
+    st.session_state.query = selected_question
+
+# -------------------
+# Input + Prompt Guidance
+# -------------------
+st.markdown("### 💬 Try asking:")
+st.markdown("**“Tell me about a time you led a global delivery.”**")
+
+# Then render the input field (no conflict)
+user_query = st.text_input(
+    "Ask about Matt’s experience (e.g., 'cloud modernization', 'capability building', 'payments')",
+    key="query"
+)
+# -------------------
+# Query Handling + Story Display
+# -------------------
+
+#query = st.text_input("Ask about Matt's experience (e.g., 'cloud modernization', 'capability building', 'payments')")
 show_star = st.checkbox("Show full STAR details", value=True)
-# Sidebar display
-st.sidebar.title("⚙️ Settings")
-st.sidebar.info(f"Using backend: {VECTOR_BACKEND.upper()}")
 
-if query:
+
+if user_query:
     with st.spinner("🔍 Retrieving best matches..."):
-        query_embedding = model.encode([query])
+        query_embedding = model.encode([user_query])
         matched_stories = []
 
         if VECTOR_BACKEND == "pinecone":
-            st.write("🔍 Querying Pinecone...")
             search_results = pinecone_index.query(
                 vector=query_embedding.tolist(),
                 top_k=4,
                 include_metadata=True
             )
-            st.write("✅ Pinecone returned results.")
             for match in search_results["matches"]:
                 story = match["metadata"]
                 title = story.get("Title", "Untitled")
@@ -125,23 +274,10 @@ if query:
                 situation = story.get("Situation", [])
                 task = story.get("Task", [])
                 action = story.get("Action", [])
-                st.sidebar.write("DEBUG: Action field", action)
                 result = story.get("Result", [])
-
-
-                story_block = f"""
-                    <div style="margin-bottom: 2rem; line-height: 1.6;">
-                    <p>📘 <strong>{title}</strong><br>
-                    <strong>Client</strong>: {client_name} | <strong>Role</strong>: {role} | <strong>Category</strong>: {category}</p> 
-                    <p><strong>Use Cases</strong>: {', '.join(use_cases) if isinstance(use_cases, list) else use_cases}</p>             
-                    <p>🟦 <strong>Situation</strong>: {' '.join(situation) if isinstance(situation, list) else situation}</p>
-                    <p>🟨 <strong>Task</strong>: {' '.join(task) if isinstance(task, list) else task}</p>
-                    <p>🟧 <strong>Action</strong>: {' '.join(action) if isinstance(action, list) else action}</p>
-                    <p>🟩 <strong>Result</strong>: {' '.join(result) if isinstance(result, list) else result}</p>
-                    </div>
-                    """            
+                          
+                story_block = render_story_block(story)          
                 matched_stories.append(story_block.strip())
-                st.sidebar.write("DEBUG: Full story metadata", story)
             if not matched_stories:
                 st.warning("No relevant stories found. Please try a different query.")
                 st.stop()
@@ -150,53 +286,41 @@ if query:
             for idx in indices[0]:
                 story = metadata[idx]
                 title = story.get("Title", "Untitled")
-                client_name = story.get("Client", "Unknown")
+                client = story.get("Client", "Unknown")
                 role = story.get("Role", "Unknown")
                 category = story.get("Category", "Uncategorized")
                 use_cases = story.get("Use Case(s)", [])
                 situation = story.get("Situation", [])
                 task = story.get("Task", [])
                 action = story.get("Action", [])
-                st.sidebar.write("DEBUG: Action field", action)
                 result = story.get("Result", [])
                 
-                story_block = f"""
-                    <div style="margin-bottom: 2rem; line-height: 1.6;">
-                        <p>📘 <strong>{title}</strong><br>
-                        <strong>Client</strong>: {client_name} | <strong>Role</strong>: {role} | <strong>Category</strong>: {category}</p>
-                        <p><strong>Use Cases</strong>: {', '.join(use_cases) if isinstance(use_cases, list) else use_cases}</p>
-                        <p>🟦 <strong>Situation</strong>: {' '.join(situation) if isinstance(situation, list) else situation}</p>
-                        <p>🟨 <strong>Task</strong>: {' '.join(task) if isinstance(task, list) else task}</p>
-                        <p>🟧 <strong>Action</strong>: {' '.join(action) if isinstance(action, list) else action}</p>
-                        <p>🟩 <strong>Result</strong>: {' '.join(result) if isinstance(result, list) else result}</p>
-                    </div>
-                """
-              
+                story_block = render_story_block(story)
                 matched_stories.append(story_block.strip())
-                if not matched_stories:
-                    st.warning("No relevant stories found. Please try a different query.")
-                    st.stop()
-        st.sidebar.write("DEBUG: First matched story", matched_stories[0] if matched_stories else "None")
+            if not matched_stories:
+                st.warning("No relevant stories found. Please try a different query.")
+                st.stop()
+
         full_prompt = f"""You are Matt Pugmire. Respond in first person using confident, natural language. These are your own STAR stories:
+
 
 {chr(10).join(matched_stories)}
 
-Now answer this question naturally and helpfully: {query}"""
+Now answer this question naturally and helpfully: {user_query}"""
 
         try:
-            st.write("🧠 Sending prompt to OpenAI...")
-            response = client.chat.completions.create(
+            with st.spinner("🧠 Sending prompt to OpenAI..."):
+             response = client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=[
                     {
                         "role": "system",
                         "content": "You are Matt Pugmire. Always respond in first person. Use confident, natural language, and draw from your real career experiences."
-                    },
+                    },                        
                     {"role": "user", "content": full_prompt}
                 ],
                 temperature=0.3
-            )
-            st.write("✅ OpenAI responded.")
+         )
             answer = response.choices[0].message.content
             st.markdown("---")
             st.subheader("🧠 Best Match:")
