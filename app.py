@@ -6,7 +6,13 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
-from query_rewriter_llm import rewrite_query_with_llm
+try:
+    from query_rewriter_llm import rewrite_query_with_llm
+except Exception as e:
+    print(f"[WARN] query_rewriter_llm import failed: {e}")
+    def rewrite_query_with_llm(q: str) -> str:
+        return q  # fallback: pass-through if import hiccups
+    
 from vector_search import embed_query, search, rerank_by_metadata
 
 FAISS_INDEX_PATH = Path("faiss_index/index.faiss")
