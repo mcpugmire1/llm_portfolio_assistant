@@ -273,7 +273,8 @@ for i, question in enumerate(sample_questions):
     if st.button(label, key=f"sample_question_{i}"):
         st.session_state.query = question
         st.session_state.selected_sample_index = i
-
+        st.rerun()  # <-- ensure the next run picks up the new query
+        
 # Load STAR stories dataset early so it's available for all logic
 stories = load_star_stories("echo_star_stories.jsonl")
 
