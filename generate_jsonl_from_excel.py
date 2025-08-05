@@ -1,7 +1,7 @@
 import pandas as pd
 import json
 
-INPUT_EXCEL_FILE = "MPugmire - STAR Stories - 6JUN25.xlsx"
+INPUT_EXCEL_FILE = "MPugmire - STAR Stories - 16JUL25924AM.xlsx"
 OUTPUT_JSONL_FILE = "echo_star_stories.jsonl"
 SHEET_NAME = "STAR Stories - Interview Ready"
 
@@ -29,7 +29,13 @@ def excel_to_jsonl():
             "Action": [str(row.get("Action", "")).strip()],
             "Result": [str(row.get("Result", "")).strip()],
             "public_tags": str(row.get("Public Tags", "")).strip(),
-            "content": ""  # will be filled in by script 2
+            "Person": str(row.get("Person", "")).strip(),
+            "Place": str(row.get("Place", "")).strip(),
+            "Purpose": str(row.get("Purpose", "")).strip(),
+            "Performance": [s.strip() for s in str(row.get("Performance", "")).split("- ") if s.strip()],
+            "Process": [s.strip() for s in str(row.get("Process", "")).split("- ") if s.strip()],
+            "5PSummary": str(row.get("5PSummary", "")).strip(),
+            "content": ""  # will be filled in by script 2 - need to determine if this is still needed
         }
         records.append(record)
 

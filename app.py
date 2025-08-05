@@ -3,10 +3,11 @@ import subprocess
 import streamlit as st
 import json
 from pathlib import Path
-from sentence_transformers import SentenceTransformer
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
+from query_rewriter_llm import rewrite_query_with_llm
+from vector_search import embed_query, search, rerank_by_metadata
 
 FAISS_INDEX_PATH = Path("faiss_index/index.faiss")
 
@@ -57,7 +58,6 @@ if VECTOR_BACKEND == "pinecone":
     pinecone_index = pc.Index(PINECONE_INDEX_NAME)
    
     # Disable CUDA explicitly by setting device
-    model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
     metadata = None  # Will be loaded per query from Pinecone
 
 else:
@@ -65,7 +65,6 @@ else:
     import numpy as np
 
 
-    model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
     ensure_faiss_index()                      # ← NEW LINE
 
     
@@ -115,7 +114,7 @@ def render_story_block(story):
 # Page Configuration
 # -------------------
 st.set_page_config(
-    page_title="MattGPT – STAR Story Assistant",
+    page_title="MattGPT – Career Story Assistant",
     page_icon="🤖"
 )
 
@@ -125,12 +124,12 @@ if "query" not in st.session_state:
 # -------------------
 # Hero Title & Summary
 # -------------------
-st.markdown("# 🤖 MattGPT – Matt's LLM-Powered STAR Story Assistant")
+st.markdown("# 🤖 MattGPT – Matt's LLM-Powered Career Story Assistant")
 
 st.markdown("""
 Welcome to **MattGPT** – my interactive portfolio assistant.
 
-Use this tool to explore my STAR stories, technical projects, and leadership experiences.  
+Use this tool to explore my career stories, technical projects, and leadership experiences.  
 Ask a question like “Tell me about a time you led a global delivery” or browse by category.
 
 This app was built using **OpenAI + Pinecone** to showcase my experience in a conversational, AI-powered format.
@@ -141,21 +140,23 @@ This app was built using **OpenAI + Pinecone** to showcase my experience in a co
 # -------------------
 with st.expander("👋 About Matt"):
     st.markdown("""
-Technology isn’t just a tool—it’s a force for unlocking entirely new possibilities.  
-I believe in harnessing cloud-native platforms, applied AI, and product-centric delivery to drive transformation that creates meaningful, measurable outcomes for organizations navigating disruption and scale.
+Digital transformation isn’t just about shipping code faster — it’s about building the right thing, the right way, with the right people. I help tech leaders modernize legacy platforms and launch innovative, 
+cloud-native products that scale — all while nurturing cross-functional teams grounded in empathy, authenticity, and purpose.
 
-As a technology leader, I focus on aligning digital strategy with business growth—whether that means accelerating time-to-market, enabling responsible GenAI experimentation, or scaling modern engineering practices across global teams.  
-I bridge execution and strategy to build secure, scalable platforms designed for change.
+As a technology leader, I focus on aligning digital strategy with business growth — whether that means accelerating time-to-market, enabling responsible experimentation with GenAI, or scaling modern engineering practices across global teams. I bridge strategy and execution to build secure, scalable platforms designed for change.
 
-I help organizations move faster and smarter by:  
-🔹 Architecting cloud platforms that fuel innovation and global reach  
-🔹 Shaping technology strategy to align with customer needs and business priorities  
-🔹 Advancing agility through Lean delivery, scaled DevOps, and intelligent automation  
-🔹 Driving product transformations while mentoring high-performing, cross-functional teams
+With 20+ years at the intersection of platform strategy, product innovation, and cloud modernization, I lead with a builder’s mindset and a coach’s heart. I’ve helped Fortune 500 organizations:
 
-Career highlights include launching platforms across 12+ countries, improving operational efficiency by 15%, and accelerating innovation cycles by 4x.  My expertise spans platform architecture, GenAI enablement, and scaling modern engineering practices in complex, regulated environments.
+🔹 Architect cloud platforms that fuel innovation and global reach  
+🔹 Shape technology strategy around customer needs and business goals  
+🔹 Advance agility through Lean delivery, DevOps at scale, and automation  
+🔹 Drive product transformation while mentoring high-performing teams  
 
-I’m currently exploring Director or VP-level opportunities where I can shape platform strategy, AI enablement, and enterprise modernization.
+Career highlights include launching platforms across 12+ countries, improving operational efficiency by 15%, and accelerating innovation cycles by 4x. My expertise spans platform architecture, GenAI enablement, and modern engineering practices in complex, regulated environments.
+
+My approach blends platform architecture, product thinking, and a deep focus on customer experience — all grounded in empathy, lean practices, and iterative delivery.
+
+If you’re navigating legacy constraints, siloed teams, or the pressure to modernize, let’s talk. I’m exploring Director or VP-level roles where I can shape platform strategy, enterprise modernization, and AI-enabled delivery.
                 
 **Matt Pugmire**  
 Technology & Transformation Leader | Platform Strategy | AI-Enabled Product Innovation | Driving Cloud-Native Transformation
@@ -169,84 +170,135 @@ Technology & Transformation Leader | Platform Strategy | AI-Enabled Product Inno
     
 with st.expander("🤖 How does MattGPT work?"):
     st.markdown("""
-**MattGPT uses _Retrieval-Augmented Generation (RAG)_** – a technique that retrieves relevant examples from my actual experience before answering your question.
-This means:
-                
-• You get responses grounded in real work I’ve done.  
-• The assistant can reference STAR stories aligned with your query.  
-• It behaves like the enterprise-grade GenAI tools I’ve helped architect.
+**MattGPT uses Retrieval-Augmented Generation (RAG) with semantic search** — meaning it understands the intent behind your question and retrieves real examples from my experience to answer it.
 
-Ask anything — from leadership in Agile transformations to global payments modernization.
+This means:  
+✅ Real experiences from my work inform each response  
+📘 Relevant career stories are retrieved based on intent  
+🏗️ Mirrors the enterprise-grade GenAI tools I’ve helped architect
+
+Ask anything — from leading Agile transformations to modernizing global payments platforms.
 
 """)
-
-# Load STAR stories dataset early so it's available for all logic
-stories = load_star_stories("echo_star_stories.jsonl")
-
-# -------------------
-# Sidebar: Filters + Clickable Sample Questions
-# -------------------
-# Sidebar styling to enhance sample question button layout
+    
+# 📘 Sidebar filter pointer banner (restore this)
+#st.markdown("<br>", unsafe_allow_html=True)
 st.markdown("""
-    <style>
-    section[data-testid="stSidebar"] button {
-        width: 100% !important;
-        white-space: normal !important;
-        text-align: left !important;
-        justify-content: flex-start !important;
-        border-radius: 6px !important;
-        padding: 0.5rem 0.75rem !important;
-        font-size: 0.95rem !important;
-        margin-bottom: 0.25rem !important;
-    }
-
-    /* Highlight selected button */
-    .selected-sample-question {
-        background-color: #e0f0ff !important;
-        font-weight: 600 !important;
-    }
-    </style>
+<div style="background-color: #1e1e1e; padding: 0.75rem 1rem; border-left: 4px solid #2e8bff; border-radius: 6px; margin: 0.5rem 0 0.75rem;">
+🔍 <strong>Pro Tip for Mobile:</strong> Tap the sidebar ➤ icon on the left to filter career stories by <strong>domain</strong> or <strong>skill area</strong>.
+</div>
 """, unsafe_allow_html=True)
 
-#st.sidebar.markdown("### 💬 Sample Questions")
+#st.markdown("<br>", unsafe_allow_html=True)
 
-#st.sidebar.markdown("### 🤔 Curious where to start?")
-#st.sidebar.markdown("Here are a few sample questions to try:")
-st.sidebar.markdown("""
-### 💬 Sample Questions  
-<span style='font-weight: 600; font-size: 0.9rem;'>🤔 Curious where to start?</span><br>
-<span style='font-size: 0.85rem;'>Here are a few sample questions to try:</span>
+# --- Add custom CSS for sample question buttons just before the block that begins with "### 🤔 Curious where to start?"
+# --- Custom CSS for styling sample question buttons (main and sidebar)
+st.markdown("""
+<style>
+/* Reduce excessive spacing under expanders (About Matt, How it Works) */
+.element-container:has(> details) {
+    margin-bottom: 0.5rem !important;
+}
+
+/* Style for sample question buttons in main area */
+.sample-question-btn, button[data-testid^="sample_question_"] {
+    display: block;
+    background-color: #2e8bff !important;
+    color: white !important;
+    padding: 0.75rem 1rem !important;
+    margin-bottom: 0.5rem !important;
+    border-radius: 6px !important;
+    font-weight: 500 !important;
+    cursor: pointer;
+    border: none;
+    text-align: left !important;
+    transition: background-color 0.2s ease;
+    white-space: normal !important;
+    word-break: break-word !important;
+    max-width: 100% !important;        
+}
+.sample-question-btn:hover, button[data-testid^="sample_question_"]:hover {
+    background-color: #1e6fd6 !important;
+    padding-top: 1rem !important;
+}
+
+/* Sidebar sample button styling */
+section[data-testid="stSidebar"] button {
+    width: 100% !important;
+    white-space: normal !important;
+    text-align: left !important;
+    justify-content: flex-start !important;
+    border-radius: 6px !important;
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.95rem !important;
+    margin-bottom: 0.25rem !important;
+}
+
+/* Highlight selected question */
+.selected-sample-question {
+    background-color: #e0f0ff !important;
+    font-weight: 600 !important;
+}
+</style>
 """, unsafe_allow_html=True)
 
+st.markdown("""
+<h2 style='margin-top: -0.5rem; margin-bottom: 0.25rem;'>🤔 Curious where to start?</h2>
+""", unsafe_allow_html=True)
+st.markdown("Here are a few sample questions you can click on:")
 
 sample_questions = [
-    "What’s your experience with platform strategy?",
-    "How did you lead a $500M payments transformation?",
-    "Describe a GenAI project you led.",
-    "How do you enable developer upskilling?",
-    "What’s your leadership approach for tech teams?"
+    "Tell me about leading a global payments transformation.",
+    "How did you apply GenAI in a healthcare project?",
+    "What’s your experience with cloud-native architecture?",
+    "How do you help teams adopt modern engineering practices?",
+    "Describe how you scale agile and DevOps in enterprise environments."
 ]
 
 # 1. Initialize it if missing
 if "selected_sample_index" not in st.session_state:
     st.session_state.selected_sample_index = None
 
-# 2. Render sidebar buttons with tracking
+icon_map = ["🧭", "🏥", "⚙️", "🔧", "🚀"]
+# Use Streamlit buttons with improved sidebar style
 for i, question in enumerate(sample_questions):
-    button_label = question
+    label = f"{icon_map[i]} {question}"
     is_selected = st.session_state.selected_sample_index == i
+    if st.button(label, key=f"sample_question_{i}"):
+        st.session_state.query = question
+        st.session_state.selected_sample_index = i
 
-    # Create a unique container so we can wrap with a div
-    with st.sidebar.container():
-        html_id = f"sample-question-{i}"
-        st.markdown(
-            f"""<div id="{html_id}" class="{'selected-sample-question' if is_selected else ''}">""",
-            unsafe_allow_html=True,
-        )
-        if st.button(button_label, key=f"sample_question_{i}"):
-            st.session_state.query = question
-            st.session_state.selected_sample_index = i
-        st.markdown("</div>", unsafe_allow_html=True)
+# Load STAR stories dataset early so it's available for all logic
+stories = load_star_stories("echo_star_stories.jsonl")
+
+# Extract available sub-categories for dropdown
+available_domains = sorted(set(story.get("Sub-category", "") for story in stories if story.get("Sub-category")))
+
+# -------------------
+# Sidebar: Filters + Clickable Sample Questions
+# -------------------
+# Sidebar styling to enhance sample question button layout
+
+# 🔽 Domain Filter (from story metadata)
+available_domains = sorted(set(story.get("Sub-category", "") for story in stories if story.get("Sub-category")))
+selected_domain = st.sidebar.selectbox(
+    "🗂️ Filter by Domain",
+    options=["(All)"] + available_domains
+)
+
+
+# Extract unique tags from comma-separated public_tags field
+all_tags = sorted({
+    tag.strip()
+    for story in stories
+    for tag in story.get("public_tags", "").split(",")
+    if tag.strip()
+})
+selected_tags = st.sidebar.multiselect("🎯 Filter by Skill Area", all_tags)
+
+# 1. Initialize it if missing
+if "selected_sample_index" not in st.session_state:
+    st.session_state.selected_sample_index = None
 
 # -------------------
 # Input + Prompt Guidance
@@ -255,6 +307,11 @@ st.markdown("### 💬 Try asking:")
 st.markdown("**“Tell me about a time you led a global delivery.”**")
 
 # Then render the input field (no conflict)
+st.markdown("""
+<div style="background-color: #262730; border: 1px solid #4a4a4a; padding: 1rem; border-radius: 8px; margin-top: 1rem; margin-bottom: 1.5rem;">
+    📝 <strong>Or ask your own question</strong><br>
+    <span style='font-size: 0.9rem; color: #ccc;'>Describe a topic or experience you'd like to explore (e.g., 'Tell me about leading a global delivery')</span>
+    """, unsafe_allow_html=True)
 user_query = st.text_input(
     "Ask about Matt’s experience (e.g., 'cloud modernization', 'capability building', 'payments')",
     key="query"
@@ -262,90 +319,91 @@ user_query = st.text_input(
 # -------------------
 # Query Handling + Story Display
 # -------------------
+st.markdown("""
+</div>
+""", unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
 
 #query = st.text_input("Ask about Matt's experience (e.g., 'cloud modernization', 'capability building', 'payments')")
-show_star = st.checkbox("Show full STAR details", value=True)
-
+show_star = st.checkbox("Include detailed career story breakdowns", value=True)
 
 if user_query:
     with st.spinner("🔍 Retrieving best matches..."):
-        query_embedding = model.encode([user_query])
+        rewritten_query = rewrite_query_with_llm(user_query)
+        st.write("🧠 Original query:", user_query)
+        st.write("🔁 Rewritten query:", rewritten_query)
+
+        query_embedding = embed_query(rewritten_query)
+        search_results = search(query_embedding, top_k=5)
+        
+
+         # Re-rank or filter using domain metadata
+        print("[DEBUG] Filtered search results after domain filter:")
+        for s in search_results:
+            print(s.get("Title"), "—", s.get("Sub-category"))
+            print(f"[DEBUG] Selected domain: {selected_domain}")
+            print(f"[DEBUG] Selected tags: {selected_tags}")
+
+        print(f"[DEBUG] Selected domain: {selected_domain}")
+        print(f"[DEBUG] Selected tags: {selected_tags}")
+        search_results = rerank_by_metadata(
+            search_results,
+            domain_filter=selected_domain,
+            competency_filter=selected_tags
+        )
+
         matched_stories = []
 
-        if VECTOR_BACKEND == "pinecone":
-            search_results = pinecone_index.query(
-                vector=query_embedding.tolist(),
-                top_k=4,
-                include_metadata=True
-            )
-            for match in search_results["matches"]:
-                story = match["metadata"]
-                title = story.get("Title", "Untitled")
-                client_name = story.get("Client", "Unknown")
-                role = story.get("Role", "Unknown")
-                category = story.get("Category", "Uncategorized")
-                use_cases = story.get("Use Case(s)", [])
-                situation = story.get("Situation", [])
-                task = story.get("Task", [])
-                action = story.get("Action", [])
-                result = story.get("Result", [])
-                          
-                story_block = render_story_block(story)          
-                matched_stories.append(story_block.strip())
-            if not matched_stories:
-                st.warning("No relevant stories found. Please try a different query.")
-                st.stop()
-        else:
-            scores, indices = index.search(np.array(query_embedding), 4)
-            for idx in indices[0]:
-                story = metadata[idx]
-                title = story.get("Title", "Untitled")
-                client = story.get("Client", "Unknown")
-                role = story.get("Role", "Unknown")
-                category = story.get("Category", "Uncategorized")
-                use_cases = story.get("Use Case(s)", [])
-                situation = story.get("Situation", [])
-                task = story.get("Task", [])
-                action = story.get("Action", [])
-                result = story.get("Result", [])
-                
-                story_block = render_story_block(story)
-                matched_stories.append(story_block.strip())
-            if not matched_stories:
-                st.warning("No relevant stories found. Please try a different query.")
-                st.stop()
+        st.write(f"🔎 {len(search_results)} match(es) found")
+        st.write("📎 Top match titles:")
+        for i, story in enumerate(search_results):
+            st.write(f"{i+1}. {story.get('Title')} — Client: {story.get('Client')}")
+        for story in search_results:
+        # your display logic
+            story_block = render_story_block(story)
+            matched_stories.append(story_block.strip())
 
-        full_prompt = f"""You are Matt Pugmire. Respond in first person using confident, natural language. These are your own STAR stories:
+        if not matched_stories:
+            st.warning("No relevant stories found. Please try a different query.")
+            st.stop()
 
+    
 
-{chr(10).join(matched_stories)}
+        # Construct prompt from matched stories and user query
+        full_prompt = f"""Relevant STAR stories:
 
-Now answer this question naturally and helpfully: {user_query}"""
+        {chr(10).join(matched_stories)}
+        Question: {user_query}"""
 
         try:
             with st.spinner("🧠 Sending prompt to OpenAI..."):
-             response = client.chat.completions.create(
-                model="gpt-3.5-turbo",
-                messages=[
-                    {
-                        "role": "system",
-                        "content": "You are Matt Pugmire. Always respond in first person. Use confident, natural language, and draw from your real career experiences."
-                    },                        
-                    {"role": "user", "content": full_prompt}
-                ],
-                temperature=0.3
-         )
-            answer = response.choices[0].message.content
-            st.markdown("---")
-            st.subheader("🧠 Best Match:")
-            st.markdown(answer)
+                response = client.chat.completions.create(
+                    model="gpt-3.5-turbo",
+                    messages=[
+                        {
+                            "role": "system",
+                            "content": f"""You are Matt Pugmire, a seasoned technology leader. Always respond in first person using confident, conversational language drawn from your real STAR experiences.
+        Answer the user's question clearly and concisely by focusing on:
+        - The problem or opportunity
+        - The actions you took (product, people, or process)
+        - The value created or business impact
 
-            if show_star:
+        Be outcome-oriented — as if preparing for a leadership interview."""
+                        },
+                        {"role": "user", "content": full_prompt}
+                    ],
+                    temperature=0.3
+                )
+                answer = response.choices[0].message.content
                 st.markdown("---")
-                st.subheader("📘 Full STAR Breakdowns:")
-                for block in matched_stories:
-                    st.markdown(block, unsafe_allow_html=True)
-                    
+                st.subheader("🧠 Best Match:")
+                st.markdown(answer)
+
+                if show_star:
+                    st.markdown("---")
+                    st.subheader("📘 Full STAR Breakdowns:")
+                    for block in matched_stories:
+                        st.markdown(block, unsafe_allow_html=True)
 
         except Exception as e:
             st.error(f"OpenAI API error: {e}")
