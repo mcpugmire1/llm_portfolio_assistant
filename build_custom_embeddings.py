@@ -1,3 +1,12 @@
+"""
+build_custom_embeddings.py
+
+This script reads enriched STAR story data from a JSONL file, generates OpenAI embeddings
+using the specified model, and upserts the results into a Pinecone index for semantic search.
+It also ensures existing vectors in the namespace are purged before reindexing, providing a clean slate.
+
+Assumes environment variables are set for Pinecone and OpenAI API keys and configuration.
+"""
 import json
 import os
 import faiss
@@ -5,8 +14,22 @@ import numpy as np
 from sentence_transformers import SentenceTransformer
 from dotenv import load_dotenv
 from pinecone import Pinecone
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s — %(levelname)s — %(message)s",
+)
 
 load_dotenv()
+
+"""
+Main execution logic:
+- Loads enriched STAR story records from JSONL.
+- Generates embeddings using OpenAI.
+- Batches and upserts them into Pinecone under a defined namespace.
+- Handles errors and skips empty content.
+"""
 
 VECTOR_BACKEND = os.getenv("VECTOR_BACKEND", "faiss")  # default to faiss if not set
 
@@ -16,7 +39,7 @@ stories = []
 with open(file_path, "r") as f:
     for line in f:
         stories.append(json.loads(line.strip()))
-print(f"\U0001F50D Total stories found: {len(stories)}")
+logging.info(f"\U0001F50D Total stories found: {len(stories)}")
 
 # Initialize the embedding model
 model = SentenceTransformer("all-MiniLM-L6-v2")
@@ -25,13 +48,10 @@ model = SentenceTransformer("all-MiniLM-L6-v2")
 texts = []
 metadata = []
 
+# Minimal semantic embedding input using only core 5P fields
 for story in stories:
     # Enrich content for embedding
     enriched_content = f"""
-{story.get('search_context', '')}
-
-{story.get('content', '')}
-
 Purpose: {story.get('Purpose', '')}
 Performance: {'; '.join(story.get('Performance', []))}
 Process: {'; '.join(story.get('Process', []))}
@@ -40,6 +60,7 @@ Process: {'; '.join(story.get('Process', []))}
     texts.append(enriched_content)
 
     metadata.append({
+        "id": story.get("id"),
         "Title": story.get("Title", "Untitled"),
         "Client": story.get("Client", "Unknown"),
         "Role": story.get("Role", "Unknown"),
@@ -53,7 +74,6 @@ Process: {'; '.join(story.get('Process', []))}
         "Action": story.get("Action", []),
         "Result": story.get("Result", []),
         "public_tags": story.get("public_tags", ""),
-        "content": story.get("content", ""),
         "Person": story.get("Person", ""),
         "Place": story.get("Place", ""),
         "Purpose": story.get("Purpose", ""),
@@ -70,7 +90,7 @@ if VECTOR_BACKEND == "pinecone":
     index_name = os.getenv("PINECONE_INDEX_NAME")
     namespace = os.getenv("PINECONE_NAMESPACE", "default")
 
-    print(f"[INFO] Using Pinecone index: {index_name} and namespace: {namespace}")
+    logging.info(f"[INFO] Using Pinecone index: {index_name} and namespace: {namespace}")
     
 
     # Ensure index exists
@@ -80,39 +100,41 @@ if VECTOR_BACKEND == "pinecone":
 
     index = pc.Index(index_name)
 
-    print("\U0001f9f9 Purging existing Pinecone index data...")
+    logging.info("\U0001f9f9 Purging existing Pinecone index data...")
     existing_ids = [f"story-{i}" for i in range(len(stories))]
-    #index.delete(ids=existing_ids, namespace=namespace)
+    
     # Get current namespaces
     stats = index.describe_index_stats()
     existing_namespaces = stats.get("namespaces", {}).keys()
 
     if namespace in existing_namespaces:
         index.delete(ids=existing_ids, namespace=namespace)
-        print(f"✅ Deleted {len(existing_ids)} vectors from namespace '{namespace}'")
+        logging.info(f"✅ Deleted {len(existing_ids)} vectors from namespace '{namespace}'")
     else:
-        print(f"⚠️ Namespace '{namespace}' not found — skipping delete")
-        print("✅ Purge complete.")
+        logging.info(f"⚠️ Namespace '{namespace}' not found — skipping delete")
+        logging.info("✅ Purge complete.")
 
     upsert_items = []
     for i, embedding in enumerate(embeddings):
         if np.any(np.isnan(embedding)):
-            print(f"❌ Skipping story-{i}: embedding contains NaNs")
+            logging.warning(f"❌ Skipping story-{i}: embedding contains NaNs")
             continue
         upsert_items.append((f"story-{i}", embedding.tolist(), metadata[i]))
 
-    print(f"📦 Ready to upsert {len(upsert_items)} stories to Pinecone")
+    logging.info(f"📦 Ready to upsert {len(upsert_items)} stories to Pinecone")
     index.upsert(upsert_items, namespace=namespace)
-    print("✅ Pinecone index updated successfully.")
+    logging.info("✅ Pinecone index updated successfully.")
 
 else:
     dimension = embeddings[0].shape[0]
     index = faiss.IndexFlatL2(dimension)
     index.add(np.array(embeddings))
+    
+    logging.info("📁 Saving FAISS index and metadata locally...")
 
     os.makedirs("faiss_index", exist_ok=True)
     faiss.write_index(index, "faiss_index/index.faiss")
     with open("faiss_index/story_metadata.json", "w") as f:
         json.dump(metadata, f, indent=2)
 
-    print("✅ Custom embeddings built and saved to faiss_index/")
+    logging.info("✅ Custom embeddings built and saved to faiss_index/")
