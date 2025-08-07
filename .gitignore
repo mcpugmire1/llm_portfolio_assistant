@@ -48,3 +48,15 @@ yourfile_pretty.json
 LLM_Portfolio_Asst_theme_tag_map.py
 app_dev.py
 app_dev_car.py
+
+# Ignore backup JSONL files
+echo_star_stories.jsonl.bak-*
+
+# Ignore alternate JSONL output
+echo_star_stories_nlp.jsonl
+
+# Ignore intermediate CSVs
+5P_Batching_Format_-_Agile_Planning.csv
+
+# Ignore archived scripts or legacy code
+archive/
