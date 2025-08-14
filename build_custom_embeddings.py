@@ -1,140 +1,212 @@
 """
 build_custom_embeddings.py
 
-This script reads enriched STAR story data from a JSONL file, generates OpenAI embeddings
-using the specified model, and upserts the results into a Pinecone index for semantic search.
-It also ensures existing vectors in the namespace are purged before reindexing, providing a clean slate.
+Reads enriched STAR story data from a JSONL file, generates embeddings (MiniLM),
+and upserts them into a Pinecone index (or FAISS locally). It purges the target
+Pinecone namespace before reindexing for a clean slate.
 
-Assumes environment variables are set for Pinecone and OpenAI API keys and configuration.
+Env (via .env or shell):
+  VECTOR_BACKEND=faiss | pinecone
+  STORIES_JSONL=echo_star_stories_nlp.jsonl   # default if unset
+  PINECONE_API_KEY=...
+  PINECONE_INDEX_NAME=...
+  PINECONE_NAMESPACE=default
 """
+
 import json
 import os
-import faiss
-import numpy as np
-from sentence_transformers import SentenceTransformer
-from dotenv import load_dotenv
-from pinecone import Pinecone
 import logging
+from typing import List, Dict, Any
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s — %(levelname)s — %(message)s",
-)
+import numpy as np
+from dotenv import load_dotenv
+from sentence_transformers import SentenceTransformer
 
+# Optional backends
+import faiss
+from pinecone import Pinecone
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s — %(levelname)s — %(message)s")
 load_dotenv()
 
-"""
-Main execution logic:
-- Loads enriched STAR story records from JSONL.
-- Generates embeddings using OpenAI.
-- Batches and upserts them into Pinecone under a defined namespace.
-- Handles errors and skips empty content.
-"""
+VECTOR_BACKEND = os.getenv("VECTOR_BACKEND", "faiss").strip().lower()
+STORIES_JSONL = os.getenv("STORIES_JSONL", "echo_star_stories_nlp.jsonl")
+PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+PINECONE_INDEX_NAME = os.getenv("PINECONE_INDEX_NAME")
+PINECONE_NAMESPACE = os.getenv("PINECONE_NAMESPACE", "default")
 
-VECTOR_BACKEND = os.getenv("VECTOR_BACKEND", "faiss")  # default to faiss if not set
+MODEL_NAME = "all-MiniLM-L6-v2"  # 384-dim
 
-# Load enriched STAR stories
-file_path = "echo_star_stories_nlp.jsonl"
-stories = []
-with open(file_path, "r") as f:
-    for line in f:
-        stories.append(json.loads(line.strip()))
-logging.info(f"\U0001F50D Total stories found: {len(stories)}")
+# ---------------------------
+# Helpers
+# ---------------------------
+def _as_list(v) -> List[str]:
+    if v is None:
+        return []
+    if isinstance(v, list):
+        return [str(x).strip() for x in v if str(x).strip()]
+    s = str(v).strip()
+    if not s:
+        return []
+    # split on common separators if someone stored as string
+    if ";" in s:
+        return [x.strip() for x in s.split(";") if x.strip()]
+    if "," in s:
+        return [x.strip() for x in s.split(",") if x.strip()]
+    return [s]
 
-# Initialize the embedding model
-model = SentenceTransformer("all-MiniLM-L6-v2")
+def _join(parts: List[str]) -> str:
+    return " ".join(p for p in parts if p)
 
-# Prepare documents and metadata
-texts = []
-metadata = []
+def build_embedding_text(story: Dict[str, Any]) -> str:
+    """Rich, semantic text for the vector (order is intentional)."""
+    title = story.get("Title", "")
+    client = story.get("Client", "")
+    role = story.get("Role", "")
+    cat = story.get("Category", "")
+    sub = story.get("Sub-category", "")
+    domain = " / ".join([x for x in [cat, sub] if x])
 
-# Minimal semantic embedding input using only core 5P fields
-for story in stories:
-    # Enrich content for embedding
-    enriched_content = f"""
-Purpose: {story.get('Purpose', '')}
-Performance: {'; '.join(story.get('Performance', []))}
-Process: {'; '.join(story.get('Process', []))}
-""".strip()
+    purpose = story.get("Purpose", "")
+    performance = "; ".join(_as_list(story.get("Performance")))
+    process = "; ".join(_as_list(story.get("Process")))
+    situation = "; ".join(_as_list(story.get("Situation")))
+    task = "; ".join(_as_list(story.get("Task")))
+    action = "; ".join(_as_list(story.get("Action")))
+    result = "; ".join(_as_list(story.get("Result")))
+    use_cases = "; ".join(_as_list(story.get("Use Case(s)")))
+    competencies = "; ".join(_as_list(story.get("Competencies")))
+    public_tags = "; ".join(_as_list(story.get("public_tags")))
+    fivep = story.get("5PSummary", "")
 
-    texts.append(enriched_content)
+    return "\n".join([
+        f"Title: {title}",
+        f"Client: {client}",
+        f"Role: {role}",
+        f"Domain: {domain}",
+        f"Purpose: {purpose}",
+        f"Performance: {performance}",
+        f"Process: {process}",
+        f"Situation: {situation}",
+        f"Task: {task}",
+        f"Action: {action}",
+        f"Result: {result}",
+        f"Use Cases: {use_cases}",
+        f"Competencies: {competencies}",
+        f"Tags: {public_tags}",
+        f"5P: {fivep}",
+    ]).strip()
 
-    metadata.append({
+def build_metadata(story: Dict[str, Any]) -> Dict[str, Any]:
+    """Compact but rich metadata for UI/snippets + Pinecone filters."""
+    cat = story.get("Category", "")
+    sub = story.get("Sub-category", "")
+    domain = " / ".join([x for x in [cat, sub] if x])
+
+    tags_list = _as_list(story.get("public_tags"))
+
+    meta = {
+        # canonical (matches JSONL / Excel)
         "id": story.get("id"),
         "Title": story.get("Title", "Untitled"),
         "Client": story.get("Client", "Unknown"),
         "Role": story.get("Role", "Unknown"),
-        "Category": story.get("Category", "Uncategorized"),
-        "Sub-category": story.get("Sub-category", ""),
-        "Competencies": story.get("Competencies", []),
-        "Solution / Offering": story.get("Solution / Offering", ""),
-        "Use Case(s)": story.get("Use Case(s)", []),
-        "Situation": story.get("Situation", []),
-        "Task": story.get("Task", []),
-        "Action": story.get("Action", []),
-        "Result": story.get("Result", []),
-        "public_tags": story.get("public_tags", ""),
-        "Person": story.get("Person", ""),
-        "Place": story.get("Place", ""),
+        "Category": cat,
+        "Sub-category": sub,
+        "Use Case(s)": _as_list(story.get("Use Case(s)")),
+        "Competencies": _as_list(story.get("Competencies")),
+        "Situation": _as_list(story.get("Situation")),
+        "Task": _as_list(story.get("Task")),
+        "Action": _as_list(story.get("Action")),
+        "Result": _as_list(story.get("Result")),
         "Purpose": story.get("Purpose", ""),
-        "Performance": story.get("Performance", []),
-        "Process": story.get("Process", []),
-        "5PSummary": story.get("5PSummary", "")
-    })
+        "Performance": _as_list(story.get("Performance")),
+        "Process": _as_list(story.get("Process")),
+        "5PSummary": story.get("5PSummary", ""),
+        "public_tags": tags_list,
 
-# Generate embeddings
-embeddings = model.encode(texts, show_progress_bar=True)
+        # UI-friendly duplicates (lowercase) to minimize UI mapping pain
+        "title": story.get("Title", "Untitled"),
+        "client": story.get("Client", "Unknown"),
+        "role": story.get("Role", "Unknown"),
+        "domain": domain,
+        "tags": tags_list,
 
+        # Snippet used in list view when results come from Pinecone
+        "summary": story.get("5PSummary", ""),
+    }
+    return meta
+
+# ---------------------------
+# Load data
+# ---------------------------
+stories: List[Dict[str, Any]] = []
+with open(STORIES_JSONL, "r") as f:
+    for line in f:
+        if line.strip():
+            stories.append(json.loads(line))
+logging.info(f"🔎 Loaded {len(stories)} stories from {STORIES_JSONL}")
+
+# ---------------------------
+# Embed
+# ---------------------------
+model = SentenceTransformer(MODEL_NAME)
+texts = [build_embedding_text(s) for s in stories]
+embeddings = model.encode(texts, show_progress_bar=True, normalize_embeddings=True)
+
+# ---------------------------
+# Pinecone or FAISS
+# ---------------------------
 if VECTOR_BACKEND == "pinecone":
-    pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
-    index_name = os.getenv("PINECONE_INDEX_NAME")
-    namespace = os.getenv("PINECONE_NAMESPACE", "default")
+    if not (PINECONE_API_KEY and PINECONE_INDEX_NAME):
+        raise RuntimeError("Pinecone selected but PINECONE_API_KEY or PINECONE_INDEX_NAME is missing.")
 
-    logging.info(f"[INFO] Using Pinecone index: {index_name} and namespace: {namespace}")
-    
+    pc = Pinecone(api_key=PINECONE_API_KEY)
+    logging.info(f"[INFO] Using Pinecone index='{PINECONE_INDEX_NAME}', namespace='{PINECONE_NAMESPACE}'")
 
     # Ensure index exists
-    index_names = [index.name for index in pc.list_indexes()]
-    if index_name not in index_names:
-        raise ValueError(f"Index '{index_name}' does not exist. Available indexes: {index_names}")
+    existing = [i.name for i in pc.list_indexes()]
+    if PINECONE_INDEX_NAME not in existing:
+        raise ValueError(f"Index '{PINECONE_INDEX_NAME}' does not exist. Available: {existing}")
 
-    index = pc.Index(index_name)
+    index = pc.Index(PINECONE_INDEX_NAME)
 
-    logging.info("\U0001f9f9 Purging existing Pinecone index data...")
-    existing_ids = [f"story-{i}" for i in range(len(stories))]
-    
-    # Get current namespaces
-    stats = index.describe_index_stats()
-    existing_namespaces = stats.get("namespaces", {}).keys()
+    # Purge namespace (best effort across SDK variants)
+    try:
+        logging.info("🧹 Purging namespace (delete_all=True)…")
+        index.delete(delete_all=True, namespace=PINECONE_NAMESPACE)  # v3 SDK
+    except Exception:
+        # Fallback: delete by id range (not perfect, but avoids stale dupes)
+        ids_guess = [f"story-{i}" for i in range(max(1, len(stories) * 2))]
+        logging.info("🧹 Fallback purge by guessed ids…")
+        index.delete(ids=ids_guess, namespace=PINECONE_NAMESPACE)
 
-    if namespace in existing_namespaces:
-        index.delete(ids=existing_ids, namespace=namespace)
-        logging.info(f"✅ Deleted {len(existing_ids)} vectors from namespace '{namespace}'")
-    else:
-        logging.info(f"⚠️ Namespace '{namespace}' not found — skipping delete")
-        logging.info("✅ Purge complete.")
+    # Upsert in batches
+    batch = 200
+    upserted = 0
+    for start in range(0, len(stories), batch):
+        items = []
+        for i in range(start, min(start + batch, len(stories))):
+            vec = embeddings[i]
+            if np.any(np.isnan(vec)):
+                logging.warning(f"❌ Skipping story-{i}: embedding contains NaNs")
+                continue
+            meta = build_metadata(stories[i])
+            items.append((meta.get("id") or f"story-{i}", vec.tolist(), meta))
+        if items:
+            index.upsert(vectors=items, namespace=PINECONE_NAMESPACE)
+            upserted += len(items)
+            logging.info(f"⬆️ Upserted {upserted}/{len(stories)}")
 
-    upsert_items = []
-    for i, embedding in enumerate(embeddings):
-        if np.any(np.isnan(embedding)):
-            logging.warning(f"❌ Skipping story-{i}: embedding contains NaNs")
-            continue
-        upsert_items.append((f"story-{i}", embedding.tolist(), metadata[i]))
-
-    logging.info(f"📦 Ready to upsert {len(upsert_items)} stories to Pinecone")
-    index.upsert(upsert_items, namespace=namespace)
     logging.info("✅ Pinecone index updated successfully.")
 
 else:
-    dimension = embeddings[0].shape[0]
-    index = faiss.IndexFlatL2(dimension)
-    index.add(np.array(embeddings))
-    
-    logging.info("📁 Saving FAISS index and metadata locally...")
-
+    # FAISS local index
+    dim = embeddings.shape[1]
+    faiss_index = faiss.IndexFlatL2(dim)
+    faiss_index.add(np.array(embeddings, dtype="float32"))
     os.makedirs("faiss_index", exist_ok=True)
-    faiss.write_index(index, "faiss_index/index.faiss")
+    faiss.write_index(faiss_index, "faiss_index/index.faiss")
     with open("faiss_index/story_metadata.json", "w") as f:
-        json.dump(metadata, f, indent=2)
-
-    logging.info("✅ Custom embeddings built and saved to faiss_index/")
+        json.dump([build_metadata(s) for s in stories], f, indent=2)
+    logging.info("✅ FAISS index + metadata saved to ./faiss_index/")
