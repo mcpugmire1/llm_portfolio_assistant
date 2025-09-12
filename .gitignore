@@ -81,3 +81,4 @@ mockui.py
 search_test.py
 validate_search.py
 backend/chat_bak*.py
+archive/
