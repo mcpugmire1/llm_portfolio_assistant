@@ -21,8 +21,8 @@ results = index.query(vector=dummy_vector, top_k=5, include_metadata=True)
 
 # Print story info
 print("🔍 Sample stories in Pinecone:\n")
-for match in results['matches']:
-    meta = match['metadata']
+for match in results["matches"]:
+    meta = match["metadata"]
     print(f"🆔 ID: {match['id']}")
     print(f"📌 Title: {meta.get('Title', 'N/A')}")
     print(f"🏷️ Tags: {meta.get('public_tags', '—')}")

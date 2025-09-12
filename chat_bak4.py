@@ -46,11 +46,17 @@ llm = ChatOpenAI(
 )
 
 # Prompt setup
-prompt_template = ChatPromptTemplate.from_messages([
-    ("system", SYSTEM_PROMPT),
-    ("user", "{question}\n\nHere are a few relevant STAR stories from your portfolio:\n\n{stories}")
-])
+prompt_template = ChatPromptTemplate.from_messages(
+    [
+        ("system", SYSTEM_PROMPT),
+        (
+            "user",
+            "{question}\n\nHere are a few relevant STAR stories from your portfolio:\n\n{stories}",
+        ),
+    ]
+)
 output_parser = StrOutputParser()
+
 
 def generate_chat_response(query):
     # Build and search FAISS vectorstore
@@ -65,6 +71,6 @@ def generate_chat_response(query):
 
     # Build chain
     chain = prompt_template | llm | output_parser
-    response = chain.invoke({ "question": query, "stories": story_text })
+    response = chain.invoke({"question": query, "stories": story_text})
 
     return response

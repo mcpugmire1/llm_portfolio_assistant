@@ -28,6 +28,7 @@ with open("star_stories_llm_enriched_with_search.json", "r") as f:
 # Load embedding model
 model = SentenceTransformer("all-MiniLM-L6-v2")
 
+
 def format_response_from_stories(story_indices, max_per_client=1, max_stories=5):
     client_seen = defaultdict(int)
     output = []
@@ -36,7 +37,9 @@ def format_response_from_stories(story_indices, max_per_client=1, max_stories=5)
         if idx >= len(stories):
             continue
         story = stories[idx]
-        client = story.get("Client") or story.get("Client/Company") or "Internal (Accenture)"
+        client = (
+            story.get("Client") or story.get("Client/Company") or "Internal (Accenture)"
+        )
         if client_seen[client] >= max_per_client:
             continue
         client_seen[client] += 1
@@ -45,8 +48,14 @@ def format_response_from_stories(story_indices, max_per_client=1, max_stories=5)
         role = story.get("Role", "")
         category = story.get("Category", "")
         use_case_raw = story.get("Use Case(s)", [])
-        use_case = ", ".join(use_case_raw if isinstance(use_case_raw, list) else [use_case_raw])
-        impact_line = story["content"].strip().split("R:")[-1].strip() if "R:" in story["content"] else story["content"].strip()
+        use_case = ", ".join(
+            use_case_raw if isinstance(use_case_raw, list) else [use_case_raw]
+        )
+        impact_line = (
+            story["content"].strip().split("R:")[-1].strip()
+            if "R:" in story["content"]
+            else story["content"].strip()
+        )
 
         summary = (
             f"> {title} ({client}, {role})\n"
@@ -61,12 +70,14 @@ def format_response_from_stories(story_indices, max_per_client=1, max_stories=5)
 
     return "\n\n".join(output)
 
+
 def generate_chat_response(query, k=12):
     print("🔍 Embedding query and retrieving top matches...")
     query_embedding = model.encode([query])[0]
     D, I = index.search(np.array([query_embedding]), k)
     print("✅ Retrieved relevant STAR stories.")
     return format_response_from_stories(I[0])
+
 
 # CLI loop
 if __name__ == "__main__":
@@ -76,4 +87,3 @@ if __name__ == "__main__":
             break
         answer = generate_chat_response(query)
         print(f"\nAnswer:\n{answer}")
-

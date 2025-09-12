@@ -17,9 +17,11 @@ output_file = "MPugmire - STAR Stories - 5P - OUTPUT.xlsx"
 # Load Excel
 df = pd.read_excel(input_file, sheet_name="STAR Stories - Interview Ready")
 
+
 # Utility: Is field filled
 def is_filled(val):
     return isinstance(val, str) and val.strip() != ""
+
 
 def infer_place(client, category):
     if client == "Multiple Clients":
@@ -28,7 +30,11 @@ def infer_place(client, category):
             return "U.S. healthcare providers"
         elif "financial" in category:
             return "leading global banks"
-        elif "innovation" in category or "liquid studio" in category or "cloud innovation center" in category:
+        elif (
+            "innovation" in category
+            or "liquid studio" in category
+            or "cloud innovation center" in category
+        ):
             return "Fortune 500 innovation teams"
         elif "public sector" in category:
             return "government agencies and regulators"
@@ -37,6 +43,7 @@ def infer_place(client, category):
         else:
             return "enterprise organizations"
     return client
+
 
 # Prompt generator
 def generate_prompt(star_text, place=None):
@@ -58,17 +65,24 @@ STAR story:
 {note}
 """
 
+
 # Field extractor
 def extract(label, text):
     match = re.search(rf"{label}:\s*(.*)", text, re.IGNORECASE)
     return match.group(1).strip() if match else ""
 
+
 # Process rows
 for idx, row in df.iterrows():
-    if all(is_filled(row[col]) for col in ["Person", "Place", "Purpose", "Performance", "Process", "5PSummary"]):
+    if all(
+        is_filled(row[col])
+        for col in ["Person", "Place", "Purpose", "Performance", "Process", "5PSummary"]
+    ):
         continue
 
-    story = " ".join([str(row.get(fld, "")) for fld in ["Situation", "Task", "Action", "Result"]]).strip()
+    story = " ".join(
+        [str(row.get(fld, "")) for fld in ["Situation", "Task", "Action", "Result"]]
+    ).strip()
     place_override = infer_place(row["Client"], row["Category"])
     prompt = generate_prompt(story, place_override)
 
@@ -76,7 +90,7 @@ for idx, row in df.iterrows():
         response = client.chat.completions.create(
             model="gpt-4",
             messages=[{"role": "user", "content": prompt}],
-            temperature=0.3
+            temperature=0.3,
         )
 
         content = response.choices[0].message.content.strip()

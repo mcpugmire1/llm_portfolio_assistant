@@ -26,7 +26,9 @@ from sentence_transformers import SentenceTransformer
 import faiss
 from pinecone import Pinecone
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s — %(levelname)s — %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s — %(levelname)s — %(message)s"
+)
 load_dotenv()
 
 VECTOR_BACKEND = os.getenv("VECTOR_BACKEND", "faiss").strip().lower()
@@ -36,6 +38,7 @@ PINECONE_INDEX_NAME = os.getenv("PINECONE_INDEX_NAME")
 PINECONE_NAMESPACE = os.getenv("PINECONE_NAMESPACE", "default")
 
 MODEL_NAME = "all-MiniLM-L6-v2"  # 384-dim
+
 
 # ---------------------------
 # Helpers
@@ -55,8 +58,10 @@ def _as_list(v) -> List[str]:
         return [x.strip() for x in s.split(",") if x.strip()]
     return [s]
 
+
 def _join(parts: List[str]) -> str:
     return " ".join(p for p in parts if p)
+
 
 def build_embedding_text(story: Dict[str, Any]) -> str:
     """Rich, semantic text for the vector (order is intentional)."""
@@ -79,23 +84,26 @@ def build_embedding_text(story: Dict[str, Any]) -> str:
     public_tags = "; ".join(_as_list(story.get("public_tags")))
     fivep = story.get("5PSummary", "")
 
-    return "\n".join([
-        f"Title: {title}",
-        f"Client: {client}",
-        f"Role: {role}",
-        f"Domain: {domain}",
-        f"Purpose: {purpose}",
-        f"Performance: {performance}",
-        f"Process: {process}",
-        f"Situation: {situation}",
-        f"Task: {task}",
-        f"Action: {action}",
-        f"Result: {result}",
-        f"Use Cases: {use_cases}",
-        f"Competencies: {competencies}",
-        f"Tags: {public_tags}",
-        f"5P: {fivep}",
-    ]).strip()
+    return "\n".join(
+        [
+            f"Title: {title}",
+            f"Client: {client}",
+            f"Role: {role}",
+            f"Domain: {domain}",
+            f"Purpose: {purpose}",
+            f"Performance: {performance}",
+            f"Process: {process}",
+            f"Situation: {situation}",
+            f"Task: {task}",
+            f"Action: {action}",
+            f"Result: {result}",
+            f"Use Cases: {use_cases}",
+            f"Competencies: {competencies}",
+            f"Tags: {public_tags}",
+            f"5P: {fivep}",
+        ]
+    ).strip()
+
 
 def build_metadata(story: Dict[str, Any]) -> Dict[str, Any]:
     """Compact but rich metadata for UI/snippets + Pinecone filters."""
@@ -124,18 +132,17 @@ def build_metadata(story: Dict[str, Any]) -> Dict[str, Any]:
         "Process": _as_list(story.get("Process")),
         "5PSummary": story.get("5PSummary", ""),
         "public_tags": tags_list,
-
         # UI-friendly duplicates (lowercase) to minimize UI mapping pain
         "title": story.get("Title", "Untitled"),
         "client": story.get("Client", "Unknown"),
         "role": story.get("Role", "Unknown"),
         "domain": domain,
         "tags": tags_list,
-
         # Snippet used in list view when results come from Pinecone
         "summary": story.get("5PSummary", ""),
     }
     return meta
+
 
 # ---------------------------
 # Load data
@@ -159,15 +166,21 @@ embeddings = model.encode(texts, show_progress_bar=True, normalize_embeddings=Tr
 # ---------------------------
 if VECTOR_BACKEND == "pinecone":
     if not (PINECONE_API_KEY and PINECONE_INDEX_NAME):
-        raise RuntimeError("Pinecone selected but PINECONE_API_KEY or PINECONE_INDEX_NAME is missing.")
+        raise RuntimeError(
+            "Pinecone selected but PINECONE_API_KEY or PINECONE_INDEX_NAME is missing."
+        )
 
     pc = Pinecone(api_key=PINECONE_API_KEY)
-    logging.info(f"[INFO] Using Pinecone index='{PINECONE_INDEX_NAME}', namespace='{PINECONE_NAMESPACE}'")
+    logging.info(
+        f"[INFO] Using Pinecone index='{PINECONE_INDEX_NAME}', namespace='{PINECONE_NAMESPACE}'"
+    )
 
     # Ensure index exists
     existing = [i.name for i in pc.list_indexes()]
     if PINECONE_INDEX_NAME not in existing:
-        raise ValueError(f"Index '{PINECONE_INDEX_NAME}' does not exist. Available: {existing}")
+        raise ValueError(
+            f"Index '{PINECONE_INDEX_NAME}' does not exist. Available: {existing}"
+        )
 
     index = pc.Index(PINECONE_INDEX_NAME)
 
@@ -179,7 +192,7 @@ if VECTOR_BACKEND == "pinecone":
         # Fallback: delete by id range (not perfect, but avoids stale dupes)
         ids_guess = [f"story-{i}" for i in range(max(1, len(stories) * 2))]
         logging.info("🧹 Fallback purge by guessed ids…")
-        index.delete(ids=ids_guess, namespace=PINECONE_NAMESPACE)
+        index.delete(vectors=ids_guess, namespace=PINECONE_NAMESPACE)
 
     # Upsert in batches
     batch = 200
@@ -192,7 +205,10 @@ if VECTOR_BACKEND == "pinecone":
                 logging.warning(f"❌ Skipping story-{i}: embedding contains NaNs")
                 continue
             meta = build_metadata(stories[i])
-            items.append((meta.get("id") or f"story-{i}", vec.tolist(), meta))
+            vec_id = str(meta.get("id") or f"story-{i}")
+            meta["id"] = vec_id  # ensure metadata ID matches vector ID
+            items.append((vec_id, vec.tolist(), meta))
+            logging.debug(f"Prepared upsert ID={vec_id} with dim={len(vec)}")
         if items:
             index.upsert(vectors=items, namespace=PINECONE_NAMESPACE)
             upserted += len(items)

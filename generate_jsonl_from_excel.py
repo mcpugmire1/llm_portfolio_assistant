@@ -15,6 +15,7 @@ import shutil
 from datetime import datetime
 import re
 from utils import normalize, slugify, norm_key, split_bullets
+
 # ---------- config ----------
 
 INPUT_EXCEL_FILE = "MPugmire - STAR Stories - 06AUG25.xlsx"  # <-- update as needed
@@ -23,6 +24,7 @@ SHEET_NAME = "STAR Stories - Interview Ready"
 DRY_RUN = False  # ✅ Change to False when ready to write output
 
 # ---------- helpers ----------
+
 
 def load_existing_jsonl(path: str):
     """
@@ -43,6 +45,7 @@ def load_existing_jsonl(path: str):
             by_key[key] = rec
     return records, by_key
 
+
 def backup_file(path: str):
     if os.path.exists(path):
         ts = datetime.utcnow().strftime("%Y-%m-%dT%H_%M_%SZ")
@@ -53,8 +56,11 @@ def backup_file(path: str):
 
 # ---------- main ----------
 
+
 def excel_to_jsonl():
-    print(f"\n🚦 DRY_RUN = {DRY_RUN} — {'No file will be written' if DRY_RUN else 'Output will be saved to disk'}")
+    print(
+        f"\n🚦 DRY_RUN = {DRY_RUN} — {'No file will be written' if DRY_RUN else 'Output will be saved to disk'}"
+    )
 
     # Load existing JSONL (to preserve public_tags/content/ids where appropriate)
     existing_records, existing_by_key = load_existing_jsonl(OUTPUT_JSONL_FILE)
@@ -83,9 +89,17 @@ def excel_to_jsonl():
             "Role": normalize(row.get("Role", "")),
             "Category": normalize(row.get("Category", "")),
             "Sub-category": normalize(row.get("Sub-category", "")),
-            "Competencies": [s.strip() for s in str(row.get("Competencies", "")).split(",") if s and s.strip()],
+            "Competencies": [
+                s.strip()
+                for s in str(row.get("Competencies", "")).split(",")
+                if s and s.strip()
+            ],
             "Solution / Offering": normalize(row.get("Solution / Offering", "")),
-            "Use Case(s)": [s.strip() for s in str(row.get("Use Case(s)", "")).split(";") if s and s.strip()],
+            "Use Case(s)": [
+                s.strip()
+                for s in str(row.get("Use Case(s)", "")).split(";")
+                if s and s.strip()
+            ],
             "Situation": [normalize(row.get("Situation", ""))],
             "Task": [normalize(row.get("Task", ""))],
             "Action": [normalize(row.get("Action", ""))],
@@ -98,7 +112,7 @@ def excel_to_jsonl():
             "Process": split_bullets(normalize(row.get("Process", ""))),
             "5PSummary": normalize(row.get("5PSummary", "")),
             # content is often generated later; Excel usually doesn't contain it
-            "content": ""  # placeholder; may be preserved from existing
+            "content": "",  # placeholder; may be preserved from existing
         }
 
         # Merge with existing (preserve id, public_tags, content when Excel is blank)
@@ -132,7 +146,7 @@ def excel_to_jsonl():
         else:
             created += 1
 
-       # === PREVIEW OR WRITE OUTPUT JSONL ===
+    # === PREVIEW OR WRITE OUTPUT JSONL ===
     out_ids = [rec["id"] for rec in out_records]
     existing_ids = [rec.get("id") for rec in existing_records if "id" in rec]
     new_ids = set(out_ids) - set(existing_ids)
@@ -177,14 +191,19 @@ def excel_to_jsonl():
     print(f"➕ Created: {created}  🔁 Updated: {updated}  ✅ Unchanged: {unchanged}")
 
     if DRY_RUN:
-        print("\n🛑 DRY RUN MODE: No file written. Set DRY_RUN = False to save changes.")
+        print(
+            "\n🛑 DRY RUN MODE: No file written. Set DRY_RUN = False to save changes."
+        )
     else:
         with open(OUTPUT_JSONL_FILE, "w", encoding="utf-8") as f:
             for rec in out_records:
                 f.write(json.dumps(rec, ensure_ascii=False) + "\n")
         print("✅ JSONL export complete.")
         print(f"📄 Output file: {OUTPUT_JSONL_FILE}")
-        print("📌 Safe to run content/tag enrichment next; preserves existing data when Excel is blank.")
+        print(
+            "📌 Safe to run content/tag enrichment next; preserves existing data when Excel is blank."
+        )
+
 
 if __name__ == "__main__":
     excel_to_jsonl()

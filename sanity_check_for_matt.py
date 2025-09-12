@@ -3,6 +3,7 @@ import pandas as pd
 INPUT_EXCEL_FILE = "MPugmire - STAR Stories - 6JUN25.xlsx"
 SHEET_NAME = "STAR Stories - Interview Ready"
 
+
 def run_sanity_check():
     print("🧠 Running sanity check...")
 
@@ -30,10 +31,13 @@ def run_sanity_check():
     missing_count = missing_fields.sum()
 
     if missing_count > 0:
-        print(f"\n⚠️ Finalized (Interview-Ready) rows with missing critical fields: {missing_count}")
+        print(
+            f"\n⚠️ Finalized (Interview-Ready) rows with missing critical fields: {missing_count}"
+        )
         print(finalized_ready_rows[missing_fields][["Title"] + required_fields])
     else:
         print("\n✅ No missing critical fields in Interview-Ready stories.")
+
 
 if __name__ == "__main__":
     run_sanity_check()

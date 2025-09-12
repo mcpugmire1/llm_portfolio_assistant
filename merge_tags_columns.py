@@ -8,6 +8,7 @@ PUBLIC_TAGS_COL = "Public Tags"
 REFINED_TAGS_COL = "Refined Tags"
 MERGED_TAGS_COL = "Merged Tags"
 
+
 def merge_and_clean_tags(row):
     tags = set()
 
@@ -17,6 +18,7 @@ def merge_and_clean_tags(row):
             tags.update([t.strip() for t in str(raw).split(",") if t.strip()])
 
     return ", ".join(sorted(tags))
+
 
 def main():
     print(f"📂 Loading file: {INPUT_FILE}")
@@ -29,6 +31,7 @@ def main():
     df.to_excel(OUTPUT_FILE, index=False)
 
     print("\n✅ Done! Merged tags are now available in the column 'Merged Tags'.")
+
 
 if __name__ == "__main__":
     main()

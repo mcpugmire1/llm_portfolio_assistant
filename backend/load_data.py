@@ -2,6 +2,7 @@
 import json
 import os
 
+
 def load_stories(json_path):
     if not os.path.exists(json_path):
         raise FileNotFoundError(f"Could not find {json_path}")

@@ -6,16 +6,20 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
+
 try:
     from query_rewriter_llm import rewrite_query_with_llm
 except Exception as e:
     print(f"[WARN] query_rewriter_llm import failed: {e}")
+
     def rewrite_query_with_llm(q: str) -> str:
         return q  # fallback: pass-through if import hiccups
-    
+
+
 from vector_search import embed_query, search, rerank_by_metadata
 
 FAISS_INDEX_PATH = Path("faiss_index/index.faiss")
+
 
 def ensure_faiss_index():
     """
@@ -36,6 +40,7 @@ def ensure_faiss_index():
         st.error("Failed to build FAISS index. Check the server log.")
         st.stop()
 
+
 # Load environment variables
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
@@ -53,16 +58,16 @@ VECTOR_BACKEND = os.getenv("VECTOR_BACKEND", "faiss").lower()
 print(f"[INFO] Using vector backend: {VECTOR_BACKEND.upper()}")
 
 if VECTOR_BACKEND == "pinecone":
-    
-    #from pinecone import Pinecone
-    from pinecone import Pinecone          # 0.8.x+
+
+    # from pinecone import Pinecone
+    from pinecone import Pinecone  # 0.8.x+
 
     PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
     PINECONE_INDEX_NAME = os.getenv("PINECONE_INDEX_NAME")
 
     pc = Pinecone(api_key=PINECONE_API_KEY)
     pinecone_index = pc.Index(PINECONE_INDEX_NAME)
-   
+
     # Disable CUDA explicitly by setting device
     metadata = None  # Will be loaded per query from Pinecone
 
@@ -70,13 +75,12 @@ else:
     import faiss
     import numpy as np
 
+    ensure_faiss_index()  # ← NEW LINE
 
-    ensure_faiss_index()                      # ← NEW LINE
-
-    
     index = faiss.read_index("faiss_index/index.faiss")
     with open("faiss_index/story_metadata.json", "r") as f:
         metadata = json.load(f)
+
 
 # -------------------
 # Utility Functions
@@ -85,11 +89,14 @@ def load_star_stories(file_path):
     with open(file_path, "r", encoding="utf-8") as f:
         return [json.loads(line.strip()) for line in f.readlines()]
 
+
 def match_user_query(query, stories):
-    return [story for story in stories if query.lower() in story['content'].lower()]
+    return [story for story in stories if query.lower() in story["content"].lower()]
+
 
 def fmt(value):
-    return ', '.join(value) if isinstance(value, list) else value
+    return ", ".join(value) if isinstance(value, list) else value
+
 
 def render_story_block(story):
     title = story.get("Title", "Untitled")
@@ -114,15 +121,13 @@ def render_story_block(story):
         </div>
     """.strip()
 
+
 # Streamlit UI setup
 
 # -------------------
 # Page Configuration
 # -------------------
-st.set_page_config(
-    page_title="MattGPT – Career Story Assistant",
-    page_icon="🤖"
-)
+st.set_page_config(page_title="MattGPT – Career Story Assistant", page_icon="🤖")
 
 if "query" not in st.session_state:
     st.session_state.query = ""
@@ -132,20 +137,24 @@ if "query" not in st.session_state:
 # -------------------
 st.markdown("# 🤖 MattGPT – Matt's LLM-Powered Career Story Assistant")
 
-st.markdown("""
+st.markdown(
+    """
 Welcome to **MattGPT** – my interactive portfolio assistant.
 
 Use this tool to explore my career stories, technical projects, and leadership experiences.  
 Ask a question like “Tell me about a time you led a global delivery” or browse by category.
 
 This app was built using **OpenAI + Pinecone** to showcase my experience in a conversational, AI-powered format.
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
 # -------------------
 # Expanders for About + How it Works
 # -------------------
 with st.expander("👋 About Matt"):
-    st.markdown("""
+    st.markdown(
+        """
 Digital transformation isn’t just about shipping code faster — it’s about building the right thing, the right way, with the right people. I help tech leaders modernize legacy platforms and launch innovative, 
 cloud-native products that scale — all while nurturing cross-functional teams grounded in empathy, authenticity, and purpose.
 
@@ -172,10 +181,13 @@ Technology & Transformation Leader | Platform Strategy | AI-Enabled Product Inno
 **Contact**  
 📧 [mcpugmire@gmail.com](mailto:mcpugmire@gmail.com)  
 🔗 [linkedin.com/in/matt-pugmire](https://www.linkedin.com/in/matt-pugmire)    
-""", unsafe_allow_html=True)
-    
+""",
+        unsafe_allow_html=True,
+    )
+
 with st.expander("🤖 How does MattGPT work?"):
-    st.markdown("""
+    st.markdown(
+        """
 **MattGPT uses Retrieval-Augmented Generation (RAG) with semantic search** — meaning it understands the intent behind your question and retrieves real examples from my experience to answer it.
 
 This means:  
@@ -185,21 +197,26 @@ This means:
 
 Ask anything — from leading Agile transformations to modernizing global payments platforms.
 
-""")
-    
+"""
+    )
+
 # 📘 Sidebar filter pointer banner (restore this)
-#st.markdown("<br>", unsafe_allow_html=True)
-st.markdown("""
+# st.markdown("<br>", unsafe_allow_html=True)
+st.markdown(
+    """
 <div style="background-color: #1e1e1e; padding: 0.75rem 1rem; border-left: 4px solid #2e8bff; border-radius: 6px; margin: 0.5rem 0 0.75rem;">
 🔍 <strong>Pro Tip for Mobile:</strong> Tap the sidebar ➤ icon on the left to filter career stories by <strong>domain</strong> or <strong>skill area</strong>.
 </div>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
-#st.markdown("<br>", unsafe_allow_html=True)
+# st.markdown("<br>", unsafe_allow_html=True)
 
 # --- Add custom CSS for sample question buttons just before the block that begins with "### 🤔 Curious where to start?"
 # --- Custom CSS for styling sample question buttons (main and sidebar)
-st.markdown("""
+st.markdown(
+    """
 <style>
 /* Reduce excessive spacing under expanders (About Matt, How it Works) */
 .element-container:has(> details) {
@@ -246,11 +263,16 @@ section[data-testid="stSidebar"] button {
     font-weight: 600 !important;
 }
 </style>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
-st.markdown("""
+st.markdown(
+    """
 <h2 style='margin-top: -0.5rem; margin-bottom: 0.25rem;'>🤔 Curious where to start?</h2>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 st.markdown("Here are a few sample questions you can click on:")
 
 sample_questions = [
@@ -258,7 +280,7 @@ sample_questions = [
     "How did you apply GenAI in a healthcare project?",
     "What’s your experience with cloud-native architecture?",
     "How do you help teams adopt modern engineering practices?",
-    "Describe how you scale agile and DevOps in enterprise environments."
+    "Describe how you scale agile and DevOps in enterprise environments.",
 ]
 
 # 1. Initialize it if missing
@@ -274,12 +296,14 @@ for i, question in enumerate(sample_questions):
         st.session_state.query = question
         st.session_state.selected_sample_index = i
         st.rerun()  # <-- ensure the next run picks up the new query
-        
+
 # Load STAR stories dataset early so it's available for all logic
 stories = load_star_stories("echo_star_stories.jsonl")
 
 # Extract available sub-categories for dropdown
-available_domains = sorted(set(story.get("Sub-category", "") for story in stories if story.get("Sub-category")))
+available_domains = sorted(
+    set(story.get("Sub-category", "") for story in stories if story.get("Sub-category"))
+)
 
 # -------------------
 # Sidebar: Filters + Clickable Sample Questions
@@ -287,20 +311,23 @@ available_domains = sorted(set(story.get("Sub-category", "") for story in storie
 # Sidebar styling to enhance sample question button layout
 
 # 🔽 Domain Filter (from story metadata)
-available_domains = sorted(set(story.get("Sub-category", "") for story in stories if story.get("Sub-category")))
+available_domains = sorted(
+    set(story.get("Sub-category", "") for story in stories if story.get("Sub-category"))
+)
 selected_domain = st.sidebar.selectbox(
-    "🗂️ Filter by Domain",
-    options=["(All)"] + available_domains
+    "🗂️ Filter by Domain", options=["(All)"] + available_domains
 )
 
 
 # Extract unique tags from comma-separated public_tags field
-all_tags = sorted({
-    tag.strip()
-    for story in stories
-    for tag in story.get("public_tags", "").split(",")
-    if tag.strip()
-})
+all_tags = sorted(
+    {
+        tag.strip()
+        for story in stories
+        for tag in story.get("public_tags", "").split(",")
+        if tag.strip()
+    }
+)
 selected_tags = st.sidebar.multiselect("🎯 Filter by Skill Area", all_tags)
 
 # 1. Initialize it if missing
@@ -314,24 +341,30 @@ st.markdown("### 💬 Try asking:")
 st.markdown("**“Tell me about a time you led a global delivery.”**")
 
 # Then render the input field (no conflict)
-st.markdown("""
+st.markdown(
+    """
 <div style="background-color: #262730; border: 1px solid #4a4a4a; padding: 1rem; border-radius: 8px; margin-top: 1rem; margin-bottom: 1.5rem;">
     📝 <strong>Or ask your own question</strong><br>
     <span style='font-size: 0.9rem; color: #ccc;'>Describe a topic or experience you'd like to explore (e.g., 'Tell me about leading a global delivery')</span>
-    """, unsafe_allow_html=True)
+    """,
+    unsafe_allow_html=True,
+)
 user_query = st.text_input(
     "Ask about Matt’s experience (e.g., 'cloud modernization', 'capability building', 'payments')",
-    key="query"
+    key="query",
 )
 # -------------------
 # Query Handling + Story Display
 # -------------------
-st.markdown("""
+st.markdown(
+    """
 </div>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 st.markdown("<br>", unsafe_allow_html=True)
 
-#query = st.text_input("Ask about Matt's experience (e.g., 'cloud modernization', 'capability building', 'payments')")
+# query = st.text_input("Ask about Matt's experience (e.g., 'cloud modernization', 'capability building', 'payments')")
 show_star = st.checkbox("Include detailed career story breakdowns", value=True)
 
 if user_query:
@@ -342,9 +375,8 @@ if user_query:
 
         query_embedding = embed_query(rewritten_query)
         search_results = search(query_embedding, top_k=5)
-        
 
-         # Re-rank or filter using domain metadata
+        # Re-rank or filter using domain metadata
         print("[DEBUG] Filtered search results after domain filter:")
         for s in search_results:
             print(s.get("Title"), "—", s.get("Sub-category"))
@@ -356,7 +388,7 @@ if user_query:
         search_results = rerank_by_metadata(
             search_results,
             domain_filter=selected_domain,
-            competency_filter=selected_tags
+            competency_filter=selected_tags,
         )
 
         matched_stories = []
@@ -366,15 +398,13 @@ if user_query:
         for i, story in enumerate(search_results):
             st.write(f"{i+1}. {story.get('Title')} — Client: {story.get('Client')}")
         for story in search_results:
-        # your display logic
+            # your display logic
             story_block = render_story_block(story)
             matched_stories.append(story_block.strip())
 
         if not matched_stories:
             st.warning("No relevant stories found. Please try a different query.")
             st.stop()
-
-    
 
         # Construct prompt from matched stories and user query
         full_prompt = f"""Relevant STAR stories:
@@ -395,11 +425,11 @@ if user_query:
         - The actions you took (product, people, or process)
         - The value created or business impact
 
-        Be outcome-oriented — as if preparing for a leadership interview."""
+        Be outcome-oriented — as if preparing for a leadership interview.""",
                         },
-                        {"role": "user", "content": full_prompt}
+                        {"role": "user", "content": full_prompt},
                     ],
-                    temperature=0.3
+                    temperature=0.3,
                 )
                 answer = response.choices[0].message.content
                 st.markdown("---")

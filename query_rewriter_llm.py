@@ -9,6 +9,7 @@ load_dotenv()
 # Initialize OpenAI client
 client = OpenAI()
 
+
 @retry(wait=wait_random_exponential(min=1, max=4), stop=stop_after_attempt(3))
 def rewrite_query_with_llm(user_prompt: str) -> str:
     """
@@ -23,18 +24,17 @@ def rewrite_query_with_llm(user_prompt: str) -> str:
 
     messages = [
         {"role": "system", "content": base_prompt},
-        {"role": "user", "content": f"Rewrite this prompt for semantic search: {user_prompt}"}
+        {
+            "role": "user",
+            "content": f"Rewrite this prompt for semantic search: {user_prompt}",
+        },
     ]
 
     response = client.chat.completions.create(
-        model="gpt-4",
-        messages=messages,
-        temperature=0.3,
-        max_tokens=60
+        model="gpt-4", messages=messages, temperature=0.3, max_tokens=60
     )
 
     rewritten = response.choices[0].message.content.strip()
     if not rewritten or len(rewritten) < 3:
         raise ValueError("Invalid rewritten query returned from LLM.")
     return rewritten
-

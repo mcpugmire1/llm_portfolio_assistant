@@ -59,4 +59,25 @@ echo_star_stories_nlp.jsonl
 5P_Batching_Format_-_Agile_Planning.csv
 
 # Ignore archived scripts or legacy code
-archive/
+archive/backend/chat_bak*.py
+app_next.baseline.*.py
+app_next_backup.py
+chip_probe.py
+data/offdomain_queries.csv
+docs/verify_index.py
+mock_ask_hybrid.py
+mock_ask_view.py
+mockui.py
+search_test.py
+validate_search.py
+app_next.baseline.*.py
+app_next_backup.py
+chip_probe.py
+data/offdomain_queries.csv
+docs/verify_index.py
+mock_ask_hybrid.py
+mock_ask_view.py
+mockui.py
+search_test.py
+validate_search.py
+backend/chat_bak*.py

@@ -14,7 +14,9 @@ with open(JSONL_FILE, "r", encoding="utf-8") as f:
     jsonl_data = [json.loads(line) for line in f]
 
 # Build a lookup from Title to public_tags
-tag_lookup = {entry["Title"].strip(): entry.get("public_tags", "") for entry in jsonl_data}
+tag_lookup = {
+    entry["Title"].strip(): entry.get("public_tags", "") for entry in jsonl_data
+}
 
 # Update the DataFrame with new tags
 df["Public Tags"] = df["Title"].apply(lambda t: tag_lookup.get(t.strip(), ""))

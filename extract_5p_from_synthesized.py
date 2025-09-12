@@ -16,8 +16,9 @@ patterns = {
     "Purpose": r"\*\*Purpose:\*\*\s*(.+)",
     "Performance": r"\*\*Performance:\*\*\s*((?:- .+\n?)*)",
     "Process": r"\*\*Process:\*\*\s*((?:- .+\n?)*)",
-    "5PSummary": r"\*\*5P Summary:\*\*\s*(.+)"
+    "5PSummary": r"\*\*5P Summary:\*\*\s*(.+)",
 }
+
 
 # === Extract and populate columns ===
 def extract_5p_components(summary):
@@ -26,6 +27,7 @@ def extract_5p_components(summary):
         match = re.search(pattern, summary, re.MULTILINE)
         extracted[key] = match.group(1).strip() if match else ""
     return extracted
+
 
 # Apply to rows with markdown summaries
 for idx, row in df.iterrows():

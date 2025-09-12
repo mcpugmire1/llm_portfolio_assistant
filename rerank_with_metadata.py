@@ -1,12 +1,13 @@
 from typing import List, Dict
 import numpy as np
 
+
 def rerank_results_by_metadata(
-    results: List[Dict], 
-    user_query: str, 
+    results: List[Dict],
+    user_query: str,
     expected_tags: List[str] = None,
     expected_subcategory: str = None,
-    top_k: int = 3
+    top_k: int = 3,
 ) -> List[Dict]:
     """
     Reranks Pinecone results by matching public_tags and sub-category
@@ -22,6 +23,7 @@ def rerank_results_by_metadata(
     Returns:
         List[Dict]: Reranked and filtered results.
     """
+
     def score(result):
         score = result.get("score", 0)
         metadata = result.get("metadata", {})
@@ -33,7 +35,10 @@ def rerank_results_by_metadata(
             score += overlap * 0.3  # weight tag match
 
         # Boost if sub-category matches
-        if expected_subcategory and metadata.get("sub-category") == expected_subcategory:
+        if (
+            expected_subcategory
+            and metadata.get("sub-category") == expected_subcategory
+        ):
             score += 0.5  # weight sub-category match
 
         return score

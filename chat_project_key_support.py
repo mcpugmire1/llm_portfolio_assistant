@@ -31,10 +31,9 @@ model = SentenceTransformer("all-MiniLM-L6-v2")
 
 # Set up OpenAI client with project scope
 client = OpenAI(
-    api_key=OPENAI_API_KEY,
-    organization=OPENAI_ORG_ID,
-    project=OPENAI_PROJECT_ID
+    api_key=OPENAI_API_KEY, organization=OPENAI_ORG_ID, project=OPENAI_PROJECT_ID
 )
+
 
 def format_stories_grouped(story_indices, max_per_client=1, max_stories=5):
     client_seen = defaultdict(int)
@@ -60,6 +59,7 @@ def format_stories_grouped(story_indices, max_per_client=1, max_stories=5):
 
     return "\n\n---\n\n".join(grouped)
 
+
 def generate_chat_response(query, k=12):
     print("🔍 Embedding query and retrieving top matches...")
     query_embedding = model.encode([query])[0]
@@ -76,18 +76,20 @@ def generate_chat_response(query, k=12):
 
     messages = [
         {"role": "system", "content": system_prompt},
-        {"role": "user", "content": f"{query}\n\nHere are some relevant STAR stories:\n\n{formatted_context}"}
+        {
+            "role": "user",
+            "content": f"{query}\n\nHere are some relevant STAR stories:\n\n{formatted_context}",
+        },
     ]
 
     print("📤 Sending query to OpenAI...")
     response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=messages,
-        temperature=0.3
+        model="gpt-3.5-turbo", messages=messages, temperature=0.3
     )
     print("✅ Received response from OpenAI.")
 
     return response.choices[0].message.content
+
 
 # CLI loop
 if __name__ == "__main__":

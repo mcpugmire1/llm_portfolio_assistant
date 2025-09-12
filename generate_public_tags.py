@@ -19,15 +19,12 @@ project_id = os.getenv("OPENAI_PROJECT_ID")
 org_id = os.getenv("OPENAI_ORG_ID")
 
 # Initialize OpenAI client
-client = OpenAI(
-    api_key=api_key,
-    project=project_id,
-    organization=org_id
-)
+client = OpenAI(api_key=api_key, project=project_id, organization=org_id)
 
 INPUT_FILE = "echo_star_stories.jsonl"
 OUTPUT_FILE = "echo_star_stories_nlp.jsonl"  # Overwrites original after backup
 MODEL = "gpt-4"  # Use GPT-4 for richer tags
+
 
 # ---------------------------
 # Helper: NLP-based tagger
@@ -52,14 +49,13 @@ def extract_semantic_tags(story):
 
     try:
         response = client.chat.completions.create(
-            model=MODEL,
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.3
+            model=MODEL, messages=[{"role": "user", "content": prompt}], temperature=0.3
         )
         return response.choices[0].message.content.strip()
     except Exception as e:
         print(f"❌ Error generating tags for story ID {story.get('id')}: {e}")
         return ""
+
 
 # ---------------------------
 # Main enrichment process
@@ -92,6 +88,7 @@ def enrich_stories_with_nlp_tags():
 
     print("\n🎉 Done! NLP-enhanced tags now stored in `public_tags`.")
     print(f"📄 Output file: {OUTPUT_FILE}")
+
 
 # ---------------------------
 # Run

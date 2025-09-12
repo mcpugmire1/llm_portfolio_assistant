@@ -15,7 +15,7 @@ load_dotenv()
 client = OpenAI(
     api_key=os.getenv("OPENAI_API_KEY"),
     project=os.getenv("OPENAI_PROJECT_ID"),
-    organization=os.getenv("OPENAI_ORG_ID")
+    organization=os.getenv("OPENAI_ORG_ID"),
 )
 
 # === Configuration ===
@@ -27,11 +27,12 @@ OPENAI_MODEL = "gpt-4"
 # === Load Excel ===
 df = pd.read_excel(INPUT_FILE, sheet_name=INPUT_SHEET)
 
+
 # === Helper ===
 def generate_5p_fields(row):
     """
     Generates 5P fields in markdown format using OpenAI GPT, preserving the existing 'Person' value.
-    
+
     Args:
         row (pd.Series): A single row from the STAR story DataFrame containing STAR fields.
 
@@ -69,15 +70,19 @@ Result: {result}
         response = client.chat.completions.create(
             model=OPENAI_MODEL,
             messages=[
-                {"role": "system", "content": "You are a helpful assistant that extracts structured 5P fields from STAR stories."},
-                {"role": "user", "content": prompt}
+                {
+                    "role": "system",
+                    "content": "You are a helpful assistant that extracts structured 5P fields from STAR stories.",
+                },
+                {"role": "user", "content": prompt},
             ],
-            temperature=0.3
+            temperature=0.3,
         )
         return response.choices[0].message.content.strip()
     except Exception as e:
         print("❌ Error generating 5P fields:", e)
         return ""
+
 
 # === Filter for rows to update ===
 target_rows = df[df["5P Retrofit Status"] == "Not Started"].copy()
