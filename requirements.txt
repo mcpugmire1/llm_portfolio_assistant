@@ -10,4 +10,5 @@ huggingface-hub==0.32.4
 tokenizers==0.21.1
 pinecone           # current package name
 watchdog
-keras==2.11.0streamlit-option-menu
+keras==2.11.0
+streamlit-option-menu
