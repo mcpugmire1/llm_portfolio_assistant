@@ -9,12 +9,7 @@ import os, re, time, textwrap, json
 from typing import List, Optional
 from urllib.parse import quote_plus
 
-from ui.components import (
-    css_once as _ui_css_once,
-    render_sources_chips as _ext_render_sources_chips,
-    render_sources_badges_static as _ext_render_sources_badges_static,
-)
-
+from ui.components import css_once, render_sources_chips, render_sources_badges_static
 
 # =========================
 # UI — Home / Stories / Ask / About
@@ -270,17 +265,8 @@ except Exception:
 st.set_page_config(page_title="MattGPT — Matt's Story", page_icon="🤖", layout="wide")
 
 # ensure external UI CSS is injected once (safe no-op if it’s empty)
-try:
-    _ui_css_once()
-except Exception:
-    pass
+css_once()
 
-
-# optional: Bootstrap mono icons (for option_menu)
-st.markdown(
-    "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css'>",
-    unsafe_allow_html=True,
-)
 # optional: ChatGPT-style sidebar menu
 try:
     from streamlit_option_menu import option_menu

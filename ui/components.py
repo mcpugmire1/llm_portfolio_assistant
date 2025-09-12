@@ -2,19 +2,25 @@
 from __future__ import annotations
 import streamlit as st
 
-# -------- one-time CSS injector (idempotent) --------
 def css_once():
     flag = "__ui_css_once__"
     if st.session_state.get(flag):
         return
     st.session_state[flag] = True
 
+    # 1) Load Bootstrap Icons once, globally
+    st.markdown(
+        "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css'>",
+        unsafe_allow_html=True,
+    )
+
+    # 2) Then inject your unified pill/chip CSS
     st.markdown("""
 <style>
 /* ====== Pills & Sources: single source of truth ====== */
 
 /* Define a single token and reuse it in **both** places */
-:root { --pill-font-size: 0.95rem; }  /* adjust this until it visually matches your pills exactly */
+:root { --pill-font-size: 0.95rem; }  /* tune until it visually matches your pills */
 
 /* Pills (reference) */
 .pill-container .stButton > button{
