@@ -52,9 +52,6 @@ app_dev_car.py
 # Ignore backup JSONL files
 echo_star_stories.jsonl.bak-*
 
-# Ignore alternate JSONL output
-echo_star_stories_nlp.jsonl
-
 # Ignore intermediate CSVs
 5P_Batching_Format_-_Agile_Planning.csv
 
@@ -63,7 +60,6 @@ archive/backend/chat_bak*.py
 app_next.baseline.*.py
 app_next_backup.py
 chip_probe.py
-data/offdomain_queries.csv
 docs/verify_index.py
 mock_ask_hybrid.py
 mock_ask_view.py
@@ -73,7 +69,6 @@ validate_search.py
 app_next.baseline.*.py
 app_next_backup.py
 chip_probe.py
-data/offdomain_queries.csv
 docs/verify_index.py
 mock_ask_hybrid.py
 mock_ask_view.py
@@ -82,3 +77,5 @@ search_test.py
 validate_search.py
 backend/chat_bak*.py
 archive/
+!echo_star_stories_nlp.jsonl
+!data/offdomain_queries.csv
