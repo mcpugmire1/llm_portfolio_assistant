@@ -92,6 +92,14 @@ def css_once():
   display:inline-block; margin:0 8px 8px 0;
   font-family:inherit!important;
 }
+/* Ensure Bootstrap Icons keep their font even if we reset others */
+.bi {
+  font-family: "bootstrap-icons" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  line-height: 1;
+  vertical-align: -0.125em; /* looks nicer next to text */
+}
 </style>
 """, unsafe_allow_html=True)
 
