@@ -12,3 +12,4 @@ pinecone           # current package name
 watchdog
 keras==2.11.0
 streamlit-option-menu
+streamlit-aggrid==0.3.4.post3
