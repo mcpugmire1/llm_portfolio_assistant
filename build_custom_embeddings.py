@@ -63,7 +63,7 @@ def _join(parts: List[str]) -> str:
     return " ".join(p for p in parts if p)
 
 
-def build_embedding_text(story: Dict[str, Any]) -> str:
+def build_embedding_text_bak(story: Dict[str, Any]) -> str:
     """Rich, semantic text for the vector (order is intentional)."""
     title = story.get("Title", "")
     client = story.get("Client", "")
@@ -104,6 +104,21 @@ def build_embedding_text(story: Dict[str, Any]) -> str:
         ]
     ).strip()
 
+def build_embedding_text(story: Dict[str, Any]) -> str:
+    """Just use the 5P summary if it exists - it's already natural language"""
+    
+    # Try the 5P summary first - it's usually the best text
+    summary = story.get("5PSummary", "").strip()
+    if summary and len(summary) > 50:
+        return summary
+    
+    # Fallback: create simple natural text
+    title = story.get("Title", "")
+    client = story.get("Client", "")
+    situation = story.get("Situation", [""])[0] if story.get("Situation") else ""
+    result = story.get("Result", [""])[0] if story.get("Result") else ""
+    
+    return f"Project: {title} at {client}. {situation} {result}".strip()
 
 def build_metadata(story: Dict[str, Any]) -> Dict[str, Any]:
     """Compact but rich metadata for UI/snippets + Pinecone filters."""

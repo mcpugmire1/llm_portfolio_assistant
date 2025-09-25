@@ -5,3 +5,5 @@
 {"category":"retail_price","pattern":"\\b(how much|price|cost|cheapest|deal|discount)\\b.*\\b(walmart|target|amazon|costco|best\\s?buy)\\b"}
 {"category":"shopping_merch","pattern":"\\b(baseball|cap|caps|hat|jersey|hoodie)\\b.*\\b(price|cost|buy|purchase)\\b"}
 {"category":"random_fun","pattern":"\\b(lottery|horoscope|zodiac|pick-up line)\\b"}
+{"category":"internal","pattern":"^DEBUG\\s*•"}
+{"category":"internal","pattern":"^🧪"}

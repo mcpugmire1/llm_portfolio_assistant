@@ -20,12 +20,62 @@ def css_once():
 /* ====== Pills & Sources: single source of truth ====== */
 
 /* Define a single token and reuse it in **both** places */
-:root { --pill-font-size: 0.95rem; }  /* tune until it visually matches your pills */
-
+:root { --pill-font-size: 0.90rem; --pill-pad-y: 4px; --pill-pad-x: 10px; }  /* shared tokens used by pills + source chips */
+/* Sidebar reset so sample buttons aren’t pill-sized */
+                
+[data-testid="stSidebar"] div.stButton > button{
+  width:100% !important;
+  justify-content:flex-start !important;
+  min-width:0 !important;
+  border-radius:8px !important;
+  padding:8px 12px !important;
+  font-weight:500 !important;
+  background:rgba(255,255,255,.06) !important;
+  border:1px solid rgba(255,255,255,.14) !important;
+}
+/* Fallback (MAIN AREA ONLY): give Streamlit buttons the pill look */
+[data-testid="stAppViewContainer"] div.stButton > button {
+  border-radius:999px!important;
+  padding:var(--pill-pad-y) var(--pill-pad-x)!important;
+  font-weight:600!important;
+  font-size:var(--pill-font-size)!important;  /* using the token */
+  line-height:1.2!important;
+  border:1px solid rgba(255,255,255,.22)!important;
+  background:rgba(255,255,255,.04)!important;
+  box-shadow:none!important;
+  width:auto!important;
+  min-width:140px!important;
+  height:auto!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  font-family:inherit!important;
+  cursor:pointer!important;
+}
+/* Fallback for newer baseButton path (MAIN AREA ONLY) */
+[data-testid="stAppViewContainer"] [data-testid="baseButton-secondary"] {
+  border-radius:999px!important;
+  padding:var(--pill-pad-y) var(--pill-pad-x)!important;
+  font-weight:600!important;
+  font-size:var(--pill-font-size)!important;
+  line-height:1.2!important;
+  border:1px solid rgba(255,255,255,.22)!important;
+  background:rgba(255,255,255,.04)!important;
+  box-shadow:none!important;
+  width:auto!important;
+  min-width:140px!important;
+  height:auto!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  font-family:inherit!important;
+  cursor:pointer!important;
+}
+                
 /* Pills (reference) */
 .pill-container .stButton > button{
   border-radius:999px!important;
-  padding:6px 12px!important;
+  padding:var(--pill-pad-y) var(--pill-pad-x)!important;
   font-weight:600!important;
   font-size:var(--pill-font-size)!important;
   line-height:1.2!important;
@@ -45,46 +95,234 @@ def css_once():
   outline-offset:1px!important;
 }
 
-/* Sources chips – EXACT same rules as pills */
-.sources-grid [data-testid="stButton"] > button,
-.pill-container.sources-tight :where(div.stButton) > button{
-  border-radius:999px!important;
-  padding:6px 12px!important;
-  font-weight:600!important;
-  font-size:var(--pill-font-size)!important;
-  line-height:1.2!important;
-  border:1px solid rgba(255,255,255,.22)!important;
-  background:rgba(255,255,255,.04)!important;
-  box-shadow:none!important;
-  min-width:140px!important;
-  height:auto!important;
-  width:auto!important;
-  white-space:nowrap!important;
-  overflow:hidden!important;
-  text-overflow:ellipsis!important;
-  font-family:inherit!important;
-}
-.sources-grid [data-testid="stButton"] > button:hover,
-.pill-container.sources-tight :where(div.stButton) > button:hover{
-  background:rgba(255,255,255,.08)!important;
-  border-color:rgba(255,255,255,.30)!important;
-}
-.sources-grid [data-testid="stButton"] > button:focus-visible,
-.pill-container.sources-tight :where(div.stButton) > button:focus-visible{
-  outline:2px solid rgba(255,255,255,.35)!important;
-  outline-offset:1px!important;
+/* Sources chips — EXACT same look as pills (covers both render paths and anchor fallback) */
+[data-mpg-srcchips] a,
+[data-mpg-srcchips] button,
+[data-mpg-srcchips] div.stButton > button,
+[data-mpg-srcchips] [data-testid="baseButton-secondary"] {
+  border-radius: 999px !important;
+  padding: var(--pill-pad-y) var(--pill-pad-x) !important;
+  font-weight: 600 !important;
+  font-size: var(--pill-font-size) !important;
+  line-height: 1.2 !important;
+  border: 1px solid rgba(255,255,255,.22) !important;
+  background: rgba(255,255,255,.04) !important;
+  box-shadow: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: auto !important;
+  min-width: 140px !important;
+  height: auto !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  font-family: inherit !important;
+  cursor: pointer !important;
 }
 
-/* Horizontal flow container used by your chips */
-.sources-grid{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:6px; }
+[data-mpg-srcchips] a:hover,
+[data-mpg-srcchips] button:hover,
+[data-mpg-srcchips] div.stButton > button:hover,
+[data-mpg-srcchips] [data-testid="baseButton-secondary"]:hover {
+  background: rgba(255,255,255,.08) !important;
+  border-color: rgba(255,255,255,.30) !important;
+}
 
+[data-mpg-srcchips] a:focus-visible,
+[data-mpg-srcchips] button:focus-visible,
+[data-mpg-srcchips] div.stButton > button:focus-visible,
+[data-mpg-srcchips] [data-testid="baseButton-secondary"]:focus-visible {
+  outline: 2px solid rgba(255,255,255,.35) !important;
+  outline-offset: 1px !important;
+}
+
+/* --- Fallback: style the Streamlit button that follows our marker span --- */
+/* Classic st.button path */
+.srcchip-flag ~ div.stButton > button {
+  border-radius: 999px !important;
+  padding: var(--pill-pad-y) var(--pill-pad-x) !important;
+  font-weight: 600 !important;
+  font-size: var(--pill-font-size) !important;
+  line-height: 1.2 !important;
+  border: 1px solid rgba(255,255,255,.22) !important;
+  background: rgba(255,255,255,.04) !important;
+  box-shadow: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: auto !important;
+  min-width: 140px !important;
+  height: auto !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  font-family: inherit !important;
+  cursor: pointer !important;
+}
+.srcchip-flag ~ div.stButton > button:hover {
+  background: rgba(255,255,255,.08) !important;
+  border-color: rgba(255,255,255,.30) !important;
+}
+.srcchip-flag ~ div.stButton > button:focus-visible {
+  outline: 2px solid rgba(255,255,255,.35) !important;
+  outline-offset: 1px !important;
+}
+
+/* Newer baseButton path Streamlit uses on Cloud */
+.srcchip-flag ~ [data-testid="baseButton-secondary"],
+.srcchip-flag ~ button[data-testid="baseButton-secondary"] {
+  border-radius: 999px !important;
+  padding: var(--pill-pad-y) var(--pill-pad-x) !important;
+  font-weight: 600 !important;
+  font-size: var(--pill-font-size) !important;
+  line-height: 1.2 !important;
+  border: 1px solid rgba(255,255,255,.22) !important;
+  background: rgba(255,255,255,.04) !important;
+  box-shadow: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: auto !important;
+  min-width: 140px !important;
+  height: auto !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  font-family: inherit !important;
+  cursor: pointer !important;
+}
+.srcchip-flag ~ [data-testid="baseButton-secondary"]:hover,
+.srcchip-flag ~ button[data-testid="baseButton-secondary"]:hover {
+  background: rgba(255,255,255,.08) !important;
+  border-color: rgba(255,255,255,.30) !important;
+}
+.srcchip-flag ~ [data-testid="baseButton-secondary"]:focus-visible,
+.srcchip-flag ~ button[data-testid="baseButton-secondary"]:focus-visible {
+  outline: 2px solid rgba(255,255,255,.35) !important;
+  outline-offset: 1px !important;
+}
+
+/* === Ultra‑robust fallback: main content buttons that are Source chips ===
+   Streamlit sometimes wraps st.button differently (classic vs. baseButton).
+   These selectors target any MAIN‑AREA button whose aria‑label contains
+   "Match", which we only use for Sources chips. (Sidebar is excluded by
+   scoping to stAppViewContainer.) */
+[data-testid="stAppViewContainer"] button[aria-label*="Match"],
+[data-testid="stAppViewContainer"] [data-testid="baseButton-secondary"][aria-label*="Match"] {
+  border-radius: 999px !important;
+  padding: var(--pill-pad-y) var(--pill-pad-x) !important;
+  font-weight: 600 !important;
+  font-size: var(--pill-font-size) !important;
+  line-height: 1.2 !important;
+  border: 1px solid rgba(255,255,255,.22) !important;
+  background: rgba(255,255,255,.04) !important;
+  box-shadow: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: auto !important;
+  min-width: 140px !important;
+  height: auto !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  font-family: inherit !important;
+  cursor: pointer !important;
+}
+[data-testid="stAppViewContainer"] button[aria-label*="Match"]:hover,
+[data-testid="stAppViewContainer"] [data-testid="baseButton-secondary"][aria-label*="Match"]:hover {
+  background: rgba(255,255,255,.08) !important;
+  border-color: rgba(255,255,255,.30) !important;
+}
+[data-testid="stAppViewContainer"] button[aria-label*="Match"]:focus-visible,
+[data-testid="stAppViewContainer"] [data-testid="baseButton-secondary"][aria-label*="Match"]:focus-visible {
+  outline: 2px solid rgba(255,255,255,.35) !important;
+  outline-offset: 1px !important;
+}
+
+/* FINAL SAFETY NET: force main-area buttons to the pill look.
+   Streamlit sometimes renders st.button as classic `div.stButton > button` or
+   as the newer `[data-testid="baseButton-secondary"]`. Limiting to
+   stAppViewContainer prevents sidebar buttons from being affected. */
+[data-testid="stAppViewContainer"] div.stButton > button,
+[data-testid="stAppViewContainer"] [data-testid="baseButton-secondary"] {
+  border-radius: 999px !important;
+  padding: var(--pill-pad-y) var(--pill-pad-x) !important;
+  font-weight: 600 !important;
+  font-size: var(--pill-font-size) !important;
+  line-height: 1.2 !important;
+  border: 1px solid rgba(255,255,255,.22) !important;
+  background: rgba(255,255,255,.04) !important;
+  box-shadow: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: auto !important;
+  min-width: 140px !important;
+  height: auto !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  font-family: inherit !important;
+  cursor: pointer !important;
+}
+
+[data-testid="stAppViewContainer"] div.stButton > button:hover,
+[data-testid="stAppViewContainer"] [data-testid="baseButton-secondary"]:hover {
+  background: rgba(255,255,255,.08) !important;
+  border-color: rgba(255,255,255,.30) !important;
+}
+
+[data-testid="stAppViewContainer"] div.stButton > button:focus-visible,
+[data-testid="stAppViewContainer"] [data-testid="baseButton-secondary"]:focus-visible {
+  outline: 2px solid rgba(255,255,255,.35) !important;
+  outline-offset: 1px !important;
+}
+
+/* Layout helper for chips container (safe no-op if unused) */
+.sources-grid { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:6px; }
+
+/* --- Sidebar sample buttons: force compact, left-aligned, full-width --- */
+/* Cover both Streamlit render paths: classic stButton and baseButton-secondary */
+[data-testid="stSidebar"] .stButton,
+[data-testid="stSidebar"] button,
+[data-testid="stSidebar"] [data-testid="baseButton-secondary"] {
+  width: 100% !important;
+}
+
+[data-testid="stSidebar"] .stButton > button,
+[data-testid="stSidebar"] [data-testid="baseButton-secondary"],
+[data-testid="stSidebar"] button {
+  display: flex !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+
+  /* shape + spacing (NOT pills) */
+  border-radius: 8px !important;
+  padding: 10px 12px !important;
+  min-width: 0 !important;
+  height: auto !important;
+
+  /* visual */
+  font-weight: 500 !important;
+  font-size: 0.95rem !important;
+  background: rgba(255,255,255,.06) !important;
+  border: 1px solid rgba(255,255,255,.14) !important;
+  box-shadow: none !important;
+  white-space: normal !important;   /* allow wrapping on narrow sidebars */
+  text-align: left !important;
+}
+
+/* tidy vertical rhythm */
+[data-testid="stSidebar"] .stButton { margin-bottom: 8px !important; }              
 /* Tight label above chips */
 .section-tight{ font-weight:700; margin:4px 0 2px!important; }
 
 /* Static badges reuse same “pill look” */
 .badge-row{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:6px; }
 .pill-look{
-  border-radius:999px!important; padding:6px 12px!important; font-weight:600!important;
+  border-radius:999px!important; padding:var(--pill-pad-y) var(--pill-pad-x)!important; font-weight:600!important;
   font-size:var(--pill-font-size)!important; line-height:1.2!important;
   border:1px solid rgba(255,255,255,.22)!important; background:rgba(255,255,255,.04)!important;
   box-shadow:none!important; min-width:140px!important; height:auto!important;
@@ -159,7 +397,9 @@ def render_sources_chips(
         return
 
     st.markdown(f"<div class='section-tight'>{title}</div>", unsafe_allow_html=True)
-    st.markdown("<div class='sources-grid'>", unsafe_allow_html=True)
+
+    # Open a scoped container so our CSS can target buttons reliably
+    st.markdown("<div data-mpg-srcchips class='pill-container sources-tight sources-grid'>", unsafe_allow_html=True)
 
     # Stable horizontal layout: render in rows of columns
     per_row = 3
@@ -168,15 +408,15 @@ def render_sources_chips(
     def _label_for(s: dict) -> str:
         base = f"{s['client']} — {s['title']}" if s["client"] else s["title"]
         short = _shorten_middle(base, 72)
-        score = pc_scores.get(str(s.get("id") or ""))
+        score = pc_scores.get(str(s.get('id') or ""))
         if isinstance(score, (int, float)):
             return f"{score*100:.0f}% Match • {short}"
         return short
 
-    # Batch into rows
     container = st.container()
     row: list[dict] = []
     for i, s in enumerate(items):
+        row.append(s)
         if len(row) == per_row:
             cols = container.columns(len(row))
             for col, item in zip(cols, row):
@@ -185,8 +425,9 @@ def render_sources_chips(
                         _label_for(item),
                         key=f"{key_prefix}srcchip_{item.get('id') or _label_for(item)}",
                         use_container_width=False,
-                        help="Semantic relevance to your question",
+                        help="Semantic relevance to your question (higher = stronger match)",
                     ):
+                        # Select story and switch context
                         st.session_state["active_story"] = item.get("id") or ""
                         st.session_state["active_story_title"] = item.get("title")
                         st.session_state["active_story_client"] = item.get("client")
@@ -194,11 +435,11 @@ def render_sources_chips(
                         if stay_here:
                             st.rerun()
                         else:
-                            st.session_state["active_tab"] = "Explore Stories"
+                            st.session_state["active_tab"] = "Ask MattGPT"
                             st.rerun()
             row = []
-        row.append(s)
 
+    # Flush any remainder in the last row
     if row:
         cols = container.columns(len(row))
         for col, item in zip(cols, row):
@@ -207,7 +448,7 @@ def render_sources_chips(
                     _label_for(item),
                     key=f"{key_prefix}srcchip_{item.get('id') or _label_for(item)}",
                     use_container_width=False,
-                    help="Semantic relevance to your question",
+                    help="Semantic relevance to your question (higher = stronger match)",
                 ):
                     st.session_state["active_story"] = item.get("id") or ""
                     st.session_state["active_story_title"] = item.get("title")
@@ -216,9 +457,10 @@ def render_sources_chips(
                     if stay_here:
                         st.rerun()
                     else:
-                        st.session_state["active_tab"] = "Explore Stories"
+                        st.session_state["active_tab"] = "Ask MattGPT"
                         st.rerun()
 
+    # Close the scoped container
     st.markdown("</div>", unsafe_allow_html=True)
 
 # -------- static badges (Explore/Details) --------

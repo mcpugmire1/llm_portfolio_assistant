@@ -9,10 +9,11 @@ import os, re, time, textwrap, json
 from typing import List, Optional
 from urllib.parse import quote_plus
 
-from ui.components import css_once, render_sources_chips, render_sources_badges_static
+from ui.components import css_once
 
 # =========================
 # UI — Home / Stories / Ask / About
+
 
 def render_sources_chips(
     sources: list[dict],
@@ -68,95 +69,136 @@ def render_sources_chips(
 
     # tighter, non-<p> header + zero top gap container
     st.markdown(f"<div class='section-tight'>{title}</div>", unsafe_allow_html=True)
-    st.markdown('<div class="pill-container sources-tight" no-gap>', unsafe_allow_html=True)
+    st.markdown(
+        "<div data-mpg-srcchips class='pill-container sources-tight sources-grid'>",
+        unsafe_allow_html=True,
+    )
 
-    # 3-up grid; wraps to next row on small widths automatically
-    #cols = st.columns(3)
+    # Lay out chips in rows using Streamlit columns (3-up per row)
+    per_row = 3
+    container = st.container()
+    batch: list[dict] = []
 
-    for i, s in enumerate(items):
-        # Build label
+    def _chip_label(item: dict, idx: int) -> tuple[str, str]:
         sep = " \u2009— "
-        base = f"{s['client']}{sep}{s['title']}" if s["client"] else s["title"]
+        base = (
+            f"{item['client']}{sep}{item['title']}" if item["client"] else item["title"]
+        )
         short = _shorten_middle(base, 72)
-
-        # Unique, stable key even when id is missing
-        safe_id = s.get('id') or _slug(base) or str(i)
-        btn_key = f"{key_prefix}srcchip_{i}_{safe_id}"
-
-        # Pull Pinecone score and format as a percent
+        safe_id = item.get("id") or _slug(base) or str(idx)
         _scores = st.session_state.get("__pc_last_ids__", {}) or {}
-        _score_key = safe_id or (s.get("id") or "")
-        sc = _scores.get(str(_score_key))
+        sc = _scores.get(str(safe_id) or str(item.get("id") or ""))
         pct = f"{float(sc)*100:.0f}%" if isinstance(sc, (int, float)) else None
         label = f"{pct} Match • {short}" if pct else short
+        return label, safe_id
 
-        # Marker span lets CSS target the next button reliably
-        st.markdown("<span class='srcchip-flag'></span>", unsafe_allow_html=True)
+    for i, s in enumerate(items, 1):
+        batch.append(s)
+        if len(batch) == per_row or i == len(items):
+            cols = container.columns(len(batch))
+            for col, item in zip(cols, batch):
+                with col:
+                    label, safe_id = _chip_label(item, i)
+                    btn_key = f"{key_prefix}srcchip_{safe_id}"
+                    if st.button(
+                        label,
+                        key=btn_key,
+                        use_container_width=False,
+                        help="Semantic relevance to your question (higher = stronger match)",
+                    ):
+                        st.session_state["active_story"] = item.get("id") or ""
+                        st.session_state["active_story_title"] = item.get("title")
+                        st.session_state["active_story_client"] = item.get("client")
+                        st.session_state["show_ask_panel"] = True
+                        
+                        # ➜ ADD THIS (one-shot lock)
+                        st.session_state["__ctx_locked__"] = True
 
-        # NOTE: use_container_width=False so CSS can size to content
-        if st.button(
-            label,
-            key=btn_key,
-            use_container_width=False,
-            help="Semantic relevance to your question (higher = stronger match)"):
-            st.session_state["active_story"] = s.get("id") or ""
-            st.session_state["active_story_title"] = s.get("title")
-            st.session_state["active_story_client"] = s.get("client")
-            st.session_state["show_ask_panel"] = True
-
-            if stay_here:
-                # Resolve target (id → title/client → last_results), then set modes
-                target = None
-                sid_norm = (s.get("id") or "").strip()
-                if sid_norm:
-                    target = next((x for x in STORIES if str(x.get("id")) == str(sid_norm)), None)
-                if not target:
-                    tgt_title = (s.get("title") or "").strip().lower()
-                    tgt_client = (s.get("client") or "").strip().lower()
-                    if tgt_title:
-                        for x in STORIES:
-                            xt = (x.get("title") or "").strip().lower()
-                            xc = (x.get("client") or "").strip().lower()
-                            if xt == tgt_title and (not tgt_client or xc == tgt_client):
-                                target = x
-                                break
-                if not target:
-                    lr = st.session_state.get("last_results") or []
-                    for x in lr:
-                        cand = x.get("story") if isinstance(x, dict) else None
-                        if not isinstance(cand, dict):
-                            cand = x if isinstance(x, dict) else None
-                        if not isinstance(cand, dict):
-                            continue
-                        xid = str(cand.get("id") or cand.get("story_id") or "").strip()
-                        xt = (cand.get("title") or "").strip().lower()
-                        xc = (cand.get("client") or "").strip().lower()
-                        if (sid_norm and xid and xid == sid_norm) or (
-                            (s.get("title") and xt == (s.get("title") or "").strip().lower())
-                            and (not s.get("client") or xc == (s.get("client") or "").strip().lower())
-                        ):
-                            target = cand
-                            break
-                if target:
-                    st.session_state["active_story_obj"] = target
-                    st.session_state["answer_modes"] = story_modes(target)
-                    cur = st.session_state.get("answer_mode", "narrative")
-                    st.session_state["answer_mode"] = cur if cur in ("narrative", "key_points", "deep_dive") else "narrative"
-                    st.session_state["last_sources"] = [{
-                        "id": target.get("id") or target.get("story_id"),
-                        "title": target.get("title"),
-                        "client": target.get("client"),
-                    }]
-                else:
-                    st.session_state["last_sources"] = [{
-                        "id": s.get("id") or s.get("story_id"),
-                        "title": s.get("title"),
-                        "client": s.get("client"),
-                    }]
-            else:
-                st.session_state["active_tab"] = "Explore Stories"
-
-            st.rerun()
+                        if stay_here:
+                            # resolve and pin the selected story context
+                            target = None
+                            sid_norm = (item.get("id") or "").strip()
+                            if sid_norm:
+                                target = next(
+                                    (
+                                        x
+                                        for x in STORIES
+                                        if str(x.get("id")) == str(sid_norm)
+                                    ),
+                                    None,
+                                )
+                            if not target:
+                                tgt_title = (item.get("title") or "").strip().lower()
+                                tgt_client = (item.get("client") or "").strip().lower()
+                                if tgt_title:
+                                    for x in STORIES:
+                                        xt = (x.get("title") or "").strip().lower()
+                                        xc = (x.get("client") or "").strip().lower()
+                                        if xt == tgt_title and (
+                                            not tgt_client or xc == tgt_client
+                                        ):
+                                            target = x
+                                            break
+                            if not target:
+                                lr = st.session_state.get("last_results") or []
+                                for x in lr:
+                                    cand = (
+                                        x.get("story") if isinstance(x, dict) else None
+                                    )
+                                    if not isinstance(cand, dict):
+                                        cand = x if isinstance(x, dict) else None
+                                    if not isinstance(cand, dict):
+                                        continue
+                                    xid = str(
+                                        cand.get("id") or cand.get("story_id") or ""
+                                    ).strip()
+                                    xt = (cand.get("title") or "").strip().lower()
+                                    xc = (cand.get("client") or "").strip().lower()
+                                    if (sid_norm and xid and xid == sid_norm) or (
+                                        (
+                                            item.get("title")
+                                            and xt
+                                            == (item.get("title") or "").strip().lower()
+                                        )
+                                        and (
+                                            not item.get("client")
+                                            or xc
+                                            == (item.get("client") or "")
+                                            .strip()
+                                            .lower()
+                                        )
+                                    ):
+                                        target = cand
+                                        break
+                            if target:
+                                st.session_state["active_story_obj"] = target
+                                st.session_state["answer_modes"] = story_modes(target)
+                                cur = st.session_state.get("answer_mode", "narrative")
+                                st.session_state["answer_mode"] = (
+                                    cur
+                                    if cur in ("narrative", "key_points", "deep_dive")
+                                    else "narrative"
+                                )
+                                st.session_state["last_sources"] = [
+                                    {
+                                        "id": target.get("id")
+                                        or target.get("story_id"),
+                                        "title": target.get("title"),
+                                        "client": target.get("client"),
+                                    }
+                                ]
+                            else:
+                                st.session_state["last_sources"] = [
+                                    {
+                                        "id": item.get("id") or item.get("story_id"),
+                                        "title": item.get("title"),
+                                        "client": item.get("client"),
+                                    }
+                                ]
+                        else:
+                            st.session_state["active_tab"] = "Explore Stories"
+                        st.rerun()
+            batch = []
 
     st.markdown("</div>", unsafe_allow_html=True)
 
@@ -267,6 +309,10 @@ st.set_page_config(page_title="MattGPT — Matt's Story", page_icon="🤖", layo
 # ensure external UI CSS is injected once (safe no-op if it’s empty)
 css_once()
 
+# ---- first-mount guard: let CSS finish applying, then paint once more ----
+if not st.session_state.get("__first_mount_rerun__", False):
+    st.session_state["__first_mount_rerun__"] = True
+    st.rerun()
 # optional: ChatGPT-style sidebar menu
 try:
     from streamlit_option_menu import option_menu
@@ -275,9 +321,24 @@ try:
 except Exception:
     _HAS_OPTION_MENU = False
 
+if DEBUG:
+    with st.sidebar.expander("📊 Pinecone debug (last query)", expanded=True):
+        dbg_state = st.session_state.get("__pc_debug__", {}) or {}
+        if not dbg_state:
+            st.caption("No query yet.")
+        else:
+            st.write({k: v for k, v in dbg_state.items() if k != "stats"})
+            st.write("Index stats:")
+            st.json(dbg_state.get("stats", {}))
+
 # --- Tab names and nav helpers (must be defined before any use of goto) ---
 TAB_NAMES = ["Home", "Explore Stories", "Ask MattGPT", "About Matt"]
 _ALIASES = {"Stories": "Explore Stories"}
+
+#
+# Optional external renderer hooks (may be injected by other modules)
+_ext_render_sources_chips = globals().get("_ext_render_sources_chips")
+_ext_render_sources_badges_static = globals().get("_ext_render_sources_badges_static")
 
 
 def normalize_tab(name: str) -> str:
@@ -365,6 +426,11 @@ def on_ask_this_story(s: dict):
     # Navigate to Ask tab
     st.session_state["active_tab"] = "Ask MattGPT"
     st.session_state["ask_input"] = st.session_state.get("seed_prompt", "")
+
+    # ➜ ADD THIS (one-shot lock)
+    st.session_state["__ctx_locked__"] = True
+    st.session_state["__ask_from_suggestion__"] = True
+
     st.stop()
 
 
@@ -572,6 +638,7 @@ def F(s: dict, key: str, default: str | list | None = None):
 
     return default
 
+
 # Safe alias that mirrors F() but is immune to shadowing elsewhere
 def field_value(s: dict, key: str, default: str | list | None = None):
     # Inline copy of F() to avoid name collisions
@@ -729,13 +796,57 @@ def _related_stories(s: dict, max_items: int = 3) -> list[dict]:
     return [t for _, t in scored[:max_items]]
 
 
+def _safe_json(obj):
+    try:
+        # pinecone client may expose one of these:
+        if hasattr(obj, "to_dict"):
+            return obj.to_dict()
+        if hasattr(obj, "model_dump"):
+            return obj.model_dump()
+        if hasattr(obj, "dict"):  # pydantic v1
+            return obj.dict()
+    except Exception:
+        pass
+    import json
+
+    try:
+        return json.loads(json.dumps(obj, default=str))
+    except Exception:
+        return {"_raw": str(obj)}
+
+
+def _summarize_index_stats(stats: dict) -> dict:
+    """Return a compact view of Pinecone index stats."""
+    if not isinstance(stats, dict):
+        return {}
+    namespaces = stats.get("namespaces") or {}
+    dims = stats.get("dimension")
+    total_vecs = 0
+    by_ns = {}
+    for ns, info in namespaces.items():
+        count = (info or {}).get("vector_count") or 0
+        by_ns[ns or ""] = int(count)
+        total_vecs += int(count)
+    return {
+        "dimension": int(dims) if dims else None,
+        "total_vectors": int(total_vecs),
+        "namespaces": by_ns,  # {"default": 115, "": 0, ...}
+    }
+
+
 # =========================
 # Config / constants
 # =========================
-PINECONE_MIN_SIM = 0.22  # suppress low-confidence semantic hits
+PINECONE_MIN_SIM = 0.15  # gentler gate: surface more semantically-close hits
 _DEF_DIM = 384  # stub embedding size to keep demo self-contained
 DATA_FILE = os.getenv("STORIES_JSONL", "echo_star_stories_nlp.jsonl")  # optional
 
+# 🔧 Hybrid score weights (tune these!)
+W_PC = 0.6  # semantic (Pinecone vector match)
+W_KW = 0.4  # keyword/token overlap
+
+# Centralized retrieval pool size for semantic search / Pinecone
+SEARCH_TOP_K = 30
 # =========================
 # Safe Pinecone wiring (optional)
 # =========================
@@ -1082,6 +1193,9 @@ st.session_state.setdefault("__pc_suppressed__", False)
 st.session_state.setdefault("page_size", 25)
 st.session_state.setdefault("page_offset", 0)
 
+# Ensure no stray chat_input outside Ask tab
+# (REMOVED global user_input_local = st.chat_input("Ask anything…", key="ask_chat_input1"))
+
 
 # =========================
 # Helpers
@@ -1089,12 +1203,19 @@ st.session_state.setdefault("page_offset", 0)
 
 # --- Unified tiny façade to simplify badge rendering (keep old fns working) ---
 
+
 def show_persona_tags(s: dict):
     """Simple alias for personas/tags badges for a single story (non-interactive)."""
     return render_badges_static(s)
 
 
-def show_sources(srcs: list[dict], *, interactive: bool = False, key_prefix: str = "src_", title: str = "Sources"):
+def show_sources(
+    srcs: list[dict],
+    *,
+    interactive: bool = False,
+    key_prefix: str = "src_",
+    title: str = "Sources",
+):
     """Render Sources row using a single call site.
     - interactive=True  -> clickable chips (Ask)
     - interactive=False -> static badges (Explore/Details)
@@ -1102,8 +1223,11 @@ def show_sources(srcs: list[dict], *, interactive: bool = False, key_prefix: str
     if not srcs:
         return
     if interactive:
-        return render_sources_chips(srcs, title=title, stay_here=True, key_prefix=key_prefix)
+        return render_sources_chips(
+            srcs, title=title, stay_here=True, key_prefix=key_prefix
+        )
     return render_sources_badges_static(srcs, title=title, key_prefix=key_prefix)
+
 
 METRIC_RX = re.compile(
     r"(\b\d{1,3}\s?%|\$\s?\d[\d,\.]*\b|\b\d+x\b|\b\d+(?:\.\d+)?\s?(pts|pp|bps)\b)", re.I
@@ -1144,6 +1268,15 @@ _DOT_EMOJI = [
     "🟦",
 ]  # stable palette-ish
 
+def _clear_ask_context():
+    """Remove any sticky context so the next ask is general-purpose."""
+    st.session_state.pop("active_story", None)
+    st.session_state.pop("__ctx_locked__", None)
+    # Optional: also clear any preloaded seed text
+    st.session_state.pop("seed_prompt", None)
+    # Do NOT clear last_sources; that belongs to the last answer
+    st.rerun()
+    
 # --- Clean Answer Card (mock_ask_hybrid style) -------------------------------
 
 
@@ -1154,22 +1287,25 @@ def render_answer_card_clean_pills(
     Render a single card with Title + (Narrative|Key Points|Deep Dive) pills + body + sources,
     visually consistent with mock_ask_hybrid.py. Uses existing modes dict from story_modes().
     """
-    # If the user clicked a Source chip elsewhere, prefer that context story
-    _ctx_story = get_context_story()
-    if _ctx_story and str(_ctx_story.get("id")) != str(primary_story.get("id")):
-        primary_story = _ctx_story
-        st.session_state["active_story_obj"] = _ctx_story
-        try:
-            modes = story_modes(primary_story)
-        except Exception:
-            pass
+    # # If the user clicked a Source chip or "Ask about this", we set __ctx_locked__.
+# Only override the primary story when that lock is present.
+    if st.session_state.get("__ctx_locked__"):
+        _ctx_story = get_context_story()
+        if _ctx_story and str(_ctx_story.get("id")) != str(primary_story.get("id")):
+            primary_story = _ctx_story
+            st.session_state["active_story_obj"] = _ctx_story
+            try:
+                modes = story_modes(primary_story)
+            except Exception:
+                pass
     title = field_value(primary_story, "title", "")
     one_liner_html = (
         f"<div class='fivep-quote fivep-unclamped'>{build_5p_summary(primary_story, 9999)}</div>"
-        if primary_story else ""
+        if primary_story
+        else ""
     )
     client = field_value(primary_story, "client", "")
-    role   = field_value(primary_story, "role", "")
+    role = field_value(primary_story, "role", "")
     domain = field_value(primary_story, "domain", "")
     bits = [b for b in [client, role, domain] if b]
     subtitle_html = f"<div class='meta-block'>{' • '.join(bits)}</div>" if bits else ""
@@ -1277,7 +1413,7 @@ def _shorten_middle(text: str, max_len: int = 64) -> str:
     return text[:left] + "… " + text[-right:]
 
 
-def render_sources_badges_static (
+def render_sources_badges_static(
     sources: list[dict], title: str = "Sources", key_prefix: str = "srcbad_"
 ):
     """Render non-interactive mock-style badges under a small 'Sources' header.
@@ -1330,25 +1466,29 @@ def render_sources_badges_static (
             f"<span class='badge' title='Semantic relevance'>{text}</span>"
         )
 
-    st.markdown(f"<div class='badge-row'>{''.join(chips_html)}</div>", unsafe_allow_html=True)
+    st.markdown(
+        f"<div class='badge-row'>{''.join(chips_html)}</div>", unsafe_allow_html=True
+    )
+
 
 # --- Prefer external UI renderers when available; fall back to locals ---
-try:
-    if callable(_ext_render_sources_chips):
-        render_sources_chips = _ext_render_sources_chips  # override safely
-except Exception:
-    pass
+# In DEBUG, always use the local renderers to make behavior deterministic.
+if not DEBUG:
+    _ext_chips = globals().get("_ext_render_sources_chips")
+    if callable(_ext_chips):
+        render_sources_chips = _ext_chips  # override safely
 
-try:
-    if callable(_ext_render_sources_badges_static):
-        render_sources_badges_static = _ext_render_sources_badges_static  # override safely
-except Exception:
-    pass
+    _ext_badges = globals().get("_ext_render_sources_badges_static")
+    if callable(_ext_badges):
+        render_sources_badges_static = _ext_badges  # override safely
 
 # Optional: tiny debug note to confirm which renderer is active
 try:
-    _which_src = "external" if 'ui.components' in (render_sources_chips.__module__) else "local"
-    # Comment out the next line if you don't want the caption
+    _which_src = (
+        "external"
+        if getattr(render_sources_chips, "__module__", "").startswith("ui.components")
+        else "local"
+    )
     # st.caption(f"DEBUG • Sources renderer: {_which_src}")
 except Exception:
     pass
@@ -1719,6 +1859,7 @@ def _matched_caption(story_id: str, fallback_builder=build_5p_summary) -> str:
 
 # --- Static badges (personas + tags) — mock-style row -----------------------
 
+
 def render_badges_static(s: dict):
     """Render a single flowing row of small badges for personas + tags.
     Matches the mock badge styling already defined in CSS (.badge-row, .badge).
@@ -1742,19 +1883,16 @@ def render_badges_static(s: dict):
     # Personas first
     for p in personas:
         dot = _dot_for(p)
-        chips.append(
-            f"<span class='badge' title='Persona'>{dot} {p}</span>"
-        )
+        chips.append(f"<span class='badge' title='Persona'>{dot} {p}</span>")
 
     # Then tags
     for t in tags:
         dot = _dot_for(t)
-        chips.append(
-            f"<span class='badge' title='Tag'>{dot} {t}</span>"
-        )
+        chips.append(f"<span class='badge' title='Tag'>{dot} {t}</span>")
 
     html = "".join(chips)
     st.markdown(f"<div class='badge-row'>{html}</div>", unsafe_allow_html=True)
+
 
 def story_card(s, idx=0, show_ask_cta=True):
     st.markdown('<div class="story-block">', unsafe_allow_html=True)
@@ -1844,7 +1982,9 @@ def story_card(s, idx=0, show_ask_cta=True):
                         )
                 except Exception:
                     pass
-                show_sources(srcs, interactive=False, key_prefix="detailsrc_", title="Sources")
+                show_sources(
+                    srcs, interactive=False, key_prefix="detailsrc_", title="Sources"
+                )
 
         with row_right:
             if show_ask_cta:
@@ -1867,7 +2007,8 @@ def compact_row(s, idx=0, show_ask_cta=True):
         st.markdown('<div class="compact-left">', unsafe_allow_html=True)
         # Title prominent (unified style)
         st.markdown(
-            f"<div class='story-title'>{field_value(s,'title','')}</div>", unsafe_allow_html=True
+            f"<div class='story-title'>{field_value(s,'title','')}</div>",
+            unsafe_allow_html=True,
         )
         st.markdown(
             f"<div class='fivep-quote fivep-compact'><span class='fivep-lines-3'>{build_5p_summary(s,9999)}</span></div>",
@@ -1967,12 +2108,11 @@ def get_context_story():
 
 
 def _choose_story_for_ask(top_story: dict | None) -> dict | None:
-    """
-    Pinecone-first chooser: return the Pinecone top story unless the user clicked
-    a Source chip; in that case, honor the clicked story.
-    """
-    ctx = get_context_story()
-    return ctx or top_story
+    """Prefer Pinecone (top_story) unless a one-shot context lock is set."""
+    if st.session_state.get("__ctx_locked__"):
+        ctx = get_context_story()
+        return ctx or top_story
+    return top_story
 
 
 def build_facets(stories):
@@ -2114,15 +2254,26 @@ def _keyword_score_for_story(s: dict, query: str) -> float:
 
 
 def _hybrid_score(
-    pc_score: float, kw_score: float, *, w_pc: float = 0.7, w_kw: float = 0.3
-) -> float:
-    """Blend vector similarity (0..1) with keyword overlap (0..1)."""
+    pc_score: float, kw_score: float, w_pc: float = W_PC, w_kw: float = W_KW
+):
+    """
+    Blend Pinecone similarity and keyword overlap into one score.
+    Args:
+        pc_score: float similarity from Pinecone (0..1+ depending on metric)
+        kw_score: float keyword/token overlap helper (0..1)
+    """
     try:
-        return float(w_pc) * float(pc_score or 0.0) + float(w_kw) * float(
-            kw_score or 0.0
-        )
+        pc = float(pc_score or 0.0)
     except Exception:
-        return pc_score or 0.0
+        pc = 0.0
+    try:
+        kw = float(kw_score or 0.0)
+    except Exception:
+        kw = 0.0
+
+    blended = (pc * float(w_pc)) + (kw * float(w_kw))
+
+    return blended
 
 
 def _embed(text: str) -> List[float]:
@@ -2153,8 +2304,27 @@ def _embed(text: str) -> List[float]:
     return [v / norm for v in vec]
 
 
+def _extract_match_fields(m) -> tuple[str, float, dict]:
+    """
+    Normalize a Pinecone match object or dict into (sid, score, metadata).
+    Returns (None, 0.0, {}) if fields are missing.
+    """
+    try:
+        if isinstance(m, dict):
+            meta = m.get("metadata") or {}
+            sid = meta.get("id") or m.get("id")
+            score = float(m.get("score") or 0.0)
+        else:
+            meta = getattr(m, "metadata", None) or {}
+            sid = meta.get("id") or getattr(m, "id", None)
+            score = float(getattr(m, "score", 0.0) or 0.0)
+    except Exception:
+        return None, 0.0, {}
+    return sid, score, meta
+
+
 def pinecone_semantic_search(
-    query: str, filters: dict, top_k: int = 5
+    query: str, filters: dict, top_k: int = SEARCH_TOP_K
 ) -> Optional[List[dict]]:
     idx = _init_pinecone()
     if not idx or not query:
@@ -2163,21 +2333,24 @@ def pinecone_semantic_search(
                 f"DEBUG Pinecone: skipped (idx={'present' if idx else 'none'}, query_len={len(query or '')})"
             )
         return None
+
+    # Build filter for Pinecone
     pc_filter = {}
     if filters.get("domains"):
         pc_filter["domain"] = {"$in": filters["domains"]}
     if filters.get("clients"):
         pc_filter["client"] = {"$in": filters["clients"]}
+
     try:
         qvec = _embed(query)
         if DEBUG:
             print(
                 f"DEBUG Embeddings: qvec_dim={len(qvec)}  model=MiniLM({'yes' if _get_embedder() else 'stub'})"
             )
-            # DEBUG: confirm index + namespace
             print(
                 f"DEBUG Pinecone query → index={_PINECONE_INDEX or PINECONE_INDEX_NAME}, namespace={PINECONE_NAMESPACE}"
             )
+
         res = idx.query(
             vector=qvec,
             top_k=top_k,
@@ -2185,75 +2358,112 @@ def pinecone_semantic_search(
             namespace=PINECONE_NAMESPACE,
             filter=pc_filter or None,
         )
-        # --- DEBUG logging block ---
+
+        matches = getattr(res, "matches", []) or []
+
+        # --- DEBUG: snapshot Pinecone info to session (compact) ---
         if DEBUG:
-            print("DEBUG Pinecone raw matches:", res.matches)
-            for m in res.matches:
-                try:
-                    meta = (m.metadata or {}) if hasattr(m, "metadata") else {}
-                    sid = meta.get("id")
-                    score = float(getattr(m, "score", 0.0) or 0.0)
-                    snippet = meta.get("summary")
-                    print(
-                        f"DEBUG Pinecone hit: id={sid}, score={score:.3f}, snippet={snippet}"
-                    )
-                except Exception as e:
-                    print("DEBUG Pinecone hit parse error:", e)
-        # --- end DEBUG logging block ---
-        # Optional second probe: if namespace may be wrong, try default namespace and warn
-        if (
-            DEBUG
-            and (not res.matches)
-            and (PINECONE_TRY_DEFAULT_NS or DEBUG)
-            and PINECONE_NAMESPACE
-        ):
             try:
-                probe = idx.query(
-                    vector=qvec,
-                    top_k=top_k,
-                    include_metadata=True,
-                    namespace="",
-                    filter=pc_filter or None,
-                )
-                if probe and probe.matches:
-                    print(
-                        "DEBUG Pinecone: Found matches in default namespace; check PINECONE_NAMESPACE — your vectors may be in ''"
+                preview = []
+                for m in matches[:8]:
+                    sid, score, meta = _extract_match_fields(m)
+                    found = any(str(s.get("id")) == str(sid) for s in STORIES)
+                    title = (meta or {}).get("title") or ""
+                    client = (meta or {}).get("client") or ""
+                    if title and client:
+                        title = f"{client} — {title}"
+                    if len(title) > 72:
+                        title = title[:69] + "…"
+                    preview.append(
+                        {
+                            "id": str(sid or ""),
+                            "score": float(score or 0.0),
+                            "title": title,
+                            "in_STORIES": bool(found),
+                        }
                     )
-                    res = probe
+
+                try:
+                    raw_stats = idx.describe_index_stats()
+                except Exception:
+                    raw_stats = {}
+                stats_compact = _summarize_index_stats(_safe_json(raw_stats))
+
+                st.session_state["__pc_debug__"] = {
+                    "index": _PINECONE_INDEX or PINECONE_INDEX_NAME,
+                    "namespace": PINECONE_NAMESPACE or "",
+                    "match_count": len(matches),
+                    "preview": preview,
+                    "weights": {"W_PC": W_PC, "W_KW": W_KW},
+                    "min_sim": PINECONE_MIN_SIM,
+                    "stats": stats_compact,
+                }
             except Exception as e:
-                print(f"DEBUG Pinecone default-namespace probe failed: {e}")
+                print("DEBUG: Pinecone snapshot error:", e)
+        # --- end DEBUG snapshot ---
 
         hits = []
         st.session_state["__pc_last_ids__"].clear()
         st.session_state["__pc_snippets__"].clear()
 
-        for m in res.matches:
-            meta = (m.metadata or {}) if hasattr(m, "metadata") else {}
-            sid = meta.get("id")
-            score = float(getattr(m, "score", 0.0) or 0.0)
-            if not sid:
-                # attempt fallback: some indexes store id only in m.id
-                sid = getattr(m, "id", None)
+        for m in matches:
+            sid, score, meta = _extract_match_fields(m)
             if not sid:
                 continue
+
             story = next((s for s in STORIES if str(s.get("id")) == str(sid)), None)
             if not story:
                 continue
+
+            snip = meta.get("summary") or meta.get("snippet") or ""
+            if snip:
+                st.session_state["__pc_snippets__"][str(sid)] = snip
+            st.session_state["__pc_last_ids__"][str(sid)] = score
+
             kw = _keyword_score_for_story(story, query)
             blended = _hybrid_score(score, kw)
+
+            if DEBUG:
+                try:
+                    title_dbg = (story.get("title") or "")[:60]
+                    client_dbg = story.get("client") or ""
+                    print(
+                        f"DEBUG Hit: id={sid} pc={score:.3f} kw={kw:.3f} blend={blended:.3f}  [{client_dbg}] {title_dbg}"
+                    )
+                except Exception:
+                    pass
+
             hits.append(
                 {
                     "story": story,
                     "pc_score": score,
                     "kw_score": kw,
                     "score": blended,
-                    "snippet": meta.get("summary"),
+                    "snippet": snip,
                 }
             )
 
-        # sort by blended score desc for stability
+        st.session_state["last_results"] = hits
+        st.session_state["last_sources"] = [
+            {
+                "id": h["story"].get("id"),
+                "title": h["story"].get("title"),
+                "client": h["story"].get("client"),
+            }
+            for h in hits[:5]
+        ]
+
         hits.sort(key=lambda h: h.get("score", 0.0), reverse=True)
-        return hits
+
+        strong = [
+            h for h in hits if (h.get("pc_score", 0.0) or 0.0) >= PINECONE_MIN_SIM
+        ]
+        if strong:
+            st.session_state["__pc_suppressed__"] = False
+            return strong
+        st.session_state["__pc_suppressed__"] = True
+        return hits[:3]
+
     except Exception as e:
         if DEBUG:
             print(f"DEBUG Pinecone query error: {e}")
@@ -2266,63 +2476,94 @@ def semantic_search(
     *,
     enforce_overlap: bool = False,
     min_overlap: float = 0.0,
-    top_k: int = 5,
+    top_k: int = SEARCH_TOP_K,
 ):
-    """Pinecone-first with confidence threshold; fallback to local filters; persists snippet/score for UI.
-    For dev mode, disables strict overlap gating and score thresholds so queries always return something.
+    """
+    Pinecone-first semantic retrieval with gentle gating; strict UI filters applied after.
+    Falls back to local keyword filtering if Pinecone returns nothing.
+    Persists session state needed for chips/badges and transparency UI.
     """
     q = (query or "").strip()
-    hits = pinecone_semantic_search(q, filters, top_k=top_k)
+
+    # 1) Always try Pinecone first
+    hits = pinecone_semantic_search(q, filters, top_k=top_k) or []
     st.session_state["__pc_suppressed__"] = False
 
-    if hits is not None and hits:
-        threshold = 0.25  # lower to avoid over-suppressing legitimate matches
-        confident = [h for h in hits if h.get("score", 0.0) >= threshold]
+    # 2) If Pinecone gave us candidates, keep those crossing the raw PC gate
+    if hits:
+        # Raw Pinecone gate; 'score' is blended, 'pc_score' is raw vector sim
+        raw_gate = float(globals().get("PINECONE_MIN_SIM", 0.15))
+        confident = [h for h in hits if (h.get("pc_score", 0.0) or 0.0) >= raw_gate]
+
+        # If nothing crossed, mark suppressed but still carry a small set forward
         if not confident:
-            # Soft failover: mark suppressed but continue with local keyword fallback
             st.session_state["__pc_suppressed__"] = True
-            if DEBUG:
-                print(
-                    f"DEBUG Pinecone: all {len(hits)} hits below threshold {threshold}; falling back to local keyword results"
-                )
-            local_fallback = [s for s in STORIES if matches_filters(s, filters)]
-            # Persist ranked source ids for mode switching even on fallback
+            confident = hits[:3]  # gentle fallback already handled inside pinecone fn
+
+        # Persist per-story Pinecone info for chips/captions (use raw PC % in chips)
+        try:
+            st.session_state["__pc_last_ids__"] = {
+                h["story"]["id"]: float(h.get("pc_score", h.get("score", 0.0)) or 0.0)
+                for h in confident
+            }
+            st.session_state["__pc_snippets__"] = {
+                h["story"]["id"]: (h.get("snippet") or build_5p_summary(h["story"]))
+                for h in confident
+            }
             st.session_state["__last_ranked_sources__"] = [
-                s["id"] for s in local_fallback
-            ][:10]
-            # Clear snippet/score caches since we don't trust Pinecone in this branch
+                h["story"]["id"] for h in confident
+            ]
+            st.session_state["__dbg_pc_hits"] = len(hits)
+            # Also keep a compact top-5 for the Sources row if caller hasn’t set it
+            st.session_state.setdefault(
+                "last_sources",
+                [
+                    {
+                        "id": h["story"]["id"],
+                        "title": h["story"]["title"],
+                        "client": h["story"].get("client", ""),
+                    }
+                    for h in confident[:5]
+                ],
+            )
+        except Exception:
+            pass
+
+        # 3) Apply strict UI filters after retrieval
+        filtered = [
+            h["story"] for h in confident if matches_filters(h["story"], filters)
+        ]
+        if filtered:
+            return filtered
+
+        # If UI filters eliminate everything, return the confident set’s stories
+        return [h["story"] for h in confident]
+
+    # 4) If Pinecone returned nothing, optionally enforce overlap, else local fallback
+    if enforce_overlap:
+        ov = token_overlap_ratio(q, _KNOWN_VOCAB)
+        if ov < float(min_overlap or 0.0) and not st.session_state.get(
+            "__ask_from_suggestion__"
+        ):
+            # No semantic hits and below overlap bar → empty (caller may show banner)
+            st.session_state["__dbg_pc_hits"] = 0
             st.session_state["__pc_last_ids__"].clear()
             st.session_state["__pc_snippets__"].clear()
-            return local_fallback
+            return []
 
-        # persist per‑story display info using Pinecone score (for caption) but rank by blended
-        st.session_state["__pc_suppressed__"] = False
-        st.session_state["__pc_last_ids__"] = {
-            h["story"]["id"]: h.get("pc_score", h.get("score", 0.0)) for h in confident
-        }
-        st.session_state["__pc_snippets__"] = {
-            h["story"]["id"]: (h.get("snippet") or build_5p_summary(h["story"]))
-            for h in confident
-        }
-        # also persist the ranked list for Ask mode switching
-        st.session_state["__last_ranked_sources__"] = [
-            h["story"]["id"] for h in confident
-        ]
-        if DEBUG:
-            print(
-                f"DEBUG Pinecone: returning {len(confident)} confident hits above {threshold}"
-            )
-        st.session_state["__dbg_pc_hits"] = len(confident)
-        # Default: enforce user-selected filters strictly; chips no longer set one-shot filters
-        return [h["story"] for h in confident if matches_filters(h["story"], filters)]
-
-    # Always return local keyword fallback
+    # Local keyword fallback (keeps app responsive during indexing issues)
+    local = [s for s in STORIES if matches_filters(s, filters)]
     st.session_state["__dbg_pc_hits"] = 0
-    return [s for s in STORIES if matches_filters(s, filters)]
+    st.session_state["__pc_last_ids__"].clear()
+    st.session_state["__pc_snippets__"].clear()
+    st.session_state["__last_ranked_sources__"] = [s["id"] for s in local[:10]]
+    return local
 
 
 # --- Compatibility shim: legacy callers expect `retrieve_stories(query, top_k)` ---
-def retrieve_stories(query: str, top_k: int = 6, *, filters: dict | None = None):
+def retrieve_stories(
+    query: str, top_k: int = SEARCH_TOP_K, *, filters: dict | None = None
+):
     """
     Thin wrapper around semantic_search to maintain backwards compatibility with older code.
     - Uses current sidebar filters from session_state unless an explicit `filters` dict is passed.
@@ -2374,10 +2615,19 @@ def _ensure_ask_bootstrap():
 
 def _push_user_turn(text: str):
     st.session_state["ask_transcript"].append({"role": "user", "text": text})
+    st.session_state["__asked_once__"] = True
 
 
 def _push_assistant_turn(text: str):
     st.session_state["ask_transcript"].append({"role": "assistant", "text": text})
+
+
+def _clear_ask_context():
+    """Remove any sticky story context so the next Ask is general-purpose."""
+    st.session_state.pop("active_story", None)
+    st.session_state.pop("__ctx_locked__", None)
+    st.session_state.pop("seed_prompt", None)
+    st.rerun()
 
 
 def _render_ask_transcript():
@@ -2396,10 +2646,10 @@ def _render_ask_transcript():
                         (s for s in STORIES if str(s.get("id")) == str(sid)), None
                     )
                     # If the user clicked a Source after this snapshot was created,
-                    # honor that context by overriding the story used for the pills/body.
-                    _ctx = get_context_story()
+                    use_ctx = bool(st.session_state.get("__ctx_locked__"))
+                    _ctx = get_context_story() if use_ctx else None
                     if isinstance(_ctx, dict) and (_ctx.get("id") or _ctx.get("title")):
-                        story = _ctx
+                        story = _ctx or story
                     # If we resolved to a different story via Source click, update the header text, too
                     if isinstance(story, dict):
                         title = story.get("title", title)
@@ -2810,7 +3060,7 @@ def rag_answer(question: str, filters: dict):
             next((s for s in STORIES if str(s.get("id")) == str(i)), None) for i in ids
         ]
         ranked = [s for s in ranked if s][:3] or (
-            semantic_search(question or "", filters, top_k=20) or STORIES[:3]
+            semantic_search(question or "", filters, top_k=SEARCH_TOP_K) or STORIES[:3]
         )
         primary = ranked[0]
         modes = {
@@ -2863,15 +3113,21 @@ def rag_answer(question: str, filters: dict):
                 "default_mode": "narrative",
             }
 
-        # 0.5) Off-domain heuristic via known vocab overlap (fast, language-agnostic)
+        # 0.5) Compute overlap for telemetry only (do not gate yet)
         overlap = token_overlap_ratio(question or "", _KNOWN_VOCAB)
         if DEBUG:
             dbg(
                 f"ask: overlap={overlap:.2f} __pc_suppressed__={st.session_state.get('__pc_suppressed__')}"
             )
-        if overlap < 0.15 and not from_suggestion:
+
+        # 1) Pinecone-first retrieval
+        pool = semantic_search(
+            question or filters.get("q", ""), filters, top_k=SEARCH_TOP_K
+        )
+
+        # If Pinecone returned nothing, *then* decide if we want to show a low-overlap banner
+        if not pool and (overlap < 0.15) and not from_suggestion:
             log_offdomain(question or "", f"overlap:{overlap:.2f}")
-            # One‑shot banner stamp for Ask view (rendered in Ask section, not here)
             st.session_state["ask_last_reason"] = "low_overlap"
             st.session_state["ask_last_query"] = question or ""
             st.session_state["ask_last_overlap"] = overlap
@@ -2882,8 +3138,6 @@ def rag_answer(question: str, filters: dict):
                 "modes": {},
                 "default_mode": "narrative",
             }
-        # 1) Pinecone-first retrieval (existing)
-        pool = semantic_search(question or filters.get("q", ""), filters, top_k=20)
         # If this was triggered by a suggestion, widen the candidate pool by
         # blending in top local keyword matches so the reranker can surface
         # off-namespace or semantically-adjacent stories (e.g., cloud-native).
@@ -3011,14 +3265,13 @@ def rag_answer(question: str, filters: dict):
                     "default_mode": "narrative",
                 }
 
-        # 3) Vocab overlap safety: if overlap is ~zero AND Pinecone had suppressed matches earlier, abstain
+        # 3) Vocab overlap safety: only after Pinecone path ran
         if (
-            token_overlap_ratio(question or "", _KNOWN_VOCAB) < 0.05
+            (overlap < 0.05)
             and st.session_state.get("__pc_suppressed__")
             and not from_suggestion
         ):
             log_offdomain(question or "", "no_overlap+low_conf")
-            # One‑shot banner stamp for Ask view (rendered later in Ask section)
             st.session_state["ask_last_reason"] = "no_overlap+low_conf"
             st.session_state["ask_last_query"] = question or ""
             st.session_state["ask_last_overlap"] = overlap
@@ -3299,9 +3552,53 @@ def render_ask_panel(ctx: Optional[dict]):
     """Inline Ask MattGPT panel rendered inside the Stories detail column."""
     st.markdown("---")
     st.markdown("#### Ask MattGPT")
+    # Compact context breadcrumb (minimal) + hover/click details
     if ctx:
-        st.caption(
-            f"Context: {ctx.get('title','')} — {ctx.get('client','')} • {ctx.get('role','')} • {ctx.get('domain','')}"
+        client = (ctx.get("client") or "").strip()
+        # Prefer the sub-domain after " / " so the crumb stays short
+        domain_full = (ctx.get("domain") or "").strip()
+        domain_short = domain_full.split(" / ")[-1] if " / " in domain_full else domain_full
+        title = (ctx.get("title") or "").strip()
+        role = (ctx.get("role") or "").strip()
+        # One-time CSS for breadcrumb + details
+        if not st.session_state.get("_ctx_css_done"):
+            st.markdown(
+                """
+                <style>
+                .ctx-crumb{font-size:.9rem;opacity:.85;margin:.25rem 0 .5rem 0}
+                .ctx-crumb small{opacity:.85}
+                details.ctx-details summary{cursor:pointer; list-style:none; margin:.25rem 0}
+                details.ctx-details summary::-webkit-details-marker{display:none}
+                details.ctx-details summary::after{content:"▸"; margin-left:.35rem; opacity:.6}
+                details.ctx-details[open] summary::after{content:"▾"}
+                details.ctx-details .ctx-body{font-size:.9rem; opacity:.9; padding:.25rem 0 0 0}
+                </style>
+                """,
+                unsafe_allow_html=True,
+            )
+            st.session_state["_ctx_css_done"] = True
+
+        # Hover tooltip carries the long form; crumb is short
+        long_txt = f"{title} — {client} • {role} • {domain_full}".strip(" •-")
+        short_txt = f"💼 {client} | {domain_short}".strip(" |")
+        st.markdown(
+            f"<div class='ctx-crumb' title='{long_txt}'><small>{short_txt}</small></div>",
+            unsafe_allow_html=True,
+        )
+        # Click-to-expand full details (optional)
+        st.markdown(
+            f"""
+            <details class="ctx-details">
+              <summary><small>Show details</small></summary>
+              <div class="ctx-body">
+                <strong>Title:</strong> {title or "—"}<br/>
+                <strong>Client:</strong> {client or "—"}<br/>
+                <strong>Role:</strong> {role or "—"}<br/>
+                <strong>Domain:</strong> {domain_full or "—"}
+              </div>
+            </details>
+            """,
+            unsafe_allow_html=True,
         )
     with st.expander("What is Ask MattGPT?", expanded=False):
         st.markdown(
@@ -3339,7 +3636,7 @@ def render_ask_panel(ctx: Optional[dict]):
         st.markdown("#### Answer")
         with safe_container(border=True):
             # Prefer a user-selected story from Sources; otherwise fall back to the first source
-            chosen_story = get_context_story()
+            chosen_story = get_context_story() if st.session_state.get("__ctx_locked__") else None
             if not chosen_story:
                 _srcs = st.session_state.get("last_sources") or []
                 if _srcs:
@@ -3813,7 +4110,9 @@ elif st.session_state["active_tab"] == "Explore Stories":
 
         with right:
             with safe_container(border=True):
-                st.markdown('<div class="sticky-detail detail-pane">', unsafe_allow_html=True)
+                st.markdown(
+                    '<div class="sticky-detail detail-pane">', unsafe_allow_html=True
+                )
                 detail = get_context_story()
                 if detail:
                     # Keep the details and the CTA inside the same container so it doesn't float
@@ -3892,10 +4191,59 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
 
     # Context banner if Ask was launched from a Story
     ctx = get_context_story()
-    if ctx:
-        st.caption(
-            f"Context: {ctx.get('title','')} — {ctx.get('client','')} • {ctx.get('role','')} • {ctx.get('domain','')}"
-        )
+    _show_ctx = bool(ctx) and (
+        st.session_state.get("__ctx_locked__") or st.session_state.get("__asked_once__")
+    )
+
+    if _show_ctx:
+        client = (ctx.get("client") or "").strip()
+        domain_full = (ctx.get("domain") or "").strip()
+        domain_short = domain_full.split(" / ")[-1] if " / " in domain_full else domain_full
+        title = (ctx.get("title") or "").strip()
+        role = (ctx.get("role") or "").strip()
+        if not st.session_state.get("_ctx_css_done"):
+            st.markdown(
+                """
+                <style>
+                .ctx-crumb{font-size:.9rem;opacity:.85;margin:.25rem 0 .5rem 0}
+                .ctx-crumb small{opacity:.85}
+                details.ctx-details summary{cursor:pointer; list-style:none; margin:.25rem 0}
+                details.ctx-details summary::-webkit-details-marker{display:none}
+                details.ctx-details summary::after{content:"▸"; margin-left:.35rem; opacity:.6}
+                details.ctx-details[open] summary::after{content:"▾"}
+                details.ctx-details .ctx-body{font-size:.9rem; opacity:.9; padding:.25rem 0 0 0}
+                </style>
+                """,
+                unsafe_allow_html=True,
+            )
+            st.session_state["_ctx_css_done"] = True
+
+        long_txt = f"{title} — {client} • {role} • {domain_full}".strip(" •-")
+        short_txt = f"💼 {client} | {domain_short}".strip(" |")
+
+        left, right = st.columns([1, 0.12], gap="small")
+        with left:
+            st.markdown(
+                f"<div class='ctx-crumb' title='{long_txt}'><small>{short_txt}</small></div>",
+                unsafe_allow_html=True,
+            )
+            st.markdown(
+                f"""
+                <details class="ctx-details">
+                  <summary><small>Show details</small></summary>
+                  <div class="ctx-body">
+                    <strong>Title:</strong> {title or "—"}<br/>
+                    <strong>Client:</strong> {client or "—"}<br/>
+                    <strong>Role:</strong> {role or "—"}<br/>
+                    <strong>Domain:</strong> {domain_full or "—"}
+                  </div>
+                </details>
+                """,
+                unsafe_allow_html=True,
+            )
+       # with right:
+        #    if st.button("×", key="btn_clear_ctx", help="Clear context"):
+         #       _clear_ask_context()
 
     # Lightweight DEBUG status for Ask (visible only when DEBUG=True)
     if DEBUG:
@@ -3907,6 +4255,17 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
                 "pc_suppressed": bool(st.session_state.get("__pc_suppressed__")),
                 "has_last": bool(st.session_state.get("last_sources")),
                 "pending_snap": bool(st.session_state.get("__pending_card_snapshot__")),
+                # NEW: report external renderer overrides
+                "ext_chips": (
+                    "yes"
+                    if callable(globals().get("_ext_render_sources_chips"))
+                    else "no"
+                ),
+                "ext_badges": (
+                    "yes"
+                    if callable(globals().get("_ext_render_sources_badges_static"))
+                    else "no"
+                ),
             }
             st.caption("🧪 " + ", ".join(f"{k}={v}" for k, v in _dbg_flags.items()))
             # Second line: last prompt + ask decision
@@ -4048,7 +4407,11 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
         st.session_state["__suppress_live_card_once__"] = False
 
     # 6) Handle a new chat input (command aliases or normal question)
-    user_input_local = st.chat_input("Ask anything…", key="ask_chat_input1")
+    # Render the chat input only on the Ask MattGPT tab
+    if st.session_state.get("active_tab") == "Ask MattGPT":
+        user_input_local = st.chat_input("Ask anything…", key="ask_chat_input1")
+    else:
+        user_input_local = None
     if user_input_local:
         # If a live card is pending snapshot from the previous answer, snapshot it now
         if st.session_state.get("__pending_card_snapshot__"):
@@ -4127,24 +4490,41 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
                 st.rerun()
 
         # Normal question → ask backend, persist state, append assistant turn
+        # One-shot context lock: if a story was explicitly selected (chip/CTA),
+        # use that story as context for THIS turn only, then clear the lock.
+        # --- Determine context for THIS turn (one-shot lock) ---
+        ctx_for_this_turn = ctx
+        if st.session_state.pop("__ctx_locked__", False):  # consume the lock
+            try:
+                locked_ctx = get_context_story()
+            except Exception:
+                locked_ctx = None
+            if locked_ctx:
+                ctx_for_this_turn = locked_ctx
+
+        # --- Ask backend + render result ---
         with st.spinner("Thinking…"):
             try:
+                # Consume the suggestion flag (one-shot); we don't need its value here
+                st.session_state.pop("__ask_from_suggestion__", None)
+
                 # Ask is pure semantic; ignore Explore filters here
-                resp = send_to_backend(user_input_local, {}, ctx)
+                resp = send_to_backend(user_input_local, {}, ctx_for_this_turn)
+
             except Exception as e:
                 _push_assistant_turn("Sorry, I couldn't generate an answer right now.")
                 st.error(f"Backend error: {e}")
                 st.rerun()
+
             else:
                 set_answer(resp)
-                # For normal chat follow-ups, add a static card snapshot into the
-                # transcript so the answer appears in-order as a bubble, and
-                # suppress the bottom live card once to avoid duplication.
-                if not st.session_state.get(
-                    "ask_last_reason"
-                ) and not st.session_state.get("__sticky_banner__"):
+
+                # Add a static snapshot so the answer appears in-order as a bubble,
+                # and suppress the bottom live card once to avoid duplication.
+                if not st.session_state.get("ask_last_reason") and not st.session_state.get("__sticky_banner__"):
                     _push_card_snapshot_from_state()
                     st.session_state["__suppress_live_card_once__"] = True
+
                 st.rerun()
 
 # --- ABOUT ---
