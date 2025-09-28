@@ -9,7 +9,7 @@ import os, re, time, textwrap, json
 from typing import List, Optional
 from urllib.parse import quote_plus
 
-from ui.components import css_once
+from ui.components import css_once, render_home_hero_and_stats, render_home_starters
 
 # =========================
 # UI — Home / Stories / Ask / About
@@ -3709,86 +3709,16 @@ clients, domains, roles, tags, personas_all = build_facets(STORIES)
 
 # --- HOME ---
 if st.session_state["active_tab"] == "Home":
-    st.subheader("Welcome")
-    st.caption("Pick a path to get started.")
-
-    # Centered action buttons (option_menu pills with mono icons)
-    from streamlit_option_menu import option_menu as _home_option_menu
-
-    # Remember the last explicit choice the user made on the Home pills
-    st.session_state.setdefault("__home_sel__", "Explore Stories")
-    # Guard so the pills don't auto-navigate on the very first render
-    st.session_state.setdefault("__home_first_mount__", True)
-    _home_options = ["Explore Stories", "Ask MattGPT", "About Matt"]
-    try:
-        def_idx = _home_options.index(st.session_state["__home_sel__"])
-    except ValueError:
-        def_idx = 0
-
-    sel = _home_option_menu(
-        menu_title=None,
-        options=_home_options,
-        icons=["book", "chat-dots", "person"],
-        default_index=def_idx,
-        orientation="horizontal",
-        styles={
-            "container": {"padding": "0", "background": "transparent"},
-            "icon": {"color": "inherit", "font-size": "1.1rem"},
-            "nav-link": {
-                "font-size": "1rem",
-                "padding": "10px 14px",
-                "border-radius": "8px",
-                "color": "inherit",
-                "white-space": "nowrap",
-                "background-color": "transparent",
-                "font-weight": "600",
-                "border": "none",
-                "box-shadow": "1px",
-                "margin-right": "12px",
-            },
-            "nav-link-selected": {
-                "font-size": "1rem",
-                "padding": "10px 14px",
-                "border-radius": "8px",
-                "color": "inherit",
-                "white-space": "nowrap",
-                "background-color": "transparent",
-                "font-weight": "600",
-                "border": "none",
-                "box-shadow": "1px",
-            },
-        },
-    )
-
-    # Always navigate on selection (even if the same pill is clicked),
-    # but skip on the very first render so the page doesn't auto-jump.
-    if st.session_state.get("__home_first_mount__", True):
-        # Record the selection and allow the user to click one of the pills
-        st.session_state["__home_sel__"] = sel
-        st.session_state["__home_first_mount__"] = False
-    else:
-        st.session_state["__home_sel__"] = sel
-        st.session_state["active_tab"] = sel
-        st.rerun()
-
-    st.markdown(
-        """
-    ## About this app
-    This is my interactive portfolio assistant — blending storytelling, strategy, and AI.  
-    It showcases my career journey, career stories, and impact highlights.
-
-    ### What you can do
-    - **Explore Stories**: Browse curated projects with filters and details.  
-    - **Ask MattGPT**: Get AI-powered answers about my work, challenges, and outcomes.  
-    - **About Matt**: Learn about my background, leadership style, and values.  
-
-    ### Why I built this
-    1. To demonstrate hands-on GenAI/LLM engineering skills.  
-    2. To showcase practical expertise in building portfolio assistants.  
-    3. To highlight how I bridge **strategy, engineering, and storytelling**.
-    """
-    )
-
+    
+    # Check if a button just changed the tab by looking for the flag
+    # that components.py sets when a starter card is clicked
+    #Check if we should skip the option_menu (because a button was just clicked)
+    
+        # Just render the home content without the option_menu
+        css_once()
+        render_home_hero_and_stats()
+        render_home_starters()
+   
 
 # --- STORIES ---
 elif st.session_state["active_tab"] == "Explore Stories":
@@ -4187,8 +4117,108 @@ elif st.session_state["active_tab"] == "Explore Stories":
 
 # --- ASK MATTGPT ---
 elif st.session_state["active_tab"] == "Ask MattGPT":
-    st.subheader("Ask MattGPT")
-
+    # Add a header row with the title and the How it Works link
+    col1, col2 = st.columns([5, 1])
+    with col1:
+        st.subheader("Ask MattGPT")
+    with col2:
+        if st.button("🔧 How it works", key="how_works_top"):
+             # Add a subtle overlay effect
+            st.markdown("""
+            <style>
+            /* Subtle background dim effect */
+            .stApp > div:first-child {
+                background-color: rgba(0, 0, 0, 0.1);
+            }
+            </style>
+            """, unsafe_allow_html=True)
+            st.session_state["show_how_modal"] = not st.session_state.get("show_how_modal", False)
+            st.rerun()
+    
+    # Show the modal if toggled
+    if st.session_state.get("show_how_modal", False):
+        # Create a proper modal container without using expander
+        st.markdown("---")
+        
+        # Header with close button
+        col1, col2 = st.columns([10, 1])
+        with col1:
+            st.markdown("## 🔧 How MattGPT Works")
+        with col2:
+            if st.button("✕", key="close_how"):
+                st.session_state["show_how_modal"] = False
+                st.rerun()
+        
+        # Content in a bordered container
+        with st.container():
+            # Quick stats bar
+            col1, col2, col3, col4 = st.columns(4)
+            with col1:
+                st.metric("Stories Indexed", "115")
+            with col2:
+                st.metric("Avg Response Time", "1.2s")
+            with col3:
+                st.metric("Retrieval Accuracy", "87%")
+            with col4:
+                st.metric("Vector Dimensions", "384")
+            
+            st.markdown("---")
+            
+            # Architecture overview
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                st.markdown("""
+                ### Architecture Overview
+                
+                **🎯 Semantic Search Pipeline**
+                - Sentence-BERT embeddings (all-MiniLM-L6-v2)
+                - 384-dimensional vector space
+                - Pinecone vector database with metadata filtering
+                
+                **🔄 Hybrid Retrieval**
+                - 60% semantic similarity weight
+                - 40% keyword matching weight
+                - Intent recognition for query understanding
+                """)
+            
+            with col2:
+                st.markdown("""
+                ### Data & Processing
+                
+                **📊 Story Corpus**
+                - 115+ structured narratives from Fortune 500 projects
+                - STAR/5P framework encoding
+                - Rich metadata: client, domain, outcomes, metrics
+                
+                **💬 Response Generation**
+                - Context-aware retrieval (top-k=30)
+                - Multi-mode synthesis (Narrative/Key Points/Deep Dive)
+                - Source attribution with confidence scoring
+                """)
+            
+            # Query Flow
+            st.markdown("### Query Flow")
+            st.code("""
+                Your Question 
+                    ↓
+                [Embedding + Intent Analysis]
+                    ↓
+                [Pinecone Vector Search + Keyword Matching]
+                    ↓
+                [Hybrid Scoring & Ranking]
+                    ↓
+                [Top 3 Stories Retrieved]
+                    ↓
+                [Response Synthesis with Sources]
+                            """, language="text")
+                        
+            st.markdown("---")
+    
+    # Rest of your Ask MattGPT content continues...
+    # Rest of your Ask MattGPT content continues as normal
+    # Context banner, transcript, etc...
+                
     # Context banner if Ask was launched from a Story
     ctx = get_context_story()
     _show_ctx = bool(ctx) and (
@@ -4406,6 +4436,7 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
     if st.session_state.get("__suppress_live_card_once__"):
         st.session_state["__suppress_live_card_once__"] = False
 
+
     # 6) Handle a new chat input (command aliases or normal question)
     # Render the chat input only on the Ask MattGPT tab
     if st.session_state.get("active_tab") == "Ask MattGPT":
@@ -4526,23 +4557,356 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
                     st.session_state["__suppress_live_card_once__"] = True
 
                 st.rerun()
-
+ 
 # --- ABOUT ---
 elif st.session_state["active_tab"] == "About Matt":
-    st.subheader("About Matt")
-    st.caption("A human-centered portfolio + AI assistant.")
+   # First, ensure CSS is loaded
+    css_once()  # This should load your existing styles
+    
+    # If that doesn't work, inject the specific styles needed
+    st.markdown("""
+    <style>
+    .hero-section {
+        text-align: center;
+            padding: 60px 30px;
+            background: var(--background-color);  
+            color: var(--text-color);  /* Instead of white */
+            border-radius: 16px;
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+    }
+    
+    .stat-card {
+        background: #2d2d2d;
+        padding: 32px 24px;
+        border-radius: 12px;
+        text-align: center;
+        border: 1px solid #3a3a3a;
+        transition: transform 0.3s ease;
+        margin-bottom: 24px;
+        box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);  /* Always visible shadow */
+    }
+    
+    .stat-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(74, 144, 226, 0.2);
+    }
+    
+    .stat-number {
+        font-size: 36px;
+        font-weight: 700;
+        color: #4a90e2;
+        display: block;
+        margin-bottom: 8px;
+    }
+    
+    .stat-label {
+        color: #b0b0b0;
+        font-size: 16px;
+    }
+    
+    .section-title {
+        font-size: 32px;
+        font-weight: 600;
+        text-align: center;
+        margin: 60px 0 40px 0;
+        color: #ffffff;
+    }
+    
+    .fixed-height-card {
+        background: var(--secondary-background-color);
+        padding: 28px;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        transition: all 0.3s ease;
+        min-height: 250px;
+        box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);  /* Always visible shadow */
+    }
+
+    .fixed-height-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--border-color);
+        box-shadow: 0 12px 35px rgba(128, 128, 128, 0.35);  /* Brighter shadow on hover */
+    }
+    .card-desc {
+        color: #b0b0b0;
+        margin-bottom: 8px;
+        line-height: 1.5;
+        font-size: 14px;
+    }
+    .skill-bar {
+        height: 6px;
+        background: var(--border-color);
+        border-radius: 3px;
+        margin-bottom: 16px;
+        position: relative;
+    }
+
+    .skill-fill {
+        height: 100%;
+        background: #4a90e2;
+        border-radius: 3px;
+        transition: width 0.3s ease;
+    }
+
+    .philosophy-card {
+        background: var(--secondary-background-color);
+        padding: 32px;
+        border-radius: 16px;
+        text-align: center;
+        border: 1px solid var(--border-color);
+        min-height: 180px;
+    }
+
+    .philosophy-icon {
+        font-size: 48px;
+        margin-bottom: 16px;
+        box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);  /* Always visible shadow */
+        }
+
+    .timeline-marker {
+        width: 64px;
+        height: 64px;
+        background: #4a90e2;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        flex-shrink: 0;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div class='hero-section'>
+        <h1 style='font-size: 48px; font-weight: 700; margin-bottom: 24px;'>Matt's Journey</h1>
+        <p style='font-size: 20px; color: #b0b0b0; max-width: 800px; margin: 0 auto;'>
+            Helping Fortune 500 companies both modernize legacy systems and launch net new cloud-native products — blending modern architecture, 
+            product mindset, and innovative engineering practices to deliver scalable digital platforms and experiences.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+
+    #Pure HTML stats that bypass Streamlit's CSS
     st.markdown(
         """
-**What this is** — A simple place to browse outcomes (Stories) and ask follow‑ups (Ask MattGPT).
-
-**How to use it**
-- **Stories:** Filter by audience, client, domain, role, tags, or search keywords.
-- **Ask MattGPT:** Click **Ask MattGPT about this** on any story to preload context, then type a question.
-  Debounce will auto-run when you pause typing; you can also press **Send**.
-
-**What’s next**
-- Real embeddings + Pinecone metadata snippets
-- Cleaner card/list theming
-- Optional keep‑alive
-"""
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin: 50px 0;">
+            <div style="background: var(--secondary-background-color); padding: 32px 24px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
+                <span style="font-size: 36px; font-weight: 700; color: #4a90e2; display: block; margin-bottom: 8px;">20+</span>
+                <span style="color: #999999; font-size: 16px;">Years Experience</span>
+            </div>
+            <div style="background: var(--secondary-background-color); padding: 32px 24px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
+                <span style="font-size: 36px; font-weight: 700; color: #4a90e2; display: block; margin-bottom: 8px;">300+</span>
+                <span style="color: #999999; font-size: 16px;">Professionals Upskilled</span>
+            </div>
+            <div style="background: var(--secondary-background-color); padding: 32px 24px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
+                <span style="font-size: 36px; font-weight: 700; color: #4a90e2; display: block; margin-bottom: 8px;">200+</span>
+                <span style="color: #999999; font-size: 16px;">Engineers Certified</span>
+            </div>
+            <div style="background: var(--secondary-background-color); padding: 32px 24px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
+                <span style="font-size: 36px; font-weight: 700; color: #4a90e2; display: block; margin-bottom: 8px;">2</span>
+                <span style="color: #999999; font-size: 16px;">Innovation Centers Built & Scaled to 150+</span>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
     )
+
+    st.markdown("<h2 class='section-title'>Career Evolution</h2>", unsafe_allow_html=True)
+    
+    # Timeline using fixed-height-card styling
+    timeline_data = [
+        ("🚀", "2019-2023", "Director, Cloud Innovation @ Accenture", 
+         "Led 150+ professionals • Generated $300M+ revenue • 4x faster delivery • 25% retention improvement"),
+        ("☁️", "2016-2019", "Cloud Architecture Lead @ Liquid Studio",
+         "AWS enablement • 200+ certifications • Rapid prototyping • 30% faster time-to-market"),
+        ("💳", "2009-2016", "Sr Technology Manager @ Accenture",
+         "$500M+ transformation • 12 countries • Payment platforms • 3x sales increase"),
+        ("⚡", "2005-2009", "Startups & Consulting",
+         "Built products 0→1 • Team building • Product-market fit • Successful exits")
+    ]
+    
+    for icon, period, role, desc in timeline_data:
+        col1, col2 = st.columns([1, 11])
+        with col1:
+            #class="timeline-marker
+            st.markdown(f"<div class='timeline-marker'>{icon}</div>", unsafe_allow_html=True)
+
+            #st.markdown(f"<div style='font-size: 40px; text-align: center; margin-top: 20px;'>{icon}</div>", 
+                      # unsafe_allow_html=True)
+        with col2:
+            st.markdown(f"""
+            <div class='fixed-height-card' style='margin-bottom: 16px; min-height: auto;'>
+                <div style='color: #4a90e2; font-size: 14px; margin-bottom: 8px;'>{period}</div>
+                <h3 style='font-size: 20px; font-weight: 600; margin-bottom: 8px;'>{role}</h3>
+                <p style='color: #b0b0b0; font-size: 14px;'>{desc}</p>
+            </div>
+            """, unsafe_allow_html=True)
+    
+    # Core Competencies with skill bars
+    st.markdown("<h2 class='section-title'>Core Competencies</h2>", unsafe_allow_html=True)
+    
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        st.markdown("""
+        <div class='fixed-height-card'>
+            <h3 style='color: var(--text-color); font-size: 20px; margin-bottom: 24px;'>Digital Product & Innovation</h3>
+            <div style='margin-bottom: 20px;'>
+                <p style='color: var(--text-color); margin-bottom: 8px;'>Product Mindset</p>
+                <div class='skill-bar'><div class='skill-fill' style='width: 95%;'></div></div>
+            </div>
+            <div style='margin-bottom: 20px;'>
+                <p style='color: var(--text-color); margin-bottom: 8px;'>Modern Engineering</p>
+                <div class='skill-bar'><div class='skill-fill' style='width: 90%;'></div></div>
+            </div>
+            <div style='margin-bottom: 20px;'>
+                <p style='color: var(--text-color); margin-bottom: 8px;'>Innovation Strategy</p>
+                <div class='skill-bar'><div class='skill-fill' style='width: 85%;'></div></div>
+            </div>
+            <div>
+                <p style='color: var(--text-color); margin-bottom: 8px;'>Digital Transformation</p>
+                <div class='skill-bar'><div class='skill-fill' style='width: 95%;'></div></div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown("""
+        <div class='fixed-height-card'>
+            <h3 style='color: var(--text-color); font-size: 20px; margin-bottom: 24px;'>Technical Architecture</h3>
+            <div style='margin-bottom: 20px;'>
+                <p style='color: var(--text-color); margin-bottom: 8px;'>Cloud Modernization</p>
+                <div class='skill-bar'><div class='skill-fill' style='width: 95%;'></div></div>
+            </div>
+            <div style='margin-bottom: 20px;'>
+                <p style='color: var(--text-color); margin-bottom: 8px;'>Microservices</p>
+                <div class='skill-bar'><div class='skill-fill' style='width: 85%;'></div></div>
+            </div>
+            <div style='margin-bottom: 20px;'>
+                <p style='color: var(--text-color); margin-bottom: 8px;'>DevOps & CI/CD</p>
+                <div class='skill-bar'><div class='skill-fill' style='width: 85%;'></div></div>
+            </div>
+            <div>
+                <p style='color: var(--text-color); margin-bottom: 8px;'>API Strategy</p>
+                <div class='skill-bar'><div class='skill-fill' style='width: 90%;'></div></div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col3:
+        st.markdown("""
+        <div class='fixed-height-card'>
+            <h3 style='color: var(--text-color); font-size: 20px; margin-bottom: 24px;'>Industry Expertise</h3>
+            <div style='margin-bottom: 20px;'>
+                <p style='color: var(--text-color); margin-bottom: 8px;'>Financial Services</p>
+                <div class='skill-bar'><div class='skill-fill' style='width: 95%;'></div></div>
+            </div>
+            <div style='margin-bottom: 20px;'>
+                <p style='color: var(--text-color); margin-bottom: 8px;'>Healthcare & Life Sciences</p>
+                <div class='skill-bar'><div class='skill-fill' style='width: 80%;'></div></div>
+            </div>
+            <div style='margin-bottom: 20px;'>
+                <p style='color: var(--text-color); margin-bottom: 8px;'>Enterprise Technology</p>
+                <div class='skill-bar'><div class='skill-fill' style='width: 90%;'></div></div>
+            </div>
+            <div>
+                <p style='color: var(--text-color); margin-bottom: 8px;'>Startup Operations</p>
+                <div class='skill-bar'><div class='skill-fill' style='width: 75%;'></div></div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    # Leadership Philosophy
+    st.markdown("""
+    <div class='philosophy-card' style='margin: 60px 0;'>
+        <h2 style='font-size: 28px; margin-bottom: 16px;'>Leadership Philosophy</h2>
+        <p style='color: #b0b0b0; margin-bottom: 40px;'>Principles that guide how I approach transformation, team building, and complex challenges</p>
+    </div>
+    """, unsafe_allow_html=True)
+    cols = st.columns(4)
+    philosophy_items = [
+        ("🎯", "Outcome-Driven", "Measure success by business impact, not activity"),
+        ("🚀", "Iterate Fast", "Small experiments beat big plans"),
+        ("👥", "People First", "Technology serves humans, not the other way around"),
+        ("🔄", "Learn Continuously", "Every failure is data for the next attempt")
+    ]
+    
+    for col, (icon, title, desc) in zip(cols, philosophy_items):
+        with col:
+            st.markdown(f"""
+            <div style='text-align: center;'>
+                <div class='philosophy-icon'>{icon}</div>
+                <h4 style='font-size: 18px; margin-bottom: 8px;'>{title}</h4>
+                <p style='font-size: 14px; color: #b0b0b0;'>{desc}</p>
+            </div>
+            """, unsafe_allow_html=True)
+    
+   
+    # Let's Connect section with better UI/UX
+    st.markdown("<h2 class='section-title'>Let's Connect</h2>", unsafe_allow_html=True)
+
+    # Professional summary with visual appeal
+    st.markdown("""
+    <div style='text-align: center; max-width: 800px; margin: 0 auto 40px auto;'>
+        <p style='font-size: 18px; color: var(--text-color); margin-bottom: 24px;'>
+            Open to Director/VP roles in platform modernization and innovation strategy
+        </p>
+        <div style='display: flex; justify-content: center; gap: 40px; margin-bottom: 32px;box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);'>
+            <div style='text-align: center;'>
+                <span style='font-size: 24px;'>🏢</span>
+                <p style='font-size: 14px; color: #999; margin-top: 8px;'>Office Preferred</p>
+            </div>
+            <div style='text-align: center;'>
+                <span style='font-size: 24px;'>🤝</span>
+                <p style='font-size: 14px; color: #999; margin-top: 8px;'>Team Collaboration</p>
+            </div>
+            <div style='text-align: center;'>
+                <span style='font-size: 24px;'>📍</span>
+                <p style='font-size: 14px; color: #999; margin-top: 8px;'>Open to Relocation</p>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Contact cards in a grid
+    col1, col2, col3 = st.columns([1, 1, 1])
+
+    with col1:
+        st.markdown("""
+        <div class='fixed-height-card' style='text-align: center; min-height: 180px; cursor: pointer; transition: all 0.3s;'>
+            <span style='font-size: 32px;'>📧</span>
+            <h4 style='margin: 16px 0 8px 0; color: var(--text-color);'>Email</h4>
+            <p style='color: #4a90e2; font-size: 14px;'>mcpugmire@gmail.com</p>
+            <p style='color: #999; font-size: 12px; margin-top: 8px;'>Direct inquiries</p>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button("Copy Email", key="copy_email", use_container_width=True):
+            st.code("mcpugmire@gmail.com")
+
+    with col2:
+        st.markdown("""
+        <div class='fixed-height-card' style='text-align: center; min-height: 180px; cursor: pointer; transition: all 0.3s;'>
+            <span style='font-size: 32px;'>💼</span>
+            <h4 style='margin: 16px 0 8px 0; color: var(--text-color);'>LinkedIn</h4>
+            <p style='color: #4a90e2; font-size: 14px;'>matt-pugmire</p>
+            <p style='color: #999; font-size: 12px; margin-top: 8px;'>Professional network</p>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button("Open LinkedIn", key="open_linkedin", use_container_width=True):
+            st.markdown("[→ linkedin.com/in/matt-pugmire](https://linkedin.com/in/matt-pugmire/)")
+
+    with col3:
+        st.markdown("""
+        <div class='fixed-height-card' style='text-align: center; min-height: 180px; cursor: pointer; transition: all 0.3s;'>
+            <span style='font-size: 32px;'>☕</span>
+            <h4 style='margin: 16px 0 8px 0; color: var(--text-color);'>Coffee Chat</h4>
+            <p style='color: #4a90e2; font-size: 14px;'>In-person meeting</p>
+            <p style='color: #999; font-size: 12px; margin-top: 8px;'>Let's meet face-to-face</p>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button("Schedule Coffee", key="coffee_chat", use_container_width=True):
+            st.info("Reach out via email or LinkedIn to schedule an in-person meeting")
