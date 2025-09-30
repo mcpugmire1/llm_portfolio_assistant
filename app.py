@@ -110,7 +110,7 @@ def render_sources_chips(
                         st.session_state["active_story_title"] = item.get("title")
                         st.session_state["active_story_client"] = item.get("client")
                         st.session_state["show_ask_panel"] = True
-                        
+
                         # ➜ ADD THIS (one-shot lock)
                         st.session_state["__ctx_locked__"] = True
 
@@ -1268,6 +1268,7 @@ _DOT_EMOJI = [
     "🟦",
 ]  # stable palette-ish
 
+
 def _clear_ask_context():
     """Remove any sticky context so the next ask is general-purpose."""
     st.session_state.pop("active_story", None)
@@ -1276,7 +1277,8 @@ def _clear_ask_context():
     st.session_state.pop("seed_prompt", None)
     # Do NOT clear last_sources; that belongs to the last answer
     st.rerun()
-    
+
+
 # --- Clean Answer Card (mock_ask_hybrid style) -------------------------------
 
 
@@ -1288,7 +1290,7 @@ def render_answer_card_clean_pills(
     visually consistent with mock_ask_hybrid.py. Uses existing modes dict from story_modes().
     """
     # # If the user clicked a Source chip or "Ask about this", we set __ctx_locked__.
-# Only override the primary story when that lock is present.
+    # Only override the primary story when that lock is present.
     if st.session_state.get("__ctx_locked__"):
         _ctx_story = get_context_story()
         if _ctx_story and str(_ctx_story.get("id")) != str(primary_story.get("id")):
@@ -3557,7 +3559,9 @@ def render_ask_panel(ctx: Optional[dict]):
         client = (ctx.get("client") or "").strip()
         # Prefer the sub-domain after " / " so the crumb stays short
         domain_full = (ctx.get("domain") or "").strip()
-        domain_short = domain_full.split(" / ")[-1] if " / " in domain_full else domain_full
+        domain_short = (
+            domain_full.split(" / ")[-1] if " / " in domain_full else domain_full
+        )
         title = (ctx.get("title") or "").strip()
         role = (ctx.get("role") or "").strip()
         # One-time CSS for breadcrumb + details
@@ -3636,7 +3640,9 @@ def render_ask_panel(ctx: Optional[dict]):
         st.markdown("#### Answer")
         with safe_container(border=True):
             # Prefer a user-selected story from Sources; otherwise fall back to the first source
-            chosen_story = get_context_story() if st.session_state.get("__ctx_locked__") else None
+            chosen_story = (
+                get_context_story() if st.session_state.get("__ctx_locked__") else None
+            )
             if not chosen_story:
                 _srcs = st.session_state.get("last_sources") or []
                 if _srcs:
@@ -3709,16 +3715,16 @@ clients, domains, roles, tags, personas_all = build_facets(STORIES)
 
 # --- HOME ---
 if st.session_state["active_tab"] == "Home":
-    
+
     # Check if a button just changed the tab by looking for the flag
     # that components.py sets when a starter card is clicked
-    #Check if we should skip the option_menu (because a button was just clicked)
-    
-        # Just render the home content without the option_menu
-        css_once()
-        render_home_hero_and_stats()
-        render_home_starters()
-   
+    # Check if we should skip the option_menu (because a button was just clicked)
+
+    # Just render the home content without the option_menu
+    css_once()
+    render_home_hero_and_stats()
+    render_home_starters()
+
 
 # --- STORIES ---
 elif st.session_state["active_tab"] == "Explore Stories":
@@ -4123,23 +4129,28 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
         st.subheader("Ask MattGPT")
     with col2:
         if st.button("🔧 How it works", key="how_works_top"):
-             # Add a subtle overlay effect
-            st.markdown("""
+            # Add a subtle overlay effect
+            st.markdown(
+                """
             <style>
             /* Subtle background dim effect */
             .stApp > div:first-child {
                 background-color: rgba(0, 0, 0, 0.1);
             }
             </style>
-            """, unsafe_allow_html=True)
-            st.session_state["show_how_modal"] = not st.session_state.get("show_how_modal", False)
+            """,
+                unsafe_allow_html=True,
+            )
+            st.session_state["show_how_modal"] = not st.session_state.get(
+                "show_how_modal", False
+            )
             st.rerun()
-    
+
     # Show the modal if toggled
     if st.session_state.get("show_how_modal", False):
         # Create a proper modal container without using expander
         st.markdown("---")
-        
+
         # Header with close button
         col1, col2 = st.columns([10, 1])
         with col1:
@@ -4148,7 +4159,7 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
             if st.button("✕", key="close_how"):
                 st.session_state["show_how_modal"] = False
                 st.rerun()
-        
+
         # Content in a bordered container
         with st.container():
             # Quick stats bar
@@ -4161,15 +4172,16 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
                 st.metric("Retrieval Accuracy", "87%")
             with col4:
                 st.metric("Vector Dimensions", "384")
-            
+
             st.markdown("---")
-            
+
             # Architecture overview
             col1, col2 = st.columns(2)
-            
+
             with col1:
-                st.markdown("""
-                ### Architecture Overview
+                st.markdown(
+                    """
+                ### Solution Architecture Overview
                 
                 **🎯 Semantic Search Pipeline**
                 - Sentence-BERT embeddings (all-MiniLM-L6-v2)
@@ -4180,10 +4192,12 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
                 - 60% semantic similarity weight
                 - 40% keyword matching weight
                 - Intent recognition for query understanding
-                """)
-            
+                """
+                )
+
             with col2:
-                st.markdown("""
+                st.markdown(
+                    """
                 ### Data & Processing
                 
                 **📊 Story Corpus**
@@ -4195,11 +4209,13 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
                 - Context-aware retrieval (top-k=30)
                 - Multi-mode synthesis (Narrative/Key Points/Deep Dive)
                 - Source attribution with confidence scoring
-                """)
-            
+                """
+                )
+
             # Query Flow
             st.markdown("### Query Flow")
-            st.code("""
+            st.code(
+                """
                 Your Question 
                     ↓
                 [Embedding + Intent Analysis]
@@ -4211,14 +4227,85 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
                 [Top 3 Stories Retrieved]
                     ↓
                 [Response Synthesis with Sources]
-                            """, language="text")
-                        
+                            """,
+                language="text",
+            )
+
             st.markdown("---")
-    
+            st.markdown("### System Architecture")
+
+            # Read and display the SVG file
+            try:
+                with open("assets/rag_architecture_grid_svg.svg", "r") as f:
+                    svg_content = f.read()
+                
+                # Display SVG using Streamlit's native image function instead
+                st.image("assets/rag_architecture_grid_svg.svg", use_container_width=True)
+                
+            except FileNotFoundError:
+                st.error("Architecture diagram not found. Please ensure 'assets/rag_architecture_grid_svg.svg' exists.")
+            except Exception as e:
+                st.error(f"Error loading architecture diagram: {e}")
+
+            st.markdown("---")
+
+           
+            
+
+            # Detailed breakdown
+            st.markdown("### Architecture Details")
+
+            col1, col2 = st.columns(2)
+
+            with col1:
+                st.markdown("""
+                **Offline Pipeline (Indexing)**
+                - Stories JSONL → Embedding Model (all-MiniLM-L6-v2)
+                - 384-dimensional vectors → Pinecone (serverless)
+                - Local keyword index → In-memory tokenized store
+                - 115 stories with STAR/5P structure
+                """)
+                
+                st.markdown("""
+                **Dual Retrieval**
+                - **Semantic**: Pinecone cosine similarity (60% weight)
+                - **Keyword**: BM25-style token overlap (40% weight)
+                - Minimum similarity threshold: 0.15
+                - Top-k pool: 30 candidates before ranking
+                """)
+
+            with col2:
+                st.markdown("""
+                **Query Processing**
+                - Embed user query with same model (MiniLM)
+                - Tokenize for keyword matching (3+ char tokens)
+                - Apply metadata filters (client, domain)
+                - Combine scores: `(0.6 × semantic) + (0.4 × keyword)`
+                """)
+                
+                st.markdown("""
+                **Response Synthesis**
+                - Rank top 3 stories by blended score
+                - Generate 3 views from same sources:
+                - Narrative (1-paragraph summary)
+                - Key Points (3-4 bullets)
+                - Deep Dive (STAR breakdown)
+                - Interactive source chips with confidence %
+                """)
+
+            st.markdown("---")
+
+            st.markdown("""
+            **Key Differentiators:**
+            - Hybrid retrieval ensures both semantic understanding and exact term matching
+            - Multi-mode synthesis provides flexible presentation for different use cases
+            - Context locking allows follow-up questions on specific stories
+            - Off-domain gating with suggestion chips prevents poor matches
+            """)
     # Rest of your Ask MattGPT content continues...
     # Rest of your Ask MattGPT content continues as normal
     # Context banner, transcript, etc...
-                
+
     # Context banner if Ask was launched from a Story
     ctx = get_context_story()
     _show_ctx = bool(ctx) and (
@@ -4228,7 +4315,9 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
     if _show_ctx:
         client = (ctx.get("client") or "").strip()
         domain_full = (ctx.get("domain") or "").strip()
-        domain_short = domain_full.split(" / ")[-1] if " / " in domain_full else domain_full
+        domain_short = (
+            domain_full.split(" / ")[-1] if " / " in domain_full else domain_full
+        )
         title = (ctx.get("title") or "").strip()
         role = (ctx.get("role") or "").strip()
         if not st.session_state.get("_ctx_css_done"):
@@ -4271,9 +4360,9 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
                 """,
                 unsafe_allow_html=True,
             )
-       # with right:
-        #    if st.button("×", key="btn_clear_ctx", help="Clear context"):
-         #       _clear_ask_context()
+    # with right:
+    #    if st.button("×", key="btn_clear_ctx", help="Clear context"):
+    #       _clear_ask_context()
 
     # Lightweight DEBUG status for Ask (visible only when DEBUG=True)
     if DEBUG:
@@ -4436,7 +4525,6 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
     if st.session_state.get("__suppress_live_card_once__"):
         st.session_state["__suppress_live_card_once__"] = False
 
-
     # 6) Handle a new chat input (command aliases or normal question)
     # Render the chat input only on the Ask MattGPT tab
     if st.session_state.get("active_tab") == "Ask MattGPT":
@@ -4552,19 +4640,22 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
 
                 # Add a static snapshot so the answer appears in-order as a bubble,
                 # and suppress the bottom live card once to avoid duplication.
-                if not st.session_state.get("ask_last_reason") and not st.session_state.get("__sticky_banner__"):
+                if not st.session_state.get(
+                    "ask_last_reason"
+                ) and not st.session_state.get("__sticky_banner__"):
                     _push_card_snapshot_from_state()
                     st.session_state["__suppress_live_card_once__"] = True
 
                 st.rerun()
- 
+
 # --- ABOUT ---
 elif st.session_state["active_tab"] == "About Matt":
-   # First, ensure CSS is loaded
+    # First, ensure CSS is loaded
     css_once()  # This should load your existing styles
-    
+
     # If that doesn't work, inject the specific styles needed
-    st.markdown("""
+    st.markdown(
+        """
     <style>
     .hero-section {
         text-align: center;
@@ -4585,12 +4676,12 @@ elif st.session_state["active_tab"] == "About Matt":
         border: 1px solid #3a3a3a;
         transition: transform 0.3s ease;
         margin-bottom: 24px;
-        box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);  /* Always visible shadow */
+        box-shadow: 0 2px 8px rgba(128, 128, 128, 0.2);  /* Always visible shadow */
     }
     
     .stat-card:hover {
         transform: translateY(-4px);
-        box-shadow: 0 8px 24px rgba(74, 144, 226, 0.2);
+        box-shadow: 0 4px 16px rgba(74, 144, 226, 0.2);
     }
     
     .stat-number {
@@ -4677,82 +4768,135 @@ elif st.session_state["active_tab"] == "About Matt":
         flex-shrink: 0;
     }
     </style>
-    """, unsafe_allow_html=True)
-    
-    st.markdown("""
-    <div class='hero-section'>
-        <h1 style='font-size: 48px; font-weight: 700; margin-bottom: 24px;'>Matt's Journey</h1>
-        <p style='font-size: 20px; color: #b0b0b0; max-width: 800px; margin: 0 auto;'>
-            Helping Fortune 500 companies both modernize legacy systems and launch net new cloud-native products — blending modern architecture, 
-            product mindset, and innovative engineering practices to deliver scalable digital platforms and experiences.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-    
-
-    #Pure HTML stats that bypass Streamlit's CSS
-    st.markdown(
-        """
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin: 50px 0;">
-            <div style="background: var(--secondary-background-color); padding: 32px 24px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
-                <span style="font-size: 36px; font-weight: 700; color: #4a90e2; display: block; margin-bottom: 8px;">20+</span>
-                <span style="color: #999999; font-size: 16px;">Years Experience</span>
-            </div>
-            <div style="background: var(--secondary-background-color); padding: 32px 24px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
-                <span style="font-size: 36px; font-weight: 700; color: #4a90e2; display: block; margin-bottom: 8px;">300+</span>
-                <span style="color: #999999; font-size: 16px;">Professionals Upskilled</span>
-            </div>
-            <div style="background: var(--secondary-background-color); padding: 32px 24px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
-                <span style="font-size: 36px; font-weight: 700; color: #4a90e2; display: block; margin-bottom: 8px;">200+</span>
-                <span style="color: #999999; font-size: 16px;">Engineers Certified</span>
-            </div>
-            <div style="background: var(--secondary-background-color); padding: 32px 24px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
-                <span style="font-size: 36px; font-weight: 700; color: #4a90e2; display: block; margin-bottom: 8px;">2</span>
-                <span style="color: #999999; font-size: 16px;">Innovation Centers Built & Scaled to 150+</span>
-            </div>
-        </div>
-        """,
+    """,
         unsafe_allow_html=True,
     )
 
-    st.markdown("<h2 class='section-title'>Career Evolution</h2>", unsafe_allow_html=True)
-    
+    st.markdown("""
+    <style>
+    .hero-section {
+        padding: 20px 30px 16px 30px !important;
+        margin-top: 0 !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <style>
+    /* Force About page content to start at the same position as Home */
+    section[data-testid="stAppViewContainer"] {
+        padding-top: 1rem !important;
+    }
+
+    /* Remove any extra spacing from the main block */
+    .main > div.block-container {
+        padding-top: 1rem !important;
+        max-width: 100%;
+    }
+
+    /* Eliminate hero section top spacing */
+    .hero-section {
+        margin-top: 0 !important;
+        padding-top: 20px !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+
+    st.markdown("""<div class='hero-section' style='margin-top: 0; margin-bottom: 8px; padding: 20px 30px 16px 30px;'>
+    <h1 style='font-size: 48px; font-weight: 700; margin-bottom: 16px; margin-top: 0;'>Matt's Journey</h1>
+    <p style='font-size: 20px; color: #b0b0b0; max-width: 800px; margin: 0 auto;'>
+        Helping Fortune 500 companies modernize legacy systems and launch new cloud-native products — combining modern architecture, product mindset, 
+            and innovative engineering practices to deliver scalable digital platforms.</p>
+    </div>""", unsafe_allow_html=True)
+
+
+    # Pure HTML stats that bypass Streamlit's CSS
+    st.markdown(
+    """
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 8px 0 24px 0;">
+        <div style="background: var(--secondary-background-color); padding: 28px 20px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
+            <span style="font-size: 36px; font-weight: 700; color: #4a90e2; display: block; margin-bottom: 8px;">20+</span>
+            <span style="color: #999999; font-size: 15px; display: block;">Years Experience</span>
+        </div>
+        <div style="background: var(--secondary-background-color); padding: 28px 20px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
+            <span style="font-size: 36px; font-weight: 700; color: #4a90e2; display: block; margin-bottom: 8px;">300+</span>
+            <span style="color: #999999; font-size: 15px; display: block;">Professionals Upskilled</span>
+        </div>
+        <div style="background: var(--secondary-background-color); padding: 28px 20px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
+            <span style="font-size: 36px; font-weight: 700; color: #4a90e2; display: block; margin-bottom: 8px;">200+</span>
+            <span style="color: #999999; font-size: 15px; display: block;">Engineers Certified</span>
+        </div>
+        <div style="background: var(--secondary-background-color); padding: 28px 20px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
+            <span style="font-size: 36px; font-weight: 700; color: #4a90e2; display: block; margin-bottom: 8px;">2</span>
+            <span style="color: #999999; font-size: 14px; line-height: 1.3; display: block;">Innovation Centers Built & Scaled to 150+</span>
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+    st.markdown(
+        "<h2 class='section-title'>Career Evolution</h2>", unsafe_allow_html=True
+    )
+
     # Timeline using fixed-height-card styling
     timeline_data = [
-        ("🚀", "2019-2023", "Director, Cloud Innovation @ Accenture", 
-         "Led 150+ professionals • Generated $300M+ revenue • 4x faster delivery • 25% retention improvement"),
-        ("☁️", "2016-2019", "Cloud Architecture Lead @ Liquid Studio",
-         "AWS enablement • 200+ certifications • Rapid prototyping • 30% faster time-to-market"),
-        ("💳", "2009-2016", "Sr Technology Manager @ Accenture",
-         "$500M+ transformation • 12 countries • Payment platforms • 3x sales increase"),
-        ("⚡", "2005-2009", "Startups & Consulting",
-         "Built products 0→1 • Team building • Product-market fit • Successful exits")
+        (
+            "🚀",
+            "2019-2023",
+            "Director, Cloud Innovation @ Accenture",
+            "Led 150+ professionals • Generated $300M+ revenue • 4x faster delivery • 25% retention improvement",
+        ),
+        (
+            "☁️",
+            "2016-2019",
+            "Cloud Architecture Lead @ Liquid Studio",
+            "AWS enablement • 200+ certifications • Rapid prototyping • 30% faster time-to-market",
+        ),
+        (
+            "💳",
+            "2009-2016",
+            "Sr Technology Manager @ Accenture",
+            "$500M+ transformation • 12 countries • Payment platforms • 3x sales increase",
+        ),
+        (
+            "⚡",
+            "2005-2009",
+            "Startups & Consulting",
+            "Built products 0→1 • Team building • Product-market fit • Successful exits",
+        ),
     ]
-    
+
     for icon, period, role, desc in timeline_data:
         col1, col2 = st.columns([1, 11])
         with col1:
-            #class="timeline-marker
-            st.markdown(f"<div class='timeline-marker'>{icon}</div>", unsafe_allow_html=True)
+            # class="timeline-marker
+            st.markdown(
+                f"<div class='timeline-marker'>{icon}</div>", unsafe_allow_html=True
+            )
 
-            #st.markdown(f"<div style='font-size: 40px; text-align: center; margin-top: 20px;'>{icon}</div>", 
-                      # unsafe_allow_html=True)
+            # st.markdown(f"<div style='font-size: 40px; text-align: center; margin-top: 20px;'>{icon}</div>",
+            # unsafe_allow_html=True)
         with col2:
-            st.markdown(f"""
+            st.markdown(
+                f"""
             <div class='fixed-height-card' style='margin-bottom: 16px; min-height: auto;'>
                 <div style='color: #4a90e2; font-size: 14px; margin-bottom: 8px;'>{period}</div>
                 <h3 style='font-size: 20px; font-weight: 600; margin-bottom: 8px;'>{role}</h3>
                 <p style='color: #b0b0b0; font-size: 14px;'>{desc}</p>
             </div>
-            """, unsafe_allow_html=True)
-    
+            """,
+                unsafe_allow_html=True,
+            )
+
     # Core Competencies with skill bars
-    st.markdown("<h2 class='section-title'>Core Competencies</h2>", unsafe_allow_html=True)
-    
+    st.markdown("<h2 class='section-title' style='margin: 48px 0 32px 0;'>Core Competencies</h2>", unsafe_allow_html=True)
     col1, col2, col3 = st.columns(3)
-    
+
     with col1:
-        st.markdown("""
+        st.markdown(
+            """
         <div class='fixed-height-card'>
             <h3 style='color: var(--text-color); font-size: 20px; margin-bottom: 24px;'>Digital Product & Innovation</h3>
             <div style='margin-bottom: 20px;'>
@@ -4772,10 +4916,13 @@ elif st.session_state["active_tab"] == "About Matt":
                 <div class='skill-bar'><div class='skill-fill' style='width: 95%;'></div></div>
             </div>
         </div>
-        """, unsafe_allow_html=True)
-    
+        """,
+            unsafe_allow_html=True,
+        )
+
     with col2:
-        st.markdown("""
+        st.markdown(
+            """
         <div class='fixed-height-card'>
             <h3 style='color: var(--text-color); font-size: 20px; margin-bottom: 24px;'>Technical Architecture</h3>
             <div style='margin-bottom: 20px;'>
@@ -4795,10 +4942,13 @@ elif st.session_state["active_tab"] == "About Matt":
                 <div class='skill-bar'><div class='skill-fill' style='width: 90%;'></div></div>
             </div>
         </div>
-        """, unsafe_allow_html=True)
-    
+        """,
+            unsafe_allow_html=True,
+        )
+
     with col3:
-        st.markdown("""
+        st.markdown(
+            """
         <div class='fixed-height-card'>
             <h3 style='color: var(--text-color); font-size: 20px; margin-bottom: 24px;'>Industry Expertise</h3>
             <div style='margin-bottom: 20px;'>
@@ -4818,39 +4968,45 @@ elif st.session_state["active_tab"] == "About Matt":
                 <div class='skill-bar'><div class='skill-fill' style='width: 75%;'></div></div>
             </div>
         </div>
-        """, unsafe_allow_html=True)
-    
+        """,
+            unsafe_allow_html=True,
+        )
+
     # Leadership Philosophy
+    st.markdown("<h2 class='section-title' style='margin: 48px 0 32px 0;'>Leadership Philosophy</h2>", unsafe_allow_html=True)
     st.markdown("""
-    <div class='philosophy-card' style='margin: 60px 0;'>
-        <h2 style='font-size: 28px; margin-bottom: 16px;'>Leadership Philosophy</h2>
-        <p style='color: #b0b0b0; margin-bottom: 40px;'>Principles that guide how I approach transformation, team building, and complex challenges</p>
+    <div style='text-align: center; max-width: 800px; margin: 0 auto 32px auto;'>
+        <p style='color: #b0b0b0; font-size: 16px;'>Principles that guide how I approach transformation, team building, and complex challenges</p>
     </div>
     """, unsafe_allow_html=True)
+
     cols = st.columns(4)
     philosophy_items = [
         ("🎯", "Outcome-Driven", "Measure success by business impact, not activity"),
         ("🚀", "Iterate Fast", "Small experiments beat big plans"),
         ("👥", "People First", "Technology serves humans, not the other way around"),
-        ("🔄", "Learn Continuously", "Every failure is data for the next attempt")
+        ("🔄", "Learn Continuously", "Every failure is data for the next attempt"),
     ]
-    
+
     for col, (icon, title, desc) in zip(cols, philosophy_items):
         with col:
-            st.markdown(f"""
+            st.markdown(
+                f"""
             <div style='text-align: center;'>
                 <div class='philosophy-icon'>{icon}</div>
                 <h4 style='font-size: 18px; margin-bottom: 8px;'>{title}</h4>
                 <p style='font-size: 14px; color: #b0b0b0;'>{desc}</p>
             </div>
-            """, unsafe_allow_html=True)
-    
-   
+            """,
+                unsafe_allow_html=True,
+            )
+
     # Let's Connect section with better UI/UX
-    st.markdown("<h2 class='section-title'>Let's Connect</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 class='section-title' style='margin: 48px 0 32px 0;'>Let's Connect</h2>", unsafe_allow_html=True)
 
     # Professional summary with visual appeal
-    st.markdown("""
+    st.markdown(
+        """
     <div style='text-align: center; max-width: 800px; margin: 0 auto 40px auto;'>
         <p style='font-size: 18px; color: var(--text-color); margin-bottom: 24px;'>
             Open to Director/VP roles in platform modernization and innovation strategy
@@ -4870,43 +5026,56 @@ elif st.session_state["active_tab"] == "About Matt":
             </div>
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
     # Contact cards in a grid
     col1, col2, col3 = st.columns([1, 1, 1])
 
     with col1:
-        st.markdown("""
+        st.markdown(
+            """
         <div class='fixed-height-card' style='text-align: center; min-height: 180px; cursor: pointer; transition: all 0.3s;'>
             <span style='font-size: 32px;'>📧</span>
             <h4 style='margin: 16px 0 8px 0; color: var(--text-color);'>Email</h4>
             <p style='color: #4a90e2; font-size: 14px;'>mcpugmire@gmail.com</p>
             <p style='color: #999; font-size: 12px; margin-top: 8px;'>Direct inquiries</p>
         </div>
-        """, unsafe_allow_html=True)
+        """,
+            unsafe_allow_html=True,
+        )
         if st.button("Copy Email", key="copy_email", use_container_width=True):
             st.code("mcpugmire@gmail.com")
 
     with col2:
-        st.markdown("""
+        st.markdown(
+            """
         <div class='fixed-height-card' style='text-align: center; min-height: 180px; cursor: pointer; transition: all 0.3s;'>
             <span style='font-size: 32px;'>💼</span>
             <h4 style='margin: 16px 0 8px 0; color: var(--text-color);'>LinkedIn</h4>
             <p style='color: #4a90e2; font-size: 14px;'>matt-pugmire</p>
             <p style='color: #999; font-size: 12px; margin-top: 8px;'>Professional network</p>
         </div>
-        """, unsafe_allow_html=True)
+        """,
+            unsafe_allow_html=True,
+        )
         if st.button("Open LinkedIn", key="open_linkedin", use_container_width=True):
-            st.markdown("[→ linkedin.com/in/matt-pugmire](https://linkedin.com/in/matt-pugmire/)")
+            st.markdown(
+                "[→ linkedin.com/in/matt-pugmire](https://linkedin.com/in/matt-pugmire/)"
+            )
 
     with col3:
-        st.markdown("""
+        st.markdown(
+            """
         <div class='fixed-height-card' style='text-align: center; min-height: 180px; cursor: pointer; transition: all 0.3s;'>
             <span style='font-size: 32px;'>☕</span>
             <h4 style='margin: 16px 0 8px 0; color: var(--text-color);'>Coffee Chat</h4>
             <p style='color: #4a90e2; font-size: 14px;'>In-person meeting</p>
             <p style='color: #999; font-size: 12px; margin-top: 8px;'>Let's meet face-to-face</p>
         </div>
-        """, unsafe_allow_html=True)
+        """,
+            unsafe_allow_html=True,
+        )
         if st.button("Schedule Coffee", key="coffee_chat", use_container_width=True):
             st.info("Reach out via email or LinkedIn to schedule an in-person meeting")
