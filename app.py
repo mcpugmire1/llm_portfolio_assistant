@@ -4234,22 +4234,27 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
             st.markdown("---")
             st.markdown("### System Architecture")
 
-            # Read and display the SVG file
             try:
                 with open("assets/rag_architecture_grid_svg.svg", "r") as f:
                     svg_content = f.read()
                 
-                # Display SVG using Streamlit's native image function instead
-                st.image("assets/rag_architecture_grid_svg.svg", use_container_width=True)
+                # Remove XML declaration and DOCTYPE
+                svg_content = svg_content.replace('<?xml version="1.0" encoding="UTF-8" standalone="no"?>', '')
+                svg_content = svg_content.replace('<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">', '')
                 
-            except FileNotFoundError:
-                st.error("Architecture diagram not found. Please ensure 'assets/rag_architecture_grid_svg.svg' exists.")
+                # Use HTML component with transparent background and no scroll
+                import streamlit.components.v1 as components
+                
+                components.html(f"""
+                <div style='width: 100%; text-align: center;'>
+                    {svg_content}
+                </div>
+                """, height=280, scrolling=False)
+                
             except Exception as e:
                 st.error(f"Error loading architecture diagram: {e}")
 
             st.markdown("---")
-
-           
             
 
             # Detailed breakdown
