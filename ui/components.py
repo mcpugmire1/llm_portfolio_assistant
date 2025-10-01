@@ -175,6 +175,7 @@ def css_once():
         /* Typography inside the card */
         .matt-card-btn .icon { display:block; font-size:40px; margin-bottom:20px; }
         .matt-card-btn .title { font-size:22px; font-weight:600; margin-bottom:16px; }
+        .matt-card-btn .client-name { color:#5b9dd9; font-size:16px; font-weight:600; margin-bottom:8px; }
         .matt-card-btn .desc { color:#b0b0b0; margin-bottom:20px; line-height:1.5; }
         .matt-card-btn .examples { font-size:14px; color:#888; font-style:italic; }
 
@@ -211,6 +212,182 @@ def css_once():
             background: #4a90e2;  /* Keep the blue accent color */
             border-radius: 3px;
         }
+
+        /* ========================================
+           EXPLORE STORIES - CARD VIEW STYLING
+           ======================================== */
+
+        /* Remove any CSS that isn't working - the .fixed-height-card inline styles handle it */
+
+        /* ========================================
+           EXPLORE STORIES - AGGRID TABLE STYLING
+           Match the wireframe design exactly
+           ======================================== */
+
+        /* AgGrid container wrapper - add prominence */
+        .ag-theme-streamlit {
+            background: #262626 !important;
+            border-radius: 12px !important;
+            overflow: hidden !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+            border: 1px solid #333 !important;
+            margin-top: 8px !important;
+            margin-bottom: 8px !important;
+        }
+
+        /* AgGrid header styling */
+        .ag-theme-streamlit .ag-header {
+            background: #2f2f2f !important;
+            border-bottom: 2px solid #404040 !important;
+        }
+
+        .ag-theme-streamlit .ag-header-cell {
+            background: #2f2f2f !important;
+            border-right: none !important;
+            padding: 16px 20px !important;
+            font-weight: 600 !important;
+            font-size: 13px !important;
+            color: #ffffff !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+        }
+
+        .ag-theme-streamlit .ag-header-cell-text {
+            color: #ffffff !important;
+        }
+
+        /* AgGrid body and rows */
+        .ag-theme-streamlit .ag-root-wrapper {
+            background: #262626 !important;
+            border: none !important;
+        }
+
+        .ag-theme-streamlit .ag-row {
+            background: #262626 !important;
+            border-bottom: 1px solid #333 !important;
+            border-left: 3px solid transparent !important;
+            transition: all 0.2s ease !important;
+            cursor: pointer !important;
+        }
+
+        .ag-theme-streamlit .ag-row:hover {
+            background: #2d2d2d !important;
+            border-left: 3px solid #4a90e2 !important;
+        }
+
+        .ag-theme-streamlit .ag-row-selected {
+            background: #1e3a5f !important;
+            border-left: 3px solid #4a90e2 !important;
+        }
+
+        .ag-theme-streamlit .ag-row-selected:hover {
+            background: #1e3a5f !important;
+        }
+
+        /* AgGrid cells */
+        .ag-theme-streamlit .ag-cell {
+            padding: 24px 20px !important;
+            font-size: 14px !important;
+            line-height: 1.6 !important;
+            color: var(--text-color) !important;
+            border-right: none !important;
+        }
+
+        /* Ensure cell text is 14px */
+        .ag-theme-streamlit .ag-cell-value {
+            font-size: 14px !important;
+        }
+
+        /* Increase row height */
+        .ag-theme-streamlit .ag-row {
+            min-height: 70px !important;
+        }
+
+        /* Remove center container borders */
+        .ag-theme-streamlit .ag-center-cols-container {
+            border: none !important;
+        }
+
+        /* Scrollbar styling */
+        .ag-theme-streamlit .ag-body-viewport::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .ag-theme-streamlit .ag-body-viewport::-webkit-scrollbar-track {
+            background: #2a2a2a;
+            border-radius: 4px;
+        }
+
+        .ag-theme-streamlit .ag-body-viewport::-webkit-scrollbar-thumb {
+            background: #4a4a4a;
+            border-radius: 4px;
+            transition: background 0.2s ease;
+        }
+
+        .ag-theme-streamlit .ag-body-viewport::-webkit-scrollbar-thumb:hover {
+            background: #5a5a5a;
+        }
+
+        /* Hide AgGrid's built-in pagination controls completely */
+        .ag-theme-streamlit .ag-paging-panel {
+            display: none !important;
+        }
+
+        .ag-theme-streamlit .ag-status-bar {
+            display: none !important;
+        }
+
+        /* ========================================
+           EXPLORE STORIES - DETAIL PANEL STYLING
+           Make the detail panel more prominent
+           ======================================== */
+
+        /* Style the detail panel container (after the --- divider) */
+        [data-testid="stVerticalBlock"] [data-testid="stVerticalBlock"]:has([data-testid="stMarkdownContainer"]) {
+            background: #262626;
+            border-radius: 12px;
+            padding: 32px;
+            margin-top: 24px;
+            border: 1px solid #333;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Detail panel header section */
+        .detail-panel-header {
+            border-bottom: 2px solid #404040;
+            padding-bottom: 20px;
+            margin-bottom: 24px;
+        }
+
+        .detail-panel-title {
+            font-size: 24px !important;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        /* Increase font sizes in detail panel */
+        [data-testid="stMarkdownContainer"] h3 {
+            font-size: 20px !important;
+            font-weight: 600;
+            color: #ffffff;
+            margin-top: 20px;
+            margin-bottom: 12px;
+        }
+
+        [data-testid="stMarkdownContainer"] p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #e0e0e0;
+        }
+
+        /* Make detail panel content more spacious */
+        [data-testid="stMarkdownContainer"] li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
         </style>
         """,
         unsafe_allow_html=True,
@@ -326,13 +503,13 @@ def render_home_starters():
         color: var(--text-color); 
         padding: 32px; 
         border-radius: 12px; 
-        border: 1px solid var(--border-color);
         height: 350px;
         display: flex;
         flex-direction: column;
         transition: all 0.3s ease;
         margin-bottom: 15px;
-        box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);
+        border: 1px solid var(--border-color) !important; 
+        box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2) !important;
     }
     .fixed-height-card:hover {
         transform: translateY(-4px);
@@ -362,7 +539,10 @@ def render_home_starters():
         </div>
         """, unsafe_allow_html=True)
         if st.button("Explore Product Work", key="btn_0"):
+            st.session_state["__inject_user_turn__"] = "Tell me about your product innovation approach"
             st.session_state["active_tab"] = card["tab"]
+            st.session_state.pop("__ctx_locked__", None)
+            st.session_state.pop("active_context", None)
             st.session_state["skip_home_menu"] = True
             st.rerun()
 
@@ -378,7 +558,10 @@ def render_home_starters():
         </div>
         """, unsafe_allow_html=True)
         if st.button("View Architecture Cases", key="btn_1"):
+                st.session_state["__inject_user_turn__"] = "How do you modernize legacy applications?"
                 st.session_state["active_tab"] = card["tab"]
+                st.session_state.pop("__ctx_locked__", None)
+                st.session_state.pop("active_context", None)
                 st.session_state["skip_home_menu"] = True
                 st.rerun()
 
@@ -394,7 +577,10 @@ def render_home_starters():
         </div>
         """, unsafe_allow_html=True)
         if st.button("See Payments Projects", key="btn_2"):
+            st.session_state["__inject_user_turn__"] = "Tell me about your payments transformation work"
             st.session_state["active_tab"] = card["tab"]
+            st.session_state.pop("__ctx_locked__", None)
+            st.session_state.pop("active_context", None)
             st.session_state["skip_home_menu"] = True
             st.rerun()
     
@@ -412,7 +598,10 @@ def render_home_starters():
         </div>
         """, unsafe_allow_html=True)
         if st.button("Browse Transformations", key="btn_3"):
+            st.session_state["__inject_user_turn__"] = "How do you achieve faster delivery for Fortune 500 clients?"
             st.session_state["active_tab"] = card["tab"]
+            st.session_state.pop("__ctx_locked__", None)
+            st.session_state.pop("active_context", None)
             st.session_state["skip_home_menu"] = True
             st.rerun()
 
@@ -428,7 +617,10 @@ def render_home_starters():
         </div>
         """, unsafe_allow_html=True)
         if st.button("Check Team Stories", key="btn_4"):
+            st.session_state["__inject_user_turn__"] = "How did you scale and develop innovation teams?"
             st.session_state["active_tab"] = card["tab"]
+            st.session_state.pop("__ctx_locked__", None)
+            st.session_state.pop("active_context", None)
             st.session_state["skip_home_menu"] = True
             st.rerun()
 
@@ -444,6 +636,7 @@ def render_home_starters():
         </div>
         """, unsafe_allow_html=True)
         if st.button("Ask MattGPT", key="btn_5"):
+            # This one just opens Ask MattGPT without a pre-loaded question
             st.session_state["active_tab"] = card["tab"]
             st.session_state["skip_home_menu"] = True
             st.rerun()

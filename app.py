@@ -351,9 +351,27 @@ def goto(tab_name: str):
     # If we are navigating to Home, ensure the Home pills do NOT auto-jump
     # by marking the first render as a fresh mount.
     if tab == "Home":
-        st.session_state["__home_first_mount__"] = True
+        st.session_state["__home_first_mount__"] = Truex
     # Stop this render immediately; the next run will paint the new tab.
     st.stop()
+
+def render_compact_context_banner():
+    """Single-line context breadcrumb - no emojis, minimal styling."""
+    ctx = get_context_story()
+    if not ctx:
+        return
+    
+    client = (ctx.get("client") or "").strip()
+    domain_full = (ctx.get("domain") or "").strip()
+    domain_short = domain_full.split(" / ")[-1] if " / " in domain_full else domain_full
+    
+    st.markdown(f"""
+    <div style='font-size: 13px; color: #888; margin-bottom: 16px; padding: 8px 12px; background: rgba(128,128,128,0.05); border-radius: 6px;'>
+        Context: {client} | {domain_short}
+    </div>
+    """, unsafe_allow_html=True)
+
+
 
 
 # --------- Simple, reliable state-driven navigation (DISABLED for now to avoid default_index errors) ---------
@@ -516,10 +534,12 @@ if USE_SIDEBAR_NAV:
         ]
         for i, q in enumerate(ex):
             if st.button(q, key=f"exq_{i}", use_container_width=True):
-                # Treat like a suggestion chip to use the same relaxed, intent-boosted flow
+                # Treat like fresh typed questions - pure semantic search
                 st.session_state["__inject_user_turn__"] = q
-                st.session_state["__ask_from_suggestion__"] = True
-                st.session_state["__ask_force_answer__"] = True
+                # Don't set force_answer - let semantic search rank naturally
+                # Clear context lock so these trigger fresh searches
+                st.session_state.pop("__ctx_locked__", None)
+                st.session_state.pop("active_context", None)
                 st.session_state["active_tab"] = "Ask MattGPT"
                 st.rerun()
         st.divider()
@@ -842,8 +862,8 @@ _DEF_DIM = 384  # stub embedding size to keep demo self-contained
 DATA_FILE = os.getenv("STORIES_JSONL", "echo_star_stories_nlp.jsonl")  # optional
 
 # 🔧 Hybrid score weights (tune these!)
-W_PC = 0.6  # semantic (Pinecone vector match)
-W_KW = 0.4  # keyword/token overlap
+W_PC = 0.8  # semantic (Pinecone vector match)
+W_KW = 0.2  # keyword/token overlap
 
 # Centralized retrieval pool size for semantic search / Pinecone
 SEARCH_TOP_K = 30
@@ -1281,16 +1301,12 @@ def _clear_ask_context():
 
 # --- Clean Answer Card (mock_ask_hybrid style) -------------------------------
 
-
-def render_answer_card_clean_pills(
+def render_answer_card_compact(
     primary_story: dict, modes: dict, answer_mode_key: str = "answer_mode"
 ):
-    """
-    Render a single card with Title + (Narrative|Key Points|Deep Dive) pills + body + sources,
-    visually consistent with mock_ask_hybrid.py. Uses existing modes dict from story_modes().
-    """
-    # # If the user clicked a Source chip or "Ask about this", we set __ctx_locked__.
-    # Only override the primary story when that lock is present.
+    """Lightweight answer card - reduced padding, cleaner hierarchy, no emojis."""
+    
+    # Override with context-locked story if set
     if st.session_state.get("__ctx_locked__"):
         _ctx_story = get_context_story()
         if _ctx_story and str(_ctx_story.get("id")) != str(primary_story.get("id")):
@@ -1300,101 +1316,96 @@ def render_answer_card_clean_pills(
                 modes = story_modes(primary_story)
             except Exception:
                 pass
+    
     title = field_value(primary_story, "title", "")
-    one_liner_html = (
-        f"<div class='fivep-quote fivep-unclamped'>{build_5p_summary(primary_story, 9999)}</div>"
-        if primary_story
-        else ""
-    )
     client = field_value(primary_story, "client", "")
-    role = field_value(primary_story, "role", "")
     domain = field_value(primary_story, "domain", "")
-    bits = [b for b in [client, role, domain] if b]
-    subtitle_html = f"<div class='meta-block'>{' • '.join(bits)}</div>" if bits else ""
-
-    st.markdown(
-        "<div class='card'>"
-        f"<div class='h1'>{title}</div>"
-        f"{one_liner_html}"
-        f"{subtitle_html}"
-        "</div>",
-        unsafe_allow_html=True,
-    )
-
-    # Pills control (same labels as mock; drive the app's 'answer_mode')
+    
+    # Compact header - single line with subtle separators
+    meta_line = " • ".join([x for x in [client, domain] if x])
+    
+    st.markdown(f"""
+    <div style='margin-bottom: 8px;'>
+        <div style='font-size: 18px; font-weight: 600; margin-bottom: 4px;'>{title}</div>
+        <div style='font-size: 13px; color: #888; margin-bottom: 12px;'>{meta_line}</div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # View mode pills - smaller, less prominent
     labels = [
-        ("narrative", "Narrative"),
+        ("narrative", "Summary"),
         ("key_points", "Key Points"),
-        ("deep_dive", "Deep Dive"),
+        ("deep_dive", "Details"),
     ]
     current = st.session_state.get(answer_mode_key, "narrative")
-
-    # If your Streamlit supports segmented control:
-    if hasattr(st, "segmented_control"):
-        label_map = {b: a for a, b in labels}
-        default_label = next((b for a, b in labels if a == current), "Narrative")
-        chosen = st.segmented_control(
-            "",
-            [b for _, b in labels],
-            selection_mode="single",
-            default=default_label,
-            key=f"seg_{answer_mode_key}",
-        )
-        new_mode = label_map.get(chosen, "narrative")
-        if new_mode != current:
-            st.session_state[answer_mode_key] = new_mode
-            st.rerun()
-    else:
-        # Left-aligned pill row (no Streamlit columns => no centering/flex bugs)
-        st.markdown(
-            f'<div class="pill-container" data-mode="{current}">',
-            unsafe_allow_html=True,
-        )
-        for key, text in labels:
-            class_name = {
-                "narrative": "pill-narrative",
-                "key_points": "pill-keypoints",
-                "deep_dive": "pill-deepdive",
-            }[key]
-            st.markdown(f'<div class="{class_name}">', unsafe_allow_html=True)
-            if st.button(text, key=f"pill_clean_{key}", disabled=(current == key)):
+    
+    # Compact pill row
+    cols = st.columns([1, 1, 1, 9])
+    for i, (key, text) in enumerate(labels):
+        with cols[i]:
+            disabled = (current == key)
+            if st.button(
+                text,
+                key=f"mode_{answer_mode_key}_{key}",
+                disabled=disabled,
+                use_container_width=True
+            ):
                 st.session_state[answer_mode_key] = key
                 st.rerun()
-            st.markdown("</div>", unsafe_allow_html=True)
-        st.markdown("</div>", unsafe_allow_html=True)
-
-    # Divider + Body
-    st.markdown("<div class='hr'></div>", unsafe_allow_html=True)
+    
+    st.markdown("<div style='margin: 12px 0;'></div>", unsafe_allow_html=True)
+    
+    # Body with less padding
     body_md = modes.get(st.session_state.get(answer_mode_key, "narrative"), "")
     if body_md:
         st.markdown(body_md)
     else:
         st.markdown("_No content available for this view._")
-
-    # --- Sources row (interactive) ---
-    # Prefer last_sources from session if present; otherwise build a minimal list from the current story + related
+    
+    # Sources - tighter spacing
     _srcs = st.session_state.get("last_sources") or []
     if not _srcs and primary_story:
-        _srcs = [
-            {
-                "id": primary_story.get("id"),
-                "title": primary_story.get("title"),
-                "client": primary_story.get("client"),
-            }
-        ]
+        _srcs = [{
+            "id": primary_story.get("id"),
+            "title": primary_story.get("title"),
+            "client": primary_story.get("client"),
+        }]
         try:
             for r in _related_stories(primary_story, max_items=2):
-                _srcs.append(
-                    {
-                        "id": r.get("id"),
-                        "title": r.get("title"),
-                        "client": r.get("client"),
-                    }
-                )
+                _srcs.append({
+                    "id": r.get("id"),
+                    "title": r.get("title"),
+                    "client": r.get("client"),
+                })
         except Exception:
             pass
+    
     if _srcs:
-        show_sources(_srcs, interactive=True, key_prefix="asksrc_", title="Sources")
+        st.markdown("<div style='margin-top: 16px;'></div>", unsafe_allow_html=True)
+        show_sources(_srcs, interactive=True, key_prefix=f"compact_{answer_mode_key}_", title="Sources")
+        st.write("DEBUG: About to call render_followup_chips")
+
+        # Add follow-up suggestions
+        render_followup_chips(primary_story, st.session_state.get("ask_input", ""))
+        st.write("DEBUG: After render_followup_chips call")
+
+
+# Also update your context banner to be minimal
+def render_compact_context_banner():
+    """Single-line context breadcrumb."""
+    ctx = get_context_story()
+    if not ctx:
+        return
+    
+    client = (ctx.get("client") or "").strip()
+    domain_full = (ctx.get("domain") or "").strip()
+    domain_short = domain_full.split(" / ")[-1] if " / " in domain_full else domain_full
+    
+    st.markdown(f"""
+    <div style='font-size: 13px; color: #888; margin-bottom: 16px; padding: 8px 12px; background: rgba(128,128,128,0.05); border-radius: 6px;'>
+        Context: {client} | {domain_short}
+    </div>
+    """, unsafe_allow_html=True)
 
 
 def _dot_for(label: str) -> str:
@@ -1414,6 +1425,60 @@ def _shorten_middle(text: str, max_len: int = 64) -> str:
     right = keep - left
     return text[:left] + "… " + text[-right:]
 
+def render_followup_chips(primary_story: dict, query: str = "", key_suffix: str = ""):
+    """Generate contextual follow-up suggestions based on the answer."""
+
+    if not primary_story:
+        return
+
+    # Universal follow-up suggestions that work with card-based retrieval
+    # Focus on themes that trigger good semantic searches
+    tags = set(str(t).lower() for t in (primary_story.get("tags") or []))
+
+    suggestions = []
+
+    # Theme-based suggestions that trigger relevant searches
+    if any(t in tags for t in ["stakeholder", "collaboration", "communication"]):
+        suggestions = [
+            "How do you handle difficult stakeholders?",
+            "Tell me about cross-functional collaboration",
+            "What about managing remote teams?"
+        ]
+    elif any(t in tags for t in ["cloud", "architecture", "platform", "technical"]):
+        suggestions = [
+            "Show me examples with cloud architecture",
+            "How do you modernize legacy systems?",
+            "Tell me about technical challenges you've solved"
+        ]
+    elif any(t in tags for t in ["agile", "process", "delivery"]):
+        suggestions = [
+            "How do you accelerate delivery?",
+            "Tell me about scaling agile practices",
+            "Show me examples of process improvements"
+        ]
+    else:
+        # Generic suggestions that work for any story
+        suggestions = [
+            "Show me examples with measurable impact",
+            "How do you drive innovation?",
+            "Tell me about leading transformation"
+        ]
+
+    if not suggestions:
+        return
+
+    st.markdown("<div style='margin-top: 16px;'></div>", unsafe_allow_html=True)
+    cols = st.columns(len(suggestions[:3]))
+    for i, suggest in enumerate(suggestions[:3]):
+        with cols[i]:
+            # Make key unique by including card index and suggestion index
+            unique_key = f"followup_{key_suffix}_{i}" if key_suffix else f"followup_{hash(suggest)%10000}_{i}"
+            if st.button(suggest, key=unique_key, use_container_width=True):
+                st.session_state["__inject_user_turn__"] = suggest
+                # Don't set __ask_from_suggestion__ - treat chips like fresh typed questions
+                # This ensures context lock is cleared and we get fresh search results
+                st.session_state["__ask_force_answer__"] = True
+                st.rerun()
 
 def render_sources_badges_static(
     sources: list[dict], title: str = "Sources", key_prefix: str = "srcbad_"
@@ -1950,9 +2015,10 @@ def story_card(s, idx=0, show_ask_cta=True):
                 with safe_container(border=True):
                     mode_key = f"__detail_mode__{s.get('id','x')}"
                     st.session_state.setdefault(mode_key, "narrative")
-                    render_answer_card_clean_pills(
+                    render_answer_card_compact(
                         s, story_modes(s), answer_mode_key=mode_key
                     )
+
 
                 # Separator + Related
                 rel = _related_stories(s, max_items=3)
@@ -2420,10 +2486,10 @@ def pinecone_semantic_search(
             snip = meta.get("summary") or meta.get("snippet") or ""
             if snip:
                 st.session_state["__pc_snippets__"][str(sid)] = snip
-            st.session_state["__pc_last_ids__"][str(sid)] = score
 
             kw = _keyword_score_for_story(story, query)
             blended = _hybrid_score(score, kw)
+            st.session_state["__pc_last_ids__"][str(sid)] = blended
 
             if DEBUG:
                 try:
@@ -2502,10 +2568,10 @@ def semantic_search(
             st.session_state["__pc_suppressed__"] = True
             confident = hits[:3]  # gentle fallback already handled inside pinecone fn
 
-        # Persist per-story Pinecone info for chips/captions (use raw PC % in chips)
+        # Persist per-story blended confidence scores for display
         try:
             st.session_state["__pc_last_ids__"] = {
-                h["story"]["id"]: float(h.get("pc_score", h.get("score", 0.0)) or 0.0)
+                h["story"]["id"]: float(h.get("score", 0.0) or 0.0)  # Use blended score
                 for h in confident
             }
             st.session_state["__pc_snippets__"] = {
@@ -2637,7 +2703,7 @@ def _render_ask_transcript():
     for i, m in enumerate(st.session_state.get("ask_transcript", [])):
         # Static snapshot card entry
         if m.get("type") == "card":
-            with st.chat_message("assistant", avatar=ASSIST_AVATAR):
+            with st.chat_message("assistant"):
                 # Snapshot with the same visual shell as the live answer card
                 st.markdown('<div class="answer-card">', unsafe_allow_html=True)
                 with safe_container(border=True):
@@ -2659,8 +2725,67 @@ def _render_ask_transcript():
                             one_liner = build_5p_summary(story, 9999)
                         except Exception:
                             one_liner = one_liner
+
+                    # Title
                     if title:
                         st.markdown(f"### {title}")
+
+                    # Metadata: Client, Role, Domain
+                    if isinstance(story, dict):
+                        client = story.get("client", "")
+                        role = story.get("role", "")
+                        domain = story.get("domain", "")
+
+                        # Create metadata line with role and domain
+                        meta_parts = []
+                        if client:
+                            meta_parts.append(f"<strong>{client}</strong>")
+                        if role or domain:
+                            role_domain = " • ".join([x for x in [role, domain] if x])
+                            if role_domain:
+                                meta_parts.append(role_domain)
+
+                        if meta_parts:
+                            st.markdown(
+                                f"<div style='font-size: 13px; color: #888; margin-bottom: 12px;'>{' | '.join(meta_parts)}</div>",
+                                unsafe_allow_html=True,
+                            )
+
+                    # Confidence indicator (check if story changed via source click)
+                    confidence = m.get("confidence")  # Original confidence from snapshot
+
+                    print(f"DEBUG render: card_id={m.get('story_id')}, current_story_id={story.get('id') if story else None}, confidence={confidence}")
+
+                    # If user clicked a different source, get that story's confidence from stored data
+                    if isinstance(story, dict) and str(story.get("id")) != str(m.get("story_id")):
+                        # Story was changed via source click - use stored source confidences
+                        source_confidences = m.get("source_confidences", {}) or {}
+                        story_id = str(story.get("id"))
+                        if story_id in source_confidences:
+                            confidence = source_confidences[story_id]
+                        print(f"DEBUG render: switched story, new confidence={confidence}")
+
+                    if confidence:
+                        conf_pct = int(float(confidence) * 100)
+                        # Color gradient: red -> orange -> green
+                        if conf_pct >= 70:
+                            bar_color = "#238636"  # green
+                        elif conf_pct >= 50:
+                            bar_color = "#ff8c00"  # orange
+                        else:
+                            bar_color = "#f85149"  # red
+
+                        st.markdown(f"""
+                        <div style='display: flex; align-items: center; gap: 8px; font-size: 12px; color: #7d8590; margin-bottom: 12px;'>
+                            <span>Match confidence</span>
+                            <div style='width: 60px; height: 4px; background: #21262d; border-radius: 2px; overflow: hidden;'>
+                                <div style='height: 100%; width: {conf_pct}%; background: {bar_color}; border-radius: 2px;'></div>
+                            </div>
+                            <span style='color: {bar_color}; font-weight: 600;'>{conf_pct}%</span>
+                        </div>
+                        """, unsafe_allow_html=True)
+
+                    # 5P Summary
                     if one_liner:
                         st.markdown(
                             f"<div class='fivep-quote fivep-unclamped'>{one_liner}</div>",
@@ -2740,13 +2865,16 @@ def _render_ask_transcript():
                             key_prefix=f"snap_{i}_",
                         )
                         st.markdown("</div>", unsafe_allow_html=True)
+
+                        # Add follow-up suggestion chips
+                        if story:
+                            render_followup_chips(story, st.session_state.get("ask_input", ""), key_suffix=f"snap_{i}")
                 st.markdown('</div>', unsafe_allow_html=True)
             continue
 
         # Default chat bubble (user/assistant text)
         role = "assistant" if m.get("role") == "assistant" else "user"
-        avatar = ASSIST_AVATAR if role == "assistant" else USER_AVATAR
-        with st.chat_message(role, avatar=avatar):
+        with st.chat_message(role):  # Remove avatar parameter
             st.markdown(m.get("text", ""))
 
 
@@ -2762,6 +2890,22 @@ def _push_card_snapshot_from_state():
     if not primary:
         return
     content_md = modes.get(sel) if modes else st.session_state.get("last_answer", "")
+
+    # Capture ALL confidence scores at snapshot time (before they get cleared on next query)
+    scores = st.session_state.get("__pc_last_ids__", {}) or {}
+    confidence = scores.get(sid)
+
+    print(f"DEBUG _push_card_snapshot: sid={sid}, confidence={confidence}, scores={scores}")
+
+    # Also store confidence scores for all sources
+    source_confidences = {}
+    for src in sources:
+        src_id = str(src.get("id", ""))
+        if src_id in scores:
+            source_confidences[src_id] = scores[src_id]
+
+    print(f"DEBUG _push_card_snapshot: source_confidences={source_confidences}")
+
     entry = {
         "type": "card",
         "story_id": primary.get("id"),
@@ -2769,6 +2913,8 @@ def _push_card_snapshot_from_state():
         "one_liner": build_5p_summary(primary, 9999),
         "content": content_md,
         "sources": sources,
+        "confidence": confidence,  # Primary story confidence
+        "source_confidences": source_confidences,  # All source confidences
     }
     st.session_state["ask_transcript"].append(entry)
 
@@ -2866,169 +3012,7 @@ def _score_story_for_prompt(s: dict, prompt: str) -> float:
     return score
 
 
-# --- Intent boosting for suggestion chips ------------------------------------
-_INTENT_SETS = {
-    "genai": {
-        "genai",
-        "generative",
-        "llm",
-        "model",
-        "models",
-        "nlp",
-        "rai",
-        "mlops",
-        "registry",
-        "governance",
-        "responsible",
-        "healthcare",
-    },
-    "cloud": {
-        "cloud",
-        "cloud-native",
-        "kubernetes",
-        "k8s",
-        "microservices",
-        "container",
-        "serverless",
-        "platform",
-        "api",
-        "apis",
-        "aws",
-        "azure",
-        "gcp",
-    },
-    "payments": {
-        "payment",
-        "payments",
-        "treasury",
-        "bank",
-        "banking",
-        "wire",
-        "ach",
-        "fx",
-        "finance",
-        "fintech",
-    },
-    "innovation": {
-        "innovation",
-        "innovate",
-        "prototype",
-        "prototyping",
-        "incubation",
-        "experimentation",
-        "discovery",
-    },
-}
-
-
-def _intent_topics(prompt: str) -> set[str]:
-    toks = set(_tokenize(prompt or ""))
-    hits = set()
-    for key, words in _INTENT_SETS.items():
-        if toks & words:
-            hits.add(key)
-    return hits
-
-
-def _intent_boost_for_story(story: dict, topics: set[str]) -> float:
-    if not topics:
-        return 0.0
-    txt_fields = " ".join(
-        [
-            story.get("title", ""),
-            story.get("client", ""),
-            story.get("domain", ""),
-            story.get("where", ""),
-            " ".join(story.get("tags", []) or []),
-            " ".join(story.get("how", []) or []),
-            " ".join(story.get("what", []) or []),
-        ]
-    )
-    stoks = set(_tokenize(txt_fields))
-    boost = 0.0
-    for key in topics:
-        if stoks & _INTENT_SETS.get(key, set()):
-            # Stronger, deterministic boost per matched topic for chips
-            boost += 2.5
-    return boost
-
-
-# --- Qualifier awareness (e.g., healthcare with GenAI) -----------------------
-_QUAL_HEALTH = {
-    "health",
-    "healthcare",
-    "health-care",
-    "clinical",
-    "patient",
-    "patients",
-    "hospital",
-    "provider",
-    "ehr",
-    "emr",
-    "hipaa",
-    "phi",
-    "hippa",
-    "kp",
-    "kaiser",
-    "permanente",
-}
-
-# Qualifiers for product/digital product context
-_QUAL_PRODUCTS = {
-    "product",
-    "products",
-    "digital",
-    "app",
-    "apps",
-    "application",
-    "applications",
-    "mobile",
-    "web",
-    "ux",
-    "ui",
-    "experience",
-    "customer",
-    "journey",
-    "mvp",
-    "poc",
-    "prototype",
-    "prototyping",
-    "ideation",
-    "innovation",
-    "experimentation",
-}
-
-
-def _qualifier_categories(prompt: str) -> set[str]:
-    toks = set(_tokenize(prompt or ""))
-    cats = set()
-    if toks & _QUAL_HEALTH:
-        cats.add("health")
-    if toks & _QUAL_PRODUCTS:
-        cats.add("product")
-    return cats
-
-
-def _story_has_qualifier(story: dict, cats: set[str]) -> bool:
-    if not cats:
-        return False
-    txt = " ".join(
-        [
-            story.get("title", ""),
-            story.get("client", ""),
-            story.get("domain", ""),
-            story.get("where", ""),
-            " ".join(story.get("tags", []) or []),
-            " ".join(story.get("how", []) or []),
-            " ".join(story.get("what", []) or []),
-        ]
-    )
-    stoks = set(_tokenize(txt))
-    if "health" in cats and (stoks & _QUAL_HEALTH):
-        return True
-    if "product" in cats and (stoks & _QUAL_PRODUCTS):
-        return True
-    return False
+# Intent boosting and qualifier systems removed - using pure semantic search
 
 
 def rag_answer(question: str, filters: dict):
@@ -3161,111 +3145,22 @@ def rag_answer(question: str, filters: dict):
         if DEBUG:
             dbg(f"ask: pool_size={len(pool) if pool else 0}")
 
-        # Intent-first narrowing for suggestion chips: prefer stories that match the chip intent
-        if (from_suggestion or force_answer) and pool:
-            topics = _intent_topics(question or "")
-            try:
-                subset = [s for s in pool if _intent_boost_for_story(s, topics) > 0]
-            except Exception:
-                subset = []
-            if subset:
-                pool = subset
-                if DEBUG:
-                    dbg(
-                        f"ask: intent_subset size={len(pool)} topics={sorted(list(topics))}"
-                    )
+        # Use full Pinecone pool - no intent-based filtering
 
-        # 2) No results? Prefer building an answer for suggestion-driven prompts
+        # 2) No semantic results? Show appropriate message
         if not pool:
-            if from_suggestion or force_answer:
-                # Intent-first fallback: pick top stories that match the chip intent
-                topics = _intent_topics(question or "")
-                try:
-                    scored = []
-                    for s in STORIES:
-                        boost = _intent_boost_for_story(s, topics)
-                        if boost <= 0:
-                            continue
-                        local = _score_story_for_prompt(s, question)
-                        scored.append((boost, local, s))
-                    scored.sort(key=lambda t: (-t[0], -t[1]))
-                    ranked = [t[2] for t in scored][:3]
-                except Exception:
-                    ranked = []
-                if ranked:
-                    # Decision tag and fast return using fallback ranking
-                    st.session_state["__ask_dbg_decision"] = (
-                        f"chip_intent_fallback:{ranked[0].get('id')}"
-                    )
-                    st.session_state["__last_ranked_sources__"] = [
-                        s["id"] for s in ranked
-                    ]
-                    primary = ranked[0]
-                    try:
-                        narrative = _format_narrative(primary)
-                        kp_lines = [_format_key_points(s) for s in ranked]
-                        key_points = "\n\n".join(kp_lines)
-                        deep_dive = _format_deep_dive(primary)
-                        if len(ranked) > 1:
-                            more = ", ".join(
-                                [
-                                    f"{s.get('title','')} — {s.get('client','')}"
-                                    for s in ranked[1:]
-                                ]
-                            )
-                            deep_dive += f"\n\n_Also relevant:_ {more}"
-                        modes = {
-                            "narrative": narrative,
-                            "key_points": key_points,
-                            "deep_dive": deep_dive,
-                        }
-                        answer_md = narrative
-                    except Exception as e:
-                        if DEBUG:
-                            print(f"DEBUG rag_answer build error (chip fallback): {e}")
-                        summary = build_5p_summary(primary, 280)
-                        modes = {
-                            "narrative": summary,
-                            "key_points": summary,
-                            "deep_dive": summary,
-                        }
-                        answer_md = summary
-                    sources = [
-                        {
-                            "id": s["id"],
-                            "title": s["title"],
-                            "client": s.get("client", ""),
-                        }
-                        for s in ranked
-                    ]
-                    return {
-                        "answer_md": answer_md,
-                        "sources": sources,
-                        "modes": modes,
-                        "default_mode": "narrative",
-                    }
-                # Otherwise, fall back to all stories and continue to normal ranking
-                pool = [s for s in STORIES if matches_filters(s, filters)] or STORIES
-            elif st.session_state.get("__pc_suppressed__"):
+            if st.session_state.get("__pc_suppressed__"):
                 log_offdomain(question or "", "low_confidence")
-                # One‑shot banner stamp for Ask view (rendered later in Ask section)
                 st.session_state["ask_last_reason"] = "low_confidence"
                 st.session_state["ask_last_query"] = question or ""
                 st.session_state["ask_last_overlap"] = overlap
                 st.session_state["__ask_dbg_decision"] = "low_conf"
-                return {
-                    "answer_md": "",
-                    "sources": [],
-                    "modes": {},
-                    "default_mode": "narrative",
-                }
-            else:
-                return {
-                    "answer_md": "No stories match those filters yet. Clear a few filters or try a broader keyword.",
-                    "sources": [],
-                    "modes": {},
-                    "default_mode": "narrative",
-                }
+            return {
+                "answer_md": "",
+                "sources": [],
+                "modes": {},
+                "default_mode": "narrative",
+            }
 
         # 3) Vocab overlap safety: only after Pinecone path ran
         if (
@@ -3322,81 +3217,18 @@ def rag_answer(question: str, filters: dict):
 
     # … then continue with your existing ranking + modes construction …
 
-    # 4) Rank top‑N while preserving Pinecone order; apply intent boost only for suggestion chips
+    # 4) Rank top 3 using pure Pinecone order (no intent boosting or diversity filtering)
     try:
-        if from_suggestion or force_answer:
-            topics = _intent_topics(question or "")
-            quals = _qualifier_categories(question or "")
-            with_idx = list(enumerate(pool))
-            # compute boost, local score, and qualifier match
-            scored = []
-            for idx, s in with_idx:
-                try:
-                    boost = _intent_boost_for_story(s, topics)
-                    local = _score_story_for_prompt(s, question)
-                    has_qual = _story_has_qualifier(s, quals)
-                except Exception:
-                    boost, local, has_qual = 0.0, 0.0, False
-                # Base score from intent boost and local score
-                score = boost + local
-                # Qualifier-aware adjustment: if qualifiers present in prompt,
-                # promote stories matching them; demote those that don't.
-                if quals:
-                    if has_qual:
-                        score += 3.5
-                    else:
-                        score -= 3.0
-                scored.append((score, idx, has_qual, boost, local, s))
+        # Always use Pinecone semantic ranking - no special cases
+        ranked = [x for x in pool if isinstance(x, dict)][:3] or (
+            pool[:1] if pool else []
+        )
 
-            # If qualifiers exist, try to keep only items that match them; otherwise use all
-            if quals:
-                scored_with = [t for t in scored if t[2]]  # has_qual=True
-                if scored_with:
-                    scored = scored_with
-
-            # Sort by score desc, then original order for stability
-            scored.sort(key=lambda t: (-t[0], t[1]))
-
-            # Diversity nudge across client/domain
-            picked = []
-            seen_clients = set()
-            seen_domains = set()
-            for score, idx, has_qual, boost, local, s in scored:
-                c = (s.get("client") or "").strip().lower()
-                d = (s.get("domain") or "").strip().lower()
-                if picked:
-                    # prefer diversity if available and enough candidates remain
-                    if c in seen_clients or d in seen_domains:
-                        # Look ahead for a diverse alternative within a small window
-                        continue
-                picked.append(s)
-                seen_clients.add(c)
-                seen_domains.add(d)
-                if len(picked) >= 3:
-                    break
-            # If we didn't reach 3 due to diversity, fill from remaining in order
-            if len(picked) < 3:
-                for _, idx, _, _, _, s in scored:
-                    if s not in picked:
-                        picked.append(s)
-                        if len(picked) >= 3:
-                            break
-            ranked = (
-                picked[:3] if picked else [x for x in pool if isinstance(x, dict)][:3]
-            )
-
-            if DEBUG:
-                try:
-                    dbg(
-                        f"ask: topics={sorted(list(topics))} quals={sorted(list(quals))} first_ids={[s.get('id') for s in ranked]}"
-                    )
-                except Exception:
-                    pass
-        else:
-            # Keep Pinecone/semantic order; only take top 3
-            ranked = [x for x in pool if isinstance(x, dict)][:3] or (
-                pool[:1] if pool else []
-            )
+        if DEBUG and ranked:
+            try:
+                dbg(f"ask: ranked by semantic similarity, first_ids={[s.get('id') for s in ranked]}")
+            except Exception:
+                pass
     except Exception as e:
         # Defensive: if ranking fails, take first 1–3 items in the pool order
         if DEBUG:
@@ -3665,11 +3497,12 @@ def render_ask_panel(ctx: Optional[dict]):
 
             if isinstance(chosen_story, dict):
                 # Render the unified pills card: title + pills + body + clickable Sources
-                render_answer_card_clean_pills(
+                render_answer_card_compact(
                     chosen_story,
                     story_modes(chosen_story),
                     answer_mode_key="answer_mode",
                 )
+
             else:
                 # Fallback: keep legacy body if we couldn't resolve a structured story
                 modes = st.session_state.get("answer_modes", {}) or {}
@@ -3728,33 +3561,231 @@ if st.session_state["active_tab"] == "Home":
 
 # --- STORIES ---
 elif st.session_state["active_tab"] == "Explore Stories":
+    # Add page header matching wireframe - use st.title to ensure it's visible
+    st.title("Project Case Studies")
+    st.markdown('<p>Browse and explore digital transformation initiatives</p>', unsafe_allow_html=True)
+
+    # --- Explore Stories CSS ---
+    st.markdown("""
+    <style>
+    /* Filter Section - Much More Compact (matching TO BE wireframe) */
+    .explore-filters {
+        background: #2a2a2a;
+        border-radius: 12px;
+        padding: 12px 16px;
+        margin-bottom: 12px;
+        border: 1px solid #333;
+    }
+
+    /* Compact filter controls */
+    .stMultiSelect, .stSelectbox, .stTextInput {
+        margin-bottom: 0px !important;
+        margin-top: 0px !important;
+    }
+
+    /* Reduce label spacing */
+    label[data-testid="stWidgetLabel"] {
+        margin-bottom: 4px !important;
+    }
+
+    [data-testid="stVerticalBlock"] > div {
+        gap: 8px !important;
+    }
+
+    /* Reduce overall vertical spacing in Explore Stories */
+    [data-testid="stVerticalBlock"] {
+        gap: 8px !important;
+    }
+
+    /* Tighter button spacing */
+    .stButton {
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+    }
+
+    /* Compact selectbox styling */
+    div[data-testid="stSelectbox"] {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* Fixed width for SHOW dropdown */
+    div[data-testid="stSelectbox"] div[data-baseweb="select"] {
+        min-width: 75px !important;
+        max-width: 75px !important;
+    }
+
+    /* Ensure dropdown doesn't overflow */
+    div[data-testid="stSelectbox"] {
+        min-width: 75px !important;
+        max-width: 75px !important;
+    }
+
+    /* Results Summary */
+    .results-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+        padding: 0 4px;
+    }
+
+    .results-count {
+        color: var(--text-color);
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    /* Card Grid */
+    .story-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+        gap: 20px;
+        margin-bottom: 24px;
+    }
+
+    .story-card {
+        background: var(--secondary-background-color);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 20px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .story-card:hover {
+        border-color: #4a90e2;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--text-color);
+        line-height: 1.4;
+        margin-bottom: 8px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .card-client {
+        color: #4a90e2;
+        font-weight: 500;
+        font-size: 14px;
+        margin-bottom: 12px;
+    }
+
+    .card-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 12px;
+    }
+
+    .card-role {
+        background: var(--background-color);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 11px;
+        color: var(--text-color);
+        text-transform: uppercase;
+        font-weight: 500;
+    }
+
+    .card-domain {
+        color: #999999;
+        font-size: 12px;
+        text-align: right;
+        max-width: 150px;
+        line-height: 1.3;
+    }
+
+    .card-summary {
+        color: #c0c0c0;
+        font-size: 13px;
+        line-height: 1.5;
+        margin-top: 8px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    /* Card styling for Cards view - with !important to override */
+    .fixed-height-card {
+        background: var(--secondary-background-color) !important;
+        padding: 20px 24px !important;
+        border-radius: 12px !important;
+        border: 1px solid var(--border-color) !important;
+        transition: all 0.3s ease !important;
+        height: 320px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2) !important;
+    }
+
+    .fixed-height-card:hover {
+        transform: translateY(-4px) !important;
+        border-color: var(--border-color) !important;
+        box-shadow: 0 8px 25px rgba(74,144,226,.15) !important;
+    }
+
+    .card-desc {
+        color: #b0b0b0 !important;
+        margin-bottom: 0 !important;
+        line-height: 1.5 !important;
+        font-size: 14px !important;
+        overflow: hidden !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 5 !important;
+        -webkit-box-orient: vertical !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
     # --- normalize legacy tab names ---
     legacy = {"Stories": "Explore Stories"}
     cur = st.session_state.get("active_tab", "Home")
     if cur in legacy:
         st.session_state["active_tab"] = legacy[cur]
     st.markdown("<a id='stories_top'></a>", unsafe_allow_html=True)
-    st.markdown('<div class="sticky-filters">', unsafe_allow_html=True)
     F = st.session_state["filters"]
 
     with safe_container(border=True):
-        c1, c2, c3 = st.columns([1, 1, 1])
+        # More compact layout - Row 1: 4 columns
+        c1, c2, c3, c4 = st.columns([1.2, 1, 1, 1])
 
-        # --- Col 1: Audience + Client
+        # --- Col 1: Search first (most used)
         with c1:
+            F["q"] = st.text_input(
+                "Search keywords",
+                value=F["q"],
+                placeholder="Search by title, client, or keywords...",
+                key="facet_q",
+            )
+
+        # --- Col 2: Audience
+        with c2:
             F["personas"] = st.multiselect(
                 "Audience",
                 personas_all,
                 default=F["personas"],
                 key="facet_personas",
-                help="Who would find this story most relevant?",
             )
+
+        # --- Col 3: Client
+        with c3:
             F["clients"] = st.multiselect(
                 "Client", clients, default=F["clients"], key="facet_clients"
             )
 
-        # --- Col 2: Friendlier Domain picker (Category -> Sub-domain)
-        with c2:
+        # --- Col 4: Domain category selector
+        with c4:
             domain_parts = [
                 (d.split(" / ")[0], (d.split(" / ")[1] if " / " in d else ""), d)
                 for d in domains
@@ -3765,6 +3796,11 @@ elif st.session_state["active_tab"] == "Explore Stories":
                 "Domain category", ["All"] + groups, key="facet_domain_group"
             )
 
+        # Row 2: Domain details + additional filters
+        c1, c2 = st.columns([1.5, 2.5])
+
+        with c1:
+            # Domain multiselect based on category
             def _fmt_sub(full_value: str) -> str:
                 return (
                     full_value.split(" / ")[-1] if " / " in full_value else full_value
@@ -3777,7 +3813,6 @@ elif st.session_state["active_tab"] == "Explore Stories":
                     default=F["domains"],
                     key="facet_domains_all",
                     format_func=_fmt_sub,
-                    help="Start typing to filter. Stored value remains the full 'Category / Sub' path.",
                 )
             else:
                 subdomain_options = [
@@ -3785,36 +3820,33 @@ elif st.session_state["active_tab"] == "Explore Stories":
                 ]
                 prev = [d for d in F.get("domains", []) if d in subdomain_options]
                 F["domains"] = st.multiselect(
-                    "Sub‑domain",
+                    "Domain",
                     options=sorted(subdomain_options),
                     default=prev,
                     key="facet_subdomains",
                     format_func=_fmt_sub,
                 )
 
-        # --- Col 3: Role, Tags, Metric flag
-        with c3:
-            F["roles"] = st.multiselect(
-                "Role", roles, default=F["roles"], key="facet_roles"
-            )
-            F["tags"] = st.multiselect(
-                "Tags", tags, default=F["tags"], key="facet_tags"
-            )
-            F["has_metric"] = st.toggle(
-                "Has metric in outcomes", value=F["has_metric"], key="facet_has_metric"
-            )
+        with c2:
+            # Optional filters in a compact row
+            subcols = st.columns([1, 1, 1.2])
+            with subcols[0]:
+                F["roles"] = st.multiselect(
+                    "Role", roles, default=F["roles"], key="facet_roles"
+                )
+            with subcols[1]:
+                F["tags"] = st.multiselect(
+                    "Tags", tags, default=F["tags"], key="facet_tags"
+                )
+            with subcols[2]:
+                F["has_metric"] = st.toggle(
+                    "Has metric in outcomes", value=F["has_metric"], key="facet_has_metric"
+                )
 
-        # Keyword box
-        F["q"] = st.text_input(
-            "Search keywords",
-            value=F["q"],
-            placeholder="title, client, outcomes…",
-            key="facet_q",
-        )
-
+        # Reset button
         cols = st.columns([1, 4])
         with cols[0]:
-            if st.button("Reset filters", key="btn_reset_filters"):
+            def reset_filters():
                 st.session_state["filters"] = {
                     "personas": [],
                     "clients": [],
@@ -3827,7 +3859,8 @@ elif st.session_state["active_tab"] == "Explore Stories":
                 # reset domain group selector & paging so UI doesn't look 'stuck'
                 st.session_state["facet_domain_group"] = "All"
                 st.session_state["page_offset"] = 0
-                st.rerun()
+
+            st.button("Reset filters", key="btn_reset_filters", on_click=reset_filters)
 
     st.markdown("</div>", unsafe_allow_html=True)
 
@@ -3895,10 +3928,6 @@ elif st.session_state["active_tab"] == "Explore Stories":
             chips.append((label, v, (key, v)))
 
     st.markdown('<div class="active-chip-row">', unsafe_allow_html=True)
-    st.markdown(
-        f'<span class="results-count">{len(view)} results</span>',
-        unsafe_allow_html=True,
-    )
 
     to_remove = []
     clear_all = False
@@ -3947,10 +3976,79 @@ elif st.session_state["active_tab"] == "Explore Stories":
         st.session_state["page_offset"] = 0
         st.rerun()
 
-    # --- Sort + layout toggle (stay INSIDE the Stories block) ---
-    # --- Slim toolbar (results • metric-first • layout) ---
-    st.caption(f"**{len(view)} results**")
-    layout_mode = "List (master‑detail)"  # force list view for now
+    # --- Results header with view toggle (matching wireframe) ---
+    total_results = len(view)
+
+    # Get current view mode from session state or default to Table
+    if "explore_view_mode" not in st.session_state:
+        st.session_state["explore_view_mode"] = "Table"
+
+    # Initialize page offset if not set
+    if "page_offset" not in st.session_state:
+        st.session_state["page_offset"] = 0
+
+    # Track previous view mode to detect changes
+    prev_view_mode = st.session_state.get("_prev_explore_view_mode", "Table")
+
+    # Calculate pagination values first
+    page_size_option = st.session_state.get("page_size_select", 10)
+    view_mode = st.session_state.get("explore_view_mode", "Table")
+
+    # Reset page offset if view mode changed
+    if view_mode != prev_view_mode:
+        st.session_state["page_offset"] = 0
+        st.session_state["_prev_explore_view_mode"] = view_mode
+    layout_mode = "List (master‑detail)" if view_mode == "Table" else "Cards"
+    page_size = page_size_option if view_mode == "Table" else 9
+    offset = int(st.session_state.get("page_offset", 0))
+    start = offset + 1
+    end = min(offset + page_size, total_results)
+
+    # Results summary row - all on one line matching wireframe
+    col1, col2, col3, spacer, col4 = st.columns([2.5, 0.15, 0.25, 0.1, 1.2])
+
+    with col1:
+        st.markdown(f"""
+        <div style="padding-top: 6px; color: var(--text-color); font-size: 14px;">
+            <strong style="font-size: 16px;">{total_results}</strong> projects found • Showing <strong>{start}-{end}</strong>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col2:
+        st.markdown('<div style="padding-top: 6px; font-size: 14px; font-weight: 500; white-space: nowrap;">SHOW:</div>', unsafe_allow_html=True)
+
+    with col3:
+        page_size_option = st.selectbox(
+            "page_size",
+            options=[10, 20, 50],
+            index=0,
+            key="page_size_select",
+            label_visibility="collapsed"
+        )
+
+    with col4:
+        view_mode = st.segmented_control(
+            "View",
+            options=["Table", "Cards"],
+            key="explore_view_mode",
+            label_visibility="collapsed"
+        ) if hasattr(st, 'segmented_control') else st.radio(
+            "View",
+            ["Table", "Cards"],
+            horizontal=True,
+            key="explore_view_mode",
+            label_visibility="collapsed"
+        )
+
+    # Recalculate with actual values
+    layout_mode = "List (master‑detail)" if view_mode == "Table" else "Cards"
+    page_size = page_size_option if view_mode == "Table" else 9
+    offset = int(st.session_state.get("page_offset", 0))
+    start = offset + 1
+    end = min(offset + page_size, total_results)
+
+    if DEBUG:
+        print(f"DEBUG Explore: view_mode={view_mode}, layout_mode={layout_mode}")
 
     # ---- Build grid model (keep ID internally, hide in UI) ----
     def _row(s: dict) -> dict:
@@ -3963,112 +4061,251 @@ elif st.session_state["active_tab"] == "Explore Stories":
             "Domain": dom,
         }
 
-    rows = [_row(s) for s in view]
+    # Paginate the view for table
+    view_paginated = view[offset:offset + page_size]
+    rows = [_row(s) for s in view_paginated]
     df = pd.DataFrame(rows)
     show_cols = [c for c in ["Title", "Client", "Role", "Domain"] if c in df.columns]
     show_df = df[show_cols] if show_cols else df
 
     if layout_mode.startswith("List"):
-        # -------- Master–detail (wide grid, compact detail) --------
-        left, right = st.columns(
-            [26, 12], gap="large"
-        )  # wider grid; slightly narrower detail
+        # -------- Table view with AgGrid (clickable rows) --------
+        if not _HAS_AGGRID:
+            st.warning("Row-click selection requires **st-aggrid**. Install with: `pip install streamlit-aggrid`")
+            st.dataframe(show_df, hide_index=True, use_container_width=True)
+        else:
+            df_view = df[["ID"] + show_cols] if show_cols else df
 
-        with left:
-            if not _HAS_AGGRID:
-                st.warning(
-                    "Row‑click selection requires **st‑aggrid**. Install with: `pip install streamlit-aggrid`"
-                )
-                st.dataframe(
-                    show_df,
-                    hide_index=True,
-                    use_container_width=True,
-                    height=min(820, 36 * (len(show_df) + 2)),
-                    column_config={
-                        "Title": st.column_config.TextColumn(width="large"),
-                        "Client": st.column_config.TextColumn(width="medium"),
-                        "Role": st.column_config.TextColumn(width="medium"),
-                        "Domain": st.column_config.TextColumn(width="large"),
-                    },
-                )
-                # Ensure right pane has something
-                id_list = df["ID"].tolist() if "ID" in df.columns else []
-                cur = st.session_state.get("active_story")
-                if id_list and (not cur or cur not in id_list):
-                    st.session_state["active_story"] = id_list[0]
+            gob = GridOptionsBuilder.from_dataframe(df_view)
+            gob.configure_default_column(resizable=True, sortable=True, filter=True)
+
+            # Configure column widths to match wireframe exactly (45%, 20%, 15%, 20%)
+            # Using flex for proportional/percentage-based widths
+            gob.configure_column("ID", hide=True)
+            gob.configure_column("Title", flex=9)  # 45% (9/20)
+            gob.configure_column("Client", flex=4)  # 20% (4/20)
+            gob.configure_column("Role", flex=3)  # 15% (3/20)
+            gob.configure_column("Domain", flex=4)  # 20% (4/20)
+
+            gob.configure_selection(selection_mode="single", use_checkbox=False)
+
+            # Disable AgGrid's built-in pagination
+            gob.configure_pagination(enabled=False)
+
+            opts = gob.build()
+            opts["suppressRowClickSelection"] = False
+            opts["rowSelection"] = "single"
+            opts["rowHeight"] = 70  # Set explicit row height
+
+            grid = AgGrid(
+                df_view,
+                gridOptions=opts,
+                update_mode=GridUpdateMode.SELECTION_CHANGED,
+                allow_unsafe_jscode=True,
+                theme="streamlit",
+                fit_columns_on_grid_load=True,
+                height=750,  # Fixed height enables vertical scrolling
+            )
+
+            # Handle selection
+            if isinstance(grid, dict):
+                sr = grid.get("selected_rows") or grid.get("selectedRows") or []
             else:
-                df_view = df[["ID"] + show_cols] if show_cols else df
+                sr = getattr(grid, "selected_rows", None)
 
-                gob = GridOptionsBuilder.from_dataframe(df_view)
-                gob.configure_default_column(
-                    resizable=True, sortable=True, filter=True, flex=1, min_width=160
-                )
-                gob.configure_column("ID", hide=True)
-                gob.configure_selection(selection_mode="single", use_checkbox=False)
-                opts = gob.build()
-                opts["suppressRowClickSelection"] = False
-                opts["rowSelection"] = "single"
+            if isinstance(sr, pd.DataFrame):
+                sel_rows = sr.to_dict("records")
+            elif isinstance(sr, list):
+                sel_rows = sr
+            elif isinstance(sr, dict):
+                sel_rows = [sr]
+            else:
+                sel_rows = []
 
-                grid = AgGrid(
-                    df_view,
-                    gridOptions=opts,
-                    update_mode=GridUpdateMode.SELECTION_CHANGED,
-                    allow_unsafe_jscode=True,
-                    theme="streamlit",
-                    height=min(860, 36 * (len(df_view) + 2)),
-                    fit_columns_on_grid_load=True,
-                )
+            if sel_rows:
+                st.session_state["active_story"] = sel_rows[0].get("ID")
+            else:
+                cur = st.session_state.get("active_story")
+                id_series = df_view["ID"].tolist() if "ID" in df_view.columns else []
+                if id_series and (not cur or cur not in id_series):
+                    st.session_state["active_story"] = id_series[0]
 
-                # Normalize selection across versions
-                if isinstance(grid, dict):
-                    sr = grid.get("selected_rows") or grid.get("selectedRows") or []
+        # Numbered pagination controls for table (matching wireframe exactly)
+        total_pages = (total_results + page_size - 1) // page_size
+        current_page = (offset // page_size) + 1
+
+        if total_pages > 1:
+            st.markdown("""
+            <style>
+            .pagination-info {
+                color: var(--text-color);
+                opacity: 0.7;
+                font-size: 14px;
+            }
+            /* Style pagination buttons to match segmented control wireframe */
+            div[data-testid="column"] .stButton > button {
+                border-radius: 8px !important;
+                border: 1.5px solid #e0e0e0 !important;
+                background: transparent !important;
+                color: var(--text-color) !important;
+                padding: 6px 14px !important;
+                font-size: 13px !important;
+                font-weight: 500 !important;
+                min-height: 36px !important;
+                transition: all 0.2s ease !important;
+            }
+            div[data-testid="column"] .stButton > button:hover {
+                border-color: #ff4b4b !important;
+                background: rgba(255, 75, 75, 0.08) !important;
+                color: var(--text-color) !important;
+            }
+            /* Active page button style */
+            .pagination-active {
+                border-radius: 8px;
+                border: 1.5px solid #ff4b4b;
+                background: rgba(255, 75, 75, 0.1);
+                color: #ff4b4b;
+                padding: 6px 14px;
+                font-size: 13px;
+                font-weight: 600;
+                text-align: center;
+                min-height: 36px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            /* Disabled button style */
+            .pagination-disabled {
+                text-align: center;
+                color: #888;
+                opacity: 0.4;
+                padding: 6px 14px;
+                font-size: 13px;
+            }
+            </style>
+            """, unsafe_allow_html=True)
+
+            # Calculate which page numbers to show (max 5 numbers + ellipsis)
+            if total_pages <= 7:
+                page_numbers = list(range(1, total_pages + 1))
+            else:
+                if current_page <= 4:
+                    page_numbers = list(range(1, 6)) + ["...", total_pages]
+                elif current_page >= total_pages - 3:
+                    page_numbers = [1, "..."] + list(range(total_pages - 4, total_pages + 1))
                 else:
-                    sr = getattr(grid, "selected_rows", None)
+                    page_numbers = [1, "...", current_page - 1, current_page, current_page + 1, "...", total_pages]
 
-                if isinstance(sr, pd.DataFrame):
-                    sel_rows = sr.to_dict("records")
-                elif isinstance(sr, list):
-                    sel_rows = sr
-                elif isinstance(sr, dict):
-                    sel_rows = [sr]
+            # Build pagination layout: First | Previous | Numbers | Next | Last | Page info
+            num_buttons = len(page_numbers) + 4  # +4 for First, Previous, Next, Last
+            cols = st.columns([0.6, 0.6] + [0.35] * len(page_numbers) + [0.6, 0.6, 1.2])
+
+            col_idx = 0
+
+            # First button
+            with cols[col_idx]:
+                disabled_first = current_page <= 1
+                if not disabled_first:
+                    if st.button("First", key="btn_first_table", use_container_width=True):
+                        st.session_state["page_offset"] = 0
+                        st.rerun()
                 else:
-                    sel_rows = []
+                    st.markdown("<div class='pagination-disabled'>First</div>", unsafe_allow_html=True)
+            col_idx += 1
 
-                if sel_rows:
-                    st.session_state["active_story"] = sel_rows[0].get("ID")
+            # Previous button
+            with cols[col_idx]:
+                disabled_prev = current_page <= 1
+                if not disabled_prev:
+                    if st.button("Prev", key="btn_prev_table", use_container_width=True):
+                        st.session_state["page_offset"] = offset - page_size
+                        st.rerun()
                 else:
-                    cur = st.session_state.get("active_story")
-                    id_series = (
-                        df_view["ID"].tolist() if "ID" in df_view.columns else []
-                    )
-                    if id_series and (not cur or cur not in id_series):
-                        st.session_state["active_story"] = id_series[0]
+                    st.markdown("<div class='pagination-disabled'>Prev</div>", unsafe_allow_html=True)
+            col_idx += 1
 
-        with right:
+            # Page number buttons
+            for page_num in page_numbers:
+                with cols[col_idx]:
+                    if page_num == "...":
+                        st.markdown("<div style='text-align: center; padding: 6px; color: #666;'>...</div>", unsafe_allow_html=True)
+                    elif page_num == current_page:
+                        st.markdown(f"<div class='pagination-active'>{page_num}</div>", unsafe_allow_html=True)
+                    else:
+                        if st.button(str(page_num), key=f"btn_page_table_{page_num}", use_container_width=True):
+                            st.session_state["page_offset"] = (page_num - 1) * page_size
+                            st.rerun()
+                col_idx += 1
+
+            # Next button
+            with cols[col_idx]:
+                disabled_next = current_page >= total_pages
+                if not disabled_next:
+                    if st.button("Next", key="btn_next_table", use_container_width=True):
+                        st.session_state["page_offset"] = offset + page_size
+                        st.rerun()
+                else:
+                    st.markdown("<div class='pagination-disabled'>Next</div>", unsafe_allow_html=True)
+            col_idx += 1
+
+            # Last button
+            with cols[col_idx]:
+                disabled_last = current_page >= total_pages
+                if not disabled_last:
+                    if st.button("Last", key="btn_last_table", use_container_width=True):
+                        st.session_state["page_offset"] = (total_pages - 1) * page_size
+                        st.rerun()
+                else:
+                    st.markdown("<div class='pagination-disabled'>Last</div>", unsafe_allow_html=True)
+            col_idx += 1
+
+            # Page info (right side)
+            with cols[col_idx]:
+                st.markdown(f"<div class='pagination-info' style='text-align: right; padding: 6px;'>Page {current_page} of {total_pages}</div>", unsafe_allow_html=True)
+
+        # Detail panel at bottom (compact version matching wireframe)
+        st.markdown("<hr style='margin: 16px 0 12px 0; border: none; border-top: 1px solid var(--border-color);'>", unsafe_allow_html=True)
+        detail = get_context_story()
+        if detail:
             with safe_container(border=True):
-                st.markdown(
-                    '<div class="sticky-detail detail-pane">', unsafe_allow_html=True
-                )
-                detail = get_context_story()
-                if detail:
-                    # Keep the details and the CTA inside the same container so it doesn't float
-                    story_card(detail, idx=0, show_ask_cta=False)
-                    if st.button(
-                        "Ask MattGPT about this",
-                        key=f"ask_from_detail_{detail.get('id','x')}",
-                        use_container_width=True,
-                        help="Switch to Ask with this story as context",
-                    ):
-                        on_ask_this_story(detail)  # on_ask_this_story sets active tab
-                        st.stop()
-                else:
-                    st.info("Select a story on the left to view details.")
-                st.markdown("</div>", unsafe_allow_html=True)
+                # Title
+                st.markdown(f"<h3 style='margin-bottom: 4px; color: var(--text-color);'>{detail.get('title', 'Untitled')}</h3>", unsafe_allow_html=True)
+
+                # Metadata line
+                client = detail.get('client', 'Unknown')
+                role = detail.get('role', 'Unknown')
+                domain = detail.get('domain', 'Unknown')
+                st.markdown(f"<div style='color: var(--text-color); opacity: 0.7; font-size: 14px; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);'><strong>Client:</strong> {client} &nbsp;&nbsp; <strong>Role:</strong> {role} &nbsp;&nbsp; <strong>Domain:</strong> {domain}</div>", unsafe_allow_html=True)
+
+                # Summary paragraph
+                summary = detail.get('5PSummary', '') or build_5p_summary(detail, 999)
+                if summary:
+                    st.markdown(f"<p style='color: var(--text-color); line-height: 1.6; margin-bottom: 20px;'>{summary}</p>", unsafe_allow_html=True)
+
+                # Key Achievements
+                outcomes = detail.get('what', []) or detail.get('Result', [])
+                if outcomes and isinstance(outcomes, list) and len(outcomes) > 0:
+                    st.markdown("<div style='margin-bottom: 16px;'><strong style='color: var(--text-color);'>Key Achievements:</strong></div>", unsafe_allow_html=True)
+                    for outcome in outcomes[:4]:  # Limit to 4 achievements
+                        if outcome:
+                            st.markdown(f"<div style='margin-left: 20px; margin-bottom: 8px; color: var(--text-color);'>• {outcome}</div>", unsafe_allow_html=True)
+
+                # Ask button
+                if st.button(
+                    "Ask MattGPT about this",
+                    key=f"ask_from_detail_{detail.get('id','x')}",
+                    type="primary",
+                    use_container_width=False,
+                ):
+                    on_ask_this_story(detail)
+                    st.stop()
+        else:
+            st.info("Click a row above to view details.")
 
     else:
-        # -------- Cards mode (unchanged except caption trimmed) --------
+        # -------- Cards Grid View --------
         total = len(view)
-        page_size = int(st.session_state.get("page_size", 25))
+        # Cards view respects the page_size dropdown (but shows in grid format)
         offset = int(st.session_state.get("page_offset", 0))
         if offset < 0:
             offset = 0
@@ -4079,18 +4316,7 @@ elif st.session_state["active_tab"] == "Explore Stories":
         view_window = view[offset : offset + page_size]
 
         if not view_window:
-            if F["q"] and st.session_state["__pc_suppressed__"]:
-                st.warning(
-                    "Tried semantic search but didn’t find anything confidently relevant. Try rephrasing or pick a filter."
-                )
-                for i, tip in enumerate(
-                    ["Payments modernization", "Generative AI", "Governance", "OKRs"]
-                ):
-                    if st.button(tip, key=f"suggest_{i}"):
-                        F["q"] = tip
-                        st.rerun()
-            else:
-                st.info("No stories match your filters yet.")
+            st.info("No stories match your filters yet.")
             if st.button("Clear filters", key="clear_filters_empty"):
                 st.session_state["filters"] = {
                     "personas": [],
@@ -4107,19 +4333,244 @@ elif st.session_state["active_tab"] == "Explore Stories":
         else:
             start = offset + 1
             end = min(offset + page_size, total)
-            st.caption(f"Showing {start}–{end} of {total}")
 
-            for i, s in enumerate(view_window):
-                story_card(s, offset + i, show_ask_cta=False)
+            # Inject card styles right before rendering
+            st.markdown("""
+            <style>
+            .fixed-height-card {
+                background: var(--secondary-background-color) !important;
+                padding: 20px 24px !important;
+                border-radius: 12px !important;
+                border: 1px solid var(--border-color) !important;
+                transition: all 0.3s ease !important;
+                height: 320px !important;
+                display: flex !important;
+                flex-direction: column !important;
+                box-shadow: 0 4px 12px rgba(0,0,0,.25) !important;
+            }
+            .fixed-height-card:hover {
+                transform: translateY(-4px) !important;
+                border-color: var(--border-color) !important;
+                box-shadow: 0 8px 25px rgba(74,144,226,.15) !important;
+            }
+            .card-desc {
+                color: #b0b0b0 !important;
+                margin-bottom: 0 !important;
+                line-height: 1.5 !important;
+                font-size: 14px !important;
+                overflow: hidden !important;
+                display: -webkit-box !important;
+                -webkit-line-clamp: 5 !important;
+                -webkit-box-orient: vertical !important;
+            }
+            /* Pagination styles */
+            .pagination-active {
+                border-radius: 8px;
+                border: 1.5px solid #ff4b4b;
+                background: rgba(255, 75, 75, 0.1);
+                color: #ff4b4b;
+                padding: 6px 14px;
+                font-size: 13px;
+                font-weight: 600;
+                text-align: center;
+                min-height: 36px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .pagination-disabled {
+                text-align: center;
+                color: #888;
+                opacity: 0.4;
+                padding: 6px 14px;
+                font-size: 13px;
+            }
+            .pagination-info {
+                color: var(--text-color);
+                opacity: 0.7;
+                font-size: 14px;
+            }
+            </style>
+            """, unsafe_allow_html=True)
 
-            mc1, mc2 = st.columns([1, 1])
-            with mc1:
-                if offset + page_size < total:
-                    if st.button("Show more stories", key="btn_show_more"):
-                        st.session_state["page_offset"] = offset + page_size
-                        st.rerun()
-            with mc2:
-                st.markdown("[Back to top](#stories_top)")
+            # Dynamic grid based on page size (3 columns per row)
+            cards_per_row = 3
+            num_rows = (len(view_window) + cards_per_row - 1) // cards_per_row
+
+            for row in range(num_rows):
+                cols = st.columns(cards_per_row)
+
+                for col_idx in range(cards_per_row):
+                    i = row * cards_per_row + col_idx
+                    if i >= len(view_window):
+                        continue
+
+                    s = view_window[i]
+                    with cols[col_idx]:
+                        title = s.get('title', 'Untitled')
+                        client = s.get('client', 'Unknown')
+                        role = s.get('role', 'Unknown')
+                        domain = (s.get("domain") or "").split(" / ")[-1] if s.get("domain") else 'Unknown'
+                        summary = s.get("5PSummary", "")
+
+                        st.markdown(f"""
+                        <div class="fixed-height-card" style="margin-bottom: 20px;">
+                            <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 12px; color: var(--text-color);">{title}</h3>
+                            <div style="color: #5b9dd9; font-size: 15px; font-weight: 600; margin-bottom: 10px;">{client}</div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                <span style="font-size: 10px; color: #718096; text-transform: uppercase; font-weight: 700; letter-spacing: 0.8px;">{role}</span>
+                                <span style="background: rgba(91, 157, 217, 0.12); color: #5b9dd9; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 600;">{domain}</span>
+                            </div>
+                            <p class="card-desc">{summary}</p>
+                        </div>
+                        """, unsafe_allow_html=True)
+
+                        story_id = str(s.get('id', i))
+                        if st.button("View Details", key=f"card_{story_id}", use_container_width=True):
+                            st.session_state["active_story"] = story_id
+                            st.rerun()
+
+            # Numbered pagination controls for cards (matching Table pagination)
+            total_pages = (total + page_size - 1) // page_size
+            current_page = (offset // page_size) + 1
+
+            if total_pages > 1:
+                st.markdown("""
+                <style>
+                /* Style pagination buttons to match segmented control wireframe */
+                div[data-testid="column"] .stButton > button {
+                    border-radius: 8px !important;
+                    border: 1.5px solid #e0e0e0 !important;
+                    background: transparent !important;
+                    color: var(--text-color) !important;
+                    padding: 6px 14px !important;
+                    font-size: 13px !important;
+                    font-weight: 500 !important;
+                    min-height: 36px !important;
+                    transition: all 0.2s ease !important;
+                }
+                div[data-testid="column"] .stButton > button:hover {
+                    border-color: #ff4b4b !important;
+                    background: rgba(255, 75, 75, 0.08) !important;
+                    color: var(--text-color) !important;
+                }
+                </style>
+                """, unsafe_allow_html=True)
+
+                # Calculate which page numbers to show (max 5 numbers + ellipsis)
+                if total_pages <= 7:
+                    page_numbers = list(range(1, total_pages + 1))
+                else:
+                    if current_page <= 4:
+                        page_numbers = list(range(1, 6)) + ["...", total_pages]
+                    elif current_page >= total_pages - 3:
+                        page_numbers = [1, "..."] + list(range(total_pages - 4, total_pages + 1))
+                    else:
+                        page_numbers = [1, "...", current_page - 1, current_page, current_page + 1, "...", total_pages]
+
+                # Build pagination layout: First | Previous | Numbers | Next | Last | Page info
+                cols = st.columns([0.6, 0.6] + [0.35] * len(page_numbers) + [0.6, 0.6, 1.2])
+
+                col_idx = 0
+
+                # First button
+                with cols[col_idx]:
+                    disabled_first = current_page <= 1
+                    if not disabled_first:
+                        if st.button("First", key="btn_first_cards", use_container_width=True):
+                            st.session_state["page_offset"] = 0
+                            st.rerun()
+                    else:
+                        st.markdown("<div class='pagination-disabled'>First</div>", unsafe_allow_html=True)
+                col_idx += 1
+
+                # Previous button
+                with cols[col_idx]:
+                    disabled_prev = current_page <= 1
+                    if not disabled_prev:
+                        if st.button("Prev", key="btn_prev_cards", use_container_width=True):
+                            st.session_state["page_offset"] = offset - page_size
+                            st.rerun()
+                    else:
+                        st.markdown("<div class='pagination-disabled'>Prev</div>", unsafe_allow_html=True)
+                col_idx += 1
+
+                # Page number buttons
+                for page_num in page_numbers:
+                    with cols[col_idx]:
+                        if page_num == "...":
+                            st.markdown("<div style='text-align: center; padding: 6px; color: #666;'>...</div>", unsafe_allow_html=True)
+                        elif page_num == current_page:
+                            st.markdown(f"<div class='pagination-active'>{page_num}</div>", unsafe_allow_html=True)
+                        else:
+                            if st.button(str(page_num), key=f"btn_page_cards_{page_num}", use_container_width=True):
+                                st.session_state["page_offset"] = (page_num - 1) * page_size
+                                st.rerun()
+                    col_idx += 1
+
+                # Next button
+                with cols[col_idx]:
+                    disabled_next = current_page >= total_pages
+                    if not disabled_next:
+                        if st.button("Next", key="btn_next_cards", use_container_width=True):
+                            st.session_state["page_offset"] = offset + page_size
+                            st.rerun()
+                    else:
+                        st.markdown("<div class='pagination-disabled'>Next</div>", unsafe_allow_html=True)
+                col_idx += 1
+
+                # Last button
+                with cols[col_idx]:
+                    disabled_last = current_page >= total_pages
+                    if not disabled_last:
+                        if st.button("Last", key="btn_last_cards", use_container_width=True):
+                            st.session_state["page_offset"] = (total_pages - 1) * page_size
+                            st.rerun()
+                    else:
+                        st.markdown("<div class='pagination-disabled'>Last</div>", unsafe_allow_html=True)
+                col_idx += 1
+
+                # Page info (right side)
+                with cols[col_idx]:
+                    st.markdown(f"<div class='pagination-info' style='text-align: right; padding: 6px;'>Page {current_page} of {total_pages}</div>", unsafe_allow_html=True)
+
+            # Detail panel at bottom (compact version matching wireframe)
+            st.markdown("<hr style='margin: 16px 0 12px 0; border: none; border-top: 1px solid var(--border-color);'>", unsafe_allow_html=True)
+            detail = get_context_story()
+            if detail:
+                with safe_container(border=True):
+                    # Title
+                    st.markdown(f"<h3 style='margin-bottom: 4px; color: var(--text-color);'>{detail.get('title', 'Untitled')}</h3>", unsafe_allow_html=True)
+
+                    # Metadata line
+                    client = detail.get('client', 'Unknown')
+                    role = detail.get('role', 'Unknown')
+                    domain = detail.get('domain', 'Unknown')
+                    st.markdown(f"<div style='color: var(--text-color); opacity: 0.7; font-size: 14px; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);'><strong>Client:</strong> {client} &nbsp;&nbsp; <strong>Role:</strong> {role} &nbsp;&nbsp; <strong>Domain:</strong> {domain}</div>", unsafe_allow_html=True)
+
+                    # Summary paragraph
+                    summary = detail.get('5PSummary', '') or build_5p_summary(detail, 999)
+                    if summary:
+                        st.markdown(f"<p style='color: var(--text-color); line-height: 1.6; margin-bottom: 20px;'>{summary}</p>", unsafe_allow_html=True)
+
+                    # Key Achievements
+                    outcomes = detail.get('what', []) or detail.get('Result', [])
+                    if outcomes and isinstance(outcomes, list) and len(outcomes) > 0:
+                        st.markdown("<div style='margin-bottom: 16px;'><strong style='color: var(--text-color);'>Key Achievements:</strong></div>", unsafe_allow_html=True)
+                        for outcome in outcomes[:4]:  # Limit to 4 achievements
+                            if outcome:
+                                st.markdown(f"<div style='margin-left: 20px; margin-bottom: 8px; color: var(--text-color);'>• {outcome}</div>", unsafe_allow_html=True)
+
+                    # Ask button
+                    if st.button(
+                        "Ask MattGPT about this",
+                        key="ask_mattgpt_detail_cards",
+                        type="primary",
+                        use_container_width=False,
+                    ):
+                        on_ask_this_story(detail)
+            else:
+                st.info("Click a card above to view details.")
 
 # --- ASK MATTGPT ---
 elif st.session_state["active_tab"] == "Ask MattGPT":
@@ -4129,24 +4580,24 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
         st.subheader("Ask MattGPT")
     with col2:
         if st.button("🔧 How it works", key="how_works_top"):
-            # Add a subtle overlay effect
-            st.markdown(
-                """
-            <style>
-            /* Subtle background dim effect */
-            .stApp > div:first-child {
-                background-color: rgba(0, 0, 0, 0.1);
-            }
-            </style>
-            """,
-                unsafe_allow_html=True,
-            )
             st.session_state["show_how_modal"] = not st.session_state.get(
                 "show_how_modal", False
             )
             st.rerun()
+    
+    # Intelligence indicator strip
+    st.markdown("""
+    <div style='display: flex; gap: 12px; align-items: center; padding: 8px 12px; background: rgba(56, 139, 253, 0.1); border: 1px solid rgba(56, 139, 253, 0.2); border-radius: 6px; font-size: 12px; color: #58a6ff; margin-bottom: 16px;'>
+        <span>🧠 Semantic search active</span>
+        <span>•</span>
+        <span>Pinecone index ready</span>
+        <span>•</span>
+        <span>115 stories indexed</span>
+    </div>
+    """, unsafe_allow_html=True)
 
     # Show the modal if toggled
+        # Show the modal if toggled
     if st.session_state.get("show_how_modal", False):
         # Create a proper modal container without using expander
         st.markdown("---")
@@ -4189,8 +4640,8 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
                 - Pinecone vector database with metadata filtering
                 
                 **🔄 Hybrid Retrieval**
-                - 60% semantic similarity weight
-                - 40% keyword matching weight
+                - 80% semantic similarity weight
+                - 20% keyword matching weight
                 - Intent recognition for query understanding
                 """
                 )
@@ -4264,30 +4715,14 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
 
             with col1:
                 st.markdown("""
-                **Offline Pipeline (Indexing)**
-                - Stories JSONL → Embedding Model (all-MiniLM-L6-v2)
-                - 384-dimensional vectors → Pinecone (serverless)
-                - Local keyword index → In-memory tokenized store
-                - 115 stories with STAR/5P structure
-                """)
-                
-                st.markdown("""
-                **Dual Retrieval**
-                - **Semantic**: Pinecone cosine similarity (60% weight)
-                - **Keyword**: BM25-style token overlap (40% weight)
+                **Search & Retrieval**
+                - **Semantic**: Pinecone cosine similarity (80% weight)
+                - **Keyword**: BM25-style token overlap (20% weight)
                 - Minimum similarity threshold: 0.15
                 - Top-k pool: 30 candidates before ranking
                 """)
 
             with col2:
-                st.markdown("""
-                **Query Processing**
-                - Embed user query with same model (MiniLM)
-                - Tokenize for keyword matching (3+ char tokens)
-                - Apply metadata filters (client, domain)
-                - Combine scores: `(0.6 × semantic) + (0.4 × keyword)`
-                """)
-                
                 st.markdown("""
                 **Response Synthesis**
                 - Rank top 3 stories by blended score
@@ -4307,64 +4742,20 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
             - Context locking allows follow-up questions on specific stories
             - Off-domain gating with suggestion chips prevents poor matches
             """)
-    # Rest of your Ask MattGPT content continues...
-    # Rest of your Ask MattGPT content continues as normal
-    # Context banner, transcript, etc...
 
-    # Context banner if Ask was launched from a Story
+    # Define ctx - MUST be outside and after the modal block
     ctx = get_context_story()
     _show_ctx = bool(ctx) and (
         st.session_state.get("__ctx_locked__") or st.session_state.get("__asked_once__")
     )
 
     if _show_ctx:
-        client = (ctx.get("client") or "").strip()
-        domain_full = (ctx.get("domain") or "").strip()
-        domain_short = (
-            domain_full.split(" / ")[-1] if " / " in domain_full else domain_full
-        )
-        title = (ctx.get("title") or "").strip()
-        role = (ctx.get("role") or "").strip()
-        if not st.session_state.get("_ctx_css_done"):
-            st.markdown(
-                """
-                <style>
-                .ctx-crumb{font-size:.9rem;opacity:.85;margin:.25rem 0 .5rem 0}
-                .ctx-crumb small{opacity:.85}
-                details.ctx-details summary{cursor:pointer; list-style:none; margin:.25rem 0}
-                details.ctx-details summary::-webkit-details-marker{display:none}
-                details.ctx-details summary::after{content:"▸"; margin-left:.35rem; opacity:.6}
-                details.ctx-details[open] summary::after{content:"▾"}
-                details.ctx-details .ctx-body{font-size:.9rem; opacity:.9; padding:.25rem 0 0 0}
-                </style>
-                """,
-                unsafe_allow_html=True,
-            )
-            st.session_state["_ctx_css_done"] = True
+        render_compact_context_banner()
 
-        long_txt = f"{title} — {client} • {role} • {domain_full}".strip(" •-")
-        short_txt = f"💼 {client} | {domain_short}".strip(" |")
+    # Rest of your Ask MattGPT content continues...
+    # Rest of your Ask MattGPT content continues as normal
+    # Context banner, transcript, etc...
 
-        left, right = st.columns([1, 0.12], gap="small")
-        with left:
-            st.markdown(
-                f"<div class='ctx-crumb' title='{long_txt}'><small>{short_txt}</small></div>",
-                unsafe_allow_html=True,
-            )
-            st.markdown(
-                f"""
-                <details class="ctx-details">
-                  <summary><small>Show details</small></summary>
-                  <div class="ctx-body">
-                    <strong>Title:</strong> {title or "—"}<br/>
-                    <strong>Client:</strong> {client or "—"}<br/>
-                    <strong>Role:</strong> {role or "—"}<br/>
-                    <strong>Domain:</strong> {domain_full or "—"}
-                  </div>
-                </details>
-                """,
-                unsafe_allow_html=True,
-            )
     # with right:
     #    if st.button("×", key="btn_clear_ctx", help="Clear context"):
     #       _clear_ask_context()
@@ -4418,14 +4809,31 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
             _push_card_snapshot_from_state()
             st.session_state["__pending_card_snapshot__"] = False
         _push_user_turn(pending)
-        with st.spinner("Thinking…"):
+        with st.status("Searching Matt's experience...", expanded=True) as status:
             try:
                 # Ask is pure semantic; ignore Explore filters here
                 resp = send_to_backend(pending, {}, ctx)
+
+                # Show confidence after retrieval
+                sources = resp.get("sources", [])
+                if sources:
+                    first_id = str(sources[0].get("id", ""))
+                    scores = st.session_state.get("__pc_last_ids__", {}) or {}
+                    conf = scores.get(first_id)
+                    if conf:
+                        conf_pct = int(float(conf) * 100)
+                        st.write(f"✓ Found relevant stories • {conf_pct}% match confidence")
+
+                status.update(label="Answer ready!", state="complete", expanded=False)
+
             except Exception as e:
-                _push_assistant_turn("Sorry, I couldn't generate an answer right now.")
-                st.error(f"Backend error: {e}")
-                st.rerun()
+                    status.update(label="Error occurred", state="error")
+                    print(f"DEBUG: send_to_backend failed: {e}")
+                    import traceback
+                    traceback.print_exc()
+                    _push_assistant_turn(f"Error: {str(e)}")
+                    st.rerun()
+
             else:
                 set_answer(resp)
                 # If no banner is active, append a static card snapshot now so it
@@ -4448,7 +4856,7 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
     # 4) One‑shot nonsense/off‑domain banner appears AFTER transcript
     rendered_banner = False
     if st.session_state.get("ask_last_reason"):
-        with st.chat_message("assistant", avatar=ASSIST_AVATAR):
+        with st.chat_message("assistant"):
             render_no_match_banner(
                 reason=st.session_state.get("ask_last_reason", ""),
                 query=st.session_state.get("ask_last_query", ""),
@@ -4487,7 +4895,7 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
             or dec == "no_overlap+low_conf"
         )
         if no_match_decision and not st.session_state.get("last_sources"):
-            with st.chat_message("assistant", avatar=ASSIST_AVATAR):
+            with st.chat_message("assistant"):
                 render_no_match_banner(
                     reason=dec or "no_match",
                     query=st.session_state.get("__ask_dbg_prompt", ""),
@@ -4523,9 +4931,10 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
     ):
         # Always render the bottom live card so pills are available.
         # Snapshot holds only header + one-liner + sources to avoid duplicate body text.
-        render_answer_card_clean_pills(
+        render_answer_card_compact(
             _primary or {"title": "Answer"}, _m, "answer_mode"
         )
+
     # Reset one-shot suppression flag after a render cycle
     if st.session_state.get("__suppress_live_card_once__"):
         st.session_state["__suppress_live_card_once__"] = False
@@ -4544,6 +4953,11 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
 
         # Append user's turn immediately to keep order deterministic
         _push_user_turn(user_input_local)
+
+        # Clear context lock for fresh typed questions (not from suggestion chips)
+        if not st.session_state.get("__ask_from_suggestion__"):
+            st.session_state.pop("__ctx_locked__", None)
+            st.session_state.pop("active_context", None)
 
         # Command aliases (view switches) should not trigger new retrieval
         cmd = re.sub(r"\s+", " ", user_input_local.strip().lower())
@@ -4627,7 +5041,7 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
                 ctx_for_this_turn = locked_ctx
 
         # --- Ask backend + render result ---
-        with st.spinner("Thinking…"):
+        with st.status("Searching Matt's experience...", expanded=True) as status:
             try:
                 # Consume the suggestion flag (one-shot); we don't need its value here
                 st.session_state.pop("__ask_from_suggestion__", None)
@@ -4635,7 +5049,20 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
                 # Ask is pure semantic; ignore Explore filters here
                 resp = send_to_backend(user_input_local, {}, ctx_for_this_turn)
 
+                # Show confidence after retrieval
+                sources = resp.get("sources", [])
+                if sources:
+                    first_id = str(sources[0].get("id", ""))
+                    scores = st.session_state.get("__pc_last_ids__", {}) or {}
+                    conf = scores.get(first_id)
+                    if conf:
+                        conf_pct = int(float(conf) * 100)
+                        st.write(f"✓ Found relevant stories • {conf_pct}% match confidence")
+
+                status.update(label="Answer ready!", state="complete", expanded=False)
+
             except Exception as e:
+                status.update(label="Error occurred", state="error")
                 _push_assistant_turn("Sorry, I couldn't generate an answer right now.")
                 st.error(f"Backend error: {e}")
                 st.rerun()
@@ -4717,13 +5144,14 @@ elif st.session_state["active_tab"] == "About Matt":
         border: 1px solid var(--border-color);
         transition: all 0.3s ease;
         min-height: 250px;
-        box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);  /* Always visible shadow */
+        box-shadow: 0 4px 12px rgba(0,0,0,.25);
     }
 
     .fixed-height-card:hover {
         transform: translateY(-4px);
         border-color: var(--border-color);
-        box-shadow: 0 12px 35px rgba(128, 128, 128, 0.35);  /* Brighter shadow on hover */
+        box-shadow: 0 8px 25px rgba(74,144,226,.15);
+
     }
     .card-desc {
         color: #b0b0b0;
