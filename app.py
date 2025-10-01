@@ -5276,28 +5276,46 @@ elif st.session_state["active_tab"] == "About Matt":
     # Timeline using fixed-height-card styling
     timeline_data = [
         (
+            "🧘",
+            "2023–Present",
+            "Sabbatical | Innovation & Upskilling",
+            "Focused on GenAI, cloud-native architecture, and building LLM-powered portfolio assistant",
+        ),
+        (
             "🚀",
-            "2019-2023",
-            "Director, Cloud Innovation @ Accenture",
-            "Led 150+ professionals • Generated $300M+ revenue • 4x faster delivery • 25% retention improvement",
+            "2019–2023",
+            "Director, Cloud Innovation Center @ Accenture",
+            "Launched Innovation Centers (150+ engineers) • 30+ products • $300M+ revenue • 4x faster delivery",
+        ),
+        (
+            "📚",
+            "2016–2023",
+            "Capability Development Lead, CloudFirst @ Accenture",
+            "Upskilled 300+ professionals • 40% proficiency increase • 50% faster delivery • Culture transformation",
         ),
         (
             "☁️",
-            "2016-2019",
-            "Cloud Architecture Lead @ Liquid Studio",
-            "AWS enablement • 200+ certifications • Rapid prototyping • 30% faster time-to-market",
+            "2018–2019",
+            "Cloud Native Architecture Lead, Liquid Studio @ Accenture",
+            "Built cloud-native accelerator • AWS enablement (200+ certs) • Rapid prototyping for Fortune 500",
         ),
         (
             "💳",
-            "2009-2016",
-            "Sr Technology Manager @ Accenture",
-            "$500M+ transformation • 12 countries • Payment platforms • 3x sales increase",
+            "2009–2017",
+            "Sr. Technology Architecture Manager, Payments @ Accenture",
+            "$500M+ payments modernization • 12 countries • ACH/FX/Wire hubs • Salesforce integration",
+        ),
+        (
+            "🏗️",
+            "2005–2009",
+            "Technology Manager @ Accenture",
+            "Early leadership in payments, banking, and platform modernization",
         ),
         (
             "⚡",
-            "2005-2009",
-            "Startups & Consulting",
-            "Built products 0→1 • Team building • Product-market fit • Successful exits",
+            "2000–2005",
+            "Startups & Consulting (incl. Cendian Corp)",
+            "Built B2B/supply chain platforms • webMethods & J2EE integration solutions",
         ),
     ]
 
