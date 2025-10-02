@@ -3745,6 +3745,78 @@ elif st.session_state["active_tab"] == "Explore Stories":
         -webkit-line-clamp: 5 !important;
         -webkit-box-orient: vertical !important;
     }
+
+    /* Mobile Responsive Design */
+    @media (max-width: 768px) {
+        /* Hide Table view toggle on mobile - force Cards view */
+        div[data-testid="column"]:has(div[data-baseweb="segmented-control"]) {
+            display: none !important;
+        }
+
+        /* Hide SHOW dropdown on mobile - not needed for Cards view */
+        div[data-testid="column"]:has(div[data-testid="stSelectbox"]) {
+            display: none !important;
+        }
+
+        /* Make results summary full width on mobile */
+        div[data-testid="column"] > div > div {
+            font-size: 13px !important;
+        }
+
+        /* Stack filter columns vertically on mobile */
+        div[data-testid="stHorizontalBlock"] {
+            flex-direction: column !important;
+            gap: 12px !important;
+        }
+
+        div[data-testid="column"] {
+            width: 100% !important;
+            min-width: 100% !important;
+        }
+
+        /* Increase touch targets for buttons on mobile */
+        .stButton > button {
+            min-height: 44px !important;
+            font-size: 16px !important;
+            padding: 12px 20px !important;
+        }
+
+        /* Pagination buttons - larger touch targets */
+        div[data-testid="column"] .stButton > button {
+            min-height: 44px !important;
+            padding: 10px 18px !important;
+            font-size: 15px !important;
+        }
+
+        /* Card grid - single column on mobile */
+        .story-cards-grid {
+            grid-template-columns: 1fr !important;
+            gap: 16px !important;
+        }
+
+        /* Adjust card height for mobile */
+        .fixed-height-card {
+            height: auto !important;
+            min-height: 280px !important;
+        }
+
+        /* Make filter inputs full width */
+        div[data-testid="stTextInput"] input,
+        div[data-testid="stMultiSelect"],
+        div[data-testid="stSelectbox"] {
+            width: 100% !important;
+        }
+
+        /* Compact filter container on mobile */
+        div[data-testid="stVerticalBlock"] > div[data-testid="stVerticalBlock"] {
+            gap: 8px !important;
+        }
+
+        /* Hide AgGrid table on mobile */
+        .ag-theme-streamlit {
+            display: none !important;
+        }
+    }
     </style>
     """, unsafe_allow_html=True)
 
