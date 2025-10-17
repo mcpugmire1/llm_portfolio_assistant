@@ -1,9 +1,124 @@
-# LLM Portfolio Assistant
+# MattGPT - AI-Powered Career Portfolio Assistant
 
-This is a personalized, local-first assistant that helps you explore real experiences from Matt Pugmire's career.  
-It uses custom embeddings, FAISS or Pinecone indexing, and OpenAI's API to respond in natural language to questions about Matt's work history.
+> An intelligent interface to 20+ years of digital transformation experience
+
+🚀 **[Try the Live App](https://askmattgpt.streamlit.app/)** 
 
 ---
+## 🎯 What This Is
+
+An AI assistant that provides conversational access to my professional portfolio 
+across 115+ transformation projects, enabling recruiters and hiring managers to 
+ask specific questions and receive verifiable, outcome-focused answers.
+
+**Example queries:**
+- "How did Matt scale engineering teams from 4 to 150+ people?"
+- "Show me examples of agile transformation in financial services"
+- "What's Matt's experience with payments modernization?"
+
+**The Innovation:** Moving beyond static resumes to an interactive, AI-powered 
+portfolio that delivers cited, STAR-formatted stories on demand.
+
+---
+## 💡 Why This Approach
+
+Traditional portfolios force readers to:
+- 📄 Read pages of static text
+- 🔍 Search manually for relevant experience
+- ❓ Wonder about specific outcomes or methodologies
+
+**MattGPT solves this by:**
+- ✅ Answering specific questions in natural language
+- ✅ Providing verifiable STAR-formatted stories
+- ✅ Citing specific projects for verification
+- ✅ Adapting responses to different audience needs (recruiters, technical leaders, executives)
+
+---
+
+## 🏗️ How It Works
+```
+User Query → Semantic Search → RAG Retrieval → GPT-4 → Cited Answer
+                    ↓
+              Pinecone/FAISS
+           (115+ STAR stories)
+```
+**Technical Innovation:** Hybrid retrieval combining semantic embeddings with 
+structured metadata filtering to deliver context-aware, outcome-focused responses.
+
+---
+---
+
+## ✨ Key Features
+
+- **Semantic Search** - Understands intent beyond keywords
+- **STAR Framework** - Every answer includes Situation, Task, Action, Result
+- **Source Citations** - Direct links to specific project details
+- **Hybrid Retrieval** - Vector similarity + metadata filtering
+- **Multi-Modal Responses** - Narrative summaries, key points, or detailed breakdowns
+- **Role-Aware** - Tailors depth/focus for recruiters vs. technical vs. executive audiences
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: Streamlit (Python)
+- **LLM**: OpenAI GPT-4
+- **Embeddings**: sentence-transformers (all-MiniLM-L6-v2)
+- **Vector DB**: Pinecone (cloud) or FAISS (local)
+- **Deployment**: Streamlit Cloud
+- **Future**: React + AWS migration
+
+---
+
+## 🎓 Technical Learning Objectives
+
+Built as a hands-on exploration of modern AI application development:
+- ✅ RAG (Retrieval-Augmented Generation) architecture
+- ✅ Vector databases and semantic search optimization
+- ✅ Embedding model selection and performance tuning
+- ✅ LLM prompt engineering and response synthesis
+- ✅ Production deployment and cloud infrastructure
+
+---
+## 📊 What This Demonstrates
+
+**Product Thinking**
+- Identified user pain points (static portfolios, manual search)
+- Designed solution prioritizing verifiability and user experience
+
+**Technical Execution**
+- Implemented RAG pipeline from scratch
+- Integrated vector search, LLM APIs, and cloud deployment
+- Optimized for both semantic understanding and structured retrieval
+
+**Modern AI/ML Capabilities**
+- Practical application of embeddings and vector search
+- Production LLM integration with citation tracking
+- Hybrid retrieval strategies for improved accuracy
+
+---
+
+## 🗺️ Roadmap
+
+**Phase 1: MVP ✅ Complete**
+- Streamlit app with semantic search
+- RAG pipeline with STAR methodology
+- Cloud deployment (Streamlit Cloud)
+
+**Phase 2: Production Enhancement 🔄 In Progress**
+- React frontend refactor
+- AWS deployment
+- Advanced filtering and timeline views
+- Enhanced mobile experience
+
+**Phase 3: Advanced Features 📋 Planned**
+- Multi-modal search (semantic + filters)
+- Analytics dashboard
+- Export capabilities (PDF, portfolio packets)
+- Performance optimizations
+
+---
+
 
 ## 🚀 Quick Start
 
@@ -49,8 +164,17 @@ for access or instructions to generate it from the source Excel file.
    PINECONE_NAMESPACE=default
    ```
 
-5. **Build the embeddings** (only needed if updating `echo_star_stories.jsonl`):  
+5. **Build the embeddings** (only needed if updating the dataset):
+
+   **Data Pipeline (3 steps):**
    ```bash
+   # Step 1: Extract base data from Excel
+   python generate_jsonl_from_excel.py
+
+   # Step 2: Enrich with AI-generated tags
+   python generate_public_tags.py
+
+   # Step 3: Generate embeddings and upload to vector DB
    python build_custom_embeddings.py
    ```
 
@@ -72,6 +196,7 @@ for access or instructions to generate it from the source Excel file.
 
 
 ---
+
 ## 🛠️ Scripts
 
 ### 📜 `generate_jsonl_from_excel.py`
@@ -119,5 +244,96 @@ Edit the script directly to:
 
 ---
 
+### 📜 `generate_public_tags.py`
+
+This script enriches the base JSONL data with AI-generated semantic tags using OpenAI's GPT-4.
+
+**Pipeline Position:** Step 2 of 3
+
+**Input:**  `echo_star_stories.jsonl` (from `generate_jsonl_from_excel.py`)
+**Output:** `echo_star_stories_nlp.jsonl` (enriched with `public_tags` field)
+
+---
+
+#### 🔑 Key Features
+
+- **AI-Powered Tagging**
+  - Uses GPT-4 to analyze each story's Title, Use Cases, Situation, Task, Action, Result
+  - Generates semantic tags aligned with SFIA, O*NET, LinkedIn, and industry frameworks
+  - Captures technical skills, business capabilities, leadership themes
+
+- **Smart Token Management**
+  - Tracks token usage to avoid API limits
+  - Estimates costs before running
+  - Caches results to avoid re-processing unchanged stories
+
+- **Backup Safety**
+  - Creates timestamped backup of input file before processing
+  - Preserves existing tags if present
+
+---
+
+#### 🚦 Usage
+
+```bash
+python generate_public_tags.py
+```
+
+**Requirements:**
+- `OPENAI_API_KEY` in `.env` file
+- `echo_star_stories.jsonl` must exist (run `generate_jsonl_from_excel.py` first)
+
+**Expected Cost:** ~$0.50-2.00 for 115 stories (using GPT-4)
+
+---
+
+### 📜 `build_custom_embeddings.py`
+
+This script generates vector embeddings from the enriched JSONL data and uploads them to Pinecone or FAISS.
+
+**Pipeline Position:** Step 3 of 3
+
+**Input:**  `echo_star_stories_nlp.jsonl` (from `generate_public_tags.py`)
+**Output:** Pinecone index or FAISS local index with embeddings
+
+---
+
+#### 🔑 Key Features
+
+- **Dual Backend Support**
+  - Pinecone (cloud vector database)
+  - FAISS (local vector database)
+
+- **Natural Language Embeddings**
+  - Uses `all-MiniLM-L6-v2` model (384 dimensions)
+  - Embeds 5P summary + Place + Industry context
+  - Optimized for semantic search
+
+- **Clean Re-indexing**
+  - Purges existing namespace before upserting
+  - Handles NaN values and validation
+  - Batch processing for efficiency
+
+---
+
+#### 🚦 Usage
+
+```bash
+python build_custom_embeddings.py
+```
+
+**Environment Variables:**
+```env
+VECTOR_BACKEND=pinecone    # or "faiss"
+STORIES_JSONL=echo_star_stories_nlp.jsonl
+PINECONE_API_KEY=...
+PINECONE_INDEX_NAME=...
+PINECONE_NAMESPACE=default
+```
+
+---
+
 ## 📄 License
 This project is for personal use only.
+
+**Built by [Matt Pugmire](https://linkedin.com/in/matthewpugmire)** | [mcpugmire@gmail.com](mailto:mcpugmire@gmail.com)

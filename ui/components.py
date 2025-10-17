@@ -388,6 +388,56 @@ def css_once():
             font-size: 14px;
         }
 
+        /* Fix selectbox - only in main app content, not settings panel */
+        section[data-testid="stAppViewContainer"] div[data-baseweb="select"] {
+            max-width: none !important;
+            min-width: 100% !important;
+        }
+
+        section[data-testid="stAppViewContainer"] div[data-baseweb="select"] > div {
+            max-width: none !important;
+            width: 100% !important;
+        }
+
+        /* Fix the value container (what shows when closed) */
+        section[data-testid="stAppViewContainer"] div[data-baseweb="select"] div[class*="ValueContainer"] {
+            max-width: none !important;
+            overflow: visible !important;
+        }
+
+        section[data-testid="stAppViewContainer"] div[data-baseweb="select"] div[class*="SingleValue"] {
+            max-width: none !important;
+            overflow: visible !important;
+            text-overflow: clip !important;
+            white-space: normal !important;
+        }
+
+        /* Fix dropdown menu container and list width - only in main app */
+        section[data-testid="stAppViewContainer"] div[data-baseweb="popover"] {
+            max-width: none !important;
+            width: auto !important;
+        }
+
+        section[data-testid="stAppViewContainer"] ul[role="listbox"] {
+            max-width: none !important;
+            min-width: 350px !important;
+            width: auto !important;
+        }
+
+        /* Fix individual dropdown options - only in main app */
+        section[data-testid="stAppViewContainer"] li[role="option"] {
+            white-space: nowrap !important;
+            overflow: visible !important;
+            text-overflow: clip !important;
+        }
+
+        /* Bottom-align filter controls in row */
+        [data-testid="column"] {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
         </style>
         """,
         unsafe_allow_html=True,
@@ -415,7 +465,38 @@ def render_home_hero_and_stats():
     # Pure HTML stats that bypass Streamlit's CSS
     st.markdown(
         """
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin: 50px 0;">
+        <style>
+        .home-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin: 50px 0;
+        }
+
+        @media (max-width: 768px) {
+            .home-stats-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 16px !important;
+                margin: 30px 0 !important;
+            }
+            .home-stats-grid > div {
+                padding: 24px 16px !important;
+            }
+            .home-stats-grid > div span:first-child {
+                font-size: 28px !important;
+            }
+            .home-stats-grid > div span:last-child {
+                font-size: 14px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .home-stats-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        </style>
+        <div class="home-stats-grid">
             <div style="background: var(--secondary-background-color); padding: 32px 24px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
                 <span style="font-size: 36px; font-weight: 700; color: #4a90e2; display: block; margin-bottom: 8px;">$300M+</span>
                 <span style="color: #999999; font-size: 16px;">Revenue Growth</span>

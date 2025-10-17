@@ -105,20 +105,31 @@ def build_embedding_text_bak(story: Dict[str, Any]) -> str:
     ).strip()
 
 def build_embedding_text(story: Dict[str, Any]) -> str:
-    """Just use the 5P summary if it exists - it's already natural language"""
-    
-    # Try the 5P summary first - it's usually the best text
+    """Natural language embedding optimized for semantic search"""
+
     summary = story.get("5PSummary", "").strip()
+    industry = story.get("Industry", "").strip()
+    place = story.get("Place", "").strip()
+
     if summary and len(summary) > 50:
+        # Put industry context up front for stronger semantic signal
+        if industry:
+            return f"In {industry}: {summary}"
+        elif place:
+            return f"{summary} This work was done at {place}."
         return summary
-    
-    # Fallback: create simple natural text
+
+    # Fallback: simple natural text
     title = story.get("Title", "")
     client = story.get("Client", "")
     situation = story.get("Situation", [""])[0] if story.get("Situation") else ""
     result = story.get("Result", [""])[0] if story.get("Result") else ""
-    
-    return f"Project: {title} at {client}. {situation} {result}".strip()
+
+    base_text = f"Project: {title} at {client}. {situation} {result}".strip()
+
+    if industry:
+        return f"In {industry}: {base_text}"
+    return base_text
 
 def build_metadata(story: Dict[str, Any]) -> Dict[str, Any]:
     """Compact but rich metadata for UI/snippets + Pinecone filters."""
@@ -128,12 +139,18 @@ def build_metadata(story: Dict[str, Any]) -> Dict[str, Any]:
 
     tags_list = _as_list(story.get("public_tags"))
 
+    # Extract Industry and Division for hybrid search filtering
+    industry = story.get("Industry", "").strip()
+    division = story.get("Division", "").strip()
+
     meta = {
         # canonical (matches JSONL / Excel)
         "id": story.get("id"),
         "Title": story.get("Title", "Untitled"),
         "Client": story.get("Client", "Unknown"),
         "Role": story.get("Role", "Unknown"),
+        "Industry": industry,
+        "Division": division,
         "Category": cat,
         "Sub-category": sub,
         "Use Case(s)": _as_list(story.get("Use Case(s)")),
@@ -151,6 +168,8 @@ def build_metadata(story: Dict[str, Any]) -> Dict[str, Any]:
         "title": story.get("Title", "Untitled"),
         "client": story.get("Client", "Unknown"),
         "role": story.get("Role", "Unknown"),
+        "industry": industry.lower() if industry else "",
+        "division": division.lower() if division else "",
         "domain": domain,
         "tags": tags_list,
         # Snippet used in list view when results come from Pinecone

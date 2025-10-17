@@ -1,6 +1,15 @@
 """
+generate_public_tags.py
+
 Enriches STAR stories with semantic `public_tags` using OpenAI GPT-based NLP.
-Replaces legacy static tagging. Output overwrites `echo_star_stories.jsonl`.
+
+Input:  echo_star_stories.jsonl (base data from Excel)
+Output: echo_star_stories_nlp.jsonl (enriched with AI-generated tags)
+
+This is step 2 in the data pipeline:
+  1. Excel → generate_jsonl_from_excel.py → echo_star_stories.jsonl
+  2. echo_star_stories.jsonl → generate_public_tags.py → echo_star_stories_nlp.jsonl
+  3. echo_star_stories_nlp.jsonl → build_custom_embeddings.py → Pinecone/FAISS
 """
 
 import json

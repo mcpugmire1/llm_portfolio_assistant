@@ -304,7 +304,12 @@ try:
 except Exception:
     _HAS_AGGRID = False
 
-st.set_page_config(page_title="MattGPT — Matt's Story", page_icon="🤖", layout="wide")
+st.set_page_config(
+    page_title="MattGPT — Matt's Story",
+    page_icon="🤖",
+    layout="wide",
+    initial_sidebar_state="expanded"  # Show sidebar by default, especially helpful on mobile
+)
 
 # ensure external UI CSS is injected once (safe no-op if it’s empty)
 css_once()
@@ -449,7 +454,7 @@ def on_ask_this_story(s: dict):
     st.session_state["__ctx_locked__"] = True
     st.session_state["__ask_from_suggestion__"] = True
 
-    st.stop()
+    st.rerun()  # Rerun to scroll to top of Ask MattGPT page
 
 
 # === Sidebar navigation (icon buttons; no radios, no flicker) ===
@@ -496,7 +501,7 @@ if USE_SIDEBAR_NAV:
             if normalize_tab(selected) != current:
                 new_tab = normalize_tab(selected)
                 st.session_state["active_tab"] = new_tab
-                # Reset Home’s first-mount guard so the Home page doesn’t immediately
+                # Reset Home's first-mount guard so the Home page doesn't immediately
                 # redirect back to the last pill selection.
                 if new_tab == "Home":
                     st.session_state["__home_first_mount__"] = True
@@ -570,51 +575,40 @@ if not USE_SIDEBAR_NAV:
 
 
 # --- Audience derivation from Person (5Ps) ---
-def _derive_personas(person: str | list | None) -> list[str]:
-    """
-    Map raw 5P 'Person' text to concise audience tags.
-    Non-destructive: returns a small set of normalized labels.
-    """
+def _derive_personas(person: str | list | None, industry: str | None = None) -> list[str]:
     if not person:
         return []
 
-    # Accept list or string (some rows may already be arrays)
     if isinstance(person, list):
         raw = " ; ".join(str(x) for x in person if str(x).strip())
     else:
         raw = str(person)
 
     txt = raw.lower()
+    ind = (industry or "").lower()
+    combined = f"{txt} {ind}"
 
-    # Keyword → label rules (order matters; keep this small & opinionated)
     rules = [
-        (["cxo", "c-suite", "executive", "vp", "svp", "evp", "chief "], "Execs"),
-        (
-            ["product", "pm ", "pmm", "head of product", "product leader"],
-            "Product Leaders",
-        ),
-        (
-            ["engineering", "platform", "sre", "devops", "cto", "tech lead"],
-            "Eng Leaders",
-        ),
+        (["cxo", "c-suite", "executive", "vp", "svp", "evp", "chief"], "Execs"),
+        (["product", "pm ", "pmm", "head of product", "product leader"], "Product Leaders"),
+        (["engineering", "platform", "sre", "devops", "cto", "tech lead"], "Eng Leaders"),
         (["data", "ml", "ai", "science", "model", "analytics"], "Data/AI"),
         (["security", "privacy", "compliance", "governance", "risk"], "Compliance"),
         (["operations", "ops", "contact center", "service"], "Operations"),
-        (["sales", "marketing", "go-to-market", "g tm", "g2m"], "Go-To-Market"),
-        (["finance", "treasury", "payments", "banking"], "Finance/Payments"),
-        (["customer", "member", "patient", "end user"], "End Users"),
+        (["sales", "marketing", "go-to-market"], "Go-To-Market"),
+        (["finance", "financial services", "banking", "treasury", "payments"], "Finance/Payments"),
+        (["healthcare", "life sciences", "patient", "clinical"], "Healthcare"),
+        (["transportation", "logistics", "supply chain"], "Transportation/Logistics"),
+        (["customer", "member", "patient", "end user", "client", "student"], "End Users"),
     ]
 
     out = set()
     for kws, label in rules:
-        if any(k in txt for k in kws):
+        if any(k in combined for k in kws):
             out.add(label)
 
-    # If nothing matched, try to create a reasonable fallback:
-    # pull capitalized role tokens from the original (keeps noise low)
     if not out:
-        # very light fallback: if text includes "lead", "manager", "director", map to leaders
-        if any(k in txt for k in ["lead", "manager", "director"]):
+        if any(k in combined for k in ["lead", "manager", "director"]):
             out.add("Leaders")
         else:
             out.add("Stakeholders")
@@ -866,7 +860,7 @@ W_PC = 0.8  # semantic (Pinecone vector match)
 W_KW = 0.2  # keyword/token overlap
 
 # Centralized retrieval pool size for semantic search / Pinecone
-SEARCH_TOP_K = 30
+SEARCH_TOP_K = 100  # Increased to capture more industry-specific results
 # =========================
 # Safe Pinecone wiring (optional)
 # =========================
@@ -1030,6 +1024,8 @@ def load_star_stories(path: str):
             performance = _ensure_list(raw.get("Performance"))
 
             tags = _split_tags(raw.get("public_tags"))
+            division = (raw.get("Division") or "").strip()
+            industry = (raw.get("Industry") or "").strip()
 
             stories.append(
                 {
@@ -1038,9 +1034,12 @@ def load_star_stories(path: str):
                     "client": client,
                     "role": role,
                     "domain": domain,
+                    "division": division,
+                    "industry": industry,
                     # Derive concise audience labels from 5P 'Person'
                     "personas": _derive_personas(
-                        raw.get("Person") or raw.get("person")
+                        raw.get("Person") or raw.get("person"),
+                        raw.get("Industry") or raw.get("industry")
                     ),
                     "who": who,
                     "where": where,
@@ -1755,7 +1754,8 @@ _STOPWORDS = {
 def build_known_vocab(stories: list[dict]):
     vocab = set()
     for s in stories:
-        for field in ["title", "client", "role", "domain"]:
+        # Use lowercase field names from normalized stories
+        for field in ["title", "client", "role", "domain", "division", "industry", "who", "where", "why"]:
             txt = (s.get(field) or "").lower()
             vocab.update(re.split(r"[^\w]+", txt))
         for t in s.get("tags") or []:
@@ -3563,260 +3563,267 @@ if st.session_state["active_tab"] == "Home":
 elif st.session_state["active_tab"] == "Explore Stories":
     # Add page header matching wireframe - use st.title to ensure it's visible
     st.title("Project Case Studies")
-    st.markdown('<p>Browse and explore digital transformation initiatives</p>', unsafe_allow_html=True)
+    st.markdown('<p>See how digital transformation happens in practice. Browse case studies, then click Ask MattGPT for the inside story.</p>', unsafe_allow_html=True)
 
     # --- Explore Stories CSS ---
     st.markdown("""
     <style>
-    /* Filter Section - Much More Compact (matching TO BE wireframe) */
-    .explore-filters {
-        background: #2a2a2a;
-        border-radius: 12px;
-        padding: 12px 16px;
-        margin-bottom: 12px;
-        border: 1px solid #333;
-    }
-
-    /* Compact filter controls */
-    .stMultiSelect, .stSelectbox, .stTextInput {
-        margin-bottom: 0px !important;
-        margin-top: 0px !important;
-    }
-
-    /* Reduce label spacing */
-    label[data-testid="stWidgetLabel"] {
-        margin-bottom: 4px !important;
-    }
-
-    [data-testid="stVerticalBlock"] > div {
-        gap: 8px !important;
-    }
-
-    /* Reduce overall vertical spacing in Explore Stories */
-    [data-testid="stVerticalBlock"] {
-        gap: 8px !important;
-    }
-
-    /* Tighter button spacing */
-    .stButton {
-        margin-top: 0px !important;
-        margin-bottom: 0px !important;
-    }
-
-    /* Compact selectbox styling */
-    div[data-testid="stSelectbox"] {
-        margin-top: 0 !important;
-        margin-bottom: 0 !important;
-    }
-
-    /* Fixed width for SHOW dropdown */
-    div[data-testid="stSelectbox"] div[data-baseweb="select"] {
-        min-width: 75px !important;
-        max-width: 75px !important;
-    }
-
-    /* Ensure dropdown doesn't overflow */
-    div[data-testid="stSelectbox"] {
-        min-width: 75px !important;
-        max-width: 75px !important;
-    }
-
-    /* Results Summary */
-    .results-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 8px;
-        padding: 0 4px;
-    }
-
-    .results-count {
-        color: var(--text-color);
-        font-size: 14px;
-        font-weight: 600;
-    }
-
-    /* Card Grid */
-    .story-cards-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-        gap: 20px;
-        margin-bottom: 24px;
-    }
-
-    .story-card {
-        background: var(--secondary-background-color);
-        border: 1px solid var(--border-color);
-        border-radius: 12px;
-        padding: 20px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .story-card:hover {
-        border-color: #4a90e2;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    }
-
-    .card-title {
-        font-size: 16px;
-        font-weight: 600;
-        color: var(--text-color);
-        line-height: 1.4;
-        margin-bottom: 8px;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-
-    .card-client {
-        color: #4a90e2;
-        font-weight: 500;
-        font-size: 14px;
-        margin-bottom: 12px;
-    }
-
-    .card-meta {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 12px;
-    }
-
-    .card-role {
-        background: var(--background-color);
-        padding: 4px 8px;
-        border-radius: 4px;
-        font-size: 11px;
-        color: var(--text-color);
-        text-transform: uppercase;
-        font-weight: 500;
-    }
-
-    .card-domain {
-        color: #999999;
-        font-size: 12px;
-        text-align: right;
-        max-width: 150px;
-        line-height: 1.3;
-    }
-
-    .card-summary {
-        color: #c0c0c0;
-        font-size: 13px;
-        line-height: 1.5;
-        margin-top: 8px;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-
-    /* Card styling for Cards view - with !important to override */
-    .fixed-height-card {
-        background: var(--secondary-background-color) !important;
-        padding: 20px 24px !important;
-        border-radius: 12px !important;
-        border: 1px solid var(--border-color) !important;
-        transition: all 0.3s ease !important;
-        height: 320px !important;
-        display: flex !important;
-        flex-direction: column !important;
-        box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2) !important;
-    }
-
-    .fixed-height-card:hover {
-        transform: translateY(-4px) !important;
-        border-color: var(--border-color) !important;
-        box-shadow: 0 8px 25px rgba(74,144,226,.15) !important;
-    }
-
-    .card-desc {
-        color: #b0b0b0 !important;
-        margin-bottom: 0 !important;
-        line-height: 1.5 !important;
-        font-size: 14px !important;
-        overflow: hidden !important;
-        display: -webkit-box !important;
-        -webkit-line-clamp: 5 !important;
-        -webkit-box-orient: vertical !important;
-    }
-
-    /* Mobile Responsive Design */
-    @media (max-width: 768px) {
-        /* Hide Table view toggle on mobile - force Cards view */
-        div[data-testid="column"]:has(div[data-baseweb="segmented-control"]) {
-            display: none !important;
+        /* Filter Section - Much More Compact */
+        .explore-filters {
+            background: #2a2a2a;
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+            border: 1px solid #333;
         }
 
-        /* Hide SHOW dropdown on mobile - not needed for Cards view */
-        div[data-testid="column"]:has(div[data-testid="stSelectbox"]) {
-            display: none !important;
+        .stMultiSelect, .stSelectbox, .stTextInput {
+            margin-bottom: 0px !important;
+            margin-top: 0px !important;
         }
 
-        /* Make results summary full width on mobile */
-        div[data-testid="column"] > div > div {
-            font-size: 13px !important;
+        label[data-testid="stWidgetLabel"] {
+            margin-bottom: 4px !important;
         }
 
-        /* Stack filter columns vertically on mobile */
-        div[data-testid="stHorizontalBlock"] {
-            flex-direction: column !important;
-            gap: 12px !important;
-        }
-
-        div[data-testid="column"] {
-            width: 100% !important;
-            min-width: 100% !important;
-        }
-
-        /* Increase touch targets for buttons on mobile */
-        .stButton > button {
-            min-height: 44px !important;
-            font-size: 16px !important;
-            padding: 12px 20px !important;
-        }
-
-        /* Pagination buttons - larger touch targets */
-        div[data-testid="column"] .stButton > button {
-            min-height: 44px !important;
-            padding: 10px 18px !important;
-            font-size: 15px !important;
-        }
-
-        /* Card grid - single column on mobile */
-        .story-cards-grid {
-            grid-template-columns: 1fr !important;
-            gap: 16px !important;
-        }
-
-        /* Adjust card height for mobile */
-        .fixed-height-card {
-            height: auto !important;
-            min-height: 280px !important;
-        }
-
-        /* Make filter inputs full width */
-        div[data-testid="stTextInput"] input,
-        div[data-testid="stMultiSelect"],
-        div[data-testid="stSelectbox"] {
-            width: 100% !important;
-        }
-
-        /* Compact filter container on mobile */
-        div[data-testid="stVerticalBlock"] > div[data-testid="stVerticalBlock"] {
+        [data-testid="stVerticalBlock"] > div {
             gap: 8px !important;
         }
 
-        /* Hide AgGrid table on mobile */
-        .ag-theme-streamlit {
-            display: none !important;
+        [data-testid="stVerticalBlock"] {
+            gap: 8px !important;
         }
-    }
+
+        .stButton {
+            margin-top: 0px !important;
+            margin-bottom: 0px !important;
+        }
+
+         /* RESULTS ROW - Target 3rd column ONLY in 5-column layout */
+        div[data-testid="stHorizontalBlock"]:has(> div:nth-child(5)) > div:nth-child(3) {
+            flex: 0 0 75px !important;
+            max-width: 75px !important;
+            min-width: 75px !important;
+        }
+
+        div[data-testid="stHorizontalBlock"]:has(> div:nth-child(5)) > div:nth-child(3) div[data-testid="stSelectbox"],
+        div[data-testid="stHorizontalBlock"]:has(> div:nth-child(5)) > div:nth-child(3) div[data-baseweb="select"],
+        div[data-testid="stHorizontalBlock"]:has(> div:nth-child(5)) > div:nth-child(3) div[data-baseweb="select"] > div {
+            width: 75px !important;
+            min-width: 75px !important;
+            max-width: 75px !important;
+        }
+
+        /* Results Summary */
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            padding: 0 4px;
+        }
+
+        .results-count {
+            color: var(--text-color);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Card Grid */
+        .story-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .story-card {
+            background: var(--secondary-background-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-card:hover {
+            border-color: #4a90e2;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-color);
+            line-height: 1.4;
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-client {
+            color: #4a90e2;
+            font-weight: 500;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+        }
+
+        .card-role {
+            background: var(--background-color);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            color: var(--text-color);
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .card-domain {
+            color: #999999;
+            font-size: 12px;
+            text-align: right;
+            max-width: 150px;
+            line-height: 1.3;
+        }
+
+        .card-summary {
+            color: #c0c0c0;
+            font-size: 13px;
+            line-height: 1.5;
+            margin-top: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .fixed-height-card {
+            background: var(--secondary-background-color) !important;
+            padding: 20px 24px !important;
+            border-radius: 12px !important;
+            border: 1px solid var(--border-color) !important;
+            transition: all 0.3s ease !important;
+            height: 320px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2) !important;
+        }
+
+        .fixed-height-card:hover {
+            transform: translateY(-4px) !important;
+            border-color: var(--border-color) !important;
+            box-shadow: 0 8px 25px rgba(74,144,226,.15) !important;
+        }
+
+        .card-desc {
+            color: #b0b0b0 !important;
+            margin-bottom: 0 !important;
+            line-height: 1.5 !important;
+            font-size: 14px !important;
+            overflow: hidden !important;
+            display: -webkit-box !important;
+            -webkit-line-clamp: 5 !important;
+            -webkit-box-orient: vertical !important;
+        }
+
+        /* Mobile Responsive Design */
+        @media (max-width: 768px) {
+            div[data-testid="column"]:has(div[data-baseweb="segmented-control"]) {
+                display: none !important;
+            }
+
+            div[data-testid="column"]:has(div[data-testid="stSelectbox"]) {
+                display: none !important;
+            }
+
+            div[data-testid="column"] > div > div {
+                font-size: 13px !important;
+            }
+
+            div[data-testid="stHorizontalBlock"] {
+                flex-direction: column !important;
+                gap: 12px !important;
+            }
+
+            div[data-testid="column"] {
+                width: 100% !important;
+                min-width: 100% !important;
+            }
+
+            .stButton > button {
+                min-height: 44px !important;
+                font-size: 16px !important;
+                padding: 12px 20px !important;
+            }
+
+            div[data-testid="column"] .stButton > button {
+                min-height: 44px !important;
+                padding: 10px 18px !important;
+                font-size: 15px !important;
+            }
+
+            .story-cards-grid {
+                grid-template-columns: 1fr !important;
+                gap: 16px !important;
+            }
+
+            .fixed-height-card {
+                height: auto !important;
+                min-height: 280px !important;
+            }
+
+            .ag-theme-streamlit {
+                display: none !important;
+            }
+
+            section[data-testid="stSidebar"] {
+                transform: translateX(-100%) !important;
+            }
+
+            button[kind="header"] {
+                display: block !important;
+            }
+            /* RESULTS ROW - Page size dropdown width constraint */
+            div[data-testid="stHorizontalBlock"] > div:nth-child(3) {
+                flex: 0 0 75px !important;
+                max-width: 75px !important;
+                min-width: 75px !important;
+            }
+
+            div[data-testid="stHorizontalBlock"] > div:nth-child(3) div[data-testid="stSelectbox"],
+            div[data-testid="stHorizontalBlock"] > div:nth-child(3) div[data-baseweb="select"],
+            div[data-testid="stHorizontalBlock"] > div:nth-child(3) div[data-baseweb="select"] > div {
+                width: 75px !important;
+                min-width: 75px !important;
+                max-width: 75px !important;
+            }
+
+            /* BUT: Remove constraint from Domain Category and Tags */
+            div[data-testid="stSelectbox"]:has(select[id*="facet_domain_group"]) {
+                width: auto !important;
+                max-width: none !important;
+                min-width: auto !important;
+                flex: 1 !important;
+            }
+
+            div[data-testid="stSelectbox"]:has(select[id*="facet_domain_group"]) div[data-baseweb="select"] {
+                width: 100% !important;
+                max-width: none !important;
+            }
+
+        }
     </style>
     """, unsafe_allow_html=True)
 
@@ -3829,10 +3836,10 @@ elif st.session_state["active_tab"] == "Explore Stories":
     F = st.session_state["filters"]
 
     with safe_container(border=True):
-        # More compact layout - Row 1: 4 columns
-        c1, c2, c3, c4 = st.columns([1.2, 1, 1, 1])
-
-        # --- Col 1: Search first (most used)
+        # Row 1: Search and Audience
+         # Row 1: 3 columns with Domain category getting 60% of the space
+        c1, c2, c3 = st.columns([1, 0.8, 1.5])
+        
         with c1:
             F["q"] = st.text_input(
                 "Search keywords",
@@ -3840,8 +3847,7 @@ elif st.session_state["active_tab"] == "Explore Stories":
                 placeholder="Search by title, client, or keywords...",
                 key="facet_q",
             )
-
-        # --- Col 2: Audience
+        
         with c2:
             F["personas"] = st.multiselect(
                 "Audience",
@@ -3849,15 +3855,8 @@ elif st.session_state["active_tab"] == "Explore Stories":
                 default=F["personas"],
                 key="facet_personas",
             )
-
-        # --- Col 3: Client
+        
         with c3:
-            F["clients"] = st.multiselect(
-                "Client", clients, default=F["clients"], key="facet_clients"
-            )
-
-        # --- Col 4: Domain category selector
-        with c4:
             domain_parts = [
                 (d.split(" / ")[0], (d.split(" / ")[1] if " / " in d else ""), d)
                 for d in domains
@@ -3865,7 +3864,9 @@ elif st.session_state["active_tab"] == "Explore Stories":
             groups = sorted({cat for cat, sub, full in domain_parts if full})
 
             selected_group = st.selectbox(
-                "Domain category", ["All"] + groups, key="facet_domain_group"
+                "Domain category", 
+                ["All"] + groups, 
+                key="facet_domain_group"
             )
 
         # Row 2: Domain details + additional filters
@@ -3900,21 +3901,24 @@ elif st.session_state["active_tab"] == "Explore Stories":
                 )
 
         with c2:
-            # Optional filters in a compact row
-            subcols = st.columns([1, 1, 1.2])
+            # Optional filters in a compact row - NOW WITH CLIENT
+            subcols = st.columns([1, 1, 1])  # Changed from [1, 1, 1.2] to [1, 1, 1, 1.2]
+            
             with subcols[0]:
+                F["clients"] = st.multiselect(
+                    "Client", clients, default=F["clients"], key="facet_clients"
+                )
+            
+            with subcols[1]:
                 F["roles"] = st.multiselect(
                     "Role", roles, default=F["roles"], key="facet_roles"
                 )
-            with subcols[1]:
+            
+            with subcols[2]:
                 F["tags"] = st.multiselect(
                     "Tags", tags, default=F["tags"], key="facet_tags"
                 )
-            with subcols[2]:
-                F["has_metric"] = st.toggle(
-                    "Has metric in outcomes", value=F["has_metric"], key="facet_has_metric"
-                )
-
+            
         # Reset button
         cols = st.columns([1, 4])
         with cols[0]:
@@ -3928,15 +3932,31 @@ elif st.session_state["active_tab"] == "Explore Stories":
                     "q": "",
                     "has_metric": False,
                 }
-                # reset domain group selector & paging so UI doesn't look 'stuck'
-                st.session_state["facet_domain_group"] = "All"
+                # Delete ALL widget state keys so they don't override the reset values
+                widget_keys = [
+                    "facet_q",
+                    "facet_personas",
+                    "facet_clients",
+                    "facet_domain_group",
+                    "facet_domains_all",
+                    "facet_subdomains",
+                    "facet_roles",
+                    "facet_tags",
+                    "facet_has_metric"
+                ]
+                for key in widget_keys:
+                    if key in st.session_state:
+                        del st.session_state[key]
+
+                # Reset paging
                 st.session_state["page_offset"] = 0
+                # Clear last results so all stories show
+                st.session_state["last_results"] = STORIES
 
             st.button("Reset filters", key="btn_reset_filters", on_click=reset_filters)
 
     st.markdown("</div>", unsafe_allow_html=True)
 
-    # --- Always run semantic search (no debounce, no skip) ---
     # --- Always run semantic search (no debounce, no skip) ---
     view = []
     if F["q"].strip():
@@ -3979,14 +3999,61 @@ elif st.session_state["active_tab"] == "Explore Stories":
                     st.rerun()
                 st.stop()
     else:
-        # No query: fall back to last results or all stories
-        view = st.session_state.get("last_results", STORIES)
+        # No search query: apply UI filters to all stories
+        # Check if any filters are active
+        has_filters = any([
+            F.get("personas"),
+            F.get("clients"),
+            F.get("domains"),
+            F.get("roles"),
+            F.get("tags"),
+            F.get("has_metric")
+        ])
+
+        if has_filters:
+            # Apply filters to all stories
+            view = [s for s in STORIES if matches_filters(s, F)]
+        else:
+            # No filters at all: show all stories
+            view = STORIES
+
+        st.session_state["last_results"] = view
 
     st.session_state["__results_count__"] = len(view)
 
+    # Show sticky success banner right after filter container
+    # Using custom CSS to make it sticky at top on mobile
+    if F.get("q", "").strip() and len(view) > 0:
+        st.markdown(f"""
+        <style>
+        .search-success-banner {{
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin: 16px 0;
+            font-size: 14px;
+        }}
+        @media (max-width: 768px) {{
+            .search-success-banner {{
+                position: sticky;
+                top: 0;
+                z-index: 100;
+                margin: 0 0 16px 0;
+                border-radius: 0;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }}
+        }}
+        </style>
+        <div class="search-success-banner">
+            ✓ Found {len(view)} matching {'story' if len(view) == 1 else 'stories'} for "{F['q']}"
+        </div>
+        """, unsafe_allow_html=True)
+
     chips = []
     if F.get("q"):
-        chips.append(("Search", f"“{F['q']}”", ("q", None)))
+        chips.append(("Search", f'"{F["q"]}"', ("q", None)))
     if F.get("has_metric"):
         chips.append(("Flag", "Has metric", ("has_metric", None)))
     for label, key in [
@@ -4026,6 +4093,8 @@ elif st.session_state["active_tab"] == "Explore Stories":
                 "has_metric": False,
             }
         )
+        st.session_state["page_offset"] = 0
+        st.session_state["last_results"] = STORIES
         changed = True
     elif to_remove:
         for k, v in to_remove:
@@ -4046,6 +4115,24 @@ elif st.session_state["active_tab"] == "Explore Stories":
 
     if changed:
         st.session_state["page_offset"] = 0
+
+        # If clearing all filters, delete widget state keys so they don't repopulate
+        if clear_all:
+            widget_keys_to_clear = [
+                "facet_q",
+                "facet_personas",
+                "facet_clients",
+                "facet_domain_group",
+                "facet_domains_all",
+                "facet_subdomains",
+                "facet_roles",
+                "facet_tags",
+                "facet_has_metric"
+            ]
+            for key in widget_keys_to_clear:
+                if key in st.session_state:
+                    del st.session_state[key]
+
         st.rerun()
 
     # --- Results header with view toggle (matching wireframe) ---
@@ -4077,40 +4164,36 @@ elif st.session_state["active_tab"] == "Explore Stories":
     end = min(offset + page_size, total_results)
 
     # Results summary row - all on one line matching wireframe
-    col1, col2, col3, spacer, col4 = st.columns([2.5, 0.15, 0.25, 0.1, 1.2])
+    col1, col2, col3, spacer, col4 = st.columns([2.2, 0.18, 0.5, 0.12, 1.2])
 
     with col1:
         st.markdown(f"""
-        <div style="padding-top: 6px; color: var(--text-color); font-size: 14px;">
-            <strong style="font-size: 16px;">{total_results}</strong> projects found • Showing <strong>{start}-{end}</strong>
+        <div style="display: flex; align-items: flex-end; min-height: 40px; color: var(--text-color); font-size: 14px;">
+            Showing &nbsp;<strong>{start}–{end}</strong>&nbsp; of &nbsp;<strong>{total_results}</strong>&nbsp; projects
         </div>
         """, unsafe_allow_html=True)
-
     with col2:
-        st.markdown('<div style="padding-top: 6px; font-size: 14px; font-weight: 500; white-space: nowrap;">SHOW:</div>', unsafe_allow_html=True)
+         st.markdown('<div style="display: flex; align-items: flex-end; min-height: 40px; font-size: 14px; font-weight: 500; white-space: nowrap;">SHOW:</div>', unsafe_allow_html=True)
 
     with col3:
         page_size_option = st.selectbox(
             "page_size",
-            options=[10, 20, 50],
+            options=[10, 20, 55],
             index=0,
             key="page_size_select",
-            label_visibility="collapsed"
+            label_visibility="collapsed",
         )
 
     with col4:
+        st.markdown('<div style="padding-top: 6px;flex-end">', unsafe_allow_html=True)
         view_mode = st.segmented_control(
             "View",
             options=["Table", "Cards"],
             key="explore_view_mode",
             label_visibility="collapsed"
-        ) if hasattr(st, 'segmented_control') else st.radio(
-            "View",
-            ["Table", "Cards"],
-            horizontal=True,
-            key="explore_view_mode",
-            label_visibility="collapsed"
         )
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     # Recalculate with actual values
     layout_mode = "List (master‑detail)" if view_mode == "Table" else "Cards"
@@ -4196,11 +4279,7 @@ elif st.session_state["active_tab"] == "Explore Stories":
 
             if sel_rows:
                 st.session_state["active_story"] = sel_rows[0].get("ID")
-            else:
-                cur = st.session_state.get("active_story")
-                id_series = df_view["ID"].tolist() if "ID" in df_view.columns else []
-                if id_series and (not cur or cur not in id_series):
-                    st.session_state["active_story"] = id_series[0]
+            # Don't auto-select first row - let user choose what to view
 
         # Numbered pagination controls for table (matching wireframe exactly)
         total_pages = (total_results + page_size - 1) // page_size
@@ -4220,10 +4299,12 @@ elif st.session_state["active_tab"] == "Explore Stories":
                 border: 1.5px solid #e0e0e0 !important;
                 background: transparent !important;
                 color: var(--text-color) !important;
-                padding: 6px 14px !important;
-                font-size: 13px !important;
+                padding: 8px 16px !important;  /* Increased from 6px 14px */
+                font-size: 14px !important;    /* Increased from 13px */
                 font-weight: 500 !important;
-                min-height: 36px !important;
+                min-height: 40px !important;   /* Increased from 36px */
+                min-width: 60px !important;    /* NEW - makes buttons more uniform */
+                margin: 0 4px !important;      /* NEW - adds gap between buttons */
                 transition: all 0.2s ease !important;
             }
             div[data-testid="column"] .stButton > button:hover {
@@ -4411,14 +4492,20 @@ elif st.session_state["active_tab"] == "Explore Stories":
             <style>
             .fixed-height-card {
                 background: var(--secondary-background-color) !important;
-                padding: 20px 24px !important;
+                padding: 28px !important;  /* Increase from 20px */
                 border-radius: 12px !important;
                 border: 1px solid var(--border-color) !important;
                 transition: all 0.3s ease !important;
-                height: 320px !important;
+                height: 380px !important;  /* Increase from 320px */
                 display: flex !important;
                 flex-direction: column !important;
                 box-shadow: 0 4px 12px rgba(0,0,0,.25) !important;
+            }
+            /* Style View Details buttons to match wireframe */
+            .fixed-height-card ~ div button {
+                background: transparent !important;
+                border: 1.5px solid var(--border-color) !important;
+                color: var(--text-color) !important;
             }
             .fixed-height-card:hover {
                 transform: translateY(-4px) !important;
@@ -4462,6 +4549,22 @@ elif st.session_state["active_tab"] == "Explore Stories":
                 opacity: 0.7;
                 font-size: 14px;
             }
+            /* View Details button styling to match wireframe */
+            .card-button-wrapper button {
+                background: transparent !important;
+                border: 1.5px solid #e74c3c !important;
+                color: #e74c3c !important;
+                border-radius: 8px !important;
+                padding: 12px 24px !important;
+                font-size: 15px !important;
+                font-weight: 600 !important;
+                transition: all 0.2s ease !important;
+            }
+
+            .card-button-wrapper button:hover {
+                background: rgba(231, 76, 60, 0.1) !important;
+                border-color: #c0392b !important;
+            }
             </style>
             """, unsafe_allow_html=True)
 
@@ -4487,7 +4590,7 @@ elif st.session_state["active_tab"] == "Explore Stories":
 
                         st.markdown(f"""
                         <div class="fixed-height-card" style="margin-bottom: 20px;">
-                            <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 12px; color: var(--text-color);">{title}</h3>
+                            <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 16px; line-height: 1.3; color: var(--text-color);">{title}</h3>
                             <div style="color: #5b9dd9; font-size: 15px; font-weight: 600; margin-bottom: 10px;">{client}</div>
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
                                 <span style="font-size: 10px; color: #718096; text-transform: uppercase; font-weight: 700; letter-spacing: 0.8px;">{role}</span>
@@ -4497,38 +4600,21 @@ elif st.session_state["active_tab"] == "Explore Stories":
                         </div>
                         """, unsafe_allow_html=True)
 
+                        # Right before the button, add this wrapper
+                        st.markdown('<div class="card-button-wrapper">', unsafe_allow_html=True)
+
                         story_id = str(s.get('id', i))
                         if st.button("View Details", key=f"card_{story_id}", use_container_width=True):
                             st.session_state["active_story"] = story_id
                             st.rerun()
+
+                        st.markdown('</div>', unsafe_allow_html=True)
 
             # Numbered pagination controls for cards (matching Table pagination)
             total_pages = (total + page_size - 1) // page_size
             current_page = (offset // page_size) + 1
 
             if total_pages > 1:
-                st.markdown("""
-                <style>
-                /* Style pagination buttons to match segmented control wireframe */
-                div[data-testid="column"] .stButton > button {
-                    border-radius: 8px !important;
-                    border: 1.5px solid #e0e0e0 !important;
-                    background: transparent !important;
-                    color: var(--text-color) !important;
-                    padding: 6px 14px !important;
-                    font-size: 13px !important;
-                    font-weight: 500 !important;
-                    min-height: 36px !important;
-                    transition: all 0.2s ease !important;
-                }
-                div[data-testid="column"] .stButton > button:hover {
-                    border-color: #ff4b4b !important;
-                    background: rgba(255, 75, 75, 0.08) !important;
-                    color: var(--text-color) !important;
-                }
-                </style>
-                """, unsafe_allow_html=True)
-
                 # Calculate which page numbers to show (max 5 numbers + ellipsis)
                 if total_pages <= 7:
                     page_numbers = list(range(1, total_pages + 1))
@@ -4646,6 +4732,26 @@ elif st.session_state["active_tab"] == "Explore Stories":
 
 # --- ASK MATTGPT ---
 elif st.session_state["active_tab"] == "Ask MattGPT":
+    # Anchor at top to force scroll position
+    st.markdown('<div id="ask-top"></div>', unsafe_allow_html=True)
+
+    # Force scroll to top using multiple methods
+    st.markdown("""
+    <script>
+    // Immediate scroll
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+
+    // Also try after a tiny delay in case content is still loading
+    setTimeout(function() {
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+    }, 10);
+    </script>
+    """, unsafe_allow_html=True)
+
     # Add a header row with the title and the How it Works link
     col1, col2 = st.columns([5, 1])
     with col1:
@@ -4669,8 +4775,14 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
     """, unsafe_allow_html=True)
 
     # Show the modal if toggled
-        # Show the modal if toggled
     if st.session_state.get("show_how_modal", False):
+        # Force scroll to top when modal opens
+        st.markdown("""
+        <script>
+        window.scrollTo({top: 0, behavior: 'smooth'});
+        </script>
+        """, unsafe_allow_html=True)
+
         # Create a proper modal container without using expander
         st.markdown("---")
 
@@ -4924,6 +5036,26 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
 
     # 3) Render transcript so far (strict order, no reflow)
     _render_ask_transcript()
+
+    # Force scroll to top after transcript renders
+    st.markdown("""
+    <script>
+    // Multiple scroll methods with longer delays
+    setTimeout(function() {
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+    }, 50);
+    setTimeout(function() {
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+    }, 100);
+    setTimeout(function() {
+        window.scrollTo(0, 0);
+    }, 200);
+    </script>
+    """, unsafe_allow_html=True)
 
     # 4) One‑shot nonsense/off‑domain banner appears AFTER transcript
     rendered_banner = False

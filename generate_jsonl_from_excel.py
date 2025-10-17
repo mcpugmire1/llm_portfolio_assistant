@@ -87,6 +87,8 @@ def excel_to_jsonl():
             "Title": title,
             "Client": client,
             "Role": normalize(row.get("Role", "")),
+            "Division": normalize(row.get("Division", "")),
+            "Industry": normalize(row.get("Industry", "")),
             "Category": normalize(row.get("Category", "")),
             "Sub-category": normalize(row.get("Sub-category", "")),
             "Competencies": [
