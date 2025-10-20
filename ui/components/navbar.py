@@ -22,11 +22,11 @@ def render_navbar(current_tab: str = "Home"):
     # Navbar-specific CSS - target by container class
     st.markdown(f"""
     <style>
-    /* Target the horizontal block that contains elements with st-key-topnav_ class */
+    /* Remove the full-width override - stay within Streamlit's container */
     div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) {{
         background: {COLORS['dark_navy']} !important;
         padding: {SPACING['nav_padding']} !important;
-        margin: -1rem -1rem 1rem -1rem !important;
+        margin: 0 !important; 
         border-radius: 0 !important;
     }}
 
