@@ -3570,6 +3570,15 @@ if st.session_state["active_tab"] == "Home":
     render_home_hero_and_stats()
     render_home_starters()
 
+# --- BANKING LANDING ---
+elif st.session_state["active_tab"] == "Banking":
+    from ui.pages.banking_landing import render_banking_landing
+    render_banking_landing()
+
+# --- CROSS-INDUSTRY LANDING ---
+elif st.session_state["active_tab"] == "Cross-Industry":
+    from ui.pages.cross_industry_landing import render_cross_industry_landing
+    render_cross_industry_landing()
 
 # --- STORIES ---
 elif st.session_state["active_tab"] == "Explore Stories":
