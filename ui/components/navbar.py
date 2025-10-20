@@ -19,12 +19,11 @@ def render_navbar(current_tab: str = "Home"):
         None (updates session state and triggers rerun on navigation)
     """
 
-    # Navbar-specific CSS - target the container by its unique characteristics
+    # Navbar-specific CSS - target by container class
     st.markdown(f"""
     <style>
-    /* Target the navigation container by looking for the specific button pattern */
-    /* This selector finds the horizontal block that contains our 4 navigation buttons */
-    div[data-testid="stHorizontalBlock"]:has(button[key*="topnav_"]) {{
+    /* Target the horizontal block that contains elements with st-key-topnav_ class */
+    div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) {{
         background: {COLORS['dark_navy']} !important;
         padding: {SPACING['nav_padding']} !important;
         margin: -1rem -1rem 1rem -1rem !important;
@@ -32,12 +31,12 @@ def render_navbar(current_tab: str = "Home"):
     }}
 
     /* Target columns within the nav container */
-    div[data-testid="stHorizontalBlock"]:has(button[key*="topnav_"]) > div[data-testid="column"] {{
+    div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-testid="column"] {{
         background: {COLORS['dark_navy']} !important;
     }}
 
-    /* Style ONLY navigation buttons (identified by key prefix) */
-    button[key^="topnav_"] {{
+    /* Style navigation buttons by targeting their containers */
+    [class*="st-key-topnav_"] button {{
         background: transparent !important;
         color: white !important;
         border: none !important;
@@ -45,14 +44,14 @@ def render_navbar(current_tab: str = "Home"):
         box-shadow: none !important;
     }}
 
-    /* Hover state for nav buttons */
-    button[key^="topnav_"]:hover {{
+    /* Hover state */
+    [class*="st-key-topnav_"] button:hover {{
         background: rgba(255, 255, 255, 0.1) !important;
         color: white !important;
     }}
 
-    /* Active/disabled state for nav buttons */
-    button[key^="topnav_"]:disabled {{
+    /* Disabled state */
+    [class*="st-key-topnav_"] button:disabled {{
         background: {COLORS['dark_navy_hover']} !important;
         color: white !important;
         font-weight: 600 !important;
