@@ -9,7 +9,9 @@ import os, re, time, textwrap, json
 from typing import List, Optional
 from urllib.parse import quote_plus
 
-from ui.components import css_once, render_home_hero_and_stats, render_home_starters
+from ui.legacy_components import css_once, render_home_hero_and_stats, render_home_starters
+from ui.components.navbar import render_navbar
+from ui.styles.global_styles import apply_global_styles
 
 # =========================
 # UI — Home / Stories / Ask / About
@@ -308,16 +310,25 @@ st.set_page_config(
     page_title="MattGPT — Matt's Story",
     page_icon="🤖",
     layout="wide",
-    initial_sidebar_state="expanded"  # Show sidebar by default, especially helpful on mobile
+    initial_sidebar_state="collapsed"  # Hide sidebar - we use top navbar instead
 )
 
-# ensure external UI CSS is injected once (safe no-op if it’s empty)
+# Apply global styles once per session
+apply_global_styles()
+
+# ensure external UI CSS is injected once (safe no-op if it's empty)
 css_once()
 
 # ---- first-mount guard: let CSS finish applying, then paint once more ----
 if not st.session_state.get("__first_mount_rerun__", False):
     st.session_state["__first_mount_rerun__"] = True
     st.rerun()
+
+# Initialize session state for active tab
+st.session_state.setdefault("active_tab", "Home")
+
+# Render top navigation bar
+render_navbar(current_tab=st.session_state.get("active_tab", "Home"))
 # optional: ChatGPT-style sidebar menu
 try:
     from streamlit_option_menu import option_menu
@@ -430,7 +441,7 @@ if ENABLE_TOP_QUICK_NAV and st.session_state.get("active_tab", "Home") == "Home"
 
 
 # Choose nav mode:
-USE_SIDEBAR_NAV = True  # set False to use top button nav (classic look)
+USE_SIDEBAR_NAV = False  # Using top navbar instead
 
 # single source of truth for the current tab
 st.session_state.setdefault("active_tab", "Home")
@@ -551,27 +562,28 @@ if USE_SIDEBAR_NAV:
 # ------------------------------------------------------------
 
 # --- Top nav (classic, ChatGPT‑ish pills) ---
-if not USE_SIDEBAR_NAV:
-    st.markdown(" ")
-    current = st.session_state.get("active_tab", "Home")
-    labels = [
-        ("🏠 Home", "Home"),
-        ("📚 Explore Stories", "Explore Stories"),
-        ("💬 Ask MattGPT", "Ask MattGPT"),
-        ("👤 About Matt", "About Matt"),
-    ]
-    cols = st.columns(len(labels), gap="medium")
-    for i, (label, name) in enumerate(labels):
-        with cols[i]:
-            if st.button(
-                label,
-                use_container_width=True,
-                key=f"topnav_{name}",
-                disabled=(name == current),
-            ):
-                st.session_state["active_tab"] = name
-                st.rerun()
-    st.markdown("---")
+# DISABLED: Now using ui/components/navbar.py instead
+# if not USE_SIDEBAR_NAV:
+#     st.markdown(" ")
+#     current = st.session_state.get("active_tab", "Home")
+#     labels = [
+#         ("🏠 Home", "Home"),
+#         ("📚 Explore Stories", "Explore Stories"),
+#         ("💬 Ask MattGPT", "Ask MattGPT"),
+#         ("👤 About Matt", "About Matt"),
+#     ]
+#     cols = st.columns(len(labels), gap="medium")
+#     for i, (label, name) in enumerate(labels):
+#         with cols[i]:
+#             if st.button(
+#                 label,
+#                 use_container_width=True,
+#                 key=f"topnav_{name}",
+#                 disabled=(name == current),
+#             ):
+#                 st.session_state["active_tab"] = name
+#                 st.rerun()
+#     st.markdown("---")
 
 
 # --- Audience derivation from Person (5Ps) ---
@@ -3869,8 +3881,8 @@ elif st.session_state["active_tab"] == "Explore Stories":
                 key="facet_domain_group"
             )
 
-        # Row 2: Domain details + additional filters
-        c1, c2 = st.columns([1.5, 2.5])
+        # Row 2: Flatten to a single row with 4 columns to avoid nested column styling issue
+        c1, c2, c3, c4 = st.columns([1.5, 1, 1, 1])
 
         with c1:
             # Domain multiselect based on category
@@ -3901,23 +3913,19 @@ elif st.session_state["active_tab"] == "Explore Stories":
                 )
 
         with c2:
-            # Optional filters in a compact row - NOW WITH CLIENT
-            subcols = st.columns([1, 1, 1])  # Changed from [1, 1, 1.2] to [1, 1, 1, 1.2]
-            
-            with subcols[0]:
-                F["clients"] = st.multiselect(
-                    "Client", clients, default=F["clients"], key="facet_clients"
-                )
-            
-            with subcols[1]:
-                F["roles"] = st.multiselect(
-                    "Role", roles, default=F["roles"], key="facet_roles"
-                )
-            
-            with subcols[2]:
-                F["tags"] = st.multiselect(
-                    "Tags", tags, default=F["tags"], key="facet_tags"
-                )
+            F["clients"] = st.multiselect(
+                "Client", clients, default=F["clients"], key="facet_clients"
+            )
+
+        with c3:
+            F["roles"] = st.multiselect(
+                "Role", roles, default=F["roles"], key="facet_roles"
+            )
+
+        with c4:
+            F["tags"] = st.multiselect(
+                "Tags", tags, default=F["tags"], key="facet_tags"
+            )
             
         # Reset button
         cols = st.columns([1, 4])
