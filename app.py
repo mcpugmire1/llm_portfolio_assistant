@@ -13,219 +13,17 @@ from ui.legacy_components import css_once, render_home_hero_and_stats, render_ho
 from ui.components.navbar import render_navbar
 from ui.styles.global_styles import apply_global_styles
 from config.debug import DEBUG
+from utils.ui_helpers import safe_container, dbg
+from config.settings import get_conf
+from utils.formatting import _format_narrative, _format_key_points, _format_deep_dive
+from services.pinecone_service import _safe_json
 
 # =========================
 # UI — Home / Stories / Ask / About
 
 
-def render_sources_chips(
-    sources: list[dict],
-    title: str = "Sources",
-    *,
-    stay_here: bool = False,
-    key_prefix: str = "",
-):
-    """Render Sources as compact, 2-line chips.
-    - stay_here=True: switch the active story + modes inline on Ask (no tab jump)
-    - stay_here=False: legacy behavior (navigate to Explore Stories)
-    """
-    if not sources:
-        return
-
-    # Normalize + prune empties, but accept story_id as fallback and try to infer from title/client if missing
-    items = []
-    for s in sources:
-        # prefer 'id', fall back to 'story_id' (common from LLM/backend)
-        sid = str(s.get("id") or s.get("story_id") or "").strip()
-        client = (s.get("client") or "").strip()
-        title_txt = (s.get("title") or "").strip()
-        # If no id was provided, try to infer from STORIES by title/client
-        if not sid and (title_txt or client):
-            cand = None
-            low_title = title_txt.lower()
-            low_client = client.lower()
-            for x in STORIES:
-                xt = (x.get("title") or "").strip().lower()
-                xc = (x.get("client") or "").strip().lower()
-                if (
-                    low_title
-                    and xt == low_title
-                    and (not low_client or xc == low_client)
-                ):
-                    cand = x
-                    break
-            if cand:
-                sid = str(cand.get("id") or "").strip()
-        # Skip if we still don't have an id and no visible label
-        if not sid and not (title_txt or client):
-            continue
-        # Keep the item even if id is still blank, so click can resolve by title/client
-        items.append(
-            {
-                "id": sid or "",
-                "client": client,
-                "title": title_txt,
-            }
-        )
-    if not items:
-        return
-
-    # tighter, non-<p> header + zero top gap container
-    st.markdown(f"<div class='section-tight'>{title}</div>", unsafe_allow_html=True)
-    st.markdown(
-        "<div data-mpg-srcchips class='pill-container sources-tight sources-grid'>",
-        unsafe_allow_html=True,
-    )
-
-    # Lay out chips in rows using Streamlit columns (3-up per row)
-    per_row = 3
-    container = st.container()
-    batch: list[dict] = []
-
-    def _chip_label(item: dict, idx: int) -> tuple[str, str]:
-        sep = " \u2009— "
-        base = (
-            f"{item['client']}{sep}{item['title']}" if item["client"] else item["title"]
-        )
-        short = _shorten_middle(base, 72)
-        safe_id = item.get("id") or _slug(base) or str(idx)
-        _scores = st.session_state.get("__pc_last_ids__", {}) or {}
-        sc = _scores.get(str(safe_id) or str(item.get("id") or ""))
-        pct = f"{float(sc)*100:.0f}%" if isinstance(sc, (int, float)) else None
-        label = f"{pct} Match • {short}" if pct else short
-        return label, safe_id
-
-    for i, s in enumerate(items, 1):
-        batch.append(s)
-        if len(batch) == per_row or i == len(items):
-            cols = container.columns(len(batch))
-            for col, item in zip(cols, batch):
-                with col:
-                    label, safe_id = _chip_label(item, i)
-                    btn_key = f"{key_prefix}srcchip_{safe_id}"
-                    if st.button(
-                        label,
-                        key=btn_key,
-                        use_container_width=False,
-                        help="Semantic relevance to your question (higher = stronger match)",
-                    ):
-                        st.session_state["active_story"] = item.get("id") or ""
-                        st.session_state["active_story_title"] = item.get("title")
-                        st.session_state["active_story_client"] = item.get("client")
-                        st.session_state["show_ask_panel"] = True
-
-                        # ➜ ADD THIS (one-shot lock)
-                        st.session_state["__ctx_locked__"] = True
-
-                        if stay_here:
-                            # resolve and pin the selected story context
-                            target = None
-                            sid_norm = (item.get("id") or "").strip()
-                            if sid_norm:
-                                target = next(
-                                    (
-                                        x
-                                        for x in STORIES
-                                        if str(x.get("id")) == str(sid_norm)
-                                    ),
-                                    None,
-                                )
-                            if not target:
-                                tgt_title = (item.get("title") or "").strip().lower()
-                                tgt_client = (item.get("client") or "").strip().lower()
-                                if tgt_title:
-                                    for x in STORIES:
-                                        xt = (x.get("title") or "").strip().lower()
-                                        xc = (x.get("client") or "").strip().lower()
-                                        if xt == tgt_title and (
-                                            not tgt_client or xc == tgt_client
-                                        ):
-                                            target = x
-                                            break
-                            if not target:
-                                lr = st.session_state.get("last_results") or []
-                                for x in lr:
-                                    cand = (
-                                        x.get("story") if isinstance(x, dict) else None
-                                    )
-                                    if not isinstance(cand, dict):
-                                        cand = x if isinstance(x, dict) else None
-                                    if not isinstance(cand, dict):
-                                        continue
-                                    xid = str(
-                                        cand.get("id") or cand.get("story_id") or ""
-                                    ).strip()
-                                    xt = (cand.get("title") or "").strip().lower()
-                                    xc = (cand.get("client") or "").strip().lower()
-                                    if (sid_norm and xid and xid == sid_norm) or (
-                                        (
-                                            item.get("title")
-                                            and xt
-                                            == (item.get("title") or "").strip().lower()
-                                        )
-                                        and (
-                                            not item.get("client")
-                                            or xc
-                                            == (item.get("client") or "")
-                                            .strip()
-                                            .lower()
-                                        )
-                                    ):
-                                        target = cand
-                                        break
-                            if target:
-                                st.session_state["active_story_obj"] = target
-                                st.session_state["answer_modes"] = story_modes(target)
-                                cur = st.session_state.get("answer_mode", "narrative")
-                                st.session_state["answer_mode"] = (
-                                    cur
-                                    if cur in ("narrative", "key_points", "deep_dive")
-                                    else "narrative"
-                                )
-                                st.session_state["last_sources"] = [
-                                    {
-                                        "id": target.get("id")
-                                        or target.get("story_id"),
-                                        "title": target.get("title"),
-                                        "client": target.get("client"),
-                                    }
-                                ]
-                            else:
-                                st.session_state["last_sources"] = [
-                                    {
-                                        "id": item.get("id") or item.get("story_id"),
-                                        "title": item.get("title"),
-                                        "client": item.get("client"),
-                                    }
-                                ]
-                        else:
-                            st.session_state["active_tab"] = "Explore Stories"
-                        st.rerun()
-            batch = []
-
-    st.markdown("</div>", unsafe_allow_html=True)
-
-
-# --- Mock-style non-interactive source badges (stays on Ask) ---
-def render_sources_badges(
-    sources: list[dict], title: str = "Sources", key_prefix: str = "srcbad_"
-):
-    """Backward-compatible alias: render interactive chips and stay on Ask."""
-    return render_sources_chips(
-        sources, title=title, stay_here=True, key_prefix=key_prefix
-    )
-
-
 import pandas as pd
 import streamlit as st
-
-
-# Streamlit compatibility helper for bordered containers (older Streamlit lacks border kw)
-def safe_container(*, border: bool = False):
-    try:
-        return st.container(border=border)
-    except TypeError:
-        return st.container()
 
 
 ASSIST_AVATAR = "🤖"  # keep the retro robot
@@ -236,26 +34,7 @@ from dotenv import load_dotenv
 import streamlit as st
 
 
-def dbg(*args):
-    if DEBUG:
-        try:
-            st.sidebar.write("🧪", *args)
-        except Exception:
-            pass
-
-
 load_dotenv()
-
-
-def get_conf(key: str, default: str | None = None):
-    try:
-        v = st.secrets.get(key)
-        if v is not None:
-            return v
-    except Exception:
-        pass
-    return os.getenv(key, default)
-
 
 VECTOR_BACKEND = (get_conf("VECTOR_BACKEND", "faiss") or "faiss").lower()
 OPENAI_API_KEY = get_conf("OPENAI_API_KEY")
@@ -715,72 +494,6 @@ def FIVEP_SUMMARY(s: dict) -> str:
     return s.get("5PSummary") or s.get("5p_summary") or ""
 
 
-def _format_narrative(s: dict) -> str:
-    """1-paragraph, recruiter-friendly narrative from a single story."""
-    title = s.get("title", "")
-    client = s.get("client", "")
-    domain = s.get("domain", "")
-    goal = (s.get("why") or "").strip().rstrip(".")
-    how = ", ".join((s.get("how") or [])[:2]).strip().rstrip(".")
-    metric = strongest_metric_line(s)
-    bits = []
-    if title or client:
-        bits.append(
-            f"I led **{title}** at **{client}**"
-            if title
-            else f"I led work at **{client}**"
-        )
-    if domain:
-        bits[-1] += f" in **{domain}**."
-    if goal:
-        bits.append(f"The aim was {goal.lower()}.")
-    if how:
-        bits.append(f"We focused on {how.lower()}.")
-    if metric:
-        bits.append(f"Impact: **{metric}**.")
-    return " ".join(bits) or build_5p_summary(s, 280)
-
-
-def _format_key_points(s: dict) -> str:
-    """3–4 bullets: scope, approach, outcomes."""
-    metric = strongest_metric_line(s)
-    lines = []
-    lines.append(f"- **Scope:** {s.get('title','')} — {s.get('client','')}".strip(" —"))
-    top_how = (s.get("how") or [])[:2]
-    if top_how:
-        lines.append("- **Approach:** " + " / ".join(top_how))
-    outs = s.get("what") or []
-    if metric:
-        lines.append(f"- **Outcome:** {metric}")
-    elif outs:
-        lines.append(f"- **Outcome:** {outs[0]}")
-    dom = s.get("domain")
-    if dom:
-        lines.append(f"- **Domain:** {dom}")
-    return "\n".join(lines)
-
-
-def _format_deep_dive(s: dict) -> str:
-    """Detail without saying STAR/5P explicitly: What was happening / Goal / What we did / Results."""
-    st_blocks = s.get("star", {}) or {}
-    situation = st_blocks.get("situation") or []
-    task = st_blocks.get("task") or []
-    action = st_blocks.get("action") or []
-    result = st_blocks.get("result") or []
-    parts = []
-    if situation:
-        parts.append(
-            "**What was happening**\n" + "\n".join([f"- {x}" for x in situation])
-        )
-    if task:
-        parts.append("**Goal**\n" + "\n".join([f"- {x}" for x in task]))
-    if action:
-        parts.append("**What we did**\n" + "\n".join([f"- {x}" for x in action]))
-    if result:
-        parts.append("**Results**\n" + "\n".join([f"- {x}" for x in result]))
-    return "\n\n".join(parts) or build_5p_summary(s, 320)
-
-
 # =========================
 # Story modes and related helpers
 # =========================
@@ -818,25 +531,6 @@ def _related_stories(s: dict, max_items: int = 3) -> list[dict]:
             scored.append((score, t))
     scored.sort(key=lambda x: x[0], reverse=True)
     return [t for _, t in scored[:max_items]]
-
-
-def _safe_json(obj):
-    try:
-        # pinecone client may expose one of these:
-        if hasattr(obj, "to_dict"):
-            return obj.to_dict()
-        if hasattr(obj, "model_dump"):
-            return obj.model_dump()
-        if hasattr(obj, "dict"):  # pydantic v1
-            return obj.dict()
-    except Exception:
-        pass
-    import json
-
-    try:
-        return json.loads(json.dumps(obj, default=str))
-    except Exception:
-        return {"_raw": str(obj)}
 
 
 def _summarize_index_stats(stats: dict) -> dict:
@@ -1490,64 +1184,6 @@ def render_followup_chips(primary_story: dict, query: str = "", key_suffix: str 
                 # This ensures context lock is cleared and we get fresh search results
                 st.session_state["__ask_force_answer__"] = True
                 st.rerun()
-
-def render_sources_badges_static(
-    sources: list[dict], title: str = "Sources", key_prefix: str = "srcbad_"
-):
-    """Render non-interactive mock-style badges under a small 'Sources' header.
-    This avoids nested layout/columns and matches the mock_ask_hybrid DOM exactly.
-    """
-    if not sources:
-        return
-
-    # Normalize + prune empties
-    items = []
-    for s in sources:
-        sid = str(s.get("id") or s.get("story_id") or "").strip()
-        client = (s.get("client") or "").strip()
-        title_txt = (s.get("title") or "").strip()
-        if not (sid or client or title_txt):
-            continue
-        items.append({"id": sid, "client": client, "title": title_txt})
-    if not items:
-        return
-
-    def _pick_icon(label: str) -> str:
-        low = label.lower()
-        if any(w in low for w in ["payment", "treasury", "bank"]):
-            return "bi-bank"
-        if any(w in low for w in ["health", "care", "patient", "kaiser"]):
-            return "bi-hospital"
-        if any(w in low for w in ["cloud", "kubernetes", "microservice"]):
-            return "bi-cloud"
-        if any(w in low for w in ["ai", "ml", "model", "genai", "rai"]):
-            return "bi-cpu"
-        return "bi-journal-text"
-
-    # Tight section header (no extra paragraph margins)
-    st.markdown(f"<div class='section-tight'>{title}</div>", unsafe_allow_html=True)
-
-    chips_html = []
-    _scores = st.session_state.get("__pc_last_ids__", {}) or {}
-    for s in items:
-        label_full = f"{s['client']} — {s['title']}" if s['client'] else s['title']
-        _score_key = str(s.get("id") or "")
-        sc = _scores.get(_score_key)
-        pct = f"{float(sc)*100:.0f}%" if isinstance(sc, (int, float)) else None
-
-        text = _shorten_middle(label_full, 96)
-        if pct:
-            text = f"{pct} Match • {text}"
-
-        # Static badge (no icon) to match the mock capsule style
-        chips_html.append(
-            f"<span class='badge' title='Semantic relevance'>{text}</span>"
-        )
-
-    st.markdown(
-        f"<div class='badge-row'>{''.join(chips_html)}</div>", unsafe_allow_html=True
-    )
-
 
 # --- Prefer external UI renderers when available; fall back to locals ---
 # In DEBUG, always use the local renderers to make behavior deterministic.
