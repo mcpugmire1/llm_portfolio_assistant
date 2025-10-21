@@ -367,7 +367,7 @@ def goto(tab_name: str):
     # If we are navigating to Home, ensure the Home pills do NOT auto-jump
     # by marking the first render as a fresh mount.
     if tab == "Home":
-        st.session_state["__home_first_mount__"] = Truex
+        st.session_state["__home_first_mount__"] = True
     # Stop this render immediately; the next run will paint the new tab.
     st.stop()
 
@@ -4756,1005 +4756,1010 @@ elif st.session_state["active_tab"] == "Explore Stories":
 
 # --- ASK MATTGPT ---
 elif st.session_state["active_tab"] == "Ask MattGPT":
-    # Anchor at top to force scroll position
-    st.markdown('<div id="ask-top"></div>', unsafe_allow_html=True)
+    from ui.pages.ask_mattgpt import render_ask_mattgpt
+    render_ask_mattgpt(STORIES)
+    # # Anchor at top to force scroll position
+    # st.markdown('<div id="ask-top"></div>', unsafe_allow_html=True)
 
-    # Force scroll to top using multiple methods
-    st.markdown("""
-    <script>
-    // Immediate scroll
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
+    # # Force scroll to top using multiple methods
+    # st.markdown("""
+    # <script>
+    # // Immediate scroll
+    # window.scrollTo(0, 0);
+    # document.documentElement.scrollTop = 0;
+    # document.body.scrollTop = 0;
 
-    // Also try after a tiny delay in case content is still loading
-    setTimeout(function() {
-        window.scrollTo(0, 0);
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
-    }, 10);
-    </script>
-    """, unsafe_allow_html=True)
+    # // Also try after a tiny delay in case content is still loading
+    # setTimeout(function() {
+    #     window.scrollTo(0, 0);
+    #     document.documentElement.scrollTop = 0;
+    #     document.body.scrollTop = 0;
+    # }, 10);
+    # </script>
+    # """, unsafe_allow_html=True)
 
-    # Add a header row with the title and the How it Works link
-    col1, col2 = st.columns([5, 1])
-    with col1:
-        st.subheader("Ask MattGPT")
-    with col2:
-        if st.button("🔧 How it works", key="how_works_top"):
-            st.session_state["show_how_modal"] = not st.session_state.get(
-                "show_how_modal", False
-            )
-            st.rerun()
+    # # Add a header row with the title and the How it Works link
+    # col1, col2 = st.columns([5, 1])
+    # with col1:
+    #     st.subheader("Ask MattGPT")
+    # with col2:
+    #     if st.button("🔧 How it works", key="how_works_top"):
+    #         st.session_state["show_how_modal"] = not st.session_state.get(
+    #             "show_how_modal", False
+    #         )
+    #         st.rerun()
     
-    # Intelligence indicator strip
-    st.markdown("""
-    <div style='display: flex; gap: 12px; align-items: center; padding: 8px 12px; background: rgba(56, 139, 253, 0.1); border: 1px solid rgba(56, 139, 253, 0.2); border-radius: 6px; font-size: 12px; color: #58a6ff; margin-bottom: 16px;'>
-        <span>🧠 Semantic search active</span>
-        <span>•</span>
-        <span>Pinecone index ready</span>
-        <span>•</span>
-        <span>115 stories indexed</span>
-    </div>
-    """, unsafe_allow_html=True)
+    # # Intelligence indicator strip
+    # st.markdown("""
+    # <div style='display: flex; gap: 12px; align-items: center; padding: 8px 12px; background: rgba(56, 139, 253, 0.1); border: 1px solid rgba(56, 139, 253, 0.2); border-radius: 6px; font-size: 12px; color: #58a6ff; margin-bottom: 16px;'>
+    #     <span>🧠 Semantic search active</span>
+    #     <span>•</span>
+    #     <span>Pinecone index ready</span>
+    #     <span>•</span>
+    #     <span>115 stories indexed</span>
+    # </div>
+    # """, unsafe_allow_html=True)
 
-    # Show the modal if toggled
-    if st.session_state.get("show_how_modal", False):
-        # Force scroll to top when modal opens
-        st.markdown("""
-        <script>
-        window.scrollTo({top: 0, behavior: 'smooth'});
-        </script>
-        """, unsafe_allow_html=True)
+    # # Show the modal if toggled
+    # if st.session_state.get("show_how_modal", False):
+    #     # Force scroll to top when modal opens
+    #     st.markdown("""
+    #     <script>
+    #     window.scrollTo({top: 0, behavior: 'smooth'});
+    #     </script>
+    #     """, unsafe_allow_html=True)
 
-        # Create a proper modal container without using expander
-        st.markdown("---")
+    #     # Create a proper modal container without using expander
+    #     st.markdown("---")
 
-        # Header with close button
-        col1, col2 = st.columns([10, 1])
-        with col1:
-            st.markdown("## 🔧 How MattGPT Works")
-        with col2:
-            if st.button("✕", key="close_how"):
-                st.session_state["show_how_modal"] = False
-                st.rerun()
+    #     # Header with close button
+    #     col1, col2 = st.columns([10, 1])
+    #     with col1:
+    #         st.markdown("## 🔧 How MattGPT Works")
+    #     with col2:
+    #         if st.button("✕", key="close_how"):
+    #             st.session_state["show_how_modal"] = False
+    #             st.rerun()
 
-        # Content in a bordered container
-        with st.container():
-            # Quick stats bar
-            col1, col2, col3, col4 = st.columns(4)
-            with col1:
-                st.metric("Stories Indexed", "115")
-            with col2:
-                st.metric("Avg Response Time", "1.2s")
-            with col3:
-                st.metric("Retrieval Accuracy", "87%")
-            with col4:
-                st.metric("Vector Dimensions", "384")
+    #     # Content in a bordered container
+    #     with st.container():
+    #         # Quick stats bar
+    #         col1, col2, col3, col4 = st.columns(4)
+    #         with col1:
+    #             st.metric("Stories Indexed", "115")
+    #         with col2:
+    #             st.metric("Avg Response Time", "1.2s")
+    #         with col3:
+    #             st.metric("Retrieval Accuracy", "87%")
+    #         with col4:
+    #             st.metric("Vector Dimensions", "384")
 
-            st.markdown("---")
+    #         st.markdown("---")
 
-            # Architecture overview
-            col1, col2 = st.columns(2)
+    #         # Architecture overview
+    #         col1, col2 = st.columns(2)
 
-            with col1:
-                st.markdown(
-                    """
-                ### Solution Architecture Overview
+    #         with col1:
+    #             st.markdown(
+    #                 """
+    #             ### Solution Architecture Overview
                 
-                **🎯 Semantic Search Pipeline**
-                - Sentence-BERT embeddings (all-MiniLM-L6-v2)
-                - 384-dimensional vector space
-                - Pinecone vector database with metadata filtering
+    #             **🎯 Semantic Search Pipeline**
+    #             - Sentence-BERT embeddings (all-MiniLM-L6-v2)
+    #             - 384-dimensional vector space
+    #             - Pinecone vector database with metadata filtering
                 
-                **🔄 Hybrid Retrieval**
-                - 80% semantic similarity weight
-                - 20% keyword matching weight
-                - Intent recognition for query understanding
-                """
-                )
+    #             **🔄 Hybrid Retrieval**
+    #             - 80% semantic similarity weight
+    #             - 20% keyword matching weight
+    #             - Intent recognition for query understanding
+    #             """
+    #             )
 
-            with col2:
-                st.markdown(
-                    """
-                ### Data & Processing
+    #         with col2:
+    #             st.markdown(
+    #                 """
+    #             ### Data & Processing
                 
-                **📊 Story Corpus**
-                - 115+ structured narratives from Fortune 500 projects
-                - STAR/5P framework encoding
-                - Rich metadata: client, domain, outcomes, metrics
+    #             **📊 Story Corpus**
+    #             - 115+ structured narratives from Fortune 500 projects
+    #             - STAR/5P framework encoding
+    #             - Rich metadata: client, domain, outcomes, metrics
                 
-                **💬 Response Generation**
-                - Context-aware retrieval (top-k=30)
-                - Multi-mode synthesis (Narrative/Key Points/Deep Dive)
-                - Source attribution with confidence scoring
-                """
-                )
+    #             **💬 Response Generation**
+    #             - Context-aware retrieval (top-k=30)
+    #             - Multi-mode synthesis (Narrative/Key Points/Deep Dive)
+    #             - Source attribution with confidence scoring
+    #             """
+    #             )
 
-            # Query Flow
-            st.markdown("### Query Flow")
-            st.code(
-                """
-                Your Question 
-                    ↓
-                [Embedding + Intent Analysis]
-                    ↓
-                [Pinecone Vector Search + Keyword Matching]
-                    ↓
-                [Hybrid Scoring & Ranking]
-                    ↓
-                [Top 3 Stories Retrieved]
-                    ↓
-                [Response Synthesis with Sources]
-                            """,
-                language="text",
-            )
+    #         # Query Flow
+    #         st.markdown("### Query Flow")
+    #         st.code(
+    #             """
+    #             Your Question 
+    #                 ↓
+    #             [Embedding + Intent Analysis]
+    #                 ↓
+    #             [Pinecone Vector Search + Keyword Matching]
+    #                 ↓
+    #             [Hybrid Scoring & Ranking]
+    #                 ↓
+    #             [Top 3 Stories Retrieved]
+    #                 ↓
+    #             [Response Synthesis with Sources]
+    #                         """,
+    #             language="text",
+    #         )
 
-            st.markdown("---")
-            st.markdown("### System Architecture")
+    #         st.markdown("---")
+    #         st.markdown("### System Architecture")
 
-            try:
-                with open("assets/rag_architecture_grid_svg.svg", "r") as f:
-                    svg_content = f.read()
+    #         try:
+    #             with open("assets/rag_architecture_grid_svg.svg", "r") as f:
+    #                 svg_content = f.read()
                 
-                # Remove XML declaration and DOCTYPE
-                svg_content = svg_content.replace('<?xml version="1.0" encoding="UTF-8" standalone="no"?>', '')
-                svg_content = svg_content.replace('<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">', '')
+    #             # Remove XML declaration and DOCTYPE
+    #             svg_content = svg_content.replace('<?xml version="1.0" encoding="UTF-8" standalone="no"?>', '')
+    #             svg_content = svg_content.replace('<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">', '')
                 
-                # Use HTML component with transparent background and no scroll
-                import streamlit.components.v1 as components
+    #             # Use HTML component with transparent background and no scroll
+    #             import streamlit.components.v1 as components
                 
-                components.html(f"""
-                <div style='width: 100%; text-align: center;'>
-                    {svg_content}
-                </div>
-                """, height=280, scrolling=False)
+    #             components.html(f"""
+    #             <div style='width: 100%; text-align: center;'>
+    #                 {svg_content}
+    #             </div>
+    #             """, height=280, scrolling=False)
                 
-            except Exception as e:
-                st.error(f"Error loading architecture diagram: {e}")
+    #         except Exception as e:
+    #             st.error(f"Error loading architecture diagram: {e}")
 
-            st.markdown("---")
+    #         st.markdown("---")
             
 
-            # Detailed breakdown
-            st.markdown("### Architecture Details")
+    #         # Detailed breakdown
+    #         st.markdown("### Architecture Details")
 
-            col1, col2 = st.columns(2)
+    #         col1, col2 = st.columns(2)
 
-            with col1:
-                st.markdown("""
-                **Search & Retrieval**
-                - **Semantic**: Pinecone cosine similarity (80% weight)
-                - **Keyword**: BM25-style token overlap (20% weight)
-                - Minimum similarity threshold: 0.15
-                - Top-k pool: 30 candidates before ranking
-                """)
+    #         with col1:
+    #             st.markdown("""
+    #             **Search & Retrieval**
+    #             - **Semantic**: Pinecone cosine similarity (80% weight)
+    #             - **Keyword**: BM25-style token overlap (20% weight)
+    #             - Minimum similarity threshold: 0.15
+    #             - Top-k pool: 30 candidates before ranking
+    #             """)
 
-            with col2:
-                st.markdown("""
-                **Response Synthesis**
-                - Rank top 3 stories by blended score
-                - Generate 3 views from same sources:
-                - Narrative (1-paragraph summary)
-                - Key Points (3-4 bullets)
-                - Deep Dive (STAR breakdown)
-                - Interactive source chips with confidence %
-                """)
+    #         with col2:
+    #             st.markdown("""
+    #             **Response Synthesis**
+    #             - Rank top 3 stories by blended score
+    #             - Generate 3 views from same sources:
+    #             - Narrative (1-paragraph summary)
+    #             - Key Points (3-4 bullets)
+    #             - Deep Dive (STAR breakdown)
+    #             - Interactive source chips with confidence %
+    #             """)
 
-            st.markdown("---")
+    #         st.markdown("---")
 
-            st.markdown("""
-            **Key Differentiators:**
-            - Hybrid retrieval ensures both semantic understanding and exact term matching
-            - Multi-mode synthesis provides flexible presentation for different use cases
-            - Context locking allows follow-up questions on specific stories
-            - Off-domain gating with suggestion chips prevents poor matches
-            """)
+    #         st.markdown("""
+    #         **Key Differentiators:**
+    #         - Hybrid retrieval ensures both semantic understanding and exact term matching
+    #         - Multi-mode synthesis provides flexible presentation for different use cases
+    #         - Context locking allows follow-up questions on specific stories
+    #         - Off-domain gating with suggestion chips prevents poor matches
+    #         """)
 
-    # Define ctx - MUST be outside and after the modal block
-    ctx = get_context_story()
-    _show_ctx = bool(ctx) and (
-        st.session_state.get("__ctx_locked__") or st.session_state.get("__asked_once__")
-    )
+    # # Define ctx - MUST be outside and after the modal block
+    # ctx = get_context_story()
+    # _show_ctx = bool(ctx) and (
+    #     st.session_state.get("__ctx_locked__") or st.session_state.get("__asked_once__")
+    # )
 
-    if _show_ctx:
-        render_compact_context_banner()
+    # if _show_ctx:
+    #     render_compact_context_banner()
 
-    # Rest of your Ask MattGPT content continues...
-    # Rest of your Ask MattGPT content continues as normal
-    # Context banner, transcript, etc...
+    # # Rest of your Ask MattGPT content continues...
+    # # Rest of your Ask MattGPT content continues as normal
+    # # Context banner, transcript, etc...
 
-    # with right:
-    #    if st.button("×", key="btn_clear_ctx", help="Clear context"):
-    #       _clear_ask_context()
+    # # with right:
+    # #    if st.button("×", key="btn_clear_ctx", help="Clear context"):
+    # #       _clear_ask_context()
 
-    # Lightweight DEBUG status for Ask (visible only when DEBUG=True)
-    if DEBUG:
-        try:
-            _dbg_flags = {
-                "vector": VECTOR_BACKEND,
-                "index": PINECONE_INDEX_NAME or "-",
-                "ns": PINECONE_NAMESPACE or "-",
-                "pc_suppressed": bool(st.session_state.get("__pc_suppressed__")),
-                "has_last": bool(st.session_state.get("last_sources")),
-                "pending_snap": bool(st.session_state.get("__pending_card_snapshot__")),
-                # NEW: report external renderer overrides
-                "ext_chips": (
-                    "yes"
-                    if callable(globals().get("_ext_render_sources_chips"))
-                    else "no"
-                ),
-                "ext_badges": (
-                    "yes"
-                    if callable(globals().get("_ext_render_sources_badges_static"))
-                    else "no"
-                ),
-            }
-            st.caption("🧪 " + ", ".join(f"{k}={v}" for k, v in _dbg_flags.items()))
-            # Second line: last prompt + ask decision
-            lp = (st.session_state.get("__ask_dbg_prompt") or "").strip()
-            lp = (lp[:60] + "…") if len(lp) > 60 else lp
-            st.caption(
-                "🧪 "
-                + f"prompt='{lp}' from_suggestion={st.session_state.get('__ask_dbg_from_suggestion')}"
-                + f" force={st.session_state.get('__ask_dbg_force_answer')} pc_hits={st.session_state.get('__dbg_pc_hits')}"
-                + f" decision={st.session_state.get('__ask_dbg_decision')}"
-                + f" reason={st.session_state.get('ask_last_reason')}"
-            )
-        except Exception:
-            pass
+    # # Lightweight DEBUG status for Ask (visible only when DEBUG=True)
+    # if DEBUG:
+    #     try:
+    #         _dbg_flags = {
+    #             "vector": VECTOR_BACKEND,
+    #             "index": PINECONE_INDEX_NAME or "-",
+    #             "ns": PINECONE_NAMESPACE or "-",
+    #             "pc_suppressed": bool(st.session_state.get("__pc_suppressed__")),
+    #             "has_last": bool(st.session_state.get("last_sources")),
+    #             "pending_snap": bool(st.session_state.get("__pending_card_snapshot__")),
+    #             # NEW: report external renderer overrides
+    #             "ext_chips": (
+    #                 "yes"
+    #                 if callable(globals().get("_ext_render_sources_chips"))
+    #                 else "no"
+    #             ),
+    #             "ext_badges": (
+    #                 "yes"
+    #                 if callable(globals().get("_ext_render_sources_badges_static"))
+    #                 else "no"
+    #             ),
+    #         }
+    #         st.caption("🧪 " + ", ".join(f"{k}={v}" for k, v in _dbg_flags.items()))
+    #         # Second line: last prompt + ask decision
+    #         lp = (st.session_state.get("__ask_dbg_prompt") or "").strip()
+    #         lp = (lp[:60] + "…") if len(lp) > 60 else lp
+    #         st.caption(
+    #             "🧪 "
+    #             + f"prompt='{lp}' from_suggestion={st.session_state.get('__ask_dbg_from_suggestion')}"
+    #             + f" force={st.session_state.get('__ask_dbg_force_answer')} pc_hits={st.session_state.get('__dbg_pc_hits')}"
+    #             + f" decision={st.session_state.get('__ask_dbg_decision')}"
+    #             + f" reason={st.session_state.get('ask_last_reason')}"
+    #         )
+    #     except Exception:
+    #         pass
 
-    # 1) Bootstrap a stable transcript (one-time)
-    _ensure_ask_bootstrap()
+    # # 1) Bootstrap a stable transcript (one-time)
+    # _ensure_ask_bootstrap()
 
-    # 2) Unify seeds and chip-clicks: inject as a real user turn if present
-    seed = st.session_state.pop("seed_prompt", None)
-    injected = st.session_state.pop("__inject_user_turn__", None)
-    pending = seed or injected
-    if pending:
-        # If a live card was pending snapshot, capture it now before injecting the new turn
-        if st.session_state.get("__pending_card_snapshot__"):
-            _push_card_snapshot_from_state()
-            st.session_state["__pending_card_snapshot__"] = False
-        _push_user_turn(pending)
-        with st.status("Searching Matt's experience...", expanded=True) as status:
-            try:
-                # Ask is pure semantic; ignore Explore filters here
-                resp = send_to_backend(pending, {}, ctx)
+    # # 2) Unify seeds and chip-clicks: inject as a real user turn if present
+    # seed = st.session_state.pop("seed_prompt", None)
+    # injected = st.session_state.pop("__inject_user_turn__", None)
+    # pending = seed or injected
+    # if pending:
+    #     # If a live card was pending snapshot, capture it now before injecting the new turn
+    #     if st.session_state.get("__pending_card_snapshot__"):
+    #         _push_card_snapshot_from_state()
+    #         st.session_state["__pending_card_snapshot__"] = False
+    #     _push_user_turn(pending)
+    #     with st.status("Searching Matt's experience...", expanded=True) as status:
+    #         try:
+    #             # Ask is pure semantic; ignore Explore filters here
+    #             resp = send_to_backend(pending, {}, ctx)
 
-                # Show confidence after retrieval
-                sources = resp.get("sources", [])
-                if sources:
-                    first_id = str(sources[0].get("id", ""))
-                    scores = st.session_state.get("__pc_last_ids__", {}) or {}
-                    conf = scores.get(first_id)
-                    if conf:
-                        conf_pct = int(float(conf) * 100)
-                        st.write(f"✓ Found relevant stories • {conf_pct}% match confidence")
+    #             # Show confidence after retrieval
+    #             sources = resp.get("sources", [])
+    #             if sources:
+    #                 first_id = str(sources[0].get("id", ""))
+    #                 scores = st.session_state.get("__pc_last_ids__", {}) or {}
+    #                 conf = scores.get(first_id)
+    #                 if conf:
+    #                     conf_pct = int(float(conf) * 100)
+    #                     st.write(f"✓ Found relevant stories • {conf_pct}% match confidence")
 
-                status.update(label="Answer ready!", state="complete", expanded=False)
+    #             status.update(label="Answer ready!", state="complete", expanded=False)
 
-            except Exception as e:
-                    status.update(label="Error occurred", state="error")
-                    print(f"DEBUG: send_to_backend failed: {e}")
-                    import traceback
-                    traceback.print_exc()
-                    _push_assistant_turn(f"Error: {str(e)}")
-                    st.rerun()
+    #         except Exception as e:
+    #                 status.update(label="Error occurred", state="error")
+    #                 print(f"DEBUG: send_to_backend failed: {e}")
+    #                 import traceback
+    #                 traceback.print_exc()
+    #                 _push_assistant_turn(f"Error: {str(e)}")
+    #                 st.rerun()
 
-            else:
-                set_answer(resp)
-                # If no banner is active, append a static card snapshot now so it
-                # appears in-order as a chat bubble; also suppress the bottom live card once.
-                if not st.session_state.get(
-                    "ask_last_reason"
-                ) and not st.session_state.get("__sticky_banner__"):
-                    _push_card_snapshot_from_state()
-                    st.session_state["__suppress_live_card_once__"] = True
-                # If a chip click requested banner clear, perform it now after answer set
-                if st.session_state.pop("__clear_banner_after_answer__", False):
-                    st.session_state.pop("ask_last_reason", None)
-                    st.session_state.pop("ask_last_query", None)
-                    st.session_state.pop("ask_last_overlap", None)
-                st.rerun()
+    #         else:
+    #             set_answer(resp)
+    #             # If no banner is active, append a static card snapshot now so it
+    #             # appears in-order as a chat bubble; also suppress the bottom live card once.
+    #             if not st.session_state.get(
+    #                 "ask_last_reason"
+    #             ) and not st.session_state.get("__sticky_banner__"):
+    #                 _push_card_snapshot_from_state()
+    #                 st.session_state["__suppress_live_card_once__"] = True
+    #             # If a chip click requested banner clear, perform it now after answer set
+    #             if st.session_state.pop("__clear_banner_after_answer__", False):
+    #                 st.session_state.pop("ask_last_reason", None)
+    #                 st.session_state.pop("ask_last_query", None)
+    #                 st.session_state.pop("ask_last_overlap", None)
+    #             st.rerun()
 
-    # 3) Render transcript so far (strict order, no reflow)
-    _render_ask_transcript()
+    # # 3) Render transcript so far (strict order, no reflow)
+    # _render_ask_transcript()
 
-    # Force scroll to top after transcript renders
-    st.markdown("""
-    <script>
-    // Multiple scroll methods with longer delays
-    setTimeout(function() {
-        window.scrollTo(0, 0);
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
-    }, 50);
-    setTimeout(function() {
-        window.scrollTo(0, 0);
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
-    }, 100);
-    setTimeout(function() {
-        window.scrollTo(0, 0);
-    }, 200);
-    </script>
-    """, unsafe_allow_html=True)
+    # # Force scroll to top after transcript renders
+    # st.markdown("""
+    # <script>
+    # // Multiple scroll methods with longer delays
+    # setTimeout(function() {
+    #     window.scrollTo(0, 0);
+    #     document.documentElement.scrollTop = 0;
+    #     document.body.scrollTop = 0;
+    # }, 50);
+    # setTimeout(function() {
+    #     window.scrollTo(0, 0);
+    #     document.documentElement.scrollTop = 0;
+    #     document.body.scrollTop = 0;
+    # }, 100);
+    # setTimeout(function() {
+    #     window.scrollTo(0, 0);
+    # }, 200);
+    # </script>
+    # """, unsafe_allow_html=True)
 
-    # 4) One‑shot nonsense/off‑domain banner appears AFTER transcript
-    rendered_banner = False
-    if st.session_state.get("ask_last_reason"):
-        with st.chat_message("assistant"):
-            render_no_match_banner(
-                reason=st.session_state.get("ask_last_reason", ""),
-                query=st.session_state.get("ask_last_query", ""),
-                overlap=st.session_state.get("ask_last_overlap", None),
-                suppressed=st.session_state.get("__pc_suppressed__", False),
-                filters=st.session_state.get("filters", {}),
-                key_prefix="askinline",
-            )
-        rendered_banner = True
-        # Clear flags so the banner doesn't re-render on every rerun
-        st.session_state.pop("ask_last_reason", None)
-        st.session_state.pop("ask_last_query", None)
-        st.session_state.pop("ask_last_overlap", None)
-        # Persist as sticky so it remains visible between user turns unless dismissed
-        st.session_state.setdefault(
-            "__sticky_banner__",
-            {
-                "reason": (
-                    dec
-                    if (dec := (st.session_state.get("__ask_dbg_decision") or ""))
-                    else "no_match"
-                ),
-                "query": st.session_state.get("__ask_dbg_prompt", ""),
-                "overlap": None,
-                "suppressed": bool(st.session_state.get("__pc_suppressed__", False)),
-            },
-        )
-    elif True:
-        # Forced fallback: if gating decided no‑match but the flag was not set,
-        # render a banner anyway so the user sees actionable chips.
-        dec = (st.session_state.get("__ask_dbg_decision") or "").strip().lower()
-        no_match_decision = (
-            dec.startswith("rule:")
-            or dec.startswith("low_overlap")
-            or dec == "low_conf"
-            or dec == "no_overlap+low_conf"
-        )
-        if no_match_decision and not st.session_state.get("last_sources"):
-            with st.chat_message("assistant"):
-                render_no_match_banner(
-                    reason=dec or "no_match",
-                    query=st.session_state.get("__ask_dbg_prompt", ""),
-                    overlap=st.session_state.get("ask_last_overlap", None),
-                    suppressed=st.session_state.get("__pc_suppressed__", False),
-                    filters=st.session_state.get("filters", {}),
-                    key_prefix="askinline_forced",
-                )
-            rendered_banner = True
+    # # 4) One‑shot nonsense/off‑domain banner appears AFTER transcript
+    # rendered_banner = False
+    # if st.session_state.get("ask_last_reason"):
+    #     with st.chat_message("assistant"):
+    #         render_no_match_banner(
+    #             reason=st.session_state.get("ask_last_reason", ""),
+    #             query=st.session_state.get("ask_last_query", ""),
+    #             overlap=st.session_state.get("ask_last_overlap", None),
+    #             suppressed=st.session_state.get("__pc_suppressed__", False),
+    #             filters=st.session_state.get("filters", {}),
+    #             key_prefix="askinline",
+    #         )
+    #     rendered_banner = True
+    #     # Clear flags so the banner doesn't re-render on every rerun
+    #     st.session_state.pop("ask_last_reason", None)
+    #     st.session_state.pop("ask_last_query", None)
+    #     st.session_state.pop("ask_last_overlap", None)
+    #     # Persist as sticky so it remains visible between user turns unless dismissed
+    #     st.session_state.setdefault(
+    #         "__sticky_banner__",
+    #         {
+    #             "reason": (
+    #                 dec
+    #                 if (dec := (st.session_state.get("__ask_dbg_decision") or ""))
+    #                 else "no_match"
+    #             ),
+    #             "query": st.session_state.get("__ask_dbg_prompt", ""),
+    #             "overlap": None,
+    #             "suppressed": bool(st.session_state.get("__pc_suppressed__", False)),
+    #         },
+    #     )
+    # elif True:
+    #     # Forced fallback: if gating decided no‑match but the flag was not set,
+    #     # render a banner anyway so the user sees actionable chips.
+    #     dec = (st.session_state.get("__ask_dbg_decision") or "").strip().lower()
+    #     no_match_decision = (
+    #         dec.startswith("rule:")
+    #         or dec.startswith("low_overlap")
+    #         or dec == "low_conf"
+    #         or dec == "no_overlap+low_conf"
+    #     )
+    #     if no_match_decision and not st.session_state.get("last_sources"):
+    #         with st.chat_message("assistant"):
+    #             render_no_match_banner(
+    #                 reason=dec or "no_match",
+    #                 query=st.session_state.get("__ask_dbg_prompt", ""),
+    #                 overlap=st.session_state.get("ask_last_overlap", None),
+    #                 suppressed=st.session_state.get("__pc_suppressed__", False),
+    #                 filters=st.session_state.get("filters", {}),
+    #                 key_prefix="askinline_forced",
+    #             )
+    #         rendered_banner = True
 
-    # Sticky banner temporarily disabled to stabilize chip clicks
-    st.session_state["__sticky_banner__"] = None
+    # # Sticky banner temporarily disabled to stabilize chip clicks
+    # st.session_state["__sticky_banner__"] = None
 
-    # 5) Compact answer panel (title • unclamped 5P • view pills • sources)
-    _m = st.session_state.get("answer_modes", {}) or {}
-    _srcs = st.session_state.get("last_sources", []) or []
-    _primary = None
-    if _srcs:
-        _sid = str(_srcs[0].get("id", ""))
-        _primary = next((s for s in STORIES if str(s.get("id")) == _sid), None)
-    # Suppress the bottom live card when:
-    #  - a banner was rendered this run; or
-    #  - we already have at least one static card snapshot in the transcript
-    has_snapshot_card = any(
-        (isinstance(x, dict) and x.get("type") == "card")
-        for x in st.session_state.get("ask_transcript", [])
-    )
-    if (
-        not rendered_banner
-        and not has_snapshot_card
-        and not st.session_state.get("__suppress_live_card_once__")
-        and (_m or _primary or st.session_state.get("last_answer"))
-    ):
-        # Always render the bottom live card so pills are available.
-        # Snapshot holds only header + one-liner + sources to avoid duplicate body text.
-        render_answer_card_compact(
-            _primary or {"title": "Answer"}, _m, "answer_mode"
-        )
+    # # 5) Compact answer panel (title • unclamped 5P • view pills • sources)
+    # _m = st.session_state.get("answer_modes", {}) or {}
+    # _srcs = st.session_state.get("last_sources", []) or []
+    # _primary = None
+    # if _srcs:
+    #     _sid = str(_srcs[0].get("id", ""))
+    #     _primary = next((s for s in STORIES if str(s.get("id")) == _sid), None)
+    # # Suppress the bottom live card when:
+    # #  - a banner was rendered this run; or
+    # #  - we already have at least one static card snapshot in the transcript
+    # has_snapshot_card = any(
+    #     (isinstance(x, dict) and x.get("type") == "card")
+    #     for x in st.session_state.get("ask_transcript", [])
+    # )
+    # if (
+    #     not rendered_banner
+    #     and not has_snapshot_card
+    #     and not st.session_state.get("__suppress_live_card_once__")
+    #     and (_m or _primary or st.session_state.get("last_answer"))
+    # ):
+    #     # Always render the bottom live card so pills are available.
+    #     # Snapshot holds only header + one-liner + sources to avoid duplicate body text.
+    #     render_answer_card_compact(
+    #         _primary or {"title": "Answer"}, _m, "answer_mode"
+    #     )
 
-    # Reset one-shot suppression flag after a render cycle
-    if st.session_state.get("__suppress_live_card_once__"):
-        st.session_state["__suppress_live_card_once__"] = False
+    # # Reset one-shot suppression flag after a render cycle
+    # if st.session_state.get("__suppress_live_card_once__"):
+    #     st.session_state["__suppress_live_card_once__"] = False
 
-    # 6) Handle a new chat input (command aliases or normal question)
-    # Render the chat input only on the Ask MattGPT tab
-    if st.session_state.get("active_tab") == "Ask MattGPT":
-        user_input_local = st.chat_input("Ask anything…", key="ask_chat_input1")
-    else:
-        user_input_local = None
-    if user_input_local:
-        # If a live card is pending snapshot from the previous answer, snapshot it now
-        if st.session_state.get("__pending_card_snapshot__"):
-            _push_card_snapshot_from_state()
-            st.session_state["__pending_card_snapshot__"] = False
+    # # 6) Handle a new chat input (command aliases or normal question)
+    # # Render the chat input only on the Ask MattGPT tab
+    # if st.session_state.get("active_tab") == "Ask MattGPT":
+    #     user_input_local = st.chat_input("Ask anything…", key="ask_chat_input1")
+    # else:
+    #     user_input_local = None
+    # if user_input_local:
+    #     # If a live card is pending snapshot from the previous answer, snapshot it now
+    #     if st.session_state.get("__pending_card_snapshot__"):
+    #         _push_card_snapshot_from_state()
+    #         st.session_state["__pending_card_snapshot__"] = False
 
-        # Append user's turn immediately to keep order deterministic
-        _push_user_turn(user_input_local)
+    #     # Append user's turn immediately to keep order deterministic
+    #     _push_user_turn(user_input_local)
 
-        # Clear context lock for fresh typed questions (not from suggestion chips)
-        if not st.session_state.get("__ask_from_suggestion__"):
-            st.session_state.pop("__ctx_locked__", None)
-            st.session_state.pop("active_context", None)
+    #     # Clear context lock for fresh typed questions (not from suggestion chips)
+    #     if not st.session_state.get("__ask_from_suggestion__"):
+    #         st.session_state.pop("__ctx_locked__", None)
+    #         st.session_state.pop("active_context", None)
 
-        # Command aliases (view switches) should not trigger new retrieval
-        cmd = re.sub(r"\s+", " ", user_input_local.strip().lower())
-        cmd_map = {
-            "narrative": "narrative",
-            "key points": "key_points",
-            "keypoints": "key_points",
-            "deep dive": "deep_dive",
-            "deep-dive": "deep_dive",
-            "details": "deep_dive",
-        }
-        # If a quick command is used without any story context, show a friendly tip
-        has_context = bool(
-            ctx
-            or st.session_state.get("active_story")
-            or st.session_state.get("last_sources")
-        )
-        if cmd in cmd_map and not has_context:
-            _push_assistant_turn(
-                "Quick mode commands like “key points” work after a story is in context — either select a story or ask a question first so I can cite sources. For now, try asking a full question."
-            )
-            st.rerun()
-        if cmd in cmd_map and (
-            ctx
-            or st.session_state.get("active_story")
-            or st.session_state.get("last_sources")
-        ):
-            # Resolve a target story: explicit context > last active story > last answer’s primary source
-            target = ctx
-            if not target:
-                sid = st.session_state.get("active_story")
-                if not sid:
-                    srcs = st.session_state.get("last_sources") or []
-                    if srcs:
-                        sid = srcs[0].get("id")
-                if sid:
-                    target = next(
-                        (x for x in STORIES if str(x.get("id")) == str(sid)), None
-                    )
+    #     # Command aliases (view switches) should not trigger new retrieval
+    #     cmd = re.sub(r"\s+", " ", user_input_local.strip().lower())
+    #     cmd_map = {
+    #         "narrative": "narrative",
+    #         "key points": "key_points",
+    #         "keypoints": "key_points",
+    #         "deep dive": "deep_dive",
+    #         "deep-dive": "deep_dive",
+    #         "details": "deep_dive",
+    #     }
+    #     # If a quick command is used without any story context, show a friendly tip
+    #     has_context = bool(
+    #         ctx
+    #         or st.session_state.get("active_story")
+    #         or st.session_state.get("last_sources")
+    #     )
+    #     if cmd in cmd_map and not has_context:
+    #         _push_assistant_turn(
+    #             "Quick mode commands like “key points” work after a story is in context — either select a story or ask a question first so I can cite sources. For now, try asking a full question."
+    #         )
+    #         st.rerun()
+    #     if cmd in cmd_map and (
+    #         ctx
+    #         or st.session_state.get("active_story")
+    #         or st.session_state.get("last_sources")
+    #     ):
+    #         # Resolve a target story: explicit context > last active story > last answer’s primary source
+    #         target = ctx
+    #         if not target:
+    #             sid = st.session_state.get("active_story")
+    #             if not sid:
+    #                 srcs = st.session_state.get("last_sources") or []
+    #                 if srcs:
+    #                     sid = srcs[0].get("id")
+    #             if sid:
+    #                 target = next(
+    #                     (x for x in STORIES if str(x.get("id")) == str(sid)), None
+    #                 )
 
-            if target:
-                modes_local = story_modes(target)
-                key = cmd_map[cmd]
-                heading = {
-                    "narrative": "Narrative",
-                    "key_points": "Key points",
-                    "deep_dive": "Deep dive",
-                }[key]
-                answer_md = (
-                    f"**{heading} for _{target.get('title','')} — {target.get('client','')}_**\n\n"
-                    + modes_local.get(key, "")
-                )
+    #         if target:
+    #             modes_local = story_modes(target)
+    #             key = cmd_map[cmd]
+    #             heading = {
+    #                 "narrative": "Narrative",
+    #                 "key_points": "Key points",
+    #                 "deep_dive": "Deep dive",
+    #             }[key]
+    #             answer_md = (
+    #                 f"**{heading} for _{target.get('title','')} — {target.get('client','')}_**\n\n"
+    #                 + modes_local.get(key, "")
+    #             )
 
-                # Prime compact answer state (no assistant bubble)
-                st.session_state["answer_modes"] = modes_local
-                st.session_state["answer_mode"] = key
-                st.session_state["last_answer"] = answer_md
-                st.session_state["last_sources"] = [
-                    {
-                        "id": target.get("id"),
-                        "title": target.get("title"),
-                        "client": target.get("client"),
-                    }
-                ]
-                # Show the answer card below the transcript
-                _push_assistant_turn(answer_md)
-                # Do NOT snapshot for command aliases; they don't represent a new question
-                st.rerun()
+    #             # Prime compact answer state (no assistant bubble)
+    #             st.session_state["answer_modes"] = modes_local
+    #             st.session_state["answer_mode"] = key
+    #             st.session_state["last_answer"] = answer_md
+    #             st.session_state["last_sources"] = [
+    #                 {
+    #                     "id": target.get("id"),
+    #                     "title": target.get("title"),
+    #                     "client": target.get("client"),
+    #                 }
+    #             ]
+    #             # Show the answer card below the transcript
+    #             _push_assistant_turn(answer_md)
+    #             # Do NOT snapshot for command aliases; they don't represent a new question
+    #             st.rerun()
 
-        # Normal question → ask backend, persist state, append assistant turn
-        # One-shot context lock: if a story was explicitly selected (chip/CTA),
-        # use that story as context for THIS turn only, then clear the lock.
-        # --- Determine context for THIS turn (one-shot lock) ---
-        ctx_for_this_turn = ctx
-        if st.session_state.pop("__ctx_locked__", False):  # consume the lock
-            try:
-                locked_ctx = get_context_story()
-            except Exception:
-                locked_ctx = None
-            if locked_ctx:
-                ctx_for_this_turn = locked_ctx
+    #     # Normal question → ask backend, persist state, append assistant turn
+    #     # One-shot context lock: if a story was explicitly selected (chip/CTA),
+    #     # use that story as context for THIS turn only, then clear the lock.
+    #     # --- Determine context for THIS turn (one-shot lock) ---
+    #     ctx_for_this_turn = ctx
+    #     if st.session_state.pop("__ctx_locked__", False):  # consume the lock
+    #         try:
+    #             locked_ctx = get_context_story()
+    #         except Exception:
+    #             locked_ctx = None
+    #         if locked_ctx:
+    #             ctx_for_this_turn = locked_ctx
 
-        # --- Ask backend + render result ---
-        with st.status("Searching Matt's experience...", expanded=True) as status:
-            try:
-                # Consume the suggestion flag (one-shot); we don't need its value here
-                st.session_state.pop("__ask_from_suggestion__", None)
+    #     # --- Ask backend + render result ---
+    #     with st.status("Searching Matt's experience...", expanded=True) as status:
+    #         try:
+    #             # Consume the suggestion flag (one-shot); we don't need its value here
+    #             st.session_state.pop("__ask_from_suggestion__", None)
 
-                # Ask is pure semantic; ignore Explore filters here
-                resp = send_to_backend(user_input_local, {}, ctx_for_this_turn)
+    #             # Ask is pure semantic; ignore Explore filters here
+    #             resp = send_to_backend(user_input_local, {}, ctx_for_this_turn)
 
-                # Show confidence after retrieval
-                sources = resp.get("sources", [])
-                if sources:
-                    first_id = str(sources[0].get("id", ""))
-                    scores = st.session_state.get("__pc_last_ids__", {}) or {}
-                    conf = scores.get(first_id)
-                    if conf:
-                        conf_pct = int(float(conf) * 100)
-                        st.write(f"✓ Found relevant stories • {conf_pct}% match confidence")
+    #             # Show confidence after retrieval
+    #             sources = resp.get("sources", [])
+    #             if sources:
+    #                 first_id = str(sources[0].get("id", ""))
+    #                 scores = st.session_state.get("__pc_last_ids__", {}) or {}
+    #                 conf = scores.get(first_id)
+    #                 if conf:
+    #                     conf_pct = int(float(conf) * 100)
+    #                     st.write(f"✓ Found relevant stories • {conf_pct}% match confidence")
 
-                status.update(label="Answer ready!", state="complete", expanded=False)
+    #             status.update(label="Answer ready!", state="complete", expanded=False)
 
-            except Exception as e:
-                status.update(label="Error occurred", state="error")
-                _push_assistant_turn("Sorry, I couldn't generate an answer right now.")
-                st.error(f"Backend error: {e}")
-                st.rerun()
+    #         except Exception as e:
+    #             status.update(label="Error occurred", state="error")
+    #             _push_assistant_turn("Sorry, I couldn't generate an answer right now.")
+    #             st.error(f"Backend error: {e}")
+    #             st.rerun()
 
-            else:
-                set_answer(resp)
+    #         else:
+    #             set_answer(resp)
 
-                # Add a static snapshot so the answer appears in-order as a bubble,
-                # and suppress the bottom live card once to avoid duplication.
-                if not st.session_state.get(
-                    "ask_last_reason"
-                ) and not st.session_state.get("__sticky_banner__"):
-                    _push_card_snapshot_from_state()
-                    st.session_state["__suppress_live_card_once__"] = True
+    #             # Add a static snapshot so the answer appears in-order as a bubble,
+    #             # and suppress the bottom live card once to avoid duplication.
+    #             if not st.session_state.get(
+    #                 "ask_last_reason"
+    #             ) and not st.session_state.get("__sticky_banner__"):
+    #                 _push_card_snapshot_from_state()
+    #                 st.session_state["__suppress_live_card_once__"] = True
 
-                st.rerun()
+    #             st.rerun()
 
 # --- ABOUT ---
 elif st.session_state["active_tab"] == "About Matt":
-    # First, ensure CSS is loaded
-    css_once()  # This should load your existing styles
+    from ui.pages.about_matt import render_about_matt
+    render_about_matt()
 
-    # If that doesn't work, inject the specific styles needed
-    st.markdown(
-        """
-    <style>
-    .hero-section {
-        text-align: center;
-            padding: 60px 30px;
-            background: var(--background-color);  
-            color: var(--text-color);  /* Instead of white */
-            border-radius: 16px;
-            margin-bottom: 50px;
-            position: relative;
-            overflow: hidden;
-    }
+#     # First, ensure CSS is loaded
+#     css_once()  # This should load your existing styles
+
+#     # If that doesn't work, inject the specific styles needed
+#     st.markdown(
+#         """
+#     <style>
+#     .hero-section {
+#         text-align: center;
+#             padding: 60px 30px;
+#             background: var(--background-color);  
+#             color: var(--text-color);  /* Instead of white */
+#             border-radius: 16px;
+#             margin-bottom: 50px;
+#             position: relative;
+#             overflow: hidden;
+#     }
     
-    .stat-card {
-        background: #2d2d2d;
-        padding: 32px 24px;
-        border-radius: 12px;
-        text-align: center;
-        border: 1px solid #3a3a3a;
-        transition: transform 0.3s ease;
-        margin-bottom: 24px;
-        box-shadow: 0 2px 8px rgba(128, 128, 128, 0.2);  /* Always visible shadow */
-    }
+#     .stat-card {
+#         background: #2d2d2d;
+#         padding: 32px 24px;
+#         border-radius: 12px;
+#         text-align: center;
+#         border: 1px solid #3a3a3a;
+#         transition: transform 0.3s ease;
+#         margin-bottom: 24px;
+#         box-shadow: 0 2px 8px rgba(128, 128, 128, 0.2);  /* Always visible shadow */
+#     }
     
-    .stat-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 4px 16px rgba(74, 144, 226, 0.2);
-    }
+#     .stat-card:hover {
+#         transform: translateY(-4px);
+#         box-shadow: 0 4px 16px rgba(74, 144, 226, 0.2);
+#     }
     
-    .stat-number {
-        font-size: 36px;
-        font-weight: 700;
-        color: #4a90e2;
-        display: block;
-        margin-bottom: 8px;
-    }
+#     .stat-number {
+#         font-size: 36px;
+#         font-weight: 700;
+#         color: #4a90e2;
+#         display: block;
+#         margin-bottom: 8px;
+#     }
     
-    .stat-label {
-        color: #b0b0b0;
-        font-size: 16px;
-    }
+#     .stat-label {
+#         color: #b0b0b0;
+#         font-size: 16px;
+#     }
     
-    .section-title {
-        font-size: 32px;
-        font-weight: 600;
-        text-align: center;
-        margin: 60px 0 40px 0;
-        color: #ffffff;
-    }
+#     .section-title {
+#         font-size: 32px;
+#         font-weight: 600;
+#         text-align: center;
+#         margin: 60px 0 40px 0;
+#         color: #ffffff;
+#     }
     
-    .fixed-height-card {
-        background: var(--secondary-background-color);
-        padding: 28px;
-        border-radius: 12px;
-        border: 1px solid var(--border-color);
-        transition: all 0.3s ease;
-        min-height: 250px;
-        box-shadow: 0 4px 12px rgba(0,0,0,.25);
-    }
+#     .fixed-height-card {
+#         background: var(--secondary-background-color);
+#         padding: 28px;
+#         border-radius: 12px;
+#         border: 1px solid var(--border-color);
+#         transition: all 0.3s ease;
+#         min-height: 250px;
+#         box-shadow: 0 4px 12px rgba(0,0,0,.25);
+#     }
 
-    .fixed-height-card:hover {
-        transform: translateY(-4px);
-        border-color: var(--border-color);
-        box-shadow: 0 8px 25px rgba(74,144,226,.15);
+#     .fixed-height-card:hover {
+#         transform: translateY(-4px);
+#         border-color: var(--border-color);
+#         box-shadow: 0 8px 25px rgba(74,144,226,.15);
 
-    }
-    .card-desc {
-        color: #b0b0b0;
-        margin-bottom: 8px;
-        line-height: 1.5;
-        font-size: 14px;
-    }
-    .skill-bar {
-        height: 6px;
-        background: var(--border-color);
-        border-radius: 3px;
-        margin-bottom: 16px;
-        position: relative;
-    }
+#     }
+#     .card-desc {
+#         color: #b0b0b0;
+#         margin-bottom: 8px;
+#         line-height: 1.5;
+#         font-size: 14px;
+#     }
+#     .skill-bar {
+#         height: 6px;
+#         background: var(--border-color);
+#         border-radius: 3px;
+#         margin-bottom: 16px;
+#         position: relative;
+#     }
 
-    .skill-fill {
-        height: 100%;
-        background: #4a90e2;
-        border-radius: 3px;
-        transition: width 0.3s ease;
-    }
+#     .skill-fill {
+#         height: 100%;
+#         background: #4a90e2;
+#         border-radius: 3px;
+#         transition: width 0.3s ease;
+#     }
 
-    .philosophy-card {
-        background: var(--secondary-background-color);
-        padding: 32px;
-        border-radius: 16px;
-        text-align: center;
-        border: 1px solid var(--border-color);
-        min-height: 180px;
-    }
+#     .philosophy-card {
+#         background: var(--secondary-background-color);
+#         padding: 32px;
+#         border-radius: 16px;
+#         text-align: center;
+#         border: 1px solid var(--border-color);
+#         min-height: 180px;
+#     }
 
-    .philosophy-icon {
-        font-size: 48px;
-        margin-bottom: 16px;
-        box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);  /* Always visible shadow */
-        }
+#     .philosophy-icon {
+#         font-size: 48px;
+#         margin-bottom: 16px;
+#         box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);  /* Always visible shadow */
+#         }
 
-    .timeline-marker {
-        width: 64px;
-        height: 64px;
-        background: #4a90e2;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        flex-shrink: 0;
-    }
-    </style>
-    """,
-        unsafe_allow_html=True,
-    )
+#     .timeline-marker {
+#         width: 64px;
+#         height: 64px;
+#         background: #4a90e2;
+#         border-radius: 50%;
+#         display: flex;
+#         align-items: center;
+#         justify-content: center;
+#         font-size: 24px;
+#         flex-shrink: 0;
+#     }
+#     </style>
+#     """,
+#         unsafe_allow_html=True,
+#     )
 
-    st.markdown("""
-    <style>
-    .hero-section {
-        padding: 20px 30px 16px 30px !important;
-        margin-top: 0 !important;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+#     st.markdown("""
+#     <style>
+#     .hero-section {
+#         padding: 20px 30px 16px 30px !important;
+#         margin-top: 0 !important;
+#     }
+#     </style>
+#     """, unsafe_allow_html=True)
 
-    st.markdown("""
-    <style>
-    /* Force About page content to start at the same position as Home */
-    section[data-testid="stAppViewContainer"] {
-        padding-top: 1rem !important;
-    }
+#     st.markdown("""
+#     <style>
+#     /* Force About page content to start at the same position as Home */
+#     section[data-testid="stAppViewContainer"] {
+#         padding-top: 1rem !important;
+#     }
 
-    /* Remove any extra spacing from the main block */
-    .main > div.block-container {
-        padding-top: 1rem !important;
-        max-width: 100%;
-    }
+#     /* Remove any extra spacing from the main block */
+#     .main > div.block-container {
+#         padding-top: 1rem !important;
+#         max-width: 100%;
+#     }
 
-    /* Eliminate hero section top spacing */
-    .hero-section {
-        margin-top: 0 !important;
-        padding-top: 20px !important;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
-
-    st.markdown("""<div class='hero-section' style='margin-top: 0; margin-bottom: 8px; padding: 20px 30px 16px 30px;'>
-    <h1 style='font-size: 48px; font-weight: 700; margin-bottom: 16px; margin-top: 0;'>Matt's Journey</h1>
-    <p style='font-size: 20px; color: #b0b0b0; max-width: 800px; margin: 0 auto;'>
-        Helping Fortune 500 companies modernize legacy systems and launch new cloud-native products — combining modern architecture, product mindset, 
-            and innovative engineering practices to deliver scalable digital platforms.</p>
-    </div>""", unsafe_allow_html=True)
+#     /* Eliminate hero section top spacing */
+#     .hero-section {
+#         margin-top: 0 !important;
+#         padding-top: 20px !important;
+#     }
+#     </style>
+#     """, unsafe_allow_html=True)
 
 
-    # Pure HTML stats that bypass Streamlit's CSS
-    st.markdown(
-    """
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 8px 0 24px 0;">
-        <div style="background: var(--secondary-background-color); padding: 28px 20px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
-            <span style="font-size: 36px; font-weight: 700; color: #4a90e2; display: block; margin-bottom: 8px;">20+</span>
-            <span style="color: #999999; font-size: 15px; display: block;">Years Experience</span>
-        </div>
-        <div style="background: var(--secondary-background-color); padding: 28px 20px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
-            <span style="font-size: 36px; font-weight: 700; color: #4a90e2; display: block; margin-bottom: 8px;">300+</span>
-            <span style="color: #999999; font-size: 15px; display: block;">Professionals Upskilled</span>
-        </div>
-        <div style="background: var(--secondary-background-color); padding: 28px 20px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
-            <span style="font-size: 36px; font-weight: 700; color: #4a90e2; display: block; margin-bottom: 8px;">200+</span>
-            <span style="color: #999999; font-size: 15px; display: block;">Engineers Certified</span>
-        </div>
-        <div style="background: var(--secondary-background-color); padding: 28px 20px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
-            <span style="font-size: 36px; font-weight: 700; color: #4a90e2; display: block; margin-bottom: 8px;">2</span>
-            <span style="color: #999999; font-size: 14px; line-height: 1.3; display: block;">Innovation Centers Built & Scaled to 150+</span>
-        </div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+#     st.markdown("""<div class='hero-section' style='margin-top: 0; margin-bottom: 8px; padding: 20px 30px 16px 30px;'>
+#     <h1 style='font-size: 48px; font-weight: 700; margin-bottom: 16px; margin-top: 0;'>Matt's Journey</h1>
+#     <p style='font-size: 20px; color: #b0b0b0; max-width: 800px; margin: 0 auto;'>
+#         Helping Fortune 500 companies modernize legacy systems and launch new cloud-native products — combining modern architecture, product mindset, 
+#             and innovative engineering practices to deliver scalable digital platforms.</p>
+#     </div>""", unsafe_allow_html=True)
 
-    st.markdown(
-        "<h2 class='section-title'>Career Evolution</h2>", unsafe_allow_html=True
-    )
 
-    # Timeline using fixed-height-card styling
-    timeline_data = [
-        (
-            "🧘",
-            "2023–Present",
-            "Sabbatical | Innovation & Upskilling",
-            "Focused on GenAI, cloud-native architecture, and building LLM-powered portfolio assistant",
-        ),
-        (
-            "🚀",
-            "2019–2023",
-            "Director, Cloud Innovation Center @ Accenture",
-            "Launched Innovation Centers (150+ engineers) • 30+ products • $300M+ revenue • 4x faster delivery",
-        ),
-        (
-            "📚",
-            "2016–2023",
-            "Capability Development Lead, CloudFirst @ Accenture",
-            "Upskilled 300+ professionals • 40% proficiency increase • 50% faster delivery • Culture transformation",
-        ),
-        (
-            "☁️",
-            "2018–2019",
-            "Cloud Native Architecture Lead, Liquid Studio @ Accenture",
-            "Built cloud-native accelerator • AWS enablement (200+ certs) • Rapid prototyping for Fortune 500",
-        ),
-        (
-            "💳",
-            "2009–2017",
-            "Sr. Technology Architecture Manager, Payments @ Accenture",
-            "$500M+ payments modernization • 12 countries • ACH/FX/Wire hubs • Salesforce integration",
-        ),
-        (
-            "🏗️",
-            "2005–2009",
-            "Technology Manager @ Accenture",
-            "Early leadership in payments, banking, and platform modernization",
-        ),
-        (
-            "⚡",
-            "2000–2005",
-            "Startups & Consulting (incl. Cendian Corp)",
-            "Built B2B/supply chain platforms • webMethods & J2EE integration solutions",
-        ),
-    ]
+#     # Pure HTML stats that bypass Streamlit's CSS
+#     st.markdown(
+#     """
+#     <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 8px 0 24px 0;">
+#         <div style="background: var(--secondary-background-color); padding: 28px 20px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
+#             <span style="font-size: 36px; font-weight: 700; color: #4a90e2; display: block; margin-bottom: 8px;">20+</span>
+#             <span style="color: #999999; font-size: 15px; display: block;">Years Experience</span>
+#         </div>
+#         <div style="background: var(--secondary-background-color); padding: 28px 20px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
+#             <span style="font-size: 36px; font-weight: 700; color: #4a90e2; display: block; margin-bottom: 8px;">300+</span>
+#             <span style="color: #999999; font-size: 15px; display: block;">Professionals Upskilled</span>
+#         </div>
+#         <div style="background: var(--secondary-background-color); padding: 28px 20px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
+#             <span style="font-size: 36px; font-weight: 700; color: #4a90e2; display: block; margin-bottom: 8px;">200+</span>
+#             <span style="color: #999999; font-size: 15px; display: block;">Engineers Certified</span>
+#         </div>
+#         <div style="background: var(--secondary-background-color); padding: 28px 20px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
+#             <span style="font-size: 36px; font-weight: 700; color: #4a90e2; display: block; margin-bottom: 8px;">2</span>
+#             <span style="color: #999999; font-size: 14px; line-height: 1.3; display: block;">Innovation Centers Built & Scaled to 150+</span>
+#         </div>
+#     </div>
+#     """,
+#     unsafe_allow_html=True,
+# )
 
-    for icon, period, role, desc in timeline_data:
-        col1, col2 = st.columns([1, 11])
-        with col1:
-            # class="timeline-marker
-            st.markdown(
-                f"<div class='timeline-marker'>{icon}</div>", unsafe_allow_html=True
-            )
+#     st.markdown(
+#         "<h2 class='section-title'>Career Evolution</h2>", unsafe_allow_html=True
+#     )
 
-            # st.markdown(f"<div style='font-size: 40px; text-align: center; margin-top: 20px;'>{icon}</div>",
-            # unsafe_allow_html=True)
-        with col2:
-            st.markdown(
-                f"""
-            <div class='fixed-height-card' style='margin-bottom: 16px; min-height: auto;'>
-                <div style='color: #4a90e2; font-size: 14px; margin-bottom: 8px;'>{period}</div>
-                <h3 style='font-size: 20px; font-weight: 600; margin-bottom: 8px;'>{role}</h3>
-                <p style='color: #b0b0b0; font-size: 14px;'>{desc}</p>
-            </div>
-            """,
-                unsafe_allow_html=True,
-            )
+#     # Timeline using fixed-height-card styling
+#     timeline_data = [
+#         (
+#             "🧘",
+#             "2023–Present",
+#             "Sabbatical | Innovation & Upskilling",
+#             "Focused on GenAI, cloud-native architecture, and building LLM-powered portfolio assistant",
+#         ),
+#         (
+#             "🚀",
+#             "2019–2023",
+#             "Director, Cloud Innovation Center @ Accenture",
+#             "Launched Innovation Centers (150+ engineers) • 30+ products • $300M+ revenue • 4x faster delivery",
+#         ),
+#         (
+#             "📚",
+#             "2016–2023",
+#             "Capability Development Lead, CloudFirst @ Accenture",
+#             "Upskilled 300+ professionals • 40% proficiency increase • 50% faster delivery • Culture transformation",
+#         ),
+#         (
+#             "☁️",
+#             "2018–2019",
+#             "Cloud Native Architecture Lead, Liquid Studio @ Accenture",
+#             "Built cloud-native accelerator • AWS enablement (200+ certs) • Rapid prototyping for Fortune 500",
+#         ),
+#         (
+#             "💳",
+#             "2009–2017",
+#             "Sr. Technology Architecture Manager, Payments @ Accenture",
+#             "$500M+ payments modernization • 12 countries • ACH/FX/Wire hubs • Salesforce integration",
+#         ),
+#         (
+#             "🏗️",
+#             "2005–2009",
+#             "Technology Manager @ Accenture",
+#             "Early leadership in payments, banking, and platform modernization",
+#         ),
+#         (
+#             "⚡",
+#             "2000–2005",
+#             "Startups & Consulting (incl. Cendian Corp)",
+#             "Built B2B/supply chain platforms • webMethods & J2EE integration solutions",
+#         ),
+#     ]
 
-    # Core Competencies with skill bars
-    st.markdown("<h2 class='section-title' style='margin: 48px 0 32px 0;'>Core Competencies</h2>", unsafe_allow_html=True)
-    col1, col2, col3 = st.columns(3)
+#     for icon, period, role, desc in timeline_data:
+#         col1, col2 = st.columns([1, 11])
+#         with col1:
+#             # class="timeline-marker
+#             st.markdown(
+#                 f"<div class='timeline-marker'>{icon}</div>", unsafe_allow_html=True
+#             )
 
-    with col1:
-        st.markdown(
-            """
-        <div class='fixed-height-card'>
-            <h3 style='color: var(--text-color); font-size: 20px; margin-bottom: 24px;'>Digital Product & Innovation</h3>
-            <div style='margin-bottom: 20px;'>
-                <p style='color: var(--text-color); margin-bottom: 8px;'>Product Mindset</p>
-                <div class='skill-bar'><div class='skill-fill' style='width: 95%;'></div></div>
-            </div>
-            <div style='margin-bottom: 20px;'>
-                <p style='color: var(--text-color); margin-bottom: 8px;'>Modern Engineering</p>
-                <div class='skill-bar'><div class='skill-fill' style='width: 90%;'></div></div>
-            </div>
-            <div style='margin-bottom: 20px;'>
-                <p style='color: var(--text-color); margin-bottom: 8px;'>Innovation Strategy</p>
-                <div class='skill-bar'><div class='skill-fill' style='width: 85%;'></div></div>
-            </div>
-            <div>
-                <p style='color: var(--text-color); margin-bottom: 8px;'>Digital Transformation</p>
-                <div class='skill-bar'><div class='skill-fill' style='width: 95%;'></div></div>
-            </div>
-        </div>
-        """,
-            unsafe_allow_html=True,
-        )
+#             # st.markdown(f"<div style='font-size: 40px; text-align: center; margin-top: 20px;'>{icon}</div>",
+#             # unsafe_allow_html=True)
+#         with col2:
+#             st.markdown(
+#                 f"""
+#             <div class='fixed-height-card' style='margin-bottom: 16px; min-height: auto;'>
+#                 <div style='color: #4a90e2; font-size: 14px; margin-bottom: 8px;'>{period}</div>
+#                 <h3 style='font-size: 20px; font-weight: 600; margin-bottom: 8px;'>{role}</h3>
+#                 <p style='color: #b0b0b0; font-size: 14px;'>{desc}</p>
+#             </div>
+#             """,
+#                 unsafe_allow_html=True,
+#             )
 
-    with col2:
-        st.markdown(
-            """
-        <div class='fixed-height-card'>
-            <h3 style='color: var(--text-color); font-size: 20px; margin-bottom: 24px;'>Technical Architecture</h3>
-            <div style='margin-bottom: 20px;'>
-                <p style='color: var(--text-color); margin-bottom: 8px;'>Cloud Modernization</p>
-                <div class='skill-bar'><div class='skill-fill' style='width: 95%;'></div></div>
-            </div>
-            <div style='margin-bottom: 20px;'>
-                <p style='color: var(--text-color); margin-bottom: 8px;'>Microservices</p>
-                <div class='skill-bar'><div class='skill-fill' style='width: 85%;'></div></div>
-            </div>
-            <div style='margin-bottom: 20px;'>
-                <p style='color: var(--text-color); margin-bottom: 8px;'>DevOps & CI/CD</p>
-                <div class='skill-bar'><div class='skill-fill' style='width: 85%;'></div></div>
-            </div>
-            <div>
-                <p style='color: var(--text-color); margin-bottom: 8px;'>API Strategy</p>
-                <div class='skill-bar'><div class='skill-fill' style='width: 90%;'></div></div>
-            </div>
-        </div>
-        """,
-            unsafe_allow_html=True,
-        )
+#     # Core Competencies with skill bars
+#     st.markdown("<h2 class='section-title' style='margin: 48px 0 32px 0;'>Core Competencies</h2>", unsafe_allow_html=True)
+#     col1, col2, col3 = st.columns(3)
 
-    with col3:
-        st.markdown(
-            """
-        <div class='fixed-height-card'>
-            <h3 style='color: var(--text-color); font-size: 20px; margin-bottom: 24px;'>Industry Expertise</h3>
-            <div style='margin-bottom: 20px;'>
-                <p style='color: var(--text-color); margin-bottom: 8px;'>Financial Services</p>
-                <div class='skill-bar'><div class='skill-fill' style='width: 95%;'></div></div>
-            </div>
-            <div style='margin-bottom: 20px;'>
-                <p style='color: var(--text-color); margin-bottom: 8px;'>Healthcare & Life Sciences</p>
-                <div class='skill-bar'><div class='skill-fill' style='width: 80%;'></div></div>
-            </div>
-            <div style='margin-bottom: 20px;'>
-                <p style='color: var(--text-color); margin-bottom: 8px;'>Enterprise Technology</p>
-                <div class='skill-bar'><div class='skill-fill' style='width: 90%;'></div></div>
-            </div>
-            <div>
-                <p style='color: var(--text-color); margin-bottom: 8px;'>Startup Operations</p>
-                <div class='skill-bar'><div class='skill-fill' style='width: 75%;'></div></div>
-            </div>
-        </div>
-        """,
-            unsafe_allow_html=True,
-        )
+#     with col1:
+#         st.markdown(
+#             """
+#         <div class='fixed-height-card'>
+#             <h3 style='color: var(--text-color); font-size: 20px; margin-bottom: 24px;'>Digital Product & Innovation</h3>
+#             <div style='margin-bottom: 20px;'>
+#                 <p style='color: var(--text-color); margin-bottom: 8px;'>Product Mindset</p>
+#                 <div class='skill-bar'><div class='skill-fill' style='width: 95%;'></div></div>
+#             </div>
+#             <div style='margin-bottom: 20px;'>
+#                 <p style='color: var(--text-color); margin-bottom: 8px;'>Modern Engineering</p>
+#                 <div class='skill-bar'><div class='skill-fill' style='width: 90%;'></div></div>
+#             </div>
+#             <div style='margin-bottom: 20px;'>
+#                 <p style='color: var(--text-color); margin-bottom: 8px;'>Innovation Strategy</p>
+#                 <div class='skill-bar'><div class='skill-fill' style='width: 85%;'></div></div>
+#             </div>
+#             <div>
+#                 <p style='color: var(--text-color); margin-bottom: 8px;'>Digital Transformation</p>
+#                 <div class='skill-bar'><div class='skill-fill' style='width: 95%;'></div></div>
+#             </div>
+#         </div>
+#         """,
+#             unsafe_allow_html=True,
+#         )
 
-    # Leadership Philosophy
-    st.markdown("<h2 class='section-title' style='margin: 48px 0 32px 0;'>Leadership Philosophy</h2>", unsafe_allow_html=True)
-    st.markdown("""
-    <div style='text-align: center; max-width: 800px; margin: 0 auto 32px auto;'>
-        <p style='color: #b0b0b0; font-size: 16px;'>Principles that guide how I approach transformation, team building, and complex challenges</p>
-    </div>
-    """, unsafe_allow_html=True)
+#     with col2:
+#         st.markdown(
+#             """
+#         <div class='fixed-height-card'>
+#             <h3 style='color: var(--text-color); font-size: 20px; margin-bottom: 24px;'>Technical Architecture</h3>
+#             <div style='margin-bottom: 20px;'>
+#                 <p style='color: var(--text-color); margin-bottom: 8px;'>Cloud Modernization</p>
+#                 <div class='skill-bar'><div class='skill-fill' style='width: 95%;'></div></div>
+#             </div>
+#             <div style='margin-bottom: 20px;'>
+#                 <p style='color: var(--text-color); margin-bottom: 8px;'>Microservices</p>
+#                 <div class='skill-bar'><div class='skill-fill' style='width: 85%;'></div></div>
+#             </div>
+#             <div style='margin-bottom: 20px;'>
+#                 <p style='color: var(--text-color); margin-bottom: 8px;'>DevOps & CI/CD</p>
+#                 <div class='skill-bar'><div class='skill-fill' style='width: 85%;'></div></div>
+#             </div>
+#             <div>
+#                 <p style='color: var(--text-color); margin-bottom: 8px;'>API Strategy</p>
+#                 <div class='skill-bar'><div class='skill-fill' style='width: 90%;'></div></div>
+#             </div>
+#         </div>
+#         """,
+#             unsafe_allow_html=True,
+#         )
 
-    cols = st.columns(4)
-    philosophy_items = [
-        ("🎯", "Outcome-Driven", "Measure success by business impact, not activity"),
-        ("🚀", "Iterate Fast", "Small experiments beat big plans"),
-        ("👥", "People First", "Technology serves humans, not the other way around"),
-        ("🔄", "Learn Continuously", "Every failure is data for the next attempt"),
-    ]
+#     with col3:
+#         st.markdown(
+#             """
+#         <div class='fixed-height-card'>
+#             <h3 style='color: var(--text-color); font-size: 20px; margin-bottom: 24px;'>Industry Expertise</h3>
+#             <div style='margin-bottom: 20px;'>
+#                 <p style='color: var(--text-color); margin-bottom: 8px;'>Financial Services</p>
+#                 <div class='skill-bar'><div class='skill-fill' style='width: 95%;'></div></div>
+#             </div>
+#             <div style='margin-bottom: 20px;'>
+#                 <p style='color: var(--text-color); margin-bottom: 8px;'>Healthcare & Life Sciences</p>
+#                 <div class='skill-bar'><div class='skill-fill' style='width: 80%;'></div></div>
+#             </div>
+#             <div style='margin-bottom: 20px;'>
+#                 <p style='color: var(--text-color); margin-bottom: 8px;'>Enterprise Technology</p>
+#                 <div class='skill-bar'><div class='skill-fill' style='width: 90%;'></div></div>
+#             </div>
+#             <div>
+#                 <p style='color: var(--text-color); margin-bottom: 8px;'>Startup Operations</p>
+#                 <div class='skill-bar'><div class='skill-fill' style='width: 75%;'></div></div>
+#             </div>
+#         </div>
+#         """,
+#             unsafe_allow_html=True,
+#         )
 
-    for col, (icon, title, desc) in zip(cols, philosophy_items):
-        with col:
-            st.markdown(
-                f"""
-            <div style='text-align: center;'>
-                <div class='philosophy-icon'>{icon}</div>
-                <h4 style='font-size: 18px; margin-bottom: 8px;'>{title}</h4>
-                <p style='font-size: 14px; color: #b0b0b0;'>{desc}</p>
-            </div>
-            """,
-                unsafe_allow_html=True,
-            )
+#     # Leadership Philosophy
+#     st.markdown("<h2 class='section-title' style='margin: 48px 0 32px 0;'>Leadership Philosophy</h2>", unsafe_allow_html=True)
+#     st.markdown("""
+#     <div style='text-align: center; max-width: 800px; margin: 0 auto 32px auto;'>
+#         <p style='color: #b0b0b0; font-size: 16px;'>Principles that guide how I approach transformation, team building, and complex challenges</p>
+#     </div>
+#     """, unsafe_allow_html=True)
 
-    # Let's Connect section with better UI/UX
-    st.markdown("<h2 class='section-title' style='margin: 48px 0 32px 0;'>Let's Connect</h2>", unsafe_allow_html=True)
+#     cols = st.columns(4)
+#     philosophy_items = [
+#         ("🎯", "Outcome-Driven", "Measure success by business impact, not activity"),
+#         ("🚀", "Iterate Fast", "Small experiments beat big plans"),
+#         ("👥", "People First", "Technology serves humans, not the other way around"),
+#         ("🔄", "Learn Continuously", "Every failure is data for the next attempt"),
+#     ]
 
-    # Professional summary with visual appeal
-    st.markdown(
-        """
-    <div style='text-align: center; max-width: 800px; margin: 0 auto 40px auto;'>
-        <p style='font-size: 18px; color: var(--text-color); margin-bottom: 24px;'>
-            Open to Director/VP roles in platform modernization and innovation strategy
-        </p>
-        <div style='display: flex; justify-content: center; gap: 40px; margin-bottom: 32px;box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);'>
-            <div style='text-align: center;'>
-                <span style='font-size: 24px;'>🏢</span>
-                <p style='font-size: 14px; color: #999; margin-top: 8px;'>Office Preferred</p>
-            </div>
-            <div style='text-align: center;'>
-                <span style='font-size: 24px;'>🤝</span>
-                <p style='font-size: 14px; color: #999; margin-top: 8px;'>Team Collaboration</p>
-            </div>
-            <div style='text-align: center;'>
-                <span style='font-size: 24px;'>📍</span>
-                <p style='font-size: 14px; color: #999; margin-top: 8px;'>Open to Relocation</p>
-            </div>
-        </div>
-    </div>
-    """,
-        unsafe_allow_html=True,
-    )
+#     for col, (icon, title, desc) in zip(cols, philosophy_items):
+#         with col:
+#             st.markdown(
+#                 f"""
+#             <div style='text-align: center;'>
+#                 <div class='philosophy-icon'>{icon}</div>
+#                 <h4 style='font-size: 18px; margin-bottom: 8px;'>{title}</h4>
+#                 <p style='font-size: 14px; color: #b0b0b0;'>{desc}</p>
+#             </div>
+#             """,
+#                 unsafe_allow_html=True,
+#             )
 
-    # Contact cards in a grid
-    col1, col2, col3 = st.columns([1, 1, 1])
+#     # Let's Connect section with better UI/UX
+#     st.markdown("<h2 class='section-title' style='margin: 48px 0 32px 0;'>Let's Connect</h2>", unsafe_allow_html=True)
 
-    with col1:
-        st.markdown(
-            """
-        <div class='fixed-height-card' style='text-align: center; min-height: 180px; cursor: pointer; transition: all 0.3s;'>
-            <span style='font-size: 32px;'>📧</span>
-            <h4 style='margin: 16px 0 8px 0; color: var(--text-color);'>Email</h4>
-            <p style='color: #4a90e2; font-size: 14px;'>mcpugmire@gmail.com</p>
-            <p style='color: #999; font-size: 12px; margin-top: 8px;'>Direct inquiries</p>
-        </div>
-        """,
-            unsafe_allow_html=True,
-        )
-        if st.button("Copy Email", key="copy_email", use_container_width=True):
-            st.code("mcpugmire@gmail.com")
+#     # Professional summary with visual appeal
+#     st.markdown(
+#         """
+#     <div style='text-align: center; max-width: 800px; margin: 0 auto 40px auto;'>
+#         <p style='font-size: 18px; color: var(--text-color); margin-bottom: 24px;'>
+#             Open to Director/VP roles in platform modernization and innovation strategy
+#         </p>
+#         <div style='display: flex; justify-content: center; gap: 40px; margin-bottom: 32px;box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);'>
+#             <div style='text-align: center;'>
+#                 <span style='font-size: 24px;'>🏢</span>
+#                 <p style='font-size: 14px; color: #999; margin-top: 8px;'>Office Preferred</p>
+#             </div>
+#             <div style='text-align: center;'>
+#                 <span style='font-size: 24px;'>🤝</span>
+#                 <p style='font-size: 14px; color: #999; margin-top: 8px;'>Team Collaboration</p>
+#             </div>
+#             <div style='text-align: center;'>
+#                 <span style='font-size: 24px;'>📍</span>
+#                 <p style='font-size: 14px; color: #999; margin-top: 8px;'>Open to Relocation</p>
+#             </div>
+#         </div>
+#     </div>
+#     """,
+#         unsafe_allow_html=True,
+#     )
 
-    with col2:
-        st.markdown(
-            """
-        <div class='fixed-height-card' style='text-align: center; min-height: 180px; cursor: pointer; transition: all 0.3s;'>
-            <span style='font-size: 32px;'>💼</span>
-            <h4 style='margin: 16px 0 8px 0; color: var(--text-color);'>LinkedIn</h4>
-            <p style='color: #4a90e2; font-size: 14px;'>matt-pugmire</p>
-            <p style='color: #999; font-size: 12px; margin-top: 8px;'>Professional network</p>
-        </div>
-        """,
-            unsafe_allow_html=True,
-        )
-        if st.button("Open LinkedIn", key="open_linkedin", use_container_width=True):
-            st.markdown(
-                "[→ linkedin.com/in/matt-pugmire](https://linkedin.com/in/matt-pugmire/)"
-            )
+#     # Contact cards in a grid
+#     col1, col2, col3 = st.columns([1, 1, 1])
 
-    with col3:
-        st.markdown(
-            """
-        <div class='fixed-height-card' style='text-align: center; min-height: 180px; cursor: pointer; transition: all 0.3s;'>
-            <span style='font-size: 32px;'>☕</span>
-            <h4 style='margin: 16px 0 8px 0; color: var(--text-color);'>Coffee Chat</h4>
-            <p style='color: #4a90e2; font-size: 14px;'>In-person meeting</p>
-            <p style='color: #999; font-size: 12px; margin-top: 8px;'>Let's meet face-to-face</p>
-        </div>
-        """,
-            unsafe_allow_html=True,
-        )
-        if st.button("Schedule Coffee", key="coffee_chat", use_container_width=True):
-            st.info("Reach out via email or LinkedIn to schedule an in-person meeting")
+#     with col1:
+#         st.markdown(
+#             """
+#         <div class='fixed-height-card' style='text-align: center; min-height: 180px; cursor: pointer; transition: all 0.3s;'>
+#             <span style='font-size: 32px;'>📧</span>
+#             <h4 style='margin: 16px 0 8px 0; color: var(--text-color);'>Email</h4>
+#             <p style='color: #4a90e2; font-size: 14px;'>mcpugmire@gmail.com</p>
+#             <p style='color: #999; font-size: 12px; margin-top: 8px;'>Direct inquiries</p>
+#         </div>
+#         """,
+#             unsafe_allow_html=True,
+#         )
+#         if st.button("Copy Email", key="copy_email", use_container_width=True):
+#             st.code("mcpugmire@gmail.com")
+
+#     with col2:
+#         st.markdown(
+#             """
+#         <div class='fixed-height-card' style='text-align: center; min-height: 180px; cursor: pointer; transition: all 0.3s;'>
+#             <span style='font-size: 32px;'>💼</span>
+#             <h4 style='margin: 16px 0 8px 0; color: var(--text-color);'>LinkedIn</h4>
+#             <p style='color: #4a90e2; font-size: 14px;'>matt-pugmire</p>
+#             <p style='color: #999; font-size: 12px; margin-top: 8px;'>Professional network</p>
+#         </div>
+#         """,
+#             unsafe_allow_html=True,
+#         )
+#         if st.button("Open LinkedIn", key="open_linkedin", use_container_width=True):
+#             st.markdown(
+#                 "[→ linkedin.com/in/matt-pugmire](https://linkedin.com/in/matt-pugmire/)"
+#             )
+
+#     with col3:
+#         st.markdown(
+#             """
+#         <div class='fixed-height-card' style='text-align: center; min-height: 180px; cursor: pointer; transition: all 0.3s;'>
+#             <span style='font-size: 32px;'>☕</span>
+#             <h4 style='margin: 16px 0 8px 0; color: var(--text-color);'>Coffee Chat</h4>
+#             <p style='color: #4a90e2; font-size: 14px;'>In-person meeting</p>
+#             <p style='color: #999; font-size: 12px; margin-top: 8px;'>Let's meet face-to-face</p>
+#         </div>
+#         """,
+#             unsafe_allow_html=True,
+#         )
+#         if st.button("Schedule Coffee", key="coffee_chat", use_container_width=True):
+#             st.info("Reach out via email or LinkedIn to schedule an in-person meeting")
