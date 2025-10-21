@@ -484,23 +484,6 @@ def _score_story_for_prompt(s: dict, prompt: str) -> float:
 
     return score
 
-
-def render_compact_context_banner(stories: List):
-    """Single-line context breadcrumb - no emojis, minimal styling."""
-    ctx = get_context_story(stories)
-    if not ctx:
-        return
-    
-    client = (ctx.get("client") or "").strip()
-    domain_full = (ctx.get("domain") or "").strip()
-    domain_short = domain_full.split(" / ")[-1] if " / " in domain_full else domain_full
-    
-    st.markdown(f"""
-    <div style='font-size: 13px; color: #888; margin-bottom: 16px; padding: 8px 12px; background: rgba(128,128,128,0.05); border-radius: 6px;'>
-        Context: {client} | {domain_short}
-    </div>
-    """, unsafe_allow_html=True)
-
 def _push_card_snapshot_from_state(stories: list):
     """Append a static answer card snapshot to the transcript based on current state."""
     modes = st.session_state.get("answer_modes", {}) or {}
@@ -542,15 +525,6 @@ def _push_card_snapshot_from_state(stories: list):
     st.session_state["ask_transcript"].append(entry)
 
 # --- Minimal linear transcript helpers (Ask) ---
-def _ensure_ask_bootstrap():
-    """Guarantee the Ask transcript starts with the assistant opener once per session."""
-    if "ask_transcript" not in st.session_state:
-        st.session_state["ask_transcript"] = []
-    if not st.session_state["ask_transcript"]:
-        st.session_state["ask_transcript"].append(
-            {"role": "assistant", "text": "Ask anything."}
-        )
-
 def _split_tags(s):
     if not s:
         return []
