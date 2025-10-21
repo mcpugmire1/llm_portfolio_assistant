@@ -111,3 +111,101 @@ def _extract_metric_value(text: str):
         if best is None or item[0] > best[0]:
             best = item
     return best
+
+def _format_narrative(s: dict) -> str:
+    """1-paragraph, recruiter-friendly narrative from a single story."""
+    title = s.get("title", "")
+    client = s.get("client", "")
+    domain = s.get("domain", "")
+    goal = (s.get("why") or "").strip().rstrip(".")
+    how = ", ".join((s.get("how") or [])[:2]).strip().rstrip(".")
+    metric = strongest_metric_line(s)
+    bits = []
+    if title or client:
+        bits.append(
+            f"I led **{title}** at **{client}**"
+            if title
+            else f"I led work at **{client}**"
+        )
+    if domain:
+        bits[-1] += f" in **{domain}**."
+    if goal:
+        bits.append(f"The aim was {goal.lower()}.")
+    if how:
+        bits.append(f"We focused on {how.lower()}.")
+    if metric:
+        bits.append(f"Impact: **{metric}**.")
+    return " ".join(bits) or build_5p_summary(s, 280)
+
+def _format_deep_dive(s: dict) -> str:
+    """Detail without saying STAR/5P explicitly: What was happening / Goal / What we did / Results."""
+    st_blocks = s.get("star", {}) or {}
+    situation = st_blocks.get("situation") or []
+    task = st_blocks.get("task") or []
+    action = st_blocks.get("action") or []
+    result = st_blocks.get("result") or []
+    parts = []
+    if situation:
+        parts.append(
+            "**What was happening**\n" + "\n".join([f"- {x}" for x in situation])
+        )
+    if task:
+        parts.append("**Goal**\n" + "\n".join([f"- {x}" for x in task]))
+    if action:
+        parts.append("**What we did**\n" + "\n".join([f"- {x}" for x in action]))
+    if result:
+        parts.append("**Results**\n" + "\n".join([f"- {x}" for x in result]))
+    return "\n\n".join(parts) or build_5p_summary(s, 320)
+
+
+# Add to utils/formatting.py
+
+def _format_narrative(s: dict) -> str:
+    """1-paragraph, recruiter-friendly narrative from a single story."""
+    title = s.get("title", "")
+    client = s.get("client", "")
+    domain = s.get("domain", "")
+    goal = (s.get("why") or "").strip().rstrip(".")
+    how = ", ".join((s.get("how") or [])[:2]).strip().rstrip(".")
+    metric = strongest_metric_line(s)
+    
+    bits = []
+    if title or client:
+        bits.append(
+            f"I led **{title}** at **{client}**"
+            if title
+            else f"I led work at **{client}**"
+        )
+    if domain:
+        bits[-1] += f" in **{domain}**."
+    if goal:
+        bits.append(f"The aim was {goal.lower()}.")
+    if how:
+        bits.append(f"We focused on {how.lower()}.")
+    if metric:
+        bits.append(f"Impact: **{metric}**.")
+    
+    return " ".join(bits) or build_5p_summary(s, 280)
+
+
+def _format_deep_dive(s: dict) -> str:
+    """Detail without saying STAR/5P explicitly: What/Goal/Actions/Results."""
+    st_blocks = s.get("star", {}) or {}
+    situation = st_blocks.get("situation") or []
+    task = st_blocks.get("task") or []
+    action = st_blocks.get("action") or []
+    result = st_blocks.get("result") or []
+    
+    parts = []
+    if situation:
+        parts.append(
+            "**What was happening**\n" + "\n".join([f"- {x}" for x in situation])
+        )
+    if task:
+        parts.append("**Goal**\n" + "\n".join([f"- {x}" for x in task]))
+    if action:
+        parts.append("**What we did**\n" + "\n".join([f"- {x}" for x in action]))
+    if result:
+        parts.append("**Results**\n" + "\n".join([f"- {x}" for x in result]))
+    
+    return "\n\n".join(parts) or build_5p_summary(s, 320)

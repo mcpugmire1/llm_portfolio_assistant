@@ -78,4 +78,4 @@ validate_search.py
 backend/chat_bak*.py
 archive/
 !echo_star_stories_nlp.jsonl
-!data/offdomain_queries.csv
+!data/offdomain_queries.csvdata/offdomain_queries.csv
