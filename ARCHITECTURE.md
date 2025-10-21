@@ -15,22 +15,130 @@ The original implementation suffered from:
 Refactored to a modular structure with clear separation of concerns:
 
 ```
+l### Current Architecture (October 21, 2025)
+```
 llm_portfolio_assistant/
-├── app.py                          # Main router (~3600 lines → target: 200 lines)
+├── app.py                          # Main router (3600 lines → target: <1000 after cleanup)
+│
 ├── config/
-│   └── theme.py                    # Design system constants
+│   └── theme.py                    # Design system constants (colors, spacing, typography)
+│
 ├── ui/
 │   ├── components/
-│   │   ├── navbar.py               # Navigation bar (scoped CSS)
-│   │   ├── footer.py               # Reusable footer
-│   │   └── components.py           # Legacy (being phased out)
+│   │   ├── __init__.py
+│   │   ├── navbar.py               # Top navigation bar with routing (80 lines)
+│   │   └── footer.py               # Reusable footer component (60 lines)
+│   │
 │   ├── pages/
-│   │   ├── home.py                 # Home page render
-│   │   ├── banking_landing.py     # Banking landing page
-│   │   └── cross_industry_landing.py  # Cross-industry landing
+│   │   ├── __init__.py
+│   │   ├── home.py                 # Home page with hero & cards (38 lines)
+│   │   ├── explore_stories.py      # Case studies browser with filters (2160 lines)
+│   │   ├── ask_mattgpt.py          # Conversational RAG interface (2940 lines)
+│   │   ├── about_matt.py           # Professional background & contact (467 lines)
+│   │   ├── banking_landing.py      # Banking industry landing (14 lines, wraps legacy)
+│   │   └── cross_industry_landing.py  # Cross-industry landing (14 lines, wraps legacy)
+│   │
+│   ├── styles/
+│   │   ├── __init__.py
+│   │   └── global_styles.py        # Shared CSS (metrics, forms, tables, AgGrid)
+│   │
+│   └── legacy_components.py        # Legacy monolith (2100 lines) - TO BE DELETED
+│
+├── data/
+│   ├── echo_star_stories_nlp.jsonl # Story corpus (115 stories)
+│   ├── nonsense_filters.jsonl      # Off-domain query rules
+│   └── offdomain_queries.csv       # Query telemetry log
+│
+├── assets/
+│   └── (images, SVGs, etc.)
+│
+└── .streamlit/
+    └── config.toml                 # Streamlit theme config
+```
+
+---
+
+### Target Architecture (After Phase 3 & 4 Cleanup)
+```
+llm_portfolio_assistant/
+├── app.py                          # Pure router (<1000 lines, ideally <500)
+│
+├── config/
+│   ├── __init__.py
+│   ├── theme.py                    # Design system constants
+│   └── debug.py                    # DEBUG flag (centralized)
+│
+├── utils/                          # 🆕 Shared business logic
+│   ├── __init__.py
+│   ├── search.py                   # semantic_search, pinecone_semantic_search
+│   ├── validation.py               # is_nonsense, token_overlap_ratio
+│   ├── formatting.py               # build_5p_summary, _format_* helpers
+│   ├── filters.py                  # matches_filters, filter logic
+│   ├── pinecone_utils.py           # _init_pinecone, _summarize_index_stats
+│   ├── config.py                   # get_conf helper
+│   └── ui_helpers.py               # safe_container, render_no_match_banner
+│
+├── ui/
+│   ├── components/
+│   │   ├── __init__.py
+│   │   ├── navbar.py               # Top navigation (~80 lines)
+│   │   └── footer.py               # Footer (~60 lines)
+│   │
+│   ├── pages/
+│   │   ├── __init__.py
+│   │   ├── home.py                 # Home page (~200 lines after extraction)
+│   │   ├── explore_stories.py      # Stories browser (~1800 lines after utils)
+│   │   ├── ask_mattgpt.py          # RAG interface (~2200 lines after utils)
+│   │   ├── about_matt.py           # About page (~400 lines)
+│   │   ├── banking_landing.py      # Banking page (fully extracted)
+│   │   └── cross_industry_landing.py  # Cross-industry page (fully extracted)
+│   │
 │   └── styles/
-│       └── global_styles.py        # Shared CSS (metrics, forms, tables)
-└── services/                       # Business logic (future)
+│       ├── __init__.py
+│       ├── global_styles.py        # Shared Streamlit overrides
+│       └── css_injection.py        # 🆕 css_once() helper
+│
+├── data/
+│   ├── echo_star_stories_nlp.jsonl
+│   ├── nonsense_filters.jsonl
+│   └── offdomain_queries.csv
+│
+├── assets/
+│   └── (images, SVGs, etc.)
+│
+├── tests/                          # 🆕 Future: Unit & integration tests
+│   ├── __init__.py
+│   ├── test_search.py
+│   ├── test_formatting.py
+│   └── test_components.py
+│
+└── .streamlit/
+    └── config.toml
+```
+
+---
+
+### File Size Summary
+
+**Current State (After Page Extraction):**
+| File/Module | Lines | Status |
+|-------------|-------|--------|
+| app.py | 3600 | 🔄 Has ~2200 lines of commented code to delete |
+| explore_stories.py | 2160 | ✅ Extracted, has duplicate helpers |
+| ask_mattgpt.py | 2940 | ✅ Extracted, has duplicate helpers |
+| about_matt.py | 467 | ✅ Extracted |
+| legacy_components.py | 2100 | ⚠️ To be deleted in Phase 4 |
+| **Total** | **11,267** | |
+
+**Target State (After Utils Extraction):**
+| File/Module | Lines | Status |
+|-------------|-------|--------|
+| app.py | <1000 | 🎯 Pure routing only |
+| explore_stories.py | ~1500 | 🎯 Imports from utils/ |
+| ask_mattgpt.py | ~1800 | 🎯 Imports from utils/ |
+| about_matt.py | ~400 | ✅ Minimal changes |
+| utils/*.py | ~1200 | 🆕 Shared logic extracted |
+| **Total** | **~4900** | **56% reduction** |                  # Business logic (future)
 ```
 
 ---
@@ -136,19 +244,26 @@ st.markdown(f"""
 - [x] Extract `navbar.py` component
 - [x] Extract `footer.py` component
 
-### Phase 2: Page Extraction 🔄 In Progress
-- [x] Create page stubs (home, banking, cross-industry)
-- [ ] Extract Explore Stories page
-- [ ] Extract Ask MattGPT page
-- [ ] Extract About Matt page
+### Phase 2: Page Extraction ✅ COMPLETE (October 21, 2025)
+- [x] Extract Explore Stories page (2160 lines)
+- [x] Extract Ask MattGPT page (2940 lines)
+- [x] Extract About Matt page (467 lines)
+- [x] Create landing page stubs (28 lines)
 
-### Phase 3: Component Extraction 📋 Planned
-- [ ] Extract hero component
-- [ ] Extract category cards component
-- [ ] Extract filters component
-- [ ] Extract table component
+**Total extracted: 5633 lines**
+
+### Phase 3: Cleanup 🔄 Next
+- [ ] Delete commented old code from app.py (~2200 lines)
+- [ ] Centralize DEBUG flag to config/debug.py
+- [ ] Move css_once to ui/styles/css_injection.py  
+- [ ] Move shared helpers to utils/ (semantic_search, etc.)
+- [ ] Investigate potential state-related filtering issues in Explore Stories (intermittent, needs reproduction)
+
+
 
 ### Phase 4: Cleanup 📋 Planned
+- [ ] Extract banking_landing_page from legacy_components
+- [ ] Extract cross_industry_landing_page from legacy_components
 - [ ] Remove `ui/components.py` legacy file
 - [ ] Reduce `app.py` to pure routing (<200 lines)
 - [ ] Add docstrings to all modules
@@ -285,6 +400,6 @@ def test_navbar_doesnt_affect_filters():
 
 ---
 
-**Last Updated:** October 20, 2025
+**Last Updated:** October 21, 2025
 **Author:** Matt Pugmire
 **Review Status:** Ready for technical review

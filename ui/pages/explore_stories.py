@@ -13,6 +13,25 @@ from datetime import datetime
 from typing import List, Optional
 import os, re, time, textwrap, json
 import pandas as pd
+from config.debug import DEBUG
+from config.settings import get_conf
+from utils.ui_helpers import dbg, safe_container
+from utils.validation import is_nonsense, token_overlap_ratio, _tokenize
+from utils.formatting import story_has_metric, strongest_metric_line, build_5p_summary, _format_key_points, METRIC_RX
+from services.pinecone_service import (
+    _init_pinecone,
+    _safe_json, 
+    _summarize_index_stats,
+    PINECONE_MIN_SIM,      # ← Only once
+    PINECONE_NAMESPACE,
+    PINECONE_INDEX_NAME,
+    SEARCH_TOP_K,
+    W_PC,
+    W_KW,
+    _DEF_DIM,
+    _PINECONE_INDEX,
+    VECTOR_BACKEND,
+)
 
 # --- Shared config: prefer st.secrets, fallback to .env ---
 import os
@@ -23,238 +42,11 @@ import streamlit as st
 import csv
 from datetime import datetime
 
-# === DEBUG UTIL (safe to keep; no-op when DEBUG=False) ===
-DEBUG = False
 
 load_dotenv()
 
 
-def get_conf(key: str, default: str | None = None):
-    try:
-        v = st.secrets.get(key)
-        if v is not None:
-            return v
-    except Exception:
-        pass
-    return os.getenv(key, default)
-
-def _safe_json(obj):
-    try:
-        # pinecone client may expose one of these:
-        if hasattr(obj, "to_dict"):
-            return obj.to_dict()
-        if hasattr(obj, "model_dump"):
-            return obj.model_dump()
-        if hasattr(obj, "dict"):  # pydantic v1
-            return obj.dict()
-    except Exception:
-        pass
-    import json
-
-    try:
-        return json.loads(json.dumps(obj, default=str))
-    except Exception:
-        return {"_raw": str(obj)}
-
-def _summarize_index_stats(stats: dict) -> dict:
-    """Return a compact view of Pinecone index stats."""
-    if not isinstance(stats, dict):
-        return {}
-    namespaces = stats.get("namespaces") or {}
-    dims = stats.get("dimension")
-    total_vecs = 0
-    by_ns = {}
-    for ns, info in namespaces.items():
-        count = (info or {}).get("vector_count") or 0
-        by_ns[ns or ""] = int(count)
-        total_vecs += int(count)
-    return {
-        "dimension": int(dims) if dims else None,
-        "total_vectors": int(total_vecs),
-        "namespaces": by_ns,  # {"default": 115, "": 0, ...}
-    }
-
-# =========================
-# Config / constants
-# =========================
-VECTOR_BACKEND = (get_conf("VECTOR_BACKEND", "faiss") or "faiss").lower()
-OPENAI_API_KEY = get_conf("OPENAI_API_KEY")
-PINECONE_API_KEY = get_conf("PINECONE_API_KEY")
-PINECONE_INDEX_NAME = get_conf("PINECONE_INDEX_NAME")  # no default
-PINECONE_NAMESPACE = get_conf("PINECONE_NAMESPACE")  # no default
-
-PINECONE_ALLOW_CREATE = str(
-    get_conf("PINECONE_ALLOW_CREATE", "false")
-).strip().lower() in {"1", "true", "yes", "on"}
-
-PINECONE_TRY_DEFAULT_NS = str(
-    get_conf("PINECONE_TRY_DEFAULT_NS", "false")
-).strip().lower() in {"1", "true", "yes", "on"}
-
-# Guard: Require Pinecone config ONLY if VECTOR_BACKEND == "pinecone"
-if VECTOR_BACKEND == "pinecone":
-    missing = []
-    if not PINECONE_API_KEY:
-        missing.append("PINECONE_API_KEY")
-    if not PINECONE_INDEX_NAME:
-        missing.append("PINECONE_INDEX_NAME")
-    if not PINECONE_NAMESPACE:
-        missing.append("PINECONE_NAMESPACE")
-    if missing:
-        raise RuntimeError(
-            f"Missing required Pinecone config: {', '.join(missing)}. Set them in st.secrets or .env"
-        )
-
-# Lazy Pinecone init only if selected
-pinecone_index = None
-if VECTOR_BACKEND == "pinecone":
-    try:
-        from pinecone import Pinecone
-
-        pc = Pinecone(api_key=PINECONE_API_KEY)
-        pinecone_index = pc.Index(PINECONE_INDEX_NAME)
-    except Exception as e:
-        # Do NOT downgrade to FAISS silently; keep backend as pinecone and retry lazily later.
-        st.warning(f"Pinecone init failed at startup; will retry lazily. ({e})")
-        pinecone_index = None
-
-PINECONE_MIN_SIM = 0.15  # gentler gate: surface more semantically-close hits
-_DEF_DIM = 384  # stub embedding size to keep demo self-contained
 DATA_FILE = os.getenv("STORIES_JSONL", "echo_star_stories_nlp.jsonl")  # optional
-
-# 🔧 Hybrid score weights (tune these!)
-W_PC = 0.8  # semantic (Pinecone vector match)
-W_KW = 0.2  # keyword/token overlap
-
-# Centralized retrieval pool size for semantic search / Pinecone
-SEARCH_TOP_K = 100  # Increased to capture more industry-specific results
-# Centralized retrieval pool size for semantic search / Pinecone
-SEARCH_TOP_K = 100  # Increased to capture more industry-specific results
-
-_NONSENSE_RULES = []
-
-# =========================
-# Config / constants
-# =========================
-PINECONE_MIN_SIM = 0.15  # gentler gate: surface more semantically-close hits
-_DEF_DIM = 384  # stub embedding size to keep demo self-contained
-DATA_FILE = os.getenv("STORIES_JSONL", "echo_star_stories_nlp.jsonl")  # optional
-
-# 🔧 Hybrid score weights (tune these!)
-W_PC = 0.8  # semantic (Pinecone vector match)
-W_KW = 0.2  # keyword/token overlap
-
-# Centralized retrieval pool size for semantic search / Pinecone
-SEARCH_TOP_K = 100  # Increased to capture more industry-specific results
-
-
-# =========================
-# Safe Pinecone wiring (optional)
-# =========================
-try:
-    from pinecone import Pinecone  # type: ignore
-except Exception:
-    Pinecone = None  # keeps the app running without Pinecone installed
-
-_PINECONE_API_KEY = get_conf("PINECONE_API_KEY")
-_PINECONE_INDEX = PINECONE_INDEX_NAME or get_conf("PINECONE_INDEX_NAME")
-_PC = None
-_PC_INDEX = None
-
-def dbg(*args):
-    if DEBUG:
-        try:
-            st.sidebar.write("🧪", *args)
-        except Exception:
-            pass
-
-def _init_pinecone():
-    """Lazy init of Pinecone client + index (no-op if unavailable)."""
-    global _PC, _PC_INDEX
-    if _PC_INDEX is not None:
-        return _PC_INDEX
-    if not (_PINECONE_API_KEY and Pinecone):
-        return None
-    try:
-        _PC = Pinecone(api_key=_PINECONE_API_KEY)
-        # Inspect existing indexes (and their dimensions) once
-        idx_list = _PC.list_indexes().indexes
-        existing = {i.name: i for i in idx_list}
-        if _PINECONE_INDEX not in existing:
-            if DEBUG:
-                print(
-                    f"DEBUG Pinecone: index '{_PINECONE_INDEX}' missing. allow_create={PINECONE_ALLOW_CREATE or DEBUG}"
-                )
-            if PINECONE_ALLOW_CREATE or DEBUG:
-                _PC.create_index(
-                    name=_PINECONE_INDEX, dimension=_DEF_DIM, metric="cosine"
-                )
-            else:
-                # Do not create in prod unless explicitly allowed
-                return None
-        else:
-            # Validate dimension if available
-            try:
-                dim = getattr(existing[_PINECONE_INDEX], "dimension", None)
-                if dim and int(dim) != int(_DEF_DIM):
-                    if DEBUG:
-                        print(
-                            f"DEBUG Pinecone: index dim mismatch (have={dim}, want={_DEF_DIM}); refusing to use."
-                        )
-                    return None
-            except Exception:
-                pass
-
-        _PC_INDEX = _PC.Index(_PINECONE_INDEX)
-        return _PC_INDEX
-    except Exception as e:
-        if DEBUG:
-            print(f"DEBUG Pinecone init error: {e}")
-        return None
-
-
-def _load_nonsense_rules(path: str = "nonsense_filters.jsonl"):
-    rules = []
-    try:
-        if os.path.exists(path):
-            with open(path, "r", encoding="utf-8") as f:
-                for i, line in enumerate(f, 1):
-                    line = line.strip()
-                    if not line:
-                        continue
-                    try:
-                        rules.append(json.loads(line))
-                    except Exception as e:
-                        dbg(f"[rules] JSON error on line {i}: {e}")
-        else:
-            dbg(f"[rules] file not found: {path}")
-    except Exception as e:
-        dbg(f"[rules] load exception: {e}")
-    dbg(f"[rules] loaded: {len(rules)}")
-    if rules[:2]:
-        dbg("[rules] first items →", rules[:2])
-    return rules
-
-
-def is_nonsense(query: str) -> Optional[str]:
-    """Return category string if query matches a nonsense rule, else None."""
-    global _NONSENSE_RULES
-    if not _NONSENSE_RULES:
-        _NONSENSE_RULES = _load_nonsense_rules()
-    q = (query or "").strip()
-    if not q:
-        return None
-    for r in _NONSENSE_RULES:
-        pat = r.get("pattern")
-        if not pat:
-            continue
-        try:
-            if re.search(pat, q, re.IGNORECASE):
-                return r.get("category") or "other"
-        except re.error:
-            # bad regex in file — skip
-            continue
-    return None
 
 # Streamlit compatibility helper for bordered containers (older Streamlit lacks border kw)
 def safe_container(*, border: bool = False):
@@ -274,62 +66,6 @@ except Exception:
 # Known vocab built from stories (call once after STORIES is loaded)
 _KNOWN_VOCAB = set()
 
-# Very small stopword set to avoid false overlap on generic words like 'how'
-_STOPWORDS = {
-    "a",
-    "an",
-    "the",
-    "and",
-    "or",
-    "but",
-    "if",
-    "then",
-    "else",
-    "of",
-    "in",
-    "on",
-    "for",
-    "to",
-    "from",
-    "by",
-    "with",
-    "about",
-    "how",
-    "what",
-    "why",
-    "when",
-    "where",
-    "who",
-    "whom",
-    "is",
-    "are",
-    "was",
-    "were",
-    "be",
-    "been",
-    "being",
-    "do",
-    "does",
-    "did",
-    "done",
-    "much",
-    "at",
-    "as",
-    "into",
-    "over",
-    "under",
-}
-
-def token_overlap_ratio(query: str, vocab: set[str]) -> float:
-    toks = [
-        t
-        for t in re.split(r"[^\w]+", (query or "").lower())
-        if len(t) >= 3 and t not in _STOPWORDS
-    ]
-    if not toks:
-        return 0.0
-    hits = sum(1 for t in toks if t in vocab)
-    return hits / max(1, len(set(toks)))
 
 def render_no_match_banner(
     reason: str,
@@ -741,7 +477,7 @@ def semantic_search(
             return []
 
     # Local keyword fallback (keeps app responsive during indexing issues)
-    local = [s for s in sto if matches_filters(s, filters)]
+    local = [s for s in stories if matches_filters(s, filters)]
     st.session_state["__dbg_pc_hits"] = 0
     st.session_state["__pc_last_ids__"].clear()
     st.session_state["__pc_snippets__"].clear()
@@ -829,97 +565,6 @@ def _get_embedder():
         )
     return _EMBEDDER
 
-def story_has_metric(s):
-    for line in s.get("what") or []:
-        if METRIC_RX.search(line or ""):
-            return True
-    for line in s.get("star", {}).get("result") or []:
-        if METRIC_RX.search(line or ""):
-            return True
-    return False
-
-METRIC_RX = re.compile(
-    r"(\b\d{1,3}\s?%|\$\s?\d[\d,\.]*\b|\b\d+x\b|\b\d+(?:\.\d+)?\s?(pts|pp|bps)\b)", re.I
-)
-
-def _tokenize(text: str) -> list[str]:
-    return [t.lower() for t in _WORD_RX.findall(text or "") if len(t) >= 3]
-
-# --- Hybrid retrieval helpers (no hard-coding) ---
-_WORD_RX = re.compile(r"[A-Za-z0-9+#\-_.]+")
-
-def build_5p_summary(s: dict, max_chars: int = 220) -> str:
-    """
-    Neutral, recruiter-friendly one-liner:
-    Goal: <why>. Approach: <top 1-2 how>. Outcome: <strongest metric>.
-    Uses curated 5PSummary if present; otherwise composes a clean line.
-    """
-    curated = (s.get("5PSummary") or s.get("5p_summary") or "").strip()
-    if curated:
-        # Keep curated text, but trim if super long for list views
-        return (
-            curated if len(curated) <= max_chars else (curated[: max_chars - 1] + "…")
-        )
-
-    goal = (s.get("why") or "").strip().rstrip(".")
-    approach = ", ".join((s.get("how") or [])[:2]).strip().rstrip(".")
-    metric_line = strongest_metric_line(s)
-    outcome = (metric_line or "").strip().rstrip(".")
-
-    parts = []
-    if goal:
-        parts.append(f"**Goal:** {goal}.")
-    if approach:
-        parts.append(f"**Approach:** {approach}.")
-    if outcome:
-        parts.append(f"**Outcome:** {outcome}.")
-
-    text = " ".join(parts).strip()
-    if not text:
-        # last resort, try WHAT list
-        what = "; ".join(s.get("what", [])[:2])
-        text = what or "Impact-focused delivery across stakeholders."
-
-    # Clamp for compact list cells
-    return text if len(text) <= max_chars else (text[: max_chars - 1] + "…")
-
-def strongest_metric_line(s: dict) -> Optional[str]:
-    candidates = []
-    for line in s.get("what") or []:
-        v = _extract_metric_value(line or "")
-        if v:
-            candidates.append(v)
-    for line in s.get("star", {}).get("result") or []:
-        v = _extract_metric_value(line or "")
-        if v:
-            candidates.append(v)
-    if not candidates:
-        return None
-    return max(candidates, key=lambda t: t[0])[1]
-
-def _extract_metric_value(text: str):
-    if not text:
-        return None
-    best = None
-    for m in METRIC_RX.finditer(text):
-        tok = m.group(0)
-        if "%" in tok:
-            try:
-                num = float(tok.replace("%", "").strip())
-            except Exception:
-                num = 0.0
-            score = 1000 + num
-        else:
-            digits = "".join([c for c in tok if c.isdigit() or c == "."])
-            try:
-                num = float(digits)
-            except Exception:
-                num = 0.0
-            score = num
-        item = (score, text)
-        if best is None or item[0] > best[0]:
-            best = item
-    return best
 
 def on_ask_this_story(s: dict):
     """Set context to a specific story and open the Ask MattGPT tab preloaded with a seed prompt."""
