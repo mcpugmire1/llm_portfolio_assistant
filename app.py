@@ -288,41 +288,6 @@ if USE_SIDEBAR_NAV:
         st.divider()
 # ------------------------------------------------------------
 
-def F(s: dict, key: str, default: str | list | None = None):
-    if key in s:
-        return s[key]
-    pc = key[:1].upper() + key[1:]
-    if pc in s:
-        return s[pc]
-
-    if key == "domain":
-        cat = s.get("Category") or s.get("Domain")
-        sub = s.get("Sub-category") or s.get("SubCategory")
-        if cat and sub:
-            return f"{cat} / {sub}"
-        return cat or sub or default
-
-    if key == "tags":
-        if "tags" in s and isinstance(s["tags"], list):
-            return s["tags"]
-        pub = s.get("public_tags")
-        if isinstance(pub, list):
-            return pub
-        if isinstance(pub, str):
-            return [t.strip() for t in pub.split(",") if t.strip()]
-        return default or []
-
-    alias = {
-        "who": "Person",
-        "where": "Place",
-        "why": "Purpose",
-        "how": "Process",
-        "what": "Performance",
-    }
-    if key in alias and alias[key] in s:
-        return s[alias[key]]
-
-    return default
 
 
 # Safe alias that mirrors F() but is immune to shadowing elsewhere
