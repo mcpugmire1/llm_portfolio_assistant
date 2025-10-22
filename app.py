@@ -363,47 +363,6 @@ if USE_SIDEBAR_NAV:
 #     st.markdown("---")
 
 
-# --- Audience derivation from Person (5Ps) ---
-def _derive_personas(person: str | list | None, industry: str | None = None) -> list[str]:
-    if not person:
-        return []
-
-    if isinstance(person, list):
-        raw = " ; ".join(str(x) for x in person if str(x).strip())
-    else:
-        raw = str(person)
-
-    txt = raw.lower()
-    ind = (industry or "").lower()
-    combined = f"{txt} {ind}"
-
-    rules = [
-        (["cxo", "c-suite", "executive", "vp", "svp", "evp", "chief"], "Execs"),
-        (["product", "pm ", "pmm", "head of product", "product leader"], "Product Leaders"),
-        (["engineering", "platform", "sre", "devops", "cto", "tech lead"], "Eng Leaders"),
-        (["data", "ml", "ai", "science", "model", "analytics"], "Data/AI"),
-        (["security", "privacy", "compliance", "governance", "risk"], "Compliance"),
-        (["operations", "ops", "contact center", "service"], "Operations"),
-        (["sales", "marketing", "go-to-market"], "Go-To-Market"),
-        (["finance", "financial services", "banking", "treasury", "payments"], "Finance/Payments"),
-        (["healthcare", "life sciences", "patient", "clinical"], "Healthcare"),
-        (["transportation", "logistics", "supply chain"], "Transportation/Logistics"),
-        (["customer", "member", "patient", "end user", "client", "student"], "End Users"),
-    ]
-
-    out = set()
-    for kws, label in rules:
-        if any(k in combined for k in kws):
-            out.add(label)
-
-    if not out:
-        if any(k in combined for k in ["lead", "manager", "director"]):
-            out.add("Leaders")
-        else:
-            out.add("Stakeholders")
-
-    return sorted(out)
-
 
 def F(s: dict, key: str, default: str | list | None = None):
     if key in s:
@@ -741,12 +700,7 @@ def load_star_stories(path: str):
                     "role": role,
                     "domain": domain,
                     "division": division,
-                    "industry": industry,
-                    # Derive concise audience labels from 5P 'Person'
-                    "personas": _derive_personas(
-                        raw.get("Person") or raw.get("person"),
-                        raw.get("Industry") or raw.get("industry")
-                    ),
+                    "industry": industry,                    
                     "who": who,
                     "where": where,
                     "why": why,
@@ -774,103 +728,15 @@ def load_star_stories(path: str):
 
     return stories
 
-
-# Minimal demo stories (fallback)
-DEMO_STORIES = [
-    {
-        "id": "rbc-payments",
-        "title": "Global Payments Modernization",
-        "client": "RBC",
-        "role": "Product & Delivery Lead",
-        "domain": "Payments / Treasury",
-        "personas": ["Product Leaders", "Banking Stakeholders"],
-        "who": "Corporate banking customers & operations teams",
-        "where": "RBC – Commercial Banking",
-        "why": "Increase straight-through processing and reduce settlement delays",
-        "how": [
-            "Introduced OKR-driven roadmapping",
-            "Implemented event-driven architecture",
-            "Scaled CI/CD across teams",
-        ],
-        "what": [
-            "Reduced wire transfer delays by 30%",
-            "Improved SLA adherence to 99.5%",
-        ],
-        "star": {
-            "situation": [
-                "Legacy payments flows caused reconciliation delays and operations pain across regions."
-            ],
-            "task": [
-                "Define a modernization roadmap and deliver near-term wins while aligning stakeholders."
-            ],
-            "action": [
-                "Introduced OKR-driven roadmap and prioritized high-impact flows",
-                "Implemented event-driven services and hardened CI/CD",
-            ],
-            "result": [
-                "30% fewer wire transfer delays",
-                "SLA adherence improved to 99.5%",
-                "Stakeholder satisfaction up measurably",
-            ],
-        },
-        "tags": ["Payments", "OKRs", "Event-Driven"],
-    },
-    {
-        "id": "kp-rai",
-        "title": "Responsible AI Governance",
-        "client": "Kaiser Permanente",
-        "role": "AI Program Lead",
-        "domain": "AI/ML / Governance",
-        "personas": ["Product Leaders", "Data Science Leaders", "Compliance"],
-        "who": "Clinical operations & compliance stakeholders",
-        "where": "Healthcare (Fortune 100)",
-        "why": "Protect patient privacy while enabling predictive care",
-        "how": [
-            "Risk taxonomy & model registry",
-            "Human-in-the-loop review",
-            "Policy gating in CI/CD",
-        ],
-        "what": [
-            "Zero high-severity compliance incidents post-launch",
-            "Audit time reduced by 40%",
-        ],
-        "star": {
-            "situation": [
-                "Multiple ML pilots lacked centralized governance and clear risk controls."
-            ],
-            "task": [
-                "Stand up a Responsible AI program that satisfied privacy and audit requirements."
-            ],
-            "action": [
-                "Built risk taxonomy and model registry",
-                "Added human-in-the-loop reviews and policy gates in CI/CD",
-            ],
-            "result": [
-                "Zero high-severity compliance incidents post-launch",
-                "Audit prep time reduced by 40%",
-            ],
-        },
-        "tags": ["Responsible AI", "Governance", "Privacy"],
-    },
-]
-
-# After DEMO_STORIES is defined:
-STORIES = load_star_stories(DATA_FILE) or DEMO_STORIES
+# Load stories from JSONL
+STORIES = load_star_stories(DATA_FILE)
+if not STORIES:
+    st.error(f"❌ Failed to load stories from {DATA_FILE}. Check file path and format.")
+    st.stop()
 
 # Initialize search vocabulary at startup
 from services.rag_service import initialize_vocab
 initialize_vocab(STORIES)
-
-# --- FAST DEBUG: data source + counts ---
-# Stories are already loaded earlier:
-# STORIES = load_star_stories(DATA_FILE) or DEMO_STORIES
-
-_loaded_from = (
-    "JSONL" if (os.path.exists(DATA_FILE) and load_star_stories(DATA_FILE)) else "DEMO"
-)
-# dbg(f"[data] Source={_loaded_from}  file={DATA_FILE!r}  stories={len(STORIES)}")
-if not STORIES:
-    st.error("No stories loaded. Check STORIES_JSONL path or JSONL format.")
 
 
 # =========================

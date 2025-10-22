@@ -967,7 +967,7 @@ def render_answer_card_compact(
     
     if _srcs:
         st.markdown("<div style='margin-top: 16px;'></div>", unsafe_allow_html=True)
-        show_sources(_srcs, interactive=True, key_prefix=f"compact_{answer_mode_key}_", title="Sources")
+        show_sources(_srcs, interactive=True, key_prefix=f"compact_{answer_mode_key}_", title="Sources", stories=stories)
         st.write("DEBUG: About to call render_followup_chips")
 
         # Add follow-up suggestions
