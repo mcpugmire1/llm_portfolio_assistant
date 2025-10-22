@@ -167,59 +167,6 @@ def render_compact_context_banner():
     </div>
     """, unsafe_allow_html=True)
 
-
-
-
-# --------- Simple, reliable state-driven navigation (DISABLED for now to avoid default_index errors) ---------
-ENABLE_TOP_QUICK_NAV = (
-    False  # keep buttons on Home instead; prevents accidental tab jumps & flicker
-)
-if ENABLE_TOP_QUICK_NAV and st.session_state.get("active_tab", "Home") == "Home":
-    # Use option_menu only when explicitly enabled; must pass an integer default_index
-    from streamlit_option_menu import option_menu  # safe repeat import
-
-    prev = st.session_state.get("__top_sel__", "Explore Stories")
-    def_idx = ["Explore Stories", "Ask MattGPT", "About Matt"].index(prev)
-
-    with st.container():
-        sel = option_menu(
-            menu_title=None,
-            options=["Explore Stories", "Ask MattGPT", "About Matt"],
-            icons=["book", "chat-dots", "person"],
-            default_index=def_idx,  # option_menu requires an int
-            orientation="horizontal",
-            styles={
-                "container": {"padding": "0", "background": "transparent"},
-                "icon": {"color": "inherit", "font-size": "1.0rem"},
-                "nav-link": {
-                    "font-size": "1rem",
-                    "padding": "10px 16px",
-                    "border-radius": "10px",
-                    "color": "inherit",
-                    "white-space": "nowrap",
-                    "background-color": "transparent",
-                    "font-weight": "600",
-                    "border": "1px solid rgba(255,255,255,0.16)",
-                    "margin-right": "18px",
-                },
-                "nav-link-selected": {
-                    "font-size": "1rem",
-                    "padding": "10px 16px",
-                    "border-radius": "10px",
-                    "color": "inherit",
-                    "white-space": "nowrap",
-                    "background-color": "transparent",
-                    "font-weight": "600",
-                    "border": "1px solid rgba(255,255,255,0.16)",
-                },
-            },
-        )
-        # Only navigate when user *changes* the selection
-        if sel != prev:
-            st.session_state["__top_sel__"] = sel
-            goto(sel)
-
-
 # Choose nav mode:
 USE_SIDEBAR_NAV = False  # Using top navbar instead
 
@@ -340,32 +287,6 @@ if USE_SIDEBAR_NAV:
                 st.rerun()
         st.divider()
 # ------------------------------------------------------------
-
-# --- Top nav (classic, ChatGPT‑ish pills) ---
-# DISABLED: Now using ui/components/navbar.py instead
-# if not USE_SIDEBAR_NAV:
-#     st.markdown(" ")
-#     current = st.session_state.get("active_tab", "Home")
-#     labels = [
-#         ("🏠 Home", "Home"),
-#         ("📚 Explore Stories", "Explore Stories"),
-#         ("💬 Ask MattGPT", "Ask MattGPT"),
-#         ("👤 About Matt", "About Matt"),
-#     ]
-#     cols = st.columns(len(labels), gap="medium")
-#     for i, (label, name) in enumerate(labels):
-#         with cols[i]:
-#             if st.button(
-#                 label,
-#                 use_container_width=True,
-#                 key=f"topnav_{name}",
-#                 disabled=(name == current),
-#             ):
-#                 st.session_state["active_tab"] = name
-#                 st.rerun()
-#     st.markdown("---")
-
-
 
 def F(s: dict, key: str, default: str | list | None = None):
     if key in s:
