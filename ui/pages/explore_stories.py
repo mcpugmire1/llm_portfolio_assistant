@@ -639,8 +639,6 @@ def render_explore_stories(
         with c1:
             # VERSION: Search keywords
             search_version = st.session_state.get("_widget_version_q", 0)
-            if DEBUG:
-                st.write(f"🔍 Search widget v{search_version}, F['q']='{F['q']}'")
             F["q"] = st.text_input(
                 "Search keywords",
                 value=F["q"],
@@ -750,15 +748,6 @@ def render_explore_stories(
         nonsense_check = is_nonsense(F["q"])
         overlap_check = (ov < 0.03 and f"overlap:{ov:.2f}")
         reason = nonsense_check or overlap_check
-        
-        # DETAILED DEBUG
-        if DEBUG:
-            st.write("🔍 **Search Debug:**")
-            st.write(f"- Query: `{F['q']}`")
-            st.write(f"- Token overlap: `{ov:.4f}` (threshold: 0.03)")
-            st.write(f"- is_nonsense(): `{nonsense_check}`")
-            st.write(f"- Low overlap?: `{overlap_check}`")
-            st.write(f"- Final reason: `{reason}`")
         
         if reason:
             st.session_state["__nonsense_reason__"] = reason
