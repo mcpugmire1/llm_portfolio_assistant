@@ -27,8 +27,15 @@ from ui.styles.global_styles import apply_global_styles
 from config.debug import DEBUG
 from config.settings import get_conf
 from utils.ui_helpers import safe_container, dbg
-from utils.formatting import _format_narrative, _format_key_points, _format_deep_dive
 from services.pinecone_service import _safe_json
+from utils.formatting import (
+    _format_narrative, 
+    _format_key_points, 
+    _format_deep_dive,
+    build_5p_summary,
+    strongest_metric_line,
+    story_has_metric,
+)
 
 
 # =========================
@@ -1019,42 +1026,6 @@ def strongest_metric_line(s: dict) -> Optional[str]:
     if not candidates:
         return None
     return max(candidates, key=lambda t: t[0])[1]
-
-
-def build_5p_summary(s: dict, max_chars: int = 220) -> str:
-    """
-    Neutral, recruiter-friendly one-liner:
-    Goal: <why>. Approach: <top 1-2 how>. Outcome: <strongest metric>.
-    Uses curated 5PSummary if present; otherwise composes a clean line.
-    """
-    curated = (s.get("5PSummary") or s.get("5p_summary") or "").strip()
-    if curated:
-        # Keep curated text, but trim if super long for list views
-        return (
-            curated if len(curated) <= max_chars else (curated[: max_chars - 1] + "…")
-        )
-
-    goal = (s.get("why") or "").strip().rstrip(".")
-    approach = ", ".join((s.get("how") or [])[:2]).strip().rstrip(".")
-    metric_line = strongest_metric_line(s)
-    outcome = (metric_line or "").strip().rstrip(".")
-
-    parts = []
-    if goal:
-        parts.append(f"**Goal:** {goal}.")
-    if approach:
-        parts.append(f"**Approach:** {approach}.")
-    if outcome:
-        parts.append(f"**Outcome:** {outcome}.")
-
-    text = " ".join(parts).strip()
-    if not text:
-        # last resort, try WHAT list
-        what = "; ".join(s.get("what", [])[:2])
-        text = what or "Impact-focused delivery across stakeholders."
-
-    # Clamp for compact list cells
-    return text if len(text) <= max_chars else (text[: max_chars - 1] + "…")
 
 
 # --- Nonsense rules (JSONL) + known vocab -------------------
