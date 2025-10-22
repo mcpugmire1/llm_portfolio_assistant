@@ -857,6 +857,10 @@ DEMO_STORIES = [
 # After DEMO_STORIES is defined:
 STORIES = load_star_stories(DATA_FILE) or DEMO_STORIES
 
+# Initialize search vocabulary at startup
+from services.rag_service import initialize_vocab
+initialize_vocab(STORIES)
+
 # --- FAST DEBUG: data source + counts ---
 # Stories are already loaded earlier:
 # STORIES = load_star_stories(DATA_FILE) or DEMO_STORIES

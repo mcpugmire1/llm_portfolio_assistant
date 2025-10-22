@@ -17,6 +17,25 @@ from services.pinecone_service import (
 # Known vocab (built from stories)
 _KNOWN_VOCAB = set()
 
+def initialize_vocab(stories: List[dict]):
+    """Build vocabulary from story corpus. Call once at startup."""
+    global _KNOWN_VOCAB
+    if _KNOWN_VOCAB:
+        return  # Already built
+    
+    for s in stories:
+        # Add tokens from key fields
+        for field in ["title", "client", "domain", "5PSummary"]:
+            if s.get(field):
+                _KNOWN_VOCAB.update(_tokenize(str(s[field])))
+        
+        # Add tags
+        if s.get("tags"):
+            for tag in s["tags"]:
+                _KNOWN_VOCAB.update(_tokenize(str(tag)))
+    
+    if DEBUG:
+        print(f"📚 Built vocab: {len(_KNOWN_VOCAB)} unique tokens")
 
 def semantic_search(
     query: str,
