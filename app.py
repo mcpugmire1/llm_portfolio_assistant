@@ -4,35 +4,38 @@
 # - Debounced “Ask MattGPT” with starter chips
 # - Compact List view by default, Card view optional
 # - Badges + strongest-metric summary
-
-import os, re, time, textwrap, json
+# Standard library
+import json
+import os
+import re
+import textwrap
+import time
 from typing import List, Optional
 from urllib.parse import quote_plus
 
+# Third-party
+import pandas as pd
+import streamlit as st
+from dotenv import load_dotenv
+
+# Local imports - components
 from ui.legacy_components import css_once, render_home_hero_and_stats, render_home_starters
 from ui.components.navbar import render_navbar
 from ui.styles.global_styles import apply_global_styles
+
+# Local imports - utilities
 from config.debug import DEBUG
-from utils.ui_helpers import safe_container, dbg
 from config.settings import get_conf
+from utils.ui_helpers import safe_container, dbg
 from utils.formatting import _format_narrative, _format_key_points, _format_deep_dive
 from services.pinecone_service import _safe_json
+
 
 # =========================
 # UI — Home / Stories / Ask / About
 
-
-import pandas as pd
-import streamlit as st
-
-
 ASSIST_AVATAR = "🤖"  # keep the retro robot
 USER_AVATAR = "🗣️"  # or "🙋", "🧑", "👋", "👥", "🧑‍💻", etc.
-# --- Shared config: prefer st.secrets, fallback to .env ---
-import os
-from dotenv import load_dotenv
-import streamlit as st
-
 
 load_dotenv()
 
