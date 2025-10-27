@@ -143,14 +143,26 @@ def build_metadata(story: Dict[str, Any]) -> Dict[str, Any]:
     industry = story.get("Industry", "").strip()
     division = story.get("Division", "").strip()
 
+    # ADDED: Extract new fields
+    employer = story.get("Employer", "").strip()           # ← NEW 10.27.25
+    project = story.get("Project", "").strip()             # ← NEW 10.27.25
+    complexity = story.get("Project Scope / Complexity", "").strip()  # ← NEW 10.27.25
+    status = story.get("Status", "").strip()               # ← NEW 10.27.25
+
+
     meta = {
         # canonical (matches JSONL / Excel)
         "id": story.get("id"),
         "Title": story.get("Title", "Untitled"),
-        "Client": story.get("Client", "Unknown"),
-        "Role": story.get("Role", "Unknown"),
-        "Industry": industry,
+        "Employer": employer,                               # ← NEW 10.27.25
         "Division": division,
+        "Role": story.get("Role", "Unknown"),
+        "Client": story.get("Client", "Unknown"),
+        "Project": project,                                 # ← NEW 10.27.25
+        "Start_Date": story.get("Start_Date", ""),         # ← NEW 10.27.25
+        "End_Date": story.get("End_Date", ""),             # ← NEW 10.27.25
+        "Industry": industry,
+        "Project Scope / Complexity": complexity,           # ← NEW 10.27.25
         "Category": cat,
         "Sub-category": sub,
         "Use Case(s)": _as_list(story.get("Use Case(s)")),
@@ -166,10 +178,13 @@ def build_metadata(story: Dict[str, Any]) -> Dict[str, Any]:
         "public_tags": tags_list,
         # UI-friendly duplicates (lowercase) to minimize UI mapping pain
         "title": story.get("Title", "Untitled"),
+        "employer": employer.lower() if employer else "",   # ← NEW 10.27.25
+        "division": division.lower() if division else "",
         "client": story.get("Client", "Unknown"),
         "role": story.get("Role", "Unknown"),
+        "project": project.lower() if project else "",      # ← NEW 10.27.25
         "industry": industry.lower() if industry else "",
-        "division": division.lower() if division else "",
+        "complexity": complexity.lower() if complexity else "",  # ← NEW 10.27.25
         "domain": domain,
         "tags": tags_list,
         # Snippet used in list view when results come from Pinecone

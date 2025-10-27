@@ -12,13 +12,12 @@ import pandas as pd
 import json
 import os
 import shutil
-from datetime import datetime
+from datetime import datetime, timezone
 import re
-from utils import normalize, slugify, norm_key, split_bullets
 
 # ---------- config ----------
 
-INPUT_EXCEL_FILE = "MPugmire - STAR Stories - 06AUG25.xlsx"  # <-- update as needed
+INPUT_EXCEL_FILE = "MPugmire - STAR Stories - 024OCT25.xlsx"  # <-- update as needed
 OUTPUT_JSONL_FILE = "echo_star_stories.jsonl"
 SHEET_NAME = "STAR Stories - Interview Ready"
 DRY_RUN = False  # ✅ Change to False when ready to write output
@@ -48,10 +47,38 @@ def load_existing_jsonl(path: str):
 
 def backup_file(path: str):
     if os.path.exists(path):
-        ts = datetime.utcnow().strftime("%Y-%m-%dT%H_%M_%SZ")
+        ts = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H_%M_%SZ")
         backup_path = f"{path}.bak-{ts}"
         shutil.copy2(path, backup_path)
         print(f"🛟 Backup written: {backup_path}")
+
+# Utility functions (inlined from old utils.py)
+def normalize(s: str) -> str:
+    return (s or "").strip()
+
+def slugify(text: str) -> str:
+    text = text.lower().strip()
+    text = re.sub(r"[^\w\s-]", "", text)
+    text = re.sub(r"\s+", "-", text)
+    return text
+
+def norm_key(title: str, client: str) -> str:
+    return f"{normalize(title).lower()}|{normalize(client).lower()}"
+
+def split_bullets(value: str):
+    if not value:
+        return []
+    raw = str(value)
+    parts = []
+    for line in raw.replace("•", "\n").replace("–", "\n").split("\n"):
+        line = line.strip()
+        if line.startswith("- ") or line.startswith("• ") or line.startswith("– "):
+            line = line[2:].strip()
+        if line:
+            parts.append(line)
+    if len(parts) == 1 and " - " in raw:
+        parts = [p.strip() for p in raw.split(" - ") if p.strip()]
+    return parts
 
 
 # ---------- main ----------
@@ -85,10 +112,16 @@ def excel_to_jsonl():
         # Base fields from Excel
         rec_from_excel = {
             "Title": title,
-            "Client": client,
-            "Role": normalize(row.get("Role", "")),
+            "Employer": normalize(row.get("Employer", "")),           
             "Division": normalize(row.get("Division", "")),
+            "Role": normalize(row.get("Role", "")),
+            "Client": client,
+            "Project": normalize(row.get("Project", "")),         
+            "Start_Date": normalize(row.get("Start_Date", "")),      
+            "End_Date": normalize(row.get("End_Date", "")),       
             "Industry": normalize(row.get("Industry", "")),
+            "Solution / Offering": normalize(row.get("Solution / Offering", "")),
+            "Project Scope / Complexity": normalize(row.get("Project Scope / Complexity", "")), 
             "Category": normalize(row.get("Category", "")),
             "Sub-category": normalize(row.get("Sub-category", "")),
             "Competencies": [
@@ -97,6 +130,7 @@ def excel_to_jsonl():
                 if s and s.strip()
             ],
             "Solution / Offering": normalize(row.get("Solution / Offering", "")),
+            "Project Scope / Complexity": normalize(row.get("Project Scope / Complexity", "")), 
             "Use Case(s)": [
                 s.strip()
                 for s in str(row.get("Use Case(s)", "")).split(";")
