@@ -47,6 +47,7 @@ from utils.formatting import (
 )
 from utils.ui_helpers import dbg, render_no_match_banner, safe_container
 from utils.validation import _tokenize, is_nonsense, token_overlap_ratio
+from streamlit_js_eval import streamlit_js_eval
 
 load_dotenv()
 
@@ -191,8 +192,8 @@ def build_domain_options(domains: List[str]) -> Tuple[List[str], List[Tuple[str,
 def on_ask_this_story(s: dict):
     """Set context to a specific story and open Ask MattGPT tab"""
     st.session_state["active_story"] = s.get("id")
-    client = s.get("client", "")
-    title = s.get("title", "")
+    client = s.get("Client", "")
+    title = s.get("Title", "")
     st.session_state["seed_prompt"] = (
         f"How were these outcomes achieved for {client} — {title}? "
         "Focus on tradeoffs, risks, and replicable patterns."
@@ -207,7 +208,7 @@ def on_ask_this_story(s: dict):
 def get_context_story(stories: List[dict]) -> Optional[dict]:
     """Get the currently selected story for detail view"""
     obj = st.session_state.get("active_story_obj")
-    if isinstance(obj, dict) and (obj.get("id") or obj.get("title")):
+    if isinstance(obj, dict) and (obj.get("id") or obj.get("Title")):
         return obj
 
     sid = st.session_state.get("active_story")
@@ -220,14 +221,14 @@ def get_context_story(stories: List[dict]) -> Optional[dict]:
     ac = (st.session_state.get("active_story_client") or "").strip().lower()
     if at:
         for s in stories:
-            stitle = (s.get("title") or "").strip().lower()
-            sclient = (s.get("client") or "").strip().lower()
+            stitle = (s.get("Title") or "").strip().lower()
+            sclient = (s.get("Client") or "").strip().lower()
             if stitle == at and (not ac or sclient == ac):
                 return s
 
     if at:
         for s in stories:
-            stitle = (s.get("title") or "").strip().lower()
+            stitle = (s.get("Title") or "").strip().lower()
             if at in stitle or stitle in at:
                 return s
 
@@ -239,8 +240,8 @@ def get_context_story(stories: List[dict]) -> Optional[dict]:
         if not isinstance(cand, dict):
             continue
         xid = str(cand.get("id") or cand.get("story_id") or "").strip()
-        xt = (cand.get("title") or "").strip().lower()
-        xc = (cand.get("client") or "").strip().lower()
+        xt = (cand.get("Title") or "").strip().lower()
+        xc = (cand.get("Client") or "").strip().lower()
         if (sid and xid and str(xid) == str(sid)) or (at and xt == at and (not ac or xc == ac)):
             return cand
 
@@ -259,9 +260,15 @@ def render_filter_chips(filters: dict, stories: List[dict]) -> bool:
         chips.append(("Search", f'"{filters["q"]}"', ("q", None)))
     if filters.get("has_metric"):
         chips.append(("Flag", "Has metric", ("has_metric", None)))
-    
+
+    # Primary filters (single-select)
+    if filters.get("industry"):
+        chips.append(("Industry", filters["industry"], ("industry", None)))
+    if filters.get("capability"):
+        chips.append(("Capability", filters["capability"], ("capability", None)))
+
+    # Advanced filters (multi-select)
     for label, key in [
-        ("Audience", "personas"),
         ("Client", "clients"),
         ("Domain", "domains"),
         ("Role", "roles"),
@@ -300,6 +307,10 @@ def render_filter_chips(filters: dict, stories: List[dict]) -> bool:
                 filters["q"] = ""
             elif k == "has_metric":
                 filters["has_metric"] = False
+            elif k == "industry":
+                filters["industry"] = ""
+            elif k == "capability":
+                filters["capability"] = ""
             else:
                 remove_filter_value(k, v)
         
@@ -316,51 +327,209 @@ def render_filter_chips(filters: dict, stories: List[dict]) -> bool:
 
 
 def render_detail_panel(detail: Optional[dict], key_suffix: str, stories: List[dict]):
-    """Render the story detail panel (shared by table and card views)"""
-    hr_style = "margin: 16px 0 12px 0; border: none; border-top: 1px solid var(--border-color);"
+    """Render the story detail panel with full STAR narrative and sidebar (matches wireframe)"""
+    hr_style = "margin: 16px 0 12px 0; border: none; border-top: 3px solid #8B5CF6;"
     st.markdown(f"<hr style='{hr_style}'>", unsafe_allow_html=True)
 
     if not detail:
         st.info("Click a row/card above to view details.")
         return
 
+    # Extract data
+    title = detail.get("Title", "Untitled")
+    client = detail.get("Client", "Unknown")
+    role = detail.get("Role", "Unknown")
+    domain = detail.get("Sub-category", "Unknown")
+    start_date = detail.get("Start_Date", "")
+    end_date = detail.get("End_Date", "")
+
+    # STAR sections
+    situation = detail.get("Situation", [])
+    task = detail.get("Task", [])
+    action = detail.get("Action", [])
+    result = detail.get("Result", [])
+
+    # Sidebar data
+    public_tags = detail.get("public_tags", []) or []
+    competencies = detail.get("Competencies", []) or []
+    performance = detail.get("Performance", []) or []
+
+    # Format dates
+    date_range = ""
+    if start_date or end_date:
+        date_range = f"{start_date or '?'} - {end_date or '?'}"
+
     with safe_container(border=True):
-        title = detail.get("title", "Untitled")
-        title_style = "margin-bottom: 4px; color: var(--text-color);"
-        st.markdown(f"<h3 style='{title_style}'>{title}</h3>", unsafe_allow_html=True)
+        # HEADER: Title + Metadata + Action Buttons
+        header_col1, header_col2 = st.columns([4, 1])
 
-        client = detail.get("client", "Unknown")
-        role = detail.get("role", "Unknown")
-        domain = detail.get("domain", "Unknown")
-        meta_style = "color: var(--text-color); opacity: 0.7; font-size: 14px; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);"
-        meta_html = (
-            f"<div style='{meta_style}'>"
-            f"<strong>Client:</strong> {client} &nbsp;&nbsp; "
-            f"<strong>Role:</strong> {role} &nbsp;&nbsp; "
-            f"<strong>Domain:</strong> {domain}"
-            f"</div>"
-        )
-        st.markdown(meta_html, unsafe_allow_html=True)
+        with header_col1:
+            st.markdown(f"<h2 style='font-size: 24px; font-weight: 700; color: var(--text-color); margin-bottom: 12px; line-height: 1.3;'>{title}</h2>", unsafe_allow_html=True)
 
-        summary = detail.get("5PSummary", "") or build_5p_summary(detail, 999)
-        if summary:
-            summary_style = "color: var(--text-color); line-height: 1.6; margin-bottom: 20px;"
-            st.markdown(f"<p style='{summary_style}'>{summary}</p>", unsafe_allow_html=True)
+            # Metadata with icons
+            meta_html = f"""
+            <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center; font-size: 14px; color: #7f8c8d; margin-bottom: 20px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span>🏢</span>
+                    <strong style="color: var(--text-color);">{client}</strong>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span>👤</span>
+                    <strong style="color: var(--text-color);">{role}</strong>
+                </div>
+                {'<div style="display: flex; align-items: center; gap: 8px;"><span>📅</span><span>' + date_range + '</span></div>' if date_range else ''}
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span>🏷️</span>
+                    <span>{domain}</span>
+                </div>
+            </div>
+            """
+            st.markdown(meta_html, unsafe_allow_html=True)
 
-        outcomes = detail.get("what", []) or detail.get("Result", [])
-        if outcomes and isinstance(outcomes, list) and len(outcomes) > 0:
-            st.markdown(
-                "<div style='margin-bottom: 16px;'><strong style='color: var(--text-color);'>Key Achievements:</strong></div>",
-                unsafe_allow_html=True,
-            )
-            for outcome in outcomes[:MAX_ACHIEVEMENTS_SHOWN]:
-                if outcome:
-                    item_style = "margin-left: 20px; margin-bottom: 8px; color: var(--text-color);"
-                    st.markdown(f"<div style='{item_style}'>• {outcome}</div>", unsafe_allow_html=True)
+        with header_col2:
+            # Share and Export buttons (MVP implementation per UX spec)
+            btn_col1, btn_col2 = st.columns(2)
+            with btn_col1:
+                if st.button("🔗", key=f"share_{key_suffix}_{detail.get('id', 'x')}", help="Share (Copy link)", use_container_width=True):
+                    # MVP: Provide instructions since Streamlit doesn't support clipboard API
+                    st.toast("💡 To share: Copy the URL from your browser address bar", icon="ℹ️")
+            with btn_col2:
+                if st.button("📄", key=f"export_{key_suffix}_{detail.get('id', 'x')}", help="Export (Print)", use_container_width=True):
+                    st.toast("Print dialog opened. Save as PDF.", icon="ℹ️")
+                    # Use streamlit-js-eval to trigger browser print dialog
+                    streamlit_js_eval(js_expressions="window.print()", key=f"print_{key_suffix}")
 
-        btn_key = f"ask_from_detail_{key_suffix}_{detail.get('id', 'x')}"
-        if st.button("Ask MattGPT about this", key=btn_key, type="primary", use_container_width=False):
-            on_ask_this_story(detail)
+        st.markdown("<hr style='border: none; border-top: 2px solid #e0e0e0; margin: 20px 0;'>", unsafe_allow_html=True)
+
+        # TWO-COLUMN LAYOUT: STAR sections (left) + Sidebar (right)
+        main_col, sidebar_col = st.columns([2, 1])
+
+        with main_col:
+            # SITUATION
+            if situation and len(situation) > 0:
+                st.markdown("""
+                <div style="margin-bottom: 24px;">
+                    <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #8B5CF6; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                        <span>📍</span><span>SITUATION</span>
+                    </div>
+                    <div style="font-size: 14px; color: var(--text-color); line-height: 1.7;">
+                """, unsafe_allow_html=True)
+                for s in situation:
+                    if s:
+                        st.markdown(f"<p>{s}</p>", unsafe_allow_html=True)
+                st.markdown("</div></div>", unsafe_allow_html=True)
+
+            # TASK
+            if task and len(task) > 0:
+                st.markdown("""
+                <div style="margin-bottom: 24px;">
+                    <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #8B5CF6; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                        <span>🎯</span><span>TASK</span>
+                    </div>
+                    <div style="font-size: 14px; color: var(--text-color); line-height: 1.7;">
+                """, unsafe_allow_html=True)
+                for t in task:
+                    if t:
+                        st.markdown(f"<p>{t}</p>", unsafe_allow_html=True)
+                st.markdown("</div></div>", unsafe_allow_html=True)
+
+            # ACTION
+            if action and len(action) > 0:
+                st.markdown("""
+                <div style="margin-bottom: 24px;">
+                    <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #8B5CF6; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                        <span>⚡</span><span>ACTION</span>
+                    </div>
+                    <div style="font-size: 14px; color: var(--text-color); line-height: 1.7;">
+                        <ul style="margin: 12px 0; padding-left: 20px;">
+                """, unsafe_allow_html=True)
+                for a in action:
+                    if a:
+                        st.markdown(f"<li style='margin-bottom: 8px;'>{a}</li>", unsafe_allow_html=True)
+                st.markdown("</ul></div></div>", unsafe_allow_html=True)
+
+            # RESULT
+            if result and len(result) > 0:
+                st.markdown("""
+                <div style="margin-bottom: 24px;">
+                    <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #8B5CF6; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                        <span>🏆</span><span>RESULT</span>
+                    </div>
+                    <div style="font-size: 14px; color: var(--text-color); line-height: 1.7;">
+                        <ul style="margin: 12px 0; padding-left: 20px;">
+                """, unsafe_allow_html=True)
+                for r in result:
+                    if r:
+                        st.markdown(f"<li style='margin-bottom: 8px;'>{r}</li>", unsafe_allow_html=True)
+                st.markdown("</ul></div></div>", unsafe_allow_html=True)
+
+        with sidebar_col:
+            # TECHNOLOGIES & PRACTICES (Tags)
+            if public_tags and len(public_tags) > 0:
+                st.markdown("""
+                <div style="margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid #e0e0e0;">
+                    <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #7f8c8d; margin-bottom: 12px;">
+                        TECHNOLOGIES & PRACTICES
+                    </div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                """, unsafe_allow_html=True)
+                for tag in public_tags[:10]:  # Limit to 10 tags
+                    if tag:
+                        st.markdown(f'<span style="background: #ecf0f1; padding: 6px 12px; border-radius: 12px; font-size: 12px; color: #555; font-weight: 500;">{tag}</span>', unsafe_allow_html=True)
+                st.markdown("</div></div>", unsafe_allow_html=True)
+
+            # CORE COMPETENCIES (List)
+            if competencies and len(competencies) > 0:
+                st.markdown("""
+                <div style="margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid #e0e0e0;">
+                    <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #7f8c8d; margin-bottom: 12px;">
+                        CORE COMPETENCIES
+                    </div>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                """, unsafe_allow_html=True)
+                for comp in competencies:
+                    if comp:
+                        st.markdown(f'<li style="padding: 8px 0; font-size: 13px; color: #555; border-bottom: 1px solid #ecf0f1;">{comp}</li>', unsafe_allow_html=True)
+                st.markdown("</ul></div>", unsafe_allow_html=True)
+
+            # KEY METRICS (Green boxes with extracted numbers)
+            metrics = []
+            for perf in performance:
+                if perf and ("%" in perf or "x" in perf.lower() or "month" in perf.lower() or "week" in perf.lower()):
+                    # Extract first number/percentage for display
+                    import re
+                    match = re.search(r'(\d+[%xX]?|\d+\+?)', perf)
+                    if match:
+                        metrics.append((match.group(1), perf[:50]))
+
+            if metrics:
+                st.markdown("""
+                <div style="margin-bottom: 24px;">
+                    <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #7f8c8d; margin-bottom: 12px;">
+                        KEY METRICS
+                    </div>
+                """, unsafe_allow_html=True)
+                for value, label in metrics[:4]:  # Limit to 4 metrics
+                    st.markdown(f"""
+                    <div style="background: #f8f9fa; padding: 12px; border-radius: 6px; border-left: 3px solid #27ae60; margin-bottom: 12px;">
+                        <div style="font-size: 18px; font-weight: 700; color: #27ae60; margin-bottom: 4px;">{value}</div>
+                        <div style="font-size: 11px; color: #7f8c8d; text-transform: uppercase;">{label}</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                st.markdown("</div>", unsafe_allow_html=True)
+
+        # ASK AGY ABOUT THIS (Full-width CTA at bottom)
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown("""
+        <p style="text-align: center; margin-bottom: 20px; color: #555; font-size: 14px;">💬 Want to know more about this project?</p>
+        """, unsafe_allow_html=True)
+
+        # Ask button centered using columns
+        _, col_center, _ = st.columns([1.5, 1, 1.5])
+        with col_center:
+            btn_key = f"ask_from_detail_{key_suffix}_{detail.get('id', 'x')}"
+            if st.button("Ask Agy 🐾 About This", key=btn_key, type="primary", use_container_width=True):
+                on_ask_this_story(detail)
 
 
 def render_pagination(total_results: int, page_size: int, offset: int, view_mode: str):
@@ -378,28 +547,27 @@ def render_pagination(total_results: int, page_size: int, offset: int, view_mode
             opacity: 0.7;
             font-size: 14px;
         }
+        /* Pagination buttons - WIREFRAME EXACT */
         div[data-testid="column"] .stButton > button {
-            border-radius: 8px !important;
-            border: 1.5px solid #e0e0e0 !important;
-            background: transparent !important;
-            color: var(--text-color) !important;
-            padding: 8px 16px !important;
-            font-size: 14px !important;
-            font-weight: 500 !important;
-            min-height: 40px !important;
-            min-width: 60px !important;
-            margin: 0 4px !important;
+            padding: 8px 14px !important;
+            border: 2px solid #ddd !important;
+            background: white !important;
+            cursor: pointer !important;
+            border-radius: 4px !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            color: #555 !important;
             transition: all 0.2s ease !important;
         }
-        /* NUCLEAR: Force ALL multiselect pills to be blue ALWAYS */
+        /* NUCLEAR: Force ALL multiselect pills to purple to match wireframe */
         [data-testid="stMultiSelect"] [data-baseweb="tag"],
         [data-baseweb="tag"],
         .stMultiSelect [data-baseweb="tag"],
         div[data-baseweb="tag"],
         span[data-baseweb="tag"] {
-            background-color: #4a90e2 !important;
-            background: #4a90e2 !important;
-            border-color: #4a90e2 !important;
+            background-color: #8B5CF6 !important;
+            background: #8B5CF6 !important;
+            border-color: #8B5CF6 !important;
         }
 
         /* Text color in pills */
@@ -420,31 +588,30 @@ def render_pagination(total_results: int, page_size: int, offset: int, view_mode
         /* Hover state */
         [data-testid="stMultiSelect"] [data-baseweb="tag"]:hover,
         [data-baseweb="tag"]:hover {
-            background-color: #3a7bc8 !important;
-            background: #3a7bc8 !important;
+            background-color: #7C3AED !important;
+            background: #7C3AED !important;
         }
 
         /* Override Streamlit's default red/orange pills */
         .stMultiSelect span[data-baseweb="tag"][style*="background"],
         [data-baseweb="tag"][style*="background"] {
-            background-color: #4a90e2 !important;
-            background: #4a90e2 !important;
+            background-color: #8B5CF6 !important;
+            background: #8B5CF6 !important;
         }
-v
+
         div[data-testid="column"] .stButton > button:hover {
-            border-color: #ff4b4b !important;
-            background: rgba(255, 75, 75, 0.08) !important;
+            background: #f5f5f5 !important;
         }
+        /* Pagination active state - WIREFRAME EXACT */
         .pagination-active {
-            border-radius: 8px;
-            border: 1.5px solid #ff4b4b;
-            background: rgba(255, 75, 75, 0.1);
-            color: #ff4b4b;
-            padding: 6px 14px;
+            background: #8B5CF6;
+            color: white;
+            border: 2px solid #8B5CF6;
+            padding: 8px 14px;
+            border-radius: 4px;
             font-size: 13px;
             font-weight: 600;
             text-align: center;
-            min-height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -533,6 +700,8 @@ v
 
 def render_explore_stories(
     stories: List[dict],
+    industries: List[str],
+    capabilities: List[str],
     clients: List[str],
     domains: List[str],
     roles: List[str],
@@ -547,30 +716,261 @@ def render_explore_stories(
     - Pill X buttons work correctly
     - Clear all resets everything properly
     """
-    st.title("Project Case Studies")
-    intro_text = "<p>See how digital transformation happens in practice. Browse case studies, then click Ask MattGPT for the inside story.</p>"
-    st.markdown(intro_text, unsafe_allow_html=True)
+    # Hero header - pure HTML to prevent auto-scroll (matches home page pattern)
+    # Margin: negative top only (-1rem 0), no side margins to match navbar width
+    st.markdown('''
+    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 60px 40px 80px 40px; margin: -1rem 0 40px 0; border-radius: 0; min-height: 350px;">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center; color: white;">
+            <h1 style="font-size: 42px; font-weight: 700; margin-bottom: 16px; color: white !important;">Project Case Studies</h1>
+            <p style="font-size: 18px; opacity: 0.95; max-width: 700px; margin: 0 auto; line-height: 1.6;">
+                See how digital transformation happens in practice. Browse case studies, then click Ask MattGPT for the inside story.
+            </p>
+        </div>
+    </div>
+    ''', unsafe_allow_html=True)
 
     explore_css = """
     <style>
-    .explore-filters {
-        background: #2a2a2a;
-        border-radius: 12px;
-        padding: 12px 16px;
-        margin-bottom: 12px;
-        border: 1px solid #333;
+    /* Print styles - make content visible when printing */
+    @media print {
+        /* Hide Streamlit chrome and unnecessary elements */
+        header[data-testid="stHeader"],
+        div[data-testid="stDecoration"],
+        div[data-testid="stToolbar"],
+        div[data-testid="stStatusWidget"],
+        button,
+        .stButton,
+        footer {
+            display: none !important;
+        }
+
+        /* Show main content */
+        .main .block-container,
+        [data-testid="stVerticalBlock"],
+        [data-testid="stHorizontalBlock"],
+        div[data-baseweb="block"] {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+        /* Reset backgrounds for print */
+        body {
+            background: white !important;
+        }
+
+        /* Ensure text is black for print */
+        * {
+            color: black !important;
+        }
+
+        /* Page breaks */
+        .story-detail-pane {
+            page-break-before: always;
+        }
     }
-    .stMultiSelect, .stSelectbox, .stTextInput {
+
+    /* Filter container styling - WIREFRAME EXACT */
+    .explore-filters {
+        background: #fafafa;
+        padding: 30px;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    /* Search input styling - WIREFRAME EXACT */
+    .main .stTextInput > div > div > input {
+        width: 100% !important;
+        padding: 12px 16px !important;
+        border: 2px solid #ddd !important;
+        border-radius: 6px !important;
+        font-size: 14px !important;
+    }
+
+    .main .stTextInput > div > div > input:focus {
+        border-color: #8B5CF6 !important;
+        outline: none !important;
+    }
+
+    /* Selectbox styling - WIREFRAME EXACT */
+    .main .stSelectbox > div > div {
+        padding: 10px !important;
+        border: 2px solid #ddd !important;
+        border-radius: 4px !important;
+        font-size: 14px !important;
+        background: white !important;
+    }
+
+    .main .stSelectbox > div > div:focus-within {
+        border-color: #8B5CF6 !important;
+        outline: none !important;
+    }
+
+    /* Multiselect styling - WIREFRAME EXACT */
+    .main .stMultiSelect > div > div {
+        padding: 10px !important;
+        border: 2px solid #ddd !important;
+        border-radius: 4px !important;
+        font-size: 14px !important;
+        background: white !important;
+    }
+
+    .main .stMultiSelect > div > div:focus-within {
+        border-color: #8B5CF6 !important;
+    }
+
+    /* Label styling - WIREFRAME EXACT */
+    .main label[data-testid="stWidgetLabel"] {
+        font-size: 12px !important;
+        font-weight: 600 !important;
+        color: #555 !important;
+        text-transform: uppercase !important;
+        margin-bottom: 6px !important;
+    }
+
+    /* Segmented Control (Table/Cards toggle) - WIREFRAME EXACT */
+    [data-testid="stSegmentedControl"] button {
+        padding: 8px 16px !important;
+        border: 2px solid #ddd !important;
+        background: white !important;
+        font-size: 13px !important;
+        font-weight: 600 !important;
+        color: #555 !important;
+    }
+    [data-testid="stSegmentedControl"] button[data-baseweb="button"][aria-pressed="true"] {
+        background: #8B5CF6 !important;
+        color: white !important;
+        border-color: #8B5CF6 !important;
+    }
+
+    /* Table styling - WIREFRAME EXACT */
+    .main table {
+        border-collapse: collapse !important;
+    }
+    .main thead {
+        background: #ecf0f1 !important;
+    }
+    .main th {
+        padding: 12px !important;
+        font-size: 12px !important;
+        font-weight: 600 !important;
+        color: #2c3e50 !important;
+        text-transform: uppercase !important;
+        border-bottom: 2px solid #bdc3c7 !important;
+        text-align: left !important;
+    }
+    .main td {
+        padding: 16px 12px !important;
+        border-bottom: 1px solid #e0e0e0 !important;
+        font-size: 14px !important;
+        color: #2c3e50 !important;
+    }
+    /* Story title in table - purple and clickable */
+    .main td a {
+        color: #8B5CF6 !important;
+        font-weight: 500 !important;
+        text-decoration: none !important;
+    }
+    .main td a:hover {
+        text-decoration: underline !important;
+    }
+
+    /* Client badge styling - WIREFRAME EXACT */
+    .client-badge {
+        display: inline-block !important;
+        padding: 4px 10px !important;
+        background: #e3f2fd !important;
+        color: #1976d2 !important;
+        border-radius: 12px !important;
+        font-size: 12px !important;
+        font-weight: 500 !important;
+    }
+
+    /* Domain tag styling - WIREFRAME EXACT */
+    .domain-tag {
+        font-size: 12px !important;
+        color: #7f8c8d !important;
+    }
+
+    /* Selected row styling - WIREFRAME EXACT */
+    .ag-row-selected {
+        background: #F3E8FF !important;
+        border-left: 4px solid #8B5CF6 !important;
+    }
+    .ag-row-selected td {
+        font-weight: 500 !important;
+    }
+
+    /* Button styling - WIREFRAME EXACT */
+    .main .stButton > button {
+        padding: 8px 16px !important;
+        border: 2px solid #ddd !important;
+        background: white !important;
+        cursor: pointer !important;
+        font-size: 13px !important;
+        font-weight: 600 !important;
+        border-radius: 6px !important;
+        color: #555 !important;
+        transition: all 0.2s ease !important;
+    }
+
+    .main .stButton > button:hover {
+        background: #f5f5f5 !important;
+    }
+
+    /* Primary button (View Details) - Premium subtle style - NUCLEAR SELECTOR */
+    div[class*="st-key-card_"] button[data-testid="stBaseButton-primary"],
+    div[class*="st-key-card_"] .stButton > button[kind="primary"],
+    [data-testid="column"] [class*="st-key-card_"] button {
+        background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%) !important;
+        color: white !important;
+        border: none !important;
+        padding: 10px 20px !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        border-radius: 8px !important;
+        box-shadow: 0 2px 8px rgba(139, 92, 246, 0.25), 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    div[class*="st-key-card_"] button[data-testid="stBaseButton-primary"]:hover,
+    div[class*="st-key-card_"] .stButton > button[kind="primary"]:hover,
+    [data-testid="column"] [class*="st-key-card_"] button:hover {
+        background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%) !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4), 0 3px 6px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    /* Ask Agy button - purple to match wireframe (target via key class) */
+    [class*="st-key-ask_from_detail"] .stButton > button[kind="primary"],
+    div[class*="st-key-ask_from_detail"] button[data-testid="stBaseButton-primary"] {
+        background: #8B5CF6 !important;
+        border: 2px solid #8B5CF6 !important;
+        border-radius: 8px !important;
+        padding: 12px 28px !important;
+        font-weight: 600 !important;
+        font-size: 15px !important;
+        transition: all 0.2s ease !important;
+    }
+
+    [class*="st-key-ask_from_detail"] .stButton > button[kind="primary"]:hover,
+    div[class*="st-key-ask_from_detail"] button[data-testid="stBaseButton-primary"]:hover {
+        background: #7C3AED !important;
+        border-color: #7C3AED !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3) !important;
+    }
+
+    /* Spacing adjustments (scoped to main content) */
+    .main .stMultiSelect, .main .stSelectbox, .main .stTextInput {
         margin-bottom: 0px !important;
         margin-top: 0px !important;
     }
-    label[data-testid="stWidgetLabel"] {
-        margin-bottom: 4px !important;
-    }
-    [data-testid="stVerticalBlock"] > div {
+
+    .main [data-testid="stVerticalBlock"] > div {
         gap: 8px !important;
     }
-    .stButton {
+
+    .main .stButton {
         margin-top: 0px !important;
         margin-bottom: 0px !important;
     }
@@ -585,28 +985,35 @@ def render_explore_stories(
         margin-bottom: 24px;
     }
     .fixed-height-card {
-        background: var(--secondary-background-color) !important;
-        padding: 28px !important;
-        border-radius: 12px !important;
-        border: 1px solid var(--border-color) !important;
+        background: white !important;
+        padding: 24px !important;
+        border-radius: 8px !important;
+        border: 1px solid #e5e7eb !important;
         height: 380px !important;
         display: flex !important;
         flex-direction: column !important;
-        box-shadow: 0 4px 12px rgba(0,0,0,.25) !important;
-        transition: all 0.3s ease !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+        transition: all 0.2s ease !important;
+        cursor: pointer !important;
     }
     .fixed-height-card:hover {
-        transform: translateY(-4px) !important;
-        box-shadow: 0 8px 25px rgba(74,144,226,.15) !important;
+        box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15) !important;
+        border-color: #8B5CF6 !important;
+        transform: translateY(-2px) !important;
+    }
+    .fixed-height-card.active {
+        border-color: #8B5CF6 !important;
+        box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1) !important;
     }
     .card-desc {
-        color: #b0b0b0 !important;
-        line-height: 1.5 !important;
+        color: #4a5568 !important;
+        line-height: 1.6 !important;
         font-size: 14px !important;
         overflow: hidden !important;
         display: -webkit-box !important;
-        -webkit-line-clamp: 5 !important;
+        -webkit-line-clamp: 3 !important;
         -webkit-box-orient: vertical !important;
+        flex-grow: 1 !important;
     }
     @media (max-width: 768px) {
         .story-cards-grid {
@@ -630,113 +1037,105 @@ def render_explore_stories(
 
     F = st.session_state["filters"]
 
+    # Initialize pre-filters from landing pages (Phase 4)
+    if "prefilter_industry" in st.session_state:
+        F["industry"] = st.session_state.pop("prefilter_industry")
+    if "prefilter_capability" in st.session_state:
+        F["capability"] = st.session_state.pop("prefilter_capability")
+
     # ==================================================================
-    # FILTERS SECTION
+    # FILTERS SECTION - REDESIGNED (Phase 4)
     # ==================================================================
     with safe_container(border=True):
-        c1, c2, c3 = st.columns([1, 0.8, 1.5])
-        
+        # PRIMARY FILTERS (Always Visible)
+        c1, c2, c3 = st.columns([2, 1, 1.5])
+
         with c1:
-            # VERSION: Search keywords
+            # Search keywords
             search_version = st.session_state.get("_widget_version_q", 0)
             F["q"] = st.text_input(
                 "Search keywords",
-                value=F["q"],
+                value=F.get("q", ""),
                 placeholder="Search by title, client, or keywords...",
                 key=f"facet_q_v{search_version}",
             )
-        
+
         with c2:
-            # VERSION: Audience (personas)
-            personas_version = st.session_state.get("_widget_version_personas", 0)
-            F["personas"] = st.multiselect(
-                "Audience",
-                personas_all,
-                default=F["personas"],
-                key=f"facet_personas_v{personas_version}",
+            # Industry filter (NEW - single select dropdown)
+            industry_version = st.session_state.get("_widget_version_industry", 0)
+            industry_options = ["All"] + industries
+            current_industry = F.get("industry", "")
+            industry_index = industry_options.index(current_industry) if current_industry in industry_options else 0
+            selected_industry = st.selectbox(
+                "Industry",
+                options=industry_options,
+                index=industry_index,
+                key=f"facet_industry_v{industry_version}",
             )
-        
+            F["industry"] = "" if selected_industry == "All" else selected_industry
+
         with c3:
-            groups, domain_parts = build_domain_options(domains)
-            # VERSION: Domain category (selectbox)
-            domain_cat_version = st.session_state.get("_widget_version_domain_cat", 0)
-            selected_group = st.selectbox(
-                "Domain category", 
-                ["All"] + groups, 
-                key=f"facet_domain_group_v{domain_cat_version}"
+            # Capability filter (NEW - single select dropdown)
+            capability_version = st.session_state.get("_widget_version_capability", 0)
+            capability_options = ["All"] + capabilities
+            current_capability = F.get("capability", "")
+            capability_index = capability_options.index(current_capability) if current_capability in capability_options else 0
+            selected_capability = st.selectbox(
+                "Capability",
+                options=capability_options,
+                index=capability_index,
+                key=f"facet_capability_v{capability_version}",
             )
-        
-        c1, c2, c3, c4 = st.columns([1.5, 1, 1, 1])
-        
-        with c1:
-            def _fmt_sub(full_value: str) -> str:
-                return full_value.split(" / ")[-1] if " / " in full_value else full_value
-            
-            # VERSION: Domains
-            domains_version = st.session_state.get("_widget_version_domains", 0)
-            
-            if selected_group == "All":
-                F["domains"] = st.multiselect(
-                    "Domain",
-                    options=domains,
-                    default=F["domains"],
-                    key=f"facet_domains_all_v{domains_version}",
-                    format_func=_fmt_sub,
-                )
-            else:
-                subdomain_options = [full for cat, sub, full in domain_parts if cat == selected_group]
-                last_group = st.session_state.get("_last_domain_group", "All")
-                
-                if selected_group != last_group:
-                    F["domains"] = subdomain_options
-                    st.session_state["_last_domain_group"] = selected_group
-                else:
-                    prev = [d for d in F.get("domains", []) if d in subdomain_options]
-                    F["domains"] = prev
-                
-                F["domains"] = st.multiselect(
-                    "Domain",
-                    options=sorted(subdomain_options),
-                    default=F["domains"],
-                    key=f"facet_subdomains_v{domains_version}",
-                    format_func=_fmt_sub,
-                )
-        
-        with c2:
-            # VERSION: Client
-            clients_version = st.session_state.get("_widget_version_clients", 0)
-            F["clients"] = st.multiselect(
-                "Client", 
-                clients, 
-                default=F["clients"], 
-                key=f"facet_clients_v{clients_version}"
-            )
-        
-        with c3:
-            # VERSION: Role
-            roles_version = st.session_state.get("_widget_version_roles", 0)
-            F["roles"] = st.multiselect(
-                "Role", 
-                roles, 
-                default=F["roles"], 
-                key=f"facet_roles_v{roles_version}"
-            )
-        
-        with c4:
-            # VERSION: Tags
-            tags_version = st.session_state.get("_widget_version_tags", 0)
-            F["tags"] = st.multiselect(
-                "Tags", 
-                tags, 
-                default=F["tags"], 
-                key=f"facet_tags_v{tags_version}"
-            )
-        
-        cols = st.columns([1, 4])
-        with cols[0]:
+            F["capability"] = "" if selected_capability == "All" else selected_capability
+
+        # ADVANCED FILTERS (Collapsed by default)
+        show_advanced = st.session_state.get("show_advanced_filters", False)
+
+        col_toggle, col_spacer, col_reset = st.columns([1, 3, 0.8])
+        with col_toggle:
+            toggle_label = "▾ Advanced Filters" if show_advanced else "▸ Advanced Filters"
+            if st.button(toggle_label, key="btn_toggle_advanced"):
+                st.session_state["show_advanced_filters"] = not show_advanced
+                st.rerun()
+
+        with col_reset:
             if st.button("Reset filters", key="btn_reset_filters"):
                 reset_all_filters(stories)
                 st.rerun()
+
+        if show_advanced:
+            st.markdown("---")
+            c1, c2, c3 = st.columns([1.5, 1, 1.5])
+
+            with c1:
+                # Client filter (multiselect)
+                clients_version = st.session_state.get("_widget_version_clients", 0)
+                F["clients"] = st.multiselect(
+                    "Client",
+                    clients,
+                    default=F.get("clients", []),
+                    key=f"facet_clients_v{clients_version}"
+                )
+
+            with c2:
+                # Role filter (multiselect)
+                roles_version = st.session_state.get("_widget_version_roles", 0)
+                F["roles"] = st.multiselect(
+                    "Role",
+                    roles,
+                    default=F.get("roles", []),
+                    key=f"facet_roles_v{roles_version}"
+                )
+
+            with c3:
+                # Domain filter (multiselect) - now uses Sub-category directly
+                domains_version = st.session_state.get("_widget_version_domains", 0)
+                F["domains"] = st.multiselect(
+                    "Domain",
+                    options=domains,
+                    default=F.get("domains", []),
+                    key=f"facet_domains_v{domains_version}",
+                )
 
     # =========================================================================
     # SEARCH & FILTERING LOGIC
@@ -764,6 +1163,8 @@ def render_explore_stories(
             st.session_state["__last_q__"] = F["q"]
     else:
         has_filters = any([
+            F.get("industry"),  # NEW: Primary filter
+            F.get("capability"),  # NEW: Primary filter
             F.get("personas"),
             F.get("clients"),
             F.get("domains"),
@@ -872,12 +1273,12 @@ def render_explore_stories(
 
     if view_mode == "Table":
         def _row(s: dict) -> dict:
-            dom = (s.get("domain") or "").split(" / ")[-1]
+            dom = (s.get("Sub-category") or "").split(" / ")[-1]
             return {
                 "ID": s.get("id", ""),
-                "Title": s.get("title", ""),
-                "Client": s.get("client", ""),
-                "Role": s.get("role", ""),
+                "Title": s.get("Title", ""),
+                "Client": s.get("Client", ""),
+                "Role": s.get("Role", ""),
                 "Domain": dom,
             }
 
@@ -897,9 +1298,25 @@ def render_explore_stories(
 
             gob.configure_column("ID", hide=True)
             gob.configure_column("Title", flex=9)
-            gob.configure_column("Client", flex=4)
+            gob.configure_column(
+                "Client",
+                flex=4,
+                cellRenderer="""
+                    function(params) {
+                        return '<span class="client-badge">' + params.value + '</span>';
+                    }
+                """
+            )
             gob.configure_column("Role", flex=3)
-            gob.configure_column("Domain", flex=4)
+            gob.configure_column(
+                "Domain",
+                flex=4,
+                cellRenderer="""
+                    function(params) {
+                        return '<span class="domain-tag">' + params.value + '</span>';
+                    }
+                """
+            )
 
             gob.configure_selection(selection_mode="single", use_checkbox=False)
             gob.configure_pagination(enabled=False)
@@ -971,30 +1388,105 @@ def render_explore_stories(
 
                     s = view_window[i]
                     with cols[col_idx]:
-                        title = s.get("title", "Untitled")
-                        client = s.get("client", "Unknown")
-                        role = s.get("role", "Unknown")
-                        domain = (s.get("domain") or "").split(" / ")[-1] if s.get("domain") else "Unknown"
+                        title = s.get("Title", "Untitled")
+                        client = s.get("Client", "Unknown")
+                        role = s.get("Role", "Unknown")
+                        domain = (s.get("Sub-category") or "").split(" / ")[-1] if s.get("Sub-category") else "Unknown"
                         summary = s.get("5PSummary", "")
 
                         card_html = f"""
                         <div class="fixed-height-card" style="margin-bottom: 20px;">
-                            <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 16px; line-height: 1.3; color: var(--text-color);">{title}</h3>
-                            <div style="color: #5b9dd9; font-size: 15px; font-weight: 600; margin-bottom: 10px;">{client}</div>
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                                <span style="font-size: 10px; color: #718096; text-transform: uppercase; font-weight: 700; letter-spacing: 0.8px;">{role}</span>
-                                <span style="background: rgba(91, 157, 217, 0.12); color: #5b9dd9; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 600;">{domain}</span>
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                                <h3 style="font-size: 18px; font-weight: 600; margin: 0; line-height: 1.4; color: #1a202c; flex: 1;">{title}</h3>
+                                <span style="background: #e6f2ff; color: #2563eb; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 500; white-space: nowrap; margin-left: 12px;">{client}</span>
                             </div>
-                            <p class="card-desc">{summary}</p>
+                            <p class="card-desc" style="margin-bottom: 16px;">{summary}</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 12px; border-top: 1px solid #e5e7eb;">
+                                <span style="font-size: 12px; color: #64748b; font-weight: 500;">{role}</span>
+                                <span style="background: #f3f4f6; color: #374151; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 500;">{domain}</span>
+                            </div>
                         </div>
                         """
                         st.markdown(card_html, unsafe_allow_html=True)
 
                         story_id = str(s.get("id", i))
-                        if st.button("View Details", key=f"card_{story_id}", use_container_width=True):
+
+                        # Vary button text based on story attributes for better UX
+                        button_texts = [
+                            "View Details →",
+                            "See Project →",
+                            "Learn More →",
+                            "Explore Story →",
+                            "Read More →"
+                        ]
+                        button_text = button_texts[i % len(button_texts)]
+
+                        if st.button(button_text, key=f"card_{story_id}", use_container_width=False):
                             st.session_state["active_story"] = story_id
                             st.rerun()
 
             render_pagination(total_results, page_size, offset, "cards")
             detail = get_context_story(stories)
             render_detail_panel(detail, "cards", stories)
+
+            # JAVASCRIPT: Force purple button styles for card buttons (same workaround as home page)
+            import streamlit.components.v1 as components
+            components.html("""
+            <script>
+            (function() {
+                function applyPurpleCardButtons() {
+                    const parentDoc = window.parent.document;
+                    const cardButtons = parentDoc.querySelectorAll('[class*="st-key-card_"] button[data-testid="stBaseButton-secondary"]');
+
+                    cardButtons.forEach(function(button) {
+                        if (!button.dataset.purpled) {
+                            button.dataset.purpled = 'true';
+                            button.style.cssText = 'background: white !important; background-color: white !important; background-image: none !important; border: 2px solid #e5e5e5 !important; color: #8B5CF6 !important; padding: 10px 18px !important; font-size: 14px !important; font-weight: 600 !important; border-radius: 8px !important; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;';
+
+                            button.addEventListener('mouseenter', function() {
+                                this.style.cssText = 'background: #8B5CF6 !important; background-color: #8B5CF6 !important; background-image: none !important; border: 2px solid #8B5CF6 !important; color: white !important; padding: 10px 18px !important; font-size: 14px !important; font-weight: 600 !important; border-radius: 8px !important; transform: translateY(-2px) !important; box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3), 0 2px 4px rgba(0, 0, 0, 0.1) !important;';
+                            });
+                            button.addEventListener('mouseleave', function() {
+                                this.style.cssText = 'background: white !important; background-color: white !important; background-image: none !important; border: 2px solid #e5e5e5 !important; color: #8B5CF6 !important; padding: 10px 18px !important; font-size: 14px !important; font-weight: 600 !important; border-radius: 8px !important; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;';
+                            });
+                        }
+                    });
+                }
+
+                // Run immediately and repeatedly to catch all buttons
+                applyPurpleCardButtons();
+                setTimeout(applyPurpleCardButtons, 100);
+                setTimeout(applyPurpleCardButtons, 500);
+                setTimeout(applyPurpleCardButtons, 1000);
+
+                // Keep checking periodically for dynamically added buttons
+                setInterval(applyPurpleCardButtons, 2000);
+            })();
+            </script>
+            """, height=0)
+
+    # =========================================================================
+    # LET'S CONNECT FOOTER - WIREFRAME EXACT
+    # =========================================================================
+    st.markdown("""
+    <div style="background: #2c3e50; color: white; padding: 48px 40px; text-align: center; margin-top: 40px; border-radius: 8px;">
+        <h3 style="font-size: 28px; margin-bottom: 12px; color: white;">Let's Connect</h3>
+        <p style="font-size: 16px; margin-bottom: 8px; opacity: 0.9;">
+            Exploring Director/VP opportunities in <strong>Product Leadership</strong>, <strong>Platform Engineering</strong>, and <strong>Organizational Transformation</strong>
+        </p>
+        <p style="font-size: 14px; margin-bottom: 32px; opacity: 0.75;">
+            Available for immediate start • Remote or Atlanta-based • Open to consulting engagements
+        </p>
+        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+            <a href="mailto:mcpugmire@gmail.com" style="padding: 12px 28px; background: #8B5CF6; color: white; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease;">
+                📧 mcpugmire@gmail.com
+            </a>
+            <a href="https://www.linkedin.com/in/matt-pugmire/" target="_blank" style="padding: 12px 28px; background: rgba(255,255,255,0.1); color: white; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease;">
+                💼 LinkedIn
+            </a>
+            <a href="#ask" style="padding: 12px 28px; background: rgba(255,255,255,0.1); color: white; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease;">
+                🐾 Ask Agy
+            </a>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
