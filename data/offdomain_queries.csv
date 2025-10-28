@@ -153,3 +153,5 @@ ts_utc,query,reason
 2025-10-10T18:01:42,peanut butter?,no_overlap+low_conf
 2025-10-21T13:11:35,how much are baseball caps at walmart?,rule:retail_price
 2025-10-21T15:46:10,how much are baseball caps at walmart?,rule:retail_price
+2025-10-22T15:24:34,how much are baseball caps at walmart?,rule:retail_price
+2025-10-22T16:55:22,how much are baseball caps at walmart?,rule:retail_price
