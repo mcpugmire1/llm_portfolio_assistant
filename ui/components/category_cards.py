@@ -101,9 +101,12 @@ def render_category_cards():
     - Row 4: 1 full-width quick question card (gradient)
     """
 
-    # Card CSS
+    # DEBUG TEST - Add visible marker to confirm code is running
+    st.markdown("### 🔴 DEBUG: If you see this red circle, the code is loading!")
+
+    # Card CSS - injected early
     st.markdown(f"""
-    <style>
+    <style id="homepage-button-styles">
     /* Industry cards - gradient background, white text */
     .industry-card {{
         background: {GRADIENTS['purple_hero']};
@@ -212,7 +215,130 @@ def render_category_cards():
         transform: translateY(-4px);
         box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
     }}
+
+    /* Homepage category buttons - MEGA ULTRA NUCLEAR - Target EXACT classes from HTML */
+    button.st-emotion-cache-7lqsib.e8vg11g2[data-testid="stBaseButton-secondary"],
+    .stElementContainer[class*="st-key-btn_"] button.st-emotion-cache-7lqsib,
+    .st-key-btn_0 button, .st-key-btn_1 button, .st-key-btn_2 button, .st-key-btn_3 button, .st-key-btn_4 button, .st-key-btn_5 button,
+    [class*="st-key-btn_"] button[data-testid="stBaseButton-secondary"] {{
+        background-color: white !important;
+        background-image: none !important;
+        background: white !important;
+        color: #8B5CF6 !important;
+        border: 2px solid #e5e5e5 !important;
+        border-radius: 8px !important;
+        padding: 11px 20px !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        min-height: unset !important;
+    }}
+    button.st-emotion-cache-7lqsib.e8vg11g2[data-testid="stBaseButton-secondary"]:hover,
+    .stElementContainer[class*="st-key-btn_"] button.st-emotion-cache-7lqsib:hover,
+    .st-key-btn_0 button:hover, .st-key-btn_1 button:hover, .st-key-btn_2 button:hover, .st-key-btn_3 button:hover, .st-key-btn_4 button:hover, .st-key-btn_5 button:hover,
+    [class*="st-key-btn_"] button[data-testid="stBaseButton-secondary"]:hover {{
+        background-color: #8B5CF6 !important;
+        background-image: none !important;
+        background: #8B5CF6 !important;
+        color: white !important;
+        border-color: #8B5CF6 !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3), 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    }}
+
+    /* Fix card height inconsistencies */
+    .capability-card {{
+        min-height: 280px !important;
+        height: 100% !important;
+    }}
+
+    /* "Ask Agy" bottom CTA button - Premium purple gradient */
+    .stElementContainer[class*="st-key-btn_6"] button,
+    [class*="st-key-btn_6"] button[class*="st-emotion-cache"] {{
+        background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%) !important;
+        background-color: #8B5CF6 !important;
+        color: white !important;
+        border: none !important;
+        padding: 12px 28px !important;
+        font-size: 15px !important;
+        font-weight: 600 !important;
+        border-radius: 8px !important;
+        box-shadow: 0 2px 8px rgba(139, 92, 246, 0.25), 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }}
+    .stElementContainer[class*="st-key-btn_6"] button:hover,
+    [class*="st-key-btn_6"] button[class*="st-emotion-cache"]:hover {{
+        background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%) !important;
+        background-color: #7C3AED !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4), 0 3px 6px rgba(0, 0, 0, 0.15) !important;
+    }}
     </style>
+    """, unsafe_allow_html=True)
+
+    # JavaScript approach - apply styles AFTER page loads to override emotion-cache
+    st.markdown("""
+    <script>
+    setTimeout(function() {{
+        // Target homepage category buttons
+        const buttons = document.querySelectorAll('[class*="st-key-btn_"] button[data-testid="stBaseButton-secondary"]');
+        buttons.forEach(button => {{
+            if (!button.classList.contains('st-key-btn_6')) {{ // Not the Ask Agy button
+                button.style.backgroundColor = 'white';
+                button.style.color = '#8B5CF6';
+                button.style.border = '2px solid #e5e5e5';
+                button.style.borderRadius = '8px';
+                button.style.padding = '11px 20px';
+                button.style.fontSize = '14px';
+                button.style.fontWeight = '600';
+                button.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.08)';
+                button.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+
+                // Add hover effect
+                button.addEventListener('mouseenter', function() {{
+                    this.style.backgroundColor = '#8B5CF6';
+                    this.style.color = 'white';
+                    this.style.borderColor = '#8B5CF6';
+                    this.style.transform = 'translateY(-2px)';
+                    this.style.boxShadow = '0 4px 12px rgba(139, 92, 246, 0.3), 0 2px 4px rgba(0, 0, 0, 0.1)';
+                }});
+                button.addEventListener('mouseleave', function() {{
+                    this.style.backgroundColor = 'white';
+                    this.style.color = '#8B5CF6';
+                    this.style.borderColor = '#e5e5e5';
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.08)';
+                }});
+            }}
+        }});
+
+        // Target Ask Agy button (btn_6) for purple gradient
+        const agyButton = document.querySelector('.st-key-btn_6 button');
+        if (agyButton) {{
+            agyButton.style.background = 'linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)';
+            agyButton.style.backgroundColor = '#8B5CF6';
+            agyButton.style.color = 'white';
+            agyButton.style.border = 'none';
+            agyButton.style.padding = '12px 28px';
+            agyButton.style.fontSize = '15px';
+            agyButton.style.fontWeight = '600';
+            agyButton.style.borderRadius = '8px';
+            agyButton.style.boxShadow = '0 2px 8px rgba(139, 92, 246, 0.25), 0 1px 3px rgba(0, 0, 0, 0.1)';
+
+            agyButton.addEventListener('mouseenter', function() {{
+                this.style.background = 'linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%)';
+                this.style.transform = 'translateY(-2px)';
+                this.style.boxShadow = '0 6px 16px rgba(139, 92, 246, 0.4), 0 3px 6px rgba(0, 0, 0, 0.15)';
+            }});
+            agyButton.addEventListener('mouseleave', function() {{
+                this.style.background = 'linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)';
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 2px 8px rgba(139, 92, 246, 0.25), 0 1px 3px rgba(0, 0, 0, 0.1)';
+            }});
+        }}
+    }}, 100);
+    </script>
     """, unsafe_allow_html=True)
 
     st.markdown('<div class="matt-container">', unsafe_allow_html=True)
