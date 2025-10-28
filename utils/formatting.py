@@ -81,7 +81,7 @@ def _format_key_points(s: dict) -> str:
         lines.append(f"- **Outcome:** {metric}")
     elif outs:
         lines.append(f"- **Outcome:** {outs[0]}")
-    dom = s.get("domain")
+    dom = s.get("Sub-category")  # Use JSONL field name
     if dom:
         lines.append(f"- **Domain:** {dom}")
     return "\n".join(lines)
@@ -114,9 +114,9 @@ def _extract_metric_value(text: str):
 
 def _format_narrative(s: dict) -> str:
     """1-paragraph, recruiter-friendly narrative from a single story."""
-    title = s.get("title", "")
-    client = s.get("client", "")
-    domain = s.get("domain", "")
+    title = s.get("Title", "")
+    client = s.get("Client", "")
+    domain = s.get("Sub-category", "")
     goal = (s.get("why") or "").strip().rstrip(".")
     how = ", ".join((s.get("how") or [])[:2]).strip().rstrip(".")
     metric = strongest_metric_line(s)
@@ -162,9 +162,9 @@ def _format_deep_dive(s: dict) -> str:
 
 def _format_narrative(s: dict) -> str:
     """1-paragraph, recruiter-friendly narrative from a single story."""
-    title = s.get("title", "")
-    client = s.get("client", "")
-    domain = s.get("domain", "")
+    title = s.get("Title", "")
+    client = s.get("Client", "")
+    domain = s.get("Sub-category", "")
     goal = (s.get("why") or "").strip().rstrip(".")
     how = ", ".join((s.get("how") or [])[:2]).strip().rstrip(".")
     metric = strongest_metric_line(s)

@@ -17,21 +17,21 @@ def _keyword_score_for_story(s: dict, query: str) -> float:
         return 0.0
     
     hay_parts = [
-        s.get("title", ""),
-        s.get("client", ""),
-        s.get("role", ""),
-        s.get("domain", ""),
-        " ".join(s.get("tags", []) or []),
+        s.get("Title", ""),
+        s.get("Client", ""),
+        s.get("Role", ""),
+        s.get("Sub-category", ""),
+        " ".join(s.get("public_tags", []) or []),
         build_5p_summary(s, 400),
-        " ".join(s.get("how", []) or []),
-        " ".join(s.get("what", []) or []),
+        " ".join(s.get("Process", []) or []),
+        " ".join(s.get("Performance", []) or []),
     ]
     hay = " ".join(hay_parts)
     h_toks = set(_tokenize(hay))
     hits = q_toks & h_toks
-    
+
     # Soft weighting: title/domain twice
-    title_dom = " ".join([s.get("title", ""), s.get("domain", "")])
+    title_dom = " ".join([s.get("Title", ""), s.get("Sub-category", "")])
     td_hits = q_toks & set(_tokenize(title_dom))
     score = len(hits) + len(td_hits)
     

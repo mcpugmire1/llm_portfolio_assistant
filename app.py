@@ -516,11 +516,15 @@ def _slug(s):
 
 
 def load_star_stories(path: str):
-    """Normalize JSONL records (Title‑cased keys) into the lowercase schema the UI expects.
+    """Load JSONL records as-is, preserving all fields from source data.
+
+    This is a "dumb loader" - no business logic, no transformation, no synthetic fields.
+    Just loads what's in the JSONL file.
 
     Changes:
     - NO fallback to a different filename: if the requested path doesn't exist, return [].
     - REQUIRE a stable `id`: if missing, skip the row (prevents mismatch with Pinecone vector IDs).
+    - Preserves ALL fields from JSONL (including Solution / Offering, Category, Sub-category, etc.)
     - Emit small warnings for visibility.
     """
     stories = []
@@ -536,68 +540,30 @@ def load_star_stories(path: str):
             if not line:
                 continue
             try:
-                raw = json.loads(line)
+                story = json.loads(line)
             except Exception as e:
                 st.warning(f"JSON parse error at line {line_no}: {e}")
                 continue
 
             # Enforce a stable ID so Pinecone hits can map back to STORIES
-            raw_id = raw.get("id")
-            if raw_id in (None, "", 0):
+            story_id = story.get("id")
+            if story_id in (None, "", 0):
                 skipped_no_id += 1
                 continue
-            sid = str(raw_id).strip()
 
-            # Build normalized record
-            title = (raw.get("Title") or "").strip() or "Untitled"
-            client = (raw.get("Client") or "").strip() or "Unknown"
-            role = raw.get("Role") or ""
-            cat = raw.get("Category") or ""
-            subcat = raw.get("Sub-category") or ""
-            domain = " / ".join([x for x in [cat, subcat] if x]).strip()
+            # Ensure id is a string
+            story["id"] = str(story_id).strip()
 
-            who = raw.get("Person") or ""
-            where = raw.get("Place") or ""
-            why = raw.get("Purpose") or ""
+            # Normalize list fields (accept strings or arrays) - this is data cleaning, not business logic
+            for field in ["Situation", "Task", "Action", "Result", "Process", "Performance", "Competencies", "Use Case(s)"]:
+                if field in story:
+                    story[field] = _ensure_list(story[field])
 
-            # STAR/5P lists (accept strings or arrays)
-            situation = _ensure_list(raw.get("Situation"))
-            task = _ensure_list(raw.get("Task"))
-            action = _ensure_list(raw.get("Action"))
-            result = _ensure_list(raw.get("Result"))
+            # Parse public_tags from comma-separated string to list - this is data cleaning
+            if "public_tags" in story and isinstance(story["public_tags"], str):
+                story["public_tags"] = _split_tags(story["public_tags"])
 
-            process = _ensure_list(raw.get("Process"))
-            performance = _ensure_list(raw.get("Performance"))
-
-            tags = _split_tags(raw.get("public_tags"))
-            division = (raw.get("Division") or "").strip()
-            industry = (raw.get("Industry") or "").strip()
-
-            stories.append(
-                {
-                    "id": sid,
-                    "title": title,
-                    "client": client,
-                    "role": role,
-                    "domain": domain,
-                    "division": division,
-                    "industry": industry,                    
-                    "who": who,
-                    "where": where,
-                    "why": why,
-                    "how": process,  # map 5P Process → UI "how"
-                    "what": performance,  # map 5P Performance → UI "what"
-                    "star": {
-                        "situation": situation,
-                        "task": task,
-                        "action": action,
-                        "result": result,
-                    },
-                    "tags": tags,
-                    "content": raw.get("content", ""),
-                    "5PSummary": (raw.get("5PSummary") or "").strip(),
-                }
-            )
+            stories.append(story)
 
     if DEBUG:
         if skipped_no_id:
@@ -932,12 +898,21 @@ def _matched_caption(story_id: str, fallback_builder=build_5p_summary) -> str:
 
 
 def build_facets(stories):
-    clients = sorted({s.get("client", "") for s in stories if s.get("client")})
-    domains = sorted({s.get("domain", "") for s in stories if s.get("domain")})
-    roles = sorted({s.get("role", "") for s in stories if s.get("role")})
-    tags = sorted({t for s in stories for t in (s.get("tags") or [])})
-    personas = sorted({p for s in stories for p in (s.get("personas") or [])})
-    return clients, domains, roles, tags, personas
+    """Build filter option lists from story data using raw JSONL field names."""
+    # Primary filters (NEW for Phase 4 redesign)
+    industries = sorted({s.get("Industry", "") for s in stories if s.get("Industry")})
+    capabilities = sorted({s.get("Solution / Offering", "") for s in stories if s.get("Solution / Offering")})
+
+    # Advanced filters
+    clients = sorted({s.get("Client", "") for s in stories if s.get("Client")})
+    # domains now comes from Sub-category field (used to be synthetic Category / Sub-category)
+    domains = sorted({s.get("Sub-category", "") for s in stories if s.get("Sub-category")})
+    roles = sorted({s.get("Role", "") for s in stories if s.get("Role")})
+    # tags comes from public_tags (already parsed to list in loader)
+    tags = sorted({t for s in stories for t in (s.get("public_tags") or [])})
+    # personas field doesn't exist in current data
+    personas = []
+    return industries, capabilities, clients, domains, roles, tags, personas
 
 
 # --- Minimal linear transcript helpers (Ask) ---
@@ -972,7 +947,7 @@ def _clear_ask_context():
 # =========================
 # UI — Home / Stories / Ask / About
 # =========================
-clients, domains, roles, tags, personas_all = build_facets(STORIES)
+industries, capabilities, clients, domains, roles, tags, personas_all = build_facets(STORIES)
 
 # --- HOME ---
 if st.session_state["active_tab"] == "Home":
@@ -999,7 +974,7 @@ elif st.session_state["active_tab"] == "Cross-Industry":
 # --- REFACTORED STORIES ---
 elif st.session_state["active_tab"] == "Explore Stories":
     from ui.pages.explore_stories import render_explore_stories
-    render_explore_stories(STORIES, clients, domains, roles, tags, personas_all)
+    render_explore_stories(STORIES, industries, capabilities, clients, domains, roles, tags, personas_all)
 
 
 # --- ASK MATTGPT ---

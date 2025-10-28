@@ -42,7 +42,7 @@ def log_offdomain(query: str, reason: str, path: str = "data/offdomain_queries.c
 def get_context_story(stories: list):
     # Highest priority: an explicitly stored story object
     obj = st.session_state.get("active_story_obj")
-    if isinstance(obj, dict) and (obj.get("id") or obj.get("title")):
+    if isinstance(obj, dict) and (obj.get("id") or obj.get("Title")):
         return obj
 
     sid = st.session_state.get("active_story")
@@ -51,18 +51,18 @@ def get_context_story(stories: list):
             if str(s.get("id")) == str(sid):
                 return s
 
-    # Fallback: match by title/client when id mapping isn’t stable
+    # Fallback: match by title/client when id mapping isn't stable
     at = (st.session_state.get("active_story_title") or "").strip().lower()
     ac = (st.session_state.get("active_story_client") or "").strip().lower()
     if at:
         for s in stories:
-            stitle = (s.get("title") or "").strip().lower()
-            sclient = (s.get("client") or "").strip().lower()
+            stitle = (s.get("Title") or "").strip().lower()
+            sclient = (s.get("Client") or "").strip().lower()
             if stitle == at and (not ac or sclient == ac):
                 return s
         # Last resort: substring/startswith
         for s in stories:
-            stitle = (s.get("title") or "").strip().lower()
+            stitle = (s.get("Title") or "").strip().lower()
             if at in stitle or stitle in at:
                 return s
     # Fallback: attempt to resolve from last_results payloads
@@ -77,8 +77,8 @@ def get_context_story(stories: list):
         if not isinstance(cand, dict):
             continue
         xid = str(cand.get("id") or cand.get("story_id") or "").strip()
-        xt = (cand.get("title") or "").strip().lower()
-        xc = (cand.get("client") or "").strip().lower()
+        xt = (cand.get("Title") or "").strip().lower()
+        xc = (cand.get("Client") or "").strip().lower()
         if (sid and xid and str(xid) == str(sid)) or (
             at and xt == at and (not ac or xc == ac)
         ):
@@ -153,7 +153,7 @@ def rag_answer(question: str, filters: dict, stories: list):
         sel = _MODE_ALIASES[simple_mode]
         answer_md = modes.get(sel, modes["narrative"])
         sources = [
-            {"id": s["id"], "title": s["title"], "client": s.get("client", "")}
+            {"id": s["id"], "title": s["Title"], "client": s.get("Client", "")}
             for s in ranked
         ]
         return {
@@ -285,7 +285,7 @@ def rag_answer(question: str, filters: dict, stories: list):
         primary = ranked[0]
         summary = build_5p_summary(primary, 280)
         sources = [
-            {"id": s.get("id"), "title": s.get("title"), "client": s.get("client", "")}
+            {"id": s.get("id"), "title": s.get("Title"), "client": s.get("Client", "")}
             for s in ranked
             if isinstance(s, dict)
         ]
@@ -359,7 +359,7 @@ def rag_answer(question: str, filters: dict, stories: list):
         answer_md = summary
 
     sources = [
-        {"id": s["id"], "title": s["title"], "client": s.get("client", "")}
+        {"id": s["id"], "title": s["Title"], "client": s.get("Client", "")}
         for s in ranked
     ]
     return {
@@ -409,8 +409,8 @@ def _related_stories(s: dict, stories: list, max_items: int = 3) -> list[dict]:
     Excludes the current story. Returns up to max_items stories.
     """
     cur_id = s.get("id")
-    dom = s.get("domain", "")
-    client = s.get("client", "")
+    dom = s.get("Sub-category", "")
+    client = s.get("Client", "")
     tags = set(s.get("tags", []) or [])
     # simple scoring
     scored = []
@@ -418,9 +418,9 @@ def _related_stories(s: dict, stories: list, max_items: int = 3) -> list[dict]:
         if t.get("id") == cur_id:
             continue
         score = 0
-        if client and t.get("client") == client:
+        if client and t.get("Client") == client:
             score += 3
-        if dom and t.get("domain") == dom:
+        if dom and t.get("Sub-category") == dom:
             score += 2
         if tags:
             score += len(tags & set(t.get("tags", []) or []))
@@ -452,10 +452,10 @@ def _score_story_for_prompt(s: dict, prompt: str) -> float:
         _tokenize(
             " ".join(
                 [
-                    s.get("title", ""),
-                    s.get("client", ""),
-                    s.get("domain", ""),
-                    s.get("where", ""),
+                    s.get("Title", ""),
+                    s.get("Client", ""),
+                    s.get("Sub-category", ""),
+                    s.get("Place", ""),
                 ]
             )
         )
@@ -464,9 +464,9 @@ def _score_story_for_prompt(s: dict, prompt: str) -> float:
     body_toks = set(
         _tokenize(
             " ".join(
-                (s.get("how", []) or [])
-                + (s.get("what", []) or [])
-                + ([s.get("why", "")] if s.get("why") else [])
+                (s.get("Process", []) or [])
+                + (s.get("Performance", []) or [])
+                + ([s.get("Purpose", "")] if s.get("Purpose") else [])
             )
         )
     )
@@ -516,7 +516,7 @@ def _push_card_snapshot_from_state(stories: list):
     entry = {
         "type": "card",
         "story_id": primary.get("id"),
-        "title": primary.get("title"),
+        "title": primary.get("Title"),
         "one_liner": build_5p_summary(primary, 9999),
         "content": content_md,
         "sources": sources,
@@ -617,7 +617,7 @@ def _render_ask_transcript(stories: list):
                 # Snapshot with the same visual shell as the live answer card
                 st.markdown('<div class="answer-card">', unsafe_allow_html=True)
                 with safe_container(border=True):
-                    title = m.get("title", "")
+                    title = m.get("Title", "")
                     one_liner = m.get("one_liner", "")
                     sid = m.get("story_id")
                     story = next(
@@ -626,11 +626,11 @@ def _render_ask_transcript(stories: list):
                     # If the user clicked a Source after this snapshot was created,
                     use_ctx = bool(st.session_state.get("__ctx_locked__"))
                     _ctx = get_context_story(stories) if use_ctx else None
-                    if isinstance(_ctx, dict) and (_ctx.get("id") or _ctx.get("title")):
+                    if isinstance(_ctx, dict) and (_ctx.get("id") or _ctx.get("Title")):
                         story = _ctx or story
                     # If we resolved to a different story via Source click, update the header text, too
                     if isinstance(story, dict):
-                        title = story.get("title", title)
+                        title = story.get("Title", title)
                         try:
                             one_liner = build_5p_summary(story, 9999)
                         except Exception:
@@ -642,9 +642,9 @@ def _render_ask_transcript(stories: list):
 
                     # Metadata: Client, Role, Domain
                     if isinstance(story, dict):
-                        client = story.get("client", "")
-                        role = story.get("role", "")
-                        domain = story.get("domain", "")
+                        client = story.get("Client", "")
+                        role = story.get("Role", "")
+                        domain = story.get("Sub-category", "")
 
                         # Create metadata line with role and domain
                         meta_parts = []
@@ -786,7 +786,7 @@ def _render_ask_transcript(stories: list):
             continue
 
         # Default chat bubble (user/assistant text)
-        role = "assistant" if m.get("role") == "assistant" else "user"
+        role = "assistant" if m.get("Role") == "assistant" else "user"
         with st.chat_message(role):  # Remove avatar parameter
             st.markdown(m.get("text", ""))
 
@@ -952,15 +952,15 @@ def render_answer_card_compact(
     if not _srcs and primary_story:
         _srcs = [{
             "id": primary_story.get("id"),
-            "title": primary_story.get("title"),
-            "client": primary_story.get("client"),
+            "title": primary_story.get("Title"),
+            "client": primary_story.get("Client"),
         }]
         try:
             for r in _related_stories(primary_story, max_items=2):
                 _srcs.append({
                     "id": r.get("id"),
-                    "title": r.get("title"),
-                    "client": r.get("client"),
+                    "title": r.get("Title"),
+                    "client": r.get("Client"),
                 })
         except Exception:
             pass
@@ -1028,11 +1028,11 @@ def FIVEP_SUMMARY(s: dict) -> str:
 
 def _format_narrative(s: dict) -> str:
     """1-paragraph, recruiter-friendly narrative from a single story."""
-    title = s.get("title", "")
-    client = s.get("client", "")
-    domain = s.get("domain", "")
-    goal = (s.get("why") or "").strip().rstrip(".")
-    how = ", ".join((s.get("how") or [])[:2]).strip().rstrip(".")
+    title = s.get("Title", "")
+    client = s.get("Client", "")
+    domain = s.get("Sub-category", "")
+    goal = (s.get("Purpose") or "").strip().rstrip(".")
+    how = ", ".join((s.get("Process") or [])[:2]).strip().rstrip(".")
     metric = strongest_metric_line(s)
     bits = []
     if title or client:
@@ -1059,8 +1059,8 @@ def render_compact_context_banner(stories: list):
     if not ctx:
         return
     
-    client = (ctx.get("client") or "").strip()
-    domain_full = (ctx.get("domain") or "").strip()
+    client = (ctx.get("Client") or "").strip()
+    domain_full = (ctx.get("Sub-category") or "").strip()
     domain_short = domain_full.split(" / ")[-1] if " / " in domain_full else domain_full
     
     st.markdown(f"""
@@ -1572,8 +1572,8 @@ def render_ask_mattgpt(stories: list):
                 st.session_state["last_sources"] = [
                     {
                         "id": target.get("id"),
-                        "title": target.get("title"),
-                        "client": target.get("client"),
+                        "title": target.get("Title"),
+                        "client": target.get("Client"),
                     }
                 ]
                 # Show the answer card below the transcript
