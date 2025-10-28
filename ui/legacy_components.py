@@ -214,28 +214,116 @@ def css_once():
         .matt-card-btn .desc { color:#b0b0b0; margin-bottom:20px; line-height:1.5; }
         .matt-card-btn .examples { font-size:14px; color:#888; font-style:italic; }
 
-        /* Buttons on gradient cards - white style */
+        /* Buttons on gradient cards - PURPLE THEME */
         .stButton > button {
             background: white !important;
-            border: 2px solid white !important;
-            color: #667eea !important;
+            border: 2px solid #e5e5e5 !important;
+            color: #8B5CF6 !important;
             padding: 14px 28px !important;
             border-radius: 8px !important;
             font-size: 15px !important;
             font-weight: 600 !important;
-            transition: all 0.3s ease !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
             width: 100% !important;
             margin-top: 10px !important;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
         }
 
         .stButton > button:hover {
-            background: rgba(255, 255, 255, 0.95) !important;
-            color: #667eea !important;
+            background: #8B5CF6 !important;
+            color: white !important;
+            border-color: #8B5CF6 !important;
             transform: translateY(-2px) !important;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3), 0 2px 4px rgba(0, 0, 0, 0.1) !important;
         }
 
+        /* Home category buttons - EVERY CLASS FROM DEV TOOLS */
+        div.st-key-btn_0.st-emotion-cache-zh2fnc button.st-emotion-cache-7lqsib.e8vg11g2,
+        div.st-key-btn_1.st-emotion-cache-zh2fnc button.st-emotion-cache-7lqsib.e8vg11g2,
+        div.st-key-btn_2.st-emotion-cache-zh2fnc button.st-emotion-cache-7lqsib.e8vg11g2,
+        div.st-key-btn_3.st-emotion-cache-zh2fnc button.st-emotion-cache-7lqsib.e8vg11g2,
+        div.st-key-btn_4.st-emotion-cache-zh2fnc button.st-emotion-cache-7lqsib.e8vg11g2,
+        div.st-key-btn_5.st-emotion-cache-zh2fnc button.st-emotion-cache-7lqsib.e8vg11g2 {
+            background: white !important;
+            background-color: white !important;
+            background-image: none !important;
+            border: 2px solid #e5e5e5 !important;
+            border-width: 2px !important;
+            border-style: solid !important;
+            border-color: #e5e5e5 !important;
+            color: #8B5CF6 !important;
+        }
+        div.st-key-btn_0.st-emotion-cache-zh2fnc button.st-emotion-cache-7lqsib.e8vg11g2:hover,
+        div.st-key-btn_1.st-emotion-cache-zh2fnc button.st-emotion-cache-7lqsib.e8vg11g2:hover,
+        div.st-key-btn_2.st-emotion-cache-zh2fnc button.st-emotion-cache-7lqsib.e8vg11g2:hover,
+        div.st-key-btn_3.st-emotion-cache-zh2fnc button.st-emotion-cache-7lqsib.e8vg11g2:hover,
+        div.st-key-btn_4.st-emotion-cache-zh2fnc button.st-emotion-cache-7lqsib.e8vg11g2:hover,
+        div.st-key-btn_5.st-emotion-cache-zh2fnc button.st-emotion-cache-7lqsib.e8vg11g2:hover {
+            background: #8B5CF6 !important;
+            background-color: #8B5CF6 !important;
+            background-image: none !important;
+            color: white !important;
+            border: 2px solid #8B5CF6 !important;
+            border-color: #8B5CF6 !important;
+        }
+
+        /* Ask Agy CTA button - purple gradient */
+        [class*="st-key-btn_6"] button,
+        button[data-testid*="btn_6"] {
+            background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%) !important;
+            color: white !important;
+            border: none !important;
+            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.25) !important;
+        }
+        [class*="st-key-btn_6"] button:hover,
+        button[data-testid*="btn_6"]:hover {
+            background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%) !important;
+            box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4) !important;
+        }
+    </style>
+
+    <script>
+    // JavaScript nuclear option - forcibly override button styles with inline styles
+    function applyPurpleButtonStyles() {
+        for (let i = 0; i <= 5; i++) {
+            const container = document.querySelector('.st-key-btn_' + i);
+            if (container) {
+                const button = container.querySelector('button[data-testid="stBaseButton-secondary"]');
+                if (button && !button.dataset.purpleStyled) {
+                    button.dataset.purpleStyled = 'true';
+
+                    button.style.setProperty('background', 'white', 'important');
+                    button.style.setProperty('background-color', 'white', 'important');
+                    button.style.setProperty('background-image', 'none', 'important');
+                    button.style.setProperty('border', '2px solid #e5e5e5', 'important');
+                    button.style.setProperty('color', '#8B5CF6', 'important');
+
+                    button.addEventListener('mouseenter', function() {
+                        this.style.setProperty('background', '#8B5CF6', 'important');
+                        this.style.setProperty('background-color', '#8B5CF6', 'important');
+                        this.style.setProperty('color', 'white', 'important');
+                        this.style.setProperty('border-color', '#8B5CF6', 'important');
+                    });
+                    button.addEventListener('mouseleave', function() {
+                        this.style.setProperty('background', 'white', 'important');
+                        this.style.setProperty('background-color', 'white', 'important');
+                        this.style.setProperty('color', '#8B5CF6', 'important');
+                        this.style.setProperty('border-color', '#e5e5e5', 'important');
+                    });
+                }
+            }
+        }
+    }
+
+    setTimeout(applyPurpleButtonStyles, 100);
+    setTimeout(applyPurpleButtonStyles, 500);
+    setTimeout(applyPurpleButtonStyles, 1000);
+
+    const observer = new MutationObserver(applyPurpleButtonStyles);
+    observer.observe(document.body, { childList: true, subtree: true });
+    </script>
+
+    <style>
         .skill-bar {
             height: 6px;
             background: var(--border-color);  /* Use theme variable instead of hardcoded color */
@@ -494,7 +582,7 @@ def render_home_hero_and_stats():
         .hero-gradient-wrapper {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 0px;  /* Square edges */
-            margin: 0;  /* No margins */
+            margin: -1rem 0 0 0;  /* Negative top margin to pull up to navbar */
             padding: 0;
             width: 100%;
         }
@@ -632,14 +720,14 @@ def render_home_starters():
             "icon": "🏦",
             "title": "Financial Services / Banking",
             "desc": "Banking modernization, payments, compliance, core banking systems",
-            "examples": '"JPMorgan Chase(33)" • "American Express (3)" "Fiserv (7)"',
+            "examples": '"JP Morgan Chase (22)" • "RBC (11)" • "Fiserv (7)" • "American Express (3)" • "Capital One (2)" • "HSBC (2)"',
             "tab": "**cross_industry_landing_page88"
         },
         {
             "icon": "🌐",
             "title": "Cross-Industry Transformation",
             "desc": "Multi-sector consulting, platform engineering, organizational transformation",
-            "examples": '"Accenture (13)" • "Multiple Clients (33)"',
+            "examples": '"Accenture (13)" • "JP Morgan Chase (1)" • "Multiple Clients (38)" • "U.S. Regulatory Agency (1)"',
             "tab": "**cross_industry_landing_page**"
         },
         {
@@ -804,15 +892,15 @@ def render_home_starters():
         <div class="industry-card">
             <div style="font-size: 48px; margin-bottom: 16px;">{card['icon']}</div>
             <h3>{card['title']}</h3>
-            <div class="project-count">55 projects</div>
+            <div class="project-count">47 projects</div>
             <div class="card-desc">{card['desc']}</div>
             <div class="tags">
-                <span class="tag">JPMorgan Chase (33)</span>
+                <span class="tag">JP Morgan Chase (22)</span>
+                <span class="tag">RBC (11)</span>
+                <span class="tag">Fiserv (7)</span>
                 <span class="tag">American Express (3)</span>
                 <span class="tag">Capital One (2)</span>
-                <span class="tag">Fiserv (7)</span>
                 <span class="tag">HSBC (2)</span>
-                <span class="tag">RBC (11)</span>
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -827,13 +915,13 @@ def render_home_starters():
         <div class="industry-card">
             <div style="font-size: 48px; margin-bottom: 16px;">{card['icon']}</div>
             <h3>{card['title']}</h3>
-            <div class="project-count">51 projects</div>
+            <div class="project-count">53 projects</div>
             <div class="card-desc">{card['desc']}</div>
             <div class="tags">
                 <span class="tag">Accenture (13)</span>
-                <span class="tag">Multiple Clients (33)</span>
-                <span class="tag">Healthcare (3)</span>
-                <span class="tag">Transportation (5)</span>
+                <span class="tag">Multiple Clients (38)</span>
+                <span class="tag">JP Morgan Chase (1)</span>
+                <span class="tag">U.S. Regulatory Agency (1)</span>
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -952,6 +1040,59 @@ def render_home_starters():
 
     st.markdown('</div>', unsafe_allow_html=True)
 
+    # JAVASCRIPT: Force purple button styles using components.html
+    import streamlit.components.v1 as components
+    components.html("""
+    <script>
+    (function() {
+        function applyPurpleButtons() {
+            const iframeDoc = window.parent.document;
+
+            // Category buttons 0-5: white with purple text
+            for (let i = 0; i <= 5; i++) {
+                const container = iframeDoc.querySelector('.st-key-btn_' + i);
+                if (container) {
+                    const button = container.querySelector('button');
+                    if (button && !button.dataset.purpled) {
+                        button.dataset.purpled = 'true';
+                        button.style.cssText = 'background: white !important; background-color: white !important; background-image: none !important; border: 2px solid #e5e5e5 !important; color: #8B5CF6 !important;';
+
+                        button.onmouseenter = function() {
+                            this.style.cssText = 'background: #8B5CF6 !important; background-color: #8B5CF6 !important; background-image: none !important; border: 2px solid #8B5CF6 !important; color: white !important;';
+                        };
+                        button.onmouseleave = function() {
+                            this.style.cssText = 'background: white !important; background-color: white !important; background-image: none !important; border: 2px solid #e5e5e5 !important; color: #8B5CF6 !important;';
+                        };
+                    }
+                }
+            }
+
+            // Ask Agy button (btn_6): purple gradient - BIGGER SIZE
+            const agyContainer = iframeDoc.querySelector('.st-key-btn_6');
+            if (agyContainer) {
+                const agyButton = agyContainer.querySelector('button');
+                if (agyButton && !agyButton.dataset.purpled) {
+                    agyButton.dataset.purpled = 'true';
+                    agyButton.style.cssText = 'background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%) !important; background-color: #8B5CF6 !important; border: none !important; color: white !important; padding: 14px 28px !important; font-size: 15px !important; font-weight: 600 !important; border-radius: 8px !important; box-shadow: 0 2px 8px rgba(139, 92, 246, 0.25) !important;';
+
+                    agyButton.onmouseenter = function() {
+                        this.style.cssText = 'background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%) !important; background-color: #7C3AED !important; border: none !important; color: white !important; padding: 14px 28px !important; font-size: 15px !important; font-weight: 600 !important; border-radius: 8px !important; box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4) !important; transform: translateY(-2px) !important;';
+                    };
+                    agyButton.onmouseleave = function() {
+                        this.style.cssText = 'background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%) !important; background-color: #8B5CF6 !important; border: none !important; color: white !important; padding: 14px 28px !important; font-size: 15px !important; font-weight: 600 !important; border-radius: 8px !important; box-shadow: 0 2px 8px rgba(139, 92, 246, 0.25) !important;';
+                    };
+                }
+            }
+        }
+
+        setTimeout(applyPurpleButtons, 100);
+        setTimeout(applyPurpleButtons, 500);
+        setTimeout(applyPurpleButtons, 1000);
+        setTimeout(applyPurpleButtons, 2000);
+    })();
+    </script>
+    """, height=0)
+
     # Footer
     footer_html = """
     <div style="background: #2c3e50; color: white; padding: 48px 40px; text-align: center; margin-top: 60px; border-radius: 16px;">
@@ -963,7 +1104,7 @@ def render_home_starters():
             Available for immediate start • Remote or Atlanta-based • Open to consulting engagements
         </p>
         <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-            <a href="mailto:mcpugmire@gmail.com" style="padding: 12px 28px; background: #667eea; color: white; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease;">
+            <a href="mailto:mcpugmire@gmail.com" style="padding: 12px 28px; background: #8B5CF6; color: white; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease;">
                 📧 mcpugmire@gmail.com
             </a>
             <a href="https://www.linkedin.com/in/matt-pugmire/" target="_blank" style="padding: 12px 28px; background: rgba(255,255,255,0.1); color: white; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease;">
@@ -1534,7 +1675,7 @@ def render_banking_landing_page_OLD():
             Available for immediate start • Remote or Atlanta-based • Open to consulting engagements
         </p>
         <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-            <a href="mailto:mcpugmire@gmail.com" style="padding: 12px 28px; background: #667eea; color: white; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease;">
+            <a href="mailto:mcpugmire@gmail.com" style="padding: 12px 28px; background: #8B5CF6; color: white; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease;">
                 📧 mcpugmire@gmail.com
             </a>
             <a href="https://www.linkedin.com/in/matt-pugmire/" target="_blank" style="padding: 12px 28px; background: rgba(255,255,255,0.1); color: white; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease;">
@@ -2108,7 +2249,7 @@ def render_cross_industry_landing_page_OLD():
             Available for immediate start • Remote or Atlanta-based • Open to consulting engagements
         </p>
         <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-            <a href="mailto:mcpugmire@gmail.com" style="padding: 12px 28px; background: #667eea; color: white; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease;">
+            <a href="mailto:mcpugmire@gmail.com" style="padding: 12px 28px; background: #8B5CF6; color: white; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease;">
                 📧 mcpugmire@gmail.com
             </a>
             <a href="https://www.linkedin.com/in/matt-pugmire/" target="_blank" style="padding: 12px 28px; background: rgba(255,255,255,0.1); color: white; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease;">
