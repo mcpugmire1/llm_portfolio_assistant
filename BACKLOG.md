@@ -1,8 +1,8 @@
 # MattGPT Streamlit App - Product Backlog
 
-**Sprint Goal:** Match wireframe styling for job search launch (1 week)
+**Sprint Goal:** Phase 4 Complete - UI Polish & Wireframe Alignment ✅
 
-**Last Updated:** October 19, 2024
+**Last Updated:** October 28, 2025
 
 ---
 
@@ -19,63 +19,119 @@
 - [x] Footer with contact links
 
 **Reference:** `/wireframes/homepage_wireframe.html`
-**Files:** `ui/components.py:489-986`, `app.py:556-620`
+**Files:** `ui/legacy_components.py`, `ui/components/category_cards.py`
 
 ---
 
 ### ✅ Banking Landing Page
 **Status:** Complete
-**Completed:** Oct 19, 2024
+**Completed:** Oct 28, 2025 (Rewritten with purple theme)
 
 - [x] Header with title and project count
+- [x] Purple gradient hero section matching home page
+- [x] Stats section (47 projects, 16 capabilities, 6 clients)
 - [x] Client pills horizontal layout (6 clients)
-- [x] 16 capability cards in 3-column responsive grid
-- [x] Purple accents and hover effects
-- [x] "Ask Agy" CTA button
-- [x] Footer matching homepage
+- [x] 15 capability cards in 3-column responsive grid
+- [x] Purple button theme with varied text
+- [x] Purple "Ask Agy" CTA button gradient
+- [x] Purple footer email button
 
 **Reference:** `/wireframes/banking_landing_page.html`
-**Files:** `ui/components.py:981-1213`
+**Files:** `ui/pages/banking_landing.py` (complete rewrite, 413 lines)
 
 ---
 
 ### ✅ Cross-Industry Landing Page
 **Status:** Complete
-**Completed:** Oct 19, 2024
+**Completed:** Oct 28, 2025 (Rewritten with purple theme)
 
 - [x] Header with title and project count
+- [x] Purple gradient hero section matching home page
+- [x] Stats section (53 projects, 11 capabilities, 4 client groups)
 - [x] Industry pills horizontal layout (8 industries)
-- [x] 15 capability cards in 3-column responsive grid
-- [x] Purple accents and hover effects
-- [x] "Ask Agy" CTA button
-- [x] Footer matching homepage
+- [x] 11 capability cards in 3-column responsive grid
+- [x] Purple button theme with varied text
+- [x] Purple "Ask Agy" CTA button gradient
+- [x] Purple footer email button
 
 **Reference:** `/wireframes/cross_industry_landing_page.html`
-**Files:** `ui/components.py:1215-1448`
+**Files:** `ui/pages/cross_industry_landing.py` (complete rewrite, 413 lines)
+
+---
+
+### ✅ Button Styling Unification (ADR 015)
+**Status:** Complete
+**Completed:** Oct 28, 2025
+
+- [x] Implement purple theme (#8B5CF6) across all pages
+- [x] Solve Streamlit emotion-cache CSS override issue
+- [x] Create JavaScript workaround for button styling
+- [x] Add varied button text (not all "View Projects →")
+- [x] Unify button padding and hover states
+- [x] Purple footer email button across all pages
+- [x] "Ask Agy" purple gradient CTA buttons
+
+**Technical Solution:** JavaScript injection via `streamlit.components.v1.html()` with inline styles
+**Files:**
+- `ui/legacy_components.py:1046-1094` (home page)
+- `ui/pages/explore_stories.py:1378-1423` (card buttons)
+- `ui/pages/banking_landing.py`, `ui/pages/cross_industry_landing.py`
+
+**Reference:** ADR 015 in `docs/ADR.md`
+
+---
+
+### ✅ Explore Stories - Filter UI Redesign
+**Status:** Complete
+**Completed:** Oct 28, 2025
+
+- [x] Progressive disclosure pattern (primary + advanced filters)
+- [x] Industry and Capability filters (primary, always visible)
+- [x] Advanced filters collapsed by default (Client, Role, Domain)
+- [x] Pre-filtered navigation from landing pages
+- [x] Filter chips with removal functionality
+- [x] Purple accent colors throughout
+- [x] Data layer refactored to use raw JSONL fields (Title-case)
+
+**Reference:** `EXPLORE_STORIES_UX_REDESIGN.md`
+**Files:** `ui/pages/explore_stories.py`, `utils/filters.py`, `app.py`
+
+---
+
+### ✅ Explore Stories - Detail Panel Redesign
+**Status:** Complete
+**Completed:** Oct 28, 2025
+
+- [x] Match explore_stories_table_wireframe.html specification
+- [x] Full STAR narrative display (Situation, Task, Action, Result)
+- [x] Sidebar with tech tags, competencies, metrics
+- [x] 100% JSONL-sourced data (zero fabrication verified)
+- [x] Header with metadata icons (🏢 🎯 📅 🏷️)
+- [x] "Ask Agy About This" CTA button
+- [x] Two-column responsive layout
+
+**Files:** `ui/pages/explore_stories.py:329-520`
 
 ---
 
 ## 🔴 HIGH PRIORITY (Job Search Critical)
 
-### 1. Fix Navigation Bar Disappearing Issue
+### ✅ Fix Navigation Bar Disappearing Issue
 **Story ID:** MATTGPT-001
-**Priority:** HIGH (but user deprioritized temporarily)
+**Status:** Complete
+**Completed:** Oct 2025
 
 **User Story:**
 As a user navigating the app, I want a consistent dark navbar across all pages so that I can easily move between sections.
 
-**Current Issue:**
-Dark navbar (#2c3e50) keeps disappearing on some pages due to CSS selector conflicts.
-
 **Acceptance Criteria:**
-- [ ] Dark navbar visible on all pages (Home, Banking, Cross-Industry, Explore Stories, Ask MattGPT, About Matt)
-- [ ] Navigation buttons: Home, Explore Stories, Ask MattGPT, About Matt
-- [ ] White text with hover states
-- [ ] No emoji icons in nav labels
-- [ ] Fix doesn't break other pages
+- [x] Dark navbar visible on all pages (Home, Banking, Cross-Industry, Explore Stories, Ask MattGPT, About Matt)
+- [x] Navigation buttons: Home, Explore Stories, Ask MattGPT, About Matt
+- [x] White text with hover states
+- [x] No emoji icons in nav labels
+- [x] Fix doesn't break other pages
 
-**Reference:** `app.py:556-620`
-**Notes:** User said "i'll come back to it later" - low urgency for now
+**Reference:** `ui/components/navbar.py`
 
 ---
 

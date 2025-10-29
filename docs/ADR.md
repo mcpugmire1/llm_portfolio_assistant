@@ -260,8 +260,134 @@ Repeated confusion arose around whether to use `Title` vs. `Story_Title` and `Cl
 - The loader/UI must normalize these to lowercase (`title`, `client`) for rendering.  
 - No additional variants (`Story_Title`, `short_title`, etc.) are introduced.  
 
-**Consequences:**  
-- Ensures consistency across Excel, JSONL, Pinecone, and UI.  
-- Eliminates recurring mismatch debates.  
-- Simplifies pipeline code and reduces maintenance overhead.  
+**Consequences:**
+- Ensures consistency across Excel, JSONL, Pinecone, and UI.
+- Eliminates recurring mismatch debates.
+- Simplifies pipeline code and reduces maintenance overhead.
 - Requires a one-time migration to map any legacy `Story_Title` keys to `Title`.
+
+---
+
+## ADR 015 — JavaScript Override for Streamlit Emotion-Cache Button Styling
+**Date:** 2025-10-28
+**Status:** Accepted
+
+**Context:**
+Streamlit uses emotion-based CSS-in-JS with dynamically generated classes (e.g., `.st-emotion-cache-7lqsib`) that have higher specificity than custom CSS. This prevents normal CSS overrides, even with `!important`, making it impossible to apply consistent button styling (purple theme #8B5CF6) across the portfolio website. The application is a job search portfolio aimed at recruiters and hiring managers, requiring professional, consistent visual presentation.
+
+**Problem Evidence:**
+```html
+<!-- Streamlit-rendered button -->
+<button class="st-emotion-cache-7lqsib e8vg11g2" data-testid="stBaseButton-secondary">
+    View Projects →
+</button>
+```
+
+Custom CSS attempts failed:
+```css
+button.st-emotion-cache-7lqsib {
+    background: #8B5CF6 !important;  /* IGNORED - emotion classes win */
+}
+```
+
+**Decision:**
+Use `streamlit.components.v1.html()` to inject JavaScript that applies inline styles via `window.parent.document`, bypassing the emotion-cache specificity issue.
+
+**Implementation Pattern:**
+```python
+import streamlit.components.v1 as components
+
+components.html("""
+<script>
+(function() {
+    function applyPurpleButtons() {
+        const parentDoc = window.parent.document;
+        const buttons = parentDoc.querySelectorAll('[class*="st-key-btn_"] button');
+
+        buttons.forEach(function(button) {
+            if (!button.dataset.purpled) {
+                button.dataset.purpled = 'true';
+                button.style.cssText = 'background: white !important; color: #8B5CF6 !important; border: 2px solid #e5e5e5 !important;';
+
+                button.addEventListener('mouseenter', function() {
+                    this.style.cssText = 'background: #8B5CF6 !important; color: white !important; border: 2px solid #8B5CF6 !important;';
+                });
+                button.addEventListener('mouseleave', function() {
+                    this.style.cssText = 'background: white !important; color: #8B5CF6 !important; border: 2px solid #e5e5e5 !important;';
+                });
+            }
+        });
+    }
+
+    // Handle async rendering
+    setTimeout(applyPurpleButtons, 100);
+    setTimeout(applyPurpleButtons, 500);
+    setTimeout(applyPurpleButtons, 1000);
+    setInterval(applyPurpleButtons, 2000);  // Catch dynamically added buttons
+})();
+</script>
+""", height=0)
+```
+
+**Why This Works:**
+- `window.parent.document` accesses Streamlit's DOM from iframe context
+- `style.cssText` applies inline styles (CSS specificity: 1,0,0,0 - highest possible)
+- `dataset.purpled` flag prevents duplicate event listener attachment
+- Multiple `setTimeout` calls handle Streamlit's async rendering pipeline
+- `setInterval` catches buttons added later (e.g., pagination, filters)
+- Event listeners maintain hover/interaction states
+
+**Alternatives Considered:**
+1. ❌ **Pure CSS with `!important`** - Doesn't work; emotion classes have higher specificity
+2. ❌ **CSS with nuclear selectors** - Still insufficient against emotion-cache
+3. ❌ **Custom Streamlit component** - Too heavyweight for simple button styling
+4. ❌ **Fork Streamlit** - Maintenance nightmare, not sustainable
+5. ❌ **Modify Streamlit source** - Same issues as forking
+6. ✅ **JavaScript inline styles** - Pragmatic, version-independent solution
+
+**Trade-offs:**
+- **Pros:**
+  - Complete control over button styling
+  - Works across all Streamlit versions
+  - No modifications to Streamlit source code
+  - Maintains hover states and interactions
+  - Can target specific buttons via key patterns
+- **Cons:**
+  - Adds ~0.5-1KB per page (negligible impact)
+  - Timing-dependent (100ms, 500ms delays)
+  - Must handle button lifecycle (mount/unmount scenarios)
+  - Requires iframe context awareness
+
+**Usage Pattern:**
+```python
+# Target specific buttons by key
+components.html(f"""
+<script>
+const container = window.parent.document.querySelector('.st-key-btn_{button_index}');
+const button = container.querySelector('button');
+// ... styling logic
+</script>
+""", height=0)
+```
+
+**Consequences:**
+- **Positive:** Achieved consistent purple button theme across all pages (home, landing, explore stories)
+- **Positive:** Professional appearance for recruiter/hiring manager audience
+- **Positive:** Pattern established for future Streamlit styling challenges
+- **Negative:** Technical debt if migrating away from Streamlit
+- **Negative:** Must maintain timing logic if Streamlit rendering changes
+- **Learning:** Inline styles are the highest CSS specificity weapon
+
+**Lessons Learned:**
+- Streamlit's emotion-cache is intentional (CSS-in-JS architecture)
+- Inline styles via `style.cssText` have maximum CSS specificity
+- Async rendering requires multiple timing strategies
+- Always use dataset flags to prevent duplicate event listeners
+- User quality standards drive technical solutions ("Do you think a half ass solution would help me land a new job? yes or no?")
+
+**Applied To:**
+- Home page category buttons ([legacy_components.py#L1046-L1094](../ui/legacy_components.py))
+- Explore Stories card buttons ([explore_stories.py#L1378-L1423](../ui/pages/explore_stories.py))
+- Landing page buttons (banking_landing.py, cross_industry_landing.py)
+
+---
