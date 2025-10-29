@@ -95,6 +95,17 @@ def _ensure_ask_bootstrap():
         )
 
 
+def _is_empty_conversation():
+    """Check if conversation is empty (should show landing page)."""
+    transcript = st.session_state.get("ask_transcript", [])
+    # Empty or only has the bootstrap "Ask anything." message
+    if not transcript:
+        return True
+    if len(transcript) == 1 and transcript[0].get("text") == "Ask anything.":
+        return True
+    return False
+
+
 def send_to_backend(prompt: str, filters: dict, ctx: Optional[dict], stories: list):
     return rag_answer(prompt, filters, stories)
 
@@ -1070,18 +1081,325 @@ def render_compact_context_banner(stories: list):
     """, unsafe_allow_html=True)
 
 
+def render_landing_page(stories: list):
+    """
+    Render the Ask MattGPT landing page (empty state) matching the wireframe.
+    Shown when conversation transcript is empty.
+
+    Wireframe: ask_mattgpt_landing_wireframe.html
+    """
+    import streamlit.components.v1 as components
+
+    # Purple gradient header with Agy avatar
+    st.markdown("""
+    <style>
+    .ask-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 30px;
+        margin: -1rem 0 0 0;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+   .header-content {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .agy-avatar {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        border: 3px solid white;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .header-text h1 {
+        font-size: 32px;
+        margin: 0 0 8px 0;
+        color: white;
+    }
+
+    .header-text p {
+        font-size: 16px;
+        margin: 0;
+        opacity: 0.95;
+    }
+
+    /* Status Bar */
+    .status-bar {
+        display: flex;
+        gap: 32px;
+        justify-content: center;
+        padding: 16px 24px;
+        background: rgba(255, 255, 255, 0.95);
+        border-bottom: 1px solid #E5E7EB;
+    }
+
+    .status-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        color: #6B7280;
+    }
+
+    .status-value {
+        font-weight: 600;
+        color: #2C363D;
+    }
+
+    .status-dot {
+        width: 8px;
+        height: 8px;
+        background: #10B981;
+        border-radius: 50%;
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+
+    /* Welcome Section */
+    .welcome-container {
+        padding: 60px 30px;
+        background: #fafafa;
+        text-align: center;
+    }
+
+    .main-intro-section {
+        background: white;
+        border-radius: 24px;
+        padding: 48px 32px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        max-width: 900px;
+        margin: -40px auto 40px;
+    }
+
+    .welcome-icon {
+        font-size: 72px;
+        margin-bottom: 24px;
+    }
+
+    .main-avatar img {
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .welcome-title {
+        font-size: 28px;
+        color: #2c3e50;
+        margin: 24px 0 12px;
+    }
+
+    .intro-text-primary {
+        font-size: 18px;
+        color: #374151;
+        line-height: 1.7;
+        font-weight: 500;
+        margin-bottom: 20px;
+        max-width: 650px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .intro-text-secondary {
+        font-size: 17px;
+        color: #6B7280;
+        line-height: 1.6;
+        max-width: 650px;
+        margin: 0 auto 48px;
+    }
+
+    /* Suggested Questions */
+    .suggested-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: #7f8c8d;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .suggested-questions {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .suggested-question {
+        background: white;
+        border: 2px solid #E5E7EB;
+        border-radius: 12px;
+        padding: 20px 24px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-align: left;
+        display: flex;
+        align-items: start;
+        gap: 12px;
+    }
+
+    .suggested-question:hover {
+        border-color: #8B5CF6;
+        background: #F9FAFB;
+        box-shadow: 0 4px 12px rgba(139, 92, 246, 0.12);
+        transform: translateY(-2px);
+    }
+
+    .question-icon {
+        font-size: 24px;
+        flex-shrink: 0;
+    }
+
+    .question-text {
+        font-size: 16px;
+        color: #2C363D;
+        line-height: 1.4;
+        font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+        .suggested-questions {
+            grid-template-columns: 1fr;
+        }
+    }
+    </style>
+
+    <div class="ask-header">
+        <div class="header-content">
+            <img class="agy-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%238B5CF6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' font-size='32' fill='white'%3E🐾%3C/text%3E%3C/svg%3E" alt="Agy"/>
+            <div class="header-text">
+                <h1>Ask MattGPT</h1>
+                <p>Meet Agy 🐾 — Tracking down insights from 20+ years of transformation experience</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="status-bar">
+        <div class="status-item">
+            <span class="status-dot"></span>
+            <span>Semantic search <span class="status-value">active</span></span>
+        </div>
+        <div class="status-item">
+            <span>Pinecone index <span class="status-value">ready</span></span>
+        </div>
+        <div class="status-item">
+            <span>115 stories <span class="status-value">indexed</span></span>
+        </div>
+    </div>
+
+    <div class="welcome-container">
+        <div class="main-intro-section">
+            <div class="welcome-icon">
+                <div class="main-avatar">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Ccircle cx='48' cy='48' r='46' fill='%238B5CF6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' font-size='48' fill='white'%3E🐾%3C/text%3E%3C/svg%3E" alt="Agy" />
+                </div>
+            </div>
+            <h2 class="welcome-title">Hi, I'm Agy 🐾</h2>
+            <div>
+                <p class="intro-text-primary">I'm a Plott Hound — a breed known for tracking skills and determination. Perfect traits for helping you hunt down insights from Matt's 115+ transformation projects.</p>
+                <p class="intro-text-secondary">Ask me about specific methodologies, leadership approaches, or project outcomes. I understand context, not just keywords.</p>
+            </div>
+        </div>
+
+        <div class="suggested-title">Try asking:</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Suggested question cards (using Streamlit buttons in grid)
+    suggested_questions = [
+        ("🚀", "How did Matt transform global payments at scale?"),
+        ("🏥", "Show me Matt's GenAI work in healthcare"),
+        ("💡", "Track down Matt's innovation leadership stories"),
+        ("👥", "How did Matt scale agile across 150+ people?"),
+        ("⚡", "Find Matt's platform engineering projects"),
+        ("🎯", "Show me how Matt handles stakeholders")
+    ]
+
+    # Create 2-column grid for suggested questions
+    col1, col2 = st.columns(2)
+
+    for i, (icon, question) in enumerate(suggested_questions):
+        with col1 if i % 2 == 0 else col2:
+            if st.button(
+                f"{icon}  {question}",
+                key=f"suggested_{i}",
+                use_container_width=True
+            ):
+                # Set the question in session state and trigger conversation
+                st.session_state["ask_input_value"] = question
+                st.session_state["ask_transcript"] = []
+                _ensure_ask_bootstrap()
+                # Trigger the search
+                send_to_backend(question, {}, None, stories)
+                st.rerun()
+
+    # Large input area at bottom
+    st.markdown("<br><br>", unsafe_allow_html=True)
+
+    user_input = st.text_input(
+        "Ask me anything — from building MattGPT to leading global programs...",
+        key="landing_input",
+        label_visibility="collapsed",
+        placeholder="Ask me anything — from building MattGPT to leading global programs..."
+    )
+
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        if st.button("Ask Agy 🐾", key="landing_ask", type="primary", use_container_width=True):
+            if user_input:
+                st.session_state["ask_input_value"] = user_input
+                st.session_state["ask_transcript"] = []
+                _ensure_ask_bootstrap()
+                send_to_backend(user_input, {}, None, stories)
+                st.rerun()
+
+    st.caption("Powered by OpenAI GPT-4 with semantic search across 115 project case studies")
+
+
 def render_ask_mattgpt(stories: list):
     """
-    Render the Ask MattGPT conversational interface.
-    
+    Main router for Ask MattGPT page.
+
+    Shows landing page (wireframe) when conversation is empty,
+    otherwise shows conversational interface.
+
     Args:
         stories: List of story dictionaries (STORIES from app.py)
     """
-    
+    _ensure_ask_bootstrap()
+
+    # Route to landing or conversation view
+    if _is_empty_conversation():
+        render_landing_page(stories)
+    else:
+        render_conversation_view(stories)
+
+
+def render_conversation_view(stories: list):
+    """
+    Render the conversational chat interface (after first question asked).
+
+    Wireframe: ask_mattgpt_wireframe.html
+
+    Args:
+        stories: List of story dictionaries (STORIES from app.py)
+    """
+
     # Page header
     st.title("Ask MattGPT")
     st.markdown("Ask me anything about my 20+ years in digital transformation...")
-    
+
      # Anchor at top to force scroll position
     st.markdown('<div id="ask-top"></div>', unsafe_allow_html=True)
 
