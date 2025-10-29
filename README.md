@@ -8,7 +8,7 @@
 ## 🎯 What This Is
 
 An AI assistant that provides conversational access to my professional portfolio 
-across 115+ transformation projects, enabling recruiters and hiring managers to 
+across 120+ transformation projects, enabling recruiters and hiring managers to 
 ask specific questions and receive verifiable, outcome-focused answers.
 
 **Example queries:**
@@ -40,7 +40,7 @@ Traditional portfolios force readers to:
 User Query → Semantic Search → RAG Retrieval → GPT-4 → Cited Answer
                     ↓
               Pinecone/FAISS
-           (115+ STAR stories)
+           (120+ STAR stories)
 ```
 **Technical Innovation:** Hybrid retrieval combining semantic embeddings with 
 structured metadata filtering to deliver context-aware, outcome-focused responses.
@@ -283,7 +283,7 @@ python generate_public_tags.py
 - `OPENAI_API_KEY` in `.env` file
 - `echo_star_stories.jsonl` must exist (run `generate_jsonl_from_excel.py` first)
 
-**Expected Cost:** ~$0.50-2.00 for 115 stories (using GPT-4)
+**Expected Cost:** ~$0.50-2.00 for 120+ stories (using GPT-4o-mini)
 
 ---
 

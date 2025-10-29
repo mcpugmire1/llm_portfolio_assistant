@@ -608,7 +608,7 @@ def render_home_hero_and_stats():
                 <h1 style="font-size: 42px; font-weight: 700; margin-bottom: 16px; color: white;">Digital Transformation Leader</h1>
                 <p style="font-size: 18px; color: white; opacity: 0.95; max-width: 700px; margin: 0 auto 32px; line-height: 1.6;">
                     20+ years driving innovation, agile delivery, and technology leadership across Fortune 500 companies.
-                    Explore my portfolio of 115+ projects or chat with Agy 🐾 to learn about my experience.
+                    Explore my portfolio of 120+ projects or chat with Agy 🐾 to learn about my experience.
                 </p>
                 <div style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap;">
                     <a href="#explore" style="display: inline-block; padding: 14px 32px; background: white; color: #667eea; border: 2px solid white; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease;">
@@ -688,7 +688,7 @@ def render_home_hero_and_stats():
                 <div class="stat-label">Years Experience</div>
             </div>
             <div class="stat">
-                <div class="stat-number">115</div>
+                <div class="stat-number">120+</div>
                 <div class="stat-label">Projects Delivered</div>
             </div>
             <div class="stat">

@@ -63,7 +63,7 @@ llm_portfolio_assistant/
 │   └── legacy_components.py        # Legacy monolith (2,100 lines) - TO BE DELETED
 │
 ├── data/
-│   ├── echo_star_stories_nlp.jsonl # Story corpus (115 stories)
+│   ├── echo_star_stories_nlp.jsonl # Story corpus (120+ stories)
 │   ├── nonsense_filters.jsonl      # Off-domain query rules
 │   └── offdomain_queries.csv       # Query telemetry log
 │
