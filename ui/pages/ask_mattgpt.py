@@ -340,7 +340,9 @@ def rag_answer(question: str, filters: dict, stories: list):
 
     primary = ranked[0]
     try:
+        # Generate Agy-voiced response using GPT-4
         narrative = _format_narrative(primary)
+        agy_response = _generate_agy_response(question, ranked, narrative)
 
         # Key points: include top 2–3 stories as bullets for breadth
         kp_lines = [_format_key_points(s) for s in ranked]
@@ -355,12 +357,12 @@ def rag_answer(question: str, filters: dict, stories: list):
             deep_dive += f"\n\n_Also relevant:_ {more}"
 
         modes = {
-            "narrative": narrative,
+            "narrative": agy_response,  # Use Agy-voiced response for narrative
             "key_points": key_points,
             "deep_dive": deep_dive,
         }
-        # Use the narrative itself as the assistant bubble; omit CTA text
-        answer_md = narrative
+        # Use the Agy-voiced response as the assistant bubble
+        answer_md = agy_response
     except Exception as e:
         # Defensive fallback so Ask never crashes: use 5P summary only
         if DEBUG:
@@ -379,6 +381,119 @@ def rag_answer(question: str, filters: dict, stories: list):
         "modes": modes,
         "default_mode": "narrative",
     }
+
+def _generate_agy_response(question: str, ranked_stories: list[dict], answer_context: str) -> str:
+    """
+    Generate an Agy-voiced response using OpenAI GPT-4.
+
+    Uses the Agy system prompt to create warm, helpful responses that:
+    - Lead with search status ("🐾 Tracking down...")
+    - Cite specific projects and outcomes
+    - Show patterns across Matt's work
+    - Offer depth without forcing it
+
+    Args:
+        question: User's original question
+        ranked_stories: Top 3 relevant stories from semantic search
+        answer_context: Pre-formatted story content (narrative/key points/deep dive)
+
+    Returns:
+        Agy-voiced response string with personality and citations
+    """
+    try:
+        from openai import OpenAI
+        import os
+        from dotenv import load_dotenv
+
+        load_dotenv()
+
+        client = OpenAI(
+            api_key=os.getenv("OPENAI_API_KEY"),
+            project=os.getenv("OPENAI_PROJECT_ID"),
+            organization=os.getenv("OPENAI_ORG_ID")
+        )
+
+        # Build context from ranked stories
+        story_context = "\n\n---\n\n".join([
+            f"**Story {i+1}: {s.get('Title', 'Untitled')}**\n"
+            f"Client: {s.get('Client', 'Unknown')}\n"
+            f"Role: {s.get('Role', '')}\n"
+            f"Industry: {s.get('Industry', '')}\n"
+            f"Domain: {s.get('Sub-category', '')}\n\n"
+            f"Situation: {' '.join(s.get('Situation', []))}\n"
+            f"Task: {' '.join(s.get('Task', []))}\n"
+            f"Action: {' '.join(s.get('Action', []))}\n"
+            f"Result: {' '.join(s.get('Result', []))}\n"
+            f"Performance: {' '.join(s.get('Performance', []))}"
+            for i, s in enumerate(ranked_stories[:3])
+        ])
+
+        # Agy system prompt (from agy-system-prompt.md)
+        system_prompt = """You are Agy 🐾, Matt Pugmire's AI assistant and Plott Hound. You help people understand Matt's career through his portfolio of 115+ real project case studies.
+
+Plott Hounds are known for their tracking skills and determination - traits that serve you well when hunting down insights from Matt's 20+ years of digital transformation experience.
+
+**Your Voice:**
+- Use first person ("I'll track down...", "Let me find...")
+- Include 🐾 once per response (opening OR closing, never both)
+- Professional but warm - you're Matt's professional portfolio assistant
+- No dog puns, barking, or cutesy behavior
+- Show determination when needed
+
+**Response Structure:**
+1. Search status with 🐾: "🐾 Let me track down Matt's experience with..."
+2. Direct answer (1-2 sentences grounded in specific projects)
+3. Cite project, client, and quantifiable outcomes
+4. Extract patterns across multiple projects if applicable
+5. Optional: Offer to go deeper
+
+**Guidelines:**
+- Always cite specific projects with Title, Client, and outcomes
+- Lead with outcomes, then methodology
+- Be conversational but professional
+- Admit gaps honestly
+- Show patterns across projects when relevant
+- One 🐾 emoji per response maximum
+
+**Success Criteria:**
+You're successful when users can cite specific projects and outcomes after talking to you, and trust Matt because of concrete proof you've provided."""
+
+        # User message with context
+        user_message = f"""User Question: {question}
+
+Here are the top 3 relevant projects from Matt's portfolio:
+
+{story_context}
+
+Generate an Agy-voiced response that:
+1. Starts with a search status (e.g., "🐾 Let me track down Matt's experience with...")
+2. Answers their question with specific project citations
+3. Shows outcomes and patterns across Matt's work
+4. Stays professional and credible
+5. Offers to go deeper if helpful
+
+Keep it conversational, warm, but professional. Cite specific clients and outcomes."""
+
+        # Call OpenAI API
+        response = client.chat.completions.create(
+            model="gpt-4",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_message}
+            ],
+            temperature=0.7,
+            max_tokens=500
+        )
+
+        return response.choices[0].message.content
+
+    except Exception as e:
+        # Fallback to non-LLM response if OpenAI fails
+        if DEBUG:
+            print(f"DEBUG: OpenAI call failed, using fallback: {e}")
+        # Return a simple Agy-prefixed version of the context
+        return f"🐾 Let me show you what I found...\n\n{answer_context}"
+
 
 def build_known_vocab(stories: list[dict]):
     vocab = set()
