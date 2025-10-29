@@ -429,7 +429,7 @@ def _generate_agy_response(question: str, ranked_stories: list[dict], answer_con
         ])
 
         # Agy system prompt (from agy-system-prompt.md)
-        system_prompt = """You are Agy 🐾, Matt Pugmire's AI assistant and Plott Hound. You help people understand Matt's career through his portfolio of 115+ real project case studies.
+        system_prompt = """You are Agy 🐾, Matt Pugmire's AI assistant and Plott Hound. You help people understand Matt's career through his portfolio of 120+ real project case studies.
 
 Plott Hounds are known for their tracking skills and determination - traits that serve you well when hunting down insights from Matt's 20+ years of digital transformation experience.
 
@@ -475,8 +475,9 @@ Generate an Agy-voiced response that:
 Keep it conversational, warm, but professional. Cite specific clients and outcomes."""
 
         # Call OpenAI API
+        # Using gpt-4o-mini: fast, cost-effective, excellent for well-crafted prompts
         response = client.chat.completions.create(
-            model="gpt-4",
+            model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_message}
@@ -1409,7 +1410,7 @@ def render_landing_page(stories: list):
             <span>Pinecone index <span class="status-value">ready</span></span>
         </div>
         <div class="status-item">
-            <span>115 stories <span class="status-value">indexed</span></span>
+            <span>120+ stories <span class="status-value">indexed</span></span>
         </div>
     </div>
 
@@ -1422,7 +1423,7 @@ def render_landing_page(stories: list):
             </div>
             <h2 class="welcome-title">Hi, I'm Agy 🐾</h2>
             <div>
-                <p class="intro-text-primary">I'm a Plott Hound — a breed known for tracking skills and determination. Perfect traits for helping you hunt down insights from Matt's 115+ transformation projects.</p>
+                <p class="intro-text-primary">I'm a Plott Hound — a breed known for tracking skills and determination. Perfect traits for helping you hunt down insights from Matt's 120+ transformation projects.</p>
                 <p class="intro-text-secondary">Ask me about specific methodologies, leadership approaches, or project outcomes. I understand context, not just keywords.</p>
             </div>
         </div>
@@ -1479,7 +1480,7 @@ def render_landing_page(stories: list):
                 send_to_backend(user_input, {}, None, stories)
                 st.rerun()
 
-    st.caption("Powered by OpenAI GPT-4 with semantic search across 115 project case studies")
+    st.caption("Powered by OpenAI GPT-4o-mini with semantic search across 120+ project case studies")
 
 
 def render_ask_mattgpt(stories: list):
@@ -1553,7 +1554,7 @@ def render_conversation_view(stories: list):
         <span>•</span>
         <span>Pinecone index ready</span>
         <span>•</span>
-        <span>115 stories indexed</span>
+        <span>120+ stories indexed</span>
     </div>
     """, unsafe_allow_html=True)
 
@@ -1583,7 +1584,7 @@ def render_conversation_view(stories: list):
             # Quick stats bar
             col1, col2, col3, col4 = st.columns(4)
             with col1:
-                st.metric("Stories Indexed", "115")
+                st.metric("Stories Indexed", "120+")
             with col2:
                 st.metric("Avg Response Time", "1.2s")
             with col3:
@@ -1619,7 +1620,7 @@ def render_conversation_view(stories: list):
                 ### Data & Processing
                 
                 **📊 Story Corpus**
-                - 115+ structured narratives from Fortune 500 projects
+                - 120+ structured narratives from Fortune 500 projects
                 - STAR/5P framework encoding
                 - Rich metadata: client, domain, outcomes, metrics
                 
