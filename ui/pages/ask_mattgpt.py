@@ -331,8 +331,37 @@ def render_landing_page(stories: list):
             padding: 0 !important;
         }
 
-        input[key="landing_input"] {
+        /* Nicer input styling from wireframe */
+        /* Multiple selectors to ensure it catches Streamlit's rendered input */
+        .landing-input-container input,
+        .landing-input-container input[type="text"],
+        div.landing-input-container input,
+        div.landing-input-container input[type="text"] {
             width: 100% !important;
+            padding: 20px 24px !important;
+            font-size: 17px !important;
+            border: 2px solid #E5E7EB !important;
+            border-radius: 16px !important;
+            transition: all 0.2s ease !important;
+            background: #FAFAFA !important;
+            font-family: inherit !important;
+        }
+
+        .landing-input-container input:focus,
+        .landing-input-container input[type="text"]:focus,
+        div.landing-input-container input:focus,
+        div.landing-input-container input[type="text"]:focus {
+            outline: none !important;
+            border-color: #8B5CF6 !important;
+            background: white !important;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1) !important;
+        }
+
+        .landing-input-container input::placeholder,
+        .landing-input-container input[type="text"]::placeholder,
+        div.landing-input-container input::placeholder,
+        div.landing-input-container input[type="text"]::placeholder {
+            color: #9CA3AF !important;
         }
 
         /* ASK AGY BUTTON - Purple background with WHITE text */
@@ -398,6 +427,39 @@ def render_landing_page(stories: list):
         /* Target the div wrapper around button text */
         button[key="landing_ask"] div {
             color: white !important;
+        }
+
+        /* Bounce animation for loading paw icon */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        /* Fade in up animation for welcome text */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Apply animation to welcome elements */
+        .welcome-title {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .intro-text-primary {
+            animation: fadeInUp 0.6s ease-out 0.2s;
+            animation-fill-mode: both;
+        }
+
+        .intro-text-secondary {
+            animation: fadeInUp 0.6s ease-out 0.4s;
+            animation-fill-mode: both;
         }
 
         /* Hide trigger button */
