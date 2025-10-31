@@ -332,11 +332,8 @@ def render_landing_page(stories: list):
         }
 
         /* Nicer input styling from wireframe */
-        /* Multiple selectors to ensure it catches Streamlit's rendered input */
-        .landing-input-container input,
-        .landing-input-container input[type="text"],
-        div.landing-input-container input,
-        div.landing-input-container input[type="text"] {
+        /* Target Streamlit's actual rendered input using data-testid */
+        div[data-testid="stTextInput"] input {
             width: 100% !important;
             padding: 20px 24px !important;
             font-size: 17px !important;
@@ -347,20 +344,14 @@ def render_landing_page(stories: list):
             font-family: inherit !important;
         }
 
-        .landing-input-container input:focus,
-        .landing-input-container input[type="text"]:focus,
-        div.landing-input-container input:focus,
-        div.landing-input-container input[type="text"]:focus {
+        div[data-testid="stTextInput"] input:focus {
             outline: none !important;
             border-color: #8B5CF6 !important;
             background: white !important;
             box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1) !important;
         }
 
-        .landing-input-container input::placeholder,
-        .landing-input-container input[type="text"]::placeholder,
-        div.landing-input-container input::placeholder,
-        div.landing-input-container input[type="text"]::placeholder {
+        div[data-testid="stTextInput"] input::placeholder {
             color: #9CA3AF !important;
         }
 
