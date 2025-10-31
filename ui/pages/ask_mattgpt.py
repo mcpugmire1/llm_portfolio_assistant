@@ -20,11 +20,1520 @@ from services.pinecone_service import _init_pinecone, PINECONE_MIN_SIM, SEARCH_T
 from services.rag_service import semantic_search, _KNOWN_VOCAB
 from utils.formatting import _format_narrative, _format_key_points, _format_deep_dive
 from utils.ui_helpers import render_sources_chips, render_sources_badges_static
+from ui.components.how_agy_works import render_how_agy_works
 
 # --- Nonsense rules (JSONL) + known vocab -------------------
 import csv
 from datetime import datetime
 import os, re, time, textwrap, json
+
+# ====================
+# 1. MAIN ENTRY POINT
+# ====================
+
+def render_ask_mattgpt(stories: list):
+    """Main entry point for Ask MattGPT page."""
+        
+    _ensure_ask_bootstrap()
+        
+    if not st.session_state.get("ask_transcript"):
+        render_landing_page(stories)
+    else:
+        render_conversation_view(stories)
+
+
+
+# ====================
+# 2. LANDING PAGE (EMPTY STATE)
+# ====================
+
+def _render_landing_with_loading(stories: list):
+    """Render landing page in loading state while processing query."""
+    # Get the pending query
+    query = st.session_state.get("pending_query", "")
+
+    # Render same CSS as main landing page
+    st.markdown("""
+        <style>
+        /* AGGRESSIVE SPACING REMOVAL */
+        .main {
+            padding-top: 0 !important;
+        }
+
+        .main .block-container {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+    # Render header
+    st.markdown("""
+    <div class="ask-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; margin: -2rem 0 0 0; color: white; display: flex; justify-content: space-between; align-items: center;">
+        <div class="header-content" style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 24px;">
+                <img style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.2);"
+                    src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar_64_dark.png"
+                    alt="Agy"/>
+                <div>
+                    <h1 style="font-size: 32px; margin: 0 0 8px 0; color: white;">Ask MattGPT</h1>
+                    <p style="font-size: 16px; margin: 0; opacity: 0.95;">Meet Agy 🐾 — Tracking down insights from 20+ years of transformation experience</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Show loading message with the exact styling requested
+    st.markdown("""
+<div style='background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%);
+            border: 2px solid #667eea40;
+            border-radius: 12px;
+            padding: 16px 24px;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: 600px;'>
+    <div style='font-size: 20px; animation: bounce 1s infinite;'>🐾</div>
+    <div style='color: #667eea; font-weight: 500;'>Agy is tracking down insights...</div>
+</div>
+<style>@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }</style>
+""", unsafe_allow_html=True)
+
+    # Process the query
+    result = send_to_backend(query, {}, None, stories)
+
+    # Add to transcript
+    st.session_state["ask_transcript"].append({"Role": "user", "text": query})
+    st.session_state["ask_transcript"].append({
+        "type": "card",
+        "Title": result.get("sources", [{}])[0].get("title", "Response"),
+        "story_id": result.get("sources", [{}])[0].get("id"),
+        "one_liner": result["answer_md"],
+        "sources": result.get("sources", []),
+        "confidence": result.get("sources", [{}])[0].get("score", 0.8) if result.get("sources") else 0.8,
+        "modes": result.get("modes", {}),
+    })
+
+    # Clear processing state
+    st.session_state["processing_suggestion"] = False
+    st.session_state["pending_query"] = None
+
+    # Rerun to show conversation view
+    st.rerun()
+
+def render_landing_page(stories: list):
+    """
+    Render the Ask MattGPT landing page (empty state) matching the wireframe.
+    NAVBAR IS RENDERED BY PARENT - NO NAVBAR CSS HERE
+    """
+
+    # Initialize processing flag
+    if "processing_suggestion" not in st.session_state:
+        st.session_state["processing_suggestion"] = False
+
+    # If we're in processing state, handle the query processing first
+    if st.session_state.get("processing_suggestion") and st.session_state.get("pending_query"):
+        # Render page with loading state, then process
+        _render_landing_with_loading(stories)
+        return
+
+    # === PAGE-SPECIFIC CSS ONLY ===
+    st.markdown("""
+        <style>
+        /* AGGRESSIVE SPACING REMOVAL */
+        .main {
+            padding-top: 0 !important;
+        }
+        
+        .main .block-container {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+        }
+        
+        section[data-testid="stMain"] {
+            padding-top: 0 !important;
+        }
+        
+        div[data-testid="stAppViewContainer"] {
+            padding-top: 0 !important;
+        }
+        
+        /* Kill the gap after header */
+        header[data-testid="stHeader"] {
+            margin-bottom: 0 !important;
+            padding-bottom: 0 !important;
+        }
+        
+        /* Remove spacing from first markdown element */
+        .stMarkdown:first-child {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+
+        /* Purple header - pull up slightly if needed */
+        .ask-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            margin: -2rem 0 0 0 !important;  /* Slight negative top margin */
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .header-agy-avatar {
+            width: 64px !important;
+            height: 64px !important;
+            border-radius: 50% !important;
+            border: 3px solid white !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+        }
+
+        .header-text h1 {
+            font-size: 32px;
+            margin: 0 0 8px 0;
+            color: white;
+        }
+
+        .header-text p {
+            font-size: 16px;
+            margin: 0;
+            opacity: 0.95;
+        }
+
+        .how-it-works-btn {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .how-it-works-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Status bar */
+        .status-bar {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            padding: 16px 24px;
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid #E5E7EB;
+            margin: 0 !important;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #6B7280;
+        }
+
+        .status-value {
+            font-weight: 600;
+            color: #2C363D;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #10B981;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* MAIN INTRO SECTION */
+        .main-intro-section {
+            background: white;
+            border-radius: 24px 24px 0 0;
+            max-width: 900px;
+            width: 100%;
+            margin: 20px auto 0;
+            padding: 48px 32px 32px;
+            text-align: center;
+        }
+
+        .main-avatar {
+            text-align: center;
+        }
+
+        .main-avatar img {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .welcome-title {
+            font-size: 28px;
+            color: #2c3e50;
+            margin: 24px 0 12px;
+            text-align: center;
+        }
+
+        .intro-text-primary {
+            font-size: 18px;
+            color: #374151;
+            line-height: 1.7;
+            font-weight: 500;
+            margin-bottom: 20px;
+            max-width: 650px;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            text-align: center !important;
+        }
+
+        .intro-text-secondary {
+            font-size: 17px;
+            color: #6B7280;
+            line-height: 1.6;
+            max-width: 650px;
+            margin: 0 auto 48px !important;
+            text-align: center !important;
+        }
+
+        .suggested-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* BUTTON CONTAINER - Grid layout */
+        div[data-testid="stHorizontalBlock"]:has(button[key^="suggested_"]) {
+            display: grid !important;
+            grid-template-columns: repeat(2, 1fr) !important;
+            grid-template-rows: repeat(3, auto) !important;
+            gap: 16px !important;
+            max-width: 900px !important;
+            width: 100% !important;
+            margin: 0 auto !important;
+            background: white !important;
+            padding: 0 32px 48px !important;
+            border-radius: 0 0 24px 24px !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+        }
+
+        div[data-testid="stHorizontalBlock"]:has(button[key^="suggested_"]) > div[data-testid="column"] {
+            display: contents !important;
+        }
+
+        div[data-testid="stHorizontalBlock"]:has(button[key^="suggested_"]) .stElementContainer {
+            background: transparent !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        /* Suggested question buttons */
+        button[key^="suggested_"] {
+            background: white !important;
+            border: 2px solid #E5E7EB !important;
+            border-radius: 12px !important;
+            padding: 20px 24px !important;
+            text-align: left !important;
+            transition: all 0.2s ease !important;
+            min-height: 80px !important;
+            max-height: 80px !important;
+            height: 80px !important;
+            display: flex !important;
+            align-items: start !important;
+            gap: 12px !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+            width: 100% !important;
+            overflow: hidden !important;
+        }
+
+        button[key^="suggested_"]:hover {
+            border-color: #8B5CF6 !important;
+            background: #F9FAFB !important;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.12) !important;
+            transform: translateY(-2px) !important;
+        }
+
+        button[key^="suggested_"] p {
+            font-size: 16px !important;
+            font-weight: 600 !important;
+            color: #2C363D !important;
+            line-height: 1.4 !important;
+            margin: 0 !important;
+            text-align: left !important;
+            overflow: hidden !important;
+            display: -webkit-box !important;
+            -webkit-line-clamp: 2 !important;
+            -webkit-box-orient: vertical !important;
+        }
+
+        button[key^="suggested_"] div {
+            max-height: 80px !important;
+        }
+
+
+        /* Landing input container */
+        .landing-input-container {
+            max-width: 800px !important;
+            width: 100% !important;
+            margin: 40px auto 0px !important;
+            padding: 0 30px !important;
+        }
+
+        /* Powered by text */
+        .powered-by-text {
+            text-align: center !important;
+            font-size: 12px !important;
+            color: #95a5a6 !important;
+            margin-top: -25px !important;
+            margin-bottom: 0 !important;
+            padding: 0 !important;
+        }
+
+        input[key="landing_input"] {
+            width: 100% !important;
+        }
+
+        /* ASK AGY BUTTON - Purple background with WHITE text */
+        button[key="landing_ask"] {
+            background: #8B5CF6 !important;
+            background-color: #8B5CF6 !important;
+            border: none !important;
+            color: white !important;
+            font-weight: 600 !important;
+            padding: 12px 32px !important;
+            border-radius: 12px !important;
+            font-size: 16px !important;
+            transition: all 0.2s ease !important;
+            cursor: pointer !important;
+            height: auto !important;
+            min-height: 48px !important;
+        }
+
+        button[key="landing_ask"]:hover:not(:disabled) {
+            background: #7C3AED !important;
+            color: white !important;
+            transform: scale(1.02) !important;
+        }
+
+        button[key="landing_ask"]:disabled {
+            background: #8B5CF6 !important;
+            background-color: #8B5CF6 !important;
+            border: none !important;
+            opacity: 1 !important;
+            cursor: not-allowed !important;
+            color: white !important;
+            filter: brightness(0.85) !important;
+        }
+
+        button[key="landing_ask"]:disabled p {
+            color: white !important;
+            opacity: 1 !important;
+        }
+
+        /* Override Streamlit's default disabled button styles */
+        button[kind="primary"]:disabled {
+            background: #8B5CF6 !important;
+            background-color: #8B5CF6 !important;
+            border: none !important;
+            color: white !important;
+        }
+
+        button[key="landing_ask"] p {
+            color: white !important;
+            font-weight: 600 !important;
+            margin: 0 !important;
+        }
+
+        /* Force white text on all child elements */
+        button[key="landing_ask"] * {
+            color: white !important;
+        }
+
+        button[key="landing_ask"]:disabled * {
+            color: white !important;
+        }
+
+        /* Target the div wrapper around button text */
+        button[key="landing_ask"] div {
+            color: white !important;
+        }
+
+        /* Hide trigger button */
+        button[key="how_works_landing"] {
+            display: none !important;
+        }
+
+        div:has(> button[key="how_works_landing"]) {
+            display: none !important;
+        }
+                
+        /* HOW AGY SEARCHES BUTTON - IN HEADER */
+        button[key="toggle_how_agy"] {
+            position: absolute !important;
+            top: 170px !important;
+            right: 40px !important;
+            background: rgba(255, 255, 255, 0.2) !important;
+            backdrop-filter: blur(10px) !important;
+            border: 2px solid rgba(255, 255, 255, 0.3) !important;
+            border-radius: 12px !important;
+            color: white !important;
+            padding: 12px 24px !important;
+            font-size: 15px !important;
+            font-weight: 600 !important;
+            z-index: 10 !important;
+        }
+        
+        button[key="toggle_how_agy"]:hover {
+            background: rgba(255, 255, 255, 0.3) !important;
+            border-color: rgba(255, 255, 255, 0.5) !important;
+        }
+        
+        button[key="toggle_how_agy"] p {
+            color: white !important;
+            font-weight: 600 !important;
+        }
+
+        </style>
+    """, unsafe_allow_html=True)
+
+    # === PURPLE HEADER ===
+    st.markdown("""
+    <div class="ask-header">
+        <div class="header-content" style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 24px;">
+                <img class="header-agy-avatar"
+                    src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar_64_dark.png"
+                    alt="Agy"/>
+                <div class="header-text">
+                    <h1>Ask MattGPT</h1>
+                    <p>Meet Agy 🐾 — Tracking down insights from 20+ years of transformation experience</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # === STATUS BAR ===
+    st.markdown("""
+    <div class="status-bar">
+        <div class="status-item">
+            <span class="status-dot"></span>
+            <span>Semantic search <span class="status-value">active</span></span>
+        </div>
+        <div class="status-item">
+            <span>Pinecone index <span class="status-value">ready</span></span>
+        </div>
+        <div class="status-item">
+            <span>120+ stories <span class="status-value">indexed</span></span>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # === MAIN INTRO SECTION ===
+    st.markdown("""
+    <div class="main-intro-section">
+        <div class="main-avatar">
+            <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar_96_dark.png" alt="Agy"/>
+        </div>
+        <h2 class="welcome-title">Hi, I'm Agy 🐾</h2>
+        <p class="intro-text-primary">
+            I'm a Plott Hound — a breed known for tracking skills and determination. 
+            Perfect traits for helping you hunt down insights from Matt's 120+ transformation projects.
+        </p>
+        <p class="intro-text-secondary">
+            Ask me about specific methodologies, leadership approaches, or project outcomes. 
+            I understand context, not just keywords.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Placeholder for loading message - positioned before "TRY ASKING" section
+    loading_placeholder = st.empty()
+
+    st.markdown('<div class="suggested-title">TRY ASKING:</div>', unsafe_allow_html=True)
+
+    # === SUGGESTED QUESTION BUTTONS ===
+    qs = [
+        ("🚀", "How did Matt transform global payments at scale?"),
+        ("🏥", "Show me Matt's GenAI work in healthcare"),
+        ("💡", "Track down Matt's innovation leadership stories"),
+        ("👥", "How did Matt scale agile across 150+ people?"),
+        ("⚡", "Find Matt's platform engineering projects"),
+        ("🎯", "Show me how Matt handles stakeholders")
+    ]
+
+    c1, c2 = st.columns(2, gap="small")
+
+    # Disable all buttons when any is processing
+    disabled = st.session_state.get("processing_suggestion", False)
+
+    for i, (icon, q) in enumerate(qs):
+        with c1 if i % 2 == 0 else c2:
+            if st.button(f"{icon}  {q}", key=f"suggested_{i}", type="secondary", use_container_width=True, disabled=disabled):
+                # Set state and trigger rerun to show loading state
+                st.session_state["processing_suggestion"] = True
+                st.session_state["landing_input_value"] = q
+                st.session_state["landing_input"] = q
+                st.session_state["ask_input_value"] = q
+                st.session_state["pending_query"] = q
+                st.session_state["ask_transcript"] = []
+                _ensure_ask_bootstrap()
+                st.rerun()
+
+    # === INPUT AREA ===
+    st.markdown('<div class="landing-input-container">', unsafe_allow_html=True)
+
+    # Use columns to keep input and button on same line
+    col_input, col_button = st.columns([6, 1])
+
+    with col_input:
+        user_input = st.text_input(
+            "Ask me anything — from building MattGPT to leading global programs...",
+            key="landing_input",
+            value=st.session_state.get("landing_input", ""),
+            label_visibility="collapsed",
+            placeholder="Ask me anything — from building MattGPT to leading global programs..."
+        )
+
+    with col_button:
+        # Disable button if input is empty OR if we're currently processing
+        button_disabled = not user_input or disabled
+        if st.button("Ask Agy 🐾", key="landing_ask", type="primary", disabled=button_disabled):
+            if user_input:
+                # Set state and trigger rerun to show loading state
+                st.session_state["processing_suggestion"] = True
+                st.session_state["landing_input_value"] = user_input
+                st.session_state["landing_input"] = user_input
+                st.session_state["ask_input_value"] = user_input
+                st.session_state["pending_query"] = user_input
+                st.session_state["ask_transcript"] = []
+                _ensure_ask_bootstrap()
+                st.rerun()
+
+    st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown('<p class="powered-by-text">Powered by OpenAI GPT-4o-mini with semantic search across 120+ project case studies</p>', unsafe_allow_html=True)
+
+    # === ADD FOOTER ===
+    from ui.components.footer import render_footer
+    render_footer()
+    
+
+
+# ====================
+# 3. CONVERSATION VIEW
+# ====================
+
+def render_conversation_view(stories: list):
+    """
+    Render active conversation view.
+    NAVBAR IS RENDERED BY PARENT - NO NAVBAR CSS HERE
+    """
+    
+    # === PAGE-SPECIFIC CSS ONLY (NO NAVBAR) ===
+    st.markdown("""
+        <style>
+        /* Keep existing conversation CSS - just remove navbar styles */
+        /* Chat interface header */
+        .conversation-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            margin: -2rem 0 0 0 !important;  
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .conversation-header-content {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .conversation-agy-avatar {
+                width: 64px !important;
+                height: 64px !important;
+                border-radius: 50% !important;
+                border: 3px solid white !important;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+        }
+
+        .conversation-header-text h1 {
+            font-size: 32px;
+            margin: 0 0 8px 0;
+            color: white;
+        }
+
+        .conversation-header-text p {
+            font-size: 16px;
+            margin: 0;
+            opacity: 0.95;
+        }
+
+        /* How Agy searches button - glass morphism */
+        .conversation-how-btn {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            color: white;
+            padding: 0.5rem 1.25rem;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .conversation-how-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Status bar for conversation view */
+        .status-bar-conversation {
+            background: #f8f9fa;
+            padding: 12px 30px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+
+        .status-dot-conversation {
+            width: 8px;
+            height: 8px;
+            background: #27ae60;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
+        }
+
+        .status-label {
+            color: #7f8c8d;
+        }
+
+        .status-value {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        /* Thinking indicator */
+        .thinking-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: #f0f0f0;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #7f8c8d;
+            margin-bottom: 12px;
+            animation: fadeOutSmooth 0.5s ease-out 2s forwards;
+        }
+
+        @keyframes fadeOutSmooth {
+            to {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+        }
+
+        .thinking-icon {
+            width: 16px;
+            height: 16px;
+            animation: tennisBallCycle 0.9s infinite;
+        }
+
+        @keyframes tennisBallCycle {
+            0%, 100% { content: '🎾'; }
+            33% { content: '🎾'; }
+            66% { content: '🎾'; }
+        }
+
+        /* Chat messages styling */
+        .chat-message-ai {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border-left: 4px solid #8B5CF6;
+        }
+
+        .chat-message-user {
+            background: #e3f2fd;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        /* Message text styling */
+        .message-text {
+            font-size: 15px;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        .message-text strong {
+            font-weight: bold;
+        }
+
+        /* Override Streamlit chat message styling */
+        [data-testid="stChatMessage"][data-testid-assistant] {
+            background: white !important;
+            border-radius: 16px !important;
+            padding: 24px !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+            border-left: 4px solid #8B5CF6 !important;
+        }
+
+        [data-testid="stChatMessage"][data-testid-user] {
+            background: #e3f2fd !important;
+            border-radius: 8px !important;
+            padding: 16px !important;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+        }
+
+        /* Avatar styling */
+        [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"] {
+            width: 48px !important;
+            height: 48px !important;
+            background: white !important;
+            border: 2px solid #e0e0e0 !important;
+            padding: 4px !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-user"] {
+            width: 40px !important;
+            height: 40px !important;
+            background: #7f8c8d !important;
+            opacity: 0.5 !important;
+        }
+
+        /* Chat input styling */
+        [data-testid="stChatInput"] {
+            padding: 20px 30px !important;
+            background: white !important;
+            border-top: 2px solid #e0e0e0 !important;
+        }
+
+        [data-testid="stChatInput"] input {
+            padding: 14px 18px !important;
+            border: 2px solid #ddd !important;
+            border-radius: 8px !important;
+            font-size: 15px !important;
+        }
+
+        [data-testid="stChatInput"] input:focus {
+            border-color: #8B5CF6 !important;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1) !important;
+        }
+
+        [data-testid="stChatInput"] button {
+            padding: 14px 28px !important;
+            background: #8B5CF6 !important;
+            color: white !important;
+            font-size: 15px !important;
+            font-weight: 600 !important;
+            border-radius: 8px !important;
+        }
+
+        [data-testid="stChatInput"] button:hover {
+            background: #7C3AED !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3) !important;
+        }
+
+        /* Messages area background */
+        .main .block-container {
+            background: #fafafa !important;
+            padding: 30px !important;
+        }
+
+        /* Source links section */
+        .source-links-section {
+            border-top: 1px solid #e0e0e0;
+            margin-top: 16px;
+            padding-top: 16px;
+        }
+
+        .source-links-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #7f8c8d;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        /* Source chips styling */
+        .source-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #F3F4F6;
+            border: 2px solid #E5E7EB;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #2563EB;
+            text-decoration: none;
+            margin: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .source-chip:hover {
+            background: #EEF2FF;
+            border-color: #8B5CF6;
+            transform: translateY(-1px);
+        }
+
+        .source-chip-icon {
+            color: #8B5CF6;
+        }
+
+        /* Action buttons */
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .action-btn {
+            padding: 6px 12px;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .action-btn:hover {
+            background: #f5f5f5;
+            border-color: #ccc;
+        }
+
+        .action-btn.helpful-active {
+            background: #10B981;
+            color: white;
+            border-color: #10B981;
+        }
+
+        /* Message spacing */
+        .message-avatar-gap {
+            gap: 12px;
+        }
+
+        .message-spacing {
+            margin-bottom: 24px;
+        }
+        /* Your existing conversation CSS goes here unchanged */
+        </style>
+    """, unsafe_allow_html=True)
+    
+    # Page header with purple gradient
+    st.markdown("""
+    <div class="conversation-header">
+        <div class="conversation-header-content">
+            <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar_96_dark.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
+            <div class="conversation-header-text">
+                <h1>Ask MattGPT</h1>
+                <p>Meet Agy 🐾 — Tracking down insights from 20+ years of transformation experience</p>
+            </div>
+        </div>
+        <button class="conversation-how-btn" onclick="document.querySelector('[key=how_works_top]').click()">
+            🔧 How Agy searches
+        </button>
+    </div>
+    """, unsafe_allow_html=True)
+
+     # Anchor at top to force scroll position
+    st.markdown('<div id="ask-top"></div>', unsafe_allow_html=True)
+
+    # Force scroll to top using multiple methods
+    st.markdown("""
+    <script>
+    // Immediate scroll
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+
+    // Also try after a tiny delay in case content is still loading
+    setTimeout(function() {
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+    }, 10);
+    </script>
+    """, unsafe_allow_html=True)
+
+    # Hidden button for "How it works" (triggered by header button)
+    if st.button("🔧 How it works", key="how_works_top"):
+        st.session_state["show_how_modal"] = not st.session_state.get(
+            "show_how_modal", False
+        )
+        st.rerun()
+
+    # Status bar matching the spec
+    st.markdown("""
+    <div class="status-bar">
+        <div class="status-item">
+            <span class="status-dot"></span>
+            <span>Semantic search <span class="status-value">active</span></span>
+        </div>
+        <div class="status-item">
+            <span>Pinecone index <span class="status-value">ready</span></span>
+        </div>
+        <div class="status-item">
+            <span>120+ stories <span class="status-value">indexed</span></span>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Show the modal if toggled
+    if st.session_state.get("show_how_modal", False):
+        # Force scroll to top when modal opens
+        st.markdown("""
+        <script>
+        window.scrollTo({top: 0, behavior: 'smooth'});
+        </script>
+        """, unsafe_allow_html=True)
+
+        # Create a proper modal container without using expander
+        st.markdown("---")
+
+        # Header with close button
+        col1, col2 = st.columns([10, 1])
+        with col1:
+            st.markdown("## 🔧 How MattGPT Works")
+        with col2:
+            if st.button("✕", key="close_how"):
+                st.session_state["show_how_modal"] = False
+                st.rerun()
+
+        # Content in a bordered container
+        with st.container():
+            # Quick stats bar
+            col1, col2, col3, col4 = st.columns(4)
+            with col1:
+                st.metric("Stories Indexed", "120+")
+            with col2:
+                st.metric("Avg Response Time", "1.2s")
+            with col3:
+                st.metric("Retrieval Accuracy", "87%")
+            with col4:
+                st.metric("Vector Dimensions", "384")
+
+            st.markdown("---")
+
+            # Architecture overview
+            col1, col2 = st.columns(2)
+
+            with col1:
+                st.markdown(
+                    """
+                ### Solution Architecture Overview
+                
+                **🎯 Semantic Search Pipeline**
+                - Sentence-BERT embeddings (all-MiniLM-L6-v2)
+                - 384-dimensional vector space
+                - Pinecone vector database with metadata filtering
+                
+                **🔄 Hybrid Retrieval**
+                - 80% semantic similarity weight
+                - 20% keyword matching weight
+                - Intent recognition for query understanding
+                """
+                )
+
+            with col2:
+                st.markdown(
+                    """
+                ### Data & Processing
+                
+                **📊 Story Corpus**
+                - 120+ structured narratives from Fortune 500 projects
+                - STAR/5P framework encoding
+                - Rich metadata: client, domain, outcomes, metrics
+                
+                **💬 Response Generation**
+                - Context-aware retrieval (top-k=30)
+                - Multi-mode synthesis (Narrative/Key Points/Deep Dive)
+                - Source attribution with confidence scoring
+                """
+                )
+
+            # Query Flow
+            st.markdown("### Query Flow")
+            st.code(
+                """
+                Your Question 
+                    ↓
+                [Embedding + Intent Analysis]
+                    ↓
+                [Pinecone Vector Search + Keyword Matching]
+                    ↓
+                [Hybrid Scoring & Ranking]
+                    ↓
+                [Top 3 Stories Retrieved]
+                    ↓
+                [Response Synthesis with Sources]
+                            """,
+                language="text",
+            )
+
+            st.markdown("---")
+            st.markdown("### System Architecture")
+
+            try:
+                with open("assets/rag_architecture_grid_svg.svg", "r") as f:
+                    svg_content = f.read()
+                
+                # Remove XML declaration and DOCTYPE
+                svg_content = svg_content.replace('<?xml version="1.0" encoding="UTF-8" standalone="no"?>', '')
+                svg_content = svg_content.replace('<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">', '')
+                
+                # Use HTML component with transparent background and no scroll
+                import streamlit.components.v1 as components
+                
+                components.html(f"""
+                <div style='width: 100%; text-align: center;'>
+                    {svg_content}
+                </div>
+                """, height=280, scrolling=False)
+                
+            except Exception as e:
+                st.error(f"Error loading architecture diagram: {e}")
+
+            st.markdown("---")
+            
+
+            # Detailed breakdown
+            st.markdown("### Architecture Details")
+
+            col1, col2 = st.columns(2)
+
+            with col1:
+                st.markdown("""
+                **Search & Retrieval**
+                - **Semantic**: Pinecone cosine similarity (80% weight)
+                - **Keyword**: BM25-style token overlap (20% weight)
+                - Minimum similarity threshold: 0.15
+                - Top-k pool: 30 candidates before ranking
+                """)
+
+            with col2:
+                st.markdown("""
+                **Response Synthesis**
+                - Rank top 3 stories by blended score
+                - Generate 3 views from same sources:
+                - Narrative (1-paragraph summary)
+                - Key Points (3-4 bullets)
+                - Deep Dive (STAR breakdown)
+                - Interactive source chips with confidence %
+                """)
+
+            st.markdown("---")
+
+            st.markdown("""
+            **Key Differentiators:**
+            - Hybrid retrieval ensures both semantic understanding and exact term matching
+            - Multi-mode synthesis provides flexible presentation for different use cases
+            - Context locking allows follow-up questions on specific stories
+            - Off-domain gating with suggestion chips prevents poor matches
+            """)
+
+    # Define ctx - MUST be outside and after the modal block
+    ctx = get_context_story(stories)
+    _show_ctx = bool(ctx) and (
+        st.session_state.get("__ctx_locked__") or st.session_state.get("__asked_once__")
+    )
+
+    if _show_ctx:
+        render_compact_context_banner(stories)
+
+    # Rest of your Ask MattGPT content continues...
+    # Rest of your Ask MattGPT content continues as normal
+    # Context banner, transcript, etc...
+
+    # with right:
+    #    if st.button("×", key="btn_clear_ctx", help="Clear context"):
+    #       _clear_ask_context()
+
+    # Lightweight DEBUG status for Ask (visible only when DEBUG=True)
+    if DEBUG:
+        try:
+            _dbg_flags = {
+                "vector": VECTOR_BACKEND,
+                "index": PINECONE_INDEX_NAME or "-",
+                "ns": PINECONE_NAMESPACE or "-",
+                "pc_suppressed": bool(st.session_state.get("__pc_suppressed__")),
+                "has_last": bool(st.session_state.get("last_sources")),
+                "pending_snap": bool(st.session_state.get("__pending_card_snapshot__")),
+                # NEW: report external renderer overrides
+                "ext_chips": (
+                    "yes"
+                    if callable(globals().get("_ext_render_sources_chips"))
+                    else "no"
+                ),
+                "ext_badges": (
+                    "yes"
+                    if callable(globals().get("_ext_render_sources_badges_static"))
+                    else "no"
+                ),
+            }
+            st.caption("🧪 " + ", ".join(f"{k}={v}" for k, v in _dbg_flags.items()))
+            # Second line: last prompt + ask decision
+            lp = (st.session_state.get("__ask_dbg_prompt") or "").strip()
+            lp = (lp[:60] + "…") if len(lp) > 60 else lp
+            st.caption(
+                "🧪 "
+                + f"prompt='{lp}' from_suggestion={st.session_state.get('__ask_dbg_from_suggestion')}"
+                + f" force={st.session_state.get('__ask_dbg_force_answer')} pc_hits={st.session_state.get('__dbg_pc_hits')}"
+                + f" decision={st.session_state.get('__ask_dbg_decision')}"
+                + f" reason={st.session_state.get('ask_last_reason')}"
+            )
+        except Exception:
+            pass
+
+    # 1) Bootstrap a stable transcript (one-time)
+    _ensure_ask_bootstrap()
+
+    # 2) Unify seeds and chip-clicks: inject as a real user turn if present
+    seed = st.session_state.pop("seed_prompt", None)
+    injected = st.session_state.pop("__inject_user_turn__", None)
+    pending = seed or injected
+    if pending:
+        # If a live card was pending snapshot, capture it now before injecting the new turn
+        if st.session_state.get("__pending_card_snapshot__"):
+            _push_card_snapshot_from_state(stories)
+            st.session_state["__pending_card_snapshot__"] = False
+        _push_user_turn(pending)
+        with st.status("Searching Matt's experience...", expanded=True) as status:
+            try:
+                # Ask is pure semantic; ignore Explore filters here
+                resp = send_to_backend(pending, {}, ctx, stories)
+
+                # Show confidence after retrieval
+                sources = resp.get("sources", [])
+                if sources:
+                    first_id = str(sources[0].get("id", ""))
+                    scores = st.session_state.get("__pc_last_ids__", {}) or {}
+                    conf = scores.get(first_id)
+                    if conf:
+                        conf_pct = int(float(conf) * 100)
+                        st.write(f"✓ Found relevant stories • {conf_pct}% match confidence")
+
+                status.update(label="Answer ready!", state="complete", expanded=False)
+
+            except Exception as e:
+                    status.update(label="Error occurred", state="error")
+                    print(f"DEBUG: send_to_backend failed: {e}")
+                    import traceback
+                    traceback.print_exc()
+                    _push_assistant_turn(f"Error: {str(e)}")
+                    st.rerun()
+
+            else:
+                set_answer(resp)
+                # If no banner is active, append a static card snapshot now so it
+                # appears in-order as a chat bubble; also suppress the bottom live card once.
+                if not st.session_state.get(
+                    "ask_last_reason"
+                ) and not st.session_state.get("__sticky_banner__"):
+                    _push_card_snapshot_from_state(stories)
+                    st.session_state["__suppress_live_card_once__"] = True
+                # If a chip click requested banner clear, perform it now after answer set
+                if st.session_state.pop("__clear_banner_after_answer__", False):
+                    st.session_state.pop("ask_last_reason", None)
+                    st.session_state.pop("ask_last_query", None)
+                    st.session_state.pop("ask_last_overlap", None)
+                st.rerun()
+
+    # 3) Render transcript so far (strict order, no reflow)
+    _render_ask_transcript(stories)
+
+    # Force scroll to top after transcript renders
+    st.markdown("""
+    <script>
+    // Multiple scroll methods with longer delays
+    setTimeout(function() {
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+    }, 50);
+    setTimeout(function() {
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+    }, 100);
+    setTimeout(function() {
+        window.scrollTo(0, 0);
+    }, 200);
+    </script>
+    """, unsafe_allow_html=True)
+
+    # 4) One‑shot nonsense/off‑domain banner appears AFTER transcript
+    rendered_banner = False
+    if st.session_state.get("ask_last_reason"):
+        with st.chat_message("assistant"):
+            render_no_match_banner(
+                reason=st.session_state.get("ask_last_reason", ""),
+                query=st.session_state.get("ask_last_query", ""),
+                overlap=st.session_state.get("ask_last_overlap", None),
+                suppressed=st.session_state.get("__pc_suppressed__", False),
+                filters=st.session_state.get("filters", {}),
+                key_prefix="askinline",
+            )
+        rendered_banner = True
+        # Clear flags so the banner doesn't re-render on every rerun
+        st.session_state.pop("ask_last_reason", None)
+        st.session_state.pop("ask_last_query", None)
+        st.session_state.pop("ask_last_overlap", None)
+        # Persist as sticky so it remains visible between user turns unless dismissed
+        st.session_state.setdefault(
+            "__sticky_banner__",
+            {
+                "reason": (
+                    dec
+                    if (dec := (st.session_state.get("__ask_dbg_decision") or ""))
+                    else "no_match"
+                ),
+                "query": st.session_state.get("__ask_dbg_prompt", ""),
+                "overlap": None,
+                "suppressed": bool(st.session_state.get("__pc_suppressed__", False)),
+            },
+        )
+    elif True:
+        # Forced fallback: if gating decided no‑match but the flag was not set,
+        # render a banner anyway so the user sees actionable chips.
+        dec = (st.session_state.get("__ask_dbg_decision") or "").strip().lower()
+        no_match_decision = (
+            dec.startswith("rule:")
+            or dec.startswith("low_overlap")
+            or dec == "low_conf"
+            or dec == "no_overlap+low_conf"
+        )
+        if no_match_decision and not st.session_state.get("last_sources"):
+            with st.chat_message("assistant"):
+                render_no_match_banner(
+                    reason=dec or "no_match",
+                    query=st.session_state.get("__ask_dbg_prompt", ""),
+                    overlap=st.session_state.get("ask_last_overlap", None),
+                    suppressed=st.session_state.get("__pc_suppressed__", False),
+                    filters=st.session_state.get("filters", {}),
+                    key_prefix="askinline_forced",
+                )
+            rendered_banner = True
+
+    # Sticky banner temporarily disabled to stabilize chip clicks
+    st.session_state["__sticky_banner__"] = None
+
+    # 5) Compact answer panel (title • unclamped 5P • view pills • sources)
+    _m = st.session_state.get("answer_modes", {}) or {}
+    _srcs = st.session_state.get("last_sources", []) or []
+    _primary = None
+    if _srcs:
+        _sid = str(_srcs[0].get("id", ""))
+        _primary = next((s for s in stories if str(s.get("id")) == _sid), None)
+    # Suppress the bottom live card when:
+    #  - a banner was rendered this run; or
+    #  - we already have at least one static card snapshot in the transcript
+    has_snapshot_card = any(
+        (isinstance(x, dict) and x.get("type") == "card")
+        for x in st.session_state.get("ask_transcript", [])
+    )
+    if (
+        not rendered_banner
+        and not has_snapshot_card
+        and not st.session_state.get("__suppress_live_card_once__")
+        and (_m or _primary or st.session_state.get("last_answer"))
+    ):
+        # Always render the bottom live card so pills are available.
+        # Snapshot holds only header + one-liner + sources to avoid duplicate body text.
+        render_answer_card_compact(
+            _primary or {"title": "Answer"}, _m, stories, "answer_mode"
+        )
+
+    # Reset one-shot suppression flag after a render cycle
+    if st.session_state.get("__suppress_live_card_once__"):
+        st.session_state["__suppress_live_card_once__"] = False
+
+    # 6) Handle a new chat input (command aliases or normal question)
+    # Render the chat input only on the Ask MattGPT tab
+    if st.session_state.get("active_tab") == "Ask MattGPT":
+        user_input_local = st.chat_input("Ask anything…", key="ask_chat_input1")
+    else:
+        user_input_local = None
+    if user_input_local:
+        # If a live card is pending snapshot from the previous answer, snapshot it now
+        if st.session_state.get("__pending_card_snapshot__"):
+            _push_card_snapshot_from_state(stories)
+            st.session_state["__pending_card_snapshot__"] = False
+
+        # Append user's turn immediately to keep order deterministic
+        _push_user_turn(user_input_local)
+
+        # Clear context lock for fresh typed questions (not from suggestion chips)
+        if not st.session_state.get("__ask_from_suggestion__"):
+            st.session_state.pop("__ctx_locked__", None)
+            st.session_state.pop("active_context", None)
+
+        # Command aliases (view switches) should not trigger new retrieval
+        cmd = re.sub(r"\s+", " ", user_input_local.strip().lower())
+        cmd_map = {
+            "narrative": "narrative",
+            "key points": "key_points",
+            "keypoints": "key_points",
+            "deep dive": "deep_dive",
+            "deep-dive": "deep_dive",
+            "details": "deep_dive",
+        }
+        # If a quick command is used without any story context, show a friendly tip
+        has_context = bool(
+            ctx
+            or st.session_state.get("active_story")
+            or st.session_state.get("last_sources")
+        )
+        if cmd in cmd_map and not has_context:
+            _push_assistant_turn(
+                "Quick mode commands like “key points” work after a story is in context — either select a story or ask a question first so I can cite sources. For now, try asking a full question."
+            )
+            st.rerun()
+        if cmd in cmd_map and (
+            ctx
+            or st.session_state.get("active_story")
+            or st.session_state.get("last_sources")
+        ):
+            # Resolve a target story: explicit context > last active story > last answer’s primary source
+            target = ctx
+            if not target:
+                sid = st.session_state.get("active_story")
+                if not sid:
+                    srcs = st.session_state.get("last_sources") or []
+                    if srcs:
+                        sid = srcs[0].get("id")
+                if sid:
+                    target = next(
+                        (x for x in stories if str(x.get("id")) == str(sid)), None
+                    )
+
+            if target:
+                modes_local = story_modes(target)
+                key = cmd_map[cmd]
+                heading = {
+                    "narrative": "Narrative",
+                    "key_points": "Key points",
+                    "deep_dive": "Deep dive",
+                }[key]
+                answer_md = (
+                    f"**{heading} for _{target.get('title','')} — {target.get('client','')}_**\n\n"
+                    + modes_local.get(key, "")
+                )
+
+                # Prime compact answer state (no assistant bubble)
+                st.session_state["answer_modes"] = modes_local
+                st.session_state["answer_mode"] = key
+                st.session_state["last_answer"] = answer_md
+                st.session_state["last_sources"] = [
+                    {
+                        "id": target.get("id"),
+                        "title": target.get("Title"),
+                        "client": target.get("Client"),
+                    }
+                ]
+                # Show the answer card below the transcript
+                _push_assistant_turn(answer_md)
+                # Do NOT snapshot for command aliases; they don't represent a new question
+                st.rerun()
+
+        # Normal question → ask backend, persist state, append assistant turn
+        # One-shot context lock: if a story was explicitly selected (chip/CTA),
+        # use that story as context for THIS turn only, then clear the lock.
+        # --- Determine context for THIS turn (one-shot lock) ---
+        ctx_for_this_turn = ctx
+        if st.session_state.pop("__ctx_locked__", False):  # consume the lock
+            try:
+                locked_ctx = get_context_story(stories)
+            except Exception:
+                locked_ctx = None
+            if locked_ctx:
+                ctx_for_this_turn = locked_ctx
+
+        # --- Ask backend + render result ---
+        with st.status("Searching Matt's experience...", expanded=True) as status:
+            try:
+                # Consume the suggestion flag (one-shot); we don't need its value here
+                st.session_state.pop("__ask_from_suggestion__", None)
+
+                # Ask is pure semantic; ignore Explore filters here
+                resp = send_to_backend(user_input_local, {}, ctx_for_this_turn, stories)
+
+                # Show confidence after retrieval
+                sources = resp.get("sources", [])
+                if sources:
+                    first_id = str(sources[0].get("id", ""))
+                    scores = st.session_state.get("__pc_last_ids__", {}) or {}
+                    conf = scores.get(first_id)
+                    if conf:
+                        conf_pct = int(float(conf) * 100)
+                        st.write(f"✓ Found relevant stories • {conf_pct}% match confidence")
+
+                status.update(label="Answer ready!", state="complete", expanded=False)
+
+            except Exception as e:
+                status.update(label="Error occurred", state="error")
+                _push_assistant_turn("Sorry, I couldn't generate an answer right now.")
+                st.error(f"Backend error: {e}")
+                st.rerun()
+
+            else:
+                set_answer(resp)
+
+                # Add a static snapshot so the answer appears in-order as a bubble,
+                # and suppress the bottom live card once to avoid duplication.
+                if not st.session_state.get(
+                    "ask_last_reason"
+                ) and not st.session_state.get("__sticky_banner__"):
+                    _push_card_snapshot_from_state(stories)
+                    st.session_state["__suppress_live_card_once__"] = True
+
+                st.rerun()
+
+
+    # === ADD FOOTER ===
+    from ui.components.footer import render_footer
+    render_footer()
 
 
 # simple CSV logger
@@ -90,9 +1599,7 @@ def _ensure_ask_bootstrap():
     if "ask_transcript" not in st.session_state:
         st.session_state["ask_transcript"] = []
     if not st.session_state["ask_transcript"]:
-        st.session_state["ask_transcript"].append(
-            {"role": "assistant", "text": "Ask anything."}
-        )
+        st.session_state["ask_input_value"] = ""
 
 
 def _is_empty_conversation():
@@ -201,7 +1708,7 @@ def rag_answer(question: str, filters: dict, stories: list):
             )
 
         # 1) Pinecone-first retrieval
-        pool = semantic_search(question or filters.get("q", ""), filters, stories, top_k=SEARCH_TOP_K)
+        pool = semantic_search(question or filters.get("q", ""), filters, stories=stories, top_k=SEARCH_TOP_K)
 
 
         # If Pinecone returned nothing, *then* decide if we want to show a low-overlap banner
@@ -1197,873 +2704,1423 @@ def render_compact_context_banner(stories: list):
     """, unsafe_allow_html=True)
 
 
-def render_landing_page(stories: list):
-    """
-    Render the Ask MattGPT landing page (empty state) matching the wireframe.
-    Shown when conversation transcript is empty.
+# def render_landing_page(stories: list):
+#     """
+#     Render the Ask MattGPT landing page (empty state) matching the wireframe.
+#     Shown when conversation transcript is empty.
+#     """
+#     import streamlit.components.v1 as components
 
-    Wireframe: ask_mattgpt_landing_wireframe.html
-    """
-    import streamlit.components.v1 as components
-
-    # Purple gradient header with Agy avatar
-    st.markdown("""
-    <style>
-    .ask-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 30px;
-        margin: -1rem 0 0 0;
-        color: white;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-   .header-content {
-        display: flex;
-        align-items: center;
-        gap: 24px;
-    }
-
-    .agy-avatar {
-        width: 64px;
-        height: 64px;
-        border-radius: 50%;
-        border: 3px solid white;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-
-    .header-text h1 {
-        font-size: 32px;
-        margin: 0 0 8px 0;
-        color: white;
-    }
-
-    .header-text p {
-        font-size: 16px;
-        margin: 0;
-        opacity: 0.95;
-    }
-
-    /* Status Bar */
-    .status-bar {
-        display: flex;
-        gap: 32px;
-        justify-content: center;
-        padding: 16px 24px;
-        background: rgba(255, 255, 255, 0.95);
-        border-bottom: 1px solid #E5E7EB;
-    }
-
-    .status-item {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 14px;
-        color: #6B7280;
-    }
-
-    .status-value {
-        font-weight: 600;
-        color: #2C363D;
-    }
-
-    .status-dot {
-        width: 8px;
-        height: 8px;
-        background: #10B981;
-        border-radius: 50%;
-        animation: pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.5; }
-    }
-
-    /* Welcome Section */
-    .welcome-container {
-        padding: 60px 30px;
-        background: #fafafa;
-        text-align: center;
-    }
-
-    .main-intro-section {
-        background: white;
-        border-radius: 24px;
-        padding: 48px 32px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        max-width: 900px;
-        margin: -40px auto 40px;
-    }
-
-    .welcome-icon {
-        font-size: 72px;
-        margin-bottom: 24px;
-    }
-
-    .main-avatar img {
-        width: 96px;
-        height: 96px;
-        border-radius: 50%;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .welcome-title {
-        font-size: 28px;
-        color: #2c3e50;
-        margin: 24px 0 12px;
-    }
-
-    .intro-text-primary {
-        font-size: 18px;
-        color: #374151;
-        line-height: 1.7;
-        font-weight: 500;
-        margin-bottom: 20px;
-        max-width: 650px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .intro-text-secondary {
-        font-size: 17px;
-        color: #6B7280;
-        line-height: 1.6;
-        max-width: 650px;
-        margin: 0 auto 48px;
-    }
-
-    /* Suggested Questions */
-    .suggested-title {
-        font-size: 14px;
-        font-weight: 600;
-        color: #7f8c8d;
-        text-transform: uppercase;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-
-    .suggested-questions {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
-        max-width: 900px;
-        margin: 0 auto;
-    }
-
-    .suggested-question {
-        background: white;
-        border: 2px solid #E5E7EB;
-        border-radius: 12px;
-        padding: 20px 24px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        text-align: left;
-        display: flex;
-        align-items: start;
-        gap: 12px;
-    }
-
-    .suggested-question:hover {
-        border-color: #8B5CF6;
-        background: #F9FAFB;
-        box-shadow: 0 4px 12px rgba(139, 92, 246, 0.12);
-        transform: translateY(-2px);
-    }
-
-    .question-icon {
-        font-size: 24px;
-        flex-shrink: 0;
-    }
-
-    .question-text {
-        font-size: 16px;
-        color: #2C363D;
-        line-height: 1.4;
-        font-weight: 500;
-    }
-
-    @media (max-width: 768px) {
-        .suggested-questions {
-            grid-template-columns: 1fr;
-        }
-    }
-    </style>
-
-    <div class="ask-header">
-        <div class="header-content">
-            <img class="agy-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%238B5CF6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' font-size='32' fill='white'%3E🐾%3C/text%3E%3C/svg%3E" alt="Agy"/>
-            <div class="header-text">
-                <h1>Ask MattGPT</h1>
-                <p>Meet Agy 🐾 — Tracking down insights from 20+ years of transformation experience</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="status-bar">
-        <div class="status-item">
-            <span class="status-dot"></span>
-            <span>Semantic search <span class="status-value">active</span></span>
-        </div>
-        <div class="status-item">
-            <span>Pinecone index <span class="status-value">ready</span></span>
-        </div>
-        <div class="status-item">
-            <span>120+ stories <span class="status-value">indexed</span></span>
-        </div>
-    </div>
-
-    <div class="welcome-container">
-        <div class="main-intro-section">
-            <div class="welcome-icon">
-                <div class="main-avatar">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Ccircle cx='48' cy='48' r='46' fill='%238B5CF6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' font-size='48' fill='white'%3E🐾%3C/text%3E%3C/svg%3E" alt="Agy" />
-                </div>
-            </div>
-            <h2 class="welcome-title">Hi, I'm Agy 🐾</h2>
-            <div>
-                <p class="intro-text-primary">I'm a Plott Hound — a breed known for tracking skills and determination. Perfect traits for helping you hunt down insights from Matt's 120+ transformation projects.</p>
-                <p class="intro-text-secondary">Ask me about specific methodologies, leadership approaches, or project outcomes. I understand context, not just keywords.</p>
-            </div>
-        </div>
-
-        <div class="suggested-title">Try asking:</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    # Suggested question cards (using Streamlit buttons in grid)
-    suggested_questions = [
-        ("🚀", "How did Matt transform global payments at scale?"),
-        ("🏥", "Show me Matt's GenAI work in healthcare"),
-        ("💡", "Track down Matt's innovation leadership stories"),
-        ("👥", "How did Matt scale agile across 150+ people?"),
-        ("⚡", "Find Matt's platform engineering projects"),
-        ("🎯", "Show me how Matt handles stakeholders")
-    ]
-
-    # Create 2-column grid for suggested questions
-    col1, col2 = st.columns(2)
-
-    for i, (icon, question) in enumerate(suggested_questions):
-        with col1 if i % 2 == 0 else col2:
-            if st.button(
-                f"{icon}  {question}",
-                key=f"suggested_{i}",
-                use_container_width=True
-            ):
-                # Set the question in session state and trigger conversation
-                st.session_state["ask_input_value"] = question
-                st.session_state["ask_transcript"] = []
-                _ensure_ask_bootstrap()
-                # Trigger the search
-                send_to_backend(question, {}, None, stories)
-                st.rerun()
-
-    # Large input area at bottom
-    st.markdown("<br><br>", unsafe_allow_html=True)
-
-    user_input = st.text_input(
-        "Ask me anything — from building MattGPT to leading global programs...",
-        key="landing_input",
-        label_visibility="collapsed",
-        placeholder="Ask me anything — from building MattGPT to leading global programs..."
-    )
-
-    col1, col2, col3 = st.columns([1, 2, 1])
-    with col2:
-        if st.button("Ask Agy 🐾", key="landing_ask", type="primary", use_container_width=True):
-            if user_input:
-                st.session_state["ask_input_value"] = user_input
-                st.session_state["ask_transcript"] = []
-                _ensure_ask_bootstrap()
-                send_to_backend(user_input, {}, None, stories)
-                st.rerun()
-
-    st.caption("Powered by OpenAI GPT-4o-mini with semantic search across 120+ project case studies")
-
-
-def render_ask_mattgpt(stories: list):
-    """
-    Main router for Ask MattGPT page.
-
-    Shows landing page (wireframe) when conversation is empty,
-    otherwise shows conversational interface.
-
-    Args:
-        stories: List of story dictionaries (STORIES from app.py)
-    """
-    _ensure_ask_bootstrap()
-
-    # Route to landing or conversation view
-    if _is_empty_conversation():
-        render_landing_page(stories)
-    else:
-        render_conversation_view(stories)
-
-
-def render_conversation_view(stories: list):
-    """
-    Render the conversational chat interface (after first question asked).
-
-    Wireframe: ask_mattgpt_wireframe.html
-
-    Args:
-        stories: List of story dictionaries (STORIES from app.py)
-    """
-
-    # Page header
-    st.title("Ask MattGPT")
-    st.markdown("Ask me anything about my 20+ years in digital transformation...")
-
-     # Anchor at top to force scroll position
-    st.markdown('<div id="ask-top"></div>', unsafe_allow_html=True)
-
-    # Force scroll to top using multiple methods
-    st.markdown("""
-    <script>
-    // Immediate scroll
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-
-    // Also try after a tiny delay in case content is still loading
-    setTimeout(function() {
-        window.scrollTo(0, 0);
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
-    }, 10);
-    </script>
-    """, unsafe_allow_html=True)
-
-    # Add a header row with the title and the How it Works link
-    col1, col2 = st.columns([5, 1])
-    with col1:
-        st.subheader("Ask MattGPT")
-    with col2:
-        if st.button("🔧 How it works", key="how_works_top"):
-            st.session_state["show_how_modal"] = not st.session_state.get(
-                "show_how_modal", False
-            )
-            st.rerun()
+#     # === 1. ALL CSS IN ONE BLOCK ===
+#     st.markdown("""
+#     <style>
+#        /* NUCLEAR OPTION: Remove ALL spacing from Streamlit containers */
+#     .main {
+#         padding-top: 0 !important;
+#     }
     
-    # Intelligence indicator strip
-    st.markdown("""
-    <div style='display: flex; gap: 12px; align-items: center; padding: 8px 12px; background: rgba(56, 139, 253, 0.1); border: 1px solid rgba(56, 139, 253, 0.2); border-radius: 6px; font-size: 12px; color: #58a6ff; margin-bottom: 16px;'>
-        <span>🧠 Semantic search active</span>
-        <span>•</span>
-        <span>Pinecone index ready</span>
-        <span>•</span>
-        <span>120+ stories indexed</span>
-    </div>
-    """, unsafe_allow_html=True)
+#     * Target the main app container - remove top padding */
+#     section.main {
+#         padding-top: 0 !important;
+#     }
 
-    # Show the modal if toggled
-    if st.session_state.get("show_how_modal", False):
-        # Force scroll to top when modal opens
-        st.markdown("""
-        <script>
-        window.scrollTo({top: 0, behavior: 'smooth'});
-        </script>
-        """, unsafe_allow_html=True)
+#     /* Target the block container - remove top padding/margin */
+#     .block-container {
+#         padding-top: 0 !important;
+#         margin-top: 0 !important;
+#     }
 
-        # Create a proper modal container without using expander
-        st.markdown("---")
+#     /* Remove bottom spacing from header */
+#     header.st-emotion-cache-12fmjuu.ezrtsby2 {
+#         margin-bottom: 0 !important;
+#         padding-bottom: 0 !important;
+#     }
 
-        # Header with close button
-        col1, col2 = st.columns([10, 1])
-        with col1:
-            st.markdown("## 🔧 How MattGPT Works")
-        with col2:
-            if st.button("✕", key="close_how"):
-                st.session_state["show_how_modal"] = False
-                st.rerun()
+#     /* More generic - target any header */
+#     header[data-testid="stHeader"] {
+#         margin-bottom: 0 !important;
+#         padding-bottom: 0 !important;
+#     }
+    
+#     /* Target the div that contains the first markdown (purple header) */
+#     div[data-testid="stVerticalBlock"] > div:first-child {
+#         margin-top: 0 !important;
+#         padding-top: 0 !important;
+#     }   
 
-        # Content in a bordered container
-        with st.container():
-            # Quick stats bar
-            col1, col2, col3, col4 = st.columns(4)
-            with col1:
-                st.metric("Stories Indexed", "120+")
-            with col2:
-                st.metric("Avg Response Time", "1.2s")
-            with col3:
-                st.metric("Retrieval Accuracy", "87%")
-            with col4:
-                st.metric("Vector Dimensions", "384")
-
-            st.markdown("---")
-
-            # Architecture overview
-            col1, col2 = st.columns(2)
-
-            with col1:
-                st.markdown(
-                    """
-                ### Solution Architecture Overview
                 
-                **🎯 Semantic Search Pipeline**
-                - Sentence-BERT embeddings (all-MiniLM-L6-v2)
-                - 384-dimensional vector space
-                - Pinecone vector database with metadata filtering
-                
-                **🔄 Hybrid Retrieval**
-                - 80% semantic similarity weight
-                - 20% keyword matching weight
-                - Intent recognition for query understanding
-                """
-                )
+#     .main .block-container {
+#         padding-top: 0 !important;
+#         margin-top: 0 !important;
+#         padding-bottom: 0 !important;
+#     }
+    
+#     /* Kill the gap after header */
+#     header[data-testid="stHeader"] {
+#         margin-bottom: 0 !important;
+#         padding-bottom: 0 !important;
+#     }
+    
+#     /* Remove spacing from the header's parent container */
+#     div[data-testid="stAppViewContainer"] {
+#         padding-top: 0 !important;
+#     }
+    
+#     /* Kill spacing on the main content container */
+#     section[data-testid="stMain"] {
+#         padding-top: 0 !important;
+#     }
+    
+#     /* Remove gap between header and first element */
+#     .stMarkdown:first-child {
+#         margin-top: 0 !important;
+#         padding-top: 0 !important;
+#     }
 
-            with col2:
-                st.markdown(
-                    """
-                ### Data & Processing
-                
-                **📊 Story Corpus**
-                - 120+ structured narratives from Fortune 500 projects
-                - STAR/5P framework encoding
-                - Rich metadata: client, domain, outcomes, metrics
-                
-                **💬 Response Generation**
-                - Context-aware retrieval (top-k=30)
-                - Multi-mode synthesis (Narrative/Key Points/Deep Dive)
-                - Source attribution with confidence scoring
-                """
-                )
+#     /* Lock navbar - FULL WIDTH with proper height */
+#     [class*="st-key-topnav_"] {
+#         background: #2c3e50 !important;
+#         margin: 0 !important;
+#         padding: 15px 30px !important;
+#         width: 100% !important;
+#         min-height: 60px !important;
+#     }
 
-            # Query Flow
-            st.markdown("### Query Flow")
-            st.code(
-                """
-                Your Question 
-                    ↓
-                [Embedding + Intent Analysis]
-                    ↓
-                [Pinecone Vector Search + Keyword Matching]
-                    ↓
-                [Hybrid Scoring & Ranking]
-                    ↓
-                [Top 3 Stories Retrieved]
-                    ↓
-                [Response Synthesis with Sources]
-                            """,
-                language="text",
-            )
+#    /* Navbar buttons need proper padding */
+#     [class*="st-key-topnav_"] button {
+#         background: transparent !important;
+#         padding: 8px 16px !important;
+#         color: white !important;
+#         font-size: 14px !important;
+#         min-height: 40px !important;  /* ADD THIS */
+#         display: inline-flex !important;  /* ADD THIS */
+#         align-items: center !important;  /* ADD THIS */
+#     }
+#     /* Style the text inside navbar buttons */
+#     [class*="st-key-topnav_"] button p {
+#         color: white !important;
+#         margin: 0 !important;
+#         padding: 0 !important;
+#         font-size: 14px !important;
+#         line-height: 1.4 !important;
+#     }
+#      /* Only highlight the Ask MattGPT button */
+#     [class*="st-key-topnav_"] button[key="nav_ask_mattgpt"] {
+#         background: #34495e !important;
+#         border-radius: 4px !important;
+#     }
 
-            st.markdown("---")
-            st.markdown("### System Architecture")
+#     /* Don't mess with navbar internal spacing */
+#     [class*="st-key-topnav_"] div[data-testid="stHorizontalBlock"] {
+#         background: transparent !important;
+#         gap: 30px !important;
+#     }
+                
+#     /* Pull the purple header up with negative margin */
+#     .ask-header {
+#         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+#         padding: 30px;
+#         margin-top: -2rem !important;
+#         margin-bottom: 0 !important;
+#         color: white;
+#         display: flex;
+#         justify-content: space-between;
+#         align-items: center;
+#     }
 
-            try:
-                with open("assets/rag_architecture_grid_svg.svg", "r") as f:
-                    svg_content = f.read()
-                
-                # Remove XML declaration and DOCTYPE
-                svg_content = svg_content.replace('<?xml version="1.0" encoding="UTF-8" standalone="no"?>', '')
-                svg_content = svg_content.replace('<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">', '')
-                
-                # Use HTML component with transparent background and no scroll
-                import streamlit.components.v1 as components
-                
-                components.html(f"""
-                <div style='width: 100%; text-align: center;'>
-                    {svg_content}
-                </div>
-                """, height=280, scrolling=False)
-                
-            except Exception as e:
-                st.error(f"Error loading architecture diagram: {e}")
 
-            st.markdown("---")
+#     .header-content {
+#         display: flex;
+#         align-items: center;
+#         gap: 24px;
+#     }
+
+#     .header-agy-avatar {
+#         width: 64px !important;
+#         height: 64px !important;
+#         border-radius: 50% !important;
+#         border: 3px solid white !important;
+#         box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+#     }
+
+#     .header-text h1 {
+#         font-size: 32px;
+#         margin: 0 0 8px 0;
+#         color: white;
+#     }
+
+#     .header-text p {
+#         font-size: 16px;
+#         margin: 0;
+#         opacity: 0.95;
+#     }
+
+#     .how-it-works-btn {
+#         background: rgba(255, 255, 255, 0.2);
+#         backdrop-filter: blur(10px);
+#         border: 2px solid rgba(255, 255, 255, 0.3);
+#         border-radius: 20px;
+#         color: white;
+#         padding: 0.5rem 1.25rem;
+#         font-size: 14px;
+#         font-weight: 500;
+#         cursor: pointer;
+#         transition: all 0.2s ease;
+#     }
+
+#     .how-it-works-btn:hover {
+#         background: rgba(255, 255, 255, 0.25);
+#         border-color: rgba(255, 255, 255, 0.5);
+#     }
+
+#     /* Status bar */
+#     .status-bar {
+#         display: flex;
+#         gap: 32px;
+#         justify-content: center;
+#         padding: 16px 24px;
+#         background: rgba(255, 255, 255, 0.95);
+#         border-bottom: 1px solid #E5E7EB;
+#         margin: 0 !important;
+#     }
+
+#     .status-item {
+#         display: flex;
+#         align-items: center;
+#         gap: 8px;
+#         font-size: 14px;
+#         color: #6B7280;
+#     }
+
+#     .status-value {
+#         font-weight: 600;
+#         color: #2C363D;
+#     }
+
+#     .status-dot {
+#         width: 8px;
+#         height: 8px;
+#         background: #10B981;
+#         border-radius: 50%;
+#         animation: pulse 2s ease-in-out infinite;
+#     }
+
+#     @keyframes pulse {
+#         0%, 100% { opacity: 1; }
+#         50% { opacity: 0.5; }
+#     }
+
+#     /* MAIN INTRO SECTION - Responsive like wireframe */
+#     .main-intro-section {
+#         background: white;
+#         border-radius: 24px 24px 0 0;
+#         max-width: 900px;
+#         width: 100%;
+#         margin: 20px auto 0;
+#         padding: 48px 32px 32px;
+#     }
+
+#     .main-avatar {
+#         text-align: center;
+#     }
+
+#     .main-avatar img {
+#         width: 96px;
+#         height: 96px;
+#         border-radius: 50%;
+#         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+#     }
+
+#     .welcome-title {
+#         font-size: 28px;
+#         color: #2c3e50;
+#         margin: 24px 0 12px;
+#         text-align: center;
+#     }
+
+#     .intro-text-primary {
+#         font-size: 18px;
+#         color: #374151;
+#         line-height: 1.7;
+#         font-weight: 500;
+#         margin-bottom: 20px;
+#         max-width: 650px;
+#         margin-left: auto;
+#         margin-right: auto;
+#         text-align: center;
+#     }
+
+#     .intro-text-secondary {
+#         font-size: 17px;
+#         color: #6B7280;
+#         line-height: 1.6;
+#         max-width: 650px;
+#         margin: 0 auto 48px;
+#         text-align: center;
+#     }
+
+#     .suggested-title {
+#         font-size: 14px;
+#         font-weight: 600;
+#         color: #7f8c8d;
+#         text-transform: uppercase;
+#         margin-bottom: 20px;
+#         text-align: center;
+#     }
+
+#     /* BUTTON CONTAINER - Responsive with max-width like wireframe */
+#     div[data-testid="stHorizontalBlock"]:has(button[key^="suggested_"]) {
+#         display: grid !important;
+#         grid-template-columns: repeat(2, 1fr) !important;
+#         grid-template-rows: repeat(3, auto) !important;
+#         gap: 16px !important;
+#         max-width: 900px !important;
+#         width: 100% !important;
+#         margin: 0 auto !important;
+#         background: white !important;
+#         padding: 0 32px 48px !important;
+#         border-radius: 0 0 24px 24px !important;
+#         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+#     }
+
+#     /* Kill Streamlit's column divs - flatten the structure */
+#     div[data-testid="stHorizontalBlock"]:has(button[key^="suggested_"]) > div[data-testid="column"] {
+#         display: contents !important;
+#     }
+
+#     /* Remove element containers around buttons */
+#     div[data-testid="stHorizontalBlock"]:has(button[key^="suggested_"]) .stElementContainer {
+#         background: transparent !important;
+#         padding: 0 !important;
+#         margin: 0 !important;
+#     }
+
+#     /* Suggested question buttons */
+#     button[key^="suggested_"] {
+#         background: white !important;
+#         border: 2px solid #E5E7EB !important;
+#         border-radius: 12px !important;
+#         padding: 20px 24px !important;
+#         text-align: left !important;
+#         transition: all 0.2s ease !important;
+#         min-height: 85px !important;
+#         display: flex !important;
+#         align-items: center !important;
+#         gap: 12px !important;
+#         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+#         width: 100% !important;
+#     }
+
+#     button[key^="suggested_"]:hover {
+#         border-color: #8B5CF6 !important;
+#         background: #F9FAFB !important;
+#         box-shadow: 0 4px 12px rgba(139, 92, 246, 0.12) !important;
+#         transform: translateY(-2px) !important;
+#     }
+
+#     button[key^="suggested_"] p {
+#         font-size: 16px !important;
+#         font-weight: 600 !important;
+#         color: #2C363D !important;
+#         line-height: 1.4 !important;
+#         margin: 0 !important;
+#         text-align: left !important;
+#     }
+
+#     /* Landing input container - Responsive like wireframe */
+#     .landing-input-container {
+#         max-width: 800px !important;
+#         width: 100% !important;
+#         margin: 40px auto 20px !important;
+#         padding: 0 30px !important;
+#     }
+
+#     /* Lock the text input itself */
+#     input[key="landing_input"] {
+#         width: 100% !important;
+#         max-width: 100% !important;
+#     }
+
+#     /* Lock input wrapper */
+#     div:has(> input[key="landing_input"]) {
+#         width: 100% !important;
+#         max-width: 100% !important;
+#     }
+
+#     /* Lock the stElementContainer around the input */
+#     .landing-input-container .stElementContainer {
+#         width: 100% !important;
+#         max-width: 100% !important;
+#     }
+
+#     /* Lock button wrapper in input container */
+#     .landing-input-container div:has(> button[key="landing_ask"]) {
+#         width: 100% !important;
+#         max-width: 100% !important;
+#     }
+
+#     /* PURPLE ASK AGY BUTTON */
+#     button[key="landing_ask"] {
+#         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+#         border: none !important;
+#         color: white !important;
+#         font-weight: 600 !important;
+#         padding: 12px 32px !important;
+#         border-radius: 24px !important;
+#         font-size: 16px !important;
+#         transition: all 0.3s ease !important;
+#         box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
+#     }
+
+#     button[key="landing_ask"]:hover:not(:disabled) {
+#         transform: translateY(-2px) !important;
+#         box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4) !important;
+#     }
+
+#     button[key="landing_ask"]:disabled {
+#         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+#         opacity: 0.5 !important;
+#         cursor: not-allowed !important;
+#     }
+
+#     button[key="landing_ask"] p {
+#         color: white !important;
+#         margin: 0 !important;
+#         font-weight: 600 !important;
+#     }
+
+#     /* Force remove any background from button wrapper */
+#     div:has(> button[key="landing_ask"]) {
+#         background: transparent !important;
+#     }
+
+#     /* Hide the trigger button - it's only for programmatic clicks */
+#     button[key="how_works_landing"] {
+#         display: none !important;
+#         visibility: hidden !important;
+#         position: absolute !important;
+#         pointer-events: none !important;
+#     }
+
+#     /* Hide its container too */
+#     div:has(> button[key="how_works_landing"]) {
+#         display: none !important;
+#     }
+#     </style>
+#     """, unsafe_allow_html=True)
+
+#     # === 2. HEADER HTML - NO MARGIN ===
+#     st.markdown("""
+#     <div class="ask-header">
+#         <div class="header-content">
+#             <img class="header-agy-avatar" 
+#                 src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar_96_dark.png" 
+#                 alt="Agy"/>
+#             <div class="header-text">
+#                 <h1>Ask MattGPT</h1>
+#                 <p>Meet Agy 🐾 — Tracking down insights from 20+ years of transformation experience</p>
+#             </div>
+#         </div>
+#         <button class="how-it-works-btn" onclick="document.querySelector('[key=how_works_landing]').click()">
+#             🔧 How Agy searches
+#         </button>
+#     </div>
+#     """, unsafe_allow_html=True)
+
+#     # === 3. STATUS BAR HTML ===
+#     st.markdown("""
+#     <div class="status-bar">
+#         <div class="status-item">
+#             <span class="status-dot"></span>
+#             <span>Semantic search <span class="status-value">active</span></span>
+#         </div>
+#         <div class="status-item">
+#             <span>Pinecone index <span class="status-value">ready</span></span>
+#         </div>
+#         <div class="status-item">
+#             <span>120+ stories <span class="status-value">indexed</span></span>
+#         </div>
+#     </div>
+#     """, unsafe_allow_html=True)
+
+#     # === 4. MAIN INTRO SECTION ===
+#     st.markdown("""
+#     <div class="main-intro-section">
+#         <div class="main-avatar">
+#             <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar_96_dark.png" alt="Agy"/>
+#         </div>
+#         <h2 class="welcome-title">Hi, I'm Agy 🐾</h2>
+#         <p class="intro-text-primary">
+#             I'm a Plott Hound — a breed known for tracking skills and determination. 
+#             Perfect traits for helping you hunt down insights from Matt's 120+ transformation projects.
+#         </p>
+#         <p class="intro-text-secondary">
+#             Ask me about specific methodologies, leadership approaches, or project outcomes. 
+#             I understand context, not just keywords.
+#         </p>
+#         <div class="suggested-title">TRY ASKING:</div>
+#     </div>
+#     """, unsafe_allow_html=True)
+
+#     # === 5. SUGGESTED QUESTION BUTTONS ===
+#     qs = [
+#         ("🚀", "How did Matt transform global payments at scale?"),
+#         ("🏥", "Show me Matt's GenAI work in healthcare"),
+#         ("💡", "Track down Matt's innovation leadership stories"),
+#         ("👥", "How did Matt scale agile across 150+ people?"),
+#         ("⚡", "Find Matt's platform engineering projects"),
+#         ("🎯", "Show me how Matt handles stakeholders")
+#     ]
+
+#     c1, c2 = st.columns(2, gap="small")
+
+#     for i, (icon, q) in enumerate(qs):
+#         with c1 if i % 2 == 0 else c2:
+#             if st.button(f"{icon}  {q}", key=f"suggested_{i}", type="secondary", use_container_width=True):
+#                 st.session_state["ask_input_value"] = q
+#                 st.session_state["ask_transcript"] = []
+#                 _ensure_ask_bootstrap()
+#                 result = send_to_backend(q, {}, None, stories)
+#                 st.session_state["ask_transcript"].append({"Role": "user", "text": q})
+#                 st.session_state["ask_transcript"].append({
+#                     "type": "card",
+#                     "Title": result.get("sources", [{}])[0].get("title", "Response"),
+#                     "story_id": result.get("sources", [{}])[0].get("id"),
+#                     "one_liner": result["answer_md"],
+#                     "sources": result.get("sources", []),
+#                     "confidence": result.get("sources", [{}])[0].get("score", 0.8) if result.get("sources") else 0.8,
+#                     "modes": result.get("modes", {}),
+#                 })
+#                 st.rerun()
+
+#     # === 6. LARGE INPUT AREA AT BOTTOM ===
+#     st.markdown('<div class="landing-input-container">', unsafe_allow_html=True)
+
+#     user_input = st.text_input(
+#         "Ask me anything — from building MattGPT to leading global programs...",
+#         key="landing_input",
+#         label_visibility="collapsed",
+#         placeholder="Ask me anything — from building MattGPT to leading global programs..."
+#     )
+
+#     if st.button("Ask Agy ➜", key="landing_ask", type="primary", disabled=not user_input):
+#         if user_input:
+#             st.session_state["ask_input_value"] = user_input
+#             st.session_state["ask_transcript"] = []
+#             _ensure_ask_bootstrap()
+            
+#             result = send_to_backend(user_input, {}, None, stories)
+            
+#             st.session_state["ask_transcript"].append({
+#                 "Role": "user",
+#                 "text": user_input
+#             })
+            
+#             st.session_state["ask_transcript"].append({
+#                 "type": "card",
+#                 "Title": result.get("sources", [{}])[0].get("title", "Response"),
+#                 "story_id": result.get("sources", [{}])[0].get("id"),
+#                 "one_liner": result["answer_md"],
+#                 "sources": result.get("sources", []),
+#                 "confidence": result.get("sources", [{}])[0].get("score", 0.8) if result.get("sources") else 0.8,
+#                 "modes": result.get("modes", {}),
+#             })
+            
+#             st.rerun()
+
+#     st.markdown('</div>', unsafe_allow_html=True)
+
+#     st.caption("Powered by OpenAI GPT-4o-mini with semantic search across 120+ project case studies")
+
+#     # Hidden button for "How Agy searches" functionality
+#     if st.button("How it works", key="how_works_landing", help="Learn how Agy searches"):
+#         st.session_state["show_how_modal_landing"] = not st.session_state.get("show_how_modal_landing", False)
+#         st.rerun()
+
+
+
+
+# def render_conversation_view(stories: list):
+#     """
+#     Render the conversational chat interface (after first question asked).
+
+#     Wireframe: ask_mattgpt_wireframe.html
+
+#     Args:
+#         stories: List of story dictionaries (STORIES from app.py)
+#     """
+
+#     # Conversation view CSS styling
+#     st.markdown("""
+#     <style>
+#     /* Chat interface header */
+#     .conversation-header {
+#         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+#         padding: 30px;
+#         margin: -1rem -1rem 0 -1rem;
+#         color: white;
+#         display: flex;
+#         justify-content: space-between;
+#         align-items: center;
+#     }
+
+#     .conversation-header-content {
+#         display: flex;
+#         align-items: center;
+#         gap: 24px;
+#     }
+
+#    .conversation-agy-avatar {
+#         width: 64px !important;
+#         height: 64px !important;
+#         border-radius: 50% !important;
+#         border: 3px solid white !important;
+#         box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+# }
+
+#     .conversation-header-text h1 {
+#         font-size: 32px;
+#         margin: 0 0 8px 0;
+#         color: white;
+#     }
+
+#     .conversation-header-text p {
+#         font-size: 16px;
+#         margin: 0;
+#         opacity: 0.95;
+#     }
+
+#     /* How Agy searches button - glass morphism */
+#     .conversation-how-btn {
+#         background: rgba(255, 255, 255, 0.2);
+#         backdrop-filter: blur(10px);
+#         border: 2px solid rgba(255, 255, 255, 0.3);
+#         border-radius: 20px;
+#         color: white;
+#         padding: 0.5rem 1.25rem;
+#         font-size: 14px;
+#         font-weight: 500;
+#         cursor: pointer;
+#         transition: all 0.2s ease;
+#     }
+
+#     .conversation-how-btn:hover {
+#         background: rgba(255, 255, 255, 0.25);
+#         border-color: rgba(255, 255, 255, 0.5);
+#     }
+
+#     /* Status bar for conversation view */
+#     .status-bar-conversation {
+#         background: #f8f9fa;
+#         padding: 12px 30px;
+#         border-bottom: 1px solid #e0e0e0;
+#         display: flex;
+#         gap: 24px;
+#         align-items: center;
+#         font-size: 13px;
+#         margin-bottom: 16px;
+#     }
+
+#     .status-dot-conversation {
+#         width: 8px;
+#         height: 8px;
+#         background: #27ae60;
+#         border-radius: 50%;
+#         display: inline-block;
+#         margin-right: 6px;
+#     }
+
+#     .status-label {
+#         color: #7f8c8d;
+#     }
+
+#     .status-value {
+#         color: #2c3e50;
+#         font-weight: 600;
+#     }
+
+#     /* Thinking indicator */
+#     .thinking-indicator {
+#         display: inline-flex;
+#         align-items: center;
+#         gap: 8px;
+#         padding: 8px 12px;
+#         background: #f0f0f0;
+#         border-radius: 6px;
+#         font-size: 13px;
+#         color: #7f8c8d;
+#         margin-bottom: 12px;
+#         animation: fadeOutSmooth 0.5s ease-out 2s forwards;
+#     }
+
+#     @keyframes fadeOutSmooth {
+#         to {
+#             opacity: 0;
+#             transform: translateY(-8px);
+#         }
+#     }
+
+#     .thinking-icon {
+#         width: 16px;
+#         height: 16px;
+#         animation: tennisBallCycle 0.9s infinite;
+#     }
+
+#     @keyframes tennisBallCycle {
+#         0%, 100% { content: '🎾'; }
+#         33% { content: '🎾'; }
+#         66% { content: '🎾'; }
+#     }
+
+#     /* Chat messages styling */
+#     .chat-message-ai {
+#         background: white;
+#         border-radius: 16px;
+#         padding: 24px;
+#         margin-bottom: 24px;
+#         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+#         border-left: 4px solid #8B5CF6;
+#     }
+
+#     .chat-message-user {
+#         background: #e3f2fd;
+#         border-radius: 8px;
+#         padding: 16px;
+#         margin-bottom: 24px;
+#         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+#     }
+
+#     /* Message text styling */
+#     .message-text {
+#         font-size: 15px;
+#         color: #2c3e50;
+#         line-height: 1.6;
+#     }
+
+#     .message-text strong {
+#         font-weight: bold;
+#     }
+
+#     /* Override Streamlit chat message styling */
+#     [data-testid="stChatMessage"][data-testid-assistant] {
+#         background: white !important;
+#         border-radius: 16px !important;
+#         padding: 24px !important;
+#         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+#         border-left: 4px solid #8B5CF6 !important;
+#     }
+
+#     [data-testid="stChatMessage"][data-testid-user] {
+#         background: #e3f2fd !important;
+#         border-radius: 8px !important;
+#         padding: 16px !important;
+#         box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+#     }
+
+#     /* Avatar styling */
+#     [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"] {
+#         width: 48px !important;
+#         height: 48px !important;
+#         background: white !important;
+#         border: 2px solid #e0e0e0 !important;
+#         padding: 4px !important;
+#         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+#     }
+
+#     [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-user"] {
+#         width: 40px !important;
+#         height: 40px !important;
+#         background: #7f8c8d !important;
+#         opacity: 0.5 !important;
+#     }
+
+#     /* Chat input styling */
+#     [data-testid="stChatInput"] {
+#         padding: 20px 30px !important;
+#         background: white !important;
+#         border-top: 2px solid #e0e0e0 !important;
+#     }
+
+#     [data-testid="stChatInput"] input {
+#         padding: 14px 18px !important;
+#         border: 2px solid #ddd !important;
+#         border-radius: 8px !important;
+#         font-size: 15px !important;
+#     }
+
+#     [data-testid="stChatInput"] input:focus {
+#         border-color: #8B5CF6 !important;
+#         box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1) !important;
+#     }
+
+#     [data-testid="stChatInput"] button {
+#         padding: 14px 28px !important;
+#         background: #8B5CF6 !important;
+#         color: white !important;
+#         font-size: 15px !important;
+#         font-weight: 600 !important;
+#         border-radius: 8px !important;
+#     }
+
+#     [data-testid="stChatInput"] button:hover {
+#         background: #7C3AED !important;
+#         transform: translateY(-1px) !important;
+#         box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3) !important;
+#     }
+
+#     /* Messages area background */
+#     .main .block-container {
+#         background: #fafafa !important;
+#         padding: 30px !important;
+#     }
+
+#     /* Source links section */
+#     .source-links-section {
+#         border-top: 1px solid #e0e0e0;
+#         margin-top: 16px;
+#         padding-top: 16px;
+#     }
+
+#     .source-links-title {
+#         font-size: 12px;
+#         text-transform: uppercase;
+#         color: #7f8c8d;
+#         margin-bottom: 12px;
+#         font-weight: 600;
+#     }
+
+#     /* Source chips styling */
+#     .source-chip {
+#         display: inline-flex;
+#         align-items: center;
+#         gap: 8px;
+#         padding: 8px 16px;
+#         background: #F3F4F6;
+#         border: 2px solid #E5E7EB;
+#         border-radius: 8px;
+#         font-size: 14px;
+#         font-weight: 500;
+#         color: #2563EB;
+#         text-decoration: none;
+#         margin: 4px;
+#         transition: all 0.2s ease;
+#     }
+
+#     .source-chip:hover {
+#         background: #EEF2FF;
+#         border-color: #8B5CF6;
+#         transform: translateY(-1px);
+#     }
+
+#     .source-chip-icon {
+#         color: #8B5CF6;
+#     }
+
+#     /* Action buttons */
+#     .action-buttons {
+#         display: flex;
+#         gap: 8px;
+#         margin-top: 16px;
+#     }
+
+#     .action-btn {
+#         padding: 6px 12px;
+#         background: white;
+#         border: 1px solid #e0e0e0;
+#         border-radius: 6px;
+#         font-size: 12px;
+#         color: #555;
+#         cursor: pointer;
+#         transition: all 0.2s ease;
+#     }
+
+#     .action-btn:hover {
+#         background: #f5f5f5;
+#         border-color: #ccc;
+#     }
+
+#     .action-btn.helpful-active {
+#         background: #10B981;
+#         color: white;
+#         border-color: #10B981;
+#     }
+
+#     /* Message spacing */
+#     .message-avatar-gap {
+#         gap: 12px;
+#     }
+
+#     .message-spacing {
+#         margin-bottom: 24px;
+#     }
+#     </style>
+#     """, unsafe_allow_html=True)
+
+#     # Page header with purple gradient
+#     st.markdown("""
+#     <div class="conversation-header">
+#         <div class="conversation-header-content">
+#             <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar_96_dark.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
+#             <div class="conversation-header-text">
+#                 <h1>Ask MattGPT</h1>
+#                 <p>Meet Agy 🐾 — Tracking down insights from 20+ years of transformation experience</p>
+#             </div>
+#         </div>
+#         <button class="conversation-how-btn" onclick="document.querySelector('[key=how_works_top]').click()">
+#             🔧 How Agy searches
+#         </button>
+#     </div>
+#     """, unsafe_allow_html=True)
+
+#      # Anchor at top to force scroll position
+#     st.markdown('<div id="ask-top"></div>', unsafe_allow_html=True)
+
+#     # Force scroll to top using multiple methods
+#     st.markdown("""
+#     <script>
+#     // Immediate scroll
+#     window.scrollTo(0, 0);
+#     document.documentElement.scrollTop = 0;
+#     document.body.scrollTop = 0;
+
+#     // Also try after a tiny delay in case content is still loading
+#     setTimeout(function() {
+#         window.scrollTo(0, 0);
+#         document.documentElement.scrollTop = 0;
+#         document.body.scrollTop = 0;
+#     }, 10);
+#     </script>
+#     """, unsafe_allow_html=True)
+
+#     # Hidden button for "How it works" (triggered by header button)
+#     if st.button("🔧 How it works", key="how_works_top"):
+#         st.session_state["show_how_modal"] = not st.session_state.get(
+#             "show_how_modal", False
+#         )
+#         st.rerun()
+
+#     # Status bar matching the spec
+#     st.markdown("""
+#     <div class="status-bar">
+#         <div class="status-item">
+#             <span class="status-dot"></span>
+#             <span>Semantic search <span class="status-value">active</span></span>
+#         </div>
+#         <div class="status-item">
+#             <span>Pinecone index <span class="status-value">ready</span></span>
+#         </div>
+#         <div class="status-item">
+#             <span>120+ stories <span class="status-value">indexed</span></span>
+#         </div>
+#     </div>
+#     """, unsafe_allow_html=True)
+
+#     # Show the modal if toggled
+#     if st.session_state.get("show_how_modal", False):
+#         # Force scroll to top when modal opens
+#         st.markdown("""
+#         <script>
+#         window.scrollTo({top: 0, behavior: 'smooth'});
+#         </script>
+#         """, unsafe_allow_html=True)
+
+#         # Create a proper modal container without using expander
+#         st.markdown("---")
+
+#         # Header with close button
+#         col1, col2 = st.columns([10, 1])
+#         with col1:
+#             st.markdown("## 🔧 How MattGPT Works")
+#         with col2:
+#             if st.button("✕", key="close_how"):
+#                 st.session_state["show_how_modal"] = False
+#                 st.rerun()
+
+#         # Content in a bordered container
+#         with st.container():
+#             # Quick stats bar
+#             col1, col2, col3, col4 = st.columns(4)
+#             with col1:
+#                 st.metric("Stories Indexed", "120+")
+#             with col2:
+#                 st.metric("Avg Response Time", "1.2s")
+#             with col3:
+#                 st.metric("Retrieval Accuracy", "87%")
+#             with col4:
+#                 st.metric("Vector Dimensions", "384")
+
+#             st.markdown("---")
+
+#             # Architecture overview
+#             col1, col2 = st.columns(2)
+
+#             with col1:
+#                 st.markdown(
+#                     """
+#                 ### Solution Architecture Overview
+                
+#                 **🎯 Semantic Search Pipeline**
+#                 - Sentence-BERT embeddings (all-MiniLM-L6-v2)
+#                 - 384-dimensional vector space
+#                 - Pinecone vector database with metadata filtering
+                
+#                 **🔄 Hybrid Retrieval**
+#                 - 80% semantic similarity weight
+#                 - 20% keyword matching weight
+#                 - Intent recognition for query understanding
+#                 """
+#                 )
+
+#             with col2:
+#                 st.markdown(
+#                     """
+#                 ### Data & Processing
+                
+#                 **📊 Story Corpus**
+#                 - 120+ structured narratives from Fortune 500 projects
+#                 - STAR/5P framework encoding
+#                 - Rich metadata: client, domain, outcomes, metrics
+                
+#                 **💬 Response Generation**
+#                 - Context-aware retrieval (top-k=30)
+#                 - Multi-mode synthesis (Narrative/Key Points/Deep Dive)
+#                 - Source attribution with confidence scoring
+#                 """
+#                 )
+
+#             # Query Flow
+#             st.markdown("### Query Flow")
+#             st.code(
+#                 """
+#                 Your Question 
+#                     ↓
+#                 [Embedding + Intent Analysis]
+#                     ↓
+#                 [Pinecone Vector Search + Keyword Matching]
+#                     ↓
+#                 [Hybrid Scoring & Ranking]
+#                     ↓
+#                 [Top 3 Stories Retrieved]
+#                     ↓
+#                 [Response Synthesis with Sources]
+#                             """,
+#                 language="text",
+#             )
+
+#             st.markdown("---")
+#             st.markdown("### System Architecture")
+
+#             try:
+#                 with open("assets/rag_architecture_grid_svg.svg", "r") as f:
+#                     svg_content = f.read()
+                
+#                 # Remove XML declaration and DOCTYPE
+#                 svg_content = svg_content.replace('<?xml version="1.0" encoding="UTF-8" standalone="no"?>', '')
+#                 svg_content = svg_content.replace('<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">', '')
+                
+#                 # Use HTML component with transparent background and no scroll
+#                 import streamlit.components.v1 as components
+                
+#                 components.html(f"""
+#                 <div style='width: 100%; text-align: center;'>
+#                     {svg_content}
+#                 </div>
+#                 """, height=280, scrolling=False)
+                
+#             except Exception as e:
+#                 st.error(f"Error loading architecture diagram: {e}")
+
+#             st.markdown("---")
             
 
-            # Detailed breakdown
-            st.markdown("### Architecture Details")
+#             # Detailed breakdown
+#             st.markdown("### Architecture Details")
 
-            col1, col2 = st.columns(2)
+#             col1, col2 = st.columns(2)
 
-            with col1:
-                st.markdown("""
-                **Search & Retrieval**
-                - **Semantic**: Pinecone cosine similarity (80% weight)
-                - **Keyword**: BM25-style token overlap (20% weight)
-                - Minimum similarity threshold: 0.15
-                - Top-k pool: 30 candidates before ranking
-                """)
+#             with col1:
+#                 st.markdown("""
+#                 **Search & Retrieval**
+#                 - **Semantic**: Pinecone cosine similarity (80% weight)
+#                 - **Keyword**: BM25-style token overlap (20% weight)
+#                 - Minimum similarity threshold: 0.15
+#                 - Top-k pool: 30 candidates before ranking
+#                 """)
 
-            with col2:
-                st.markdown("""
-                **Response Synthesis**
-                - Rank top 3 stories by blended score
-                - Generate 3 views from same sources:
-                - Narrative (1-paragraph summary)
-                - Key Points (3-4 bullets)
-                - Deep Dive (STAR breakdown)
-                - Interactive source chips with confidence %
-                """)
+#             with col2:
+#                 st.markdown("""
+#                 **Response Synthesis**
+#                 - Rank top 3 stories by blended score
+#                 - Generate 3 views from same sources:
+#                 - Narrative (1-paragraph summary)
+#                 - Key Points (3-4 bullets)
+#                 - Deep Dive (STAR breakdown)
+#                 - Interactive source chips with confidence %
+#                 """)
 
-            st.markdown("---")
+#             st.markdown("---")
 
-            st.markdown("""
-            **Key Differentiators:**
-            - Hybrid retrieval ensures both semantic understanding and exact term matching
-            - Multi-mode synthesis provides flexible presentation for different use cases
-            - Context locking allows follow-up questions on specific stories
-            - Off-domain gating with suggestion chips prevents poor matches
-            """)
+#             st.markdown("""
+#             **Key Differentiators:**
+#             - Hybrid retrieval ensures both semantic understanding and exact term matching
+#             - Multi-mode synthesis provides flexible presentation for different use cases
+#             - Context locking allows follow-up questions on specific stories
+#             - Off-domain gating with suggestion chips prevents poor matches
+#             """)
 
-    # Define ctx - MUST be outside and after the modal block
-    ctx = get_context_story(stories)
-    _show_ctx = bool(ctx) and (
-        st.session_state.get("__ctx_locked__") or st.session_state.get("__asked_once__")
-    )
+#     # Define ctx - MUST be outside and after the modal block
+#     ctx = get_context_story(stories)
+#     _show_ctx = bool(ctx) and (
+#         st.session_state.get("__ctx_locked__") or st.session_state.get("__asked_once__")
+#     )
 
-    if _show_ctx:
-        render_compact_context_banner(stories)
+#     if _show_ctx:
+#         render_compact_context_banner(stories)
 
-    # Rest of your Ask MattGPT content continues...
-    # Rest of your Ask MattGPT content continues as normal
-    # Context banner, transcript, etc...
+#     # Rest of your Ask MattGPT content continues...
+#     # Rest of your Ask MattGPT content continues as normal
+#     # Context banner, transcript, etc...
 
-    # with right:
-    #    if st.button("×", key="btn_clear_ctx", help="Clear context"):
-    #       _clear_ask_context()
+#     # with right:
+#     #    if st.button("×", key="btn_clear_ctx", help="Clear context"):
+#     #       _clear_ask_context()
 
-    # Lightweight DEBUG status for Ask (visible only when DEBUG=True)
-    if DEBUG:
-        try:
-            _dbg_flags = {
-                "vector": VECTOR_BACKEND,
-                "index": PINECONE_INDEX_NAME or "-",
-                "ns": PINECONE_NAMESPACE or "-",
-                "pc_suppressed": bool(st.session_state.get("__pc_suppressed__")),
-                "has_last": bool(st.session_state.get("last_sources")),
-                "pending_snap": bool(st.session_state.get("__pending_card_snapshot__")),
-                # NEW: report external renderer overrides
-                "ext_chips": (
-                    "yes"
-                    if callable(globals().get("_ext_render_sources_chips"))
-                    else "no"
-                ),
-                "ext_badges": (
-                    "yes"
-                    if callable(globals().get("_ext_render_sources_badges_static"))
-                    else "no"
-                ),
-            }
-            st.caption("🧪 " + ", ".join(f"{k}={v}" for k, v in _dbg_flags.items()))
-            # Second line: last prompt + ask decision
-            lp = (st.session_state.get("__ask_dbg_prompt") or "").strip()
-            lp = (lp[:60] + "…") if len(lp) > 60 else lp
-            st.caption(
-                "🧪 "
-                + f"prompt='{lp}' from_suggestion={st.session_state.get('__ask_dbg_from_suggestion')}"
-                + f" force={st.session_state.get('__ask_dbg_force_answer')} pc_hits={st.session_state.get('__dbg_pc_hits')}"
-                + f" decision={st.session_state.get('__ask_dbg_decision')}"
-                + f" reason={st.session_state.get('ask_last_reason')}"
-            )
-        except Exception:
-            pass
+#     # Lightweight DEBUG status for Ask (visible only when DEBUG=True)
+#     if DEBUG:
+#         try:
+#             _dbg_flags = {
+#                 "vector": VECTOR_BACKEND,
+#                 "index": PINECONE_INDEX_NAME or "-",
+#                 "ns": PINECONE_NAMESPACE or "-",
+#                 "pc_suppressed": bool(st.session_state.get("__pc_suppressed__")),
+#                 "has_last": bool(st.session_state.get("last_sources")),
+#                 "pending_snap": bool(st.session_state.get("__pending_card_snapshot__")),
+#                 # NEW: report external renderer overrides
+#                 "ext_chips": (
+#                     "yes"
+#                     if callable(globals().get("_ext_render_sources_chips"))
+#                     else "no"
+#                 ),
+#                 "ext_badges": (
+#                     "yes"
+#                     if callable(globals().get("_ext_render_sources_badges_static"))
+#                     else "no"
+#                 ),
+#             }
+#             st.caption("🧪 " + ", ".join(f"{k}={v}" for k, v in _dbg_flags.items()))
+#             # Second line: last prompt + ask decision
+#             lp = (st.session_state.get("__ask_dbg_prompt") or "").strip()
+#             lp = (lp[:60] + "…") if len(lp) > 60 else lp
+#             st.caption(
+#                 "🧪 "
+#                 + f"prompt='{lp}' from_suggestion={st.session_state.get('__ask_dbg_from_suggestion')}"
+#                 + f" force={st.session_state.get('__ask_dbg_force_answer')} pc_hits={st.session_state.get('__dbg_pc_hits')}"
+#                 + f" decision={st.session_state.get('__ask_dbg_decision')}"
+#                 + f" reason={st.session_state.get('ask_last_reason')}"
+#             )
+#         except Exception:
+#             pass
 
-    # 1) Bootstrap a stable transcript (one-time)
-    _ensure_ask_bootstrap()
+#     # 1) Bootstrap a stable transcript (one-time)
+#     _ensure_ask_bootstrap()
 
-    # 2) Unify seeds and chip-clicks: inject as a real user turn if present
-    seed = st.session_state.pop("seed_prompt", None)
-    injected = st.session_state.pop("__inject_user_turn__", None)
-    pending = seed or injected
-    if pending:
-        # If a live card was pending snapshot, capture it now before injecting the new turn
-        if st.session_state.get("__pending_card_snapshot__"):
-            _push_card_snapshot_from_state(stories)
-            st.session_state["__pending_card_snapshot__"] = False
-        _push_user_turn(pending)
-        with st.status("Searching Matt's experience...", expanded=True) as status:
-            try:
-                # Ask is pure semantic; ignore Explore filters here
-                resp = send_to_backend(pending, {}, ctx, stories)
+#     # 2) Unify seeds and chip-clicks: inject as a real user turn if present
+#     seed = st.session_state.pop("seed_prompt", None)
+#     injected = st.session_state.pop("__inject_user_turn__", None)
+#     pending = seed or injected
+#     if pending:
+#         # If a live card was pending snapshot, capture it now before injecting the new turn
+#         if st.session_state.get("__pending_card_snapshot__"):
+#             _push_card_snapshot_from_state(stories)
+#             st.session_state["__pending_card_snapshot__"] = False
+#         _push_user_turn(pending)
+#         with st.status("Searching Matt's experience...", expanded=True) as status:
+#             try:
+#                 # Ask is pure semantic; ignore Explore filters here
+#                 resp = send_to_backend(pending, {}, ctx, stories)
 
-                # Show confidence after retrieval
-                sources = resp.get("sources", [])
-                if sources:
-                    first_id = str(sources[0].get("id", ""))
-                    scores = st.session_state.get("__pc_last_ids__", {}) or {}
-                    conf = scores.get(first_id)
-                    if conf:
-                        conf_pct = int(float(conf) * 100)
-                        st.write(f"✓ Found relevant stories • {conf_pct}% match confidence")
+#                 # Show confidence after retrieval
+#                 sources = resp.get("sources", [])
+#                 if sources:
+#                     first_id = str(sources[0].get("id", ""))
+#                     scores = st.session_state.get("__pc_last_ids__", {}) or {}
+#                     conf = scores.get(first_id)
+#                     if conf:
+#                         conf_pct = int(float(conf) * 100)
+#                         st.write(f"✓ Found relevant stories • {conf_pct}% match confidence")
 
-                status.update(label="Answer ready!", state="complete", expanded=False)
+#                 status.update(label="Answer ready!", state="complete", expanded=False)
 
-            except Exception as e:
-                    status.update(label="Error occurred", state="error")
-                    print(f"DEBUG: send_to_backend failed: {e}")
-                    import traceback
-                    traceback.print_exc()
-                    _push_assistant_turn(f"Error: {str(e)}")
-                    st.rerun()
+#             except Exception as e:
+#                     status.update(label="Error occurred", state="error")
+#                     print(f"DEBUG: send_to_backend failed: {e}")
+#                     import traceback
+#                     traceback.print_exc()
+#                     _push_assistant_turn(f"Error: {str(e)}")
+#                     st.rerun()
 
-            else:
-                set_answer(resp)
-                # If no banner is active, append a static card snapshot now so it
-                # appears in-order as a chat bubble; also suppress the bottom live card once.
-                if not st.session_state.get(
-                    "ask_last_reason"
-                ) and not st.session_state.get("__sticky_banner__"):
-                    _push_card_snapshot_from_state(stories)
-                    st.session_state["__suppress_live_card_once__"] = True
-                # If a chip click requested banner clear, perform it now after answer set
-                if st.session_state.pop("__clear_banner_after_answer__", False):
-                    st.session_state.pop("ask_last_reason", None)
-                    st.session_state.pop("ask_last_query", None)
-                    st.session_state.pop("ask_last_overlap", None)
-                st.rerun()
+#             else:
+#                 set_answer(resp)
+#                 # If no banner is active, append a static card snapshot now so it
+#                 # appears in-order as a chat bubble; also suppress the bottom live card once.
+#                 if not st.session_state.get(
+#                     "ask_last_reason"
+#                 ) and not st.session_state.get("__sticky_banner__"):
+#                     _push_card_snapshot_from_state(stories)
+#                     st.session_state["__suppress_live_card_once__"] = True
+#                 # If a chip click requested banner clear, perform it now after answer set
+#                 if st.session_state.pop("__clear_banner_after_answer__", False):
+#                     st.session_state.pop("ask_last_reason", None)
+#                     st.session_state.pop("ask_last_query", None)
+#                     st.session_state.pop("ask_last_overlap", None)
+#                 st.rerun()
 
-    # 3) Render transcript so far (strict order, no reflow)
-    _render_ask_transcript(stories)
+#     # 3) Render transcript so far (strict order, no reflow)
+#     _render_ask_transcript(stories)
 
-    # Force scroll to top after transcript renders
-    st.markdown("""
-    <script>
-    // Multiple scroll methods with longer delays
-    setTimeout(function() {
-        window.scrollTo(0, 0);
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
-    }, 50);
-    setTimeout(function() {
-        window.scrollTo(0, 0);
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
-    }, 100);
-    setTimeout(function() {
-        window.scrollTo(0, 0);
-    }, 200);
-    </script>
-    """, unsafe_allow_html=True)
+#     # Force scroll to top after transcript renders
+#     st.markdown("""
+#     <script>
+#     // Multiple scroll methods with longer delays
+#     setTimeout(function() {
+#         window.scrollTo(0, 0);
+#         document.documentElement.scrollTop = 0;
+#         document.body.scrollTop = 0;
+#     }, 50);
+#     setTimeout(function() {
+#         window.scrollTo(0, 0);
+#         document.documentElement.scrollTop = 0;
+#         document.body.scrollTop = 0;
+#     }, 100);
+#     setTimeout(function() {
+#         window.scrollTo(0, 0);
+#     }, 200);
+#     </script>
+#     """, unsafe_allow_html=True)
 
-    # 4) One‑shot nonsense/off‑domain banner appears AFTER transcript
-    rendered_banner = False
-    if st.session_state.get("ask_last_reason"):
-        with st.chat_message("assistant"):
-            render_no_match_banner(
-                reason=st.session_state.get("ask_last_reason", ""),
-                query=st.session_state.get("ask_last_query", ""),
-                overlap=st.session_state.get("ask_last_overlap", None),
-                suppressed=st.session_state.get("__pc_suppressed__", False),
-                filters=st.session_state.get("filters", {}),
-                key_prefix="askinline",
-            )
-        rendered_banner = True
-        # Clear flags so the banner doesn't re-render on every rerun
-        st.session_state.pop("ask_last_reason", None)
-        st.session_state.pop("ask_last_query", None)
-        st.session_state.pop("ask_last_overlap", None)
-        # Persist as sticky so it remains visible between user turns unless dismissed
-        st.session_state.setdefault(
-            "__sticky_banner__",
-            {
-                "reason": (
-                    dec
-                    if (dec := (st.session_state.get("__ask_dbg_decision") or ""))
-                    else "no_match"
-                ),
-                "query": st.session_state.get("__ask_dbg_prompt", ""),
-                "overlap": None,
-                "suppressed": bool(st.session_state.get("__pc_suppressed__", False)),
-            },
-        )
-    elif True:
-        # Forced fallback: if gating decided no‑match but the flag was not set,
-        # render a banner anyway so the user sees actionable chips.
-        dec = (st.session_state.get("__ask_dbg_decision") or "").strip().lower()
-        no_match_decision = (
-            dec.startswith("rule:")
-            or dec.startswith("low_overlap")
-            or dec == "low_conf"
-            or dec == "no_overlap+low_conf"
-        )
-        if no_match_decision and not st.session_state.get("last_sources"):
-            with st.chat_message("assistant"):
-                render_no_match_banner(
-                    reason=dec or "no_match",
-                    query=st.session_state.get("__ask_dbg_prompt", ""),
-                    overlap=st.session_state.get("ask_last_overlap", None),
-                    suppressed=st.session_state.get("__pc_suppressed__", False),
-                    filters=st.session_state.get("filters", {}),
-                    key_prefix="askinline_forced",
-                )
-            rendered_banner = True
+#     # 4) One‑shot nonsense/off‑domain banner appears AFTER transcript
+#     rendered_banner = False
+#     if st.session_state.get("ask_last_reason"):
+#         with st.chat_message("assistant"):
+#             render_no_match_banner(
+#                 reason=st.session_state.get("ask_last_reason", ""),
+#                 query=st.session_state.get("ask_last_query", ""),
+#                 overlap=st.session_state.get("ask_last_overlap", None),
+#                 suppressed=st.session_state.get("__pc_suppressed__", False),
+#                 filters=st.session_state.get("filters", {}),
+#                 key_prefix="askinline",
+#             )
+#         rendered_banner = True
+#         # Clear flags so the banner doesn't re-render on every rerun
+#         st.session_state.pop("ask_last_reason", None)
+#         st.session_state.pop("ask_last_query", None)
+#         st.session_state.pop("ask_last_overlap", None)
+#         # Persist as sticky so it remains visible between user turns unless dismissed
+#         st.session_state.setdefault(
+#             "__sticky_banner__",
+#             {
+#                 "reason": (
+#                     dec
+#                     if (dec := (st.session_state.get("__ask_dbg_decision") or ""))
+#                     else "no_match"
+#                 ),
+#                 "query": st.session_state.get("__ask_dbg_prompt", ""),
+#                 "overlap": None,
+#                 "suppressed": bool(st.session_state.get("__pc_suppressed__", False)),
+#             },
+#         )
+#     elif True:
+#         # Forced fallback: if gating decided no‑match but the flag was not set,
+#         # render a banner anyway so the user sees actionable chips.
+#         dec = (st.session_state.get("__ask_dbg_decision") or "").strip().lower()
+#         no_match_decision = (
+#             dec.startswith("rule:")
+#             or dec.startswith("low_overlap")
+#             or dec == "low_conf"
+#             or dec == "no_overlap+low_conf"
+#         )
+#         if no_match_decision and not st.session_state.get("last_sources"):
+#             with st.chat_message("assistant"):
+#                 render_no_match_banner(
+#                     reason=dec or "no_match",
+#                     query=st.session_state.get("__ask_dbg_prompt", ""),
+#                     overlap=st.session_state.get("ask_last_overlap", None),
+#                     suppressed=st.session_state.get("__pc_suppressed__", False),
+#                     filters=st.session_state.get("filters", {}),
+#                     key_prefix="askinline_forced",
+#                 )
+#             rendered_banner = True
 
-    # Sticky banner temporarily disabled to stabilize chip clicks
-    st.session_state["__sticky_banner__"] = None
+#     # Sticky banner temporarily disabled to stabilize chip clicks
+#     st.session_state["__sticky_banner__"] = None
 
-    # 5) Compact answer panel (title • unclamped 5P • view pills • sources)
-    _m = st.session_state.get("answer_modes", {}) or {}
-    _srcs = st.session_state.get("last_sources", []) or []
-    _primary = None
-    if _srcs:
-        _sid = str(_srcs[0].get("id", ""))
-        _primary = next((s for s in stories if str(s.get("id")) == _sid), None)
-    # Suppress the bottom live card when:
-    #  - a banner was rendered this run; or
-    #  - we already have at least one static card snapshot in the transcript
-    has_snapshot_card = any(
-        (isinstance(x, dict) and x.get("type") == "card")
-        for x in st.session_state.get("ask_transcript", [])
-    )
-    if (
-        not rendered_banner
-        and not has_snapshot_card
-        and not st.session_state.get("__suppress_live_card_once__")
-        and (_m or _primary or st.session_state.get("last_answer"))
-    ):
-        # Always render the bottom live card so pills are available.
-        # Snapshot holds only header + one-liner + sources to avoid duplicate body text.
-        render_answer_card_compact(
-            _primary or {"title": "Answer"}, _m, stories, "answer_mode"
-        )
+#     # 5) Compact answer panel (title • unclamped 5P • view pills • sources)
+#     _m = st.session_state.get("answer_modes", {}) or {}
+#     _srcs = st.session_state.get("last_sources", []) or []
+#     _primary = None
+#     if _srcs:
+#         _sid = str(_srcs[0].get("id", ""))
+#         _primary = next((s for s in stories if str(s.get("id")) == _sid), None)
+#     # Suppress the bottom live card when:
+#     #  - a banner was rendered this run; or
+#     #  - we already have at least one static card snapshot in the transcript
+#     has_snapshot_card = any(
+#         (isinstance(x, dict) and x.get("type") == "card")
+#         for x in st.session_state.get("ask_transcript", [])
+#     )
+#     if (
+#         not rendered_banner
+#         and not has_snapshot_card
+#         and not st.session_state.get("__suppress_live_card_once__")
+#         and (_m or _primary or st.session_state.get("last_answer"))
+#     ):
+#         # Always render the bottom live card so pills are available.
+#         # Snapshot holds only header + one-liner + sources to avoid duplicate body text.
+#         render_answer_card_compact(
+#             _primary or {"title": "Answer"}, _m, stories, "answer_mode"
+#         )
 
-    # Reset one-shot suppression flag after a render cycle
-    if st.session_state.get("__suppress_live_card_once__"):
-        st.session_state["__suppress_live_card_once__"] = False
+#     # Reset one-shot suppression flag after a render cycle
+#     if st.session_state.get("__suppress_live_card_once__"):
+#         st.session_state["__suppress_live_card_once__"] = False
 
-    # 6) Handle a new chat input (command aliases or normal question)
-    # Render the chat input only on the Ask MattGPT tab
-    if st.session_state.get("active_tab") == "Ask MattGPT":
-        user_input_local = st.chat_input("Ask anything…", key="ask_chat_input1")
-    else:
-        user_input_local = None
-    if user_input_local:
-        # If a live card is pending snapshot from the previous answer, snapshot it now
-        if st.session_state.get("__pending_card_snapshot__"):
-            _push_card_snapshot_from_state(stories)
-            st.session_state["__pending_card_snapshot__"] = False
+#     # 6) Handle a new chat input (command aliases or normal question)
+#     # Render the chat input only on the Ask MattGPT tab
+#     if st.session_state.get("active_tab") == "Ask MattGPT":
+#         user_input_local = st.chat_input("Ask anything…", key="ask_chat_input1")
+#     else:
+#         user_input_local = None
+#     if user_input_local:
+#         # If a live card is pending snapshot from the previous answer, snapshot it now
+#         if st.session_state.get("__pending_card_snapshot__"):
+#             _push_card_snapshot_from_state(stories)
+#             st.session_state["__pending_card_snapshot__"] = False
 
-        # Append user's turn immediately to keep order deterministic
-        _push_user_turn(user_input_local)
+#         # Append user's turn immediately to keep order deterministic
+#         _push_user_turn(user_input_local)
 
-        # Clear context lock for fresh typed questions (not from suggestion chips)
-        if not st.session_state.get("__ask_from_suggestion__"):
-            st.session_state.pop("__ctx_locked__", None)
-            st.session_state.pop("active_context", None)
+#         # Clear context lock for fresh typed questions (not from suggestion chips)
+#         if not st.session_state.get("__ask_from_suggestion__"):
+#             st.session_state.pop("__ctx_locked__", None)
+#             st.session_state.pop("active_context", None)
 
-        # Command aliases (view switches) should not trigger new retrieval
-        cmd = re.sub(r"\s+", " ", user_input_local.strip().lower())
-        cmd_map = {
-            "narrative": "narrative",
-            "key points": "key_points",
-            "keypoints": "key_points",
-            "deep dive": "deep_dive",
-            "deep-dive": "deep_dive",
-            "details": "deep_dive",
-        }
-        # If a quick command is used without any story context, show a friendly tip
-        has_context = bool(
-            ctx
-            or st.session_state.get("active_story")
-            or st.session_state.get("last_sources")
-        )
-        if cmd in cmd_map and not has_context:
-            _push_assistant_turn(
-                "Quick mode commands like “key points” work after a story is in context — either select a story or ask a question first so I can cite sources. For now, try asking a full question."
-            )
-            st.rerun()
-        if cmd in cmd_map and (
-            ctx
-            or st.session_state.get("active_story")
-            or st.session_state.get("last_sources")
-        ):
-            # Resolve a target story: explicit context > last active story > last answer’s primary source
-            target = ctx
-            if not target:
-                sid = st.session_state.get("active_story")
-                if not sid:
-                    srcs = st.session_state.get("last_sources") or []
-                    if srcs:
-                        sid = srcs[0].get("id")
-                if sid:
-                    target = next(
-                        (x for x in stories if str(x.get("id")) == str(sid)), None
-                    )
+#         # Command aliases (view switches) should not trigger new retrieval
+#         cmd = re.sub(r"\s+", " ", user_input_local.strip().lower())
+#         cmd_map = {
+#             "narrative": "narrative",
+#             "key points": "key_points",
+#             "keypoints": "key_points",
+#             "deep dive": "deep_dive",
+#             "deep-dive": "deep_dive",
+#             "details": "deep_dive",
+#         }
+#         # If a quick command is used without any story context, show a friendly tip
+#         has_context = bool(
+#             ctx
+#             or st.session_state.get("active_story")
+#             or st.session_state.get("last_sources")
+#         )
+#         if cmd in cmd_map and not has_context:
+#             _push_assistant_turn(
+#                 "Quick mode commands like “key points” work after a story is in context — either select a story or ask a question first so I can cite sources. For now, try asking a full question."
+#             )
+#             st.rerun()
+#         if cmd in cmd_map and (
+#             ctx
+#             or st.session_state.get("active_story")
+#             or st.session_state.get("last_sources")
+#         ):
+#             # Resolve a target story: explicit context > last active story > last answer’s primary source
+#             target = ctx
+#             if not target:
+#                 sid = st.session_state.get("active_story")
+#                 if not sid:
+#                     srcs = st.session_state.get("last_sources") or []
+#                     if srcs:
+#                         sid = srcs[0].get("id")
+#                 if sid:
+#                     target = next(
+#                         (x for x in stories if str(x.get("id")) == str(sid)), None
+#                     )
 
-            if target:
-                modes_local = story_modes(target)
-                key = cmd_map[cmd]
-                heading = {
-                    "narrative": "Narrative",
-                    "key_points": "Key points",
-                    "deep_dive": "Deep dive",
-                }[key]
-                answer_md = (
-                    f"**{heading} for _{target.get('title','')} — {target.get('client','')}_**\n\n"
-                    + modes_local.get(key, "")
-                )
+#             if target:
+#                 modes_local = story_modes(target)
+#                 key = cmd_map[cmd]
+#                 heading = {
+#                     "narrative": "Narrative",
+#                     "key_points": "Key points",
+#                     "deep_dive": "Deep dive",
+#                 }[key]
+#                 answer_md = (
+#                     f"**{heading} for _{target.get('title','')} — {target.get('client','')}_**\n\n"
+#                     + modes_local.get(key, "")
+#                 )
 
-                # Prime compact answer state (no assistant bubble)
-                st.session_state["answer_modes"] = modes_local
-                st.session_state["answer_mode"] = key
-                st.session_state["last_answer"] = answer_md
-                st.session_state["last_sources"] = [
-                    {
-                        "id": target.get("id"),
-                        "title": target.get("Title"),
-                        "client": target.get("Client"),
-                    }
-                ]
-                # Show the answer card below the transcript
-                _push_assistant_turn(answer_md)
-                # Do NOT snapshot for command aliases; they don't represent a new question
-                st.rerun()
+#                 # Prime compact answer state (no assistant bubble)
+#                 st.session_state["answer_modes"] = modes_local
+#                 st.session_state["answer_mode"] = key
+#                 st.session_state["last_answer"] = answer_md
+#                 st.session_state["last_sources"] = [
+#                     {
+#                         "id": target.get("id"),
+#                         "title": target.get("Title"),
+#                         "client": target.get("Client"),
+#                     }
+#                 ]
+#                 # Show the answer card below the transcript
+#                 _push_assistant_turn(answer_md)
+#                 # Do NOT snapshot for command aliases; they don't represent a new question
+#                 st.rerun()
 
-        # Normal question → ask backend, persist state, append assistant turn
-        # One-shot context lock: if a story was explicitly selected (chip/CTA),
-        # use that story as context for THIS turn only, then clear the lock.
-        # --- Determine context for THIS turn (one-shot lock) ---
-        ctx_for_this_turn = ctx
-        if st.session_state.pop("__ctx_locked__", False):  # consume the lock
-            try:
-                locked_ctx = get_context_story(stories)
-            except Exception:
-                locked_ctx = None
-            if locked_ctx:
-                ctx_for_this_turn = locked_ctx
+#         # Normal question → ask backend, persist state, append assistant turn
+#         # One-shot context lock: if a story was explicitly selected (chip/CTA),
+#         # use that story as context for THIS turn only, then clear the lock.
+#         # --- Determine context for THIS turn (one-shot lock) ---
+#         ctx_for_this_turn = ctx
+#         if st.session_state.pop("__ctx_locked__", False):  # consume the lock
+#             try:
+#                 locked_ctx = get_context_story(stories)
+#             except Exception:
+#                 locked_ctx = None
+#             if locked_ctx:
+#                 ctx_for_this_turn = locked_ctx
 
-        # --- Ask backend + render result ---
-        with st.status("Searching Matt's experience...", expanded=True) as status:
-            try:
-                # Consume the suggestion flag (one-shot); we don't need its value here
-                st.session_state.pop("__ask_from_suggestion__", None)
+#         # --- Ask backend + render result ---
+#         with st.status("Searching Matt's experience...", expanded=True) as status:
+#             try:
+#                 # Consume the suggestion flag (one-shot); we don't need its value here
+#                 st.session_state.pop("__ask_from_suggestion__", None)
 
-                # Ask is pure semantic; ignore Explore filters here
-                resp = send_to_backend(user_input_local, {}, ctx_for_this_turn, stories)
+#                 # Ask is pure semantic; ignore Explore filters here
+#                 resp = send_to_backend(user_input_local, {}, ctx_for_this_turn, stories)
 
-                # Show confidence after retrieval
-                sources = resp.get("sources", [])
-                if sources:
-                    first_id = str(sources[0].get("id", ""))
-                    scores = st.session_state.get("__pc_last_ids__", {}) or {}
-                    conf = scores.get(first_id)
-                    if conf:
-                        conf_pct = int(float(conf) * 100)
-                        st.write(f"✓ Found relevant stories • {conf_pct}% match confidence")
+#                 # Show confidence after retrieval
+#                 sources = resp.get("sources", [])
+#                 if sources:
+#                     first_id = str(sources[0].get("id", ""))
+#                     scores = st.session_state.get("__pc_last_ids__", {}) or {}
+#                     conf = scores.get(first_id)
+#                     if conf:
+#                         conf_pct = int(float(conf) * 100)
+#                         st.write(f"✓ Found relevant stories • {conf_pct}% match confidence")
 
-                status.update(label="Answer ready!", state="complete", expanded=False)
+#                 status.update(label="Answer ready!", state="complete", expanded=False)
 
-            except Exception as e:
-                status.update(label="Error occurred", state="error")
-                _push_assistant_turn("Sorry, I couldn't generate an answer right now.")
-                st.error(f"Backend error: {e}")
-                st.rerun()
+#             except Exception as e:
+#                 status.update(label="Error occurred", state="error")
+#                 _push_assistant_turn("Sorry, I couldn't generate an answer right now.")
+#                 st.error(f"Backend error: {e}")
+#                 st.rerun()
 
-            else:
-                set_answer(resp)
+#             else:
+#                 set_answer(resp)
 
-                # Add a static snapshot so the answer appears in-order as a bubble,
-                # and suppress the bottom live card once to avoid duplication.
-                if not st.session_state.get(
-                    "ask_last_reason"
-                ) and not st.session_state.get("__sticky_banner__"):
-                    _push_card_snapshot_from_state(stories)
-                    st.session_state["__suppress_live_card_once__"] = True
+#                 # Add a static snapshot so the answer appears in-order as a bubble,
+#                 # and suppress the bottom live card once to avoid duplication.
+#                 if not st.session_state.get(
+#                     "ask_last_reason"
+#                 ) and not st.session_state.get("__sticky_banner__"):
+#                     _push_card_snapshot_from_state(stories)
+#                     st.session_state["__suppress_live_card_once__"] = True
 
-                st.rerun()
+#                 st.rerun()
