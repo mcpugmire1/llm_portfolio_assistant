@@ -333,6 +333,12 @@ def render_landing_page(stories: list):
 
         /* Nicer input styling from wireframe */
         /* Target Streamlit's actual rendered input using data-testid */
+        /* Fix clipped corners by setting overflow visible on parent containers */
+        div[data-testid="stTextInput"],
+        div[data-testid="stTextInput"] > div {
+            overflow: visible !important;
+        }
+
         div[data-testid="stTextInput"] input {
             width: 100% !important;
             padding: 20px 24px !important;
@@ -342,6 +348,7 @@ def render_landing_page(stories: list):
             transition: all 0.2s ease !important;
             background: #FAFAFA !important;
             font-family: inherit !important;
+            overflow: visible !important;
         }
 
         div[data-testid="stTextInput"] input:focus {
@@ -566,11 +573,10 @@ def render_landing_page(stories: list):
         with c1 if i % 2 == 0 else c2:
             if st.button(f"{icon}  {q}", key=f"suggested_{i}", type="secondary", use_container_width=True, disabled=disabled):
                 # Set state and trigger rerun to show loading state
+                # NOTE: Don't set "landing_input" - it's controlled by the widget
                 st.session_state["ask_transcript"] = []
                 st.session_state["processing_suggestion"] = True
                 st.session_state["pending_query"] = q
-                st.session_state["landing_input_value"] = q
-                st.session_state["landing_input"] = q
                 st.session_state["ask_input_value"] = q
                 st.rerun()
 
@@ -580,14 +586,26 @@ def render_landing_page(stories: list):
     # Use columns to keep input and button on same line
     col_input, col_button = st.columns([6, 1])
 
+    # Check if user pressed Enter in the text input (on_change triggers)
+    if st.session_state.get("landing_input_submitted"):
+        user_input_value = st.session_state.get("landing_input", "")
+        if user_input_value and not st.session_state.get("processing_suggestion"):
+            # Set state and trigger rerun to show loading state
+            st.session_state["ask_transcript"] = []
+            st.session_state["processing_suggestion"] = True
+            st.session_state["pending_query"] = user_input_value
+            st.session_state["ask_input_value"] = user_input_value
+            st.session_state["landing_input_submitted"] = False
+            st.rerun()
+        st.session_state["landing_input_submitted"] = False
+
     with col_input:
-        # The text_input uses the key to automatically sync with session state
-        # When we set st.session_state["landing_input"] = question, it appears here
         user_input = st.text_input(
             "Ask me anything — from building MattGPT to leading global programs...",
             key="landing_input",
             label_visibility="collapsed",
-            placeholder="Ask me anything — from building MattGPT to leading global programs..."
+            placeholder="Ask me anything — from building MattGPT to leading global programs...",
+            on_change=lambda: st.session_state.update({"landing_input_submitted": True})
         )
 
     with col_button:
@@ -596,12 +614,10 @@ def render_landing_page(stories: list):
         if st.button("Ask Agy 🐾", key="landing_ask", type="primary", disabled=button_disabled):
             if user_input:
                 # Set state and trigger rerun to show loading state
-                # NOTE: Set ask_transcript FIRST, then our values (so _ensure doesn't clear them)
+                # NOTE: Don't set "landing_input" - it's controlled by the widget
                 st.session_state["ask_transcript"] = []
                 st.session_state["processing_suggestion"] = True
                 st.session_state["pending_query"] = user_input
-                st.session_state["landing_input_value"] = user_input
-                st.session_state["landing_input"] = user_input
                 st.session_state["ask_input_value"] = user_input
                 st.rerun()
 
@@ -635,13 +651,18 @@ def render_landing_page(stories: list):
 
         # Add to transcript
         st.session_state["ask_transcript"].append({"Role": "user", "text": query})
+
+        # Handle case when sources is empty (e.g., nonsense query)
+        sources = result.get("sources", [])
+        first_source = sources[0] if sources else {}
+
         st.session_state["ask_transcript"].append({
             "type": "card",
-            "Title": result.get("sources", [{}])[0].get("title", "Response"),
-            "story_id": result.get("sources", [{}])[0].get("id"),
-            "one_liner": result["answer_md"],
-            "sources": result.get("sources", []),
-            "confidence": result.get("sources", [{}])[0].get("score", 0.8) if result.get("sources") else 0.8,
+            "Title": first_source.get("title", "Response"),
+            "story_id": first_source.get("id"),
+            "one_liner": result.get("answer_md", ""),
+            "sources": sources,
+            "confidence": first_source.get("score", 0.8) if sources else 0.8,
             "modes": result.get("modes", {}),
         })
 
