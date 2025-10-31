@@ -33,9 +33,9 @@ import os, re, time, textwrap, json
 
 def render_ask_mattgpt(stories: list):
     """Main entry point for Ask MattGPT page."""
-        
-    _ensure_ask_bootstrap()
-        
+    # NOTE: Don't call _ensure_ask_bootstrap() here - it clears ask_input_value
+    # which breaks the pending_query flow
+
     if not st.session_state.get("ask_transcript"):
         render_landing_page(stories)
     else:
@@ -47,82 +47,6 @@ def render_ask_mattgpt(stories: list):
 # 2. LANDING PAGE (EMPTY STATE)
 # ====================
 
-def _render_landing_with_loading(stories: list):
-    """Render landing page in loading state while processing query."""
-    # Get the pending query
-    query = st.session_state.get("pending_query", "")
-
-    # Render same CSS as main landing page
-    st.markdown("""
-        <style>
-        /* AGGRESSIVE SPACING REMOVAL */
-        .main {
-            padding-top: 0 !important;
-        }
-
-        .main .block-container {
-            padding-top: 0 !important;
-            margin-top: 0 !important;
-        }
-        </style>
-    """, unsafe_allow_html=True)
-
-    # Render header
-    st.markdown("""
-    <div class="ask-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; margin: -2rem 0 0 0; color: white; display: flex; justify-content: space-between; align-items: center;">
-        <div class="header-content" style="display: flex; justify-content: space-between; align-items: center;">
-            <div style="display: flex; align-items: center; gap: 24px;">
-                <img style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.2);"
-                    src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar_64_dark.png"
-                    alt="Agy"/>
-                <div>
-                    <h1 style="font-size: 32px; margin: 0 0 8px 0; color: white;">Ask MattGPT</h1>
-                    <p style="font-size: 16px; margin: 0; opacity: 0.95;">Meet Agy 🐾 — Tracking down insights from 20+ years of transformation experience</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    # Show loading message with the exact styling requested
-    st.markdown("""
-<div style='background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%);
-            border: 2px solid #667eea40;
-            border-radius: 12px;
-            padding: 16px 24px;
-            margin: 20px auto;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            max-width: 600px;'>
-    <div style='font-size: 20px; animation: bounce 1s infinite;'>🐾</div>
-    <div style='color: #667eea; font-weight: 500;'>Agy is tracking down insights...</div>
-</div>
-<style>@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }</style>
-""", unsafe_allow_html=True)
-
-    # Process the query
-    result = send_to_backend(query, {}, None, stories)
-
-    # Add to transcript
-    st.session_state["ask_transcript"].append({"Role": "user", "text": query})
-    st.session_state["ask_transcript"].append({
-        "type": "card",
-        "Title": result.get("sources", [{}])[0].get("title", "Response"),
-        "story_id": result.get("sources", [{}])[0].get("id"),
-        "one_liner": result["answer_md"],
-        "sources": result.get("sources", []),
-        "confidence": result.get("sources", [{}])[0].get("score", 0.8) if result.get("sources") else 0.8,
-        "modes": result.get("modes", {}),
-    })
-
-    # Clear processing state
-    st.session_state["processing_suggestion"] = False
-    st.session_state["pending_query"] = None
-
-    # Rerun to show conversation view
-    st.rerun()
-
 def render_landing_page(stories: list):
     """
     Render the Ask MattGPT landing page (empty state) matching the wireframe.
@@ -132,12 +56,6 @@ def render_landing_page(stories: list):
     # Initialize processing flag
     if "processing_suggestion" not in st.session_state:
         st.session_state["processing_suggestion"] = False
-
-    # If we're in processing state, handle the query processing first
-    if st.session_state.get("processing_suggestion") and st.session_state.get("pending_query"):
-        # Render page with loading state, then process
-        _render_landing_with_loading(stories)
-        return
 
     # === PAGE-SPECIFIC CSS ONLY ===
     st.markdown("""
@@ -595,13 +513,12 @@ def render_landing_page(stories: list):
         with c1 if i % 2 == 0 else c2:
             if st.button(f"{icon}  {q}", key=f"suggested_{i}", type="secondary", use_container_width=True, disabled=disabled):
                 # Set state and trigger rerun to show loading state
+                st.session_state["ask_transcript"] = []
                 st.session_state["processing_suggestion"] = True
+                st.session_state["pending_query"] = q
                 st.session_state["landing_input_value"] = q
                 st.session_state["landing_input"] = q
                 st.session_state["ask_input_value"] = q
-                st.session_state["pending_query"] = q
-                st.session_state["ask_transcript"] = []
-                _ensure_ask_bootstrap()
                 st.rerun()
 
     # === INPUT AREA ===
@@ -611,10 +528,11 @@ def render_landing_page(stories: list):
     col_input, col_button = st.columns([6, 1])
 
     with col_input:
+        # The text_input uses the key to automatically sync with session state
+        # When we set st.session_state["landing_input"] = question, it appears here
         user_input = st.text_input(
             "Ask me anything — from building MattGPT to leading global programs...",
             key="landing_input",
-            value=st.session_state.get("landing_input", ""),
             label_visibility="collapsed",
             placeholder="Ask me anything — from building MattGPT to leading global programs..."
         )
@@ -625,17 +543,62 @@ def render_landing_page(stories: list):
         if st.button("Ask Agy 🐾", key="landing_ask", type="primary", disabled=button_disabled):
             if user_input:
                 # Set state and trigger rerun to show loading state
+                # NOTE: Set ask_transcript FIRST, then our values (so _ensure doesn't clear them)
+                st.session_state["ask_transcript"] = []
                 st.session_state["processing_suggestion"] = True
+                st.session_state["pending_query"] = user_input
                 st.session_state["landing_input_value"] = user_input
                 st.session_state["landing_input"] = user_input
                 st.session_state["ask_input_value"] = user_input
-                st.session_state["pending_query"] = user_input
-                st.session_state["ask_transcript"] = []
-                _ensure_ask_bootstrap()
                 st.rerun()
 
     st.markdown('</div>', unsafe_allow_html=True)
     st.markdown('<p class="powered-by-text">Powered by OpenAI GPT-4o-mini with semantic search across 120+ project case studies</p>', unsafe_allow_html=True)
+
+    # === PROCESS PENDING QUERY (if in processing state) ===
+    # This runs AFTER the UI is rendered, so user sees disabled buttons and styled message
+    if st.session_state.get("processing_suggestion") and st.session_state.get("pending_query"):
+        query = st.session_state.get("pending_query")
+
+        # Show the styled loading message in the placeholder
+        with loading_placeholder:
+            st.markdown("""
+<div style='background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%);
+            border: 2px solid #667eea40;
+            border-radius: 12px;
+            padding: 16px 24px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;'>
+    <div style='font-size: 20px; animation: bounce 1s infinite;'>🐾</div>
+    <div style='color: #667eea; font-weight: 500;'>Agy is tracking down insights...</div>
+</div>
+<style>@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }</style>
+""", unsafe_allow_html=True)
+
+        # Process the query
+        result = send_to_backend(query, {}, None, stories)
+
+        # Add to transcript
+        st.session_state["ask_transcript"].append({"Role": "user", "text": query})
+        st.session_state["ask_transcript"].append({
+            "type": "card",
+            "Title": result.get("sources", [{}])[0].get("title", "Response"),
+            "story_id": result.get("sources", [{}])[0].get("id"),
+            "one_liner": result["answer_md"],
+            "sources": result.get("sources", []),
+            "confidence": result.get("sources", [{}])[0].get("score", 0.8) if result.get("sources") else 0.8,
+            "modes": result.get("modes", {}),
+        })
+
+        # Clear processing state
+        st.session_state["processing_suggestion"] = False
+        st.session_state["pending_query"] = None
+        loading_placeholder.empty()
+
+        # Rerun to show conversation view
+        st.rerun()
 
     # === ADD FOOTER ===
     from ui.components.footer import render_footer
