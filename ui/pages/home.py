@@ -83,5 +83,6 @@ def render_home_page():
     # Category cards
     render_category_cards()
 
-    # Footer
+    # === ADD FOOTER ===
+    from ui.components.footer import render_footer
     render_footer()

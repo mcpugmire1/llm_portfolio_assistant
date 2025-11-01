@@ -16,7 +16,7 @@ Refactored to a modular structure with clear separation of concerns:
 
 ---
 
-### Current Architecture (October 22, 2025)
+### Current Architecture (October 28, 2025)
 ```
 llm_portfolio_assistant/
 ├── app.py                          # Pure router (1,014 lines) ✅
@@ -33,13 +33,15 @@ llm_portfolio_assistant/
 │   ├── validation.py               # is_nonsense, token_overlap_ratio
 │   ├── scoring.py                  # _keyword_score, _hybrid_score
 │   ├── filters.py                  # matches_filters
-│   └── ui_helpers.py               # safe_container, render_no_match_banner, dbg
+│   ├── ui_helpers.py               # safe_container, render_no_match_banner, dbg
+│   └── ask_helpers.py              # Ask MattGPT UI helpers (NEW)
 │
 ├── services/                       # Business logic & external APIs
 │   ├── __init__.py
 │   ├── pinecone_service.py         # Pinecone client & vector search
 │   ├── rag_service.py              # Semantic search orchestration
-│   └── story_service.py            # Story retrieval logic
+│   ├── story_service.py            # Story retrieval logic
+│   └── ask_service.py              # Ask MattGPT RAG orchestration (NEW)
 │
 ├── ui/
 │   ├── components/
@@ -51,10 +53,10 @@ llm_portfolio_assistant/
 │   │   ├── __init__.py
 │   │   ├── home.py                 # Home page (38 lines)
 │   │   ├── explore_stories.py      # Stories browser (1,306 lines)
-│   │   ├── ask_mattgpt.py          # RAG interface (1,885 lines)
+│   │   ├── ask_mattgpt.py          # Ask MattGPT landing + conversation (700 lines)
 │   │   ├── about_matt.py           # About page (467 lines)
-│   │   ├── banking_landing.py      # Banking landing (14 lines, wraps legacy)
-│   │   └── cross_industry_landing.py  # Cross-industry landing (14 lines, wraps legacy)
+│   │   ├── banking_landing.py      # Banking landing (413 lines)
+│   │   └── cross_industry_landing.py  # Cross-industry landing (413 lines)
 │   │
 │   ├── styles/
 │   │   ├── __init__.py

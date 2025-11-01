@@ -465,3 +465,7 @@ def render_about_matt():
         )
         if st.button("Schedule Coffee", key="coffee_chat", use_container_width=True):
             st.info("Reach out via email or LinkedIn to schedule an in-person meeting")
+    
+    # === ADD FOOTER ===
+    from ui.components.footer import render_footer
+    render_footer()

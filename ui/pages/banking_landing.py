@@ -410,4 +410,7 @@ def render_banking_landing():
     }
     </style>
     """
-    st.markdown(footer_html, unsafe_allow_html=True)
+    # st.markdown(footer_html, unsafe_allow_html=True)
+    # === ADD FOOTER ===
+    from ui.components.footer import render_footer
+    render_footer()

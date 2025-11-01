@@ -14,13 +14,22 @@ def css_once():
     st.markdown(
         """
         <style>
-        /* Hide Streamlit default header and menu */
+        /* Minimize header height but keep toolbar visible for hamburger menu */
         header[data-testid="stHeader"] {
-            display: none !important;
+            height: 0 !important;
+            min-height: 0 !important;
+            padding: 0 !important;
+            overflow: visible !important;
         }
-        #MainMenu {
-            visibility: hidden !important;
+
+        /* Position toolbar in top-right corner */
+        header[data-testid="stHeader"] [data-testid="stToolbar"] {
+            position: fixed !important;
+            top: 10px !important;
+            right: 10px !important;
+            z-index: 999999 !important;
         }
+
         footer {
             visibility: hidden !important;
         }
