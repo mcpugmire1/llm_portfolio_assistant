@@ -28,18 +28,68 @@ def apply_global_styles():
            STREAMLIT OVERRIDES
            ======================================== */
 
-        /* Hide Streamlit default header and footer (but keep settings menu) */
+        /* Show header with transparent background to keep hamburger menu */
         header[data-testid="stHeader"] {
+            background: transparent !important;
+            display: block !important;
+            visibility: visible !important;
+        }
+
+        /* Keep toolbar visible for hamburger menu */
+        header[data-testid="stHeader"] [data-testid="stToolbar"] {
+            display: flex !important;
+            visibility: visible !important;
+        }
+
+        /* Hide the "Deploy" button but keep hamburger */
+        header[data-testid="stHeader"] .stDeployButton,
+        header[data-testid="stHeader"] button[kind="header"]:has(svg):not(:has([data-testid="baseButton-header"])) {
             display: none !important;
         }
+
         /* Keep #MainMenu visible for settings access */
         footer {
             visibility: hidden !important;
         }
 
+        /* Hide status widgets but NOT the header */
+        div[data-testid="stStatusWidget"]:not(header *) {
+            display: none !important;
+        }
+
+        /* Hide decorations but NOT in header */
+        .stApp [data-testid="stAppViewContainer"] > div[data-testid="stDecoration"]:not(header *) {
+            display: none !important;
+        }
+        /* Hide Streamlit toasts and notifications */
+        [data-testid="stNotification"],
+        [data-testid="stToast"],
+        div[data-baseweb="toast"],
+        .st-emotion-cache-notification {
+            display: none !important;
+        }
+        /* Hide ONLY Streamlit's default alert/info boxes, NOT our custom markdown */
+        .stAlert:not(:has(img[class*="thinking-ball"])),
+        [data-testid="stAlert"]:not(:has(img[class*="thinking-ball"])),
+        div[data-baseweb="notification"]:not(:has(img[class*="thinking-ball"])),
+        div[kind="info"]:not(:has(img[class*="thinking-ball"])) {
+            display: none !important;
+        }
+
         /* Remove default top padding */
         .main > div:first-child {
             padding-top: 0 !important;
+        }
+
+        /* Consistent navbar alignment across all pages */
+        .stMainBlockContainer {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+        }
+
+        .stMainBlockContainer > div[data-testid="stVerticalBlock"]:first-child {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
         }
 
         /* Override Streamlit's default background for bordered containers */

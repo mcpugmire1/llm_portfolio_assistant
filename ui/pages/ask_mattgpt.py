@@ -1006,18 +1006,11 @@ def render_conversation_view(stories: list):
             opacity: 0.5 !important;
         }
 
-        /* Chat input styling - fixed at bottom, always on top */
+        /* Chat input styling - keep it simple, natural flow like original */
         [data-testid="stChatInput"] {
             padding: 20px 30px !important;
             background: white !important;
             border-top: 2px solid #e0e0e0 !important;
-            position: fixed !important;
-            bottom: 0 !important;
-            left: 0 !important;
-            right: 0 !important;
-            width: 100% !important;
-            z-index: 999999 !important;
-            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1) !important;
         }
 
         [data-testid="stChatInput"] input {
