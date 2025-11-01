@@ -60,28 +60,50 @@ def render_landing_page(stories: list):
     # === PAGE-SPECIFIC CSS ONLY ===
     st.markdown("""
         <style>
+        /* Fine-tune Ask MattGPT navbar to match other pages */
+        div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) {
+            margin-top: 2.25rem !important;
+        }
+
         /* AGGRESSIVE SPACING REMOVAL */
         .main {
             padding-top: 0 !important;
         }
-        
+
         .main .block-container {
             padding-top: 0 !important;
             margin-top: 0 !important;
         }
-        
+
+        .stMainBlockContainer {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+        }
+
+        .stMainBlockContainer > div[data-testid="stVerticalBlock"]:first-child {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+        }
+
         section[data-testid="stMain"] {
             padding-top: 0 !important;
         }
-        
+
         div[data-testid="stAppViewContainer"] {
             padding-top: 0 !important;
         }
-        
-        /* Kill the gap after header */
+
+        /* Keep header visible with hamburger menu on top */
         header[data-testid="stHeader"] {
             margin-bottom: 0 !important;
             padding-bottom: 0 !important;
+            z-index: 999999 !important;
+            position: relative !important;
+        }
+
+        header[data-testid="stHeader"] [data-testid="stToolbar"] {
+            display: flex !important;
+            visibility: visible !important;
         }
         
         /* Remove spacing from first markdown element */
@@ -90,11 +112,29 @@ def render_landing_page(stories: list):
             padding-top: 0 !important;
         }
 
-        /* Purple header - pull up slightly if needed */
+        /* Override Streamlit's default markdown container spacing */
+        .main > div:first-child .stMarkdownContainer {
+            margin-bottom: 0 !important;
+            padding-top: 0 !important;
+        }
+
+        /* Target the first element container after the nav layout wrapper */
+        div[data-testid="stLayoutWrapper"] + div[data-testid="stElementContainer"] {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+
+        /* Also ensure the markdown container inside doesn't add spacing */
+        div[data-testid="stLayoutWrapper"] + div[data-testid="stElementContainer"] .stMarkdownContainer {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+
+        /* Purple header - pull up to eliminate white space */
         .ask-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 30px;
-            margin: -2rem 0 0 0 !important;  /* Slight negative top margin */
+            margin: -2rem 0 0 0 !important;  /* Compensate for Streamlit container spacing */
             color: white;
             display: flex;
             justify-content: space-between;
@@ -148,23 +188,35 @@ def render_landing_page(stories: list):
             transform: translateY(-2px);
         }
 
-        /* Status bar */
+        /* Status bar - force parent containers to full width */
         .status-bar {
-            display: flex;
-            gap: 32px;
-            justify-content: center;
-            padding: 16px 24px;
-            background: rgba(255, 255, 255, 0.95);
-            border-bottom: 1px solid #E5E7EB;
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            gap: 24px !important;
+            justify-content: center !important;
+            padding: 12px 30px !important;
+            background: #f8f9fa !important;
+            border-bottom: 1px solid #e0e0e0 !important;
             margin: 0 !important;
+            overflow-x: auto !important;
+            width: 100vw !important;
+            max-width: 100vw !important;
+            margin-left: calc(-50vw + 50%) !important;
+            margin-right: calc(-50vw + 50%) !important;
         }
 
         .status-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            color: #6B7280;
+            display: flex !important;
+            align-items: center !important;
+            gap: 6px !important;
+            font-size: 13px !important;
+            color: #6B7280 !important;
+            white-space: nowrap !important;
+            flex-shrink: 0 !important;
+        }
+
+        .status-item span {
+            white-space: nowrap !important;
         }
 
         .status-value {
@@ -552,6 +604,36 @@ def render_landing_page(stories: list):
     # Placeholder for loading message - positioned before "TRY ASKING" section
     loading_placeholder = st.empty()
 
+    # Show loading immediately if processing
+    if st.session_state.get("processing_suggestion"):
+        with loading_placeholder:
+            st.markdown("""
+<style>
+@keyframes chaseAnimationEarly {
+    0% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
+    33.33% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_2.png'); }
+    66.66% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_3.png'); }
+    100% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
+}
+.thinking-ball-early {
+    width: 48px;
+    height: 48px;
+    animation: chaseAnimationEarly 0.9s steps(3) infinite;
+}
+</style>
+<div style='background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%) !important;
+            border: 2px solid #667eea40 !important;
+            border-radius: 12px;
+            padding: 16px 24px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;'>
+    <img class="thinking-ball-early" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png" alt="Thinking"/>
+    <div style='color: #667eea !important; font-weight: 500;'>🐾 Tracking down insights...</div>
+</div>
+""", unsafe_allow_html=True)
+
     st.markdown('<div class="suggested-title">TRY ASKING:</div>', unsafe_allow_html=True)
 
     # === SUGGESTED QUESTION BUTTONS ===
@@ -632,18 +714,30 @@ def render_landing_page(stories: list):
         # Show the styled loading message in the placeholder
         with loading_placeholder:
             st.markdown("""
-<div style='background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%);
-            border: 2px solid #667eea40;
+<style>
+@keyframes chaseAnimation {
+    0% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
+    33.33% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_2.png'); }
+    66.66% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_3.png'); }
+    100% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
+}
+.thinking-ball {
+    width: 48px;
+    height: 48px;
+    animation: chaseAnimation 0.9s steps(3) infinite;
+}
+</style>
+<div style='background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%) !important;
+            border: 2px solid #667eea40 !important;
             border-radius: 12px;
             padding: 16px 24px;
             margin: 20px 0;
             display: flex;
             align-items: center;
             gap: 12px;'>
-    <div style='font-size: 20px; animation: bounce 1s infinite;'>🐾</div>
-    <div style='color: #667eea; font-weight: 500;'>Agy is tracking down insights...</div>
+    <img class="thinking-ball" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png" alt="Thinking"/>
+    <div style='color: #667eea !important; font-weight: 500;'>🐾 Tracking down insights...</div>
 </div>
-<style>@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }</style>
 """, unsafe_allow_html=True)
 
         # Process the query
@@ -652,18 +746,15 @@ def render_landing_page(stories: list):
         # Add to transcript
         st.session_state["ask_transcript"].append({"Role": "user", "text": query})
 
-        # Handle case when sources is empty (e.g., nonsense query)
+        # Add conversational answer (wireframe style)
         sources = result.get("sources", [])
-        first_source = sources[0] if sources else {}
+        answer_text = result.get("answer_md") or result.get("answer", "")
 
         st.session_state["ask_transcript"].append({
-            "type": "card",
-            "Title": first_source.get("title", "Response"),
-            "story_id": first_source.get("id"),
-            "one_liner": result.get("answer_md", ""),
-            "sources": sources,
-            "confidence": first_source.get("score", 0.8) if sources else 0.8,
-            "modes": result.get("modes", {}),
+            "type": "conversational",
+            "Role": "assistant",
+            "text": answer_text,
+            "sources": sources
         })
 
         # Clear processing state
@@ -693,12 +784,47 @@ def render_conversation_view(stories: list):
     # === PAGE-SPECIFIC CSS ONLY (NO NAVBAR) ===
     st.markdown("""
         <style>
-        /* Keep existing conversation CSS - just remove navbar styles */
+        /* Fine-tune Ask MattGPT navbar to match other pages */
+        div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) {
+            margin-top: 2.75rem !important;
+        }
+
+        /* Keep Streamlit header visible with hamburger menu on top */
+        header[data-testid="stHeader"] {
+            z-index: 999999 !important;
+            position: relative !important;
+            display: block !important;
+            visibility: visible !important;
+        }
+
+        header[data-testid="stHeader"] [data-testid="stToolbar"] {
+            display: flex !important;
+            visibility: visible !important;
+        }
+
+        /* Override Streamlit's default markdown container spacing */
+        .main > div:first-child .stMarkdownContainer {
+            margin-bottom: 0 !important;
+            padding-top: 0 !important;
+        }
+
+        /* Target the first element container after the nav layout wrapper */
+        div[data-testid="stLayoutWrapper"] + div[data-testid="stElementContainer"] {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+
+        /* Also ensure the markdown container inside doesn't add spacing */
+        div[data-testid="stLayoutWrapper"] + div[data-testid="stElementContainer"] .stMarkdownContainer {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+
         /* Chat interface header */
         .conversation-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 30px;
-            margin: -2rem 0 0 0 !important;  
+            margin: -2rem 0 0 0 !important;  /* Compensate for Streamlit container spacing */
             color: white;
             display: flex;
             justify-content: space-between;
@@ -802,15 +928,8 @@ def render_conversation_view(stories: list):
         }
 
         .thinking-icon {
-            width: 16px;
-            height: 16px;
-            animation: tennisBallCycle 0.9s infinite;
-        }
-
-        @keyframes tennisBallCycle {
-            0%, 100% { content: '🎾'; }
-            33% { content: '🎾'; }
-            66% { content: '🎾'; }
+            width: 48px;
+            height: 48px;
         }
 
         /* Chat messages styling */
@@ -981,9 +1100,21 @@ def render_conversation_view(stories: list):
         }
 
         .action-btn.helpful-active {
-            background: #10B981;
-            color: white;
-            border-color: #10B981;
+            background: #10B981 !important;
+            color: white !important;
+            border-color: #10B981 !important;
+        }
+
+        .action-btn.helpful-active::after {
+            content: " ✓";
+        }
+
+        /* Answer card wrapper for AI responses */
+        .answer-card {
+            background: white;
+            border-radius: 16px;
+            padding: 0;
+            margin-bottom: 24px;
         }
 
         /* Message spacing */
@@ -994,6 +1125,143 @@ def render_conversation_view(stories: list):
         .message-spacing {
             margin-bottom: 24px;
         }
+
+        /* Source chips container styling */
+        .sources-tight {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .section-tight {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #7f8c8d;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .sources-grid {
+            display: grid;
+            gap: 8px;
+        }
+
+        /* Style Streamlit buttons inside sources-tight to look like chips */
+        .sources-tight button[kind="secondary"],
+        .sources-tight button {
+            background: #F3F4F6 !important;
+            border: 2px solid #E5E7EB !important;
+            border-radius: 8px !important;
+            font-size: 14px !important;
+            font-weight: 500 !important;
+            color: #2563EB !important;
+            padding: 8px 16px !important;
+            transition: all 0.2s ease !important;
+            height: auto !important;
+            min-height: 44px !important;
+        }
+
+        .sources-tight button:hover {
+            background: #EEF2FF !important;
+            border-color: #8B5CF6 !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.2) !important;
+        }
+
+        /* Hide ONLY Streamlit's built-in status/spinner widgets - NOT our custom status bar */
+        [data-testid="stStatusWidget"],
+        [data-testid="stStatus"],
+        [class*="stStatus"],
+        .stSpinner,
+        [data-testid="stSpinner"],
+        [data-testid="stAlert"] {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            height: 0 !important;
+            max-height: 0 !important;
+            overflow: hidden !important;
+        }
+
+        /* Explicitly SHOW our custom status bars */
+        .status-bar,
+        .status-bar-container,
+        div.status-bar,
+        div.status-bar-container {
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            height: auto !important;
+            max-height: none !important;
+        }
+
+        /* Status bar green dot with pulse animation */
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #10B981;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        /* Pill container for view mode buttons */
+        .pill-container {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .pill-narrative, .pill-keypoints, .pill-deepdive {
+            display: inline-block;
+        }
+
+        /* 5P Summary quote styling */
+        .fivep-quote {
+            font-style: italic;
+            color: #555;
+            padding: 12px 16px;
+            border-left: 3px solid #8B5CF6;
+            background: #f9f9f9;
+            margin: 12px 0;
+            border-radius: 4px;
+            line-height: 1.6;
+        }
+
+        .fivep-unclamped {
+            /* No max-height restriction */
+        }
+
+        /* Badge row for tags and personas */
+        .badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 12px 0;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            background: #f5f5f5;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 12px;
+            color: #555;
+        }
+
         /* Your existing conversation CSS goes here unchanged */
         </style>
     """, unsafe_allow_html=True)
@@ -1034,14 +1302,41 @@ def render_conversation_view(stories: list):
     </script>
     """, unsafe_allow_html=True)
 
-    # Hidden button for "How it works" (triggered by header button)
-    if st.button("🔧 How it works", key="how_works_top"):
+    # Wrap button in a container div to target it specifically
+    st.markdown('<div class="how-agy-button-wrapper">', unsafe_allow_html=True)
+
+    # Style "How Agy searches" button to match header button
+    st.markdown("""
+    <style>
+    /* Target only the button inside our wrapper */
+    .how-agy-button-wrapper button {
+        background: rgba(139, 92, 246, 0.1) !important;
+        border: 2px solid rgba(139, 92, 246, 0.3) !important;
+        border-radius: 20px !important;
+        color: #667eea !important;
+        padding: 0.5rem 1.25rem !important;
+        font-size: 14px !important;
+        font-weight: 500 !important;
+        transition: all 0.2s ease !important;
+    }
+
+    .how-agy-button-wrapper button:hover {
+        background: rgba(139, 92, 246, 0.15) !important;
+        border-color: rgba(139, 92, 246, 0.5) !important;
+        transform: translateY(-1px) !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    if st.button("🔧 How Agy searches", key="how_works_top"):
         st.session_state["show_how_modal"] = not st.session_state.get(
             "show_how_modal", False
         )
         st.rerun()
 
-    # Status bar matching the spec
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    # === STATUS BAR === (matches landing page exactly)
     st.markdown("""
     <div class="status-bar">
         <div class="status-item">
@@ -1276,40 +1571,61 @@ def render_conversation_view(stories: list):
             _push_card_snapshot_from_state(stories)
             st.session_state["__pending_card_snapshot__"] = False
         _push_user_turn(pending)
-        with st.status("Searching Matt's experience...", expanded=True) as status:
-            try:
-                # Ask is pure semantic; ignore Explore filters here
-                resp = send_to_backend(pending, {}, ctx, stories)
 
-                # Show confidence after retrieval
-                sources = resp.get("sources", [])
-                if sources:
-                    first_id = str(sources[0].get("id", ""))
-                    scores = st.session_state.get("__pc_last_ids__", {}) or {}
-                    conf = scores.get(first_id)
-                    if conf:
-                        conf_pct = int(float(conf) * 100)
-                        st.write(f"✓ Found relevant stories • {conf_pct}% match confidence")
+        # Show branded loading indicator
+        loading_msg = st.empty()
+        loading_msg.markdown("""
+<style>
+@keyframes chaseAnimationChip {
+    0% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
+    33.33% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_2.png'); }
+    66.66% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_3.png'); }
+    100% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
+}
+.thinking-ball-chip {
+    width: 48px;
+    height: 48px;
+    animation: chaseAnimationChip 0.9s steps(3) infinite;
+}
+</style>
+<div style='background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%) !important;
+            border: 2px solid #667eea40 !important;
+            border-radius: 12px;
+            padding: 16px 24px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;'>
+    <img class="thinking-ball-chip" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png" alt="Thinking"/>
+    <div style='color: #667eea !important; font-weight: 500;'>🐾 Tracking down insights...</div>
+</div>
+""", unsafe_allow_html=True)
 
-                status.update(label="Answer ready!", state="complete", expanded=False)
+        try:
+            # Ask is pure semantic; ignore Explore filters here
+            resp = send_to_backend(pending, {}, ctx, stories)
 
-            except Exception as e:
-                    status.update(label="Error occurred", state="error")
-                    print(f"DEBUG: send_to_backend failed: {e}")
-                    import traceback
-                    traceback.print_exc()
-                    _push_assistant_turn(f"Error: {str(e)}")
-                    st.rerun()
+            # Clear loading message
+            loading_msg.empty()
 
-            else:
-                set_answer(resp)
-                # If no banner is active, append a static card snapshot now so it
-                # appears in-order as a chat bubble; also suppress the bottom live card once.
-                if not st.session_state.get(
-                    "ask_last_reason"
-                ) and not st.session_state.get("__sticky_banner__"):
-                    _push_card_snapshot_from_state(stories)
-                    st.session_state["__suppress_live_card_once__"] = True
+        except Exception as e:
+            loading_msg.empty()
+            print(f"DEBUG: send_to_backend failed: {e}")
+            import traceback
+            traceback.print_exc()
+            _push_assistant_turn(f"Error: {str(e)}")
+            st.rerun()
+
+        else:
+            set_answer(resp)
+            # Push conversational answer instead of card snapshot (wireframe style)
+            if not st.session_state.get(
+                "ask_last_reason"
+            ) and not st.session_state.get("__sticky_banner__"):
+                answer_text = resp.get("answer_md") or resp.get("answer", "")
+                sources = resp.get("sources", []) or []
+                _push_conversational_answer(answer_text, sources)
+                st.session_state["__suppress_live_card_once__"] = True
                 # If a chip click requested banner clear, perform it now after answer set
                 if st.session_state.pop("__clear_banner_after_answer__", False):
                     st.session_state.pop("ask_last_reason", None)
@@ -1343,7 +1659,7 @@ def render_conversation_view(stories: list):
     # 4) One‑shot nonsense/off‑domain banner appears AFTER transcript
     rendered_banner = False
     if st.session_state.get("ask_last_reason"):
-        with st.chat_message("assistant"):
+        with st.chat_message("assistant", avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar_48_dark.png"):
             render_no_match_banner(
                 reason=st.session_state.get("ask_last_reason", ""),
                 query=st.session_state.get("ask_last_query", ""),
@@ -1382,7 +1698,7 @@ def render_conversation_view(stories: list):
             or dec == "no_overlap+low_conf"
         )
         if no_match_decision and not st.session_state.get("last_sources"):
-            with st.chat_message("assistant"):
+            with st.chat_message("assistant", avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar_48_dark.png"):
                 render_no_match_banner(
                     reason=dec or "no_match",
                     query=st.session_state.get("__ask_dbg_prompt", ""),
@@ -1405,22 +1721,56 @@ def render_conversation_view(stories: list):
         _primary = next((s for s in stories if str(s.get("id")) == _sid), None)
     # Suppress the bottom live card when:
     #  - a banner was rendered this run; or
-    #  - we already have at least one static card snapshot in the transcript
-    has_snapshot_card = any(
-        (isinstance(x, dict) and x.get("type") == "card")
+    #  - we already have a conversational answer in the transcript
+    has_conversational_answer = any(
+        (isinstance(x, dict) and x.get("type") == "conversational")
         for x in st.session_state.get("ask_transcript", [])
     )
     if (
         not rendered_banner
-        and not has_snapshot_card
+        and not has_conversational_answer
         and not st.session_state.get("__suppress_live_card_once__")
-        and (_m or _primary or st.session_state.get("last_answer"))
+        and st.session_state.get("last_answer")
     ):
-        # Always render the bottom live card so pills are available.
-        # Snapshot holds only header + one-liner + sources to avoid duplicate body text.
-        render_answer_card_compact(
-            _primary or {"title": "Answer"}, _m, stories, "answer_mode"
-        )
+        # Render live conversational answer (wireframe style)
+        # This only shows if the answer hasn't been added to transcript yet
+        with st.chat_message("assistant", avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar_48_dark.png"):
+            st.markdown(st.session_state.get("last_answer", ""))
+
+            # Show Related Projects
+            if _srcs:
+                st.markdown("""
+                <div style='margin-top: 16px; padding-top: 16px; border-top: 1px solid #e0e0e0;'>
+                    <div style='font-size: 12px; text-transform: uppercase; color: #7f8c8d; margin-bottom: 12px; font-weight: 600;'>
+                        📚 RELATED PROJECTS
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+
+                for j, src in enumerate(_srcs[:3]):
+                    title = src.get("title") or src.get("Title", "")
+                    client = src.get("client") or src.get("Client", "")
+                    label = f"🔗 {client} - {title}" if client and title else f"🔗 {title}"
+
+                    if st.button(label, key=f"live_related_proj_{j}", use_container_width=False):
+                        st.session_state["active_story"] = src.get("id")
+                        st.session_state["__ctx_locked__"] = True
+                        st.rerun()
+
+            # Action buttons
+            st.markdown("""
+            <div class="action-buttons">
+                <button class="action-btn" onclick="this.classList.toggle('helpful-active')">
+                    👍 Helpful
+                </button>
+                <button class="action-btn" onclick="navigator.clipboard.writeText(this.closest('[data-testid=stChatMessage]').innerText); this.textContent='✓ Copied!';">
+                    📋 Copy
+                </button>
+                <button class="action-btn" onclick="alert('Share functionality coming soon!')">
+                    🔗 Share
+                </button>
+            </div>
+            """, unsafe_allow_html=True)
 
     # Reset one-shot suppression flag after a render cycle
     if st.session_state.get("__suppress_live_card_once__"):
@@ -1528,44 +1878,65 @@ def render_conversation_view(stories: list):
                 ctx_for_this_turn = locked_ctx
 
         # --- Ask backend + render result ---
-        with st.status("Searching Matt's experience...", expanded=True) as status:
-            try:
-                # Consume the suggestion flag (one-shot); we don't need its value here
-                st.session_state.pop("__ask_from_suggestion__", None)
+        # Show branded loading indicator
+        loading_container = st.empty()
+        with loading_container:
+            st.markdown("""
+<style>
+@keyframes chaseAnimation {
+    0% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
+    33.33% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_2.png'); }
+    66.66% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_3.png'); }
+    100% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
+}
+.thinking-ball-conv {
+    width: 48px;
+    height: 48px;
+    animation: chaseAnimation 0.9s steps(3) infinite;
+}
+</style>
+<div style='background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%);
+            border: 2px solid #667eea40;
+            border-radius: 12px;
+            padding: 16px 24px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;'>
+    <img class="thinking-ball-conv" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png" alt="Thinking"/>
+    <div style='color: #667eea; font-weight: 500;'>🐾 Tracking down insights...</div>
+</div>
+""", unsafe_allow_html=True)
 
-                # Ask is pure semantic; ignore Explore filters here
-                resp = send_to_backend(user_input_local, {}, ctx_for_this_turn, stories)
+        try:
+            # Consume the suggestion flag (one-shot); we don't need its value here
+            st.session_state.pop("__ask_from_suggestion__", None)
 
-                # Show confidence after retrieval
-                sources = resp.get("sources", [])
-                if sources:
-                    first_id = str(sources[0].get("id", ""))
-                    scores = st.session_state.get("__pc_last_ids__", {}) or {}
-                    conf = scores.get(first_id)
-                    if conf:
-                        conf_pct = int(float(conf) * 100)
-                        st.write(f"✓ Found relevant stories • {conf_pct}% match confidence")
+            # Ask is pure semantic; ignore Explore filters here
+            resp = send_to_backend(user_input_local, {}, ctx_for_this_turn, stories)
 
-                status.update(label="Answer ready!", state="complete", expanded=False)
+            # Clear loading indicator
+            loading_container.empty()
 
-            except Exception as e:
-                status.update(label="Error occurred", state="error")
-                _push_assistant_turn("Sorry, I couldn't generate an answer right now.")
-                st.error(f"Backend error: {e}")
-                st.rerun()
+        except Exception as e:
+            loading_container.empty()
+            _push_assistant_turn("Sorry, I couldn't generate an answer right now.")
+            st.error(f"Backend error: {e}")
+            st.rerun()
 
-            else:
-                set_answer(resp)
+        else:
+            set_answer(resp)
 
-                # Add a static snapshot so the answer appears in-order as a bubble,
-                # and suppress the bottom live card once to avoid duplication.
-                if not st.session_state.get(
-                    "ask_last_reason"
-                ) and not st.session_state.get("__sticky_banner__"):
-                    _push_card_snapshot_from_state(stories)
-                    st.session_state["__suppress_live_card_once__"] = True
+            # Push conversational answer instead of card snapshot (wireframe style)
+            if not st.session_state.get(
+                "ask_last_reason"
+            ) and not st.session_state.get("__sticky_banner__"):
+                answer_text = resp.get("answer_md") or resp.get("answer", "")
+                sources = resp.get("sources", []) or []
+                _push_conversational_answer(answer_text, sources)
+                st.session_state["__suppress_live_card_once__"] = True
 
-                st.rerun()
+            st.rerun()
 
 
     # === ADD FOOTER ===
@@ -2217,6 +2588,16 @@ def _push_assistant_turn(text: str):
     st.session_state["ask_transcript"].append({"role": "assistant", "text": text})
 
 
+def _push_conversational_answer(answer_text: str, sources: list):
+    """Push a conversational AI response with related projects (wireframe style)."""
+    st.session_state["ask_transcript"].append({
+        "type": "conversational",
+        "Role": "assistant",
+        "text": answer_text,
+        "sources": sources
+    })
+
+
 def _clear_ask_context():
     """Remove any sticky story context so the next Ask is general-purpose."""
     st.session_state.pop("active_story", None)
@@ -2284,7 +2665,7 @@ def _render_ask_transcript(stories: list):
     for i, m in enumerate(st.session_state.get("ask_transcript", [])):
         # Static snapshot card entry
         if m.get("type") == "card":
-            with st.chat_message("assistant"):
+            with st.chat_message("assistant", avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar_48_dark.png"):
                 # Snapshot with the same visual shell as the live answer card
                 st.markdown('<div class="answer-card">', unsafe_allow_html=True)
                 with safe_container(border=True):
@@ -2453,12 +2834,80 @@ def _render_ask_transcript(stories: list):
                         # Add follow-up suggestion chips
                         if story:
                             render_followup_chips(story, st.session_state.get("ask_input", ""), key_suffix=f"snap_{i}")
+
+                    # Action buttons (Helpful/Copy/Share)
+                    st.markdown("""
+                    <div class="action-buttons">
+                        <button class="action-btn" onclick="this.classList.toggle('helpful-active')">
+                            👍 Helpful
+                        </button>
+                        <button class="action-btn" onclick="navigator.clipboard.writeText(this.closest('.answer-card').innerText); this.textContent='✓ Copied!';">
+                            📋 Copy
+                        </button>
+                        <button class="action-btn" onclick="alert('Share functionality coming soon!')">
+                            🔗 Share
+                        </button>
+                    </div>
+                    """, unsafe_allow_html=True)
+
                 st.markdown('</div>', unsafe_allow_html=True)
+            continue
+
+        # Conversational answer with Related Projects (wireframe style)
+        if m.get("type") == "conversational":
+            with st.chat_message("assistant", avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar_48_dark.png"):
+                # Show conversational response text
+                st.markdown(m.get("text", ""))
+
+                # Show Related Projects chips
+                sources = m.get("sources", []) or []
+                if sources:
+                    st.markdown("""
+                    <div style='margin-top: 16px; padding-top: 16px; border-top: 1px solid #e0e0e0;'>
+                        <div style='font-size: 12px; text-transform: uppercase; color: #7f8c8d; margin-bottom: 12px; font-weight: 600;'>
+                            📚 RELATED PROJECTS
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
+
+                    # Render source chips as Related Projects links
+                    for j, src in enumerate(sources[:3]):
+                        title = src.get("title") or src.get("Title", "")
+                        client = src.get("client") or src.get("Client", "")
+                        label = f"🔗 {client} - {title}" if client and title else f"🔗 {title}"
+
+                        if st.button(label, key=f"related_proj_{i}_{j}", use_container_width=False):
+                            # Click to show story details
+                            st.session_state["active_story"] = src.get("id")
+                            st.session_state["__ctx_locked__"] = True
+                            st.rerun()
+
+                # Action buttons
+                st.markdown("""
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="this.classList.toggle('helpful-active')">
+                        👍 Helpful
+                    </button>
+                    <button class="action-btn" onclick="navigator.clipboard.writeText(this.closest('[data-testid=stChatMessage]').innerText); this.textContent='✓ Copied!';">
+                        📋 Copy
+                    </button>
+                    <button class="action-btn" onclick="alert('Share functionality coming soon!')">
+                        🔗 Share
+                    </button>
+                </div>
+                """, unsafe_allow_html=True)
             continue
 
         # Default chat bubble (user/assistant text)
         role = "assistant" if m.get("Role") == "assistant" else "user"
-        with st.chat_message(role):  # Remove avatar parameter
+
+        # Set custom avatars
+        if role == "assistant":
+            avatar = "https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar_48_dark.png"
+        else:
+            avatar = "👤"  # Gender-neutral user avatar
+
+        with st.chat_message(role, avatar=avatar):
             st.markdown(m.get("text", ""))
 
 def _shorten_middle(text: str, max_len: int = 64) -> str:
