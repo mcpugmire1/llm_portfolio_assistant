@@ -786,7 +786,7 @@ def render_conversation_view(stories: list):
         <style>
         /* Fine-tune Ask MattGPT navbar to match other pages */
         div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) {
-            margin-top: 2.75rem !important;
+            margin-top: 2.25rem !important;
         }
 
         /* Keep Streamlit header visible with hamburger menu on top */
@@ -829,6 +829,7 @@ def render_conversation_view(stories: list):
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
         }
 
         .conversation-header-content {
@@ -861,19 +862,23 @@ def render_conversation_view(stories: list):
         .conversation-how-btn {
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 20px;
             color: white;
-            padding: 0.5rem 1.25rem;
+            padding: 10px 20px;
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         }
 
         .conversation-how-btn:hover {
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.3);
             border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         /* Status bar for conversation view */
@@ -884,8 +889,9 @@ def render_conversation_view(stories: list):
             display: flex;
             gap: 24px;
             align-items: center;
+            justify-content: center;
             font-size: 13px;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
 
         .status-dot-conversation {
@@ -895,6 +901,12 @@ def render_conversation_view(stories: list):
             border-radius: 50%;
             display: inline-block;
             margin-right: 6px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
         }
 
         .status-label {
@@ -994,11 +1006,18 @@ def render_conversation_view(stories: list):
             opacity: 0.5 !important;
         }
 
-        /* Chat input styling */
+        /* Chat input styling - fixed at bottom, always on top */
         [data-testid="stChatInput"] {
             padding: 20px 30px !important;
             background: white !important;
             border-top: 2px solid #e0e0e0 !important;
+            position: fixed !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            width: 100% !important;
+            z-index: 999999 !important;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1) !important;
         }
 
         [data-testid="stChatInput"] input {
@@ -1006,20 +1025,33 @@ def render_conversation_view(stories: list):
             border: 2px solid #ddd !important;
             border-radius: 8px !important;
             font-size: 15px !important;
+            transition: all 0.2s ease !important;
+            background: white !important;
         }
 
         [data-testid="stChatInput"] input:focus {
             border-color: #8B5CF6 !important;
             box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1) !important;
+            outline: none !important;
+        }
+
+        [data-testid="stChatInput"] input::placeholder {
+            color: #9ca3af !important;
+            opacity: 1 !important;
         }
 
         [data-testid="stChatInput"] button {
-            padding: 14px 28px !important;
+            padding: 12px 20px !important;
             background: #8B5CF6 !important;
             color: white !important;
-            font-size: 15px !important;
+            font-size: 14px !important;
             font-weight: 600 !important;
             border-radius: 8px !important;
+            border: none !important;
+            min-height: 44px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
         }
 
         [data-testid="stChatInput"] button:hover {
@@ -1028,10 +1060,40 @@ def render_conversation_view(stories: list):
             box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3) !important;
         }
 
+        [data-testid="stChatInput"] button:disabled {
+            background: #d1d5db !important;
+            opacity: 0.6 !important;
+            cursor: not-allowed !important;
+        }
+
         /* Messages area background */
         .main .block-container {
             background: #fafafa !important;
             padding: 30px !important;
+            padding-bottom: 140px !important;
+            max-width: 900px !important;
+            margin: 0 auto !important;
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Add subtle animations to messages */
+        [data-testid="stChatMessage"] {
+            animation: fadeInUp 0.3s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Source links section */
@@ -1276,10 +1338,18 @@ def render_conversation_view(stories: list):
                 <p>Meet Agy 🐾 — Tracking down insights from 20+ years of transformation experience</p>
             </div>
         </div>
-        <button class="conversation-how-btn" onclick="document.querySelector('[key=how_works_top]').click()">
+        <button class="conversation-how-btn" id="header-how-btn">
             🔧 How Agy searches
         </button>
     </div>
+    <script>
+    // Wire up header button to trigger Streamlit button
+    document.getElementById('header-how-btn')?.addEventListener('click', function() {
+        const streamlitBtn = window.parent.document.querySelector('button[kind="secondary"]') ||
+                            Array.from(window.parent.document.querySelectorAll('button')).find(b => b.textContent.includes('How Agy searches'));
+        if (streamlitBtn) streamlitBtn.click();
+    });
+    </script>
     """, unsafe_allow_html=True)
 
      # Anchor at top to force scroll position
@@ -1309,21 +1379,28 @@ def render_conversation_view(stories: list):
     st.markdown("""
     <style>
     /* Target only the button inside our wrapper */
+    .how-agy-button-wrapper {
+        margin-bottom: 20px !important;
+    }
+
     .how-agy-button-wrapper button {
-        background: rgba(139, 92, 246, 0.1) !important;
-        border: 2px solid rgba(139, 92, 246, 0.3) !important;
-        border-radius: 20px !important;
-        color: #667eea !important;
-        padding: 0.5rem 1.25rem !important;
+        background: white !important;
+        border: 2px solid #8B5CF6 !important;
+        border-radius: 24px !important;
+        color: #8B5CF6 !important;
+        padding: 10px 24px !important;
         font-size: 14px !important;
-        font-weight: 500 !important;
+        font-weight: 600 !important;
         transition: all 0.2s ease !important;
+        box-shadow: 0 2px 4px rgba(139, 92, 246, 0.1) !important;
     }
 
     .how-agy-button-wrapper button:hover {
-        background: rgba(139, 92, 246, 0.15) !important;
-        border-color: rgba(139, 92, 246, 0.5) !important;
-        transform: translateY(-1px) !important;
+        background: #8B5CF6 !important;
+        color: white !important;
+        border-color: #8B5CF6 !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3) !important;
     }
     </style>
     """, unsafe_allow_html=True)
