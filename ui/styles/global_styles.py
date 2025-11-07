@@ -76,13 +76,35 @@ def apply_global_styles():
             display: none !important;
         }
 
-        /* Remove default top padding */
-        .main > div:first-child {
-            padding-top: 0 !important;
+        /* ========================================
+           UNIVERSAL LAYOUT RESET
+           ======================================== */
+         /* Pull page headers up to sit flush under navbar */
+        div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) ~ div[data-testid="stVerticalBlock"] > div:first-child {
+            margin-top: -40px !important;
         }
 
-        /* Consistent navbar alignment across all pages */
-        .stMainBlockContainer {
+        /* Also target specific header types directly */
+        .hero-gradient-wrapper,
+        .conversation-header,
+        .ask-header {
+            margin-top: -20px !important;  /* Changed from 0 to -20px */
+        }
+
+        /* Remove ALL default Streamlit top spacing */
+        div[data-testid="stAppViewContainer"],
+        .main,
+        .main .block-container,
+        .stMainBlockContainer,
+        div[data-testid="stMainBlockContainer"],
+        div.stMainBlockContainer.block-container,
+        div[data-testid="stVerticalBlock"] {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+        }
+
+        /* Remove spacing from first elements */
+        .main > div:first-child {
             padding-top: 0 !important;
             margin-top: 0 !important;
         }
@@ -92,14 +114,33 @@ def apply_global_styles():
             margin-top: 0 !important;
         }
 
+        /* Neutralize custom headers (navbar handles its own positioning) */
+        .ask-header,
+        .hero-section,
+        .conversation-header,
+        .hero-gradient-wrapper {
+            margin-top: 0 !important;
+        }
+
+        /* Neutralize Streamlit containers wrapping custom headers */
+        div[data-testid="stMarkdown"]:has(.ask-header),
+        div[data-testid="element-container"]:has(.ask-header),
+        div[data-testid="stMarkdown"]:has(.hero-section),
+        div[data-testid="element-container"]:has(.hero-section),
+        div[data-testid="stMarkdown"]:has(.conversation-header),
+        div[data-testid="element-container"]:has(.conversation-header),
+        div[data-testid="stMarkdown"]:has(.hero-gradient-wrapper),
+        div[data-testid="element-container"]:has(.hero-gradient-wrapper) {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+
         /* Override Streamlit's default background for bordered containers */
-        /* In light mode, Streamlit uses a slightly darker shade for containers */
         div[data-testid="stVerticalBlockBorderWrapper"] {
             background: transparent !important;
             border: 1px solid rgba(0, 0, 0, 0.1) !important;
         }
 
-        /* Ensure the wrapper's parent also doesn't add background */
         div[data-testid="element-container"]:has(div[data-testid="stVerticalBlockBorderWrapper"]) {
             background: transparent !important;
         }
@@ -209,46 +250,6 @@ def apply_global_styles():
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-        }
-
-        /* ========================================
-           NAVBAR STYLING
-           ======================================== */
-
-        /* Target ALL elements in the first horizontal block (navbar area) */
-        .main > div:first-child > div:first-child > div:first-child div[data-testid="stHorizontalBlock"]:first-of-type {
-            background: #2c3e50 !important;
-            padding: 16px 40px !important;
-            margin: -1rem -1rem 1rem -1rem !important;
-            border-radius: 0 !important;
-        }
-
-        /* Target columns in first horizontal block */
-        .main > div:first-child > div:first-child > div:first-child div[data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="column"] {
-            background: #2c3e50 !important;
-        }
-
-        /* Style first 4 buttons (navigation) */
-        .main > div:first-child > div:first-child > div:first-child div[data-testid="stHorizontalBlock"]:first-of-type button {
-            background: transparent !important;
-            color: white !important;
-            border: none !important;
-            font-weight: 500 !important;
-            box-shadow: none !important;
-        }
-
-        /* Hover state */
-        .main > div:first-child > div:first-child > div:first-child div[data-testid="stHorizontalBlock"]:first-of-type button:hover {
-            background: rgba(255, 255, 255, 0.1) !important;
-            color: white !important;
-        }
-
-        /* Active/disabled state */
-        .main > div:first-child > div:first-child > div:first-child div[data-testid="stHorizontalBlock"]:first-of-type button:disabled {
-            background: #34495e !important;
-            color: white !important;
-            font-weight: 600 !important;
-            opacity: 1 !important;
         }
 
         /* ========================================

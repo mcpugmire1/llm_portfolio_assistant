@@ -16,22 +16,25 @@ def render_cross_industry_landing():
     Streamlit limitation that cannot be overridden without converting to multipage app.
     """
 
-    # Hero header section FIRST - provides clear visual anchor at top of page
-    # Margin matches home page: negative top only, no side margins
-    st.markdown('''
-    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 60px 40px 80px 40px; margin: -1rem 0 40px 0; border-radius: 0; min-height: 350px;">
-        <div style="max-width: 1200px; margin: 0 auto; text-align: center; color: white;">
-            <div style="font-size: 42px; font-weight: 700; margin-bottom: 16px; color: white !important;">Cross-Industry Transformation</div>
-            <p style="font-size: 18px; opacity: 0.95; max-width: 700px; margin: 0 auto; line-height: 1.6;">
-                53 projects across 15+ transformation capabilities — or ask Agy 🐾 to find what you're looking for
-            </p>
+    # Hero header with Agy avatar (green headphones - versatility, growth)
+    st.markdown(
+        """
+<div class="conversation-header">
+    <div class="conversation-header-content">
+        <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_cross_industry.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
+        <div class="conversation-header-text">
+            <h1>Agy's Cross-Industry Playbook</h1>
+            <p>Tracking proven methods across 53 transformation capabilities — ask Agy 🐾 to find what's repeatable</p>
         </div>
     </div>
-    ''', unsafe_allow_html=True)
+</div>
+""",
+        unsafe_allow_html=True,
+    )
 
     # Stats section - separate st.markdown() to avoid anchor conflicts
     st.markdown('''
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 50px; padding: 30px; background: #f8f9fa; border-radius: 10px;">
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin: 0 0 15px 0; padding: 30px; background: #f8f9fa; border-radius: 10px;">
         <div style="text-align: center;">
             <div style="font-size: 36px; font-weight: 700; color: #764ba2; margin-bottom: 8px;">53</div>
             <div style="font-size: 14px; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">Projects Delivered</div>
@@ -50,6 +53,43 @@ def render_cross_industry_landing():
     # Inject CSS for this page
     st.markdown("""
     <style>
+    /* Conversation header styles for hero section */
+    .conversation-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 2rem;
+        border-radius: 0;
+        margin: -1rem 0 0 0;
+    }
+
+    .conversation-header-content {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        max-width: 1200px;
+        margin: 0;
+    }
+
+    .conversation-agy-avatar {
+        flex-shrink: 0;
+        width: 64px !important;
+        height: 64px !important;
+        border-radius: 50% !important;
+        border: 3px solid white !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+    }
+
+    .conversation-header-text h1 {
+        color: white !important;
+        margin: 0;
+        font-size: 2rem;
+    }
+
+    .conversation-header-text p {
+        color: rgba(255, 255, 255, 0.9);
+        margin: 0.5rem 0 0 0;
+        font-size: 1.1rem;
+    }
+
     /* Landing page specific styles */
     .stApp {
         background: white !important;

@@ -22,41 +22,43 @@ def render_navbar(current_tab: str = "Home"):
     # Navbar-specific CSS - target by container class
     st.markdown(f"""
     <style>
-    /* Remove the full-width override - stay within Streamlit's container */
-    div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) {{
-        background: {COLORS['dark_navy']} !important;
-        padding: {SPACING['nav_padding']} !important;
-        margin: 0 !important; 
-        border-radius: 0 !important;
-    }}
+        div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) {{
+            background: {COLORS['dark_navy']} !important;
+            padding: 16px 40px !important;  /* 16px top + 16px bottom = 72px height with 40px text */
+            margin: -40px 0 0 0 !important;  /* Pull up 40px = 20px breathing room (60px header - 40px pull) */
+            height: 72px !important;
+            border-radius: 0 !important;
+            position: relative !important;
+            z-index: 999998 !important;
+        }}
 
-    /* Target columns within the nav container */
-    div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-testid="column"] {{
-        background: {COLORS['dark_navy']} !important;
-    }}
+        /* Target columns within the nav container */
+        div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-testid="column"] {{
+            background: {COLORS['dark_navy']} !important;
+        }}
 
-    /* Style navigation buttons by targeting their containers */
-    [class*="st-key-topnav_"] button {{
-        background: transparent !important;
-        color: white !important;
-        border: none !important;
-        font-weight: 500 !important;
-        box-shadow: none !important;
-    }}
+        /* Style navigation buttons by targeting their containers */
+        [class*="st-key-topnav_"] button {{
+            background: transparent !important;
+            color: white !important;
+            border: none !important;
+            font-weight: 500 !important;
+            box-shadow: none !important;
+        }}
 
-    /* Hover state */
-    [class*="st-key-topnav_"] button:hover {{
-        background: rgba(255, 255, 255, 0.1) !important;
-        color: white !important;
-    }}
+        /* Hover state */
+        [class*="st-key-topnav_"] button:hover {{
+            background: rgba(255, 255, 255, 0.1) !important;
+            color: white !important;
+        }}
 
-    /* Disabled state */
-    [class*="st-key-topnav_"] button:disabled {{
-        background: {COLORS['dark_navy_hover']} !important;
-        color: white !important;
-        font-weight: 600 !important;
-        opacity: 1 !important;
-    }}
+        /* Disabled state */
+        [class*="st-key-topnav_"] button:disabled {{
+            background: {COLORS['dark_navy_hover']} !important;
+            color: white !important;
+            font-weight: 600 !important;
+            opacity: 1 !important;
+        }}
     </style>
     """, unsafe_allow_html=True)
 
