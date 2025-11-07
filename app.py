@@ -10,11 +10,8 @@ import streamlit as st
 import json
 import os
 import re
-import textwrap
-import time
 
 # Third-party
-import pandas as pd
 from dotenv import load_dotenv
 
 # Local imports - components
@@ -30,45 +27,6 @@ from config.settings import get_conf
 # UI — Home / Stories / Ask / About
 
 load_dotenv()
-
-VECTOR_BACKEND = (get_conf("VECTOR_BACKEND", "faiss") or "faiss").lower()
-OPENAI_API_KEY = get_conf("OPENAI_API_KEY")
-PINECONE_API_KEY = get_conf("PINECONE_API_KEY")
-PINECONE_INDEX_NAME = get_conf("PINECONE_INDEX_NAME")  # no default
-PINECONE_NAMESPACE = get_conf("PINECONE_NAMESPACE")  # no default
-PINECONE_ALLOW_CREATE = str(
-    get_conf("PINECONE_ALLOW_CREATE", "false")
-).strip().lower() in {"1", "true", "yes", "on"}
-PINECONE_TRY_DEFAULT_NS = str(
-    get_conf("PINECONE_TRY_DEFAULT_NS", "false")
-).strip().lower() in {"1", "true", "yes", "on"}
-
-# Guard: Require Pinecone config ONLY if VECTOR_BACKEND == "pinecone"
-if VECTOR_BACKEND == "pinecone":
-    missing = []
-    if not PINECONE_API_KEY:
-        missing.append("PINECONE_API_KEY")
-    if not PINECONE_INDEX_NAME:
-        missing.append("PINECONE_INDEX_NAME")
-    if not PINECONE_NAMESPACE:
-        missing.append("PINECONE_NAMESPACE")
-    if missing:
-        raise RuntimeError(
-            f"Missing required Pinecone config: {', '.join(missing)}. Set them in st.secrets or .env"
-        )
-
-# Lazy Pinecone init only if selected
-pinecone_index = None
-if VECTOR_BACKEND == "pinecone":
-    try:
-        from pinecone import Pinecone
-
-        pc = Pinecone(api_key=PINECONE_API_KEY)
-        pinecone_index = pc.Index(PINECONE_INDEX_NAME)
-    except Exception as e:
-        # Do NOT downgrade to FAISS silently; keep backend as pinecone and retry lazily later.
-        st.warning(f"Pinecone init failed at startup; will retry lazily. ({e})")
-        pinecone_index = None
 
 st.set_page_config(
     page_title="Matt Pugmire | Director of Technology Delivery | Digital Transformation Leader",
@@ -101,8 +59,7 @@ if DEBUG:
             st.write("Index stats:")
             st.json(dbg_state.get("stats", {}))
 
-# --- Tab names and nav helpers (must be defined before any use of goto) ---
-TAB_NAMES = ["Home", "Explore Stories", "Ask MattGPT", "About Matt"]
+# --- Tab navigation helpers ---
 _ALIASES = {"Stories": "Explore Stories"}
 
 
@@ -121,10 +78,7 @@ def goto(tab_name: str):
     st.stop()
 
 
-# Choose nav mode:
-USE_SIDEBAR_NAV = False  # Using top navbar instead
-
-# single source of truth for the current tab
+# Single source of truth for the current tab
 st.session_state.setdefault("active_tab", "Home")
 # Coerce any legacy/old values that may still be in session state
 if st.session_state.get("active_tab") == "Stories":
