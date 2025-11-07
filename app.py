@@ -1,9 +1,9 @@
 import streamlit as st
 
-# app_next.py — Next-gen UI (Home / Stories / Ask / About)
+# app.py — Portfolio Router (Home / Stories / Ask / About)
 # - Clean, centered layout without sidebar
 # - Pinecone-first (guarded) + local fallback search
-# - Debounced “Ask MattGPT” with starter chips
+# - Debounced "Ask MattGPT" with starter chips
 # - Compact List view by default, Card view optional
 # - Badges + strongest-metric summary
 # Standard library
@@ -78,8 +78,6 @@ def goto(tab_name: str):
     st.stop()
 
 
-# Single source of truth for the current tab
-st.session_state.setdefault("active_tab", "Home")
 # Coerce any legacy/old values that may still be in session state
 if st.session_state.get("active_tab") == "Stories":
     st.session_state["active_tab"] = "Explore Stories"
@@ -90,7 +88,6 @@ if st.session_state.get("active_tab") == "Stories":
 # =========================
 DATA_FILE = os.getenv("STORIES_JSONL", "echo_star_stories_nlp.jsonl")  # optional
 
-import json, os, re
 from pathlib import Path
 
 
@@ -282,3 +279,11 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
 elif st.session_state["active_tab"] == "About Matt":
     from ui.pages.about_matt import render_about_matt
     render_about_matt()
+
+# --- INVALID TAB FALLBACK ---
+else:
+    st.error(f"❌ Unknown page: {st.session_state['active_tab']}")
+    st.info("Valid pages: Home, Explore Stories, Ask MattGPT, About Matt, Banking, Cross-Industry")
+    # Reset to home
+    st.session_state["active_tab"] = "Home"
+    st.rerun()
