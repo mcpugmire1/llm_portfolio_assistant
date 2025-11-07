@@ -5,6 +5,7 @@ Large gradient hero with portfolio overview and CTAs.
 """
 
 import streamlit as st
+import streamlit.components.v1 as components
 from config.theme import COLORS, GRADIENTS
 
 def render_hero():
@@ -20,20 +21,67 @@ def render_hero():
     st.markdown(
         f"""
         <style>
-        .hero-gradient-wrapper {{
-            background: {GRADIENTS['purple_hero']};
-            border-radius: 0px;
-            margin: 0;
-            padding: 0;
-            width: 100%;
-        }}
-        .hero-content {{
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-            padding: 60px 40px;
-            color: white;
-        }}
+            /* Hide the trigger buttons */
+            [class*="st-key-hero_explore"],
+            [class*="st-key-hero_ask"] {{
+                display: none !important;
+            }}
+            
+            /* Pull hero up to sit flush under navbar */
+            .hero-gradient-wrapper {{
+                background: {GRADIENTS['purple_hero']};
+                border-radius: 0px;
+                margin: -20px 0 0 0 !important;
+                padding: 0;
+                width: 100%;
+            }}
+            
+            .hero-content {{
+                max-width: 1200px;
+                margin: 0 auto;
+                text-align: center;
+                padding: 50px 40px;
+                color: white;
+            }}
+            
+            .hero-btn {{
+                display: inline-block;
+                padding: 14px 32px;
+                border-radius: 8px;
+                font-weight: 600;
+                text-decoration: none !important;
+                transition: all 0.2s ease;
+                cursor: pointer;
+                border: 2px solid white;
+            }}
+            
+            /* Also add these states to ensure no underlines ever */
+            .hero-btn:hover,
+            .hero-btn:active,
+            .hero-btn:focus,
+            .hero-btn:visited {{
+                text-decoration: none !important;
+            }}
+            
+            .hero-btn-primary {{
+                background: white;
+                color: {COLORS['purple_gradient_start']};
+            }}
+            
+            .hero-btn-primary:hover {{
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(255,255,255,0.3);
+            }}
+            
+            .hero-btn-secondary {{
+                background: rgba(255,255,255,0.2);
+                color: white;
+            }}
+            
+            .hero-btn-secondary:hover {{
+                background: rgba(255,255,255,0.3);
+                transform: translateY(-2px);
+            }}
         </style>
         <div class="hero-gradient-wrapper">
             <div class="hero-content">
@@ -42,20 +90,22 @@ def render_hero():
                          alt="MattGPT with Agy"
                          style="max-width: 400px; width: 100%; height: auto; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));">
                 </div>
-                <div style="font-size: 18px; margin-bottom: 12px; color: white; opacity: 0.95;">
+                <div style="font-size: 22px; margin-bottom: 12px; color: white; opacity: 0.95;">
                     <span>👋</span>
                     <span> Hi, I'm Matt Pugmire</span>
                 </div>
                 <h1 style="font-size: 42px; font-weight: 700; margin-bottom: 16px; color: white;">Digital Transformation Leader</h1>
-                <p style="font-size: 18px; color: white; opacity: 0.95; max-width: 700px; margin: 0 auto 32px; line-height: 1.6;">
+                <p style="font-size: 18px; color: white; opacity: 0.95; max-width: 700px; margin: 0 auto 22px; line-height: 1.6;">
                     20+ years driving innovation, agile delivery, and technology leadership across Fortune 500 companies.
-                    Explore my portfolio of 120+ projects or chat with Agy 🐾 to learn about my experience.
                 </p>
+                 <p style="font-size: 16px; color: white; opacity: 0.95; max-width: 700px; margin: 0 auto 20px; line-height: 1.6;">
+                    I trained my AI counterpart, <strong>Agy</strong> — a loyal Plott Hound with a nose for patterns — to surface insights across 120+ real transformation projects.
+                 </p>
                 <div style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap;">
-                    <a href="#explore" style="display: inline-block; padding: 14px 32px; background: white; color: {COLORS['purple_gradient_start']}; border: 2px solid white; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease;">
+                    <a id="btn-explore" class="hero-btn hero-btn-primary">
                         Explore Stories
                     </a>
-                    <a href="#ask" style="display: inline-block; padding: 14px 32px; background: rgba(255,255,255,0.2); color: white; border: 2px solid white; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease;">
+                    <a id="btn-ask" class="hero-btn hero-btn-secondary">
                         Ask Agy 🐾
                     </a>
                 </div>
@@ -64,6 +114,43 @@ def render_hero():
         """,
         unsafe_allow_html=True,
     )
+    
+    # JavaScript to wire up the HTML buttons
+    components.html("""
+    <script>
+    (function() {
+        setTimeout(function() {
+            const parentDoc = window.parent.document;
+            
+            const btnExplore = parentDoc.getElementById('btn-explore');
+            const btnAsk = parentDoc.getElementById('btn-ask');
+            
+            if (btnExplore) {
+                btnExplore.onclick = function() {
+                    const stBtn = parentDoc.querySelector('[class*="st-key-hero_explore"] button');
+                    if (stBtn) stBtn.click();
+                };
+            }
+            
+            if (btnAsk) {
+                btnAsk.onclick = function() {
+                    const stBtn = parentDoc.querySelector('[class*="st-key-hero_ask"] button');
+                    if (stBtn) stBtn.click();
+                };
+            }
+        }, 200);
+    })();
+    </script>
+    """, height=0)
+    
+    # Hidden Streamlit buttons that get triggered by the HTML buttons
+    if st.button("", key="hero_explore"):
+        st.session_state["active_tab"] = "Explore Stories"
+        st.rerun()
+    
+    if st.button("", key="hero_ask"):
+        st.session_state["active_tab"] = "Ask MattGPT"
+        st.rerun()
 
 
 def render_stats_bar():
@@ -84,11 +171,11 @@ def render_stats_bar():
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             border-bottom: 2px solid {COLORS['border_gray']};
-            margin-bottom: 50px;
+            margin-bottom: 30px;
         }}
 
         .stat {{
-            padding: 30px;
+            padding: 5px;
             text-align: center;
             border-right: 1px solid {COLORS['border_gray']};
         }}
@@ -158,8 +245,15 @@ def render_stats_bar():
 
 
 def render_section_title(title: str):
-    """Render styled section title."""
+    """Render styled section title with emoji icon."""
     st.markdown(
-        f'<h2 class="matt-section-title">{title}</h2>',
+        f"""
+        <div class="section-header" style="text-align: center;">
+            <h2>
+                <span>🎯</span>
+                <span>{title}</span>
+            </h2>
+        </div>
+        """,
         unsafe_allow_html=True,
     )

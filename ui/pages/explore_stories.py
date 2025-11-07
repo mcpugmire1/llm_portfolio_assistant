@@ -716,21 +716,61 @@ def render_explore_stories(
     - Pill X buttons work correctly
     - Clear all resets everything properly
     """
-    # Hero header - pure HTML to prevent auto-scroll (matches home page pattern)
-    # Margin: negative top only (-1rem 0), no side margins to match navbar width
-    st.markdown('''
-    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 60px 40px 80px 40px; margin: -1rem 0 40px 0; border-radius: 0; min-height: 350px;">
-        <div style="max-width: 1200px; margin: 0 auto; text-align: center; color: white;">
-            <h1 style="font-size: 42px; font-weight: 700; margin-bottom: 16px; color: white !important;">Project Case Studies</h1>
-            <p style="font-size: 18px; opacity: 0.95; max-width: 700px; margin: 0 auto; line-height: 1.6;">
-                See how digital transformation happens in practice. Browse case studies, then click Ask MattGPT for the inside story.
-            </p>
+    # Hero header with Agy avatar (gray headphones)
+    st.markdown(
+        """
+<div class="conversation-header">
+    <div class="conversation-header-content">
+        <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_explore_stories.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
+        <div class="conversation-header-text">
+            <h1>Project Stories & Insights</h1>
+            <p>Browse 115+ transformation case studies, or ask Agy 🐾 for the deeper context</p>
         </div>
     </div>
-    ''', unsafe_allow_html=True)
+</div>
+""",
+        unsafe_allow_html=True,
+    )
 
     explore_css = """
     <style>
+    /* Conversation header styles for hero section */
+    .conversation-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 2rem;
+        border-radius: 0;
+        margin: -1rem 0 2rem 0;
+    }
+
+    .conversation-header-content {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        max-width: 1200px;
+        margin: 0;
+    }
+
+    .conversation-agy-avatar {
+        flex-shrink: 0;
+        width: 64px !important;
+        height: 64px !important;
+        border-radius: 50% !important;
+        border: 3px solid white !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+    }
+
+    .conversation-header-text h1 {
+        color: white !important;
+        margin: 0;
+        font-size: 2rem;
+    }
+
+    .conversation-header-text p {
+        color: rgba(255, 255, 255, 0.9);
+        margin: 0.5rem 0 0 0;
+        font-size: 1.1rem;
+    }
+
     /* Print styles - make content visible when printing */
     @media print {
         /* Hide Streamlit chrome and unnecessary elements */
@@ -1042,7 +1082,13 @@ def render_explore_stories(
         F["industry"] = st.session_state.pop("prefilter_industry")
     if "prefilter_capability" in st.session_state:
         F["capability"] = st.session_state.pop("prefilter_capability")
-
+        # Clear domains when setting capability
+        F["domains"] = []
+    if "prefilter_domains" in st.session_state:
+        F["domains"] = st.session_state.pop("prefilter_domains")
+        # Clear capability when setting domains
+        F["capability"] = ""
+        
     # ==================================================================
     # FILTERS SECTION - REDESIGNED (Phase 4)
     # ==================================================================
