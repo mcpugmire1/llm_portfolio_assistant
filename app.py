@@ -1,3 +1,5 @@
+import streamlit as st
+
 # app_next.py — Next-gen UI (Home / Stories / Ask / About)
 # - Clean, centered layout without sidebar
 # - Pinecone-first (guarded) + local fallback search
@@ -10,40 +12,22 @@ import os
 import re
 import textwrap
 import time
-from typing import List, Optional
-from urllib.parse import quote_plus
 
 # Third-party
 import pandas as pd
-import streamlit as st
 from dotenv import load_dotenv
 
 # Local imports - components
-from ui.legacy_components import css_once, render_home_hero_and_stats, render_home_starters
+from ui.pages.home import render_home_page
 from ui.components.navbar import render_navbar
 from ui.styles.global_styles import apply_global_styles
 
 # Local imports - utilities
 from config.debug import DEBUG
 from config.settings import get_conf
-from utils.ui_helpers import safe_container, dbg
-from services.pinecone_service import _safe_json
-from utils.formatting import (
-    _format_narrative, 
-    _format_key_points, 
-    _format_deep_dive,
-    build_5p_summary,
-    strongest_metric_line,
-    story_has_metric,
-)
-from utils.validation import is_nonsense, token_overlap_ratio, _tokenize
-
 
 # =========================
 # UI — Home / Stories / Ask / About
-
-ASSIST_AVATAR = "🤖"  # keep the retro robot
-USER_AVATAR = "🗣️"  # or "🙋", "🧑", "👋", "👥", "🧑‍💻", etc.
 
 load_dotenv()
 
@@ -86,16 +70,8 @@ if VECTOR_BACKEND == "pinecone":
         st.warning(f"Pinecone init failed at startup; will retry lazily. ({e})")
         pinecone_index = None
 
-# optional: row-click table
-try:
-    from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode
-
-    _HAS_AGGRID = True
-except Exception:
-    _HAS_AGGRID = False
-
 st.set_page_config(
-    page_title="MattGPT — Matt's Story",
+    page_title="Matt Pugmire | Director of Technology Delivery | Digital Transformation Leader",
     page_icon="🤖",
     layout="wide",
     initial_sidebar_state="collapsed"  # Hide sidebar - we use top navbar instead
@@ -104,26 +80,16 @@ st.set_page_config(
 # Apply global styles once per session
 apply_global_styles()
 
-# ensure external UI CSS is injected once (safe no-op if it's empty)
-css_once()
+# Render navbar (shows on all pages)
+render_navbar(current_tab=st.session_state.get("active_tab", "Home"))
 
-# ---- first-mount guard: let CSS finish applying, then paint once more ----
+# ---- first-mount guard ----
 if not st.session_state.get("__first_mount_rerun__", False):
     st.session_state["__first_mount_rerun__"] = True
     st.rerun()
 
 # Initialize session state for active tab
 st.session_state.setdefault("active_tab", "Home")
-
-# Render top navigation bar
-render_navbar(current_tab=st.session_state.get("active_tab", "Home"))
-# optional: ChatGPT-style sidebar menu
-try:
-    from streamlit_option_menu import option_menu
-
-    _HAS_OPTION_MENU = True
-except Exception:
-    _HAS_OPTION_MENU = False
 
 if DEBUG:
     with st.sidebar.expander("📊 Pinecone debug (last query)", expanded=True):
@@ -138,11 +104,6 @@ if DEBUG:
 # --- Tab names and nav helpers (must be defined before any use of goto) ---
 TAB_NAMES = ["Home", "Explore Stories", "Ask MattGPT", "About Matt"]
 _ALIASES = {"Stories": "Explore Stories"}
-
-#
-# Optional external renderer hooks (may be injected by other modules)
-_ext_render_sources_chips = globals().get("_ext_render_sources_chips")
-_ext_render_sources_badges_static = globals().get("_ext_render_sources_badges_static")
 
 
 def normalize_tab(name: str) -> str:
@@ -188,100 +149,6 @@ def on_ask_this_story(s: dict):
     st.rerun()  # Rerun to scroll to top of Ask MattGPT page
 
 
-# === Sidebar navigation (option_menu with mono line icons) ===
-if USE_SIDEBAR_NAV:
-    with st.sidebar:
-        st.header("MattGPT")
-
-        if _HAS_OPTION_MENU:
-            _OPTIONS = ["Home", "Explore Stories", "Ask MattGPT", "About Matt"]
-            current = normalize_tab(st.session_state.get("active_tab", "Home"))
-            def_idx = _OPTIONS.index(current) if current in _OPTIONS else 0
-
-            selected = option_menu(
-                menu_title=None,
-                options=_OPTIONS,
-                icons=["house", "book", "chat-dots", "person"],  # Bootstrap mono icons
-                default_index=def_idx,
-                orientation="vertical",
-                styles={
-                    "container": {"padding": "0", "background": "transparent"},
-                    "icon": {"color": "inherit", "font-size": "1.1rem"},
-                    "nav-link": {
-                        "font-size": "1rem",
-                        "padding": "10px 14px",
-                        "border-radius": "8px",
-                        "color": "inherit",
-                        "white-space": "nowrap",
-                        "background-color": "transparent",
-                        "font-weight": "600",
-                    },
-                    "nav-link-selected": {
-                        "font-size": "1rem",
-                        "padding": "10px 14px",
-                        "border-radius": "8px",
-                        "color": "inherit",
-                        "white-space": "nowrap",
-                        "background-color": "transparent",
-                        "font-weight": "600",
-                    },
-                },
-            )
-
-            if normalize_tab(selected) != current:
-                new_tab = normalize_tab(selected)
-                st.session_state["active_tab"] = new_tab
-                # Reset Home's first-mount guard so the Home page doesn't immediately
-                # redirect back to the last pill selection.
-                if new_tab == "Home":
-                    st.session_state["__home_first_mount__"] = True
-                st.rerun()
-
-        else:
-            # Fallback if option_menu isn't installed: minimal text + glyphs
-            ICONS = {
-                "Home": "⌂",
-                "Explore Stories": "📖",
-                "Ask MattGPT": "💭",
-                "About Matt": "👤",
-            }
-            current = st.session_state.get("active_tab", "Home")
-            for name in ["Home", "Explore Stories", "Ask MattGPT", "About Matt"]:
-                label = f"{ICONS.get(name,'')}  {name}"
-                if st.button(
-                    label,
-                    key=f"nav_{name}",
-                    use_container_width=True,
-                    disabled=(name == current),
-                ):
-                    goto(name)
-
-        st.divider()
-
-        st.markdown(
-            '<div class="quick-actions-header">Try it out</div>', unsafe_allow_html=True
-        )
-
-        ex = [
-            "Tell me about leading a global payments transformation.",
-            "How did you apply GenAI in a healthcare project?",
-            "How have you driven innovation in your career?",
-        ]
-        for i, q in enumerate(ex):
-            if st.button(q, key=f"exq_{i}", use_container_width=True):
-                # Treat like fresh typed questions - pure semantic search
-                st.session_state["__inject_user_turn__"] = q
-                # Don't set force_answer - let semantic search rank naturally
-                # Clear context lock so these trigger fresh searches
-                st.session_state.pop("__ctx_locked__", None)
-                st.session_state.pop("active_context", None)
-                st.session_state["active_tab"] = "Ask MattGPT"
-                st.rerun()
-        st.divider()
-# ------------------------------------------------------------
-
-
-
 # Safe alias that mirrors F() but is immune to shadowing elsewhere
 def field_value(s: dict, key: str, default: str | list | None = None):
     # Inline copy of F() to avoid name collisions
@@ -321,171 +188,10 @@ def field_value(s: dict, key: str, default: str | list | None = None):
     return default
 
 
-def STAR(s: dict) -> dict:
-    return {
-        "situation": s.get("Situation", []) or s.get("situation", []),
-        "task": s.get("Task", []) or s.get("task", []),
-        "action": s.get("Action", []) or s.get("action", []),
-        "result": s.get("Result", []) or s.get("result", []),
-    }
-
-
-def FIVEP_SUMMARY(s: dict) -> str:
-    return s.get("5PSummary") or s.get("5p_summary") or ""
-
-
-# =========================
-# Story modes and related helpers
-# =========================
-def story_modes(s: dict) -> dict:
-    """Return the three anchored views for a single story."""
-    return {
-        "narrative": _format_narrative(s),
-        "key_points": _format_key_points(s),
-        "deep_dive": _format_deep_dive(s),
-    }
-
-
-def _related_stories(s: dict, max_items: int = 3) -> list[dict]:
-    """
-    Very light 'related' heuristic: prefer same client, then same domain/tags.
-    Excludes the current story. Returns up to max_items stories.
-    """
-    cur_id = s.get("id")
-    dom = s.get("domain", "")
-    client = s.get("client", "")
-    tags = set(s.get("tags", []) or [])
-    # simple scoring
-    scored = []
-    for t in STORIES:
-        if t.get("id") == cur_id:
-            continue
-        score = 0
-        if client and t.get("client") == client:
-            score += 3
-        if dom and t.get("domain") == dom:
-            score += 2
-        if tags:
-            score += len(tags & set(t.get("tags", []) or []))
-        if score:
-            scored.append((score, t))
-    scored.sort(key=lambda x: x[0], reverse=True)
-    return [t for _, t in scored[:max_items]]
-
-
-def _summarize_index_stats(stats: dict) -> dict:
-    """Return a compact view of Pinecone index stats."""
-    if not isinstance(stats, dict):
-        return {}
-    namespaces = stats.get("namespaces") or {}
-    dims = stats.get("dimension")
-    total_vecs = 0
-    by_ns = {}
-    for ns, info in namespaces.items():
-        count = (info or {}).get("vector_count") or 0
-        by_ns[ns or ""] = int(count)
-        total_vecs += int(count)
-    return {
-        "dimension": int(dims) if dims else None,
-        "total_vectors": int(total_vecs),
-        "namespaces": by_ns,  # {"default": 115, "": 0, ...}
-    }
-
-
 # =========================
 # Config / constants
 # =========================
-PINECONE_MIN_SIM = 0.15  # gentler gate: surface more semantically-close hits
-_DEF_DIM = 384  # stub embedding size to keep demo self-contained
 DATA_FILE = os.getenv("STORIES_JSONL", "echo_star_stories_nlp.jsonl")  # optional
-
-# 🔧 Hybrid score weights (tune these!)
-W_PC = 0.8  # semantic (Pinecone vector match)
-W_KW = 0.2  # keyword/token overlap
-
-# Centralized retrieval pool size for semantic search / Pinecone
-SEARCH_TOP_K = 100  # Increased to capture more industry-specific results
-
-
-# =========================
-# Safe Pinecone wiring (optional)
-# =========================
-try:
-    from pinecone import Pinecone  # type: ignore
-except Exception:
-    Pinecone = None  # keeps the app running without Pinecone installed
-
-_PINECONE_API_KEY = get_conf("PINECONE_API_KEY")
-_PINECONE_INDEX = PINECONE_INDEX_NAME or get_conf("PINECONE_INDEX_NAME")
-_PC = None
-_PC_INDEX = None
-
-# NOTE: When adding upserts, always pass namespace=PINECONE_NAMESPACE to .upsert()/.update()
-
-
-def _init_pinecone():
-    """Lazy init of Pinecone client + index (no-op if unavailable)."""
-    global _PC, _PC_INDEX
-    if _PC_INDEX is not None:
-        return _PC_INDEX
-    if not (_PINECONE_API_KEY and Pinecone):
-        return None
-    try:
-        _PC = Pinecone(api_key=_PINECONE_API_KEY)
-        # Inspect existing indexes (and their dimensions) once
-        idx_list = _PC.list_indexes().indexes
-        existing = {i.name: i for i in idx_list}
-        if _PINECONE_INDEX not in existing:
-            if DEBUG:
-                print(
-                    f"DEBUG Pinecone: index '{_PINECONE_INDEX}' missing. allow_create={PINECONE_ALLOW_CREATE or DEBUG}"
-                )
-            if PINECONE_ALLOW_CREATE or DEBUG:
-                _PC.create_index(
-                    name=_PINECONE_INDEX, dimension=_DEF_DIM, metric="cosine"
-                )
-            else:
-                # Do not create in prod unless explicitly allowed
-                return None
-        else:
-            # Validate dimension if available
-            try:
-                dim = getattr(existing[_PINECONE_INDEX], "dimension", None)
-                if dim and int(dim) != int(_DEF_DIM):
-                    if DEBUG:
-                        print(
-                            f"DEBUG Pinecone: index dim mismatch (have={dim}, want={_DEF_DIM}); refusing to use."
-                        )
-                    return None
-            except Exception:
-                pass
-
-        _PC_INDEX = _PC.Index(_PINECONE_INDEX)
-        return _PC_INDEX
-    except Exception as e:
-        if DEBUG:
-            print(f"DEBUG Pinecone init error: {e}")
-        return None
-
-
-# =========================
-# Load data (JSONL optional) with safe fallback
-# =========================
-def _load_jsonl(path: str) -> Optional[List[dict]]:
-    try:
-        if not os.path.exists(path):
-            return None
-        out = []
-        with open(path, "r", encoding="utf-8") as f:
-            for line in f:
-                line = line.strip()
-                if not line:
-                    continue
-                out.append(json.loads(line))
-        return out or None
-    except Exception:
-        return None
-
 
 import json, os, re
 from pathlib import Path
@@ -509,10 +215,6 @@ def _split_tags(s):
     if isinstance(s, list):
         return [str(x).strip() for x in s if str(x).strip()]
     return [t.strip() for t in str(s).split(",") if t.strip()]
-
-
-def _slug(s):
-    return re.sub(r"[^a-z0-9]+", "-", str(s).strip().lower()).strip("-") or "x"
 
 
 def load_star_stories(path: str):
@@ -619,13 +321,6 @@ st.session_state.setdefault("__pending_card_snapshot__", False)
 st.session_state.setdefault("__sticky_banner__", None)
 st.session_state.setdefault("__suppress_live_card_once__", False)
 
-# --- Query-param navigation: /?view=explore&story_id=<id>
-params = st.query_params
-if params.get("view") == "explore" and params.get("story_id"):
-    st.session_state["active_story"] = params.get("story_id")
-    st.session_state["active_tab"] = "Explore Stories"
-    st.rerun()
-
 # For Pinecone snippets + low-confidence banner
 st.session_state.setdefault("__pc_last_ids__", {})  # {story_id: score}
 st.session_state.setdefault("__pc_snippets__", {})  # {story_id: snippet}
@@ -635,129 +330,11 @@ st.session_state.setdefault("__pc_suppressed__", False)
 st.session_state.setdefault("page_size", 25)
 st.session_state.setdefault("page_offset", 0)
 
-# Ensure no stray chat_input outside Ask tab
-# (REMOVED global user_input_local = st.chat_input("Ask anything…", key="ask_chat_input1"))
-
 
 # =========================
 # Helpers
 # =========================
 
-# --- Unified tiny façade to simplify badge rendering (keep old fns working) ---
-
-
-
-
-_BADGE_PALETTE = [
-    "#4F46E5",
-    "#059669",
-    "#DC2626",
-    "#D97706",
-    "#0EA5E9",
-    "#7C3AED",
-    "#16A34A",
-    "#EA580C",
-    "#A855F7",
-    "#0891B2",
-]
-
-## debounce logic removed
-
-
-def _badge_color(label: str) -> str:
-    if not label:
-        return "#6B7280"
-    idx = sum(ord(c) for c in label) % len(_BADGE_PALETTE)
-    return _BADGE_PALETTE[idx]
-
-
-_DOT_EMOJI = [
-    "🟦",
-    "🟩",
-    "🟥",
-    "🟧",
-    "🟦",
-    "🟪",
-    "🟩",
-    "🟧",
-    "🟪",
-    "🟦",
-]  # stable palette-ish
-
-
-def _clear_ask_context():
-    """Remove any sticky context so the next ask is general-purpose."""
-    st.session_state.pop("active_story", None)
-    st.session_state.pop("__ctx_locked__", None)
-    # Optional: also clear any preloaded seed text
-    st.session_state.pop("seed_prompt", None)
-    # Do NOT clear last_sources; that belongs to the last answer
-    st.rerun()
-
-
-# --- Clean Answer Card (mock_ask_hybrid style) -------------------------------
-
-
-
-def _dot_for(label: str) -> str:
-    if not label:
-        return "•"
-    idx = sum(ord(c) for c in label) % len(_DOT_EMOJI)
-    return _DOT_EMOJI[idx]
-
-
-def _shorten_middle(text: str, max_len: int = 64) -> str:
-    if not text:
-        return ""
-    if len(text) <= max_len:
-        return text
-    keep = max_len - 1
-    left = keep // 2
-    right = keep - left
-    return text[:left] + "… " + text[-right:]
-
-
-
-def render_list(items: Optional[List[str]]):
-    for x in items or []:
-        st.write(f"- {x}")
-
-
-
-# --- Nonsense rules (JSONL) + known vocab -------------------
-import csv
-from datetime import datetime
-
-
-# Known vocab built from stories (call once after STORIES is loaded)
-_KNOWN_VOCAB = set()
-
-
-def build_known_vocab(stories: list[dict]):
-    vocab = set()
-    for s in stories:
-        # Use lowercase field names from normalized stories
-        for field in ["title", "client", "role", "domain", "division", "industry", "who", "where", "why"]:
-            txt = (s.get(field) or "").lower()
-            vocab.update(re.split(r"[^\w]+", txt))
-        for t in s.get("tags") or []:
-            vocab.update(re.split(r"[^\w]+", str(t).lower()))
-    # prune tiny tokens
-    return {w for w in vocab if len(w) >= 3}
-
-
-
-# simple CSV logger
-def log_offdomain(query: str, reason: str, path: str = "data/offdomain_queries.csv"):
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    row = [datetime.utcnow().isoformat(timespec="seconds"), query, reason]
-    header = ["ts_utc", "query", "reason"]
-    write_header = not os.path.exists(path)
-    with open(path, "a", newline="", encoding="utf-8") as f:
-        w = csv.writer(f)
-        if write_header:
-            w.writerow(header)
-        w.writerow(row)
 
 
 def render_no_match_banner(
@@ -847,54 +424,6 @@ def render_no_match_banner(
                 st.rerun()
 
 
-# Build known-vocab now that build_known_vocab() is defined
-_KNOWN_VOCAB = build_known_vocab(STORIES)
-
-
-# --- Helper: sanitize legacy CTA in answers ---
-def _sanitize_answer(text: str) -> str:
-    """Remove legacy STAR/5P CTA and replace with neutral wording."""
-    if not text:
-        return text
-    legacy = "Want a deeper dive or a 60-second spoken version? Ask for STAR/5P or a tailored summary."
-    replacement = "Want more detail or a 60‑second version? Switch the view above or ask for a tailored summary."
-    return text.replace(legacy, replacement)
-
-
-# --- Pinecone UI helpers: matched snippet + score ---
-def _fmt_score(score) -> str:
-    try:
-        return f"{float(score):.2f}"
-    except Exception:
-        return "n/a"
-
-
-def _matched_caption(story_id: str, fallback_builder=build_5p_summary) -> str:
-    """
-    Build 'Matched on: … (score …)' using Pinecone snippet + score, with a clean fallback.
-    - Uses session_state['__pc_snippets__'][id] for snippet (if present)
-    - Uses session_state['__pc_last_ids__'][id] for score (if present)
-    - Falls back to build_5p_summary(story) if no Pinecone snippet is available
-    """
-    snippets = st.session_state.get("__pc_snippets__", {}) or {}
-    scores = st.session_state.get("__pc_last_ids__", {}) or {}
-
-    snip = (snippets.get(story_id) or "").strip()
-    score = scores.get(story_id)
-    # If we don't have a Pinecone snippet, try to build a 5P fallback from the local story
-    if not snip:
-        story = next((s for s in STORIES if str(s.get("id")) == str(story_id)), None)
-        if story:
-            snip = fallback_builder(story)
-
-    # Tidy + truncate for UI neatness
-    snip = " ".join(str(snip).split())
-    if len(snip) > 220:
-        snip = snip[:217] + "..."
-
-    return f"🔎 Matched on: {snip} (score { _fmt_score(score) })"
-
-
 
 
 def build_facets(stories):
@@ -914,52 +443,14 @@ def build_facets(stories):
     personas = []
     return industries, capabilities, clients, domains, roles, tags, personas
 
-
-# --- Minimal linear transcript helpers (Ask) ---
-def _ensure_ask_bootstrap():
-    """Guarantee the Ask transcript starts with the assistant opener once per session."""
-    if "ask_transcript" not in st.session_state:
-        st.session_state["ask_transcript"] = []
-    if not st.session_state["ask_transcript"]:
-        st.session_state["ask_transcript"].append(
-            {"role": "assistant", "text": "Ask anything."}
-        )
-
-
-def _push_user_turn(text: str):
-    st.session_state["ask_transcript"].append({"role": "user", "text": text})
-    st.session_state["__asked_once__"] = True
-
-
-def _push_assistant_turn(text: str):
-    st.session_state["ask_transcript"].append({"role": "assistant", "text": text})
-
-
-def _clear_ask_context():
-    """Remove any sticky story context so the next Ask is general-purpose."""
-    st.session_state.pop("active_story", None)
-    st.session_state.pop("__ctx_locked__", None)
-    st.session_state.pop("seed_prompt", None)
-    st.rerun()
-
-# === Ask MattGPT helpers ===
-
 # =========================
 # UI — Home / Stories / Ask / About
 # =========================
 industries, capabilities, clients, domains, roles, tags, personas_all = build_facets(STORIES)
 
-# --- HOME ---
 if st.session_state["active_tab"] == "Home":
-
-    # Check if a button just changed the tab by looking for the flag
-    # that components.py sets when a starter card is clicked
-    # Check if we should skip the option_menu (because a button was just clicked)
-
-    # Just render the home content without the option_menu
-    css_once()
-    render_home_hero_and_stats()
-    render_home_starters()
+    from ui.pages.home import render_home_page
+    render_home_page()
 
 # --- BANKING LANDING ---
 elif st.session_state["active_tab"] == "Banking":
@@ -976,12 +467,10 @@ elif st.session_state["active_tab"] == "Explore Stories":
     from ui.pages.explore_stories import render_explore_stories
     render_explore_stories(STORIES, industries, capabilities, clients, domains, roles, tags, personas_all)
 
-
 # --- ASK MATTGPT ---
 elif st.session_state["active_tab"] == "Ask MattGPT":
     from ui.pages.ask_mattgpt import render_ask_mattgpt
     render_ask_mattgpt(STORIES)
-
 
 # --- ABOUT ---
 elif st.session_state["active_tab"] == "About Matt":
