@@ -5,22 +5,17 @@ Professional background, resume, and contact information.
 """
 
 import streamlit as st
-from typing import List, Dict, Optional
-
-from ui.legacy_components import css_once
 
 def render_about_matt():
     """
     Render the About Matt page with professional background and contact info.
     """
-    
+
     # Page header
     st.title("About Matt")
-    
-    # First, ensure CSS is loaded
-    css_once()  # This should load your existing styles
 
-    # If that doesn't work, inject the specific styles needed
+    # Global styles already applied via apply_global_styles() in app.py
+    # Inject page-specific styles
     st.markdown(
         """
     <style>
