@@ -1,11 +1,15 @@
+"""
+app.py — MattGPT Portfolio Router
+
+Minimal Streamlit router for the MattGPT portfolio application.
+Loads data, bootstraps session state, and delegates to page modules.
+
+Architecture documentation: See ARCHITECTURE.md
+Design specification: https://github.com/mcpugmire1/mattgpt-design-spec
+"""
+
 import streamlit as st
 
-# app.py — Portfolio Router (Home / Stories / Ask / About)
-# - Clean, centered layout without sidebar
-# - Pinecone-first (guarded) + local fallback search
-# - Debounced "Ask MattGPT" with starter chips
-# - Compact List view by default, Card view optional
-# - Badges + strongest-metric summary
 # Standard library
 import json
 import os
