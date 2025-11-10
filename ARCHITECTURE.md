@@ -875,8 +875,118 @@ From SESSION_HANDOFF_SESSION10.md - Ask MattGPT Conversation View:
 
 ---
 
-**Last Updated:** November 9, 2025
+### Session 4: About Matt Timeline Visualization (November 10, 2025)
+
+**Objective:** Implement Career Timeline section matching wireframe specifications exactly.
+
+**Wireframe Reference:** https://mcpugmire1.github.io/mattgpt-design-spec/wireframes/about_matt_wireframe.html
+
+**Implementation Details:**
+
+**1. Timeline Structure (7 Career Positions)**
+- Data structure: year, title (with emoji), company, single-line description
+- Timeline spans: 2023–Present through 2000–2005
+- Content aligned with wireframe exactly (no deviations)
+
+**2. CSS Implementation** (`ui/pages/about_matt.py`, lines 158-226)
+
+**Timeline Container:**
+```css
+.timeline {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    padding-left: 40px;
+}
+```
+
+**Vertical Purple Gradient Line:**
+```css
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;  /* Increased from 3px to match wireframe */
+    background: linear-gradient(to bottom, #8B5CF6, #7C3AED);
+}
+```
+
+**Circular Dot Markers:**
+```css
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -50px;
+    top: 4px;
+    width: 20px;   /* Increased from 14px for better visibility */
+    height: 20px;
+    background: white;
+    border: 4px solid #8B5CF6;  /* Increased from 3px */
+    border-radius: 50%;
+}
+```
+
+**Typography Styling:**
+- `.timeline-year`: 14px, weight 700, purple (#8B5CF6), 8px margin-bottom
+- `.timeline-title`: 18px, weight 600, dark gray (#2c3e50), 6px margin-bottom
+- `.timeline-company`: 14px, gray (#7f8c8d), 8px margin-bottom
+- `.timeline-desc`: 14px, dark gray (#555), line-height 1.6
+
+**3. Rendering Approach**
+
+**Challenge:** Streamlit wraps each `st.markdown()` call in full-width container divs, breaking the 900px max-width constraint.
+
+**Solution:** Build complete HTML in single string before rendering:
+```python
+timeline_items = []
+for item in timeline_data:
+    timeline_items.append(f"""
+    <div class="timeline-item">
+        <div class="timeline-card">
+            <div class="timeline-year">{item["year"]}</div>
+            <div class="timeline-title">{item["title"]}</div>
+            <div class="timeline-company">{item["company"]}</div>
+            <div class="timeline-desc">{item["desc"]}</div>
+        </div>
+    </div>""")
+
+timeline_html = '<div class="timeline">' + ''.join(timeline_items) + '</div>'
+st.markdown(timeline_html, unsafe_allow_html=True)
+```
+
+**4. Key Technical Decisions**
+
+- **No card backgrounds:** Cards use `transparent` background to match wireframe's minimal design
+- **CSS pseudo-elements:** Vertical line and dots render via `::before` selectors
+- **Single HTML block:** Prevents Streamlit container wrapping issues
+- **Inline concatenation:** Avoids f-string escaping problems
+
+**5. Iterations Required**
+
+1. Initial: Used card backgrounds (white) - removed to match wireframe
+2. Circle size: 14px → 20px for better visual weight
+3. Line width: 3px → 4px to match wireframe prominence
+4. HTML rendering: Multiple `st.markdown()` calls → single consolidated block
+5. Avatar: Replaced "MP" initials with Agy logo from brand kit
+
+**Files Modified:**
+- `ui/pages/about_matt.py` (lines 158-364) - Timeline CSS and rendering
+
+**Status:** ✅ Complete - Timeline matches wireframe exactly
+
+**Visual Verification:**
+- Purple vertical gradient line visible
+- Larger circular dots (20px) properly positioned
+- 7 career positions with correct content
+- Clean minimal design without card backgrounds
+- Max-width 900px centered layout
+
+---
+
+**Last Updated:** November 10, 2025
 **Author:** Matt Pugmire
-**Review Status:** ✅ **Phase 5 Complete + UI Polish Session**
+**Review Status:** ✅ **Phase 5 Complete + UI Polish Sessions**
 **GitHub:** Ready to share with hiring managers and technical interviewers
 **Key Metric:** 95.1% code reduction (5,765 → 284 lines in app.py)

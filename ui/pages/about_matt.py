@@ -11,18 +11,54 @@ def render_about_matt():
     Render the About Matt page with professional background and contact info.
     """
 
-    # Page header
-    st.title("About Matt")
-
     # Global styles already applied via apply_global_styles() in app.py
     # Inject page-specific styles
     st.markdown(
         """
     <style>
+    /* Conversation header styles - matches Ask MattGPT pattern */
+    .conversation-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 30px;
+        margin-top: -50px !important;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+    }
+
+    .conversation-header-content {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .conversation-agy-avatar {
+        width: 64px !important;
+        height: 64px !important;
+        border-radius: 50% !important;
+        border: 3px solid white !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+        flex-shrink: 0;
+    }
+
+    .conversation-header-text h1 {
+        font-size: 32px;
+        margin: 0 0 8px 0;
+        color: white;
+    }
+
+    .conversation-header-text p {
+        font-size: 16px;
+        margin: 0;
+        opacity: 0.95;
+    }
+
     .hero-section {
         text-align: center;
             padding: 60px 30px;
-            background: var(--background-color);  
+            background: var(--background-color);
             color: var(--text-color);  /* Instead of white */
             border-radius: 16px;
             margin-bottom: 50px;
@@ -119,80 +155,119 @@ def render_about_matt():
         box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);  /* Always visible shadow */
         }
 
-    .timeline-marker {
-        width: 64px;
-        height: 64px;
-        background: #4a90e2;
+    /* Career Timeline - matches wireframe exactly */
+    .timeline {
+        max-width: 900px;
+        margin: 0 auto;
+        position: relative;
+        padding-left: 40px;
+    }
+
+    .timeline::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: linear-gradient(to bottom, #8B5CF6, #7C3AED);
+    }
+
+    .timeline-item {
+        position: relative;
+        margin-bottom: 30px;
+        padding-left: 30px;
+    }
+
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -50px;
+        top: 4px;
+        width: 20px;
+        height: 20px;
+        background: white;
+        border: 4px solid #8B5CF6;
         border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        flex-shrink: 0;
+    }
+
+    .timeline-year {
+        font-size: 14px;
+        font-weight: 700;
+        color: #8B5CF6;
+        margin-bottom: 8px;
+    }
+
+    .timeline-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 6px;
+    }
+
+    .timeline-company {
+        font-size: 14px;
+        color: #7f8c8d;
+        margin-bottom: 8px;
+    }
+
+    .timeline-desc {
+        font-size: 14px;
+        color: #555;
+        line-height: 1.6;
+    }
+
+    /* Timeline card styling - no background, matches wireframe */
+    .timeline-card {
+        background: transparent;
+        padding: 0;
+        border: none;
+        transition: all 0.3s ease;
     }
     </style>
     """,
         unsafe_allow_html=True,
     )
 
+    # Purple header with avatar - matches Ask MattGPT pattern
     st.markdown("""
-    <style>
-    .hero-section {
-        padding: 20px 30px 16px 30px !important;
-        margin-top: 0 !important;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
-    st.markdown("""
-    <style>
-    /* Force About page content to start at the same position as Home */
-    section[data-testid="stAppViewContainer"] {
-        padding-top: 1rem !important;
-    }
-
-    /* Remove any extra spacing from the main block */
-    .main > div.block-container {
-        padding-top: 1rem !important;
-        max-width: 100%;
-    }
-
-    /* Eliminate hero section top spacing */
-    .hero-section {
-        margin-top: 0 !important;
-        padding-top: 20px !important;
-    }
-    </style>
+    <div class="conversation-header">
+        <div class="conversation-header-content">
+            <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png"
+                 alt="Agy"
+                 class="conversation-agy-avatar">
+            <div class="conversation-header-text">
+                <h1>Matt Pugmire</h1>
+                <p>Digital Transformation Leader | Director of Technology Delivery</p>
+            </div>
+        </div>
+    </div>
     """, unsafe_allow_html=True)
 
 
-    st.markdown("""<div class='hero-section' style='margin-top: 0; margin-bottom: 8px; padding: 20px 30px 16px 30px;'>
-    <h1 style='font-size: 48px; font-weight: 700; margin-bottom: 16px; margin-top: 0;'>Matt's Journey</h1>
-    <p style='font-size: 20px; color: #b0b0b0; max-width: 800px; margin: 0 auto;'>
-        Helping Fortune 500 companies modernize legacy systems and launch new cloud-native products — combining modern architecture, product mindset, 
-            and innovative engineering practices to deliver scalable digital platforms.</p>
-    </div>""", unsafe_allow_html=True)
-
-
-    # Pure HTML stats that bypass Streamlit's CSS
+    # Stats bar - 5 stats with purple accent
     st.markdown(
     """
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 8px 0 24px 0;">
+    <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; margin: 8px 0 24px 0;">
         <div style="background: var(--secondary-background-color); padding: 28px 20px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
-            <span style="font-size: 36px; font-weight: 700; color: #4a90e2; display: block; margin-bottom: 8px;">20+</span>
+            <span style="font-size: 36px; font-weight: 700; color: #8B5CF6; display: block; margin-bottom: 8px;">20+</span>
             <span style="color: #999999; font-size: 15px; display: block;">Years Experience</span>
         </div>
         <div style="background: var(--secondary-background-color); padding: 28px 20px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
-            <span style="font-size: 36px; font-weight: 700; color: #4a90e2; display: block; margin-bottom: 8px;">300+</span>
-            <span style="color: #999999; font-size: 15px; display: block;">Professionals Upskilled</span>
+            <span style="font-size: 36px; font-weight: 700; color: #8B5CF6; display: block; margin-bottom: 8px;">115</span>
+            <span style="color: #999999; font-size: 15px; display: block;">Projects Delivered</span>
         </div>
         <div style="background: var(--secondary-background-color); padding: 28px 20px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
-            <span style="font-size: 36px; font-weight: 700; color: #4a90e2; display: block; margin-bottom: 8px;">200+</span>
-            <span style="color: #999999; font-size: 15px; display: block;">Engineers Certified</span>
+            <span style="font-size: 36px; font-weight: 700; color: #8B5CF6; display: block; margin-bottom: 8px;">300+</span>
+            <span style="color: #999999; font-size: 15px; display: block;">Professionals Trained</span>
         </div>
         <div style="background: var(--secondary-background-color); padding: 28px 20px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
-            <span style="font-size: 36px; font-weight: 700; color: #4a90e2; display: block; margin-bottom: 8px;">2</span>
-            <span style="color: #999999; font-size: 14px; line-height: 1.3; display: block;">Innovation Centers Built & Scaled to 150+</span>
+            <span style="font-size: 36px; font-weight: 700; color: #8B5CF6; display: block; margin-bottom: 8px;">15+</span>
+            <span style="color: #999999; font-size: 15px; display: block;">Enterprise Clients</span>
+        </div>
+        <div style="background: var(--secondary-background-color); padding: 28px 20px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
+            <span style="font-size: 36px; font-weight: 700; color: #8B5CF6; display: block; margin-bottom: 8px;">3-20x</span>
+            <span style="color: #999999; font-size: 14px; line-height: 1.3; display: block;">Delivery Acceleration</span>
         </div>
     </div>
     """,
@@ -203,73 +278,68 @@ def render_about_matt():
         "<h2 class='section-title'>Career Evolution</h2>", unsafe_allow_html=True
     )
 
-    # Timeline using fixed-height-card styling
+    # Timeline - matches wireframe exactly (7 positions)
     timeline_data = [
-        (
-            "🧘",
-            "2023–Present",
-            "Sabbatical | Innovation & Upskilling",
-            "Focused on GenAI, cloud-native architecture, and building LLM-powered portfolio assistant",
-        ),
-        (
-            "🚀",
-            "2019–2023",
-            "Director, Cloud Innovation Center @ Accenture",
-            "Launched Innovation Centers (150+ engineers) • 30+ products • $300M+ revenue • 4x faster delivery",
-        ),
-        (
-            "📚",
-            "2016–2023",
-            "Capability Development Lead, CloudFirst @ Accenture",
-            "Upskilled 300+ professionals • 40% proficiency increase • 50% faster delivery • Culture transformation",
-        ),
-        (
-            "☁️",
-            "2018–2019",
-            "Cloud Native Architecture Lead, Liquid Studio @ Accenture",
-            "Built cloud-native accelerator • AWS enablement (200+ certs) • Rapid prototyping for Fortune 500",
-        ),
-        (
-            "💳",
-            "2009–2017",
-            "Sr. Technology Architecture Manager, Payments @ Accenture",
-            "$500M+ payments modernization • 12 countries • ACH/FX/Wire hubs • Salesforce integration",
-        ),
-        (
-            "🏗️",
-            "2005–2009",
-            "Technology Manager @ Accenture",
-            "Early leadership in payments, banking, and platform modernization",
-        ),
-        (
-            "⚡",
-            "2000–2005",
-            "Startups & Consulting (incl. Cendian Corp)",
-            "Built B2B/supply chain platforms • webMethods & J2EE integration solutions",
-        ),
+        {
+            "year": "2023–Present",
+            "title": "🧘 Sabbatical | Innovation & Upskilling",
+            "company": "Independent",
+            "desc": "Focused on GenAI, cloud-native architecture, and building LLM-powered portfolio assistant"
+        },
+        {
+            "year": "2019–2023",
+            "title": "🚀 Director, Cloud Innovation Center",
+            "company": "Accenture",
+            "desc": "Launched Innovation Centers (150+ engineers) • 30+ products • $300M+ revenue • 4x faster delivery"
+        },
+        {
+            "year": "2016–2023",
+            "title": "📚 Capability Development Lead, CloudFirst",
+            "company": "Accenture",
+            "desc": "Upskilled 300+ professionals • 40% proficiency increase • 50% faster delivery • Culture transformation"
+        },
+        {
+            "year": "2018–2019",
+            "title": "☁️ Cloud Native Architecture Lead, Liquid Studio",
+            "company": "Accenture",
+            "desc": "Built cloud-native accelerator • AWS enablement (200+ certs) • Rapid prototyping for Fortune 500"
+        },
+        {
+            "year": "2009–2017",
+            "title": "💳 Sr. Technology Architecture Manager, Payments",
+            "company": "Accenture",
+            "desc": "$500M+ payments modernization • 12 countries • ACH/FX/Wire hubs • Salesforce integration"
+        },
+        {
+            "year": "2005–2009",
+            "title": "🏗️ Technology Manager",
+            "company": "Accenture",
+            "desc": "Early leadership in payments, banking, and platform modernization"
+        },
+        {
+            "year": "2000–2005",
+            "title": "⚡ Startups & Consulting",
+            "company": "Including Cendian Corp",
+            "desc": "Built B2B/supply chain platforms • webMethods & J2EE integration solutions"
+        }
     ]
 
-    for icon, period, role, desc in timeline_data:
-        col1, col2 = st.columns([1, 11])
-        with col1:
-            # class="timeline-marker
-            st.markdown(
-                f"<div class='timeline-marker'>{icon}</div>", unsafe_allow_html=True
-            )
-
-            # st.markdown(f"<div style='font-size: 40px; text-align: center; margin-top: 20px;'>{icon}</div>",
-            # unsafe_allow_html=True)
-        with col2:
-            st.markdown(
-                f"""
-            <div class='fixed-height-card' style='margin-bottom: 16px; min-height: auto;'>
-                <div style='color: #4a90e2; font-size: 14px; margin-bottom: 8px;'>{period}</div>
-                <h3 style='font-size: 20px; font-weight: 600; margin-bottom: 8px;'>{role}</h3>
-                <p style='color: #b0b0b0; font-size: 14px;'>{desc}</p>
+    # Render timeline with vertical line
+    # Build complete HTML in one call to prevent Streamlit wrapper divs
+    timeline_items = []
+    for item in timeline_data:
+        timeline_items.append(f"""
+        <div class="timeline-item">
+            <div class="timeline-card">
+                <div class="timeline-year">{item["year"]}</div>
+                <div class="timeline-title">{item["title"]}</div>
+                <div class="timeline-company">{item["company"]}</div>
+                <div class="timeline-desc">{item["desc"]}</div>
             </div>
-            """,
-                unsafe_allow_html=True,
-            )
+        </div>""")
+
+    timeline_html = '<div class="timeline">' + ''.join(timeline_items) + '</div>'
+    st.markdown(timeline_html, unsafe_allow_html=True)
 
     # Core Competencies with skill bars
     st.markdown("<h2 class='section-title' style='margin: 48px 0 32px 0;'>Core Competencies</h2>", unsafe_allow_html=True)
