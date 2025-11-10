@@ -4,8 +4,8 @@ from utils.validation import _tokenize
 from utils.formatting import build_5p_summary
 
 # Import weight constants
-W_PC = 0.8  # semantic (Pinecone vector match)
-W_KW = 0.2  # keyword/token overlap
+W_PC = 1.0  # semantic (Pinecone vector match)
+W_KW = 0.0  # keyword/token overlap
 
 def _keyword_score_for_story(s: dict, query: str) -> float:
     """
@@ -17,10 +17,11 @@ def _keyword_score_for_story(s: dict, query: str) -> float:
         return 0.0
     
     hay_parts = [
-        s.get("Title", ""),
+         s.get("Title", ""),
         s.get("Client", ""),
         s.get("Role", ""),
         s.get("Sub-category", ""),
+        " ".join(s.get("Competencies", []) or []),  # ← ADD THIS Direct keyword matches 
         " ".join(s.get("public_tags", []) or []),
         build_5p_summary(s, 400),
         " ".join(s.get("Process", []) or []),

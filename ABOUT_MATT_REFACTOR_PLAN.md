@@ -17,6 +17,102 @@ This document captures the gap between the current About Matt implementation and
 
 ---
 
+## SYSTEMATIC GAP ANALYSIS (Current vs Wireframe)
+
+### Section-by-Section Review:
+
+#### ✅ **1. Hero Section (Purple Header)** - COMPLETE
+- Current: Purple gradient header with Agy avatar, name, and subtitle
+- Wireframe: Same
+- **Status:** ✅ Matches wireframe
+
+#### ⚠️ **2. Stats Bar** - NEEDS UPDATE
+**Current Implementation:**
+- 5 columns: ✅ Correct
+- "115 Projects Delivered" ❌ Should be "120+"
+- Purple accent (#8B5CF6) ✅ Correct
+- Layout and styling ✅ Correct
+
+**Required Changes:**
+- Change "115" to "120+" in line 257 of about_matt.py
+
+#### ⚠️ **3. Career Timeline** - MOSTLY COMPLETE
+**Current Implementation:**
+- Section title: "Career Evolution" ✅
+- **Missing subtitle:** "From individual contributor to enterprise transformation leader" ❌
+- Timeline structure: ✅ Complete (7 positions, purple line, dots)
+
+**Required Changes:**
+- Add subtitle under "Career Evolution" heading (line 278-279)
+
+#### ❌ **4. Core Competencies** - MAJOR RESTRUCTURE NEEDED
+**Current Implementation:**
+- 3 columns with skill bars
+- Categories: "Digital Product & Innovation", "Technical Architecture", "Industry Expertise"
+- Uses percentage bars
+
+**Wireframe Target:**
+- 6 category cards in 3x2 grid
+- NO skill bars (just bullet lists)
+- New categories: "Product & Innovation", "Modern Engineering", "Agile at Scale", "Transformation Leadership", "Team Building", "AI & Emerging Tech"
+- 5 items per category
+
+**Gap:** Complete restructure needed (see section 4 for details)
+
+#### ❌ **5. Leadership Philosophy** - NEEDS EXPANSION
+**Current Implementation:**
+- 4 columns (emoji, title, 1-sentence description)
+- Brief statements
+
+**Wireframe Target:**
+- 2x2 grid layout (4 cards total)
+- Full paragraph descriptions (3-4 sentences each)
+- Quotes with detailed explanations
+
+**Gap:** Need to expand from brief statements to full paragraphs (see section 5 for details)
+
+#### ❌ **6. MattGPT Technical Deep-Dive** - COMPLETELY MISSING
+**Current Implementation:** Section does not exist
+
+**Wireframe Target:** Major new section with:
+- Problem statement
+- Agy origin story
+- Tech stack visualization
+- System architecture diagram
+- Code samples (Python)
+- Implementation notes
+
+**Gap:** Entire section needs to be built (~200-300 lines, see section 6 for details)
+
+#### ❌ **7. Contact/CTA Section** - NEEDS REDESIGN
+**Current Implementation:**
+- 3-column cards (Email, LinkedIn, Coffee Chat)
+- Interactive buttons that reveal info
+- Generic availability statement
+- Dark card backgrounds
+
+**Wireframe Target:**
+- Full-width purple gradient background
+- Centered content (max-width: 900px)
+- White text on gradient
+- 3 actual link buttons (not interactive reveals)
+- Specific availability text: "Exploring Director/VP opportunities..."
+
+**Gap:** Complete redesign needed (see section 7 for details)
+
+---
+
+## PRIORITY GAPS TO ADDRESS (in order):
+
+1. **QUICK FIX** - Stats bar: Change "115" → "120+" (2 minutes)
+2. **QUICK FIX** - Career Timeline: Add subtitle "From individual contributor..." (5 minutes)
+3. **MEDIUM** - Leadership Philosophy: Expand to full paragraphs (30-45 minutes)
+4. **MEDIUM** - Contact/CTA: Redesign with purple gradient background (30-45 minutes)
+5. **HEAVY** - Core Competencies: Restructure to 6 categories, remove skill bars (1-2 hours)
+6. **MAJOR** - MattGPT Technical Deep-Dive: Build entire new section (3-4 hours)
+
+---
+
 ## 1. Hero Section Changes
 
 **Current:**
@@ -47,7 +143,7 @@ This document captures the gap between the current About Matt implementation and
 **Wireframe Target (5 columns):**
 ```
 20+ Years Experience (keep)
-115 Projects Delivered (NEW)
+120+ Projects Delivered (NEW)
 300+ Professionals Trained (word change from "Upskilled")
 15+ Enterprise Clients (NEW - replace Engineers Certified)
 3-20x Delivery Acceleration (NEW - replace Innovation Centers)
@@ -61,6 +157,10 @@ This document captures the gap between the current About Matt implementation and
 
 **Status:** ✅ Implemented November 10, 2025 (Session 4)
 
+**Section Header (from wireframe):**
+- **Title:** "Career Evolution"
+- **Subtitle:** "From individual contributor to enterprise transformation leader"
+
 **Implementation Details:**
 - **Vertical purple gradient line** (4px width, increased from wireframe 3px) connecting all positions
 - **Circular dots** (20px diameter with 4px border, increased from wireframe 14px/3px for better visibility)
@@ -71,6 +171,8 @@ This document captures the gap between the current About Matt implementation and
 - 900px max-width container
 - CSS `::before` pseudo-elements for line and dots
 - HTML consolidation into single `st.markdown()` call to prevent Streamlit wrapper issues
+
+**Note:** Section header "Career Evolution" with subtitle currently missing from implementation - needs to be added above timeline.
 
 **Timeline Positions Implemented:**
 1. 2023–Present: Sabbatical | Innovation & Upskilling

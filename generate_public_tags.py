@@ -48,6 +48,7 @@ def extract_semantic_tags(story):
         f"Title: {story.get('Title', '')}\n"
         f"Role: {story.get('Role', '')}\n"
         f"Industry: {story.get('Industry', '')}\n"
+        f"Theme: {story.get('Theme', '')}\n"  # ← ADDED THIS on 11.10.25
         f"Project Scope: {story.get('Project Scope / Complexity', '')}\n"
         f"Use Cases: {story.get('Use Case(s)', '')}\n"
         f"Situation: {story.get('Situation', [''])[0]}\n"

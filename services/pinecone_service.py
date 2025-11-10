@@ -55,19 +55,6 @@ if VECTOR_BACKEND == "pinecone":
         st.warning(f"Pinecone init failed at startup; will retry lazily. ({e})")
         pinecone_index = None
 
-PINECONE_MIN_SIM = 0.15  # gentler gate: surface more semantically-close hits
-_DEF_DIM = 384  # stub embedding size to keep demo self-contained
-DATA_FILE = os.getenv("STORIES_JSONL", "echo_star_stories_nlp.jsonl")  # optional
-
-# 🔧 Hybrid score weights (tune these!)
-W_PC = 0.8  # semantic (Pinecone vector match)
-W_KW = 0.2  # keyword/token overlap
-
-# Centralized retrieval pool size for semantic search / Pinecone
-SEARCH_TOP_K = 100  # Increased to capture more industry-specific results
-# Centralized retrieval pool size for semantic search / Pinecone
-SEARCH_TOP_K = 100  # Increased to capture more industry-specific results
-
 # =========================
 # Config / constants
 # =========================
@@ -76,8 +63,8 @@ _DEF_DIM = 384  # stub embedding size to keep demo self-contained
 DATA_FILE = os.getenv("STORIES_JSONL", "echo_star_stories_nlp.jsonl")  # optional
 
 # 🔧 Hybrid score weights (tune these!)
-W_PC = 0.8  # semantic (Pinecone vector match)
-W_KW = 0.2  # keyword/token overlap
+W_PC = 1.0  # semantic (Pinecone vector match)
+W_KW = 0.0  # keyword/token overlap
 
 # Centralized retrieval pool size for semantic search / Pinecone
 SEARCH_TOP_K = 100  # Increased to capture more industry-specific results

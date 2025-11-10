@@ -17,7 +17,7 @@ import re
 
 # ---------- config ----------
 
-INPUT_EXCEL_FILE = "MPugmire - STAR Stories - 024OCT25.xlsx"  # <-- update as needed
+INPUT_EXCEL_FILE = "MPugmire - STAR Stories - 11NOV25_CLEANED.xlsx"  # <-- update as needed
 OUTPUT_JSONL_FILE = "echo_star_stories.jsonl"
 SHEET_NAME = "STAR Stories - Interview Ready"
 DRY_RUN = False  # ✅ Change to False when ready to write output
@@ -65,21 +65,27 @@ def slugify(text: str) -> str:
 def norm_key(title: str, client: str) -> str:
     return f"{normalize(title).lower()}|{normalize(client).lower()}"
 
+
 def split_bullets(value: str):
+    """Split multi-line bullet fields, removing Excel apostrophe prefix."""
     if not value:
         return []
-    raw = str(value)
+    
+    lines = str(value).split("\n")
     parts = []
-    for line in raw.replace("•", "\n").replace("–", "\n").split("\n"):
+    
+    for line in lines:
         line = line.strip()
-        if line.startswith("- ") or line.startswith("• ") or line.startswith("– "):
-            line = line[2:].strip()
-        if line:
-            parts.append(line)
-    if len(parts) == 1 and " - " in raw:
-        parts = [p.strip() for p in raw.split(" - ") if p.strip()]
+        if not line:
+            continue
+        
+        # Remove leading apostrophe
+        if line.startswith("'"):
+            line = line[1:]
+        
+        parts.append(line)
+    
     return parts
-
 
 # ---------- main ----------
 
@@ -120,6 +126,7 @@ def excel_to_jsonl():
             "Start_Date": normalize(row.get("Start_Date", "")),      
             "End_Date": normalize(row.get("End_Date", "")),       
             "Industry": normalize(row.get("Industry", "")),
+            "Theme": normalize(row.get("Theme", "")),
             "Solution / Offering": normalize(row.get("Solution / Offering", "")),
             "Project Scope / Complexity": normalize(row.get("Project Scope / Complexity", "")), 
             "Category": normalize(row.get("Category", "")),

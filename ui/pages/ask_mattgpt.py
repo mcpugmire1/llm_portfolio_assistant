@@ -3464,25 +3464,31 @@ def rag_answer(question: str, filters: dict, stories: list):
     }
 
 
+"""
+Updated _generate_agy_response() function for Agy V2
+This version intelligently pulls from BOTH STAR and 5P fields
+"""
+
 def _generate_agy_response(
     question: str, ranked_stories: list[dict], answer_context: str
 ) -> str:
     """
-    Generate an Agy-voiced response using OpenAI GPT-4o-mini.
+    Generate an Agy-voiced response using OpenAI GPT-4.
 
-    Uses the Agy system prompt to create warm, helpful responses that:
-    - Lead with search status ("🐾 Tracking down...")
-    - Cite specific projects and outcomes
-    - Show patterns across Matt's work
-    - Offer depth without forcing it
+    Uses the Agy V2 system prompt to create warm, purpose-driven responses that:
+    - Lead with 🐾 tracking status
+    - Start with WHY (Purpose/Situation - the human stakes)
+    - Show HOW (Process/Action - Matt's unique approach)
+    - Prove WHAT (Performance/Result - concrete outcomes)
+    - Extract transferable patterns
 
     Args:
         question: User's original question
         ranked_stories: Top 3 relevant stories from semantic search
-        answer_context: Pre-formatted story content (narrative/key points/deep dive)
+        answer_context: Pre-formatted story content (optional, can be ignored)
 
     Returns:
-        Agy-voiced response string with personality and citations
+        Agy-voiced response string with Start With Why narrative structure
     """
     try:
         from openai import OpenAI
@@ -3497,70 +3503,140 @@ def _generate_agy_response(
             organization=os.getenv("OPENAI_ORG_ID"),
         )
 
-        # Build context from ranked stories
+        # Build context from ranked stories - PULLING FROM BOTH STAR AND 5P
+        def get_text(story: dict, field: str) -> str:
+            """Helper to extract text from field (handles both string and list)."""
+            value = story.get(field, '')
+            if isinstance(value, list):
+                return ' '.join(str(v) for v in value if v)
+            return str(value) if value else ''
+        
         story_context = "\n\n---\n\n".join(
             [
                 f"**Story {i+1}: {s.get('Title', 'Untitled')}**\n"
+                f"Theme: {s.get('Theme', '')}\n"  # ← ADDED 11.10.25
                 f"Client: {s.get('Client', 'Unknown')}\n"
                 f"Role: {s.get('Role', '')}\n"
                 f"Industry: {s.get('Industry', '')}\n"
                 f"Domain: {s.get('Sub-category', '')}\n\n"
-                f"Situation: {' '.join(s.get('Situation', []))}\n"
-                f"Task: {' '.join(s.get('Task', []))}\n"
-                f"Action: {' '.join(s.get('Action', []))}\n"
-                f"Result: {' '.join(s.get('Result', []))}\n"
-                f"Performance: {' '.join(s.get('Performance', []))}"
+                
+                # 5P SUMMARY (if available, great hook)
+                f"Summary: {s.get('5PSummary', '') or s.get('5p_summary', '')}\n\n"
+                
+                # WHY IT MATTERED (use Purpose OR Situation, whichever is better)
+                f"WHY (Purpose/Situation):\n"
+                f"{get_text(s, 'Purpose') or get_text(s, 'Situation')}\n"
+                f"{get_text(s, 'Task') if not get_text(s, 'Purpose') else ''}\n\n"
+                
+                # HOW MATT APPROACHED IT (use Process OR Action, whichever is better)
+                f"HOW (Process/Action):\n"
+                f"{get_text(s, 'Process') or get_text(s, 'Action')}\n\n"
+                
+                # WHAT HAPPENED (use Performance OR Result, whichever is better)
+                f"WHAT (Performance/Result):\n"
+                f"{get_text(s, 'Performance') or get_text(s, 'Result')}\n\n"
+                
+                # OPTIONAL: Additional Context
+                f"Person (Who): {get_text(s, 'Person') or get_text(s, 'Who')}\n"
+                f"Place (Where): {get_text(s, 'Place') or get_text(s, 'Where')}\n"
+                
                 for i, s in enumerate(ranked_stories[:3])
             ]
         )
 
-        # Agy system prompt (from agy-system-prompt.md)
-        system_prompt = """You are Agy 🐾, Matt Pugmire's AI assistant and Plott Hound. You help people understand Matt's career through his portfolio of 120+ real project case studies.
+        # Agy V2 system prompt (from agy-system-prompt-v2-enhanced.md)
+        system_prompt = """You are Agy 🐾 — Matt Pugmire's Plott Hound assistant and professional portfolio intelligence system.
 
-Plott Hounds are known for their tracking skills and determination - traits that serve you well when hunting down insights from Matt's 20+ years of digital transformation experience.
+You help people understand Matt's real-world leadership and technical impact across 20+ years of digital transformation, product innovation, cloud modernization, and emerging tech adoption.
 
-**Your Voice:**
-- Use first person ("I'll track down...", "Let me find...")
-- Include 🐾 once per response (opening OR closing, never both)
-- Professional but warm - you're Matt's professional portfolio assistant
-- No dog puns, barking, or cutesy behavior
-- Show determination when needed
+You don't chat — you reveal meaningful, human-anchored proof from Matt's portfolio.
 
-**Response Structure:**
-1. Search status with 🐾: "🐾 Let me track down Matt's experience with..."
-2. Direct answer (1-2 sentences grounded in specific projects)
-3. Cite project, client, and quantifiable outcomes
-4. Extract patterns across multiple projects if applicable
-5. Optional: Offer to go deeper
+**Voice Principles:**
+* Warm, steady, grounded — never hype, never stiff
+* Competent, confident, and calm
+* Patient intelligence — not hurried AI chatter
+* Humane, leadership-minded, thoughtful
+* Purpose-first, human-centered framing
+* Exactly one 🐾 per reply (opening OR closing)
+* No dog jokes, barking, fetch references, or cutesiness
 
-**Guidelines:**
-- Always cite specific projects with Title, Client, and outcomes
-- Lead with outcomes, then methodology
-- Be conversational but professional
-- Admit gaps honestly
-- Show patterns across projects when relevant
-- One 🐾 emoji per response maximum
+**Tone:** Loyal advisor + sense-maker + precision tracker of meaning
 
-**Success Criteria:**
-You're successful when users can cite specific projects and outcomes after talking to you, and trust Matt because of concrete proof you've provided."""
+**Response Structure - Start With Why:**
+
+1. **Status + 🐾**
+   * "🐾 Let me track down Matt's experience with..."
+   * "🐾 I've found the strongest example of..."
+
+2. **Start With WHY (Purpose)**
+   * What human, organizational, or mission-level pain or opportunity drove this?
+   * Why did it matter to real people, customers, clinicians, employees, or business leaders?
+   * What was at stake?
+
+3. **HOW (Process)**
+   * What approach, mindset, and leadership behaviors shaped the solution?
+   * Where did Matt bridge human, business, and technical needs?
+   * What collaboration, architecture, and delivery strategies were used?
+
+4. **WHAT (Performance)**
+   * Concrete business + human outcomes
+   * Measured improvements in adoption, trust, experience, capability
+   * Bold the numbers and key outcomes
+
+5. **Pattern Insight**
+   * The transferable leadership principle or capability demonstrated
+   * "What makes Matt's work different:" or "This reflects Matt's broader pattern of..."
+   * Avoid generic patterns like "strong communication skills"
+
+6. **Gentle CTA**
+   * "Want me to dig deeper into..."
+   * "If you'd like, we can explore..."
+
+**Formatting:**
+* Use markdown for structure
+* Bold all client names, capabilities, and key outcomes
+* Bullet principles only — not the story arc itself
+* No over-formatting or emoji clutter
+* Scannable, polished, executive-friendly
+
+**Things You Never Do:**
+* Hype ("incredible!!" "game-changing!" "revolutionary!")
+* Puppy talk / dog jokes / cutesiness
+* Corporate jargon walls ("synergistic value propositions")
+* Stiff academic language ("Key Methodologies Employed")
+* Lead with technology before establishing human stakes
+* Generic praise ("Matt is a strong leader")
+
+**Remember:**
+You are not reciting bullet points.
+You are tracking meaning, revealing leadership, and inviting deeper conversation.
+
+Matt's portfolio isn't a database.
+It's a library of purpose-driven transformation stories — and you are the guide who knows every trail."""
 
         # User message with context
         user_message = f"""User Question: {question}
 
-Here are the top 3 relevant projects from Matt's portfolio, including key 5P fields:
+Here are the top 3 relevant projects from Matt's portfolio:
 
 {story_context}
 
-Generate an Agy-voiced response (professional, determined, first-person) that:
-1. STARTS with a **Status Update** (must include 🐾).
-2. Provides a **Direct Answer** grounded in Matt's principles.
-3. Uses the project context (Situation, Purpose, Performance) to give a **Specific Example**.
-4. Uses **MARKDOWN** (bolding, lists) to enhance scannability.
-5. The list of working principles (like 'Speak their language') **MUST BE FORMATTED as a bulleted list** (markdown `*`).
-6. **Bold** all Client names and key methodology terms (e.g., **JPMorgan Chase**, **data-driven decision making**).
-7. Ends with a relevant **Call to Action**.
+Generate an Agy-voiced response that follows the "Start With Why" structure:
 
-Keep it conversational, warm, but professional. Cite specific clients and outcomes. Ensure exactly one 🐾 emoji is used in the entire response."""
+1. **Status Update** (must include 🐾)
+2. **WHY it mattered** (human stakes, problem, what was at stake)
+3. **HOW Matt approached it** (unique methodology, collaboration, technical choices)
+4. **WHAT happened** (concrete outcomes with numbers AND human impact)
+5. **Pattern insight** (transferable principle - what makes Matt's work distinctive)
+6. **Gentle CTA** (offer to go deeper)
+
+Use **MARKDOWN** for scannability:
+* **Bold** all client names and key outcomes
+* Bullet lists ONLY for principles/patterns at the end
+* Keep the narrative flow natural (not a bulleted list)
+
+Keep it warm but professional. Cite specific clients and outcomes. 
+Exactly one 🐾 emoji in the entire response."""
 
         # Call OpenAI API
         # Using gpt-4o-mini: fast, cost-effective, excellent for well-crafted prompts
@@ -3571,7 +3647,7 @@ Keep it conversational, warm, but professional. Cite specific clients and outcom
                 {"role": "user", "content": user_message},
             ],
             temperature=0.7,
-            max_tokens=500,
+            max_tokens=600,  # Increased to allow full narrative
         )
 
         return response.choices[0].message.content
@@ -3580,8 +3656,46 @@ Keep it conversational, warm, but professional. Cite specific clients and outcom
         # Fallback to non-LLM response if OpenAI fails
         if DEBUG:
             print(f"DEBUG: OpenAI call failed, using fallback: {e}")
+        
         # Return a simple Agy-prefixed version of the context
         return f"🐾 Let me show you what I found...\n\n{answer_context}"
+
+
+# USAGE NOTES:
+# 
+# This updated function (v3 - Nov 2025):
+# 1. ✅ Pulls from BOTH STAR and 5P fields intelligently
+# 2. ✅ Uses whichever field has better content (Purpose OR Situation, etc.)
+# 3. ✅ Includes Theme for better story contextualization
+# 4. ✅ Implements full "Start With Why" structure
+# 5. ✅ Uses Agy V2 voice principles
+# 6. ✅ Provides clear guidance to GPT about narrative flow
+#
+# What Theme adds:
+# - Helps Agy understand story TYPE (Execution vs Strategic vs Enablement, etc.)
+# - Enables better framing ("This Execution & Delivery story shows...")
+# - Makes cross-story patterns more obvious
+#
+# The 6 Themes:
+# - Execution & Delivery
+# - Strategic & Advisory
+# - Org & Working-Model Transformation
+# - Talent & Enablement
+# - Risk & Responsible Tech
+# - Emerging Tech
+#
+# What you DON'T need to do:
+# ❌ Duplicate data between STAR and 5P fields
+# ❌ Choose between STAR or 5P - use BOTH
+# ❌ Re-enrich all your stories if they already have good STAR data
+#
+# The function intelligently pulls from whichever fields have the best content.
+# If your Situation field is detailed, it uses that for WHY.
+# If your Purpose field is better, it uses that instead.
+# Same logic for Process/Action and Performance/Result.
+#
+# Theme is pulled from metadata and helps frame the entire response.
+
 
 
 def build_known_vocab(stories: list[dict]):
