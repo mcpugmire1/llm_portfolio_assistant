@@ -1,6 +1,6 @@
 # About Matt Page Refactoring Plan
 
-**Status:** Deferred - Ask MattGPT takes priority
+**Status:** Partially Complete - Career Timeline ✅ (Session 4, Nov 10, 2025) - Remaining sections deferred
 **Wireframe:** https://mcpugmire1.github.io/mattgpt-design-spec/wireframes/about_matt_wireframe.html
 **Current File:** [ui/pages/about_matt.py](ui/pages/about_matt.py)
 
@@ -8,7 +8,12 @@
 
 ## Summary of Changes Needed
 
-This document captures the gap between the current About Matt implementation and the wireframe specification. Implementation deferred to focus on Ask MattGPT improvements.
+This document captures the gap between the current About Matt implementation and the wireframe specification.
+
+**Completed:**
+- ✅ Career Timeline Visualization (Session 4 - November 10, 2025)
+
+**Remaining sections deferred** to focus on Ask MattGPT improvements.
 
 ---
 
@@ -52,27 +57,40 @@ This document captures the gap between the current About Matt implementation and
 
 ---
 
-## 3. Career Timeline Visualization
+## 3. Career Timeline Visualization ✅ COMPLETE
 
-**Current:**
-- Streamlit columns with emoji markers
-- 7 positions listed
-- Blue color scheme (`#4a90e2`)
-- Basic card styling
+**Status:** ✅ Implemented November 10, 2025 (Session 4)
 
-**Wireframe Target:**
-- **Vertical purple gradient line** (3px) connecting all positions
-- **Circular dots** (14px diameter, 3px border) positioned at `-47px` offset
-- 6 positions (consolidate/update from current 7)
-- Purple gradient accent (`#8B5CF6`)
-- More detailed achievement bullet points (2-3 per role)
-- Timeline periods:
-  - 2023–Present: Sabbatical | Innovation & Upskilling
-  - 2019–2023: Director, Cloud Innovation Center @ Accenture
-  - 2016–2023: Capability Development Lead @ Accenture
-  - 2018–2019: Cloud Native Architecture Lead @ Accenture
-  - 2009–2017: Sr. Technology Architecture Manager @ Accenture
-  - 2000–2009: Early Career (Startups & Consulting)
+**Implementation Details:**
+- **Vertical purple gradient line** (4px width, increased from wireframe 3px) connecting all positions
+- **Circular dots** (20px diameter with 4px border, increased from wireframe 14px/3px for better visibility)
+- **7 positions** matching wireframe exactly (not 6 as originally planned)
+- Purple gradient accent (`linear-gradient(to bottom, #8B5CF6, #7C3AED)`)
+- Single-line descriptions (changed from bullet points to match wireframe)
+- Transparent card backgrounds (no borders/shadows for minimal design)
+- 900px max-width container
+- CSS `::before` pseudo-elements for line and dots
+- HTML consolidation into single `st.markdown()` call to prevent Streamlit wrapper issues
+
+**Timeline Positions Implemented:**
+1. 2023–Present: Sabbatical | Innovation & Upskilling
+2. 2019–2023: Director, Cloud Innovation Center @ Accenture
+3. 2016–2023: Capability Development Lead @ Accenture
+4. 2018–2019: Cloud Native Architecture Lead @ Accenture
+5. 2009–2017: Sr. Technology Architecture Manager @ Accenture
+6. 2005–2009: Technology Manager @ Blue Cross Blue Shield
+7. 2000–2005: Early Career | Startups & Consulting
+
+**Technical Approach:**
+- CSS classes: `.timeline`, `.timeline-item`, `.timeline-card`
+- Typography: 14px purple years (bold), 18px dark titles, 14px gray companies, 14px descriptions
+- Spacing: 30px margin-bottom between items, 40px left padding for timeline container
+- Dot positioning: `-50px` left offset from timeline container
+
+**Key Learnings:**
+- Streamlit wraps each `st.markdown()` call in container divs, breaking width constraints
+- Solution: Build complete HTML string before single markdown render
+- List collection with `join()` prevents raw HTML display issues
 
 ---
 
@@ -288,24 +306,25 @@ Answer naturally, referencing specific projects:"""
 ## Implementation Priority
 
 **Priority Order:**
-1. ✅ ~~Hero section~~ (deferred)
-2. ✅ ~~Stats bar~~ (deferred)
-3. ✅ ~~Timeline visualization~~ (deferred)
-4. ✅ ~~Core competencies restructure~~ (deferred)
-5. ✅ ~~Leadership philosophy expansion~~ (deferred)
+1. ⏸️ Hero section (deferred - pending Ask MattGPT completion)
+2. ⏸️ Stats bar (deferred - pending Ask MattGPT completion)
+3. ✅ **Timeline visualization** (COMPLETE - November 10, 2025)
+4. ⏸️ Core competencies restructure (deferred - pending Ask MattGPT completion)
+5. ⏸️ Leadership philosophy expansion (deferred - pending Ask MattGPT completion)
 6. ⭐ **MattGPT Technical Deep-Dive** (HIGHEST PRIORITY when we return - showcases technical credibility)
-7. ✅ ~~Contact/CTA redesign~~ (deferred)
+7. ⏸️ Contact/CTA redesign (deferred - pending Ask MattGPT completion)
 
 ---
 
 ## Estimated Effort
 
 - **Quick wins:** Stats bar, color scheme updates (~30 min)
-- **Medium effort:** Hero, Timeline, CTA section (~1-2 hours)
+- **Medium effort:** Hero, ~~Timeline~~ ✅, CTA section (~1-2 hours)
 - **Heavy lift:** Core Competencies restructure, Leadership expansion (~2-3 hours)
 - **Major addition:** MattGPT Technical Deep-Dive (~3-4 hours)
 
-**Total estimated effort:** ~8-10 hours for complete wireframe alignment
+**Timeline Actual Effort:** ~60 minutes (completed Session 4)
+**Remaining Estimated Effort:** ~7-9 hours for complete wireframe alignment
 
 ---
 
@@ -337,17 +356,16 @@ Answer naturally, referencing specific projects:"""
 
 ## Next Steps When Resuming
 
-1. Read current `about_matt.py` file
-2. Start with MattGPT Technical Deep-Dive section (highest impact)
-3. Update hero section with avatar + gradient
-4. Restructure core competencies (6 categories, no skill bars)
-5. Expand leadership philosophy (full paragraphs)
-6. Update stats bar metrics (5 columns)
-7. Add timeline visualization (vertical line with dots)
-8. Redesign contact/CTA (gradient background, centered)
+1. ⭐ **MattGPT Technical Deep-Dive section** (highest impact - showcases technical credibility)
+2. Update hero section with avatar + gradient
+3. Update stats bar metrics (5 columns, purple accent)
+4. Restructure core competencies (6 categories in 3x2 grid, no skill bars)
+5. Expand leadership philosophy (full paragraphs in 2x2 grid)
+6. Redesign contact/CTA (gradient background, centered, actual links)
+7. ~~Timeline visualization~~ ✅ COMPLETE
 
 ---
 
-**Last Updated:** November 7, 2025
-**Status:** Documented and deferred
-**Next Action:** Focus on Ask MattGPT priorities, return to this when ready
+**Last Updated:** November 10, 2025
+**Status:** Career Timeline Complete (Session 4) - Remaining sections deferred pending Ask MattGPT completion
+**Next Action:** Continue focusing on Ask MattGPT priorities, return to remaining About Matt sections when ready
