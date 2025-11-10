@@ -254,7 +254,7 @@ def render_about_matt():
             <span style="color: #999999; font-size: 15px; display: block;">Years Experience</span>
         </div>
         <div style="background: var(--secondary-background-color); padding: 28px 20px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
-            <span style="font-size: 36px; font-weight: 700; color: #8B5CF6; display: block; margin-bottom: 8px;">115</span>
+            <span style="font-size: 36px; font-weight: 700; color: #8B5CF6; display: block; margin-bottom: 8px;">120+</span>
             <span style="color: #999999; font-size: 15px; display: block;">Projects Delivered</span>
         </div>
         <div style="background: var(--secondary-background-color); padding: 28px 20px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
@@ -277,6 +277,11 @@ def render_about_matt():
     st.markdown(
         "<h2 class='section-title'>Career Evolution</h2>", unsafe_allow_html=True
     )
+    st.markdown("""
+    <div style='text-align: center; max-width: 800px; margin: 0 auto 32px auto;'>
+        <p style='color: #b0b0b0; font-size: 16px;'>From individual contributor to enterprise transformation leader</p>
+    </div>
+    """, unsafe_allow_html=True)
 
     # Timeline - matches wireframe exactly (7 positions)
     timeline_data = [
