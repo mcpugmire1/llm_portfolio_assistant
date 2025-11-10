@@ -1,8 +1,8 @@
 """UI helper utilities - containers, debug output."""
 
 import streamlit as st
+from streamlit import components
 from config.debug import DEBUG
-import streamlit as st
 from typing import Optional
 from utils.formatting import _format_narrative, _format_key_points, _format_deep_dive
 import os, re, time, textwrap, json
@@ -304,15 +304,60 @@ def render_no_match_banner(
     Unified yellow warning banner for 'no confident match' situations.
     Always shows a consistent message, suggestions, and optionally a Clear Filters button.
     """
-    msg = "I couldn’t find anything confidently relevant to that query."
-    debug_note = ""
+    # Primary message
+    msg = "🐾 I can't help with that. I'm trained on Matt's transformation work."
+
+    # Add debug info if in debug mode
+    debug_text = ""
     if DEBUG and reason:
-        debug_note = f"  \n_Reason: {reason}"
+        debug_text = f"Debug: {reason}"
         if overlap is not None:
-            debug_note += f" (overlap={overlap:.2f})"
-        debug_note += "_"
-    msg += debug_note
-    st.warning(msg)
+            debug_text += f" (overlap={overlap:.2f})"
+
+    # Use native Streamlit components for better compatibility in chat messages
+    # Create a container with custom styling via markdown
+    st.markdown(
+        """
+        <style>
+        .no-match-banner {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #FFFBEB;
+            border-left: 4px solid #F59E0B;
+            padding: 20px 24px;
+            border-radius: 12px;
+            margin: 16px 0;
+        }
+        .no-match-banner-msg {
+            color: #B45309;
+            font-weight: 500;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .no-match-banner-debug {
+            color: #B45309;
+            font-size: 13px;
+            opacity: 0.8;
+            font-style: italic;
+            margin-top: 8px;
+        }
+        .no-match-banner-subtitle {
+            color: #B45309;
+            font-weight: 500;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Render the banner content
+    banner_html = f'<div class="no-match-banner"><div class="no-match-banner-msg">{msg}</div>'
+    if debug_text:
+        banner_html += f'<div class="no-match-banner-debug">{debug_text}</div>'
+    banner_html += '<div class="no-match-banner-subtitle">Ask me about:</div></div>'
+
+    st.markdown(banner_html, unsafe_allow_html=True)
 
     # Chips act as clean semantic prompts (no tag/domain filters)
     suggestions = [
@@ -346,7 +391,8 @@ def render_no_match_banner(
                 # Guarantee we build a compact answer panel even if retrieval is empty
                 st.session_state["__ask_force_answer__"] = True
                 st.session_state["ask_input"] = prompt_text
-                st.session_state["active_tab"] = "Ask MattGPT"
+                # Note: Don't set active_tab here - we're already on Ask MattGPT if we see this banner
+                # Setting it redundantly can cause issues with page state
                 # Defer banner clearing to after a successful answer, avoiding duplicates
                 st.session_state["__clear_banner_after_answer__"] = True
                 st.rerun()

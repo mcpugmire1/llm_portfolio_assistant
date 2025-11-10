@@ -48,6 +48,7 @@ from utils.formatting import (
 from utils.ui_helpers import dbg, render_no_match_banner, safe_container
 from utils.validation import _tokenize, is_nonsense, token_overlap_ratio
 from streamlit_js_eval import streamlit_js_eval
+from ui.components.story_detail import render_story_detail
 
 load_dotenv()
 
@@ -189,21 +190,6 @@ def build_domain_options(domains: List[str]) -> Tuple[List[str], List[Tuple[str,
 # =============================================================================
 
 
-def on_ask_this_story(s: dict):
-    """Set context to a specific story and open Ask MattGPT tab"""
-    st.session_state["active_story"] = s.get("id")
-    client = s.get("Client", "")
-    title = s.get("Title", "")
-    st.session_state["seed_prompt"] = (
-        f"How were these outcomes achieved for {client} — {title}? "
-        "Focus on tradeoffs, risks, and replicable patterns."
-    )
-    st.session_state["active_tab"] = "Ask MattGPT"
-    st.session_state["ask_input"] = st.session_state.get("seed_prompt", "")
-    st.session_state["__ctx_locked__"] = True
-    st.session_state["__ask_from_suggestion__"] = True
-    st.rerun()
-
 
 def get_context_story(stories: List[dict]) -> Optional[dict]:
     """Get the currently selected story for detail view"""
@@ -325,211 +311,6 @@ def render_filter_chips(filters: dict, stories: List[dict]) -> bool:
     
     return False
 
-
-def render_detail_panel(detail: Optional[dict], key_suffix: str, stories: List[dict]):
-    """Render the story detail panel with full STAR narrative and sidebar (matches wireframe)"""
-    hr_style = "margin: 16px 0 12px 0; border: none; border-top: 3px solid #8B5CF6;"
-    st.markdown(f"<hr style='{hr_style}'>", unsafe_allow_html=True)
-
-    if not detail:
-        st.info("Click a row/card above to view details.")
-        return
-
-    # Extract data
-    title = detail.get("Title", "Untitled")
-    client = detail.get("Client", "Unknown")
-    role = detail.get("Role", "Unknown")
-    domain = detail.get("Sub-category", "Unknown")
-    start_date = detail.get("Start_Date", "")
-    end_date = detail.get("End_Date", "")
-
-    # STAR sections
-    situation = detail.get("Situation", [])
-    task = detail.get("Task", [])
-    action = detail.get("Action", [])
-    result = detail.get("Result", [])
-
-    # Sidebar data
-    public_tags = detail.get("public_tags", []) or []
-    competencies = detail.get("Competencies", []) or []
-    performance = detail.get("Performance", []) or []
-
-    # Format dates
-    date_range = ""
-    if start_date or end_date:
-        date_range = f"{start_date or '?'} - {end_date or '?'}"
-
-    with safe_container(border=True):
-        # HEADER: Title + Metadata + Action Buttons
-        header_col1, header_col2 = st.columns([4, 1])
-
-        with header_col1:
-            st.markdown(f"<h2 style='font-size: 24px; font-weight: 700; color: var(--text-color); margin-bottom: 12px; line-height: 1.3;'>{title}</h2>", unsafe_allow_html=True)
-
-            # Metadata with icons
-            meta_html = f"""
-            <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center; font-size: 14px; color: #7f8c8d; margin-bottom: 20px;">
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    <span>🏢</span>
-                    <strong style="color: var(--text-color);">{client}</strong>
-                </div>
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    <span>👤</span>
-                    <strong style="color: var(--text-color);">{role}</strong>
-                </div>
-                {'<div style="display: flex; align-items: center; gap: 8px;"><span>📅</span><span>' + date_range + '</span></div>' if date_range else ''}
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    <span>🏷️</span>
-                    <span>{domain}</span>
-                </div>
-            </div>
-            """
-            st.markdown(meta_html, unsafe_allow_html=True)
-
-        with header_col2:
-            # Share and Export buttons (MVP implementation per UX spec)
-            btn_col1, btn_col2 = st.columns(2)
-            with btn_col1:
-                if st.button("🔗", key=f"share_{key_suffix}_{detail.get('id', 'x')}", help="Share (Copy link)", use_container_width=True):
-                    # MVP: Provide instructions since Streamlit doesn't support clipboard API
-                    st.toast("💡 To share: Copy the URL from your browser address bar", icon="ℹ️")
-            with btn_col2:
-                if st.button("📄", key=f"export_{key_suffix}_{detail.get('id', 'x')}", help="Export (Print)", use_container_width=True):
-                    st.toast("Print dialog opened. Save as PDF.", icon="ℹ️")
-                    # Use streamlit-js-eval to trigger browser print dialog
-                    streamlit_js_eval(js_expressions="window.print()", key=f"print_{key_suffix}")
-
-        st.markdown("<hr style='border: none; border-top: 2px solid #e0e0e0; margin: 20px 0;'>", unsafe_allow_html=True)
-
-        # TWO-COLUMN LAYOUT: STAR sections (left) + Sidebar (right)
-        main_col, sidebar_col = st.columns([2, 1])
-
-        with main_col:
-            # SITUATION
-            if situation and len(situation) > 0:
-                st.markdown("""
-                <div style="margin-bottom: 24px;">
-                    <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #8B5CF6; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
-                        <span>📍</span><span>SITUATION</span>
-                    </div>
-                    <div style="font-size: 14px; color: var(--text-color); line-height: 1.7;">
-                """, unsafe_allow_html=True)
-                for s in situation:
-                    if s:
-                        st.markdown(f"<p>{s}</p>", unsafe_allow_html=True)
-                st.markdown("</div></div>", unsafe_allow_html=True)
-
-            # TASK
-            if task and len(task) > 0:
-                st.markdown("""
-                <div style="margin-bottom: 24px;">
-                    <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #8B5CF6; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
-                        <span>🎯</span><span>TASK</span>
-                    </div>
-                    <div style="font-size: 14px; color: var(--text-color); line-height: 1.7;">
-                """, unsafe_allow_html=True)
-                for t in task:
-                    if t:
-                        st.markdown(f"<p>{t}</p>", unsafe_allow_html=True)
-                st.markdown("</div></div>", unsafe_allow_html=True)
-
-            # ACTION
-            if action and len(action) > 0:
-                st.markdown("""
-                <div style="margin-bottom: 24px;">
-                    <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #8B5CF6; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
-                        <span>⚡</span><span>ACTION</span>
-                    </div>
-                    <div style="font-size: 14px; color: var(--text-color); line-height: 1.7;">
-                        <ul style="margin: 12px 0; padding-left: 20px;">
-                """, unsafe_allow_html=True)
-                for a in action:
-                    if a:
-                        st.markdown(f"<li style='margin-bottom: 8px;'>{a}</li>", unsafe_allow_html=True)
-                st.markdown("</ul></div></div>", unsafe_allow_html=True)
-
-            # RESULT
-            if result and len(result) > 0:
-                st.markdown("""
-                <div style="margin-bottom: 24px;">
-                    <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #8B5CF6; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
-                        <span>🏆</span><span>RESULT</span>
-                    </div>
-                    <div style="font-size: 14px; color: var(--text-color); line-height: 1.7;">
-                        <ul style="margin: 12px 0; padding-left: 20px;">
-                """, unsafe_allow_html=True)
-                for r in result:
-                    if r:
-                        st.markdown(f"<li style='margin-bottom: 8px;'>{r}</li>", unsafe_allow_html=True)
-                st.markdown("</ul></div></div>", unsafe_allow_html=True)
-
-        with sidebar_col:
-            # TECHNOLOGIES & PRACTICES (Tags)
-            if public_tags and len(public_tags) > 0:
-                st.markdown("""
-                <div style="margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid #e0e0e0;">
-                    <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #7f8c8d; margin-bottom: 12px;">
-                        TECHNOLOGIES & PRACTICES
-                    </div>
-                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-                """, unsafe_allow_html=True)
-                for tag in public_tags[:10]:  # Limit to 10 tags
-                    if tag:
-                        st.markdown(f'<span style="background: #ecf0f1; padding: 6px 12px; border-radius: 12px; font-size: 12px; color: #555; font-weight: 500;">{tag}</span>', unsafe_allow_html=True)
-                st.markdown("</div></div>", unsafe_allow_html=True)
-
-            # CORE COMPETENCIES (List)
-            if competencies and len(competencies) > 0:
-                st.markdown("""
-                <div style="margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid #e0e0e0;">
-                    <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #7f8c8d; margin-bottom: 12px;">
-                        CORE COMPETENCIES
-                    </div>
-                    <ul style="list-style: none; padding: 0; margin: 0;">
-                """, unsafe_allow_html=True)
-                for comp in competencies:
-                    if comp:
-                        st.markdown(f'<li style="padding: 8px 0; font-size: 13px; color: #555; border-bottom: 1px solid #ecf0f1;">{comp}</li>', unsafe_allow_html=True)
-                st.markdown("</ul></div>", unsafe_allow_html=True)
-
-            # KEY METRICS (Green boxes with extracted numbers)
-            metrics = []
-            for perf in performance:
-                if perf and ("%" in perf or "x" in perf.lower() or "month" in perf.lower() or "week" in perf.lower()):
-                    # Extract first number/percentage for display
-                    import re
-                    match = re.search(r'(\d+[%xX]?|\d+\+?)', perf)
-                    if match:
-                        metrics.append((match.group(1), perf[:50]))
-
-            if metrics:
-                st.markdown("""
-                <div style="margin-bottom: 24px;">
-                    <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #7f8c8d; margin-bottom: 12px;">
-                        KEY METRICS
-                    </div>
-                """, unsafe_allow_html=True)
-                for value, label in metrics[:4]:  # Limit to 4 metrics
-                    st.markdown(f"""
-                    <div style="background: #f8f9fa; padding: 12px; border-radius: 6px; border-left: 3px solid #27ae60; margin-bottom: 12px;">
-                        <div style="font-size: 18px; font-weight: 700; color: #27ae60; margin-bottom: 4px;">{value}</div>
-                        <div style="font-size: 11px; color: #7f8c8d; text-transform: uppercase;">{label}</div>
-                    </div>
-                    """, unsafe_allow_html=True)
-                st.markdown("</div>", unsafe_allow_html=True)
-
-        # ASK AGY ABOUT THIS (Full-width CTA at bottom)
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown("""
-        <p style="text-align: center; margin-bottom: 20px; color: #555; font-size: 14px;">💬 Want to know more about this project?</p>
-        """, unsafe_allow_html=True)
-
-        # Ask button centered using columns
-        _, col_center, _ = st.columns([1.5, 1, 1.5])
-        with col_center:
-            btn_key = f"ask_from_detail_{key_suffix}_{detail.get('id', 'x')}"
-            if st.button("Ask Agy 🐾 About This", key=btn_key, type="primary", use_container_width=True):
-                on_ask_this_story(detail)
 
 
 def render_pagination(total_results: int, page_size: int, offset: int, view_mode: str):
@@ -716,6 +497,18 @@ def render_explore_stories(
     - Pill X buttons work correctly
     - Clear all resets everything properly
     """
+    # Clear Ask MattGPT session state ONLY when first entering from Ask MattGPT
+    # Use a flag to ensure this only happens once per tab switch
+    if st.session_state.get("active_tab") == "Explore Stories":
+        if st.session_state.get("_just_switched_to_explore"):
+            # Clear the story selection from Ask MattGPT
+            if 'active_story' in st.session_state:
+                del st.session_state['active_story']
+            if 'active_story_obj' in st.session_state:
+                del st.session_state['active_story_obj']
+            # Clear the flag so this doesn't run again
+            del st.session_state["_just_switched_to_explore"]
+
     # Hero header with Agy avatar (gray headphones)
     st.markdown(
         """
@@ -1401,7 +1194,7 @@ def render_explore_stories(
 
         render_pagination(total_results, page_size, offset, "table")
         detail = get_context_story(stories)
-        render_detail_panel(detail, "table", stories)
+        render_story_detail(detail, "table", stories)
 
     # =========================================================================
     # CARDS VIEW
@@ -1473,7 +1266,7 @@ def render_explore_stories(
 
             render_pagination(total_results, page_size, offset, "cards")
             detail = get_context_story(stories)
-            render_detail_panel(detail, "cards", stories)
+            render_story_detail(detail, "cards", stories)
 
             # JAVASCRIPT: Force purple button styles for card buttons (same workaround as home page)
             import streamlit.components.v1 as components

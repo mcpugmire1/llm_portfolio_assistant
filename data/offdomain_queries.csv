@@ -155,3 +155,28 @@ ts_utc,query,reason
 2025-10-21T15:46:10,how much are baseball caps at walmart?,rule:retail_price
 2025-10-22T15:24:34,how much are baseball caps at walmart?,rule:retail_price
 2025-10-22T16:55:22,how much are baseball caps at walmart?,rule:retail_price
+2025-11-06T16:03:03,How much are bananas at walmart?,rule:retail_price
+2025-11-06T16:38:16,How much are baseball caps at walmart?,rule:retail_price
+2025-11-07T19:47:52,How much are bananas at walmart?,rule:retail_price
+2025-11-07T19:52:53,"How much are bananas at walmart?
+
+",rule:retail_price
+2025-11-07T20:32:08,How much are baseball caps at walmart?,rule:retail_price
+2025-11-07T20:39:21,How much are baseball caps at Walmart?,rule:retail_price
+2025-11-07T20:41:57,How much are baseball caps at Walmart? ,rule:retail_price
+2025-11-07T20:57:47,How much are baseball caps at walmart?,rule:retail_price
+2025-11-07T21:11:12,How much are bananas at walmart?,rule:retail_price
+2025-11-07T21:19:11,How much are bananas at Walmart?,rule:retail_price
+2025-11-07T21:19:33,How much are bananas at walmart?,rule:retail_price
+2025-11-07T21:29:29,How much are bananas?,no_overlap+low_conf
+2025-11-09T19:27:35,How much are baseball caps at Target?,rule:retail_price
+2025-11-09T19:48:43,how much are baseball caps at Walmart?,rule:retail_price
+2025-11-09T19:51:28,How much are baseball caps at Target?,rule:retail_price
+2025-11-09T20:24:02,how much are caps at walmart?,rule:retail_price
+2025-11-09T20:29:04,How much are baseball caps at Walmart?,rule:retail_price
+2025-11-09T20:42:58,How much are baseball caps at walmart?,rule:retail_price
+2025-11-09T22:42:28,how much are baseball caps at walmart? ,rule:retail_price
+2025-11-09T22:43:00,How much are baseball caps at walmart?,rule:retail_price
+2025-11-09T22:44:16,how much are baseball hats at Target?,rule:retail_price
+2025-11-10T03:09:04,How much are baseball caps at Walmart?,rule:retail_price
+2025-11-10T03:10:26,How much are baseball caps at Walmart?,rule:retail_price

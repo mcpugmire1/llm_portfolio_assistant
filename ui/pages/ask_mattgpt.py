@@ -6,6 +6,7 @@ Uses semantic search and Pinecone to retrieve relevant project stories.
 """
 
 import streamlit as st
+import streamlit.components.v1 as components  # ADD THIS LINE
 from typing import List, Dict, Optional
 import json
 from datetime import datetime
@@ -39,7 +40,7 @@ from services.pinecone_service import (
 from services.rag_service import semantic_search, _KNOWN_VOCAB
 from utils.formatting import _format_narrative, _format_key_points, _format_deep_dive
 from utils.ui_helpers import render_sources_chips, render_sources_badges_static
-from ui.components.how_agy_works import render_how_agy_works
+from ui.components.story_detail import render_story_detail
 
 # --- Nonsense rules (JSONL) + known vocab -------------------
 import csv
@@ -56,9 +57,34 @@ def render_ask_mattgpt(stories: list):
     # NOTE: Don't call _ensure_ask_bootstrap() here - it clears ask_input_value
     # which breaks the pending_query flow
 
-    if not st.session_state.get("ask_transcript"):
+    if DEBUG:
+        from utils.ui_helpers import dbg
+        transcript_len = len(st.session_state.get("ask_transcript", []))
+        has_inject = st.session_state.get("__inject_user_turn__")
+        has_processing = st.session_state.get("__processing_chip_injection__")
+        dbg(f"[ENTRY] transcript_len={transcript_len}, inject={has_inject}, processing={has_processing}")
+
+    # Clear transition indicator flag only (feature temporarily disabled due to positioning issues)
+    # Don't clear processing flags here as they're needed for the normal flow
+    if st.session_state.get("show_transition_indicator"):
+        del st.session_state["show_transition_indicator"]
+
+    # Force conversation view if coming from story suggestion
+    show_conversation = bool(st.session_state.get("ask_transcript"))
+    if st.session_state.get("__ask_from_suggestion__"):
+        show_conversation = True
+        st.session_state["show_ask_panel"] = True
+        # Clear the flag after using it
+        if "__ask_from_suggestion__" in st.session_state:
+            del st.session_state["__ask_from_suggestion__"]
+
+    if not show_conversation:
+        if DEBUG:
+            dbg("[ENTRY] → LANDING PAGE")
         render_landing_page(stories)
     else:
+        if DEBUG:
+            dbg("[ENTRY] → CONVERSATION VIEW")
         render_conversation_view(stories)
 
 
@@ -78,84 +104,15 @@ def render_landing_page(stories: list):
         st.session_state["processing_suggestion"] = False
 
     # === PAGE-SPECIFIC CSS ONLY ===
+    # Note: Navbar positioning is handled by global_styles.py
     st.markdown(
         """
         <style>
-        /* Fine-tune Ask MattGPT navbar to match other pages */
-        div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) {
-            margin-top: 2.25rem !important;
-        }
-
-        /* AGGRESSIVE SPACING REMOVAL */
-        .main {
-            padding-top: 0 !important;
-        }
-
-        .main .block-container {
-            padding-top: 0 !important;
-            margin-top: 0 !important;
-        }
-
-        .stMainBlockContainer {
-            padding-top: 0 !important;
-            margin-top: 0 !important;
-        }
-
-        .stMainBlockContainer > div[data-testid="stVerticalBlock"]:first-child {
-            padding-top: 0 !important;
-            margin-top: 0 !important;
-        }
-
-        section[data-testid="stMain"] {
-            padding-top: 0 !important;
-        }
-
-        div[data-testid="stAppViewContainer"] {
-            padding-top: 0 !important;
-        }
-
-        /* Keep header visible with hamburger menu on top */
-        header[data-testid="stHeader"] {
-            margin-bottom: 0 !important;
-            padding-bottom: 0 !important;
-            z-index: 999999 !important;
-            position: relative !important;
-        }
-
-        header[data-testid="stHeader"] [data-testid="stToolbar"] {
-            display: flex !important;
-            visibility: visible !important;
-        }
-        
-        /* Remove spacing from first markdown element */
-        .stMarkdown:first-child {
-            margin-top: 0 !important;
-            padding-top: 0 !important;
-        }
-
-        /* Override Streamlit's default markdown container spacing */
-        .main > div:first-child .stMarkdownContainer {
-            margin-bottom: 0 !important;
-            padding-top: 0 !important;
-        }
-
-        /* Target the first element container after the nav layout wrapper */
-        div[data-testid="stLayoutWrapper"] + div[data-testid="stElementContainer"] {
-            margin-top: 0 !important;
-            padding-top: 0 !important;
-        }
-
-        /* Also ensure the markdown container inside doesn't add spacing */
-        div[data-testid="stLayoutWrapper"] + div[data-testid="stElementContainer"] .stMarkdownContainer {
-            margin-top: 0 !important;
-            padding-top: 0 !important;
-        }
-
         /* Purple header - pull up to eliminate white space */
         .ask-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 30px;
-            margin: -2rem 0 0 0 !important;  /* Compensate for Streamlit container spacing */
+            margin-top: -35px !important; /* Set to 0 so it aligns perfectly with the 72px padding-top above */
             color: white;
             display: flex;
             justify-content: space-between;
@@ -174,6 +131,11 @@ def render_landing_page(stories: list):
             border-radius: 50% !important;
             border: 3px solid white !important;
             box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+        }
+
+        /* Dark mode halo effect for header avatar */
+        [data-theme="dark"] .header-agy-avatar {
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
         }
 
         .header-text h1 {
@@ -209,7 +171,7 @@ def render_landing_page(stories: list):
             transform: translateY(-2px);
         }
 
-        /* Status bar - force parent containers to full width */
+        /* Status bar - constrained to content width */
         .status-bar {
             display: flex !important;
             flex-wrap: nowrap !important;
@@ -220,10 +182,6 @@ def render_landing_page(stories: list):
             border-bottom: 1px solid #e0e0e0 !important;
             margin: 0 !important;
             overflow-x: auto !important;
-            width: 100vw !important;
-            max-width: 100vw !important;
-            margin-left: calc(-50vw + 50%) !important;
-            margin-right: calc(-50vw + 50%) !important;
         }
 
         .status-item {
@@ -281,6 +239,11 @@ def render_landing_page(stories: list):
             height: 96px;
             border-radius: 50%;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Dark mode halo effect for main hero avatar */
+        [data-theme="dark"] .main-avatar img {
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
         }
 
         .welcome-title {
@@ -583,7 +546,7 @@ def render_landing_page(stories: list):
         <div class="header-content" style="display: flex; justify-content: space-between; align-items: center;">
             <div style="display: flex; align-items: center; gap: 24px;">
                 <img class="header-agy-avatar"
-                    src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar_64_dark.png"
+                    src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png"
                     alt="Agy"/>
                 <div class="header-text">
                     <h1>Ask MattGPT</h1>
@@ -620,7 +583,7 @@ def render_landing_page(stories: list):
         """
     <div class="main-intro-section">
         <div class="main-avatar">
-            <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar_96_dark.png" alt="Agy"/>
+            <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png" alt="Agy"/>
         </div>
         <h2 class="welcome-title">Hi, I'm Agy 🐾</h2>
         <p class="intro-text-primary">
@@ -657,16 +620,14 @@ def render_landing_page(stories: list):
     animation: chaseAnimationEarly 0.9s steps(3) infinite;
 }
 </style>
-<div style='background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%) !important;
-            border: 2px solid #667eea40 !important;
-            border-radius: 12px;
-            padding: 16px 24px;
+<div style='background: transparent;
+            padding: 16px 0;
             margin: 20px 0;
             display: flex;
             align-items: center;
             gap: 12px;'>
     <img class="thinking-ball-early" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png" alt="Thinking"/>
-    <div style='color: #667eea !important; font-weight: 500;'>🐾 Tracking down insights...</div>
+    <div style='color: #2C363D; font-weight: 500;'>🐾 Tracking down insights...</div>
 </div>
 """,
                 unsafe_allow_html=True,
@@ -783,16 +744,14 @@ def render_landing_page(stories: list):
     animation: chaseAnimation 0.9s steps(3) infinite;
 }
 </style>
-<div style='background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%) !important;
-            border: 2px solid #667eea40 !important;
-            border-radius: 12px;
-            padding: 16px 24px;
+<div style='background: transparent;
+            padding: 16px 0;
             margin: 20px 0;
             display: flex;
             align-items: center;
             gap: 12px;'>
     <img class="thinking-ball" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png" alt="Thinking"/>
-    <div style='color: #667eea !important; font-weight: 500;'>🐾 Tracking down insights...</div>
+    <div style='color: #2C363D; font-weight: 500;'>🐾 Tracking down insights...</div>
 </div>
 """,
                 unsafe_allow_html=True,
@@ -804,18 +763,38 @@ def render_landing_page(stories: list):
         # Add to transcript
         st.session_state["ask_transcript"].append({"Role": "user", "text": query})
 
-        # Add conversational answer (wireframe style)
-        sources = result.get("sources", [])
-        answer_text = result.get("answer_md") or result.get("answer", "")
+        # Check if nonsense was detected
+        if st.session_state.get("ask_last_reason"):
+            # Nonsense detected - add banner entry to transcript
+            reason = st.session_state.get("ask_last_reason", "")
+            query_text = st.session_state.get("ask_last_query", "")
+            overlap = st.session_state.get("ask_last_overlap", None)
 
-        st.session_state["ask_transcript"].append(
-            {
-                "type": "conversational",
+            st.session_state["ask_transcript"].append({
+                "type": "banner",
                 "Role": "assistant",
-                "text": answer_text,
-                "sources": sources,
-            }
-        )
+                "reason": reason,
+                "query": query_text,
+                "overlap": overlap,
+            })
+
+            # Clear flags after adding to transcript
+            st.session_state.pop("ask_last_reason", None)
+            st.session_state.pop("ask_last_query", None)
+            st.session_state.pop("ask_last_overlap", None)
+        else:
+            # Normal answer - add conversational answer (wireframe style)
+            sources = result.get("sources", [])
+            answer_text = result.get("answer_md") or result.get("answer", "")
+
+            st.session_state["ask_transcript"].append(
+                {
+                    "type": "conversational",
+                    "Role": "assistant",
+                    "text": answer_text,
+                    "sources": sources,
+                }
+            )
 
         # Clear processing state
         st.session_state["processing_suggestion"] = False
@@ -843,50 +822,52 @@ def render_conversation_view(stories: list):
     """
 
     # === PAGE-SPECIFIC CSS ONLY (NO NAVBAR) ===
+    # Navbar positioning is now handled by universal CSS in global_styles.py
     st.markdown(
         """
         <style>
-        /* Fine-tune Ask MattGPT navbar to match other pages */
-        div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) {
-            margin-top: 2.25rem !important;
-        }
-
-        /* Keep Streamlit header visible with hamburger menu on top */
-        header[data-testid="stHeader"] {
-            z-index: 999999 !important;
-            position: relative !important;
-            display: block !important;
-            visibility: visible !important;
-        }
-
-        header[data-testid="stHeader"] [data-testid="stToolbar"] {
+        /* Status bar - constrained to content width */
+        .status-bar {
             display: flex !important;
-            visibility: visible !important;
+            flex-wrap: nowrap !important;
+            gap: 24px !important;
+            justify-content: center !important;
+            padding: 12px 30px !important;
+            background: #f8f9fa !important;
+            border-bottom: 1px solid #e0e0e0 !important;
+            margin: 0 !important;
+            overflow-x: auto !important;
         }
 
-        /* Override Streamlit's default markdown container spacing */
-        .main > div:first-child .stMarkdownContainer {
-            margin-bottom: 0 !important;
-            padding-top: 0 !important;
+        .status-item {
+            display: flex !important;
+            align-items: center !important;
+            gap: 6px !important;
+            font-size: 13px !important;
+            color: #6B7280 !important;
+            white-space: nowrap !important;
+            flex-shrink: 0 !important;
         }
 
-        /* Target the first element container after the nav layout wrapper */
-        div[data-testid="stLayoutWrapper"] + div[data-testid="stElementContainer"] {
-            margin-top: 0 !important;
-            padding-top: 0 !important;
+        .status-value {
+            font-weight: 600;
+            color: #2C363D;
         }
 
-        /* Also ensure the markdown container inside doesn't add spacing */
-        div[data-testid="stLayoutWrapper"] + div[data-testid="stElementContainer"] .stMarkdownContainer {
-            margin-top: 0 !important;
-            padding-top: 0 !important;
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #10B981;
+            border-radius: 50%;
+            display: inline-block;
+            flex-shrink: 0;
         }
 
         /* Chat interface header */
         .conversation-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 30px;
-            margin: -2rem 0 0 0 !important;  /* Compensate for Streamlit container spacing */
+            margin-top: -50px !important;  /* Navbar positioning handled by global_styles.py */
             color: white;
             display: flex;
             justify-content: space-between;
@@ -906,6 +887,11 @@ def render_conversation_view(stories: list):
                 border-radius: 50% !important;
                 border: 3px solid white !important;
                 box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+        }
+
+        /* Dark mode halo effect for conversation avatar */
+        [data-theme="dark"] .conversation-agy-avatar {
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
         }
 
         .conversation-header-text h1 {
@@ -1063,14 +1049,29 @@ def render_conversation_view(stories: list):
             border: none !important;
         }
 
-        /* Avatar styling */
+        /* Avatar styling - resize using rem units as per Streamlit's design */
+        .stChatMessage [data-testid="stImage"] img,
+        [data-testid="stChatMessage"] [data-testid="stImage"] img {
+            width: 4.5rem !important;  /* Default is 2rem, increased to 4.5rem (~72px) */
+            height: 4.5rem !important;
+            border-radius: 50% !important;
+            border: 2px solid #e0e0e0 !important;
+            background: white !important;
+            padding: 4px !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        /* Alternative selector for avatar container */
         [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"] {
-            width: 48px !important;
-            height: 48px !important;
             background: white !important;
             border: 2px solid #e0e0e0 !important;
             padding: 4px !important;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        /* Dark mode halo effect for chat message avatars */
+        [data-theme="dark"] [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"] img {
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
         }
 
         [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-user"] {
@@ -1678,56 +1679,235 @@ def render_conversation_view(stories: list):
             font-weight: 600 !important;
             margin: 0 !important;
         }
+       /* --- NUCLEAR BRUTE-FORCE FOCUS KILLER (Place inside your <style> block) --- */
+
+        /* 1. Reset Global Variables to Neutralize Theme Color */
+        :root {
+            --st-focus-ring-color: transparent !important;
+            --primary-color: #f5f5f5 !important; 
+            --st-primary-color: #f5f5f5 !important;
+        }
+
+        /* 2. Target the specific element wrappers responsible for the purple glow (using Max Specificity) */
+        /* Targets the text input container */
+        [data-testid^="stTextInput"] > div > div > div, 
+        /* Targets the base input field itself */
+        div[data-baseweb="base-input"],
+        /* Targets the fieldset wrapper which draws the border */
+        [data-testid^="stTextInput"] fieldset {
+            /* Apply normal non-focus styling by default */
+            border-color: #E5E7EB !important;
+            box-shadow: none !important;
+            outline: none !important;
+        }
+
+        /* 3. Aggressively target the FOCUS/HOVER STATES on all identified wrappers */
+        [data-testid^="stTextInput"] :focus,
+        [data-testid^="stTextInput"] :hover,
+        [data-testid^="stTextInput"] :focus-within,
+        div[data-baseweb="base-input"]:focus,
+        div[data-baseweb="base-input"]:focus-within,
+        div[data-baseweb="base-input"]:hover {
+            /* Brute-force: Force it back to the wireframe gray state */
+            border-color: #E5E7EB !important;
+            box-shadow: none !important;
+            outline: none !important;
+        }
+        /* FINAL OVERRIDE - Most specific possible */
+        [data-testid="stChatInput"] div[data-baseweb="input"] > div:first-child,
+        [data-testid="stChatInput"] div[data-baseweb="base-input"] > div:first-child,
+        [data-testid="stChatInput"] [class*="Input-Container"],
+        [data-testid="stChatInput"] div[class*="st-"][class*="emotion"] > div:first-child {
+            border-radius: 8px !important;
+            overflow: hidden !important;
+        }
+
+        /* Force the parent fieldset/wrapper */
+        [data-testid="stChatInput"] fieldset,
+        [data-testid="stChatInput"] [data-baseweb="input"],
+        [data-testid="stChatInput"] [data-baseweb="base-input"] {
+            border-radius: 8px !important;
+        }
+
+         /* ========================================
+       FIX: TEXTAREA BORDER ISSUE (ADD AT VERY BOTTOM)
+       ======================================== */
+    
+        /* KILL the purple left border on input - it's inheriting from chat messages */
+        [data-testid="stChatInput"] textarea,
+        [data-testid="stChatInputTextArea"],
+        [data-testid="stChatInput"] div,
+        [data-testid="stChatInput"] fieldset,
+        [data-testid="stChatInput"] *:not(button) {
+            border-left: 2px solid #ddd !important;  /* Force gray, not purple */
+        }
+
+        /* Ensure focus state also uses gray left border */
+        [data-testid="stChatInput"] textarea:focus,
+        [data-testid="stChatInputTextArea"]:focus {
+            border-left: 2px solid #8B5CF6 !important;  /* Purple only on focus */
+            border-top: 2px solid #8B5CF6 !important;
+            border-right: 2px solid #8B5CF6 !important;
+            border-bottom: 2px solid #8B5CF6 !important;
+        }
+
+        /* Prevent ANY element inside chat input from having purple left border by default */
+        [data-testid="stChatInput"] *:not(:focus) {
+            border-left-color: #ddd !important;
+        }
+        /* ========================================
+            FINAL FIX: Kill wrapper borders
+            ======================================== */
+
+        /* Target the specific wrapper div that has the gray border */
+        [data-testid="stChatInput"] div[class*="exaa2ht1"],
+        [data-testid="stChatInput"] div[data-baseweb="textarea"],
+        [data-testid="stChatInput"] > div > div:first-child {
+            border: none !important;
+            border-left: none !important;
+            box-shadow: none !important;
+            background: transparent !important;
+        }
+
+        /* ONLY the textarea gets styled */
+        textarea[data-testid="stChatInputTextArea"] {
+            border: 2px solid #ddd !important;
+            border-radius: 8px !important;
+        }
+
+        textarea[data-testid="stChatInputTextArea"]:focus {
+            border: 2px solid #8B5CF6 !important;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1) !important;
+        }
+        /* ========================================
+        TEXTAREA BORDERS - Clean styling
+        ======================================== */
+
+        /* MAXIMUM SPECIFICITY - Force borders on textarea */
+        [data-testid="stChatInput"] textarea[data-testid="stChatInputTextArea"][class*="st-"],
+        textarea[data-testid="stChatInputTextArea"].st-ae {
+            border: 2px solid #ddd !important;
+            border-radius: 8px !important;
+            padding: 14px 18px !important;
+            min-height: 48px !important;
+            max-height: 48px !important;
+            background: white !important;
+        }
+
+        /* Focus state with maximum specificity */
+        [data-testid="stChatInput"] textarea[data-testid="stChatInputTextArea"]:focus,
+        textarea[data-testid="stChatInputTextArea"].st-ae:focus {
+            border: 2px solid #8B5CF6 !important;
+            border-color: #8B5CF6 !important;
+            outline: none !important;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1) !important;
+        }
+        /* Match landing page input styling for chat textarea */
+    
+        /* Fix clipped corners - make parent containers visible */
+        [data-testid="stChatInput"],
+        [data-testid="stChatInput"] > div,
+        [data-testid="stChatInput"] > div > div,
+        [data-baseweb="textarea"],
+        [data-baseweb="base-input"] {
+            overflow: visible !important;
+        }
+        
+        /* Style the textarea to match landing page */
+        textarea[data-testid="stChatInputTextArea"] {
+            width: 100% !important;
+            padding: 20px 24px !important;
+            font-size: 17px !important;
+            border: 2px solid #E5E7EB !important;
+            border-radius: 16px !important;
+            transition: all 0.2s ease !important;
+            background: #FAFAFA !important;
+            font-family: inherit !important;
+            overflow: visible !important;
+            min-height: 60px !important;
+            max-height: 60px !important;
+        }
+        
+        /* Focus state - purple like the landing page */
+        textarea[data-testid="stChatInputTextArea"]:focus {
+            border-color: #8B5CF6 !important;
+            outline: none !important;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1) !important;
+        }
+        /* Kill all wrapper borders - only style the textarea */
+        [data-testid="stChatInput"] div[class*="exaa2ht"],
+        [data-baseweb="textarea"],
+        [data-baseweb="base-input"],
+        [data-testid="stChatInput"] > div,
+        [data-testid="stChatInput"] > div > div {
+            border: none !important;
+            box-shadow: none !important;
+            overflow: visible !important;
+            background: transparent !important;
+        }
+
+        /* ONLY style the textarea itself */
+        textarea[data-testid="stChatInputTextArea"] {
+            width: 100% !important;
+            padding: 20px 24px !important;
+            font-size: 17px !important;
+            border: 2px solid #E5E7EB !important;
+            border-radius: 16px !important;
+            transition: all 0.2s ease !important;
+            background: #FAFAFA !important;
+            font-family: inherit !important;
+            min-height: 60px !important;
+            max-height: 60px !important;
+        }
+
+        /* Focus state */
+        textarea[data-testid="stChatInputTextArea"]:focus {
+            border-color: #8B5CF6 !important;
+            outline: none !important;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1) !important;
+        }
+
+        button[data-testid="stChatInputSubmitButton"] {
+            padding: 14px 28px !important;
+            background: #8B5CF6 !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 8px !important;
+            font-size: 15px !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
+            /* Position adjustments */
+            transform: translate(-3px, 1.5px) !important;    /* More left - Move down */   
+        }
+        /* Fix hint - center it below the input */
+        [data-testid="stChatInput"]::after {
+            content: "Powered by OpenAI GPT-4o-mini with semantic search across 120+ project case studies";
+            display: block;
+            position: fixed;  /* Fixed positioning */
+            bottom: 26px;     /* 10px from bottom of screen */
+            left: 50%;
+            transform: translateX(-50%);  /* Center it */
+            text-align: center;
+            font-size: 12px;
+            color: #95a5a6;
+            padding: 10px 0;
+            width: 100%;
+            max-width: 900px;
+            z-index: 1000;
+            }
+
     </style>
     """,
         unsafe_allow_html=True,
     )
-
-    st.markdown("""
-        <script>
-        // Force input styling with JavaScript
-        setTimeout(function() {
-            // Target the textarea directly
-            const textarea = document.querySelector('[data-testid="stChatInputTextArea"]');
-            if (textarea) {
-                textarea.style.setProperty('border-radius', '8px', 'important');
-                textarea.style.setProperty('border', '2px solid #ddd', 'important');
-                textarea.style.setProperty('padding', '14px 18px', 'important');
-                textarea.style.setProperty('min-height', '48px', 'important');
-                textarea.style.setProperty('max-height', '48px', 'important');
-            }
-            
-            // Force hint text to show
-            const chatInput = document.querySelector('[data-testid="stChatInput"]');
-            if (chatInput && !document.querySelector('.input-hint-forced')) {
-                const hint = document.createElement('div');
-                hint.className = 'input-hint-forced';
-                hint.innerHTML = 'Powered by OpenAI GPT-4 with semantic search across 115 project case studies';
-                hint.style.cssText = 'text-align: center; font-size: 12px; color: #95a5a6; margin-top: 10px; padding: 10px 0 20px 0; background: white;';
-                chatInput.appendChild(hint);
-            }
-        }, 100);
-
-        // Re-run on any DOM changes
-        const observer = new MutationObserver(function() {
-            setTimeout(function() {
-                const textarea = document.querySelector('[data-testid="stChatInputTextArea"]');
-                if (textarea) {
-                    textarea.style.setProperty('border-radius', '8px', 'important');
-                    textarea.style.setProperty('border', '2px solid #ddd', 'important');
-                }
-            }, 50);
-        });
-        observer.observe(document.body, { childList: true, subtree: true });
-        </script>
-    """, unsafe_allow_html=True)
 
     # Page header with purple gradient - streamlined with button integrated
     st.markdown(
         """
     <div class="conversation-header">
         <div class="conversation-header-content">
-            <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar_96_dark.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
+            <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
             <div class="conversation-header-text">
                 <h1>Ask MattGPT</h1>
                 <p>Meet Agy 🐾 — Tracking down insights from 20+ years of transformation experience</p>
@@ -1738,197 +1918,372 @@ def render_conversation_view(stories: list):
         unsafe_allow_html=True,
     )
 
-    # Brand CTA button with specific key-based selector
-
-    if st.button("🔍 How Agy searches", key="how_works_top"):
-        st.session_state["show_how_modal"] = not st.session_state.get(
-            "show_how_modal", False
-        )
-        st.rerun()
-
-    st.markdown('</div>', unsafe_allow_html=True)
-
-    # Status bar matching landing page exactly
+    # Status bar matching landing page exactly - moved to be flush with purple header
     st.markdown(
         """
-    <div style='display: flex; gap: 32px; justify-content: center; align-items: center; padding: 4px 8px; background: rgba(255, 255, 255, 0.95); border-bottom: 1px solid #E5E7EB; font-size: 14px; color: #6B7280; margin-bottom: 20px; margin-top: 0;'>
-        <span><span class="status-dot"></span>Semantic search <strong>active</strong></span>
-        <span>Pinecone index <strong>ready</strong></span>
-        <span>120+ stories <strong>indexed</strong></span>
+    <div class="status-bar">
+        <div class="status-item">
+            <span class="status-dot"></span>
+            <span>Semantic search <span class="status-value">active</span></span>
+        </div>
+        <div class="status-item">
+            <span>Pinecone index <span class="status-value">ready</span></span>
+        </div>
+        <div class="status-item">
+            <span>120+ stories <span class="status-value">indexed</span></span>
+        </div>
     </div>
     """,
         unsafe_allow_html=True,
     )
 
-    # Show the modal if toggled
-    if st.session_state.get("show_how_modal", False):
-        # Force scroll to top when modal opens
-        st.markdown(
-            """
-        <script>
-        window.scrollTo({top: 0, behavior: 'smooth'});
-        </script>
-        """,
-            unsafe_allow_html=True,
+    # # Brand CTA button with specific key-based selector
+    # if st.button("🔍 How Agy searches", key="how_works_top"):
+    #     st.session_state["show_how_modal"] = not st.session_state.get(
+    #         "show_how_modal", False
+    #     )
+    #     st.rerun()
+
+    """
+    Clean "How Agy Searches" Modal Implementation
+    Combines stable CSS targeting, accessibility, and proper Streamlit rendering
+    """
+
+    # ============================================================================
+    # MODAL CONTROL FUNCTION
+    # ============================================================================
+
+    def toggle_how_modal():
+        """Centralized toggle for modal visibility state."""
+        st.session_state["show_how_modal"] = not st.session_state.get(
+            "show_how_modal", False
         )
+        st.rerun()
 
-        # Create a proper modal container without using expander
-        st.markdown("---")
+    # ============================================================================
+    # TRIGGER BUTTON
+    # ============================================================================
 
-        # Header with close button
-        col1, col2 = st.columns([10, 1])
-        with col1:
-            st.markdown("## 🔧 How MattGPT Works")
-        with col2:
-            if st.button("✕", key="close_how"):
-                st.session_state["show_how_modal"] = False
-                st.rerun()
+    if st.button("🔍 How Agy searches", key="how_works_top"):
+        toggle_how_modal()
 
-        # Content in a bordered container
-        with st.container():
-            # Quick stats bar
-            col1, col2, col3, col4 = st.columns(4)
+    # ============================================================================
+    # MODAL RENDERING
+    # ============================================================================
+    # Show the panel if toggled
+    if st.session_state.get("show_how_modal", False):
+        
+        # Auto-scroll to top
+        st.markdown("""
+            <script>
+            window.scrollTo({top: 0, behavior: 'smooth'});
+            </script>
+        """, unsafe_allow_html=True)
+        
+        # Just style the content nicely - NO backdrop
+        st.markdown("""
+        <style>
+        /* Close button styling */
+        button[key="close_how"] {
+            background: white !important;
+            border: 2px solid #D1D5DB !important;
+            border-radius: 8px !important;
+            color: #6B7280 !important;
+            font-size: 20px !important;
+            font-weight: 700 !important;
+            padding: 8px 16px !important;
+            transition: all 0.2s ease !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+        }
+        
+        button[key="close_how"]:hover {
+            background: #F3F4F6 !important;
+            border-color: #8B5CF6 !important;
+            color: #8B5CF6 !important;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+        
+        # Nice bordered container
+        with st.container(border=True):
+            # Header with close button
+            col1, col2 = st.columns([10, 1])
+            
             with col1:
-                st.metric("Stories Indexed", "120+")
+                st.markdown("## 🔍 How Agy Finds Your Stories")
+            
             with col2:
-                st.metric("Avg Response Time", "1.2s")
-            with col3:
-                st.metric("Retrieval Accuracy", "87%")
-            with col4:
-                st.metric("Vector Dimensions", "384")
-
+                if st.button("✕", key="close_how", help="Close"):
+                    toggle_how_modal()
+            
             st.markdown("---")
-
-            # Architecture overview
-            col1, col2 = st.columns(2)
-
-            with col1:
-                st.markdown(
-                    """
-                ### Solution Architecture Overview
-                
-                **🎯 Semantic Search Pipeline**
-                - Sentence-BERT embeddings (all-MiniLM-L6-v2)
-                - 384-dimensional vector space
-                - Pinecone vector database with metadata filtering
-                
-                **🔄 Hybrid Retrieval**
-                - 80% semantic similarity weight
-                - 20% keyword matching weight
-                - Intent recognition for query understanding
+            
+            # 3-step flow
+            components.html(
                 """
-                )
+                <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+                            padding: 28px; 
+                            background: linear-gradient(135deg, #FAFAFA 0%, #F9FAFB 100%); 
+                            border-radius: 16px; 
+                            border: 2px solid #E5E7EB;">
+                    
+                    <!-- Step 1: You Ask -->
+                    <div style="margin-bottom: 48px;">
+                        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+                            <div style="background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%); 
+                                        color: white; 
+                                        width: 48px; 
+                                        height: 48px; 
+                                        border-radius: 50%; 
+                                        display: flex; 
+                                        align-items: center; 
+                                        justify-content: center; 
+                                        font-weight: 700; 
+                                        font-size: 22px; 
+                                        flex-shrink: 0; 
+                                        box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);">1</div>
+                            <h3 style="margin: 0; color: #1F2937; font-size: 24px; font-weight: 700;">You Ask</h3>
+                        </div>
+                        <div style="margin-left: 64px; 
+                                    background: white; 
+                                    padding: 24px; 
+                                    border-radius: 12px; 
+                                    border: 2px solid #E9D5FF; 
+                                    box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+                            <div style="color: #4B5563; font-size: 16px; font-style: italic; line-height: 1.6;">
+                                "Show me cloud migration projects in financial services"
+                            </div>
+                        </div>
+                    </div>
 
-            with col2:
-                st.markdown(
-                    """
-                ### Data & Processing
-                
-                **📊 Story Corpus**
-                - 120+ structured narratives from Fortune 500 projects
-                - STAR/5P framework encoding
-                - Rich metadata: client, domain, outcomes, metrics
-                
-                **💬 Response Generation**
-                - Context-aware retrieval (top-k=30)
-                - Multi-mode synthesis (Narrative/Key Points/Deep Dive)
-                - Source attribution with confidence scoring
-                """
-                )
+                    <!-- Arrow -->
+                    <div style="text-align: center; color: #A78BFA; font-size: 40px; margin: 20px 0; font-weight: 300;">↓</div>
 
-            # Query Flow
-            st.markdown("### Query Flow")
-            st.code(
-                """
-                Your Question 
-                    ↓
-                [Embedding + Intent Analysis]
-                    ↓
-                [Pinecone Vector Search + Keyword Matching]
-                    ↓
-                [Hybrid Scoring & Ranking]
-                    ↓
-                [Top 3 Stories Retrieved]
-                    ↓
-                [Response Synthesis with Sources]
-                            """,
-                language="text",
-            )
+                    <!-- Step 2: Agy Searches -->
+                    <div style="margin-bottom: 48px;">
+                        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+                            <div style="background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%); 
+                                        color: white; 
+                                        width: 48px; 
+                                        height: 48px; 
+                                        border-radius: 50%; 
+                                        display: flex; 
+                                        align-items: center; 
+                                        justify-content: center; 
+                                        font-weight: 700; 
+                                        font-size: 22px; 
+                                        flex-shrink: 0; 
+                                        box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);">2</div>
+                            <h3 style="margin: 0; color: #1F2937; font-size: 24px; font-weight: 700;">Agy Searches</h3>
+                        </div>
+                        <div style="margin-left: 64px;">
+                            <div style="display: flex; gap: 16px; margin-bottom: 16px;">
+                                <div style="flex: 1; 
+                                            background: white; 
+                                            padding: 20px; 
+                                            border-radius: 10px; 
+                                            border: 2px solid #E9D5FF; 
+                                            box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+                                    <div style="font-weight: 700; color: #7C3AED; font-size: 16px; margin-bottom: 8px;">
+                                        🧠 AI Understanding
+                                    </div>
+                                    <div style="color: #6B21A8; font-size: 14px; line-height: 1.6;">
+                                        Finds stories with similar meaning
+                                    </div>
+                                </div>
+                                <div style="flex: 1; 
+                                            background: white; 
+                                            padding: 20px; 
+                                            border-radius: 10px; 
+                                            border: 2px solid #BFDBFE; 
+                                            box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+                                    <div style="font-weight: 700; color: #2563EB; font-size: 16px; margin-bottom: 8px;">
+                                        🔍 Keyword Match
+                                    </div>
+                                    <div style="color: #1E40AF; font-size: 14px; line-height: 1.6;">
+                                        Finds exact terms you used
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="background: white; 
+                                        padding: 20px; 
+                                        border-radius: 10px; 
+                                        border: 2px solid #FDE68A; 
+                                        box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+                                <div style="font-weight: 700; color: #D97706; font-size: 16px; margin-bottom: 8px;">
+                                    ⚡ Smart Filtering
+                                </div>
+                                <div style="color: #92400E; font-size: 14px; line-height: 1.6;">
+                                    Applies your industry, skill, and time filters
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-            st.markdown("---")
-            st.markdown("### System Architecture")
+                    <!-- Arrow -->
+                    <div style="text-align: center; color: #A78BFA; font-size: 40px; margin: 20px 0; font-weight: 300;">↓</div>
 
-            try:
-                with open("assets/rag_architecture_grid_svg.svg", "r") as f:
-                    svg_content = f.read()
+                    <!-- Step 3: You Get Results -->
+                    <div>
+                        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+                            <div style="background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%); 
+                                        color: white; 
+                                        width: 48px; 
+                                        height: 48px; 
+                                        border-radius: 50%; 
+                                        display: flex; 
+                                        align-items: center; 
+                                        justify-content: center; 
+                                        font-weight: 700; 
+                                        font-size: 22px; 
+                                        flex-shrink: 0; 
+                                        box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);">3</div>
+                            <h3 style="margin: 0; color: #1F2937; font-size: 24px; font-weight: 700;">You Get Results</h3>
+                        </div>
+                        <div style="margin-left: 64px; 
+                                    background: white; 
+                                    border: 3px solid #8B5CF6; 
+                                    border-radius: 12px; 
+                                    padding: 24px; 
+                                    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.25);">
+                            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                                        color: white; 
+                                        padding: 20px; 
+                                        border-radius: 10px; 
+                                        margin-bottom: 20px; 
+                                        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);">
+                                <div style="font-weight: 700; font-size: 17px; margin-bottom: 8px;">
+                                    Cloud Migration at Fortune 50 Bank
+                                </div>
+                                <div style="font-size: 15px; opacity: 0.95; line-height: 1.6;">
+                                    Led 50-person team migrating 200+ apps to AWS...
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                <span style="background: #EDE9FE; 
+                                             color: #7C3AED; 
+                                             padding: 8px 16px; 
+                                             border-radius: 20px; 
+                                             font-size: 13px; 
+                                             font-weight: 700; 
+                                             border: 2px solid #DDD6FE;">Financial Services</span>
+                                <span style="background: #E0E7FF; 
+                                             color: #4F46E5; 
+                                             padding: 8px 16px; 
+                                             border-radius: 20px; 
+                                             font-size: 13px; 
+                                             font-weight: 700; 
+                                             border: 2px solid #C7D2FE;">AWS</span>
+                                <span style="background: #DBEAFE; 
+                                             color: #2563EB; 
+                                             padding: 8px 16px; 
+                                             border-radius: 20px; 
+                                             font-size: 13px; 
+                                             font-weight: 700; 
+                                             border: 2px solid #BFDBFE;">2020-2023</span>
+                            </div>
+                        </div>
+                    </div>
 
-                # Remove XML declaration and DOCTYPE
-                svg_content = svg_content.replace(
-                    '<?xml version="1.0" encoding="UTF-8" standalone="no"?>', ''
-                )
-                svg_content = svg_content.replace(
-                    '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">',
-                    '',
-                )
-
-                # Use HTML component with transparent background and no scroll
-                import streamlit.components.v1 as components
-
-                components.html(
-                    f"""
-                <div style='width: 100%; text-align: center;'>
-                    {svg_content}
                 </div>
                 """,
-                    height=280,
-                    scrolling=False,
-                )
-
-            except Exception as e:
-                st.error(f"Error loading architecture diagram: {e}")
-
-            st.markdown("---")
-
-            # Detailed breakdown
-            st.markdown("### Architecture Details")
-
-            col1, col2 = st.columns(2)
-
-            with col1:
-                st.markdown(
-                    """
-                **Search & Retrieval**
-                - **Semantic**: Pinecone cosine similarity (80% weight)
-                - **Keyword**: BM25-style token overlap (20% weight)
-                - Minimum similarity threshold: 0.15
-                - Top-k pool: 30 candidates before ranking
-                """
-                )
-
-            with col2:
-                st.markdown(
-                    """
-                **Response Synthesis**
-                - Rank top 3 stories by blended score
-                - Generate 3 views from same sources:
-                - Narrative (1-paragraph summary)
-                - Key Points (3-4 bullets)
-                - Deep Dive (STAR breakdown)
-                - Interactive source chips with confidence %
-                """
-                )
-
-            st.markdown("---")
-
-            st.markdown(
-                """
-            **Key Differentiators:**
-            - Hybrid retrieval ensures both semantic understanding and exact term matching
-            - Multi-mode synthesis provides flexible presentation for different use cases
-            - Context locking allows follow-up questions on specific stories
-            - Off-domain gating with suggestion chips prevents poor matches
-            """
+                height=1000
             )
+            
+            st.markdown("---")
+            
+            # Step 4: Technical Details (matches step 1-3 style)
+            components.html(
+                """
+                <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+                    
+                    <!-- Step 4 Header -->
+                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
+                        <h3 style="margin: 0; color: #1F2937; font-size: 24px; font-weight: 700;">Technical Details</h3>
+                    </div>
+                    
+                    <!-- Content Area -->
+                    <div style="margin-left: 64px; padding: 26px; background: linear-gradient(135deg, #FAFAFA 0%, #F9FAFB 100%); border-radius: 16px; border: 2px solid #E5E7EB;">
+                        
+                        <!-- Two Cards -->
+                        <div style="display: flex; gap: 20px; margin-bottom: 24px;">
+                            
+                            <!-- Search Technology Card -->
+                            <div style="flex: 1; 
+                                        background: white; 
+                                        padding: 24px; 
+                                        border-radius: 12px; 
+                                        border: 2px solid #E9D5FF; 
+                                        box-shadow: 0 4px 12px rgba(139, 92, 246, 0.1);">
+                                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+                                    <span style="font-size: 24px;">🔍</span>
+                                    <h4 style="margin: 0; color: #7C3AED; font-size: 18px; font-weight: 700;">
+                                        Search Technology
+                                    </h4>
+                                </div>
+                                <ul style="margin: 0; padding-left: 20px; color: #4B5563; line-height: 1.8; font-size: 14px;">
+                                    <li><strong style="color: #6B21A8;">Sentence-BERT</strong> embeddings (384-dim)</li>
+                                    <li><strong style="color: #6B21A8;">Pinecone</strong> vector database</li>
+                                    <li><strong style="color: #6B21A8;">80% semantic + 20% keyword</strong></li>
+                                    <li>Top-30 candidate pool, rank top-3</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Data Structure Card -->
+                            <div style="flex: 1; 
+                                        background: white; 
+                                        padding: 24px; 
+                                        border-radius: 12px; 
+                                        border: 2px solid #BFDBFE; 
+                                        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);">
+                                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+                                    <span style="font-size: 24px;">📊</span>
+                                    <h4 style="margin: 0; color: #2563EB; font-size: 18px; font-weight: 700;">
+                                        Data Structure
+                                    </h4>
+                                </div>
+                                <ul style="margin: 0; padding-left: 20px; color: #4B5563; line-height: 1.8; font-size: 14px;">
+                                    <li><strong style="color: #1E40AF;">120+ STAR-formatted</strong> stories</li>
+                                    <li>Rich metadata (client, skills, outcomes)</li>
+                                    <li><strong style="color: #1E40AF;">Multi-mode synthesis</strong> (3 views)</li>
+                                    <li>Source attribution with confidence scores</li>
+                                </ul>
+                            </div>
+                            
+                        </div>
+                        
+                        <!-- Performance Stats Bar -->
+                        <div style="background: white;
+                                    padding: 20px 32px;
+                                    border-radius: 12px;
+                                    border: 2px solid #D1D5DB;
+                                    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+                                    display: flex;
+                                    justify-content: space-around;
+                                    align-items: center;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 28px; font-weight: 700; color: #8B5CF6; margin-bottom: 4px;">120+</div>
+                                <div style="font-size: 13px; color: #6B7280; font-weight: 500;">Stories Indexed</div>
+                            </div>
+                            <div style="width: 1px; height: 40px; background: #E5E7EB;"></div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 28px; font-weight: 700; color: #8B5CF6; margin-bottom: 4px;">~1.2s</div>
+                                <div style="font-size: 13px; color: #6B7280; font-weight: 500;">Avg Response Time</div>
+                            </div>
+                            <div style="width: 1px; height: 40px; background: #E5E7EB;"></div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 28px; font-weight: 700; color: #8B5CF6; margin-bottom: 4px;">87%</div>
+                                <div style="font-size: 13px; color: #6B7280; font-weight: 500;">Relevance Accuracy</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                """,
+                height=440
+            )
+
 
     # Define ctx - MUST be outside and after the modal block
     ctx = get_context_story(stories)
@@ -1936,10 +2291,294 @@ def render_conversation_view(stories: list):
         st.session_state.get("__ctx_locked__") or st.session_state.get("__asked_once__")
     )
 
+    # if st.button("🔍 How Agy searches", key="how_works_top"):
+    #     st.session_state["show_how_modal"] = not st.session_state.get(
+    #         "show_how_modal", False
+    #     )
+    #     st.rerun()
+
+    # st.markdown('</div>', unsafe_allow_html=True)
+
+    # # Show the modal if toggled
+    # if st.session_state.get("show_how_modal", False):
+    #     # Force scroll to top when modal opens
+    #     st.markdown(
+    #         """
+    #     <script>
+    #     window.scrollTo({top: 0, behavior: 'smooth'});
+    #     </script>
+    #     """,
+    #         unsafe_allow_html=True,
+    #     )
+
+    #     # Create a proper modal container without using expander
+    #     st.markdown("---")
+
+    #     # Add modal styling
+    #     st.markdown("""
+    #     <style>
+    #     /* Target the container that has the modal content */
+    #     div[data-testid="stVerticalBlock"]:has(div.element-container:has(button[data-testid*="baseButton"][aria-label*="close"])) > div[data-testid="element-container"],
+    #     div[data-testid="stVerticalBlock"]:has(h2:contains("How Agy Searches")) {
+    #         background: #fafafa;
+    #         border: 2px solid #e0e0e0;
+    #         border-radius: 16px;
+    #         padding: 32px;
+    #         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    #         margin: 24px 0;
+    #     }
+    #     /* Style the entire modal area more broadly */
+    #     .stMarkdown:has(h2:contains("How Agy")) ~ * {
+    #         background: inherit;
+    #     }
+    #     </style>
+    #     """, unsafe_allow_html=True)
+
+    #     # Use a bordered container with visual background
+    #     modal_container = st.container(border=True)
+
+    #     with modal_container:
+    #         # Header with close button
+    #         col1, col2 = st.columns([10, 1])
+    #         with col1:
+    #             st.markdown("## 🔧 How Agy Searches")
+    #         with col2:
+    #             if st.button("✕", key="close_how"):
+    #                 st.session_state["show_how_modal"] = False
+    #                 st.rerun()
+    #         # Quick stats bar
+    #         col1, col2, col3, col4 = st.columns(4)
+    #         with col1:
+    #             st.metric("Stories Indexed", "120+")
+    #         with col2:
+    #             st.metric("Avg Response Time", "1.2s")
+    #         with col3:
+    #             st.metric("Retrieval Accuracy", "87%")
+    #         with col4:
+    #             st.metric("Vector Dimensions", "384")
+
+    #         st.markdown("---")
+
+    #         # Architecture overview - COLOR CODED SECTIONS
+    #         col1, col2 = st.columns(2)
+
+    #         with col1:
+    #             components.html(
+    #                 """
+    #                 <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif; background: linear-gradient(135deg, #EDE9FE 0%, #DDD6FE 100%); padding: 24px 24px 32px 24px; border-radius: 12px; border-left: 4px solid #8B5CF6;">
+    #                     <h3 style="color: #6B21A8; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+    #                         <span style="font-size: 28px;">🧠</span>
+    #                         <span>Solution Architecture</span>
+    #                     </h3>
+
+    #                     <div style="margin-bottom: 16px;">
+    #                         <div style="font-weight: 600; color: #7C3AED; margin-bottom: 8px;">🎯 Semantic Search Pipeline</div>
+    #                         <ul style="margin: 0; padding-left: 20px; color: #5B21B6; line-height: 1.7;">
+    #                             <li>Sentence-BERT embeddings (all-MiniLM-L6-v2)</li>
+    #                             <li>384-dimensional vector space</li>
+    #                             <li>Pinecone vector database with metadata filtering</li>
+    #                         </ul>
+    #                     </div>
+
+    #                     <div>
+    #                         <div style="font-weight: 600; color: #7C3AED; margin-bottom: 8px;">🔄 Hybrid Retrieval</div>
+    #                         <ul style="margin: 0; padding-left: 20px; color: #5B21B6; line-height: 1.7;">
+    #                             <li>80% semantic similarity weight</li>
+    #                             <li>20% keyword matching weight</li>
+    #                             <li>Intent recognition for query understanding</li>
+    #                         </ul>
+    #                     </div>
+    #                 </div>
+    #                 """,
+    #                 height=380
+    #             )
+
+    #         with col2:
+    #             components.html(
+    #                 """
+    #                 <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif; background: linear-gradient(135deg, #E0E7FF 0%, #C7D2FE 100%); padding: 24px 24px 32px 24px; border-radius: 12px; border-left: 4px solid #6366F1;">
+    #                     <h3 style="color: #3730A3; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+    #                         <span style="font-size: 28px;">📊</span>
+    #                         <span>Data & Processing</span>
+    #                     </h3>
+
+    #                     <div style="margin-bottom: 16px;">
+    #                         <div style="font-weight: 600; color: #4F46E5; margin-bottom: 8px;">📚 Story Corpus</div>
+    #                         <ul style="margin: 0; padding-left: 20px; color: #312E81; line-height: 1.7;">
+    #                             <li>120+ structured narratives from Fortune 500 projects</li>
+    #                             <li>STAR/5P framework encoding</li>
+    #                             <li>Rich metadata: client, domain, outcomes, metrics</li>
+    #                         </ul>
+    #                     </div>
+
+    #                     <div>
+    #                         <div style="font-weight: 600; color: #4F46E5; margin-bottom: 8px;">💬 Response Generation</div>
+    #                         <ul style="margin: 0; padding-left: 20px; color: #312E81; line-height: 1.7;">
+    #                             <li>Context-aware retrieval (top-k=30)</li>
+    #                             <li>Multi-mode synthesis (Narrative/Key Points/Deep Dive)</li>
+    #                             <li>Source attribution with confidence scoring</li>
+    #                         </ul>
+    #                     </div>
+    #                 </div>
+    #                 """,
+    #                 height=380
+    #             )
+
+    #         # VISUAL QUERY FLOW - Replaces plain text code block
+    #         components.html(
+    #             """
+    #             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif; background: linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%); padding: 32px 32px 40px 32px; border-radius: 12px; border-left: 4px solid #A78BFA; margin-top: 24px;">
+    #                 <h3 style="color: #5B21B6; margin-top: 0; display: flex; align-items: center; gap: 10px; margin-bottom: 24px;">
+    #                     <span style="font-size: 28px;">⚡</span>
+    #                     <span>Query Flow Pipeline</span>
+    #                 </h3>
+
+    #                 <div style="display: flex; flex-direction: column; gap: 16px;">
+    #                     <!-- Step 1 -->
+    #                     <div style="background: white; padding: 16px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 12px;">
+    #                         <div style="background: #8B5CF6; color: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">1</div>
+    #                         <div style="flex-grow: 1;">
+    #                             <div style="font-weight: 600; color: #5B21B6; margin-bottom: 4px;">💬 Your Question</div>
+    #                             <div style="font-size: 13px; color: #6B21A8;">Natural language input from user</div>
+    #                         </div>
+    #                     </div>
+
+    #                     <!-- Arrow -->
+    #                     <div style="text-align: center; color: #A78BFA; font-size: 24px;">↓</div>
+
+    #                     <!-- Step 2 -->
+    #                     <div style="background: white; padding: 16px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 12px;">
+    #                         <div style="background: #8B5CF6; color: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">2</div>
+    #                         <div style="flex-grow: 1;">
+    #                             <div style="font-weight: 600; color: #5B21B6; margin-bottom: 4px;">🔍 Embedding + Intent Analysis</div>
+    #                             <div style="font-size: 13px; color: #6B21A8;">Convert to 384-dim vector, detect intent type</div>
+    #                         </div>
+    #                     </div>
+
+    #                     <!-- Arrow -->
+    #                     <div style="text-align: center; color: #A78BFA; font-size: 24px;">↓</div>
+
+    #                     <!-- Step 3 -->
+    #                     <div style="background: white; padding: 16px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 12px;">
+    #                         <div style="background: #8B5CF6; color: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">3</div>
+    #                         <div style="flex-grow: 1;">
+    #                             <div style="font-weight: 600; color: #5B21B6; margin-bottom: 4px;">🎯 Pinecone Vector Search + Keyword Matching</div>
+    #                             <div style="font-size: 13px; color: #6B21A8;">Hybrid retrieval: 80% semantic + 20% keyword</div>
+    #                         </div>
+    #                     </div>
+
+    #                     <!-- Arrow -->
+    #                     <div style="text-align: center; color: #A78BFA; font-size: 24px;">↓</div>
+
+    #                     <!-- Step 4 -->
+    #                     <div style="background: white; padding: 16px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 12px;">
+    #                         <div style="background: #8B5CF6; color: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">4</div>
+    #                         <div style="flex-grow: 1;">
+    #                             <div style="font-weight: 600; color: #5B21B6; margin-bottom: 4px;">📊 Hybrid Scoring & Ranking</div>
+    #                             <div style="font-size: 13px; color: #6B21A8;">Rank top 3 from 30 candidate pool</div>
+    #                         </div>
+    #                     </div>
+
+    #                     <!-- Arrow -->
+    #                     <div style="text-align: center; color: #A78BFA; font-size: 24px;">↓</div>
+
+    #                     <!-- Step 5 -->
+    #                     <div style="background: white; padding: 16px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 12px;">
+    #                         <div style="background: #8B5CF6; color: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">5</div>
+    #                         <div style="flex-grow: 1;">
+    #                             <div style="font-weight: 600; color: #5B21B6; margin-bottom: 4px;">✨ Response Synthesis with Sources</div>
+    #                             <div style="font-size: 13px; color: #6B21A8;">Generate 3 response modes with source attribution</div>
+    #                         </div>
+    #                     </div>
+    #                 </div>
+    #             </div>
+    #             """,
+    #             height=800
+    #         )
+
+    #         st.markdown("---")
+    #         st.markdown("### System Architecture")
+
+    #         try:
+    #             with open("assets/rag_architecture_grid_svg.svg", "r") as f:
+    #                 svg_content = f.read()
+
+    #             # Remove XML declaration and DOCTYPE
+    #             svg_content = svg_content.replace(
+    #                 '<?xml version="1.0" encoding="UTF-8" standalone="no"?>', ''
+    #             )
+    #             svg_content = svg_content.replace(
+    #                 '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">',
+    #                 '',
+    #             )
+
+    #             # Use HTML component with transparent background and no scroll
+
+    #             components.html(
+    #                 f"""
+    #             <div style='width: 100%; text-align: center;'>
+    #                 {svg_content}
+    #             </div>
+    #             """,
+    #                 height=280,
+    #                 scrolling=False,
+    #             )
+
+    #         except Exception as e:
+    #             st.error(f"Error loading architecture diagram: {e}")
+
+    #         st.markdown("---")
+
+    #         # Detailed breakdown
+    #         st.markdown("### Architecture Details")
+
+    #         col1, col2 = st.columns(2)
+
+    #         with col1:
+    #             st.markdown(
+    #                 """
+    #             **Search & Retrieval**
+    #             - **Semantic**: Pinecone cosine similarity (80% weight)
+    #             - **Keyword**: BM25-style token overlap (20% weight)
+    #             - Minimum similarity threshold: 0.15
+    #             - Top-k pool: 30 candidates before ranking
+    #             """
+    #             )
+
+    #         with col2:
+    #             st.markdown(
+    #                 """
+    #             **Response Synthesis**
+    #             - Rank top 3 stories by blended score
+    #             - Generate 3 views from same sources:
+    #             - Narrative (1-paragraph summary)
+    #             - Key Points (3-4 bullets)
+    #             - Deep Dive (STAR breakdown)
+    #             - Interactive source chips with confidence %
+    #             """
+    #             )
+
+    #         st.markdown("---")
+
+    #         st.markdown(
+    #             """
+    #         **Key Differentiators:**
+    #         - Hybrid retrieval ensures both semantic understanding and exact term matching
+    #         - Multi-mode synthesis provides flexible presentation for different use cases
+    #         - Context locking allows follow-up questions on specific stories
+    #         - Off-domain gating with suggestion chips prevents poor matches
+    #         """
+    #         )
+
+    # # Define ctx - MUST be outside and after the modal block
+    # ctx = get_context_story(stories)
+    # _show_ctx = bool(ctx) and (
+    #     st.session_state.get("__ctx_locked__") or st.session_state.get("__asked_once__")
+    # )
+
     if _show_ctx:
         render_compact_context_banner(stories)
 
-    # Rest of your Ask MattGPT content continues...
     # Rest of your Ask MattGPT content continues as normal
     # Context banner, transcript, etc...
 
@@ -1990,64 +2629,51 @@ def render_conversation_view(stories: list):
     seed = st.session_state.pop("seed_prompt", None)
     injected = st.session_state.pop("__inject_user_turn__", None)
     pending = seed or injected
-    if pending:
-        # If a live card was pending snapshot, capture it now before injecting the new turn
+
+    if DEBUG and (seed or injected):
+        dbg(f"[POP] seed={seed}, injected={injected}, pending={pending}")
+
+    # Multi-step processing for chip injection to show thinking indicator
+    processing_state = st.session_state.get("__processing_chip_injection__")
+
+    if pending and not processing_state:
+        # Step 1: Push user turn and set processing to "pending", then rerun to show indicator
+        if DEBUG:
+            dbg(f"[STEP1] pending={pending}, transcript_len={len(st.session_state.get('ask_transcript', []))}")
         if st.session_state.get("__pending_card_snapshot__"):
-            _push_card_snapshot_from_state(stories)
+            
             st.session_state["__pending_card_snapshot__"] = False
         _push_user_turn(pending)
+        if DEBUG:
+            dbg(f"[STEP1] after push, transcript_len={len(st.session_state.get('ask_transcript', []))}")
+        st.session_state["__processing_chip_injection__"] = {"query": pending, "step": "pending"}
+        st.rerun()
 
-        # Show branded loading indicator as chat message (matching landing page style)
-        loading_msg = st.empty()
-        with loading_msg.container():
-            with st.chat_message(
-                "assistant",
-                avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar_48_dark.png",
-            ):
-                st.markdown(
-                    """
-<style>
-@keyframes chaseAnimationChip {
-    0% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
-    33.33% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_2.png'); }
-    66.66% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_3.png'); }
-    100% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
-}
-.thinking-ball-chip {
-    width: 48px;
-    height: 48px;
-    animation: chaseAnimationChip 0.9s steps(3) infinite;
-}
-</style>
-<div style='background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%);
-            border: 2px solid #667eea40;
-            border-radius: 12px;
-            padding: 16px 24px;
-            margin: 8px 0;
-            display: flex;
-            align-items: center;
-            gap: 12px;'>
-    <img class="thinking-ball-chip" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png" alt="Thinking"/>
-    <div style='color: #667eea !important; font-weight: 500;'>🐾 Tracking down insights...</div>
-</div>
-""",
-                    unsafe_allow_html=True,
-                )
+    elif isinstance(processing_state, dict) and processing_state.get("step") == "pending":
+        # Step 2: Render page with thinking indicator visible, then rerun to actually process
+        if DEBUG:
+            dbg(f"[STEP2] showing indicator for query={processing_state.get('query')}")
+        # Mark as ready to process on next render
+        st.session_state["__processing_chip_injection__"] = {"query": processing_state["query"], "step": "processing"}
+        # Continue rendering to show transcript and indicator
+
+    elif isinstance(processing_state, dict) and processing_state.get("step") == "processing":
+        # Step 3: Now actually process the query
+        pending_query = processing_state["query"]
+        if DEBUG:
+            dbg(f"[STEP3] processing={pending_query}, transcript_len={len(st.session_state.get('ask_transcript', []))}")
 
         try:
             # Ask is pure semantic; ignore Explore filters here
-            resp = send_to_backend(pending, {}, ctx, stories)
-
-            # Clear loading message
-            loading_msg.empty()
+            resp = send_to_backend(pending_query, {}, ctx, stories)
 
         except Exception as e:
-            loading_msg.empty()
             print(f"DEBUG: send_to_backend failed: {e}")
             import traceback
 
             traceback.print_exc()
             _push_assistant_turn(f"Error: {str(e)}")
+            st.session_state["__processing_chip_injection__"] = False
             st.rerun()
 
         else:
@@ -2065,92 +2691,32 @@ def render_conversation_view(stories: list):
                     st.session_state.pop("ask_last_reason", None)
                     st.session_state.pop("ask_last_query", None)
                     st.session_state.pop("ask_last_overlap", None)
-                st.rerun()
+            elif st.session_state.get("ask_last_reason"):
+                # Nonsense detected - add banner entry to transcript
+                reason = st.session_state.get("ask_last_reason", "")
+                query = st.session_state.get("ask_last_query", "")
+                overlap = st.session_state.get("ask_last_overlap", None)
+
+                st.session_state["ask_transcript"].append({
+                    "type": "banner",
+                    "Role": "assistant",
+                    "reason": reason,
+                    "query": query,
+                    "overlap": overlap,
+                })
+
+                # Clear flags after adding to transcript
+                st.session_state.pop("ask_last_reason", None)
+                st.session_state.pop("ask_last_query", None)
+                st.session_state.pop("ask_last_overlap", None)
+            st.session_state["__processing_chip_injection__"] = False
+            st.rerun()
 
     # 3) Render transcript so far (strict order, no reflow)
     _render_ask_transcript(stories)
 
-    # Force scroll to top after transcript renders
-    st.markdown(
-        """
-    <script>
-    // Multiple scroll methods with longer delays
-    setTimeout(function() {
-        window.scrollTo(0, 0);
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
-    }, 50);
-    setTimeout(function() {
-        window.scrollTo(0, 0);
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
-    }, 100);
-    setTimeout(function() {
-        window.scrollTo(0, 0);
-    }, 200);
-    </script>
-    """,
-        unsafe_allow_html=True,
-    )
-
-    # 4) One‑shot nonsense/off‑domain banner appears AFTER transcript
-    rendered_banner = False
-    if st.session_state.get("ask_last_reason"):
-        with st.chat_message(
-            "assistant",
-            avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar_48_dark.png",
-        ):
-            render_no_match_banner(
-                reason=st.session_state.get("ask_last_reason", ""),
-                query=st.session_state.get("ask_last_query", ""),
-                overlap=st.session_state.get("ask_last_overlap", None),
-                suppressed=st.session_state.get("__pc_suppressed__", False),
-                filters=st.session_state.get("filters", {}),
-                key_prefix="askinline",
-            )
-        rendered_banner = True
-        # Clear flags so the banner doesn't re-render on every rerun
-        st.session_state.pop("ask_last_reason", None)
-        st.session_state.pop("ask_last_query", None)
-        st.session_state.pop("ask_last_overlap", None)
-        # Persist as sticky so it remains visible between user turns unless dismissed
-        st.session_state.setdefault(
-            "__sticky_banner__",
-            {
-                "reason": (
-                    dec
-                    if (dec := (st.session_state.get("__ask_dbg_decision") or ""))
-                    else "no_match"
-                ),
-                "query": st.session_state.get("__ask_dbg_prompt", ""),
-                "overlap": None,
-                "suppressed": bool(st.session_state.get("__pc_suppressed__", False)),
-            },
-        )
-    elif True:
-        # Forced fallback: if gating decided no‑match but the flag was not set,
-        # render a banner anyway so the user sees actionable chips.
-        dec = (st.session_state.get("__ask_dbg_decision") or "").strip().lower()
-        no_match_decision = (
-            dec.startswith("rule:")
-            or dec.startswith("low_overlap")
-            or dec == "low_conf"
-            or dec == "no_overlap+low_conf"
-        )
-        if no_match_decision and not st.session_state.get("last_sources"):
-            with st.chat_message(
-                "assistant",
-                avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar_48_dark.png",
-            ):
-                render_no_match_banner(
-                    reason=dec or "no_match",
-                    query=st.session_state.get("__ask_dbg_prompt", ""),
-                    overlap=st.session_state.get("ask_last_overlap", None),
-                    suppressed=st.session_state.get("__pc_suppressed__", False),
-                    filters=st.session_state.get("filters", {}),
-                    key_prefix="askinline_forced",
-                )
-            rendered_banner = True
+    # 4) Banner now rendered as part of transcript (type="banner" entries)
+    # Flags are cleared when banner entry is added to transcript
 
     # Sticky banner temporarily disabled to stabilize chip clicks
     st.session_state["__sticky_banner__"] = None
@@ -2170,8 +2736,7 @@ def render_conversation_view(stories: list):
         for x in st.session_state.get("ask_transcript", [])
     )
     if (
-        not rendered_banner
-        and not has_conversational_answer
+        not has_conversational_answer
         and not st.session_state.get("__suppress_live_card_once__")
         and st.session_state.get("last_answer")
     ):
@@ -2179,7 +2744,7 @@ def render_conversation_view(stories: list):
         # This only shows if the answer hasn't been added to transcript yet
         with st.chat_message(
             "assistant",
-            avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar_48_dark.png",
+            avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/svg/agy_icon_color.svg",
         ):
             st.markdown(st.session_state.get("last_answer", ""))
 
@@ -2240,9 +2805,32 @@ def render_conversation_view(stories: list):
                             )
 
                             if st.form_submit_button(f"🔗 {label}"):
-                                st.session_state["active_story"] = src.get("id")
-                                st.session_state["__ctx_locked__"] = True
+                                # Toggle expander - if same source clicked, close it; otherwise open new one
+                                expanded_key = f"live_source_expanded_{j}"
+                                current_expanded = st.session_state.get("live_source_expanded")
+
+                                if current_expanded == expanded_key:
+                                    # Clicking same source - close it
+                                    st.session_state["live_source_expanded"] = None
+                                else:
+                                    # Open this source (closes any other)
+                                    st.session_state["live_source_expanded"] = expanded_key
+                                    # Store the source ID for rendering
+                                    st.session_state["live_source_expanded_id"] = src.get("id")
+
                                 st.rerun()
+
+                # Render the expanded story detail below all buttons (only one at a time)
+                expanded_key = st.session_state.get("live_source_expanded")
+                expanded_id = st.session_state.get("live_source_expanded_id")
+
+                if expanded_key and expanded_id:
+                    # Find the story object
+                    story_obj = next((s for s in stories if str(s.get("id")) == str(expanded_id)), None)
+
+                    if story_obj:
+                        st.markdown("<div style='margin-top: 16px;'></div>", unsafe_allow_html=True)
+                        render_story_detail(story_obj, "live_expanded", stories)
 
             # Action buttons (wireframe style)
             st.markdown(
@@ -2266,25 +2854,72 @@ def render_conversation_view(stories: list):
     if st.session_state.get("__suppress_live_card_once__"):
         st.session_state["__suppress_live_card_once__"] = False
 
+    # 5.5) Show thinking indicator at bottom (above input) if processing chip injection OR transitioning from Explore Stories
+    processing_state = st.session_state.get("__processing_chip_injection__")
+    show_transition = st.session_state.get("show_transition_indicator", False)
+    show_thinking = (isinstance(processing_state, dict) and processing_state.get("step") in ["pending", "processing"]) or show_transition
+    if DEBUG:
+        dbg(f"[INDICATOR] processing_state={processing_state}, show_transition={show_transition}, show_thinking={show_thinking}")
+
+    if show_thinking:
+        st.markdown(
+            """
+<style>
+@keyframes chaseAnimationBottom {
+    0% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
+    33.33% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_2.png'); }
+    66.66% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_3.png'); }
+    100% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
+}
+.thinking-ball-bottom {
+    width: 48px;
+    height: 48px;
+    animation: chaseAnimationBottom 0.9s steps(3) infinite;
+}
+.transition-indicator-bottom {
+    position: fixed;
+    bottom: 140px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    /* Better contrast for visibility */
+    background: #F3F4F6 !important;
+    color: #374151 !important;
+    border: 1px solid #D1D5DB !important;
+    padding: 12px 24px;
+    border-radius: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    opacity: 1 !important;
+}
+</style>
+<div class='transition-indicator-bottom' style='display: flex;
+            align-items: center;
+            gap: 12px;'>
+    <img class="thinking-ball-bottom" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png" alt="Thinking"/>
+    <div style='color: #374151 !important; font-weight: 600 !important;'>🐾 Tracking down insights...</div>
+</div>
+""",
+            unsafe_allow_html=True,
+        )
+        # If we just showed the indicator in "pending" step, trigger rerun to process
+        if isinstance(processing_state, dict) and processing_state.get("step") == "processing":
+            # We're now in the state where indicator is visible, rerun to actually process
+            st.rerun()
+
     # 6) Handle a new chat input (command aliases or normal question)
     # Render the chat input only on the Ask MattGPT tab
     if st.session_state.get("active_tab") == "Ask MattGPT":
-        user_input_local = st.chat_input("Ask anything…", key="ask_chat_input1")
-        # Add hint text below input
-        st.markdown(
-            '''
-        <div class="input-hint">
-            Powered by OpenAI GPT-4 with semantic search across 115 project case studies
-        </div>
-        ''',
-            unsafe_allow_html=True,
+        user_input_local = st.chat_input(
+            "💬 Ask a follow-up question...", key="ask_chat_input1"
         )
+        # Add hint text below input
+
     else:
         user_input_local = None
     if user_input_local:
         # If a live card is pending snapshot from the previous answer, snapshot it now
         if st.session_state.get("__pending_card_snapshot__"):
-            _push_card_snapshot_from_state(stories)
+            
             st.session_state["__pending_card_snapshot__"] = False
 
         # Append user's turn immediately to keep order deterministic
@@ -2382,7 +3017,7 @@ def render_conversation_view(stories: list):
         with loading_container:
             with st.chat_message(
                 "assistant",
-                avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar_48_dark.png",
+                avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/svg/agy_icon_color.svg",
             ):
                 st.markdown(
                     """
@@ -2399,16 +3034,14 @@ def render_conversation_view(stories: list):
     animation: chaseAnimationConv 0.9s steps(3) infinite;
 }
 </style>
-<div style='background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%);
-            border: 2px solid #667eea40;
-            border-radius: 12px;
-            padding: 16px 24px;
+<div style='background: transparent;
+            padding: 16px 0;
             margin: 8px 0;
             display: flex;
             align-items: center;
             gap: 12px;'>
     <img class="thinking-ball-conv" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png" alt="Thinking"/>
-    <div style='color: #667eea !important; font-weight: 500;'>🐾 Tracking down insights...</div>
+    <div style='color: #2C363D; font-weight: 500;'>🐾 Tracking down insights...</div>
 </div>
 """,
                     unsafe_allow_html=True,
@@ -2441,6 +3074,24 @@ def render_conversation_view(stories: list):
                 sources = resp.get("sources", []) or []
                 _push_conversational_answer(answer_text, sources)
                 st.session_state["__suppress_live_card_once__"] = True
+            elif st.session_state.get("ask_last_reason"):
+                # Nonsense detected - add banner entry to transcript
+                reason = st.session_state.get("ask_last_reason", "")
+                query = st.session_state.get("ask_last_query", "")
+                overlap = st.session_state.get("ask_last_overlap", None)
+
+                st.session_state["ask_transcript"].append({
+                    "type": "banner",
+                    "Role": "assistant",
+                    "reason": reason,
+                    "query": query,
+                    "overlap": overlap,
+                })
+
+                # Clear flags after adding to transcript
+                st.session_state.pop("ask_last_reason", None)
+                st.session_state.pop("ask_last_query", None)
+                st.session_state.pop("ask_last_overlap", None)
 
             st.rerun()
 
@@ -2770,7 +3421,7 @@ def rag_answer(question: str, filters: dict, stories: list):
 
     primary = ranked[0]
     try:
-        # Generate Agy-voiced response using GPT-4
+        # Generate Agy-voiced response using GPT-4o-mini
         narrative = _format_narrative(primary)
         agy_response = _generate_agy_response(question, ranked, narrative)
 
@@ -2817,7 +3468,7 @@ def _generate_agy_response(
     question: str, ranked_stories: list[dict], answer_context: str
 ) -> str:
     """
-    Generate an Agy-voiced response using OpenAI GPT-4.
+    Generate an Agy-voiced response using OpenAI GPT-4o-mini.
 
     Uses the Agy system prompt to create warm, helpful responses that:
     - Lead with search status ("🐾 Tracking down...")
@@ -2896,18 +3547,20 @@ You're successful when users can cite specific projects and outcomes after talki
         # User message with context
         user_message = f"""User Question: {question}
 
-Here are the top 3 relevant projects from Matt's portfolio:
+Here are the top 3 relevant projects from Matt's portfolio, including key 5P fields:
 
 {story_context}
 
-Generate an Agy-voiced response that:
-1. Starts with a search status (e.g., "🐾 Let me track down Matt's experience with...")
-2. Answers their question with specific project citations
-3. Shows outcomes and patterns across Matt's work
-4. Stays professional and credible
-5. Offers to go deeper if helpful
+Generate an Agy-voiced response (professional, determined, first-person) that:
+1. STARTS with a **Status Update** (must include 🐾).
+2. Provides a **Direct Answer** grounded in Matt's principles.
+3. Uses the project context (Situation, Purpose, Performance) to give a **Specific Example**.
+4. Uses **MARKDOWN** (bolding, lists) to enhance scannability.
+5. The list of working principles (like 'Speak their language') **MUST BE FORMATTED as a bulleted list** (markdown `*`).
+6. **Bold** all Client names and key methodology terms (e.g., **JPMorgan Chase**, **data-driven decision making**).
+7. Ends with a relevant **Call to Action**.
 
-Keep it conversational, warm, but professional. Cite specific clients and outcomes."""
+Keep it conversational, warm, but professional. Cite specific clients and outcomes. Ensure exactly one 🐾 emoji is used in the entire response."""
 
         # Call OpenAI API
         # Using gpt-4o-mini: fast, cost-effective, excellent for well-crafted prompts
@@ -3143,48 +3796,55 @@ def _clear_ask_context():
 
 
 def render_followup_chips(primary_story: dict, query: str = "", key_suffix: str = ""):
-    """Generate contextual follow-up suggestions based on the answer."""
+    """Generate contextual follow-up suggestions based on the answer, adhering to the Agy Voice Guide."""
 
     if not primary_story:
         return
 
-    # Universal follow-up suggestions that work with card-based retrieval
     # Focus on themes that trigger good semantic searches
     tags = set(str(t).lower() for t in (primary_story.get("tags") or []))
 
     suggestions = []
 
-    # Theme-based suggestions that trigger relevant searches
+    # Theme-based suggestions that match Agy Voice Guide examples
     if any(t in tags for t in ["stakeholder", "collaboration", "communication"]):
         suggestions = [
-            "How do you handle difficult stakeholders?",
+            # Use official suggestion as priority, mix with contextually relevant existing questions
+            "🎯 What's your approach to stakeholder management?",  # Official Guide Theme
+            "👥 How do you scale agile across large organizations?",
             "Tell me about cross-functional collaboration",
-            "What about managing remote teams?",
         ]
     elif any(t in tags for t in ["cloud", "architecture", "platform", "technical"]):
         suggestions = [
+            "⚡ Show me your platform engineering experience",  # Official Guide Theme
             "Show me examples with cloud architecture",
             "How do you modernize legacy systems?",
-            "Tell me about technical challenges you've solved",
         ]
     elif any(t in tags for t in ["agile", "process", "delivery"]):
         suggestions = [
+            "👥 How do you scale agile across large organizations?",  # Official Guide Theme
             "How do you accelerate delivery?",
-            "Tell me about scaling agile practices",
-            "Show me examples of process improvements",
+            "💡 How have you driven innovation in your career?",
+        ]
+    elif any(t in tags for t in ["healthcare", "health"]):
+        suggestions = [
+            "🏥 How did you apply GenAI in a healthcare project?",  # Official Guide Theme
+            "Tell me about the challenges of technology in the healthcare space",
+            "Show me examples with measurable impact",
         ]
     else:
-        # Generic suggestions that work for any story
+        # Default/Generic suggestions, prioritizing the official voice guide prompts
         suggestions = [
+            "🚀 Tell me about leading a global payments transformation",  # Official Guide Prompt
+            "💡 How have you driven innovation in your career?",  # Official Guide Prompt
             "Show me examples with measurable impact",
-            "How do you drive innovation?",
-            "Tell me about leading transformation",
         ]
 
     if not suggestions:
         return
 
     st.markdown("<div style='margin-top: 16px;'></div>", unsafe_allow_html=True)
+    # Only display the top 3 suggestions
     cols = st.columns(len(suggestions[:3]))
     for i, suggest in enumerate(suggestions[:3]):
         with cols[i]:
@@ -3196,8 +3856,6 @@ def render_followup_chips(primary_story: dict, query: str = "", key_suffix: str 
             )
             if st.button(suggest, key=unique_key, use_container_width=True):
                 st.session_state["__inject_user_turn__"] = suggest
-                # Don't set __ask_from_suggestion__ - treat chips like fresh typed questions
-                # This ensures context lock is cleared and we get fresh search results
                 st.session_state["__ask_force_answer__"] = True
                 st.rerun()
 
@@ -3209,7 +3867,7 @@ def _render_ask_transcript(stories: list):
         if m.get("type") == "card":
             with st.chat_message(
                 "assistant",
-                avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar_48_dark.png",
+                avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/svg/agy_icon_color.svg",
             ):
                 # Snapshot with the same visual shell as the live answer card
                 st.markdown('<div class="answer-card">', unsafe_allow_html=True)
@@ -3416,11 +4074,27 @@ def _render_ask_transcript(stories: list):
                 st.markdown('</div>', unsafe_allow_html=True)
             continue
 
+        # Banner (nonsense/off-domain detection)
+        if m.get("type") == "banner":
+            with st.chat_message(
+                "assistant",
+                avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/svg/agy_icon_color.svg",
+            ):
+                render_no_match_banner(
+                    reason=m.get("reason", ""),
+                    query=m.get("query", ""),
+                    overlap=m.get("overlap", None),
+                    suppressed=st.session_state.get("__pc_suppressed__", False),
+                    filters=st.session_state.get("filters", {}),
+                    key_prefix=f"transcript_banner_{i}",
+                )
+            continue
+
         # Conversational answer with Related Projects (wireframe style)
         if m.get("type") == "conversational":
             with st.chat_message(
                 "assistant",
-                avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar_48_dark.png",
+                avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/svg/agy_icon_color.svg",
             ):
                 # Show conversational response text
                 st.markdown(m.get("text", ""))
@@ -3483,9 +4157,34 @@ def _render_ask_transcript(stories: list):
                                 )
 
                                 if st.form_submit_button(f"🔗 {label}"):
-                                    st.session_state["active_story"] = src.get("id")
-                                    st.session_state["__ctx_locked__"] = True
+                                    # Toggle expander - if same source clicked, close it; otherwise open new one
+                                    expanded_key = f"transcript_source_expanded_{i}_{j}"
+                                    current_expanded = st.session_state.get("transcript_source_expanded")
+
+                                    if current_expanded == expanded_key:
+                                        # Clicking same source - close it
+                                        st.session_state["transcript_source_expanded"] = None
+                                    else:
+                                        # Open this source (closes any other)
+                                        st.session_state["transcript_source_expanded"] = expanded_key
+                                        # Store the source ID and message index for rendering
+                                        st.session_state["transcript_source_expanded_id"] = src.get("id")
+                                        st.session_state["transcript_source_expanded_msg"] = i
+
                                     st.rerun()
+
+                    # Render the expanded story detail below buttons for this message (only one at a time)
+                    expanded_key = st.session_state.get("transcript_source_expanded")
+                    expanded_id = st.session_state.get("transcript_source_expanded_id")
+                    expanded_msg = st.session_state.get("transcript_source_expanded_msg")
+
+                    if expanded_key and expanded_id and expanded_msg == i:
+                        # Find the story object
+                        story_obj = next((s for s in stories if str(s.get("id")) == str(expanded_id)), None)
+
+                        if story_obj:
+                            st.markdown("<div style='margin-top: 16px;'></div>", unsafe_allow_html=True)
+                            render_story_detail(story_obj, f"transcript_expanded_{i}", stories)
 
                 # Action buttons (wireframe style)
                 st.markdown(
@@ -3511,7 +4210,7 @@ def _render_ask_transcript(stories: list):
 
         # Set custom avatars
         if role == "assistant":
-            avatar = "https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar_48_dark.png"
+            avatar = "https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/svg/agy_icon_color.svg"
         else:
             avatar = "👤"  # Gender-neutral user avatar
 

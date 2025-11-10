@@ -329,6 +329,8 @@ def _get_embedder():
     if _EMBEDDER is not None:
         return _EMBEDDER
     try:
+        import os
+        os.environ["TOKENIZERS_PARALLELISM"] = "false"
         from sentence_transformers import SentenceTransformer  # type: ignore
 
         _EMBEDDER = SentenceTransformer("all-MiniLM-L6-v2")

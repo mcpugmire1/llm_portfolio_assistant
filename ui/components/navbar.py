@@ -84,4 +84,7 @@ def render_navbar(current_tab: str = "Home"):
                     disabled=(name == current_tab),
                 ):
                     st.session_state["active_tab"] = name
+                    # Set flag to clear Ask MattGPT story selection when switching to Explore Stories
+                    if name == "Explore Stories":
+                        st.session_state["_just_switched_to_explore"] = True
                     st.rerun()

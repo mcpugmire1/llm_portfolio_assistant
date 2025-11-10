@@ -28,16 +28,20 @@ def apply_global_styles():
            STREAMLIT OVERRIDES
            ======================================== */
 
-        /* Show header with transparent background to keep hamburger menu */
-        header[data-testid="stHeader"] {
-            background: transparent !important;
-            display: block !important;
-            visibility: visible !important;
+        /* Keep header functional but force all backgrounds transparent */
+        header[data-testid="stHeader"],
+        header[data-testid="stHeader"] *,
+        header[data-testid="stHeader"] > div,
+        header[data-testid="stHeader"] div[data-testid="stHeaderActionElements"],
+        div[data-testid="stToolbar"] {
+            background: rgba(0,0,0,0) !important;
+            background-color: rgba(0,0,0,0) !important;
+            backdrop-filter: none !important;
         }
 
-        /* Keep toolbar visible for hamburger menu */
-        header[data-testid="stHeader"] [data-testid="stToolbar"] {
-            display: flex !important;
+        /* Keep header visible (just transparent) */
+        header[data-testid="stHeader"] {
+            display: block !important;
             visibility: visible !important;
         }
 

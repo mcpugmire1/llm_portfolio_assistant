@@ -32,6 +32,7 @@ def render_home_page():
     render_section_title("What would you like to explore?")
 
 
+
     # Category cards
     render_category_cards()
 

@@ -48,6 +48,7 @@ llm_portfolio_assistant/
 │   │   ├── __init__.py
 │   │   ├── navbar.py               # Top navigation (80 lines)
 │   │   └── footer.py               # Footer (60 lines)
+│   │   └── story_detail.py         # Story Detail Component - Shared Renderer (329 lines)
 │   │
 │   ├── pages/
 │   │   ├── __init__.py
@@ -744,8 +745,138 @@ When presenting this codebase to potential employers:
 
 ---
 
-**Last Updated:** November 7, 2025
+## UI/UX Polish Sessions (October-November 2025)
+
+### Overview
+Multiple focused sessions to fix UI bugs and polish the user experience across Explore Stories and Ask MattGPT pages.
+
+---
+
+### Session 1: Explore Stories Fixes (October 2025)
+
+**Issues Fixed:**
+
+1. **White Header Band Issue** ✅
+   - **Problem:** White band appearing above dark navy navbar
+   - **Root Cause:** Streamlit header element had white background
+   - **Solution:** Force transparent background on all header elements
+   - **File:** `ui/styles/global_styles.py` (lines 31-46)
+   ```css
+   header[data-testid="stHeader"],
+   header[data-testid="stHeader"] * {
+       background: rgba(0,0,0,0) !important;
+   }
+   ```
+
+2. **Detail Pane Stuck Issue** ✅
+   - **Problem:** Story detail pane from Ask MattGPT persisted when switching to Explore Stories
+   - **Root Cause:** `active_story` session state not cleared on tab navigation
+   - **Solution:** Flag-based cleanup using `_just_switched_to_explore`
+   - **Files:**
+     - `ui/components/navbar.py` (lines 87-89) - Set flag on navigation
+     - `ui/pages/explore_stories.py` (lines 500-510) - Clear state when flag detected
+
+3. **Card View Switching Issue** ✅
+   - **Problem:** Switching to card view cleared the selected story from Ask MattGPT
+   - **Root Cause:** Same as #2 - aggressive state cleanup
+   - **Solution:** `_just_switched_to_explore` flag ensures cleanup only happens on actual tab switch
+
+4. **Banner Showing Raw HTML** ✅
+   - **Problem:** No-match banner rendering as raw HTML instead of styled component
+   - **Root Cause:** Banner CSS not being applied in chat context
+   - **Solution:** Inline CSS with proper markdown rendering
+   - **File:** `utils/ui_helpers.py` (lines 319-360)
+
+**Status:** All confirmed fixed by user
+
+---
+
+### Session 2: Story Detail Component Extraction (October 2025)
+
+**New Component Created:** `ui/components/story_detail.py` (untracked file)
+
+**Purpose:** Shared story detail renderer used by both Explore Stories and Ask MattGPT
+
+**Key Functions:**
+- `render_story_detail()` - Full STAR narrative display with sidebar
+- `on_ask_this_story()` - Navigation handler for "Ask Agy About This" button
+- `_smart_list_detection()` - Parses nested lists and bullet points from JSONL data
+
+**Benefits:**
+- DRY principle - single source of truth for story detail rendering
+- Consistent UX across Explore Stories and Ask MattGPT
+- Easier maintenance - fix once, applies everywhere
+
+**Integration Points:**
+- Explore Stories: Story detail panel (lines 500-600)
+- Ask MattGPT: Source expanders in conversation view (lines 3800-3900)
+
+**Status:** Created but not yet tracked in git
+
+---
+
+### Session 3: Transition Indicator Visibility (November 9, 2025)
+
+**Problem:** The "🐾 Tracking down insights..." transition indicator was washing out during page transitions from Explore Stories to Ask MattGPT, making it hard for users to see progress feedback.
+
+**Root Cause:** Initial styling used semi-transparent backgrounds and medium gray text, which lost contrast when the page "whited out" during Streamlit reruns.
+
+**Solution Evolution (7 iterations):**
+
+1. **Initial attempt:** Darker text color `#6B7280` + opacity lock
+   - Result: Still too light during transition
+
+2. **Second attempt:** Even darker text `#1F2937` + bold weight
+   - Result: No visible improvement, needed Streamlit restart
+
+3. **Third attempt:** Purple-tinted background with stronger opacity
+   - Result: User feedback: "worse than before" - wrong color approach
+
+4. **Fourth attempt:** Neutral gray with transparency `rgba(243, 244, 246, 0.95)`
+   - Result: Still insufficient contrast during whiteout
+
+5. **Final solution:** Solid colors with maximum contrast
+   ```css
+   .transition-indicator-bottom {
+       background: #F3F4F6 !important;     /* Solid gray, not transparent */
+       color: #374151 !important;          /* Dark gray text */
+       border: 1px solid #D1D5DB !important;
+       padding: 12px 24px;                 /* Increased from 10px 18px */
+       border-radius: 24px;                /* Increased from 20px */
+       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+   }
+   ```
+
+**Files Modified:**
+- `ui/pages/ask_mattgpt.py` (lines 2879-2899) - Transition indicator styling
+
+**Key Learnings:**
+- Transparent backgrounds don't work during Streamlit page transitions
+- Solid colors with high contrast are essential for visibility during reloads
+- Visual weight (padding, shadow) matters as much as color contrast
+- Iterative user feedback is critical for CSS refinements
+
+**Status:** ✅ Improved visibility, awaiting user feedback for final validation
+
+---
+
+### Known Outstanding Issues (Future Work)
+
+From SESSION_HANDOFF_SESSION10.md - Ask MattGPT Conversation View:
+
+1. **Navbar Position** - Conversation view navbar sits lower than landing page
+2. **"How Agy searches" Button** - Header button not triggering modal
+3. **Status Bar Alignment** - Doesn't match landing page styling
+4. **Action Buttons** - Helpful/Copy/Share buttons not functional
+5. **Purple Left Border** - AI messages missing 4px purple border from wireframe
+6. **Input/Footer Overlap** - Chat input renders after footer, causing overlap
+
+**Recommendation:** Address these in future session with structural code changes, not CSS-only fixes.
+
+---
+
+**Last Updated:** November 9, 2025
 **Author:** Matt Pugmire
-**Review Status:** ✅ **Phase 5 Complete - Portfolio-ready minimal architecture**
+**Review Status:** ✅ **Phase 5 Complete + UI Polish Session**
 **GitHub:** Ready to share with hiring managers and technical interviewers
 **Key Metric:** 95.1% code reduction (5,765 → 284 lines in app.py)
