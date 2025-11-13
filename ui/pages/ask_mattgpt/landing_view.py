@@ -220,14 +220,20 @@ div[data-testid="stTextInput"] input {
     )
 
     # === PROCESS PENDING QUERY (if in processing state) ===
-    # The thinking indicator is already showing from lines 98-133, don't replace it
+    # Use 2-step process to ensure indicator renders BEFORE blocking backend call
     if st.session_state.get("processing_suggestion") and st.session_state.get(
         "pending_query"
     ):
         query = st.session_state.get("pending_query")
 
-        # Process the query (indicator already visible above)
+        # Step 1: If indicator not yet shown, just rerun to render it
+        if not st.session_state.get("_indicator_rendered"):
+            st.session_state["_indicator_rendered"] = True
+            st.rerun()
+
+        # Step 2: Indicator was rendered in previous rerun, now process query
         result = send_to_backend(query, {}, None, stories)
+        st.session_state.pop("_indicator_rendered", None)
 
         # Add to transcript
         st.session_state["ask_transcript"].append({"Role": "user", "text": query})
