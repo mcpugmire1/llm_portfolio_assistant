@@ -464,11 +464,12 @@ def render_conversation_view(stories: List[Dict]):
         st.rerun()
 
     elif isinstance(processing_state, dict) and processing_state.get("step") == "pending":
-        # Step 2: Show indicator
+        # Step 2: Show indicator and trigger rerun to render it
         st.session_state["__processing_chip_injection__"] = {
             "query": processing_state["query"],
             "step": "processing"
         }
+        st.rerun()
 
     elif isinstance(processing_state, dict) and processing_state.get("step") == "processing":
         # Step 3: Actually process

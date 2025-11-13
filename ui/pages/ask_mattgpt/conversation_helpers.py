@@ -494,16 +494,17 @@ def _render_ask_transcript(stories: List[Dict]):
                 sources = m.get("sources", []) or []
                 if sources:
                     st.markdown(
-                        '''
+                        f'''
                     <div class="sources-tight">
-                        <div class="source-links-title">📚 RELATED PROJECTS</div>
+                        <div class="source-links-title">📚 RELATED PROJECTS ({len(sources[:3])} found)</div>
                     </div>
                     ''',
                         unsafe_allow_html=True,
                     )
 
                     # Use columns with forms for complete styling control
-                    cols = st.columns(len(sources[:3]))
+                    # Always use 3 columns for consistent layout
+                    cols = st.columns(3)
                     for j, src in enumerate(sources[:3]):
                         title = src.get("title") or src.get("Title", "")
                         client = src.get("client") or src.get("Client", "")
