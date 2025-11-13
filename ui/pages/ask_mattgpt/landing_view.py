@@ -166,6 +166,7 @@ div[data-testid="stTextInput"] input {
                 st.session_state["processing_suggestion"] = True
                 st.session_state["pending_query"] = q
                 st.session_state["ask_input_value"] = q
+                st.session_state["__ask_force_answer__"] = True  # 🔥 BYPASS NONSENSE FILTER
                 st.rerun()
 
     # === INPUT AREA ===
@@ -220,22 +221,16 @@ div[data-testid="stTextInput"] input {
     )
 
     # === PROCESS PENDING QUERY (if in processing state) ===
-    # Use 2-step process to ensure indicator renders BEFORE blocking backend call
+    # Indicator already showing from line 98 when processing_suggestion=True
     if st.session_state.get("processing_suggestion") and st.session_state.get(
         "pending_query"
     ):
         query = st.session_state.get("pending_query")
 
-        # Step 1: If indicator not yet shown, just rerun to render it
-        if not st.session_state.get("_indicator_rendered"):
-            st.session_state["_indicator_rendered"] = True
-            st.rerun()
-
-        # Step 2: Indicator was rendered in previous rerun, now process query
+        # Process query immediately - indicator is already visible
         result = send_to_backend(query, {}, None, stories)
-        st.session_state.pop("_indicator_rendered", None)
 
-        # Add to transcript
+        # Add user message to transcript
         st.session_state["ask_transcript"].append({"Role": "user", "text": query})
 
         # Check if nonsense was detected
