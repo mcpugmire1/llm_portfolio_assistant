@@ -46,11 +46,6 @@ def render_ask_mattgpt(stories: List[Dict]):
     # 2. Transcript is empty or only has bootstrap message
     show_landing = is_empty_conversation()
 
-    # Handle landing query processing (if user submitted from landing page)
-    if st.session_state.get("processing_suggestion") and st.session_state.get("pending_query"):
-        # User submitted from landing - transition to conversation view
-        show_landing = False
-
     # Route to appropriate view
     if show_landing:
         render_landing_page(stories)

@@ -521,9 +521,49 @@ def get_conversation_css() -> str:
             border-radius: 16px !important;
         }
 
+        /* Chat input submit button - complete styling */
+        button[data-testid="stChatInputSubmitButton"],
+        [data-testid="stChatInput"] button {
+            padding: 14px 28px !important;
+            background: #8B5CF6 !important;
+            background-color: #8B5CF6 !important;
+            background-image: none !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 8px !important;
+            font-size: 15px !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
+            min-width: auto !important;
+            width: auto !important;
+            height: auto !important;
+            min-height: auto !important;
+        }
+
+        /* Hide default SVG icon */
+        button[data-testid="stChatInputSubmitButton"] svg {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+        /* Add custom text */
         button[data-testid="stChatInputSubmitButton"]::after {
             content: "Ask Agy 🐾" !important;
             color: white !important;
+            font-size: 15px !important;
+            font-weight: 600 !important;
+        }
+
+        /* Hover state */
+        button[data-testid="stChatInputSubmitButton"]:hover {
+            background: #7C3AED !important;
+            background-color: #7C3AED !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3) !important;
         }
 
         /* Hide footer in conversation view */

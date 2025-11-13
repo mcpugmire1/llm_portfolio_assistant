@@ -100,6 +100,13 @@ def render_landing_page(stories: List[Dict]):
             st.markdown(
                 """
 <style>
+/* Disable text input during processing */
+div[data-testid="stTextInput"] input {
+    opacity: 0.5 !important;
+    pointer-events: none !important;
+    cursor: not-allowed !important;
+    background: #F3F4F6 !important;
+}
 @keyframes chaseAnimationEarly {
     0% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
     33.33% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_2.png'); }
