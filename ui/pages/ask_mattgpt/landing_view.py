@@ -220,43 +220,13 @@ div[data-testid="stTextInput"] input {
     )
 
     # === PROCESS PENDING QUERY (if in processing state) ===
-    # This runs AFTER the UI is rendered, so user sees disabled buttons and styled message
+    # The thinking indicator is already showing from lines 98-133, don't replace it
     if st.session_state.get("processing_suggestion") and st.session_state.get(
         "pending_query"
     ):
         query = st.session_state.get("pending_query")
 
-        # Show the styled loading message in the placeholder
-        with loading_placeholder:
-            st.markdown(
-                """
-<style>
-@keyframes chaseAnimation {
-    0% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
-    33.33% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_2.png'); }
-    66.66% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_3.png'); }
-    100% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
-}
-.thinking-ball {
-    width: 48px;
-    height: 48px;
-    animation: chaseAnimation 0.9s steps(3) infinite;
-}
-</style>
-<div style='background: transparent;
-            padding: 16px 0;
-            margin: 20px 0;
-            display: flex;
-            align-items: center;
-            gap: 12px;'>
-    <img class="thinking-ball" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png" alt="Thinking"/>
-    <div style='color: #2C363D; font-weight: 500;'>🐾 Tracking down insights...</div>
-</div>
-""",
-                unsafe_allow_html=True,
-            )
-
-        # Process the query
+        # Process the query (indicator already visible above)
         result = send_to_backend(query, {}, None, stories)
 
         # Add to transcript
