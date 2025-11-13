@@ -96,9 +96,9 @@ def render_landing_page(stories: List[Dict]):
 
     # Show loading immediately if processing
     if st.session_state.get("processing_suggestion"):
-        # Disable text input during processing via CSS
-        st.markdown(
-            """
+        with loading_placeholder:
+            st.markdown(
+                """
 <style>
 /* Disable text input during processing */
 div[data-testid="stTextInput"] input {
@@ -107,15 +107,6 @@ div[data-testid="stTextInput"] input {
     cursor: not-allowed !important;
     background: #F3F4F6 !important;
 }
-</style>
-""",
-            unsafe_allow_html=True,
-        )
-
-        with loading_placeholder:
-            st.markdown(
-                """
-<style>
 @keyframes chaseAnimationEarly {
     0% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
     33.33% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_2.png'); }
@@ -128,15 +119,9 @@ div[data-testid="stTextInput"] input {
     animation: chaseAnimationEarly 0.9s steps(3) infinite;
 }
 </style>
-<div style='position: fixed;
-            bottom: 140px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 9999;
-            background: #F3F4F6;
-            padding: 12px 24px;
-            border-radius: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+<div style='background: transparent;
+            padding: 16px 0;
+            margin: 20px 0;
             display: flex;
             align-items: center;
             gap: 12px;'>
@@ -235,20 +220,44 @@ div[data-testid="stTextInput"] input {
     )
 
     # === PROCESS PENDING QUERY (if in processing state) ===
-    # Two-step process to ensure indicator shows before blocking backend call
+    # This runs AFTER the UI is rendered, so user sees disabled buttons and styled message
     if st.session_state.get("processing_suggestion") and st.session_state.get(
         "pending_query"
     ):
         query = st.session_state.get("pending_query")
 
-        # Step 1: If this is the first rerun, just trigger another rerun to ensure indicator renders
-        if not st.session_state.get("_indicator_shown"):
-            st.session_state["_indicator_shown"] = True
-            st.rerun()
+        # Show the styled loading message in the placeholder
+        with loading_placeholder:
+            st.markdown(
+                """
+<style>
+@keyframes chaseAnimation {
+    0% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
+    33.33% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_2.png'); }
+    66.66% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_3.png'); }
+    100% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
+}
+.thinking-ball {
+    width: 48px;
+    height: 48px;
+    animation: chaseAnimation 0.9s steps(3) infinite;
+}
+</style>
+<div style='background: transparent;
+            padding: 16px 0;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;'>
+    <img class="thinking-ball" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png" alt="Thinking"/>
+    <div style='color: #2C363D; font-weight: 500;'>🐾 Tracking down insights...</div>
+</div>
+""",
+                unsafe_allow_html=True,
+            )
 
-        # Step 2: Now process the query (indicator was rendered in previous rerun)
+        # Process the query
         result = send_to_backend(query, {}, None, stories)
-        st.session_state.pop("_indicator_shown", None)
 
         # Add to transcript
         st.session_state["ask_transcript"].append({"Role": "user", "text": query})
