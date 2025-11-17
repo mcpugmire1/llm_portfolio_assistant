@@ -15,23 +15,27 @@ openai_client = OpenAI(api_key=os.environ['OPENAI_API_KEY'])
 pc = Pinecone(api_key=os.environ['PINECONE_API_KEY'])
 index = pc.Index(os.environ['PINECONE_INDEX'])
 
-# Load system prompt
-SYSTEM_PROMPT = """You are Agy, Matt Pugmire's AI portfolio assistant. You help people understand Matt's 20+ years of digital transformation experience through conversational, outcome-focused answers.
+# Load system prompt from file
+def load_system_prompt():
+    """Load Agy system prompt from file"""
+    try:
+        # Try to load from local file (packaged with Lambda)
+        prompt_path = os.path.join(os.path.dirname(__file__), 'agy_system.txt')
+        if os.path.exists(prompt_path):
+            with open(prompt_path, 'r') as f:
+                return f.read()
+    except Exception as e:
+        print(f"Warning: Could not load system prompt from file: {e}")
 
-Your responses should:
-- Be grounded in the specific stories and examples provided
-- Lead with outcomes and metrics when available
-- Use a warm, trusted advisor tone (not corporate or robotic)
-- Cite specific projects/clients when relevant
-- Stay focused on Matt's actual experience
+    # Fallback prompt if file not found
+    return """You are Agy 🐾 — Matt Pugmire's professional portfolio assistant.
 
-When responding:
-1. Answer the question directly (1-2 sentences)
-2. Provide specific example from the context (with client/project name)
-3. Share the pattern or methodology if relevant
-4. Keep responses concise but substantive
+You ONLY answer questions about Matt's transformation work. For off-topic queries, respond:
+"🐾 I can only discuss Matt's transformation experience. Ask me about his application modernization work, digital product innovation, agile transformation, or innovation leadership."
 
-CRITICAL: Base your answer ONLY on the context provided below. If the context doesn't contain relevant information, say so honestly."""
+CRITICAL: Base your answer ONLY on the context provided. If the context doesn't contain relevant information, say so honestly."""
+
+SYSTEM_PROMPT = load_system_prompt()
 
 def lambda_handler(event, context):
     """Main Lambda handler for RAG queries"""
@@ -83,6 +87,8 @@ def lambda_handler(event, context):
 def check_nonsense_filter(query: str) -> Optional[str]:
     """Check if query matches nonsense patterns"""
     try:
+        import re
+
         # Load nonsense filters from S3
         bucket = os.environ.get('STORIES_BUCKET')
         if not bucket:
@@ -91,15 +97,17 @@ def check_nonsense_filter(query: str) -> Optional[str]:
         response = s3_client.get_object(Bucket=bucket, Key='nonsense_filters.jsonl')
         filters_data = response['Body'].read().decode('utf-8')
 
-        query_lower = query.lower()
-
         for line in filters_data.strip().split('\n'):
+            if not line.strip():
+                continue
+
             filter_obj = json.loads(line)
-            patterns = filter_obj.get('patterns', [])
+            pattern = filter_obj.get('pattern', '')
             category = filter_obj.get('category', 'general')
 
-            for pattern in patterns:
-                if pattern.lower() in query_lower:
+            if pattern:
+                # Use regex pattern matching (case-insensitive)
+                if re.search(pattern, query, re.IGNORECASE):
                     return category
 
         return None
@@ -111,12 +119,8 @@ def check_nonsense_filter(query: str) -> Optional[str]:
 
 def get_nonsense_response(category: str) -> str:
     """Return canned response for nonsense queries"""
-    responses = {
-        'greeting': "Hi there! 👋 I'm Agy, Matt's AI portfolio assistant. I can help you learn about Matt's 20+ years of experience in digital transformation, agile delivery, and enterprise leadership. What would you like to know?",
-        'identity': "I'm Agy, an AI assistant that helps you explore Matt Pugmire's professional portfolio. I can share specific examples from his 115+ transformation projects across Fortune 500 companies. What aspect of his experience interests you?",
-        'general': "I'm here to help you learn about Matt's professional experience! Try asking about specific capabilities like 'agile transformation', 'team scaling', or 'payments modernization'."
-    }
-    return responses.get(category, responses['general'])
+    # Per Agy system prompt: strict off-topic handling
+    return "🐾 I can only discuss Matt's transformation experience. Ask me about his application modernization work, digital product innovation, agile transformation, or innovation leadership."
 
 
 def search_pinecone(query: str, top_k: int = 7) -> List[Dict]:
