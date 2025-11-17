@@ -79,3 +79,7 @@ backend/chat_bak*.py
 archive/
 !echo_star_stories_nlp.jsonl
 !data/offdomain_queries.csv
+
+# Ignore temporary archive files
+*.tar.gz
+*.zip
