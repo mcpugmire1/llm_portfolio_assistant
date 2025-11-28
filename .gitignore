@@ -37,8 +37,7 @@ venv/
 star_stories_no_content.jsonl
 count_faiss_file
 
-# Ignore test or scratch files
-test_*.py
+# Ignore scratch files (but allow tests/ directory)
 yourfile_pretty.json
 
 # Ignore local Streamlit config (only if unnecessary to deploy)
