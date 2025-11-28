@@ -7,3 +7,9 @@
 {"category":"random_fun","pattern":"\\b(lottery|horoscope|zodiac|pick-up line)\\b"}
 {"category":"internal","pattern":"^DEBUG\\s*•"}
 {"category":"internal","pattern":"^🧪"}
+{"category":"retail_price","pattern":"\\b(how much|what'?s the price|how expensive)\\b.*\\b(store|shop|gift shop|merch)\\b"}
+{"category":"shopping_merch","pattern":"\\b(hat|hats|cap|caps|shirt|hoodie)\\b.*\\b(shop|store|gift shop)\\b"}
+{"category":"retail_price","pattern":"\\b(how much|price|cost)\\b.*\\b(at|from)\\b.*\\b(shop|store|retail|gift)\\b"}
+{"category":"celebrity_earnings","pattern":"\\b(how much|salary|net worth|earnings|income)\\b.*(celebrity|actor|singer|athlete|madonna|beyonce|musk|bezos|trump)"}
+{"pattern": "favorite (color|food|movie|song|book|animal|sport)", "category": "personal_trivia"}
+{"pattern": "what('s| is) matt('s)? (favorite|least favorite)", "category": "personal_trivia"}

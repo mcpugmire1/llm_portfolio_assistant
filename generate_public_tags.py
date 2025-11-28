@@ -39,23 +39,57 @@ MODEL = "gpt-4o"  # Use GPT-4o for richer tags
 def extract_semantic_tags(story):
     prompt = (
         "You are an intelligent assistant that analyzes STAR stories for professional tagging.\n\n"
-        "Given the following data, generate a concise, comma-separated list of **semantic tags** that capture:\n"
-        "- Technical skills and methodologies\n"
-        "- Business capabilities and outcomes\n"
-        "- Leadership, transformation, or collaboration themes\n"
-        "- Keywords useful for semantic search (aligned with SFIA, O*NET, LinkedIn, Accenture Tech Vision, etc)\n\n"
-        "**Avoid repeating section headers or general terms. Be specific, insightful, and consistent.**\n\n"
+        "Given the following data, generate a concise, comma-separated list of **semantic tags** that capture:\n\n"
+        
+        "**Behavioral & Leadership (CRITICAL - include these when present in Action/Result):**\n"
+        "- Stakeholder management, trust-building, influencing without authority\n"
+        "- Coaching, mentoring, capability building, knowledge transfer\n"
+        "- Navigating resistance, organizational politics, conflict resolution\n"
+        "- Team dynamics, psychological safety, culture change\n"
+        "- Cross-functional collaboration, alignment, consensus-building\n"
+        "- Change management, overcoming skepticism, building credibility\n\n"
+        
+        "**Technical & Methodological:**\n"
+        "- Technical skills, architectures, platforms, tools\n"
+        "- Methodologies (Agile, TDD, DevOps, CI/CD, etc.)\n"
+        "- Engineering practices and patterns\n\n"
+        
+        "**Business & Outcomes:**\n"
+        "- Business capabilities and measurable outcomes\n"
+        "- Industry-specific terminology\n"
+        "- Transformation types (digital, agile, cloud, etc.)\n\n"
+        
+        "**Keyword Alignment:**\n"
+        "- Use terminology aligned with SFIA, O*NET, LinkedIn Skills, and Accenture Tech Vision\n"
+        "- Include synonyms that recruiters and hiring managers search for\n"
+        "- Ensure tags are discoverable via semantic search\n\n"
+        
+        "**IMPORTANT RULES:**\n"
+        "1. Read the Action and Result fields carefully for behavioral signals\n"
+        "2. If the story describes navigating politics, coaching stakeholders, building trust, "
+        "or overcoming resistance - those behaviors MUST appear in tags\n"
+        "3. Phrases like 'coached', 'mentored', 'navigated', 'aligned', 'influenced', 'facilitated' "
+        "indicate behavioral competencies - tag them\n"
+        "4. Balance technical and behavioral tags - most stories have both dimensions\n"
+        "5. Be specific and avoid generic terms like 'leadership' - use 'stakeholder alignment' or 'team coaching' instead\n\n"
+        
         f"Title: {story.get('Title', '')}\n"
         f"Role: {story.get('Role', '')}\n"
         f"Industry: {story.get('Industry', '')}\n"
-        f"Theme: {story.get('Theme', '')}\n"  # ← ADDED THIS on 11.10.25
+        f"Theme: {story.get('Theme', '')}\n"
+        f"Category: {story.get('Category', '')}\n"
+        f"Sub-category: {story.get('Sub-category', '')}\n"
         f"Project Scope: {story.get('Project Scope / Complexity', '')}\n"
         f"Use Cases: {story.get('Use Case(s)', '')}\n"
         f"Situation: {story.get('Situation', [''])[0]}\n"
         f"Task: {story.get('Task', [''])[0]}\n"
         f"Action: {' '.join(story.get('Action', []))}\n"
-        f"Result: {' '.join(story.get('Result', []))}\n\n"
-        "Output only the semantic tags as a comma-separated string."
+        f"Result: {' '.join(story.get('Result', []))}\n"
+        f"Process: {' '.join(story.get('Process', []))}\n"
+        f"Performance: {' '.join(story.get('Performance', []))}\n\n"
+        
+        "Output only the semantic tags as a comma-separated string. "
+        "Aim for 8-15 tags that balance behavioral and technical dimensions."
     )
 
     try:
