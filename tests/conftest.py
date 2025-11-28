@@ -174,6 +174,29 @@ def valid_queries() -> list[str]:
 
 
 @pytest.fixture
+def mock_streamlit(monkeypatch):
+    """Mock streamlit session_state for testing."""
+    from unittest.mock import MagicMock
+
+    mock_session_state = {}
+
+    # Create a mock that behaves like a dict
+    mock = MagicMock()
+    mock.get = lambda key, default=None: mock_session_state.get(key, default)
+    mock.__getitem__ = lambda _self, key: mock_session_state[key]
+    mock.__setitem__ = lambda _self, key, value: mock_session_state.__setitem__(
+        key, value
+    )
+    mock.__contains__ = lambda _self, key: key in mock_session_state
+    mock.pop = lambda key, default=None: mock_session_state.pop(key, default)
+
+    # Patch streamlit.session_state
+    monkeypatch.setattr("streamlit.session_state", mock)
+
+    return mock
+
+
+@pytest.fixture
 def mock_pinecone_response(sample_search_results):
     """Mock Pinecone query response structure."""
     return {
