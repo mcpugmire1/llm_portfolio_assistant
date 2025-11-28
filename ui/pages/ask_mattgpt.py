@@ -5,47 +5,40 @@ Interactive chat interface for conversational exploration of Matt's experience.
 Uses semantic search and Pinecone to retrieve relevant project stories.
 """
 
-import streamlit as st
-import streamlit.components.v1 as components  # ADD THIS LINE
-from typing import List, Dict, Optional
-import json
-from datetime import datetime
-import os, re, time, textwrap, json
-from config.debug import DEBUG
-from config.settings import get_conf
-from utils.ui_helpers import dbg, safe_container
-from utils.validation import is_nonsense, token_overlap_ratio, _tokenize
-from utils.ui_helpers import render_no_match_banner
-from utils.formatting import (
-    story_has_metric,
-    strongest_metric_line,
-    build_5p_summary,
-    _format_key_points,
-    METRIC_RX,
-)
-from services.pinecone_service import (
-    _init_pinecone,
-    PINECONE_MIN_SIM,
-    SEARCH_TOP_K,
-    _safe_json,
-    _summarize_index_stats,
-    PINECONE_NAMESPACE,
-    PINECONE_INDEX_NAME,
-    W_PC,
-    W_KW,
-    _DEF_DIM,
-    _PINECONE_INDEX,
-    VECTOR_BACKEND,
-)
-from services.rag_service import semantic_search, _KNOWN_VOCAB
-from utils.formatting import _format_narrative, _format_key_points, _format_deep_dive
-from utils.ui_helpers import render_sources_chips, render_sources_badges_static
-from ui.components.story_detail import render_story_detail
-
 # --- Nonsense rules (JSONL) + known vocab -------------------
 import csv
+import os
+import re
 from datetime import datetime
-import os, re, time, textwrap, json
+
+import streamlit as st
+import streamlit.components.v1 as components  # ADD THIS LINE
+
+from config.debug import DEBUG
+from services.pinecone_service import (
+    PINECONE_INDEX_NAME,
+    PINECONE_NAMESPACE,
+    SEARCH_TOP_K,
+    VECTOR_BACKEND,
+)
+from services.rag_service import _KNOWN_VOCAB, semantic_search
+from ui.components.story_detail import render_story_detail
+from utils.formatting import (
+    _format_deep_dive,
+    _format_key_points,
+    _format_narrative,
+    build_5p_summary,
+    story_has_metric,
+    strongest_metric_line,
+)
+from utils.ui_helpers import (
+    dbg,
+    render_no_match_banner,
+    render_sources_badges_static,
+    render_sources_chips,
+    safe_container,
+)
+from utils.validation import _tokenize, is_nonsense, token_overlap_ratio
 
 # ====================
 # 1. MAIN ENTRY POINT
@@ -59,10 +52,13 @@ def render_ask_mattgpt(stories: list):
 
     if DEBUG:
         from utils.ui_helpers import dbg
+
         transcript_len = len(st.session_state.get("ask_transcript", []))
         has_inject = st.session_state.get("__inject_user_turn__")
         has_processing = st.session_state.get("__processing_chip_injection__")
-        dbg(f"[ENTRY] transcript_len={transcript_len}, inject={has_inject}, processing={has_processing}")
+        dbg(
+            f"[ENTRY] transcript_len={transcript_len}, inject={has_inject}, processing={has_processing}"
+        )
 
     # Clear transition indicator flag only (feature temporarily disabled due to positioning issues)
     # Don't clear processing flags here as they're needed for the normal flow
@@ -203,7 +199,7 @@ def render_landing_page(stories: list):
             color: #2C363D;
         }
 
-       
+
         .status-dot {
             width: 8px;
             height: 8px;
@@ -507,7 +503,7 @@ def render_landing_page(stories: list):
         div:has(> button[key="how_works_landing"]) {
             display: none !important;
         }
-                
+
         /* HOW AGY SEARCHES BUTTON - IN HEADER */
         button[key="toggle_how_agy"] {
             position: absolute !important;
@@ -523,12 +519,12 @@ def render_landing_page(stories: list):
             font-weight: 600 !important;
             z-index: 10 !important;
         }
-        
+
         button[key="toggle_how_agy"]:hover {
             background: rgba(255, 255, 255, 0.3) !important;
             border-color: rgba(255, 255, 255, 0.5) !important;
         }
-        
+
         button[key="toggle_how_agy"] p {
             color: white !important;
             font-weight: 600 !important;
@@ -587,11 +583,11 @@ def render_landing_page(stories: list):
         </div>
         <h2 class="welcome-title">Hi, I'm Agy 🐾</h2>
         <p class="intro-text-primary">
-            I'm a Plott Hound — a breed known for tracking skills and determination. 
+            I'm a Plott Hound — a breed known for tracking skills and determination.
             Perfect traits for helping you hunt down insights from Matt's 120+ transformation projects.
         </p>
         <p class="intro-text-secondary">
-            Ask me about specific methodologies, leadership approaches, or project outcomes. 
+            Ask me about specific methodologies, leadership approaches, or project outcomes.
             I understand context, not just keywords.
         </p>
     </div>
@@ -770,13 +766,15 @@ def render_landing_page(stories: list):
             query_text = st.session_state.get("ask_last_query", "")
             overlap = st.session_state.get("ask_last_overlap", None)
 
-            st.session_state["ask_transcript"].append({
-                "type": "banner",
-                "Role": "assistant",
-                "reason": reason,
-                "query": query_text,
-                "overlap": overlap,
-            })
+            st.session_state["ask_transcript"].append(
+                {
+                    "type": "banner",
+                    "Role": "assistant",
+                    "reason": reason,
+                    "query": query_text,
+                    "overlap": overlap,
+                }
+            )
 
             # Clear flags after adding to transcript
             st.session_state.pop("ask_last_reason", None)
@@ -1263,7 +1261,7 @@ def render_conversation_view(stories: list):
 
         /* Targets the inner-most container wrapper that applies the text-input styling */
         [data-testid="stChatInput"] .st-emotion-cache-1ydk24 {
-            /* Use the actual emotion class for maximum certainty, if known. 
+            /* Use the actual emotion class for maximum certainty, if known.
             If not, try the generic wrapper below: */
             border-left: none !important;
         }
@@ -1282,15 +1280,15 @@ def render_conversation_view(stories: list):
         }
 
         /* Targets the Fieldset (a common wrapper for Streamlit text inputs) */
-        [data-testid="stChatInput"] fieldset, 
+        [data-testid="stChatInput"] fieldset,
         [data-testid="stChatInput"] legend {
             border: none !important;
             outline: none !important;
             box-shadow: none !important;
             /* Ensure no residual color */
-            border-left: none !important; 
+            border-left: none !important;
         }
-        
+
         /* Messages area background */
         .main .block-container {
             background: #fafafa !important;
@@ -1547,7 +1545,7 @@ def render_conversation_view(stories: list):
             transform: translateX(-50%) !important;
             z-index: 1000 !important;
         }
-        
+
 
         /* Hide ONLY Streamlit's built-in status/spinner widgets - NOT our custom status bar */
         [data-testid="stStatusWidget"],
@@ -1648,7 +1646,7 @@ def render_conversation_view(stories: list):
             display: none !important;
         }
 
-                
+
         .st-key-how_works_top button[data-testid="stBaseButton-secondary"] {
             background: rgba(102, 126, 234, 0.1) !important;
             border: 2px solid #667eea !important;
@@ -1664,7 +1662,7 @@ def render_conversation_view(stories: list):
         .st-key-how_works_top {
             margin: 16px 0 20px 0 !important;        /* More space above/below */
             padding: 0 20px !important;              /* Side padding */
-        }      
+        }
 
         .st-key-how_works_top button[data-testid="stBaseButton-secondary"]:hover {
             background: rgba(102, 126, 234, 0.2) !important;
@@ -1684,13 +1682,13 @@ def render_conversation_view(stories: list):
         /* 1. Reset Global Variables to Neutralize Theme Color */
         :root {
             --st-focus-ring-color: transparent !important;
-            --primary-color: #f5f5f5 !important; 
+            --primary-color: #f5f5f5 !important;
             --st-primary-color: #f5f5f5 !important;
         }
 
         /* 2. Target the specific element wrappers responsible for the purple glow (using Max Specificity) */
         /* Targets the text input container */
-        [data-testid^="stTextInput"] > div > div > div, 
+        [data-testid^="stTextInput"] > div > div > div,
         /* Targets the base input field itself */
         div[data-baseweb="base-input"],
         /* Targets the fieldset wrapper which draws the border */
@@ -1732,7 +1730,7 @@ def render_conversation_view(stories: list):
          /* ========================================
        FIX: TEXTAREA BORDER ISSUE (ADD AT VERY BOTTOM)
        ======================================== */
-    
+
         /* KILL the purple left border on input - it's inheriting from chat messages */
         [data-testid="stChatInput"] textarea,
         [data-testid="stChatInputTextArea"],
@@ -1803,7 +1801,7 @@ def render_conversation_view(stories: list):
             box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1) !important;
         }
         /* Match landing page input styling for chat textarea */
-    
+
         /* Fix clipped corners - make parent containers visible */
         [data-testid="stChatInput"],
         [data-testid="stChatInput"] > div,
@@ -1812,7 +1810,7 @@ def render_conversation_view(stories: list):
         [data-baseweb="base-input"] {
             overflow: visible !important;
         }
-        
+
         /* Style the textarea to match landing page */
         textarea[data-testid="stChatInputTextArea"] {
             width: 100% !important;
@@ -1827,7 +1825,7 @@ def render_conversation_view(stories: list):
             min-height: 60px !important;
             max-height: 60px !important;
         }
-        
+
         /* Focus state - purple like the landing page */
         textarea[data-testid="stChatInputTextArea"]:focus {
             border-color: #8B5CF6 !important;
@@ -1878,7 +1876,7 @@ def render_conversation_view(stories: list):
             cursor: pointer !important;
             transition: all 0.2s ease !important;
             /* Position adjustments */
-            transform: translate(-3px, 1.5px) !important;    /* More left - Move down */   
+            transform: translate(-3px, 1.5px) !important;    /* More left - Move down */
         }
         /* Fix hint - center it below the input */
         [data-testid="stChatInput"]::after {
@@ -1972,16 +1970,19 @@ def render_conversation_view(stories: list):
     # ============================================================================
     # Show the panel if toggled
     if st.session_state.get("show_how_modal", False):
-        
         # Auto-scroll to top
-        st.markdown("""
+        st.markdown(
+            """
             <script>
             window.scrollTo({top: 0, behavior: 'smooth'});
             </script>
-        """, unsafe_allow_html=True)
-        
+        """,
+            unsafe_allow_html=True,
+        )
+
         # Just style the content nicely - NO backdrop
-        st.markdown("""
+        st.markdown(
+            """
         <style>
         /* Close button styling */
         button[key="close_how"] {
@@ -1995,60 +1996,62 @@ def render_conversation_view(stories: list):
             transition: all 0.2s ease !important;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
         }
-        
+
         button[key="close_how"]:hover {
             background: #F3F4F6 !important;
             border-color: #8B5CF6 !important;
             color: #8B5CF6 !important;
         }
         </style>
-        """, unsafe_allow_html=True)
-        
+        """,
+            unsafe_allow_html=True,
+        )
+
         # Nice bordered container
         with st.container(border=True):
             # Header with close button
             col1, col2 = st.columns([10, 1])
-            
+
             with col1:
                 st.markdown("## 🔍 How Agy Finds Your Stories")
-            
+
             with col2:
                 if st.button("✕", key="close_how", help="Close"):
                     toggle_how_modal()
-            
+
             st.markdown("---")
-            
+
             # 3-step flow
             components.html(
                 """
-                <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-                            padding: 28px; 
-                            background: linear-gradient(135deg, #FAFAFA 0%, #F9FAFB 100%); 
-                            border-radius: 16px; 
+                <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                            padding: 28px;
+                            background: linear-gradient(135deg, #FAFAFA 0%, #F9FAFB 100%);
+                            border-radius: 16px;
                             border: 2px solid #E5E7EB;">
-                    
+
                     <!-- Step 1: You Ask -->
                     <div style="margin-bottom: 48px;">
                         <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
-                            <div style="background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%); 
-                                        color: white; 
-                                        width: 48px; 
-                                        height: 48px; 
-                                        border-radius: 50%; 
-                                        display: flex; 
-                                        align-items: center; 
-                                        justify-content: center; 
-                                        font-weight: 700; 
-                                        font-size: 22px; 
-                                        flex-shrink: 0; 
+                            <div style="background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+                                        color: white;
+                                        width: 48px;
+                                        height: 48px;
+                                        border-radius: 50%;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        font-weight: 700;
+                                        font-size: 22px;
+                                        flex-shrink: 0;
                                         box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);">1</div>
                             <h3 style="margin: 0; color: #1F2937; font-size: 24px; font-weight: 700;">You Ask</h3>
                         </div>
-                        <div style="margin-left: 64px; 
-                                    background: white; 
-                                    padding: 24px; 
-                                    border-radius: 12px; 
-                                    border: 2px solid #E9D5FF; 
+                        <div style="margin-left: 64px;
+                                    background: white;
+                                    padding: 24px;
+                                    border-radius: 12px;
+                                    border: 2px solid #E9D5FF;
                                     box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
                             <div style="color: #4B5563; font-size: 16px; font-style: italic; line-height: 1.6;">
                                 "Show me cloud migration projects in financial services"
@@ -2062,27 +2065,27 @@ def render_conversation_view(stories: list):
                     <!-- Step 2: Agy Searches -->
                     <div style="margin-bottom: 48px;">
                         <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
-                            <div style="background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%); 
-                                        color: white; 
-                                        width: 48px; 
-                                        height: 48px; 
-                                        border-radius: 50%; 
-                                        display: flex; 
-                                        align-items: center; 
-                                        justify-content: center; 
-                                        font-weight: 700; 
-                                        font-size: 22px; 
-                                        flex-shrink: 0; 
+                            <div style="background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+                                        color: white;
+                                        width: 48px;
+                                        height: 48px;
+                                        border-radius: 50%;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        font-weight: 700;
+                                        font-size: 22px;
+                                        flex-shrink: 0;
                                         box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);">2</div>
                             <h3 style="margin: 0; color: #1F2937; font-size: 24px; font-weight: 700;">Agy Searches</h3>
                         </div>
                         <div style="margin-left: 64px;">
                             <div style="display: flex; gap: 16px; margin-bottom: 16px;">
-                                <div style="flex: 1; 
-                                            background: white; 
-                                            padding: 20px; 
-                                            border-radius: 10px; 
-                                            border: 2px solid #E9D5FF; 
+                                <div style="flex: 1;
+                                            background: white;
+                                            padding: 20px;
+                                            border-radius: 10px;
+                                            border: 2px solid #E9D5FF;
                                             box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
                                     <div style="font-weight: 700; color: #7C3AED; font-size: 16px; margin-bottom: 8px;">
                                         🧠 AI Understanding
@@ -2091,11 +2094,11 @@ def render_conversation_view(stories: list):
                                         Finds stories with similar meaning
                                     </div>
                                 </div>
-                                <div style="flex: 1; 
-                                            background: white; 
-                                            padding: 20px; 
-                                            border-radius: 10px; 
-                                            border: 2px solid #BFDBFE; 
+                                <div style="flex: 1;
+                                            background: white;
+                                            padding: 20px;
+                                            border-radius: 10px;
+                                            border: 2px solid #BFDBFE;
                                             box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
                                     <div style="font-weight: 700; color: #2563EB; font-size: 16px; margin-bottom: 8px;">
                                         🔍 Keyword Match
@@ -2105,10 +2108,10 @@ def render_conversation_view(stories: list):
                                     </div>
                                 </div>
                             </div>
-                            <div style="background: white; 
-                                        padding: 20px; 
-                                        border-radius: 10px; 
-                                        border: 2px solid #FDE68A; 
+                            <div style="background: white;
+                                        padding: 20px;
+                                        border-radius: 10px;
+                                        border: 2px solid #FDE68A;
                                         box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
                                 <div style="font-weight: 700; color: #D97706; font-size: 16px; margin-bottom: 8px;">
                                     ⚡ Smart Filtering
@@ -2126,31 +2129,31 @@ def render_conversation_view(stories: list):
                     <!-- Step 3: You Get Results -->
                     <div>
                         <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
-                            <div style="background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%); 
-                                        color: white; 
-                                        width: 48px; 
-                                        height: 48px; 
-                                        border-radius: 50%; 
-                                        display: flex; 
-                                        align-items: center; 
-                                        justify-content: center; 
-                                        font-weight: 700; 
-                                        font-size: 22px; 
-                                        flex-shrink: 0; 
+                            <div style="background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+                                        color: white;
+                                        width: 48px;
+                                        height: 48px;
+                                        border-radius: 50%;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        font-weight: 700;
+                                        font-size: 22px;
+                                        flex-shrink: 0;
                                         box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);">3</div>
                             <h3 style="margin: 0; color: #1F2937; font-size: 24px; font-weight: 700;">You Get Results</h3>
                         </div>
-                        <div style="margin-left: 64px; 
-                                    background: white; 
-                                    border: 3px solid #8B5CF6; 
-                                    border-radius: 12px; 
-                                    padding: 24px; 
+                        <div style="margin-left: 64px;
+                                    background: white;
+                                    border: 3px solid #8B5CF6;
+                                    border-radius: 12px;
+                                    padding: 24px;
                                     box-shadow: 0 8px 20px rgba(139, 92, 246, 0.25);">
-                            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-                                        color: white; 
-                                        padding: 20px; 
-                                        border-radius: 10px; 
-                                        margin-bottom: 20px; 
+                            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                                        color: white;
+                                        padding: 20px;
+                                        border-radius: 10px;
+                                        margin-bottom: 20px;
                                         box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);">
                                 <div style="font-weight: 700; font-size: 17px; margin-bottom: 8px;">
                                     Cloud Migration at Fortune 50 Bank
@@ -2160,26 +2163,26 @@ def render_conversation_view(stories: list):
                                 </div>
                             </div>
                             <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                                <span style="background: #EDE9FE; 
-                                             color: #7C3AED; 
-                                             padding: 8px 16px; 
-                                             border-radius: 20px; 
-                                             font-size: 13px; 
-                                             font-weight: 700; 
+                                <span style="background: #EDE9FE;
+                                             color: #7C3AED;
+                                             padding: 8px 16px;
+                                             border-radius: 20px;
+                                             font-size: 13px;
+                                             font-weight: 700;
                                              border: 2px solid #DDD6FE;">Financial Services</span>
-                                <span style="background: #E0E7FF; 
-                                             color: #4F46E5; 
-                                             padding: 8px 16px; 
-                                             border-radius: 20px; 
-                                             font-size: 13px; 
-                                             font-weight: 700; 
+                                <span style="background: #E0E7FF;
+                                             color: #4F46E5;
+                                             padding: 8px 16px;
+                                             border-radius: 20px;
+                                             font-size: 13px;
+                                             font-weight: 700;
                                              border: 2px solid #C7D2FE;">AWS</span>
-                                <span style="background: #DBEAFE; 
-                                             color: #2563EB; 
-                                             padding: 8px 16px; 
-                                             border-radius: 20px; 
-                                             font-size: 13px; 
-                                             font-weight: 700; 
+                                <span style="background: #DBEAFE;
+                                             color: #2563EB;
+                                             padding: 8px 16px;
+                                             border-radius: 20px;
+                                             font-size: 13px;
+                                             font-weight: 700;
                                              border: 2px solid #BFDBFE;">2020-2023</span>
                             </div>
                         </div>
@@ -2187,33 +2190,33 @@ def render_conversation_view(stories: list):
 
                 </div>
                 """,
-                height=1000
+                height=1000,
             )
-            
+
             st.markdown("---")
-            
+
             # Step 4: Technical Details (matches step 1-3 style)
             components.html(
                 """
                 <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-                    
+
                     <!-- Step 4 Header -->
                     <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
                         <h3 style="margin: 0; color: #1F2937; font-size: 24px; font-weight: 700;">Technical Details</h3>
                     </div>
-                    
+
                     <!-- Content Area -->
                     <div style="margin-left: 64px; padding: 26px; background: linear-gradient(135deg, #FAFAFA 0%, #F9FAFB 100%); border-radius: 16px; border: 2px solid #E5E7EB;">
-                        
+
                         <!-- Two Cards -->
                         <div style="display: flex; gap: 20px; margin-bottom: 24px;">
-                            
+
                             <!-- Search Technology Card -->
-                            <div style="flex: 1; 
-                                        background: white; 
-                                        padding: 24px; 
-                                        border-radius: 12px; 
-                                        border: 2px solid #E9D5FF; 
+                            <div style="flex: 1;
+                                        background: white;
+                                        padding: 24px;
+                                        border-radius: 12px;
+                                        border: 2px solid #E9D5FF;
                                         box-shadow: 0 4px 12px rgba(139, 92, 246, 0.1);">
                                 <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
                                     <span style="font-size: 24px;">🔍</span>
@@ -2228,13 +2231,13 @@ def render_conversation_view(stories: list):
                                     <li>Top-30 candidate pool, rank top-3</li>
                                 </ul>
                             </div>
-                            
+
                             <!-- Data Structure Card -->
-                            <div style="flex: 1; 
-                                        background: white; 
-                                        padding: 24px; 
-                                        border-radius: 12px; 
-                                        border: 2px solid #BFDBFE; 
+                            <div style="flex: 1;
+                                        background: white;
+                                        padding: 24px;
+                                        border-radius: 12px;
+                                        border: 2px solid #BFDBFE;
                                         box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);">
                                 <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
                                     <span style="font-size: 24px;">📊</span>
@@ -2249,9 +2252,9 @@ def render_conversation_view(stories: list):
                                     <li>Source attribution with confidence scores</li>
                                 </ul>
                             </div>
-                            
+
                         </div>
-                        
+
                         <!-- Performance Stats Bar -->
                         <div style="background: white;
                                     padding: 20px 32px;
@@ -2276,14 +2279,13 @@ def render_conversation_view(stories: list):
                                 <div style="font-size: 13px; color: #6B7280; font-weight: 500;">Relevance Accuracy</div>
                             </div>
                         </div>
-                        
+
                     </div>
-                    
+
                 </div>
                 """,
-                height=440
+                height=440,
             )
-
 
     # Define ctx - MUST be outside and after the modal block
     ctx = get_context_story(stories)
@@ -2639,29 +2641,45 @@ def render_conversation_view(stories: list):
     if pending and not processing_state:
         # Step 1: Push user turn and set processing to "pending", then rerun to show indicator
         if DEBUG:
-            dbg(f"[STEP1] pending={pending}, transcript_len={len(st.session_state.get('ask_transcript', []))}")
+            dbg(
+                f"[STEP1] pending={pending}, transcript_len={len(st.session_state.get('ask_transcript', []))}"
+            )
         if st.session_state.get("__pending_card_snapshot__"):
-            
             st.session_state["__pending_card_snapshot__"] = False
         _push_user_turn(pending)
         if DEBUG:
-            dbg(f"[STEP1] after push, transcript_len={len(st.session_state.get('ask_transcript', []))}")
-        st.session_state["__processing_chip_injection__"] = {"query": pending, "step": "pending"}
+            dbg(
+                f"[STEP1] after push, transcript_len={len(st.session_state.get('ask_transcript', []))}"
+            )
+        st.session_state["__processing_chip_injection__"] = {
+            "query": pending,
+            "step": "pending",
+        }
         st.rerun()
 
-    elif isinstance(processing_state, dict) and processing_state.get("step") == "pending":
+    elif (
+        isinstance(processing_state, dict) and processing_state.get("step") == "pending"
+    ):
         # Step 2: Render page with thinking indicator visible, then rerun to actually process
         if DEBUG:
             dbg(f"[STEP2] showing indicator for query={processing_state.get('query')}")
         # Mark as ready to process on next render
-        st.session_state["__processing_chip_injection__"] = {"query": processing_state["query"], "step": "processing"}
+        st.session_state["__processing_chip_injection__"] = {
+            "query": processing_state["query"],
+            "step": "processing",
+        }
         # Continue rendering to show transcript and indicator
 
-    elif isinstance(processing_state, dict) and processing_state.get("step") == "processing":
+    elif (
+        isinstance(processing_state, dict)
+        and processing_state.get("step") == "processing"
+    ):
         # Step 3: Now actually process the query
         pending_query = processing_state["query"]
         if DEBUG:
-            dbg(f"[STEP3] processing={pending_query}, transcript_len={len(st.session_state.get('ask_transcript', []))}")
+            dbg(
+                f"[STEP3] processing={pending_query}, transcript_len={len(st.session_state.get('ask_transcript', []))}"
+            )
 
         try:
             # Ask is pure semantic; ignore Explore filters here
@@ -2697,13 +2715,15 @@ def render_conversation_view(stories: list):
                 query = st.session_state.get("ask_last_query", "")
                 overlap = st.session_state.get("ask_last_overlap", None)
 
-                st.session_state["ask_transcript"].append({
-                    "type": "banner",
-                    "Role": "assistant",
-                    "reason": reason,
-                    "query": query,
-                    "overlap": overlap,
-                })
+                st.session_state["ask_transcript"].append(
+                    {
+                        "type": "banner",
+                        "Role": "assistant",
+                        "reason": reason,
+                        "query": query,
+                        "overlap": overlap,
+                    }
+                )
 
                 # Clear flags after adding to transcript
                 st.session_state.pop("ask_last_reason", None)
@@ -2769,15 +2789,15 @@ def render_conversation_view(stories: list):
                     with cols[j]:
                         with st.form(key=f"live_source_form_{j}"):
                             st.markdown(
-                                f"""
+                                """
                             <style>
                             /* Hide form border */
-                            div[data-testid="stForm"] {{
+                            div[data-testid="stForm"] {
                                 border: none !important;
                                 padding: 0 !important;
                                 margin: 0 !important;
-                            }}
-                            div[data-testid="stForm"] button {{
+                            }
+                            div[data-testid="stForm"] button {
                                 background: #F3F4F6 !important;
                                 border: 2px solid #E5E7EB !important;
                                 color: #2563EB !important;
@@ -2788,17 +2808,17 @@ def render_conversation_view(stories: list):
                                 width: 100% !important;
                                 height: auto !important;
                                 min-height: 32px !important;
-                            }}
-                            div[data-testid="stForm"] button p {{
+                            }
+                            div[data-testid="stForm"] button p {
                                 color: #2563EB !important;
                                 font-size: 14px !important;
                                 margin: 0 !important;
                                 line-height: 1.4 !important;
-                            }}
-                            div[data-testid="stForm"] button:hover {{
+                            }
+                            div[data-testid="stForm"] button:hover {
                                 background: #EEF2FF !important;
                                 border-color: #8B5CF6 !important;
-                            }}
+                            }
                             </style>
                             """,
                                 unsafe_allow_html=True,
@@ -2807,16 +2827,22 @@ def render_conversation_view(stories: list):
                             if st.form_submit_button(f"🔗 {label}"):
                                 # Toggle expander - if same source clicked, close it; otherwise open new one
                                 expanded_key = f"live_source_expanded_{j}"
-                                current_expanded = st.session_state.get("live_source_expanded")
+                                current_expanded = st.session_state.get(
+                                    "live_source_expanded"
+                                )
 
                                 if current_expanded == expanded_key:
                                     # Clicking same source - close it
                                     st.session_state["live_source_expanded"] = None
                                 else:
                                     # Open this source (closes any other)
-                                    st.session_state["live_source_expanded"] = expanded_key
+                                    st.session_state["live_source_expanded"] = (
+                                        expanded_key
+                                    )
                                     # Store the source ID for rendering
-                                    st.session_state["live_source_expanded_id"] = src.get("id")
+                                    st.session_state["live_source_expanded_id"] = (
+                                        src.get("id")
+                                    )
 
                                 st.rerun()
 
@@ -2826,10 +2852,16 @@ def render_conversation_view(stories: list):
 
                 if expanded_key and expanded_id:
                     # Find the story object
-                    story_obj = next((s for s in stories if str(s.get("id")) == str(expanded_id)), None)
+                    story_obj = next(
+                        (s for s in stories if str(s.get("id")) == str(expanded_id)),
+                        None,
+                    )
 
                     if story_obj:
-                        st.markdown("<div style='margin-top: 16px;'></div>", unsafe_allow_html=True)
+                        st.markdown(
+                            "<div style='margin-top: 16px;'></div>",
+                            unsafe_allow_html=True,
+                        )
                         render_story_detail(story_obj, "live_expanded", stories)
 
             # Action buttons (wireframe style)
@@ -2857,9 +2889,14 @@ def render_conversation_view(stories: list):
     # 5.5) Show thinking indicator at bottom (above input) if processing chip injection OR transitioning from Explore Stories
     processing_state = st.session_state.get("__processing_chip_injection__")
     show_transition = st.session_state.get("show_transition_indicator", False)
-    show_thinking = (isinstance(processing_state, dict) and processing_state.get("step") in ["pending", "processing"]) or show_transition
+    show_thinking = (
+        isinstance(processing_state, dict)
+        and processing_state.get("step") in ["pending", "processing"]
+    ) or show_transition
     if DEBUG:
-        dbg(f"[INDICATOR] processing_state={processing_state}, show_transition={show_transition}, show_thinking={show_thinking}")
+        dbg(
+            f"[INDICATOR] processing_state={processing_state}, show_transition={show_transition}, show_thinking={show_thinking}"
+        )
 
     if show_thinking:
         st.markdown(
@@ -2902,7 +2939,10 @@ def render_conversation_view(stories: list):
             unsafe_allow_html=True,
         )
         # If we just showed the indicator in "pending" step, trigger rerun to process
-        if isinstance(processing_state, dict) and processing_state.get("step") == "processing":
+        if (
+            isinstance(processing_state, dict)
+            and processing_state.get("step") == "processing"
+        ):
             # We're now in the state where indicator is visible, rerun to actually process
             st.rerun()
 
@@ -2919,7 +2959,6 @@ def render_conversation_view(stories: list):
     if user_input_local:
         # If a live card is pending snapshot from the previous answer, snapshot it now
         if st.session_state.get("__pending_card_snapshot__"):
-            
             st.session_state["__pending_card_snapshot__"] = False
 
         # Append user's turn immediately to keep order deterministic
@@ -3080,13 +3119,15 @@ def render_conversation_view(stories: list):
                 query = st.session_state.get("ask_last_query", "")
                 overlap = st.session_state.get("ask_last_overlap", None)
 
-                st.session_state["ask_transcript"].append({
-                    "type": "banner",
-                    "Role": "assistant",
-                    "reason": reason,
-                    "query": query,
-                    "overlap": overlap,
-                })
+                st.session_state["ask_transcript"].append(
+                    {
+                        "type": "banner",
+                        "Role": "assistant",
+                        "reason": reason,
+                        "query": query,
+                        "overlap": overlap,
+                    }
+                )
 
                 # Clear flags after adding to transcript
                 st.session_state.pop("ask_last_reason", None)
@@ -3180,7 +3221,7 @@ def _is_empty_conversation():
     return False
 
 
-def send_to_backend(prompt: str, filters: dict, ctx: Optional[dict], stories: list):
+def send_to_backend(prompt: str, filters: dict, ctx: dict | None, stories: list):
     return rag_answer(prompt, filters, stories)
 
 
@@ -3469,6 +3510,7 @@ Updated _generate_agy_response() function for Agy V2
 This version intelligently pulls from BOTH STAR and 5P fields
 """
 
+
 def _generate_agy_response(
     question: str, ranked_stories: list[dict], answer_context: str
 ) -> str:
@@ -3491,9 +3533,10 @@ def _generate_agy_response(
         Agy-voiced response string with Start With Why narrative structure
     """
     try:
-        from openai import OpenAI
         import os
+
         from dotenv import load_dotenv
+        from openai import OpenAI
 
         load_dotenv()
 
@@ -3510,7 +3553,7 @@ def _generate_agy_response(
             if isinstance(value, list):
                 return ' '.join(str(v) for v in value if v)
             return str(value) if value else ''
-        
+
         story_context = "\n\n---\n\n".join(
             [
                 f"**Story {i+1}: {s.get('Title', 'Untitled')}**\n"
@@ -3519,27 +3562,21 @@ def _generate_agy_response(
                 f"Role: {s.get('Role', '')}\n"
                 f"Industry: {s.get('Industry', '')}\n"
                 f"Domain: {s.get('Sub-category', '')}\n\n"
-                
                 # 5P SUMMARY (if available, great hook)
                 f"Summary: {s.get('5PSummary', '') or s.get('5p_summary', '')}\n\n"
-                
                 # WHY IT MATTERED (use Purpose OR Situation, whichever is better)
                 f"WHY (Purpose/Situation):\n"
                 f"{get_text(s, 'Purpose') or get_text(s, 'Situation')}\n"
                 f"{get_text(s, 'Task') if not get_text(s, 'Purpose') else ''}\n\n"
-                
                 # HOW MATT APPROACHED IT (use Process OR Action, whichever is better)
                 f"HOW (Process/Action):\n"
                 f"{get_text(s, 'Process') or get_text(s, 'Action')}\n\n"
-                
                 # WHAT HAPPENED (use Performance OR Result, whichever is better)
                 f"WHAT (Performance/Result):\n"
                 f"{get_text(s, 'Performance') or get_text(s, 'Result')}\n\n"
-                
                 # OPTIONAL: Additional Context
                 f"Person (Who): {get_text(s, 'Person') or get_text(s, 'Who')}\n"
                 f"Place (Where): {get_text(s, 'Place') or get_text(s, 'Where')}\n"
-                
                 for i, s in enumerate(ranked_stories[:3])
             ]
         )
@@ -3635,7 +3672,7 @@ Use **MARKDOWN** for scannability:
 * Bullet lists ONLY for principles/patterns at the end
 * Keep the narrative flow natural (not a bulleted list)
 
-Keep it warm but professional. Cite specific clients and outcomes. 
+Keep it warm but professional. Cite specific clients and outcomes.
 Exactly one 🐾 emoji in the entire response."""
 
         # Call OpenAI API
@@ -3656,13 +3693,13 @@ Exactly one 🐾 emoji in the entire response."""
         # Fallback to non-LLM response if OpenAI fails
         if DEBUG:
             print(f"DEBUG: OpenAI call failed, using fallback: {e}")
-        
+
         # Return a simple Agy-prefixed version of the context
         return f"🐾 Let me show you what I found...\n\n{answer_context}"
 
 
 # USAGE NOTES:
-# 
+#
 # This updated function (v3 - Nov 2025):
 # 1. ✅ Pulls from BOTH STAR and 5P fields intelligently
 # 2. ✅ Uses whichever field has better content (Purpose OR Situation, etc.)
@@ -3695,7 +3732,6 @@ Exactly one 🐾 emoji in the entire response."""
 # Same logic for Process/Action and Performance/Result.
 #
 # Theme is pulled from metadata and helps frame the entire response.
-
 
 
 def build_known_vocab(stories: list[dict]):
@@ -4235,15 +4271,15 @@ def _render_ask_transcript(stories: list):
                         with cols[j]:
                             with st.form(key=f"source_form_{i}_{j}"):
                                 st.markdown(
-                                    f"""
+                                    """
                                 <style>
                                 /* Hide form border */
-                                div[data-testid="stForm"] {{
+                                div[data-testid="stForm"] {
                                     border: none !important;
                                     padding: 0 !important;
                                     margin: 0 !important;
-                                }}
-                                div[data-testid="stForm"] button {{
+                                }
+                                div[data-testid="stForm"] button {
                                     background: #F3F4F6 !important;
                                     border: 2px solid #E5E7EB !important;
                                     color: #2563EB !important;
@@ -4254,17 +4290,17 @@ def _render_ask_transcript(stories: list):
                                     width: 100% !important;
                                     height: auto !important;
                                     min-height: 32px !important;
-                                }}
-                                div[data-testid="stForm"] button p {{
+                                }
+                                div[data-testid="stForm"] button p {
                                     color: #2563EB !important;
                                     font-size: 14px !important;
                                     margin: 0 !important;
                                     line-height: 1.4 !important;
-                                }}
-                                div[data-testid="stForm"] button:hover {{
+                                }
+                                div[data-testid="stForm"] button:hover {
                                     background: #EEF2FF !important;
                                     border-color: #8B5CF6 !important;
-                                }}
+                                }
                                 </style>
                                 """,
                                     unsafe_allow_html=True,
@@ -4273,32 +4309,56 @@ def _render_ask_transcript(stories: list):
                                 if st.form_submit_button(f"🔗 {label}"):
                                     # Toggle expander - if same source clicked, close it; otherwise open new one
                                     expanded_key = f"transcript_source_expanded_{i}_{j}"
-                                    current_expanded = st.session_state.get("transcript_source_expanded")
+                                    current_expanded = st.session_state.get(
+                                        "transcript_source_expanded"
+                                    )
 
                                     if current_expanded == expanded_key:
                                         # Clicking same source - close it
-                                        st.session_state["transcript_source_expanded"] = None
+                                        st.session_state[
+                                            "transcript_source_expanded"
+                                        ] = None
                                     else:
                                         # Open this source (closes any other)
-                                        st.session_state["transcript_source_expanded"] = expanded_key
+                                        st.session_state[
+                                            "transcript_source_expanded"
+                                        ] = expanded_key
                                         # Store the source ID and message index for rendering
-                                        st.session_state["transcript_source_expanded_id"] = src.get("id")
-                                        st.session_state["transcript_source_expanded_msg"] = i
+                                        st.session_state[
+                                            "transcript_source_expanded_id"
+                                        ] = src.get("id")
+                                        st.session_state[
+                                            "transcript_source_expanded_msg"
+                                        ] = i
 
                                     st.rerun()
 
                     # Render the expanded story detail below buttons for this message (only one at a time)
                     expanded_key = st.session_state.get("transcript_source_expanded")
                     expanded_id = st.session_state.get("transcript_source_expanded_id")
-                    expanded_msg = st.session_state.get("transcript_source_expanded_msg")
+                    expanded_msg = st.session_state.get(
+                        "transcript_source_expanded_msg"
+                    )
 
                     if expanded_key and expanded_id and expanded_msg == i:
                         # Find the story object
-                        story_obj = next((s for s in stories if str(s.get("id")) == str(expanded_id)), None)
+                        story_obj = next(
+                            (
+                                s
+                                for s in stories
+                                if str(s.get("id")) == str(expanded_id)
+                            ),
+                            None,
+                        )
 
                         if story_obj:
-                            st.markdown("<div style='margin-top: 16px;'></div>", unsafe_allow_html=True)
-                            render_story_detail(story_obj, f"transcript_expanded_{i}", stories)
+                            st.markdown(
+                                "<div style='margin-top: 16px;'></div>",
+                                unsafe_allow_html=True,
+                            )
+                            render_story_detail(
+                                story_obj, f"transcript_expanded_{i}", stories
+                            )
 
                 # Action buttons (wireframe style)
                 st.markdown(
@@ -4435,7 +4495,7 @@ def set_answer(resp: dict):
 def render_answer_card_compact(
     primary_story: dict,
     modes: dict,
-    stories: List,
+    stories: list,
     answer_mode_key: str = "answer_mode",
 ):
     """Lightweight answer card - reduced padding, cleaner hierarchy, no emojis."""

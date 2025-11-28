@@ -1,5 +1,6 @@
-import pandas as pd
 import json
+
+import pandas as pd
 
 EXCEL_FILE = "MPugmire - STAR Stories - 16JUL25924AM.xlsx"
 JSONL_FILE = "echo_star_stories_nlp.jsonl"
@@ -10,7 +11,7 @@ SHEET_NAME = "STAR Stories - Interview Ready"
 df = pd.read_excel(EXCEL_FILE, sheet_name=SHEET_NAME)
 
 # Load JSONL
-with open(JSONL_FILE, "r", encoding="utf-8") as f:
+with open(JSONL_FILE, encoding="utf-8") as f:
     jsonl_data = [json.loads(line) for line in f]
 
 # Build a lookup from Title to public_tags

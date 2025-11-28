@@ -1,7 +1,7 @@
 import json
 
 # Read the raw file with individual objects
-with open("star_stories_llm_ready.json", "r") as f:
+with open("star_stories_llm_ready.json") as f:
     raw = f.read()
 
 # Split objects if they're not in a list (naive but effective)

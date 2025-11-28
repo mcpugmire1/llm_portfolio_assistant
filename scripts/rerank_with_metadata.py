@@ -1,14 +1,10 @@
-from typing import List, Dict
-import numpy as np
-
-
 def rerank_results_by_metadata(
-    results: List[Dict],
+    results: list[dict],
     user_query: str,
-    expected_tags: List[str] = None,
+    expected_tags: list[str] = None,
     expected_subcategory: str = None,
     top_k: int = 3,
-) -> List[Dict]:
+) -> list[dict]:
     """
     Reranks Pinecone results by matching public_tags and sub-category
     against expectations extracted from the rewritten query.

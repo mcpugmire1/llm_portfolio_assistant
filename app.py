@@ -8,24 +8,23 @@ Architecture documentation: See ARCHITECTURE.md
 Design specification: https://github.com/mcpugmire1/mattgpt-design-spec
 """
 
-import streamlit as st
-
 # Standard library
 import json
 import os
 import re
 
+import streamlit as st
+
 # Third-party
 from dotenv import load_dotenv
 
-# Local imports - components
-from ui.pages.home import render_home_page
-from ui.components.navbar import render_navbar
-from ui.styles.global_styles import apply_global_styles
-
 # Local imports - utilities
 from config.debug import DEBUG
-from config.settings import get_conf
+from ui.components.navbar import render_navbar
+
+# Local imports - components
+from ui.pages.home import render_home_page
+from ui.styles.global_styles import apply_global_styles
 
 # =========================
 # UI — Home / Stories / Ask / About
@@ -36,7 +35,7 @@ st.set_page_config(
     page_title="Matt Pugmire | Director of Technology Delivery | Digital Transformation Leader",
     page_icon="🤖",
     layout="wide",
-    initial_sidebar_state="collapsed"  # Hide sidebar - we use top navbar instead
+    initial_sidebar_state="collapsed",  # Hide sidebar - we use top navbar instead
 )
 
 # Apply global styles once per session
@@ -155,7 +154,16 @@ def load_star_stories(path: str):
             story["id"] = str(story_id).strip()
 
             # Normalize list fields (accept strings or arrays) - this is data cleaning, not business logic
-            for field in ["Situation", "Task", "Action", "Result", "Process", "Performance", "Competencies", "Use Case(s)"]:
+            for field in [
+                "Situation",
+                "Task",
+                "Action",
+                "Result",
+                "Process",
+                "Performance",
+                "Competencies",
+                "Use Case(s)",
+            ]:
                 if field in story:
                     story[field] = _ensure_list(story[field])
 
@@ -175,6 +183,7 @@ def load_star_stories(path: str):
 
     return stories
 
+
 # Load stories from JSONL
 STORIES = load_star_stories(DATA_FILE)
 if not STORIES:
@@ -183,6 +192,7 @@ if not STORIES:
 
 # Initialize search vocabulary at startup
 from services.rag_service import initialize_vocab
+
 initialize_vocab(STORIES)
 
 
@@ -233,16 +243,25 @@ st.session_state.setdefault("page_offset", 0)
 # Helpers
 # =========================
 
+
 def build_facets(stories):
     """Build filter option lists from story data using raw JSONL field names."""
     # Primary filters (NEW for Phase 4 redesign)
     industries = sorted({s.get("Industry", "") for s in stories if s.get("Industry")})
-    capabilities = sorted({s.get("Solution / Offering", "") for s in stories if s.get("Solution / Offering")})
+    capabilities = sorted(
+        {
+            s.get("Solution / Offering", "")
+            for s in stories
+            if s.get("Solution / Offering")
+        }
+    )
 
     # Advanced filters
     clients = sorted({s.get("Client", "") for s in stories if s.get("Client")})
     # domains now comes from Sub-category field (used to be synthetic Category / Sub-category)
-    domains = sorted({s.get("Sub-category", "") for s in stories if s.get("Sub-category")})
+    domains = sorted(
+        {s.get("Sub-category", "") for s in stories if s.get("Sub-category")}
+    )
     roles = sorted({s.get("Role", "") for s in stories if s.get("Role")})
     # tags comes from public_tags (already parsed to list in loader)
     tags = sorted({t for s in stories for t in (s.get("public_tags") or [])})
@@ -250,44 +269,57 @@ def build_facets(stories):
     personas = []
     return industries, capabilities, clients, domains, roles, tags, personas
 
+
 # =========================
 # UI — Home / Stories / Ask / About
 # =========================
-industries, capabilities, clients, domains, roles, tags, personas_all = build_facets(STORIES)
+industries, capabilities, clients, domains, roles, tags, personas_all = build_facets(
+    STORIES
+)
 
 if st.session_state["active_tab"] == "Home":
     from ui.pages.home import render_home_page
+
     render_home_page()
 
 # --- BANKING LANDING ---
 elif st.session_state["active_tab"] == "Banking":
     from ui.pages.banking_landing import render_banking_landing
+
     render_banking_landing()
 
 # --- CROSS-INDUSTRY LANDING ---
 elif st.session_state["active_tab"] == "Cross-Industry":
     from ui.pages.cross_industry_landing import render_cross_industry_landing
+
     render_cross_industry_landing()
 
 # --- REFACTORED STORIES ---
 elif st.session_state["active_tab"] == "Explore Stories":
     from ui.pages.explore_stories import render_explore_stories
-    render_explore_stories(STORIES, industries, capabilities, clients, domains, roles, tags, personas_all)
+
+    render_explore_stories(
+        STORIES, industries, capabilities, clients, domains, roles, tags, personas_all
+    )
 
 # --- ASK MATTGPT ---
 elif st.session_state["active_tab"] == "Ask MattGPT":
     from ui.pages.ask_mattgpt import render_ask_mattgpt
+
     render_ask_mattgpt(STORIES)
 
 # --- ABOUT ---
 elif st.session_state["active_tab"] == "About Matt":
     from ui.pages.about_matt import render_about_matt
+
     render_about_matt()
 
 # --- INVALID TAB FALLBACK ---
 else:
     st.error(f"❌ Unknown page: {st.session_state['active_tab']}")
-    st.info("Valid pages: Home, Explore Stories, Ask MattGPT, About Matt, Banking, Cross-Industry")
+    st.info(
+        "Valid pages: Home, Explore Stories, Ask MattGPT, About Matt, Banking, Cross-Industry"
+    )
     # Reset to home
     st.session_state["active_tab"] = "Home"
     st.rerun()

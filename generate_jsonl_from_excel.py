@@ -8,16 +8,19 @@
 # This script PRESERVES existing public_tags, content, and IDs.
 # --------------------------------------------------------
 
-import pandas as pd
 import json
 import os
-import shutil
-from datetime import datetime, timezone
 import re
+import shutil
+from datetime import UTC, datetime
+
+import pandas as pd
 
 # ---------- config ----------
 
-INPUT_EXCEL_FILE = "MPugmire - STAR Stories - 11NOV25_CLEANED.xlsx"  # <-- update as needed
+INPUT_EXCEL_FILE = (
+    "MPugmire - STAR Stories - 11NOV25_CLEANED.xlsx"  # <-- update as needed
+)
 OUTPUT_JSONL_FILE = "echo_star_stories.jsonl"
 SHEET_NAME = "STAR Stories - Interview Ready"
 DRY_RUN = False  # ✅ Change to False when ready to write output
@@ -34,7 +37,7 @@ def load_existing_jsonl(path: str):
     records, by_key = [], {}
     if not os.path.exists(path):
         return records, by_key
-    with open(path, "r", encoding="utf-8") as f:
+    with open(path, encoding="utf-8") as f:
         for line in f:
             if not line.strip():
                 continue
@@ -47,20 +50,23 @@ def load_existing_jsonl(path: str):
 
 def backup_file(path: str):
     if os.path.exists(path):
-        ts = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H_%M_%SZ")
+        ts = datetime.now(UTC).strftime("%Y-%m-%dT%H_%M_%SZ")
         backup_path = f"{path}.bak-{ts}"
         shutil.copy2(path, backup_path)
         print(f"🛟 Backup written: {backup_path}")
 
+
 # Utility functions (inlined from old utils.py)
 def normalize(s: str) -> str:
     return (s or "").strip()
+
 
 def slugify(text: str) -> str:
     text = text.lower().strip()
     text = re.sub(r"[^\w\s-]", "", text)
     text = re.sub(r"\s+", "-", text)
     return text
+
 
 def norm_key(title: str, client: str) -> str:
     return f"{normalize(title).lower()}|{normalize(client).lower()}"
@@ -70,22 +76,23 @@ def split_bullets(value: str):
     """Split multi-line bullet fields, removing Excel apostrophe prefix."""
     if not value:
         return []
-    
+
     lines = str(value).split("\n")
     parts = []
-    
+
     for line in lines:
         line = line.strip()
         if not line:
             continue
-        
+
         # Remove leading apostrophe
         if line.startswith("'"):
             line = line[1:]
-        
+
         parts.append(line)
-    
+
     return parts
+
 
 # ---------- main ----------
 
@@ -118,17 +125,19 @@ def excel_to_jsonl():
         # Base fields from Excel
         rec_from_excel = {
             "Title": title,
-            "Employer": normalize(row.get("Employer", "")),           
+            "Employer": normalize(row.get("Employer", "")),
             "Division": normalize(row.get("Division", "")),
             "Role": normalize(row.get("Role", "")),
             "Client": client,
-            "Project": normalize(row.get("Project", "")),         
-            "Start_Date": normalize(row.get("Start_Date", "")),      
-            "End_Date": normalize(row.get("End_Date", "")),       
+            "Project": normalize(row.get("Project", "")),
+            "Start_Date": normalize(row.get("Start_Date", "")),
+            "End_Date": normalize(row.get("End_Date", "")),
             "Industry": normalize(row.get("Industry", "")),
             "Theme": normalize(row.get("Theme", "")),
             "Solution / Offering": normalize(row.get("Solution / Offering", "")),
-            "Project Scope / Complexity": normalize(row.get("Project Scope / Complexity", "")), 
+            "Project Scope / Complexity": normalize(
+                row.get("Project Scope / Complexity", "")
+            ),
             "Category": normalize(row.get("Category", "")),
             "Sub-category": normalize(row.get("Sub-category", "")),
             "Competencies": [
@@ -137,7 +146,9 @@ def excel_to_jsonl():
                 if s and s.strip()
             ],
             "Solution / Offering": normalize(row.get("Solution / Offering", "")),
-            "Project Scope / Complexity": normalize(row.get("Project Scope / Complexity", "")), 
+            "Project Scope / Complexity": normalize(
+                row.get("Project Scope / Complexity", "")
+            ),
             "Use Case(s)": [
                 s.strip()
                 for s in str(row.get("Use Case(s)", "")).split(";")
@@ -200,7 +211,7 @@ def excel_to_jsonl():
         if rec["id"] in new_ids:
             print(f"[id={rec['id']}] Title: {rec.get('Title', '')}")
 
-    print(f"\n--- 🔍 Detailed Changes ---")
+    print("\n--- 🔍 Detailed Changes ---")
     for rec in out_records:
         rec_id = rec["id"]
         if rec_id in new_ids:

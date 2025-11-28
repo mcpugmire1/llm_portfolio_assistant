@@ -1,18 +1,55 @@
 """Query validation and text overlap utilities."""
 
-import re
-import os
 import json
-from typing import Optional, Set
-from config.debug import DEBUG
+import os
+import re
+
 from utils.ui_helpers import dbg
 
 # Small stopword set to avoid false overlap on generic words
 _STOPWORDS = {
-    "a", "an", "the", "and", "or", "but", "if", "then", "else", "of", "in", "on",
-    "for", "to", "from", "by", "with", "about", "how", "what", "why", "when",
-    "where", "who", "whom", "is", "are", "was", "were", "be", "been", "being",
-    "do", "does", "did", "done", "much", "at", "as", "into", "over", "under",
+    "a",
+    "an",
+    "the",
+    "and",
+    "or",
+    "but",
+    "if",
+    "then",
+    "else",
+    "of",
+    "in",
+    "on",
+    "for",
+    "to",
+    "from",
+    "by",
+    "with",
+    "about",
+    "how",
+    "what",
+    "why",
+    "when",
+    "where",
+    "who",
+    "whom",
+    "is",
+    "are",
+    "was",
+    "were",
+    "be",
+    "been",
+    "being",
+    "do",
+    "does",
+    "did",
+    "done",
+    "much",
+    "at",
+    "as",
+    "into",
+    "over",
+    "under",
 }
 
 # Word regex for tokenization
@@ -21,16 +58,18 @@ _WORD_RX = re.compile(r"[A-Za-z0-9+#\-_.]+")
 # Global rules cache
 _NONSENSE_RULES = []
 
+
 def _tokenize(text: str) -> list[str]:
     """Tokenize text into normalized words (3+ chars)."""
     return [t.lower() for t in _WORD_RX.findall(text or "") if len(t) >= 3]
+
 
 def _load_nonsense_rules(path: str = "nonsense_filters.jsonl"):
     """Load off-domain query rules from JSONL file."""
     rules = []
     try:
         if os.path.exists(path):
-            with open(path, "r", encoding="utf-8") as f:
+            with open(path, encoding="utf-8") as f:
                 for i, line in enumerate(f, 1):
                     line = line.strip()
                     if not line:
@@ -48,20 +87,21 @@ def _load_nonsense_rules(path: str = "nonsense_filters.jsonl"):
         dbg("[rules] first items →", rules[:2])
     return rules
 
-def is_nonsense(query: str) -> Optional[str]:
+
+def is_nonsense(query: str) -> str | None:
     """
     Check if query matches off-domain patterns.
-    
+
     Returns category string if nonsense, else None.
     """
     global _NONSENSE_RULES
     if not _NONSENSE_RULES:
         _NONSENSE_RULES = _load_nonsense_rules()
-    
+
     q = (query or "").strip()
     if not q:
         return None
-    
+
     for r in _NONSENSE_RULES:
         pat = r.get("pattern")
         if not pat:
@@ -73,19 +113,21 @@ def is_nonsense(query: str) -> Optional[str]:
             continue
     return None
 
-def token_overlap_ratio(query: str, vocab: Set[str]) -> float:
+
+def token_overlap_ratio(query: str, vocab: set[str]) -> float:
     """
     Calculate token overlap ratio between query and known vocabulary.
-    
+
     Args:
         query: User query string
         vocab: Set of known vocabulary terms
-        
+
     Returns:
         Ratio of query tokens found in vocab (0.0 to 1.0)
     """
     toks = [
-        t for t in re.split(r"[^\w]+", (query or "").lower())
+        t
+        for t in re.split(r"[^\w]+", (query or "").lower())
         if len(t) >= 3 and t not in _STOPWORDS
     ]
     if not toks:

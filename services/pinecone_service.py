@@ -1,12 +1,13 @@
 """Pinecone vector database service."""
 
-import streamlit as st
-from typing import Optional, List
-from config.settings import get_conf
-from config.debug import DEBUG
 import os
+
+import streamlit as st
 from dotenv import load_dotenv
-from utils.scoring import _keyword_score_for_story, _hybrid_score
+
+from config.debug import DEBUG
+from config.settings import get_conf
+from utils.scoring import _hybrid_score, _keyword_score_for_story
 
 load_dotenv()
 _EMBEDDER = None
@@ -128,6 +129,7 @@ def _init_pinecone():
             print(f"DEBUG Pinecone init error: {e}")
         return None
 
+
 def _safe_json(obj):
     """Convert Pinecone objects to JSON-serializable dicts."""
     try:
@@ -146,7 +148,8 @@ def _safe_json(obj):
         return json.loads(json.dumps(obj, default=str))
     except Exception:
         return {"_raw": str(obj)}
-    
+
+
 def _summarize_index_stats(stats: dict) -> dict:
     """Return a compact view of Pinecone index stats."""
     if not isinstance(stats, dict):
@@ -165,9 +168,10 @@ def _summarize_index_stats(stats: dict) -> dict:
         "namespaces": by_ns,  # {"default": 115, "": 0, ...}
     }
 
+
 def pinecone_semantic_search(
     query: str, filters: dict, stories: list, top_k: int = SEARCH_TOP_K
-) -> Optional[List[dict]]:
+) -> list[dict] | None:
     idx = _init_pinecone()
     if not idx or not query:
         if DEBUG:
@@ -310,13 +314,15 @@ def pinecone_semantic_search(
         if DEBUG:
             print(f"DEBUG Pinecone query error: {e}")
         return None
-    
+
+
 def _get_embedder():
     global _EMBEDDER
     if _EMBEDDER is not None:
         return _EMBEDDER
     try:
         import os
+
         os.environ["TOKENIZERS_PARALLELISM"] = "false"
         from sentence_transformers import SentenceTransformer  # type: ignore
 
@@ -331,8 +337,9 @@ def _get_embedder():
             f"WARNING: sentence-transformers not available ({e}); falling back to stub embedder (low quality)"
         )
     return _EMBEDDER
-    
-def _embed(text: str) -> List[float]:
+
+
+def _embed(text: str) -> list[float]:
     """
     Query-time embeddings that MATCH the build script:
     - Model: all-MiniLM-L6-v2 (384-dim)
@@ -358,6 +365,7 @@ def _embed(text: str) -> List[float]:
         vec[i % _DEF_DIM] += (ch % 13) / 13.0
     norm = math.sqrt(sum(v * v for v in vec)) or 1.0
     return [v / norm for v in vec]
+
 
 def _extract_match_fields(m) -> tuple[str, float, dict]:
     """

@@ -1,5 +1,6 @@
-import pandas as pd
 import re
+
+import pandas as pd
 
 # === Config ===
 INPUT_FILE = "MPugmire - STAR Stories - 12JUL25_5p_summaries_synthesized.xlsx"

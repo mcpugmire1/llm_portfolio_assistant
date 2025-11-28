@@ -5,8 +5,6 @@ Displays full STAR narrative with sidebar metadata.
 Used by both Explore Stories and Ask MattGPT pages.
 """
 
-from typing import List, Optional
-
 import streamlit as st
 from streamlit_js_eval import streamlit_js_eval
 
@@ -65,6 +63,7 @@ def _format_nested_bullet(text: str) -> str:
     # Pattern: "- Item 1\n\n- Item 2\n\n- Item 3"
     elif "\n\n-" in text or (text.count("\n") >= 2 and "-" in text):
         import re
+
         # Split on double newline followed by dash
         segments = re.split(r'\n\n-\s*', text)
 
@@ -81,7 +80,9 @@ def _format_nested_bullet(text: str) -> str:
 
             if len(items) > 1:
                 # Multiple list items - render as bullet list
-                html = '<ul style="margin: 0; padding-left: 20px; list-style-type: disc;">'
+                html = (
+                    '<ul style="margin: 0; padding-left: 20px; list-style-type: disc;">'
+                )
                 for item in items:
                     html += f'<li style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 12px;">{item}</li>'
                 html += '</ul>'
@@ -92,6 +93,7 @@ def _format_nested_bullet(text: str) -> str:
     elif " -" in text and text.count(" -") >= 2:
         # Try splitting on " -" (space-dash, may or may not have trailing space)
         import re
+
         # Split on " -" but keep the dash pattern visible for analysis
         segments = re.split(r'\s+-\s*', text)
 
@@ -142,7 +144,7 @@ def on_ask_this_story(detail: dict):
     st.rerun()
 
 
-def render_story_detail(detail: Optional[dict], key_suffix: str, stories: List[dict]):
+def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict]):
     """Render the story detail panel with full STAR narrative and sidebar (matches wireframe)"""
     hr_style = "margin: 16px 0 12px 0; border: none; border-top: 3px solid #8B5CF6;"
     st.markdown(f"<hr style='{hr_style}'>", unsafe_allow_html=True)
@@ -182,7 +184,10 @@ def render_story_detail(detail: Optional[dict], key_suffix: str, stories: List[d
     header_col1, header_col2 = st.columns([4, 1])
 
     with header_col1:
-        st.markdown(f"<h2 style='font-size: 24px; font-weight: 700; color: #2c3e50; margin-bottom: 12px; line-height: 1.3;'>{title}</h2>", unsafe_allow_html=True)
+        st.markdown(
+            f"<h2 style='font-size: 24px; font-weight: 700; color: #2c3e50; margin-bottom: 12px; line-height: 1.3;'>{title}</h2>",
+            unsafe_allow_html=True,
+        )
 
         # Metadata with icons
         meta_html = f"""
@@ -208,14 +213,31 @@ def render_story_detail(detail: Optional[dict], key_suffix: str, stories: List[d
         # Share and Export buttons
         btn_col1, btn_col2 = st.columns(2)
         with btn_col1:
-            if st.button("🔗", key=f"share_{key_suffix}_{detail.get('id', 'x')}", help="Share (Copy link)", use_container_width=True):
-                st.toast("💡 To share: Copy the URL from your browser address bar", icon="ℹ️")
+            if st.button(
+                "🔗",
+                key=f"share_{key_suffix}_{detail.get('id', 'x')}",
+                help="Share (Copy link)",
+                use_container_width=True,
+            ):
+                st.toast(
+                    "💡 To share: Copy the URL from your browser address bar", icon="ℹ️"
+                )
         with btn_col2:
-            if st.button("📄", key=f"export_{key_suffix}_{detail.get('id', 'x')}", help="Export (Print)", use_container_width=True):
+            if st.button(
+                "📄",
+                key=f"export_{key_suffix}_{detail.get('id', 'x')}",
+                help="Export (Print)",
+                use_container_width=True,
+            ):
                 st.toast("Print dialog opened. Save as PDF.", icon="ℹ️")
-                streamlit_js_eval(js_expressions="window.print()", key=f"print_{key_suffix}")
+                streamlit_js_eval(
+                    js_expressions="window.print()", key=f"print_{key_suffix}"
+                )
 
-    st.markdown("<hr style='border: none; border-top: 2px solid #e0e0e0; margin: 12px 0 20px 0;'>", unsafe_allow_html=True)
+    st.markdown(
+        "<hr style='border: none; border-top: 2px solid #e0e0e0; margin: 12px 0 20px 0;'>",
+        unsafe_allow_html=True,
+    )
 
     # TWO-COLUMN LAYOUT
     main_col, sidebar_col = st.columns([2, 1])
@@ -223,82 +245,139 @@ def render_story_detail(detail: Optional[dict], key_suffix: str, stories: List[d
     with main_col:
         # 5P SUMMARY (if available)
         if summary_5p:
-            st.markdown(f'''
+            st.markdown(
+                f'''
             <div style="background: #faf5ff; border-left: 3px solid #8B5CF6; padding: 16px 20px; border-radius: 8px; margin-bottom: 24px;">
                 <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #8B5CF6; margin-bottom: 12px; letter-spacing: 0.5px;">
                     💡 WHY THIS MATTERS
                 </div>
                 <p style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin: 0;">{summary_5p}</p>
             </div>
-            ''', unsafe_allow_html=True)
+            ''',
+                unsafe_allow_html=True,
+            )
 
         # SITUATION
         if situation:
-            st.markdown('<div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #8B5CF6; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span>📍</span><span>SITUATION</span></div>', unsafe_allow_html=True)
+            st.markdown(
+                '<div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #8B5CF6; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span>📍</span><span>SITUATION</span></div>',
+                unsafe_allow_html=True,
+            )
             for s in situation:
                 if s:
-                    st.markdown(f'<p style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 12px;">{s}</p>', unsafe_allow_html=True)
-            st.markdown("<div style='margin-bottom: 24px;'></div>", unsafe_allow_html=True)
+                    st.markdown(
+                        f'<p style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 12px;">{s}</p>',
+                        unsafe_allow_html=True,
+                    )
+            st.markdown(
+                "<div style='margin-bottom: 24px;'></div>", unsafe_allow_html=True
+            )
 
         # TASK
         if task:
-            st.markdown('<div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #8B5CF6; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span>🎯</span><span>TASK</span></div>', unsafe_allow_html=True)
+            st.markdown(
+                '<div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #8B5CF6; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span>🎯</span><span>TASK</span></div>',
+                unsafe_allow_html=True,
+            )
             for t in task:
                 if t:
                     formatted = _format_nested_bullet(t)
-                    st.markdown(f'<div style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 12px;">{formatted}</div>', unsafe_allow_html=True)
-            st.markdown("<div style='margin-bottom: 24px;'></div>", unsafe_allow_html=True)
+                    st.markdown(
+                        f'<div style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 12px;">{formatted}</div>',
+                        unsafe_allow_html=True,
+                    )
+            st.markdown(
+                "<div style='margin-bottom: 24px;'></div>", unsafe_allow_html=True
+            )
 
         # ACTION
         if action:
-            st.markdown('<div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #8B5CF6; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span>⚡</span><span>ACTION</span></div>', unsafe_allow_html=True)
+            st.markdown(
+                '<div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #8B5CF6; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span>⚡</span><span>ACTION</span></div>',
+                unsafe_allow_html=True,
+            )
             for a in action:
                 if a:
                     formatted = _format_nested_bullet(a)
                     # Use div instead of p to avoid nesting issues with nested HTML
-                    st.markdown(f'<div style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 12px;">{formatted}</div>', unsafe_allow_html=True)
-            st.markdown("<div style='margin-bottom: 24px;'></div>", unsafe_allow_html=True)
+                    st.markdown(
+                        f'<div style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 12px;">{formatted}</div>',
+                        unsafe_allow_html=True,
+                    )
+            st.markdown(
+                "<div style='margin-bottom: 24px;'></div>", unsafe_allow_html=True
+            )
 
         # RESULT
         if result:
-            st.markdown('<div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #8B5CF6; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span>🎯</span><span>RESULT</span></div>', unsafe_allow_html=True)
+            st.markdown(
+                '<div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #8B5CF6; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span>🎯</span><span>RESULT</span></div>',
+                unsafe_allow_html=True,
+            )
             for r in result:
                 if r:
                     formatted = _format_nested_bullet(r)
                     # Use div instead of p to avoid nesting issues with nested HTML
-                    st.markdown(f'<div style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 12px;">{formatted}</div>', unsafe_allow_html=True)
+                    st.markdown(
+                        f'<div style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 12px;">{formatted}</div>',
+                        unsafe_allow_html=True,
+                    )
 
     with sidebar_col:
         # TECHNOLOGIES & PRACTICES
         if public_tags:
-            st.markdown('<div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #7f8c8d; margin-bottom: 12px;">TECHNOLOGIES & PRACTICES</div>', unsafe_allow_html=True)
+            st.markdown(
+                '<div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #7f8c8d; margin-bottom: 12px;">TECHNOLOGIES & PRACTICES</div>',
+                unsafe_allow_html=True,
+            )
             tags_html = '<div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;">'
             for tag in public_tags[:10]:
                 if tag:
                     tags_html += f'<span style="background: #ecf0f1; padding: 6px 12px; border-radius: 12px; font-size: 12px; color: #555; font-weight: 500;">{tag}</span>'
             tags_html += '</div>'
             st.markdown(tags_html, unsafe_allow_html=True)
-            st.markdown('<div style="border-bottom: 1px solid #e0e0e0; margin-bottom: 24px;"></div>', unsafe_allow_html=True)
+            st.markdown(
+                '<div style="border-bottom: 1px solid #e0e0e0; margin-bottom: 24px;"></div>',
+                unsafe_allow_html=True,
+            )
 
         # CORE COMPETENCIES
         if competencies:
-            st.markdown('<div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #7f8c8d; margin-bottom: 12px;">CORE COMPETENCIES</div>', unsafe_allow_html=True)
+            st.markdown(
+                '<div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #7f8c8d; margin-bottom: 12px;">CORE COMPETENCIES</div>',
+                unsafe_allow_html=True,
+            )
             for comp in competencies:
                 if comp:
-                    st.markdown(f'<div style="padding: 8px 0; font-size: 13px; color: #555; border-bottom: 1px solid #ecf0f1;">{comp}</div>', unsafe_allow_html=True)
-            st.markdown('<div style="border-bottom: 1px solid #e0e0e0; margin: 24px 0;"></div>', unsafe_allow_html=True)
+                    st.markdown(
+                        f'<div style="padding: 8px 0; font-size: 13px; color: #555; border-bottom: 1px solid #ecf0f1;">{comp}</div>',
+                        unsafe_allow_html=True,
+                    )
+            st.markdown(
+                '<div style="border-bottom: 1px solid #e0e0e0; margin: 24px 0;"></div>',
+                unsafe_allow_html=True,
+            )
 
         # KEY METRICS
         metrics = []
         for perf in performance:
-            if perf and ("%" in perf or "x" in perf.lower() or "month" in perf.lower() or "week" in perf.lower()):
+            if perf and (
+                "%" in perf
+                or "x" in perf.lower()
+                or "month" in perf.lower()
+                or "week" in perf.lower()
+            ):
                 import re
+
                 match = re.search(r'(\d+[%xX]?|\d+\+?)', perf)
                 if match:
                     metrics.append((match.group(1), perf[:50]))
 
         if metrics:
-            st.markdown('<div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #7f8c8d; margin-bottom: 12px;">KEY METRICS</div>', unsafe_allow_html=True)
+            st.markdown(
+                '<div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #7f8c8d; margin-bottom: 12px;">KEY METRICS</div>',
+                unsafe_allow_html=True,
+            )
             for value, label in metrics[:4]:
                 metric_html = f'''
                 <div style="background: #f8f9fa; padding: 12px; border-radius: 6px; border-left: 3px solid #27ae60; margin-bottom: 12px;">
@@ -310,10 +389,18 @@ def render_story_detail(detail: Optional[dict], key_suffix: str, stories: List[d
 
     # ASK AGY ABOUT THIS
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center; margin-bottom: 20px; color: #555; font-size: 14px;'>💬 Want to know more about this project?</p>", unsafe_allow_html=True)
+    st.markdown(
+        "<p style='text-align: center; margin-bottom: 20px; color: #555; font-size: 14px;'>💬 Want to know more about this project?</p>",
+        unsafe_allow_html=True,
+    )
 
     _, col_center, _ = st.columns([1.5, 1, 1.5])
     with col_center:
         btn_key = f"ask_from_detail_{key_suffix}_{detail.get('id', 'x')}"
-        if st.button("Ask Agy 🐾 About This", key=btn_key, type="primary", use_container_width=True):
+        if st.button(
+            "Ask Agy 🐾 About This",
+            key=btn_key,
+            type="primary",
+            use_container_width=True,
+        ):
             on_ask_this_story(detail)

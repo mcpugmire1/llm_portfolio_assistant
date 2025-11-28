@@ -11,9 +11,9 @@ Usage:
 
 import json
 import sys
-from typing import Dict, List, Tuple
 
-def get_text(story: Dict, *field_names: str) -> str:
+
+def get_text(story: dict, *field_names: str) -> str:
     """Get text from first non-empty field (handles both string and list fields)"""
     for field in field_names:
         value = story.get(field, "")
@@ -23,14 +23,16 @@ def get_text(story: Dict, *field_names: str) -> str:
             return value.strip()
     return ""
 
+
 def count_metrics(text: str) -> int:
     """Count quantifiable metrics in text (numbers followed by units/descriptors)"""
     import re
+
     # Look for patterns like: "90%", "20+ screens", "5 months", "doubled", "2x", etc.
     patterns = [
         r'\d+\s*%',  # percentages
-        r'\d+\+',    # numbers with +
-        r'\d+x',     # multipliers
+        r'\d+\+',  # numbers with +
+        r'\d+x',  # multipliers
         r'\d+\s*months?',
         r'\d+\s*weeks?',
         r'\d+\s*days?',
@@ -45,7 +47,8 @@ def count_metrics(text: str) -> int:
         matches += len(re.findall(pattern, text, re.IGNORECASE))
     return matches
 
-def assess_why(story: Dict) -> Tuple[int, str, str]:
+
+def assess_why(story: dict) -> tuple[int, str, str]:
     """
     Assess WHY it mattered - uses Purpose OR Situation (whichever is better)
     Returns: (stars, source_field, text_used)
@@ -55,8 +58,20 @@ def assess_why(story: Dict) -> Tuple[int, str, str]:
 
     # Prefer whichever has more human-centered content
     # Look for: teams, people, challenges, pain points, business impact
-    human_keywords = ["team", "people", "customer", "user", "struggle", "challenge",
-                     "pain", "bottleneck", "issue", "problem", "impact", "business"]
+    human_keywords = [
+        "team",
+        "people",
+        "customer",
+        "user",
+        "struggle",
+        "challenge",
+        "pain",
+        "bottleneck",
+        "issue",
+        "problem",
+        "impact",
+        "business",
+    ]
 
     purpose_score = sum(1 for kw in human_keywords if kw in purpose.lower())
     situation_score = sum(1 for kw in human_keywords if kw in situation.lower())
@@ -80,7 +95,8 @@ def assess_why(story: Dict) -> Tuple[int, str, str]:
 
     return (stars, source, text)
 
-def assess_how(story: Dict) -> Tuple[int, str, str]:
+
+def assess_how(story: dict) -> tuple[int, str, str]:
     """
     Assess HOW Matt approached it - uses Process OR Action (whichever is better)
     Returns: (stars, source_field, text_used)
@@ -89,9 +105,24 @@ def assess_how(story: Dict) -> Tuple[int, str, str]:
     action = get_text(story, "Action")
 
     # Prefer whichever shows unique methodology better
-    method_keywords = ["established", "developed", "implemented", "created", "built",
-                      "designed", "architected", "coached", "led", "enabled", "framework",
-                      "approach", "methodology", "practice", "pattern", "standard"]
+    method_keywords = [
+        "established",
+        "developed",
+        "implemented",
+        "created",
+        "built",
+        "designed",
+        "architected",
+        "coached",
+        "led",
+        "enabled",
+        "framework",
+        "approach",
+        "methodology",
+        "practice",
+        "pattern",
+        "standard",
+    ]
 
     process_score = sum(1 for kw in method_keywords if kw in process.lower())
     action_score = sum(1 for kw in method_keywords if kw in action.lower())
@@ -115,7 +146,8 @@ def assess_how(story: Dict) -> Tuple[int, str, str]:
 
     return (stars, source, text)
 
-def assess_what(story: Dict) -> Tuple[int, str, str]:
+
+def assess_what(story: dict) -> tuple[int, str, str]:
     """
     Assess WHAT happened - uses Performance OR Result (whichever is better)
     Returns: (stars, source_field, text_used)
@@ -148,7 +180,8 @@ def assess_what(story: Dict) -> Tuple[int, str, str]:
 
     return (stars, source, text)
 
-def assess_summary(story: Dict) -> Tuple[int, str]:
+
+def assess_summary(story: dict) -> tuple[int, str]:
     """Assess the 5PSummary"""
     summary = get_text(story, "5PSummary")
 
@@ -156,7 +189,9 @@ def assess_summary(story: Dict) -> Tuple[int, str]:
         return (1, "Missing 5PSummary")
 
     # Good summary has: who, what, measured by, how
-    has_who = any(word in summary.lower() for word in ["i ", "helped", "led", "enabled"])
+    has_who = any(
+        word in summary.lower() for word in ["i ", "helped", "led", "enabled"]
+    )
     has_what = len(summary) > 50
     has_metrics = count_metrics(summary) > 0
     has_how = any(word in summary.lower() for word in ["by ", "through ", "using "])
@@ -170,7 +205,8 @@ def assess_summary(story: Dict) -> Tuple[int, str]:
     else:
         return (1, summary)
 
-def assess_story(story: Dict) -> Dict:
+
+def assess_story(story: dict) -> dict:
     """Assess a single story and return detailed ratings"""
     why_stars, why_source, why_text = assess_why(story)
     how_stars, how_source, how_text = assess_how(story)
@@ -199,24 +235,26 @@ def assess_story(story: Dict) -> Dict:
         "summary_stars": summary_stars,
         "total_stars": total_stars,
         "tier": tier,
-        "id": story.get("id", "")
+        "id": story.get("id", ""),
     }
 
-def load_stories(filepath: str) -> List[Dict]:
+
+def load_stories(filepath: str) -> list[dict]:
     """Load stories from JSONL file"""
     stories = []
-    with open(filepath, 'r') as f:
+    with open(filepath) as f:
         for line in f:
             if line.strip():
                 stories.append(json.loads(line))
     return stories
 
-def print_assessment(results: List[Dict]):
+
+def print_assessment(results: list[dict]):
     """Print assessment results"""
-    print("\n" + "="*80)
+    print("\n" + "=" * 80)
     print("STORY QUALITY ASSESSMENT V2")
     print("Using intelligent STAR + 5P field selection")
-    print("="*80 + "\n")
+    print("=" * 80 + "\n")
 
     # Group by tier
     tier1 = [r for r in results if "Tier 1" in r["tier"]]
@@ -227,12 +265,12 @@ def print_assessment(results: List[Dict]):
     print(f"  Tier 1 (Ready for Agy V2): {len(tier1)}")
     print(f"  Tier 2 (Close, minor work): {len(tier2)}")
     print(f"  Tier 3 (Needs significant work): {len(tier3)}")
-    print("\n" + "-"*80 + "\n")
+    print("\n" + "-" * 80 + "\n")
 
     # Print Tier 1 stories
     if tier1:
         print("TIER 1 STORIES (READY FOR AGY V2)")
-        print("-"*80)
+        print("-" * 80)
         for r in tier1[:20]:  # Show first 20
             print(f"\n✅ {r['title']}")
             print(f"   Client: {r['client']}")
@@ -245,9 +283,9 @@ def print_assessment(results: List[Dict]):
             print(f"\n   ... and {len(tier1) - 20} more Tier 1 stories")
 
     # Data source analysis
-    print("\n" + "="*80)
+    print("\n" + "=" * 80)
     print("DATA SOURCE ANALYSIS")
-    print("="*80)
+    print("=" * 80)
 
     why_sources = {}
     how_sources = {}
@@ -258,25 +296,25 @@ def print_assessment(results: List[Dict]):
         how_sources[r['how_source']] = how_sources.get(r['how_source'], 0) + 1
         what_sources[r['what_source']] = what_sources.get(r['what_source'], 0) + 1
 
-    print(f"\nWHY (Purpose vs Situation):")
+    print("\nWHY (Purpose vs Situation):")
     for source, count in sorted(why_sources.items(), key=lambda x: x[1], reverse=True):
         pct = (count / len(results)) * 100
         print(f"  {source}: {count} stories ({pct:.0f}%)")
 
-    print(f"\nHOW (Process vs Action):")
+    print("\nHOW (Process vs Action):")
     for source, count in sorted(how_sources.items(), key=lambda x: x[1], reverse=True):
         pct = (count / len(results)) * 100
         print(f"  {source}: {count} stories ({pct:.0f}%)")
 
-    print(f"\nWHAT (Performance vs Result):")
+    print("\nWHAT (Performance vs Result):")
     for source, count in sorted(what_sources.items(), key=lambda x: x[1], reverse=True):
         pct = (count / len(results)) * 100
         print(f"  {source}: {count} stories ({pct:.0f}%)")
 
     # Recommendations
-    print("\n" + "="*80)
+    print("\n" + "=" * 80)
     print("RECOMMENDATIONS")
-    print("="*80 + "\n")
+    print("=" * 80 + "\n")
 
     if len(tier1) >= 10:
         print("✅ You have 10+ Tier 1 stories - YOU'RE READY TO LAUNCH AGY V2!")
@@ -292,6 +330,7 @@ def print_assessment(results: List[Dict]):
     print("1. Update your _generate_agy_response() to use both STAR and 5P fields")
     print("2. Test with your Tier 1 stories to validate the approach")
     print("3. Only enrich specific weak fields (not entire stories)")
+
 
 def main():
     if len(sys.argv) < 2:
@@ -312,7 +351,8 @@ def main():
     with open("tier1_story_ids.txt", "w") as f:
         for story_id in tier1_ids:
             f.write(f"{story_id}\n")
-    print(f"\n✅ Tier 1 story IDs exported to tier1_story_ids.txt")
+    print("\n✅ Tier 1 story IDs exported to tier1_story_ids.txt")
+
 
 if __name__ == "__main__":
     main()

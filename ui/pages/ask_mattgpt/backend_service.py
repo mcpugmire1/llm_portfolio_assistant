@@ -5,18 +5,24 @@ Handles RAG (Retrieval-Augmented Generation) and OpenAI integration.
 Includes nonsense detection, semantic search orchestration, and Agy response generation.
 """
 
-import os
 import csv
+import os
 import re
 from datetime import datetime
-from typing import Dict, List, Optional
+
 import streamlit as st
 
 from config.debug import DEBUG
-from utils.validation import is_nonsense, token_overlap_ratio
-from utils.formatting import build_5p_summary, _format_narrative, _format_key_points, _format_deep_dive
 from services.rag_service import semantic_search
+from utils.formatting import (
+    _format_deep_dive,
+    _format_key_points,
+    _format_narrative,
+    build_5p_summary,
+)
 from utils.ui_helpers import dbg
+from utils.validation import is_nonsense, token_overlap_ratio
+
 from .story_intelligence import (
     build_story_context_for_rag,
     get_theme_guidance,
@@ -47,7 +53,7 @@ def log_offdomain(query: str, reason: str, path: str = "data/offdomain_queries.c
         w.writerow(row)
 
 
-def build_known_vocab(stories: List[Dict]) -> set:
+def build_known_vocab(stories: list[dict]) -> set:
     """
     Build vocabulary set from story corpus for overlap detection.
 
@@ -71,55 +77,60 @@ def build_known_vocab(stories: List[Dict]) -> set:
     # Prune tiny tokens
     return {w for w in vocab if len(w) >= 3}
 
+
 # Add to backend_service.py (after build_known_vocab, around line 70)
+
 
 def is_query_on_topic_llm(query: str) -> bool:
     """
     Use LLM to classify if query is about Matt's professional work.
     Fast, cheap classification guard.
-    
+
     Args:
         query: User query string
-        
+
     Returns:
         True if on-topic, False if off-topic
     """
     try:
-        from openai import OpenAI
         from dotenv import load_dotenv
-        
+        from openai import OpenAI
+
         load_dotenv()
-        
+
         client = OpenAI(
             api_key=os.getenv("OPENAI_API_KEY"),
             project=os.getenv("OPENAI_PROJECT_ID"),
             organization=os.getenv("OPENAI_ORG_ID"),
         )
-        
+
         response = client.chat.completions.create(
             model="gpt-4o-mini",
-            messages=[{
-                "role": "user",
-                "content": f"""Is this query about professional transformation work, digital product delivery, agile/cloud modernization, leadership, innovation programs, or technology projects?
+            messages=[
+                {
+                    "role": "user",
+                    "content": f"""Is this query about professional transformation work, digital product delivery, agile/cloud modernization, leadership, innovation programs, or technology projects?
 
                 Query: "{query}"
 
-                Answer ONLY: YES or NO"""
-            }],
+                Answer ONLY: YES or NO""",
+                }
+            ],
             temperature=0,
             max_tokens=5,
         )
-        
+
         answer = response.choices[0].message.content.strip().upper()
         return answer.startswith("YES")
-        
+
     except Exception as e:
         if DEBUG:
             print(f"DEBUG: LLM guard failed: {e}")
         # Fail open - allow query if LLM check fails
         return True
 
-def _score_story_for_prompt(story: Dict, prompt: str) -> float:
+
+def _score_story_for_prompt(story: dict, prompt: str) -> float:
     """
     Simple keyword-based scoring for fallback ranking.
 
@@ -154,7 +165,7 @@ def _score_story_for_prompt(story: Dict, prompt: str) -> float:
 
 
 def _generate_agy_response(
-    question: str, ranked_stories: List[Dict], answer_context: str
+    question: str, ranked_stories: list[dict], answer_context: str
 ) -> str:
     """
     Generate an Agy-voiced response using OpenAI GPT-4.
@@ -171,8 +182,8 @@ def _generate_agy_response(
         Agy-voiced response string with Start With Why narrative structure
     """
     try:
-        from openai import OpenAI
         from dotenv import load_dotenv
+        from openai import OpenAI
 
         load_dotenv()
 
@@ -207,7 +218,7 @@ def _generate_agy_response(
 
         You ONLY answer questions about Matt Pugmire's professional transformation work.
 
-        If the user query asks about shopping, prices, products, retail stores, general knowledge, 
+        If the user query asks about shopping, prices, products, retail stores, general knowledge,
         or ANY topic unrelated to Matt's portfolio:
 
         OUTPUT ONLY THIS EXACT TEXT (nothing else):
@@ -335,50 +346,52 @@ def _generate_agy_response(
         # Return a simple Agy-prefixed version of the context
         return f"🐾 Let me show you what I found...\n\n{answer_context}"
 
-def diversify_results(stories: List[Dict], max_per_client: int = 1) -> List[Dict]:
+
+def diversify_results(stories: list[dict], max_per_client: int = 1) -> list[dict]:
     """Ensure client variety in top results, avoiding last-used client for primary."""
-    
+
     # DEBUG
     if DEBUG:
-        print(f"DEBUG diversify_results: incoming={[s.get('Client') for s in stories[:7]]}")
-    
+        print(
+            f"DEBUG diversify_results: incoming={[s.get('Client') for s in stories[:7]]}"
+        )
+
     last_primary_client = st.session_state.get("_last_primary_client")
-    
+
     if DEBUG:
         print(f"DEBUG diversify_results: last_primary_client={last_primary_client}")
-    
+
     seen_clients = set()
     diverse = []
     overflow = []
-    
+
     for s in stories:
         client = s.get("Client", "Unknown")
-        
+
         if not diverse and client == last_primary_client and len(stories) > 1:
             if DEBUG:
                 print(f"DEBUG diversify_results: skipping {client} for #1 slot")
             overflow.append(s)
             continue
-            
+
         if client not in seen_clients:
             diverse.append(s)
             seen_clients.add(client)
         else:
             overflow.append(s)
-    
+
     result = (diverse + overflow)[:3]
-    
+
     if result:
         st.session_state["_last_primary_client"] = result[0].get("Client", "Unknown")
-    
+
     if DEBUG:
         print(f"DEBUG diversify_results: result={[s.get('Client') for s in result]}")
-    
+
     return result
 
 
-
-def send_to_backend(prompt: str, filters: Dict, ctx: Optional[Dict], stories: List):
+def send_to_backend(prompt: str, filters: dict, ctx: dict | None, stories: list):
     """
     Legacy wrapper for rag_answer.
 
@@ -394,7 +407,7 @@ def send_to_backend(prompt: str, filters: Dict, ctx: Optional[Dict], stories: Li
     return rag_answer(prompt, filters, stories)
 
 
-def rag_answer(question: str, filters: Dict, stories: List):
+def rag_answer(question: str, filters: dict, stories: list):
     """
     Main RAG orchestration function.
 
@@ -424,8 +437,12 @@ def rag_answer(question: str, filters: Dict, stories: List):
     st.session_state["__ask_dbg_force_answer"] = bool(force_answer)
 
     if DEBUG:
-        dbg(f"ask: from_suggestion={from_suggestion} q='{(question or '').strip()[:60]}'")
-        print(f"DEBUG: query='{question}', from_suggestion={from_suggestion}, force_answer={force_answer}")
+        dbg(
+            f"ask: from_suggestion={from_suggestion} q='{(question or '').strip()[:60]}'"
+        )
+        print(
+            f"DEBUG: query='{question}', from_suggestion={from_suggestion}, force_answer={force_answer}"
+        )
 
     # Mode-only prompts (narrative, key points, deep dive)
     simple_mode = (question or "").strip().lower()
@@ -475,7 +492,7 @@ def rag_answer(question: str, filters: Dict, stories: List):
         cat = is_nonsense(question or "")
         if DEBUG:
             print(f"DEBUG: is_nonsense returned cat={cat}")
-            
+
         if cat and not from_suggestion:
             log_offdomain(question or "", f"rule:{cat}")
             st.session_state["ask_last_reason"] = f"rule:{cat}"
@@ -494,7 +511,7 @@ def rag_answer(question: str, filters: Dict, stories: List):
             is_on_topic = is_query_on_topic_llm(question or "")
             if DEBUG:
                 print(f"DEBUG: LLM guard returned is_on_topic={is_on_topic}")
-            
+
             if not is_on_topic:
                 log_offdomain(question or "", "llm_guard")
                 st.session_state["ask_last_reason"] = "llm_guard"
@@ -610,9 +627,7 @@ def rag_answer(question: str, filters: Dict, stories: List):
     # Rank top 3 with client diversity
     try:
         candidates = [x for x in pool if isinstance(x, dict)]
-        ranked = diversify_results(candidates) or (
-            pool[:1] if pool else []
-        )
+        ranked = diversify_results(candidates) or (pool[:1] if pool else [])
         if DEBUG and ranked:
             dbg(f"ask: ranked first_ids={[s.get('id') for s in ranked]}")
     except Exception as e:

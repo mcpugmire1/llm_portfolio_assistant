@@ -13,7 +13,6 @@ FIXES:
 """
 
 import os
-from typing import Dict, List, Optional, Tuple
 
 import pandas as pd
 import streamlit as st
@@ -21,34 +20,11 @@ from dotenv import load_dotenv
 from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode
 
 from config.debug import DEBUG
-from config.settings import get_conf
-from services.pinecone_service import (
-    PINECONE_INDEX_NAME,
-    PINECONE_MIN_SIM,
-    PINECONE_NAMESPACE,
-    SEARCH_TOP_K,
-    VECTOR_BACKEND,
-    W_KW,
-    W_PC,
-    _DEF_DIM,
-    _PINECONE_INDEX,
-    _init_pinecone,
-    _safe_json,
-    _summarize_index_stats,
-)
 from services.rag_service import _KNOWN_VOCAB, semantic_search
-from utils.filters import matches_filters
-from utils.formatting import (
-    METRIC_RX,
-    _format_key_points,
-    build_5p_summary,
-    story_has_metric,
-    strongest_metric_line,
-)
-from utils.ui_helpers import dbg, render_no_match_banner, safe_container
-from utils.validation import _tokenize, is_nonsense, token_overlap_ratio
-from streamlit_js_eval import streamlit_js_eval
 from ui.components.story_detail import render_story_detail
+from utils.filters import matches_filters
+from utils.ui_helpers import render_no_match_banner, safe_container
+from utils.validation import is_nonsense, token_overlap_ratio
 
 load_dotenv()
 
@@ -72,6 +48,7 @@ MAX_ACHIEVEMENTS_SHOWN = 4
 # AgGrid availability check
 try:
     from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode
+
     _HAS_AGGRID = True
 except Exception:
     _HAS_AGGRID = False
@@ -81,34 +58,43 @@ except Exception:
 # HELPER FUNCTIONS - State Management
 # =============================================================================
 
-def reset_all_filters(stories: List[dict]):
+
+def reset_all_filters(stories: list[dict]):
     """Reset all filters and widget state to defaults - FIXED VERSION"""
-    
+
     # STEP 1: READ current version counters BEFORE deleting anything
     version_counters = {}
-    for filter_type in ["q", "personas", "clients", "domains", "roles", "tags", "domain_cat"]:
+    for filter_type in [
+        "q",
+        "personas",
+        "clients",
+        "domains",
+        "roles",
+        "tags",
+        "domain_cat",
+    ]:
         version_key = f"_widget_version_{filter_type}"
         current = st.session_state.get(version_key, 0)
         version_counters[filter_type] = current + 1  # Increment for next version
-    
+
     # STEP 2: Delete ALL session state except critical keys
     preserve_keys = {
-        "active_tab", 
-        "active_story", 
-        "active_story_obj", 
+        "active_tab",
+        "active_story",
+        "active_story_obj",
         "explore_view_mode",
         "page_size_select",
-        "_prev_explore_view_mode"
+        "_prev_explore_view_mode",
     }
-    
+
     keys_to_delete = []
     for key in list(st.session_state.keys()):
         if key not in preserve_keys:
             keys_to_delete.append(key)
-    
+
     for key in keys_to_delete:
         del st.session_state[key]
-    
+
     # STEP 3: Recreate filters from scratch
     st.session_state["filters"] = {
         "personas": [],
@@ -119,17 +105,17 @@ def reset_all_filters(stories: List[dict]):
         "q": "",
         "has_metric": False,
     }
-    
+
     # STEP 4: Set INCREMENTED version counters (using values we saved earlier)
     for filter_type, new_version in version_counters.items():
         version_key = f"_widget_version_{filter_type}"
         st.session_state[version_key] = new_version
-    
+
     # STEP 5: Reset other state
     st.session_state["_last_domain_group"] = "All"
     st.session_state["page_offset"] = 0
     st.session_state["last_results"] = stories
-    
+
     # CRITICAL: Preserve the active tab
     if "active_tab" not in st.session_state:
         st.session_state["active_tab"] = "Explore Stories"
@@ -138,17 +124,17 @@ def reset_all_filters(stories: List[dict]):
 def remove_filter_value(filter_key: str, value: str):
     """Remove a specific value from a filter list and sync widget state"""
     F = st.session_state["filters"]
-    
+
     # Remove from filter state
     if filter_key in F and isinstance(F[filter_key], list):
         if value in F[filter_key]:
             F[filter_key].remove(value)
-    
+
     # Increment widget version to force recreation with fresh state
     version_key = f"_widget_version_{filter_key}"
     current_version = st.session_state.get(version_key, 0)
     st.session_state[version_key] = current_version + 1
-    
+
     # Delete ALL versions of the widget keys (both base and versioned)
     widget_map = {
         "clients": "facet_clients",
@@ -157,17 +143,17 @@ def remove_filter_value(filter_key: str, value: str):
         "tags": "facet_tags",
         "personas": "facet_personas",
     }
-    
+
     widget_keys = widget_map.get(filter_key, [])
     if not isinstance(widget_keys, list):
         widget_keys = [widget_keys]
-    
+
     # Delete both the base key AND any versioned keys that exist
     for widget_key in widget_keys:
         # Delete base key if it exists
         if widget_key in st.session_state:
             del st.session_state[widget_key]
-        
+
         # Delete versioned keys (check up to version 100 to be safe)
         for v in range(current_version + 2):  # Check current and previous versions
             versioned_key = f"{widget_key}_v{v}"
@@ -175,7 +161,9 @@ def remove_filter_value(filter_key: str, value: str):
                 del st.session_state[versioned_key]
 
 
-def build_domain_options(domains: List[str]) -> Tuple[List[str], List[Tuple[str, str, str]]]:
+def build_domain_options(
+    domains: list[str],
+) -> tuple[list[str], list[tuple[str, str, str]]]:
     """Parse domain strings into categories and build options list"""
     domain_parts = [
         (d.split(" / ")[0], (d.split(" / ")[1] if " / " in d else ""), d)
@@ -190,8 +178,7 @@ def build_domain_options(domains: List[str]) -> Tuple[List[str], List[Tuple[str,
 # =============================================================================
 
 
-
-def get_context_story(stories: List[dict]) -> Optional[dict]:
+def get_context_story(stories: list[dict]) -> dict | None:
     """Get the currently selected story for detail view"""
     obj = st.session_state.get("active_story_obj")
     if isinstance(obj, dict) and (obj.get("id") or obj.get("Title")):
@@ -228,7 +215,9 @@ def get_context_story(stories: List[dict]) -> Optional[dict]:
         xid = str(cand.get("id") or cand.get("story_id") or "").strip()
         xt = (cand.get("Title") or "").strip().lower()
         xc = (cand.get("Client") or "").strip().lower()
-        if (sid and xid and str(xid) == str(sid)) or (at and xt == at and (not ac or xc == ac)):
+        if (sid and xid and str(xid) == str(sid)) or (
+            at and xt == at and (not ac or xc == ac)
+        ):
             return cand
 
     return None
@@ -239,7 +228,7 @@ def get_context_story(stories: List[dict]) -> Optional[dict]:
 # =============================================================================
 
 
-def render_filter_chips(filters: dict, stories: List[dict]) -> bool:
+def render_filter_chips(filters: dict, stories: list[dict]) -> bool:
     """Render active filter chips. Returns True if state changed."""
     chips = []
     if filters.get("q"):
@@ -262,12 +251,12 @@ def render_filter_chips(filters: dict, stories: List[dict]) -> bool:
     ]:
         for v in filters.get(key, []):
             chips.append((label, v, (key, v)))
-    
+
     if not chips:
         return False
-    
+
     st.markdown('<div class="active-chip-row">', unsafe_allow_html=True)
-    
+
     to_remove = []
     for i, (_, text, (k, v)) in enumerate(chips):
         # FIX: Create stable unique key using hash instead of position index
@@ -275,18 +264,18 @@ def render_filter_chips(filters: dict, stories: List[dict]) -> bool:
         unique_key = f"chip_{k}_{hash((k, v))}"
         if st.button(f"✕ {text}", key=unique_key):
             to_remove.append((k, v))
-    
+
     clear_all = False
     if st.button("Clear all", key="chip_clear_all"):
         clear_all = True
-    
+
     st.markdown("</div>", unsafe_allow_html=True)
-    
+
     if clear_all:
         reset_all_filters(stories)
         st.rerun()
         return True
-    
+
     if to_remove:
         for k, v in to_remove:
             if k == "q":
@@ -299,18 +288,17 @@ def render_filter_chips(filters: dict, stories: List[dict]) -> bool:
                 filters["capability"] = ""
             else:
                 remove_filter_value(k, v)
-        
+
         st.session_state["page_offset"] = 0
-        
+
         # CRITICAL: Preserve the active tab before rerunning
         if "active_tab" not in st.session_state:
             st.session_state["active_tab"] = "Explore Stories"
-        
+
         st.rerun()
         return True
-    
-    return False
 
+    return False
 
 
 def render_pagination(total_results: int, page_size: int, offset: int, view_mode: str):
@@ -416,18 +404,30 @@ def render_pagination(total_results: int, page_size: int, offset: int, view_mode
         elif current_page >= total_pages - 3:
             page_numbers = [1, "..."] + list(range(total_pages - 4, total_pages + 1))
         else:
-            page_numbers = [1, "...", current_page - 1, current_page, current_page + 1, "...", total_pages]
+            page_numbers = [
+                1,
+                "...",
+                current_page - 1,
+                current_page,
+                current_page + 1,
+                "...",
+                total_pages,
+            ]
 
     cols = st.columns([0.6, 0.6] + [0.35] * len(page_numbers) + [0.6, 0.6, 1.2])
     col_idx = 0
 
     with cols[col_idx]:
         if current_page > 1:
-            if st.button("First", key=f"btn_first_{view_mode}", use_container_width=True):
+            if st.button(
+                "First", key=f"btn_first_{view_mode}", use_container_width=True
+            ):
                 st.session_state["page_offset"] = 0
                 st.rerun()
         else:
-            st.markdown("<div class='pagination-disabled'>First</div>", unsafe_allow_html=True)
+            st.markdown(
+                "<div class='pagination-disabled'>First</div>", unsafe_allow_html=True
+            )
     col_idx += 1
 
     with cols[col_idx]:
@@ -436,17 +436,29 @@ def render_pagination(total_results: int, page_size: int, offset: int, view_mode
                 st.session_state["page_offset"] = offset - page_size
                 st.rerun()
         else:
-            st.markdown("<div class='pagination-disabled'>Prev</div>", unsafe_allow_html=True)
+            st.markdown(
+                "<div class='pagination-disabled'>Prev</div>", unsafe_allow_html=True
+            )
     col_idx += 1
 
     for page_num in page_numbers:
         with cols[col_idx]:
             if page_num == "...":
-                st.markdown("<div style='text-align: center; padding: 6px; color: #666;'>...</div>", unsafe_allow_html=True)
+                st.markdown(
+                    "<div style='text-align: center; padding: 6px; color: #666;'>...</div>",
+                    unsafe_allow_html=True,
+                )
             elif page_num == current_page:
-                st.markdown(f"<div class='pagination-active'>{page_num}</div>", unsafe_allow_html=True)
+                st.markdown(
+                    f"<div class='pagination-active'>{page_num}</div>",
+                    unsafe_allow_html=True,
+                )
             else:
-                if st.button(str(page_num), key=f"btn_page_{view_mode}_{page_num}", use_container_width=True):
+                if st.button(
+                    str(page_num),
+                    key=f"btn_page_{view_mode}_{page_num}",
+                    use_container_width=True,
+                ):
                     st.session_state["page_offset"] = (page_num - 1) * page_size
                     st.rerun()
         col_idx += 1
@@ -457,7 +469,9 @@ def render_pagination(total_results: int, page_size: int, offset: int, view_mode
                 st.session_state["page_offset"] = offset + page_size
                 st.rerun()
         else:
-            st.markdown("<div class='pagination-disabled'>Next</div>", unsafe_allow_html=True)
+            st.markdown(
+                "<div class='pagination-disabled'>Next</div>", unsafe_allow_html=True
+            )
     col_idx += 1
 
     with cols[col_idx]:
@@ -466,7 +480,9 @@ def render_pagination(total_results: int, page_size: int, offset: int, view_mode
                 st.session_state["page_offset"] = (total_pages - 1) * page_size
                 st.rerun()
         else:
-            st.markdown("<div class='pagination-disabled'>Last</div>", unsafe_allow_html=True)
+            st.markdown(
+                "<div class='pagination-disabled'>Last</div>", unsafe_allow_html=True
+            )
     col_idx += 1
 
     with cols[col_idx]:
@@ -480,14 +496,14 @@ def render_pagination(total_results: int, page_size: int, offset: int, view_mode
 
 
 def render_explore_stories(
-    stories: List[dict],
-    industries: List[str],
-    capabilities: List[str],
-    clients: List[str],
-    domains: List[str],
-    roles: List[str],
-    tags: List[str],
-    personas_all: List[str],
+    stories: list[dict],
+    industries: list[str],
+    capabilities: list[str],
+    clients: list[str],
+    domains: list[str],
+    roles: list[str],
+    tags: list[str],
+    personas_all: list[str],
 ):
     """
     Render the Explore Stories page with filters and project listings.
@@ -869,7 +885,7 @@ def render_explore_stories(
         F["domains"] = st.session_state.pop("prefilter_domains")
         # Clear capability when setting domains
         F["capability"] = ""
-        
+
     # ==================================================================
     # FILTERS SECTION - REDESIGNED (Phase 4)
     # ==================================================================
@@ -892,7 +908,11 @@ def render_explore_stories(
             industry_version = st.session_state.get("_widget_version_industry", 0)
             industry_options = ["All"] + industries
             current_industry = F.get("industry", "")
-            industry_index = industry_options.index(current_industry) if current_industry in industry_options else 0
+            industry_index = (
+                industry_options.index(current_industry)
+                if current_industry in industry_options
+                else 0
+            )
             selected_industry = st.selectbox(
                 "Industry",
                 options=industry_options,
@@ -906,21 +926,29 @@ def render_explore_stories(
             capability_version = st.session_state.get("_widget_version_capability", 0)
             capability_options = ["All"] + capabilities
             current_capability = F.get("capability", "")
-            capability_index = capability_options.index(current_capability) if current_capability in capability_options else 0
+            capability_index = (
+                capability_options.index(current_capability)
+                if current_capability in capability_options
+                else 0
+            )
             selected_capability = st.selectbox(
                 "Capability",
                 options=capability_options,
                 index=capability_index,
                 key=f"facet_capability_v{capability_version}",
             )
-            F["capability"] = "" if selected_capability == "All" else selected_capability
+            F["capability"] = (
+                "" if selected_capability == "All" else selected_capability
+            )
 
         # ADVANCED FILTERS (Collapsed by default)
         show_advanced = st.session_state.get("show_advanced_filters", False)
 
         col_toggle, col_spacer, col_reset = st.columns([1, 3, 0.8])
         with col_toggle:
-            toggle_label = "▾ Advanced Filters" if show_advanced else "▸ Advanced Filters"
+            toggle_label = (
+                "▾ Advanced Filters" if show_advanced else "▸ Advanced Filters"
+            )
             if st.button(toggle_label, key="btn_toggle_advanced"):
                 st.session_state["show_advanced_filters"] = not show_advanced
                 st.rerun()
@@ -941,7 +969,7 @@ def render_explore_stories(
                     "Client",
                     clients,
                     default=F.get("clients", []),
-                    key=f"facet_clients_v{clients_version}"
+                    key=f"facet_clients_v{clients_version}",
                 )
 
             with c2:
@@ -951,7 +979,7 @@ def render_explore_stories(
                     "Role",
                     roles,
                     default=F.get("roles", []),
-                    key=f"facet_roles_v{roles_version}"
+                    key=f"facet_roles_v{roles_version}",
                 )
 
             with c3:
@@ -972,14 +1000,16 @@ def render_explore_stories(
     if F["q"].strip():
         ov = token_overlap_ratio(F["q"], _KNOWN_VOCAB)
         nonsense_check = is_nonsense(F["q"])
-        overlap_check = (ov < 0.03 and f"overlap:{ov:.2f}")
+        overlap_check = ov < 0.03 and f"overlap:{ov:.2f}"
         reason = nonsense_check or overlap_check
-        
+
         if reason:
             st.session_state["__nonsense_reason__"] = reason
             st.session_state["__pc_suppressed__"] = True
             st.session_state["last_results"] = stories[:5]
-            render_no_match_banner(reason=reason, query=F["q"], overlap=ov, suppressed=True, filters=F)
+            render_no_match_banner(
+                reason=reason, query=F["q"], overlap=ov, suppressed=True, filters=F
+            )
             st.stop()
         else:
             # FIX: Call with correct signature
@@ -989,16 +1019,18 @@ def render_explore_stories(
             st.session_state["page_offset"] = 0
             st.session_state["__last_q__"] = F["q"]
     else:
-        has_filters = any([
-            F.get("industry"),  # NEW: Primary filter
-            F.get("capability"),  # NEW: Primary filter
-            F.get("personas"),
-            F.get("clients"),
-            F.get("domains"),
-            F.get("roles"),
-            F.get("tags"),
-            F.get("has_metric"),
-        ])
+        has_filters = any(
+            [
+                F.get("industry"),  # NEW: Primary filter
+                F.get("capability"),  # NEW: Primary filter
+                F.get("personas"),
+                F.get("clients"),
+                F.get("domains"),
+                F.get("roles"),
+                F.get("tags"),
+                F.get("has_metric"),
+            ]
+        )
         if has_filters:
             view = [s for s in stories if matches_filters(s, F)]
         else:
@@ -1066,7 +1098,7 @@ def render_explore_stories(
     with col2:
         st.markdown(
             '<div style="display: flex; align-items: center; min-height: 44px; font-size: 14px; font-weight: 500;">SHOW:</div>',
-            unsafe_allow_html=True
+            unsafe_allow_html=True,
         )
 
     with col3:
@@ -1076,7 +1108,7 @@ def render_explore_stories(
             options=TABLE_PAGE_SIZE_OPTIONS,
             index=0,
             key="page_size_select",
-            label_visibility="collapsed"
+            label_visibility="collapsed",
         )
 
     with col4:
@@ -1085,7 +1117,7 @@ def render_explore_stories(
             "View",
             options=["Table", "Cards"],
             key="explore_view_mode",
-            label_visibility="collapsed"
+            label_visibility="collapsed",
         )
 
     page_size = page_size_option if view_mode == "Table" else CARDS_PAGE_SIZE
@@ -1099,6 +1131,7 @@ def render_explore_stories(
     # =========================================================================
 
     if view_mode == "Table":
+
         def _row(s: dict) -> dict:
             dom = (s.get("Sub-category") or "").split(" / ")[-1]
             return {
@@ -1112,11 +1145,15 @@ def render_explore_stories(
         view_paginated = view[offset : offset + page_size]
         rows = [_row(s) for s in view_paginated]
         df = pd.DataFrame(rows)
-        show_cols = [c for c in ["Title", "Client", "Role", "Domain"] if c in df.columns]
+        show_cols = [
+            c for c in ["Title", "Client", "Role", "Domain"] if c in df.columns
+        ]
         show_df = df[show_cols] if show_cols else df
 
         if not _HAS_AGGRID:
-            st.warning("Row-click requires st-aggrid. Install: `pip install streamlit-aggrid`")
+            st.warning(
+                "Row-click requires st-aggrid. Install: `pip install streamlit-aggrid`"
+            )
             st.dataframe(show_df, hide_index=True, use_container_width=True)
         else:
             df_view = df[["ID"] + show_cols] if show_cols else df
@@ -1132,7 +1169,7 @@ def render_explore_stories(
                     function(params) {
                         return '<span class="client-badge">' + params.value + '</span>';
                     }
-                """
+                """,
             )
             gob.configure_column("Role", flex=3)
             gob.configure_column(
@@ -1142,7 +1179,7 @@ def render_explore_stories(
                     function(params) {
                         return '<span class="domain-tag">' + params.value + '</span>';
                     }
-                """
+                """,
             )
 
             gob.configure_selection(selection_mode="single", use_checkbox=False)
@@ -1218,7 +1255,11 @@ def render_explore_stories(
                         title = s.get("Title", "Untitled")
                         client = s.get("Client", "Unknown")
                         role = s.get("Role", "Unknown")
-                        domain = (s.get("Sub-category") or "").split(" / ")[-1] if s.get("Sub-category") else "Unknown"
+                        domain = (
+                            (s.get("Sub-category") or "").split(" / ")[-1]
+                            if s.get("Sub-category")
+                            else "Unknown"
+                        )
                         summary = s.get("5PSummary", "")
 
                         card_html = f"""
@@ -1244,11 +1285,15 @@ def render_explore_stories(
                             "See Project →",
                             "Learn More →",
                             "Explore Story →",
-                            "Read More →"
+                            "Read More →",
                         ]
                         button_text = button_texts[i % len(button_texts)]
 
-                        if st.button(button_text, key=f"card_{story_id}", use_container_width=False):
+                        if st.button(
+                            button_text,
+                            key=f"card_{story_id}",
+                            use_container_width=False,
+                        ):
                             st.session_state["active_story"] = story_id
                             st.rerun()
 
@@ -1258,7 +1303,9 @@ def render_explore_stories(
 
             # JAVASCRIPT: Force purple button styles for card buttons (same workaround as home page)
             import streamlit.components.v1 as components
-            components.html("""
+
+            components.html(
+                """
             <script>
             (function() {
                 function applyPurpleCardButtons() {
@@ -1290,10 +1337,13 @@ def render_explore_stories(
                 setInterval(applyPurpleCardButtons, 2000);
             })();
             </script>
-            """, height=0)
-    
+            """,
+                height=0,
+            )
+
     # === ADD FOOTER ===
     from ui.components.footer import render_footer
+
     render_footer()
     # # =========================================================================
     # # LET'S CONNECT FOOTER - WIREFRAME EXACT

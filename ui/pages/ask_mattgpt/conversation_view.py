@@ -12,39 +12,39 @@ Phase 5.1 Complete: All helper functions extracted to conversation_helpers.py
 """
 
 import re
+
 import streamlit as st
 import streamlit.components.v1 as components
-from typing import List, Dict, Optional
+
+from config.debug import DEBUG
+from ui.components.thinking_indicator import render_thinking_indicator
 
 # Import from refactored modules
 from ui.pages.ask_mattgpt.backend_service import send_to_backend
-from ui.pages.ask_mattgpt.utils import (
-    get_context_story,
-    story_modes,
-    push_user_turn as _push_user_turn,
-    push_assistant_turn as _push_assistant_turn,
-    push_conversational_answer as _push_conversational_answer,
-    ensure_ask_bootstrap as _ensure_ask_bootstrap,
-)
-from ui.components.footer import render_footer
-from ui.components.story_detail import render_story_detail
-from config.debug import DEBUG
-from utils.ui_helpers import safe_container, dbg
 
 # Import extracted helpers from Phase 5.1
 from ui.pages.ask_mattgpt.conversation_helpers import (
-    set_answer,
     _render_ask_transcript,
+    set_answer,
 )
-from ui.pages.ask_mattgpt.styles import get_landing_css, get_loading_animation_css, get_conversation_css
-from ui.components.thinking_indicator import render_thinking_indicator
+from ui.pages.ask_mattgpt.styles import (
+    get_conversation_css,
+)
+from ui.pages.ask_mattgpt.utils import (
+    ensure_ask_bootstrap as _ensure_ask_bootstrap,
+    get_context_story,
+    push_assistant_turn as _push_assistant_turn,
+    push_conversational_answer as _push_conversational_answer,
+    push_user_turn as _push_user_turn,
+    story_modes,
+)
 
 # Environment variables for debugging
 try:
     from services.pinecone_service import (
-        VECTOR_BACKEND,
         PINECONE_INDEX_NAME,
         PINECONE_NAMESPACE,
+        VECTOR_BACKEND,
     )
 except ImportError:
     VECTOR_BACKEND = "unknown"
@@ -52,7 +52,7 @@ except ImportError:
     PINECONE_NAMESPACE = "unknown"
 
 
-def render_conversation_view(stories: List[Dict]):
+def render_conversation_view(stories: list[dict]):
     """
     Render active conversation view.
     NAVBAR IS RENDERED BY PARENT - NO NAVBAR CSS HERE
@@ -69,7 +69,8 @@ def render_conversation_view(stories: List[Dict]):
     # ============================================================================
     # INJECT JAVASCRIPT to force input styling (Streamlit emotion classes workaround)
     # ============================================================================
-    st.markdown("""
+    st.markdown(
+        """
         <script>
         function forceInputStyling() {
             const chatInput = document.querySelector('[data-testid="stChatInput"]');
@@ -92,12 +93,14 @@ def render_conversation_view(stories: List[Dict]):
         const observer = new MutationObserver(() => setTimeout(forceInputStyling, 50));
         observer.observe(document.body, { childList: true, subtree: true });
         </script>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
     # ============================================================================
     # HEADER - Purple gradient with Agy avatar
     # ============================================================================
-    
+
     st.markdown(
         """
     <div class="ask-header">
@@ -145,7 +148,9 @@ def render_conversation_view(stories: List[Dict]):
 
     def toggle_how_modal():
         """Centralized toggle for modal visibility state."""
-        st.session_state["show_how_modal"] = not st.session_state.get("show_how_modal", False)
+        st.session_state["show_how_modal"] = not st.session_state.get(
+            "show_how_modal", False
+        )
         st.rerun()
 
     if st.button("🔍 How Agy searches", key="how_works_top"):
@@ -345,7 +350,7 @@ def render_conversation_view(stories: List[Dict]):
 
                 </div>
                 """,
-                height=1000
+                height=1000,
             )
 
             st.markdown("---")
@@ -439,7 +444,7 @@ def render_conversation_view(stories: List[Dict]):
 
                 </div>
                 """,
-                height=440
+                height=440,
             )
 
     # ============================================================================
@@ -486,18 +491,26 @@ def render_conversation_view(stories: List[Dict]):
     if pending and not processing_state:
         # Step 1: Push user turn and set processing
         _push_user_turn(pending)
-        st.session_state["__processing_chip_injection__"] = {"query": pending, "step": "pending"}
+        st.session_state["__processing_chip_injection__"] = {
+            "query": pending,
+            "step": "pending",
+        }
         st.rerun()
 
-    elif isinstance(processing_state, dict) and processing_state.get("step") == "pending":
+    elif (
+        isinstance(processing_state, dict) and processing_state.get("step") == "pending"
+    ):
         # Step 2: Show indicator and trigger rerun to render it
         st.session_state["__processing_chip_injection__"] = {
             "query": processing_state["query"],
-            "step": "processing"
+            "step": "processing",
         }
         st.rerun()  # PUT THIS BACK
 
-    elif isinstance(processing_state, dict) and processing_state.get("step") == "processing":
+    elif (
+        isinstance(processing_state, dict)
+        and processing_state.get("step") == "processing"
+    ):
         # Step 3: Actually process WITH indicator
         pending_query = processing_state["query"]
 
@@ -532,13 +545,15 @@ def render_conversation_view(stories: List[Dict]):
                 query = st.session_state.get("ask_last_query", "")
                 overlap = st.session_state.get("ask_last_overlap", None)
 
-                st.session_state["ask_transcript"].append({
-                    "type": "banner",
-                    "Role": "assistant",
-                    "reason": reason,
-                    "query": query,
-                    "overlap": overlap,
-                })
+                st.session_state["ask_transcript"].append(
+                    {
+                        "type": "banner",
+                        "Role": "assistant",
+                        "reason": reason,
+                        "query": query,
+                        "overlap": overlap,
+                    }
+                )
 
                 # Clear flags
                 st.session_state.pop("ask_last_reason", None)
@@ -556,7 +571,9 @@ def render_conversation_view(stories: List[Dict]):
     processing_state = st.session_state.get("__processing_chip_injection__")
 
     # Check if we're in the middle of processing
-    is_processing = isinstance(processing_state, dict) and processing_state.get("step") in ["pending", "processing"]
+    is_processing = isinstance(processing_state, dict) and processing_state.get(
+        "step"
+    ) in ["pending", "processing"]
 
     if is_processing:
         render_thinking_indicator()
@@ -566,17 +583,19 @@ def render_conversation_view(stories: List[Dict]):
     # ============================================================================
     # DEBUG - check transcript order
     if DEBUG:
-        print(f"DEBUG: Transcript order before render:")
+        print("DEBUG: Transcript order before render:")
         for i, m in enumerate(st.session_state.get("ask_transcript", [])):
             msg_type = m.get("type", "text")
             role = m.get("role", "?")
-            text_preview = str(m.get("text", m.get("query", m.get("answer_md", ""))))[:60]
+            text_preview = str(m.get("text", m.get("query", m.get("answer_md", ""))))[
+                :60
+            ]
             print(f"  [{i}] {role}/{msg_type}: {text_preview}")
 
     if _render_ask_transcript:
         _render_ask_transcript(stories)
     else:
-    # Fallback: simple transcript rendering
+        # Fallback: simple transcript rendering
         st.info("Transcript rendering helper pending extraction (Phase 5.1)")
 
     # ============================================================================
@@ -585,12 +604,14 @@ def render_conversation_view(stories: List[Dict]):
 
     user_input_local = None
     if st.session_state.get("active_tab") == "Ask MattGPT":
-        user_input_local = st.chat_input("💬 Ask a follow-up question...", key="ask_chat_input1")
+        user_input_local = st.chat_input(
+            "💬 Ask a follow-up question...", key="ask_chat_input1"
+        )
 
         # Add "Powered by" text below input
         st.markdown(
             '<div class="conversation-powered-by">Powered by OpenAI GPT-4o-mini with semantic search across 120+ project case studies</div>',
-            unsafe_allow_html=True
+            unsafe_allow_html=True,
         )
 
     if user_input_local:
@@ -629,12 +650,18 @@ def render_conversation_view(stories: List[Dict]):
                 srcs = st.session_state.get("last_sources") or []
                 if srcs:
                     sid = srcs[0].get("id")
-                    target = next((x for x in stories if str(x.get("id")) == str(sid)), None)
+                    target = next(
+                        (x for x in stories if str(x.get("id")) == str(sid)), None
+                    )
 
             if target:
                 modes_local = story_modes(target)
                 key = cmd_map[cmd]
-                heading = {"narrative": "Narrative", "key_points": "Key points", "deep_dive": "Deep dive"}[key]
+                heading = {
+                    "narrative": "Narrative",
+                    "key_points": "Key points",
+                    "deep_dive": "Deep dive",
+                }[key]
                 answer_md = f"**{heading}**\n\n" + modes_local.get(key, "")
 
                 st.session_state["answer_mode"] = key
@@ -679,13 +706,15 @@ def render_conversation_view(stories: List[Dict]):
                 query = st.session_state.get("ask_last_query", "")
                 overlap = st.session_state.get("ask_last_overlap", None)
 
-                st.session_state["ask_transcript"].append({
-                    "type": "banner",
-                    "Role": "assistant",
-                    "reason": reason,
-                    "query": query,
-                    "overlap": overlap,
-                })
+                st.session_state["ask_transcript"].append(
+                    {
+                        "type": "banner",
+                        "Role": "assistant",
+                        "reason": reason,
+                        "query": query,
+                        "overlap": overlap,
+                    }
+                )
 
                 # Clear flags
                 st.session_state.pop("ask_last_reason", None)

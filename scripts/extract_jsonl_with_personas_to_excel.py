@@ -1,5 +1,6 @@
-import pandas as pd
 import json
+
+import pandas as pd
 
 EXCEL_FILE = "MPugmire - STAR Stories - 06AUG25.xlsx"
 JSONL_FILE = "echo_star_stories_nlp_with_personas.jsonl"
@@ -10,13 +11,12 @@ SHEET_NAME = "STAR Stories - Interview Ready"
 df = pd.read_excel(EXCEL_FILE, sheet_name=SHEET_NAME)
 
 # Load JSONL
-with open(JSONL_FILE, "r", encoding="utf-8") as f:
+with open(JSONL_FILE, encoding="utf-8") as f:
     jsonl_data = [json.loads(line) for line in f]
 
 # Build a lookup from Title to personas (convert list to comma-separated string)
 tag_lookup = {
-    entry["Title"].strip(): ", ".join(entry.get("personas", [])) 
-    for entry in jsonl_data
+    entry["Title"].strip(): ", ".join(entry.get("personas", [])) for entry in jsonl_data
 }
 
 # Update the DataFrame with new personas

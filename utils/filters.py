@@ -1,7 +1,8 @@
 """Story filtering utilities."""
 
-from utils.validation import _tokenize
 from utils.formatting import story_has_metric
+from utils.validation import _tokenize
+
 
 def matches_filters(s, F=None):
     """
@@ -73,18 +74,20 @@ def matches_filters(s, F=None):
     q_raw = (F.get("q") or "").strip()
     if q_raw:
         q_toks = _tokenize(q_raw)
-        hay_joined = " ".join([
-            s.get("Title", ""),
-            s.get("Client", ""),
-            s.get("Role", ""),
-            s.get("Sub-category", ""),
-            s.get("Person", ""),
-            s.get("Place", ""),
-            s.get("Purpose", ""),
-            " ".join(s.get("Process", []) or []),
-            " ".join(s.get("Performance", []) or []),
-            " ".join(s.get("public_tags", []) or []),
-        ])
+        hay_joined = " ".join(
+            [
+                s.get("Title", ""),
+                s.get("Client", ""),
+                s.get("Role", ""),
+                s.get("Sub-category", ""),
+                s.get("Person", ""),
+                s.get("Place", ""),
+                s.get("Purpose", ""),
+                " ".join(s.get("Process", []) or []),
+                " ".join(s.get("Performance", []) or []),
+                " ".join(s.get("public_tags", []) or []),
+            ]
+        )
 
         if q_toks:
             hay_toks = set(_tokenize(hay_joined))

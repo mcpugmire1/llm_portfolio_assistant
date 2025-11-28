@@ -7,13 +7,15 @@ Reusable footer with contact information and availability.
 import streamlit as st
 import streamlit.components.v1 as components
 
+
 def render_footer():
     """Render footer with contact information and CTAs."""
-    
+
     # =========================================================================
     # LET'S CONNECT FOOTER - WIREFRAME EXACT
     # =========================================================================
-    st.markdown("""
+    st.markdown(
+        """
     <style>
     /* Hide the footer trigger button */
     [class*="st-key-footer_ask"] {
@@ -40,16 +42,19 @@ def render_footer():
             </a>
         </div>
     </div>
-    """, unsafe_allow_html=True)
-    
+    """,
+        unsafe_allow_html=True,
+    )
+
     # JavaScript to wire up the Ask Agy button
-    components.html("""
+    components.html(
+        """
     <script>
     (function() {
         setTimeout(function() {
             const parentDoc = window.parent.document;
             const btnAsk = parentDoc.getElementById('btn-footer-ask');
-            
+
             if (btnAsk) {
                 btnAsk.onclick = function() {
                     const stBtn = parentDoc.querySelector('[class*="st-key-footer_ask"] button');
@@ -59,8 +64,10 @@ def render_footer():
         }, 200);
     })();
     </script>
-    """, height=0)
-    
+    """,
+        height=0,
+    )
+
     # Hidden Streamlit button
     if st.button("", key="footer_ask"):
         st.session_state["active_tab"] = "Ask MattGPT"

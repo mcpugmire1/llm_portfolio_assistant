@@ -15,9 +15,10 @@ This is step 2 in the data pipeline:
 import json
 import os
 import shutil
-from datetime import datetime, timezone
-from openai import OpenAI
+from datetime import UTC, datetime
+
 from dotenv import load_dotenv
+from openai import OpenAI
 
 # Load environment variables
 load_dotenv()
@@ -40,7 +41,6 @@ def extract_semantic_tags(story):
     prompt = (
         "You are an intelligent assistant that analyzes STAR stories for professional tagging.\n\n"
         "Given the following data, generate a concise, comma-separated list of **semantic tags** that capture:\n\n"
-        
         "**Behavioral & Leadership (CRITICAL - include these when present in Action/Result):**\n"
         "- Stakeholder management, trust-building, influencing without authority\n"
         "- Coaching, mentoring, capability building, knowledge transfer\n"
@@ -48,22 +48,18 @@ def extract_semantic_tags(story):
         "- Team dynamics, psychological safety, culture change\n"
         "- Cross-functional collaboration, alignment, consensus-building\n"
         "- Change management, overcoming skepticism, building credibility\n\n"
-        
         "**Technical & Methodological:**\n"
         "- Technical skills, architectures, platforms, tools\n"
         "- Methodologies (Agile, TDD, DevOps, CI/CD, etc.)\n"
         "- Engineering practices and patterns\n\n"
-        
         "**Business & Outcomes:**\n"
         "- Business capabilities and measurable outcomes\n"
         "- Industry-specific terminology\n"
         "- Transformation types (digital, agile, cloud, etc.)\n\n"
-        
         "**Keyword Alignment:**\n"
         "- Use terminology aligned with SFIA, O*NET, LinkedIn Skills, and Accenture Tech Vision\n"
         "- Include synonyms that recruiters and hiring managers search for\n"
         "- Ensure tags are discoverable via semantic search\n\n"
-        
         "**IMPORTANT RULES:**\n"
         "1. Read the Action and Result fields carefully for behavioral signals\n"
         "2. If the story describes navigating politics, coaching stakeholders, building trust, "
@@ -72,7 +68,6 @@ def extract_semantic_tags(story):
         "indicate behavioral competencies - tag them\n"
         "4. Balance technical and behavioral tags - most stories have both dimensions\n"
         "5. Be specific and avoid generic terms like 'leadership' - use 'stakeholder alignment' or 'team coaching' instead\n\n"
-        
         f"Title: {story.get('Title', '')}\n"
         f"Role: {story.get('Role', '')}\n"
         f"Industry: {story.get('Industry', '')}\n"
@@ -87,7 +82,6 @@ def extract_semantic_tags(story):
         f"Result: {' '.join(story.get('Result', []))}\n"
         f"Process: {' '.join(story.get('Process', []))}\n"
         f"Performance: {' '.join(story.get('Performance', []))}\n\n"
-        
         "Output only the semantic tags as a comma-separated string. "
         "Aim for 8-15 tags that balance behavioral and technical dimensions."
     )
@@ -109,12 +103,12 @@ def enrich_stories_with_nlp_tags():
     # File validation
     if not os.path.exists(INPUT_FILE):
         print(f"❌ Error: Input file '{INPUT_FILE}' not found.")
-        print(f"   Please run generate_jsonl_from_excel.py first.")
+        print("   Please run generate_jsonl_from_excel.py first.")
         return
 
     # Count stories and estimate cost
     story_count = 0
-    with open(INPUT_FILE, "r", encoding="utf-8") as infile:
+    with open(INPUT_FILE, encoding="utf-8") as infile:
         for line in infile:
             story_count += 1
 
@@ -133,7 +127,7 @@ def enrich_stories_with_nlp_tags():
 
     enriched_records = []
 
-    with open(INPUT_FILE, "r", encoding="utf-8") as infile:
+    with open(INPUT_FILE, encoding="utf-8") as infile:
         for line in infile:
             story = json.loads(line)
 
@@ -144,14 +138,16 @@ def enrich_stories_with_nlp_tags():
 
             # Combine and deduplicate
             new_tag_list = [tag.strip() for tag in tags.split(",") if tag.strip()]
-            existing_tag_list = [tag.strip() for tag in existing_tags.split(",") if tag.strip()]
+            existing_tag_list = [
+                tag.strip() for tag in existing_tags.split(",") if tag.strip()
+            ]
             all_tags = set(new_tag_list + existing_tag_list)
 
             story["public_tags"] = ", ".join(sorted(all_tags))
             enriched_records.append(story)
 
     # Backup before overwriting
-    timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+    timestamp = datetime.now(UTC).strftime("%Y%m%d_%H%M%S")
     backup_file = f"{OUTPUT_FILE.replace('.jsonl', '')}_backup_{timestamp}.jsonl"
     shutil.copy(INPUT_FILE, backup_file)
     print(f"\n📦 Backup created: {backup_file}")
@@ -161,7 +157,9 @@ def enrich_stories_with_nlp_tags():
         for record in enriched_records:
             outfile.write(json.dumps(record, ensure_ascii=False) + "\n")
 
-    print(f"\n🎉 Done! Successfully enriched {len(enriched_records)} stories with AI-generated tags.")
+    print(
+        f"\n🎉 Done! Successfully enriched {len(enriched_records)} stories with AI-generated tags."
+    )
     print(f"📄 Output file: {OUTPUT_FILE}")
     print(f"📦 Backup file: {backup_file}")
 

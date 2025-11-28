@@ -1,0 +1,18 @@
+# Development dependencies for code quality and testing
+# Install with: pip install -r requirements-dev.txt
+
+# Code formatting and linting
+black==24.10.0
+ruff==0.8.4
+
+# Type checking
+mypy==1.13.0
+types-requests
+types-python-dotenv
+
+# Pre-commit hooks
+pre-commit==4.0.1
+
+# Testing (optional - for future)
+pytest>=8.0.0
+pytest-cov>=4.1.0

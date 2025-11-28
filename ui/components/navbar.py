@@ -6,7 +6,9 @@ Uses Streamlit container with CSS scoping to prevent bleeding.
 """
 
 import streamlit as st
-from config.theme import COLORS, SPACING
+
+from config.theme import COLORS
+
 
 def render_navbar(current_tab: str = "Home"):
     """
@@ -20,7 +22,8 @@ def render_navbar(current_tab: str = "Home"):
     """
 
     # Navbar-specific CSS - target by container class
-    st.markdown(f"""
+    st.markdown(
+        f"""
     <style>
         div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) {{
             background: {COLORS['dark_navy']} !important;
@@ -60,7 +63,9 @@ def render_navbar(current_tab: str = "Home"):
             opacity: 1 !important;
         }}
     </style>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
     # Use Streamlit container to group navigation elements
     with st.container():

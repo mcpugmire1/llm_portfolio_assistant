@@ -6,6 +6,9 @@ skip-string-normalization = true
 [tool.ruff]
 line-length = 88
 target-version = "py311"
+fix = true
+
+[tool.ruff.lint]
 select = [
   "E",   # pycodestyle errors
   "F",   # pyflakes
@@ -15,9 +18,8 @@ select = [
 ]
 ignore = [
   "E203",  # black-compatible slicing
-  "W503",  # line break before binary operator (black style)
+  "E501",  # line too long (black handles this)
 ]
-fix = true
 
 [tool.ruff.format]
 quote-style = "preserve"

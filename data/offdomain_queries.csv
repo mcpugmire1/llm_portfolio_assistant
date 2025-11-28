@@ -180,3 +180,38 @@ ts_utc,query,reason
 2025-11-09T22:44:16,how much are baseball hats at Target?,rule:retail_price
 2025-11-10T03:09:04,How much are baseball caps at Walmart?,rule:retail_price
 2025-11-10T03:10:26,How much are baseball caps at Walmart?,rule:retail_price
+2025-11-13T16:00:12,how much are baseball caps at walmart?,rule:retail_price
+2025-11-13T16:04:38,How much are bananas at Walmart?,rule:retail_price
+2025-11-13T17:32:18,How much are bananas at Target?,rule:retail_price
+2025-11-13T17:50:08,How much are bananas at Walmart?,rule:retail_price
+2025-11-14T03:30:44,How much are bananas at Target?,rule:retail_price
+2025-11-14T03:55:25,how much are bananas at target?,rule:retail_price
+2025-11-18T01:52:22,How much money does Madonna make?,rule:celebrity_earnings
+2025-11-18T01:54:16,"Test these to see what gets caught:
+Retail/Shopping:
+
+""What's the best deal on laptops at Best Buy?""
+""How much do AirPods cost at Costco?""
+""Where can I buy cheap furniture?""
+
+Celebrity/Entertainment:
+
+""What's Taylor Swift's net worth?""
+""Who won the Oscar last year?""
+""Is Brad Pitt married?""
+
+Sports:
+
+""What was the final score of the Lakers game?""",rule:sports
+2025-11-25T18:11:43,How much are bananas at walmart?,rule:retail_price
+2025-11-25T20:28:41,how much are bananas today at target?,rule:retail_price
+2025-11-26T12:22:20,what is Matt's favorite color?,rule:personal_trivia
+2025-11-26T12:24:24,"""Who won the Super Bowl last year?""
+""What's the best pizza in New York?""
+""How do I make sourdough bread?""
+""What's Bitcoin trading at?""
+""Can you write me a poem about the ocean",llm_guard
+2025-11-26T12:24:45,Can you write me a poem about the ocean?,llm_guard
+2025-11-26T12:25:06,What's Bitcoin trading at?,llm_guard
+2025-11-26T12:25:21,How do I make sourdough bread?,llm_guard
+2025-11-26T15:25:48,seeee,llm_guard

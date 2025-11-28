@@ -1,12 +1,12 @@
 """Story formatting utilities - summaries, narratives, key points."""
 
 import re
-from typing import Optional
 
 # Metric detection pattern
 METRIC_RX = re.compile(
     r"(\b\d{1,3}\s?%|\$\s?\d[\d,\.]*\b|\b\d+x\b|\b\d+(?:\.\d+)?\s?(pts|pp|bps)\b)", re.I
 )
+
 
 def story_has_metric(s):
     """Check if story contains quantified metrics."""
@@ -18,7 +18,8 @@ def story_has_metric(s):
             return True
     return False
 
-def strongest_metric_line(s: dict) -> Optional[str]:
+
+def strongest_metric_line(s: dict) -> str | None:
     """Extract the most impactful metric from a story."""
     candidates = []
     for line in s.get("what") or []:
@@ -32,6 +33,7 @@ def strongest_metric_line(s: dict) -> Optional[str]:
     if not candidates:
         return None
     return max(candidates, key=lambda t: t[0])[1]
+
 
 def build_5p_summary(s: dict, max_chars: int = 220) -> str:
     """
@@ -67,6 +69,7 @@ def build_5p_summary(s: dict, max_chars: int = 220) -> str:
 
     # Clamp for compact list cells
     return text if len(text) <= max_chars else (text[: max_chars - 1] + "…")
+
 
 def _format_key_points(s: dict) -> str:
     """3–4 bullets: scope, approach, outcomes."""
@@ -112,6 +115,7 @@ def _extract_metric_value(text: str):
             best = item
     return best
 
+
 def _format_narrative(s: dict) -> str:
     """1-paragraph, recruiter-friendly narrative from a single story."""
     title = s.get("Title", "")
@@ -136,6 +140,7 @@ def _format_narrative(s: dict) -> str:
     if metric:
         bits.append(f"Impact: **{metric}**.")
     return " ".join(bits) or build_5p_summary(s, 280)
+
 
 def _format_deep_dive(s: dict) -> str:
     """Detail without saying STAR/5P explicitly: What was happening / Goal / What we did / Results."""
@@ -160,6 +165,7 @@ def _format_deep_dive(s: dict) -> str:
 
 # Add to utils/formatting.py
 
+
 def _format_narrative(s: dict) -> str:
     """1-paragraph, recruiter-friendly narrative from a single story."""
     title = s.get("Title", "")
@@ -168,7 +174,7 @@ def _format_narrative(s: dict) -> str:
     goal = (s.get("why") or "").strip().rstrip(".")
     how = ", ".join((s.get("how") or [])[:2]).strip().rstrip(".")
     metric = strongest_metric_line(s)
-    
+
     bits = []
     if title or client:
         bits.append(
@@ -184,7 +190,7 @@ def _format_narrative(s: dict) -> str:
         bits.append(f"We focused on {how.lower()}.")
     if metric:
         bits.append(f"Impact: **{metric}**.")
-    
+
     return " ".join(bits) or build_5p_summary(s, 280)
 
 
@@ -195,7 +201,7 @@ def _format_deep_dive(s: dict) -> str:
     task = st_blocks.get("task") or []
     action = st_blocks.get("action") or []
     result = st_blocks.get("result") or []
-    
+
     parts = []
     if situation:
         parts.append(
@@ -207,5 +213,5 @@ def _format_deep_dive(s: dict) -> str:
         parts.append("**What we did**\n" + "\n".join([f"- {x}" for x in action]))
     if result:
         parts.append("**Results**\n" + "\n".join([f"- {x}" for x in result]))
-    
+
     return "\n\n".join(parts) or build_5p_summary(s, 320)

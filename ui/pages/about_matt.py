@@ -6,6 +6,7 @@ Professional background, resume, and contact information.
 
 import streamlit as st
 
+
 def render_about_matt():
     """
     Render the About Matt page with professional background and contact info.
@@ -65,7 +66,7 @@ def render_about_matt():
             position: relative;
             overflow: hidden;
     }
-    
+
     .stat-card {
         background: #2d2d2d;
         padding: 32px 24px;
@@ -76,12 +77,12 @@ def render_about_matt():
         margin-bottom: 24px;
         box-shadow: 0 2px 8px rgba(128, 128, 128, 0.2);  /* Always visible shadow */
     }
-    
+
     .stat-card:hover {
         transform: translateY(-4px);
         box-shadow: 0 4px 16px rgba(74, 144, 226, 0.2);
     }
-    
+
     .stat-number {
         font-size: 36px;
         font-weight: 700;
@@ -89,12 +90,12 @@ def render_about_matt():
         display: block;
         margin-bottom: 8px;
     }
-    
+
     .stat-label {
         color: #b0b0b0;
         font-size: 16px;
     }
-    
+
     .section-title {
         font-size: 32px;
         font-weight: 600;
@@ -102,7 +103,7 @@ def render_about_matt():
         margin: 60px 0 40px 0;
         color: #ffffff;
     }
-    
+
     .fixed-height-card {
         background: var(--secondary-background-color);
         padding: 28px;
@@ -230,7 +231,8 @@ def render_about_matt():
     )
 
     # Purple header with avatar - matches Ask MattGPT pattern
-    st.markdown("""
+    st.markdown(
+        """
     <div class="conversation-header">
         <div class="conversation-header-content">
             <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png"
@@ -242,12 +244,13 @@ def render_about_matt():
             </div>
         </div>
     </div>
-    """, unsafe_allow_html=True)
-
+    """,
+        unsafe_allow_html=True,
+    )
 
     # Stats bar - 5 stats with purple accent
     st.markdown(
-    """
+        """
     <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; margin: 8px 0 24px 0;">
         <div style="background: var(--secondary-background-color); padding: 28px 20px; border-radius: 12px; text-align: center; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(128, 128, 128, 0.2);">
             <span style="font-size: 36px; font-weight: 700; color: #8B5CF6; display: block; margin-bottom: 8px;">20+</span>
@@ -271,17 +274,20 @@ def render_about_matt():
         </div>
     </div>
     """,
-    unsafe_allow_html=True,
-)
+        unsafe_allow_html=True,
+    )
 
     st.markdown(
         "<h2 class='section-title'>Career Evolution</h2>", unsafe_allow_html=True
     )
-    st.markdown("""
+    st.markdown(
+        """
     <div style='text-align: center; max-width: 800px; margin: 0 auto 32px auto;'>
         <p style='color: #b0b0b0; font-size: 16px;'>From individual contributor to enterprise transformation leader</p>
     </div>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
     # Timeline - matches wireframe exactly (7 positions)
     timeline_data = [
@@ -289,51 +295,52 @@ def render_about_matt():
             "year": "2023–Present",
             "title": "🧘 Sabbatical | Innovation & Upskilling",
             "company": "Independent",
-            "desc": "Focused on GenAI, cloud-native architecture, and building LLM-powered portfolio assistant"
+            "desc": "Focused on GenAI, cloud-native architecture, and building LLM-powered portfolio assistant",
         },
         {
             "year": "2019–2023",
             "title": "🚀 Director, Cloud Innovation Center",
             "company": "Accenture",
-            "desc": "Launched Innovation Centers (150+ engineers) • 30+ products • $300M+ revenue • 4x faster delivery"
+            "desc": "Launched Innovation Centers (150+ engineers) • 30+ products • $300M+ revenue • 4x faster delivery",
         },
         {
             "year": "2016–2023",
             "title": "📚 Capability Development Lead, CloudFirst",
             "company": "Accenture",
-            "desc": "Upskilled 300+ professionals • 40% proficiency increase • 50% faster delivery • Culture transformation"
+            "desc": "Upskilled 300+ professionals • 40% proficiency increase • 50% faster delivery • Culture transformation",
         },
         {
             "year": "2018–2019",
             "title": "☁️ Cloud Native Architecture Lead, Liquid Studio",
             "company": "Accenture",
-            "desc": "Built cloud-native accelerator • AWS enablement (200+ certs) • Rapid prototyping for Fortune 500"
+            "desc": "Built cloud-native accelerator • AWS enablement (200+ certs) • Rapid prototyping for Fortune 500",
         },
         {
             "year": "2009–2017",
             "title": "💳 Sr. Technology Architecture Manager, Payments",
             "company": "Accenture",
-            "desc": "$500M+ payments modernization • 12 countries • ACH/FX/Wire hubs • Salesforce integration"
+            "desc": "$500M+ payments modernization • 12 countries • ACH/FX/Wire hubs • Salesforce integration",
         },
         {
             "year": "2005–2009",
             "title": "🏗️ Technology Manager",
             "company": "Accenture",
-            "desc": "Early leadership in payments, banking, and platform modernization"
+            "desc": "Early leadership in payments, banking, and platform modernization",
         },
         {
             "year": "2000–2005",
             "title": "⚡ Startups & Consulting",
             "company": "Including Cendian Corp",
-            "desc": "Built B2B/supply chain platforms • webMethods & J2EE integration solutions"
-        }
+            "desc": "Built B2B/supply chain platforms • webMethods & J2EE integration solutions",
+        },
     ]
 
     # Render timeline with vertical line
     # Build complete HTML in one call to prevent Streamlit wrapper divs
     timeline_items = []
     for item in timeline_data:
-        timeline_items.append(f"""
+        timeline_items.append(
+            f"""
         <div class="timeline-item">
             <div class="timeline-card">
                 <div class="timeline-year">{item["year"]}</div>
@@ -341,13 +348,17 @@ def render_about_matt():
                 <div class="timeline-company">{item["company"]}</div>
                 <div class="timeline-desc">{item["desc"]}</div>
             </div>
-        </div>""")
+        </div>"""
+        )
 
     timeline_html = '<div class="timeline">' + ''.join(timeline_items) + '</div>'
     st.markdown(timeline_html, unsafe_allow_html=True)
 
     # Core Competencies with skill bars
-    st.markdown("<h2 class='section-title' style='margin: 48px 0 32px 0;'>Core Competencies</h2>", unsafe_allow_html=True)
+    st.markdown(
+        "<h2 class='section-title' style='margin: 48px 0 32px 0;'>Core Competencies</h2>",
+        unsafe_allow_html=True,
+    )
     col1, col2, col3 = st.columns(3)
 
     with col1:
@@ -429,12 +440,18 @@ def render_about_matt():
         )
 
     # Leadership Philosophy
-    st.markdown("<h2 class='section-title' style='margin: 48px 0 32px 0;'>Leadership Philosophy</h2>", unsafe_allow_html=True)
-    st.markdown("""
+    st.markdown(
+        "<h2 class='section-title' style='margin: 48px 0 32px 0;'>Leadership Philosophy</h2>",
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        """
     <div style='text-align: center; max-width: 800px; margin: 0 auto 32px auto;'>
         <p style='color: #b0b0b0; font-size: 16px;'>Principles that guide how I approach transformation, team building, and complex challenges</p>
     </div>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
     cols = st.columns(4)
     philosophy_items = [
@@ -444,7 +461,7 @@ def render_about_matt():
         ("🔄", "Learn Continuously", "Every failure is data for the next attempt"),
     ]
 
-    for col, (icon, title, desc) in zip(cols, philosophy_items):
+    for col, (icon, title, desc) in zip(cols, philosophy_items, strict=False):
         with col:
             st.markdown(
                 f"""
@@ -458,7 +475,10 @@ def render_about_matt():
             )
 
     # Let's Connect section with better UI/UX
-    st.markdown("<h2 class='section-title' style='margin: 48px 0 32px 0;'>Let's Connect</h2>", unsafe_allow_html=True)
+    st.markdown(
+        "<h2 class='section-title' style='margin: 48px 0 32px 0;'>Let's Connect</h2>",
+        unsafe_allow_html=True,
+    )
 
     # Professional summary with visual appeal
     st.markdown(
@@ -535,7 +555,8 @@ def render_about_matt():
         )
         if st.button("Schedule Coffee", key="coffee_chat", use_container_width=True):
             st.info("Reach out via email or LinkedIn to schedule an in-person meeting")
-    
+
     # === ADD FOOTER ===
     from ui.components.footer import render_footer
+
     render_footer()

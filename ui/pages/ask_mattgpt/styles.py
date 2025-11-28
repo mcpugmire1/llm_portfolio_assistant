@@ -151,7 +151,7 @@ def get_landing_css() -> str:
             padding: 48px 32px 24px;
             text-align: center;
         }
-        
+
         /* THE WHITE CARD - wraps everything */
         .st-key-intro_section {
             max-width: 900px !important;
@@ -227,13 +227,13 @@ def get_landing_css() -> str:
             grid-template-columns: repeat(2, 1fr) !important; /* Keep columns flexible */
             grid-template-rows: repeat(3, auto) !important;
             gap: 8px !important;
-            
+
             /* === CORE FIX: Use calc() to force a narrow, centered container === */
             /* This makes the grid content narrower and centered by forcing 32px margins (64px total). */
-            width: calc(100% - 64px) !important; 
+            width: calc(100% - 64px) !important;
             max-width: calc(100% - 64px) !important;
             margin: 0 auto 48px !important; /* Centers the new narrower block */
-            
+
             padding: 0 !important;
             background: transparent !important;
             border-radius: 0 !important;
@@ -257,7 +257,7 @@ def get_landing_css() -> str:
             margin: 0 !important;
 
             /* === NEW EXTREME FIX === */
-            width: 90% !important; 
+            width: 90% !important;
             float: right !important; /* Float it to one side */
             margin-right: 5% !important; /* Force margin on the floating side */
         }
@@ -286,9 +286,9 @@ def get_landing_css() -> str:
             justify-content: flex-start !important;
             gap: 8px !important;
             box-shadow: none !important;
-    
-            width: 100% !important; 
-            
+
+            width: 100% !important;
+
             /* Remove any margin overrides */
             margin-left: unset !important;
             margin-right: unset !important;
@@ -322,7 +322,7 @@ def get_landing_css() -> str:
             margin: 40px auto 0px !important;
             padding: 0 30px !important;
         }
-        
+
         /* Target input row via key */
         [data-testid="stHorizontalBlock"]:has(.st-key-landing_input) {
             max-width: 800px !important;
@@ -334,7 +334,7 @@ def get_landing_css() -> str:
             flex-wrap: nowrap !important;
             align-items: center !important;
         }
-        
+
         /* Input column expands, button column shrinks to fit */
         [data-testid="stHorizontalBlock"]:has(.st-key-landing_input) > [data-testid="stColumn"]:first-child {
             flex: 1 1 auto !important;
@@ -392,14 +392,14 @@ def get_landing_css() -> str:
             border: none !important;
             background: transparent !important;
         }
-        
+
         .st-key-landing_input div[data-baseweb="input"],
         .st-key-landing_input div[data-baseweb="input"]:hover,
         .st-key-landing_input div[data-baseweb="input"]:focus-within {
             border: none !important;
             border-color: transparent !important;
         }
-        
+
         /* Kill Streamlit's atomic border classes */
         .st-key-landing_input .st-bz,
         .st-key-landing_input .st-c0,
@@ -551,11 +551,9 @@ def get_landing_css() -> str:
             font-weight: 600 !important;
         }
 
-        
+
         </style>
     """
-
-
 
 
 def get_loading_animation_css() -> str:
@@ -841,7 +839,7 @@ def get_conversation_css() -> str:
         [data-theme="dark"] .header-agy-avatar {
             filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
         }
-       
+
         [class*="st-key-how_works_top"] button[data-testid="stBaseButton-secondary"] {
             background: rgba(102, 126, 234, 0.1) !important;
             border: 2px solid #667eea !important;
@@ -908,7 +906,7 @@ def get_conversation_css() -> str:
             border-radius: 8px !important;
             padding: 16px !important;
         }
-        
+
         /* Input Area - Complete Wireframe Match */
         [data-testid="stChatInput"] {
             padding: 20px 30px !important;
@@ -1238,6 +1236,6 @@ def get_conversation_css() -> str:
         button[data-testid="stChatInputSubmitButton"] {
             transform: translateY(.5px) !important;
         }
-        
+
         </style>
     """

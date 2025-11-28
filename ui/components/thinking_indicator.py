@@ -5,6 +5,7 @@ Renders animated thinking indicator with Agy's tennis ball chase animation.
 """
 
 import random
+
 import streamlit as st
 
 THINKING_MESSAGES = [

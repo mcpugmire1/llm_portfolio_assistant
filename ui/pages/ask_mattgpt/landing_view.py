@@ -10,14 +10,13 @@ Landing page UI for Ask MattGPT with:
 """
 
 import streamlit as st
-from typing import List, Dict
 
+from ui.components.thinking_indicator import render_thinking_indicator
 from ui.pages.ask_mattgpt.backend_service import send_to_backend
 from ui.pages.ask_mattgpt.styles import get_landing_css
-from ui.components.thinking_indicator import render_thinking_indicator
 
 
-def render_landing_page(stories: List[Dict]):
+def render_landing_page(stories: list[dict]):
     """
     Render the Ask MattGPT landing page (empty state) matching the wireframe.
     NAVBAR IS RENDERED BY PARENT - NO NAVBAR CSS HERE
@@ -72,7 +71,6 @@ def render_landing_page(stories: List[Dict]):
     )
 
     with st.container(key="intro_section"):
-
         # === MAIN INTRO SECTION ===
         st.markdown(
             """
@@ -128,16 +126,17 @@ def render_landing_page(stories: List[Dict]):
                     st.session_state["processing_suggestion"] = True
                     st.session_state["pending_query"] = q
                     st.session_state["ask_input_value"] = q
-                    st.session_state["__ask_force_answer__"] = True  # 🔥 BYPASS NONSENSE FILTER
+                    st.session_state["__ask_force_answer__"] = (
+                        True  # 🔥 BYPASS NONSENSE FILTER
+                    )
                     st.rerun()
-                    
+
     # === THINKING INDICATOR ===
     loading_placeholder = st.empty()
 
     if st.session_state.get("processing_suggestion"):
         with loading_placeholder:
             render_thinking_indicator()
-
 
     # === INPUT AREA ===
     st.markdown('<div class="landing-input-container">', unsafe_allow_html=True)
@@ -217,13 +216,15 @@ def render_landing_page(stories: List[Dict]):
             query_text = st.session_state.get("ask_last_query", "")
             overlap = st.session_state.get("ask_last_overlap", None)
 
-            st.session_state["ask_transcript"].append({
-                "type": "banner",
-                "Role": "assistant",
-                "reason": reason,
-                "query": query_text,
-                "overlap": overlap,
-            })
+            st.session_state["ask_transcript"].append(
+                {
+                    "type": "banner",
+                    "Role": "assistant",
+                    "reason": reason,
+                    "query": query_text,
+                    "overlap": overlap,
+                }
+            )
 
             # Clear flags after adding to transcript
             st.session_state.pop("ask_last_reason", None)
@@ -250,7 +251,7 @@ def render_landing_page(stories: List[Dict]):
 
         # Rerun to show conversation view
         st.rerun()
-    
+
     # === ADD FOOTER ===
     from ui.components.footer import render_footer
 

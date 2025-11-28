@@ -6,19 +6,21 @@ Includes gradient industry cards and white capability cards.
 """
 
 import streamlit as st
+
 from config.theme import COLORS, GRADIENTS
 
 
 def render_category_cards():
     """Render homepage category cards grid - responsive with CSS Grid."""
-    
+
     st.markdown('<div class="matt-container">', unsafe_allow_html=True)
 
     # Row 1: Industry cards with buttons
     col1, col2 = st.columns(2)
 
     with col1:
-        st.markdown(f"""
+        st.markdown(
+            f"""
         <div style="background: {GRADIENTS['purple_hero']}; color: white; padding: 32px; border-radius: 12px; height: 340px; display: flex; flex-direction: column;">
             <div style="font-size: 48px; margin-bottom: 16px;">🏦</div>
             <h3 style="color: white; font-size: 24px; font-weight: 700; margin: 0 0 8px 0;">Financial Services / Banking</h3>
@@ -33,14 +35,17 @@ def render_category_cards():
                 <span style="background: rgba(255,255,255,0.25); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; display: inline-block; white-space: nowrap;">RBC (11)</span>
             </div>
         </div>
-        """, unsafe_allow_html=True)
-        
+        """,
+            unsafe_allow_html=True,
+        )
+
         if st.button("See Banking Projects →", key="btn_0", use_container_width=False):
             st.session_state["active_tab"] = "Banking"
             st.rerun()
 
     with col2:
-        st.markdown(f"""
+        st.markdown(
+            f"""
         <div style="background: {GRADIENTS['purple_hero']}; color: white; padding: 32px; border-radius: 12px; height: 340px; display: flex; flex-direction: column;">
             <div style="font-size: 48px; margin-bottom: 16px;">🌐</div>
             <h3 style="color: white; font-size: 24px; font-weight: 700; margin: 0 0 8px 0;">Cross-Industry Transformation</h3>
@@ -53,9 +58,13 @@ def render_category_cards():
                 <span style="background: rgba(255,255,255,0.25); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; display: inline-block; white-space: nowrap;">Transportation (5)</span>
             </div>
         </div>
-        """, unsafe_allow_html=True)
-        
-        if st.button("Browse Transformations →", key="btn_1", use_container_width=False):
+        """,
+            unsafe_allow_html=True,
+        )
+
+        if st.button(
+            "Browse Transformations →", key="btn_1", use_container_width=False
+        ):
             st.session_state["active_tab"] = "Cross-Industry"
             st.rerun()
 
@@ -63,15 +72,20 @@ def render_category_cards():
     col3, col4 = st.columns(2)
 
     with col3:
-        st.markdown(f"""
+        st.markdown(
+            f"""
         <div style="background: white; color: #333; padding: 32px; border-radius: 12px; border: 1px solid {COLORS['border_gray']}; height: 320px; display: flex; flex-direction: column;">
             <div style="font-size: 40px; margin-bottom: 16px;">🚀</div>
             <h3 style="color: #333; font-size: 20px; font-weight: 700; margin: 0 0 12px 0;">Product Innovation &amp; Strategy</h3>
             <div style="color: #666; margin-bottom: 16px; line-height: 1.6; font-size: 15px; flex-grow: 1;">Cloud-native products from zero. Lean, rapid prototyping, OKRs, MVPs</div>
             <div style="color: #999; font-style: italic; font-size: 14px; line-height: 1.5;">&quot;How do you do hypothesis-driven development?&quot; • &quot;How do you shift to product thinking?&quot;</div>
         </div>
-        """, unsafe_allow_html=True)
-        if st.button("View Case Studies →", key="btn_product_mgmt", use_container_width=False):
+        """,
+            unsafe_allow_html=True,
+        )
+        if st.button(
+            "View Case Studies →", key="btn_product_mgmt", use_container_width=False
+        ):
             # Guard: Only trigger if we're actually on the Home page
             if st.session_state.get("active_tab") == "Home":
                 st.session_state["prefilter_domains"] = [
@@ -79,20 +93,23 @@ def render_category_cards():
                     "Product Strategy & Innovation",
                     "Client Product Innovation & Co-Creation",
                     "User-Centered Product Strategy & Innovation",
-                    "Digital Product Development & Delivery"
+                    "Digital Product Development & Delivery",
                 ]
                 st.session_state["active_tab"] = "Explore Stories"
                 st.rerun()
 
     with col4:
-        st.markdown(f"""
+        st.markdown(
+            f"""
         <div style="background: white; color: #333; padding: 32px; border-radius: 12px; border: 1px solid {COLORS['border_gray']}; height: 320px; display: flex; flex-direction: column;">
             <div style="font-size: 40px; margin-bottom: 16px;">🔧</div>
             <h3 style="color: #333; font-size: 20px; font-weight: 700; margin: 0 0 12px 0;">App Modernization</h3>
             <div style="color: #666; margin-bottom: 16px; line-height: 1.6; font-size: 15px; flex-grow: 1;">Modernizing legacy apps with event-driven design, microservices, and zero-defect delivery</div>
             <div style="color: #999; font-style: italic; font-size: 14px; line-height: 1.5;">&quot;How do you modernize monoliths into microservices?&quot; • &quot;How do you approach application rationalization?&quot;</div>
         </div>
-        """, unsafe_allow_html=True)
+        """,
+            unsafe_allow_html=True,
+        )
         if st.button("View Case Studies →", key="btn_3", use_container_width=False):
             # Add the same guard here!
             if st.session_state.get("active_tab") == "Home":
@@ -100,50 +117,53 @@ def render_category_cards():
                 st.session_state["active_tab"] = "Explore Stories"
                 st.rerun()
 
-
     # Row 3: Capability cards with buttons
     col5, col6 = st.columns(2)
 
     with col5:
-        st.markdown(f"""
+        st.markdown(
+            f"""
         <div style="background: white; color: #333; padding: 32px; border-radius: 12px; border: 1px solid {COLORS['border_gray']}; height: 320px; display: flex; flex-direction: column;">
             <div style="font-size: 40px; margin-bottom: 16px;">💡</div>
             <h3 style="color: #333; font-size: 20px; font-weight: 700; margin: 0 0 12px 0;">Consulting &amp; Transformation</h3>
             <div style="color: #666; margin-bottom: 16px; line-height: 1.6; font-size: 15px; flex-grow: 1;">Fortune 500 advisory, operating models, 3-20x acceleration, New Ways of Working</div>
             <div style="color: #999; font-style: italic; font-size: 14px; line-height: 1.5;">&quot;How do you achieve 4x faster delivery?&quot; • &quot;How do you align cross-functional teams?&quot;</div>
         </div>
-        """, unsafe_allow_html=True)
-        
-        if st.button("Browse Transformations →", key="btn_4", use_container_width=False):
+        """,
+            unsafe_allow_html=True,
+        )
+
+        if st.button(
+            "Browse Transformations →", key="btn_4", use_container_width=False
+        ):
             # Guard: Only trigger if we're actually on the Home page
             if st.session_state.get("active_tab") == "Home":
                 st.session_state["prefilter_domains"] = [
-                "Agile Planning & Value-Driven Delivery",
-                "Agile Transformation & Leadership Enablement",
-                "AI Governance & Data Privacy",
-                "Client Product Innovation & Co-Creation",
-                "Cross-Functional Collaboration & Alignment",
-                "Leadership & Continuous Improvement",
-                "Platform Adoption & Client Integration",
-                "Process Optimization & Automation",
-                "Product Management",
-                "Product Strategy & Innovation",
-                "Program Management & Governance",
-                "Psychological Safety & Innovation Culture",
-                "Security & Compliance Solutions",
-                "Strategic Client Partnerships",
-                "Strategic Enterprise & Methodology Innovation",
-                "Technical Leadership",
-                "Technology Strategy & Advisory Services",
-                "User-Centered Product Strategy & Innovation"
+                    "Agile Planning & Value-Driven Delivery",
+                    "Agile Transformation & Leadership Enablement",
+                    "AI Governance & Data Privacy",
+                    "Client Product Innovation & Co-Creation",
+                    "Cross-Functional Collaboration & Alignment",
+                    "Leadership & Continuous Improvement",
+                    "Platform Adoption & Client Integration",
+                    "Process Optimization & Automation",
+                    "Product Management",
+                    "Product Strategy & Innovation",
+                    "Program Management & Governance",
+                    "Psychological Safety & Innovation Culture",
+                    "Security & Compliance Solutions",
+                    "Strategic Client Partnerships",
+                    "Strategic Enterprise & Methodology Innovation",
+                    "Technical Leadership",
+                    "Technology Strategy & Advisory Services",
+                    "User-Centered Product Strategy & Innovation",
                 ]
                 st.session_state["active_tab"] = "Explore Stories"
                 st.rerun()
 
-
-
     with col6:
-        st.markdown(f"""
+        st.markdown(
+            f"""
         <div style="background: white; color: #333; padding: 32px; border-radius: 12px; border: 1px solid {COLORS['border_gray']}; height: 320px; display: flex; flex-direction: column;">
             <div style="font-size: 40px; margin-bottom: 16px;">👥</div>
             <h3 style="color: #333; font-size: 20px; font-weight: 700; margin: 0 0 12px 0;">Teams &amp; Talent Development</h3>
@@ -151,23 +171,25 @@ def render_category_cards():
             <div style="color: #666; margin-bottom: 16px; line-height: 1.6; font-size: 15px; flex-grow: 1;">Innovation centers, servant leadership, upskilling programs</div>
             <div style="color: #999; font-style: italic; font-size: 14px; line-height: 1.5;">&quot;How did you scale the innovation center to 150+ people?&quot; • &quot;How did you equip teams for New IT ways of working?&quot;</div>
         </div>
-        """, unsafe_allow_html=True)
-        
+        """,
+            unsafe_allow_html=True,
+        )
+
         if st.button("Check Team Stories →", key="btn_5", use_container_width=False):
             # Guard: Only trigger if we're actually on the Home page
             if st.session_state.get("active_tab") == "Home":
                 st.session_state["prefilter_domains"] = [
-                "Client Upskilling & Enablement",
-                "Cross-Functional Team Enablement",
-                "Psychological Safety & Innovation Culture",
-                "Talent Enablement & Growth",
+                    "Client Upskilling & Enablement",
+                    "Cross-Functional Team Enablement",
+                    "Psychological Safety & Innovation Culture",
+                    "Talent Enablement & Growth",
                 ]
                 st.session_state["active_tab"] = "Explore Stories"
                 st.rerun()
 
-
     # Row 4: Quick Question card
-    st.markdown(f"""
+    st.markdown(
+        f"""
     <div style="background: {GRADIENTS['purple_hero']}; color: white; padding: 32px; border-radius: 12px; min-height: 200px; margin-bottom: 24px;">
         <div style="display: flex; align-items: center; gap: 24px; margin-bottom: 20px;">
             <img src="https://raw.githubusercontent.com/mcpugmire1/mattgpt-design-spec/main/brand-kit/chat_avatars/agy_avatar_128_dark.png"
@@ -184,16 +206,20 @@ def render_category_cards():
             &quot;How did you build MattGPT?&quot; • &quot;How do you overcome the challenges of scaling to 150+ engineers?&quot;
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
     if st.button("Ask Agy 🐾", key="btn_6", use_container_width=False):
         st.session_state["active_tab"] = "Ask MattGPT"
         st.session_state["skip_home_menu"] = True
         st.rerun()
     st.markdown('</div>', unsafe_allow_html=True)
-    
+
     # JavaScript for button styling
     import streamlit.components.v1 as components
-    components.html("""
+
+    components.html(
+        """
     <script>
     (function() {
         function applyPurpleButtons() {
@@ -235,4 +261,6 @@ def render_category_cards():
         setTimeout(applyPurpleButtons, 2000);
     })();
     </script>
-    """, height=0)
+    """,
+        height=0,
+    )

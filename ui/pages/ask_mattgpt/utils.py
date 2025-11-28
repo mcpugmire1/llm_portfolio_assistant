@@ -6,17 +6,21 @@ and UI component rendering.
 """
 
 import re
+
 import streamlit as st
-from typing import Dict, List, Optional
 
-from utils.formatting import build_5p_summary, _format_narrative, _format_key_points, _format_deep_dive
-from utils.validation import _tokenize
 from config.debug import DEBUG
-
+from utils.formatting import (
+    _format_deep_dive,
+    _format_key_points,
+    _format_narrative,
+    build_5p_summary,
+)
 
 # ========== STORY HELPERS ==========
 
-def get_context_story(stories: List[Dict]) -> Optional[Dict]:
+
+def get_context_story(stories: list[dict]) -> dict | None:
     """
     Get the active context story from session state.
 
@@ -82,7 +86,7 @@ def get_context_story(stories: List[Dict]) -> Optional[Dict]:
     return None
 
 
-def choose_story_for_ask(top_story: Optional[Dict], stories: List[Dict]) -> Optional[Dict]:
+def choose_story_for_ask(top_story: dict | None, stories: list[dict]) -> dict | None:
     """
     Choose which story to use for Ask MattGPT.
 
@@ -101,7 +105,7 @@ def choose_story_for_ask(top_story: Optional[Dict], stories: List[Dict]) -> Opti
     return top_story
 
 
-def story_modes(s: Dict) -> Dict:
+def story_modes(s: dict) -> dict:
     """
     Return the three presentation modes for a single story.
 
@@ -118,7 +122,7 @@ def story_modes(s: Dict) -> Dict:
     }
 
 
-def related_stories(s: Dict, stories: List[Dict], max_items: int = 3) -> List[Dict]:
+def related_stories(s: dict, stories: list[dict], max_items: int = 3) -> list[dict]:
     """
     Find related stories using simple heuristic.
 
@@ -158,7 +162,7 @@ def related_stories(s: Dict, stories: List[Dict], max_items: int = 3) -> List[Di
     return [t for _, t in scored[:max_items]]
 
 
-def story_has_metric(s: Dict) -> bool:
+def story_has_metric(s: dict) -> bool:
     """
     Check if story has quantifiable metrics.
 
@@ -175,11 +179,14 @@ def story_has_metric(s: Dict) -> bool:
         text = str(perf or "")
 
     # Look for numbers, percentages, time periods
-    has_numbers = bool(re.search(r'\d+[%xX]|\d+\s*(?:days?|weeks?|months?|years?)', text))
+    has_numbers = bool(
+        re.search(r'\d+[%xX]|\d+\s*(?:days?|weeks?|months?|years?)', text)
+    )
     return has_numbers
 
 
 # ========== TRANSCRIPT MANAGEMENT ==========
+
 
 def push_user_turn(text: str):
     """
@@ -202,7 +209,7 @@ def push_assistant_turn(text: str):
     st.session_state["ask_transcript"].append({"role": "assistant", "text": text})
 
 
-def push_conversational_answer(answer_text: str, sources: List[Dict]):
+def push_conversational_answer(answer_text: str, sources: list[dict]):
     """
     Add conversational AI response to transcript with sources.
 
@@ -220,7 +227,7 @@ def push_conversational_answer(answer_text: str, sources: List[Dict]):
     )
 
 
-def push_card_snapshot_from_state(stories: List[Dict]):
+def push_card_snapshot_from_state(stories: list[dict]):
     """
     Append a static answer card snapshot to transcript from current state.
 
@@ -279,6 +286,7 @@ def clear_ask_context():
 
 
 # ========== FORMATTING HELPERS ==========
+
 
 def split_tags(s):
     """

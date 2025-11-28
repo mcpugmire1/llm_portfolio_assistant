@@ -5,8 +5,9 @@ Cross-Industry Transformation Landing Page
 """
 
 import streamlit as st
-import streamlit.components.v1 as components
+
 from ui.components.footer import render_footer
+
 
 def render_cross_industry_landing():
     """Render Cross-Industry Transformation landing page using Streamlit components
@@ -33,7 +34,8 @@ def render_cross_industry_landing():
     )
 
     # Stats section - separate st.markdown() to avoid anchor conflicts
-    st.markdown('''
+    st.markdown(
+        '''
     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin: 0 0 15px 0; padding: 30px; background: #f8f9fa; border-radius: 10px;">
         <div style="text-align: center;">
             <div style="font-size: 36px; font-weight: 700; color: #764ba2; margin-bottom: 8px;">53</div>
@@ -48,10 +50,13 @@ def render_cross_industry_landing():
             <div style="font-size: 14px; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">Industries</div>
         </div>
     </div>
-    ''', unsafe_allow_html=True)
+    ''',
+        unsafe_allow_html=True,
+    )
 
     # Inject CSS for this page
-    st.markdown("""
+    st.markdown(
+        """
     <style>
     /* Conversation header styles for hero section */
     .conversation-header {
@@ -220,10 +225,15 @@ def render_cross_industry_landing():
         box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4), 0 3px 6px rgba(0, 0, 0, 0.15) !important;
     }
     </style>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
     # Industries section - using DIV instead of H2 to prevent anchor generation
-    st.markdown('<div class="section-header" style="font-size: 20px; font-weight: 600; color: #2c3e50; margin-top: 30px; margin-bottom: 16px;">Industries Served</div>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="section-header" style="font-size: 20px; font-weight: 600; color: #2c3e50; margin-top: 30px; margin-bottom: 16px;">Industries Served</div>',
+        unsafe_allow_html=True,
+    )
 
     industries_html = """
     <div class="client-pills">
@@ -240,22 +250,94 @@ def render_cross_industry_landing():
     st.markdown(industries_html, unsafe_allow_html=True)
 
     # Categories section - using DIV instead of H2 to prevent anchor generation
-    st.markdown('<div class="section-header" style="font-size: 20px; font-weight: 600; color: #2c3e50; margin-top: 30px; margin-bottom: 16px;">Explore by Transformation Capability</div>', unsafe_allow_html=True)
-    st.markdown('<p style="font-size: 14px; color: #7f8c8d; margin-bottom: 24px;">Browse 53 cross-industry projects organized by transformation approach and methodology</p>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="section-header" style="font-size: 20px; font-weight: 600; color: #2c3e50; margin-top: 30px; margin-bottom: 16px;">Explore by Transformation Capability</div>',
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        '<p style="font-size: 14px; color: #7f8c8d; margin-bottom: 24px;">Browse 53 cross-industry projects organized by transformation approach and methodology</p>',
+        unsafe_allow_html=True,
+    )
 
     # Cross-industry categories data with varied button text
     cross_industry_categories = [
-        ("🔧", "Modern Engineering Practices & Solutions", 26, "DevOps, CI/CD, test automation, engineering excellence, quality practices", "View Engineering Work →"),
-        ("🤝", "Cross-Functional Collaboration & Team Enablement", 8, "Breaking down silos, team alignment, collaboration frameworks, culture change", "View Team Projects →"),
-        ("🎓", "Client Enablement & Sustainable Innovation", 8, "Knowledge transfer, capability building, innovation centers, sustainable practices", "View Enablement Work →"),
-        ("⚡", "Agile Transformation & Delivery", 2, "Scaling agile practices, SAFe, Scrum at scale, delivery acceleration across industries", "View Agile Projects →"),
-        ("💡", "Product Management & Innovation Labs", 2, "Innovation programs, experimentation, lean startup methodology, product discovery", "Explore Innovation Labs →"),
-        ("🚀", "Application Modernization", 2, "Legacy transformation, microservices migration, platform engineering", "View Modernization Work →"),
-        ("🎨", "User-Centered Design & Experience", 1, "UX research, design thinking, customer journey mapping, experience design", "View Design Projects →"),
-        ("🌩️", "Platform Optimization & Cloud-Native Development", 1, "Platform engineering, developer experience, internal platforms, service catalogs", "View Platform Work →"),
-        ("📱", "Modern Product Engineering Methodology", 1, "Product thinking, user-centered design, rapid prototyping, product-market fit", "View Product Engineering →"),
-        ("🚢", "DevOps & Continuous Delivery", 1, "Deployment automation, pipeline engineering, continuous integration, release management", "View DevOps Projects →"),
-        ("🤖", "AI & Machine Learning Solutions", 1, "Machine learning platforms, AI strategy, intelligent automation, predictive analytics", "View AI Projects →"),
+        (
+            "🔧",
+            "Modern Engineering Practices & Solutions",
+            26,
+            "DevOps, CI/CD, test automation, engineering excellence, quality practices",
+            "View Engineering Work →",
+        ),
+        (
+            "🤝",
+            "Cross-Functional Collaboration & Team Enablement",
+            8,
+            "Breaking down silos, team alignment, collaboration frameworks, culture change",
+            "View Team Projects →",
+        ),
+        (
+            "🎓",
+            "Client Enablement & Sustainable Innovation",
+            8,
+            "Knowledge transfer, capability building, innovation centers, sustainable practices",
+            "View Enablement Work →",
+        ),
+        (
+            "⚡",
+            "Agile Transformation & Delivery",
+            2,
+            "Scaling agile practices, SAFe, Scrum at scale, delivery acceleration across industries",
+            "View Agile Projects →",
+        ),
+        (
+            "💡",
+            "Product Management & Innovation Labs",
+            2,
+            "Innovation programs, experimentation, lean startup methodology, product discovery",
+            "Explore Innovation Labs →",
+        ),
+        (
+            "🚀",
+            "Application Modernization",
+            2,
+            "Legacy transformation, microservices migration, platform engineering",
+            "View Modernization Work →",
+        ),
+        (
+            "🎨",
+            "User-Centered Design & Experience",
+            1,
+            "UX research, design thinking, customer journey mapping, experience design",
+            "View Design Projects →",
+        ),
+        (
+            "🌩️",
+            "Platform Optimization & Cloud-Native Development",
+            1,
+            "Platform engineering, developer experience, internal platforms, service catalogs",
+            "View Platform Work →",
+        ),
+        (
+            "📱",
+            "Modern Product Engineering Methodology",
+            1,
+            "Product thinking, user-centered design, rapid prototyping, product-market fit",
+            "View Product Engineering →",
+        ),
+        (
+            "🚢",
+            "DevOps & Continuous Delivery",
+            1,
+            "Deployment automation, pipeline engineering, continuous integration, release management",
+            "View DevOps Projects →",
+        ),
+        (
+            "🤖",
+            "AI & Machine Learning Solutions",
+            1,
+            "Machine learning platforms, AI strategy, intelligent automation, predictive analytics",
+            "View AI Projects →",
+        ),
     ]
 
     # Render cards in 3-column grid with varied button text
@@ -269,17 +351,24 @@ def render_cross_industry_landing():
                     project_text = "project" if count == 1 else "projects"
 
                     # Card content
-                    st.markdown(f"""
+                    st.markdown(
+                        f"""
                     <div class="capability-card">
                         <div class="card-icon">{icon}</div>
                         <div class="card-title">{title}</div>
                         <div class="card-count">{count} {project_text}</div>
                         <div class="card-desc">{desc}</div>
                     </div>
-                    """, unsafe_allow_html=True)
+                    """,
+                        unsafe_allow_html=True,
+                    )
 
                     # Varied button text matching the category (not full width to match home page)
-                    if st.button(button_text, key=f"cross_industry_card_{i}_{j}", use_container_width=False):
+                    if st.button(
+                        button_text,
+                        key=f"cross_industry_card_{i}_{j}",
+                        use_container_width=False,
+                    ):
                         # Set pre-filters for Explore Stories (Phase 4)
                         st.session_state["prefilter_industry"] = "Cross Industry"
                         st.session_state["prefilter_capability"] = title
@@ -323,7 +412,12 @@ def render_cross_industry_landing():
     # Center the button using columns (narrower center column for better proportions)
     _, col_center, _ = st.columns([1.5, 1, 1.5])
     with col_center:
-        if st.button("Ask Agy 🐾", key="cross_industry_cta", type="primary", use_container_width=True):
+        if st.button(
+            "Ask Agy 🐾",
+            key="cross_industry_cta",
+            type="primary",
+            use_container_width=True,
+        ):
             st.session_state["active_tab"] = "Ask MattGPT"
             st.rerun()
 
@@ -448,7 +542,7 @@ def render_cross_industry_landing():
     }
     </style>
     """
-    
+
     # === ADD FOOTER ===
-    from ui.components.footer import render_footer
+
     render_footer()

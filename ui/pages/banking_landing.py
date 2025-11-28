@@ -5,8 +5,9 @@ Banking Landing Page
 """
 
 import streamlit as st
-import streamlit.components.v1 as components
+
 from ui.components.footer import render_footer
+
 
 def render_banking_landing():
     """Render Banking / Financial Services landing page using Streamlit components
@@ -33,7 +34,8 @@ def render_banking_landing():
     )
 
     # Stats section - separate st.markdown() to avoid anchor conflicts
-    st.markdown('''
+    st.markdown(
+        '''
     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin: 0 0 15px 0; padding: 30px; background: #f8f9fa; border-radius: 10px;">
         <div style="text-align: center;">
             <div style="font-size: 36px; font-weight: 700; color: #764ba2; margin-bottom: 8px;">47</div>
@@ -48,10 +50,13 @@ def render_banking_landing():
             <div style="font-size: 14px; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">Banking Clients</div>
         </div>
     </div>
-    ''', unsafe_allow_html=True)
+    ''',
+        unsafe_allow_html=True,
+    )
 
     # Inject CSS for this page
-    st.markdown("""
+    st.markdown(
+        """
     <style>
     /* Conversation header styles for hero section */
     .conversation-header {
@@ -220,10 +225,15 @@ def render_banking_landing():
         box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4), 0 3px 6px rgba(0, 0, 0, 0.15) !important;
     }
     </style>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
     # Clients section - using DIV instead of H2 to prevent anchor generation
-    st.markdown('<div class="section-header" style="font-size: 20px; font-weight: 600; color: #2c3e50; margin-top: 30px; margin-bottom: 16px;">Clients</div>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="section-header" style="font-size: 20px; font-weight: 600; color: #2c3e50; margin-top: 30px; margin-bottom: 16px;">Clients</div>',
+        unsafe_allow_html=True,
+    )
 
     clients_html = """
     <div class="client-pills">
@@ -238,26 +248,122 @@ def render_banking_landing():
     st.markdown(clients_html, unsafe_allow_html=True)
 
     # Categories section - using DIV instead of H2 to prevent anchor generation
-    st.markdown('<div class="section-header" style="font-size: 20px; font-weight: 600; color: #2c3e50; margin-top: 30px; margin-bottom: 16px;">Explore by Capability</div>', unsafe_allow_html=True)
-    st.markdown('<p style="font-size: 14px; color: #7f8c8d; margin-bottom: 24px;">Browse 47 banking projects organized by specialty area</p>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="section-header" style="font-size: 20px; font-weight: 600; color: #2c3e50; margin-top: 30px; margin-bottom: 16px;">Explore by Capability</div>',
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        '<p style="font-size: 14px; color: #7f8c8d; margin-bottom: 24px;">Browse 47 banking projects organized by specialty area</p>',
+        unsafe_allow_html=True,
+    )
 
     # Banking categories data with varied button text
     banking_categories = [
-        ("⚡", "Agile Transformation & Delivery", 8, "Scaling agile practices, delivery acceleration, team transformation", "View Agile Projects →"),
-        ("💰", "Global Payments & Treasury Solutions", 7, "Payment platforms, treasury systems, real-time processing", "View Payment Projects →"),
-        ("🎯", "Technology Strategy & Advisory", 5, "Architecture roadmaps, strategic planning, technology vision", "View Strategy Work →"),
-        ("📊", "Program Management & Governance", 4, "Large-scale program delivery, governance frameworks, PMO", "View Programs →"),
-        ("🔧", "Modern Engineering Practices & Solutions", 4, "DevOps, CI/CD, cloud-native engineering, modern toolchains", "View Engineering Work →"),
-        ("📈", "Data & Analytics Solutions", 3, "Data platforms, analytics, business intelligence", "View Analytics Projects →"),
-        ("🤝", "Cross-Functional Collaboration & Team Enablement", 3, "Team alignment, collaboration frameworks, culture change", "View Team Projects →"),
-        ("🔄", "Business Process Optimization", 3, "Process reengineering, workflow automation, efficiency", "View Process Work →"),
-        ("🔌", "Enterprise Integration & API Management", 2, "API platforms, integration architecture, service mesh", "View Integration Work →"),
-        ("📱", "Digital Product Development", 2, "Mobile banking, customer experiences, digital channels", "View Product Work →"),
-        ("🔐", "Compliance & Risk Solutions", 2, "Regulatory compliance, risk frameworks, audit support", "View Compliance Work →"),
-        ("🚢", "DevOps & Continuous Delivery", 1, "Automation, deployment pipelines, continuous integration", "View DevOps Projects →"),
-        ("☁️", "Cloud Transformation & Migration", 1, "Cloud strategy, migrations, hybrid cloud architectures", "View Cloud Projects →"),
-        ("🔨", "Application Modernization", 1, "Legacy modernization, microservices, platform engineering", "View Modernization Work →"),
-        ("📦", "Adoption Enablement & Developer Toolkit", 1, "Developer experience, tooling, productivity platforms", "View Enablement Work →"),
+        (
+            "⚡",
+            "Agile Transformation & Delivery",
+            8,
+            "Scaling agile practices, delivery acceleration, team transformation",
+            "View Agile Projects →",
+        ),
+        (
+            "💰",
+            "Global Payments & Treasury Solutions",
+            7,
+            "Payment platforms, treasury systems, real-time processing",
+            "View Payment Projects →",
+        ),
+        (
+            "🎯",
+            "Technology Strategy & Advisory",
+            5,
+            "Architecture roadmaps, strategic planning, technology vision",
+            "View Strategy Work →",
+        ),
+        (
+            "📊",
+            "Program Management & Governance",
+            4,
+            "Large-scale program delivery, governance frameworks, PMO",
+            "View Programs →",
+        ),
+        (
+            "🔧",
+            "Modern Engineering Practices & Solutions",
+            4,
+            "DevOps, CI/CD, cloud-native engineering, modern toolchains",
+            "View Engineering Work →",
+        ),
+        (
+            "📈",
+            "Data & Analytics Solutions",
+            3,
+            "Data platforms, analytics, business intelligence",
+            "View Analytics Projects →",
+        ),
+        (
+            "🤝",
+            "Cross-Functional Collaboration & Team Enablement",
+            3,
+            "Team alignment, collaboration frameworks, culture change",
+            "View Team Projects →",
+        ),
+        (
+            "🔄",
+            "Business Process Optimization",
+            3,
+            "Process reengineering, workflow automation, efficiency",
+            "View Process Work →",
+        ),
+        (
+            "🔌",
+            "Enterprise Integration & API Management",
+            2,
+            "API platforms, integration architecture, service mesh",
+            "View Integration Work →",
+        ),
+        (
+            "📱",
+            "Digital Product Development",
+            2,
+            "Mobile banking, customer experiences, digital channels",
+            "View Product Work →",
+        ),
+        (
+            "🔐",
+            "Compliance & Risk Solutions",
+            2,
+            "Regulatory compliance, risk frameworks, audit support",
+            "View Compliance Work →",
+        ),
+        (
+            "🚢",
+            "DevOps & Continuous Delivery",
+            1,
+            "Automation, deployment pipelines, continuous integration",
+            "View DevOps Projects →",
+        ),
+        (
+            "☁️",
+            "Cloud Transformation & Migration",
+            1,
+            "Cloud strategy, migrations, hybrid cloud architectures",
+            "View Cloud Projects →",
+        ),
+        (
+            "🔨",
+            "Application Modernization",
+            1,
+            "Legacy modernization, microservices, platform engineering",
+            "View Modernization Work →",
+        ),
+        (
+            "📦",
+            "Adoption Enablement & Developer Toolkit",
+            1,
+            "Developer experience, tooling, productivity platforms",
+            "View Enablement Work →",
+        ),
     ]
 
     # Render cards in 3-column grid with varied button text
@@ -271,19 +377,28 @@ def render_banking_landing():
                     project_text = "project" if count == 1 else "projects"
 
                     # Card content
-                    st.markdown(f"""
+                    st.markdown(
+                        f"""
                     <div class="capability-card">
                         <div class="card-icon">{icon}</div>
                         <div class="card-title">{title}</div>
                         <div class="card-count">{count} {project_text}</div>
                         <div class="card-desc">{desc}</div>
                     </div>
-                    """, unsafe_allow_html=True)
+                    """,
+                        unsafe_allow_html=True,
+                    )
 
                     # Varied button text matching the category (not full width to match home page)
-                    if st.button(button_text, key=f"banking_card_{i}_{j}", use_container_width=False):
+                    if st.button(
+                        button_text,
+                        key=f"banking_card_{i}_{j}",
+                        use_container_width=False,
+                    ):
                         # Set pre-filters for Explore Stories (Phase 4)
-                        st.session_state["prefilter_industry"] = "Financial Services / Banking"
+                        st.session_state["prefilter_industry"] = (
+                            "Financial Services / Banking"
+                        )
                         st.session_state["prefilter_capability"] = title
                         st.session_state["active_tab"] = "Explore Stories"
                         st.rerun()
@@ -325,7 +440,9 @@ def render_banking_landing():
     # Center the button using columns (narrower center column for better proportions)
     _, col_center, _ = st.columns([1.5, 1, 1.5])
     with col_center:
-        if st.button("Ask Agy 🐾", key="banking_cta", type="primary", use_container_width=True):
+        if st.button(
+            "Ask Agy 🐾", key="banking_cta", type="primary", use_container_width=True
+        ):
             st.session_state["active_tab"] = "Ask MattGPT"
             st.rerun()
 
@@ -452,5 +569,5 @@ def render_banking_landing():
     """
     # st.markdown(footer_html, unsafe_allow_html=True)
     # === ADD FOOTER ===
-    from ui.components.footer import render_footer
+
     render_footer()

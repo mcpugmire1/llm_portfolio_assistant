@@ -6,7 +6,9 @@ Large gradient hero with portfolio overview and CTAs.
 
 import streamlit as st
 import streamlit.components.v1 as components
+
 from config.theme import COLORS, GRADIENTS
+
 
 def render_hero():
     """
@@ -26,7 +28,7 @@ def render_hero():
             [class*="st-key-hero_ask"] {{
                 display: none !important;
             }}
-            
+
             /* Pull hero up to sit flush under navbar */
             .hero-gradient-wrapper {{
                 background: {GRADIENTS['purple_hero']};
@@ -35,7 +37,7 @@ def render_hero():
                 padding: 0;
                 width: 100%;
             }}
-            
+
             .hero-content {{
                 max-width: 1200px;
                 margin: 0 auto;
@@ -43,7 +45,7 @@ def render_hero():
                 padding: 50px 40px;
                 color: white;
             }}
-            
+
             .hero-btn {{
                 display: inline-block;
                 padding: 14px 32px;
@@ -54,7 +56,7 @@ def render_hero():
                 cursor: pointer;
                 border: 2px solid white;
             }}
-            
+
             /* Also add these states to ensure no underlines ever */
             .hero-btn:hover,
             .hero-btn:active,
@@ -62,22 +64,22 @@ def render_hero():
             .hero-btn:visited {{
                 text-decoration: none !important;
             }}
-            
+
             .hero-btn-primary {{
                 background: white;
                 color: {COLORS['purple_gradient_start']};
             }}
-            
+
             .hero-btn-primary:hover {{
                 transform: translateY(-2px);
                 box-shadow: 0 4px 12px rgba(255,255,255,0.3);
             }}
-            
+
             .hero-btn-secondary {{
                 background: rgba(255,255,255,0.2);
                 color: white;
             }}
-            
+
             .hero-btn-secondary:hover {{
                 background: rgba(255,255,255,0.3);
                 transform: translateY(-2px);
@@ -114,24 +116,25 @@ def render_hero():
         """,
         unsafe_allow_html=True,
     )
-    
+
     # JavaScript to wire up the HTML buttons
-    components.html("""
+    components.html(
+        """
     <script>
     (function() {
         setTimeout(function() {
             const parentDoc = window.parent.document;
-            
+
             const btnExplore = parentDoc.getElementById('btn-explore');
             const btnAsk = parentDoc.getElementById('btn-ask');
-            
+
             if (btnExplore) {
                 btnExplore.onclick = function() {
                     const stBtn = parentDoc.querySelector('[class*="st-key-hero_explore"] button');
                     if (stBtn) stBtn.click();
                 };
             }
-            
+
             if (btnAsk) {
                 btnAsk.onclick = function() {
                     const stBtn = parentDoc.querySelector('[class*="st-key-hero_ask"] button');
@@ -141,13 +144,15 @@ def render_hero():
         }, 200);
     })();
     </script>
-    """, height=0)
-    
+    """,
+        height=0,
+    )
+
     # Hidden Streamlit buttons that get triggered by the HTML buttons
     if st.button("", key="hero_explore"):
         st.session_state["active_tab"] = "Explore Stories"
         st.rerun()
-    
+
     if st.button("", key="hero_ask"):
         st.session_state["active_tab"] = "Ask MattGPT"
         st.rerun()

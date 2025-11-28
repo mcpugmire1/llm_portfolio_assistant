@@ -3,9 +3,10 @@ import os
 # Force CPU on Streamlit Cloud (prevents CUDA meta-tensor issues)
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
-from sentence_transformers import SentenceTransformer
-import numpy as np
 import json
+
+import numpy as np
+from sentence_transformers import SentenceTransformer
 
 # --- Backend Configuration: Model, Vector Store, and Environment Variables ---
 VECTOR_BACKEND = os.getenv("VECTOR_BACKEND", "faiss")
@@ -39,7 +40,7 @@ def search(query_embedding, top_k=5):
         import faiss
 
         index = faiss.read_index("faiss_index/index.faiss")
-        with open("faiss_index/story_metadata.json", "r") as f:
+        with open("faiss_index/story_metadata.json") as f:
             metadata = json.load(f)
         D, I = index.search(np.array([query_embedding]), top_k)
         return [metadata[int(i)] for i in I[0]]

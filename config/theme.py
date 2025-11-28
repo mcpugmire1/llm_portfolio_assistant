@@ -13,21 +13,17 @@ COLORS = {
     "secondary_purple": "#764ba2",
     "purple_gradient_start": "#667eea",
     "purple_gradient_end": "#764ba2",
-
     # Navigation & Dark Elements
     "dark_navy": "#2c3e50",
     "dark_navy_hover": "#34495e",
     "dark_slate": "#334155",
-
     # Backgrounds
     "white": "#ffffff",
     "light_gray_bg": "#f8f9fa",
     "page_bg": "#f5f5f5",
-
     # Borders & Dividers
     "border_gray": "#e5e5e5",
     "border_gray_alt": "#e0e0e0",
-
     # Text Colors
     "text_dark": "#1a1a1a",
     "text_dark_alt": "#333333",
@@ -46,7 +42,6 @@ TYPOGRAPHY = {
     "body": "16px",
     "small": "14px",
     "tiny": "13px",
-
     "weight_normal": "400",
     "weight_medium": "500",
     "weight_semibold": "600",

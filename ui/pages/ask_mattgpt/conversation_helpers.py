@@ -6,24 +6,24 @@ Extracted from monolithic ask_mattgpt.py in Phase 5.1.
 """
 
 import streamlit as st
-from typing import List, Dict
+
+from config.debug import DEBUG
+from ui.components.story_detail import render_story_detail
 
 # Import from existing modules
 from ui.pages.ask_mattgpt.utils import get_context_story, story_modes
-from ui.components.story_detail import render_story_detail
 from utils.formatting import build_5p_summary
 from utils.ui_helpers import (
-    safe_container,
-    render_sources_chips,
-    render_sources_badges_static,
     render_no_match_banner,
+    render_sources_badges_static,
+    render_sources_chips,
+    safe_container,
 )
-from config.debug import DEBUG
-
 
 # ============================================================================
 # STATE MANAGEMENT
 # ============================================================================
+
 
 def set_answer(resp: dict):
     """
@@ -44,7 +44,8 @@ def set_answer(resp: dict):
 # CONTEXT BANNER
 # ============================================================================
 
-def render_compact_context_banner(stories: List[Dict]):
+
+def render_compact_context_banner(stories: list[dict]):
     """
     Single-line context breadcrumb showing active story context.
 
@@ -74,8 +75,16 @@ def render_compact_context_banner(stories: List[Dict]):
 # ============================================================================
 
 _DOT_EMOJI = [
-    "🟦", "🟩", "🟥", "🟧", "🟦", "🟪",
-    "🟩", "🟧", "🟪", "🟦",
+    "🟦",
+    "🟩",
+    "🟥",
+    "🟧",
+    "🟦",
+    "🟪",
+    "🟩",
+    "🟧",
+    "🟪",
+    "🟦",
 ]  # stable palette-ish
 
 
@@ -134,13 +143,14 @@ def show_persona_tags(s: dict):
 # SOURCE RENDERING
 # ============================================================================
 
+
 def show_sources(
-    srcs: List[Dict],
+    srcs: list[dict],
     *,
     interactive: bool = False,
     key_prefix: str = "src_",
     title: str = "Sources",
-    stories: List[Dict],
+    stories: list[dict],
 ):
     """
     Render Sources row using a single call site.
@@ -164,6 +174,7 @@ def show_sources(
 # ============================================================================
 # FOLLOW-UP SUGGESTIONS
 # ============================================================================
+
 
 def render_followup_chips(primary_story: dict, query: str = "", key_suffix: str = ""):
     """
@@ -240,7 +251,8 @@ def render_followup_chips(primary_story: dict, query: str = "", key_suffix: str 
 # TRANSCRIPT RENDERING (The Big One)
 # ============================================================================
 
-def _render_ask_transcript(stories: List[Dict]):
+
+def _render_ask_transcript(stories: list[dict]):
     """
     Render conversation transcript in strict order so avatars / order never jump.
 
@@ -479,7 +491,7 @@ def _render_ask_transcript(stories: List[Dict]):
                 sources = m.get("sources", []) or []
                 if sources:
                     st.markdown(
-                        f'''
+                        '''
                     <div class="sources-tight">
                         <div class="source-links-title">📚 RELATED PROJECTS</div>
                     </div>
@@ -498,15 +510,15 @@ def _render_ask_transcript(stories: List[Dict]):
                         with cols[j]:
                             with st.form(key=f"source_form_{i}_{j}"):
                                 st.markdown(
-                                    f"""
+                                    """
                                 <style>
                                 /* Hide form border */
-                                div[data-testid="stForm"] {{
+                                div[data-testid="stForm"] {
                                     border: none !important;
                                     padding: 0 !important;
                                     margin: 0 !important;
-                                }}
-                                div[data-testid="stForm"] button {{
+                                }
+                                div[data-testid="stForm"] button {
                                     background: #F3F4F6 !important;
                                     border: 2px solid #E5E7EB !important;
                                     color: #2563EB !important;
@@ -517,17 +529,17 @@ def _render_ask_transcript(stories: List[Dict]):
                                     width: 100% !important;
                                     height: auto !important;
                                     min-height: 32px !important;
-                                }}
-                                div[data-testid="stForm"] button p {{
+                                }
+                                div[data-testid="stForm"] button p {
                                     color: #2563EB !important;
                                     font-size: 14px !important;
                                     margin: 0 !important;
                                     line-height: 1.4 !important;
-                                }}
-                                div[data-testid="stForm"] button:hover {{
+                                }
+                                div[data-testid="stForm"] button:hover {
                                     background: #EEF2FF !important;
                                     border-color: #8B5CF6 !important;
-                                }}
+                                }
                                 </style>
                                 """,
                                     unsafe_allow_html=True,
@@ -536,36 +548,60 @@ def _render_ask_transcript(stories: List[Dict]):
                                 if st.form_submit_button(f"🔗 {label}"):
                                     # Toggle expander - if same source clicked, close it; otherwise open new one
                                     expanded_key = f"transcript_source_expanded_{i}_{j}"
-                                    current_expanded = st.session_state.get("transcript_source_expanded")
+                                    current_expanded = st.session_state.get(
+                                        "transcript_source_expanded"
+                                    )
 
                                     if current_expanded == expanded_key:
                                         # Clicking same source - close it
-                                        st.session_state["transcript_source_expanded"] = None
+                                        st.session_state[
+                                            "transcript_source_expanded"
+                                        ] = None
                                     else:
                                         # Open this source (closes any other)
-                                        st.session_state["transcript_source_expanded"] = expanded_key
+                                        st.session_state[
+                                            "transcript_source_expanded"
+                                        ] = expanded_key
                                         # Store the source ID and message index for rendering
-                                        st.session_state["transcript_source_expanded_id"] = src.get("id")
-                                        st.session_state["transcript_source_expanded_msg"] = i
+                                        st.session_state[
+                                            "transcript_source_expanded_id"
+                                        ] = src.get("id")
+                                        st.session_state[
+                                            "transcript_source_expanded_msg"
+                                        ] = i
 
                                     st.rerun()
 
                     # Render the expanded story detail below buttons for this message (only one at a time)
                     expanded_key = st.session_state.get("transcript_source_expanded")
                     expanded_id = st.session_state.get("transcript_source_expanded_id")
-                    expanded_msg = st.session_state.get("transcript_source_expanded_msg")
+                    expanded_msg = st.session_state.get(
+                        "transcript_source_expanded_msg"
+                    )
 
                     if expanded_key and expanded_id and expanded_msg == i:
                         # Find the story object
-                        story_obj = next((s for s in stories if str(s.get("id")) == str(expanded_id)), None)
+                        story_obj = next(
+                            (
+                                s
+                                for s in stories
+                                if str(s.get("id")) == str(expanded_id)
+                            ),
+                            None,
+                        )
 
                         if story_obj:
-                            st.markdown("<div style='margin-top: 16px;'></div>", unsafe_allow_html=True)
-                            render_story_detail(story_obj, f"transcript_expanded_{i}", stories)
+                            st.markdown(
+                                "<div style='margin-top: 16px;'></div>",
+                                unsafe_allow_html=True,
+                            )
+                            render_story_detail(
+                                story_obj, f"transcript_expanded_{i}", stories
+                            )
 
                 # Action buttons (wireframe style) - HIDDEN for Streamlit version
                 # TODO: Re-enable for React version
-                
+
             continue
 
         # Default chat bubble (user/assistant text)

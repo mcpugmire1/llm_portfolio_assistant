@@ -11,6 +11,7 @@ Shared styles applied across all pages:
 
 import streamlit as st
 
+
 def apply_global_styles():
     """
     Apply global CSS once per session.

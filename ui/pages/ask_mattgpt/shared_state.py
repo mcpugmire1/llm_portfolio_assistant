@@ -6,7 +6,6 @@ Prevents state collisions between landing and conversation views.
 """
 
 import streamlit as st
-from typing import Optional, Dict, List, Any
 
 
 class AskMattGPTState:
@@ -16,12 +15,12 @@ class AskMattGPTState:
     # Used by both landing and conversation views
 
     @staticmethod
-    def get_transcript() -> List[Dict]:
+    def get_transcript() -> list[dict]:
         """Get conversation transcript (shared)."""
         return st.session_state.get("ask_transcript", [])
 
     @staticmethod
-    def set_transcript(value: List[Dict]):
+    def set_transcript(value: list[dict]):
         """Set conversation transcript (shared)."""
         st.session_state["ask_transcript"] = value
 
@@ -82,12 +81,12 @@ class AskMattGPTState:
         st.session_state["__processing_chip_injection__"] = value
 
     @staticmethod
-    def get_inject_user_turn() -> Optional[str]:
+    def get_inject_user_turn() -> str | None:
         """Get pending user turn injection."""
         return st.session_state.get("__inject_user_turn__")
 
     @staticmethod
-    def set_inject_user_turn(value: Optional[str]):
+    def set_inject_user_turn(value: str | None):
         """Set pending user turn injection."""
         if value is None:
             st.session_state.pop("__inject_user_turn__", None)
@@ -98,12 +97,12 @@ class AskMattGPTState:
     # Shared between backend and views
 
     @staticmethod
-    def get_nonsense_reason() -> Optional[str]:
+    def get_nonsense_reason() -> str | None:
         """Get nonsense detection reason."""
         return st.session_state.get("ask_last_reason")
 
     @staticmethod
-    def set_nonsense_reason(value: Optional[str]):
+    def set_nonsense_reason(value: str | None):
         """Set nonsense detection reason."""
         if value is None:
             st.session_state.pop("ask_last_reason", None)
@@ -111,12 +110,12 @@ class AskMattGPTState:
             st.session_state["ask_last_reason"] = value
 
     @staticmethod
-    def get_last_query() -> Optional[str]:
+    def get_last_query() -> str | None:
         """Get last query that was checked."""
         return st.session_state.get("ask_last_query")
 
     @staticmethod
-    def set_last_query(value: Optional[str]):
+    def set_last_query(value: str | None):
         """Set last query that was checked."""
         if value is None:
             st.session_state.pop("ask_last_query", None)
@@ -124,12 +123,12 @@ class AskMattGPTState:
             st.session_state["ask_last_query"] = value
 
     @staticmethod
-    def get_last_overlap() -> Optional[float]:
+    def get_last_overlap() -> float | None:
         """Get last token overlap ratio."""
         return st.session_state.get("ask_last_overlap")
 
     @staticmethod
-    def set_last_overlap(value: Optional[float]):
+    def set_last_overlap(value: float | None):
         """Set last token overlap ratio."""
         if value is None:
             st.session_state.pop("ask_last_overlap", None)
@@ -174,12 +173,12 @@ class AskMattGPTState:
     # Manages state when coming from Explore Stories
 
     @staticmethod
-    def get_active_story() -> Optional[str]:
+    def get_active_story() -> str | None:
         """Get active story ID."""
         return st.session_state.get("active_story")
 
     @staticmethod
-    def set_active_story(value: Optional[str]):
+    def set_active_story(value: str | None):
         """Set active story ID."""
         if value is None:
             st.session_state.pop("active_story", None)
@@ -187,12 +186,12 @@ class AskMattGPTState:
             st.session_state["active_story"] = value
 
     @staticmethod
-    def get_active_story_obj() -> Optional[Dict]:
+    def get_active_story_obj() -> dict | None:
         """Get active story object."""
         return st.session_state.get("active_story_obj")
 
     @staticmethod
-    def set_active_story_obj(value: Optional[Dict]):
+    def set_active_story_obj(value: dict | None):
         """Set active story object."""
         if value is None:
             st.session_state.pop("active_story_obj", None)
@@ -200,12 +199,12 @@ class AskMattGPTState:
             st.session_state["active_story_obj"] = value
 
     @staticmethod
-    def get_transcript_source_expanded_id() -> Optional[str]:
+    def get_transcript_source_expanded_id() -> str | None:
         """Get expanded transcript source ID."""
         return st.session_state.get("transcript_source_expanded_id")
 
     @staticmethod
-    def set_transcript_source_expanded_id(value: Optional[str]):
+    def set_transcript_source_expanded_id(value: str | None):
         """Set expanded transcript source ID."""
         if value is None:
             st.session_state.pop("transcript_source_expanded_id", None)
@@ -222,12 +221,12 @@ class AskMattGPTState:
     # ========== FILTERS ==========
 
     @staticmethod
-    def get_filters() -> Dict:
+    def get_filters() -> dict:
         """Get current search filters."""
         return st.session_state.get("filters", {})
 
     @staticmethod
-    def set_filters(value: Dict):
+    def set_filters(value: dict):
         """Set search filters."""
         st.session_state["filters"] = value
 

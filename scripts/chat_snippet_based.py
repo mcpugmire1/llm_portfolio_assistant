@@ -1,11 +1,12 @@
+import json
+import os
 import pickle
+from collections import defaultdict
+
 import faiss
 import numpy as np
-import json
-from sentence_transformers import SentenceTransformer
 from dotenv import load_dotenv
-import os
-from collections import defaultdict
+from sentence_transformers import SentenceTransformer
 
 # Load environment variables
 load_dotenv()
@@ -22,7 +23,7 @@ with open("faiss_index/metadata.pkl", "rb") as f:
     metadata = pickle.load(f)
 
 # Load enriched STAR stories
-with open("star_stories_llm_enriched_with_search.json", "r") as f:
+with open("star_stories_llm_enriched_with_search.json") as f:
     stories = json.load(f)
 
 # Load embedding model

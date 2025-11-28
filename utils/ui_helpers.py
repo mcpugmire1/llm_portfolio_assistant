@@ -1,11 +1,11 @@
 """UI helper utilities - containers, debug output."""
 
+import re
+
 import streamlit as st
-from streamlit import components
+
 from config.debug import DEBUG
-from typing import Optional
-from utils.formatting import _format_narrative, _format_key_points, _format_deep_dive
-import os, re, time, textwrap, json
+from utils.formatting import _format_deep_dive, _format_key_points, _format_narrative
 
 
 def dbg(*args):
@@ -16,10 +16,11 @@ def dbg(*args):
         except Exception:
             pass
 
+
 def safe_container(*, border: bool = False):
     """
     Streamlit compatibility helper for bordered containers.
-    
+
     Older Streamlit versions don't support border kwarg.
     """
     try:
@@ -27,8 +28,13 @@ def safe_container(*, border: bool = False):
     except TypeError:
         return st.container()
 
+
 def render_sources_badges(
-    sources: list[dict], *, title: str = "Sources", key_prefix: str = "srcbad_", stories: list,
+    sources: list[dict],
+    *,
+    title: str = "Sources",
+    key_prefix: str = "srcbad_",
+    stories: list,
 ):
     """Backward-compatible alias: render interactive chips and stay on Ask."""
     return render_sources_chips(
@@ -85,6 +91,7 @@ def render_sources_badges_static(
 def _slug(s):
     return re.sub(r"[^a-z0-9]+", "-", str(s).strip().lower()).strip("-") or "x"
 
+
 def story_modes(s: dict) -> dict:
     """Return the three anchored views for a single story."""
     return {
@@ -92,6 +99,7 @@ def story_modes(s: dict) -> dict:
         "key_points": _format_key_points(s),
         "deep_dive": _format_deep_dive(s),
     }
+
 
 def _shorten_middle(text: str, max_len: int = 64) -> str:
     if not text:
@@ -102,6 +110,7 @@ def _shorten_middle(text: str, max_len: int = 64) -> str:
     left = keep // 2
     right = keep - left
     return text[:left] + "… " + text[-right:]
+
 
 def render_sources_chips(
     sources: list[dict],
@@ -185,7 +194,7 @@ def render_sources_chips(
         batch.append(s)
         if len(batch) == per_row or i == len(items):
             cols = container.columns(len(batch))
-            for col, item in zip(cols, batch):
+            for col, item in zip(cols, batch, strict=False):
                 with col:
                     label, safe_id = _chip_label(item, i)
                     btn_key = f"{key_prefix}srcchip_{safe_id}"
@@ -290,7 +299,8 @@ def render_sources_chips(
             batch = []
 
     st.markdown("</div>", unsafe_allow_html=True)
-    
+
+
 def render_no_match_banner(
     reason: str,
     query: str,
@@ -348,11 +358,13 @@ def render_no_match_banner(
         }
         </style>
         """,
-        unsafe_allow_html=True
+        unsafe_allow_html=True,
     )
 
     # Render the banner content
-    banner_html = f'<div class="no-match-banner"><div class="no-match-banner-msg">{msg}</div>'
+    banner_html = (
+        f'<div class="no-match-banner"><div class="no-match-banner-msg">{msg}</div>'
+    )
     if debug_text:
         banner_html += f'<div class="no-match-banner-debug">{debug_text}</div>'
     banner_html += '<div class="no-match-banner-subtitle">Ask me about:</div></div>'
