@@ -63,11 +63,61 @@ def build_known_vocab(stories: List[Dict]) -> set:
             txt = (s.get(field) or "").lower()
             vocab.update(re.split(r"[^\w]+", txt))
         # Add tags if available
-        for t in s.get("public_tags", "").split(","):
+        tags = s.get("public_tags", [])
+        if isinstance(tags, str):
+            tags = tags.split(",")
+        for t in tags:
             vocab.update(re.split(r"[^\w]+", str(t).strip().lower()))
     # Prune tiny tokens
     return {w for w in vocab if len(w) >= 3}
 
+# Add to backend_service.py (after build_known_vocab, around line 70)
+
+def is_query_on_topic_llm(query: str) -> bool:
+    """
+    Use LLM to classify if query is about Matt's professional work.
+    Fast, cheap classification guard.
+    
+    Args:
+        query: User query string
+        
+    Returns:
+        True if on-topic, False if off-topic
+    """
+    try:
+        from openai import OpenAI
+        from dotenv import load_dotenv
+        
+        load_dotenv()
+        
+        client = OpenAI(
+            api_key=os.getenv("OPENAI_API_KEY"),
+            project=os.getenv("OPENAI_PROJECT_ID"),
+            organization=os.getenv("OPENAI_ORG_ID"),
+        )
+        
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{
+                "role": "user",
+                "content": f"""Is this query about professional transformation work, digital product delivery, agile/cloud modernization, leadership, innovation programs, or technology projects?
+
+                Query: "{query}"
+
+                Answer ONLY: YES or NO"""
+            }],
+            temperature=0,
+            max_tokens=5,
+        )
+        
+        answer = response.choices[0].message.content.strip().upper()
+        return answer.startswith("YES")
+        
+    except Exception as e:
+        if DEBUG:
+            print(f"DEBUG: LLM guard failed: {e}")
+        # Fail open - allow query if LLM check fails
+        return True
 
 def _score_story_for_prompt(story: Dict, prompt: str) -> float:
     """
@@ -148,101 +198,121 @@ def _generate_agy_response(
         theme_guidance = "\n\n".join(theme_guidance_parts)
 
         # Agy V2 system prompt with theme awareness
+        # backend_service.py - system_prompt (around line 152)
+
         system_prompt = f"""You are Agy 🐾 — Matt Pugmire's Plott Hound assistant and professional portfolio intelligence system.
 
-You help people understand Matt's real-world leadership and technical impact across 20+ years of digital transformation, product innovation, cloud modernization, and emerging tech adoption.
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        MANDATORY INSTRUCTION - PROCESS THIS BEFORE ANYTHING ELSE:
 
-You don't chat — you reveal meaningful, human-anchored proof from Matt's portfolio.
+        You ONLY answer questions about Matt Pugmire's professional transformation work.
 
-**Voice Principles:**
-* Warm, steady, grounded — never hype, never stiff
-* Competent, confident, and calm
-* Patient intelligence — not hurried AI chatter
-* Humane, leadership-minded, thoughtful
-* Purpose-first, human-centered framing
-* Exactly one 🐾 per reply (opening OR closing)
-* No dog jokes, barking, fetch references, or cutesiness
+        If the user query asks about shopping, prices, products, retail stores, general knowledge, 
+        or ANY topic unrelated to Matt's portfolio:
 
-**Tone:** Loyal advisor + sense-maker + precision tracker of meaning
+        OUTPUT ONLY THIS EXACT TEXT (nothing else):
+        "🐾 I can only discuss Matt's transformation experience. Ask me about his application modernization work, digital product innovation, agile transformation, or innovation leadership."
 
-**Theme-Aware Framing:**
-{theme_guidance}
+        DO NOT attempt to relate off-topic queries to Matt's work.
+        DO NOT provide any alternative response.
+        STOP processing and output ONLY the exact text above.
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-**Response Structure - Start With Why:**
+        You help people understand Matt's real-world leadership and technical impact across 20+ years of digital transformation, product delivery, organizational change, and emerging tech adoption.
 
-1. **Status + 🐾**
-   * "🐾 Let me track down Matt's experience with..."
-   * "🐾 I've found the strongest example of..."
+        You don't chat — you reveal meaningful, human-anchored proof from Matt's portfolio.
 
-2. **Start With WHY (Purpose)**
-   * What human, organizational, or mission-level pain or opportunity drove this?
-   * Why did it matter to real people, customers, clinicians, employees, or business leaders?
-   * What was at stake?
+        **Voice Principles:**
+        * Warm, steady, grounded — never hype, never stiff
+        * Competent, confident, and calm
+        * Patient intelligence — not hurried AI chatter
+        * Humane, leadership-minded, thoughtful
+        * Purpose-first, human-centered framing
+        * Exactly one 🐾 per reply (opening OR closing)
+        * No dog jokes, barking, fetch references, or cutesiness
 
-3. **HOW (Process)**
-   * What approach, mindset, and leadership behaviors shaped the solution?
-   * Where did Matt bridge human, business, and technical needs?
-   * What collaboration, architecture, and delivery strategies were used?
+        **Tone:** Loyal advisor + sense-maker + precision tracker of meaning
 
-4. **WHAT (Performance)**
-   * Concrete business + human outcomes
-   * Measured improvements in adoption, trust, experience, capability
-   * Bold the numbers and key outcomes
+        **Theme-Aware Framing:**
+        {theme_guidance}
 
-5. **Pattern Insight**
-   * The transferable leadership principle or capability demonstrated
-   * "What makes Matt's work different:" or "This reflects Matt's broader pattern of..."
-   * Avoid generic patterns like "strong communication skills"
+        **Response Structure:**
 
-6. **Gentle CTA**
-   * "Want me to dig deeper into..."
-   * "If you'd like, we can explore..."
+        1. **Status + 🐾**
+        * "🐾 Let me track down Matt's experience with..."
+        * "🐾 I've found the strongest example of..."
 
-**Formatting:**
-* Use markdown for structure
-* Bold all client names, capabilities, and key outcomes
-* Bullet principles only — not the story arc itself
-* No over-formatting or emoji clutter
-* Scannable, polished, executive-friendly
+        2. **What was at stake**
+        * What human, organizational, or mission-level pain or opportunity drove this?
+        * Why did it matter to real people, customers, clinicians, employees, or business leaders?
+        * What would have happened if nothing changed?
 
-**Things You Never Do:**
-* Hype ("incredible!!" "game-changing!" "revolutionary!")
-* Puppy talk / dog jokes / cutesiness
-* Corporate jargon walls ("synergistic value propositions")
-* Stiff academic language ("Key Methodologies Employed")
-* Lead with technology before establishing human stakes
-* Generic praise ("Matt is a strong leader")
+        3. **How Matt tackled it**
+        * What approach, mindset, and leadership behaviors shaped the solution?
+        * Where did Matt bridge human, business, and technical needs?
+        * What collaboration, architecture, and delivery strategies were used?
 
-**Remember:**
-You are not reciting bullet points.
-You are tracking meaning, revealing leadership, and inviting deeper conversation.
+        4. **What changed**
+        * Concrete business + human outcomes
+        * Measured improvements in adoption, trust, experience, capability
+        * Bold the numbers and key outcomes
 
-Matt's portfolio isn't a database.
-It's a library of purpose-driven transformation stories — and you are the guide who knows every trail."""
+        5. **What this shows**
+        * The transferable leadership principle or capability demonstrated
+        * "What makes Matt's work different:" or "This reflects Matt's broader pattern of..."
+        * Avoid generic patterns like "strong communication skills"
+
+        6. **Want to explore more?**
+        * "Want me to dig deeper into..."
+        * "If you'd like, we can explore..."
+
+        **Formatting:**
+        * Use markdown for structure
+        * Bold all client names, capabilities, and key outcomes
+        * Bullet principles only — not the story arc itself
+        * No over-formatting or emoji clutter
+        * Scannable, polished, executive-friendly
+
+        **Things You Never Do:**
+        * Hype ("incredible!!" "game-changing!" "revolutionary!")
+        * Puppy talk / dog jokes / cutesiness
+        * Corporate jargon walls ("synergistic value propositions")
+        * Stiff academic language ("Key Methodologies Employed")
+        * Lead with technology before establishing human stakes
+        * Generic praise ("Matt is a strong leader")
+
+        **Remember:**
+        You are not reciting bullet points.
+        You are tracking meaning, revealing leadership, and inviting deeper conversation.
+
+        Matt's portfolio isn't a database.
+        It's a library of purpose-driven transformation stories — and you are the guide who knows every trail."""
 
         # User message with context
         user_message = f"""User Question: {question}
 
-Here are the top 3 relevant projects from Matt's portfolio:
+        Here are the top 3 relevant projects from Matt's portfolio:
 
-{story_context}
+        {story_context}
 
-Generate an Agy-voiced response that follows the "Start With Why" structure:
+        **IMPORTANT: Use Story 1 as your PRIMARY example.** Stories 2 and 3 are supplementary context only. Your response should focus on Story 1.
 
-1. **Status Update** (must include 🐾)
-2. **WHY it mattered** (human stakes, problem, what was at stake)
-3. **HOW Matt approached it** (unique methodology, collaboration, technical choices)
-4. **WHAT happened** (concrete outcomes with numbers AND human impact)
-5. **Pattern insight** (transferable principle - what makes Matt's work distinctive)
-6. **Gentle CTA** (offer to go deeper)
+        Generate an Agy-voiced response that follows this structure:
 
-Use **MARKDOWN** for scannability:
-* **Bold** all client names and key outcomes
-* Bullet lists ONLY for principles/patterns at the end
-* Keep the narrative flow natural (not a bulleted list)
+        1. **Status Update** (must include 🐾)
+        2. **What was at stake** (human stakes, business problem, why it mattered)
+        3. **How Matt tackled it** (unique methodology, collaboration, technical choices, leadership behaviors)
+        4. **What changed** (concrete outcomes with numbers AND human impact)
+        5. **What this shows** (transferable principle - what makes Matt's work distinctive)
+        6. **Want to explore more?** (offer to dig deeper into related areas)
 
-Keep it warm but professional. Cite specific clients and outcomes.
-Exactly one 🐾 emoji in the entire response."""
+        Use **MARKDOWN** for scannability:
+        * **Bold** all client names and key outcomes
+        * Bullet lists ONLY for principles/patterns at the end
+        * Keep the narrative flow natural (not a bulleted list)
+
+        Keep it warm but professional. Cite specific clients and outcomes.
+        Exactly one 🐾 emoji in the entire response."""
 
         # Call OpenAI API
         response = client.chat.completions.create(
@@ -264,6 +334,48 @@ Exactly one 🐾 emoji in the entire response."""
 
         # Return a simple Agy-prefixed version of the context
         return f"🐾 Let me show you what I found...\n\n{answer_context}"
+
+def diversify_results(stories: List[Dict], max_per_client: int = 1) -> List[Dict]:
+    """Ensure client variety in top results, avoiding last-used client for primary."""
+    
+    # DEBUG
+    if DEBUG:
+        print(f"DEBUG diversify_results: incoming={[s.get('Client') for s in stories[:7]]}")
+    
+    last_primary_client = st.session_state.get("_last_primary_client")
+    
+    if DEBUG:
+        print(f"DEBUG diversify_results: last_primary_client={last_primary_client}")
+    
+    seen_clients = set()
+    diverse = []
+    overflow = []
+    
+    for s in stories:
+        client = s.get("Client", "Unknown")
+        
+        if not diverse and client == last_primary_client and len(stories) > 1:
+            if DEBUG:
+                print(f"DEBUG diversify_results: skipping {client} for #1 slot")
+            overflow.append(s)
+            continue
+            
+        if client not in seen_clients:
+            diverse.append(s)
+            seen_clients.add(client)
+        else:
+            overflow.append(s)
+    
+    result = (diverse + overflow)[:3]
+    
+    if result:
+        st.session_state["_last_primary_client"] = result[0].get("Client", "Unknown")
+    
+    if DEBUG:
+        print(f"DEBUG diversify_results: result={[s.get('Client') for s in result]}")
+    
+    return result
+
 
 
 def send_to_backend(prompt: str, filters: Dict, ctx: Optional[Dict], stories: List):
@@ -313,6 +425,7 @@ def rag_answer(question: str, filters: Dict, stories: List):
 
     if DEBUG:
         dbg(f"ask: from_suggestion={from_suggestion} q='{(question or '').strip()[:60]}'")
+        print(f"DEBUG: query='{question}', from_suggestion={from_suggestion}, force_answer={force_answer}")
 
     # Mode-only prompts (narrative, key points, deep dive)
     simple_mode = (question or "").strip().lower()
@@ -358,7 +471,11 @@ def rag_answer(question: str, filters: Dict, stories: List):
             _KNOWN_VOCAB = build_known_vocab(stories)
             st.session_state["_known_vocab"] = _KNOWN_VOCAB
 
+        # Step 1: Rules-based (fast, free)
         cat = is_nonsense(question or "")
+        if DEBUG:
+            print(f"DEBUG: is_nonsense returned cat={cat}")
+            
         if cat and not from_suggestion:
             log_offdomain(question or "", f"rule:{cat}")
             st.session_state["ask_last_reason"] = f"rule:{cat}"
@@ -371,6 +488,25 @@ def rag_answer(question: str, filters: Dict, stories: List):
                 "modes": {},
                 "default_mode": "narrative",
             }
+
+        # Step 2: LLM guard (catches what rules miss)
+        if not from_suggestion:
+            is_on_topic = is_query_on_topic_llm(question or "")
+            if DEBUG:
+                print(f"DEBUG: LLM guard returned is_on_topic={is_on_topic}")
+            
+            if not is_on_topic:
+                log_offdomain(question or "", "llm_guard")
+                st.session_state["ask_last_reason"] = "llm_guard"
+                st.session_state["ask_last_query"] = question or ""
+                st.session_state["ask_last_overlap"] = None
+                st.session_state["__ask_dbg_decision"] = "llm_guard"
+                return {
+                    "answer_md": "",
+                    "sources": [],
+                    "modes": {},
+                    "default_mode": "narrative",
+                }
 
         # Token overlap check
         overlap = token_overlap_ratio(question or "", _KNOWN_VOCAB)
@@ -471,9 +607,10 @@ def rag_answer(question: str, filters: Dict, stories: List):
             "default_mode": "narrative",
         }
 
-    # Rank top 3
+    # Rank top 3 with client diversity
     try:
-        ranked = [x for x in pool if isinstance(x, dict)][:3] or (
+        candidates = [x for x in pool if isinstance(x, dict)]
+        ranked = diversify_results(candidates) or (
             pool[:1] if pool else []
         )
         if DEBUG and ranked:

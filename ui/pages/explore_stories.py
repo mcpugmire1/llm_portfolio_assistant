@@ -497,18 +497,6 @@ def render_explore_stories(
     - Pill X buttons work correctly
     - Clear all resets everything properly
     """
-    # Clear Ask MattGPT session state ONLY when first entering from Ask MattGPT
-    # Use a flag to ensure this only happens once per tab switch
-    if st.session_state.get("active_tab") == "Explore Stories":
-        if st.session_state.get("_just_switched_to_explore"):
-            # Clear the story selection from Ask MattGPT
-            if 'active_story' in st.session_state:
-                del st.session_state['active_story']
-            if 'active_story_obj' in st.session_state:
-                del st.session_state['active_story_obj']
-            # Clear the flag so this doesn't run again
-            del st.session_state["_just_switched_to_explore"]
-
     # Hero header with Agy avatar (gray headphones)
     st.markdown(
         """
@@ -1266,7 +1254,7 @@ def render_explore_stories(
 
             render_pagination(total_results, page_size, offset, "cards")
             detail = get_context_story(stories)
-            render_story_detail(detail, "cards", stories)
+            render_detail_panel(detail, "cards", stories)
 
             # JAVASCRIPT: Force purple button styles for card buttons (same workaround as home page)
             import streamlit.components.v1 as components

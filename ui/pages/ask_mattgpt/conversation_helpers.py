@@ -444,23 +444,8 @@ def _render_ask_transcript(stories: List[Dict]):
                                 key_suffix=f"snap_{i}",
                             )
 
-                    # Action buttons (Helpful/Copy/Share)
-                    st.markdown(
-                        """
-                    <div class="action-buttons">
-                        <button class="action-btn" onclick="this.classList.toggle('helpful-active')">
-                            👍 Helpful
-                        </button>
-                        <button class="action-btn" onclick="navigator.clipboard.writeText(this.closest('.answer-card').innerText); this.textContent='✓ Copied!';">
-                            📋 Copy
-                        </button>
-                        <button class="action-btn" onclick="alert('Share functionality coming soon!')">
-                            🔗 Share
-                        </button>
-                    </div>
-                    """,
-                        unsafe_allow_html=True,
-                    )
+                # Action buttons (Helpful/Copy/Share) - HIDDEN for Streamlit version
+                # TODO: Re-enable for React version
 
                 st.markdown('</div>', unsafe_allow_html=True)
             continue
@@ -496,7 +481,7 @@ def _render_ask_transcript(stories: List[Dict]):
                     st.markdown(
                         f'''
                     <div class="sources-tight">
-                        <div class="source-links-title">📚 RELATED PROJECTS ({len(sources[:3])} found)</div>
+                        <div class="source-links-title">📚 RELATED PROJECTS</div>
                     </div>
                     ''',
                         unsafe_allow_html=True,
@@ -578,23 +563,9 @@ def _render_ask_transcript(stories: List[Dict]):
                             st.markdown("<div style='margin-top: 16px;'></div>", unsafe_allow_html=True)
                             render_story_detail(story_obj, f"transcript_expanded_{i}", stories)
 
-                # Action buttons (wireframe style)
-                st.markdown(
-                    '''
-                <div class="action-buttons">
-                    <button class="action-btn" onclick="this.classList.toggle('helpful-active')">
-                        👍 Helpful
-                    </button>
-                    <button class="action-btn" onclick="navigator.clipboard.writeText(this.closest('[data-testid=stChatMessage]').innerText); this.textContent='✓ Copied!'; setTimeout(() => this.textContent='📋 Copy', 2000);">
-                        📋 Copy
-                    </button>
-                    <button class="action-btn" onclick="alert('Share functionality coming soon!')">
-                        🔗 Share
-                    </button>
-                </div>
-                ''',
-                    unsafe_allow_html=True,
-                )
+                # Action buttons (wireframe style) - HIDDEN for Streamlit version
+                # TODO: Re-enable for React version
+                
             continue
 
         # Default chat bubble (user/assistant text)

@@ -116,12 +116,8 @@ def _format_nested_bullet(text: str) -> str:
 def on_ask_this_story(detail: dict):
     """
     Handle 'Ask Agy About This' button.
-
-    Behavior:
-    - From Explore Stories: Navigate to Ask MattGPT conversation view with pre-filled input
-    - From Ask MattGPT: Close expander and pre-fill input for new question
+    Sets up seed prompt for chip injection flow.
     """
-    # Detect current context
     current_tab = st.session_state.get("active_tab", "")
     is_in_ask_mattgpt = current_tab == "Ask MattGPT"
 
@@ -133,21 +129,15 @@ def on_ask_this_story(detail: dict):
     st.session_state["__ctx_locked__"] = True
 
     if is_in_ask_mattgpt:
-        # CASE A: Already in Ask MattGPT - close expander and pre-fill
-        st.session_state["live_source_expanded"] = None           # Close live answer expander
-        st.session_state["live_source_expanded_id"] = None        # Clear live expander ID
-        st.session_state["transcript_source_expanded"] = None     # Close transcript expanders
-        st.session_state["transcript_source_expanded_id"] = None  # Clear transcript expander ID
-        st.session_state["transcript_source_expanded_msg"] = None # Clear transcript message index
-        st.session_state["ask_input"] = prompt                    # Pre-fill the input
-        # Don't change tabs, stay in conversation
+        # Close any open expanders
+        st.session_state["live_source_expanded"] = None
+        st.session_state["live_source_expanded_id"] = None
+        st.session_state["transcript_source_expanded"] = None
+        st.session_state["transcript_source_expanded_id"] = None
+        st.session_state["transcript_source_expanded_msg"] = None
     else:
-        # CASE B: From Explore Stories - navigate to Ask MattGPT conversation view
+        # Navigate to Ask MattGPT
         st.session_state["active_tab"] = "Ask MattGPT"
-        st.session_state["show_ask_panel"] = True       # Force conversation view (not landing)
-        st.session_state["ask_input"] = prompt          # Pre-fill the input
-        st.session_state["__ask_from_suggestion__"] = True  # Signal this is from suggestion
-        st.session_state["show_transition_indicator"] = True  # Show thinking indicator at bottom during transition
 
     st.rerun()
 

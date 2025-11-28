@@ -33,11 +33,11 @@ from utils.ui_helpers import safe_container, dbg
 
 # Import extracted helpers from Phase 5.1
 from ui.pages.ask_mattgpt.conversation_helpers import (
-    render_compact_context_banner,
     set_answer,
     _render_ask_transcript,
 )
-from ui.pages.ask_mattgpt.styles import get_conversation_css, get_loading_animation_css
+from ui.pages.ask_mattgpt.styles import get_landing_css, get_loading_animation_css, get_conversation_css
+from ui.components.thinking_indicator import render_thinking_indicator
 
 # Environment variables for debugging
 try:
@@ -67,23 +67,53 @@ def render_conversation_view(stories: List[Dict]):
     st.markdown(get_conversation_css(), unsafe_allow_html=True)
 
     # ============================================================================
+    # INJECT JAVASCRIPT to force input styling (Streamlit emotion classes workaround)
+    # ============================================================================
+    st.markdown("""
+        <script>
+        function forceInputStyling() {
+            const chatInput = document.querySelector('[data-testid="stChatInput"]');
+            if (chatInput) {
+                // Kill borders on everything EXCEPT textarea and button
+                chatInput.querySelectorAll('*').forEach(function(el) {
+                    if (el.tagName !== 'TEXTAREA' && el.tagName !== 'BUTTON') {
+                        el.style.setProperty('border', 'none', 'important');
+                        el.style.setProperty('border-left', 'none', 'important');
+                        el.style.setProperty('box-shadow', 'none', 'important');
+                    }
+                });
+            }
+        }
+
+        setTimeout(forceInputStyling, 100);
+        setTimeout(forceInputStyling, 500);
+        setTimeout(forceInputStyling, 1000);
+
+        const observer = new MutationObserver(() => setTimeout(forceInputStyling, 50));
+        observer.observe(document.body, { childList: true, subtree: true });
+        </script>
+    """, unsafe_allow_html=True)
+
+    # ============================================================================
     # HEADER - Purple gradient with Agy avatar
     # ============================================================================
-
+    
     st.markdown(
         """
-        <div class="conversation-header">
-            <div class="conversation-header-content">
-                <img class="conversation-agy-avatar"
-                     src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png"
-                     width="64" height="64" alt="Agy"/>
-                <div class="conversation-header-text">
+    <div class="ask-header">
+        <div class="header-content" style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 24px;">
+                <img class="header-agy-avatar"
+                    src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png"
+                    alt="Agy"/>
+                <div class="header-text">
                     <h1>Ask MattGPT</h1>
                     <p>Meet Agy 🐾 — Tracking down insights from 20+ years of transformation experience</p>
                 </div>
             </div>
         </div>
-        """,
+    </div>
+    """,
         unsafe_allow_html=True,
     )
 
@@ -413,21 +443,14 @@ def render_conversation_view(stories: List[Dict]):
             )
 
     # ============================================================================
-    # CONTEXT BANNER (if story selected from Explore)
+    # CONTEXT (get story for later use)
     # ============================================================================
 
     ctx = get_context_story(stories)
-    _show_ctx = bool(ctx) and (
-        st.session_state.get("__ctx_locked__") or st.session_state.get("__asked_once__")
-    )
-
-    if _show_ctx and render_compact_context_banner:
-        render_compact_context_banner(stories)
 
     # ============================================================================
     # DEBUG INFO
     # ============================================================================
-
     if DEBUG:
         try:
             _dbg_flags = {
@@ -457,6 +480,9 @@ def render_conversation_view(stories: List[Dict]):
 
     processing_state = st.session_state.get("__processing_chip_injection__")
 
+    print(f"DEBUG CHIP: seed={seed}, injected={injected}, pending={pending}")
+    print(f"DEBUG CHIP: processing_state={processing_state}")
+
     if pending and not processing_state:
         # Step 1: Push user turn and set processing
         _push_user_turn(pending)
@@ -469,19 +495,27 @@ def render_conversation_view(stories: List[Dict]):
             "query": processing_state["query"],
             "step": "processing"
         }
-        st.rerun()
+        st.rerun()  # PUT THIS BACK
 
     elif isinstance(processing_state, dict) and processing_state.get("step") == "processing":
-        # Step 3: Actually process
+        # Step 3: Actually process WITH indicator
         pending_query = processing_state["query"]
+
+        # Show indicator DURING processing
+        indicator_placeholder = st.empty()
+        with indicator_placeholder:
+            render_thinking_indicator()
 
         try:
             resp = send_to_backend(pending_query, {}, ctx, stories)
+            indicator_placeholder.empty()  # Clear indicator
         except Exception as e:
+            indicator_placeholder.empty()
             print(f"DEBUG: send_to_backend failed: {e}")
             _push_assistant_turn(f"Error: {str(e)}")
             st.session_state["__processing_chip_injection__"] = False
             st.rerun()
+
         else:
             if set_answer:
                 set_answer(resp)
@@ -515,32 +549,35 @@ def render_conversation_view(stories: List[Dict]):
             st.rerun()
 
     # ============================================================================
+    # THINKING INDICATOR (check BEFORE rendering transcript)
+    # ============================================================================
+
+    # Get current processing state
+    processing_state = st.session_state.get("__processing_chip_injection__")
+
+    # Check if we're in the middle of processing
+    is_processing = isinstance(processing_state, dict) and processing_state.get("step") in ["pending", "processing"]
+
+    if is_processing:
+        render_thinking_indicator()
+
+    # ============================================================================
     # RENDER TRANSCRIPT
     # ============================================================================
+    # DEBUG - check transcript order
+    if DEBUG:
+        print(f"DEBUG: Transcript order before render:")
+        for i, m in enumerate(st.session_state.get("ask_transcript", [])):
+            msg_type = m.get("type", "text")
+            role = m.get("role", "?")
+            text_preview = str(m.get("text", m.get("query", m.get("answer_md", ""))))[:60]
+            print(f"  [{i}] {role}/{msg_type}: {text_preview}")
 
     if _render_ask_transcript:
         _render_ask_transcript(stories)
     else:
-        # Fallback: simple transcript rendering
+    # Fallback: simple transcript rendering
         st.info("Transcript rendering helper pending extraction (Phase 5.1)")
-
-    # ============================================================================
-    # THINKING INDICATOR
-    # ============================================================================
-
-    show_thinking = isinstance(processing_state, dict) and processing_state.get("step") in ["pending", "processing"]
-
-    if show_thinking:
-        st.markdown(
-            """
-            <div style='position: fixed; bottom: 140px; left: 50%; transform: translateX(-50%);
-                        background: #F3F4F6; padding: 12px 24px; border-radius: 24px;
-                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); z-index: 9999;'>
-                🐾 Tracking down insights...
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
 
     # ============================================================================
     # CHAT INPUT HANDLER
@@ -549,6 +586,12 @@ def render_conversation_view(stories: List[Dict]):
     user_input_local = None
     if st.session_state.get("active_tab") == "Ask MattGPT":
         user_input_local = st.chat_input("💬 Ask a follow-up question...", key="ask_chat_input1")
+
+        # Add "Powered by" text below input
+        st.markdown(
+            '<div class="conversation-powered-by">Powered by OpenAI GPT-4o-mini with semantic search across 120+ project case studies</div>',
+            unsafe_allow_html=True
+        )
 
     if user_input_local:
         # Push user turn
@@ -609,11 +652,7 @@ def render_conversation_view(stories: List[Dict]):
         # Show loading indicator
         loading_container = st.empty()
         with loading_container:
-            with st.chat_message(
-                "assistant",
-                avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/svg/agy_icon_color.svg",
-            ):
-                st.markdown("🐾 Tracking down insights...")
+            render_thinking_indicator()
 
         try:
             st.session_state.pop("__ask_from_suggestion__", None)

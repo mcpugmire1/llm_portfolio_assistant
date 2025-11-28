@@ -40,11 +40,16 @@ def render_ask_mattgpt(stories: List[Dict]):
     # Initialize session state
     init_ask_mattgpt_state()
 
-    # Determine which view to show
-    # Show landing if:
-    # 1. No transcript exists, OR
-    # 2. Transcript is empty or only has bootstrap message
-    show_landing = is_empty_conversation()
+    # Force conversation view if:
+    # 1. show_ask_panel flag is set (from Explore Stories)
+    # 2. seed_prompt is pending (from story detail)
+    # 3. Transcript has actual messages
+    force_conversation = (
+        st.session_state.get("show_ask_panel") or 
+        st.session_state.get("seed_prompt") or
+        not is_empty_conversation()
+    )
+    show_landing = not force_conversation
 
     # Route to appropriate view
     if show_landing:

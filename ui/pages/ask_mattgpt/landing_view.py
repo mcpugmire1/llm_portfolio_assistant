@@ -13,7 +13,8 @@ import streamlit as st
 from typing import List, Dict
 
 from ui.pages.ask_mattgpt.backend_service import send_to_backend
-from ui.pages.ask_mattgpt.styles import get_landing_css, get_loading_animation_css
+from ui.pages.ask_mattgpt.styles import get_landing_css
+from ui.components.thinking_indicator import render_thinking_indicator
 
 
 def render_landing_page(stories: List[Dict]):
@@ -70,110 +71,80 @@ def render_landing_page(stories: List[Dict]):
         unsafe_allow_html=True,
     )
 
-    # === MAIN INTRO SECTION ===
-    st.markdown(
-        """
-    <div class="main-intro-section">
-        <div class="main-avatar">
-            <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png" alt="Agy"/>
-        </div>
-        <h2 class="welcome-title">Hi, I'm Agy 🐾</h2>
-        <p class="intro-text-primary">
-            I'm a Plott Hound — a breed known for tracking skills and determination.
-            Perfect traits for helping you hunt down insights from Matt's 120+ transformation projects.
-        </p>
-        <p class="intro-text-secondary">
-            Ask me about specific methodologies, leadership approaches, or project outcomes.
-            I understand context, not just keywords.
-        </p>
-    </div>
-    """,
-        unsafe_allow_html=True,
-    )
+    with st.container(key="intro_section"):
 
-    # Placeholder for loading message - positioned before "TRY ASKING" section
+        # === MAIN INTRO SECTION ===
+        st.markdown(
+            """
+        <div class="main-intro-section">
+            <div class="main-avatar">
+                <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png" alt="Agy"/>
+            </div>
+            <h2 class="welcome-title">Hi, I'm Agy 🐾</h2>
+            <p class="intro-text-primary">
+                I'm a Plott Hound — a breed known for tracking skills and determination.
+                Perfect traits for helping you hunt down insights from Matt's 120+ transformation projects.
+            </p>
+            <p class="intro-text-secondary">
+                Ask me about specific methodologies, leadership approaches, or project outcomes.
+                I understand context, not just keywords.
+            </p>
+        </div>
+        """,
+            unsafe_allow_html=True,
+        )
+
+        st.markdown(
+            '<div class="suggested-title">TRY ASKING:</div>', unsafe_allow_html=True
+        )
+
+        # === SUGGESTED QUESTION BUTTONS ===
+        qs = [
+            ("🚀", "How did Matt transform global payments at scale?"),
+            ("🏥", "Show me Matt's GenAI work in healthcare"),
+            ("💡", "Track down Matt's innovation leadership stories"),
+            ("👥", "How did Matt scale agile across 150+ people?"),
+            ("⚡", "Find Matt's platform engineering projects"),
+            ("🎯", "Show me how Matt handles stakeholders"),
+        ]
+
+        c1, c2 = st.columns(2, gap="small")
+
+        # Disable all buttons when any is processing
+        disabled = st.session_state.get("processing_suggestion", False)
+
+        for i, (icon, q) in enumerate(qs):
+            with c1 if i % 2 == 0 else c2:
+                if st.button(
+                    f"{icon}  {q}",
+                    key=f"suggested_{i}",
+                    type="secondary",
+                    use_container_width=True,
+                    disabled=disabled,
+                ):
+                    # Set state and trigger rerun to show loading state
+                    # NOTE: Don't set "landing_input" - it's controlled by the widget
+                    st.session_state["ask_transcript"] = []
+                    st.session_state["processing_suggestion"] = True
+                    st.session_state["pending_query"] = q
+                    st.session_state["ask_input_value"] = q
+                    st.session_state["__ask_force_answer__"] = True  # 🔥 BYPASS NONSENSE FILTER
+                    st.rerun()
+                    
+    # === THINKING INDICATOR ===
     loading_placeholder = st.empty()
 
-    # Show loading immediately if processing
     if st.session_state.get("processing_suggestion"):
         with loading_placeholder:
-            st.markdown(
-                """
-<style>
-/* Disable text input during processing */
-div[data-testid="stTextInput"] input {
-    opacity: 0.5 !important;
-    pointer-events: none !important;
-    cursor: not-allowed !important;
-    background: #F3F4F6 !important;
-}
-@keyframes chaseAnimationEarly {
-    0% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
-    33.33% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_2.png'); }
-    66.66% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_3.png'); }
-    100% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
-}
-.thinking-ball-early {
-    width: 48px;
-    height: 48px;
-    animation: chaseAnimationEarly 0.9s steps(3) infinite;
-}
-</style>
-<div style='background: transparent;
-            padding: 16px 0;
-            margin: 20px 0;
-            display: flex;
-            align-items: center;
-            gap: 12px;'>
-    <img class="thinking-ball-early" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png" alt="Thinking"/>
-    <div style='color: #2C363D; font-weight: 500;'>🐾 Tracking down insights...</div>
-</div>
-""",
-                unsafe_allow_html=True,
-            )
+            render_thinking_indicator()
 
-    st.markdown(
-        '<div class="suggested-title">TRY ASKING:</div>', unsafe_allow_html=True
-    )
-
-    # === SUGGESTED QUESTION BUTTONS ===
-    qs = [
-        ("🚀", "How did Matt transform global payments at scale?"),
-        ("🏥", "Show me Matt's GenAI work in healthcare"),
-        ("💡", "Track down Matt's innovation leadership stories"),
-        ("👥", "How did Matt scale agile across 150+ people?"),
-        ("⚡", "Find Matt's platform engineering projects"),
-        ("🎯", "Show me how Matt handles stakeholders"),
-    ]
-
-    c1, c2 = st.columns(2, gap="small")
-
-    # Disable all buttons when any is processing
-    disabled = st.session_state.get("processing_suggestion", False)
-
-    for i, (icon, q) in enumerate(qs):
-        with c1 if i % 2 == 0 else c2:
-            if st.button(
-                f"{icon}  {q}",
-                key=f"suggested_{i}",
-                type="secondary",
-                use_container_width=True,
-                disabled=disabled,
-            ):
-                # Set state and trigger rerun to show loading state
-                # NOTE: Don't set "landing_input" - it's controlled by the widget
-                st.session_state["ask_transcript"] = []
-                st.session_state["processing_suggestion"] = True
-                st.session_state["pending_query"] = q
-                st.session_state["ask_input_value"] = q
-                st.session_state["__ask_force_answer__"] = True  # 🔥 BYPASS NONSENSE FILTER
-                st.rerun()
 
     # === INPUT AREA ===
     st.markdown('<div class="landing-input-container">', unsafe_allow_html=True)
 
     # Use columns to keep input and button on same line
-    col_input, col_button = st.columns([6, 1])
+    # col_input, col_button = st.columns([6, 1])
+    col_input, col_button = st.columns([5, 1], gap="small")
 
     # Check if user pressed Enter in the text input (on_change triggers)
     if st.session_state.get("landing_input_submitted"):
@@ -279,7 +250,7 @@ div[data-testid="stTextInput"] input {
 
         # Rerun to show conversation view
         st.rerun()
-
+    
     # === ADD FOOTER ===
     from ui.components.footer import render_footer
 
