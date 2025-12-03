@@ -485,9 +485,6 @@ def render_conversation_view(stories: list[dict]):
 
     processing_state = st.session_state.get("__processing_chip_injection__")
 
-    print(f"DEBUG CHIP: seed={seed}, injected={injected}, pending={pending}")
-    print(f"DEBUG CHIP: processing_state={processing_state}")
-
     if pending and not processing_state:
         # Step 1: Push user turn and set processing
         _push_user_turn(pending)

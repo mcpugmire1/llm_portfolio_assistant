@@ -13,3 +13,15 @@
 {"category":"celebrity_earnings","pattern":"\\b(how much|salary|net worth|earnings|income)\\b.*(celebrity|actor|singer|athlete|madonna|beyonce|musk|bezos|trump)"}
 {"pattern": "favorite (color|food|movie|song|book|animal|sport)", "category": "personal_trivia"}
 {"pattern": "what('s| is) matt('s)? (favorite|least favorite)", "category": "personal_trivia"}
+{"category":"sports","pattern":"\\b(super bowl|world series|world cup|olympics|championship|playoffs|stanley cup|march madness)\\b"}
+{"category":"creative_writing","pattern":"\\b(write|compose|create)\\b.*(poem|story|song|haiku|limerick|essay|fiction)\\b"}
+{"category":"creative_writing","pattern":"\\b(poem|story|haiku|limerick)\\b.*\\b(about|for|regarding)\\b"}
+{"category":"general_knowledge","pattern":"\\b(capital of|president of|who (is|was) the|when (did|was)|what year)\\b"}
+{"category":"general_knowledge","pattern":"\\b(explain|define|what is)\\b.*(quantum|physics|chemistry|biology|calculus|philosophy)\\b"}
+{"category":"recruiter_logistics","pattern":"\\b(where are you (based|located)|what('s| is) your (location|address|city))\\b"}
+{"category":"recruiter_logistics","pattern":"\\b(open to|willing to|consider)\\b.*(relocation|relocate|move|remote)\\b"}
+{"category":"recruiter_logistics","pattern":"\\b(salary|compensation|pay|rate)\\b.*(expectation|requirement|range|target)\\b"}
+{"category":"recruiter_logistics","pattern":"\\b(when|what)\\b.*(can you|could you|available to)\\b.*(start|begin|join)\\b"}
+{"category":"recruiter_logistics","pattern":"\\b(timeline|availability|notice period|start date)\\b"}
+{"category":"cooking_recipes","pattern":"\\b(recipe|how to (cook|make|bake|prepare)|ingredients for)\\b"}
+{"category":"directions_travel","pattern":"\\b(directions to|how (do i|to) get to|route to|distance from)\\b"}

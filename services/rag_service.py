@@ -85,12 +85,19 @@ def semantic_search(
             pass
 
         # Apply UI filters
-        filtered = [
-            h["story"] for h in confident if matches_filters(h["story"], filters)
-        ]
+        filtered = []
+        for h in confident:
+            story = h["story"]
+            story["pc"] = h.get("pc_score") or h.get("score") or 0.0
+            if matches_filters(story, filters):
+                filtered.append(story)
+
         if filtered:
             return filtered
 
+        # Return unfiltered with scores attached
+        for h in confident:
+            h["story"]["pc"] = h.get("pc_score") or h.get("score") or 0.0
         return [h["story"] for h in confident]
 
     # 3) No Pinecone results - enforce overlap if requested

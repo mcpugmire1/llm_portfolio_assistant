@@ -2,9 +2,11 @@
 Story Intelligence - Theme inference and context building for Agy V2
 
 Maps Sub-category to the 6 Themes and builds theme-aware context for RAG.
+Provides theme-specific voice guidance for Agy's response generation.
 """
 
 from collections import Counter
+from typing import Any
 
 # The 6 Themes
 THEME_EXECUTION = "Execution & Delivery"
@@ -57,17 +59,27 @@ SUBCATEGORY_TO_THEME = {
 }
 
 
-def infer_story_theme(story: dict) -> str:
-    """
-    Infer the theme for a story based on Sub-category.
+def infer_story_theme(story: dict[str, Any]) -> str:
+    """Infer the theme for a story based on Sub-category.
 
-    Falls back to explicit Theme field, then Execution & Delivery if not recognized.
+    Uses a three-tier fallback strategy:
+    1. Sub-category lookup in SUBCATEGORY_TO_THEME mapping
+    2. Explicit Theme field (if story was previously enriched)
+    3. Default to Execution & Delivery
 
     Args:
-        story: Story dictionary with metadata
+        story: Story dictionary with metadata. Expected fields:
+            - Sub-category (str): Primary lookup field
+            - Theme (str, optional): Explicit theme override
+            - Other story fields (Title, Client, etc.)
 
     Returns:
-        One of the 6 theme strings
+        One of the 6 canonical theme strings (THEME_* constants).
+
+    Example:
+        >>> story = {"Sub-category": "Platform Engineering", "Client": "JPMC"}
+        >>> infer_story_theme(story)
+        'Execution & Delivery'
     """
     # First try: Sub-category lookup
     sub_category = story.get("Sub-category", "")
@@ -84,16 +96,26 @@ def infer_story_theme(story: dict) -> str:
 
 
 def get_theme_guidance(theme: str) -> str:
-    """
-    Get Agy voice guidance for a specific theme.
+    """Get Agy voice guidance for a specific theme.
 
-    Returns framing instructions for how Agy should talk about this type of story.
+    Provides framing instructions that guide Agy's tone, positioning, and
+    emphasis when discussing stories from this theme. Used in system prompts
+    for _generate_agy_response().
 
     Args:
-        theme: One of the 6 theme strings
+        theme: One of the 6 canonical theme strings (THEME_* constants).
+            Examples: "Execution & Delivery", "Strategic & Advisory", etc.
 
     Returns:
-        Voice guidance text for the system prompt
+        Multi-line voice guidance text formatted for inclusion in system prompts.
+        Includes emphasis points, voice patterns, positioning, proof points,
+        and thematic patterns. Falls back to THEME_EXECUTION guidance if
+        theme is unrecognized.
+
+    Example:
+        >>> guidance = get_theme_guidance("Talent & Enablement")
+        >>> "capability building" in guidance.lower()
+        True
     """
     guidance = {
         THEME_EXECUTION: """🏗️ EXECUTION & DELIVERY stories:
@@ -137,17 +159,41 @@ def get_theme_guidance(theme: str) -> str:
     return guidance.get(theme, guidance[THEME_EXECUTION])
 
 
-def build_story_context_for_rag(story: dict) -> str:
-    """
-    Build theme-aware context for a single story to pass to RAG/Agy.
+def build_story_context_for_rag(story: dict[str, Any]) -> str:
+    """Build theme-aware context for a single story to pass to RAG/Agy.
 
-    Intelligently pulls from BOTH STAR and 5P fields.
+    Intelligently pulls from BOTH STAR (Situation, Task, Action, Result) and
+    5P (Person, Place, Purpose, Performance, Process) fields, using the most
+    complete data available for each section.
 
     Args:
-        story: Story dictionary with all fields
+        story: Story dictionary with all fields. Supports both STAR and 5P schemas:
+            - Title (str): Story title
+            - Client (str): Client name
+            - Role (str): Matt's role on the project
+            - Industry (str): Industry domain
+            - Sub-category (str): Subcategory for theme inference
+            - STAR fields: Situation, Task, Action, Result
+            - 5P fields: Person, Place, Purpose, Performance, Process
+            - 5PSummary/5p_summary (str): Optional summary
 
     Returns:
-        Formatted context string for RAG
+        Multi-line formatted context string with sections:
+        - Header: Title, Theme, Client, Role, Industry, Domain
+        - Summary: 5P summary if available
+        - WHY: Purpose/Situation (what drove this work)
+        - HOW: Process/Action (how it was accomplished)
+        - WHAT: Performance/Result (outcomes achieved)
+        - Additional Context: Person and Place
+
+    Example:
+        >>> story = {"Title": "Platform Modernization", "Client": "JPMC",
+        ...          "Situation": "Legacy system", "Result": "60% faster"}
+        >>> context = build_story_context_for_rag(story)
+        >>> "Platform Modernization" in context
+        True
+        >>> "JPMC" in context
+        True
     """
 
     def get_text(field: str) -> str:
@@ -205,31 +251,52 @@ def get_all_themes() -> list[str]:
     ]
 
 
-def get_theme_distribution(stories: list[dict]) -> dict[str, int]:
-    """
-    Analyze theme distribution across a story collection.
+def get_theme_distribution(stories: list[dict[str, Any]]) -> dict[str, int]:
+    """Analyze theme distribution across a story collection.
 
-    Useful for understanding portfolio coverage.
+    Useful for understanding portfolio coverage, identifying gaps,
+    and validating that stories are distributed across all 6 themes.
 
     Args:
-        stories: List of story dictionaries
+        stories: List of story dictionaries with Sub-category or Theme fields.
 
     Returns:
-        Dictionary mapping theme names to counts
+        Dictionary mapping theme names to occurrence counts.
+        Keys are the 6 canonical theme strings, values are integers.
+
+    Example:
+        >>> stories = [
+        ...     {"Sub-category": "Platform Engineering"},
+        ...     {"Sub-category": "Platform Engineering"},
+        ...     {"Sub-category": "Coaching & Mentorship"},
+        ... ]
+        >>> dist = get_theme_distribution(stories)
+        >>> dist["Execution & Delivery"]
+        2
+        >>> dist["Talent & Enablement"]
+        1
     """
     themes = [infer_story_theme(s) for s in stories]
     return dict(Counter(themes))
 
 
 def get_theme_emoji(theme: str) -> str:
-    """
-    Get emoji representation for a theme.
+    """Get emoji representation for a theme.
+
+    Provides consistent emoji icons for UI display, tags, and navigation.
 
     Args:
-        theme: Theme name
+        theme: One of the 6 canonical theme strings (THEME_* constants).
 
     Returns:
-        Emoji string
+        Single emoji character as string. Falls back to 🏗️ (Execution theme)
+        if theme is unrecognized.
+
+    Example:
+        >>> get_theme_emoji("Talent & Enablement")
+        '👥'
+        >>> get_theme_emoji("Emerging Tech")
+        '🚀'
     """
     emoji_map = {
         THEME_EXECUTION: "🏗️",

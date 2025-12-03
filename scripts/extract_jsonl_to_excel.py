@@ -2,9 +2,9 @@ import json
 
 import pandas as pd
 
-EXCEL_FILE = "MPugmire - STAR Stories - 16JUL25924AM.xlsx"
+EXCEL_FILE = "MPugmire - STAR Stories - 11NOV25_CLEANED.xlsx"
 JSONL_FILE = "echo_star_stories_nlp.jsonl"
-OUTPUT_EXCEL_FILE = "MPugmire - STAR Stories - 16JUL25-NLP-Updated.xlsx"
+OUTPUT_EXCEL_FILE = "MPugmire - STAR Stories - 01DEC25.xlsx"
 SHEET_NAME = "STAR Stories - Interview Ready"
 
 # Load Excel

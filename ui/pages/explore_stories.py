@@ -549,10 +549,10 @@ def render_explore_stories(
 
     .conversation-agy-avatar {
         flex-shrink: 0;
-        width: 64px !important;
-        height: 64px !important;
+        width: 120px !important;
+        height: 120px !important;
         border-radius: 50% !important;
-        border: 3px solid white !important;
+        border: 4px solid white !important;
         box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
     }
 
@@ -1299,7 +1299,7 @@ def render_explore_stories(
 
             render_pagination(total_results, page_size, offset, "cards")
             detail = get_context_story(stories)
-            render_detail_panel(detail, "cards", stories)
+            render_story_detail(detail, "cards", stories)
 
             # JAVASCRIPT: Force purple button styles for card buttons (same workaround as home page)
             import streamlit.components.v1 as components

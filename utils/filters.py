@@ -1,21 +1,61 @@
-"""Story filtering utilities."""
+"""Story filtering utilities.
+
+This module provides comprehensive story filtering functionality supporting
+multiple filter types: industry, capability, client, domain, role, tags,
+metrics, and keyword search with token-based matching.
+"""
+
+from typing import Any
 
 from utils.formatting import story_has_metric
 from utils.validation import _tokenize
 
 
-def matches_filters(s, F=None):
-    """
-    Check if story matches active filters.
+def matches_filters(s: dict[str, Any], F: dict[str, Any] | None = None) -> bool:
+    """Check if story matches all active filters.
 
-    Uses raw JSONL field names (Title-case) since loader no longer transforms data.
+    Applies comprehensive filtering logic including primary filters (industry,
+    capability), advanced filters (client, domain, role, tags, metrics), and
+    keyword search with token-based matching. All active filters must pass
+    (AND logic).
+
+    Filter Types:
+        - industry (str): Single-select industry filter (e.g., "Financial Services")
+        - capability (str): Single-select capability/offering filter
+        - clients (list[str]): Client names to filter (OR logic within list)
+        - domains (list[str]): Sub-category/domain filters (OR logic)
+        - roles (list[str]): Role filters (OR logic)
+        - tags (list[str]): Public tags to match (OR logic, case-insensitive)
+        - has_metric (bool): If True, only stories with quantified metrics
+        - q (str): Keyword search query (token-based ALL match required)
 
     Args:
-        s: Story dict (with raw JSONL fields)
-        F: Filters dict (defaults to st.session_state["filters"])
+        s: Story dictionary with raw JSONL fields (Title-case):
+            - Industry (str): Industry category
+            - Solution / Offering (str): Capability/offering
+            - Client (str): Client name
+            - Sub-category (str): Domain/category
+            - Role (str): Role on project
+            - public_tags (list[str]): Public tags
+            - Title, Purpose, Process, Performance, etc. (for keyword search)
+        F: Filters dictionary. If None, reads from st.session_state["filters"].
+            Defaults to empty dict if not found.
 
     Returns:
-        True if story passes all active filters
+        True if story passes all active filters, False if any filter fails.
+
+    Side Effects:
+        Imports streamlit (only when F is None) to access session state.
+
+    Example:
+        >>> story = {"Industry": "Financial Services", "Client": "JPMC",
+        ...          "Sub-category": "Platform Engineering"}
+        >>> filters = {"industry": "Financial Services", "clients": ["JPMC"]}
+        >>> matches_filters(story, filters)
+        True
+        >>> filters2 = {"industry": "Healthcare"}
+        >>> matches_filters(story, filters2)
+        False
     """
     import streamlit as st
 

@@ -8,12 +8,14 @@ Includes nonsense detection, semantic search orchestration, and Agy response gen
 import csv
 import os
 import re
-from datetime import datetime
+from datetime import UTC, datetime
+from typing import Any
 
 import streamlit as st
 
 from config.debug import DEBUG
 from services.rag_service import semantic_search
+from services.semantic_router import is_portfolio_query_semantic
 from utils.formatting import (
     _format_deep_dive,
     _format_key_points,
@@ -33,17 +35,24 @@ from .story_intelligence import (
 SEARCH_TOP_K = 7
 
 
-def log_offdomain(query: str, reason: str, path: str = "data/offdomain_queries.csv"):
-    """
-    Log off-domain queries for telemetry and analysis.
+def log_offdomain(
+    query: str, reason: str, path: str = "data/offdomain_queries.csv"
+) -> None:
+    """Log off-domain queries for telemetry and analysis.
+
+    Appends rejected queries to a CSV file with timestamp, query text, and
+    rejection reason. Creates the file with headers if it doesn't exist.
 
     Args:
-        query: User query that was detected as off-domain
-        reason: Reason for rejection (e.g., "rule:profanity", "low_overlap")
-        path: Path to CSV log file
+        query: User query that was detected as off-domain.
+        reason: Reason for rejection (e.g., "rule:profanity", "low_overlap", "llm_guard").
+        path: Path to CSV log file. Defaults to "data/offdomain_queries.csv".
+
+    Raises:
+        OSError: If directory creation or file writing fails.
     """
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    row = [datetime.utcnow().isoformat(timespec="seconds"), query, reason]
+    row = [datetime.now(UTC).isoformat(timespec="seconds"), query, reason]
     header = ["ts_utc", "query", "reason"]
     write_header = not os.path.exists(path)
     with open(path, "a", newline="", encoding="utf-8") as f:
@@ -53,15 +62,24 @@ def log_offdomain(query: str, reason: str, path: str = "data/offdomain_queries.c
         w.writerow(row)
 
 
-def build_known_vocab(stories: list[dict]) -> set:
-    """
-    Build vocabulary set from story corpus for overlap detection.
+def build_known_vocab(stories: list[dict[str, Any]]) -> set[str]:
+    """Build vocabulary set from story corpus for overlap detection.
+
+    Extracts tokens from key story fields (Title, Client, Role, Industry,
+    Sub-category) and tags to create a domain vocabulary. Used for
+    token_overlap_ratio calculations to detect off-topic queries.
 
     Args:
-        stories: List of story dictionaries
+        stories: List of story dictionaries from the portfolio.
 
     Returns:
-        Set of lowercase tokens (length >= 3)
+        Set of lowercase tokens with length >= 3 characters.
+
+    Example:
+        >>> stories = [{"Title": "Platform Modernization", "Client": "JPMC"}]
+        >>> vocab = build_known_vocab(stories)
+        >>> "platform" in vocab
+        True
     """
     vocab = set()
     for s in stories:
@@ -78,19 +96,28 @@ def build_known_vocab(stories: list[dict]) -> set:
     return {w for w in vocab if len(w) >= 3}
 
 
-# Add to backend_service.py (after build_known_vocab, around line 70)
-
-
 def is_query_on_topic_llm(query: str) -> bool:
-    """
-    Use LLM to classify if query is about Matt's professional work.
-    Fast, cheap classification guard.
+    """Use LLM to classify if query is about Matt's professional work.
+
+    Fast, cheap classification guard using GPT-4o-mini to detect queries
+    unrelated to professional transformation, product delivery, agile,
+    cloud modernization, leadership, or technology projects.
 
     Args:
-        query: User query string
+        query: User query string to classify.
 
     Returns:
-        True if on-topic, False if off-topic
+        True if on-topic (about Matt's professional work), False if off-topic.
+        Returns True (fail-open) if the LLM API call fails.
+
+    Raises:
+        Exception: Catches all exceptions and fails open (returns True).
+
+    Example:
+        >>> is_query_on_topic_llm("Tell me about agile transformation")
+        True
+        >>> is_query_on_topic_llm("What's the weather today?")
+        False
     """
     try:
         from dotenv import load_dotenv
@@ -109,11 +136,17 @@ def is_query_on_topic_llm(query: str) -> bool:
             messages=[
                 {
                     "role": "user",
-                    "content": f"""Is this query about professional transformation work, digital product delivery, agile/cloud modernization, leadership, innovation programs, or technology projects?
+                    "content": f"""Is this query about professional transformation work, digital product delivery, agile/cloud modernization, leadership, innovation programs, technology projects, OR a behavioral interview question about work experience?
 
-                Query: "{query}"
+                    Behavioral patterns to accept:
+                    - "Tell me about a time..." (conflict, failure, success, challenge)
+                    - "How did you handle..."
+                    - "Give me an example of..."
+                    - "Describe a situation where..."
 
-                Answer ONLY: YES or NO""",
+                    Query: "{query}"
+
+                    Answer ONLY: YES or NO""",
                 }
             ],
             temperature=0,
@@ -130,16 +163,24 @@ def is_query_on_topic_llm(query: str) -> bool:
         return True
 
 
-def _score_story_for_prompt(story: dict, prompt: str) -> float:
-    """
-    Simple keyword-based scoring for fallback ranking.
+def _score_story_for_prompt(story: dict[str, Any], prompt: str) -> float:
+    """Simple keyword-based scoring for fallback ranking.
+
+    Provides a basic relevance score when semantic search fails or needs
+    supplementary ranking. Scores stories based on keyword matches in
+    Title (10pts), Client (8pts), Industry (5pts), and tags (3pts).
 
     Args:
-        story: Story dictionary
-        prompt: User query
+        story: Story dictionary with Title, Client, Industry, public_tags fields.
+        prompt: User query string (lowercased for matching).
 
     Returns:
-        Score (higher is better)
+        Score as float (higher is better, 0.0 if no matches).
+
+    Example:
+        >>> story = {"Title": "JPMC Platform", "Client": "JPMC", "Industry": "Banking"}
+        >>> _score_story_for_prompt(story, "jpmc")
+        18.0  # 10 (title) + 8 (client)
     """
     prompt_lower = prompt.lower()
     score = 0.0
@@ -165,21 +206,34 @@ def _score_story_for_prompt(story: dict, prompt: str) -> float:
 
 
 def _generate_agy_response(
-    question: str, ranked_stories: list[dict], answer_context: str
+    question: str, ranked_stories: list[dict[str, Any]], answer_context: str
 ) -> str:
-    """
-    Generate an Agy-voiced response using OpenAI GPT-4.
+    """Generate an Agy-voiced response using OpenAI GPT-4o-mini.
 
-    Uses the Agy V2 system prompt with Theme-aware framing to create warm,
-    purpose-driven responses that Start With Why.
+    Uses the Agy V2 system prompt with theme-aware framing to create warm,
+    purpose-driven responses that Start With Why. Incorporates story themes
+    from story_intelligence to provide context-appropriate guidance.
 
     Args:
-        question: User's original question
-        ranked_stories: Top 3 relevant stories from semantic search
-        answer_context: Pre-formatted story content (optional fallback)
+        question: User's original question.
+        ranked_stories: Top 3 relevant stories from semantic search (typically
+            from diversify_results).
+        answer_context: Pre-formatted story content used as fallback if
+            OpenAI API call fails.
 
     Returns:
-        Agy-voiced response string with Start With Why narrative structure
+        Agy-voiced response string with Start With Why narrative structure,
+        including 🐾 emoji, human stakes, methodology, outcomes, and principles.
+        Falls back to "{answer_context}" prefixed with 🐾 if API call fails.
+
+    Raises:
+        Exception: Catches all exceptions and returns fallback response.
+
+    Example:
+        >>> stories = [{"Title": "Platform Modernization", "Client": "JPMC", ...}]
+        >>> response = _generate_agy_response("Tell me about platform work", stories, "...")
+        >>> "🐾" in response
+        True
     """
     try:
         from dotenv import load_dotenv
@@ -347,8 +401,36 @@ def _generate_agy_response(
         return f"🐾 Let me show you what I found...\n\n{answer_context}"
 
 
-def diversify_results(stories: list[dict], max_per_client: int = 1) -> list[dict]:
-    """Ensure client variety in top results, avoiding last-used client for primary."""
+def diversify_results(
+    stories: list[dict[str, Any]], max_per_client: int = 1
+) -> list[dict[str, Any]]:
+    """Ensure client variety in top results, avoiding last-used client for primary.
+
+    Implements client diversity by limiting stories per client and avoiding
+    repeating the same client in the #1 position across consecutive queries.
+    Uses st.session_state["_last_primary_client"] for tracking.
+
+    Args:
+        stories: List of candidate stories (typically from semantic_search).
+        max_per_client: Maximum stories per client in results. Defaults to 1.
+
+    Returns:
+        List of up to 3 diversified stories with client variety. Returns
+        stories[:1] if input list is shorter than 3.
+
+    Side Effects:
+        Updates st.session_state["_last_primary_client"] with the Client field
+        from the first result in the returned list.
+
+    Example:
+        >>> stories = [
+        ...     {"id": "1", "Client": "JPMC", "Title": "Story A"},
+        ...     {"id": "2", "Client": "JPMC", "Title": "Story B"},
+        ...     {"id": "3", "Client": "USAA", "Title": "Story C"},
+        ... ]
+        >>> diversify_results(stories)
+        [{"id": "1", "Client": "JPMC", ...}, {"id": "3", "Client": "USAA", ...}]
+    """
 
     # DEBUG
     if DEBUG:
@@ -391,39 +473,76 @@ def diversify_results(stories: list[dict], max_per_client: int = 1) -> list[dict
     return result
 
 
-def send_to_backend(prompt: str, filters: dict, ctx: dict | None, stories: list):
-    """
-    Legacy wrapper for rag_answer.
+def send_to_backend(
+    prompt: str,
+    filters: dict[str, Any],
+    ctx: dict[str, Any] | None,
+    stories: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Legacy wrapper for rag_answer.
+
+    Maintained for backward compatibility. Directly delegates to rag_answer().
 
     Args:
-        prompt: User query
-        filters: Search filters
-        ctx: Context (unused)
-        stories: All stories
+        prompt: User query string.
+        filters: Search filters dictionary (passed to semantic_search).
+        ctx: Context dictionary (unused, kept for API compatibility).
+        stories: Full list of portfolio stories.
 
     Returns:
-        RAG answer dictionary
+        RAG answer dictionary with keys: answer_md, sources, modes, default_mode.
     """
     return rag_answer(prompt, filters, stories)
 
 
-def rag_answer(question: str, filters: dict, stories: list):
-    """
-    Main RAG orchestration function.
+def rag_answer(
+    question: str, filters: dict[str, Any], stories: list[dict[str, Any]]
+) -> dict[str, Any]:
+    """Main RAG (Retrieval-Augmented Generation) orchestration function.
 
-    Handles:
-    - Nonsense detection
-    - Semantic search
-    - Answer generation with Agy V2 voice
-    - Multiple presentation modes
+    Coordinates the full Ask MattGPT pipeline:
+    1. Mode detection (narrative/key_points/deep_dive shortcuts)
+    2. Off-domain query filtering (rules, LLM guard, token overlap)
+    3. Semantic search for relevant stories
+    4. Client diversity ranking
+    5. Agy-voiced response generation with multiple presentation modes
 
     Args:
-        question: User query
-        filters: Search filters
-        stories: All stories
+        question: User query string. Special mode shortcuts:
+            - "narrative" | "key points" | "deep dive" → reformat last results
+        filters: Search filters dictionary passed to semantic_search.
+            Typically includes "q" (query string) and optional facet filters.
+        stories: Full list of portfolio story dictionaries.
 
     Returns:
-        Dictionary with answer_md, sources, modes, default_mode
+        Dictionary with keys:
+            - answer_md (str): Primary response in markdown format
+            - sources (list[dict]): Top 3 stories with id, title, client
+            - modes (dict[str, str]): All 3 presentation modes (narrative,
+              key_points, deep_dive)
+            - default_mode (str): Which mode is shown in answer_md
+
+        Returns empty result if query is rejected:
+            {"answer_md": "", "sources": [], "modes": {}, "default_mode": "narrative"}
+
+    Side Effects:
+        - Updates st.session_state["_known_vocab"] (cached vocabulary)
+        - Updates st.session_state["_last_primary_client"] (via diversify_results)
+        - Updates st.session_state["__last_ranked_sources__"] (story IDs)
+        - Updates st.session_state["__ask_dbg_*"] fields for debug panel
+        - Logs rejected queries to data/offdomain_queries.csv
+
+    Raises:
+        Exception: Catches all exceptions and returns fallback response using
+            keyword-based ranking and 5P summary format.
+
+    Example:
+        >>> filters = {"q": "Tell me about platform modernization"}
+        >>> result = rag_answer("platform modernization", filters, all_stories)
+        >>> result.keys()
+        dict_keys(['answer_md', 'sources', 'modes', 'default_mode'])
+        >>> len(result['sources'])
+        3
     """
     # Check if from suggestion (skip aggressive off-domain gating)
     force_answer = bool(st.session_state.pop("__ask_force_answer__", False))
@@ -506,31 +625,27 @@ def rag_answer(question: str, filters: dict, stories: list):
                 "default_mode": "narrative",
             }
 
-        # Step 2: LLM guard (catches what rules miss)
-        if not from_suggestion:
-            is_on_topic = is_query_on_topic_llm(question or "")
-            if DEBUG:
-                print(f"DEBUG: LLM guard returned is_on_topic={is_on_topic}")
+        # Step 2: Semantic router (embedding-based intent classification)
+        semantic_valid = True
+        semantic_score = 1.0
+        matched_intent = ""
+        intent_family = ""
 
-            if not is_on_topic:
-                log_offdomain(question or "", "llm_guard")
-                st.session_state["ask_last_reason"] = "llm_guard"
-                st.session_state["ask_last_query"] = question or ""
-                st.session_state["ask_last_overlap"] = None
-                st.session_state["__ask_dbg_decision"] = "llm_guard"
-                return {
-                    "answer_md": "",
-                    "sources": [],
-                    "modes": {},
-                    "default_mode": "narrative",
-                }
+        if not from_suggestion:
+            semantic_valid, semantic_score, matched_intent, intent_family = (
+                is_portfolio_query_semantic(question or "")
+            )
+            if DEBUG:
+                print(
+                    f"DEBUG: Semantic router: valid={semantic_valid}, score={semantic_score:.3f}, family={intent_family}"
+                )
 
         # Token overlap check
         overlap = token_overlap_ratio(question or "", _KNOWN_VOCAB)
         if DEBUG:
             dbg(f"ask: overlap={overlap:.2f}")
 
-        # Semantic search
+        # Semantic search (run before rejection to enable search fallback)
         pool = semantic_search(
             question or filters.get("q", ""),
             filters,
@@ -538,13 +653,38 @@ def rag_answer(question: str, filters: dict, stories: list):
             top_k=SEARCH_TOP_K,
         )
 
-        # Low overlap fallback
-        if not pool and (overlap < 0.15) and not from_suggestion:
-            log_offdomain(question or "", f"overlap:{overlap:.2f}")
-            st.session_state["ask_last_reason"] = "low_overlap"
+        # --- Pinecone confidence gate ---
+        # Semantic router is advisory only. We never reject on it.
+        # We ONLY reject if Pinecone has no results or VERY low similarity.
+
+        best_score = 0.0
+        top_keys = []
+
+        if pool:
+            top = pool[0]
+            top_keys = list(top.keys())
+
+            # Try several possible score keys explicitly
+            for key in ["pc_score", "pc", "score", "blend"]:
+                if key in top and top[key] is not None:
+                    try:
+                        best_score = float(top[key])
+                    except (TypeError, ValueError):
+                        best_score = 0.0
+                    break
+
+        if DEBUG:
+            print(f"DEBUG: best_score={best_score:.3f}, top_keys={top_keys}")
+
+        # Reject ONLY if:
+        #  - not from suggestion
+        #  - no results OR best_score is very low
+        if not from_suggestion and (not pool or best_score < 0.12):
+            log_offdomain(question or "", f"low_pinecone:{best_score:.3f}")
+            st.session_state["ask_last_reason"] = "low_confidence"
             st.session_state["ask_last_query"] = question or ""
-            st.session_state["ask_last_overlap"] = overlap
-            st.session_state["__ask_dbg_decision"] = f"low_overlap:{overlap:.2f}"
+            st.session_state["ask_last_overlap"] = locals().get("overlap", None)
+            st.session_state["__ask_dbg_decision"] = f"pinecone_reject:{best_score:.3f}"
             return {
                 "answer_md": "",
                 "sources": [],

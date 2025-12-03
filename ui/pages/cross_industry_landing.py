@@ -76,10 +76,10 @@ def render_cross_industry_landing():
 
     .conversation-agy-avatar {
         flex-shrink: 0;
-        width: 64px !important;
-        height: 64px !important;
+        width: 120px !important;
+        height: 120px !important;
         border-radius: 50% !important;
-        border: 3px solid white !important;
+        border: 4px solid white !important;
         box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
     }
 

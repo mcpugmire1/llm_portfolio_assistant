@@ -32,8 +32,8 @@ from ui.styles.global_styles import apply_global_styles
 load_dotenv()
 
 st.set_page_config(
-    page_title="Matt Pugmire | Director of Technology Delivery | Digital Transformation Leader",
-    page_icon="🤖",
+    page_title="MattGPT | Matt Pugmire",
+    page_icon="🐾",
     layout="wide",
     initial_sidebar_state="collapsed",  # Hide sidebar - we use top navbar instead
 )

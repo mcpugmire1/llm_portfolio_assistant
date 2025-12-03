@@ -129,6 +129,9 @@ def on_ask_this_story(detail: dict):
     prompt = f"Tell me more about: {detail.get('Title', 'this project')}"
     st.session_state["seed_prompt"] = prompt
     st.session_state["__ctx_locked__"] = True
+    st.session_state["__ask_from_suggestion__"] = (
+        True  # <-- ADD to prevent nonsense logic from misfiring
+    )
 
     if is_in_ask_mattgpt:
         # Close any open expanders
