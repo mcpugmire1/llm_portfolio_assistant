@@ -215,3 +215,37 @@ Sports:
 2025-11-26T12:25:06,What's Bitcoin trading at?,llm_guard
 2025-11-26T12:25:21,How do I make sourdough bread?,llm_guard
 2025-11-26T15:25:48,seeee,llm_guard
+2025-11-28T13:31:03,Tell me about payments,llm_guard
+2025-11-28T13:31:34,Tell me about payments,llm_guard
+2025-11-28T13:32:03,Tell me about payments,llm_guard
+2025-11-28T13:37:36,Tell me about payments,llm_guard
+2025-11-28T13:38:06,Tell me about payments,llm_guard
+2025-11-28T13:39:57+00:00,Tell me about payments,llm_guard
+2025-11-28T13:40:27+00:00,Tell me about payments,llm_guard
+2025-11-28T14:24:06+00:00,Tell me about payments,llm_guard
+2025-11-28T14:24:17+00:00,Tell me about payments,llm_guard
+2025-11-28T14:57:42+00:00,Tell me about payments,llm_guard
+2025-11-28T21:15:33+00:00,Tell me about payments,llm_guard
+2025-11-28T21:36:21+00:00,Tell me about payments,llm_guard
+2025-11-28T21:48:45+00:00,Tell me about Matt's background,llm_guard
+2025-11-28T21:50:50+00:00,Tell me about payments,llm_guard
+2025-11-28T21:51:01+00:00,Tell me about payments,llm_guard
+2025-11-28T21:51:19+00:00,Tell me about a time you failed,llm_guard
+2025-11-28T21:51:50+00:00,Tell me about a time you disagreed with leadership,llm_guard
+2025-11-29T19:21:22+00:00,Tell me about Matt’s background and leadership journey,llm_guard
+2025-11-29T19:22:03+00:00,How does Matt ensure teams deliver faster and with higher quality?,llm_guard
+2025-11-29T19:23:05+00:00,What is Matt’s experience with modern engineering and cloud platforms?,llm_guard
+2025-11-29T21:15:27+00:00,Tell me about payments,llm_guard
+2025-11-29T21:18:49+00:00,Tell me about payments,llm_guard
+2025-11-29T21:55:47+00:00,What's the weather in Atlanta?,rule:weather
+2025-11-29T22:59:13+00:00,What's the weather in Atlanta?,rule:weather
+2025-11-29T23:30:30+00:00,What's the weather in Atlanta?,rule:weather
+2025-11-29T23:30:49+00:00,Who won the Super Bowl?,rule:sports
+2025-11-29T23:31:02+00:00,Write me a poem about cats,rule:creative_writing
+2025-12-02T21:49:52+00:00,Tell me more about: Helping fast track clients with solutions to keep them competitive,semantic:0.500
+2025-12-03T15:18:03+00:00,norfolk southern,semantic:0.142
+2025-12-03T15:18:25+00:00,tell me about experience with norfolk southern,semantic:0.315
+2025-12-03T18:01:28+00:00,Norfolk Southern,low_pinecone:0.000
+2025-12-03T18:17:57+00:00,Norfolk Southern,low_pinecone:0.000
+2025-12-03T18:22:21+00:00,What’s the weather in Atlanta?,rule:weather
+2025-12-03T18:23:06+00:00,Write me a poem about cats,rule:creative_writing
