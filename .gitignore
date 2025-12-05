@@ -2,45 +2,44 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyc
+*.pyo
+*.pyd
 
 # Virtual environment
 venv/
 .env
+.env.*
 
 # FAISS and vector indexes
 faiss_index/
 vectorstore/
 
-# VSCode and macOS system files
+# OS files
 .vscode/
-.DS_Storellm_portfolio_assistant_backup.zip
-
-
-# Ignore Mac system files
 .DS_Store
 
-# Ignore Python cache and venv
-__pycache__/
-*.py[cod]
-*.egg-info/
-venv/
+# Coverage reports
+.coverage
+htmlcov/
 
-# Ignore dotenv and backups
-.env
-.env.*
+# Python egg info
+*.egg-info/
+
+# Dotenv and backups
 *.backup
 
-# Ignore Excel/JSON backup or raw data files
+# Excel/JSON backup or raw data files
 *.xlsx
 *backup*.jsonl
 *pretty.json
 star_stories_no_content.jsonl
 count_faiss_file
 
-# Ignore scratch files (but allow tests/ directory)
+# Scratch files (but allow tests/ directory)
 yourfile_pretty.json
 
-# Ignore local Streamlit config (only if unnecessary to deploy)
+# Local Streamlit config (only if unnecessary to deploy)
 .streamlit/config.toml
 
 # Local development scratch files
@@ -48,23 +47,14 @@ LLM_Portfolio_Asst_theme_tag_map.py
 app_dev.py
 app_dev_car.py
 
-# Ignore backup JSONL files
+# Backup JSONL files
 echo_star_stories.jsonl.bak-*
 
-# Ignore intermediate CSVs
+# Intermediate CSVs
 5P_Batching_Format_-_Agile_Planning.csv
 
-# Ignore archived scripts or legacy code
+# Archived scripts or legacy code
 archive/backend/chat_bak*.py
-app_next.baseline.*.py
-app_next_backup.py
-chip_probe.py
-docs/verify_index.py
-mock_ask_hybrid.py
-mock_ask_view.py
-mockui.py
-search_test.py
-validate_search.py
 app_next.baseline.*.py
 app_next_backup.py
 chip_probe.py
@@ -76,5 +66,9 @@ search_test.py
 validate_search.py
 backend/chat_bak*.py
 archive/
+
+# Data files that shouldn't be tracked
+data/offdomain_queries.csv
+
+# Exceptions - keep these files
 !echo_star_stories_nlp.jsonl
-!data/offdomain_queries.csvdata/offdomain_queries.csv
