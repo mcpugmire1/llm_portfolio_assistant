@@ -1,9 +1,9 @@
+import json
+import os
 import subprocess
+from pathlib import Path
 
 import streamlit as st
-import json
-from pathlib import Path
-import os
 from dotenv import load_dotenv
 from openai import OpenAI
 
@@ -16,7 +16,7 @@ except Exception as e:
         return q  # fallback: pass-through if import hiccups
 
 
-from vector_search import embed_query, search, rerank_by_metadata
+from vector_search import embed_query, rerank_by_metadata, search
 
 FAISS_INDEX_PATH = Path("faiss_index/index.faiss")
 
@@ -58,7 +58,6 @@ VECTOR_BACKEND = os.getenv("VECTOR_BACKEND", "faiss").lower()
 print(f"[INFO] Using vector backend: {VECTOR_BACKEND.upper()}")
 
 if VECTOR_BACKEND == "pinecone":
-
     # from pinecone import Pinecone
     from pinecone import Pinecone  # 0.8.x+
 
@@ -73,12 +72,11 @@ if VECTOR_BACKEND == "pinecone":
 
 else:
     import faiss
-    import numpy as np
 
     ensure_faiss_index()  # ← NEW LINE
 
     index = faiss.read_index("faiss_index/index.faiss")
-    with open("faiss_index/story_metadata.json", "r") as f:
+    with open("faiss_index/story_metadata.json") as f:
         metadata = json.load(f)
 
 
@@ -86,7 +84,7 @@ else:
 # Utility Functions
 # -------------------
 def load_star_stories(file_path):
-    with open(file_path, "r", encoding="utf-8") as f:
+    with open(file_path, encoding="utf-8") as f:
         return [json.loads(line.strip()) for line in f.readlines()]
 
 
@@ -141,7 +139,7 @@ st.markdown(
     """
 Welcome to **MattGPT** – my interactive portfolio assistant.
 
-Use this tool to explore my career stories, technical projects, and leadership experiences.  
+Use this tool to explore my career stories, technical projects, and leadership experiences.
 Ask a question like “Tell me about a time you led a global delivery” or browse by category.
 
 This app was built using **OpenAI + Pinecone** to showcase my experience in a conversational, AI-powered format.
@@ -155,32 +153,32 @@ This app was built using **OpenAI + Pinecone** to showcase my experience in a co
 with st.expander("👋 About Matt"):
     st.markdown(
         """
-Digital transformation isn’t just about shipping code faster — it’s about building the right thing, the right way, with the right people. I help tech leaders modernize legacy platforms and launch innovative, 
+Digital transformation isn’t just about shipping code faster — it’s about building the right thing, the right way, with the right people. I help tech leaders modernize legacy platforms and launch innovative,
 cloud-native products that scale — all while nurturing cross-functional teams grounded in empathy, authenticity, and purpose.
 
 As a technology leader, I focus on aligning digital strategy with business growth — whether that means accelerating time-to-market, enabling responsible experimentation with GenAI, or scaling modern engineering practices across global teams. I bridge strategy and execution to build secure, scalable platforms designed for change.
 
 With 20+ years at the intersection of platform strategy, product innovation, and cloud modernization, I lead with a builder’s mindset and a coach’s heart. I’ve helped Fortune 500 organizations:
 
-🔹 Architect cloud platforms that fuel innovation and global reach  
-🔹 Shape technology strategy around customer needs and business goals  
-🔹 Advance agility through Lean delivery, DevOps at scale, and automation  
-🔹 Drive product transformation while mentoring high-performing teams  
+🔹 Architect cloud platforms that fuel innovation and global reach
+🔹 Shape technology strategy around customer needs and business goals
+🔹 Advance agility through Lean delivery, DevOps at scale, and automation
+🔹 Drive product transformation while mentoring high-performing teams
 
 Career highlights include launching platforms across 12+ countries, improving operational efficiency by 15%, and accelerating innovation cycles by 4x. My expertise spans platform architecture, GenAI enablement, and modern engineering practices in complex, regulated environments.
 
 My approach blends platform architecture, product thinking, and a deep focus on customer experience — all grounded in empathy, lean practices, and iterative delivery.
 
 If you’re navigating legacy constraints, siloed teams, or the pressure to modernize, let’s talk. I’m exploring Director or VP-level roles where I can shape platform strategy, enterprise modernization, and AI-enabled delivery.
-                
-**Matt Pugmire**  
+
+**Matt Pugmire**
 Technology & Transformation Leader | Platform Strategy | AI-Enabled Product Innovation | Driving Cloud-Native Transformation
 
 ---
 
-**Contact**  
-📧 [mcpugmire@gmail.com](mailto:mcpugmire@gmail.com)  
-🔗 [linkedin.com/in/matt-pugmire](https://www.linkedin.com/in/matt-pugmire)    
+**Contact**
+📧 [mcpugmire@gmail.com](mailto:mcpugmire@gmail.com)
+🔗 [linkedin.com/in/matt-pugmire](https://www.linkedin.com/in/matt-pugmire)
 """,
         unsafe_allow_html=True,
     )
@@ -190,9 +188,9 @@ with st.expander("🤖 How does MattGPT work?"):
         """
 **MattGPT uses Retrieval-Augmented Generation (RAG) with semantic search** — meaning it understands the intent behind your question and retrieves real examples from my experience to answer it.
 
-This means:  
-✅ Real experiences from my work inform each response  
-📘 Relevant career stories are retrieved based on intent  
+This means:
+✅ Real experiences from my work inform each response
+📘 Relevant career stories are retrieved based on intent
 🏗️ Mirrors the enterprise-grade GenAI tools I’ve helped architect
 
 Ask anything — from leading Agile transformations to modernizing global payments platforms.
@@ -238,7 +236,7 @@ st.markdown(
     transition: background-color 0.2s ease;
     white-space: normal !important;
     word-break: break-word !important;
-    max-width: 100% !important;        
+    max-width: 100% !important;
 }
 .sample-question-btn:hover, button[data-testid^="sample_question_"]:hover {
     background-color: #1e6fd6 !important;
@@ -419,7 +417,7 @@ if user_query:
                     messages=[
                         {
                             "role": "system",
-                            "content": f"""You are Matt Pugmire, a seasoned technology leader. Always respond in first person using confident, conversational language drawn from your real STAR experiences.
+                            "content": """You are Matt Pugmire, a seasoned technology leader. Always respond in first person using confident, conversational language drawn from your real STAR experiences.
         Answer the user's question clearly and concisely by focusing on:
         - The problem or opportunity
         - The actions you took (product, people, or process)

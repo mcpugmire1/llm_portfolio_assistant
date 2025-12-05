@@ -4,11 +4,12 @@ Preserves the 'Person' field as-is and outputs results in markdown format.
 Only processes rows where '5P Retrofit Status' is marked 'Not Started'.
 """
 
-import pandas as pd
-from openai import OpenAI
-import time
-from dotenv import load_dotenv
 import os
+import time
+
+import pandas as pd
+from dotenv import load_dotenv
+from openai import OpenAI
 
 # === Load environment variables and authenticate OpenAI ===
 load_dotenv()

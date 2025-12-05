@@ -6,7 +6,6 @@ Used by both Explore Stories and Ask MattGPT pages.
 """
 
 import streamlit as st
-from streamlit_js_eval import streamlit_js_eval
 
 
 def _format_nested_bullet(text: str) -> str:
@@ -90,7 +89,7 @@ def _format_nested_bullet(text: str) -> str:
 
     # Check for dash patterns: " -" at start of segments (common list pattern)
     # Look for pattern where text has " -" followed by capital letter or common list indicators
-    elif " -" in text and text.count(" -") >= 2:
+    elif " -" in text and text.count(" -") >= 3:
         # Try splitting on " -" (space-dash, may or may not have trailing space)
         import re
 
@@ -113,6 +112,63 @@ def _format_nested_bullet(text: str) -> str:
 
     # No delimiters found, return as plain text
     return text
+
+
+def _render_bullet_list(items: list) -> str:
+    """
+    Render a list of items as HTML bullets, detecting indentation for nesting.
+
+    Handles patterns like:
+    - Parent item:
+      - Child item 1
+      - Child item 2
+    - Another parent item
+    """
+
+    if not items:
+        return ""
+
+    html = '<ul style="margin: 0; padding-left: 20px; list-style-type: disc;">'
+    i = 0
+    while i < len(items):
+        item = items[i]
+        if not item:
+            i += 1
+            continue
+
+        # Check if this item is indented (it's a sub-item that wasn't caught)
+        is_indented = item.startswith("  ")
+
+        # Format the item text
+        formatted = _format_nested_bullet(item.lstrip(" -"))
+
+        # Look ahead: collect any indented sub-items
+        sub_items = []
+        j = i + 1
+        while j < len(items) and items[j] and items[j].startswith("  "):
+            sub_items.append(items[j])
+            j += 1
+
+        if sub_items:
+            # Parent with nested children
+            html += f'<li style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 8px;">{formatted}'
+            html += '<ul style="margin: 8px 0 0 20px; padding-left: 20px; list-style-type: circle;">'
+            for sub in sub_items:
+                sub_formatted = _format_nested_bullet(sub.lstrip(" -"))
+                html += f'<li style="font-size: 13px; color: #555; line-height: 1.6; margin-bottom: 6px;">{sub_formatted}</li>'
+            html += '</ul></li>'
+            i = j  # Skip past the sub-items we just processed
+        elif is_indented:
+            # Orphaned indented item (shouldn't happen, but handle gracefully)
+            html += f'<li style="font-size: 13px; color: #555; line-height: 1.6; margin-bottom: 6px; margin-left: 20px;">{formatted}</li>'
+            i += 1
+        else:
+            # Regular item, no children
+            html += f'<li style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 8px;">{formatted}</li>'
+            i += 1
+
+    html += '</ul>'
+    return html
 
 
 def on_ask_this_story(detail: dict):
@@ -153,7 +209,14 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
     st.markdown(f"<hr style='{hr_style}'>", unsafe_allow_html=True)
 
     if not detail:
-        st.info("Click a row/card above to view details.")
+        st.markdown(
+            """
+            <div style="background: #F3E8FF; border-left: 4px solid #8B5CF6; padding: 12px 16px; margin: 16px 0;">
+                <span style="color: #6B21A8; font-size: 14px;">🐾 Click a row/card above to view details.</span>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
         return
 
     # Extract data
@@ -232,10 +295,84 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
                 help="Export (Print)",
                 use_container_width=True,
             ):
-                st.toast("Print dialog opened. Save as PDF.", icon="ℹ️")
-                streamlit_js_eval(
-                    js_expressions="window.print()", key=f"print_{key_suffix}"
-                )
+                # Format tags
+                tags_html = ', '.join(public_tags[:10]) if public_tags else 'N/A'
+
+                # Format competencies
+                comp_html = ', '.join(competencies) if competencies else 'N/A'
+
+                # Format metrics
+                metrics_list = []
+                for perf in performance:
+                    if perf and ("%" in perf or "x" in perf.lower()):
+                        metrics_list.append(perf)
+                metrics_html = '<br>'.join(metrics_list) if metrics_list else 'N/A'
+
+                # Build printable HTML
+                print_html = f"""
+                <script>
+                    var printWindow = window.open('', '_blank');
+                    printWindow.document.write(`
+                        <!DOCTYPE html>
+                        <html>
+                        <head>
+                            <title>{title}</title>
+                            <style>
+                                body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 40px; max-width: 900px; margin: 0 auto; }}
+                                h1 {{ color: #2c3e50; font-size: 24px; margin-bottom: 8px; }}
+                                .meta {{ color: #7f8c8d; font-size: 14px; margin-bottom: 20px; }}
+                                .summary {{ background: #faf5ff; border-left: 3px solid #8B5CF6; padding: 16px; margin-bottom: 20px; }}
+                                .summary-title {{ color: #8B5CF6; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; }}
+                                .section-title {{ color: #8B5CF6; font-size: 12px; font-weight: 700; text-transform: uppercase; margin: 20px 0 8px 0; }}
+                                .content {{ color: #2c3e50; font-size: 14px; line-height: 1.7; }}
+                                ul {{ padding-left: 20px; }}
+                                li {{ margin-bottom: 8px; }}
+                                .sidebar {{ background: #f8f9fa; padding: 20px; margin-top: 30px; border-radius: 8px; }}
+                                .sidebar-title {{ color: #7f8c8d; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; }}
+                                .sidebar-content {{ color: #555; font-size: 13px; margin-bottom: 16px; }}
+                                .metric {{ background: #fff; border-left: 3px solid #27ae60; padding: 8px 12px; margin-bottom: 8px; }}
+                                .metric-value {{ color: #27ae60; font-size: 18px; font-weight: 700; }}
+                            </style>
+                        </head>
+                        <body>
+                            <h1>{title}</h1>
+                            <div class="meta">🏢 {client} • 🤝 {role} • 📅 {date_range} • 🏷️ {domain}</div>
+
+                            <div class="summary">
+                                <div class="summary-title">💡 WHY THIS MATTERS</div>
+                                <div class="content">{summary_5p or 'N/A'}</div>
+                            </div>
+
+                            <div class="section-title">📍 SITUATION</div>
+                            <div class="content">{'<br>'.join(situation) if situation else 'N/A'}</div>
+
+                            <div class="section-title">🎯 TASK</div>
+                            <div class="content">{'<br>'.join(task) if task else 'N/A'}</div>
+
+                            <div class="section-title">⚡ ACTION</div>
+                            <div class="content"><ul>{''.join(f'<li>{a}</li>' for a in action)}</ul></div>
+
+                            <div class="section-title">🎯 RESULT</div>
+                            <div class="content"><ul>{''.join(f'<li>{r}</li>' for r in result)}</ul></div>
+
+                            <div class="sidebar">
+                                <div class="sidebar-title">Technologies & Practices</div>
+                                <div class="sidebar-content">{tags_html}</div>
+
+                                <div class="sidebar-title">Core Competencies</div>
+                                <div class="sidebar-content">{comp_html}</div>
+
+                                <div class="sidebar-title">Key Metrics</div>
+                                <div class="sidebar-content">{metrics_html}</div>
+                            </div>
+                        </body>
+                        </html>
+                    `);
+                    printWindow.document.close();
+                    printWindow.print();
+                </script>
+                """
+                st.components.v1.html(print_html, height=0)
 
     st.markdown(
         "<hr style='border: none; border-top: 2px solid #e0e0e0; margin: 12px 0 20px 0;'>",
@@ -266,10 +403,20 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
                 '<div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #8B5CF6; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span>📍</span><span>SITUATION</span></div>',
                 unsafe_allow_html=True,
             )
-            for s in situation:
-                if s:
+            if len(situation) > 1:
+                html = (
+                    '<ul style="margin: 0; padding-left: 20px; list-style-type: disc;">'
+                )
+                for s in situation:
+                    if s:
+                        formatted = _format_nested_bullet(s)
+                        html += f'<li style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 8px;">{formatted}</li>'
+                html += '</ul>'
+                st.markdown(html, unsafe_allow_html=True)
+            else:
+                if situation[0]:
                     st.markdown(
-                        f'<p style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 12px;">{s}</p>',
+                        f'<p style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 12px;">{situation[0]}</p>',
                         unsafe_allow_html=True,
                     )
             st.markdown(
@@ -282,9 +429,19 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
                 '<div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #8B5CF6; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span>🎯</span><span>TASK</span></div>',
                 unsafe_allow_html=True,
             )
-            for t in task:
-                if t:
-                    formatted = _format_nested_bullet(t)
+            if len(task) > 1:
+                html = (
+                    '<ul style="margin: 0; padding-left: 20px; list-style-type: disc;">'
+                )
+                for t in task:
+                    if t:
+                        formatted = _format_nested_bullet(t)
+                        html += f'<li style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 8px;">{formatted}</li>'
+                html += '</ul>'
+                st.markdown(html, unsafe_allow_html=True)
+            else:
+                if task[0]:
+                    formatted = _format_nested_bullet(task[0])
                     st.markdown(
                         f'<div style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 12px;">{formatted}</div>',
                         unsafe_allow_html=True,
@@ -299,33 +456,43 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
                 '<div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #8B5CF6; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span>⚡</span><span>ACTION</span></div>',
                 unsafe_allow_html=True,
             )
-            for a in action:
-                if a:
-                    formatted = _format_nested_bullet(a)
-                    # Use div instead of p to avoid nesting issues with nested HTML
+            if len(action) > 1:
+                html = _render_bullet_list(action)
+                st.markdown(html, unsafe_allow_html=True)
+            else:
+                if action[0]:
+                    formatted = _format_nested_bullet(action[0])
                     st.markdown(
                         f'<div style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 12px;">{formatted}</div>',
                         unsafe_allow_html=True,
                     )
-            st.markdown(
-                "<div style='margin-bottom: 24px;'></div>", unsafe_allow_html=True
-            )
 
+        # RESULT
         # RESULT
         if result:
             st.markdown(
                 '<div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #8B5CF6; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span>🎯</span><span>RESULT</span></div>',
                 unsafe_allow_html=True,
             )
-            for r in result:
-                if r:
-                    formatted = _format_nested_bullet(r)
-                    # Use div instead of p to avoid nesting issues with nested HTML
+            if len(result) > 1:
+                # Multiple items - render as bullet list
+                html = (
+                    '<ul style="margin: 0; padding-left: 20px; list-style-type: disc;">'
+                )
+                for r in result:
+                    if r:
+                        formatted = _format_nested_bullet(r)
+                        html += f'<li style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 8px;">{formatted}</li>'
+                html += '</ul>'
+                st.markdown(html, unsafe_allow_html=True)
+            else:
+                # Single item - render as paragraph
+                if result[0]:
+                    formatted = _format_nested_bullet(result[0])
                     st.markdown(
                         f'<div style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 12px;">{formatted}</div>',
                         unsafe_allow_html=True,
                     )
-
     with sidebar_col:
         # TECHNOLOGIES & PRACTICES
         if public_tags:

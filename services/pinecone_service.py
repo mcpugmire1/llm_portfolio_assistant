@@ -4,13 +4,13 @@ import os
 
 import streamlit as st
 from dotenv import load_dotenv
+from openai import OpenAI
 
 from config.debug import DEBUG
 from config.settings import get_conf
 from utils.scoring import _hybrid_score, _keyword_score_for_story
 
 load_dotenv()
-_EMBEDDER = None
 
 # =========================
 # Config / constants
@@ -18,8 +18,8 @@ _EMBEDDER = None
 VECTOR_BACKEND = (get_conf("VECTOR_BACKEND", "faiss") or "faiss").lower()
 OPENAI_API_KEY = get_conf("OPENAI_API_KEY")
 PINECONE_API_KEY = get_conf("PINECONE_API_KEY")
-PINECONE_INDEX_NAME = get_conf("PINECONE_INDEX_NAME")  # no default
-PINECONE_NAMESPACE = get_conf("PINECONE_NAMESPACE")  # no default
+PINECONE_INDEX_NAME = get_conf("PINECONE_INDEX_NAME")
+PINECONE_NAMESPACE = get_conf("PINECONE_NAMESPACE")
 
 PINECONE_ALLOW_CREATE = str(
     get_conf("PINECONE_ALLOW_CREATE", "false")
@@ -52,32 +52,36 @@ if VECTOR_BACKEND == "pinecone":
         pc = Pinecone(api_key=PINECONE_API_KEY)
         pinecone_index = pc.Index(PINECONE_INDEX_NAME)
     except Exception as e:
-        # Do NOT downgrade to FAISS silently; keep backend as pinecone and retry lazily later.
         st.warning(f"Pinecone init failed at startup; will retry lazily. ({e})")
         pinecone_index = None
 
 # =========================
-# Config / constants
+# Embedding config
 # =========================
-PINECONE_MIN_SIM = 0.15  # gentler gate: surface more semantically-close hits
-_DEF_DIM = 384  # stub embedding size to keep demo self-contained
-DATA_FILE = os.getenv("STORIES_JSONL", "echo_star_stories_nlp.jsonl")  # optional
-
-# 🔧 Hybrid score weights (tune these!)
-W_PC = 1.0  # semantic (Pinecone vector match)
-W_KW = 0.0  # keyword/token overlap
-
-# Centralized retrieval pool size for semantic search / Pinecone
-SEARCH_TOP_K = 100  # Increased to capture more industry-specific results
-
+EMBEDDING_MODEL = "text-embedding-3-small"  # OpenAI model
+_DEF_DIM = 1536  # OpenAI text-embedding-3-small dimension
 
 # =========================
-# Safe Pinecone wiring (optional)
+# Search config
+# =========================
+PINECONE_MIN_SIM = 0.15
+DATA_FILE = os.getenv("STORIES_JSONL", "echo_star_stories_nlp.jsonl")
+
+# Hybrid score weights
+W_PC = 1.0
+W_KW = 0.0
+
+# Retrieval pool size
+SEARCH_TOP_K = 100
+
+
+# =========================
+# Safe Pinecone wiring
 # =========================
 try:
-    from pinecone import Pinecone  # type: ignore
+    from pinecone import Pinecone
 except Exception:
-    Pinecone = None  # keeps the app running without Pinecone installed
+    Pinecone = None
 
 _PINECONE_API_KEY = get_conf("PINECONE_API_KEY")
 _PINECONE_INDEX = PINECONE_INDEX_NAME or get_conf("PINECONE_INDEX_NAME")
@@ -86,7 +90,7 @@ _PC_INDEX = None
 
 
 def _init_pinecone():
-    """Lazy init of Pinecone client + index (no-op if unavailable)."""
+    """Lazy init of Pinecone client + index."""
     global _PC, _PC_INDEX
     if _PC_INDEX is not None:
         return _PC_INDEX
@@ -94,33 +98,12 @@ def _init_pinecone():
         return None
     try:
         _PC = Pinecone(api_key=_PINECONE_API_KEY)
-        # Inspect existing indexes (and their dimensions) once
         idx_list = _PC.list_indexes().indexes
         existing = {i.name: i for i in idx_list}
         if _PINECONE_INDEX not in existing:
             if DEBUG:
-                print(
-                    f"DEBUG Pinecone: index '{_PINECONE_INDEX}' missing. allow_create={PINECONE_ALLOW_CREATE or DEBUG}"
-                )
-            if PINECONE_ALLOW_CREATE or DEBUG:
-                _PC.create_index(
-                    name=_PINECONE_INDEX, dimension=_DEF_DIM, metric="cosine"
-                )
-            else:
-                # Do not create in prod unless explicitly allowed
-                return None
-        else:
-            # Validate dimension if available
-            try:
-                dim = getattr(existing[_PINECONE_INDEX], "dimension", None)
-                if dim and int(dim) != int(_DEF_DIM):
-                    if DEBUG:
-                        print(
-                            f"DEBUG Pinecone: index dim mismatch (have={dim}, want={_DEF_DIM}); refusing to use."
-                        )
-                    return None
-            except Exception:
-                pass
+                print(f"DEBUG Pinecone: index '{_PINECONE_INDEX}' missing.")
+            return None
 
         _PC_INDEX = _PC.Index(_PINECONE_INDEX)
         return _PC_INDEX
@@ -133,12 +116,11 @@ def _init_pinecone():
 def _safe_json(obj):
     """Convert Pinecone objects to JSON-serializable dicts."""
     try:
-        # pinecone client may expose one of these:
         if hasattr(obj, "to_dict"):
             return obj.to_dict()
         if hasattr(obj, "model_dump"):
             return obj.model_dump()
-        if hasattr(obj, "dict"):  # pydantic v1
+        if hasattr(obj, "dict"):
             return obj.dict()
     except Exception:
         pass
@@ -165,7 +147,7 @@ def _summarize_index_stats(stats: dict) -> dict:
     return {
         "dimension": int(dims) if dims else None,
         "total_vectors": int(total_vecs),
-        "namespaces": by_ns,  # {"default": 115, "": 0, ...}
+        "namespaces": by_ns,
     }
 
 
@@ -190,9 +172,7 @@ def pinecone_semantic_search(
     try:
         qvec = _embed(query)
         if DEBUG:
-            print(
-                f"DEBUG Embeddings: qvec_dim={len(qvec)}  model=MiniLM({'yes' if _get_embedder() else 'stub'})"
-            )
+            print(f"DEBUG Embeddings: qvec_dim={len(qvec)} model={EMBEDDING_MODEL}")
             print(
                 f"DEBUG Pinecone query → index={_PINECONE_INDEX or PINECONE_INDEX_NAME}, namespace={PINECONE_NAMESPACE}"
             )
@@ -316,61 +296,42 @@ def pinecone_semantic_search(
         return None
 
 
-def _get_embedder():
-    global _EMBEDDER
-    if _EMBEDDER is not None:
-        return _EMBEDDER
-    try:
-        import os
+# =========================
+# OpenAI Embeddings
+# =========================
+_OPENAI_CLIENT = None
 
-        os.environ["TOKENIZERS_PARALLELISM"] = "false"
-        from sentence_transformers import SentenceTransformer  # type: ignore
 
-        _EMBEDDER = SentenceTransformer("all-MiniLM-L6-v2")
-        if DEBUG:
-            print(
-                "DEBUG Embeddings: using SentenceTransformer(all-MiniLM-L6-v2) with normalize_embeddings=True"
-            )
-    except Exception as e:
-        _EMBEDDER = None
-        print(
-            f"WARNING: sentence-transformers not available ({e}); falling back to stub embedder (low quality)"
-        )
-    return _EMBEDDER
+def _get_openai_client():
+    """Lazy init OpenAI client."""
+    global _OPENAI_CLIENT
+    if _OPENAI_CLIENT is None:
+        _OPENAI_CLIENT = OpenAI(api_key=OPENAI_API_KEY)
+    return _OPENAI_CLIENT
 
 
 def _embed(text: str) -> list[float]:
     """
-    Query-time embeddings that MATCH the build script:
-    - Model: all-MiniLM-L6-v2 (384-dim)
-    - Normalization: normalize_embeddings=True
-    Falls back to the old stub only if sentence-transformers is unavailable.
+    Generate query embedding using OpenAI text-embedding-3-small.
+    Must match the model used in build_custom_embeddings.py.
     """
-    model = _get_embedder()
-    if model is not None:
-        try:
-            # sentence-transformers returns a numpy array; ensure list[float]
-            v = model.encode(text or "", normalize_embeddings=True)
-            return [float(x) for x in (v.tolist() if hasattr(v, "tolist") else list(v))]
-        except Exception as e:
-            print(f"WARNING: MiniLM encode failed ({e}); using stub embedding")
-
-    # Fallback: deterministic stub (keeps app running, but scores will be poor)
-    import math
-
-    vec = [0.0] * _DEF_DIM
     if not text:
-        return vec
-    for i, ch in enumerate(text.encode("utf-8")):
-        vec[i % _DEF_DIM] += (ch % 13) / 13.0
-    norm = math.sqrt(sum(v * v for v in vec)) or 1.0
-    return [v / norm for v in vec]
+        return [0.0] * _DEF_DIM
+
+    try:
+        client = _get_openai_client()
+        response = client.embeddings.create(model=EMBEDDING_MODEL, input=text)
+        return response.data[0].embedding
+    except Exception as e:
+        if DEBUG:
+            print(f"DEBUG OpenAI embedding error: {e}")
+        # Return zero vector on error (will result in poor matches but won't crash)
+        return [0.0] * _DEF_DIM
 
 
 def _extract_match_fields(m) -> tuple[str, float, dict]:
     """
     Normalize a Pinecone match object or dict into (sid, score, metadata).
-    Returns (None, 0.0, {}) if fields are missing.
     """
     try:
         if isinstance(m, dict):

@@ -11,7 +11,7 @@ Design specification: https://github.com/mcpugmire1/mattgpt-design-spec
 # Standard library
 import json
 import os
-import re
+from pathlib import Path
 
 import streamlit as st
 
@@ -20,6 +20,7 @@ from dotenv import load_dotenv
 
 # Local imports - utilities
 from config.debug import DEBUG
+from services.rag_service import initialize_vocab
 from ui.components.navbar import render_navbar
 
 # Local imports - components
@@ -91,19 +92,13 @@ if st.session_state.get("active_tab") == "Stories":
 # =========================
 DATA_FILE = os.getenv("STORIES_JSONL", "echo_star_stories_nlp.jsonl")  # optional
 
-from pathlib import Path
-
 
 def _ensure_list(v):
     if v is None:
         return []
     if isinstance(v, list):
-        # trim whitespace bullets
-        return [x.strip(" -\t") for x in v if str(x).strip()]
-    # split on newlines or "•"/"-" bullets
-    text = str(v)
-    parts = re.split(r"\n|•|-  ", text)
-    return [p.strip(" -\t") for p in parts if p and p.strip()]
+        return [x for x in v if str(x).strip()]
+    return [str(v)] if str(v).strip() else []
 
 
 def _split_tags(s):
@@ -126,7 +121,7 @@ def load_star_stories(path: str):
     - Preserves ALL fields from JSONL (including Solution / Offering, Category, Sub-category, etc.)
     - Emit small warnings for visibility.
     """
-    stories = []
+    stories: list[dict] = []
     p = Path(path)
     if not p.exists():
         st.warning(f"Stories file not found: {path!r}. No fallback will be used.")
@@ -191,8 +186,6 @@ if not STORIES:
     st.stop()
 
 # Initialize search vocabulary at startup
-from services.rag_service import initialize_vocab
-
 initialize_vocab(STORIES)
 
 

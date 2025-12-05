@@ -1,4 +1,5 @@
 import os
+
 from dotenv import load_dotenv
 from openai import OpenAI
 
@@ -17,11 +18,7 @@ print(f"Project ID: {project_id}")
 print(f"Org ID: {org_id}")
 
 # Initialize OpenAI client
-client = OpenAI(
-    api_key=api_key,
-    project=project_id,
-    organization=org_id
-)
+client = OpenAI(api_key=api_key, project=project_id, organization=org_id)
 
 # Test listing models
 try:

@@ -249,3 +249,8 @@ Sports:
 2025-12-03T18:17:57+00:00,Norfolk Southern,low_pinecone:0.000
 2025-12-03T18:22:21+00:00,What’s the weather in Atlanta?,rule:weather
 2025-12-03T18:23:06+00:00,Write me a poem about cats,rule:creative_writing
+2025-12-05T18:35:20+00:00,Marshmellow,low_pinecone:0.205
+2025-12-05T18:36:17+00:00,Tell me about Claude Opus 4.5,low_pinecone:0.129
+2025-12-05T18:38:30+00:00,Tell me about a time Matt failed,low_pinecone:0.226
+2025-12-05T19:54:19+00:00,Does matt like to eat marshmellows?,low_pinecone:0.161
+2025-12-05T20:58:28+00:00,Madonna's dance moves?,rule:celebrity

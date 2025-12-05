@@ -1,0 +1,53 @@
+timestamp,query,score,matched_intent,family
+2025-11-29T21:33:27+00:00,Who is Matt?,0.741,Tell me about Matt's background,background
+2025-11-29T21:33:28+00:00,Give me an example of when Matt showed leadership,0.770,Give me an example of leadership,behavioral
+2025-11-29T21:33:29+00:00,Describe a difficult situation Matt handled,0.741,How did Matt handle a challenging project?,behavioral
+2025-11-29T21:33:34+00:00,Tell me about Matt's transformation work,0.764,Tell me about Matt's agile transformation work,agile_transformation
+2025-11-29T21:33:38+00:00,Tell me abot Matts backgroun,0.796,Tell me about Matt's background,background
+2025-11-29T21:33:39+00:00,How did matt handle stakholders?,0.795,Tell me about Matt's stakeholder management,stakeholders
+2025-11-29T21:33:42+00:00,So like what's Matt's experience with cloud stuff?,0.783,What is Matt's experience with modern engineering and cloud platforms?,technical
+2025-11-29T21:35:17+00:00,Who is Matt?,0.741,Tell me about Matt's background,background
+2025-11-29T21:35:19+00:00,Give me an example of when Matt showed leadership,0.770,Give me an example of leadership,behavioral
+2025-11-29T21:35:19+00:00,Describe a difficult situation Matt handled,0.741,How did Matt handle a challenging project?,behavioral
+2025-11-29T21:35:25+00:00,Tell me about Matt's transformation work,0.764,Tell me about Matt's agile transformation work,agile_transformation
+2025-11-29T21:35:29+00:00,Tell me abot Matts backgroun,0.796,Tell me about Matt's background,background
+2025-11-29T21:35:30+00:00,How did matt handle stakholders?,0.795,Tell me about Matt's stakeholder management,stakeholders
+2025-11-29T21:35:34+00:00,So like what's Matt's experience with cloud stuff?,0.783,What is Matt's experience with modern engineering and cloud platforms?,technical
+2025-11-29T21:35:53+00:00,Who is Matt?,0.741,Tell me about Matt's background,background
+2025-11-29T21:35:54+00:00,Give me an example of when Matt showed leadership,0.770,Give me an example of leadership,behavioral
+2025-11-29T21:35:54+00:00,Describe a difficult situation Matt handled,0.741,How did Matt handle a challenging project?,behavioral
+2025-11-29T21:35:59+00:00,Tell me about Matt's transformation work,0.764,Tell me about Matt's agile transformation work,agile_transformation
+2025-11-29T21:36:04+00:00,Tell me abot Matts backgroun,0.796,Tell me about Matt's background,background
+2025-11-29T21:36:05+00:00,How did matt handle stakholders?,0.795,Tell me about Matt's stakeholder management,stakeholders
+2025-11-29T21:36:08+00:00,So like what's Matt's experience with cloud stuff?,0.783,What is Matt's experience with modern engineering and cloud platforms?,technical
+2025-11-29T22:04:11+00:00,How do you work with executives?,0.749,How does Matt work with executives?,stakeholders
+2025-11-29T22:14:00+00:00,How do you lead teams?,0.731,How does Matt lead teams?,leadership
+2025-11-29T22:14:28+00:00,What’s your leadership style?,0.722,What's Matt's leadership style?,leadership
+2025-11-29T22:15:33+00:00,Tell me about a time you had to resolve conflict on your team.,0.765,Tell me about a time Matt resolved team conflict,behavioral
+2025-11-29T23:03:44+00:00,Tell me about a time you handled conflict,0.754,Tell me about a difficult situation you handled,behavioral
+2025-11-29T23:31:14+00:00,Tell me about a time you handled conflict,0.754,Tell me about a difficult situation you handled,behavioral
+2025-12-04T18:44:13+00:00,Who is Matt?,0.741,Tell me about Matt's background,background
+2025-12-04T18:44:17+00:00,Give me an example of when Matt showed leadership,0.770,Give me an example of leadership,behavioral
+2025-12-04T18:44:18+00:00,Describe a difficult situation Matt handled,0.741,How did Matt handle a challenging project?,behavioral
+2025-12-04T18:44:26+00:00,Tell me about Matt's transformation work,0.764,Tell me about Matt's agile transformation work,agile_transformation
+2025-12-04T18:44:32+00:00,Tell me abot Matts backgroun,0.796,Tell me about Matt's background,background
+2025-12-04T18:44:33+00:00,How did matt handle stakholders?,0.795,Tell me about Matt's stakeholder management,stakeholders
+2025-12-04T18:44:38+00:00,So like what's Matt's experience with cloud stuff?,0.783,What is Matt's experience with modern engineering and cloud platforms?,technical
+2025-12-05T18:37:04+00:00,Tell me about Matt's work at JP Morgan,0.747,Show me Matt's work with JPMC,domain_payments
+2025-12-05T21:30:45+00:00,Show me how Matt applied GenAI in enterprise environments,0.786,Show me Matt's GenAI work,technical
+2025-12-05T21:31:17+00:00,What are Matt’s strongest innovation and product leadership stories,0.765,What's Matt's approach to innovation leadership?,innovation
+2025-12-05T21:32:00+00:00,Show me Matt’s cloud-native architecture work,0.760,Tell me about Matt's cloud modernization projects,technical
+2025-12-05T21:34:07+00:00,How does Matt manage stakeholders and drive alignment,0.786,Tell me about Matt's stakeholder management,stakeholders
+2025-12-05T21:43:43+00:00,What are Matt’s strongest innovation and product leadership stories?,0.773,What's Matt's approach to innovation leadership?,innovation
+2025-12-05T21:44:05+00:00,Show me Matt’s cloud-native architecture work,0.760,Tell me about Matt's cloud modernization projects,technical
+2025-12-05T21:44:38+00:00,How does Matt manage stakeholders and drive alignment,0.786,Tell me about Matt's stakeholder management,stakeholders
+2025-12-05T21:59:25+00:00,How does Matt lead enterprise-scale technology transformation,0.725,What's Matt's experience with digital transformation?,agile_transformation
+2025-12-05T22:01:07+00:00,What are Matt’s strongest innovation and product leadership stories?,0.773,What's Matt's approach to innovation leadership?,innovation
+2025-12-05T22:01:31+00:00,Show me Matt’s cloud-native architecture work,0.760,Tell me about Matt's cloud modernization projects,technical
+2025-12-05T22:02:24+00:00,How does Matt manage stakeholders and drive alignment?,0.798,How does Matt handle difficult stakeholders?,stakeholders
+2025-12-05T22:08:17+00:00,"💡 What are Matt’s strongest innovation and product leadership stories?
+",0.744,What's Matt's approach to innovation leadership?,innovation
+2025-12-05T22:08:37+00:00,"🏗️ Show me Matt’s cloud-native architecture work.
+",0.723,Tell me about Matt's cloud modernization projects,technical
+2025-12-05T22:09:42+00:00,🎯 How does Matt manage stakeholders and drive alignment?,0.783,How does Matt handle difficult stakeholders?,stakeholders
+2025-12-05T22:39:05+00:00,How did Matt grow a team from 4 to 150+ engineers,0.747,How did Matt scale teams from 4 to 150+?,team_scaling

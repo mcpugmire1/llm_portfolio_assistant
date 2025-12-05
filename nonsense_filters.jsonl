@@ -25,3 +25,50 @@
 {"category":"recruiter_logistics","pattern":"\\b(timeline|availability|notice period|start date)\\b"}
 {"category":"cooking_recipes","pattern":"\\b(recipe|how to (cook|make|bake|prepare)|ingredients for)\\b"}
 {"category":"directions_travel","pattern":"\\b(directions to|how (do i|to) get to|route to|distance from)\\b"}
+{"category":"celebrity","pattern":"\\b(madonna|beyonce|taylor swift|kardashian|bieber|drake|rihanna|kanye|swift|gaga|cardi|lizzo|doja|ariana|selena gomez|justin bieber|miley|britney|shakira|jlo|jennifer lopez)\\b"}
+{"category":"weather","pattern":"\\b(weather|forecast|temperature|rain|snow|sunny|cloudy|humidity)\\b"}
+{"category":"sports","pattern":"\\b(NBA|NFL|MLB|NHL|Yankees|score|odds|betting|playoffs|championship|super bowl|world series|world cup|march madness|stanley cup)\\b"}
+{"category":"stocks_crypto","pattern":"\\b(stock|stocks|NASDAQ|Dow Jones|BTC|crypto|bitcoin|ethereum|price chart|trading|invest in)\\b"}
+{"category":"personal_sensitive","pattern":"\\b(SSN|social security|passport|driver'?s license|credit card number)\\b"}
+{"category":"retail_price","pattern":"\\b(how much|price|cost|cheapest|deal|discount)\\b.*\\b(walmart|target|amazon|costco|best\\s?buy|ebay)\\b"}
+{"category":"shopping_merch","pattern":"\\b(baseball|cap|caps|hat|jersey|hoodie)\\b.*\\b(price|cost|buy|purchase)\\b"}
+{"category":"random_fun","pattern":"\\b(lottery|horoscope|zodiac|pick-up line|fortune|tarot)\\b"}
+{"category":"internal","pattern":"^DEBUG\\s*•"}
+{"category":"internal","pattern":"^🧪"}
+{"category":"retail_price","pattern":"\\b(how much|what'?s the price|how expensive)\\b.*\\b(store|shop|gift shop|merch)\\b"}
+{"category":"shopping_merch","pattern":"\\b(hat|hats|cap|caps|shirt|hoodie)\\b.*\\b(shop|store|gift shop)\\b"}
+{"category":"retail_price","pattern":"\\b(how much|price|cost)\\b.*\\b(at|from)\\b.*\\b(shop|store|retail|gift)\\b"}
+{"category":"celebrity_earnings","pattern":"\\b(how much|salary|net worth|earnings|income)\\b.*(celebrity|actor|singer|athlete|madonna|beyonce|musk|bezos|trump)"}
+{"category":"personal_trivia","pattern":"favorite (color|food|movie|song|book|animal|sport)"}
+{"category":"personal_trivia","pattern":"what('s| is) matt('s)? (favorite|least favorite)"}
+{"category":"sports","pattern":"\\b(super bowl|world series|world cup|olympics|championship|playoffs|stanley cup|march madness)\\b"}
+{"category":"creative_writing","pattern":"\\b(write|compose|create)\\b.*(poem|story|song|haiku|limerick|essay|fiction)\\b"}
+{"category":"creative_writing","pattern":"\\b(poem|story|haiku|limerick)\\b.*\\b(about|for|regarding)\\b"}
+{"category":"general_knowledge","pattern":"\\b(capital of|president of|who (is|was) the|when (did|was)|what year)\\b"}
+{"category":"general_knowledge","pattern":"\\b(explain|define|what is)\\b.*(quantum|physics|chemistry|biology|calculus|philosophy)\\b"}
+{"category":"recruiter_logistics","pattern":"\\b(where are you (based|located)|what('s| is) your (location|address|city))\\b"}
+{"category":"recruiter_logistics","pattern":"\\b(open to|willing to|consider)\\b.*(relocation|relocate|move|remote)\\b"}
+{"category":"recruiter_logistics","pattern":"\\b(salary|compensation|pay|rate)\\b.*(expectation|requirement|range|target)\\b"}
+{"category":"recruiter_logistics","pattern":"\\b(when|what)\\b.*(can you|could you|available to)\\b.*(start|begin|join)\\b"}
+{"category":"recruiter_logistics","pattern":"\\b(timeline|availability|notice period|start date)\\b"}
+{"category":"cooking_recipes","pattern":"\\b(recipe|how to (cook|make|bake|prepare)|ingredients for)\\b"}
+{"category":"directions_travel","pattern":"\\b(directions to|how (do i|to) get to|route to|distance from)\\b"}
+{"category":"celebrity","pattern":"\\b(madonna|beyonce|taylor swift|kardashian|bieber|drake|rihanna|kanye|lady gaga|cardi b|lizzo|doja cat|ariana grande|selena gomez|justin bieber|miley cyrus|britney spears|shakira|jennifer lopez|brad pitt|angelina jolie|tom cruise|leonardo dicaprio|johnny depp|kim kardashian|kylie jenner|elon musk|jeff bezos|mark zuckerberg)\\b"}
+{"category":"entertainment_gossip","pattern":"\\b(dating|divorce|wedding|pregnant|baby|affair|scandal)\\b.*\\b(celebrity|actor|singer|star)\\b"}
+{"category":"entertainment_gossip","pattern":"\\b(who is .* dating|are .* together|did .* break up)\\b"}
+{"category":"fashion_clothing","pattern":"\\b(what (is|was) .* wearing|outfit|dress|fashion|red carpet|met gala)\\b.*\\b(celebrity|star|actor|singer)\\b"}
+{"category":"medical_diagnosis","pattern":"\\b(do i have|symptoms of|is it|could it be)\\b.*(cancer|diabetes|disease|disorder|infection|syndrome)\\b"}
+{"category":"medical_advice","pattern":"\\b(should i (take|stop taking)|dosage|medicine for|cure for|treatment for)\\b"}
+{"category":"legal_advice","pattern":"\\b(can i sue|is it legal|lawyer for|legal advice|court case)\\b"}
+{"category":"homework","pattern":"\\b(solve|calculate|what is \\d+|equation|math problem|homework help)\\b"}
+{"category":"jokes_riddles","pattern":"\\b(tell me a joke|make me laugh|riddle|knock knock|funny story)\\b"}
+{"category":"dating_relationships","pattern":"\\b(how to (ask out|break up|get over)|relationship advice|dating tips|tinder|bumble)\\b"}
+{"category":"news_current_events","pattern":"\\b(what happened (today|yesterday)|breaking news|latest news|current events)\\b"}
+{"category":"gaming","pattern":"\\b(fortnite|minecraft|call of duty|playstation|xbox|nintendo|gaming|video game cheats)\\b"}
+{"category":"astrology","pattern":"\\b(mercury retrograde|birth chart|rising sign|moon sign|compatibility|aries|taurus|gemini|cancer|leo|virgo|libra|scorpio|sagittarius|capricorn|aquarius|pisces)\\b.*\\b(horoscope|astrology|zodiac)\\b"}
+{"category":"religious_spiritual","pattern":"\\b(bible verse|quran|torah|prayer|god says|what does god|spiritual meaning)\\b"}
+{"category":"adult_content","pattern":"\\b(nsfw|porn|xxx|nude|naked|sex)\\b"}
+{"category":"drugs_illegal","pattern":"\\b(how to (make|buy|get)|where to buy)\\b.*(drugs|cocaine|heroin|meth|weed)\\b"}
+{"category":"weapons","pattern":"\\b(how to (make|build)|where to buy)\\b.*(bomb|gun|weapon|explosive)\\b"}
+{"category":"random_objects","pattern":"\\b(bra|underwear|panties|socks|shoes)\\b.*\\b(celebrity|famous|star)\\b"}
+{"category":"random_objects","pattern":"\\b(madonna|beyonce|taylor)'?s?\\b.*(bra|underwear|dress|outfit|hair|makeup)\\b"}

@@ -1,5 +1,6 @@
-import os
 import json
+import os
+
 from dotenv import load_dotenv
 
 # Load environment variables
@@ -27,7 +28,7 @@ except ImportError:
 # Load stories dataset
 DATA_PATH = os.path.join(os.path.dirname(__file__), "echo_star_stories.jsonl")
 stories = []
-with open(DATA_PATH, "r", encoding="utf-8") as f:
+with open(DATA_PATH, encoding="utf-8") as f:
     for line in f:
         stories.append(json.loads(line))
 
@@ -69,8 +70,8 @@ def search_pinecone(query_embedding, top_k=5, threshold=0.25):
 
 
 def search_faiss(query_embedding, top_k=3):
-    import numpy as np
     import faiss
+    import numpy as np
 
     global corpus_embeddings, corpus_texts
     # Prepare corpus if not already loaded
@@ -90,7 +91,7 @@ def search_faiss(query_embedding, top_k=3):
     query_vec = np.array(query_embedding, dtype="float32").reshape(1, -1)
     D, I = faiss_index.search(query_vec, top_k)
     results = []
-    for score, idx in zip(D[0], I[0]):
+    for score, idx in zip(D[0], I[0], strict=False):
         results.append({"score": float(-score), "idx": int(idx)})
     return results
 
@@ -156,7 +157,6 @@ def main():
 
 def debug_pinecone_index():
     from pinecone import Pinecone
-    import numpy as np
 
     pc = Pinecone(api_key=PINECONE_API_KEY)
     index = pc.Index(PINECONE_INDEX_NAME)

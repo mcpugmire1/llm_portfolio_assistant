@@ -1,9 +1,10 @@
 import os
-import time
-import pandas as pd
-from openai import OpenAI
-from dotenv import load_dotenv
 import re
+import time
+
+import pandas as pd
+from dotenv import load_dotenv
+from openai import OpenAI
 
 load_dotenv()  # ✅ This loads variables from .env into os.environ
 
@@ -48,7 +49,7 @@ def infer_place(client, category):
 # Prompt generator
 def generate_prompt(star_text, place=None):
     note = f'Note: The organization type (Place) is likely "{place}".' if place else ""
-    return f"""You're helping write a short, clear 5P summary from this STAR story. 
+    return f"""You're helping write a short, clear 5P summary from this STAR story.
 Break it into:
 1. Person (the role or title of the person being helped),
 2. Place (type of organization),

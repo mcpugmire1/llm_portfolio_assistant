@@ -1,8 +1,8 @@
 import os
-import json
+
 import pandas as pd
-from openai import OpenAI
 from dotenv import load_dotenv
+from openai import OpenAI
 from tqdm import tqdm
 
 # Load environment variables
@@ -12,11 +12,7 @@ project_id = os.getenv("OPENAI_PROJECT_ID")
 org_id = os.getenv("OPENAI_ORG_ID")
 
 # Initialize OpenAI client
-client = OpenAI(
-    api_key=api_key,
-    project=project_id,
-    organization=org_id
-)
+client = OpenAI(api_key=api_key, project=project_id, organization=org_id)
 
 INPUT_EXCEL = "MPugmire - STAR Stories - 14JUL25.xlsx"
 OUTPUT_EXCEL = "MPugmire - STAR Stories - Tagged.xlsx"
@@ -25,6 +21,7 @@ MODEL = "gpt-3.5-turbo"
 
 # Read Excel file
 df = pd.read_excel(INPUT_EXCEL)
+
 
 # Define function to generate tags using GPT
 def generate_refined_tags(row):
@@ -40,7 +37,7 @@ def generate_refined_tags(row):
         "competencies": row.get("Competencies", ""),
         "solutions": row.get("Solution / Offering", ""),
         "public_tags": row.get("Public Tags", ""),
-        "five_p_summary": row.get("5P Summary", "")
+        "five_p_summary": row.get("5P Summary", ""),
     }
 
     prompt = f"""
@@ -68,14 +65,13 @@ Output only the comma-separated list of refined tags.
 
     try:
         response = client.chat.completions.create(
-            model=MODEL,
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.3
+            model=MODEL, messages=[{"role": "user", "content": prompt}], temperature=0.3
         )
         return response.choices[0].message.content.strip()
     except Exception as e:
         print(f"Error generating tags: {e}")
         return ""
+
 
 # Apply GPT-based tag generation
 tqdm.pandas()

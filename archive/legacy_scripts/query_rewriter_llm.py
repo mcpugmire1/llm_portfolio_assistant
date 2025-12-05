@@ -1,7 +1,6 @@
-import os
 from dotenv import load_dotenv
 from openai import OpenAI
-from tenacity import retry, wait_random_exponential, stop_after_attempt
+from tenacity import retry, stop_after_attempt, wait_random_exponential
 
 # Load environment variables
 load_dotenv()

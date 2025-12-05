@@ -1,10 +1,10 @@
 # search_test.py
 from app_next import (
-    semantic_search,
-    STORIES,
-    token_overlap_ratio,
     _KNOWN_VOCAB,
+    STORIES,
     is_nonsense,
+    semantic_search,
+    token_overlap_ratio,
 )
 
 print(f"Loaded {len(STORIES)} stories")

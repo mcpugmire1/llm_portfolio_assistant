@@ -18,7 +18,7 @@ def run_streamlit_test():
             ["streamlit", "run", "app.py", "--server.headless", "true"],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            text=True
+            text=True,
         )
 
         # Wait for startup
@@ -47,7 +47,7 @@ def check_code_patterns():
 
     issues = []
 
-    with open("app.py", "r") as f:
+    with open("app.py") as f:
         content = f.read()
         lines = content.split("\n")
 
@@ -66,7 +66,9 @@ def check_code_patterns():
     # Check 3: No excessive negative margins
     negative_margin_count = content.count("margin-top: -")
     if negative_margin_count > 3:
-        issues.append(f"Too many negative margins ({negative_margin_count}) - may cause alignment issues")
+        issues.append(
+            f"Too many negative margins ({negative_margin_count}) - may cause alignment issues"
+        )
     else:
         print(f"✅ Negative margin usage acceptable ({negative_margin_count})")
 
@@ -77,7 +79,12 @@ def check_code_patterns():
         issues.append("Selectbox options may be incorrect")
 
     # Check 5: Pagination buttons exist
-    if '"First"' in content and '"Prev"' in content and '"Next"' in content and '"Last"' in content:
+    if (
+        '"First"' in content
+        and '"Prev"' in content
+        and '"Next"' in content
+        and '"Last"' in content
+    ):
         print("✅ Pagination buttons configured")
     else:
         issues.append("Pagination buttons may be missing or misconfigured")

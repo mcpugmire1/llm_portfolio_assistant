@@ -98,12 +98,18 @@ def render_landing_page(stories: list[dict]):
 
         # === SUGGESTED QUESTION BUTTONS ===
         qs = [
-            ("🚀", "How did Matt transform global payments at scale?"),
-            ("🏥", "Show me Matt's GenAI work in healthcare"),
-            ("💡", "Track down Matt's innovation leadership stories"),
-            ("👥", "How did Matt scale agile across 150+ people?"),
-            ("⚡", "Find Matt's platform engineering projects"),
-            ("🎯", "Show me how Matt handles stakeholders"),
+            (
+                "💳",
+                "How did Matt modernize payments across 12+ countries at JP Morgan?",
+            ),
+            ("🔬", "Tell me about Matt's early failure and experimentation approach"),
+            ("🚀", "Tell me about Matt's rapid prototyping work for client products"),
+            (
+                "🏗️",
+                "How did Matt establish and expand the Cloud Innovation Center in Atlanta?",
+            ),
+            ("📈", "How did Matt scale learning and talent development at Accenture?"),
+            ("🤝", "How did Matt align stakeholders across 3 regions at JP Morgan?"),
         ]
 
         c1, c2 = st.columns(2, gap="small")

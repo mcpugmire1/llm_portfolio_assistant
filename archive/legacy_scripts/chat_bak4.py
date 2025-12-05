@@ -1,11 +1,12 @@
-from langchain_openai import OpenAIEmbeddings, ChatOpenAI
-from langchain_community.vectorstores import FAISS
+import json
+import os
+
+from dotenv import load_dotenv
 from langchain.docstore.document import Document
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema.output_parser import StrOutputParser
-from dotenv import load_dotenv
-import os
-import json
+from langchain_community.vectorstores import FAISS
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 
 # Load environment variables
 load_dotenv()

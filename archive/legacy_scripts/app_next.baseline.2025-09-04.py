@@ -5,8 +5,9 @@
 # - Compact List view by default, Card view optional
 # - Badges + strongest-metric summary
 
-import os, re, time, textwrap, json
-from typing import List, Optional
+import json
+import os
+import re
 from urllib.parse import quote_plus
 
 # =========================
@@ -36,9 +37,7 @@ import pandas as pd
 import streamlit as st
 
 # --- Shared config: prefer st.secrets, fallback to .env ---
-import os
 from dotenv import load_dotenv
-import streamlit as st
 
 # === DEBUG UTIL (safe to keep; no-op when DEBUG=False) ===
 DEBUG = True
@@ -577,12 +576,12 @@ def _init_pinecone():
 # =========================
 # Load data (JSONL optional) with safe fallback
 # =========================
-def _load_jsonl(path: str) -> Optional[List[dict]]:
+def _load_jsonl(path: str) -> list[dict] | None:
     try:
         if not os.path.exists(path):
             return None
         out = []
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, encoding="utf-8") as f:
             for line in f:
                 line = line.strip()
                 if not line:
@@ -593,7 +592,7 @@ def _load_jsonl(path: str) -> Optional[List[dict]]:
         return None
 
 
-import json, os, re
+import os
 from pathlib import Path
 
 
@@ -835,7 +834,7 @@ st.markdown(
 <style>
 /* Keep the detail card visible when the left table scrolls */
 .sticky-detail { position: sticky; top: 72px; }
-            
+
 /* Harmonize table/detail font sizes and tighten table look */
 .ag-theme-streamlit .ag-cell,
 .ag-theme-streamlit .ag-header-cell-text { font-size: 1.0rem; line-height: 1.35; }
@@ -846,7 +845,7 @@ st.markdown(
 
 /* Make left grid feel a bit denser without looking crowded */
 .ag-theme-streamlit .ag-row { height: 34px; }
-            
+
 /* Row container spacing (slightly tighter) */
 .story-block { margin: 8px 0 10px 0; }
 
@@ -1005,7 +1004,7 @@ a.badge:hover { filter: brightness(0.97); }
 /* Sticky filter bar + active chips */
 .sticky-filters { position: sticky; top: 8px; z-index: 9; }
 
-                    
+
 .active-chip-row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin: 6px 0; }
 .active-chip-row button {
   border-radius: 999px !important;
@@ -1115,9 +1114,9 @@ div[data-testid="stHorizontalBlock"] .nav-link:hover {
     border-color: rgba(255,255,255,0.26);
   }
 }
-            
+
 /* Selected row highlight & hover */
-.ag-theme-streamlit .ag-row.ag-row-selected { 
+.ag-theme-streamlit .ag-row.ag-row-selected {
   background: rgba(99, 102, 241, 0.12) !important;  /* indigo-500-ish */
 }
 .ag-theme-streamlit .ag-row:hover {
@@ -1216,12 +1215,12 @@ def render_badges_static(s: dict, max_tags: int = 6):
     )
 
 
-def render_list(items: Optional[List[str]]):
+def render_list(items: list[str] | None):
     for x in items or []:
         st.write(f"- {x}")
 
 
-def render_outcomes(items: Optional[List[str]]):
+def render_outcomes(items: list[str] | None):
     for line in items or []:
         out = line
         for m in METRIC_RX.finditer(line or ""):
@@ -1255,7 +1254,7 @@ def _extract_metric_value(text: str):
     return best
 
 
-def strongest_metric_line(s: dict) -> Optional[str]:
+def strongest_metric_line(s: dict) -> str | None:
     candidates = []
     for line in s.get("what") or []:
         v = _extract_metric_value(line or "")
@@ -1317,7 +1316,7 @@ def _load_nonsense_rules(path: str = "nonsense_filters.jsonl"):
     rules = []
     try:
         if os.path.exists(path):
-            with open(path, "r", encoding="utf-8") as f:
+            with open(path, encoding="utf-8") as f:
                 for i, line in enumerate(f, 1):
                     line = line.strip()
                     if not line:
@@ -1336,7 +1335,7 @@ def _load_nonsense_rules(path: str = "nonsense_filters.jsonl"):
     return rules
 
 
-def is_nonsense(query: str) -> Optional[str]:
+def is_nonsense(query: str) -> str | None:
     """Return category string if query matches a nonsense rule, else None."""
     global _NONSENSE_RULES
     if not _NONSENSE_RULES:
@@ -1806,7 +1805,7 @@ def _hybrid_score(
         return pc_score or 0.0
 
 
-def _embed(text: str) -> List[float]:
+def _embed(text: str) -> list[float]:
     """
     Query-time embeddings that MATCH the build script:
     - Model: all-MiniLM-L6-v2 (384-dim)
@@ -1836,7 +1835,7 @@ def _embed(text: str) -> List[float]:
 
 def pinecone_semantic_search(
     query: str, filters: dict, top_k: int = 5
-) -> Optional[List[dict]]:
+) -> list[dict] | None:
     idx = _init_pinecone()
     if not idx or not query:
         return None
@@ -2155,7 +2154,7 @@ def rag_answer(question: str, filters: dict):
     if overlap < 0.03:
         log_offdomain(question or "", f"overlap:{overlap:.2f}")
         render_no_match_banner(
-            reason=f"low_overlap",
+            reason="low_overlap",
             query=question or "",
             overlap=overlap,
             suppressed=False,
@@ -2268,7 +2267,7 @@ def rag_answer(question: str, filters: dict):
     }
 
 
-def send_to_backend(prompt: str, filters: dict, ctx: Optional[dict]):
+def send_to_backend(prompt: str, filters: dict, ctx: dict | None):
     return rag_answer(prompt, filters)
 
 
@@ -2280,7 +2279,7 @@ def set_answer(resp: dict):
 
 
 # --- Inline Ask MattGPT panel (for Stories) ---
-def render_ask_panel(ctx: Optional[dict]):
+def render_ask_panel(ctx: dict | None):
     """Inline Ask MattGPT panel rendered inside the Stories detail column."""
     st.markdown("---")
     st.markdown("#### Ask MattGPT")
@@ -2541,17 +2540,17 @@ if st.session_state["active_tab"] == "Home":
     st.markdown(
         """
     ## About this app
-    This is my interactive portfolio assistant — blending storytelling, strategy, and AI.  
+    This is my interactive portfolio assistant — blending storytelling, strategy, and AI.
     It showcases my career journey, career stories, and impact highlights.
 
     ### What you can do
-    - **Explore Stories**: Browse curated projects with filters and details.  
-    - **Ask MattGPT**: Get AI-powered answers about my work, challenges, and outcomes.  
-    - **About Matt**: Learn about my background, leadership style, and values.  
+    - **Explore Stories**: Browse curated projects with filters and details.
+    - **Ask MattGPT**: Get AI-powered answers about my work, challenges, and outcomes.
+    - **About Matt**: Learn about my background, leadership style, and values.
 
     ### Why I built this
-    1. To demonstrate hands-on GenAI/LLM engineering skills.  
-    2. To showcase practical expertise in building portfolio assistants.  
+    1. To demonstrate hands-on GenAI/LLM engineering skills.
+    2. To showcase practical expertise in building portfolio assistants.
     3. To highlight how I bridge **strategy, engineering, and storytelling**.
     """
     )

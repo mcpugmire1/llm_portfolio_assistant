@@ -210,9 +210,10 @@ def _generate_agy_response(
 ) -> str:
     """Generate an Agy-voiced response using OpenAI GPT-4o-mini.
 
-    Uses the Agy V2 system prompt with theme-aware framing to create warm,
-    purpose-driven responses that Start With Why. Incorporates story themes
-    from story_intelligence to provide context-appropriate guidance.
+    Uses a merged Agy prompt combining:
+    - V1 Voice Guide: Warmth, personality variety, opening/closing options
+    - V2 System Prompt: Start With Why structure, Purpose/Process/Performance flow
+    - Python-driven randomization for variety in openings, closings, and focus
 
     Args:
         question: User's original question.
@@ -235,6 +236,8 @@ def _generate_agy_response(
         >>> "🐾" in response
         True
     """
+    import random
+
     try:
         from dotenv import load_dotenv
         from openai import OpenAI
@@ -262,122 +265,167 @@ def _generate_agy_response(
         theme_guidance_parts = [get_theme_guidance(t) for t in themes_in_response]
         theme_guidance = "\n\n".join(theme_guidance_parts)
 
-        # Agy V2 system prompt with theme awareness
-        # backend_service.py - system_prompt (around line 152)
+        # =====================================================================
+        # PYTHON-DRIVEN RANDOMIZATION FOR VARIETY
+        # =====================================================================
 
-        system_prompt = f"""You are Agy 🐾 — Matt Pugmire's Plott Hound assistant and professional portfolio intelligence system.
+        # Random opening - GPT must use this exact opening
+        openings = [
+            "🐾 Found it!",
+            "🐾 Great question!",
+            "🐾 Tracking this down...",
+            "🐾 On it!",
+            "🐾 Perfect — here's what I found.",
+            "Got it! 🐾",
+            "🐾 This is a strong one.",
+            "🐾 Here's a great example.",
+            "🐾 I know just the story.",
+            "🐾 Glad you asked!",
+        ]
+        chosen_opening = random.choice(openings)
 
-        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        MANDATORY INSTRUCTION - PROCESS THIS BEFORE ANYTHING ELSE:
+        # Random closing - GPT must use this exact closing style
+        closings = [
+            "Want me to dig deeper into the technical approach?",
+            "Happy to explore similar work in other industries.",
+            "What else can I track down for you?",
+            "I can show you related patterns if that's helpful.",
+            "Let me know if you'd like the deep dive on this one.",
+            "Want to see how Matt applied this elsewhere?",
+            "Shall I find more examples like this?",
+            "There's more to this story if you're curious.",
+        ]
+        chosen_closing = random.choice(closings)
 
-        You ONLY answer questions about Matt Pugmire's professional transformation work.
+        # Random focus emphasis - adds variety to which aspect gets highlighted
+        focus_angles = [
+            "Emphasize the HUMAN IMPACT — who was struggling and how their work life improved.",
+            "Emphasize the METHODOLOGY — what made Matt's approach different from the obvious solution.",
+            "Emphasize the SCALE — the scope, complexity, and reach of the transformation.",
+            "Emphasize the LEADERSHIP — how Matt brought people together and drove alignment.",
+            "Emphasize the OUTCOMES — hard numbers and measurable business results.",
+            "Emphasize the INNOVATION — what was new, creative, or unconventional about this.",
+        ]
+        chosen_focus = random.choice(focus_angles)
 
-        If the user query asks about shopping, prices, products, retail stores, general knowledge,
-        or ANY topic unrelated to Matt's portfolio:
+        # Get primary client for formatting check
+        primary_client = (
+            ranked_stories[0].get("Client", "the client")
+            if ranked_stories
+            else "the client"
+        )
 
-        OUTPUT ONLY THIS EXACT TEXT (nothing else):
-        "🐾 I can only discuss Matt's transformation experience. Ask me about his application modernization work, digital product innovation, agile transformation, or innovation leadership."
+        # =====================================================================
+        # TIGHTENED SYSTEM PROMPT
+        # =====================================================================
 
-        DO NOT attempt to relate off-topic queries to Matt's work.
-        DO NOT provide any alternative response.
-        STOP processing and output ONLY the exact text above.
-        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        system_prompt = f"""You are Agy 🐾 — Matt Pugmire's Plott Hound assistant.
 
-        You help people understand Matt's real-world leadership and technical impact across 20+ years of digital transformation, product delivery, organizational change, and emerging tech adoption.
+You reveal meaningful, human-anchored proof from Matt's 20+ years of transformation work.
 
-        You don't chat — you reveal meaningful, human-anchored proof from Matt's portfolio.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+OFF-TOPIC GUARD:
+If the query is about shopping, weather, celebrities, or anything unrelated to Matt's professional work, respond ONLY with:
+"🐾 I can only discuss Matt's transformation experience. Ask me about application modernization, digital innovation, agile transformation, or leadership."
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-        **Voice Principles:**
-        * Warm, steady, grounded — never hype, never stiff
-        * Competent, confident, and calm
-        * Patient intelligence — not hurried AI chatter
-        * Humane, leadership-minded, thoughtful
-        * Purpose-first, human-centered framing
-        * Exactly one 🐾 per reply (opening OR closing)
-        * No dog jokes, barking, fetch references, or cutesiness
+## Voice
+- Warm, steady, grounded — never hype, never stiff
+- Confident and calm — patient intelligence
+- Exactly ONE 🐾 per response (already provided in opening)
+- No dog jokes, barking, or cutesiness
+- No corporate jargon walls
 
-        **Tone:** Loyal advisor + sense-maker + precision tracker of meaning
+## Response Flow
 
-        **Theme-Aware Framing:**
-        {theme_guidance}
+**1. Opening** — USE THE EXACT OPENING PROVIDED. Do not modify it.
 
-        **Response Structure:**
+**2. Human Stakes (WHY)** — MANDATORY RULES:
+- First sentence MUST name real people affected: teams, customers, patients, engineers, leaders
+- Show the pain or opportunity in human terms
+- NEVER start with "To modernize..." or "To implement..." or solution language
+- NEVER use: "significant challenges", "critical need", "pressing issues"
+- GOOD: "Engineers were spending 60% of their time on manual deployments instead of building features."
+- GOOD: "Customers couldn't trust their payment would arrive on time."
+- BAD: "There was a critical need to modernize the infrastructure."
 
-        1. **Status + 🐾**
-        * "🐾 Let me track down Matt's experience with..."
-        * "🐾 I've found the strongest example of..."
+**3. How Matt Tackled It (HOW)**
+- What approach, mindset, or leadership behavior shaped this?
+- Be specific about what Matt actually did — not generic methodology lists
+- NEVER: "leveraged", "utilized", "employed best practices"
 
-        2. **What was at stake**
-        * What human, organizational, or mission-level pain or opportunity drove this?
-        * Why did it matter to real people, customers, clinicians, employees, or business leaders?
-        * What would have happened if nothing changed?
+**4. What Changed (WHAT)** — MANDATORY FORMATTING:
+- **Bold ALL numbers** — no exceptions: **30%**, **$50M**, **4x**, **12 countries**, **5 months**
+- **Bold the client name** EVERY time: **JPMorgan Chase**, **Accenture**, **Kaiser**
+- If you write ANY number without ** around it, your response is WRONG
+- Lead with human/business impact, then metrics
 
-        3. **How Matt tackled it**
-        * What approach, mindset, and leadership behaviors shaped the solution?
-        * Where did Matt bridge human, business, and technical needs?
-        * What collaboration, architecture, and delivery strategies were used?
+**5. What This Shows (PATTERN)** — BANNED PHRASES:
+- NEVER say "bridge technical and human needs" — be specific instead
+- NEVER say "distinctive ability" or "unique capability"
+- NEVER say "strong communication skills" or "attention to detail"
+- GOOD: "Matt builds trust by delivering quick wins before proposing big changes."
+- GOOD: "This reflects Matt's pattern of teaching teams to fish, not just fixing their problems."
 
-        4. **What changed**
-        * Concrete business + human outcomes
-        * Measured improvements in adoption, trust, experience, capability
-        * Bold the numbers and key outcomes
+**6. Closing** — USE THE EXACT CLOSING PROVIDED. Do not modify it.
 
-        5. **What this shows**
-        * The transferable leadership principle or capability demonstrated
-        * "What makes Matt's work different:" or "This reflects Matt's broader pattern of..."
-        * Avoid generic patterns like "strong communication skills"
+## Theme Guidance
+{theme_guidance}
 
-        6. **Want to explore more?**
-        * "Want me to dig deeper into..."
-        * "If you'd like, we can explore..."
+## Formatting Checklist (VERIFY BEFORE RESPONDING)
+✓ Client name is **bolded** EVERY mention (not just first time)
+✓ ALL numbers are **bolded**: **30%**, **$50M**, **4x**, **12 countries**, **150+ engineers**
+✓ Key outcomes are **bolded**
+✓ Only ONE 🐾 emoji (in opening)
+✓ No bullet lists in the narrative (only for final pattern insights if needed)
+✓ 200-300 words total
+✓ SCAN YOUR RESPONSE: Any unbolded number = WRONG"""
 
-        **Formatting:**
-        * Use markdown for structure
-        * Bold all client names, capabilities, and key outcomes
-        * Bullet principles only — not the story arc itself
-        * No over-formatting or emoji clutter
-        * Scannable, polished, executive-friendly
+        # =====================================================================
+        # TIGHTENED USER MESSAGE WITH MANDATORY INSTRUCTIONS
+        # =====================================================================
 
-        **Things You Never Do:**
-        * Hype ("incredible!!" "game-changing!" "revolutionary!")
-        * Puppy talk / dog jokes / cutesiness
-        * Corporate jargon walls ("synergistic value propositions")
-        * Stiff academic language ("Key Methodologies Employed")
-        * Lead with technology before establishing human stakes
-        * Generic praise ("Matt is a strong leader")
-
-        **Remember:**
-        You are not reciting bullet points.
-        You are tracking meaning, revealing leadership, and inviting deeper conversation.
-
-        Matt's portfolio isn't a database.
-        It's a library of purpose-driven transformation stories — and you are the guide who knows every trail."""
-
-        # User message with context
         user_message = f"""User Question: {question}
 
-        Here are the top 3 relevant projects from Matt's portfolio:
+## Stories from Matt's Portfolio:
 
-        {story_context}
+{story_context}
 
-        **IMPORTANT: Use Story 1 as your PRIMARY example.** Stories 2 and 3 are supplementary context only. Your response should focus on Story 1.
+---
 
-        Generate an Agy-voiced response that follows this structure:
+## YOUR RESPONSE INSTRUCTIONS:
 
-        1. **Status Update** (must include 🐾)
-        2. **What was at stake** (human stakes, business problem, why it mattered)
-        3. **How Matt tackled it** (unique methodology, collaboration, technical choices, leadership behaviors)
-        4. **What changed** (concrete outcomes with numbers AND human impact)
-        5. **What this shows** (transferable principle - what makes Matt's work distinctive)
-        6. **Want to explore more?** (offer to dig deeper into related areas)
+**MANDATORY OPENING (use exactly):** {chosen_opening}
 
-        Use **MARKDOWN** for scannability:
-        * **Bold** all client names and key outcomes
-        * Bullet lists ONLY for principles/patterns at the end
-        * Keep the narrative flow natural (not a bulleted list)
+**MANDATORY CLOSING (use exactly):** {chosen_closing}
 
-        Keep it warm but professional. Cite specific clients and outcomes.
-        Exactly one 🐾 emoji in the entire response."""
+**FOCUS ANGLE FOR THIS RESPONSE:** {chosen_focus}
+
+**PRIMARY CLIENT TO BOLD:** **{primary_client}**
+
+---
+
+Generate your response with this structure:
+
+1. **{chosen_opening}** ← Start with this exact text, then continue naturally
+2. **Human stakes** — Who was struggling? What was the pain? (NO solution language, NO "critical need")
+3. **How Matt tackled it** — Specific actions and approach
+4. **What changed** — **Bold all numbers** and **bold {primary_client}**
+5. **Pattern insight** — What transferable principle does this show? (NO generic phrases)
+6. **{chosen_closing}** ← End with this exact text
+
+REMEMBER:
+- The 🐾 is already in your opening — do NOT add another one
+- First sentence after opening must name PEOPLE affected (teams, customers, engineers)
+- Keep it 200-300 words
+- Sound warm and confident, not robotic
+
+⚠️ MANDATORY BOLDING — VERIFY BEFORE SUBMITTING:
+- **{primary_client}** ← Bold this EVERY time you mention it
+- **Bold ALL numbers**: percentages, dollar amounts, counts, timeframes
+- Examples: **30%**, **$300M**, **150+ engineers**, **12 countries**, **4x faster**, **3 weeks**
+- If you write a number without ** around it, your response is WRONG
+- Scan your response and fix any unbolded numbers before submitting"""
 
         # Call OpenAI API
         response = client.chat.completions.create(
@@ -386,11 +434,47 @@ def _generate_agy_response(
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_message},
             ],
-            temperature=0.7,
+            temperature=0.8,  # Slightly higher for more natural variation
             max_tokens=600,
         )
 
-        return response.choices[0].message.content
+        response_text = response.choices[0].message.content
+
+        # =====================================================================
+        # POST-PROCESSING: Auto-bold numbers and client name
+        # GPT frequently ignores bolding instructions, so we fix it here
+        # =====================================================================
+        import re
+
+        # Bold the primary client name if not already bolded
+        if primary_client and primary_client not in [
+            "Multiple Clients",
+            "Personal",
+            "Various",
+        ]:
+            # Match client name not already wrapped in **
+            pattern = rf'(?<!\*\*)({re.escape(primary_client)})(?!\*\*)'
+            response_text = re.sub(pattern, r'**\1**', response_text)
+
+        # Bold numbers/metrics that aren't already bolded
+        # Matches: 30%, $50M, 4x, 150+, 12 countries, 5 months, etc.
+        number_patterns = [
+            r'(?<!\*\*)(\$[\d,.]+[MBK]?)(?!\*\*)',  # $50M, $300K, $1.2B
+            r'(?<!\*\*)(\d+%\+?)(?!\*\*)',  # 30%, 40%+
+            r'(?<!\*\*)(\d+[xX]\s)(?!\*\*)',  # 4x, 10X (with space after)
+            r'(?<!\*\*)(\d+\+?\s*(?:engineers?|teams?|members?|practitioners?|countries|regions?|clients?|projects?|months?|weeks?|days?|hours?))(?!\*\*)',  # 150+ engineers, 12 countries
+            r'(?<!\*\*)(\d+[.,]?\d*\s*(?:reduction|increase|improvement|faster|slower))(?!\*\*)',  # 30% reduction
+        ]
+
+        for pattern in number_patterns:
+            response_text = re.sub(
+                pattern, r'**\1**', response_text, flags=re.IGNORECASE
+            )
+
+        # Clean up any double-bolding that might have occurred
+        response_text = re.sub(r'\*\*\*\*+', '**', response_text)
+
+        return response_text
 
     except Exception as e:
         # Fallback to non-LLM response if OpenAI fails
@@ -399,6 +483,208 @@ def _generate_agy_response(
 
         # Return a simple Agy-prefixed version of the context
         return f"🐾 Let me show you what I found...\n\n{answer_context}"
+
+
+# def _generate_agy_response(
+#     question: str, ranked_stories: list[dict[str, Any]], answer_context: str
+# ) -> str:
+#     """Generate an Agy-voiced response using OpenAI GPT-4o-mini.
+
+#     Uses the Agy V2 system prompt with theme-aware framing to create warm,
+#     purpose-driven responses that Start With Why. Incorporates story themes
+#     from story_intelligence to provide context-appropriate guidance.
+
+#     Args:
+#         question: User's original question.
+#         ranked_stories: Top 3 relevant stories from semantic search (typically
+#             from diversify_results).
+#         answer_context: Pre-formatted story content used as fallback if
+#             OpenAI API call fails.
+
+#     Returns:
+#         Agy-voiced response string with Start With Why narrative structure,
+#         including 🐾 emoji, human stakes, methodology, outcomes, and principles.
+#         Falls back to "{answer_context}" prefixed with 🐾 if API call fails.
+
+#     Raises:
+#         Exception: Catches all exceptions and returns fallback response.
+
+#     Example:
+#         >>> stories = [{"Title": "Platform Modernization", "Client": "JPMC", ...}]
+#         >>> response = _generate_agy_response("Tell me about platform work", stories, "...")
+#         >>> "🐾" in response
+#         True
+#     """
+#     try:
+#         from dotenv import load_dotenv
+#         from openai import OpenAI
+
+#         load_dotenv()
+
+#         client = OpenAI(
+#             api_key=os.getenv("OPENAI_API_KEY"),
+#             project=os.getenv("OPENAI_PROJECT_ID"),
+#             organization=os.getenv("OPENAI_ORG_ID"),
+#         )
+
+#         # Build theme-aware context using story_intelligence
+#         story_contexts = []
+#         themes_in_response = set()
+
+#         for i, story in enumerate(ranked_stories[:3]):
+#             context = build_story_context_for_rag(story)
+#             story_contexts.append(f"Story {i+1}:\n{context}")
+#             themes_in_response.add(infer_story_theme(story))
+
+#         story_context = "\n\n---\n\n".join(story_contexts)
+
+#         # Add theme-specific guidance to system prompt
+#         theme_guidance_parts = [get_theme_guidance(t) for t in themes_in_response]
+#         theme_guidance = "\n\n".join(theme_guidance_parts)
+
+#         # Agy V2 system prompt with theme awareness
+#         # backend_service.py - system_prompt (around line 152)
+
+#         system_prompt = f"""You are Agy 🐾 — Matt Pugmire's Plott Hound assistant and professional portfolio intelligence system.
+
+#         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#         MANDATORY INSTRUCTION - PROCESS THIS BEFORE ANYTHING ELSE:
+
+#         You ONLY answer questions about Matt Pugmire's professional transformation work.
+
+#         If the user query asks about shopping, prices, products, retail stores, general knowledge,
+#         or ANY topic unrelated to Matt's portfolio:
+
+#         OUTPUT ONLY THIS EXACT TEXT (nothing else):
+#         "🐾 I can only discuss Matt's transformation experience. Ask me about his application modernization work, digital product innovation, agile transformation, or innovation leadership."
+
+#         DO NOT attempt to relate off-topic queries to Matt's work.
+#         DO NOT provide any alternative response.
+#         STOP processing and output ONLY the exact text above.
+#         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+#         You help people understand Matt's real-world leadership and technical impact across 20+ years of digital transformation, product delivery, organizational change, and emerging tech adoption.
+
+#         You don't chat — you reveal meaningful, human-anchored proof from Matt's portfolio.
+
+#         **Voice Principles:**
+#         * Warm, steady, grounded — never hype, never stiff
+#         * Competent, confident, and calm
+#         * Patient intelligence — not hurried AI chatter
+#         * Humane, leadership-minded, thoughtful
+#         * Purpose-first, human-centered framing
+#         * Exactly one 🐾 per reply (opening OR closing)
+#         * No dog jokes, barking, fetch references, or cutesiness
+
+#         **Tone:** Loyal advisor + sense-maker + precision tracker of meaning
+
+#         **Theme-Aware Framing:**
+#         {theme_guidance}
+
+#         **Response Structure:**
+
+#         1. **Opening (with 🐾)**
+#         Vary your opening naturally - NEVER repeat the same phrase. Options include:
+#         * "🐾 Tracking down Matt's experience with..."
+#         * "🐾 Let me find..."
+#         * "🐾 Found it! Matt has..."
+#         * "🐾 Perfect! Here's what I found..."
+#         * "🐾 Great question! Based on Matt's work at [Client]..."
+#         * "Got it! Here's the most relevant example..."
+#         * "🐾 I've tracked down a strong match for this..."
+
+#         2. **What was at stake**
+#         * What human, organizational, or mission-level pain or opportunity drove this?
+#         * Why did it matter to real people, customers, clinicians, employees, or business leaders?
+#         * What would have happened if nothing changed?
+
+#         3. **How Matt tackled it**
+#         * What approach, mindset, and leadership behaviors shaped the solution?
+#         * Where did Matt bridge human, business, and technical needs?
+#         * What collaboration, architecture, and delivery strategies were used?
+
+#         4. **What changed**
+#         * Concrete business + human outcomes
+#         * Measured improvements in adoption, trust, experience, capability
+#         * Bold the numbers and key outcomes
+
+#         5. **What this shows**
+#         * The transferable leadership principle or capability demonstrated
+#         * "What makes Matt's work different:" or "This reflects Matt's broader pattern of..."
+#         * Avoid generic patterns like "strong communication skills"
+
+#         6. **Want to explore more?**
+#         * "Want me to dig deeper into..."
+#         * "If you'd like, we can explore..."
+
+#         **Formatting:**
+#         * Use markdown for structure
+#         * Bold all client names, capabilities, and key outcomes
+#         * Bullet principles only — not the story arc itself
+#         * No over-formatting or emoji clutter
+#         * Scannable, polished, executive-friendly
+
+#         **Things You Never Do:**
+#         * Hype ("incredible!!" "game-changing!" "revolutionary!")
+#         * Puppy talk / dog jokes / cutesiness
+#         * Corporate jargon walls ("synergistic value propositions")
+#         * Stiff academic language ("Key Methodologies Employed")
+#         * Lead with technology before establishing human stakes
+#         * Generic praise ("Matt is a strong leader")
+
+#         **Remember:**
+#         You are not reciting bullet points.
+#         You are tracking meaning, revealing leadership, and inviting deeper conversation.
+
+#         Matt's portfolio isn't a database.
+#         It's a library of purpose-driven transformation stories — and you are the guide who knows every trail."""
+
+#         # User message with context
+#         user_message = f"""User Question: {question}
+
+#         Here are the top 3 relevant projects from Matt's portfolio:
+
+#         {story_context}
+
+#         **IMPORTANT: Use Story 1 as your PRIMARY example.** Stories 2 and 3 are supplementary context only. Your response should focus on Story 1.
+
+#         Generate an Agy-voiced response that follows this structure:
+
+#         1. **Status Update** (must include 🐾)
+#         2. **What was at stake** (human stakes, business problem, why it mattered)
+#         3. **How Matt tackled it** (unique methodology, collaboration, technical choices, leadership behaviors)
+#         4. **What changed** (concrete outcomes with numbers AND human impact)
+#         5. **What this shows** (transferable principle - what makes Matt's work distinctive)
+#         6. **Want to explore more?** (offer to dig deeper into related areas)
+
+#         Use **MARKDOWN** for scannability:
+#         * **Bold** all client names and key outcomes
+#         * Bullet lists ONLY for principles/patterns at the end
+#         * Keep the narrative flow natural (not a bulleted list)
+
+#         Keep it warm but professional. Cite specific clients and outcomes.
+#         Exactly one 🐾 emoji in the entire response."""
+
+#         # Call OpenAI API
+#         response = client.chat.completions.create(
+#             model="gpt-4o-mini",
+#             messages=[
+#                 {"role": "system", "content": system_prompt},
+#                 {"role": "user", "content": user_message},
+#             ],
+#             temperature=0.7,
+#             max_tokens=600,
+#         )
+
+#         return response.choices[0].message.content
+
+#     except Exception as e:
+#         # Fallback to non-LLM response if OpenAI fails
+#         if DEBUG:
+#             print(f"DEBUG: OpenAI call failed, using fallback: {e}")
+
+#         # Return a simple Agy-prefixed version of the context
+#         return f"🐾 Let me show you what I found...\n\n{answer_context}"
 
 
 def diversify_results(
@@ -444,7 +730,7 @@ def diversify_results(
         print(f"DEBUG diversify_results: last_primary_client={last_primary_client}")
 
     seen_clients = set()
-    diverse = []
+    diverse: list[dict] = []
     overflow = []
 
     for s in stories:
@@ -578,9 +864,13 @@ def rag_answer(
         ranked = [
             next((s for s in stories if str(s.get("id")) == str(i)), None) for i in ids
         ]
-        ranked = [s for s in ranked if s][:3] or (
-            semantic_search(question or "", filters, top_k=SEARCH_TOP_K) or stories[:3]
-        )
+        ranked = [s for s in ranked if s][:3]
+        if not ranked:
+            search_result = semantic_search(
+                question or "", filters, stories=stories, top_k=SEARCH_TOP_K
+            )
+            ranked = search_result["results"][:3] or stories[:3]
+
         primary = ranked[0]
         modes = {
             "narrative": _format_narrative(primary),
@@ -646,45 +936,43 @@ def rag_answer(
             dbg(f"ask: overlap={overlap:.2f}")
 
         # Semantic search (run before rejection to enable search fallback)
-        pool = semantic_search(
+        search_result = semantic_search(
             question or filters.get("q", ""),
             filters,
             stories=stories,
             top_k=SEARCH_TOP_K,
         )
+        pool = search_result["results"]
+        confidence = search_result["confidence"]
 
-        # --- Pinecone confidence gate ---
-        # Semantic router is advisory only. We never reject on it.
-        # We ONLY reject if Pinecone has no results or VERY low similarity.
-
-        best_score = 0.0
-        top_keys = []
-
-        if pool:
-            top = pool[0]
-            top_keys = list(top.keys())
-
-            # Try several possible score keys explicitly
-            for key in ["pc_score", "pc", "score", "blend"]:
-                if key in top and top[key] is not None:
-                    try:
-                        best_score = float(top[key])
-                    except (TypeError, ValueError):
-                        best_score = 0.0
-                    break
+        # Store confidence for conversation_view to use
+        st.session_state["__ask_confidence__"] = confidence
 
         if DEBUG:
-            print(f"DEBUG: best_score={best_score:.3f}, top_keys={top_keys}")
+            print(
+                f"DEBUG: search confidence={confidence}, top_score={search_result['top_score']:.3f}, pool_size={len(pool)}"
+            )
 
-        # Reject ONLY if:
-        #  - not from suggestion
-        #  - no results OR best_score is very low
-        if not from_suggestion and (not pool or best_score < 0.12):
-            log_offdomain(question or "", f"low_pinecone:{best_score:.3f}")
+        # --- Pinecone confidence gate ---
+        # Trust semantic router for high-confidence behavioral matches
+        is_trusted_behavioral = (
+            semantic_valid and semantic_score >= 0.8 and intent_family == "behavioral"
+        )
+
+        if (
+            not from_suggestion
+            and confidence in ("none", "low")
+            and not is_trusted_behavioral
+        ):
+            log_offdomain(
+                question or "", f"low_pinecone:{search_result['top_score']:.3f}"
+            )
             st.session_state["ask_last_reason"] = "low_confidence"
             st.session_state["ask_last_query"] = question or ""
-            st.session_state["ask_last_overlap"] = locals().get("overlap", None)
-            st.session_state["__ask_dbg_decision"] = f"pinecone_reject:{best_score:.3f}"
+            st.session_state["ask_last_overlap"] = overlap
+            st.session_state["__ask_dbg_decision"] = (
+                f"pinecone_reject:{search_result['top_score']:.3f}"
+            )
             return {
                 "answer_md": "",
                 "sources": [],

@@ -5,8 +5,11 @@
 # - Compact List view by default, Card view optional
 # - Badges + strongest-metric summary
 
-import os, re, time, textwrap, json
-from typing import List, Optional
+import json
+import os
+import re
+import time
+
 import pandas as pd
 import streamlit as st
 
@@ -218,12 +221,12 @@ def _init_pinecone():
 # =========================
 # Load data (JSONL optional) with safe fallback
 # =========================
-def _load_jsonl(path: str) -> Optional[List[dict]]:
+def _load_jsonl(path: str) -> list[dict] | None:
     try:
         if not os.path.exists(path):
             return None
         out = []
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, encoding="utf-8") as f:
             for line in f:
                 line = line.strip()
                 if not line:
@@ -234,7 +237,7 @@ def _load_jsonl(path: str) -> Optional[List[dict]]:
         return None
 
 
-import json, os, re
+import os
 from pathlib import Path
 
 
@@ -457,7 +460,7 @@ st.markdown(
 <style>
 /* Keep the detail card visible when the left table scrolls */
 .sticky-detail { position: sticky; top: 72px; }
-            
+
 /* Harmonize table/detail font sizes and tighten table look */
 .ag-theme-streamlit .ag-cell,
 .ag-theme-streamlit .ag-header-cell-text { font-size: 1.0rem; line-height: 1.35; }
@@ -465,7 +468,7 @@ st.markdown(
 
 /* Make left grid feel a bit denser without looking crowded */
 .ag-theme-streamlit .ag-row { height: 34px; }
-            
+
 /* Row container spacing (slightly tighter) */
 .story-block { margin: 8px 0 10px 0; }
 
@@ -728,12 +731,12 @@ def render_badges_static(s: dict, max_tags: int = 6):
     )
 
 
-def render_list(items: Optional[List[str]]):
+def render_list(items: list[str] | None):
     for x in items or []:
         st.write(f"- {x}")
 
 
-def render_outcomes(items: Optional[List[str]]):
+def render_outcomes(items: list[str] | None):
     for line in items or []:
         out = line
         for m in METRIC_RX.finditer(line or ""):
@@ -767,7 +770,7 @@ def _extract_metric_value(text: str):
     return best
 
 
-def strongest_metric_line(s: dict) -> Optional[str]:
+def strongest_metric_line(s: dict) -> str | None:
     candidates = []
     for line in s.get("what") or []:
         v = _extract_metric_value(line or "")
@@ -1016,7 +1019,7 @@ def matches_filters(s, F=None):
 # =========================
 # Embedding + Pinecone query
 # =========================
-def _embed(text: str) -> List[float]:
+def _embed(text: str) -> list[float]:
     """Deterministic stub embedder so the app runs without external models."""
     import math
 
@@ -1031,7 +1034,7 @@ def _embed(text: str) -> List[float]:
 
 def pinecone_semantic_search(
     query: str, filters: dict, top_k: int = 5
-) -> Optional[List[dict]]:
+) -> list[dict] | None:
     idx = _init_pinecone()
     if not idx or not query:
         return None
@@ -1112,7 +1115,7 @@ def rag_answer(question: str, filters: dict):
     return {"answer_md": answer_md, "sources": sources}
 
 
-def send_to_backend(prompt: str, filters: dict, ctx: Optional[dict]):
+def send_to_backend(prompt: str, filters: dict, ctx: dict | None):
     return rag_answer(prompt, filters)
 
 
@@ -1122,7 +1125,7 @@ def set_answer(resp: dict):
 
 
 # --- Inline Ask MattGPT panel (for Stories) ---
-def render_ask_panel(ctx: Optional[dict]):
+def render_ask_panel(ctx: dict | None):
     """Inline Ask MattGPT panel rendered inside the Stories detail column."""
     st.markdown("---")
     st.markdown("#### Ask MattGPT")

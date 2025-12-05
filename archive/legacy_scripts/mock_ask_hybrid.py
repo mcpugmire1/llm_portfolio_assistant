@@ -1,6 +1,9 @@
+import json
+import os
+import re
+from typing import Any
+
 import streamlit as st
-import json, os, re
-from typing import List, Dict, Any
 
 st.set_page_config(page_title="Ask MattGPT — Hybrid Mock", layout="wide")
 st.session_state.setdefault("ask_mode", "Narrative")  # for the Pills view
@@ -27,21 +30,21 @@ _DEF_ICONS = {
     "bank": "bi-bank",
 }
 
-Story = Dict[str, Any]
+Story = dict[str, Any]
 
 
-def _read_jsonl(paths: List[str]) -> List[Story]:
+def _read_jsonl(paths: list[str]) -> list[Story]:
     for p in paths:
         try:
             if os.path.exists(p):
-                with open(p, "r", encoding="utf-8") as f:
+                with open(p, encoding="utf-8") as f:
                     return [json.loads(line) for line in f if line.strip()]
         except Exception as e:
             print(f"DEBUG JSONL read failed for {p}: {e}")
     return []
 
 
-def _first(story: Story, keys: List[str], default: str = "") -> str:
+def _first(story: Story, keys: list[str], default: str = "") -> str:
     """Return the first non-empty string value for any of the candidate keys.
     Looks up keys case-insensitively and supports basic numeric-to-string fallback.
     """
@@ -52,7 +55,7 @@ def _first(story: Story, keys: List[str], default: str = "") -> str:
         if k in story and isinstance(story[k], str) and story[k].strip():
             return story[k].strip()
     # build a lowercased view of keys -> values
-    lowered: Dict[str, str] = {}
+    lowered: dict[str, str] = {}
     for k, v in story.items():
         if isinstance(v, str) and v.strip():
             lowered[k.lower()] = v.strip()
@@ -65,7 +68,7 @@ def _first(story: Story, keys: List[str], default: str = "") -> str:
     return default
 
 
-def _nest(story: Story, nest_keys: List[str]) -> Dict[str, Any]:
+def _nest(story: Story, nest_keys: list[str]) -> dict[str, Any]:
     """Return the first dict value for any of the candidate keys (case-insensitive)."""
     if not story:
         return {}
@@ -73,7 +76,7 @@ def _nest(story: Story, nest_keys: List[str]) -> Dict[str, Any]:
         v = story.get(k)
         if isinstance(v, dict):
             return v
-    lowered: Dict[str, Any] = {
+    lowered: dict[str, Any] = {
         k.lower(): v for k, v in story.items() if isinstance(v, dict)
     }
     for k in nest_keys:
@@ -83,7 +86,7 @@ def _nest(story: Story, nest_keys: List[str]) -> Dict[str, Any]:
     return {}
 
 
-def _sentences(text: str, max_items: int = 3) -> List[str]:
+def _sentences(text: str, max_items: int = 3) -> list[str]:
     if not text:
         return []
     parts = re.split(r"(?<=[.!?])\s+", text.strip())
@@ -194,7 +197,7 @@ if narrative_body and not narrative_body.endswith("."):
     narrative_body += "."
 
 # Build Highlights from Performance sentences; fall back to Action/Result
-_highlights: List[str] = []
+_highlights: list[str] = []
 for s in _sentences(performance, 3):
     if s:
         _highlights.append(s)
@@ -285,7 +288,7 @@ def render_sources_row(title="Sources"):
 
 
 # ========== LAYOUT ==========
-st.markdown(f"### Ask MattGPT")
+st.markdown("### Ask MattGPT")
 st.caption(f"Prompt: **{prompt}**")
 
 (tab2,) = st.tabs(["Pills (clean CX)"])

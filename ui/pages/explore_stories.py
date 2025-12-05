@@ -20,11 +20,12 @@ from dotenv import load_dotenv
 from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode
 
 from config.debug import DEBUG
-from services.rag_service import _KNOWN_VOCAB, semantic_search
+from services.rag_service import semantic_search
 from ui.components.story_detail import render_story_detail
+from ui.components.thinking_indicator import render_thinking_indicator
 from utils.filters import matches_filters
 from utils.ui_helpers import render_no_match_banner, safe_container
-from utils.validation import is_nonsense, token_overlap_ratio
+from utils.validation import is_nonsense
 
 load_dotenv()
 
@@ -125,7 +126,16 @@ def remove_filter_value(filter_key: str, value: str):
     """Remove a specific value from a filter list and sync widget state"""
     F = st.session_state["filters"]
 
-    # Remove from filter state
+    # Handle search query specially
+    if filter_key == "q":
+        F["q"] = ""
+        # The version increment is essential to force a widget refresh
+        version_key = "_widget_version_q"
+        st.session_state[version_key] = st.session_state.get(version_key, 0) + 1
+
+        return
+
+    # Remove from filter state (existing multi-select logic)
     if filter_key in F and isinstance(F[filter_key], list):
         if value in F[filter_key]:
             F[filter_key].remove(value)
@@ -135,7 +145,7 @@ def remove_filter_value(filter_key: str, value: str):
     current_version = st.session_state.get(version_key, 0)
     st.session_state[version_key] = current_version + 1
 
-    # Delete ALL versions of the widget keys (both base and versioned)
+    # Delete ALL versions of the widget keys (existing multi-select logic)
     widget_map = {
         "clients": "facet_clients",
         "domains": ["facet_domains_all", "facet_subdomains"],
@@ -144,9 +154,11 @@ def remove_filter_value(filter_key: str, value: str):
         "personas": "facet_personas",
     }
 
-    widget_keys = widget_map.get(filter_key, [])
-    if not isinstance(widget_keys, list):
-        widget_keys = [widget_keys]
+    widget_keys_raw = widget_map.get(filter_key, [])
+    if not isinstance(widget_keys_raw, list):
+        widget_keys = [widget_keys_raw]
+    else:
+        widget_keys = widget_keys_raw
 
     # Delete both the base key AND any versioned keys that exist
     for widget_key in widget_keys:
@@ -155,7 +167,7 @@ def remove_filter_value(filter_key: str, value: str):
             del st.session_state[widget_key]
 
         # Delete versioned keys (check up to version 100 to be safe)
-        for v in range(current_version + 2):  # Check current and previous versions
+        for v in range(current_version + 2):
             versioned_key = f"{widget_key}_v{v}"
             if versioned_key in st.session_state:
                 del st.session_state[versioned_key]
@@ -175,9 +187,7 @@ def build_domain_options(
 
 # =============================================================================
 # HELPER FUNCTIONS - Story Navigation
-# =============================================================================
-
-
+# ============================================================================
 def get_context_story(stories: list[dict]) -> dict | None:
     """Get the currently selected story for detail view"""
     obj = st.session_state.get("active_story_obj")
@@ -226,6 +236,36 @@ def get_context_story(stories: list[dict]) -> dict | None:
 # =============================================================================
 # HELPER FUNCTIONS - UI Components
 # =============================================================================
+def _render_confidence_banner(query: str, confidence: str, result_count: int):
+    """Render the tiered confidence banner for search results."""
+    BANNER_STYLE = "background: #F3E8FF; border-left: 4px solid #8B5CF6; padding: 12px 16px; margin: 16px 0;"
+    TEXT_COLOR_SUCCESS = "#6B21A8"
+    TEXT_COLOR_CAUTION = "#4A1D7A"
+    TEXT_STYLE_COMMON = "font-size: 14px; font-weight: 600;"
+
+    icon = "🐾"
+    text_style_final = f"color: {TEXT_COLOR_SUCCESS}; {TEXT_STYLE_COMMON}"
+
+    if confidence == "high":
+        plural = "story" if result_count == 1 else "stories"
+        message = f"Found {result_count} matching {plural} for \"{query}\""
+    elif confidence == "low":
+        icon = "⚠️"
+        message = f"Showing closest matches for \"{query}\". Relevance may be low."
+        text_style_final = (
+            f"color: {TEXT_COLOR_CAUTION}; {TEXT_STYLE_COMMON}; font-style: italic;"
+        )
+    else:  # confidence == "none"
+        message = f"No strong matches for \"{query}\". Matt may not have worked with this client or topic."
+
+    st.markdown(
+        f"""
+    <div style="{BANNER_STYLE}">
+        <span style="{text_style_final}">{icon} {message}</span>
+    </div>
+    """,
+        unsafe_allow_html=True,
+    )
 
 
 def render_filter_chips(filters: dict, stories: list[dict]) -> bool:
@@ -258,9 +298,8 @@ def render_filter_chips(filters: dict, stories: list[dict]) -> bool:
     st.markdown('<div class="active-chip-row">', unsafe_allow_html=True)
 
     to_remove = []
-    for i, (_, text, (k, v)) in enumerate(chips):
+    for _i, (_, text, (k, v)) in enumerate(chips):
         # FIX: Create stable unique key using hash instead of position index
-        # This prevents the wrong pill from being removed when indices shift
         unique_key = f"chip_{k}_{hash((k, v))}"
         if st.button(f"✕ {text}", key=unique_key):
             to_remove.append((k, v))
@@ -279,13 +318,25 @@ def render_filter_chips(filters: dict, stories: list[dict]) -> bool:
     if to_remove:
         for k, v in to_remove:
             if k == "q":
-                filters["q"] = ""
+                # Calls remove_filter_value, which correctly handles versioning and F["q"] clearing.
+                remove_filter_value("q", None)
+
+                # The redundant version increment block is now gone.
+
+                # Clear cached search results
+                st.session_state.pop("__last_search_results__", None)
+                st.session_state.pop("__last_search_confidence__", None)
+                st.session_state.pop("__last_search_query__", None)
             elif k == "has_metric":
                 filters["has_metric"] = False
             elif k == "industry":
                 filters["industry"] = ""
+                version_key = "_widget_version_industry"
+                st.session_state[version_key] = st.session_state.get(version_key, 0) + 1
             elif k == "capability":
                 filters["capability"] = ""
+                version_key = "_widget_version_capability"
+                st.session_state[version_key] = st.session_state.get(version_key, 0) + 1
             else:
                 remove_filter_value(k, v)
 
@@ -396,13 +447,16 @@ def render_pagination(total_results: int, page_size: int, offset: int, view_mode
         """
     st.markdown(pagination_css, unsafe_allow_html=True)
 
+    page_numbers: list[int | str]
     if total_pages <= 7:
         page_numbers = list(range(1, total_pages + 1))
     else:
         if current_page <= 4:
-            page_numbers = list(range(1, 6)) + ["...", total_pages]
+            page_numbers_base = list(range(1, 6))
+            page_numbers = [*page_numbers_base, "...", total_pages]
         elif current_page >= total_pages - 3:
-            page_numbers = [1, "..."] + list(range(total_pages - 4, total_pages + 1))
+            page_numbers_range = list(range(total_pages - 4, total_pages + 1))
+            page_numbers = [1, "...", *page_numbers_range]
         else:
             page_numbers = [
                 1,
@@ -459,6 +513,8 @@ def render_pagination(total_results: int, page_size: int, offset: int, view_mode
                     key=f"btn_page_{view_mode}_{page_num}",
                     use_container_width=True,
                 ):
+                    # page_num is int here (not "...")
+                    assert isinstance(page_num, int)
                     st.session_state["page_offset"] = (page_num - 1) * page_size
                     st.rerun()
         col_idx += 1
@@ -894,14 +950,30 @@ def render_explore_stories(
         c1, c2, c3 = st.columns([2, 1, 1.5])
 
         with c1:
-            # Search keywords
             search_version = st.session_state.get("_widget_version_q", 0)
-            F["q"] = st.text_input(
-                "Search keywords",
-                value=F.get("q", ""),
-                placeholder="Search by title, client, or keywords...",
-                key=f"facet_q_v{search_version}",
-            )
+
+            # Use a form to capture 'Enter' key press as a deliberate submission
+            # We use a versioned key for the form itself and the input to force reset.
+            with st.form(
+                key=f"search_form_v{search_version}",
+                clear_on_submit=False,
+                border=False,
+            ):
+                # 🎯 FIX: This MUST use the versioned key to force the visual reset
+                # when _widget_version_q is incremented by the chip click.
+                F["q"] = st.text_input(
+                    "Search keywords",
+                    value=F.get("q", ""),
+                    placeholder="Search by title, client, or keywords...",
+                    key=f"facet_q_v{search_version}",  # ⬅️ RELIABLE VERSIONED KEY
+                )
+
+                # This button is necessary for form functionality and captures 'Enter'
+                submitted = st.form_submit_button("🔍", use_container_width=False)
+
+                if submitted:
+                    # When submitted, the widget updates F["q"]. We just set the flag.
+                    st.session_state["__search_triggered__"] = True
 
         with c2:
             # Industry filter (NEW - single select dropdown)
@@ -991,39 +1063,107 @@ def render_explore_stories(
                     default=F.get("domains", []),
                     key=f"facet_domains_v{domains_version}",
                 )
-
     # =========================================================================
-    # SEARCH & FILTERING LOGIC
+    # SEARCH & FILTERING LOGIC (Guarded and Cached)
     # =========================================================================
 
-    view = []
-    if F["q"].strip():
-        ov = token_overlap_ratio(F["q"], _KNOWN_VOCAB)
-        nonsense_check = is_nonsense(F["q"])
-        overlap_check = ov < 0.03 and f"overlap:{ov:.2f}"
-        reason = nonsense_check or overlap_check
+    # Check if search was intentionally triggered (by form submission)
+    search_triggered = st.session_state.pop("__search_triggered__", False)
+    current_query = F["q"].strip()
+    view = stories  # Default view: all stories
 
-        if reason:
-            st.session_state["__nonsense_reason__"] = reason
-            st.session_state["__pc_suppressed__"] = True
-            st.session_state["last_results"] = stories[:5]
+    # Cache keys for readability
+    LAST_RESULTS = "__last_search_results__"
+    LAST_CONFIDENCE = "__last_search_confidence__"
+    LAST_QUERY = "__last_search_query__"
+
+    if current_query and search_triggered:
+        # --- PATH 1: Intentional Search (Run Pinecone) ---
+        nonsense_check = is_nonsense(current_query)
+
+        if nonsense_check:
+            st.session_state["__nonsense_reason__"] = nonsense_check
+            # Clear cache to prevent showing old results if the user cancels this search
+            st.session_state.pop(LAST_RESULTS, None)
+            st.session_state.pop(LAST_CONFIDENCE, None)
+            st.session_state.pop(LAST_QUERY, None)
+
+            # Display rejection banner and stop execution immediately
             render_no_match_banner(
-                reason=reason, query=F["q"], overlap=ov, suppressed=True, filters=F
+                reason=nonsense_check,
+                query=current_query,
+                overlap=None,
+                suppressed=True,
+                filters=F,
+                context="explore",
             )
+            st.session_state["last_results"] = []
             st.stop()
         else:
-            # FIX: Call with correct signature
-            view = semantic_search(F["q"], filters=F, stories=stories)
-            st.session_state["last_results"] = view
+            # Run expensive semantic search
+            search_container = st.empty()
+            with search_container:
+                render_thinking_indicator()
+            try:
+                search_result = semantic_search(
+                    current_query, filters=F, stories=stories
+                )
+                view = search_result["results"]
+                confidence = search_result["confidence"]
+
+                # Cache results
+                st.session_state[LAST_RESULTS] = view
+                st.session_state[LAST_CONFIDENCE] = confidence
+                st.session_state[LAST_QUERY] = current_query
+
+            finally:
+                search_container.empty()
+
+            _render_confidence_banner(current_query, confidence, len(view))
+
+            if confidence == "none":
+                view = []
+
             st.session_state["__nonsense_reason__"] = None
             st.session_state["page_offset"] = 0
-            st.session_state["__last_q__"] = F["q"]
+            st.session_state["__last_q__"] = current_query
+
+    elif current_query and st.session_state.get(LAST_QUERY) == current_query:
+        # --- PATH 2: Reuse Cached Results (Filter Interaction - NO Pinecone Call) ---
+        # User interacted with a filter (Advanced Filter, Industry, etc.).
+        # Search term is the same as the last submitted query, so reuse the cached set.
+
+        # Retrieve cached results and confidence
+        cached_view = st.session_state.get(LAST_RESULTS, [])
+        confidence = st.session_state.get(LAST_CONFIDENCE, "none")
+
+        # Show banner based on cached confidence level
+        _render_confidence_banner(current_query, confidence, len(cached_view))
+
+        if confidence == "none":
+            cached_view = []
+
+        # Apply filters EXCEPT keyword query - Pinecone already did semantic matching.
+        # Re-applying keyword filter would remove valid semantic matches that don't
+        # contain the exact query tokens (e.g., "Truist" search returning RBC stories).
+        filters_without_q = {k: v for k, v in F.items() if k != "q"}
+        view = [s for s in cached_view if matches_filters(s, filters_without_q)]
+
     else:
+        # --- PATH 3: No Active Query (F["q"] is empty) or Query changed but not submitted ---
+        # This path handles initial load, "Clear all" clicks, and filter-only searches.
+
+        # Clear cache if the query is empty
+        st.session_state.pop(LAST_RESULTS, None)
+        st.session_state.pop(LAST_CONFIDENCE, None)
+        st.session_state.pop(LAST_QUERY, None)
+
+        # Filter the entire story set locally
         has_filters = any(
             [
-                F.get("industry"),  # NEW: Primary filter
-                F.get("capability"),  # NEW: Primary filter
-                F.get("personas"),
+                F.get("q"),
+                F.get("industry"),
+                F.get("capability"),
                 F.get("clients"),
                 F.get("domains"),
                 F.get("roles"),
@@ -1031,33 +1171,18 @@ def render_explore_stories(
                 F.get("has_metric"),
             ]
         )
+
         if has_filters:
             view = [s for s in stories if matches_filters(s, F)]
         else:
             view = stories
-        st.session_state["last_results"] = view
 
+    # Final step for all paths
+    st.session_state["last_results"] = view
     st.session_state["__results_count__"] = len(view)
-
-    if F.get("q", "").strip() and len(view) > 0:
-        plural = "story" if len(view) == 1 else "stories"
-        banner_html = f"""
-        <style>
-        .search-success-banner {{
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
-            padding: 12px 16px;
-            border-radius: 6px;
-            margin: 16px 0;
-            font-size: 14px;
-        }}
-        </style>
-        <div class="search-success-banner">
-            ✓ Found {len(view)} matching {plural} for "{F['q']}"
-        </div>
-        """
-        st.markdown(banner_html, unsafe_allow_html=True)
+    # =========================================================================
+    # END SEARCH & FILTERING LOGIC
+    # =========================================================================
 
     render_filter_chips(F, stories)
 
@@ -1345,28 +1470,3 @@ def render_explore_stories(
     from ui.components.footer import render_footer
 
     render_footer()
-    # # =========================================================================
-    # # LET'S CONNECT FOOTER - WIREFRAME EXACT
-    # # =========================================================================
-    # st.markdown("""
-    # <div style="background: #2c3e50; color: white; padding: 48px 40px; text-align: center; margin-top: 40px; border-radius: 8px;">
-    #     <h3 style="font-size: 28px; margin-bottom: 12px; color: white;">Let's Connect</h3>
-    #     <p style="font-size: 16px; margin-bottom: 8px; opacity: 0.9;">
-    #         Exploring Director/VP opportunities in <strong>Product Leadership</strong>, <strong>Platform Engineering</strong>, and <strong>Organizational Transformation</strong>
-    #     </p>
-    #     <p style="font-size: 14px; margin-bottom: 32px; opacity: 0.75;">
-    #         Available for immediate start • Remote or Atlanta-based • Open to consulting engagements
-    #     </p>
-    #     <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-    #         <a href="mailto:mcpugmire@gmail.com" style="padding: 12px 28px; background: #8B5CF6; color: white; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease;">
-    #             📧 mcpugmire@gmail.com
-    #         </a>
-    #         <a href="https://www.linkedin.com/in/matt-pugmire/" target="_blank" style="padding: 12px 28px; background: rgba(255,255,255,0.1); color: white; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease;">
-    #             💼 LinkedIn
-    #         </a>
-    #         <a href="#ask" style="padding: 12px 28px; background: rgba(255,255,255,0.1); color: white; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease;">
-    #             🐾 Ask Agy
-    #         </a>
-    #     </div>
-    # </div>
-    # """, unsafe_allow_html=True)

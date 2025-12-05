@@ -1,16 +1,17 @@
 # Generate 5P Summaries Without Modifying Master Sheet
 
-import pandas as pd
-from openai import OpenAI
-import time
-from dotenv import load_dotenv
 import os
+import time
+
+import pandas as pd
+from dotenv import load_dotenv
+from openai import OpenAI
 
 load_dotenv()
 client = OpenAI(
     api_key=os.getenv("OPENAI_API_KEY"),
     project=os.getenv("OPENAI_PROJECT_ID"),
-    organization=os.getenv("OPENAI_ORG_ID")
+    organization=os.getenv("OPENAI_ORG_ID"),
 )
 
 
@@ -22,6 +23,7 @@ OPENAI_MODEL = "gpt-4"
 
 # === Load Excel ===
 df = pd.read_excel(INPUT_FILE, sheet_name=INPUT_SHEET)
+
 
 # === Helper ===
 def generate_5p_summary(row):
@@ -53,16 +55,20 @@ def generate_5p_summary(row):
         response = client.chat.completions.create(
             model=OPENAI_MODEL,
             messages=[
-                {"role": "system", "content": "You are a helpful assistant that formats 5P summaries."},
-                {"role": "user", "content": prompt}
+                {
+                    "role": "system",
+                    "content": "You are a helpful assistant that formats 5P summaries.",
+                },
+                {"role": "user", "content": prompt},
             ],
-            temperature=0.3
+            temperature=0.3,
         )
         return response.choices[0].message.content.strip()
     except Exception as e:
         print("Error generating summary:", e)
         return ""
-    
+
+
 # === Apply to Not Started Only ===
 not_started = df[df["5P Retrofit Status"] == "Not Started"].copy()
 
@@ -82,4 +88,3 @@ for idx, summary in summaries:
 output_df = df[df.index.isin([idx for idx, _ in summaries])]
 output_df.to_excel(OUTPUT_FILE, index=False)
 print(f"Saved {len(summaries)} updated rows to: {OUTPUT_FILE}")
-

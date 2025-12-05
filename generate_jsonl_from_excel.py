@@ -18,9 +18,7 @@ import pandas as pd
 
 # ---------- config ----------
 
-INPUT_EXCEL_FILE = (
-    "MPugmire - STAR Stories - 11NOV25_CLEANED.xlsx"  # <-- update as needed
-)
+INPUT_EXCEL_FILE = "MPugmire - STAR Stories - 01DEC25.xlsx"  # <-- update as needed
 OUTPUT_JSONL_FILE = "echo_star_stories.jsonl"
 SHEET_NAME = "STAR Stories - Interview Ready"
 DRY_RUN = False  # ✅ Change to False when ready to write output
@@ -34,7 +32,8 @@ def load_existing_jsonl(path: str):
       - records: list of dicts (original order)
       - by_key: dict keyed by (Title|Client) normalized
     """
-    records, by_key = [], {}
+    records: list[dict] = []
+    by_key: dict[str, dict] = {}
     if not os.path.exists(path):
         return records, by_key
     with open(path, encoding="utf-8") as f:
@@ -73,7 +72,7 @@ def norm_key(title: str, client: str) -> str:
 
 
 def split_bullets(value: str):
-    """Split multi-line bullet fields, removing Excel apostrophe prefix."""
+    """Split multi-line bullet fields, removing Excel apostrophe prefix but preserving indentation."""
     if not value:
         return []
 
@@ -81,11 +80,12 @@ def split_bullets(value: str):
     parts = []
 
     for line in lines:
-        line = line.strip()
+        # Remove trailing whitespace only, preserve leading spaces for indentation
+        line = line.rstrip()
         if not line:
             continue
 
-        # Remove leading apostrophe
+        # Remove leading apostrophe (but keep any spaces after it)
         if line.startswith("'"):
             line = line[1:]
 
@@ -145,19 +145,15 @@ def excel_to_jsonl():
                 for s in str(row.get("Competencies", "")).split(",")
                 if s and s.strip()
             ],
-            "Solution / Offering": normalize(row.get("Solution / Offering", "")),
-            "Project Scope / Complexity": normalize(
-                row.get("Project Scope / Complexity", "")
-            ),
             "Use Case(s)": [
                 s.strip()
                 for s in str(row.get("Use Case(s)", "")).split(";")
                 if s and s.strip()
             ],
-            "Situation": [normalize(row.get("Situation", ""))],
-            "Task": [normalize(row.get("Task", ""))],
-            "Action": [normalize(row.get("Action", ""))],
-            "Result": [normalize(row.get("Result", ""))],
+            "Situation": split_bullets(normalize(row.get("Situation", ""))),
+            "Task": split_bullets(normalize(row.get("Task", ""))),
+            "Action": split_bullets(normalize(row.get("Action", ""))),
+            "Result": split_bullets(normalize(row.get("Result", ""))),
             "public_tags": normalize(row.get("Public Tags", "")),
             "Person": normalize(row.get("Person", "")),
             "Place": normalize(row.get("Place", "")),

@@ -1,6 +1,8 @@
 # mockui.py — 5P Stories + Ask MattGPT (polished demo, Pinecone-first w/ fallback)
-import os, re, time, textwrap
-from typing import List, Optional
+import os
+import re
+import textwrap
+import time
 
 import streamlit as st
 
@@ -242,7 +244,7 @@ def _badge_color(label: str) -> str:
     return _BADGE_PALETTE[idx]
 
 
-def render_badges(domain: Optional[str], tags: Optional[List[str]]):
+def render_badges(domain: str | None, tags: list[str] | None):
     parts = []
     if domain:
         c = _badge_color(domain)
@@ -261,12 +263,12 @@ def render_badges(domain: Optional[str], tags: Optional[List[str]]):
         )
 
 
-def render_list(items: Optional[List[str]]):
+def render_list(items: list[str] | None):
     for x in items or []:
         st.write(f"- {x}")
 
 
-def render_outcomes(items: Optional[List[str]]):
+def render_outcomes(items: list[str] | None):
     for line in items or []:
         out = line
         for m in METRIC_RX.finditer(line or ""):
@@ -300,7 +302,7 @@ def _extract_metric_value(text: str):
     return best
 
 
-def strongest_metric_line(s: dict) -> Optional[str]:
+def strongest_metric_line(s: dict) -> str | None:
     candidates = []
     for line in s.get("what") or []:
         v = _extract_metric_value(line or "")
@@ -526,7 +528,7 @@ def matches_filters(s, F=None):
 # =========================
 # Embedding + Pinecone query
 # =========================
-def _embed(text: str) -> List[float]:
+def _embed(text: str) -> list[float]:
     """Deterministic stub embedder so the demo runs without external models."""
     import math
 
@@ -541,7 +543,7 @@ def _embed(text: str) -> List[float]:
 
 def pinecone_semantic_search(
     query: str, filters: dict, top_k: int = 5
-) -> Optional[List[dict]]:
+) -> list[dict] | None:
     idx = _init_pinecone()
     if not idx or not query:
         return None
@@ -622,7 +624,7 @@ def rag_answer(question: str, filters: dict):
     }
 
 
-def send_to_backend(prompt: str, filters: dict, ctx: Optional[dict]):
+def send_to_backend(prompt: str, filters: dict, ctx: dict | None):
     return rag_answer(prompt, filters)
 
 

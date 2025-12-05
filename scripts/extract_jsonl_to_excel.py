@@ -2,13 +2,16 @@ import json
 
 import pandas as pd
 
-EXCEL_FILE = "MPugmire - STAR Stories - 11NOV25_CLEANED.xlsx"
+EXCEL_FILE = "MPugmire - STAR Stories - 01DEC25.xlsx"
 JSONL_FILE = "echo_star_stories_nlp.jsonl"
-OUTPUT_EXCEL_FILE = "MPugmire - STAR Stories - 01DEC25.xlsx"
+OUTPUT_EXCEL_FILE = "MPugmire - STAR Stories - 01DEC25_PTags.xlsx"
 SHEET_NAME = "STAR Stories - Interview Ready"
 
 # Load Excel
 df = pd.read_excel(EXCEL_FILE, sheet_name=SHEET_NAME)
+
+# Filter out empty rows
+df = df[df["Title"].notna()].copy()
 
 # Load JSONL
 with open(JSONL_FILE, encoding="utf-8") as f:

@@ -1,15 +1,18 @@
 """
 build_custom_embeddings.py
 
-Reads enriched STAR story data from a JSONL file, generates embeddings (MiniLM),
-and upserts them into a Pinecone index (or FAISS locally). It purges the target
-Pinecone namespace before reindexing for a clean slate.
+Reads enriched STAR story data from a JSONL file, generates embeddings using
+OpenAI's text-embedding-3-small (1536 dims), and upserts them into Pinecone.
+
+Updated 12.05.25:
+- Switched from MiniLM (384 dims) to OpenAI text-embedding-3-small (1536 dims)
+- Better semantic matching for behavioral interview questions
 
 Env (via .env or shell):
-  VECTOR_BACKEND=faiss | pinecone
-  STORIES_JSONL=echo_star_stories_nlp.jsonl   # default if unset
+  STORIES_JSONL=echo_star_stories_nlp.jsonl
+  OPENAI_API_KEY=...
   PINECONE_API_KEY=...
-  PINECONE_INDEX_NAME=...
+  PINECONE_INDEX_NAME=matt-portfolio-v2
   PINECONE_NAMESPACE=default
 """
 
@@ -18,25 +21,22 @@ import logging
 import os
 from typing import Any
 
-# Optional backends
-import faiss
-import numpy as np
 from dotenv import load_dotenv
+from openai import OpenAI
 from pinecone import Pinecone
-from sentence_transformers import SentenceTransformer
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s — %(levelname)s — %(message)s"
 )
 load_dotenv()
 
-VECTOR_BACKEND = os.getenv("VECTOR_BACKEND", "faiss").strip().lower()
 STORIES_JSONL = os.getenv("STORIES_JSONL", "echo_star_stories_nlp.jsonl")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 PINECONE_INDEX_NAME = os.getenv("PINECONE_INDEX_NAME")
 PINECONE_NAMESPACE = os.getenv("PINECONE_NAMESPACE", "default")
 
-MODEL_NAME = "all-MiniLM-L6-v2"  # 384-dim
+EMBEDDING_MODEL = "text-embedding-3-small"  # 1536 dims
 
 
 # ---------------------------
@@ -50,7 +50,6 @@ def _as_list(v) -> list[str]:
     s = str(v).strip()
     if not s:
         return []
-    # split on common separators if someone stored as string
     if ";" in s:
         return [x.strip() for x in s.split(";") if x.strip()]
     if "," in s:
@@ -58,34 +57,18 @@ def _as_list(v) -> list[str]:
     return [s]
 
 
-def _join(parts: list[str]) -> str:
-    return " ".join(p for p in parts if p)
-
-
 def build_embedding_text(story: dict[str, Any]) -> str:
     """
     Build a rich, behavior-aware text representation for embeddings.
-
-    We intentionally include:
-    - Theme / Industry / Sub-category  → high-level positioning
-    - 5PSummary                       → condensed narrative
-    - Situation / Action / Result     → behavioral signals + context
-    - Process (from 5P)              → how Matt works with people / systems
-    - public_tags                    → search hooks
-
-    This makes behavioral queries like "handled conflict" or
-    "disagreements with leadership" much easier to match.
     """
 
     def _to_text(val, max_items: int = 3) -> str:
-        """Convert string or list to space-joined text."""
         if not val:
             return ""
         if isinstance(val, list):
             return " ".join(str(p).strip() for p in val[:max_items] if str(p).strip())
         return str(val).strip()
 
-    # High-level metadata
     theme = (
         story.get("Theme", "").strip() if isinstance(story.get("Theme"), str) else ""
     )
@@ -100,7 +83,6 @@ def build_embedding_text(story: dict[str, Any]) -> str:
         else ""
     )
 
-    # Core narrative fields
     summary_5p = (
         story.get("5PSummary", "").strip()
         if isinstance(story.get("5PSummary"), str)
@@ -108,13 +90,10 @@ def build_embedding_text(story: dict[str, Any]) -> str:
     )
     situation = _to_text(story.get("Situation"), max_items=2)
     task = _to_text(story.get("Task"), max_items=2)
-    action = _to_text(
-        story.get("Action"), max_items=3
-    )  # More action = more behavioral signal
+    action = _to_text(story.get("Action"), max_items=3)
     result = _to_text(story.get("Result"), max_items=2)
     process_text = _to_text(story.get("Process"), max_items=3)
 
-    # Tags
     tags = story.get("public_tags", "")
     if isinstance(tags, list):
         tags = ", ".join(tags)
@@ -122,7 +101,6 @@ def build_embedding_text(story: dict[str, Any]) -> str:
 
     parts: list[str] = []
 
-    # Header framing
     header_bits = []
     if theme:
         header_bits.append(f"[{theme}]")
@@ -134,11 +112,9 @@ def build_embedding_text(story: dict[str, Any]) -> str:
     if header_bits:
         parts.append(" ".join(header_bits))
 
-    # 5P summary (if present) as the lead
     if summary_5p:
         parts.append(f"Summary: {summary_5p}")
 
-    # Classic STAR fields – these help behavioral questions a lot
     if situation:
         parts.append(f"Situation: {situation}")
     if task:
@@ -148,11 +124,9 @@ def build_embedding_text(story: dict[str, Any]) -> str:
     if result:
         parts.append(f"Result: {result}")
 
-    # Process (methods, collaboration style, practices)
     if process_text:
         parts.append(f"Process: {process_text}")
 
-    # Tags at the tail – good semantic + keyword hooks
     if tags:
         parts.append(f"Keywords: {tags}")
 
@@ -163,25 +137,19 @@ def build_metadata(story: dict[str, Any]) -> dict[str, Any]:
     """Compact but rich metadata for UI/snippets + Pinecone filters."""
     cat = story.get("Category", "")
     sub = story.get("Sub-category", "")
-    theme = story.get("Theme", "")  # ← NEW 11.10.25
+    theme = story.get("Theme", "")
     domain = " / ".join([x for x in [cat, sub] if x])
 
     tags_list = _as_list(story.get("public_tags"))
 
-    # Extract Industry and Division for hybrid search filtering
     industry = story.get("Industry", "").strip()
     division = story.get("Division", "").strip()
-
-    # ADDED: Extract new fields
     employer = story.get("Employer", "").strip()
     project = story.get("Project", "").strip()
     complexity = story.get("Project Scope / Complexity", "").strip()
-    status = story.get("Status", "").strip()
 
     meta = {
-        # ═══════════════════════════════════════════════════════════
-        # CANONICAL FIELDS (matches JSONL / Excel)
-        # ═══════════════════════════════════════════════════════════
+        # CANONICAL FIELDS
         "id": story.get("id"),
         "Title": story.get("Title", "Untitled"),
         "Employer": employer,
@@ -195,7 +163,7 @@ def build_metadata(story: dict[str, Any]) -> dict[str, Any]:
         "Project Scope / Complexity": complexity,
         "Category": cat,
         "Sub-category": sub,
-        "Theme": theme,  # ← MOVED HERE (canonical section)
+        "Theme": theme,
         "Use Case(s)": _as_list(story.get("Use Case(s)")),
         "Competencies": _as_list(story.get("Competencies")),
         "Situation": _as_list(story.get("Situation")),
@@ -207,9 +175,7 @@ def build_metadata(story: dict[str, Any]) -> dict[str, Any]:
         "Process": _as_list(story.get("Process")),
         "5PSummary": story.get("5PSummary", ""),
         "public_tags": tags_list,
-        # ═══════════════════════════════════════════════════════════
-        # UI-FRIENDLY DUPLICATES (lowercase for easier UI mapping)
-        # ═══════════════════════════════════════════════════════════
+        # UI-FRIENDLY DUPLICATES
         "title": story.get("Title", "Untitled"),
         "employer": employer.lower() if employer else "",
         "division": division.lower() if division else "",
@@ -225,6 +191,25 @@ def build_metadata(story: dict[str, Any]) -> dict[str, Any]:
     return meta
 
 
+def get_openai_embeddings(texts: list[str], batch_size: int = 100) -> list[list[float]]:
+    """Generate embeddings using OpenAI API in batches."""
+    client = OpenAI(api_key=OPENAI_API_KEY)
+    all_embeddings = []
+
+    for i in range(0, len(texts), batch_size):
+        batch = texts[i : i + batch_size]
+        logging.info(
+            f"📤 Embedding batch {i//batch_size + 1}/{(len(texts)-1)//batch_size + 1} ({len(batch)} texts)"
+        )
+
+        response = client.embeddings.create(model=EMBEDDING_MODEL, input=batch)
+
+        batch_embeddings = [item.embedding for item in response.data]
+        all_embeddings.extend(batch_embeddings)
+
+    return all_embeddings
+
+
 # ---------------------------
 # Load data
 # ---------------------------
@@ -236,100 +221,71 @@ with open(STORIES_JSONL) as f:
 logging.info(f"🔎 Loaded {len(stories)} stories from {STORIES_JSONL}")
 
 # ---------------------------
-# Embed
+# Build embedding texts
 # ---------------------------
-model = SentenceTransformer(MODEL_NAME)
 texts = [build_embedding_text(s) for s in stories]
-# Log a sample embedding for verification
+
 if texts:
     logging.info("📝 Sample embedding text (first story):")
     logging.info(f"   {texts[0][:500]}...")
 
-    # ← ADD THIS: Check the CI/CD story specifically
-    cicd_idx = next(
-        (
-            i
-            for i, s in enumerate(stories)
-            if 'cloud-native-architecture-cicd' in s.get('id', '')
-        ),
+    # Check the failure story
+    fail_idx = next(
+        (i for i, s in enumerate(stories) if 'assumptions' in s.get('id', '')),
         None,
     )
-    if cicd_idx:
-        logging.info("📝 CI/CD story FULL embedding text:")
-        logging.info(f"{texts[cicd_idx]}")  # ← No truncation, show EVERYTHING
-        logging.info(f"Length: {len(texts[cicd_idx])} characters")
-    ns_idx = next(
-        (i for i, s in enumerate(stories) if 'norfolk-southern' in s.get('id', '')),
-        None,
-    )
-    if ns_idx:
-        logging.info("📝 Norfolk Southern FULL embedding text:")
-        logging.info(f"{texts[ns_idx]}")
-        logging.info(f"Length: {len(texts[ns_idx])} characters")
-embeddings = model.encode(texts, show_progress_bar=True, normalize_embeddings=True)
+    if fail_idx:
+        logging.info("📝 Failure story embedding text:")
+        logging.info(f"   {texts[fail_idx][:300]}...")
 
 # ---------------------------
-# Pinecone or FAISS
+# Generate embeddings via OpenAI
 # ---------------------------
-if VECTOR_BACKEND == "pinecone":
-    if not (PINECONE_API_KEY and PINECONE_INDEX_NAME):
-        raise RuntimeError(
-            "Pinecone selected but PINECONE_API_KEY or PINECONE_INDEX_NAME is missing."
-        )
+logging.info(f"🤖 Generating embeddings with {EMBEDDING_MODEL}...")
+embeddings = get_openai_embeddings(texts)
+logging.info(f"✅ Generated {len(embeddings)} embeddings (dim={len(embeddings[0])})")
 
-    pc = Pinecone(api_key=PINECONE_API_KEY)
-    logging.info(
-        f"[INFO] Using Pinecone index='{PINECONE_INDEX_NAME}', namespace='{PINECONE_NAMESPACE}'"
+# ---------------------------
+# Upsert to Pinecone
+# ---------------------------
+if not (PINECONE_API_KEY and PINECONE_INDEX_NAME):
+    raise RuntimeError("PINECONE_API_KEY or PINECONE_INDEX_NAME is missing.")
+
+pc = Pinecone(api_key=PINECONE_API_KEY)
+logging.info(
+    f"[INFO] Using Pinecone index='{PINECONE_INDEX_NAME}', namespace='{PINECONE_NAMESPACE}'"
+)
+
+existing = [i.name for i in pc.list_indexes()]
+if PINECONE_INDEX_NAME not in existing:
+    raise ValueError(
+        f"Index '{PINECONE_INDEX_NAME}' does not exist. Available: {existing}"
     )
 
-    # Ensure index exists
-    existing = [i.name for i in pc.list_indexes()]
-    if PINECONE_INDEX_NAME not in existing:
-        raise ValueError(
-            f"Index '{PINECONE_INDEX_NAME}' does not exist. Available: {existing}"
-        )
+index = pc.Index(PINECONE_INDEX_NAME)
 
-    index = pc.Index(PINECONE_INDEX_NAME)
+# Purge namespace
+logging.info("🧹 Purging namespace (delete_all=True)…")
+try:
+    index.delete(delete_all=True, namespace=PINECONE_NAMESPACE)
+except Exception as e:
+    logging.warning(f"Purge warning: {e}")
 
-    # Purge namespace (best effort across SDK variants)
-    try:
-        logging.info("🧹 Purging namespace (delete_all=True)…")
-        index.delete(delete_all=True, namespace=PINECONE_NAMESPACE)  # v3 SDK
-    except Exception:
-        # Fallback: delete by id range (not perfect, but avoids stale dupes)
-        ids_guess = [f"story-{i}" for i in range(max(1, len(stories) * 2))]
-        logging.info("🧹 Fallback purge by guessed ids…")
-        index.delete(vectors=ids_guess, namespace=PINECONE_NAMESPACE)
+# Upsert in batches
+batch = 100
+upserted = 0
+for start in range(0, len(stories), batch):
+    items = []
+    for i in range(start, min(start + batch, len(stories))):
+        vec = embeddings[i]
+        meta = build_metadata(stories[i])
+        vec_id = str(meta.get("id") or f"story-{i}")
+        meta["id"] = vec_id
+        items.append((vec_id, vec, meta))
 
-    # Upsert in batches
-    batch = 200
-    upserted = 0
-    for start in range(0, len(stories), batch):
-        items = []
-        for i in range(start, min(start + batch, len(stories))):
-            vec = embeddings[i]
-            if np.any(np.isnan(vec)):
-                logging.warning(f"❌ Skipping story-{i}: embedding contains NaNs")
-                continue
-            meta = build_metadata(stories[i])
-            vec_id = str(meta.get("id") or f"story-{i}")
-            meta["id"] = vec_id  # ensure metadata ID matches vector ID
-            items.append((vec_id, vec.tolist(), meta))
-            logging.debug(f"Prepared upsert ID={vec_id} with dim={len(vec)}")
-        if items:
-            index.upsert(vectors=items, namespace=PINECONE_NAMESPACE)
-            upserted += len(items)
-            logging.info(f"⬆️ Upserted {upserted}/{len(stories)}")
+    if items:
+        index.upsert(vectors=items, namespace=PINECONE_NAMESPACE)
+        upserted += len(items)
+        logging.info(f"⬆️ Upserted {upserted}/{len(stories)}")
 
-    logging.info("✅ Pinecone index updated successfully.")
-
-else:
-    # FAISS local index
-    dim = embeddings.shape[1]
-    faiss_index = faiss.IndexFlatL2(dim)
-    faiss_index.add(np.array(embeddings, dtype="float32"))
-    os.makedirs("faiss_index", exist_ok=True)
-    faiss.write_index(faiss_index, "faiss_index/index.faiss")
-    with open("faiss_index/story_metadata.json", "w") as f:
-        json.dump([build_metadata(s) for s in stories], f, indent=2)
-    logging.info("✅ FAISS index + metadata saved to ./faiss_index/")
+logging.info("✅ Pinecone index updated successfully.")

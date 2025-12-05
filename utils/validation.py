@@ -62,7 +62,7 @@ _STOPWORDS = {
 _WORD_RX = re.compile(r"[A-Za-z0-9+#\-_.]+")
 
 # Global rules cache
-_NONSENSE_RULES = []
+_NONSENSE_RULES: list[dict] = []
 
 
 def _tokenize(text: str) -> list[str]:

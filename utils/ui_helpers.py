@@ -72,7 +72,7 @@ def render_sources_badges_static(
         label_full = f"{s['client']} — {s['title']}" if s['client'] else s['title']
         _score_key = str(s.get("id") or "")
         sc = _scores.get(_score_key)
-        pct = f"{float(sc)*100:.0f}%" if isinstance(sc, (int, float)) else None
+        pct = f"{float(sc)*100:.0f}%" if isinstance(sc, int | float) else None
 
         text = _shorten_middle(label_full, 96)
         if pct:
@@ -186,7 +186,7 @@ def render_sources_chips(
         safe_id = item.get("id") or _slug(base) or str(idx)
         _scores = st.session_state.get("__pc_last_ids__", {}) or {}
         sc = _scores.get(str(safe_id) or str(item.get("id") or ""))
-        pct = f"{float(sc)*100:.0f}%" if isinstance(sc, (int, float)) else None
+        pct = f"{float(sc)*100:.0f}%" if isinstance(sc, int | float) else None
         label = f"{pct} Match • {short}" if pct else short
         return label, safe_id
 
@@ -309,10 +309,14 @@ def render_no_match_banner(
     filters: dict | None = None,
     *,
     key_prefix: str = "banner",
+    context: str = "ask",  # "ask" or "explore"
 ):
     """
-    Unified yellow warning banner for 'no confident match' situations.
-    Always shows a consistent message, suggestions, and optionally a Clear Filters button.
+    Unified warning banner for 'no confident match' situations.
+
+    Args:
+        context: "ask" for Ask MattGPT (shows suggestion chips),
+                 "explore" for Explore Stories (simpler message, no chips)
     """
     # Primary message
     msg = "🐾 I can't help with that. I'm trained on Matt's transformation work."
@@ -324,94 +328,98 @@ def render_no_match_banner(
         if overlap is not None:
             debug_text += f" (overlap={overlap:.2f})"
 
-    # Use native Streamlit components for better compatibility in chat messages
-    # Create a container with custom styling via markdown
     st.markdown(
         """
         <style>
         .no-match-banner {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #FFFBEB;
-            border-left: 4px solid #F59E0B;
+            background: #F3E8FF;
+            border-left: 4px solid #8B5CF6;
             padding: 20px 24px;
             border-radius: 12px;
             margin: 16px 0;
         }
         .no-match-banner-msg {
-            color: #B45309;
+            color: #6B21A8;
             font-weight: 500;
             font-size: 15px;
             line-height: 1.6;
         }
         .no-match-banner-debug {
-            color: #B45309;
+            color: #6B21A8;
             font-size: 13px;
             opacity: 0.8;
             font-style: italic;
             margin-top: 8px;
         }
         .no-match-banner-subtitle {
-            color: #B45309;
+            color: #6B21A8;
             font-weight: 500;
             margin-top: 12px;
             font-size: 14px;
+        }
+        .no-match-banner-hint {
+            color: #7C3AED;
+            font-size: 13px;
+            margin-top: 8px;
         }
         </style>
         """,
         unsafe_allow_html=True,
     )
 
-    # Render the banner content
+    # Build banner HTML based on context
     banner_html = (
         f'<div class="no-match-banner"><div class="no-match-banner-msg">{msg}</div>'
     )
+
     if debug_text:
         banner_html += f'<div class="no-match-banner-debug">{debug_text}</div>'
-    banner_html += '<div class="no-match-banner-subtitle">Ask me about:</div></div>'
 
+    if context == "ask":
+        banner_html += '<div class="no-match-banner-subtitle">Ask me about:</div>'
+    else:
+        # Explore Stories context - simpler hint
+        banner_html += '<div class="no-match-banner-hint">Try searching for clients, technologies, or project types from Matt\'s portfolio.</div>'
+
+    banner_html += '</div>'
     st.markdown(banner_html, unsafe_allow_html=True)
 
-    # Chips act as clean semantic prompts (no tag/domain filters)
-    suggestions = [
-        (
-            "Payments modernization",
-            "Tell me about your work modernizing payments platforms.",
-        ),
-        (
-            "Generative AI in healthcare",
-            "Tell me about applying Generative AI in healthcare.",
-        ),
-        (
-            "Cloud-native architecture",
-            "Tell me about your cloud-native architecture work.",
-        ),
-        (
-            "Innovation in digital products",
-            "Tell me about driving innovation in digital products.",
-        ),
-    ]
-    cols = st.columns(len(suggestions))
-    for i, (label, prompt_text) in enumerate(suggestions):
-        with cols[i]:
-            if st.button(
-                label, key=f"{key_prefix}_suggest_no_match_{i}_{hash(label)%10000}"
-            ):
-                # Inject a new user turn with a concise prompt; rely on semantic search only
-                st.session_state["__inject_user_turn__"] = prompt_text
-                # Mark that this came from a suggestion chip to relax off-domain gating once
-                st.session_state["__ask_from_suggestion__"] = True
-                # Guarantee we build a compact answer panel even if retrieval is empty
-                st.session_state["__ask_force_answer__"] = True
-                st.session_state["ask_input"] = prompt_text
-                # Note: Don't set active_tab here - we're already on Ask MattGPT if we see this banner
-                # Setting it redundantly can cause issues with page state
-                # Defer banner clearing to after a successful answer, avoiding duplicates
-                st.session_state["__clear_banner_after_answer__"] = True
-                st.rerun()
+    # Only show suggestion chips for Ask MattGPT context
+    if context == "ask":
+        suggestions = [
+            (
+                "Payments modernization",
+                "Tell me about your work modernizing payments platforms.",
+            ),
+            (
+                "Platform engineering & modernization",
+                "Tell me about your work modernizing platforms and engineering foundations.",
+            ),
+            (
+                "Cloud-native architecture",
+                "Tell me about your cloud-native architecture work.",
+            ),
+            (
+                "Innovation in digital products",
+                "Tell me about driving innovation in digital products.",
+            ),
+        ]
+        cols = st.columns(len(suggestions))
+        for i, (label, prompt_text) in enumerate(suggestions):
+            with cols[i]:
+                if st.button(
+                    label, key=f"{key_prefix}_suggest_no_match_{i}_{hash(label)%10000}"
+                ):
+                    st.session_state["__inject_user_turn__"] = prompt_text
+                    st.session_state["__ask_from_suggestion__"] = True
+                    st.session_state["__ask_force_answer__"] = True
+                    st.session_state["ask_input"] = prompt_text
+                    st.session_state["__clear_banner_after_answer__"] = True
+                    st.rerun()
 
     # Show Clear Filters button if filters exist and are non-empty
     if filters:
-        # Check if any filter is set (excluding 'q' and 'has_metric' for len check)
         any_active = any(
             (isinstance(v, list) and v)
             or (isinstance(v, str) and v.strip())
