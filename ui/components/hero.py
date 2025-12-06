@@ -177,10 +177,11 @@ def render_stats_bar():
             grid-template-columns: repeat(4, 1fr);
             border-bottom: 2px solid {COLORS['border_gray']};
             margin-bottom: 30px;
+            margin-top: -15px;
         }}
 
         .stat {{
-            padding: 5px;
+            padding: 2px;
             text-align: center;
             border-right: 1px solid {COLORS['border_gray']};
         }}
@@ -199,7 +200,7 @@ def render_stats_bar():
 
         .stat-label {{
             font-size: 14px;
-            color: #999999;
+            color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }}

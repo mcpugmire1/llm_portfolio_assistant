@@ -2,7 +2,7 @@
 Theme Utilities for MattGPT
 
 Provides theme detection and CSS variable injection for light/dark mode support.
-Uses Streamlit's theme.base option to detect the current theme.
+Uses JavaScript to detect Streamlit's actual rendered theme.
 """
 
 import streamlit as st
@@ -27,7 +27,7 @@ def get_theme_variables_css() -> str:
     Return CSS variable definitions that automatically switch based on theme.
 
     Uses JavaScript to detect Streamlit's actual theme by checking the background
-    color of the app container. Adds a 'dark-theme' class to body when dark mode
+    color of the body element. Adds a 'dark-theme' class to body when dark mode
     is detected, which then triggers the dark CSS variables.
 
     Returns:
@@ -161,57 +161,6 @@ def get_theme_variables_css() -> str:
         --banner-info-text: #C4B5FD;
     }
     </style>
-
-    <script>
-    (function() {
-        function detectTheme() {
-            // Look for Streamlit's app container and check its background color
-            const appContainer = document.querySelector('[data-testid="stAppViewContainer"]');
-            if (appContainer) {
-                const bgColor = window.getComputedStyle(appContainer).backgroundColor;
-                // Streamlit dark mode uses rgb(14, 17, 23) which is #0E1117
-                const isDark = bgColor === 'rgb(14, 17, 23)' ||
-                               bgColor === 'rgb(17, 20, 24)' ||
-                               bgColor.includes('14, 17, 23');
-
-                if (isDark) {
-                    document.body.classList.add('dark-theme');
-                } else {
-                    document.body.classList.remove('dark-theme');
-                }
-            }
-        }
-
-        // Run on load
-        detectTheme();
-
-        // Also run after a short delay (Streamlit renders asynchronously)
-        setTimeout(detectTheme, 100);
-        setTimeout(detectTheme, 500);
-        setTimeout(detectTheme, 1000);
-
-        // Watch for changes using MutationObserver
-        const observer = new MutationObserver(function(mutations) {
-            detectTheme();
-        });
-
-        // Start observing once the container exists
-        function startObserving() {
-            const target = document.querySelector('[data-testid="stAppViewContainer"]');
-            if (target) {
-                observer.observe(target, {
-                    attributes: true,
-                    attributeFilter: ['style', 'class'],
-                    subtree: false
-                });
-                detectTheme();
-            } else {
-                setTimeout(startObserving, 100);
-            }
-        }
-        startObserving();
-    })();
-    </script>
     """
 
 
@@ -394,7 +343,44 @@ def inject_theme_css():
     Convenience function to inject all theme CSS at once.
 
     Call this at the top of your main app after page config.
-    Injects CSS variables and JS-based theme detection.
+    Injects CSS variables via markdown, and JS detection via components.html.
     """
     st.markdown(get_theme_variables_css(), unsafe_allow_html=True)
     st.markdown(get_streamlit_overrides_css(), unsafe_allow_html=True)
+
+    # JS must go through components.html to actually execute
+    theme_detection_js = """
+    <script>
+    (function() {
+        function detectTheme() {
+            var bodyBg = window.parent.document.body.style.backgroundColor ||
+                         window.parent.getComputedStyle(window.parent.document.body).backgroundColor;
+
+            var isDark = bodyBg === 'rgb(14, 17, 23)' ||
+                         bodyBg === 'rgb(17, 20, 24)';
+
+            if (isDark) {
+                window.parent.document.body.classList.add('dark-theme');
+            } else if (bodyBg === 'rgb(255, 255, 255)') {
+                window.parent.document.body.classList.remove('dark-theme');
+            }
+        }
+
+        // Poll until theme is detected
+        var attempts = 0;
+        var pollInterval = setInterval(function() {
+            detectTheme();
+            attempts++;
+            if (attempts >= 50) clearInterval(pollInterval);
+        }, 100);
+
+        // Watch for changes
+        var observer = new MutationObserver(detectTheme);
+        observer.observe(window.parent.document.body, {
+            attributes: true,
+            attributeFilter: ['style']
+        });
+    })();
+    </script>
+    """
+    st.components.v1.html(theme_detection_js, height=0)
