@@ -142,8 +142,8 @@ def apply_global_styles():
 
         /* Override Streamlit's default background for bordered containers */
         div[data-testid="stVerticalBlockBorderWrapper"] {
-            background: transparent !important;
-            border: 1px solid rgba(0, 0, 0, 0.1) !important;
+            background: var(--bg-card) !important;
+            border: 1px solid var(--border-color) !important;
         }
 
         div[data-testid="element-container"]:has(div[data-testid="stVerticalBlockBorderWrapper"]) {
@@ -155,12 +155,12 @@ def apply_global_styles():
            ======================================== */
 
         .stApp div[data-testid="metric-container"] {
-            background: #2d2d2d !important;
+            background: var(--bg-card) !important;
             padding: 28px 20px !important;
             border-radius: 12px !important;
-            border: 1px solid #3a3a3a !important;
+            border: 1px solid var(--border-color) !important;
             text-align: center !important;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.25) !important;
+            box-shadow: var(--card-shadow) !important;
             transition: transform 0.3s ease !important;
         }
 
@@ -169,14 +169,14 @@ def apply_global_styles():
         }
 
         .stApp div[data-testid="metric-container"] [data-testid="metric-value"] {
-            color: #667eea !important;
+            color: var(--accent-purple) !important;
             font-size: 34px !important;
             font-weight: 700 !important;
             margin-bottom: 4px !important;
         }
 
         .stApp div[data-testid="metric-container"] [data-testid="metric-label"] {
-            color: #b0b0b0 !important;
+            color: var(--text-secondary) !important;
             font-size: 14px !important;
             margin-top: 4px !important;
         }
@@ -186,9 +186,9 @@ def apply_global_styles():
            ======================================== */
 
         .stButton > button {
-            background: white !important;
-            border: 2px solid white !important;
-            color: #667eea !important;
+            background: var(--bg-card) !important;
+            border: 2px solid var(--border-color) !important;
+            color: var(--accent-purple) !important;
             padding: 14px 28px !important;
             border-radius: 8px !important;
             font-size: 15px !important;
@@ -196,14 +196,14 @@ def apply_global_styles():
             transition: all 0.3s ease !important;
             width: 100% !important;
             margin-top: 10px !important;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+            box-shadow: var(--card-shadow) !important;
         }
 
         .stButton > button:hover {
-            background: rgba(255, 255, 255, 0.95) !important;
-            color: #667eea !important;
+            background: var(--bg-hover) !important;
+            color: var(--accent-purple) !important;
             transform: translateY(-2px) !important;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
+            box-shadow: var(--hover-shadow) !important;
         }
 
         /* ========================================
@@ -262,34 +262,34 @@ def apply_global_styles():
            ======================================== */
 
         .ag-theme-streamlit {
-            background: #262626 !important;
+            background: var(--bg-card) !important;
             border-radius: 12px !important;
             overflow: hidden !important;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
-            border: 1px solid #333 !important;
+            box-shadow: var(--card-shadow) !important;
+            border: 1px solid var(--border-color) !important;
             margin-top: 8px !important;
             margin-bottom: 8px !important;
         }
 
         .ag-theme-streamlit .ag-header {
-            background: #2f2f2f !important;
-            border-bottom: 2px solid #404040 !important;
+            background: var(--table-header-bg) !important;
+            border-bottom: 2px solid var(--border-color) !important;
         }
 
         .ag-theme-streamlit .ag-header-cell {
-            background: #2f2f2f !important;
+            background: var(--table-header-bg) !important;
             border-right: none !important;
             padding: 16px 20px !important;
             font-weight: 600 !important;
             font-size: 13px !important;
-            color: #ffffff !important;
+            color: var(--text-primary) !important;
             text-transform: uppercase !important;
             letter-spacing: 0.5px !important;
         }
 
         .ag-theme-streamlit .ag-row {
-            background: #262626 !important;
-            border-bottom: 1px solid #333 !important;
+            background: var(--table-row-bg) !important;
+            border-bottom: 1px solid var(--border-color) !important;
             border-left: 3px solid transparent !important;
             transition: all 0.2s ease !important;
             cursor: pointer !important;
@@ -297,8 +297,8 @@ def apply_global_styles():
         }
 
         .ag-theme-streamlit .ag-row:hover {
-            background: #2d2d2d !important;
-            border-left: 3px solid #667eea !important;
+            background: var(--table-row-hover-bg) !important;
+            border-left: 3px solid var(--accent-purple) !important;
         }
 
         .ag-theme-streamlit .ag-cell {
@@ -306,6 +306,7 @@ def apply_global_styles():
             font-size: 14px !important;
             line-height: 1.6 !important;
             border-right: none !important;
+            color: var(--text-primary) !important;
         }
 
         /* Hide AgGrid pagination */

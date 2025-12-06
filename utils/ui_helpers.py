@@ -333,33 +333,33 @@ def render_no_match_banner(
         <style>
         .no-match-banner {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #F3E8FF;
-            border-left: 4px solid #8B5CF6;
+            background: var(--banner-info-bg);
+            border-left: 4px solid var(--banner-info-border);
             padding: 20px 24px;
             border-radius: 12px;
             margin: 16px 0;
         }
         .no-match-banner-msg {
-            color: #6B21A8;
+            color: var(--banner-info-text);
             font-weight: 500;
             font-size: 15px;
             line-height: 1.6;
         }
         .no-match-banner-debug {
-            color: #6B21A8;
+            color: var(--banner-info-text);
             font-size: 13px;
             opacity: 0.8;
             font-style: italic;
             margin-top: 8px;
         }
         .no-match-banner-subtitle {
-            color: #6B21A8;
+            color: var(--banner-info-text);
             font-weight: 500;
             margin-top: 12px;
             font-size: 14px;
         }
         .no-match-banner-hint {
-            color: #7C3AED;
+            color: var(--accent-purple);
             font-size: 13px;
             margin-top: 8px;
         }

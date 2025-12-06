@@ -40,7 +40,7 @@ def _format_nested_bullet(text: str) -> str:
             html = f'<div style="margin-bottom: 12px;">{main_text}'
             html += '<ul style="margin: 8px 0 0 20px; padding-left: 20px; list-style-type: circle;">'
             for item in sub_items:
-                html += f'<li style="font-size: 13px; color: #555; line-height: 1.6; margin-bottom: 6px;">{item}</li>'
+                html += f'<li style="font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 6px;">{item}</li>'
             html += '</ul></div>'
             return html
 
@@ -54,7 +54,7 @@ def _format_nested_bullet(text: str) -> str:
             html = f'<div style="margin-bottom: 12px;">{main_text}'
             html += '<ul style="margin: 8px 0 0 20px; padding-left: 20px; list-style-type: circle;">'
             for item in sub_items:
-                html += f'<li style="font-size: 13px; color: #555; line-height: 1.6; margin-bottom: 6px;">{item}</li>'
+                html += f'<li style="font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 6px;">{item}</li>'
             html += '</ul></div>'
             return html
 
@@ -83,7 +83,7 @@ def _format_nested_bullet(text: str) -> str:
                     '<ul style="margin: 0; padding-left: 20px; list-style-type: disc;">'
                 )
                 for item in items:
-                    html += f'<li style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 12px;">{item}</li>'
+                    html += f'<li style="font-size: 14px; color: var(--text-primary); line-height: 1.7; margin-bottom: 12px;">{item}</li>'
                 html += '</ul>'
                 return html
 
@@ -106,7 +106,7 @@ def _format_nested_bullet(text: str) -> str:
                 html = f'<div style="margin-bottom: 12px;">{main_text}'
                 html += '<ul style="margin: 8px 0 0 20px; padding-left: 20px; list-style-type: circle;">'
                 for item in sub_items:
-                    html += f'<li style="font-size: 13px; color: #555; line-height: 1.6; margin-bottom: 6px;">{item}</li>'
+                    html += f'<li style="font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 6px;">{item}</li>'
                 html += '</ul></div>'
                 return html
 
@@ -151,20 +151,20 @@ def _render_bullet_list(items: list) -> str:
 
         if sub_items:
             # Parent with nested children
-            html += f'<li style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 8px;">{formatted}'
+            html += f'<li style="font-size: 14px; color: var(--text-primary); line-height: 1.7; margin-bottom: 8px;">{formatted}'
             html += '<ul style="margin: 8px 0 0 20px; padding-left: 20px; list-style-type: circle;">'
             for sub in sub_items:
                 sub_formatted = _format_nested_bullet(sub.lstrip(" -"))
-                html += f'<li style="font-size: 13px; color: #555; line-height: 1.6; margin-bottom: 6px;">{sub_formatted}</li>'
+                html += f'<li style="font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 6px;">{sub_formatted}</li>'
             html += '</ul></li>'
             i = j  # Skip past the sub-items we just processed
         elif is_indented:
             # Orphaned indented item (shouldn't happen, but handle gracefully)
-            html += f'<li style="font-size: 13px; color: #555; line-height: 1.6; margin-bottom: 6px; margin-left: 20px;">{formatted}</li>'
+            html += f'<li style="font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 6px; margin-left: 20px;">{formatted}</li>'
             i += 1
         else:
             # Regular item, no children
-            html += f'<li style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 8px;">{formatted}</li>'
+            html += f'<li style="font-size: 14px; color: var(--text-primary); line-height: 1.7; margin-bottom: 8px;">{formatted}</li>'
             i += 1
 
     html += '</ul>'
@@ -251,20 +251,20 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
 
     with header_col1:
         st.markdown(
-            f"<h2 style='font-size: 24px; font-weight: 700; color: #2c3e50; margin-bottom: 12px; line-height: 1.3;'>{title}</h2>",
+            f"<h2 style='font-size: 24px; font-weight: 700; color: var(--text-heading); margin-bottom: 12px; line-height: 1.3;'>{title}</h2>",
             unsafe_allow_html=True,
         )
 
         # Metadata with icons
         meta_html = f"""
-        <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center; font-size: 14px; color: #7f8c8d; margin-bottom: 12px;">
+        <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center; font-size: 14px; color: var(--text-muted); margin-bottom: 12px;">
             <div style="display: flex; align-items: center; gap: 8px;">
                 <span>🏢</span>
-                <strong style="color: #2c3e50;">{client}</strong>
+                <strong style="color: var(--text-primary);">{client}</strong>
             </div>
             <div style="display: flex; align-items: center; gap: 8px;">
                 <span>🤝</span>
-                <strong style="color: #2c3e50;">{role}</strong>
+                <strong style="color: var(--text-primary);">{role}</strong>
             </div>
             {'<div style="display: flex; align-items: center; gap: 8px;"><span>📅</span><span>' + date_range + '</span></div>' if date_range else ''}
             <div style="display: flex; align-items: center; gap: 8px;">
@@ -387,11 +387,11 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
         if summary_5p:
             st.markdown(
                 f'''
-            <div style="background: #faf5ff; border-left: 3px solid #8B5CF6; padding: 16px 20px; border-radius: 8px; margin-bottom: 24px;">
-                <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #8B5CF6; margin-bottom: 12px; letter-spacing: 0.5px;">
+            <div style="background: var(--banner-info-bg); border-left: 3px solid var(--accent-purple); padding: 16px 20px; border-radius: 8px; margin-bottom: 24px;">
+                <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--accent-purple); margin-bottom: 12px; letter-spacing: 0.5px;">
                     💡 WHY THIS MATTERS
                 </div>
-                <p style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin: 0;">{summary_5p}</p>
+                <p style="font-size: 14px; color: var(--text-primary); line-height: 1.7; margin: 0;">{summary_5p}</p>
             </div>
             ''',
                 unsafe_allow_html=True,
@@ -410,13 +410,13 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
                 for s in situation:
                     if s:
                         formatted = _format_nested_bullet(s)
-                        html += f'<li style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 8px;">{formatted}</li>'
+                        html += f'<li style="font-size: 14px; color: var(--text-primary); line-height: 1.7; margin-bottom: 8px;">{formatted}</li>'
                 html += '</ul>'
                 st.markdown(html, unsafe_allow_html=True)
             else:
                 if situation[0]:
                     st.markdown(
-                        f'<p style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 12px;">{situation[0]}</p>',
+                        f'<p style="font-size: 14px; color: var(--text-primary); line-height: 1.7; margin-bottom: 12px;">{situation[0]}</p>',
                         unsafe_allow_html=True,
                     )
             st.markdown(
@@ -436,14 +436,14 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
                 for t in task:
                     if t:
                         formatted = _format_nested_bullet(t)
-                        html += f'<li style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 8px;">{formatted}</li>'
+                        html += f'<li style="font-size: 14px; color: var(--text-primary); line-height: 1.7; margin-bottom: 8px;">{formatted}</li>'
                 html += '</ul>'
                 st.markdown(html, unsafe_allow_html=True)
             else:
                 if task[0]:
                     formatted = _format_nested_bullet(task[0])
                     st.markdown(
-                        f'<div style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 12px;">{formatted}</div>',
+                        f'<div style="font-size: 14px; color: var(--text-primary); line-height: 1.7; margin-bottom: 12px;">{formatted}</div>',
                         unsafe_allow_html=True,
                     )
             st.markdown(
@@ -463,7 +463,7 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
                 if action[0]:
                     formatted = _format_nested_bullet(action[0])
                     st.markdown(
-                        f'<div style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 12px;">{formatted}</div>',
+                        f'<div style="font-size: 14px; color: var(--text-primary); line-height: 1.7; margin-bottom: 12px;">{formatted}</div>',
                         unsafe_allow_html=True,
                     )
 
@@ -482,7 +482,7 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
                 for r in result:
                     if r:
                         formatted = _format_nested_bullet(r)
-                        html += f'<li style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 8px;">{formatted}</li>'
+                        html += f'<li style="font-size: 14px; color: var(--text-primary); line-height: 1.7; margin-bottom: 8px;">{formatted}</li>'
                 html += '</ul>'
                 st.markdown(html, unsafe_allow_html=True)
             else:
@@ -490,41 +490,41 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
                 if result[0]:
                     formatted = _format_nested_bullet(result[0])
                     st.markdown(
-                        f'<div style="font-size: 14px; color: #2c3e50; line-height: 1.7; margin-bottom: 12px;">{formatted}</div>',
+                        f'<div style="font-size: 14px; color: var(--text-primary); line-height: 1.7; margin-bottom: 12px;">{formatted}</div>',
                         unsafe_allow_html=True,
                     )
     with sidebar_col:
         # TECHNOLOGIES & PRACTICES
         if public_tags:
             st.markdown(
-                '<div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #7f8c8d; margin-bottom: 12px;">TECHNOLOGIES & PRACTICES</div>',
+                '<div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px;">TECHNOLOGIES & PRACTICES</div>',
                 unsafe_allow_html=True,
             )
             tags_html = '<div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;">'
             for tag in public_tags[:10]:
                 if tag:
-                    tags_html += f'<span style="background: #ecf0f1; padding: 6px 12px; border-radius: 12px; font-size: 12px; color: #555; font-weight: 500;">{tag}</span>'
+                    tags_html += f'<span style="background: var(--pill-bg); padding: 6px 12px; border-radius: 12px; font-size: 12px; color: var(--pill-text); font-weight: 500;">{tag}</span>'
             tags_html += '</div>'
             st.markdown(tags_html, unsafe_allow_html=True)
             st.markdown(
-                '<div style="border-bottom: 1px solid #e0e0e0; margin-bottom: 24px;"></div>',
+                '<div style="border-bottom: 1px solid var(--border-color); margin-bottom: 24px;"></div>',
                 unsafe_allow_html=True,
             )
 
         # CORE COMPETENCIES
         if competencies:
             st.markdown(
-                '<div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #7f8c8d; margin-bottom: 12px;">CORE COMPETENCIES</div>',
+                '<div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px;">CORE COMPETENCIES</div>',
                 unsafe_allow_html=True,
             )
             for comp in competencies:
                 if comp:
                     st.markdown(
-                        f'<div style="padding: 8px 0; font-size: 13px; color: #555; border-bottom: 1px solid #ecf0f1;">{comp}</div>',
+                        f'<div style="padding: 8px 0; font-size: 13px; color: var(--text-secondary); border-bottom: 1px solid var(--border-light);">{comp}</div>',
                         unsafe_allow_html=True,
                     )
             st.markdown(
-                '<div style="border-bottom: 1px solid #e0e0e0; margin: 24px 0;"></div>',
+                '<div style="border-bottom: 1px solid var(--border-color); margin: 24px 0;"></div>',
                 unsafe_allow_html=True,
             )
 
@@ -545,14 +545,14 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
 
         if metrics:
             st.markdown(
-                '<div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #7f8c8d; margin-bottom: 12px;">KEY METRICS</div>',
+                '<div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px;">KEY METRICS</div>',
                 unsafe_allow_html=True,
             )
             for value, label in metrics[:4]:
                 metric_html = f'''
-                <div style="background: #f8f9fa; padding: 12px; border-radius: 6px; border-left: 3px solid #27ae60; margin-bottom: 12px;">
-                    <div style="font-size: 18px; font-weight: 700; color: #27ae60; margin-bottom: 4px;">{value}</div>
-                    <div style="font-size: 11px; color: #7f8c8d; text-transform: uppercase;">{label}</div>
+                <div style="background: var(--bg-surface); padding: 12px; border-radius: 6px; border-left: 3px solid var(--success-color); margin-bottom: 12px;">
+                    <div style="font-size: 18px; font-weight: 700; color: var(--success-color); margin-bottom: 4px;">{value}</div>
+                    <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase;">{label}</div>
                 </div>
                 '''
                 st.markdown(metric_html, unsafe_allow_html=True)
@@ -560,7 +560,7 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
     # ASK AGY ABOUT THIS
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown(
-        "<p style='text-align: center; margin-bottom: 20px; color: #555; font-size: 14px;'>💬 Want to know more about this project?</p>",
+        "<p style='text-align: center; margin-bottom: 20px; color: var(--text-secondary); font-size: 14px;'>💬 Want to know more about this project?</p>",
         unsafe_allow_html=True,
     )
 

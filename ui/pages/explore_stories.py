@@ -370,13 +370,13 @@ def render_pagination(total_results: int, page_size: int, offset: int, view_mode
         /* Pagination buttons - WIREFRAME EXACT */
         div[data-testid="column"] .stButton > button {
             padding: 8px 14px !important;
-            border: 2px solid #ddd !important;
-            background: white !important;
+            border: 2px solid var(--border-color) !important;
+            background: var(--bg-card) !important;
             cursor: pointer !important;
             border-radius: 4px !important;
             font-size: 13px !important;
             font-weight: 600 !important;
-            color: #555 !important;
+            color: var(--text-secondary) !important;
             transition: all 0.2s ease !important;
         }
         /* NUCLEAR: Force ALL multiselect pills to purple to match wireframe */
@@ -420,7 +420,7 @@ def render_pagination(total_results: int, page_size: int, offset: int, view_mode
         }
 
         div[data-testid="column"] .stButton > button:hover {
-            background: #f5f5f5 !important;
+            background: var(--bg-hover) !important;
         }
         /* Pagination active state - WIREFRAME EXACT */
         .pagination-active {
@@ -665,57 +665,61 @@ def render_explore_stories(
 
     /* Filter container styling - WIREFRAME EXACT */
     .explore-filters {
-        background: #fafafa;
+        background: var(--bg-surface);
         padding: 30px;
-        border-bottom: 1px solid #e0e0e0;
+        border-bottom: 1px solid var(--border-color);
     }
 
     /* Search input styling - WIREFRAME EXACT */
     .main .stTextInput > div > div > input {
         width: 100% !important;
         padding: 12px 16px !important;
-        border: 2px solid #ddd !important;
+        border: 2px solid var(--border-color) !important;
         border-radius: 6px !important;
         font-size: 14px !important;
+        background: var(--bg-input) !important;
+        color: var(--text-primary) !important;
     }
 
     .main .stTextInput > div > div > input:focus {
-        border-color: #8B5CF6 !important;
+        border-color: var(--accent-purple) !important;
         outline: none !important;
     }
 
     /* Selectbox styling - WIREFRAME EXACT */
     .main .stSelectbox > div > div {
         padding: 10px !important;
-        border: 2px solid #ddd !important;
+        border: 2px solid var(--border-color) !important;
         border-radius: 4px !important;
         font-size: 14px !important;
-        background: white !important;
+        background: var(--bg-input) !important;
+        color: var(--text-primary) !important;
     }
 
     .main .stSelectbox > div > div:focus-within {
-        border-color: #8B5CF6 !important;
+        border-color: var(--accent-purple) !important;
         outline: none !important;
     }
 
     /* Multiselect styling - WIREFRAME EXACT */
     .main .stMultiSelect > div > div {
         padding: 10px !important;
-        border: 2px solid #ddd !important;
+        border: 2px solid var(--border-color) !important;
         border-radius: 4px !important;
         font-size: 14px !important;
-        background: white !important;
+        background: var(--bg-input) !important;
+        color: var(--text-primary) !important;
     }
 
     .main .stMultiSelect > div > div:focus-within {
-        border-color: #8B5CF6 !important;
+        border-color: var(--accent-purple) !important;
     }
 
     /* Label styling - WIREFRAME EXACT */
     .main label[data-testid="stWidgetLabel"] {
         font-size: 12px !important;
         font-weight: 600 !important;
-        color: #555 !important;
+        color: var(--text-secondary) !important;
         text-transform: uppercase !important;
         margin-bottom: 6px !important;
     }
@@ -723,11 +727,11 @@ def render_explore_stories(
     /* Segmented Control (Table/Cards toggle) - WIREFRAME EXACT */
     [data-testid="stSegmentedControl"] button {
         padding: 8px 16px !important;
-        border: 2px solid #ddd !important;
-        background: white !important;
+        border: 2px solid var(--border-color) !important;
+        background: var(--bg-card) !important;
         font-size: 13px !important;
         font-weight: 600 !important;
-        color: #555 !important;
+        color: var(--text-secondary) !important;
     }
     [data-testid="stSegmentedControl"] button[data-baseweb="button"][aria-pressed="true"] {
         background: #8B5CF6 !important;
@@ -740,26 +744,26 @@ def render_explore_stories(
         border-collapse: collapse !important;
     }
     .main thead {
-        background: #ecf0f1 !important;
+        background: var(--table-header-bg) !important;
     }
     .main th {
         padding: 12px !important;
         font-size: 12px !important;
         font-weight: 600 !important;
-        color: #2c3e50 !important;
+        color: var(--text-primary) !important;
         text-transform: uppercase !important;
-        border-bottom: 2px solid #bdc3c7 !important;
+        border-bottom: 2px solid var(--border-color) !important;
         text-align: left !important;
     }
     .main td {
         padding: 16px 12px !important;
-        border-bottom: 1px solid #e0e0e0 !important;
+        border-bottom: 1px solid var(--border-color) !important;
         font-size: 14px !important;
-        color: #2c3e50 !important;
+        color: var(--text-primary) !important;
     }
     /* Story title in table - purple and clickable */
     .main td a {
-        color: #8B5CF6 !important;
+        color: var(--accent-purple) !important;
         font-weight: 500 !important;
         text-decoration: none !important;
     }
@@ -771,8 +775,8 @@ def render_explore_stories(
     .client-badge {
         display: inline-block !important;
         padding: 4px 10px !important;
-        background: #e3f2fd !important;
-        color: #1976d2 !important;
+        background: var(--accent-purple-bg) !important;
+        color: var(--accent-purple) !important;
         border-radius: 12px !important;
         font-size: 12px !important;
         font-weight: 500 !important;
@@ -781,7 +785,7 @@ def render_explore_stories(
     /* Domain tag styling - WIREFRAME EXACT */
     .domain-tag {
         font-size: 12px !important;
-        color: #7f8c8d !important;
+        color: var(--text-muted) !important;
     }
 
     /* Selected row styling - WIREFRAME EXACT */
@@ -796,18 +800,18 @@ def render_explore_stories(
     /* Button styling - WIREFRAME EXACT */
     .main .stButton > button {
         padding: 8px 16px !important;
-        border: 2px solid #ddd !important;
-        background: white !important;
+        border: 2px solid var(--border-color) !important;
+        background: var(--bg-card) !important;
         cursor: pointer !important;
         font-size: 13px !important;
         font-weight: 600 !important;
         border-radius: 6px !important;
-        color: #555 !important;
+        color: var(--text-secondary) !important;
         transition: all 0.2s ease !important;
     }
 
     .main .stButton > button:hover {
-        background: #f5f5f5 !important;
+        background: var(--bg-hover) !important;
     }
 
     /* Primary button (View Details) - Premium subtle style - NUCLEAR SELECTOR */
@@ -878,28 +882,28 @@ def render_explore_stories(
         margin-bottom: 24px;
     }
     .fixed-height-card {
-        background: white !important;
+        background: var(--bg-card) !important;
         padding: 24px !important;
         border-radius: 8px !important;
-        border: 1px solid #e5e7eb !important;
+        border: 1px solid var(--border-color) !important;
         height: 380px !important;
         display: flex !important;
         flex-direction: column !important;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+        box-shadow: var(--card-shadow) !important;
         transition: all 0.2s ease !important;
         cursor: pointer !important;
     }
     .fixed-height-card:hover {
-        box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15) !important;
-        border-color: #8B5CF6 !important;
+        box-shadow: var(--hover-shadow) !important;
+        border-color: var(--accent-purple) !important;
         transform: translateY(-2px) !important;
     }
     .fixed-height-card.active {
-        border-color: #8B5CF6 !important;
-        box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1) !important;
+        border-color: var(--accent-purple) !important;
+        box-shadow: 0 0 0 3px var(--accent-purple-light) !important;
     }
     .card-desc {
-        color: #4a5568 !important;
+        color: var(--text-secondary) !important;
         line-height: 1.6 !important;
         font-size: 14px !important;
         overflow: hidden !important;
