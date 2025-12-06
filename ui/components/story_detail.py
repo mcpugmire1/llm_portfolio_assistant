@@ -22,6 +22,9 @@ def _format_nested_bullet(text: str) -> str:
 
     # Strip leading " - " or "- " from the entire text (common Excel artifact)
     text = text.lstrip("- ").strip()
+    # Also strip leading bullet characters
+    while text and text[0] in "-*•":
+        text = text[1:].lstrip()
 
     # Check for ◘ delimiter (highest priority)
     if "◘" in text:
@@ -139,8 +142,13 @@ def _render_bullet_list(items: list) -> str:
         # Check if this item is indented (it's a sub-item that wasn't caught)
         is_indented = item.startswith("  ")
 
+        # Strip leading whitespace, hyphens, asterisks, and bullets more aggressively
+        clean_item = item.lstrip()
+        while clean_item and clean_item[0] in "-*•":
+            clean_item = clean_item[1:].lstrip()
+
         # Format the item text
-        formatted = _format_nested_bullet(item.lstrip(" -"))
+        formatted = _format_nested_bullet(clean_item)
 
         # Look ahead: collect any indented sub-items
         sub_items = []
@@ -292,7 +300,7 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
             if st.button(
                 "📄",
                 key=f"export_{key_suffix}_{detail.get('id', 'x')}",
-                help="Export (Print)",
+                help="Export (Print) - Allow pop-ups if nothing happens",
                 use_container_width=True,
             ):
                 # Format tags
@@ -350,10 +358,10 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
                             <div class="content">{'<br>'.join(task) if task else 'N/A'}</div>
 
                             <div class="section-title">⚡ ACTION</div>
-                            <div class="content"><ul>{''.join(f'<li>{a}</li>' for a in action)}</ul></div>
+                            <div class="content"><ul>{''.join(f'<li>{a.lstrip("-*• ").strip()}</li>' for a in action if a)}</ul></div>
 
                             <div class="section-title">🎯 RESULT</div>
-                            <div class="content"><ul>{''.join(f'<li>{r}</li>' for r in result)}</ul></div>
+                            <div class="content"><ul>{''.join(f'<li>{r.lstrip("-*• ").strip()}</li>' for r in result if r)}</ul></div>
 
                             <div class="sidebar">
                                 <div class="sidebar-title">Technologies & Practices</div>
@@ -467,7 +475,6 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
                         unsafe_allow_html=True,
                     )
 
-        # RESULT
         # RESULT
         if result:
             st.markdown(
