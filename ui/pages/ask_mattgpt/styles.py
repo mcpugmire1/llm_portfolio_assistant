@@ -35,7 +35,7 @@ def get_landing_css() -> str:
         .ask-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 30px;
-            margin-top: -35px !important;
+            margin-top: -50px !important;
             color: white;
             display: flex;
             justify-content: space-between;
@@ -102,8 +102,8 @@ def get_landing_css() -> str:
             gap: 24px !important;
             justify-content: center !important;
             padding: 12px 30px !important;
-            background: #f8f9fa !important;
-            border-bottom: 1px solid #e0e0e0 !important;
+            background: var(--status-bar-bg) !important;
+            border-bottom: 1px solid var(--status-bar-border) !important;
             margin: 0 !important;
             overflow-x: auto !important;
         }
@@ -113,7 +113,7 @@ def get_landing_css() -> str:
             align-items: center !important;
             gap: 6px !important;
             font-size: 13px !important;
-            color: #6B7280 !important;
+            color: var(--text-secondary) !important;
             white-space: nowrap !important;
             flex-shrink: 0 !important;
         }
@@ -124,7 +124,7 @@ def get_landing_css() -> str:
 
         .status-value {
             font-weight: 600;
-            color: #2C363D;
+            color: var(--text-primary);
         }
 
         .status-dot {
@@ -157,10 +157,11 @@ def get_landing_css() -> str:
         .st-key-intro_section {
             max-width: 900px !important;
             margin: 20px auto 0 !important;
-            background: white !important;
+            background: var(--bg-card) !important;
             border-radius: 24px !important;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+            box-shadow: var(--card-shadow) !important;
             overflow: hidden !important;
+            border: 1px solid var(--border-color) !important;
 
             /* ADD THIS PADDING TO CREATE THE 10% LEFT/RIGHT SPACE */
             padding-left: 1% !important;
@@ -186,14 +187,14 @@ def get_landing_css() -> str:
 
         .welcome-title {
             font-size: 28px;
-            color: #2c3e50;
+            color: var(--text-heading);
             margin: 24px 0 12px;
             text-align: center;
         }
 
         .intro-text-primary {
             font-size: 18px;
-            color: #374151;
+            color: var(--text-primary);
             line-height: 1.7;
             font-weight: 500;
             margin-bottom: 20px;
@@ -205,7 +206,7 @@ def get_landing_css() -> str:
 
         .intro-text-secondary {
             font-size: 17px;
-            color: #6B7280;
+            color: var(--text-secondary);
             line-height: 1.6;
             max-width: 650px;
             margin: 0 auto 48px !important;
@@ -215,7 +216,7 @@ def get_landing_css() -> str:
         .suggested-title {
             font-size: 13px;
             font-weight: 600;
-            color: #7f8c8d;
+            color: var(--text-muted);
             text-transform: uppercase;
             margin-bottom: 12px;
             text-align: center;
@@ -273,8 +274,8 @@ def get_landing_css() -> str:
 
         /* Suggested question buttons - match wireframe .example-q */
         button[key^="suggested_"] {
-            background: #f5f5f5 !important;
-            border: none !important;
+            background: var(--bg-surface) !important;
+            border: 1px solid var(--border-color) !important;
             border-radius: 6px !important;
             padding: 10px 14px !important;
             text-align: left !important;
@@ -296,7 +297,7 @@ def get_landing_css() -> str:
         }
 
         button[key^="suggested_"]:hover {
-            background: #e8e8e8 !important;
+            background: var(--bg-hover) !important;
             transform: translateY(-1px) !important;
         }
 
@@ -304,7 +305,7 @@ def get_landing_css() -> str:
             font-size: 14px !important;
             font-weight: 400 !important;
             font-style: italic !important;
-            color: #2c3e50 !important;
+            color: var(--text-primary) !important;
             line-height: 1.4 !important;
             margin: 0 !important;
             text-align: left !important;
@@ -351,7 +352,7 @@ def get_landing_css() -> str:
         .powered-by-text {
             text-align: center !important;
             font-size: 11px !important;
-            color: #9CA3AF !important;
+            color: var(--text-muted) !important;
             margin-top: 2px !important;
             margin-bottom: 20px !important;
             padding: 0 !important;
@@ -367,23 +368,24 @@ def get_landing_css() -> str:
             width: 100% !important;
             padding: 20px 24px !important;
             font-size: 17px !important;
-            border: 2px solid #E5E7EB !important;
+            border: 2px solid var(--border-color) !important;
             border-radius: 16px !important;
             transition: all 0.2s ease !important;
-            background: #FAFAFA !important;
+            background: var(--bg-input) !important;
+            color: var(--text-primary) !important;
             font-family: inherit !important;
             overflow: visible !important;
         }
 
         div[data-testid="stTextInput"] input:focus {
             outline: none !important;
-            border-color: #8B5CF6 !important;
-            background: white !important;
-            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1) !important;
+            border-color: var(--accent-purple) !important;
+            background: var(--bg-card) !important;
+            box-shadow: 0 0 0 3px var(--accent-purple-light) !important;
         }
 
         div[data-testid="stTextInput"] input::placeholder {
-            color: #9CA3AF !important;
+            color: var(--text-muted) !important;
         }
 
         /* KILL RED BORDER - Hide wrapper borders */
@@ -600,8 +602,8 @@ def get_conversation_css() -> str:
             gap: 24px !important;
             justify-content: center !important;
             padding: 12px 30px !important;
-            background: #f8f9fa !important;
-            border-bottom: 1px solid #e0e0e0 !important;
+            background: var(--status-bar-bg) !important;
+            border-bottom: 1px solid var(--status-bar-border) !important;
         }
 
         .status-item {
@@ -609,13 +611,13 @@ def get_conversation_css() -> str:
             align-items: center !important;
             gap: 6px !important;
             font-size: 13px !important;
-            color: #6B7280 !important;
+            color: var(--text-secondary) !important;
             white-space: nowrap !important;
         }
 
         .status-value {
             font-weight: 600;
-            color: #2C363D;
+            color: var(--text-primary);
         }
 
         .status-dot {
@@ -636,14 +638,14 @@ def get_conversation_css() -> str:
         .conversation-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 30px;
-            margin-top: -50px !important;
+            margin-top: -60px !important;
             color: white;
         }
         /* Purple header - pull up to eliminate white space */
         .ask-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 30px;
-            margin-top: -50px !important;
+            margin-top: -65px !important;
             color: white;
             display: flex;
             justify-content: space-between;
@@ -724,24 +726,26 @@ def get_conversation_css() -> str:
         }
         /* Chat messages - AI */
         [data-testid="stChatMessage"]:not(:has([data-testid="chatAvatarIcon-user"])) {
-            background: white !important;
+            background: var(--chat-ai-bg) !important;
             border-radius: 16px !important;
             padding: 24px !important;
-            border-left: 4px solid #8B5CF6 !important;
+            border-left: 4px solid var(--chat-ai-border) !important;
+            color: var(--text-primary) !important;
         }
 
         /* Chat messages - User */
         [data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-user"]) {
-            background: #e3f2fd !important;
+            background: var(--chat-user-bg) !important;
             border-radius: 8px !important;
             padding: 16px !important;
+            color: var(--text-primary) !important;
         }
 
         /* Input Area - Complete Wireframe Match */
         [data-testid="stChatInput"] {
             padding: 20px 30px !important;
-            background: white !important;
-            border-top: 2px solid #e0e0e0 !important;
+            background: var(--bg-card) !important;
+            border-top: 2px solid var(--border-color) !important;
             position: sticky !important;
             bottom: 0 !important;
             z-index: 100 !important;
@@ -765,11 +769,12 @@ def get_conversation_css() -> str:
         [data-testid="stChatInput"] textarea {
             flex: 1 !important;
             padding: 14px 18px !important;
-            border: 2px solid #ddd !important;
+            border: 2px solid var(--border-color) !important;
             border-radius: 8px !important;
             font-size: 15px !important;
             font-family: inherit !important;
-            background: white !important;
+            background: var(--bg-input) !important;
+            color: var(--text-primary) !important;
             transition: all 0.2s ease !important;
             resize: none !important;
             min-height: 48px !important;
@@ -783,8 +788,8 @@ def get_conversation_css() -> str:
         textarea[data-testid="stChatInputTextArea"]:focus,
         [data-testid="stChatInput"] textarea:focus {
             outline: none !important;
-            border-color: #8B5CF6 !important;
-            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1) !important;
+            border-color: var(--accent-purple) !important;
+            box-shadow: 0 0 0 3px var(--accent-purple-light) !important;
             border-radius: 8px !important;
         }
 
@@ -792,7 +797,7 @@ def get_conversation_css() -> str:
         [data-testid="stChatInputTextArea"]::placeholder,
         [data-testid="stChatInput"] textarea::placeholder,
         [data-testid="stChatInput"] input::placeholder {
-            color: #9ca3af !important;
+            color: var(--text-muted) !important;
             opacity: 1 !important;
         }
 
@@ -800,7 +805,7 @@ def get_conversation_css() -> str:
         textarea.st-emotion-cache-1vdwi3c[data-testid="stChatInputTextArea"],
         textarea[data-testid="stChatInputTextArea"][class*="st-emotion-cache"] {
             border-radius: 8px !important;
-            border: 2px solid #ddd !important;
+            border: 2px solid var(--border-color) !important;
             padding: 14px 18px !important;
             min-height: 48px !important;
             max-height: 48px !important;
@@ -979,7 +984,7 @@ def get_conversation_css() -> str:
             transform: translateX(-50%) !important;
             text-align: center !important;
             font-size: 12px !important;
-            color: #95a5a6 !important;
+            color: var(--text-muted) !important;
             padding: 0 !important;
             z-index: 999 !important;
         }
@@ -998,22 +1003,23 @@ def get_conversation_css() -> str:
 
         .action-btn {
             padding: 8px 16px;
-            background: #f3f4f6;
-            border: 1px solid #e5e7eb;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             font-size: 14px;
             cursor: pointer;
             transition: all 0.2s;
+            color: var(--text-primary);
         }
 
         .action-btn:hover {
-            background: #e5e7eb;
+            background: var(--bg-hover);
         }
 
         .action-btn.helpful-active {
-            background: #8B5CF6;
+            background: var(--accent-purple);
             color: white;
-            border-color: #8B5CF6;
+            border-color: var(--accent-purple);
         }
 
         /* Thinking indicator */
@@ -1023,12 +1029,12 @@ def get_conversation_css() -> str:
             left: 50%;
             transform: translateX(-50%);
             z-index: 9999;
-            background: #F3F4F6 !important;
-            color: #374151 !important;
-            border: 1px solid #D1D5DB !important;
+            background: var(--bg-surface) !important;
+            color: var(--text-primary) !important;
+            border: 1px solid var(--border-color) !important;
             padding: 12px 24px;
             border-radius: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+            box-shadow: var(--card-shadow) !important;
         }
         /* ========================================
         FINAL FIX: Overflow visible + kill wrapper borders
@@ -1050,15 +1056,16 @@ def get_conversation_css() -> str:
 
         /* ONLY the textarea gets border styling */
         textarea[data-testid="stChatInputTextArea"] {
-            border: 2px solid #E5E7EB !important;
+            border: 2px solid var(--border-color) !important;
             border-radius: 16px !important;
             padding: 20px 24px !important;
-            background: #FAFAFA !important;
+            background: var(--bg-input) !important;
+            color: var(--text-primary) !important;
         }
 
         textarea[data-testid="stChatInputTextArea"]:focus {
-            border-color: #8B5CF6 !important;
-            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1) !important;
+            border-color: var(--accent-purple) !important;
+            box-shadow: 0 0 0 3px var(--accent-purple-light) !important;
             outline: none !important;
         }
 

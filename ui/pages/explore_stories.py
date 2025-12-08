@@ -16,6 +16,7 @@ import os
 
 import pandas as pd
 import streamlit as st
+import streamlit.components.v1 as components
 from dotenv import load_dotenv
 from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode
 
@@ -360,103 +361,15 @@ def render_pagination(total_results: int, page_size: int, offset: int, view_mode
     if total_pages <= 1:
         return
 
-    pagination_css = """
-        <style>
-        .pagination-info {
-            color: var(--text-color);
-            opacity: 0.7;
-            font-size: 14px;
-        }
-        /* Pagination buttons - WIREFRAME EXACT */
-        div[data-testid="column"] .stButton > button {
-            padding: 8px 14px !important;
-            border: 2px solid #ddd !important;
-            background: white !important;
-            cursor: pointer !important;
-            border-radius: 4px !important;
-            font-size: 13px !important;
-            font-weight: 600 !important;
-            color: #555 !important;
-            transition: all 0.2s ease !important;
-        }
-        /* NUCLEAR: Force ALL multiselect pills to purple to match wireframe */
-        [data-testid="stMultiSelect"] [data-baseweb="tag"],
-        [data-baseweb="tag"],
-        .stMultiSelect [data-baseweb="tag"],
-        div[data-baseweb="tag"],
-        span[data-baseweb="tag"] {
-            background-color: #8B5CF6 !important;
-            background: #8B5CF6 !important;
-            border-color: #8B5CF6 !important;
-        }
-
-        /* Text color in pills */
-        [data-testid="stMultiSelect"] [data-baseweb="tag"] *,
-        [data-baseweb="tag"] *,
-        [data-baseweb="tag"] span {
-            color: white !important;
-        }
-
-        /* X button (close icon) */
-        [data-testid="stMultiSelect"] [data-baseweb="tag"] svg,
-        [data-baseweb="tag"] svg,
-        [data-baseweb="tag"] svg path {
-            fill: white !important;
-            color: white !important;
-        }
-
-        /* Hover state */
-        [data-testid="stMultiSelect"] [data-baseweb="tag"]:hover,
-        [data-baseweb="tag"]:hover {
-            background-color: #7C3AED !important;
-            background: #7C3AED !important;
-        }
-
-        /* Override Streamlit's default red/orange pills */
-        .stMultiSelect span[data-baseweb="tag"][style*="background"],
-        [data-baseweb="tag"][style*="background"] {
-            background-color: #8B5CF6 !important;
-            background: #8B5CF6 !important;
-        }
-
-        div[data-testid="column"] .stButton > button:hover {
-            background: #f5f5f5 !important;
-        }
-        /* Pagination active state - WIREFRAME EXACT */
-        .pagination-active {
-            background: #8B5CF6;
-            color: white;
-            border: 2px solid #8B5CF6;
-            padding: 8px 14px;
-            border-radius: 4px;
-            font-size: 13px;
-            font-weight: 600;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .pagination-disabled {
-            text-align: center;
-            color: #888;
-            opacity: 0.4;
-            padding: 6px 14px;
-            font-size: 13px;
-        }
-        </style>
-        """
-    st.markdown(pagination_css, unsafe_allow_html=True)
-
+    # Build page numbers list
     page_numbers: list[int | str]
     if total_pages <= 7:
         page_numbers = list(range(1, total_pages + 1))
     else:
         if current_page <= 4:
-            page_numbers_base = list(range(1, 6))
-            page_numbers = [*page_numbers_base, "...", total_pages]
+            page_numbers = [*list(range(1, 6)), "...", total_pages]
         elif current_page >= total_pages - 3:
-            page_numbers_range = list(range(total_pages - 4, total_pages + 1))
-            page_numbers = [1, "...", *page_numbers_range]
+            page_numbers = [1, "...", *list(range(total_pages - 4, total_pages + 1))]
         else:
             page_numbers = [
                 1,
@@ -468,82 +381,152 @@ def render_pagination(total_results: int, page_size: int, offset: int, view_mode
                 total_pages,
             ]
 
-    cols = st.columns([0.6, 0.6] + [0.35] * len(page_numbers) + [0.6, 0.6, 1.2])
-    col_idx = 0
+    # Build pagination HTML
+    buttons_html = ""
 
-    with cols[col_idx]:
-        if current_page > 1:
-            if st.button(
-                "First", key=f"btn_first_{view_mode}", use_container_width=True
-            ):
-                st.session_state["page_offset"] = 0
-                st.rerun()
-        else:
-            st.markdown(
-                "<div class='pagination-disabled'>First</div>", unsafe_allow_html=True
-            )
-    col_idx += 1
+    # Prev button
+    if current_page > 1:
+        buttons_html += f'<button id="pg-prev-{view_mode}">‹ Prev</button>'
+    else:
+        buttons_html += '<button disabled>‹ Prev</button>'
 
-    with cols[col_idx]:
-        if current_page > 1:
-            if st.button("Prev", key=f"btn_prev_{view_mode}", use_container_width=True):
-                st.session_state["page_offset"] = offset - page_size
-                st.rerun()
-        else:
-            st.markdown(
-                "<div class='pagination-disabled'>Prev</div>", unsafe_allow_html=True
-            )
-    col_idx += 1
-
+    # Page numbers
     for page_num in page_numbers:
-        with cols[col_idx]:
-            if page_num == "...":
-                st.markdown(
-                    "<div style='text-align: center; padding: 6px; color: #666;'>...</div>",
-                    unsafe_allow_html=True,
-                )
-            elif page_num == current_page:
-                st.markdown(
-                    f"<div class='pagination-active'>{page_num}</div>",
-                    unsafe_allow_html=True,
-                )
-            else:
-                if st.button(
-                    str(page_num),
-                    key=f"btn_page_{view_mode}_{page_num}",
-                    use_container_width=True,
-                ):
-                    # page_num is int here (not "...")
-                    assert isinstance(page_num, int)
-                    st.session_state["page_offset"] = (page_num - 1) * page_size
-                    st.rerun()
-        col_idx += 1
-
-    with cols[col_idx]:
-        if current_page < total_pages:
-            if st.button("Next", key=f"btn_next_{view_mode}", use_container_width=True):
-                st.session_state["page_offset"] = offset + page_size
-                st.rerun()
+        if page_num == "...":
+            buttons_html += '<span class="page-info">...</span>'
+        elif page_num == current_page:
+            buttons_html += f'<button class="active">{page_num}</button>'
         else:
-            st.markdown(
-                "<div class='pagination-disabled'>Next</div>", unsafe_allow_html=True
+            buttons_html += (
+                f'<button id="pg-{view_mode}-{page_num}">{page_num}</button>'
             )
-    col_idx += 1
 
-    with cols[col_idx]:
-        if current_page < total_pages:
-            if st.button("Last", key=f"btn_last_{view_mode}", use_container_width=True):
-                st.session_state["page_offset"] = (total_pages - 1) * page_size
+    # Next button
+    if current_page < total_pages:
+        buttons_html += f'<button id="pg-next-{view_mode}">Next ›</button>'
+    else:
+        buttons_html += '<button disabled>Next ›</button>'
+
+    # Page info
+    buttons_html += (
+        f'<span class="page-info">Page {current_page} of {total_pages}</span>'
+    )
+
+    st.markdown(
+        f"""
+    <style>
+    .pagination {{
+        padding: 20px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+    }}
+    .pagination button {{
+        padding: 8px 14px;
+        border: 1px solid var(--border-color);
+        background: var(--bg-card);
+        color: var(--text-secondary);
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 13px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }}
+    .pagination button:hover:not(:disabled):not(.active) {{
+        background: var(--bg-hover);
+    }}
+    .pagination button.active {{
+        background: var(--accent-purple);
+        color: white;
+        border-color: var(--accent-purple);
+    }}
+    .pagination button:disabled {{
+        opacity: 0.4;
+        cursor: not-allowed;
+    }}
+    .pagination .page-info {{
+        padding: 0 12px;
+        color: var(--text-muted);
+        font-size: 13px;
+    }}
+    /* Hide Streamlit pagination triggers */
+    [class*="st-key-pg_trigger_"] {{
+        position: absolute !important;
+        left: -9999px !important;
+        height: 0 !important;
+        overflow: hidden !important;
+    }}
+    </style>
+    <div class="pagination">
+        {buttons_html}
+    </div>
+    """,
+        unsafe_allow_html=True,
+    )
+
+    # Hidden Streamlit buttons for triggering page changes
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        if st.button("", key=f"pg_trigger_prev_{view_mode}"):
+            st.session_state["page_offset"] = offset - page_size
+            st.rerun()
+
+    with col2:
+        if st.button("", key=f"pg_trigger_next_{view_mode}"):
+            st.session_state["page_offset"] = offset + page_size
+            st.rerun()
+
+    # Page number triggers - create for ALL possible pages user might click
+    for page_num in page_numbers:
+        if page_num != "..." and page_num != current_page:
+            if st.button("", key=f"pg_trigger_{view_mode}_p{page_num}"):
+                st.session_state["page_offset"] = (int(page_num) - 1) * page_size
                 st.rerun()
-        else:
-            st.markdown(
-                "<div class='pagination-disabled'>Last</div>", unsafe_allow_html=True
-            )
-    col_idx += 1
 
-    with cols[col_idx]:
-        page_info_html = f"<div class='pagination-info' style='text-align: right; padding: 6px;'>Page {current_page} of {total_pages}</div>"
-        st.markdown(page_info_html, unsafe_allow_html=True)
+    # JS wiring
+    import streamlit.components.v1 as components
+
+    components.html(
+        f"""
+    <script>
+    (function() {{
+        setTimeout(function() {{
+            var parentDoc = window.parent.document;
+
+            // Use event delegation on the pagination container
+            parentDoc.addEventListener('click', function(e) {{
+                var btn = e.target.closest('.pagination button');
+                if (!btn || btn.disabled || btn.classList.contains('active')) return;
+
+                e.preventDefault();
+
+                // Check if it's prev/next
+                if (btn.id === 'pg-prev-{view_mode}') {{
+                    var trigger = parentDoc.querySelector('[class*="st-key-pg_trigger_prev_{view_mode}"] button');
+                    if (trigger) trigger.click();
+                    return;
+                }}
+                if (btn.id === 'pg-next-{view_mode}') {{
+                    var trigger = parentDoc.querySelector('[class*="st-key-pg_trigger_next_{view_mode}"] button');
+                    if (trigger) trigger.click();
+                    return;
+                }}
+
+                // Page number button
+                if (btn.id && btn.id.startsWith('pg-{view_mode}-')) {{
+                    var pageNum = btn.id.split('-').pop();
+                    var trigger = parentDoc.querySelector('[class*="st-key-pg_trigger_{view_mode}_p' + pageNum + '"] button');
+                    if (trigger) trigger.click();
+                }}
+            }});
+        }}, 100);
+    }})();
+    </script>
+    """,
+        height=0,
+    )
 
 
 # =============================================================================
@@ -592,7 +575,7 @@ def render_explore_stories(
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         padding: 2rem;
         border-radius: 0;
-        margin: -1rem 0 2rem 0;
+        margin: -2rem 0 0 0;
     }
 
     .conversation-header-content {
@@ -665,57 +648,61 @@ def render_explore_stories(
 
     /* Filter container styling - WIREFRAME EXACT */
     .explore-filters {
-        background: #fafafa;
+        background: var(--bg-surface);
         padding: 30px;
-        border-bottom: 1px solid #e0e0e0;
+        border-bottom: 1px solid var(--border-color);
     }
 
     /* Search input styling - WIREFRAME EXACT */
     .main .stTextInput > div > div > input {
         width: 100% !important;
         padding: 12px 16px !important;
-        border: 2px solid #ddd !important;
+        border: 2px solid var(--border-color) !important;
         border-radius: 6px !important;
         font-size: 14px !important;
+        background: var(--bg-input) !important;
+        color: var(--text-primary) !important;
     }
 
     .main .stTextInput > div > div > input:focus {
-        border-color: #8B5CF6 !important;
+        border-color: var(--accent-purple) !important;
         outline: none !important;
     }
 
     /* Selectbox styling - WIREFRAME EXACT */
     .main .stSelectbox > div > div {
         padding: 10px !important;
-        border: 2px solid #ddd !important;
+        border: 2px solid var(--border-color) !important;
         border-radius: 4px !important;
         font-size: 14px !important;
-        background: white !important;
+        background: var(--bg-input) !important;
+        color: var(--text-primary) !important;
     }
 
     .main .stSelectbox > div > div:focus-within {
-        border-color: #8B5CF6 !important;
+        border-color: var(--accent-purple) !important;
         outline: none !important;
     }
 
     /* Multiselect styling - WIREFRAME EXACT */
     .main .stMultiSelect > div > div {
         padding: 10px !important;
-        border: 2px solid #ddd !important;
+        border: 2px solid var(--border-color) !important;
         border-radius: 4px !important;
         font-size: 14px !important;
-        background: white !important;
+        background: var(--bg-input) !important;
+        color: var(--text-primary) !important;
     }
 
     .main .stMultiSelect > div > div:focus-within {
-        border-color: #8B5CF6 !important;
+        border-color: var(--accent-purple) !important;
     }
 
     /* Label styling - WIREFRAME EXACT */
     .main label[data-testid="stWidgetLabel"] {
         font-size: 12px !important;
         font-weight: 600 !important;
-        color: #555 !important;
+        color: var(--text-secondary) !important;
         text-transform: uppercase !important;
         margin-bottom: 6px !important;
     }
@@ -723,11 +710,11 @@ def render_explore_stories(
     /* Segmented Control (Table/Cards toggle) - WIREFRAME EXACT */
     [data-testid="stSegmentedControl"] button {
         padding: 8px 16px !important;
-        border: 2px solid #ddd !important;
-        background: white !important;
+        border: 2px solid var(--border-color) !important;
+        background: var(--bg-card) !important;
         font-size: 13px !important;
         font-weight: 600 !important;
-        color: #555 !important;
+        color: var(--text-secondary) !important;
     }
     [data-testid="stSegmentedControl"] button[data-baseweb="button"][aria-pressed="true"] {
         background: #8B5CF6 !important;
@@ -740,26 +727,26 @@ def render_explore_stories(
         border-collapse: collapse !important;
     }
     .main thead {
-        background: #ecf0f1 !important;
+        background: var(--table-header-bg) !important;
     }
     .main th {
         padding: 12px !important;
         font-size: 12px !important;
         font-weight: 600 !important;
-        color: #2c3e50 !important;
+        color: var(--text-primary) !important;
         text-transform: uppercase !important;
-        border-bottom: 2px solid #bdc3c7 !important;
+        border-bottom: 2px solid var(--border-color) !important;
         text-align: left !important;
     }
     .main td {
         padding: 16px 12px !important;
-        border-bottom: 1px solid #e0e0e0 !important;
+        border-bottom: 1px solid var(--border-color) !important;
         font-size: 14px !important;
-        color: #2c3e50 !important;
+        color: var(--text-primary) !important;
     }
     /* Story title in table - purple and clickable */
     .main td a {
-        color: #8B5CF6 !important;
+        color: var(--accent-purple) !important;
         font-weight: 500 !important;
         text-decoration: none !important;
     }
@@ -771,8 +758,8 @@ def render_explore_stories(
     .client-badge {
         display: inline-block !important;
         padding: 4px 10px !important;
-        background: #e3f2fd !important;
-        color: #1976d2 !important;
+        background: var(--accent-purple-bg) !important;
+        color: var(--accent-purple) !important;
         border-radius: 12px !important;
         font-size: 12px !important;
         font-weight: 500 !important;
@@ -781,7 +768,7 @@ def render_explore_stories(
     /* Domain tag styling - WIREFRAME EXACT */
     .domain-tag {
         font-size: 12px !important;
-        color: #7f8c8d !important;
+        color: var(--text-muted) !important;
     }
 
     /* Selected row styling - WIREFRAME EXACT */
@@ -796,48 +783,53 @@ def render_explore_stories(
     /* Button styling - WIREFRAME EXACT */
     .main .stButton > button {
         padding: 8px 16px !important;
-        border: 2px solid #ddd !important;
-        background: white !important;
+        border: 2px solid var(--border-color) !important;
+        background: var(--bg-card) !important;
         cursor: pointer !important;
         font-size: 13px !important;
         font-weight: 600 !important;
         border-radius: 6px !important;
-        color: #555 !important;
+        color: var(--text-secondary) !important;
         transition: all 0.2s ease !important;
     }
 
     .main .stButton > button:hover {
-        background: #f5f5f5 !important;
+        background: var(--bg-hover) !important;
     }
 
-    /* Primary button (View Details) - Premium subtle style - NUCLEAR SELECTOR */
-    div[class*="st-key-card_"] button[data-testid="stBaseButton-primary"],
-    div[class*="st-key-card_"] .stButton > button[kind="primary"],
-    [data-testid="column"] [class*="st-key-card_"] button {
-        background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%) !important;
+    /* View Details button inside cards */
+    .card-btn-view-details {
+        display: inline-block;
+        padding: 10px 20px;
+        background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-purple-hover) 100%);
+        border: none;
+        border-radius: 8px;
         color: white !important;
-        border: none !important;
-        padding: 10px 20px !important;
-        font-size: 14px !important;
-        font-weight: 600 !important;
-        border-radius: 8px !important;
-        box-shadow: 0 2px 8px rgba(139, 92, 246, 0.25), 0 1px 3px rgba(0, 0, 0, 0.1) !important;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        font-weight: 600;
+        font-size: 14px;
+        text-decoration: none !important;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 2px 8px rgba(139, 92, 246, 0.25), 0 1px 3px var(--shadow-color);
     }
 
-    div[class*="st-key-card_"] button[data-testid="stBaseButton-primary"]:hover,
-    div[class*="st-key-card_"] .stButton > button[kind="primary"]:hover,
-    [data-testid="column"] [class*="st-key-card_"] button:hover {
-        background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%) !important;
-        transform: translateY(-2px) !important;
-        box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4), 0 3px 6px rgba(0, 0, 0, 0.15) !important;
+    .card-btn-view-details:hover {
+        background: linear-gradient(135deg, var(--accent-purple-hover) 0%, #6D28D9 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4), 0 3px 6px rgba(0, 0, 0, 0.15);
+        text-decoration: none !important;
+    }
+
+    /* Hide the trigger buttons */
+    [class*="st-key-card_btn_"] {
+        display: none !important;
     }
 
     /* Ask Agy button - purple to match wireframe (target via key class) */
     [class*="st-key-ask_from_detail"] .stButton > button[kind="primary"],
     div[class*="st-key-ask_from_detail"] button[data-testid="stBaseButton-primary"] {
-        background: #8B5CF6 !important;
-        border: 2px solid #8B5CF6 !important;
+        background: var(--accent-purple) !important;
+        border: 2px solid var(--accent-purple) !important;
         border-radius: 8px !important;
         padding: 12px 28px !important;
         font-weight: 600 !important;
@@ -847,8 +839,8 @@ def render_explore_stories(
 
     [class*="st-key-ask_from_detail"] .stButton > button[kind="primary"]:hover,
     div[class*="st-key-ask_from_detail"] button[data-testid="stBaseButton-primary"]:hover {
-        background: #7C3AED !important;
-        border-color: #7C3AED !important;
+        background: var(--accent-purple-hover) !important;
+        border-color: var(--accent-purple-hover) !important;
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3) !important;
     }
@@ -878,28 +870,52 @@ def render_explore_stories(
         margin-bottom: 24px;
     }
     .fixed-height-card {
-        background: white !important;
+        background: var(--bg-card) !important;
         padding: 24px !important;
         border-radius: 8px !important;
-        border: 1px solid #e5e7eb !important;
+        border: 1px solid var(--border-color) !important;
         height: 380px !important;
         display: flex !important;
         flex-direction: column !important;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+        box-shadow: var(--card-shadow) !important;
         transition: all 0.2s ease !important;
         cursor: pointer !important;
     }
     .fixed-height-card:hover {
-        box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15) !important;
-        border-color: #8B5CF6 !important;
+        box-shadow: var(--hover-shadow) !important;
+        border-color: var(--accent-purple) !important;
         transform: translateY(-2px) !important;
     }
     .fixed-height-card.active {
-        border-color: #8B5CF6 !important;
-        box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1) !important;
+        border-color: var(--accent-purple) !important;
+        box-shadow: 0 0 0 3px var(--accent-purple-light) !important;
+    }
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 12px;
+    }
+    .card-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0;
+        line-height: 1.4;
+        color: var(--text-heading) !important;
+        flex: 1;
+    }
+    .card-client-badge {
+        background: var(--accent-purple-bg);
+        color: var(--accent-purple);
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 500;
+        white-space: nowrap;
+        margin-left: 12px;
     }
     .card-desc {
-        color: #4a5568 !important;
+        color: var(--text-secondary) !important;
         line-height: 1.6 !important;
         font-size: 14px !important;
         overflow: hidden !important;
@@ -907,6 +923,28 @@ def render_explore_stories(
         -webkit-line-clamp: 3 !important;
         -webkit-box-orient: vertical !important;
         flex-grow: 1 !important;
+        margin-bottom: 16px !important;
+    }
+    .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: auto;
+        padding-top: 12px;
+        border-top: 1px solid var(--border-color);
+    }
+    .card-role {
+        font-size: 12px;
+        color: var(--text-muted);
+        font-weight: 500;
+    }
+    .card-domain-tag {
+        background: var(--bg-surface);
+        color: var(--text-secondary);
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 500;
     }
     @media (max-width: 768px) {
         .story-cards-grid {
@@ -915,6 +953,12 @@ def render_explore_stories(
         .fixed-height-card {
             height: auto !important;
             min-height: 280px !important;
+        }
+    [class*="st-key-card_btn_"] {
+        position: absolute !important;
+        left: -9999px !important;
+        height: 0 !important;
+        overflow: hidden !important;
         }
     }
     </style>
@@ -1387,21 +1431,6 @@ def render_explore_stories(
                         )
                         summary = s.get("5PSummary", "")
 
-                        card_html = f"""
-                        <div class="fixed-height-card" style="margin-bottom: 20px;">
-                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
-                                <h3 style="font-size: 18px; font-weight: 600; margin: 0; line-height: 1.4; color: #1a202c; flex: 1;">{title}</h3>
-                                <span style="background: #e6f2ff; color: #2563eb; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 500; white-space: nowrap; margin-left: 12px;">{client}</span>
-                            </div>
-                            <p class="card-desc" style="margin-bottom: 16px;">{summary}</p>
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 12px; border-top: 1px solid #e5e7eb;">
-                                <span style="font-size: 12px; color: #64748b; font-weight: 500;">{role}</span>
-                                <span style="background: #f3f4f6; color: #374151; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 500;">{domain}</span>
-                            </div>
-                        </div>
-                        """
-                        st.markdown(card_html, unsafe_allow_html=True)
-
                         story_id = str(s.get("id", i))
 
                         # Vary button text based on story attributes for better UX
@@ -1413,12 +1442,28 @@ def render_explore_stories(
                             "Read More →",
                         ]
                         button_text = button_texts[i % len(button_texts)]
+                        button_id = f"btn-story-{story_id}"
 
-                        if st.button(
-                            button_text,
-                            key=f"card_{story_id}",
-                            use_container_width=False,
-                        ):
+                        card_html = f"""
+                        <div class="fixed-height-card" style="margin-bottom: 20px;">
+                            <div class="card-header">
+                                <div class="card-title">{title}</div>
+                                <span class="card-client-badge">{client}</span>
+                            </div>
+                            <p class="card-desc">{summary}</p>
+                            <div class="card-footer">
+                                <span class="card-role">{role}</span>
+                                <span class="card-domain-tag">{domain}</span>
+                            </div>
+                            <div style="margin-top: 16px;">
+                                <a id="{button_id}" class="card-btn-view-details">{button_text}</a>
+                            </div>
+                        </div>
+                        """
+                        st.markdown(card_html, unsafe_allow_html=True)
+
+                        # Hidden Streamlit button
+                        if st.button("", key=f"card_btn_{story_id}"):
                             st.session_state["active_story"] = story_id
                             st.rerun()
 
@@ -1426,43 +1471,51 @@ def render_explore_stories(
             detail = get_context_story(stories)
             render_story_detail(detail, "cards", stories)
 
-            # JAVASCRIPT: Force purple button styles for card buttons (same workaround as home page)
-            import streamlit.components.v1 as components
+            # JavaScript to wire HTML buttons to Streamlit buttons
+            # Build button mapping for all story cards
+            story_ids = [str(s.get('id', i)) for i, s in enumerate(view_window)]
 
+            # Generate button map entries
+            button_map_entries = []
+            for story_id in story_ids:
+                button_map_entries.append(
+                    f"'btn-story-{story_id}': 'card_btn_{story_id}'"
+                )
+
+            # JavaScript to wire HTML buttons to Streamlit buttons using event delegation
             components.html(
                 """
-            <script>
-            (function() {
-                function applyPurpleCardButtons() {
-                    const parentDoc = window.parent.document;
-                    const cardButtons = parentDoc.querySelectorAll('[class*="st-key-card_"] button[data-testid="stBaseButton-secondary"]');
+                <script>
+                (function() {
+                    var parentDoc = window.parent.document;
 
-                    cardButtons.forEach(function(button) {
-                        if (!button.dataset.purpled) {
-                            button.dataset.purpled = 'true';
-                            button.style.cssText = 'background: white !important; background-color: white !important; background-image: none !important; border: 2px solid #e5e5e5 !important; color: #8B5CF6 !important; padding: 10px 18px !important; font-size: 14px !important; font-weight: 600 !important; border-radius: 8px !important; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;';
+                    parentDoc.addEventListener('click', function(e) {
+                        var btn = e.target.closest('.card-btn-view-details');
+                        if (!btn) return;
 
-                            button.addEventListener('mouseenter', function() {
-                                this.style.cssText = 'background: #8B5CF6 !important; background-color: #8B5CF6 !important; background-image: none !important; border: 2px solid #8B5CF6 !important; color: white !important; padding: 10px 18px !important; font-size: 14px !important; font-weight: 600 !important; border-radius: 8px !important; transform: translateY(-2px) !important; box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3), 0 2px 4px rgba(0, 0, 0, 0.1) !important;';
-                            });
-                            button.addEventListener('mouseleave', function() {
-                                this.style.cssText = 'background: white !important; background-color: white !important; background-image: none !important; border: 2px solid #e5e5e5 !important; color: #8B5CF6 !important; padding: 10px 18px !important; font-size: 14px !important; font-weight: 600 !important; border-radius: 8px !important; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;';
-                            });
+                        e.preventDefault();
+
+                        var btnId = btn.id;
+                        if (!btnId || !btnId.startsWith('btn-story-')) return;
+
+                        var storyId = btnId.replace('btn-story-', '');
+                        console.log('[Story Cards] Clicked story:', storyId);
+
+                        // Replace pipe with hyphen to match Streamlit's class naming
+                        var normalizedId = storyId.replace(/\\|/g, '-');
+                        console.log('[Story Cards] Normalized ID:', normalizedId);
+
+                        var stBtn = parentDoc.querySelector('[class*="st-key-card_btn_' + normalizedId + '"] button');
+                        if (stBtn) {
+                            console.log('[Story Cards] Triggering Streamlit button');
+                            stBtn.click();
+                        } else {
+                            console.warn('[Story Cards] Streamlit button not found for:', normalizedId);
                         }
                     });
-                }
-
-                // Run immediately and repeatedly to catch all buttons
-                applyPurpleCardButtons();
-                setTimeout(applyPurpleCardButtons, 100);
-                setTimeout(applyPurpleCardButtons, 500);
-                setTimeout(applyPurpleCardButtons, 1000);
-
-                // Keep checking periodically for dynamically added buttons
-                setInterval(applyPurpleCardButtons, 2000);
-            })();
-            </script>
-            """,
+                })();
+                </script>
+                """,
                 height=0,
             )
 
