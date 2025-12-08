@@ -8,8 +8,6 @@ Uses HTML buttons with JS triggers for consistent styling across themes.
 
 import streamlit as st
 
-from config.theme import GRADIENTS
-
 
 def render_category_cards():
     """Render homepage category cards grid - responsive with CSS Grid."""
@@ -148,8 +146,8 @@ def render_category_cards():
 
     with col1:
         st.markdown(
-            f"""
-        <div style="background: {GRADIENTS['purple_hero']}; color: white; padding: 32px; border-radius: 12px; height: 380px; display: flex; flex-direction: column;">
+            """
+        <div style="background: var(--gradient-purple-hero); color: white; padding: 32px; border-radius: 12px; height: 380px; display: flex; flex-direction: column;">
             <div style="font-size: 48px; margin-bottom: 16px;">🏦</div>
             <h3 style="color: white; font-size: 24px; font-weight: 700; margin: 0 0 8px 0;">Financial Services / Banking</h3>
             <div style="color: rgba(255,255,255,0.9); font-size: 16px; font-weight: 600; margin-bottom: 16px;">55 projects</div>
@@ -176,8 +174,8 @@ def render_category_cards():
 
     with col2:
         st.markdown(
-            f"""
-        <div style="background: {GRADIENTS['purple_hero']}; color: white; padding: 32px; border-radius: 12px; height: 380px; display: flex; flex-direction: column;">
+            """
+        <div style="background: var(--gradient-purple-hero); color: white; padding: 32px; border-radius: 12px; height: 380px; display: flex; flex-direction: column;">
             <div style="font-size: 48px; margin-bottom: 16px;">🌐</div>
             <h3 style="color: white; font-size: 24px; font-weight: 700; margin: 0 0 8px 0;">Cross-Industry Transformation</h3>
             <div style="color: rgba(255,255,255,0.9); font-size: 16px; font-weight: 600; margin-bottom: 16px;">51 projects</div>
@@ -331,8 +329,8 @@ def render_category_cards():
 
     # === ROW 4: Quick Question card ===
     st.markdown(
-        f"""
-    <div style="background: {GRADIENTS['purple_hero']}; color: white; padding: 32px; border-radius: 12px; min-height: 200px; margin-bottom: 24px;">
+        """
+    <div style="background: var(--gradient-purple-hero); color: white; padding: 32px; border-radius: 12px; min-height: 200px; margin-bottom: 24px;">
         <div style="display: flex; align-items: center; gap: 24px; margin-bottom: 20px;">
             <img src="https://raw.githubusercontent.com/mcpugmire1/mattgpt-design-spec/main/brand-kit/chat_avatars/agy_avatar_128_dark.png"
                  alt="Agy" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
@@ -368,6 +366,19 @@ def render_category_cards():
         """
     <script>
     (function() {
+    // Theme detection
+    function detectTheme() {
+        var body = window.parent.document.body;
+        var bg = window.parent.getComputedStyle(body).backgroundColor;
+
+        if (bg === 'rgb(14, 17, 23)' || bg === 'rgb(17, 20, 24)') {
+            body.classList.add('dark-theme');
+        } else {
+            body.classList.remove('dark-theme');
+        }
+    }
+    setInterval(detectTheme, 500);
+    detectTheme();
         setTimeout(function() {
             const parentDoc = window.parent.document;
 

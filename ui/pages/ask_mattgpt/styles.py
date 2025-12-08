@@ -35,7 +35,7 @@ def get_landing_css() -> str:
         .ask-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 30px;
-            margin-top: -35px !important;
+            margin-top: -50px !important;
             color: white;
             display: flex;
             justify-content: space-between;
@@ -638,14 +638,14 @@ def get_conversation_css() -> str:
         .conversation-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 30px;
-            margin-top: -50px !important;
+            margin-top: -60px !important;
             color: white;
         }
         /* Purple header - pull up to eliminate white space */
         .ask-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 30px;
-            margin-top: -50px !important;
+            margin-top: -65px !important;
             color: white;
             display: flex;
             justify-content: space-between;

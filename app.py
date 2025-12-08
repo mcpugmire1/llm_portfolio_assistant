@@ -26,7 +26,6 @@ from ui.components.navbar import render_navbar
 # Local imports - components
 from ui.pages.home import render_home_page
 from ui.styles.global_styles import apply_global_styles
-from utils.theme import inject_theme_css
 
 # =========================
 # UI — Home / Stories / Ask / About
@@ -39,9 +38,6 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="collapsed",  # Hide sidebar - we use top navbar instead
 )
-
-# Inject theme CSS variables (light/dark mode support)
-inject_theme_css()
 
 # Apply global styles once per session
 apply_global_styles()

@@ -6,6 +6,7 @@ Used by both Explore Stories and Ask MattGPT pages.
 """
 
 import streamlit as st
+import streamlit.components.v1 as components
 
 
 def _format_nested_bullet(text: str) -> str:
@@ -211,8 +212,8 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
     if not detail:
         st.markdown(
             """
-            <div style="background: #F3E8FF; border-left: 4px solid #8B5CF6; padding: 12px 16px; margin: 16px 0;">
-                <span style="color: #6B21A8; font-size: 14px;">🐾 Click a row/card above to view details.</span>
+            <div style="background: var(--banner-info-bg); border-left: 4px solid var(--accent-purple); padding: 12px 16px; margin: 16px 0;">
+                <span style="color: var(--accent-purple); font-size: 14px;">🐾 Click a row/card above to view details.</span>
             </div>
             """,
             unsafe_allow_html=True,
@@ -558,19 +559,81 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
                 st.markdown(metric_html, unsafe_allow_html=True)
 
     # ASK AGY ABOUT THIS
-    st.markdown("<br>", unsafe_allow_html=True)
+    btn_key = f"ask_story_{key_suffix}_{detail.get('id', 'x')}"
     st.markdown(
-        "<p style='text-align: center; margin-bottom: 20px; color: var(--text-secondary); font-size: 14px;'>💬 Want to know more about this project?</p>",
+        """
+        <style>
+        .card-btn-primary {
+            display: inline-block;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+            border: none;
+            border-radius: 8px;
+            color: white !important;
+            font-weight: 600;
+            font-size: 15px;
+            text-decoration: none !important;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.25);
+        }
+        .card-btn-primary:hover {
+            background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);
+            text-decoration: none !important;
+        }
+        [class*="st-key-ask_story_"] {
+            display: none !important;
+        }
+        [class*="st-key-btn_page_"] .stButton > button,
+        [class*="st-key-btn_first_"] .stButton > button,
+        [class*="st-key-btn_prev_"] .stButton > button,
+        [class*="st-key-btn_next_"] .stButton > button,
+        [class*="st-key-btn_last_"] .stButton > button {
+            padding: 8px 16px !important;
+            font-size: 13px !important;
+            border-radius: 6px !important;
+            border: 1px solid var(--border-color) !important;
+            background: var(--bg-card) !important;
+            color: var(--text-secondary) !important;
+            margin-top: 0 !important;
+            box-shadow: none !important;
+            width: auto !important;
+        }
+        </style>
+        <br>
+        <p style='text-align: center; margin-bottom: 20px; color: var(--text-secondary); font-size: 14px;'>💬 Want to know more about this project?</p>
+        <div style="text-align: center;">
+            <a id="btn-ask-story" class="card-btn-primary">Ask Agy 🐾 About This</a>
+        </div>
+        """,
         unsafe_allow_html=True,
     )
 
-    _, col_center, _ = st.columns([1.5, 1, 1.5])
-    with col_center:
-        btn_key = f"ask_from_detail_{key_suffix}_{detail.get('id', 'x')}"
-        if st.button(
-            "Ask Agy 🐾 About This",
-            key=btn_key,
-            type="primary",
-            use_container_width=True,
-        ):
-            on_ask_this_story(detail)
+    # Hidden trigger button
+    btn_key = f"ask_story_{key_suffix}_{detail.get('id', 'x')}"
+    if st.button("", key=btn_key):
+        on_ask_this_story(detail)
+
+    # JS wiring
+
+    components.html(
+        """
+    <script>
+    (function() {
+        setTimeout(function() {
+            var parentDoc = window.parent.document;
+            var btn = parentDoc.getElementById('btn-ask-story');
+            if (btn) {
+                btn.onclick = function() {
+                    var stBtn = parentDoc.querySelector('[class*="st-key-ask_story_"] button');
+                    if (stBtn) stBtn.click();
+                };
+            }
+        }, 200);
+    })();
+    </script>
+    """,
+        height=0,
+    )

@@ -2,6 +2,7 @@
 Global CSS Styles
 
 Shared styles applied across all pages:
+- CSS Variables (design system)
 - Streamlit overrides (hide header/menu)
 - Metrics styling
 - Form controls
@@ -18,13 +19,105 @@ def apply_global_styles():
 
     Returns early if already applied to avoid redundant style injection.
     """
-    if st.session_state.get("_matt_css_done"):
-        return
-    st.session_state["_matt_css_done"] = True
-
     st.markdown(
         """
         <style>
+        /* ========================================
+           CSS VARIABLES - DESIGN SYSTEM
+           ======================================== */
+        :root {
+            /* Brand */
+            --accent-purple: #8B5CF6;
+            --accent-purple-hover: #7C3AED;
+            --accent-purple-bg: rgba(139, 92, 246, 0.08);
+            --accent-purple-light: rgba(139, 92, 246, 0.2);
+
+            /* Backgrounds */
+            --bg-card: #FFFFFF;
+            --bg-surface: #F9FAFB;
+            --bg-primary: #FFFFFF;
+            --bg-hover: #F3F4F6;
+            --bg-input: #FFFFFF;
+
+            /* Text */
+            --text-heading: #111827;
+            --text-primary: #1F2937;
+            --text-secondary: #6B7280;
+            --text-muted: #9CA3AF;
+            --text-color: #1F2937;
+
+            /* Borders & Shadows */
+            --border-color: #E5E7EB;
+            --border-light: #F3F4F6;
+            --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+            /* Components */
+            --pill-bg: #F3F4F6;
+            --pill-text: #4B5563;
+            --success-color: #10B981;
+            --banner-info-bg: rgba(139, 92, 246, 0.05);
+
+            /* Tables */
+            --table-header-bg: #F9FAFB;
+            --table-row-bg: #FFFFFF;
+            --table-row-hover-bg: #F9FAFB;
+
+            /* Chat/Status */
+            --status-bar-bg: #F9FAFB;
+            --status-bar-border: #E5E7EB;
+            --chat-ai-bg: #F9FAFB;
+            --chat-ai-border: #8B5CF6;
+            --chat-user-bg: #FFFFFF;
+
+            /* Gradients */
+            --gradient-purple-hero: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+            /* Legacy colors (navbar, hero, stats) */
+            --purple-gradient-start: #667eea;
+            --dark-navy: #2c3e50;
+            --dark-navy-hover: #34495e;
+        }
+        /* ========================================
+        DARK MODE OVERRIDES
+        ======================================== */
+        body.dark-theme {
+            /* Backgrounds */
+            --bg-card: #1E1E2E;
+            --bg-surface: #262633;
+            --bg-primary: #0E1117;
+            --bg-hover: #2D2D3D;
+            --bg-input: #1E1E2E;
+
+            /* Text */
+            --text-heading: #F9FAFB;
+            --text-primary: #E5E7EB;
+            --text-secondary: #9CA3AF;
+            --text-muted: #6B7280;
+            --text-color: #E5E7EB;
+
+            /* Borders & Shadows */
+            --border-color: #374151;
+            --border-light: #2D2D3D;
+            --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            --hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+
+            /* Components */
+            --pill-bg: #374151;
+            --pill-text: #E5E7EB;
+            --banner-info-bg: rgba(139, 92, 246, 0.15);
+
+            /* Tables */
+            --table-header-bg: #1E1E2E;
+            --table-row-bg: #0E1117;
+            --table-row-hover-bg: #262633;
+
+            /* Chat/Status */
+            --status-bar-bg: #1E1E2E;
+            --status-bar-border: #374151;
+            --chat-ai-bg: #1E1E2E;
+            --chat-user-bg: #262633;
+        }
         /* ========================================
            STREAMLIT OVERRIDES
            ======================================== */
@@ -84,17 +177,7 @@ def apply_global_styles():
         /* ========================================
            UNIVERSAL LAYOUT RESET
            ======================================== */
-         /* Pull page headers up to sit flush under navbar */
-        div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) ~ div[data-testid="stVerticalBlock"] > div:first-child {
-            margin-top: -40px !important;
-        }
 
-        /* Also target specific header types directly */
-        .hero-gradient-wrapper,
-        .conversation-header,
-        .ask-header {
-            margin-top: -20px !important;  /* Changed from 0 to -20px */
-        }
 
         /* Remove ALL default Streamlit top spacing */
         div[data-testid="stAppViewContainer"],
@@ -119,13 +202,6 @@ def apply_global_styles():
             margin-top: 0 !important;
         }
 
-        /* Neutralize custom headers (navbar handles its own positioning) */
-        .ask-header,
-        .hero-section,
-        .conversation-header,
-        .hero-gradient-wrapper {
-            margin-top: 0 !important;
-        }
 
         /* Neutralize Streamlit containers wrapping custom headers */
         div[data-testid="stMarkdown"]:has(.ask-header),

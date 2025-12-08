@@ -118,7 +118,7 @@ def render_cross_industry_landing():
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         padding: 2rem;
         border-radius: 0;
-        margin: -1rem 0 0 0;
+        margin: -2rem 0 0 0;
     }
 
     .conversation-header-content {
@@ -156,7 +156,6 @@ def render_cross_industry_landing():
     }
     .main .block-container {
         max-width: 1400px !important;
-        padding: 2rem 1rem !important;
         background: var(--bg-primary) !important;
     }
     h1 {
@@ -180,13 +179,13 @@ def render_cross_industry_landing():
     .stats-bar {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        border-bottom: 2px solid #e5e5e5;
+        border-bottom: 2px solid var(--border-color);
         margin-bottom: 8px;
     }
     .stat {
         padding: 2px;
         text-align: center;
-        border-right: 1px solid #e5e5e5;
+        border-right: 1px solid var(--border-color);
     }
     .stat:last-child {
         border-right: none;
@@ -194,7 +193,7 @@ def render_cross_industry_landing():
     .stat-number {
         font-size: 36px;
         font-weight: 700;
-        color: var(--accent-purple);
+        color: var(--purple-gradient-start);
         margin-bottom: 8px;
         display: block;
     }

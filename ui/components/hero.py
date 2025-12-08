@@ -7,8 +7,6 @@ Large gradient hero with portfolio overview and CTAs.
 import streamlit as st
 import streamlit.components.v1 as components
 
-from config.theme import COLORS, GRADIENTS
-
 
 def render_hero():
     """
@@ -21,32 +19,32 @@ def render_hero():
     """
 
     st.markdown(
-        f"""
+        """
         <style>
             /* Hide the trigger buttons */
             [class*="st-key-hero_explore"],
-            [class*="st-key-hero_ask"] {{
+            [class*="st-key-hero_ask"] {
                 display: none !important;
-            }}
+            }
 
             /* Pull hero up to sit flush under navbar */
-            .hero-gradient-wrapper {{
-                background: {GRADIENTS['purple_hero']};
+            .hero-gradient-wrapper {
+                background: var(--gradient-purple-hero);
                 border-radius: 0px;
-                margin: -20px 0 0 0 !important;
+                margin: -32px 0 0 0 !important;
                 padding: 0;
                 width: 100%;
-            }}
+            }
 
-            .hero-content {{
+            .hero-content {
                 max-width: 1200px;
                 margin: 0 auto;
                 text-align: center;
                 padding: 50px 40px;
                 color: white;
-            }}
+            }
 
-            .hero-btn {{
+            .hero-btn {
                 display: inline-block;
                 padding: 14px 32px;
                 border-radius: 8px;
@@ -55,35 +53,35 @@ def render_hero():
                 transition: all 0.2s ease;
                 cursor: pointer;
                 border: 2px solid white;
-            }}
+            }
 
             /* Also add these states to ensure no underlines ever */
             .hero-btn:hover,
             .hero-btn:active,
             .hero-btn:focus,
-            .hero-btn:visited {{
+            .hero-btn:visited {
                 text-decoration: none !important;
-            }}
+            }
 
-            .hero-btn-primary {{
+            .hero-btn-primary {
                 background: white;
-                color: {COLORS['purple_gradient_start']};
-            }}
+                color: var(--purple-gradient-start);
+            }
 
-            .hero-btn-primary:hover {{
+            .hero-btn-primary:hover {
                 transform: translateY(-2px);
                 box-shadow: 0 4px 12px rgba(255,255,255,0.3);
-            }}
+            }
 
-            .hero-btn-secondary {{
+            .hero-btn-secondary {
                 background: rgba(255,255,255,0.2);
                 color: white;
-            }}
+            }
 
-            .hero-btn-secondary:hover {{
+            .hero-btn-secondary:hover {
                 background: rgba(255,255,255,0.3);
                 transform: translateY(-2px);
-            }}
+            }
         </style>
         <div class="hero-gradient-wrapper">
             <div class="hero-content">
@@ -170,62 +168,62 @@ def render_stats_bar():
     """
 
     st.markdown(
-        f"""
+        """
         <style>
-        .stats-bar {{
+        .stats-bar {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            border-bottom: 2px solid {COLORS['border_gray']};
+            border-bottom: 2px solid var(--border-color);
             margin-bottom: 30px;
             margin-top: -15px;
-        }}
+        }
 
-        .stat {{
+        .stat {
             padding: 2px;
             text-align: center;
-            border-right: 1px solid {COLORS['border_gray']};
-        }}
+            border-right: 1px solid var(--border-color);
+        }
 
-        .stat:last-child {{
+        .stat:last-child {
             border-right: none;
-        }}
+        }
 
-        .stat-number {{
+        .stat-number {
             font-size: 36px;
             font-weight: 700;
-            color: {COLORS['purple_gradient_start']};
+            color: var(--purple-gradient-start);
             margin-bottom: 8px;
             display: block;
-        }}
+        }
 
-        .stat-label {{
+        .stat-label {
             font-size: 14px;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.5px;
-        }}
+        }
 
-        @media (max-width: 768px) {{
-            .stats-bar {{
+        @media (max-width: 768px) {
+            .stats-bar {
                 grid-template-columns: repeat(2, 1fr);
-            }}
-            .stat:nth-child(2) {{
+            }
+            .stat:nth-child(2) {
                 border-right: none;
-            }}
-        }}
+            }
+        }
 
-        @media (max-width: 480px) {{
-            .stats-bar {{
+        @media (max-width: 480px) {
+            .stats-bar {
                 grid-template-columns: 1fr;
-            }}
-            .stat {{
+            }
+            .stat {
                 border-right: none;
-                border-bottom: 1px solid {COLORS['border_gray']};
-            }}
-            .stat:last-child {{
+                border-bottom: 1px solid var(--border-color);
+            }
+            .stat:last-child {
                 border-bottom: none;
-            }}
-        }}
+            }
+        }
         </style>
         <div class="stats-bar">
             <div class="stat">
