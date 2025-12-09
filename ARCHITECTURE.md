@@ -33,6 +33,13 @@
 - [Services Layer](#services-layer)
 - [Utilities](#utilities)
 
+### 📱 Mobile & Responsive Design
+- [Mobile Responsiveness Roadmap](#mobile-responsiveness-roadmap)
+  - [Known Mobile Issues](#known-mobile-issues)
+  - [CSS Breakpoint Strategy](#recommended-css-breakpoint-strategy)
+  - [Testing Approach](#testing-approach)
+  - [Implementation Priority](#implementation-priority)
+
 ### 🔮 Future Work
 - [Future Enhancements](#future-enhancements)
 - [Interview Talking Points](#interview-talking-points)
@@ -908,22 +915,185 @@ def test_navbar_doesnt_affect_filters():
 
 ---
 
+## Mobile Responsiveness Roadmap
+
+### Current State: Desktop-Optimized
+
+The application is currently designed and tested for desktop viewports (1280px+). While functional on mobile browsers, the experience is not optimized.
+
+### Known Mobile Issues
+
+#### 1. **Navigation Bar**
+- **Current:** Horizontal tabs (Home | Explore Stories | Ask MattGPT | About Matt)
+- **Issue:** Won't fit on mobile widths (< 768px)
+- **Proposed Solution:** Hamburger menu or bottom navigation bar
+- **Streamlit Note:** Sidebar becomes hamburger automatically, but horizontal tabs need manual handling
+
+#### 2. **Ask MattGPT Header**
+- **Current:** 64px avatar + title + tagline + "How Agy searches" button in horizontal row
+- **Issue:** Too wide for mobile (375-480px viewports)
+- **Proposed Solution:**
+  - Stack vertically on mobile
+  - Hide/shrink "How Agy searches" button text to icon-only
+  - Reduce avatar to 48px on mobile
+
+#### 3. **Chat Avatars**
+- **Current:** 60px avatars in conversation view
+- **Issue:** Consumes too much horizontal space on mobile
+- **Proposed Solution:** Reduce to 40-48px on mobile breakpoints
+- **CSS Pattern:**
+  ```css
+  @media (max-width: 768px) {
+      .stChatMessage > img[alt="assistant avatar"] {
+          width: 48px !important;
+          height: 48px !important;
+      }
+  }
+  ```
+
+#### 4. **Chat Message Bubbles**
+- **Current:** `padding: 24px` on AI messages, `16px` on user messages
+- **Issue:** Large padding wastes space on narrow screens
+- **Proposed Solution:** Reduce to `16px/12px` on mobile
+- **Font Size:** May need to reduce from `15px` to `14px` for readability
+
+#### 5. **Chat Input Box**
+- **Current:** "Ask Agy 🐾" button with full text placeholder
+- **Issue:** May overflow on narrow screens (< 375px)
+- **Proposed Solution:** Shorten placeholder text or use icon-only on mobile
+
+#### 6. **"How Agy Searches" Modal**
+- **Current:** Fixed heights, 3-column flow grid for steps
+- **Issue:** Won't fit mobile viewport, horizontal scrolling
+- **Proposed Solution:**
+  - Stack 3-step flow vertically on mobile
+  - Make modal full-screen with scrollable content
+  - Adjust `max-height` for smaller screens
+
+#### 7. **Related Projects Grid**
+- **Current:** 3-column layout for related stories
+- **Issue:** Columns too narrow on tablet/mobile
+- **Proposed Solution:**
+  ```css
+  @media (max-width: 768px) {
+      .related-projects-grid {
+          grid-template-columns: 1fr; /* Stack to single column */
+      }
+  }
+  ```
+
+#### 8. **Status Bar**
+- **Current:** "Semantic search active | Pinecone index ready | 130+ stories indexed"
+- **Issue:** Text too long for mobile, may wrap awkwardly
+- **Proposed Solution:** Abbreviate to "130+ stories | Search active" on mobile
+
+### Recommended CSS Breakpoint Strategy
+
+```css
+/* Mobile-first approach */
+
+/* Base styles (mobile) */
+.chat-message {
+    padding: 12px;
+    font-size: 14px;
+}
+
+/* Tablet (768px and up) */
+@media (min-width: 768px) {
+    .chat-message {
+        padding: 16px;
+        font-size: 15px;
+    }
+}
+
+/* Desktop (1024px and up) */
+@media (min-width: 1024px) {
+    .chat-message {
+        padding: 24px;
+        font-size: 15px;
+    }
+}
+```
+
+**Standard Breakpoints:**
+- Mobile: `< 768px`
+- Tablet: `768px - 1023px`
+- Desktop: `1024px+`
+
+**Test Devices:**
+- iPhone SE: 375px (smallest modern phone)
+- iPhone 14: 390px
+- iPad: 768px
+- Desktop: 1280px+
+
+### Testing Approach
+
+1. **Chrome DevTools:** Toggle Device Toolbar (`Cmd+Shift+M`)
+2. **Test Viewports:**
+   - iPhone SE (375px)
+   - iPhone 14 (390px)
+   - iPad (768px)
+   - Desktop (1280px)
+3. **Test Both Modes:** Light and dark mode at each breakpoint
+4. **Real Device Testing:** Check touch targets, scroll behavior, input focus
+
+### Streamlit Mobile Quirks
+
+- **Sidebar:** Automatically converts to hamburger menu on mobile
+- **st.columns():** Does NOT auto-stack on mobile - requires manual CSS overrides
+- **Chat Input:** Sticky positioning may behave differently on mobile browsers
+- **Touch Targets:** Must be minimum 44x44px (Apple Human Interface Guidelines)
+- **Emotion Cache:** May generate different class names on mobile, test thoroughly
+
+### Implementation Priority
+
+**Phase 1: Critical Fixes (Mobile Usability)**
+1. Stack navigation tabs vertically on mobile
+2. Reduce chat avatar sizes to 48px on mobile
+3. Adjust chat bubble padding for mobile
+4. Make "How Agy Searches" modal full-screen on mobile
+
+**Phase 2: Polish (Enhanced Experience)**
+5. Optimize status bar text for mobile
+6. Stack related projects grid to single column
+7. Adjust header layout for mobile (stack vertically)
+8. Test and refine touch targets
+
+**Phase 3: Testing & Refinement**
+9. Cross-browser testing (Safari iOS, Chrome Android)
+10. Real device testing
+11. Accessibility audit (VoiceOver, TalkBack)
+12. Performance testing on slower connections
+
+### Future Work: Progressive Web App (PWA)
+
+Once mobile responsiveness is solid, consider:
+- Add manifest.json for "Add to Home Screen"
+- Service worker for offline support
+- Push notifications for story updates
+- Native app-like experience
+
+---
+
 ## Future Enhancements
 
 ### Short-term (Next 2 weeks)
-1. Complete Phase 4 cleanup
-2. Add docstrings and type hints
-3. Set up pre-commit hooks
+1. ~~Complete Phase 4 cleanup~~ ✅ Done (Phase 5 completed Nov 7, 2025)
+2. ~~Add docstrings and type hints~~ (Partially done)
+3. ~~Set up pre-commit hooks~~ ✅ Done (black, ruff, mypy)
+4. **NEW:** Begin mobile responsiveness Phase 1 (critical fixes)
 
 ### Medium-term (Next month)
 4. Add unit tests for components
 5. Implement proper error boundaries
 6. Add logging and observability
+7. Complete mobile responsiveness testing
 
 ### Long-term (3-6 months)
-7. Migrate to Next.js + React
-8. Replace Streamlit with FastAPI backend
-9. Add proper state management (Redux/Zustand)
+8. Migrate to Next.js + React (mobile-first from start)
+9. Replace Streamlit with FastAPI backend
+10. Add proper state management (Redux/Zustand)
+11. Consider PWA implementation
 
 ---
 
