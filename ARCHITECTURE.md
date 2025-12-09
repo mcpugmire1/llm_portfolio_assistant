@@ -23,9 +23,9 @@ llm_portfolio_assistant/
 │
 ├── config/
 │   ├── __init__.py
-│   ├── theme.py                    # Design system constants
 │   ├── debug.py                    # Centralized DEBUG flag
 │   └── settings.py                 # Configuration helpers
+│   # Note: theme.py was removed - superseded by CSS variables in global_styles.py
 │
 ├── utils/                          # Shared utilities
 │   ├── __init__.py
@@ -34,29 +34,43 @@ llm_portfolio_assistant/
 │   ├── scoring.py                  # _keyword_score, _hybrid_score
 │   ├── filters.py                  # matches_filters
 │   ├── ui_helpers.py               # safe_container, render_no_match_banner, dbg
-│   └── ask_helpers.py              # Ask MattGPT UI helpers (NEW)
+│   └── search.py                   # Search utilities (placeholder)
 │
 ├── services/                       # Business logic & external APIs
 │   ├── __init__.py
 │   ├── pinecone_service.py         # Pinecone client & vector search
 │   ├── rag_service.py              # Semantic search orchestration
-│   ├── story_service.py            # Story retrieval logic
-│   └── ask_service.py              # Ask MattGPT RAG orchestration (NEW)
+│   ├── semantic_router.py          # ✅ Query routing & validation (11.4 KB)
+│   └── story_service.py            # Story retrieval logic (placeholder)
 │
 ├── ui/
 │   ├── components/
 │   │   ├── __init__.py
-│   │   ├── navbar.py               # Top navigation (80 lines)
-│   │   └── footer.py               # Footer (60 lines)
-│   │   └── story_detail.py         # Story Detail Component - Shared Renderer (329 lines)
+│   │   ├── navbar.py                  # Top navigation (80 lines)
+│   │   ├── footer.py                  # Footer (60 lines)
+│   │   ├── story_detail.py            # Story Detail Component - Shared Renderer (329 lines)
+│   │   ├── ask_mattgpt_header.py      # ✨ Unified Ask MattGPT header (47.5 KB)
+│   │   ├── how_agy_modal.py           # ✨ "How Agy Searches" modal (28.6 KB)
+│   │   ├── category_cards.py          # Landing page capability cards (19 KB)
+│   │   ├── hero.py                    # Hero section component (8 KB)
+│   │   └── thinking_indicator.py      # ✨ Loading/processing indicator (3 KB)
 │   │
 │   ├── pages/
 │   │   ├── __init__.py
-│   │   ├── home.py                 # Home page (38 lines)
-│   │   ├── explore_stories.py      # Stories browser (1,306 lines)
-│   │   ├── ask_mattgpt.py          # Ask MattGPT landing + conversation (700 lines)
-│   │   ├── about_matt.py           # About page (467 lines)
-│   │   ├── banking_landing.py      # Banking landing (413 lines)
+│   │   ├── home.py                    # Home page (38 lines)
+│   │   ├── explore_stories.py         # Stories browser (1,306 lines)
+│   │   ├── ask_mattgpt/               # ✅ Modular structure (Dec 2024)
+│   │   │   ├── __init__.py            # Router (1.9 KB)
+│   │   │   ├── landing_view.py        # Landing page UI (9.8 KB)
+│   │   │   ├── conversation_view.py   # Chat conversation UI (15.4 KB)
+│   │   │   ├── conversation_helpers.py # Message rendering (26.9 KB)
+│   │   │   ├── backend_service.py     # RAG pipeline integration (43.2 KB)
+│   │   │   ├── styles.py              # CSS definitions (39.0 KB)
+│   │   │   ├── story_intelligence.py  # Theme/persona inference (11.6 KB)
+│   │   │   ├── shared_state.py        # Session state management (7.9 KB)
+│   │   │   └── utils.py               # Shared utilities (9.4 KB)
+│   │   ├── about_matt.py              # About page (467 lines)
+│   │   ├── banking_landing.py         # Banking landing (413 lines)
 │   │   └── cross_industry_landing.py  # Cross-industry landing (413 lines)
 │   │
 │   ├── styles/
@@ -66,7 +80,7 @@ llm_portfolio_assistant/
 │   └── legacy_components.py        # Legacy monolith (2,100 lines) - TO BE DELETED
 │
 ├── data/
-│   ├── echo_star_stories_nlp.jsonl # Story corpus (120+ stories)
+│   ├── echo_star_stories_nlp.jsonl # Story corpus (130+ stories)
 │   ├── nonsense_filters.jsonl      # Off-domain query rules
 │   └── offdomain_queries.csv       # Query telemetry log
 │
@@ -111,40 +125,40 @@ def render_navbar(current_tab):
 
 ---
 
-### ADR-002: Theme Constants
+### ADR-002: Theme Constants (Evolved)
 
-**Decision:** Centralize colors, typography, spacing in `config/theme.py`.
+**Original Decision:** Centralize colors, typography, spacing in `config/theme.py`.
 
 **Problem:** Hardcoded values scattered across 20+ files:
 - `#667eea` appears 47 times
 - `padding: 24px` repeated 32 times
 - Inconsistent values (sometimes `24px`, sometimes `20px`)
 
-**Solution:**
+**Original Solution:**
 ```python
-# config/theme.py
+# config/theme.py (deprecated)
 COLORS = {
     "primary_purple": "#8B5CF6",
     "dark_navy": "#2c3e50",
 }
-
-SPACING = {
-    "card_padding": "24px",
-}
-
-# Usage in components
-from config.theme import COLORS, SPACING
-
-st.markdown(f"""
-    background: {COLORS['dark_navy']};
-    padding: {SPACING['card_padding']};
-""")
 ```
 
+**Evolution (Dec 2024):** Replaced with CSS variables in `global_styles.py`
+
+**Why the change:**
+- Python theme constants were over-engineered for Streamlit
+- CSS variables provide native browser support
+- Better dark mode support via `:root` and `body.dark-theme`
+- No Python-to-CSS bridging required
+- Streamlit just injects CSS once
+
+**Current Approach:** See ADR-005 for CSS Variable System
+
 **Benefits:**
-- Single source of truth for design system
-- Easy to update colors/spacing globally
-- Type-safe imports (IDE autocomplete)
+- Single source of truth (still maintained)
+- Native dark mode via variable overrides
+- No template interpolation needed
+- Cleaner separation of concerns
 
 ---
 
@@ -485,11 +499,12 @@ Further dead code removal through import analysis:
 |-------------|-------|-------------------|--------|
 | **app.py** | **284** | **-5,481 (-95.1%)** | ✅ **Absolute minimal router** |
 | explore_stories.py | 1,306 | -854 (-40%) | ✅ Modularized |
-| ask_mattgpt.py | 1,885 | -1,055 (-36%) | ✅ Modularized |
+| ask_mattgpt/ (dir) | 164 KB | Replaced 4,696-line monolith | ✅ **Modular** (8 files) |
 | about_matt.py | 467 | - | ✅ Extracted |
-| utils/*.py | 548 | +548 (new) | ✅ Shared utilities |
-| services/*.py | 479 | +479 (new) | ✅ Business logic |
-| config/*.py | 120 | +120 (new) | ✅ Configuration |
+| components/ | 142 KB | +8 components | ✅ **Reusable** |
+| utils/*.py | ~27 KB | +6 modules | ✅ Shared utilities |
+| services/*.py | ~28 KB | +4 services | ✅ Business logic |
+| config/*.py | ~1 KB | +2 modules | ✅ Configuration |
 | **Total** | **~5,550** | **-5,481 from app.py** | ✅ |
 
 **Key Achievements:**
@@ -595,6 +610,137 @@ const buttons = window.parent.document.querySelectorAll('.st-key-{key}');
 - Inline styles have maximum specificity (1,0,0,0)
 - Timing matters: Streamlit renders async
 - Always use dataset flags to avoid duplicate listeners
+
+---
+
+### ADR-005: CSS Variable System for Dark Mode
+
+**Decision:** Use CSS custom properties (`--variable-name`) for all colors, with light/dark mode variants.
+
+**Problem:**
+- No dark mode support
+- Hardcoded colors throughout components
+- Difficult to maintain consistent theming
+
+**Solution:** Define CSS variables in `ui/styles/global_styles.py`:
+
+```css
+/* Light Mode (default) */
+:root {
+    /* Brand */
+    --accent-purple: #8B5CF6;
+    --accent-purple-hover: #7C3AED;
+
+    /* Backgrounds */
+    --bg-card: #FFFFFF;
+    --bg-surface: #F9FAFB;
+    --bg-primary: #FFFFFF;
+
+    /* Text */
+    --text-heading: #111827;
+    --text-primary: #1F2937;
+    --text-secondary: #6B7280;
+
+    /* Chat */
+    --chat-ai-bg: #F9FAFB;
+    --chat-ai-border: #8B5CF6;
+    --chat-user-bg: #FBFBFC;
+
+    /* Borders */
+    --border-color: #E5E7EB;
+}
+
+/* Dark Mode (override) */
+body.dark-theme {
+    --bg-card: #1E1E2E;
+    --bg-surface: #262633;
+    --bg-primary: #0E1117;
+
+    --text-heading: #F9FAFB;
+    --text-primary: #E5E7EB;
+    --text-secondary: #9CA3AF;
+    --accent-purple-text: #A78BFA;  /* Lighter for dark BG */
+
+    --chat-ai-bg: #1E1E2E;
+    --chat-user-bg: #282435;  /* Purple-tinted dark */
+
+    --border-color: #374151;
+}
+```
+
+**Usage in Components:**
+```css
+.chat-message {
+    background: var(--chat-ai-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+```
+
+**Benefits:**
+- Automatic dark mode via variable overrides
+- Single source of truth for colors
+- No Python-to-CSS bridging
+- Native browser support
+- Fallback values supported: `var(--bg-card, #FFFFFF)`
+
+**Trade-offs:**
+- **Pro:** Clean separation of concerns
+- **Pro:** Easy to add new color schemes
+- **Pro:** Works with Streamlit's theme system
+- **Con:** Must test both light and dark modes for every change
+- **Con:** Older browsers need fallbacks (not an issue for modern stack)
+
+**Supersedes:** ADR-002 (Python theme.py approach)
+
+---
+
+### ADR-006: Avatar Sizing Standards
+
+**Decision:** Standardize avatar sizes across all contexts with inline styles.
+
+**Problem:**
+- Inconsistent avatar sizes (50px, 60px, 64px variations)
+- Streamlit emotion-cache classes override CSS
+- Users notice size differences between views
+
+**Solution:**
+
+**Header Avatars:** 64px
+```html
+<img src="...agy_avatar.png"
+     width="64" height="64"
+     style="width: 64px; height: 64px; border-radius: 50%; ..."
+     alt="Agy">
+```
+
+**Chat Avatars:** 60px
+```css
+/* Agy avatar */
+.stChatMessage > img[alt="assistant avatar"] {
+    width: 60px !important;
+    height: 60px !important;
+    border-radius: 50% !important;
+}
+
+/* User avatar (emoji) */
+.stChatMessage > div[contains(@class, 'st-emotion-cache')] {
+    width: 60px !important;
+    height: 60px !important;
+    font-size: 28px !important;
+}
+```
+
+**Rationale:**
+- Headers need visual prominence → 64px
+- Chat needs balanced sizing → 60px (not too large, not too small)
+- Inline styles required to override emotion-cache
+
+**Consistency Rules:**
+- All landing page headers: 64px
+- All conversation headers: 64px
+- All About Matt avatars: 64px
+- All in-chat avatars: 60px
 
 ---
 
