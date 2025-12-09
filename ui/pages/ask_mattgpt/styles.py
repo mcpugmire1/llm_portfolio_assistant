@@ -724,8 +724,8 @@ def get_conversation_css() -> str:
             color: var(--text-primary) !important;
         }
 
-        /* Chat messages - User */
-        [data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-user"]) {
+      /* Chat messages - User */
+        [data-testid="stChatMessage"]:has([aria-label="Chat message from user"]) {
             background: var(--chat-user-bg) !important;
             border-radius: 8px !important;
             padding: 16px !important;

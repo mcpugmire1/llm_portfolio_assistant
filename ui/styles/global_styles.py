@@ -69,7 +69,7 @@ def apply_global_styles():
             --status-bar-border: #E5E7EB;
             --chat-ai-bg: #F9FAFB;
             --chat-ai-border: #8B5CF6;
-            --chat-user-bg: #FFFFFF;
+            --chat-user-bg: #FBFBFC;
 
             /* Gradients */
             --gradient-purple-hero: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -118,7 +118,7 @@ def apply_global_styles():
             --status-bar-bg: #1E1E2E;
             --status-bar-border: #374151;
             --chat-ai-bg: #1E1E2E;
-            --chat-user-bg: #262633;
+            --chat-user-bg: #282435;
         }
         /* ========================================
            STREAMLIT OVERRIDES
