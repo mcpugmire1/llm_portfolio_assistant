@@ -1,7 +1,7 @@
 """
 Explore Stories Page - Refactored & Bug-Free
 
-Browse 120+ project case studies with advanced filtering.
+Browse 130+ project case studies with advanced filtering.
 Includes semantic search, faceted filters, and pagination.
 
 FIXES:

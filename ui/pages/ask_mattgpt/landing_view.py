@@ -66,7 +66,7 @@ def render_landing_page(stories: list[dict]):
             <h2 class="welcome-title">Hi, I'm Agy 🐾</h2>
             <p class="intro-text-primary">
                 I'm a Plott Hound — a breed known for tracking skills and determination.
-                Perfect traits for helping you hunt down insights from Matt's 120+ transformation projects.
+                Perfect traits for helping you hunt down insights from Matt's 130+ transformation projects.
             </p>
             <p class="intro-text-secondary">
                 Ask me about specific methodologies, leadership approaches, or project outcomes.
@@ -177,7 +177,7 @@ def render_landing_page(stories: list[dict]):
 
     st.markdown('</div>', unsafe_allow_html=True)
     st.markdown(
-        '<p class="powered-by-text">Powered by OpenAI GPT-4o-mini with semantic search across 120+ project case studies</p>',
+        '<p class="powered-by-text">Powered by OpenAI GPT-4o-mini with semantic search across 130+ project case studies</p>',
         unsafe_allow_html=True,
     )
 

@@ -7,8 +7,8 @@
 ---
 ## 🎯 What This Is
 
-An AI assistant that provides conversational access to my professional portfolio 
-across 120+ transformation projects, enabling recruiters and hiring managers to 
+An AI assistant that provides conversational access to my professional portfolio
+across 130+ transformation projects, enabling recruiters and hiring managers to
 ask specific questions and receive verifiable, outcome-focused answers.
 
 **Example queries:**
@@ -40,7 +40,7 @@ Traditional portfolios force readers to:
 User Query → Semantic Search → RAG Retrieval → GPT-4 → Cited Answer
                     ↓
               Pinecone/FAISS
-           (120+ STAR stories)
+           (130+ STAR stories)
 ```
 **Technical Innovation:** Hybrid retrieval combining semantic embeddings with 
 structured metadata filtering to deliver context-aware, outcome-focused responses.
