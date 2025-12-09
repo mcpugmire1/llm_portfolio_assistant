@@ -24,6 +24,19 @@
 - [File Size Summary](#file-size-summary)
 - [Refactoring Impact](#refactoring-impact)
 
+### 📊 Data Pipeline & RAG
+- [Data Pipeline & RAG Architecture](#data-pipeline--rag-architecture)
+  - [Pipeline Overview](#pipeline-overview)
+  - [Stage 1: Excel to JSONL](#stage-1-excel-to-jsonl)
+  - [Stage 2: Manual Enrichment](#stage-2-manual-enrichment)
+  - [Stage 3: Embedding Generation](#stage-3-embedding-generation)
+  - [Production RAG Pipeline](#production-rag-pipeline)
+  - [Key Services](#key-services)
+  - [Cost & Performance](#cost--performance)
+  - [Data Refresh Workflow](#data-refresh-workflow)
+  - [Environment Configuration](#environment-configuration)
+  - [Deployment](#deployment)
+
 ### 🎨 CSS Architecture
 - [CSS Scoping Patterns](#css-scoping-patterns)
 - [Streamlit-Specific Challenges](#streamlit-specific-challenges)
@@ -839,6 +852,410 @@ body.dark-theme {
 - All conversation headers: 64px
 - All About Matt avatars: 64px
 - All in-chat avatars: 60px
+
+---
+
+## Data Pipeline & RAG Architecture
+
+### Pipeline Overview
+
+The data engineering flow transforms Excel-based STAR stories into vector embeddings that power semantic search:
+
+```
+Excel Master Sheet
+      ↓
+[generate_jsonl_from_excel.py]
+      ↓
+echo_star_stories.jsonl (raw)
+      ↓
+[Manual enrichment + LLM processing]
+      ↓
+echo_star_stories_nlp.jsonl (enriched)
+      ↓
+[build_custom_embeddings.py]
+      ↓
+OpenAI text-embedding-3-small (1536 dims)
+      ↓
+Pinecone Index (matt-portfolio-v2)
+      ↓
+[Production App - services/pinecone_service.py]
+      ↓
+Semantic Search Results → RAG → GPT-4o-mini → User
+```
+
+---
+
+### Stage 1: Excel to JSONL
+
+**Script:** `generate_jsonl_from_excel.py` (259 lines, root-level)
+
+**Purpose:** Convert Excel master sheet to structured JSONL format while preserving existing data.
+
+**Input:**
+- Excel file: `MPugmire - STAR Stories - [DATE].xlsx`
+- Sheet: `"STAR Stories - Interview Ready"`
+
+**Output:**
+- `echo_star_stories.jsonl` (130+ records)
+
+**Key Features:**
+- **Merge strategy:** Preserves existing `public_tags`, `content`, `id` fields
+- **Backup:** Auto-creates `.bak` file before overwriting
+- **Normalization:** Slug-based key matching (`Title|Client`)
+- **Dry-run mode:** Preview changes before committing
+
+**Fields Extracted:**
+```python
+{
+    "id": "story_123",
+    "Title": "Scaled Engineering Team from 4 to 150+",
+    "Client": "Fortune 500 Bank",
+    "Industry": "Financial Services",
+    "Domain": "Platform Engineering",
+    "Role": "Head of Engineering",
+    "Situation": "Rapid growth, technical debt...",
+    "Task": "Scale team while maintaining quality...",
+    "Action": "Implemented hiring pipeline, mentorship...",
+    "Result": "150+ engineers, 40% faster delivery...",
+    "Theme": "Team Scaling & Leadership",
+    "Sub-category": "Organizational Design",
+    "Tags": "scaling, leadership, hiring",
+    "public_tags": ["Team Scaling", "Engineering Leadership"]
+}
+```
+
+**Environment:**
+```bash
+INPUT_EXCEL_FILE="MPugmire - STAR Stories - 01DEC25.xlsx"
+SHEET_NAME="STAR Stories - Interview Ready"
+DRY_RUN=False  # Set to True for preview
+```
+
+---
+
+### Stage 2: Manual Enrichment
+
+**Script:** `generate_public_tags.py` (171 lines, root-level)
+
+**Purpose:** Add semantic metadata and public-facing tags.
+
+**Enrichment Process:**
+1. **Persona Tagging** - Map stories to interview personas (e.g., "Product Leader", "Technical Architect")
+2. **5P Summaries** - Generate concise 5-paragraph summaries for quick scanning
+3. **Public Tags** - Create user-friendly tags from technical metadata
+4. **Theme Assignment** - Categorize stories by transformation themes
+
+**Output:**
+- `echo_star_stories_nlp.jsonl` (enriched with semantic metadata)
+
+---
+
+### Stage 3: Embedding Generation
+
+**Script:** `build_custom_embeddings.py` (291 lines, root-level)
+
+**Purpose:** Generate vector embeddings and upsert to Pinecone for semantic search.
+
+**Input:**
+- `echo_star_stories_nlp.jsonl` (enriched stories)
+
+**Output:**
+- Pinecone index: `matt-portfolio-v2`
+- Namespace: `default`
+- Dimensions: 1536 (OpenAI text-embedding-3-small)
+
+**Embedding Strategy:**
+
+**Text Composition for Embedding:**
+```python
+def build_embedding_text(story):
+    """
+    Combines multiple fields into rich semantic representation:
+    - Theme + Industry + Sub-category (behavioral context)
+    - 5P Summary (concise overview)
+    - STAR fields: Situation, Task, Action, Result (2-3 items each)
+    - Process details (max 3 items)
+    - Public tags (comma-separated)
+
+    Result: ~200-400 token text optimized for behavioral queries
+    """
+```
+
+**Why This Approach:**
+- **Behavioral focus:** Theme/Industry/Sub-category surface in behavioral interviews
+- **Balanced detail:** Full STAR fields would dilute semantic signal
+- **Tag inclusion:** Public tags capture essence without verbosity
+- **Process field:** Critical for "how did you..." questions
+
+**Migration History:**
+- **v1:** MiniLM-L6-v2 (384 dims) - Fast but limited semantic understanding
+- **v2:** OpenAI text-embedding-3-small (1536 dims) - Better behavioral query matching
+
+**Metadata Stored in Pinecone:**
+```python
+{
+    "id": "story_123",
+    "title": "Scaled Engineering Team...",
+    "client": "Fortune 500 Bank",
+    "industry": "Financial Services",
+    "domain": "Platform Engineering",
+    "role": "Head of Engineering",
+    "theme": "Team Scaling & Leadership",
+    "tags": ["Team Scaling", "Engineering Leadership"],
+    "embedding": [0.023, -0.045, ...],  # 1536-dimensional vector
+}
+```
+
+**Processing Stats:**
+- ~130 stories in ~30 seconds
+- Cost: $0.0008 per full re-index
+- OpenAI API: text-embedding-3-small @ $0.02 per 1M tokens
+
+**Environment:**
+```bash
+STORIES_JSONL=echo_star_stories_nlp.jsonl
+OPENAI_API_KEY=sk-...
+PINECONE_API_KEY=...
+PINECONE_INDEX_NAME=matt-portfolio-v2
+PINECONE_NAMESPACE=default
+```
+
+---
+
+### Production RAG Pipeline
+
+**Query Flow:**
+
+```
+User Question: "How did Matt scale engineering teams?"
+      ↓
+[Query Preprocessing - services/semantic_router.py]
+- Validate query (not nonsense)
+- Route to appropriate handler
+      ↓
+[Semantic Search - services/pinecone_service.py]
+- Embed query with text-embedding-3-small
+- Vector search in Pinecone (top 10, similarity > 0.75)
+- Apply metadata filters (Industry, Domain, Role)
+      ↓
+[Hybrid Ranking - utils/scoring.py]
+- Vector similarity score (0-1)
+- Keyword matching score (0-1)
+- Weighted combination (70% vector, 30% keyword)
+      ↓
+[Context Assembly - ui/pages/ask_mattgpt/backend_service.py]
+- Select top 3-5 stories
+- Build prompt with STAR narratives
+- Include metadata (Client, Industry, Theme)
+      ↓
+[LLM Generation - OpenAI GPT-4o-mini]
+- System prompt: "Answer using STAR format..."
+- Context: Top-ranked stories
+- User query
+      ↓
+[Response Formatting - ui/pages/ask_mattgpt/conversation_helpers.py]
+- Extract answer + sources
+- Render with citations
+- Display expandable story details
+      ↓
+User receives cited, STAR-formatted answer
+```
+
+---
+
+### Key Services
+
+#### 1. Pinecone Service ([services/pinecone_service.py](services/pinecone_service.py))
+
+**Purpose:** Vector search and embedding management.
+
+**Key Functions:**
+```python
+def semantic_search(query: str, top_k: int = 10, filters: dict = None):
+    """
+    1. Embed query with OpenAI
+    2. Query Pinecone index
+    3. Return top_k results with scores
+    4. Apply optional metadata filters
+    """
+
+def get_pinecone_index():
+    """Initialize Pinecone client and return index"""
+```
+
+**Search Parameters:**
+- `top_k`: 10 (retrieve top 10 matches)
+- `min_similarity`: 0.75 (filter low-quality matches)
+- `namespace`: "default"
+
+**Metadata Filters:**
+```python
+filters = {
+    "industry": "Financial Services",
+    "domain": "Platform Engineering"
+}
+```
+
+---
+
+#### 2. RAG Service ([services/rag_service.py](services/rag_service.py))
+
+**Purpose:** Orchestrate semantic search + LLM generation.
+
+**Key Functions:**
+```python
+def answer_question(query: str, filters: dict = None):
+    """
+    1. Semantic search → top stories
+    2. Build context window
+    3. Call GPT-4o-mini with system prompt
+    4. Return answer + source citations
+    """
+```
+
+**Context Window Strategy:**
+- Max 3-5 stories (to fit within token limits)
+- Prioritize highest similarity scores
+- Include full STAR narratives
+
+---
+
+#### 3. Semantic Router ([services/semantic_router.py](services/semantic_router.py))
+
+**Purpose:** Route queries to appropriate handlers based on intent.
+
+**Key Functions:**
+```python
+def route_query(query: str):
+    """
+    Detect query type:
+    - Behavioral (STAR stories)
+    - Factual (resume data)
+    - Off-topic (reject politely)
+    - Clarification needed (ask follow-up)
+    """
+```
+
+**Routing Logic:**
+- Behavioral keywords: "How did you...", "Tell me about a time...", "Show me examples..."
+- Factual keywords: "What is...", "Where did...", "When did..."
+- Off-topic: Technical trivia, non-career questions
+
+---
+
+### Cost & Performance
+
+#### Embedding Generation
+- **Model:** text-embedding-3-small (1536 dims)
+- **Cost:** $0.02 per 1M tokens
+- **130 stories @ ~300 tokens each** = ~39K tokens
+- **Total cost:** ~$0.0008 per full re-index
+- **Time:** ~30 seconds for full corpus
+
+#### Query Pipeline
+- **Embedding:** 1 query = 10-20 tokens = $0.0000002
+- **Pinecone:** Free tier (up to 100K queries/month)
+- **GPT-4o-mini:** ~500 tokens per response = $0.00015
+- **Total per query:** ~$0.0002 (negligible)
+
+#### Pinecone Index
+- **Dimensions:** 1536
+- **Records:** 130
+- **Storage:** ~0.7 MB (tiny)
+- **Queries/month:** ~1,000 (well within free tier)
+
+---
+
+### Data Refresh Workflow
+
+**When to Re-Index:**
+
+1. **Add new stories** (Excel → JSONL → Pinecone)
+2. **Update existing stories** (Edit Excel → re-run pipeline)
+3. **Change embedding strategy** (Switch models → rebuild)
+4. **Modify metadata fields** (Add filters → re-process)
+
+**Full Refresh Steps:**
+
+```bash
+# 1. Update Excel master sheet
+# 2. Export to JSONL
+python generate_jsonl_from_excel.py
+
+# 3. Enrich with LLM (manual or scripted)
+python generate_public_tags.py
+
+# 4. Generate embeddings and upsert
+python build_custom_embeddings.py
+
+# 5. Verify Pinecone index
+python scripts/validate_pinecone_data.py
+
+# 6. Test in app
+streamlit run app.py
+```
+
+**Estimated time:** 5-10 minutes for full pipeline
+
+---
+
+### Environment Configuration
+
+**Required Environment Variables:**
+
+```bash
+# OpenAI
+OPENAI_API_KEY=sk-...
+
+# Pinecone
+PINECONE_API_KEY=pcsk_...
+PINECONE_INDEX_NAME=matt-portfolio-v2
+PINECONE_NAMESPACE=default
+
+# Data
+STORIES_JSONL=echo_star_stories_nlp.jsonl
+
+# Debug (optional)
+DEBUG=False
+```
+
+**`.env` File Structure:**
+```bash
+# .env (not committed to git)
+OPENAI_API_KEY=sk-proj-...
+PINECONE_API_KEY=pcsk_...
+PINECONE_INDEX_NAME=matt-portfolio-v2
+PINECONE_NAMESPACE=default
+STORIES_JSONL=data/echo_star_stories_nlp.jsonl
+```
+
+---
+
+### Deployment
+
+**Streamlit Cloud Configuration:**
+
+**App URL:** https://askmattgpt.streamlit.app/
+
+**Secrets (Streamlit Cloud):**
+```toml
+[default]
+OPENAI_API_KEY = "sk-..."
+PINECONE_API_KEY = "pcsk_..."
+PINECONE_INDEX_NAME = "matt-portfolio-v2"
+PINECONE_NAMESPACE = "default"
+```
+
+**Python Version:** 3.11+
+
+**Requirements:**
+```txt
+streamlit>=1.28.0
+openai>=1.0.0
+pinecone-client>=2.0.0
+python-dotenv>=1.0.0
+pandas>=2.0.0
+```
 
 ---
 
