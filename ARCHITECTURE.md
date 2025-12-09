@@ -1,5 +1,96 @@
 # Architecture Documentation
 
+## Table of Contents
+
+### 📋 Overview
+- [Executive Summary](#executive-summary)
+- [Component-Based Refactoring](#component-based-refactoring-october-2025)
+- [Current Architecture](#current-architecture-november-7-2025)
+
+### 🏗️ Architecture Decision Records (ADRs)
+- [ADR-001: Component Scoping](#adr-001-component-scoping)
+- [ADR-002: Theme Constants (Evolved)](#adr-002-theme-constants-evolved)
+- [ADR-003: Global vs. Component Styles](#adr-003-global-vs-component-styles)
+- [ADR-004: Emotion-Cache Override Strategy](#adr-004-emotion-cache-override-strategy)
+- [ADR-005: CSS Variable System for Dark Mode](#adr-005-css-variable-system-for-dark-mode)
+- [ADR-006: Avatar Sizing Standards](#adr-006-avatar-sizing-standards)
+
+### 🚀 Migration History
+- [Migration Strategy](#migration-strategy)
+  - [Phase 1: Infrastructure](#phase-1-infrastructure--complete)
+  - [Phase 2: Page Extraction](#phase-2-page-extraction--complete-october-21-2025)
+  - [Phase 3: Massive Cleanup](#phase-3-massive-cleanup--complete-october-22-2025)
+  - [Phase 5: Dead Code Elimination](#phase-5-dead-code-elimination--complete-november-7-2025)
+- [File Size Summary](#file-size-summary)
+- [Refactoring Impact](#refactoring-impact)
+
+### 🎨 CSS Architecture
+- [CSS Scoping Patterns](#css-scoping-patterns)
+- [Streamlit-Specific Challenges](#streamlit-specific-challenges)
+
+### 💡 Key Features
+- [Component Catalog](#component-catalog)
+- [Services Layer](#services-layer)
+- [Utilities](#utilities)
+
+### 🔮 Future Work
+- [Future Enhancements](#future-enhancements)
+- [Interview Talking Points](#interview-talking-points)
+
+---
+
+## Executive Summary
+
+**Project:** MattGPT Portfolio Assistant - AI-powered career story search and chat interface
+**Tech Stack:** Streamlit, OpenAI GPT-4o-mini, Pinecone vector DB, Python 3.11+
+**Data Corpus:** 130+ STAR-formatted transformation project stories
+**Last Updated:** December 9, 2024
+
+### Key Achievements
+
+**95.1% Code Reduction in Core Router**
+- `app.py`: 5,765 lines → 284 lines
+- Eliminated 1,400+ lines of dead code (zombie functions, commented blocks, unused imports)
+- Modularized monolithic `ask_mattgpt.py` (4,696 lines) into 8-file directory structure
+
+**Modern CSS Architecture**
+- Implemented CSS variables for light/dark mode support
+- Standardized avatar sizing (64px headers, 60px chat)
+- Solved Streamlit emotion-cache override challenges
+- Consistent purple brand (#8B5CF6) across all views
+
+**Component-Based Structure**
+- 8 reusable UI components (142 KB)
+- 4 business logic services (28 KB)
+- 6 shared utility modules (27 KB)
+- Zero circular dependencies
+
+### Current State (December 2024)
+
+**Ask MattGPT Modular Architecture:**
+- Landing view with capability cards and sample queries
+- Conversation view with RAG-powered responses
+- Unified header component across all views
+- "How Agy Searches" modal with 3-step flow visualization
+- Dark mode support via CSS variables
+
+**Core Features:**
+- Semantic search across 130+ project stories
+- Query validation via semantic router
+- Context-aware follow-up questions
+- Story intelligence (theme/persona inference)
+- Responsive chat UI with thinking indicators
+
+### What This Document Contains
+
+1. **Current Architecture:** File structure, components, services (as of Dec 2024)
+2. **ADRs 1-6:** Design decisions with rationale and trade-offs
+3. **Migration History:** Refactoring phases, metrics, achievements (Oct-Nov 2025)
+4. **CSS Architecture:** Scoping patterns, emotion-cache strategies, dark mode
+5. **Future Roadmap:** Mobile responsiveness, analytics, performance optimizations
+
+---
+
 ## Component-Based Refactoring (October 2025)
 
 ### Problem Statement
