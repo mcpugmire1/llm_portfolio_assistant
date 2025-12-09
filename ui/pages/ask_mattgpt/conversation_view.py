@@ -17,6 +17,14 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 from config.debug import DEBUG
+from ui.components.ask_mattgpt_header import (
+    get_how_agy_flow_html,
+    get_technical_details_html,
+    render_header,
+    render_modal_wrapper_end,
+    render_modal_wrapper_start,
+    render_status_bar,
+)
 from ui.components.thinking_indicator import render_thinking_indicator
 
 # Import from refactored modules
@@ -100,352 +108,25 @@ def render_conversation_view(stories: list[dict]):
     # ============================================================================
     # HEADER - Purple gradient with Agy avatar
     # ============================================================================
-
-    st.markdown(
-        """
-    <div class="ask-header">
-        <div class="header-content" style="display: flex; justify-content: space-between; align-items: center;">
-            <div style="display: flex; align-items: center; gap: 24px;">
-                <img class="header-agy-avatar"
-                    src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png"
-                    alt="Agy"/>
-                <div class="header-text">
-                    <h1>Ask MattGPT</h1>
-                    <p>Meet Agy 🐾 — Tracking down insights from 20+ years of transformation experience</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    """,
-        unsafe_allow_html=True,
-    )
-
-    # ============================================================================
-    # STATUS BAR
-    # ============================================================================
-
-    st.markdown(
-        """
-        <div class="status-bar">
-            <div class="status-item">
-                <span class="status-dot"></span>
-                <span>Semantic search <span class="status-value">active</span></span>
-            </div>
-            <div class="status-item">
-                <span>Pinecone index <span class="status-value">ready</span></span>
-            </div>
-            <div class="status-item">
-                <span>120+ stories <span class="status-value">indexed</span></span>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    # NEW: Single call renders header with integrated button
+    # Header with button
+    render_header(include_button=True, view="conversation")
 
     # ============================================================================
     # HOW AGY SEARCHES MODAL
     # ============================================================================
-
-    def toggle_how_modal():
-        """Centralized toggle for modal visibility state."""
-        st.session_state["show_how_modal"] = not st.session_state.get(
-            "show_how_modal", False
-        )
-        st.rerun()
-
-    if st.button("🔍 How Agy searches", key="how_works_top"):
-        toggle_how_modal()
-
+    # Modal (if open)
     if st.session_state.get("show_how_modal", False):
-        # Auto-scroll to top
-        st.markdown(
-            """
-            <script>
-            window.scrollTo({top: 0, behavior: 'smooth'});
-            </script>
-            """,
-            unsafe_allow_html=True,
-        )
+        st.markdown(render_modal_wrapper_start(), unsafe_allow_html=True)
+        components.html(get_how_agy_flow_html(), height=1100)
+        components.html(get_technical_details_html(), height=580)
+        st.markdown(render_modal_wrapper_end(), unsafe_allow_html=True)
+        # Remove: render_modal_close_wiring_js()
 
-        # Modal container
-        with st.container(border=True):
-            # Header with close button
-            col1, col2 = st.columns([10, 1])
-
-            with col1:
-                st.markdown("## 🔍 How Agy Finds Your Stories")
-
-            with col2:
-                if st.button("✕", key="close_how", help="Close"):
-                    toggle_how_modal()
-
-            st.markdown("---")
-
-            # 3-step flow visualization
-            components.html(
-                """
-                <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-                            padding: 28px;
-                            background: linear-gradient(135deg, #FAFAFA 0%, #F9FAFB 100%);
-                            border-radius: 16px;
-                            border: 2px solid #E5E7EB;">
-
-                    <!-- Step 1: You Ask -->
-                    <div style="margin-bottom: 48px;">
-                        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
-                            <div style="background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
-                                        color: white;
-                                        width: 48px;
-                                        height: 48px;
-                                        border-radius: 50%;
-                                        display: flex;
-                                        align-items: center;
-                                        justify-content: center;
-                                        font-weight: 700;
-                                        font-size: 22px;
-                                        flex-shrink: 0;
-                                        box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);">1</div>
-                            <h3 style="margin: 0; color: #1F2937; font-size: 24px; font-weight: 700;">You Ask</h3>
-                        </div>
-                        <div style="margin-left: 64px;
-                                    background: white;
-                                    padding: 24px;
-                                    border-radius: 12px;
-                                    border: 2px solid #E9D5FF;
-                                    box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
-                            <div style="color: #4B5563; font-size: 16px; font-style: italic; line-height: 1.6;">
-                                "Show me cloud migration projects in financial services"
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Arrow -->
-                    <div style="text-align: center; color: #A78BFA; font-size: 40px; margin: 20px 0; font-weight: 300;">↓</div>
-
-                    <!-- Step 2: Agy Searches -->
-                    <div style="margin-bottom: 48px;">
-                        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
-                            <div style="background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
-                                        color: white;
-                                        width: 48px;
-                                        height: 48px;
-                                        border-radius: 50%;
-                                        display: flex;
-                                        align-items: center;
-                                        justify-content: center;
-                                        font-weight: 700;
-                                        font-size: 22px;
-                                        flex-shrink: 0;
-                                        box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);">2</div>
-                            <h3 style="margin: 0; color: #1F2937; font-size: 24px; font-weight: 700;">Agy Searches</h3>
-                        </div>
-                        <div style="margin-left: 64px;">
-                            <div style="display: flex; gap: 16px; margin-bottom: 16px;">
-                                <div style="flex: 1;
-                                            background: white;
-                                            padding: 20px;
-                                            border-radius: 10px;
-                                            border: 2px solid #E9D5FF;
-                                            box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
-                                    <div style="font-weight: 700; color: #7C3AED; font-size: 16px; margin-bottom: 8px;">
-                                        🧠 AI Understanding
-                                    </div>
-                                    <div style="color: #6B21A8; font-size: 14px; line-height: 1.6;">
-                                        Finds stories with similar meaning
-                                    </div>
-                                </div>
-                                <div style="flex: 1;
-                                            background: white;
-                                            padding: 20px;
-                                            border-radius: 10px;
-                                            border: 2px solid #BFDBFE;
-                                            box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
-                                    <div style="font-weight: 700; color: #2563EB; font-size: 16px; margin-bottom: 8px;">
-                                        🔍 Keyword Match
-                                    </div>
-                                    <div style="color: #1E40AF; font-size: 14px; line-height: 1.6;">
-                                        Finds exact terms you used
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="background: white;
-                                        padding: 20px;
-                                        border-radius: 10px;
-                                        border: 2px solid #FDE68A;
-                                        box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
-                                <div style="font-weight: 700; color: #D97706; font-size: 16px; margin-bottom: 8px;">
-                                    ⚡ Smart Filtering
-                                </div>
-                                <div style="color: #92400E; font-size: 14px; line-height: 1.6;">
-                                    Applies your industry, skill, and time filters
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Arrow -->
-                    <div style="text-align: center; color: #A78BFA; font-size: 40px; margin: 20px 0; font-weight: 300;">↓</div>
-
-                    <!-- Step 3: You Get Results -->
-                    <div>
-                        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
-                            <div style="background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
-                                        color: white;
-                                        width: 48px;
-                                        height: 48px;
-                                        border-radius: 50%;
-                                        display: flex;
-                                        align-items: center;
-                                        justify-content: center;
-                                        font-weight: 700;
-                                        font-size: 22px;
-                                        flex-shrink: 0;
-                                        box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);">3</div>
-                            <h3 style="margin: 0; color: #1F2937; font-size: 24px; font-weight: 700;">You Get Results</h3>
-                        </div>
-                        <div style="margin-left: 64px;
-                                    background: white;
-                                    border: 3px solid #8B5CF6;
-                                    border-radius: 12px;
-                                    padding: 24px;
-                                    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.25);">
-                            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                                        color: white;
-                                        padding: 20px;
-                                        border-radius: 10px;
-                                        margin-bottom: 20px;
-                                        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);">
-                                <div style="font-weight: 700; font-size: 17px; margin-bottom: 8px;">
-                                    Cloud Migration at Fortune 50 Bank
-                                </div>
-                                <div style="font-size: 15px; opacity: 0.95; line-height: 1.6;">
-                                    Led 50-person team migrating 200+ apps to AWS...
-                                </div>
-                            </div>
-                            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                                <span style="background: #EDE9FE;
-                                             color: #7C3AED;
-                                             padding: 8px 16px;
-                                             border-radius: 20px;
-                                             font-size: 13px;
-                                             font-weight: 700;
-                                             border: 2px solid #DDD6FE;">Financial Services</span>
-                                <span style="background: #E0E7FF;
-                                             color: #4F46E5;
-                                             padding: 8px 16px;
-                                             border-radius: 20px;
-                                             font-size: 13px;
-                                             font-weight: 700;
-                                             border: 2px solid #C7D2FE;">AWS</span>
-                                <span style="background: #DBEAFE;
-                                             color: #2563EB;
-                                             padding: 8px 16px;
-                                             border-radius: 20px;
-                                             font-size: 13px;
-                                             font-weight: 700;
-                                             border: 2px solid #BFDBFE;">2020-2023</span>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                """,
-                height=1000,
-            )
-
-            st.markdown("---")
-
-            # Technical Details
-            components.html(
-                """
-                <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-
-                    <!-- Step 4 Header -->
-                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
-                        <h3 style="margin: 0; color: #1F2937; font-size: 24px; font-weight: 700;">Technical Details</h3>
-                    </div>
-
-                    <!-- Content Area -->
-                    <div style="margin-left: 64px; padding: 26px; background: linear-gradient(135deg, #FAFAFA 0%, #F9FAFB 100%); border-radius: 16px; border: 2px solid #E5E7EB;">
-
-                        <!-- Two Cards -->
-                        <div style="display: flex; gap: 20px; margin-bottom: 24px;">
-
-                            <!-- Search Technology Card -->
-                            <div style="flex: 1;
-                                        background: white;
-                                        padding: 24px;
-                                        border-radius: 12px;
-                                        border: 2px solid #E9D5FF;
-                                        box-shadow: 0 4px 12px rgba(139, 92, 246, 0.1);">
-                                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
-                                    <span style="font-size: 24px;">🔍</span>
-                                    <h4 style="margin: 0; color: #7C3AED; font-size: 18px; font-weight: 700;">
-                                        Search Technology
-                                    </h4>
-                                </div>
-                                <ul style="margin: 0; padding-left: 20px; color: #4B5563; line-height: 1.8; font-size: 14px;">
-                                    <li><strong style="color: #6B21A8;">Sentence-BERT</strong> embeddings (384-dim)</li>
-                                    <li><strong style="color: #6B21A8;">Pinecone</strong> vector database</li>
-                                    <li><strong style="color: #6B21A8;">80% semantic + 20% keyword</strong></li>
-                                    <li>Top-30 candidate pool, rank top-3</li>
-                                </ul>
-                            </div>
-
-                            <!-- Data Structure Card -->
-                            <div style="flex: 1;
-                                        background: white;
-                                        padding: 24px;
-                                        border-radius: 12px;
-                                        border: 2px solid #BFDBFE;
-                                        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);">
-                                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
-                                    <span style="font-size: 24px;">📊</span>
-                                    <h4 style="margin: 0; color: #2563EB; font-size: 18px; font-weight: 700;">
-                                        Data Structure
-                                    </h4>
-                                </div>
-                                <ul style="margin: 0; padding-left: 20px; color: #4B5563; line-height: 1.8; font-size: 14px;">
-                                    <li><strong style="color: #1E40AF;">120+ STAR-formatted</strong> stories</li>
-                                    <li>Rich metadata (client, skills, outcomes)</li>
-                                    <li><strong style="color: #1E40AF;">Multi-mode synthesis</strong> (3 views)</li>
-                                    <li>Source attribution with confidence scores</li>
-                                </ul>
-                            </div>
-
-                        </div>
-
-                        <!-- Performance Stats Bar -->
-                        <div style="background: white;
-                                    padding: 20px 32px;
-                                    border-radius: 12px;
-                                    border: 2px solid #D1D5DB;
-                                    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-                                    display: flex;
-                                    justify-content: space-around;
-                                    align-items: center;">
-                            <div style="text-align: center;">
-                                <div style="font-size: 28px; font-weight: 700; color: #8B5CF6; margin-bottom: 4px;">120+</div>
-                                <div style="font-size: 13px; color: #6B7280; font-weight: 500;">Stories Indexed</div>
-                            </div>
-                            <div style="width: 1px; height: 40px; background: #E5E7EB;"></div>
-                            <div style="text-align: center;">
-                                <div style="font-size: 28px; font-weight: 700; color: #8B5CF6; margin-bottom: 4px;">~1.2s</div>
-                                <div style="font-size: 13px; color: #6B7280; font-weight: 500;">Avg Response Time</div>
-                            </div>
-                            <div style="width: 1px; height: 40px; background: #E5E7EB;"></div>
-                            <div style="text-align: center;">
-                                <div style="font-size: 28px; font-weight: 700; color: #8B5CF6; margin-bottom: 4px;">87%</div>
-                                <div style="font-size: 13px; color: #6B7280; font-weight: 500;">Relevance Accuracy</div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-                """,
-                height=440,
-            )
+    # ============================================================================
+    # STATUS BAR
+    # ============================================================================
+    st.markdown(render_status_bar(), unsafe_allow_html=True)
 
     # ============================================================================
     # CONTEXT (get story for later use)

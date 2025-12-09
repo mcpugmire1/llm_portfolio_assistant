@@ -69,6 +69,7 @@ archive/
 
 # Data files that shouldn't be tracked
 data/offdomain_queries.csv
+data/borderline_queries.csv
 
 # Exceptions - keep these files
 !echo_star_stories_nlp.jsonl

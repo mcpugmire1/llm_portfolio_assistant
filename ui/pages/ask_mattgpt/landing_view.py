@@ -10,7 +10,16 @@ Landing page UI for Ask MattGPT with:
 """
 
 import streamlit as st
+import streamlit.components.v1 as components
 
+from ui.components.ask_mattgpt_header import (
+    get_how_agy_flow_html,
+    get_technical_details_html,
+    render_header,
+    render_modal_wrapper_end,
+    render_modal_wrapper_start,
+    render_status_bar,
+)
 from ui.components.thinking_indicator import render_thinking_indicator
 from ui.pages.ask_mattgpt.backend_service import send_to_backend
 from ui.pages.ask_mattgpt.styles import get_landing_css
@@ -32,43 +41,19 @@ def render_landing_page(stories: list[dict]):
     # === CSS now loaded from styles.py ===
 
     # === PURPLE HEADER ===
-    st.markdown(
-        """
-    <div class="ask-header">
-        <div class="header-content" style="display: flex; justify-content: space-between; align-items: center;">
-            <div style="display: flex; align-items: center; gap: 24px;">
-                <img class="header-agy-avatar"
-                    src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png"
-                    alt="Agy"/>
-                <div class="header-text">
-                    <h1>Ask MattGPT</h1>
-                    <p>Meet Agy 🐾 — Tracking down insights from 20+ years of transformation experience</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    """,
-        unsafe_allow_html=True,
-    )
+    # Header with button
+    render_header(include_button=True, view="landing")
+
+    # Modal (if open)
+    if st.session_state.get("show_how_modal", False):
+        st.markdown(render_modal_wrapper_start(), unsafe_allow_html=True)
+        components.html(get_how_agy_flow_html(), height=1170)
+        components.html(get_technical_details_html(), height=680)
+        st.markdown(render_modal_wrapper_end(), unsafe_allow_html=True)
+        # Remove: render_modal_close_wiring_js()
 
     # === STATUS BAR ===
-    st.markdown(
-        """
-    <div class="status-bar">
-        <div class="status-item">
-            <span class="status-dot"></span>
-            <span>Semantic search <span class="status-value">active</span></span>
-        </div>
-        <div class="status-item">
-            <span>Pinecone index <span class="status-value">ready</span></span>
-        </div>
-        <div class="status-item">
-            <span>120+ stories <span class="status-value">indexed</span></span>
-        </div>
-    </div>
-    """,
-        unsafe_allow_html=True,
-    )
+    st.markdown(render_status_bar(), unsafe_allow_html=True)
 
     with st.container(key="intro_section"):
         # === MAIN INTRO SECTION ===

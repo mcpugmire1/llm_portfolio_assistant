@@ -31,6 +31,7 @@ def apply_global_styles():
             --accent-purple-hover: #7C3AED;
             --accent-purple-bg: rgba(139, 92, 246, 0.08);
             --accent-purple-light: rgba(139, 92, 246, 0.2);
+            --accent-purple-text: #8B5CF6;  /* Same as accent-purple for light mode */
 
             /* Backgrounds */
             --bg-card: #FFFFFF;
@@ -95,6 +96,7 @@ def apply_global_styles():
             --text-secondary: #9CA3AF;
             --text-muted: #6B7280;
             --text-color: #E5E7EB;
+            --accent-purple-text: #A78BFA;  /* Lighter purple for dark backgrounds */
 
             /* Borders & Shadows */
             --border-color: #374151;

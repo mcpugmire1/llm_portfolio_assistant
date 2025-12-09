@@ -62,8 +62,8 @@ def render_compact_context_banner(stories: list[dict]):
 
     st.markdown(
         f"""
-    <div style='font-size: 13px; color: #888; margin-bottom: 16px; padding: 8px 12px; background: rgba(128,128,128,0.05); border-radius: 6px;'>
-        Context: {client} | {domain_short}
+   <div style='font-size: 13px; color: var(--text-muted); margin-bottom: 16px; padding: 8px 12px; background: var(--bg-surface); border-radius: 6px;'>
+    Context: {client} | {domain_short}
     </div>
     """,
         unsafe_allow_html=True,
@@ -315,7 +315,7 @@ def _render_ask_transcript(stories: list[dict]):
 
                         if meta_parts:
                             st.markdown(
-                                f"<div style='font-size: 13px; color: #888; margin-bottom: 12px;'>{' | '.join(meta_parts)}</div>",
+                                f"<div style='font-size: 13px; color: var(--text-muted); margin-bottom: 12px;'>{' | '.join(meta_parts)}</div>",
                                 unsafe_allow_html=True,
                             )
 
@@ -356,7 +356,7 @@ def _render_ask_transcript(stories: list[dict]):
                             f"""
                         <div style='display: flex; align-items: center; gap: 8px; font-size: 12px; color: #7d8590; margin-bottom: 12px;'>
                             <span>Match confidence</span>
-                            <div style='width: 60px; height: 4px; background: #21262d; border-radius: 2px; overflow: hidden;'>
+                                <div style='width: 60px; height: 4px; background: var(--bg-surface); border-radius: 2px; overflow: hidden;'>
                                 <div style='height: 100%; width: {conf_pct}%; background: {bar_color}; border-radius: 2px;'></div>
                             </div>
                             <span style='color: {bar_color}; font-weight: 600;'>{conf_pct}%</span>
@@ -511,37 +511,37 @@ def _render_ask_transcript(stories: list[dict]):
                             with st.form(key=f"source_form_{i}_{j}"):
                                 st.markdown(
                                     """
-                                <style>
-                                /* Hide form border */
-                                div[data-testid="stForm"] {
-                                    border: none !important;
-                                    padding: 0 !important;
-                                    margin: 0 !important;
-                                }
-                                div[data-testid="stForm"] button {
-                                    background: #F3F4F6 !important;
-                                    border: 2px solid #E5E7EB !important;
-                                    color: #2563EB !important;
-                                    font-size: 14px !important;
-                                    font-weight: 500 !important;
-                                    padding: 6px 12px !important;
-                                    border-radius: 8px !important;
-                                    width: 100% !important;
-                                    height: auto !important;
-                                    min-height: 32px !important;
-                                }
-                                div[data-testid="stForm"] button p {
-                                    color: #2563EB !important;
-                                    font-size: 14px !important;
-                                    margin: 0 !important;
-                                    line-height: 1.4 !important;
-                                }
-                                div[data-testid="stForm"] button:hover {
-                                    background: #EEF2FF !important;
-                                    border-color: #8B5CF6 !important;
-                                }
-                                </style>
-                                """,
+                                    <style>
+                                    /* Hide form border */
+                                    div[data-testid="stForm"] {
+                                        border: none !important;
+                                        padding: 0 !important;
+                                        margin: 0 !important;
+                                    }
+                                    div[data-testid="stForm"] button {
+                                        background: var(--bg-surface) !important;
+                                        border: 1px solid var(--border-color) !important;
+                                        color: var(--accent-purple-text) !important;
+                                        font-size: 14px !important;
+                                        font-weight: 500 !important;
+                                        padding: 6px 12px !important;
+                                        border-radius: 8px !important;
+                                        width: 100% !important;
+                                        height: auto !important;
+                                        min-height: 32px !important;
+                                    }
+                                    div[data-testid="stForm"] button p {
+                                        color: var(--accent-purple) !important;
+                                        font-size: 14px !important;
+                                        margin: 0 !important;
+                                        line-height: 1.4 !important;
+                                    }
+                                    div[data-testid="stForm"] button:hover {
+                                        background: var(--bg-hover) !important;
+                                        border-color: var(--accent-purple) !important;
+                                    }
+                                    </style>
+                                    """,
                                     unsafe_allow_html=True,
                                 )
 

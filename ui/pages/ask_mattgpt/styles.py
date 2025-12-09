@@ -31,22 +31,22 @@ def get_landing_css() -> str:
            LANDING PAGE STYLES
            ============================================================================ */
 
-        /* Purple header - pull up to eliminate white space */
-        .ask-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 30px;
-            margin-top: -50px !important;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        # /* Purple header - pull up to eliminate white space */
+        # .ask-header {
+        #     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        #     padding: 30px;
+        #     margin-top: -50px !important;
+        #     color: white;
+        #     display: flex;
+        #     justify-content: space-between;
+        #     align-items: center;
+        # }
 
-        .header-content {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-        }
+        # .header-content {
+        #     display: flex;
+        #     align-items: center;
+        #     gap: 24px;
+        # }
 
         .header-agy-avatar {
             flex-shrink: 0;
@@ -95,18 +95,19 @@ def get_landing_css() -> str:
             transform: translateY(-2px);
         }
 
-        /* Status bar - constrained to content width */
-        .status-bar {
-            display: flex !important;
-            flex-wrap: nowrap !important;
-            gap: 24px !important;
-            justify-content: center !important;
-            padding: 12px 30px !important;
-            background: var(--status-bar-bg) !important;
-            border-bottom: 1px solid var(--status-bar-border) !important;
-            margin: 0 !important;
-            overflow-x: auto !important;
-        }
+        # /* Status bar - constrained to content width */
+        # .status-bar {
+        #     display: flex !important;
+        #     flex-wrap: nowrap !important;
+        #     gap: 24px !important;
+        #     justify-content: center !important;
+        #     padding: 12px 30px !important;
+        #     background: var(--status-bar-bg) !important;
+        #     border-bottom: 1px solid var(--status-bar-border) !important;
+        #     margin-top: -15px !important;
+        #     margin: 0 !important;
+        #     overflow-x: auto !important;
+        # }
 
         .status-item {
             display: flex !important;
@@ -151,17 +152,27 @@ def get_landing_css() -> str:
             margin: 0;
             padding: 48px 32px 24px;
             text-align: center;
+            margin-top: 5px !important;
+        }
+
+        [data-testid="stLayoutWrapper"]:has(.st-key-intro_section) {
+            margin-top: 20px !important;
         }
 
         /* THE WHITE CARD - wraps everything */
         .st-key-intro_section {
             max-width: 900px !important;
-            margin: 20px auto 0 !important;
+            margin: 40px auto 0 !important;
             background: var(--bg-card) !important;
             border-radius: 24px !important;
             box-shadow: var(--card-shadow) !important;
             overflow: hidden !important;
             border: 1px solid var(--border-color) !important;
+
+            margin-top: 140px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            margin-bottom: 0 !important;
 
             /* ADD THIS PADDING TO CREATE THE 10% LEFT/RIGHT SPACE */
             padding-left: 1% !important;
@@ -174,14 +185,15 @@ def get_landing_css() -> str:
         }
 
         .main-avatar img {
-            width: 96px;
-            height: 96px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
-        /* Dark mode halo effect for main hero avatar */
-        [data-theme="dark"] .main-avatar img {
+       /* Dark mode halo effect for main hero avatar */
+        [data-theme="dark"] .main-avatar img,
+        body.dark-theme .main-avatar img {
             filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
         }
 
@@ -596,16 +608,6 @@ def get_conversation_css() -> str:
            CONVERSATION VIEW STYLES
            ============================================================================ */
 
-        /* Status bar */
-        .status-bar {
-            display: flex !important;
-            gap: 24px !important;
-            justify-content: center !important;
-            padding: 12px 30px !important;
-            background: var(--status-bar-bg) !important;
-            border-bottom: 1px solid var(--status-bar-border) !important;
-        }
-
         .status-item {
             display: flex !important;
             align-items: center !important;
@@ -633,23 +635,6 @@ def get_conversation_css() -> str:
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
-        }
-
-        .conversation-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 30px;
-            margin-top: -60px !important;
-            color: white;
-        }
-        /* Purple header - pull up to eliminate white space */
-        .ask-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 30px;
-            margin-top: -65px !important;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
         .header-content {
@@ -683,6 +668,10 @@ def get_conversation_css() -> str:
             transition: all 0.2s ease !important;
         }
 
+        [data-testid="stLayoutWrapper"]:has(.stChatMessage) {
+            margin-top: 20px !important;
+        }
+
         [class*="st-key-how_works_top"] button:hover {
             background: rgba(102, 126, 234, 0.2) !important;
             border-color: #764ba2 !important;
@@ -695,6 +684,7 @@ def get_conversation_css() -> str:
             font-weight: 600 !important;
             margin: 0 !important;
         }
+
 
         /* ASK AGY ABOUT THIS BUTTON - Keep purple on all states */
         [class*="st-key-ask_from_detail"] button,
@@ -724,6 +714,7 @@ def get_conversation_css() -> str:
         [class*="st-key-ask_from_detail"] button p {
             color: white !important;
         }
+
         /* Chat messages - AI */
         [data-testid="stChatMessage"]:not(:has([data-testid="chatAvatarIcon-user"])) {
             background: var(--chat-ai-bg) !important;
@@ -739,6 +730,49 @@ def get_conversation_css() -> str:
             border-radius: 8px !important;
             padding: 16px !important;
             color: var(--text-primary) !important;
+        }
+
+       /* =============================================
+        CHAT AVATARS - User and Agy
+        ============================================= */
+
+        /* User avatar - div with emoji */
+        .stChatMessage > div.st-emotion-cache-18qnold,
+        .stChatMessage > .e1ypd8m72 {
+            width: 60px !important;
+            height: 60px !important;
+            min-width: 40px !important;
+            min-height: 40px !important;
+            font-size: 20px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            border-radius: 50% !important;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3) !important;
+        }
+
+        /* Agy avatar - img element */
+        .stChatMessage > img.st-emotion-cache-p4micv,
+        .stChatMessage > img.e1ypd8m74,
+        .stChatMessage > img[alt="assistant avatar"] {
+            width: 60px !important;
+            height: 60px !important;
+            min-width: 40px !important;
+            min-height: 40px !important;
+            border-radius: 50% !important;
+            background: var(--bg-surface, #262633) !important;
+            border: 2px solid var(--accent-purple, #8B5CF6) !important;
+            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.2) !important;
+            padding: 0 !important;
+            object-fit: cover !important;
+        }
+
+
+        /* Dark mode glow on Agy */
+        [data-theme="dark"] .stChatMessage > img[alt="assistant avatar"],
+        body.dark-theme .stChatMessage > img[alt="assistant avatar"] {
+            filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.4));
         }
 
         /* Input Area - Complete Wireframe Match */
@@ -952,24 +986,15 @@ def get_conversation_css() -> str:
 
         /* Re-apply border ONLY to textarea */
         [data-testid="stChatInput"] textarea[data-testid="stChatInputTextArea"] {
-            border: 2px solid #ddd !important;
-            border-radius: 8px !important;
+            border: 2px solid var(--border-color) !important;
+            background: var(--bg-input) !important;
         }
 
         [data-testid="stChatInput"] textarea[data-testid="stChatInputTextArea"]:focus {
             border: 2px solid #8B5CF6 !important;
             box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1) !important;
         }
-        /* Force all 4 borders on textarea */
-        [data-testid="stChatInput"] textarea[data-testid="stChatInputTextArea"] {
-            border: 2px solid #ddd !important;
-            border-top: 2px solid #ddd !important;
-            border-right: 2px solid #ddd !important;
-            border-bottom: 2px solid #ddd !important;
-            border-left: 2px solid #ddd !important;
-            border-radius: 8px !important;
-            background: white !important;
-        }
+
         [data-baseweb="textarea"],
         [data-baseweb="base-input"] {
             overflow: visible !important;

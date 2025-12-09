@@ -2,7 +2,7 @@
 About Matt Page
 
 Professional background, resume, and contact information.
-Updated to match wireframe specification.
+Updated for dark mode compatibility using CSS variables.
 """
 
 import streamlit as st
@@ -11,52 +11,49 @@ import streamlit as st
 def render_about_matt():
     """
     Render the About Matt page with professional background and contact info.
+    Dark mode compatible using CSS variables.
     """
 
     # =========================================================================
-    # CSS STYLES
+    # CSS STYLES - Dark Mode Compatible
     # =========================================================================
     st.markdown(
         """
 <style>
-/* Conversation header - matches other pages */
-.conversation-header {
+/* ============================================================================
+   ABOUT MATT PAGE STYLES - Dark Mode Compatible
+   ============================================================================ */
+
+/* Header - matches other pages */
+.about-header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 30px 40px;
-    margin-top: -50px !important;
+    margin-top: -60px !important;
+    margin-bottom: 0 !important;
     color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
 }
 
-.conversation-header-content {
+.about-header-content {
     display: flex;
     align-items: center;
     gap: 24px;
 }
 
-.conversation-agy-avatar {
-    width: 120px !important;
-    height: 120px !important;
-    border-radius: 50% !important;
-    border: 4px solid white !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
-    flex-shrink: 0;
-}
-
-.conversation-header-text h1 {
+.about-header-text h1 {
     font-size: 36px;
     font-weight: 700;
     margin: 0 0 8px 0;
     color: white;
 }
 
-.conversation-header-text p {
+.about-header-text p {
     font-size: 16px;
     margin: 0;
     opacity: 0.95;
+    color: white;
 }
 
 /* Stats bar */
@@ -73,24 +70,24 @@ def render_about_matt():
 }
 
 .stat-card {
-    background: var(--secondary-background-color, #fafafa);
+    background: var(--bg-card, #ffffff);
     padding: 28px 20px;
     border-radius: 12px;
     text-align: center;
     border: 1px solid var(--border-color, #e0e0e0);
-    box-shadow: 0 4px 12px rgba(128, 128, 128, 0.1);
+    box-shadow: var(--card-shadow, 0 4px 12px rgba(128, 128, 128, 0.1));
 }
 
 .stat-number {
     font-size: 36px;
     font-weight: 700;
-    color: #8B5CF6;
+    color: var(--accent-purple, #8B5CF6);
     display: block;
     margin-bottom: 8px;
 }
 
 .stat-label {
-    color: #999999;
+    color: var(--text-muted, #999999);
     font-size: 15px;
     display: block;
 }
@@ -101,12 +98,12 @@ def render_about_matt():
     font-weight: 600;
     text-align: center;
     margin: 60px 0 12px 0;
-    color: var(--text-color, #2c3e50);
+    color: var(--text-heading, #2c3e50);
 }
 
 .section-subtitle {
     font-size: 16px;
-    color: #7f8c8d;
+    color: var(--text-muted, #7f8c8d);
     text-align: center;
     margin-bottom: 40px;
 }
@@ -142,46 +139,46 @@ def render_about_matt():
     top: 4px;
     width: 20px;
     height: 20px;
-    background: white;
-    border: 4px solid #8B5CF6;
+    background: var(--bg-primary, white);
+    border: 4px solid var(--accent-purple, #8B5CF6);
     border-radius: 50%;
 }
 
 .timeline-year {
     font-size: 14px;
     font-weight: 700;
-    color: #8B5CF6;
+    color: var(--accent-purple, #8B5CF6);
     margin-bottom: 8px;
 }
 
 .timeline-title {
     font-size: 18px;
     font-weight: 600;
-    color: var(--text-color, #2c3e50);
+    color: var(--text-heading, #2c3e50);
     margin-bottom: 6px;
 }
 
 .timeline-company {
     font-size: 14px;
-    color: #7f8c8d;
+    color: var(--text-muted, #7f8c8d);
     margin-bottom: 8px;
 }
 
 .timeline-desc {
     font-size: 14px;
-    color: #888;
+    color: var(--text-secondary, #888);
     line-height: 1.6;
 }
 
 /* Deep-dive section */
 .deep-dive-section {
-    background: var(--secondary-background-color, #f8f9fa);
+    background: var(--bg-surface, #f8f9fa);
     padding: 50px 20px;
     margin: 40px -1rem 0 -1rem;
 }
 
 .deep-dive-card {
-    background: var(--background-color, white);
+    background: var(--bg-card, white);
     border: 2px solid var(--border-color, #e0e0e0);
     border-radius: 12px;
     padding: 32px;
@@ -189,6 +186,14 @@ def render_about_matt():
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.deep-dive-card h3 {
+    color: var(--text-heading, #2c3e50);
+}
+
+.deep-dive-card p {
+    color: var(--text-secondary, #888);
 }
 
 .tech-grid {
@@ -203,15 +208,17 @@ def render_about_matt():
 }
 
 .tech-item {
-    background: var(--secondary-background-color, #f8f9fa);
+    background: var(--bg-surface, #f8f9fa);
     border: 2px solid var(--border-color, #e0e0e0);
     border-radius: 8px;
     padding: 16px 12px;
     text-align: center;
+    color: var(--text-primary, #333);
+    transition: all 0.2s ease;
 }
 
 .tech-item:hover {
-    border-color: #8B5CF6;
+    border-color: var(--accent-purple, #8B5CF6);
 }
 
 .flow-grid {
@@ -227,12 +234,13 @@ def render_about_matt():
 }
 
 .flow-step {
-    background: var(--secondary-background-color, #f8f9fa);
+    background: var(--bg-surface, #f8f9fa);
     border: 2px solid var(--border-color, #e0e0e0);
     border-radius: 8px;
     padding: 16px 12px;
     text-align: center;
     position: relative;
+    color: var(--text-primary, #333);
 }
 
 .flow-step:not(:last-child)::after {
@@ -242,14 +250,14 @@ def render_about_matt():
     top: 50%;
     transform: translateY(-50%);
     font-size: 18px;
-    color: #8B5CF6;
+    color: var(--accent-purple, #8B5CF6);
     font-weight: bold;
 }
 
 .flow-num {
     width: 28px;
     height: 28px;
-    background: #8B5CF6;
+    background: var(--accent-purple, #8B5CF6);
     color: white;
     border-radius: 50%;
     font-size: 12px;
@@ -260,16 +268,45 @@ def render_about_matt():
     margin: 0 auto 10px;
 }
 
+.flow-step-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-heading, #333);
+}
+
+.flow-step-desc {
+    font-size: 11px;
+    color: var(--text-muted, #7f8c8d);
+}
+
+/* Code block - works in both modes */
 .code-block {
-    background: #1e1e1e;
-    color: #d4d4d4;
+    background: #1e1e2e;
+    color: #cdd6f4;
     border-radius: 8px;
     padding: 20px;
-    font-family: monospace;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
     font-size: 12px;
     line-height: 1.6;
     overflow-x: auto;
     white-space: pre-wrap;
+    margin-top: 12px;
+}
+
+.code-comment {
+    color: #6c7086;
+}
+
+.code-keyword {
+    color: #cba6f7;
+}
+
+.code-string {
+    color: #a6e3a1;
+}
+
+.code-function {
+    color: #89b4fa;
 }
 
 .details-grid {
@@ -285,20 +322,21 @@ def render_about_matt():
 }
 
 .detail-card {
-    background: var(--background-color, white);
+    background: var(--bg-card, white);
     border: 2px solid var(--border-color, #e0e0e0);
     border-radius: 12px;
     padding: 24px;
+    transition: all 0.2s ease;
 }
 
 .detail-card:hover {
-    border-color: #8B5CF6;
+    border-color: var(--accent-purple, #8B5CF6);
 }
 
 .detail-card h4 {
     font-size: 16px;
     font-weight: 600;
-    color: var(--text-color, #2c3e50);
+    color: var(--text-heading, #2c3e50);
     margin: 0 0 16px 0;
 }
 
@@ -310,24 +348,44 @@ def render_about_matt():
 
 .detail-card li {
     font-size: 13px;
-    color: #888;
+    color: var(--text-secondary, #888);
     line-height: 1.6;
     padding: 8px 0;
-    border-bottom: 1px solid var(--border-color, #f0f0f0);
+    border-bottom: 1px solid var(--border-light, #f0f0f0);
 }
 
 .detail-card li:last-child {
     border-bottom: none;
 }
 
+.detail-card li strong {
+    color: var(--text-primary, #333);
+}
+
 .cta-card {
     max-width: 900px;
     margin: 32px auto 0;
-    background: var(--background-color, white);
-    border-left: 4px solid #8B5CF6;
+    background: var(--bg-card, white);
+    border-left: 4px solid var(--accent-purple, #8B5CF6);
     border-radius: 12px;
     padding: 40px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--card-shadow, 0 4px 12px rgba(0, 0, 0, 0.08));
+}
+
+.cta-card h3 {
+    color: var(--text-heading, #333);
+}
+
+.cta-card p {
+    color: var(--text-secondary, #888);
+}
+
+.cta-card ul {
+    color: var(--text-secondary, #888);
+}
+
+.cta-card strong {
+    color: var(--text-primary, #333);
 }
 
 /* Competencies grid */
@@ -349,21 +407,22 @@ def render_about_matt():
 }
 
 .competency-card {
-    background: var(--secondary-background-color, #fafafa);
+    background: var(--bg-card, #fafafa);
     border: 2px solid var(--border-color, #e0e0e0);
     border-radius: 12px;
     padding: 24px;
+    transition: all 0.2s ease;
 }
 
 .competency-card:hover {
-    border-color: #8B5CF6;
+    border-color: var(--accent-purple, #8B5CF6);
     transform: translateY(-2px);
 }
 
 .competency-card h4 {
     font-size: 18px;
     font-weight: 600;
-    color: var(--text-color, #2c3e50);
+    color: var(--text-heading, #2c3e50);
     margin: 12px 0 16px 0;
 }
 
@@ -375,11 +434,11 @@ def render_about_matt():
 
 .competency-card li {
     font-size: 13px;
-    color: #888;
+    color: var(--text-secondary, #888);
     padding: 6px 0;
 }
 
-/* Philosophy grid */
+/* Philosophy grid - gradient cards work in both modes */
 .philosophy-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -398,6 +457,7 @@ def render_about_matt():
     color: white;
     border-radius: 12px;
     padding: 32px;
+    transition: all 0.2s ease;
 }
 
 .philosophy-card:hover {
@@ -416,9 +476,10 @@ def render_about_matt():
     line-height: 1.7;
     opacity: 0.95;
     margin: 0;
+    color: white;
 }
 
-/* Contact section */
+/* Contact section - gradient works in both modes */
 .contact-section {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 60px 20px;
@@ -430,6 +491,10 @@ def render_about_matt():
     font-size: 32px;
     color: white;
     margin-bottom: 16px;
+}
+
+.contact-section p {
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .contact-buttons {
@@ -449,6 +514,7 @@ def render_about_matt():
     text-decoration: none;
     font-size: 15px;
     font-weight: 600;
+    transition: all 0.2s ease;
 }
 
 .contact-btn:hover {
@@ -461,21 +527,22 @@ def render_about_matt():
     color: #8B5CF6;
 }
 
-.code-block {
-        background: #2c3e50;
-        color: #ecf0f1;
-        border-radius: 6px;
-        padding: 16px;
-        font-family: 'Courier New', monospace;
-        font-size: 12px;
-        line-height: 1.6;
-        overflow-x: auto;
-        margin-top: 12px;
-        white-space: pre-wrap;
-    }
-.code-comment {
-        color: #95a5a6;
-    }
+/* Secret sauce badge */
+.secret-sauce-badge {
+    display: inline-block;
+    background: var(--accent-purple-bg, #e3f2fd);
+    color: var(--accent-purple, #1976d2);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .secret-sauce-badge {
+    background: rgba(139, 92, 246, 0.2);
+    color: #a78bfa;
+}
 </style>
         """,
         unsafe_allow_html=True,
@@ -486,15 +553,18 @@ def render_about_matt():
     # =========================================================================
     st.markdown(
         """
-<div class="conversation-header">
-    <div class="conversation-header-content">
-        <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png" alt="Agy">
-        <div class="conversation-header-text">
+<div class="about-header">
+    <div class="about-header-content">
+        <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png"
+             width="64" height="64"
+             style="width: 120px; height: 120px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.2);"
+             alt="Agy">
+        <div class="about-header-text">
             <h1>Matt Pugmire</h1>
             <p style="font-size: 17px; margin-bottom: 12px;">Digital Transformation Leader | Director of Technology Delivery</p>
             <p style="font-size: 14px; opacity: 0.9; line-height: 1.6; max-width: 800px;">
                 20+ years driving innovation, agile transformation, and application modernization across Fortune 500 companies.
-                Proven track record of accelerating delivery 3-20x, scaling engineering teams to 150+ people, and building
+                Proven track record of accelerating delivery 4x, scaling engineering teams to 150+ people, and building
                 high-performing product organizations.
             </p>
         </div>
@@ -515,7 +585,7 @@ def render_about_matt():
         <span class="stat-label">Years Experience</span>
     </div>
     <div class="stat-card">
-        <span class="stat-number">120+</span>
+        <span class="stat-number">130+</span>
         <span class="stat-label">Projects Delivered</span>
     </div>
     <div class="stat-card">
@@ -527,7 +597,7 @@ def render_about_matt():
         <span class="stat-label">Enterprise Clients</span>
     </div>
     <div class="stat-card">
-        <span class="stat-number">3-20x</span>
+        <span class="stat-number">4x</span>
         <span class="stat-label">Delivery Acceleration</span>
     </div>
 </div>
@@ -553,7 +623,7 @@ def render_about_matt():
         <div class="timeline-year">2023–Present</div>
         <div class="timeline-title">🧘 Sabbatical | Innovation & Upskilling</div>
         <div class="timeline-company">Independent</div>
-        <div class="timeline-desc">Focused on GenAI, cloud-native architecture, and building LLM-powered portfolio assistant</div>
+        <div class="timeline-desc">Focused on GenAI, cloud-native architecture, and building LLM-powered portfolio assistant (MattGPT)</div>
     </div>
     <div class="timeline-item">
         <div class="timeline-year">2019–2023</div>
@@ -599,9 +669,8 @@ def render_about_matt():
     # =========================================================================
     # 4. MATTGPT DEEP-DIVE
     # =========================================================================
-    # st.markdown('<div class="deep-dive-section">', unsafe_allow_html=True)
     st.markdown(
-        '<h2 class="section-title" style="margin-top: 0;">How I Built MattGPT</h2>',
+        '<h2 class="section-title" style="margin-top: 60px;">How I Built MattGPT</h2>',
         unsafe_allow_html=True,
     )
     st.markdown(
@@ -614,9 +683,9 @@ def render_about_matt():
         """
 <div class="deep-dive-card">
     <h3 style="margin: 0 0 12px 0;">💭 The Problem</h3>
-    <p style="color: #888; line-height: 1.7;">
+    <p style="line-height: 1.7;">
         Traditional portfolios are static PDFs that don't scale. Recruiters and hiring managers can't easily
-        search 120+ projects by methodology, outcome, or domain. I wanted to create an <strong>intelligent,
+        search 130+ projects by methodology, outcome, or domain. I wanted to create an <strong>intelligent,
         conversational interface</strong> that understands intent and surfaces relevant experience.
     </p>
 </div>
@@ -629,16 +698,16 @@ def render_about_matt():
         """
 <div class="deep-dive-card">
     <h3 style="margin: 0 0 12px 0;">🐾 Why "Agy"?</h3>
-    <p style="color: #888; line-height: 1.7; margin-bottom: 12px;">
+    <p style="line-height: 1.7; margin-bottom: 12px;">
         When I started building this AI assistant, there was only one name that made sense: Agy, named in honor
         of my Plott Hound who was my companion through 20+ years of transformation work.
     </p>
-    <p style="color: #888; line-height: 1.7; margin-bottom: 12px;">
+    <p style="line-height: 1.7; margin-bottom: 12px;">
         Plott Hounds are bred for determination and tracking skills—they don't give up on a trail. Those same
         traits define how this AI assistant works: determined to find the right insights, skilled at tracking down
-        relevant experience across 120+ projects.
+        relevant experience across 130+ projects.
     </p>
-    <p style="color: #7f8c8d; font-style: italic;">
+    <p style="font-style: italic; color: var(--text-muted, #7f8c8d);">
         It felt right to keep his name part of the work we loved doing together.
     </p>
 </div>
@@ -651,21 +720,20 @@ def render_about_matt():
         """
 <div class="deep-dive-card">
     <h3 style="margin: 0 0 16px 0;">🛠️ Tech Stack</h3>
-<div class="tech-grid" style="grid-template-columns: repeat(3, 1fr);">
-    <div class="tech-item"><div style="font-size: 28px;">🐍</div><div style="font-size: 11px; font-weight: 600;">Python 3.11</div></div>
-    <div class="tech-item"><div style="font-size: 28px;">⚡</div><div style="font-size: 11px; font-weight: 600;">Streamlit</div></div>
-    <div class="tech-item"><div style="font-size: 28px;">🤖</div><div style="font-size: 11px; font-weight: 600;">OpenAI GPT-4</div></div>
-    <div class="tech-item"><div style="font-size: 28px;">📌</div><div style="font-size: 11px; font-weight: 600;">Pinecone</div></div>
-    <div class="tech-item"><div style="font-size: 28px;">🧠</div><div style="font-size: 11px; font-weight: 600;">Embeddings</div></div>
-    <div class="tech-item"><div style="font-size: 28px;">🔀</div><div style="font-size: 11px; font-weight: 600;">GitHub</div></div>
-</div>
-
+    <div class="tech-grid" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="tech-item"><div style="font-size: 28px;">🐍</div><div style="font-size: 11px; font-weight: 600;">Python 3.11</div></div>
+        <div class="tech-item"><div style="font-size: 28px;">⚡</div><div style="font-size: 11px; font-weight: 600;">Streamlit</div></div>
+        <div class="tech-item"><div style="font-size: 28px;">🤖</div><div style="font-size: 11px; font-weight: 600;">OpenAI GPT-4o-mini</div></div>
+        <div class="tech-item"><div style="font-size: 28px;">📌</div><div style="font-size: 11px; font-weight: 600;">Pinecone</div></div>
+        <div class="tech-item"><div style="font-size: 28px;">🧠</div><div style="font-size: 11px; font-weight: 600;">text-embedding-3-small</div></div>
+        <div class="tech-item"><div style="font-size: 28px;">🔀</div><div style="font-size: 11px; font-weight: 600;">GitHub Actions</div></div>
+    </div>
 </div>
     """,
         unsafe_allow_html=True,
     )
 
-    # Architecture Flow + Code Block - ONE CARD
+    # Architecture Flow
     st.markdown(
         """
 <div class="deep-dive-card">
@@ -673,87 +741,60 @@ def render_about_matt():
     <div class="flow-grid">
         <div class="flow-step">
             <div class="flow-num">1</div>
-            <div style="font-size: 13px; font-weight: 600;">Data Ingestion</div>
-            <div style="font-size: 11px; color: #7f8c8d;">Excel → JSONL with STAR format</div>
+            <div class="flow-step-title">Data Ingestion</div>
+            <div class="flow-step-desc">Excel → JSONL with STAR format</div>
         </div>
         <div class="flow-step">
             <div class="flow-num">2</div>
-            <div style="font-size: 13px; font-weight: 600;">Embeddings</div>
-            <div style="font-size: 11px; color: #7f8c8d;">OpenAI text-embedding-3-small</div>
+            <div class="flow-step-title">Embeddings</div>
+            <div class="flow-step-desc">OpenAI text-embedding-3-small</div>
         </div>
         <div class="flow-step">
             <div class="flow-num">3</div>
-            <div style="font-size: 13px; font-weight: 600;">Vector Store</div>
-            <div style="font-size: 11px; color: #7f8c8d;">Pinecone with metadata filters</div>
+            <div class="flow-step-title">Vector Store</div>
+            <div class="flow-step-desc">Pinecone with metadata filters</div>
         </div>
         <div class="flow-step">
             <div class="flow-num">4</div>
-            <div style="font-size: 13px; font-weight: 600;">RAG Pipeline</div>
-            <div style="font-size: 11px; color: #7f8c8d;">Semantic search + GPT-4</div>
+            <div class="flow-step-title">RAG Pipeline</div>
+            <div class="flow-step-desc">Semantic search + GPT-4o-mini</div>
         </div>
     </div>
     <div style="text-align: center; margin: 24px 0 16px 0;">
-        <div style="display: inline-block; background: #e3f2fd; color: #1976d2; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 600;">
-            🔬 The Secret Sauce: Actual Python Code Powering the System
-        </div>
+        <span class="secret-sauce-badge">
+            🔬 The Secret Sauce: 3-Stage Quality Pipeline
+        </span>
     </div>
-<div class="code-block"><span class="code-comment"># Embedding Generation Pipeline</span>
-from sentence_transformers import SentenceTransformer
+<div class="code-block"><span class="code-comment"># 3-Stage Quality Pipeline</span>
+<span class="code-comment"># Stage 1: Rules-based nonsense detection</span>
+def check_rules_filter(query: str) -&gt; bool:
+    <span class="code-string">"Fast rejection of obvious non-portfolio queries"</span>
+    blocked_patterns = [<span class="code-string">"weather"</span>, <span class="code-string">"stock price"</span>, <span class="code-string">"recipe"</span>]
+    return not any(p in query.lower() for p in blocked_patterns)
 
-model = SentenceTransformer('all-MiniLM-L6-v2')
-embeddings = model.encode(content_chunks, show_progress_bar=True)
+<span class="code-comment"># Stage 2: Semantic router intent classification</span>
+def classify_intent(query: str) -&gt; dict:
+    <span class="code-string">"LLM-based intent detection with confidence scoring"</span>
+    return semantic_router.route(query)  <span class="code-comment"># Returns intent + score</span>
 
-<span class="code-comment"># Hybrid Retrieval with Pinecone</span>
-results = index.query(
-    vector=query_embedding,
-    top_k=5,
-    include_metadata=True,
-    filter={"client": "JPMorgan Chase"}  <span class="code-comment"># Optional filters</span>
-)
+<span class="code-comment"># Stage 3: Confidence gating on Pinecone results</span>
+def confidence_gate(results: list, threshold: float = 0.25) -&gt; list:
+    <span class="code-string">"Only return results above confidence threshold"</span>
+    return [r for r in results if r.score &gt;= threshold]
 
-<span class="code-comment"># RAG with GPT-4</span>
-response = openai.ChatCompletion.create(
-    model="gpt-4o-mini",
-    messages=[
-        {"role": "system", "content": mattgpt_system_prompt},
-        {"role": "user", "content": augmented_query}
-    ])
-
-<span class="code-comment"># 5P Framework - Rich Context Beyond STAR</span>
-story_schema = {
-    "person": "Who was involved, stakeholders, team dynamics",
-    "place": "Client, environment, organizational context",
-    "purpose": "The 'why' - Simon Sinek style motivation",
-    "performance": "Measurable outcomes, metrics, impact",
-    "process": "How it was done, methodology, approach"
-}
-
-<span class="code-comment"># Embedding Strategy - Full Context Per Vector</span>
-def build_embedding_text(story: dict) -> str:
-    return f\"\"\"
-    {story['title']} | {story['client']}
-    Purpose: {story['purpose']}
-    Situation: {story['situation']}
-    Action: {story['action']}
-    Result: {story['result']}
-    Tags: {', '.join(story['tags'])}
-    \"\"\"  <span class="code-comment"># Preserves narrative, not just keywords</span>
-
-<span class="code-comment"># Behavioral Query Detection via LLM-Generated Tags</span>
-def match_behavioral_tags(query: str, stories: List[dict]):
-    behavioral_signals = ["conflict", "challenge", "difficult", "disagree"]
-    if any(signal in query.lower() for signal in behavioral_signals):
-        return [s for s in stories if "Leadership" in s.get("tags", [])]
-    return stories
-
-<span class="code-comment"># Client Diversity - Showcase Breadth of Experience</span>
-def diversify_results(stories, max_per_client=2):
+<span class="code-comment"># Client Diversity Algorithm - No repetitive results</span>
+def diversify_results(stories: list, max_per_client: int = 2) -&gt; list:
+    <span class="code-string">"Ensure variety across different clients/industries"</span>
     seen = {}
     return [s for s in stories
-            if seen.setdefault(s['client'], 0) < max_per_client
-            and not seen.update({s['client']: seen[s['client']] + 1})]</div>
-    </div>
+            if seen.setdefault(s[<span class="code-string">'client'</span>], 0) &lt; max_per_client
+            and not seen.update({s[<span class="code-string">'client'</span>]: seen[s[<span class="code-string">'client'</span>]] + 1})]
 
+<span class="code-comment"># Behavioral Query Detection for Interview Prep</span>
+def detect_behavioral_query(query: str) -&gt; bool:
+    <span class="code-string">"Recognize STAR-format interview questions"</span>
+    signals = [<span class="code-string">"tell me about a time"</span>, <span class="code-string">"difficult"</span>, <span class="code-string">"challenge"</span>, <span class="code-string">"conflict"</span>]
+    return any(signal in query.lower() for signal in signals)</div>
 </div>
     """,
         unsafe_allow_html=True,
@@ -766,9 +807,9 @@ def diversify_results(stories, max_per_client=2):
     <div class="detail-card">
         <h4>📊 Data Pipeline</h4>
         <ul>
-            <li>Excel master sheet with 120+ STAR stories</li>
+            <li>Excel master sheet with 130+ STAR stories</li>
             <li>Python script converts to JSONL with rich metadata</li>
-            <li>5P framework fields: Person, Place, Purpose, Performance, Process</li>
+            <li>5P framework: Person, Place, Purpose, Performance, Process</li>
             <li>Automated validation ensures consistency</li>
         </ul>
     </div>
@@ -782,18 +823,18 @@ def diversify_results(stories, max_per_client=2):
         </ul>
     </div>
     <div class="detail-card">
-        <h4>🔍 Hybrid Retrieval</h4>
+        <h4>🔍 3-Stage Quality Pipeline</h4>
         <ul>
-            <li><strong>Semantic Search:</strong> Understands meaning, not keywords</li>
-            <li><strong>Tag Matching:</strong> LLM-generated tags for behavioral queries</li>
-            <li><strong>Client Diversity:</strong> Results balanced across clients</li>
-            <li><strong>Fallback Logic:</strong> Graceful off-domain handling</li>
+            <li><strong>Stage 1:</strong> Rules-based nonsense detection</li>
+            <li><strong>Stage 2:</strong> Semantic router intent classification</li>
+            <li><strong>Stage 3:</strong> Confidence gating (threshold: 0.25)</li>
+            <li><strong>Diversity:</strong> Max 2 stories per client</li>
         </ul>
     </div>
     <div class="detail-card">
-        <h4>💬 RAG with GPT-4</h4>
+        <h4>💬 RAG with GPT-4o-mini</h4>
         <ul>
-            <li><strong>System Prompt:</strong> Defines Agy's voice</li>
+            <li><strong>System Prompt:</strong> Defines Agy's personality & voice</li>
             <li><strong>Context Injection:</strong> Top 3-5 stories as grounding</li>
             <li><strong>Response Structure:</strong> Answer → Example → Invitation</li>
             <li><strong>Source Citations:</strong> Links to full STAR stories</li>
@@ -803,7 +844,7 @@ def diversify_results(stories, max_per_client=2):
         <h4>🎨 Frontend (Streamlit)</h4>
         <ul>
             <li>Conversational chat interface with history</li>
-            <li>Suggested questions for exploration</li>
+            <li>Dark mode support with CSS variables</li>
             <li>Story cards with expandable details</li>
             <li>Responsive design with custom CSS</li>
         </ul>
@@ -812,7 +853,7 @@ def diversify_results(stories, max_per_client=2):
         <h4>🚀 DevOps & Quality</h4>
         <ul>
             <li><strong>CI/CD:</strong> GitHub Actions → Streamlit Cloud</li>
-            <li><strong>Testing:</strong> pytest with BDD features</li>
+            <li><strong>Testing:</strong> pytest with behavioral tests</li>
             <li><strong>Monitoring:</strong> Query logging, error tracking</li>
             <li><strong>Security:</strong> API keys in secrets, no PII</li>
         </ul>
@@ -827,27 +868,25 @@ def diversify_results(stories, max_per_client=2):
         """
 <div class="cta-card">
     <h3 style="font-size: 28px; margin: 0 0 16px 0;">🎯 See It In Action</h3>
-    <p style="color: #888; line-height: 1.7; margin-bottom: 20px;">
+    <p style="line-height: 1.7; margin-bottom: 20px;">
         This isn't just a portfolio showcase — <strong>Agy 🐾 is a working AI assistant</strong> that can
-        answer detailed questions about my 120+ projects, methodologies, and outcomes.
+        answer detailed questions about my 130+ projects, methodologies, and outcomes.
     </p>
-    <p style="font-weight: 600; color: #7f8c8d; margin-bottom: 12px;">Try asking questions like:</p>
-    <ul style="color: #888; line-height: 2; margin-bottom: 24px;">
+    <p style="font-weight: 600; margin-bottom: 12px;">Try asking questions like:</p>
+    <ul style="line-height: 2; margin-bottom: 24px;">
         <li>"How did Matt scale engineering teams from 4 to 150+ people?"</li>
         <li>"What were the biggest challenges at the Accenture Innovation Center?"</li>
         <li>"Show me examples of agile transformation with measurable outcomes"</li>
         <li>"Tell me about a time Matt resolved conflict between senior engineers"</li>
     </ul>
-    <p style="text-align: center; color: #95a5a6; font-size: 14px;">
+    <p style="text-align: center; font-size: 14px; color: var(--text-muted, #95a5a6);">
         Head to <strong>Ask MattGPT</strong> in the navigation above to try it yourself.<br>
-        Real AI assistant • 120+ projects • Instant answers • Available 24/7
+        Real AI assistant • 130+ projects • Instant answers • Available 24/7
     </p>
 </div>
         """,
         unsafe_allow_html=True,
     )
-
-    st.markdown('</div>', unsafe_allow_html=True)  # Close deep-dive-section
 
     # =========================================================================
     # 5. CORE COMPETENCIES
