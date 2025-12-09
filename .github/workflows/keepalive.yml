@@ -1,7 +1,7 @@
 name: Keep Streamlit Warm
 on:
   schedule:
-    - cron: "*/5 * * * *"   # every 5 minutes
+    - cron: "*/5 * * * *"
   workflow_dispatch:
 
 jobs:
@@ -11,6 +11,6 @@ jobs:
     steps:
       - name: Ping app
         run: |
-          curl -A "keepalive-bot/1.0" -sSfL --max-time 30 "$APP_URL" >/dev/null
+          curl -sL --max-time 60 "${APP_URL}/_stcore/health" || true
         env:
           APP_URL: ${{ secrets.STREAMLIT_APP_URL }}
