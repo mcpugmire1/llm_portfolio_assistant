@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MattGPT Responsive Wireframes - Interactive Preview</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        /* ========================================
+           CONTROLS BAR
+           ======================================== */
+        .controls {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .control-group label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        button {
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: 2px solid #E5E7EB;
+            background: white;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        button.active {
+            background: #8B5CF6;
+            color: white;
+            border-color: #8B5CF6;
+        }
+
+        button:hover:not(.active) {
+            border-color: #8B5CF6;
+            background: #F3F4F6;
+        }
+
+        /* ========================================
+           DEVICE PREVIEW FRAME
+           ======================================== */
+        .preview-container {
+            margin-top: 100px;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .device-frame {
+            background: #1F2937;
+            border-radius: 20px;
+            padding: 8px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            transition: all 0.3s ease;
+        }
+
+        .device-screen {
+            border-radius: 12px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            background: white;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        /* Device sizes */
+        .device-mobile-se .device-screen { width: 375px; height: 667px; }
+        .device-mobile-14 .device-screen { width: 430px; height: 932px; }
+        .device-tablet .device-screen { width: 768px; height: 1024px; }
+        .device-desktop .device-screen { width: 1024px; height: 768px; }
+
+        /* Notch for mobile */
+        .notch {
+            height: 28px;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .notch-bar {
+            width: 80px;
+            height: 6px;
+            background: #1F2937;
+            border-radius: 3px;
+        }
+
+        /* ========================================
+           DARK MODE
+           ======================================== */
+        body.dark .device-screen { background: #0E1117; }
+        body.dark .app-bg { background: #0E1117; }
+        body.dark .card-bg { background: #1E1E2E; }
+        body.dark .surface-bg { background: #262633; }
+        body.dark .text-primary { color: #E5E7EB; }
+        body.dark .text-secondary { color: #9CA3AF; }
+        body.dark .border-color { border-color: #374151; }
+        body.dark .chat-ai-bg { background: #1E1E2E; border-left-color: #8B5CF6; }
+        body.dark .chat-user-bg { background: #282435; }
+        body.dark .notch { background: #0E1117; }
+
+        /* Light mode (default) */
+        .app-bg { background: #FFFFFF; }
+        .card-bg { background: #FFFFFF; border: 1px solid #E5E7EB; }
+        .surface-bg { background: #F9FAFB; }
+        .text-primary { color: #1F2937; }
+        .text-secondary { color: #6B7280; }
+        .border-color { border-color: #E5E7EB; }
+        .chat-ai-bg { background: #F9FAFB; border-left: 4px solid #8B5CF6; }
+        .chat-user-bg { background: #FBFBFC; }
+
+        /* ========================================
+           HEADER - GRADIENT PURPLE
+           ======================================== */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: white;
+        }
+
+        .header.mobile {
+            flex-direction: column;
+            text-align: center;
+            padding: 16px;
+        }
+
+        .header-avatar {
+            border-radius: 50%;
+            flex-shrink: 0;
+            border: 3px solid rgba(255,255,255,0.3);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .header-avatar.size-48 { width: 48px; height: 48px; }
+        .header-avatar.size-64 { width: 64px; height: 64px; }
+
+        body.dark .header-avatar {
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+        }
+
+        .header-text {
+            flex: 1;
+        }
+
+        .header-text h1 {
+            font-size: 28px;
+            margin: 0 0 4px 0;
+            font-weight: 700;
+        }
+
+        .header-text.mobile h1 { font-size: 20px; }
+
+        .header-text p {
+            font-size: 15px;
+            opacity: 0.95;
+            margin: 0;
+        }
+
+        .header-text.mobile p { font-size: 13px; }
+
+        .how-btn {
+            padding: 10px 20px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .how-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .how-btn.mobile {
+            padding: 10px;
+            min-width: 44px;
+            font-size: 18px;
+        }
+
+        /* ========================================
+           STATUS BAR
+           ======================================== */
+        .status-bar {
+            padding: 12px 24px;
+            border-bottom: 1px solid;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+            font-size: 13px;
+        }
+
+        .status-bar.mobile {
+            padding: 8px 12px;
+            font-size: 11px;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #10B981;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* ========================================
+           LANDING VIEW
+           ======================================== */
+        .landing-content {
+            padding: 32px 24px;
+        }
+
+        .landing-content.mobile {
+            padding: 24px 16px;
+        }
+
+        .intro-card {
+            max-width: 900px;
+            margin: 0 auto 32px;
+            padding: 40px 32px;
+            border-radius: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .intro-card.mobile {
+            padding: 24px 16px;
+            border-radius: 16px;
+        }
+
+        .intro-avatar {
+            width: 96px;
+            height: 96px;
+            margin: 0 auto 24px;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .intro-avatar.mobile {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 16px;
+        }
+
+        body.dark .intro-avatar {
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+        }
+
+        .intro-card h2 {
+            font-size: 28px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .intro-card.mobile h2 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .intro-card p {
+            font-size: 17px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .intro-card.mobile p {
+            font-size: 14px;
+        }
+
+        .sample-queries-title {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .sample-queries {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 32px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .sample-queries.mobile { grid-template-columns: 1fr; }
+        .sample-queries.tablet { grid-template-columns: 1fr 1fr; }
+        .sample-queries.desktop { grid-template-columns: 1fr 1fr; }
+
+        .query-card {
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-style: italic;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            text-align: left;
+        }
+
+        .query-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(139, 92, 246, 0.2);
+        }
+
+        .capability-cards {
+            display: grid;
+            gap: 16px;
+            max-width: 900px;
+            margin: 0 auto 32px;
+        }
+
+        .capability-cards.mobile { grid-template-columns: 1fr; }
+        .capability-cards.tablet { grid-template-columns: 1fr 1fr 1fr; }
+        .capability-cards.desktop { grid-template-columns: 1fr 1fr 1fr; }
+
+        .capability-card {
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .capability-card.mobile {
+            padding: 16px;
+        }
+
+        .capability-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            border-color: #8B5CF6;
+        }
+
+        .capability-icon {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .capability-card.mobile .capability-icon { font-size: 32px; }
+
+        .capability-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .capability-card.mobile .capability-title { font-size: 14px; }
+
+        .capability-desc {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .capability-card.mobile .capability-desc { font-size: 12px; }
+
+        /* ========================================
+           CHAT INPUT
+           ======================================== */
+        .chat-input-container {
+            display: flex;
+            gap: 12px;
+            padding: 16px 24px;
+            border-top: 2px solid;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .chat-input-container.mobile {
+            padding: 12px 16px;
+            gap: 8px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 2px solid;
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .chat-input.mobile {
+            padding: 12px 14px;
+            font-size: 14px;
+            border-radius: 8px;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: #8B5CF6;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+
+        .chat-send-btn {
+            padding: 14px 28px;
+            background: #8B5CF6;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .chat-send-btn:hover {
+            background: #7C3AED;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+        }
+
+        .chat-send-btn.mobile {
+            padding: 12px 14px;
+            min-width: 44px;
+            font-size: 18px;
+            border-radius: 8px;
+        }
+
+        /* ========================================
+           CONVERSATION VIEW
+           ======================================== */
+        .chat-messages {
+            padding: 24px;
+            min-height: 400px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .chat-messages.mobile {
+            padding: 16px;
+        }
+
+        .chat-message {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .chat-message.mobile {
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .chat-message.user {
+            flex-direction: row-reverse;
+        }
+
+        .chat-avatar {
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .chat-avatar.size-40 { width: 40px; height: 40px; font-size: 18px; }
+        .chat-avatar.size-60 { width: 60px; height: 60px; font-size: 28px; }
+
+        .chat-avatar.ai {
+            border: 2px solid #8B5CF6;
+        }
+
+        body.dark .chat-avatar.ai {
+            filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.4));
+        }
+
+        .chat-avatar.user {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .chat-bubble {
+            padding: 20px 24px;
+            border-radius: 12px;
+            max-width: 75%;
+            font-size: 15px;
+            line-height: 1.6;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .chat-bubble.mobile {
+            padding: 14px 16px;
+            font-size: 14px;
+            max-width: 85%;
+        }
+
+        .chat-bubble.user {
+            text-align: right;
+        }
+
+        .chat-sources {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid;
+            font-size: 13px;
+            opacity: 0.8;
+        }
+
+        .chat-sources.mobile {
+            font-size: 12px;
+        }
+
+        /* ========================================
+           POWERED BY
+           ======================================== */
+        .powered-by {
+            text-align: center;
+            font-size: 12px;
+            padding: 12px;
+            opacity: 0.7;
+        }
+
+        .powered-by.mobile {
+            font-size: 10px;
+            padding: 8px;
+        }
+
+        /* ========================================
+           HOME PAGE
+           ======================================== */
+        .home-hero {
+            padding: 48px 24px;
+            text-align: center;
+        }
+
+        .home-hero.mobile {
+            padding: 32px 16px;
+        }
+
+        .home-hero-avatar {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .home-hero-avatar.mobile {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 16px;
+        }
+
+        body.dark .home-hero-avatar {
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+        }
+
+        .home-hero h1 {
+            font-size: 32px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .home-hero.mobile h1 {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .home-hero p {
+            font-size: 17px;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+
+        .home-hero.mobile p {
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .home-cta-buttons {
+            display: grid;
+            gap: 12px;
+            max-width: 500px;
+            margin: 0 auto 48px;
+        }
+
+        .home-cta-buttons.mobile {
+            grid-template-columns: 1fr;
+        }
+
+        .home-cta-buttons.tablet {
+            grid-template-columns: 1fr;
+        }
+
+        .home-cta-buttons.desktop {
+            grid-template-columns: 1fr;
+        }
+
+        .home-cta {
+            padding: 18px 32px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .home-cta.mobile {
+            padding: 16px 24px;
+            font-size: 15px;
+            min-height: 44px;
+        }
+
+        .home-cta:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(139, 92, 246, 0.2);
+        }
+
+        .home-cta.primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: 2px solid transparent;
+        }
+
+        .home-stats {
+            display: grid;
+            gap: 16px;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px 48px;
+        }
+
+        .home-stats.mobile {
+            grid-template-columns: 1fr;
+            padding: 0 16px 32px;
+        }
+
+        .home-stats.tablet {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        .home-stats.desktop {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        .stat-card {
+            padding: 28px 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card.mobile {
+            padding: 20px 16px;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .stat-value {
+            font-size: 34px;
+            font-weight: 700;
+            color: #8B5CF6;
+            margin-bottom: 8px;
+        }
+
+        .stat-card.mobile .stat-value {
+            font-size: 28px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .stat-card.mobile .stat-label {
+            font-size: 13px;
+        }
+
+        /* ========================================
+           EXPLORE STORIES
+           ======================================== */
+        .explore-header {
+            padding: 24px;
+            border-bottom: 1px solid;
+        }
+
+        .explore-header.mobile {
+            padding: 16px;
+        }
+
+        .explore-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .explore-header.mobile h1 {
+            font-size: 22px;
+        }
+
+        .explore-filters {
+            padding: 16px 24px;
+            border-bottom: 1px solid;
+        }
+
+        .explore-filters.mobile {
+            padding: 12px 16px;
+        }
+
+        .filter-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .filter-title.mobile {
+            font-size: 14px;
+        }
+
+        .filter-accordion {
+            display: grid;
+            gap: 8px;
+        }
+
+        .filter-button {
+            padding: 12px 16px;
+            border: 2px solid;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 44px;
+        }
+
+        .filter-button:hover {
+            border-color: #8B5CF6;
+        }
+
+        .story-grid {
+            padding: 24px;
+            display: grid;
+            gap: 16px;
+        }
+
+        .story-grid.mobile {
+            padding: 16px;
+            grid-template-columns: 1fr;
+        }
+
+        .story-grid.tablet {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .story-grid.desktop {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .story-card {
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            min-height: 140px;
+        }
+
+        .story-card.mobile {
+            padding: 16px;
+            min-height: 120px;
+        }
+
+        .story-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(139, 92, 246, 0.2);
+            border-color: #8B5CF6;
+        }
+
+        .story-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .story-card.mobile .story-title {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .story-metadata {
+            font-size: 13px;
+            opacity: 0.7;
+            margin-bottom: 8px;
+        }
+
+        .story-card.mobile .story-metadata {
+            font-size: 12px;
+        }
+
+        .story-preview {
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            opacity: 0.8;
+        }
+
+        .story-card.mobile .story-preview {
+            font-size: 13px;
+        }
+
+        .story-cta {
+            padding: 10px 20px;
+            background: #8B5CF6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .story-cta:hover {
+            background: #7C3AED;
+        }
+
+        /* ========================================
+           ABOUT MATT
+           ======================================== */
+        .about-hero {
+            padding: 48px 24px;
+            text-align: center;
+            border-bottom: 1px solid;
+        }
+
+        .about-hero.mobile {
+            padding: 32px 16px;
+        }
+
+        .about-avatar {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 24px;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .about-avatar.mobile {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 16px;
+        }
+
+        body.dark .about-avatar {
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+        }
+
+        .about-hero h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .about-hero.mobile h1 {
+            font-size: 24px;
+        }
+
+        .about-hero .title {
+            font-size: 18px;
+            opacity: 0.8;
+            margin-bottom: 24px;
+        }
+
+        .about-hero.mobile .title {
+            font-size: 16px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .social-links.mobile {
+            flex-direction: column;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .social-link {
+            padding: 12px 24px;
+            border: 2px solid;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-link:hover {
+            border-color: #8B5CF6;
+            transform: translateY(-2px);
+        }
+
+        .about-section {
+            padding: 32px 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-section.mobile {
+            padding: 24px 16px;
+        }
+
+        .about-section h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .about-section.mobile h2 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .about-section p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .about-section.mobile p {
+            font-size: 14px;
+        }
+
+        .highlights-grid {
+            display: grid;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .highlights-grid.mobile {
+            grid-template-columns: 1fr;
+        }
+
+        .highlights-grid.tablet {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .highlights-grid.desktop {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .highlight-card {
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .highlight-card.mobile {
+            padding: 16px;
+        }
+
+        .highlight-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: #8B5CF6;
+            margin-bottom: 8px;
+        }
+
+        .highlight-card.mobile .highlight-number {
+            font-size: 24px;
+        }
+
+        .competencies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .competencies.mobile {
+            flex-direction: column;
+        }
+
+        .competency-tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(139, 92, 246, 0.1);
+            color: #8B5CF6;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .competencies.mobile .competency-tag {
+            font-size: 13px;
+            padding: 10px 16px;
+        }
+
+        .timeline {
+            display: grid;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .timeline-card {
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-left: 4px solid #8B5CF6;
+        }
+
+        .timeline-card.mobile {
+            padding: 16px;
+        }
+
+        .timeline-period {
+            font-size: 13px;
+            font-weight: 600;
+            color: #8B5CF6;
+            margin-bottom: 8px;
+        }
+
+        .timeline-role {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .timeline-card.mobile .timeline-role {
+            font-size: 15px;
+        }
+
+        .timeline-company {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 8px;
+        }
+
+        .timeline-card.mobile .timeline-company {
+            font-size: 13px;
+        }
+
+        .timeline-desc {
+            font-size: 14px;
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+
+        .timeline-card.mobile .timeline-desc {
+            font-size: 13px;
+        }
+
+        /* ========================================
+           FOOTER SPECS
+           ======================================== */
+        .footer-note {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            pointer-events: none;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <div class="control-group">
+            <label>Device:</label>
+            <button onclick="setDevice('mobile-se')" id="btn-mobile-se" class="active">iPhone SE (375px)</button>
+            <button onclick="setDevice('mobile-14')" id="btn-mobile-14">iPhone 14 (430px)</button>
+            <button onclick="setDevice('tablet')" id="btn-tablet">iPad (768px)</button>
+            <button onclick="setDevice('desktop')" id="btn-desktop">Desktop (1024px)</button>
+        </div>
+        <div class="control-group">
+            <label>View:</label>
+            <button onclick="setView('home')" id="btn-home" class="active">Home</button>
+            <button onclick="setView('landing')" id="btn-landing">Landing</button>
+            <button onclick="setView('conversation')" id="btn-conversation">Conversation</button>
+            <button onclick="setView('explore')" id="btn-explore">Explore Stories</button>
+            <button onclick="setView('about')" id="btn-about">About Matt</button>
+        </div>
+        <div class="control-group">
+            <label>Theme:</label>
+            <button onclick="toggleTheme()" id="btn-theme">🌙 Dark Mode</button>
+        </div>
+    </div>
+
+    <div class="preview-container">
+        <div class="device-frame device-mobile-se" id="device-frame">
+            <div class="device-screen" id="device-screen">
+                <!-- Content will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-note" id="specs">
+        Viewport: 375px • Mobile • Header: 48px • Chat: 40px • Grid: 1 col
+    </div>
+
+    <script>
+        let currentDevice = 'mobile-se';
+        let currentView = 'home';
+        let isDark = false;
+
+        const deviceSpecs = {
+            'mobile-se': { width: 375, label: 'Mobile', header: 48, chat: 40, grid: '1 col' },
+            'mobile-14': { width: 430, label: 'Mobile', header: 48, chat: 40, grid: '1 col' },
+            'tablet': { width: 768, label: 'Tablet', header: 64, chat: 60, grid: '3 col' },
+            'desktop': { width: 1024, label: 'Desktop', header: 64, chat: 60, grid: '3 col' }
+        };
+
+        // Real image URLs from GitHub
+        const images = {
+            agy_64: 'https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/agy_avatar_64_dark.png',
+            agy_96: 'https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/agy_avatar_96_dark.png',
+            agy_128: 'https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/agy_avatar_128_dark.png'
+        };
+
+        function setDevice(device) {
+            currentDevice = device;
+            document.querySelectorAll('.controls button').forEach(btn => {
+                if (btn.id === `btn-${device}`) btn.classList.add('active');
+                else if (btn.id.startsWith('btn-mobile') || btn.id.startsWith('btn-tablet') || btn.id.startsWith('btn-desktop')) {
+                    btn.classList.remove('active');
+                }
+            });
+
+            const frame = document.getElementById('device-frame');
+            frame.className = `device-frame device-${device}`;
+
+            updateSpecs();
+            renderView();
+        }
+
+        function setView(view) {
+            currentView = view;
+            document.getElementById('btn-home').classList.toggle('active', view === 'home');
+            document.getElementById('btn-landing').classList.toggle('active', view === 'landing');
+            document.getElementById('btn-conversation').classList.toggle('active', view === 'conversation');
+            document.getElementById('btn-explore').classList.toggle('active', view === 'explore');
+            document.getElementById('btn-about').classList.toggle('active', view === 'about');
+            renderView();
+        }
+
+        function toggleTheme() {
+            isDark = !isDark;
+            document.body.classList.toggle('dark', isDark);
+            document.getElementById('btn-theme').textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+        }
+
+        function updateSpecs() {
+            const spec = deviceSpecs[currentDevice];
+            document.getElementById('specs').textContent =
+                `Viewport: ${spec.width}px • ${spec.label} • Header: ${spec.header}px • Chat: ${spec.chat}px • Grid: ${spec.grid}`;
+        }
+
+        function renderView() {
+            const screen = document.getElementById('device-screen');
+            const isMobile = currentDevice.startsWith('mobile');
+            const isTablet = currentDevice === 'tablet';
+            const spec = deviceSpecs[currentDevice];
+
+            const gridClass = isMobile ? 'mobile' : isTablet ? 'tablet' : 'desktop';
+            const layoutClass = isMobile ? 'mobile' : 'desktop';
+            const headerSize = `size-${spec.header}`;
+            const chatSize = `size-${spec.chat}`;
+            const headerImg = isMobile ? images.agy_64 : images.agy_96;
+            const introImg = isMobile ? images.agy_64 : images.agy_128;
+            const heroAvatar = isMobile ? (currentDevice === 'mobile-se' ? '48px' : '60px') : '96px';
+
+            if (currentView === 'home') {
+                screen.innerHTML = `
+                    ${isMobile ? '<div class="notch"><div class="notch-bar"></div></div>' : ''}
+
+                    <div class="home-hero ${layoutClass} app-bg">
+                        <img src="${images.agy_128}" class="home-hero-avatar ${layoutClass}" alt="Matt Pugmire">
+                        <h1 class="text-primary">Welcome to MattGPT</h1>
+                        <p class="text-secondary">AI-powered career story search across 130+ project case studies</p>
+
+                        <div class="home-cta-buttons ${gridClass}">
+                            <div class="home-cta primary ${layoutClass}">🔍 Ask MattGPT</div>
+                            <div class="home-cta ${layoutClass} card-bg border-color text-primary">📚 Explore Stories</div>
+                            <div class="home-cta ${layoutClass} card-bg border-color text-primary">👤 About Matt</div>
+                        </div>
+                    </div>
+
+                    <div class="app-bg" style="padding: 32px 24px;">
+                        <h2 class="text-primary" style="text-align: center; font-size: ${isMobile ? '20px' : '24px'}; margin-bottom: 16px; font-weight: 700;">Quick Stats</h2>
+                        <div class="home-stats ${gridClass}">
+                            <div class="stat-card ${layoutClass} card-bg border-color">
+                                <div class="stat-value">130+</div>
+                                <div class="stat-label text-secondary">Project Stories</div>
+                            </div>
+                            <div class="stat-card ${layoutClass} card-bg border-color">
+                                <div class="stat-value">15+</div>
+                                <div class="stat-label text-secondary">Years Leadership</div>
+                            </div>
+                            <div class="stat-card ${layoutClass} card-bg border-color">
+                                <div class="stat-value">$100M+</div>
+                                <div class="stat-label text-secondary">Revenue Impact</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="powered-by ${layoutClass} text-secondary">
+                        © 2024 Matt Pugmire • Privacy • Terms
+                    </div>
+                `;
+            } else if (currentView === 'explore') {
+                screen.innerHTML = `
+                    ${isMobile ? '<div class="notch"><div class="notch-bar"></div></div>' : ''}
+
+                    <div class="explore-header ${layoutClass} app-bg border-color">
+                        <h1 class="text-primary">Explore Stories</h1>
+                        <p class="text-secondary" style="font-size: ${isMobile ? '13px' : '15px'};">130 stories found</p>
+                    </div>
+
+                    <div class="explore-filters ${layoutClass} surface-bg border-color">
+                        <div class="filter-title text-primary">Filters</div>
+                        <div class="filter-accordion">
+                            <div class="filter-button card-bg border-color text-primary">
+                                <span>Industry</span>
+                                <span>▼</span>
+                            </div>
+                            <div class="filter-button card-bg border-color text-primary">
+                                <span>Domain</span>
+                                <span>▼</span>
+                            </div>
+                            <div class="filter-button card-bg border-color text-primary">
+                                <span>Theme</span>
+                                <span>▼</span>
+                            </div>
+                            <button class="filter-button" style="background: #8B5CF6; color: white; border-color: #8B5CF6;">Clear Filters</button>
+                        </div>
+                    </div>
+
+                    <div class="story-grid ${gridClass} app-bg">
+                        <div class="story-card ${layoutClass} card-bg border-color">
+                            <div class="story-title text-primary">API Gateway Modernization</div>
+                            <div class="story-metadata text-secondary">Client: Fortune 500 Bank • Industry: Financial Services${!isMobile ? ' • Role: Head of Engineering' : ''}</div>
+                            <div class="story-preview text-primary">Migrated legacy API gateway to modern microservices architecture, improving performance by 60%...</div>
+                            <button class="story-cta">View Details</button>
+                        </div>
+
+                        <div class="story-card ${layoutClass} card-bg border-color">
+                            <div class="story-title text-primary">Microservices Migration</div>
+                            <div class="story-metadata text-secondary">Client: Fintech Startup • Industry: Financial Technology${!isMobile ? ' • Role: Technical Architect' : ''}</div>
+                            <div class="story-preview text-primary">Led migration from monolithic architecture to microservices, reducing deployment time by 80%...</div>
+                            <button class="story-cta">View Details</button>
+                        </div>
+
+                        <div class="story-card ${layoutClass} card-bg border-color">
+                            <div class="story-title text-primary">CI/CD Pipeline Implementation</div>
+                            <div class="story-metadata text-secondary">Client: SaaS Company • Industry: Software${!isMobile ? ' • Role: VP of Engineering' : ''}</div>
+                            <div class="story-preview text-primary">Built automated deployment pipeline from scratch, enabling 50+ deployments per day...</div>
+                            <button class="story-cta">View Details</button>
+                        </div>
+
+                        <div class="story-card ${layoutClass} card-bg border-color">
+                            <div class="story-title text-primary">Team Scaling Initiative</div>
+                            <div class="story-metadata text-secondary">Client: Enterprise Corp • Industry: Technology${!isMobile ? ' • Role: Head of Engineering' : ''}</div>
+                            <div class="story-preview text-primary">Scaled engineering team from 4 to 150+ while maintaining code quality and delivery velocity...</div>
+                            <button class="story-cta">View Details</button>
+                        </div>
+                    </div>
+
+                    <div class="powered-by ${layoutClass} text-secondary">
+                        ${isMobile ? 'Load more...' : '[1] [2] [3] ... [Next]'}
+                    </div>
+                `;
+            } else if (currentView === 'about') {
+                screen.innerHTML = `
+                    ${isMobile ? '<div class="notch"><div class="notch-bar"></div></div>' : ''}
+
+                    <div class="about-hero ${layoutClass} app-bg border-color">
+                        <img src="${images.agy_128}" class="about-avatar ${layoutClass}" alt="Matt Pugmire">
+                        <h1 class="text-primary">Matt Pugmire</h1>
+                        <p class="title text-secondary">Product & Engineering Leader</p>
+
+                        <div class="social-links ${layoutClass}">
+                            <div class="social-link border-color text-primary">LinkedIn</div>
+                            <div class="social-link border-color text-primary">GitHub</div>
+                            <div class="social-link border-color text-primary">Email</div>
+                        </div>
+                    </div>
+
+                    <div class="about-section ${layoutClass} app-bg">
+                        <h2 class="text-primary">About</h2>
+                        <p class="text-primary">Matt is a product and engineering leader with 15+ years of experience scaling teams, building platforms, and driving transformation across financial services, SaaS, and enterprise organizations.</p>
+                    </div>
+
+                    <div class="about-section ${layoutClass} app-bg">
+                        <h2 class="text-primary">Experience Highlights</h2>
+                        <div class="highlights-grid ${gridClass}">
+                            <div class="highlight-card ${layoutClass} card-bg border-color">
+                                <div class="highlight-number">15+</div>
+                                <div class="text-secondary">Years Product & Engineering Leadership</div>
+                            </div>
+                            <div class="highlight-card ${layoutClass} card-bg border-color">
+                                <div class="highlight-number">150+</div>
+                                <div class="text-secondary">Team Scaling (from 4 engineers)</div>
+                            </div>
+                            <div class="highlight-card ${layoutClass} card-bg border-color">
+                                <div class="highlight-number">$100M+</div>
+                                <div class="text-secondary">Revenue Impact Delivered</div>
+                            </div>
+                            <div class="highlight-card ${layoutClass} card-bg border-color">
+                                <div class="highlight-number">20+</div>
+                                <div class="text-secondary">Transformation Projects</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-section ${layoutClass} app-bg">
+                        <h2 class="text-primary">Core Competencies</h2>
+                        <div class="competencies ${layoutClass}">
+                            <div class="competency-tag">Platform Engineering</div>
+                            <div class="competency-tag">Product Strategy</div>
+                            <div class="competency-tag">Team Leadership</div>
+                            <div class="competency-tag">Digital Transformation</div>
+                            <div class="competency-tag">API & Microservices</div>
+                        </div>
+                    </div>
+
+                    <div class="about-section ${layoutClass} app-bg">
+                        <h2 class="text-primary">Career Timeline</h2>
+                        <div class="timeline">
+                            <div class="timeline-card ${layoutClass} card-bg">
+                                <div class="timeline-period">2020 - Present</div>
+                                <div class="timeline-role text-primary">Head of Engineering</div>
+                                <div class="timeline-company text-secondary">Fortune 500 Bank</div>
+                                <div class="timeline-desc text-primary">Led platform modernization initiative across 5 business units. Scaled team from 40 to 150+ engineers.</div>
+                            </div>
+
+                            <div class="timeline-card ${layoutClass} card-bg">
+                                <div class="timeline-period">2017 - 2020</div>
+                                <div class="timeline-role text-primary">VP of Product</div>
+                                <div class="timeline-company text-secondary">Fintech Startup</div>
+                                <div class="timeline-desc text-primary">Built product roadmap and scaled platform to serve 10M+ users. Led cross-functional teams.</div>
+                            </div>
+
+                            <div class="timeline-card ${layoutClass} card-bg">
+                                <div class="timeline-period">2013 - 2017</div>
+                                <div class="timeline-role text-primary">Director of Engineering</div>
+                                <div class="timeline-company text-secondary">SaaS Company</div>
+                                <div class="timeline-desc text-primary">Scaled team from 4 to 40 engineers. Built CI/CD pipeline reducing deployment time by 80%.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="powered-by ${layoutClass} text-secondary">
+                        © 2024 Matt Pugmire
+                    </div>
+                `;
+            } else if (currentView === 'landing') {
+                screen.innerHTML = `
+                    ${isMobile ? '<div class="notch"><div class="notch-bar"></div></div>' : ''}
+
+                    <div class="header ${layoutClass}">
+                        <img src="${headerImg}" class="header-avatar ${headerSize}" alt="Agy">
+                        <div class="header-text ${layoutClass}">
+                            <h1>Ask MattGPT</h1>
+                            <p>${isMobile ? 'AI-powered portfolio search' : 'AI-powered career story search, guided by Agy 🐾'}</p>
+                        </div>
+                        <button class="how-btn ${layoutClass}">${isMobile ? '🔍' : '🔍 How Agy Searches'}</button>
+                    </div>
+
+                    <div class="status-bar ${layoutClass} surface-bg border-color text-secondary">
+                        ${isMobile ?
+                            '<span class="status-dot"></span>130+ stories • Search active' :
+                            '<span class="status-dot"></span>Semantic search active • Pinecone index ready • 130+ stories indexed'}
+                    </div>
+
+                    <div class="landing-content ${layoutClass} app-bg">
+                        <div class="intro-card ${layoutClass} card-bg">
+                            <img src="${introImg}" class="intro-avatar ${layoutClass}" alt="Agy">
+                            <h2 class="text-primary">Welcome! I'm Agy 🐾</h2>
+                            <p class="text-primary">I can help you explore Matt's career stories using semantic search across 130+ project case studies.</p>
+                            <p class="text-secondary">Ask me about team scaling, platform engineering, product strategy, or transformation projects.</p>
+                        </div>
+
+                        <div class="sample-queries-title text-secondary">TRY THESE QUESTIONS:</div>
+                        <div class="sample-queries ${gridClass}">
+                            <div class="query-card card-bg text-primary">"How did Matt scale engineering teams from 4 to 150+?"</div>
+                            <div class="query-card card-bg text-primary">"Tell me about platform modernization projects"</div>
+                            <div class="query-card card-bg text-primary">"Show me examples of product strategy work"</div>
+                            <div class="query-card card-bg text-primary">"What transformation projects has Matt led?"</div>
+                            <div class="query-card card-bg text-primary">"How did Matt handle technical debt at scale?"</div>
+                            <div class="query-card card-bg text-primary">"Tell me about Matt's leadership philosophy"</div>
+                        </div>
+
+                        <div class="capability-cards ${gridClass}">
+                            <div class="capability-card ${layoutClass} card-bg">
+                                <div class="capability-icon">🎯</div>
+                                <div class="capability-title text-primary">Behavioral Questions</div>
+                                <div class="capability-desc text-secondary">STAR-formatted responses from real projects</div>
+                            </div>
+                            <div class="capability-card ${layoutClass} card-bg">
+                                <div class="capability-icon">🏦</div>
+                                <div class="capability-title text-primary">Industry Focus</div>
+                                <div class="capability-desc text-secondary">Financial services & cross-industry expertise</div>
+                            </div>
+                            <div class="capability-card ${layoutClass} card-bg">
+                                <div class="capability-icon">📊</div>
+                                <div class="capability-title text-primary">130+ Stories</div>
+                                <div class="capability-desc text-secondary">Semantic search across transformation projects</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat-input-container ${layoutClass} card-bg border-color">
+                        <input class="chat-input ${layoutClass} card-bg border-color text-primary" placeholder="${isMobile ? 'Ask Agy...' : 'Ask Agy about Matt\'s experience...'}">
+                        <button class="chat-send-btn ${layoutClass}">${isMobile ? '🐾' : 'Ask Agy 🐾'}</button>
+                    </div>
+
+                    <div class="powered-by ${layoutClass} text-secondary">
+                        Powered by OpenAI GPT-4o-mini with semantic search
+                    </div>
+                `;
+            } else {
+                screen.innerHTML = `
+                    ${isMobile ? '<div class="notch"><div class="notch-bar"></div></div>' : ''}
+
+                    <div class="header ${layoutClass}">
+                        <img src="${headerImg}" class="header-avatar ${headerSize}" alt="Agy">
+                        <div class="header-text ${layoutClass}">
+                            <h1>Ask MattGPT</h1>
+                            <p>${isMobile ? 'AI-powered portfolio search' : 'AI-powered career story search, guided by Agy 🐾'}</p>
+                        </div>
+                        <button class="how-btn ${layoutClass}">${isMobile ? '🔍' : '🔍 How Agy Searches'}</button>
+                    </div>
+
+                    <div class="status-bar ${layoutClass} surface-bg border-color text-secondary">
+                        ${isMobile ?
+                            '<span class="status-dot"></span>130+ stories • Search active' :
+                            '<span class="status-dot"></span>Semantic search active • Pinecone index ready • 130+ stories indexed'}
+                    </div>
+
+                    <div class="chat-messages ${layoutClass} app-bg">
+                        <div class="chat-message ${layoutClass} user">
+                            <div class="chat-avatar user ${chatSize}">👤</div>
+                            <div class="chat-bubble ${layoutClass} chat-user-bg text-primary">
+                                How did Matt scale engineering teams from small to large organizations?
+                            </div>
+                        </div>
+
+                        <div class="chat-message ${layoutClass} ai">
+                            <img src="${isMobile ? images.agy_64 : images.agy_96}" class="chat-avatar ai ${chatSize}" alt="Agy">
+                            <div class="chat-bubble ${layoutClass} chat-ai-bg text-primary">
+                                <p style="margin-bottom: 12px;">Matt has extensive experience scaling engineering teams. Here are the key examples:</p>
+
+                                <p style="margin-bottom: 12px;"><strong>Cloud Innovation Center (2018-2023):</strong> Built practice from 4 to 150+ professionals, establishing hiring pipelines, mentorship programs, and structured onboarding processes.</p>
+
+                                <p style="margin-bottom: 12px;"><strong>JPMorgan Chase:</strong> Scaled platform team through Lean XP methodology adoption, improving delivery velocity by 40% while maintaining code quality.</p>
+
+                                <p style="margin: 0;"><strong>Key Strategies:</strong> Implemented hiring frameworks, created technical leveling guides, and established engineering excellence programs.</p>
+
+                                <div class="chat-sources ${layoutClass} border-color text-secondary">
+                                    📚 <strong>Sources:</strong> 3 stories found<br>
+                                    • Team Scaling at Fortune 500 Bank<br>
+                                    • Lean XP Transformation<br>
+                                    • Engineering Excellence Program
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat-input-container ${layoutClass} card-bg border-color">
+                        <input class="chat-input ${layoutClass} card-bg border-color text-primary" placeholder="${isMobile ? 'Follow up...' : 'Ask a follow-up question...'}">
+                        <button class="chat-send-btn ${layoutClass}">${isMobile ? '↑' : 'Send'}</button>
+                    </div>
+
+                    <div class="powered-by ${layoutClass} text-secondary">
+                        Powered by OpenAI GPT-4o-mini with semantic search across 130+ project case studies
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize
+        renderView();
+        updateSpecs();
+    </script>
+</body>
+</html>
