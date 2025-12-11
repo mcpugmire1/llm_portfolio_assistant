@@ -82,6 +82,52 @@ def render_hero():
                 background: rgba(255,255,255,0.3);
                 transform: translateY(-2px);
             }
+
+            /* ========================================
+               MOBILE RESPONSIVE (<768px)
+               ======================================== */
+            @media (max-width: 767px) {
+                .hero-content {
+                    padding: 32px 20px !important;
+                }
+
+                /* Logo */
+                .hero-content img[alt="MattGPT with Agy"] {
+                    max-width: 280px !important;
+                }
+
+                /* Greeting text */
+                .hero-content > div:nth-of-type(2) {
+                    font-size: 18px !important;
+                }
+
+                /* Title */
+                .hero-content h1 {
+                    font-size: 28px !important;
+                    margin-bottom: 12px !important;
+                }
+
+                /* Paragraphs */
+                .hero-content p {
+                    font-size: 15px !important;
+                    line-height: 1.5 !important;
+                    padding: 0 12px !important;
+                }
+
+                /* Button container */
+                .hero-content > div:last-of-type {
+                    flex-direction: column !important;
+                    gap: 12px !important;
+                    padding: 0 20px !important;
+                }
+
+                /* Buttons */
+                .hero-btn {
+                    width: 100% !important;
+                    padding: 14px 24px !important;
+                    font-size: 15px !important;
+                }
+            }
         </style>
         <div class="hero-gradient-wrapper">
             <div class="hero-content">

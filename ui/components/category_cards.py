@@ -4,6 +4,8 @@ Category Cards Component
 Homepage exploration cards for different portfolio categories.
 Includes gradient industry cards and white capability cards.
 Uses HTML buttons with JS triggers for consistent styling across themes.
+
+MOBILE CSS: Card heights are handled here. Layout/spacing handled by mobile_overrides.py
 """
 
 import streamlit as st
@@ -134,6 +136,25 @@ def render_category_cards():
     [class*="st-key-card_btn_"] {
         display: none !important;
     }
+
+    /* ========================================
+       MOBILE: CARD HEIGHTS ONLY
+       Layout/spacing handled by mobile_overrides.py
+       ======================================== */
+    @media (max-width: 767px) {
+        /* Purple gradient cards - auto height */
+        div[style*="background: var(--gradient-purple-hero)"][style*="height: 380px"],
+        div[style*="background: var(--gradient-purple-hero)"][style*="height:380px"] {
+            height: auto !important;
+            min-height: 280px !important;
+        }
+
+        /* Capability cards - auto height */
+        .capability-card {
+            height: auto !important;
+            min-height: 260px !important;
+        }
+    }
     </style>
     """,
         unsafe_allow_html=True,
@@ -147,6 +168,7 @@ def render_category_cards():
     with col1:
         st.markdown(
             """
+        <div class="card-mobile-spacing">
         <div style="background: var(--gradient-purple-hero); color: white; padding: 32px; border-radius: 12px; height: 380px; display: flex; flex-direction: column;">
             <div style="font-size: 48px; margin-bottom: 16px;">🏦</div>
             <h3 style="color: white; font-size: 24px; font-weight: 700; margin: 0 0 8px 0;">Financial Services / Banking</h3>
@@ -155,19 +177,16 @@ def render_category_cards():
             <div style="display: flex; flex-wrap: wrap; gap: 8px; flex-grow: 1; align-items: flex-start; margin-bottom: 20px;">
                 <span style="background: rgba(255,255,255,0.25); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">JPMorgan Chase (33)</span>
                 <span style="background: rgba(255,255,255,0.25); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">American Express (3)</span>
-                <span style="background: rgba(255,255,255,0.25); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">Capital One (2)</span>
-                <span style="background: rgba(255,255,255,0.25); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">Fiserv (7)</span>
-                <span style="background: rgba(255,255,255,0.25); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">HSBC (2)</span>
-                <span style="background: rgba(255,255,255,0.25); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">RBC (11)</span>
+                <span style="background: rgba(255,255,255,0.25); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">Capital One (8)</span>
             </div>
-            <div>
-                <a id="btn-banking" class="card-btn-gradient">See Banking Projects →</a>
+            <div style="margin-top: auto;">
+                <a id="btn-banking" class="card-btn-gradient">Explore Stories →</a>
             </div>
+        </div>
         </div>
         """,
             unsafe_allow_html=True,
         )
-        # Hidden Streamlit button
         if st.button("", key="card_btn_banking"):
             st.session_state["active_tab"] = "Banking"
             st.rerun()
@@ -175,30 +194,29 @@ def render_category_cards():
     with col2:
         st.markdown(
             """
+        <div class="card-mobile-spacing">
         <div style="background: var(--gradient-purple-hero); color: white; padding: 32px; border-radius: 12px; height: 380px; display: flex; flex-direction: column;">
             <div style="font-size: 48px; margin-bottom: 16px;">🌐</div>
             <h3 style="color: white; font-size: 24px; font-weight: 700; margin: 0 0 8px 0;">Cross-Industry Transformation</h3>
-            <div style="color: rgba(255,255,255,0.9); font-size: 16px; font-weight: 600; margin-bottom: 16px;">51 projects</div>
-            <div style="color: rgba(255,255,255,0.95); margin-bottom: 16px; line-height: 1.5; font-size: 15px;">Multi-sector consulting, platform engineering, organizational transformation</div>
+            <div style="color: rgba(255,255,255,0.9); font-size: 16px; font-weight: 600; margin-bottom: 16px;">65 projects</div>
+            <div style="color: rgba(255,255,255,0.95); margin-bottom: 16px; line-height: 1.5; font-size: 15px;">Agile transformation, cloud innovation, platform engineering</div>
             <div style="display: flex; flex-wrap: wrap; gap: 8px; flex-grow: 1; align-items: flex-start; margin-bottom: 20px;">
-                <span style="background: rgba(255,255,255,0.25); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">Accenture (13)</span>
-                <span style="background: rgba(255,255,255,0.25); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">Multiple Clients (33)</span>
-                <span style="background: rgba(255,255,255,0.25); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">Healthcare (3)</span>
-                <span style="background: rgba(255,255,255,0.25); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">Transportation (5)</span>
+                <span style="background: rgba(255,255,255,0.25); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">AT&T (18)</span>
+                <span style="background: rgba(255,255,255,0.25); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">Accenture CIC (36)</span>
             </div>
-            <div>
-                <a id="btn-cross-industry" class="card-btn-gradient">Browse Transformations →</a>
+            <div style="margin-top: auto;">
+                <a id="btn-cross-industry" class="card-btn-gradient">Explore Stories →</a>
             </div>
+        </div>
         </div>
         """,
             unsafe_allow_html=True,
         )
-        # Hidden Streamlit button
         if st.button("", key="card_btn_cross_industry"):
             st.session_state["active_tab"] = "Cross-Industry"
             st.rerun()
 
-    # Row spacing
+    # Row spacing (hidden on mobile via CSS)
     st.markdown('<div style="height: 24px;"></div>', unsafe_allow_html=True)
 
     # === ROW 2: Capability cards ===
@@ -207,41 +225,39 @@ def render_category_cards():
     with col3:
         st.markdown(
             """
+        <div class="card-mobile-spacing">
         <div class="capability-card">
             <div style="font-size: 40px; margin-bottom: 16px;">🚀</div>
             <h3>Product Innovation &amp; Strategy</h3>
-            <div class="description">Cloud-native products from zero. Lean, rapid prototyping, OKRs, MVPs</div>
-            <div class="hints">"How do you do hypothesis-driven development?" • "How do you shift to product thinking?"</div>
+            <div class="description">From cloud-native prototypes to enterprise platforms — launching products that transform businesses</div>
+            <div class="hints">"How did Matt launch products?" • "How did Matt approach rapid prototyping?"</div>
             <div>
-                <a id="btn-product" class="card-btn-outline">View Case Studies →</a>
+                <a id="btn-product" class="card-btn-outline">View Product Work →</a>
             </div>
+        </div>
         </div>
         """,
             unsafe_allow_html=True,
         )
         if st.button("", key="card_btn_product"):
             if st.session_state.get("active_tab") == "Home":
-                st.session_state["prefilter_domains"] = [
-                    "Product Management",
-                    "Product Strategy & Innovation",
-                    "Client Product Innovation & Co-Creation",
-                    "User-Centered Product Strategy & Innovation",
-                    "Digital Product Development & Delivery",
-                ]
+                st.session_state["prefilter_capability"] = "Product Leadership"
                 st.session_state["active_tab"] = "Explore Stories"
                 st.rerun()
 
     with col4:
         st.markdown(
             """
+        <div class="card-mobile-spacing">
         <div class="capability-card">
-            <div style="font-size: 40px; margin-bottom: 16px;">🔧</div>
-            <h3>App Modernization</h3>
+            <div style="font-size: 40px; margin-bottom: 16px;">⚙️</div>
+            <h3>Application Modernization</h3>
             <div class="description">Modernizing legacy apps with event-driven design, microservices, and zero-defect delivery</div>
             <div class="hints">"How do you modernize monoliths into microservices?" • "How do you approach application rationalization?"</div>
             <div>
                 <a id="btn-modernization" class="card-btn-outline">View Case Studies →</a>
             </div>
+        </div>
         </div>
         """,
             unsafe_allow_html=True,
@@ -252,7 +268,7 @@ def render_category_cards():
                 st.session_state["active_tab"] = "Explore Stories"
                 st.rerun()
 
-    # Row spacing
+    # Row spacing (hidden on mobile via CSS)
     st.markdown('<div style="height: 24px;"></div>', unsafe_allow_html=True)
 
     # === ROW 3: Capability cards ===
@@ -261,6 +277,7 @@ def render_category_cards():
     with col5:
         st.markdown(
             """
+        <div class="card-mobile-spacing">
         <div class="capability-card">
             <div style="font-size: 40px; margin-bottom: 16px;">💡</div>
             <h3>Consulting &amp; Transformation</h3>
@@ -269,6 +286,7 @@ def render_category_cards():
             <div>
                 <a id="btn-consulting" class="card-btn-outline">Browse Transformations →</a>
             </div>
+        </div>
         </div>
         """,
             unsafe_allow_html=True,
@@ -301,6 +319,7 @@ def render_category_cards():
     with col6:
         st.markdown(
             """
+        <div class="card-mobile-spacing">
         <div class="capability-card">
             <div style="font-size: 40px; margin-bottom: 16px;">👥</div>
             <h3>Teams &amp; Talent Development</h3>
@@ -309,6 +328,7 @@ def render_category_cards():
             <div>
                 <a id="btn-teams" class="card-btn-outline">Check Team Stories →</a>
             </div>
+        </div>
         </div>
         """,
             unsafe_allow_html=True,
@@ -324,13 +344,13 @@ def render_category_cards():
                 st.session_state["active_tab"] = "Explore Stories"
                 st.rerun()
 
-    # Row spacing
+    # Row spacing (hidden on mobile via CSS)
     st.markdown('<div style="height: 24px;"></div>', unsafe_allow_html=True)
 
     # === ROW 4: Quick Question card ===
     st.markdown(
         """
-    <div style="background: var(--gradient-purple-hero); color: white; padding: 32px; border-radius: 12px; min-height: 200px; margin-bottom: 24px;">
+    <div style="background: var(--gradient-purple-hero); color: white; padding: 32px; border-radius: 12px; min-height: 200px; margin-top: 16px;">
         <div style="display: flex; align-items: center; gap: 24px; margin-bottom: 20px;">
             <img src="https://raw.githubusercontent.com/mcpugmire1/mattgpt-design-spec/main/brand-kit/chat_avatars/agy_avatar_128_dark.png"
                  alt="Agy" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">

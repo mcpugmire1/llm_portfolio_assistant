@@ -1,622 +1,480 @@
 """
-Mobile Responsive CSS Overrides
+Mobile Responsive CSS - EXPLORE STORIES ONLY
 
-ADDITIVE ONLY: Media queries for mobile/tablet responsiveness.
-Does not modify existing desktop CSS (1024px+).
+STRATEGY: Surgical, scoped CSS that won't break desktop.
+- All rules inside @media (max-width: 767px)
+- Uses .explore-page wrapper class for scoping
+- Targets specific elements with high specificity
+- NO generic selectors that could leak
 
-Based on mattgpt-mobile-mockup.jsx design spec.
+================================================================================
+BREAKPOINTS
+================================================================================
+| Breakpoint | Width         | Navigation          | Layout                    |
+|------------|---------------|---------------------|---------------------------|
+| Mobile     | < 768px       | Hamburger menu      | Single column             |
+| Tablet     | 768-1023px    | Compact horizontal  | 2 columns                 |
+| Desktop    | ≥ 1024px      | Full horizontal     | 2-3 columns               |
 
-BREAKPOINTS:
-- Mobile: <768px (optimize for iPhone SE 375px)
-- Tablet: 768-1023px
-- Desktop: 1024px+ (existing, unchanged)
+================================================================================
+TEST DEVICES
+================================================================================
+- iPhone SE: 375px (smallest modern phone)
+- iPhone 14/15: 390-393px
+- iPhone Max: 428-430px
+- iPad Mini: 768px
+- iPad: 810px
+- iPad Pro / Small laptop: 1024px
+- Desktop: 1280px+
+
+================================================================================
+RESPONSIVE VALUES (per wireframe spec)
+================================================================================
+| Element              | Mobile   | Tablet | Desktop |
+|----------------------|----------|--------|---------|
+| Hero padding         | 24px 16px| 32px   | 2rem    |
+| Hero title           | 24px     | 28px   | 2rem    |
+| Hero subtitle        | 14px     | 14px   | 1.1rem  |
+| Filter inputs        | stacked  | row    | row     |
+| Cards grid           | 1-col    | 2-col  | 3-col   |
+| Card padding         | 20px     | 24px   | 24px    |
+| Card title           | 16px     | 18px   | 18px    |
+| Table Domain col     | hidden   | visible| visible |
+| Touch targets        | 44px min | 44px   | default |
+
+================================================================================
+WIREFRAME SPEC SUMMARY (from mobile_wireframes.html)
+================================================================================
+- Hero: 24px 16px padding, 24px title, 14px subtitle
+- Filters: Stack vertically, full width inputs, 16px padding
+- Cards: Single column, 20px padding, 16px title, 260px min-height
+- Table: Horizontal scroll, hide Domain column, 550px min-width
+- Pagination: Wrap, 12px font, centered
 """
 
 
-def get_mobile_css() -> str:
+def get_explore_mobile_css() -> str:
     """
-    Mobile-first responsive CSS using media queries.
-    Matches values from mattgpt-mobile-mockup.jsx.
-
-    RESPONSIVE VALUES:
-    | Element              | Mobile   | Tablet | Desktop |
-    |----------------------|----------|--------|---------|
-    | Header avatar        | 48px     | 64px   | 64px    |
-    | Chat avatar          | 40px     | 60px   | 60px    |
-    | Chat padding         | 14px     | 18px   | 24px    |
-    | Grids                | 1-col    | 2-col  | 3-col   |
-    | "How Agy Searches"   | Icon only| Full   | Full    |
-    | Navbar               | Stacked  | Row    | Row     |
-    | Status bar           | Short    | Full   | Full    |
+    Mobile CSS for Explore Stories page ONLY.
+    Import this in explore_stories.py and inject once.
     """
-    return """
-        <style>
-        /* ============================================================================
-           MOBILE RESPONSIVE OVERRIDES (<768px)
-           ============================================================================ */
-
-        @media (max-width: 767px) {
-            /* ========================================
-               HEADER - LANDING & CONVERSATION
-               ======================================== */
-
-            /* Header Avatar: 48px (mobile) */
-            .header-agy-avatar {
-                width: 48px !important;
-                height: 48px !important;
-                border: 2px solid white !important;
-            }
-
-            /* Main avatar (landing view hero) */
-            .main-avatar img {
-                width: 64px !important;
-                height: 64px !important;
-            }
-
-            /* Header layout - stack vertically on mobile */
-            .ask-header {
-                flex-direction: column !important;
-                text-align: center !important;
-                padding: 16px !important;
-                gap: 12px !important;
-            }
-
-            .header-content {
-                flex-direction: column !important;
-                text-align: center !important;
-                gap: 12px !important;
-            }
-
-            .header-text h1 {
-                font-size: 20px !important;
-                margin: 8px 0 4px 0 !important;
-            }
-
-            .header-text p {
-                font-size: 13px !important;
-            }
-
-            /* "How Agy Searches" button - Icon only on mobile */
-            .how-it-works-btn,
-            button[key="toggle_how_agy"] {
-                padding: 8px 12px !important;
-                font-size: 13px !important;
-                min-width: 44px !important;
-                height: 44px !important;
-            }
-
-            /* Hide text, show icon only */
-            button[key="toggle_how_agy"] p {
-                font-size: 0 !important;
-            }
-
-            button[key="toggle_how_agy"]::before {
-                content: "🔍" !important;
-                font-size: 18px !important;
-            }
-
-            /* ========================================
-               STATUS BAR - SHORT VERSION
-               ======================================== */
-
-            .status-bar {
-                padding: 8px 12px !important;
-                gap: 12px !important;
-                font-size: 11px !important;
-            }
-
-            /* Hide verbose status items on mobile */
-            .status-item span {
-                font-size: 11px !important;
-            }
-
-            /* Show short version: "130+ stories • Search active" */
-            .status-item:nth-child(1)::after {
-                content: " • " !important;
-            }
-
-            .status-item:nth-child(2),
-            .status-item:nth-child(3) {
-                display: none !important;
-            }
-
-            /* ========================================
-               LANDING VIEW - MOBILE
-               ======================================== */
-
-            /* Main intro section */
-            .main-intro-section {
-                padding: 24px 16px 16px !important;
-            }
-
-            /* White card container */
-            .st-key-intro_section {
-                margin: 80px auto 0 !important;
-                padding: 16px !important;
-                border-radius: 16px !important;
-            }
-
-            /* Typography */
-            .welcome-title {
-                font-size: 20px !important;
-                margin: 16px 0 8px !important;
-            }
-
-            .intro-text-primary {
-                font-size: 15px !important;
-                margin-bottom: 12px !important;
-                padding: 0 8px !important;
-            }
-
-            .intro-text-secondary {
-                font-size: 14px !important;
-                margin-bottom: 24px !important;
-                padding: 0 8px !important;
-            }
-
-            .suggested-title {
-                font-size: 12px !important;
-                padding: 0 16px !important;
-            }
-
-            /* ========================================
-               SUGGESTION BUTTONS - 1 COLUMN GRID
-               ======================================== */
-
-            /* Override 2×3 grid to single column */
-            div[data-testid="stHorizontalBlock"]:has(button[key^="suggested_"]) {
-                grid-template-columns: 1fr !important;
-                grid-template-rows: repeat(6, auto) !important;
-                width: calc(100% - 32px) !important;
-                max-width: calc(100% - 32px) !important;
-                margin: 0 auto 24px !important;
-                gap: 8px !important;
-            }
-
-            /* Reset grid positions for single column */
-            .st-key-suggested_0 { grid-row: 1 !important; grid-column: 1 !important; }
-            .st-key-suggested_1 { grid-row: 2 !important; grid-column: 1 !important; }
-            .st-key-suggested_2 { grid-row: 3 !important; grid-column: 1 !important; }
-            .st-key-suggested_3 { grid-row: 4 !important; grid-column: 1 !important; }
-            .st-key-suggested_4 { grid-row: 5 !important; grid-column: 1 !important; }
-            .st-key-suggested_5 { grid-row: 6 !important; grid-column: 1 !important; }
-
-            /* Buttons full width */
-            button[key^="suggested_"] {
-                padding: 10px 12px !important;
-                font-size: 13px !important;
-                width: 100% !important;
-            }
-
-            button[key^="suggested_"] p {
-                font-size: 13px !important;
-            }
-
-            /* ========================================
-               INPUT FORM - MOBILE
-               ======================================== */
-
-            /* Input container */
-            .landing-input-container {
-                padding: 0 16px !important;
-                margin: 24px auto 0 !important;
-            }
-
-            [data-testid="stHorizontalBlock"]:has(.st-key-landing_input) {
-                flex-direction: column !important;
-                gap: 8px !important;
-                padding: 0 12px !important;
-            }
-
-            /* Input field */
-            div[data-testid="stTextInput"] input {
-                padding: 12px 14px !important;
-                font-size: 14px !important;
-                border-radius: 8px !important;
-            }
-
-            /* Ask Agy button - shorter text on mobile */
-            button[key="landing_ask"] {
-                padding: 12px 16px !important;
-                font-size: 14px !important;
-                min-height: 44px !important;
-                width: 100% !important;
-            }
-
-            button[key="landing_ask"]::after {
-                content: "Ask Agy 🐾" !important;
-            }
-
-            /* Powered by text */
-            .powered-by-text {
-                font-size: 10px !important;
-                margin-top: 8px !important;
-            }
-
-            /* ========================================
-               CONVERSATION VIEW - MOBILE
-               ======================================== */
-
-            /* Chat avatars: 40px (mobile) */
-            .stChatMessage > div.st-emotion-cache-18qnold,
-            .stChatMessage > .e1ypd8m72,
-            .stChatMessage > img.st-emotion-cache-p4micv,
-            .stChatMessage > img.e1ypd8m74,
-            .stChatMessage > img[alt="assistant avatar"] {
-                width: 40px !important;
-                height: 40px !important;
-                min-width: 40px !important;
-                min-height: 40px !important;
-                font-size: 18px !important;
-            }
-
-            /* Chat message padding: 14px (mobile) */
-            [data-testid="stChatMessage"]:not(:has([data-testid="chatAvatarIcon-user"])) {
-                padding: 14px !important;
-                font-size: 14px !important;
-                line-height: 1.5 !important;
-            }
-
-            [data-testid="stChatMessage"]:has([aria-label="Chat message from user"]) {
-                padding: 12px !important;
-                font-size: 14px !important;
-            }
-
-            /* Chat bubbles - narrower on mobile */
-            [data-testid="stChatMessage"] {
-                gap: 10px !important;
-                margin-bottom: 12px !important;
-            }
-
-            /* Message max width */
-            .stChatMessage > div:last-child {
-                max-width: 85% !important;
-            }
-
-            /* ========================================
-               CHAT INPUT - MOBILE
-               ======================================== */
-
-            [data-testid="stChatInput"] {
-                padding: 12px 16px !important;
-            }
-
-            /* Input textarea */
-            textarea[data-testid="stChatInputTextArea"] {
-                padding: 12px 14px !important;
-                font-size: 14px !important;
-                min-height: 44px !important;
-                max-height: 44px !important;
-                border-radius: 8px !important;
-            }
-
-            /* Submit button - icon only on mobile */
-            button[data-testid="stChatInputSubmitButton"] {
-                padding: 12px 14px !important;
-                min-width: 44px !important;
-                width: 44px !important;
-            }
-
-            /* Replace text with icon */
-            button[data-testid="stChatInputSubmitButton"]::after {
-                content: "↑" !important;
-                font-size: 18px !important;
-                font-weight: 700 !important;
-            }
-
-            /* Powered by text - mobile */
-            .conversation-powered-by {
-                font-size: 10px !important;
-                bottom: 18px !important;
-                max-width: 90% !important;
-            }
-
-            /* ========================================
-               RELATED STORIES GRID - 1 COLUMN
-               ======================================== */
-
-            /* Single column on mobile */
-            div[data-testid="stHorizontalBlock"]:has([class*="related-"]),
-            div[data-testid="stColumns"]:has([class*="related-"]) {
-                flex-direction: column !important;
-            }
-
-            [data-testid="stColumn"]:has([class*="related-"]) {
-                width: 100% !important;
-                max-width: 100% !important;
-            }
-
-            /* ========================================
-               CAPABILITY CARDS - 1 COLUMN
-               ======================================== */
-
-            /* Category cards stack on mobile */
-            div[data-testid="stColumns"] {
-                flex-direction: column !important;
-                gap: 12px !important;
-            }
-
-            [data-testid="stColumn"] {
-                width: 100% !important;
-                min-width: 100% !important;
-            }
-
-            /* ========================================
-               MODALS - FULL SCREEN
-               ======================================== */
-
-            /* "How Agy Searches" modal - full screen on mobile */
-            .modal-container,
-            div[data-testid="stModal"] {
-                width: 100vw !important;
-                max-width: 100vw !important;
-                height: 100vh !important;
-                max-height: 100vh !important;
-                margin: 0 !important;
-                border-radius: 0 !important;
-            }
-
-            .modal-content {
-                padding: 16px !important;
-                max-height: calc(100vh - 80px) !important;
-                overflow-y: auto !important;
-            }
-
-            /* Modal steps - stack vertically */
-            .modal-steps {
-                flex-direction: column !important;
-                gap: 12px !important;
-            }
-
-            .modal-step {
-                width: 100% !important;
-            }
-
-            /* ========================================
-               NAVBAR - STACKED (IF CUSTOM)
-               ======================================== */
-
-            /* If using custom navbar */
-            .custom-navbar {
-                flex-direction: column !important;
-                gap: 8px !important;
-                padding: 8px 12px !important;
-            }
-
-            .nav-tab {
-                padding: 10px 12px !important;
-                text-align: center !important;
-                font-size: 14px !important;
-            }
-
-            /* ========================================
-               METRICS - STACK ON MOBILE
-               ======================================== */
-
-            .stApp div[data-testid="metric-container"] {
-                padding: 20px 16px !important;
-            }
-
-            .stApp div[data-testid="metric-container"] [data-testid="metric-value"] {
-                font-size: 28px !important;
-            }
-
-            .stApp div[data-testid="metric-container"] [data-testid="metric-label"] {
-                font-size: 13px !important;
-            }
-
-            /* ========================================
-               TOUCH TARGETS - MINIMUM 44PX
-               ======================================== */
-
-            button,
-            a,
-            [role="button"],
-            input[type="checkbox"],
-            input[type="radio"] {
-                min-height: 44px !important;
-                min-width: 44px !important;
-            }
-
-            /* ========================================
-               THINKING INDICATOR - MOBILE
-               ======================================== */
-
-            .transition-indicator-bottom {
-                bottom: 80px !important;
-                padding: 8px 16px !important;
-                font-size: 12px !important;
-            }
-
-            .thinking-ball {
-                width: 36px !important;
-                height: 36px !important;
-            }
-        }
-
-        /* ============================================================================
-           TABLET RESPONSIVE OVERRIDES (768px - 1023px)
-           ============================================================================ */
-
-        @media (min-width: 768px) and (max-width: 1023px) {
-            /* ========================================
-               HEADER - TABLET
-               ======================================== */
-
-            /* Header avatar: 64px (tablet/desktop) */
-            .header-agy-avatar {
-                width: 64px !important;
-                height: 64px !important;
-            }
-
-            .main-avatar img {
-                width: 96px !important;
-                height: 96px !important;
-            }
-
-            /* Header stays horizontal on tablet */
-            .ask-header {
-                flex-direction: row !important;
-                padding: 20px 24px !important;
-            }
-
-            .header-text h1 {
-                font-size: 24px !important;
-            }
-
-            .header-text p {
-                font-size: 14px !important;
-            }
-
-            /* "How Agy Searches" - full text on tablet */
-            button[key="toggle_how_agy"] {
-                padding: 10px 16px !important;
-            }
-
-            button[key="toggle_how_agy"] p {
-                font-size: 13px !important;
-            }
-
-            /* ========================================
-               STATUS BAR - FULL TEXT
-               ======================================== */
-
-            .status-bar {
-                padding: 10px 24px !important;
-                gap: 20px !important;
-            }
-
-            .status-item {
-                font-size: 12px !important;
-            }
-
-            /* Show all status items on tablet */
-            .status-item:nth-child(2),
-            .status-item:nth-child(3) {
-                display: flex !important;
-            }
-
-            /* ========================================
-               GRIDS - 2 COLUMNS
-               ======================================== */
-
-            /* Suggestion buttons: 2×3 grid on tablet */
-            div[data-testid="stHorizontalBlock"]:has(button[key^="suggested_"]) {
-                grid-template-columns: 1fr 1fr !important;
-                grid-template-rows: repeat(3, auto) !important;
-                width: calc(100% - 48px) !important;
-                max-width: calc(100% - 48px) !important;
-            }
-
-            /* Restore 2-column positions */
-            .st-key-suggested_0 { grid-row: 1 !important; grid-column: 1 !important; }
-            .st-key-suggested_1 { grid-row: 1 !important; grid-column: 2 !important; }
-            .st-key-suggested_2 { grid-row: 2 !important; grid-column: 1 !important; }
-            .st-key-suggested_3 { grid-row: 2 !important; grid-column: 2 !important; }
-            .st-key-suggested_4 { grid-row: 3 !important; grid-column: 1 !important; }
-            .st-key-suggested_5 { grid-row: 3 !important; grid-column: 2 !important; }
-
-            button[key^="suggested_"] {
-                font-size: 14px !important;
-            }
-
-            /* Related stories: 2 columns */
-            div[data-testid="stColumns"]:has([class*="related-"]) > [data-testid="stColumn"] {
-                flex: 0 0 48% !important;
-                max-width: 48% !important;
-            }
-
-            /* Capability cards: 2 columns */
-            div[data-testid="stColumns"] {
-                flex-direction: row !important;
-                flex-wrap: wrap !important;
-            }
-
-            [data-testid="stColumn"] {
-                flex: 0 0 48% !important;
-                min-width: 48% !important;
-            }
-
-            /* ========================================
-               CHAT - TABLET
-               ======================================== */
-
-            /* Chat avatars: 60px (tablet/desktop) */
-            .stChatMessage > div.st-emotion-cache-18qnold,
-            .stChatMessage > .e1ypd8m72,
-            .stChatMessage > img.st-emotion-cache-p4micv,
-            .stChatMessage > img.e1ypd8m74,
-            .stChatMessage > img[alt="assistant avatar"] {
-                width: 60px !important;
-                height: 60px !important;
-                min-width: 60px !important;
-                min-height: 60px !important;
-            }
-
-            /* Chat padding: 18px (tablet) */
-            [data-testid="stChatMessage"]:not(:has([data-testid="chatAvatarIcon-user"])) {
-                padding: 18px !important;
-                font-size: 15px !important;
-            }
-
-            [data-testid="stChatMessage"]:has([aria-label="Chat message from user"]) {
-                padding: 14px !important;
-                font-size: 15px !important;
-            }
-
-            /* ========================================
-               INPUT - TABLET
-               ======================================== */
-
-            [data-testid="stChatInput"] {
-                padding: 16px 24px !important;
-            }
-
-            textarea[data-testid="stChatInputTextArea"] {
-                padding: 14px 18px !important;
-                font-size: 15px !important;
-            }
-
-            /* Submit button - full text on tablet */
-            button[data-testid="stChatInputSubmitButton"] {
-                padding: 14px 24px !important;
-                width: auto !important;
-            }
-
-            button[data-testid="stChatInputSubmitButton"]::after {
-                content: "Ask Agy 🐾" !important;
-            }
-
-            /* ========================================
-               MODALS - TABLET
-               ======================================== */
-
-            .modal-container {
-                width: 90vw !important;
-                max-width: 700px !important;
-                height: auto !important;
-                max-height: 90vh !important;
-                border-radius: 16px !important;
-            }
-
-            .modal-steps {
-                flex-direction: row !important;
-                gap: 16px !important;
-            }
-
-            .modal-step {
-                flex: 1 !important;
-            }
-        }
-
-        /* ============================================================================
-           DESKTOP (1024px+) - NO CHANGES
-           Existing desktop styles remain unchanged
-           ============================================================================ */
-
-        @media (min-width: 1024px) {
-            /* All existing desktop CSS from styles.py and global_styles.py applies */
-            /* No overrides needed - desktop is the baseline */
-        }
-        </style>
-    """
+    return """<style>
+/* ============================================================================
+   EXPLORE STORIES - MOBILE RESPONSIVE (<768px)
+   ============================================================================
+   RULE: Every selector MUST be inside this media query.
+   RULE: Use .explore-page wrapper for scoping.
+   RULE: Prefer class selectors over data-testid where possible.
+   ============================================================================ */
+
+@media (max-width: 767px) {
+
+    /* ========================================
+       HERO SECTION
+       Wireframe: 24px 16px padding, 24px title
+       ======================================== */
+
+    .explore-page .conversation-header {
+        padding: 24px 16px !important;
+        margin: 0 !important;
+    }
+
+    .explore-page .conversation-header-content {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 12px !important;
+    }
+
+    .explore-page .conversation-agy-avatar {
+        width: 64px !important;
+        height: 64px !important;
+        border-width: 3px !important;
+    }
+
+    .explore-page .conversation-header-text h1 {
+        font-size: 24px !important;
+        margin-bottom: 4px !important;
+    }
+
+    .explore-page .conversation-header-text p {
+        font-size: 14px !important;
+    }
+
+    /* ========================================
+       FILTERS SECTION
+       Wireframe: Stack vertically, 16px padding
+       ======================================== */
+
+    /* Filter container */
+    .explore-page .stContainer,
+    .explore-page div[data-testid="stContainer"] {
+        padding: 16px !important;
+    }
+
+    /* Force filter columns to stack */
+    .explore-page .filter-row,
+    .explore-page div[data-testid="stHorizontalBlock"]:has(div[data-testid="stSelectbox"]) {
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+
+    /* Make each filter column full width */
+    .explore-page div[data-testid="stHorizontalBlock"]:has(div[data-testid="stSelectbox"]) > div[data-testid="stColumn"] {
+        flex: 1 1 100% !important;
+        min-width: 100% !important;
+        width: 100% !important;
+    }
+
+    /* Filter labels */
+    .explore-page label[data-testid="stWidgetLabel"] {
+        font-size: 13px !important;
+    }
+
+    /* Filter inputs - proper touch targets */
+    .explore-page div[data-testid="stSelectbox"] > div > div,
+    .explore-page div[data-testid="stMultiSelect"] > div > div,
+    .explore-page div[data-testid="stTextInput"] input {
+        min-height: 44px !important;
+        font-size: 15px !important;
+    }
+
+    /* Search form row - keep search input + button on same row */
+    .explore-page div[data-testid="stForm"] div[data-testid="stHorizontalBlock"] {
+        flex-direction: row !important;
+        align-items: flex-end !important;
+        gap: 8px !important;
+    }
+
+    /* Search input - take most space */
+    .explore-page div[data-testid="stForm"] div[data-testid="stHorizontalBlock"] > div:first-child {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+    }
+
+    /* Search button - compact */
+    .explore-page div[data-testid="stForm"] div[data-testid="stHorizontalBlock"] > div:last-child {
+        flex: 0 0 auto !important;
+    }
+
+    .explore-page div[data-testid="stFormSubmitButton"] button {
+        padding: 8px 12px !important;
+        min-width: 44px !important;
+        width: 44px !important;
+        height: 44px !important;
+    }
+
+    /* Button row - Advanced Filters + Reset */
+    .explore-page [class*="st-key-btn_toggle_advanced"] button,
+    .explore-page [class*="st-key-btn_reset_filters"] button {
+        padding: 10px 14px !important;
+        font-size: 13px !important;
+        white-space: nowrap !important;
+    }
+
+    /* ========================================
+       RESULTS HEADER
+       Wireframe: justify-between, 12px 16px padding
+       ======================================== */
+
+    .explore-page .results-header {
+        padding: 12px 16px !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+    }
+
+    .explore-page .results-count {
+        font-size: 14px !important;
+    }
+
+    /* View toggle (Table/Cards) - compact */
+    .explore-page [data-testid="stSegmentedControl"] {
+        justify-content: flex-end !important;
+    }
+
+    .explore-page [data-testid="stSegmentedControl"] button {
+        padding: 6px 12px !important;
+        font-size: 13px !important;
+    }
+
+    /* ========================================
+       TABLE VIEW
+       Wireframe: Horizontal scroll, hide Domain
+       ======================================== */
+
+    /* AgGrid container - enable horizontal scroll */
+    .explore-page .ag-root-wrapper {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+
+    /* Force minimum width for readability */
+    .explore-page .ag-header,
+    .explore-page .ag-body-viewport {
+        min-width: 550px !important;
+    }
+
+    /* Title column - needs more space */
+    .explore-page .ag-header-cell[col-id="Title"],
+    .explore-page .ag-cell[col-id="Title"] {
+        min-width: 180px !important;
+        white-space: normal !important;
+        line-height: 1.4 !important;
+    }
+
+    /* Hide Domain column on mobile */
+    .explore-page .ag-header-cell[col-id="Domain"],
+    .explore-page .ag-cell[col-id="Domain"] {
+        display: none !important;
+    }
+
+    /* Reduce row height slightly */
+    .explore-page .ag-row {
+        min-height: 48px !important;
+    }
+
+    /* Cell padding - more compact */
+    .explore-page .ag-cell {
+        padding: 8px 10px !important;
+        font-size: 13px !important;
+    }
+
+    /* Header cells - smaller */
+    .explore-page .ag-header-cell {
+        padding: 10px !important;
+        font-size: 11px !important;
+    }
+
+    /* Client badge smaller */
+    .explore-page .client-badge {
+        padding: 3px 8px !important;
+        font-size: 11px !important;
+    }
+
+    /* Constrain table height */
+    .explore-page div[data-testid="stAgGrid"] {
+        max-height: 400px !important;
+    }
+
+    /* Swipe hint for table */
+    .explore-page .table-swipe-hint {
+        display: block !important;
+        text-align: center;
+        font-size: 12px;
+        color: var(--text-muted);
+        padding: 8px;
+    }
+
+    /* ========================================
+       CARDS VIEW
+       Wireframe: Single column, 20px padding
+       ======================================== */
+
+    /* Cards grid - single column */
+    .explore-page .story-cards-grid {
+        grid-template-columns: 1fr !important;
+        padding: 16px !important;
+        gap: 16px !important;
+    }
+
+    /* Individual card */
+    .explore-page .fixed-height-card {
+        padding: 20px !important;
+        height: auto !important;
+        min-height: 260px !important;
+        margin: 0 !important;
+    }
+
+    /* Card title */
+    .explore-page .card-title {
+        font-size: 16px !important;
+        line-height: 1.4 !important;
+        margin-bottom: 8px !important;
+    }
+
+    /* Card client badge */
+    .explore-page .card-client-badge {
+        font-size: 11px !important;
+        padding: 3px 8px !important;
+    }
+
+    /* Card description */
+    .explore-page .card-desc {
+        font-size: 14px !important;
+        -webkit-line-clamp: 3 !important;
+    }
+
+    /* Card footer - stack on mobile */
+    .explore-page .card-footer {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+    }
+
+    .explore-page .card-role {
+        font-size: 12px !important;
+    }
+
+    .explore-page .card-domain-tag {
+        font-size: 11px !important;
+    }
+
+    /* View details button - full width */
+    .explore-page .card-btn-view-details {
+        width: 100% !important;
+        text-align: center !important;
+        padding: 12px 16px !important;
+        font-size: 14px !important;
+    }
+
+    /* Hide Streamlit card buttons (already positioned off-screen) */
+    .explore-page [class*="st-key-card_btn_"] {
+        position: absolute !important;
+        left: -9999px !important;
+        height: 0 !important;
+        overflow: hidden !important;
+    }
+
+    /* ========================================
+       PAGINATION
+       Wireframe: Wrap, smaller buttons
+       ======================================== */
+
+    .explore-page .pagination {
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+        padding: 16px 12px !important;
+        justify-content: center !important;
+    }
+
+    .explore-page .pagination button {
+        padding: 8px 10px !important;
+        font-size: 12px !important;
+        min-width: 36px !important;
+    }
+
+    .explore-page .pagination .page-info {
+        width: 100% !important;
+        text-align: center !important;
+        order: -1 !important;
+        margin-bottom: 8px !important;
+        font-size: 12px !important;
+    }
+
+    /* ========================================
+       FILTER CHIPS (Active filters)
+       ======================================== */
+
+    .explore-page .active-chip-row {
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        padding: 12px 16px !important;
+    }
+
+    .explore-page .active-chip-row button {
+        font-size: 12px !important;
+        padding: 6px 10px !important;
+    }
+
+    /* ========================================
+       STORY DETAIL PANE
+       Full width on mobile
+       ======================================== */
+
+    .explore-page .story-detail-pane {
+        width: 100% !important;
+        margin: 16px 0 !important;
+        padding: 20px 16px !important;
+    }
+
+    .explore-page .story-detail-pane h2 {
+        font-size: 20px !important;
+    }
+
+    .explore-page .story-detail-pane h3 {
+        font-size: 16px !important;
+    }
+
+    .explore-page .story-detail-pane p,
+    .explore-page .story-detail-pane li {
+        font-size: 14px !important;
+        line-height: 1.6 !important;
+    }
+
+    /* STAR sections */
+    .explore-page .star-section {
+        padding: 16px !important;
+        margin-bottom: 12px !important;
+    }
+
+    /* Technologies pills */
+    .explore-page .tech-pills {
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+    }
+
+    .explore-page .tech-pill {
+        font-size: 12px !important;
+        padding: 4px 10px !important;
+    }
+
+    /* Ask Agy button - full width */
+    .explore-page [class*="st-key-ask_from_detail"] button {
+        width: 100% !important;
+        padding: 14px 20px !important;
+    }
+
+    /* ========================================
+       GENERAL MOBILE FIXES
+       ======================================== */
+
+    /* All buttons - proper touch targets */
+    .explore-page .stButton > button {
+        min-height: 44px !important;
+    }
+
+    /* Tighter vertical spacing */
+    .explore-page div[data-testid="stVerticalBlock"] > div {
+        margin-bottom: 8px !important;
+    }
+
+}
+
+/* ============================================================================
+   TABLET RESPONSIVE (768px - 1023px)
+   ============================================================================ */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+
+    /* Hero - horizontal layout OK, slightly smaller */
+    .explore-page .conversation-header-text h1 {
+        font-size: 28px !important;
+    }
+
+    /* Filters - can stay in row on tablet */
+    .explore-page div[data-testid="stHorizontalBlock"]:has(div[data-testid="stSelectbox"]) {
+        flex-direction: row !important;
+    }
+
+    /* Cards - 2 columns on tablet */
+    .explore-page .story-cards-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    /* Table - show Domain column on tablet */
+    .explore-page .ag-header-cell[col-id="Domain"],
+    .explore-page .ag-cell[col-id="Domain"] {
+        display: table-cell !important;
+    }
+
+    /* Hide swipe hint on tablet */
+    .explore-page .table-swipe-hint {
+        display: none !important;
+    }
+}
+
+/* ============================================================================
+   DESKTOP (1024px+) - NO CHANGES
+   Desktop is the baseline - all existing CSS applies unchanged
+   ============================================================================ */
+</style>
+"""

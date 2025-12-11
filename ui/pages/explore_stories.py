@@ -646,6 +646,58 @@ def render_explore_stories(
         }
     }
 
+    /* =========================================================
+       FILTER SECTION SPACING - TIGHTENED
+       ========================================================= */
+
+    /* Filter container - reduced padding */
+    .main [data-testid="stContainer"] {
+        padding: 12px 16px !important;
+    }
+
+    /* Reduce vertical gaps inside filter container */
+    .main [data-testid="stContainer"] [data-testid="stVerticalBlock"] > div {
+        margin-bottom: 2px !important;
+    }
+
+    /* Search form - remove extra padding and border */
+    .main [data-testid="stForm"] {
+        padding: 0 !important;
+        border: none !important;
+        background: transparent !important;
+    }
+
+    /* Form inner vertical block - tighter */
+    .main [data-testid="stForm"] [data-testid="stVerticalBlock"] > div {
+        margin-bottom: 0 !important;
+    }
+
+    /* Search submit button - compact */
+    .main [data-testid="stFormSubmitButton"] button {
+        padding: 6px 12px !important;
+        min-height: 38px !important;
+        height: 38px !important;
+    }
+
+    /* Advanced/Reset buttons - smaller, quieter */
+    [class*="st-key-btn_toggle_advanced"] button,
+    [class*="st-key-btn_reset_filters"] button {
+        padding: 4px 12px !important;
+        font-size: 12px !important;
+        background: transparent !important;
+        border: 1px solid var(--border-color) !important;
+        color: var(--text-muted) !important;
+        min-height: 32px !important;
+    }
+
+    [class*="st-key-btn_toggle_advanced"] button:hover {
+        background: var(--bg-hover) !important;
+    }
+
+    [class*="st-key-btn_reset_filters"] button:hover {
+        background: var(--bg-hover) !important;
+    }
+
     /* Filter container styling - WIREFRAME EXACT */
     .explore-filters {
         background: var(--bg-surface);
@@ -656,7 +708,7 @@ def render_explore_stories(
     /* Search input styling - WIREFRAME EXACT */
     .main .stTextInput > div > div > input {
         width: 100% !important;
-        padding: 12px 16px !important;
+        padding: 10px 14px !important;
         border: 2px solid var(--border-color) !important;
         border-radius: 6px !important;
         font-size: 14px !important;
@@ -669,9 +721,35 @@ def render_explore_stories(
         outline: none !important;
     }
 
+    /* Search form submit button - compact icon button */
+    [class*="search_form"] button[kind="secondaryFormSubmit"],
+    [class*="search_form"] button[type="submit"],
+    .stForm button[kind="secondaryFormSubmit"] {
+        width: 40px !important;
+        min-width: 40px !important;
+        max-width: 40px !important;
+        height: 40px !important;
+        padding: 0 !important;
+        border: 2px solid var(--border-color) !important;
+        border-radius: 6px !important;
+        background: var(--bg-card) !important;
+        color: var(--text-secondary) !important;
+        font-size: 16px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    [class*="search_form"] button[kind="secondaryFormSubmit"]:hover,
+    [class*="search_form"] button[type="submit"]:hover,
+    .stForm button[kind="secondaryFormSubmit"]:hover {
+        border-color: var(--accent-purple) !important;
+        background: var(--bg-hover) !important;
+    }
+
     /* Selectbox styling - WIREFRAME EXACT */
     .main .stSelectbox > div > div {
-        padding: 10px !important;
+        padding: 8px !important;
         border: 2px solid var(--border-color) !important;
         border-radius: 4px !important;
         font-size: 14px !important;
@@ -686,7 +764,7 @@ def render_explore_stories(
 
     /* Multiselect styling - WIREFRAME EXACT */
     .main .stMultiSelect > div > div {
-        padding: 10px !important;
+        padding: 8px !important;
         border: 2px solid var(--border-color) !important;
         border-radius: 4px !important;
         font-size: 14px !important;
@@ -704,22 +782,95 @@ def render_explore_stories(
         font-weight: 600 !important;
         color: var(--text-secondary) !important;
         text-transform: uppercase !important;
-        margin-bottom: 6px !important;
+        margin-bottom: 4px !important;
     }
 
     /* Segmented Control (Table/Cards toggle) - WIREFRAME EXACT */
-    [data-testid="stSegmentedControl"] button {
-        padding: 8px 16px !important;
-        border: 2px solid var(--border-color) !important;
+    /* Override Streamlit's default red (#FF4B4B) on active state */
+
+    /* Direct emotion class override (highest specificity) */
+    button.st-emotion-cache-1umuqkm.e8vg11g13,
+    button.st-emotion-cache-1umuqkm.e8vg11g13:active,
+    button.st-emotion-cache-1umuqkm.e8vg11g13:focus,
+    button.st-emotion-cache-1umuqkm.e8vg11g13:hover {
+        background: #8B5CF6 !important;
+        background-color: #8B5CF6 !important;
+        border: 1px solid #8B5CF6 !important;
+        color: white !important;
+    }
+
+    button.st-emotion-cache-1umuqkm.e8vg11g13 p,
+    button.st-emotion-cache-1umuqkm.e8vg11g13 * {
+        color: white !important;
+    }
+
+    /* Inactive button - emotion class */
+    button.st-emotion-cache-2mqt7m.e8vg11g12,
+    button.st-emotion-cache-2mqt7m.e8vg11g12:active,
+    button.st-emotion-cache-2mqt7m.e8vg11g12:focus {
         background: var(--bg-card) !important;
-        font-size: 13px !important;
-        font-weight: 600 !important;
+        background-color: var(--bg-card) !important;
+        border: 1px solid var(--border-color) !important;
         color: var(--text-secondary) !important;
     }
-    [data-testid="stSegmentedControl"] button[data-baseweb="button"][aria-pressed="true"] {
+
+    button.st-emotion-cache-2mqt7m.e8vg11g12 p,
+    button.st-emotion-cache-2mqt7m.e8vg11g12 * {
+        color: var(--text-secondary) !important;
+    }
+
+    button.st-emotion-cache-2mqt7m.e8vg11g12:hover {
+        background: var(--bg-hover) !important;
+        background-color: var(--bg-hover) !important;
+    }
+
+    /* Target by kind attribute (stable, fallback) */
+    button[kind="segmented_controlActive"],
+    button[kind="segmented_controlActive"]:active,
+    button[kind="segmented_controlActive"]:focus,
+    button[kind="segmented_controlActive"]:hover,
+    [data-testid="stBaseButton-segmented_controlActive"] {
         background: #8B5CF6 !important;
+        border: 1px solid #8B5CF6 !important;
         color: white !important;
-        border-color: #8B5CF6 !important;
+    }
+
+    button[kind="segmented_controlActive"] p,
+    button[kind="segmented_controlActive"] div,
+    button[kind="segmented_controlActive"] *,
+    [data-testid="stBaseButton-segmented_controlActive"] p,
+    [data-testid="stBaseButton-segmented_controlActive"] * {
+        color: white !important;
+    }
+
+    /* Inactive button styling */
+    button[kind="segmented_control"],
+    button[kind="segmented_control"]:active,
+    button[kind="segmented_control"]:focus,
+    [data-testid="stBaseButton-segmented_control"] {
+        background: var(--bg-card) !important;
+        border: 1px solid var(--border-color) !important;
+        color: var(--text-secondary) !important;
+    }
+
+    button[kind="segmented_control"] p,
+    button[kind="segmented_control"] div,
+    button[kind="segmented_control"] *,
+    [data-testid="stBaseButton-segmented_control"] p,
+    [data-testid="stBaseButton-segmented_control"] * {
+        color: var(--text-secondary) !important;
+    }
+
+    /* Hover states */
+    button[kind="segmented_control"]:hover {
+        background: var(--bg-hover) !important;
+        border-color: var(--text-muted) !important;
+    }
+
+    /* Target the p element inside stButtonGroup */
+    .stButtonGroup p,
+    [data-testid="stButtonGroup"] p {
+        color: inherit !important;
     }
 
     /* Table styling - WIREFRAME EXACT */
@@ -780,14 +931,14 @@ def render_explore_stories(
         font-weight: 500 !important;
     }
 
-    /* Button styling - WIREFRAME EXACT */
+    /* Button styling - WIREFRAME EXACT but more compact */
     .main .stButton > button {
-        padding: 8px 16px !important;
-        border: 2px solid var(--border-color) !important;
+        padding: 6px 14px !important;
+        border: 1px solid var(--border-color) !important;
         background: var(--bg-card) !important;
         cursor: pointer !important;
         font-size: 13px !important;
-        font-weight: 600 !important;
+        font-weight: 500 !important;
         border-radius: 6px !important;
         color: var(--text-secondary) !important;
         transition: all 0.2s ease !important;
@@ -954,11 +1105,179 @@ def render_explore_stories(
             height: auto !important;
             min-height: 280px !important;
         }
-    [class*="st-key-card_btn_"] {
-        position: absolute !important;
-        left: -9999px !important;
-        height: 0 !important;
-        overflow: hidden !important;
+        [class*="st-key-card_btn_"] {
+            position: absolute !important;
+            left: -9999px !important;
+            height: 0 !important;
+            overflow: hidden !important;
+        }
+
+        /* =============================================
+           MOBILE FILTER SECTION - TIGHTENED
+           ============================================= */
+
+        /* Filter container - tighter padding */
+        .main [data-testid="stContainer"] {
+            padding: 12px !important;
+        }
+
+        /* Reduce all vertical gaps in filter section */
+        .main [data-testid="stContainer"] [data-testid="stVerticalBlock"] > div {
+            margin-bottom: 4px !important;
+        }
+
+        /* Form internal spacing - minimal */
+        .main [data-testid="stForm"] [data-testid="stVerticalBlock"] > div {
+            margin-bottom: 2px !important;
+        }
+
+        /* Search form submit button - compact, full width OK on mobile */
+        .main [data-testid="stFormSubmitButton"] button {
+            padding: 8px 16px !important;
+            min-height: 40px !important;
+        }
+
+        /* Hide the spacer div we added for desktop alignment */
+        .main [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:last-child > div[style*="height: 23px"] {
+            display: none !important;
+        }
+
+        /* Labels - smaller */
+        label[data-testid="stWidgetLabel"] {
+            margin-bottom: 2px !important;
+            font-size: 12px !important;
+        }
+
+        /* Inputs - slightly smaller */
+        .main .stTextInput > div > div > input {
+            padding: 10px 12px !important;
+            font-size: 14px !important;
+        }
+
+        .main .stSelectbox > div > div {
+            padding: 8px 10px !important;
+            font-size: 14px !important;
+        }
+
+        /* =============================================
+           MOBILE BUTTONS - COMPACT
+           ============================================= */
+
+        /* All buttons smaller */
+        .main .stButton > button {
+            padding: 6px 12px !important;
+            font-size: 13px !important;
+            min-height: 36px !important;
+        }
+
+        /* Advanced/Reset buttons - inline them */
+        [class*="st-key-btn_toggle_advanced"] button,
+        [class*="st-key-btn_reset_filters"] button {
+            padding: 6px 10px !important;
+            font-size: 11px !important;
+            min-height: 32px !important;
+        }
+
+        /* Smaller segmented control */
+        [data-testid="stSegmentedControl"] button {
+            padding: 6px 12px !important;
+            font-size: 12px !important;
+        }
+
+        /* =============================================
+           MOBILE RESULTS HEADER - COMPACT ROW
+           ============================================= */
+
+        /* Force results row to wrap nicely */
+        div[data-testid="stHorizontalBlock"]:has([data-testid="stSegmentedControl"]) {
+            flex-wrap: wrap !important;
+            gap: 8px !important;
+            align-items: center !important;
+        }
+
+        /* "Showing X of Y" - full width on its own row */
+        div[data-testid="stHorizontalBlock"]:has([data-testid="stSegmentedControl"]) > div:first-child {
+            flex: 1 1 100% !important;
+            min-width: 100% !important;
+        }
+
+        /* Hide the "SHOW:" label on mobile - save space */
+        div[data-testid="stHorizontalBlock"]:has([data-testid="stSegmentedControl"]) > div:nth-child(2) {
+            display: none !important;
+        }
+
+        /* Page size dropdown - compact */
+        div[data-testid="stHorizontalBlock"]:has([data-testid="stSegmentedControl"]) > div:nth-child(3) {
+            flex: 0 0 70px !important;
+            min-width: 70px !important;
+        }
+
+        /* Hide spacer column */
+        div[data-testid="stHorizontalBlock"]:has([data-testid="stSegmentedControl"]) > div:nth-child(4) {
+            display: none !important;
+        }
+
+        /* Table/Cards toggle - takes remaining space */
+        div[data-testid="stHorizontalBlock"]:has([data-testid="stSegmentedControl"]) > div:nth-child(5) {
+            flex: 1 1 auto !important;
+        }
+
+        /* =============================================
+           MOBILE TABLE - HORIZONTAL SCROLL
+           ============================================= */
+
+        .ag-root-wrapper {
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch !important;
+        }
+
+        .ag-header,
+        .ag-body-viewport {
+            min-width: 500px !important;
+        }
+
+        /* Hide Domain column on mobile */
+        .ag-header-cell[col-id="Domain"],
+        .ag-cell[col-id="Domain"] {
+            display: none !important;
+        }
+
+        /* Tighter table cells */
+        .ag-cell {
+            padding: 8px !important;
+            font-size: 13px !important;
+        }
+
+        .ag-header-cell {
+            padding: 8px !important;
+            font-size: 11px !important;
+        }
+
+        /* =============================================
+           MOBILE HERO - STACKED
+           ============================================= */
+
+        .conversation-header {
+            padding: 20px 16px !important;
+        }
+
+        .conversation-header-content {
+            flex-direction: column !important;
+            text-align: center !important;
+            gap: 12px !important;
+        }
+
+        .conversation-agy-avatar {
+            width: 64px !important;
+            height: 64px !important;
+        }
+
+        .conversation-header-text h1 {
+            font-size: 1.4rem !important;
+        }
+
+        .conversation-header-text p {
+            font-size: 0.9rem !important;
         }
     }
     </style>
@@ -990,37 +1309,39 @@ def render_explore_stories(
     # FILTERS SECTION - REDESIGNED (Phase 4)
     # ==================================================================
     with safe_container(border=True):
-        # PRIMARY FILTERS (Always Visible)
-        c1, c2, c3 = st.columns([2, 1, 1.5])
+        # PRIMARY FILTERS ROW: Search (with inline button) | Industry | Capability
+        search_col, industry_col, capability_col = st.columns([2, 1, 1.5])
 
-        with c1:
+        with search_col:
             search_version = st.session_state.get("_widget_version_q", 0)
 
             # Use a form to capture 'Enter' key press as a deliberate submission
-            # We use a versioned key for the form itself and the input to force reset.
             with st.form(
                 key=f"search_form_v{search_version}",
                 clear_on_submit=False,
                 border=False,
             ):
-                # 🎯 FIX: This MUST use the versioned key to force the visual reset
-                # when _widget_version_q is incremented by the chip click.
-                F["q"] = st.text_input(
-                    "Search keywords",
-                    value=F.get("q", ""),
-                    placeholder="Search by title, client, or keywords...",
-                    key=f"facet_q_v{search_version}",  # ⬅️ RELIABLE VERSIONED KEY
-                )
-
-                # This button is necessary for form functionality and captures 'Enter'
-                submitted = st.form_submit_button("🔍", use_container_width=False)
+                # Inline search input + button
+                input_col, btn_col = st.columns([0.88, 0.12])
+                with input_col:
+                    F["q"] = st.text_input(
+                        "Search keywords",
+                        value=F.get("q", ""),
+                        placeholder="Search by title, client, or keywords...",
+                        key=f"facet_q_v{search_version}",
+                    )
+                with btn_col:
+                    # Add spacing to align with input
+                    st.markdown(
+                        "<div style='height: 23px;'></div>", unsafe_allow_html=True
+                    )
+                    submitted = st.form_submit_button("🔍", use_container_width=True)
 
                 if submitted:
-                    # When submitted, the widget updates F["q"]. We just set the flag.
                     st.session_state["__search_triggered__"] = True
 
-        with c2:
-            # Industry filter (NEW - single select dropdown)
+        with industry_col:
+            # Industry filter (single select dropdown)
             industry_version = st.session_state.get("_widget_version_industry", 0)
             industry_options = ["All"] + industries
             current_industry = F.get("industry", "")
@@ -1037,8 +1358,8 @@ def render_explore_stories(
             )
             F["industry"] = "" if selected_industry == "All" else selected_industry
 
-        with c3:
-            # Capability filter (NEW - single select dropdown)
+        with capability_col:
+            # Capability filter (single select dropdown)
             capability_version = st.session_state.get("_widget_version_capability", 0)
             capability_options = ["All"] + capabilities
             current_capability = F.get("capability", "")
@@ -1060,7 +1381,8 @@ def render_explore_stories(
         # ADVANCED FILTERS (Collapsed by default)
         show_advanced = st.session_state.get("show_advanced_filters", False)
 
-        col_toggle, col_spacer, col_reset = st.columns([1, 3, 0.8])
+        # Compact button row - pushed left with empty spacer column
+        col_toggle, col_reset, _ = st.columns([0.35, 0.25, 1.4])
         with col_toggle:
             toggle_label = (
                 "▾ Advanced Filters" if show_advanced else "▸ Advanced Filters"
@@ -1070,7 +1392,7 @@ def render_explore_stories(
                 st.rerun()
 
         with col_reset:
-            if st.button("Reset filters", key="btn_reset_filters"):
+            if st.button("Reset Filters", key="btn_reset_filters"):
                 reset_all_filters(stories)
                 st.rerun()
 
@@ -1300,6 +1622,33 @@ def render_explore_stories(
     # =========================================================================
 
     if view_mode == "Table":
+        # Mobile swipe hint (hidden on tablet/desktop via CSS)
+        st.markdown(
+            """
+            <div class="table-swipe-hint">
+                <span>← Swipe to see more columns →</span>
+            </div>
+            <style>
+            .table-swipe-hint {
+                display: none;
+                text-align: center;
+                padding: 8px 16px;
+                background: var(--bg-surface);
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                margin-bottom: 12px;
+                font-size: 13px;
+                color: var(--text-muted);
+            }
+            @media (max-width: 767px) {
+                .table-swipe-hint {
+                    display: block;
+                }
+            }
+            </style>
+            """,
+            unsafe_allow_html=True,
+        )
 
         def _row(s: dict) -> dict:
             dom = (s.get("Sub-category") or "").split(" / ")[-1]

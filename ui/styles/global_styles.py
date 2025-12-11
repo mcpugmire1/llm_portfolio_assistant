@@ -393,12 +393,185 @@ def apply_global_styles():
         }
 
         /* ========================================
-           RESPONSIVE
+           RESPONSIVE - MOBILE OVERRIDES INLINED
            ======================================== */
 
-        @media (max-width: 768px) {
-            .matt-hero h1 { font-size: 32px; }
-            .matt-hero p { font-size: 18px; }
+        @media (max-width: 767px) {
+            /* Global: Prevent horizontal scroll */
+            html, body, [data-testid="stAppViewContainer"], .main {
+                overflow-x: hidden !important;
+                max-width: 100vw !important;
+            }
+            .main .block-container, .stMainBlockContainer, div[data-testid="stMainBlockContainer"] {
+                padding-left: 16px !important;
+                padding-right: 16px !important;
+                max-width: 100% !important;
+            }
+            /* Columns stack - except nav */
+            div[data-testid="stHorizontalBlock"]:not(:has([class*="st-key-topnav_"])) {
+                flex-direction: column !important;
+                gap: 0 !important;
+            }
+            div[data-testid="stHorizontalBlock"]:not(:has([class*="st-key-topnav_"])) > div[data-testid="stColumn"] {
+                width: 100% !important;
+                min-width: 100% !important;
+                flex: 1 1 100% !important;
+                margin: 0 0 16px 0 !important;
+            }
+            /* Card spacing */
+            .card-mobile-spacing { margin-bottom: 16px !important; }
+            div[data-testid="stElementContainer"]:has(div[style="height: 24px;"]) { display: none !important; }
+            div[style="height: 24px;"] { display: none !important; height: 0 !important; }
+            /* Purple cards auto height */
+            div[style*="background: var(--gradient-purple-hero)"][style*="height: 380px"] {
+                height: auto !important;
+                min-height: 280px !important;
+            }
+            .capability-card { height: auto !important; min-height: 260px !important; }
+            /* Header */
+            .ask-header { flex-direction: column !important; text-align: center !important; padding: 20px 16px !important; gap: 12px !important; }
+            .header-agy-avatar { width: 64px !important; height: 64px !important; }
+            .header-text h1 { font-size: 22px !important; }
+            /* Chat */
+            .stChatMessage img, [data-testid="stChatMessage"] img { width: 40px !important; height: 40px !important; }
+            [data-testid="stChatMessage"] { padding: 14px !important; gap: 12px !important; }
+            /* Touch targets */
+            button, a[role="button"] { min-height: 44px !important; }
+            /* Stats bar - 2x2 grid on mobile */
+            .stats-bar {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 0 !important;
+            }
+            .stat { padding: 16px 8px !important; }
+            .stat-number { font-size: 28px !important; }
+            .stat-label { font-size: 12px !important; }
+
+            /* ========================================
+               EXPLORE STORIES - Mobile Compact Layout
+               ======================================== */
+
+            /* Hero - Compact on mobile */
+            .conversation-header {
+                padding: 16px !important;
+                margin: -1rem 0 0 0 !important;
+            }
+            .conversation-header-content {
+                flex-direction: row !important;
+                gap: 12px !important;
+                align-items: center !important;
+            }
+            .conversation-agy-avatar {
+                width: 56px !important;
+                height: 56px !important;
+                flex-shrink: 0 !important;
+            }
+            .conversation-header-text h1 {
+                font-size: 1.25rem !important;
+                line-height: 1.2 !important;
+            }
+            .conversation-header-text p {
+                font-size: 0.85rem !important;
+                margin-top: 4px !important;
+            }
+
+            /* Filters - Tighter layout */
+            .explore-filters {
+                padding: 16px !important;
+            }
+
+            /* Search row - input + button inline */
+            .explore-filters [data-testid="stHorizontalBlock"]:first-of-type {
+                flex-direction: row !important;
+                gap: 8px !important;
+            }
+            .explore-filters [data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="stColumn"] {
+                margin: 0 !important;
+            }
+            .explore-filters [data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="stColumn"]:first-child {
+                flex: 1 1 auto !important;
+                min-width: 0 !important;
+                width: auto !important;
+            }
+            .explore-filters [data-testid="stHorizontalBlock"]:first-of-type > div[data-testid="stColumn"]:last-child {
+                flex: 0 0 auto !important;
+                min-width: auto !important;
+                width: auto !important;
+            }
+
+            /* Filter dropdowns - 2 column grid */
+            .explore-filters .stSelectbox {
+                margin-bottom: 8px !important;
+            }
+
+            /* Advanced filters / Reset - inline */
+            .explore-filters [data-testid="stExpander"] {
+                margin-top: 8px !important;
+            }
+
+            /* Reduce gap between filters and results */
+            [data-testid="stVerticalBlock"] > div:has(.explore-filters) + div {
+                margin-top: 0 !important;
+            }
+
+            /* Results header - Showing X of Y, page size selector */
+            .main [data-testid="stHorizontalBlock"]:has(.stSelectbox[data-testid*="page"]) {
+                flex-direction: row !important;
+                align-items: center !important;
+                gap: 8px !important;
+            }
+
+            /* Table/Cards toggle - compact */
+            [data-testid="stSegmentedControl"] {
+                margin: 8px 0 !important;
+            }
+            [data-testid="stSegmentedControl"] button {
+                padding: 6px 12px !important;
+                font-size: 12px !important;
+            }
+
+            /* Table - horizontal scroll wrapper */
+            .main [data-testid="stDataFrame"],
+            .main .ag-root-wrapper {
+                overflow-x: auto !important;
+                -webkit-overflow-scrolling: touch !important;
+            }
+
+            /* Story Detail Pane - Compact mobile */
+            .story-detail-pane {
+                padding: 16px !important;
+            }
+            .story-detail-pane h2 {
+                font-size: 1.25rem !important;
+                line-height: 1.3 !important;
+            }
+
+            /* Metrics in story detail - stack vertically */
+            .story-detail-pane [data-testid="stHorizontalBlock"] {
+                gap: 8px !important;
+            }
+
+            /* Action buttons in detail pane - full width */
+            .story-detail-pane .stButton button {
+                width: 100% !important;
+                justify-content: center !important;
+            }
+
+            /* Hide spacer divs */
+            div[data-testid="stVerticalBlock"] > div:empty,
+            div[data-testid="stVerticalBlockBorderWrapper"] > div:empty {
+                display: none !important;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+            /* Tablet: 2-col layout */
+            div[data-testid="stHorizontalBlock"]:not(:has([class*="st-key-topnav_"])) { flex-wrap: wrap !important; }
+            div[data-testid="stHorizontalBlock"]:not(:has([class*="st-key-topnav_"])) > div[data-testid="stColumn"] {
+                flex: 0 0 48% !important;
+                min-width: 48% !important;
+            }
+            .header-agy-avatar { width: 80px !important; height: 80px !important; }
+            .stChatMessage img { width: 50px !important; height: 50px !important; }
         }
         </style>
         """,
