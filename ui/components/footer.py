@@ -21,18 +21,45 @@ def render_footer():
     [class*="st-key-footer_ask"] {
         display: none !important;
     }
+
+    /* Mobile responsive footer */
+    @media (max-width: 767px) {
+        .footer-connect {
+            padding: 24px 16px !important;
+            margin-top: 24px !important;
+        }
+        .footer-connect h3 {
+            font-size: 20px !important;
+            margin-bottom: 8px !important;
+        }
+        .footer-connect .footer-desc {
+            font-size: 13px !important;
+            margin-bottom: 6px !important;
+        }
+        .footer-connect .footer-avail {
+            font-size: 11px !important;
+            margin-bottom: 16px !important;
+        }
+        .footer-connect .footer-buttons {
+            gap: 8px !important;
+        }
+        .footer-connect .footer-buttons a {
+            padding: 10px 16px !important;
+            font-size: 12px !important;
+        }
+    }
     </style>
-    <div style="background: #2c3e50; color: white; padding: 48px 40px; text-align: center; margin-top: 40px; border-radius: 8px;">
+    <div class="footer-connect" style="background: #2c3e50; color: white; padding: 48px 40px; text-align: center; margin-top: 40px; border-radius: 8px;">
         <h3 style="font-size: 28px; margin-bottom: 12px; color: white;">Let's Connect</h3>
-        <p style="font-size: 16px; margin-bottom: 8px; opacity: 0.9;">
+        <p class="footer-desc" style="font-size: 16px; margin-bottom: 8px; opacity: 0.9;">
             Seeking Director/VP opportunities in <strong>Product Leadership</strong>, <strong>Platform Engineering</strong>, and <strong>Organizational Transformation</strong>
         </p>
-        <p style="font-size: 14px; margin-bottom: 32px; opacity: 0.75;">
+        <p class="footer-avail" style="font-size: 14px; margin-bottom: 32px; opacity: 0.75;">
             Available immediately • Atlanta-based preferred • Open to relocation and consulting engagements
         </p>
-        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <div class="footer-buttons" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
             <a href="mailto:mcpugmire@gmail.com" style="padding: 12px 28px; background: #8B5CF6; color: white; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease;">
-                📧 mcpugmire@gmail.com
+                📧 Email Me
             </a>
             <a href="https://www.linkedin.com/in/matt-pugmire/" target="_blank" style="padding: 12px 28px; background: rgba(255,255,255,0.1); color: white; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease;">
                 💼 LinkedIn

@@ -64,17 +64,60 @@ def render_thinking_indicator(message=None):
                 height: 40px;
                 animation: chaseAnimation 0.9s steps(3) infinite;
             }}
+            .thinking-modal {{
+                position: fixed;
+                bottom: 140px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: var(--bg-card);
+                padding: 12px 24px;
+                border-radius: 24px;
+                border: 1px solid var(--border-color);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+                z-index: 99999;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                white-space: nowrap;
+            }}
+            .thinking-text {{
+                color: var(--text-primary);
+                font-weight: 500;
+                font-size: 15px;
+            }}
+            .thinking-paw {{
+                font-size: 20px;
+                margin-right: 6px;
+            }}
+            @media (max-width: 767px) {{
+                .thinking-modal {{
+                    padding: 10px 16px;
+                    gap: 8px;
+                    bottom: 100px;
+                    max-width: 90vw;
+                    white-space: normal;
+                }}
+                .thinking-ball {{
+                    width: 32px;
+                    height: 32px;
+                    flex-shrink: 0;
+                }}
+                .thinking-text {{
+                    font-size: 13px;
+                    line-height: 1.3;
+                }}
+                .thinking-paw {{
+                    font-size: 16px;
+                    margin-right: 4px;
+                }}
+            }}
         </style>
         <div class="thinking-backdrop"></div>
-        <div style='position: fixed; bottom: 140px; left: 50%; transform: translateX(-50%);
-                background: var(--bg-card); padding: 12px 24px; border-radius: 24px;
-                border: 1px solid var(--border-color);
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); z-index: 99999;
-                display: flex; align-items: center; gap: 12px;'>
-        <img class="thinking-ball" src="..." style="width: 40px; height: 40px;" alt=""/>
-        <span style='color: var(--text-primary); font-weight: 500; font-size: 15px;'>
-            <span style='font-size: 20px; margin-right: 6px;'>🐾</span>{message}
-        </span>
+        <div class="thinking-modal">
+            <img class="thinking-ball" src="..." alt=""/>
+            <span class="thinking-text">
+                <span class="thinking-paw">🐾</span>{message}
+            </span>
         </div>
         """,
         unsafe_allow_html=True,

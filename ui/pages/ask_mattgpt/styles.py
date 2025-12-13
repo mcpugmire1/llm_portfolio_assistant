@@ -565,7 +565,250 @@ def get_landing_css() -> str:
             color: white !important;
             font-weight: 600 !important;
         }
+        /* ============================================================================
+           MOBILE RESPONSIVE (<768px)
+           ============================================================================ */
+        @media (max-width: 767px) {
+            /* KILL Streamlit container padding */
+            div[data-testid="stMainBlockContainer"] {
+                padding: 1rem 1rem 2rem 1rem !important;
+            }
 
+            /* KILL extra margins on intro section container */
+            .st-key-intro_section,
+            [data-testid="stVerticalBlock"]:has(.main-intro-section) {
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            /* KILL empty placeholder taking space */
+            .stElementContainer:has(.stEmpty),
+            [data-testid="stVerticalBlock"] > div:has(.stEmpty) {
+                height: 0 !important;
+                min-height: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            /* Main intro section - compact */
+            .main-intro-section {
+                padding: 16px 16px 12px !important;
+            }
+
+            .main-avatar img {
+                width: 60px !important;
+                height: 60px !important;
+            }
+
+            .welcome-title {
+                font-size: 18px !important;
+                margin: 12px 0 6px !important;
+            }
+
+            .intro-text-primary {
+                font-size: 13px !important;
+                line-height: 1.4 !important;
+                margin-bottom: 8px !important;
+            }
+
+            .intro-text-secondary {
+                font-size: 12px !important;
+                line-height: 1.3 !important;
+                margin-bottom: 16px !important;
+            }
+
+            /* "TRY ASKING" title */
+            .suggested-title {
+                font-size: 10px !important;
+                margin-bottom: 6px !important;
+                padding: 0 16px !important;
+            }
+
+            /* Suggestion chips container - COMPACT */
+            div[data-testid="stHorizontalBlock"]:has(button[key^="suggested_"]) {
+                grid-template-columns: 1fr !important;
+                width: calc(100% - 24px) !important;
+                max-width: calc(100% - 24px) !important;
+                gap: 4px !important;
+                margin-bottom: 12px !important;
+            }
+
+            /* Suggestion buttons - MUCH more compact */
+            button[key^="suggested_"],
+            [class*="st-key-suggested_"] button,
+            .stButton button[key^="suggested_"] {
+                padding: 8px 12px !important;
+                min-height: 36px !important;
+                border-radius: 4px !important;
+            }
+
+            button[key^="suggested_"] p,
+            [class*="st-key-suggested_"] button p,
+            .stButton button p {
+                font-size: 13px !important;
+                line-height: 1.3 !important;
+            }
+
+            /* Form buttons (suggestion chips) - force smaller */
+            div[data-testid="stForm"] button {
+                padding: 8px 12px !important;
+                min-height: auto !important;
+            }
+
+            div[data-testid="stForm"] button p {
+                font-size: 13px !important;
+                line-height: 1.3 !important;
+            }
+
+            /* KILL gaps in vertical blocks */
+            [data-testid="stVerticalBlock"] {
+                gap: 4px !important;
+            }
+
+            /* Specifically kill gap after input row */
+            [data-testid="stHorizontalBlock"]:has(.st-key-landing_input) + *,
+            [data-testid="stHorizontalBlock"]:has(.st-key-landing_ask) + * {
+                margin-top: 0 !important;
+            }
+
+            /* Input container - tighter margins */
+            .landing-input-container {
+                margin: 8px auto 0 !important;
+                padding: 0 16px !important;
+            }
+
+            [data-testid="stHorizontalBlock"]:has(.st-key-landing_input) {
+                margin: 8px auto 0 !important;
+                padding: 0 16px !important;
+            }
+
+            /* FORCE input + button to stay on same line */
+            /* Target the HorizontalBlock as flex row */
+            [data-testid="stHorizontalBlock"]:has(.st-key-landing_input) {
+                display: flex !important;
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                gap: 8px !important;
+                align-items: center !important;
+            }
+
+            /* Make columns flex properly */
+            [data-testid="stHorizontalBlock"]:has(.st-key-landing_input) > .stColumn {
+                display: block !important;
+                width: auto !important;
+                flex: unset !important;
+            }
+
+            /* Input column - fill remaining space */
+            .stColumn:has(.st-key-landing_input) {
+                flex: 1 1 0% !important;
+                min-width: 0 !important;
+            }
+
+            /* Button column - shrink to content */
+            .stColumn:has(.st-key-landing_ask) {
+                flex: 0 0 auto !important;
+            }
+
+            /* Make stTextInput inline */
+            .st-key-landing_input .stTextInput,
+            [data-testid="stTextInput"]:has(#text_input_1) {
+                display: block !important;
+                width: 100% !important;
+            }
+
+            /* Make stButton inline */
+            .st-key-landing_ask .stButton,
+            .stColumn:has(.st-key-landing_ask) .stButton {
+                display: inline-flex !important;
+                width: auto !important;
+            }
+
+            /* Kill excessive vertical spacing throughout */
+            .main-intro-section + div,
+            .main-intro-section ~ [data-testid="stVerticalBlock"],
+            [data-testid="stVerticalBlock"]:has([data-testid="stForm"]) {
+                margin-top: 0 !important;
+                padding-top: 0 !important;
+            }
+
+            /* Input field */
+            .st-key-landing_input input,
+            .st-key-landing_input textarea,
+            [data-testid="stTextInput"] input {
+                font-size: 13px !important;
+                padding: 10px 12px !important;
+            }
+
+            /* Input placeholder */
+            .st-key-landing_input input::placeholder,
+            [data-testid="stTextInput"] input::placeholder {
+                font-size: 13px !important;
+            }
+
+            /* Ask Agy button - compact, inline with input */
+            .st-key-landing_submit button,
+            .st-key-landing_ask button {
+                padding: 10px 14px !important;
+                font-size: 13px !important;
+                margin-bottom: 0 !important;
+                white-space: nowrap !important;
+            }
+
+            .st-key-landing_ask button p {
+                font-size: 13px !important;
+            }
+
+            /* Status bar - compact single line */
+            .status-bar {
+                padding: 6px 12px !important;
+                gap: 6px !important;
+                flex-wrap: nowrap !important;
+                justify-content: center !important;
+            }
+
+            .status-bar span {
+                font-size: 10px !important;
+                white-space: nowrap !important;
+            }
+
+            /* Powered by text - tight under input */
+            .powered-by,
+            .powered-by-text {
+                font-size: 10px !important;
+                margin: 0 !important;
+                padding-top: 8px !important;
+                text-align: center !important;
+            }
+
+            /* Kill gaps around powered by container */
+            [data-testid="stMarkdown"]:has(.powered-by-text),
+            [data-testid="stElementContainer"]:has(.powered-by-text) {
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            /* Kill gap after landing input container */
+            .landing-input-container + [data-testid="stMarkdown"],
+            .landing-input-container ~ [data-testid="stElementContainer"] {
+                margin-top: 0 !important;
+            }
+
+            /* KILL empty element containers */
+            .stElementContainer:empty,
+            [data-testid="stVerticalBlock"] > div:empty {
+                display: none !important;
+            }
+
+            /* Footer CTA section */
+            .footer-cta {
+                padding: 24px 16px !important;
+            }
+
+            .footer-cta h2 {
+                font-size: 22px !important;
+            }
+        }
 
         </style>
     """
@@ -1097,6 +1340,135 @@ def get_conversation_css() -> str:
         /* Button vertical alignment */
         button[data-testid="stChatInputSubmitButton"] {
             transform: translateY(.5px) !important;
+        }
+
+        /* ============================================================================
+           MOBILE RESPONSIVE - CONVERSATION VIEW (<768px)
+           ============================================================================ */
+        @media (max-width: 767px) {
+            /* KILL Streamlit's excessive padding */
+            div[data-testid="stMainBlockContainer"] {
+                padding: 0 !important;
+                padding-bottom: 80px !important;
+            }
+
+            /* Status bar - compact like landing page */
+            .status-bar {
+                padding: 6px 12px !important;
+                gap: 6px !important;
+                flex-wrap: nowrap !important;
+                justify-content: center !important;
+                font-size: 10px !important;
+            }
+
+            .status-bar span {
+                font-size: 10px !important;
+                white-space: nowrap !important;
+            }
+
+            /* Chat messages - smaller avatars */
+            .stChatMessage img[data-testid="chatAvatarIcon-user"],
+            .stChatMessage img[data-testid="chatAvatarIcon-assistant"],
+            .stChatMessage > img {
+                width: 36px !important;
+                height: 36px !important;
+            }
+
+            .stChatMessage {
+                padding: 10px 12px !important;
+                gap: 10px !important;
+                margin-bottom: 8px !important;
+            }
+
+            /* Message text - readable on mobile */
+            .stChatMessage [data-testid="stMarkdownContainer"] {
+                font-size: 14px !important;
+                line-height: 1.5 !important;
+            }
+
+            /* KILL gaps between elements */
+            [data-testid="stVerticalBlock"] {
+                gap: 8px !important;
+            }
+
+            /* Chat input area - fixed at bottom */
+            [data-testid="stChatInput"] {
+                padding: 8px 12px !important;
+                position: fixed !important;
+                bottom: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                background: var(--bg-card) !important;
+                border-top: 1px solid var(--border-color) !important;
+                z-index: 1000 !important;
+            }
+
+            /* Input container - horizontal with tight gap */
+            [data-testid="stChatInput"] > div:first-child {
+                flex-direction: row !important;
+                gap: 8px !important;
+                align-items: center !important;
+            }
+
+            /* Textarea - flex to fill */
+            textarea[data-testid="stChatInputTextArea"] {
+                flex: 1 !important;
+                min-height: 40px !important;
+                max-height: 40px !important;
+                padding: 10px 14px !important;
+                font-size: 14px !important;
+                border-radius: 20px !important;
+            }
+
+            /* Ask Agy button - compact */
+            button[data-testid="stChatInputSubmitButton"],
+            [data-testid="stChatInput"] button {
+                width: auto !important;
+                padding: 10px 16px !important;
+                font-size: 13px !important;
+                border-radius: 20px !important;
+                flex-shrink: 0 !important;
+            }
+
+            button[data-testid="stChatInputSubmitButton"]::after {
+                font-size: 13px !important;
+            }
+
+            /* Powered by text - HIDE on mobile conversation view (shown on landing) */
+            [data-testid="stElementContainer"]:has(.conversation-powered-by) {
+                display: none !important;
+            }
+
+            /* Related projects - compact */
+            .related-project-link,
+            a[href*="story_id"] {
+                padding: 8px 12px !important;
+                font-size: 12px !important;
+                margin-bottom: 6px !important;
+            }
+
+            /* Source cards - compact */
+            .source-card {
+                padding: 10px !important;
+                margin-bottom: 8px !important;
+            }
+
+            .source-card h4 {
+                font-size: 13px !important;
+            }
+
+            .source-card p {
+                font-size: 11px !important;
+            }
+
+            /* RELATED PROJECTS header */
+            h3:has(+ .related-project-link),
+            [data-testid="stMarkdownContainer"] h3 {
+                font-size: 14px !important;
+                margin: 12px 0 8px 0 !important;
+            }
         }
 
         </style>

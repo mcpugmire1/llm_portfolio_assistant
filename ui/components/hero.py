@@ -86,46 +86,62 @@ def render_hero():
             /* ========================================
                MOBILE RESPONSIVE (<768px)
                ======================================== */
+            /* ========================================
+               MOBILE RESPONSIVE (<768px)
+               ======================================== */
             @media (max-width: 767px) {
                 .hero-content {
-                    padding: 32px 20px !important;
+                    padding: 20px 16px !important;
                 }
 
-                /* Logo */
+                /* Logo - much smaller */
+                .hero-content > div:first-of-type {
+                    margin-bottom: 16px !important;
+                }
                 .hero-content img[alt="MattGPT with Agy"] {
-                    max-width: 280px !important;
+                    max-width: 140px !important;
                 }
 
                 /* Greeting text */
                 .hero-content > div:nth-of-type(2) {
-                    font-size: 18px !important;
+                    font-size: 14px !important;
+                    margin-bottom: 8px !important;
                 }
 
                 /* Title */
                 .hero-content h1 {
-                    font-size: 28px !important;
+                    font-size: 22px !important;
+                    margin-bottom: 10px !important;
+                }
+
+                /* First paragraph - keep but smaller */
+                .hero-content p:first-of-type {
+                    font-size: 13px !important;
+                    line-height: 1.4 !important;
                     margin-bottom: 12px !important;
+                    padding: 0 8px !important;
                 }
 
-                /* Paragraphs */
-                .hero-content p {
-                    font-size: 15px !important;
-                    line-height: 1.5 !important;
-                    padding: 0 12px !important;
+                /* Second paragraph (Agy) - hide on mobile */
+                .hero-content p:nth-of-type(2) {
+                    display: none !important;
                 }
 
-                /* Button container */
+                /* Button container - row on mobile */
                 .hero-content > div:last-of-type {
-                    flex-direction: column !important;
-                    gap: 12px !important;
-                    padding: 0 20px !important;
+                    flex-direction: row !important;
+                    gap: 10px !important;
+                    padding: 0 !important;
+                    align-items: center !important;
+                    justify-content: center !important;
+                    margin-top: 8px !important;
                 }
 
-                /* Buttons */
+                /* Buttons - compact for side by side */
                 .hero-btn {
-                    width: 100% !important;
-                    padding: 14px 24px !important;
-                    font-size: 15px !important;
+                    width: auto !important;
+                    padding: 10px 16px !important;
+                    font-size: 13px !important;
                 }
             }
         </style>
@@ -145,7 +161,7 @@ def render_hero():
                     20+ years driving innovation, agile delivery, and technology leadership across Fortune 500 companies.
                 </p>
                  <p style="font-size: 16px; color: white; opacity: 0.95; max-width: 700px; margin: 0 auto 20px; line-height: 1.6;">
-                    I trained my AI counterpart, <strong>Agy</strong> — a loyal Plott Hound with a nose for patterns — to surface insights across 120+ real transformation projects.
+                    I trained my AI counterpart, <strong>Agy</strong> — a loyal Plott Hound with a nose for patterns — to surface insights across 130+ real transformation projects.
                  </p>
                 <div style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap;">
                     <a id="btn-explore" class="hero-btn hero-btn-primary">
@@ -251,23 +267,28 @@ def render_stats_bar():
 
         @media (max-width: 768px) {
             .stats-bar {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(4, 1fr) !important;
+                padding: 8px 0 !important;
             }
-            .stat:nth-child(2) {
-                border-right: none;
+            .stat {
+                padding: 6px 2px !important;
+            }
+            .stat-number {
+                font-size: 18px !important;
+                margin-bottom: 2px !important;
+            }
+            .stat-label {
+                font-size: 8px !important;
+                letter-spacing: 0 !important;
             }
         }
 
-        @media (max-width: 480px) {
-            .stats-bar {
-                grid-template-columns: 1fr;
+        @media (max-width: 380px) {
+            .stat-number {
+                font-size: 16px !important;
             }
-            .stat {
-                border-right: none;
-                border-bottom: 1px solid var(--border-color);
-            }
-            .stat:last-child {
-                border-bottom: none;
+            .stat-label {
+                font-size: 7px !important;
             }
         }
         </style>
@@ -277,7 +298,7 @@ def render_stats_bar():
                 <div class="stat-label">Years Experience</div>
             </div>
             <div class="stat">
-                <div class="stat-number">120+</div>
+                <div class="stat-number">130+</div>
                 <div class="stat-label">Projects Delivered</div>
             </div>
             <div class="stat">
@@ -298,6 +319,41 @@ def render_section_title(title: str):
     """Render styled section title with emoji icon."""
     st.markdown(
         f"""
+        <style>
+            .section-header h2 {{
+                font-size: 36px;
+                font-weight: 700;
+                color: var(--text-heading);
+                margin: 40px 0 24px 0;
+            }}
+            @media (max-width: 767px) {{
+                .section-header {{
+                    margin: 0 !important;
+                    padding: 0 !important;
+                }}
+                .section-header h2 {{
+                    font-size: 18px !important;
+                    margin: 8px 0 8px 0 !important;
+                    white-space: nowrap !important;
+                }}
+                .section-header h2 span:first-child {{
+                    font-size: 16px !important;
+                }}
+                /* Kill Streamlit's wrapper padding */
+                .section-header [data-testid="stHeadingWithActionElements"] {{
+                    padding: 0 !important;
+                    margin: 0 !important;
+                }}
+                .section-header .st-emotion-cache-ua1rfn {{
+                    padding: 0 !important;
+                    margin: 0 !important;
+                }}
+                /* Hide the anchor link icon */
+                .section-header [data-testid="stHeaderActionElements"] {{
+                    display: none !important;
+                }}
+            }}
+        </style>
         <div class="section-header" style="text-align: center;">
             <h2>
                 <span>🎯</span>

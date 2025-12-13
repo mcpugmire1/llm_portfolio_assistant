@@ -71,5 +71,8 @@ archive/
 data/offdomain_queries.csv
 data/borderline_queries.csv
 
+# API documentation (auto-generated)
+docs/api/
+
 # Exceptions - keep these files
 !echo_star_stories_nlp.jsonl

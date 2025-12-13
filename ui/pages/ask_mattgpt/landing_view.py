@@ -31,6 +31,19 @@ def render_landing_page(stories: list[dict]):
     NAVBAR IS RENDERED BY PARENT - NO NAVBAR CSS HERE
     """
 
+    # Scroll to top on page load
+    components.html(
+        """
+        <script>
+            setTimeout(function() {
+                const main = window.parent.document.querySelector('[data-testid="stMain"]');
+                if (main) main.scrollTop = 0;
+            }, 100);
+        </script>
+        """,
+        height=0,
+    )
+
     # Initialize processing flag
     if "processing_suggestion" not in st.session_state:
         st.session_state["processing_suggestion"] = False
@@ -47,8 +60,8 @@ def render_landing_page(stories: list[dict]):
     # Modal (if open)
     if st.session_state.get("show_how_modal", False):
         st.markdown(render_modal_wrapper_start(), unsafe_allow_html=True)
-        components.html(get_how_agy_flow_html(), height=1170)
-        components.html(get_technical_details_html(), height=680)
+        components.html(get_how_agy_flow_html(), height=1160)
+        components.html(get_technical_details_html(), height=670)
         st.markdown(render_modal_wrapper_end(), unsafe_allow_html=True)
         # Remove: render_modal_close_wiring_js()
 
@@ -151,10 +164,10 @@ def render_landing_page(stories: list[dict]):
 
     with col_input:
         user_input = st.text_input(
-            "Ask me anything — from building MattGPT to leading global programs...",
+            "Ask about Matt's experience...",
             key="landing_input",
             label_visibility="collapsed",
-            placeholder="Ask me anything — from building MattGPT to leading global programs...",
+            placeholder="Ask about projects, methods, or outcomes...",
             on_change=lambda: st.session_state.update(
                 {"landing_input_submitted": True}
             ),

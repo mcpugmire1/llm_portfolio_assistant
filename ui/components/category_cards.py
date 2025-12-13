@@ -138,21 +138,83 @@ def render_category_cards():
     }
 
     /* ========================================
-       MOBILE: CARD HEIGHTS ONLY
-       Layout/spacing handled by mobile_overrides.py
+       MOBILE: COMPACT CARDS
        ======================================== */
     @media (max-width: 767px) {
-        /* Purple gradient cards - auto height */
-        div[style*="background: var(--gradient-purple-hero)"][style*="height: 380px"],
-        div[style*="background: var(--gradient-purple-hero)"][style*="height:380px"] {
+        /* Purple gradient cards - compact */
+        div[style*="background: var(--gradient-purple-hero)"] {
             height: auto !important;
-            min-height: 280px !important;
+            min-height: 0 !important;
+            padding: 20px !important;
+        }
+        div[style*="background: var(--gradient-purple-hero)"] > div:first-child {
+            font-size: 32px !important;
+            margin-bottom: 10px !important;
+        }
+        div[style*="background: var(--gradient-purple-hero)"] h3 {
+            font-size: 18px !important;
+            margin-bottom: 6px !important;
+        }
+        div[style*="background: var(--gradient-purple-hero)"] > div[style*="font-size: 16px"] {
+            font-size: 14px !important;
+            margin-bottom: 10px !important;
+        }
+        div[style*="background: var(--gradient-purple-hero)"] > div[style*="line-height: 1.5"] {
+            font-size: 13px !important;
+            margin-bottom: 10px !important;
+        }
+        div[style*="background: var(--gradient-purple-hero)"] > div[style*="flex-wrap: wrap"] {
+            margin-bottom: 12px !important;
+        }
+        div[style*="background: var(--gradient-purple-hero)"] span[style*="border-radius: 12px"] {
+            font-size: 10px !important;
+            padding: 3px 8px !important;
+        }
+        .card-btn-gradient {
+            padding: 10px 18px !important;
+            font-size: 13px !important;
         }
 
-        /* Capability cards - auto height */
+        /* Capability cards - compact */
         .capability-card {
             height: auto !important;
-            min-height: 260px !important;
+            min-height: 0 !important;
+            padding: 16px !important;
+        }
+        .capability-card h3 {
+            font-size: 16px !important;
+            margin-bottom: 8px !important;
+        }
+        .capability-card .description {
+            font-size: 13px !important;
+            margin-bottom: 10px !important;
+        }
+        .capability-card .hints {
+            font-size: 12px !important;
+            margin-bottom: 10px !important;
+        }
+        .capability-card .highlight {
+            font-size: 13px !important;
+            margin-bottom: 8px !important;
+        }
+        .card-btn-outline {
+            padding: 6px 12px !important;
+            font-size: 12px !important;
+        }
+
+        /* Fix Streamlit column heights */
+        .stColumn {
+            width: 100% !important;
+        }
+        .stColumn .stVerticalBlock {
+            height: auto !important;
+        }
+        .stHorizontalBlock {
+            flex-wrap: wrap !important;
+            gap: 0 !important;
+        }
+        .card-mobile-spacing {
+            margin-bottom: 12px !important;
         }
     }
     </style>

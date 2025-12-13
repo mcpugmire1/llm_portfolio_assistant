@@ -552,6 +552,8 @@ def render_explore_stories(
     - Pill X buttons work correctly
     - Clear all resets everything properly
     """
+    # Note: Mobile CSS is injected globally via navbar.py
+
     # Hero header with Agy avatar (gray headphones)
     st.markdown(
         """
@@ -560,7 +562,7 @@ def render_explore_stories(
         <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_explore_stories.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
         <div class="conversation-header-text">
             <h1>Project Stories & Insights</h1>
-            <p>Browse 115+ transformation case studies, or ask Agy 🐾 for the deeper context</p>
+            <p>Browse 130+ transformation case studies, or ask Agy 🐾 for the deeper context</p>
         </div>
     </div>
 </div>
@@ -574,6 +576,8 @@ def render_explore_stories(
     .conversation-header {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         padding: 2rem;
+        min-height: 184px;
+        box-sizing: border-box;
         border-radius: 0;
         margin: -2rem 0 0 0;
     }
@@ -1113,50 +1117,82 @@ def render_explore_stories(
         }
 
         /* =============================================
-           MOBILE FILTER SECTION - TIGHTENED
+           MOBILE FILTER SECTION - COMPACT 3-ROW LAYOUT
            ============================================= */
 
-        /* Filter container - tighter padding */
-        .main [data-testid="stContainer"] {
-            padding: 12px !important;
+        /* KILL Streamlit's massive container padding on mobile */
+        div[data-testid="stMainBlockContainer"] {
+            padding: 1rem 1rem 2rem 1rem !important;
         }
 
-        /* Reduce all vertical gaps in filter section */
+        /* Filter container - tight padding */
+        .main [data-testid="stContainer"] {
+            padding: 8px 12px !important;
+        }
+
+        /* Kill ALL vertical gaps */
+        .main [data-testid="stContainer"] [data-testid="stVerticalBlock"] {
+            gap: 4px !important;
+        }
         .main [data-testid="stContainer"] [data-testid="stVerticalBlock"] > div {
+            margin-bottom: 0 !important;
+        }
+        .main [data-testid="stContainer"] [data-testid="stLayoutWrapper"] {
             margin-bottom: 4px !important;
         }
 
-        /* Form internal spacing - minimal */
-        .main [data-testid="stForm"] [data-testid="stVerticalBlock"] > div {
-            margin-bottom: 2px !important;
+        /* HIDE search button */
+        .stFormSubmitButton {
+            display: none !important;
         }
-
-        /* Search form submit button - compact, full width OK on mobile */
-        .main [data-testid="stFormSubmitButton"] button {
-            padding: 8px 16px !important;
-            min-height: 40px !important;
-        }
-
-        /* Hide the spacer div we added for desktop alignment */
-        .main [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:last-child > div[style*="height: 23px"] {
+        .main [data-testid="stForm"] div[style*="height: 23px"] {
             display: none !important;
         }
 
-        /* Labels - smaller */
-        label[data-testid="stWidgetLabel"] {
-            margin-bottom: 2px !important;
-            font-size: 12px !important;
+        /* HIDE labels - placeholders are enough */
+        .main [data-testid="stContainer"] label[data-testid="stWidgetLabel"] {
+            display: none !important;
         }
 
-        /* Inputs - slightly smaller */
+        /* NUCLEAR: Override Streamlit's column width calculations */
+        .main [data-testid="stContainer"] [data-testid="stHorizontalBlock"] {
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: nowrap !important;
+            gap: 8px !important;
+        }
+
+        /* NUCLEAR: Force all columns to flex equally */
+        .main [data-testid="stContainer"] [data-testid="stColumn"] {
+            flex: 1 1 0% !important;
+            min-width: 0 !important;
+            width: auto !important;
+            max-width: none !important;
+        }
+
+        /* But search form column should be full width (it's alone) */
+        .main [data-testid="stContainer"] [data-testid="stColumn"]:has(.stForm) {
+            flex: 1 1 100% !important;
+        }
+
+        /* Compact inputs */
         .main .stTextInput > div > div > input {
-            padding: 10px 12px !important;
+            padding: 8px 12px !important;
             font-size: 14px !important;
         }
 
+        /* Compact dropdowns */
         .main .stSelectbox > div > div {
-            padding: 8px 10px !important;
-            font-size: 14px !important;
+            padding: 6px 8px !important;
+            font-size: 13px !important;
+            min-height: 36px !important;
+        }
+
+        /* Compact buttons */
+        .main [data-testid="stContainer"] .stButton button {
+            padding: 6px 10px !important;
+            font-size: 12px !important;
+            min-height: 32px !important;
         }
 
         /* =============================================
@@ -1259,6 +1295,7 @@ def render_explore_stories(
 
         .conversation-header {
             padding: 20px 16px !important;
+            margin: 0 !important;  /* Reset the -2rem negative margin */
         }
 
         .conversation-header-content {
@@ -1848,18 +1885,13 @@ def render_explore_stories(
                         if (!btnId || !btnId.startsWith('btn-story-')) return;
 
                         var storyId = btnId.replace('btn-story-', '');
-                        console.log('[Story Cards] Clicked story:', storyId);
 
                         // Replace pipe with hyphen to match Streamlit's class naming
                         var normalizedId = storyId.replace(/\\|/g, '-');
-                        console.log('[Story Cards] Normalized ID:', normalizedId);
 
                         var stBtn = parentDoc.querySelector('[class*="st-key-card_btn_' + normalizedId + '"] button');
                         if (stBtn) {
-                            console.log('[Story Cards] Triggering Streamlit button');
                             stBtn.click();
-                        } else {
-                            console.warn('[Story Cards] Streamlit button not found for:', normalizedId);
                         }
                     });
                 })();

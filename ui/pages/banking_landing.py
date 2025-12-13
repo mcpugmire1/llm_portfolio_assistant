@@ -18,6 +18,19 @@ def render_banking_landing():
     Streamlit limitation that cannot be overridden without converting to multipage app.
     """
 
+    # Scroll to top on page load
+    components.html(
+        """
+        <script>
+            setTimeout(function() {
+                const main = window.parent.document.querySelector('[data-testid="stMain"]');
+                if (main) main.scrollTop = 0;
+            }, 100);
+        </script>
+        """,
+        height=0,
+    )
+
     # Hero header with Agy avatar (deep blue headphones - authority, trust)
     st.markdown(
         """
@@ -142,8 +155,10 @@ def render_banking_landing():
     .conversation-header {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         padding: 2rem;
+        min-height: 184px;
+        box-sizing: border-box;
         border-radius: 0;
-        margin: -2rem 0 0 0;
+        margin: -3rem 0 0 0;
     }
 
     .conversation-header-content {
@@ -228,24 +243,128 @@ def render_banking_landing():
         text-transform: uppercase;
         letter-spacing: 0.5px;
     }
-    @media (max-width: 768px) {
-        .stats-bar {
-            grid-template-columns: repeat(2, 1fr);
+    /* === MOBILE RESPONSIVE === */
+    @media (max-width: 767px) {
+        /* Header - compact and stacked */
+        .conversation-header {
+            padding: 16px !important;
+            min-height: auto !important;
+            margin: -56px 0 0 0 !important;
         }
-        .stat:nth-child(2) {
-            border-right: none;
+        .conversation-header-content {
+            flex-direction: column !important;
+            align-items: center !important;
+            text-align: center !important;
+            gap: 12px !important;
         }
-    }
-    @media (max-width: 480px) {
+        .conversation-agy-avatar {
+            width: 56px !important;
+            height: 56px !important;
+            border: 2px solid white !important;
+        }
+        .conversation-header-text h1 {
+            font-size: 1.25rem !important;
+            line-height: 1.2 !important;
+        }
+        .conversation-header-text p {
+            font-size: 0.85rem !important;
+            line-height: 1.4 !important;
+        }
+        /* Stats - 3 across, compact */
         .stats-bar {
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(3, 1fr) !important;
+            padding: 8px 0 !important;
+            margin-bottom: 12px !important;
         }
         .stat {
-            border-right: none;
-            border-bottom: 1px solid var(--border-color);
+            padding: 6px 2px !important;
         }
-        .stat:last-child {
-            border-bottom: none;
+        .stat-number {
+            font-size: 20px !important;
+            margin-bottom: 4px !important;
+        }
+        .stat-label {
+            font-size: 9px !important;
+            letter-spacing: 0 !important;
+        }
+        /* Section headers */
+        .section-header {
+            font-size: 16px !important;
+            margin-top: 12px !important;
+            margin-bottom: 8px !important;
+        }
+        .subtitle {
+            font-size: 12px !important;
+            margin-bottom: 12px !important;
+        }
+        /* Client pills - horizontal scroll */
+        .client-pills {
+            flex-wrap: nowrap !important;
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch !important;
+            gap: 6px !important;
+            margin-bottom: 16px !important;
+            padding-bottom: 4px !important;
+        }
+        .client-pill {
+            flex-shrink: 0 !important;
+            padding: 6px 10px !important;
+            font-size: 11px !important;
+        }
+        /* Cards - force compact height */
+        .capability-card {
+            padding: 14px !important;
+            margin-bottom: 10px !important;
+            height: auto !important;
+            min-height: 0 !important;
+        }
+        /* Fix Streamlit column equal-height behavior on mobile */
+        .stColumn {
+            width: 100% !important;
+            flex: none !important;
+        }
+        .stColumn .stVerticalBlock {
+            height: auto !important;
+        }
+        .stHorizontalBlock {
+            flex-wrap: wrap !important;
+            gap: 0 !important;
+        }
+        .stHorizontalBlock > .stColumn {
+            min-height: 0 !important;
+        }
+        .card-icon {
+            font-size: 22px !important;
+            margin-bottom: 6px !important;
+        }
+        .card-title {
+            font-size: 14px !important;
+        }
+        .card-count {
+            font-size: 11px !important;
+        }
+        .card-desc {
+            font-size: 11px !important;
+            margin-bottom: 8px !important;
+        }
+        .card-btn-outline {
+            padding: 6px 12px !important;
+            font-size: 11px !important;
+        }
+        /* CTA */
+        .cta-section {
+            padding: 20px 14px !important;
+            margin: 16px 0 !important;
+        }
+        .cta-heading {
+            font-size: 18px !important;
+        }
+        .cta-subtext {
+            font-size: 13px !important;
+        }
+        .card-btn-primary {
+            padding: 10px 20px !important;
+            font-size: 13px !important;
         }
     }
     /* Client pills (theme-aware) */

@@ -118,8 +118,8 @@ def render_conversation_view(stories: list[dict]):
     # Modal (if open)
     if st.session_state.get("show_how_modal", False):
         st.markdown(render_modal_wrapper_start(), unsafe_allow_html=True)
-        components.html(get_how_agy_flow_html(), height=1100)
-        components.html(get_technical_details_html(), height=580)
+        components.html(get_how_agy_flow_html(), height=1160)
+        components.html(get_technical_details_html(), height=670)
         st.markdown(render_modal_wrapper_end(), unsafe_allow_html=True)
         # Remove: render_modal_close_wiring_js()
 
@@ -282,9 +282,7 @@ def render_conversation_view(stories: list[dict]):
 
     user_input_local = None
     if st.session_state.get("active_tab") == "Ask MattGPT":
-        user_input_local = st.chat_input(
-            "💬 Ask a follow-up question...", key="ask_chat_input1"
-        )
+        user_input_local = st.chat_input("Ask a follow-up...", key="ask_chat_input1")
 
         # Add "Powered by" text below input
         st.markdown(

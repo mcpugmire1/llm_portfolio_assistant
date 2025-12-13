@@ -27,7 +27,9 @@ def render_about_matt():
 /* Header - matches other pages */
 .about-header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 30px 40px;
+    padding: 32px;
+    min-height: 184px;
+    box-sizing: border-box;
     margin-top: -60px !important;
     margin-bottom: 0 !important;
     color: white;
@@ -40,6 +42,8 @@ def render_about_matt():
     display: flex;
     align-items: center;
     gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .about-header-text h1 {
@@ -542,6 +546,270 @@ def render_about_matt():
 [data-theme="dark"] .secret-sauce-badge {
     background: rgba(139, 92, 246, 0.2);
     color: #a78bfa;
+}
+
+/* ============================================================================
+   MOBILE RESPONSIVE STYLES (<768px)
+   ============================================================================ */
+@media (max-width: 767px) {
+    /* Header */
+    .about-header {
+        padding: 16px !important;
+        min-height: auto !important;
+        margin-top: -40px !important;
+    }
+
+    .about-header-content {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 12px !important;
+    }
+
+    .about-header-content img {
+        width: 80px !important;
+        height: 80px !important;
+    }
+
+    .about-header-text h1 {
+        font-size: 22px !important;
+    }
+
+    .about-header-text p {
+        font-size: 12px !important;
+    }
+
+    /* Stats bar */
+    .stats-bar {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+        margin: 16px 0 !important;
+        padding: 0 8px !important;
+    }
+
+    .stat-card {
+        padding: 16px 12px !important;
+    }
+
+    .stat-number {
+        font-size: 24px !important;
+        margin-bottom: 4px !important;
+    }
+
+    .stat-label {
+        font-size: 11px !important;
+    }
+
+    /* Section titles */
+    .section-title {
+        font-size: 20px !important;
+        margin: 32px 0 8px 0 !important;
+    }
+
+    .section-subtitle {
+        font-size: 13px !important;
+        margin-bottom: 20px !important;
+    }
+
+    /* Timeline */
+    .timeline {
+        padding-left: 24px !important;
+    }
+
+    .timeline::before {
+        width: 3px !important;
+    }
+
+    .timeline-item {
+        padding-left: 20px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .timeline-item::before {
+        left: -34px !important;
+        width: 16px !important;
+        height: 16px !important;
+        border-width: 3px !important;
+    }
+
+    .timeline-year {
+        font-size: 12px !important;
+    }
+
+    .timeline-title {
+        font-size: 14px !important;
+    }
+
+    .timeline-company {
+        font-size: 12px !important;
+    }
+
+    .timeline-desc {
+        font-size: 12px !important;
+    }
+
+    /* Deep-dive section */
+    .deep-dive-section {
+        padding: 24px 12px !important;
+        margin: 24px -1rem 0 -1rem !important;
+    }
+
+    .deep-dive-card {
+        padding: 16px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .deep-dive-card h3 {
+        font-size: 16px !important;
+    }
+
+    .deep-dive-card p {
+        font-size: 12px !important;
+    }
+
+    /* Tech grid */
+    .tech-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+    }
+
+    .tech-item {
+        padding: 10px 8px !important;
+        font-size: 11px !important;
+    }
+
+    /* Flow grid */
+    .flow-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 16px !important;
+    }
+
+    .flow-step {
+        padding: 12px 8px !important;
+    }
+
+    .flow-step:not(:last-child)::after {
+        display: none !important;
+    }
+
+    .flow-num {
+        width: 22px !important;
+        height: 22px !important;
+        font-size: 10px !important;
+    }
+
+    .flow-step-title {
+        font-size: 11px !important;
+    }
+
+    .flow-step-desc {
+        font-size: 9px !important;
+    }
+
+    /* Code block */
+    .code-block {
+        padding: 12px !important;
+        font-size: 9px !important;
+    }
+
+    /* Details grid */
+    .details-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    .detail-card {
+        padding: 14px !important;
+    }
+
+    .detail-card h4 {
+        font-size: 14px !important;
+    }
+
+    .detail-card ul {
+        font-size: 11px !important;
+    }
+
+    /* CTA card */
+    .cta-card {
+        padding: 20px 16px !important;
+    }
+
+    .cta-card h3 {
+        font-size: 18px !important;
+    }
+
+    .cta-card p,
+    .cta-card ul {
+        font-size: 12px !important;
+    }
+
+    /* Competencies grid */
+    .competencies-grid {
+        gap: 12px !important;
+        padding: 0 8px !important;
+    }
+
+    .competency-card {
+        padding: 16px !important;
+    }
+
+    .competency-card h4 {
+        font-size: 14px !important;
+        margin: 8px 0 10px 0 !important;
+    }
+
+    .competency-card div {
+        font-size: 24px !important;
+    }
+
+    .competency-card li {
+        font-size: 11px !important;
+        padding: 4px 0 !important;
+    }
+
+    /* Philosophy grid */
+    .philosophy-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    .philosophy-card {
+        padding: 20px !important;
+    }
+
+    .philosophy-card h3 {
+        font-size: 16px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .philosophy-card p {
+        font-size: 12px !important;
+        line-height: 1.5 !important;
+    }
+
+    /* Contact section */
+    .contact-section {
+        padding: 32px 16px !important;
+        margin: 32px -1rem 0 -1rem !important;
+    }
+
+    .contact-section h2 {
+        font-size: 20px !important;
+    }
+
+    .contact-section p {
+        font-size: 13px !important;
+    }
+
+    .contact-buttons {
+        gap: 10px !important;
+        margin-top: 20px !important;
+    }
+
+    .contact-btn {
+        padding: 10px 16px !important;
+        font-size: 12px !important;
+    }
 }
 </style>
         """,

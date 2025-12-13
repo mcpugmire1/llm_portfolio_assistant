@@ -54,7 +54,9 @@ def get_header_css() -> str:
     .ask-header-landing,
     .ask-header-conversation {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 30px;
+        padding: 32px;
+        min-height: 184px;
+        box-sizing: border-box;
         color: white;
         display: flex;
         justify-content: space-between;
@@ -63,7 +65,7 @@ def get_header_css() -> str:
 
     /* Landing page header */
     .ask-header-landing {
-        margin-top: -65px !important;
+        margin-top: -80px !important;
         margin-bottom: 0 !important;
     }
 
@@ -77,14 +79,27 @@ def get_header_css() -> str:
     .header-content {
         display: flex;
         align-items: center;
+        justify-content: space-between;
         gap: 24px;
         width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
     }
 
     /* Dark mode halo effect for header avatar */
     [data-theme="dark"] .header-agy-avatar,
     body.dark-theme .header-agy-avatar {
         filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+    }
+
+    /* Header avatar - matches other pages */
+    .header-agy-avatar {
+        flex-shrink: 0;
+        width: 120px !important;
+        height: 120px !important;
+        border-radius: 50% !important;
+        border: 4px solid white !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
     }
 
     /* Header text */
@@ -100,6 +115,53 @@ def get_header_css() -> str:
         margin: 0;
         opacity: 0.95;
         color: white;
+    }
+
+    /* ============================================================================
+       MOBILE RESPONSIVE (<768px)
+       ============================================================================ */
+    @media (max-width: 767px) {
+        .ask-header-landing,
+        .ask-header-conversation {
+            padding: 16px 16px 40px 16px !important;
+            min-height: auto !important;
+            margin-top: -56px !important;
+            overflow: visible !important;
+        }
+
+        .header-content {
+            flex-direction: column !important;
+            align-items: center !important;
+            text-align: center !important;
+            gap: 10px !important;
+        }
+
+        .header-agy-avatar {
+            width: 64px !important;
+            height: 64px !important;
+            border: 3px solid white !important;
+        }
+
+        .header-text {
+            order: 2;
+        }
+
+        .header-text h1 {
+            font-size: 20px !important;
+            margin-bottom: 4px !important;
+        }
+
+        .header-text p {
+            font-size: 13px !important;
+            line-height: 1.4 !important;
+        }
+
+        .how-agy-btn {
+            order: 3;
+            padding: 8px 14px !important;
+            font-size: 12px !important;
+            margin-bottom: 4px !important;
+        }
     }
 
     /* ============================================================================
@@ -468,8 +530,6 @@ def render_header(include_button: bool = True, view: str = "landing") -> None:
                 <div style="display: flex; align-items: center; gap: 24px;">
                     <img class="header-agy-avatar"
                         src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png"
-                        width="64" height="64"
-                        style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;"
                         alt="Agy"/>
                     <div class="header-text">
                         <h1>Ask MattGPT</h1>
@@ -508,11 +568,9 @@ def render_button_wiring_js() -> None:
                     htmlBtn.addEventListener('click', function(e) {
                         e.preventDefault();
                         e.stopPropagation();
-                        console.log('[How Agy Button] Clicked');
                         stBtn.click();
                     });
 
-                    console.log('[How Agy Button] Wired successfully');
                     return true;
                 }
                 return false;
@@ -569,11 +627,9 @@ def render_modal_close_wiring_js() -> None:
                     closeBtn.addEventListener('click', function(e) {
                         e.preventDefault();
                         e.stopPropagation();
-                        console.log('[Modal Close] Clicked');
                         stBtn.click();
                     });
 
-                    console.log('[Modal Close] Wired successfully');
                     return true;
                 }
                 return false;
@@ -670,6 +726,133 @@ def get_how_agy_flow_html() -> str:
                 --modal-pill-text: #c4b5fd;
                 --modal-pill-border: #5b4b7a;
                 --modal-arrow: #a78bfa;
+            }
+
+            /* ============================================
+               MOBILE RESPONSIVE (<768px)
+               ============================================ */
+            @media (max-width: 767px) {
+                #flow-wrapper {
+                    padding: 12px !important;
+                    padding-bottom: 16px !important;
+                    margin-bottom: 8px !important;
+                    border-radius: 10px !important;
+                }
+
+                .step-section {
+                    margin-bottom: 16px !important;
+                }
+
+                .step-header {
+                    gap: 8px !important;
+                    margin-bottom: 8px !important;
+                }
+
+                .step-number {
+                    width: 28px !important;
+                    height: 28px !important;
+                    font-size: 14px !important;
+                    box-shadow: 0 3px 8px rgba(139, 92, 246, 0.3) !important;
+                }
+
+                .step-title {
+                    font-size: 14px !important;
+                }
+
+                .step-content {
+                    margin-left: 36px !important;
+                }
+
+                .query-card {
+                    padding: 10px !important;
+                    border-radius: 6px !important;
+                }
+
+                .query-text {
+                    font-size: 12px !important;
+                    line-height: 1.4 !important;
+                }
+
+                .arrow {
+                    font-size: 20px !important;
+                    margin: 8px 0 !important;
+                }
+
+                .pipeline-flow {
+                    gap: 3px !important;
+                    margin-bottom: 10px !important;
+                    padding: 8px !important;
+                }
+
+                .pipeline-stage {
+                    padding: 4px 8px !important;
+                    font-size: 9px !important;
+                    border-radius: 12px !important;
+                }
+
+                .pipeline-arrow {
+                    font-size: 10px !important;
+                }
+
+                .search-cards {
+                    flex-direction: column !important;
+                    gap: 6px !important;
+                    margin-bottom: 6px !important;
+                }
+
+                .search-card {
+                    padding: 10px !important;
+                    border-radius: 6px !important;
+                }
+
+                .card-title {
+                    font-size: 12px !important;
+                    margin-bottom: 3px !important;
+                }
+
+                .card-desc {
+                    font-size: 10px !important;
+                    line-height: 1.3 !important;
+                }
+
+                /* Result section - Step 3 */
+                .result-wrapper {
+                    padding: 12px !important;
+                    border-radius: 8px !important;
+                    border-width: 2px !important;
+                }
+
+                .result-card {
+                    padding: 12px !important;
+                    border-radius: 8px !important;
+                    margin-bottom: 10px !important;
+                }
+
+                .result-title {
+                    font-size: 13px !important;
+                    margin-bottom: 4px !important;
+                }
+
+                .result-desc {
+                    font-size: 11px !important;
+                    line-height: 1.4 !important;
+                }
+
+                .pills {
+                    gap: 6px !important;
+                }
+
+                .pill {
+                    padding: 4px 10px !important;
+                    font-size: 10px !important;
+                    border-radius: 12px !important;
+                }
+
+                .confidence-badge {
+                    padding: 4px 10px !important;
+                    font-size: 10px !important;
+                    margin-top: 8px !important;
+                }
             }
 
             #flow-wrapper {
@@ -943,9 +1126,25 @@ def get_how_agy_flow_html() -> str:
                 background: #064e3b;
                 color: #6ee7b7;
             }
+
+            .flow-title {
+                font-size: 24px;
+                font-weight: 700;
+                color: var(--modal-text-primary);
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+            @media (max-width: 767px) {
+                .flow-title {
+                    font-size: 16px !important;
+                    margin-bottom: 12px !important;
+                }
+            }
         </style>
 
         <div id="flow-wrapper">
+            <h2 class="flow-title">How Agy Searches</h2>
             <!-- Step 1: You Ask -->
             <div class="step-section">
                 <div class="step-header">
@@ -1301,6 +1500,88 @@ def get_technical_details_html() -> str:
                 width: 1px;
                 height: 36px;
                 background: var(--modal-divider);
+            }
+
+            /* ============================================
+               MOBILE RESPONSIVE (<768px)
+               ============================================ */
+            @media (max-width: 767px) {
+                .tech-header {
+                    margin-bottom: 12px !important;
+                }
+
+                .tech-header h3 {
+                    font-size: 16px !important;
+                }
+
+                .tech-content {
+                    padding: 12px !important;
+                    border-radius: 10px !important;
+                }
+
+                .pipeline-flow {
+                    padding: 10px 12px !important;
+                    gap: 4px !important;
+                    margin-bottom: 12px !important;
+                }
+
+                .pipeline-stage {
+                    padding: 5px 8px !important;
+                    font-size: 9px !important;
+                    border-radius: 12px !important;
+                }
+
+                .pipeline-arrow {
+                    font-size: 12px !important;
+                }
+
+                .tech-cards {
+                    flex-direction: column !important;
+                    gap: 8px !important;
+                    margin-bottom: 8px !important;
+                }
+
+                .tech-card {
+                    padding: 10px !important;
+                    border-radius: 8px !important;
+                }
+
+                .tech-card-header {
+                    gap: 6px !important;
+                    margin-bottom: 6px !important;
+                }
+
+                .tech-card-header span {
+                    font-size: 16px !important;
+                }
+
+                .tech-card-header h4 {
+                    font-size: 12px !important;
+                }
+
+                .tech-card ul {
+                    font-size: 10px !important;
+                    line-height: 1.4 !important;
+                    padding-left: 14px !important;
+                }
+
+                .stats-bar {
+                    padding: 10px 12px !important;
+                    gap: 4px !important;
+                    flex-wrap: wrap !important;
+                }
+
+                .stat-value {
+                    font-size: 16px !important;
+                }
+
+                .stat-label {
+                    font-size: 9px !important;
+                }
+
+                .stat-divider {
+                    height: 24px !important;
+                }
             }
         </style>
 
