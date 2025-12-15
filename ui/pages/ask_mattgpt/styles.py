@@ -671,56 +671,19 @@ def get_landing_css() -> str:
                 margin-top: 0 !important;
             }
 
-            /* Input container - tighter margins */
+            /* Landing input area - stacked on mobile, styled nicely */
             .landing-input-container {
-                margin: 8px auto 0 !important;
+                margin: 12px auto 0 !important;
                 padding: 0 16px !important;
             }
 
-            [data-testid="stHorizontalBlock"]:has(.st-key-landing_input) {
-                margin: 8px auto 0 !important;
-                padding: 0 16px !important;
-            }
-
-            /* FORCE input + button to stay on same line */
-            /* Target the HorizontalBlock as flex row */
-            [data-testid="stHorizontalBlock"]:has(.st-key-landing_input) {
-                display: flex !important;
-                flex-direction: row !important;
-                flex-wrap: nowrap !important;
-                gap: 8px !important;
-                align-items: center !important;
-            }
-
-            /* Make columns flex properly */
-            [data-testid="stHorizontalBlock"]:has(.st-key-landing_input) > .stColumn {
-                display: block !important;
-                width: auto !important;
-                flex: unset !important;
-            }
-
-            /* Input column - fill remaining space */
-            .stColumn:has(.st-key-landing_input) {
-                flex: 1 1 0% !important;
-                min-width: 0 !important;
-            }
-
-            /* Button column - shrink to content */
+            /* Center the button when stacked */
             .stColumn:has(.st-key-landing_ask) {
-                flex: 0 0 auto !important;
+                display: flex !important;
+                justify-content: center !important;
             }
 
-            /* Make stTextInput inline */
-            .st-key-landing_input .stTextInput,
-            [data-testid="stTextInput"]:has(#text_input_1) {
-                display: block !important;
-                width: 100% !important;
-            }
-
-            /* Make stButton inline */
-            .st-key-landing_ask .stButton,
-            .stColumn:has(.st-key-landing_ask) .stButton {
-                display: inline-flex !important;
+            .st-key-landing_ask .stButton {
                 width: auto !important;
             }
 
@@ -802,11 +765,31 @@ def get_landing_css() -> str:
 
             /* Footer CTA section */
             .footer-cta {
-                padding: 24px 16px !important;
+                padding: 20px 16px !important;
             }
 
             .footer-cta h2 {
-                font-size: 22px !important;
+                font-size: 20px !important;
+                margin-bottom: 8px !important;
+            }
+
+            .footer-cta p {
+                font-size: 13px !important;
+                line-height: 1.4 !important;
+                margin-bottom: 12px !important;
+            }
+
+            .footer-cta .footer-buttons,
+            .footer-cta [data-testid="stHorizontalBlock"] {
+                gap: 8px !important;
+                flex-wrap: wrap !important;
+                justify-content: center !important;
+            }
+
+            .footer-cta button,
+            .footer-cta a {
+                font-size: 12px !important;
+                padding: 8px 12px !important;
             }
         }
 
@@ -962,17 +945,103 @@ def get_conversation_css() -> str:
         [data-testid="stChatMessage"]:not(:has([data-testid="chatAvatarIcon-user"])) {
             background: var(--chat-ai-bg) !important;
             border-radius: 16px !important;
-            padding: 24px !important;
+            padding: 20px !important;
             border-left: 4px solid var(--chat-ai-border) !important;
             color: var(--text-primary) !important;
+            align-items: flex-start !important;
+            margin-left: 0 !important;
         }
 
       /* Chat messages - User */
         [data-testid="stChatMessage"]:has([aria-label="Chat message from user"]) {
             background: var(--chat-user-bg) !important;
             border-radius: 8px !important;
-            padding: 16px !important;
+            padding: 20px !important;
             color: var(--text-primary) !important;
+            align-items: flex-start !important;
+            margin-left: 0 !important;
+        }
+
+        /* Message content - force top alignment */
+        [data-testid="stChatMessage"] [data-testid="stMarkdownContainer"] {
+            align-self: flex-start !important;
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+
+        /* Message content wrapper - consistent vertical start */
+        [data-testid="stChatMessage"] [data-testid="stChatMessageContent"] {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+        }
+
+        /* First paragraph in message - no top margin */
+        [data-testid="stChatMessage"] [data-testid="stMarkdownContainer"] p:first-child {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+
+        /* All chat messages - force top alignment and consistent left position */
+        [data-testid="stChatMessage"],
+        .stChatMessage,
+        .st-emotion-cache-1fee4w7,
+        .st-emotion-cache-1iitq1e,
+        .e1ypd8m70 {
+            align-items: flex-start !important;
+            display: flex !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            gap: 16px !important;
+        }
+
+        /* Layout wrapper around chat messages - no extra margin */
+        [data-testid="stLayoutWrapper"]:has(.stChatMessage),
+        .st-emotion-cache-18kf3ut:has(.stChatMessage) {
+            margin-left: 0 !important;
+            padding-left: 0 !important;
+        }
+
+        /* Force image to be exactly 60x60 with no extra space */
+        [data-testid="stChatMessage"] > img {
+            width: 60px !important;
+            height: 60px !important;
+            flex: 0 0 60px !important;
+            max-width: 60px !important;
+            max-height: 60px !important;
+        }
+
+        /* Message content wrapper - don't stretch to 100% height */
+        [data-testid="stChatMessage"] [data-testid="stChatMessageContent"],
+        .st-emotion-cache-1flajlm,
+        .e1ypd8m71 {
+            align-self: flex-start !important;
+            height: auto !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        /* Vertical block inside message - kill the 100% height */
+        [data-testid="stChatMessage"] [data-testid="stVerticalBlock"],
+        .st-emotion-cache-wfksaw {
+            height: auto !important;
+            align-items: flex-start !important;
+        }
+
+        /* Fix avatar container spacing - target all possible wrappers */
+        [data-testid="stChatMessage"] > div:first-child,
+        [data-testid="stChatMessage"] > *:first-child {
+            display: flex !important;
+            align-items: flex-start !important;
+            line-height: 0 !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            flex-shrink: 0 !important;
+        }
+
+        /* Image wrapper container fix */
+        [data-testid="stChatMessage"] img {
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
         }
 
        /* =============================================
@@ -995,10 +1064,12 @@ def get_conversation_css() -> str:
             box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3) !important;
         }
 
-        /* Agy avatar - img element */
+        /* Agy and User avatars - img element with exact Streamlit classes */
         .stChatMessage > img.st-emotion-cache-p4micv,
         .stChatMessage > img.e1ypd8m74,
-        .stChatMessage > img[alt="assistant avatar"] {
+        .stChatMessage > img[alt="assistant avatar"],
+        .stChatMessage > img[alt="user avatar"],
+        [data-testid="stChatMessage"] > img {
             width: 60px !important;
             height: 60px !important;
             min-width: 40px !important;
@@ -1008,7 +1079,14 @@ def get_conversation_css() -> str:
             border: 2px solid var(--accent-purple, #8B5CF6) !important;
             box-shadow: 0 2px 8px rgba(139, 92, 246, 0.2) !important;
             padding: 0 !important;
+            margin: 0 !important;
             object-fit: cover !important;
+            object-position: center top !important;
+            align-self: flex-start !important;
+            flex-shrink: 0 !important;
+            display: block !important;
+            line-height: 0 !important;
+            vertical-align: top !important;
         }
 
 
@@ -1372,6 +1450,7 @@ def get_conversation_css() -> str:
             .stChatMessage > img {
                 width: 36px !important;
                 height: 36px !important;
+                align-self: flex-start !important;
             }
 
             .stChatMessage {

@@ -148,9 +148,9 @@ def render_hero():
         <div class="hero-gradient-wrapper">
             <div class="hero-content">
                 <div style="display: flex; justify-content: center; margin-bottom: 32px;">
-                    <img src="https://raw.githubusercontent.com/mcpugmire1/mattgpt-design-spec/main/brand-kit/logos/MattGPT_Agy_Transparent.png"
-                         alt="MattGPT with Agy"
-                         style="max-width: 400px; width: 100%; height: auto; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));">
+                    <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/AgyMattCartoon-Transparent.png"
+                         alt="Matt and Agy"
+                         style="max-width: 280px; width: 100%; height: auto; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));">
                 </div>
                 <div style="font-size: 22px; margin-bottom: 12px; color: white; opacity: 0.95;">
                     <span>👋</span>

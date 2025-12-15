@@ -58,9 +58,6 @@ def get_header_css() -> str:
         min-height: 184px;
         box-sizing: border-box;
         color: white;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
     }
 
     /* Landing page header */
@@ -79,11 +76,10 @@ def get_header_css() -> str:
     .header-content {
         display: flex;
         align-items: center;
-        justify-content: space-between;
         gap: 24px;
         width: 100%;
         max-width: 1200px;
-        margin: 0 auto;
+        margin: 0;
     }
 
     /* Dark mode halo effect for header avatar */
@@ -123,9 +119,9 @@ def get_header_css() -> str:
     @media (max-width: 767px) {
         .ask-header-landing,
         .ask-header-conversation {
-            padding: 16px 16px 40px 16px !important;
+            padding: 20px 16px 40px 16px !important;
             min-height: auto !important;
-            margin-top: -56px !important;
+            margin-top: 0 !important;
             overflow: visible !important;
         }
 

@@ -33,9 +33,6 @@ def render_about_matt():
     margin-top: -60px !important;
     margin-bottom: 0 !important;
     color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .about-header-content {
@@ -43,7 +40,7 @@ def render_about_matt():
     align-items: center;
     gap: 24px;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0;
 }
 
 .about-header-text h1 {
@@ -554,9 +551,9 @@ def render_about_matt():
 @media (max-width: 767px) {
     /* Header */
     .about-header {
-        padding: 16px !important;
+        padding: 20px 16px !important;
         min-height: auto !important;
-        margin-top: -40px !important;
+        margin-top: 0 !important;
     }
 
     .about-header-content {
@@ -656,6 +653,13 @@ def render_about_matt():
     .deep-dive-card {
         padding: 16px !important;
         margin-bottom: 16px !important;
+        flex-direction: column !important;
+    }
+
+    .deep-dive-card img {
+        width: 120px !important;
+        margin: 0 auto 12px auto !important;
+        order: -1;
     }
 
     .deep-dive-card h3 {
@@ -823,10 +827,10 @@ def render_about_matt():
         """
 <div class="about-header">
     <div class="about-header-content">
-        <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png"
-             width="64" height="64"
-             style="width: 120px; height: 120px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.2);"
-             alt="Agy">
+        <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/MattCartoon-Transparent.png"
+             width="120" height="120"
+             style="width: 120px; height: 120px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.2); object-fit: cover; background: rgba(255,255,255,0.1);"
+             alt="Matt Pugmire">
         <div class="about-header-text">
             <h1>Matt Pugmire</h1>
             <p style="font-size: 17px; margin-bottom: 12px;">Digital Transformation Leader | Director of Technology Delivery</p>
@@ -964,20 +968,25 @@ def render_about_matt():
     # Agy story
     st.markdown(
         """
-<div class="deep-dive-card">
-    <h3 style="margin: 0 0 12px 0;">🐾 Why "Agy"?</h3>
-    <p style="line-height: 1.7; margin-bottom: 12px;">
-        When I started building this AI assistant, there was only one name that made sense: Agy, named in honor
-        of my Plott Hound who was my companion through 20+ years of transformation work.
-    </p>
-    <p style="line-height: 1.7; margin-bottom: 12px;">
-        Plott Hounds are bred for determination and tracking skills—they don't give up on a trail. Those same
-        traits define how this AI assistant works: determined to find the right insights, skilled at tracking down
-        relevant experience across 130+ projects.
-    </p>
-    <p style="font-style: italic; color: var(--text-muted, #7f8c8d);">
-        It felt right to keep his name part of the work we loved doing together.
-    </p>
+<div class="deep-dive-card" style="display: flex; gap: 24px; align-items: center;">
+    <div style="flex: 1;">
+        <h3 style="margin: 0 0 12px 0;">🐾 Why "Agy"?</h3>
+        <p style="line-height: 1.7; margin-bottom: 12px;">
+            When I started building this AI assistant, there was only one name that made sense: Agy, named in honor
+            of my Plott Hound who was my companion through 20+ years of transformation work.
+        </p>
+        <p style="line-height: 1.7; margin-bottom: 12px;">
+            Plott Hounds are bred for determination and tracking skills—they don't give up on a trail. Those same
+            traits define how this AI assistant works: determined to find the right insights, skilled at tracking down
+            relevant experience across 130+ projects.
+        </p>
+        <p style="font-style: italic; color: var(--text-muted, #7f8c8d);">
+            It felt right to keep his name part of the work we loved doing together.
+        </p>
+    </div>
+    <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/AgyMattCartoon-Transparent.png"
+         style="width: 160px; height: auto; flex-shrink: 0; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));"
+         alt="Matt and Agy">
 </div>
     """,
         unsafe_allow_html=True,

@@ -312,7 +312,7 @@ def get_mobile_css() -> str:
                 width: 44px !important;
             }
 
-            /* Replace text with icon */
+            /* Replace text with icon */cc
             button[data-testid="stChatInputSubmitButton"]::after {
                 content: "↑" !important;
                 font-size: 18px !important;
@@ -1323,7 +1323,7 @@ def get_mobile_css() -> str:
             .conversation-header {
                 padding: 20px 16px !important;
                 min-height: auto !important;
-                margin: -1rem 0 0 0 !important;
+                margin: 0 !important;
             }
 
             .conversation-header-content {

@@ -247,9 +247,9 @@ def render_banking_landing():
     @media (max-width: 767px) {
         /* Header - compact and stacked */
         .conversation-header {
-            padding: 16px !important;
+            padding: 20px 16px !important;
             min-height: auto !important;
-            margin: -56px 0 0 0 !important;
+            margin: 0 !important;
         }
         .conversation-header-content {
             flex-direction: column !important;
