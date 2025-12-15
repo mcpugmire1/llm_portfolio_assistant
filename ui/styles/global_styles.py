@@ -407,12 +407,12 @@ def apply_global_styles():
                 padding-right: 16px !important;
                 max-width: 100% !important;
             }
-            /* Columns stack - except nav */
-            div[data-testid="stHorizontalBlock"]:not(:has([class*="st-key-topnav_"])) {
+            /* Columns stack - except nav and results row */
+            div[data-testid="stHorizontalBlock"]:not(:has([class*="st-key-topnav_"])):not(:has([data-testid="stButtonGroup"])) {
                 flex-direction: column !important;
                 gap: 0 !important;
             }
-            div[data-testid="stHorizontalBlock"]:not(:has([class*="st-key-topnav_"])) > div[data-testid="stColumn"] {
+            div[data-testid="stHorizontalBlock"]:not(:has([class*="st-key-topnav_"])):not(:has([data-testid="stButtonGroup"])) > div[data-testid="stColumn"] {
                 width: 100% !important;
                 min-width: 100% !important;
                 flex: 1 1 100% !important;

@@ -1101,7 +1101,53 @@ def render_explore_stories(
         font-size: 11px;
         font-weight: 500;
     }
-    @media (max-width: 768px) {
+
+    /* =============================================================================
+       MOBILE RESPONSIVE - EXPLORE STORIES
+       Target: iPhone SE (375px) and up to 767px
+       ============================================================================= */
+    @media (max-width: 767px) {
+        /* -----------------------------------------
+           FILTER SECTION - Custom wrapper for mobile
+           ----------------------------------------- */
+
+        /* Filter row - force horizontal with wrap */
+        .explore-filter-section [data-testid="stHorizontalBlock"] {
+            flex-direction: row !important;
+            flex-wrap: wrap !important;
+            gap: 8px !important;
+        }
+
+        /* Search column - full width */
+        .explore-filter-section [data-testid="stHorizontalBlock"]:first-of-type > [data-testid="stColumn"]:first-child {
+            flex: 0 0 100% !important;
+            width: 100% !important;
+            min-width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 0 8px 0 !important;
+        }
+
+        /* Industry column - 50% */
+        .explore-filter-section [data-testid="stHorizontalBlock"]:first-of-type > [data-testid="stColumn"]:nth-child(2) {
+            flex: 0 0 calc(50% - 4px) !important;
+            width: calc(50% - 4px) !important;
+            min-width: calc(50% - 4px) !important;
+            max-width: calc(50% - 4px) !important;
+            margin: 0 !important;
+        }
+
+        /* Capability column - 50% */
+        .explore-filter-section [data-testid="stHorizontalBlock"]:first-of-type > [data-testid="stColumn"]:nth-child(3) {
+            flex: 0 0 calc(50% - 4px) !important;
+            width: calc(50% - 4px) !important;
+            min-width: calc(50% - 4px) !important;
+            max-width: calc(50% - 4px) !important;
+            margin: 0 !important;
+        }
+
+        /* -----------------------------------------
+           CARDS GRID - Single column
+           ----------------------------------------- */
         .story-cards-grid {
             grid-template-columns: 1fr !important;
         }
@@ -1116,186 +1162,12 @@ def render_explore_stories(
             overflow: hidden !important;
         }
 
-        /* =============================================
-           MOBILE FILTER SECTION - COMPACT 3-ROW LAYOUT
-           ============================================= */
-
-        /* KILL Streamlit's massive container padding on mobile */
-        div[data-testid="stMainBlockContainer"] {
-            padding: 1rem 1rem 2rem 1rem !important;
-        }
-
-        /* Filter container - tight padding */
-        .main [data-testid="stContainer"] {
-            padding: 8px 12px !important;
-        }
-
-        /* Kill ALL vertical gaps */
-        .main [data-testid="stContainer"] [data-testid="stVerticalBlock"] {
-            gap: 4px !important;
-        }
-        .main [data-testid="stContainer"] [data-testid="stVerticalBlock"] > div {
-            margin-bottom: 0 !important;
-        }
-        .main [data-testid="stContainer"] [data-testid="stLayoutWrapper"] {
-            margin-bottom: 4px !important;
-        }
-
-        /* HIDE search button */
-        .stFormSubmitButton {
-            display: none !important;
-        }
-        .main [data-testid="stForm"] div[style*="height: 23px"] {
-            display: none !important;
-        }
-
-        /* HIDE labels - placeholders are enough */
-        .main [data-testid="stContainer"] label[data-testid="stWidgetLabel"] {
-            display: none !important;
-        }
-
-        /* NUCLEAR: Override Streamlit's column width calculations */
-        .main [data-testid="stContainer"] [data-testid="stHorizontalBlock"] {
-            display: flex !important;
-            flex-direction: row !important;
-            flex-wrap: nowrap !important;
-            gap: 8px !important;
-        }
-
-        /* NUCLEAR: Force all columns to flex equally */
-        .main [data-testid="stContainer"] [data-testid="stColumn"] {
-            flex: 1 1 0% !important;
-            min-width: 0 !important;
-            width: auto !important;
-            max-width: none !important;
-        }
-
-        /* But search form column should be full width (it's alone) */
-        .main [data-testid="stContainer"] [data-testid="stColumn"]:has(.stForm) {
-            flex: 1 1 100% !important;
-        }
-
-        /* Compact inputs */
-        .main .stTextInput > div > div > input {
-            padding: 8px 12px !important;
-            font-size: 14px !important;
-        }
-
-        /* Compact dropdowns */
-        .main .stSelectbox > div > div {
-            padding: 6px 8px !important;
-            font-size: 13px !important;
-            min-height: 36px !important;
-        }
-
-        /* Compact buttons */
-        .main [data-testid="stContainer"] .stButton button {
-            padding: 6px 10px !important;
-            font-size: 12px !important;
-            min-height: 32px !important;
-        }
-
-        /* =============================================
-           MOBILE BUTTONS - COMPACT
-           ============================================= */
-
-        /* All buttons smaller */
-        .main .stButton > button {
-            padding: 6px 12px !important;
-            font-size: 13px !important;
-            min-height: 36px !important;
-        }
-
-        /* Advanced/Reset buttons - inline them */
-        [class*="st-key-btn_toggle_advanced"] button,
-        [class*="st-key-btn_reset_filters"] button {
-            padding: 6px 10px !important;
-            font-size: 11px !important;
-            min-height: 32px !important;
-        }
-
-        /* Smaller segmented control */
-        [data-testid="stSegmentedControl"] button {
-            padding: 6px 12px !important;
-            font-size: 12px !important;
-        }
-
-        /* =============================================
-           MOBILE RESULTS HEADER - COMPACT ROW
-           ============================================= */
-
-        /* Force results row to wrap nicely */
-        div[data-testid="stHorizontalBlock"]:has([data-testid="stSegmentedControl"]) {
-            flex-wrap: wrap !important;
-            gap: 8px !important;
-            align-items: center !important;
-        }
-
-        /* "Showing X of Y" - full width on its own row */
-        div[data-testid="stHorizontalBlock"]:has([data-testid="stSegmentedControl"]) > div:first-child {
-            flex: 1 1 100% !important;
-            min-width: 100% !important;
-        }
-
-        /* Hide the "SHOW:" label on mobile - save space */
-        div[data-testid="stHorizontalBlock"]:has([data-testid="stSegmentedControl"]) > div:nth-child(2) {
-            display: none !important;
-        }
-
-        /* Page size dropdown - compact */
-        div[data-testid="stHorizontalBlock"]:has([data-testid="stSegmentedControl"]) > div:nth-child(3) {
-            flex: 0 0 70px !important;
-            min-width: 70px !important;
-        }
-
-        /* Hide spacer column */
-        div[data-testid="stHorizontalBlock"]:has([data-testid="stSegmentedControl"]) > div:nth-child(4) {
-            display: none !important;
-        }
-
-        /* Table/Cards toggle - takes remaining space */
-        div[data-testid="stHorizontalBlock"]:has([data-testid="stSegmentedControl"]) > div:nth-child(5) {
-            flex: 1 1 auto !important;
-        }
-
-        /* =============================================
-           MOBILE TABLE - HORIZONTAL SCROLL
-           ============================================= */
-
-        .ag-root-wrapper {
-            overflow-x: auto !important;
-            -webkit-overflow-scrolling: touch !important;
-        }
-
-        .ag-header,
-        .ag-body-viewport {
-            min-width: 500px !important;
-        }
-
-        /* Hide Domain column on mobile */
-        .ag-header-cell[col-id="Domain"],
-        .ag-cell[col-id="Domain"] {
-            display: none !important;
-        }
-
-        /* Tighter table cells */
-        .ag-cell {
-            padding: 8px !important;
-            font-size: 13px !important;
-        }
-
-        .ag-header-cell {
-            padding: 8px !important;
-            font-size: 11px !important;
-        }
-
-        /* =============================================
-           MOBILE HERO - STACKED
-           ============================================= */
-
+        /* -----------------------------------------
+           HERO - Compact & Centered
+           ----------------------------------------- */
         .conversation-header {
             padding: 20px 16px !important;
-            margin: 0 !important;  /* Reset the -2rem negative margin */
+            min-height: auto !important;
         }
 
         .conversation-header-content {
@@ -1315,6 +1187,256 @@ def render_explore_stories(
 
         .conversation-header-text p {
             font-size: 0.9rem !important;
+        }
+
+        /* -----------------------------------------
+           FILTER SECTION
+           ----------------------------------------- */
+
+        /* Filter container - tight padding */
+        [data-testid="stVerticalBlockBorderWrapper"] {
+            padding: 12px !important;
+        }
+
+        /* ==========================================
+           HIDE ALL LABELS - Multiple selector approaches
+           ========================================== */
+        [data-testid="stVerticalBlockBorderWrapper"] label {
+            display: none !important;
+            visibility: hidden !important;
+            height: 0 !important;
+            overflow: hidden !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            position: absolute !important;
+            left: -9999px !important;
+        }
+
+        /* Target by emotion cache class pattern */
+        [data-testid="stVerticalBlockBorderWrapper"] [class*="e1gk92lc"] {
+            display: none !important;
+        }
+
+        /* Target stWidgetLabel specifically */
+        [data-testid="stVerticalBlockBorderWrapper"] [data-testid="stWidgetLabel"] {
+            display: none !important;
+            position: absolute !important;
+            left: -9999px !important;
+        }
+
+        /* ==========================================
+           FORCE ROW LAYOUT FOR FILTER COLUMNS
+           Global styles uses: div[data-testid="stHorizontalBlock"]:not(:has([class*="st-key-topnav_"])) > div[data-testid="stColumn"]
+           We use :has() targeting the facet key classes for higher specificity
+           ========================================== */
+
+        /* Target the horizontal block that contains facet inputs */
+        [data-testid="stHorizontalBlock"]:has([class*="st-key-facet_"]) {
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: wrap !important;
+            gap: 8px !important;
+        }
+
+        /* Search column - target by containing facet_q - FULL WIDTH */
+        [data-testid="stColumn"]:has([class*="st-key-facet_q"]) {
+            flex: 0 0 100% !important;
+            min-width: 100% !important;
+            max-width: 100% !important;
+            width: 100% !important;
+            margin: 0 0 4px 0 !important;
+        }
+
+        /* Industry column - target by containing facet_industry - 50% */
+        [data-testid="stColumn"]:has([class*="st-key-facet_industry"]) {
+            flex: 0 0 calc(50% - 4px) !important;
+            min-width: calc(50% - 4px) !important;
+            max-width: calc(50% - 4px) !important;
+            width: calc(50% - 4px) !important;
+            margin: 0 !important;
+        }
+
+        /* Capability column - target by containing facet_capability - 50% */
+        [data-testid="stColumn"]:has([class*="st-key-facet_capability"]) {
+            flex: 0 0 calc(50% - 4px) !important;
+            min-width: calc(50% - 4px) !important;
+            max-width: calc(50% - 4px) !important;
+            width: calc(50% - 4px) !important;
+            margin: 0 !important;
+        }
+
+        /* FORM ROW: Force row layout, hide button column */
+        [data-testid="stForm"] [data-testid="stHorizontalBlock"] {
+            flex-direction: row !important;
+        }
+        [data-testid="stForm"] [data-testid="stColumn"]:last-child {
+            display: none !important;
+        }
+        [data-testid="stForm"] [data-testid="stColumn"]:first-child {
+            flex: 1 1 100% !important;
+            max-width: 100% !important;
+            min-width: 100% !important;
+            width: 100% !important;
+            margin: 0 !important;
+        }
+
+        /* HIDE: Form submit button */
+        [data-testid="stFormSubmitButton"],
+        .stFormSubmitButton {
+            display: none !important;
+        }
+
+        /* HIDE: Spacer div */
+        [data-testid="stForm"] div[style*="height: 23px"] {
+            display: none !important;
+        }
+
+        /* HIDE: Advanced/Reset buttons and their row */
+        [data-testid="stHorizontalBlock"]:has([class*="st-key-btn_toggle_advanced"]) {
+            display: none !important;
+            height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        [class*="st-key-btn_toggle_advanced"],
+        [class*="st-key-btn_reset_filters"] {
+            display: none !important;
+        }
+
+        /* HIDE: Filter chips */
+        [class*="st-key-chip_"],
+        [class*="st-key-chip_clear_all"],
+        .active-chip-row {
+            display: none !important;
+        }
+
+        /* HIDE: Expander */
+        [data-testid="stExpander"] {
+            display: none !important;
+        }
+
+        /* Compact search input */
+        .stTextInput > div > div > input {
+            padding: 12px 14px !important;
+            font-size: 15px !important;
+            border-radius: 8px !important;
+        }
+
+        /* Compact dropdowns */
+        .stSelectbox > div > div {
+            padding: 10px 12px !important;
+            font-size: 14px !important;
+            min-height: 44px !important;
+            border-radius: 8px !important;
+        }
+
+        /* Kill gaps */
+        [data-testid="stVerticalBlockBorderWrapper"] [data-testid="stVerticalBlock"] {
+            gap: 8px !important;
+        }
+
+        [data-testid="stVerticalBlockBorderWrapper"] [data-testid="stVerticalBlock"] > div {
+            margin-bottom: 0 !important;
+        }
+
+        /* -----------------------------------------
+           RESULTS ROW - Keep horizontal
+           ----------------------------------------- */
+
+        [data-testid="stHorizontalBlock"]:has([data-testid="stButtonGroup"]) {
+            flex-direction: row !important;
+            align-items: center !important;
+            gap: 8px !important;
+        }
+
+        [data-testid="stHorizontalBlock"]:has([data-testid="stButtonGroup"]) > [data-testid="stColumn"]:nth-child(2),
+        [data-testid="stHorizontalBlock"]:has([data-testid="stButtonGroup"]) > [data-testid="stColumn"]:nth-child(3),
+        [data-testid="stHorizontalBlock"]:has([data-testid="stButtonGroup"]) > [data-testid="stColumn"]:nth-child(4) {
+            display: none !important;
+        }
+
+        [data-testid="stHorizontalBlock"]:has([data-testid="stButtonGroup"]) > [data-testid="stColumn"]:first-child {
+            flex: 1 !important;
+            min-width: 0 !important;
+            margin: 0 !important;
+        }
+
+        [data-testid="stHorizontalBlock"]:has([data-testid="stButtonGroup"]) > [data-testid="stColumn"]:last-child {
+            flex: 0 0 auto !important;
+            min-width: 120px !important;
+            width: auto !important;
+            margin: 0 !important;
+        }
+
+        /* Force button group to horizontal - NO WRAP */
+        [data-testid="stButtonGroup"],
+        [data-testid="stButtonGroup"] > div,
+        .stButtonGroup,
+        .stButtonGroup > div {
+            flex-direction: row !important;
+            flex-wrap: nowrap !important;
+            display: flex !important;
+            width: auto !important;
+        }
+
+        [data-testid="stButtonGroup"] button {
+            padding: 6px 10px !important;
+            font-size: 12px !important;
+            min-width: auto !important;
+            width: auto !important;
+            overflow: visible !important;
+            text-overflow: clip !important;
+            white-space: nowrap !important;
+        }
+
+        /* -----------------------------------------
+           TABLE - Horizontal scroll
+           ----------------------------------------- */
+        .ag-root-wrapper {
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch !important;
+        }
+
+        .ag-header,
+        .ag-body-viewport {
+            min-width: 500px !important;
+        }
+
+        .ag-header-cell[col-id="Domain"],
+        .ag-cell[col-id="Domain"] {
+            display: none !important;
+        }
+
+        .ag-cell {
+            padding: 8px !important;
+            font-size: 13px !important;
+        }
+
+        .ag-header-cell {
+            padding: 8px !important;
+            font-size: 11px !important;
+        }
+
+        /* -----------------------------------------
+           PAGINATION - Compact
+           ----------------------------------------- */
+        .pagination {
+            flex-wrap: wrap !important;
+            gap: 6px !important;
+            padding: 12px 0 !important;
+        }
+
+        .pagination button {
+            padding: 8px 12px !important;
+            font-size: 12px !important;
+        }
+
+        .pagination .page-info {
+            width: 100% !important;
+            text-align: center !important;
+            order: -1 !important;
+            padding: 0 0 8px 0 !important;
         }
     }
     </style>

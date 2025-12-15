@@ -480,6 +480,10 @@ def _render_ask_transcript(stories: list[dict]):
 
         # Conversational answer with Related Projects (wireframe style)
         if m.get("type") == "conversational":
+            # Generate a stable message ID based on content hash (not index)
+            # This prevents key collisions when messages shift
+            msg_hash = hash(m.get("text", "")[:50]) % 100000
+
             with st.chat_message(
                 "assistant",
                 avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/svg/agy_icon_color.svg",
@@ -499,87 +503,103 @@ def _render_ask_transcript(stories: list[dict]):
                         unsafe_allow_html=True,
                     )
 
-                    # Use columns with forms for complete styling control
-                    # Always use 3 columns for consistent layout
+                    # Use regular buttons instead of forms to avoid rerun issues
+                    # Style them to look like the original form buttons
+                    st.markdown(
+                        """
+                        <style>
+                        /* Related Projects button styling */
+                        [class*="st-key-container_related_proj"] button,
+                        [class*="st-key-related_proj"] button {
+                            background: var(--bg-surface) !important;
+                            border: 1px solid var(--border-color) !important;
+                            color: var(--accent-purple) !important;
+                            font-size: 14px !important;
+                            font-weight: 500 !important;
+                            padding: 6px 12px !important;
+                            border-radius: 8px !important;
+                            width: 100% !important;
+                            height: auto !important;
+                            min-height: 32px !important;
+                        }
+                        [class*="st-key-container_related_proj"] button:hover,
+                        [class*="st-key-related_proj"] button:hover {
+                            background: var(--bg-hover) !important;
+                            border-color: var(--accent-purple) !important;
+                        }
+                        [class*="st-key-container_related_proj"] button p,
+                        [class*="st-key-related_proj"] button p {
+                            color: var(--accent-purple) !important;
+                            font-size: 14px !important;
+                            margin: 0 !important;
+                            line-height: 1.4 !important;
+                        }
+                        </style>
+                        """,
+                        unsafe_allow_html=True,
+                    )
+
+                    # Use columns for layout
                     cols = st.columns(3)
                     for j, src in enumerate(sources[:3]):
                         title = src.get("title") or src.get("Title", "")
                         client = src.get("client") or src.get("Client", "")
+                        story_id = src.get("id") or src.get("ID", "")
                         label = f"{client} - {title}" if client and title else title
 
                         with cols[j]:
-                            with st.form(key=f"source_form_{i}_{j}"):
-                                st.markdown(
-                                    """
-                                    <style>
-                                    /* Hide form border */
-                                    div[data-testid="stForm"] {
-                                        border: none !important;
-                                        padding: 0 !important;
-                                        margin: 0 !important;
-                                    }
-                                    div[data-testid="stForm"] button {
-                                        background: var(--bg-surface) !important;
-                                        border: 1px solid var(--border-color) !important;
-                                        color: var(--accent-purple-text) !important;
-                                        font-size: 14px !important;
-                                        font-weight: 500 !important;
-                                        padding: 6px 12px !important;
-                                        border-radius: 8px !important;
-                                        width: 100% !important;
-                                        height: auto !important;
-                                        min-height: 32px !important;
-                                    }
-                                    div[data-testid="stForm"] button p {
-                                        color: var(--accent-purple) !important;
-                                        font-size: 14px !important;
-                                        margin: 0 !important;
-                                        line-height: 1.4 !important;
-                                    }
-                                    div[data-testid="stForm"] button:hover {
-                                        background: var(--bg-hover) !important;
-                                        border-color: var(--accent-purple) !important;
-                                    }
-                                    </style>
-                                    """,
-                                    unsafe_allow_html=True,
-                                )
+                            # Use stable key based on story ID (not indices)
+                            # Format: related_proj_{msg_hash}_{story_id}
+                            stable_key = f"related_proj_{msg_hash}_{story_id}"
 
-                                if st.form_submit_button(f"🔗 {label}"):
-                                    # Toggle expander - if same source clicked, close it; otherwise open new one
-                                    expanded_key = f"transcript_source_expanded_{i}_{j}"
+                            with st.container(key=f"container_{stable_key}"):
+                                if st.button(
+                                    f"🔗 {label}",
+                                    key=stable_key,
+                                    use_container_width=True,
+                                ):
+                                    # Use story_id as the expanded key (stable across reruns)
+                                    expanded_key = f"expanded_{story_id}"
                                     current_expanded = st.session_state.get(
                                         "transcript_source_expanded"
                                     )
+
+                                    # Preserve active_tab before any state changes
+                                    if "active_tab" not in st.session_state:
+                                        st.session_state["active_tab"] = "Ask MattGPT"
 
                                     if current_expanded == expanded_key:
                                         # Clicking same source - close it
                                         st.session_state[
                                             "transcript_source_expanded"
                                         ] = None
+                                        st.session_state[
+                                            "transcript_source_expanded_id"
+                                        ] = None
                                     else:
                                         # Open this source (closes any other)
                                         st.session_state[
                                             "transcript_source_expanded"
                                         ] = expanded_key
-                                        # Store the source ID and message index for rendering
                                         st.session_state[
                                             "transcript_source_expanded_id"
-                                        ] = src.get("id")
+                                        ] = story_id
+                                        # Store msg_hash instead of index for matching
                                         st.session_state[
                                             "transcript_source_expanded_msg"
-                                        ] = i
+                                        ] = msg_hash
 
                                     st.rerun()
 
-                    # Render the expanded story detail below buttons for this message (only one at a time)
+                    # Render the expanded story detail below buttons for this message
                     expanded_key = st.session_state.get("transcript_source_expanded")
                     expanded_id = st.session_state.get("transcript_source_expanded_id")
                     expanded_msg = st.session_state.get(
                         "transcript_source_expanded_msg"
                     )
 
-                    if expanded_key and expanded_id and expanded_msg == i:
+                    # Match using msg_hash instead of index i
+                    if expanded_key and expanded_id and expanded_msg == msg_hash:
                         # Find the story object
                         story_obj = next(
                             (
@@ -596,7 +616,7 @@ def _render_ask_transcript(stories: list[dict]):
                                 unsafe_allow_html=True,
                             )
                             render_story_detail(
-                                story_obj, f"transcript_expanded_{i}", stories
+                                story_obj, f"transcript_expanded_{expanded_id}", stories
                             )
 
                 # Action buttons (wireframe style) - HIDDEN for Streamlit version
@@ -611,7 +631,7 @@ def _render_ask_transcript(stories: list[dict]):
         if role == "assistant":
             avatar = "https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/svg/agy_icon_color.svg"
         else:
-            avatar = "👤"  # Gender-neutral user avatar
+            avatar = "https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/MattCartoon-Transparent.png"
 
         with st.chat_message(role, avatar=avatar):
             st.write(m.get("text", ""))
