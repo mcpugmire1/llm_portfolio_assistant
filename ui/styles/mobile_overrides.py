@@ -1326,11 +1326,12 @@ def get_mobile_css() -> str:
                 margin: 0 !important;
             }
 
-            .conversation-header-content {
-                flex-direction: column !important;
-                align-items: flex-start !important;
-                gap: 16px !important;
-            }
+                # .conversation-header-content {
+                #     flex-direction: row !important;
+                #     align-items: flex-start !important;
+                #     text-align: left !important;
+                #     gap: 12px !important;
+                # }
 
             .conversation-agy-avatar {
                 width: 64px !important;
