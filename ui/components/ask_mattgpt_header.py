@@ -117,19 +117,28 @@ def get_header_css() -> str:
        MOBILE RESPONSIVE (<768px)
        ============================================================================ */
     @media (max-width: 767px) {
-        .ask-header-landing,
-        .ask-header-conversation {
+        .ask-header-landing {
             padding: 20px 16px 40px 16px !important;
             min-height: auto !important;
-            margin-top: 0 !important;
+            margin: 19px 0 0 0 !important;
             overflow: visible !important;
         }
 
+       .ask-header-conversation {
+            padding: 20px 16px 33px 16px !important;
+            min-height: auto !important;
+            margin: 0px 16px 0px 16px !important;
+            overflow: visible !important;
+            position: relative !important;
+        }
+
         .header-content {
-            flex-direction: column !important;
-            align-items: center !important;
-            text-align: center !important;
+            flex-direction: row !important;
+            align-items: flex-start !important;
+            text-align: left !important;
             gap: 10px !important;
+            flex-wrap: wrap !important;
+            justify-content: center !important;
         }
 
         .header-agy-avatar {
@@ -138,9 +147,6 @@ def get_header_css() -> str:
             border: 3px solid white !important;
         }
 
-        .header-text {
-            order: 2;
-        }
 
         .header-text h1 {
             font-size: 20px !important;
@@ -157,7 +163,28 @@ def get_header_css() -> str:
             padding: 8px 14px !important;
             font-size: 12px !important;
             margin-bottom: 4px !important;
+            margin-top: 12px !important;
         }
+
+        .ask-header-conversation .how-agy-btn {
+            margin-bottom: -4px !important;
+            position: relative !important;
+            top: -7px !important;
+
+        }
+
+        .how-agy-modal-wrapper {
+            margin-top: 20px !important;
+        }
+
+        div[data-testid="stMarkdownContainer"] > div.how-agy-modal-wrapper {
+            margin-top: 8px !important;
+        }
+
+        [data-testid="stMarkdownContainer"]:has(.how-agy-modal-wrapper) {
+            margin-top: 8px !important;
+        }
+
     }
 
     /* ============================================================================
@@ -209,6 +236,13 @@ def get_header_css() -> str:
         pointer-events: none !important;
         height: 0 !important;
         overflow: hidden !important;
+    }
+
+    [data-testid="stMarkdown"]:has(.status-bar) {
+        margin-top: -2px !important;
+    }
+    [data-testid="stMarkdownContainer"]:has(.status-bar) {
+        margin-top: -2px !important;
     }
 
     /* ============================================================================
@@ -435,6 +469,23 @@ def get_header_css() -> str:
     /* Force status bar flush - pull up to close gap */
     .status-bar {
         margin-top: -15px !important;
+        position: relative !important;
+        overflow: visible !important;
+        padding-bottom: 15px !important;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+
+    /* Extend background DOWN to cover purple header bleed-through */
+    .status-bar::before {
+        content: '' !important;
+        position: absolute !important;
+        bottom: -3px !important;
+        left: 0 !important;
+        right: 0 !important;
+        height: 2px !important;
+        background: var(--status-bar-bg, #f8f9fa) !important;
+        z-index: -1 !important;
     }
 
     /* Nuclear option: remove all vertical block gaps in the header area */
@@ -462,6 +513,8 @@ def get_header_css() -> str:
     /* Target any element immediately before status bar */
     [data-testid="stElementContainer"]:has(.status-bar) {
         margin-top: -20px !important;
+        overflow: visible !important;
+        padding-bottom: 5px !important;
     }
 
     /* KILL THE IFRAME CONTAINER GAP */
@@ -522,8 +575,8 @@ def render_header(include_button: bool = True, view: str = "landing") -> None:
     header_html = (
         f"""
         <div class="{header_class}">
-            <div class="header-content" style="display: flex; justify-content: space-between; align-items: center;">
-                <div style="display: flex; align-items: center; gap: 24px;">
+            <div class="header-content" style="display: flex; justify-content: space-between; ">
+                <div style="display: flex; align-items: flex-start; gap: 24px;">
                     <img class="header-agy-avatar"
                         src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png"
                         alt="Agy"/>

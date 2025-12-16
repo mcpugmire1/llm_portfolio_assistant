@@ -249,25 +249,24 @@ def render_banking_landing():
         .conversation-header {
             padding: 20px 16px !important;
             min-height: auto !important;
-            margin: 0 !important;
+            margin: -24px 0 0 0 !important;  /* top right bottom left */
         }
         .conversation-header-content {
-            flex-direction: column !important;
-            align-items: center !important;
-            text-align: center !important;
+            flex-direction: row !important;
+            align-items: flex-start !important;
+            text-align: left !important;
             gap: 12px !important;
         }
         .conversation-agy-avatar {
-            width: 56px !important;
-            height: 56px !important;
-            border: 2px solid white !important;
+            width: 64px !important;
+            height: 64px !important;
+            border: 3px solid white !important;
         }
         .conversation-header-text h1 {
-            font-size: 1.25rem !important;
-            line-height: 1.2 !important;
+            font-size: 20px !important;
         }
         .conversation-header-text p {
-            font-size: 0.85rem !important;
+            font-size: 13px !important;
             line-height: 1.4 !important;
         }
         /* Stats - 3 across, compact */

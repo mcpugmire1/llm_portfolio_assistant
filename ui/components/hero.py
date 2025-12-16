@@ -93,6 +93,10 @@ def render_hero():
                 .hero-content {
                     padding: 20px 16px !important;
                 }
+                .hero-gradient-wrapper {
+                    margin-top: -20px !important;
+
+                }
 
                 /* Logo - much smaller */
                 .hero-content > div:first-of-type {

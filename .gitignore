@@ -74,5 +74,17 @@ data/borderline_queries.csv
 # API documentation (auto-generated)
 docs/api/
 
+# Architecture and planning documents (work-in-progress)
+ARCHITECTURE_MERGE_ANALYSIS.md
+ARCHITECTURE_REALITY_CHECK.md
+MATTGPT_CURRENT_STATE_OVERVIEW.md
+MOBILE_IMPLEMENTATION_PLAN.md
+MOBILE_IMPLEMENTATION_STATUS.md
+TECHNICAL_ARCHITECTURE_ADDITION.md
+
+# Restructure scripts (temporary)
+scripts/minimal_restructure.py
+scripts/restructure_architecture.py
+
 # Exceptions - keep these files
 !echo_star_stories_nlp.jsonl

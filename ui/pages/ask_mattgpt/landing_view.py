@@ -13,7 +13,6 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 from ui.components.ask_mattgpt_header import (
-    get_how_agy_flow_html,
     get_technical_details_html,
     render_header,
     render_modal_wrapper_end,
@@ -60,7 +59,7 @@ def render_landing_page(stories: list[dict]):
     # Modal (if open)
     if st.session_state.get("show_how_modal", False):
         st.markdown(render_modal_wrapper_start(), unsafe_allow_html=True)
-        components.html(get_how_agy_flow_html(), height=1160)
+        # components.html(get_how_agy_flow_html(), height=1200)
         components.html(get_technical_details_html(), height=670)
         st.markdown(render_modal_wrapper_end(), unsafe_allow_html=True)
         # Remove: render_modal_close_wiring_js()

@@ -595,7 +595,7 @@ def render_explore_stories(
         width: 120px !important;
         height: 120px !important;
         border-radius: 50% !important;
-        border: 4px solid white !important;
+        border: 3px solid white !important;
         box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
     }
 
@@ -1168,25 +1168,28 @@ def render_explore_stories(
         .conversation-header {
             padding: 20px 16px !important;
             min-height: auto !important;
+            margin: -8px 0 0 0 !important;
         }
 
         .conversation-header-content {
-            flex-direction: column !important;
-            text-align: center !important;
+            flex-direction: row !important;
+            text-align: left !important;
             gap: 12px !important;
+            align-items: flex-start !important;
         }
 
         .conversation-agy-avatar {
             width: 64px !important;
             height: 64px !important;
+            border: 3px solid white !important;
         }
 
         .conversation-header-text h1 {
-            font-size: 1.4rem !important;
+            font-size: 20px !important;
         }
 
         .conversation-header-text p {
-            font-size: 0.9rem !important;
+            font-size: 13px !important;
         }
 
         /* -----------------------------------------

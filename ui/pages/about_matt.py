@@ -551,20 +551,21 @@ def render_about_matt():
 @media (max-width: 767px) {
     /* Header */
     .about-header {
-        padding: 20px 16px !important;
+        padding: 20px 16px 29px 16px !important;
         min-height: auto !important;
-        margin-top: 0 !important;
+        margin-top: -24px !important;
     }
 
     .about-header-content {
-        flex-direction: column !important;
-        text-align: center !important;
+        flex-direction: row !important;
+        text-align: left !important;
         gap: 12px !important;
+        align-items: flex-start !important;
     }
 
     .about-header-content img {
-        width: 80px !important;
-        height: 80px !important;
+        width: 64px !important;
+        height: 64px !important;
     }
 
     .about-header-text h1 {
@@ -573,6 +574,10 @@ def render_about_matt():
 
     .about-header-text p {
         font-size: 12px !important;
+    }
+
+    .about-header-text p:last-of-type {
+            display: none !important;
     }
 
     /* Stats bar */
