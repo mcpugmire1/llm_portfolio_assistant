@@ -1446,6 +1446,16 @@ def render_explore_stories(
     """
     st.markdown(explore_css, unsafe_allow_html=True)
 
+    # DEBUG - remove after testing
+    st.markdown(
+        """
+    <div style="position: fixed; bottom: 80px; right: 10px; background: red; color: white; padding: 8px; z-index: 99999; font-size: 14px; border-radius: 4px;">
+        <script>document.write('W:' + window.innerWidth)</script>
+    </div>
+    """,
+        unsafe_allow_html=True,
+    )
+
     legacy = {"Stories": "Explore Stories"}
     cur = st.session_state.get("active_tab", "Home")
     if cur in legacy:
