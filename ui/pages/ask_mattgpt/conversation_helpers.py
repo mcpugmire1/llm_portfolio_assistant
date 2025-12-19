@@ -505,6 +505,11 @@ def _render_ask_transcript(stories: list[dict]):
 
                     # Use regular buttons instead of forms to avoid rerun issues
                     # Style them to look like the original form buttons
+                    # Get currently expanded story ID for selected state styling
+                    current_expanded_id = st.session_state.get(
+                        "transcript_source_expanded_id"
+                    )
+
                     st.markdown(
                         """
                         <style>
@@ -521,6 +526,7 @@ def _render_ask_transcript(stories: list[dict]):
                             width: 100% !important;
                             height: auto !important;
                             min-height: 32px !important;
+                            transition: all 0.2s ease !important;
                         }
                         [class*="st-key-container_related_proj"] button:hover,
                         [class*="st-key-related_proj"] button:hover {
@@ -552,9 +558,32 @@ def _render_ask_transcript(stories: list[dict]):
                             # Format: related_proj_{msg_hash}_{story_id}
                             stable_key = f"related_proj_{msg_hash}_{story_id}"
 
+                            # Check if this card is the selected one
+                            is_selected = current_expanded_id == story_id
+
                             with st.container(key=f"container_{stable_key}"):
+                                # Add selected indicator styling inline
+                                if is_selected:
+                                    st.markdown(
+                                        f"""
+                                        <style>
+                                        [class*="st-key-{stable_key}"] button {{
+                                            background: #F3E8FF !important;
+                                            border: 2px solid #8B5CF6 !important;
+                                            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2) !important;
+                                        }}
+                                        </style>
+                                        """,
+                                        unsafe_allow_html=True,
+                                    )
+
+                                # When selected, show "✕ Close" - otherwise show link icon + label
+                                button_label = (
+                                    "✕ Close" if is_selected else f"🔗 {label}"
+                                )
+
                                 if st.button(
-                                    f"🔗 {label}",
+                                    button_label,
                                     key=stable_key,
                                     use_container_width=True,
                                 ):
@@ -611,10 +640,30 @@ def _render_ask_transcript(stories: list[dict]):
                         )
 
                         if story_obj:
+                            # Ensure story detail breaks out of narrow container on mobile
                             st.markdown(
-                                "<div style='margin-top: 16px;'></div>",
+                                """
+                                <style>
+                                /* Force story detail to full width on mobile */
+                                @media (max-width: 767px) {
+                                    [class*="st-key-transcript_expanded_"] {
+                                        width: 100vw !important;
+                                        max-width: 100vw !important;
+                                        margin-left: -16px !important;
+                                        margin-right: -16px !important;
+                                        padding: 0 16px !important;
+                                    }
+                                    [class*="st-key-transcript_expanded_"] .story-detail-pane {
+                                        width: 100% !important;
+                                        max-width: 100% !important;
+                                    }
+                                }
+                                </style>
+                                <div style='margin-top: 16px;'></div>
+                                """,
                                 unsafe_allow_html=True,
                             )
+
                             render_story_detail(
                                 story_obj, f"transcript_expanded_{expanded_id}", stories
                             )

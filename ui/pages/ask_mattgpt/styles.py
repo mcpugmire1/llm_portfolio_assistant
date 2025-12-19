@@ -677,10 +677,44 @@ def get_landing_css() -> str:
                 padding: 0 16px !important;
             }
 
-            /* Center the button when stacked */
+            /* Force input + button to stay on same row on mobile */
+            /* Target the keyed container */
+            .st-key-landing_input_row .stHorizontalBlock,
+            .st-key-landing_input_row [data-testid="stHorizontalBlock"] {
+                display: flex !important;
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                gap: 8px !important;
+                align-items: center !important;
+            }
+
+            /* Override column width - first column (input) */
+            .st-key-landing_input_row .stColumn:first-child {
+                flex: 1 1 0% !important;
+                min-width: 0 !important;
+                width: auto !important;
+            }
+
+            /* Override column width - last column (button) */
+            .st-key-landing_input_row .stColumn:last-child {
+                flex: 0 0 auto !important;
+                width: auto !important;
+                min-width: auto !important;
+            }
+
+            /* Make button fit content, not full width */
+            .st-key-landing_ask,
+            .st-key-landing_ask .stButton,
+            .st-key-landing_ask button {
+                width: auto !important;
+                min-width: auto !important;
+            }
+
+            /* Button column alignment */
             .stColumn:has(.st-key-landing_ask) {
                 display: flex !important;
-                justify-content: center !important;
+                justify-content: flex-start !important;
+                align-items: center !important;
             }
 
             .st-key-landing_ask .stButton {

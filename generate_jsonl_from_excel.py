@@ -18,7 +18,7 @@ import pandas as pd
 
 # ---------- config ----------
 
-INPUT_EXCEL_FILE = "MPugmire - STAR Stories - 01DEC25.xlsx"  # <-- update as needed
+INPUT_EXCEL_FILE = "MPugmire - STAR Stories - 20DEC25.xlsx"  # <-- update as needed
 OUTPUT_JSONL_FILE = "echo_star_stories.jsonl"
 SHEET_NAME = "STAR Stories - Interview Ready"
 DRY_RUN = False  # ✅ Change to False when ready to write output
@@ -134,6 +134,7 @@ def excel_to_jsonl():
             "End_Date": normalize(row.get("End_Date", "")),
             "Industry": normalize(row.get("Industry", "")),
             "Theme": normalize(row.get("Theme", "")),
+            "Era": normalize(row.get("Era", "")),
             "Solution / Offering": normalize(row.get("Solution / Offering", "")),
             "Project Scope / Complexity": normalize(
                 row.get("Project Scope / Complexity", "")

@@ -13,10 +13,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 from ui.components.ask_mattgpt_header import (
-    get_technical_details_html,
     render_header,
-    render_modal_wrapper_end,
-    render_modal_wrapper_start,
     render_status_bar,
 )
 from ui.components.thinking_indicator import render_thinking_indicator
@@ -57,12 +54,12 @@ def render_landing_page(stories: list[dict]):
     render_header(include_button=True, view="landing")
 
     # Modal (if open)
-    if st.session_state.get("show_how_modal", False):
-        st.markdown(render_modal_wrapper_start(), unsafe_allow_html=True)
-        # components.html(get_how_agy_flow_html(), height=1200)
-        components.html(get_technical_details_html(), height=670)
-        st.markdown(render_modal_wrapper_end(), unsafe_allow_html=True)
-        # Remove: render_modal_close_wiring_js()
+    # if st.session_state.get("show_how_modal", False):
+    #     st.markdown(render_modal_wrapper_start(), unsafe_allow_html=True)
+    #     # components.html(get_how_agy_flow_html(), height=1200)
+    #     # components.html(get_technical_details_html(), height=670)
+    #     st.markdown(render_modal_wrapper_end(), unsafe_allow_html=True)
+    #     # Remove: render_modal_close_wiring_js()
 
     # === STATUS BAR ===
     st.markdown(render_status_bar(), unsafe_allow_html=True)
@@ -144,10 +141,6 @@ def render_landing_page(stories: list[dict]):
     # === INPUT AREA ===
     st.markdown('<div class="landing-input-container">', unsafe_allow_html=True)
 
-    # Use columns to keep input and button on same line
-    # col_input, col_button = st.columns([6, 1])
-    col_input, col_button = st.columns([5, 1], gap="small")
-
     # Check if user pressed Enter in the text input (on_change triggers)
     if st.session_state.get("landing_input_submitted"):
         user_input_value = st.session_state.get("landing_input", "")
@@ -161,31 +154,87 @@ def render_landing_page(stories: list[dict]):
             st.rerun()
         st.session_state["landing_input_submitted"] = False
 
-    with col_input:
-        user_input = st.text_input(
-            "Ask about Matt's experience...",
-            key="landing_input",
-            label_visibility="collapsed",
-            placeholder="Ask about projects, methods, or outcomes...",
-            on_change=lambda: st.session_state.update(
-                {"landing_input_submitted": True}
-            ),
-        )
+    # Inject mobile CSS directly here to ensure it loads
+    st.markdown(
+        """
+        <style>
+        @media (max-width: 767px) {
+            /* NUCLEAR OPTION: Override min-width: 100% on columns */
+            .st-key-landing_input_row .stColumn {
+                min-width: 0 !important;
+                min-inline-size: 0 !important;
+                flex-basis: auto !important;
+            }
 
-    with col_button:
-        # Disable button if input is empty OR if we're currently processing
-        button_disabled = not user_input or disabled
-        if st.button(
-            "Ask Agy 🐾", key="landing_ask", type="primary", disabled=button_disabled
-        ):
-            if user_input:
-                # Set state and trigger rerun to show loading state
-                # NOTE: Don't set "landing_input" - it's controlled by the widget
-                st.session_state["ask_transcript"] = []
-                st.session_state["processing_suggestion"] = True
-                st.session_state["pending_query"] = user_input
-                st.session_state["ask_input_value"] = user_input
-                st.rerun()
+            /* Parent horizontal block */
+            .st-key-landing_input_row .stHorizontalBlock {
+                display: flex !important;
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                gap: 8px !important;
+                align-items: center !important;
+            }
+
+            /* First column - input - grow to fill */
+            .st-key-landing_input_row .stColumn:first-child {
+                flex: 1 1 auto !important;
+                min-width: 0 !important;
+                width: auto !important;
+            }
+
+            /* Second column - button - shrink to fit */
+            .st-key-landing_input_row .stColumn:last-child {
+                flex: 0 0 auto !important;
+                width: auto !important;
+                min-width: 0 !important;
+            }
+
+            /* Button styling */
+            .st-key-landing_ask,
+            .st-key-landing_ask .stButton,
+            .st-key-landing_ask button {
+                width: auto !important;
+                white-space: nowrap !important;
+            }
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    # Use container with key for reliable CSS targeting on mobile
+    with st.container(key="landing_input_row"):
+        # Use columns to keep input and button on same line
+        col_input, col_button = st.columns([5, 1], gap="small")
+
+        with col_input:
+            user_input = st.text_input(
+                "Ask about Matt's experience...",
+                key="landing_input",
+                label_visibility="collapsed",
+                placeholder="Ask about projects, methods, or outcomes...",
+                on_change=lambda: st.session_state.update(
+                    {"landing_input_submitted": True}
+                ),
+            )
+
+        with col_button:
+            # Disable button if input is empty OR if we're currently processing
+            button_disabled = not user_input or disabled
+            if st.button(
+                "Ask Agy 🐾",
+                key="landing_ask",
+                type="primary",
+                disabled=button_disabled,
+            ):
+                if user_input:
+                    # Set state and trigger rerun to show loading state
+                    # NOTE: Don't set "landing_input" - it's controlled by the widget
+                    st.session_state["ask_transcript"] = []
+                    st.session_state["processing_suggestion"] = True
+                    st.session_state["pending_query"] = user_input
+                    st.session_state["ask_input_value"] = user_input
+                    st.rerun()
 
     st.markdown('</div>', unsafe_allow_html=True)
     st.markdown(

@@ -164,6 +164,7 @@ def build_metadata(story: dict[str, Any]) -> dict[str, Any]:
         "Category": cat,
         "Sub-category": sub,
         "Theme": theme,
+        "Era": story.get("Era", "").strip(),
         "Use Case(s)": _as_list(story.get("Use Case(s)")),
         "Competencies": _as_list(story.get("Competencies")),
         "Situation": _as_list(story.get("Situation")),

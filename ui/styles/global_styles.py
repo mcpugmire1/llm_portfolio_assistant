@@ -407,16 +407,48 @@ def apply_global_styles():
                 padding-right: 16px !important;
                 max-width: 100% !important;
             }
-            /* Columns stack - except nav and results row */
-            div[data-testid="stHorizontalBlock"]:not(:has([class*="st-key-topnav_"])):not(:has([data-testid="stButtonGroup"])) {
+            /* Columns stack - except nav, results row, and landing input row */
+            div[data-testid="stHorizontalBlock"]:not(:has([class*="st-key-topnav_"])):not(:has([data-testid="stButtonGroup"])):not(:has(.st-key-landing_input)) {
                 flex-direction: column !important;
                 gap: 0 !important;
             }
-            div[data-testid="stHorizontalBlock"]:not(:has([class*="st-key-topnav_"])):not(:has([data-testid="stButtonGroup"])) > div[data-testid="stColumn"] {
+            div[data-testid="stHorizontalBlock"]:not(:has([class*="st-key-topnav_"])):not(:has([data-testid="stButtonGroup"])):not(:has(.st-key-landing_input)) > div[data-testid="stColumn"] {
                 width: 100% !important;
                 min-width: 100% !important;
                 flex: 1 1 100% !important;
                 margin: 0 0 16px 0 !important;
+            }
+            /* Landing input row - keep horizontal on mobile */
+            div[data-testid="stHorizontalBlock"]:has(.st-key-landing_input) {
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                gap: 8px !important;
+                align-items: center !important;
+            }
+            div[data-testid="stHorizontalBlock"]:has(.st-key-landing_input) > div[data-testid="stColumn"]:first-child {
+                flex: 1 1 auto !important;
+                min-width: 0 !important;
+                width: auto !important;
+            }
+            div[data-testid="stHorizontalBlock"]:has(.st-key-landing_input) > div[data-testid="stColumn"]:last-child {
+                flex: 0 0 auto !important;
+                min-width: 0 !important;
+                width: auto !important;
+            }
+            /* Make input fill its column */
+            div[data-testid="stHorizontalBlock"]:has(.st-key-landing_input) .stTextInput,
+            div[data-testid="stHorizontalBlock"]:has(.st-key-landing_input) [data-testid="stTextInput"],
+            div[data-testid="stHorizontalBlock"]:has(.st-key-landing_input) [data-baseweb="input"] {
+                width: 100% !important;
+            }
+            /* Compact button - shorter padding, smaller text */
+            div[data-testid="stHorizontalBlock"]:has(.st-key-landing_input) .st-key-landing_ask button {
+                padding: 8px 12px !important;
+                white-space: nowrap !important;
+                font-size: 13px !important;
+            }
+            div[data-testid="stHorizontalBlock"]:has(.st-key-landing_input) .st-key-landing_ask button p {
+                font-size: 13px !important;
             }
             /* Card spacing */
             .card-mobile-spacing { margin-bottom: 16px !important; }

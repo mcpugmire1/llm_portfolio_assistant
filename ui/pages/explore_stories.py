@@ -24,6 +24,7 @@ from config.debug import DEBUG
 from services.rag_service import semantic_search
 from ui.components.story_detail import render_story_detail
 from ui.components.thinking_indicator import render_thinking_indicator
+from ui.components.timeline_view import render_timeline_view
 from utils.filters import matches_filters
 from utils.ui_helpers import render_no_match_banner, safe_container
 from utils.validation import is_nonsense
@@ -570,9 +571,15 @@ def render_explore_stories(
         unsafe_allow_html=True,
     )
 
-    explore_css = """
-    <style>
-    /* Conversation header styles for hero section */
+    explore_css = """<style>
+    /* =============================================================================
+       EXPLORE STORIES CSS - CLEANED UP
+       Redundancies removed, device-specific rules preserved
+       ============================================================================= */
+
+    /* =============================================================================
+       HERO SECTION
+       ============================================================================= */
     .conversation-header {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         padding: 2rem;
@@ -611,9 +618,10 @@ def render_explore_stories(
         font-size: 1.1rem;
     }
 
-    /* Print styles - make content visible when printing */
+    /* =============================================================================
+       PRINT STYLES
+       ============================================================================= */
     @media print {
-        /* Hide Streamlit chrome and unnecessary elements */
         header[data-testid="stHeader"],
         div[data-testid="stDecoration"],
         div[data-testid="stToolbar"],
@@ -624,7 +632,6 @@ def render_explore_stories(
             display: none !important;
         }
 
-        /* Show main content */
         .main .block-container,
         [data-testid="stVerticalBlock"],
         [data-testid="stHorizontalBlock"],
@@ -634,56 +641,47 @@ def render_explore_stories(
             opacity: 1 !important;
         }
 
-        /* Reset backgrounds for print */
         body {
             background: white !important;
         }
 
-        /* Ensure text is black for print */
         * {
             color: black !important;
         }
 
-        /* Page breaks */
         .story-detail-pane {
             page-break-before: always;
         }
     }
 
-    /* =========================================================
-       FILTER SECTION SPACING - TIGHTENED
-       ========================================================= */
-
-    /* Filter container - reduced padding */
+    /* =============================================================================
+       FILTER SECTION - BASE STYLES
+       ============================================================================= */
     .main [data-testid="stContainer"] {
         padding: 12px 16px !important;
     }
 
-    /* Reduce vertical gaps inside filter container */
     .main [data-testid="stContainer"] [data-testid="stVerticalBlock"] > div {
         margin-bottom: 2px !important;
     }
 
-    /* Search form - remove extra padding and border */
     .main [data-testid="stForm"] {
         padding: 0 !important;
         border: none !important;
         background: transparent !important;
     }
 
-    /* Form inner vertical block - tighter */
     .main [data-testid="stForm"] [data-testid="stVerticalBlock"] > div {
         margin-bottom: 0 !important;
     }
 
-    /* Search submit button - compact */
     .main [data-testid="stFormSubmitButton"] button {
         padding: 6px 12px !important;
         min-height: 38px !important;
         height: 38px !important;
     }
 
-    /* Advanced/Reset buttons - smaller, quieter */
+    /* Advanced/Reset buttons */
     [class*="st-key-btn_toggle_advanced"] button,
     [class*="st-key-btn_reset_filters"] button {
         padding: 4px 12px !important;
@@ -694,22 +692,20 @@ def render_explore_stories(
         min-height: 32px !important;
     }
 
-    [class*="st-key-btn_toggle_advanced"] button:hover {
-        background: var(--bg-hover) !important;
-    }
-
+    [class*="st-key-btn_toggle_advanced"] button:hover,
     [class*="st-key-btn_reset_filters"] button:hover {
         background: var(--bg-hover) !important;
     }
 
-    /* Filter container styling - WIREFRAME EXACT */
     .explore-filters {
         background: var(--bg-surface);
         padding: 30px;
         border-bottom: 1px solid var(--border-color);
     }
 
-    /* Search input styling - WIREFRAME EXACT */
+    /* =============================================================================
+       FORM INPUTS - BASE STYLES
+       ============================================================================= */
     .main .stTextInput > div > div > input {
         width: 100% !important;
         padding: 10px 14px !important;
@@ -725,7 +721,7 @@ def render_explore_stories(
         outline: none !important;
     }
 
-    /* Search form submit button - compact icon button */
+    /* Search form submit button */
     [class*="search_form"] button[kind="secondaryFormSubmit"],
     [class*="search_form"] button[type="submit"],
     .stForm button[kind="secondaryFormSubmit"] {
@@ -751,7 +747,7 @@ def render_explore_stories(
         background: var(--bg-hover) !important;
     }
 
-    /* Selectbox styling - WIREFRAME EXACT */
+    /* Selectbox */
     .main .stSelectbox > div > div {
         padding: 8px !important;
         border: 2px solid var(--border-color) !important;
@@ -766,7 +762,7 @@ def render_explore_stories(
         outline: none !important;
     }
 
-    /* Multiselect styling - WIREFRAME EXACT */
+    /* Multiselect */
     .main .stMultiSelect > div > div {
         padding: 8px !important;
         border: 2px solid var(--border-color) !important;
@@ -780,7 +776,7 @@ def render_explore_stories(
         border-color: var(--accent-purple) !important;
     }
 
-    /* Label styling - WIREFRAME EXACT */
+    /* Labels */
     .main label[data-testid="stWidgetLabel"] {
         font-size: 12px !important;
         font-weight: 600 !important;
@@ -789,10 +785,11 @@ def render_explore_stories(
         margin-bottom: 4px !important;
     }
 
-    /* Segmented Control (Table/Cards toggle) - WIREFRAME EXACT */
-    /* Override Streamlit's default red (#FF4B4B) on active state */
+    /* =============================================================================
+       SEGMENTED CONTROL (Table/Cards/Timeline toggle)
+       ============================================================================= */
 
-    /* Direct emotion class override (highest specificity) */
+    /* Active button - emotion class override */
     button.st-emotion-cache-1umuqkm.e8vg11g13,
     button.st-emotion-cache-1umuqkm.e8vg11g13:active,
     button.st-emotion-cache-1umuqkm.e8vg11g13:focus,
@@ -828,7 +825,7 @@ def render_explore_stories(
         background-color: var(--bg-hover) !important;
     }
 
-    /* Target by kind attribute (stable, fallback) */
+    /* Active button - kind attribute fallback */
     button[kind="segmented_controlActive"],
     button[kind="segmented_controlActive"]:active,
     button[kind="segmented_controlActive"]:focus,
@@ -847,7 +844,7 @@ def render_explore_stories(
         color: white !important;
     }
 
-    /* Inactive button styling */
+    /* Inactive button - kind attribute fallback */
     button[kind="segmented_control"],
     button[kind="segmented_control"]:active,
     button[kind="segmented_control"]:focus,
@@ -865,19 +862,19 @@ def render_explore_stories(
         color: var(--text-secondary) !important;
     }
 
-    /* Hover states */
     button[kind="segmented_control"]:hover {
         background: var(--bg-hover) !important;
         border-color: var(--text-muted) !important;
     }
 
-    /* Target the p element inside stButtonGroup */
     .stButtonGroup p,
     [data-testid="stButtonGroup"] p {
         color: inherit !important;
     }
 
-    /* Table styling - WIREFRAME EXACT */
+    /* =============================================================================
+       TABLE STYLES
+       ============================================================================= */
     .main table {
         border-collapse: collapse !important;
     }
@@ -899,7 +896,6 @@ def render_explore_stories(
         font-size: 14px !important;
         color: var(--text-primary) !important;
     }
-    /* Story title in table - purple and clickable */
     .main td a {
         color: var(--accent-purple) !important;
         font-weight: 500 !important;
@@ -909,7 +905,6 @@ def render_explore_stories(
         text-decoration: underline !important;
     }
 
-    /* Client badge styling - WIREFRAME EXACT */
     .client-badge {
         display: inline-block !important;
         padding: 4px 10px !important;
@@ -920,13 +915,11 @@ def render_explore_stories(
         font-weight: 500 !important;
     }
 
-    /* Domain tag styling - WIREFRAME EXACT */
     .domain-tag {
         font-size: 12px !important;
         color: var(--text-muted) !important;
     }
 
-    /* Selected row styling - WIREFRAME EXACT */
     .ag-row-selected {
         background: #F3E8FF !important;
         border-left: 4px solid #8B5CF6 !important;
@@ -935,7 +928,9 @@ def render_explore_stories(
         font-weight: 500 !important;
     }
 
-    /* Button styling - WIREFRAME EXACT but more compact */
+    /* =============================================================================
+       BUTTON STYLES
+       ============================================================================= */
     .main .stButton > button {
         padding: 6px 14px !important;
         border: 1px solid var(--border-color) !important;
@@ -952,7 +947,6 @@ def render_explore_stories(
         background: var(--bg-hover) !important;
     }
 
-    /* View Details button inside cards */
     .card-btn-view-details {
         display: inline-block;
         padding: 10px 20px;
@@ -975,12 +969,25 @@ def render_explore_stories(
         text-decoration: none !important;
     }
 
-    /* Hide the trigger buttons */
+    /* Hide card trigger buttons */
     [class*="st-key-card_btn_"] {
-        display: none !important;
+        position: absolute !important;
+        left: -9999px !important;
+        height: 0 !important;
+        overflow: hidden !important;
     }
 
-    /* Ask Agy button - purple to match wireframe (target via key class) */
+    /* Hide timeline trigger buttons */
+    [class*="st-key-timeline_story_"],
+    [class*="st-key-timeline_explore_"],
+    [class*="st-key-timeline_toggle_"] {
+        position: absolute !important;
+        left: -9999px !important;
+        height: 0 !important;
+        overflow: hidden !important;
+    }
+
+    /* Ask Agy button */
     [class*="st-key-ask_from_detail"] .stButton > button[kind="primary"],
     div[class*="st-key-ask_from_detail"] button[data-testid="stBaseButton-primary"] {
         background: var(--accent-purple) !important;
@@ -1000,7 +1007,106 @@ def render_explore_stories(
         box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3) !important;
     }
 
-    /* Spacing adjustments (scoped to main content) */
+    /* =============================================================================
+       CARDS GRID
+       ============================================================================= */
+    .story-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+        gap: 20px;
+        margin-bottom: 24px;
+    }
+
+    .fixed-height-card {
+        background: var(--bg-card) !important;
+        padding: 24px !important;
+        border-radius: 8px !important;
+        border: 1px solid var(--border-color) !important;
+        height: 380px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        box-shadow: var(--card-shadow) !important;
+        transition: all 0.2s ease !important;
+        cursor: pointer !important;
+    }
+
+    .fixed-height-card:hover {
+        box-shadow: var(--hover-shadow) !important;
+        border-color: var(--accent-purple) !important;
+        transform: translateY(-2px) !important;
+    }
+
+    .fixed-height-card.active {
+        border-color: var(--accent-purple) !important;
+        box-shadow: 0 0 0 3px var(--accent-purple-light) !important;
+    }
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 12px;
+    }
+
+    .card-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0;
+        line-height: 1.4;
+        color: var(--text-heading) !important;
+        flex: 1;
+    }
+
+    .card-client-badge {
+        background: var(--accent-purple-bg);
+        color: var(--accent-purple);
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 500;
+        white-space: nowrap;
+        margin-left: 12px;
+    }
+
+    .card-desc {
+        color: var(--text-secondary) !important;
+        line-height: 1.6 !important;
+        font-size: 14px !important;
+        overflow: hidden !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 3 !important;
+        -webkit-box-orient: vertical !important;
+        flex-grow: 1 !important;
+        margin-bottom: 16px !important;
+    }
+
+    .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: auto;
+        padding-top: 12px;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .card-role {
+        font-size: 12px;
+        color: var(--text-muted);
+        font-weight: 500;
+    }
+
+    .card-domain-tag {
+        background: var(--bg-surface);
+        color: var(--text-secondary);
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 500;
+    }
+
+    /* =============================================================================
+       SPACING ADJUSTMENTS
+       ============================================================================= */
     .main .stMultiSelect, .main .stSelectbox, .main .stTextInput {
         margin-bottom: 0px !important;
         margin-top: 0px !important;
@@ -1014,156 +1120,78 @@ def render_explore_stories(
         margin-top: 0px !important;
         margin-bottom: 0px !important;
     }
+
     div[data-testid="stHorizontalBlock"]:has(> div:nth-child(5)) > div:nth-child(3) {
         flex: 0 0 75px !important;
         max-width: 75px !important;
     }
-    .story-cards-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-        gap: 20px;
-        margin-bottom: 24px;
+
+    /* =============================================================================
+       SHOW DROPDOWN - ALL BREAKPOINTS (CONSOLIDATED)
+       ============================================================================= */
+    [class*="st-key-page_size_select"] {
+        max-width: 80px !important;
+        min-width: 70px !important;
+        width: 80px !important;
     }
-    .fixed-height-card {
-        background: var(--bg-card) !important;
-        padding: 24px !important;
-        border-radius: 8px !important;
-        border: 1px solid var(--border-color) !important;
-        height: 380px !important;
+
+    [class*="st-key-page_size_select"] > div {
+        min-width: 70px !important;
+        max-width: 80px !important;
+    }
+
+    /* Results row - force single line */
+    [data-testid="stHorizontalBlock"]:has([class*="st-key-page_size_select"]) {
         display: flex !important;
-        flex-direction: column !important;
-        box-shadow: var(--card-shadow) !important;
-        transition: all 0.2s ease !important;
-        cursor: pointer !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        gap: 12px !important;
     }
-    .fixed-height-card:hover {
-        box-shadow: var(--hover-shadow) !important;
-        border-color: var(--accent-purple) !important;
-        transform: translateY(-2px) !important;
+
+    [data-testid="stHorizontalBlock"]:has([class*="st-key-page_size_select"]) > [data-testid="stColumn"] {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        min-width: 0 !important;
     }
-    .fixed-height-card.active {
-        border-color: var(--accent-purple) !important;
-        box-shadow: 0 0 0 3px var(--accent-purple-light) !important;
-    }
-    .card-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 12px;
-    }
-    .card-title {
-        font-size: 18px;
-        font-weight: 600;
-        margin: 0;
-        line-height: 1.4;
-        color: var(--text-heading) !important;
-        flex: 1;
-    }
-    .card-client-badge {
-        background: var(--accent-purple-bg);
-        color: var(--accent-purple);
-        padding: 4px 12px;
-        border-radius: 12px;
-        font-size: 12px;
-        font-weight: 500;
-        white-space: nowrap;
-        margin-left: 12px;
-    }
-    .card-desc {
-        color: var(--text-secondary) !important;
-        line-height: 1.6 !important;
-        font-size: 14px !important;
-        overflow: hidden !important;
-        display: -webkit-box !important;
-        -webkit-line-clamp: 3 !important;
-        -webkit-box-orient: vertical !important;
-        flex-grow: 1 !important;
-        margin-bottom: 16px !important;
-    }
-    .card-footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: auto;
-        padding-top: 12px;
-        border-top: 1px solid var(--border-color);
-    }
-    .card-role {
-        font-size: 12px;
-        color: var(--text-muted);
-        font-weight: 500;
-    }
-    .card-domain-tag {
-        background: var(--bg-surface);
-        color: var(--text-secondary);
-        padding: 4px 10px;
-        border-radius: 6px;
-        font-size: 11px;
-        font-weight: 500;
+
+    [data-testid="stHorizontalBlock"]:has([class*="st-key-page_size_select"]) > [data-testid="stColumn"]:first-child {
+        flex: 1 1 auto !important;
     }
 
     /* =============================================================================
-       MOBILE RESPONSIVE - EXPLORE STORIES
-       Target: iPhone SE (375px) and up to 767px
+       TABLET (768px - 1024px)
+       ============================================================================= */
+    @media (min-width: 768px) and (max-width: 1024px) {
+        /* Hide form submit button */
+        [data-testid="stForm"] [data-testid="stColumn"]:last-child {
+            display: none !important;
+        }
+
+        /* Keep filter columns horizontal */
+        [data-testid="stVerticalBlockBorderWrapper"] [data-testid="stHorizontalBlock"] {
+            flex-wrap: nowrap !important;
+            flex-direction: row !important;
+        }
+
+        [data-testid="stVerticalBlockBorderWrapper"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
+            flex: 1 1 0 !important;
+            min-width: 0 !important;
+        }
+
+        /* Results row - hide SHOW label and spacer */
+        [data-testid="stHorizontalBlock"]:has([data-testid="stButtonGroup"]) > [data-testid="stColumn"]:nth-child(2),
+        [data-testid="stHorizontalBlock"]:has([data-testid="stButtonGroup"]) > [data-testid="stColumn"]:nth-child(4) {
+            display: none !important;
+        }
+    }
+
+    /* =============================================================================
+       MOBILE (< 768px)
        ============================================================================= */
     @media (max-width: 767px) {
         /* -----------------------------------------
-           FILTER SECTION - Custom wrapper for mobile
-           ----------------------------------------- */
-
-        /* Filter row - force horizontal with wrap */
-        .explore-filter-section [data-testid="stHorizontalBlock"] {
-            flex-direction: row !important;
-            flex-wrap: wrap !important;
-            gap: 8px !important;
-        }
-
-        /* Search column - full width */
-        .explore-filter-section [data-testid="stHorizontalBlock"]:first-of-type > [data-testid="stColumn"]:first-child {
-            flex: 0 0 100% !important;
-            width: 100% !important;
-            min-width: 100% !important;
-            max-width: 100% !important;
-            margin: 0 0 8px 0 !important;
-        }
-
-        /* Industry column - 50% */
-        .explore-filter-section [data-testid="stHorizontalBlock"]:first-of-type > [data-testid="stColumn"]:nth-child(2) {
-            flex: 0 0 calc(50% - 4px) !important;
-            width: calc(50% - 4px) !important;
-            min-width: calc(50% - 4px) !important;
-            max-width: calc(50% - 4px) !important;
-            margin: 0 !important;
-        }
-
-        /* Capability column - 50% */
-        .explore-filter-section [data-testid="stHorizontalBlock"]:first-of-type > [data-testid="stColumn"]:nth-child(3) {
-            flex: 0 0 calc(50% - 4px) !important;
-            width: calc(50% - 4px) !important;
-            min-width: calc(50% - 4px) !important;
-            max-width: calc(50% - 4px) !important;
-            margin: 0 !important;
-        }
-
-        /* -----------------------------------------
-           CARDS GRID - Single column
-           ----------------------------------------- */
-        .story-cards-grid {
-            grid-template-columns: 1fr !important;
-        }
-        .fixed-height-card {
-            height: auto !important;
-            min-height: 280px !important;
-        }
-        [class*="st-key-card_btn_"] {
-            position: absolute !important;
-            left: -9999px !important;
-            height: 0 !important;
-            overflow: hidden !important;
-        }
-
-        /* -----------------------------------------
-           HERO - Compact & Centered
+           HERO - Compact
            ----------------------------------------- */
         .conversation-header {
             padding: 20px 16px !important;
@@ -1177,6 +1205,7 @@ def render_explore_stories(
             gap: 12px !important;
             align-items: flex-start !important;
         }
+
         .conversation-agy-avatar {
             width: 64px !important;
             height: 64px !important;
@@ -1194,45 +1223,19 @@ def render_explore_stories(
         /* -----------------------------------------
            FILTER SECTION
            ----------------------------------------- */
-
-        /* Filter container - tight padding */
         [data-testid="stVerticalBlockBorderWrapper"] {
             padding: 12px !important;
         }
 
-        /* ==========================================
-           HIDE ALL LABELS - Multiple selector approaches
-           ========================================== */
-        [data-testid="stVerticalBlockBorderWrapper"] label {
-            display: none !important;
-            visibility: hidden !important;
-            height: 0 !important;
-            overflow: hidden !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            position: absolute !important;
-            left: -9999px !important;
-        }
-
-        /* Target by emotion cache class pattern */
-        [data-testid="stVerticalBlockBorderWrapper"] [class*="e1gk92lc"] {
-            display: none !important;
-        }
-
-        /* Target stWidgetLabel specifically */
+        /* Hide all labels */
+        [data-testid="stVerticalBlockBorderWrapper"] label,
         [data-testid="stVerticalBlockBorderWrapper"] [data-testid="stWidgetLabel"] {
             display: none !important;
             position: absolute !important;
             left: -9999px !important;
         }
 
-        /* ==========================================
-           FORCE ROW LAYOUT FOR FILTER COLUMNS
-           Global styles uses: div[data-testid="stHorizontalBlock"]:not(:has([class*="st-key-topnav_"])) > div[data-testid="stColumn"]
-           We use :has() targeting the facet key classes for higher specificity
-           ========================================== */
-
-        /* Target the horizontal block that contains facet inputs */
+        /* Filter columns layout */
         [data-testid="stHorizontalBlock"]:has([class*="st-key-facet_"]) {
             display: flex !important;
             flex-direction: row !important;
@@ -1240,7 +1243,7 @@ def render_explore_stories(
             gap: 8px !important;
         }
 
-        /* Search column - target by containing facet_q - FULL WIDTH */
+        /* Search - full width */
         [data-testid="stColumn"]:has([class*="st-key-facet_q"]) {
             flex: 0 0 100% !important;
             min-width: 100% !important;
@@ -1249,7 +1252,7 @@ def render_explore_stories(
             margin: 0 0 4px 0 !important;
         }
 
-        /* Industry column - target by containing facet_industry - 50% */
+        /* Industry - 50% */
         [data-testid="stColumn"]:has([class*="st-key-facet_industry"]) {
             flex: 0 0 calc(50% - 4px) !important;
             min-width: calc(50% - 4px) !important;
@@ -1258,7 +1261,7 @@ def render_explore_stories(
             margin: 0 !important;
         }
 
-        /* Capability column - target by containing facet_capability - 50% */
+        /* Capability - 50% */
         [data-testid="stColumn"]:has([class*="st-key-facet_capability"]) {
             flex: 0 0 calc(50% - 4px) !important;
             min-width: calc(50% - 4px) !important;
@@ -1267,7 +1270,7 @@ def render_explore_stories(
             margin: 0 !important;
         }
 
-        /* FORM ROW: Force row layout, hide button column */
+        /* Form row */
         [data-testid="stForm"] [data-testid="stHorizontalBlock"] {
             flex-direction: row !important;
         }
@@ -1282,50 +1285,26 @@ def render_explore_stories(
             margin: 0 !important;
         }
 
-        /* HIDE: Form submit button */
+        /* Hide form submit, spacer, Advanced/Reset, chips, expander */
         [data-testid="stFormSubmitButton"],
-        .stFormSubmitButton {
-            display: none !important;
-        }
-
-        /* HIDE: Spacer div */
-        [data-testid="stForm"] div[style*="height: 23px"] {
-            display: none !important;
-        }
-
-        /* HIDE: Advanced/Reset buttons and their row */
-        [data-testid="stHorizontalBlock"]:has([class*="st-key-btn_toggle_advanced"]) {
-            display: none !important;
-            height: 0 !important;
-            margin: 0 !important;
-            padding: 0 !important;
-        }
-
+        .stFormSubmitButton,
+        [data-testid="stForm"] div[style*="height: 23px"],
+        [data-testid="stHorizontalBlock"]:has([class*="st-key-btn_toggle_advanced"]),
         [class*="st-key-btn_toggle_advanced"],
-        [class*="st-key-btn_reset_filters"] {
-            display: none !important;
-        }
-
-        /* HIDE: Filter chips */
+        [class*="st-key-btn_reset_filters"],
         [class*="st-key-chip_"],
-        [class*="st-key-chip_clear_all"],
-        .active-chip-row {
-            display: none !important;
-        }
-
-        /* HIDE: Expander */
+        .active-chip-row,
         [data-testid="stExpander"] {
             display: none !important;
         }
 
-        /* Compact search input */
+        /* Compact inputs */
         .stTextInput > div > div > input {
             padding: 12px 14px !important;
             font-size: 15px !important;
             border-radius: 8px !important;
         }
 
-        /* Compact dropdowns */
         .stSelectbox > div > div {
             padding: 10px 12px !important;
             font-size: 14px !important;
@@ -1333,7 +1312,6 @@ def render_explore_stories(
             border-radius: 8px !important;
         }
 
-        /* Kill gaps */
         [data-testid="stVerticalBlockBorderWrapper"] [data-testid="stVerticalBlock"] {
             gap: 8px !important;
         }
@@ -1343,9 +1321,8 @@ def render_explore_stories(
         }
 
         /* -----------------------------------------
-           RESULTS ROW - Keep horizontal
+           RESULTS ROW
            ----------------------------------------- */
-
         [data-testid="stHorizontalBlock"]:has([data-testid="stButtonGroup"]) {
             flex-direction: row !important;
             align-items: center !important;
@@ -1371,7 +1348,7 @@ def render_explore_stories(
             margin: 0 !important;
         }
 
-        /* Force button group to horizontal - NO WRAP */
+        /* Button group horizontal */
         [data-testid="stButtonGroup"],
         [data-testid="stButtonGroup"] > div,
         .stButtonGroup,
@@ -1387,13 +1364,32 @@ def render_explore_stories(
             font-size: 12px !important;
             min-width: auto !important;
             width: auto !important;
-            overflow: visible !important;
-            text-overflow: clip !important;
+            white-space: nowrap !important;
+        }
+        /* Results count - prevent wrapping */
+        .results-count {
+            font-size: 12px !important;
             white-space: nowrap !important;
         }
 
+        /* Fix selectbox showing "..." - ensure minimum width */
+        .stSelectbox [data-baseweb="select"] {
+            min-width: 100% !important;
+        }
+
+        /* Hide labels inside form too */
+        [data-testid="stForm"] label,
+        [data-testid="stForm"] [data-testid="stWidgetLabel"] {
+            display: none !important;
+            position: absolute !important;
+            left: -9999px !important;
+        }
+        /* Hide SHOW label on mobile */
+        [data-testid="stHorizontalBlock"]:has([class*="st-key-page_size_select"]) > [data-testid="stColumn"]:nth-child(2) {
+            display: none !important;
+        }
         /* -----------------------------------------
-           TABLE - Horizontal scroll
+           TABLE
            ----------------------------------------- */
         .ag-root-wrapper {
             overflow-x: auto !important;
@@ -1421,7 +1417,19 @@ def render_explore_stories(
         }
 
         /* -----------------------------------------
-           PAGINATION - Compact
+           CARDS
+           ----------------------------------------- */
+        .story-cards-grid {
+            grid-template-columns: 1fr !important;
+        }
+
+        .fixed-height-card {
+            height: auto !important;
+            min-height: 280px !important;
+        }
+
+        /* -----------------------------------------
+           PAGINATION
            ----------------------------------------- */
         .pagination {
             flex-wrap: wrap !important;
@@ -1465,6 +1473,12 @@ def render_explore_stories(
         F["domains"] = st.session_state.pop("prefilter_domains")
         # Clear capability when setting domains
         F["capability"] = ""
+    if "prefilter_roles" in st.session_state:
+        F["roles"] = st.session_state.pop("prefilter_roles")
+    if "prefilter_view_mode" in st.session_state:
+        st.session_state["explore_view_mode"] = st.session_state.pop(
+            "prefilter_view_mode"
+        )
 
     # ==================================================================
     # FILTERS SECTION - REDESIGNED (Phase 4)
@@ -1741,8 +1755,8 @@ def render_explore_stories(
 
     with col1:
         results_html = f"""
-        <div style="display: flex; align-items: center; min-height: 44px; color: var(--text-color); font-size: 14px;">
-            Showing &nbsp;<strong>{start}–{end}</strong>&nbsp; of &nbsp;<strong>{total_results}</strong>&nbsp; projects
+        <div class="results-count" style="display: flex; align-items: center; min-height: 44px; color: var(--text-color); font-size: 14px; white-space: nowrap;">
+            <span>Showing</span>&nbsp;<strong>{start}&ndash;{end}</strong>&nbsp;<span>of</span>&nbsp;<strong>{total_results}</strong>&nbsp;<span>projects</span>
         </div>
         """
         st.markdown(results_html, unsafe_allow_html=True)
@@ -1754,7 +1768,6 @@ def render_explore_stories(
         )
 
     with col3:
-        # Remove the extra CSS - just let it be
         page_size_option = st.selectbox(
             "page_size",
             options=TABLE_PAGE_SIZE_OPTIONS,
@@ -1764,10 +1777,9 @@ def render_explore_stories(
         )
 
     with col4:
-        # Remove the padding-top wrapper
         view_mode = st.segmented_control(
             "View",
-            options=["Table", "Cards"],
+            options=["Table", "Cards", "Timeline"],  # Added "Timeline"
             key="explore_view_mode",
             label_visibility="collapsed",
         )
@@ -1818,6 +1830,7 @@ def render_explore_stories(
                 "Title": s.get("Title", ""),
                 "Client": s.get("Client", ""),
                 "Role": s.get("Role", ""),
+                "Start_Date": s.get("Start_Date", ""),
                 "Domain": dom,
             }
 
@@ -1825,7 +1838,9 @@ def render_explore_stories(
         rows = [_row(s) for s in view_paginated]
         df = pd.DataFrame(rows)
         show_cols = [
-            c for c in ["Title", "Client", "Role", "Domain"] if c in df.columns
+            c
+            for c in ["Title", "Client", "Role", "Start_Date", "Domain"]
+            if c in df.columns
         ]
         show_df = df[show_cols] if show_cols else df
 
@@ -1851,6 +1866,7 @@ def render_explore_stories(
                 """,
             )
             gob.configure_column("Role", flex=3)
+            gob.configure_column("Start_Date", flex=2, headerName="Start")
             gob.configure_column(
                 "Domain",
                 flex=4,
@@ -1904,7 +1920,7 @@ def render_explore_stories(
     # CARDS VIEW
     # =========================================================================
 
-    else:
+    elif view_mode == "Cards":  # Changed from "else:"  `
         offset = int(st.session_state.get("page_offset", 0))
         if offset < 0:
             offset = 0
@@ -2023,6 +2039,29 @@ def render_explore_stories(
                 """,
                 height=0,
             )
+    # =========================================================================
+    # TIMELINE VIEW
+    # =========================================================================
+
+    elif view_mode == "Timeline":
+        # Timeline shows all filtered stories grouped by date range
+        # No pagination - all stories visible in chronological groups
+        # Timeline shows all roles grouped - clear any role filter
+        F["roles"] = []
+
+        if not view:
+            st.info("No stories match your filters yet.")
+            if st.button("Clear filters", key="clear_filters_timeline"):
+                reset_all_filters(stories)
+                st.rerun()
+        else:
+            # Render the timeline component
+
+            render_timeline_view(view)
+
+            # Story detail panel (if a story is selected)
+            detail = get_context_story(stories)
+            render_story_detail(detail, "timeline", stories)
 
     # === ADD FOOTER ===
     from ui.components.footer import render_footer

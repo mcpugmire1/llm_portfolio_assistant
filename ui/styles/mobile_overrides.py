@@ -217,10 +217,28 @@ def get_mobile_css() -> str:
                 margin: 24px auto 0 !important;
             }
 
+            /* Landing input + button - KEEP ON SAME ROW */
             [data-testid="stHorizontalBlock"]:has(.st-key-landing_input) {
-                flex-direction: column !important;
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
                 gap: 8px !important;
                 padding: 0 12px !important;
+                align-items: center !important;
+            }
+
+            /* Override column min-width */
+            [data-testid="stHorizontalBlock"]:has(.st-key-landing_input) .stColumn {
+                min-width: 0 !important;
+                flex-basis: auto !important;
+            }
+
+            [data-testid="stHorizontalBlock"]:has(.st-key-landing_input) .stColumn:first-child {
+                flex: 1 1 auto !important;
+            }
+
+            [data-testid="stHorizontalBlock"]:has(.st-key-landing_input) .stColumn:last-child {
+                flex: 0 0 auto !important;
+                width: auto !important;
             }
 
             /* Input field */
@@ -1324,6 +1342,12 @@ def get_mobile_css() -> str:
                 padding: 20px 16px !important;
                 min-height: auto !important;
                 margin: 0 !important;
+            }
+
+            .conversation-header-content {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 16px !important;
             }
 
             .conversation-agy-avatar {
