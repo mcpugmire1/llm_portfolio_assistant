@@ -62,9 +62,9 @@ structured metadata filtering to deliver context-aware, outcome-focused response
 ## 🛠️ Tech Stack
 
 - **Frontend**: Streamlit (Python)
-- **LLM**: OpenAI GPT-4
-- **Embeddings**: sentence-transformers (all-MiniLM-L6-v2)
-- **Vector DB**: Pinecone (cloud) or FAISS (local)
+- **LLM**: OpenAI GPT-4o-mini
+- **Embeddings**: OpenAI text-embedding-3-small (1536 dims)
+- **Vector DB**: Pinecone (cloud)
 - **Deployment**: Streamlit Cloud
 - **Future**: React + AWS migration
 
@@ -125,9 +125,9 @@ Built as a hands-on exploration of modern AI application development:
 ### Features
 - **Interactive Streamlit UI** for exploring career stories and technical projects
 - **Career story recall** in STAR format (with optional 5P summaries)
-- **Semantic search** with custom embeddings via `sentence-transformers`
-- **FAISS (local)** or **Pinecone (cloud)** vector search backends
-- **Local-first and private by design**, with optional cloud deployment
+- **Semantic search** with OpenAI embeddings (text-embedding-3-small)
+- **Pinecone (cloud)** vector search backend
+- **Production deployment** at [askmattgpt.streamlit.app](https://askmattgpt.streamlit.app)
 
 ---
 
@@ -186,13 +186,12 @@ for access or instructions to generate it from the source Excel file.
 ---
 
 ## 📝 Notes
-- Requires Python 3.10+
+- Requires Python 3.11+
 - Built with:
-  - `sentence-transformers` – Creates dense vector embeddings from text, enabling semantic search by meaning rather than keywords.
-  - `faiss` or `pinecone` – Vector databases that store embeddings and perform high-speed similarity searches to retrieve relevant stories.
-  - `streamlit` – Interactive Python framework for building browser-based UIs, used here for filters, queries, and mobile-friendly design.
-  - `openai` – Powers the conversational responses by synthesizing retrieved stories into clear, first-person narratives.
-- Optimized for both desktop and mobile use; includes sidebar filtering and semantic search.
+  - `openai` – Powers both embeddings (text-embedding-3-small) and conversational responses (GPT-4o-mini).
+  - `pinecone` – Cloud vector database that stores embeddings and performs high-speed similarity searches to retrieve relevant stories.
+  - `streamlit` – Interactive Python framework for building browser-based UIs, used here for filters, queries, and mobile-responsive design.
+- Optimized for both desktop and mobile use; includes advanced filtering, timeline views, and semantic search.
 
 
 ---
@@ -305,9 +304,9 @@ This script generates vector embeddings from the enriched JSONL data and uploads
   - FAISS (local vector database)
 
 - **Natural Language Embeddings**
-  - Uses `all-MiniLM-L6-v2` model (384 dimensions)
+  - Uses OpenAI `text-embedding-3-small` model (1536 dimensions)
   - Embeds 5P summary + Place + Industry context
-  - Optimized for semantic search
+  - Optimized for behavioral query matching
 
 - **Clean Re-indexing**
   - Purges existing namespace before upserting
