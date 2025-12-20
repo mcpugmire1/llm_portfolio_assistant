@@ -44,7 +44,7 @@
 **Project:** MattGPT Portfolio Assistant - AI-powered career story search and chat interface
 **Tech Stack:** Streamlit, OpenAI GPT-4o-mini, Pinecone vector DB, Python 3.11+
 **Data Corpus:** 130+ STAR-formatted transformation project stories
-**Last Updated:** December 9, 2024
+**Last Updated:** December 9, 2025
 
 ### Key Achievements
 
@@ -65,7 +65,7 @@
 - 6 shared utility modules (27 KB)
 - Zero circular dependencies
 
-### Current State (December 2024)
+### Current State (December 2025)
 
 **Ask MattGPT Modular Architecture:**
 - Landing view with capability cards and sample queries
@@ -83,7 +83,7 @@
 
 ### What This Document Contains
 
-1. **System Overview:** Current file structure, components, services (as of Dec 2024)
+1. **System Overview:** Current file structure, components, services (as of Dec 2025)
 2. **Data Pipeline:** Excel → JSONL → Embeddings → Pinecone → RAG
 3. **CSS Architecture:** Scoping patterns, emotion-cache strategies, dark mode
 4. **Mobile Roadmap:** Known issues, breakpoint strategy, implementation phases
@@ -141,7 +141,7 @@ llm_portfolio_assistant/
 │   │   ├── __init__.py
 │   │   ├── home.py                    # Home page (38 lines)
 │   │   ├── explore_stories.py         # Stories browser (1,306 lines)
-│   │   ├── ask_mattgpt/               # ✅ Modular structure (Dec 2024)
+│   │   ├── ask_mattgpt/               # ✅ Modular structure (Dec 2025)
 │   │   │   ├── __init__.py            # Router (1.9 KB)
 │   │   │   ├── landing_view.py        # Landing page UI (9.8 KB)
 │   │   │   ├── conversation_view.py   # Chat conversation UI (15.4 KB)
@@ -161,10 +161,14 @@ llm_portfolio_assistant/
 │   │
 │   └── legacy_components.py        # Legacy monolith (2,100 lines) - TO BE DELETED
 │
+├── echo_star_stories.jsonl         # Raw story corpus (130 stories)
+├── echo_star_stories_nlp.jsonl     # NLP-enriched story corpus (production)
+├── nonsense_filters.jsonl          # Off-domain query rules
+│
 ├── data/
-│   ├── echo_star_stories_nlp.jsonl # Story corpus (130+ stories)
-│   ├── nonsense_filters.jsonl      # Off-domain query rules
-│   └── offdomain_queries.csv       # Query telemetry log
+│   ├── offdomain_queries.csv       # Query telemetry log (generated)
+│   ├── borderline_queries.csv      # Edge case queries for testing
+│   └── intent_embeddings.json      # Semantic router embeddings cache
 │
 ├── assets/
 │   └── (images, SVGs, diagrams)
@@ -692,7 +696,7 @@ OPENAI_API_KEY=sk-proj-...
 PINECONE_API_KEY=pcsk_...
 PINECONE_INDEX_NAME=matt-portfolio-v2
 PINECONE_NAMESPACE=default
-STORIES_JSONL=data/echo_star_stories_nlp.jsonl
+STORIES_JSONL=echo_star_stories_nlp.jsonl
 ```
 
 ---
