@@ -786,6 +786,19 @@ def get_technical_details_html() -> str:
                         <div class="stat-label">Quality Stages</div>
                     </div>
                 </div>
+
+                <!-- Design Spec Link -->
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(139, 92, 246, 0.2); text-align: center;">
+                    <p style="margin: 0; color: #64748b; font-size: 0.95rem;">
+                        Want to go deeper?
+                        <a href="https://mcpugmire1.github.io/mattgpt-design-spec/"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           style="color: #8B5CF6; text-decoration: none; font-weight: 500; margin-left: 0.25rem;">
+                            View the full design specification →
+                        </a>
+                    </p>
+                </div>
             </div>
         </div>
     </div>

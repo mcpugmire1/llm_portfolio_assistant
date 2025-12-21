@@ -1145,6 +1145,24 @@ def detect_behavioral_query(query: str) -&gt; bool:
         unsafe_allow_html=True,
     )
 
+    # Design Spec Link
+    st.markdown(
+        """
+<div style="text-align: center; margin: 2.5rem 0; padding: 1.5rem; background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(99, 102, 241, 0.05) 100%); border-radius: 12px; border: 1px solid rgba(139, 92, 246, 0.2);">
+    <p style="margin: 0; font-size: 1rem; color: var(--text-primary, #2c3e50); line-height: 1.6;">
+        I documented the entire product development process — from strategy through architecture to implementation.
+        <a href="https://mcpugmire1.github.io/mattgpt-design-spec/"
+           target="_blank"
+           rel="noopener noreferrer"
+           style="color: #8B5CF6; text-decoration: none; font-weight: 600; margin-left: 0.25rem; white-space: nowrap;">
+            View Design Specification →
+        </a>
+    </p>
+</div>
+        """,
+        unsafe_allow_html=True,
+    )
+
     # CTA
     st.markdown(
         """
