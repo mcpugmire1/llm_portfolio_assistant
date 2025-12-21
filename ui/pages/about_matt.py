@@ -1148,8 +1148,8 @@ def detect_behavioral_query(query: str) -&gt; bool:
     # Design Spec Link
     st.markdown(
         """
-<div style="text-align: center; margin: 2.5rem 0; padding: 1.5rem; background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(99, 102, 241, 0.05) 100%); border-radius: 12px; border: 1px solid rgba(139, 92, 246, 0.2);">
-    <p style="margin: 0; font-size: 1rem; color: var(--text-primary, #2c3e50); line-height: 1.6;">
+<div class="deep-dive-card" style="margin-top: 2rem; margin-bottom: 2rem;">
+    <p style="margin: 0; font-size: 1rem; line-height: 1.6; text-align: center;">
         I documented the entire product development process — from strategy through architecture to implementation.
         <a href="https://mcpugmire1.github.io/mattgpt-design-spec/"
            target="_blank"
@@ -1159,6 +1159,7 @@ def detect_behavioral_query(query: str) -&gt; bool:
         </a>
     </p>
 </div>
+
         """,
         unsafe_allow_html=True,
     )

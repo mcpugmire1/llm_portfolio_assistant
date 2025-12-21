@@ -18,7 +18,10 @@ from ui.components.ask_mattgpt_header import (
     render_modal_wrapper_start,
     render_status_bar,
 )
-from ui.components.how_agy_modal import get_how_agy_flow_html
+from ui.components.how_agy_modal import (
+    get_how_agy_flow_html,
+    get_technical_details_html,
+)
 from ui.components.thinking_indicator import render_thinking_indicator
 from ui.pages.ask_mattgpt.backend_service import send_to_backend
 from ui.pages.ask_mattgpt.styles import get_landing_css
@@ -59,7 +62,8 @@ def render_landing_page(stories: list[dict]):
     # Modal (if open)
     if st.session_state.get("show_how_modal", False):
         st.markdown(render_modal_wrapper_start(), unsafe_allow_html=True)
-        components.html(get_how_agy_flow_html(), height=1200)
+        components.html(get_how_agy_flow_html(), height=1160)
+        components.html(get_technical_details_html(), height=730)
         st.markdown(render_modal_wrapper_end(), unsafe_allow_html=True)
 
     # === STATUS BAR ===

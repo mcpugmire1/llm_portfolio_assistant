@@ -18,12 +18,14 @@ import streamlit.components.v1 as components
 
 from config.debug import DEBUG
 from ui.components.ask_mattgpt_header import (
-    get_how_agy_flow_html,
-    get_technical_details_html,
     render_header,
     render_modal_wrapper_end,
     render_modal_wrapper_start,
     render_status_bar,
+)
+from ui.components.how_agy_modal import (
+    get_how_agy_flow_html,
+    get_technical_details_html,
 )
 from ui.components.thinking_indicator import render_thinking_indicator
 
@@ -119,7 +121,7 @@ def render_conversation_view(stories: list[dict]):
     if st.session_state.get("show_how_modal", False):
         st.markdown(render_modal_wrapper_start(), unsafe_allow_html=True)
         components.html(get_how_agy_flow_html(), height=1160)
-        components.html(get_technical_details_html(), height=670)
+        components.html(get_technical_details_html(), height=740)
         st.markdown(render_modal_wrapper_end(), unsafe_allow_html=True)
         # Remove: render_modal_close_wiring_js()
 
