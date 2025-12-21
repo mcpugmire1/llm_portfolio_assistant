@@ -14,8 +14,11 @@ import streamlit.components.v1 as components
 
 from ui.components.ask_mattgpt_header import (
     render_header,
+    render_modal_wrapper_end,
+    render_modal_wrapper_start,
     render_status_bar,
 )
+from ui.components.how_agy_modal import get_how_agy_flow_html
 from ui.components.thinking_indicator import render_thinking_indicator
 from ui.pages.ask_mattgpt.backend_service import send_to_backend
 from ui.pages.ask_mattgpt.styles import get_landing_css
@@ -54,12 +57,10 @@ def render_landing_page(stories: list[dict]):
     render_header(include_button=True, view="landing")
 
     # Modal (if open)
-    # if st.session_state.get("show_how_modal", False):
-    #     st.markdown(render_modal_wrapper_start(), unsafe_allow_html=True)
-    #     # components.html(get_how_agy_flow_html(), height=1200)
-    #     # components.html(get_technical_details_html(), height=670)
-    #     st.markdown(render_modal_wrapper_end(), unsafe_allow_html=True)
-    #     # Remove: render_modal_close_wiring_js()
+    if st.session_state.get("show_how_modal", False):
+        st.markdown(render_modal_wrapper_start(), unsafe_allow_html=True)
+        components.html(get_how_agy_flow_html(), height=1200)
+        st.markdown(render_modal_wrapper_end(), unsafe_allow_html=True)
 
     # === STATUS BAR ===
     st.markdown(render_status_bar(), unsafe_allow_html=True)
