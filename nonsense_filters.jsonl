@@ -60,7 +60,7 @@
 {"category":"medical_diagnosis","pattern":"\\b(do i have|symptoms of|is it|could it be)\\b.*(cancer|diabetes|disease|disorder|infection|syndrome)\\b"}
 {"category":"medical_advice","pattern":"\\b(should i (take|stop taking)|dosage|medicine for|cure for|treatment for)\\b"}
 {"category":"legal_advice","pattern":"\\b(can i sue|is it legal|lawyer for|legal advice|court case)\\b"}
-{"category":"homework","pattern":"\\b(solve|calculate|what is \\d+|equation|math problem|homework help)\\b"}
+{"category":"homework","pattern":"\\b(calculate|what is \\d+|equation|math problem|homework help)\\b"}
 {"category":"jokes_riddles","pattern":"\\b(tell me a joke|make me laugh|riddle|knock knock|funny story)\\b"}
 {"category":"dating_relationships","pattern":"\\b(how to (ask out|break up|get over)|relationship advice|dating tips|tinder|bumble)\\b"}
 {"category":"news_current_events","pattern":"\\b(what happened (today|yesterday)|breaking news|latest news|current events)\\b"}
