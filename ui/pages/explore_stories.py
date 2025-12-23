@@ -1882,7 +1882,7 @@ def render_explore_stories(
                 """,
             )
             gob.configure_column("Role", flex=3)
-            gob.configure_column("Start_Date", flex=2, headerName="Start")
+            gob.configure_column("Start_Date", flex=2, headerName="Start Date")
             gob.configure_column(
                 "Domain",
                 flex=4,
