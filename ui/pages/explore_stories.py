@@ -138,6 +138,11 @@ def remove_filter_value(filter_key: str, value: str):
 
         return
 
+    # Handle string filters (not lists)
+    if filter_key in ("era", "industry", "capability"):
+        F[filter_key] = ""
+        return
+
     # Remove from filter state (existing multi-select logic)
     if filter_key in F and isinstance(F[filter_key], list):
         if value in F[filter_key]:
