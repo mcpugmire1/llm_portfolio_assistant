@@ -1871,21 +1871,21 @@ def render_explore_stories(
             gob.configure_default_column(resizable=True, sortable=True, filter=True)
 
             gob.configure_column("ID", hide=True)
-            gob.configure_column("Title", flex=9)
+            gob.configure_column("Title", flex=2, minWidth=300, tooltipField="Title")
             gob.configure_column(
                 "Client",
-                flex=4,
+                width=150,
                 cellRenderer="""
                     function(params) {
                         return '<span class="client-badge">' + params.value + '</span>';
                     }
                 """,
             )
-            gob.configure_column("Role", flex=3)
-            gob.configure_column("Start_Date", flex=2, headerName="Start Date")
+            gob.configure_column("Role", flex=1)
+            gob.configure_column("Start_Date", width=100, headerName="Start Date")
             gob.configure_column(
                 "Domain",
-                flex=4,
+                flex=1,
                 cellRenderer="""
                     function(params) {
                         return '<span class="domain-tag">' + params.value + '</span>';
