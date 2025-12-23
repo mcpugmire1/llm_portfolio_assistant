@@ -74,6 +74,7 @@ def matches_filters(s: dict[str, Any], F: dict[str, Any] | None = None) -> bool:
     roles = F.get("roles", []) or []
     tags = F.get("tags", []) or []
     has_metric = bool(F.get("has_metric", False))
+    era = F.get("era", "") or ""  # Era filter for Timeline navigation
 
     # Industry filter (NEW) - uses "Industry" field from JSONL
     if industry and s.get("Industry") != industry:
@@ -81,6 +82,10 @@ def matches_filters(s: dict[str, Any], F: dict[str, Any] | None = None) -> bool:
 
     # Capability filter (NEW) - uses "Solution / Offering" field from JSONL
     if capability and s.get("Solution / Offering") != capability:
+        return False
+
+    # Era filter - uses "Era" field from JSONL
+    if era and s.get("Era") != era:
         return False
 
     # Persona filter (not used - field doesn't exist in data)

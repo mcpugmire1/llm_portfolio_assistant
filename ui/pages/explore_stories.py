@@ -107,6 +107,7 @@ def reset_all_filters(stories: list[dict]):
         "tags": [],
         "q": "",
         "has_metric": False,
+        "era": "",
     }
 
     # STEP 4: Set INCREMENTED version counters (using values we saved earlier)
@@ -283,6 +284,8 @@ def render_filter_chips(filters: dict, stories: list[dict]) -> bool:
         chips.append(("Industry", filters["industry"], ("industry", None)))
     if filters.get("capability"):
         chips.append(("Capability", filters["capability"], ("capability", None)))
+    if filters.get("era"):
+        chips.append(("Era", filters["era"], ("era", None)))
 
     # Advanced filters (multi-select)
     for label, key in [
@@ -1479,6 +1482,13 @@ def render_explore_stories(
         st.session_state["explore_view_mode"] = st.session_state.pop(
             "prefilter_view_mode"
         )
+    if "prefilter_era" in st.session_state:
+        F["era"] = st.session_state.pop("prefilter_era")
+        # Scroll to top
+        components.html(
+            '<script>window.parent.document.querySelector("section.main").scrollTo(0, 0);</script>',
+            height=0,
+        )
 
     # ==================================================================
     # FILTERS SECTION - REDESIGNED (Phase 4)
@@ -1709,6 +1719,7 @@ def render_explore_stories(
                 F.get("domains"),
                 F.get("roles"),
                 F.get("tags"),
+                F.get("era"),
                 F.get("has_metric"),
             ]
         )
