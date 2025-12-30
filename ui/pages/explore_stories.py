@@ -1397,8 +1397,8 @@ def render_explore_stories(
             display: none !important;
         }
         /* -----------------------------------------
-           TABLE
-           ----------------------------------------- */
+        TABLE
+        ----------------------------------------- */
         .ag-root-wrapper {
             overflow-x: auto !important;
             -webkit-overflow-scrolling: touch !important;
@@ -1406,7 +1406,7 @@ def render_explore_stories(
 
         .ag-header,
         .ag-body-viewport {
-            min-width: 500px !important;
+            min-width: 600px !important;
         }
 
         .ag-header-cell[col-id="Domain"],
@@ -1858,6 +1858,7 @@ def render_explore_stories(
             for c in ["Title", "Client", "Role", "Start_Date", "Domain"]
             if c in df.columns
         ]
+
         show_df = df[show_cols] if show_cols else df
 
         if not _HAS_AGGRID:
@@ -1871,27 +1872,22 @@ def render_explore_stories(
             gob.configure_default_column(resizable=True, sortable=True, filter=True)
 
             gob.configure_column("ID", hide=True)
-            gob.configure_column("Title", flex=2, minWidth=300, tooltipField="Title")
+            gob.configure_column("Title", flex=2, minWidth=200, tooltipField="Title")
             gob.configure_column(
                 "Client",
-                width=150,
+                flex=1,
+                minWidth=120,
                 cellRenderer="""
                     function(params) {
                         return '<span class="client-badge">' + params.value + '</span>';
                     }
                 """,
             )
-            gob.configure_column("Role", flex=1)
-            gob.configure_column("Start_Date", width=100, headerName="Start Date")
+            gob.configure_column("Role", flex=1, minWidth=100)
             gob.configure_column(
-                "Domain",
-                flex=1,
-                cellRenderer="""
-                    function(params) {
-                        return '<span class="domain-tag">' + params.value + '</span>';
-                    }
-                """,
+                "Start_Date", flex=0.5, minWidth=90, headerName="Start Date"
             )
+            gob.configure_column("Domain", flex=1, minWidth=150)
 
             gob.configure_selection(selection_mode="single", use_checkbox=False)
             gob.configure_pagination(enabled=False)
@@ -1900,6 +1896,9 @@ def render_explore_stories(
             opts["suppressRowClickSelection"] = False
             opts["rowSelection"] = "single"
             opts["rowHeight"] = TABLE_ROW_HEIGHT
+            opts["suppressHorizontalScroll"] = (
+                False  # False = allow horizontal scroll/swipe
+            )
 
             grid = AgGrid(
                 df_view,
