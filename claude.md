@@ -172,6 +172,12 @@ ERA_ORDER = [
 - **Hardcode values that are already CSS variables** — Always check global_styles.py first
 - **Generate fantasy roadmaps** — No "100K users", "99.9% SLA", "enterprise customers" nonsense
 
+## Working with Claude
+- Start with "what's the minimal fix?" before architectural changes
+- Verify root cause before accepting complex solutions
+- Check simple things first: regex, config, cache, typos
+- If Claude proposes 50+ lines, ask "is there a simpler way?"
+
 ## Quality Standards
 - **"Can you defend it?"** — Every claim, metric, or statement must be factually accurate
 - **No AI fabrications** — Real stories from real experience only
