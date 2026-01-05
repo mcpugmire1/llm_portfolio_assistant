@@ -9,6 +9,22 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 
+# Handle deep-link to specific story via ?story= query param
+def handle_story_deeplink():
+    query_params = st.query_params
+    if 'story' in query_params:
+        story_id = query_params['story']
+        # Convert sanitized ID back if needed (hyphens to pipes)
+        # Only set if not already set (avoid overwriting user selection)
+        if not st.session_state.get('_deeplink_handled'):
+            st.session_state['active_story'] = story_id
+            st.session_state['_deeplink_handled'] = True
+
+
+# Call it early
+handle_story_deeplink()
+
+
 def _format_nested_bullet(text: str) -> str:
     """
     Format text with delimiters (◘, •, -) into nested HTML bullets.
@@ -203,9 +219,23 @@ def on_ask_this_story(detail: dict):
 
 
 def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict]):
-    """Render the story detail panel with full STAR narrative and sidebar (matches wireframe)"""
+    """Render the story detail panel with full STAR narrative and sidebar (matches wireframe).
 
-    hr_style = "margin: 16px 0 12px 0; border: none; border-top: 3px solid #8B5CF6;"
+    Args:
+        detail: Story dictionary to display
+        key_suffix: Suffix for widget keys (automatically sanitized for Streamlit compatibility)
+        stories: Full list of stories for Related Projects
+
+    Note:
+        key_suffix is sanitized to replace pipes (|) and spaces with hyphens (-).
+        Story IDs use pipe delimiters (e.g., "title|client") which aren't allowed in Streamlit widget keys.
+    """
+
+    # Sanitize key_suffix for Streamlit widget keys (pipes not allowed)
+    # Story IDs use | delimiter (e.g., "title|client") but Streamlit keys don't support it
+    key_suffix = key_suffix.replace('|', '-').replace(' ', '-')
+
+    hr_style = "margin: 16px 0 12px 0; border: none; border-top: 4px solid #8B5CF6; box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);"
     st.markdown(f"<hr style='{hr_style}'>", unsafe_allow_html=True)
 
     if not detail:
@@ -248,9 +278,9 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
 
     # HEADER: Title + Metadata + Action Buttons
     # Using HTML buttons for pixel-perfect control (same pattern as Ask Agy button)
-
-    share_btn_key = f"share_{key_suffix}_{detail.get('id', 'x')}"
-    export_btn_key = f"export_{key_suffix}_{detail.get('id', 'x')}"
+    story_id_original = detail.get("id", "")
+    story_id_safe = str(detail.get('id', 'x')).replace('|', '-').replace(' ', '-')
+    export_btn_key = f"export_{key_suffix}_{story_id_safe}"
 
     header_html = f"""
     <style>
@@ -262,6 +292,9 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
         margin-bottom: 20px;
         padding-bottom: 16px;
         border-bottom: 2px solid var(--border-color, #e0e0e0);
+        background: linear-gradient(180deg, var(--accent-purple-bg) 0%, transparent 100%);
+        padding-top: 16px;
+        scroll-margin-top: 80px;
     }}
 
     .detail-title-section {{
@@ -271,7 +304,7 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
     .detail-title {{
         font-size: 24px !important;
         font-weight: 700 !important;
-        color: #2c3e50 !important;
+        color: var(--accent-purple-text) !important;
         margin-bottom: 12px !important;
         line-height: 1.3 !important;
     }}
@@ -391,7 +424,7 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
             <div class="detail-title">{title}</div>
             <div class="detail-meta">
                 <div class="detail-meta-item">
-                    <span class="meta-icon">🏢</span>
+                    <span class="meta-icon">💼</span>
                     <strong>{client}</strong>
                 </div>
                 <div class="detail-meta-item">
@@ -400,7 +433,7 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
                 </div>
                 {'<div class="detail-meta-item"><span class="meta-icon">📅</span><span>' + date_range + '</span></div>' if date_range else ''}
                 <div class="detail-meta-item">
-                    <span class="meta-icon">🏷️</span>
+                    <span class="meta-icon">📁</span>
                     <span>{domain}</span>
                 </div>
             </div>
@@ -418,10 +451,6 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
     </div>
     """
     st.markdown(header_html, unsafe_allow_html=True)
-
-    # Hidden Streamlit buttons for triggering actions
-    if st.button("", key=share_btn_key):
-        st.toast("💡 To share: Copy the URL from your browser address bar", icon="ℹ️")
 
     export_clicked = st.button("", key=export_btn_key)
 
@@ -467,7 +496,7 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
                 </head>
                 <body>
                     <h1>{title}</h1>
-                    <div class="meta">🏢 {client} • 🤝 {role} • 📅 {date_range} • 🏷️ {domain}</div>
+                    <div class="meta">💼 {client} • 🤝 {role} • 📅 {date_range} • 📁 {domain}</div>
 
                     <div class="summary">
                         <div class="summary-title">💡 WHY THIS MATTERS</div>
@@ -508,32 +537,62 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
     # JS wiring for HTML buttons
     components.html(
         f"""
-    <script>
-    (function() {{
-        setTimeout(function() {{
+        <script>
+        (function() {{
             var parentDoc = window.parent.document;
 
-            // Share button
-            var shareBtn = parentDoc.getElementById('btn-share-story');
-            if (shareBtn) {{
-                shareBtn.onclick = function() {{
-                    var stBtn = parentDoc.querySelector('[class*="st-key-{share_btn_key}"] button');
-                    if (stBtn) stBtn.click();
-                }};
-            }}
+            // Micro-scroll with offset for navbar
+            setTimeout(function() {{
+                var detail = parentDoc.querySelector('.detail-header');
+                if (detail) {{
+                    var rect = detail.getBoundingClientRect();
+                    var scrollTop = window.parent.scrollY + rect.top - 100;
+                    detail.scrollIntoView({{ behavior: 'smooth', block: 'start' }});
+                }}
 
-            // Export button
-            var exportBtn = parentDoc.getElementById('btn-export-story');
-            if (exportBtn) {{
-                exportBtn.onclick = function() {{
-                    var stBtn = parentDoc.querySelector('[class*="st-key-{export_btn_key}"] button');
-                    if (stBtn) stBtn.click();
-                }};
-            }}
-        }}, 200);
-    }})();
-    </script>
-    """,
+                // Wire buttons after scroll
+                setTimeout(function() {{
+                    var shareBtn = parentDoc.getElementById('btn-share-story');
+                    if (shareBtn) {{
+                        shareBtn.onclick = function(e) {{
+                            e.preventDefault();
+                            var storyId = '{story_id_original}';
+                            var url = window.parent.location.origin + window.parent.location.pathname + '?story=' + encodeURIComponent(storyId);
+
+                            var tempInput = parentDoc.createElement('input');
+                            tempInput.style.position = 'absolute';
+                            tempInput.style.left = '-9999px';
+                            tempInput.style.opacity = '0';
+                            tempInput.value = url;
+                            parentDoc.body.appendChild(tempInput);
+                            tempInput.select();
+                            parentDoc.execCommand('copy');
+                            parentDoc.body.removeChild(tempInput);
+
+                            var originalHTML = shareBtn.innerHTML;
+                            shareBtn.innerHTML = '<span>✓</span><span class="btn-label">Copied!</span>';
+                            shareBtn.style.borderColor = '#10B981';
+                            shareBtn.style.color = '#10B981';
+                            setTimeout(function() {{
+                                shareBtn.innerHTML = originalHTML;
+                                shareBtn.style.borderColor = '';
+                                shareBtn.style.color = '';
+                            }}, 2000);
+                        }};
+                    }}
+
+                    var exportBtn = parentDoc.getElementById('btn-export-story');
+                    if (exportBtn) {{
+                        exportBtn.onclick = function() {{
+                            var stBtn = parentDoc.querySelector('[class*="st-key-{export_btn_key}"] button');
+                            if (stBtn) stBtn.click();
+                        }};
+                    }}
+                }}, 500);
+            }}, 200);
+        }})();
+        </script>
+        """,
         height=0,
     )
 
@@ -641,9 +700,10 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
             for comp in competencies:
                 if comp:
                     st.markdown(
-                        f'<div style="padding: 8px 0; font-size: 13px; color: var(--text-secondary); border-bottom: 1px solid var(--border-light);">{comp}</div>',
+                        f'<div style="padding: 8px 0; font-size: 13px; color: var(--text-secondary);">{comp}</div>',
                         unsafe_allow_html=True,
                     )
+
             st.markdown(
                 '<div style="border-bottom: 1px solid var(--border-color); margin: 24px 0;"></div>',
                 unsafe_allow_html=True,
@@ -666,20 +726,20 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
 
         if metrics:
             st.markdown(
-                '<div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px;">KEY METRICS</div>',
+                '<div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 12px;">KEY METRICS</div>',
                 unsafe_allow_html=True,
             )
             for value, label in metrics[:4]:
                 metric_html = f'''
                 <div style="background: var(--bg-surface); padding: 12px; border-radius: 6px; border-left: 3px solid var(--success-color); margin-bottom: 12px;">
                     <div style="font-size: 18px; font-weight: 700; color: var(--success-color); margin-bottom: 4px;">{value}</div>
-                    <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase;">{label}</div>
+                    <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase;">{label}</div>
                 </div>
                 '''
                 st.markdown(metric_html, unsafe_allow_html=True)
 
     # ASK AGY ABOUT THIS
-    btn_key = f"ask_story_{key_suffix}_{detail.get('id', 'x')}"
+    btn_key = f"ask_story_{key_suffix}_{story_id_safe}"
     st.markdown(
         """
         <style>
@@ -695,8 +755,8 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
             text-decoration: none !important;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.25);
         }
+
         .card-btn-primary:hover {
             background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%);
             transform: translateY(-2px);

@@ -74,30 +74,6 @@ def render_banking_landing():
     <style>
     /* === CARD BUTTON STYLES === */
 
-    /* Buttons inside capability cards (theme-aware) */
-    .card-btn-outline {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 16px;
-        background: var(--bg-surface);
-        border: 2px solid var(--border-color);
-        border-radius: 6px;
-        color: var(--accent-purple) !important;
-        font-weight: 600;
-        font-size: 13px;
-        text-decoration: none !important;
-        cursor: pointer;
-        transition: all 0.2s ease;
-    }
-
-    .card-btn-outline:hover {
-        background: var(--accent-purple);
-        border-color: var(--accent-purple);
-        color: white !important;
-        text-decoration: none !important;
-    }
-
     /* Ask Agy button - always purple filled */
     .card-btn-primary {
         display: inline-block;
@@ -346,10 +322,6 @@ def render_banking_landing():
             font-size: 11px !important;
             margin-bottom: 8px !important;
         }
-        .card-btn-outline {
-            padding: 6px 12px !important;
-            font-size: 11px !important;
-        }
         /* CTA */
         .cta-section {
             padding: 20px 14px !important;
@@ -389,7 +361,7 @@ def render_banking_landing():
         color: var(--accent-purple);
         background: var(--accent-purple-bg);
     }
-    /* Category cards (theme-aware) */
+    /* Category cards (theme-aware) - CLICKABLE, NO BUTTON */
     .capability-card {
         background: var(--bg-card);
         border: 1px solid var(--border-color);
@@ -399,6 +371,7 @@ def render_banking_landing():
         box-shadow: 0 1px 3px rgba(0,0,0,0.08);
         transition: all 0.3s ease;
         height: 100%;
+        cursor: pointer;
     }
     .capability-card:hover {
         border-color: var(--accent-purple);
@@ -428,7 +401,7 @@ def render_banking_landing():
         font-size: 13px;
         color: var(--text-secondary);
         line-height: 1.5;
-        margin-bottom: 12px;
+        margin-bottom: 0;
     }
     </style>
     """,
@@ -463,139 +436,121 @@ def render_banking_landing():
         unsafe_allow_html=True,
     )
 
-    # Banking categories data with varied button text
+    # Banking categories data (removed button_text - no longer needed)
     banking_categories = [
         (
             "⚡",
             "Agile Transformation & Delivery",
             8,
             "Scaling agile practices, delivery acceleration, team transformation",
-            "View Agile Projects →",
         ),
         (
             "💰",
             "Global Payments & Treasury Solutions",
             7,
             "Payment platforms, treasury systems, real-time processing",
-            "View Payment Projects →",
         ),
         (
             "🎯",
             "Technology Strategy & Advisory",
             5,
             "Architecture roadmaps, strategic planning, technology vision",
-            "View Strategy Work →",
         ),
         (
             "📊",
             "Program Management & Governance",
             4,
             "Large-scale program delivery, governance frameworks, PMO",
-            "View Programs →",
         ),
         (
             "🔧",
             "Modern Engineering Practices & Solutions",
             4,
             "DevOps, CI/CD, cloud-native engineering, modern toolchains",
-            "View Engineering Work →",
         ),
         (
             "📈",
             "Data & Analytics Solutions",
             3,
             "Data platforms, analytics, business intelligence",
-            "View Analytics Projects →",
         ),
         (
             "🤝",
             "Cross-Functional Collaboration & Team Enablement",
             3,
             "Team alignment, collaboration frameworks, culture change",
-            "View Team Projects →",
         ),
         (
             "🔄",
             "Business Process Optimization",
             3,
             "Process reengineering, workflow automation, efficiency",
-            "View Process Work →",
         ),
         (
             "🔌",
             "Enterprise Integration & API Management",
             2,
             "API platforms, integration architecture, service mesh",
-            "View Integration Work →",
         ),
         (
             "📱",
             "Digital Product Development",
             2,
             "Mobile banking, customer experiences, digital channels",
-            "View Product Work →",
         ),
         (
             "🔐",
             "Compliance & Risk Solutions",
             2,
             "Regulatory compliance, risk frameworks, audit support",
-            "View Compliance Work →",
         ),
         (
             "🚢",
             "DevOps & Continuous Delivery",
             1,
             "Automation, deployment pipelines, continuous integration",
-            "View DevOps Projects →",
         ),
         (
             "☁️",
             "Cloud Transformation & Migration",
             1,
             "Cloud strategy, migrations, hybrid cloud architectures",
-            "View Cloud Projects →",
         ),
         (
             "🔨",
             "Application Modernization",
             1,
             "Legacy modernization, microservices, platform engineering",
-            "View Modernization Work →",
         ),
         (
             "📦",
             "Adoption Enablement & Developer Toolkit",
             1,
             "Developer experience, tooling, productivity platforms",
-            "View Enablement Work →",
         ),
     ]
 
-    # Render cards in 3-column grid with varied button text
+    # Render cards in 3-column grid - CLICKABLE CARDS, NO BUTTONS
     for i in range(0, len(banking_categories), 3):
         cols = st.columns(3)
         for j in range(3):
             if i + j < len(banking_categories):
-                icon, title, count, desc, button_text = banking_categories[i + j]
+                icon, title, count, desc = banking_categories[i + j]
                 with cols[j]:
                     # Singular/plural handling
                     project_text = "project" if count == 1 else "projects"
 
-                    # Generate safe ID for button
-                    button_id = f"btn-banking-{i}-{j}"
+                    # Generate safe ID for card
+                    card_id = f"card-banking-{i}-{j}"
 
-                    # Card content with HTML button
+                    # Card content - NO BUTTON, whole card is clickable
                     st.markdown(
                         f"""
-                    <div class="capability-card">
+                    <div class="capability-card" id="{card_id}" data-title="{title}">
                         <div class="card-icon">{icon}</div>
                         <div class="card-title">{title}</div>
                         <div class="card-count">{count} {project_text}</div>
                         <div class="card-desc">{desc}</div>
-                        <div>
-                            <a id="{button_id}" class="card-btn-outline">{button_text}</a>
-                        </div>
                     </div>
                     """,
                         unsafe_allow_html=True,
@@ -632,47 +587,45 @@ def render_banking_landing():
         st.session_state["active_tab"] = "Ask MattGPT"
         st.rerun()
 
-    # JavaScript to wire HTML buttons to Streamlit buttons
+    # JavaScript to wire clickable cards and CTA button to Streamlit buttons
     components.html(
         """
 <script>
 (function() {
-    function wireButtons() {
+    function wireCards() {
         const parentDoc = window.parent.document;
 
-        // Build button map dynamically for all banking cards
-        const buttonMap = {
-            'btn-banking-cta': 'card_btn_banking_cta'
-        };
-
-        // Add all banking card buttons (15 capability cards in 3-column grid)
-        for (let i = 0; i < 15; i++) {
-            for (let j = 0; j < 3; j++) {
-                const idx = i + j;
-                if (idx < 15) {
-                    buttonMap[`btn-banking-${i}-${j}`] = `card_btn_banking_${i}_${j}`;
-                }
-            }
+        // Wire CTA button
+        const ctaBtn = parentDoc.getElementById('btn-banking-cta');
+        if (ctaBtn && !ctaBtn.dataset.wired) {
+            ctaBtn.dataset.wired = 'true';
+            ctaBtn.onclick = function() {
+                const stBtn = parentDoc.querySelector('[class*="st-key-card_btn_banking_cta"] button');
+                if (stBtn) stBtn.click();
+            };
         }
 
-        // Wire each HTML button to its Streamlit counterpart
-        for (const [htmlId, stKey] of Object.entries(buttonMap)) {
-            const htmlBtn = parentDoc.getElementById(htmlId);
-            if (htmlBtn && !htmlBtn.dataset.wired) {
-                htmlBtn.dataset.wired = 'true';
-                htmlBtn.onclick = function() {
-                    const stBtn = parentDoc.querySelector('[class*="st-key-' + stKey + '"] button');
-                    if (stBtn) stBtn.click();
-                };
+        // Wire all capability cards (click anywhere on card)
+        for (let i = 0; i < 15; i++) {
+            for (let j = 0; j < 3; j++) {
+                const cardId = `card-banking-${i}-${j}`;
+                const card = parentDoc.getElementById(cardId);
+                if (card && !card.dataset.wired) {
+                    card.dataset.wired = 'true';
+                    card.onclick = function() {
+                        const stBtn = parentDoc.querySelector(`[class*="st-key-card_btn_banking_${i}_${j}"] button`);
+                        if (stBtn) stBtn.click();
+                    };
+                }
             }
         }
     }
 
-    // Run multiple times to catch all buttons as they render
-    setTimeout(wireButtons, 100);
-    setTimeout(wireButtons, 300);
-    setTimeout(wireButtons, 600);
-    setTimeout(wireButtons, 1000);
+    // Run multiple times to catch all cards as they render
+    setTimeout(wireCards, 100);
+    setTimeout(wireCards, 300);
+    setTimeout(wireCards, 600);
+    setTimeout(wireCards, 1000);
 })();
 </script>
 """,

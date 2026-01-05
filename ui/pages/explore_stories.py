@@ -10,6 +10,9 @@ FIXES:
 - Clear all properly resets all dropdowns
 - Extracted duplicate code (detail panel, pagination)
 - Centralized state management
+- [2025-01] Fixed filter state consistency issues (industry/capability/era)
+- [2025-01] Fixed page size dropdown resetting
+- [2025-01] Fixed prefilter keys not clearing on reset
 """
 
 import os
@@ -63,7 +66,7 @@ except Exception:
 
 
 def reset_all_filters(stories: list[dict]):
-    """Reset all filters and widget state to defaults - FIXED VERSION"""
+    """Reset all filters and widget state to defaults - COMPREHENSIVE FIX"""
 
     # STEP 1: READ current version counters BEFORE deleting anything
     version_counters = {}
@@ -75,6 +78,9 @@ def reset_all_filters(stories: list[dict]):
         "roles",
         "tags",
         "domain_cat",
+        "industry",
+        "capability",
+        "era",
     ]:
         version_key = f"_widget_version_{filter_type}"
         current = st.session_state.get(version_key, 0)
@@ -98,7 +104,7 @@ def reset_all_filters(stories: list[dict]):
     for key in keys_to_delete:
         del st.session_state[key]
 
-    # STEP 3: Recreate filters from scratch
+    # STEP 3: Recreate filters from scratch - ALL KEYS
     st.session_state["filters"] = {
         "personas": [],
         "clients": [],
@@ -108,6 +114,8 @@ def reset_all_filters(stories: list[dict]):
         "q": "",
         "has_metric": False,
         "era": "",
+        "industry": "",
+        "capability": "",
     }
 
     # STEP 4: Set INCREMENTED version counters (using values we saved earlier)
@@ -119,6 +127,25 @@ def reset_all_filters(stories: list[dict]):
     st.session_state["_last_domain_group"] = "All"
     st.session_state["page_offset"] = 0
     st.session_state["last_results"] = stories
+
+    # STEP 6: Clear any lingering prefilter keys (belt and suspenders)
+    for key in [
+        "prefilter_industry",
+        "prefilter_capability",
+        "prefilter_domains",
+        "prefilter_roles",
+        "prefilter_view_mode",
+        "prefilter_era",
+    ]:
+        st.session_state.pop(key, None)
+
+    # STEP 7: Clear deeplink flag to allow re-triggering
+    st.session_state.pop("_deeplink_story", None)
+
+    # STEP 8: Clear search cache
+    st.session_state.pop("__last_search_results__", None)
+    st.session_state.pop("__last_search_confidence__", None)
+    st.session_state.pop("__last_search_query__", None)
 
     # CRITICAL: Preserve the active tab
     if "active_tab" not in st.session_state:
@@ -132,15 +159,27 @@ def remove_filter_value(filter_key: str, value: str):
     # Handle search query specially
     if filter_key == "q":
         F["q"] = ""
-        # The version increment is essential to force a widget refresh
         version_key = "_widget_version_q"
         st.session_state[version_key] = st.session_state.get(version_key, 0) + 1
-
         return
 
     # Handle string filters (not lists)
     if filter_key in ("era", "industry", "capability"):
         F[filter_key] = ""
+        version_key = f"_widget_version_{filter_key}"
+        current_version = st.session_state.get(version_key, 0)
+        st.session_state[version_key] = current_version + 1
+        widget_key = f"facet_{filter_key}"
+        for v in range(current_version + 2):
+            versioned_key = f"{widget_key}_v{v}"
+            if versioned_key in st.session_state:
+                del st.session_state[versioned_key]
+        # Clear search cache and re-trigger search
+        st.session_state.pop("__last_search_results__", None)
+        st.session_state.pop("__last_search_confidence__", None)
+        st.session_state.pop("__last_search_query__", None)
+        if F.get("q"):
+            st.session_state["__search_triggered__"] = True
         return
 
     # Remove from filter state (existing multi-select logic)
@@ -163,22 +202,25 @@ def remove_filter_value(filter_key: str, value: str):
     }
 
     widget_keys_raw = widget_map.get(filter_key, [])
-    if not isinstance(widget_keys_raw, list):
-        widget_keys = [widget_keys_raw]
-    else:
-        widget_keys = widget_keys_raw
+    widget_keys = (
+        [widget_keys_raw] if isinstance(widget_keys_raw, str) else list(widget_keys_raw)
+    )
 
     # Delete both the base key AND any versioned keys that exist
     for widget_key in widget_keys:
-        # Delete base key if it exists
         if widget_key in st.session_state:
             del st.session_state[widget_key]
-
-        # Delete versioned keys (check up to version 100 to be safe)
         for v in range(current_version + 2):
             versioned_key = f"{widget_key}_v{v}"
             if versioned_key in st.session_state:
                 del st.session_state[versioned_key]
+
+    # Clear search cache and re-trigger search
+    st.session_state.pop("__last_search_results__", None)
+    st.session_state.pop("__last_search_confidence__", None)
+    st.session_state.pop("__last_search_query__", None)
+    if F.get("q"):
+        st.session_state["__search_triggered__"] = True
 
 
 def build_domain_options(
@@ -328,25 +370,13 @@ def render_filter_chips(filters: dict, stories: list[dict]) -> bool:
     if to_remove:
         for k, v in to_remove:
             if k == "q":
-                # Calls remove_filter_value, which correctly handles versioning and F["q"] clearing.
                 remove_filter_value("q", None)
-
-                # The redundant version increment block is now gone.
-
                 # Clear cached search results
                 st.session_state.pop("__last_search_results__", None)
                 st.session_state.pop("__last_search_confidence__", None)
                 st.session_state.pop("__last_search_query__", None)
             elif k == "has_metric":
                 filters["has_metric"] = False
-            elif k == "industry":
-                filters["industry"] = ""
-                version_key = "_widget_version_industry"
-                st.session_state[version_key] = st.session_state.get(version_key, 0) + 1
-            elif k == "capability":
-                filters["capability"] = ""
-                version_key = "_widget_version_capability"
-                st.session_state[version_key] = st.session_state.get(version_key, 0) + 1
             else:
                 remove_filter_value(k, v)
 
@@ -714,7 +744,17 @@ def render_explore_stories(
     /* =============================================================================
        FORM INPUTS - BASE STYLES
        ============================================================================= */
+
+    [data-baseweb="input"],
+    [data-baseweb="base-input"],
+    [data-baseweb="input"] input {
+            min-height: 44px !important;
+            height: 44px !important;
+        }
+
     .main .stTextInput > div > div > input {
+        height: 44px !important;
+        min-height: 44px !important;
         width: 100% !important;
         padding: 10px 14px !important;
         border: 2px solid var(--border-color) !important;
@@ -1111,6 +1151,96 @@ def render_explore_stories(
         font-size: 11px;
         font-weight: 500;
     }
+    .card-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 12px;
+        border-top: 1px solid var(--border-color);
+        margin-top: auto;
+    }
+
+    .role-badge {
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--text-secondary);
+        max-width: 180px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .domain-tag {
+        font-size: 11px;
+        color: var(--text-muted);
+        text-align: right;
+        max-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    /* Selected card state */
+    .fixed-height-card.selected {
+        border-color: var(--accent-purple) !important;
+        box-shadow: 0 0 0 3px var(--accent-purple-light) !important;
+    }
+
+    /* Close hint on selected card */
+    .card-close-hint {
+        text-align: center;
+        font-size: 12px;
+        color: var(--accent-purple);
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px solid var(--border-color);
+    }
+
+    /* Detail connector arrow */
+    .detail-connector {
+        display: flex;
+        justify-content: center;
+        margin: -10px 0 10px 0;
+    }
+
+    .detail-arrow-up {
+        width: 0;
+        height: 0;
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
+        border-bottom: 12px solid var(--accent-purple);
+    }
+
+    .card-close-hint {
+        font-size: 11px;
+        margin-top: 8px;
+        padding-top: 8px;
+    }
+
+
+    /* Selected card becomes Close button */
+    .card-close-state {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        min-height: 280px;
+        color: var(--accent-purple);
+    }
+
+    .card-close-state .close-x {
+        font-size: 36px;
+        font-weight: 300;
+        margin-bottom: 8px;
+    }
+
+    .card-close-state .close-text {
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
 
     /* =============================================================================
        SPACING ADJUSTMENTS
@@ -1260,6 +1390,17 @@ def render_explore_stories(
             margin: 0 0 4px 0 !important;
         }
 
+        /* Fix dropdown text truncation */
+        .stSelectbox [data-baseweb="select"] > div {
+            min-width: 100% !important;
+            overflow: visible !important;
+        }
+
+        .stSelectbox [data-baseweb="select"] span {
+            overflow: visible !important;
+            text-overflow: unset !important;
+        }
+
         /* Industry - 50% */
         [data-testid="stColumn"]:has([class*="st-key-facet_industry"]) {
             flex: 0 0 calc(50% - 4px) !important;
@@ -1315,9 +1456,14 @@ def render_explore_stories(
 
         .stSelectbox > div > div {
             padding: 10px 12px !important;
-            font-size: 14px !important;
+            font-size: 15px !important;
             min-height: 44px !important;
             border-radius: 8px !important;
+        }
+
+        .stSelectbox [data-baseweb="select"] > div {
+            display: flex !important;
+            align-items: center !important;
         }
 
         [data-testid="stVerticalBlockBorderWrapper"] [data-testid="stVerticalBlock"] {
@@ -1385,13 +1531,6 @@ def render_explore_stories(
             min-width: 100% !important;
         }
 
-        /* Hide labels inside form too */
-        [data-testid="stForm"] label,
-        [data-testid="stForm"] [data-testid="stWidgetLabel"] {
-            display: none !important;
-            position: absolute !important;
-            left: -9999px !important;
-        }
         /* Hide SHOW label on mobile */
         [data-testid="stHorizontalBlock"]:has([class*="st-key-page_size_select"]) > [data-testid="stColumn"]:nth-child(2) {
             display: none !important;
@@ -1410,8 +1549,15 @@ def render_explore_stories(
         }
 
         .ag-header-cell[col-id="Domain"],
-        .ag-cell[col-id="Domain"] {
+        .ag-cell[col-id="Domain"],
+        div[col-id="Domain"] {
             display: none !important;
+            width: 0 !important;
+            min-width: 0 !important;
+            max-width: 0 !important;
+            padding: 0 !important;
+            border: none !important;
+            overflow: hidden !important;
         }
 
         .ag-cell {
@@ -1515,9 +1661,9 @@ def render_explore_stories(
                 input_col, btn_col = st.columns([0.88, 0.12])
                 with input_col:
                     F["q"] = st.text_input(
-                        "Search keywords",
+                        "Find stories",
                         value=F.get("q", ""),
-                        placeholder="Search by title, client, or keywords...",
+                        placeholder="Try modern platforms, product innovation...",
                         key=f"facet_q_v{search_version}",
                     )
                 with btn_col:
@@ -1675,7 +1821,25 @@ def render_explore_stories(
             finally:
                 search_container.empty()
 
-            _render_confidence_banner(current_query, confidence, len(view))
+            # Check if filters blocked all results but matches exist elsewhere
+            relaxed_count = search_result.get("relaxed_count", 0)
+            active_filters = search_result.get("active_filters", [])
+
+            if relaxed_count > 0 and not view:
+                # Show helpful banner with option to clear restrictive filters
+                filter_names = " + ".join([f[1] for f in active_filters])
+                st.markdown(
+                    f"""
+                    <div style="background: #F3E8FF; border-left: 4px solid #8B5CF6; padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;">
+                        <span style="color: #6B21A8; font-size: 14px;">
+                            🐾 No matches. Matt has {relaxed_count} "{current_query}" stories, but none in {filter_names}.
+                        </span>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+            else:
+                _render_confidence_banner(current_query, confidence, len(view))
 
             if confidence == "none":
                 view = []
@@ -1734,6 +1898,50 @@ def render_explore_stories(
         else:
             view = stories
 
+        # Filter-only feedback banner (no search query active)
+        if has_filters and not F.get("q"):
+            # Build description of active filters
+            active_filter_names = []
+            if F.get("industry"):
+                active_filter_names.append(F["industry"])
+            if F.get("capability"):
+                active_filter_names.append(F["capability"])
+            if F.get("clients"):
+                active_filter_names.append(", ".join(F["clients"]))
+            if F.get("domains"):
+                active_filter_names.append(", ".join(F["domains"]))
+            if F.get("roles"):
+                active_filter_names.append(", ".join(F["roles"]))
+
+            filter_desc = (
+                " + ".join(active_filter_names)
+                if active_filter_names
+                else "these filters"
+            )
+
+            if len(view) == 0:
+                st.markdown(
+                    f"""
+                    <div style="background: #F3E8FF; border-left: 4px solid #8B5CF6; padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;">
+                        <span style="color: #6B21A8; font-size: 14px;">
+                            🐾 No projects match {filter_desc}.
+                        </span>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+            else:
+                st.markdown(
+                    f"""
+                    <div style="background: #F3E8FF; border-left: 4px solid #8B5CF6; padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;">
+                        <span style="color: #6B21A8; font-size: 14px;">
+                            🐾 Showing {len(view)} {filter_desc} projects.
+                        </span>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+
     # Final step for all paths
     st.session_state["last_results"] = view
     st.session_state["__results_count__"] = len(view)
@@ -1764,8 +1972,29 @@ def render_explore_stories(
     page_size_option = st.session_state.get("page_size_select", TABLE_PAGE_SIZE_DEFAULT)
     page_size = page_size_option if view_mode == "Table" else CARDS_PAGE_SIZE
     offset = int(st.session_state.get("page_offset", 0))
-    start = offset + 1
-    end = min(offset + page_size, total_results)
+
+    # Bounds check pagination offset for all views
+    if offset >= total_results and total_results > 0:
+        offset = 0
+        st.session_state["page_offset"] = 0
+
+    if total_results == 0:
+        start = 0
+        end = 0
+    else:
+        start = offset + 1
+        end = min(offset + page_size, total_results)
+
+    # Hide SHOW controls on Cards/Timeline (keeps column width, hides visually)
+    if view_mode != "Table":
+        st.markdown(
+            """
+        <style>
+        .st-key-page_size_select { visibility: hidden; }
+        </style>
+        """,
+            unsafe_allow_html=True,
+        )
 
     col1, col2, col3, spacer, col4 = st.columns([2.2, 0.18, 0.5, 0.12, 1.2])
 
@@ -1778,16 +2007,23 @@ def render_explore_stories(
         st.markdown(results_html, unsafe_allow_html=True)
 
     with col2:
+        visibility = "visible" if view_mode == "Table" else "hidden"
         st.markdown(
-            '<div style="display: flex; align-items: center; min-height: 44px; font-size: 14px; font-weight: 500;">SHOW:</div>',
+            f'<div style="display: flex; align-items: center; min-height: 44px; font-size: 14px; font-weight: 500; visibility: {visibility};">SHOW:</div>',
             unsafe_allow_html=True,
         )
 
     with col3:
+        current_size = st.session_state.get("page_size_select", TABLE_PAGE_SIZE_DEFAULT)
+        try:
+            current_index = TABLE_PAGE_SIZE_OPTIONS.index(current_size)
+        except (ValueError, TypeError):
+            current_index = 0
+
         page_size_option = st.selectbox(
             "page_size",
             options=TABLE_PAGE_SIZE_OPTIONS,
-            index=0,
+            index=current_index,
             key="page_size_select",
             label_visibility="collapsed",
         )
@@ -1840,23 +2076,19 @@ def render_explore_stories(
         )
 
         def _row(s: dict) -> dict:
-            dom = (s.get("Sub-category") or "").split(" / ")[-1]
             return {
                 "ID": s.get("id", ""),
                 "Title": s.get("Title", ""),
                 "Client": s.get("Client", ""),
                 "Role": s.get("Role", ""),
                 "Start_Date": s.get("Start_Date", ""),
-                "Domain": dom,
             }
 
         view_paginated = view[offset : offset + page_size]
         rows = [_row(s) for s in view_paginated]
         df = pd.DataFrame(rows)
         show_cols = [
-            c
-            for c in ["Title", "Client", "Role", "Start_Date", "Domain"]
-            if c in df.columns
+            c for c in ["Title", "Client", "Role", "Start_Date"] if c in df.columns
         ]
 
         show_df = df[show_cols] if show_cols else df
@@ -1870,24 +2102,27 @@ def render_explore_stories(
             df_view = df[["ID"] + show_cols] if show_cols else df
             gob = GridOptionsBuilder.from_dataframe(df_view)
             gob.configure_default_column(resizable=True, sortable=True, filter=True)
-
             gob.configure_column("ID", hide=True)
-            gob.configure_column("Title", flex=2, minWidth=200, tooltipField="Title")
+            gob.configure_column("Title", flex=3, minWidth=300, tooltipField="Title")
             gob.configure_column(
                 "Client",
                 flex=1,
-                minWidth=120,
+                minWidth=110,
+                maxWidth=170,
                 cellRenderer="""
                     function(params) {
                         return '<span class="client-badge">' + params.value + '</span>';
                     }
                 """,
             )
-            gob.configure_column("Role", flex=1, minWidth=100)
+            gob.configure_column("Role", flex=1, minWidth=120, maxWidth=300)
             gob.configure_column(
-                "Start_Date", flex=0.5, minWidth=90, headerName="Start Date"
+                "Start_Date",
+                flex=0.5,
+                minWidth=100,
+                maxWidth=140,
+                headerName="Start Date",
             )
-            gob.configure_column("Domain", flex=1, minWidth=150)
 
             gob.configure_selection(selection_mode="single", use_checkbox=False)
             gob.configure_pagination(enabled=False)
@@ -1926,6 +2161,10 @@ def render_explore_stories(
 
             if sel_rows:
                 st.session_state["active_story"] = sel_rows[0].get("ID")
+                # Clear other active story sources to prevent conflicts
+                st.session_state.pop("active_story_obj", None)
+                st.session_state.pop("active_story_title", None)
+                st.session_state.pop("active_story_client", None)
 
         render_pagination(total_results, page_size, offset, "table")
         detail = get_context_story(stories)
@@ -1935,7 +2174,7 @@ def render_explore_stories(
     # CARDS VIEW
     # =========================================================================
 
-    elif view_mode == "Cards":  # Changed from "else:"  `
+    elif view_mode == "Cards":
         offset = int(st.session_state.get("page_offset", 0))
         if offset < 0:
             offset = 0
@@ -1951,10 +2190,15 @@ def render_explore_stories(
                 reset_all_filters(stories)
                 st.rerun()
         else:
+            # Get currently selected story ID
+            selected_story_id = st.session_state.get("active_story")
+
             num_rows = (len(view_window) + CARDS_PER_ROW - 1) // CARDS_PER_ROW
 
             for row in range(num_rows):
                 cols = st.columns(CARDS_PER_ROW)
+                row_story_ids = []  # Track story IDs in this row
+
                 for col_idx in range(CARDS_PER_ROW):
                     i = row * CARDS_PER_ROW + col_idx
                     if i >= len(view_window):
@@ -1973,57 +2217,60 @@ def render_explore_stories(
                         summary = s.get("5PSummary", "")
 
                         story_id = str(s.get("id", i))
+                        row_story_ids.append(story_id)
 
-                        # Vary button text based on story attributes for better UX
-                        button_texts = [
-                            "View Details →",
-                            "See Project →",
-                            "Learn More →",
-                            "Explore Story →",
-                            "Read More →",
-                        ]
-                        button_text = button_texts[i % len(button_texts)]
-                        button_id = f"btn-story-{story_id}"
+                        # Check if this card is selected
+                        is_selected = selected_story_id == story_id
 
-                        card_html = f"""
-                        <div class="fixed-height-card" style="margin-bottom: 20px;">
-                            <div class="card-header">
-                                <div class="card-title">{title}</div>
-                                <span class="card-client-badge">{client}</span>
+                        if is_selected:
+                            card_html = f"""
+                            <div class="fixed-height-card selected" data-story-id="{story_id}" style="margin-bottom: 20px; cursor: pointer;">
+                                <div class="card-close-state">
+                                    <span class="close-x">✕</span>
+                                    <span class="close-text">Close</span>
+                                </div>
                             </div>
-                            <p class="card-desc">{summary}</p>
-                            <div class="card-footer">
-                                <span class="card-role">{role}</span>
-                                <span class="card-domain-tag">{domain}</span>
+                            """
+                        else:
+                            card_html = f"""
+                            <div class="fixed-height-card" data-story-id="{story_id}" style="margin-bottom: 20px; cursor: pointer;">
+                                <div class="card-header">
+                                    <div class="card-title">{title}</div>
+                                    <span class="card-client-badge">{client}</span>
+                                </div>
+                                <p class="card-desc">{summary}</p>
+                                <div class="card-meta">
+                                    <span class="role-badge">{role}</span>
+                                    <span class="domain-tag">{domain}</span>
+                                </div>
                             </div>
-                            <div style="margin-top: 16px;">
-                                <a id="{button_id}" class="card-btn-view-details">{button_text}</a>
-                            </div>
-                        </div>
-                        """
+                            """
                         st.markdown(card_html, unsafe_allow_html=True)
 
-                        # Hidden Streamlit button
+                        # Hidden Streamlit button with toggle behavior
                         if st.button("", key=f"card_btn_{story_id}"):
-                            st.session_state["active_story"] = story_id
+                            if st.session_state.get("active_story") == story_id:
+                                # Click same card = close
+                                st.session_state["active_story"] = None
+                            else:
+                                # Click different card = select it
+                                st.session_state["active_story"] = story_id
+                            # Clear other active story sources to prevent conflicts
+                            st.session_state.pop("active_story_obj", None)
+                            st.session_state.pop("active_story_title", None)
+                            st.session_state.pop("active_story_client", None)
                             st.rerun()
 
+                # After each row: render detail if selected story is in this row
+                if selected_story_id and selected_story_id in row_story_ids:
+                    detail = get_context_story(stories)
+                    if detail:
+                        render_story_detail(detail, "cards", stories)
+
             render_pagination(total_results, page_size, offset, "cards")
-            detail = get_context_story(stories)
-            render_story_detail(detail, "cards", stories)
 
-            # JavaScript to wire HTML buttons to Streamlit buttons
-            # Build button mapping for all story cards
-            story_ids = [str(s.get('id', i)) for i, s in enumerate(view_window)]
+            # JavaScript to wire HTML card clicks to Streamlit buttons
 
-            # Generate button map entries
-            button_map_entries = []
-            for story_id in story_ids:
-                button_map_entries.append(
-                    f"'btn-story-{story_id}': 'card_btn_{story_id}'"
-                )
-
-            # JavaScript to wire HTML buttons to Streamlit buttons using event delegation
             components.html(
                 """
                 <script>
@@ -2031,19 +2278,15 @@ def render_explore_stories(
                     var parentDoc = window.parent.document;
 
                     parentDoc.addEventListener('click', function(e) {
-                        var btn = e.target.closest('.card-btn-view-details');
-                        if (!btn) return;
+                        var card = e.target.closest('.fixed-height-card');
+                        if (!card) return;
+
+                        var storyId = card.getAttribute('data-story-id');
+                        if (!storyId) return;
 
                         e.preventDefault();
 
-                        var btnId = btn.id;
-                        if (!btnId || !btnId.startsWith('btn-story-')) return;
-
-                        var storyId = btnId.replace('btn-story-', '');
-
-                        // Replace pipe with hyphen to match Streamlit's class naming
                         var normalizedId = storyId.replace(/\\|/g, '-');
-
                         var stBtn = parentDoc.querySelector('[class*="st-key-card_btn_' + normalizedId + '"] button');
                         if (stBtn) {
                             stBtn.click();

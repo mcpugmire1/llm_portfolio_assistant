@@ -74,30 +74,6 @@ def render_cross_industry_landing():
     <style>
     /* === CARD BUTTON STYLES === */
 
-    /* Buttons inside capability cards (theme-aware) */
-    .card-btn-outline {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 16px;
-        background: var(--bg-surface);
-        border: 2px solid var(--border-color);
-        border-radius: 6px;
-        color: var(--accent-purple) !important;
-        font-weight: 600;
-        font-size: 13px;
-        text-decoration: none !important;
-        cursor: pointer;
-        transition: all 0.2s ease;
-    }
-
-    .card-btn-outline:hover {
-        background: var(--accent-purple);
-        border-color: var(--accent-purple);
-        color: white !important;
-        text-decoration: none !important;
-    }
-
     /* Ask Agy button - always purple filled */
     .card-btn-primary {
         display: inline-block;
@@ -321,10 +297,6 @@ def render_cross_industry_landing():
             font-size: 11px !important;
             margin-bottom: 8px !important;
         }
-        .card-btn-outline {
-            padding: 6px 12px !important;
-            font-size: 11px !important;
-        }
         /* CTA */
         .cta-section {
             padding: 20px 14px !important;
@@ -386,7 +358,7 @@ def render_cross_industry_landing():
         color: var(--accent-purple);
         background: rgba(139, 92, 246, 0.05);
     }
-    /* Category cards (theme-aware) */
+    /* Category cards (theme-aware) - CLICKABLE, NO BUTTON */
     .capability-card {
         background: var(--bg-card);
         border: 1px solid var(--border-color);
@@ -396,6 +368,7 @@ def render_cross_industry_landing():
         box-shadow: 0 1px 3px rgba(0,0,0,0.08);
         transition: all 0.3s ease;
         height: 100%;
+        cursor: pointer;
     }
     .capability-card:hover {
         border-color: var(--accent-purple);
@@ -425,7 +398,7 @@ def render_cross_industry_landing():
         font-size: 13px;
         color: var(--text-secondary);
         line-height: 1.5;
-        margin-bottom: 12px;
+        margin-bottom: 0;
     }
     </style>
     """,
@@ -462,111 +435,97 @@ def render_cross_industry_landing():
         unsafe_allow_html=True,
     )
 
-    # Cross-industry categories data with varied button text
+    # Cross-industry categories data (removed button_text - no longer needed)
     cross_industry_categories = [
         (
             "🔧",
             "Modern Engineering Practices & Solutions",
             26,
             "DevOps, CI/CD, test automation, engineering excellence, quality practices",
-            "View Engineering Work →",
         ),
         (
             "🤝",
             "Cross-Functional Collaboration & Team Enablement",
             8,
             "Breaking down silos, team alignment, collaboration frameworks, culture change",
-            "View Team Projects →",
         ),
         (
             "🎓",
             "Client Enablement & Sustainable Innovation",
             8,
             "Knowledge transfer, capability building, innovation centers, sustainable practices",
-            "View Enablement Work →",
         ),
         (
             "⚡",
             "Agile Transformation & Delivery",
             2,
             "Scaling agile practices, SAFe, Scrum at scale, delivery acceleration across industries",
-            "View Agile Projects →",
         ),
         (
             "💡",
             "Product Management & Innovation Labs",
             2,
             "Innovation programs, experimentation, lean startup methodology, product discovery",
-            "Explore Innovation Labs →",
         ),
         (
             "🚀",
             "Application Modernization",
             2,
             "Legacy transformation, microservices migration, platform engineering",
-            "View Modernization Work →",
         ),
         (
             "🎨",
             "User-Centered Design & Experience",
             1,
             "UX research, design thinking, customer journey mapping, experience design",
-            "View Design Projects →",
         ),
         (
             "🌩️",
             "Platform Optimization & Cloud-Native Development",
             1,
             "Platform engineering, developer experience, internal platforms, service catalogs",
-            "View Platform Work →",
         ),
         (
             "📱",
             "Modern Product Engineering Methodology",
             1,
             "Product thinking, user-centered design, rapid prototyping, product-market fit",
-            "View Product Engineering →",
         ),
         (
             "🚢",
             "DevOps & Continuous Delivery",
             1,
             "Deployment automation, pipeline engineering, continuous integration, release management",
-            "View DevOps Projects →",
         ),
         (
             "🤖",
             "AI & Machine Learning Solutions",
             1,
             "Machine learning platforms, AI strategy, intelligent automation, predictive analytics",
-            "View AI Projects →",
         ),
     ]
 
-    # Render cards in 3-column grid with varied button text
+    # Render cards in 3-column grid - CLICKABLE CARDS, NO BUTTONS
     for i in range(0, len(cross_industry_categories), 3):
         cols = st.columns(3)
         for j in range(3):
             if i + j < len(cross_industry_categories):
-                icon, title, count, desc, button_text = cross_industry_categories[i + j]
+                icon, title, count, desc = cross_industry_categories[i + j]
                 with cols[j]:
                     # Singular/plural handling
                     project_text = "project" if count == 1 else "projects"
 
-                    # Generate safe ID for button
-                    button_id = f"btn-cross-industry-{i}-{j}"
+                    # Generate safe ID for card
+                    card_id = f"card-cross-industry-{i}-{j}"
 
-                    # Card content with HTML button
+                    # Card content - NO BUTTON, whole card is clickable
                     st.markdown(
                         f"""
-                    <div class="capability-card">
+                    <div class="capability-card" id="{card_id}" data-title="{title}">
                         <div class="card-icon">{icon}</div>
                         <div class="card-title">{title}</div>
                         <div class="card-count">{count} {project_text}</div>
                         <div class="card-desc">{desc}</div>
-                        <div>
-                            <a id="{button_id}" class="card-btn-outline">{button_text}</a>
-                        </div>
                     </div>
                     """,
                         unsafe_allow_html=True,
@@ -601,47 +560,45 @@ def render_cross_industry_landing():
         st.session_state["active_tab"] = "Ask MattGPT"
         st.rerun()
 
-    # JavaScript to wire HTML buttons to Streamlit buttons
+    # JavaScript to wire clickable cards and CTA button to Streamlit buttons
     components.html(
         """
 <script>
 (function() {
-    function wireButtons() {
+    function wireCards() {
         const parentDoc = window.parent.document;
 
-        // Build button map dynamically for all cross-industry cards
-        const buttonMap = {
-            'btn-cross-industry-cta': 'card_btn_cross_industry_cta'
-        };
-
-        // Add all cross-industry card buttons
-        for (let i = 0; i < 20; i++) {
-            for (let j = 0; j < 3; j++) {
-                const idx = i + j;
-                if (idx < 20) {
-                    buttonMap[`btn-cross-industry-${i}-${j}`] = `card_btn_cross_industry_${i}_${j}`;
-                }
-            }
+        // Wire CTA button
+        const ctaBtn = parentDoc.getElementById('btn-cross-industry-cta');
+        if (ctaBtn && !ctaBtn.dataset.wired) {
+            ctaBtn.dataset.wired = 'true';
+            ctaBtn.onclick = function() {
+                const stBtn = parentDoc.querySelector('[class*="st-key-card_btn_cross_industry_cta"] button');
+                if (stBtn) stBtn.click();
+            };
         }
 
-        // Wire each HTML button to its Streamlit counterpart
-        for (const [htmlId, stKey] of Object.entries(buttonMap)) {
-            const htmlBtn = parentDoc.getElementById(htmlId);
-            if (htmlBtn && !htmlBtn.dataset.wired) {
-                htmlBtn.dataset.wired = 'true';
-                htmlBtn.onclick = function() {
-                    const stBtn = parentDoc.querySelector('[class*="st-key-' + stKey + '"] button');
-                    if (stBtn) stBtn.click();
-                };
+        // Wire all capability cards (click anywhere on card)
+        for (let i = 0; i < 12; i++) {
+            for (let j = 0; j < 3; j++) {
+                const cardId = `card-cross-industry-${i}-${j}`;
+                const card = parentDoc.getElementById(cardId);
+                if (card && !card.dataset.wired) {
+                    card.dataset.wired = 'true';
+                    card.onclick = function() {
+                        const stBtn = parentDoc.querySelector(`[class*="st-key-card_btn_cross_industry_${i}_${j}"] button`);
+                        if (stBtn) stBtn.click();
+                    };
+                }
             }
         }
     }
 
-    // Run multiple times to catch all buttons as they render
-    setTimeout(wireButtons, 100);
-    setTimeout(wireButtons, 300);
-    setTimeout(wireButtons, 600);
-    setTimeout(wireButtons, 1000);
+    // Run multiple times to catch all cards as they render
+    setTimeout(wireCards, 100);
+    setTimeout(wireCards, 300);
+    setTimeout(wireCards, 600);
+    setTimeout(wireCards, 1000);
 })();
 </script>
 """,

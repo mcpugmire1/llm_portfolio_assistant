@@ -59,6 +59,8 @@ def semantic_search(
             "results": List of relevant stories (each with "pc" score attached),
             "confidence": "high" | "low" | "none",
             "top_score": float (highest Pinecone similarity score),
+            "relaxed_count": int (optional - count of results without industry/capability filters),
+            "active_filters": list (optional - which filters caused 0 results),
         }
     """
     # Import matches_filters here to avoid circular dependency
@@ -152,12 +154,31 @@ def semantic_search(
         if matches_filters(story, filters):
             filtered_stories.append(story)
 
-    # If filters removed everything, return unfiltered confident hits
-    if not filtered_stories:
+    # 7) If filters removed everything, check what we'd get without industry/capability
+    if not filtered_stories and (filters.get("industry") or filters.get("capability")):
+        relaxed_filters = {
+            k: v for k, v in filters.items() if k not in ("industry", "capability")
+        }
+        relaxed_count = 0
         for h in confident_hits:
             story = h["story"].copy()
-            story["pc"] = h.get("pc_score", 0.0) or 0.0
-            filtered_stories.append(story)
+            if matches_filters(story, relaxed_filters):
+                relaxed_count += 1
+
+        # Build list of which filters are active
+        active_filters = []
+        if filters.get("industry"):
+            active_filters.append(("industry", filters["industry"]))
+        if filters.get("capability"):
+            active_filters.append(("capability", filters["capability"]))
+
+        return {
+            "results": [],
+            "confidence": confidence,
+            "top_score": top_score,
+            "relaxed_count": relaxed_count,
+            "active_filters": active_filters,
+        }
 
     return {
         "results": filtered_stories,

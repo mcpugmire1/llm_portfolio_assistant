@@ -202,6 +202,9 @@ st.session_state.setdefault(
         "tags": [],
         "q": "",
         "has_metric": False,
+        "era": "",  # ADD
+        "industry": "",
+        "capability": "",
     },
 )
 
@@ -231,6 +234,17 @@ st.session_state.setdefault("__pc_suppressed__", False)
 st.session_state.setdefault("page_size", 25)
 st.session_state.setdefault("page_offset", 0)
 
+# =========================
+# Deep-link handling: ?story=story-id
+# =========================
+if 'story' in st.query_params:
+    story_from_url = st.query_params['story']
+    if st.session_state.get('_deeplink_story') != story_from_url:
+        st.session_state['active_story'] = story_from_url
+        st.session_state['active_tab'] = 'Explore Stories'
+        st.session_state['explore_view_mode'] = 'Cards'
+        st.session_state['_deeplink_story'] = story_from_url
+        st.rerun()
 
 # =========================
 # Helpers
