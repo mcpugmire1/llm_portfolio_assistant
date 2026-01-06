@@ -160,12 +160,12 @@ def render_hero():
                     <span>👋</span>
                     <span> Hi, I'm Matt Pugmire</span>
                 </div>
-                <h1 style="font-size: 42px; font-weight: 700; margin-bottom: 16px; color: white;">Digital Transformation Leader</h1>
+                <h1 style="font-size: 42px; font-weight: 700; margin-bottom: 16px; color: white;">I build platforms. I grow teams. We ship together.</h1>
                 <p style="font-size: 18px; color: white; opacity: 0.95; max-width: 700px; margin: 0 auto 22px; line-height: 1.6;">
-                    20+ years driving innovation, agile delivery, and technology leadership across Fortune 500 companies.
+                    20+ years of platform modernization and engineering leadership across Fortune 500 companies.
                 </p>
                  <p style="font-size: 16px; color: white; opacity: 0.95; max-width: 700px; margin: 0 auto 20px; line-height: 1.6;">
-                    I trained my AI counterpart, <strong>Agy</strong> — a loyal Plott Hound with a nose for patterns — to surface insights across 130+ real transformation projects.
+                    Ask Agy 🐾 about my projects, skills, or leadership approach. He's got a nose for patterns.
                  </p>
                 <div style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap;">
                     <a id="btn-explore" class="hero-btn hero-btn-primary">
