@@ -160,7 +160,7 @@ def render_hero():
                     <span>👋</span>
                     <span> Hi, I'm Matt Pugmire</span>
                 </div>
-                <h1 style="font-size: 42px; font-weight: 700; margin-bottom: 16px; color: white;">I build platforms. I grow teams. We ship together.</h1>
+                <h1 style="font-size: 42px; font-weight: 700; margin-bottom: 16px; color: white;">I modernize platforms and build teams that last.</h1>
                 <p style="font-size: 18px; color: white; opacity: 0.95; max-width: 700px; margin: 0 auto 22px; line-height: 1.6;">
                     20+ years of platform modernization and engineering leadership across Fortune 500 companies.
                 </p>
