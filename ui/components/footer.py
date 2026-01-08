@@ -58,7 +58,7 @@ def render_footer():
             Available immediately • Atlanta-based preferred • Open to relocation and consulting engagements
         </p>
         <div class="footer-buttons" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-            <a href="mailto:mcpugmire@gmail.com" style="padding: 12px 28px; background: #8B5CF6; color: white; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease;">
+            <a href="mailto:matthew.c.pugmire+MattGPT@gmail.com?subject=Inquiry from MattGPT" style="padding: 12px 28px; background: #8B5CF6; color: white; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease;">
                 📧 Email Me
             </a>
             <a href="https://www.linkedin.com/in/matt-pugmire/" target="_blank" style="padding: 12px 28px; background: rgba(255,255,255,0.1); color: white; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease;">
