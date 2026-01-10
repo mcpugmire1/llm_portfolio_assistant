@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 
 import streamlit as st
+import streamlit_analytics2 as streamlit_analytics
 
 # Third-party
 from dotenv import load_dotenv
@@ -283,64 +284,57 @@ def build_facets(stories):
 industries, capabilities, clients, domains, roles, tags, personas_all = build_facets(
     STORIES
 )
+with streamlit_analytics.track():
+    if st.session_state["active_tab"] == "Home":
+        from ui.pages.home import render_home_page
 
-if st.session_state["active_tab"] == "Home":
-    from ui.pages.home import render_home_page
+        render_home_page()
 
-    render_home_page()
+    # --- BANKING LANDING ---
+    elif st.session_state["active_tab"] == "Banking":
+        from ui.pages.banking_landing import render_banking_landing
 
-# --- BANKING LANDING ---
-elif st.session_state["active_tab"] == "Banking":
-    from ui.pages.banking_landing import render_banking_landing
+        render_banking_landing()
 
-    render_banking_landing()
+    # --- CROSS-INDUSTRY LANDING ---
+    elif st.session_state["active_tab"] == "Cross-Industry":
+        from ui.pages.cross_industry_landing import render_cross_industry_landing
 
-# --- CROSS-INDUSTRY LANDING ---
-elif st.session_state["active_tab"] == "Cross-Industry":
-    from ui.pages.cross_industry_landing import render_cross_industry_landing
+        render_cross_industry_landing()
 
-    render_cross_industry_landing()
+    # --- REFACTORED STORIES ---
+    elif st.session_state["active_tab"] == "Explore Stories":
+        from ui.pages.explore_stories import render_explore_stories
 
-# --- REFACTORED STORIES ---
-elif st.session_state["active_tab"] == "Explore Stories":
-    from ui.pages.explore_stories import render_explore_stories
+        render_explore_stories(
+            STORIES,
+            industries,
+            capabilities,
+            clients,
+            domains,
+            roles,
+            tags,
+            personas_all,
+        )
 
-    render_explore_stories(
-        STORIES, industries, capabilities, clients, domains, roles, tags, personas_all
-    )
+    # --- ASK MATTGPT ---
+    elif st.session_state["active_tab"] == "Ask MattGPT":
+        from ui.pages.ask_mattgpt import render_ask_mattgpt
 
-# --- ASK MATTGPT ---
-elif st.session_state["active_tab"] == "Ask MattGPT":
-    from ui.pages.ask_mattgpt import render_ask_mattgpt
+        render_ask_mattgpt(STORIES)
 
-    render_ask_mattgpt(STORIES)
+    # --- ABOUT ---
+    elif st.session_state["active_tab"] == "About Matt":
+        from ui.pages.about_matt import render_about_matt
 
-# --- ABOUT ---
-elif st.session_state["active_tab"] == "About Matt":
-    from ui.pages.about_matt import render_about_matt
+        render_about_matt()
 
-    render_about_matt()
-
-# --- INVALID TAB FALLBACK ---
-else:
-    st.error(f"❌ Unknown page: {st.session_state['active_tab']}")
-    st.info(
-        "Valid pages: Home, Explore Stories, Ask MattGPT, About Matt, Banking, Cross-Industry"
-    )
-    # Reset to home
-    st.session_state["active_tab"] = "Home"
-    st.rerun()
-
-# Google Analytics - inject into head
-st.markdown(
-    """
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z37K63HRV6"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-Z37K63HRV6');
-    </script>
-    """,
-    unsafe_allow_html=True,
-)
+    # --- INVALID TAB FALLBACK ---
+    else:
+        st.error(f"❌ Unknown page: {st.session_state['active_tab']}")
+        st.info(
+            "Valid pages: Home, Explore Stories, Ask MattGPT, About Matt, Banking, Cross-Industry"
+        )
+        # Reset to home
+        st.session_state["active_tab"] = "Home"
+        st.rerun()
