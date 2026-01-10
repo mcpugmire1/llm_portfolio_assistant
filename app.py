@@ -11,9 +11,14 @@ Design specification: https://github.com/mcpugmire1/mattgpt-design-spec
 # Standard library
 import json
 import os
+
+# =========================
+# Google Analytics
+import pathlib
 from pathlib import Path
 
 import streamlit as st
+from bs4 import BeautifulSoup
 
 # Third-party
 from dotenv import load_dotenv
@@ -26,6 +31,33 @@ from ui.components.navbar import render_navbar
 # Local imports - components
 from ui.pages.home import render_home_page
 from ui.styles.global_styles import apply_global_styles
+
+GA_ID = "G-Z37K63HRV6"
+
+
+def inject_ga():
+    GA_JS = f"""
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){{dataLayer.push(arguments);}}
+        gtag('js', new Date());
+        gtag('config', '{GA_ID}');
+    </script>
+    """
+
+    index_path = pathlib.Path(st.__file__).parent / "static" / "index.html"
+    soup = BeautifulSoup(index_path.read_text(), "html.parser")
+
+    if not soup.find(id="google-analytics"):
+        script_tag = soup.new_tag("div", id="google-analytics")
+        script_tag.append(BeautifulSoup(GA_JS, "html.parser"))
+        soup.head.append(script_tag)
+        index_path.write_text(str(soup))
+
+
+inject_ga()
 
 # =========================
 # UI — Home / Stories / Ask / About
