@@ -904,7 +904,7 @@ def render_about_matt():
         <div class="timeline-year">2019–2023</div>
         <div class="timeline-title">🚀 Director, Cloud Innovation Center</div>
         <div class="timeline-company">Accenture</div>
-        <div class="timeline-desc">Launched Innovation Centers (150+ engineers) • 30+ products • $300M+ revenue • 4x faster delivery</div>
+        <div class="timeline-desc">Launched Innovation Centers (150+ engineers) • 30+ products • $300M+ revenue • 4x faster delivery.</div>
     </div>
     <div class="timeline-item">
         <div class="timeline-year">2016–2023</div>
