@@ -838,11 +838,9 @@ def render_about_matt():
              alt="Matt Pugmire">
         <div class="about-header-text">
             <h1>Matt Pugmire</h1>
-            <p style="font-size: 17px; margin-bottom: 12px;">Digital Transformation Leader | Director of Technology Delivery</p>
+            <p style="font-size: 17px; margin-bottom: 12px;">Platform & AI Innovation Leader</p>
             <p style="font-size: 14px; opacity: 0.9; line-height: 1.6; max-width: 800px;">
-                20+ years driving innovation, agile transformation, and application modernization across Fortune 500 companies.
-                Proven track record of accelerating delivery 4x, scaling engineering teams to 150+ people, and building
-                high-performing product organizations.
+                I build what’s next, modernize what’s not, and grow teams along the way.
             </p>
         </div>
     </div>
@@ -889,7 +887,7 @@ def render_about_matt():
         '<h2 class="section-title">Career Evolution</h2>', unsafe_allow_html=True
     )
     st.markdown(
-        '<p class="section-subtitle">From individual contributor to enterprise transformation leader</p>',
+        '<p class="section-subtitle">From engineer to director—building, modernizing, and leading along the way</p>',
         unsafe_allow_html=True,
     )
 
@@ -900,7 +898,7 @@ def render_about_matt():
         <div class="timeline-year">2023–Present</div>
         <div class="timeline-title">🧘 Sabbatical | Innovation & Upskilling</div>
         <div class="timeline-company">Independent</div>
-        <div class="timeline-desc">Focused on GenAI, cloud-native architecture, and building LLM-powered portfolio assistant (MattGPT)</div>
+        <div class="timeline-desc">Sabbatical to recharge, refocus, and reskill — with MattGPT as tangible proof of the work.</div>
     </div>
     <div class="timeline-item">
         <div class="timeline-year">2019–2023</div>
@@ -912,31 +910,31 @@ def render_about_matt():
         <div class="timeline-year">2016–2023</div>
         <div class="timeline-title">📚 Capability Development Lead, CloudFirst</div>
         <div class="timeline-company">Accenture</div>
-        <div class="timeline-desc">Upskilled 300+ professionals • 40% proficiency increase • 50% faster delivery • Culture transformation</div>
+        <div class="timeline-desc">Enterprise capability development, engineering enablement, and culture transformation.</div>
     </div>
     <div class="timeline-item">
         <div class="timeline-year">2018–2019</div>
         <div class="timeline-title">☁️ Cloud Native Architecture Lead, Liquid Studio</div>
         <div class="timeline-company">Accenture</div>
-        <div class="timeline-desc">Built cloud-native accelerator • AWS enablement (200+ certs) • Rapid prototyping for Fortune 500</div>
+        <div class="timeline-desc">Cloud-native prototyping and product shaping through rapid experimentation and modern engineering practices.</div>
     </div>
     <div class="timeline-item">
         <div class="timeline-year">2009–2017</div>
-        <div class="timeline-title">💳 Sr. Technology Architecture Manager, Payments</div>
+        <div class="timeline-title">💳 Sr. Technology Architecture Manager, Financial Services</div>
         <div class="timeline-company">Accenture</div>
-        <div class="timeline-desc">$500M+ payments modernization • 12 countries • ACH/FX/Wire hubs • Salesforce integration</div>
+        <div class="timeline-desc">Financial services platform modernization and architecture at global scale.</div>
     </div>
     <div class="timeline-item">
         <div class="timeline-year">2005–2009</div>
         <div class="timeline-title">🏗️ Technology Manager</div>
         <div class="timeline-company">Accenture</div>
-        <div class="timeline-desc">Early leadership in payments, banking, and platform modernization</div>
+        <div class="timeline-desc">Enterprise integration and solution architecture for large-scale telecom and enterprise platforms.</div>
     </div>
     <div class="timeline-item">
         <div class="timeline-year">2000–2005</div>
         <div class="timeline-title">⚡ Startups & Consulting</div>
         <div class="timeline-company">Including Cendian Corp</div>
-        <div class="timeline-desc">Built B2B/supply chain platforms • webMethods & J2EE integration solutions</div>
+        <div class="timeline-desc">Building B2B and supply-chain platforms using enterprise integration technologies.</div>
     </div>
 </div>
         """,
