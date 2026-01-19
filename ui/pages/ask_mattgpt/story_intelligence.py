@@ -171,8 +171,18 @@ def build_story_context_for_rag(story: dict[str, Any]) -> str:
     theme = infer_story_theme(story)
     pattern_phrase = THEME_TO_PATTERN.get(theme, theme)
 
+    # Check for personal project - add warning to prevent fictional stakeholders
+    client = story.get('Client', '')
+    personal_project_warning = ""
+    if client in ('Independent', 'Career Narrative'):
+        personal_project_warning = """⚠️ **PERSONAL PROJECT - NO FICTIONAL STAKEHOLDERS**
+This is Matt's personal project. Do NOT mention "job seekers", "engineers", or anyone "struggling".
+Frame the WHY as: "Matt wanted to..." or "Matt recognized..." based on the story content below.
+
+"""
+
     # Build structured context - use pattern phrase instead of theme name
-    context = f"""**{story.get('Title', 'Untitled')}**
+    context = f"""{personal_project_warning}**{story.get('Title', 'Untitled')}**
 Pattern: {pattern_phrase}
 Client: {story.get('Client', 'Unknown')}
 Role: {story.get('Role', '')}

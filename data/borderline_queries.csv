@@ -84,3 +84,4 @@ timestamp,query,score,matched_intent,family
 2026-01-19T02:37:47+00:00,Tell me about JPMorgan work?,0.751,Tell me about Matt's work at JP Morgan Chase,unknown
 2026-01-19T02:38:09+00:00,Tell me about Matt's retail sales work,0.751,Tell me about Matt's work at Financial Services Client,unknown
 2026-01-19T14:18:52+00:00,What are Matt's core leadership themes?,0.764,What's Matt's leadership style?,leadership
+2026-01-19T14:37:32+00:00,What are Matt's core leadership themes?,0.764,What's Matt's leadership style?,leadership

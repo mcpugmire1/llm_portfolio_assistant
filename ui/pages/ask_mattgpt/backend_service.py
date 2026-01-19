@@ -911,6 +911,16 @@ This is a BIG-PICTURE question. The user wants themes, patterns, or philosophy.
 - No corporate jargon
 - Bold **client names** and **numbers**
 
+**REFINED STAKEHOLDER RULE (CRITICAL):**
+1. **For Corporate/Client stories** (JP Morgan, Accenture, RBC, etc.):
+   Reference real teams, customers, or leaders who benefited.
+
+2. **For 'Independent' or 'Career Narrative' stories**:
+   **DO NOT use "people were struggling" framing.** Frame as Matt's own goals:
+   - BANNED: "Job seekers were struggling...", "Engineers needed...", "Teams lacked..."
+   - REQUIRED: "Matt wanted to...", "Matt built this to demonstrate..."
+   - **NEVER invent fictional stakeholders for personal projects.**
+
 **Word count:** 250-400 words
 
 ## Theme Guidance
@@ -1001,14 +1011,30 @@ Never narrate as if you ARE Matt.
 
 **1. Opening** — USE THE EXACT OPENING PROVIDED. Do not modify it.
 
-**2. Human Stakes (WHY)** — MANDATORY RULES:
+**2. Human Stakes (WHY)** — CHECK CLIENT FIELD FIRST:
+
+⚠️ **PERSONAL PROJECT EXCEPTION (Client = "Independent" or "Career Narrative"):**
+If the story's Client field is "Independent" or "Career Narrative", this is Matt's PERSONAL PROJECT.
+
+**HARD RULE: DO NOT MENTION "job seekers", "engineers", "teams", "users", or ANY group "struggling/needing/lacking".**
+
+For personal projects, the ONLY acceptable framing is Matt's OWN motivation:
+- ✅ "Matt recognized that traditional resumes failed to showcase his experience..."
+- ✅ "Matt wanted to demonstrate his RAG architecture skills..."
+- ✅ "During his sabbatical, Matt set out to build..."
+- ❌ NEVER: "Job seekers were struggling..." / "Engineers needed..." / "Professionals faced..."
+
+**If the story says "I recognized X", your output MUST be "Matt recognized X" - do not generalize to fictional groups.**
+
+**FOR CORPORATE STORIES ONLY** (Client = JP Morgan, Accenture, RBC, AT&T, etc.):
 - First sentence MUST name real people affected: teams, customers, patients, engineers, leaders
 - Show the pain or opportunity in human terms
+- GOOD: "Engineers were spending 60% of their time on manual deployments..."
+- GOOD: "Customers couldn't trust their payment would arrive on time..."
+
+**UNIVERSAL RULES:**
 - NEVER start with "To modernize..." or "To implement..." or solution language
 - NEVER use: "significant challenges", "critical need", "pressing issues"
-- GOOD: "Engineers were spending 60% of their time on manual deployments instead of building features."
-- GOOD: "Customers couldn't trust their payment would arrive on time."
-- BAD: "There was a critical need to modernize the infrastructure."
 
 **3. How Matt Tackled It (HOW)**
 - What approach, mindset, or leadership behavior shaped this?
