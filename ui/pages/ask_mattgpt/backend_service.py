@@ -8,12 +8,18 @@ Includes nonsense detection, semantic search orchestration, and Agy response gen
 import csv
 import os
 import re
+from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, datetime
 from typing import Any
 
 import streamlit as st
 
 from config.debug import DEBUG
+from services.pinecone_service import (
+    PINECONE_NAMESPACE,
+    _embed,
+    _init_pinecone,
+)
 from services.rag_service import semantic_search
 from services.semantic_router import is_portfolio_query_semantic
 from utils.formatting import (
@@ -33,6 +39,215 @@ from .story_intelligence import (
 
 # Constants
 SEARCH_TOP_K = 7
+
+# Known clients - derived dynamically from story data at startup
+_KNOWN_CLIENTS: set[str] | None = None
+
+
+def get_known_clients(stories: list[dict]) -> set[str]:
+    """Derive known client names from story data for post-processing bolding."""
+    global _KNOWN_CLIENTS
+    if _KNOWN_CLIENTS is None:
+        _KNOWN_CLIENTS = {
+            s.get("Client")
+            for s in stories
+            if s.get("Client")
+            and s.get("Client")
+            not in {
+                "Multiple Clients",
+                "Personal",
+                "Various",
+                "Career Narrative",
+                "Independent",
+            }
+        }
+    return _KNOWN_CLIENTS
+
+
+# Theme-specific search queries for synthesis mode
+# (search for the THEME characteristics, not user's query)
+THEME_SEARCH_QUERIES = {
+    "Execution & Delivery": "delivery scale production systems metrics outcomes shipping",
+    "Strategic & Advisory": "strategic roadmap executive alignment thought partnership",
+    "Org & Working-Model Transformation": "agile transformation culture change organizational mindset",
+    "Talent & Enablement": "coaching mentorship team development retention talent growth",
+    "Risk & Responsible Tech": "governance compliance security responsible innovation risk",
+    "Emerging Tech": "innovation experimentation emerging technology exploration",
+    "Professional Narrative": "career journey philosophy leadership identity growth",
+}
+
+
+def get_synthesis_stories(stories: list[dict], top_per_theme: int = 2) -> list[dict]:
+    """
+    Parallel metadata-filtered search across themes.
+    Returns best stories per theme for synthesis queries.
+
+    Args:
+        stories: Full story corpus for ID lookup
+        top_per_theme: Number of stories to retrieve per theme
+
+    Returns:
+        List of stories with _search_score and _matched_theme annotations
+    """
+    idx = _init_pinecone()
+    if not idx:
+        print("DEBUG: get_synthesis_stories - Pinecone not available")
+        return []
+
+    def search_theme(theme: str) -> list[dict]:
+        query_text = THEME_SEARCH_QUERIES.get(theme, theme)
+        query_vector = _embed(query_text)
+
+        try:
+            results = idx.query(
+                vector=query_vector,
+                filter={"Theme": {"$eq": theme}},
+                top_k=top_per_theme,
+                include_metadata=True,
+                namespace=PINECONE_NAMESPACE,
+            )
+
+            theme_stories = []
+            matches = getattr(results, "matches", []) or []
+            for match in matches:
+                # Extract ID from match
+                if isinstance(match, dict):
+                    meta = match.get("metadata") or {}
+                    match_id = meta.get("id") or match.get("id")
+                    score = float(match.get("score") or 0.0)
+                else:
+                    meta = getattr(match, "metadata", None) or {}
+                    match_id = meta.get("id") or getattr(match, "id", None)
+                    score = float(getattr(match, "score", 0.0) or 0.0)
+
+                # Find story in corpus
+                story = next(
+                    (s for s in stories if str(s.get("id")) == str(match_id)), None
+                )
+                if story:
+                    # Add annotations
+                    story_copy = story.copy()
+                    story_copy["_search_score"] = score
+                    story_copy["_matched_theme"] = theme
+                    theme_stories.append(story_copy)
+
+            if DEBUG:
+                print(f"DEBUG synthesis search: {theme} → {len(theme_stories)} stories")
+
+            return theme_stories
+        except Exception as e:
+            print(f"DEBUG synthesis search error for {theme}: {e}")
+            return []
+
+    # Search all themes in parallel
+    with ThreadPoolExecutor(max_workers=4) as executor:
+        theme_results = list(executor.map(search_theme, THEME_SEARCH_QUERIES.keys()))
+
+    # Flatten and deduplicate
+    seen_ids = set()
+    pool = []
+    for theme_stories in theme_results:
+        for story in theme_stories:
+            story_id = story.get("id") or story.get("Title")
+            if story_id not in seen_ids:
+                seen_ids.add(story_id)
+                pool.append(story)
+
+    if DEBUG:
+        print(
+            f"DEBUG synthesis pool: {len(pool)} unique stories across {len(THEME_SEARCH_QUERIES)} themes"
+        )
+
+    return pool
+
+
+# Matt DNA - Ground truth injected into all prompts to prevent hallucination
+MATT_DNA = """## Matt Pugmire — Ground Truth
+
+**Identity:**
+"I build what's next, modernize what's not, and grow teams along the way."
+
+**Career Arc (20+ years):**
+Software Engineer → Solution Architect → Director → Cloud Innovation Center Leader
+- Accenture: March 2005 - September 2023 (18+ years)
+- Built CIC from 0 to 150+ practitioners (Atlanta, Tampa)
+- Currently: Sabbatical, building MattGPT, targeting Director/VP roles
+
+**Career Eras (for timeline context):**
+- 2005-2009: Enterprise Integration (AT&T systems)
+- 2009-2018: Payments & Architecture (JPMorgan, Capital One, Fiserv)
+- 2018-2019: Cloud Innovation (Liquid Studio)
+- 2019-2023: CIC Director (scaled 0→150, Fortune 500 transformation)
+- 2023-Present: Sabbatical (MattGPT, job search)
+
+**The 7 Themes of Matt's Work (use these for synthesis):**
+1. Execution & Delivery — Shipping production systems at scale, not just strategy
+2. Strategic & Advisory — Thought partnership, business alignment, executive influence
+3. Org & Working-Model Transformation — Culture change, agile adoption, sustainable practices
+4. Talent & Enablement — Coaching, mentorship, capability building
+5. Risk & Responsible Tech — Governance, compliance, ethical considerations
+6. Emerging Tech — Innovation, experimentation, GenAI/ML exploration
+7. Professional Narrative — Matt's philosophy, leadership identity, career positioning
+
+**Theme Strengths:**
+- Execution & Delivery is Matt's primary strength — the majority of his work
+- Org Transformation and Strategic Advisory are strong secondary themes
+- Talent & Enablement runs through most engagements (Matt builds people, not just systems)
+- Risk and Emerging Tech are narrower but present
+
+**Industry Experience:**
+- Primary: Financial Services / Banking (JPMorgan, RBC, Capital One, Fiserv, AmEx, HSBC)
+- Secondary: Telecommunications (AT&T), Transportation (Norfolk Southern)
+- Limited: Healthcare (one engagement), Regulatory (one engagement)
+- NOT Matt's industries: Consumer products, retail, early-stage startups
+
+**Signature Achievements (cite for synthesis):**
+- Built CIC from 0 to 150+ practitioners
+- JPMorgan payments platform across 12 countries
+- Norfolk Southern legacy-to-cloud transformation
+- Contributed to $189M cloud modernization win (major public health agency)
+- $100M+ repeat business through delivery excellence
+- 4x velocity, 50% productivity gains, zero production defects, 100% test coverage at CIC
+- CIC teams of 10 consistently delivered impact of typical teams of 20
+- AWS cloud-native architecture across engagements
+
+**How Matt Wins Business (NOT a sales role):**
+- Drove $100M+ in repeat business through delivery excellence and customer relationship building
+- Contributed to $189M cloud modernization win for a major public health agency (2022)
+- Builds capabilities that win work — differentiation through execution, not pursuit
+
+**Clients Matt Has Worked With (ONLY cite these):**
+Named: American Express, AT&T, AT&T Mobility, Capital One, Fiserv, HSBC, JPMorgan Chase, Level 3 Communications, Norfolk Southern, RBC
+Obfuscated: Financial Services Client, Leading U.S. healthcare provider, Multiple Clients, Multiple Financial Services Clients, U.S. Regulatory Agency (Confidential)
+Internal: Accenture, Independent
+
+**NOT Matt's Clients (NEVER mention):**
+Kaiser, Google, Amazon, Microsoft, Meta, MetLife, Citizens Bank
+
+**What Matt is NOT:**
+- Not a sales hunter — wins business through delivery, not pursuit
+- Not hardware/embedded systems — enterprise software focus
+- Not consumer products or retail — B2B enterprise transformation
+- Not early-stage startups — Fortune 500 / large enterprise experience
+- Not a theorist — hands-on builder who ships production systems
+
+**Core Values:**
+Empathy, Authenticity, Curiosity, Integrity, Leadership
+
+**Leadership Philosophy:**
+- Builder's mindset, coach's heart
+- Leads with empathy, clarity, and purpose
+- Teaches teams to fish — doesn't just fix problems
+- "Permit to fail" learning environment
+- Balanced teams: Product + Engineering + Design together
+
+**GROUNDING RULES:**
+1. ONLY cite clients, projects, and metrics that appear in the stories below
+2. If unsure about a detail, say "In one engagement..." instead of naming a client
+3. NEVER invent outcomes, fabricate proof points, or mention clients not on the list
+4. When discussing revenue/business impact, emphasize delivery excellence — never position Matt as a sales hunter
+5. For synthesis questions, lead with the 7 Themes and support with diverse client examples
+"""
 
 
 def log_offdomain(
@@ -94,6 +309,156 @@ def build_known_vocab(stories: list[dict[str, Any]]) -> set[str]:
             vocab.update(re.split(r"[^\w]+", str(t).strip().lower()))
     # Prune tiny tokens
     return {w for w in vocab if len(w) >= 3}
+
+
+def classify_query_intent(query: str) -> str:
+    """Classify query into intent categories using LLM.
+
+    Uses gpt-4o-mini for cheap, self-maintaining classification that handles
+    novel phrasings without keyword list maintenance.
+
+    Args:
+        query: User query string to classify.
+
+    Returns:
+        One of: "synthesis", "behavioral", "technical", "client", "background", "general"
+
+    Example:
+        >>> classify_query_intent("What are common themes across Matt's work?")
+        "synthesis"
+        >>> classify_query_intent("Tell me about a time you failed")
+        "behavioral"
+    """
+    try:
+        from dotenv import load_dotenv
+        from openai import OpenAI
+
+        load_dotenv()
+        client = OpenAI(
+            api_key=os.getenv("OPENAI_API_KEY"),
+            project=os.getenv("OPENAI_PROJECT_ID"),
+            organization=os.getenv("OPENAI_ORG_ID"),
+        )
+
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": """Classify this query about Matt Pugmire's career into exactly one category:
+
+- synthesis: Questions requiring cross-cutting evidence or methodology patterns:
+  * Themes, patterns, philosophy across all work
+  * Value/ROI/impact questions ("What ROI does Matt deliver?", "What value does Matt bring?")
+  * Role-fit/hiring questions ("Why hire Matt?", "Is Matt right for VP?", "What makes Matt different?")
+  * Strengths/differentiators ("What sets Matt apart?", "Matt's superpowers")
+  * Capability/methodology questions EVEN WITH a specific company name:
+    - Capability verbs: scale, transform, build, lead, develop, drive, grow, establish, create
+    - "How did Matt scale talent at Accenture?" → synthesis (asking about methodology)
+    - "How did Matt transform delivery at JPMorgan?" → synthesis (asking about approach)
+  * Methodology nouns (always synthesis regardless of client):
+    - rapid prototyping, design thinking, agile transformation, DevOps practices, modernization
+    - "Tell me about Matt's rapid prototyping work" → synthesis
+    - "Tell me about Matt's design thinking approach" → synthesis
+- behavioral: STAR-style questions (tell me about a time, how do you handle, give an example of when you)
+- technical: Questions about specific technologies, architecture, tools, cloud platforms
+- client: ONLY for general inquiries about work at a SPECIFIC named company WITHOUT capability framing
+  * Must be a real company name: JPMorgan, Accenture, Capital One, RBC, Norfolk Southern, Fiserv, AT&T
+  * CRITICAL: Generic words "client" or "clients" are NOT company names - NEVER classify as client intent
+  * If the query contains "client" or "clients" as a generic noun (not a company name), classify as synthesis or general
+  * "Tell me about Matt's work at JPMorgan" → client (JPMorgan is a real company)
+  * "What did Matt do at Accenture?" → client (Accenture is a real company)
+  * "Tell me about Matt's client products work" → synthesis (generic "client" is not a company)
+  * "How does Matt work with clients?" → synthesis (generic "clients" is not a company, asking about approach)
+  * "Matt's client engagement methodology" → synthesis (generic "client" is not a company, asking about methodology)
+- background: Questions about who Matt is, his experience, career history, current role
+- out_of_scope: Questions about industries/domains Matt has NOT worked in (retail, hospitality, gaming, entertainment, real estate, construction, education K-12)
+- general: Everything else
+
+Examples:
+- "What are common themes across Matt's work?" → synthesis
+- "What kind of ROI does Matt deliver?" → synthesis
+- "Why should we hire Matt as VP of Engineering?" → synthesis
+- "How did Matt scale learning at Accenture?" → synthesis (capability verb + company)
+- "How did Matt transform delivery at JPMorgan?" → synthesis (capability verb + company)
+- "Tell me about Matt's rapid prototyping work" → synthesis (methodology noun)
+- "How does Matt work with clients?" → synthesis (generic "clients" = methodology question, NOT client intent)
+- "Tell me about Matt's client engagement" → synthesis (generic "client" = approach question)
+- "Tell me about Matt's work at JPMorgan" → client (JPMorgan is a real company)
+- "What did Matt do at Capital One?" → client (Capital One is a real company)
+- "Tell me about Matt's payments work" → technical
+- "Tell me about a time you failed" → behavioral
+- "Tell me about Matt's work in retail sales" → out_of_scope
+
+Return only the category name, nothing else.""",
+                },
+                {"role": "user", "content": query},
+            ],
+            max_tokens=10,
+            temperature=0,
+        )
+        intent = response.choices[0].message.content.strip().lower()
+        # Validate response
+        valid_intents = {
+            "synthesis",
+            "behavioral",
+            "technical",
+            "client",
+            "background",
+            "out_of_scope",
+            "general",
+        }
+        if intent not in valid_intents:
+            return "general"
+        return intent
+    except Exception as e:
+        if DEBUG:
+            print(f"DEBUG classify_query_intent error: {e}")
+        return "general"
+
+
+def get_diverse_stories(
+    pinecone_results: list[dict[str, Any]],
+    diversify_by: str = "Client",
+    max_per_category: int = 2,
+    total: int = 8,
+) -> list[dict[str, Any]]:
+    """Select diverse stories from Pinecone results.
+
+    Ensures variety across Client/Theme/Era to avoid returning multiple
+    stories from the same category.
+
+    Args:
+        pinecone_results: Stories returned from Pinecone search.
+        diversify_by: Field to diversify on (Client, Theme, Era).
+        max_per_category: Maximum stories per category value.
+        total: Total stories to return.
+
+    Returns:
+        List of diverse stories, up to `total` count.
+
+    Example:
+        >>> results = [{"Client": "JPMC"}, {"Client": "JPMC"}, {"Client": "RBC"}]
+        >>> diverse = get_diverse_stories(results, max_per_category=1, total=2)
+        >>> len(diverse)
+        2
+    """
+    seen_categories: dict[str, int] = {}
+    diverse: list[dict[str, Any]] = []
+
+    for story in pinecone_results:
+        category = story.get(diversify_by, "Unknown")
+        if category not in seen_categories:
+            seen_categories[category] = 0
+
+        if seen_categories[category] < max_per_category:
+            diverse.append(story)
+            seen_categories[category] += 1
+
+        if len(diverse) >= total:
+            break
+
+    return diverse
 
 
 def is_query_on_topic_llm(query: str) -> bool:
@@ -206,7 +571,10 @@ def _score_story_for_prompt(story: dict[str, Any], prompt: str) -> float:
 
 
 def _generate_agy_response(
-    question: str, ranked_stories: list[dict[str, Any]], answer_context: str
+    question: str,
+    ranked_stories: list[dict[str, Any]],
+    answer_context: str,
+    is_synthesis: bool = False,
 ) -> str:
     """Generate an Agy-voiced response using OpenAI GPT-4o-mini.
 
@@ -215,12 +583,17 @@ def _generate_agy_response(
     - V2 System Prompt: Start With Why structure, Purpose/Process/Performance flow
     - Python-driven randomization for variety in openings, closings, and focus
 
+    For synthesis mode (big-picture questions about themes/patterns), uses expanded
+    context from multiple stories and Career Narrative content to provide holistic
+    insights rather than focusing on a single story.
+
     Args:
         question: User's original question.
-        ranked_stories: Top 3 relevant stories from semantic search (typically
-            from diversify_results).
+        ranked_stories: Top stories from semantic search. For synthesis mode,
+            includes Career Narrative stories + diverse project examples.
         answer_context: Pre-formatted story content used as fallback if
             OpenAI API call fails.
+        is_synthesis: If True, use synthesis prompt mode for big-picture questions.
 
     Returns:
         Agy-voiced response string with Start With Why narrative structure,
@@ -254,7 +627,18 @@ def _generate_agy_response(
         story_contexts = []
         themes_in_response = set()
 
-        for i, story in enumerate(ranked_stories[:3]):
+        # For synthesis mode, use more stories (up to 7)
+        # For standard mode, use top 3
+        story_limit = 7 if is_synthesis else 3
+
+        if DEBUG:
+            print(
+                f"DEBUG LLM stories ({story_limit} max, {len(ranked_stories[:story_limit])} actual):"
+            )
+            for i, s in enumerate(ranked_stories[:story_limit]):
+                print(f"DEBUG   [{i+1}] {s.get('Client')}: {s.get('Title', '')[:40]}")
+
+        for i, story in enumerate(ranked_stories[:story_limit]):
             context = build_story_context_for_rag(story)
             story_contexts.append(f"Story {i+1}:\n{context}")
             themes_in_response.add(infer_story_theme(story))
@@ -269,46 +653,71 @@ def _generate_agy_response(
         # PYTHON-DRIVEN RANDOMIZATION FOR VARIETY
         # =====================================================================
 
-        # Random opening - GPT must use this exact opening
-        openings = [
-            "🐾 Found it!",
-            "🐾 Great question!",
-            "🐾 Tracking this down...",
-            "🐾 On it!",
-            "🐾 Perfect — here's what I found.",
-            "Got it! 🐾",
-            "🐾 This is a strong one.",
-            "🐾 Here's a great example.",
-            "🐾 I know just the story.",
-            "🐾 Glad you asked!",
-        ]
-        chosen_opening = random.choice(openings)
+        if is_synthesis:
+            # Synthesis mode openings - for big-picture questions
+            openings = [
+                "🐾 Great question — let me pull together the big picture.",
+                "🐾 Looking across Matt's portfolio, I see clear patterns.",
+                "🐾 Here's what connects the dots across Matt's work.",
+                "🐾 Stepping back to see the themes...",
+                "🐾 Let me show you what ties Matt's work together.",
+            ]
+            chosen_opening = random.choice(openings)
 
-        # Random closing - GPT must use this exact closing style
-        closings = [
-            "Want me to dig deeper into the technical approach?",
-            "Happy to explore similar work in other industries.",
-            "What else can I track down for you?",
-            "I can show you related patterns if that's helpful.",
-            "Let me know if you'd like the deep dive on this one.",
-            "Want to see how Matt applied this elsewhere?",
-            "Shall I find more examples like this?",
-            "There's more to this story if you're curious.",
-        ]
-        chosen_closing = random.choice(closings)
+            # Synthesis mode closings
+            closings = [
+                "Want me to dive deeper into any of these themes?",
+                "I can show specific examples from any of these areas.",
+                "Which pattern would you like to explore further?",
+                "Happy to unpack any of these with concrete stories.",
+            ]
+            chosen_closing = random.choice(closings)
 
-        # Random focus emphasis - adds variety to which aspect gets highlighted
-        focus_angles = [
-            "Emphasize the HUMAN IMPACT — who was struggling and how their work life improved.",
-            "Emphasize the METHODOLOGY — what made Matt's approach different from the obvious solution.",
-            "Emphasize the SCALE — the scope, complexity, and reach of the transformation.",
-            "Emphasize the LEADERSHIP — how Matt brought people together and drove alignment.",
-            "Emphasize the OUTCOMES — hard numbers and measurable business results.",
-            "Emphasize the INNOVATION — what was new, creative, or unconventional about this.",
-        ]
-        chosen_focus = random.choice(focus_angles)
+            # No focus angle for synthesis — we want breadth
+            chosen_focus = (
+                "Synthesize patterns ACROSS all stories, not depth on any single one."
+            )
+        else:
+            # Standard mode openings - for specific questions
+            openings = [
+                "🐾 Found it!",
+                "🐾 Great question!",
+                "🐾 Tracking this down...",
+                "🐾 On it!",
+                "🐾 Perfect — here's what I found.",
+                "Got it! 🐾",
+                "🐾 This is a strong one.",
+                "🐾 Here's a great example.",
+                "🐾 I know just the story.",
+                "🐾 Glad you asked!",
+            ]
+            chosen_opening = random.choice(openings)
 
-        # Get primary client for formatting check
+            # Standard mode closings
+            closings = [
+                "Want me to dig deeper into the technical approach?",
+                "Happy to explore similar work in other industries.",
+                "What else can I track down for you?",
+                "I can show you related patterns if that's helpful.",
+                "Let me know if you'd like the deep dive on this one.",
+                "Want to see how Matt applied this elsewhere?",
+                "Shall I find more examples like this?",
+                "There's more to this story if you're curious.",
+            ]
+            chosen_closing = random.choice(closings)
+
+            # Random focus emphasis - adds variety to which aspect gets highlighted
+            focus_angles = [
+                "Emphasize the HUMAN IMPACT — who was struggling and how their work life improved.",
+                "Emphasize the METHODOLOGY — what made Matt's approach different from the obvious solution.",
+                "Emphasize the SCALE — the scope, complexity, and reach of the transformation.",
+                "Emphasize the LEADERSHIP — how Matt brought people together and drove alignment.",
+                "Emphasize the OUTCOMES — hard numbers and measurable business results.",
+                "Emphasize the INNOVATION — what was new, creative, or unconventional about this.",
+            ]
+            chosen_focus = random.choice(focus_angles)
+
+        # Get primary client for formatting check (not used in synthesis mode)
         primary_client = (
             ranked_stories[0].get("Client", "the client")
             if ranked_stories
@@ -316,10 +725,136 @@ def _generate_agy_response(
         )
 
         # =====================================================================
-        # TIGHTENED SYSTEM PROMPT
+        # SYSTEM PROMPT AND USER MESSAGE (varies by mode)
         # =====================================================================
 
-        system_prompt = f"""You are Agy 🐾 — Matt Pugmire's Plott Hound assistant.
+        if is_synthesis:
+            # =================================================================
+            # SYNTHESIS MODE PROMPTS
+            # For big-picture questions about themes, patterns, philosophy
+            # =================================================================
+
+            system_prompt = f"""You are Agy 🐾 — Matt Pugmire's Plott Hound assistant.
+
+{MATT_DNA}
+
+You reveal meaningful patterns and themes from Matt's 20+ years of transformation work.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+OFF-TOPIC GUARD:
+If the query is about shopping, weather, celebrities, or anything unrelated to Matt's professional work, respond ONLY with:
+"🐾 I can only discuss Matt's transformation experience. Ask me about application modernization, digital innovation, agile transformation, or leadership."
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## Voice
+- Warm, steady, grounded — never hype, never stiff
+- Confident and calm — patient intelligence
+- Exactly ONE 🐾 per response (already provided in opening)
+- No dog jokes, barking, or cutesiness
+- No corporate jargon walls
+
+## SYNTHESIS MODE INSTRUCTIONS
+
+## CONTEXT ISOLATION (MANDATORY)
+You may ONLY cite clients that appear in the stories provided below.
+- If only ONE story is provided, discuss ONLY that example
+- NEVER invent additional client examples to "show breadth"
+- If story says Client: "Multiple Clients" → say "across multiple engagements"
+- If you lack evidence for a pattern, say "Based on the available examples..."
+- If user's query mentions a client NOT in the provided stories, do NOT attribute to that client
+
+This is a BIG-PICTURE question. The user wants themes, patterns, or philosophy.
+
+**You KNOW Matt's seven defining patterns** (from your training). When asked about themes, patterns, or what defines Matt — lead with what you know:
+
+1. **He ships.** Production systems at scale, not strategy decks. (Execution & Delivery)
+2. **He advises.** Trusted thought partner to executives, strategic framing. (Strategic & Advisory)
+3. **He transforms how teams work.** Culture change, agile adoption, ways of working. (Org Transformation)
+4. **He builds people.** Coaching, mentorship, teams that outlast the engagement. (Talent & Enablement)
+5. **He manages risk.** Governance without killing velocity. (Risk & Responsible Tech)
+6. **He explores pragmatically.** GenAI, ML, emerging tech — with production value in mind. (Emerging Tech)
+7. **He knows who he is.** Clear values, clear philosophy, clear on what's next. (Professional Narrative)
+
+**Response Structure for Synthesis:**
+
+1. **Opening** — USE THE EXACT OPENING PROVIDED (includes 🐾)
+
+2. **Name the patterns** — Don't talk vaguely about "common themes." Name them in natural language:
+   - "He ships." not "Execution & Delivery theme"
+   - "He builds people." not "Talent & Enablement theme"
+
+3. **Prove each with a client example** — One sentence per pattern, different clients:
+   - **Bold client names** and **key numbers**
+   - Show breadth: JPMorgan, Norfolk Southern, RBC, AT&T, Capital One, Fiserv — not just one or two
+   - **CRITICAL: You MUST reference at least one story from EACH theme represented in the evidence below.**
+     If the evidence covers 6 themes, your response must mention all 6. Don't skip themes.
+
+4. **The thread** — What connects these patterns? (Builder's mindset, coach's heart. Both platforms and teams outlast the engagement.)
+
+5. **Closing** — USE THE EXACT CLOSING PROVIDED
+
+**BANNED PHRASES — Never use these:**
+- "bridge the gap between strategy and execution"
+- "foster collaboration"
+- "high-trust engineering cultures"
+- "meaningful outcomes"
+- "stakeholder alignment" (say "getting executives on the same page")
+- "strategic mindset" (say "thinks strategically")
+- "execution excellence" (say "he ships")
+
+**Voice Rules:**
+- Warm, confident, grounded — this is Agy who KNOWS Matt
+- First person ("I see seven patterns...")
+- WHY first (the pattern), then WHAT (the proof)
+- No corporate jargon
+- Bold **client names** and **numbers**
+
+**Word count:** 250-400 words
+
+## Theme Guidance
+{theme_guidance}"""
+
+            user_message = f"""User Question: {question}
+
+## Stories from Matt's Portfolio (use these as evidence):
+
+{story_context}
+
+---
+
+## YOUR SYNTHESIS RESPONSE INSTRUCTIONS:
+
+**MANDATORY OPENING (use exactly):** {chosen_opening}
+
+**MANDATORY CLOSING (use exactly):** {chosen_closing}
+
+**MODE:** {chosen_focus}
+
+---
+
+Generate a SYNTHESIS response that:
+
+1. **{chosen_opening}** ← Start with this exact text
+2. **Answer the question directly** — State the theme/pattern/insight upfront
+3. **Show evidence ONLY from the stories provided above** — Do NOT invent examples from clients not in the stories
+4. **Connect to a broader principle** — What does this reveal about Matt's approach?
+5. **{chosen_closing}** ← End with this exact text
+
+REMEMBER:
+- The 🐾 is already in your opening — do NOT add another one
+- **CRITICAL: ONLY cite clients that appear in the stories above. If only 1 story, discuss ONLY that one.**
+- **Bold ALL client names and numbers**
+- Keep it 200-300 words"""
+
+        else:
+            # =================================================================
+            # STANDARD MODE PROMPTS
+            # For specific questions about a single story or topic
+            # =================================================================
+
+            system_prompt = f"""You are Agy 🐾 — Matt Pugmire's Plott Hound assistant.
+
+{MATT_DNA}
 
 You reveal meaningful, human-anchored proof from Matt's 20+ years of transformation work.
 
@@ -355,8 +890,8 @@ If the query is about shopping, weather, celebrities, or anything unrelated to M
 - NEVER: "leveraged", "utilized", "employed best practices"
 
 **4. What Changed (WHAT)** — MANDATORY FORMATTING:
-- **Bold ALL numbers** — no exceptions: **30%**, **$50M**, **4x**, **12 countries**, **5 months**
-- **Bold the client name** EVERY time: **JPMorgan Chase**, **Accenture**, **Kaiser**
+- **Bold ALL numbers** — no exceptions (percentages, dollars, multipliers, counts, durations)
+- **Bold the client name** EVERY time it appears
 - If you write ANY number without ** around it, your response is WRONG
 - Lead with human/business impact, then metrics
 
@@ -381,11 +916,7 @@ If the query is about shopping, weather, celebrities, or anything unrelated to M
 ✓ 200-300 words total
 ✓ SCAN YOUR RESPONSE: Any unbolded number = WRONG"""
 
-        # =====================================================================
-        # TIGHTENED USER MESSAGE WITH MANDATORY INSTRUCTIONS
-        # =====================================================================
-
-        user_message = f"""User Question: {question}
+            user_message = f"""User Question: {question}
 
 ## Stories from Matt's Portfolio:
 
@@ -441,20 +972,18 @@ REMEMBER:
         response_text = response.choices[0].message.content
 
         # =====================================================================
-        # POST-PROCESSING: Auto-bold numbers and client name
+        # POST-PROCESSING: Auto-bold numbers and client names
         # GPT frequently ignores bolding instructions, so we fix it here
         # =====================================================================
         import re
 
-        # Bold the primary client name if not already bolded
-        if primary_client and primary_client not in [
-            "Multiple Clients",
-            "Personal",
-            "Various",
-        ]:
-            # Match client name not already wrapped in **
-            pattern = rf'(?<!\*\*)({re.escape(primary_client)})(?!\*\*)'
-            response_text = re.sub(pattern, r'**\1**', response_text)
+        # Bold ALL known client names (derived from story data)
+        known_clients = get_known_clients(ranked_stories)
+        for client in known_clients:
+            if client and len(client) > 2:  # Skip very short strings
+                # Match client name not already wrapped in **
+                pattern = rf'(?<!\*\*)({re.escape(client)})(?!\*\*)'
+                response_text = re.sub(pattern, r'**\1**', response_text)
 
         # Bold numbers/metrics that aren't already bolded
         # Matches: 30%, $50M, 4x, 150+, 12 countries, 5 months, etc.
@@ -473,6 +1002,12 @@ REMEMBER:
 
         # Clean up any double-bolding that might have occurred
         response_text = re.sub(r'\*\*\*\*+', '**', response_text)
+
+        # Fix LLM's malformed number bolding: **1**0%** → **10%**
+        # This handles cases where LLM splits numbers incorrectly
+        response_text = re.sub(
+            r'\*\*(\d)\*\*(\d+%?\+?)\*\*', r'**\1\2**', response_text
+        )
 
         return response_text
 
@@ -948,10 +1483,32 @@ def rag_answer(
         # Store confidence for conversation_view to use
         st.session_state["__ask_confidence__"] = confidence
 
+        # Classify query intent for synthesis mode detection
+        query_intent = classify_query_intent(question or "")
+        is_synthesis = query_intent == "synthesis"
+        st.session_state["__ask_query_intent__"] = query_intent
+
         if DEBUG:
             print(
                 f"DEBUG: search confidence={confidence}, top_score={search_result['top_score']:.3f}, pool_size={len(pool)}"
             )
+            print(f"DEBUG: query_intent={query_intent}, is_synthesis={is_synthesis}")
+
+        # Handle out-of-scope queries gracefully
+        if query_intent == "out_of_scope":
+            out_of_scope_response = """🐾 That's outside my wheelhouse! Matt's experience is in **Financial Services**, **Healthcare/Life Sciences**, **Telecom**, and **Technology/SaaS** — not retail, hospitality, or consumer goods.
+
+But here's what might translate: Matt's work in **B2B platform modernization**, **payments systems**, and **enterprise transformation** often shares patterns with other industries. Want me to show you how his financial services or platform work might apply to your context?"""
+
+            if DEBUG:
+                print("DEBUG: out_of_scope query handled with redirect")
+
+            return {
+                "answer_md": out_of_scope_response,
+                "sources": [],
+                "modes": {"narrative": out_of_scope_response},
+                "default_mode": "narrative",
+            }
 
         # --- Pinecone confidence gate ---
         # Trust semantic router for high-confidence behavioral matches
@@ -1052,12 +1609,42 @@ def rag_answer(
             "default_mode": "narrative",
         }
 
-    # Rank top 3 with client diversity
+    # Rank stories based on intent type
     try:
         candidates = [x for x in pool if isinstance(x, dict)]
-        ranked = diversify_results(candidates) or (pool[:1] if pool else [])
-        if DEBUG and ranked:
-            dbg(f"ask: ranked first_ids={[s.get('id') for s in ranked]}")
+
+        if is_synthesis:
+            # Synthesis mode: Theme-diverse retrieval via parallel metadata-filtered search
+            # Each theme gets its own Pinecone query with filter={"Theme": theme}
+            # Professional Narrative theme will retrieve Career Narrative stories with scores
+            synthesis_pool = get_synthesis_stories(stories, top_per_theme=2)
+
+            # Sort by score (highest first) to ensure best stories from each theme surface
+            ranked = sorted(
+                synthesis_pool, key=lambda s: s.get("_search_score", 0), reverse=True
+            )
+            ranked = ranked[:9]  # Cap at 9 stories for synthesis
+
+            if DEBUG:
+                themes_found = set(
+                    s.get("_matched_theme") or s.get("Theme") for s in ranked
+                )
+                print(
+                    f"DEBUG synthesis mode - pool={len(synthesis_pool)}, ranked={len(ranked)}"
+                )
+                print(f"DEBUG synthesis themes covered: {themes_found}")
+                print("DEBUG synthesis ranked:")
+                for i, s in enumerate(ranked):
+                    theme = s.get("_matched_theme") or s.get("Theme", "?")
+                    score = s.get("_search_score", 0)
+                    print(
+                        f"DEBUG   [{i+1}] [{theme}] {s.get('Client')}: {s.get('Title', '')[:40]} (score={score:.3f})"
+                    )
+        else:
+            # Standard mode: Client diversity ranking
+            ranked = diversify_results(candidates) or (pool[:1] if pool else [])
+            if DEBUG and ranked:
+                dbg(f"ask: ranked first_ids={[s.get('id') for s in ranked]}")
     except Exception as e:
         if DEBUG:
             print(f"DEBUG rag_answer rank error: {e}")
@@ -1075,7 +1662,9 @@ def rag_answer(
     try:
         # Generate Agy-voiced response
         narrative = _format_narrative(primary)
-        agy_response = _generate_agy_response(question, ranked, narrative)
+        agy_response = _generate_agy_response(
+            question, ranked, narrative, is_synthesis=is_synthesis
+        )
 
         # Build modes
         key_points = "\n\n".join([_format_key_points(s) for s in ranked])
