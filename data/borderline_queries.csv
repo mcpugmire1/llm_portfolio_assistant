@@ -74,3 +74,13 @@ timestamp,query,score,matched_intent,family
 2025-12-09T18:31:06+00:00,Tell me abot Matts backgroun,0.796,Tell me about Matt's background,background
 2025-12-09T18:31:07+00:00,How did matt handle stakholders?,0.795,Tell me about Matt's stakeholder management,stakeholders
 2025-12-09T18:31:11+00:00,So like what's Matt's experience with cloud stuff?,0.783,What is Matt's experience with modern engineering and cloud platforms?,technical
+2026-01-05T19:09:59+00:00,What kind of teams does Matt build?,0.732,How does Matt lead teams?,leadership
+2026-01-18T18:53:04+00:00,Tell me about Matt's work in retail sales,0.748,Tell me about Matt's work at Financial Services Client,unknown
+2026-01-18T19:02:37+00:00,Tell me about Matt's work in retail sales,0.748,Tell me about Matt's work at Financial Services Client,unknown
+2026-01-19T02:17:02+00:00,How did Matt transform delivery at JPMorgan?,0.766,Tell me about Matt's work at JP Morgan Chase,unknown
+2026-01-19T02:17:37+00:00,How did Matt build teams at Capital One?,0.798,Tell me about Matt's work at Capital One,unknown
+2026-01-19T02:34:41+00:00,How did Matt build teams at Capital One?,0.798,Tell me about Matt's work at Capital One,unknown
+2026-01-19T02:35:22+00:00,Tell me about Matt's design thinking approach,0.747,What's Matt's approach to innovation?,unknown
+2026-01-19T02:37:47+00:00,Tell me about JPMorgan work?,0.751,Tell me about Matt's work at JP Morgan Chase,unknown
+2026-01-19T02:38:09+00:00,Tell me about Matt's retail sales work,0.751,Tell me about Matt's work at Financial Services Client,unknown
+2026-01-19T14:18:52+00:00,What are Matt's core leadership themes?,0.764,What's Matt's leadership style?,leadership

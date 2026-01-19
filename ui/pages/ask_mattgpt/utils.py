@@ -209,13 +209,16 @@ def push_assistant_turn(text: str):
     st.session_state["ask_transcript"].append({"role": "assistant", "text": text})
 
 
-def push_conversational_answer(answer_text: str, sources: list[dict]):
+def push_conversational_answer(
+    answer_text: str, sources: list[dict], query_intent: str | None = None
+):
     """
     Add conversational AI response to transcript with sources.
 
     Args:
         answer_text: Agy's response
         sources: Related story sources
+        query_intent: Intent type ("synthesis", "client", etc.) for card rendering
     """
     st.session_state["ask_transcript"].append(
         {
@@ -223,6 +226,7 @@ def push_conversational_answer(answer_text: str, sources: list[dict]):
             "Role": "assistant",
             "text": answer_text,
             "sources": sources,
+            "query_intent": query_intent,
         }
     )
 

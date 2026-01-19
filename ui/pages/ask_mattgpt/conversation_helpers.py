@@ -5,12 +5,15 @@ Rendering helpers specific to Ask MattGPT conversation view.
 Extracted from monolithic ask_mattgpt.py in Phase 5.1.
 """
 
+import math
+
 import streamlit as st
 
 from config.debug import DEBUG
 from ui.components.story_detail import render_story_detail
 
 # Import from existing modules
+from ui.pages.ask_mattgpt.story_intelligence import THEME_TO_PATTERN
 from ui.pages.ask_mattgpt.utils import get_context_story, story_modes
 from utils.formatting import build_5p_summary
 from utils.ui_helpers import (
@@ -19,6 +22,13 @@ from utils.ui_helpers import (
     render_sources_chips,
     safe_container,
 )
+
+# ============================================================================
+# SOURCES DISPLAY CONFIG
+# ============================================================================
+SOURCES_LABEL = "SOURCES"
+SOURCES_COLS_PER_ROW = 3
+SOURCES_MAX_DISPLAY = 6
 
 # ============================================================================
 # STATE MANAGEMENT
@@ -495,9 +505,9 @@ def _render_ask_transcript(stories: list[dict]):
                 sources = m.get("sources", []) or []
                 if sources:
                     st.markdown(
-                        '''
+                        f'''
                     <div class="sources-tight">
-                        <div class="source-links-title">📚 RELATED PROJECTS</div>
+                        <div class="source-links-title">{SOURCES_LABEL}</div>
                     </div>
                     ''',
                         unsafe_allow_html=True,
@@ -513,6 +523,25 @@ def _render_ask_transcript(stories: list[dict]):
                     st.markdown(
                         """
                         <style>
+                        /* Force source card row to not stretch columns */
+                        [class*="st-key-sources_grid"] .stHorizontalBlock {
+                            align-items: flex-start !important;
+                        }
+                        /* Force columns to not stretch to full height */
+                        [class*="st-key-sources_grid"] .stColumn {
+                            height: auto !important;
+                            align-self: flex-start !important;
+                        }
+                        [class*="st-key-sources_grid"] .stColumn > .stVerticalBlock {
+                            height: auto !important;
+                            justify-content: flex-start !important;
+                        }
+                        /* Remove gap inside button containers (fixes style tag gap issue) */
+                        [class*="st-key-container_related_proj"] {
+                            gap: 0 !important;
+                            row-gap: 0 !important;
+                        }
+
                         /* Related Projects button styling */
                         [class*="st-key-container_related_proj"] button,
                         [class*="st-key-related_proj"] button {
@@ -525,8 +554,11 @@ def _render_ask_transcript(stories: list[dict]):
                             border-radius: 8px !important;
                             width: 100% !important;
                             height: auto !important;
-                            min-height: 32px !important;
+                            min-height: 56px !important;
                             transition: all 0.2s ease !important;
+                            display: flex !important;
+                            align-items: center !important;
+                            justify-content: center !important;
                         }
                         [class*="st-key-container_related_proj"] button:hover,
                         [class*="st-key-related_proj"] button:hover {
@@ -545,80 +577,119 @@ def _render_ask_transcript(stories: list[dict]):
                         unsafe_allow_html=True,
                     )
 
-                    # Use columns for layout
-                    cols = st.columns(3)
-                    for j, src in enumerate(sources[:3]):
-                        title = src.get("title") or src.get("Title", "")
-                        client = src.get("client") or src.get("Client", "")
-                        story_id = src.get("id") or src.get("ID", "")
-                        label = f"{client} - {title}" if client and title else title
+                    # Dynamic grid: 1-3 sources → 1 row, 4-6 → 2 rows
+                    display_sources = sources[:SOURCES_MAX_DISPLAY]
+                    rows_needed = math.ceil(len(display_sources) / SOURCES_COLS_PER_ROW)
 
-                        with cols[j]:
-                            # Use stable key based on story ID (not indices)
-                            # Format: related_proj_{msg_hash}_{story_id}
-                            stable_key = f"related_proj_{msg_hash}_{story_id}"
+                    with st.container(key=f"sources_grid_{i}_{msg_hash}"):
+                        for row in range(rows_needed):
+                            cols = st.columns(SOURCES_COLS_PER_ROW)
+                            for col_idx in range(SOURCES_COLS_PER_ROW):
+                                src_idx = row * SOURCES_COLS_PER_ROW + col_idx
+                                if src_idx >= len(display_sources):
+                                    continue  # No more sources
 
-                            # Check if this card is the selected one
-                            is_selected = current_expanded_id == story_id
+                                src = display_sources[src_idx]
+                                title = src.get("title") or src.get("Title", "")
+                                client = src.get("client") or src.get("Client", "")
+                                story_id = src.get("id") or src.get("ID", "")
 
-                            with st.container(key=f"container_{stable_key}"):
-                                # Add selected indicator styling inline
-                                if is_selected:
-                                    st.markdown(
-                                        f"""
-                                        <style>
-                                        [class*="st-key-{stable_key}"] button {{
-                                            background: #F3E8FF !important;
-                                            border: 2px solid #8B5CF6 !important;
-                                            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2) !important;
-                                        }}
-                                        </style>
-                                        """,
-                                        unsafe_allow_html=True,
+                                # For synthesis mode, use pattern phrase instead of client
+                                # This matches the response structure ("He ships" not "JPMorgan")
+                                # Read from message's stored intent, not global state (fixes re-render bug)
+                                msg_query_intent = m.get("query_intent")
+                                is_synthesis_mode = msg_query_intent == "synthesis"
+                                if is_synthesis_mode:
+                                    theme = src.get("theme") or src.get("Theme", "")
+                                    pattern = THEME_TO_PATTERN.get(theme, theme)
+                                    # Use short pattern prefix for cleaner labels
+                                    label = (
+                                        f"{pattern} {title}"
+                                        if pattern and title
+                                        else title
+                                    )
+                                else:
+                                    label = (
+                                        f"{client} - {title}"
+                                        if client and title
+                                        else title
                                     )
 
-                                # When selected, show "✕ Close" - otherwise show link icon + label
-                                button_label = (
-                                    "✕ Close" if is_selected else f"🔗 {label}"
-                                )
+                                with cols[col_idx]:
+                                    # Use stable key based on message index + hash + source index + story ID
+                                    stable_key = f"related_proj_{i}_{msg_hash}_{src_idx}_{story_id}"
+                                    # Escape CSS special characters (pipe, etc.) for selector
+                                    css_safe_key = stable_key.replace(
+                                        "|", "\\|"
+                                    ).replace(":", "\\:")
 
-                                if st.button(
-                                    button_label,
-                                    key=stable_key,
-                                    use_container_width=True,
-                                ):
-                                    # Use story_id as the expanded key (stable across reruns)
-                                    expanded_key = f"expanded_{story_id}"
-                                    current_expanded = st.session_state.get(
-                                        "transcript_source_expanded"
-                                    )
+                                    # Check if this card is the selected one
+                                    is_selected = current_expanded_id == story_id
 
-                                    # Preserve active_tab before any state changes
-                                    if "active_tab" not in st.session_state:
-                                        st.session_state["active_tab"] = "Ask MattGPT"
+                                    with st.container(key=f"container_{stable_key}"):
+                                        # Add selected indicator styling inline
+                                        if is_selected:
+                                            st.markdown(
+                                                f"""
+                                                <style>
+                                                [class*="st-key-{css_safe_key}"] button {{
+                                                    background: #8B5CF6 !important;
+                                                    border: 2px solid #7C3AED !important;
+                                                    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3) !important;
+                                                }}
+                                                [class*="st-key-{css_safe_key}"] button p {{
+                                                    color: white !important;
+                                                    font-weight: 600 !important;
+                                                }}
+                                                </style>
+                                                """,
+                                                unsafe_allow_html=True,
+                                            )
 
-                                    if current_expanded == expanded_key:
-                                        # Clicking same source - close it
-                                        st.session_state[
-                                            "transcript_source_expanded"
-                                        ] = None
-                                        st.session_state[
-                                            "transcript_source_expanded_id"
-                                        ] = None
-                                    else:
-                                        # Open this source (closes any other)
-                                        st.session_state[
-                                            "transcript_source_expanded"
-                                        ] = expanded_key
-                                        st.session_state[
-                                            "transcript_source_expanded_id"
-                                        ] = story_id
-                                        # Store msg_hash instead of index for matching
-                                        st.session_state[
-                                            "transcript_source_expanded_msg"
-                                        ] = msg_hash
+                                        # When selected, show "✕ Close" - otherwise show link icon + label
+                                        button_label = (
+                                            "✕ Close" if is_selected else f"🔗 {label}"
+                                        )
 
-                                    st.rerun()
+                                        if st.button(
+                                            button_label,
+                                            key=stable_key,
+                                            use_container_width=True,
+                                        ):
+                                            # Use story_id as the expanded key (stable across reruns)
+                                            expanded_key = f"expanded_{story_id}"
+                                            current_expanded = st.session_state.get(
+                                                "transcript_source_expanded"
+                                            )
+
+                                            # Preserve active_tab before any state changes
+                                            if "active_tab" not in st.session_state:
+                                                st.session_state["active_tab"] = (
+                                                    "Ask MattGPT"
+                                                )
+
+                                            if current_expanded == expanded_key:
+                                                # Clicking same source - close it
+                                                st.session_state[
+                                                    "transcript_source_expanded"
+                                                ] = None
+                                                st.session_state[
+                                                    "transcript_source_expanded_id"
+                                                ] = None
+                                            else:
+                                                # Open this source (closes any other)
+                                                st.session_state[
+                                                    "transcript_source_expanded"
+                                                ] = expanded_key
+                                                st.session_state[
+                                                    "transcript_source_expanded_id"
+                                                ] = story_id
+                                                # Store msg_hash instead of index for matching
+                                                st.session_state[
+                                                    "transcript_source_expanded_msg"
+                                                ] = msg_hash
+
+                                            st.rerun()
 
                     # Render the expanded story detail below buttons for this message
                     expanded_key = st.session_state.get("transcript_source_expanded")

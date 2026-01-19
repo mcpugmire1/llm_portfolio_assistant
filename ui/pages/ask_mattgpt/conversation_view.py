@@ -217,7 +217,8 @@ def render_conversation_view(stories: list[dict]):
             if not st.session_state.get("ask_last_reason"):
                 answer_text = resp.get("answer_md") or resp.get("answer", "")
                 sources = resp.get("sources", []) or []
-                _push_conversational_answer(answer_text, sources)
+                query_intent = st.session_state.get("__ask_query_intent__")
+                _push_conversational_answer(answer_text, sources, query_intent)
                 st.session_state["__suppress_live_card_once__"] = True
             elif st.session_state.get("ask_last_reason"):
                 # Nonsense detected
@@ -376,7 +377,8 @@ def render_conversation_view(stories: list[dict]):
             if not st.session_state.get("ask_last_reason"):
                 answer_text = resp.get("answer_md") or resp.get("answer", "")
                 sources = resp.get("sources", []) or []
-                _push_conversational_answer(answer_text, sources)
+                query_intent = st.session_state.get("__ask_query_intent__")
+                _push_conversational_answer(answer_text, sources, query_intent)
                 st.session_state["__suppress_live_card_once__"] = True
             elif st.session_state.get("ask_last_reason"):
                 # Nonsense detected

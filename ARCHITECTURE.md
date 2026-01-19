@@ -76,7 +76,7 @@
 
 **Core Features:**
 - Semantic search across 130+ project stories
-- Query validation via semantic router
+- Query validation via nonsense filter + Pinecone confidence gating
 - Context-aware follow-up questions
 - Story intelligence (theme/persona inference)
 - Responsive chat UI with thinking indicators
@@ -167,8 +167,7 @@ llm_portfolio_assistant/
 │
 ├── data/
 │   ├── offdomain_queries.csv       # Query telemetry log (generated)
-│   ├── borderline_queries.csv      # Edge case queries for testing
-│   └── intent_embeddings.json      # Semantic router embeddings cache
+│   └── borderline_queries.csv      # Edge case queries for testing
 │
 ├── assets/
 │   └── (images, SVGs, diagrams)
@@ -508,20 +507,22 @@ User Question: "How did Matt scale engineering teams?"
 - Vector search in Pinecone (top 10, similarity > 0.75)
 - Apply metadata filters (Industry, Domain, Role)
       ↓
-[Hybrid Ranking - utils/scoring.py]
-- Vector similarity score (0-1)
-- Keyword matching score (0-1)
-- Weighted combination (70% vector, 30% keyword)
+[Intent Classification - backend_service.py]
+- classify_query_intent() → synthesis | behavioral | technical | client | background | general
+- Uses gpt-4o-mini for cheap, self-maintaining classification
+      ↓
+[Retrieval Strategy - based on intent]
+- STANDARD MODE: diversify_results() → top 3 stories with client variety
+- SYNTHESIS MODE: Career Narrative stories + diverse project stories (up to 7)
       ↓
 [Context Assembly - ui/pages/ask_mattgpt/backend_service.py]
-- Select top 3-5 stories
+- Select stories based on intent mode
 - Build prompt with STAR narratives
 - Include metadata (Client, Industry, Theme)
       ↓
 [LLM Generation - OpenAI GPT-4o-mini]
-- System prompt: "Answer using STAR format..."
-- Context: Top-ranked stories
-- User query
+- STANDARD: Single-story focus, human stakes → methodology → outcomes
+- SYNTHESIS: Theme/pattern → evidence across projects → insight
       ↓
 [Response Formatting - ui/pages/ask_mattgpt/conversation_helpers.py]
 - Extract answer + sources
@@ -530,6 +531,60 @@ User Question: "How did Matt scale engineering teams?"
       ↓
 User receives cited, STAR-formatted answer
 ```
+
+---
+
+### Synthesis Mode (Added January 2026)
+
+**Problem:** RAG retrieves individual stories well but struggles with big-picture questions like "What are common themes?" or "What patterns do you see?" — these need holistic context, not a single story.
+
+**Solution:** Intent-aware retrieval that changes strategy based on query type.
+
+**Intent Classification:**
+```python
+def classify_query_intent(query: str) -> str:
+    """
+    Uses gpt-4o-mini (~$0.0001 per query) to classify:
+    - synthesis: themes, patterns, philosophy, what makes Matt different
+    - behavioral: STAR-style "tell me about a time" questions
+    - technical: specific technologies, architecture, tools
+    - client: questions about specific companies
+    - background: career history, experience overview
+    - general: everything else
+    """
+```
+
+**Retrieval Strategies:**
+
+| Intent | Stories Retrieved | Retrieval Method |
+|--------|-------------------|------------------|
+| synthesis | 7 (2 Career Narrative + 5 diverse projects) | Career Narrative boost + client diversity |
+| behavioral | 3 | Standard diversify_results() |
+| technical | 3 | Standard diversify_results() |
+| client | 3 | Standard diversify_results() |
+| background | 3 | Standard diversify_results() |
+| general | 3 | Standard diversify_results() |
+
+**Career Narrative Stories:**
+Pre-written synthesis content in the story corpus with `Client: "Career Narrative"`. These capture:
+- Matt's work philosophy
+- Recurring themes across projects
+- Leadership principles
+- Patterns that emerge across 20+ years
+
+**Synthesis Prompt Mode:**
+- Different system prompt focused on patterns/themes
+- Asks for breadth across stories, not depth on one
+- Structure: Theme → Evidence from 2-4 clients → Insight
+- Longer responses (250-350 words vs 200-300)
+
+**Cost:**
+- Intent classification: ~$0.0001 per query (gpt-4o-mini, 10 tokens output)
+- Total query cost increase: negligible
+
+**Self-Maintenance:**
+- LLM-based classification handles novel phrasings without keyword list updates
+- New story themes automatically included via Career Narrative content
 
 ---
 
@@ -587,29 +642,6 @@ def answer_question(query: str, filters: dict = None):
 - Max 3-5 stories (to fit within token limits)
 - Prioritize highest similarity scores
 - Include full STAR narratives
-
----
-
-#### 3. Semantic Router ([services/semantic_router.py](services/semantic_router.py))
-
-**Purpose:** Route queries to appropriate handlers based on intent.
-
-**Key Functions:**
-```python
-def route_query(query: str):
-    """
-    Detect query type:
-    - Behavioral (STAR stories)
-    - Factual (resume data)
-    - Off-topic (reject politely)
-    - Clarification needed (ask follow-up)
-    """
-```
-
-**Routing Logic:**
-- Behavioral keywords: "How did you...", "Tell me about a time...", "Show me examples..."
-- Factual keywords: "What is...", "Where did...", "When did..."
-- Off-topic: Technical trivia, non-career questions
 
 ---
 

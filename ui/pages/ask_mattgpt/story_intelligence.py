@@ -8,91 +8,47 @@ Provides theme-specific voice guidance for Agy's response generation.
 from collections import Counter
 from typing import Any
 
-# The 6 Themes
+# The 7 Themes (constants for consistency)
 THEME_EXECUTION = "Execution & Delivery"
 THEME_STRATEGIC = "Strategic & Advisory"
 THEME_ORG_TRANSFORM = "Org & Working-Model Transformation"
 THEME_TALENT = "Talent & Enablement"
 THEME_RISK = "Risk & Responsible Tech"
 THEME_EMERGING = "Emerging Tech"
+THEME_PROFESSIONAL = "Professional Narrative"
 
-# Sub-category → Theme mapping
-SUBCATEGORY_TO_THEME = {
-    # Execution & Delivery
-    "Cloud-Native Architecture": THEME_EXECUTION,
-    "DevOps & CI/CD": THEME_EXECUTION,
-    "Platform Engineering": THEME_EXECUTION,
-    "API & Integration Architecture": THEME_EXECUTION,
-    "Data Engineering & Analytics": THEME_EXECUTION,
-    "Mobile & Web Development": THEME_EXECUTION,
-    "Infrastructure & Operations": THEME_EXECUTION,
-    # Strategic & Advisory
-    "Technology Strategy & Advisory": THEME_STRATEGIC,
-    "Digital Transformation": THEME_STRATEGIC,
-    "Product Strategy & Roadmapping": THEME_STRATEGIC,
-    "Business Architecture": THEME_STRATEGIC,
-    "Technology Assessment": THEME_STRATEGIC,
-    # Org & Working-Model Transformation
-    "Agile Transformation": THEME_ORG_TRANSFORM,
-    "Operating Model Design": THEME_ORG_TRANSFORM,
-    "Change Management": THEME_ORG_TRANSFORM,
-    "Process Improvement": THEME_ORG_TRANSFORM,
-    "Culture & Ways of Working": THEME_ORG_TRANSFORM,
-    # Talent & Enablement
-    "Team Building & Leadership": THEME_TALENT,
-    "Technical Coaching & Mentorship": THEME_TALENT,
-    "Capability Building": THEME_TALENT,
-    "Training & Development": THEME_TALENT,
-    "Hiring & Talent Strategy": THEME_TALENT,
-    # Risk & Responsible Tech
-    "Security & Compliance": THEME_RISK,
-    "Governance & Risk Management": THEME_RISK,
-    "Responsible AI & Ethics": THEME_RISK,
-    "Privacy & Data Protection": THEME_RISK,
-    "Regulatory Compliance": THEME_RISK,
-    # Emerging Tech
-    "AI & Machine Learning": THEME_EMERGING,
-    "Generative AI": THEME_EMERGING,
-    "Innovation & Experimentation": THEME_EMERGING,
-    "Research & Prototyping": THEME_EMERGING,
-    "Emerging Technology Adoption": THEME_EMERGING,
+# Default theme when not specified in story data
+DEFAULT_THEME = THEME_EXECUTION
+
+# Pattern phrases for synthesis mode - prevents voice drift to theme names
+THEME_TO_PATTERN = {
+    THEME_EXECUTION: "He ships.",
+    THEME_STRATEGIC: "He advises.",
+    THEME_ORG_TRANSFORM: "He transforms how teams work.",
+    THEME_TALENT: "He builds people.",
+    THEME_RISK: "He manages risk.",
+    THEME_EMERGING: "He explores pragmatically.",
+    THEME_PROFESSIONAL: "He knows who he is.",
 }
 
 
 def infer_story_theme(story: dict[str, Any]) -> str:
-    """Infer the theme for a story based on Sub-category.
-
-    Uses a three-tier fallback strategy:
-    1. Sub-category lookup in SUBCATEGORY_TO_THEME mapping
-    2. Explicit Theme field (if story was previously enriched)
-    3. Default to Execution & Delivery
+    """Get the theme for a story from its Theme field.
 
     Args:
         story: Story dictionary with metadata. Expected fields:
-            - Sub-category (str): Primary lookup field
-            - Theme (str, optional): Explicit theme override
+            - Theme (str): The story's theme
             - Other story fields (Title, Client, etc.)
 
     Returns:
-        One of the 6 canonical theme strings (THEME_* constants).
+        The story's Theme field, or THEME_EXECUTION as default.
 
     Example:
-        >>> story = {"Sub-category": "Platform Engineering", "Client": "JPMC"}
+        >>> story = {"Theme": "Talent & Enablement", "Client": "JPMC"}
         >>> infer_story_theme(story)
-        'Execution & Delivery'
+        'Talent & Enablement'
     """
-    # First try: Sub-category lookup
-    sub_category = story.get("Sub-category", "")
-    if sub_category in SUBCATEGORY_TO_THEME:
-        return SUBCATEGORY_TO_THEME[sub_category]
-
-    # Second try: Explicit Theme field (if already enriched)
-    explicit_theme = story.get("Theme", "")
-    if explicit_theme and explicit_theme in get_all_themes():
-        return explicit_theme
-
-    # Default to Execution & Delivery
-    return THEME_EXECUTION
+    return story.get("Theme", THEME_EXECUTION)
 
 
 def get_theme_guidance(theme: str) -> str:
@@ -154,6 +110,14 @@ def get_theme_guidance(theme: str) -> str:
 - Position: Innovation leader and technology scout
 - Proof points: experiments run, insights gained, future capabilities unlocked
 - Pattern: Innovation leadership + pragmatic exploration""",
+        THEME_PROFESSIONAL: """🧭 PROFESSIONAL NARRATIVE stories:
+- Personal and reflective — this is about who Matt is, not just what he did
+- First-person positioning with confidence, not arrogance
+- Philosophy-forward: share how Matt thinks, what drives him, what he values
+- Honest about transitions, growth, and lessons learned
+- Grounded in experience but forward-looking
+- Warm and authentic — this is Matt speaking about himself
+- Avoid corporate-speak; be direct and human""",
     }
 
     return guidance.get(theme, guidance[THEME_EXECUTION])
@@ -203,12 +167,13 @@ def build_story_context_for_rag(story: dict[str, Any]) -> str:
             return ' '.join(str(v) for v in value if v)
         return str(value) if value else ''
 
-    # Infer theme
+    # Infer theme and get pattern phrase to prevent voice drift
     theme = infer_story_theme(story)
+    pattern_phrase = THEME_TO_PATTERN.get(theme, theme)
 
-    # Build structured context
+    # Build structured context - use pattern phrase instead of theme name
     context = f"""**{story.get('Title', 'Untitled')}**
-Theme: {theme}
+Pattern: {pattern_phrase}
 Client: {story.get('Client', 'Unknown')}
 Role: {story.get('Role', '')}
 Industry: {story.get('Industry', '')}
@@ -236,7 +201,7 @@ Place (Where): {get_text('Place') or get_text('Where')}
 
 def get_all_themes() -> list[str]:
     """
-    Get list of all 6 themes.
+    Get list of all 7 themes.
 
     Returns:
         List of theme strings
@@ -248,6 +213,7 @@ def get_all_themes() -> list[str]:
         THEME_TALENT,
         THEME_RISK,
         THEME_EMERGING,
+        THEME_PROFESSIONAL,
     ]
 
 
@@ -305,5 +271,6 @@ def get_theme_emoji(theme: str) -> str:
         THEME_TALENT: "👥",
         THEME_RISK: "🛡️",
         THEME_EMERGING: "🚀",
+        THEME_PROFESSIONAL: "🧭",
     }
     return emoji_map.get(theme, "🏗️")

@@ -174,7 +174,12 @@ def _get_intent_embeddings() -> dict[str, list[float]]:
             import json
 
             with open(cache_path) as f:
-                _intent_embeddings_cache = json.load(f)
+                data = json.load(f)
+            # Handle both old format (flat) and new format (nested with "embeddings" key)
+            if "embeddings" in data:
+                _intent_embeddings_cache = data["embeddings"]
+            else:
+                _intent_embeddings_cache = data
             return _intent_embeddings_cache
         except Exception:
             pass

@@ -261,3 +261,11 @@ Sports:
 2025-12-09T17:31:57+00:00,Tell me about payments,low_pinecone:0.000
 2025-12-09T18:05:25+00:00,Tell me about payments,low_pinecone:0.000
 2025-12-09T18:30:36+00:00,Tell me about payments,low_pinecone:0.000
+2026-01-11T21:35:28+00:00,What's the weather today?,rule:weather
+2026-01-11T21:35:44+00:00,How do I bake a cake?,low_pinecone:0.107
+2026-01-11T21:35:54+00:00,Tell me a joke,rule:jokes_riddles
+2026-01-11T21:36:05+00:00,What's 2+2?,low_pinecone:0.173
+2026-01-11T21:36:17+00:00,Tell me about underwater basket weaving,low_pinecone:0.197
+2026-01-11T21:36:27+00:00,What's your favorite color?,rule:personal_trivia
+2026-01-19T14:18:51+00:00,Tell me about Matt's payments work at JPMorgan,low_pinecone:0.000
+2026-01-19T14:18:53+00:00,What are Matt's core leadership themes?,low_pinecone:0.000

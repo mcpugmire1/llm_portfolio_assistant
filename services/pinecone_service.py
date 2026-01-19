@@ -12,6 +12,23 @@ from utils.scoring import _hybrid_score, _keyword_score_for_story
 
 load_dotenv()
 
+
+def _safe_session_get(key: str, default=None):
+    """Safely get session state, works outside Streamlit context."""
+    try:
+        return st.session_state.get(key, default)
+    except Exception:
+        return default
+
+
+def _safe_session_set(key: str, value):
+    """Safely set session state, no-op outside Streamlit context."""
+    try:
+        st.session_state[key] = value
+    except Exception:
+        pass
+
+
 # =========================
 # Config / constants
 # =========================
@@ -215,22 +232,30 @@ def pinecone_semantic_search(
                     raw_stats = {}
                 stats_compact = _summarize_index_stats(_safe_json(raw_stats))
 
-                st.session_state["__pc_debug__"] = {
-                    "index": _PINECONE_INDEX or PINECONE_INDEX_NAME,
-                    "namespace": PINECONE_NAMESPACE or "",
-                    "match_count": len(matches),
-                    "preview": preview,
-                    "weights": {"W_PC": W_PC, "W_KW": W_KW},
-                    "min_sim": PINECONE_MIN_SIM,
-                    "stats": stats_compact,
-                }
+                _safe_session_set(
+                    "__pc_debug__",
+                    {
+                        "index": _PINECONE_INDEX or PINECONE_INDEX_NAME,
+                        "namespace": PINECONE_NAMESPACE or "",
+                        "match_count": len(matches),
+                        "preview": preview,
+                        "weights": {"W_PC": W_PC, "W_KW": W_KW},
+                        "min_sim": PINECONE_MIN_SIM,
+                        "stats": stats_compact,
+                    },
+                )
             except Exception as e:
                 print("DEBUG: Pinecone snapshot error:", e)
         # --- end DEBUG snapshot ---
 
         hits = []
-        st.session_state["__pc_last_ids__"].clear()
-        st.session_state["__pc_snippets__"].clear()
+        # Safely clear session state dicts (works outside Streamlit context)
+        pc_last_ids = _safe_session_get("__pc_last_ids__", {})
+        if pc_last_ids:
+            pc_last_ids.clear()
+        pc_snippets = _safe_session_get("__pc_snippets__", {})
+        if pc_snippets:
+            pc_snippets.clear()
 
         for m in matches:
             sid, score, meta = _extract_match_fields(m)
@@ -242,12 +267,19 @@ def pinecone_semantic_search(
                 continue
 
             snip = meta.get("summary") or meta.get("snippet") or ""
-            if snip:
-                st.session_state["__pc_snippets__"][str(sid)] = snip
+            if snip and pc_snippets is not None:
+                try:
+                    pc_snippets[str(sid)] = snip
+                except Exception:
+                    pass
 
             kw = _keyword_score_for_story(story, query)
             blended = _hybrid_score(score, kw)
-            st.session_state["__pc_last_ids__"][str(sid)] = blended
+            if pc_last_ids is not None:
+                try:
+                    pc_last_ids[str(sid)] = blended
+                except Exception:
+                    pass
 
             if DEBUG:
                 try:

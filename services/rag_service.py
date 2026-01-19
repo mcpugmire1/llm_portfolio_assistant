@@ -10,6 +10,15 @@ from services.pinecone_service import (
 from utils.formatting import build_5p_summary
 from utils.validation import _tokenize
 
+
+def _safe_session_set(key: str, value):
+    """Safely set session state, no-op outside Streamlit context."""
+    try:
+        st.session_state[key] = value
+    except Exception:
+        pass
+
+
 # Known vocab (built from stories)
 _KNOWN_VOCAB: set[str] = set()
 
@@ -17,7 +26,9 @@ _KNOWN_VOCAB: set[str] = set()
 # CONFIDENCE THRESHOLDS (centralized)
 # =============================================================================
 CONFIDENCE_HIGH = 0.25  # Strong match - show "Found X stories"
-CONFIDENCE_LOW = 0.15  # Borderline - show "Relevance may be low"
+CONFIDENCE_LOW = (
+    0.20  # Raised from 0.15 to filter phantom similarity noise (e.g., "peanut butter")
+)
 # Below CONFIDENCE_LOW = "none" - show "No strong matches"
 
 
@@ -126,25 +137,28 @@ def semantic_search(
     ]
 
     if not confident_hits:
-        st.session_state["__pc_suppressed__"] = True
+        _safe_session_set("__pc_suppressed__", True)
         confident_hits = hits[:3]  # Fallback to top 3
 
     # Persist scores for UI display
-    try:
-        st.session_state["__pc_last_ids__"] = {
+    _safe_session_set(
+        "__pc_last_ids__",
+        {
             h["story"]["id"]: float(h.get("pc_score", 0.0) or 0.0)
             for h in confident_hits
-        }
-        st.session_state["__pc_snippets__"] = {
+        },
+    )
+    _safe_session_set(
+        "__pc_snippets__",
+        {
             h["story"]["id"]: (h.get("snippet") or build_5p_summary(h["story"]))
             for h in confident_hits
-        }
-        st.session_state["__last_ranked_sources__"] = [
-            h["story"]["id"] for h in confident_hits
-        ]
-        st.session_state["__dbg_pc_hits"] = len(hits)
-    except Exception:
-        pass
+        },
+    )
+    _safe_session_set(
+        "__last_ranked_sources__", [h["story"]["id"] for h in confident_hits]
+    )
+    _safe_session_set("__dbg_pc_hits", len(hits))
 
     # 6) Apply UI filters and attach scores to stories
     filtered_stories = []

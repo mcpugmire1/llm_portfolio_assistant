@@ -291,6 +291,7 @@ def render_landing_page(stories: list[dict]):
             # Normal answer - add conversational answer (wireframe style)
             sources = result.get("sources", [])
             answer_text = result.get("answer_md") or result.get("answer", "")
+            query_intent = st.session_state.get("__ask_query_intent__")
 
             st.session_state["ask_transcript"].append(
                 {
@@ -298,6 +299,7 @@ def render_landing_page(stories: list[dict]):
                     "Role": "assistant",
                     "text": answer_text,
                     "sources": sources,
+                    "query_intent": query_intent,
                 }
             )
 
