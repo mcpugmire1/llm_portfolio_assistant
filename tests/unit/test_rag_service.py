@@ -307,7 +307,7 @@ class TestSemanticSearchNoRegression:
     def test_low_confidence_search(
         self, mock_st, mock_pinecone, sample_stories_with_industry
     ):
-        """Search with low confidence (0.15-0.25) returns 'low' confidence."""
+        """Search with low confidence (0.20-0.25) returns 'low' confidence."""
         # Setup
         mock_st.session_state = {}
         low_confidence_hits = [
@@ -317,7 +317,7 @@ class TestSemanticSearchNoRegression:
                     "Title": "Payments Platform",
                     "Industry": "Banking",
                 },
-                "pc_score": 0.18,  # Between CONFIDENCE_LOW (0.15) and CONFIDENCE_HIGH (0.25)
+                "pc_score": 0.22,  # Between CONFIDENCE_LOW (0.20) and CONFIDENCE_HIGH (0.25)
                 "snippet": "Some match",
             }
         ]
@@ -342,7 +342,7 @@ class TestSemanticSearchNoRegression:
 
         # Assert
         assert result["confidence"] == "low"
-        assert result["top_score"] == 0.18
+        assert result["top_score"] == 0.22
         assert len(result["results"]) >= 1
 
     @patch("services.rag_service.pinecone_semantic_search")

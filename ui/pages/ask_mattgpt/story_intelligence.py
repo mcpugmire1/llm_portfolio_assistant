@@ -59,7 +59,7 @@ def get_theme_guidance(theme: str) -> str:
     for _generate_agy_response().
 
     Args:
-        theme: One of the 6 canonical theme strings (THEME_* constants).
+        theme: One of the 7 canonical theme strings (THEME_* constants).
             Examples: "Execution & Delivery", "Strategic & Advisory", etc.
 
     Returns:
@@ -231,14 +231,14 @@ def get_theme_distribution(stories: list[dict[str, Any]]) -> dict[str, int]:
     """Analyze theme distribution across a story collection.
 
     Useful for understanding portfolio coverage, identifying gaps,
-    and validating that stories are distributed across all 6 themes.
+    and validating that stories are distributed across all 7 themes.
 
     Args:
         stories: List of story dictionaries with Sub-category or Theme fields.
 
     Returns:
         Dictionary mapping theme names to occurrence counts.
-        Keys are the 6 canonical theme strings, values are integers.
+        Keys are the 7 canonical theme strings, values are integers.
 
     Example:
         >>> stories = [
@@ -262,7 +262,7 @@ def get_theme_emoji(theme: str) -> str:
     Provides consistent emoji icons for UI display, tags, and navigation.
 
     Args:
-        theme: One of the 6 canonical theme strings (THEME_* constants).
+        theme: One of the 7 canonical theme strings (THEME_* constants).
 
     Returns:
         Single emoji character as string. Falls back to 🏗️ (Execution theme)

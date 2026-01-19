@@ -47,7 +47,7 @@ class TestInferStoryTheme:
             pytest.skip("infer_story_theme not available")
 
         empty_story = {}
-        theme = infer_story_theme(empty_story)
+        _theme = infer_story_theme(empty_story)  # noqa: F841 - testing no exception
 
         # Should not raise, can return None or default
 
@@ -106,7 +106,7 @@ class TestGetThemeGuidance:
         except ImportError:
             pytest.skip("get_theme_guidance not available")
 
-        guidance = get_theme_guidance("Talent & Enablement")
+        guidance = get_theme_guidance("Talent & Enablement")  # One of 7 themes
 
         # Should return some guidance string
         assert guidance is not None
@@ -156,8 +156,8 @@ class TestGetThemeGuidance:
 class TestGetAllThemes:
     """Tests for get_all_themes() function."""
 
-    def test_returns_list_of_six_themes(self):
-        """Should return all 6 canonical themes."""
+    def test_returns_list_of_seven_themes(self):
+        """Should return all 7 canonical themes (including Professional Narrative)."""
         try:
             from ui.pages.ask_mattgpt.story_intelligence import get_all_themes
         except ImportError:
@@ -166,7 +166,7 @@ class TestGetAllThemes:
         themes = get_all_themes()
 
         assert isinstance(themes, list)
-        assert len(themes) == 6
+        assert len(themes) == 7
 
     def test_themes_are_strings(self):
         """All themes should be strings."""
@@ -242,7 +242,7 @@ class TestGetThemeEmoji:
     """Tests for get_theme_emoji() function."""
 
     def test_returns_emoji_for_each_theme(self):
-        """Should return emoji for all 6 themes."""
+        """Should return emoji for all 7 themes."""
         try:
             from ui.pages.ask_mattgpt.story_intelligence import (
                 get_all_themes,
