@@ -77,7 +77,49 @@ THEME_SEARCH_QUERIES = {
 }
 
 
-def get_synthesis_stories(stories: list[dict], top_per_theme: int = 2) -> list[dict]:
+# Known clients for client-scoped synthesis
+KNOWN_CLIENTS_FOR_SYNTHESIS = {
+    "Accenture",
+    "JPMorgan",
+    "JP Morgan",
+    "JP Morgan Chase",
+    "JPMorgan Chase",
+    "Capital One",
+    "RBC",
+    "Norfolk Southern",
+    "Fiserv",
+    "AT&T",
+    "AT&T Mobility",
+    "American Express",
+    "AmEx",
+    "HSBC",
+    "Level 3",
+    "Takeda",
+}
+
+
+def _detect_client_in_query(query: str) -> str | None:
+    """Detect if query mentions a known client. Returns normalized client name or None."""
+    query_lower = query.lower()
+    # Check each known client
+    for client in KNOWN_CLIENTS_FOR_SYNTHESIS:
+        if client.lower() in query_lower:
+            # Normalize variations
+            if "jpmorgan" in client.lower() or "jp morgan" in client.lower():
+                return "JP Morgan Chase"
+            if "amex" in client.lower():
+                return "American Express"
+            if "at&t mobility" in client.lower():
+                return "AT&T Mobility"
+            if "at&t" in client.lower():
+                return "AT&T"
+            return client
+    return None
+
+
+def get_synthesis_stories(
+    stories: list[dict], top_per_theme: int = 2, query: str | None = None
+) -> list[dict]:
     """
     Parallel metadata-filtered search across themes.
     Returns best stories per theme for synthesis queries.
@@ -85,6 +127,7 @@ def get_synthesis_stories(stories: list[dict], top_per_theme: int = 2) -> list[d
     Args:
         stories: Full story corpus for ID lookup
         top_per_theme: Number of stories to retrieve per theme
+        query: Optional query string to detect client-scoped synthesis
 
     Returns:
         List of stories with _search_score and _matched_theme annotations
@@ -94,18 +137,51 @@ def get_synthesis_stories(stories: list[dict], top_per_theme: int = 2) -> list[d
         print("DEBUG: get_synthesis_stories - Pinecone not available")
         return []
 
+    # Detect if query mentions a specific client
+    detected_client = _detect_client_in_query(query) if query else None
+    if DEBUG and detected_client:
+        print(f"DEBUG synthesis: detected client scope = {detected_client}")
+
     def search_theme(theme: str) -> list[dict]:
         query_text = THEME_SEARCH_QUERIES.get(theme, theme)
         query_vector = _embed(query_text)
 
         try:
-            results = idx.query(
-                vector=query_vector,
-                filter={"Theme": {"$eq": theme}},
-                top_k=top_per_theme,
-                include_metadata=True,
-                namespace=PINECONE_NAMESPACE,
-            )
+            # If client detected, try client+theme filter first
+            if detected_client:
+                results = idx.query(
+                    vector=query_vector,
+                    filter={
+                        "Theme": {"$eq": theme},
+                        "Client": {"$eq": detected_client},
+                    },
+                    top_k=top_per_theme,
+                    include_metadata=True,
+                    namespace=PINECONE_NAMESPACE,
+                )
+                matches = getattr(results, "matches", []) or []
+                # Fall back to theme-only if no client-scoped results
+                if not matches:
+                    if DEBUG:
+                        print(
+                            f"DEBUG synthesis: no {detected_client} stories for {theme}, falling back"
+                        )
+                    results = idx.query(
+                        vector=query_vector,
+                        filter={"Theme": {"$eq": theme}},
+                        top_k=top_per_theme,
+                        include_metadata=True,
+                        namespace=PINECONE_NAMESPACE,
+                    )
+            else:
+                # No client detected - use theme-only filter
+                results = idx.query(
+                    vector=query_vector,
+                    filter={"Theme": {"$eq": theme}},
+                    top_k=top_per_theme,
+                    include_metadata=True,
+                    namespace=PINECONE_NAMESPACE,
+                )
 
             theme_stories = []
             matches = getattr(results, "matches", []) or []
@@ -762,6 +838,8 @@ You may ONLY cite clients that appear in the stories provided below.
 - If story says Client: "Multiple Clients" → say "across multiple engagements"
 - If you lack evidence for a pattern, say "Based on the available examples..."
 - If user's query mentions a client NOT in the provided stories, do NOT attribute to that client
+- If a story's client is "Multiple Clients", refer to it as "across multiple engagements" - NEVER re-assign it to a specific firm named in the query
+- Do NOT combine metrics from one story with a different story's client name
 
 This is a BIG-PICTURE question. The user wants themes, patterns, or philosophy.
 
@@ -959,13 +1037,14 @@ REMEMBER:
 - Scan your response and fix any unbolded numbers before submitting"""
 
         # Call OpenAI API
+        # Use lower temperature for synthesis to reduce hallucination
         response = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_message},
             ],
-            temperature=0.8,  # Slightly higher for more natural variation
+            temperature=0.2 if is_synthesis else 0.8,
             max_tokens=600,
         )
 
@@ -1616,8 +1695,10 @@ But here's what might translate: Matt's work in **B2B platform modernization**, 
         if is_synthesis:
             # Synthesis mode: Theme-diverse retrieval via parallel metadata-filtered search
             # Each theme gets its own Pinecone query with filter={"Theme": theme}
-            # Professional Narrative theme will retrieve Career Narrative stories with scores
-            synthesis_pool = get_synthesis_stories(stories, top_per_theme=2)
+            # If query mentions a client, scope to that client's stories
+            synthesis_pool = get_synthesis_stories(
+                stories, top_per_theme=2, query=question
+            )
 
             # Sort by score (highest first) to ensure best stories from each theme surface
             ranked = sorted(
