@@ -31,6 +31,67 @@ CONFIDENCE_LOW = (
 )
 # Below CONFIDENCE_LOW = "none" - show "No strong matches"
 
+# =============================================================================
+# PROFESSIONAL NARRATIVE BOOSTING
+# =============================================================================
+NARRATIVE_TITLE_FRAGMENTS = [
+    "leadership journey",
+    "career intent",
+    "leadership philosophy",
+    "work philosophy",
+    "risk ownership",
+    "early failure",
+    "sustainable leadership",
+    "career transition",
+    "complex problems",
+    "who is matt",
+    "about matt",
+]
+
+
+def boost_narrative_matches(
+    query: str, results: list[dict], stories: list[dict]
+) -> list[dict]:
+    """Force-include Professional Narrative stories when query matches title.
+
+    For biographical queries like "Tell me about Matt's leadership journey",
+    ensures the matching Professional Narrative story is at the top of results
+    even if semantic search ranked other stories higher.
+
+    Args:
+        query: User's query string
+        results: Current search results from semantic_search
+        stories: Full story corpus (to find complete story objects)
+
+    Returns:
+        Results list with matching Professional Narrative story boosted to top
+    """
+    q_lower = query.lower()
+
+    for fragment in NARRATIVE_TITLE_FRAGMENTS:
+        if fragment in q_lower:
+            # Find full story object (ensures 5PSummary present)
+            match = next(
+                (
+                    s
+                    for s in stories
+                    if fragment in s.get("Title", "").lower()
+                    and s.get("Theme") == "Professional Narrative"
+                ),
+                None,
+            )
+            if match:
+                # Remove if already in results, then insert at top
+                results = [r for r in results if r.get("id") != match.get("id")]
+                results.insert(0, match)
+                if DEBUG:
+                    print(
+                        f"DEBUG boost_narrative: boosted '{match.get('Title')}' for fragment '{fragment}'"
+                    )
+                break
+
+    return results
+
 
 def initialize_vocab(stories: list[dict]):
     """Build vocabulary from story corpus. Call once at startup."""

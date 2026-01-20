@@ -20,7 +20,7 @@ from services.pinecone_service import (
     _embed,
     _init_pinecone,
 )
-from services.rag_service import semantic_search
+from services.rag_service import boost_narrative_matches, semantic_search
 from services.semantic_router import is_portfolio_query_semantic
 from utils.formatting import (
     _format_deep_dive,
@@ -1665,6 +1665,10 @@ def rag_answer(
             top_k=SEARCH_TOP_K,
         )
         pool = search_result["results"]
+
+        # Boost Professional Narrative stories for biographical queries
+        pool = boost_narrative_matches(question or "", pool, stories)
+
         confidence = search_result["confidence"]
 
         # Store confidence for conversation_view to use
