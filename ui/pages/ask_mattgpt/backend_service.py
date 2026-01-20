@@ -160,19 +160,13 @@ def get_synthesis_stories(
                     namespace=PINECONE_NAMESPACE,
                 )
                 matches = getattr(results, "matches", []) or []
-                # Fall back to theme-only if no client-scoped results
+                # Skip this theme if no client-scoped results (don't fall back to other clients)
                 if not matches:
                     if DEBUG:
                         print(
-                            f"DEBUG synthesis: no {detected_client} stories for {theme}, falling back"
+                            f"DEBUG synthesis: no {detected_client} stories for {theme}, skipping theme"
                         )
-                    results = idx.query(
-                        vector=query_vector,
-                        filter={"Theme": {"$eq": theme}},
-                        top_k=top_per_theme,
-                        include_metadata=True,
-                        namespace=PINECONE_NAMESPACE,
-                    )
+                    return []  # Return empty for this theme - don't pollute with other clients
             else:
                 # No client detected - use theme-only filter
                 results = idx.query(
@@ -712,11 +706,11 @@ def _generate_agy_response(
                 f"DEBUG LLM stories ({story_limit} max, {len(ranked_stories[:story_limit])} actual):"
             )
             for i, s in enumerate(ranked_stories[:story_limit]):
-                print(f"DEBUG   [{i+1}] {s.get('Client')}: {s.get('Title', '')[:40]}")
+                print(f"DEBUG   [{i + 1}] {s.get('Client')}: {s.get('Title', '')[:40]}")
 
         for i, story in enumerate(ranked_stories[:story_limit]):
             context = build_story_context_for_rag(story)
-            story_contexts.append(f"Story {i+1}:\n{context}")
+            story_contexts.append(f"Story {i + 1}:\n{context}")
             themes_in_response.add(infer_story_theme(story))
 
         story_context = "\n\n---\n\n".join(story_contexts)
@@ -1833,7 +1827,7 @@ But here's what might translate: Matt's work in **B2B platform modernization**, 
                     theme = s.get("_matched_theme") or s.get("Theme", "?")
                     score = s.get("_search_score", 0)
                     print(
-                        f"DEBUG   [{i+1}] [{theme}] {s.get('Client')}: {s.get('Title', '')[:40]} (score={score:.3f})"
+                        f"DEBUG   [{i + 1}] [{theme}] {s.get('Client')}: {s.get('Title', '')[:40]} (score={score:.3f})"
                     )
         else:
             # Standard mode: Client diversity ranking
@@ -1866,7 +1860,7 @@ But here's what might translate: Matt's work in **B2B platform modernization**, 
         deep_dive = _format_deep_dive(primary)
         if len(ranked) > 1:
             more = ", ".join(
-                [f"{s.get('Title','')} — {s.get('Client','')}" for s in ranked[1:]]
+                [f"{s.get('Title', '')} — {s.get('Client', '')}" for s in ranked[1:]]
             )
             deep_dive += f"\n\n_Also relevant:_ {more}"
 
