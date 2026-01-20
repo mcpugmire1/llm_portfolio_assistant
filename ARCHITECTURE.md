@@ -973,6 +973,402 @@ LAST_QUERY = "__explore_last_query__"         # Query that produced cache
 
 ---
 
+### Session State Keys Reference
+
+Central reference for all session state keys used across the application.
+
+**Ask MattGPT Keys:**
+| Key | Type | Purpose | Set By | Used By |
+|-----|------|---------|--------|---------|
+| `ask_transcript` | `list[dict]` | Chat history `[{role, text}, ...]` | conversation_view.py | All ask_mattgpt modules |
+| `ask_input_value` | `str` | Current input field value | landing_view.py, conversation_view.py | Input widget |
+| `seed_prompt` | `str` | Pre-filled query from navigation | story_detail.py | conversation_view.py (pop) |
+| `pending_query` | `str` | Query being processed | landing_view.py | Backend processing |
+| `processing_suggestion` | `bool` | Processing indicator flag | landing_view.py | UI disable state |
+| `last_answer` | `str` | Most recent Agy response | conversation_helpers.py | Display |
+| `last_sources` | `list[dict]` | Retrieved stories for response | conversation_helpers.py | Related Projects |
+| `last_results` | `list[dict]` | Raw Pinecone results | backend_service.py | Scoring |
+| `answer_modes` | `dict` | Response modes (narrative, etc.) | conversation_helpers.py | Mode switching |
+| `answer_mode` | `str` | Currently selected mode | conversation_helpers.py | Display |
+| `show_ask_panel` | `bool` | Whether to show conversation view | shared_state.py | View routing |
+| `show_how_modal` | `bool` | "How Agy Searches" modal open | landing_view.py | Modal |
+
+**Context Keys (double-underscore prefix = internal):**
+| Key | Type | Purpose |
+|-----|------|---------|
+| `__ctx_locked__` | `bool` | Lock context to specific story |
+| `__ask_from_suggestion__` | `bool` | Query from suggestion (bypass filters) |
+| `__ask_force_answer__` | `bool` | Force answer even on low confidence |
+| `__ask_query_intent__` | `str` | Detected query intent |
+| `__ask_confidence__` | `str` | Confidence level (high/low/none) |
+| `__asked_once__` | `bool` | User has asked at least one question |
+| `__inject_user_turn__` | `str` | Inject follow-up question |
+| `__landing_processing__` | `bool` | Landing page processing state |
+| `__processing_chip_injection__` | `bool` | Chip click processing |
+
+**Story Selection Keys:**
+| Key | Type | Purpose |
+|-----|------|---------|
+| `active_story` | `str` | Selected story ID |
+| `active_story_obj` | `dict` | Full story object |
+| `active_story_title` | `str` | Selected story title |
+| `active_story_client` | `str` | Selected story client |
+
+**Explore Stories Keys:**
+| Key | Type | Purpose |
+|-----|------|---------|
+| `filters` | `dict` | Active filter state |
+| `__explore_last_results__` | `list` | Cached Pinecone results |
+| `__explore_last_confidence__` | `str` | Cached confidence level |
+| `__explore_last_query__` | `str` | Query that produced cache |
+| `page_offset` | `int` | Pagination offset |
+
+**Prefilter Keys (cross-page navigation):**
+| Key | Purpose | Consumed By |
+|-----|---------|-------------|
+| `prefilter_industry` | Pre-set Industry filter | explore_stories.py |
+| `prefilter_capability` | Pre-set Capability filter | explore_stories.py |
+| `prefilter_era` | Pre-set Era filter | explore_stories.py |
+| `prefilter_view_mode` | Pre-set view mode (table/cards/timeline) | explore_stories.py |
+| `prefilter_domains` | Pre-set domains filter | explore_stories.py |
+| `prefilter_roles` | Pre-set roles filter | explore_stories.py |
+
+**Navigation Keys:**
+| Key | Type | Purpose |
+|-----|------|---------|
+| `active_tab` | `str` | Current page ("Home", "Explore Stories", "Ask MattGPT", "About Matt") |
+
+---
+
+### JSONL Story Schema
+
+Stories are stored in `echo_star_stories_nlp.jsonl` (130+ entries). Each line is a JSON object.
+
+**Core Fields:**
+| Field | Type | Example | Description |
+|-------|------|---------|-------------|
+| `id` | `str` | `"platform-modernization\|jpmc"` | Unique ID (title\|client) |
+| `Title` | `str` | `"Platform Modernization for Payments"` | Story title |
+| `Client` | `str` | `"JPMorgan Chase"` | Client name |
+| `Employer` | `str` | `"Accenture"` | Employer |
+| `Division` | `str` | `"Technology"` | Division/business unit |
+| `Role` | `str` | `"Platform Architect"` | Matt's role |
+| `Project` | `str` | `"Payments Modernization"` | Project name |
+| `Industry` | `str` | `"Financial Services"` | Industry vertical |
+| `Theme` | `str` | `"Execution & Delivery"` | One of 7 themes |
+| `Era` | `str` | `"Financial Services Platform Modernization"` | Career era |
+| `Solution / Offering` | `str` | `"Platform Engineering"` | Capability/offering |
+| `Sub-category` | `str` | `"Platform Engineering"` | Domain sub-category |
+
+**STAR Fields:**
+| Field | Type | Description |
+|-------|------|-------------|
+| `Situation` | `list[str]` | Context and challenge |
+| `Task` | `list[str]` | Objective or goal |
+| `Action` | `list[str]` | Steps taken |
+| `Result` | `list[str]` | Outcomes achieved |
+
+**5P Fields:**
+| Field | Type | Description |
+|-------|------|-------------|
+| `Person` | `str` | Who Matt worked with |
+| `Place` | `str` | Where work happened |
+| `Purpose` | `str` | Why this work mattered |
+| `Process` | `list[str]` | How it was done |
+| `Performance` | `list[str]` | Results and metrics |
+| `5PSummary` | `str` | Synthesized summary |
+
+**Metadata Fields:**
+| Field | Type | Description |
+|-------|------|-------------|
+| `Start_Date` | `str` | Start date (YYYY-MM) |
+| `End_Date` | `str` | End date (YYYY-MM) |
+| `Competencies` | `list[str]` | Skills demonstrated |
+| `Use Case(s)` | `list[str]` | Interview scenarios |
+| `public_tags` | `str` | Comma-separated search tags |
+| `content` | `str` | Empty (reserved for future) |
+
+**Special Values:**
+- `Client="Career Narrative"` → Professional narrative stories
+- `Client="Independent"` → Personal projects (MattGPT)
+- `Client="Multiple Clients"` → Cross-client patterns
+- `Theme="Professional Narrative"` → Identity/philosophy stories
+- `Era="Leadership & Professional Narrative"` → Excluded from Timeline view
+
+---
+
+### Utils Modules (`utils/`)
+
+| Module | Purpose | Key Functions |
+|--------|---------|---------------|
+| **validation.py** | Query validation, tokenization, nonsense detection | `is_nonsense()`, `_tokenize()`, `vocab_overlap_ratio()` |
+| **filters.py** | Story filtering for Explore Stories | `matches_filters(story, filters)` |
+| **formatting.py** | Story presentation, metric extraction | `story_has_metric()`, `strongest_metric_line()`, `build_5p_summary()` |
+| **scoring.py** | Hybrid scoring (semantic + keyword) | `_keyword_score_for_story()`, `_hybrid_score()` |
+| **ui_helpers.py** | Debug logging, UI utilities | `dbg()` |
+
+**validation.py Key Functions:**
+```python
+def is_nonsense(query: str) -> tuple[bool, str | None]:
+    """Check if query matches nonsense patterns from nonsense_filters.jsonl.
+    Returns (is_nonsense, category) where category is e.g., 'profanity', 'meta', 'gibberish'."""
+
+def _tokenize(text: str) -> list[str]:
+    """Tokenize text into normalized words (3+ chars, lowercase)."""
+
+def vocab_overlap_ratio(query: str, corpus_vocab: set[str]) -> float:
+    """Calculate what % of query tokens appear in corpus vocabulary."""
+```
+
+**filters.py Key Function:**
+```python
+def matches_filters(s: dict, F: dict | None = None) -> bool:
+    """Check if story matches all active filters. F reads from st.session_state['filters'] if None.
+    Supports: industry, capability, era, clients, domains, roles, tags, has_metric, q (keyword)."""
+```
+
+**scoring.py Weights:**
+```python
+W_PC = 1.0  # Semantic (Pinecone) weight
+W_KW = 0.0  # Keyword weight (disabled by default)
+```
+
+---
+
+### story_intelligence.py
+
+Theme inference and voice guidance for RAG.
+
+**7 Themes (constants):**
+```python
+THEME_EXECUTION = "Execution & Delivery"      # PRIMARY - He ships
+THEME_STRATEGIC = "Strategic & Advisory"       # He advises
+THEME_ORG_TRANSFORM = "Org & Working-Model Transformation"  # He transforms
+THEME_TALENT = "Talent & Enablement"          # He builds people
+THEME_RISK = "Risk & Responsible Tech"        # He manages risk
+THEME_EMERGING = "Emerging Tech"              # He explores pragmatically
+THEME_PROFESSIONAL = "Professional Narrative" # He knows who he is
+```
+
+**THEME_TO_PATTERN** (prevents voice drift in synthesis):
+```python
+THEME_TO_PATTERN = {
+    THEME_EXECUTION: "He ships.",
+    THEME_STRATEGIC: "He advises.",
+    THEME_ORG_TRANSFORM: "He transforms how teams work.",
+    THEME_TALENT: "He builds people.",
+    THEME_RISK: "He manages risk.",
+    THEME_EMERGING: "He explores pragmatically.",
+    THEME_PROFESSIONAL: "He knows who he is.",
+}
+```
+
+**Key Functions:**
+```python
+def infer_story_theme(story: dict) -> str:
+    """Get theme from story's Theme field (defaults to THEME_EXECUTION)."""
+
+def get_theme_guidance(theme: str) -> str:
+    """Get Agy voice guidance for theme (emphasize, voice pattern, position, proof points)."""
+
+def build_story_context_for_rag(story: dict) -> str:
+    """Build WHY→HOW→WHAT context string for RAG prompt injection."""
+
+def get_theme_emoji(theme: str) -> str:
+    """Get emoji for theme (🏗️ 🧠 🔄 👥 🛡️ 🚀 🧭)."""
+```
+
+---
+
+### Config Modules (`config/`)
+
+| Module | Purpose | Contents |
+|--------|---------|----------|
+| **debug.py** | Global debug flag | `DEBUG = False` |
+| **settings.py** | Configuration management | `get_conf(key, default)` |
+
+**settings.py Pattern:**
+```python
+def get_conf(key: str, default: str | None = None):
+    """Get config from st.secrets (Streamlit Cloud) or .env fallback."""
+    try:
+        v = st.secrets.get(key)
+        if v is not None:
+            return v
+    except Exception:
+        pass
+    return os.getenv(key, default)
+```
+
+**Required Environment Variables:**
+| Variable | Purpose |
+|----------|---------|
+| `OPENAI_API_KEY` | OpenAI API for embeddings + LLM |
+| `PINECONE_API_KEY` | Pinecone vector database |
+| `PINECONE_INDEX` | Pinecone index name |
+
+---
+
+### CSS Variables (Full List)
+
+Defined in `ui/styles/global_styles.py`. Use these instead of hardcoding colors.
+
+**Light Mode (`:root`):**
+```css
+/* Brand */
+--accent-purple: #8B5CF6;
+--accent-purple-hover: #7C3AED;
+--accent-purple-bg: rgba(139, 92, 246, 0.08);
+--accent-purple-light: rgba(139, 92, 246, 0.2);
+--accent-purple-text: #8B5CF6;
+
+/* Backgrounds */
+--bg-card: #FFFFFF;
+--bg-surface: #F9FAFB;
+--bg-primary: #FFFFFF;
+--bg-hover: #F3F4F6;
+--bg-input: #FFFFFF;
+
+/* Text */
+--text-heading: #111827;
+--text-primary: #1F2937;
+--text-secondary: #6B7280;
+--text-muted: #9CA3AF;
+--text-color: #1F2937;
+
+/* Borders & Shadows */
+--border-color: #E5E7EB;
+--border-light: #F3F4F6;
+--card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+--hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+/* Components */
+--pill-bg: #F3F4F6;
+--pill-text: #4B5563;
+--success-color: #10B981;
+--banner-info-bg: rgba(139, 92, 246, 0.05);
+
+/* Tables */
+--table-header-bg: #F9FAFB;
+--table-row-bg: #FFFFFF;
+--table-row-hover-bg: #F9FAFB;
+
+/* Chat/Status */
+--status-bar-bg: #F9FAFB;
+--status-bar-border: #E5E7EB;
+--chat-ai-bg: #F9FAFB;
+--chat-ai-border: #8B5CF6;
+--chat-user-bg: #FBFBFC;
+
+/* Gradients */
+--gradient-purple-hero: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+/* Legacy (navbar, hero) */
+--purple-gradient-start: #667eea;
+--dark-navy: #2c3e50;
+--dark-navy-hover: #34495e;
+```
+
+**Dark Mode (`body.dark-theme`):**
+```css
+--bg-card: #1E1E2E;
+--bg-surface: #262633;
+--bg-primary: #0E1117;
+--bg-hover: #2D2D3D;
+--text-heading: #F9FAFB;
+--text-primary: #E5E7EB;
+--text-secondary: #9CA3AF;
+--border-color: #374151;
+--accent-purple-text: #A78BFA;  /* Lighter for dark backgrounds */
+```
+
+---
+
+### Eval Framework (`tests/`)
+
+| File | Purpose |
+|------|---------|
+| `eval_rag_quality.py` | RAG quality evaluation against ground truth |
+| `test_agy_behavior.py` | Agy response behavior tests |
+
+**eval_rag_quality.py:**
+- Runs 25 test queries across 4 categories: narrative, client, intent, edge
+- Checks: voice consistency, ground truth matches, client attribution, client bolding
+- Outputs JSON results to `tests/eval_results/`
+
+**Test Categories:**
+| Category | Count | Checks |
+|----------|-------|--------|
+| `narrative` | 10 | Voice + ground_truth phrases |
+| `client` | 6 | Voice + client attribution + bolding |
+| `intent` | 5 | Voice + synthesis mode detection |
+| `edge` | 4 | Voice + client attribution |
+
+**Running Eval:**
+```bash
+python tests/eval_rag_quality.py
+# Outputs: tests/eval_results/with_boost_YYYYMMDD_HHMMSS.json
+```
+
+---
+
+### Error Handling Patterns
+
+**Layer 1 (Validation):**
+- `is_nonsense()` → Returns rejection message with category
+- `semantic_router()` → Returns `(False, score)` if below threshold; fails-open on errors
+
+**Layer 2 (Classification):**
+- `classify_query_intent()` → Falls back to `"general"` on LLM error
+- `detect_entity()` → Returns `None` if no entity found
+
+**Layer 3 (Retrieval):**
+- `semantic_search()` → Returns empty results on Pinecone error
+- `get_synthesis_stories()` → Returns empty list on error
+
+**Layer 4 (Generation):**
+- `_generate_agy_response()` → Returns fallback message on LLM error:
+  ```
+  "🐾 I had a little trouble fetching that. Could you try rephrasing?"
+  ```
+
+**UI Error Handling:**
+- `send_to_backend()` wraps all errors in try/except
+- Failed responses show generic error message
+- Network errors trigger retry prompt
+
+**Logging:**
+- `dbg()` function logs when `DEBUG=True`
+- Error details captured in `st.session_state["__ask_dbg_*"]` keys
+
+---
+
+### Analytics (In Progress)
+
+Google Analytics integration is partially implemented.
+
+**Planned Tracking Events:**
+| Event | Trigger | Data |
+|-------|---------|------|
+| `page_view` | Tab navigation | `page_name` |
+| `search` | Explore Stories query | `query`, `result_count` |
+| `ask_query` | Ask MattGPT query | `query_intent`, `confidence` |
+| `story_view` | Story detail opened | `story_id`, `source_page` |
+| `related_project_click` | Related Projects card clicked | `story_id` |
+
+**Implementation Status:**
+- [ ] GA4 measurement ID configured
+- [ ] gtag.js injected in app.py
+- [ ] Event tracking functions created
+- [ ] Events wired to UI actions
+
+**Environment Variable (when implemented):**
+```
+GA_MEASUREMENT_ID=G-XXXXXXXXXX
+```
+
+---
+
 ### Key Services
 
 #### 1. Pinecone Service ([services/pinecone_service.py](services/pinecone_service.py))
