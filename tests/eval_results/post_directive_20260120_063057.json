@@ -1,0 +1,203 @@
+{
+  "timestamp": "2026-01-20T06:34:10.689103",
+  "total_queries": 25,
+  "passed": 14,
+  "failed": 11,
+  "pass_rate": 56.00000000000001,
+  "by_category": {
+    "narrative": {
+      "total": 10,
+      "passed": 3,
+      "pass_rate": 30.0
+    },
+    "client": {
+      "total": 6,
+      "passed": 4,
+      "pass_rate": 66.66666666666666
+    },
+    "intent": {
+      "total": 5,
+      "passed": 4,
+      "pass_rate": 80.0
+    },
+    "edge": {
+      "total": 4,
+      "passed": 3,
+      "pass_rate": 75.0
+    }
+  },
+  "failed_queries": [
+    {
+      "id": 1,
+      "query": "Tell me about Matt's leadership journey",
+      "category": "narrative",
+      "checks": {
+        "voice": true,
+        "ground_truth": false
+      },
+      "details": {
+        "ground_truth_matches": 0,
+        "matched_phrases": []
+      },
+      "error": null
+    },
+    {
+      "id": 2,
+      "query": "Career Intent \u2013 What I'm Looking For Next",
+      "category": "narrative",
+      "checks": {
+        "voice": true,
+        "ground_truth": false
+      },
+      "details": {
+        "ground_truth_matches": 0,
+        "matched_phrases": []
+      },
+      "error": null
+    },
+    {
+      "id": 3,
+      "query": "How does Matt approach complex problems?",
+      "category": "narrative",
+      "checks": {
+        "voice": true,
+        "ground_truth": false
+      },
+      "details": {
+        "ground_truth_matches": 0,
+        "matched_phrases": []
+      },
+      "error": null
+    },
+    {
+      "id": 4,
+      "query": "What's Matt's leadership philosophy?",
+      "category": "narrative",
+      "checks": {
+        "voice": true,
+        "ground_truth": false
+      },
+      "details": {
+        "ground_truth_matches": 0,
+        "matched_phrases": []
+      },
+      "error": null
+    },
+    {
+      "id": 5,
+      "query": "Why is Matt exploring opportunities?",
+      "category": "narrative",
+      "checks": {
+        "voice": true,
+        "ground_truth": false
+      },
+      "details": {
+        "ground_truth_matches": 1,
+        "matched_phrases": [
+          "intentional transition"
+        ]
+      },
+      "error": null
+    },
+    {
+      "id": 6,
+      "query": "Where does Matt do his best work?",
+      "category": "narrative",
+      "checks": {
+        "voice": false,
+        "ground_truth": false
+      },
+      "details": {
+        "banned_phrases_found": [
+          "foster collaboration"
+        ],
+        "ground_truth_matches": 0,
+        "matched_phrases": []
+      },
+      "error": null
+    },
+    {
+      "id": 7,
+      "query": "What did Matt learn about risk ownership?",
+      "category": "narrative",
+      "checks": {
+        "voice": true,
+        "ground_truth": false
+      },
+      "details": {
+        "ground_truth_matches": 0,
+        "matched_phrases": []
+      },
+      "error": null
+    },
+    {
+      "id": 11,
+      "query": "Tell me about Matt's payments work at JPMorgan",
+      "category": "client",
+      "checks": {
+        "voice": true,
+        "client_attribution": true,
+        "client_bolded": false
+      },
+      "details": {
+        "found_client": "JP Morgan",
+        "is_bolded": false,
+        "bold_required": true
+      },
+      "error": null
+    },
+    {
+      "id": 13,
+      "query": "How did Matt scale the CIC at Accenture?",
+      "category": "client",
+      "checks": {
+        "voice": true,
+        "client_attribution": true,
+        "client_bolded": false
+      },
+      "details": {
+        "found_client": "Accenture",
+        "is_bolded": false,
+        "bold_required": true
+      },
+      "error": null
+    },
+    {
+      "id": 17,
+      "query": "What are Matt's core themes?",
+      "category": "intent",
+      "checks": {
+        "voice": true,
+        "synthesis_mode": false
+      },
+      "details": {
+        "client_count": 1
+      },
+      "error": null
+    },
+    {
+      "id": 25,
+      "query": "How did Matt transform delivery at JPMorgan?",
+      "category": "edge",
+      "checks": {
+        "voice": true,
+        "client_attribution": true,
+        "client_bolded": false
+      },
+      "details": {
+        "found_client": "JPMorgan",
+        "is_bolded": false
+      },
+      "error": null
+    }
+  ],
+  "voice_failures": [
+    {
+      "id": 6,
+      "query": "Where does Matt do his best work?",
+      "banned_found": [
+        "foster collaboration"
+      ]
+    }
+  ]
+}

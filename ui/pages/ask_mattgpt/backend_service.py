@@ -704,8 +704,8 @@ def _generate_agy_response(
         themes_in_response = set()
 
         # For synthesis mode, use more stories (up to 7)
-        # For standard mode, use top 3
-        story_limit = 7 if is_synthesis else 3
+        # For standard mode, use top 5 to ensure Professional Narrative stories are included
+        story_limit = 7 if is_synthesis else 5
 
         if DEBUG:
             print(
@@ -813,6 +813,22 @@ def _generate_agy_response(
             system_prompt = f"""You are Agy 🐾 — Matt Pugmire's Plott Hound assistant.
 
 {MATT_DNA}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+### PRIMARY DIRECTIVE
+Your job is to REPORT on Matt's portfolio, not rewrite it.
+1. SURFACE: Use Matt's exact vocabulary and phrases from the retrieved stories.
+2. DO NOT SYNTHESIZE: Never replace specific terms (e.g., "0 to 1", "builder", "modernizer") with generic filler.
+3. TRANSFORM PRONOUNS ONLY: Convert "I" to "Matt" while maintaining the original intensity and technical detail.
+4. PERSONA: Keep the warm, loyal "Chief of Staff" opening/closing and 🐾 emoji, but keep the substance verbatim.
+
+**BANNED CORPORATE FILLER (never use these):**
+- "meaningful outcomes" → use the actual outcomes from the story
+- "strategic mindset" → describe what Matt actually did
+- "foster collaboration" → describe the specific collaboration
+- "stakeholder alignment" → name the actual stakeholders
+- "bridge the gap" → describe the specific connection made
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 You reveal meaningful patterns and themes from Matt's 20+ years of transformation work.
 
@@ -967,6 +983,22 @@ REMEMBER:
             system_prompt = f"""You are Agy 🐾 — Matt Pugmire's Plott Hound assistant.
 
 {MATT_DNA}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+### PRIMARY DIRECTIVE
+Your job is to REPORT on Matt's portfolio, not rewrite it.
+1. SURFACE: Use Matt's exact vocabulary and phrases from the retrieved stories.
+2. DO NOT SYNTHESIZE: Never replace specific terms (e.g., "0 to 1", "builder", "modernizer") with generic filler.
+3. TRANSFORM PRONOUNS ONLY: Convert "I" to "Matt" while maintaining the original intensity and technical detail.
+4. PERSONA: Keep the warm, loyal "Chief of Staff" opening/closing and 🐾 emoji, but keep the substance verbatim.
+
+**BANNED CORPORATE FILLER (never use these):**
+- "meaningful outcomes" → use the actual outcomes from the story
+- "strategic mindset" → describe what Matt actually did
+- "foster collaboration" → describe the specific collaboration
+- "stakeholder alignment" → name the actual stakeholders
+- "bridge the gap" → describe the specific connection made
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 You reveal meaningful, human-anchored proof from Matt's 20+ years of transformation work.
 
@@ -1389,8 +1421,8 @@ def diversify_results(
         max_per_client: Maximum stories per client in results. Defaults to 1.
 
     Returns:
-        List of up to 3 diversified stories with client variety. Returns
-        stories[:1] if input list is shorter than 3.
+        List of up to 5 diversified stories with client variety. Returns
+        stories[:1] if input list is shorter than 5.
 
     Side Effects:
         Updates st.session_state["_last_primary_client"] with the Client field
@@ -1436,7 +1468,9 @@ def diversify_results(
         else:
             overflow.append(s)
 
-    result = (diverse + overflow)[:3]
+    result = (diverse + overflow)[
+        :5
+    ]  # Include more stories for Professional Narrative coverage
 
     if result:
         st.session_state["_last_primary_client"] = result[0].get("Client", "Unknown")
