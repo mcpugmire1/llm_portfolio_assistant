@@ -697,15 +697,87 @@ This section defines the **job, rules, and constraints** for each retrieval comp
 - **Job:** Transform retrieved stories into WHY→HOW→WHAT narrative with Agy personality
 - **Lives in:** `backend_service.py:_generate_agy_response()`
 - **Model:** gpt-4o-mini
-- **Structure:**
-  - **Standard mode:** Human stakes → How Matt tackled it → What changed → Pattern insight
-  - **Synthesis mode:** Name patterns → Prove with client examples → Connect the thread
-- **Guardrails:**
-  - MATT_DNA ground truth injected
-  - Banned corporate filler phrases
-  - `[[CORE BRAND DNA]]` verbatim anchors for Professional Narrative
-  - Personal project warning (no fictional stakeholders)
-- **Post-processing:** Auto-bold client names and metrics
+- **Persona:** Agy 🐾 — Matt Pugmire's Plott Hound assistant (named after his late dog Agador Spartacus)
+- **Temperature:** 0.2 (synthesis) / 0.8 (standard) — lower for synthesis to reduce hallucination
+- **Max tokens:** 600
+
+**Response Structure:**
+- **Standard mode:** Human stakes → How Matt tackled it → What changed → Pattern insight
+- **Synthesis mode:** Name patterns → Prove with client examples → Connect the thread
+
+**Python-Driven Randomization** (for variety):
+- 10 standard mode openings ("🐾 Found it!", "🐾 Great question!", etc.)
+- 5 synthesis mode openings ("🐾 Looking across Matt's portfolio...", etc.)
+- 8 standard closings ("Want me to dig deeper?", etc.)
+- 4 synthesis closings ("Which pattern would you like to explore?", etc.)
+- 6 focus angles: human impact, methodology, scale, leadership, outcomes, innovation
+
+**MATT_DNA Ground Truth** (injected into every prompt):
+```
+Identity: "I build what's next, modernize what's not, and grow teams along the way."
+
+Career Arc: Software Engineer → Solution Architect → Director → CIC Leader
+- Accenture: March 2005 - September 2023 (18+ years)
+- Built CIC from 0 to 150+ practitioners
+
+7 Themes of Matt's Work:
+1. Execution & Delivery (PRIMARY) — shipping production systems at scale
+2. Strategic & Advisory — thought partnership, executive influence
+3. Org & Working-Model Transformation — culture change, agile adoption
+4. Talent & Enablement — coaching, mentorship, capability building
+5. Risk & Responsible Tech — governance, compliance
+6. Emerging Tech — GenAI/ML exploration with production value
+7. Professional Narrative — philosophy, leadership identity
+
+Named Clients: American Express, AT&T, Capital One, Fiserv, HSBC,
+              JPMorgan Chase, Norfolk Southern, RBC
+NOT Matt's Clients: Kaiser, Google, Amazon, Microsoft, Meta, MetLife
+
+GROUNDING RULES:
+1. ONLY cite clients/projects/metrics from retrieved stories
+2. If unsure, say "In one engagement..." instead of naming client
+3. NEVER invent outcomes or mention unlisted clients
+4. For revenue impact, emphasize delivery excellence (not sales)
+5. For synthesis, lead with 7 Themes + diverse client examples
+```
+
+**Banned Corporate Filler Phrases:**
+- "meaningful outcomes" → use actual outcomes
+- "strategic mindset" → describe what Matt did
+- "foster collaboration" → describe specific collaboration
+- "stakeholder alignment" → name actual stakeholders
+- "bridge the gap" → describe specific connection
+- "execution excellence" → say "he ships"
+- "high-trust engineering cultures" → be specific
+
+**Persona Transformation Rules** (I → Matt):
+```
+| Source (Matt's voice) | Output (Agy's voice) |
+| I/Me/My               | Matt/Him/His         |
+| In my journey         | Throughout Matt's career |
+| I've learned          | Matt learned / Matt demonstrated |
+| I led                 | Matt led             |
+```
+Banned starters: "In my journey", "I've encountered", "In my experience"
+
+**Context Isolation Rules** (prevents hallucination):
+- ONLY cite clients that appear in retrieved stories
+- If only ONE story provided, discuss ONLY that example
+- NEVER invent additional examples to "show breadth"
+- If Client="Multiple Clients" → say "across multiple engagements"
+- Do NOT combine metrics from one story with another story's client
+
+**Personal Project Exception** (Client="Independent" or "Career Narrative"):
+- **HARD RULE:** DO NOT mention job seekers, engineers, teams, or users "struggling"
+- Only acceptable framing is Matt's OWN motivation
+- ✅ "Matt recognized that traditional resumes failed to showcase..."
+- ✅ "Matt wanted to demonstrate his RAG architecture skills..."
+- ❌ NEVER: "Job seekers were struggling..." / "Engineers needed..."
+
+**Post-processing:**
+- Auto-bold all known client names (derived from story corpus)
+- Auto-bold numbers/metrics: $50M, 30%, 4x, 150+ engineers, etc.
+- Fix LLM's malformed bolding (e.g., **1**0%** → **10%**)
 
 ### Data Flow Diagram
 
@@ -730,11 +802,123 @@ User Query
 User Response
 ```
 
+### Cross-Page Navigation into Ask MattGPT
+
+Multiple pages can navigate into Ask MattGPT with pre-filled context. This uses session state injection.
+
+**Entry Points:**
+
+| Source | Trigger | Session State Set |
+|--------|---------|-------------------|
+| Story Detail | "Ask Agy About This" button | `seed_prompt`, `active_story`, `active_story_obj`, `__ctx_locked__`, `__ask_from_suggestion__` |
+| Hero CTA | Main call-to-action button | `active_tab` only |
+| Category Cards | Card click | `active_tab` only |
+| Footer | "Ask MattGPT" link | `active_tab` only |
+| Banking Landing | Capability card click | `active_tab` only (prefilters go to Explore) |
+| Cross-Industry Landing | Capability card click | `active_tab` only (prefilters go to Explore) |
+
+**Context Injection Keys (for story-specific queries):**
+
+```python
+# Set by story_detail.py:handle_ask_about_this()
+st.session_state["seed_prompt"] = "Tell me more about: {Title}"  # Pre-filled query
+st.session_state["active_story"] = story_id                      # Story ID for context
+st.session_state["active_story_obj"] = story_dict                # Full story object
+st.session_state["__ctx_locked__"] = True                        # Lock context to this story
+st.session_state["__ask_from_suggestion__"] = True               # Bypass off-domain filters
+st.session_state["active_tab"] = "Ask MattGPT"                   # Navigate to Ask MattGPT
+st.rerun()
+```
+
+**Consumption in Ask MattGPT:**
+
+```python
+# In conversation_view.py
+seed = st.session_state.pop("seed_prompt", None)  # Pop to consume once
+if seed:
+    # Auto-submit the seed prompt
+    process_query(seed)
+
+# In utils.py:get_context_story()
+if st.session_state.get("__ctx_locked__"):
+    return st.session_state.get("active_story_obj")  # Use locked story
+```
+
+**Prefilter Pattern (for Explore Stories, NOT Ask MattGPT):**
+
+```python
+# Used by banking_landing.py, cross_industry_landing.py → Explore Stories
+st.session_state["prefilter_industry"] = "Financial Services"
+st.session_state["prefilter_capability"] = "Platform Engineering"
+st.session_state["active_tab"] = "Explore Stories"
+
+# Consumed in explore_stories.py BEFORE widgets render
+if "prefilter_industry" in st.session_state:
+    F["industry"] = st.session_state.pop("prefilter_industry")
+```
+
+**Key Rule:** Set prefilters BEFORE the target page renders, then `pop()` to consume them. Never modify widget-bound session state after the widget renders.
+
+### Explore Stories Search Architecture
+
+Explore Stories (`ui/pages/explore_stories.py`) has a **3-path search architecture** to minimize Pinecone API calls:
+
+```
+User Interaction
+       ↓
+┌──────────────────────────────────────────────────────────────┐
+│ PATH 1: New Keyword Query (Expensive - Pinecone Call)        │
+│ Trigger: User submits search query (different from cached)   │
+│ Action: semantic_search() → Pinecone → cache results         │
+│ Cost: ~$0.0001 (one embedding + Pinecone query)              │
+└──────────────────────────────────────────────────────────────┘
+       ↓ results cached
+┌──────────────────────────────────────────────────────────────┐
+│ PATH 2: Filter Change (Cheap - No Pinecone Call)             │
+│ Trigger: User changes filter while query unchanged           │
+│ Action: Reuse cached Pinecone results + local filter         │
+│ Cost: Zero (no API calls)                                    │
+└──────────────────────────────────────────────────────────────┘
+       ↓ if no query
+┌──────────────────────────────────────────────────────────────┐
+│ PATH 3: No Query (Free - Local Filter Only)                  │
+│ Trigger: Empty search box, filter-only browsing              │
+│ Action: matches_filters() on full story corpus               │
+│ Cost: Zero (no API calls)                                    │
+└──────────────────────────────────────────────────────────────┘
+```
+
+**Code Location:** `explore_stories.py:1805-1900`
+
+**Cache Keys:**
+```python
+LAST_RESULTS = "__explore_last_results__"     # Cached Pinecone results
+LAST_CONFIDENCE = "__explore_last_confidence__" # "high" | "low" | "none"
+LAST_QUERY = "__explore_last_query__"         # Query that produced cache
+```
+
+**Filter Application:**
+- **PATH 1:** Pinecone handles semantic matching; UI filters applied post-search
+- **PATH 2:** Apply filters EXCEPT `q` (keyword) — Pinecone already did semantic match
+- **PATH 3:** Full local filtering via `matches_filters(s, F)`
+
+**Key Optimization:** When user changes filters (Industry, Capability, etc.) without changing the search query, the system reuses cached Pinecone results instead of re-querying. This prevents expensive API calls on every filter toggle.
+
+**matches_filters() Logic** (`utils/filters.py`):
+- Industry → exact match on `s["Industry"]`
+- Capability → exact match on `s["Solution / Offering"]`
+- Era → exact match on `s["Era"]`
+- Clients, Domains, Roles → IN list (OR logic)
+- Tags → case-insensitive intersection
+- has_metric → `story_has_metric(s)`
+- q (keyword) → token-based ALL match on Title, Client, Purpose, Process, Performance, tags
+
 ### Known Limitations
 
 1. **Synthesis + specific topic:** "Tell me about Matt's rapid prototyping work" classified as synthesis but should find the specific rapid prototyping story. Current workaround: synthesis now uses user query embedding.
 2. **Multi-client stories:** Stories with `Client="Multiple Clients"` won't match entity filters. Workaround: check Employer/Division fields.
 3. **Ground truth fidelity:** LLM paraphrases instead of quoting verbatim despite `[[CORE BRAND DNA]]` markers.
+4. **Deprecated documentation:** `mattgpt_system_prompt.md` documents the original "MattGPT" persona (pre-Agy). The current Agy voice is documented in this file under Component Contracts → Agy Voice Generator.
 
 ---
 
