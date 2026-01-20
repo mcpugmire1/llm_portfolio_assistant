@@ -135,7 +135,8 @@ llm_portfolio_assistant/
 │   │   ├── how_agy_modal.py           # ✨ "How Agy Searches" modal (28.6 KB)
 │   │   ├── category_cards.py          # Landing page capability cards (19 KB)
 │   │   ├── hero.py                    # Hero section component (8 KB)
-│   │   └── thinking_indicator.py      # ✨ Loading/processing indicator (3 KB)
+│   │   ├── thinking_indicator.py      # ✨ Loading/processing indicator (3 KB)
+│   │   └── timeline_view.py           # Era-based timeline for Explore Stories
 │   │
 │   ├── pages/
 │   │   ├── __init__.py
@@ -175,6 +176,56 @@ llm_portfolio_assistant/
 └── .streamlit/
     └── config.toml                 # Streamlit theme config
 
+
+---
+
+### Shared Components (`ui/components/`)
+
+Reusable UI components shared across multiple pages.
+
+| Component | Job | Used By | Key Functions |
+|-----------|-----|---------|---------------|
+| **navbar.py** | Top navigation bar (desktop + mobile hamburger) | All pages via app.py | `render_navbar()` |
+| **footer.py** | Contact info, availability, "Ask MattGPT" CTA | All pages | `render_footer()` |
+| **hero.py** | Gradient hero section with stats | Home | `render_hero()`, `render_stats_bar()`, `render_section_title()` |
+| **category_cards.py** | Industry/capability exploration cards | Home | `render_category_cards()` |
+| **story_detail.py** | Full STAR narrative with sidebar | Explore Stories, Ask MattGPT (Related Projects) | `render_story_detail(detail, key_suffix, stories)` |
+| **timeline_view.py** | Era-based timeline with collapsible sections | Explore Stories | `render_timeline_view(stories, on_story_click)` |
+| **ask_mattgpt_header.py** | Unified header + "How Agy Searches" button | Ask MattGPT (Landing + Conversation) | `render_ask_header()`, `get_ask_header_css()` |
+| **how_agy_modal.py** | "How Agy Finds Your Stories" modal content | Ask MattGPT | `get_how_agy_flow_html()`, `get_how_agy_modal_html()` |
+| **thinking_indicator.py** | Animated loading indicator | Ask MattGPT, Explore Stories | `render_thinking_indicator()` |
+
+**story_detail.py Key Pattern:**
+```python
+# "Ask Agy About This" button flow (see Cross-Page Navigation section)
+def handle_ask_about_this(detail: dict):
+    st.session_state["seed_prompt"] = f"Tell me more about: {detail.get('Title')}"
+    st.session_state["active_story"] = detail.get("id")
+    st.session_state["active_story_obj"] = detail
+    st.session_state["__ctx_locked__"] = True
+    st.session_state["__ask_from_suggestion__"] = True
+    st.session_state["active_tab"] = "Ask MattGPT"
+    st.rerun()
+```
+
+**timeline_view.py Key Pattern:**
+```python
+# Era configuration
+ERA_ORDER = [
+    "Independent Product Development",           # 2024-2025
+    "Enterprise Innovation & Transformation",    # 2019-2023
+    "Cloud-Native Prototyping & Product Shaping", # 2018-2019
+    "Financial Services Platform Modernization", # 2008-2018
+    "Integration & Platform Foundations",        # 2005-2008
+]
+EXCLUDED_ERA = "Leadership & Professional Narrative"  # Not shown in timeline
+MAX_STORIES_PER_ERA = 6
+
+# "View in Explore" navigation
+st.session_state["prefilter_era"] = era_name
+st.session_state["prefilter_view_mode"] = "table"
+st.session_state["active_tab"] = "Explore Stories"
+```
 
 ---
 
