@@ -44,7 +44,7 @@
 **Project:** MattGPT Portfolio Assistant - AI-powered career story search and chat interface
 **Tech Stack:** Streamlit, OpenAI GPT-4o-mini, Pinecone vector DB, Python 3.11+
 **Data Corpus:** 130+ STAR-formatted transformation project stories
-**Last Updated:** December 9, 2025
+**Last Updated:** January 20, 2026
 
 ### Key Achievements
 
@@ -534,43 +534,56 @@ User receives cited, STAR-formatted answer
 
 ---
 
-### Synthesis Mode (Added January 2026)
+### Synthesis Mode (Updated January 2026)
 
 **Problem:** RAG retrieves individual stories well but struggles with big-picture questions like "What are common themes?" or "What patterns do you see?" — these need holistic context, not a single story.
 
-**Solution:** Intent-aware retrieval that changes strategy based on query type.
+**Solution:** Intent-aware retrieval that changes strategy based on query type, with entity-first classification.
 
-**Intent Classification:**
+**Intent Classification (Entity-First Priority):**
 ```python
 def classify_query_intent(query: str) -> str:
     """
-    Uses gpt-4o-mini (~$0.0001 per query) to classify:
-    - synthesis: themes, patterns, philosophy, what makes Matt different
-    - behavioral: STAR-style "tell me about a time" questions
-    - technical: specific technologies, architecture, tools
-    - client: questions about specific companies
-    - background: career history, experience overview
-    - general: everything else
+    Uses gpt-4o-mini (~$0.0001 per query) with PRIORITY HIERARCHY:
+    1. ENTITY ANCHOR: Company/Project mentioned → client (overrides verbs)
+    2. BIOGRAPHICAL ANCHOR: Narrative fragments → narrative
+    3. SYNTHESIS: No entity + cross-cutting question → synthesis
+    4. BEHAVIORAL: STAR-style questions → behavioral
+    5. TECHNICAL: Technology without company → technical
+    6. BACKGROUND: Career history → background
+    7. OUT_OF_SCOPE: Industries Matt hasn't worked in → out_of_scope
+    8. GENERAL: Everything else → general
     """
 ```
+
+**Key Rule:** Entity detection OVERRIDES verb patterns.
+- "How did Matt scale at Accenture?" → `client` (not synthesis)
+- "What are Matt's core themes?" → `synthesis` (no entity)
 
 **Retrieval Strategies:**
 
 | Intent | Stories Retrieved | Retrieval Method |
 |--------|-------------------|------------------|
-| synthesis | 7 (2 Career Narrative + 5 diverse projects) | Career Narrative boost + client diversity |
-| behavioral | 3 | Standard diversify_results() |
-| technical | 3 | Standard diversify_results() |
-| client | 3 | Standard diversify_results() |
-| background | 3 | Standard diversify_results() |
-| general | 3 | Standard diversify_results() |
+| synthesis | 7-9 (up to 2 per theme) | Theme-filtered search with USER query embedding |
+| narrative | 5 | Standard + narrative boost |
+| client | 5 | Standard diversify_results() with entity filter |
+| behavioral | 5 | Standard diversify_results() |
+| technical | 5 | Standard diversify_results() |
+| background | 5 | Standard diversify_results() |
+| general | 5 | Standard diversify_results() |
 
-**Career Narrative Stories:**
-Pre-written synthesis content in the story corpus with `Client: "Career Narrative"`. These capture:
-- Matt's work philosophy
-- Recurring themes across projects
-- Leadership principles
-- Patterns that emerge across 20+ years
+**Synthesis Retrieval (get_synthesis_stories):**
+1. Embed USER's actual query (not fixed theme keywords)
+2. For each of 7 themes: Pinecone query with `filter={"Theme": theme}` + user embedding
+3. If entity detected: Add entity filter (e.g., `{"Division": "Cloud Innovation Center"}`)
+4. Up to 2 stories per theme, skip themes with no entity-scoped results
+5. Sort by score, return top 7-9 stories
+
+**Entity Detection (Multi-Field):**
+Checks fields in order: Client, Employer, Division, Project, Place
+- "CIC" normalizes to Division: "Cloud Innovation Center"
+- "JPMorgan" normalizes to Client: "JP Morgan Chase"
+- Excludes generic values: "Multiple Clients", "Independent"
 
 **Synthesis Prompt Mode:**
 - Different system prompt focused on patterns/themes
@@ -585,6 +598,143 @@ Pre-written synthesis content in the story corpus with `Client: "Career Narrativ
 **Self-Maintenance:**
 - LLM-based classification handles novel phrasings without keyword list updates
 - New story themes automatically included via Career Narrative content
+
+---
+
+## Component Contracts (Updated January 2026)
+
+This section defines the **job, rules, and constraints** for each retrieval component. Update this when changing retrieval logic.
+
+### Layer 1: Validation (Fast, Free)
+
+#### Nonsense Filters
+- **Job:** Regex-based rejection of obvious off-topic queries (weather, sports, crypto)
+- **Lives in:** `nonsense_filters.jsonl` + `utils/validation.py:is_nonsense()`
+- **Cost:** Zero (pure regex, no API calls)
+- **Rule:** Runs FIRST before any embedding or LLM cost
+
+#### Semantic Router
+- **Job:** Embedding-based intent classification to reject borderline off-topic queries
+- **Lives in:** `services/semantic_router.py`
+- **Thresholds:** HARD_ACCEPT=0.80, SOFT_ACCEPT=0.72
+- **Intent Families:** 11 categories (background, behavioral, delivery, team_scaling, leadership, technical, domain_payments, domain_healthcare, stakeholders, innovation, agile_transformation)
+- **Cost:** ~$0.0000002 per query (one embedding)
+- **Rule:** Fail-open on errors (accept query if embedding fails)
+- **Do not remove:** Saves LLM cost, prevents garbage-in
+
+### Layer 2: Intent Classification (Cheap LLM)
+
+#### Intent Classifier
+- **Job:** Route queries to synthesis/client/narrative/behavioral/technical/background/out_of_scope/general
+- **Lives in:** `ui/pages/ask_mattgpt/backend_service.py:classify_query_intent()`
+- **Model:** gpt-4o-mini (~$0.0001 per query)
+- **Priority Hierarchy:**
+  1. **ENTITY ANCHOR** (Company/Project name) → `client`
+  2. **BIOGRAPHICAL ANCHOR** (narrative fragments) → `narrative`
+  3. **SYNTHESIS** (no entity + cross-cutting question) → `synthesis`
+  4. **BEHAVIORAL** (STAR-style questions) → `behavioral`
+  5. **TECHNICAL** (technology questions without company) → `technical`
+  6. **BACKGROUND** (career history) → `background`
+  7. **OUT_OF_SCOPE** (industries Matt hasn't worked in) → `out_of_scope`
+  8. **GENERAL** (everything else) → `general`
+- **Rule:** Entity detection OVERRIDES verb patterns ("How did Matt scale at Accenture?" → `client`, not `synthesis`)
+- **Do not add more intents** without updating this doc and the eval suite
+
+#### Entity Detection
+- **Job:** Detect company/project/division mentions in query for scoped retrieval
+- **Lives in:** `ui/pages/ask_mattgpt/backend_service.py:detect_entity()`
+- **Fields checked (in order):** Client, Employer, Division, Project, Place
+- **Normalization:** "jpmorgan" → "JP Morgan Chase", "cic" → "Cloud Innovation Center", etc.
+- **Exclusions:** "Multiple Clients", "Independent", "Career Narrative" (too generic to filter)
+- **Returns:** `(field_name, entity_value)` tuple or `None`
+
+### Layer 3: Retrieval
+
+#### Confidence Gating
+- **Job:** Reject queries where Pinecone returns low-confidence results
+- **Lives in:** `services/rag_service.py:semantic_search()`
+- **Thresholds:**
+  - `CONFIDENCE_HIGH = 0.25` → "Found X stories"
+  - `CONFIDENCE_LOW = 0.20` → Filter threshold
+  - Below 0.20 → `confidence="none"` (reject)
+- **Rule:** Trust semantic router for high-confidence behavioral matches (score ≥ 0.80)
+
+#### Standard Mode
+- **Job:** Answer specific questions about one story/client/topic
+- **Triggers:** Intent = client, behavioral, technical, background, general
+- **Retrieval:**
+  1. User query → OpenAI embedding
+  2. Pinecone vector search (top 100)
+  3. Confidence gating
+  4. `boost_narrative_matches()` for biographical queries
+  5. `diversify_results()` → top 5 stories with client variety
+- **Lives in:** `services/rag_service.py` + `backend_service.py:rag_answer()`
+- **Story limit:** 5 stories to LLM context
+
+#### Synthesis Mode
+- **Job:** Answer "what are Matt's themes/patterns/philosophy" questions
+- **Triggers:** Intent = `synthesis` (no entity + cross-cutting question)
+- **Retrieval:**
+  1. User query → OpenAI embedding (NOT fixed theme keywords)
+  2. For each of 7 themes: Pinecone query with `filter={"Theme": theme}` + user embedding
+  3. If entity detected: Add entity filter (e.g., `{"Theme": theme, "Client": "Accenture"}`)
+  4. Up to 2 stories per theme
+  5. Skip themes with no results for detected entity (don't fall back to other entities)
+- **Lives in:** `backend_service.py:get_synthesis_stories()`
+- **Story limit:** 7-9 stories to LLM context
+- **MUST use:** User's actual query embedding for semantic relevance
+- **MUST NOT:** Ignore user's query for fixed theme keywords (previous bug)
+
+#### Narrative Boost
+- **Job:** Force Professional Narrative stories to top for biographical queries
+- **Lives in:** `services/rag_service.py:boost_narrative_matches()`
+- **Triggers on fragments:** "leadership journey", "career intent", "philosophy", "early failure", "risk ownership", "work philosophy", "sustainable leadership", "career transition", "complex problems", "who is matt", "about matt"
+- **Rule:** Matches story Title containing fragment + Theme="Professional Narrative"
+
+### Layer 4: Response Generation
+
+#### Agy Voice Generator
+- **Job:** Transform retrieved stories into WHY→HOW→WHAT narrative with Agy personality
+- **Lives in:** `backend_service.py:_generate_agy_response()`
+- **Model:** gpt-4o-mini
+- **Structure:**
+  - **Standard mode:** Human stakes → How Matt tackled it → What changed → Pattern insight
+  - **Synthesis mode:** Name patterns → Prove with client examples → Connect the thread
+- **Guardrails:**
+  - MATT_DNA ground truth injected
+  - Banned corporate filler phrases
+  - `[[CORE BRAND DNA]]` verbatim anchors for Professional Narrative
+  - Personal project warning (no fictional stakeholders)
+- **Post-processing:** Auto-bold client names and metrics
+
+### Data Flow Diagram
+
+```
+User Query
+    ↓
+[Layer 1: Validation]
+    ├── is_nonsense() → reject if regex match
+    └── semantic_router() → reject if score < 0.72
+    ↓
+[Layer 2: Classification]
+    ├── classify_query_intent() → synthesis | client | narrative | ...
+    └── detect_entity() → (field, value) or None
+    ↓
+[Layer 3: Retrieval]
+    ├── Standard Mode: semantic_search() → diversify_results()
+    └── Synthesis Mode: get_synthesis_stories() with user embedding + theme filter
+    ↓
+[Layer 4: Generation]
+    └── _generate_agy_response() → Agy-voiced markdown
+    ↓
+User Response
+```
+
+### Known Limitations
+
+1. **Synthesis + specific topic:** "Tell me about Matt's rapid prototyping work" classified as synthesis but should find the specific rapid prototyping story. Current workaround: synthesis now uses user query embedding.
+2. **Multi-client stories:** Stories with `Client="Multiple Clients"` won't match entity filters. Workaround: check Employer/Division fields.
+3. **Ground truth fidelity:** LLM paraphrases instead of quoting verbatim despite `[[CORE BRAND DNA]]` markers.
 
 ---
 
