@@ -77,43 +77,75 @@ THEME_SEARCH_QUERIES = {
 }
 
 
-# Known clients for client-scoped synthesis
-KNOWN_CLIENTS_FOR_SYNTHESIS = {
-    "Accenture",
-    "JPMorgan",
-    "JP Morgan",
-    "JP Morgan Chase",
-    "JPMorgan Chase",
-    "Capital One",
-    "RBC",
-    "Norfolk Southern",
-    "Fiserv",
-    "AT&T",
-    "AT&T Mobility",
-    "American Express",
-    "AmEx",
-    "HSBC",
-    "Level 3",
-    "Takeda",
+# Entity fields to check for routing (in priority order)
+ENTITY_FIELDS = ["Client", "Employer", "Division", "Project", "Place"]
+
+# Excluded entity values (too generic to filter on)
+EXCLUDED_ENTITIES = {
+    "Multiple Clients",
+    "Multiple Financial Services Clients",
+    "Independent",
+    "Career Narrative",
+    "Sabbatical",
+    "Various",
+    "N/A",
+    "",
+    None,
+}
+
+# Entity name normalization map
+ENTITY_NORMALIZATION = {
+    "jpmorgan": "JP Morgan Chase",
+    "jp morgan": "JP Morgan Chase",
+    "jpmorgan chase": "JP Morgan Chase",
+    "amex": "American Express",
+    "at&t mobility": "AT&T Mobility",
+    "cic": "Cloud Innovation Center",
+    "liquid studio": "Atlanta Liquid Studio",
 }
 
 
-def _detect_client_in_query(query: str) -> str | None:
-    """Detect if query mentions a known client. Returns normalized client name or None."""
-    query_lower = query.lower()
-    # Check each known client
-    for client in KNOWN_CLIENTS_FOR_SYNTHESIS:
-        if client.lower() in query_lower:
-            # Normalize variations
-            if "jpmorgan" in client.lower() or "jp morgan" in client.lower():
-                return "JP Morgan Chase"
-            if "amex" in client.lower():
-                return "American Express"
-            if "at&t mobility" in client.lower():
-                return "AT&T Mobility"
-            if "at&t" in client.lower():
-                return "AT&T"
-            return client
+def detect_entity(
+    query: str, stories: list[dict]
+) -> tuple[str, str] | None:
+    """Detect if query mentions a known entity from any entity field.
+
+    Checks Client, Employer, Division, Project, Place fields.
+    Returns (field_name, entity_value) if match found.
+
+    Args:
+        query: User query string
+        stories: Story corpus to extract known entities from
+
+    Returns:
+        Tuple of (field_name, entity_value) or None if no match
+    """
+    q_lower = query.lower()
+
+    # First check normalization map for common aliases
+    for alias, normalized in ENTITY_NORMALIZATION.items():
+        if alias in q_lower:
+            # Find which field contains this normalized value
+            for field in ENTITY_FIELDS:
+                for story in stories:
+                    if story.get(field) == normalized:
+                        return (field, normalized)
+            # If not found in stories, default to Client
+            return ("Client", normalized)
+
+    # Build entity sets from ALL relevant fields
+    for field in ENTITY_FIELDS:
+        known_entities = {
+            s.get(field)
+            for s in stories
+            if s.get(field) and s.get(field) not in EXCLUDED_ENTITIES
+        }
+        # Sort by length descending to match longer names first
+        # (e.g., "JP Morgan Chase" before "JP Morgan")
+        for entity in sorted(known_entities, key=len, reverse=True):
+            if entity.lower() in q_lower:
+                return (field, entity)
+
     return None
 
 
@@ -137,36 +169,37 @@ def get_synthesis_stories(
         print("DEBUG: get_synthesis_stories - Pinecone not available")
         return []
 
-    # Detect if query mentions a specific client
-    detected_client = _detect_client_in_query(query) if query else None
-    if DEBUG and detected_client:
-        print(f"DEBUG synthesis: detected client scope = {detected_client}")
+    # Detect if query mentions a specific entity (Client, Employer, Division, etc.)
+    entity_match = detect_entity(query, stories) if query else None
+    if DEBUG and entity_match:
+        print(f"DEBUG synthesis: detected entity scope = {entity_match[0]}:{entity_match[1]}")
 
     def search_theme(theme: str) -> list[dict]:
         query_text = THEME_SEARCH_QUERIES.get(theme, theme)
         query_vector = _embed(query_text)
 
         try:
-            # If client detected, try client+theme filter first
-            if detected_client:
+            # If entity detected, try entity+theme filter first
+            if entity_match:
+                entity_field, entity_value = entity_match
                 results = idx.query(
                     vector=query_vector,
                     filter={
                         "Theme": {"$eq": theme},
-                        "Client": {"$eq": detected_client},
+                        entity_field: {"$eq": entity_value},
                     },
                     top_k=top_per_theme,
                     include_metadata=True,
                     namespace=PINECONE_NAMESPACE,
                 )
                 matches = getattr(results, "matches", []) or []
-                # Skip this theme if no client-scoped results (don't fall back to other clients)
+                # Skip this theme if no entity-scoped results (don't fall back to other entities)
                 if not matches:
                     if DEBUG:
                         print(
-                            f"DEBUG synthesis: no {detected_client} stories for {theme}, skipping theme"
+                            f"DEBUG synthesis: no {entity_field}={entity_value} stories for {theme}, skipping"
                         )
-                    return []  # Return empty for this theme - don't pollute with other clients
+                    return []  # Return empty for this theme - don't pollute with other entities
             else:
                 # No client detected - use theme-only filter
                 results = idx.query(
@@ -391,13 +424,16 @@ def classify_query_intent(query: str) -> str:
         query: User query string to classify.
 
     Returns:
-        One of: "synthesis", "behavioral", "technical", "client", "background", "general"
+        One of: "synthesis", "behavioral", "technical", "client", "narrative",
+        "background", "out_of_scope", "general"
 
     Example:
-        >>> classify_query_intent("What are common themes across Matt's work?")
-        "synthesis"
-        >>> classify_query_intent("Tell me about a time you failed")
-        "behavioral"
+        >>> classify_query_intent("How did Matt modernize payments at JPMorgan?")
+        "client"  # Entity anchor takes priority
+        >>> classify_query_intent("Tell me about Matt's leadership journey")
+        "narrative"  # Biographical anchor
+        >>> classify_query_intent("What are Matt's core themes?")
+        "synthesis"  # No entity, cross-cutting
     """
     try:
         from dotenv import load_dotenv
@@ -415,50 +451,55 @@ def classify_query_intent(query: str) -> str:
             messages=[
                 {
                     "role": "system",
-                    "content": """Classify this query about Matt Pugmire's career into exactly one category:
+                    "content": """Classify this query about Matt Pugmire's career. Use this PRIORITY HIERARCHY:
 
-- synthesis: Questions requiring cross-cutting evidence or methodology patterns:
-  * Themes, patterns, philosophy across all work
-  * Value/ROI/impact questions ("What ROI does Matt deliver?", "What value does Matt bring?")
-  * Role-fit/hiring questions ("Why hire Matt?", "Is Matt right for VP?", "What makes Matt different?")
-  * Strengths/differentiators ("What sets Matt apart?", "Matt's superpowers")
-  * Capability/methodology questions EVEN WITH a specific company name:
-    - Capability verbs: scale, transform, build, lead, develop, drive, grow, establish, create
-    - "How did Matt scale talent at Accenture?" → synthesis (asking about methodology)
-    - "How did Matt transform delivery at JPMorgan?" → synthesis (asking about approach)
-  * Methodology nouns (always synthesis regardless of client):
-    - rapid prototyping, design thinking, agile transformation, DevOps practices, modernization
-    - "Tell me about Matt's rapid prototyping work" → synthesis
-    - "Tell me about Matt's design thinking approach" → synthesis
-- behavioral: STAR-style questions (tell me about a time, how do you handle, give an example of when you)
-- technical: Questions about specific technologies, architecture, tools, cloud platforms
-- client: ONLY for general inquiries about work at a SPECIFIC named company WITHOUT capability framing
-  * Must be a real company name: JPMorgan, Accenture, Capital One, RBC, Norfolk Southern, Fiserv, AT&T
-  * CRITICAL: Generic words "client" or "clients" are NOT company names - NEVER classify as client intent
-  * If the query contains "client" or "clients" as a generic noun (not a company name), classify as synthesis or general
-  * "Tell me about Matt's work at JPMorgan" → client (JPMorgan is a real company)
-  * "What did Matt do at Accenture?" → client (Accenture is a real company)
-  * "Tell me about Matt's client products work" → synthesis (generic "client" is not a company)
-  * "How does Matt work with clients?" → synthesis (generic "clients" is not a company, asking about approach)
-  * "Matt's client engagement methodology" → synthesis (generic "client" is not a company, asking about methodology)
-- background: Questions about who Matt is, his experience, career history, current role
-- out_of_scope: Questions about industries/domains Matt has NOT worked in (retail, hospitality, gaming, entertainment, real estate, construction, education K-12)
-- general: Everything else
+PRIORITY 1 - ENTITY ANCHOR (Company/Project):
+If query mentions a SPECIFIC company or project name, classify as `client`.
+This OVERRIDES any "How did", capability verbs, or methodology phrasing.
+Companies: JPMorgan, JP Morgan, JPMC, Accenture, Capital One, RBC, Norfolk Southern, Fiserv, AT&T, CDC, Deloitte
+Projects: MattGPT, Liquid Studio, CIC, Cloud Innovation Center
+- "How did Matt modernize payments at JPMorgan?" → client (JPMorgan is anchor)
+- "How did Matt scale the CIC at Accenture?" → client (Accenture is anchor)
+- "What did Matt build at Liquid Studio?" → client (Liquid Studio is anchor)
+- "Tell me about Matt's work at Capital One" → client
 
-Examples:
-- "What are common themes across Matt's work?" → synthesis
-- "What kind of ROI does Matt deliver?" → synthesis
-- "Why should we hire Matt as VP of Engineering?" → synthesis
-- "How did Matt scale learning at Accenture?" → synthesis (capability verb + company)
-- "How did Matt transform delivery at JPMorgan?" → synthesis (capability verb + company)
-- "Tell me about Matt's rapid prototyping work" → synthesis (methodology noun)
-- "How does Matt work with clients?" → synthesis (generic "clients" = methodology question, NOT client intent)
-- "Tell me about Matt's client engagement" → synthesis (generic "client" = approach question)
-- "Tell me about Matt's work at JPMorgan" → client (JPMorgan is a real company)
-- "What did Matt do at Capital One?" → client (Capital One is a real company)
-- "Tell me about Matt's payments work" → technical
+PRIORITY 2 - BIOGRAPHICAL ANCHOR (Professional Narrative):
+If query mentions Professional Narrative fragments, classify as `narrative`.
+Fragments: leadership journey, career intent, philosophy, early failure, risk ownership, work philosophy, sustainable leadership, career transition, approach to failure, who is matt, about matt
+- "Tell me about Matt's leadership journey" → narrative
+- "What's Matt's philosophy?" → narrative
+- "Tell me about Matt's approach to failure" → narrative
+
+PRIORITY 3 - SYNTHESIS (Cross-cutting patterns):
+ONLY if NO specific entity AND asks for patterns/themes/summary:
+- "What are Matt's core themes?" → synthesis
+- "Why hire Matt?" → synthesis
+- "What makes Matt different?" → synthesis
+- "What ROI does Matt deliver?" → synthesis
+
+PRIORITY 4 - BEHAVIORAL (STAR-style):
+"Tell me about a time", "How do you handle", "Give an example of when you"
 - "Tell me about a time you failed" → behavioral
+
+PRIORITY 5 - TECHNICAL:
+Questions about specific technologies, architecture, tools (WITHOUT company name)
+- "Tell me about Matt's payments work" → technical
+- "What cloud platforms has Matt used?" → technical
+
+PRIORITY 6 - BACKGROUND:
+Who Matt is, career history, current role (WITHOUT specific Professional Narrative fragment)
+- "What's Matt's background?" → background
+
+PRIORITY 7 - OUT_OF_SCOPE:
+Industries Matt has NOT worked in: retail, hospitality, gaming, entertainment, real estate, construction, K-12 education
 - "Tell me about Matt's work in retail sales" → out_of_scope
+
+PRIORITY 8 - GENERAL:
+Everything else
+
+CRITICAL: Generic words "client" or "clients" are NOT company names.
+- "How does Matt work with clients?" → synthesis (generic, asking about approach)
+- "Matt's client engagement" → synthesis (generic, not a company)
 
 Return only the category name, nothing else.""",
                 },
@@ -474,6 +515,7 @@ Return only the category name, nothing else.""",
             "behavioral",
             "technical",
             "client",
+            "narrative",
             "background",
             "out_of_scope",
             "general",
