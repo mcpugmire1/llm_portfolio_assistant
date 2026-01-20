@@ -182,6 +182,11 @@ Frame the WHY as: "Matt wanted to..." or "Matt recognized..." based on the story
 """
 
     # Build structured context - use pattern phrase instead of theme name
+    # For Professional Narrative stories, mark summary as verbatim anchor
+    summary = story.get('5PSummary', '') or story.get('5p_summary', '')
+    if story.get('Theme') == 'Professional Narrative' and summary:
+        summary = f"[[MATT'S CORE BRAND DNA - USE VERBATIM: {summary}]]"
+
     context = f"""{personal_project_warning}**{story.get('Title', 'Untitled')}**
 Pattern: {pattern_phrase}
 Client: {story.get('Client', 'Unknown')}
@@ -189,7 +194,7 @@ Role: {story.get('Role', '')}
 Industry: {story.get('Industry', '')}
 Domain: {story.get('Sub-category', '')}
 
-Summary: {story.get('5PSummary', '') or story.get('5p_summary', '')}
+Summary: {summary}
 
 WHY (Purpose/Situation):
 {get_text('Purpose') or get_text('Situation')}

@@ -41,7 +41,7 @@ BANNED_PHRASES = [
     "foster collaboration",
     "stakeholder alignment",
     "meaningful outcomes",
-    "high-trust engineering cultures",
+    # NOTE: "high-trust engineering cultures" REMOVED - it's Matt's actual language in 5PSummary
     "bridge the gap between strategy and execution",
 ]
 

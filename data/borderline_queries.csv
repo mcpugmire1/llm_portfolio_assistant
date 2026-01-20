@@ -85,3 +85,13 @@ timestamp,query,score,matched_intent,family
 2026-01-19T02:38:09+00:00,Tell me about Matt's retail sales work,0.751,Tell me about Matt's work at Financial Services Client,unknown
 2026-01-19T14:18:52+00:00,What are Matt's core leadership themes?,0.764,What's Matt's leadership style?,leadership
 2026-01-19T14:37:32+00:00,What are Matt's core leadership themes?,0.764,What's Matt's leadership style?,leadership
+2026-01-20T11:21:07+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-20T11:28:30+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-20T11:33:39+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-20T11:43:52+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-20T11:50:12+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-20T11:54:00+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-20T12:05:09+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-20T12:11:42+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-20T12:18:13+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-20T12:22:18+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
