@@ -947,6 +947,12 @@ def _generate_agy_response(
                         required_phrases.append('"not looking for a maintenance role"')
                     if "build what's next" in summary.lower():
                         required_phrases.append('"build what\'s next"')
+                    # Transition Story identity phrases
+                    if "recharge and refocus" in summary.lower():
+                        required_phrases.append('"recharge and refocus"')
+                    elif "recharge" in summary.lower() and "refocus" in summary.lower():
+                        required_phrases.append('"recharge"')
+                        required_phrases.append('"refocus"')
 
                     if required_phrases:
                         verbatim_requirement = f"""

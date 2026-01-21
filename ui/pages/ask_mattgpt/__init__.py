@@ -16,8 +16,6 @@ This router determines whether to show landing or conversation view
 based on session state and provides the main render function.
 """
 
-from typing import Dict, List
-
 import streamlit as st
 
 from ui.pages.ask_mattgpt.conversation_view import render_conversation_view

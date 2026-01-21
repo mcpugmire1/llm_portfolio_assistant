@@ -1343,9 +1343,19 @@ python tests/eval_rag_quality.py
 
 ---
 
-### Analytics (In Progress)
+### Analytics (Paused)
 
-Google Analytics integration is partially implemented.
+Google Analytics integration was attempted but removed due to session state conflicts.
+
+**History:**
+| Date | Action | Outcome |
+|------|--------|---------|
+| Jan 10, 2026 | Added `streamlit-analytics2` | Working initially (3 pageviews logged) |
+| Jan 12, 2026 | Production failure | `AttributeError: st.session_state has no attribute "session_data"` |
+| Jan 12, 2026 | Removed analytics | Quick fix to restore production stability |
+
+**Root Cause:**
+The `streamlit-analytics2` wrapper (`with streamlit_analytics.track():`) executed before Streamlit initialized session state. The wrapper runs at import time, but `app.py` session state setup (lines 46-54) hadn't completed yet.
 
 **Planned Tracking Events:**
 | Event | Trigger | Data |
@@ -1361,6 +1371,24 @@ Google Analytics integration is partially implemented.
 - [ ] gtag.js injected in app.py
 - [ ] Event tracking functions created
 - [ ] Events wired to UI actions
+
+**Next Attempt - Critical Fix:**
+Place the analytics wrapper **AFTER** all session state initialization:
+```python
+# app.py - CORRECT placement
+import streamlit_analytics2 as streamlit_analytics
+
+# ... all session state setup (lines 46-54) ...
+# ... render_navbar(), setdefault("active_tab"), etc. ...
+
+# THEN wrap page rendering:
+with streamlit_analytics.track():
+    if st.session_state["active_tab"] == "Home":
+        render_home_page()
+    # ... rest of page routing ...
+```
+
+**Fallback:** Manual `gtag.js` injection via `st.components.html()` if `streamlit-analytics2` continues to conflict.
 
 **Environment Variable (when implemented):**
 ```

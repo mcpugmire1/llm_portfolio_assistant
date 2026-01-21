@@ -294,187 +294,187 @@ logging.info("✅ Pinecone index updated successfully.")
 # ---------------------------
 # Derive Intent Families from Story Data
 # ---------------------------
-logging.info("🧠 Deriving intent families from story data...")
+# logging.info("🧠 Deriving intent families from story data...")
 
-derived_intents = {
-    "background": [
-        "Tell me about Matt's background",
-        "Who is Matt Pugmire?",
-        "Walk me through Matt's career",
-        "What's Matt's professional experience?",
-        "Give me a quick overview of Matt's experience",
-    ],
-    "synthesis": [
-        # Recruiter synthesis questions - static, always needed
-        "What problems does Matt solve?",
-        "What are Matt's strengths?",
-        "What patterns in Matt's work?",
-        "What evidence of Director level experience?",
-        "What evidence shows Matt can operate at VP level?",
-        "What makes Matt different from other candidates?",
-        "How does Matt handle failure?",
-        "How does Matt handle resistance?",
-        "What transformation problems does Matt consistently solve?",
-    ],
-    "behavioral": [
-        "Tell me about a time Matt failed",
-        "Tell me about a time you failed",
-        "Describe a situation where Matt had to influence stakeholders",
-        "How do you handle conflict?",
-        "Give me an example of leadership",
-        "Tell me about a difficult situation you handled",
-        "Tell me about a challenge Matt overcame",
-    ],
-    "leadership": [
-        "What's Matt's leadership style?",
-        "How does Matt lead teams?",
-        "What's Matt's management philosophy?",
-        "How does Matt coach and develop people?",
-        "How did Matt scale teams?",
-        "How did Matt build high-performing teams?",
-    ],
-}
+# derived_intents = {
+#     "background": [
+#         "Tell me about Matt's background",
+#         "Who is Matt Pugmire?",
+#         "Walk me through Matt's career",
+#         "What's Matt's professional experience?",
+#         "Give me a quick overview of Matt's experience",
+#     ],
+#     "synthesis": [
+#         # Recruiter synthesis questions - static, always needed
+#         "What problems does Matt solve?",
+#         "What are Matt's strengths?",
+#         "What patterns in Matt's work?",
+#         "What evidence of Director level experience?",
+#         "What evidence shows Matt can operate at VP level?",
+#         "What makes Matt different from other candidates?",
+#         "How does Matt handle failure?",
+#         "How does Matt handle resistance?",
+#         "What transformation problems does Matt consistently solve?",
+#     ],
+#     "behavioral": [
+#         "Tell me about a time Matt failed",
+#         "Tell me about a time you failed",
+#         "Describe a situation where Matt had to influence stakeholders",
+#         "How do you handle conflict?",
+#         "Give me an example of leadership",
+#         "Tell me about a difficult situation you handled",
+#         "Tell me about a challenge Matt overcame",
+#     ],
+#     "leadership": [
+#         "What's Matt's leadership style?",
+#         "How does Matt lead teams?",
+#         "What's Matt's management philosophy?",
+#         "How does Matt coach and develop people?",
+#         "How did Matt scale teams?",
+#         "How did Matt build high-performing teams?",
+#     ],
+# }
 
-# Extract unique Themes
-themes = set()
-for s in stories:
-    theme = s.get("Theme", "").strip()
-    if theme and theme != "Career Narrative":
-        themes.add(theme)
+# # Extract unique Themes
+# themes = set()
+# for s in stories:
+#     theme = s.get("Theme", "").strip()
+#     if theme and theme != "Career Narrative":
+#         themes.add(theme)
 
-# Generate theme-based intents
-derived_intents["themes"] = []
-for theme in sorted(themes):
-    derived_intents["themes"].extend(
-        [
-            f"Tell me about Matt's {theme} experience",
-            f"Show me {theme} projects",
-            f"Matt's {theme} work",
-        ]
-    )
+# # Generate theme-based intents
+# derived_intents["themes"] = []
+# for theme in sorted(themes):
+#     derived_intents["themes"].extend(
+#         [
+#             f"Tell me about Matt's {theme} experience",
+#             f"Show me {theme} projects",
+#             f"Matt's {theme} work",
+#         ]
+#     )
 
-# Extract unique Clients (exclude generic ones)
-clients = set()
-skip_clients = {
-    "Multiple Clients",
-    "Accenture",
-    "Career Narrative",
-    "Independent",
-    "Multiple Financial Services Clients",
-}
-for s in stories:
-    client = s.get("Client", "").strip()
-    if client and client not in skip_clients:
-        clients.add(client)
+# # Extract unique Clients (exclude generic ones)
+# clients = set()
+# skip_clients = {
+#     "Multiple Clients",
+#     "Accenture",
+#     "Career Narrative",
+#     "Independent",
+#     "Multiple Financial Services Clients",
+# }
+# for s in stories:
+#     client = s.get("Client", "").strip()
+#     if client and client not in skip_clients:
+#         clients.add(client)
 
-# Generate client-based intents
-derived_intents["clients"] = []
-for client in sorted(clients):
-    derived_intents["clients"].extend(
-        [
-            f"Tell me about Matt's work at {client}",
-            f"Show me {client} projects",
-            f"Matt's {client} experience",
-        ]
-    )
+# # Generate client-based intents
+# derived_intents["clients"] = []
+# for client in sorted(clients):
+#     derived_intents["clients"].extend(
+#         [
+#             f"Tell me about Matt's work at {client}",
+#             f"Show me {client} projects",
+#             f"Matt's {client} experience",
+#         ]
+#     )
 
-# Extract unique Industries
-industries = set()
-for s in stories:
-    industry = s.get("Industry", "").strip()
-    if (
-        industry and "/" not in industry
-    ):  # Skip compound like "Financial Services / Banking"
-        industries.add(industry)
-    elif industry and "/" in industry:
-        # Split compound industries
-        for ind in industry.split("/"):
-            ind = ind.strip()
-            if ind:
-                industries.add(ind)
+# # Extract unique Industries
+# industries = set()
+# for s in stories:
+#     industry = s.get("Industry", "").strip()
+#     if (
+#         industry and "/" not in industry
+#     ):  # Skip compound like "Financial Services / Banking"
+#         industries.add(industry)
+#     elif industry and "/" in industry:
+#         # Split compound industries
+#         for ind in industry.split("/"):
+#             ind = ind.strip()
+#             if ind:
+#                 industries.add(ind)
 
-# Generate industry-based intents
-derived_intents["industries"] = []
-for industry in sorted(industries):
-    derived_intents["industries"].extend(
-        [
-            f"Tell me about Matt's {industry} experience",
-            f"Show me {industry} projects",
-            f"Matt's work in {industry}",
-        ]
-    )
+# # Generate industry-based intents
+# derived_intents["industries"] = []
+# for industry in sorted(industries):
+#     derived_intents["industries"].extend(
+#         [
+#             f"Tell me about Matt's {industry} experience",
+#             f"Show me {industry} projects",
+#             f"Matt's work in {industry}",
+#         ]
+#     )
 
-# Technical intents from common tags
-derived_intents["technical"] = [
-    "What is Matt's experience with cloud platforms?",
-    "Show me Matt's platform engineering work",
-    "Tell me about Matt's cloud modernization projects",
-    "What's Matt's experience with microservices?",
-    "Show me Matt's GenAI work",
-    "What's Matt's technical background?",
-    "Tell me about Matt's architecture experience",
-    "Show me Matt's DevOps experience",
-    "Tell me about Matt's CI/CD work",
-    "What's Matt's experience with agile transformation?",
-]
+# # Technical intents from common tags
+# derived_intents["technical"] = [
+#     "What is Matt's experience with cloud platforms?",
+#     "Show me Matt's platform engineering work",
+#     "Tell me about Matt's cloud modernization projects",
+#     "What's Matt's experience with microservices?",
+#     "Show me Matt's GenAI work",
+#     "What's Matt's technical background?",
+#     "Tell me about Matt's architecture experience",
+#     "Show me Matt's DevOps experience",
+#     "Tell me about Matt's CI/CD work",
+#     "What's Matt's experience with agile transformation?",
+# ]
 
-# Innovation intents
-derived_intents["innovation"] = [
-    "What's Matt's approach to innovation?",
-    "Tell me about Matt's innovation center work",
-    "How does Matt drive innovation?",
-    "Tell me about the Cloud Innovation Center",
-    "Where has Matt scaled innovation to production?",
-]
+# # Innovation intents
+# derived_intents["innovation"] = [
+#     "What's Matt's approach to innovation?",
+#     "Tell me about Matt's innovation center work",
+#     "How does Matt drive innovation?",
+#     "Tell me about the Cloud Innovation Center",
+#     "Where has Matt scaled innovation to production?",
+# ]
 
-# Delivery intents
-derived_intents["delivery"] = [
-    "How did Matt achieve faster delivery?",
-    "How does Matt ensure teams deliver with quality?",
-    "Show me Matt's biggest delivery wins",
-    "What results has Matt achieved?",
-    "How did Matt accelerate team delivery?",
-]
+# # Delivery intents
+# derived_intents["delivery"] = [
+#     "How did Matt achieve faster delivery?",
+#     "How does Matt ensure teams deliver with quality?",
+#     "Show me Matt's biggest delivery wins",
+#     "What results has Matt achieved?",
+#     "How did Matt accelerate team delivery?",
+# ]
 
-# Stakeholder intents
-derived_intents["stakeholders"] = [
-    "How does Matt handle difficult stakeholders?",
-    "Tell me about Matt's stakeholder management",
-    "How does Matt work with executives?",
-    "How does Matt manage up?",
-]
+# # Stakeholder intents
+# derived_intents["stakeholders"] = [
+#     "How does Matt handle difficult stakeholders?",
+#     "Tell me about Matt's stakeholder management",
+#     "How does Matt work with executives?",
+#     "How does Matt manage up?",
+# ]
 
-# Flatten for embedding generation
-all_derived_intents = []
-intent_to_family = {}
-for family, intents in derived_intents.items():
-    for intent in intents:
-        if intent not in all_derived_intents:  # Dedupe
-            all_derived_intents.append(intent)
-            intent_to_family[intent] = family
+# # Flatten for embedding generation
+# all_derived_intents = []
+# intent_to_family = {}
+# for family, intents in derived_intents.items():
+#     for intent in intents:
+#         if intent not in all_derived_intents:  # Dedupe
+#             all_derived_intents.append(intent)
+#             intent_to_family[intent] = family
 
-logging.info(
-    f"📊 Derived {len(all_derived_intents)} intents across {len(derived_intents)} families"
-)
+# logging.info(
+#     f"📊 Derived {len(all_derived_intents)} intents across {len(derived_intents)} families"
+# )
 
-# Generate intent embeddings
-logging.info("🤖 Generating intent embeddings...")
-intent_texts = all_derived_intents
-intent_embeddings = get_openai_embeddings(intent_texts)
+# # Generate intent embeddings
+# logging.info("🤖 Generating intent embeddings...")
+# intent_texts = all_derived_intents
+# intent_embeddings = get_openai_embeddings(intent_texts)
 
-# Build intent data structure
-intent_data = {
-    "families": derived_intents,
-    "intent_to_family": intent_to_family,
-    "embeddings": {
-        intent: emb
-        for intent, emb in zip(all_derived_intents, intent_embeddings, strict=False)
-    },
-}
+# # Build intent data structure
+# intent_data = {
+#     "families": derived_intents,
+#     "intent_to_family": intent_to_family,
+#     "embeddings": {
+#         intent: emb
+#         for intent, emb in zip(all_derived_intents, intent_embeddings, strict=False)
+#     },
+# }
 
-# Save to data/intent_embeddings.json
-os.makedirs("data", exist_ok=True)
-intent_cache_path = "data/intent_embeddings.json"
-with open(intent_cache_path, 'w') as f:
-    json.dump(intent_data, f)
-logging.info(f"💾 Saved intent embeddings to {intent_cache_path}")
+# # Save to data/intent_embeddings.json
+# os.makedirs("data", exist_ok=True)
+# intent_cache_path = "data/intent_embeddings.json"
+# with open(intent_cache_path, 'w') as f:
+#     json.dump(intent_data, f)
+# logging.info(f"💾 Saved intent embeddings to {intent_cache_path}")

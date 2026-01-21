@@ -204,7 +204,8 @@ def render_conversation_view(stories: list[dict]):
             indicator_placeholder.empty()  # Clear indicator
         except Exception as e:
             indicator_placeholder.empty()
-            print(f"DEBUG: send_to_backend failed: {e}")
+            if DEBUG:
+                print(f"DEBUG: send_to_backend failed: {e}")
             _push_assistant_turn(f"Error: {str(e)}")
             st.session_state["__processing_chip_injection__"] = False
             st.rerun()

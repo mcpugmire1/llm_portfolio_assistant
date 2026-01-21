@@ -95,22 +95,39 @@ def boost_narrative_matches(
                 key_phrase = key_phrase[len(prefix) :]
                 break
 
-        # Also extract the part after " – " or " - " for titles like "Career Intent – What I'm Looking For Next"
-        alt_phrase = None
+        # Extract BOTH parts of split titles like "Transition Story – Why I'm Exploring Opportunities"
+        # prefix_phrase = "transition story", subtitle_phrase = "why i'm exploring opportunities"
+        prefix_phrase = None
+        subtitle_phrase = None
         if " – " in title_lower:
             parts = title_lower.split(" – ")
-            alt_phrase = parts[0].strip()  # "career intent"
+            prefix_phrase = parts[0].strip()
+            subtitle_phrase = parts[1].strip() if len(parts) > 1 else None
         elif " - " in title_lower:
             parts = title_lower.split(" - ")
-            alt_phrase = parts[0].strip()
+            prefix_phrase = parts[0].strip()
+            subtitle_phrase = parts[1].strip() if len(parts) > 1 else None
 
         # Check for matches - any key phrase in query
+        matched = False
         if key_phrase in q_lower or title_lower in q_lower:
             matched = True
-        elif alt_phrase and alt_phrase in q_lower:
+        elif prefix_phrase and prefix_phrase in q_lower:
             matched = True
-        else:
-            matched = False
+        elif subtitle_phrase and subtitle_phrase in q_lower:
+            matched = True
+        # Also check for partial subtitle match (e.g., "exploring opportunities" in "why i'm exploring opportunities")
+        elif subtitle_phrase:
+            # Extract core phrase from subtitle by removing common starters
+            # Jan 2026 - Normalize curly apostrophe (U+2019) to straight (') for matching
+            # Story data uses Unicode curly apostrophe but starters use ASCII
+            core_subtitle = subtitle_phrase.replace("\u2019", "'")
+            for starter in ["why i'm ", "what i'm ", "how i ", "where i "]:
+                if core_subtitle.startswith(starter):
+                    core_subtitle = core_subtitle[len(starter) :]
+                    break
+            if core_subtitle in q_lower:
+                matched = True
 
         if matched:
             # Remove if already in results, then insert at top
@@ -254,17 +271,21 @@ def semantic_search(
     _safe_session_set("__dbg_pc_hits", len(hits))
 
     # 6) Apply UI filters and attach scores to stories
+    # Jan 2026 - Strip q from filters: Pinecone already did semantic matching on query.
+    # Passing q to matches_filters() causes double-filtering (keyword match on semantic results).
+    ui_filters = {k: v for k, v in filters.items() if k != "q"} if filters else {}
     filtered_stories = []
     for h in confident_hits:
         story = h["story"].copy()  # Don't mutate original
         story["pc"] = h.get("pc_score", 0.0) or 0.0
-        if matches_filters(story, filters):
+        if matches_filters(story, ui_filters):
             filtered_stories.append(story)
 
     # 7) If filters removed everything, check what we'd get without industry/capability
     if not filtered_stories and (filters.get("industry") or filters.get("capability")):
+        # Also strip q here - same reason as above
         relaxed_filters = {
-            k: v for k, v in filters.items() if k not in ("industry", "capability")
+            k: v for k, v in filters.items() if k not in ("industry", "capability", "q")
         }
         relaxed_count = 0
         for h in confident_hits:

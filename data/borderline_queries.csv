@@ -113,3 +113,45 @@ timestamp,query,score,matched_intent,family
 2026-01-20T21:53:06+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
 2026-01-20T21:57:54+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
 2026-01-20T22:25:34+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T13:37:37+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T14:01:23+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T14:08:32+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T14:13:21+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T14:18:06+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T14:22:40+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T14:27:57+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T14:32:46+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T14:37:34+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T14:43:03+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T14:48:12+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T14:53:14+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T14:57:47+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T15:03:13+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T15:06:54+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T15:19:38+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T15:24:21+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T15:36:10+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T15:41:02+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T15:45:15+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T15:49:35+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T15:55:59+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T15:59:58+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T16:05:22+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T16:10:21+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T16:34:33+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T16:53:34+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T16:57:41+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T17:06:05+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T17:10:47+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T18:23:36+00:00,Tell me about Matt's leadership journey,0.755,What's Matt's leadership style?,leadership
+2026-01-21T18:23:48+00:00,How does Matt approach complex problems?,0.741,What problems does Matt solve?,unknown
+2026-01-21T18:25:04+00:00,Norfolk Southern transformation,0.734,Show me Norfolk Southern projects,unknown
+2026-01-21T18:25:50+00:00,Tell me about Matt's retail experience,0.743,Tell me about Matt's Banking experience,unknown
+2026-01-21T18:26:14+00:00,How did Matt transform delivery at JPMorgan?,0.766,Tell me about Matt's work at JP Morgan Chase,unknown
+2026-01-21T18:27:05+00:00,Tell me about Matt's leadership journey,0.755,What's Matt's leadership style?,leadership
+2026-01-21T18:27:13+00:00,How does Matt approach complex problems?,0.741,What problems does Matt solve?,unknown
+2026-01-21T18:28:36+00:00,Norfolk Southern transformation,0.734,Show me Norfolk Southern projects,unknown
+2026-01-21T18:29:25+00:00,Tell me about Matt's retail experience,0.743,Tell me about Matt's Banking experience,unknown
+2026-01-21T18:29:50+00:00,How did Matt transform delivery at JPMorgan?,0.766,Tell me about Matt's work at JP Morgan Chase,unknown
+2026-01-21T20:54:58+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments
+2026-01-21T21:20:33+00:00,Tell me about Matt's retail experience,0.749,Tell me about Matt's financial services experience,domain_payments

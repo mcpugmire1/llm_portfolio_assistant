@@ -320,11 +320,15 @@ def _log_borderline(query: str, score: float, intent: str, family: str):
 
 def warm_cache():
     """Pre-compute and cache intent embeddings."""
-    print("Warming semantic router cache...")
+    from config.debug import DEBUG
+
+    if DEBUG:
+        print("Warming semantic router cache...")
     embeddings = _get_intent_embeddings()
-    print(
-        f"Cached {len(embeddings)} intent embeddings across {len(VALID_INTENTS)} families"
-    )
+    if DEBUG:
+        print(
+            f"Cached {len(embeddings)} intent embeddings across {len(VALID_INTENTS)} families"
+        )
 
 
 def get_intent_families() -> list[str]:
