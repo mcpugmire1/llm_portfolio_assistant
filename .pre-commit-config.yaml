@@ -4,14 +4,7 @@
 # Run manually: pre-commit run --all-files
 
 repos:
-  # Black - Python code formatter
-  - repo: https://github.com/psf/black
-    rev: 24.10.0
-    hooks:
-      - id: black
-        language_version: python3.11
-
-  # Ruff - Fast Python linter (replaces isort, flake8, etc.)
+  # Ruff - Fast Python linter and formatter (replaces black, isort, flake8, etc.)
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.8.4
     hooks:
