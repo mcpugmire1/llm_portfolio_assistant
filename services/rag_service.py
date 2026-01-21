@@ -32,21 +32,24 @@ CONFIDENCE_LOW = (
 # Below CONFIDENCE_LOW = "none" - show "No strong matches"
 
 # =============================================================================
-# PROFESSIONAL NARRATIVE BOOSTING
+# PROFESSIONAL NARRATIVE BOOSTING (Jan 2026 - Sovereign Narrative Update)
+# Dynamically derives title fragments from story data instead of hardcoded list.
+# Handles title formats like "About Matt – My Leadership Journey" by stripping
+# prefixes and extracting key phrases for query matching.
 # =============================================================================
-NARRATIVE_TITLE_FRAGMENTS = [
-    "leadership journey",
-    "career intent",
-    "leadership philosophy",
-    "work philosophy",
-    "risk ownership",
-    "early failure",
-    "sustainable leadership",
-    "career transition",
-    "complex problems",
-    "who is matt",
-    "about matt",
-]
+
+
+def _get_narrative_fragments(stories: list[dict]) -> list[tuple[str, dict]]:
+    """Extract title fragments from Professional Narrative stories.
+
+    Returns list of (lowercase_title, story) tuples for matching.
+    Derives fragments dynamically instead of hardcoding.
+    """
+    return [
+        (s.get("Title", "").lower(), s)
+        for s in stories
+        if s.get("Theme") == "Professional Narrative" and s.get("Title")
+    ]
 
 
 def boost_narrative_matches(
@@ -58,6 +61,8 @@ def boost_narrative_matches(
     ensures the matching Professional Narrative story is at the top of results
     even if semantic search ranked other stories higher.
 
+    Now derives fragments dynamically from story titles rather than hardcoded list.
+
     Args:
         query: User's query string
         results: Current search results from semantic_search
@@ -68,27 +73,54 @@ def boost_narrative_matches(
     """
     q_lower = query.lower()
 
-    for fragment in NARRATIVE_TITLE_FRAGMENTS:
-        if fragment in q_lower:
-            # Find full story object (ensures 5PSummary present)
-            match = next(
-                (
-                    s
-                    for s in stories
-                    if fragment in s.get("Title", "").lower()
-                    and s.get("Theme") == "Professional Narrative"
-                ),
-                None,
-            )
-            if match:
-                # Remove if already in results, then insert at top
-                results = [r for r in results if r.get("id") != match.get("id")]
-                results.insert(0, match)
-                if DEBUG:
-                    print(
-                        f"DEBUG boost_narrative: boosted '{match.get('Title')}' for fragment '{fragment}'"
-                    )
+    # Get narrative stories with their titles (dynamic, not hardcoded)
+    narrative_stories = _get_narrative_fragments(stories)
+
+    for title_lower, story in narrative_stories:
+        # Extract key phrases from title - handle various title formats
+        # e.g., "About Matt – My Leadership Journey" → "leadership journey"
+        # e.g., "Career Intent – What I'm Looking For Next" → "career intent", "looking for next"
+        key_phrase = title_lower
+
+        # Remove common title prefixes
+        for prefix in [
+            "about matt – ",
+            "about matt - ",
+            "my ",
+            "matt's ",
+            "the ",
+            "what i learned about ",
+        ]:
+            if key_phrase.startswith(prefix):
+                key_phrase = key_phrase[len(prefix) :]
                 break
+
+        # Also extract the part after " – " or " - " for titles like "Career Intent – What I'm Looking For Next"
+        alt_phrase = None
+        if " – " in title_lower:
+            parts = title_lower.split(" – ")
+            alt_phrase = parts[0].strip()  # "career intent"
+        elif " - " in title_lower:
+            parts = title_lower.split(" - ")
+            alt_phrase = parts[0].strip()
+
+        # Check for matches - any key phrase in query
+        if key_phrase in q_lower or title_lower in q_lower:
+            matched = True
+        elif alt_phrase and alt_phrase in q_lower:
+            matched = True
+        else:
+            matched = False
+
+        if matched:
+            # Remove if already in results, then insert at top
+            results = [r for r in results if r.get("id") != story.get("id")]
+            results.insert(0, story)
+            if DEBUG:
+                print(
+                    f"DEBUG boost_narrative: boosted '{story.get('Title')}' for query match"
+                )
+            break
 
     return results
 

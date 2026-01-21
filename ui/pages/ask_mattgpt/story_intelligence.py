@@ -181,37 +181,69 @@ Frame the WHY as: "Matt wanted to..." or "Matt recognized..." based on the story
 
 """
 
-    # Build structured context - use pattern phrase instead of theme name
+    # Build structured context with field-aware headers
     # For Professional Narrative stories, mark summary as verbatim anchor
     summary = story.get('5PSummary', '') or story.get('5p_summary', '')
     if story.get('Theme') == 'Professional Narrative' and summary:
         summary = f"[[MATT'S CORE BRAND DNA - USE VERBATIM: {summary}]]"
 
-    context = f"""{personal_project_warning}**{story.get('Title', 'Untitled')}**
-Pattern: {pattern_phrase}
-Client: {story.get('Client', 'Unknown')}
-Role: {story.get('Role', '')}
-Industry: {story.get('Industry', '')}
-Domain: {story.get('Sub-category', '')}
+    # Build field-aware context lines, omitting empty fields
+    lines = []
 
-Summary: {summary}
+    if personal_project_warning:
+        lines.append(personal_project_warning.strip())
 
-WHY (Purpose/Situation):
-{get_text('Purpose') or get_text('Situation')}
-{get_text('Task') if not get_text('Purpose') else ''}
+    # Title and pattern
+    lines.append(f"[TITLE]: {story.get('Title', 'Untitled')}")
+    lines.append(f"[PATTERN]: {pattern_phrase}")
 
-HOW (Process/Action):
-{get_text('Process') or get_text('Action')}
+    # Core metadata fields
+    client_val = story.get('Client', '')
+    if client_val:
+        lines.append(f"[CLIENT]: {client_val}")
 
-WHAT (Performance/Result):
-{get_text('Performance') or get_text('Result')}
+    role_val = story.get('Role', '')
+    if role_val:
+        lines.append(f"[ROLE]: {role_val}")
 
-Additional Context:
-Person (Who): {get_text('Person') or get_text('Who')}
-Place (Where): {get_text('Place') or get_text('Where')}
-"""
+    industry_val = story.get('Industry', '')
+    if industry_val:
+        lines.append(f"[INDUSTRY]: {industry_val}")
 
-    return context
+    domain_val = story.get('Sub-category', '')
+    if domain_val:
+        lines.append(f"[DOMAIN]: {domain_val}")
+
+    if summary:
+        lines.append(f"[SUMMARY]: {summary}")
+
+    # STAR fields with 5P fallbacks
+    situation_val = get_text('Situation') or get_text('Purpose')
+    if situation_val:
+        lines.append(f"[SITUATION]: {situation_val}")
+
+    task_val = get_text('Task')
+    if task_val:
+        lines.append(f"[TASK]: {task_val}")
+
+    action_val = get_text('Action') or get_text('Process')
+    if action_val:
+        lines.append(f"[ACTION]: {action_val}")
+
+    result_val = get_text('Result') or get_text('Performance')
+    if result_val:
+        lines.append(f"[RESULT]: {result_val}")
+
+    # Additional context (optional)
+    person_val = get_text('Person') or get_text('Who')
+    if person_val:
+        lines.append(f"[PERSON]: {person_val}")
+
+    place_val = get_text('Place') or get_text('Where')
+    if place_val:
+        lines.append(f"[PLACE]: {place_val}")
+
+    return "\n".join(lines)
 
 
 def get_all_themes() -> list[str]:

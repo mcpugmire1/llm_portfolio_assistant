@@ -64,17 +64,42 @@ def get_known_clients(stories: list[dict]) -> set[str]:
     return _KNOWN_CLIENTS
 
 
-# Theme-specific search queries for synthesis mode
-# (search for the THEME characteristics, not user's query)
-THEME_SEARCH_QUERIES = {
-    "Execution & Delivery": "delivery scale production systems metrics outcomes shipping",
-    "Strategic & Advisory": "strategic roadmap executive alignment thought partnership",
-    "Org & Working-Model Transformation": "agile transformation culture change organizational mindset",
-    "Talent & Enablement": "coaching mentorship team development retention talent growth",
-    "Risk & Responsible Tech": "governance compliance security responsible innovation risk",
-    "Emerging Tech": "innovation experimentation emerging technology exploration",
-    "Professional Narrative": "career journey philosophy leadership identity growth",
-}
+# Cache for narrative titles
+_NARRATIVE_TITLES: list[str] | None = None
+
+
+def get_narrative_titles(stories: list[dict]) -> list[str]:
+    """Derive Professional Narrative story titles for intent classification.
+
+    Returns titles of stories where Theme='Professional Narrative'.
+    These are used to detect biographical/narrative intent queries.
+
+    Args:
+        stories: Story corpus
+
+    Returns:
+        List of narrative story titles (lowercase for matching)
+    """
+    global _NARRATIVE_TITLES
+    if _NARRATIVE_TITLES is None:
+        _NARRATIVE_TITLES = [
+            s.get("Title", "").lower()
+            for s in stories
+            if s.get("Theme") == "Professional Narrative" and s.get("Title")
+        ]
+    return _NARRATIVE_TITLES
+
+
+# Theme names for synthesis mode coverage (values removed - user's query vector is used)
+SYNTHESIS_THEMES = [
+    "Execution & Delivery",
+    "Strategic & Advisory",
+    "Org & Working-Model Transformation",
+    "Talent & Enablement",
+    "Risk & Responsible Tech",
+    "Emerging Tech",
+    "Professional Narrative",
+]
 
 
 # Entity fields to check for routing (in priority order)
@@ -105,13 +130,15 @@ ENTITY_NORMALIZATION = {
 }
 
 
-def detect_entity(
-    query: str, stories: list[dict]
-) -> tuple[str, str] | None:
+def detect_entity(query: str, stories: list[dict]) -> tuple[str, str] | None:
     """Detect if query mentions a known entity from any entity field.
 
     Checks Client, Employer, Division, Project, Place fields.
     Returns (field_name, entity_value) if match found.
+
+    Context-aware: Returns None if entity is preceded by transitional phrases
+    like "after", "leaving", "before", "transition from" - these indicate
+    the query is ABOUT the transition, not filtering TO that entity.
 
     Args:
         query: User query string
@@ -122,9 +149,37 @@ def detect_entity(
     """
     q_lower = query.lower()
 
+    # =================================================================
+    # CONTEXT EXCLUSIONS (Jan 2026 - Sovereign Narrative Update)
+    # If an entity is preceded by transitional phrases, the query is
+    # ABOUT the transition, not requesting stories FROM that entity.
+    # Example: "career transition after Accenture" should NOT filter
+    # to Accenture stories - it's asking about leaving Accenture.
+    # =================================================================
+    EXCLUSION_PREFIXES = ["after ", "leaving ", "before ", "transition from ", "left "]
+
+    def _is_excluded_context(entity_lower: str) -> bool:
+        """Check if entity is preceded by exclusion phrase."""
+        pos = q_lower.find(entity_lower)
+        if pos <= 0:
+            return False
+        # Check text before the entity match
+        prefix = q_lower[:pos].rstrip()
+        for excl in EXCLUSION_PREFIXES:
+            if prefix.endswith(excl.rstrip()):
+                if DEBUG:
+                    print(
+                        f"DEBUG: Entity '{entity_lower}' excluded - preceded by '{excl.rstrip()}'"
+                    )
+                return True
+        return False
+
     # First check normalization map for common aliases
     for alias, normalized in ENTITY_NORMALIZATION.items():
         if alias in q_lower:
+            # Check for exclusion context
+            if _is_excluded_context(alias):
+                return None
             # Find which field contains this normalized value
             for field in ENTITY_FIELDS:
                 for story in stories:
@@ -144,6 +199,9 @@ def detect_entity(
         # (e.g., "JP Morgan Chase" before "JP Morgan")
         for entity in sorted(known_entities, key=len, reverse=True):
             if entity.lower() in q_lower:
+                # Check for exclusion context
+                if _is_excluded_context(entity.lower()):
+                    return None
                 return (field, entity)
 
     return None
@@ -166,17 +224,23 @@ def get_synthesis_stories(
     """
     idx = _init_pinecone()
     if not idx:
-        print("DEBUG: get_synthesis_stories - Pinecone not available")
+        if DEBUG:
+            print("DEBUG: get_synthesis_stories - Pinecone not available")
         return []
 
     # Detect if query mentions a specific entity (Client, Employer, Division, etc.)
     entity_match = detect_entity(query, stories) if query else None
     if DEBUG and entity_match:
-        print(f"DEBUG synthesis: detected entity scope = {entity_match[0]}:{entity_match[1]}")
+        print(
+            f"DEBUG synthesis: detected entity scope = {entity_match[0]}:{entity_match[1]}"
+        )
+
+    # Use USER'S query for semantic search, not fixed theme keywords
+    user_query_vector = _embed(query) if query else None
 
     def search_theme(theme: str) -> list[dict]:
-        query_text = THEME_SEARCH_QUERIES.get(theme, theme)
-        query_vector = _embed(query_text)
+        # Use user's query embedding for relevance, filter by theme for coverage
+        query_vector = user_query_vector if user_query_vector else _embed(theme)
 
         try:
             # If entity detected, try entity+theme filter first
@@ -239,12 +303,13 @@ def get_synthesis_stories(
 
             return theme_stories
         except Exception as e:
-            print(f"DEBUG synthesis search error for {theme}: {e}")
+            if DEBUG:
+                print(f"DEBUG synthesis search error for {theme}: {e}")
             return []
 
     # Search all themes in parallel
     with ThreadPoolExecutor(max_workers=4) as executor:
-        theme_results = list(executor.map(search_theme, THEME_SEARCH_QUERIES.keys()))
+        theme_results = list(executor.map(search_theme, SYNTHESIS_THEMES))
 
     # Flatten and deduplicate
     seen_ids = set()
@@ -258,7 +323,7 @@ def get_synthesis_stories(
 
     if DEBUG:
         print(
-            f"DEBUG synthesis pool: {len(pool)} unique stories across {len(THEME_SEARCH_QUERIES)} themes"
+            f"DEBUG synthesis pool: {len(pool)} unique stories across {len(SYNTHESIS_THEMES)} themes"
         )
 
     return pool
@@ -414,7 +479,7 @@ def build_known_vocab(stories: list[dict[str, Any]]) -> set[str]:
     return {w for w in vocab if len(w) >= 3}
 
 
-def classify_query_intent(query: str) -> str:
+def classify_query_intent(query: str, stories: list[dict] | None = None) -> str:
     """Classify query into intent categories using LLM.
 
     Uses gpt-4o-mini for cheap, self-maintaining classification that handles
@@ -422,17 +487,19 @@ def classify_query_intent(query: str) -> str:
 
     Args:
         query: User query string to classify.
+        stories: Optional story corpus for dynamic entity/narrative lists.
+            If not provided, uses fallback static lists.
 
     Returns:
         One of: "synthesis", "behavioral", "technical", "client", "narrative",
         "background", "out_of_scope", "general"
 
     Example:
-        >>> classify_query_intent("How did Matt modernize payments at JPMorgan?")
+        >>> classify_query_intent("How did Matt modernize payments at JPMorgan?", stories)
         "client"  # Entity anchor takes priority
-        >>> classify_query_intent("Tell me about Matt's leadership journey")
+        >>> classify_query_intent("Tell me about Matt's leadership journey", stories)
         "narrative"  # Biographical anchor
-        >>> classify_query_intent("What are Matt's core themes?")
+        >>> classify_query_intent("What are Matt's core themes?", stories)
         "synthesis"  # No entity, cross-cutting
     """
     try:
@@ -446,26 +513,39 @@ def classify_query_intent(query: str) -> str:
             organization=os.getenv("OPENAI_ORG_ID"),
         )
 
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {
-                    "role": "system",
-                    "content": """Classify this query about Matt Pugmire's career. Use this PRIORITY HIERARCHY:
+        # Build dynamic lists from stories if available
+        if stories:
+            known_clients = get_known_clients(stories)
+            # Format client list for prompt
+            client_list = ", ".join(sorted(known_clients))
+
+            # Get narrative titles and extract key phrases
+            narrative_titles = get_narrative_titles(stories)
+            # Extract distinctive phrases from titles (e.g., "leadership journey" from "My Leadership Journey")
+            narrative_fragments = ", ".join(
+                narrative_titles[:15]
+            )  # Limit to avoid prompt bloat
+        else:
+            # Fallback static lists if no stories provided
+            client_list = (
+                "JPMorgan, Accenture, Capital One, RBC, Norfolk Southern, Fiserv, AT&T"
+            )
+            narrative_fragments = "leadership journey, career intent, philosophy, early failure, risk ownership"
+
+        prompt = f"""Classify this query about Matt Pugmire's career. Use this PRIORITY HIERARCHY:
 
 PRIORITY 1 - ENTITY ANCHOR (Company/Project):
 If query mentions a SPECIFIC company or project name, classify as `client`.
 This OVERRIDES any "How did", capability verbs, or methodology phrasing.
-Companies: JPMorgan, JP Morgan, JPMC, Accenture, Capital One, RBC, Norfolk Southern, Fiserv, AT&T, CDC, Deloitte
-Projects: MattGPT, Liquid Studio, CIC, Cloud Innovation Center
+Known companies/employers: {client_list}
+Known projects: MattGPT, Cloud Innovation Center, CIC, Liquid Studio
 - "How did Matt modernize payments at JPMorgan?" → client (JPMorgan is anchor)
 - "How did Matt scale the CIC at Accenture?" → client (Accenture is anchor)
-- "What did Matt build at Liquid Studio?" → client (Liquid Studio is anchor)
 - "Tell me about Matt's work at Capital One" → client
 
 PRIORITY 2 - BIOGRAPHICAL ANCHOR (Professional Narrative):
-If query mentions Professional Narrative fragments, classify as `narrative`.
-Fragments: leadership journey, career intent, philosophy, early failure, risk ownership, work philosophy, sustainable leadership, career transition, approach to failure, who is matt, about matt
+If query mentions Professional Narrative story topics, classify as `narrative`.
+Narrative topics: {narrative_fragments}
 - "Tell me about Matt's leadership journey" → narrative
 - "What's Matt's philosophy?" → narrative
 - "Tell me about Matt's approach to failure" → narrative
@@ -475,7 +555,6 @@ ONLY if NO specific entity AND asks for patterns/themes/summary:
 - "What are Matt's core themes?" → synthesis
 - "Why hire Matt?" → synthesis
 - "What makes Matt different?" → synthesis
-- "What ROI does Matt deliver?" → synthesis
 
 PRIORITY 4 - BEHAVIORAL (STAR-style):
 "Tell me about a time", "How do you handle", "Give an example of when you"
@@ -499,10 +578,13 @@ Everything else
 
 CRITICAL: Generic words "client" or "clients" are NOT company names.
 - "How does Matt work with clients?" → synthesis (generic, asking about approach)
-- "Matt's client engagement" → synthesis (generic, not a company)
 
-Return only the category name, nothing else.""",
-                },
+Return only the category name, nothing else."""
+
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": prompt},
                 {"role": "user", "content": query},
             ],
             max_tokens=10,
@@ -836,6 +918,46 @@ def _generate_agy_response(
             else "the client"
         )
 
+        # =================================================================
+        # VERBATIM PHRASE INJECTION (Jan 2026 - Sovereign Narrative Update)
+        # For Professional Narrative stories, extract Matt's identity phrases
+        # from 5PSummary and inject them as MANDATORY requirements in the
+        # user message. This forces the LLM to use phrases like "builder",
+        # "modernizer", "complexity to clarity" verbatim instead of paraphrasing.
+        # =================================================================
+        verbatim_requirement = ""
+        if ranked_stories:
+            primary_story = ranked_stories[0]
+            if primary_story.get("Theme") == "Professional Narrative":
+                summary = primary_story.get("5PSummary", "") or primary_story.get(
+                    "5p_summary", ""
+                )
+                if summary:
+                    # Extract key identity phrases that MUST appear verbatim
+                    required_phrases = []
+                    if "builder" in summary.lower():
+                        required_phrases.append('"builder"')
+                    if "modernizer" in summary.lower():
+                        required_phrases.append('"modernizer"')
+                    if "complexity to clarity" in summary.lower():
+                        required_phrases.append('"complexity to clarity"')
+                    if "build something from nothing" in summary.lower():
+                        required_phrases.append('"build something from nothing"')
+                    if "not looking for a maintenance role" in summary.lower():
+                        required_phrases.append('"not looking for a maintenance role"')
+                    if "build what's next" in summary.lower():
+                        required_phrases.append('"build what\'s next"')
+
+                    if required_phrases:
+                        verbatim_requirement = f"""
+⚠️ **VERBATIM REQUIREMENT - THIS IS MANDATORY**
+Your response MUST include these EXACT phrases (convert I→Matt):
+{chr(10).join('- ' + p for p in required_phrases)}
+
+Example: If source says "I'm a builder, a modernizer" → You write "Matt is a builder, a modernizer"
+DO NOT paraphrase. These are Matt's chosen identity words.
+"""
+
         # =====================================================================
         # SYSTEM PROMPT AND USER MESSAGE (varies by mode)
         # =====================================================================
@@ -854,10 +976,10 @@ def _generate_agy_response(
 ### PRIMARY DIRECTIVE
 Your job is to REPORT on Matt's portfolio, not rewrite it.
 1. SURFACE: Use Matt's exact vocabulary and phrases from the retrieved stories.
-2. DO NOT SYNTHESIZE: Never replace specific terms (e.g., "0 to 1", "builder", "modernizer") with generic filler.
+2. DO NOT GENERALIZE: Connect themes but keep specific vocabulary and metrics verbatim. Never replace specific terms (e.g., "0 to 1", "builder", "modernizer", "60% reduction") with generic filler.
 3. TRANSFORM PRONOUNS ONLY: Convert "I" to "Matt" while maintaining the original intensity and technical detail.
 4. PERSONA: Keep the warm, loyal "Chief of Staff" opening/closing and 🐾 emoji, but keep the substance verbatim.
-5. VERBATIM ANCHORS: When you see [[CORE BRAND DNA]], include at least one full phrase from that text exactly as written.
+5. VERBATIM ANCHORS (MANDATORY): When you see [[MATT'S CORE BRAND DNA - USE VERBATIM: ...]], you MUST include the EXACT identity phrases from that text in your response. For example, if the text says "I'm a builder, a modernizer" you MUST say "Matt is a builder, a modernizer" - NOT "Matt builds and modernizes". These are Matt's chosen self-descriptors - SACRED vocabulary that must appear verbatim.
 
 **BANNED CORPORATE FILLER (never use these):**
 - "meaningful outcomes" → use the actual outcomes from the story
@@ -908,6 +1030,34 @@ Never narrate as if you ARE Matt.
 
 ## SYNTHESIS MODE INSTRUCTIONS
 
+## QUERY-FIRST RULE (CRITICAL)
+Answer the user's specific question using the top-scored stories FIRST.
+- Lead with direct evidence that answers their question
+- Only reference Matt's 7 patterns if they naturally emerge from the evidence
+- Do NOT reorganize responses by pattern unless the user explicitly asks about "patterns" or "themes"
+- The user's question drives the structure, not a predefined pattern list
+
+## STORY SELECTION RULE (CRITICAL)
+When a query targets a specific career theme (leadership, philosophy, failure, risk, sustainable, transition):
+- Prioritize the story whose TITLE most closely matches the query topic
+- Professional Narrative stories (Theme: "Professional Narrative") are Matt's direct voice on identity/philosophy
+- Do NOT default to project stories for identity/philosophy questions
+- Example: "What's Matt's leadership philosophy?" → use "Leadership Philosophy – How I Lead", NOT a project story
+- Example: "Why is early failure important?" → use "Why Early Failure Is a Feature...", NOT a project story
+
+## VERBATIM RULE FOR PROFESSIONAL NARRATIVE (CRITICAL - READ THIS)
+**When responding to questions about Matt's identity, leadership journey, or philosophy using Professional Narrative stories:**
+
+YOUR RESPONSE MUST CONTAIN THESE EXACT PHRASES (converted from first to third person):
+- "builder" and "modernizer" → "Matt is a builder, a modernizer"
+- "complexity to clarity" → "from complexity to clarity"
+- "build something from nothing" → "build something from nothing"
+- "not looking for a maintenance role" → "not looking for a maintenance role"
+
+**DO NOT PARAPHRASE.** If the source says "I'm a builder," you write "Matt is a builder" - NOT "Matt builds things."
+
+**CHECKLIST BEFORE SUBMITTING:** Does your response include at least 2 of these identity phrases verbatim? If not, REVISE.
+
 ## CONTEXT ISOLATION (MANDATORY)
 You may ONLY cite clients that appear in the stories provided below.
 - If only ONE story is provided, discuss ONLY that example
@@ -917,6 +1067,13 @@ You may ONLY cite clients that appear in the stories provided below.
 - If user's query mentions a client NOT in the provided stories, do NOT attribute to that client
 - If a story's client is "Multiple Clients", refer to it as "across multiple engagements" - NEVER re-assign it to a specific firm named in the query
 - Do NOT combine metrics from one story with a different story's client name
+
+## CONTEXT PINNING (MANDATORY)
+Each metric or outcome must be pinned to the [CLIENT] header it originated from.
+- No cross-pollination between story blocks
+- "60% reduction" from JP Morgan stays with JP Morgan
+- "150+ practitioners" from Accenture stays with Accenture
+- When in doubt, cite the client inline: "At **JP Morgan**, Matt achieved..."
 
 This is a BIG-PICTURE question. The user wants themes, patterns, or philosophy.
 
@@ -948,14 +1105,16 @@ This is a BIG-PICTURE question. The user wants themes, patterns, or philosophy.
 
 5. **Closing** — USE THE EXACT CLOSING PROVIDED
 
-**BANNED PHRASES — Never use these:**
+**BANNED PHRASES — Never use these (UNLESS the user's question explicitly asks about that topic):**
 - "bridge the gap between strategy and execution"
 - "foster collaboration"
 - "high-trust engineering cultures"
 - "meaningful outcomes"
-- "stakeholder alignment" (say "getting executives on the same page")
+- "stakeholder alignment" (say "getting executives on the same page" — UNLESS user asks about stakeholder alignment)
 - "strategic mindset" (say "thinks strategically")
 - "execution excellence" (say "he ships")
+
+**CONTEXT EXCEPTION:** If the user's question contains a banned phrase (e.g., "stakeholder alignment"), you MAY use that phrase when directly answering their question about it.
 
 **Voice Rules:**
 - Warm, confident, grounded — this is Agy who KNOWS Matt
@@ -1028,7 +1187,7 @@ Your job is to REPORT on Matt's portfolio, not rewrite it.
 2. DO NOT SYNTHESIZE: Never replace specific terms (e.g., "0 to 1", "builder", "modernizer") with generic filler.
 3. TRANSFORM PRONOUNS ONLY: Convert "I" to "Matt" while maintaining the original intensity and technical detail.
 4. PERSONA: Keep the warm, loyal "Chief of Staff" opening/closing and 🐾 emoji, but keep the substance verbatim.
-5. VERBATIM ANCHORS: When you see [[CORE BRAND DNA]], include at least one full phrase from that text exactly as written.
+5. VERBATIM ANCHORS (MANDATORY): When you see [[MATT'S CORE BRAND DNA - USE VERBATIM: ...]], you MUST include the EXACT identity phrases from that text in your response. For example, if the text says "I'm a builder, a modernizer" you MUST say "Matt is a builder, a modernizer" - NOT "Matt builds and modernizes". These are Matt's chosen self-descriptors - SACRED vocabulary that must appear verbatim.
 
 **BANNED CORPORATE FILLER (never use these):**
 - "meaningful outcomes" → use the actual outcomes from the story
@@ -1143,7 +1302,7 @@ For personal projects, the ONLY acceptable framing is Matt's OWN motivation:
 ## Stories from Matt's Portfolio:
 
 {story_context}
-
+{verbatim_requirement}
 ---
 
 ## YOUR RESPONSE INSTRUCTIONS:
@@ -1231,6 +1390,31 @@ REMEMBER:
         response_text = re.sub(
             r'\*\*(\d)\*\*(\d+%?\+?)\*\*', r'**\1\2**', response_text
         )
+
+        # =====================================================================
+        # BANNED PHRASE CLEANUP (Jan 2026 - Sovereign Narrative Update)
+        # LLM sometimes ignores the banned list in the prompt, so we
+        # post-process to remove corporate filler phrases like
+        # "meaningful outcomes", "foster collaboration", etc.
+        # =====================================================================
+        BANNED_PHRASES_CLEANUP = [
+            "meaningful outcomes",
+            "foster collaboration",
+            "fostered collaboration",
+            "fostering collaboration",
+            "strategic mindset",
+            "stakeholder alignment",
+            "bridge the gap",
+        ]
+        for phrase in BANNED_PHRASES_CLEANUP:
+            # Replace banned phrase with a clean alternative (or just remove)
+            response_text = re.sub(
+                rf'\b{re.escape(phrase)}\b', '', response_text, flags=re.IGNORECASE
+            )
+        # Clean up any double spaces or awkward punctuation left behind
+        response_text = re.sub(r'  +', ' ', response_text)
+        response_text = re.sub(r' ,', ',', response_text)
+        response_text = re.sub(r' \.', '.', response_text)
 
         return response_text
 
@@ -1690,15 +1874,74 @@ def rag_answer(
                     f"DEBUG: Semantic router: valid={semantic_valid}, score={semantic_score:.3f}, family={intent_family}"
                 )
 
+        # Step 2b: Entity Detection - ALWAYS detect entities for sovereignty
+        # Entity-first sovereignty: detected entities are used for:
+        # 1. Bypassing router rejection (if semantic_valid=False)
+        # 2. Filtering Pinecone results (always)
+        entity_match = (
+            detect_entity(question or "", stories) if not from_suggestion else None
+        )
+        if DEBUG and entity_match:
+            print(f"DEBUG: Entity detected - {entity_match[0]}:{entity_match[1]}")
+
+        # =================================================================
+        # ENTITY GATE (Jan 2026 - Sovereign Narrative Update)
+        # Threshold lowered from 0.55 to 0.50 to allow more narrative queries
+        # like "Tell me about Matt's leadership journey" to pass through.
+        # Queries below this threshold WITH no detected entity are rejected.
+        # Queries WITH a detected entity bypass this gate entirely.
+        # =================================================================
+        ENTITY_GATE_THRESHOLD = 0.50
+        if not from_suggestion and not semantic_valid:
+            if entity_match is None and semantic_score < ENTITY_GATE_THRESHOLD:
+                # No entity detected + very low semantic score → out of scope
+                log_offdomain(question or "", "no_entity_low_score")
+                st.session_state["ask_last_reason"] = "out_of_scope"
+                st.session_state["ask_last_query"] = question or ""
+                st.session_state["__ask_dbg_decision"] = (
+                    f"entity_gate_reject:{semantic_score:.3f}"
+                )
+                if DEBUG:
+                    print(
+                        f"DEBUG: Entity gate REJECT - no entity, low score ({semantic_score:.3f} < {ENTITY_GATE_THRESHOLD})"
+                    )
+                return {
+                    "answer_md": "",
+                    "sources": [],
+                    "modes": {},
+                    "default_mode": "narrative",
+                }
+            elif entity_match:
+                # Entity detected → bypass router rejection
+                if DEBUG:
+                    print(
+                        f"DEBUG: Entity gate BYPASS - found {entity_match[0]}:{entity_match[1]}"
+                    )
+            elif DEBUG:
+                # No entity but score is acceptable → proceed to Pinecone
+                print(
+                    f"DEBUG: Entity gate PASS - no entity but decent score ({semantic_score:.3f} >= {ENTITY_GATE_THRESHOLD})"
+                )
+
         # Token overlap check
         overlap = token_overlap_ratio(question or "", _KNOWN_VOCAB)
         if DEBUG:
             dbg(f"ask: overlap={overlap:.2f}")
 
+        # Entity-first sovereignty: if entity detected, add to filters for Pinecone
+        # This ensures entity-anchored queries prioritize stories from that entity
+        search_filters = filters.copy()  # Don't mutate original
+        if entity_match:
+            entity_field, entity_value = entity_match
+            search_filters["entity_field"] = entity_field
+            search_filters["entity_value"] = entity_value
+            if DEBUG:
+                print(f"DEBUG: Entity filter added: {entity_field}={entity_value}")
+
         # Semantic search (run before rejection to enable search fallback)
         search_result = semantic_search(
             question or filters.get("q", ""),
-            filters,
+            search_filters,
             stories=stories,
             top_k=SEARCH_TOP_K,
         )
@@ -1712,8 +1955,8 @@ def rag_answer(
         # Store confidence for conversation_view to use
         st.session_state["__ask_confidence__"] = confidence
 
-        # Classify query intent for synthesis mode detection
-        query_intent = classify_query_intent(question or "")
+        # Classify query intent for synthesis mode detection (uses dynamic entity lists)
+        query_intent = classify_query_intent(question or "", stories)
         is_synthesis = query_intent == "synthesis"
         st.session_state["__ask_query_intent__"] = query_intent
 
@@ -1871,6 +2114,26 @@ But here's what might translate: Matt's work in **B2B platform modernization**, 
                     print(
                         f"DEBUG   [{i + 1}] [{theme}] {s.get('Client')}: {s.get('Title', '')[:40]} (score={score:.3f})"
                     )
+        elif intent_family == "narrative" and pool:
+            # =============================================================
+            # NARRATIVE MODE (Jan 2026 - Sovereign Narrative Update)
+            # For narrative queries (leadership journey, philosophy, etc.),
+            # keep the boosted Professional Narrative story at position #1
+            # but include other stories for the UI sources panel.
+            # =============================================================
+            first_story = pool[0]
+            if first_story.get("Theme") == "Professional Narrative":
+                # Get other stories via diversify, then prepend the narrative story
+                other_stories = diversify_results(
+                    [c for c in candidates if c.get("id") != first_story.get("id")]
+                )
+                ranked = [first_story] + (other_stories or [])
+                if DEBUG:
+                    print(
+                        f"DEBUG narrative mode: boosted '{first_story.get('Title')}' + {len(other_stories or [])} others"
+                    )
+            else:
+                ranked = diversify_results(candidates) or (pool[:1] if pool else [])
         else:
             # Standard mode: Client diversity ranking
             ranked = diversify_results(candidates) or (pool[:1] if pool else [])

@@ -72,3 +72,8 @@
 {"category":"weapons","pattern":"\\b(how to (make|build)|where to buy)\\b.*(bomb|gun|weapon|explosive)\\b"}
 {"category":"random_objects","pattern":"\\b(bra|underwear|panties|socks|shoes)\\b.*\\b(celebrity|famous|star)\\b"}
 {"category":"random_objects","pattern":"\\b(madonna|beyonce|taylor)'?s?\\b.*(bra|underwear|dress|outfit|hair|makeup)\\b"}
+{"category":"html_garbage","pattern":"<[a-zA-Z][a-zA-Z0-9]*[^>]*>"}
+{"category":"html_garbage","pattern":"</[a-zA-Z][a-zA-Z0-9]*>"}
+{"category":"html_garbage","pattern":"<[a-zA-Z][^>]*/\\s*>"}
+{"category":"html_garbage","pattern":"&(nbsp|lt|gt|amp|quot|apos);"}
+{"category":"code_garbage","pattern":"^\\s*[{\\[].*[}\\]]\\s*$"}

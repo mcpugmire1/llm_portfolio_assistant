@@ -186,6 +186,23 @@ def pinecone_semantic_search(
     if filters.get("clients"):
         pc_filter["client"] = {"$in": filters["clients"]}
 
+    # Entity-first sovereignty: if entity detected, add as filter
+    # Pinecone metadata field/value case rules:
+    #   - Field names: always lowercase
+    #   - Values: 'division' is lowercase, 'client' keeps original case
+    entity_field = filters.get("entity_field")
+    entity_value = filters.get("entity_value")
+    if entity_field and entity_value:
+        pc_field = entity_field.lower()
+        # Division values are lowercase in Pinecone; client values keep original case
+        if pc_field == "division":
+            pc_value = entity_value.lower()
+        else:
+            pc_value = entity_value
+        pc_filter[pc_field] = {"$eq": pc_value}
+        if DEBUG:
+            print(f"DEBUG Pinecone: Entity filter applied - {pc_field}={pc_value}")
+
     try:
         qvec = _embed(query)
         if DEBUG:

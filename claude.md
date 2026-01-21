@@ -177,6 +177,68 @@
   - Check simple things first: regex, config, cache, typos
   - If Claude proposes 50+ lines, ask "is there a simpler way?"
 
+  ## Nonsense Filter Rules (Learned the Hard Way)
+
+  The `nonsense_filters.jsonl` file contains regex patterns to block off-topic queries. **Be extremely careful with word choices.**
+
+  ### The "solve" Incident (Dec 2025)
+  - **Problem:** Added "solve" to homework pattern → blocked "What problems does Matt solve?"
+  - **Root cause:** Overly broad word in regex matched legitimate portfolio queries
+  - **Fix:** Removed "solve" from pattern (commit `2dab2dc`)
+
+  ### Rules for Adding Patterns
+  1. **Test against real queries first** — Will this block "Tell me about Matt's X"?
+  2. **Avoid common verbs** — Words like "solve", "build", "create", "manage" appear in legitimate queries
+  3. **Prefer multi-word phrases** — `"homework help"` is safer than `"homework"` alone
+  4. **Use word boundaries** — `\b(word)\b` prevents partial matches
+  5. **Don't duplicate the entity gate's job** — Semantic scoring (< 0.55) already catches gibberish like "asdfghjkl"
+
+  ### Pattern Testing
+  ```python
+  # Always test new patterns against these legitimate queries:
+  test_queries = [
+      "What problems does Matt solve?",
+      "How did Matt transform delivery?",
+      "Tell me about stakeholder alignment",
+      "What's Matt's leadership philosophy?",
+  ]
+  ```
+
+  ## Pinecone Metadata Casing Protocol (Learned the Hard Way)
+
+  Pinecone metadata fields use **lowercase field names** but values have inconsistent casing. When building entity filters in `pinecone_service.py`, follow these rules:
+
+  ### Lowercase Values (must call `.lower()`)
+  | Field | Example Value |
+  |-------|---------------|
+  | `division` | `"cloud innovation center"` |
+  | `employer` | `"accenture"` |
+  | `project` | `"cloud innovation center"` |
+  | `industry` | `"cross industry"` |
+  | `complexity` | `"internal"` |
+
+  ### PascalCase Values (preserve original case)
+  | Field | Example Value |
+  |-------|---------------|
+  | `client` | `"Accenture"` |
+  | `role` | `"Director"` |
+  | `title` | `"Scaling CIC Impact..."` |
+  | `domain` | `"Leadership & Talent Development"` |
+
+  ### The Q29 Incident (Jan 2026)
+  - **Problem:** Entity filter `division = "Cloud Innovation Center"` returned 0 hits
+  - **Root cause:** Pinecone stores `division` values lowercase (`"cloud innovation center"`)
+  - **Fix:** Field-specific lowercasing in `pinecone_service.py:198`
+
+  ### Implementation
+  ```python
+  # In pinecone_service.py
+  if pc_field == "division":
+      pc_value = entity_value.lower()
+  else:
+      pc_value = entity_value  # Keep PascalCase for client, role, etc.
+  ```
+
   ## Quality Standards
   - **"Can you defend it?"** — Every claim, metric, or statement must be factually accurate
   - **No AI fabrications** — Real stories from real experience only
@@ -221,6 +283,41 @@
   CONFIDENCE_LOW = 0.15   # "Relevance may be low"
   # Below 0.15 = "No strong matches"
   ```
+
+  ## Sovereign Narrative Update (Jan 2026)
+
+  Major RAG pipeline changes to improve handling of Professional Narrative (identity/philosophy) queries. Eval improved from 51.6% to 71.0%.
+
+  ### Key Changes
+
+  | Change | File | Purpose |
+  |--------|------|---------|
+  | Entity Gate Threshold | backend_service.py | Lowered from 0.55 to 0.50 to allow narrative queries |
+  | Narrative Intent Family | semantic_router.py | Added 22 intents for Professional Narrative recognition |
+  | Context Exclusions | backend_service.py | "after Accenture" doesn't filter TO Accenture stories |
+  | Verbatim Phrase Injection | backend_service.py | Forces LLM to use "builder", "modernizer" verbatim |
+  | Banned Phrase Cleanup | backend_service.py | Post-processing removes corporate filler phrases |
+  | Narrative Mode Ranking | backend_service.py | Keeps boosted narrative story at #1 in results |
+  | Dynamic Boost Fragments | rag_service.py | Derives title fragments from story data |
+
+  ### Verbatim Phrases (Sacred Vocabulary)
+  When responding to Professional Narrative queries, the LLM must use these exact phrases:
+  - "builder", "modernizer"
+  - "complexity to clarity"
+  - "build something from nothing"
+  - "not looking for a maintenance role"
+
+  ### Context Exclusion Prefixes
+  These words before an entity name prevent entity filtering:
+  - "after", "leaving", "before", "transition from", "left"
+  - Example: "career transition after Accenture" → broad search, not Accenture filter
+
+  ### Banned Phrases (Auto-Removed)
+  - "meaningful outcomes"
+  - "foster collaboration"
+  - "strategic mindset"
+  - "stakeholder alignment"
+  - "bridge the gap"
 
   ### Common Fixes
   - **Widget won't reset:** Increment version key, delete old widget keys

@@ -251,6 +251,97 @@ GOLDEN_QUERIES = {
             "category": "edge",
         },
     ],
+    # Surgical Precision (6) - Entity-First + Specific Story Retrieval
+    "surgical": [
+        {
+            "id": 26,
+            "query": "How did Matt modernize payments across 12+ countries at JP Morgan?",
+            "expected_client": "JP Morgan Chase",
+            "client_variants": ["JPMorgan", "JP Morgan", "JPMC", "JP Morgan Chase"],
+            "ground_truth": [
+                "12 countries",
+                "12+",
+                "payments",
+                "modernization",
+                "global",
+            ],
+            "min_matches": 2,
+            "expected_intent": "client",
+            "category": "surgical",
+        },
+        {
+            "id": 27,
+            "query": "Tell me about Matt's early failure and experimentation approach",
+            "ground_truth": [
+                "failure is a feature",
+                "experiment",
+                "early failure",
+                "innovation",
+            ],
+            "min_matches": 2,
+            "expected_intent": "narrative",
+            "expected_story_title": "Early Failure",
+            "category": "surgical",
+        },
+        {
+            "id": 28,
+            "query": "Tell me about Matt's rapid prototyping work for client products",
+            "ground_truth": [
+                "rapid prototyping",
+                "prototype",
+                "product",
+                "sprint",
+                "validation",
+            ],
+            "min_matches": 2,
+            "expected_intent": "technical",
+            "expected_story_title": "Rapid Prototyping",
+            "category": "surgical",
+        },
+        {
+            "id": 29,
+            "query": "How did Matt establish and expand the Cloud Innovation Center in Atlanta?",
+            "expected_client": "Accenture",
+            "client_variants": ["Accenture", "CIC", "Cloud Innovation Center"],
+            "ground_truth": [
+                "0 to 150",
+                "150+",
+                "Cloud Innovation Center",
+                "CIC",
+                "Atlanta",
+            ],
+            "min_matches": 2,
+            "expected_intent": "client",
+            "category": "surgical",
+        },
+        {
+            "id": 30,
+            "query": "How did Matt scale learning and talent development at Accenture?",
+            "expected_client": "Accenture",
+            "client_variants": ["Accenture"],
+            "ground_truth": [
+                "learning",
+                "talent",
+                "development",
+                "coaching",
+                "enablement",
+            ],
+            "min_matches": 2,
+            "expected_intent": "client",
+            "expected_theme": "Talent & Enablement",
+            "category": "surgical",
+        },
+        {
+            "id": 31,
+            "query": "How did Matt align stakeholders across 3 regions at JP Morgan?",
+            "expected_client": "JP Morgan Chase",
+            "client_variants": ["JPMorgan", "JP Morgan", "JPMC", "JP Morgan Chase"],
+            "ground_truth": ["3 regions", "stakeholder", "alignment", "global"],
+            "min_matches": 2,
+            "expected_intent": "client",
+            "category": "surgical",
+        },
+    ],
 }
 
 
@@ -273,14 +364,43 @@ class EvalResult:
     details: dict[str, Any] = field(default_factory=dict)
 
 
-def check_banned_phrases(response: str) -> tuple[bool, list[str]]:
+def check_banned_phrases(response: str, query: str = "") -> tuple[bool, list[str]]:
     """Check if response contains any banned phrases.
+
+    Context-aware: If user's query contains the key words of a banned phrase
+    (in any order), that phrase is allowed in the response.
+
+    Args:
+        response: The LLM response to check
+        query: The user's original query (for context-awareness)
 
     Returns:
         Tuple of (passed, list of found banned phrases)
     """
     response_lower = response.lower()
-    found = [phrase for phrase in BANNED_PHRASES if phrase.lower() in response_lower]
+    query_lower = query.lower()
+
+    found = []
+    for phrase in BANNED_PHRASES:
+        phrase_lower = phrase.lower()
+        # Extract key words from banned phrase (3+ chars)
+        phrase_words = {w for w in phrase_lower.split() if len(w) >= 3}
+
+        # Skip if user's query contains most key words from the banned phrase
+        # This handles "align stakeholders" matching "stakeholder alignment"
+        query_words = set(query_lower.split())
+        # Check for word stems too (stakeholder/stakeholders, align/alignment)
+        query_stems = {w.rstrip("s").rstrip("ment").rstrip("ing") for w in query_words}
+        phrase_stems = {
+            w.rstrip("s").rstrip("ment").rstrip("ing") for w in phrase_words
+        }
+
+        if phrase_stems and phrase_stems.issubset(query_stems):
+            continue
+
+        if phrase_lower in response_lower:
+            found.append(phrase)
+
     return len(found) == 0, found
 
 
@@ -465,8 +585,8 @@ def evaluate_query(
             result.error = "Empty response"
             return result
 
-        # Voice check (all queries)
-        voice_pass, banned_found = check_banned_phrases(response)
+        # Voice check (all queries) - context-aware for user's query terms
+        voice_pass, banned_found = check_banned_phrases(response, query)
         result.checks["voice"] = voice_pass
         if banned_found:
             result.details["banned_phrases_found"] = banned_found
@@ -567,6 +687,36 @@ def evaluate_query(
             else:
                 # thin_theme, risk_theme - just voice check
                 result.passed = voice_pass
+
+        elif category == "surgical":
+            # Surgical precision - entity-first + specific story retrieval
+            all_checks_pass = voice_pass
+
+            # Ground truth check if specified
+            if "ground_truth" in query_spec:
+                gt_pass, match_count, matched = check_ground_truth(
+                    response,
+                    query_spec["ground_truth"],
+                    query_spec.get("min_matches", 1),
+                )
+                result.checks["ground_truth"] = gt_pass
+                result.details["ground_truth_matches"] = match_count
+                result.details["matched_phrases"] = matched
+                all_checks_pass = all_checks_pass and gt_pass
+
+            # Client attribution check if specified
+            if "expected_client" in query_spec:
+                client_pass, found, is_bolded = check_client_attribution(
+                    response,
+                    query_spec["expected_client"],
+                    query_spec.get("client_variants", []),
+                )
+                result.checks["client_attribution"] = client_pass
+                result.details["found_client"] = found
+                result.details["is_bolded"] = is_bolded
+                all_checks_pass = all_checks_pass and client_pass
+
+            result.passed = all_checks_pass
 
     except Exception as e:
         result.error = str(e)
@@ -712,6 +862,38 @@ class TestEdgeCases:
         )
 
 
+class TestSurgicalPrecision:
+    """Test Surgical Precision queries - Entity-First + Specific Story Retrieval."""
+
+    @pytest.mark.parametrize(
+        "query_spec", GOLDEN_QUERIES["surgical"], ids=lambda q: f"Q{q['id']}"
+    )
+    def test_surgical_query(self, query_spec, stories, rag_fn):
+        """Test each surgical precision query."""
+        result = evaluate_query(query_spec, rag_fn, stories)
+
+        # Always check voice
+        assert result.checks.get("voice", False), (
+            f"Voice check failed - banned phrases found: "
+            f"{result.details.get('banned_phrases_found', [])}"
+        )
+
+        # Check ground truth if specified
+        if "ground_truth" in query_spec:
+            assert result.checks.get("ground_truth", False), (
+                f"Ground truth check failed - matched {result.details.get('ground_truth_matches', 0)} "
+                f"of {query_spec['min_matches']} required. "
+                f"Matched: {result.details.get('matched_phrases', [])}"
+            )
+
+        # Check client attribution if specified
+        if "expected_client" in query_spec:
+            assert result.checks.get("client_attribution", False), (
+                f"Client attribution failed for '{query_spec['expected_client']}' - "
+                f"found: {result.details.get('found_client')}"
+            )
+
+
 class TestVoiceOnly:
     """Quick voice-only check across all queries."""
 
@@ -754,7 +936,7 @@ def generate_report(results: list[EvalResult]) -> dict:
         report["pass_rate"] = report["passed"] / report["total_queries"] * 100
 
     # Group by category
-    for category in ["narrative", "client", "intent", "edge"]:
+    for category in ["narrative", "client", "intent", "edge", "surgical"]:
         cat_results = [r for r in results if r.category == category]
         if cat_results:
             report["by_category"][category] = {
@@ -880,5 +1062,180 @@ def main():
         print("Or run: pytest tests/eval_rag_quality.py -v")
 
 
+def run_surgical_diagnostics():
+    """Run detailed diagnostics on surgical precision queries.
+
+    Captures Intent Family, Detected Entity, and Retrieval Confidence for each query.
+    """
+    import json
+    from pathlib import Path
+    from unittest.mock import MagicMock, patch
+
+    # Load stories
+    story_path = Path(__file__).parent.parent / "echo_star_stories_nlp.jsonl"
+    stories = []
+    with open(story_path) as f:
+        for line in f:
+            if line.strip():
+                stories.append(json.loads(line))
+
+    print(f"Loaded {len(stories)} stories")
+    print("\n" + "=" * 80)
+    print("SURGICAL PRECISION DIAGNOSTIC REPORT")
+    print("=" * 80)
+
+    # Setup mocks
+    mock_st = MagicMock()
+    mock_st.session_state = {}
+
+    with patch("streamlit.session_state", mock_st.session_state):
+        with patch("ui.pages.ask_mattgpt.backend_service.st", mock_st):
+            from services.semantic_router import is_portfolio_query_semantic
+            from ui.pages.ask_mattgpt.backend_service import (
+                classify_query_intent,
+                detect_entity,
+                rag_answer,
+            )
+
+            surgical_queries = GOLDEN_QUERIES["surgical"]
+
+            diagnostics = []
+
+            for query_spec in surgical_queries:
+                query = query_spec["query"]
+                query_id = query_spec["id"]
+
+                print(f"\n{'─' * 80}")
+                print(f"Q{query_id}: {query}")
+                print(f"{'─' * 80}")
+
+                # 1. Semantic Router
+                semantic_valid, semantic_score, matched_intent, intent_family = (
+                    is_portfolio_query_semantic(query)
+                )
+                print("  Semantic Router:")
+                print(f"    Valid: {semantic_valid} | Score: {semantic_score:.3f}")
+                print(f"    Intent Family: {intent_family}")
+                print(
+                    f"    Matched Intent: {matched_intent[:60]}..."
+                    if len(matched_intent) > 60
+                    else f"    Matched Intent: {matched_intent}"
+                )
+
+                # 2. Entity Detection
+                entity_match = detect_entity(query, stories)
+                print("  Entity Detection:")
+                if entity_match:
+                    print(f"    Field: {entity_match[0]} | Value: {entity_match[1]}")
+                else:
+                    print("    No entity detected")
+
+                # 3. Intent Classification (LLM)
+                query_intent = classify_query_intent(query)
+                print(f"  Intent Classification (LLM): {query_intent}")
+                expected_intent = query_spec.get("expected_intent", "N/A")
+                if query_intent != expected_intent:
+                    print(f"    ⚠️  Expected: {expected_intent}")
+
+                # 4. RAG Answer (captures confidence)
+                mock_st.session_state = {}  # Reset session state
+                filters = {
+                    "industry": "",
+                    "capability": "",
+                    "era": "",
+                    "clients": [],
+                    "domains": [],
+                    "roles": [],
+                    "tags": [],
+                }
+                rag_result = rag_answer(query, filters, stories)
+
+                # Get confidence from session state
+                confidence = mock_st.session_state.get("__ask_confidence__", "unknown")
+                top_score = mock_st.session_state.get("__pc_last_ids__", {})
+
+                print(f"  Retrieval Confidence: {confidence}")
+                if top_score:
+                    scores = list(top_score.values())[:3]
+                    print(f"    Top Pinecone Scores: {[f'{s:.3f}' for s in scores]}")
+
+                # 5. Response Analysis
+                sources = rag_result.get("sources", [])
+                print(f"  Sources Retrieved: {len(sources)}")
+                if sources:
+                    for i, src in enumerate(sources[:3]):
+                        title = src.get("Title", "Unknown")[:40]
+                        client = src.get("Client", "Unknown")
+                        print(f"    {i+1}. {title}... | Client: {client}")
+
+                # 6. Check Pass/Fail
+                result = evaluate_query(query_spec, rag_answer, stories)
+                status = "✅ PASS" if result.passed else "❌ FAIL"
+                print(f"  Result: {status}")
+                if not result.passed:
+                    print(f"    Checks: {result.checks}")
+                    if result.details.get("matched_phrases"):
+                        print(f"    Matched: {result.details['matched_phrases']}")
+                    if "ground_truth" in query_spec:
+                        print(f"    Expected: {query_spec['ground_truth']}")
+
+                diagnostics.append(
+                    {
+                        "id": query_id,
+                        "query": query,
+                        "semantic_router": {
+                            "valid": semantic_valid,
+                            "score": semantic_score,
+                            "intent_family": intent_family,
+                        },
+                        "entity_detected": entity_match,
+                        "intent_classification": query_intent,
+                        "expected_intent": expected_intent,
+                        "confidence": confidence,
+                        "sources_count": len(sources),
+                        "passed": result.passed,
+                        "checks": result.checks,
+                    }
+                )
+
+            # Summary
+            print("\n" + "=" * 80)
+            print("SUMMARY")
+            print("=" * 80)
+            passed = sum(1 for d in diagnostics if d["passed"])
+            print(f"Passed: {passed}/{len(diagnostics)}")
+
+            # Intent mismatches
+            mismatches = [
+                d
+                for d in diagnostics
+                if d["intent_classification"] != d["expected_intent"]
+            ]
+            if mismatches:
+                print(f"\nIntent Mismatches ({len(mismatches)}):")
+                for m in mismatches:
+                    print(
+                        f"  Q{m['id']}: got '{m['intent_classification']}', expected '{m['expected_intent']}'"
+                    )
+
+            # Entity detection failures
+            no_entity = [
+                d
+                for d in diagnostics
+                if d["entity_detected"] is None and d["expected_intent"] == "client"
+            ]
+            if no_entity:
+                print(f"\nMissed Entity Detection ({len(no_entity)}):")
+                for m in no_entity:
+                    print(f"  Q{m['id']}: {m['query'][:50]}...")
+
+            return diagnostics
+
+
 if __name__ == "__main__":
-    main()
+    import sys
+
+    if len(sys.argv) > 1 and sys.argv[1] == "--surgical":
+        run_surgical_diagnostics()
+    else:
+        main()

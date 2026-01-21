@@ -115,6 +115,36 @@ VALID_INTENTS = {
         "What's Matt's experience with digital transformation?",
         "How does Matt approach organizational change?",
     ],
+    # =================================================================
+    # NARRATIVE FAMILY (Jan 2026 - Sovereign Narrative Update)
+    # These intents map to Professional Narrative stories that express
+    # Matt's identity, philosophy, and career journey. Added to ensure
+    # the semantic router recognizes these biographical queries.
+    # =================================================================
+    "narrative": [
+        "Tell me about Matt's leadership journey",
+        "About Matt's leadership journey",
+        "What's Matt's career intent?",
+        "What is Matt looking for next?",
+        "Career Intent – What I'm Looking For Next",
+        "How does Matt approach complex problems?",
+        "How I Approach Complex, Ambiguous Problems",
+        "What's Matt's leadership philosophy?",
+        "How does Matt lead?",
+        "Leadership Philosophy – How I Lead",
+        "Why is Matt exploring opportunities?",
+        "Transition Story – Why I'm Exploring Opportunities",
+        "Where does Matt do his best work?",
+        "Work Philosophy – Where I Do My Best Work",
+        "What did Matt learn about risk ownership?",
+        "What I Learned About Assumptions and Risk Ownership",
+        "Why is early failure important?",
+        "Why Early Failure Is a Feature, Not a Bug, in Innovation",
+        "What did Matt learn about sustainable leadership?",
+        "What I Learned About Sustainable Leadership",
+        "Matt's career transition after Accenture",
+        "Making an Intentional Career Transition After Accenture",
+    ],
 }
 
 # Flatten for embedding generation
