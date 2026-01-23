@@ -182,10 +182,7 @@ Frame the WHY as: "Matt wanted to..." or "Matt recognized..." based on the story
 """
 
     # Build structured context with field-aware headers
-    # For Professional Narrative stories, mark summary as verbatim anchor
     summary = story.get('5PSummary', '') or story.get('5p_summary', '')
-    if story.get('Theme') == 'Professional Narrative' and summary:
-        summary = f"[[MATT'S CORE BRAND DNA - USE VERBATIM: {summary}]]"
 
     # Build field-aware context lines, omitting empty fields
     lines = []

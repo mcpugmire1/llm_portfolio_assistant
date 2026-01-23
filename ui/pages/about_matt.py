@@ -224,8 +224,8 @@ def render_about_matt():
 
 .flow-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 32px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
     margin: 24px 0;
     align-items: center;
 }
@@ -1003,7 +1003,7 @@ def render_about_matt():
     <div class="tech-grid" style="grid-template-columns: repeat(3, 1fr);">
         <div class="tech-item"><div style="font-size: 28px;">🐍</div><div style="font-size: 11px; font-weight: 600;">Python 3.11</div></div>
         <div class="tech-item"><div style="font-size: 28px;">⚡</div><div style="font-size: 11px; font-weight: 600;">Streamlit</div></div>
-        <div class="tech-item"><div style="font-size: 28px;">🤖</div><div style="font-size: 11px; font-weight: 600;">OpenAI GPT-4o-mini</div></div>
+        <div class="tech-item"><div style="font-size: 28px;">🤖</div><div style="font-size: 11px; font-weight: 600;">OpenAI GPT-4o</div></div>
         <div class="tech-item"><div style="font-size: 28px;">📌</div><div style="font-size: 11px; font-weight: 600;">Pinecone</div></div>
         <div class="tech-item"><div style="font-size: 28px;">🧠</div><div style="font-size: 11px; font-weight: 600;">text-embedding-3-small</div></div>
         <div class="tech-item"><div style="font-size: 28px;">🔀</div><div style="font-size: 11px; font-weight: 600;">GitHub Actions</div></div>
@@ -1036,45 +1036,59 @@ def render_about_matt():
         </div>
         <div class="flow-step">
             <div class="flow-num">4</div>
-            <div class="flow-step-title">RAG Pipeline</div>
-            <div class="flow-step-desc">Semantic search + GPT-4o-mini</div>
+            <div class="flow-step-title">Intent & Entity</div>
+            <div class="flow-step-desc">Query classification + entity pinning</div>
+        </div>
+        <div class="flow-step">
+            <div class="flow-num">5</div>
+            <div class="flow-step-title">RAG + GPT-4o</div>
+            <div class="flow-step-desc">XML-isolated context → generation</div>
         </div>
     </div>
     <div style="text-align: center; margin: 24px 0 16px 0;">
         <span class="secret-sauce-badge">
-            🔬 The Secret Sauce: 3-Stage Quality Pipeline
+            🔬 The Secret Sauce: 5-Stage RAG Pipeline with Context Isolation
         </span>
     </div>
-<div class="code-block"><span class="code-comment"># 3-Stage Quality Pipeline</span>
+<div class="code-block"><span class="code-comment"># 5-Stage RAG Pipeline</span>
 <span class="code-comment"># Stage 1: Rules-based nonsense detection</span>
 def check_rules_filter(query: str) -&gt; bool:
-    <span class="code-string">"Fast rejection of obvious non-portfolio queries"</span>
-    blocked_patterns = [<span class="code-string">"weather"</span>, <span class="code-string">"stock price"</span>, <span class="code-string">"recipe"</span>]
-    return not any(p in query.lower() for p in blocked_patterns)
+    <span class="code-string">"Fast rejection of non-portfolio queries (regex patterns)"</span>
+    return not matches_blocked_patterns(query)
 
 <span class="code-comment"># Stage 2: Semantic router intent classification</span>
-def classify_intent(query: str) -&gt; dict:
-    <span class="code-string">"LLM-based intent detection with confidence scoring"</span>
-    return semantic_router.route(query)  <span class="code-comment"># Returns intent + score</span>
+def classify_intent(query: str) -&gt; tuple:
+    <span class="code-string">"Embedding-based intent routing with confidence scoring"</span>
+    return router.route(query)  <span class="code-comment"># → (intent_family, score)</span>
 
 <span class="code-comment"># Stage 3: Confidence gating on Pinecone results</span>
-def confidence_gate(results: list, threshold: float = 0.25) -&gt; list:
-    <span class="code-string">"Only return results above confidence threshold"</span>
-    return [r for r in results if r.score &gt;= threshold]
+def confidence_gate(results: list) -&gt; list:
+    <span class="code-string">"Only surface results above semantic confidence threshold"</span>
+    return [r for r in results if r.pc_score &gt;= CONFIDENCE_HIGH]
 
-<span class="code-comment"># Client Diversity Algorithm - No repetitive results</span>
-def diversify_results(stories: list, max_per_client: int = 2) -&gt; list:
-    <span class="code-string">"Ensure variety across different clients/industries"</span>
-    seen = {}
-    return [s for s in stories
-            if seen.setdefault(s[<span class="code-string">'client'</span>], 0) &lt; max_per_client
-            and not seen.update({s[<span class="code-string">'client'</span>]: seen[s[<span class="code-string">'client'</span>]] + 1})]
+<span class="code-comment"># Stage 4: Entity detection &amp; pinning</span>
+def detect_and_pin_entity(query: str, results: list) -&gt; list:
+    <span class="code-string">"Detect client/division entities; pin matching story to #1"</span>
+    entity = extract_entity(query)  <span class="code-comment"># NER on known clients</span>
+    if entity:
+        pinned = find_best_match(results, entity)
+        return [pinned] + [r for r in results if r != pinned]
+    return results
 
-<span class="code-comment"># Behavioral Query Detection for Interview Prep</span>
-def detect_behavioral_query(query: str) -&gt; bool:
-    <span class="code-string">"Recognize STAR-format interview questions"</span>
-    signals = [<span class="code-string">"tell me about a time"</span>, <span class="code-string">"difficult"</span>, <span class="code-string">"challenge"</span>, <span class="code-string">"conflict"</span>]
-    return any(signal in query.lower() for signal in signals)</div>
+<span class="code-comment"># Stage 5: Intent-aware ranking</span>
+def rank_by_intent(query_intent: str, results: list) -&gt; list:
+    <span class="code-string">"Narrative queries trust Pinecone; client queries add diversity"</span>
+    if query_intent == <span class="code-string">"narrative"</span>:
+        return sorted(results, key=lambda s: s.pc_score, reverse=True)
+    return diversify_by_client(results)
+
+<span class="code-comment"># XML Context Isolation for GPT-4o generation</span>
+def build_context(ranked_stories: list) -&gt; str:
+    <span class="code-string">"Wrap stories in XML tags to prevent cross-story bleed"</span>
+    ctx = [f<span class="code-string">"&lt;primary_story&gt;\n{ranked_stories[0]}\n&lt;/primary_story&gt;"</span>]
+    for i, s in enumerate(ranked_stories[1:], 2):
+        ctx.append(f<span class="code-string">"&lt;supporting_story index='{i}'&gt;\n{s}\n&lt;/supporting_story&gt;"</span>)
+    return <span class="code-string">"\n"</span>.join(ctx)</div>
 </div>
     """,
         unsafe_allow_html=True,
@@ -1103,20 +1117,21 @@ def detect_behavioral_query(query: str) -&gt; bool:
         </ul>
     </div>
     <div class="detail-card">
-        <h4>🔍 3-Stage Quality Pipeline</h4>
+        <h4>🔍 5-Stage RAG Pipeline</h4>
         <ul>
             <li><strong>Stage 1:</strong> Rules-based nonsense detection</li>
             <li><strong>Stage 2:</strong> Semantic router intent classification</li>
             <li><strong>Stage 3:</strong> Confidence gating (threshold: 0.25)</li>
-            <li><strong>Diversity:</strong> Max 2 stories per client</li>
+            <li><strong>Stage 4:</strong> Entity detection & story pinning</li>
+            <li><strong>Stage 5:</strong> Intent-aware ranking (narrative vs client)</li>
         </ul>
     </div>
     <div class="detail-card">
-        <h4>💬 RAG with GPT-4o-mini</h4>
+        <h4>💬 RAG with GPT-4o</h4>
         <ul>
-            <li><strong>System Prompt:</strong> Defines Agy's personality & voice</li>
-            <li><strong>Context Injection:</strong> Top 3-5 stories as grounding</li>
-            <li><strong>Response Structure:</strong> Answer → Example → Invitation</li>
+            <li><strong>Context Isolation:</strong> XML tags prevent cross-story bleed</li>
+            <li><strong>Texture Preservation:</strong> Quotes distinctive phrases verbatim</li>
+            <li><strong>Synthesis Mode:</strong> Multi-theme responses for broad queries</li>
             <li><strong>Source Citations:</strong> Links to full STAR stories</li>
         </ul>
     </div>

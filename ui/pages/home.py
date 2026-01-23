@@ -10,9 +10,12 @@ from ui.components.footer import render_footer
 from ui.components.hero import render_hero, render_section_title, render_stats_bar
 
 
-def render_home_page():
+def render_home_page(stories: list[dict] | None = None):
     """
     Render the homepage with hero, stats, category cards, and footer.
+
+    Args:
+        stories: Full story corpus from JSONL (for dynamic counts in category cards).
 
     Structure:
     1. Hero section with logo and CTAs
@@ -31,8 +34,8 @@ def render_home_page():
     # Section title
     render_section_title("What would you like to explore?")
 
-    # Category cards
-    render_category_cards()
+    # Category cards (with dynamic counts from stories)
+    render_category_cards(stories or [])
 
     # === ADD FOOTER ===
 

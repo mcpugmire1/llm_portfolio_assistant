@@ -6,6 +6,7 @@
 - [Executive Summary](#executive-summary)
 - [System Overview](#system-overview)
   - [Current Architecture](#current-architecture)
+  - [Startup Sequence](#startup-sequence-apppy)
 
 ### 📚 History & Context
 - [Refactoring History](#refactoring-history)
@@ -22,6 +23,21 @@
   - [Data Refresh Workflow](#data-refresh-workflow)
   - [Environment Configuration](#environment-configuration)
   - [Deployment](#deployment)
+
+### 📋 Data Governance
+- [Data Governance & Master Source](#data-governance--master-source)
+  - [Principle](#principle)
+  - [Hybrid Sovereignty Model](#hybrid-sovereignty-model)
+  - [January 2026 Sovereignty Patterns](#january-2026-sovereignty-patterns)
+    - [Dynamic Identity (MATT_DNA)](#1-dynamic-identity-matt_dna)
+    - [Multi-Field Entity Gate](#2-multi-field-entity-gate)
+    - [UI Hydration](#3-ui-hydration)
+  - [Master Data Source](#master-data-source)
+  - [Ingestion Workflow](#ingestion-workflow)
+  - [What Derives from JSONL](#what-derives-from-jsonl-at-runtime)
+  - [Curated Content](#curated-content-intentionally-static)
+  - [Anti-Patterns](#anti-patterns-dont-do-this)
+  - [Warning: No Manual JSONL Surgery](#️-warning-no-manual-jsonl-surgery)
 
 ### 🎨 CSS Architecture
 - [CSS Scoping Patterns](#css-scoping-patterns)
@@ -44,7 +60,7 @@
 **Project:** MattGPT Portfolio Assistant - AI-powered career story search and chat interface
 **Tech Stack:** Streamlit, OpenAI GPT-4o-mini, Pinecone vector DB, Python 3.11+
 **Data Corpus:** 130+ STAR-formatted transformation project stories
-**Last Updated:** January 20, 2026
+**Last Updated:** January 22, 2026
 
 ### Key Achievements
 
@@ -65,7 +81,14 @@
 - 6 shared utility modules (27 KB)
 - Zero circular dependencies
 
-### Current State (December 2025)
+### Current State (January 2026)
+
+**RAG Eval Quality Sprint (Jan 21-22, 2026):**
+- 100% eval pass rate (31/31 queries) — up from 71% baseline
+- Multi-Field Entity Gate: searches across 5 entity fields via Pinecone `$or`
+- Dynamic MATT_DNA: client names derived from JSONL (Single Source of Truth)
+- UI Hydration: all landing page counts derived dynamically from story data
+- Removed phantom industries from wireframe leftovers
 
 **Ask MattGPT Modular Architecture:**
 - Landing view with capability cards and sample queries
@@ -83,7 +106,7 @@
 
 ### What This Document Contains
 
-1. **System Overview:** Current file structure, components, services (as of Dec 2025)
+1. **System Overview:** Current file structure, components, services (as of Jan 2026)
 2. **Data Pipeline:** Excel → JSONL → Embeddings → Pinecone → RAG
 3. **CSS Architecture:** Scoping patterns, emotion-cache strategies, dark mode
 4. **Mobile Roadmap:** Known issues, breakpoint strategy, implementation phases
@@ -176,6 +199,51 @@ llm_portfolio_assistant/
 └── .streamlit/
     └── config.toml                 # Streamlit theme config
 
+
+---
+
+### Startup Sequence (`app.py`)
+
+The application initialization order is critical—later steps depend on earlier outputs:
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│  1. load_star_stories(DATA_FILE)                             │
+│     - Reads echo_star_stories_nlp.jsonl                      │
+│     - Returns STORIES list (130+ dicts)                      │
+│     - Enforces stable IDs, normalizes list fields            │
+└──────────────────────────────────────────────────────────────┘
+                              ↓
+┌──────────────────────────────────────────────────────────────┐
+│  2. initialize_vocab(STORIES)                                │
+│     - Builds corpus vocabulary for search scoring            │
+│     - Lives in: services/rag_service.py                      │
+└──────────────────────────────────────────────────────────────┘
+                              ↓
+┌──────────────────────────────────────────────────────────────┐
+│  3. sync_portfolio_metadata(STORIES)                         │
+│     - Derives SYNTHESIS_THEMES from story Theme fields       │
+│     - Derives _KNOWN_CLIENTS from story Client fields        │
+│     - Generates MATT_DNA prompt via generate_dynamic_dna()   │
+│     - Lives in: ui/pages/ask_mattgpt/backend_service.py      │
+└──────────────────────────────────────────────────────────────┘
+                              ↓
+┌──────────────────────────────────────────────────────────────┐
+│  4. build_facets(STORIES)                                    │
+│     - Extracts filter options (industries, capabilities,     │
+│       clients, domains, roles, tags)                         │
+│     - Used by Explore Stories filter widgets                  │
+└──────────────────────────────────────────────────────────────┘
+                              ↓
+┌──────────────────────────────────────────────────────────────┐
+│  5. Page Rendering                                           │
+│     - Routes to active_tab page                              │
+│     - Landing pages receive STORIES for hydration            │
+│     - Ask MattGPT uses synced metadata for RAG              │
+└──────────────────────────────────────────────────────────────┘
+```
+
+**Key Invariant:** Steps 1-3 run on every Streamlit rerun but are idempotent. `sync_portfolio_metadata()` regenerates globals each time, ensuring any JSONL change is picked up without restart.
 
 ---
 
@@ -699,6 +767,73 @@ This section defines the **job, rules, and constraints** for each retrieval comp
 - **Exclusions:** "Multiple Clients", "Independent", "Career Narrative" (too generic to filter)
 - **Returns:** `(field_name, entity_value)` tuple or `None`
 
+#### Multi-Field Entity Gate (January 2026)
+- **Job:** Search across ALL entity fields when entity detected, not just the primary field
+- **Lives in:** `services/pinecone_service.py:189-216`
+- **Implementation:** Uses Pinecone `$or` operator to search across 5 fields simultaneously
+- **Fields searched:** `client`, `employer`, `division`, `project`, `place`
+- **Casing rules:**
+  - **Lowercase fields:** `division`, `employer`, `project`, `place` → `.lower()` applied
+  - **PascalCase fields:** `client` → preserve original casing
+- **Example:** Query "Accenture work" searches:
+  ```python
+  {"$or": [
+      {"client": {"$eq": "Accenture"}},
+      {"employer": {"$eq": "accenture"}},
+      {"division": {"$eq": "accenture"}},
+      {"project": {"$eq": "accenture"}},
+      {"place": {"$eq": "accenture"}}
+  ]}
+  ```
+- **Why:** Fixes "entity blind spot" where stories with `Client="Confidential"` but `Employer="Accenture"` weren't found
+
+#### Entity Normalization Map
+
+Common aliases normalized to canonical JSONL values before entity matching.
+
+**Lives in:** `backend_service.py:315-323` (`ENTITY_NORMALIZATION` constant)
+
+| Alias (user input) | Normalized Value | Field |
+|---------------------|-----------------|-------|
+| `jpmorgan`, `jp morgan`, `jpmorgan chase` | `JP Morgan Chase` | Client |
+| `amex` | `American Express` | Client |
+| `at&t mobility` | `AT&T Mobility` | Client |
+| `cic` | `Cloud Innovation Center` | Division |
+| `liquid studio` | `Atlanta Liquid Studio` | Division |
+
+**Matching Logic:** Aliases checked first (case-insensitive substring). If alias found, the normalized value is used to identify the correct field from story data. Falls back to `Client` if entity not found in any field.
+
+#### Excluded Entities & Clients
+
+Two related constants prevent overly generic values from triggering entity filters or appearing in UI:
+
+**`EXCLUDED_ENTITIES`** — Values too generic to filter on in Pinecone queries.
+**Lives in:** `backend_service.py:302-312`
+
+| Value | Reason |
+|-------|--------|
+| `Multiple Clients` | Would match too broadly |
+| `Multiple Financial Services Clients` | Same |
+| `Independent` | Personal projects, not a real client |
+| `Career Narrative` | Meta-content, not a client |
+| `Sabbatical` | Not a work engagement |
+| `Various`, `N/A`, `""`, `None` | Empty/placeholder values |
+
+**`EXCLUDED_CLIENTS` / `_EXCLUDED_CLIENTS`** — Values excluded from UI counts and pills.
+**Lives in:** `backend_service.py:44-49`, `banking_landing.py:16-22`, `category_cards.py:17-23`
+
+| Value | Appears In |
+|-------|------------|
+| `Independent` | All |
+| `Career Narrative` | All |
+| `Multiple Clients` | All |
+| `Personal` | backend_service.py |
+| `Various` | All |
+| `Multiple Financial Services Clients` | Landing pages |
+| `Financial Services Client` | Landing pages |
+
+**Note:** These constants are defined separately in each file. If a new exclusion is needed, update all locations.
+
 ### Layer 3: Retrieval
 
 #### Confidence Gating
@@ -763,7 +898,16 @@ This section defines the **job, rules, and constraints** for each retrieval comp
 - 4 synthesis closings ("Which pattern would you like to explore?", etc.)
 - 6 focus angles: human impact, methodology, scale, leadership, outcomes, innovation
 
-**MATT_DNA Ground Truth** (injected into every prompt):
+**MATT_DNA Ground Truth** (dynamically generated from JSONL — January 2026):
+
+The `MATT_DNA` grounding prompt is now generated dynamically via `generate_dynamic_dna()` in `backend_service.py:160-273`. Client names are derived from the JSONL story data, ensuring the prompt never drifts from the source of truth.
+
+**Dynamic Elements (derived from JSONL):**
+- **Banking clients:** Derived from stories where `Industry = "Financial Services / Banking"`
+- **Telecom clients:** Derived from stories where `Industry = "Telecommunications"`
+- **Transport clients:** Derived from stories where `Industry = "Transportation & Logistics"`
+
+**Static Elements (curated):**
 ```
 Identity: "I build what's next, modernize what's not, and grow teams along the way."
 
@@ -780,10 +924,6 @@ Career Arc: Software Engineer → Solution Architect → Director → CIC Leader
 6. Emerging Tech — GenAI/ML exploration with production value
 7. Professional Narrative — philosophy, leadership identity
 
-Named Clients: American Express, AT&T, Capital One, Fiserv, HSBC,
-              JPMorgan Chase, Norfolk Southern, RBC
-NOT Matt's Clients: Kaiser, Google, Amazon, Microsoft, Meta, MetLife
-
 GROUNDING RULES:
 1. ONLY cite clients/projects/metrics from retrieved stories
 2. If unsure, say "In one engagement..." instead of naming client
@@ -791,6 +931,8 @@ GROUNDING RULES:
 4. For revenue impact, emphasize delivery excellence (not sales)
 5. For synthesis, lead with 7 Themes + diverse client examples
 ```
+
+**Why Dynamic:** Previously had hardcoded "JPMorgan, Capital One, Fiserv" which drifted from JSONL canonical names ("JP Morgan Chase"). Now uses Single Source of Truth pattern.
 
 **Banned Corporate Filler Phrases:**
 - "meaningful outcomes" → use actual outcomes
@@ -910,6 +1052,46 @@ if "prefilter_industry" in st.session_state:
 
 **Key Rule:** Set prefilters BEFORE the target page renders, then `pop()` to consume them. Never modify widget-bound session state after the widget renders.
 
+### UI Hydration Pattern (January 2026)
+
+Landing pages now receive the full `stories` list and compute counts dynamically at render time. This ensures metrics never drift from the JSONL source of truth.
+
+**Updated Function Signatures:**
+```python
+# app.py passes STORIES to all landing pages
+render_home_page(STORIES)
+render_banking_landing(STORIES)
+render_cross_industry_landing(STORIES)
+
+# Each landing page derives counts from stories
+def render_banking_landing(stories: list[dict]):
+    banking_stories = [s for s in stories if s.get("Industry") == "Financial Services / Banking"]
+    total_projects = len(banking_stories)
+
+    # Client counts with exclusions
+    client_counter = Counter(s.get("Client", "Unknown") for s in banking_stories
+                             if s.get("Client") not in _EXCLUDED_CLIENTS)
+    named_clients = [(client, count) for client, count in client_counter.most_common()]
+    num_clients = len(named_clients)
+
+    # Capability areas
+    capabilities = set(s.get("Solution / Offering", "") for s in banking_stories
+                       if s.get("Solution / Offering"))
+    num_capabilities = len(capabilities)
+```
+
+**Hydrated Pages:**
+| File | Hydrated Metrics |
+|------|------------------|
+| `banking_landing.py` | Project count, client pills with counts, capability areas |
+| `cross_industry_landing.py` | Project count, industry pills, capability areas |
+| `category_cards.py` | Banking/Cross-industry project counts, top 3 client pills |
+| `home.py` | Passes STORIES to category_cards |
+
+**Excluded Clients:** "Career Narrative", "Independent", "Multiple Clients" (excluded from counts and pills)
+
+**Why:** Previously had hardcoded counts like "12 projects" that drifted as JSONL changed. Now counts are always accurate.
+
 ### Explore Stories Search Architecture
 
 Explore Stories (`ui/pages/explore_stories.py`) has a **3-path search architecture** to minimize Pinecone API calls:
@@ -967,9 +1149,10 @@ LAST_QUERY = "__explore_last_query__"         # Query that produced cache
 ### Known Limitations
 
 1. **Synthesis + specific topic:** "Tell me about Matt's rapid prototyping work" classified as synthesis but should find the specific rapid prototyping story. Current workaround: synthesis now uses user query embedding.
-2. **Multi-client stories:** Stories with `Client="Multiple Clients"` won't match entity filters. Workaround: check Employer/Division fields.
+2. ~~**Multi-client stories:** Stories with `Client="Multiple Clients"` won't match entity filters.~~ **FIXED (Jan 2026):** Multi-Field Entity Gate now searches across 5 fields (client, employer, division, project, place) using Pinecone `$or` operator.
 3. **Ground truth fidelity:** LLM paraphrases instead of quoting verbatim despite `[[CORE BRAND DNA]]` markers.
 4. **Deprecated documentation:** `mattgpt_system_prompt.md` documents the original "MattGPT" persona (pre-Agy). The current Agy voice is documented in this file under Component Contracts → Agy Voice Generator.
+5. **LLM stochasticity:** Eval may show occasional failures due to LLM response variability. Re-running typically passes. Semantic similarity scoring would address this (see BACKLOG.md MATTGPT-004).
 
 ---
 
@@ -1291,8 +1474,10 @@ Defined in `ui/styles/global_styles.py`. Use these instead of hardcoding colors.
 | `eval_rag_quality.py` | RAG quality evaluation against ground truth |
 | `test_agy_behavior.py` | Agy response behavior tests |
 
+**Current Status (January 22, 2026):** 100% pass rate (31/31 queries)
+
 **eval_rag_quality.py:**
-- Runs 25 test queries across 4 categories: narrative, client, intent, edge
+- Runs 31 test queries across 5 categories: narrative, client, intent, edge, synthesis
 - Checks: voice consistency, ground truth matches, client attribution, client bolding
 - Outputs JSON results to `tests/eval_results/`
 
@@ -1300,9 +1485,16 @@ Defined in `ui/styles/global_styles.py`. Use these instead of hardcoding colors.
 | Category | Count | Checks |
 |----------|-------|--------|
 | `narrative` | 10 | Voice + ground_truth phrases |
-| `client` | 6 | Voice + client attribution + bolding |
-| `intent` | 5 | Voice + synthesis mode detection |
+| `client` | 8 | Voice + client attribution + bolding |
+| `synthesis` | 5 | Voice + synthesis mode detection + theme coverage |
+| `intent` | 4 | Voice + intent classification |
 | `edge` | 4 | Voice + client attribution |
+
+**Eval History:**
+| Date | Pass Rate | Changes |
+|------|-----------|---------|
+| Jan 21, 2026 | 71% (22/31) | Baseline after sovereign narrative sync |
+| Jan 22, 2026 | 100% (31/31) | Multi-field entity gate + dynamic DNA |
 
 **Running Eval:**
 ```bash
@@ -1410,7 +1602,7 @@ def semantic_search(query: str, top_k: int = 10, filters: dict = None):
     1. Embed query with OpenAI
     2. Query Pinecone index
     3. Return top_k results with scores
-    4. Apply optional metadata filters
+    4. Apply optional metadata filters (including multi-field entity gate)
     """
 
 def get_pinecone_index():
@@ -1424,11 +1616,21 @@ def get_pinecone_index():
 
 **Metadata Filters:**
 ```python
+# Standard filters
 filters = {
     "industry": "Financial Services",
     "domain": "Platform Engineering"
 }
+
+# Entity filter (January 2026) - uses $or across 5 fields
+filters = {
+    "entity_field": "client",
+    "entity_value": "Accenture"
+}
+# Translates to: {"$or": [{client: "Accenture"}, {employer: "accenture"}, ...]}
 ```
+
+**Multi-Field Entity Gate:** When `entity_field` and `entity_value` are provided, the service builds a Pinecone `$or` clause that searches across `client`, `employer`, `division`, `project`, and `place` fields simultaneously. See Component Contracts → Multi-Field Entity Gate for details.
 
 ---
 
@@ -1566,6 +1768,179 @@ openai>=1.0.0
 pinecone-client>=2.0.0
 python-dotenv>=1.0.0
 pandas>=2.0.0
+```
+
+---
+
+## Data Governance & Master Source
+
+### Principle
+
+The **Excel master file** (`MPugmire - STAR Stories - [DATE].xlsx`) owned by the user is the canonical source for all portfolio data. The JSONL file is a derived artifact. No component should hardcode values that exist in the data.
+
+### Hybrid Sovereignty Model
+
+MattGPT uses a **Hybrid Sovereignty** approach that balances two complementary strategies:
+
+| Strategy | Purpose | Examples |
+|----------|---------|----------|
+| **Dynamic RAG Grounding** | Accuracy — metrics, counts, and facts derived from data | Client names in MATT_DNA, project counts on landing pages, entity filters |
+| **Curated UI** | Narrative control — intentional framing of user experience | Suggested questions on landing page, About Matt timeline, capability card copy |
+
+**Why Hybrid?**
+- **Pure dynamic** risks losing narrative voice (e.g., auto-generated questions might not showcase strengths)
+- **Pure curated** risks data drift (e.g., hardcoded "12 projects" becomes wrong when JSONL grows)
+- **Hybrid** gets accuracy where it matters (facts) + control where it matters (story)
+
+**Decision Framework:**
+| Content Type | Approach | Rationale |
+|--------------|----------|-----------|
+| Counts, metrics, client names | **Dynamic** | Must match reality |
+| Suggested questions, CTAs | **Curated** | Showcase specific capabilities |
+| Capability/industry pills | **Dynamic** | Derived from actual story distribution |
+| About page timeline | **Curated** | Resume narrative, not raw data |
+| RAG grounding prompt | **Dynamic** | Client names from JSONL prevent hallucination |
+
+### January 2026 Sovereignty Patterns
+
+Three patterns implement the Dynamic RAG Grounding half of Hybrid Sovereignty:
+
+#### 1. Dynamic Identity (MATT_DNA)
+
+The `MATT_DNA` grounding prompt—injected into every LLM call—is now rendered at runtime from JSONL data rather than hardcoded.
+
+| Element | Source | Example |
+|---------|--------|---------|
+| Banking clients | Stories where `Industry = "Financial Services / Banking"` | JP Morgan Chase, Capital One, Fiserv |
+| Telecom clients | Stories where `Industry = "Telecommunications"` | AT&T |
+| Transport clients | Stories where `Industry = "Transportation & Logistics"` | Norfolk Southern |
+
+**Implementation:** `backend_service.py:generate_dynamic_dna()` (lines 160-273)
+
+**Why:** Previously hardcoded "JPMorgan" drifted from JSONL canonical name "JP Morgan Chase". Dynamic derivation ensures the LLM never hallucinates client names that don't exist in the data.
+
+#### 2. Multi-Field Entity Gate
+
+When a user asks about an entity (e.g., "Accenture work"), the system now searches across **five metadata fields** using Pinecone's `$or` operator—not just the `client` field.
+
+| Field | Casing | Example Match |
+|-------|--------|---------------|
+| `client` | PascalCase | `"Accenture"` |
+| `employer` | lowercase | `"accenture"` |
+| `division` | lowercase | `"cloud innovation center"` |
+| `project` | lowercase | `"accenture"` |
+| `place` | lowercase | `"accenture"` |
+
+**Implementation:** `pinecone_service.py:189-216`
+
+**Why:** Closed the "entity blind spot" where stories with `Client="Confidential Healthcare Provider"` but `Employer="Accenture"` weren't found for Accenture queries. The CIC stories were particularly affected since many had `Division="Cloud Innovation Center"` but generic client names.
+
+#### 3. UI Hydration
+
+Landing pages now receive the full `stories` list and compute counts dynamically at render time—no hardcoded metrics.
+
+| Page | Hydrated Values |
+|------|-----------------|
+| `banking_landing.py` | Project count, client pills with counts, capability count |
+| `cross_industry_landing.py` | Project count, industry pills, capability count |
+| `category_cards.py` | Banking/Cross-industry counts, top 3 client pills |
+
+**Implementation:** All landing pages accept `stories: list[dict]` parameter; `app.py` passes `STORIES` to each.
+
+**Why:** Previously had hardcoded "12 projects" that drifted as JSONL grew. Removed phantom industries ("Manufacturing", "Retail & Consumer Goods") that were wireframe leftovers with zero stories.
+
+**See also:**
+- [MATT_DNA Ground Truth](#matt_dna-ground-truth-dynamically-generated-from-jsonl--january-2026) — Full prompt template
+- [Multi-Field Entity Gate](#multi-field-entity-gate-january-2026) — Component contract details
+- [UI Hydration Pattern](#ui-hydration-pattern-january-2026) — Code examples
+
+### Master Data Source
+
+| Artifact | Role | Owner |
+|----------|------|-------|
+| Excel master file | **Source of truth** — all story content, metadata, tags | User (Matt) |
+| `echo_star_stories_nlp.jsonl` | Derived artifact — ingested from Excel | Generated |
+| Pinecone index | Derived artifact — embeddings from JSONL | Generated |
+| UI counts, pills, prompts | Derived at runtime — from JSONL | Dynamic |
+
+### Ingestion Workflow
+
+Data flows one direction: **Excel → JSONL → Pinecone → App**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  1. USER updates Excel master file                              │
+│     - Add/edit stories, metadata, tags                          │
+│     - Schema changes (new columns, renamed fields)              │
+└─────────────────────────────────────────────────────────────────┘
+                              ↓
+┌─────────────────────────────────────────────────────────────────┐
+│  2. Copy Excel to environment                                   │
+│     - Place in project root                                     │
+└─────────────────────────────────────────────────────────────────┘
+                              ↓
+┌─────────────────────────────────────────────────────────────────┐
+│  3. Run ingestion pipeline                                      │
+│     python generate_jsonl_from_excel.py                         │
+│     python generate_public_tags.py      # Optional enrichment   │
+│     python build_custom_embeddings.py   # Upsert to Pinecone    │
+└─────────────────────────────────────────────────────────────────┘
+                              ↓
+┌─────────────────────────────────────────────────────────────────┐
+│  4. echo_star_stories_nlp.jsonl is regenerated                  │
+│     - Previous JSONL is backed up (.bak)                        │
+│     - All downstream consumers see updated data                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### What Derives from JSONL (at Runtime)
+
+| Component | Derived Values |
+|-----------|----------------|
+| `MATT_DNA` prompt | Client names grouped by industry |
+| `banking_landing.py` | Project count, client pills with counts, capability areas |
+| `cross_industry_landing.py` | Project count, industry pills, capability areas |
+| `category_cards.py` | Banking/Cross-industry project counts, top 3 client pills |
+| Pinecone metadata | All searchable fields (client, industry, theme, etc.) |
+| Entity normalization | Alias map derived from unique Client/Employer values |
+
+### Curated Content (Intentionally Static)
+
+Some UI content is intentionally curated and NOT derived from data:
+
+| File | Content | Reason |
+|------|---------|--------|
+| `landing_view.py` | Suggested questions | Curated UX showcase, tied to eval queries |
+| `about_matt.py` | Timeline, company names | Curated CV/resume presentation |
+
+### Anti-Patterns (Don't Do This)
+
+- ❌ Hardcoding "12 projects" when JSONL count changes
+- ❌ Listing "JPMorgan" when JSONL says "JP Morgan Chase"
+- ❌ Adding phantom industries/capabilities not in the data
+- ❌ Manual JSONL edits that will be overwritten on next ingestion
+
+### ⚠️ WARNING: No Manual JSONL Surgery
+
+**Do not perform manual metadata surgery on the JSONL file.**
+
+Schema or tagging changes (like adding "AI/ML" tags to existing rows, renaming fields, or fixing typos) **must be implemented in the Excel master** to prevent data drift during the next ingestion cycle.
+
+**Why this matters:**
+1. The next `generate_jsonl_from_excel.py` run will overwrite manual changes
+2. JSONL and Excel will diverge, causing confusion
+3. Pinecone embeddings may not match JSONL metadata
+4. Debugging becomes impossible ("why does prod differ from my Excel?")
+
+**Correct workflow for metadata changes:**
+```bash
+# 1. Edit Excel master (add AI/ML tag to stories)
+# 2. Re-run ingestion
+python generate_jsonl_from_excel.py
+python build_custom_embeddings.py
+
+# 3. Verify changes
+grep "AI/ML" echo_star_stories_nlp.jsonl | wc -l
 ```
 
 ---
@@ -1809,7 +2184,8 @@ Once mobile responsiveness is solid, consider:
 1. ~~Complete Phase 4 cleanup~~ ✅ Done (Phase 5 completed Nov 7, 2025)
 2. ~~Add docstrings and type hints~~ (Partially done)
 3. ~~Set up pre-commit hooks~~ ✅ Done (black, ruff, mypy)
-4. **NEW:** Begin mobile responsiveness Phase 1 (critical fixes)
+4. ~~Begin mobile responsiveness Phase 1~~ ✅ Done
+5. **NEW:** Landing Page Capability Surfacing Redesign (MATTGPT-012) - UX design task for visual capability browsing
 
 ### Medium-term (Next month)
 4. Add unit tests for components

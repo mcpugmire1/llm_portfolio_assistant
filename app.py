@@ -22,6 +22,7 @@ from dotenv import load_dotenv
 from config.debug import DEBUG
 from services.rag_service import initialize_vocab
 from ui.components.navbar import render_navbar
+from ui.pages.ask_mattgpt.backend_service import sync_portfolio_metadata
 
 # Local imports - components
 from ui.pages.home import render_home_page
@@ -188,6 +189,10 @@ if not STORIES:
 # Initialize search vocabulary at startup
 initialize_vocab(STORIES)
 
+# Sync portfolio metadata (MATT_DNA, SYNTHESIS_THEMES) from story data
+# This ensures grounding prompt and themes never drift from JSONL
+sync_portfolio_metadata(STORIES)
+
 
 # =========================
 # Session state
@@ -251,6 +256,29 @@ if 'story' in st.query_params:
 # =========================
 
 
+def _clear_explore_state():
+    """Reset all Explore Stories state for a fresh slate on navigation away."""
+    st.session_state.pop("return_to_landing", None)
+    st.session_state["filters"] = {
+        "personas": [],
+        "clients": [],
+        "domains": [],
+        "roles": [],
+        "tags": [],
+        "q": "",
+        "has_metric": False,
+        "era": "",
+        "industry": "",
+        "capability": "",
+    }
+    st.session_state["page_offset"] = 0
+    st.session_state["active_story"] = None
+    # Clear cached search results
+    st.session_state.pop("__last_search_results__", None)
+    st.session_state.pop("__last_search_confidence__", None)
+    st.session_state.pop("__last_search_query__", None)
+
+
 def build_facets(stories):
     """Build filter option lists from story data using raw JSONL field names."""
     # Primary filters (NEW for Phase 4 redesign)
@@ -285,21 +313,24 @@ industries, capabilities, clients, domains, roles, tags, personas_all = build_fa
 )
 
 if st.session_state["active_tab"] == "Home":
+    _clear_explore_state()
     from ui.pages.home import render_home_page
 
-    render_home_page()
+    render_home_page(STORIES)
 
 # --- BANKING LANDING ---
 elif st.session_state["active_tab"] == "Banking":
+    _clear_explore_state()
     from ui.pages.banking_landing import render_banking_landing
 
-    render_banking_landing()
+    render_banking_landing(STORIES)
 
 # --- CROSS-INDUSTRY LANDING ---
 elif st.session_state["active_tab"] == "Cross-Industry":
+    _clear_explore_state()
     from ui.pages.cross_industry_landing import render_cross_industry_landing
 
-    render_cross_industry_landing()
+    render_cross_industry_landing(STORIES)
 
 # --- REFACTORED STORIES ---
 elif st.session_state["active_tab"] == "Explore Stories":
@@ -318,12 +349,14 @@ elif st.session_state["active_tab"] == "Explore Stories":
 
 # --- ASK MATTGPT ---
 elif st.session_state["active_tab"] == "Ask MattGPT":
+    _clear_explore_state()
     from ui.pages.ask_mattgpt import render_ask_mattgpt
 
     render_ask_mattgpt(STORIES)
 
 # --- ABOUT ---
 elif st.session_state["active_tab"] == "About Matt":
+    _clear_explore_state()
     from ui.pages.about_matt import render_about_matt
 
     render_about_matt()

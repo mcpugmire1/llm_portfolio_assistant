@@ -1,6 +1,7 @@
 """Pinecone vector database service."""
 
 import os
+from typing import Any
 
 import streamlit as st
 from dotenv import load_dotenv
@@ -180,28 +181,44 @@ def pinecone_semantic_search(
         return None
 
     # Build filter for Pinecone
-    pc_filter = {}
+    pc_filter: dict[str, Any] = {}
     if filters.get("domains"):
         pc_filter["domain"] = {"$in": filters["domains"]}
     if filters.get("clients"):
         pc_filter["client"] = {"$in": filters["clients"]}
 
-    # Entity-first sovereignty: if entity detected, add as filter
+    # Entity-first sovereignty: if entity detected, search across ALL entity fields
+    # Uses Pinecone $or operator to check client, employer, division, project, place
+    # This catches cases like Accenture stories where Client="Confidential Healthcare"
+    # but Employer="Accenture" (Multi-Field Entity Blind Spot fix)
+    #
     # Pinecone metadata field/value case rules:
     #   - Field names: always lowercase
-    #   - Values: 'division' is lowercase, 'client' keeps original case
-    entity_field = filters.get("entity_field")
+    #   - Values: 'division', 'employer', 'project', 'place' are lowercase
+    #   - Values: 'client' keeps PascalCase
+    entity_field = filters.get(
+        "entity_field"
+    )  # Original field where entity was detected
     entity_value = filters.get("entity_value")
     if entity_field and entity_value:
-        pc_field = entity_field.lower()
-        # Division values are lowercase in Pinecone; client values keep original case
-        if pc_field == "division":
-            pc_value = entity_value.lower()
-        else:
-            pc_value = entity_value
-        pc_filter[pc_field] = {"$eq": pc_value}
+        # Multi-field entity gate: search across all 5 entity fields
+        MULTI_ENTITY_FIELDS = ["client", "employer", "division", "project", "place"]
+        LOWERCASE_FIELDS = {"division", "employer", "project", "place"}
+
+        or_clauses = []
+        for field in MULTI_ENTITY_FIELDS:
+            # Apply appropriate casing per field
+            if field in LOWERCASE_FIELDS:
+                field_value = entity_value.lower()
+            else:
+                field_value = entity_value  # client keeps PascalCase
+            or_clauses.append({field: {"$eq": field_value}})
+
+        pc_filter["$or"] = or_clauses
         if DEBUG:
-            print(f"DEBUG Pinecone: Entity filter applied - {pc_field}={pc_value}")
+            print(
+                f"DEBUG Pinecone: Multi-field entity filter applied - entity={entity_value} across {MULTI_ENTITY_FIELDS}"
+            )
 
     try:
         qvec = _embed(query)

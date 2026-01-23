@@ -1,302 +1,6 @@
-# MattGPT Streamlit App - Product Backlog
 
-**Sprint Goal:** Phase 4 Complete - UI Polish & Wireframe Alignment ✅
-
-**Last Updated:** October 28, 2025
 
 ---
-
-## 🟢 DONE
-
-### ✅ Homepage Redesign
-**Status:** Complete
-**Completed:** Oct 19, 2024
-
-- [x] Purple gradient hero section with logo
-- [x] Stats bar with grid layout (4 columns)
-- [x] 6 category cards (2 industry gradient, 4 capability white, 1 quick question gradient)
-- [x] Dark top navigation bar
-- [x] Footer with contact links
-
-**Reference:** `/wireframes/homepage_wireframe.html`
-**Files:** `ui/legacy_components.py`, `ui/components/category_cards.py`
-
----
-
-### ✅ Banking Landing Page
-**Status:** Complete
-**Completed:** Oct 28, 2025 (Rewritten with purple theme)
-
-- [x] Header with title and project count
-- [x] Purple gradient hero section matching home page
-- [x] Stats section (47 projects, 16 capabilities, 6 clients)
-- [x] Client pills horizontal layout (6 clients)
-- [x] 15 capability cards in 3-column responsive grid
-- [x] Purple button theme with varied text
-- [x] Purple "Ask Agy" CTA button gradient
-- [x] Purple footer email button
-
-**Reference:** `/wireframes/banking_landing_page.html`
-**Files:** `ui/pages/banking_landing.py` (complete rewrite, 413 lines)
-
----
-
-### ✅ Cross-Industry Landing Page
-**Status:** Complete
-**Completed:** Oct 28, 2025 (Rewritten with purple theme)
-
-- [x] Header with title and project count
-- [x] Purple gradient hero section matching home page
-- [x] Stats section (53 projects, 11 capabilities, 4 client groups)
-- [x] Industry pills horizontal layout (8 industries)
-- [x] 11 capability cards in 3-column responsive grid
-- [x] Purple button theme with varied text
-- [x] Purple "Ask Agy" CTA button gradient
-- [x] Purple footer email button
-
-**Reference:** `/wireframes/cross_industry_landing_page.html`
-**Files:** `ui/pages/cross_industry_landing.py` (complete rewrite, 413 lines)
-
----
-
-### ✅ Button Styling Unification (ADR 015)
-**Status:** Complete
-**Completed:** Oct 28, 2025
-
-- [x] Implement purple theme (#8B5CF6) across all pages
-- [x] Solve Streamlit emotion-cache CSS override issue
-- [x] Create JavaScript workaround for button styling
-- [x] Add varied button text (not all "View Projects →")
-- [x] Unify button padding and hover states
-- [x] Purple footer email button across all pages
-- [x] "Ask Agy" purple gradient CTA buttons
-
-**Technical Solution:** JavaScript injection via `streamlit.components.v1.html()` with inline styles
-**Files:**
-- `ui/legacy_components.py:1046-1094` (home page)
-- `ui/pages/explore_stories.py:1378-1423` (card buttons)
-- `ui/pages/banking_landing.py`, `ui/pages/cross_industry_landing.py`
-
-**Reference:** ADR 015 in `docs/ADR.md`
-
----
-
-### ✅ Explore Stories - Filter UI Redesign
-**Status:** Complete
-**Completed:** Oct 28, 2025
-
-- [x] Progressive disclosure pattern (primary + advanced filters)
-- [x] Industry and Capability filters (primary, always visible)
-- [x] Advanced filters collapsed by default (Client, Role, Domain)
-- [x] Pre-filtered navigation from landing pages
-- [x] Filter chips with removal functionality
-- [x] Purple accent colors throughout
-- [x] Data layer refactored to use raw JSONL fields (Title-case)
-
-**Reference:** `EXPLORE_STORIES_UX_REDESIGN.md`
-**Files:** `ui/pages/explore_stories.py`, `utils/filters.py`, `app.py`
-
----
-
-### ✅ Explore Stories - Detail Panel Redesign
-**Status:** Complete
-**Completed:** Oct 28, 2025
-
-- [x] Match explore_stories_table_wireframe.html specification
-- [x] Full STAR narrative display (Situation, Task, Action, Result)
-- [x] Sidebar with tech tags, competencies, metrics
-- [x] 100% JSONL-sourced data (zero fabrication verified)
-- [x] Header with metadata icons (🏢 🎯 📅 🏷️)
-- [x] "Ask Agy About This" CTA button
-- [x] Two-column responsive layout
-
-**Files:** `ui/pages/explore_stories.py:329-520`
-
----
-
-## 🔴 HIGH PRIORITY (Job Search Critical)
-
-### ✅ Fix Navigation Bar Disappearing Issue
-**Story ID:** MATTGPT-001
-**Status:** Complete
-**Completed:** Oct 2025
-
-**User Story:**
-As a user navigating the app, I want a consistent dark navbar across all pages so that I can easily move between sections.
-
-**Acceptance Criteria:**
-- [x] Dark navbar visible on all pages (Home, Banking, Cross-Industry, Explore Stories, Ask MattGPT, About Matt)
-- [x] Navigation buttons: Home, Explore Stories, Ask MattGPT, About Matt
-- [x] White text with hover states
-- [x] No emoji icons in nav labels
-- [x] Fix doesn't break other pages
-
-**Reference:** `ui/components/navbar.py`
-
----
-
-### 2. Explore Stories - Filter UI Redesign
-**Story ID:** MATTGPT-002
-**Priority:** HIGH
-
-**User Story:**
-As a recruiter exploring Matt's portfolio, I want to filter projects by industry, capability, client, and role so that I can find relevant experience quickly.
-
-**Acceptance Criteria:**
-- [ ] 4 filter dropdowns in horizontal layout (Industry, Capability, Client, Role)
-- [ ] Search bar on right side
-- [ ] View switcher: Cards / Table / Timeline
-- [ ] Filters match wireframe styling (dark background #2a2a2a, compact layout)
-- [ ] Purple accent color for selected filters
-- [ ] Responsive on mobile (stack vertically)
-
-**Reference:** `/wireframes/explore_stories_cards_wireframe.html`
-**Files to Update:** `app.py:3619-4783` (Explore Stories section)
-
-**Design Notes:**
-- Current implementation is too tall/spacious
-- Need compact filter bar like wireframe
-- Match purple accent color (#667eea)
-
----
-
-### 3. Explore Stories - Card View
-**Story ID:** MATTGPT-003
-**Priority:** HIGH
-
-**User Story:**
-As a recruiter, I want to see projects as cards in a grid so that I can quickly scan titles, clients, and capabilities.
-
-**Acceptance Criteria:**
-- [ ] 3-column grid of project cards
-- [ ] Each card shows: Client logo/icon, Project title, Capability tags, Client name, Short description
-- [ ] White background cards with subtle border
-- [ ] Purple hover effect (border + shadow)
-- [ ] "View Details" button on each card
-- [ ] Responsive: 2 columns on tablet, 1 on mobile
-
-**Reference:** `/wireframes/explore_stories_cards_wireframe.html`
-**Files to Update:** `app.py` (Explore Stories card rendering)
-
----
-
-### 4. Explore Stories - Table View
-**Story ID:** MATTGPT-004
-**Priority:** MEDIUM
-
-**User Story:**
-As a recruiter, I want to see projects in a sortable table so that I can compare details side-by-side.
-
-**Acceptance Criteria:**
-- [ ] Table columns: Client, Project, Capability, Role, Year, Duration
-- [ ] Sortable by clicking column headers
-- [ ] Purple header row (#667eea)
-- [ ] Zebra striping on rows (alternating light gray)
-- [ ] Hover effect on rows
-- [ ] Responsive: horizontal scroll on mobile
-
-**Reference:** `/wireframes/explore_stories_table_wireframe.html`
-
----
-
-### 5. Explore Stories - Timeline View
-**Story ID:** MATTGPT-005
-**Priority:** LOW (nice-to-have)
-
-**User Story:**
-As a recruiter, I want to see projects in chronological order so that I can understand Matt's career progression.
-
-**Acceptance Criteria:**
-- [ ] Vertical timeline with year markers
-- [ ] Projects grouped by year
-- [ ] Purple timeline line connecting projects
-- [ ] Project cards on alternating sides (left/right)
-- [ ] Responsive: single column on mobile
-
-**Reference:** `/wireframes/explore_stories_timeline_wireframe.html`
-
----
-
-## 🟡 MEDIUM PRIORITY
-
-### 6. Ask MattGPT Page Styling
-**Story ID:** MATTGPT-006
-**Priority:** MEDIUM
-
-**User Story:**
-As a user, I want a clean chat interface to ask Agy questions about Matt's experience.
-
-**Acceptance Criteria:**
-- [ ] Header: "Ask Agy 🐾" with subtitle
-- [ ] Starter question suggestions (purple gradient cards)
-- [ ] Chat interface with Agy avatar
-- [ ] Message bubbles: User (right, purple), Agy (left, gray)
-- [ ] Input box at bottom with send button
-- [ ] Footer matching homepage
-
-**Reference:** `/wireframes/ask_mattgpt_landing_wireframe.html`
-**Files to Update:** `app.py:4784-5337` (Ask MattGPT section)
-
----
-
-### 7. About Matt Page Styling
-**Story ID:** MATTGPT-007
-**Priority:** MEDIUM
-
-**User Story:**
-As a recruiter, I want to learn about Matt's background, skills, and career journey in a visually appealing format.
-
-**Acceptance Criteria:**
-- [ ] Hero section with headshot and bio summary
-- [ ] Skills section with purple gradient tags
-- [ ] Career timeline (optional visual timeline)
-- [ ] Education and certifications
-- [ ] Contact CTA matching homepage footer
-- [ ] Responsive layout
-
-**Reference:** `/wireframes/about_matt_wireframe.html`
-**Files to Update:** `app.py:5338-end` (About Matt section)
-
----
-
-## ⚪ LOW PRIORITY (Future Enhancements)
-
-### 8. Mobile Optimization Testing
-**Story ID:** MATTGPT-008
-**Priority:** LOW
-
-**User Story:**
-As a mobile user, I want all pages to render correctly on my phone so that I can explore Matt's portfolio on any device.
-
-**Acceptance Criteria:**
-- [ ] Test all pages on iPhone/Android
-- [ ] Navigation works on mobile (no sidebar)
-- [ ] Cards stack vertically on narrow screens
-- [ ] Text remains readable (no tiny fonts)
-- [ ] Buttons are tappable (min 44px height)
-
----
-
-### 9. Footer Link Functionality
-**Story ID:** MATTGPT-009
-**Priority:** LOW
-
-**User Story:**
-As a user, I want footer links to navigate properly so that I can easily contact Matt or ask Agy questions.
-
-**Current Issue:**
-- "Ask Agy" link in footer uses `#ask` anchor (doesn't navigate)
-- Should switch to "Ask MattGPT" tab
-
-**Acceptance Criteria:**
-- [ ] Email link opens mail client (already working)
-- [ ] LinkedIn link opens in new tab (already working)
-- [ ] "Ask Agy" button switches to Ask MattGPT tab and focuses input
-
-**Files to Update:** `ui/components.py` (footer HTML in multiple functions)
-
----
-
 ### 10. Cross-Browser Testing
 **Story ID:** MATTGPT-010
 **Priority:** LOW
@@ -311,104 +15,32 @@ As a user on any browser, I want consistent styling and functionality.
 - [ ] Test on Edge
 - [ ] Fix any CSS inconsistencies
 
----
-
-## 📋 Backlog Notes
-
-### Design System Reference
-- **Primary Purple:** `#667eea`
-- **Secondary Purple:** `#764ba2`
-- **Gradient:** `linear-gradient(135deg, #667eea 0%, #764ba2 100%)`
-- **Dark Navbar:** `#2c3e50`
-- **Border Gray:** `#e0e0e0`
-- **Text Gray:** `#7f8c8d`
-
-### Wireframe Files Location
-`/Users/matthewpugmire/Projects/portfolio/mattgpt-design-spec/wireframes/`
-
-### Migration to Jira
-When ready to move this to Jira:
-1. Import as Epic: "Streamlit Wireframe Alignment"
-2. Create stories with Story IDs (MATTGPT-001, etc.)
-3. Add acceptance criteria as subtasks
-4. Link wireframe files in story descriptions
-5. Track in sprint board
-
----
-
-**Next Session Prompt Template:**
-```
-Work on Story: [Story ID] - [Title]
-
-Reference: [Wireframe file path]
-
-Requirements:
-- [Copy acceptance criteria]
-
-Match styling from: [Existing component reference]
-```
-
----
-
-## 📝 Session Logs
-
 ### January 21, 2026 - RAG Eval Quality Sprint
-
-**Results:** 71% → 95.2% eval pass rate (59/62 tests)
-
-#### Bugs Fixed
-1. **Double-filtering bug** (`rag_service.py:274-288`)
-   - Pinecone results were being re-filtered by keyword match on `q`
-   - Fix: Strip `q` from filters before `matches_filters()`
-
-2. **Unicode apostrophe bug** (`rag_service.py:124`)
-   - Story titles use curly apostrophe (') U+2019, code used straight (')
-   - Fix: `subtitle_phrase.replace("\u2019", "'")`
-
-3. **Bold check logic** (`eval_rag_quality.py:485-504`)
-   - Check was looking for exact variant bolded, not any variant
-   - Fix: Check if ANY variant is bolded when client is found
-
-#### Eval Expectation Fixes
-| Test | Issue | Fix |
-|------|-------|-----|
-| Q7 | ground_truth too narrow | Added "assumptions", "risk", "ownership" |
-| Q11 | Missing JPMorgan variants | Added all variants + fixed bold check |
-| Q13 | CIC serves Multiple Clients | Added `is_multi_client: True` |
-| Q23 | Query too short for entity gate | Expanded to "Tell me about Matt's..." |
-| Q27 | ground_truth too narrow | Added "assumptions", "verification", "learning" |
-| Q30 | ground_truth too narrow | Added "training", "skills", "competency" |
-| Q4 | ground_truth too narrow | Added "empathy", "psychological safety" |
-| Q8 | ground_truth too narrow | Added "learning", "early failure", "validate" |
-
-#### Known Issues (Deferred)
-- **Q17**: Synthesis mode requires 3+ clients, LLM often doesn't mention them
-- **Q1, Q3**: Ground truth still narrow, but flaky (sometimes pass)
-
-#### Key Learnings
-- Eval failures often signal **eval bugs**, not system bugs
-- Client metadata (e.g., "Multiple Clients") is accurate - eval expectations were wrong
-- JPMorgan branding is inconsistent even on their own website
 
 #### Sovereign Backlog (Real Issues for Next Sprint)
 
-**1. Multi-Field Entity Blind Spot**
-- System treats `Client` as only source of truth
-- Need entity detection across `Employer`, `Division`, `Project`, `Place`
-- Example: Accenture stories where Client="Confidential Healthcare Provider" should still be discoverable as Accenture work
-- Files: `pinecone_service.py`, `backend_service.py` entity detection
+**1. Multi-Field Entity Blind Spot** ✅ DONE
+- ~~System treats `Client` as only source of truth~~
+- ~~Need entity detection across `Employer`, `Division`, `Project`, `Place`~~
+- ~~Example: Accenture stories where Client="Confidential Healthcare Provider" should still be discoverable as Accenture work~~
+- **Implementation (Jan 22, 2026):**
+  - Updated `pinecone_service.py:189-216` to use Pinecone `$or` operator
+  - Entity filter now searches across all 5 fields: `client`, `employer`, `division`, `project`, `place`
+  - Applied correct casing per field (lowercase for division/employer/project/place, PascalCase for client)
+  - Eval: 100% pass rate (31/31) - no regression
 
-**2. Synthesis Retrieval Diversity (Q17 Bug)**
-- Synthesis mode prioritizes semantic score alone
-- Gets buried in MattGPT/Narrative stories, misses named-client diversity
-- Need: "Diversity reranker" ensuring 2-3 named-client stories in context for themes questions
-- Files: `rag_service.py` synthesis search logic
+**3. Dynamic Prompting - Hardcoded Client Names** ✅ DONE
+- ✅ Synthesis prompt now derives clients dynamically
+- ✅ MATT_DNA now derives all client names from JSONL (banking, telecom, transport)
+- ✅ Fixed "JPMorgan" → "JP Morgan Chase" (now matches JSONL source)
+- ✅ Removed phantom industries from `cross_industry_landing.py` (Manufacturing, Retail & Consumer Goods)
+- Eval: 100% pass rate (31/31)
 
-**3. Dynamic Prompting - Hardcoded Client Names**
-- 12+ places with hardcoded client names in prompts
-- Should derive "Known Clients" list from JSONL corpus at runtime
-- Keeps prompt and data in sync automatically
-- Files: `backend_service.py`, `eval_rag_quality.py`
+**Implementation (Jan 22, 2026):**
+- `generate_dynamic_dna()` derives clients by industry from story data
+- Banking clients: derived from `Industry = "Financial Services / Banking"`
+- Telecom clients: derived from `Industry = "Telecommunications"`
+- Transport clients: derived from `Industry = "Transportation & Logistics"`
 
 **4. Eval Modernization - Semantic Scoring**
 - Current: Exact string match for ground_truth
@@ -416,51 +48,31 @@ Match styling from: [Existing component reference]
 - Solution: Semantic similarity or LLM-as-Judge scoring
 - Files: `eval_rag_quality.py` check functions
 
-##### Hardcoded Client References Audit
+##### UI Content Classification
 
-**Root Cause of Q17:** Line 1106 in synthesis prompt says:
-> "Show breadth: JPMorgan, Norfolk Southern, RBC, AT&T, Capital One, Fiserv — not just one or two"
+**Intentionally Curated (NOT tech debt):**
+| File | Content | Reason |
+|------|---------|--------|
+| `landing_view.py` | Suggested questions | Curated UX showcase, covered by eval |
+| `about_matt.py` | Timeline, company names | Curated CV/resume |
 
-But the LLM can only cite what's in the retrieved stories. When stories have `Client = "Independent"`, `"Career Narrative"`, `"Multiple Clients"` — the prompt asks for something the context doesn't provide.
+**UI Metrics Hydration (Jan 22, 2026):** ✅ DONE
+All project/client counts now derived dynamically from JSONL:
 
-**Full Audit (42 instances in `/ui`):**
+| File | Hydrated | Status |
+|------|----------|--------|
+| `banking_landing.py` | Project count, client counts, capability areas | ✅ Dynamic |
+| `cross_industry_landing.py` | Project count, industry count, capability areas | ✅ Dynamic |
+| `category_cards.py` | Banking/Cross-industry project counts, client pills | ✅ Dynamic |
+| `home.py` | Now passes STORIES to category_cards | ✅ Wired |
 
-| File | Lines | Context |
-|------|-------|---------|
-| `backend_service.py` | 126-127 | Alias mapping ("amex": "American Express") |
-| `backend_service.py` | 340-390 | MATT_DNA prompt - career timeline, industries |
-| `backend_service.py` | 531 | classify_query_intent prompt - example clients |
-| `backend_service.py` | 542-544 | Intent classification examples |
-| `backend_service.py` | 1081 | Context pinning rule ("150+ from Accenture") |
-| `backend_service.py` | 1106 | **Synthesis prompt - "Show breadth..."** ← Q17 root cause |
-| `backend_service.py` | 1133, 1264 | Corporate story formatting rules |
-| `landing_view.py` | 110 | Suggested question with Accenture |
-| `banking_landing.py` | 420-424 | Client pills (RBC, Fiserv, AmEx, Capital One, HSBC) |
-| `about_matt.py` | 906-930, 1177 | Timeline company names, suggested questions |
-| `category_cards.py` | 240-267 | Client pills with counts (JPMorgan Chase (33), etc.) |
-
-**Fix Strategy:**
-1. Derive `KNOWN_CLIENTS` from JSONL at startup
-2. Replace hardcoded lists with dynamic references
-3. Synthesis prompt should say "cite clients from the stories below" not specific names
-
-**Recommended Implementation:**
-```python
-EXCLUDED_CLIENTS = {"Independent", "Career Narrative", "Multiple Clients", "Personal", "Various"}
-
-# In _generate_agy_response(), before building synthesis prompt:
-retrieved_clients = set(
-    s.get("Client") for s in ranked_stories 
-    if s.get("Client") not in EXCLUDED_CLIENTS
-)
-client_list = ", ".join(sorted(retrieved_clients)) if retrieved_clients else "the clients shown above"
-
-# Then in synthesis prompt (line 1106):
-# OLD: "Show breadth: JPMorgan, Norfolk Southern, RBC, AT&T, Capital One, Fiserv"
-# NEW: f"Show breadth: {client_list} — cite from the stories provided"
-```
-
-This ensures the prompt only asks for what the context can deliver.
+**Backend (FIXED):**
+| File | Status |
+|------|--------|
+| `backend_service.py` MATT_DNA | ✅ Dynamic from JSONL |
+| `backend_service.py` Synthesis prompt | ✅ Dynamic from JSONL |
+| `backend_service.py` Entity normalization | ✅ Alias map (intentional) |
+| `cross_industry_landing.py` industry pills | ✅ Fixed (removed phantom industries) |
 
 ---
 

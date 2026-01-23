@@ -4,15 +4,56 @@ Category Cards Component
 Homepage exploration cards for different portfolio categories.
 Includes gradient industry cards and white capability cards.
 Uses HTML buttons with JS triggers for consistent styling across themes.
+Counts are derived dynamically from JSONL data.
 
 MOBILE CSS: Card heights are handled here. Layout/spacing handled by mobile_overrides.py
 """
 
+from collections import Counter
+
 import streamlit as st
 
+# Clients to exclude from pills (too generic)
+_EXCLUDED_CLIENTS = {
+    "Multiple Clients",
+    "Multiple Financial Services Clients",
+    "Financial Services Client",
+    "Various",
+    "Independent",
+    "Career Narrative",
+    "N/A",
+    "",
+    None,
+}
 
-def render_category_cards():
-    """Render homepage category cards grid - responsive with CSS Grid."""
+
+def render_category_cards(stories: list[dict]):
+    """Render homepage category cards grid - responsive with CSS Grid.
+
+    Args:
+        stories: Full story corpus from JSONL.
+    """
+    # === DYNAMIC COUNTS (derived from JSONL) ===
+    banking_stories = [
+        s for s in stories if s.get("Industry") == "Financial Services / Banking"
+    ]
+    cross_industry_stories = [
+        s for s in stories if s.get("Industry") == "Cross Industry"
+    ]
+
+    # Banking client counts (top 3, excluding generic)
+    banking_clients = Counter(
+        s.get("Client", "Unknown")
+        for s in banking_stories
+        if s.get("Client") not in _EXCLUDED_CLIENTS
+    )
+    top_banking_clients = banking_clients.most_common(3)
+
+    # Cross-industry: show Accenture and telecom clients
+    telecom_stories = [s for s in stories if s.get("Industry") == "Telecommunications"]
+    accenture_stories = [s for s in stories if s.get("Client") == "Accenture"]
+
+    # === END DYNAMIC COUNTS ===
 
     # Inject card and button styles
     st.markdown(
@@ -228,18 +269,21 @@ def render_category_cards():
     col1, col2 = st.columns(2)
 
     with col1:
+        # Generate banking client pills dynamically
+        banking_pills = "".join(
+            f'<span style="background: rgba(255,255,255,0.25); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">{client} ({count})</span>'
+            for client, count in top_banking_clients
+        )
         st.markdown(
-            """
+            f"""
         <div class="card-mobile-spacing">
         <div style="background: var(--gradient-purple-hero); color: white; padding: 32px; border-radius: 12px; height: 380px; display: flex; flex-direction: column;">
             <div style="font-size: 48px; margin-bottom: 16px;">🏦</div>
             <h3 style="color: white; font-size: 24px; font-weight: 700; margin: 0 0 8px 0;">Financial Services / Banking</h3>
-            <div style="color: rgba(255,255,255,0.9); font-size: 16px; font-weight: 600; margin-bottom: 16px;">55 projects</div>
+            <div style="color: rgba(255,255,255,0.9); font-size: 16px; font-weight: 600; margin-bottom: 16px;">{len(banking_stories)} projects</div>
             <div style="color: rgba(255,255,255,0.95); margin-bottom: 16px; line-height: 1.5; font-size: 15px;">Banking modernization, payments, compliance, core banking systems</div>
             <div style="display: flex; flex-wrap: wrap; gap: 8px; flex-grow: 1; align-items: flex-start; margin-bottom: 20px;">
-                <span style="background: rgba(255,255,255,0.25); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">JPMorgan Chase (33)</span>
-                <span style="background: rgba(255,255,255,0.25); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">American Express (3)</span>
-                <span style="background: rgba(255,255,255,0.25); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">Capital One (8)</span>
+                {banking_pills}
             </div>
             <div style="margin-top: auto;">
                 <a id="btn-banking" class="card-btn-gradient">Explore Stories →</a>
@@ -254,17 +298,28 @@ def render_category_cards():
             st.rerun()
 
     with col2:
+        # Cross-industry pills: Telecom + Accenture
+        cross_pills = []
+        if telecom_stories:
+            cross_pills.append(
+                f'<span style="background: rgba(255,255,255,0.25); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">Telecom ({len(telecom_stories)})</span>'
+            )
+        if accenture_stories:
+            cross_pills.append(
+                f'<span style="background: rgba(255,255,255,0.25); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">Accenture ({len(accenture_stories)})</span>'
+            )
+        cross_pills_html = "".join(cross_pills)
+
         st.markdown(
-            """
+            f"""
         <div class="card-mobile-spacing">
         <div style="background: var(--gradient-purple-hero); color: white; padding: 32px; border-radius: 12px; height: 380px; display: flex; flex-direction: column;">
             <div style="font-size: 48px; margin-bottom: 16px;">🌐</div>
             <h3 style="color: white; font-size: 24px; font-weight: 700; margin: 0 0 8px 0;">Cross-Industry Transformation</h3>
-            <div style="color: rgba(255,255,255,0.9); font-size: 16px; font-weight: 600; margin-bottom: 16px;">65 projects</div>
+            <div style="color: rgba(255,255,255,0.9); font-size: 16px; font-weight: 600; margin-bottom: 16px;">{len(cross_industry_stories)} projects</div>
             <div style="color: rgba(255,255,255,0.95); margin-bottom: 16px; line-height: 1.5; font-size: 15px;">Agile transformation, cloud innovation, platform engineering</div>
             <div style="display: flex; flex-wrap: wrap; gap: 8px; flex-grow: 1; align-items: flex-start; margin-bottom: 20px;">
-                <span style="background: rgba(255,255,255,0.25); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">AT&T (18)</span>
-                <span style="background: rgba(255,255,255,0.25); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">Accenture CIC (36)</span>
+                {cross_pills_html}
             </div>
             <div style="margin-top: auto;">
                 <a id="btn-cross-industry" class="card-btn-gradient">Explore Stories →</a>

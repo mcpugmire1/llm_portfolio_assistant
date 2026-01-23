@@ -40,6 +40,16 @@ from .story_intelligence import (
 # Constants
 SEARCH_TOP_K = 7
 
+# Clients to exclude from dynamic client list (not real named clients)
+EXCLUDED_CLIENTS = {
+    "Independent",
+    "Career Narrative",
+    "Multiple Clients",
+    "Personal",
+    "Various",
+    "Confidential",
+}
+
 # Known clients - derived dynamically from story data at startup
 _KNOWN_CLIENTS: set[str] | None = None
 
@@ -90,16 +100,212 @@ def get_narrative_titles(stories: list[dict]) -> list[str]:
     return _NARRATIVE_TITLES
 
 
-# Theme names for synthesis mode coverage (values removed - user's query vector is used)
-SYNTHESIS_THEMES = [
-    "Execution & Delivery",
-    "Strategic & Advisory",
-    "Org & Working-Model Transformation",
-    "Talent & Enablement",
-    "Risk & Responsible Tech",
-    "Emerging Tech",
-    "Professional Narrative",
-]
+# Theme names for synthesis mode coverage
+# NOTE: Dynamically derived from stories at startup via sync_portfolio_metadata()
+SYNTHESIS_THEMES: list[str] = []
+
+# Themes to exclude from synthesis (too generic or internal-only)
+EXCLUDED_THEMES = {
+    "Internal",
+    "Confidential",
+    "Other",
+    "N/A",
+    "",
+    None,
+}
+
+# Matt DNA - Ground truth injected into all prompts
+# NOTE: Dynamically generated at startup via sync_portfolio_metadata()
+MATT_DNA: str = ""
+
+
+def sync_portfolio_metadata(stories: list[dict]) -> None:
+    """Startup sync to derive system metadata from JSONL.
+
+    Ensures MATT_DNA and SYNTHESIS_THEMES never drift from story data.
+    Call this once during app initialization after loading stories.
+
+    Args:
+        stories: The loaded story corpus from JSONL.
+    """
+    global SYNTHESIS_THEMES, _KNOWN_CLIENTS, MATT_DNA
+
+    # 1. Derive Themes (Fix for Theme Fragility)
+    # Automatically picks up new themes or renames in the JSONL
+    # Excludes generic labels like 'Internal', 'Confidential', 'Other'
+    SYNTHESIS_THEMES = sorted(
+        list(
+            set(
+                s.get("Theme")
+                for s in stories
+                if s.get("Theme") and s.get("Theme") not in EXCLUDED_THEMES
+            )
+        )
+    )
+
+    # 2. Derive Known Clients (Fix for Entity Logic)
+    # Uses existing helper to ensure intent classification stays in sync
+    _KNOWN_CLIENTS = get_known_clients(stories)
+
+    # 3. Dynamic DNA Generation
+    # Injects real-time stats into the system prompt to prevent hallucination
+    MATT_DNA = generate_dynamic_dna(stories, _KNOWN_CLIENTS)
+
+    # --- THE 1-SECOND TERMINAL AUDIT (once per session) ---
+    if DEBUG and not st.session_state.get("__sanity_check_printed__"):
+        st.session_state["__sanity_check_printed__"] = True
+        print("\n🐾 AGY STARTUP SANITY CHECK:")
+        print(f"   - Themes Detected:  {len(SYNTHESIS_THEMES)} {SYNTHESIS_THEMES}")
+        print(f"   - Clients Loaded:   {len(_KNOWN_CLIENTS)}")
+        print(f"   - Career Span:      {datetime.now().year - 2005} years")
+        print("   - DNA Status:       [DYNAMICALLY SYNCED]\n")
+
+
+def generate_dynamic_dna(stories: list[dict], clients: set[str]) -> str:
+    """Generate MATT_DNA ground truth prompt from live story data.
+
+    Extracts key metrics (practitioner count, career span, client list) from
+    the story corpus to ensure the grounding prompt matches the data.
+
+    Args:
+        stories: The story corpus.
+        clients: Set of known client names.
+
+    Returns:
+        The MATT_DNA prompt string with dynamic values injected.
+    """
+    # Extract practitioner count from CIC story
+    cic_story = next(
+        (s for s in stories if "Cloud Innovation Center" in s.get("Title", "")),
+        {},
+    )
+    # Hardened regex: matches "150+ practitioners", "200 team members", "150 engineers"
+    practitioner_match = re.search(
+        r"(\d+)\+?\s*(?:practitioners|team members|engineers)",
+        str(cic_story),
+        re.IGNORECASE,
+    )
+    p_count = practitioner_match.group(1) if practitioner_match else "150"
+
+    # Build client list
+    client_list = ", ".join(sorted(clients)) if clients else "Various clients"
+    current_year = datetime.now().year
+    career_span = current_year - 2005
+
+    # Derive themes list for the prompt
+    themes_text = "\n".join(
+        f"{i+1}. {theme}" for i, theme in enumerate(SYNTHESIS_THEMES)
+    )
+
+    # Derive clients by industry from story data (Single Source of Truth)
+    clients_by_industry: dict[str, set[str]] = {}
+    for s in stories:
+        ind = s.get("Industry", "")
+        client = s.get("Client", "")
+        if ind and client and client not in EXCLUDED_CLIENTS:
+            if ind not in clients_by_industry:
+                clients_by_industry[ind] = set()
+            clients_by_industry[ind].add(client)
+
+    # Build industry-specific client strings
+    banking_clients = sorted(
+        clients_by_industry.get("Financial Services / Banking", set())
+    )
+    telecom_clients = sorted(clients_by_industry.get("Telecommunications", set()))
+    transport_clients = sorted(
+        clients_by_industry.get("Transportation & Logistics", set())
+    )
+
+    banking_str = (
+        ", ".join(banking_clients)
+        if banking_clients
+        else "Various financial services clients"
+    )
+    telecom_str = ", ".join(telecom_clients) if telecom_clients else "AT&T"
+    transport_str = (
+        ", ".join(transport_clients) if transport_clients else "Norfolk Southern"
+    )
+
+    # Find a major banking client for achievements (first alphabetically from banking)
+    major_banking_client = banking_clients[0] if banking_clients else "a major bank"
+
+    return f"""## Matt Pugmire — Ground Truth (Synced {datetime.now().strftime('%Y-%m')})
+
+**Identity:**
+"I build what's next, modernize what's not, and grow teams along the way."
+
+**Career Arc ({career_span}+ years):**
+Software Engineer → Solution Architect → Director → Cloud Innovation Center Leader
+- Accenture: March 2005 - September 2023 (18+ years)
+- Built CIC from 0 to {p_count}+ practitioners (Atlanta, Tampa)
+- Currently: Sabbatical, building MattGPT, targeting Director/VP roles
+
+**Career Eras (for timeline context):**
+- 2005-2009: Enterprise Integration ({telecom_str})
+- 2009-2018: Payments & Architecture ({banking_str})
+- 2018-2019: Cloud Innovation (Liquid Studio)
+- 2019-2023: CIC Director (scaled 0→{p_count}, Fortune 500 transformation)
+- 2023-Present: Sabbatical (MattGPT, job search)
+
+**The {len(SYNTHESIS_THEMES)} Themes of Matt's Work (use these for synthesis):**
+{themes_text}
+
+**Theme Strengths:**
+- Execution & Delivery is Matt's primary strength — the majority of his work
+- Org Transformation and Strategic Advisory are strong secondary themes
+- Talent & Enablement runs through most engagements (Matt builds people, not just systems)
+- Risk and Emerging Tech are narrower but present
+
+**Industry Experience:**
+- Primary: Financial Services / Banking ({banking_str})
+- Secondary: Telecommunications ({telecom_str}), Transportation ({transport_str})
+- Limited: Healthcare (one engagement), Regulatory (one engagement)
+- NOT Matt's industries: Consumer products, retail, early-stage startups
+
+**Signature Achievements (cite for synthesis):**
+- Built CIC from 0 to {p_count}+ practitioners; grew practice to $300M+ annual sales by FY23
+- CIC proven metrics: 4X faster velocity, zero defects, 30-60% cycle time reduction, MVP in 3 weeks vs months
+- {major_banking_client} payments platform across 12 countries
+- {transport_str} legacy-to-cloud transformation
+- Contributed to $189M cloud modernization win (major public health agency)
+- CIC teams of 10 consistently delivered impact of typical teams of 20
+- AWS cloud-native architecture across engagements
+
+**How Matt Wins Business (NOT a sales role):**
+- Drove $100M+ in repeat business through delivery excellence and customer relationship building
+- Contributed to $189M cloud modernization win for a major public health agency (2022)
+- Builds capabilities that win work — differentiation through execution, not pursuit
+
+**Clients Matt Has Worked With (ONLY cite these):**
+{client_list}
+
+**NOT Matt's Clients (NEVER mention):**
+Kaiser, Google, Amazon, Microsoft, Meta, MetLife, Citizens Bank
+
+**What Matt is NOT:**
+- Not a sales hunter — wins business through delivery, not pursuit
+- Not hardware/embedded systems — enterprise software focus
+- Not consumer products or retail — B2B enterprise transformation
+- Not early-stage startups — Fortune 500 / large enterprise experience
+- Not a theorist — hands-on builder who ships production systems
+
+**Core Values:**
+Empathy, Authenticity, Curiosity, Integrity, Leadership
+
+**Leadership Philosophy:**
+- Builder's mindset, coach's heart
+- Leads with empathy, clarity, and purpose
+- Teaches teams to fish — doesn't just fix problems
+- "Permit to fail" learning environment
+- Balanced teams: Product + Engineering + Design together
+
+**GROUNDING RULES:**
+1. ONLY cite clients, projects, and metrics that appear in the stories below
+2. If unsure about a detail, say "In one engagement..." instead of naming a client
+3. NEVER invent outcomes, fabricate proof points, or mention clients not on the list
+4. When discussing revenue/business impact, emphasize delivery excellence — never position Matt as a sales hunter
+5. For synthesis questions, lead with the Themes and support with diverse client examples
+"""
 
 
 # Entity fields to check for routing (in priority order)
@@ -327,95 +533,6 @@ def get_synthesis_stories(
         )
 
     return pool
-
-
-# Matt DNA - Ground truth injected into all prompts to prevent hallucination
-MATT_DNA = """## Matt Pugmire — Ground Truth
-
-**Identity:**
-"I build what's next, modernize what's not, and grow teams along the way."
-
-**Career Arc (20+ years):**
-Software Engineer → Solution Architect → Director → Cloud Innovation Center Leader
-- Accenture: March 2005 - September 2023 (18+ years)
-- Built CIC from 0 to 150+ practitioners (Atlanta, Tampa)
-- Currently: Sabbatical, building MattGPT, targeting Director/VP roles
-
-**Career Eras (for timeline context):**
-- 2005-2009: Enterprise Integration (AT&T systems)
-- 2009-2018: Payments & Architecture (JPMorgan, Capital One, Fiserv)
-- 2018-2019: Cloud Innovation (Liquid Studio)
-- 2019-2023: CIC Director (scaled 0→150, Fortune 500 transformation)
-- 2023-Present: Sabbatical (MattGPT, job search)
-
-**The 7 Themes of Matt's Work (use these for synthesis):**
-1. Execution & Delivery — Shipping production systems at scale, not just strategy
-2. Strategic & Advisory — Thought partnership, business alignment, executive influence
-3. Org & Working-Model Transformation — Culture change, agile adoption, sustainable practices
-4. Talent & Enablement — Coaching, mentorship, capability building
-5. Risk & Responsible Tech — Governance, compliance, ethical considerations
-6. Emerging Tech — Innovation, experimentation, GenAI/ML exploration
-7. Professional Narrative — Matt's philosophy, leadership identity, career positioning
-
-**Theme Strengths:**
-- Execution & Delivery is Matt's primary strength — the majority of his work
-- Org Transformation and Strategic Advisory are strong secondary themes
-- Talent & Enablement runs through most engagements (Matt builds people, not just systems)
-- Risk and Emerging Tech are narrower but present
-
-**Industry Experience:**
-- Primary: Financial Services / Banking (JPMorgan, RBC, Capital One, Fiserv, AmEx, HSBC)
-- Secondary: Telecommunications (AT&T), Transportation (Norfolk Southern)
-- Limited: Healthcare (one engagement), Regulatory (one engagement)
-- NOT Matt's industries: Consumer products, retail, early-stage startups
-
-**Signature Achievements (cite for synthesis):**
-- Built CIC from 0 to 150+ practitioners
-- JPMorgan payments platform across 12 countries
-- Norfolk Southern legacy-to-cloud transformation
-- Contributed to $189M cloud modernization win (major public health agency)
-- $100M+ repeat business through delivery excellence
-- 4x velocity, 50% productivity gains, zero production defects, 100% test coverage at CIC
-- CIC teams of 10 consistently delivered impact of typical teams of 20
-- AWS cloud-native architecture across engagements
-
-**How Matt Wins Business (NOT a sales role):**
-- Drove $100M+ in repeat business through delivery excellence and customer relationship building
-- Contributed to $189M cloud modernization win for a major public health agency (2022)
-- Builds capabilities that win work — differentiation through execution, not pursuit
-
-**Clients Matt Has Worked With (ONLY cite these):**
-Named: American Express, AT&T, AT&T Mobility, Capital One, Fiserv, HSBC, JPMorgan Chase, Level 3 Communications, Norfolk Southern, RBC
-Obfuscated: Financial Services Client, Leading U.S. healthcare provider, Multiple Clients, Multiple Financial Services Clients, U.S. Regulatory Agency (Confidential)
-Internal: Accenture, Independent
-
-**NOT Matt's Clients (NEVER mention):**
-Kaiser, Google, Amazon, Microsoft, Meta, MetLife, Citizens Bank
-
-**What Matt is NOT:**
-- Not a sales hunter — wins business through delivery, not pursuit
-- Not hardware/embedded systems — enterprise software focus
-- Not consumer products or retail — B2B enterprise transformation
-- Not early-stage startups — Fortune 500 / large enterprise experience
-- Not a theorist — hands-on builder who ships production systems
-
-**Core Values:**
-Empathy, Authenticity, Curiosity, Integrity, Leadership
-
-**Leadership Philosophy:**
-- Builder's mindset, coach's heart
-- Leads with empathy, clarity, and purpose
-- Teaches teams to fish — doesn't just fix problems
-- "Permit to fail" learning environment
-- Balanced teams: Product + Engineering + Design together
-
-**GROUNDING RULES:**
-1. ONLY cite clients, projects, and metrics that appear in the stories below
-2. If unsure about a detail, say "In one engagement..." instead of naming a client
-3. NEVER invent outcomes, fabricate proof points, or mention clients not on the list
-4. When discussing revenue/business impact, emphasize delivery excellence — never position Matt as a sales hunter
-5. For synthesis questions, lead with the 7 Themes and support with diverse client examples
-"""
 
 
 def log_offdomain(
@@ -834,10 +951,15 @@ def _generate_agy_response(
 
         for i, story in enumerate(ranked_stories[:story_limit]):
             context = build_story_context_for_rag(story)
-            story_contexts.append(f"Story {i + 1}:\n{context}")
+            if i == 0:
+                story_contexts.append(f"<primary_story>\n{context}\n</primary_story>")
+            else:
+                story_contexts.append(
+                    f"<supporting_story index=\"{i + 1}\">\n{context}\n</supporting_story>"
+                )
             themes_in_response.add(infer_story_theme(story))
 
-        story_context = "\n\n---\n\n".join(story_contexts)
+        story_context = "\n\n".join(story_contexts)
 
         # Add theme-specific guidance to system prompt
         theme_guidance_parts = [get_theme_guidance(t) for t in themes_in_response]
@@ -968,6 +1090,21 @@ DO NOT paraphrase. These are Matt's chosen identity words.
         # SYSTEM PROMPT AND USER MESSAGE (varies by mode)
         # =====================================================================
 
+        # =====================================================================
+        # DYNAMIC CLIENT LIST (Sovereign Backlog Item #3)
+        # Derive clients from actual retrieved stories - no more hardcoding
+        # =====================================================================
+        retrieved_clients = set(
+            s.get("Client")
+            for s in ranked_stories
+            if s.get("Client") and s.get("Client") not in EXCLUDED_CLIENTS
+        )
+        client_list = (
+            ", ".join(sorted(retrieved_clients))
+            if retrieved_clients
+            else "the clients shown above"
+        )
+
         if is_synthesis:
             # =================================================================
             # SYNTHESIS MODE PROMPTS
@@ -985,7 +1122,8 @@ Your job is to REPORT on Matt's portfolio, not rewrite it.
 2. DO NOT GENERALIZE: Connect themes but keep specific vocabulary and metrics verbatim. Never replace specific terms (e.g., "0 to 1", "builder", "modernizer", "60% reduction") with generic filler.
 3. TRANSFORM PRONOUNS ONLY: Convert "I" to "Matt" while maintaining the original intensity and technical detail.
 4. PERSONA: Keep the warm, loyal "Chief of Staff" opening/closing and 🐾 emoji, but keep the substance verbatim.
-5. VERBATIM ANCHORS (MANDATORY): When you see [[MATT'S CORE BRAND DNA - USE VERBATIM: ...]], you MUST include the EXACT identity phrases from that text in your response. For example, if the text says "I'm a builder, a modernizer" you MUST say "Matt is a builder, a modernizer" - NOT "Matt builds and modernizes". These are Matt's chosen self-descriptors - SACRED vocabulary that must appear verbatim.
+5. FACT-PAIRING RULE (CRITICAL): A metric is only valid if BOTH the number AND the specific outcome it measures appear together in the same story. Do not re-attach a number from one context to a different outcome (e.g., if the story says "40% cycle time reduction" you CANNOT say "40% onboarding reduction"). If the story does not explicitly state a metric for a particular outcome, use qualitative language instead ("significant improvement", "measurable gains").
+6. TEXTURE RULE (CRITICAL): Preserve the story's distinctive details — quote unique phrases, name specific practices, and include concrete anecdotes. If the story says "Silicon Valley product culture to Fortune 500 enterprises" do NOT flatten it to "modern development practices." If it mentions specific practices — NAME them. If it describes a specific moment or anecdote — INCLUDE it. Generic summaries are a failure mode. The story's texture IS the value.
 
 **BANNED CORPORATE FILLER (never use these):**
 - "meaningful outcomes" → use the actual outcomes from the story
@@ -993,6 +1131,14 @@ Your job is to REPORT on Matt's portfolio, not rewrite it.
 - "foster collaboration" → describe the specific collaboration
 - "stakeholder alignment" → name the actual stakeholders
 - "bridge the gap" → describe the specific connection made
+- "modern development practices" → name the actual practices from the story
+- "significant challenges" → describe the actual challenge
+- "adapt to new approaches" → name what they adapted to
+- "rapidly evolving digital landscape" → name the specific market pressure
+- "fostering a culture of" → describe what actually happened
+- "agile methodologies" → name the specific methodology (Lean XP, TDD, etc.)
+- "remain competitive" → describe the specific business pressure
+- "continuous improvement" → describe what specifically improved
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 You reveal meaningful patterns and themes from Matt's 20+ years of transformation work.
@@ -1065,20 +1211,19 @@ YOUR RESPONSE MUST CONTAIN THESE EXACT PHRASES (converted from first to third pe
 **CHECKLIST BEFORE SUBMITTING:** Does your response include at least 2 of these identity phrases verbatim? If not, REVISE.
 
 ## CONTEXT ISOLATION (MANDATORY)
-You may ONLY cite clients that appear in the stories provided below.
-- If only ONE story is provided, discuss ONLY that example
+Stories are wrapped in XML tags. Treat each tag as a **strictly isolated factual island.**
+- `<primary_story>` is the MAIN story — your response should primarily be about THIS story
+- `<supporting_story>` tags are background context ONLY — reference them only if the user asks about patterns or breadth
+- Do NOT use a client/employer name from a supporting story to label the primary story
+- If the primary story says Client: "Multiple Clients" → you MUST say "across multiple engagements" even if you see "Accenture" in a supporting story
+- Do NOT pull metrics from supporting stories into your primary narrative
 - NEVER invent additional client examples to "show breadth"
-- If story says Client: "Multiple Clients" → say "across multiple engagements"
-- If you lack evidence for a pattern, say "Based on the available examples..."
 - If user's query mentions a client NOT in the provided stories, do NOT attribute to that client
-- If a story's client is "Multiple Clients", refer to it as "across multiple engagements" - NEVER re-assign it to a specific firm named in the query
-- Do NOT combine metrics from one story with a different story's client name
 
 ## CONTEXT PINNING (MANDATORY)
-Each metric or outcome must be pinned to the [CLIENT] header it originated from.
-- No cross-pollination between story blocks
-- "60% reduction" from JP Morgan stays with JP Morgan
-- "150+ practitioners" from Accenture stays with Accenture
+Each metric or outcome must stay inside the XML tag it originated from.
+- No cross-pollination between `<primary_story>` and `<supporting_story>` blocks
+- A number from a supporting story CANNOT appear in your discussion of the primary story
 - When in doubt, cite the client inline: "At **JP Morgan**, Matt achieved..."
 
 This is a BIG-PICTURE question. The user wants themes, patterns, or philosophy.
@@ -1103,7 +1248,7 @@ This is a BIG-PICTURE question. The user wants themes, patterns, or philosophy.
 
 3. **Prove each with a client example** — One sentence per pattern, different clients:
    - **Bold client names** and **key numbers**
-   - Show breadth: JPMorgan, Norfolk Southern, RBC, AT&T, Capital One, Fiserv — not just one or two
+   - Show breadth: {client_list} — cite only from the stories provided
    - **CRITICAL: You MUST reference at least one story from EACH theme represented in the evidence below.**
      If the evidence covers 6 themes, your response must mention all 6. Don't skip themes.
 
@@ -1146,7 +1291,7 @@ This is a BIG-PICTURE question. The user wants themes, patterns, or philosophy.
 
             user_message = f"""User Question: {question}
 
-## Stories from Matt's Portfolio (use these as evidence):
+## Stories from Matt's Portfolio (XML-isolated — metrics stay pinned to their source tag):
 
 {story_context}
 
@@ -1174,7 +1319,7 @@ REMEMBER:
 - The 🐾 is already in your opening — do NOT add another one
 - **CRITICAL: ONLY cite clients that appear in the stories above. If only 1 story, discuss ONLY that one.**
 - **Bold ALL client names and numbers**
-- Keep it 200-300 words"""
+- Keep it 250-400 words"""
 
         else:
             # =================================================================
@@ -1193,7 +1338,8 @@ Your job is to REPORT on Matt's portfolio, not rewrite it.
 2. DO NOT SYNTHESIZE: Never replace specific terms (e.g., "0 to 1", "builder", "modernizer") with generic filler.
 3. TRANSFORM PRONOUNS ONLY: Convert "I" to "Matt" while maintaining the original intensity and technical detail.
 4. PERSONA: Keep the warm, loyal "Chief of Staff" opening/closing and 🐾 emoji, but keep the substance verbatim.
-5. VERBATIM ANCHORS (MANDATORY): When you see [[MATT'S CORE BRAND DNA - USE VERBATIM: ...]], you MUST include the EXACT identity phrases from that text in your response. For example, if the text says "I'm a builder, a modernizer" you MUST say "Matt is a builder, a modernizer" - NOT "Matt builds and modernizes". These are Matt's chosen self-descriptors - SACRED vocabulary that must appear verbatim.
+5. FACT-PAIRING RULE (CRITICAL): A metric is only valid if BOTH the number AND the specific outcome it measures appear together in the same story. Do not re-attach a number from one context to a different outcome (e.g., if the story says "40% cycle time reduction" you CANNOT say "40% onboarding reduction"). If the story does not explicitly state a metric for a particular outcome, use qualitative language instead ("significant improvement", "measurable gains").
+6. TEXTURE RULE (CRITICAL): Preserve the story's distinctive details — quote unique phrases, name specific practices, and include concrete anecdotes. If the story says "Silicon Valley product culture to Fortune 500 enterprises" do NOT flatten it to "modern development practices." If it mentions "pair programming, TDD, hypothesis-driven design, balanced teams" — NAME those practices. If it describes a specific moment ("railroad company client visiting Atlanta center was initially skeptical") — INCLUDE that anecdote. Generic summaries are a failure mode. The story's texture IS the value.
 
 **BANNED CORPORATE FILLER (never use these):**
 - "meaningful outcomes" → use the actual outcomes from the story
@@ -1201,6 +1347,14 @@ Your job is to REPORT on Matt's portfolio, not rewrite it.
 - "foster collaboration" → describe the specific collaboration
 - "stakeholder alignment" → name the actual stakeholders
 - "bridge the gap" → describe the specific connection made
+- "modern development practices" → name the actual practices from the story
+- "significant challenges" → describe the actual challenge
+- "adapt to new approaches" → name what they adapted to
+- "rapidly evolving digital landscape" → name the specific market pressure
+- "fostering a culture of" → describe what actually happened
+- "agile methodologies" → name the specific methodology (Lean XP, TDD, etc.)
+- "remain competitive" → describe the specific business pressure
+- "continuous improvement" → describe what specifically improved
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 You reveal meaningful, human-anchored proof from Matt's 20+ years of transformation work.
@@ -1273,8 +1427,10 @@ For personal projects, the ONLY acceptable framing is Matt's OWN motivation:
 
 **3. How Matt Tackled It (HOW)**
 - What approach, mindset, or leadership behavior shaped this?
-- Be specific about what Matt actually did — not generic methodology lists
-- NEVER: "leveraged", "utilized", "employed best practices"
+- NAME the specific practices from the story (e.g., "pair programming, TDD, hypothesis-driven design" — not "modern development practices")
+- INCLUDE distinctive phrases verbatim (e.g., "show don't tell" sales approach, "Silicon Valley product culture")
+- If the story describes a concrete moment or anecdote, USE IT (e.g., "a railroad company client visiting the center was initially skeptical...")
+- NEVER: "leveraged", "utilized", "employed best practices", "modern practices", "agile methodologies"
 
 **4. What Changed (WHAT)** — MANDATORY FORMATTING:
 - **Bold ALL numbers** — no exceptions (percentages, dollars, multipliers, counts, durations)
@@ -1291,6 +1447,15 @@ For personal projects, the ONLY acceptable framing is Matt's OWN motivation:
 
 **6. Closing** — USE THE EXACT CLOSING PROVIDED. Do not modify it.
 
+## CONTEXT ISOLATION (MANDATORY)
+Stories are wrapped in XML tags. Treat each tag as a **strictly isolated factual island.**
+- `<primary_story>` is the MAIN story — your response should primarily be about THIS story
+- `<supporting_story>` tags are background context ONLY — do NOT pull their details into your primary narrative
+- Do NOT use a client/employer name from a supporting story to label the primary story
+- If the primary story says Client: "Multiple Clients" → say "across multiple engagements" even if you see a named client in a supporting story
+- A metric from a supporting story CANNOT appear in your discussion of the primary story
+- Each number stays inside the XML tag it came from. No cross-pollination.
+
 ## Theme Guidance
 {theme_guidance}
 
@@ -1300,18 +1465,19 @@ For personal projects, the ONLY acceptable framing is Matt's OWN motivation:
 ✓ Key outcomes are **bolded**
 ✓ Only ONE 🐾 emoji (in opening)
 ✓ No bullet lists in the narrative (only for final pattern insights if needed)
-✓ 200-300 words total
+✓ 250-400 words total
 ✓ SCAN YOUR RESPONSE: Any unbolded number = WRONG"""
 
             user_message = f"""User Question: {question}
 
-## Stories from Matt's Portfolio:
+## Stories from Matt's Portfolio (XML-isolated — do NOT cross-pollinate between tags):
 
 {story_context}
 {verbatim_requirement}
 ---
 
 ## YOUR RESPONSE INSTRUCTIONS:
+**RESPOND PRIMARILY ABOUT `<primary_story>` — supporting stories are background only.**
 
 **MANDATORY OPENING (use exactly):** {chosen_opening}
 
@@ -1326,16 +1492,20 @@ For personal projects, the ONLY acceptable framing is Matt's OWN motivation:
 Generate your response with this structure:
 
 1. **{chosen_opening}** ← Start with this exact text, then continue naturally
-2. **Human stakes** — Who was struggling? What was the pain? (NO solution language, NO "critical need")
-3. **How Matt tackled it** — Specific actions and approach
+2. **Human stakes** — Use the story's OWN framing of the challenge (quote its language, don't genericize)
+3. **How Matt tackled it** — Name specific practices FROM the story. Include at least ONE concrete anecdote or distinctive phrase verbatim (e.g., a client reaction, a "show don't tell" moment, a memorable detail)
 4. **What changed** — **Bold all numbers** and **bold {primary_client}**
 5. **Pattern insight** — What transferable principle does this show? (NO generic phrases)
 6. **{chosen_closing}** ← End with this exact text
 
+⚠️ TEXTURE CHECK (do this before submitting):
+- Does your response include at least ONE direct phrase or anecdote from the story? If not, REVISE.
+- Did you write "modern development practices", "agile methodologies", or "digital landscape"? REPLACE with the actual practices named in the story.
+- Did you use the story's distinctive language, or did you flatten it into summary-speak? If flattened, REVISE.
+
 REMEMBER:
 - The 🐾 is already in your opening — do NOT add another one
-- First sentence after opening must name PEOPLE affected (teams, customers, engineers)
-- Keep it 200-300 words
+- Keep it 250-400 words
 - Sound warm and confident, not robotic
 
 ⚠️ MANDATORY BOLDING — VERIFY BEFORE SUBMITTING:
@@ -1347,14 +1517,20 @@ REMEMBER:
 
         # Call OpenAI API
         # Use lower temperature for synthesis to reduce hallucination
+        _temp = 0.2 if is_synthesis else 0.4
+        if DEBUG:
+            print(
+                f"DEBUG LLM call: model=gpt-4o, temperature={_temp}, is_synthesis={is_synthesis}"
+            )
+            print(f"DEBUG system_prompt[:200]: {system_prompt[:200]}")
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="gpt-4o",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_message},
             ],
-            temperature=0.2 if is_synthesis else 0.8,
-            max_tokens=600,
+            temperature=_temp,
+            max_tokens=700,
         )
 
         response_text = response.choices[0].message.content
@@ -1638,10 +1814,13 @@ REMEMBER:
 def diversify_results(
     stories: list[dict[str, Any]], max_per_client: int = 1
 ) -> list[dict[str, Any]]:
-    """Ensure client variety in top results, avoiding last-used client for primary.
+    """Ensure client variety in top results, prioritizing named clients.
 
-    Implements client diversity by limiting stories per client and avoiding
-    repeating the same client in the #1 position across consecutive queries.
+    Implements client diversity by:
+    1. Prioritizing real named clients over generic ones (Independent, Career Narrative, etc.)
+    2. Limiting stories per client
+    3. Avoiding repeating the same client in #1 position across consecutive queries
+
     Uses st.session_state["_last_primary_client"] for tracking.
 
     Args:
@@ -1649,27 +1828,25 @@ def diversify_results(
         max_per_client: Maximum stories per client in results. Defaults to 1.
 
     Returns:
-        List of up to 5 diversified stories with client variety. Returns
-        stories[:1] if input list is shorter than 5.
+        List of up to 7 diversified stories with client variety, named clients first.
 
     Side Effects:
         Updates st.session_state["_last_primary_client"] with the Client field
         from the first result in the returned list.
-
-    Example:
-        >>> stories = [
-        ...     {"id": "1", "Client": "JPMC", "Title": "Story A"},
-        ...     {"id": "2", "Client": "JPMC", "Title": "Story B"},
-        ...     {"id": "3", "Client": "USAA", "Title": "Story C"},
-        ... ]
-        >>> diversify_results(stories)
-        [{"id": "1", "Client": "JPMC", ...}, {"id": "3", "Client": "USAA", ...}]
     """
+    # Generic clients to deprioritize (not real named clients)
+    GENERIC_CLIENTS = {
+        "Independent",
+        "Career Narrative",
+        "Various",
+        "Personal",
+        "Unknown",
+        "Multiple Clients",
+    }
 
-    # DEBUG
     if DEBUG:
         print(
-            f"DEBUG diversify_results: incoming={[s.get('Client') for s in stories[:7]]}"
+            f"DEBUG diversify_results: incoming={[s.get('Client') for s in stories[:10]]}"
         )
 
     last_primary_client = st.session_state.get("_last_primary_client")
@@ -1677,33 +1854,47 @@ def diversify_results(
     if DEBUG:
         print(f"DEBUG diversify_results: last_primary_client={last_primary_client}")
 
-    seen_clients = set()
-    diverse: list[dict] = []
-    overflow = []
+    seen_clients: set[str] = set()
+    named_diverse: list[dict] = []  # Real named clients (JP Morgan, RBC, etc.)
+    generic_overflow: list[dict] = []  # Generic clients (Independent, Career Narrative)
+    duplicate_overflow: list[dict] = []  # Duplicates of already-seen clients
 
     for s in stories:
         client = s.get("Client", "Unknown")
 
-        if not diverse and client == last_primary_client and len(stories) > 1:
+        # Handle last primary client - avoid repeating in #1 slot
+        if (
+            not named_diverse
+            and not generic_overflow
+            and client == last_primary_client
+            and len(stories) > 1
+        ):
             if DEBUG:
                 print(f"DEBUG diversify_results: skipping {client} for #1 slot")
-            overflow.append(s)
+            duplicate_overflow.append(s)
             continue
 
+        # Priority routing based on client type
         if client not in seen_clients:
-            diverse.append(s)
+            if client in GENERIC_CLIENTS:
+                generic_overflow.append(s)
+            else:
+                named_diverse.append(s)
             seen_clients.add(client)
         else:
-            overflow.append(s)
+            duplicate_overflow.append(s)
 
-    result = (diverse + overflow)[
-        :5
-    ]  # Include more stories for Professional Narrative coverage
+    # Final assembly: Named clients first, then generic unique, then duplicates
+    # This ensures JP Morgan/RBC always beat "Independent" in synthesis mode (Q17 fix)
+    result = (named_diverse + generic_overflow + duplicate_overflow)[:7]
 
     if result:
         st.session_state["_last_primary_client"] = result[0].get("Client", "Unknown")
 
     if DEBUG:
+        print(
+            f"DEBUG diversify_results: named={len(named_diverse)}, generic={len(generic_overflow)}"
+        )
         print(f"DEBUG diversify_results: result={[s.get('Client') for s in result]}")
 
     return result
@@ -1880,13 +2071,12 @@ def rag_answer(
                     f"DEBUG: Semantic router: valid={semantic_valid}, score={semantic_score:.3f}, family={intent_family}"
                 )
 
-        # Step 2b: Entity Detection - ALWAYS detect entities for sovereignty
+        # Step 2b: Entity Detection - ALWAYS detect entities
         # Entity-first sovereignty: detected entities are used for:
         # 1. Bypassing router rejection (if semantic_valid=False)
         # 2. Filtering Pinecone results (always)
-        entity_match = (
-            detect_entity(question or "", stories) if not from_suggestion else None
-        )
+        # 3. Pinning entity-matched stories to #1 in ranking (always)
+        entity_match = detect_entity(question or "", stories)
         if DEBUG and entity_match:
             print(f"DEBUG: Entity detected - {entity_match[0]}:{entity_match[1]}")
 
@@ -2095,30 +2285,61 @@ But here's what might translate: Matt's work in **B2B platform modernization**, 
             # Synthesis mode: Theme-diverse retrieval via parallel metadata-filtered search
             # Each theme gets its own Pinecone query with filter={"Theme": theme}
             # If query mentions a client, scope to that client's stories
+            # NOTE: top_per_theme=3 (was 2) to widen the net for client diversity (Q17 fix)
             synthesis_pool = get_synthesis_stories(
-                stories, top_per_theme=2, query=question
+                stories, top_per_theme=3, query=question
             )
 
-            # Sort by score (highest first) to ensure best stories from each theme surface
-            ranked = sorted(
+            # Q17 Fix: Prioritize named clients over generic ones in synthesis ranking
+            # Same logic as diversify_results but preserves score-based ordering within groups
+            GENERIC_CLIENTS_SYNTH = {
+                "Independent",
+                "Career Narrative",
+                "Various",
+                "Personal",
+                "Unknown",
+                "Multiple Clients",
+            }
+
+            # Sort full pool by score first
+            sorted_pool = sorted(
                 synthesis_pool, key=lambda s: s.get("_search_score", 0), reverse=True
             )
-            ranked = ranked[:9]  # Cap at 9 stories for synthesis
+
+            # Separate into named vs generic, preserving score order
+            named_stories = [
+                s
+                for s in sorted_pool
+                if s.get("Client", "Unknown") not in GENERIC_CLIENTS_SYNTH
+            ]
+            generic_stories = [
+                s
+                for s in sorted_pool
+                if s.get("Client", "Unknown") in GENERIC_CLIENTS_SYNTH
+            ]
+
+            # Named clients first, then generic - ensures JP Morgan/RBC beat Independent
+            ranked = (named_stories + generic_stories)[:9]
 
             if DEBUG:
                 themes_found = set(
                     s.get("_matched_theme") or s.get("Theme") for s in ranked
                 )
                 print(
-                    f"DEBUG synthesis mode - pool={len(synthesis_pool)}, ranked={len(ranked)}"
+                    f"DEBUG synthesis mode - pool={len(synthesis_pool)}, named={len(named_stories)}, generic={len(generic_stories)}, ranked={len(ranked)}"
                 )
                 print(f"DEBUG synthesis themes covered: {themes_found}")
-                print("DEBUG synthesis ranked:")
+                print("DEBUG synthesis ranked (named clients first):")
                 for i, s in enumerate(ranked):
                     theme = s.get("_matched_theme") or s.get("Theme", "?")
                     score = s.get("_search_score", 0)
+                    is_named = (
+                        "NAMED"
+                        if s.get("Client", "Unknown") not in GENERIC_CLIENTS_SYNTH
+                        else "generic"
+                    )
                     print(
-                        f"DEBUG   [{i + 1}] [{theme}] {s.get('Client')}: {s.get('Title', '')[:40]} (score={score:.3f})"
+                        f"DEBUG   [{i + 1}] [{is_named}] [{theme}] {s.get('Client')}: {s.get('Title', '')[:40]} (score={score:.3f})"
                     )
         elif intent_family == "narrative" and pool:
             # =============================================================
@@ -2141,8 +2362,91 @@ But here's what might translate: Matt's work in **B2B platform modernization**, 
             else:
                 ranked = diversify_results(candidates) or (pool[:1] if pool else [])
         else:
-            # Standard mode: Client diversity ranking
-            ranked = diversify_results(candidates) or (pool[:1] if pool else [])
+            # Standard mode: Entity-pinned + Client diversity ranking
+            # If entity gate detected a match, pin the matching story to #1
+            # before diversity reordering (prevents "Multiple Clients" demotion)
+            if entity_match:
+                entity_field, entity_value = entity_match
+                # Find ALL stories matching the entity, then pick the one
+                # whose title best overlaps with the query (handles multiple
+                # stories sharing the same Division/Project)
+                entity_candidates = [
+                    c for c in candidates if c.get(entity_field) == entity_value
+                ]
+                if len(entity_candidates) > 1 and entity_field not in (
+                    "Client",
+                    "Employer",
+                ):
+                    # Title substring pin: only for Division/Project/Place entities
+                    # where the entity phrase IS the topic being asked about.
+                    # For Client/Employer, Pinecone score ordering is already
+                    # semantically correct (entity value may not appear in all titles).
+                    entity_phrase = entity_value.lower()
+                    title_matches = [
+                        c
+                        for c in entity_candidates
+                        if entity_phrase in c.get("Title", "").lower()
+                    ]
+                    if title_matches:
+                        pinned = title_matches[
+                            0
+                        ]  # Highest Pinecone score among title matches
+                        if DEBUG:
+                            print(
+                                f"DEBUG entity pin: title substring match '{pinned.get('Title', '')[:50]}' "
+                                f"('{entity_phrase}' in title, {len(entity_candidates)} total candidates)"
+                            )
+                    else:
+                        pinned = entity_candidates[
+                            0
+                        ]  # Fallback to highest Pinecone score
+                        if DEBUG:
+                            print(
+                                f"DEBUG entity pin: no title match for '{entity_phrase}', "
+                                f"using top score: '{pinned.get('Title', '')[:50]}'"
+                            )
+                else:
+                    pinned = entity_candidates[0] if entity_candidates else None
+                    if DEBUG and len(entity_candidates) > 1:
+                        print(
+                            f"DEBUG entity pin: Client/Employer field '{entity_field}' — "
+                            f"using top Pinecone score: '{pinned.get('Title', '')[:50]}' "
+                            f"(skipped title substring, {len(entity_candidates)} candidates)"
+                        )
+                if pinned:
+                    others = diversify_results(
+                        [c for c in candidates if c.get("id") != pinned.get("id")]
+                    )
+                    ranked = [pinned] + (others or [])
+                    if DEBUG:
+                        print(
+                            f"DEBUG entity pin: '{pinned.get('Title', '')[:50]}' pinned to #1 ({entity_field}={entity_value})"
+                        )
+                else:
+                    if DEBUG:
+                        pool_values = [
+                            c.get(entity_field, "MISSING") for c in candidates[:5]
+                        ]
+                        print(
+                            f"DEBUG entity pin MISS: no story matched {entity_field}='{entity_value}'. Pool values: {pool_values}"
+                        )
+                    ranked = diversify_results(candidates) or (pool[:1] if pool else [])
+            else:
+                if query_intent == "narrative":
+                    # Narrative queries: trust Pinecone semantic ranking.
+                    # Diversity demotes the best match based on client name
+                    # (e.g., "Multiple Clients" ranked below "Financial Services Client"
+                    # even when the Multiple Clients story is the actual answer).
+                    ranked = sorted(
+                        candidates, key=lambda s: s.get("pc", 0.0), reverse=True
+                    ) or (pool[:1] if pool else [])
+                    if DEBUG:
+                        print(
+                            f"DEBUG narrative skip-diversity: top='{ranked[0].get('Title', '')[:50]}' "
+                            f"(pc={ranked[0].get('pc', 0.0):.3f})"
+                        )
+                else:
+                    ranked = diversify_results(candidates) or (pool[:1] if pool else [])
             if DEBUG and ranked:
                 dbg(f"ask: ranked first_ids={[s.get('id') for s in ranked]}")
     except Exception as e:

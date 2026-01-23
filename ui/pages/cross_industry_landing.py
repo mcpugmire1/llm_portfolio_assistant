@@ -1,8 +1,11 @@
 """
 Cross-Industry Transformation Landing Page
 
-53 transformation projects across multiple industries.
+Cross-industry transformation projects.
+Counts are derived dynamically from JSONL data.
 """
+
+from collections import Counter
 
 import streamlit as st
 import streamlit.components.v1 as components
@@ -10,13 +13,35 @@ import streamlit.components.v1 as components
 from ui.components.footer import render_footer
 
 
-def render_cross_industry_landing():
+def render_cross_industry_landing(stories: list[dict]):
     """Render Cross-Industry Transformation landing page using Streamlit components
+
+    Args:
+        stories: Full story corpus from JSONL.
 
     KNOWN ISSUE: Streamlit preserves scroll position when using st.session_state + st.rerun(),
     causing pages to load at the same vertical position as the previous page. This is a
     Streamlit limitation that cannot be overridden without converting to multipage app.
     """
+    # === DYNAMIC COUNTS (derived from JSONL) ===
+    cross_industry_stories = [
+        s for s in stories if s.get("Industry") == "Cross Industry"
+    ]
+    total_projects = len(cross_industry_stories)
+
+    # Unique industries across all stories
+    all_industries = set(s.get("Industry", "") for s in stories if s.get("Industry"))
+    num_industries = len(all_industries)
+
+    # Capability areas (unique Solution / Offering values)
+    capabilities = set(
+        s.get("Solution / Offering", "")
+        for s in cross_industry_stories
+        if s.get("Solution / Offering")
+    )
+    num_capabilities = len(capabilities)
+
+    # === END DYNAMIC COUNTS ===
 
     # Scroll to top on page load
     components.html(
@@ -33,13 +58,13 @@ def render_cross_industry_landing():
 
     # Hero header with Agy avatar (green headphones - versatility, growth)
     st.markdown(
-        """
+        f"""
 <div class="conversation-header">
     <div class="conversation-header-content">
         <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_cross_industry.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
         <div class="conversation-header-text">
             <h1>Agy's Cross-Industry Playbook</h1>
-            <p>Tracking proven methods across 53 transformation capabilities — ask Agy 🐾 to find what's repeatable</p>
+            <p>Tracking proven methods across {total_projects} transformation capabilities — ask Agy 🐾 to find what's repeatable</p>
         </div>
     </div>
 </div>
@@ -49,18 +74,18 @@ def render_cross_industry_landing():
 
     # Stats bar - using same pattern as hero.py
     st.markdown(
-        '''
+        f'''
     <div class="stats-bar">
         <div class="stat">
-            <div class="stat-number">53</div>
+            <div class="stat-number">{total_projects}</div>
             <div class="stat-label">Projects Delivered</div>
         </div>
         <div class="stat">
-            <div class="stat-number">15+</div>
+            <div class="stat-number">{num_capabilities}</div>
             <div class="stat-label">Capability Areas</div>
         </div>
         <div class="stat">
-            <div class="stat-number">6</div>
+            <div class="stat-number">{num_industries}</div>
             <div class="stat-label">Industries</div>
         </div>
     </div>
@@ -415,8 +440,6 @@ def render_cross_industry_landing():
     <div class="client-pills">
         <span class="client-pill">Banking & Financial Services</span>
         <span class="client-pill">Healthcare & Life Sciences</span>
-        <span class="client-pill">Manufacturing</span>
-        <span class="client-pill">Retail & Consumer Goods</span>
         <span class="client-pill">Transportation & Logistics</span>
         <span class="client-pill">Telecommunications</span>
         <span class="client-pill">Public Sector</span>
@@ -431,76 +454,73 @@ def render_cross_industry_landing():
         unsafe_allow_html=True,
     )
     st.markdown(
-        '<p class="subtitle">Browse 53 cross-industry projects organized by transformation approach and methodology</p>',
+        f'<p class="subtitle">Browse {total_projects} cross-industry projects organized by transformation approach and methodology</p>',
         unsafe_allow_html=True,
     )
 
-    # Cross-industry categories data (removed button_text - no longer needed)
+    # Dynamic counts: Solution / Offering occurrences in cross-industry stories
+    capability_counts = Counter(
+        s.get("Solution / Offering", "")
+        for s in cross_industry_stories
+        if s.get("Solution / Offering")
+    )
+
+    # Cross-industry capability cards (icon, title, description)
+    # Count for each card is looked up dynamically from capability_counts
     cross_industry_categories = [
         (
             "🔧",
             "Modern Engineering Practices & Solutions",
-            26,
             "DevOps, CI/CD, test automation, engineering excellence, quality practices",
         ),
         (
             "🤝",
             "Cross-Functional Collaboration & Team Enablement",
-            8,
             "Breaking down silos, team alignment, collaboration frameworks, culture change",
         ),
         (
             "🎓",
             "Client Enablement & Sustainable Innovation",
-            8,
             "Knowledge transfer, capability building, innovation centers, sustainable practices",
         ),
         (
             "⚡",
             "Agile Transformation & Delivery",
-            2,
             "Scaling agile practices, SAFe, Scrum at scale, delivery acceleration across industries",
         ),
         (
             "💡",
             "Product Management & Innovation Labs",
-            2,
             "Innovation programs, experimentation, lean startup methodology, product discovery",
         ),
         (
             "🚀",
             "Application Modernization",
-            2,
             "Legacy transformation, microservices migration, platform engineering",
         ),
         (
             "🎨",
             "User-Centered Design & Experience",
-            1,
             "UX research, design thinking, customer journey mapping, experience design",
         ),
         (
             "🌩️",
             "Platform Optimization & Cloud-Native Development",
-            1,
             "Platform engineering, developer experience, internal platforms, service catalogs",
         ),
         (
             "📱",
             "Modern Product Engineering Methodology",
-            1,
             "Product thinking, user-centered design, rapid prototyping, product-market fit",
         ),
         (
             "🚢",
             "DevOps & Continuous Delivery",
-            1,
             "Deployment automation, pipeline engineering, continuous integration, release management",
         ),
         (
             "🤖",
             "AI & Machine Learning Solutions",
-            1,
             "Machine learning platforms, AI strategy, intelligent automation, predictive analytics",
         ),
     ]
@@ -510,7 +530,8 @@ def render_cross_industry_landing():
         cols = st.columns(3)
         for j in range(3):
             if i + j < len(cross_industry_categories):
-                icon, title, count, desc = cross_industry_categories[i + j]
+                icon, title, desc = cross_industry_categories[i + j]
+                count = capability_counts.get(title, 0)
                 with cols[j]:
                     # Singular/plural handling
                     project_text = "project" if count == 1 else "projects"
@@ -536,6 +557,7 @@ def render_cross_industry_landing():
                         # Set pre-filters for Explore Stories
                         st.session_state["prefilter_industry"] = "Cross Industry"
                         st.session_state["prefilter_capability"] = title
+                        st.session_state["return_to_landing"] = "cross_industry"
                         st.session_state["active_tab"] = "Explore Stories"
                         st.rerun()
 

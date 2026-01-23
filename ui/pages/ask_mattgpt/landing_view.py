@@ -79,12 +79,7 @@ def render_landing_page(stories: list[dict]):
             </div>
             <h2 class="welcome-title">Hi, I'm Agy 🐾</h2>
             <p class="intro-text-primary">
-                I'm a Plott Hound — a breed known for tracking skills and determination.
-                Perfect traits for helping you hunt down insights from Matt's 130+ transformation projects.
-            </p>
-            <p class="intro-text-secondary">
-                Ask me about specific methodologies, leadership approaches, or project outcomes.
-                I understand context, not just keywords.
+                Go deeper than a resume. Ask me anything about Matt's 130+ projects—I'll connect the dots.
             </p>
         </div>
         """,

@@ -741,6 +741,15 @@ def render_explore_stories(
         border-bottom: 1px solid var(--border-color);
     }
 
+    /* Active filter chips - compact text */
+    [class*="st-key-chip_"] button,
+    [class*="st-key-chip_clear_all"] button {
+        font-size: 13px !important;
+        padding: 4px 14px !important;
+        min-height: 32px !important;
+    }
+
+
     /* =============================================================================
        FORM INPUTS - BASE STYLES
        ============================================================================= */
@@ -1638,6 +1647,59 @@ def render_explore_stories(
         # Scroll to top
         components.html(
             '<script>window.parent.document.querySelector("section.main").scrollTo(0, 0);</script>',
+            height=0,
+        )
+
+    # ==================================================================
+    # BREADCRUMB STRIP (between hero and filter box)
+    # ==================================================================
+    _return_landing = st.session_state.get("return_to_landing")
+    if _return_landing:
+        _bc_label = "← Banking" if _return_landing == "banking" else "← Cross Industry"
+        st.markdown(
+            f"""
+            <span id="breadcrumb-chip" style="display: inline-flex; align-items: center; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; border: 1px solid #E5E7EB; background: white; color: #6B21A8; transition: all 0.15s ease; margin-top: -1rem;">
+                <a id="breadcrumb-return" style="color: inherit; text-decoration: none; cursor: pointer;">{_bc_label}</a>
+            </span>
+            <style>
+            #breadcrumb-chip:hover {{ border-color: #8B5CF6; background: #F5F3FF; color: #7C3AED; box-shadow: 0 2px 6px rgba(139, 92, 246, 0.15); }}
+            [class*="st-key-breadcrumb_return_landing"] {{ display: none !important; }}
+            </style>
+            """,
+            unsafe_allow_html=True,
+        )
+        if st.button("", key="breadcrumb_return_landing"):
+            _landing_tab = (
+                "Banking" if _return_landing == "banking" else "Cross-Industry"
+            )
+            st.session_state.pop("return_to_landing", None)
+            st.session_state["active_tab"] = _landing_tab
+            st.session_state["filters"] = {
+                "personas": [],
+                "clients": [],
+                "domains": [],
+                "roles": [],
+                "tags": [],
+                "q": "",
+                "has_metric": False,
+                "era": "",
+                "industry": "",
+                "capability": "",
+            }
+            st.rerun()
+        components.html(
+            """<script>
+            setTimeout(function() {
+                var chip = window.parent.document.getElementById('breadcrumb-chip');
+                if (chip && !chip.dataset.wired) {
+                    chip.dataset.wired = 'true';
+                    chip.onclick = function() {
+                        var btn = window.parent.document.querySelector('[class*="st-key-breadcrumb_return_landing"] button');
+                        if (btn) btn.click();
+                    };
+                }
+            }, 200);
+            </script>""",
             height=0,
         )
 

@@ -1,22 +1,65 @@
 """
 Banking Landing Page
 
-47 banking projects organized by capability and client.
+Banking projects organized by capability and client.
+Counts are derived dynamically from JSONL data.
 """
+
+from collections import Counter
 
 import streamlit as st
 import streamlit.components.v1 as components
 
 from ui.components.footer import render_footer
 
+# Clients to exclude from pills (too generic)
+_EXCLUDED_CLIENTS = {
+    "Multiple Clients",
+    "Multiple Financial Services Clients",
+    "Financial Services Client",
+    "Various",
+    "Independent",
+    "Career Narrative",
+    "N/A",
+    "",
+    None,
+}
 
-def render_banking_landing():
+
+def render_banking_landing(stories: list[dict]):
     """Render Banking / Financial Services landing page using Streamlit components
+
+    Args:
+        stories: Full story corpus from JSONL.
 
     KNOWN ISSUE: Streamlit preserves scroll position when using st.session_state + st.rerun(),
     causing pages to load at the same vertical position as the previous page. This is a
     Streamlit limitation that cannot be overridden without converting to multipage app.
     """
+    # === DYNAMIC COUNTS (derived from JSONL) ===
+    banking_stories = [
+        s for s in stories if s.get("Industry") == "Financial Services / Banking"
+    ]
+    total_projects = len(banking_stories)
+
+    # Client counts (excluding generic clients)
+    client_counter = Counter(
+        s.get("Client", "Unknown")
+        for s in banking_stories
+        if s.get("Client") not in _EXCLUDED_CLIENTS
+    )
+    named_clients = [(client, count) for client, count in client_counter.most_common()]
+    num_clients = len(named_clients)
+
+    # Capability areas (unique Solution / Offering values)
+    capabilities = set(
+        s.get("Solution / Offering", "")
+        for s in banking_stories
+        if s.get("Solution / Offering")
+    )
+    num_capabilities = len(capabilities)
+
+    # === END DYNAMIC COUNTS ===
 
     # Scroll to top on page load
     components.html(
@@ -33,13 +76,13 @@ def render_banking_landing():
 
     # Hero header with Agy avatar (deep blue headphones - authority, trust)
     st.markdown(
-        """
+        f"""
 <div class="conversation-header">
     <div class="conversation-header-content">
         <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_banking.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
         <div class="conversation-header-text">
             <h1>Matt's Financial Services Expertise</h1>
-            <p>47 projects across 16 specialized areas — trust Agy 🐾 to filter decades of domain experience</p>
+            <p>{total_projects} projects across {num_capabilities} specialized areas — trust Agy 🐾 to filter decades of domain experience</p>
         </div>
     </div>
 </div>
@@ -49,18 +92,18 @@ def render_banking_landing():
 
     # Stats bar - using same pattern as hero.py
     st.markdown(
-        '''
+        f'''
     <div class="stats-bar">
         <div class="stat">
-            <div class="stat-number">47</div>
+            <div class="stat-number">{total_projects}</div>
             <div class="stat-label">Projects Delivered</div>
         </div>
         <div class="stat">
-            <div class="stat-number">16</div>
+            <div class="stat-number">{num_capabilities}</div>
             <div class="stat-label">Capability Areas</div>
         </div>
         <div class="stat">
-            <div class="stat-number">6</div>
+            <div class="stat-number">{num_clients}</div>
             <div class="stat-label">Banking Clients</div>
         </div>
     </div>
@@ -414,16 +457,12 @@ def render_banking_landing():
         unsafe_allow_html=True,
     )
 
-    clients_html = """
-    <div class="client-pills">
-        <span class="client-pill">JP Morgan Chase (22)</span>
-        <span class="client-pill">RBC (11)</span>
-        <span class="client-pill">Fiserv (7)</span>
-        <span class="client-pill">American Express (3)</span>
-        <span class="client-pill">Capital One (2)</span>
-        <span class="client-pill">HSBC (2)</span>
-    </div>
-    """
+    # Generate client pills dynamically from JSONL data
+    client_pills = "".join(
+        f'<span class="client-pill">{client} ({count})</span>'
+        for client, count in named_clients
+    )
+    clients_html = f'<div class="client-pills">{client_pills}</div>'
     st.markdown(clients_html, unsafe_allow_html=True)
 
     # Categories section - using DIV instead of H2 to prevent anchor generation
@@ -432,100 +471,93 @@ def render_banking_landing():
         unsafe_allow_html=True,
     )
     st.markdown(
-        '<p class="subtitle">Browse 47 banking projects organized by specialty area</p>',
+        f'<p class="subtitle">Browse {total_projects} banking projects organized by specialty area</p>',
         unsafe_allow_html=True,
     )
 
-    # Banking categories data (removed button_text - no longer needed)
+    # Dynamic counts: Solution / Offering occurrences in banking stories
+    capability_counts = Counter(
+        s.get("Solution / Offering", "")
+        for s in banking_stories
+        if s.get("Solution / Offering")
+    )
+
+    # Banking capability cards (icon, title, description)
+    # Count for each card is looked up dynamically from capability_counts
     banking_categories = [
         (
             "⚡",
             "Agile Transformation & Delivery",
-            8,
             "Scaling agile practices, delivery acceleration, team transformation",
         ),
         (
             "💰",
             "Global Payments & Treasury Solutions",
-            7,
             "Payment platforms, treasury systems, real-time processing",
         ),
         (
             "🎯",
             "Technology Strategy & Advisory",
-            5,
             "Architecture roadmaps, strategic planning, technology vision",
         ),
         (
             "📊",
             "Program Management & Governance",
-            4,
             "Large-scale program delivery, governance frameworks, PMO",
         ),
         (
             "🔧",
             "Modern Engineering Practices & Solutions",
-            4,
             "DevOps, CI/CD, cloud-native engineering, modern toolchains",
         ),
         (
             "📈",
             "Data & Analytics Solutions",
-            3,
             "Data platforms, analytics, business intelligence",
         ),
         (
             "🤝",
             "Cross-Functional Collaboration & Team Enablement",
-            3,
             "Team alignment, collaboration frameworks, culture change",
         ),
         (
             "🔄",
             "Business Process Optimization",
-            3,
             "Process reengineering, workflow automation, efficiency",
         ),
         (
             "🔌",
             "Enterprise Integration & API Management",
-            2,
             "API platforms, integration architecture, service mesh",
         ),
         (
             "📱",
             "Digital Product Development",
-            2,
             "Mobile banking, customer experiences, digital channels",
         ),
         (
             "🔐",
             "Compliance & Risk Solutions",
-            2,
             "Regulatory compliance, risk frameworks, audit support",
         ),
         (
             "🚢",
             "DevOps & Continuous Delivery",
-            1,
             "Automation, deployment pipelines, continuous integration",
         ),
         (
             "☁️",
             "Cloud Transformation & Migration",
-            1,
             "Cloud strategy, migrations, hybrid cloud architectures",
         ),
         (
             "🔨",
             "Application Modernization",
-            1,
             "Legacy modernization, microservices, platform engineering",
         ),
         (
             "📦",
             "Adoption Enablement & Developer Toolkit",
-            1,
             "Developer experience, tooling, productivity platforms",
         ),
     ]
@@ -535,7 +567,8 @@ def render_banking_landing():
         cols = st.columns(3)
         for j in range(3):
             if i + j < len(banking_categories):
-                icon, title, count, desc = banking_categories[i + j]
+                icon, title, desc = banking_categories[i + j]
+                count = capability_counts.get(title, 0)
                 with cols[j]:
                     # Singular/plural handling
                     project_text = "project" if count == 1 else "projects"
@@ -563,6 +596,7 @@ def render_banking_landing():
                             "Financial Services / Banking"
                         )
                         st.session_state["prefilter_capability"] = title
+                        st.session_state["return_to_landing"] = "banking"
                         st.session_state["active_tab"] = "Explore Stories"
                         st.rerun()
 

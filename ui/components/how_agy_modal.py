@@ -381,8 +381,8 @@ def get_how_agy_flow_html() -> str:
                         </div>
                     </div>
                     <div class="search-card diversity" style="margin-top: 0;">
-                        <div class="card-title diversity">🎲 Result Diversity</div>
-                        <div class="card-desc diversity">Shows varied experiences across different clients and industries—no repetitive results</div>
+                        <div class="card-title diversity">🎯 Best Match</div>
+                        <div class="card-desc diversity">Prioritizes the best match for your question type—whether it's a specific client story or a career theme</div>
                     </div>
                 </div>
             </div>
@@ -720,7 +720,7 @@ def get_technical_details_html() -> str:
                         <ul>
                             <li><strong>OpenAI text-embedding-3-small</strong></li>
                             <li><strong>Pinecone</strong> vector database</li>
-                            <li>Pure semantic similarity (no keyword matching)</li>
+                            <li>Semantic + keyword hybrid scoring</li>
                         </ul>
                     </div>
 
@@ -741,13 +741,13 @@ def get_technical_details_html() -> str:
                 <div class="tech-cards">
                     <div class="tech-card diversity">
                         <div class="tech-card-header">
-                            <span>🎲</span>
-                            <h4>Client Diversity</h4>
+                            <span>🎯</span>
+                            <h4>Smart Ranking</h4>
                         </div>
                         <ul>
-                            <li><strong>Max 1 story per client</strong> in results</li>
-                            <li>Prevents repetitive single-client results</li>
-                            <li>Smart overflow for quality maintenance</li>
+                            <li><strong>Best semantic match</strong> always surfaces first</li>
+                            <li>Adapts ranking to question type</li>
+                            <li>Client variety for broad queries</li>
                         </ul>
                     </div>
 
