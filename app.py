@@ -22,7 +22,6 @@ from dotenv import load_dotenv
 from config.debug import DEBUG
 from services.rag_service import initialize_vocab
 from ui.components.navbar import render_navbar
-from ui.pages.ask_mattgpt.backend_service import sync_portfolio_metadata
 
 # Local imports - components
 from ui.pages.home import render_home_page
@@ -191,6 +190,9 @@ initialize_vocab(STORIES)
 
 # Sync portfolio metadata (MATT_DNA, SYNTHESIS_THEMES) from story data
 # This ensures grounding prompt and themes never drift from JSONL
+# NOTE: Deferred import to avoid circular dependency (backend_service ← conversation_view ← __init__)
+from ui.pages.ask_mattgpt.backend_service import sync_portfolio_metadata  # noqa: E402
+
 sync_portfolio_metadata(STORIES)
 
 
