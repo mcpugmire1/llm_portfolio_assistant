@@ -347,20 +347,16 @@ def render_filter_chips(filters: dict, stories: list[dict]) -> bool:
     if not chips:
         return False
 
-    st.markdown('<div class="active-chip-row">', unsafe_allow_html=True)
-
+    # Pure CSS inline layout: buttons inside a keyed container, styled via CSS flex
     to_remove = []
-    for _i, (_, text, (k, v)) in enumerate(chips):
-        # FIX: Create stable unique key using hash instead of position index
-        unique_key = f"chip_{k}_{hash((k, v))}"
-        if st.button(f"✕ {text}", key=unique_key):
-            to_remove.append((k, v))
-
     clear_all = False
-    if st.button("Clear all", key="chip_clear_all"):
-        clear_all = True
 
-    st.markdown("</div>", unsafe_allow_html=True)
+    with st.container(key="chip_row"):
+        for _i, (_, text, (k, v)) in enumerate(chips):
+            if st.button(f"\u2715 {text}", key=f"chip_{_i}"):
+                to_remove.append((k, v))
+        if st.button("\u2715 Clear all", key="chip_clear_all"):
+            clear_all = True
 
     if clear_all:
         reset_all_filters(stories)
@@ -741,12 +737,54 @@ def render_explore_stories(
         border-bottom: 1px solid var(--border-color);
     }
 
-    /* Active filter chips - compact text */
-    [class*="st-key-chip_"] button,
-    [class*="st-key-chip_clear_all"] button {
-        font-size: 13px !important;
-        padding: 4px 14px !important;
-        min-height: 32px !important;
+    /* Filter chip row - force horizontal flex layout */
+    .st-key-chip_row,
+    .st-key-chip_row > div,
+    .st-key-chip_row > div > div {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        flex-direction: row !important;
+        gap: 6px !important;
+        align-items: center !important;
+    }
+    .st-key-chip_row [data-testid="element-container"] {
+        width: auto !important;
+        flex: none !important;
+    }
+
+    /* Filter chip buttons - pill styling */
+    .st-key-chip_row [class*="st-key-chip_"] button {
+        border-radius: 16px !important;
+        font-size: 12px !important;
+        padding: 4px 10px !important;
+        font-weight: 500 !important;
+        white-space: nowrap !important;
+        transition: all 0.15s ease !important;
+        background: var(--bg-card) !important;
+        color: var(--text-primary) !important;
+        border: 1px solid var(--border-color) !important;
+    }
+    .st-key-chip_row [class*="st-key-chip_"] button p {
+        font-size: 12px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        color: inherit !important;
+    }
+    .st-key-chip_row [class*="st-key-chip_"] button:hover {
+        border-color: #EF4444 !important;
+        color: #DC2626 !important;
+        background: #FEF2F2 !important;
+    }
+    /* "Clear all" chip - surface bg to distinguish */
+    .st-key-chip_row .st-key-chip_clear_all button {
+        background: var(--bg-surface) !important;
+        color: var(--text-secondary) !important;
+        border: 1px solid var(--border-color) !important;
+    }
+    .st-key-chip_row .st-key-chip_clear_all button:hover {
+        border-color: #EF4444 !important;
+        color: #DC2626 !important;
+        background: #FEF2F2 !important;
     }
 
 
@@ -1450,8 +1488,7 @@ def render_explore_stories(
         [data-testid="stHorizontalBlock"]:has([class*="st-key-btn_toggle_advanced"]),
         [class*="st-key-btn_toggle_advanced"],
         [class*="st-key-btn_reset_filters"],
-        [class*="st-key-chip_"],
-        .active-chip-row,
+        .st-key-chip_row,
         [data-testid="stExpander"] {
             display: none !important;
         }
@@ -1984,10 +2021,11 @@ def render_explore_stories(
             if len(view) == 0:
                 st.markdown(
                     f"""
-                    <div style="background: #F3E8FF; border-left: 4px solid #8B5CF6; padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;">
-                        <span style="color: #6B21A8; font-size: 14px;">
+                    <div style="background: var(--banner-info-bg); border-left: 4px solid var(--accent-purple); padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;">
+                        <span style="color: var(--accent-purple-text); font-size: 14px;">
                             🐾 No projects match {filter_desc}.
                         </span>
+                        <br><span style="color: var(--accent-purple-text); font-size: 13px; opacity: 0.8;">Try removing a filter or broadening your search.</span>
                     </div>
                     """,
                     unsafe_allow_html=True,
@@ -1995,8 +2033,8 @@ def render_explore_stories(
             else:
                 st.markdown(
                     f"""
-                    <div style="background: #F3E8FF; border-left: 4px solid #8B5CF6; padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;">
-                        <span style="color: #6B21A8; font-size: 14px;">
+                    <div style="background: var(--banner-info-bg); border-left: 4px solid var(--accent-purple); padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;">
+                        <span style="color: var(--accent-purple-text); font-size: 14px;">
                             🐾 Showing {len(view)} {filter_desc} projects.
                         </span>
                     </div>
