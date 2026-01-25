@@ -69,6 +69,10 @@ def build_embedding_text(story: dict[str, Any]) -> str:
             return " ".join(str(p).strip() for p in val[:max_items] if str(p).strip())
         return str(val).strip()
 
+    title = (
+        story.get("Title", "").strip() if isinstance(story.get("Title"), str) else ""
+    )
+
     theme = (
         story.get("Theme", "").strip() if isinstance(story.get("Theme"), str) else ""
     )
@@ -102,6 +106,8 @@ def build_embedding_text(story: dict[str, Any]) -> str:
     parts: list[str] = []
 
     header_bits = []
+    if title:
+        header_bits.append(f"[{title}]")
     if theme:
         header_bits.append(f"[{theme}]")
     if industry:
