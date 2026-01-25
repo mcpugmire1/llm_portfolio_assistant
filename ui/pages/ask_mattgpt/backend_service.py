@@ -982,7 +982,6 @@ def _generate_agy_response(
             # Standard mode openings - for specific questions
             openings = [
                 "🐾 Found it!",
-                "🐾 Great question!",
                 "🐾 Tracking this down...",
                 "🐾 On it!",
                 "🐾 Perfect — here's what I found.",
@@ -990,7 +989,6 @@ def _generate_agy_response(
                 "🐾 This is a strong one.",
                 "🐾 Here's a great example.",
                 "🐾 I know just the story.",
-                "🐾 Glad you asked!",
             ]
             chosen_opening = random.choice(openings)
 
@@ -1098,6 +1096,12 @@ DO NOT paraphrase. These are Matt's chosen identity words.
 
             system_prompt = f"""You are Agy 🐾 — Matt Pugmire's Plott Hound assistant.
 
+## NEVER DO THESE (violating these is a failure)
+- NEVER write meta-commentary about Matt ("This reflects Matt's pattern...", "Matt's ability to...", "This demonstrates Matt's...")
+- NEVER end with a reflection paragraph summarizing Matt's skills or patterns
+- NEVER write "His approach shows..." or "This experience demonstrates..." — that's LinkedIn garbage
+- Your response ENDS with the closing line. No summary paragraph after it.
+
 {MATT_DNA}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1140,6 +1144,13 @@ If the query is about shopping, weather, celebrities, or anything unrelated to M
 - Exactly ONE 🐾 per response (already provided in opening)
 - No dog jokes, barking, or cutesiness
 - No corporate jargon walls
+
+## NEVER DO THESE (violating these is a failure)
+- NEVER use sycophantic openers ("Great question!", "That's a great topic!")
+- NEVER use these words: "impactful", "holistic", "synergy", "showcasing"
+- NEVER write meta-commentary about Matt ("This reflects Matt's pattern...", "Matt's ability to...", "This demonstrates Matt's...")
+- NEVER end with a reflection paragraph summarizing Matt's skills or patterns — your response ends with the closing line, period
+- NEVER write "His approach shows..." or "This experience demonstrates..." — that's LinkedIn garbage
 
 ## PERSONA TRANSFORMATION RULES (Career Narrative & Behavioral stories)
 
@@ -1314,6 +1325,12 @@ REMEMBER:
 
             system_prompt = f"""You are Agy 🐾 — Matt Pugmire's Plott Hound assistant.
 
+## NEVER DO THESE (violating these is a failure)
+- NEVER write meta-commentary about Matt ("This reflects Matt's pattern...", "Matt's ability to...", "This demonstrates Matt's...")
+- NEVER end with a reflection paragraph summarizing Matt's skills or patterns
+- NEVER write "His approach shows..." or "This experience demonstrates..." — that's LinkedIn garbage
+- Your response ENDS with the closing line. No summary paragraph after it.
+
 {MATT_DNA}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1356,6 +1373,13 @@ If the query is about shopping, weather, celebrities, or anything unrelated to M
 - Exactly ONE 🐾 per response (already provided in opening)
 - No dog jokes, barking, or cutesiness
 - No corporate jargon walls
+
+## NEVER DO THESE (violating these is a failure)
+- NEVER use sycophantic openers ("Great question!", "That's a great topic!")
+- NEVER use these words: "impactful", "holistic", "synergy", "showcasing"
+- NEVER write meta-commentary about Matt ("This reflects Matt's pattern...", "Matt's ability to...", "This demonstrates Matt's...")
+- NEVER end with a reflection paragraph summarizing Matt's skills or patterns — your response ends with the closing line, period
+- NEVER write "His approach shows..." or "This experience demonstrates..." — that's LinkedIn garbage
 
 ## PERSONA TRANSFORMATION RULES (Career Narrative & Behavioral stories)
 
@@ -1573,15 +1597,52 @@ REMEMBER:
             "stakeholder alignment",
             "bridge the gap",
         ]
+        phrases_removed = []
         for phrase in BANNED_PHRASES_CLEANUP:
-            # Replace banned phrase with a clean alternative (or just remove)
+            if re.search(
+                rf'\b{re.escape(phrase)}\b', response_text, flags=re.IGNORECASE
+            ):
+                phrases_removed.append(phrase)
             response_text = re.sub(
                 rf'\b{re.escape(phrase)}\b', '', response_text, flags=re.IGNORECASE
             )
+        if phrases_removed and DEBUG:
+            print(f"DEBUG BANDAID [banned_phrases]: removed {phrases_removed}")
+
+        # Remove meta-commentary sentences (GPT-4o ignores NEVER rules)
+        META_SENTENCE_PATTERNS = [
+            r"This (experience|project|work|effort) (reflects|demonstrates|shows|highlights|showcases) Matt's[^.]*\.",
+            r"(Matt's|His) (ability|pattern|approach) to[^.]*\.",
+            r"His approach (shows|demonstrates|reflects|highlights)[^.]*\.",
+            r"This demonstrates Matt's[^.]*\.",
+            r"This (reflects|showcases|highlights) Matt's[^.]*\.",
+            r"This (ensures|showcases|demonstrates) that[^.]*\.",
+            r"By [^,]+, Matt (effectively|successfully|consistently|ensures|ensured)[^.]*\.",
+        ]
+        meta_removed = []
+        for pattern in META_SENTENCE_PATTERNS:
+            match = re.search(pattern, response_text, flags=re.IGNORECASE)
+            if match:
+                meta_removed.append(
+                    match.group(0)[:50] + "..."
+                    if len(match.group(0)) > 50
+                    else match.group(0)
+                )
+                response_text = re.sub(pattern, '', response_text, flags=re.IGNORECASE)
+        if meta_removed and DEBUG:
+            print(f"DEBUG BANDAID [meta_commentary]: removed {meta_removed}")
+
         # Clean up any double spaces or awkward punctuation left behind
         response_text = re.sub(r'  +', ' ', response_text)
         response_text = re.sub(r' ,', ',', response_text)
         response_text = re.sub(r' \.', '.', response_text)
+        response_text = re.sub(
+            r' and were ', ' were ', response_text
+        )  # "X and were Y" → "X were Y"
+        response_text = re.sub(r'\band\s+\.', '.', response_text)  # "and ." → "."
+        response_text = re.sub(
+            r'\n\n\n+', '\n\n', response_text
+        )  # collapse multiple newlines
 
         return response_text
 
