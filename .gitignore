@@ -88,3 +88,5 @@ scripts/restructure_architecture.py
 
 # Exceptions - keep these files
 !echo_star_stories_nlp.jsonl
+data/borderline_queries.csv
+data/offdomain_queries.csv
