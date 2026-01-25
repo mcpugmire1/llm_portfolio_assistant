@@ -236,10 +236,14 @@ def _format_narrative(s: dict[str, Any]) -> str:
     "I led [Title] at [Client] in [Domain]. The aim was [goal].
     We focused on [approach]. Impact: [strongest metric]."
 
+    For Professional Narrative stories (biographical/philosophical content),
+    uses the 5PSummary directly instead of the "I led X at Y" template.
+
     Args:
         s: Story dictionary with fields:
             - Title (str): Story title
             - Client (str): Client name
+            - Theme (str, optional): Story theme (checks for "Professional Narrative")
             - Sub-category (str, optional): Domain
             - why (str, optional): Purpose/goal
             - how (list[str], optional): Approach bullets (uses first 2)
@@ -258,6 +262,14 @@ def _format_narrative(s: dict[str, Any]) -> str:
         >>> _format_narrative(story)
         'I led **Platform Modernization** at **JPMC** in **Cloud-Native Architecture**. The aim was reduce infrastructure costs. We focused on migrated to AWS, implemented auto-scaling. Impact: **Reduced costs by 40%**.'
     """
+    # Professional Narrative stories - use summary directly, not "I led X at Y"
+    if s.get("Theme") == "Professional Narrative":
+        summary = s.get("5PSummary") or s.get("5p_summary") or ""
+        if summary:
+            return summary
+        # Fall through to 5P summary builder if no summary field
+        return build_5p_summary(s, 300)
+
     title = s.get("Title", "")
     client = s.get("Client", "")
     domain = s.get("Sub-category", "")

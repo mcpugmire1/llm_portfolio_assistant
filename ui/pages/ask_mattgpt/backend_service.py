@@ -46,6 +46,12 @@ SEARCH_TOP_K = 7
 _KNOWN_CLIENTS: set[str] | None = None
 
 
+class RateLimitError(Exception):
+    """Raised when OpenAI rate limit is hit. Caller should suppress sources."""
+
+    pass
+
+
 def get_known_clients(stories: list[dict]) -> set[str]:
     """Derive known client names from story data for post-processing bolding."""
     global _KNOWN_CLIENTS
@@ -1580,11 +1586,15 @@ REMEMBER:
         return response_text
 
     except Exception as e:
-        # Fallback to non-LLM response if OpenAI fails
         if DEBUG:
-            print(f"DEBUG: OpenAI call failed, using fallback: {e}")
+            print(f"DEBUG: OpenAI call failed: {e}")
 
-        # Return a simple Agy-prefixed version of the context
+        # Rate limit - raise so caller can suppress sources
+        err_lower = str(e).lower()
+        if "429" in str(e) or "rate_limit" in err_lower or "rate limit" in err_lower:
+            raise RateLimitError("OpenAI rate limit exceeded") from e
+
+        # Other errors - simple fallback
         return f"🐾 Let me show you what I found...\n\n{answer_context}"
 
 
@@ -2441,6 +2451,17 @@ But here's what might translate: Matt's work in **B2B platform modernization**, 
             "deep_dive": deep_dive,
         }
         answer_md = agy_response
+
+    except RateLimitError:
+        # Rate limit - return friendly message with NO sources
+        if DEBUG:
+            print("DEBUG rag_answer: rate limit hit, suppressing sources")
+        return {
+            "answer_md": "🐾 I need a quick breather — try again in about 15 seconds!",
+            "sources": [],
+            "modes": {},
+            "default_mode": "narrative",
+        }
 
     except Exception as e:
         # Fallback to 5P summary
