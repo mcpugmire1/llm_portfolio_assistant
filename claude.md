@@ -177,6 +177,30 @@
   - Check simple things first: regex, config, cache, typos
   - If Claude proposes 50+ lines, ask "is there a simpler way?"
 
+  ## No Hardcoded Enums for Data-Derived Values
+
+  **NEVER hardcode lists of values that come from story data (clients, industries, themes, eras, etc.)**
+
+  ❌ BAD:
+  ```python
+  EXCLUDED_CLIENTS = {"Multiple Clients", "Career Narrative", "Independent"}
+  if client in {"JP Morgan", "Capital One", "RBC"}:
+  ```
+
+  ✅ GOOD:
+  ```python
+  # Pattern-based (no maintenance)
+  from utils.client_utils import is_generic_client
+  if is_generic_client(client):
+
+  # Or derived from data at runtime
+  named_clients = {s.get("Client") for s in stories if not is_generic_client(s.get("Client"))}
+  ```
+
+  **Why:** Hardcoded lists drift, duplicate across files, and break when data changes. If a value comes from the JSONL, the code should derive it or use pattern matching — never enumerate it.
+
+  **If you need a list:** Create ONE source of truth in `utils/` or `constants/`, import everywhere.
+
   ## Nonsense Filter Rules (Learned the Hard Way)
 
   The `nonsense_filters.jsonl` file contains regex patterns to block off-topic queries. **Be extremely careful with word choices.**

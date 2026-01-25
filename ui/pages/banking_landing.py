@@ -11,19 +11,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 from ui.components.footer import render_footer
-
-# Clients to exclude from pills (too generic)
-_EXCLUDED_CLIENTS = {
-    "Multiple Clients",
-    "Multiple Financial Services Clients",
-    "Financial Services Client",
-    "Various",
-    "Independent",
-    "Career Narrative",
-    "N/A",
-    "",
-    None,
-}
+from utils.client_utils import is_generic_client
 
 
 def render_banking_landing(stories: list[dict]):
@@ -46,7 +34,7 @@ def render_banking_landing(stories: list[dict]):
     client_counter = Counter(
         s.get("Client", "Unknown")
         for s in banking_stories
-        if s.get("Client") not in _EXCLUDED_CLIENTS
+        if not is_generic_client(s.get("Client"))
     )
     named_clients = [(client, count) for client, count in client_counter.most_common()]
     num_clients = len(named_clients)

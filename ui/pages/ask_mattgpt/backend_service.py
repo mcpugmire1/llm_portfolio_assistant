@@ -20,8 +20,9 @@ from services.pinecone_service import (
     _embed,
     _init_pinecone,
 )
-from services.rag_service import boost_narrative_matches, semantic_search
+from services.rag_service import semantic_search
 from services.semantic_router import is_portfolio_query_semantic
+from utils.client_utils import is_generic_client
 from utils.formatting import (
     _format_deep_dive,
     _format_key_points,
@@ -41,15 +42,6 @@ from .story_intelligence import (
 SEARCH_TOP_K = 7
 
 # Clients to exclude from dynamic client list (not real named clients)
-EXCLUDED_CLIENTS = {
-    "Independent",
-    "Career Narrative",
-    "Multiple Clients",
-    "Personal",
-    "Various",
-    "Confidential",
-}
-
 # Known clients - derived dynamically from story data at startup
 _KNOWN_CLIENTS: set[str] | None = None
 
@@ -202,7 +194,7 @@ def generate_dynamic_dna(stories: list[dict], clients: set[str]) -> str:
     for s in stories:
         ind = s.get("Industry", "")
         client = s.get("Client", "")
-        if ind and client and client not in EXCLUDED_CLIENTS:
+        if ind and client and not is_generic_client(client):
             if ind not in clients_by_industry:
                 clients_by_industry[ind] = set()
             clients_by_industry[ind].add(client)
@@ -311,19 +303,6 @@ Empathy, Authenticity, Curiosity, Integrity, Leadership
 # Entity fields to check for routing (in priority order)
 ENTITY_FIELDS = ["Client", "Employer", "Division", "Project", "Place"]
 
-# Excluded entity values (too generic to filter on)
-EXCLUDED_ENTITIES = {
-    "Multiple Clients",
-    "Multiple Financial Services Clients",
-    "Independent",
-    "Career Narrative",
-    "Sabbatical",
-    "Various",
-    "N/A",
-    "",
-    None,
-}
-
 # Entity name normalization map
 ENTITY_NORMALIZATION = {
     "jpmorgan": "JP Morgan Chase",
@@ -399,7 +378,7 @@ def detect_entity(query: str, stories: list[dict]) -> tuple[str, str] | None:
         known_entities = {
             s.get(field)
             for s in stories
-            if s.get(field) and s.get(field) not in EXCLUDED_ENTITIES
+            if s.get(field) and not is_generic_client(s.get(field))
         }
         # Sort by length descending to match longer names first
         # (e.g., "JP Morgan Chase" before "JP Morgan")
@@ -1097,7 +1076,7 @@ DO NOT paraphrase. These are Matt's chosen identity words.
         retrieved_clients = set(
             s.get("Client")
             for s in ranked_stories
-            if s.get("Client") and s.get("Client") not in EXCLUDED_CLIENTS
+            if s.get("Client") and not is_generic_client(s.get("Client"))
         )
         client_list = (
             ", ".join(sorted(retrieved_clients))
@@ -1834,16 +1813,6 @@ def diversify_results(
         Updates st.session_state["_last_primary_client"] with the Client field
         from the first result in the returned list.
     """
-    # Generic clients to deprioritize (not real named clients)
-    GENERIC_CLIENTS = {
-        "Independent",
-        "Career Narrative",
-        "Various",
-        "Personal",
-        "Unknown",
-        "Multiple Clients",
-    }
-
     if DEBUG:
         print(
             f"DEBUG diversify_results: incoming={[s.get('Client') for s in stories[:10]]}"
@@ -1876,7 +1845,7 @@ def diversify_results(
 
         # Priority routing based on client type
         if client not in seen_clients:
-            if client in GENERIC_CLIENTS:
+            if is_generic_client(client):
                 generic_overflow.append(s)
             else:
                 named_diverse.append(s)
@@ -2142,10 +2111,6 @@ def rag_answer(
             top_k=SEARCH_TOP_K,
         )
         pool = search_result["results"]
-
-        # Boost Professional Narrative stories for biographical queries
-        pool = boost_narrative_matches(question or "", pool, stories)
-
         confidence = search_result["confidence"]
 
         # Store confidence for conversation_view to use
@@ -2292,14 +2257,6 @@ But here's what might translate: Matt's work in **B2B platform modernization**, 
 
             # Q17 Fix: Prioritize named clients over generic ones in synthesis ranking
             # Same logic as diversify_results but preserves score-based ordering within groups
-            GENERIC_CLIENTS_SYNTH = {
-                "Independent",
-                "Career Narrative",
-                "Various",
-                "Personal",
-                "Unknown",
-                "Multiple Clients",
-            }
 
             # Sort full pool by score first
             sorted_pool = sorted(
@@ -2310,12 +2267,10 @@ But here's what might translate: Matt's work in **B2B platform modernization**, 
             named_stories = [
                 s
                 for s in sorted_pool
-                if s.get("Client", "Unknown") not in GENERIC_CLIENTS_SYNTH
+                if not is_generic_client(s.get("Client", "Unknown"))
             ]
             generic_stories = [
-                s
-                for s in sorted_pool
-                if s.get("Client", "Unknown") in GENERIC_CLIENTS_SYNTH
+                s for s in sorted_pool if is_generic_client(s.get("Client", "Unknown"))
             ]
 
             # Named clients first, then generic - ensures JP Morgan/RBC beat Independent
@@ -2335,7 +2290,7 @@ But here's what might translate: Matt's work in **B2B platform modernization**, 
                     score = s.get("_search_score", 0)
                     is_named = (
                         "NAMED"
-                        if s.get("Client", "Unknown") not in GENERIC_CLIENTS_SYNTH
+                        if not is_generic_client(s.get("Client", "Unknown"))
                         else "generic"
                     )
                     print(
@@ -2449,6 +2404,7 @@ But here's what might translate: Matt's work in **B2B platform modernization**, 
                     ranked = diversify_results(candidates) or (pool[:1] if pool else [])
             if DEBUG and ranked:
                 dbg(f"ask: ranked first_ids={[s.get('id') for s in ranked]}")
+
     except Exception as e:
         if DEBUG:
             print(f"DEBUG rag_answer rank error: {e}")

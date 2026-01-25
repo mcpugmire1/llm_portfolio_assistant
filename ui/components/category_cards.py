@@ -13,18 +13,7 @@ from collections import Counter
 
 import streamlit as st
 
-# Clients to exclude from pills (too generic)
-_EXCLUDED_CLIENTS = {
-    "Multiple Clients",
-    "Multiple Financial Services Clients",
-    "Financial Services Client",
-    "Various",
-    "Independent",
-    "Career Narrative",
-    "N/A",
-    "",
-    None,
-}
+from utils.client_utils import is_generic_client
 
 
 def render_category_cards(stories: list[dict]):
@@ -45,7 +34,7 @@ def render_category_cards(stories: list[dict]):
     banking_clients = Counter(
         s.get("Client", "Unknown")
         for s in banking_stories
-        if s.get("Client") not in _EXCLUDED_CLIENTS
+        if not is_generic_client(s.get("Client"))
     )
     top_banking_clients = banking_clients.most_common(3)
 

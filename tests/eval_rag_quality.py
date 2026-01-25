@@ -818,8 +818,8 @@ def stories():
 
 
 @pytest.fixture(scope="module")
-def rag_fn():
-    """Get RAG function with mocked streamlit."""
+def rag_fn(stories):
+    """Get RAG function with mocked streamlit and synced metadata."""
     from unittest.mock import MagicMock, patch
 
     # Mock streamlit
@@ -828,7 +828,13 @@ def rag_fn():
 
     with patch("streamlit.session_state", mock_st.session_state):
         with patch("ui.pages.ask_mattgpt.backend_service.st", mock_st):
-            from ui.pages.ask_mattgpt.backend_service import rag_answer
+            from ui.pages.ask_mattgpt.backend_service import (
+                rag_answer,
+                sync_portfolio_metadata,
+            )
+
+            # Sync SYNTHESIS_THEMES and MATT_DNA from story data
+            sync_portfolio_metadata(stories)
 
             return rag_answer
 
