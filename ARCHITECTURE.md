@@ -70,7 +70,7 @@
 **Project:** MattGPT Portfolio Assistant - AI-powered career story search and chat interface
 **Tech Stack:** Streamlit, OpenAI GPT-4o, Pinecone vector DB, Python 3.11+
 **Data Corpus:** 130+ STAR-formatted transformation project stories
-**Last Updated:** January 24, 2026
+**Last Updated:** January 26, 2026
 
 ### Key Achievements
 
@@ -92,6 +92,16 @@
 - Minimal circular dependencies (one deferred import for `sync_portfolio_metadata`)
 
 ### Current State (January 2026)
+
+**Prompt Architecture Refactor (Jan 26, 2026) — 93-97% structural pass rate:**
+- Created `prompts.py` with clean BASE_PROMPT + SYNTHESIS_DELTA + STANDARD_DELTA architecture
+- BASE_PROMPT establishes Agy as fact-relayer, not evaluator (prevents meta-commentary)
+- Removed `get_theme_guidance()` which had conflicting "Emphasize:" instructions
+- Removed `BANNED_PHRASES_CLEANUP` post-processing bandaid
+- Fixed hardcoded client exclusions → pattern-based `is_generic_client()`
+- Added structural assertion tests: `assert_no_meta_commentary()`, `assert_agy_voice()`, `assert_no_hardcoded_drift()`
+- Meta-commentary failures reduced from 10/31 → 1-2/31
+- `backend_service.py` reduced by 564 lines
 
 **RAG Quality Sprint (Jan 21-24, 2026) — 100% eval pass rate (31/31):**
 - Model upgrade: GPT-4o-mini → GPT-4o (temperature 0.4 standard / 0.2 synthesis)
@@ -179,12 +189,13 @@ llm_portfolio_assistant/
 │   │   ├── __init__.py
 │   │   ├── home.py                    # Home page (38 lines)
 │   │   ├── explore_stories.py         # Stories browser (1,306 lines)
-│   │   ├── ask_mattgpt/               # ✅ Modular structure (Dec 2025)
+│   │   ├── ask_mattgpt/               # ✅ Modular structure (Dec 2025, refactored Jan 2026)
 │   │   │   ├── __init__.py            # Router (1.9 KB)
 │   │   │   ├── landing_view.py        # Landing page UI (9.8 KB)
 │   │   │   ├── conversation_view.py   # Chat conversation UI (15.4 KB)
 │   │   │   ├── conversation_helpers.py # Message rendering (26.9 KB)
-│   │   │   ├── backend_service.py     # RAG pipeline integration (43.2 KB)
+│   │   │   ├── backend_service.py     # RAG pipeline integration (~75 KB → 55 KB after refactor)
+│   │   │   ├── prompts.py             # ✅ NEW: BASE_PROMPT + DELTA architecture (12 KB)
 │   │   │   ├── styles.py              # CSS definitions (39.0 KB)
 │   │   │   ├── story_intelligence.py  # Theme/persona inference (11.6 KB)
 │   │   │   ├── shared_state.py        # Session state management (7.9 KB)
@@ -573,6 +584,7 @@ DRY_RUN=False  # Set to True for preview
 def build_embedding_text(story):
     """
     Combines multiple fields into rich semantic representation:
+    - Title (story title - improves keyword matching)  # Added Jan 2026
     - Theme + Industry + Sub-category (behavioral context)
     - 5P Summary (concise overview)
     - STAR fields: Situation, Task, Action, Result (2-3 items each)
@@ -584,6 +596,7 @@ def build_embedding_text(story):
 ```
 
 **Why This Approach:**
+- **Title inclusion:** Story titles contain key terminology (e.g., "Platform Modernization", "Cloud Migration") that users search for directly
 - **Behavioral focus:** Theme/Industry/Sub-category surface in behavioral interviews
 - **Balanced detail:** Full STAR fields would dilute semantic signal
 - **Tag inclusion:** Public tags capture essence without verbosity
@@ -818,7 +831,7 @@ This section defines the **job, rules, and constraints** for each retrieval comp
 
 #### Entity Normalization Map
 
-Common aliases normalized to canonical JSONL values before entity matching.
+Common aliases normalized to canonical JSONL values before entity matching. THIS NEEDS TO BE REMOVED
 
 **Lives in:** `backend_service.py:315-323` (`ENTITY_NORMALIZATION` constant)
 
@@ -1444,7 +1457,9 @@ def infer_story_theme(story: dict) -> str:
     """Get theme from story's Theme field (defaults to THEME_EXECUTION)."""
 
 def get_theme_guidance(theme: str) -> str:
-    """Get Agy voice guidance for theme (emphasize, voice pattern, position, proof points)."""
+    """⚠️ DEPRECATED (Jan 26, 2026) - No longer imported by backend_service.py.
+    Had conflicting 'Emphasize:' instructions that caused meta-commentary.
+    Kept for backward compatibility but not used in production."""
 
 def build_story_context_for_rag(story: dict) -> str:
     """Build WHY→HOW→WHAT context string for RAG prompt injection."""
@@ -1452,6 +1467,59 @@ def build_story_context_for_rag(story: dict) -> str:
 def get_theme_emoji(theme: str) -> str:
     """Get emoji for theme (🏗️ 🧠 🔄 👥 🛡️ 🚀 🧭)."""
 ```
+
+---
+
+### prompts.py ✅ NEW (Jan 26, 2026)
+
+Clean prompt architecture that prevents meta-commentary by keeping Agy in REPORTING mode, not evaluation mode.
+
+**Architecture: BASE_PROMPT + DELTA Pattern**
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  BASE_PROMPT (shared across all modes)                      │
+│  - Agy's core identity: fact-relayer, not evaluator         │
+│  - Banned phrases with "delete and state the fact" guidance │
+│  - Pronoun transformation rules (I → Matt)                  │
+│  - Fact-pairing and context isolation rules                 │
+├─────────────────────────────────────────────────────────────┤
+│  + SYNTHESIS_DELTA (for multi-story questions)              │
+│    OR                                                       │
+│  + STANDARD_DELTA (for single-story questions)              │
+├─────────────────────────────────────────────────────────────┤
+│  + OFF_TOPIC_GUARD                                          │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**Key Principle:** Agy RELAYS facts from stories. She does NOT evaluate Matt.
+
+**Meta-Commentary Prevention:**
+```python
+# BAD: "Matt's ability to align stakeholders enabled the transformation."
+# GOOD: "Matt aligned 12 stakeholders across 3 regions. The transformation shipped on time."
+
+# BAD: "This demonstrates his technical leadership."
+# GOOD: "He led a team of 40 engineers. They shipped the platform in 6 months."
+```
+
+**Key Functions:**
+```python
+def build_system_prompt(is_synthesis: bool, matt_dna: str, client_list: str) -> str:
+    """Build complete system prompt: BASE_PROMPT + mode-specific DELTA + OFF_TOPIC_GUARD."""
+
+def build_user_message(question, story_context, opening, closing, is_synthesis, ...) -> str:
+    """Build user message with stories and response instructions."""
+
+def get_verbatim_requirement(summary: str) -> str:
+    """Extract required verbatim phrases from Professional Narrative stories."""
+```
+
+**Why This Architecture:**
+- Previous 500+ line inline prompts had conflicting instructions ("Emphasize X" vs "NEVER meta-commentary")
+- `get_theme_guidance()` was injecting evaluation-mode instructions
+- Post-processing `BANNED_PHRASES_CLEANUP` was a bandaid, not a fix
+- New architecture makes Agy's role crystal clear: messenger, not evaluator
 
 ---
 
@@ -1565,8 +1633,11 @@ Defined in `ui/styles/global_styles.py`. Use these instead of hardcoding colors.
 |------|---------|
 | `eval_rag_quality.py` | RAG quality evaluation against ground truth |
 | `test_agy_behavior.py` | Agy response behavior tests |
+| `test_structural_assertions.py` | ✅ NEW: Meta-commentary, voice, and drift checks |
 
-**Current Status (January 22, 2026):** 100% pass rate (31/31 queries)
+**Current Status (January 26, 2026):**
+- RAG quality: 100% pass rate (31/31 queries)
+- Structural: 93-97% pass rate (meta-commentary varies with LLM stochasticity)
 
 **eval_rag_quality.py:**
 - Runs 31 test queries across 5 categories: narrative, client, intent, edge, synthesis
@@ -1587,11 +1658,39 @@ Defined in `ui/styles/global_styles.py`. Use these instead of hardcoding colors.
 |------|-----------|---------|
 | Jan 21, 2026 | 71% (22/31) | Baseline after sovereign narrative sync |
 | Jan 22, 2026 | 100% (31/31) | Multi-field entity gate + dynamic DNA |
+| Jan 26, 2026 | 93-97% structural | Added structural assertions, prompt refactor |
 
 **Running Eval:**
 ```bash
+# RAG quality eval
 python tests/eval_rag_quality.py
 # Outputs: tests/eval_results/eval_YYYYMMDD_HHMMSS.json
+
+# Structural assertions (meta-commentary, voice, drift)
+python tests/test_structural_assertions.py --report
+# Outputs: tests/eval_results/structural_baseline_YYYYMMDD_HHMMSS.json
+```
+
+**test_structural_assertions.py (NEW Jan 26, 2026):**
+
+Three structural assertion functions that run against all 31 queries:
+
+| Function | Checks | Pass Criteria |
+|----------|--------|---------------|
+| `assert_no_meta_commentary()` | "Matt's ability to...", "This demonstrates...", etc. | No matches |
+| `assert_agy_voice()` | Multiple 🐾, "we" pronouns, Agy self-reference | Exactly 1 🐾, no "we", no "Agy thinks" |
+| `assert_no_hardcoded_drift()` | ENTITY_NORMALIZATION, client exclusions vs JSONL | All values exist in source |
+
+**Meta-Commentary Patterns Detected:**
+```python
+META_PATTERNS = [
+    r"\bThis demonstrates\b",
+    r"\bThis reflects\b",
+    r"\bMatt's ability to\b",
+    r"\bhis ability to\b",
+    r"\bIn essence,?\b",
+    # ... 20+ patterns
+]
 ```
 
 ---
@@ -2385,16 +2484,34 @@ User Response
 
 **Embedding Fields Used (from JSONL):**
 
-Stories are embedded using a concatenated text block:
+Stories are embedded using `build_embedding_text()` which concatenates:
 ```python
-text = f"{title}. {why}. {' '.join(how or [])}. {' '.join(what or [])}"
+# Header: [Title] [Theme] in Industry (Sub-category)
+header_bits = [f"[{title}]", f"[{theme}]", f"in {industry}", f"({sub_category})"]
+
+# Body sections
+parts = [
+    f"Summary: {summary_5p}",
+    f"Situation: {situation}",  # STAR fields ARE embedded
+    f"Task: {task}",
+    f"Action: {action}",
+    f"Result: {result}",
+    f"Process: {process_text}",
+    f"Keywords: {tags}",
+]
 ```
 
-**Fields NOT embedded** (metadata only):
-- Client, Employer, Division (used for filtering)
-- Theme, Sub-category (used for filtering)
-- Role, Era, Industry (used for filtering)
-- STAR structure (situation/task/action/result)
+**Fields embedded:**
+- Title (added Jan 2026 for better keyword matching)
+- Theme, Industry, Sub-category (behavioral context)
+- 5PSummary (concise overview)
+- STAR fields: Situation, Task, Action, Result (2-3 items each)
+- Process (max 3 items)
+- public_tags (keywords)
+
+**Fields NOT embedded** (metadata only, used for filtering):
+- Client, Employer, Division
+- Role, Era
 
 ### Ranking Pipeline Order of Operations
 
@@ -2559,19 +2676,15 @@ ENTITY_NORMALIZATION = {
 Hardcoded in semantic_router.py - 11 intent families with ~20 example phrases each.
 These should be reviewed quarterly for relevance.
 
-**6. Banned Phrases**
+**6. Banned Phrases** ✅ REMOVED (Jan 26, 2026)
 
 ```python
-BANNED_PHRASES = [
-    "meaningful outcomes",
-    "foster collaboration",
-    "strategic mindset",
-    ...
-]
+# DELETED - was BANNED_PHRASES_CLEANUP in backend_service.py
+# Post-processing bandaid is no longer needed after prompt refactor
 ```
 
-**Location:** backend_service.py
-**Purpose:** Post-processing cleanup of corporate filler.
+**Previous Location:** backend_service.py
+**Status:** Removed. The BASE_PROMPT in `prompts.py` now instructs "delete and state the fact" which is more effective than post-processing removal.
 
 **7. Sacred Vocabulary (Verbatim Phrases)**
 
@@ -2626,12 +2739,16 @@ index_name="portfolio-stories"  # pinecone_service.py
 - 100% eval pass rate demonstrates quality baseline
 - XML context isolation prevents cross-story bleed
 - Dynamic MATT_DNA derived from single source of truth
+- ✅ **NEW (Jan 26):** Clean prompt architecture in `prompts.py` (BASE_PROMPT + DELTA pattern)
+- ✅ **NEW (Jan 26):** Structural assertion tests catch meta-commentary and voice drift
+- ✅ **NEW (Jan 26):** Pattern-based client filtering via `is_generic_client()` (no hardcoded lists)
 
 **Weaknesses:**
-- Hardcoded values scattered across 6+ files
+- Hardcoded values scattered across 6+ files (partially addressed — client exclusions now pattern-based)
 - Unclear ownership boundaries between layers
 - No centralized configuration
 - Limited error handling coverage
+- Semantic router connection errors fail closed (should fail open) — see BACKLOG #9
 - Test suite focused on happy path
 - Duplicate logic (client exclusions, entity normalization)
 - Hybrid scoring systems don't align
