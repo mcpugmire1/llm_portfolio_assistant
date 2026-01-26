@@ -24,6 +24,32 @@
 - `semantic_valid=True` + `score=1.0` ensures query proceeds to entity detection and RAG
 - No special handling for `error_fallback` in backend_service.py that would reject
 
+### 10. Threshold Calibration ✅ DONE
+**Priority:** HIGH
+**Issue:** Legitimate queries like "Tell me about the CIC" (score 0.41) and "What problems does Matt solve?" (score 0.38) were being rejected
+**Evidence:** Score analysis showed garbage queries at 0.11-0.27, legitimate queries at 0.30+
+**Resolution (Jan 26, 2026):**
+- Lowered SOFT_ACCEPT from 0.72 to 0.40 in `semantic_router.py`
+- Lowered ENTITY_GATE_THRESHOLD from 0.50 to 0.30 in `backend_service.py`
+- Added threshold boundary tests in `test_structural_assertions.py` to catch regressions
+
+### 11. Remove ENTITY_NORMALIZATION Hardcoded Map ✅ DONE
+**Priority:** MEDIUM
+**Issue:** Hardcoded alias map ("jpmorgan"→"JP Morgan Chase", "amex"→"American Express") was drifting from JSONL data
+**Evidence:** Attempting fuzzy matching led to false positives ("matt" matching "MattGPT Product Development")
+**Resolution (Jan 26, 2026):**
+- Tested and proved semantic search handles variations naturally ("JPMC", "amex", "CIC" all return correct stories)
+- Removed ENTITY_NORMALIZATION map and fuzzy matching functions from `backend_service.py`
+- Entity detection now uses exact case-insensitive matching only
+
+### 12. Add Observability Logging ✅ DONE
+**Priority:** MEDIUM
+**Issue:** No visibility into why queries get "I can't help with that" response in production
+**Resolution (Jan 26, 2026):**
+- Added `[QUERY_REJECTED]` log tag for entity gate rejections (includes router_family, router_score, pinecone_score)
+- Added `[API_ERROR_DETECTED]` log tag for router failures with "breather" message fallback
+- Logs help diagnose whether rejections are from semantic router, entity gate, or Pinecone confidence
+
 ### 2. Add Eval Cases for "Tell me more about: [Title]"
 **Priority:** MEDIUM
 **Issue:** No test coverage for the Related Projects "tell me more" pattern

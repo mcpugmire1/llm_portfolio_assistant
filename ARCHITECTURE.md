@@ -771,11 +771,27 @@ This section defines the **job, rules, and constraints** for each retrieval comp
 #### Semantic Router
 - **Job:** Embedding-based intent classification to reject borderline off-topic queries
 - **Lives in:** `services/semantic_router.py`
-- **Thresholds:** HARD_ACCEPT=0.80, SOFT_ACCEPT=0.72
+- **Thresholds:** HARD_ACCEPT=0.80, SOFT_ACCEPT=0.40 (calibrated Jan 2026)
 - **Intent Families:** 11 categories (background, behavioral, delivery, team_scaling, leadership, technical, domain_payments, domain_healthcare, stakeholders, innovation, agile_transformation)
 - **Cost:** ~$0.0000002 per query (one embedding)
 - **Rule:** Fail-open on errors (accept query if embedding fails)
 - **Do not remove:** Saves LLM cost, prevents garbage-in
+
+#### Observability Logging (Jan 2026)
+
+Structured logs added to diagnose "I can't help with that" issues in production.
+
+**Log tags:**
+- `[QUERY_REJECTED]` — Query rejected by entity gate or low Pinecone confidence
+- `[API_ERROR_DETECTED]` — Router returned `error_fallback` family (connection/timeout issue)
+
+**Log format:**
+```
+[QUERY_REJECTED] reason=low_pinecone, router_family=background, router_score=0.42, pinecone_score=0.12, query=Tell me about...
+[API_ERROR_DETECTED] router=error_fallback, pinecone_score=0.35, confidence=high, query=Tell me about...
+```
+
+**Lives in:** `ui/pages/ask_mattgpt/backend_service.py`
 
 ### Layer 2: Intent Classification (Hybrid)
 
@@ -829,21 +845,17 @@ This section defines the **job, rules, and constraints** for each retrieval comp
   ```
 - **Why:** Fixes "entity blind spot" where stories with `Client="Confidential"` but `Employer="Accenture"` weren't found
 
-#### Entity Normalization Map
+#### Entity Normalization Map ✅ REMOVED (Jan 26, 2026)
 
-Common aliases normalized to canonical JSONL values before entity matching. THIS NEEDS TO BE REMOVED
+**Status:** Removed. Semantic search handles entity variations naturally through embeddings.
 
-**Lives in:** `backend_service.py:315-323` (`ENTITY_NORMALIZATION` constant)
+**Why removed:**
+- Hardcoded aliases drifted from JSONL data
+- Fuzzy matching added complexity without reliability
+- Testing proved semantic search correctly returns "JP Morgan Chase" stories for queries like "JPMC", "JPM", "Chase"
+- Testing proved "amex" and "CIC" variations work via embedding similarity
 
-| Alias (user input) | Normalized Value | Field |
-|---------------------|-----------------|-------|
-| `jpmorgan`, `jp morgan`, `jpmorgan chase` | `JP Morgan Chase` | Client |
-| `amex` | `American Express` | Client |
-| `at&t mobility` | `AT&T Mobility` | Client |
-| `cic` | `Cloud Innovation Center` | Division |
-| `liquid studio` | `Atlanta Liquid Studio` | Division |
-
-**Matching Logic:** Aliases checked first (case-insensitive substring). If alias found, the normalized value is used to identify the correct field from story data. Falls back to `Client` if entity not found in any field.
+**Current behavior:** Entity detection uses exact case-insensitive matching against JSONL field values. Semantic search handles variations the hardcoded map was trying to solve.
 
 #### Excluded Entities & Clients
 
@@ -1070,7 +1082,7 @@ User Query
     ↓
 [Layer 1: Validation]
     ├── is_nonsense() → reject if regex match
-    └── semantic_router() → reject if score < 0.72 (also provides intent_family)
+    └── semantic_router() → reject if score < 0.40 (also provides intent_family)
     ↓
 [Layer 2: Classification]
     ├── intent_family from semantic router (primary)
@@ -2638,8 +2650,8 @@ NAMED_CLIENT_PREFERENCE = ["JP Morgan", "RBC", "JPMC", ...]
 | Constant | Value | Location |
 |----------|-------|----------|
 | HARD_ACCEPT | 0.80 | semantic_router.py |
-| SOFT_ACCEPT | 0.72 | semantic_router.py |
-| ENTITY_GATE_THRESHOLD | 0.50 | backend_service.py |
+| SOFT_ACCEPT | 0.40 | semantic_router.py (calibrated Jan 2026) |
+| ENTITY_GATE_THRESHOLD | 0.30 | backend_service.py (calibrated Jan 2026) |
 | CONFIDENCE_HIGH | 0.25 | backend_service.py |
 | CONFIDENCE_LOW | 0.15 | backend_service.py |
 | SEARCH_TOP_K | 100 | pinecone_service.py |
@@ -2656,20 +2668,12 @@ model="gpt-4o"                  # backend_service.py
 model="gpt-4o-mini"             # backend_service.py (classifier)
 ```
 
-**4. Entity Normalization Map**
+**4. Entity Normalization Map** ✅ REMOVED (Jan 26, 2026)
 
-```python
-ENTITY_NORMALIZATION = {
-    "jpmorgan": "JP Morgan Chase",
-    "jp morgan": "JP Morgan Chase",
-    "jpm": "JP Morgan Chase",
-    "cic": "Cloud Innovation Center",
-    ...
-}
-```
+**Status:** Removed. Semantic search handles entity variations naturally.
 
-**Location:** backend_service.py:315-323
-**Issue:** Not synchronized with JSONL field values.
+**Previous location:** backend_service.py:315-323
+**Resolution:** Testing proved semantic search returns correct stories for "JPMC", "amex", "CIC" variations without hardcoded aliases.
 
 **5. Intent Family Keywords**
 
