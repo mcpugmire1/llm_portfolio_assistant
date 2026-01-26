@@ -53,6 +53,16 @@
 ### 🔮 Future Work
 - [Future Enhancements](#future-enhancements)
 
+### 📊 Appendix: RAG Pipeline Audit
+- [RAG Pipeline Audit (January 2026)](#rag-pipeline-audit-january-2026)
+  - [Data Flow Map](#data-flow-map)
+  - [Embedding Analysis](#embedding-analysis)
+  - [Ranking Pipeline Order of Operations](#ranking-pipeline-order-of-operations)
+  - [Test Coverage Analysis](#test-coverage-analysis)
+  - [Architecture Issues](#architecture-issues)
+  - [Hardcoded Values Audit](#hardcoded-values-audit)
+  - [Summary Findings](#summary-findings)
+
 ---
 
 ## Executive Summary
@@ -871,9 +881,8 @@ Two related constants prevent overly generic values from triggering entity filte
   1. User query → OpenAI embedding
   2. Pinecone vector search (top 100) with multi-field entity filter if detected
   3. Confidence gating
-  4. `boost_narrative_matches()` for biographical queries
-  5. **Entity pinning:** If entity detected, pin matching story to #1 (title substring match for Division/Project, Pinecone score for Client/Employer)
-  6. `diversify_results()` on remaining stories → named clients first, max 1 per client
+  4. **Entity pinning:** If entity detected, pin matching story to #1 (title substring match for Division/Project, Pinecone score for Client/Employer)
+  5. `diversify_results()` on remaining stories → named clients first, max 1 per client
 - **Lives in:** `services/rag_service.py` + `backend_service.py:rag_answer()`
 - **Story limit:** 7 stories to LLM context
 
@@ -881,11 +890,11 @@ Two related constants prevent overly generic values from triggering entity filte
 - **Job:** Answer biographical/philosophy questions (leadership journey, early failure, etc.)
 - **Triggers:** Intent family = `narrative` (from semantic router)
 - **Retrieval:**
-  1. Same as Standard (steps 1-4)
-  2. **Skip diversity:** Sort candidates by Pinecone `pc` score (highest first)
-  3. Boosted narrative story without pc score naturally falls to bottom
+  1. Same as Standard (steps 1-3)
+  2. **Skip diversity:** If `pool[0]` is Professional Narrative, preserve it at #1
+  3. Diversify remaining stories
 - **Lives in:** `backend_service.py:rag_answer()` (narrative branch)
-- **Rationale:** Diversity reordering was demoting the best semantic match for narrative queries based on client name priority. Pinecone already has the right answer at #1.
+- **Rationale:** Title is now embedded in Pinecone, so semantic search naturally finds narrative stories. The `intent_family == "narrative"` branch protects against diversity demotion.
 
 #### Synthesis Mode
 - **Job:** Answer "what are Matt's themes/patterns/philosophy" questions
@@ -901,12 +910,6 @@ Two related constants prevent overly generic values from triggering entity filte
 - **Story limit:** 9 stories to LLM context
 - **MUST use:** User's actual query embedding for semantic relevance
 - **MUST NOT:** Ignore user's query for fixed theme keywords (previous bug)
-
-#### Narrative Boost
-- **Job:** Force Professional Narrative stories to top for biographical queries
-- **Lives in:** `services/rag_service.py:boost_narrative_matches()`
-- **Triggers on fragments:** "leadership journey", "career intent", "philosophy", "early failure", "risk ownership", "work philosophy", "sustainable leadership", "career transition", "complex problems", "who is matt", "about matt"
-- **Rule:** Matches story Title containing fragment + Theme="Professional Narrative"
 
 ### Layer 4: Response Generation
 
@@ -1030,6 +1033,22 @@ Stories are wrapped in XML tags before injection into the LLM prompt:
 - Auto-bold all known client names (derived from story corpus)
 - Auto-bold numbers/metrics: $50M, 30%, 4x, 150+ engineers, etc.
 - Fix LLM's malformed bolding (e.g., **1**0%** → **10%**)
+- Remove banned phrases that LLM ignores (BANNED_PHRASES_CLEANUP list)
+
+**Meta-Commentary Safety Net** (temporary — see BACKLOG.md #1):
+- `META_SENTENCE_PATTERNS` regex catches LLM meta-commentary that violates NEVER rules
+- Patterns: "This story demonstrates...", "This reflects Matt's...", "reveals his pattern of..."
+- Logs violations with `_log_bandaid()` for tracking which rules fire
+- **Known issue:** Prompt conflict between "Emphasize X" and "NEVER meta-commentary" causes this to fire frequently
+
+**BANDAID Logging:**
+```python
+def _log_bandaid(bandaid_name: str, details: str):
+    """Log when a post-processing safety net catches a violation.
+    Used to track which band-aids fire so unused ones can be deleted."""
+```
+- Logged to DEBUG output when `DEBUG=True`
+- Helps identify which post-processing rules are actually needed vs. cruft
 
 ### Data Flow Diagram
 
@@ -1348,11 +1367,20 @@ Stories are stored in `echo_star_stories_nlp.jsonl` (130+ entries). Each line is
 
 | Module | Purpose | Key Functions |
 |--------|---------|---------------|
+| **client_utils.py** | Client classification | `is_generic_client()` — pattern-based detection of placeholder clients |
 | **validation.py** | Query validation, tokenization, nonsense detection | `is_nonsense()`, `_tokenize()`, `vocab_overlap_ratio()` |
 | **filters.py** | Story filtering for Explore Stories | `matches_filters(story, filters)` |
-| **formatting.py** | Story presentation, metric extraction | `story_has_metric()`, `strongest_metric_line()`, `build_5p_summary()` |
+| **formatting.py** | Story presentation, metric extraction | `story_has_metric()`, `strongest_metric_line()`, `build_5p_summary()`, `_format_narrative()` |
 | **scoring.py** | Hybrid scoring (semantic + keyword) | `_keyword_score_for_story()`, `_hybrid_score()` |
 | **ui_helpers.py** | Debug logging, UI utilities | `dbg()` |
+
+**client_utils.py Key Function:**
+```python
+def is_generic_client(client: str) -> bool:
+    """Pattern-based detection of generic/placeholder clients.
+    Returns True for: empty strings, values ending with 'clients' or 'project'.
+    Examples: 'Multiple Clients', 'Fortune 500 Clients', 'Independent Project'."""
+```
 
 **validation.py Key Functions:**
 ```python
@@ -1563,7 +1591,7 @@ Defined in `ui/styles/global_styles.py`. Use these instead of hardcoding colors.
 **Running Eval:**
 ```bash
 python tests/eval_rag_quality.py
-# Outputs: tests/eval_results/with_boost_YYYYMMDD_HHMMSS.json
+# Outputs: tests/eval_results/eval_YYYYMMDD_HHMMSS.json
 ```
 
 ---
@@ -1583,9 +1611,10 @@ python tests/eval_rag_quality.py
 - `get_synthesis_stories()` → Returns empty list on error
 
 **Layer 4 (Generation):**
-- `_generate_agy_response()` → Returns fallback message on LLM error:
+- `_generate_agy_response()` → Raises `RateLimitError` on 429, returns fallback on other errors
+- `rag_answer()` → Catches `RateLimitError`, returns empty sources with:
   ```
-  "🐾 I had a little trouble fetching that. Could you try rephrasing?"
+  "🐾 I need a quick breather — try again in about 15 seconds!"
   ```
 
 **UI Error Handling:**
@@ -2262,6 +2291,358 @@ Once mobile responsiveness is solid, consider:
 9. Replace Streamlit with FastAPI backend
 10. Add proper state management (Redux/Zustand)
 11. Consider PWA implementation
+
+---
+
+## RAG Pipeline Audit (January 2026)
+
+Comprehensive audit of the RAG (Retrieval-Augmented Generation) pipeline covering data flow, embedding analysis, ranking operations, test coverage, and architecture issues.
+
+### Data Flow Map
+
+**Query → Response Trace:**
+
+```
+User Query
+    ↓
+┌─────────────────────────────────────────────────┐
+│ Gate 1: Rules-Based Rejection (Free)            │
+│ - nonsense_filters.jsonl patterns               │
+│ - is_nonsense() regex validation                │
+└─────────────────────────────────────────────────┘
+    ↓ (passed)
+┌─────────────────────────────────────────────────┐
+│ Gate 2: Semantic Router (Cheap)                 │
+│ - Embed query with text-embedding-3-small       │
+│ - Compare against 11 intent-family centroids    │
+│ - HARD_ACCEPT=0.80, SOFT_ACCEPT=0.72            │
+└─────────────────────────────────────────────────┘
+    ↓ (accepted)
+┌─────────────────────────────────────────────────┐
+│ Gate 3: Entity Gate                             │
+│ - detect_entity() substring matching            │
+│ - Multi-field normalization (client aliases)    │
+│ - Returns (field, value) or None                │
+└─────────────────────────────────────────────────┘
+    ↓
+┌─────────────────────────────────────────────────┐
+│ Intent Classification                           │
+│ - Semantic router intent_family (primary)       │
+│ - LLM classifier fallback (rare)                │
+│ - Priority: entity > narrative > synthesis      │
+└─────────────────────────────────────────────────┘
+    ↓
+┌─────────────────────────────────────────────────┐
+│ Pinecone Vector Search                          │
+│ - Query embedding → vector search               │
+│ - Entity filter (Pinecone $or across 5 fields)  │
+│ - UI filters (industry, domain, role)           │
+│ - Returns top 100 candidates                    │
+└─────────────────────────────────────────────────┘
+    ↓
+┌─────────────────────────────────────────────────┐
+│ Post-Retrieval Processing (Mode-Dependent)      │
+│ STANDARD: entity_pin → diversify_results() → 7 │
+│ NARRATIVE: sort by score (skip diversity) → 7   │
+│ SYNTHESIS: theme-filter → named-clients-first   │
+└─────────────────────────────────────────────────┘
+    ↓
+┌─────────────────────────────────────────────────┐
+│ Context Assembly                                │
+│ - XML isolation: <primary_story> tags           │
+│ - MATT_DNA ground truth injection               │
+│ - Mode-specific prompt selection                │
+└─────────────────────────────────────────────────┘
+    ↓
+┌─────────────────────────────────────────────────┐
+│ LLM Generation (OpenAI GPT-4o)                  │
+│ - Temperature: 0.4 (standard) / 0.2 (synthesis) │
+│ - Max tokens: 700                               │
+│ - Fact-pairing + texture rules                  │
+└─────────────────────────────────────────────────┘
+    ↓
+┌─────────────────────────────────────────────────┐
+│ Response Formatting                             │
+│ - Extract answer + sources                      │
+│ - Meta-commentary cleanup                       │
+│ - Banned phrase removal                         │
+└─────────────────────────────────────────────────┘
+    ↓
+User Response
+```
+
+### Embedding Analysis
+
+**Embedding Model:** OpenAI `text-embedding-3-small` (1536 dimensions)
+
+**Vectors Stored in Pinecone:**
+
+| Vector Type | Source | Dimensions | Purpose |
+|-------------|--------|------------|---------|
+| Story embeddings | `build_custom_embeddings.py` | 1536 | Retrieved from Pinecone for story matching |
+| Query embeddings | `pinecone_service.py` | 1536 | Generated at runtime for semantic search |
+| Intent centroids | `semantic_router.py` | 1536 | 11 pre-computed intent family embeddings |
+
+**Embedding Fields Used (from JSONL):**
+
+Stories are embedded using a concatenated text block:
+```python
+text = f"{title}. {why}. {' '.join(how or [])}. {' '.join(what or [])}"
+```
+
+**Fields NOT embedded** (metadata only):
+- Client, Employer, Division (used for filtering)
+- Theme, Sub-category (used for filtering)
+- Role, Era, Industry (used for filtering)
+- STAR structure (situation/task/action/result)
+
+### Ranking Pipeline Order of Operations
+
+**1. Pinecone Search (services/pinecone_service.py)**
+```
+query_vector → Pinecone.query(top_k=100, filter=entity_filters)
+↓
+Returns: [(story_id, score, metadata), ...] sorted by cosine similarity
+```
+
+**2. Entity Pinning (backend_service.py)**
+```
+If entity detected AND matching story found:
+  Move matching story to position 0
+  Rest maintain Pinecone order
+```
+
+**3. Diversity Reordering (backend_service.py:diversify_results)**
+```
+Standard/Behavioral modes only:
+  - Group by client
+  - Interleave to avoid consecutive same-client stories
+  - Skip for narrative mode (trust Pinecone semantic ranking)
+```
+
+**4. Final Selection**
+```
+Standard: top 7 after diversity
+Narrative: top 7 by Pinecone score (no reorder)
+Synthesis: up to 9 (3 per theme × 3 themes)
+```
+
+**Scoring Formula:**
+- Primary: Pinecone cosine similarity (0.0 - 1.0)
+- No secondary scoring layer
+- Confidence thresholds: HIGH=0.25, LOW=0.15 (UI display only)
+
+### Test Coverage Analysis
+
+**Eval Framework:** `tests/test_benchmark_rag.py`
+
+| Test Category | Count | Coverage |
+|---------------|-------|----------|
+| Entity queries | 8 | Client, Employer, Division detection |
+| Synthesis queries | 5 | Cross-cutting theme questions |
+| Narrative queries | 6 | Identity/philosophy questions |
+| Behavioral queries | 4 | STAR-style interview questions |
+| Boundary cases | 8 | Edge cases, negation, ambiguity |
+| **Total** | 31 | 100% pass rate (as of Jan 24, 2026) |
+
+**Test File Structure:**
+- `tests/test_benchmark_rag.py` - Main eval suite
+- `data/borderline_queries.csv` - Edge case query log
+- `tests/test_boost_narrative.py` - Narrative boost tests
+
+**Gaps Identified:**
+- No rate limit handling tests
+- No concurrent request tests
+- Limited negative test cases ("don't tell me about X")
+- No tests for "Tell me more about: [Title]" pattern
+
+### Architecture Issues
+
+**1. Coupling Between Layers**
+
+| Issue | Location | Impact |
+|-------|----------|--------|
+| `backend_service.py` imports from 6+ modules | backend_service.py:1-40 | Hard to test in isolation |
+| Entity detection duplicated | backend_service.py, pinecone_service.py | Inconsistent normalization |
+| Mode logic scattered | backend_service.py, rag_service.py | Unclear ownership |
+
+**2. Fragile Patterns**
+
+| Pattern | Risk | Recommendation |
+|---------|------|----------------|
+| Substring entity matching | False positives ("CIC" in "SPECIFIC") | Use word boundaries |
+| Hardcoded client lists | Stale data, maintenance burden | Derive from JSONL |
+| Regex-based meta-commentary cleanup | Brittle, catches false positives | Improve prompt instead |
+
+**3. Unclear Boundaries**
+
+| Question | Current State |
+|----------|---------------|
+| Who owns ranking? | Split: Pinecone → backend_service → rag_service |
+| Who owns intent classification? | Split: semantic_router → backend_service |
+| Who owns response formatting? | Split: backend_service → formatting.py → conversation_helpers.py |
+
+**4. Hybrid Scoring Confusion**
+
+The system has two scoring systems that don't align:
+- **Pinecone scores**: 0.0-1.0 cosine similarity
+- **Confidence thresholds**: 0.15-0.25 (arbitrary UI buckets)
+
+No clear mapping between "Pinecone score 0.82" and "high confidence display."
+
+**5. Error Handling**
+
+| Error Type | Handling | Issues |
+|------------|----------|--------|
+| Rate limit (429) | `RateLimitError` exception | ✅ Fixed Jan 25, 2026 |
+| Pinecone timeout | Silent fallback | No user notification |
+| Embedding failure | Fail-open (accept query) | May pass garbage |
+| LLM failure | Static fallback message | Loses context |
+
+### Hardcoded Values Audit
+
+**1. Client Names (7+ locations)**
+
+```python
+# backend_service.py
+GENERIC_CLIENTS = ["Multiple Clients", "Independent", "Career Narrative"]
+
+# formatting.py
+if client.lower() in ["multiple clients", "independent"]: ...
+
+# rag_service.py
+NAMED_CLIENT_PREFERENCE = ["JP Morgan", "RBC", "JPMC", ...]
+```
+
+**Recommendation:** Centralize in `config/constants.py` or derive from JSONL.
+
+**2. Threshold Constants**
+
+| Constant | Value | Location |
+|----------|-------|----------|
+| HARD_ACCEPT | 0.80 | semantic_router.py |
+| SOFT_ACCEPT | 0.72 | semantic_router.py |
+| ENTITY_GATE_THRESHOLD | 0.50 | backend_service.py |
+| CONFIDENCE_HIGH | 0.25 | backend_service.py |
+| CONFIDENCE_LOW | 0.15 | backend_service.py |
+| SEARCH_TOP_K | 100 | pinecone_service.py |
+| SEARCH_TOP_K | 7 | backend_service.py (conflict!) |
+
+**3. Model Names**
+
+```python
+# 4 different locations:
+model="text-embedding-3-small"  # pinecone_service.py
+model="text-embedding-3-small"  # semantic_router.py
+model="text-embedding-3-small"  # build_custom_embeddings.py
+model="gpt-4o"                  # backend_service.py
+model="gpt-4o-mini"             # backend_service.py (classifier)
+```
+
+**4. Entity Normalization Map**
+
+```python
+ENTITY_NORMALIZATION = {
+    "jpmorgan": "JP Morgan Chase",
+    "jp morgan": "JP Morgan Chase",
+    "jpm": "JP Morgan Chase",
+    "cic": "Cloud Innovation Center",
+    ...
+}
+```
+
+**Location:** backend_service.py:315-323
+**Issue:** Not synchronized with JSONL field values.
+
+**5. Intent Family Keywords**
+
+Hardcoded in semantic_router.py - 11 intent families with ~20 example phrases each.
+These should be reviewed quarterly for relevance.
+
+**6. Banned Phrases**
+
+```python
+BANNED_PHRASES = [
+    "meaningful outcomes",
+    "foster collaboration",
+    "strategic mindset",
+    ...
+]
+```
+
+**Location:** backend_service.py
+**Purpose:** Post-processing cleanup of corporate filler.
+
+**7. Sacred Vocabulary (Verbatim Phrases)**
+
+```python
+VERBATIM_PHRASES = ["builder", "modernizer", "complexity to clarity", ...]
+```
+
+**Location:** backend_service.py
+**Purpose:** Force LLM to use exact phrases for Professional Narrative.
+
+**8. UI Display Strings**
+
+```python
+"🐾 I need a quick breather — try again in about 15 seconds!"
+"Found {n} relevant stories"
+"No strong matches found"
+```
+
+**Scattered across:** backend_service.py, conversation_helpers.py
+
+**9. Temperature Settings**
+
+```python
+temperature=0.4  # standard mode
+temperature=0.2  # synthesis mode
+```
+
+**Location:** backend_service.py
+**Issue:** Not configurable, no A/B testing capability.
+
+**10. Token Limits**
+
+```python
+max_tokens=700  # generation
+max_tokens=150  # classifier
+```
+
+**11. Pinecone Index Name**
+
+```python
+index_name="portfolio-stories"  # pinecone_service.py
+```
+
+**Should be:** Environment variable.
+
+### Summary Findings
+
+**Strengths:**
+- Multi-layer gating prevents garbage queries efficiently
+- Entity detection adds precision to broad queries
+- Mode-specific retrieval (standard/narrative/synthesis) improves relevance
+- 100% eval pass rate demonstrates quality baseline
+- XML context isolation prevents cross-story bleed
+- Dynamic MATT_DNA derived from single source of truth
+
+**Weaknesses:**
+- Hardcoded values scattered across 6+ files
+- Unclear ownership boundaries between layers
+- No centralized configuration
+- Limited error handling coverage
+- Test suite focused on happy path
+- Duplicate logic (client exclusions, entity normalization)
+- Hybrid scoring systems don't align
+
+**Recommended Actions:**
+1. **Centralize constants** in `config/constants.py`
+2. **Derive client lists** from JSONL metadata at startup
+3. **Add error handling tests** for rate limits, timeouts
+4. **Clarify layer boundaries** with explicit contracts
+5. **Remove duplicate code** (client exclusions, entity maps)
+6. **Add negative test cases** to eval suite
 
 ---
 

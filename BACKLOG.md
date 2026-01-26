@@ -1,6 +1,53 @@
+# BACKLOG
 
+## January 25, 2026 - Tech Debt from RAG Audit
+
+### 1. Fix Prompt Conflict
+**Priority:** HIGH
+**Issue:** System prompt says "Emphasize X" but also "NEVER meta-commentary" — LLM can't satisfy both
+**Evidence:** `META_SENTENCE_PATTERNS` regex fires frequently catching violations
+**Fix:** Rewrite prompt to remove conflicting instructions
+
+### 2. Add Eval Cases for "Tell me more about: [Title]"
+**Priority:** MEDIUM
+**Issue:** No test coverage for the Related Projects "tell me more" pattern
+**Fix:** Add 3-5 eval cases like "Tell me more about: Platform Modernization at JPMC"
+
+### 3. Simplify backend_service.py
+**Priority:** MEDIUM
+**Issue:** 800+ lines, imports from 6+ modules, unclear ownership boundaries
+**Fix:** Extract intent classification, entity detection, and mode logic into separate modules
+
+### 4. Audit Excel Master for Corporate Filler
+**Priority:** LOW
+**Issue:** BANNED_PHRASES list keeps growing; should fix at source
+**Fix:** Grep Excel master for "meaningful outcomes", "foster collaboration", etc. and rewrite
+
+### 5. Delete META_SENTENCE_PATTERNS Regex
+**Priority:** MEDIUM (blocked by #1)
+**Issue:** Band-aid for prompt conflict; should be unnecessary after #1
+**Fix:** After fixing prompt, monitor for 1 week, then delete if no violations
+
+### 6. Remove boost_narrative_matches()
+**Priority:** LOW
+**Issue:** Title is now embedded in Pinecone, so semantic search naturally finds narrative stories
+**Status:** Function still exists but may be dead code
+**Fix:** Verify with eval, then delete from `rag_service.py`
+
+### 7. Centralize Hardcoded Values
+**Priority:** MEDIUM
+**Issue:** 11 categories of hardcoded values scattered across 6+ files (see RAG Audit in ARCHITECTURE.md)
+**Fix:** Create `config/constants.py` with all thresholds, model names, client lists
+
+### 8. Dead Code Cleanup
+**Priority:** LOW
+**Files to audit:**
+- `services/query_logger.py` - orphaned Google Sheets logger
+- `utils/scoring.py` - may have unused functions
+- Any `# TODO` or `# FIXME` comments older than 30 days
 
 ---
+
 ### 10. Cross-Browser Testing
 **Story ID:** MATTGPT-010
 **Priority:** LOW
