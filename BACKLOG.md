@@ -2,11 +2,24 @@
 
 ## January 25, 2026 - Tech Debt from RAG Audit
 
-### 1. Fix Prompt Conflict
+### 1. Fix Prompt Conflict ✅ DONE
 **Priority:** HIGH
 **Issue:** System prompt says "Emphasize X" but also "NEVER meta-commentary" — LLM can't satisfy both
 **Evidence:** `META_SENTENCE_PATTERNS` regex fires frequently catching violations
 **Fix:** Rewrite prompt to remove conflicting instructions
+**Resolution (Jan 26, 2026):**
+- Created `prompts.py` with BASE_PROMPT + SYNTHESIS_DELTA + STANDARD_DELTA architecture
+- Removed `get_theme_guidance()` which had conflicting "Emphasize:" instructions
+- Removed `BANNED_PHRASES_CLEANUP` post-processing bandaid
+- Meta-commentary failures reduced from 10/31 → 1-2/31 (LLM variance)
+
+### 9. Semantic Router Fail-Open Handling
+**Priority:** MEDIUM
+**Issue:** When semantic router has connection error, system falls back to off-topic guard
+**Evidence:** "Semantic router error: Connection error." → "🐾 I can't help with that..."
+**Expected:** Skip intent classification, proceed with RAG, return actual results
+**File:** `backend_service.py` — error handling in semantic router section
+**Fix:** Catch connection errors and fail open (allow query) rather than fail closed (block)
 
 ### 2. Add Eval Cases for "Tell me more about: [Title]"
 **Priority:** MEDIUM
@@ -24,9 +37,10 @@
 **Fix:** Grep Excel master for "meaningful outcomes", "foster collaboration", etc. and rewrite
 
 ### 5. Delete META_SENTENCE_PATTERNS Regex
-**Priority:** MEDIUM (blocked by #1)
+**Priority:** MEDIUM (unblocked — #1 is done)
 **Issue:** Band-aid for prompt conflict; should be unnecessary after #1
 **Fix:** After fixing prompt, monitor for 1 week, then delete if no violations
+**Status:** Ready to monitor — #1 completed Jan 26, 2026
 
 ### 6. Remove boost_narrative_matches()
 **Priority:** LOW
