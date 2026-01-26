@@ -307,7 +307,10 @@ Empathy, Authenticity, Curiosity, Integrity, Leadership
 
 
 # Entity fields to check for routing (in priority order)
-ENTITY_FIELDS = ["Client", "Employer", "Division", "Project", "Place"]
+# Note: Project and Place removed Jan 2026 - too many generic values caused false positives
+# (e.g., "innovation" matching Project="Innovation"). Semantic search handles these well.
+# Division kept for "Cloud Innovation Center" queries - watch for "Technology" false positives.
+ENTITY_FIELDS = ["Client", "Employer", "Division"]
 
 
 def detect_entity(query: str, stories: list[dict]) -> tuple[str, str] | None:
