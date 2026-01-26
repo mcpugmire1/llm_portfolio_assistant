@@ -97,13 +97,13 @@ def render_landing_page(stories: list[dict]):
                 "How did Matt modernize payments across 12+ countries at JP Morgan?",
             ),
             ("🔬", "Tell me about Matt's early failure and experimentation approach"),
-            ("🚀", "Tell me about Matt's rapid prototyping work for client products"),
+            ("🚀", "How does Matt build teams that ship like startups in enterprise?"),
             (
                 "🏗️",
                 "How did Matt establish and expand the Cloud Innovation Center in Atlanta?",
             ),
             ("📈", "How did Matt scale learning and talent development at Accenture?"),
-            ("🤝", "How did Matt align stakeholders across 3 regions at JP Morgan?"),
+            ("💥", "How does Matt handle resistance and failure in transformations?"),
         ]
 
         c1, c2 = st.columns(2, gap="small")
