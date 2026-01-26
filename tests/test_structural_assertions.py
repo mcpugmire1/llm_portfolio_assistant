@@ -155,9 +155,11 @@ def assert_no_hardcoded_drift(stories: list[dict]) -> tuple[bool, dict[str, list
     """Check if hardcoded constants match JSONL source of truth.
 
     Compares:
-    - ENTITY_NORMALIZATION values → must exist in actual JSONL
     - Excluded clients list → must match pattern-based detection
     - Verbatim phrases → must exist in actual story content
+
+    Note: ENTITY_NORMALIZATION was removed (Jan 2026) - semantic search
+    handles variations naturally without hardcoded alias maps.
 
     Args:
         stories: Story corpus from JSONL
@@ -165,31 +167,14 @@ def assert_no_hardcoded_drift(stories: list[dict]) -> tuple[bool, dict[str, list
     Returns:
         Tuple of (passed, dict of drift categories to mismatches)
     """
-    from ui.pages.ask_mattgpt.backend_service import ENTITY_NORMALIZATION
     from utils.client_utils import is_generic_client
 
     drift = {
-        "entity_normalization": [],
         "excluded_clients": [],
         "verbatim_phrases": [],
     }
 
-    # === 1. Check ENTITY_NORMALIZATION ===
-    # All normalized values should exist in JSONL
-    all_entity_values = set()
-    for s in stories:
-        for field_name in ["Client", "Employer", "Division", "Project", "Place"]:
-            val = s.get(field_name)
-            if val:
-                all_entity_values.add(val)
-
-    for alias, normalized in ENTITY_NORMALIZATION.items():
-        if normalized not in all_entity_values:
-            drift["entity_normalization"].append(
-                f"'{alias}' -> '{normalized}' (not in JSONL)"
-            )
-
-    # === 2. Verify pattern-based client filtering works ===
+    # === 1. Verify pattern-based client filtering works ===
     # backend_service.py now uses is_generic_client() instead of hardcoded values
     # This check verifies the pattern catches actual generic clients in the data
     actual_clients = {s.get("Client") for s in stories if s.get("Client")}
@@ -432,6 +417,137 @@ class TestAllStructuralChecks:
             errors.append(f"Voice violations: {result.voice_violations}")
 
         assert result.overall_passed, f"Structural failures: {errors}"
+
+
+# =============================================================================
+# THRESHOLD BOUNDARY TESTS
+# =============================================================================
+
+# Queries calibrated from semantic score analysis (Jan 2026)
+# Off-topic queries score 0.11-0.22, legitimate queries score 0.30+
+# These tests catch if someone bumps the threshold and breaks legitimate queries
+THRESHOLD_TEST_QUERIES = [
+    # Should PASS (legitimate queries that were blocked at 0.50 threshold)
+    {"query": "Tell me about the CIC", "should_pass": True, "note": "CIC=0.41"},
+    {
+        "query": "What problems does Matt solve?",
+        "should_pass": True,
+        "note": "score=0.38",
+    },
+    {
+        "query": "How did Matt handle failure?",
+        "should_pass": True,
+        "note": "score=0.41",
+    },
+    {"query": "Matt's work at JPMC", "should_pass": True, "note": "score=0.46"},
+    {
+        "query": "Tell me about Matt's amex work",
+        "should_pass": True,
+        "note": "score=0.45",
+    },
+    {"query": "leadership", "should_pass": True, "note": "score=0.49"},
+    # Should FAIL (garbage/off-topic)
+    {"query": "What's the weather today?", "should_pass": False, "note": "score=0.11"},
+    {"query": "Best pizza in Atlanta", "should_pass": False, "note": "score=0.17"},
+    {"query": "asdf jkl qwerty", "should_pass": False, "note": "gibberish"},
+]
+
+
+class TestEntityGateThreshold:
+    """Test that entity gate threshold doesn't reject legitimate queries.
+
+    These tests catch threshold miscalibration. If someone bumps the threshold
+    back up (e.g., from 0.30 to 0.50), these tests will fail because legitimate
+    queries like "Tell me about the CIC" will be incorrectly blocked.
+    """
+
+    @pytest.mark.parametrize(
+        "test_case",
+        [t for t in THRESHOLD_TEST_QUERIES if t["should_pass"]],
+        ids=lambda t: f"pass_{t['query'][:30]}",
+    )
+    def test_legitimate_queries_pass(self, test_case, stories, rag_fn):
+        """Verify legitimate queries return real answers, not refusals."""
+        query = test_case["query"]
+        filters = {
+            "industry": "",
+            "capability": "",
+            "era": "",
+            "clients": [],
+            "domains": [],
+            "roles": [],
+            "tags": [],
+        }
+
+        rag_result = rag_fn(query, filters, stories)
+        response = rag_result.get("answer_md", "")
+
+        # Check for refusal patterns
+        refusal_patterns = [
+            "I can't help with that",
+            "I can only discuss Matt's",
+            "out of scope",
+            "off-topic",
+        ]
+
+        is_refusal = any(
+            pattern.lower() in response.lower() for pattern in refusal_patterns
+        )
+
+        assert not is_refusal, (
+            f"Legitimate query was refused (threshold too high?)\n"
+            f"Query: {query}\n"
+            f"Note: {test_case['note']}\n"
+            f"Response: {response[:200]}..."
+        )
+
+        # Also verify we got a real response
+        assert len(response) > 50, (
+            f"Response too short - likely empty or error\n"
+            f"Query: {query}\n"
+            f"Response: {response}"
+        )
+
+    @pytest.mark.parametrize(
+        "test_case",
+        [t for t in THRESHOLD_TEST_QUERIES if not t["should_pass"]],
+        ids=lambda t: f"block_{t['query'][:30]}",
+    )
+    def test_garbage_queries_blocked(self, test_case, stories, rag_fn):
+        """Verify garbage queries are rejected, not answered."""
+        query = test_case["query"]
+        filters = {
+            "industry": "",
+            "capability": "",
+            "era": "",
+            "clients": [],
+            "domains": [],
+            "roles": [],
+            "tags": [],
+        }
+
+        rag_result = rag_fn(query, filters, stories)
+        response = rag_result.get("answer_md", "")
+
+        # Should be refused or empty
+        refusal_patterns = [
+            "I can't help with that",
+            "I can only discuss Matt's",
+            "out of scope",
+            "off-topic",
+        ]
+
+        is_refusal = any(
+            pattern.lower() in response.lower() for pattern in refusal_patterns
+        )
+        is_empty = len(response.strip()) < 50
+
+        assert is_refusal or is_empty, (
+            f"Garbage query was NOT blocked (threshold too low?)\n"
+            f"Query: {query}\n"
+            f"Note: {test_case['note']}\n"
+            f"Response: {response[:200]}..."
+        )
 
 
 # =============================================================================

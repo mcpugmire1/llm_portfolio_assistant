@@ -309,17 +309,6 @@ Empathy, Authenticity, Curiosity, Integrity, Leadership
 # Entity fields to check for routing (in priority order)
 ENTITY_FIELDS = ["Client", "Employer", "Division", "Project", "Place"]
 
-# Entity name normalization map
-ENTITY_NORMALIZATION = {
-    "jpmorgan": "JP Morgan Chase",
-    "jp morgan": "JP Morgan Chase",
-    "jpmorgan chase": "JP Morgan Chase",
-    "amex": "American Express",
-    "at&t mobility": "AT&T Mobility",
-    "cic": "Cloud Innovation Center",
-    "liquid studio": "Atlanta Liquid Studio",
-}
-
 
 def detect_entity(query: str, stories: list[dict]) -> tuple[str, str] | None:
     """Detect if query mentions a known entity from any entity field.
@@ -365,21 +354,9 @@ def detect_entity(query: str, stories: list[dict]) -> tuple[str, str] | None:
                 return True
         return False
 
-    # First check normalization map for common aliases
-    for alias, normalized in ENTITY_NORMALIZATION.items():
-        if alias in q_lower:
-            # Check for exclusion context
-            if _is_excluded_context(alias):
-                return None
-            # Find which field contains this normalized value
-            for field in ENTITY_FIELDS:
-                for story in stories:
-                    if story.get(field) == normalized:
-                        return (field, normalized)
-            # If not found in stories, default to Client
-            return ("Client", normalized)
-
-    # Build entity sets from ALL relevant fields
+    # Build entity sets from ALL relevant fields (exact match only)
+    # Note: Semantic search handles variations like "JPMC", "amex", "CIC" naturally
+    # through embeddings - no fuzzy matching needed here.
     for field in ENTITY_FIELDS:
         known_entities = {
             s.get(field)
@@ -1594,16 +1571,23 @@ def rag_answer(
             print(f"DEBUG: Entity detected - {entity_match[0]}:{entity_match[1]}")
 
         # =================================================================
-        # ENTITY GATE (Jan 2026 - Sovereign Narrative Update)
-        # Threshold lowered from 0.55 to 0.50 to allow more narrative queries
-        # like "Tell me about Matt's leadership journey" to pass through.
-        # Queries below this threshold WITH no detected entity are rejected.
-        # Queries WITH a detected entity bypass this gate entirely.
+        # ENTITY GATE (Jan 2026 - Calibrated from score analysis)
+        # Off-topic queries score 0.11-0.22, legitimate queries score 0.30+
+        # Threshold set to 0.30 based on empirical testing showing queries
+        # like "What problems does Matt solve?" (0.38) and "CIC" (0.41)
+        # were being incorrectly blocked at 0.50.
         # =================================================================
-        ENTITY_GATE_THRESHOLD = 0.50
+        ENTITY_GATE_THRESHOLD = 0.30
         if not from_suggestion and not semantic_valid:
             if entity_match is None and semantic_score < ENTITY_GATE_THRESHOLD:
                 # No entity detected + very low semantic score → out of scope
+                # Log for observability - helps diagnose "I can't help" issues
+                print(
+                    f"[QUERY_REJECTED] reason=entity_gate, "
+                    f"router_family={intent_family}, router_score={semantic_score:.3f}, "
+                    f"entity=None, threshold={ENTITY_GATE_THRESHOLD}, "
+                    f"query={question[:50]}..."
+                )
                 log_offdomain(question or "", "no_entity_low_score")
                 st.session_state["ask_last_reason"] = "out_of_scope"
                 st.session_state["ask_last_query"] = question or ""
@@ -1698,6 +1682,31 @@ But here's what might translate: Matt's work in **B2B platform modernization**, 
             and confidence in ("none", "low")
             and not is_trusted_behavioral
         ):
+            # Check if this is likely an API error (semantic router failed + Pinecone poor)
+            # rather than an invalid question
+            if intent_family == "error_fallback":
+                # Log for observability - helps diagnose "I can't help" issues
+                print(
+                    f"[API_ERROR_DETECTED] router=error_fallback, "
+                    f"pinecone_score={search_result.get('top_score', 0):.3f}, "
+                    f"confidence={confidence}, query={question[:50]}..."
+                )
+                if DEBUG:
+                    print("DEBUG: API error detected (router failed + low Pinecone)")
+                return {
+                    "answer_md": "🐾 I need a quick breather — please try again in a moment!",
+                    "sources": [],
+                    "modes": {},
+                    "default_mode": "narrative",
+                }
+
+            # Log for observability - helps diagnose "I can't help" issues
+            print(
+                f"[QUERY_REJECTED] reason=low_pinecone, "
+                f"router_family={intent_family}, router_score={semantic_score:.3f}, "
+                f"pinecone_score={search_result.get('top_score', 0):.3f}, "
+                f"query={question[:50]}..."
+            )
             log_offdomain(
                 question or "", f"low_pinecone:{search_result['top_score']:.3f}"
             )
@@ -1736,6 +1745,22 @@ But here's what might translate: Matt's work in **B2B platform modernization**, 
 
         # No results handling
         if not pool:
+            # Check if this is likely an API error (semantic router failed + no pool)
+            if intent_family == "error_fallback":
+                # Log for observability - helps diagnose "I can't help" issues
+                print(
+                    f"[API_ERROR_DETECTED] router=error_fallback, "
+                    f"pool=empty, query={question[:50]}..."
+                )
+                if DEBUG:
+                    print("DEBUG: API error detected (router failed + empty pool)")
+                return {
+                    "answer_md": "🐾 I need a quick breather — please try again in a moment!",
+                    "sources": [],
+                    "modes": {},
+                    "default_mode": "narrative",
+                }
+
             if st.session_state.get("__pc_suppressed__"):
                 log_offdomain(question or "", "low_confidence")
                 st.session_state["ask_last_reason"] = "low_confidence"

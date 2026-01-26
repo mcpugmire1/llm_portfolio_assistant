@@ -16,10 +16,11 @@ import os
 import numpy as np
 
 # =============================================================================
-# THRESHOLDS
+# THRESHOLDS (Calibrated Jan 2026 from score analysis)
+# Garbage queries: 0.17-0.27 | Legitimate queries: 0.46-0.84
 # =============================================================================
 HARD_ACCEPT = 0.80  # Clearly on-topic, no question
-SOFT_ACCEPT = 0.72  # Accept but log as borderline for review
+SOFT_ACCEPT = 0.40  # Accept but log as borderline for review
 # Below SOFT_ACCEPT = router rejects (but search fallback may still work)
 
 # =============================================================================
@@ -286,8 +287,16 @@ def is_portfolio_query_semantic(
         return is_valid, max_similarity, best_intent, family
 
     except Exception as e:
-        # Fail open if embedding fails
-        print(f"Semantic router error: {e}")
+        # FAIL OPEN: Connection errors should NOT block queries
+        # Return is_valid=True so query proceeds to entity detection and RAG
+        # Score of 1.0 ensures entity gate won't reject
+        # Family "error_fallback" signals this was a router failure
+        print(f"Semantic router error (FAILING OPEN): {e}")
+        print("  Query will proceed to entity detection and RAG")
+        if "connection" in str(e).lower() or "timeout" in str(e).lower():
+            print("  Likely network issue - check OpenAI API connectivity")
+        # Debug: uncomment to see full traceback
+        # traceback.print_exc()
         return True, 1.0, "", "error_fallback"
 
 

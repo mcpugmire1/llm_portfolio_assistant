@@ -13,13 +13,16 @@
 - Removed `BANNED_PHRASES_CLEANUP` post-processing bandaid
 - Meta-commentary failures reduced from 10/31 → 1-2/31 (LLM variance)
 
-### 9. Semantic Router Fail-Open Handling
+### 9. Semantic Router Fail-Open Handling ✅ DONE
 **Priority:** MEDIUM
 **Issue:** When semantic router has connection error, system falls back to off-topic guard
 **Evidence:** "Semantic router error: Connection error." → "🐾 I can't help with that..."
 **Expected:** Skip intent classification, proceed with RAG, return actual results
-**File:** `backend_service.py` — error handling in semantic router section
-**Fix:** Catch connection errors and fail open (allow query) rather than fail closed (block)
+**Resolution (Jan 26, 2026):**
+- Verified `is_portfolio_query_semantic()` already returns `(True, 1.0, "", "error_fallback")` on exception
+- Added clearer logging: "FAILING OPEN" message with network error hints
+- `semantic_valid=True` + `score=1.0` ensures query proceeds to entity detection and RAG
+- No special handling for `error_fallback` in backend_service.py that would reject
 
 ### 2. Add Eval Cases for "Tell me more about: [Title]"
 **Priority:** MEDIUM
