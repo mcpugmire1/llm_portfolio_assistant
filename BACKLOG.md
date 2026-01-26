@@ -89,6 +89,41 @@
 - `utils/scoring.py` - may have unused functions
 - Any `# TODO` or `# FIXME` comments older than 30 days
 
+### 13. Centralize Constants
+**Priority:** MEDIUM
+**Issue:** Thresholds, model names, token limits scattered across 6+ files
+**Fix:** Create `config/constants.py` with all configurable values
+
+### 14. Fix SEARCH_TOP_K Conflict
+**Priority:** MEDIUM
+**Issue:** `SEARCH_TOP_K = 100` in pinecone_service.py, `SEARCH_TOP_K = 7` in backend_service.py
+**Fix:** Determine correct value, centralize
+
+### 15. Clarify Hybrid Scoring
+**Priority:** MEDIUM
+**Issue:** Pinecone scores (0.0-1.0) don't map clearly to confidence buckets (0.15-0.25)
+**Fix:** Document or align the scoring systems
+
+### 16. Add Error Handling Tests
+**Priority:** MEDIUM
+**Issue:** Test suite only covers happy path
+**Fix:** Add tests for rate limits, timeouts, embedding failures
+
+### 17. Clarify Layer Ownership
+**Priority:** LOW
+**Issue:** Ranking, intent classification, and formatting split across multiple files
+**Fix:** Document contracts or refactor boundaries
+
+### 18. Pinecone Index as Env Var
+**Priority:** LOW
+**Issue:** `index_name="portfolio-stories"` hardcoded
+**Fix:** Move to environment variable
+
+### 19. Quarterly Intent Review
+**Priority:** LOW
+**Issue:** 11 intent families with ~20 phrases each in semantic_router.py
+**Fix:** Schedule quarterly review for relevance
+
 ---
 
 ### 10. Cross-Browser Testing

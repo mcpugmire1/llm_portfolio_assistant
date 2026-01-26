@@ -731,10 +731,12 @@ Query → Semantic Router (embedding similarity)
 5. Sort by score, then named-clients-first (JP Morgan/RBC beat "Independent")
 6. Return top 9 stories
 
-**Entity Detection (Multi-Field):**
-Checks fields in order: Client, Employer, Division, Project, Place
-- "CIC" normalizes to Division: "Cloud Innovation Center"
-- "JPMorgan" normalizes to Client: "JP Morgan Chase"
+**Entity Detection (Jan 2026 Update):**
+Checks fields in order: Client, Employer, Division
+- Project and Place removed - too many generic values caused false positives (e.g., "innovation" matching Project="Innovation")
+- Semantic search handles Project/Place queries naturally
+- "CIC" matches Division: "Cloud Innovation Center"
+- "JPMorgan" matches Client: "JP Morgan Chase"
 - Excludes generic values: "Multiple Clients", "Independent"
 
 **Synthesis Prompt Mode:**
@@ -818,10 +820,10 @@ Structured logs added to diagnose "I can't help with that" issues in production.
 - **Do not add more intents** without updating this doc and the eval suite
 
 #### Entity Detection
-- **Job:** Detect company/project/division mentions in query for scoped retrieval
+- **Job:** Detect company/division mentions in query for scoped retrieval
 - **Lives in:** `ui/pages/ask_mattgpt/backend_service.py:detect_entity()`
-- **Fields checked (in order):** Client, Employer, Division, Project, Place
-- **Normalization:** "jpmorgan" → "JP Morgan Chase", "cic" → "Cloud Innovation Center", etc.
+- **Fields checked (in order):** Client, Employer, Division
+- **Removed (Jan 2026):** Project, Place - too many generic values caused false positives (e.g., "innovation" matching Project="Innovation"). Semantic search handles these naturally.
 - **Exclusions:** "Multiple Clients", "Independent", "Career Narrative" (too generic to filter)
 - **Returns:** `(field_name, entity_value)` tuple or `None`
 
@@ -829,11 +831,12 @@ Structured logs added to diagnose "I can't help with that" issues in production.
 - **Job:** Search across ALL entity fields when entity detected, not just the primary field
 - **Lives in:** `services/pinecone_service.py:189-216`
 - **Implementation:** Uses Pinecone `$or` operator to search across 5 fields simultaneously
+- **Note:** Entity DETECTION checks 3 fields (Client, Employer, Division), but once detected, Pinecone SEARCH spans all 5 fields to catch cross-references
 - **Fields searched:** `client`, `employer`, `division`, `project`, `place`
 - **Casing rules:**
   - **Lowercase fields:** `division`, `employer`, `project`, `place` → `.lower()` applied
   - **PascalCase fields:** `client` → preserve original casing
-- **Example:** Query "Accenture work" searches:
+- **Example:** Query "Accenture work" → detected as Client, then searches:
   ```python
   {"$or": [
       {"client": {"$eq": "Accenture"}},
@@ -1058,13 +1061,13 @@ Stories are wrapped in XML tags before injection into the LLM prompt:
 - Auto-bold all known client names (derived from story corpus)
 - Auto-bold numbers/metrics: $50M, 30%, 4x, 150+ engineers, etc.
 - Fix LLM's malformed bolding (e.g., **1**0%** → **10%**)
-- Remove banned phrases that LLM ignores (BANNED_PHRASES_CLEANUP list)
+- ~~Remove banned phrases that LLM ignores (BANNED_PHRASES_CLEANUP list)~~ ✅ **REMOVED (Jan 26):** BASE_PROMPT now instructs "delete and state the fact"
 
-**Meta-Commentary Safety Net** (temporary — see BACKLOG.md #1):
+**Meta-Commentary Safety Net** ✅ **LARGELY RESOLVED (Jan 26):**
 - `META_SENTENCE_PATTERNS` regex catches LLM meta-commentary that violates NEVER rules
 - Patterns: "This story demonstrates...", "This reflects Matt's...", "reveals his pattern of..."
-- Logs violations with `_log_bandaid()` for tracking which rules fire
-- **Known issue:** Prompt conflict between "Emphasize X" and "NEVER meta-commentary" causes this to fire frequently
+- ~~**Known issue:** Prompt conflict between "Emphasize X" and "NEVER meta-commentary"~~ ✅ **FIXED:** Removed `get_theme_guidance()`, new BASE_PROMPT + DELTA architecture
+- Failures reduced from 10/31 → 1-2/31 (LLM variance)
 
 **BANDAID Logging:**
 ```python
@@ -1257,7 +1260,7 @@ LAST_QUERY = "__explore_last_query__"         # Query that produced cache
 ### Known Limitations
 
 1. **Synthesis + specific topic:** "Tell me about Matt's rapid prototyping work" classified as synthesis but should find the specific rapid prototyping story. Current workaround: synthesis now uses user query embedding.
-2. ~~**Multi-client stories:** Stories with `Client="Multiple Clients"` won't match entity filters.~~ **FIXED (Jan 2026):** Multi-Field Entity Gate now searches across 5 fields (client, employer, division, project, place) using Pinecone `$or` operator.
+2. ~~**Multi-client stories:** Stories with `Client="Multiple Clients"` won't match entity filters.~~ **FIXED (Jan 2026):** Multi-Field Entity Gate now searches across 5 fields using Pinecone `$or` operator. Entity detection narrowed to 3 fields (Client, Employer, Division) to prevent false positives.
 3. **Ground truth fidelity:** LLM paraphrases instead of quoting verbatim despite `[[CORE BRAND DNA]]` markers.
 4. **Deprecated documentation:** `mattgpt_system_prompt.md` documents the original "MattGPT" persona (pre-Agy). The current Agy voice is documented in this file under Component Contracts → Agy Voice Generator.
 5. **LLM stochasticity:** Eval may show occasional failures due to LLM response variability. Re-running typically passes. Semantic similarity scoring would address this (see BACKLOG.md MATTGPT-004).
@@ -2752,17 +2755,17 @@ index_name="portfolio-stories"  # pinecone_service.py
 - Unclear ownership boundaries between layers
 - No centralized configuration
 - Limited error handling coverage
-- Semantic router connection errors fail closed (should fail open) — see BACKLOG #9
+- ~~Semantic router connection errors fail closed (should fail open)~~ ✅ **FIXED (Jan 26):** Now fails open
 - Test suite focused on happy path
-- Duplicate logic (client exclusions, entity normalization)
+- ~~Duplicate logic (client exclusions, entity normalization)~~ ✅ **FIXED (Jan 26):** Entity normalization removed, client exclusions pattern-based
 - Hybrid scoring systems don't align
 
 **Recommended Actions:**
 1. **Centralize constants** in `config/constants.py`
-2. **Derive client lists** from JSONL metadata at startup
+2. ~~**Derive client lists** from JSONL metadata at startup~~ ✅ **DONE:** `generate_dynamic_dna()` + `is_generic_client()`
 3. **Add error handling tests** for rate limits, timeouts
 4. **Clarify layer boundaries** with explicit contracts
-5. **Remove duplicate code** (client exclusions, entity maps)
+5. ~~**Remove duplicate code** (client exclusions, entity maps)~~ ✅ **DONE:** Entity normalization removed, client exclusions use `is_generic_client()`
 6. **Add negative test cases** to eval suite
 
 ---
