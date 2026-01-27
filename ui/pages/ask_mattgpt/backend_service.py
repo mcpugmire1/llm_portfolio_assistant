@@ -309,8 +309,12 @@ Empathy, Authenticity, Curiosity, Integrity, Leadership
 # Entity fields to check for routing (in priority order)
 # Note: Project and Place removed Jan 2026 - too many generic values caused false positives
 # (e.g., "innovation" matching Project="Innovation"). Semantic search handles these well.
-# Division kept for "Cloud Innovation Center" queries - watch for "Technology" false positives.
+# Division kept for "Cloud Innovation Center" queries.
 ENTITY_FIELDS = ["Client", "Employer", "Division"]
+
+# Division values to exclude from entity matching - common words that cause false positives
+# e.g., "Matt's technology experience" should NOT scope to Division="Technology" (9 stories)
+EXCLUDED_DIVISION_VALUES = {"Technology"}
 
 
 def detect_entity(query: str, stories: list[dict]) -> tuple[str, str] | None:
@@ -369,6 +373,9 @@ def detect_entity(query: str, stories: list[dict]) -> tuple[str, str] | None:
         # Sort by length descending to match longer names first
         # (e.g., "JP Morgan Chase" before "JP Morgan")
         for entity in sorted(known_entities, key=len, reverse=True):
+            # Skip excluded Division values (common words that cause false positives)
+            if field == "Division" and entity in EXCLUDED_DIVISION_VALUES:
+                continue
             if entity.lower() in q_lower:
                 # Check for exclusion context
                 if _is_excluded_context(entity.lower()):
