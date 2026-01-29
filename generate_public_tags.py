@@ -75,6 +75,7 @@ def extract_semantic_tags(story):
         f"Category: {story.get('Category', '')}\n"
         f"Sub-category: {story.get('Sub-category', '')}\n"
         f"Project Scope: {story.get('Project Scope / Complexity', '')}\n"
+        f"Competencies: { story.get('Competencies', '')}\n"
         f"Use Cases: {story.get('Use Case(s)', '')}\n"
         f"Situation: {story.get('Situation', [''])[0]}\n"
         f"Task: {story.get('Task', [''])[0]}\n"
@@ -109,7 +110,7 @@ def enrich_stories_with_nlp_tags():
     # Count stories and estimate cost
     story_count = 0
     with open(INPUT_FILE, encoding="utf-8") as infile:
-        for line in infile:
+        for _line in infile:
             story_count += 1
 
     # Cost estimation (gpt-4o pricing: ~$2.50 per 1M input tokens, ~$10 per 1M output tokens)

@@ -18,7 +18,7 @@ import pandas as pd
 
 # ---------- config ----------
 
-INPUT_EXCEL_FILE = "MPugmire - STAR Stories - 25JAN26.xlsx"  # <-- update as needed
+INPUT_EXCEL_FILE = "MPugmire - STAR Stories - 29JAN26.xlsx"  # <-- update as needed
 OUTPUT_JSONL_FILE = "echo_star_stories.jsonl"
 SHEET_NAME = "STAR Stories - Interview Ready"
 DRY_RUN = False  # ✅ Change to False when ready to write output
@@ -149,6 +149,11 @@ def excel_to_jsonl():
             "Use Case(s)": [
                 s.strip()
                 for s in str(row.get("Use Case(s)", "")).split(";")
+                if s and s.strip()
+            ],
+            "Interview Questions": [
+                s.strip()
+                for s in str(row.get("Interview Questions", "")).split(";")
                 if s and s.strip()
             ],
             "Situation": split_bullets(normalize(row.get("Situation", ""))),

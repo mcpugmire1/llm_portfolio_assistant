@@ -8,6 +8,14 @@ Updated 12.05.25:
 - Switched from MiniLM (384 dims) to OpenAI text-embedding-3-small (1536 dims)
 - Better semantic matching for behavioral interview questions
 
+DEPENDENCY WARNING:
+Run this script after ANY changes to:
+- echo_star_stories_nlp.jsonl (story data)
+- Embedding text construction logic (what text gets embedded)
+- Embedding model (DEFAULT_EMBEDDING_MODEL in config/constants.py)
+
+Failure to re-run after changes will cause semantic search drift.
+
 Env (via .env or shell):
   STORIES_JSONL=echo_star_stories_nlp.jsonl
   OPENAI_API_KEY=...
@@ -103,6 +111,12 @@ def build_embedding_text(story: dict[str, Any]) -> str:
         tags = ", ".join(tags)
     tags = tags.strip() if tags else ""
 
+    # Use Case(s) - interview question patterns for retrieval
+    use_cases = _to_text(story.get("Use Case(s)"), max_items=6)
+
+    # Interview Questions - story-specific questions with anchor terms
+    interview_questions = _to_text(story.get("Interview Questions"), max_items=5)
+
     parts: list[str] = []
 
     header_bits = []
@@ -135,6 +149,12 @@ def build_embedding_text(story: dict[str, Any]) -> str:
 
     if tags:
         parts.append(f"Keywords: {tags}")
+
+    if use_cases:
+        parts.append(f"Use Cases: {use_cases}")
+
+    if interview_questions:
+        parts.append(f"Interview Questions: {interview_questions}")
 
     return " ".join(p for p in parts if p)
 
@@ -172,6 +192,7 @@ def build_metadata(story: dict[str, Any]) -> dict[str, Any]:
         "Theme": theme,
         "Era": story.get("Era", "").strip(),
         "Use Case(s)": _as_list(story.get("Use Case(s)")),
+        "Interview Questions": _as_list(story.get("Interview Questions")),
         "Competencies": _as_list(story.get("Competencies")),
         "Situation": _as_list(story.get("Situation")),
         "Task": _as_list(story.get("Task")),
