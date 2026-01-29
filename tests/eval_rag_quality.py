@@ -3,9 +3,9 @@ RAG Quality Evaluation Framework for MattGPT
 
 Evaluates Agy's response quality across:
 - Source Fidelity: Ground truth phrases from stories appear
-- Voice: No banned corporate-speak phrases
 - Accuracy: Correct client attribution
 - Authenticity: Matt's real voice preserved
+- Meta-commentary: No LLM talking ABOUT the story
 
 See docs/EVAL_FRAMEWORK.md for full specification.
 
@@ -28,22 +28,13 @@ import pytest
 # Add project root to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-# =============================================================================
-# CONSTANTS
-# =============================================================================
+from config.constants import META_COMMENTARY_PATTERNS
 
-BANNED_PHRASES = [
-    "stagnant growth",
-    "emerging market demands",
-    "limited potential",
-    "prioritize maintenance over innovation",
-    "strategic mindset",
-    "foster collaboration",
-    "stakeholder alignment",
-    "meaningful outcomes",
-    # NOTE: "high-trust engineering cultures" REMOVED - it's Matt's actual language in 5PSummary
-    "bridge the gap between strategy and execution",
-]
+# =============================================================================
+# CONSTANTS - Imported from config/constants.py
+# =============================================================================
+# META_COMMENTARY_PATTERNS is centralized in constants.py
+# to ensure consistency between evaluation tests and production code.
 
 # =============================================================================
 # GOLDEN QUERIES
@@ -395,6 +386,207 @@ GOLDEN_QUERIES = {
             "category": "surgical",
         },
     ],
+    # =========================================================================
+    # Entity Detection (9) - Regression Tests for detect_entity()
+    # Tests that common words don't incorrectly scope queries, while proper
+    # nouns correctly trigger entity filtering.
+    # =========================================================================
+    "entity_detection": [
+        # Should NOT scope (common words that happen to match entity values)
+        {
+            "id": 32,
+            "query": "What's Matt's technology experience?",
+            "expect_no_entity_scope": True,
+            "excluded_value": "Technology",
+            "note": "Technology is Division value but common word - should not scope",
+            "category": "entity_detection",
+        },
+        {
+            "id": 33,
+            "query": "Where has Matt driven innovation?",
+            "expect_no_entity_scope": True,
+            "excluded_value": "Innovation",
+            "note": "Innovation was Project value - removed from entity fields, no client named",
+            "category": "entity_detection",
+        },
+        {
+            "id": 34,
+            "query": "How does Matt handle transformation?",
+            "expect_no_entity_scope": True,
+            "note": "Transformation is common word, should not scope",
+            "category": "entity_detection",
+        },
+        {
+            "id": 39,
+            "query": "What's Matt's technology leadership style?",
+            "expect_no_entity_scope": True,
+            "excluded_value": "Technology",
+            "note": "Technology in context of leadership - should not scope",
+            "category": "entity_detection",
+        },
+        {
+            "id": 40,
+            "query": "Where has Matt scaled innovation?",
+            "expect_no_entity_scope": True,
+            "excluded_value": "Innovation",
+            "note": "Innovation as concept, not entity - should not scope",
+            "category": "entity_detection",
+        },
+        # Abbreviations/partial names - semantic search handles these, NOT entity detection
+        # detect_entity() uses exact substring matching by design
+        {
+            "id": 35,
+            "query": "Tell me about the CIC",
+            "expect_no_entity_scope": True,
+            "note": "CIC is abbreviation - semantic search handles it, not entity detection",
+            "category": "entity_detection",
+        },
+        {
+            "id": 36,
+            "query": "What did Matt do at JP Morgan?",
+            "expect_no_entity_scope": True,
+            "note": "Partial name 'JP Morgan' doesn't match 'JP Morgan Chase' - semantic search handles",
+            "category": "entity_detection",
+        },
+        # SHOULD scope (exact full names in query)
+        {
+            "id": 37,
+            "query": "Tell me about Matt's work at RBC",
+            "expect_entity": ("Client", "RBC"),
+            "note": "RBC is exact match - proper noun client name",
+            "category": "entity_detection",
+        },
+        {
+            "id": 38,
+            "query": "How did Matt scale the Cloud Innovation Center?",
+            "expect_entity": ("Division", "Cloud Innovation Center"),
+            "note": "Full division name is exact match - should scope",
+            "category": "entity_detection",
+        },
+        {
+            "id": 41,
+            "query": "Tell me about Matt's work at JP Morgan Chase",
+            "expect_entity": ("Client", "JP Morgan Chase"),
+            "note": "Full client name is exact match - should scope",
+            "category": "entity_detection",
+        },
+        {
+            "id": 42,
+            "query": "What did Matt build at Accenture?",
+            "expect_entity": ("Client", "Accenture"),
+            "note": "Accenture matches as Client (priority over Employer) - should scope",
+            "category": "entity_detection",
+        },
+    ],
+    # =========================================================================
+    # Marketing/Recruiter Questions (3) - MISSION CRITICAL
+    # These are landing page suggested questions and recruiter anxiety probes.
+    # If these fail, changes don't ship. Must work flawlessly every time.
+    # =========================================================================
+    "marketing": [
+        {
+            "id": 43,
+            "query": "How does Matt build teams that ship like startups in enterprise?",
+            "category": "marketing",
+            "ground_truth": ["4x", "Lean XP", "CIC", "startup", "enterprise"],
+            "min_matches": 2,
+            "must_not_contain_meta": True,
+            "note": "Landing page question #3 - must work flawlessly",
+            "is_landing_page": True,
+        },
+        {
+            "id": 44,
+            "query": "How does Matt handle resistance and failure in transformations?",
+            "category": "marketing",
+            "ground_truth": [
+                "permit to fail",
+                "psychological safety",
+                "failure",
+                "resistance",
+                "early failure",
+            ],
+            "min_matches": 2,
+            "must_not_contain_meta": True,
+            "note": "Landing page question #6 - must work flawlessly",
+            "is_landing_page": True,
+        },
+        {
+            "id": 45,
+            "query": "What evidence shows Matt can operate at Director or VP level?",
+            "category": "marketing",
+            # Evidence terms actually in project stories (not just narrative)
+            "ground_truth": [
+                "150",  # Team size - 8 stories
+                "Cloud Innovation Center",  # Division led - 61 mentions
+                "Fortune 500",  # Client tier - common
+                "$100M",  # Revenue impact - more common than $300M
+                "4x",  # Velocity improvement
+                "12 countries",  # Global scope
+                "platform",  # Scope indicator
+            ],
+            "min_matches": 2,
+            "must_not_contain_meta": True,
+            "note": "Recruiter anxiety probe - synthesis required, tests evidence not titles",
+            "is_synthesis": True,
+        },
+        {
+            "id": 46,
+            "query": "How did Matt modernize payments across 12+ countries at JP Morgan?",
+            "category": "marketing",
+            "ground_truth": ["12 countries", "12+", "payments", "JP Morgan", "global"],
+            "min_matches": 2,
+            "must_not_contain_meta": True,
+            "note": "Landing page question #1 - must work flawlessly",
+            "is_landing_page": True,
+        },
+        {
+            "id": 47,
+            "query": "Tell me about Matt's early failure and experimentation approach",
+            "category": "marketing",
+            "ground_truth": [
+                "failure is a feature",
+                "experiment",
+                "early failure",
+                "learning",
+            ],
+            "min_matches": 2,
+            "must_not_contain_meta": True,
+            "note": "Landing page question #2 - must work flawlessly",
+            "is_landing_page": True,
+        },
+        {
+            "id": 48,
+            "query": "How did Matt establish and expand the Cloud Innovation Center in Atlanta?",
+            "category": "marketing",
+            "ground_truth": [
+                "0 to 150",
+                "150+",
+                "CIC",
+                "Cloud Innovation Center",
+                "Atlanta",
+            ],
+            "min_matches": 2,
+            "must_not_contain_meta": True,
+            "note": "Landing page question #4 - must work flawlessly",
+            "is_landing_page": True,
+        },
+        {
+            "id": 49,
+            "query": "How did Matt scale learning and talent development at Accenture?",
+            "category": "marketing",
+            "ground_truth": [
+                "learning",
+                "talent",
+                "development",
+                "Accenture",
+                "enablement",
+            ],
+            "min_matches": 2,
+            "must_not_contain_meta": True,
+            "note": "Landing page question #5 - must work flawlessly",
+            "is_landing_page": True,
+        },
+    ],
 }
 
 
@@ -417,42 +609,25 @@ class EvalResult:
     details: dict[str, Any] = field(default_factory=dict)
 
 
-def check_banned_phrases(response: str, query: str = "") -> tuple[bool, list[str]]:
-    """Check if response contains any banned phrases.
+def check_meta_commentary(response: str) -> tuple[bool, list[str]]:
+    """Check if response contains meta-commentary patterns.
 
-    Context-aware: If user's query contains the key words of a banned phrase
-    (in any order), that phrase is allowed in the response.
+    Meta-commentary is when the LLM talks ABOUT the story instead of
+    answering the question. This is a HARD FAIL for marketing/landing
+    page queries.
 
     Args:
         response: The LLM response to check
-        query: The user's original query (for context-awareness)
 
     Returns:
-        Tuple of (passed, list of found banned phrases)
+        Tuple of (passed, list of found meta-commentary patterns)
     """
     response_lower = response.lower()
-    query_lower = query.lower()
-
     found = []
-    for phrase in BANNED_PHRASES:
-        phrase_lower = phrase.lower()
-        # Extract key words from banned phrase (3+ chars)
-        phrase_words = {w for w in phrase_lower.split() if len(w) >= 3}
 
-        # Skip if user's query contains most key words from the banned phrase
-        # This handles "align stakeholders" matching "stakeholder alignment"
-        query_words = set(query_lower.split())
-        # Check for word stems too (stakeholder/stakeholders, align/alignment)
-        query_stems = {w.rstrip("s").rstrip("ment").rstrip("ing") for w in query_words}
-        phrase_stems = {
-            w.rstrip("s").rstrip("ment").rstrip("ing") for w in phrase_words
-        }
-
-        if phrase_stems and phrase_stems.issubset(query_stems):
-            continue
-
-        if phrase_lower in response_lower:
-            found.append(phrase)
+    for pattern in META_COMMENTARY_PATTERNS:
+        if pattern.lower() in response_lower:
+            found.append(pattern)
 
     return len(found) == 0, found
 
@@ -650,12 +825,6 @@ def evaluate_query(
             result.error = "Empty response"
             return result
 
-        # Voice check (all queries) - context-aware for user's query terms
-        voice_pass, banned_found = check_banned_phrases(response, query)
-        result.checks["voice"] = voice_pass
-        if banned_found:
-            result.details["banned_phrases_found"] = banned_found
-
         # Category-specific checks
         if category == "narrative":
             # Ground truth check
@@ -667,7 +836,7 @@ def evaluate_query(
             result.checks["ground_truth"] = gt_pass
             result.details["ground_truth_matches"] = match_count
             result.details["matched_phrases"] = matched
-            result.passed = voice_pass and gt_pass
+            result.passed = gt_pass
 
         elif category == "client":
             # Client attribution check
@@ -689,7 +858,7 @@ def evaluate_query(
                 result.passed = False  # Fail if client found but not bolded
             else:
                 result.checks["client_bolded"] = is_bolded or is_multi
-                result.passed = voice_pass and client_pass
+                result.passed = client_pass
 
         elif category == "intent":
             behavior = query_spec["expected_behavior"]
@@ -700,7 +869,7 @@ def evaluate_query(
                 )
                 result.checks["synthesis_mode"] = synth_pass
                 result.details["client_count"] = client_count
-                result.passed = voice_pass and synth_pass
+                result.passed = synth_pass
 
             elif behavior == "redirect":
                 # Check for graceful redirect (doesn't claim expertise in retail)
@@ -716,11 +885,11 @@ def evaluate_query(
                     ]
                 )
                 result.checks["graceful_redirect"] = has_redirect
-                result.passed = voice_pass and has_redirect
+                result.passed = has_redirect
 
             else:
-                # Technical, behavioral, background - just voice check for now
-                result.passed = voice_pass
+                # Technical, behavioral, background - pass for now
+                result.passed = True
 
         elif category == "edge":
             behavior = query_spec.get("expected_behavior", "")
@@ -729,7 +898,7 @@ def evaluate_query(
                 # For multi-turn, we'd need to call twice - skip for now
                 result.checks["multi_turn"] = True
                 result.details["note"] = "Multi-turn test requires separate handling"
-                result.passed = voice_pass
+                result.passed = True
 
             elif behavior == "synthesis_client_combo":
                 # Check both synthesis and client
@@ -754,15 +923,15 @@ def evaluate_query(
                     result.passed = False
                 else:
                     result.checks["client_bolded"] = is_bolded
-                    result.passed = voice_pass and client_pass
+                    result.passed = client_pass
 
             else:
-                # thin_theme, risk_theme - just voice check
-                result.passed = voice_pass
+                # thin_theme, risk_theme - pass for now
+                result.passed = True
 
         elif category == "surgical":
             # Surgical precision - entity-first + specific story retrieval
-            all_checks_pass = voice_pass
+            all_checks_pass = True
 
             # Ground truth check if specified
             if "ground_truth" in query_spec:
@@ -787,6 +956,62 @@ def evaluate_query(
                 result.details["found_client"] = found
                 result.details["is_bolded"] = is_bolded
                 all_checks_pass = all_checks_pass and client_pass
+
+            result.passed = all_checks_pass
+
+        elif category == "entity_detection":
+            # Entity detection tests - check detect_entity() behavior directly
+            from ui.pages.ask_mattgpt.backend_service import detect_entity
+
+            detected = detect_entity(query, stories)
+
+            if query_spec.get("expect_no_entity_scope"):
+                # Should NOT detect an entity
+                no_scope_pass = detected is None
+                result.checks["no_entity_scope"] = no_scope_pass
+                result.details["detected_entity"] = detected
+                result.details["expected"] = "None (no scoping)"
+                result.passed = no_scope_pass
+            elif query_spec.get("expect_entity"):
+                # Should detect specific entity
+                expected_field, expected_value = query_spec["expect_entity"]
+                if detected:
+                    field_match = detected[0] == expected_field
+                    value_match = detected[1] == expected_value
+                    entity_pass = field_match and value_match
+                else:
+                    entity_pass = False
+                result.checks["entity_detected"] = entity_pass
+                result.details["detected_entity"] = detected
+                result.details["expected_entity"] = (expected_field, expected_value)
+                result.passed = entity_pass
+            else:
+                # Fallback - just pass if we got here
+                result.passed = True
+
+        elif category == "marketing":
+            # Marketing/landing page queries - ground truth + meta-commentary
+            all_checks_pass = True
+
+            # Ground truth check
+            if "ground_truth" in query_spec:
+                gt_pass, match_count, matched = check_ground_truth(
+                    response,
+                    query_spec["ground_truth"],
+                    query_spec.get("min_matches", 2),
+                )
+                result.checks["ground_truth"] = gt_pass
+                result.details["ground_truth_matches"] = match_count
+                result.details["matched_phrases"] = matched
+                all_checks_pass = all_checks_pass and gt_pass
+
+            # Meta-commentary check for landing page questions
+            if query_spec.get("must_not_contain_meta"):
+                meta_pass, meta_found = check_meta_commentary(response)
+                result.checks["no_meta_commentary"] = meta_pass
+                if meta_found:
+                    result.details["meta_commentary_found"] = meta_found
+                all_checks_pass = all_checks_pass and meta_pass
 
             result.passed = all_checks_pass
 
@@ -854,12 +1079,6 @@ class TestProfessionalNarrative:
         """Test each Professional Narrative query."""
         result = evaluate_query(query_spec, rag_fn, stories)
 
-        # Always check voice
-        assert result.checks.get("voice", False), (
-            f"Voice check failed - banned phrases found: "
-            f"{result.details.get('banned_phrases_found', [])}"
-        )
-
         # Check ground truth
         assert result.checks.get("ground_truth", False), (
             f"Ground truth check failed - matched {result.details.get('ground_truth_matches', 0)} "
@@ -877,11 +1096,6 @@ class TestClientAttribution:
     def test_client_query(self, query_spec, stories, rag_fn):
         """Test each client attribution query."""
         result = evaluate_query(query_spec, rag_fn, stories)
-
-        assert result.checks.get("voice", False), (
-            f"Voice check failed - banned phrases found: "
-            f"{result.details.get('banned_phrases_found', [])}"
-        )
 
         assert result.checks.get("client_attribution", False), (
             f"Client attribution failed for '{query_spec['expected_client']}' - "
@@ -906,11 +1120,6 @@ class TestIntentRouting:
         """Test each intent routing query."""
         result = evaluate_query(query_spec, rag_fn, stories)
 
-        assert result.checks.get("voice", False), (
-            f"Voice check failed - banned phrases found: "
-            f"{result.details.get('banned_phrases_found', [])}"
-        )
-
         if query_spec["expected_behavior"] == "synthesis":
             assert result.checks.get("synthesis_mode", False), (
                 f"Synthesis mode failed - only {result.details.get('client_count', 0)} "
@@ -933,11 +1142,7 @@ class TestEdgeCases:
     def test_edge_query(self, query_spec, stories, rag_fn):
         """Test each edge case query."""
         result = evaluate_query(query_spec, rag_fn, stories)
-
-        assert result.checks.get("voice", False), (
-            f"Voice check failed - banned phrases found: "
-            f"{result.details.get('banned_phrases_found', [])}"
-        )
+        assert result.passed, f"Edge query failed: {result.checks}"
 
 
 class TestSurgicalPrecision:
@@ -949,12 +1154,6 @@ class TestSurgicalPrecision:
     def test_surgical_query(self, query_spec, stories, rag_fn):
         """Test each surgical precision query."""
         result = evaluate_query(query_spec, rag_fn, stories)
-
-        # Always check voice
-        assert result.checks.get("voice", False), (
-            f"Voice check failed - banned phrases found: "
-            f"{result.details.get('banned_phrases_found', [])}"
-        )
 
         # Check ground truth if specified
         if "ground_truth" in query_spec:
@@ -972,24 +1171,192 @@ class TestSurgicalPrecision:
             )
 
 
-class TestVoiceOnly:
-    """Quick voice-only check across all queries."""
+class TestEntityDetection:
+    """Test entity detection regression - ensure detect_entity() works correctly.
+
+    These tests verify:
+    1. Common words (technology, innovation, transformation) do NOT scope queries
+    2. Proper nouns (CIC, JP Morgan, RBC) DO scope queries correctly
+    3. Excluded division values (Technology) are skipped
+
+    This is a regression test suite - if entity detection changes, these must pass.
+    """
+
+    @pytest.fixture
+    def detect_entity_fn(self, stories):
+        """Get detect_entity function with stories loaded."""
+        from unittest.mock import MagicMock, patch
+
+        mock_st = MagicMock()
+        mock_st.session_state = {}
+
+        with patch("streamlit.session_state", mock_st.session_state):
+            with patch("ui.pages.ask_mattgpt.backend_service.st", mock_st):
+                from ui.pages.ask_mattgpt.backend_service import detect_entity
+
+                return lambda query: detect_entity(query, stories)
 
     @pytest.mark.parametrize(
         "query_spec",
-        [q for queries in GOLDEN_QUERIES.values() for q in queries],
-        ids=lambda q: f"Q{q['id']}_voice",
+        [
+            q
+            for q in GOLDEN_QUERIES["entity_detection"]
+            if q.get("expect_no_entity_scope")
+        ],
+        ids=lambda q: f"Q{q['id']}_no_scope",
     )
-    def test_no_banned_phrases(self, query_spec, stories, rag_fn):
-        """Verify no banned phrases in any response."""
+    def test_common_words_do_not_scope(self, query_spec, stories, detect_entity_fn):
+        """Verify common words don't incorrectly trigger entity scoping.
+
+        Words like 'technology', 'innovation', 'transformation' appear in
+        Division/Project values but are common enough that they shouldn't
+        scope queries when used conversationally.
+        """
+        query = query_spec["query"]
+        result = detect_entity_fn(query)
+
+        assert result is None, (
+            f"Query should NOT be entity-scoped but got: {result}\n"
+            f"Query: {query}\n"
+            f"Note: {query_spec.get('note', '')}\n"
+            f"Excluded value: {query_spec.get('excluded_value', 'N/A')}"
+        )
+
+    @pytest.mark.parametrize(
+        "query_spec",
+        [q for q in GOLDEN_QUERIES["entity_detection"] if q.get("expect_entity")],
+        ids=lambda q: f"Q{q['id']}_should_scope",
+    )
+    def test_proper_nouns_do_scope(self, query_spec, stories, detect_entity_fn):
+        """Verify proper nouns correctly trigger entity scoping.
+
+        Client names (JP Morgan, RBC) and specific divisions (Cloud Innovation Center)
+        should trigger entity filtering to return focused results.
+        """
+        query = query_spec["query"]
+        expected_field, expected_value = query_spec["expect_entity"]
+        result = detect_entity_fn(query)
+
+        assert result is not None, (
+            f"Query should be entity-scoped but got None\n"
+            f"Query: {query}\n"
+            f"Expected: ({expected_field}, {expected_value})\n"
+            f"Note: {query_spec.get('note', '')}"
+        )
+
+        actual_field, actual_value = result
+
+        assert actual_field == expected_field, (
+            f"Wrong entity field detected\n"
+            f"Query: {query}\n"
+            f"Expected field: {expected_field}, got: {actual_field}"
+        )
+
+        # For clients with variants, check if any variant matches
+        if "client_variants" in query_spec:
+            variants = [v.lower() for v in query_spec["client_variants"]]
+            assert (
+                actual_value.lower() in variants
+                or expected_value.lower() in actual_value.lower()
+            ), (
+                f"Wrong entity value detected\n"
+                f"Query: {query}\n"
+                f"Expected: {expected_value} (or variants: {query_spec['client_variants']})\n"
+                f"Got: {actual_value}"
+            )
+        else:
+            assert (
+                expected_value.lower() in actual_value.lower()
+                or actual_value.lower() in expected_value.lower()
+            ), (
+                f"Wrong entity value detected\n"
+                f"Query: {query}\n"
+                f"Expected: {expected_value}, got: {actual_value}"
+            )
+
+
+class TestMarketing:
+    """Test marketing/landing page queries - MISSION CRITICAL.
+
+    These are the first-impression queries that recruiters and hiring managers
+    see on the landing page. If these fail, nothing else matters.
+
+    Checks:
+    1. Ground truth phrases present (proves right stories retrieved)
+    2. NO meta-commentary (proves authentic voice)
+
+    These tests are HARD FAIL - if any landing page question breaks,
+    the change does not ship.
+    """
+
+    @pytest.mark.parametrize(
+        "query_spec",
+        GOLDEN_QUERIES["marketing"],
+        ids=lambda q: f"Q{q['id']}_{'landing' if q.get('is_landing_page') else 'probe'}",
+    )
+    def test_marketing_query(self, query_spec, stories, rag_fn):
+        """Test each marketing/landing page query.
+
+        MISSION CRITICAL: These are the first-impression queries.
+        All checks must pass for the query to pass.
+        """
+        result = evaluate_query(query_spec, rag_fn, stories)
+
+        # HARD FAIL: No errors
+        assert not result.error, f"Query error: {result.error}"
+
+        # HARD FAIL: Ground truth - proves right stories retrieved
+        if "ground_truth" in query_spec:
+            gt_passed, gt_count, matched = check_ground_truth(
+                result.response,
+                query_spec["ground_truth"],
+                query_spec.get("min_matches", 2),
+            )
+            assert gt_passed, (
+                f"MISSION CRITICAL FAILURE: Ground truth check failed\n"
+                f"Query: {query_spec['query']}\n"
+                f"Note: {query_spec.get('note', '')}\n"
+                f"Required: {query_spec.get('min_matches', 2)} matches\n"
+                f"Got: {gt_count} matches - {matched}\n"
+                f"Expected any of: {query_spec['ground_truth']}"
+            )
+
+        # HARD FAIL: No meta-commentary
+        if query_spec.get("must_not_contain_meta"):
+            meta_passed, meta_found = check_meta_commentary(result.response)
+            assert meta_passed, (
+                f"MISSION CRITICAL FAILURE: Meta-commentary detected\n"
+                f"Query: {query_spec['query']}\n"
+                f"Note: {query_spec.get('note', '')}\n"
+                f"Found patterns: {meta_found}\n"
+                f"Response excerpt: {result.response[:500]}..."
+            )
+
+    @pytest.mark.parametrize(
+        "query_spec",
+        [q for q in GOLDEN_QUERIES["marketing"] if q.get("is_landing_page")],
+        ids=lambda q: f"Q{q['id']}_landing_page_meta",
+    )
+    def test_landing_page_no_meta_commentary(self, query_spec, stories, rag_fn):
+        """Dedicated meta-commentary check for landing page questions.
+
+        This is a focused test that ONLY checks for meta-commentary.
+        If Agy says "This demonstrates Matt's ability to..." on a
+        landing page question, it's a HARD FAIL.
+        """
         result = evaluate_query(query_spec, rag_fn, stories)
 
         if result.error:
             pytest.skip(f"Query error: {result.error}")
 
-        assert result.checks.get(
-            "voice", False
-        ), f"Banned phrases found: {result.details.get('banned_phrases_found', [])}"
+        meta_passed, meta_found = check_meta_commentary(result.response)
+        assert meta_passed, (
+            f"LANDING PAGE VOICE FAILURE\n"
+            f"Query: {query_spec['query']}\n"
+            f"Meta-commentary patterns found: {meta_found}\n"
+            f"This is unacceptable for first-impression queries.\n"
+            f"Response excerpt: {result.response[:400]}..."
+        )
 
 
 # =============================================================================
@@ -1007,14 +1374,21 @@ def generate_report(results: list[EvalResult]) -> dict:
         "pass_rate": 0.0,
         "by_category": {},
         "failed_queries": [],
-        "voice_failures": [],
     }
 
     if results:
         report["pass_rate"] = report["passed"] / report["total_queries"] * 100
 
     # Group by category
-    for category in ["narrative", "client", "intent", "edge", "surgical"]:
+    for category in [
+        "narrative",
+        "client",
+        "intent",
+        "edge",
+        "surgical",
+        "entity_detection",
+        "marketing",
+    ]:
         cat_results = [r for r in results if r.category == category]
         if cat_results:
             report["by_category"][category] = {
@@ -1036,14 +1410,6 @@ def generate_report(results: list[EvalResult]) -> dict:
                     "checks": r.checks,
                     "details": r.details,
                     "error": r.error,
-                }
-            )
-        if not r.checks.get("voice", True):
-            report["voice_failures"].append(
-                {
-                    "id": r.query_id,
-                    "query": r.query,
-                    "banned_found": r.details.get("banned_phrases_found", []),
                 }
             )
 
@@ -1122,11 +1488,6 @@ def main():
             print(
                 f"  {cat}: {stats['passed']}/{stats['total']} ({stats['pass_rate']:.1f}%)"
             )
-
-        if report["voice_failures"]:
-            print("\nVoice Failures (banned phrases):")
-            for vf in report["voice_failures"]:
-                print(f"  Q{vf['id']}: {vf['banned_found']}")
 
         if report["failed_queries"]:
             print(f"\nFailed Queries ({len(report['failed_queries'])}):")

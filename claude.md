@@ -351,6 +351,25 @@
   - **HTML rendering as text:** Remove newlines/indentation from f-string HTML
   - **Import conflicts:** Check you're not importing same function from two different files (last import wins)
 
+  ## Configuration & Hardcoding Rules
+
+  **Never hardcode values that might need to change or are used in multiple places.**
+
+  Priority order:
+  1. **Derive from data** — If it can be computed from source data, do that (see `utils/client_utils.py` pattern)
+  2. **Environment variable** — If it changes between environments or is a secret (API keys, index names)
+  3. **config/constants.py** — If it's application logic that must be consistent (thresholds, model names, field lists, banned phrases)
+  4. **Local constant with comment** — Only if truly file-specific and unlikely to be needed elsewhere
+
+  **Before adding any hardcoded value, ask:**
+  - "Will I need this value somewhere else?" → constants.py
+  - "Could this drift out of sync with something?" → constants.py
+  - "Is this derived from story data?" → Compute it, don't hardcode it
+
+  **If you find hardcoded values duplicated across files, that's a bug. Centralize immediately.**
+
+  See `config/constants.py` for the single source of truth for thresholds, models, banned phrases, and entity fields.
+
   ## Deployment
   ```bash
   # Local

@@ -9,19 +9,22 @@ Features:
 - Dual threshold (hard accept / soft accept / reject)
 - Returns best matching intent for telemetry
 - Caches embeddings to disk
+
+DEPENDENCY WARNING:
+If you modify VALID_INTENTS (add/remove/rename intents), you MUST delete
+data/intent_embeddings.json to regenerate the cache. Otherwise the router
+will use stale embeddings that don't match the new intent definitions.
 """
 
 import os
 
 import numpy as np
 
-# =============================================================================
-# THRESHOLDS (Calibrated Jan 2026 from score analysis)
-# Garbage queries: 0.17-0.27 | Legitimate queries: 0.46-0.84
-# =============================================================================
-HARD_ACCEPT = 0.80  # Clearly on-topic, no question
-SOFT_ACCEPT = 0.40  # Accept but log as borderline for review
-# Below SOFT_ACCEPT = router rejects (but search fallback may still work)
+from config.constants import DEFAULT_EMBEDDING_MODEL, HARD_ACCEPT, SOFT_ACCEPT
+
+# Thresholds imported from config/constants.py
+# HARD_ACCEPT = 0.80  # Clearly on-topic, no question
+# SOFT_ACCEPT = 0.40  # Accept but log as borderline for review
 
 # =============================================================================
 # CANONICAL INTENTS BY FAMILY
@@ -187,7 +190,7 @@ def _get_embedding(text: str) -> list[float]:
         organization=os.getenv("OPENAI_ORG_ID"),
     )
 
-    response = client.embeddings.create(input=text, model="text-embedding-3-small")
+    response = client.embeddings.create(input=text, model=DEFAULT_EMBEDDING_MODEL)
 
     return response.data[0].embedding
 

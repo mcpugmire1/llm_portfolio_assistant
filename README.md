@@ -178,10 +178,37 @@ for access or instructions to generate it from the source Excel file.
    python build_custom_embeddings.py
    ```
 
-6. **Run the app**  
+6. **Run the app**
    ```bash
    streamlit run app.py
    ```
+
+---
+
+## ⚙️ Configuration
+
+### `config/constants.py` - Single Source of Truth
+
+All application constants are centralized in `config/constants.py`:
+
+| Category | Constants |
+|----------|-----------|
+| **Models** | `DEFAULT_CHAT_MODEL`, `DEFAULT_CLASSIFICATION_MODEL`, `DEFAULT_EMBEDDING_MODEL` |
+| **Thresholds** | `HARD_ACCEPT`, `SOFT_ACCEPT`, `CONFIDENCE_HIGH`, `CONFIDENCE_LOW`, `PINECONE_MIN_SIM`, `ENTITY_GATE_THRESHOLD` |
+| **Voice Quality** | `BANNED_PHRASES`, `META_COMMENTARY_PATTERNS` |
+| **Entity Detection** | `ENTITY_DETECTION_FIELDS`, `ENTITY_SEARCH_FIELDS`, `EXCLUDED_DIVISION_VALUES` |
+
+**To change a threshold or add a banned phrase, edit `config/constants.py` only.**
+
+### Cache Dependencies
+
+When modifying certain files, caches must be regenerated:
+
+| If you change... | Run this... |
+|-----------------|-------------|
+| `echo_star_stories_nlp.jsonl` | `python build_custom_embeddings.py` |
+| `VALID_INTENTS` in `semantic_router.py` | Delete `data/intent_embeddings.json` |
+| `DEFAULT_EMBEDDING_MODEL` | `python build_custom_embeddings.py` |
 
 ---
 

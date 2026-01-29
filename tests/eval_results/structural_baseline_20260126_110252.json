@@ -1,0 +1,106 @@
+{
+  "timestamp": "2026-01-26T11:09:06.959690",
+  "total_queries": 31,
+  "structural_passed": 21,
+  "meta_passed": 21,
+  "voice_passed": 31,
+  "hardcoded_drift": {
+    "passed": false,
+    "details": {
+      "entity_normalization": [],
+      "excluded_clients": [
+        "'Independent' is hardcoded but not in JSONL",
+        "'Various' is hardcoded but not in JSONL",
+        "'Personal' is hardcoded but not in JSONL",
+        "'Career Narrative' is hardcoded but not in JSONL"
+      ],
+      "verbatim_phrases": []
+    }
+  },
+  "failed_queries": [
+    {
+      "id": 2,
+      "query": "Career Intent \u2013 What I'm Looking For Next",
+      "meta_violations": [
+        "Matt's ability to"
+      ],
+      "voice_violations": []
+    },
+    {
+      "id": 5,
+      "query": "Why is Matt exploring opportunities?",
+      "meta_violations": [
+        "his ability to"
+      ],
+      "voice_violations": []
+    },
+    {
+      "id": 6,
+      "query": "Where does Matt do his best work?",
+      "meta_violations": [
+        "his ability to"
+      ],
+      "voice_violations": []
+    },
+    {
+      "id": 10,
+      "query": "Matt's career transition after Accenture",
+      "meta_violations": [
+        "his ability to"
+      ],
+      "voice_violations": []
+    },
+    {
+      "id": 15,
+      "query": "Matt's work at Fiserv",
+      "meta_violations": [
+        "his ability to"
+      ],
+      "voice_violations": []
+    },
+    {
+      "id": 16,
+      "query": "Tell me about scaling learning programs",
+      "meta_violations": [
+        "his ability to",
+        "highlights his"
+      ],
+      "voice_violations": []
+    },
+    {
+      "id": 17,
+      "query": "What are Matt's core themes?",
+      "meta_violations": [
+        "This demonstrates",
+        "his ability to",
+        "demonstrates his",
+        "reflects his"
+      ],
+      "voice_violations": []
+    },
+    {
+      "id": 19,
+      "query": "What's Matt's cloud architecture experience?",
+      "meta_violations": [
+        "Matt's ability to"
+      ],
+      "voice_violations": []
+    },
+    {
+      "id": 20,
+      "query": "Who is Matt Pugmire?",
+      "meta_violations": [
+        "his ability to"
+      ],
+      "voice_violations": []
+    },
+    {
+      "id": 25,
+      "query": "How did Matt transform delivery at JP Morgan?",
+      "meta_violations": [
+        "his ability to"
+      ],
+      "voice_violations": []
+    }
+  ]
+}

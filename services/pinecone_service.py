@@ -7,6 +7,12 @@ import streamlit as st
 from dotenv import load_dotenv
 from openai import OpenAI
 
+from config.constants import (
+    DEFAULT_EMBEDDING_MODEL,
+    ENTITY_SEARCH_FIELDS,
+    PINECONE_LOWERCASE_FIELDS,
+    PINECONE_MIN_SIM,
+)
 from config.debug import DEBUG
 from config.settings import get_conf
 from utils.scoring import _hybrid_score, _keyword_score_for_story
@@ -76,13 +82,14 @@ if VECTOR_BACKEND == "pinecone":
 # =========================
 # Embedding config
 # =========================
-EMBEDDING_MODEL = "text-embedding-3-small"  # OpenAI model
+# EMBEDDING_MODEL and PINECONE_MIN_SIM imported from config/constants.py
+EMBEDDING_MODEL = DEFAULT_EMBEDDING_MODEL  # Alias for local use
 _DEF_DIM = 1536  # OpenAI text-embedding-3-small dimension
 
 # =========================
 # Search config
 # =========================
-PINECONE_MIN_SIM = 0.15
+# PINECONE_MIN_SIM imported from config/constants.py
 DATA_FILE = os.getenv("STORIES_JSONL", "echo_star_stories_nlp.jsonl")
 
 # Hybrid score weights
@@ -201,14 +208,12 @@ def pinecone_semantic_search(
     )  # Original field where entity was detected
     entity_value = filters.get("entity_value")
     if entity_field and entity_value:
-        # Multi-field entity gate: search across all 5 entity fields
-        MULTI_ENTITY_FIELDS = ["client", "employer", "division", "project", "place"]
-        LOWERCASE_FIELDS = {"division", "employer", "project", "place"}
-
+        # Entity search fields imported from config/constants.py
+        # See constants.py for documentation on why search (5 fields) differs from detection (3 fields)
         or_clauses = []
-        for field in MULTI_ENTITY_FIELDS:
-            # Apply appropriate casing per field
-            if field in LOWERCASE_FIELDS:
+        for field in ENTITY_SEARCH_FIELDS:
+            # Apply appropriate casing per field (rules from constants.py)
+            if field in PINECONE_LOWERCASE_FIELDS:
                 field_value = entity_value.lower()
             else:
                 field_value = entity_value  # client keeps PascalCase
@@ -217,7 +222,7 @@ def pinecone_semantic_search(
         pc_filter["$or"] = or_clauses
         if DEBUG:
             print(
-                f"DEBUG Pinecone: Multi-field entity filter applied - entity={entity_value} across {MULTI_ENTITY_FIELDS}"
+                f"DEBUG Pinecone: Entity search filter applied - entity={entity_value} across {ENTITY_SEARCH_FIELDS}"
             )
 
     try:

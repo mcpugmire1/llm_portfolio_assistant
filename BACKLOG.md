@@ -60,10 +60,11 @@
 **Issue:** 800+ lines, imports from 6+ modules, unclear ownership boundaries
 **Fix:** Extract intent classification, entity detection, and mode logic into separate modules
 
-### 4. Audit Excel Master for Corporate Filler
+### 4. Audit Excel Master for Corporate Filler ✅ DONE
 **Priority:** LOW
 **Issue:** BANNED_PHRASES list keeps growing; should fix at source
 **Fix:** Grep Excel master for "meaningful outcomes", "foster collaboration", etc. and rewrite
+**Resolution (Jan 28, 2026):** Deleted BANNED_PHRASES entirely - was testing for imaginary problems that never appeared in responses. "meaningful outcomes" was Matt's actual words being quoted correctly.
 
 ### 5. Delete META_SENTENCE_PATTERNS Regex
 **Priority:** MEDIUM (unblocked — #1 is done)

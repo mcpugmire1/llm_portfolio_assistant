@@ -2633,76 +2633,51 @@ No clear mapping between "Pinecone score 0.82" and "high confidence display."
 
 ### Hardcoded Values Audit
 
-**1. Client Names (7+ locations)**
+**STATUS UPDATE (Jan 27, 2026):** Centralized in `config/constants.py`
 
-```python
-# backend_service.py
-GENERIC_CLIENTS = ["Multiple Clients", "Independent", "Career Narrative"]
+The following constants are now in a single source of truth:
 
-# formatting.py
-if client.lower() in ["multiple clients", "independent"]: ...
+| Category | Constants | Location |
+|----------|-----------|----------|
+| **Models** | `DEFAULT_CHAT_MODEL`, `DEFAULT_CLASSIFICATION_MODEL`, `DEFAULT_EMBEDDING_MODEL` | config/constants.py |
+| **Thresholds** | `HARD_ACCEPT`, `SOFT_ACCEPT`, `CONFIDENCE_HIGH`, `CONFIDENCE_LOW`, `PINECONE_MIN_SIM`, `ENTITY_GATE_THRESHOLD` | config/constants.py |
+| **Voice Quality** | `BANNED_PHRASES`, `META_COMMENTARY_PATTERNS`, `META_COMMENTARY_REGEX_PATTERNS` | config/constants.py |
+| **Entity Detection** | `ENTITY_DETECTION_FIELDS`, `ENTITY_SEARCH_FIELDS`, `EXCLUDED_DIVISION_VALUES`, `PINECONE_LOWERCASE_FIELDS` | config/constants.py |
 
-# rag_service.py
-NAMED_CLIENT_PREFERENCE = ["JP Morgan", "RBC", "JPMC", ...]
-```
+Files that import from constants.py:
+- `ui/pages/ask_mattgpt/backend_service.py`
+- `services/rag_service.py`
+- `services/semantic_router.py`
+- `services/pinecone_service.py`
+- `tests/eval_rag_quality.py`
 
-**Recommendation:** Centralize in `config/constants.py` or derive from JSONL.
+**Deleted:** `scripts/test_pinecone_direct.py` (had duplicated thresholds)
 
-**2. Threshold Constants**
+---
 
-| Constant | Value | Location |
-|----------|-------|----------|
-| HARD_ACCEPT | 0.80 | semantic_router.py |
-| SOFT_ACCEPT | 0.40 | semantic_router.py (calibrated Jan 2026) |
-| ENTITY_GATE_THRESHOLD | 0.30 | backend_service.py (calibrated Jan 2026) |
-| CONFIDENCE_HIGH | 0.25 | backend_service.py |
-| CONFIDENCE_LOW | 0.15 | backend_service.py |
-| SEARCH_TOP_K | 100 | pinecone_service.py |
-| SEARCH_TOP_K | 7 | backend_service.py (conflict!) |
+**Remaining items (lower priority):**
 
-**3. Model Names**
+**1. Client Names** — Pattern-based via `utils/client_utils.py`
 
-```python
-# 4 different locations:
-model="text-embedding-3-small"  # pinecone_service.py
-model="text-embedding-3-small"  # semantic_router.py
-model="text-embedding-3-small"  # build_custom_embeddings.py
-model="gpt-4o"                  # backend_service.py
-model="gpt-4o-mini"             # backend_service.py (classifier)
-```
+Uses `is_generic_client()` pattern matching, not hardcoded lists. ✅
 
-**4. Entity Normalization Map** ✅ REMOVED (Jan 26, 2026)
-
-**Status:** Removed. Semantic search handles entity variations naturally.
-
-**Previous location:** backend_service.py:315-323
-**Resolution:** Testing proved semantic search returns correct stories for "JPMC", "amex", "CIC" variations without hardcoded aliases.
-
-**5. Intent Family Keywords**
+**2. Intent Family Keywords**
 
 Hardcoded in semantic_router.py - 11 intent families with ~20 example phrases each.
 These should be reviewed quarterly for relevance.
 
-**6. Banned Phrases** ✅ REMOVED (Jan 26, 2026)
+**DEPENDENCY WARNING:** If you modify `VALID_INTENTS`, delete `data/intent_embeddings.json` to regenerate cache.
 
-```python
-# DELETED - was BANNED_PHRASES_CLEANUP in backend_service.py
-# Post-processing bandaid is no longer needed after prompt refactor
-```
-
-**Previous Location:** backend_service.py
-**Status:** Removed. The BASE_PROMPT in `prompts.py` now instructs "delete and state the fact" which is more effective than post-processing removal.
-
-**7. Sacred Vocabulary (Verbatim Phrases)**
+**3. Sacred Vocabulary (Verbatim Phrases)**
 
 ```python
 VERBATIM_PHRASES = ["builder", "modernizer", "complexity to clarity", ...]
 ```
 
-**Location:** backend_service.py
+**Location:** prompts.py (`get_verbatim_requirement()`)
 **Purpose:** Force LLM to use exact phrases for Professional Narrative.
 
-**8. UI Display Strings**
+**4. UI Display Strings**
 
 ```python
 "🐾 I need a quick breather — try again in about 15 seconds!"
@@ -2712,7 +2687,7 @@ VERBATIM_PHRASES = ["builder", "modernizer", "complexity to clarity", ...]
 
 **Scattered across:** backend_service.py, conversation_helpers.py
 
-**9. Temperature Settings**
+**5. Temperature Settings**
 
 ```python
 temperature=0.4  # standard mode
@@ -2722,14 +2697,14 @@ temperature=0.2  # synthesis mode
 **Location:** backend_service.py
 **Issue:** Not configurable, no A/B testing capability.
 
-**10. Token Limits**
+**6. Token Limits**
 
 ```python
 max_tokens=700  # generation
 max_tokens=150  # classifier
 ```
 
-**11. Pinecone Index Name**
+**7. Pinecone Index Name**
 
 ```python
 index_name="portfolio-stories"  # pinecone_service.py

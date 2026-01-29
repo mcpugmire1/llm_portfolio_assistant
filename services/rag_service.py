@@ -2,6 +2,7 @@
 
 import streamlit as st
 
+from config.constants import CONFIDENCE_HIGH, CONFIDENCE_LOW
 from config.debug import DEBUG
 from services.pinecone_service import (
     SEARCH_TOP_K,
@@ -22,14 +23,9 @@ def _safe_session_set(key: str, value):
 # Known vocab (built from stories)
 _KNOWN_VOCAB: set[str] = set()
 
-# =============================================================================
-# CONFIDENCE THRESHOLDS (centralized)
-# =============================================================================
-CONFIDENCE_HIGH = 0.25  # Strong match - show "Found X stories"
-CONFIDENCE_LOW = (
-    0.20  # Raised from 0.15 to filter phantom similarity noise (e.g., "peanut butter")
-)
-# Below CONFIDENCE_LOW = "none" - show "No strong matches"
+# Confidence thresholds imported from config/constants.py
+# CONFIDENCE_HIGH = 0.25  # Strong match - show "Found X stories"
+# CONFIDENCE_LOW = 0.20   # Raised from 0.15 to filter phantom similarity noise
 
 
 def initialize_vocab(stories: list[dict]):

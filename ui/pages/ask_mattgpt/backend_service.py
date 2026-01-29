@@ -14,6 +14,12 @@ from typing import Any
 
 import streamlit as st
 
+from config.constants import (
+    ENTITY_DETECTION_FIELDS,
+    ENTITY_GATE_THRESHOLD,
+    EXCLUDED_DIVISION_VALUES,
+    META_COMMENTARY_REGEX_PATTERNS,
+)
 from config.debug import DEBUG
 from services.pinecone_service import (
     PINECONE_NAMESPACE,
@@ -306,15 +312,8 @@ Empathy, Authenticity, Curiosity, Integrity, Leadership
 """
 
 
-# Entity fields to check for routing (in priority order)
-# Note: Project and Place removed Jan 2026 - too many generic values caused false positives
-# (e.g., "innovation" matching Project="Innovation"). Semantic search handles these well.
-# Division kept for "Cloud Innovation Center" queries.
-ENTITY_FIELDS = ["Client", "Employer", "Division"]
-
-# Division values to exclude from entity matching - common words that cause false positives
-# e.g., "Matt's technology experience" should NOT scope to Division="Technology" (9 stories)
-EXCLUDED_DIVISION_VALUES = {"Technology"}
+# Entity detection fields and exclusions imported from config/constants.py
+# See constants.py for documentation on why detection (3 fields) differs from search (5 fields)
 
 
 def detect_entity(query: str, stories: list[dict]) -> tuple[str, str] | None:
@@ -364,7 +363,7 @@ def detect_entity(query: str, stories: list[dict]) -> tuple[str, str] | None:
     # Build entity sets from ALL relevant fields (exact match only)
     # Note: Semantic search handles variations like "JPMC", "amex", "CIC" naturally
     # through embeddings - no fuzzy matching needed here.
-    for field in ENTITY_FIELDS:
+    for field in ENTITY_DETECTION_FIELDS:
         known_entities = {
             s.get(field)
             for s in stories
@@ -1100,9 +1099,24 @@ def _generate_agy_response(
             r'\*\*(\d)\*\*(\d+%?\+?)\*\*', r'**\1\2**', response_text
         )
 
+        # =====================================================================
+        # POST-PROCESSING: Strip meta-commentary patterns
+        # LLM sometimes ignores "don't evaluate Matt" instruction
+        # These patterns talk ABOUT the story instead of answering
+        # Patterns imported from config/constants.py
+        # =====================================================================
+        for pattern in META_COMMENTARY_REGEX_PATTERNS:
+            # Find and remove sentences containing meta-commentary
+            # Match sentence containing the pattern (from capital letter or newline to period/newline)
+            sentence_pattern = rf'[^.]*{pattern}[^.]*\.'
+            response_text = re.sub(
+                sentence_pattern, '', response_text, flags=re.IGNORECASE
+            )
+
         # Clean up formatting
         response_text = re.sub(r'  +', ' ', response_text)  # Double spaces
         response_text = re.sub(r'\n\n\n+', '\n\n', response_text)  # Triple newlines
+        response_text = response_text.strip()
 
         return response_text
 
@@ -1581,13 +1595,9 @@ def rag_answer(
             print(f"DEBUG: Entity detected - {entity_match[0]}:{entity_match[1]}")
 
         # =================================================================
-        # ENTITY GATE (Jan 2026 - Calibrated from score analysis)
+        # ENTITY GATE (Threshold from config/constants.py)
         # Off-topic queries score 0.11-0.22, legitimate queries score 0.30+
-        # Threshold set to 0.30 based on empirical testing showing queries
-        # like "What problems does Matt solve?" (0.38) and "CIC" (0.41)
-        # were being incorrectly blocked at 0.50.
         # =================================================================
-        ENTITY_GATE_THRESHOLD = 0.30
         if not from_suggestion and not semantic_valid:
             if entity_match is None and semantic_score < ENTITY_GATE_THRESHOLD:
                 # No entity detected + very low semantic score → out of scope
