@@ -238,7 +238,7 @@ def render_landing_page(stories: list[dict]):
 
     st.markdown('</div>', unsafe_allow_html=True)
     st.markdown(
-        '<p class="powered-by-text">Powered by OpenAI GPT-4o-mini with semantic search across 130+ project case studies</p>',
+        '<p class="powered-by-text">Powered by OpenAI GPT-4o with semantic search across 130+ project case studies</p>',
         unsafe_allow_html=True,
     )
 

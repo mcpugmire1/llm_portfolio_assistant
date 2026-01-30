@@ -290,7 +290,7 @@ def render_conversation_view(stories: list[dict]):
 
         # Add "Powered by" text below input
         st.markdown(
-            '<div class="conversation-powered-by">Powered by OpenAI GPT-4o-mini with semantic search across 130+ project case studies</div>',
+            '<div class="conversation-powered-by">Powered by OpenAI GPT-4o with semantic search across 130+ project case studies</div>',
             unsafe_allow_html=True,
         )
 
