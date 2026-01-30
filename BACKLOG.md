@@ -229,6 +229,58 @@
 **Issue:** Limited test coverage for semantic router error handling paths
 **Fix:** Add tests for connection errors, timeout, malformed responses
 
+### 30. Fix "Builder/Modernizer" Verbatim Quoting (Data Fix)
+**Priority:** MEDIUM
+**Issue:** Agy quotes "I'm a builder, a modernizer..." verbatim in synthesis responses
+**Root Cause:** The "About Matt – My Leadership Journey" story has poetic language in 5PSummary field
+**Fix:**
+1. Edit Excel master → update 5PSummary to concrete language
+2. Regenerate JSONL: `python scripts/generate_jsonl_from_excel.py`
+3. Re-index Pinecone: `python scripts/index_to_pinecone.py`
+**Note:** This is a DATA fix, not a code fix
+
+---
+
+## New Stories to Add (from Jan 28-30 Sessions)
+
+**Priority:** LOW (content creation, not bugs)
+**Purpose:** Director/VP-relevant stories demonstrating leadership + technical depth
+
+### 31. RAG Pipeline Cleanup / Entity Gate Removal
+- **Situation:** Multiple overlapping LLM gates causing false rejections (TICARA bug)
+- **Task:** Simplify architecture while maintaining quality
+- **Action:** Removed 132 lines, consolidated to semantic router, implemented soft filtering
+- **Result:** 98% eval, faster queries, cleaner code
+- **Signals:** Architectural decision-making, knowing when to remove vs. add
+
+### 32. State Management Debugging
+- **Situation:** "Ask Agy About This" and deeplinks broken by well-intentioned fix
+- **Task:** Fix search bug without breaking other flows
+- **Action:** Surgical state clearing (only when query changes), deeplink pagination fix
+- **Result:** All core flows working, identified need for BDD tests
+- **Signals:** System thinking, debugging complex interactions, prioritization
+
+### 33. Building MattGPT as Product Differentiator
+- **Situation:** Job search in competitive market
+- **Task:** Stand out from other Director/VP candidates
+- **Action:** Built AI-powered portfolio from scratch (RAG, embeddings, Streamlit)
+- **Result:** "Interview me before you interview me" - recruiters can explore 20 years of work
+- **Signals:** Product thinking, initiative, modern tech fluency
+
+### 34. Eval-Driven Development
+- **Situation:** Non-deterministic LLM outputs, hard to test
+- **Task:** Create reliable quality checks
+- **Action:** 52+ golden queries, automated eval, confidence scoring
+- **Result:** Catch regressions before deploy, 98% pass rate
+- **Signals:** Quality engineering, testing strategy for non-deterministic systems
+
+### 35. AI-Assisted Development Meta-Story
+- **Situation:** Using Claude/Claude Code to build Claude-powered product
+- **Task:** Navigate AI tooling while building AI product
+- **Action:** Multi-agent workflow, context management, knowing when to revert
+- **Result:** Lessons on AI collaboration, when to trust vs. verify
+- **Signals:** Future of work, AI collaboration, meta-awareness
+
 ---
 
 ## Closed/Resolved Items
