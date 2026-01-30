@@ -121,10 +121,10 @@
 - `utils/scoring.py` - may have unused functions
 - Any `# TODO` or `# FIXME` comments older than 30 days
 
-### 14. Fix SEARCH_TOP_K Conflict
+### 14. Fix SEARCH_TOP_K Conflict ✅ DONE
 **Priority:** MEDIUM
 **Issue:** `SEARCH_TOP_K = 100` in pinecone_service.py, `SEARCH_TOP_K = 7` in backend_service.py
-**Fix:** Determine correct value, centralize
+**Resolution (Jan 30, 2026):** Centralized to `config/constants.py` with value 10 (headroom for reranking)
 
 ### 15. Clarify Hybrid Scoring
 **Priority:** MEDIUM
