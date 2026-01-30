@@ -32,7 +32,7 @@
 {"category":"personal_sensitive","pattern":"\\b(SSN|social security|passport|driver'?s license|credit card number)\\b"}
 {"category":"retail_price","pattern":"\\b(how much|price|cost|cheapest|deal|discount)\\b.*\\b(walmart|target|amazon|costco|best\\s?buy|ebay)\\b"}
 {"category":"shopping_merch","pattern":"\\b(baseball|cap|caps|hat|jersey|hoodie)\\b.*\\b(price|cost|buy|purchase)\\b"}
-{"category":"random_fun","pattern":"\\b(lottery|horoscope|zodiac|pick-up line|fortune|tarot)\\b"}
+{"category":"random_fun","pattern":"\\b(lottery|horoscope|zodiac|pick-up line|tarot)\\b|\\bfortune\\b(?!\\s*500)"}
 {"category":"internal","pattern":"^DEBUG\\s*•"}
 {"category":"internal","pattern":"^🧪"}
 {"category":"retail_price","pattern":"\\b(how much|what'?s the price|how expensive)\\b.*\\b(store|shop|gift shop|merch)\\b"}

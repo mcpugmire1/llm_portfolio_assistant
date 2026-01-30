@@ -156,12 +156,12 @@ def render_hero():
                          alt="Matt and Agy"
                          style="max-width: 360px; width: 100%; height: auto; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));">
                 </div>
-                <div style="font-size: 22px; margin-bottom: 12px; color: white; opacity: 0.95;">
+                <div style="font-size: 22px; margin-bottom: 10px; color: white; opacity: 0.95;">
                     <span>👋</span>
                     <span> Hi, I'm Matt Pugmire</span>
                 </div>
-                <h1 style="font-size: 42px; font-weight: 700; margin-bottom: 16px; color: white;">I build what's next, modernize what's not, and grow teams along the way.</h1>
-                <p style="font-size: 18px; color: white; opacity: 0.95; max-width: 700px; margin: 0 auto 22px; line-height: 1.6;">MattGPT lets you go deeper than a resume — think of it as a way to interview me before you interview me. Agy 🐾 will help you explore. He's got a nose for patterns.
+                <h1 style="font-size: 42px; font-weight: 700; margin-bottom: 10px; color: white;">Interview me before you interview me.</h1>
+                <p style="font-size: 18px; color: white; opacity: 0.95; max-width: 700px; margin: 0 auto 16px; line-height: 1.6;">I build products, platforms, and teams. MattGPT lets you explore 20 years of my work — Agy 🐾 will help.
                 </p>
                 <div style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap;">
                     <a id="btn-explore" class="hero-btn hero-btn-primary">

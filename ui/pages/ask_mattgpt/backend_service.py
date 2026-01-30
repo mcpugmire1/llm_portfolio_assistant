@@ -16,7 +16,6 @@ import streamlit as st
 
 from config.constants import (
     ENTITY_DETECTION_FIELDS,
-    ENTITY_GATE_THRESHOLD,
     EXCLUDED_DIVISION_VALUES,
     META_COMMENTARY_REGEX_PATTERNS,
 )
@@ -317,10 +316,11 @@ Empathy, Authenticity, Curiosity, Integrity, Leadership
 
 
 def detect_entity(query: str, stories: list[dict]) -> tuple[str, str] | None:
-    """Detect if query mentions a known entity from any entity field.
+    """Detect if query mentions a known entity from story data.
 
-    Checks Client, Employer, Division, Project, Place fields.
-    Returns (field_name, entity_value) if match found.
+    Checks these fields in order:
+    1. Client, Employer, Division (from ENTITY_DETECTION_FIELDS)
+    2. Story Titles (exact match or significant unique keywords)
 
     Context-aware: Returns None if entity is preceded by transitional phrases
     like "after", "leaving", "before", "transition from" - these indicate
@@ -332,6 +332,7 @@ def detect_entity(query: str, stories: list[dict]) -> tuple[str, str] | None:
 
     Returns:
         Tuple of (field_name, entity_value) or None if no match
+        field_name can be: "Client", "Employer", "Division", or "Title"
     """
     q_lower = query.lower()
 
@@ -380,6 +381,20 @@ def detect_entity(query: str, stories: list[dict]) -> tuple[str, str] | None:
                 if _is_excluded_context(entity.lower()):
                     return None
                 return (field, entity)
+
+    # =================================================================
+    # STORY TITLE DETECTION (Jan 2026)
+    # Check if query contains an exact story title.
+    # This handles "Ask Agy About This" pattern: "Tell me more about: [title]"
+    # NOTE: We only match EXACT titles, not keywords, because common words
+    # like "leadership", "culture" appear in both titles and general queries.
+    # =================================================================
+    all_titles = {s.get("Title", "") for s in stories if s.get("Title")}
+    for title in sorted(all_titles, key=len, reverse=True):
+        if title.lower() in q_lower:
+            if DEBUG:
+                print(f"DEBUG: Title match found: {title}")
+            return ("Title", title)
 
     return None
 
@@ -565,138 +580,6 @@ def build_known_vocab(stories: list[dict[str, Any]]) -> set[str]:
             vocab.update(re.split(r"[^\w]+", str(t).strip().lower()))
     # Prune tiny tokens
     return {w for w in vocab if len(w) >= 3}
-
-
-def classify_query_intent(query: str, stories: list[dict] | None = None) -> str:
-    """Classify query into intent categories using LLM.
-
-    Uses gpt-4o-mini for cheap, self-maintaining classification that handles
-    novel phrasings without keyword list maintenance.
-
-    Args:
-        query: User query string to classify.
-        stories: Optional story corpus for dynamic entity/narrative lists.
-            If not provided, uses fallback static lists.
-
-    Returns:
-        One of: "synthesis", "behavioral", "technical", "client", "narrative",
-        "background", "out_of_scope", "general"
-
-    Example:
-        >>> classify_query_intent("How did Matt modernize payments at JPMorgan?", stories)
-        "client"  # Entity anchor takes priority
-        >>> classify_query_intent("Tell me about Matt's leadership journey", stories)
-        "narrative"  # Biographical anchor
-        >>> classify_query_intent("What are Matt's core themes?", stories)
-        "synthesis"  # No entity, cross-cutting
-    """
-    try:
-        from dotenv import load_dotenv
-        from openai import OpenAI
-
-        load_dotenv()
-        client = OpenAI(
-            api_key=os.getenv("OPENAI_API_KEY"),
-            project=os.getenv("OPENAI_PROJECT_ID"),
-            organization=os.getenv("OPENAI_ORG_ID"),
-        )
-
-        # Build dynamic lists from stories if available
-        if stories:
-            known_clients = get_known_clients(stories)
-            # Format client list for prompt
-            client_list = ", ".join(sorted(known_clients))
-
-            # Get narrative titles and extract key phrases
-            narrative_titles = get_narrative_titles(stories)
-            # Extract distinctive phrases from titles (e.g., "leadership journey" from "My Leadership Journey")
-            narrative_fragments = ", ".join(
-                narrative_titles[:15]
-            )  # Limit to avoid prompt bloat
-        else:
-            # Fallback static lists if no stories provided
-            client_list = (
-                "JPMorgan, Accenture, Capital One, RBC, Norfolk Southern, Fiserv, AT&T"
-            )
-            narrative_fragments = "leadership journey, career intent, philosophy, early failure, risk ownership"
-
-        prompt = f"""Classify this query about Matt Pugmire's career. Use this PRIORITY HIERARCHY:
-
-PRIORITY 1 - ENTITY ANCHOR (Company/Project):
-If query mentions a SPECIFIC company or project name, classify as `client`.
-This OVERRIDES any "How did", capability verbs, or methodology phrasing.
-Known companies/employers: {client_list}
-Known projects: MattGPT, Cloud Innovation Center, CIC, Liquid Studio
-- "How did Matt modernize payments at JPMorgan?" → client (JPMorgan is anchor)
-- "How did Matt scale the CIC at Accenture?" → client (Accenture is anchor)
-- "Tell me about Matt's work at Capital One" → client
-
-PRIORITY 2 - BIOGRAPHICAL ANCHOR (Professional Narrative):
-If query mentions Professional Narrative story topics, classify as `narrative`.
-Narrative topics: {narrative_fragments}
-- "Tell me about Matt's leadership journey" → narrative
-- "What's Matt's philosophy?" → narrative
-- "Tell me about Matt's approach to failure" → narrative
-
-PRIORITY 3 - SYNTHESIS (Cross-cutting patterns):
-ONLY if NO specific entity AND asks for patterns/themes/summary:
-- "What are Matt's core themes?" → synthesis
-- "Why hire Matt?" → synthesis
-- "What makes Matt different?" → synthesis
-
-PRIORITY 4 - BEHAVIORAL (STAR-style):
-"Tell me about a time", "How do you handle", "Give an example of when you"
-- "Tell me about a time you failed" → behavioral
-
-PRIORITY 5 - TECHNICAL:
-Questions about specific technologies, architecture, tools (WITHOUT company name)
-- "Tell me about Matt's payments work" → technical
-- "What cloud platforms has Matt used?" → technical
-
-PRIORITY 6 - BACKGROUND:
-Who Matt is, career history, current role (WITHOUT specific Professional Narrative fragment)
-- "What's Matt's background?" → background
-
-PRIORITY 7 - OUT_OF_SCOPE:
-Industries Matt has NOT worked in: retail, hospitality, gaming, entertainment, real estate, construction, K-12 education
-- "Tell me about Matt's work in retail sales" → out_of_scope
-
-PRIORITY 8 - GENERAL:
-Everything else
-
-CRITICAL: Generic words "client" or "clients" are NOT company names.
-- "How does Matt work with clients?" → synthesis (generic, asking about approach)
-
-Return only the category name, nothing else."""
-
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {"role": "system", "content": prompt},
-                {"role": "user", "content": query},
-            ],
-            max_tokens=10,
-            temperature=0,
-        )
-        intent = response.choices[0].message.content.strip().lower()
-        # Validate response
-        valid_intents = {
-            "synthesis",
-            "behavioral",
-            "technical",
-            "client",
-            "narrative",
-            "background",
-            "out_of_scope",
-            "general",
-        }
-        if intent not in valid_intents:
-            return "general"
-        return intent
-    except Exception as e:
-        if DEBUG:
-            print(f"DEBUG classify_query_intent error: {e}")
-        return "general"
 
 
 def get_diverse_stories(
@@ -1585,73 +1468,62 @@ def rag_answer(
                     f"DEBUG: Semantic router: valid={semantic_valid}, score={semantic_score:.3f}, family={intent_family}"
                 )
 
-        # Step 2b: Entity Detection - ALWAYS detect entities
-        # Entity-first sovereignty: detected entities are used for:
-        # 1. Bypassing router rejection (if semantic_valid=False)
-        # 2. Filtering Pinecone results (always)
-        # 3. Pinning entity-matched stories to #1 in ranking (always)
+        # Step 2b: Entity Detection - detect entities to scope search
+        # Detected entities are used for:
+        # 1. Filtering Pinecone results (always)
+        # 2. Pinning entity-matched stories to #1 in ranking (always)
+        # NOTE: Entity gate (bouncer) REMOVED Jan 2026 - let Pinecone confidence
+        # be the sole decider. Nonsense filters catch off-topic queries.
         entity_match = detect_entity(question or "", stories)
         if DEBUG and entity_match:
             print(f"DEBUG: Entity detected - {entity_match[0]}:{entity_match[1]}")
-
-        # =================================================================
-        # ENTITY GATE (Threshold from config/constants.py)
-        # Off-topic queries score 0.11-0.22, legitimate queries score 0.30+
-        # =================================================================
-        if not from_suggestion and not semantic_valid:
-            if entity_match is None and semantic_score < ENTITY_GATE_THRESHOLD:
-                # No entity detected + very low semantic score → out of scope
-                # Log for observability - helps diagnose "I can't help" issues
-                print(
-                    f"[QUERY_REJECTED] reason=entity_gate, "
-                    f"router_family={intent_family}, router_score={semantic_score:.3f}, "
-                    f"entity=None, threshold={ENTITY_GATE_THRESHOLD}, "
-                    f"query={question[:50]}..."
-                )
-                log_offdomain(question or "", "no_entity_low_score")
-                st.session_state["ask_last_reason"] = "out_of_scope"
-                st.session_state["ask_last_query"] = question or ""
-                st.session_state["__ask_dbg_decision"] = (
-                    f"entity_gate_reject:{semantic_score:.3f}"
-                )
-                if DEBUG:
-                    print(
-                        f"DEBUG: Entity gate REJECT - no entity, low score ({semantic_score:.3f} < {ENTITY_GATE_THRESHOLD})"
-                    )
-                return {
-                    "answer_md": "",
-                    "sources": [],
-                    "modes": {},
-                    "default_mode": "narrative",
-                }
-            elif entity_match:
-                # Entity detected → bypass router rejection
-                if DEBUG:
-                    print(
-                        f"DEBUG: Entity gate BYPASS - found {entity_match[0]}:{entity_match[1]}"
-                    )
-            elif DEBUG:
-                # No entity but score is acceptable → proceed to Pinecone
-                print(
-                    f"DEBUG: Entity gate PASS - no entity but decent score ({semantic_score:.3f} >= {ENTITY_GATE_THRESHOLD})"
-                )
 
         # Token overlap check
         overlap = token_overlap_ratio(question or "", _KNOWN_VOCAB)
         if DEBUG:
             dbg(f"ask: overlap={overlap:.2f}")
 
+        # =================================================================
+        # OUT_OF_SCOPE CHECK (Jan 2026 - Semantic Router)
+        # Gracefully redirect queries about industries Matt doesn't work in.
+        # This uses embedding similarity (free, fast) instead of LLM calls.
+        # Checked BEFORE Pinecone to avoid unnecessary search costs.
+        # =================================================================
+        if intent_family == "out_of_scope" and not from_suggestion:
+            out_of_scope_response = """🐾 I don't have experience in that industry. Matt's work is primarily in **Financial Services**, **Healthcare/Life Sciences**, **Telecom**, and **Technology/SaaS**.
+
+Would you like to explore how his work in **platform modernization**, **payments systems**, or **enterprise transformation** might apply to your context?"""
+            if DEBUG:
+                print("DEBUG: out_of_scope detected by semantic router")
+            st.session_state["ask_last_reason"] = "out_of_scope"
+            st.session_state["ask_last_query"] = question or ""
+            return {
+                "answer_md": out_of_scope_response,
+                "sources": [],
+                "modes": {"narrative": out_of_scope_response},
+                "default_mode": "narrative",
+            }
+
         # Entity-first sovereignty: if entity detected, add to filters for Pinecone
         # This ensures entity-anchored queries prioritize stories from that entity
+        # EXCEPTION: Title entities use SOFT filtering (semantic search naturally ranks
+        # the matching story #1, and related stories fill #2-4 in one call)
         search_filters = filters.copy()  # Don't mutate original
         if entity_match:
             entity_field, entity_value = entity_match
-            search_filters["entity_field"] = entity_field
-            search_filters["entity_value"] = entity_value
-            if DEBUG:
-                print(f"DEBUG: Entity filter added: {entity_field}={entity_value}")
+            # Title uses soft filtering - semantic search handles ranking naturally
+            # Hard filter only for Client/Employer/Division/Project/Place
+            if entity_field != "Title":
+                search_filters["entity_field"] = entity_field
+                search_filters["entity_value"] = entity_value
+                if DEBUG:
+                    print(f"DEBUG: Entity filter added: {entity_field}={entity_value}")
+            elif DEBUG:
+                print(
+                    f"DEBUG: Title entity '{entity_value[:50]}...' - using soft filtering (no Pinecone filter)"
+                )
 
-        # Semantic search (run before rejection to enable search fallback)
+        # Semantic search
         search_result = semantic_search(
             question or filters.get("q", ""),
             search_filters,
@@ -1664,32 +1536,19 @@ def rag_answer(
         # Store confidence for conversation_view to use
         st.session_state["__ask_confidence__"] = confidence
 
-        # Classify query intent for synthesis mode detection (uses dynamic entity lists)
-        query_intent = classify_query_intent(question or "", stories)
-        is_synthesis = query_intent == "synthesis"
-        st.session_state["__ask_query_intent__"] = query_intent
+        # Synthesis mode detection - use semantic router's intent_family (no LLM call!)
+        # NOTE: classify_query_intent LLM gate REMOVED Jan 2026
+        # - Was expensive (GPT-4o-mini call on every query)
+        # - Was brittle (rejected valid projects like TICARA it didn't recognize)
+        # - Was redundant (Pinecone confidence handles relevance)
+        is_synthesis = intent_family == "synthesis"
+        st.session_state["__ask_query_intent__"] = intent_family  # Use router family
 
         if DEBUG:
             print(
                 f"DEBUG: search confidence={confidence}, top_score={search_result['top_score']:.3f}, pool_size={len(pool)}"
             )
-            print(f"DEBUG: query_intent={query_intent}, is_synthesis={is_synthesis}")
-
-        # Handle out-of-scope queries gracefully
-        if query_intent == "out_of_scope":
-            out_of_scope_response = """🐾 That's outside my wheelhouse! Matt's experience is in **Financial Services**, **Healthcare/Life Sciences**, **Telecom**, and **Technology/SaaS** — not retail, hospitality, or consumer goods.
-
-But here's what might translate: Matt's work in **B2B platform modernization**, **payments systems**, and **enterprise transformation** often shares patterns with other industries. Want me to show you how his financial services or platform work might apply to your context?"""
-
-            if DEBUG:
-                print("DEBUG: out_of_scope query handled with redirect")
-
-            return {
-                "answer_md": out_of_scope_response,
-                "sources": [],
-                "modes": {"narrative": out_of_scope_response},
-                "default_mode": "narrative",
-            }
+            print(f"DEBUG: intent_family={intent_family}, is_synthesis={is_synthesis}")
 
         # --- Pinecone confidence gate ---
         # Trust semantic router for high-confidence behavioral matches
@@ -1976,7 +1835,7 @@ But here's what might translate: Matt's work in **B2B platform modernization**, 
                         )
                     ranked = diversify_results(candidates) or (pool[:1] if pool else [])
             else:
-                if query_intent == "narrative":
+                if intent_family == "narrative":
                     # Narrative queries: trust Pinecone semantic ranking.
                     # Diversity demotes the best match based on client name
                     # (e.g., "Multiple Clients" ranked below "Financial Services Client"

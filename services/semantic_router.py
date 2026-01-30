@@ -149,6 +149,42 @@ VALID_INTENTS = {
         "Matt's career transition after Accenture",
         "Making an Intentional Career Transition After Accenture",
     ],
+    # =================================================================
+    # SYNTHESIS FAMILY (Jan 2026)
+    # Cross-cutting questions that require synthesizing across multiple
+    # stories rather than focusing on a specific project or client.
+    # =================================================================
+    "synthesis": [
+        "What are Matt's core themes?",
+        "What themes run through Matt's career?",
+        "Why hire Matt?",
+        "Why should we hire Matt?",
+        "What makes Matt different?",
+        "What differentiates Matt?",
+        "Summarize Matt's experience",
+        "Give me an overview of Matt's strengths",
+        "What patterns emerge from Matt's work?",
+        "What's Matt's unique value?",
+    ],
+    # =================================================================
+    # OUT_OF_SCOPE FAMILY (Jan 2026)
+    # Industries and domains Matt has NOT worked in. Triggers graceful
+    # redirect instead of searching Pinecone for non-existent experience.
+    # =================================================================
+    "out_of_scope": [
+        "Tell me about Matt's retail experience",
+        "Tell me about Matt's work in retail",
+        "Does Matt have hospitality experience?",
+        "Show me Matt's hospitality work",
+        "Show me work in the gaming industry",
+        "Tell me about Matt's gaming experience",
+        "What's Matt's entertainment industry experience?",
+        "Show me Matt's real estate work",
+        "Tell me about Matt's construction experience",
+        "Does Matt have K-12 education experience?",
+        "Show me Matt's restaurant industry work",
+        "Tell me about Matt's consumer goods experience",
+    ],
 }
 
 # Flatten for embedding generation

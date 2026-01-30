@@ -286,8 +286,14 @@ def get_context_story(stories: list[dict]) -> dict | None:
 # =============================================================================
 # HELPER FUNCTIONS - UI Components
 # =============================================================================
-def _render_confidence_banner(query: str, confidence: str, result_count: int):
-    """Render the tiered confidence banner for search results."""
+def _render_confidence_banner(query: str, confidence: str, results: list[dict]):
+    """Render the tiered confidence banner for search results.
+
+    Args:
+        query: The search query string
+        confidence: "high", "low", or "none"
+        results: List of result dicts (with Title field) - needed to detect exact title match
+    """
     BANNER_STYLE = "background: #F3E8FF; border-left: 4px solid #8B5CF6; padding: 12px 16px; margin: 16px 0;"
     TEXT_COLOR_SUCCESS = "#6B21A8"
     TEXT_COLOR_CAUTION = "#4A1D7A"
@@ -295,10 +301,26 @@ def _render_confidence_banner(query: str, confidence: str, result_count: int):
 
     icon = "🐾"
     text_style_final = f"color: {TEXT_COLOR_SUCCESS}; {TEXT_STYLE_COMMON}"
+    result_count = len(results)
 
     if confidence == "high":
-        plural = "story" if result_count == 1 else "stories"
-        message = f"Found {result_count} matching {plural} for \"{query}\""
+        # Check if top result is an exact title match
+        top_title = results[0].get("Title", "") if results else ""
+        is_exact_match = query.lower().strip() == top_title.lower().strip()
+
+        if is_exact_match:
+            # Exact title search - highlight the match
+            related_count = result_count - 1
+            if related_count == 0:
+                message = f"Found your story: \"{query}\""
+            elif related_count == 1:
+                message = "Found your story + 1 related story"
+            else:
+                message = f"Found your story + {related_count} related stories"
+        else:
+            # Generic search - show total count
+            plural = "story" if result_count == 1 else "stories"
+            message = f"Found {result_count} matching {plural} for \"{query}\""
     elif confidence == "low":
         icon = "⚠️"
         message = f"Showing closest matches for \"{query}\". Relevance may be low."
@@ -1880,6 +1902,17 @@ def render_explore_stories(
 
     if current_query and search_triggered:
         # --- PATH 1: Intentional Search (Run Pinecone) ---
+
+        # SURGICAL FIX: Clear active_story ONLY when search query actually changes
+        # This prevents showing stale story detail from a previous search
+        # but preserves active_story for: filter changes, view switching, "Ask Agy About This"
+        previous_query = st.session_state.get("__last_q__", "")
+        if current_query != previous_query:
+            st.session_state.pop("active_story", None)
+            st.session_state.pop("active_story_obj", None)
+            st.session_state.pop("active_story_title", None)
+            st.session_state.pop("active_story_client", None)
+
         nonsense_check = is_nonsense(current_query)
 
         if nonsense_check:
@@ -1938,7 +1971,7 @@ def render_explore_stories(
                     unsafe_allow_html=True,
                 )
             else:
-                _render_confidence_banner(current_query, confidence, len(view))
+                _render_confidence_banner(current_query, confidence, view)
 
             if confidence == "none":
                 view = []
@@ -1957,7 +1990,7 @@ def render_explore_stories(
         confidence = st.session_state.get(LAST_CONFIDENCE, "none")
 
         # Show banner based on cached confidence level
-        _render_confidence_banner(current_query, confidence, len(cached_view))
+        _render_confidence_banner(current_query, confidence, cached_view)
 
         if confidence == "none":
             cached_view = []
@@ -2065,9 +2098,38 @@ def render_explore_stories(
     prev_view_mode = st.session_state.get("_prev_explore_view_mode", "Table")
     view_mode = st.session_state.get("explore_view_mode", "Table")
 
-    if view_mode != prev_view_mode:
+    # Check if arriving via deeplink - skip view mode reset in that case
+    deeplink_story_id = st.query_params.get("story")
+
+    if view_mode != prev_view_mode and not deeplink_story_id:
+        # Only reset offset on view mode change if NOT arriving via deeplink
         st.session_state["page_offset"] = 0
         st.session_state["_prev_explore_view_mode"] = view_mode
+    elif view_mode != prev_view_mode:
+        # Deeplink arrival - just update the mode tracker, don't reset offset
+        st.session_state["_prev_explore_view_mode"] = view_mode
+
+    # =========================================================================
+    # DEEPLINK PAGINATION FIX
+    # When arriving via ?story=id, calculate offset so the story is visible
+    # Search through full `stories` list (not filtered `view`) since deeplinks
+    # should work regardless of any filters that might be applied
+    # =========================================================================
+    if deeplink_story_id:
+        current_offset = st.session_state.get("page_offset", 0)
+        # Find the story's index in the FULL stories list
+        for idx, s in enumerate(stories):
+            if str(s.get("id")) == str(deeplink_story_id):
+                # Calculate correct offset for Cards view (CARDS_PAGE_SIZE = 9)
+                page_number = idx // CARDS_PAGE_SIZE
+                correct_offset = page_number * CARDS_PAGE_SIZE
+                # Ensure we have the story object for get_context_story()
+                st.session_state["active_story_obj"] = s
+                # Only rerun if offset needs to change (prevents infinite loop)
+                if current_offset != correct_offset:
+                    st.session_state["page_offset"] = correct_offset
+                    st.rerun()
+                break
 
     page_size_option = st.session_state.get("page_size_select", TABLE_PAGE_SIZE_DEFAULT)
     page_size = page_size_option if view_mode == "Table" else CARDS_PAGE_SIZE

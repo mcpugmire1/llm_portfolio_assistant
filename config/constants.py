@@ -131,7 +131,7 @@ ENTITY_DETECTION_FIELDS = ["Client", "Employer", "Division"]
 #
 # NOTE: Field names are lowercase to match Pinecone metadata schema.
 
-ENTITY_SEARCH_FIELDS = ["client", "employer", "division", "project", "place"]
+ENTITY_SEARCH_FIELDS = ["client", "employer", "division", "project", "place", "title"]
 
 # Pinecone metadata casing rules (from CLAUDE.md):
 # - Lowercase values: division, employer, project, industry, complexity

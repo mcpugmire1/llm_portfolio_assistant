@@ -587,6 +587,37 @@ GOLDEN_QUERIES = {
             "is_landing_page": True,
         },
     ],
+    # =========================================================================
+    # Context Story Bypass (3) - "Ask Agy About This" button flow
+    # Tests that when a user clicks "Ask Agy About This" on a story detail,
+    # the system uses that story directly without semantic search.
+    #
+    # NOTE: These tests use story_index to dynamically select stories from
+    # the dataset rather than hardcoding titles (which change frequently).
+    # =========================================================================
+    "context_story": [
+        {
+            "id": 50,
+            "query": "(dynamic - built from story_index)",  # Placeholder, actual query built at runtime
+            "story_index": 0,  # First story in dataset
+            "note": "Context story bypass - first story",
+            "category": "context_story",
+        },
+        {
+            "id": 51,
+            "query": "(dynamic - built from story_index)",
+            "story_index": 10,  # 11th story
+            "note": "Context story bypass - middle story",
+            "category": "context_story",
+        },
+        {
+            "id": 52,
+            "query": "(dynamic - built from story_index)",
+            "story_index": 50,  # 51st story
+            "note": "Context story bypass - later story",
+            "category": "context_story",
+        },
+    ],
 }
 
 
@@ -1015,6 +1046,58 @@ def evaluate_query(
 
             result.passed = all_checks_pass
 
+        elif category == "context_story":
+            # Context story tests - "Ask Agy About This" button flow
+            # These tests verify that "Tell me more about: [Title]" queries work
+            # through Title detection (no entity gate bouncer)
+            all_checks_pass = True
+
+            # Get story by index (dynamic, not hardcoded title)
+            story_index = query_spec.get("story_index", 0)
+            if story_index >= len(stories):
+                result.error = f"Story index {story_index} out of range (have {len(stories)} stories)"
+                result.passed = False
+            else:
+                context_story = stories[story_index]
+                story_title = context_story.get("Title", "Unknown")
+
+                # Build the query dynamically from the story title
+                dynamic_query = f"Tell me more about: {story_title}"
+                result.query = dynamic_query  # Update for reporting
+
+                # Call rag_answer through normal flow (Title detection should find it)
+                rag_result = rag_fn(dynamic_query, {}, stories)
+                response = rag_result.get("answer_md", "")
+                sources = rag_result.get("sources", [])
+                result.response = response
+
+                # Check 1: Sources returned (not blocked by entity gate)
+                has_sources = len(sources) > 0
+                result.checks["has_sources"] = has_sources
+                if not has_sources:
+                    result.details["error"] = (
+                        "No sources returned - query may have been blocked"
+                    )
+                    all_checks_pass = False
+                else:
+                    # Check 2: Expected story appears in sources
+                    source_titles = [s.get("title", "") for s in sources]
+                    story_in_sources = story_title in source_titles
+                    result.checks["story_in_sources"] = story_in_sources
+                    result.details["expected_source"] = story_title[:50]
+                    result.details["actual_sources"] = [
+                        t[:40] for t in source_titles[:3]
+                    ]
+                    all_checks_pass = all_checks_pass and story_in_sources
+
+                # Check 3: Response is not empty (we got a real answer)
+                has_response = len(response) > 50
+                result.checks["has_response"] = has_response
+                result.details["response_length"] = len(response)
+                all_checks_pass = all_checks_pass and has_response
+
+                result.passed = all_checks_pass
+
     except Exception as e:
         result.error = str(e)
         result.passed = False
@@ -1044,24 +1127,22 @@ def stories():
 
 @pytest.fixture(scope="module")
 def rag_fn(stories):
-    """Get RAG function with mocked streamlit and synced metadata."""
-    from unittest.mock import MagicMock, patch
+    """Get RAG function with synced metadata.
 
-    # Mock streamlit
-    mock_st = MagicMock()
-    mock_st.session_state = {}
+    Note: We don't mock streamlit because:
+    1. Patches expire when fixture returns, breaking Pinecone calls
+    2. The 'missing ScriptRunContext' warnings are benign
+    3. Direct Pinecone calls work fine without mocking
+    """
+    from ui.pages.ask_mattgpt.backend_service import (
+        rag_answer,
+        sync_portfolio_metadata,
+    )
 
-    with patch("streamlit.session_state", mock_st.session_state):
-        with patch("ui.pages.ask_mattgpt.backend_service.st", mock_st):
-            from ui.pages.ask_mattgpt.backend_service import (
-                rag_answer,
-                sync_portfolio_metadata,
-            )
+    # Sync SYNTHESIS_THEMES and MATT_DNA from story data
+    sync_portfolio_metadata(stories)
 
-            # Sync SYNTHESIS_THEMES and MATT_DNA from story data
-            sync_portfolio_metadata(stories)
-
-            return rag_answer
+    return rag_answer
 
 
 # =============================================================================
@@ -1359,6 +1440,58 @@ class TestMarketing:
         )
 
 
+class TestContextStory:
+    """Test 'Ask Agy About This' button flow - Title detection.
+
+    When a user clicks "Ask Agy About This" on a story detail, the system
+    generates a "Tell me more about: [Title]" query. This should:
+    1. Pass through entity detection (Title field now checked)
+    2. Not be blocked by any gate
+    3. Return the correct story in sources
+    4. Provide a substantive response
+
+    Tests use story_index to dynamically select stories, avoiding brittle
+    hardcoded titles that change when story data is updated.
+    """
+
+    @pytest.mark.parametrize(
+        "query_spec",
+        GOLDEN_QUERIES["context_story"],
+        ids=lambda q: f"Q{q['id']}_story_{q.get('story_index', 0)}",
+    )
+    def test_context_story_title_detection(self, query_spec, stories, rag_fn):
+        """Test that 'Tell me more about: [Title]' queries find the story."""
+        result = evaluate_query(query_spec, rag_fn, stories)
+
+        assert not result.error, f"Query error: {result.error}"
+
+        # Query should not be blocked (sources returned)
+        assert result.checks.get("has_sources"), (
+            f"CONTEXT STORY BLOCKED\n"
+            f"Story index: {query_spec.get('story_index', 0)}\n"
+            f"Query: {result.query[:60]}...\n"
+            f"Error: {result.details.get('error', 'Query blocked by entity gate')}\n"
+            f"Title detection should find story titles."
+        )
+
+        # Expected story should appear in sources
+        assert result.checks.get("story_in_sources"), (
+            f"CONTEXT STORY NOT IN SOURCES\n"
+            f"Story index: {query_spec.get('story_index', 0)}\n"
+            f"Expected: {result.details.get('expected_source', '?')}\n"
+            f"Actual sources: {result.details.get('actual_sources', [])}\n"
+            f"Title detection should prioritize matching story."
+        )
+
+        # Response should not be empty
+        assert result.checks.get("has_response"), (
+            f"CONTEXT STORY RESPONSE FAILURE\n"
+            f"Story index: {query_spec.get('story_index', 0)}\n"
+            f"Response length: {result.details.get('response_length', 0)}\n"
+            f"Expected: > 50 characters"
+        )
+
+
 # =============================================================================
 # REPORT GENERATION
 # =============================================================================
@@ -1388,6 +1521,7 @@ def generate_report(results: list[EvalResult]) -> dict:
         "surgical",
         "entity_detection",
         "marketing",
+        "context_story",
     ]:
         cat_results = [r for r in results if r.category == category]
         if cat_results:

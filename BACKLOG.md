@@ -1,5 +1,26 @@
 # BACKLOG
 
+## January 29, 2026 - RAG Pipeline Cleanup
+
+### Entity Gate Removal ✅ DONE
+**Priority:** HIGH
+**Issue:** Entity Gate was causing false rejections on legitimate queries
+**Resolution (Jan 29, 2026):**
+- Removed `ENTITY_GATE_THRESHOLD` and related gating logic from `backend_service.py`
+- Entity detection still runs for Pinecone filtering, but no longer blocks queries
+- Eval improved from 96.4% to 98.1%
+
+### classify_query_intent LLM Removal ✅ DONE
+**Priority:** HIGH
+**Issue:** Extra LLM call for intent classification was redundant with semantic router
+**Resolution (Jan 29, 2026):**
+- Removed `classify_query_intent()` function entirely
+- Synthesis detection moved to semantic router (`synthesis` intent family)
+- Out-of-scope detection moved to semantic router (`out_of_scope` intent family)
+- Reduces latency and API costs
+
+---
+
 ## January 25, 2026 - Tech Debt from RAG Audit
 
 ### 1. Fix Prompt Conflict ✅ DONE
@@ -16,7 +37,7 @@
 ### 9. Semantic Router Fail-Open Handling ✅ DONE
 **Priority:** MEDIUM
 **Issue:** When semantic router has connection error, system falls back to off-topic guard
-**Evidence:** "Semantic router error: Connection error." → "🐾 I can't help with that..."
+**Evidence:** "Semantic router error: Connection error." → "I can't help with that..."
 **Expected:** Skip intent classification, proceed with RAG, return actual results
 **Resolution (Jan 26, 2026):**
 - Verified `is_portfolio_query_semantic()` already returns `(True, 1.0, "", "error_fallback")` on exception
@@ -30,7 +51,7 @@
 **Evidence:** Score analysis showed garbage queries at 0.11-0.27, legitimate queries at 0.30+
 **Resolution (Jan 26, 2026):**
 - Lowered SOFT_ACCEPT from 0.72 to 0.40 in `semantic_router.py`
-- Lowered ENTITY_GATE_THRESHOLD from 0.50 to 0.30 in `backend_service.py`
+- Entity Gate removed entirely (Jan 29, 2026) - no threshold needed
 - Added threshold boundary tests in `test_structural_assertions.py` to catch regressions
 
 ### 11. Remove ENTITY_NORMALIZATION Hardcoded Map ✅ DONE
@@ -46,31 +67,36 @@
 **Priority:** MEDIUM
 **Issue:** No visibility into why queries get "I can't help with that" response in production
 **Resolution (Jan 26, 2026):**
-- Added `[QUERY_REJECTED]` log tag for entity gate rejections (includes router_family, router_score, pinecone_score)
+- Added `[QUERY_REJECTED]` log tag for low-pinecone rejections (includes router_family, router_score, pinecone_score)
 - Added `[API_ERROR_DETECTED]` log tag for router failures with "breather" message fallback
-- Logs help diagnose whether rejections are from semantic router, entity gate, or Pinecone confidence
+- Logs help diagnose whether rejections are from semantic router or Pinecone confidence
+
+### 13. Centralize Constants ✅ DUPLICATE
+**Priority:** MEDIUM
+**Issue:** Thresholds, model names, token limits scattered across 6+ files
+**Status:** Duplicate of #7 (Centralize Hardcoded Values) - consolidated there
+
+---
+
+## Open Items
 
 ### 2. Add Eval Cases for "Tell me more about: [Title]"
 **Priority:** MEDIUM
 **Issue:** No test coverage for the Related Projects "tell me more" pattern
 **Fix:** Add 3-5 eval cases like "Tell me more about: Platform Modernization at JPMC"
+**Status (Jan 29, 2026):** Eval now at 98.1% (60/61 cases). Title soft-filtering implemented - titles detected but semantic search ranks naturally. Still need specific "tell me more" eval cases.
 
 ### 3. Simplify backend_service.py
 **Priority:** MEDIUM
-**Issue:** 800+ lines, imports from 6+ modules, unclear ownership boundaries
-**Fix:** Extract intent classification, entity detection, and mode logic into separate modules
-
-### 4. Audit Excel Master for Corporate Filler ✅ DONE
-**Priority:** LOW
-**Issue:** BANNED_PHRASES list keeps growing; should fix at source
-**Fix:** Grep Excel master for "meaningful outcomes", "foster collaboration", etc. and rewrite
-**Resolution (Jan 28, 2026):** Deleted BANNED_PHRASES entirely - was testing for imaginary problems that never appeared in responses. "meaningful outcomes" was Matt's actual words being quoted correctly.
+**Issue:** 600+ lines (was 800+ before cleanup), imports from 4+ modules
+**Fix:** Extract entity detection and mode logic into separate modules
+**Status (Jan 29, 2026):** Entity Gate removed, classify_query_intent removed. Still candidates for extraction: entity detection, prompt building.
 
 ### 5. Delete META_SENTENCE_PATTERNS Regex
 **Priority:** MEDIUM (unblocked — #1 is done)
 **Issue:** Band-aid for prompt conflict; should be unnecessary after #1
 **Fix:** After fixing prompt, monitor for 1 week, then delete if no violations
-**Status:** Ready to monitor — #1 completed Jan 26, 2026
+**Status (Jan 29, 2026):** #1 completed Jan 26. Monitoring period complete. Ready to delete if eval confirms no meta-commentary issues.
 
 ### 6. Remove boost_narrative_matches()
 **Priority:** LOW
@@ -80,8 +106,13 @@
 
 ### 7. Centralize Hardcoded Values
 **Priority:** MEDIUM
-**Issue:** 11 categories of hardcoded values scattered across 6+ files (see RAG Audit in ARCHITECTURE.md)
-**Fix:** Create `config/constants.py` with all thresholds, model names, client lists
+**Issue:** Hardcoded values scattered across files
+**Categories identified (RAG Audit):**
+- Thresholds: CONFIDENCE_HIGH, CONFIDENCE_LOW, SOFT_ACCEPT
+- Model names: text-embedding-3-small, gpt-4o-mini
+- Token limits: MAX_TOKENS, context windows
+- Pinecone: index name, top_k values
+**Fix:** Create `config/constants.py` with all configurable values
 
 ### 8. Dead Code Cleanup
 **Priority:** LOW
@@ -89,11 +120,6 @@
 - `services/query_logger.py` - orphaned Google Sheets logger
 - `utils/scoring.py` - may have unused functions
 - Any `# TODO` or `# FIXME` comments older than 30 days
-
-### 13. Centralize Constants
-**Priority:** MEDIUM
-**Issue:** Thresholds, model names, token limits scattered across 6+ files
-**Fix:** Create `config/constants.py` with all configurable values
 
 ### 14. Fix SEARCH_TOP_K Conflict
 **Priority:** MEDIUM
@@ -122,26 +148,100 @@
 
 ### 19. Quarterly Intent Review
 **Priority:** LOW
-**Issue:** 11 intent families with ~20 phrases each in semantic_router.py
+**Issue:** 13 intent families (was 11) with ~20 phrases each in semantic_router.py
+**Families:** background, behavioral, delivery, team_scaling, leadership, technical, domain_payments, domain_healthcare, stakeholders, innovation, agile_transformation, narrative, synthesis, out_of_scope
 **Fix:** Schedule quarterly review for relevance
+**Last review:** Jan 29, 2026
 
 ---
 
-### 10. Cross-Browser Testing
-**Story ID:** MATTGPT-010
+## January 29-30, 2026 - Explore Stories Bugs
+
+### 20. Deeplink Regression ✅ FIXED
+**Priority:** HIGH
+**Issue:** Share deeplink `?story=story-id` opens Cards view but doesn't display story detail
+**Evidence:** `http://localhost:8501/?story=driving-cloud-native-innovation-through-ticara-framework%7Caccenture` shows Cards view, no detail panel
+**Resolution (Jan 30, 2026):**
+- Root cause: Story not on page 1, detail only renders if story is in visible page
+- Fix: Calculate correct page offset in `explore_stories.py` based on story index in full list
+- Rerun if offset needs to change, set `active_story_obj` for `get_context_story()`
+**Files:** `explore_stories.py` (DEEPLINK PAGINATION FIX section)
+
+### 21. Search State Clearing ✅ FIXED
+**Priority:** HIGH
+**Issue:** Searching in Explore Stories didn't clear previous `active_story`, causing wrong story detail to display
+**Evidence:** Search "TICARA" → correct results → detail panel showed "Scaling Talent..." from previous selection
+**Resolution (Jan 30, 2026):**
+- Initial fix was too aggressive (cleared on every state change, broke "Ask Agy About This")
+- Surgical fix: Only clear `active_story` in PATH 1 when query actually changes (`current_query != previous_query`)
+- Preserves `active_story` for: filter changes, view switching, deeplinks, "Ask Agy About This"
+**Files:** `explore_stories.py` (SURGICAL FIX comment in search logic)
+
+### 22. "Ask Agy About This" Regression ✅ FIXED
+**Priority:** HIGH
+**Issue:** "Ask Agy About This" button stuck on loading spinner, never redirected to Ask MattGPT
+**Root cause:** Aggressive state clearing from #21 initial fix was clearing `active_story` needed for navigation
+**Resolution (Jan 30, 2026):** Surgical fix in #21 preserves `active_story` for "Ask Agy About This" flow
+
+### 23. Stale Story on Return to Explore Stories
 **Priority:** LOW
+**Issue:** Returning to Explore Stories from another tab shows previously selected story
+**Status:** Open - low priority, doesn't break core functionality
 
-**User Story:**
-As a user on any browser, I want consistent styling and functionality.
+### 24. 6 Sources on Surgical Queries
+**Priority:** MEDIUM
+**Issue:** "Ask Agy About This" returns 6 sources, should be 3 for surgical/tree search
+**Status:** Open - separate from state management bugs
 
-**Acceptance Criteria:**
-- [ ] Test on Chrome
-- [ ] Test on Safari
-- [ ] Test on Firefox
-- [ ] Test on Edge
-- [ ] Fix any CSS inconsistencies
+### 25. BDD/E2E Tests for Explore Stories State Machine
+**Priority:** HIGH (Tech Debt)
+**Issue:** No automated tests for Explore Stories interactive state
+**Effort:** 3-4 hours
+**Coverage needed:**
+- Search flow (clears stale state, opens correct detail, empty results)
+- "Ask Agy About This" flow (Table, Cards views)
+- Deeplink flow (valid/invalid story IDs)
+- View switching (preserves detail, query, filters)
+- Navigation return
+- Filter combinations (Industry, Capability, Advanced)
+- Pagination
+- Reset behavior
+**Widgets:** Find stories, Industry, Capability, Advanced Filters, Client/Role/Domain multiselects, Reset, Page size, View toggle, Pagination
+**Recommendation:** Playwright for Streamlit widget interaction
 
-### January 21, 2026 - RAG Eval Quality Sprint
+### 26. Share Link Copy Functionality
+**Priority:** LOW
+**Issue:** Verify share link copy-to-clipboard works correctly
+**Fix:** Test across browsers (Chrome, Safari, Firefox)
+
+### 27. Low-Confidence Banner Edge Cases
+**Priority:** LOW
+**Issue:** Low-confidence banner sometimes triggers incorrectly
+**Fix:** Review threshold logic and test with edge case queries
+
+### 28. Related Projects Selection State
+**Priority:** LOW
+**Issue:** Edge cases in Related Projects selection (purple highlight, close toggle)
+**Fix:** Verify single-selection behavior, test rapid clicks
+
+### 29. Semantic Router Error Path Coverage
+**Priority:** MEDIUM
+**Issue:** Limited test coverage for semantic router error handling paths
+**Fix:** Add tests for connection errors, timeout, malformed responses
+
+---
+
+## Closed/Resolved Items
+
+### 4. Audit Excel Master for Corporate Filler ✅ DONE
+**Priority:** LOW
+**Issue:** BANNED_PHRASES list keeps growing; should fix at source
+**Fix:** Grep Excel master for "meaningful outcomes", "foster collaboration", etc. and rewrite
+**Resolution (Jan 28, 2026):** Deleted BANNED_PHRASES entirely - was testing for imaginary problems that never appeared in responses. "meaningful outcomes" was Matt's actual words being quoted correctly.
+
+---
+
+## January 21, 2026 - RAG Eval Quality Sprint
 
 #### Sovereign Backlog (Real Issues for Next Sprint)
 
@@ -151,15 +251,15 @@ As a user on any browser, I want consistent styling and functionality.
 - ~~Example: Accenture stories where Client="Confidential Healthcare Provider" should still be discoverable as Accenture work~~
 - **Implementation (Jan 22, 2026):**
   - Updated `pinecone_service.py:189-216` to use Pinecone `$or` operator
-  - Entity filter now searches across all 5 fields: `client`, `employer`, `division`, `project`, `place`
+  - Entity filter now searches across all 6 fields: `client`, `employer`, `division`, `project`, `place`, `title`
   - Applied correct casing per field (lowercase for division/employer/project/place, PascalCase for client)
   - Eval: 100% pass rate (31/31) - no regression
 
 **3. Dynamic Prompting - Hardcoded Client Names** ✅ DONE
-- ✅ Synthesis prompt now derives clients dynamically
-- ✅ MATT_DNA now derives all client names from JSONL (banking, telecom, transport)
-- ✅ Fixed "JPMorgan" → "JP Morgan Chase" (now matches JSONL source)
-- ✅ Removed phantom industries from `cross_industry_landing.py` (Manufacturing, Retail & Consumer Goods)
+- Synthesis prompt now derives clients dynamically
+- MATT_DNA now derives all client names from JSONL (banking, telecom, transport)
+- Fixed "JPMorgan" → "JP Morgan Chase" (now matches JSONL source)
+- Removed phantom industries from `cross_industry_landing.py` (Manufacturing, Retail & Consumer Goods)
 - Eval: 100% pass rate (31/31)
 
 **Implementation (Jan 22, 2026):**
@@ -187,22 +287,21 @@ All project/client counts now derived dynamically from JSONL:
 
 | File | Hydrated | Status |
 |------|----------|--------|
-| `banking_landing.py` | Project count, client counts, capability areas | ✅ Dynamic |
-| `cross_industry_landing.py` | Project count, industry count, capability areas | ✅ Dynamic |
-| `category_cards.py` | Banking/Cross-industry project counts, client pills | ✅ Dynamic |
-| `home.py` | Now passes STORIES to category_cards | ✅ Wired |
+| `banking_landing.py` | Project count, client counts, capability areas | Dynamic |
+| `cross_industry_landing.py` | Project count, industry count, capability areas | Dynamic |
+| `category_cards.py` | Banking/Cross-industry project counts, client pills | Dynamic |
+| `home.py` | Now passes STORIES to category_cards | Wired |
 
 **Backend (FIXED):**
 | File | Status |
 |------|--------|
-| `backend_service.py` MATT_DNA | ✅ Dynamic from JSONL |
-| `backend_service.py` Synthesis prompt | ✅ Dynamic from JSONL |
-| `backend_service.py` Entity normalization | ✅ Alias map (intentional) |
-| `cross_industry_landing.py` industry pills | ✅ Fixed (removed phantom industries) |
+| `backend_service.py` MATT_DNA | Dynamic from JSONL |
+| `backend_service.py` Synthesis prompt | Dynamic from JSONL |
+| `cross_industry_landing.py` industry pills | Fixed (removed phantom industries) |
 
 ---
 
-## 📊 Analytics Integration (Paused)
+## Analytics Integration (Paused)
 
 **Story ID:** MATTGPT-011
 **Priority:** LOW (blocked on RAG stability)
@@ -222,9 +321,9 @@ All project/client counts now derived dynamically from JSONL:
 
 | Prerequisite | Status |
 |--------------|--------|
-| Eval stable at 90%+ | ~92% (56/61 passed) |
-| Double-filtering bug fixed | ✓ |
-| Core RAG architecture stable | ✓ (Q17 synthesis diversity is known gap) |
+| Eval stable at 90%+ | 98.1% (60/61 passed) |
+| Double-filtering bug fixed | Done |
+| Core RAG architecture stable | Done (Entity Gate removed, pipeline simplified) |
 
 ### Action Plan
 
@@ -297,3 +396,19 @@ All project/client counts now derived dynamically from JSONL:
 4. Test in Streamlit Cloud (local won't have secrets configured)
 
 **Note:** This is separate from `streamlit-analytics2` (GA4). Could run both - Sheets for query content, GA4 for pageviews/events.
+
+---
+
+## Cross-Browser Testing
+**Story ID:** MATTGPT-010
+**Priority:** LOW
+
+**User Story:**
+As a user on any browser, I want consistent styling and functionality.
+
+**Acceptance Criteria:**
+- [ ] Test on Chrome
+- [ ] Test on Safari
+- [ ] Test on Firefox
+- [ ] Test on Edge
+- [ ] Fix any CSS inconsistencies

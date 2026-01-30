@@ -30,7 +30,7 @@
   - [Hybrid Sovereignty Model](#hybrid-sovereignty-model)
   - [January 2026 Sovereignty Patterns](#january-2026-sovereignty-patterns)
     - [Dynamic Identity (MATT_DNA)](#1-dynamic-identity-matt_dna)
-    - [Multi-Field Entity Gate](#2-multi-field-entity-gate)
+    - [Multi-Field Entity Search](#2-multi-field-entity-search)
     - [UI Hydration](#3-ui-hydration)
   - [Master Data Source](#master-data-source)
   - [Ingestion Workflow](#ingestion-workflow)
@@ -70,7 +70,7 @@
 **Project:** MattGPT Portfolio Assistant - AI-powered career story search and chat interface
 **Tech Stack:** Streamlit, OpenAI GPT-4o, Pinecone vector DB, Python 3.11+
 **Data Corpus:** 130+ STAR-formatted transformation project stories
-**Last Updated:** January 26, 2026
+**Last Updated:** January 29, 2026
 
 ### Key Achievements
 
@@ -639,47 +639,59 @@ PINECONE_NAMESPACE=default
 
 ### Production RAG Pipeline
 
-**Query Flow:**
+**Query Flow (Updated Jan 29, 2026):**
 
 ```
 User Question: "How did Matt scale engineering teams?"
       ↓
-[Query Preprocessing - services/semantic_router.py]
-- Validate query (not nonsense)
-- Route to appropriate handler
+[Layer 1: Validation - services/semantic_router.py + utils/validation.py]
+- is_nonsense() → reject if regex match
+- Semantic router → reject if score < 0.40
+- Returns intent_family (13 families including synthesis, out_of_scope)
       ↓
-[Semantic Search - services/pinecone_service.py]
-- Embed query with text-embedding-3-small
-- Vector search in Pinecone (top 10, similarity > 0.75)
-- Apply metadata filters (Industry, Domain, Role)
-      ↓
-[Intent Classification - backend_service.py]
-- Semantic router intent_family (embedding-based, 11 families)
+[Layer 2: Fast Exit Checks - backend_service.py]
+- out_of_scope check: if intent_family == "out_of_scope" → graceful redirect
 - Entity detection → (field, value) for scoped retrieval
-- classify_query_intent() fallback for edge cases
+- Title entities use SOFT filtering (semantic search ranks naturally)
       ↓
-[Retrieval Strategy - based on intent]
+[Layer 3: Semantic Search - services/pinecone_service.py]
+- Embed query with text-embedding-3-small
+- Vector search in Pinecone (top 7, similarity > 0.15)
+- Apply entity metadata filters (Client, Employer, Division, Project, Place)
+- NOTE: Title entities do NOT filter Pinecone (soft filtering)
+      ↓
+[Layer 4: Confidence Gate - backend_service.py]
+- CONFIDENCE_HIGH (0.25) → proceed normally
+- CONFIDENCE_LOW (0.20) → proceed with warning
+- Below 0.20 → "I couldn't find relevant stories"
+      ↓
+[Layer 5: Retrieval Strategy - based on intent_family]
 - STANDARD MODE: entity pin → diversify_results() → top 7 with client variety
 - NARRATIVE MODE: sort by Pinecone score (skip diversity)
 - SYNTHESIS MODE: theme-filtered parallel search → named-clients-first (up to 9)
       ↓
-[Context Assembly - ui/pages/ask_mattgpt/backend_service.py]
+[Layer 6: Context Assembly - backend_service.py]
 - XML isolation: <primary_story> + <supporting_story> tags
 - Build prompt with STAR narratives + theme guidance
 - Include MATT_DNA ground truth (dynamic from JSONL)
       ↓
-[LLM Generation - OpenAI GPT-4o]
+[Layer 7: LLM Generation - OpenAI GPT-4o]
 - STANDARD: Primary story focus, human stakes → methodology → outcomes
 - SYNTHESIS: Theme/pattern → evidence across projects → insight
 - Temperature: 0.4 (standard) / 0.2 (synthesis)
       ↓
-[Response Formatting - ui/pages/ask_mattgpt/conversation_helpers.py]
+[Layer 8: Response Formatting - conversation_helpers.py]
 - Extract answer + sources
 - Render with citations
-- Display expandable story details
+- Display Related Projects
       ↓
 User receives cited, STAR-formatted answer
 ```
+
+**What Was Removed (Jan 29, 2026):**
+- **Entity Gate**: Was rejecting valid queries (TICARA, story titles) when no entity + low semantic score
+- **classify_query_intent() LLM**: Expensive, brittle, redundant with semantic router
+- **Title hard filtering**: Broke Related Projects UX (only 1 source returned)
 
 ---
 
@@ -689,23 +701,25 @@ User receives cited, STAR-formatted answer
 
 **Solution:** Intent-aware retrieval that changes strategy based on query type, with entity-first classification.
 
-**Intent Classification (Hybrid: Semantic Router + Entity Detection):**
+**Intent Classification (Semantic Router Only - Jan 29, 2026):**
 
-Primary classification uses the embedding-based semantic router (`services/semantic_router.py`) which maps queries to intent families without LLM cost. Entity detection runs in parallel to identify company/project mentions.
+All intent classification uses the embedding-based semantic router (`services/semantic_router.py`) which maps queries to 13 intent families without LLM cost. Entity detection runs in parallel to identify company/project/title mentions.
 
 ```
-Query → Semantic Router (embedding similarity)
-      → Entity Detection (substring matching against known entities)
+Query → Semantic Router (embedding similarity against 106+ intent embeddings)
+      → Entity Detection (substring matching against known entities + exact title match)
       → Intent Family Resolution:
-        1. ENTITY ANCHOR: Company/Project mentioned → client (overrides verbs)
-        2. BIOGRAPHICAL ANCHOR: Narrative fragments → narrative
-        3. SYNTHESIS: No entity + cross-cutting question → synthesis
-        4. BEHAVIORAL: STAR-style questions → behavioral
-        5. TECHNICAL: Technology without company → technical
-        6. BACKGROUND: Career history → background
-        7. OUT_OF_SCOPE: Industries Matt hasn't worked in → out_of_scope
-        8. GENERAL: Everything else → general
+        - background, behavioral, delivery, team_scaling, leadership
+        - technical, domain_payments, domain_healthcare, stakeholders
+        - innovation, agile_transformation, narrative, synthesis, out_of_scope
 ```
+
+**Note:** The previous `classify_query_intent()` LLM fallback was **removed** (Jan 29, 2026). It was:
+- Expensive (~$0.0001 per query)
+- Brittle (didn't recognize project names like TICARA)
+- Redundant (semantic router handles all cases)
+
+The semantic router now handles synthesis detection (`intent_family == "synthesis"`) and out_of_scope detection (`intent_family == "out_of_scope"`) directly via embedding similarity.
 
 **Key Rule:** Entity detection OVERRIDES verb patterns.
 - "How did Matt scale at Accenture?" → `client` (not synthesis)
@@ -803,36 +817,30 @@ Structured logs added to diagnose "I can't help with that" issues in production.
 - **Families:** narrative, behavioral, delivery, team_scaling, leadership, technical, etc.
 - **Cost:** Free (reuses embedding from validation step)
 
-#### LLM Intent Classifier (Fallback)
-- **Job:** Route queries to synthesis/client/narrative/behavioral/technical/background/out_of_scope/general
-- **Lives in:** `ui/pages/ask_mattgpt/backend_service.py:classify_query_intent()`
-- **Model:** gpt-4o-mini (~$0.0001 per query, only called when semantic router insufficient)
-- **Priority Hierarchy:**
-  1. **ENTITY ANCHOR** (Company/Project name) → `client`
-  2. **BIOGRAPHICAL ANCHOR** (narrative fragments) → `narrative`
-  3. **SYNTHESIS** (no entity + cross-cutting question) → `synthesis`
-  4. **BEHAVIORAL** (STAR-style questions) → `behavioral`
-  5. **TECHNICAL** (technology questions without company) → `technical`
-  6. **BACKGROUND** (career history) → `background`
-  7. **OUT_OF_SCOPE** (industries Matt hasn't worked in) → `out_of_scope`
-  8. **GENERAL** (everything else) → `general`
-- **Rule:** Entity detection OVERRIDES verb patterns ("How did Matt scale at Accenture?" → `client`, not `synthesis`)
-- **Do not add more intents** without updating this doc and the eval suite
+#### ~~LLM Intent Classifier~~ (REMOVED Jan 29, 2026)
+The `classify_query_intent()` function was **removed**. It was:
+- Expensive (~$0.0001 per query via GPT-4o-mini)
+- Brittle (didn't recognize project names like TICARA)
+- Redundant (semantic router handles synthesis, out_of_scope, and all other intents)
+
+The semantic router now handles ALL intent classification via embedding similarity.
 
 #### Entity Detection
-- **Job:** Detect company/division mentions in query for scoped retrieval
+- **Job:** Detect company/division/title mentions in query for scoped retrieval
 - **Lives in:** `ui/pages/ask_mattgpt/backend_service.py:detect_entity()`
-- **Fields checked (in order):** Client, Employer, Division
-- **Removed (Jan 2026):** Project, Place - too many generic values caused false positives (e.g., "innovation" matching Project="Innovation"). Semantic search handles these naturally.
+- **Fields checked (in order):** Client, Employer, Division, Title
+- **Hard filtering:** Client, Employer, Division → Apply Pinecone metadata filter
+- **Soft filtering:** Title → Detected but NO Pinecone filter (semantic search ranks naturally)
+- **Why soft filtering for Title:** Hard filtering returned only 1 result, breaking Related Projects UX
 - **Exclusions:** "Multiple Clients", "Independent", "Career Narrative" (too generic to filter)
 - **Returns:** `(field_name, entity_value)` tuple or `None`
 
-#### Multi-Field Entity Gate (January 2026)
+#### Multi-Field Entity Search (January 2026)
 - **Job:** Search across ALL entity fields when entity detected, not just the primary field
 - **Lives in:** `services/pinecone_service.py:189-216`
-- **Implementation:** Uses Pinecone `$or` operator to search across 5 fields simultaneously
-- **Note:** Entity DETECTION checks 3 fields (Client, Employer, Division), but once detected, Pinecone SEARCH spans all 5 fields to catch cross-references
-- **Fields searched:** `client`, `employer`, `division`, `project`, `place`
+- **Implementation:** Uses Pinecone `$or` operator to search across 6 fields simultaneously
+- **Note:** Entity DETECTION checks 4 fields (Client, Employer, Division, Title), but Title uses soft filtering. Pinecone SEARCH spans 6 fields for hard-filtered entities.
+- **Fields searched:** `client`, `employer`, `division`, `project`, `place`, `title`
 - **Casing rules:**
   - **Lowercase fields:** `division`, `employer`, `project`, `place` → `.lower()` applied
   - **PascalCase fields:** `client` → preserve original casing
@@ -1078,33 +1086,38 @@ def _log_bandaid(bandaid_name: str, details: str):
 - Logged to DEBUG output when `DEBUG=True`
 - Helps identify which post-processing rules are actually needed vs. cruft
 
-### Data Flow Diagram
+### Data Flow Diagram (Updated Jan 29, 2026)
 
 ```
 User Query
     ↓
 [Layer 1: Validation]
     ├── is_nonsense() → reject if regex match
-    └── semantic_router() → reject if score < 0.40 (also provides intent_family)
+    └── semantic_router() → reject if score < 0.40 (returns intent_family)
     ↓
-[Layer 2: Classification]
-    ├── intent_family from semantic router (primary)
+[Layer 2: Fast Exit + Entity Detection]
+    ├── out_of_scope check: intent_family == "out_of_scope" → redirect
     ├── detect_entity() → (field, value) or None
-    └── classify_query_intent() fallback if needed
+    └── Title entities: soft filter (no Pinecone metadata)
     ↓
 [Layer 3: Retrieval]
     ├── Standard Mode: entity pin → diversify_results() (named clients first)
     ├── Narrative Mode: sort by Pinecone score (skip diversity)
     └── Synthesis Mode: get_synthesis_stories() → named-clients-first
     ↓
-[Layer 4: Context Assembly]
+[Layer 4: Confidence Gate]
+    └── HIGH/LOW/NONE based on Pinecone scores
+    ↓
+[Layer 5: Context Assembly]
     └── XML isolation: <primary_story> + <supporting_story> tags
     ↓
-[Layer 5: Generation]
+[Layer 6: Generation]
     └── GPT-4o → Agy-voiced markdown (fact-pairing + texture rules)
     ↓
 User Response
 ```
+
+**Removed (Jan 29, 2026):** `classify_query_intent()` LLM fallback — semantic router handles all cases.
 
 ### Cross-Page Navigation into Ask MattGPT
 
@@ -1710,26 +1723,31 @@ META_PATTERNS = [
 
 ---
 
-### Error Handling Patterns
+### Error Handling Patterns (Updated Jan 29, 2026)
 
 **Layer 1 (Validation):**
 - `is_nonsense()` → Returns rejection message with category
 - `semantic_router()` → Returns `(False, score)` if below threshold; fails-open on errors
 
-**Layer 2 (Classification):**
-- `classify_query_intent()` → Falls back to `"general"` on LLM error
-- `detect_entity()` → Returns `None` if no entity found
+**Layer 2 (Fast Exit + Entity Detection):**
+- `out_of_scope` check → Returns graceful redirect if `intent_family == "out_of_scope"`
+- `detect_entity()` → Returns `None` if no entity found; Title entities use soft filtering
 
 **Layer 3 (Retrieval):**
 - `semantic_search()` → Returns empty results on Pinecone error
 - `get_synthesis_stories()` → Returns empty list on error
 
-**Layer 4 (Generation):**
+**Layer 4 (Confidence Gate):**
+- `confidence == "none"` → Returns "I couldn't find relevant stories" message
+
+**Layer 5 (Generation):**
 - `_generate_agy_response()` → Raises `RateLimitError` on 429, returns fallback on other errors
 - `rag_answer()` → Catches `RateLimitError`, returns empty sources with:
   ```
   "🐾 I need a quick breather — try again in about 15 seconds!"
   ```
+
+**Removed (Jan 29, 2026):** `classify_query_intent()` error handling — function deleted.
 
 **UI Error Handling:**
 - `send_to_backend()` wraps all errors in try/except
@@ -2026,9 +2044,9 @@ The `MATT_DNA` grounding prompt—injected into every LLM call—is now rendered
 
 **Why:** Previously hardcoded "JPMorgan" drifted from JSONL canonical name "JP Morgan Chase". Dynamic derivation ensures the LLM never hallucinates client names that don't exist in the data.
 
-#### 2. Multi-Field Entity Gate
+#### 2. Multi-Field Entity Search
 
-When a user asks about an entity (e.g., "Accenture work"), the system now searches across **five metadata fields** using Pinecone's `$or` operator—not just the `client` field.
+When a user asks about an entity (e.g., "Accenture work"), the system now searches across **six metadata fields** using Pinecone's `$or` operator—not just the `client` field.
 
 | Field | Casing | Example Match |
 |-------|--------|---------------|
@@ -2037,8 +2055,11 @@ When a user asks about an entity (e.g., "Accenture work"), the system now search
 | `division` | lowercase | `"cloud innovation center"` |
 | `project` | lowercase | `"accenture"` |
 | `place` | lowercase | `"accenture"` |
+| `title` | PascalCase | `"Driving Cloud-Native Innovation..."` |
 
 **Implementation:** `pinecone_service.py:189-216`
+
+**Note (Jan 29, 2026):** Title entities use **soft filtering** — they're detected but don't create a Pinecone metadata filter. This ensures Related Projects populate naturally via semantic search.
 
 **Why:** Closed the "entity blind spot" where stories with `Client="Confidential Healthcare Provider"` but `Employer="Accenture"` weren't found for Accenture queries. The CIC stories were particularly affected since many had `Division="Cloud Innovation Center"` but generic client names.
 
@@ -2058,7 +2079,7 @@ Landing pages now receive the full `stories` list and compute counts dynamically
 
 **See also:**
 - [MATT_DNA Ground Truth](#matt_dna-ground-truth-dynamically-generated-from-jsonl--january-2026) — Full prompt template
-- [Multi-Field Entity Gate](#multi-field-entity-gate-january-2026) — Component contract details
+- [Multi-Field Entity Search](#2-multi-field-entity-search) — Component contract details
 - [UI Hydration Pattern](#ui-hydration-pattern-january-2026) — Code examples
 
 ### Master Data Source
@@ -2414,76 +2435,83 @@ Comprehensive audit of the RAG (Retrieval-Augmented Generation) pipeline coverin
 
 ### Data Flow Map
 
-**Query → Response Trace:**
+**Query → Response Trace (Updated Jan 29, 2026):**
 
 ```
 User Query
     ↓
 ┌─────────────────────────────────────────────────┐
-│ Gate 1: Rules-Based Rejection (Free)            │
+│ Layer 1: Rules-Based Rejection (Free)           │
 │ - nonsense_filters.jsonl patterns               │
 │ - is_nonsense() regex validation                │
 └─────────────────────────────────────────────────┘
     ↓ (passed)
 ┌─────────────────────────────────────────────────┐
-│ Gate 2: Semantic Router (Cheap)                 │
+│ Layer 2: Semantic Router (Cheap)                │
 │ - Embed query with text-embedding-3-small       │
-│ - Compare against 11 intent-family centroids    │
-│ - HARD_ACCEPT=0.80, SOFT_ACCEPT=0.72            │
+│ - Compare against 106+ intent embeddings        │
+│ - 13 families including synthesis, out_of_scope │
+│ - HARD_ACCEPT=0.80, SOFT_ACCEPT=0.40            │
 └─────────────────────────────────────────────────┘
-    ↓ (accepted)
+    ↓ (accepted, returns intent_family)
 ┌─────────────────────────────────────────────────┐
-│ Gate 3: Entity Gate                             │
-│ - detect_entity() substring matching            │
-│ - Multi-field normalization (client aliases)    │
-│ - Returns (field, value) or None                │
-└─────────────────────────────────────────────────┘
-    ↓
-┌─────────────────────────────────────────────────┐
-│ Intent Classification                           │
-│ - Semantic router intent_family (primary)       │
-│ - LLM classifier fallback (rare)                │
-│ - Priority: entity > narrative > synthesis      │
+│ Layer 3: Fast Exit Checks                       │
+│ - out_of_scope: intent_family check → redirect  │
+│ - detect_entity(): Client, Employer, Div, Title │
+│ - Title = SOFT filter (no Pinecone metadata)    │
 └─────────────────────────────────────────────────┘
     ↓
 ┌─────────────────────────────────────────────────┐
-│ Pinecone Vector Search                          │
+│ Layer 4: Pinecone Vector Search                 │
 │ - Query embedding → vector search               │
-│ - Entity filter (Pinecone $or across 5 fields)  │
+│ - Entity filter ($or across 6 fields) if hard   │
+│ - Title: NO filter (semantic search ranks it)   │
 │ - UI filters (industry, domain, role)           │
-│ - Returns top 100 candidates                    │
+│ - Returns top 7 candidates                      │
 └─────────────────────────────────────────────────┘
     ↓
 ┌─────────────────────────────────────────────────┐
-│ Post-Retrieval Processing (Mode-Dependent)      │
+│ Layer 5: Confidence Gate                        │
+│ - HIGH (≥0.25): proceed normally                │
+│ - LOW (≥0.20): proceed with warning             │
+│ - NONE (<0.20): "I couldn't find..."            │
+└─────────────────────────────────────────────────┘
+    ↓
+┌─────────────────────────────────────────────────┐
+│ Layer 6: Post-Retrieval Processing              │
 │ STANDARD: entity_pin → diversify_results() → 7 │
 │ NARRATIVE: sort by score (skip diversity) → 7   │
 │ SYNTHESIS: theme-filter → named-clients-first   │
 └─────────────────────────────────────────────────┘
     ↓
 ┌─────────────────────────────────────────────────┐
-│ Context Assembly                                │
+│ Layer 7: Context Assembly                       │
 │ - XML isolation: <primary_story> tags           │
 │ - MATT_DNA ground truth injection               │
 │ - Mode-specific prompt selection                │
 └─────────────────────────────────────────────────┘
     ↓
 ┌─────────────────────────────────────────────────┐
-│ LLM Generation (OpenAI GPT-4o)                  │
+│ Layer 8: LLM Generation (OpenAI GPT-4o)         │
 │ - Temperature: 0.4 (standard) / 0.2 (synthesis) │
 │ - Max tokens: 700                               │
 │ - Fact-pairing + texture rules                  │
 └─────────────────────────────────────────────────┘
     ↓
 ┌─────────────────────────────────────────────────┐
-│ Response Formatting                             │
+│ Layer 9: Response Formatting                    │
 │ - Extract answer + sources                      │
+│ - Related Projects display                      │
 │ - Meta-commentary cleanup                       │
-│ - Banned phrase removal                         │
 └─────────────────────────────────────────────────┘
     ↓
 User Response
 ```
+
+**What Was Removed (Jan 29, 2026):**
+- ~~Gate 3: Entity Gate~~ — Rejected valid queries like TICARA
+- ~~LLM classifier fallback~~ — classify_query_intent() was expensive and brittle
+- ~~Title hard filtering~~ — Broke Related Projects (1 result instead of 7)
 
 ### Embedding Analysis
 

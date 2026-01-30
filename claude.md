@@ -201,6 +201,30 @@
 
   **If you need a list:** Create ONE source of truth in `utils/` or `constants/`, import everywhere.
 
+  ## No Hardcoded Story Titles in Tests
+
+  **NEVER hardcode specific story titles in eval tests or test fixtures.**
+
+  Story titles change frequently during data cleanup. Hardcoded titles cause brittle tests.
+
+  ❌ BAD:
+  ```python
+  {
+      "query": "Tell me more about: Implementing Responsible AI Governance...",
+      "expected_title": "Implementing Responsible AI Governance...",
+  }
+  ```
+
+  ✅ GOOD:
+  ```python
+  {
+      "story_index": 0,  # Dynamically select by index
+      # Query and expected_title built at runtime from stories[story_index]
+  }
+  ```
+
+  **Why:** Story titles are edited regularly. Index-based selection is stable. If you need specific story characteristics, filter by Client, Domain, or Era instead of hardcoding titles.
+
   ## Nonsense Filter Rules (Learned the Hard Way)
 
   The `nonsense_filters.jsonl` file contains regex patterns to block off-topic queries. **Be extremely careful with word choices.**
@@ -308,21 +332,38 @@
   # Below 0.15 = "No strong matches"
   ```
 
-  ## Sovereign Narrative Update (Jan 2026)
+  ## RAG Pipeline Cleanup (Jan 29, 2026)
 
-  Major RAG pipeline changes to improve handling of Professional Narrative (identity/philosophy) queries. Eval improved from 51.6% to 71.0%.
+  Major simplification removing redundant gates. Eval: 98.1% (51/52).
 
-  ### Key Changes
+  ### What Was Removed
 
-  | Change | File | Purpose |
-  |--------|------|---------|
-  | Entity Gate Threshold | backend_service.py | Lowered from 0.55 to 0.50 to allow narrative queries |
-  | Narrative Intent Family | semantic_router.py | Added 22 intents for Professional Narrative recognition |
-  | Context Exclusions | backend_service.py | "after Accenture" doesn't filter TO Accenture stories |
-  | Verbatim Phrase Injection | backend_service.py | Forces LLM to use "builder", "modernizer" verbatim |
-  | Banned Phrase Cleanup | backend_service.py | Post-processing removes corporate filler phrases |
-  | Narrative Mode Ranking | backend_service.py | Keeps boosted narrative story at #1 in results |
-  | Dynamic Boost Fragments | rag_service.py | Derives title fragments from story data |
+  | Component | Why Removed |
+  |-----------|-------------|
+  | **Entity Gate** (bouncer) | Rejected valid queries like TICARA when no entity detected + low semantic score |
+  | **classify_query_intent** LLM | Expensive ($0.0001/query), brittle (didn't recognize story titles), redundant |
+  | **Title hard filtering** | Filtered to 1 result, breaking Related Projects UX |
+
+  ### Current Pipeline (Lean)
+  ```
+  Query → Nonsense Filters → Semantic Router → out_of_scope check → Pinecone → Confidence Gate → LLM
+  ```
+
+  ### What Semantic Router Now Handles
+  - **Intent families** (13): background, behavioral, delivery, team_scaling, leadership, technical, domain_payments, domain_healthcare, stakeholders, innovation, agile_transformation, narrative, synthesis, out_of_scope
+  - **Synthesis detection**: `intent_family == "synthesis"` (no LLM call)
+  - **Out of scope detection**: `intent_family == "out_of_scope"` → graceful redirect before Pinecone
+  - **Title detection**: Detected but uses SOFT filtering (semantic search ranks naturally, no Pinecone filter)
+
+  ### Entity Detection (Still Active)
+  - Detects: Client, Employer, Division, Title
+  - Hard filters: Client, Employer, Division, Project, Place (applies Pinecone metadata filter)
+  - Soft filters: Title (detected for analytics/pinning, but semantic search handles ranking)
+
+  ### Context Exclusion Prefixes
+  These words before an entity name prevent entity filtering:
+  - "after", "leaving", "before", "transition from", "left"
+  - Example: "career transition after Accenture" → broad search, not Accenture filter
 
   ### Verbatim Phrases (Sacred Vocabulary)
   When responding to Professional Narrative queries, the LLM must use these exact phrases:
@@ -330,18 +371,6 @@
   - "complexity to clarity"
   - "build something from nothing"
   - "not looking for a maintenance role"
-
-  ### Context Exclusion Prefixes
-  These words before an entity name prevent entity filtering:
-  - "after", "leaving", "before", "transition from", "left"
-  - Example: "career transition after Accenture" → broad search, not Accenture filter
-
-  ### Banned Phrases (Auto-Removed)
-  - "meaningful outcomes"
-  - "foster collaboration"
-  - "strategic mindset"
-  - "stakeholder alignment"
-  - "bridge the gap"
 
   ### Common Fixes
   - **Widget won't reset:** Increment version key, delete old widget keys

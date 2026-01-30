@@ -365,7 +365,7 @@ def get_how_agy_flow_html() -> str:
                     <div class="pipeline-flow">
                         <div class="pipeline-stage rules">⚡ Quality Filter</div>
                         <span class="pipeline-arrow">→</span>
-                        <div class="pipeline-stage router">🎯 Intent Router</div>
+                        <div class="pipeline-stage router">🎯 Semantic Router</div>
                         <span class="pipeline-arrow">→</span>
                         <div class="pipeline-stage confidence">📊 Confidence Gate</div>
                     </div>
@@ -731,7 +731,7 @@ def get_technical_details_html() -> str:
                         </div>
                         <ul>
                             <li><strong>Stage 1:</strong> Fast rules-based nonsense detection</li>
-                            <li><strong>Stage 2:</strong> Semantic router intent classification</li>
+                            <li><strong>Stage 2:</strong> Semantic router (intent + out-of-scope detection)</li>
                             <li><strong>Stage 3:</strong> Confidence scoring & gating</li>
                         </ul>
                     </div>
@@ -746,7 +746,7 @@ def get_technical_details_html() -> str:
                         </div>
                         <ul>
                             <li><strong>Best semantic match</strong> always surfaces first</li>
-                            <li>Adapts ranking to question type</li>
+                            <li>Context-aware: requested story + related projects</li>
                             <li>Client variety for broad queries</li>
                         </ul>
                     </div>
