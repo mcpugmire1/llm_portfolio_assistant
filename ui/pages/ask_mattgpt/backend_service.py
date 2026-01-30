@@ -18,6 +18,7 @@ from config.constants import (
     ENTITY_DETECTION_FIELDS,
     EXCLUDED_DIVISION_VALUES,
     META_COMMENTARY_REGEX_PATTERNS,
+    SEARCH_TOP_K,
 )
 from config.debug import DEBUG
 from services.pinecone_service import (
@@ -47,8 +48,7 @@ from .story_intelligence import (
     infer_story_theme,
 )
 
-# Constants
-SEARCH_TOP_K = 7
+# SEARCH_TOP_K imported from config.constants
 
 # Clients to exclude from dynamic client list (not real named clients)
 # Known clients - derived dynamically from story data at startup

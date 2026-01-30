@@ -2,12 +2,9 @@
 
 import streamlit as st
 
-from config.constants import CONFIDENCE_HIGH, CONFIDENCE_LOW
+from config.constants import CONFIDENCE_HIGH, CONFIDENCE_LOW, SEARCH_TOP_K
 from config.debug import DEBUG
-from services.pinecone_service import (
-    SEARCH_TOP_K,
-    pinecone_semantic_search,
-)
+from services.pinecone_service import pinecone_semantic_search
 from utils.formatting import build_5p_summary
 from utils.validation import _tokenize
 

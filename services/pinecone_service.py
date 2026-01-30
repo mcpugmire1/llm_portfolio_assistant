@@ -12,6 +12,7 @@ from config.constants import (
     ENTITY_SEARCH_FIELDS,
     PINECONE_LOWERCASE_FIELDS,
     PINECONE_MIN_SIM,
+    SEARCH_TOP_K,
 )
 from config.debug import DEBUG
 from config.settings import get_conf
@@ -96,8 +97,7 @@ DATA_FILE = os.getenv("STORIES_JSONL", "echo_star_stories_nlp.jsonl")
 W_PC = 1.0
 W_KW = 0.0
 
-# Retrieval pool size
-SEARCH_TOP_K = 100
+# SEARCH_TOP_K imported from config.constants
 
 
 # =========================

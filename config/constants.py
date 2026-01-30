@@ -52,6 +52,7 @@ CONFIDENCE_LOW = 0.20  # Raised from 0.15 to filter phantom similarity noise
 # =============================================================================
 
 PINECONE_MIN_SIM = 0.15  # Minimum similarity for Pinecone results
+SEARCH_TOP_K = 10  # Stories to fetch from Pinecone (headroom for reranking/filtering)
 
 # =============================================================================
 # ENTITY GATE THRESHOLD
