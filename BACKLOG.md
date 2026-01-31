@@ -188,10 +188,10 @@
 **Issue:** Returning to Explore Stories from another tab shows previously selected story
 **Status:** Open - low priority, doesn't break core functionality
 
-### 24. 6 Sources on Surgical Queries
+### 24. 6 Sources on Surgical Queries ✅ FIXED
 **Priority:** MEDIUM
 **Issue:** "Ask Agy About This" returns 6 sources, should be 3 for surgical/tree search
-**Status:** Open - separate from state management bugs
+**Resolution (Jan 31, 2026):** Added query_intent check in conversation_helpers.py - synthesis gets 6 sources (forest), surgical gets 3 (tree)
 
 ### 25. BDD/E2E Tests for Explore Stories State Machine
 **Priority:** HIGH (Tech Debt)
