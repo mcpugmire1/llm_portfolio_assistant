@@ -28,7 +28,8 @@ from utils.ui_helpers import (
 # ============================================================================
 SOURCES_LABEL = "SOURCES"
 SOURCES_COLS_PER_ROW = 3
-SOURCES_MAX_DISPLAY = 6
+SOURCES_MAX_SYNTHESIS = 6  # Broad queries: show more sources (forest view)
+SOURCES_MAX_SURGICAL = 3  # Targeted queries: show fewer sources (tree view)
 
 # ============================================================================
 # STATE MANAGEMENT
@@ -577,8 +578,15 @@ def _render_ask_transcript(stories: list[dict]):
                         unsafe_allow_html=True,
                     )
 
-                    # Dynamic grid: 1-3 sources → 1 row, 4-6 → 2 rows
-                    display_sources = sources[:SOURCES_MAX_DISPLAY]
+                    # Dynamic grid based on query type:
+                    # - Synthesis (broad themes): 6 sources (forest view)
+                    # - Surgical (specific story): 3 sources (tree view)
+                    msg_query_intent = m.get("query_intent")
+                    is_synthesis = msg_query_intent == "synthesis"
+                    max_sources = (
+                        SOURCES_MAX_SYNTHESIS if is_synthesis else SOURCES_MAX_SURGICAL
+                    )
+                    display_sources = sources[:max_sources]
                     rows_needed = math.ceil(len(display_sources) / SOURCES_COLS_PER_ROW)
 
                     with st.container(key=f"sources_grid_{i}_{msg_hash}"):
