@@ -13,6 +13,11 @@ types-python-dotenv
 # Pre-commit hooks
 pre-commit==4.0.1
 
-# Testing (optional - for future)
+# Testing
 pytest>=8.0.0
 pytest-cov>=4.1.0
+pytest-bdd>=7.0.0
+
+# E2E/BDD testing with Playwright
+# After pip install, run: playwright install chromium
+playwright>=1.40.0
