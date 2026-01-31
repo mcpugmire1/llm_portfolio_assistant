@@ -71,6 +71,16 @@ def norm_key(title: str, client: str) -> str:
     return f"{normalize(title).lower()}|{normalize(client).lower()}"
 
 
+def strip_markdown_bold(text: str) -> str:
+    """Strip ** markdown bold markers from text.
+
+    Excel may contain **bold** markers for human readability,
+    but these cause malformed markdown when LLM re-wraps them.
+    Clean during export so LLM never sees them.
+    """
+    return text.replace("**", "") if text else text
+
+
 def split_bullets(value: str):
     """Split multi-line bullet fields, removing Excel apostrophe prefix but preserving indentation."""
     if not value:
@@ -88,6 +98,9 @@ def split_bullets(value: str):
         # Remove leading apostrophe (but keep any spaces after it)
         if line.startswith("'"):
             line = line[1:]
+
+        # Strip markdown bold markers (Excel may have **bold** for readability)
+        line = strip_markdown_bold(line)
 
         parts.append(line)
 
