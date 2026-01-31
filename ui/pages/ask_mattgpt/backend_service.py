@@ -963,7 +963,7 @@ def _generate_agy_response(
         number_patterns = [
             r'(?<!\*\*)(\$[\d,.]+[MBK]?)(?!\*\*)',  # $50M, $300K, $1.2B
             r'(?<!\*\*)(\d+%\+?)(?!\*\*)',  # 30%, 40%+
-            r'(?<!\*\*)(\d+[xX]\s)(?!\*\*)',  # 4x, 10X (with space after)
+            r'(?<!\*\*)(\d+[xX])(?=\s)(?!\*\*)',  # 4x, 10X (lookahead for space, don't capture it)
             r'(?<!\*\*)(\d+\+?\s*(?:engineers?|teams?|members?|practitioners?|countries|regions?|clients?|projects?|months?|weeks?|days?|hours?))(?!\*\*)',  # 150+ engineers, 12 countries
             r'(?<!\*\*)(\d+[.,]?\d*\s*(?:reduction|increase|improvement|faster|slower))(?!\*\*)',  # 30% reduction
         ]

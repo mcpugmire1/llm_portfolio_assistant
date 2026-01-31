@@ -274,7 +274,12 @@ def _clear_explore_state():
         "capability": "",
     }
     st.session_state["page_offset"] = 0
+    # Clear ALL active story state (not just active_story)
+    # get_active_story() checks active_story_obj first, so must clear all
     st.session_state["active_story"] = None
+    st.session_state.pop("active_story_obj", None)
+    st.session_state.pop("active_story_title", None)
+    st.session_state.pop("active_story_client", None)
     # Clear cached search results
     st.session_state.pop("__last_search_results__", None)
     st.session_state.pop("__last_search_confidence__", None)
