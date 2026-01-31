@@ -229,6 +229,16 @@
 **Issue:** Limited test coverage for semantic router error handling paths
 **Fix:** Add tests for connection errors, timeout, malformed responses
 
+### 36. LLM Response Broken Markdown
+**Priority:** LOW
+**Issue:** LLM outputs `**4X **` instead of `**4X**` - space before closing asterisks breaks bold rendering
+**Fix:** Post-process regex: `r'\*\*([^*]+)\s+\*\*'` → `**\1**`
+
+### 37. Ask Agy Button Shifts on Focus
+**Priority:** LOW
+**Issue:** Ask Agy button shifts position when focused
+**Fix:** CSS fix for button focus state
+
 ### 30. Fix "Builder/Modernizer" Verbatim Quoting (Data Fix)
 **Priority:** MEDIUM
 **Issue:** Agy quotes "I'm a builder, a modernizer..." verbatim in synthesis responses
