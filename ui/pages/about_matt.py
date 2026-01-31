@@ -838,9 +838,9 @@ def render_about_matt():
              alt="Matt Pugmire">
         <div class="about-header-text">
             <h1>Matt Pugmire</h1>
-            <p style="font-size: 17px; margin-bottom: 12px;">Platform & AI Innovation Leader</p>
+            <p style="font-size: 17px; margin-bottom: 12px;">Technology & Transformation Leader | Platform Engineering | Digital Product Development | AI & Cloud</p>
             <p style="font-size: 14px; opacity: 0.9; line-height: 1.6; max-width: 800px;">
-                I build what’s next, modernize what’s not, and grow teams along the way.
+                I build new capabilities — products, platforms, and teams — using modern engineering, cloud, and AI.
             </p>
         </div>
     </div>
