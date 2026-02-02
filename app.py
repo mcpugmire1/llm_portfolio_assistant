@@ -284,6 +284,21 @@ def _clear_explore_state():
     st.session_state.pop("__last_search_results__", None)
     st.session_state.pop("__last_search_confidence__", None)
     st.session_state.pop("__last_search_query__", None)
+    # Increment widget versions to force Streamlit to reset widget values
+    # Without this, widgets keep their old values by key even when F["q"] is cleared
+    for widget_type in [
+        "q",
+        "industry",
+        "capability",
+        "era",
+        "personas",
+        "clients",
+        "domains",
+        "roles",
+        "tags",
+    ]:
+        version_key = f"_widget_version_{widget_type}"
+        st.session_state[version_key] = st.session_state.get(version_key, 0) + 1
 
 
 def build_facets(stories):

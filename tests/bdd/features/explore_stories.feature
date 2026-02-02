@@ -29,7 +29,7 @@ Feature: Explore Stories
   Scenario: Empty search results show helpful message
     When the user types "xyznonexistent123" in the search box
     And the user presses Enter
-    Then the page should show "No stories found"
+    Then the page should show "No stories match your filters yet."
     And no error should be displayed
 
   Scenario: Clearing search restores full list
@@ -43,24 +43,24 @@ Feature: Explore Stories
   # =============================================================================
 
   Scenario: Industry filter narrows results
-    When the user selects "Banking" from the Industry filter
-    Then all displayed stories should have Industry "Banking"
-    And the active filters should show "Banking"
+    When the user selects "Financial Services / Banking" from the Industry filter
+    Then all displayed stories should have Industry "Financial Services / Banking"
+    And the active filters should show "Financial Services / Banking"
 
   Scenario: Capability filter narrows results
-    When the user selects "Platform Engineering" from the Capability filter
-    Then all displayed stories should have Capability "Platform Engineering"
-    And the active filters should show "Platform Engineering"
+    When the user selects "Application Modernization" from the Capability filter
+    Then all displayed stories should have Capability "Application Modernization"
+    And the active filters should show "Application Modernization"
 
   Scenario: Combined Industry and Capability filters
-    When the user selects "Banking" from the Industry filter
-    And the user selects "Platform Engineering" from the Capability filter
+    When the user selects "Financial Services / Banking" from the Industry filter
+    And the user selects "Application Modernization" from the Capability filter
     Then all displayed stories should match both filters
-    And the active filters should show "Banking" and "Platform Engineering"
+    And the active filters should show "Financial Services / Banking" and "Platform Engineering"
 
   Scenario: Filter chip removal restores results
-    Given the user has selected "Banking" from the Industry filter
-    When the user clicks the "Banking" filter chip to remove it
+    Given the user has selected "Financial Services / Banking" from the Industry filter
+    When the user clicks the "Financial Services / Banking" filter chip to remove it
     Then the Industry filter should be cleared
     And more stories should be displayed
 
@@ -84,8 +84,8 @@ Feature: Explore Stories
 
   Scenario: Era filter from Timeline view
     When the user switches to Timeline view
-    And the user clicks "View in Explore" for "Banking & Capital Markets (2008-2013)"
-    Then the Era filter should be set to "Banking & Capital Markets (2008-2013)"
+    And the user clicks "View in Explore" for "Financial Services Platform Modernization"
+    Then the Era filter should be set to "Financial Services Platform Modernization"
     And results should be filtered to that era
 
   # =============================================================================
@@ -93,7 +93,7 @@ Feature: Explore Stories
   # =============================================================================
 
   Scenario: Reset clears all filters
-    Given the user has selected "Banking" from the Industry filter
+    Given the user has selected "Financial Services / Banking" from the Industry filter
     And the user has searched for "payments"
     When the user clicks the Reset button
     Then all filters should be cleared
@@ -102,7 +102,7 @@ Feature: Explore Stories
 
   Scenario: Reset preserves view mode
     Given the user is in Cards view
-    And the user has selected "Banking" from the Industry filter
+    And the user has selected "Financial Services / Banking" from the Industry filter
     When the user clicks the Reset button
     Then the view should still be Cards view
 
@@ -133,10 +133,10 @@ Feature: Explore Stories
     And results should still be filtered
 
   Scenario: View switching preserves filters
-    Given the user has selected "Banking" from the Industry filter
+    Given the user has selected "Financial Services / Banking" from the Industry filter
     And the user is in Table view
     When the user switches to Cards view
-    Then the Industry filter should still be "Banking"
+    Then the Industry filter should still be "Financial Services / Banking"
 
   Scenario: View switching preserves open story detail
     Given the user is in Cards view
@@ -246,7 +246,7 @@ Feature: Explore Stories
 
   Scenario: Pagination resets on filter change
     Given the user is on page 2
-    When the user selects "Banking" from the Industry filter
+    When the user selects "Financial Services / Banking" from the Industry filter
     Then the page should reset to 1
 
   # =============================================================================
@@ -267,7 +267,7 @@ Feature: Explore Stories
 
   Scenario: Return from Ask MattGPT starts fresh
     Given the user has searched for "payments"
-    And the user has selected "Banking" from the Industry filter
+    And the user has selected "Financial Services / Banking" from the Industry filter
     And the user has opened a story detail
     When the user clicks "Ask Agy About This"
     And the user navigates back to Explore Stories
