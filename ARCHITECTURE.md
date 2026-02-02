@@ -2220,29 +2220,96 @@ st.markdown('<div data-component="navbar">', unsafe_allow_html=True)
 
 ---
 
-## Testing Strategy (Future)
+## Testing Strategy
+
+### BDD/E2E Tests (Explore Stories)
+
+**Location:** `tests/bdd/`
+**Framework:** pytest-bdd + Playwright
+**Runtime:** ~25 minutes (browser session reuse)
+
+```bash
+# Run all BDD tests
+pytest tests/bdd -v
+
+# Run specific scenario
+pytest tests/bdd -k "search_returns_relevant" -v
+```
+
+**Coverage (46 scenarios):**
+| Category | Scenarios | Status |
+|----------|-----------|--------|
+| Search flow | 4 | ✅ All passing |
+| Filter combinations | 7 | ✅ All passing |
+| View switching | 6 | ✅ All passing |
+| Story detail/STAR | 4 | ✅ All passing |
+| Ask Agy navigation | 4 | ✅ All passing |
+| Deeplinks | 4 | ⏭️ Skipped (pending app fixes) |
+| Pagination | 5 | ✅ All passing |
+| Navigation/Reset | 6 | ✅ All passing |
+| Responsive layout | 3 | ✅ All passing |
+| Edge cases | 3 | ✅ All passing |
+
+**Key Test Patterns:**
+```python
+# Browser session reuse with context isolation
+@pytest.fixture(scope="session")
+def shared_browser():
+    """Reuse browser across all tests for speed."""
+    playwright = sync_playwright().start()
+    browser = playwright.chromium.launch(headless=True)
+    yield browser
+    browser.close()
+
+@pytest.fixture
+def browser_page(shared_browser):
+    """Fresh context per test for isolation."""
+    context = shared_browser.new_context(
+        viewport={"width": 1280, "height": 900},
+        permissions=["clipboard-read", "clipboard-write"]
+    )
+    page = context.new_page()
+    yield page
+    context.close()
+
+# Streamlit-specific waits
+def wait_for_streamlit_rerun(page):
+    page.wait_for_load_state("networkidle")
+    page.wait_for_timeout(200)  # Allow state sync
+```
+
+### RAG Eval Tests
+
+**Location:** `tests/eval/`
+**Framework:** pytest + OpenAI embeddings
+**Runtime:** ~2-3 minutes
+
+```bash
+# Run eval suite
+pytest tests/eval/test_eval_rag_quality.py -v
+```
+
+**Coverage:** 61 golden queries testing:
+- Entity detection (clients, projects, roles)
+- Semantic search relevance
+- Response quality (no hallucinations)
+- Intent classification
+
+**Current Score:** 98.1% (60/61 passing)
 
 ### Unit Tests
-```python
-def test_navbar_renders_correct_tab():
-    render_navbar("Home")
-    # Assert Home button is disabled
+
+**Location:** `tests/unit/`
+**Framework:** pytest
+
+```bash
+pytest tests/unit -v
 ```
 
-### Integration Tests
-```python
-def test_page_navigation():
-    # Click Banking card
-    # Assert Banking page loads
-    # Assert navbar shows "Home" active
-```
-
-### CSS Regression Tests
-```python
-def test_navbar_doesnt_affect_filters():
-    # Render Explore Stories
-    # Assert filter section has correct background
-```
+**Coverage:**
+- `test_structural_assertions.py` - Threshold boundary tests
+- `test_filters.py` - Filter logic
+- `test_formatting.py` - STAR story formatting
 
 ---
 

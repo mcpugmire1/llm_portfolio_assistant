@@ -183,31 +183,40 @@
 **Root cause:** Aggressive state clearing from #21 initial fix was clearing `active_story` needed for navigation
 **Resolution (Jan 30, 2026):** Surgical fix in #21 preserves `active_story` for "Ask Agy About This" flow
 
-### 23. Stale Story on Return to Explore Stories
+### 23. Stale Story on Return to Explore Stories ✅ FIXED
 **Priority:** LOW
 **Issue:** Returning to Explore Stories from another tab shows previously selected story
-**Status:** Open - low priority, doesn't break core functionality
+**Resolution (Feb 1, 2026):**
+- Root cause: `_clear_explore_state()` in app.py reset filter values but didn't increment widget versions
+- Streamlit widgets keep values by key - even when `F["q"]=""`, widget `facet_q_v0` retained old value
+- Fix: Added widget version incrementing to `_clear_explore_state()` for all filter widgets
+- Now `facet_q_v0` → `facet_q_v1` forces fresh widget with cleared value
 
 ### 24. 6 Sources on Surgical Queries ✅ FIXED
 **Priority:** MEDIUM
 **Issue:** "Ask Agy About This" returns 6 sources, should be 3 for surgical/tree search
 **Resolution (Jan 31, 2026):** Added query_intent check in conversation_helpers.py - synthesis gets 6 sources (forest), surgical gets 3 (tree)
 
-### 25. BDD/E2E Tests for Explore Stories State Machine
+### 25. BDD/E2E Tests for Explore Stories State Machine ✅ DONE
 **Priority:** HIGH (Tech Debt)
 **Issue:** No automated tests for Explore Stories interactive state
-**Effort:** 3-4 hours
-**Coverage needed:**
-- Search flow (clears stale state, opens correct detail, empty results)
-- "Ask Agy About This" flow (Table, Cards views)
-- Deeplink flow (valid/invalid story IDs)
-- View switching (preserves detail, query, filters)
-- Navigation return
-- Filter combinations (Industry, Capability, Advanced)
-- Pagination
-- Reset behavior
-**Widgets:** Find stories, Industry, Capability, Advanced Filters, Client/Role/Domain multiselects, Reset, Page size, View toggle, Pagination
-**Recommendation:** Playwright for Streamlit widget interaction
+**Resolution (Feb 1, 2026):**
+- Implemented 46 BDD scenarios using pytest-bdd + Playwright
+- Browser session reuse with context isolation for faster tests (~25 min vs ~29 min)
+- Coverage includes all major flows:
+  - Search flow (clears stale state, opens correct detail, empty results)
+  - "Ask Agy About This" flow (Table, Cards views)
+  - Deeplink flow (valid/invalid story IDs) - 6 skipped pending app deeplink fixes
+  - View switching (preserves detail, query, filters)
+  - Navigation return (fresh start behavior)
+  - Filter combinations (Industry, Capability, Advanced)
+  - Pagination (page count, next page, page size selector)
+  - Reset behavior
+  - Responsive layout (mobile, tablet, desktop breakpoints)
+  - Edge cases (rapid filter changes, special characters, long queries)
+- Share link test verifies clipboard URL works as deeplink
+**Results:** 40 passed, 0 failed, 6 skipped
+**Files:** `tests/bdd/features/explore_stories.feature`, `tests/bdd/steps/test_explore_stories.py`
 
 ### 26. Share Link Copy Functionality
 **Priority:** LOW
