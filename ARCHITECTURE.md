@@ -2236,17 +2236,17 @@ pytest tests/bdd -v
 pytest tests/bdd -k "search_returns_relevant" -v
 ```
 
-**Coverage (46 scenarios):**
+**Coverage (43 scenarios):**
 | Category | Scenarios | Status |
 |----------|-----------|--------|
-| Search flow | 4 | ✅ All passing |
+| Search flow | 3 | ✅ All passing |
 | Filter combinations | 7 | ✅ All passing |
 | View switching | 6 | ✅ All passing |
 | Story detail/STAR | 4 | ✅ All passing |
 | Ask Agy navigation | 4 | ✅ All passing |
-| Deeplinks | 4 | ⏭️ Skipped (pending app fixes) |
+| Deeplinks | 3 | ✅ All passing |
 | Pagination | 5 | ✅ All passing |
-| Navigation/Reset | 6 | ✅ All passing |
+| Navigation/Reset | 5 | ✅ All passing |
 | Responsive layout | 3 | ✅ All passing |
 | Edge cases | 3 | ✅ All passing |
 

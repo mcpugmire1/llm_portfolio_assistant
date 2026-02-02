@@ -200,13 +200,13 @@
 ### 25. BDD/E2E Tests for Explore Stories State Machine ✅ DONE
 **Priority:** HIGH (Tech Debt)
 **Issue:** No automated tests for Explore Stories interactive state
-**Resolution (Feb 1, 2026):**
-- Implemented 46 BDD scenarios using pytest-bdd + Playwright
+**Resolution (Feb 1-2, 2026):**
+- Implemented 43 BDD scenarios using pytest-bdd + Playwright
 - Browser session reuse with context isolation for faster tests (~25 min vs ~29 min)
 - Coverage includes all major flows:
-  - Search flow (clears stale state, opens correct detail, empty results)
+  - Search flow (clears stale state, opens correct detail)
   - "Ask Agy About This" flow (Table, Cards views)
-  - Deeplink flow (valid/invalid story IDs) - 6 skipped pending app deeplink fixes
+  - Deeplink flow (valid story IDs, view mode preservation)
   - View switching (preserves detail, query, filters)
   - Navigation return (fresh start behavior)
   - Filter combinations (Industry, Capability, Advanced)
@@ -215,7 +215,7 @@
   - Responsive layout (mobile, tablet, desktop breakpoints)
   - Edge cases (rapid filter changes, special characters, long queries)
 - Share link test verifies clipboard URL works as deeplink
-**Results:** 40 passed, 0 failed, 6 skipped
+**Results:** 43 passed, 0 failed, 0 skipped
 **Files:** `tests/bdd/features/explore_stories.feature`, `tests/bdd/steps/test_explore_stories.py`
 
 ### 26. Share Link Copy Functionality
