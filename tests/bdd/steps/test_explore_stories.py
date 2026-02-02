@@ -601,6 +601,14 @@ def click_share(browser_page):
 def navigate_with_params(browser_page, app_url, url_params):
     browser_page.goto(f"{app_url}{url_params}")
     browser_page.wait_for_load_state("networkidle")
+    # Deeplinks trigger a Streamlit rerun - wait for Explore Stories to load
+    if "?story=" in url_params:
+        # Wait for the page to redirect and render Explore Stories
+        wait_for_content(browser_page, ".results-count", timeout=15000)
+        # Wait for story detail to open (deeplinks should auto-open the story)
+        wait_for_content(
+            browser_page, ".detail-header, .star-label, #btn-share-story", timeout=10000
+        )
 
 
 @when(parsers.parse('the user clicks "View in Explore" for "{era}"'))
@@ -1303,17 +1311,27 @@ def verify_no_crash(browser_page):
 
 @then("the story detail should be open")
 def verify_story_detail_open(browser_page):
-    # Story detail can be in various forms - check for STAR sections
-    wait_for_content(
-        browser_page, ".detail-header, .star-label, text=Situation", timeout=5000
+    # Story detail renders with .detail-header, .star-label, and #btn-share-story
+    # Wait longer for deeplinks which trigger a Streamlit rerun
+    found = wait_for_content(
+        browser_page, ".detail-header, .star-label, #btn-share-story", timeout=15000
     )
-    # Check for any visible story detail content
-    detail = browser_page.locator("text=Situation")
-    if detail.count() > 0:
-        assert True
-    else:
-        # Skip if story detail isn't visible (might be iframe issue)
-        pytest.skip("Story detail not visible (possible iframe issue)")
+
+    if found:
+        return
+
+    # Check for STAR section content as fallback
+    star_content = browser_page.locator(".star-label, .star-section, .star-content")
+    if star_content.count() > 0 and star_content.first.is_visible():
+        return
+
+    # Check for Share button (definitive sign of story detail)
+    share_btn = browser_page.locator("#btn-share-story")
+    if share_btn.count() > 0 and share_btn.first.is_visible():
+        return
+
+    # Skip if story detail isn't visible
+    pytest.skip("Story detail not visible (possible iframe issue)")
 
 
 @then(parsers.parse("the view should be {view} view"))

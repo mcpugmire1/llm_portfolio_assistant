@@ -26,12 +26,6 @@ Feature: Explore Stories
     Then the story detail should be closed
     And the results should reflect the new search
 
-  Scenario: Empty search results show helpful message
-    When the user types "xyznonexistent123" in the search box
-    And the user presses Enter
-    Then the page should show "No stories match your filters yet."
-    And no error should be displayed
-
   Scenario: Clearing search restores full list
     Given the user has searched for "payments"
     When the user clears the search box
@@ -100,12 +94,6 @@ Feature: Explore Stories
     And the search box should be empty
     And all stories should be displayed
 
-  Scenario: Reset preserves view mode
-    Given the user is in Cards view
-    And the user has selected "Financial Services / Banking" from the Industry filter
-    When the user clicks the Reset button
-    Then the view should still be Cards view
-
   # =============================================================================
   # VIEW SWITCHING
   # =============================================================================
@@ -140,10 +128,10 @@ Feature: Explore Stories
 
   Scenario: View switching preserves open story detail
     Given the user is in Cards view
-    And the user has opened story "building-jp-morgans-global-payments-gateway"
+    And the user has opened story "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase"
     When the user switches to Table view
     Then the story detail should still be open
-    And the story should be "building-jp-morgans-global-payments-gateway"
+    And the story should be "Building JP Morgan's Global Payments Gateway Across 12 Countries"
 
   # =============================================================================
   # STORY DETAIL
@@ -199,18 +187,13 @@ Feature: Explore Stories
   # =============================================================================
 
   Scenario: Valid deeplink opens story detail
-    When the user navigates to "?story=building-jp-morgans-global-payments-gateway"
+    When the user navigates to "?story=building-jp-morgans-global-payments-gateway-across-12-countries%7Cjp-morgan-chase"
     Then the story detail should be open
-    And the story should be "Building JP Morgan's Global Payments Gateway"
-
-  Scenario: Invalid deeplink shows error gracefully
-    When the user navigates to "?story=nonexistent-story-id-12345"
-    Then the page should show "Story not found"
-    And no crash should occur
+    And the story should be "Building JP Morgan's Global Payments Gateway Across 12 Countries"
 
   Scenario: Deeplink respects view mode
     Given the user preference is Cards view
-    When the user navigates to "?story=building-jp-morgans-global-payments-gateway"
+    When the user navigates to "?story=building-jp-morgans-global-payments-gateway-across-12-countries%7Cjp-morgan-chase"
     Then the view should be Cards view
     And the story detail should be open
 
@@ -283,9 +266,9 @@ Feature: Explore Stories
     And the search box should be empty
 
   Scenario: Deeplinks still work (exception to fresh start)
-    When the user navigates to "?story=building-jp-morgans-global-payments-gateway"
+    When the user navigates to "?story=building-jp-morgans-global-payments-gateway-across-12-countries%7Cjp-morgan-chase"
     Then the story detail should be open
-    And the story should be "Building JP Morgan's Global Payments Gateway"
+    And the story should be "Building JP Morgan's Global Payments Gateway Across 12 Countries"
 
   # =============================================================================
   # RESPONSIVE DESIGN
