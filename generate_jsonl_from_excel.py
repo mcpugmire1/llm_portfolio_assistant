@@ -18,7 +18,7 @@ import pandas as pd
 
 # ---------- config ----------
 
-INPUT_EXCEL_FILE = "MPugmire - STAR Stories - 31JAN26.xlsx"  # <-- update as needed
+INPUT_EXCEL_FILE = "MPugmire - STAR Stories - 03FEB26.xlsx"  # <-- update as needed
 OUTPUT_JSONL_FILE = "echo_star_stories.jsonl"
 SHEET_NAME = "STAR Stories - Interview Ready"
 DRY_RUN = False  # ✅ Change to False when ready to write output
@@ -56,8 +56,10 @@ def backup_file(path: str):
 
 
 # Utility functions (inlined from old utils.py)
-def normalize(s: str) -> str:
-    return (s or "").strip()
+def normalize(s) -> str:
+    if s is None or (isinstance(s, float) and pd.isna(s)):
+        return ""
+    return str(s).strip()
 
 
 def slugify(text: str) -> str:
@@ -95,8 +97,12 @@ def split_bullets(value: str):
         if not line:
             continue
 
-        # Remove leading apostrophe (but keep any spaces after it)
-        if line.startswith("'"):
+        # Remove Excel escape apostrophe before bullets (handles ' - or '- patterns)
+        # Strip leading whitespace first to catch " '- " patterns
+        stripped = line.lstrip()
+        if stripped.startswith("'-") or stripped.startswith("' -"):
+            line = stripped[1:]  # Remove the apostrophe, keep the dash
+        elif line.startswith("'"):
             line = line[1:]
 
         # Strip markdown bold markers (Excel may have **bold** for readability)
