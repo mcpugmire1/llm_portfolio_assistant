@@ -1,5 +1,36 @@
 # BACKLOG
 
+## February 3, 2026 - Data Pipeline & Story Updates
+
+### 38. Excel→JSONL Script Bug Fixes ✅ DONE
+**Priority:** HIGH
+**Issue:** Script crashed on empty cells (NaN) and leaked Excel escape characters (`'-`)
+**Resolution:**
+- Fixed `normalize()` to handle pandas NaN values (float type, not string)
+- Fixed `split_bullets()` to strip Excel escape apostrophe from ` '-` patterns
+**Files:** `generate_jsonl_from_excel.py`
+
+### 39. New MattGPT Development Stories ✅ DONE
+**Priority:** MEDIUM
+**Issue:** Portfolio lacked stories documenting MattGPT's technical development
+**Resolution:** Added 5 new stories:
+- Why Hire Matt?
+- Simplifying MattGPT's RAG Pipeline Through Entity Gate Removal
+- Implementing Eval-Driven Development for RAG Systems
+- Implementing BDD for System Behavior Specification
+- Building Effective AI-Assisted Development Workflows
+**Result:** 130 stories total (was 126)
+
+### 40. Design Spec Testing Docs Consolidation ✅ DONE
+**Priority:** LOW
+**Issue:** Testing documentation was fragmented (outdated TESTING-STRATEGY.md + focused RAG eval doc)
+**Resolution:** Consolidated into `docs/11-testing-and-quality.md` covering 3-layer strategy:
+- Unit tests (12 files)
+- RAG evals (98.1% pass rate)
+- BDD/E2E tests (43 scenarios)
+
+---
+
 ## January 29, 2026 - RAG Pipeline Cleanup
 
 ### Entity Gate Removal ✅ DONE
