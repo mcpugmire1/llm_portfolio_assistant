@@ -18,7 +18,7 @@ import pandas as pd
 
 # ---------- config ----------
 
-INPUT_EXCEL_FILE = "MPugmire - STAR Stories - 20FEB26.xlsx"  # <-- update as needed
+INPUT_EXCEL_FILE = "MPugmire - STAR Stories - 21FEB26.xlsx"  # <-- update as needed
 OUTPUT_JSONL_FILE = "echo_star_stories.jsonl"
 SHEET_NAME = "STAR Stories - Interview Ready"
 DRY_RUN = False  # ✅ Change to False when ready to write output
@@ -88,27 +88,26 @@ def split_bullets(value: str):
     if not value:
         return []
 
-    lines = str(value).split("\n")
+    value = str(value)
+
+    # Strip Excel escape apostrophe before dashes globally, preserving whitespace
+    # '  - becomes   - (keeps indentation)
+    # '- becomes - (no indentation to keep)
+    value = re.sub(r"'(\s*)-", r"\1-", value)
+
+    # Strip markdown bold markers
+    value = strip_markdown_bold(value)
+
+    # Split on newlines
+    lines = value.split("\n")
     parts = []
 
     for line in lines:
-        # Remove trailing whitespace only, preserve leading spaces for indentation
-        line = line.rstrip()
-        if not line:
-            continue
-
-        # Remove Excel escape apostrophe before bullets (handles ' - or '- patterns)
-        # Strip leading whitespace first to catch " '- " patterns
-        stripped = line.lstrip()
-        if stripped.startswith("'-") or stripped.startswith("' -"):
-            line = stripped[1:]  # Remove the apostrophe, keep the dash
-        elif line.startswith("'"):
-            line = line[1:]
-
-        # Strip markdown bold markers (Excel may have **bold** for readability)
-        line = strip_markdown_bold(line)
-
-        parts.append(line)
+        line = (
+            line.rstrip()
+        )  # Only strip trailing whitespace, preserve leading (indentation)
+        if line:
+            parts.append(line)
 
     return parts
 
