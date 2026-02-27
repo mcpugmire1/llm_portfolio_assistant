@@ -18,6 +18,7 @@ from config.constants import (
     ENTITY_DETECTION_FIELDS,
     EXCLUDED_DIVISION_VALUES,
     META_COMMENTARY_REGEX_PATTERNS,
+    PINECONE_LOWERCASE_FIELDS,
     SEARCH_TOP_K,
 )
 from config.debug import DEBUG
@@ -438,11 +439,17 @@ def get_synthesis_stories(
             # If entity detected, try entity+theme filter first
             if entity_match:
                 entity_field, entity_value = entity_match
+                pc_field = entity_field.lower()
+                pc_value = (
+                    entity_value.lower()
+                    if pc_field in PINECONE_LOWERCASE_FIELDS
+                    else entity_value
+                )
                 results = idx.query(
                     vector=query_vector,
                     filter={
                         "Theme": {"$eq": theme},
-                        entity_field: {"$eq": entity_value},
+                        pc_field: {"$eq": pc_value},
                     },
                     top_k=top_per_theme,
                     include_metadata=True,
@@ -1001,6 +1008,11 @@ def _generate_agy_response(
         response_text = re.sub(r'\n\n\n+', '\n\n', response_text)  # Triple newlines
         response_text = response_text.strip()
 
+        # Escape dollar signs to prevent Streamlit's markdown renderer
+        # from interpreting $...$ as LaTeX math notation.
+        # Must run AFTER all other post-processing (bolding, meta-strip, etc.)
+        response_text = response_text.replace("$", "\\$")
+
         return response_text
 
     except Exception as e:
@@ -1542,6 +1554,20 @@ Would you like to explore how his work in **platform modernization**, **payments
         # - Was brittle (rejected valid projects like TICARA it didn't recognize)
         # - Was redundant (Pinecone confidence handles relevance)
         is_synthesis = intent_family == "synthesis"
+
+        # Entity cluster promotion: if Pinecone returned 3+ stories from the
+        # detected entity, the user is asking about a client/division broadly
+        # (e.g., "What did Matt do at RBC?"). Promote to synthesis so the LLM
+        # narrates across all stories instead of focusing on a single primary.
+        if entity_match and not is_synthesis:
+            ef, ev = entity_match
+            entity_pool_count = sum(1 for s in pool if s.get(ef) == ev)
+            if entity_pool_count >= 3:
+                is_synthesis = True
+                if DEBUG:
+                    print(
+                        f"DEBUG: Entity cluster promotion: {ef}={ev} has {entity_pool_count} stories in pool -> synthesis"
+                    )
         st.session_state["__ask_query_intent__"] = intent_family  # Use router family
 
         if DEBUG:
@@ -1818,7 +1844,8 @@ Would you like to explore how his work in **platform modernization**, **payments
                         )
                 if pinned:
                     others = diversify_results(
-                        [c for c in candidates if c.get("id") != pinned.get("id")]
+                        [c for c in candidates if c.get("id") != pinned.get("id")],
+                        max_per_client=3,
                     )
                     ranked = [pinned] + (others or [])
                     if DEBUG:
@@ -1833,7 +1860,9 @@ Would you like to explore how his work in **platform modernization**, **payments
                         print(
                             f"DEBUG entity pin MISS: no story matched {entity_field}='{entity_value}'. Pool values: {pool_values}"
                         )
-                    ranked = diversify_results(candidates) or (pool[:1] if pool else [])
+                    ranked = diversify_results(candidates, max_per_client=3) or (
+                        pool[:1] if pool else []
+                    )
             else:
                 if intent_family == "narrative":
                     # Narrative queries: trust Pinecone semantic ranking.

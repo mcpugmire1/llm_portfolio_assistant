@@ -855,6 +855,7 @@ The semantic router now handles ALL intent classification via embedding similari
   ]}
   ```
 - **Why:** Fixes "entity blind spot" where stories with `Client="Confidential"` but `Employer="Accenture"` weren't found
+- **⚠️ Note (Feb 2026):** `get_synthesis_stories()` uses PascalCase `"Theme"` in Pinecone filters (line ~444). This works currently (Pinecone metadata was uploaded with PascalCase `Theme` key) but is inconsistent with the lowercase field name convention used elsewhere. If entity-scoped synthesis returns unexpected zero results, check this field name casing first.
 
 #### Entity Normalization Map ✅ REMOVED (Jan 26, 2026)
 
