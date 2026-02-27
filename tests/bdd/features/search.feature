@@ -36,9 +36,9 @@ Feature: Story Search
     And results should represent at least 3 different clients
 
   Scenario: JPMC stories don't dominate results
-    Given JPMC represents 48% of all stories
+    Given JPMC represents 16% of all stories
     When the user searches for a common topic
-    Then JPMC stories should not exceed 40% of results
+    Then JPMC stories should not exceed 30% of results
 
   # =============================================================================
   # NONSENSE FILTERING

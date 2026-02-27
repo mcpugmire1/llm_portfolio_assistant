@@ -514,3 +514,4 @@ As a user on any browser, I want consistent styling and functionality.
 - [ ] Test on Firefox
 - [ ] Test on Edge
 - [ ] Fix any CSS inconsistencies
+   
