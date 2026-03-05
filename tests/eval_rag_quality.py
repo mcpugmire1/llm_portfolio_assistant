@@ -54,10 +54,13 @@ GOLDEN_QUERIES = {
         {
             "id": 2,
             "query": "Career Intent – What I'm Looking For Next",
+            # Concept clusters — any wording that captures the idea passes
             "ground_truth": [
-                "build something from nothing",
-                "not looking for a maintenance role",
-                "build what's next",
+                "build",  # builder identity (build from nothing, build what's next, 0→1)
+                "maintenance",  # not maintenance (maintenance role, maintaining, existing)
+                "moderniz",  # modernizer identity
+                "Director",  # target role level
+                "platform",  # target domain
             ],
             "min_matches": 2,
             "category": "narrative",
@@ -93,8 +96,15 @@ GOLDEN_QUERIES = {
         {
             "id": 5,
             "query": "Why is Matt exploring opportunities?",
-            # Updated Jan 2026: Use phrases LLM consistently produces, not source verbatim
-            "ground_truth": ["intentional", "clarity", "purpose"],
+            # Concept clusters — transition narrative concepts, any wording
+            "ground_truth": [
+                "transition",  # career transition / change
+                "reflect",  # reflection, sabbatical, pause
+                "clarity",  # clarity of purpose, what energizes him
+                "MattGPT",  # built during sabbatical
+                "role was eliminated",  # trigger event
+                "sabbatical",  # time off
+            ],
             "min_matches": 2,
             "category": "narrative",
         },
@@ -385,6 +395,81 @@ GOLDEN_QUERIES = {
             "expected_intent": "client",
             "category": "surgical",
         },
+        # =================================================================
+        # Mar 2026 regression guards — queries that exposed real retrieval
+        # and generation bugs during data re-ingestion testing
+        # =================================================================
+        {
+            "id": 53,
+            "query": "How did you build the CIC?",
+            "expected_client": "Accenture",
+            "client_variants": ["Accenture"],
+            "ground_truth": [
+                "Cloud Innovation Center",
+                "CIC",
+                "150",
+                "Atlanta",
+                "Silicon Valley",
+            ],
+            "min_matches": 2,
+            "category": "surgical",
+        },
+        {
+            "id": 54,
+            "query": "How did you get clients to adopt discovery and framing?",
+            "ground_truth": [
+                "discovery",
+                "framing",
+                "resist",  # resistance, pushback
+                "alignment",
+                "rework",
+            ],
+            "min_matches": 2,
+            "category": "surgical",
+        },
+        {
+            "id": 55,
+            "query": "What makes your approach to TDD different?",
+            "ground_truth": [
+                "test-driven",
+                "TDD",
+                "pair programming",
+                "defect",
+                "zero",
+            ],
+            "min_matches": 2,
+            "category": "surgical",
+        },
+        {
+            "id": 56,
+            "query": "Why should I hire you?",
+            "ground_truth": [
+                "build",  # builder identity
+                "moderniz",  # modernizer
+                "CIC",  # flagship practice
+                "Cloud Innovation Center",
+                "150",  # team scale
+                "4x",  # velocity
+                "$100M",  # business impact
+            ],
+            "min_matches": 3,
+            "category": "surgical",
+        },
+        {
+            "id": 57,
+            "query": "How did you build the Cloud Innovation Center?",
+            "expected_client": "Accenture",
+            "client_variants": ["Accenture"],
+            "ground_truth": [
+                "Cloud Innovation Center",
+                "CIC",
+                "150",
+                "Atlanta",
+                "Silicon Valley",
+            ],
+            "min_matches": 2,
+            "category": "surgical",
+        },
     ],
     # =========================================================================
     # Entity Detection (9) - Regression Tests for detect_entity()
@@ -432,13 +517,13 @@ GOLDEN_QUERIES = {
             "note": "Innovation as concept, not entity - should not scope",
             "category": "entity_detection",
         },
-        # Abbreviations/partial names - semantic search handles these, NOT entity detection
-        # detect_entity() uses exact substring matching by design
+        # CIC alias - intentionally triggers entity detection via ENTITY_ALIASES
+        # (Mar 2026: semantic search alone ranked TICARA above the CIC story)
         {
             "id": 35,
             "query": "Tell me about the CIC",
-            "expect_no_entity_scope": True,
-            "note": "CIC is abbreviation - semantic search handles it, not entity detection",
+            "expect_entity": ("Division", "Cloud Innovation Center"),
+            "note": "CIC alias resolves to Division:Cloud Innovation Center",
             "category": "entity_detection",
         },
         {

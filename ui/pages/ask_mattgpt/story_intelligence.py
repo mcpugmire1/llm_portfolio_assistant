@@ -76,37 +76,37 @@ def get_theme_guidance(theme: str) -> str:
     guidance = {
         THEME_EXECUTION: """🏗️ EXECUTION & DELIVERY stories:
 - Emphasize: scale, velocity, production quality, technical complexity
-- Voice: "Matt delivered [system] at scale for [client]..."
+- Voice: "Matt delivered [system] at scale for [client]..." or "[Client]'s [system] was [problem]. Matt [action]..."
 - Position: Executive who ships production software
 - Proof points: deployment metrics, system performance, reliability outcomes
 - Pattern: Technical execution + operational excellence""",
         THEME_STRATEGIC: """🧠 STRATEGIC & ADVISORY stories:
 - Emphasize: thought partnership, strategic framing, business alignment
-- Voice: "Matt shaped [strategy] by bridging [business need] with [technical approach]..."
+- Voice: "Matt shaped [strategy] by bridging [business need] with [technical approach]..." or "[Client] was stuck on [problem]. Matt reframed it as [approach]..."
 - Position: Trusted advisor and strategic thought partner
 - Proof points: business outcomes, alignment achieved, decisions influenced
 - Pattern: Strategic thinking + business translation""",
         THEME_ORG_TRANSFORM: """🔄 ORG & WORKING-MODEL TRANSFORMATION stories:
 - Emphasize: culture change, process improvement, sustainable practices
-- Voice: "Matt transformed how [team/org] worked by introducing [approach]..."
+- Voice: "Matt transformed how [team/org] worked by introducing [approach]..." or "[Team/org] was [stuck pattern]. Matt shifted them to [new approach]..."
 - Position: Change agent and organizational architect
 - Proof points: adoption rates, velocity improvements, cultural shifts
 - Pattern: Change leadership + sustainable transformation""",
         THEME_TALENT: """👥 TALENT & ENABLEMENT stories:
 - Emphasize: capability building, mentorship impact, sustainable skills
-- Voice: "Matt built [capability] by coaching [team] on [skill]..."
+- Voice: "Matt built [capability] by coaching [team] on [skill]..." or "[Team] lacked [skill/capability]. Matt built it through [approach]..."
 - Position: Teacher, mentor, capability builder
 - Proof points: team growth, skill development, career progression
 - Pattern: Human development + capability multiplication""",
         THEME_RISK: """🛡️ RISK & RESPONSIBLE TECH stories:
 - Emphasize: governance frameworks, compliance, ethical considerations
-- Voice: "Matt established [governance approach] to ensure [outcome]..."
+- Voice: "Matt established [governance approach] to ensure [outcome]..." or "[Organization] had no [governance/compliance framework]. Matt built one by [approach]..."
 - Position: Responsible tech advocate and risk manager
 - Proof points: compliance achieved, risks mitigated, trust established
 - Pattern: Risk management + responsible innovation""",
         THEME_EMERGING: """🚀 EMERGING TECH stories:
 - Emphasize: innovation, experimentation, cutting-edge exploration
-- Voice: "Matt pioneered [technology] by exploring [approach]..."
+- Voice: "Matt pioneered [technology] by exploring [approach]..." or "[Existing approach] wasn't keeping pace. Matt introduced [technology] to [outcome]..."
 - Position: Innovation leader and technology scout
 - Proof points: experiments run, insights gained, future capabilities unlocked
 - Pattern: Innovation leadership + pragmatic exploration""",

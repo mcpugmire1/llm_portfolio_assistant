@@ -676,7 +676,7 @@ User Question: "How did Matt scale engineering teams?"
 - Include MATT_DNA ground truth (dynamic from JSONL)
       ↓
 [Layer 7: LLM Generation - OpenAI GPT-4o]
-- STANDARD: Primary story focus, human stakes → methodology → outcomes
+- STANDARD: Primary story focus, WHY (tension/stakes) → HOW (approach) → WHAT (proof/outcomes)
 - SYNTHESIS: Theme/pattern → evidence across projects → insight
 - Temperature: 0.4 (standard) / 0.2 (synthesis)
       ↓
@@ -960,7 +960,7 @@ Two related constants prevent overly generic values from triggering entity filte
 - **Word target:** 250-400 words (up from 200-300)
 
 **Response Structure:**
-- **Standard mode:** Human stakes → How Matt tackled it → What changed → Pattern insight
+- **Standard mode:** WHY (tension/stakes — what wasn't working) → HOW (what Matt did differently) → WHAT (proof — measurable results)
 - **Synthesis mode:** Name patterns → Prove with client examples → Connect the thread
 
 **Python-Driven Randomization** (for variety):

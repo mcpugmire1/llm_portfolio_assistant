@@ -132,6 +132,10 @@ def build_embedding_text(story: dict[str, Any]) -> str:
     if header_bits:
         parts.append(" ".join(header_bits))
 
+    # Use Cases front-loaded — strongest retrieval signal, tuned per story
+    if use_cases:
+        parts.append(f"Use Cases: {use_cases}")
+
     if summary_5p:
         parts.append(f"Summary: {summary_5p}")
 
@@ -149,9 +153,6 @@ def build_embedding_text(story: dict[str, Any]) -> str:
 
     if tags:
         parts.append(f"Keywords: {tags}")
-
-    if use_cases:
-        parts.append(f"Use Cases: {use_cases}")
 
     if interview_questions:
         parts.append(f"Interview Questions: {interview_questions}")

@@ -15,6 +15,7 @@ from typing import Any
 import streamlit as st
 
 from config.constants import (
+    ENTITY_ALIASES,
     ENTITY_DETECTION_FIELDS,
     EXCLUDED_DIVISION_VALUES,
     META_COMMENTARY_REGEX_PATTERNS,
@@ -362,9 +363,16 @@ def detect_entity(query: str, stories: list[dict]) -> tuple[str, str] | None:
                 return True
         return False
 
+    # Check acronym/abbreviation aliases first (e.g., "CIC" → Division:Cloud Innovation Center)
+    for alias, (field, canonical) in ENTITY_ALIASES.items():
+        if re.search(rf"\b{re.escape(alias)}\b", q_lower):
+            if _is_excluded_context(alias):
+                return None
+            if DEBUG:
+                print(f"DEBUG: Entity alias matched: '{alias}' → {field}:{canonical}")
+            return (field, canonical)
+
     # Build entity sets from ALL relevant fields (exact match only)
-    # Note: Semantic search handles variations like "JPMC", "amex", "CIC" naturally
-    # through embeddings - no fuzzy matching needed here.
     for field in ENTITY_DETECTION_FIELDS:
         known_entities = {
             s.get(field)
@@ -1236,9 +1244,11 @@ def diversify_results(
     """Ensure client variety in top results, prioritizing named clients.
 
     Implements client diversity by:
-    1. Prioritizing real named clients over generic ones (Independent, Career Narrative, etc.)
-    2. Limiting stories per client
-    3. Avoiding repeating the same client in #1 position across consecutive queries
+    1. PRESERVING the #1 Pinecone result as primary (highest semantic match)
+    2. Prioritizing real named clients over generic ones for slots #2+
+    3. Limiting stories per client
+    4. Avoiding repeating the same client in #1 position across consecutive queries
+       (only when the #2 result is close in score)
 
     Uses st.session_state["_last_primary_client"] for tracking.
 
@@ -1247,12 +1257,16 @@ def diversify_results(
         max_per_client: Maximum stories per client in results. Defaults to 1.
 
     Returns:
-        List of up to 7 diversified stories with client variety, named clients first.
+        List of up to 7 diversified stories with client variety, named clients first
+        for slots #2+.
 
     Side Effects:
         Updates st.session_state["_last_primary_client"] with the Client field
         from the first result in the returned list.
     """
+    if not stories:
+        return []
+
     if DEBUG:
         print(
             f"DEBUG diversify_results: incoming={[s.get('Client') for s in stories[:10]]}"
@@ -1263,27 +1277,40 @@ def diversify_results(
     if DEBUG:
         print(f"DEBUG diversify_results: last_primary_client={last_primary_client}")
 
-    seen_clients: set[str] = set()
-    named_diverse: list[dict] = []  # Real named clients (JP Morgan, RBC, etc.)
-    generic_overflow: list[dict] = []  # Generic clients (Independent, Career Narrative)
-    duplicate_overflow: list[dict] = []  # Duplicates of already-seen clients
+    # Pin the #1 Pinecone result as primary — it has the highest semantic relevance.
+    # Only allow last_primary_client demotion if the #2 story is close in score.
+    pinned = stories[0]
+    pinned_client = pinned.get("Client", "Unknown")
+    rest = stories[1:]
 
-    for s in stories:
-        client = s.get("Client", "Unknown")
-
-        # Handle last primary client - avoid repeating in #1 slot
+    # Check if we should demote pinned due to last_primary_client repeat
+    if pinned_client == last_primary_client and len(rest) >= 1:
+        pinned_score = pinned.get("pc", 0.0) or 0.0
+        next_score = rest[0].get("pc", 0.0) or 0.0
+        # Only demote if the next story is close (within 0.05 score gap)
         if (
-            not named_diverse
-            and not generic_overflow
-            and client == last_primary_client
-            and len(stories) > 1
+            pinned_score - next_score < 0.05
+            and rest[0].get("Client") != last_primary_client
         ):
             if DEBUG:
-                print(f"DEBUG diversify_results: skipping {client} for #1 slot")
-            duplicate_overflow.append(s)
-            continue
+                print(
+                    f"DEBUG diversify_results: demoting {pinned_client} (repeat, gap={pinned_score - next_score:.3f})"
+                )
+            pinned, rest = rest[0], [pinned] + rest[1:]
+            pinned_client = pinned.get("Client", "Unknown")
+        elif DEBUG:
+            print(
+                f"DEBUG diversify_results: keeping {pinned_client} as primary despite repeat (gap={pinned_score - next_score:.3f})"
+            )
 
-        # Priority routing based on client type
+    # Diversify slots #2+ — named clients first, then generic, then duplicates
+    seen_clients: set[str] = {pinned_client}
+    named_diverse: list[dict] = []
+    generic_overflow: list[dict] = []
+    duplicate_overflow: list[dict] = []
+
+    for s in rest:
+        client = s.get("Client", "Unknown")
         if client not in seen_clients:
             if is_generic_client(client):
                 generic_overflow.append(s)
@@ -1293,9 +1320,8 @@ def diversify_results(
         else:
             duplicate_overflow.append(s)
 
-    # Final assembly: Named clients first, then generic unique, then duplicates
-    # This ensures JP Morgan/RBC always beat "Independent" in synthesis mode (Q17 fix)
-    result = (named_diverse + generic_overflow + duplicate_overflow)[:7]
+    # Final assembly: Pinned primary + named clients + generic + duplicates
+    result = [pinned] + (named_diverse + generic_overflow + duplicate_overflow)[:6]
 
     if result:
         st.session_state["_last_primary_client"] = result[0].get("Client", "Unknown")

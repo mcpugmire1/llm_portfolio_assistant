@@ -146,3 +146,15 @@ PINECONE_LOWERCASE_FIELDS = {"division", "employer", "project", "place"}
 # These are common English words that cause false positives.
 
 EXCLUDED_DIVISION_VALUES = {"Technology"}  # "technology experience" ≠ Division filter
+
+# =============================================================================
+# ENTITY ALIASES
+# =============================================================================
+# Acronyms and abbreviations that should resolve to canonical entity values.
+# The entity matcher does exact substring matching against Division/Client values
+# from story data. Acronyms like "CIC" don't appear as Division values, so they
+# need explicit aliases. Format: {"acronym": ("Field", "Canonical Value")}
+
+ENTITY_ALIASES = {
+    "cic": ("Division", "Cloud Innovation Center"),
+}
