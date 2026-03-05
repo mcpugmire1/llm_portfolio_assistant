@@ -281,7 +281,7 @@ def _render_ask_transcript(stories: list[dict]):
         if m.get("type") == "card":
             with st.chat_message(
                 "assistant",
-                avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/svg/agy_icon_color.svg",
+                avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_ask_mattgpt.png",
             ):
                 # Snapshot with the same visual shell as the live answer card
                 st.markdown('<div class="answer-card">', unsafe_allow_html=True)
@@ -477,7 +477,7 @@ def _render_ask_transcript(stories: list[dict]):
         if m.get("type") == "banner":
             with st.chat_message(
                 "assistant",
-                avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/svg/agy_icon_color.svg",
+                avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_ask_mattgpt.png",
             ):
                 render_no_match_banner(
                     reason=m.get("reason", ""),
@@ -497,7 +497,7 @@ def _render_ask_transcript(stories: list[dict]):
 
             with st.chat_message(
                 "assistant",
-                avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/svg/agy_icon_color.svg",
+                avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_ask_mattgpt.png",
             ):
                 # Show conversational response text
                 st.markdown(m.get("text", ""))
@@ -757,7 +757,7 @@ def _render_ask_transcript(stories: list[dict]):
 
         # Set custom avatars
         if role == "assistant":
-            avatar = "https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/svg/agy_icon_color.svg"
+            avatar = "https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_ask_mattgpt.png"
         else:
             avatar = "https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/MattCartoon-Transparent.png"
 
