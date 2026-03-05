@@ -1123,6 +1123,15 @@ def get_conversation_css() -> str:
             vertical-align: top !important;
         }
 
+        /* Agy avatar slightly smaller to match visual weight of user avatar */
+        .stChatMessage > img[alt="assistant avatar"],
+        [data-testid="stChatMessage"] > img[alt="assistant avatar"] {
+            width: 52px !important;
+            height: 52px !important;
+            flex: 0 0 52px !important;
+            max-width: 52px !important;
+            max-height: 52px !important;
+        }
 
         /* Dark mode glow on Agy */
         [data-theme="dark"] .stChatMessage > img[alt="assistant avatar"],
