@@ -161,6 +161,11 @@
   - Backup before modifying: `cp file.py file.py.bak`
   - Keep reference docs/comments when rewriting files
 
+  ### Testing Protocol
+  - **Never push to remote without explicit confirmation that the change has been tested locally. Commit locally, then wait.**
+  - **After any change to UI files (`ui/pages/`, `ui/components/`, `ui/styles/`), restart Streamlit before running BDD tests.**
+  - **After any change to `explore_stories.py`, run the BDD suite before presenting the change for review.** Unit tests and evals validate backend logic — only BDD tests exercise the rendering layer.
+
   ### Don't
   - Ask about priorities or trade-offs before starting
   - Add dependencies without flagging it

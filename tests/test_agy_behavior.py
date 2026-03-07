@@ -12,81 +12,15 @@ import pytest
 
 from ui.pages.ask_mattgpt.backend_service import (
     _generate_agy_response,
-    classify_query_intent,
     get_synthesis_stories,
 )
 
 # =============================================================================
-# 1. INTENT ROUTING (The "Capability-First" & "Keyword Trap" Fixes)
+# 1. INTENT ROUTING
 # =============================================================================
-
-
-class TestQueryClassification:
-    """Ensure classifier prioritizes Skills/Methodology and ignores keyword traps."""
-
-    # Synthesis: Capability Verb + Client (The "Accenture Gravity" Fix)
-    @pytest.mark.parametrize(
-        "query,expected",
-        [
-            ("How did Matt scale talent at Accenture?", "synthesis"),
-            ("How did Matt transform delivery at JPMorgan?", "synthesis"),
-            ("How did Matt build teams at Capital One?", "synthesis"),
-        ],
-    )
-    def test_verb_overrides_client(self, query, expected):
-        """Action verbs MUST trigger synthesis even if a company is named."""
-        result = classify_query_intent(query)
-        assert (
-            result == expected
-        ), f"Expected '{expected}' for '{query}', got '{result}'"
-
-    # Synthesis: Methodology Nouns (The "Methodology" Fix)
-    @pytest.mark.parametrize(
-        "query,expected",
-        [
-            ("Tell me about Matt's rapid prototyping work", "synthesis"),
-            ("Matt's design thinking approach", "synthesis"),
-            ("What is Matt's agile transformation strategy?", "synthesis"),
-        ],
-    )
-    def test_methodology_triggers_synthesis(self, query, expected):
-        """Industry methodologies should trigger the 'Forest' (synthesis) view."""
-        result = classify_query_intent(query)
-        assert (
-            result == expected
-        ), f"Expected '{expected}' for '{query}', got '{result}'"
-
-    # The "Generic Client" Filter (The "Keyword Trap" Fix)
-    @pytest.mark.parametrize(
-        "query",
-        [
-            "Tell me about Matt's work for client products",
-            "How does Matt work with clients?",
-            "Matt's client engagement methodology",
-        ],
-    )
-    def test_generic_client_is_not_entity(self, query):
-        """The word 'client' is a noun, NOT a company name. Should not be 'client' intent."""
-        result = classify_query_intent(query)
-        assert (
-            result != "client"
-        ), f"Query '{query}' should NOT be classified as 'client', got '{result}'"
-
-    # Behavioral Detection (The "STAR" Fix)
-    @pytest.mark.parametrize(
-        "query,expected",
-        [
-            ("Tell me about a time you failed", "behavioral"),
-            ("Example of handling conflict", "behavioral"),
-            ("How do you handle pressure?", "behavioral"),
-        ],
-    )
-    def test_behavioral_intent(self, query, expected):
-        """STAR-style questions should be routed to behavioral handlers."""
-        result = classify_query_intent(query)
-        assert (
-            result == expected
-        ), f"Expected '{expected}' for '{query}', got '{result}'"
+# NOTE: TestQueryClassification removed — classify_query_intent was deleted
+# in Jan 2026 RAG cleanup. Intent routing now handled by semantic router.
+# =============================================================================
 
 
 # =============================================================================

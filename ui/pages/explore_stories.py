@@ -25,6 +25,7 @@ from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode
 
 from config.debug import DEBUG
 from services.rag_service import semantic_search
+from services.semantic_router import is_portfolio_query_semantic
 from ui.components.story_detail import render_story_detail
 from ui.components.thinking_indicator import render_thinking_indicator
 from ui.components.timeline_view import render_timeline_view
@@ -1934,6 +1935,23 @@ def render_explore_stories(
             st.session_state["last_results"] = []
             st.stop()
         else:
+            # Semantic router gate — catch personal/out_of_scope before Pinecone
+            _, _, _, intent_family = is_portfolio_query_semantic(current_query)
+            if intent_family in ("personal", "out_of_scope"):
+                st.session_state.pop(LAST_RESULTS, None)
+                st.session_state.pop(LAST_CONFIDENCE, None)
+                st.session_state.pop(LAST_QUERY, None)
+                render_no_match_banner(
+                    reason=f"semantic_router:{intent_family}",
+                    query=current_query,
+                    overlap=None,
+                    suppressed=True,
+                    filters=F,
+                    context="explore",
+                )
+                st.session_state["last_results"] = []
+                st.stop()
+
             # Run expensive semantic search
             search_container = st.empty()
             with search_container:

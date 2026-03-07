@@ -318,8 +318,13 @@ def render_no_match_banner(
         context: "ask" for Ask MattGPT (shows suggestion chips),
                  "explore" for Explore Stories (simpler message, no chips)
     """
-    # Primary message
-    msg = "🐾 I can't help with that. I'm trained on Matt's transformation work."
+    # Primary message — differentiate by intent family
+    if reason == "semantic_router:personal":
+        msg = "🐾 I'm focused on Matt's professional experience."
+    elif reason == "semantic_router:out_of_scope":
+        msg = "🐾 That's outside Matt's experience."
+    else:
+        msg = "🐾 I can't help with that. I'm trained on Matt's transformation work."
 
     # Add debug info if in debug mode
     debug_text = ""
@@ -378,8 +383,11 @@ def render_no_match_banner(
 
     if context == "ask":
         banner_html += '<div class="no-match-banner-subtitle">Ask me about:</div>'
+    elif reason == "semantic_router:personal":
+        # Personal questions — mirror the Ask MattGPT pivot language
+        banner_html += '<div class="no-match-banner-hint">Try searching for his transformation work, platform engineering, or how he builds teams.</div>'
     else:
-        # Explore Stories context - simpler hint
+        # Out of scope / generic — point to portfolio search terms
         banner_html += '<div class="no-match-banner-hint">Try searching for clients, technologies, or project types from Matt\'s portfolio.</div>'
 
     banner_html += '</div>'
@@ -417,28 +425,3 @@ def render_no_match_banner(
                     st.session_state["ask_input"] = prompt_text
                     st.session_state["__clear_banner_after_answer__"] = True
                     st.rerun()
-
-    # Show Clear Filters button if filters exist and are non-empty
-    if filters:
-        any_active = any(
-            (isinstance(v, list) and v)
-            or (isinstance(v, str) and v.strip())
-            or (isinstance(v, bool) and v)
-            for k, v in filters.items()
-            if k
-            in ["personas", "clients", "domains", "roles", "tags", "has_metric", "q"]
-        )
-        if any_active:
-            if st.button("Clear filters", key=f"{key_prefix}_clear_filters_no_match"):
-                st.session_state["filters"] = {
-                    "personas": [],
-                    "clients": [],
-                    "domains": [],
-                    "roles": [],
-                    "tags": [],
-                    "q": "",
-                    "has_metric": False,
-                }
-                st.session_state["facet_domain_group"] = "All"
-                st.session_state["page_offset"] = 0
-                st.rerun()

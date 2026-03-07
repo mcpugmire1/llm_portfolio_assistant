@@ -307,3 +307,15 @@ Feature: Explore Stories
     And the user presses Enter
     Then no error should be displayed
     And the query should be processed
+
+  Scenario: Personal question is rejected before Pinecone
+    When the user types "Is Matt married?" in the search box
+    And the user presses Enter
+    Then the rejection banner should be displayed
+    And no story results should be shown
+
+  Scenario: Out of scope industry is rejected before Pinecone
+    When the user types "Tell me about Matt's retail experience" in the search box
+    And the user presses Enter
+    Then the rejection banner should be displayed
+    And no story results should be shown

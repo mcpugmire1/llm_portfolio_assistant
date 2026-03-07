@@ -1533,12 +1533,31 @@ def rag_answer(
 Would you like to explore how his work in **platform modernization**, **payments systems**, or **enterprise transformation** might apply to your context?"""
             if DEBUG:
                 print("DEBUG: out_of_scope detected by semantic router")
-            st.session_state["ask_last_reason"] = "out_of_scope"
+            st.session_state["ask_last_reason"] = "semantic_router:out_of_scope"
             st.session_state["ask_last_query"] = question or ""
             return {
                 "answer_md": out_of_scope_response,
                 "sources": [],
                 "modes": {"narrative": out_of_scope_response},
+                "default_mode": "narrative",
+            }
+
+        # PERSONAL CHECK (Mar 2026 - Semantic Router)
+        # Warm redirect for personal questions (age, family, salary, identity).
+        # Same treatment for all — no category differences.
+        # =================================================================
+        if intent_family == "personal" and not from_suggestion:
+            personal_response = """🐾 I'm focused on Matt's professional experience — the projects, the teams, the outcomes.
+
+Ask me about his **transformation work**, **platform engineering**, or **how he builds teams** and I'll dig up the details."""
+            if DEBUG:
+                print("DEBUG: personal query detected by semantic router")
+            st.session_state["ask_last_reason"] = "semantic_router:personal"
+            st.session_state["ask_last_query"] = question or ""
+            return {
+                "answer_md": personal_response,
+                "sources": [],
+                "modes": {"narrative": personal_response},
                 "default_mode": "narrative",
             }
 

@@ -58,6 +58,8 @@ def apply_global_styles():
             --pill-text: #4B5563;
             --success-color: #10B981;
             --banner-info-bg: rgba(139, 92, 246, 0.05);
+            --banner-info-border: #8B5CF6;
+            --banner-info-text: #6B21A8;
 
             /* Tables */
             --table-header-bg: #F9FAFB;
@@ -108,6 +110,8 @@ def apply_global_styles():
             --pill-bg: #374151;
             --pill-text: #E5E7EB;
             --banner-info-bg: rgba(139, 92, 246, 0.15);
+            --banner-info-border: #A78BFA;
+            --banner-info-text: #C4B5FD;
 
             /* Tables */
             --table-header-bg: #1E1E2E;

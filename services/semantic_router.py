@@ -185,6 +185,28 @@ VALID_INTENTS = {
         "Show me Matt's restaurant industry work",
         "Tell me about Matt's consumer goods experience",
     ],
+    # PERSONAL FAMILY (Mar 2026)
+    # Personal questions about Matt (age, family, location, salary, identity).
+    # All get the same warm redirect — no different treatment between categories.
+    # =================================================================
+    "personal": [
+        "How old is Matt",
+        "What's Matt's age",
+        "Is Matt married",
+        "Does Matt have kids",
+        "Where does Matt live",
+        "What's Matt's salary",
+        "How much does Matt make",
+        "What does Matt look like",
+        "Is Matt single",
+        "Is Matt gay",
+        "What's Matt's sexual orientation",
+        "Is Matt straight",
+        "What's Matt's gender identity",
+        "What's Matt's religion",
+        "What's Matt's ethnicity",
+        "What race is Matt",
+    ],
 }
 
 # Flatten for embedding generation
