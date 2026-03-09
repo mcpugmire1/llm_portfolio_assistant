@@ -87,6 +87,7 @@ def log_query(
     redirect_reason: str = "",
 ):
     # Capture context in main thread before spawning daemon
+    print(f"[QUERY_LOGGER] log_query called: {query[:50]}")
     user_agent, screen_size, timezone, referrer = _capture_context()
     Thread(
         target=_write_to_sheet,
