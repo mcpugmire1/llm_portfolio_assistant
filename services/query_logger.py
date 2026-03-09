@@ -34,7 +34,8 @@ def get_sheet():
         )
         client = gspread.authorize(creds)
         return client.open_by_key(SHEET_ID).sheet1
-    except Exception:
+    except Exception as e:
+        print(f"[QUERY_LOGGER] get_sheet error: {e}")
         return None
 
 
@@ -47,8 +48,8 @@ def _ensure_headers(sheet):
         if not row1 or len(row1) != len(HEADERS):
             sheet.update("A1", [HEADERS])
         _headers_checked = True
-    except Exception:
-        pass
+    except Exception as e:
+        print(f"[QUERY_LOGGER] _ensure_headers error: {e}")
 
 
 def _capture_context():
@@ -137,5 +138,5 @@ def _write_to_sheet(
                     referrer,
                 ]
             )
-    except Exception:
-        pass
+    except Exception as e:
+        print(f"[QUERY_LOGGER] _write_to_sheet error: {e}")
