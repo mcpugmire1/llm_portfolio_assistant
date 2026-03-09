@@ -1,12 +1,9 @@
-import logging
 from datetime import datetime
 from threading import Thread
 
 import gspread
 import streamlit as st
 from google.oauth2.service_account import Credentials
-
-logger = logging.getLogger(__name__)
 
 SHEET_ID = "1Xxsh7hBx6yh8K2Vn1r6ST6JTACIblUBOGbQ2QBvrAk4"
 HEADERS = [
@@ -37,8 +34,7 @@ def get_sheet():
         )
         client = gspread.authorize(creds)
         return client.open_by_key(SHEET_ID).sheet1
-    except Exception as e:
-        logger.warning("[QUERY_LOGGER] get_sheet error: %s", e)
+    except Exception:
         return None
 
 
@@ -51,8 +47,8 @@ def _ensure_headers(sheet):
         if not row1 or len(row1) != len(HEADERS):
             sheet.update("A1", [HEADERS])
         _headers_checked = True
-    except Exception as e:
-        logger.warning("[QUERY_LOGGER] _ensure_headers error: %s", e)
+    except Exception:
+        pass
 
 
 def _capture_context():
@@ -90,7 +86,6 @@ def log_query(
     redirect_reason: str = "",
 ):
     # Capture context in main thread before spawning daemon
-    logger.warning("[QUERY_LOGGER] log_query called: %s", query[:50])
     user_agent, screen_size, timezone, referrer = _capture_context()
     Thread(
         target=_write_to_sheet,
@@ -142,5 +137,5 @@ def _write_to_sheet(
                     referrer,
                 ]
             )
-    except Exception as e:
-        logger.warning("[QUERY_LOGGER] _write_to_sheet error: %s", e)
+    except Exception:
+        pass
