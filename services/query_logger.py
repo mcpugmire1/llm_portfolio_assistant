@@ -14,6 +14,10 @@ HEADERS = [
     "Confidence",
     "Result Count",
     "Redirect Reason",
+    "User-Agent",
+    "Screen Width",
+    "Timezone",
+    "Referrer",
 ]
 
 _headers_checked = False
@@ -47,6 +51,32 @@ def _ensure_headers(sheet):
         pass
 
 
+def _capture_context():
+    """Capture browser context from st.context before spawning thread.
+    Must be called from the main Streamlit thread."""
+    user_agent = ""
+    timezone = ""
+    screen_size = ""
+    referrer = ""
+    try:
+        user_agent = st.context.headers.get("User-Agent", "")
+    except Exception:
+        pass
+    try:
+        timezone = st.context.timezone or ""
+    except Exception:
+        pass
+    try:
+        screen_size = st.session_state.get("_browser_screen_size", "")
+    except Exception:
+        pass
+    try:
+        referrer = st.session_state.get("_browser_referrer", "")
+    except Exception:
+        pass
+    return user_agent, screen_size, timezone, referrer
+
+
 def log_query(
     query: str,
     page: str = "Ask Agy",
@@ -55,15 +85,37 @@ def log_query(
     result_count: int = 0,
     redirect_reason: str = "",
 ):
+    # Capture context in main thread before spawning daemon
+    user_agent, screen_size, timezone, referrer = _capture_context()
     Thread(
         target=_write_to_sheet,
-        args=(query, page, intent_family, confidence, result_count, redirect_reason),
+        args=(
+            query,
+            page,
+            intent_family,
+            confidence,
+            result_count,
+            redirect_reason,
+            user_agent,
+            screen_size,
+            timezone,
+            referrer,
+        ),
         daemon=True,
     ).start()
 
 
 def _write_to_sheet(
-    query, page, intent_family, confidence, result_count, redirect_reason
+    query,
+    page,
+    intent_family,
+    confidence,
+    result_count,
+    redirect_reason,
+    user_agent,
+    screen_size,
+    timezone,
+    referrer,
 ):
     try:
         sheet = get_sheet()
@@ -79,6 +131,10 @@ def _write_to_sheet(
                     confidence,
                     result_count,
                     redirect_reason,
+                    user_agent,
+                    screen_size,
+                    timezone,
+                    referrer,
                 ]
             )
     except Exception:

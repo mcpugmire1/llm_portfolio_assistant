@@ -48,7 +48,25 @@ render_navbar(current_tab=st.session_state.get("active_tab", "Home"))
 # ---- first-mount guard ----
 if not st.session_state.get("__first_mount_rerun__", False):
     st.session_state["__first_mount_rerun__"] = True
+    # Capture browser context on first mount (before WebSocket takes over)
+    try:
+        st.session_state["_browser_referrer"] = st.context.headers.get("Referer", "")
+    except Exception:
+        pass
     st.rerun()
+
+# Capture screen size once per session via JS eval
+# On first capture: renders invisible iframe, gets value, reruns to clear it
+if "_browser_screen_size" not in st.session_state:
+    from streamlit_js_eval import streamlit_js_eval
+
+    _screen = streamlit_js_eval(
+        js_expressions="String(window.innerWidth)",
+        key="__screen_size__",
+    )
+    if _screen:
+        st.session_state["_browser_screen_size"] = _screen
+        st.rerun()  # Rerun to remove the iframe from the DOM
 
 # Initialize session state for active tab
 st.session_state.setdefault("active_tab", "Home")
