@@ -24,6 +24,7 @@ from dotenv import load_dotenv
 from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode
 
 from config.debug import DEBUG
+from services.query_logger import log_query
 from services.rag_service import semantic_search
 from services.semantic_router import is_portfolio_query_semantic
 from ui.components.story_detail import render_story_detail
@@ -1938,6 +1939,12 @@ def render_explore_stories(
             # Semantic router gate — catch personal/out_of_scope before Pinecone
             _, _, _, intent_family = is_portfolio_query_semantic(current_query)
             if intent_family in ("personal", "out_of_scope"):
+                log_query(
+                    current_query,
+                    "Explore Stories",
+                    intent_family=intent_family,
+                    redirect_reason=f"semantic_router:{intent_family}",
+                )
                 st.session_state.pop(LAST_RESULTS, None)
                 st.session_state.pop(LAST_CONFIDENCE, None)
                 st.session_state.pop(LAST_QUERY, None)
@@ -1967,6 +1974,13 @@ def render_explore_stories(
                 st.session_state[LAST_RESULTS] = view
                 st.session_state[LAST_CONFIDENCE] = confidence
                 st.session_state[LAST_QUERY] = current_query
+                log_query(
+                    current_query,
+                    "Explore Stories",
+                    intent_family=intent_family,
+                    confidence=confidence,
+                    result_count=len(view),
+                )
 
             finally:
                 search_container.empty()

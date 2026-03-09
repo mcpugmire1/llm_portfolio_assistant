@@ -28,6 +28,7 @@ from services.pinecone_service import (
     _embed,
     _init_pinecone,
 )
+from services.query_logger import log_query
 from services.rag_service import semantic_search
 from services.semantic_router import is_portfolio_query_semantic
 from utils.client_utils import is_generic_client
@@ -1480,6 +1481,7 @@ def rag_answer(
 
         if cat and not from_suggestion:
             log_offdomain(question or "", f"rule:{cat}")
+            log_query(question or "", "Ask Agy", redirect_reason=f"rule:{cat}")
             st.session_state["ask_last_reason"] = f"rule:{cat}"
             st.session_state["ask_last_query"] = question or ""
             st.session_state["ask_last_overlap"] = None
@@ -1533,6 +1535,12 @@ def rag_answer(
 Would you like to explore how his work in **platform modernization**, **payments systems**, or **enterprise transformation** might apply to your context?"""
             if DEBUG:
                 print("DEBUG: out_of_scope detected by semantic router")
+            log_query(
+                question or "",
+                "Ask Agy",
+                intent_family="out_of_scope",
+                redirect_reason="semantic_router:out_of_scope",
+            )
             st.session_state["ask_last_reason"] = "semantic_router:out_of_scope"
             st.session_state["ask_last_query"] = question or ""
             return {
@@ -1552,6 +1560,12 @@ Would you like to explore how his work in **platform modernization**, **payments
 Ask me about his **transformation work**, **platform engineering**, or **how he builds teams** and I'll dig up the details."""
             if DEBUG:
                 print("DEBUG: personal query detected by semantic router")
+            log_query(
+                question or "",
+                "Ask Agy",
+                intent_family="personal",
+                redirect_reason="semantic_router:personal",
+            )
             st.session_state["ask_last_reason"] = "semantic_router:personal"
             st.session_state["ask_last_query"] = question or ""
             return {
@@ -1660,6 +1674,14 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
             log_offdomain(
                 question or "", f"low_pinecone:{search_result['top_score']:.3f}"
             )
+            log_query(
+                question or "",
+                "Ask Agy",
+                intent_family=intent_family,
+                confidence=confidence,
+                result_count=len(pool),
+                redirect_reason="low_confidence",
+            )
             st.session_state["ask_last_reason"] = "low_confidence"
             st.session_state["ask_last_query"] = question or ""
             st.session_state["ask_last_overlap"] = overlap
@@ -1713,6 +1735,14 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
 
             if st.session_state.get("__pc_suppressed__"):
                 log_offdomain(question or "", "low_confidence")
+                log_query(
+                    question or "",
+                    "Ask Agy",
+                    intent_family=intent_family,
+                    confidence=confidence,
+                    result_count=0,
+                    redirect_reason="low_confidence",
+                )
                 st.session_state["ask_last_reason"] = "low_confidence"
                 st.session_state["ask_last_query"] = question or ""
                 st.session_state["ask_last_overlap"] = overlap
@@ -1987,6 +2017,14 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
         {"id": s["id"], "title": s["Title"], "client": s.get("Client", "")}
         for s in ranked
     ]
+
+    log_query(
+        question or "",
+        "Ask Agy",
+        intent_family=intent_family,
+        confidence=confidence,
+        result_count=len(ranked),
+    )
 
     return {
         "answer_md": answer_md,

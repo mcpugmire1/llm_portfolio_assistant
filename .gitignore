@@ -39,8 +39,9 @@ count_faiss_file
 # Scratch files (but allow tests/ directory)
 yourfile_pretty.json
 
-# Local Streamlit config (only if unnecessary to deploy)
+# Local Streamlit config and secrets
 .streamlit/config.toml
+.streamlit/secrets.toml
 
 # Local development scratch files
 LLM_Portfolio_Asst_theme_tag_map.py
