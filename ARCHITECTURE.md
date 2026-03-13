@@ -647,10 +647,11 @@ User Question: "How did Matt scale engineering teams?"
 [Layer 1: Validation - services/semantic_router.py + utils/validation.py]
 - is_nonsense() → reject if regex match
 - Semantic router → reject if score < 0.40
-- Returns intent_family (13 families including synthesis, out_of_scope)
+- Returns intent_family (15 families including synthesis, out_of_scope, personal)
       ↓
 [Layer 2: Fast Exit Checks - backend_service.py]
 - out_of_scope check: if intent_family == "out_of_scope" → graceful redirect
+- personal check: if intent_family == "personal" → warm professional redirect
 - Entity detection → (field, value) for scoped retrieval
 - Title entities use SOFT filtering (semantic search ranks naturally)
       ↓
@@ -703,7 +704,7 @@ User receives cited, STAR-formatted answer
 
 **Intent Classification (Semantic Router Only - Jan 29, 2026):**
 
-All intent classification uses the embedding-based semantic router (`services/semantic_router.py`) which maps queries to 13 intent families without LLM cost. Entity detection runs in parallel to identify company/project/title mentions.
+All intent classification uses the embedding-based semantic router (`services/semantic_router.py`) which maps queries to 15 intent families without LLM cost. Entity detection runs in parallel to identify company/project/title mentions.
 
 ```
 Query → Semantic Router (embedding similarity against 106+ intent embeddings)
@@ -711,7 +712,7 @@ Query → Semantic Router (embedding similarity against 106+ intent embeddings)
       → Intent Family Resolution:
         - background, behavioral, delivery, team_scaling, leadership
         - technical, domain_payments, domain_healthcare, stakeholders
-        - innovation, agile_transformation, narrative, synthesis, out_of_scope
+        - innovation, agile_transformation, narrative, synthesis, out_of_scope, personal
 ```
 
 **Note:** The previous `classify_query_intent()` LLM fallback was **removed** (Jan 29, 2026). It was:
@@ -1761,57 +1762,53 @@ META_PATTERNS = [
 
 ---
 
-### Analytics (Paused)
+### Query Logger (Google Sheets)
 
-Google Analytics integration was attempted but removed due to session state conflicts.
+Query logging to Google Sheets, capturing enriched data for every search across Ask MattGPT and Explore Stories.
 
 **History:**
 | Date | Action | Outcome |
 |------|--------|---------|
 | Jan 10, 2026 | Added `streamlit-analytics2` | Working initially (3 pageviews logged) |
 | Jan 12, 2026 | Production failure | `AttributeError: st.session_state has no attribute "session_data"` |
-| Jan 12, 2026 | Removed analytics | Quick fix to restore production stability |
+| Jan 12, 2026 | Removed analytics + dependencies | Quick fix to restore production stability |
+| Mar 9, 2026 | Re-enabled with Google Sheets logger | Enriched schema, fire-and-forget threading |
 
-**Root Cause:**
-The `streamlit-analytics2` wrapper (`with streamlit_analytics.track():`) executed before Streamlit initialized session state. The wrapper runs at import time, but `app.py` session state setup (lines 46-54) hadn't completed yet.
+**Architecture:**
+- **Service:** `services/query_logger.py`
+- **Backend:** Google Sheets via `gspread` + Google service account
+- **Threading:** Fire-and-forget daemon thread — Google Sheets API latency never blocks user response
+- **Error handling:** Silent failure (try/except pass) — logging should never break the app
+- **Browser context:** Captured in main Streamlit thread before spawning daemon (st.context is thread-local)
 
-**Planned Tracking Events:**
-| Event | Trigger | Data |
-|-------|---------|------|
-| `page_view` | Tab navigation | `page_name` |
-| `search` | Explore Stories query | `query`, `result_count` |
-| `ask_query` | Ask MattGPT query | `query_intent`, `confidence` |
-| `story_view` | Story detail opened | `story_id`, `source_page` |
-| `related_project_click` | Related Projects card clicked | `story_id` |
+**Schema (11 columns):**
+| Column | Source | Notes |
+|--------|--------|-------|
+| Timestamp | `datetime.now()` | Server-side UTC |
+| Query | function param | User's search text |
+| Page | function param | "Ask Agy" or "Explore Stories" |
+| Intent Family | semantic router | e.g., "leadership", "personal", "out_of_scope" |
+| Confidence | Pinecone result | "high", "low", "none", or "" if redirected before search |
+| Result Count | `len(results)` | 0 for redirects |
+| Redirect Reason | early-return reason | "rule:{cat}", "semantic_router:personal", "low_confidence", "" for success |
+| User-Agent | `st.context.headers` | Browser identification |
+| Screen Width | `streamlit_js_eval` | Viewport width for CSS breakpoint analysis |
+| Timezone | `st.context.timezone` | User's timezone |
+| Referrer | `st.context.headers` | Captured on first mount via first-mount guard |
 
-**Implementation Status:**
-- [ ] GA4 measurement ID configured
-- [ ] gtag.js injected in app.py
-- [ ] Event tracking functions created
-- [ ] Events wired to UI actions
+**Logging Points:**
+| Location | Count | Points |
+|----------|-------|--------|
+| `backend_service.py` | 6 | Nonsense filter, out_of_scope, personal, low_confidence, empty_pool, success |
+| `explore_stories.py` | 2 | Personal/OOS redirect, search results |
 
-**Next Attempt - Critical Fix:**
-Place the analytics wrapper **AFTER** all session state initialization:
-```python
-# app.py - CORRECT placement
-import streamlit_analytics2 as streamlit_analytics
+**Dependencies:** `gspread`, `google-auth` (in requirements.txt)
 
-# ... all session state setup (lines 46-54) ...
-# ... render_navbar(), setdefault("active_tab"), etc. ...
+**Secrets:** Requires `[gcp_service_account]` section in Streamlit secrets (both local `.streamlit/secrets.toml` and Streamlit Cloud settings)
 
-# THEN wrap page rendering:
-with streamlit_analytics.track():
-    if st.session_state["active_tab"] == "Home":
-        render_home_page()
-    # ... rest of page routing ...
-```
-
-**Fallback:** Manual `gtag.js` injection via `st.components.html()` if `streamlit-analytics2` continues to conflict.
-
-**Environment Variable (when implemented):**
-```
-GA_MEASUREMENT_ID=G-XXXXXXXXXX
-```
+**Browser Context Capture (app.py):**
+- Referrer: Captured in first-mount guard from `st.context.headers.get("Referer", "")`
+- Screen width: Captured via `streamlit_js_eval` with `st.rerun()` to remove iframe from DOM
 
 ---
 
@@ -2759,7 +2756,7 @@ Uses `is_generic_client()` pattern matching, not hardcoded lists. ✅
 
 **2. Intent Family Keywords**
 
-Hardcoded in semantic_router.py - 11 intent families with ~20 example phrases each.
+Hardcoded in semantic_router.py - 15 intent families with ~20 example phrases each.
 These should be reviewed quarterly for relevance.
 
 **DEPENDENCY WARNING:** If you modify `VALID_INTENTS`, delete `data/intent_embeddings.json` to regenerate cache.

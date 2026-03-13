@@ -355,9 +355,10 @@
   ```
 
   ### What Semantic Router Now Handles
-  - **Intent families** (13): background, behavioral, delivery, team_scaling, leadership, technical, domain_payments, domain_healthcare, stakeholders, innovation, agile_transformation, narrative, synthesis, out_of_scope
+  - **Intent families** (15): background, behavioral, delivery, team_scaling, leadership, technical, domain_payments, domain_healthcare, stakeholders, innovation, agile_transformation, narrative, synthesis, out_of_scope, personal
   - **Synthesis detection**: `intent_family == "synthesis"` (no LLM call)
   - **Out of scope detection**: `intent_family == "out_of_scope"` → graceful redirect before Pinecone
+  - **Personal query detection**: `intent_family == "personal"` → warm professional redirect
   - **Title detection**: Detected but uses SOFT filtering (semantic search ranks naturally, no Pinecone filter)
 
   ### Entity Detection (Still Active)
