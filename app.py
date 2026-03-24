@@ -65,10 +65,35 @@ if not st.session_state.get("__first_mount_rerun__", False):
         timezone = st.context.timezone or ""
     except Exception:
         pass
+    # Capture UTM params (social platforms strip HTTP Referer, UTM is reliable)
+    utm_source = ""
+    utm_medium = ""
+    utm_campaign = ""
+    utm_content = ""
+    utm_term = ""
+    try:
+        params = st.query_params
+        utm_source = params.get("utm_source", "")
+        utm_medium = params.get("utm_medium", "")
+        utm_campaign = params.get("utm_campaign", "")
+        utm_content = params.get("utm_content", "")
+        utm_term = params.get("utm_term", "")
+    except Exception:
+        pass
     # Log page_load (screen size not yet available — captured on next rerun)
     from services.query_logger import log_page_load
 
-    log_page_load(user_agent, "", timezone, referrer)
+    log_page_load(
+        user_agent,
+        "",
+        timezone,
+        referrer,
+        utm_source,
+        utm_medium,
+        utm_campaign,
+        utm_content,
+        utm_term,
+    )
     st.rerun()
 
 # Capture screen size once per session via JS eval

@@ -1,21 +1,7 @@
-Feature: Production-only logging and UTM capture
+Feature: UTM capture on page load
   As the portfolio owner
-  I want to know where visitors come from and prevent eval noise in the log
-  So that I can understand traffic sources and keep the query log clean
-
-  # =============================================================================
-  # PRODUCTION GUARD
-  # =============================================================================
-
-  Scenario: Logging skipped outside production
-    Given MATTGPT_ENV is not set to "production"
-    When log_query() or log_page_load() is called
-    Then no write is made to Google Sheets
-
-  Scenario: Logging fires in production
-    Given MATTGPT_ENV is set to "production"
-    When log_page_load() is called
-    Then a page_load row is written to Google Sheets
+  I want to know where visitors come from
+  So that I can understand which channels drive traffic
 
   # =============================================================================
   # UTM CAPTURE

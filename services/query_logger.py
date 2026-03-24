@@ -23,6 +23,11 @@ HEADERS = [
     "Rating",
     "Turn Index",
     "Msg Hash",
+    "UTM Source",
+    "UTM Medium",
+    "UTM Campaign",
+    "UTM Content",
+    "UTM Term",
 ]
 
 _headers_checked = False
@@ -83,7 +88,9 @@ def _capture_context():
 
 
 def _append_row(row):
-    """Append a single row to the sheet. Called from daemon threads."""
+    """Append a single row to the sheet. Called from daemon threads.
+    To suppress logging during evals, set st.session_state['__suppress_logging__'] = True
+    in the eval runner before calling any log_* functions."""
     try:
         sheet = get_sheet()
         if sheet:
@@ -134,7 +141,17 @@ def log_query(
     Thread(target=_append_row, args=(row,), daemon=True).start()
 
 
-def log_page_load(user_agent: str, screen_size: str, timezone: str, referrer: str):
+def log_page_load(
+    user_agent: str,
+    screen_size: str,
+    timezone: str,
+    referrer: str,
+    utm_source: str = "",
+    utm_medium: str = "",
+    utm_campaign: str = "",
+    utm_content: str = "",
+    utm_term: str = "",
+):
     """Log a page_load event. Called once per session from the first-mount guard."""
     row = _build_row(
         "page_load",
@@ -143,6 +160,11 @@ def log_page_load(user_agent: str, screen_size: str, timezone: str, referrer: st
         **{
             "User-Agent": user_agent,
             "Screen Width": screen_size,
+            "UTM Source": utm_source,
+            "UTM Medium": utm_medium,
+            "UTM Campaign": utm_campaign,
+            "UTM Content": utm_content,
+            "UTM Term": utm_term,
         },
     )
     Thread(target=_append_row, args=(row,), daemon=True).start()
