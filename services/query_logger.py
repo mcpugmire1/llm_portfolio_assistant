@@ -7,6 +7,7 @@ from google.oauth2.service_account import Credentials
 
 SHEET_ID = "1Xxsh7hBx6yh8K2Vn1r6ST6JTACIblUBOGbQ2QBvrAk4"
 HEADERS = [
+    "Event Type",
     "Timestamp",
     "Query",
     "Page",
@@ -18,6 +19,10 @@ HEADERS = [
     "Screen Width",
     "Timezone",
     "Referrer",
+    "Sources",
+    "Rating",
+    "Turn Index",
+    "Msg Hash",
 ]
 
 _headers_checked = False
@@ -45,7 +50,7 @@ def _ensure_headers(sheet):
     try:
         row1 = sheet.row_values(1)
         if not row1 or len(row1) != len(HEADERS):
-            sheet.update("A1", [HEADERS])
+            sheet.update(values=[HEADERS], range_name="A1")
         _headers_checked = True
     except Exception:
         pass
@@ -77,6 +82,30 @@ def _capture_context():
     return user_agent, screen_size, timezone, referrer
 
 
+def _append_row(row):
+    """Append a single row to the sheet. Called from daemon threads."""
+    try:
+        sheet = get_sheet()
+        if sheet:
+            _ensure_headers(sheet)
+            sheet.append_row(row)
+    except Exception:
+        pass
+
+
+def _build_row(event_type, **fields):
+    """Build a row list matching HEADERS order. Missing fields default to empty."""
+    row = []
+    for header in HEADERS:
+        if header == "Event Type":
+            row.append(event_type)
+        elif header == "Timestamp":
+            row.append(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        else:
+            row.append(fields.get(header, ""))
+    return row
+
+
 def log_query(
     query: str,
     page: str = "Ask Agy",
@@ -87,55 +116,54 @@ def log_query(
 ):
     # Capture context in main thread before spawning daemon
     user_agent, screen_size, timezone, referrer = _capture_context()
-    Thread(
-        target=_write_to_sheet,
-        args=(
-            query,
-            page,
-            intent_family,
-            confidence,
-            result_count,
-            redirect_reason,
-            user_agent,
-            screen_size,
-            timezone,
-            referrer,
-        ),
-        daemon=True,
-    ).start()
+    row = _build_row(
+        "query",
+        Query=query,
+        Page=page,
+        Confidence=confidence,
+        Referrer=referrer,
+        Timezone=timezone,
+        **{
+            "Intent Family": intent_family,
+            "Result Count": result_count,
+            "Redirect Reason": redirect_reason,
+            "User-Agent": user_agent,
+            "Screen Width": screen_size,
+        },
+    )
+    Thread(target=_append_row, args=(row,), daemon=True).start()
 
 
-def _write_to_sheet(
-    query,
-    page,
-    intent_family,
-    confidence,
-    result_count,
-    redirect_reason,
-    user_agent,
-    screen_size,
-    timezone,
-    referrer,
+def log_page_load(user_agent: str, screen_size: str, timezone: str, referrer: str):
+    """Log a page_load event. Called once per session from the first-mount guard."""
+    row = _build_row(
+        "page_load",
+        Referrer=referrer,
+        Timezone=timezone,
+        **{
+            "User-Agent": user_agent,
+            "Screen Width": screen_size,
+        },
+    )
+    Thread(target=_append_row, args=(row,), daemon=True).start()
+
+
+def log_feedback(
+    rating: str,
+    query: str,
+    sources: str,
+    turn_index: int,
+    msg_hash: int,
 ):
-    try:
-        sheet = get_sheet()
-        if sheet:
-            _ensure_headers(sheet)
-            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            sheet.append_row(
-                [
-                    timestamp,
-                    query,
-                    page,
-                    intent_family,
-                    confidence,
-                    result_count,
-                    redirect_reason,
-                    user_agent,
-                    screen_size,
-                    timezone,
-                    referrer,
-                ]
-            )
-    except Exception:
-        pass
+    """Log a feedback (up/down vote) event. Called from the conversation UI."""
+    row = _build_row(
+        "feedback",
+        Query=query[:200],
+        Sources=sources,
+        Rating=rating,
+        **{
+            "Turn Index": str(turn_index),
+            "Msg Hash": str(msg_hash),
+        },
+    )
+    Thread(target=_append_row, args=(row,), daemon=True).start()

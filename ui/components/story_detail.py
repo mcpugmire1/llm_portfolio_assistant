@@ -8,6 +8,8 @@ Used by both Explore Stories and Ask MattGPT pages.
 import streamlit as st
 import streamlit.components.v1 as components
 
+from services.query_logger import log_feedback
+
 
 # Handle deep-link to specific story via ?story= query param
 def handle_story_deeplink():
@@ -281,6 +283,15 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
     story_id_original = detail.get("id", "")
     story_id_safe = str(detail.get('id', 'x')).replace('|', '-').replace(' ', '-')
     export_btn_key = f"export_{key_suffix}_{story_id_safe}"
+    helpful_btn_key = f"helpful_{key_suffix}_{story_id_safe}"
+
+    # Confirmed state is session-scoped by design.
+    # Ratings are logged to Google Sheets via log_feedback() (write-only).
+    # No read-back -- confirmed state resets on new browser session.
+    # Visitors are typically one-time evaluators; persistence across sessions
+    # is not required for this use case.
+    helpful_state = st.session_state.get(f"helpful_{story_id_safe}")
+    is_helpful_confirmed = helpful_state == "up"
 
     header_html = f"""
     <style>
@@ -356,11 +367,25 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
 
     /* Hide Streamlit trigger buttons */
     [class*="st-key-share_"],
-    [class*="st-key-export_"] {{
+    [class*="st-key-export_"],
+    [class*="st-key-helpful_"] {{
         position: absolute !important;
         left: -9999px !important;
         height: 0 !important;
         overflow: hidden !important;
+    }}
+
+    /* Helpful button confirmed state */
+    .detail-action-btn.helpful-confirmed {{
+        background: var(--success-color) !important;
+        border-color: var(--success-color) !important;
+        color: white !important;
+        cursor: default;
+        opacity: 1;
+    }}
+    .detail-action-btn.helpful-confirmed:hover {{
+        border-color: var(--success-color) !important;
+        color: white !important;
     }}
 
     /* Mobile: optimized for scanning, not reading */
@@ -439,6 +464,7 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
             </div>
         </div>
         <div class="detail-actions">
+            <button class="detail-action-btn{" helpful-confirmed" if is_helpful_confirmed else ""}" id="btn-helpful-story"{" disabled" if is_helpful_confirmed else ""}><span class="btn-label">{"👍 Helpful ✓" if is_helpful_confirmed else "Helpful"}</span></button>
             <button class="detail-action-btn" id="btn-share-story">
                 <span>🔗</span>
                 <span class="btn-label">Share</span>
@@ -451,6 +477,19 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
     </div>
     """
     st.markdown(header_html, unsafe_allow_html=True)
+
+    helpful_clicked = st.button("", key=helpful_btn_key)
+    if helpful_clicked and not is_helpful_confirmed:
+        st.session_state[f"helpful_{story_id_safe}"] = "up"
+        story_title = detail.get("Title", "")
+        log_feedback(
+            rating="up",
+            query=story_title,
+            sources=story_title,
+            turn_index=0,
+            msg_hash=hash(story_id_safe) % 100000,
+        )
+        st.rerun()
 
     export_clicked = st.button("", key=export_btn_key)
 
@@ -585,6 +624,14 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
                     if (exportBtn) {{
                         exportBtn.onclick = function() {{
                             var stBtn = parentDoc.querySelector('[class*="st-key-{export_btn_key}"] button');
+                            if (stBtn) stBtn.click();
+                        }};
+                    }}
+
+                    var helpfulBtn = parentDoc.getElementById('btn-helpful-story');
+                    if (helpfulBtn && !helpfulBtn.disabled) {{
+                        helpfulBtn.onclick = function() {{
+                            var stBtn = parentDoc.querySelector('[class*="st-key-{helpful_btn_key}"] button');
                             if (stBtn) stBtn.click();
                         }};
                     }}

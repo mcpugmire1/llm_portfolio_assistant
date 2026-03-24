@@ -49,10 +49,26 @@ render_navbar(current_tab=st.session_state.get("active_tab", "Home"))
 if not st.session_state.get("__first_mount_rerun__", False):
     st.session_state["__first_mount_rerun__"] = True
     # Capture browser context on first mount (before WebSocket takes over)
+    referrer = ""
+    user_agent = ""
+    timezone = ""
     try:
-        st.session_state["_browser_referrer"] = st.context.headers.get("Referer", "")
+        referrer = st.context.headers.get("Referer", "")
+        st.session_state["_browser_referrer"] = referrer
     except Exception:
         pass
+    try:
+        user_agent = st.context.headers.get("User-Agent", "")
+    except Exception:
+        pass
+    try:
+        timezone = st.context.timezone or ""
+    except Exception:
+        pass
+    # Log page_load (screen size not yet available — captured on next rerun)
+    from services.query_logger import log_page_load
+
+    log_page_load(user_agent, "", timezone, referrer)
     st.rerun()
 
 # Capture screen size once per session via JS eval
