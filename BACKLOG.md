@@ -133,6 +133,51 @@ All project/client counts derived dynamically from JSONL across 4 files.
 
 ## Open — Next Up
 
+### JD Match and Fit Assessment
+**Priority:** HIGH
+**Status:** Groomed, ready for design session
+
+**User Stories:**
+- As a recruiter or hiring manager, I want to paste a job description and see how Matt's experience maps to the requirements, so I can quickly assess fit without reading an entire resume
+- As Matt, I want to privately assess my fit against a role before deciding to apply, so I can prioritize time on highest-fit opportunities and update my Notion tracker
+
+**Acceptance Criteria — Recruiter view:**
+- Text area accepts a pasted job description
+- Output shows required qualifications with match status (✓ strong / ~ partial / ✗ gap)
+- Each matched qualification links to 1-2 supporting STAR stories by title and client
+- Partial matches explain what matches and what is missing
+- Output is clean, scannable, professional — no conversational filler
+
+**Acceptance Criteria — Private view (Matt only):**
+- Same structured output plus overall fit score: High / Medium / Low
+- Gap section shows requirements with no supporting stories
+- Recommendation: Apply / Consider / Pass
+- Password-gated via discreet lock icon — recruiter never sees the prompt
+- Agentic access bypasses UI gate via environment secret (for Notion automation)
+
+**Acceptance Criteria — Both:**
+- Dedicated JD input surface — new navigation tab, not inside Ask MattGPT
+- Two-step pipeline: LLM extraction pass then Pinecone query pass (see ADR 016)
+- Story evidence is specific: title and client, not just theme
+- Works across varied JD formats (bulleted, narrative, mixed)
+
+**Mobile:** Desktop-only for v1. Feature hidden or shows "best on desktop" message at mobile breakpoints. Consistent with existing Share/Export behavior. Recruiter fit assessment is a desk task.
+
+**Out of scope for v1:**
+- LinkedIn URL scraping
+- Automatic Notion API sync — manual copy of fit score acceptable
+- Multiple JD comparison
+- Side-by-side resume comparison
+- Mobile-optimized layout
+
+**Open questions:**
+- Navigation tab name: "Job Fit" / "Match a Role" / "Assess a Role" — TBD
+- Exact placement of lock icon — must not signal hidden view to recruiters
+- Agentic access token mechanism — environment variable or Streamlit secret
+
+**Size:** Large
+**Dependencies:** Existing RAG pipeline, Pinecone index, story corpus, LLM extraction prompt (design session required before implementation)
+
 ### JPM Payments IQ Differentiation
 **Priority:** HIGH
 **Issue:** JP Morgan payments stories lack differentiation in Situation/Use Case fields — Pinecone can't distinguish them from other JPM work

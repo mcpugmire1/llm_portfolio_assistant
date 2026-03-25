@@ -391,3 +391,30 @@ const button = container.querySelector('button');
 - Landing page buttons (banking_landing.py, cross_industry_landing.py)
 
 ---
+
+## ADR 016 — Two-Step Pipeline for JD Requirement Extraction
+
+**Date:** 2026-03-25
+**Status:** Accepted
+
+**Context:**
+The JD Match feature requires mapping job description requirements to STAR stories in Pinecone. Job descriptions vary widely in format — bulleted lists, narrative paragraphs, mixed structures, implicit requirements embedded in responsibilities. A single Pinecone query against raw JD text would produce imprecise retrieval and no structured output.
+
+**Decision:**
+Use a two-step pipeline:
+
+1. **LLM extraction pass** — send raw JD text to Claude and extract structured requirements as JSON: required qualifications, preferred qualifications, responsibilities, implicit signals. This normalizes format variance before any vector search.
+
+2. **Pinecone query pass** — use extracted requirement clusters as discrete semantic queries against the story corpus. One query per requirement cluster produces per-requirement match evidence rather than a single blended result.
+
+**Alternatives considered:**
+- Single Pinecone query against full JD text — rejected. Produces blended retrieval with no per-requirement traceability. Cannot generate the structured match output the feature requires.
+- Keyword extraction only — rejected. Misses semantic equivalents (e.g. "delivery excellence" matching "zero-defect delivery" stories).
+
+**Consequences:**
+- Two LLM/API calls per JD assessment — acceptable latency tradeoff for structured output quality
+- Extraction prompt is load-bearing — prompt design session required before implementation
+- Per-requirement story evidence enables the LinkedIn-style match format
+- Pipeline is testable in isolation: extraction step and retrieval step can be evaled independently
+
+---
