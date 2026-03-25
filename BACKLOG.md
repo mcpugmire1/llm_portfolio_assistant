@@ -135,7 +135,7 @@ All project/client counts derived dynamically from JSONL across 4 files.
 
 ### JD Match and Fit Assessment
 **Priority:** HIGH
-**Status:** Groomed, ready for design session
+**Status:** Groomed, design decisions resolved — ready for implementation spec
 
 **User Stories:**
 - As a recruiter or hiring manager, I want to paste a job description and see how Matt's experience maps to the requirements, so I can quickly assess fit without reading an entire resume
@@ -143,20 +143,25 @@ All project/client counts derived dynamically from JSONL across 4 files.
 
 **Acceptance Criteria — Recruiter view:**
 - Text area accepts a pasted job description
-- Output shows required qualifications with match status (✓ strong / ~ partial / ✗ gap)
+- Output shows required/preferred qualifications with match status (✓ strong / ~ partial / ✗ gap)
 - Each matched qualification links to 1-2 supporting STAR stories by title and client
 - Partial matches explain what matches and what is missing
+- Story links expand inline using `render_story_detail()` (same pattern as Related Projects in Ask MattGPT)
+- Match count shown (e.g., "7/7 req") — factual, not scored
+- NO fit score or recommendation in recruiter view — let the evidence speak
 - Output is clean, scannable, professional — no conversational filler
 
 **Acceptance Criteria — Private view (Matt only):**
 - Same structured output plus overall fit score: High / Medium / Low
+- "Strong match" / "Partial match" / "Weak match" headline label
 - Gap section shows requirements with no supporting stories
 - Recommendation: Apply / Consider / Pass
-- Password-gated via discreet lock icon — recruiter never sees the prompt
+- Password-gated via discreet lock icon in nav bar far right — recruiter never sees the prompt
 - Agentic access bypasses UI gate via environment secret (for Notion automation)
 
 **Acceptance Criteria — Both:**
-- Dedicated JD input surface — new navigation tab, not inside Ask MattGPT
+- New navigation tab: "Role Match" (5th tab, between Ask MattGPT and About Matt)
+- Two-column layout: paste JD left, read results right
 - Two-step pipeline: LLM extraction pass then Pinecone query pass (see ADR 016)
 - Story evidence is specific: title and client, not just theme
 - Works across varied JD formats (bulleted, narrative, mixed)
@@ -170,9 +175,14 @@ All project/client counts derived dynamically from JSONL across 4 files.
 - Side-by-side resume comparison
 - Mobile-optimized layout
 
+**Resolved design decisions (Mar 25, 2026):**
+- Tab name: "Role Match"
+- Lock icon: nav bar far right, subtle, recruiter doesn't notice
+- Recruiter view: evidence only, no score — match count (7/7) is factual, fit label is private
+- Story evidence: inline expansion via `render_story_detail()`, not navigation to Explore Stories
+- Layout: two-column (paste left, results right)
+
 **Open questions:**
-- Navigation tab name: "Job Fit" / "Match a Role" / "Assess a Role" — TBD
-- Exact placement of lock icon — must not signal hidden view to recruiters
 - Agentic access token mechanism — environment variable or Streamlit secret
 
 **Size:** Large
