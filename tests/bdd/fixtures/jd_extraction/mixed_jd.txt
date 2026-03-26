@@ -1,0 +1,39 @@
+This position will report to the SVP, Products & Experiences and is based in Orlando, Florida.
+
+Emerging Tech & Product is where Pinnacle Entertainment Group identifies, prioritizes, explores, tests, and productizes the cutting edge technologies shaping our future. We leverage deep technical expertise and strategic rigor to identify high impact opportunities and turn them into scalable, value-driving solutions. The Director, Software Engineering is responsible for our early stage innovation pipeline, in close partnership with Emerging Product as well as business and technology leaders throughout the Parks, Experiences, and Products segment.
+
+As Director, Software Engineering, you will lead the management of the Emerging Tech Labs, with a focus on driving business value through three primary areas: 1) managing relationships with external partners to foster innovation and collaboration; 2) overseeing stakeholder testing to validate concepts, user experience, and business value; and 3) directing engineering efforts to evaluate both vendor and internal solutions through proof-of-concept development and testing.
+
+This role provides managerial oversight to engineers on the Emerging Technology team and serves as a technical thought leader across the organization. As the steward of our early stage innovation pipeline, your focus will be on producing well-documented insights, validated prototypes, technical evaluations, and architectural guidance that can be directly applied by delivery teams and the Emerging Tech Initial Tech Implementation team to accelerate implementation and reduce risk. You will ensure that all work is rigorously prioritized and aligned with the approved quarterly Emerging Product opportunity map, and that sound engineering and architectural practices are consistently followed.
+
+You will be accountable for ensuring that the Emerging Technology portfolio generates actionable outcomes that inform strategic decision-making and enable downstream teams. Success in this role is measured by the clarity and quality of technology evaluations, the effectiveness of knowledge transfer, and the ability to clearly articulate and quantify the business value derived from early-stage innovation efforts. A strong blend of technical fluency, business acumen, and design thinking is essential.
+
+Additionally, you will represent EmTech Labs in cross-functional and executive forums partnering closely with the office of technology enablement and R&D. You must be able to clearly communicate the team's insights, vision, and progress, and translate complex technical concepts into accessible narratives for senior technology leadership, including C-level executives. Your ability to connect emerging technology work to tangible business outcomes will be critical in driving alignment and support across the enterprise.
+
+Responsibilities:
+- Guide the exploration and evaluation of emerging technologies in alignment with the quarterly Emerging Product prioritized opportunity map.
+- Oversee the development of proofs of concept and stakeholder testing to validate technical feasibility, user experience, and business value.
+- Facilitate the transfer of validated insights, prototypes, and technical guidance to delivery teams and the Initial Tech Implementation team.
+- Engage with key stakeholders, users, and partners to ensure alignment, gather feedback, and support early-stage validation efforts.
+- Communicate emerging technology strategies, findings, and recommendations to senior executives, translating complex concepts into actionable insights.
+- Manage sponsor and stakeholder expectations, ensuring transparency around scope, outcomes, and value realization.
+- Provide technical leadership to the Emerging Technology team, ensuring adherence to sound engineering and architectural practices.
+
+Basic Qualifications:
+- Proven innovation leader with experience managing specialized, diverse teams pursuing challenging and ambiguous goals
+- 12+ years of software development experience with at least 8 years managing medium to large technology projects.
+- 5 years experience in delivering projects involving emerging tech such as Mobile/Wearables, IoT, Game Engines, CV, NLP, and Advanced ML
+- Track record of leading and driving initiatives to the next level, with a focus on delivering business value, being on time and within budget
+- Deconstruct complex problems and help teams create clarity out of ambiguous or conflicting requirements
+- Ability to simultaneously manage teams on multiple engineering projects of significant complexity
+- Ability to navigate a large, complex stakeholder environment
+
+Preferred Qualifications:
+- Recent experience delivering Next Gen projects using emerging technologies such as CV, NLP, ML, IoT, Recommendations and Predictions, Robotics and Automation, Game Engines, Mixed Reality, Mobile and Wearables, advanced Security and Privacy, Wireless Networks (5G)
+- Proven professional networking among technology companies
+
+Required Education:
+- BS or MS in Computer Science or equivalent quantitative field OR equivalent experience
+
+Preferred Education:
+- MSCS/Engineering or related work experience

@@ -1,0 +1,9 @@
+What if you could shape the AI strategy of a multi-trillion-dollar investment platform and see your work deployed at true global scale?
+
+This is a rare opportunity to step into a Global Head of Advanced Engineering role at one of the world's largest, most sophisticated asset managers. This is a tech-forward investment firm with trillions in AUM, a dominant ETF platform, and the appetite to move aggressively in artificial intelligence. Based in Atlanta (5 days onsite), this role isn't about incremental innovation. It's about leading and executing an AI vision inside a complex, high-impact financial ecosystem.
+
+You'll lead a team of 40 across AI, ML, data science, and data engineering, owning the strategy, architecture, and hands-on delivery of AI initiatives across the business. The focus is to build and scale LLM-driven systems, develop intelligent workflows, and clearly articulate and deliver measurable business impact.
+
+This organization is focused on applied AI. That means designing production-grade systems around large language models, driving automation and insight across investment, operations, and enterprise functions, and partnering directly with senior stakeholders who care deeply about ROI. You will focus on incubating new technology, building components for other engineering teams, and incubating agentic engineering across the firm.
+
+If you've built AI systems at scale, understand LLM architecture beyond the hype, and can connect technical innovation directly to business performance, this is your chance to lead AI inside a firm with the capital, ambition, and infrastructure to actually do it.

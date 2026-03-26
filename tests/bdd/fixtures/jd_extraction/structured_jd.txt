@@ -1,0 +1,47 @@
+We are seeking a Director of Engineering to lead the evolution of our shared platform capabilities that power our Integrated Risk Management and Insurance Product engineering teams. This leader will be responsible for modernizing our platform architecture, enabling reusable capabilities, strengthening security posture, and accelerating delivery through AI-assisted engineering practices.
+
+The Platform organization operates as a shared service model, partnering closely with product-aligned engineering teams to deliver scalable, secure, and high-performing platform capabilities that serve the entire enterprise. This role requires strong technical depth, excellent people leadership skills, security awareness, and a forward-looking mindset on AI in the software development lifecycle.
+
+Responsibilities:
+- Define and execute the platform modernization roadmap in alignment with long-term business and technology strategy.
+- Deliver shared platform services that enable IRM and Insurance engineering teams to build faster and more consistently.
+- Drive architectural improvements across APIs, data, caching, CI/CD, observability, identity, and cloud infrastructure.
+- Promote modular, API-driven, and service-oriented design principles.
+- Operate the Platform team as a force multiplier for product-aligned engineering teams.
+- Partner with IRM and Insurance Product Directors to balance platform enablement with delivery timelines.
+- Establish clear SLAs and engagement models for shared capabilities.
+- Promote knowledge sharing and cross-team collaboration.
+- Lead adoption of AI-assisted engineering practices across the platform organization.
+- Establish guardrails for responsible AI usage in code generation, test automation, documentation, and architectural analysis.
+- Partner with leadership to define measurable AI productivity and quality metrics.
+- Provide leadership, management, and technical vision to the Platform engineering organization.
+- Manage managers and senior technical leaders.
+- Inspire and motivate teams to deliver innovative solutions with urgency and accountability.
+- Lead hiring, performance management, compensation, and career development processes.
+- Mentor engineering leaders and foster a culture of design excellence and continuous learning.
+- Identify and coordinate technical training opportunities.
+- Stimulate knowledge sharing and elevate best practices across teams.
+- Embed secure-by-design principles across the platform.
+- Partner with Security and Architecture to ensure compliance with industry standards and regulatory expectations.
+- Strengthen identity, authentication, authorization, secrets management, and data protection strategies.
+
+Required:
+- Bachelor's Degree in Computer Science or related field.
+- 10+ years of professional software development experience.
+- 5+ years managing managers and senior engineering leaders.
+- Proficient in at least one strongly-typed language (Java, C/C++, C#, etc.).
+- Experience with a modern backend framework (e.g. Node.js, Python/FastAPI, or Go) and a frontend framework (e.g. React or Vue).
+- Cloud-native experience (AWS, Azure, or GCP)
+- Experience with modern relational and NoSQL databases (SQL Server, PostgreSQL, or Redis).
+- Experience modernizing legacy systems into modular or service-oriented architecture.
+- Demonstrated experience leading large-scale platform or shared services organizations.
+- Strong working knowledge of application security, secure coding practices, and risk mitigation.
+- Working knowledge of AI tools in software development (code generation, testing, documentation, observability)
+
+Preferred:
+- Agile/Scrum experience
+- Insurance or risk management domain knowledge
+- Experience managing client product implementations
+- Experience with building mobile applications using React Native
+
+Who We Are: RiskTech Solutions delivers single-platform SaaS solutions that help organizations navigate the complexities of risk, insurance, compliance, and safety management.
