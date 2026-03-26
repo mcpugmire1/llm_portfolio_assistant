@@ -407,14 +407,25 @@ Use a two-step pipeline:
 
 2. **Pinecone query pass** — use extracted requirement clusters as discrete semantic queries against the story corpus. One query per requirement cluster produces per-requirement match evidence rather than a single blended result.
 
+**Clarification on retrieval layer (updated 2026-03-26):**
+The Pinecone query pass reuses `pinecone_service.py` query functions and the existing index/embedding model directly. It does not route through the Ask MattGPT RAG pipeline (`backend_service.py`, `story_intelligence.py`). The assessment reasoning layer in `jd_assessor.py` is purpose-built for structured per-requirement evaluation, distinct from the conversational synthesis mode in Ask MattGPT.
+
+**Three-step pipeline (refined from original two-step):**
+1. **LLM extraction pass** — JD text → structured requirements JSON (Stage 1, validated)
+2. **Pinecone retrieval pass** — per-requirement semantic query via `pinecone_service.py` → top candidate stories per requirement
+3. **LLM assessment pass** — requirements + candidate stories → structured match report (✓ strong / ~ partial / ✗ gap) with story evidence and gap explanations
+
 **Alternatives considered:**
 - Single Pinecone query against full JD text — rejected. Produces blended retrieval with no per-requirement traceability. Cannot generate the structured match output the feature requires.
 - Keyword extraction only — rejected. Misses semantic equivalents (e.g. "delivery excellence" matching "zero-defect delivery" stories).
+- Pure long context (all 130 stories in one LLM call, no Pinecone) — rejected. Works at current corpus size but introduces noise from irrelevant stories. Pinecone pre-filtering produces a focused, higher-quality context for the assessment LLM.
+- Routing through existing Ask MattGPT RAG pipeline — rejected. The conversational synthesis pipeline is optimized for narrative answers, not structured per-requirement evaluation. Shoe-horning a different output format through an existing pipeline adds coupling without benefit.
 
 **Consequences:**
-- Two LLM/API calls per JD assessment — acceptable latency tradeoff for structured output quality
+- Two LLM calls + per-requirement Pinecone queries per assessment — acceptable latency with parallel retrieval
 - Extraction prompt is load-bearing — prompt design session required before implementation
 - Per-requirement story evidence enables the LinkedIn-style match format
-- Pipeline is testable in isolation: extraction step and retrieval step can be evaled independently
+- Pipeline is testable in isolation: extraction, retrieval, and assessment steps can be evaled independently
+- Shared infrastructure (Pinecone index, embeddings, `pinecone_service.py`) keeps the solution harmonious with the existing architecture
 
 ---

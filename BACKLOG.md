@@ -162,7 +162,7 @@ All project/client counts derived dynamically from JSONL across 4 files.
 **Acceptance Criteria — Both:**
 - New navigation tab: "Role Match" (5th tab, between Ask MattGPT and About Matt)
 - Two-column layout: paste JD left, read results right
-- Two-step pipeline: LLM extraction pass then Pinecone query pass (see ADR 016)
+- Three-step pipeline: LLM extraction → per-requirement Pinecone retrieval via pinecone_service.py → LLM assessment (see ADR 016). Uses shared Pinecone infrastructure, not Ask MattGPT RAG pipeline.
 - Story evidence is specific: title and client, not just theme
 - Works across varied JD formats (bulleted, narrative, mixed)
 
@@ -184,6 +184,7 @@ All project/client counts derived dynamically from JSONL across 4 files.
 
 **Open questions:**
 - Agentic access token mechanism — environment variable or Streamlit secret
+- Technology stack matching — extraction prompt `type` field (experience | skill | education | domain) doesn't distinguish technology-specific requirements. A `.NET Core` requirement vs a `cloud-native experience` requirement need different match confidence. Consider adding `technical_stack` type so Stage 2 matching can differentiate: (1) language/paradigm match — transferable but not primary stack, (2) framework match — specific framework gap is harder to bridge, (3) transferable — cloud, CI/CD, databases where the concept transfers regardless of vendor. This affects private gap view accuracy.
 
 **Size:** Large
 **Dependencies:** Existing RAG pipeline, Pinecone index, story corpus, LLM extraction prompt (design session required before implementation)
