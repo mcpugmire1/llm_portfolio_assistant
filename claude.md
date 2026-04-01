@@ -374,10 +374,10 @@
 
   ### Verbatim Phrases (Sacred Vocabulary)
   When responding to Professional Narrative queries, the LLM must use these exact phrases:
-  - "builder", "modernizer"
-  - "complexity to clarity"
-  - "build something from nothing"
-  - "not looking for a maintenance role"
+  - "builder", "0-to-1"
+  Note: "modernizer", "complexity to clarity", "build something from nothing", and
+  "not looking for a maintenance role" were removed from story data during Mar 2026
+  data quality cleanup. Do not reference them in prompts or tests.
 
   ### Common Fixes
   - **Widget won't reset:** Increment version key, delete old widget keys

@@ -217,6 +217,34 @@ All project/client counts derived dynamically from JSONL across 4 files.
 **Issue:** The March 2026 data quality work (CIC pairing, IQ differentiation, Situation enrichment across 85+ stories) is a compelling story about systematic data improvement for AI systems
 **Action:** Write as STAR story for portfolio — covers pattern recognition, data quality discipline, measurable impact on retrieval accuracy
 
+### Semantic Router: Wrong-Person Query Detection
+**Priority:** HIGH
+**Issue:** Queries about other people ("What's Jeff Bezos's leadership style?", "Tell me about Elon Musk") score high against valid intent families because the router matches semantic content (leadership, biography) without checking WHO the query is about. Bezos leadership query scores 0.664 as "leadership" — a strong match to a wrong subject.
+**Root cause:** Semantic router has no entity/person detection. It only checks embedding similarity to intent families.
+**Fix options:**
+1. Add person-name detection before routing — if query mentions a name that isn't Matt/he/him, classify as out_of_scope
+2. Add canonical "wrong person" phrases to out_of_scope family ("Tell me about [other person]", "[celebrity name]'s leadership")
+3. Lower SOFT_ACCEPT threshold — risky, could reject legitimate queries
+**Affects:** 3 failing tests (Bezos, Elon Musk, "Tell me a joke" — joke scores 0.429 as "behavioral")
+**Diagnosed:** Apr 2026 test audit
+
+### diversify_results() Pinning Bug
+**Priority:** MEDIUM
+**Issue:** Two related bugs in `diversify_results()`:
+1. Pinned story (result #1) is not counted toward `max_per_client` limit — a client can appear max_per_client + 1 times
+2. Client diversity reordering breaks score ordering guarantee — test expects descending scores but diversification shuffles order
+**Root cause:** Pinning logic (line ~1313 in backend_service.py) tracks seen_clients but doesn't include the pinned result in the count
+**Fix:** Count pinned client toward limit, then restore score ordering after diversification pass
+**Affects:** 2 failing tests (test_limits_single_client_stories, test_maintains_overall_order)
+**Diagnosed:** Apr 2026 test audit
+
+### LLM Meta-Commentary on Q20 (Stochastic)
+**Priority:** LOW
+**Issue:** "Who is Matt Pugmire?" sometimes generates meta-commentary ("showcases his") instead of direct biographical content. Stochastic — passes on some runs, fails on others.
+**Root cause:** LLM occasionally ignores the "never evaluate Matt" prompt instruction for broad biographical queries
+**Fix:** Monitor — if it becomes consistent, add Q20-specific prompt reinforcement
+**Diagnosed:** Apr 2026 test audit
+
 ---
 
 ## Open — Low Priority

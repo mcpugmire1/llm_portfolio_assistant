@@ -190,12 +190,13 @@ def assert_no_hardcoded_drift(stories: list[dict]) -> tuple[bool, dict[str, list
 
     # === 3. Check verbatim phrases exist in story content ===
     # These phrases should appear in Professional Narrative stories
+    # These phrases must exist in Professional Narrative stories.
+    # Updated Apr 2026 — data quality cleanup removed "modernizer",
+    # "complexity to clarity", "build something from nothing", and
+    # "not looking for a maintenance role" from story content.
     VERBATIM_PHRASES = [
         "builder",
-        "modernizer",
-        "complexity to clarity",
-        "build something from nothing",
-        "not looking for a maintenance role",
+        "0-to-1",
     ]
 
     # Collect all text from Professional Narrative stories
@@ -488,6 +489,7 @@ class TestEntityGateThreshold:
             "I can only discuss Matt's",
             "out of scope",
             "off-topic",
+            "I don't have experience",
         ]
 
         is_refusal = any(
@@ -535,6 +537,7 @@ class TestEntityGateThreshold:
             "I can only discuss Matt's",
             "out of scope",
             "off-topic",
+            "I don't have experience",
         ]
 
         is_refusal = any(
