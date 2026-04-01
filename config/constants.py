@@ -165,5 +165,9 @@ ENTITY_ALIASES = {
 # User-Agent substrings for known monitoring/keep-alive bots.
 # Requests matching any of these are excluded from page_load logging.
 # Add new signatures here when new monitoring tools are configured.
+# Note: UptimeRobot free tier sends empty User-Agent (no signature).
+# It's caught by the empty User-Agent guard in app.py, not this list.
+# The signature is kept here in case UptimeRobot changes behavior or
+# is upgraded to a paid plan that sends identifiable headers.
 
 MONITORING_BOT_SIGNATURES = ["UptimeRobot"]

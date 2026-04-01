@@ -22,7 +22,9 @@ Feature: UTM capture on page load
   # =============================================================================
 
   Scenario: UptimeRobot requests do not generate page_load events
-    Given a request arrives with User-Agent containing "UptimeRobot"
+    # Note: UptimeRobot free tier sends empty User-Agent, not a signature.
+    # Caught by the empty User-Agent guard, not the signature check.
+    Given a request arrives from UptimeRobot with an empty User-Agent
     When the first-mount guard fires
     Then log_page_load is not called
 
