@@ -81,19 +81,22 @@ if not st.session_state.get("__first_mount_rerun__", False):
     except Exception:
         pass
     # Log page_load (screen size not yet available — captured on next rerun)
+    # Skip logging for known monitoring bots (e.g., UptimeRobot keep-alive pings)
+    from config.constants import MONITORING_BOT_SIGNATURES
     from services.query_logger import log_page_load
 
-    log_page_load(
-        user_agent,
-        "",
-        timezone,
-        referrer,
-        utm_source,
-        utm_medium,
-        utm_campaign,
-        utm_content,
-        utm_term,
-    )
+    if not any(sig in user_agent for sig in MONITORING_BOT_SIGNATURES):
+        log_page_load(
+            user_agent,
+            "",
+            timezone,
+            referrer,
+            utm_source,
+            utm_medium,
+            utm_campaign,
+            utm_content,
+            utm_term,
+        )
     st.rerun()
 
 # Capture screen size once per session via JS eval

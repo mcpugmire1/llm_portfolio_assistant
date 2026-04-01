@@ -1982,6 +1982,9 @@ PINECONE_INDEX_NAME = "matt-portfolio-v2"
 PINECONE_NAMESPACE = "default"
 ```
 
+**External Monitoring:**
+- **UptimeRobot** — HTTP/S monitor configured at https://askmattgpt.streamlit.app. Pings the app every ~5 minutes to prevent Streamlit Cloud sleep. Sends User-Agent containing "UptimeRobot". Filtered from `page_load` logging via `MONITORING_BOT_SIGNATURES` in `config/constants.py`.
+
 **Python Version:** 3.11+
 
 **Requirements:**

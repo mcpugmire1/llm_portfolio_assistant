@@ -158,3 +158,12 @@ EXCLUDED_DIVISION_VALUES = {"Technology"}  # "technology experience" ≠ Divisio
 ENTITY_ALIASES = {
     "cic": ("Division", "Cloud Innovation Center"),
 }
+
+# =============================================================================
+# MONITORING BOT SIGNATURES
+# =============================================================================
+# User-Agent substrings for known monitoring/keep-alive bots.
+# Requests matching any of these are excluded from page_load logging.
+# Add new signatures here when new monitoring tools are configured.
+
+MONITORING_BOT_SIGNATURES = ["UptimeRobot"]
