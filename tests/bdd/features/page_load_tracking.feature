@@ -16,3 +16,22 @@ Feature: UTM capture on page load
     Given a visitor arrives via direct URL with no UTM params
     When the first-mount guard fires
     Then UTM Source, UTM Medium, UTM Campaign, UTM Content, UTM Term are all empty strings
+
+  # =============================================================================
+  # MONITORING BOT FILTERING
+  # =============================================================================
+
+  Scenario: UptimeRobot requests do not generate page_load events
+    Given a request arrives with User-Agent containing "UptimeRobot"
+    When the first-mount guard fires
+    Then log_page_load is not called
+
+  Scenario: Real visitor requests still generate page_load events
+    Given a request arrives with a standard browser User-Agent
+    When the first-mount guard fires
+    Then log_page_load is called
+
+  Scenario: Multiple monitoring bot signatures are filtered
+    Given MONITORING_BOT_SIGNATURES contains multiple entries
+    When a request arrives with a User-Agent matching any entry
+    Then log_page_load is not called
