@@ -85,7 +85,7 @@ if not st.session_state.get("__first_mount_rerun__", False):
     from config.constants import MONITORING_BOT_SIGNATURES
     from services.query_logger import log_page_load
 
-    if not any(sig in user_agent for sig in MONITORING_BOT_SIGNATURES):
+    if user_agent and not any(sig in user_agent for sig in MONITORING_BOT_SIGNATURES):
         log_page_load(
             user_agent,
             "",

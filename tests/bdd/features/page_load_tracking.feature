@@ -35,3 +35,8 @@ Feature: UTM capture on page load
     Given MONITORING_BOT_SIGNATURES contains multiple entries
     When a request arrives with a User-Agent matching any entry
     Then log_page_load is not called
+
+  Scenario: Requests with empty User-Agent do not generate page_load events
+    Given a request arrives with no User-Agent header
+    When the first-mount guard fires
+    Then log_page_load is not called
