@@ -170,4 +170,4 @@ ENTITY_ALIASES = {
 # The signature is kept here in case UptimeRobot changes behavior or
 # is upgraded to a paid plan that sends identifiable headers.
 
-MONITORING_BOT_SIGNATURES = ["UptimeRobot"]
+MONITORING_BOT_SIGNATURES = ["UptimeRobot", "HeadlessChrome"]
