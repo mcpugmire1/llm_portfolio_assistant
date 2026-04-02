@@ -42,14 +42,22 @@ Feature: JD requirement assessment
   # EVIDENCE QUALITY
   # =============================================================================
 
-  Scenario: Evidence is grounded in provided stories only
+  Scenario: Profile-level evidence used when no matching story exists
+    Given a requirement covered by Matt's verified skills but not by any retrieved story
+    When the assessment prompt is run
+    Then evidence contains an entry with evidence_type "profile"
+    And story_title is null
+    And client is null
+    And relevance explains how the skill addresses the requirement
+
+  Scenario: Evidence is grounded in provided stories and grounding context only
     Given a requirement and a set of retrieved stories
     When the assessment prompt is run
-    Then evidence story titles match titles from the provided stories
-    And evidence does not reference stories not in the provided set
-    And evidence does not fabricate experience not present in the stories
+    Then evidence with evidence_type "story" has titles matching the provided stories
+    And evidence with evidence_type "profile" cites only facts from the grounding context
+    And evidence does not fabricate experience not present in either source
 
-  Scenario: Evidence contains at most 2 stories
+  Scenario: Evidence contains at most 2 items
     Given a requirement with multiple relevant stories retrieved
     When the assessment prompt is run
     Then evidence contains no more than 2 stories

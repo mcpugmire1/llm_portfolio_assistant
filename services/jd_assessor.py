@@ -10,6 +10,9 @@ Architecture: Three-step pipeline (see ADR 016)
   3. LLM assessment pass — requirements + candidate stories → match report
 """
 
+import json
+from pathlib import Path
+
 # =============================================================================
 # JD EXTRACTION PROMPT
 # =============================================================================
@@ -64,40 +67,77 @@ Rules:
 # Used as the system prompt for Stage 3 of the three-step pipeline.
 # Called once per extracted requirement with Pinecone-retrieved candidate stories.
 # Produces per-requirement match status, evidence, and gap analysis.
+# Grounding context (Matt DNA) is loaded from data/matt_profile.json at runtime.
 
-JD_ASSESSMENT_PROMPT = """You are assessing how well Matt Pugmire's experience matches a specific job requirement.
+JD_ASSESSMENT_PROMPT_TEMPLATE = """You are assessing how well Matt Pugmire's experience matches a specific job requirement.
 
-Matt is a senior engineering and transformation leader with 18+ years at Accenture, most notably as Director of the Cloud Innovation Center (CIC), which he built from 0 to 150+ practitioners generating $100M+ in repeat business across 15+ Fortune 500 clients. His background spans platform engineering, agile transformation, financial services technology, and AI-assisted development.
+{matt_profile}
 
 You will be given:
 - A single requirement from a job description
 - A list of Matt's STAR stories retrieved as potential evidence, each with a Pinecone similarity score
 
-Your task: assess the match using ONLY the provided stories as evidence. Do not infer or fabricate experience not present in the stories.
+Your task: assess the match using the provided stories AND verified facts from the grounding context above as evidence. Do not infer or fabricate anything beyond these sources.
 
-{
+{{
   "requirement": "the requirement text",
   "match_status": "strong | partial | gap",
   "evidence": [
-    {
-      "story_title": "string",
-      "client": "string",
-      "relevance": "one sentence explaining how this story addresses the requirement"
-    }
+    {{
+      "evidence_type": "story | profile",
+      "story_title": "string or null if evidence_type is profile",
+      "client": "string or null if evidence_type is profile",
+      "relevance": "one sentence explaining how this evidence addresses the requirement"
+    }}
   ],
   "gap_explanation": "if partial or gap, explain specifically what's missing. Empty string if strong match.",
   "confidence": "high | medium | low"
-}
+}}
 
 Rules:
-- strong: clear direct evidence in the provided stories
+- strong: clear direct evidence in the provided stories or grounding context
 - partial: related evidence but doesn't fully cover the requirement
-- gap: no provided story meaningfully addresses the requirement
-- confidence reflects how clearly the provided stories demonstrate the requirement — high when evidence is direct and specific, medium when evidence is related but requires inference, low when the match is tenuous
-- Include up to 2 stories as evidence maximum
-- Never fabricate -- only use what's in the provided stories
+- gap: no provided story or grounding context meaningfully addresses the requirement
+- confidence reflects how clearly the provided stories and grounding context demonstrate the requirement — high when evidence is direct and specific, medium when evidence is related but requires inference, low when the match is tenuous
+- Include up to 2 evidence items maximum
+- Use evidence_type "story" when citing a retrieved STAR story (include story_title and client)
+- Use evidence_type "profile" when citing a verified fact from the grounding context (story_title and client should be null)
+- Never fabricate -- only use what's in the provided stories or grounding context
 - gap_explanation must be specific, not apologetic
 - Output valid JSON only, no preamble"""
+
+
+def load_matt_profile() -> str:
+    """Load Matt's profile from data/matt_profile.json and build grounding context string."""
+    profile_path = Path(__file__).parent.parent / "data" / "matt_profile.json"
+    with open(profile_path) as f:
+        profile = json.load(f)
+
+    education_parts = []
+    education_notes = []
+    for e in profile["education"]:
+        education_parts.append(f"{e['degree']} from {e['institution']}")
+        if e.get("note"):
+            education_notes.append(e["note"])
+    education = " and ".join(education_parts)
+    skills = ", ".join(profile["skills"])
+
+    certs = ", ".join(profile.get("certifications", []))
+
+    result = f"{profile['career_summary']} " f"He holds a {education}."
+    for note in education_notes:
+        result += f" {note}"
+    result += f" Matt's verified skills include: {skills}."
+    if certs:
+        result += f" Certifications: {certs}."
+
+    return result
+
+
+def build_assessment_prompt() -> str:
+    """Build the assessment prompt with dynamically loaded Matt profile."""
+    profile = load_matt_profile()
+    return JD_ASSESSMENT_PROMPT_TEMPLATE.format(matt_profile=profile)
 
 
 # =============================================================================

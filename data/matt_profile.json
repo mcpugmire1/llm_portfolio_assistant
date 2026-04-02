@@ -1,0 +1,43 @@
+{
+  "name": "Matt Pugmire",
+  "career_summary": "Senior engineering and transformation leader with 18+ years at Accenture, most notably as Director of the Cloud Innovation Center (CIC), which he built from 0 to 150+ practitioners generating $100M+ in repeat business across 15+ Fortune 500 clients. His background spans platform engineering, agile transformation, financial services technology, and AI-assisted development.",
+  "education": [
+    {
+      "degree": "Master's degree, Information Technology",
+      "institution": "American InterContinental University",
+      "note": "Master's degree in Information Technology satisfies requirements for 'Bachelor's degree in Computer Science or related field' — IT is a recognized CS-related discipline and a Master's exceeds a Bachelor's requirement."
+    },
+    {
+      "degree": "BA, French Language and Literature",
+      "institution": "Queens University of Charlotte"
+    }
+  ],
+  "skills": [
+    "Engineering Leadership", "Platform Modernization", "Payments & Financial Services",
+    "Generative AI", "P&L Management", "People Management", "Tech-Enabled Business Transformation",
+    "Enterprise Digital Transformation", "Agile & DevOps Leadership", "Behavior-Driven Development (BDD)",
+    "Eval-Driven Development", "LLM Integration", "Semantic Search", "Claude Skills", "Claude Code",
+    "Anthropic Claude", "OpenAI API", "Vector Databases", "Embedding Models", "AI for Business",
+    "Responsible AI", "Retrieval-Augmented Generation (RAG)", "Cloud Infrastructure", "Prompt Engineering",
+    "Operational Efficiency", "Cloud Security & Compliance", "Microsoft Azure", "Budget Management",
+    "Microsoft 365", "Program Management", "Organizational Design", "Executive-level Communication",
+    "Platform Strategy", "Cloud-Native Architecture", "AI-Enabled Product Innovation",
+    "Product Development & Prototyping", "DevOps", "Agile Transformation", "Innovation Strategy",
+    "Infrastructure as Code (IaC)", "Amazon Web Services (AWS)", "Technical Solution Design",
+    "Strategic Planning", "IT Strategy", "Solution Architecture", "Cloud-Native Application Development",
+    "API Development", "Cross-functional Team Leadership", "Enterprise Architecture",
+    "Stakeholder Management", "Product Management", "Organizational Development", "Talent Development",
+    "Skills Transformation", "Capability Development", "Integration", "Design Thinking",
+    "Change Management", "Vendor Management",
+    "SQL", "PostgreSQL", "Oracle", "Relational Database Design", "SQL Server",
+    "Amazon Aurora", "DynamoDB", "ElastiCache",
+    "Java", "JavaScript", "TypeScript", "Python", "ECMAScript",
+    "Mobile Application Development"
+  ],
+  "certifications": [
+    "SAFe 4 Certified Agilist",
+    "Microsoft Certified Professional (MCP) — Oracle",
+    "AWS Launchpad Champion",
+    "AWS Certified Solutions Architect — Associate"
+  ]
+}

@@ -194,9 +194,10 @@ def assert_no_hardcoded_drift(stories: list[dict]) -> tuple[bool, dict[str, list
     # Updated Apr 2026 — data quality cleanup removed "modernizer",
     # "complexity to clarity", "build something from nothing", and
     # "not looking for a maintenance role" from story content.
+    # "0-to-1" removed — only appears in public_tags, not STAR fields.
+    # "builder" appears in 5PSummary and covers the same intent.
     VERBATIM_PHRASES = [
         "builder",
-        "0-to-1",
     ]
 
     # Collect all text from Professional Narrative stories

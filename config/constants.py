@@ -157,6 +157,13 @@ EXCLUDED_DIVISION_VALUES = {"Technology"}  # "technology experience" ≠ Divisio
 
 ENTITY_ALIASES = {
     "cic": ("Division", "Cloud Innovation Center"),
+    "amex": ("Client", "American Express"),
+    "jpmc": ("Client", "JP Morgan Chase"),
+    "jpm": ("Client", "JP Morgan Chase"),
+    "jpmorgan": ("Client", "JP Morgan Chase"),
+    "cap one": ("Client", "Capital One"),
+    "nsc": ("Client", "Norfolk Southern"),
+    "att": ("Client", "AT&T"),
 }
 
 # =============================================================================
