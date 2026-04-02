@@ -189,6 +189,7 @@ def main():
 
         # Stage 3: Assess
         assessment = assess_requirement(client, req["text"], candidates)
+        assessment["category"] = req["category"]
         match_results.append(assessment)
 
         status_icon = {"strong": "✓", "partial": "~", "gap": "✗"}.get(
@@ -215,6 +216,9 @@ def main():
     print(f"  Recommendation: {rec['recommendation']}")
     print(
         f"  Strong: {rec['strong_count']}  Partial: {rec['partial_count']}  Gap: {rec['gap_count']}"
+    )
+    print(
+        f"  Required gaps: {rec['required_gap_count']}  Preferred gaps: {rec['preferred_gap_count']}"
     )
     print(f"  Total: {len(match_results)}")
 

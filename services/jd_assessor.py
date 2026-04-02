@@ -154,12 +154,17 @@ RECOMMENDATION_MAX_GAPS_CONSIDER = 1  # Max gaps allowed for Consider
 def compute_recommendation(match_results: list[dict]) -> dict:
     """Compute Apply/Consider/Pass recommendation from match results.
 
+    Only gaps in REQUIRED qualifications count toward thresholds.
+    Gaps in preferred qualifications are tracked but don't block Apply/Consider.
+
     Args:
-        match_results: List of assessment results, each with "match_status" field.
+        match_results: List of assessment results, each with "match_status"
+            and "category" ("required" | "preferred") fields.
 
     Returns:
         {"recommendation": "Apply|Consider|Pass", "fit_score": "High|Medium|Low",
-         "strong_count": int, "partial_count": int, "gap_count": int}
+         "strong_count": int, "partial_count": int, "gap_count": int,
+         "required_gap_count": int, "preferred_gap_count": int}
     """
     total = len(match_results)
     if total == 0:
@@ -169,20 +174,29 @@ def compute_recommendation(match_results: list[dict]) -> dict:
             "strong_count": 0,
             "partial_count": 0,
             "gap_count": 0,
+            "required_gap_count": 0,
+            "preferred_gap_count": 0,
         }
 
     strong_count = sum(1 for r in match_results if r.get("match_status") == "strong")
     partial_count = sum(1 for r in match_results if r.get("match_status") == "partial")
     gap_count = sum(1 for r in match_results if r.get("match_status") == "gap")
+    required_gap_count = sum(
+        1
+        for r in match_results
+        if r.get("match_status") == "gap" and r.get("category") == "required"
+    )
+    preferred_gap_count = gap_count - required_gap_count
 
     strong_ratio = strong_count / total
     coverage_ratio = (strong_count + partial_count) / total
 
-    if gap_count == 0 and strong_ratio >= RECOMMENDATION_STRONG_RATIO:
+    # Only required gaps block Apply/Consider
+    if required_gap_count == 0 and strong_ratio >= RECOMMENDATION_STRONG_RATIO:
         recommendation = "Apply"
         fit_score = "High"
     elif (
-        gap_count <= RECOMMENDATION_MAX_GAPS_CONSIDER
+        required_gap_count <= RECOMMENDATION_MAX_GAPS_CONSIDER
         and coverage_ratio >= RECOMMENDATION_COVERAGE_RATIO
     ):
         recommendation = "Consider"
@@ -197,4 +211,6 @@ def compute_recommendation(match_results: list[dict]) -> dict:
         "strong_count": strong_count,
         "partial_count": partial_count,
         "gap_count": gap_count,
+        "required_gap_count": required_gap_count,
+        "preferred_gap_count": preferred_gap_count,
     }

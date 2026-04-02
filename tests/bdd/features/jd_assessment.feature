@@ -104,17 +104,25 @@ Feature: JD requirement assessment
   # PRIVATE VIEW — RECOMMENDATION
   # =============================================================================
 
-  Scenario: Apply recommendation when strong matches dominate
-    Given a full set of match results with 70% or more strong matches and no gaps
+  Scenario: Apply recommendation when strong matches dominate and no required gaps
+    Given a full set of match results with 70% or more strong matches and no required gaps
     When compute_recommendation is called
     Then recommendation is "Apply"
+    And preferred gaps do not block Apply
 
-  Scenario: Consider recommendation when partial matches are present
-    Given a full set of match results with at most 1 gap and strong plus partial covering 70% or more
+  Scenario: Consider recommendation when required gaps are limited
+    Given a full set of match results with at most 1 required gap and strong plus partial covering 70% or more
     When compute_recommendation is called
     Then recommendation is "Consider"
 
-  Scenario: Pass recommendation when gaps are significant
-    Given a full set of match results with multiple gaps
+  Scenario: Pass recommendation when required gaps are significant
+    Given a full set of match results with multiple required gaps
     When compute_recommendation is called
     Then recommendation is "Pass"
+
+  Scenario: Preferred gaps do not affect recommendation thresholds
+    Given a full set of match results with 0 required gaps and 2 preferred gaps
+    And 70% or more strong matches
+    When compute_recommendation is called
+    Then recommendation is "Apply"
+    And preferred_gap_count is 2
