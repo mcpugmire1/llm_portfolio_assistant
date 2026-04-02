@@ -221,10 +221,10 @@ All project/client counts derived dynamically from JSONL across 4 files.
 **Priority:** HIGH
 **Issue:** Queries about other people ("What's Jeff Bezos's leadership style?", "Tell me about Elon Musk") score high against valid intent families because the router matches semantic content (leadership, biography) without checking WHO the query is about. Bezos leadership query scores 0.664 as "leadership" — a strong match to a wrong subject.
 **Root cause:** Semantic router has no entity/person detection. It only checks embedding similarity to intent families.
-**Fix options:**
-1. Add person-name detection before routing — if query mentions a name that isn't Matt/he/him, classify as out_of_scope
-2. Add canonical "wrong person" phrases to out_of_scope family ("Tell me about [other person]", "[celebrity name]'s leadership")
-3. Lower SOFT_ACCEPT threshold — risky, could reject legitimate queries
+**Fix options (in preference order):**
+1. ~~Add person-name detection before routing~~ — rejected, adds a new gate layer (history shows added gates create complexity and get backed out)
+2. **Add canonical "wrong person" phrases to out_of_scope family** — RECOMMENDED. Same mechanism that already handles off-topic queries. Fills a gap in existing coverage, not a new layer. Add phrases like "Tell me about [other person]'s leadership", "[celebrity] experience", etc.
+3. ~~Lower SOFT_ACCEPT threshold~~ — rejected, tried before and caused false rejections on legitimate queries
 **Affects:** 3 failing tests (Bezos, Elon Musk, "Tell me a joke" — joke scores 0.429 as "behavioral")
 **Diagnosed:** Apr 2026 test audit
 
