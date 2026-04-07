@@ -11,6 +11,11 @@ import html
 
 import streamlit as st
 
+from ui.components.action_buttons import (
+    get_action_buttons_css,
+    get_action_buttons_html,
+    render_action_button_handlers,
+)
 from ui.components.thinking_indicator import render_thinking_indicator
 
 # =============================================================================
@@ -74,6 +79,179 @@ def _render_requirement_card(result: dict) -> str:
     return "\n".join(parts)
 
 
+def _build_share_text(result_payload: dict) -> str:
+    """Build a plain-text summary of the assessment for clipboard sharing.
+
+    Recipients of this text get a self-contained, readable assessment they
+    can paste into email, Slack, or a doc. Format is intentionally narrow:
+    role/company header, then required and preferred sections with status
+    icons and gap explanations under partials/gaps.
+    """
+    extraction = result_payload.get("extraction") or {}
+    role = extraction.get("role_title") or "Untitled Role"
+    company = extraction.get("company") or ""
+    header = role + (f" — {company}" if company else "")
+
+    results = result_payload.get("results") or []
+    required = [r for r in results if r.get("category") == "required"]
+    preferred = [r for r in results if r.get("category") == "preferred"]
+
+    lines = [f"Role Match: {header}", ""]
+
+    def _section(title: str, items: list[dict]) -> None:
+        if not items:
+            return
+        lines.append(f"{title} ({len(items)})")
+        for r in items:
+            icon = _STATUS_ICON.get(r.get("match_status", "gap"), "?")
+            lines.append(f"{icon} {r.get('requirement', '')}")
+            if r.get("match_status") in ("partial", "gap"):
+                gap = (r.get("gap_explanation") or "").strip()
+                if gap:
+                    lines.append(f"   Gap: {gap}")
+        lines.append("")
+
+    _section("REQUIRED", required)
+    _section("PREFERRED", preferred)
+
+    return "\n".join(lines).rstrip() + "\n"
+
+
+def _build_export_html(result_payload: dict) -> str:
+    """Build a printable HTML document for the Export action.
+
+    Mirrors the structure of the on-screen results panel but laid out for
+    print: role/company header, required and preferred sections, status
+    icons, evidence under each requirement, gap explanations.
+    """
+    extraction = result_payload.get("extraction") or {}
+    role = html.escape(extraction.get("role_title") or "Untitled Role")
+    company = html.escape(extraction.get("company") or "")
+    header_meta = company if company else ""
+
+    results = result_payload.get("results") or []
+    required = [r for r in results if r.get("category") == "required"]
+    preferred = [r for r in results if r.get("category") == "preferred"]
+
+    def _render_section(title: str, items: list[dict]) -> str:
+        if not items:
+            return ""
+        rows = []
+        rows.append(f'<h2 class="section-title">{title} ({len(items)})</h2>')
+        for r in items:
+            status = r.get("match_status", "gap")
+            icon = _STATUS_ICON.get(status, "?")
+            req_text = html.escape(r.get("requirement", ""))
+            rows.append(
+                f'<div class="req"><span class="status {status}">{icon}</span><span class="req-text">{req_text}</span></div>'
+            )
+
+            if status in ("strong", "partial"):
+                for ev in (r.get("evidence") or [])[:2]:
+                    ev_type = ev.get("evidence_type", "story")
+                    if ev_type == "profile":
+                        relevance = html.escape(ev.get("relevance", ""))
+                        rows.append(
+                            f'<div class="evidence profile"><strong>Verified skill</strong> — {relevance}</div>'
+                        )
+                    else:
+                        title_text = html.escape(ev.get("story_title") or "Untitled")
+                        client = html.escape(ev.get("client") or "")
+                        client_str = f" ({client})" if client else ""
+                        rows.append(
+                            f'<div class="evidence">{title_text}{client_str}</div>'
+                        )
+
+            gap = (r.get("gap_explanation") or "").strip()
+            if status in ("partial", "gap") and gap:
+                rows.append(f'<div class="gap"><em>{html.escape(gap)}</em></div>')
+
+        return "\n".join(rows)
+
+    required_html = _render_section("Required Qualifications", required)
+    preferred_html = _render_section("Preferred Qualifications", preferred)
+
+    return f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Role Match — {role}</title>
+            <style>
+                body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 40px; max-width: 900px; margin: 0 auto; color: #1F2937; }}
+                h1 {{ color: #1F2937; font-size: 24px; margin-bottom: 4px; }}
+                .meta {{ color: #6B7280; font-size: 14px; margin-bottom: 24px; }}
+                .section-title {{ color: #8B5CF6; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin: 24px 0 12px 0; }}
+                .req {{ display: flex; gap: 10px; align-items: flex-start; margin-bottom: 4px; padding-top: 12px; }}
+                .req-text {{ font-size: 14px; font-weight: 500; color: #1F2937; line-height: 1.45; }}
+                .status {{ display: inline-flex; flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; }}
+                .status.strong {{ background: #10B981; }}
+                .status.partial {{ background: #F59E0B; }}
+                .status.gap {{ background: #EF4444; }}
+                .evidence {{ margin-left: 32px; margin-top: 6px; padding: 6px 10px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 6px; font-size: 12px; color: #1F2937; }}
+                .evidence.profile {{ background: rgba(139, 92, 246, 0.08); border-color: rgba(139, 92, 246, 0.2); }}
+                .gap {{ margin-left: 32px; margin-top: 6px; font-size: 12px; color: #6B7280; }}
+            </style>
+        </head>
+        <body>
+            <h1>Role Match — {role}</h1>
+            <div class="meta">{header_meta}</div>
+            {required_html}
+            {preferred_html}
+        </body>
+        </html>
+    """
+
+
+def _render_results_header(result_payload: dict) -> None:
+    """Render the results header bar: extracted role title + action buttons.
+
+    The header is a flex container with the role title on the left and the
+    shared Helpful / Share / Export buttons on the right (per story_detail
+    pattern). Buttons appear only when there is a result to act on.
+    """
+    extraction = result_payload.get("extraction") or {}
+    role = html.escape(extraction.get("role_title") or "Untitled Role")
+    company = html.escape(extraction.get("company") or "")
+
+    # Stable per-assessment id so the helpful-confirmed flag resets on a new
+    # assessment. id() is stable for the lifetime of the dict in session_state.
+    assessment_id = id(result_payload)
+    confirmed_key = f"role_match_helpful_{assessment_id}"
+    is_helpful_confirmed = st.session_state.get(confirmed_key) == "up"
+
+    buttons_html = get_action_buttons_html(
+        button_id_prefix="btn-role-match",
+        is_helpful_confirmed=is_helpful_confirmed,
+    )
+
+    company_html = (
+        f'<div class="role-match-results-company">{company}</div>' if company else ""
+    )
+    st.markdown(
+        f"""
+        <div class="role-match-results-header">
+            <div class="role-match-results-title-section">
+                <div class="role-match-results-title">{role}</div>
+                {company_html}
+            </div>
+            {buttons_html}
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    render_action_button_handlers(
+        button_id_prefix="btn-role-match",
+        key_suffix=f"role_match_{assessment_id}",
+        share_text=_build_share_text(result_payload),
+        export_html_doc=_build_export_html(result_payload),
+        feedback_query=extraction.get("role_title") or "Role Match",
+        feedback_sources=f"role_match:{extraction.get('role_title') or 'unknown'}",
+        confirmed_key=confirmed_key,
+        feedback_msg_hash=assessment_id % 100000,
+    )
+
+
 def _render_results_panel(result_payload: dict) -> None:
     """Render the full results panel — required + preferred sections.
 
@@ -89,6 +267,9 @@ def _render_results_panel(result_payload: dict) -> None:
             unsafe_allow_html=True,
         )
         return
+
+    # Header bar with role title + action buttons (Helpful / Share / Export)
+    _render_results_header(result_payload)
 
     required = [r for r in results if r.get("category") == "required"]
     preferred = [r for r in results if r.get("category") == "preferred"]
@@ -161,6 +342,52 @@ def render_role_match(stories: list[dict]):
     margin: 0.5rem 0 0 0;
     font-size: 1.1rem;
 }
+</style>
+""",
+        unsafe_allow_html=True,
+    )
+
+    # Inject the shared action_buttons CSS + the local results-header bar styles.
+    # Kept in a separate st.markdown call so the literal-string blocks above
+    # don't need to become f-strings.
+    st.markdown(
+        f"""
+<style>
+{get_action_buttons_css()}
+
+/* Results header bar — flex container for the role title (left) and the
+   shared Helpful / Share / Export action buttons (right). Sits at the top
+   of the right column when results render. */
+.role-match-results-header {{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--border-color);
+}}
+.role-match-results-title-section {{
+    flex: 1;
+    min-width: 0;
+}}
+.role-match-results-title {{
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.3;
+}}
+.role-match-results-company {{
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}}
+@media (max-width: 768px) {{
+    .role-match-results-header {{
+        flex-direction: column;
+        gap: 8px;
+    }}
+}}
 </style>
 """,
         unsafe_allow_html=True,

@@ -12,6 +12,7 @@ Feature: Role Match page
     Then "Role Match" appears in the navigation bar between "Ask MattGPT" and "About Matt"
 
   Scenario: Clicking Role Match tab navigates to the page
+    Given the user is on any page
     When the user clicks "Role Match" in the navigation bar
     Then the Role Match page is displayed
     And the page shows a JD text input area and a "Match this role" button
