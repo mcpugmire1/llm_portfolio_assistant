@@ -186,3 +186,45 @@ Feature: Role Match page
     When the assessment prompt is run for that requirement
     Then the requirement is assessed using grounding context only
     And the result is not an error
+
+  # =============================================================================
+  # ACTION BUTTONS — Helpful / Share / Export
+  # =============================================================================
+  # Visual treatment and click wiring shared with story_detail via the
+  # ui/components/action_buttons.py module. The buttons live in the results
+  # header bar at the top of the right column when results are present.
+
+  Scenario: Action buttons appear only when results are present
+    Given the user has not submitted a job description
+    Then the Helpful, Share, and Export buttons are not visible
+
+  Scenario: Action buttons appear after results render
+    Given the user has submitted a job description and results are displayed
+    Then the Helpful, Share, and Export buttons appear in the results header
+
+  Scenario: Share copies plain-text summary to clipboard
+    Given results are displayed
+    When the user clicks Share
+    Then a plain-text summary is copied to clipboard
+    And the summary includes the role title and company
+    And the summary includes required qualifications with status icons
+    And the summary includes preferred qualifications with status icons
+    And gap explanations appear under partial and gap items
+
+  Scenario: Export opens a printable document
+    Given results are displayed
+    When the user clicks Export
+    Then a print-ready window opens
+    And the window contains the role title and all requirements
+
+  Scenario: Helpful button logs feedback
+    Given results are displayed
+    When the user clicks Helpful
+    Then log_feedback is called with rating up
+    And the button shows a confirmed state
+    And the button cannot be clicked again in the same session
+
+  Scenario: Action buttons hidden on mobile
+    Given the user is on a device with viewport width less than 768px
+    And results are displayed
+    Then the action buttons are not visible
