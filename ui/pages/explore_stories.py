@@ -1330,7 +1330,8 @@ def render_explore_stories(
         margin-bottom: 0px !important;
     }
 
-    div[data-testid="stHorizontalBlock"]:has(> div:nth-child(5)) > div:nth-child(3) {
+    /* Scope to explore page content only — exclude navbar */
+    div[data-testid="stHorizontalBlock"]:not(:has([class*="st-key-topnav_"])):has(> div:nth-child(5)) > div:nth-child(3) {
         flex: 0 0 75px !important;
         max-width: 75px !important;
     }
