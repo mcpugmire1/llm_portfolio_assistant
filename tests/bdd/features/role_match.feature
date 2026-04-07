@@ -82,6 +82,44 @@ Feature: Role Match page
     Then the story detail expands inline using render_story_detail()
     And the expanded detail shows the full STAR narrative
 
+  Scenario: Clickable story chips show pointer cursor and selected state
+    Given the match results show a clickable story evidence chip
+    Then the chip has a pointer cursor on hover
+    When the user clicks the chip
+    Then the chip is rendered in a visually selected state
+    And only one chip can be in the selected state at a time
+
+  Scenario: Profile-evidence chips are not clickable
+    Given a requirement is matched using grounding context only (evidence_type "profile")
+    When the match results are displayed
+    Then the profile evidence chip is not clickable
+    And clicking the profile evidence chip has no effect
+
+  Scenario: Story chip with unresolved title falls back to non-clickable text
+    Given a story evidence chip has a title that does not match any story in the corpus
+    When the match results are displayed
+    Then the chip renders as plain non-clickable text
+    And no clickable affordance (cursor, selected state) is applied
+
+  Scenario: Clicking the same chip twice closes the inline detail
+    Given the match results show an expanded story detail beneath a chip
+    When the user clicks the same chip again
+    Then the inline detail is closed
+    And no story detail is rendered for that requirement
+
+  Scenario: Clicking a different chip switches the inline detail
+    Given the match results show an expanded story detail beneath a chip
+    When the user clicks a different story evidence chip
+    Then the previously expanded detail is closed
+    And the inline detail for the newly clicked chip is rendered
+
+  Scenario: Inline detail appears below the requirement that owns the clicked chip
+    Given the user has submitted a job description
+    And the match results show multiple requirements with story evidence chips
+    When the user clicks a story evidence chip on a specific requirement
+    Then the inline detail renders immediately below that requirement card
+    And the inline detail does not render below any other requirement card
+
   Scenario: Profile-level evidence displays without story chip
     Given a requirement is matched using grounding context only (evidence_type "profile")
     When the match results are displayed
