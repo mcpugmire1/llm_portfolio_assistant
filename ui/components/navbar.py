@@ -31,9 +31,14 @@ div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) {
     border-radius: 0 !important;
     position: relative !important;
     z-index: 999998 !important;
+    justify-content: space-evenly !important;
 }
 div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-testid="column"] {
     background: var(--dark-navy) !important;
+    flex: 1 1 calc(20% - 1rem) !important;
+    width: calc(20% - 1rem) !important;
+    min-width: calc(20% - 1rem) !important;
+    max-width: calc(20% - 1rem) !important;
 }
 [class*="st-key-topnav_"] button {
     background: transparent !important;
@@ -41,8 +46,10 @@ div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-t
     border: none !important;
     font-weight: 500 !important;
     box-shadow: none !important;
-    padding: 8px 16px !important;
+    padding: 8px 12px !important;
     margin-top: 0 !important;
+    white-space: nowrap !important;
+    font-size: 14px !important;
 }
 [class*="st-key-topnav_"] button:hover {
     background: rgba(255, 255, 255, 0.1) !important;
@@ -53,6 +60,7 @@ div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-t
     color: white !important;
     font-weight: 600 !important;
     opacity: 1 !important;
+    cursor: default !important;
 }
 .mobile-header, .mobile-nav-dropdown, .mobile-nav-overlay {
     display: none;
@@ -185,6 +193,7 @@ div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-t
             ("Home", "Home"),
             ("Explore Stories", "Explore Stories"),
             ("Ask MattGPT", "Ask MattGPT"),
+            ("Role Match", "Role Match"),
             ("About Matt", "About Matt"),
         ]
 
@@ -208,6 +217,7 @@ div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-t
     active_home = "active" if current_tab == "Home" else ""
     active_explore = "active" if current_tab == "Explore Stories" else ""
     active_ask = "active" if current_tab == "Ask MattGPT" else ""
+    active_role = "active" if current_tab == "Role Match" else ""
     active_about = "active" if current_tab == "About Matt" else ""
 
     js_code = """
@@ -251,7 +261,7 @@ div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-t
         var dropdown = document.createElement('nav');
         dropdown.className = 'mobile-nav-dropdown';
         dropdown.id = 'mobile-nav-dropdown';
-        dropdown.innerHTML = '<a href="#" id="mobile-nav-home" class="ACTIVE_HOME">Home</a><a href="#" id="mobile-nav-explore" class="ACTIVE_EXPLORE">Explore Stories</a><a href="#" id="mobile-nav-ask" class="ACTIVE_ASK">Ask MattGPT</a><a href="#" id="mobile-nav-about" class="ACTIVE_ABOUT">About Matt</a><a href="#" id="mobile-nav-settings" style="border-top:1px solid rgba(255,255,255,0.2);margin-top:8px;padding-top:16px;">⚙️ Settings</a>';
+        dropdown.innerHTML = '<a href="#" id="mobile-nav-home" class="ACTIVE_HOME">Home</a><a href="#" id="mobile-nav-explore" class="ACTIVE_EXPLORE">Explore Stories</a><a href="#" id="mobile-nav-ask" class="ACTIVE_ASK">Ask MattGPT</a><a href="#" id="mobile-nav-role" class="ACTIVE_ROLE">Role Match</a><a href="#" id="mobile-nav-about" class="ACTIVE_ABOUT">About Matt</a><a href="#" id="mobile-nav-settings" style="border-top:1px solid rgba(255,255,255,0.2);margin-top:8px;padding-top:16px;">⚙️ Settings</a>';
         doc.body.insertBefore(dropdown, doc.body.firstChild);
 
         // Event handlers
@@ -277,6 +287,7 @@ div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-t
             'mobile-nav-home': 'topnav_Home',
             'mobile-nav-explore': 'topnav_Explore',
             'mobile-nav-ask': 'topnav_Ask',
+            'mobile-nav-role': 'topnav_Role',
             'mobile-nav-about': 'topnav_About'
         };
 
@@ -313,6 +324,7 @@ div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-t
     js_code = js_code.replace('ACTIVE_HOME', active_home)
     js_code = js_code.replace('ACTIVE_EXPLORE', active_explore)
     js_code = js_code.replace('ACTIVE_ASK', active_ask)
+    js_code = js_code.replace('ACTIVE_ROLE', active_role)
     js_code = js_code.replace('ACTIVE_ABOUT', active_about)
 
     components.html(js_code, height=0)

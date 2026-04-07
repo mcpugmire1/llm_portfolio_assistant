@@ -438,6 +438,13 @@ elif st.session_state["active_tab"] == "Ask MattGPT":
 
     render_ask_mattgpt(STORIES)
 
+# --- ROLE MATCH ---
+elif st.session_state["active_tab"] == "Role Match":
+    _clear_explore_state()
+    from ui.pages.role_match import render_role_match
+
+    render_role_match(STORIES)
+
 # --- ABOUT ---
 elif st.session_state["active_tab"] == "About Matt":
     _clear_explore_state()
