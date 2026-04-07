@@ -299,8 +299,16 @@ def render_role_match(stories: list[dict]):
     """
 
     # =========================================================================
-    # CSS STYLES
+    # CSS STYLES (page hero only)
     # =========================================================================
+    # IMPORTANT: action_buttons CSS + .role-match-results-header styles are
+    # injected at the BOTTOM of this function (just before render_footer()).
+    # DO NOT add a second st.markdown here or it will break the navbar gap —
+    # an extra empty stMarkdownContainer between the navbar and the
+    # .conversation-header element adds ~16px of vertical space that the
+    # `.conversation-header { margin: -3rem 0 0 0 }` rule was tuned for ONE
+    # preceding element only. See git commit history for the regression we
+    # introduced and reverted (April 2026).
     st.markdown(
         """
 <style>
@@ -342,52 +350,6 @@ def render_role_match(stories: list[dict]):
     margin: 0.5rem 0 0 0;
     font-size: 1.1rem;
 }
-</style>
-""",
-        unsafe_allow_html=True,
-    )
-
-    # Inject the shared action_buttons CSS + the local results-header bar styles.
-    # Kept in a separate st.markdown call so the literal-string blocks above
-    # don't need to become f-strings.
-    st.markdown(
-        f"""
-<style>
-{get_action_buttons_css()}
-
-/* Results header bar — flex container for the role title (left) and the
-   shared Helpful / Share / Export action buttons (right). Sits at the top
-   of the right column when results render. */
-.role-match-results-header {{
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 16px;
-    padding-bottom: 16px;
-    margin-bottom: 16px;
-    border-bottom: 1px solid var(--border-color);
-}}
-.role-match-results-title-section {{
-    flex: 1;
-    min-width: 0;
-}}
-.role-match-results-title {{
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--text-primary);
-    line-height: 1.3;
-}}
-.role-match-results-company {{
-    font-size: 13px;
-    color: var(--text-secondary);
-    margin-top: 4px;
-}}
-@media (max-width: 768px) {{
-    .role-match-results-header {{
-        flex-direction: column;
-        gap: 8px;
-    }}
-}}
 </style>
 """,
         unsafe_allow_html=True,
@@ -677,6 +639,61 @@ def render_role_match(stories: list[dict]):
                     """,
                     unsafe_allow_html=True,
                 )
+
+    # =========================================================================
+    # CSS STYLES (results panel + shared action buttons)
+    # =========================================================================
+    # IMPORTANT: this block lives at the BOTTOM of render_role_match — NOT
+    # next to the page hero CSS at the top. Adding a second st.markdown
+    # between the navbar and the .conversation-header element introduces an
+    # extra empty stMarkdownContainer that adds ~16px of vertical space the
+    # navbar→hero negative-margin compensation cannot absorb. Browser CSS
+    # parsing does not depend on source order, so injecting these rules at
+    # the bottom of the document still applies them to elements rendered
+    # above. See git history for the regression we introduced and reverted
+    # (April 2026).
+    st.markdown(
+        f"""
+<style>
+{get_action_buttons_css()}
+
+/* Results header bar — flex container for the role title (left) and the
+   shared Helpful / Share / Export action buttons (right). Sits at the top
+   of the right column when results render. */
+.role-match-results-header {{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--border-color);
+}}
+.role-match-results-title-section {{
+    flex: 1;
+    min-width: 0;
+}}
+.role-match-results-title {{
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.3;
+}}
+.role-match-results-company {{
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}}
+@media (max-width: 768px) {{
+    .role-match-results-header {{
+        flex-direction: column;
+        gap: 8px;
+    }}
+}}
+</style>
+""",
+        unsafe_allow_html=True,
+    )
 
     # === ADD FOOTER ===
     from ui.components.footer import render_footer

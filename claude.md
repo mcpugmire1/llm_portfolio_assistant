@@ -151,6 +151,40 @@
   # - Only one related project selected at a time
   ```
 
+  ## Layout & Spacing Rules
+
+  ### Streamlit markdown call count affects navbar/hero gap
+
+  Each `st.markdown()` call creates an `stMarkdownContainer` DOM element.
+  The `.conversation-header` negative margin (`-3rem`) is tuned to compensate
+  for a specific number of preceding markdown elements. Adding an extra
+  `st.markdown()` call before the hero banner — **even one containing only
+  `<style>` tags** — breaks the visual alignment by adding ~16px of gap.
+
+  **Rule:** On any page that uses `.conversation-header`, consolidate all
+  CSS injections into as few `st.markdown()` calls as possible *before* the
+  hero. If additional CSS must be injected separately (e.g., needs f-string
+  interpolation that the literal-string hero block can't accommodate), place
+  it **after** the hero and workspace content, immediately before
+  `render_footer()`.
+
+  Browser CSS parsing does not depend on source order — a `<style>` block at
+  the bottom of the document still applies to elements rendered above it.
+  So the bottom-of-page injection pattern is functionally equivalent for
+  styling purposes, but it preserves the DOM structure that the hero's
+  negative margin was tuned for.
+
+  **Why this matters (April 2026 incident):** Phase 3 of the Role Match
+  build added a second `st.markdown()` block between the hero CSS and the
+  hero `<div>` to inject `get_action_buttons_css()`. The visible result was
+  a ~16px gap between the navbar and the hero banner. The fix was to move
+  the second `st.markdown()` to the bottom of `render_role_match`, right
+  before `render_footer()`. The `.conversation-header` negative margin was
+  not changed.
+
+  See `ui/pages/role_match.py` for the in-code comment that warns against
+  re-introducing the regression at the top CSS block.
+
   ## Behavioral Rules
 
   ### Do
