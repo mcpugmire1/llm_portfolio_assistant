@@ -7,6 +7,10 @@ Runs the full three-step pipeline against the structured JD fixture:
   3. Assess each requirement (JD_ASSESSMENT_PROMPT + OpenAI)
   4. Compute recommendation (compute_recommendation)
 
+Pipeline functions live in services/jd_assessor.py — this script is a thin
+runner that exercises them against a fixture and prints a human-readable
+report. The UI calls run_assessment() directly from the same module.
+
 Usage: python tests/jd_pipeline_validation.py
 """
 
@@ -24,11 +28,11 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 load_dotenv()
 
 from services.jd_assessor import (  # noqa: E402
-    JD_EXTRACTION_PROMPT,
-    build_assessment_prompt,
+    assess_requirement,
     compute_recommendation,
+    extract_requirements,
+    retrieve_stories,
 )
-from services.pinecone_service import pinecone_semantic_search  # noqa: E402
 
 # Load stories (same as app.py)
 STORIES_FILE = "echo_star_stories_nlp.jsonl"
@@ -45,88 +49,6 @@ def load_stories():
                     story["id"] = str(story["id"]).strip()
                     stories.append(story)
     return stories
-
-
-def extract_requirements(client: OpenAI, jd_text: str) -> dict:
-    """Stage 1: Extract structured requirements from JD."""
-    response = client.chat.completions.create(
-        model="gpt-4o",
-        messages=[
-            {"role": "system", "content": JD_EXTRACTION_PROMPT},
-            {"role": "user", "content": jd_text},
-        ],
-        temperature=0.0,
-        response_format={"type": "json_object"},
-    )
-    return json.loads(response.choices[0].message.content)
-
-
-def retrieve_stories(requirement_text: str, stories: list, top_k: int = 3) -> list:
-    """Stage 2: Query Pinecone for candidate stories matching a requirement."""
-    results = pinecone_semantic_search(
-        query=requirement_text,
-        filters={},
-        stories=stories,
-        top_k=top_k,
-    )
-    if not results:
-        return []
-    # pinecone_semantic_search returns [{"story": dict, "pc_score": float, "score": float}]
-    return [
-        {
-            "title": hit["story"].get("Title", ""),
-            "client": hit["story"].get("Client", ""),
-            "id": hit["story"].get("id", ""),
-            "score": hit.get("pc_score", 0),
-            "5PSummary": hit["story"].get("5PSummary", ""),
-            "Situation": hit["story"].get("Situation", []),
-            "Action": hit["story"].get("Action", []),
-            "Result": hit["story"].get("Result", []),
-        }
-        for hit in results[:top_k]
-    ]
-
-
-def assess_requirement(
-    client: OpenAI, requirement: str, candidate_stories: list
-) -> dict:
-    """Stage 3: Assess match quality for a single requirement."""
-    # Format stories for the prompt
-    stories_text = ""
-    for i, s in enumerate(candidate_stories, 1):
-        stories_text += f"\n--- Story {i} ---\n"
-        stories_text += f"Title: {s['title']}\n"
-        stories_text += f"Client: {s['client']}\n"
-        stories_text += f"Score: {s['score']:.3f}\n"
-        stories_text += f"Summary: {s['5PSummary']}\n"
-        if s.get("Situation"):
-            sit = s["Situation"]
-            if isinstance(sit, list):
-                sit = " ".join(sit)
-            stories_text += f"Situation: {sit}\n"
-        if s.get("Action"):
-            act = s["Action"]
-            if isinstance(act, list):
-                act = " ".join(act[:3])
-            stories_text += f"Action: {act}\n"
-        if s.get("Result"):
-            res = s["Result"]
-            if isinstance(res, list):
-                res = " ".join(res[:3])
-            stories_text += f"Result: {res}\n"
-
-    user_message = f"Requirement: {requirement}\n\nRetrieved Stories:\n{stories_text}"
-
-    response = client.chat.completions.create(
-        model="gpt-4o",
-        messages=[
-            {"role": "system", "content": build_assessment_prompt()},
-            {"role": "user", "content": user_message},
-        ],
-        temperature=0.0,
-        response_format={"type": "json_object"},
-    )
-    return json.loads(response.choices[0].message.content)
 
 
 def main():

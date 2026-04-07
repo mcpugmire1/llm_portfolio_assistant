@@ -11,7 +11,12 @@ Architecture: Three-step pipeline (see ADR 016)
 """
 
 import json
+import os
 from pathlib import Path
+
+from openai import OpenAI
+
+from services.pinecone_service import pinecone_semantic_search
 
 # =============================================================================
 # JD EXTRACTION PROMPT
@@ -138,6 +143,177 @@ def build_assessment_prompt() -> str:
     """Build the assessment prompt with dynamically loaded Matt profile."""
     profile = load_matt_profile()
     return JD_ASSESSMENT_PROMPT_TEMPLATE.format(matt_profile=profile)
+
+
+# =============================================================================
+# PIPELINE — Three-stage assessment (extract → retrieve → assess)
+# =============================================================================
+# These functions implement the production pipeline consumed by the Role Match
+# UI. They were promoted from tests/jd_pipeline_validation.py so the UI and the
+# validation script share a single source of truth.
+
+ASSESSMENT_MODEL = "gpt-4o"
+ASSESSMENT_TEMPERATURE = 0.0
+DEFAULT_TOP_K = 3
+
+
+def _get_openai_client() -> OpenAI:
+    """Build an OpenAI client using the same env-var pattern as the rest of the app."""
+    return OpenAI(
+        api_key=os.getenv("OPENAI_API_KEY"),
+        project=os.getenv("OPENAI_PROJECT_ID"),
+        organization=os.getenv("OPENAI_ORG_ID"),
+    )
+
+
+def extract_requirements(client: OpenAI, jd_text: str) -> dict:
+    """Stage 1 — extract structured requirements from a job description.
+
+    Returns the parsed JSON object produced by JD_EXTRACTION_PROMPT.
+    """
+    response = client.chat.completions.create(
+        model=ASSESSMENT_MODEL,
+        messages=[
+            {"role": "system", "content": JD_EXTRACTION_PROMPT},
+            {"role": "user", "content": jd_text},
+        ],
+        temperature=ASSESSMENT_TEMPERATURE,
+        response_format={"type": "json_object"},
+    )
+    return json.loads(response.choices[0].message.content)
+
+
+def retrieve_stories(
+    requirement_text: str, stories: list, top_k: int = DEFAULT_TOP_K
+) -> list:
+    """Stage 2 — query Pinecone for candidate stories matching a requirement.
+
+    Returns a list of trimmed story dicts (title, client, id, score, STAR fields)
+    suitable for inclusion in the assessment prompt. Empty list if no hits.
+    """
+    results = pinecone_semantic_search(
+        query=requirement_text,
+        filters={},
+        stories=stories,
+        top_k=top_k,
+    )
+    if not results:
+        return []
+    return [
+        {
+            "title": hit["story"].get("Title", ""),
+            "client": hit["story"].get("Client", ""),
+            "id": hit["story"].get("id", ""),
+            "score": hit.get("pc_score", 0),
+            "5PSummary": hit["story"].get("5PSummary", ""),
+            "Situation": hit["story"].get("Situation", []),
+            "Action": hit["story"].get("Action", []),
+            "Result": hit["story"].get("Result", []),
+        }
+        for hit in results[:top_k]
+    ]
+
+
+def _format_candidates_for_prompt(candidate_stories: list) -> str:
+    """Format retrieved stories as the user-message body for the assessment LLM."""
+    out = ""
+    for i, s in enumerate(candidate_stories, 1):
+        out += f"\n--- Story {i} ---\n"
+        out += f"Title: {s['title']}\n"
+        out += f"Client: {s['client']}\n"
+        out += f"Score: {s['score']:.3f}\n"
+        out += f"Summary: {s['5PSummary']}\n"
+        if s.get("Situation"):
+            sit = s["Situation"]
+            if isinstance(sit, list):
+                sit = " ".join(sit)
+            out += f"Situation: {sit}\n"
+        if s.get("Action"):
+            act = s["Action"]
+            if isinstance(act, list):
+                act = " ".join(act[:3])
+            out += f"Action: {act}\n"
+        if s.get("Result"):
+            res = s["Result"]
+            if isinstance(res, list):
+                res = " ".join(res[:3])
+            out += f"Result: {res}\n"
+    return out
+
+
+def assess_requirement(
+    client: OpenAI, requirement: str, candidate_stories: list
+) -> dict:
+    """Stage 3 — assess match quality for a single requirement.
+
+    Returns the parsed JSON object produced by JD_ASSESSMENT_PROMPT_TEMPLATE.
+    """
+    user_message = (
+        f"Requirement: {requirement}\n\n"
+        f"Retrieved Stories:\n{_format_candidates_for_prompt(candidate_stories)}"
+    )
+
+    response = client.chat.completions.create(
+        model=ASSESSMENT_MODEL,
+        messages=[
+            {"role": "system", "content": build_assessment_prompt()},
+            {"role": "user", "content": user_message},
+        ],
+        temperature=ASSESSMENT_TEMPERATURE,
+        response_format={"type": "json_object"},
+    )
+    return json.loads(response.choices[0].message.content)
+
+
+def run_assessment(jd_text: str, stories: list[dict]) -> dict:
+    """Run the full three-stage pipeline against a job description.
+
+    Args:
+        jd_text: Raw JD text pasted by the user.
+        stories: Full story corpus loaded by app.py.
+
+    Returns:
+        {
+            "extraction": {...},     # full JD extraction object
+            "results": [             # one entry per requirement (required + preferred)
+                {
+                    "category": "required" | "preferred",
+                    "requirement": "...",
+                    "match_status": "strong" | "partial" | "gap",
+                    "evidence": [...],
+                    "gap_explanation": "...",
+                    "confidence": "high" | "medium" | "low",
+                },
+                ...
+            ],
+        }
+
+    The returned shape is compatible with compute_recommendation().
+    """
+    client = _get_openai_client()
+
+    # Stage 1
+    extraction = extract_requirements(client, jd_text)
+
+    # Build flat list with category attached so the UI can group by required vs preferred
+    all_requirements = []
+    for r in extraction.get("required_qualifications", []) or []:
+        all_requirements.append({"text": r["requirement"], "category": "required"})
+    for r in extraction.get("preferred_qualifications", []) or []:
+        all_requirements.append({"text": r["requirement"], "category": "preferred"})
+
+    # Stages 2 + 3
+    match_results = []
+    for req in all_requirements:
+        candidates = retrieve_stories(req["text"], stories, top_k=DEFAULT_TOP_K)
+        assessment = assess_requirement(client, req["text"], candidates)
+        assessment["category"] = req["category"]
+        match_results.append(assessment)
+
+    return {
+        "extraction": extraction,
+        "results": match_results,
+    }
 
 
 # =============================================================================
