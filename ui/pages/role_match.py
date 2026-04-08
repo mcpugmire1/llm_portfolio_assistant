@@ -16,6 +16,7 @@ from ui.components.action_buttons import (
     get_action_buttons_html,
     render_action_button_handlers,
 )
+from ui.components.story_detail import render_story_detail
 from ui.components.thinking_indicator import render_thinking_indicator
 
 # =============================================================================
@@ -28,55 +29,188 @@ from ui.components.thinking_indicator import render_thinking_indicator
 _STATUS_ICON = {"strong": "✓", "partial": "~", "gap": "✗"}
 
 
-def _render_requirement_card(result: dict) -> str:
-    """Build the HTML for a single requirement card. Returns a string (no st calls)."""
+def _find_story_by_title_client(
+    stories: list[dict], title: str | None, client: str | None
+) -> dict | None:
+    """Look up a story in the corpus by title (and optionally client).
+
+    Used to map an LLM-returned evidence chip back to the full story dict so
+    the chip can be made clickable for inline detail expansion. Match is
+    case-insensitive on title; if a client is provided, the client must also
+    match (case-insensitive).
+
+    Returns the first matching story, or None if no story matches. None
+    return is the graceful-degradation path: the chip stays non-clickable
+    rather than offering a click that does nothing.
+    """
+    if not title:
+        return None
+    title_norm = title.strip().lower()
+    client_norm = (client or "").strip().lower()
+    for s in stories:
+        s_title = (s.get("Title") or "").strip().lower()
+        if s_title != title_norm:
+            continue
+        if not client_norm:
+            return s
+        s_client = (s.get("Client") or "").strip().lower()
+        if s_client == client_norm:
+            return s
+    return None
+
+
+def _resolve_evidence_stories(
+    results: list[dict], stories: list[dict]
+) -> dict[str, dict]:
+    """Walk every story-evidence chip in the assessment and resolve to story dicts.
+
+    Returns a map keyed by composite index `f"{req_idx}_{ev_idx}"` whose
+    values are the full story dicts. Profile-evidence chips and story chips
+    whose title/client cannot be resolved are NOT included in the map — the
+    presence of a key in the map is the canonical signal that the chip is
+    clickable.
+
+    Resolution happens once at render time so the click handler doesn't
+    need to re-look-up at click time. Pattern borrowed from Timeline view's
+    story_map (ui/components/timeline_view.py).
+    """
+    resolved: dict[str, dict] = {}
+    for req_idx, result in enumerate(results):
+        for ev_idx, ev in enumerate((result.get("evidence") or [])[:2]):
+            if ev.get("evidence_type", "story") != "story":
+                continue
+            story = _find_story_by_title_client(
+                stories, ev.get("story_title"), ev.get("client")
+            )
+            if story is not None:
+                resolved[f"{req_idx}_{ev_idx}"] = story
+    return resolved
+
+
+def _render_requirement_card(
+    result: dict,
+    req_idx: int,
+    evidence_stories: dict[str, dict],
+    active_evidence_key: str | None = None,
+) -> None:
+    """Emit Streamlit elements for a single requirement card.
+
+    Pattern: matches ui/pages/ask_mattgpt/conversation_helpers.py:626-700.
+    The chip is a real `st.button` styled via scoped CSS targeting its
+    `st-key-evidence_btn_<key>` class. No HTML chip, no JS bridge, no
+    hidden trigger button. Click is handled by Streamlit natively.
+
+    Toggle behavior comes for free from the if-clicked handler:
+      - Click same chip again → pop the active key (close)
+      - Click different chip → overwrite the active key (switch)
+    """
     status = result.get("match_status", "gap")
     icon = _STATUS_ICON.get(status, "?")
     requirement_text = html.escape(result.get("requirement", ""))
 
-    parts = [
-        '<div class="role-match-req-card">',
-        '  <div class="role-match-req-header">',
-        f'    <span class="role-match-status {status}">{icon}</span>',
-        f'    <div class="role-match-req-text">{requirement_text}</div>',
-        "  </div>",
-    ]
+    with st.container(key=f"role_match_req_{req_idx}"):
+        # 1. Title row — status icon + requirement text
+        st.markdown(
+            f'<div class="role-match-req-header">'
+            f'<span class="role-match-status {status}">{icon}</span>'
+            f'<div class="role-match-req-text">{requirement_text}</div>'
+            f"</div>",
+            unsafe_allow_html=True,
+        )
 
-    # Evidence chips (only for strong / partial — gaps render no chips per BDD)
-    evidence_items = result.get("evidence") or []
-    if status in ("strong", "partial") and evidence_items:
-        parts.append('  <div class="role-match-evidence">')
-        for ev in evidence_items[:2]:  # max 2 per BDD
-            ev_type = ev.get("evidence_type", "story")
-            if ev_type == "profile":
-                # Profile-level evidence: "Verified skill" pill, no story/client.
-                # Differentiated from story chips by purple-tinted background.
-                relevance = html.escape(ev.get("relevance", ""))
-                parts.append(
-                    '    <div class="role-match-evidence-chip profile">'
-                    '<span class="chip-label">Verified skill</span> — '
-                    f"{relevance}</div>"
-                )
-            else:
-                # Story evidence chip: title + client. Surface-gray background.
-                title = html.escape(ev.get("story_title") or "Untitled")
-                client = html.escape(ev.get("client") or "")
-                client_str = (
-                    f' <span class="chip-client">({client})</span>' if client else ""
-                )
-                parts.append(
-                    '    <div class="role-match-evidence-chip">'
-                    f"{title}{client_str}</div>"
-                )
-        parts.append("  </div>")
+        # 2. Evidence chips (only for strong / partial — gaps render no chips per BDD)
+        evidence_items = result.get("evidence") or []
+        if status in ("strong", "partial") and evidence_items:
+            for ev_idx, ev in enumerate(evidence_items[:2]):  # max 2 per BDD
+                ev_type = ev.get("evidence_type", "story")
+                composite_key = f"{req_idx}_{ev_idx}"
 
-    # Gap explanation for partial / gap
-    gap_text = (result.get("gap_explanation") or "").strip()
-    if status in ("partial", "gap") and gap_text:
-        parts.append(f'  <div class="role-match-gap">{html.escape(gap_text)}</div>')
+                if ev_type == "profile":
+                    # Profile chip — static markdown, never clickable.
+                    # Purple-tinted background distinguishes it from story chips.
+                    relevance = html.escape(ev.get("relevance", ""))
+                    st.markdown(
+                        '<div class="role-match-evidence-chip profile">'
+                        '<span class="chip-label">Verified skill</span> — '
+                        f"{relevance}</div>",
+                        unsafe_allow_html=True,
+                    )
+                elif composite_key in evidence_stories:
+                    # Story chip resolved to a corpus story → render as a
+                    # Streamlit button. The button label changes based on
+                    # active state: collapsed shows title (chevron suffix),
+                    # expanded shows "✕ Close". Toggle handled in the
+                    # if-clicked block below.
+                    is_active = active_evidence_key == composite_key
+                    title_text = ev.get("story_title") or "Untitled"
+                    client = ev.get("client") or ""
 
-    parts.append("</div>")
-    return "\n".join(parts)
+                    if is_active:
+                        button_label = "✕ Close"
+                        # Inject scoped CSS for the active button only.
+                        # Same pattern as conversation_helpers.py:639-655.
+                        st.markdown(
+                            f"""
+                            <style>
+                            [class*="st-key-evidence_btn_{composite_key}"] button {{
+                                background: var(--accent-purple) !important;
+                                border-color: var(--accent-purple-hover) !important;
+                                color: white !important;
+                            }}
+                            [class*="st-key-evidence_btn_{composite_key}"] button p {{
+                                color: white !important;
+                                font-weight: 600 !important;
+                            }}
+                            </style>
+                            """,
+                            unsafe_allow_html=True,
+                        )
+                    else:
+                        client_str = f" ({client})" if client else ""
+                        button_label = f"{title_text}{client_str} ›"
+
+                    if st.button(
+                        button_label,
+                        key=f"evidence_btn_{composite_key}",
+                        use_container_width=True,
+                    ):
+                        # Toggle: same chip → close. Different chip → switch.
+                        if (
+                            st.session_state.get("role_match_active_evidence")
+                            == composite_key
+                        ):
+                            st.session_state.pop("role_match_active_evidence", None)
+                        else:
+                            st.session_state["role_match_active_evidence"] = (
+                                composite_key
+                            )
+                        st.rerun()
+                else:
+                    # Story chip with unresolved title/client → graceful
+                    # degradation as plain non-clickable text. The user
+                    # still sees the LLM-cited title; we just can't
+                    # expand it because it didn't match anything in the
+                    # corpus.
+                    title_text = html.escape(ev.get("story_title") or "Untitled")
+                    client = html.escape(ev.get("client") or "")
+                    client_str = (
+                        f' <span class="chip-client">({client})</span>'
+                        if client
+                        else ""
+                    )
+                    st.markdown(
+                        '<div class="role-match-evidence-chip">'
+                        f"{title_text}{client_str}</div>",
+                        unsafe_allow_html=True,
+                    )
+
+        # 3. Gap explanation for partial / gap
+        gap_text = (result.get("gap_explanation") or "").strip()
+        if status in ("partial", "gap") and gap_text:
+            st.markdown(
+                f'<div class="role-match-gap">{html.escape(gap_text)}</div>',
+                unsafe_allow_html=True,
+            )
 
 
 def _build_share_text(result_payload: dict) -> str:
@@ -252,12 +386,21 @@ def _render_results_header(result_payload: dict) -> None:
     )
 
 
-def _render_results_panel(result_payload: dict) -> None:
+def _render_results_panel(result_payload: dict, stories: list[dict]) -> None:
     """Render the full results panel — required + preferred sections.
+
+    Per-requirement rendering loop. Each requirement card is emitted as its
+    own st.markdown call so that hidden Streamlit buttons (for chip click
+    handling) and an inline render_story_detail call (for the expanded chip,
+    if any) can be interleaved between cards. The Cards-view pattern from
+    Explore Stories — see ui/pages/explore_stories.py:2393-2487 — was the
+    direct inspiration.
 
     Args:
         result_payload: Output of services.jd_assessor.run_assessment, shape:
             {"extraction": {...}, "results": [{...}, ...]}
+        stories: Full story corpus, used to resolve evidence-chip
+            (title, client) pairs to story dicts for inline expansion.
     """
     results = result_payload.get("results") or []
     if not results:
@@ -271,24 +414,91 @@ def _render_results_panel(result_payload: dict) -> None:
     # Header bar with role title + action buttons (Helpful / Share / Export)
     _render_results_header(result_payload)
 
-    required = [r for r in results if r.get("category") == "required"]
-    preferred = [r for r in results if r.get("category") == "preferred"]
+    # Resolve every story-evidence chip to a story dict at render time so
+    # the chips can be marked clickable up-front and chips that don't
+    # resolve fall back to non-clickable plain text (graceful degradation
+    # when the LLM paraphrases a title and the corpus lookup misses).
+    evidence_stories = _resolve_evidence_stories(results, stories)
+    active_evidence_key = st.session_state.get("role_match_active_evidence")
 
-    html_parts = ['<div class="role-match-results">']
+    # Reset active evidence if it points to a chip that no longer exists in
+    # this assessment (e.g., user submitted a new JD between renders).
+    if active_evidence_key and active_evidence_key not in evidence_stories:
+        active_evidence_key = None
+        st.session_state.pop("role_match_active_evidence", None)
+
+    # Group requirements by category, preserving original index for the
+    # composite key that the click handler uses.
+    required = [
+        (idx, r) for idx, r in enumerate(results) if r.get("category") == "required"
+    ]
+    preferred = [
+        (idx, r) for idx, r in enumerate(results) if r.get("category") == "preferred"
+    ]
 
     if required:
-        html_parts.append(f"<h3>Required Qualifications ({len(required)})</h3>")
-        for r in required:
-            html_parts.append(_render_requirement_card(r))
+        _render_results_section(
+            "Required Qualifications",
+            required,
+            evidence_stories,
+            active_evidence_key,
+            stories,
+        )
 
     if preferred:
-        html_parts.append(f"<h3>Preferred Qualifications ({len(preferred)})</h3>")
-        for r in preferred:
-            html_parts.append(_render_requirement_card(r))
+        _render_results_section(
+            "Preferred Qualifications",
+            preferred,
+            evidence_stories,
+            active_evidence_key,
+            stories,
+        )
 
-    html_parts.append("</div>")
+    # No JS click handler — chip clicks are handled by Streamlit natively
+    # via the st.button calls inside _render_requirement_card. Pattern matches
+    # ui/pages/ask_mattgpt/conversation_helpers.py:626-700.
 
-    st.markdown("\n".join(html_parts), unsafe_allow_html=True)
+
+def _render_results_section(
+    title: str,
+    indexed_results: list[tuple[int, dict]],
+    evidence_stories: dict[str, dict],
+    active_evidence_key: str | None,
+    stories: list[dict],
+) -> None:
+    """Render a section header (h3) and all requirement cards in the section.
+
+    For each requirement:
+      1. Call _render_requirement_card, which emits the card directly (with
+         its own st.container wrapper, title markdown, evidence chip buttons,
+         and gap explanation). The chip buttons handle their own click logic
+         via plain st.button — no JS bridge.
+      2. If the active chip belongs to this requirement, render
+         render_story_detail inline immediately below the card so the
+         expanded story sits next to the chip the user clicked.
+    """
+    st.markdown(
+        f'<h3 class="role-match-section-header">{html.escape(title)} '
+        f"({len(indexed_results)})</h3>",
+        unsafe_allow_html=True,
+    )
+
+    for req_idx, result in indexed_results:
+        _render_requirement_card(result, req_idx, evidence_stories, active_evidence_key)
+
+        # If the active chip belongs to this requirement, expand inline below.
+        if active_evidence_key:
+            try:
+                active_req_idx = int(active_evidence_key.split("_")[0])
+            except (ValueError, IndexError):
+                active_req_idx = None
+            if active_req_idx == req_idx and active_evidence_key in evidence_stories:
+                render_story_detail(
+                    evidence_stories[active_evidence_key],
+                    f"role_match_ev_{active_evidence_key}",
+                    stories,
+                    show_actions=False,
+                )
 
 
 def render_role_match(stories: list[dict]):
@@ -414,7 +624,12 @@ def render_role_match(stories: list[dict]):
 }
 
 /* ===== RESULT PANEL — section headers, requirement cards, evidence ===== */
-.role-match-results h3 {
+/* Section header is now class-targeted (h3.role-match-section-header) instead
+   of parent-scoped (.role-match-results h3) because the per-requirement
+   render loop dropped the .role-match-results wrapper to allow inline
+   render_story_detail expansion between cards. The wrapper would have
+   spanned multiple stMarkdownContainers which breaks descendant selectors. */
+h3.role-match-section-header {
     font-size: 13px !important;
     font-weight: 700 !important;
     text-transform: uppercase;
@@ -422,15 +637,24 @@ def render_role_match(stories: list[dict]):
     color: var(--text-secondary);
     margin: 0 0 12px 0 !important;
 }
-.role-match-results h3:not(:first-child) {
+h3.role-match-section-header:not(:first-of-type) {
     margin-top: 24px !important;
 }
-.role-match-req-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    padding: 14px 16px;
-    margin-bottom: 10px;
+/* Card container — each requirement is wrapped in
+   `with st.container(key=f"role_match_req_{req_idx}"):` so this rule
+   targets the Streamlit-generated wrapper class. The chip buttons +
+   markdown elements inside the container all share this card frame. */
+[class*="st-key-role_match_req_"] {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 10px !important;
+    padding: 14px 16px !important;
+    margin-bottom: 10px !important;
+}
+/* Tighten the default Streamlit gap between elements inside each card so
+   the title, chips, and gap explanation sit close together. */
+[class*="st-key-role_match_req_"] [data-testid="stVerticalBlock"] {
+    gap: 8px !important;
 }
 .role-match-req-header {
     display: flex;
@@ -460,21 +684,16 @@ def render_role_match(stories: list[dict]):
     color: var(--text-primary);
     line-height: 1.45;
 }
-.role-match-evidence {
-    margin-top: 10px;
-    padding-left: 32px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
+/* Profile-evidence chip + unresolved-story-chip fallback. These two cases
+   are still rendered as static markdown divs (not as Streamlit buttons,
+   because they aren't clickable). The clickable story chips are
+   Streamlit buttons styled separately in the bottom CSS block. */
 .role-match-evidence-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+    display: block;
     background: var(--bg-surface);
     border: 1px solid var(--border-color);
     border-radius: 6px;
-    padding: 6px 10px;
+    padding: 8px 12px;
     font-size: 12px;
     color: var(--text-primary);
     line-height: 1.35;
@@ -631,7 +850,7 @@ def render_role_match(stories: list[dict]):
                     unsafe_allow_html=True,
                 )
             elif st.session_state.get("role_match_result"):
-                _render_results_panel(st.session_state["role_match_result"])
+                _render_results_panel(st.session_state["role_match_result"], stories)
             else:
                 st.markdown(
                     """
@@ -693,6 +912,46 @@ def render_role_match(stories: list[dict]):
         flex-direction: column;
         gap: 8px;
     }}
+}}
+
+/* ===== Clickable story-evidence chips (real Streamlit buttons) =====
+   Each clickable story chip is a `st.button(key=f"evidence_btn_<key>")`
+   call inside the requirement card container. We style the Streamlit
+   button to look like a chip via CSS targeting its `st-key-*` wrapper
+   class. Pattern matches ui/pages/ask_mattgpt/conversation_helpers.py
+   source-chip rendering (lines ~626-700).
+
+   The active state (purple background, white text, "✕ Close" label) is
+   applied via per-button inline CSS injection from the render code, so
+   only the currently-active button gets the override. */
+[class*="st-key-evidence_btn_"] button {{
+    background: var(--bg-surface) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-primary) !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    padding: 8px 12px !important;
+    min-height: auto !important;
+    height: auto !important;
+    border-radius: 6px !important;
+    text-align: left !important;
+    line-height: 1.35 !important;
+    box-shadow: none !important;
+    transition: border-color 0.15s ease, background 0.15s ease !important;
+    font-family: inherit !important;
+    /* Lighter top margin to sit closer to the requirement title */
+    margin-top: 0 !important;
+}}
+[class*="st-key-evidence_btn_"] button:hover {{
+    border-color: var(--accent-purple) !important;
+    background: var(--bg-card) !important;
+}}
+[class*="st-key-evidence_btn_"] button p {{
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: var(--text-primary) !important;
+    margin: 0 !important;
+    text-align: left !important;
 }}
 </style>
 """,

@@ -96,7 +96,60 @@
   - **For interactive HTML, use `components.html()`** — But clicks require JS to trigger hidden `st.button()` elements
   - **JS in iframes can't directly access parent** — Use `window.parent.document` with timeout for DOM readiness
 
-  ### Click Handling Pattern (for custom HTML components)
+  ### Interactive Click Handling — STOP, Read This First
+
+  **Before building any click handler, hidden button, or JS bridge for an
+  interactive chip, card, button, or list item:**
+
+  1. **Read `ui/pages/ask_mattgpt/conversation_helpers.py`** (search for
+     `st.button`, especially around the "related stories" / source-chip
+     rendering near line 626). This is the **plain `st.button` + scoped CSS**
+     pattern. The button click is handled directly by Streamlit's WebSocket
+     → Python rerun cycle. No HTML chip, no JS bridge, no hidden trigger.
+     The same button serves as both "open" and "close" affordance via a
+     state-dependent label. The visual chip appearance comes from CSS
+     targeting `[class*="st-key-{stable_key}"] button`.
+  2. **Read `ui/pages/explore_stories.py`** (Cards view rendering, lines
+     ~2393-2487). This is the **delegated `parentDoc.addEventListener('click', ...)`**
+     pattern. Used when you genuinely need an HTML chip (not a button) AND
+     a hidden Streamlit trigger button bridged via JS. Listener is on
+     `parentDoc`, not on individual elements, so it survives React DOM
+     reconciliation across reruns.
+
+  **The codebase already has two proven patterns. Do not build a third
+  pattern without a documented reason why neither of the existing two
+  works for your case.**
+
+  **Strong default:** start with the Ask MattGPT pattern (`st.button` +
+  scoped CSS). Reach for the Cards-view delegated-listener pattern only
+  when the visual or interaction requirements genuinely cannot be met by
+  styling a Streamlit button. Reach for a brand-new pattern only when both
+  documented patterns demonstrably fail and you can write down WHY in a
+  code comment that names the specific limitation.
+
+  **April 2026 incident:** Phase 3 Role Match chip expansion was built as a
+  per-element `addEventListener` on `data-req-idx`/`data-ev-idx` HTML chips
+  bridged to hidden Streamlit buttons. Click bridge worked for the first
+  click, then silently failed for subsequent chip clicks because Streamlit
+  destroys and recreates the `components.html` iframe on every rerun,
+  killing the JS context that owned the listener function. Switching to a
+  delegated `parentDoc` listener didn't help because the same iframe
+  destruction killed *that* listener too. The eventual fix was to abandon
+  the JS bridge entirely and switch to plain `st.button` with scoped CSS,
+  matching `conversation_helpers.py` exactly. **Roughly 100 lines of JS
+  bridge code, two failed debug rounds, and one unnecessary CLAUDE.md
+  warning would have been avoided by reading conversation_helpers.py
+  first.** Don't repeat this.
+
+  ### Click Handling Pattern (third option, only with documented reason)
+
+  **DO NOT use this pattern by default.** This is the historical reference
+  for the most fragile of the three patterns — pure HTML elements with
+  per-element JS click bindings. It is included here for understanding the
+  evolution of patterns in the codebase, NOT as a recommended approach.
+  See the "Interactive Click Handling — STOP, Read This First" section
+  above for the patterns you should actually use.
+
   ```python
   # 1. Render HTML with data attributes
   st.markdown('<div class="card" data-index="0">...</div>', unsafe_allow_html=True)
@@ -125,6 +178,16 @@
   # 4. CSS to hide the buttons
   [class*="st-key-card_"] { position: absolute !important; left: -9999px !important; }
   ```
+
+  **Why this pattern is fragile:** per-element `addEventListener` calls live
+  inside the `components.html` iframe's JS context. When Streamlit reruns
+  (which happens after every interaction), the iframe is destroyed and
+  recreated, killing the JS context that owns the listener functions. The
+  listeners attached to chip DOM nodes from inside the iframe become dead
+  references on the parent document. Some clicks fire, others don't, with
+  no consistent reproduction. If you find yourself needing this pattern,
+  use the **Cards view delegated-listener pattern** (which has the listener
+  on `parentDoc` and re-binds on every rerun) instead.
 
   ### Era-Based Timeline Pattern
   ```python
