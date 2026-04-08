@@ -192,7 +192,7 @@ Feature: Role Match page
   # =============================================================================
 
   Scenario: Mobile shows desktop-only message
-    Given the user is on a device with viewport width less than 768px
+    Given the user is on a device with viewport width less than 1024px
     When the user navigates to Role Match
     Then the JD input and match results are not displayed
     And a message says "Best experienced on desktop"

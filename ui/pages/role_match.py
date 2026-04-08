@@ -374,10 +374,14 @@ def render_role_match(stories: list[dict]):
     )
 
     # =========================================================================
-    # MOBILE GATE — Desktop only for v1
+    # MOBILE GATE — Desktop only for v1 (≥ 1024px, iPad Pro and up)
     # =========================================================================
+    # Threshold raised from 768 to 1024 (April 2026) after visual testing
+    # confirmed that the two-column workspace is only legible at iPad Pro
+    # width or wider. Tablets in the 768-1023px range previously slipped
+    # through the gate and rendered the workspace in a cramped state.
     screen_width = st.session_state.get("_browser_screen_size", "")
-    if screen_width and int(screen_width) < 768:
+    if screen_width and int(screen_width) < 1024:
         st.markdown(
             """
             <div style="text-align: center; padding: 60px 20px; color: var(--text-secondary);">
