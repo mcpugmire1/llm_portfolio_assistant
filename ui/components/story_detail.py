@@ -220,13 +220,26 @@ def on_ask_this_story(detail: dict):
     st.rerun()
 
 
-def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict]):
+def render_story_detail(
+    detail: dict | None,
+    key_suffix: str,
+    stories: list[dict],
+    *,
+    show_actions: bool = True,
+):
     """Render the story detail panel with full STAR narrative and sidebar (matches wireframe).
 
     Args:
         detail: Story dictionary to display
         key_suffix: Suffix for widget keys (automatically sanitized for Streamlit compatibility)
         stories: Full list of stories for Related Projects
+        show_actions: When True (default), render the Helpful / Share / Export
+            action button row in the detail header along with the supporting
+            hidden Streamlit buttons and click-handler JS. When False, the
+            entire action button surface area is suppressed — useful for
+            embedding the detail panel inside a parent surface (like Role
+            Match) that already provides its own action buttons. The scroll-
+            into-view JS stays unconditional regardless of this flag.
 
     Note:
         key_suffix is sanitized to replace pipes (|) and spaces with hyphens (-).
@@ -292,6 +305,24 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
     # is not required for this use case.
     helpful_state = st.session_state.get(f"helpful_{story_id_safe}")
     is_helpful_confirmed = helpful_state == "up"
+
+    # Build the action buttons HTML conditionally. When show_actions is False
+    # (e.g., when render_story_detail is called from inside Role Match's results
+    # panel which already has its own action buttons), this becomes an empty
+    # string and the .detail-actions div is omitted from the header entirely.
+    actions_html = ""
+    if show_actions:
+        actions_html = (
+            '<div class="detail-actions">'
+            f'<button class="detail-action-btn{" helpful-confirmed" if is_helpful_confirmed else ""}" '
+            f'id="btn-helpful-story"{" disabled" if is_helpful_confirmed else ""}>'
+            f'<span class="btn-label">{"👍 Helpful ✓" if is_helpful_confirmed else "Helpful"}</span></button>'
+            '<button class="detail-action-btn" id="btn-share-story">'
+            '<span>🔗</span><span class="btn-label">Share</span></button>'
+            '<button class="detail-action-btn" id="btn-export-story">'
+            '<span>📄</span><span class="btn-label">Export</span></button>'
+            "</div>"
+        )
 
     header_html = f"""
     <style>
@@ -463,52 +494,45 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
                 </div>
             </div>
         </div>
-        <div class="detail-actions">
-            <button class="detail-action-btn{" helpful-confirmed" if is_helpful_confirmed else ""}" id="btn-helpful-story"{" disabled" if is_helpful_confirmed else ""}><span class="btn-label">{"👍 Helpful ✓" if is_helpful_confirmed else "Helpful"}</span></button>
-            <button class="detail-action-btn" id="btn-share-story">
-                <span>🔗</span>
-                <span class="btn-label">Share</span>
-            </button>
-            <button class="detail-action-btn" id="btn-export-story">
-                <span>📄</span>
-                <span class="btn-label">Export</span>
-            </button>
-        </div>
+        {actions_html}
     </div>
     """
     st.markdown(header_html, unsafe_allow_html=True)
 
-    helpful_clicked = st.button("", key=helpful_btn_key)
-    if helpful_clicked and not is_helpful_confirmed:
-        st.session_state[f"helpful_{story_id_safe}"] = "up"
-        story_title = detail.get("Title", "")
-        log_feedback(
-            rating="up",
-            query=story_title,
-            sources=story_title,
-            turn_index=0,
-            msg_hash=hash(story_id_safe) % 100000,
-        )
-        st.rerun()
+    # Hidden Streamlit buttons + click handlers + print HTML build are all
+    # part of the action buttons surface. Suppressed when show_actions=False.
+    if show_actions:
+        helpful_clicked = st.button("", key=helpful_btn_key)
+        if helpful_clicked and not is_helpful_confirmed:
+            st.session_state[f"helpful_{story_id_safe}"] = "up"
+            story_title = detail.get("Title", "")
+            log_feedback(
+                rating="up",
+                query=story_title,
+                sources=story_title,
+                turn_index=0,
+                msg_hash=hash(story_id_safe) % 100000,
+            )
+            st.rerun()
 
-    export_clicked = st.button("", key=export_btn_key)
+        export_clicked = st.button("", key=export_btn_key)
 
-    if export_clicked:
-        # Format tags
-        tags_html = ', '.join(public_tags[:10]) if public_tags else 'N/A'
+        if export_clicked:
+            # Format tags
+            tags_html = ', '.join(public_tags[:10]) if public_tags else 'N/A'
 
-        # Format competencies
-        comp_html = ', '.join(competencies) if competencies else 'N/A'
+            # Format competencies
+            comp_html = ', '.join(competencies) if competencies else 'N/A'
 
-        # Format metrics
-        metrics_list = []
-        for perf in performance:
-            if perf and ("%" in perf or "x" in perf.lower()):
-                metrics_list.append(perf)
-        metrics_html = '<br>'.join(metrics_list) if metrics_list else 'N/A'
+            # Format metrics
+            metrics_list = []
+            for perf in performance:
+                if perf and ("%" in perf or "x" in perf.lower()):
+                    metrics_list.append(perf)
+            metrics_html = '<br>'.join(metrics_list) if metrics_list else 'N/A'
 
-        # Build printable HTML
-        print_html = f"""
+            # Build printable HTML
+            print_html = f"""
         <script>
             var printWindow = window.open('', '_blank');
             printWindow.document.write(`
@@ -570,26 +594,16 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
             printWindow.document.close();
             printWindow.print();
         </script>
-        """
-        st.components.v1.html(print_html, height=0)
+            """
+            st.components.v1.html(print_html, height=0)
 
-    # JS wiring for HTML buttons
-    components.html(
-        f"""
-        <script>
-        (function() {{
-            var parentDoc = window.parent.document;
-
-            // Micro-scroll with offset for navbar
-            setTimeout(function() {{
-                var detail = parentDoc.querySelector('.detail-header');
-                if (detail) {{
-                    var rect = detail.getBoundingClientRect();
-                    var scrollTop = window.parent.scrollY + rect.top - 100;
-                    detail.scrollIntoView({{ behavior: 'smooth', block: 'start' }});
-                }}
-
-                // Wire buttons after scroll
+    # JS wiring for HTML buttons (conditional) + scroll-into-view (always).
+    # The scroll behavior is intrinsic to the "story detail focused on screen"
+    # UX and stays unconditional. The button-wiring JS is suppressed when
+    # show_actions=False so we don't bind handlers to buttons that don't exist.
+    button_wiring_js = ""
+    if show_actions:
+        button_wiring_js = f"""
                 setTimeout(function() {{
                     var shareBtn = parentDoc.getElementById('btn-share-story');
                     if (shareBtn) {{
@@ -636,6 +650,24 @@ def render_story_detail(detail: dict | None, key_suffix: str, stories: list[dict
                         }};
                     }}
                 }}, 500);
+        """
+
+    components.html(
+        f"""
+        <script>
+        (function() {{
+            var parentDoc = window.parent.document;
+
+            // Micro-scroll with offset for navbar
+            setTimeout(function() {{
+                var detail = parentDoc.querySelector('.detail-header');
+                if (detail) {{
+                    var rect = detail.getBoundingClientRect();
+                    var scrollTop = window.parent.scrollY + rect.top - 100;
+                    detail.scrollIntoView({{ behavior: 'smooth', block: 'start' }});
+                }}
+
+                {button_wiring_js}
             }}, 200);
         }})();
         </script>
