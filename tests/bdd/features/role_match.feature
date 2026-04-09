@@ -21,6 +21,12 @@ Feature: Role Match page
   # RECRUITER VIEW — JD INPUT
   # =============================================================================
 
+  Scenario: Hint text renders in the left column above the textarea
+    Given the user is on the Role Match page
+    Then a hint text instructing the user to paste a job description is visible in the left column above the JD textarea
+    And no hint text is rendered in the right column above the results panel
+    And the hint text is styled as plain secondary-color text
+
   Scenario: JD text area accepts pasted job description
     Given the user is on the Role Match page
     When the user pastes a job description into the text area
@@ -38,15 +44,17 @@ Feature: Role Match page
   Scenario: Match results show required qualifications with status indicators
     Given the user has submitted a job description
     When the match results are displayed
-    Then each required qualification shows a match status of ✓ strong, ~ partial, or ✗ gap
-    And each qualification with a strong or partial match shows up to 2 story evidence chips
-    And each story evidence chip shows the story title and client
+    Then each required qualification shows a match status as plain colored text: green ✓ for strong, amber ~ for partial, red ✗ for gap
+    And the status indicators are plain text characters with no circle background or filled badge
+    And each qualification with a strong or partial match shows up to 2 evidence chips
+    And each evidence chip is formatted as "🔗 <label> · <source>" with a link icon prefix and middle dot separator
+    And each evidence chip is rendered in brand purple with a pill shape and fit-content width
 
   Scenario: Match results show preferred qualifications separately
     Given the user has submitted a job description with preferred qualifications
     When the match results are displayed
     Then preferred qualifications appear in a separate section below required qualifications
-    And preferred qualifications use the same ✓/~/✗ status indicators
+    And preferred qualifications use the same plain colored text ✓/~/✗ status indicators as required qualifications
 
   Scenario: Results show all qualifications without a summary count or score
     Given the user has submitted a job description
@@ -58,12 +66,14 @@ Feature: Role Match page
     Given a requirement is assessed as partial match
     When the match results are displayed
     Then the partial match shows a specific explanation of what is missing
+    And the explanation is rendered as plain secondary-color text with no italic styling
 
   Scenario: Gap shows explanation with no story chips
     Given a requirement is assessed as a gap
     When the match results are displayed
     Then the gap shows a specific explanation of what is missing
-    And no story evidence chips are displayed for that requirement
+    And no evidence chips are displayed for that requirement
+    And the explanation is rendered as plain secondary-color text with no italic styling
 
   Scenario: No fit score or recommendation in recruiter view
     Given the user has not unlocked the private view
@@ -89,17 +99,22 @@ Feature: Role Match page
     Then the chip is rendered in a visually selected state
     And only one chip can be in the selected state at a time
 
-  Scenario: Profile-evidence chips are not clickable
+  Scenario: Profile-evidence chips render in the same family as story chips but are not clickable
     Given a requirement is matched using grounding context only (evidence_type "profile")
     When the match results are displayed
-    Then the profile evidence chip is not clickable
+    Then the profile evidence renders as a chip formatted "🔗 Verified profile · <description>"
+    And the profile evidence chip has identical visual styling to story chips (link icon prefix, purple text, pill shape, fit-content width)
+    And the profile evidence chip does not show a pointer cursor on hover
     And clicking the profile evidence chip has no effect
+    And no separate "VERIFIED SKILL" pill element is rendered anywhere on the page
 
-  Scenario: Story chip with unresolved title falls back to non-clickable text
+  Scenario: Story chip with unresolved title falls back to non-clickable chip
     Given a story evidence chip has a title that does not match any story in the corpus
     When the match results are displayed
-    Then the chip renders as plain non-clickable text
-    And no clickable affordance (cursor, selected state) is applied
+    Then the chip still renders in the "🔗 <title> · <client>" format with the same visual styling
+    And the chip does not show a pointer cursor on hover
+    And clicking the chip has no effect
+    And no selected state is applied
 
   Scenario: Clicking the same chip twice closes the inline detail
     Given the match results show an expanded story detail beneath a chip
@@ -120,11 +135,13 @@ Feature: Role Match page
     Then the inline detail renders immediately below that requirement card
     And the inline detail does not render below any other requirement card
 
-  Scenario: Profile-level evidence displays without story chip
+  Scenario: Profile-level evidence collapses into the chip family
     Given a requirement is matched using grounding context only (evidence_type "profile")
     When the match results are displayed
-    Then the evidence shows a "Verified skill" indicator instead of a story chip
-    And no story title or client is shown for that evidence item
+    Then the evidence renders as a single chip in the same family as story chips
+    And the chip is formatted "🔗 Verified profile · <brief description of the verified fact>"
+    And the chip has identical visual styling to story chips (link icon prefix, purple text, pill shape, fit-content width)
+    And there is no separate "VERIFIED SKILL" pill element anywhere on the page
 
   # =============================================================================
   # PRIVATE VIEW — LOCK ICON AND PASSWORD GATE
