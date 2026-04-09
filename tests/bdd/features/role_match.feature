@@ -41,20 +41,32 @@ Feature: Role Match page
   # RECRUITER VIEW — MATCH RESULTS
   # =============================================================================
 
-  Scenario: Match results show required qualifications with status indicators
+  Scenario: Legend bar appears at the top of the results panel
     Given the user has submitted a job description
     When the match results are displayed
-    Then each required qualification shows a match status as plain colored text: green ✓ for strong, amber ~ for partial, red ✗ for gap
-    And the status indicators are plain text characters with no circle background or filled badge
-    And each qualification with a strong or partial match shows up to 2 evidence chips
-    And each evidence chip is formatted as "🔗 <label> · <source>" with a link icon prefix and middle dot separator
-    And each evidence chip is rendered in brand purple with a pill shape and fit-content width
+    Then a legend bar appears at the top of the results panel above the first section header
+    And the legend includes a green ✓ swatch labeled "Strong match"
+    And the legend includes an amber ~ swatch labeled "Partial"
+    And the legend includes a red ✗ swatch labeled "Gap"
+    And the legend includes a 🔗 swatch labeled "= clickable story"
+    And the legend includes a green dot swatch labeled "= profile evidence"
+
+  Scenario: Match results show required qualifications with status badges
+    Given the user has submitted a job description
+    When the match results are displayed
+    Then each required qualification shows a 22px circular status badge: green ✓ for strong, amber ~ for partial, red ✗ for gap
+    And the status badge sits in a fixed-width left gutter to the left of the requirement title
+    And each qualification with a strong or partial match shows up to 2 pieces of evidence
+    And clickable story chips are rendered as pills with brand purple text and a 🔗 link icon prefix
+    And profile evidence is rendered as an indented text block (NOT a pill) with a small green dot prefix and muted secondary-color text
+    And the pill container is reserved for short references (story chips, unresolved-story fallback) — NOT for argumentative profile evidence
+    And the link icon (🔗) is used exclusively to signal a clickable story chip
 
   Scenario: Match results show preferred qualifications separately
     Given the user has submitted a job description with preferred qualifications
     When the match results are displayed
     Then preferred qualifications appear in a separate section below required qualifications
-    And preferred qualifications use the same plain colored text ✓/~/✗ status indicators as required qualifications
+    And preferred qualifications use the same circular status badges as required qualifications
 
   Scenario: Results show all qualifications without a summary count or score
     Given the user has submitted a job description
@@ -66,14 +78,14 @@ Feature: Role Match page
     Given a requirement is assessed as partial match
     When the match results are displayed
     Then the partial match shows a specific explanation of what is missing
-    And the explanation is rendered as plain secondary-color text with no italic styling
+    And the explanation is rendered as italic muted-color text indented to align with the chip row
 
   Scenario: Gap shows explanation with no story chips
     Given a requirement is assessed as a gap
     When the match results are displayed
     Then the gap shows a specific explanation of what is missing
     And no evidence chips are displayed for that requirement
-    And the explanation is rendered as plain secondary-color text with no italic styling
+    And the explanation is rendered as italic muted-color text indented to align with the chip row
 
   Scenario: No fit score or recommendation in recruiter view
     Given the user has not unlocked the private view
@@ -99,20 +111,26 @@ Feature: Role Match page
     Then the chip is rendered in a visually selected state
     And only one chip can be in the selected state at a time
 
-  Scenario: Profile-evidence chips render in the same family as story chips but are not clickable
+  Scenario: Profile evidence renders as an indented text block, not a pill
     Given a requirement is matched using grounding context only (evidence_type "profile")
     When the match results are displayed
-    Then the profile evidence renders as a chip formatted "🔗 Verified profile · <description>"
-    And the profile evidence chip has identical visual styling to story chips (link icon prefix, purple text, pill shape, fit-content width)
-    And the profile evidence chip does not show a pointer cursor on hover
-    And clicking the profile evidence chip has no effect
-    And no separate "VERIFIED SKILL" pill element is rendered anywhere on the page
+    Then the profile evidence renders as a block-level text node indented to 32px
+    And the block begins with a small green dot followed by "Verified profile · <description>"
+    And the block has NO pill border, NO rounded background — it is plain prose, not a chip
+    And the block uses muted secondary-color text
+    And the block does NOT show a 🔗 link icon
+    And the block does not show a pointer cursor on hover
+    And clicking the profile evidence has no effect
+    And the link icon (🔗) is reserved exclusively for clickable story chips
+    And no "VERIFIED SKILL" pill element is rendered anywhere on the page
 
-  Scenario: Story chip with unresolved title falls back to non-clickable chip
+  Scenario: Story chip with unresolved title falls back to non-clickable pill
     Given a story evidence chip has a title that does not match any story in the corpus
     When the match results are displayed
-    Then the chip still renders in the "🔗 <title> · <client>" format with the same visual styling
-    And the chip does not show a pointer cursor on hover
+    Then the chip renders as a pill in the "Title · Client" format with NO 🔗 link icon
+    And the chip uses muted secondary-color text and a muted background to signal it is non-clickable
+    And the unresolved chip remains a PILL (not a text block) because "Title · Client" is a short reference, not an argument
+    And the chip does NOT show a green dot prefix (the green dot is reserved for profile evidence blocks)
     And clicking the chip has no effect
     And no selected state is applied
 
@@ -135,13 +153,14 @@ Feature: Role Match page
     Then the inline detail renders immediately below that requirement card
     And the inline detail does not render below any other requirement card
 
-  Scenario: Profile-level evidence collapses into the chip family
+  Scenario: Profile-level evidence appears in a block above the story chip row
     Given a requirement is matched using grounding context only (evidence_type "profile")
     When the match results are displayed
-    Then the evidence renders as a single chip in the same family as story chips
-    And the chip is formatted "🔗 Verified profile · <brief description of the verified fact>"
-    And the chip has identical visual styling to story chips (link icon prefix, purple text, pill shape, fit-content width)
-    And there is no separate "VERIFIED SKILL" pill element anywhere on the page
+    Then the profile evidence renders as a block-level text node BEFORE any story chips
+    And the block is formatted as "● Verified profile · <description>" with a small green dot prefix
+    And the block uses muted secondary-color text indented 32px from the card edge
+    And there is no pill border or rounded background around the block
+    And there is no "VERIFIED SKILL" pill element anywhere on the page
 
   # =============================================================================
   # PRIVATE VIEW — LOCK ICON AND PASSWORD GATE

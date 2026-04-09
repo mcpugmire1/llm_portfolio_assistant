@@ -149,7 +149,7 @@ def get_action_buttons_html(
         f'id="{button_id_prefix}-helpful"{helpful_disabled}>'
         f'<span class="btn-label">{helpful_label}</span></button>'
         f'<button class="detail-action-btn" id="{button_id_prefix}-share">'
-        '<span>🔗</span><span class="btn-label">Share</span></button>'
+        '<span>📋</span><span class="btn-label">Report</span></button>'
         f'<button class="detail-action-btn" id="{button_id_prefix}-export">'
         '<span>📄</span><span class="btn-label">Export</span></button>'
         "</div>"

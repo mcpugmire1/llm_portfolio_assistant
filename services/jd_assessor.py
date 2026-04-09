@@ -95,7 +95,7 @@ Your task: assess the match using the provided stories AND verified facts from t
       "relevance": "one sentence explaining how this evidence addresses the requirement"
     }}
   ],
-  "gap_explanation": "if partial or gap, explain specifically what's missing. Empty string if strong match.",
+  "gap_explanation": "if partial or gap, format as 'Note: <what's missing>' in under 15 words. Focus on what's missing, NOT what's present. Empty string if strong match.",
   "confidence": "high | medium | low"
 }}
 
@@ -108,6 +108,9 @@ Rules:
 - Use evidence_type "story" when citing a retrieved STAR story (include story_title and client)
 - Use evidence_type "profile" when citing a verified fact from the grounding context (story_title and client should be null)
 - Never fabricate -- only use what's in the provided stories or grounding context
+- Recognize cloud-managed equivalents of open-source tools as the same capability: AWS ElastiCache IS Redis (and Memcached), Amazon RDS includes PostgreSQL/MySQL/SQL Server, Aurora is MySQL/PostgreSQL-compatible, Azure Cosmos DB supports MongoDB API, etc. Treat experience with the managed service as evidence for the underlying technology.
+- gap_explanation must start with 'Note:' and stay under 15 words
+- gap_explanation must describe ONLY what's missing — do NOT restate what's present (no "While Matt's profile confirms..." preambles)
 - gap_explanation must be specific, not apologetic
 - Output valid JSON only, no preamble"""
 

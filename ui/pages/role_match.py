@@ -8,9 +8,11 @@ Architecture: See ADR 016 and services/jd_assessor.py
 """
 
 import html
+from urllib.parse import urlencode
 
 import streamlit as st
 
+from scripts.utils import slugify
 from ui.components.action_buttons import (
     get_action_buttons_css,
     get_action_buttons_html,
@@ -45,15 +47,25 @@ def _find_story_by_title_client(
     """
     if not title:
         return None
-    title_norm = title.strip().lower()
-    client_norm = (client or "").strip().lower()
+
+    # Normalize: lowercase + collapse internal whitespace runs to a single
+    # space. The corpus has historical titles with double spaces (e.g.
+    # "Launchpad:  Empowering Clients..."), and the LLM normalizes them
+    # to single spaces in its output. Without internal whitespace
+    # collapse, the strict equality below misses those titles and the
+    # chip falls through to the non-clickable unresolved-chip path.
+    def _norm(s: str) -> str:
+        return " ".join(s.split()).lower()
+
+    title_norm = _norm(title)
+    client_norm = _norm(client or "")
     for s in stories:
-        s_title = (s.get("Title") or "").strip().lower()
+        s_title = _norm(s.get("Title") or "")
         if s_title != title_norm:
             continue
         if not client_norm:
             return s
-        s_client = (s.get("Client") or "").strip().lower()
+        s_client = _norm(s.get("Client") or "")
         if s_client == client_norm:
             return s
     return None
@@ -74,9 +86,15 @@ def _resolve_evidence_stories(
     need to re-look-up at click time. Pattern borrowed from Timeline view's
     story_map (ui/components/timeline_view.py).
     """
+    # Resolve EVERY story-evidence item, not just the first two. The
+    # rendering layer enforces the per-type cap (1 profile + 2 stories).
+    # If we capped here at the combined first 2, an LLM response of
+    # [profile, story_A, story_B] would never resolve story_B → it would
+    # render as a non-clickable unresolved chip even though the story
+    # exists in the corpus. (Bug found April 2026.)
     resolved: dict[str, dict] = {}
     for req_idx, result in enumerate(results):
-        for ev_idx, ev in enumerate((result.get("evidence") or [])[:2]):
+        for ev_idx, ev in enumerate(result.get("evidence") or []):
             if ev.get("evidence_type", "story") != "story":
                 continue
             story = _find_story_by_title_client(
@@ -109,106 +127,143 @@ def _render_requirement_card(
     requirement_text = html.escape(result.get("requirement", ""))
 
     with st.container(key=f"role_match_req_{req_idx}"):
-        # 1. Title row — status icon + requirement text
+        # 1. Title row — 22px circular status badge + requirement title.
+        # Class structure matches the locked v3 spec (April 2026 design
+        # pivot): the link icon (🔗) is reserved EXCLUSIVELY for clickable
+        # story chips, so the badge here is purely structural.
         st.markdown(
-            f'<div class="role-match-req-header">'
-            f'<span class="role-match-status {status}">{icon}</span>'
-            f'<div class="role-match-req-text">{requirement_text}</div>'
+            f'<div class="role-match-req-title-row">'
+            f'<div class="role-match-status-badge {status}">{icon}</div>'
+            f'<span class="role-match-req-title">{requirement_text}</span>'
             f"</div>",
             unsafe_allow_html=True,
         )
 
-        # 2. Evidence chips (only for strong / partial — gaps render no chips per BDD)
+        # 2. Evidence — split by type, then cap PER TYPE so a noisy
+        # profile-only response doesn't starve the chip row of proof
+        # points. The per-type cap is:
+        #   - up to 1 profile evidence block (the argument)
+        #   - up to 2 story chips (the proof)
+        # Original ev_idx values are preserved across both passes so the
+        # composite_key stays stable for the click toggle.
+        #
+        # Order in the card:
+        #   title row
+        #   → profile evidence block      ← argument first
+        #   → story chip row              ← proof second
+        #   → gap text                    ← caveat last
         evidence_items = result.get("evidence") or []
-        if status in ("strong", "partial") and evidence_items:
-            for ev_idx, ev in enumerate(evidence_items[:2]):  # max 2 per BDD
-                ev_type = ev.get("evidence_type", "story")
-                composite_key = f"{req_idx}_{ev_idx}"
+        indexed_evidence = list(enumerate(evidence_items))
+        profile_evidence = [
+            (ev_idx, ev)
+            for ev_idx, ev in indexed_evidence
+            if ev.get("evidence_type", "story") == "profile"
+        ][:1]  # 1 profile block max
+        story_evidence = [
+            (ev_idx, ev)
+            for ev_idx, ev in indexed_evidence
+            if ev.get("evidence_type", "story") == "story"
+        ][:2]  # 2 story chips max
 
-                if ev_type == "profile":
-                    # Profile chip — static markdown, never clickable.
-                    # Purple-tinted background distinguishes it from story chips.
-                    relevance = html.escape(ev.get("relevance", ""))
-                    st.markdown(
-                        '<div class="role-match-evidence-chip profile">'
-                        '<span class="chip-label">Verified skill</span> — '
-                        f"{relevance}</div>",
-                        unsafe_allow_html=True,
-                    )
-                elif composite_key in evidence_stories:
-                    # Story chip resolved to a corpus story → render as a
-                    # Streamlit button. The button label changes based on
-                    # active state: collapsed shows title (chevron suffix),
-                    # expanded shows "✕ Close". Toggle handled in the
-                    # if-clicked block below.
-                    is_active = active_evidence_key == composite_key
-                    title_text = ev.get("story_title") or "Untitled"
-                    client = ev.get("client") or ""
+        if status in ("strong", "partial") and (profile_evidence or story_evidence):
+            # --- Pass A: profile evidence block (argument) ---
+            for _ev_idx, ev in profile_evidence:
+                relevance = html.escape(ev.get("relevance", ""))
+                st.markdown(
+                    '<div class="role-match-profile-evidence">'
+                    '<span class="role-match-verified-dot"></span>'
+                    f" Verified profile · {relevance}"
+                    "</div>",
+                    unsafe_allow_html=True,
+                )
 
-                    if is_active:
-                        button_label = "✕ Close"
-                        # Inject scoped CSS for the active button only.
-                        # Same pattern as conversation_helpers.py:639-655.
-                        st.markdown(
-                            f"""
-                            <style>
-                            [class*="st-key-evidence_btn_{composite_key}"] button {{
-                                background: var(--accent-purple) !important;
-                                border-color: var(--accent-purple-hover) !important;
-                                color: white !important;
-                            }}
-                            [class*="st-key-evidence_btn_{composite_key}"] button p {{
-                                color: white !important;
-                                font-weight: 600 !important;
-                            }}
-                            </style>
-                            """,
-                            unsafe_allow_html=True,
-                        )
-                    else:
-                        client_str = f" ({client})" if client else ""
-                        button_label = f"{title_text}{client_str} ›"
+            # --- Pass B: story chip row (proof) ---
+            # Only emit the flex-wrap container when there are story
+            # chips to put in it; an empty container leaves stray padding.
+            if story_evidence:
+                with st.container(key=f"role_match_evidence_{req_idx}"):
+                    for ev_idx, ev in story_evidence:
+                        composite_key = f"{req_idx}_{ev_idx}"
 
-                    if st.button(
-                        button_label,
-                        key=f"evidence_btn_{composite_key}",
-                        use_container_width=True,
-                    ):
-                        # Toggle: same chip → close. Different chip → switch.
-                        if (
-                            st.session_state.get("role_match_active_evidence")
-                            == composite_key
-                        ):
-                            st.session_state.pop("role_match_active_evidence", None)
+                        if composite_key in evidence_stories:
+                            # Story chip resolved to a corpus story → render
+                            # as a Streamlit button. Label changes based on
+                            # active state: collapsed shows "🔗 Title · Client",
+                            # expanded shows "✕ Close". Toggle handled in the
+                            # if-clicked block below.
+                            #
+                            # DO NOT change the button key pattern or the
+                            # toggle logic — this is the locked-in fix for
+                            # the chip expansion bug (April 2026). Only the
+                            # label string format and CSS may change.
+                            is_active = active_evidence_key == composite_key
+                            title_text = ev.get("story_title") or "Untitled"
+                            client = ev.get("client") or ""
+
+                            if is_active:
+                                button_label = "✕ Close"
+                                # Inject scoped CSS for the active button only.
+                                st.markdown(
+                                    f"""
+                                    <style>
+                                    [class*="st-key-evidence_btn_{composite_key}"] button[kind="secondary"] {{
+                                        background: var(--accent-purple) !important;
+                                        border-color: var(--accent-purple-hover) !important;
+                                        color: white !important;
+                                    }}
+                                    [class*="st-key-evidence_btn_{composite_key}"] button[kind="secondary"] p {{
+                                        color: white !important;
+                                        font-weight: 600 !important;
+                                    }}
+                                    </style>
+                                    """,
+                                    unsafe_allow_html=True,
+                                )
+                            else:
+                                client_suffix = f" · {client}" if client else ""
+                                button_label = f"🔗 {title_text}{client_suffix}"
+
+                            if st.button(
+                                button_label,
+                                key=f"evidence_btn_{composite_key}",
+                            ):
+                                # Toggle: same → close. Different → switch.
+                                if (
+                                    st.session_state.get("role_match_active_evidence")
+                                    == composite_key
+                                ):
+                                    st.session_state.pop(
+                                        "role_match_active_evidence", None
+                                    )
+                                else:
+                                    st.session_state["role_match_active_evidence"] = (
+                                        composite_key
+                                    )
+                                st.rerun()
                         else:
-                            st.session_state["role_match_active_evidence"] = (
-                                composite_key
+                            # Unresolved story chip — non-clickable pill in
+                            # the same muted treatment as the profile chip
+                            # family. Stays a PILL because "Title · Client"
+                            # is a short reference, not an argument.
+                            title_text = html.escape(
+                                ev.get("story_title") or "Untitled"
                             )
-                        st.rerun()
-                else:
-                    # Story chip with unresolved title/client → graceful
-                    # degradation as plain non-clickable text. The user
-                    # still sees the LLM-cited title; we just can't
-                    # expand it because it didn't match anything in the
-                    # corpus.
-                    title_text = html.escape(ev.get("story_title") or "Untitled")
-                    client = html.escape(ev.get("client") or "")
-                    client_str = (
-                        f' <span class="chip-client">({client})</span>'
-                        if client
-                        else ""
-                    )
-                    st.markdown(
-                        '<div class="role-match-evidence-chip">'
-                        f"{title_text}{client_str}</div>",
-                        unsafe_allow_html=True,
-                    )
+                            client = html.escape(ev.get("client") or "")
+                            client_suffix = f" · {client}" if client else ""
+                            st.markdown(
+                                '<div class="role-match-chip-verified '
+                                'role-match-chip-verified--no-dot">'
+                                f"{title_text}{client_suffix}"
+                                "</div>",
+                                unsafe_allow_html=True,
+                            )
 
-        # 3. Gap explanation for partial / gap
+        # 3. .gap-text — markup copied verbatim from mockup (line 213):
+        #     <div class="gap-text">...</div>
         gap_text = (result.get("gap_explanation") or "").strip()
         if status in ("partial", "gap") and gap_text:
             st.markdown(
-                f'<div class="role-match-gap">{html.escape(gap_text)}</div>',
+                f'<div class="role-match-gap-text">{html.escape(gap_text)}</div>',
                 unsafe_allow_html=True,
             )
 
@@ -216,21 +271,39 @@ def _render_requirement_card(
 def _build_share_text(result_payload: dict) -> str:
     """Build a plain-text summary of the assessment for clipboard sharing.
 
-    Recipients of this text get a self-contained, readable assessment they
-    can paste into email, Slack, or a doc. Format is intentionally narrow:
-    role/company header, then required and preferred sections with status
-    icons and gap explanations under partials/gaps.
+    Recipients of this text get a self-contained, readable fit assessment
+    they can paste into email, Slack, or an ATS notes field. Format is
+    intentionally narrow:
+
+        Matt Pugmire — <role> fit assessment
+        <company>
+
+        REQUIRED (N)
+        ✓/~/✗ requirement
+           Note: ... (only for partial/gap)
+
+        PREFERRED (N)
+        ...
+
+        Explore Matt's full portfolio: https://askmattgpt.streamlit.app
+
+    The header reframes the artifact as a fit assessment (not a generic
+    "role match"), names Matt explicitly so a forwarded report is
+    self-contained, and the trailing portfolio URL turns every paste
+    into a referral channel back to the live experience.
     """
     extraction = result_payload.get("extraction") or {}
     role = extraction.get("role_title") or "Untitled Role"
     company = extraction.get("company") or ""
-    header = role + (f" — {company}" if company else "")
 
     results = result_payload.get("results") or []
     required = [r for r in results if r.get("category") == "required"]
     preferred = [r for r in results if r.get("category") == "preferred"]
 
-    lines = [f"Role Match: {header}", ""]
+    lines = [f"Matt Pugmire — {role} fit assessment"]
+    if company:
+        lines.append(company)
+    lines.append("")
 
     def _section(title: str, items: list[dict]) -> None:
         if not items:
@@ -242,11 +315,42 @@ def _build_share_text(result_payload: dict) -> str:
             if r.get("match_status") in ("partial", "gap"):
                 gap = (r.get("gap_explanation") or "").strip()
                 if gap:
-                    lines.append(f"   Gap: {gap}")
+                    # Indent only — no "Gap:" prefix. The LLM's gap_explanation
+                    # already starts with "Note:" (per the assessment prompt),
+                    # so a "Gap:" prefix produces the redundant "Gap: Note: ..."
+                    # in the clipboard output. The 3-space indent visually
+                    # subordinates the note to its requirement.
+                    lines.append(f"   {gap}")
         lines.append("")
 
     _section("REQUIRED", required)
     _section("PREFERRED", preferred)
+
+    # Trailing portfolio referral — every forwarded report is a referral
+    # back to the live experience. UTM params let the existing
+    # log_page_load() flow in app.py attribute inbound traffic from
+    # forwarded reports back to the originating role.
+    #
+    # utm_source=role_match     — names the surface that produced the link
+    # utm_medium=clipboard      — names the mechanism (not the channel — we
+    #                             don't know if it's Slack/email/ATS/etc.)
+    # utm_campaign=fit_assessment — stable artifact category
+    # utm_content=<role-company> — slugified role + company so analytics
+    #                             can split inbound clicks by which forwarded
+    #                             report they came from. Skipped if both
+    #                             role and company are empty.
+    utm_params = {
+        "utm_source": "role_match",
+        "utm_medium": "clipboard",
+        "utm_campaign": "fit_assessment",
+    }
+    content_slug = slugify(f"{role} {company}".strip())
+    if content_slug:
+        utm_params["utm_content"] = content_slug
+    portfolio_url = f"https://askmattgpt.streamlit.app/?{urlencode(utm_params)}"
+
+    lines.append("")
+    lines.append(f"Explore Matt's full portfolio: {portfolio_url}")
 
     return "\n".join(lines).rstrip() + "\n"
 
@@ -315,9 +419,13 @@ def _build_export_html(result_payload: dict) -> str:
                 h1 {{ color: #1F2937; font-size: 24px; margin-bottom: 4px; }}
                 .meta {{ color: #6B7280; font-size: 14px; margin-bottom: 24px; }}
                 .section-title {{ color: #8B5CF6; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin: 24px 0 12px 0; }}
-                .req {{ display: flex; gap: 10px; align-items: flex-start; margin-bottom: 4px; padding-top: 12px; }}
-                .req-text {{ font-size: 14px; font-weight: 500; color: #1F2937; line-height: 1.45; }}
-                .status {{ display: inline-flex; flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; }}
+                .req {{ display: flex; gap: 10px; align-items: center; margin: 0 0 4px 0; padding: 12px 0 0 0; }}
+                .req-text {{ font-size: 14px; font-weight: 500; color: #1F2937; line-height: 1.45; margin: 0; padding: 0; }}
+                /* Status badge — explicit margin/padding zero and line-height
+                   lock so the badge sits identically across strong/partial/gap
+                   regardless of how the inner glyph (✓ ~ ✗) renders in the
+                   browser's print font. */
+                .status {{ display: inline-flex; flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; line-height: 1; margin: 0; padding: 0; box-sizing: border-box; text-align: center; }}
                 .status.strong {{ background: #10B981; }}
                 .status.partial {{ background: #F59E0B; }}
                 .status.gap {{ background: #EF4444; }}
@@ -414,6 +522,58 @@ def _render_results_panel(result_payload: dict, stories: list[dict]) -> None:
     # Header bar with role title + action buttons (Helpful / Share / Export)
     _render_results_header(result_payload)
 
+    # Legend bar — sits between the results header and the first section
+    # header, gives the recruiter a key to the badges and chip affordances
+    # (✓ ~ ✗ status, 🔗 = clickable story, ● = profile evidence).
+    #
+    # IMPORTANT: rendered with INLINE styles, not class selectors. An
+    # earlier class-based version rendered stacked vertically because
+    # Streamlit's markdown parser broke the inline-flex layout. Inline
+    # styles bypass the parser entirely.
+    legend_html = (
+        '<div class="role-match-legend" '
+        'style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;'
+        "padding:10px 14px;background:var(--bg-card);"
+        "border:1px solid var(--border-color);border-radius:10px;"
+        'margin-bottom:14px;font-size:11px;color:var(--text-secondary);">'
+        # ✓ Strong match
+        '<div style="display:inline-flex;align-items:center;gap:6px;">'
+        '<span style="display:inline-flex;align-items:center;justify-content:center;'
+        "width:16px;height:16px;border-radius:50%;background:var(--success-color);"
+        'color:white;font-size:10px;font-weight:700;line-height:1;">✓</span>'
+        "Strong match</div>"
+        # ~ Partial
+        '<div style="display:inline-flex;align-items:center;gap:6px;">'
+        '<span style="display:inline-flex;align-items:center;justify-content:center;'
+        "width:16px;height:16px;border-radius:50%;"
+        "background:var(--warning-color,#F59E0B);"
+        'color:white;font-size:10px;font-weight:700;line-height:1;">~</span>'
+        "Partial</div>"
+        # ✗ Gap
+        '<div style="display:inline-flex;align-items:center;gap:6px;">'
+        '<span style="display:inline-flex;align-items:center;justify-content:center;'
+        "width:16px;height:16px;border-radius:50%;"
+        "background:var(--error-color,#EF4444);"
+        'color:white;font-size:10px;font-weight:700;line-height:1;">✗</span>'
+        "Gap</div>"
+        # divider
+        '<span style="width:1px;height:14px;background:var(--border-color);'
+        'display:inline-block;"></span>'
+        # 🔗 = clickable story
+        '<div style="display:inline-flex;align-items:center;gap:6px;">'
+        "🔗 = clickable story</div>"
+        # ● = profile evidence
+        '<div style="display:inline-flex;align-items:center;gap:6px;">'
+        '<span style="width:8px;height:8px;border-radius:50%;'
+        'background:var(--success-color);display:inline-block;"></span>'
+        " = profile evidence</div>"
+        "</div>"
+    )
+    st.markdown(legend_html, unsafe_allow_html=True)
+
+    # Hint text lives in the LEFT column above the textarea (rendered in
+    # render_role_match), NOT in the right column above the results panel.
+
     # Resolve every story-evidence chip to a story dict at render time so
     # the chips can be marked clickable up-front and chips that don't
     # resolve fall back to non-clickable plain text (graceful degradation
@@ -466,17 +626,7 @@ def _render_results_section(
     active_evidence_key: str | None,
     stories: list[dict],
 ) -> None:
-    """Render a section header (h3) and all requirement cards in the section.
-
-    For each requirement:
-      1. Call _render_requirement_card, which emits the card directly (with
-         its own st.container wrapper, title markdown, evidence chip buttons,
-         and gap explanation). The chip buttons handle their own click logic
-         via plain st.button — no JS bridge.
-      2. If the active chip belongs to this requirement, render
-         render_story_detail inline immediately below the card so the
-         expanded story sits next to the chip the user clicked.
-    """
+    """Render a section header (h3) and all requirement cards in the section."""
     st.markdown(
         f'<h3 class="role-match-section-header">{html.escape(title)} '
         f"({len(indexed_results)})</h3>",
@@ -623,45 +773,137 @@ def render_role_match(stories: list[dict]):
     gap: 0 !important;
 }
 
-/* ===== RESULT PANEL — section headers, requirement cards, evidence ===== */
-/* Section header is now class-targeted (h3.role-match-section-header) instead
-   of parent-scoped (.role-match-results h3) because the per-requirement
-   render loop dropped the .role-match-results wrapper to allow inline
-   render_story_detail expansion between cards. The wrapper would have
-   spanned multiple stMarkdownContainers which breaks descendant selectors. */
+/* Zero the parent stLayoutWrapper gap inside the workspace. The wrapper
+   has `gap: normal` (~16px) by default which would stack on top of each
+   card's `margin-bottom: 10px`, producing 26px of visible space between
+   cards — too much. With this rule, the card's margin-bottom is the
+   ONLY thing controlling card-to-card spacing → ~10px breathing room.
+   Scoped to .st-key-role_match_workspace so the rule does not affect
+   other pages that use stLayoutWrapper. (April 2026 incident: see
+   the diagnostic in the chat history that identified the parent
+   stLayoutWrapper gap as the source of excess card-to-card space.) */
+.st-key-role_match_workspace [data-testid="stLayoutWrapper"] {
+    gap: 0 !important;
+}
+
+/* ===== RESULT PANEL — section headers, requirement cards, evidence =====
+   Locked design: see role_match_mockup_v2.html. Status indicators are plain
+   colored text (no circle/badge), chips are pill-shaped purple tags in the
+   "🔗 Title · Client" format, gap text is plain secondary-color (no italic).
+   Profile-evidence and unresolved story chips share the same chip family. */
 h3.role-match-section-header {
-    font-size: 13px !important;
-    font-weight: 700 !important;
+    font-size: 10px !important;
+    font-weight: 600 !important;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-secondary);
-    margin: 0 0 12px 0 !important;
+    letter-spacing: 0.08em;
+    color: var(--text-muted, #9CA3AF);
+    margin: 4px 0 8px 2px !important;
 }
 h3.role-match-section-header:not(:first-of-type) {
-    margin-top: 24px !important;
+    margin-top: 16px !important;
 }
 /* Card container — each requirement is wrapped in
-   `with st.container(key=f"role_match_req_{req_idx}"):` so this rule
-   targets the Streamlit-generated wrapper class. The chip buttons +
-   markdown elements inside the container all share this card frame. */
+   `with st.container(key=f"role_match_req_{req_idx}"):` which produces a
+   single div that IS the stVerticalBlock (verified via DevTools: the card
+   div has class "stVerticalBlock st-key-role_match_req_X"). This rule
+   styles the card frame AND tightens the gap between its direct children
+   in one selector — there is no nested vertical block to target.
+
+   IMPORTANT: do NOT add a nested-descendant gap selector like
+   `[class*="st-key-role_match_req_"] [data-testid="stVerticalBlock"]`.
+   That selector matches nothing because there is no nested vertical block
+   inside the card. (April 2026 incident: this exact mistake left
+   Streamlit's default 1rem gap in effect for an entire debug session.) */
+/* .req-card — values copied verbatim from role_match_mockup_v2.html.
+   Streamlit's st.container(key="role_match_req_X") produces a stVerticalBlock
+   that we style as the card directly. Class names below match the mockup
+   (req-card, req-title-row, status, req-title, chip, chip-icon, gap-text)
+   so the markup structure mirrors the mockup node-for-node. */
 [class*="st-key-role_match_req_"] {
     background: var(--bg-card) !important;
     border: 1px solid var(--border-color) !important;
     border-radius: 10px !important;
-    padding: 14px 16px !important;
-    margin-bottom: 10px !important;
+    padding: 12px 14px !important;
+    /* Explicit longhand padding-bottom — the shorthand above is sometimes
+       clobbered by a Streamlit stVerticalBlock default, leaving the last
+       child (typically gap text) flush against the card's bottom border.
+       The longhand re-asserts the bottom breathing room with higher
+       resilience. (April 2026 incident: gap text rendered flush even
+       though shorthand padding declared 12px bottom.) */
+    padding-bottom: 14px !important;
+    margin-bottom: 12px !important;
+    gap: 10px !important;
+    display: flex !important;
+    flex-direction: column !important;
 }
-/* Tighten the default Streamlit gap between elements inside each card so
-   the title, chips, and gap explanation sit close together. */
-[class*="st-key-role_match_req_"] [data-testid="stVerticalBlock"] {
-    gap: 8px !important;
+
+/* Zero margin/padding on the DIRECT CHILDREN of the card only.
+   Uses the `>` direct-child combinator (not the descendant space)
+   so the rule physically cannot match the card itself or any outer
+   wrapper Streamlit puts around the card — only the elements
+   immediately inside the card. This is what fixes the inside-card
+   spacing without nuking the card-to-card margin-bottom. */
+[class*="st-key-role_match_req_"] > [data-testid="stElementContainer"] {
+    margin: 0 !important;
+    padding: 0 !important;
 }
-.role-match-req-header {
+/* Reach one level deeper for any emotion-cache wrappers that sit
+   between the stElementContainer and the actual stMarkdown / stButton.
+   Still scoped to direct children of the card via the leading `>`. */
+[class*="st-key-role_match_req_"] > [data-testid="stElementContainer"] > div,
+[class*="st-key-role_match_req_"] > [data-testid="stElementContainer"] .stMarkdown,
+[class*="st-key-role_match_req_"] > [data-testid="stElementContainer"] .stButton {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Defensive re-assertion of margin-bottom on the card itself with a
+   higher-specificity selector. If anything in the broader cascade
+   manages to zero the card's bottom margin, this rule pulls it back
+   to 12px. The added attribute selector `[data-testid="stVerticalBlock"]`
+   bumps specificity from (0,1,0) to (0,2,0) so it beats any
+   competing class-only rule. */
+div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
+    margin-bottom: 12px !important;
+}
+
+/* JD input hint — sits in the LEFT column above the textarea. */
+.role-match-jd-hint {
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0 0 16px 0 !important;
+    padding: 0;
+}
+/* The left column's vertical block has `gap: 0` to keep the textarea
+   attached to its submit button. That rule also collapses the breathing
+   room between the hint paragraph and the textarea, so we restore it
+   here by giving the hint's stElementContainer a real bottom margin. */
+.st-key-role_match_workspace [data-testid="stColumn"]:first-child
+    [data-testid="stElementContainer"]:has(.role-match-jd-hint) {
+    margin-bottom: 16px !important;
+}
+
+/* === V3 design pivot (April 2026) ===
+   Status badge: 22px colored circle with white glyph (NOT plain colored text)
+   Profile chips: muted bg, secondary text, green dot prefix, NO 🔗
+   Story chips: pill, brand purple text, 🔗 prefix, clickable
+   Unresolved story chips: SAME visual as profile chip, no green dot
+   Evidence row: horizontal flex-wrap at padding-left 32px
+   Gap text: italic muted text at padding-left 32px */
+
+/* Title row — flex with the badge sitting in a fixed gutter to the left
+   of the wrapping title text. */
+.role-match-req-title-row {
     display: flex;
     align-items: flex-start;
     gap: 10px;
 }
-.role-match-status {
+/* Status badge — 22px circle, colored bg with white glyph inside.
+   Backgrounds use the existing semantic CSS variables (success/warning/error)
+   so they stay in lockstep with the rest of the app's color tokens. */
+.role-match-status-badge {
     flex-shrink: 0;
     width: 22px;
     height: 22px;
@@ -669,57 +911,155 @@ h3.role-match-section-header:not(:first-of-type) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
     color: white;
+    line-height: 1;
     margin-top: 1px;
 }
-.role-match-status.strong  { background: #10B981; }     /* success green */
-.role-match-status.partial { background: #F59E0B; }     /* amber */
-.role-match-status.gap     { background: #EF4444; }     /* red */
-.role-match-req-text {
+.role-match-status-badge.strong  { background: var(--success-color, #10B981); }
+.role-match-status-badge.partial { background: var(--warning-color, #F59E0B); }
+.role-match-status-badge.gap     { background: var(--error-color, #EF4444); }
+.role-match-req-title {
     flex: 1;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 13px;
     color: var(--text-primary);
-    line-height: 1.45;
+    line-height: 1.4;
+    margin-top: 2px;
 }
-/* Profile-evidence chip + unresolved-story-chip fallback. These two cases
-   are still rendered as static markdown divs (not as Streamlit buttons,
-   because they aren't clickable). The clickable story chips are
-   Streamlit buttons styled separately in the bottom CSS block. */
-.role-match-evidence-chip {
+
+/* Evidence row — st.container(key="role_match_evidence_X") wraps every
+   chip for a given requirement. We turn the container into a horizontal
+   flex-wrap row and force its inner stElementContainers to size to
+   content so chips flow inline instead of stacking. The 32px padding-left
+   indents the row to align with the requirement title (22px badge + 10px gap). */
+[class*="st-key-role_match_evidence_"] {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    padding-left: 32px !important;
+    margin-top: 2px !important;
+}
+[class*="st-key-role_match_evidence_"] [data-testid="stElementContainer"] {
+    width: auto !important;
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+[class*="st-key-role_match_evidence_"] [data-testid="stElementContainer"] .stMarkdown {
+    width: auto !important;
+}
+
+/* Profile evidence — block-level argumentative prose, NOT a pill. The
+   pill format breaks for substantive sentences, so profile evidence
+   gets a block container indented to 32px (matching the chip row),
+   with a small green dot prefix in muted secondary-color text.
+   (April 2026 v3.1 design pivot.) */
+.role-match-profile-evidence {
     display: block;
+    padding-left: 32px;
+    padding-right: 8px;
+    margin: 4px 0;
+    font-size: 11px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+}
+.role-match-profile-evidence .role-match-verified-dot {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 6px;
+    margin-bottom: 1px;
+}
+
+/* Verified profile chip — muted background, secondary text, small
+   green dot prefix. Used for both profile evidence chips and unresolved
+   story chips (the unresolved variant suppresses the dot). */
+.role-match-chip-verified {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     background: var(--bg-surface);
     border: 1px solid var(--border-color);
-    border-radius: 6px;
-    padding: 8px 12px;
-    font-size: 12px;
-    color: var(--text-primary);
-    line-height: 1.35;
-}
-.role-match-evidence-chip .chip-client {
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 11px;
     color: var(--text-secondary);
-    font-style: italic;
+    line-height: 1.4;
+    cursor: default;
+    max-width: 100%;
 }
-.role-match-evidence-chip.profile {
-    background: var(--accent-purple-bg);
-    border-color: var(--accent-purple-light);
+.role-match-verified-dot {
+    flex-shrink: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--success-color);
+    display: inline-block;
 }
-.role-match-evidence-chip.profile .chip-label {
-    font-weight: 600;
-    color: var(--accent-purple-text);
-    text-transform: uppercase;
-    font-size: 10px;
-    letter-spacing: 0.05em;
+.role-match-chip-verified--no-dot .role-match-verified-dot {
+    display: none;
 }
-.role-match-gap {
-    margin-top: 8px;
+
+/* Gap explanation — italic muted text indented 32px to align with the
+   chip row. The 8px margin-top creates clear visual separation from
+   the chip row above so the explanation reads as a distinct caveat,
+   not as a continuation of the chip label. */
+.role-match-gap-text {
+    font-size: 12px;
+    color: var(--text-secondary);
     padding-left: 32px;
-    font-size: 12px;
+    line-height: 1.4;
+    font-style: normal;
+    margin: 8px 0 4px 0;
+}
+
+/* Legend bar — static row at the top of the results panel above the
+   first section header. */
+.role-match-legend {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 14px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    margin-bottom: 14px;
+    font-size: 11px;
     color: var(--text-secondary);
-    line-height: 1.5;
-    font-style: italic;
+}
+.role-match-legend .legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.role-match-legend .legend-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+}
+.role-match-legend .legend-badge.strong  { background: var(--success-color); }
+.role-match-legend .legend-badge.partial { background: var(--warning-color); }
+.role-match-legend .legend-badge.gap     { background: var(--error-color); }
+.role-match-legend .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--success-color);
+    display: inline-block;
+}
+.role-match-legend .legend-divider {
+    width: 1px;
+    height: 14px;
+    background: var(--border-color);
 }
 
 /* ----- Subtle card treatment on both columns — uses existing variables ----- */
@@ -731,10 +1071,12 @@ h3.role-match-section-header:not(:first-of-type) {
     padding: 24px 24px 32px 24px !important;
 }
 
-/* ----- Textarea styling — borderless, relies on card container for framing ----- */
+/* ----- Textarea styling — borderless, relies on card container for framing.
+   Font size matches .role-match-jd-hint (13px) and the right-column results
+   panel so the left and right sides read in the same visual register. */
 .st-key-role_match_workspace textarea {
     padding: 20px 24px !important;
-    font-size: 17px !important;
+    font-size: 13px !important;
     border: none !important;
     border-radius: 12px !important;
     background: var(--bg-input) !important;
@@ -749,6 +1091,7 @@ h3.role-match-section-header:not(:first-of-type) {
 }
 .st-key-role_match_workspace textarea::placeholder {
     color: var(--text-secondary) !important;
+    font-family: inherit !important;
 }
 /* Kill BaseWeb wrapper borders so only the textarea itself shows a border */
 .st-key-role_match_workspace div[data-baseweb="textarea"],
@@ -799,8 +1142,19 @@ h3.role-match-section-header:not(:first-of-type) {
     with st.container(key="role_match_workspace"):
         input_col, results_col = st.columns([2, 3], gap="large")
 
-        # ----- LEFT: JD input + submit button (stacked, attached) -----
+        # ----- LEFT: hint + JD input + submit button (stacked, attached) -----
         with input_col:
+            # Hint text — plain secondary-color, sits above the textarea.
+            # Per role_match_mockup_v2.html, the hint lives in the LEFT
+            # column only and is NOT duplicated in the right column.
+            st.markdown(
+                '<p class="role-match-jd-hint">'
+                "Paste a job description below. Agy will match each "
+                "requirement and you can click any chip to explore the story."
+                "</p>",
+                unsafe_allow_html=True,
+            )
+
             jd_text = st.text_area(
                 "Job description",
                 height=400,
@@ -855,7 +1209,7 @@ h3.role-match-section-header:not(:first-of-type) {
                 st.markdown(
                     """
                     <div style="display: flex; align-items: center; justify-content: center; min-height: 400px;">
-                        <p style="color: var(--text-secondary); font-size: 16px; text-align: center; margin: 0;">
+                        <p style="color: var(--text-secondary); font-size: 16px; text-align: center; margin: 0; font-family: inherit;">
                             Agy will match each requirement to Matt's career stories.
                         </p>
                     </div>
@@ -916,42 +1270,78 @@ h3.role-match-section-header:not(:first-of-type) {
 
 /* ===== Clickable story-evidence chips (real Streamlit buttons) =====
    Each clickable story chip is a `st.button(key=f"evidence_btn_<key>")`
-   call inside the requirement card container. We style the Streamlit
-   button to look like a chip via CSS targeting its `st-key-*` wrapper
-   class. Pattern matches ui/pages/ask_mattgpt/conversation_helpers.py
-   source-chip rendering (lines ~626-700).
+   call inside the requirement card container. The button key pattern and
+   the toggle logic are LOCKED — only the label string format and the CSS
+   below may change. See the comment in _render_requirement_card.
+
+   We style the Streamlit button to look like the same pill chip used for
+   profile-evidence and unresolved-story chips (.role-match-evidence-chip),
+   so all evidence on the page reads as a single UI family. Format:
+   "🔗 Title · Client" — purple text, pill shape, fit-content width.
 
    The active state (purple background, white text, "✕ Close" label) is
    applied via per-button inline CSS injection from the render code, so
    only the currently-active button gets the override. */
-[class*="st-key-evidence_btn_"] button {{
+
+/* Force the wrapper divs to size to content. Without these the
+   stElementContainer is block-level full-width and the chip appears as
+   a wide form button regardless of the inner button's width. NO
+   margin-left here — the parent .role-match-evidence-row container
+   handles indentation via padding-left: 32px. */
+[class*="st-key-evidence_btn_"] {{
+    width: fit-content !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+}}
+[class*="st-key-evidence_btn_"] .stButton {{
+    width: fit-content !important;
+}}
+
+/* Adding `[kind="secondary"]` to the selector bumps specificity from
+   (0,1,1) to (0,2,1) so we beat Streamlit's emotion-cache class-based
+   defaults. */
+[class*="st-key-evidence_btn_"] button[kind="secondary"] {{
     background: var(--bg-surface) !important;
-    border: 1px solid var(--border-color) !important;
-    color: var(--text-primary) !important;
-    font-size: 12px !important;
-    font-weight: 500 !important;
-    padding: 8px 12px !important;
+    border-style: solid !important;
+    border-width: 1px !important;
+    border-color: var(--border-color) !important;
+    color: var(--accent-purple) !important;
+    font-size: 11px !important;
+    font-weight: 400 !important;
+    padding: 4px 10px !important;
     min-height: auto !important;
     height: auto !important;
-    border-radius: 6px !important;
-    text-align: left !important;
-    line-height: 1.35 !important;
+    width: auto !important;
+    min-width: auto !important;
+    border-radius: 20px !important;
+    line-height: 1.4 !important;
     box-shadow: none !important;
     transition: border-color 0.15s ease, background 0.15s ease !important;
     font-family: inherit !important;
-    /* Lighter top margin to sit closer to the requirement title */
-    margin-top: 0 !important;
+    display: inline-flex !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    text-align: left !important;
+    gap: 5px !important;
 }}
-[class*="st-key-evidence_btn_"] button:hover {{
+[class*="st-key-evidence_btn_"] button[kind="secondary"]:hover {{
     border-color: var(--accent-purple) !important;
     background: var(--bg-card) !important;
 }}
-[class*="st-key-evidence_btn_"] button p {{
-    font-size: 12px !important;
-    font-weight: 500 !important;
-    color: var(--text-primary) !important;
+/* The label text inside the button lives in a stMarkdownContainer wrapping
+   a <p>. Override Streamlit's default centered + bold treatment at every
+   level to win specificity. */
+[class*="st-key-evidence_btn_"] button[kind="secondary"] div[data-testid="stMarkdownContainer"] {{
+    text-align: left !important;
+    width: auto !important;
+}}
+[class*="st-key-evidence_btn_"] button[kind="secondary"] p {{
+    font-size: 11px !important;
+    font-weight: 400 !important;
+    color: var(--accent-purple) !important;
     margin: 0 !important;
     text-align: left !important;
+    line-height: 1.4 !important;
 }}
 </style>
 """,
