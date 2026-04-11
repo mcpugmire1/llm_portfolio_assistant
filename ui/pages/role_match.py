@@ -659,6 +659,28 @@ def render_role_match(stories: list[dict]):
     """
 
     # =========================================================================
+    # SESSION STATE RESTORE — JD textarea persistence across navigation
+    # =========================================================================
+    # Streamlit garbage-collects widget state for widgets that aren't in the
+    # current page tree. When the user navigates away from Role Match (e.g.
+    # to Home) and back, the textarea's `role_match_jd_input` widget key is
+    # gone, but `role_match_result` (a regular session_state key) survives.
+    # Without this restore, the user comes back to an empty textarea sitting
+    # next to populated results — confusing and inconsistent.
+    #
+    # Pattern: prefilter — set the widget's session_state key BEFORE the
+    # widget renders so Streamlit picks it up on first render. See
+    # CLAUDE.md "Use prefilter pattern for cross-page navigation" and the
+    # banking_landing.py → explore_stories.py example.
+    if (
+        "role_match_jd_input" not in st.session_state
+        and "role_match_jd_persisted" in st.session_state
+    ):
+        st.session_state["role_match_jd_input"] = st.session_state[
+            "role_match_jd_persisted"
+        ]
+
+    # =========================================================================
     # CSS STYLES (page hero only)
     # =========================================================================
     # IMPORTANT: action_buttons CSS + .role-match-results-header styles are
@@ -1188,6 +1210,16 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
                         st.session_state["role_match_result"] = run_assessment(
                             jd_text, stories
                         )
+                        # Persist the JD text in a NON-widget session key so
+                        # we can restore the textarea after a navigation away
+                        # and back. Streamlit garbage-collects widget state
+                        # for widgets that aren't currently in the page tree
+                        # (e.g., when the user navigates to Home), but
+                        # role_match_result survives because it's a regular
+                        # session_state key. Without this persisted copy the
+                        # user comes back to an empty textarea sitting next
+                        # to populated results — a confusing inconsistency.
+                        st.session_state["role_match_jd_persisted"] = jd_text
                         st.session_state.pop("role_match_error", None)
                     except Exception as e:  # noqa: BLE001
                         st.session_state["role_match_error"] = str(e)
