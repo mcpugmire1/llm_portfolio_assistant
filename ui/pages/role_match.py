@@ -643,12 +643,20 @@ def _render_results_section(
             except (ValueError, IndexError):
                 active_req_idx = None
             if active_req_idx == req_idx and active_evidence_key in evidence_stories:
-                render_story_detail(
-                    evidence_stories[active_evidence_key],
-                    f"role_match_ev_{active_evidence_key}",
-                    stories,
-                    show_actions=False,
-                )
+                # Wrap in a keyed container so the CSS gap-restore
+                # rule (.st-key-role_match_ev_* stVerticalBlock)
+                # has a DOM element to match. render_story_detail
+                # doesn't create its own wrapping container — it
+                # renders directly into the parent context.
+                with st.container(
+                    key=f"role_match_ev_{active_evidence_key}",
+                ):
+                    render_story_detail(
+                        evidence_stories[active_evidence_key],
+                        f"role_match_ev_{active_evidence_key}",
+                        stories,
+                        show_actions=False,
+                    )
 
 
 def render_role_match(stories: list[dict]):
@@ -806,6 +814,22 @@ def render_role_match(stories: list[dict]):
    stLayoutWrapper gap as the source of excess card-to-card space.) */
 .st-key-role_match_workspace [data-testid="stLayoutWrapper"] {
     gap: 0 !important;
+}
+/* Restore default gap inside inline story detail expansions. The
+   workspace-wide gap:0 rule above collapses spacing in the story
+   detail's internal two-column layout (STAR content left, technologies
+   right), crushing Task/Action/Result headings together.
+
+   The story detail is the ONLY component in Role Match that creates
+   NESTED stColumns — the main workspace has one level (input_col,
+   results_col) while the story detail adds a second level inside the
+   results column. So "stColumn inside stColumn" uniquely identifies
+   the story detail's internal layout without needing a key selector. */
+.st-key-role_match_workspace [data-testid="stColumn"] [data-testid="stColumn"] [data-testid="stVerticalBlock"] {
+    gap: 1rem !important;
+}
+.st-key-role_match_workspace [data-testid="stColumn"] [data-testid="stColumn"] [data-testid="stLayoutWrapper"] {
+    gap: normal !important;
 }
 
 /* ===== RESULT PANEL — section headers, requirement cards, evidence =====
