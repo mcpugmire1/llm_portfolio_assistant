@@ -61,6 +61,31 @@ Rules:
 - Normalize requirements into clear, testable statements
 - Extract company name from anywhere in the full JD text including company description and closing sections. If truly undisclosed, use "Undisclosed"
 - If no Required/Preferred split exists, classify based on language signals -- "must have", "required", "proven" = required; "plus", "preferred", "ideal" = preferred
+
+- FIRST: Classify the JD format. Is there an explicit "Required:" or "Requirements:" section header followed by bullets? Is there a "Preferred:" or "Nice to have:" section? If YES, this is a bulleted JD -- follow the bullet structure rules below. If NO, this is a narrative JD -- mine the body paragraphs aggressively. Hybrid JDs (some bullets, some prose body content) should mine both.
+
+- HANDLE NARRATIVE JDs: Many job descriptions are written as prose without explicit "Required:" or "Preferred:" sections. For these JDs, you MUST mine the body paragraphs for requirements. Do not stop at 2-3 explicit "must have" sentences -- a narrative JD with substantial body content should produce 5-12 requirements just like a bulleted JD would.
+
+- MINE BODY PARAGRAPHS for these signal categories and extract each as a requirement:
+  * Team scope: team size, team composition (e.g. "lead a team of 40 across AI, ML, data science") -> "Experience leading teams of N+ across X disciplines"
+  * Technical scope: what they're building (e.g. "production-grade systems around large language models") -> "Experience building production-grade LLM systems"
+  * Ownership level: strategy / architecture / hands-on / all-of-above -> "Experience owning strategy, architecture, AND hands-on delivery"
+  * Stakeholder environment: who they partner with (e.g. "senior stakeholders who care deeply about ROI") -> "Experience partnering with senior business stakeholders on ROI-driven outcomes"
+  * Domain context: industry, scale, regulatory environment (e.g. "asset management, trillions in AUM") -> "Experience in financial services / asset management at scale"
+  * Specific responsibilities: incubation, transformation, modernization, scaling -> one requirement per distinct capability
+
+- DO NOT extract logistics as requirements: location, work mode (onsite/remote/hybrid), salary, visa, interview process, start date. These are filters, not capability fit signals.
+
+- TARGET COUNT FOR NARRATIVE JDs: A pure narrative JD (no Required/Preferred sections, content delivered as prose paragraphs) with substantial body content should produce 5-12 requirements via prose mining. Below 5 means you missed signals in the body paragraphs -- go back and mine more. The 12 ceiling exists to prevent fragmentation -- consolidate related signals into thematic requirements rather than producing 25 atomic micro-requirements.
+
+- BULLETED JDs HAVE NO ARTIFICIAL CAP: When the JD has explicit Required: and/or Preferred: sections with bullet lists, follow the bullet structure. Consolidate bullets into thematic requirements when they describe related capabilities (e.g. three separate bullets about "delivery", "on-time", "within budget" become one "delivery accountability" requirement), but do NOT artificially cap the count to fit a 5-12 range. A bulleted JD with 15 legitimately distinct requirements should produce 15.
+
+- PROTECT EXPLICIT REQUIRED BULLETS: When the JD has an explicit Required: section with bullets, EVERY bullet in that section MUST be extracted as a requirement in `required_qualifications`. Do not drop, omit, or reword-away explicit Required bullets even when body content covers similar themes. The body-mining rules ADD to the explicit Required list -- they NEVER replace or remove from it. If an explicit Required bullet and a body responsibility describe the same capability, extract BOTH as separate requirements (the explicit one in `required_qualifications`, the body-mined one in `implicit_requirements`). Dropping an explicit Required bullet because "the body covers it" is a violation of this rule.
+
+- PROTECT EXPLICIT PREFERRED BULLETS: Same rule -- every bullet in an explicit Preferred section MUST be extracted to `preferred_qualifications`. Body mining never replaces explicit Preferred bullets.
+
+- For narrative JDs, place mined requirements in `required_qualifications` (not `implicit_requirements`) UNLESS the JD has BOTH a clear Required section AND prose body content -- in which case mined-from-prose requirements go in `implicit_requirements`. The downstream assessment will treat all three lists equally.
+
 - Extract implicit requirements from responsibilities when no explicit qualification covers them
 - Do not invent requirements -- only extract what is stated or clearly implied
 - Keep source_text short -- just enough to verify the extraction
@@ -103,6 +128,7 @@ Rules:
 - strong: clear direct evidence in the provided stories or grounding context
 - partial: related evidence but doesn't fully cover the requirement
 - gap: no provided story or grounding context meaningfully addresses the requirement
+- A "strong" match REQUIRES at least one cited piece of evidence (story OR profile). If you cannot cite specific evidence, the match status MUST be "partial" or "gap" -- NEVER "strong" with an empty evidence array. Asserting a strong match without evidence is a violation of this rule.
 - confidence reflects how clearly the provided stories and grounding context demonstrate the requirement — high when evidence is direct and specific, medium when evidence is related but requires inference, low when the match is tenuous
 - Include up to 2 evidence items maximum
 - Use evidence_type "story" when citing a retrieved STAR story (include story_title and client)
@@ -304,6 +330,13 @@ def run_assessment(jd_text: str, stories: list[dict]) -> dict:
         all_requirements.append({"text": r["requirement"], "category": "required"})
     for r in extraction.get("preferred_qualifications", []) or []:
         all_requirements.append({"text": r["requirement"], "category": "preferred"})
+    # Implicit requirements (mined from prose body of hybrid JDs that have
+    # both explicit Required sections AND substantive body content) get
+    # appended to the required list. Pure narrative JDs route mined
+    # requirements directly to required_qualifications via the extraction
+    # prompt rules, so this branch only fires for hybrid JDs.
+    for r in extraction.get("implicit_requirements", []) or []:
+        all_requirements.append({"text": r["requirement"], "category": "required"})
 
     # Stages 2 + 3
     match_results = []
