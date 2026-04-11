@@ -104,8 +104,17 @@ if not st.session_state.get("__first_mount_rerun__", False):
 if "_browser_screen_size" not in st.session_state:
     from streamlit_js_eval import streamlit_js_eval
 
+    # Use screen.width (physical display resolution) rather than
+    # window.innerWidth. The streamlit_js_eval library runs inside a
+    # components.html iframe with height=0 — on Streamlit Cloud that
+    # iframe can have width=0, so window.innerWidth reports 0 and the
+    # Role Match mobile gate (< 1024px) fires on desktop browsers.
+    # screen.width returns the actual display resolution and is immune
+    # to iframe/container sizing issues. It doesn't account for browser
+    # zoom, but for a "phone vs desktop" gate at 1024px the device
+    # class determination is reliable.
     _screen = streamlit_js_eval(
-        js_expressions="String(window.innerWidth)",
+        js_expressions="String(window.screen.width)",
         key="__screen_size__",
     )
     if _screen:
