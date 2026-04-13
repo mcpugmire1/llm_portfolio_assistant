@@ -53,6 +53,9 @@ def render_thinking_indicator(message=None):
                 background: rgba(0, 0, 0, 0.4);
                 z-index: 99998;
             }}
+            [data-theme="dark"] .thinking-backdrop {{
+                background: rgba(0, 0, 0, 0.6);
+            }}
             @keyframes chaseAnimation {{
                 0% {{ content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }}
                 33.33% {{ content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_2.png'); }}
