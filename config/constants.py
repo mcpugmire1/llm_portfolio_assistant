@@ -177,4 +177,7 @@ ENTITY_ALIASES = {
 # The signature is kept here in case UptimeRobot changes behavior or
 # is upgraded to a paid plan that sends identifiable headers.
 
-MONITORING_BOT_SIGNATURES = ["UptimeRobot", "HeadlessChrome"]
+# Chrome/103.0.0.0 is a stale user agent (released June 2022) seen
+# hitting the app from Windows/UTC with no referrer — automated
+# crawler masquerading as a real browser. First observed Apr 11, 2026.
+MONITORING_BOT_SIGNATURES = ["UptimeRobot", "HeadlessChrome", "Chrome/103.0.0.0"]
