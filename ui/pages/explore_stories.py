@@ -20,6 +20,11 @@ import os
 import pandas as pd
 import streamlit as st
 import streamlit.components.v1 as components
+import streamlit.components.v1.components  # noqa: F401 — pre-import so the
+
+# submodule attribute exists when streamlit-aggrid references
+# components.components.MarshallComponentException. Streamlit 1.50.0 doesn't
+# auto-import the submodule; AgGrid 0.3.4.post3 assumes it does.
 from dotenv import load_dotenv
 from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode
 
