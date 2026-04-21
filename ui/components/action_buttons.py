@@ -167,6 +167,7 @@ def render_action_button_handlers(
     feedback_msg_hash: int = 0,
     share_text: str | None = None,
     share_url_path: str | None = None,
+    context: str = "",
 ) -> None:
     """Render the hidden Streamlit trigger buttons and JS wiring for the action row.
 
@@ -216,11 +217,21 @@ def render_action_button_handlers(
             turn_index=0,
             msg_hash=feedback_msg_hash,
         )
+        if context == "role_match":
+            from services.query_logger import is_bot, log_role_match_action
+
+            if not is_bot():
+                log_role_match_action("helpful", role_title=feedback_query)
         st.rerun()
 
     # Hidden Streamlit button: Export → opens print window
     export_clicked = st.button("", key=export_btn_key)
     if export_clicked:
+        if context == "role_match":
+            from services.query_logger import is_bot, log_role_match_action
+
+            if not is_bot():
+                log_role_match_action("export", role_title=feedback_query)
         # Escape backticks in the doc since we're embedding it in a JS template literal
         escaped_doc = export_html_doc.replace("\\", "\\\\").replace("`", "\\`")
         components.html(
@@ -235,8 +246,18 @@ def render_action_button_handlers(
             height=0,
         )
 
+    # NOTE: copy_report (Report/clipboard button) cannot be logged without
+    # a visible page flash. The clipboard copy is pure client-side JS —
+    # there's no Streamlit roundtrip to piggyback on, and any hidden
+    # st.button click causes a rerun (page flash). Helpful and Export
+    # both already trigger reruns for other reasons (confirmed state,
+    # print window), so logging piggybacks cleanly. Copy_report doesn't
+    # have a natural rerun trigger, so we accept this as a known gap.
+    # If copy_report logging becomes critical, the fix is a server-side
+    # endpoint (e.g., FastAPI after the React migration) that the JS
+    # can POST to without a Streamlit rerun.
+
     # JS wiring: bridge HTML buttons → hidden Streamlit buttons + clipboard copy.
-    # Share is purely client-side (no Streamlit roundtrip needed).
     if share_url_path is not None:
         # Build the URL at click time using the user's current location
         share_url_js_literal = repr(share_url_path)  # Python repr → safe JS string
@@ -283,6 +304,7 @@ def render_action_button_handlers(
                             shareBtn.style.borderColor = '';
                             shareBtn.style.color = '';
                         }}, 2000);
+
                     }};
                 }}
 

@@ -80,6 +80,22 @@ if not st.session_state.get("__first_mount_rerun__", False):
         utm_term = params.get("utm_term", "")
     except Exception:
         pass
+    # Persist UTM params in session state so Role Match logging can
+    # read them later when an assessment is submitted. These are set
+    # once per session (inside the first-mount guard) and never change.
+    st.session_state["_utm_source"] = utm_source
+    st.session_state["_utm_medium"] = utm_medium
+    st.session_state["_utm_campaign"] = utm_campaign
+    st.session_state["_utm_content"] = utm_content
+
+    # Session ID — stable UUID for correlating Role Match events (assessment,
+    # chip clicks, actions) within the same browser session. Generated once
+    # per session inside the first-mount guard so it's set before any
+    # page rendering code runs.
+    import uuid
+
+    st.session_state["_session_id"] = str(uuid.uuid4())
+
     # Log page_load (screen size not yet available — captured on next rerun)
     # Skip logging for known monitoring bots (e.g., UptimeRobot keep-alive pings)
     from config.constants import MONITORING_BOT_SIGNATURES

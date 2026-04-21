@@ -36,7 +36,7 @@ Coverage status (April 2026):
     - Results come from the three-step pipeline
     - Pipeline handles JD with no preferred qualifications
     - Pipeline handles empty Pinecone results gracefully
-    - Match results show required qualifications with status indicators
+    - Match results show required qualifications with status badges
     - Match results show preferred qualifications separately
     - Results show all qualifications without a summary count or score
     - Partial match shows gap explanation
@@ -272,9 +272,9 @@ def test_pipeline_empty_pinecone_results():
 @pytest.mark.skip(reason="Pending decision on pipeline test strategy")
 @scenario(
     "../features/role_match.feature",
-    "Match results show required qualifications with status indicators",
+    "Match results show required qualifications with status badges",
 )
-def test_match_results_required_status_indicators():
+def test_match_results_required_status_badges():
     pass
 
 
@@ -319,9 +319,9 @@ def test_no_fit_score_recruiter_view():
 @pytest.mark.skip(reason="Pending decision on pipeline test strategy")
 @scenario(
     "../features/role_match.feature",
-    "Profile-level evidence displays without story chip",
+    "Profile-level evidence appears in a block above the story chip row",
 )
-def test_profile_evidence_no_story_chip():
+def test_profile_evidence_block_above_chips():
     pass
 
 

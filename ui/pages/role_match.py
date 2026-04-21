@@ -239,6 +239,18 @@ def _render_requirement_card(
                                     st.session_state["role_match_active_evidence"] = (
                                         composite_key
                                     )
+                                    # Log chip OPEN only (not close).
+                                    # The close path (pop above) has no log call.
+                                    from services.query_logger import (
+                                        is_bot,
+                                        log_role_match_chip_click,
+                                    )
+
+                                    if not is_bot():
+                                        log_role_match_chip_click(
+                                            story_title=title_text,
+                                            client=client,
+                                        )
                                 st.rerun()
                         else:
                             # Unresolved story chip — non-clickable pill in
@@ -491,6 +503,7 @@ def _render_results_header(result_payload: dict) -> None:
         feedback_sources=f"role_match:{extraction.get('role_title') or 'unknown'}",
         confirmed_key=confirmed_key,
         feedback_msg_hash=assessment_id % 100000,
+        context="role_match",
     )
 
 
@@ -1231,9 +1244,8 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
                     try:
                         from services.jd_assessor import run_assessment
 
-                        st.session_state["role_match_result"] = run_assessment(
-                            jd_text, stories
-                        )
+                        result = run_assessment(jd_text, stories)
+                        st.session_state["role_match_result"] = result
                         # Persist the JD text in a NON-widget session key so
                         # we can restore the textarea after a navigation away
                         # and back. Streamlit garbage-collects widget state
@@ -1251,6 +1263,49 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
                     finally:
                         loading_container.empty()
 
+                    # Log OUTSIDE try/except so a logging failure can't
+                    # interfere with the assessment result. Only log when
+                    # a result was successfully stored.
+                    if st.session_state.get("role_match_result"):
+                        from services.query_logger import (
+                            is_bot,
+                            log_role_match_assessment,
+                        )
+
+                        if not is_bot():
+                            result = st.session_state["role_match_result"]
+                            extraction = result.get("extraction") or {}
+                            results_list = result.get("results") or []
+                            log_role_match_assessment(
+                                role_title=extraction.get("role_title") or "",
+                                company=extraction.get("company") or "",
+                                jd_format=extraction.get("jd_format") or "",
+                                required_count=sum(
+                                    1
+                                    for r in results_list
+                                    if r.get("category") == "required"
+                                ),
+                                preferred_count=sum(
+                                    1
+                                    for r in results_list
+                                    if r.get("category") == "preferred"
+                                ),
+                                strong_count=sum(
+                                    1
+                                    for r in results_list
+                                    if r.get("match_status") == "strong"
+                                ),
+                                partial_count=sum(
+                                    1
+                                    for r in results_list
+                                    if r.get("match_status") == "partial"
+                                ),
+                                gap_count=sum(
+                                    1
+                                    for r in results_list
+                                    if r.get("match_status") == "gap"
+                                ),
+                            )
             # Render: error → results → empty state, in priority order
             if st.session_state.get("role_match_error"):
                 st.markdown(

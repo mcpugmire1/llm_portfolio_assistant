@@ -90,7 +90,7 @@ class TestChipToggleContract:
         # BEFORE _render_results_panel in the file, so it's matches[0].
         # The panel-level reset is the second match.
         first = matches[0]
-        tail = src[first.start() : first.start() + 800]
+        tail = src[first.start() : first.start() + 1500]
         assert "st.rerun()" in tail, (
             "st.rerun() must be called after the toggle handler so the "
             "expanded story detail re-renders on the next pass."

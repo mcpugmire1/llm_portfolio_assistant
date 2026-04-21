@@ -28,9 +28,44 @@ HEADERS = [
     "UTM Campaign",
     "UTM Content",
     "UTM Term",
+    # Role Match columns (added Apr 2026)
+    "Role Title",
+    "Company",
+    "JD Format",
+    "Required Count",
+    "Preferred Count",
+    "Strong Count",
+    "Partial Count",
+    "Gap Count",
+    "Session ID",
+    "Story Title",
+    "Client",
 ]
 
 _headers_checked = False
+
+
+def is_bot() -> bool:
+    """Check if the current request comes from a known monitoring bot.
+
+    Reads the User-Agent from st.context and checks against the
+    MONITORING_BOT_SIGNATURES list in config/constants.py. Call from the
+    main Streamlit thread (before spawning daemon threads) since
+    st.context is thread-local.
+
+    Used by Role Match logging call sites to skip logging for bot
+    traffic. The existing page_load bot filter in app.py predates this
+    utility — both use the same signature list.
+    """
+    try:
+        from config.constants import MONITORING_BOT_SIGNATURES
+
+        user_agent = st.context.headers.get("User-Agent", "")
+        if not user_agent:
+            return True  # Empty UA is likely a bot (UptimeRobot free tier)
+        return any(sig in user_agent for sig in MONITORING_BOT_SIGNATURES)
+    except Exception:
+        return False  # Fail open — don't suppress logging on errors
 
 
 def get_sheet():
@@ -96,6 +131,8 @@ def _append_row(row):
         if sheet:
             _ensure_headers(sheet)
             sheet.append_row(row)
+        else:
+            pass
     except Exception:
         pass
 
@@ -186,6 +223,107 @@ def log_feedback(
         **{
             "Turn Index": str(turn_index),
             "Msg Hash": str(msg_hash),
+        },
+    )
+    Thread(target=_append_row, args=(row,), daemon=True).start()
+
+
+# =============================================================================
+# ROLE MATCH LOGGING
+# =============================================================================
+# Three event types, correlated by session_id:
+#   role_match_assessment  — one row per successful assessment submission
+#   role_match_chip_click  — one row per story chip expansion (not close)
+#   role_match_action      — one row per action button click (helpful/copy_report/export)
+
+
+def log_role_match_assessment(
+    role_title: str,
+    company: str,
+    jd_format: str,
+    required_count: int,
+    preferred_count: int,
+    strong_count: int,
+    partial_count: int,
+    gap_count: int,
+) -> None:
+    """Log a successful Role Match assessment. Called after run_assessment()."""
+    user_agent, screen_size, timezone, referrer = _capture_context()
+    session_id = ""
+    utm_source = ""
+    utm_medium = ""
+    utm_campaign = ""
+    utm_content = ""
+    try:
+        session_id = st.session_state.get("_session_id", "")
+        utm_source = st.session_state.get("_utm_source", "")
+        utm_medium = st.session_state.get("_utm_medium", "")
+        utm_campaign = st.session_state.get("_utm_campaign", "")
+        utm_content = st.session_state.get("_utm_content", "")
+    except Exception:
+        pass
+    row = _build_row(
+        "role_match_assessment",
+        Timezone=timezone,
+        Referrer=referrer,
+        **{
+            "User-Agent": user_agent,
+            "Screen Width": screen_size,
+            "Role Title": role_title,
+            "Company": company,
+            "JD Format": jd_format,
+            "Required Count": str(required_count),
+            "Preferred Count": str(preferred_count),
+            "Strong Count": str(strong_count),
+            "Partial Count": str(partial_count),
+            "Gap Count": str(gap_count),
+            "Session ID": session_id,
+            "UTM Source": utm_source,
+            "UTM Medium": utm_medium,
+            "UTM Campaign": utm_campaign,
+            "UTM Content": utm_content,
+        },
+    )
+    Thread(target=_append_row, args=(row,), daemon=True).start()
+
+
+def log_role_match_chip_click(
+    story_title: str,
+    client: str,
+) -> None:
+    """Log a story chip expansion. Called only on the OPEN path, not close."""
+    session_id = ""
+    try:
+        session_id = st.session_state.get("_session_id", "")
+    except Exception:
+        pass
+    row = _build_row(
+        "role_match_chip_click",
+        **{
+            "Story Title": story_title[:200],
+            "Client": client,
+            "Session ID": session_id,
+        },
+    )
+    Thread(target=_append_row, args=(row,), daemon=True).start()
+
+
+def log_role_match_action(
+    action: str,
+    role_title: str = "",
+) -> None:
+    """Log a Role Match action button click (helpful/copy_report/export)."""
+    session_id = ""
+    try:
+        session_id = st.session_state.get("_session_id", "")
+    except Exception:
+        pass
+    row = _build_row(
+        "role_match_action",
+        Rating=action,
+        **{
+            "Role Title": role_title,
+            "Session ID": session_id,
         },
     )
     Thread(target=_append_row, args=(row,), daemon=True).start()

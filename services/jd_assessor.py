@@ -32,6 +32,7 @@ Extract the following as JSON:
 {
   "role_title": "string",
   "company": "string",
+  "jd_format": "narrative | bulleted | hybrid",
   "required_qualifications": [
     {
       "requirement": "normalized requirement statement",
