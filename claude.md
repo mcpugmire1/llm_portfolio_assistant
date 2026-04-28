@@ -260,7 +260,9 @@
 
   ### Testing Protocol
   - **BDD scenarios must be written and committed before any implementation code.** This is non-negotiable. Write scenarios in `tests/bdd/features/`, commit them with a descriptive message, then begin implementation. No exceptions. If a spec is provided, BDD scenarios come first.
-  - **Never push to remote without explicit confirmation that the change has been tested locally. Commit locally, then wait.**
+  - **Commit and push are two separate gates requiring two separate approvals.** A commit approval ("commit", "yes commit") is not a push approval. After committing, stop and wait. Do not run `git push` until the user explicitly types "push", "go ahead and push", or similar. Combining `git commit && git push` in a single command is not acceptable. This rule exists because pushing to `origin/main` triggers a production deploy on Streamlit Cloud — it is irreversible without a force push.
+
+  April 2026 incident: a commit-then-push chain executed when only the commit had been approved. The push triggered an unauthorized production deploy. The fix is procedural — separate gates, separate words.
   - **After any change to UI files (`ui/pages/`, `ui/components/`, `ui/styles/`), restart Streamlit before running BDD tests.**
   - **After any change to `explore_stories.py`, run the BDD suite before presenting the change for review.** Unit tests and evals validate backend logic — only BDD tests exercise the rendering layer.
 
