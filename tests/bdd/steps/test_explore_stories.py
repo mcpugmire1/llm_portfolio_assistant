@@ -40,52 +40,10 @@ def wait_for_streamlit_rerun(page):
 
 
 # =============================================================================
-# FIXTURES - Browser reuse for faster tests
+# FIXTURES — shared_browser, browser_page, app_url are defined in
+# tests/bdd/steps/conftest.py (single session-scoped Playwright instance
+# shared across all BDD test files to avoid sync/async clash).
 # =============================================================================
-
-# Module-level browser instance for reuse across tests
-_browser_instance = None
-_playwright_instance = None
-
-
-@pytest.fixture(scope="session")
-def shared_browser():
-    """Create a shared browser instance for all tests in the session."""
-    global _browser_instance, _playwright_instance
-    try:
-        from playwright.sync_api import sync_playwright
-    except ImportError:
-        pytest.skip(
-            "Playwright not installed. Run: pip install playwright && playwright install chromium"
-        )
-
-    _playwright_instance = sync_playwright().start()
-    # headless=True for CI, set to False + slow_mo=100 for debugging
-    _browser_instance = _playwright_instance.chromium.launch(headless=True)
-    yield _browser_instance
-    _browser_instance.close()
-    _playwright_instance.stop()
-
-
-@pytest.fixture
-def browser_page(shared_browser):
-    """Create a fresh page for each test, reusing the shared browser."""
-    # Create new context for each test to ensure isolation
-    # Grant clipboard permissions for Share button tests
-    context = shared_browser.new_context(
-        viewport={"width": 1280, "height": 900},
-        permissions=["clipboard-read", "clipboard-write"],
-    )
-    page = context.new_page()
-    yield page
-    page.close()
-    context.close()
-
-
-@pytest.fixture
-def app_url():
-    """URL of the running Streamlit app."""
-    return "http://localhost:8501"
 
 
 # Selector for detecting Ask MattGPT page (landing OR conversation view)

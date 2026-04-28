@@ -81,48 +81,10 @@ def wait_for_streamlit_rerun(page):
 
 
 # =============================================================================
-# FIXTURES — Same pattern as test_explore_stories.py (duplicated, not shared)
+# FIXTURES — shared_browser, browser_page, app_url are defined in
+# tests/bdd/steps/conftest.py (single session-scoped Playwright instance
+# shared across all BDD test files to avoid sync/async clash).
 # =============================================================================
-
-_browser_instance = None
-_playwright_instance = None
-
-
-@pytest.fixture(scope="session")
-def shared_browser():
-    """Create a shared browser instance for all tests in the session."""
-    global _browser_instance, _playwright_instance
-    try:
-        from playwright.sync_api import sync_playwright
-    except ImportError:
-        pytest.skip(
-            "Playwright not installed. Run: pip install playwright && playwright install chromium"
-        )
-
-    _playwright_instance = sync_playwright().start()
-    _browser_instance = _playwright_instance.chromium.launch(headless=True)
-    yield _browser_instance
-    _browser_instance.close()
-    _playwright_instance.stop()
-
-
-@pytest.fixture
-def browser_page(shared_browser):
-    """Create a fresh page for each test, reusing the shared browser."""
-    context = shared_browser.new_context(
-        viewport={"width": 1280, "height": 900},
-        permissions=["clipboard-read", "clipboard-write"],
-    )
-    page = context.new_page()
-    yield page
-    page.close()
-    context.close()
-
-
-@pytest.fixture
-def app_url():
-    """URL of the running Streamlit app."""
-    return "http://localhost:8501"
 
 
 # =============================================================================
