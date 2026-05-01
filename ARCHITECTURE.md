@@ -419,52 +419,11 @@ body.dark-theme {
 
 ---
 
-### ADR-006: Avatar Sizing Standards
+### Avatar Sizing Standards
 
-**Decision:** Standardize avatar sizes across all contexts with inline styles.
+See **ADR 017** in `docs/ADR.md` for the full decision record.
 
-**Problem:**
-- Inconsistent avatar sizes (50px, 60px, 64px variations)
-- Streamlit emotion-cache classes override CSS
-- Users notice size differences between views
-
-**Solution:**
-
-**Header Avatars:** 64px
-```html
-<img src="...agy_avatar.png"
-     width="64" height="64"
-     style="width: 64px; height: 64px; border-radius: 50%; ..."
-     alt="Agy">
-```
-
-**Chat Avatars:** 60px
-```css
-/* Agy avatar */
-.stChatMessage > img[alt="assistant avatar"] {
-    width: 60px !important;
-    height: 60px !important;
-    border-radius: 50% !important;
-}
-
-/* User avatar (emoji) */
-.stChatMessage > div[contains(@class, 'st-emotion-cache')] {
-    width: 60px !important;
-    height: 60px !important;
-    font-size: 28px !important;
-}
-```
-
-**Rationale:**
-- Headers need visual prominence → 64px
-- Chat needs balanced sizing → 60px (not too large, not too small)
-- Inline styles required to override emotion-cache
-
-**Consistency Rules:**
-- All landing page headers: 64px
-- All conversation headers: 64px
-- All About Matt avatars: 64px
-- All in-chat avatars: 60px
+**Quick reference:** Header avatars = 64px, chat avatars = 60px. Inline styles required to override Streamlit emotion-cache. Do not change avatar sizing without consulting ADR 017.
 
 ---
 

@@ -276,6 +276,17 @@
   - **Hardcode values that are already CSS variables** — Always check global_styles.py first
   - **Generate fantasy roadmaps** — No "100K users", "99.9% SLA", "enterprise customers" nonsense
 
+  ### Documentation Restraint
+  Default to **not** creating new markdown files. Most analysis, investigation results, and intermediate findings belong in commit messages, BACKLOG entries, ADRs, or inline updates to existing docs — not in standalone files.
+
+  Before creating a new `.md` file, justify why it can't go into:
+  - An existing doc (ARCHITECTURE.md, BACKLOG.md, ADR.md, HISTORY.md)
+  - A commit message
+  - A BACKLOG entry detail block
+  - A code comment near the relevant change
+
+  If a new file is genuinely needed and is transitory, it goes in `docs/working/` with a lifecycle declaration and a defined deletion target. Permanent new docs at the top level require explicit user approval.
+
   ## Working with Claude
   - Start with "what's the minimal fix?" before architectural changes
   - Verify root cause before accepting complex solutions

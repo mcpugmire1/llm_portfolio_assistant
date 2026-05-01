@@ -429,3 +429,47 @@ The Pinecone query pass reuses `pinecone_service.py` query functions and the exi
 - Shared infrastructure (Pinecone index, embeddings, `pinecone_service.py`) keeps the solution harmonious with the existing architecture
 
 ---
+
+## ADR 017 — Avatar Sizing Standards (Inline Style Enforcement)
+
+**Date:** 2025-10 (original decision); 2026-04 (promoted to ADR)
+**Status:** Accepted
+
+**Context:**
+Avatar sizes drifted across views (50px, 60px, 64px variations) as different code changes adjusted sizing independently. Users notice inconsistency between header avatars and chat avatars. Streamlit's emotion-cache classes override normal CSS, so avatar sizing must be enforced through inline styles or high-specificity selectors. Without a documented standard, code changes (including AI-assisted changes) repeatedly introduce sizing regressions.
+
+**Decision:**
+Standardize avatar sizes with two tiers, enforced via inline styles to override emotion-cache:
+
+- **Header avatars (all pages): 64px** — Landing page headers, conversation headers, About Matt
+- **Chat avatars (in-conversation): 60px** — Both Agy and user avatars in the chat stream
+
+**Implementation:**
+
+Header avatars use inline `width`/`height` attributes plus inline `style`:
+```html
+<img src="...agy_avatar.png"
+     width="64" height="64"
+     style="width: 64px; height: 64px; border-radius: 50%;"
+     alt="Agy">
+```
+
+Chat avatars use high-specificity CSS with `!important`:
+```css
+.stChatMessage > img[alt="assistant avatar"] {
+    width: 60px !important;
+    height: 60px !important;
+    border-radius: 50% !important;
+}
+```
+
+**Rationale:**
+- Headers need visual prominence → 64px
+- Chat needs balanced sizing → 60px (not too large, not too small)
+- Inline styles required to override Streamlit emotion-cache (same constraint as ADR 015)
+- Two-tier system is simple enough to remember and enforce
+
+**Consequences:**
+- Any code changing avatar sizing must check this ADR first
+- AI coding assistants should reference this ADR before modifying avatar-related CSS
+- If a new avatar context is added (e.g., Role Match), it maps to one of the two tiers
