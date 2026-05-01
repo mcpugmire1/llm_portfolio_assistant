@@ -154,7 +154,6 @@ llm_portfolio_assistant/
 │   ├── __init__.py
 │   ├── debug.py                    # Centralized DEBUG flag
 │   └── settings.py                 # Configuration helpers
-│   # Note: theme.py was removed - superseded by CSS variables in global_styles.py
 │
 ├── utils/                          # Shared utilities
 │   ├── __init__.py
@@ -207,8 +206,6 @@ llm_portfolio_assistant/
 │   ├── styles/
 │   │   ├── __init__.py
 │   │   └── global_styles.py        # Shared CSS overrides
-│   │
-│   └── legacy_components.py        # Legacy monolith (2,100 lines) - TO BE DELETED
 │
 ├── echo_star_stories.jsonl         # Raw story corpus (130 stories)
 ├── echo_star_stories_nlp.jsonl     # NLP-enriched story corpus (production)
@@ -324,20 +321,7 @@ st.session_state["active_tab"] = "Explore Stories"
 
 ## Refactoring History
 
-This codebase underwent a systematic component-based refactoring from October 18 - November 7, 2025. The refactoring reduced `app.py` from 5,765 lines to 284 lines (95.1% reduction) through:
-
-- **Component extraction**: Modularized monolithic `ask_mattgpt.py` (4,696 lines) into 8-file directory structure
-- **Duplicate elimination**: Removed 20+ duplicate functions scattered across files
-- **Dead code removal**: Eliminated 1,400+ lines (zombie functions, commented blocks, unused imports/config)
-- **Architectural improvements**: Zero circular dependencies, clear separation of concerns
-
-**Key Metrics:**
-- 95.1% code reduction in app.py (5,765 → 284 lines)
-- 5-day systematic migration (Oct 18 - Nov 7, 2025)
-- 15 atomic commits with clear audit trail
-- Zero regressions through incremental testing
-
-**For complete details** including migration phases, commit history, lessons learned, and interview talking points, see [HISTORY.md](HISTORY.md).
+See [HISTORY.md](HISTORY.md) for the full evolution story including the Oct-Nov 2025 component-based migration (app.py 5,765 → 284 lines), RAG pipeline cleanup timeline, and removed component decisions.
 
 ---
 
@@ -621,12 +605,7 @@ Query → Semantic Router (embedding similarity against 106+ intent embeddings)
         - innovation, agile_transformation, narrative, synthesis, out_of_scope, personal
 ```
 
-**Note:** The previous `classify_query_intent()` LLM fallback was **removed** (Jan 29, 2026). It was:
-- Expensive (~$0.0001 per query)
-- Brittle (didn't recognize project names like TICARA)
-- Redundant (semantic router handles all cases)
-
-The semantic router now handles synthesis detection (`intent_family == "synthesis"`) and out_of_scope detection (`intent_family == "out_of_scope"`) directly via embedding similarity.
+The semantic router handles all intent classification — synthesis detection (`intent_family == "synthesis"`), out_of_scope detection, and all other families — via embedding similarity alone.
 
 **Key Rule:** Entity detection OVERRIDES verb patterns.
 - "How did Matt scale at Accenture?" → `client` (not synthesis)
@@ -652,10 +631,8 @@ The semantic router now handles synthesis detection (`intent_family == "synthesi
 5. Sort by score, then named-clients-first (JP Morgan/RBC beat "Independent")
 6. Return top 9 stories
 
-**Entity Detection (Jan 2026 Update):**
-Checks fields in order: Client, Employer, Division
-- Project and Place removed - too many generic values caused false positives (e.g., "innovation" matching Project="Innovation")
-- Semantic search handles Project/Place queries naturally
+**Entity Detection:**
+Checks fields in order: Client, Employer, Division (Project and Place excluded — semantic search handles those naturally)
 - "CIC" matches Division: "Cloud Innovation Center"
 - "JPMorgan" matches Client: "JP Morgan Chase"
 - Excludes generic values: "Multiple Clients", "Independent"
@@ -724,13 +701,7 @@ Structured logs added to diagnose "I can't help with that" issues in production.
 - **Families:** narrative, behavioral, delivery, team_scaling, leadership, technical, etc.
 - **Cost:** Free (reuses embedding from validation step)
 
-#### ~~LLM Intent Classifier~~ (REMOVED Jan 29, 2026)
-The `classify_query_intent()` function was **removed**. It was:
-- Expensive (~$0.0001 per query via GPT-4o-mini)
-- Brittle (didn't recognize project names like TICARA)
-- Redundant (semantic router handles synthesis, out_of_scope, and all other intents)
 
-The semantic router now handles ALL intent classification via embedding similarity.
 
 #### Entity Detection
 - **Job:** Detect company/division/title mentions in query for scoped retrieval
@@ -742,7 +713,7 @@ The semantic router now handles ALL intent classification via embedding similari
 - **Exclusions:** "Multiple Clients", "Independent", "Career Narrative" (too generic to filter)
 - **Returns:** `(field_name, entity_value)` tuple or `None`
 
-#### Multi-Field Entity Search (January 2026)
+#### Multi-Field Entity Search
 - **Job:** Search across ALL entity fields when entity detected, not just the primary field
 - **Lives in:** `services/pinecone_service.py:189-216`
 - **Implementation:** Uses Pinecone `$or` operator to search across 6 fields simultaneously
@@ -763,18 +734,6 @@ The semantic router now handles ALL intent classification via embedding similari
   ```
 - **Why:** Fixes "entity blind spot" where stories with `Client="Confidential"` but `Employer="Accenture"` weren't found
 - **⚠️ Note (Feb 2026):** `get_synthesis_stories()` uses PascalCase `"Theme"` in Pinecone filters (line ~444). This works currently (Pinecone metadata was uploaded with PascalCase `Theme` key) but is inconsistent with the lowercase field name convention used elsewhere. If entity-scoped synthesis returns unexpected zero results, check this field name casing first.
-
-#### Entity Normalization Map ✅ REMOVED (Jan 26, 2026)
-
-**Status:** Removed. Semantic search handles entity variations naturally through embeddings.
-
-**Why removed:**
-- Hardcoded aliases drifted from JSONL data
-- Fuzzy matching added complexity without reliability
-- Testing proved semantic search correctly returns "JP Morgan Chase" stories for queries like "JPMC", "JPM", "Chase"
-- Testing proved "amex" and "CIC" variations work via embedding similarity
-
-**Current behavior:** Entity detection uses exact case-insensitive matching against JSONL field values. Semantic search handles variations the hardcoded map was trying to solve.
 
 #### Excluded Entities & Clients
 
@@ -1422,11 +1381,7 @@ def get_verbatim_requirement(summary: str) -> str:
     """Extract required verbatim phrases from Professional Narrative stories."""
 ```
 
-**Why This Architecture:**
-- Previous 500+ line inline prompts had conflicting instructions ("Emphasize X" vs "NEVER meta-commentary")
-- `get_theme_guidance()` was injecting evaluation-mode instructions
-- Post-processing `BANNED_PHRASES_CLEANUP` was a bandaid, not a fix
-- New architecture makes Agy's role crystal clear: messenger, not evaluator
+**Why This Architecture:** BASE_PROMPT + DELTA separates universal voice rules from contextual variations. Each module has a single job: `build_system_prompt()` selects the mode-appropriate delta, `build_user_message()` injects story context and response instructions, and `get_verbatim_requirement()` enforces identity-phrase fidelity. The result is a prompt that can't contradict itself — Agy's role as messenger (not evaluator) is structurally enforced.
 
 ---
 
@@ -1563,13 +1518,7 @@ Defined in `ui/styles/global_styles.py`. Use these instead of hardcoding colors.
 | `marketing` | 3 | Marketing/recruiter question handling |
 | `context_story` | 3 | "Ask Agy About This" button flow |
 
-**Eval History:**
-| Date | Pass Rate | Changes |
-|------|-----------|---------|
-| Jan 21, 2026 | 71% (22/31) | Baseline after sovereign narrative sync |
-| Jan 22, 2026 | 100% (31/31) | Multi-field entity gate + dynamic DNA |
-| Jan 26, 2026 | 93-97% structural | Added structural assertions, prompt refactor |
-| Mar 2026 | 98.1% (60/61) | Expanded to 61 queries across 8 categories |
+**Current eval pass rate:** 98.1% (60/61 queries across 8 categories, March 2026). Full progression history in [HISTORY.md](HISTORY.md).
 
 **Running Eval:**
 ```bash
@@ -1582,7 +1531,7 @@ python tests/test_structural_assertions.py --report
 # Outputs: tests/eval_results/structural_baseline_YYYYMMDD_HHMMSS.json
 ```
 
-**test_structural_assertions.py (NEW Jan 26, 2026):**
+**test_structural_assertions.py:**
 
 Three structural assertion functions that run against all 31 queries:
 
@@ -2454,11 +2403,6 @@ User Query
 User Response
 ```
 
-**What Was Removed (Jan 29, 2026):**
-- ~~Gate 3: Entity Gate~~ — Rejected valid queries like TICARA
-- ~~LLM classifier fallback~~ — classify_query_intent() was expensive and brittle
-- ~~Title hard filtering~~ — Broke Related Projects (1 result instead of 7)
-
 ### Embedding Analysis
 
 **Embedding Model:** OpenAI `text-embedding-3-small` (1536 dimensions)
@@ -2491,7 +2435,7 @@ parts = [
 ```
 
 **Fields embedded:**
-- Title (added Jan 2026 for better keyword matching)
+- Title
 - Theme, Industry, Sub-category (behavioral context)
 - 5PSummary (concise overview)
 - STAR fields: Situation, Task, Action, Result (2-3 items each)
@@ -2625,8 +2569,6 @@ Files that import from constants.py:
 - `services/pinecone_service.py`
 - `tests/eval_rag_quality.py`
 
-**Deleted:** `scripts/test_pinecone_direct.py` (had duplicated thresholds)
-
 ---
 
 **Remaining items (lower priority):**
@@ -2700,18 +2642,14 @@ max_tokens=150  # classifier
 - Unclear ownership boundaries between layers
 - No centralized configuration
 - Limited error handling coverage
-- ~~Semantic router connection errors fail closed (should fail open)~~ ✅ **FIXED (Jan 26):** Now fails open
 - Test suite focused on happy path
-- ~~Duplicate logic (client exclusions, entity normalization)~~ ✅ **FIXED (Jan 26):** Entity normalization removed, client exclusions pattern-based
 - Hybrid scoring systems don't align
 
 **Recommended Actions:**
 1. **Centralize constants** in `config/constants.py`
-2. ~~**Derive client lists** from JSONL metadata at startup~~ ✅ **DONE:** `generate_dynamic_dna()` + `is_generic_client()`
-3. **Add error handling tests** for rate limits, timeouts
+2. **Add error handling tests** for rate limits, timeouts
 4. **Clarify layer boundaries** with explicit contracts
-5. ~~**Remove duplicate code** (client exclusions, entity maps)~~ ✅ **DONE:** Entity normalization removed, client exclusions use `is_generic_client()`
-6. **Add negative test cases** to eval suite
+5. **Add negative test cases** to eval suite
 
 ---
 

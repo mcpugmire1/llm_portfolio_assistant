@@ -27,6 +27,9 @@ This document chronicles the evolution of the MattGPT portfolio assistant from i
   - [File Size Summary](#file-size-summary)
   - [Lessons Learned](#lessons-learned)
   - [Interview Talking Points](#interview-talking-points)
+- [January 2026: RAG Pipeline Cleanup](#january-2026-rag-pipeline-cleanup)
+  - [Removed Components](#removed-components)
+  - [Eval Suite Progression](#eval-suite-progression)
 
 ---
 
@@ -462,6 +465,49 @@ When presenting this refactoring to potential employers:
 
 ---
 
-**Last Updated:** December 9, 2024
+## January 2026: RAG Pipeline Cleanup
+
+Major architectural simplification (Jan 25-31 commit window) removing components that added cost and complexity without improving quality.
+
+### Removed Components
+
+**classify_query_intent() LLM Fallback** (removed Jan 25-31, 2026):
+- Expensive (~$0.0001 per query via GPT-4o-mini)
+- Brittle (didn't recognize project names like TICARA)
+- Redundant — semantic router handles synthesis, out_of_scope, and all other intents via embedding similarity alone
+- Vestigial references remain in `tests/eval_rag_quality.py` and `tests/debug_trace_query.py` (dead imports — these test files import a function that no longer exists in `backend_service.py`)
+
+**Entity Gate** (removed Jan 25-31, 2026):
+- Runtime gate behavior eliminated — rejected valid queries like TICARA when no entity detected + low semantic score
+- Replaced by confidence gate with simpler thresholds (HIGH ≥0.25, LOW ≥0.20)
+- `ENTITY_GATE_THRESHOLD` constant remains vestigial in `config/constants.py` (defined but not imported anywhere)
+
+**Title Hard Filtering** (removed Jan 25-31, 2026):
+- Hard filtering on Title entities broke Related Projects UX (returned 1 result instead of 7)
+- Replaced by soft filtering — title is detected by `detect_entity()` but the `if entity_field != "Title"` branch in `backend_service.py` skips the Pinecone metadata filter; semantic search ranks title matches naturally
+- Evidence: `backend_service.py:1580-1595` implements the soft-filter branch with comments explaining the change
+
+**Entity Normalization Map** (removed Jan 26, 2026):
+- `ENTITY_NORMALIZATION` hardcoded alias dict removed — drifted from JSONL data, fuzzy matching added complexity without reliability
+- Testing proved semantic search correctly returns "JP Morgan Chase" stories for queries like "JPMC", "JPM", "Chase"
+- Not to be confused with `ENTITY_ALIASES` (`config/constants.py:158-167`), which is still active — handles acronyms like "CIC" → Cloud Innovation Center that aren't discoverable via embeddings alone
+
+**Entity Detection Field Reduction** (Jan 25-31, 2026):
+- Project and Place removed from entity detection — too many generic values caused false positives (e.g., "innovation" matching Project="Innovation")
+- Semantic search handles Project/Place queries naturally
+
+**scripts/test_pinecone_direct.py** — Deleted. Had duplicated thresholds that conflicted with centralized constants. File absent from repo.
+
+### Eval Suite Progression
+
+| Date | Pass Rate | Changes |
+|------|-----------|---------|
+| Jan 21, 2026 | 71% (22/31) | Baseline after sovereign narrative sync |
+| Jan 22, 2026 | 100% (31/31) | Multi-field entity gate + dynamic DNA |
+| Jan 26, 2026 | 93-97% structural | Added structural assertions, prompt refactor |
+| Mar 2026 | 98.1% (60/61) | Expanded to 61 queries across 8 categories |
+
+---
+
+**Last Updated:** May 2026
 **Author:** Matt Pugmire
-**Status:** ✅ **Complete - Portfolio-Ready Architecture**
