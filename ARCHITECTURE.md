@@ -539,7 +539,7 @@ Semantic Search Results → RAG → GPT-4o → User
 
 **Environment:**
 ```bash
-INPUT_EXCEL_FILE="MPugmire - STAR Stories - 01DEC25.xlsx"
+INPUT_EXCEL_FILE="MPugmire - STAR Stories - [DATE].xlsx"  # e.g. 09MAR26
 SHEET_NAME="STAR Stories - Interview Ready"
 DRY_RUN=False  # Set to True for preview
 ```
@@ -789,7 +789,7 @@ This section defines the **job, rules, and constraints** for each retrieval comp
 - **Job:** Embedding-based intent classification to reject borderline off-topic queries
 - **Lives in:** `services/semantic_router.py`
 - **Thresholds:** HARD_ACCEPT=0.80, SOFT_ACCEPT=0.40 (calibrated Jan 2026)
-- **Intent Families:** 11 categories (background, behavioral, delivery, team_scaling, leadership, technical, domain_payments, domain_healthcare, stakeholders, innovation, agile_transformation)
+- **Intent Families:** 15 families (background, behavioral, delivery, team_scaling, leadership, technical, domain_payments, domain_healthcare, stakeholders, innovation, agile_transformation, narrative, synthesis, out_of_scope, personal)
 - **Cost:** ~$0.0000002 per query (one embedding)
 - **Rule:** Fail-open on errors (accept query if embedding fails)
 - **Do not remove:** Saves LLM cost, prevents garbage-in
@@ -1278,7 +1278,7 @@ LAST_QUERY = "__explore_last_query__"         # Query that produced cache
 2. ~~**Multi-client stories:** Stories with `Client="Multiple Clients"` won't match entity filters.~~ **FIXED (Jan 2026):** Multi-Field Entity Gate now searches across 5 fields using Pinecone `$or` operator. Entity detection narrowed to 3 fields (Client, Employer, Division) to prevent false positives.
 3. **Ground truth fidelity:** LLM paraphrases instead of quoting verbatim despite `[[CORE BRAND DNA]]` markers.
 4. **Deprecated documentation:** `mattgpt_system_prompt.md` documents the original "MattGPT" persona (pre-Agy). The current Agy voice is documented in this file under Component Contracts → Agy Voice Generator.
-5. **LLM stochasticity:** Eval may show occasional failures due to LLM response variability. Re-running typically passes. Semantic similarity scoring would address this (see BACKLOG.md MATTGPT-004).
+5. **LLM stochasticity:** Eval may show occasional failures due to LLM response variability. Re-running typically passes. Semantic similarity scoring would address this (see BACKLOG.md → MATTGPT-035 (Eval Modernization — Semantic Scoring)).
 
 ---
 
@@ -1665,23 +1665,26 @@ Defined in `ui/styles/global_styles.py`. Use these instead of hardcoding colors.
 | `test_agy_behavior.py` | Agy response behavior tests |
 | `test_structural_assertions.py` | ✅ NEW: Meta-commentary, voice, and drift checks |
 
-**Current Status (January 26, 2026):**
-- RAG quality: 100% pass rate (31/31 queries)
+**Current Status (March 2026):**
+- RAG quality: 98.1% pass rate (60/61 golden queries across 8 categories)
 - Structural: 93-97% pass rate (meta-commentary varies with LLM stochasticity)
 
 **eval_rag_quality.py:**
-- Runs 31 test queries across 5 categories: narrative, client, intent, edge, synthesis
-- Checks: voice consistency, ground truth matches, client attribution, client bolding
+- Runs 61 golden queries across 8 categories: narrative, client, intent, edge, surgical, entity_detection, marketing, context_story
+- Checks: voice consistency, ground truth matches, client attribution, client bolding, entity detection, context bypass
 - Outputs JSON results to `tests/eval_results/`
 
 **Test Categories:**
 | Category | Count | Checks |
 |----------|-------|--------|
 | `narrative` | 10 | Voice + ground_truth phrases |
-| `client` | 8 | Voice + client attribution + bolding |
-| `synthesis` | 5 | Voice + synthesis mode detection + theme coverage |
-| `intent` | 4 | Voice + intent classification |
+| `client` | 6 | Voice + client attribution + bolding |
+| `intent` | 5 | Voice + intent classification |
 | `edge` | 4 | Voice + client attribution |
+| `surgical` | 6 | Entity-first + specific story retrieval |
+| `entity_detection` | 9 | Regression tests for detect_entity() |
+| `marketing` | 3 | Marketing/recruiter question handling |
+| `context_story` | 3 | "Ask Agy About This" button flow |
 
 **Eval History:**
 | Date | Pass Rate | Changes |
@@ -1689,6 +1692,7 @@ Defined in `ui/styles/global_styles.py`. Use these instead of hardcoding colors.
 | Jan 21, 2026 | 71% (22/31) | Baseline after sovereign narrative sync |
 | Jan 22, 2026 | 100% (31/31) | Multi-field entity gate + dynamic DNA |
 | Jan 26, 2026 | 93-97% structural | Added structural assertions, prompt refactor |
+| Mar 2026 | 98.1% (60/61) | Expanded to 61 queries across 8 categories |
 
 **Running Eval:**
 ```bash
@@ -1833,8 +1837,8 @@ def get_pinecone_index():
 ```
 
 **Search Parameters:**
-- `top_k`: 10 (retrieve top 10 matches)
-- `min_similarity`: 0.75 (filter low-quality matches)
+- `top_k`: 10 (retrieve top 10 matches, from `SEARCH_TOP_K` in config/constants.py)
+- `min_similarity`: 0.15 (from `PINECONE_MIN_SIM` in config/constants.py)
 - `namespace`: "default"
 
 **Metadata Filters:**
@@ -1859,23 +1863,20 @@ filters = {
 
 #### 2. RAG Service ([services/rag_service.py](services/rag_service.py))
 
-**Purpose:** Orchestrate semantic search + LLM generation.
+**Purpose:** Semantic search orchestration and confidence gating. LLM generation is handled by `backend_service.py`.
 
 **Key Functions:**
 ```python
-def answer_question(query: str, filters: dict = None):
+def semantic_search(q: str, stories: list, top_k: int = SEARCH_TOP_K, filters: dict = None):
     """
-    1. Semantic search → top stories
-    2. Build context window
-    3. Call GPT-4o-mini with system prompt
-    4. Return answer + source citations
+    1. Embed query with text-embedding-3-small
+    2. Pinecone vector search (top_k from constants, default 10)
+    3. Confidence gating (HIGH=0.25, LOW=0.20)
+    4. Return ranked stories with scores and confidence level
     """
 ```
 
-**Context Window Strategy:**
-- Max 3-5 stories (to fit within token limits)
-- Prioritize highest similarity scores
-- Include full STAR narratives
+**Note:** LLM generation (GPT-4o, 700 max tokens) and context assembly live in `backend_service.py:_generate_agy_response()`. See Component Contracts → Layer 4: Response Generation for details.
 
 ---
 
@@ -2658,7 +2659,7 @@ Synthesis: up to 9 (3 per theme × 3 themes)
 **Scoring Formula:**
 - Primary: Pinecone cosine similarity (0.0 - 1.0)
 - No secondary scoring layer
-- Confidence thresholds: HIGH=0.25, LOW=0.15 (UI display only)
+- Confidence thresholds: HIGH=0.25, LOW=0.20 (from config/constants.py)
 
 ### Test Coverage Analysis
 
@@ -2802,11 +2803,7 @@ max_tokens=150  # classifier
 
 **7. Pinecone Index Name**
 
-```python
-index_name="portfolio-stories"  # pinecone_service.py
-```
-
-**Should be:** Environment variable.
+✅ **RESOLVED:** Index name is now read from `get_conf("PINECONE_INDEX_NAME")` in `pinecone_service.py`. Current value: `matt-portfolio-v2`.
 
 ### Summary Findings
 
