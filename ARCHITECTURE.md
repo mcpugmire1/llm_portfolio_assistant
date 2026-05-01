@@ -598,60 +598,7 @@ PINECONE_NAMESPACE=default
 
 ### Production RAG Pipeline
 
-**Query Flow (Updated Jan 29, 2026):**
-
-```
-User Question: "How did Matt scale engineering teams?"
-      ↓
-[Layer 1: Validation - services/semantic_router.py + utils/validation.py]
-- is_nonsense() → reject if regex match
-- Semantic router → reject if score < 0.40
-- Returns intent_family (15 families including synthesis, out_of_scope, personal)
-      ↓
-[Layer 2: Fast Exit Checks - backend_service.py]
-- out_of_scope check: if intent_family == "out_of_scope" → graceful redirect
-- personal check: if intent_family == "personal" → warm professional redirect
-- Entity detection → (field, value) for scoped retrieval
-- Title entities use SOFT filtering (semantic search ranks naturally)
-      ↓
-[Layer 3: Semantic Search - services/pinecone_service.py]
-- Embed query with text-embedding-3-small
-- Vector search in Pinecone (top 7, similarity > 0.15)
-- Apply entity metadata filters (Client, Employer, Division, Project, Place)
-- NOTE: Title entities do NOT filter Pinecone (soft filtering)
-      ↓
-[Layer 4: Confidence Gate - backend_service.py]
-- CONFIDENCE_HIGH (0.25) → proceed normally
-- CONFIDENCE_LOW (0.20) → proceed with warning
-- Below 0.20 → "I couldn't find relevant stories"
-      ↓
-[Layer 5: Retrieval Strategy - based on intent_family]
-- STANDARD MODE: entity pin → diversify_results() → top 7 with client variety
-- NARRATIVE MODE: sort by Pinecone score (skip diversity)
-- SYNTHESIS MODE: theme-filtered parallel search → named-clients-first (up to 9)
-      ↓
-[Layer 6: Context Assembly - backend_service.py]
-- XML isolation: <primary_story> + <supporting_story> tags
-- Build prompt with STAR narratives + theme guidance
-- Include MATT_DNA ground truth (dynamic from JSONL)
-      ↓
-[Layer 7: LLM Generation - OpenAI GPT-4o]
-- STANDARD: Primary story focus, WHY (tension/stakes) → HOW (approach) → WHAT (proof/outcomes)
-- SYNTHESIS: Theme/pattern → evidence across projects → insight
-- Temperature: 0.4 (standard) / 0.2 (synthesis)
-      ↓
-[Layer 8: Response Formatting - conversation_helpers.py]
-- Extract answer + sources
-- Render with citations
-- Display Related Projects
-      ↓
-User receives cited, STAR-formatted answer
-```
-
-**What Was Removed (Jan 29, 2026):**
-- **Entity Gate**: Was rejecting valid queries (TICARA, story titles) when no entity + low semantic score
-- **classify_query_intent() LLM**: Expensive, brittle, redundant with semantic router
-- **Title hard filtering**: Broke Related Projects UX (only 1 source returned)
+See [RAG Pipeline Audit → Data Flow Map](#data-flow-map) for the canonical query→response diagram (9-layer trace with removal history).
 
 ---
 
@@ -1047,38 +994,9 @@ def _log_bandaid(bandaid_name: str, details: str):
 - Logged to DEBUG output when `DEBUG=True`
 - Helps identify which post-processing rules are actually needed vs. cruft
 
-### Data Flow Diagram (Updated Jan 29, 2026)
+### Data Flow Diagram
 
-```
-User Query
-    ↓
-[Layer 1: Validation]
-    ├── is_nonsense() → reject if regex match
-    └── semantic_router() → reject if score < 0.40 (returns intent_family)
-    ↓
-[Layer 2: Fast Exit + Entity Detection]
-    ├── out_of_scope check: intent_family == "out_of_scope" → redirect
-    ├── detect_entity() → (field, value) or None
-    └── Title entities: soft filter (no Pinecone metadata)
-    ↓
-[Layer 3: Retrieval]
-    ├── Standard Mode: entity pin → diversify_results() (named clients first)
-    ├── Narrative Mode: sort by Pinecone score (skip diversity)
-    └── Synthesis Mode: get_synthesis_stories() → named-clients-first
-    ↓
-[Layer 4: Confidence Gate]
-    └── HIGH/LOW/NONE based on Pinecone scores
-    ↓
-[Layer 5: Context Assembly]
-    └── XML isolation: <primary_story> + <supporting_story> tags
-    ↓
-[Layer 6: Generation]
-    └── GPT-4o → Agy-voiced markdown (fact-pairing + texture rules)
-    ↓
-User Response
-```
-
-**Removed (Jan 29, 2026):** `classify_query_intent()` LLM fallback — semantic router handles all cases.
+See [RAG Pipeline Audit → Data Flow Map](#data-flow-map) for the canonical query→response diagram (9-layer trace with removal history).
 
 ### Cross-Page Navigation into Ask MattGPT
 
@@ -2478,7 +2396,7 @@ User Query
 │ Layer 2: Semantic Router (Cheap)                │
 │ - Embed query with text-embedding-3-small       │
 │ - Compare against 106+ intent embeddings        │
-│ - 13 families including synthesis, out_of_scope │
+│ - 15 families including narrative, synthesis, out_of_scope, personal │
 │ - HARD_ACCEPT=0.80, SOFT_ACCEPT=0.40            │
 └─────────────────────────────────────────────────┘
     ↓ (accepted, returns intent_family)
