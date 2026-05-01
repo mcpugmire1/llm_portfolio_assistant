@@ -136,7 +136,7 @@
 4. **Mobile Roadmap:** Known issues, breakpoint strategy, implementation phases
 5. **Future Enhancements:** Short, medium, and long-term roadmap
 
-**For migration history and refactoring details,** see [REFACTORING_HISTORY.md](REFACTORING_HISTORY.md)
+**For migration history and refactoring details,** see [HISTORY.md](HISTORY.md)
 
 ---
 
@@ -337,7 +337,7 @@ This codebase underwent a systematic component-based refactoring from October 18
 - 15 atomic commits with clear audit trail
 - Zero regressions through incremental testing
 
-**For complete details** including migration phases, commit history, lessons learned, and interview talking points, see [REFACTORING_HISTORY.md](REFACTORING_HISTORY.md).
+**For complete details** including migration phases, commit history, lessons learned, and interview talking points, see [HISTORY.md](HISTORY.md).
 
 ---
 
