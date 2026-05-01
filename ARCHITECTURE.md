@@ -44,7 +44,7 @@
 - [Streamlit-Specific Challenges](#streamlit-specific-challenges)
 
 ### 📱 Mobile & Responsive Design
-- [Mobile Responsiveness Roadmap](#mobile-responsiveness-roadmap)
+- [Mobile Responsiveness](#mobile-responsiveness)
   - [Known Mobile Issues](#known-mobile-issues)
   - [CSS Breakpoint Strategy](#recommended-css-breakpoint-strategy)
   - [Testing Approach](#testing-approach)
@@ -134,7 +134,7 @@
 2. **Data Pipeline:** Excel → JSONL → Embeddings → Pinecone → RAG
 3. **CSS Architecture:** Scoping patterns, emotion-cache strategies, dark mode
 4. **Mobile Roadmap:** Known issues, breakpoint strategy, implementation phases
-5. **Future Enhancements:** Short, medium, and long-term roadmap
+5. **Future Enhancements:** See [BACKLOG.md](BACKLOG.md)
 
 **For migration history and refactoring details,** see [HISTORY.md](HISTORY.md)
 
@@ -2141,186 +2141,15 @@ pytest tests/unit -v
 
 ---
 
-## Mobile Responsiveness Roadmap
+## Mobile Responsiveness
 
-### Current State: Desktop-Optimized
-
-The application is currently designed and tested for desktop viewports (1280px+). While functional on mobile browsers, the experience is not optimized.
-
-### Known Mobile Issues
-
-#### 1. **Navigation Bar**
-- **Current:** Horizontal tabs (Home | Explore Stories | Ask MattGPT | About Matt)
-- **Issue:** Won't fit on mobile widths (< 768px)
-- **Proposed Solution:** Hamburger menu or bottom navigation bar
-- **Streamlit Note:** Sidebar becomes hamburger automatically, but horizontal tabs need manual handling
-
-#### 2. **Ask MattGPT Header**
-- **Current:** 64px avatar + title + tagline + "How Agy searches" button in horizontal row
-- **Issue:** Too wide for mobile (375-480px viewports)
-- **Proposed Solution:**
-  - Stack vertically on mobile
-  - Hide/shrink "How Agy searches" button text to icon-only
-  - Reduce avatar to 48px on mobile
-
-#### 3. **Chat Avatars**
-- **Current:** 60px avatars in conversation view
-- **Issue:** Consumes too much horizontal space on mobile
-- **Proposed Solution:** Reduce to 40-48px on mobile breakpoints
-- **CSS Pattern:**
-  ```css
-  @media (max-width: 768px) {
-      .stChatMessage > img[alt="assistant avatar"] {
-          width: 48px !important;
-          height: 48px !important;
-      }
-  }
-  ```
-
-#### 4. **Chat Message Bubbles**
-- **Current:** `padding: 24px` on AI messages, `16px` on user messages
-- **Issue:** Large padding wastes space on narrow screens
-- **Proposed Solution:** Reduce to `16px/12px` on mobile
-- **Font Size:** May need to reduce from `15px` to `14px` for readability
-
-#### 5. **Chat Input Box**
-- **Current:** "Ask Agy 🐾" button with full text placeholder
-- **Issue:** May overflow on narrow screens (< 375px)
-- **Proposed Solution:** Shorten placeholder text or use icon-only on mobile
-
-#### 6. **"How Agy Searches" Modal**
-- **Current:** Fixed heights, 3-column flow grid for steps
-- **Issue:** Won't fit mobile viewport, horizontal scrolling
-- **Proposed Solution:**
-  - Stack 3-step flow vertically on mobile
-  - Make modal full-screen with scrollable content
-  - Adjust `max-height` for smaller screens
-
-#### 7. **Related Projects Grid**
-- **Current:** 3-column layout for related stories
-- **Issue:** Columns too narrow on tablet/mobile
-- **Proposed Solution:**
-  ```css
-  @media (max-width: 768px) {
-      .related-projects-grid {
-          grid-template-columns: 1fr; /* Stack to single column */
-      }
-  }
-  ```
-
-#### 8. **Status Bar**
-- **Current:** "Semantic search active | Pinecone index ready | 130+ stories indexed"
-- **Issue:** Text too long for mobile, may wrap awkwardly
-- **Proposed Solution:** Abbreviate to "130+ stories | Search active" on mobile
-
-### Recommended CSS Breakpoint Strategy
-
-```css
-/* Mobile-first approach */
-
-/* Base styles (mobile) */
-.chat-message {
-    padding: 12px;
-    font-size: 14px;
-}
-
-/* Tablet (768px and up) */
-@media (min-width: 768px) {
-    .chat-message {
-        padding: 16px;
-        font-size: 15px;
-    }
-}
-
-/* Desktop (1024px and up) */
-@media (min-width: 1024px) {
-    .chat-message {
-        padding: 24px;
-        font-size: 15px;
-    }
-}
-```
-
-**Standard Breakpoints:**
-- Mobile: `< 768px`
-- Tablet: `768px - 1023px`
-- Desktop: `1024px+`
-
-**Test Devices:**
-- iPhone SE: 375px (smallest modern phone)
-- iPhone 14: 390px
-- iPad: 768px
-- Desktop: 1280px+
-
-### Testing Approach
-
-1. **Chrome DevTools:** Toggle Device Toolbar (`Cmd+Shift+M`)
-2. **Test Viewports:**
-   - iPhone SE (375px)
-   - iPhone 14 (390px)
-   - iPad (768px)
-   - Desktop (1280px)
-3. **Test Both Modes:** Light and dark mode at each breakpoint
-4. **Real Device Testing:** Check touch targets, scroll behavior, input focus
-
-### Streamlit Mobile Quirks
-
-- **Sidebar:** Automatically converts to hamburger menu on mobile
-- **st.columns():** Does NOT auto-stack on mobile - requires manual CSS overrides
-- **Chat Input:** Sticky positioning may behave differently on mobile browsers
-- **Touch Targets:** Must be minimum 44x44px (Apple Human Interface Guidelines)
-- **Emotion Cache:** May generate different class names on mobile, test thoroughly
-
-### Implementation Priority
-
-**Phase 1: Critical Fixes (Mobile Usability)**
-1. Stack navigation tabs vertically on mobile
-2. Reduce chat avatar sizes to 48px on mobile
-3. Adjust chat bubble padding for mobile
-4. Make "How Agy Searches" modal full-screen on mobile
-
-**Phase 2: Polish (Enhanced Experience)**
-5. Optimize status bar text for mobile
-6. Stack related projects grid to single column
-7. Adjust header layout for mobile (stack vertically)
-8. Test and refine touch targets
-
-**Phase 3: Testing & Refinement**
-9. Cross-browser testing (Safari iOS, Chrome Android)
-10. Real device testing
-11. Accessibility audit (VoiceOver, TalkBack)
-12. Performance testing on slower connections
-
-### Future Work: Progressive Web App (PWA)
-
-Once mobile responsiveness is solid, consider:
-- Add manifest.json for "Add to Home Screen"
-- Service worker for offline support
-- Push notifications for story updates
-- Native app-like experience
+Mobile responsive design is shipped via `ui/styles/mobile_overrides.py` (1,520 lines). Breakpoints: <768px (mobile), 768-1023px (tablet), 1024px+ (desktop). All page components, navigation, chat interface, modals, and grids have mobile-specific overrides. See CHANGELOG.md for the Q1 2026 implementation timeline.
 
 ---
 
 ## Future Enhancements
 
-### Short-term (Next 2 weeks)
-1. ~~Complete Phase 4 cleanup~~ ✅ Done (Phase 5 completed Nov 7, 2025)
-2. ~~Add docstrings and type hints~~ (Partially done)
-3. ~~Set up pre-commit hooks~~ ✅ Done (black, ruff, mypy)
-4. ~~Begin mobile responsiveness Phase 1~~ ✅ Done
-5. **NEW:** Landing Page Capability Surfacing Redesign (MATTGPT-012) - UX design task for visual capability browsing
-
-### Medium-term (Next month)
-4. Add unit tests for components
-5. Implement proper error boundaries
-6. Add logging and observability
-7. Complete mobile responsiveness testing
-
-### Long-term (3-6 months)
-8. Migrate to Next.js + React (mobile-first from start)
-9. Replace Streamlit with FastAPI backend
-10. Add proper state management (Redux/Zustand)
-11. Consider PWA implementation
+See [BACKLOG.md](BACKLOG.md) for current open work.
 
 ---
 
@@ -2484,70 +2313,27 @@ Synthesis: up to 9 (3 per theme × 3 themes)
 
 ### Test Coverage Analysis
 
-**Eval Framework:** `tests/test_benchmark_rag.py`
+**Eval Framework:** `tests/eval_rag_quality.py` — 98.1% pass rate (60/61 queries across 8 categories, March 2026).
 
-| Test Category | Count | Coverage |
-|---------------|-------|----------|
-| Entity queries | 8 | Client, Employer, Division detection |
-| Synthesis queries | 5 | Cross-cutting theme questions |
-| Narrative queries | 6 | Identity/philosophy questions |
-| Behavioral queries | 4 | STAR-style interview questions |
-| Boundary cases | 8 | Edge cases, negation, ambiguity |
-| **Total** | 31 | 100% pass rate (as of Jan 24, 2026) |
+See [Component Contracts → Testing Strategy](#testing-strategy) for the current category breakdown.
 
 **Test File Structure:**
 - `tests/test_benchmark_rag.py` - Main eval suite
 - `data/borderline_queries.csv` - Edge case query log
 - `tests/test_boost_narrative.py` - Narrative boost tests
 
-**Gaps Identified:**
-- No rate limit handling tests
-- No concurrent request tests
-- Limited negative test cases ("don't tell me about X")
-- No tests for "Tell me more about: [Title]" pattern
+Test coverage gaps are tracked in [BACKLOG.md](BACKLOG.md) (MATTGPT-040).
 
 ### Architecture Issues
 
-**1. Coupling Between Layers**
+Known architectural concerns are tracked in [BACKLOG.md](BACKLOG.md). Current categories:
 
-| Issue | Location | Impact |
-|-------|----------|--------|
-| `backend_service.py` imports from 6+ modules | backend_service.py:1-40 | Hard to test in isolation |
-| Entity detection duplicated | backend_service.py, pinecone_service.py | Inconsistent normalization |
-| Mode logic scattered | backend_service.py, rag_service.py | Unclear ownership |
+- **Coupling and complexity** — `backend_service.py` is 2,034 lines with imports from 6+ modules; candidates for extraction (MATTGPT-020)
+- **Boundary clarity** — ranking, intent classification, and formatting ownership split across files (MATTGPT-026)
+- **Hybrid scoring** — Pinecone scores (0.0–1.0) don't map cleanly to confidence buckets (0.15–0.25) (MATTGPT-024)
+- **Error handling** — limited test coverage on error paths; Pinecone timeout and embedding failure lack user notification (MATTGPT-025, MATTGPT-031)
 
-**2. Fragile Patterns**
-
-| Pattern | Risk | Recommendation |
-|---------|------|----------------|
-| Substring entity matching | False positives ("CIC" in "SPECIFIC") | Use word boundaries |
-| Hardcoded client lists | Stale data, maintenance burden | Derive from JSONL |
-| Regex-based meta-commentary cleanup | Brittle, catches false positives | Improve prompt instead |
-
-**3. Unclear Boundaries**
-
-| Question | Current State |
-|----------|---------------|
-| Who owns ranking? | Split: Pinecone → backend_service → rag_service |
-| Who owns intent classification? | Split: semantic_router → backend_service |
-| Who owns response formatting? | Split: backend_service → formatting.py → conversation_helpers.py |
-
-**4. Hybrid Scoring Confusion**
-
-The system has two scoring systems that don't align:
-- **Pinecone scores**: 0.0-1.0 cosine similarity
-- **Confidence thresholds**: 0.15-0.25 (arbitrary UI buckets)
-
-No clear mapping between "Pinecone score 0.82" and "high confidence display."
-
-**5. Error Handling**
-
-| Error Type | Handling | Issues |
-|------------|----------|--------|
-| Rate limit (429) | `RateLimitError` exception | ✅ Fixed Jan 25, 2026 |
-| Pinecone timeout | Silent fallback | No user notification |
-| Embedding failure | Fail-open (accept query) | May pass garbage |
-| LLM failure | Static fallback message | Loses context |
+See [BACKLOG.md](BACKLOG.md) detail blocks for fix approaches and status.
 
 ### Hardcoded Values Audit
 
@@ -2573,9 +2359,7 @@ Files that import from constants.py:
 
 **Remaining items (lower priority):**
 
-**1. Client Names** — Pattern-based via `utils/client_utils.py`
-
-Uses `is_generic_client()` pattern matching, not hardcoded lists. ✅
+**1. Client Names** — ✅ Resolved. Pattern-based via `utils/client_utils.py` using `is_generic_client()`.
 
 **2. Intent Family Keywords**
 
@@ -2586,12 +2370,9 @@ These should be reviewed quarterly for relevance.
 
 **3. Sacred Vocabulary (Verbatim Phrases)**
 
-```python
-VERBATIM_PHRASES = ["builder", "modernizer", "complexity to clarity", ...]
-```
-
-**Location:** prompts.py (`get_verbatim_requirement()`)
-**Purpose:** Force LLM to use exact phrases for Professional Narrative.
+**Location:** `prompts.py` → `get_verbatim_requirement()`
+**Mechanism:** Dynamically extracts identity phrases from each story's 5PSummary field at prompt-build time. Not a hardcoded list — phrases come from the data.
+**Purpose:** Force LLM to use exact phrases for Professional Narrative stories.
 
 **4. UI Display Strings**
 
@@ -2610,14 +2391,12 @@ temperature=0.4  # standard mode
 temperature=0.2  # synthesis mode
 ```
 
-**Location:** backend_service.py
-**Issue:** Not configurable, no A/B testing capability.
+**Location:** backend_service.py (line ~945)
 
 **6. Token Limits**
 
 ```python
-max_tokens=700  # generation
-max_tokens=150  # classifier
+max_tokens=700  # generation (backend_service.py line ~958)
 ```
 
 **7. Pinecone Index Name**
@@ -2630,26 +2409,13 @@ max_tokens=150  # classifier
 - Multi-layer gating prevents garbage queries efficiently
 - Entity detection adds precision to broad queries
 - Mode-specific retrieval (standard/narrative/synthesis) improves relevance
-- 100% eval pass rate demonstrates quality baseline
 - XML context isolation prevents cross-story bleed
 - Dynamic MATT_DNA derived from single source of truth
-- ✅ **NEW (Jan 26):** Clean prompt architecture in `prompts.py` (BASE_PROMPT + DELTA pattern)
-- ✅ **NEW (Jan 26):** Structural assertion tests catch meta-commentary and voice drift
-- ✅ **NEW (Jan 26):** Pattern-based client filtering via `is_generic_client()` (no hardcoded lists)
+- Clean prompt architecture in `prompts.py` (BASE_PROMPT + DELTA pattern)
+- Structural assertion tests catch meta-commentary and voice drift
+- Pattern-based client filtering via `is_generic_client()` (no hardcoded lists)
 
-**Weaknesses:**
-- Hardcoded values scattered across 6+ files (partially addressed — client exclusions now pattern-based)
-- Unclear ownership boundaries between layers
-- No centralized configuration
-- Limited error handling coverage
-- Test suite focused on happy path
-- Hybrid scoring systems don't align
-
-**Recommended Actions:**
-1. **Centralize constants** in `config/constants.py`
-2. **Add error handling tests** for rate limits, timeouts
-4. **Clarify layer boundaries** with explicit contracts
-5. **Add negative test cases** to eval suite
+Known weaknesses and recommended actions are tracked in [BACKLOG.md](BACKLOG.md).
 
 ---
 
