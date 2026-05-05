@@ -1193,6 +1193,83 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
     font-weight: 600 !important;
     margin: 0 !important;
 }
+
+/* =============================================================================
+   PHASE 4 — SLICE 1: LOCK ICON (top-right of results panel)
+   ============================================================================= */
+/* The right column (results_col) is rendered by Streamlit as a flex container
+   with flex-direction: column and align-items: start. The natural way to
+   right-align a single child is align-self: flex-end on the child itself —
+   no absolute positioning, no need to make the column a positioning context.
+   The lock takes its natural position at the top of the column flow because
+   we render it first; align-self pulls it to the right edge. */
+[class*="st-key-lock_icon"] {
+    align-self: flex-end !important;
+    width: auto !important;     /* Defeat Streamlit's emotion-cache width:100%
+                                   on stVerticalBlock. Without this, the lock
+                                   container fills the column at full width
+                                   and align-self has nothing to flex against
+                                   — the visible glyph renders at the LEFT
+                                   edge of the wide container. width:auto
+                                   shrinks the container to content size so
+                                   align-self: flex-end actually right-anchors
+                                   the visible element. */
+}
+[class*="st-key-lock_icon"] button {
+    background: transparent !important;
+    color: var(--text-secondary) !important;
+    border: none !important;
+    box-shadow: none !important;
+    font-size: 18px !important;
+    padding: 6px !important;
+    min-height: unset !important;
+}
+[class*="st-key-lock_icon"] button:hover {
+    background: var(--bg-hover) !important;
+    color: var(--text-primary) !important;
+}
+/* Brand-aligned popover styling — scoped via widget keys on inner Streamlit
+   elements. The popover body is portal-rendered (NOT a descendant of
+   .st-key-lock_icon), so we cannot use a single ancestor selector. Instead
+   we attach key= to the elements we need to style: lock_popover (container),
+   lock_password_input (text_input), and rely on Streamlit's auto-generated
+   FormSubmitter-<form_key>-<button_label> class for the submit button. */
+/* Streamlit renders the visible "input box" border on the
+   stTextInputRootElement WRAPPER, not the <input> itself. The wrapper
+   has Streamlit auto-generated single-class rules (.st-dy/.st-dz/.st-e0/
+   .st-e1) setting each border-{side}-color individually to the error
+   red rgb(255, 75, 75). We override each side individually because
+   Streamlit sets them individually — `border-color` shorthand doesn't
+   always win the cascade. :focus-within on the wrapper matches when
+   the inner input has focus. */
+[class*="st-key-lock_password_input"] [data-testid="stTextInputRootElement"] {
+    border-top-color: var(--border-color) !important;
+    border-right-color: var(--border-color) !important;
+    border-bottom-color: var(--border-color) !important;
+    border-left-color: var(--border-color) !important;
+}
+[class*="st-key-lock_password_input"] [data-testid="stTextInputRootElement"]:focus-within {
+    border-top-color: var(--accent-purple) !important;
+    border-right-color: var(--accent-purple) !important;
+    border-bottom-color: var(--accent-purple) !important;
+    border-left-color: var(--accent-purple) !important;
+    box-shadow: 0 0 0 2px var(--accent-purple-light) !important;
+}
+[class*="st-key-lock_popover"] [data-testid="InputInstructions"] {
+    display: none !important;
+}
+/* Brand-purple submit button.
+   NOTE: this selector encodes the submit button label "Unlock" — Streamlit
+   generates the class from st.form("lock_password_form") + the button label.
+   If the label changes, this selector breaks silently. */
+[class*="st-key-FormSubmitter-lock_password_form-Unlock"] button {
+    background: var(--accent-purple) !important;
+    color: white !important;
+    border: none !important;
+}
+[class*="st-key-FormSubmitter-lock_password_form-Unlock"] button:hover {
+    background: var(--accent-purple-hover) !important;
+}
 </style>
 """,
         unsafe_allow_html=True,
@@ -1231,6 +1308,16 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
 
         # ----- RIGHT: results area — Agy thinking indicator during processing, results or empty state otherwise -----
         with results_col:
+            # Phase 4 lock icon — always visible at top-right of the results
+            # column so the user can unlock before submitting a JD. Local
+            # import is intentional: keeps the Phase 4 component's growing
+            # dependency chain (slices 2-3) out of role_match.py's
+            # module-load graph. Don't promote to top-level.
+            with st.container(key="lock_icon"):
+                from ui.components.lock_icon import render_lock_icon
+
+                render_lock_icon()
+
             # Process click first so the thinking indicator appears before results render
             if submit_clicked:
                 if not jd_text.strip():

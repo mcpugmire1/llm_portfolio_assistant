@@ -166,15 +166,16 @@ Feature: Role Match page
   # PRIVATE VIEW — LOCK ICON AND PASSWORD GATE
   # =============================================================================
 
-  Scenario: Lock icon is visible in navigation bar
-    Given the user is on any page
-    Then a small lock icon appears at the far right of the navigation bar
+  Scenario: Lock icon is visible on the Role Match results panel
+    Given the user is on the Role Match page
+    Then a small lock icon appears at the top-right of the results panel
     And the lock icon is visually discreet and does not draw attention
 
   Scenario: Clicking lock icon opens password popover
+    Given the user is on the Role Match page
+    And no password prompt is visible
     When the user clicks the lock icon
     Then a popover appears with a single password input field
-    And no password prompt is visible on the page before clicking
 
   Scenario: Correct password unlocks private view
     Given the user has clicked the lock icon
@@ -223,7 +224,7 @@ Feature: Role Match page
     And session state __private_mode__ is not set
 
   Scenario: Lock glyph reflects __private_mode__ state
-    Given the user is on any page
+    Given the user is on the Role Match page
     Then the lock icon shows the closed-lock glyph when session state __private_mode__ is False
     And the lock icon shows the open-lock glyph when session state __private_mode__ is True
 
@@ -242,7 +243,7 @@ Feature: Role Match page
 
   Scenario: Lock icon hidden on mobile
     Given the user is on a device with viewport width less than 1024px
-    Then the lock icon is not visible in the navigation bar
+    Then the lock icon is not visible
 
   Scenario: Browser refresh re-locks the session
     Given the user has unlocked the private view

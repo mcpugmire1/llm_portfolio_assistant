@@ -46,12 +46,42 @@ Coverage status (April 2026):
         (all skipped pending a decision on how to run the assessment
         pipeline in tests — real backend vs. mocked OpenAI/Pinecone)
 
-  Not yet bound:
-    - All private view scenarios (Phase 4 — lock icon, password gate,
-      fit assessment) — implementation does not exist
+  Bound and executing (Phase 4 — slice 1, lock icon + password gate):
+    - Lock icon is visible on the Role Match results panel
+    - Clicking lock icon opens password popover
+    - Correct password unlocks private view
+    - Incorrect password does not unlock private view
+    - Private mode persists within session
+    - Empty password submission is a no-op
+    - Wrong password followed by correct password still unlocks
+    - Password input is masked
+    - Lock glyph reflects __private_mode__ state
+    - Clicking the unlocked icon re-locks the session
+    - Lock icon hidden on mobile
+    - Browser refresh re-locks the session
+    - New tab does not inherit unlocked state
+        (slice 1 step defs assume MATTGPT_PRIVATE_BYPASS_TOKEN is set
+        in the Streamlit run env. Default expected value is
+        "test-bypass-token" — set the env to match before running.)
+
+  Bound but skipped (Phase 4 — Streamlit 1.50 limitation):
+    - Pressing Escape inside the popover closes it without unlocking
+        (st.popover does not auto-close on Escape; verified via Playwright.
+        The Gherkin scenario is kept in the feature file as design intent.
+        Would require a custom JS handler injected via st.markdown.)
+
+  Not yet bound (Phase 4 — slice 2 + 3):
+    - All agentic bypass scenarios (slice 2 — header injection)
+    - All private assessment view scenarios (slice 3 — fit assessment)
+    - MATTGPT_PRIVATE_BYPASS_TOKEN env var unset — silent no-op
+        (slice 2 — needs env-var control over the Streamlit subprocess)
+    - Toggling lock back hides the private assessment on next rerun
+        (slice 3 — needs the assessment view to exist first)
     - Story evidence chips are clickable and expand inline (Phase 3
       story chip expansion — implementation does not exist)
 """
+
+import os
 
 import pytest
 from pytest_bdd import given, scenario, then, when
@@ -526,3 +556,515 @@ def action_buttons_not_visible(browser_page):
         assert (
             elem.count() == 0 or not elem.first.is_visible()
         ), f"Action button {button_id} should not be visible before results render"
+
+
+# =============================================================================
+# PHASE 4 — SLICE 1: Lock icon + password gate (14 scenarios)
+# =============================================================================
+# IMPORTANT: production code reads MATTGPT_PRIVATE_BYPASS_TOKEN via get_conf()
+# and has NO default. The literal "test-bypass-token" below is a test-only
+# convention — the value is whatever the developer / CI sets in the Streamlit
+# run env. The fixture default just gives a deterministic value when the env
+# is unset, so the test process and the Streamlit process can agree.
+#
+# Run flow:
+#   MATTGPT_PRIVATE_BYPASS_TOKEN=test-bypass-token streamlit run app.py
+#   pytest tests/bdd -k role_match
+
+# --- Selectors ---
+LOCK_ICON_CONTAINER_SELECTOR = ".st-key-lock_icon"
+LOCK_ICON_GLYPH_SELECTOR = ".st-key-lock_icon button"
+LOCK_POPOVER_PASSWORD_INPUT_SELECTOR = "input[type='password']"
+LOCK_POPOVER_SUBMIT_SELECTOR = "button:has-text('Unlock')"
+INCORRECT_PASSWORD = "wrong-password-for-tests"
+
+
+# --- Fixtures ---
+@pytest.fixture
+def correct_password() -> str:
+    """The expected unlock password — must match MATTGPT_PRIVATE_BYPASS_TOKEN
+    in the Streamlit run env. Defaults to 'test-bypass-token' so a developer
+    can do `MATTGPT_PRIVATE_BYPASS_TOKEN=test-bypass-token streamlit run app.py`
+    and have the tests agree.
+    """
+    return os.getenv("MATTGPT_PRIVATE_BYPASS_TOKEN", "test-bypass-token")
+
+
+# --- Helpers ---
+def _open_password_popover(page) -> None:
+    """Click the lock icon (locked state) to open the password popover."""
+    page.locator(LOCK_ICON_GLYPH_SELECTOR).first.click()
+    page.wait_for_timeout(SHORT_WAIT)
+    page.wait_for_selector(LOCK_POPOVER_PASSWORD_INPUT_SELECTOR, timeout=2000)
+
+
+def _enter_password_and_submit(page, password: str) -> None:
+    page.locator(LOCK_POPOVER_PASSWORD_INPUT_SELECTOR).first.fill(password)
+    page.locator(LOCK_POPOVER_SUBMIT_SELECTOR).first.click()
+    wait_for_streamlit_rerun(page)
+
+
+def _read_lock_glyph(page) -> str:
+    return page.locator(LOCK_ICON_GLYPH_SELECTOR).first.inner_text()
+
+
+# --- Scenario bindings ---
+@scenario(
+    "../features/role_match.feature",
+    "Lock icon is visible on the Role Match results panel",
+)
+def test_lock_icon_visible_on_results_panel():
+    pass
+
+
+@scenario("../features/role_match.feature", "Clicking lock icon opens password popover")
+def test_clicking_lock_opens_popover():
+    pass
+
+
+@scenario("../features/role_match.feature", "Correct password unlocks private view")
+def test_correct_password_unlocks():
+    pass
+
+
+@scenario(
+    "../features/role_match.feature", "Incorrect password does not unlock private view"
+)
+def test_incorrect_password_keeps_locked():
+    pass
+
+
+@scenario("../features/role_match.feature", "Private mode persists within session")
+def test_private_mode_persists():
+    pass
+
+
+@scenario("../features/role_match.feature", "Empty password submission is a no-op")
+def test_empty_password_no_op():
+    pass
+
+
+@scenario(
+    "../features/role_match.feature",
+    "Wrong password followed by correct password still unlocks",
+)
+def test_retry_after_wrong_unlocks():
+    pass
+
+
+@scenario("../features/role_match.feature", "Password input is masked")
+def test_password_input_masked():
+    pass
+
+
+@scenario(
+    "../features/role_match.feature", "Lock glyph reflects __private_mode__ state"
+)
+def test_lock_glyph_reflects_state():
+    pass
+
+
+@scenario(
+    "../features/role_match.feature", "Clicking the unlocked icon re-locks the session"
+)
+def test_unlocked_icon_relocks():
+    pass
+
+
+@pytest.mark.skip(
+    reason="Streamlit 1.50 st.popover does not close on Escape — verified via "
+    "Playwright (popover stays open after keyboard.press('Escape'); also stays "
+    "open on click-outside). Implementing this would require a custom JS "
+    "handler injected via st.markdown. Out of scope for slice 1 UI shell. "
+    "The Gherkin scenario is kept in the feature file as design intent."
+)
+@scenario(
+    "../features/role_match.feature",
+    "Pressing Escape inside the popover closes it without unlocking",
+)
+def test_escape_closes_popover():
+    pass
+
+
+@scenario("../features/role_match.feature", "Lock icon hidden on mobile")
+def test_lock_icon_hidden_on_mobile():
+    pass
+
+
+@scenario("../features/role_match.feature", "Browser refresh re-locks the session")
+def test_refresh_relocks():
+    pass
+
+
+@scenario("../features/role_match.feature", "New tab does not inherit unlocked state")
+def test_new_tab_does_not_inherit():
+    pass
+
+
+# --- GIVEN steps (Phase 4 slice 1) ---
+
+
+def _navigate_to_role_match(page, app_url) -> None:
+    """Land on Role Match — homepage → click Role Match nav → wait for workspace."""
+    page.goto(app_url)
+    page.wait_for_load_state("networkidle")
+    _wait_for_navbar_stable(page)
+    page.locator(ROLE_MATCH_NAV_SELECTOR).first.click()
+    wait_for_streamlit_rerun(page)
+    page.wait_for_selector(ROLE_MATCH_WORKSPACE_SELECTOR, timeout=15000)
+
+
+@given("the user has clicked the lock icon")
+def given_user_clicked_lock_icon(browser_page, app_url):
+    _navigate_to_role_match(browser_page, app_url)
+    _open_password_popover(browser_page)
+
+
+@given("the user has unlocked the private view")
+def given_user_unlocked_private_view(browser_page, app_url, correct_password):
+    _navigate_to_role_match(browser_page, app_url)
+    _open_password_popover(browser_page)
+    _enter_password_and_submit(browser_page, correct_password)
+    glyph = _read_lock_glyph(browser_page)
+    assert "🔓" in glyph, (
+        "Setup failed: expected unlocked glyph after correct password. "
+        f"Got: {glyph!r}. Is MATTGPT_PRIVATE_BYPASS_TOKEN set in the Streamlit env?"
+    )
+
+
+@given("the user has unlocked the private view in tab A")
+def given_unlocked_in_tab_a(browser_page, app_url, correct_password):
+    """Same setup as 'has unlocked the private view' — kept distinct so the
+    multi-tab scenario reads naturally."""
+    _navigate_to_role_match(browser_page, app_url)
+    _open_password_popover(browser_page)
+    _enter_password_and_submit(browser_page, correct_password)
+    assert "🔓" in _read_lock_glyph(browser_page)
+
+
+@given("the user has entered an incorrect access code once")
+def given_entered_incorrect_once(browser_page):
+    """Assumes the preceding step opened the popover."""
+    _enter_password_and_submit(browser_page, INCORRECT_PASSWORD)
+    # Empty-form Streamlit reruns can collapse the popover; re-open if needed
+    # so the next step lands on a usable popover.
+    inputs = browser_page.locator(LOCK_POPOVER_PASSWORD_INPUT_SELECTOR)
+    if inputs.count() == 0 or not inputs.first.is_visible():
+        _open_password_popover(browser_page)
+
+
+@given("the user is on a device with viewport width less than 1024px")
+def given_viewport_below_1024(browser_page, app_url):
+    """Set viewport BEFORE first goto so streamlit_js_eval picks up the
+    correct width on first render — same constraint as the existing
+    768px viewport step. At <1024px Role Match shows the desktop-only
+    message instead of the workspace, so we DON'T wait for the workspace
+    selector here (it won't render)."""
+    browser_page.set_viewport_size({"width": 1000, "height": 800})
+    browser_page.goto(app_url)
+    browser_page.wait_for_load_state("networkidle")
+    _wait_for_navbar_stable(browser_page)
+    browser_page.locator(ROLE_MATCH_NAV_SELECTOR).first.click()
+    wait_for_streamlit_rerun(browser_page)
+
+
+# --- WHEN steps (Phase 4 slice 1) ---
+
+
+@when("the user clicks the lock icon")
+def when_user_clicks_lock_icon(browser_page):
+    """Click the current lock icon — popover trigger when locked, re-lock button when unlocked."""
+    browser_page.locator(LOCK_ICON_GLYPH_SELECTOR).first.click()
+    wait_for_streamlit_rerun(browser_page)
+
+
+@when("the user enters the correct access code")
+def when_user_enters_correct(browser_page, correct_password):
+    _enter_password_and_submit(browser_page, correct_password)
+
+
+@when("the user enters an incorrect access code")
+def when_user_enters_incorrect(browser_page):
+    _enter_password_and_submit(browser_page, INCORRECT_PASSWORD)
+
+
+@when("the user submits the password popover with an empty input")
+def when_user_submits_empty(browser_page):
+    """Click submit without filling anything."""
+    browser_page.locator(LOCK_POPOVER_SUBMIT_SELECTOR).first.click()
+    wait_for_streamlit_rerun(browser_page)
+
+
+@when("the user navigates to another tab and returns to Role Match")
+def when_user_navigates_away_and_back(browser_page):
+    """In-app navigation — click About Matt then click Role Match."""
+    browser_page.locator(".st-key-topnav_About-Matt button").first.click()
+    wait_for_streamlit_rerun(browser_page)
+    browser_page.locator(ROLE_MATCH_NAV_SELECTOR).first.click()
+    wait_for_streamlit_rerun(browser_page)
+
+
+@when("the user presses Escape inside the popover")
+def when_user_presses_escape(browser_page):
+    browser_page.keyboard.press("Escape")
+    browser_page.wait_for_timeout(SHORT_WAIT)
+
+
+@when("the user refreshes the browser")
+def when_user_refreshes(browser_page, app_url):
+    """Streamlit 1.50 rotates the XSRF cookie on reload, which assigns a new
+    session and discards all session_state — verified via cookie inspection.
+    The user lands on Home (active_tab defaults to 'Home' in app.py:141).
+    The security-relevant outcome (__private_mode__=False) IS preserved by
+    Streamlit's behavior; we re-navigate to Role Match so the follow-up
+    'lock icon shows closed glyph' assertion can run."""
+    browser_page.reload()
+    browser_page.wait_for_load_state("networkidle")
+    _wait_for_navbar_stable(browser_page)
+    browser_page.locator(ROLE_MATCH_NAV_SELECTOR).first.click()
+    wait_for_streamlit_rerun(browser_page)
+    browser_page.wait_for_selector(ROLE_MATCH_WORKSPACE_SELECTOR, timeout=15000)
+
+
+@when("the user opens MattGPT in a new tab")
+def when_user_opens_new_tab(browser_page, app_url):
+    """Open a second tab in the same browser context AND navigate it to
+    Role Match (since the lock icon only renders there). Streamlit
+    assigns a fresh session per tab. Stash the new page on the original
+    so the follow-up THEN can locate it."""
+    new_page = browser_page.context.new_page()
+    _navigate_to_role_match(new_page, app_url)
+    browser_page.__dict__["_new_tab_page"] = new_page
+
+
+# --- THEN steps (Phase 4 slice 1) ---
+
+
+@then("a small lock icon appears at the top-right of the results panel")
+def then_lock_icon_at_top_right_of_results(browser_page):
+    """Assert lock icon is visible AND positioned in the top-right region
+    of the workspace's right column (results_col)."""
+    lock = browser_page.locator(LOCK_ICON_GLYPH_SELECTOR).first
+    workspace = browser_page.locator(ROLE_MATCH_WORKSPACE_SELECTOR).first
+    assert lock.is_visible(), "Lock icon not visible in results panel"
+    lock_box = lock.bounding_box()
+    workspace_box = workspace.bounding_box()
+    assert lock_box and workspace_box, "Could not measure lock / workspace positions"
+    # Top-right: lock x is past the workspace midpoint, lock y is near the top
+    workspace_midpoint_x = workspace_box["x"] + workspace_box["width"] / 2
+    assert lock_box["x"] > workspace_midpoint_x, (
+        "Lock icon should be in the right half of the workspace "
+        f"(lock.x={lock_box['x']}, midpoint.x={workspace_midpoint_x})"
+    )
+    assert lock_box["y"] < workspace_box["y"] + 100, (
+        "Lock icon should be near the top of the workspace "
+        f"(lock.y={lock_box['y']}, workspace.y={workspace_box['y']})"
+    )
+
+
+@then("the lock icon is visually discreet and does not draw attention")
+def then_lock_icon_discreet(browser_page):
+    """Discreet ≡ transparent / muted background, not the brand purple color."""
+    button = browser_page.locator(LOCK_ICON_GLYPH_SELECTOR).first
+    bg = button.evaluate("el => getComputedStyle(el).backgroundColor")
+    color = button.evaluate("el => getComputedStyle(el).color")
+    assert (
+        "rgba(0, 0, 0, 0)" in bg or "rgba(255, 255, 255, 0" in bg
+    ), f"Lock icon background should be transparent / low-alpha, got: {bg!r}"
+    # Brand purple is rgb(139, 92, 246). The lock icon must not use it.
+    assert (
+        "139, 92, 246" not in color
+    ), f"Lock icon must not use brand purple — too attention-grabbing. Got: {color!r}"
+
+
+@then("a popover appears with a single password input field")
+def then_popover_with_password_field(browser_page):
+    inputs = browser_page.locator(LOCK_POPOVER_PASSWORD_INPUT_SELECTOR)
+    assert inputs.first.is_visible(), "Password input not visible after lock click"
+    assert (
+        inputs.count() == 1
+    ), f"Expected exactly 1 password input, got {inputs.count()}"
+
+
+@given("no password prompt is visible")
+def given_no_password_prompt_visible(browser_page):
+    """Precondition: the popover hasn't been opened yet. Given/When ordering
+    in the scenario establishes the temporal meaning ("before clicking")."""
+    inputs = browser_page.locator(LOCK_POPOVER_PASSWORD_INPUT_SELECTOR)
+    assert (
+        inputs.count() == 0 or not inputs.first.is_visible()
+    ), "Password input must not be visible until the lock icon is clicked"
+
+
+@then("the lock icon changes to indicate unlocked state")
+def then_lock_icon_changes_to_unlocked(browser_page):
+    glyph = _read_lock_glyph(browser_page)
+    assert "🔓" in glyph, f"Expected open-lock (🔓), got: {glyph!r}"
+
+
+@then("session state __private_mode__ is set to True")
+def then_state_set_true(browser_page):
+    """Lock icon glyph is the proxy for session state (no DOM access to st.session_state)."""
+    glyph = _read_lock_glyph(browser_page)
+    assert (
+        "🔓" in glyph
+    ), f"Expected unlocked glyph (proxy for __private_mode__=True), got: {glyph!r}"
+
+
+@then("session state __private_mode__ is set to False")
+def then_state_set_false(browser_page):
+    glyph = _read_lock_glyph(browser_page)
+    assert (
+        "🔒" in glyph
+    ), f"Expected locked glyph (proxy for __private_mode__=False), got: {glyph!r}"
+
+
+@then("session state __private_mode__ is False")
+def then_state_is_false(browser_page):
+    glyph = _read_lock_glyph(browser_page)
+    assert (
+        "🔒" in glyph
+    ), f"Expected locked glyph (proxy for __private_mode__=False), got: {glyph!r}"
+
+
+@then("session state __private_mode__ is not set")
+def then_state_not_set(browser_page):
+    """Default state — same proxy as 'is False'."""
+    glyph = _read_lock_glyph(browser_page)
+    assert (
+        "🔒" in glyph
+    ), f"Expected locked glyph (proxy for __private_mode__ unset), got: {glyph!r}"
+
+
+@then("session state __private_mode__ in the new tab is False")
+def then_state_new_tab_false(browser_page):
+    new_page = browser_page.__dict__.get("_new_tab_page")
+    assert new_page is not None, "Setup failed: _new_tab_page not stashed by prior step"
+    glyph = new_page.locator(LOCK_ICON_GLYPH_SELECTOR).first.inner_text()
+    assert "🔒" in glyph, f"New tab should show locked glyph, got: {glyph!r}"
+
+
+@then("the popover closes")
+def then_popover_closes(browser_page):
+    inputs = browser_page.locator(LOCK_POPOVER_PASSWORD_INPUT_SELECTOR)
+    assert (
+        inputs.count() == 0 or not inputs.first.is_visible()
+    ), "Popover should be closed (password input hidden)"
+
+
+@then("the popover stays open")
+def then_popover_stays_open(browser_page):
+    """After a no-op submission (empty / wrong) the popover must remain visible
+    — a silent no-op, not a close-on-error."""
+    browser_page.wait_for_timeout(SHORT_WAIT)
+    inputs = browser_page.locator(LOCK_POPOVER_PASSWORD_INPUT_SELECTOR)
+    assert (
+        inputs.first.is_visible()
+    ), "Popover should remain open after empty / wrong submission"
+
+
+@then("the private view remains locked")
+def then_private_view_remains_locked(browser_page):
+    glyph = _read_lock_glyph(browser_page)
+    assert "🔒" in glyph, f"Expected locked glyph, got: {glyph!r}"
+
+
+@then("the private view unlocks")
+def then_private_view_unlocks(browser_page):
+    glyph = _read_lock_glyph(browser_page)
+    assert "🔓" in glyph, f"Expected unlocked glyph, got: {glyph!r}"
+
+
+@then("the private view is still unlocked")
+def then_private_view_still_unlocked(browser_page):
+    glyph = _read_lock_glyph(browser_page)
+    assert "🔓" in glyph, f"Expected still-unlocked glyph, got: {glyph!r}"
+
+
+@then("the lock icon still shows unlocked state")
+def then_lock_icon_still_unlocked(browser_page):
+    glyph = _read_lock_glyph(browser_page)
+    assert "🔓" in glyph, f"Expected unlocked glyph, got: {glyph!r}"
+
+
+@then(
+    "the lock icon shows the closed-lock glyph when session state __private_mode__ is False"
+)
+def then_closed_glyph_when_state_false(browser_page):
+    """Default page-load state: __private_mode__ is unset/False → closed glyph."""
+    glyph = _read_lock_glyph(browser_page)
+    assert "🔒" in glyph, f"Expected closed-lock (🔒) on default state, got: {glyph!r}"
+
+
+@then(
+    "the lock icon shows the open-lock glyph when session state __private_mode__ is True"
+)
+def then_open_glyph_when_state_true(browser_page, correct_password):
+    """Unlock to verify the open glyph branch — closed branch is asserted by the prior step."""
+    _open_password_popover(browser_page)
+    _enter_password_and_submit(browser_page, correct_password)
+    glyph = _read_lock_glyph(browser_page)
+    assert "🔓" in glyph, f"Expected open-lock (🔓) after unlock, got: {glyph!r}"
+
+
+@then("the lock icon returns to the closed-lock glyph")
+def then_lock_icon_returns_closed(browser_page):
+    glyph = _read_lock_glyph(browser_page)
+    assert "🔒" in glyph, f"Expected closed-lock (🔒), got: {glyph!r}"
+
+
+@then("the lock icon shows the closed-lock glyph")
+def then_lock_icon_shows_closed(browser_page):
+    glyph = _read_lock_glyph(browser_page)
+    assert "🔒" in glyph, f"Expected closed-lock (🔒), got: {glyph!r}"
+
+
+@then("no popover is shown")
+def then_no_popover_shown(browser_page):
+    inputs = browser_page.locator(LOCK_POPOVER_PASSWORD_INPUT_SELECTOR)
+    assert (
+        inputs.count() == 0 or not inputs.first.is_visible()
+    ), "No popover should appear when re-locking"
+
+
+@then("the lock icon is not visible")
+def then_lock_icon_not_visible(browser_page):
+    """At viewport <1024px the Role Match workspace is replaced by the
+    desktop-only message, so the lock icon (mounted inside the workspace)
+    disappears with it."""
+    container = browser_page.locator(LOCK_ICON_CONTAINER_SELECTOR)
+    if container.count() == 0:
+        return
+    assert (
+        not container.first.is_visible()
+    ), "Lock icon should be hidden at viewport <1024px (workspace not rendered)"
+
+
+@then('the password input has type="password"')
+def then_password_input_has_type_password(browser_page):
+    input_type = browser_page.locator(
+        LOCK_POPOVER_PASSWORD_INPUT_SELECTOR
+    ).first.get_attribute("type")
+    assert input_type == "password", f"Expected type='password', got: {input_type!r}"
+
+
+@then("typed characters are not echoed in the DOM as plain text")
+def then_typed_chars_not_echoed(browser_page):
+    """Type a sample value, then assert it does not appear as visible text
+    anywhere on the page. type='password' renders dots; the value lives only
+    in the input's DOM property, not in inner_text."""
+    sample = "secretvalue123"
+    browser_page.locator(LOCK_POPOVER_PASSWORD_INPUT_SELECTOR).first.fill(sample)
+    page_text = browser_page.locator("body").inner_text()
+    assert (
+        sample not in page_text
+    ), f"Sample password {sample!r} must not appear as plain text in the rendered DOM"
+
+
+@then("no rate-limit lockout is applied between attempts")
+def then_no_rate_limit(browser_page):
+    """Proxy assertion — if the second submission unlocked, no lockout was applied."""
+    glyph = _read_lock_glyph(browser_page)
+    assert "🔓" in glyph, (
+        "Retry should succeed — no rate-limit lockout. " f"Got glyph: {glyph!r}"
+    )

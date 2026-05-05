@@ -181,3 +181,26 @@ ENTITY_ALIASES = {
 # hitting the app from Windows/UTC with no referrer — automated
 # crawler masquerading as a real browser. First observed Apr 11, 2026.
 MONITORING_BOT_SIGNATURES = ["UptimeRobot", "HeadlessChrome", "Chrome/103.0.0.0"]
+
+# =============================================================================
+# PRIVATE VIEW (Phase 4 — MATTGPT-012)
+# =============================================================================
+# Constants for the private view password gate (slice 1) and the agentic
+# bypass header (slice 2). See BACKLOG.md MATTGPT-012 for the design contract.
+# Named-constant convention: no magic strings in guard logic.
+
+PRIVATE_MODE_KEY = "__private_mode__"  # st.session_state key
+PRIVATE_BYPASS_TOKEN_ENV = "MATTGPT_PRIVATE_BYPASS_TOKEN"  # env / st.secrets key
+PRIVATE_BYPASS_HEADER = "X-Mattgpt-Bypass-Token"  # request header (slice 2)
+
+
+def get_private_bypass_token() -> str | None:
+    """Return the configured private-view bypass token, or None if unset.
+
+    Reads via get_conf() (st.secrets first, then os.environ). Used by both
+    the password popover (slice 1) and the bypass header (slice 2). Callers
+    must fail closed when this returns None.
+    """
+    from config.settings import get_conf
+
+    return get_conf(PRIVATE_BYPASS_TOKEN_ENV)
