@@ -195,6 +195,102 @@ Feature: Role Match page
     Then the private view is still unlocked
     And the lock icon still shows unlocked state
 
+  Scenario: Empty password submission is a no-op
+    Given the user has clicked the lock icon
+    When the user submits the password popover with an empty input
+    Then the private view remains locked
+    And session state __private_mode__ is not set
+    And the popover stays open
+
+  Scenario: Wrong password followed by correct password still unlocks
+    Given the user has clicked the lock icon
+    And the user has entered an incorrect access code once
+    When the user enters the correct access code
+    Then the private view unlocks
+    And no rate-limit lockout is applied between attempts
+
+  Scenario: Password input is masked
+    Given the user has clicked the lock icon
+    Then the password input has type="password"
+    And typed characters are not echoed in the DOM as plain text
+
+  Scenario: MATTGPT_PRIVATE_BYPASS_TOKEN env var unset — password submission is a silent no-op
+    Given the MATTGPT_PRIVATE_BYPASS_TOKEN env var is unset
+    And the user has clicked the lock icon
+    When the user enters any password and submits
+    Then the private view remains locked
+    And no error is surfaced to the user
+    And session state __private_mode__ is not set
+
+  Scenario: Lock glyph reflects __private_mode__ state
+    Given the user is on any page
+    Then the lock icon shows the closed-lock glyph when session state __private_mode__ is False
+    And the lock icon shows the open-lock glyph when session state __private_mode__ is True
+
+  Scenario: Clicking the unlocked icon re-locks the session
+    Given the user has unlocked the private view
+    When the user clicks the lock icon
+    Then session state __private_mode__ is set to False
+    And the lock icon returns to the closed-lock glyph
+    And no popover is shown
+
+  Scenario: Pressing Escape inside the popover closes it without unlocking
+    Given the user has clicked the lock icon
+    When the user presses Escape inside the popover
+    Then the popover closes
+    And session state __private_mode__ is not set
+
+  Scenario: Lock icon hidden on mobile
+    Given the user is on a device with viewport width less than 1024px
+    Then the lock icon is not visible in the navigation bar
+
+  Scenario: Browser refresh re-locks the session
+    Given the user has unlocked the private view
+    When the user refreshes the browser
+    Then session state __private_mode__ is False
+    And the lock icon shows the closed-lock glyph
+
+  Scenario: New tab does not inherit unlocked state
+    Given the user has unlocked the private view in tab A
+    When the user opens MattGPT in a new tab
+    Then session state __private_mode__ in the new tab is False
+
+  Scenario: Toggling lock back hides the private assessment on next rerun
+    Given the user has unlocked the private view
+    And the private assessment is visible
+    When the user clicks the lock icon to re-lock
+    Then on the next rerun the private assessment section is not visible
+    And the recruiter view content remains intact
+
+  # =============================================================================
+  # PRIVATE VIEW — AGENTIC BYPASS
+  # =============================================================================
+  # Headless / programmatic access bypasses the UI password gate by sending the
+  # X-Mattgpt-Bypass-Token header. The header value is compared to the
+  # MATTGPT_PRIVATE_BYPASS_TOKEN env var. Both names are referenced as named
+  # constants in code per CLAUDE.md (no magic strings in guards).
+
+  Scenario: Valid bypass header auto-unlocks private view on first paint
+    Given the MATTGPT_PRIVATE_BYPASS_TOKEN env var is set
+    And the request carries an X-Mattgpt-Bypass-Token header matching the env var
+    When the Role Match page renders
+    Then session state __private_mode__ is True before any user interaction
+    And the private assessment is visible without the user clicking the lock icon
+
+  Scenario: Invalid bypass header is treated as locked
+    Given the MATTGPT_PRIVATE_BYPASS_TOKEN env var is set
+    And the request carries an X-Mattgpt-Bypass-Token header that does NOT match the env var
+    When the Role Match page renders
+    Then session state __private_mode__ is False
+    And no error is surfaced to the caller
+
+  Scenario: Bypass header silently ignored when env var is unset
+    Given the MATTGPT_PRIVATE_BYPASS_TOKEN env var is unset
+    And the request carries any X-Mattgpt-Bypass-Token header value
+    When the Role Match page renders
+    Then session state __private_mode__ is False
+    And the system fails closed with no error surfaced to the caller
+
   # =============================================================================
   # PRIVATE VIEW — FIT ASSESSMENT
   # =============================================================================
@@ -222,6 +318,57 @@ Feature: Role Match page
     When the private assessment section is displayed
     Then recommendation is "Apply"
     And fit score is "High"
+
+  # Thresholds below match compute_recommendation() in services/jd_assessor.py:
+  #   Apply / High:    required_gap_count == 0 AND strong_ratio >= 0.7
+  #   Consider / Med:  required_gap_count <= 1 AND coverage_ratio >= 0.7
+  #                    (coverage_ratio = (strong + partial) / total)
+  #   Pass / Low:      otherwise (including 0-requirements edge case)
+
+  Scenario: Two or more required gaps yields Pass / Low
+    Given the private view is unlocked
+    And the match results have 2 or more required gaps
+    When the private assessment section is displayed
+    Then recommendation is "Pass"
+    And fit score is "Low"
+
+  Scenario: One required gap with at least 70 percent coverage yields Consider / Medium
+    Given the private view is unlocked
+    And the match results have exactly 1 required gap
+    And the strong+partial coverage ratio is 0.7 or higher
+    When the private assessment section is displayed
+    Then recommendation is "Consider"
+    And fit score is "Medium"
+
+  Scenario: Zero required gaps with low strong ratio but high coverage yields Consider / Medium
+    Given the private view is unlocked
+    And the match results have 0 required gaps
+    And the strong ratio is below 0.7
+    And the strong+partial coverage ratio is 0.7 or higher
+    When the private assessment section is displayed
+    Then recommendation is "Consider"
+    And fit score is "Medium"
+
+  Scenario: Empty extraction yields Pass / Low
+    Given the private view is unlocked
+    And the JD extraction returned 0 requirements
+    When the private assessment section is displayed
+    Then recommendation is "Pass"
+    And fit score is "Low"
+
+  Scenario: Unlocking after submission reveals the assessment without re-submit
+    Given the user has submitted a job description while locked
+    And the recruiter view results are visible
+    When the user unlocks the private view
+    Then the private assessment section appears below the recruiter view
+    And no re-submission of the JD is required
+
+  Scenario: Locking back while assessment is visible hides only the private section
+    Given the user has unlocked the private view
+    And the private assessment is visible alongside the recruiter view
+    When the user clicks the lock icon to re-lock
+    Then the private assessment section is hidden on the next rerun
+    And the recruiter view (Phases 1-3) remains intact and unchanged
 
   # =============================================================================
   # DESKTOP ONLY
