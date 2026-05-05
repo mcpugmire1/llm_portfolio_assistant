@@ -4,6 +4,15 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ---
 
+## May 2026
+
+### Role Match (Phase 4 in flight — see MATTGPT-012)
+
+**May 4 — Committed 20 BDD scenarios for Role Match Phase 4** — `0d6285b`
+Design contract for the private view: password gate edge cases, lock icon affordances, session persistence, agentic bypass (`X-Mattgpt-Bypass-Token` / `MATTGPT_PRIVATE_BYPASS_TOKEN`), recommendation matrix anchored to `compute_recommendation()` in `services/jd_assessor.py`, and locked↔unlocked transitions. Implementation deferred to a future session — step definitions co-author with implementation slices per CLAUDE.md testing protocol.
+
+---
+
 ## April 2026
 
 ### Process & Infrastructure
