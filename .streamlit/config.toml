@@ -1,0 +1,15 @@
+[server]
+# Use poll-based file watching instead of the default watchdog (inotify).
+#
+# Why: Streamlit Cloud's multi-tenant Linux hosts share a per-user inotify
+# instance limit. Many apps registering watchdog observers exhausts the
+# limit, causing every subsequent watch to fail with OSError EMFILE
+# ([Errno 24] inotify instance limit reached) and dump a full traceback
+# to the production log. Non-fatal but noisy — see Streamlit Cloud logs
+# from May 1, 2026.
+#
+# Why "poll" over "none": "none" disables file change detection entirely,
+# which silently breaks the "Source file changed → Rerun?" toast during
+# local development. "poll" works on both Cloud (no inotify overhead)
+# and local (file change detection still fires, just via polling).
+fileWatcherType = "poll"

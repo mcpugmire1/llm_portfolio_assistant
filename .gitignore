@@ -39,8 +39,8 @@ count_faiss_file
 # Scratch files (but allow tests/ directory)
 yourfile_pretty.json
 
-# Local Streamlit config and secrets
-.streamlit/config.toml
+# Local Streamlit secrets (config.toml IS committed — it carries non-sensitive
+# server settings like fileWatcherType; secrets.toml stays ignored)
 .streamlit/secrets.toml
 
 # Local development scratch files

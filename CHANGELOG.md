@@ -6,6 +6,11 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ## May 2026
 
+### Infrastructure
+
+**May 6 — Reduce log noise on Streamlit Cloud (file watcher → poll)**
+Streamlit's default watchdog (inotify) file watcher exhausted the kernel's per-host inotify instance limit on Streamlit Cloud's multi-tenant VMs, spamming the production log with non-fatal `OSError: [Errno 24] inotify instance limit reached` tracebacks (one per watched directory). Added `.streamlit/config.toml` with `fileWatcherType = "poll"` — no inotify overhead on Cloud (which never benefited from file watching anyway, since deploys come from git push), and the "Source file changed" toast still fires locally via polling. `"none"` rejected because it would silently disable the local toast.
+
 ### Role Match (Phase 4 in flight — see MATTGPT-012)
 
 **May 4 — Committed 20 BDD scenarios for Role Match Phase 4** — `0d6285b`
