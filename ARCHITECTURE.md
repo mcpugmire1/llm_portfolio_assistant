@@ -95,6 +95,8 @@
 
 **Role Match feature (April–May 2026):** JD-to-portfolio fit assessment. Phases 1-3 (recruiter view, AgGrid results panel, action buttons, share/export) shipped April 2026. Phase 4 slice 1 (private-view lock icon + password gate UI shell, fail-closed: deployment state must not leak) shipped May 2026. Engine: `services/jd_assessor.py` three-stage pipeline + deterministic `compute_recommendation()` scoring. See `BACKLOG.md` MATTGPT-012 for Phase 4 slices 2 (agentic bypass) and 3 (private assessment view).
 
+**Triage Agent surface (May 2026):** Engine-as-adapter pattern. `services/jd_assessor.py` is now shared by two surfaces — the interactive Streamlit Role Match page and `scripts/assess_jd.py` (CLI for external agent orchestration, schema-versioned JSON envelope over stdin/stdout). Orchestration assets live in `agent/triage/` (synthesis prompt, filter config) — source of truth in this repo, copied to Cowork's designated folder. `agent/discovery/` reserved for v2 ATS push-model discovery. See `tests/unit/test_assess_jd.py` for the CLI contract.
+
 **Prompt Architecture Refactor (Jan 26, 2026) — 93-97% structural pass rate:**
 - Created `prompts.py` with clean BASE_PROMPT + SYNTHESIS_DELTA + STANDARD_DELTA architecture
 - BASE_PROMPT establishes Agy as fact-relayer, not evaluator (prevents meta-commentary)
@@ -223,6 +225,17 @@ llm_portfolio_assistant/
 │
 ├── assets/
 │   └── (images, SVGs, diagrams)
+│
+├── scripts/                        # Operational scripts
+│   └── assess_jd.py                # Engine CLI wrapper (JD stdin → JSON envelope; agent-callable surface)
+│
+├── agent/                          # Orchestration assets for Cowork (Claude Desktop)
+│   ├── README.md                   # Layout + Cowork setup
+│   ├── triage/                     # v1 JD triage (operational)
+│   │   ├── synthesis_prompt.md     # Three-layer logic (capability + filter + thin fit)
+│   │   └── filter_config.json      # Hard rules + engagement_mode definitions
+│   └── discovery/                  # v2 placeholder (ATS push-model discovery)
+│       └── README.md
 │
 └── .streamlit/
     └── config.toml                 # Streamlit theme config
