@@ -70,7 +70,7 @@
 **Project:** MattGPT Portfolio Assistant - AI-powered career story search and chat interface
 **Tech Stack:** Streamlit, OpenAI GPT-4o, Pinecone vector DB, Python 3.11+
 **Data Corpus:** 130+ STAR-formatted transformation project stories
-**Last Updated:** January 29, 2026
+**Last Updated:** May 10, 2026
 
 ### Key Achievements
 
@@ -91,7 +91,9 @@
 - 6 shared utility modules (27 KB)
 - Minimal circular dependencies (one deferred import for `sync_portfolio_metadata`)
 
-### Current State (January 2026)
+### Current State (May 2026)
+
+**Role Match feature (April–May 2026):** JD-to-portfolio fit assessment. Phases 1-3 (recruiter view, AgGrid results panel, action buttons, share/export) shipped April 2026. Phase 4 slice 1 (private-view lock icon + password gate UI shell, fail-closed: deployment state must not leak) shipped May 2026. Engine: `services/jd_assessor.py` three-stage pipeline + deterministic `compute_recommendation()` scoring. See `BACKLOG.md` MATTGPT-012 for Phase 4 slices 2 (agentic bypass) and 3 (private assessment view).
 
 **Prompt Architecture Refactor (Jan 26, 2026) — 93-97% structural pass rate:**
 - Created `prompts.py` with clean BASE_PROMPT + SYNTHESIS_DELTA + STANDARD_DELTA architecture
@@ -166,7 +168,9 @@ llm_portfolio_assistant/
 │
 ├── services/                       # Business logic & external APIs
 │   ├── __init__.py
+│   ├── jd_assessor.py              # Role Match engine (extraction → retrieval → assessment + compute_recommendation())
 │   ├── pinecone_service.py         # Pinecone client & vector search
+│   ├── query_logger.py             # 30-column event logger → Google Sheets
 │   ├── rag_service.py              # Semantic search orchestration
 │   ├── semantic_router.py          # ✅ Query routing & validation (11.4 KB)
 │   └── story_service.py            # Story retrieval logic (placeholder)
@@ -181,6 +185,7 @@ llm_portfolio_assistant/
 │   │   ├── how_agy_modal.py           # ✨ "How Agy Searches" modal (28.6 KB)
 │   │   ├── category_cards.py          # Landing page capability cards (19 KB)
 │   │   ├── hero.py                    # Hero section component (8 KB)
+│   │   ├── lock_icon.py               # Private-view gate (popover + password, fail-closed)
 │   │   ├── thinking_indicator.py      # ✨ Loading/processing indicator (3 KB)
 │   │   └── timeline_view.py           # Era-based timeline for Explore Stories
 │   │
@@ -201,7 +206,8 @@ llm_portfolio_assistant/
 │   │   │   └── utils.py               # Shared utilities (9.4 KB)
 │   │   ├── about_matt.py              # About page (467 lines)
 │   │   ├── banking_landing.py         # Banking landing (413 lines)
-│   │   └── cross_industry_landing.py  # Cross-industry landing (413 lines)
+│   │   ├── cross_industry_landing.py  # Cross-industry landing (413 lines)
+│   │   └── role_match.py              # Role Match page (1,552 lines)
 │   │
 │   ├── styles/
 │   │   ├── __init__.py
