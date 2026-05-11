@@ -20,6 +20,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-022](#mattgpt-022) | Data Quality Cleanup Journey Story | Open | Medium | Action | Mar 2026 |
 | [MATTGPT-039](#mattgpt-039) | Automated Regression Detection (GitHub Actions) | Open | Medium | Action | Apr 29, 2026 |
 | [MATTGPT-040](#mattgpt-040) | Eval Coverage Gaps — Follow-up Queries | Open | Medium | Action | Apr 29, 2026 |
+| [MATTGPT-057](#mattgpt-057) | Architecture documentation alignment | Open | Medium | Action | May 11, 2026 |
 | [MATTGPT-023](#mattgpt-023) | LLM Meta-Commentary on Q20 (Stochastic) | Open | Low | Issue | Apr 2026 |
 | [MATTGPT-024](#mattgpt-024) | Clarify Hybrid Scoring | Open | Low | Refactor | Pre-2026 |
 | [MATTGPT-025](#mattgpt-025) | Add Error Handling Tests | Open | Low | Action | Pre-2026 |
@@ -246,6 +247,23 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Fix:** Build multi-turn eval harness that runs first query, captures response and source state, then runs follow-up query with that state, evaluates final response against ground truth.
 - **Affects:** Eval coverage of "Ask Agy About This" button flow, Related Projects follow-ups, conversational drilling.
 - **Logged:** April 29, 2026
+
+---
+
+### MATTGPT-057
+**Architecture documentation alignment**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Scope:** Align stale architecture descriptions across user-facing pages and design spec with current pipeline.
+- **Items:**
+  - `ui/pages/about_matt.py` — Update "How I Built MattGPT" pseudocode to depict current pipeline (Query → Nonsense Filters → Semantic Router → out_of_scope check → Pinecone → Confidence Gate → LLM). Keep pseudocode form; function names stay illustrative.
+  - `ui/components/how_agy_modal.py` — Expand 3-stage framing to match same pipeline shape.
+  - `mattgpt-design-spec` — Update "System Architecture Flow" and "5-Stage RAG Pipeline" pages.
+  - Factual fixes: drop "Semantic + keyword hybrid scoring" claim (W_KW = 0.0), remove "GitHub Actions" and "CI/CD pipeline" from Tech Stack (MATTGPT-039 still open), verify or drop "6 Industries" stat.
+- **History:** First flagged Feb 3, 2026. Parked. Re-surfaced May 11, 2026.
+- **Logged:** May 11, 2026
 
 ---
 

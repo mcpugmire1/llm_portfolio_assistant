@@ -287,6 +287,23 @@
 
   If a new file is genuinely needed and is transitory, it goes in `docs/working/` with a lifecycle declaration and a defined deletion target. Permanent new docs at the top level require explicit user approval.
 
+  ## Pre-Commit Doc Checklist
+
+  Before committing, answer for each:
+
+  - **ARCHITECTURE.md** — Does this change a pattern, surface, or fact stated here?
+  - **mattgpt-design-spec** (Jekyll repo) — Does this change anything in the user-facing spec?
+  - **how_agy_modal.py** — Does this change anything described in the Ask MattGPT architecture exposition?
+  - **about_matt.py** — Does this change anything described in the "How I Built MattGPT" section?
+
+  If yes to any: the doc-update commit pairs with this code commit. Same session, same push. Not a follow-up.
+
+  Triggers that always require this check:
+  - New file in `services/` or `ui/pages/`
+  - Model, embedding, or vector store change
+  - Pipeline stage added/removed/renamed
+  - Schema change in story corpus, query logger, or any `config_*.json`
+
   ## Working with Claude
   - Start with "what's the minimal fix?" before architectural changes
   - Verify root cause before accepting complex solutions
