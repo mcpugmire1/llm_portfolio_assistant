@@ -1,0 +1,70 @@
+{
+  "_metadata": {
+    "version": "1.0",
+    "last_updated": "2026-05-10",
+    "source_doc": "Matt_Pugmire_Opportunity_Filter_v3",
+    "_note": "Hard rules only. JD-language redlines surface as process probes, not auto-declines. Update this file when geographic/comp stance shifts."
+  },
+
+  "geographic": {
+    "remote_only_action": "decline",
+    "remote_only_rationale": "Values mismatch — Matt holds that distributed teams underperform; in-person collaboration is required for the work to land. This is not a logistics preference, it's a stance on how teams operate.",
+    "open_to_relocation": true,
+    "open_to_travel": true,
+    "preferred_metros": ["Atlanta", "San Francisco Bay Area"],
+    "_note": "Preferred metros are weighting after the filter passes, not gating logic. In-person anywhere is in-scope on the rule."
+  },
+
+  "compensation": {
+    "minimum_base": 250000,
+    "target_base": 350000,
+    "_note": "Director floor / VP target. When salary is unspecified in the JD (most cases), don't auto-decline — verify in screen."
+  },
+
+  "redline_phrases_for_screen_probes": [
+    "move fast",
+    "hit the ground running",
+    "wear many hats",
+    "strong personality needed",
+    "self-starter",
+    "we're like a family",
+    "high-visibility role",
+    "fast-paced environment",
+    "thrives in ambiguity",
+    "comfortable with chaos",
+    "compressed timelines",
+    "with urgency"
+  ],
+
+  "yes_profile_keywords": [
+    "build",
+    "establish",
+    "transform",
+    "modernize",
+    "scale",
+    "capability transfer",
+    "knowledge transfer",
+    "platform",
+    "innovation",
+    "0 to 1",
+    "greenfield",
+    "shared services",
+    "force multiplier"
+  ],
+
+  "no_profile_keywords": [
+    "fix the team",
+    "turn around",
+    "rescue",
+    "absorb",
+    "single point of failure",
+    "hero culture",
+    "human shock absorber"
+  ],
+
+  "engagement_modes": {
+    "apply": "Capability solid, filter passes, no special handling needed. Cold app or warm intro both viable.",
+    "apply_with_caveat": "Capability has a framable gap — typically a required item recoverable through narrative reframing or visible adjacent evidence. Or a notable item to verify in screen before fully committing.",
+    "pass": "Capability fundamentally insufficient, OR filter fails (remote-only / clear comp mismatch), OR no realistic path through despite engine showing Apply."
+  }
+}
