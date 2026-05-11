@@ -174,42 +174,42 @@ llm_portfolio_assistant/
 │   ├── pinecone_service.py         # Pinecone client & vector search
 │   ├── query_logger.py             # 32-column event logger → Google Sheets
 │   ├── rag_service.py              # Semantic search orchestration
-│   ├── semantic_router.py          # ✅ Query routing & validation (11.4 KB)
+│   ├── semantic_router.py          # Query routing & validation
 │   └── story_service.py            # Story retrieval logic (placeholder)
 │
 ├── ui/
 │   ├── components/
 │   │   ├── __init__.py
-│   │   ├── navbar.py                  # Top navigation (80 lines)
-│   │   ├── footer.py                  # Footer (60 lines)
-│   │   ├── story_detail.py            # Story Detail Component - Shared Renderer (329 lines)
-│   │   ├── ask_mattgpt_header.py      # ✨ Unified Ask MattGPT header (47.5 KB)
-│   │   ├── how_agy_modal.py           # ✨ "How Agy Searches" modal (28.6 KB)
-│   │   ├── category_cards.py          # Landing page capability cards (19 KB)
-│   │   ├── hero.py                    # Hero section component (8 KB)
+│   │   ├── navbar.py                  # Top navigation
+│   │   ├── footer.py                  # Footer
+│   │   ├── story_detail.py            # Story Detail Component (shared renderer)
+│   │   ├── ask_mattgpt_header.py      # Unified Ask MattGPT header
+│   │   ├── how_agy_modal.py           # "How Agy Searches" modal
+│   │   ├── category_cards.py          # Landing page capability cards
+│   │   ├── hero.py                    # Hero section component
 │   │   ├── lock_icon.py               # Private-view gate (popover + password, fail-closed)
-│   │   ├── thinking_indicator.py      # ✨ Loading/processing indicator (3 KB)
+│   │   ├── thinking_indicator.py      # Loading/processing indicator
 │   │   └── timeline_view.py           # Era-based timeline for Explore Stories
 │   │
 │   ├── pages/
 │   │   ├── __init__.py
-│   │   ├── home.py                    # Home page (38 lines)
-│   │   ├── explore_stories.py         # Stories browser (1,306 lines)
-│   │   ├── ask_mattgpt/               # ✅ Modular structure (Dec 2025, refactored Jan 2026)
-│   │   │   ├── __init__.py            # Router (1.9 KB)
-│   │   │   ├── landing_view.py        # Landing page UI (9.8 KB)
-│   │   │   ├── conversation_view.py   # Chat conversation UI (15.4 KB)
-│   │   │   ├── conversation_helpers.py # Message rendering (26.9 KB)
-│   │   │   ├── backend_service.py     # RAG pipeline integration (~75 KB → 55 KB after refactor)
-│   │   │   ├── prompts.py             # ✅ NEW: BASE_PROMPT + DELTA architecture (12 KB)
-│   │   │   ├── styles.py              # CSS definitions (39.0 KB)
-│   │   │   ├── story_intelligence.py  # Theme/persona inference (11.6 KB)
-│   │   │   ├── shared_state.py        # Session state management (7.9 KB)
-│   │   │   └── utils.py               # Shared utilities (9.4 KB)
-│   │   ├── about_matt.py              # About page (467 lines)
-│   │   ├── banking_landing.py         # Banking landing (413 lines)
-│   │   ├── cross_industry_landing.py  # Cross-industry landing (413 lines)
-│   │   └── role_match.py              # Role Match page (1,552 lines)
+│   │   ├── home.py                    # Home page
+│   │   ├── explore_stories.py         # Stories browser
+│   │   ├── ask_mattgpt/               # Modular page structure (router + 9 submodules)
+│   │   │   ├── __init__.py            # Router
+│   │   │   ├── landing_view.py        # Landing page UI
+│   │   │   ├── conversation_view.py   # Chat conversation UI
+│   │   │   ├── conversation_helpers.py # Message rendering
+│   │   │   ├── backend_service.py     # RAG pipeline integration
+│   │   │   ├── prompts.py             # BASE_PROMPT + DELTA architecture
+│   │   │   ├── styles.py              # CSS definitions
+│   │   │   ├── story_intelligence.py  # Theme/persona inference
+│   │   │   ├── shared_state.py        # Session state management
+│   │   │   └── utils.py               # Shared utilities
+│   │   ├── about_matt.py              # About page
+│   │   ├── banking_landing.py         # Banking landing
+│   │   ├── cross_industry_landing.py  # Cross-industry landing
+│   │   └── role_match.py              # Role Match page
 │   │
 │   ├── styles/
 │   │   ├── __init__.py
