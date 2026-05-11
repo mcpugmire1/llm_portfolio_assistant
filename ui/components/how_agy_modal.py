@@ -11,9 +11,9 @@ def get_how_agy_flow_html() -> str:
     3-step flow visualization for How Agy Works modal.
     Theme-aware: detects dark mode from parent page.
 
-    Updated Dec 2024 to reflect current architecture:
+    Updated May 2026 to reflect current architecture:
     - Pure semantic search (OpenAI text-embedding-3-small)
-    - 3-stage quality pipeline (rules → semantic router → confidence)
+    - 5-stage pipeline (nonsense filters → semantic router → Pinecone → confidence gate → LLM)
     - Client diversity algorithm
     - Behavioral query specialization for interview prep
     """
@@ -363,11 +363,15 @@ def get_how_agy_flow_html() -> str:
                 <div class="step-content">
                     <!-- Pipeline visualization -->
                     <div class="pipeline-flow">
-                        <div class="pipeline-stage rules">⚡ Quality Filter</div>
+                        <div class="pipeline-stage rules">⚡ Nonsense Filters</div>
                         <span class="pipeline-arrow">→</span>
                         <div class="pipeline-stage router">🎯 Semantic Router</div>
                         <span class="pipeline-arrow">→</span>
+                        <div class="pipeline-stage retrieval">📚 Pinecone Retrieval</div>
+                        <span class="pipeline-arrow">→</span>
                         <div class="pipeline-stage confidence">📊 Confidence Gate</div>
+                        <span class="pipeline-arrow">→</span>
+                        <div class="pipeline-stage generation">💬 LLM Generation</div>
                     </div>
 
                     <div class="search-cards">
@@ -701,13 +705,17 @@ def get_technical_details_html() -> str:
                 <h3>Technical Details</h3>
             </div>
             <div class="tech-content">
-                <!-- 3-Stage Pipeline Visualization -->
+                <!-- 5-Stage Pipeline Visualization -->
                 <div class="pipeline-flow">
-                    <div class="pipeline-stage rules">⚡ Rules Filter</div>
+                    <div class="pipeline-stage rules">⚡ Nonsense Filters</div>
                     <span class="pipeline-arrow">→</span>
                     <div class="pipeline-stage router">🎯 Semantic Router</div>
                     <span class="pipeline-arrow">→</span>
+                    <div class="pipeline-stage retrieval">📚 Pinecone Retrieval</div>
+                    <span class="pipeline-arrow">→</span>
                     <div class="pipeline-stage confidence">📊 Confidence Gate</div>
+                    <span class="pipeline-arrow">→</span>
+                    <div class="pipeline-stage generation">💬 LLM Generation</div>
                 </div>
 
                 <!-- Row 1: Search + Quality -->
@@ -720,19 +728,21 @@ def get_technical_details_html() -> str:
                         <ul>
                             <li><strong>OpenAI text-embedding-3-small</strong></li>
                             <li><strong>Pinecone</strong> vector database</li>
-                            <li>Semantic + keyword hybrid scoring</li>
+                            <li>Semantic scoring</li>
                         </ul>
                     </div>
 
                     <div class="tech-card quality">
                         <div class="tech-card-header">
                             <span>🛡️</span>
-                            <h4>3-Stage Quality Pipeline</h4>
+                            <h4>5-Stage Pipeline</h4>
                         </div>
                         <ul>
-                            <li><strong>Stage 1:</strong> Fast rules-based nonsense detection</li>
+                            <li><strong>Stage 1:</strong> Nonsense filter (fast regex rejection)</li>
                             <li><strong>Stage 2:</strong> Semantic router (intent + out-of-scope detection)</li>
-                            <li><strong>Stage 3:</strong> Confidence scoring & gating</li>
+                            <li><strong>Stage 3:</strong> Pinecone retrieval (with entity-aware pinning)</li>
+                            <li><strong>Stage 4:</strong> Confidence gating</li>
+                            <li><strong>Stage 5:</strong> LLM generation (GPT-4o with XML context isolation)</li>
                         </ul>
                     </div>
                 </div>
@@ -782,8 +792,8 @@ def get_technical_details_html() -> str:
                     </div>
                     <div class="stat-divider"></div>
                     <div class="stat">
-                        <div class="stat-value">3</div>
-                        <div class="stat-label">Quality Stages</div>
+                        <div class="stat-value">5</div>
+                        <div class="stat-label">Pipeline Stages</div>
                     </div>
                 </div>
 

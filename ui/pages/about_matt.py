@@ -1006,7 +1006,7 @@ def render_about_matt():
         <div class="tech-item"><div style="font-size: 28px;">🤖</div><div style="font-size: 11px; font-weight: 600;">OpenAI GPT-4o</div></div>
         <div class="tech-item"><div style="font-size: 28px;">📌</div><div style="font-size: 11px; font-weight: 600;">Pinecone</div></div>
         <div class="tech-item"><div style="font-size: 28px;">🧠</div><div style="font-size: 11px; font-weight: 600;">text-embedding-3-small</div></div>
-        <div class="tech-item"><div style="font-size: 28px;">🔀</div><div style="font-size: 11px; font-weight: 600;">GitHub Actions</div></div>
+        <div class="tech-item"><div style="font-size: 28px;">🔀</div><div style="font-size: 11px; font-weight: 600;">GitHub Webhook</div></div>
     </div>
 </div>
     """,
@@ -1051,44 +1051,35 @@ def render_about_matt():
         </span>
     </div>
 <div class="code-block"><span class="code-comment"># 5-Stage RAG Pipeline</span>
-<span class="code-comment"># Stage 1: Rules-based nonsense detection</span>
-def check_rules_filter(query: str) -&gt; bool:
-    <span class="code-string">"Fast rejection of non-portfolio queries (regex patterns)"</span>
-    return not matches_blocked_patterns(query)
+<span class="code-comment"># Stage 1: Nonsense filter (regex)</span>
+def is_nonsense(query: str) -&gt; bool:
+    <span class="code-string">"Fast regex rejection of clearly off-topic queries"</span>
+    return matches_blocked_patterns(query)
 
-<span class="code-comment"># Stage 2: Semantic router intent classification</span>
-def classify_intent(query: str) -&gt; tuple:
-    <span class="code-string">"Embedding-based intent routing with confidence scoring"</span>
-    return router.route(query)  <span class="code-comment"># → (intent_family, score)</span>
+<span class="code-comment"># Stage 2: Semantic router (embedding-based, no LLM call)</span>
+def route(query: str) -&gt; tuple[str, float]:
+    <span class="code-string">"Embedding similarity → intent family + score; flags out_of_scope"</span>
+    return router.classify(query)  <span class="code-comment"># → (intent_family, score)</span>
 
-<span class="code-comment"># Stage 3: Confidence gating on Pinecone results</span>
-def confidence_gate(results: list) -&gt; list:
-    <span class="code-string">"Only surface results above semantic confidence threshold"</span>
-    return [r for r in results if r.pc_score &gt;= CONFIDENCE_HIGH]
-
-<span class="code-comment"># Stage 4: Entity detection &amp; pinning</span>
-def detect_and_pin_entity(query: str, results: list) -&gt; list:
-    <span class="code-string">"Detect client/division entities; pin matching story to #1"</span>
-    entity = extract_entity(query)  <span class="code-comment"># NER on known clients</span>
+<span class="code-comment"># Stage 3: Pinecone retrieval with entity-aware pinning</span>
+def retrieve(query: str) -&gt; list:
+    <span class="code-string">"Vector search; pin a known-entity story to #1 when detected"</span>
+    results = pinecone.search(embed(query))
+    entity = detect_entity(query)  <span class="code-comment"># NER on known clients/divisions</span>
     if entity:
-        pinned = find_best_match(results, entity)
-        return [pinned] + [r for r in results if r != pinned]
+        results = pin_to_top(results, entity)
     return results
 
-<span class="code-comment"># Stage 5: Intent-aware ranking</span>
-def rank_by_intent(query_intent: str, results: list) -&gt; list:
-    <span class="code-string">"Narrative queries trust Pinecone; client queries add diversity"</span>
-    if query_intent == <span class="code-string">"narrative"</span>:
-        return sorted(results, key=lambda s: s.pc_score, reverse=True)
-    return diversify_by_client(results)
+<span class="code-comment"># Stage 4: Confidence gating</span>
+def confidence_gate(results: list) -&gt; list:
+    <span class="code-string">"Drop low-similarity hits below the semantic confidence floor"</span>
+    return [r for r in results if r.pc_score &gt;= CONFIDENCE_HIGH]
 
-<span class="code-comment"># XML Context Isolation for GPT-4o generation</span>
-def build_context(ranked_stories: list) -&gt; str:
-    <span class="code-string">"Wrap stories in XML tags to prevent cross-story bleed"</span>
-    ctx = [f<span class="code-string">"&lt;primary_story&gt;\n{ranked_stories[0]}\n&lt;/primary_story&gt;"</span>]
-    for i, s in enumerate(ranked_stories[1:], 2):
-        ctx.append(f<span class="code-string">"&lt;supporting_story index='{i}'&gt;\n{s}\n&lt;/supporting_story&gt;"</span>)
-    return <span class="code-string">"\n"</span>.join(ctx)</div>
+<span class="code-comment"># Stage 5: LLM generation with XML context isolation</span>
+def generate(stories: list, intent_family: str) -&gt; str:
+    <span class="code-string">"GPT-4o reads &lt;primary_story&gt;/&lt;supporting_story&gt; tagged context"</span>
+    ctx = build_xml_context(stories)
+    return gpt_4o.complete(SYSTEM_PROMPT + ctx)</div>
 </div>
     """,
         unsafe_allow_html=True,
@@ -1113,17 +1104,26 @@ def build_context(ranked_stories: list) -&gt; str:
             <li><strong>Model:</strong> OpenAI text-embedding-3-small (1536 dim)</li>
             <li><strong>Chunking:</strong> Full STAR story per vector</li>
             <li><strong>Metadata:</strong> Category, client, themes indexed</li>
-            <li><strong>Refresh:</strong> Re-index via CI/CD pipeline</li>
+            <li><strong>Refresh:</strong> Re-index via data ingestion pipeline (Excel → JSONL → enrich → embed → Pinecone)</li>
         </ul>
     </div>
     <div class="detail-card">
         <h4>🔍 5-Stage RAG Pipeline</h4>
         <ul>
-            <li><strong>Stage 1:</strong> Rules-based nonsense detection</li>
-            <li><strong>Stage 2:</strong> Semantic router intent classification</li>
-            <li><strong>Stage 3:</strong> Confidence gating (threshold: 0.25)</li>
-            <li><strong>Stage 4:</strong> Entity detection & story pinning</li>
-            <li><strong>Stage 5:</strong> Intent-aware ranking (narrative vs client)</li>
+            <li><strong>Stage 1:</strong> Nonsense filter (fast regex rejection)</li>
+            <li><strong>Stage 2:</strong> Semantic router (intent + out-of-scope detection)</li>
+            <li><strong>Stage 3:</strong> Pinecone retrieval with entity-aware pinning</li>
+            <li><strong>Stage 4:</strong> Confidence gating (threshold: 0.25)</li>
+            <li><strong>Stage 5:</strong> LLM generation (GPT-4o with XML context isolation)</li>
+        </ul>
+    </div>
+    <div class="detail-card">
+        <h4>🔁 CI/CD Pipeline</h4>
+        <ul>
+            <li><strong>Trigger:</strong> Git push to main</li>
+            <li><strong>Mechanism:</strong> GitHub webhook → Streamlit Cloud</li>
+            <li><strong>Action:</strong> Auto-rebuild and deploy</li>
+            <li><strong>Coverage:</strong> Code only (data refresh is the separate ingestion pipeline)</li>
         </ul>
     </div>
     <div class="detail-card">
