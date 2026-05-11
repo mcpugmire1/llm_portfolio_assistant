@@ -73,8 +73,8 @@ Documented layout spacing rule in CLAUDE.md.
 
 ### Analytics — Logger Schema Extension (MATTGPT-013 Complete)
 
-**Apr — 30-column query logger schema shipped to production** — `a3b3d84` and subsequent commits
-Expanded `services/query_logger.py` from initial implementation to full 30-column schema. Captures event types (query, feedback, redirect, role_match_assessment, role_match_chip_click, role_match_action), query metadata (intent family, confidence, result count), user/session signals (user-agent, screen width, timezone, referrer), UTM attribution (source, medium, campaign, content, term), Role Match outcomes (role title, company, JD format, required/preferred/strong/partial/gap counts, session ID, story title, client), and feedback ratings. Write-only to Google Sheets. Downstream analytics work tracked separately (MATTGPT-045 dashboard, MATTGPT-046 latency, MATTGPT-047 cost tracking).
+**Apr — 32-column query logger schema shipped to production** — `a3b3d84` and subsequent commits
+Expanded `services/query_logger.py` from initial implementation to full 32-column schema. Captures event types (query, feedback, redirect, role_match_assessment, role_match_chip_click, role_match_action), query metadata (intent family, confidence, result count), user/session signals (user-agent, screen width, timezone, referrer), UTM attribution (source, medium, campaign, content, term), Role Match outcomes (role title, company, JD format, required/preferred/strong/partial/gap counts, session ID, story title, client), and feedback ratings. Write-only to Google Sheets. Downstream analytics work tracked separately (MATTGPT-045 dashboard, MATTGPT-046 latency, MATTGPT-047 cost tracking).
 
 ### Other April Work
 

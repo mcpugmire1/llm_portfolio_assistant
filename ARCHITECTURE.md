@@ -172,7 +172,7 @@ llm_portfolio_assistant/
 │   ├── __init__.py
 │   ├── jd_assessor.py              # Role Match engine (extraction → retrieval → assessment + compute_recommendation())
 │   ├── pinecone_service.py         # Pinecone client & vector search
-│   ├── query_logger.py             # 30-column event logger → Google Sheets
+│   ├── query_logger.py             # 32-column event logger → Google Sheets
 │   ├── rag_service.py              # Semantic search orchestration
 │   ├── semantic_router.py          # ✅ Query routing & validation (11.4 KB)
 │   └── story_service.py            # Story retrieval logic (placeholder)
