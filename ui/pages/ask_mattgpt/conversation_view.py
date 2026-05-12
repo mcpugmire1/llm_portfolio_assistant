@@ -120,8 +120,8 @@ def render_conversation_view(stories: list[dict]):
     # Modal (if open)
     if st.session_state.get("show_how_modal", False):
         st.markdown(render_modal_wrapper_start(), unsafe_allow_html=True)
-        components.html(get_how_agy_flow_html(), height=1160)
-        components.html(get_technical_details_html(), height=740)
+        components.html(get_how_agy_flow_html(), height=1180)
+        components.html(get_technical_details_html(), height=850)
         st.markdown(render_modal_wrapper_end(), unsafe_allow_html=True)
         # Remove: render_modal_close_wiring_js()
 

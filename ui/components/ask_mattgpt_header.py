@@ -246,30 +246,15 @@ def get_header_css() -> str:
     }
 
     /* ============================================================================
-       MODAL - Sexy gradient transition from header
+       MODAL - Clean container, no header bleed
        ============================================================================ */
 
     .how-agy-modal-wrapper {
-        background: linear-gradient(180deg, #764ba2 0%, #5a3d7a 8%, #2d2d44 25%, var(--bg-card, #ffffff) 100%);
+        background: var(--bg-card, #ffffff);
         margin: 0 !important;
         padding: 0 20px 20px 20px;
         position: relative;
         overflow: hidden;
-    }
-
-    /* Subtle animated gradient overlay */
-    .how-agy-modal-wrapper::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 150px;
-        background: linear-gradient(135deg,
-            rgba(102, 126, 234, 0.1) 0%,
-            rgba(118, 75, 162, 0.15) 50%,
-            transparent 100%);
-        pointer-events: none;
     }
 
     .how-agy-modal-container {
@@ -374,7 +359,7 @@ def get_header_css() -> str:
     /* Dark mode modal adjustments */
     body.dark-theme .how-agy-modal-wrapper,
     [data-theme="dark"] .how-agy-modal-wrapper {
-        background: linear-gradient(180deg, #764ba2 0%, #4a3660 8%, #1a1a2e 25%, var(--bg-card, #1f2937) 100%);
+        background: var(--bg-card, #1f2937);
     }
 
     body.dark-theme .how-agy-modal-container,

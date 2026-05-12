@@ -30,16 +30,21 @@ def get_how_agy_flow_html() -> str:
                 --modal-text-muted: #6B7280;
                 --modal-purple-text: #6B21A8;
                 --modal-purple-border: #E9D5FF;
+                --modal-blue-bg: #DBEAFE;
                 --modal-blue-text: #1E40AF;
                 --modal-blue-border: #BFDBFE;
                 --modal-green-text: #065F46;
                 --modal-green-border: #A7F3D0;
                 --modal-orange-text: #92400E;
                 --modal-orange-border: #FDE68A;
+                --modal-pink-bg: #FCE7F3;
+                --modal-pink-text: #9D174D;
+                --modal-pink-border: #FBCFE8;
                 --modal-pill-bg: #EDE9FE;
                 --modal-pill-text: #7C3AED;
                 --modal-pill-border: #DDD6FE;
                 --modal-arrow: #A78BFA;
+                --modal-accent-purple: #8B5CF6;
             }
 
             /* Dark theme overrides */
@@ -52,16 +57,21 @@ def get_how_agy_flow_html() -> str:
                 --modal-text-muted: #9ca3af;
                 --modal-purple-text: #c4b5fd;
                 --modal-purple-border: #4c1d95;
+                --modal-blue-bg: #1e3a8a;
                 --modal-blue-text: #93c5fd;
                 --modal-blue-border: #1e40af;
                 --modal-green-text: #6ee7b7;
                 --modal-green-border: #065f46;
                 --modal-orange-text: #fcd34d;
                 --modal-orange-border: #92400e;
+                --modal-pink-bg: #831843;
+                --modal-pink-text: #f9a8d4;
+                --modal-pink-border: #9d174d;
                 --modal-pill-bg: #3b2e5a;
                 --modal-pill-text: #c4b5fd;
                 --modal-pill-border: #5b4b7a;
                 --modal-arrow: #a78bfa;
+                --modal-accent-purple: #a78bfa;
             }
 
             #flow-wrapper {
@@ -131,66 +141,43 @@ def get_how_agy_flow_html() -> str:
                 font-weight: 300;
             }
 
-            /* Pipeline visualization */
+            /* Pipeline visualization — lightweight flow/navigation.
+               Equal-weight pills; the cards below carry hierarchy and emphasis.
+               Container chrome (bg + border + padding) matches the tech section's
+               .pipeline-flow so pills get the same visual framing. */
             .pipeline-flow {
+                background: var(--modal-card-bg);
+                border: 2px solid var(--modal-border);
+                border-radius: 12px;
+                padding: 16px 24px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                gap: 8px;
+                gap: 6px;
                 margin-bottom: 20px;
                 flex-wrap: wrap;
             }
 
+            /* All pipeline pills share the same muted style — equal weight, no rainbow.
+               The cards below carry the stage color via their borders. */
             .pipeline-stage {
                 display: flex;
                 align-items: center;
                 gap: 6px;
-                padding: 10px 16px;
-                border-radius: 24px;
+                padding: 7px 13px;
+                border-radius: 22px;
                 font-size: 13px;
                 font-weight: 600;
-            }
-
-            .pipeline-stage.rules {
-                background: #FEF3C7;
-                color: #92400E;
-                border: 2px solid #FDE68A;
-            }
-
-            .pipeline-stage.router {
-                background: #D1FAE5;
-                color: #065F46;
-                border: 2px solid #A7F3D0;
-            }
-
-            .pipeline-stage.confidence {
-                background: #EDE9FE;
-                color: #5B21B6;
-                border: 2px solid #DDD6FE;
-            }
-
-            .dark-theme .pipeline-stage.rules {
-                background: #78350f;
-                color: #fef3c7;
-                border-color: #92400e;
-            }
-
-            .dark-theme .pipeline-stage.router {
-                background: #064e3b;
-                color: #d1fae5;
-                border-color: #065f46;
-            }
-
-            .dark-theme .pipeline-stage.confidence {
-                background: #4c1d95;
-                color: #ede9fe;
-                border-color: #5b21b6;
+                background: var(--modal-card-bg);
+                color: var(--modal-text-secondary);
+                border: 1px solid var(--modal-border);
             }
 
             .pipeline-arrow {
                 color: var(--modal-text-muted);
-                font-size: 16px;
-                font-weight: bold;
+                font-size: 12px;
+                font-weight: 400;
+                opacity: 0.5;
             }
 
             .search-cards {
@@ -204,42 +191,64 @@ def get_how_agy_flow_html() -> str:
                 background: var(--modal-card-bg);
                 padding: 20px;
                 border-radius: 10px;
+                border: 1px solid var(--modal-border);
                 box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             }
 
-            .search-card.semantic {
-                border: 2px solid var(--modal-purple-border);
+            /* Hero card styling — sizing + typography (border defined after
+               stage-color rules below, so the purple override wins the cascade) */
+            .search-card.hero {
+                padding: 26px 24px;
             }
 
-            .search-card.behavioral {
-                border: 2px solid var(--modal-green-border);
+            .search-card.hero .card-title {
+                font-size: 17px;
+                font-weight: 800;
+                margin-bottom: 10px;
             }
 
-            .search-card.diversity {
-                border: 2px solid var(--modal-orange-border);
+            .search-card.hero .card-desc {
+                font-size: 14px;
+            }
+
+            /* Guardrail cards (filter + intent + confidence) — supporting, visually quieter */
+            .search-card.guardrail {
+                padding: 14px 16px;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+                opacity: 0.88;
+            }
+
+            .search-card.guardrail .card-title {
+                font-size: 13px;
+                font-weight: 600;
+                margin-bottom: 6px;
+            }
+
+            .search-card.guardrail .card-desc {
+                font-size: 12px;
+            }
+
+            /* Hero override — brand purple border + matching shadow.
+               Higher specificity (.search-card.hero) beats the base .search-card
+               border, so hero gets purple emphasis; all other cards keep
+               the uniform 1px modal-border. */
+            .search-card.hero {
+                border: 2px solid var(--modal-accent-purple);
+                box-shadow: 0 6px 18px rgba(139, 92, 246, 0.15);
             }
 
             .card-title {
                 font-weight: 700;
                 font-size: 15px;
                 margin-bottom: 8px;
+                color: var(--modal-text-primary);
             }
-
-            .card-title.semantic { color: #7C3AED; }
-            .card-title.behavioral { color: #059669; }
-            .card-title.diversity { color: #D97706; }
-
-            .dark-theme .card-title.behavioral { color: #6ee7b7; }
-            .dark-theme .card-title.diversity { color: #fbbf24; }
 
             .card-desc {
                 font-size: 13px;
                 line-height: 1.5;
+                color: var(--modal-text-secondary);
             }
-
-            .card-desc.semantic { color: var(--modal-purple-text); }
-            .card-desc.behavioral { color: var(--modal-green-text); }
-            .card-desc.diversity { color: var(--modal-orange-text); }
 
             .result-wrapper {
                 background: var(--modal-card-bg);
@@ -247,6 +256,8 @@ def get_how_agy_flow_html() -> str:
                 border-radius: 12px;
                 padding: 24px;
                 box-shadow: 0 8px 20px rgba(139, 92, 246, 0.25);
+                box-sizing: border-box;
+                max-width: 100%;
             }
 
             .result-card {
@@ -256,6 +267,8 @@ def get_how_agy_flow_html() -> str:
                 border-radius: 10px;
                 margin-bottom: 20px;
                 box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+                box-sizing: border-box;
+                max-width: 100%;
             }
 
             .result-title {
@@ -276,14 +289,17 @@ def get_how_agy_flow_html() -> str:
                 flex-wrap: wrap;
             }
 
+            /* Result pills (Step 3) — quieter than pipeline pills so the pipeline
+               section reads as the hero. Borderless, lighter weight; colored fill
+               + colored text still carry the categorization signal. */
             .pill {
                 background: var(--modal-pill-bg);
                 color: var(--modal-pill-text);
-                padding: 8px 16px;
+                padding: 7px 13px;
                 border-radius: 20px;
                 font-size: 13px;
-                font-weight: 700;
-                border: 2px solid var(--modal-pill-border);
+                font-weight: 500;
+                border: none;
             }
 
             .pill.blue {
@@ -318,22 +334,24 @@ def get_how_agy_flow_html() -> str:
                 margin-bottom: 0;
             }
 
+            /* Confidence badge — same demoted treatment as .pill (borderless, 500). */
             .confidence-badge {
                 display: inline-flex;
                 align-items: center;
                 gap: 6px;
                 background: #D1FAE5;
                 color: #065F46;
-                padding: 6px 12px;
-                border-radius: 16px;
-                font-size: 12px;
-                font-weight: 600;
-                margin-top: 12px;
+                padding: 7px 13px;
+                border-radius: 20px;
+                font-size: 13px;
+                font-weight: 500;
+                border: none;
             }
 
             .dark-theme .confidence-badge {
                 background: #064e3b;
                 color: #6ee7b7;
+                border-color: #065f46;
             }
         </style>
 
@@ -361,32 +379,51 @@ def get_how_agy_flow_html() -> str:
                     <h3 class="step-title">Agy Searches</h3>
                 </div>
                 <div class="step-content">
-                    <!-- Pipeline visualization -->
+                    <!-- Pipeline visualization. Pills are lightweight navigation only —
+                         equal weight, muted. The cards below carry the hierarchy
+                         (hero stages 3 + 5, guardrails 1 / 2 / 4). -->
                     <div class="pipeline-flow">
-                        <div class="pipeline-stage rules">⚡ Nonsense Filters</div>
+                        <div class="pipeline-stage rules">Filters noisy input</div>
                         <span class="pipeline-arrow">→</span>
-                        <div class="pipeline-stage router">🎯 Semantic Router</div>
+                        <div class="pipeline-stage router">Detects interview intent</div>
                         <span class="pipeline-arrow">→</span>
-                        <div class="pipeline-stage retrieval">📚 Pinecone Retrieval</div>
+                        <div class="pipeline-stage retrieval">Retrieves stories</div>
                         <span class="pipeline-arrow">→</span>
-                        <div class="pipeline-stage confidence">📊 Confidence Gate</div>
+                        <div class="pipeline-stage confidence">Refuses weak matches</div>
                         <span class="pipeline-arrow">→</span>
-                        <div class="pipeline-stage generation">💬 LLM Generation</div>
+                        <div class="pipeline-stage generation">Synthesizes response</div>
                     </div>
 
+                    <!-- 5 callouts, 1:1 with pipeline stages above.
+                         Each callout's border color matches its corresponding
+                         pipeline pill so the linkage is visual, not positional. -->
+                    <!-- Callout cards carry the hierarchy: hero (3 + 5) vs guardrail (1, 2, 4).
+                         Titles match the pipeline pill labels above verbatim. -->
                     <div class="search-cards">
-                        <div class="search-card semantic">
-                            <div class="card-title semantic">🧠 Semantic Search</div>
-                            <div class="card-desc semantic">Finds stories by meaning using AI embeddings, not just keyword matching</div>
+                        <div class="search-card rules guardrail">
+                            <div class="card-title">Filters irrelevant/noisy input</div>
+                            <div class="card-desc">Homework requests, gibberish, and off-domain queries get bounced before they reach the model — no wasted cost, no off-topic answers</div>
                         </div>
-                        <div class="search-card behavioral">
-                            <div class="card-title behavioral">🎤 Interview Mode</div>
-                            <div class="card-desc behavioral">Recognizes behavioral questions and surfaces leadership & soft-skill stories</div>
+                        <div class="search-card router guardrail">
+                            <div class="card-title">Detects interview intent</div>
+                            <div class="card-desc">Recognizes behavioral, technical, leadership, and background questions — and adapts the response style to fit hiring context</div>
                         </div>
                     </div>
-                    <div class="search-card diversity" style="margin-top: 0;">
-                        <div class="card-title diversity">🎯 Best Match</div>
-                        <div class="card-desc diversity">Prioritizes the best match for your question type—whether it's a specific client story or a career theme</div>
+                    <!-- Card 3 alone: hero treatment, full width -->
+                    <div class="search-card retrieval hero" style="margin-bottom: 16px;">
+                        <div class="card-title">Retrieves grounded experience stories</div>
+                        <div class="card-desc">Pulls from Matt's actual 20+ years of work — never invents examples, never paraphrases someone else's resume</div>
+                    </div>
+                    <!-- Row 3: Cards 4 + 5 share a row (matches row 1 pattern) -->
+                    <div class="search-cards">
+                        <div class="search-card confidence guardrail">
+                            <div class="card-title">Refuses weak matches / avoids fabrication</div>
+                            <div class="card-desc">If the closest story isn't a strong fit, says "I don't know" instead of bluffing a stretch answer</div>
+                        </div>
+                        <div class="search-card generation guardrail">
+                            <div class="card-title">Synthesizes a tailored interview response</div>
+                            <div class="card-desc">Structures the answer for hiring decisions — situation, action, outcome — grounded in the retrieved stories, with distinctive phrases preserved verbatim</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -410,9 +447,7 @@ def get_how_agy_flow_html() -> str:
                             <span class="pill">Stakeholder Management</span>
                             <span class="pill blue">Financial Services</span>
                             <span class="pill green">Leadership</span>
-                        </div>
-                        <div class="confidence-badge">
-                            <span>✓</span> High confidence match
+                            <span class="confidence-badge"><span>✓</span> High confidence match</span>
                         </div>
                     </div>
                 </div>
@@ -447,8 +482,12 @@ def get_how_agy_flow_html() -> str:
             // Apply on load
             applyTheme();
 
-            // Re-check periodically (for dynamic theme switches)
-            setInterval(applyTheme, 1000);
+            // Watch for theme class changes on parent body — no polling.
+            try {
+                new MutationObserver(applyTheme).observe(window.parent.document.body, {
+                    attributes: true, attributeFilter: ['class', 'data-theme']
+                });
+            } catch(e) { setTimeout(applyTheme, 800); }
         })();
     </script>
     """
@@ -459,9 +498,9 @@ def get_technical_details_html() -> str:
     Technical details section for How Agy Works modal.
     Theme-aware: detects dark mode from parent page.
 
-    Updated Dec 2024 to reflect current architecture:
+    Updated May 2026 to reflect current architecture:
     - OpenAI text-embedding-3-small embeddings
-    - 3-stage quality filtering pipeline (rules → semantic router → confidence)
+    - 5-stage pipeline (nonsense filters → semantic router → Pinecone → confidence gate → LLM)
     - Client diversity algorithm for varied results
     - Behavioral query specialization for interview prep
     """
@@ -477,14 +516,19 @@ def get_technical_details_html() -> str:
                 --modal-text-muted: #6B7280;
                 --modal-purple-text: #6B21A8;
                 --modal-purple-border: #E9D5FF;
+                --modal-blue-bg: #DBEAFE;
                 --modal-blue-text: #1E40AF;
                 --modal-blue-border: #BFDBFE;
                 --modal-green-text: #065F46;
                 --modal-green-border: #A7F3D0;
                 --modal-orange-text: #92400E;
                 --modal-orange-border: #FDE68A;
+                --modal-pink-bg: #FCE7F3;
+                --modal-pink-text: #9D174D;
+                --modal-pink-border: #FBCFE8;
                 --modal-stat-color: #8B5CF6;
                 --modal-divider: #E5E7EB;
+                --modal-accent-purple: #8B5CF6;
             }
 
             .dark-theme {
@@ -504,6 +548,7 @@ def get_technical_details_html() -> str:
                 --modal-orange-border: #78350f;
                 --modal-stat-color: #a78bfa;
                 --modal-divider: #374151;
+                --modal-accent-purple: #a78bfa;
             }
 
             #tech-wrapper {
@@ -544,23 +589,49 @@ def get_technical_details_html() -> str:
                 background: var(--modal-card-bg);
                 padding: 20px;
                 border-radius: 12px;
+                border: 1px solid var(--modal-border);
                 box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             }
 
-            .tech-card.search {
-                border: 2px solid var(--modal-purple-border);
+            /* Hero card styling — sizing + typography (border defined after
+               stage-color rules below, so the purple override wins the cascade) */
+            .tech-card.hero {
+                padding: 26px 24px;
             }
 
-            .tech-card.quality {
-                border: 2px solid var(--modal-green-border);
+            .tech-card.hero .tech-card-header h4 {
+                font-size: 18px;
+                font-weight: 800;
             }
 
-            .tech-card.diversity {
-                border: 2px solid var(--modal-orange-border);
+            .tech-card.hero ul {
+                font-size: 14px;
             }
 
-            .tech-card.data {
-                border: 2px solid var(--modal-blue-border);
+            /* Guardrail cards (filter + intent + confidence) — supporting, visually quieter */
+            .tech-card.guardrail {
+                padding: 14px 16px;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+                opacity: 0.88;
+            }
+
+            .tech-card.guardrail .tech-card-header h4 {
+                font-size: 14px;
+                font-weight: 600;
+            }
+
+            .tech-card.guardrail ul {
+                font-size: 12px;
+                line-height: 1.6;
+            }
+
+            /* Hero override — brand purple border + matching shadow.
+               Higher specificity (.tech-card.hero) beats the base .tech-card
+               border, so hero gets purple emphasis; all other cards keep
+               the uniform 1px modal-border. */
+            .tech-card.hero {
+                border: 2px solid var(--modal-accent-purple);
+                box-shadow: 0 6px 18px rgba(139, 92, 246, 0.15);
             }
 
             .tech-card-header {
@@ -578,15 +649,8 @@ def get_technical_details_html() -> str:
                 margin: 0;
                 font-size: 16px;
                 font-weight: 700;
+                color: var(--modal-text-primary);
             }
-
-            .tech-card.search h4 { color: #7C3AED; }
-            .tech-card.quality h4 { color: #059669; }
-            .tech-card.diversity h4 { color: #D97706; }
-            .tech-card.data h4 { color: #2563EB; }
-
-            .dark-theme .tech-card.quality h4 { color: #6ee7b7; }
-            .dark-theme .tech-card.diversity h4 { color: #fbbf24; }
 
             .tech-card ul {
                 margin: 0;
@@ -596,10 +660,7 @@ def get_technical_details_html() -> str:
                 font-size: 13px;
             }
 
-            .tech-card.search strong { color: var(--modal-purple-text); }
-            .tech-card.quality strong { color: var(--modal-green-text); }
-            .tech-card.diversity strong { color: var(--modal-orange-text); }
-            .tech-card.data strong { color: var(--modal-blue-text); }
+            .tech-card strong { color: var(--modal-text-primary); }
 
             .pipeline-flow {
                 background: var(--modal-card-bg);
@@ -610,59 +671,30 @@ def get_technical_details_html() -> str:
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                gap: 12px;
+                gap: 8px;
                 flex-wrap: wrap;
             }
 
+            /* All pipeline pills share the same muted style — equal weight, no rainbow.
+               The cards below carry the stage color via their borders.
+               Matches the flow section's .pipeline-stage exactly. */
             .pipeline-stage {
                 display: flex;
                 align-items: center;
-                gap: 8px;
-                padding: 8px 14px;
-                border-radius: 20px;
+                gap: 6px;
+                padding: 7px 13px;
+                border-radius: 22px;
                 font-size: 13px;
                 font-weight: 600;
-            }
-
-            .pipeline-stage.rules {
-                background: #FEF3C7;
-                color: #92400E;
-                border: 1px solid #FDE68A;
-            }
-
-            .pipeline-stage.router {
-                background: #D1FAE5;
-                color: #065F46;
-                border: 1px solid #A7F3D0;
-            }
-
-            .pipeline-stage.confidence {
-                background: #EDE9FE;
-                color: #5B21B6;
-                border: 1px solid #DDD6FE;
-            }
-
-            .dark-theme .pipeline-stage.rules {
-                background: #78350f;
-                color: #fef3c7;
-                border-color: #92400e;
-            }
-
-            .dark-theme .pipeline-stage.router {
-                background: #064e3b;
-                color: #d1fae5;
-                border-color: #065f46;
-            }
-
-            .dark-theme .pipeline-stage.confidence {
-                background: #4c1d95;
-                color: #ede9fe;
-                border-color: #5b21b6;
+                background: var(--modal-card-bg);
+                color: var(--modal-text-secondary);
+                border: 1px solid var(--modal-border);
             }
 
             .pipeline-arrow {
                 color: var(--modal-text-muted);
-                font-size: 18px;
+                font-size: 12px;
+                opacity: 0.5;
             }
 
             .stats-bar {
@@ -705,71 +737,85 @@ def get_technical_details_html() -> str:
                 <h3>Technical Details</h3>
             </div>
             <div class="tech-content">
-                <!-- 5-Stage Pipeline Visualization -->
+                <!-- 5-Stage Pipeline Visualization. Pills are lightweight navigation only —
+                     equal weight, muted. The cards below carry the hierarchy. -->
                 <div class="pipeline-flow">
-                    <div class="pipeline-stage rules">⚡ Nonsense Filters</div>
+                    <div class="pipeline-stage rules">Filters noisy input</div>
                     <span class="pipeline-arrow">→</span>
-                    <div class="pipeline-stage router">🎯 Semantic Router</div>
+                    <div class="pipeline-stage router">Detects interview intent</div>
                     <span class="pipeline-arrow">→</span>
-                    <div class="pipeline-stage retrieval">📚 Pinecone Retrieval</div>
+                    <div class="pipeline-stage retrieval">Retrieves stories</div>
                     <span class="pipeline-arrow">→</span>
-                    <div class="pipeline-stage confidence">📊 Confidence Gate</div>
+                    <div class="pipeline-stage confidence">Refuses weak matches</div>
                     <span class="pipeline-arrow">→</span>
-                    <div class="pipeline-stage generation">💬 LLM Generation</div>
+                    <div class="pipeline-stage generation">Synthesizes response</div>
                 </div>
 
-                <!-- Row 1: Search + Quality -->
+                <!-- 5 tech-cards, 1:1 with pipeline stages above.
+                     Each card's border color matches its corresponding pipeline pill;
+                     body text stays neutral (no stage-colored headings or strong tags).
+
+                     Hierarchy: hero (3 + 5) vs guardrail (1, 2, 4). -->
+
+                <!-- Row 1: Guardrails (Filters + Detects intent) -->
                 <div class="tech-cards">
-                    <div class="tech-card search">
+                    <div class="tech-card rules guardrail">
                         <div class="tech-card-header">
-                            <span>🔍</span>
-                            <h4>Semantic Search</h4>
+                            <h4>Filters irrelevant/noisy input</h4>
                         </div>
                         <ul>
-                            <li><strong>OpenAI text-embedding-3-small</strong></li>
-                            <li><strong>Pinecone</strong> vector database</li>
-                            <li>Semantic scoring</li>
+                            <li><strong>Regex-based</strong> nonsense rejection (sub-millisecond)</li>
+                            <li>Catches homework asks, gibberish, off-domain queries</li>
+                            <li><strong>No LLM cost</strong> for rejected queries</li>
                         </ul>
                     </div>
 
-                    <div class="tech-card quality">
+                    <div class="tech-card router guardrail">
                         <div class="tech-card-header">
-                            <span>🛡️</span>
-                            <h4>5-Stage Pipeline</h4>
+                            <h4>Detects interview intent</h4>
                         </div>
                         <ul>
-                            <li><strong>Stage 1:</strong> Nonsense filter (fast regex rejection)</li>
-                            <li><strong>Stage 2:</strong> Semantic router (intent + out-of-scope detection)</li>
-                            <li><strong>Stage 3:</strong> Pinecone retrieval (with entity-aware pinning)</li>
-                            <li><strong>Stage 4:</strong> Confidence gating</li>
-                            <li><strong>Stage 5:</strong> LLM generation (GPT-4o with XML context isolation)</li>
+                            <li><strong>Semantic router</strong> classifies into 15 intent families</li>
+                            <li>Background, behavioral, technical, leadership, synthesis, etc.</li>
+                            <li>Detects <strong>out-of-scope</strong> and personal queries before retrieval</li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- Row 2: Diversity + Data -->
+                <!-- HERO: Retrieves grounded stories (full width) -->
                 <div class="tech-cards">
-                    <div class="tech-card diversity">
+                    <div class="tech-card retrieval hero">
                         <div class="tech-card-header">
-                            <span>🎯</span>
-                            <h4>Smart Ranking</h4>
+                            <h4>Retrieves grounded experience stories</h4>
                         </div>
                         <ul>
-                            <li><strong>Best semantic match</strong> always surfaces first</li>
-                            <li>Context-aware: requested story + related projects</li>
-                            <li>Client variety for broad queries</li>
+                            <li><strong>Pinecone</strong> top-K vector search</li>
+                            <li><strong>OpenAI text-embedding-3-small</strong> (1536 dimensions)</li>
+                            <li><strong>Entity-aware pinning</strong> for known clients, employers, divisions</li>
                         </ul>
                     </div>
+                </div>
 
-                    <div class="tech-card data">
+                <!-- Row 3: Cards 4 + 5 share a row (matches row 1 pattern) -->
+                <div class="tech-cards">
+                    <div class="tech-card confidence guardrail">
                         <div class="tech-card-header">
-                            <span>📚</span>
-                            <h4>Story Architecture</h4>
+                            <h4>Refuses weak matches / avoids fabrication</h4>
                         </div>
                         <ul>
-                            <li><strong>STAR format</strong> + 5P framework</li>
-                            <li>Category/Sub-category/Theme taxonomy</li>
-                            <li><strong>Behavioral interview</strong> specialization</li>
+                            <li><strong>Confidence gate</strong> inspects top match similarity</li>
+                            <li>Below threshold → "no strong matches" response</li>
+                            <li>Prevents <strong>low-quality fabrication</strong></li>
+                        </ul>
+                    </div>
+                    <div class="tech-card generation guardrail">
+                        <div class="tech-card-header">
+                            <h4>Synthesizes a tailored interview response</h4>
+                        </div>
+                        <ul>
+                            <li><strong>GPT-4o</strong> grounded synthesis</li>
+                            <li><strong>&lt;primary_story&gt;</strong> + <strong>&lt;supporting_story&gt;</strong> XML tags prevent cross-story bleed</li>
+                            <li><strong>STAR format</strong> for behavioral queries — distinctive phrases preserved verbatim</li>
                         </ul>
                     </div>
                 </div>
@@ -836,7 +882,13 @@ def get_technical_details_html() -> str:
             }
 
             applyTheme();
-            setInterval(applyTheme, 1000);
+
+            // Watch for theme class changes on parent body — no polling.
+            try {
+                new MutationObserver(applyTheme).observe(window.parent.document.body, {
+                    attributes: true, attributeFilter: ['class', 'data-theme']
+                });
+            } catch(e) { setTimeout(applyTheme, 800); }
         })();
     </script>
     """
