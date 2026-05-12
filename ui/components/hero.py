@@ -157,7 +157,7 @@ def render_hero():
                          style="max-width: 440px; width: 100%; height: auto; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));">
                 </div>
                 <div style="font-size: 22px; margin-bottom: 10px; color: white; opacity: 0.95;">
-                    <span>👋</span>
+                    <span></span>
                     <span> Hi, I'm Matt Pugmire</span>
                 </div>
                 <h1 style="font-size: 42px; font-weight: 700; margin-bottom: 10px; color: white;">Interview me before you interview me.</h1>
@@ -356,7 +356,7 @@ def render_section_title(title: str):
         </style>
         <div class="section-header" style="text-align: center;">
             <h2>
-                <span>🎯</span>
+                <span></span>
                 <span>{title}</span>
             </h2>
         </div>
