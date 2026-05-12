@@ -347,7 +347,16 @@ def render_category_cards(stories: list[dict]):
         )
         if st.button("", key="card_btn_product"):
             if st.session_state.get("active_tab") == "Home":
-                st.session_state["prefilter_capability"] = "Product Leadership"
+                # Switched from prefilter_capability="Product Leadership" (not a valid
+                # Solution/Offering value, silently sanitized to "All" → 113 unfiltered).
+                # See BACKLOG MATTGPT-060 for the BDD gap that let this ship.
+                st.session_state["prefilter_domains"] = [
+                    "User-Centered Product Strategy & Innovation",
+                    "Product Strategy & Innovation",
+                    "Product Management",
+                    "Digital Product Development & Delivery",
+                    "Client Product Innovation & Co-Creation",
+                ]
                 st.session_state["active_tab"] = "Explore Stories"
                 st.rerun()
 
@@ -399,25 +408,18 @@ def render_category_cards(stories: list[dict]):
         )
         if st.button("", key="card_btn_consulting"):
             if st.session_state.get("active_tab") == "Home":
+                # Trimmed from 18 → 8 domains. Product-related domains moved to
+                # Card 3 (Product Innovation); 1-story long-tail dropped to reduce
+                # filter-chip noise. ~29 stories covered (vs 43 prior).
                 st.session_state["prefilter_domains"] = [
                     "Agile Planning & Value-Driven Delivery",
-                    "Agile Transformation & Leadership Enablement",
-                    "AI Governance & Data Privacy",
-                    "Client Product Innovation & Co-Creation",
-                    "Cross-Functional Collaboration & Alignment",
                     "Leadership & Continuous Improvement",
-                    "Platform Adoption & Client Integration",
-                    "Process Optimization & Automation",
-                    "Product Management",
-                    "Product Strategy & Innovation",
-                    "Program Management & Governance",
-                    "Psychological Safety & Innovation Culture",
-                    "Security & Compliance Solutions",
-                    "Strategic Client Partnerships",
-                    "Strategic Enterprise & Methodology Innovation",
-                    "Technical Leadership",
+                    "Agile Transformation & Leadership Enablement",
                     "Technology Strategy & Advisory Services",
-                    "User-Centered Product Strategy & Innovation",
+                    "Strategic Client Partnerships",
+                    "Cross-Functional Collaboration & Alignment",
+                    "Process Optimization & Automation",
+                    "Security & Compliance Solutions",
                 ]
                 st.session_state["active_tab"] = "Explore Stories"
                 st.rerun()

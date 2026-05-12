@@ -41,6 +41,9 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-045](#mattgpt-045) | Analytics Dashboard | Open | Low | Action | Apr 29, 2026 |
 | [MATTGPT-046](#mattgpt-046) | Latency Benchmarks | Open | Low | Action | Apr 29, 2026 |
 | [MATTGPT-047](#mattgpt-047) | Cost Tracking | Open | Low | Action | Apr 29, 2026 |
+| [MATTGPT-058](#mattgpt-058) | Replace dark-theme setInterval polling with MutationObserver | Open | Low | Refactor | May 12, 2026 |
+| [MATTGPT-059](#mattgpt-059) | Add Theme-based prefilter dimension to category cards | Open | Low | Spike | May 12, 2026 |
+| [MATTGPT-060](#mattgpt-060) | BDD coverage gap — assert post-navigation page state, not just navigation | Open | Medium | Action | May 12, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Parked | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Parked | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Parked | Low | Action | Apr 29, 2026 |
@@ -641,3 +644,72 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Why not:** Screen-to-screen interaction flows documented using Mermaid diagrams in Jekyll pages. Miro-based wireflows replaced by in-repo diagrams that version with the codebase.
 - **Source:** Cross-reference triage, April 29, 2026
 - **Logged:** April 29, 2026
+
+---
+
+### MATTGPT-058
+**Replace dark-theme setInterval polling with MutationObserver**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Refactor
+- **Issue:** `category_cards.py` (line 506) and `navbar.py` (line 238) each run `setInterval(detectTheme, 500)` that reads parent body's computed background color and toggles `body.dark-theme` class accordingly. Two parallel 500ms polling loops on the home page; `navbar.py`'s interval runs globally on every page via `app.py:46`.
+- **Findings (May 12, 2026 research):**
+  - The `body.dark-theme` class is consumed by `global_styles.py` line 87, which redefines ~30 CSS variables for dark mode. Those variables cascade to `category_cards.py` styling (22 `var()` references). No `.dark-theme` selector exists inside `category_cards.py` itself — it relies entirely on the cascade.
+  - `category_cards.py`'s setInterval is functionally duplicative of `navbar.py`'s identical block — `navbar.py` runs globally, so the class is already maintained when category cards render.
+  - Polling was introduced in commit `548f1bf` (Dec 8 2025: "enhance dark mode support") as a FOUC remediation: the page would otherwise land halfway in light mode before transitioning. Polling defensively re-asserts the class on every re-render.
+- **Options:**
+  - **A.** Remove the setInterval block from `category_cards.py` entirely; `navbar.py`'s interval keeps the class maintained on the home page. Smallest change; loses defense-in-depth if the navbar iframe ever fails.
+  - **B.** Replace BOTH (`category_cards.py` + `navbar.py`) with `MutationObserver` on `parent.document.body` — same pattern landed in `how_agy_modal.py` (commit `9a0c0e8`). Zero polling, fires only on actual theme changes.
+- **Recommendation:** Option B for consistency with the modal work, but Option A is the minimum viable change.
+- **Logged:** May 12, 2026
+
+---
+
+### MATTGPT-059
+**Add Theme-based prefilter dimension to category cards**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Spike
+- **Context:** Current `prefilter_domains` filters against the `Sub-category` field (45 unique values in data, most have 1-5 stories). Result: cards have to choose between many chips for adequate story coverage or few chips with sparse coverage. The `Theme` field has 7 broader buckets — Execution & Delivery (50), Org & Working-Model Transformation (22), Strategic & Advisory (13), Professional Narrative (10), Talent & Enablement (10), Emerging Tech (5), Risk & Responsible Tech (3) — that could deliver high coverage with few chips.
+- **Why not done now (UX blockers, not implementation cost):**
+  - Two chips on a card landing looks sparse. Chips communicate scope ("here's what this view covers") — two doesn't do that job for a recruiter scanning quickly.
+  - Theme labels are more abstract than Sub-category labels. "Org & Working-Model Transformation" is harder to parse at a glance than "Agile Transformation & Leadership Enablement." May need a friendly-alias layer.
+  - Path A (surgical Sub-category trim) ships the immediate Card 3 + Card 5 fix without new infrastructure (MATTGPT-current).
+- **What it would take (small implementation):**
+  - `prefilter_theme` key handling in `explore_stories.py` (~10 lines)
+  - Theme dropdown widget in the filter UI (~20 lines)
+  - Theme filter logic in `utils/filters.py` (~3 lines)
+  - Decision on chip presentation: render underlying Sub-category chips, or a single high-level "Filtered by Theme: X" chip
+- **Recommendation:** Hold until a UX pass solves the chip-density and label-abstraction problems. Theme filtering is the right architectural foundation but the chip display needs more thought before it ships.
+- **Logged:** May 12, 2026
+
+---
+
+### MATTGPT-060
+**BDD coverage gap — assert post-navigation page state, not just navigation**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Issue:** Card 3 (Product Innovation & Strategy) on the home page set `prefilter_capability = "Product Leadership"` — a value that didn't exist in any story's `Solution / Offering` field. The Capability dropdown widget silently sanitized the invalid value to "All", showing 113 unfiltered stories instead of the curated product slice. The regression shipped because BDD verified that clicking the button navigated to Explore Stories — and it did — but never asserted what state the page should be in after arrival.
+- **Why it matters:** "Did we land on the right page?" passes when the prefilter is broken. The acceptance criteria assumed correct filtering but never wrote it down as a check. Human-centered exploratory testing catches what scripted assertions miss when the asserted condition is narrower than the user expectation.
+- **Proposed BDD scenario shape:**
+  ```gherkin
+  Given I am on the home page
+  When I click "View Product Work" on the Product Innovation & Strategy card
+  Then Explore Stories should be the active tab
+   And the Domain filter should include the expected product sub-categories
+   And the result count should be less than 113
+  ```
+- **Coverage targets (one scenario each):**
+  - Card 1 (Banking) — subpage navigation + page-specific content present
+  - Card 2 (Cross-Industry) — subpage navigation + page-specific content present
+  - Card 3 (Product Innovation) — `prefilter_domains` applied, result count < total
+  - Card 4 (Application Modernization) — `prefilter_capability` applied, result count < total
+  - Card 5 (Consulting & Transformation) — `prefilter_domains` applied, result count < total
+  - Card 6 (Teams & Talent Development) — `prefilter_domains` applied, result count < total
+- **Lesson framing:** "Verifying the link works isn't the same as verifying the destination state is correct." Every prefilter-triggering button needs a state assertion, not just a navigation assertion.
+- **Root-cause incident:** May 12, 2026 — Card 3 prefilter discovered broken; Path A fix landed in same session. Pre-existing regression; ship date unknown.
+- **Logged:** May 12, 2026
