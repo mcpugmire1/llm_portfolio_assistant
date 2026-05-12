@@ -181,6 +181,7 @@ def render_about_matt():
 .deep-dive-card {
     background: var(--bg-card, white);
     border: 2px solid var(--border-color, #e0e0e0);
+    border-left: 4px solid var(--accent-purple, #8B5CF6);
     border-radius: 12px;
     padding: 32px;
     margin-bottom: 24px;
@@ -437,6 +438,14 @@ def render_about_matt():
     font-size: 13px;
     color: var(--text-secondary, #888);
     padding: 6px 0;
+}
+
+.competency-card-accent {
+    width: 32px;
+    height: 3px;
+    background: var(--accent-purple, #8B5CF6);
+    border-radius: 2px;
+    margin-bottom: 12px;
 }
 
 /* Philosophy grid - gradient cards work in both modes */
@@ -896,43 +905,43 @@ def render_about_matt():
 <div class="timeline">
     <div class="timeline-item">
         <div class="timeline-year">2023–Present</div>
-        <div class="timeline-title">🧘 Sabbatical | Innovation & Upskilling</div>
+        <div class="timeline-title">Sabbatical | Innovation & Upskilling</div>
         <div class="timeline-company">Independent</div>
         <div class="timeline-desc">Sabbatical to recharge, refocus, and reskill — with MattGPT as tangible proof of the work.</div>
     </div>
     <div class="timeline-item">
         <div class="timeline-year">2019–2023</div>
-        <div class="timeline-title">🚀 Director, Cloud Innovation Center</div>
+        <div class="timeline-title">Director, Cloud Innovation Center</div>
         <div class="timeline-company">Accenture</div>
         <div class="timeline-desc">Launched Innovation Centers (150+ engineers) • 30+ products • $300M+ revenue • 4x faster delivery.</div>
     </div>
     <div class="timeline-item">
         <div class="timeline-year">2016–2023</div>
-        <div class="timeline-title">📚 Capability Development Lead, CloudFirst</div>
+        <div class="timeline-title">Capability Development Lead, CloudFirst</div>
         <div class="timeline-company">Accenture</div>
         <div class="timeline-desc">Enterprise capability development, engineering enablement, and culture transformation.</div>
     </div>
     <div class="timeline-item">
         <div class="timeline-year">2018–2019</div>
-        <div class="timeline-title">☁️ Cloud Native Architecture Lead, Liquid Studio</div>
+        <div class="timeline-title">Cloud Native Architecture Lead, Liquid Studio</div>
         <div class="timeline-company">Accenture</div>
         <div class="timeline-desc">Cloud-native prototyping and product shaping through rapid experimentation and modern engineering practices.</div>
     </div>
     <div class="timeline-item">
         <div class="timeline-year">2009–2017</div>
-        <div class="timeline-title">💳 Sr. Technology Architecture Manager, Financial Services</div>
+        <div class="timeline-title">Sr. Technology Architecture Manager, Financial Services</div>
         <div class="timeline-company">Accenture</div>
         <div class="timeline-desc">Financial services platform modernization and architecture at global scale.</div>
     </div>
     <div class="timeline-item">
         <div class="timeline-year">2005–2009</div>
-        <div class="timeline-title">🏗️ Technology Manager</div>
+        <div class="timeline-title">Technology Manager</div>
         <div class="timeline-company">Accenture</div>
         <div class="timeline-desc">Enterprise integration and solution architecture for large-scale telecom and enterprise platforms.</div>
     </div>
     <div class="timeline-item">
         <div class="timeline-year">2000–2005</div>
-        <div class="timeline-title">⚡ Startups & Consulting</div>
+        <div class="timeline-title">Startups & Consulting</div>
         <div class="timeline-company">Including Cendian Corp</div>
         <div class="timeline-desc">Building B2B and supply-chain platforms using enterprise integration technologies.</div>
     </div>
@@ -957,7 +966,7 @@ def render_about_matt():
     st.markdown(
         """
 <div class="deep-dive-card">
-    <h3 style="margin: 0 0 12px 0;">💭 The Problem</h3>
+    <h3 style="margin: 0 0 12px 0;">The Problem</h3>
     <p style="line-height: 1.7;">
         Traditional portfolios are static PDFs that don't scale. Recruiters and hiring managers can't easily
         search 130+ projects by methodology, outcome, or domain. I wanted to create an <strong>intelligent,
@@ -999,7 +1008,7 @@ def render_about_matt():
     st.markdown(
         """
 <div class="deep-dive-card">
-    <h3 style="margin: 0 0 16px 0;">🛠️ Tech Stack</h3>
+    <h3 style="margin: 0 0 16px 0;">Tech Stack</h3>
     <div class="tech-grid" style="grid-template-columns: repeat(3, 1fr);">
         <div class="tech-item"><div style="font-size: 28px;">🐍</div><div style="font-size: 11px; font-weight: 600;">Python 3.11</div></div>
         <div class="tech-item"><div style="font-size: 28px;">⚡</div><div style="font-size: 11px; font-weight: 600;">Streamlit</div></div>
@@ -1017,7 +1026,7 @@ def render_about_matt():
     st.markdown(
         """
 <div class="deep-dive-card">
-    <h3 style="text-align: center; margin: 0 0 24px 0;">🔄 System Architecture Flow</h3>
+    <h3 style="text-align: center; margin: 0 0 24px 0;">System Architecture Flow</h3>
     <div class="flow-grid">
         <div class="flow-step">
             <div class="flow-num">1</div>
@@ -1047,7 +1056,7 @@ def render_about_matt():
     </div>
     <div style="text-align: center; margin: 24px 0 16px 0;">
         <span class="secret-sauce-badge">
-            🔬 The Secret Sauce: 5-Stage RAG Pipeline with Context Isolation
+            The Secret Sauce: 5-Stage RAG Pipeline with Context Isolation
         </span>
     </div>
 <div class="code-block"><span class="code-comment"># 5-Stage RAG Pipeline</span>
@@ -1090,7 +1099,7 @@ def generate(stories: list, intent_family: str) -&gt; str:
         """
 <div class="details-grid">
     <div class="detail-card">
-        <h4>📊 Data Pipeline</h4>
+        <h4>Data Pipeline</h4>
         <ul>
             <li>Excel master sheet with 130+ STAR stories</li>
             <li>Python script converts to JSONL with rich metadata</li>
@@ -1099,7 +1108,7 @@ def generate(stories: list, intent_family: str) -&gt; str:
         </ul>
     </div>
     <div class="detail-card">
-        <h4>🧠 Embeddings Strategy</h4>
+        <h4>Embeddings Strategy</h4>
         <ul>
             <li><strong>Model:</strong> OpenAI text-embedding-3-small (1536 dim)</li>
             <li><strong>Chunking:</strong> Full STAR story per vector</li>
@@ -1108,7 +1117,7 @@ def generate(stories: list, intent_family: str) -&gt; str:
         </ul>
     </div>
     <div class="detail-card">
-        <h4>🔍 5-Stage RAG Pipeline</h4>
+        <h4>5-Stage RAG Pipeline</h4>
         <ul>
             <li><strong>Stage 1:</strong> Nonsense filter (fast regex rejection)</li>
             <li><strong>Stage 2:</strong> Semantic router (intent + out-of-scope detection)</li>
@@ -1118,7 +1127,7 @@ def generate(stories: list, intent_family: str) -&gt; str:
         </ul>
     </div>
     <div class="detail-card">
-        <h4>🔁 CI/CD Pipeline</h4>
+        <h4>CI/CD Pipeline</h4>
         <ul>
             <li><strong>Trigger:</strong> Git push to main</li>
             <li><strong>Mechanism:</strong> GitHub webhook → Streamlit Cloud</li>
@@ -1127,7 +1136,7 @@ def generate(stories: list, intent_family: str) -&gt; str:
         </ul>
     </div>
     <div class="detail-card">
-        <h4>💬 RAG with GPT-4o</h4>
+        <h4>RAG with GPT-4o</h4>
         <ul>
             <li><strong>Context Isolation:</strong> XML tags prevent cross-story bleed</li>
             <li><strong>Texture Preservation:</strong> Quotes distinctive phrases verbatim</li>
@@ -1136,7 +1145,7 @@ def generate(stories: list, intent_family: str) -&gt; str:
         </ul>
     </div>
     <div class="detail-card">
-        <h4>🎨 Frontend (Streamlit)</h4>
+        <h4>Frontend (Streamlit)</h4>
         <ul>
             <li>Conversational chat interface with history</li>
             <li>Dark mode support with CSS variables</li>
@@ -1145,9 +1154,9 @@ def generate(stories: list, intent_family: str) -&gt; str:
         </ul>
     </div>
     <div class="detail-card">
-        <h4>🚀 DevOps & Quality</h4>
+        <h4>DevOps & Quality</h4>
         <ul>
-            <li><strong>CI/CD:</strong> GitHub Actions → Streamlit Cloud</li>
+            <li><strong>CI/CD:</strong> GitHub Webhook → Streamlit Cloud</li>
             <li><strong>Testing:</strong> pytest with behavioral tests</li>
             <li><strong>Monitoring:</strong> Query logging, error tracking</li>
             <li><strong>Security:</strong> API keys in secrets, no PII</li>
@@ -1181,7 +1190,7 @@ def generate(stories: list, intent_family: str) -&gt; str:
     st.markdown(
         """
 <div class="cta-card">
-    <h3 style="font-size: 28px; margin: 0 0 16px 0;">🎯 See It In Action</h3>
+    <h3 style="font-size: 28px; margin: 0 0 16px 0;">See It In Action</h3>
     <p style="line-height: 1.7; margin-bottom: 20px;">
         This isn't just a portfolio showcase — <strong>Agy 🐾 is a working AI assistant</strong> that can
         answer detailed questions about my 130+ projects, methodologies, and outcomes.
@@ -1217,7 +1226,7 @@ def generate(stories: list, intent_family: str) -&gt; str:
         """
 <div class="competencies-grid">
     <div class="competency-card">
-        <div style="font-size: 32px;">🚀</div>
+        <div class="competency-card-accent"></div>
         <h4>Product & Innovation</h4>
         <ul>
             <li>→ Lean Product Management</li>
@@ -1228,7 +1237,7 @@ def generate(stories: list, intent_family: str) -&gt; str:
         </ul>
     </div>
     <div class="competency-card">
-        <div style="font-size: 32px;">🔧</div>
+        <div class="competency-card-accent"></div>
         <h4>Modern Engineering</h4>
         <ul>
             <li>→ Cloud-Native Microservices</li>
@@ -1239,7 +1248,7 @@ def generate(stories: list, intent_family: str) -&gt; str:
         </ul>
     </div>
     <div class="competency-card">
-        <div style="font-size: 32px;">⚡</div>
+        <div class="competency-card-accent"></div>
         <h4>Agile at Scale</h4>
         <ul>
             <li>→ SAFe, LeSS, Scrum@Scale</li>
@@ -1250,7 +1259,7 @@ def generate(stories: list, intent_family: str) -&gt; str:
         </ul>
     </div>
     <div class="competency-card">
-        <div style="font-size: 32px;">💡</div>
+        <div class="competency-card-accent"></div>
         <h4>Transformation Leadership</h4>
         <ul>
             <li>→ Change Management</li>
@@ -1261,7 +1270,7 @@ def generate(stories: list, intent_family: str) -&gt; str:
         </ul>
     </div>
     <div class="competency-card">
-        <div style="font-size: 32px;">👥</div>
+        <div class="competency-card-accent"></div>
         <h4>Team Building</h4>
         <ul>
             <li>→ Talent Development & Coaching</li>
@@ -1272,7 +1281,7 @@ def generate(stories: list, intent_family: str) -&gt; str:
         </ul>
     </div>
     <div class="competency-card">
-        <div style="font-size: 32px;">🤖</div>
+        <div class="competency-card-accent"></div>
         <h4>AI & Emerging Tech</h4>
         <ul>
             <li>→ GenAI Application Development</li>
@@ -1302,28 +1311,28 @@ def generate(stories: list, intent_family: str) -&gt; str:
         """
 <div class="philosophy-grid">
     <div class="philosophy-card">
-        <h3>🎯 Outcomes Over Output</h3>
+        <h3>Outcomes Over Output</h3>
         <p>
             I don't measure success by velocity or features shipped. I measure it by business outcomes,
             customer impact, and organizational capability built. Focus on what moves the needle.
         </p>
     </div>
     <div class="philosophy-card">
-        <h3>🔬 Experimentation Culture</h3>
+        <h3>Experimentation Culture</h3>
         <p>
             Innovation requires safe-to-fail environments. I create spaces where teams can test hypotheses,
             learn from failures fast, and iterate toward product-market fit. Data informs decisions.
         </p>
     </div>
     <div class="philosophy-card">
-        <h3>🤝 Servant Leadership</h3>
+        <h3>Servant Leadership</h3>
         <p>
             My job is to remove blockers, amplify team voices, and create conditions for excellence.
             The best ideas come from the people closest to the work. I ask questions, not give answers.
         </p>
     </div>
     <div class="philosophy-card">
-        <h3>📈 Continuous Learning</h3>
+        <h3>Continuous Learning</h3>
         <p>
             Technology evolves fast. Organizations that don't invest in upskilling fall behind. I build
             learning cultures through coaching, mentorship, and hands-on practice. Growth is strategic.
