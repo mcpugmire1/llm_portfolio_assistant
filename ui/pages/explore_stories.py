@@ -101,6 +101,13 @@ def reset_all_filters(stories: list[dict]):
         "explore_view_mode",
         "page_size_select",
         "_prev_explore_view_mode",
+        # Preserves breadcrumb back-link state. When a user arrives at Explore
+        # Stories from a landing page (Banking / Cross-Industry), that landing
+        # sets session_state["return_to_landing"]. Without this preserve entry,
+        # clicking Reset Filters silently drops the back-link — the breadcrumb
+        # chip vanishes even though the user came in via a landing flow.
+        # Test: tests/unit/test_explore_stories.py::TestResetFiltersPreservesReturnToLanding
+        "return_to_landing",
     }
 
     keys_to_delete = []

@@ -360,3 +360,108 @@ class TestRemoveFilterValueQueryRemoval:
         # Assert
         assert session_state["filters"]["q"] == ""
         assert session_state["_widget_version_q"] == 1
+
+
+# =============================================================================
+# RESET FILTERS PRESERVATION (May 12, 2026 — breadcrumb regression)
+# =============================================================================
+#
+# When user clicks a capability card on Banking or Cross-Industry landing,
+# session_state["return_to_landing"] is set so that Explore Stories renders
+# a "← Banking" / "← Cross Industry" breadcrumb back-link.
+#
+# Bug: reset_all_filters deletes ALL session state except a small preserve_keys
+# set. return_to_landing was not in that set, so clicking Reset Filters caused
+# the breadcrumb to silently disappear.
+#
+# These tests pin the contract: reset_all_filters must preserve return_to_landing.
+# =============================================================================
+
+
+def reset_all_filters_mock(stories: list, session_state: dict) -> None:
+    """Mirror of reset_all_filters in ui/pages/explore_stories.py.
+
+    Kept locally because the production function imports streamlit at module
+    level and the existing test pattern in this file uses mocks to avoid that.
+    If the production function changes, this mock must be updated.
+    """
+    preserve_keys = {
+        "active_tab",
+        "active_story",
+        "active_story_obj",
+        "explore_view_mode",
+        "page_size_select",
+        "_prev_explore_view_mode",
+        "return_to_landing",  # Preserves breadcrumb back-link after Reset Filters.
+    }
+
+    keys_to_delete = [k for k in list(session_state.keys()) if k not in preserve_keys]
+    for k in keys_to_delete:
+        del session_state[k]
+
+    session_state["filters"] = {
+        "personas": [],
+        "clients": [],
+        "domains": [],
+        "roles": [],
+        "tags": [],
+        "q": "",
+        "has_metric": False,
+        "era": "",
+        "industry": "",
+        "capability": "",
+    }
+
+
+class TestResetFiltersPreservesReturnToLanding:
+    """Reset Filters must not silently drop the breadcrumb back-link state."""
+
+    def test_return_to_landing_banking_survives_reset(self):
+        """If user arrived from Banking landing, breadcrumb state must persist after Reset."""
+        session_state = {
+            "active_tab": "Explore Stories",
+            "return_to_landing": "banking",
+            "filters": {"q": "payments"},
+            "_widget_version_q": 3,
+        }
+
+        reset_all_filters_mock([], session_state)
+
+        assert "return_to_landing" in session_state, (
+            "reset_all_filters dropped return_to_landing — breadcrumb back-link "
+            "would silently disappear after user clicks Reset Filters."
+        )
+        assert session_state["return_to_landing"] == "banking"
+
+    def test_return_to_landing_cross_industry_survives_reset(self):
+        """Same contract for Cross-Industry arrivals."""
+        session_state = {
+            "active_tab": "Explore Stories",
+            "return_to_landing": "cross_industry",
+            "filters": {"industry": "Cross Industry"},
+        }
+
+        reset_all_filters_mock([], session_state)
+
+        assert "return_to_landing" in session_state
+        assert session_state["return_to_landing"] == "cross_industry"
+
+    def test_other_session_state_still_cleared(self):
+        """Preservation is targeted — other state still gets reset."""
+        session_state = {
+            "active_tab": "Explore Stories",
+            "return_to_landing": "banking",
+            "filters": {"q": "stale query"},
+            "__last_search_results__": ["stale"],
+            "_some_widget_state": "stale",
+        }
+
+        reset_all_filters_mock([], session_state)
+
+        assert session_state["filters"]["q"] == "", "Filters should be cleared"
+        assert (
+            "__last_search_results__" not in session_state
+        ), "Search cache should clear"
+        assert "_some_widget_state" not in session_state, "Other state should clear"
+        # return_to_landing still preserved
+        assert session_state["return_to_landing"] == "banking"

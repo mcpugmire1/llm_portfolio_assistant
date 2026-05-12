@@ -204,3 +204,48 @@ def get_private_bypass_token() -> str | None:
     from config.settings import get_conf
 
     return get_conf(PRIVATE_BYPASS_TOKEN_ENV)
+
+
+# =============================================================================
+# CAPABILITY_SUBTITLES
+# =============================================================================
+# Editorial-description layer for Solution/Offering values surfaced on landing
+# pages (Banking, Cross-Industry). Mirrors the ERA_SUBTITLES pattern in
+# ui/components/timeline_view.py: short descriptive phrase per category, falls
+# through to empty string when a key is missing (cards render without
+# description in that case).
+#
+# Curation = editorial polish; the card UNIVERSE is data-derived (which
+# Solution/Offering values have stories), not driven by this dict.
+#
+# Contract: every key MUST be a valid Solution/Offering value in the current
+# story data. Enforced by tests/unit/test_capability_subtitles.py — CI fails
+# loudly if any key drifts from the master data.
+# =============================================================================
+
+CAPABILITY_SUBTITLES: dict[str, str] = {
+    # Banking + Cross-Industry shared
+    "Global Payments & Treasury Solutions": "Payment platforms, treasury systems, real-time processing",
+    "Modern Engineering Practices & Solutions": "DevOps, CI/CD, cloud-native engineering, modern toolchains",
+    "Technology Strategy & Advisory": "Architecture roadmaps, strategic planning, technology vision",
+    "Agile Transformation & Delivery": "Scaling agile practices, delivery acceleration, team transformation",
+    "Program Management & Governance": "Large-scale program delivery, governance frameworks, PMO",
+    "Data & Analytics Solutions": "Data platforms, analytics, business intelligence",
+    "Cross-Functional Collaboration & Team Enablement": "Team alignment, collaboration frameworks, culture change",
+    "Business Process Optimization": "Process reengineering, workflow automation, efficiency",
+    "Enterprise Integration & API Management": "API platforms, integration architecture, service mesh",
+    "Digital Product Development": "Mobile banking, customer experiences, digital channels",
+    "DevOps & Continuous Delivery": "Automation, deployment pipelines, continuous integration",
+    "Application Modernization": "Legacy modernization, microservices, platform engineering",
+    # Banking-specific values previously orphaned (no card existed for them)
+    "Security & Compliance Solutions": "Regulatory frameworks, audit support, risk management",
+    "VPP Adoption Enablement & Developer Toolkit": "Developer experience, tooling, productivity platforms",
+    "Program Recovery & Vendor Delivery Management": "Troubled program recovery, vendor governance, delivery rescue",
+    # Cross-Industry-specific
+    "Client Enablement & Sustainable Innovation": "Knowledge transfer, capability building, sustainable practices",
+    "Product Management & Innovation Labs": "Innovation programs, experimentation, lean startup methodology",
+    "User-Centered Design & Experience": "UX research, design thinking, customer journey mapping",
+    "Platform Optimization & Cloud-Native Development": "Platform engineering, developer experience, service catalogs",
+    "Modern Product Engineering Methodology": "Product thinking, rapid prototyping, product-market fit",
+    "AI & Machine Learning Solutions": "AI strategy, ML platforms, intelligent automation",
+}
