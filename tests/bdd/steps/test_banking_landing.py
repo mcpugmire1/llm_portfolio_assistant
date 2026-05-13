@@ -59,14 +59,33 @@ def test_top_banking_capability_lands_with_results():
 
 @given("the user navigates to the Banking landing page")
 def navigate_to_banking_landing(browser_page, app_url):
-    """Navigate via the navbar Banking tab and wait for capability cards."""
+    """Navigate via the Home page Banking card.
+
+    Banking landing isn't in the navbar — it's reached by clicking the
+    Banking capability card on the Home page (category_cards.py Card 1),
+    which sets active_tab="Banking" and reruns. We click the hidden
+    Streamlit button keyed card_btn_banking directly to bypass the JS
+    click-bridge layer (isolates the test from that bridge's wiring).
+    """
     browser_page.goto(app_url)
     browser_page.wait_for_load_state("networkidle")
-    nav_button = browser_page.locator("button:has-text('Banking'):visible").first
-    nav_button.click()
+    # The hidden Streamlit button behind the Banking card is intentionally
+    # hidden via CSS (position: absolute; left: -9999px). Use state="attached"
+    # to wait for it to exist in DOM rather than be visible.
+    browser_page.wait_for_selector(
+        "[class*='st-key-card_btn_banking'] button",
+        state="attached",
+        timeout=30000,
+    )
+    # dispatch_event("click") fires the click without Playwright's visibility
+    # check. The hidden button is moved off-screen via CSS but is still active
+    # in the DOM — a native click event still triggers Streamlit's handler.
+    browser_page.locator(
+        "[class*='st-key-card_btn_banking'] button"
+    ).first.dispatch_event("click")
     browser_page.wait_for_load_state("networkidle")
     # Wait for at least one capability card to render — the .capability-card
-    # class is used by the per-card markup.
+    # class is used by the per-card markup on the Banking landing.
     browser_page.wait_for_selector(".capability-card", timeout=30000)
 
 
@@ -84,8 +103,9 @@ def click_top_capability_card(browser_page):
     We click the hidden Streamlit button directly with force=True to isolate
     the test from the JS click-bridge layer.
     """
-    btn = browser_page.locator("[class*='st-key-card_btn_banking_0_0'] button").first
-    btn.click(force=True)
+    browser_page.locator(
+        "[class*='st-key-card_btn_banking_core_0'] button"
+    ).first.dispatch_event("click")
     wait_for_streamlit_rerun(browser_page)
 
 

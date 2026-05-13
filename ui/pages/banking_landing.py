@@ -12,6 +12,71 @@ import streamlit.components.v1 as components
 
 from ui.components.footer import render_footer
 from utils.client_utils import is_generic_client
+from utils.landing_cards import build_landing_cards
+
+
+def _build_card_wiring_js(core_count: int, spec_count: int) -> str:
+    """Build the JS click-bridge for Banking landing capability cards.
+
+    Extracted as a pure function so the wiring contract is unit-testable
+    without needing Streamlit running. The bug shape this protects against:
+    button keys (Python side) and JS-bridge selectors drifting apart silently.
+
+    The function emits a script that, for each tier in [(core, N), (spec, M)],
+    wires the visible card div (id="card-banking-{tier}-{idx}") to dispatch
+    a click on the hidden Streamlit button (key=card_btn_banking_{tier}_{idx}).
+    If these patterns ever diverge from what render_banking_landing() actually
+    creates, the test in tests/unit/test_banking_landing_js.py will fail.
+    """
+    return f"""
+<script>
+(function() {{
+    function wireCards() {{
+        const parentDoc = window.parent.document;
+
+        // Wire CTA button
+        const ctaBtn = parentDoc.getElementById('btn-banking-cta');
+        if (ctaBtn && !ctaBtn.dataset.wired) {{
+            ctaBtn.dataset.wired = 'true';
+            ctaBtn.onclick = function() {{
+                const stBtn = parentDoc.querySelector('[class*="st-key-card_btn_banking_cta"] button');
+                if (stBtn) stBtn.click();
+            }};
+        }}
+
+        // Wire capability cards. Both tiers share the same shape — only the
+        // tier prefix in the card ID and button key differs.
+        const tiers = [
+            ['core', {core_count}],
+            ['spec', {spec_count}],
+        ];
+        tiers.forEach(function(tierEntry) {{
+            const tier = tierEntry[0];
+            const count = tierEntry[1];
+            for (let idx = 0; idx < count; idx++) {{
+                const cardId = `card-banking-${{tier}}-${{idx}}`;
+                const card = parentDoc.getElementById(cardId);
+                if (card && !card.dataset.wired) {{
+                    card.dataset.wired = 'true';
+                    card.onclick = function() {{
+                        const stBtn = parentDoc.querySelector(
+                            `[class*="st-key-card_btn_banking_${{tier}}_${{idx}}"] button`
+                        );
+                        if (stBtn) stBtn.click();
+                    }};
+                }}
+            }}
+        }});
+    }}
+
+    // Run multiple times to catch all cards as they render
+    setTimeout(wireCards, 100);
+    setTimeout(wireCards, 300);
+    setTimeout(wireCards, 600);
+    setTimeout(wireCards, 1000);
+}})();
+</script>
+"""
 
 
 def render_banking_landing(stories: list[dict]):
@@ -426,7 +491,51 @@ def render_banking_landing(stories: list[dict]):
         color: var(--accent-purple);
         font-weight: 700;
         margin-bottom: 8px;
-        display: block;
+        /* display: inline so the optional .card-clients sibling sits on
+           the same line. The old pre-refactor layout had card-count as
+           the only meta element so display: block was fine; the new
+           tiered layout puts count + client count side by side. */
+        display: inline;
+    }
+    /* Tiered hierarchy (Core / Specialized Capabilities) — added Phase 2
+       data-derivation refactor. Specialized cards demoted visually so the
+       eye lands on Core first. */
+    .tier-header {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--text-heading);
+        margin: 32px 0 16px;
+    }
+    .capability-card.muted {
+        opacity: 0.85;
+        padding: 16px;
+    }
+    .capability-card.muted .card-title {
+        font-size: 14px;
+    }
+    /* Subtitle from CAPABILITY_SUBTITLES — italic muted, mirrors
+       ERA_SUBTITLES rendering in timeline_view.py */
+    .card-subtitle {
+        font-size: 13px;
+        font-style: italic;
+        color: var(--text-secondary);
+        line-height: 1.4;
+        margin-bottom: 8px;
+    }
+    .capability-card.muted .card-subtitle {
+        font-size: 12px;
+    }
+    /* Client count meta — visually subordinate to project count.
+       Only rendered when card count > 1 (signal-driven, no "· 1 client"
+       repetition where it's trivially derivable). */
+    .card-clients {
+        font-size: 13px;
+        color: var(--text-secondary);
+        margin-left: 8px;
+        /* Explicit inline (defense — span is inline by default, but
+           sibling .card-count was previously display: block which forced
+           a line break). */
+        display: inline;
     }
     .card-desc {
         font-size: 13px;
@@ -453,140 +562,116 @@ def render_banking_landing(stories: list[dict]):
     clients_html = f'<div class="client-pills">{client_pills}</div>'
     st.markdown(clients_html, unsafe_allow_html=True)
 
+    # Cards are data-derived from real Solution/Offering values that have >=1
+    # banking story (after Era exclusion). This kills the May 12, 2026 Card 3
+    # regression shape by construction: no hardcoded card can reference a
+    # value that doesn't exist in the data, because cards ARE the data.
+    # Contract pinned by tests/unit/test_landing_cards.py.
+    cards = build_landing_cards(stories, industry="Financial Services / Banking")
+    core_cards = [c for c in cards if c["tier"] == "core"]
+    specialized_cards = [c for c in cards if c["tier"] == "specialized"]
+    # Browseable total = sum of card counts. Differs from total_projects
+    # (which includes Era-excluded narrative stories) by the count of narrative
+    # banking stories. Used in the subtitle below so the "Browse N" claim
+    # matches what's actually reachable via the cards.
+    browseable_total = sum(c["count"] for c in cards)
+
     # Categories section - using DIV instead of H2 to prevent anchor generation
     st.markdown(
         '<div class="section-header">Explore by Capability</div>',
         unsafe_allow_html=True,
     )
     st.markdown(
-        f'<p class="subtitle">Browse {total_projects} banking projects organized by specialty area</p>',
+        f'<p class="subtitle">Browse {browseable_total} banking projects organized by specialty area</p>',
         unsafe_allow_html=True,
     )
 
-    # Dynamic counts: Solution / Offering occurrences in banking stories
-    capability_counts = Counter(
-        s.get("Solution / Offering", "")
-        for s in banking_stories
-        if s.get("Solution / Offering")
-    )
+    def _render_card_grid(card_list: list[dict], key_prefix: str, *, muted: bool):
+        """Render one tier's cards in a 3-column grid.
 
-    # Banking capability cards (icon, title, description)
-    # Count for each card is looked up dynamically from capability_counts
-    banking_categories = [
-        (
-            "⚡",
-            "Agile Transformation & Delivery",
-            "Scaling agile practices, delivery acceleration, team transformation",
-        ),
-        (
-            "💰",
-            "Global Payments & Treasury Solutions",
-            "Payment platforms, treasury systems, real-time processing",
-        ),
-        (
-            "🎯",
-            "Technology Strategy & Advisory",
-            "Architecture roadmaps, strategic planning, technology vision",
-        ),
-        (
-            "📊",
-            "Program Management & Governance",
-            "Large-scale program delivery, governance frameworks, PMO",
-        ),
-        (
-            "🔧",
-            "Modern Engineering Practices & Solutions",
-            "DevOps, CI/CD, cloud-native engineering, modern toolchains",
-        ),
-        (
-            "📈",
-            "Data & Analytics Solutions",
-            "Data platforms, analytics, business intelligence",
-        ),
-        (
-            "🤝",
-            "Cross-Functional Collaboration & Team Enablement",
-            "Team alignment, collaboration frameworks, culture change",
-        ),
-        (
-            "🔄",
-            "Business Process Optimization",
-            "Process reengineering, workflow automation, efficiency",
-        ),
-        (
-            "🔌",
-            "Enterprise Integration & API Management",
-            "API platforms, integration architecture, service mesh",
-        ),
-        (
-            "📱",
-            "Digital Product Development",
-            "Mobile banking, customer experiences, digital channels",
-        ),
-        (
-            "🔐",
-            "Compliance & Risk Solutions",
-            "Regulatory compliance, risk frameworks, audit support",
-        ),
-        (
-            "🚢",
-            "DevOps & Continuous Delivery",
-            "Automation, deployment pipelines, continuous integration",
-        ),
-        (
-            "☁️",
-            "Cloud Transformation & Migration",
-            "Cloud strategy, migrations, hybrid cloud architectures",
-        ),
-        (
-            "🔨",
-            "Application Modernization",
-            "Legacy modernization, microservices, platform engineering",
-        ),
-        (
-            "📦",
-            "Adoption Enablement & Developer Toolkit",
-            "Developer experience, tooling, productivity platforms",
-        ),
-    ]
+        Each card click sets the same prefilter state the previous hardcoded
+        flow did (prefilter_industry, prefilter_capability, return_to_landing).
+        The prefilter_capability value is now data-derived (a real Solution/
+        Offering string from the corpus), so the Capability dropdown widget
+        on Explore Stories can't silently sanitize it to "All" anymore.
+        """
+        muted_cls = " muted" if muted else ""
+        for row_start in range(0, len(card_list), 3):
+            cols = st.columns(3)
+            for offset in range(3):
+                idx = row_start + offset
+                if idx >= len(card_list):
+                    continue
+                card = card_list[idx]
+                with cols[offset]:
+                    # Meta line — signal-driven: only show client count when
+                    # card has >1 project (avoids trivially-redundant "1 client"
+                    # repetition that adds no signal).
+                    project_plural = "s" if card["count"] != 1 else ""
+                    meta = (
+                        f'<span class="card-count">{card["count"]} '
+                        f"banking project{project_plural}</span>"
+                    )
+                    if card["count"] > 1:
+                        client_plural = "s" if card["clients"] != 1 else ""
+                        meta += (
+                            f'<span class="card-clients">· {card["clients"]} '
+                            f"client{client_plural}</span>"
+                        )
 
-    # Render cards in 3-column grid - CLICKABLE CARDS, NO BUTTONS
-    for i in range(0, len(banking_categories), 3):
-        cols = st.columns(3)
-        for j in range(3):
-            if i + j < len(banking_categories):
-                icon, title, desc = banking_categories[i + j]
-                count = capability_counts.get(title, 0)
-                with cols[j]:
-                    # Singular/plural handling
-                    project_text = "project" if count == 1 else "projects"
+                    # Subtitle from CAPABILITY_SUBTITLES, empty-string fallback.
+                    # Mirrors ERA_SUBTITLES.get(era, "") in timeline_view.py.
+                    subtitle_html = (
+                        f'<div class="card-subtitle">{card["subtitle"]}</div>'
+                        if card["subtitle"]
+                        else ""
+                    )
 
-                    # Generate safe ID for card
-                    card_id = f"card-banking-{i}-{j}"
-
-                    # Card content - NO BUTTON, whole card is clickable
+                    # ID is referenced by the JS click-bridge at the bottom of
+                    # this function. If the naming changes here, update the JS
+                    # template too — the bridge loops over (key_prefix, idx)
+                    # pairs to wire clicks.
+                    card_id = f"card-banking-{key_prefix}-{idx}"
                     st.markdown(
                         f"""
-                    <div class="capability-card" id="{card_id}" data-title="{title}">
-                        <div class="card-icon">{icon}</div>
-                        <div class="card-title">{title}</div>
-                        <div class="card-count">{count} {project_text}</div>
-                        <div class="card-desc">{desc}</div>
+                    <div class="capability-card{muted_cls}" id="{card_id}" data-title="{card["title"]}">
+                        <div class="card-title">{card["title"]}</div>
+                        {subtitle_html}
+                        <div>{meta}</div>
                     </div>
                     """,
                         unsafe_allow_html=True,
                     )
 
-                    # Hidden Streamlit button (triggers the action)
-                    if st.button("", key=f"card_btn_banking_{i}_{j}"):
-                        # Set pre-filters for Explore Stories
+                    # Hidden Streamlit button — keyed with tier prefix + index
+                    # so Core and Specialized cards don't collide. BDD test
+                    # targets card_btn_banking_core_0 (the top Core card).
+                    if st.button("", key=f"card_btn_banking_{key_prefix}_{idx}"):
                         st.session_state["prefilter_industry"] = (
                             "Financial Services / Banking"
                         )
-                        st.session_state["prefilter_capability"] = title
+                        st.session_state["prefilter_capability"] = card["title"]
                         st.session_state["return_to_landing"] = "banking"
                         st.session_state["active_tab"] = "Explore Stories"
                         st.rerun()
+
+    # Core Capabilities tier — cards with >=3 banking stories
+    st.markdown(
+        '<div class="tier-header">Core Capabilities</div>',
+        unsafe_allow_html=True,
+    )
+    _render_card_grid(core_cards, key_prefix="core", muted=False)
+
+    # Specialized Capabilities tier — cards with <3 banking stories.
+    # Single-story specialized capabilities (Security & Compliance, DevOps, etc.)
+    # are intentionally surfaced — see feedback_dont_hide_thin_capabilities.md
+    # in memory; hiding them creates false-negative signal for hiring managers
+    # searching for specific niche capabilities.
+    st.markdown(
+        '<div class="tier-header">Specialized Capabilities</div>',
+        unsafe_allow_html=True,
+    )
+    _render_card_grid(specialized_cards, key_prefix="spec", muted=True)
 
     # CTA section with button inside
     st.markdown("<br>", unsafe_allow_html=True)
@@ -609,48 +694,11 @@ def render_banking_landing(stories: list[dict]):
         st.session_state["active_tab"] = "Ask MattGPT"
         st.rerun()
 
-    # JavaScript to wire clickable cards and CTA button to Streamlit buttons
+    # JS click-bridge for cards + CTA button. Logic extracted to
+    # _build_card_wiring_js() (module level) so it's unit-testable in isolation
+    # against the contract in tests/unit/test_banking_landing_js.py.
     components.html(
-        """
-<script>
-(function() {
-    function wireCards() {
-        const parentDoc = window.parent.document;
-
-        // Wire CTA button
-        const ctaBtn = parentDoc.getElementById('btn-banking-cta');
-        if (ctaBtn && !ctaBtn.dataset.wired) {
-            ctaBtn.dataset.wired = 'true';
-            ctaBtn.onclick = function() {
-                const stBtn = parentDoc.querySelector('[class*="st-key-card_btn_banking_cta"] button');
-                if (stBtn) stBtn.click();
-            };
-        }
-
-        // Wire all capability cards (click anywhere on card)
-        for (let i = 0; i < 15; i++) {
-            for (let j = 0; j < 3; j++) {
-                const cardId = `card-banking-${i}-${j}`;
-                const card = parentDoc.getElementById(cardId);
-                if (card && !card.dataset.wired) {
-                    card.dataset.wired = 'true';
-                    card.onclick = function() {
-                        const stBtn = parentDoc.querySelector(`[class*="st-key-card_btn_banking_${i}_${j}"] button`);
-                        if (stBtn) stBtn.click();
-                    };
-                }
-            }
-        }
-    }
-
-    // Run multiple times to catch all cards as they render
-    setTimeout(wireCards, 100);
-    setTimeout(wireCards, 300);
-    setTimeout(wireCards, 600);
-    setTimeout(wireCards, 1000);
-})();
-</script>
-""",
+        _build_card_wiring_js(len(core_cards), len(specialized_cards)),
         height=0,
     )
 
