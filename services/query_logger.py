@@ -158,6 +158,14 @@ def log_query(
     result_count: int = 0,
     redirect_reason: str = "",
 ):
+    # Skip logging for known monitoring bots (HeadlessChrome regression runs,
+    # UptimeRobot keep-alive pings, etc.). Mirrors the page_load filter in
+    # app.py:104 and the role_match is_bot() guards in role_match.py /
+    # action_buttons.py. Without this, bot queries leak into the production
+    # log and break conversion / bounce analysis. Pinned by
+    # tests/unit/test_query_logger.py::TestLogQueryBotFilter.
+    if is_bot():
+        return
     # Capture context in main thread before spawning daemon
     user_agent, screen_size, timezone, referrer = _capture_context()
     row = _build_row(
