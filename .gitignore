@@ -75,6 +75,11 @@ data/borderline_queries.csv
 # API documentation (auto-generated)
 docs/api/
 
+# Transitory scratch (mockups, intermediate analysis) — per CLAUDE.md
+# "Documentation Restraint" rule: files in docs/working/ have a lifecycle
+# declaration and a defined deletion target; they don't belong in version control.
+docs/working/
+
 # Architecture and planning documents (work-in-progress)
 ARCHITECTURE_MERGE_ANALYSIS.md
 ARCHITECTURE_REALITY_CHECK.md
