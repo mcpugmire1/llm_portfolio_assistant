@@ -81,6 +81,9 @@ def render_landing_page(stories: list[dict]):
             <p class="intro-text-primary">
                 Go deeper than a resume. Ask me anything about Matt's 130+ projects—I'll connect the dots.
             </p>
+            <p style="font-size: 13px; font-style: italic; color: var(--text-muted); margin-top: 2px; margin-bottom: 0;">
+                Named in honor of Matt's Plott Hound companion.
+            </p>
         </div>
         """,
             unsafe_allow_html=True,
