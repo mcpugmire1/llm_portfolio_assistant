@@ -41,7 +41,7 @@ MEDIUM_WAIT = 500  # ms — component renders
 CHIP_QUESTIONS = [
     "How did Matt scale a Cloud Innovation Center from 0 to 150+ engineers?",
     "How does Matt build teams that ship like startups in enterprise?",
-    "How does Matt handle resistance in large-scale transformations?",
+    "How does Matt manage resistance when leading enterprise transformation programs?",
 ]
 
 
@@ -112,7 +112,7 @@ def click_view_product_work(browser_page):
     bridge is a separate concern with its own coverage).
     """
     btn = browser_page.locator("[class*='st-key-card_btn_product'] button").first
-    btn.click(force=True)
+    btn.dispatch_event("click")
     wait_for_streamlit_rerun(browser_page)
 
 
@@ -223,7 +223,7 @@ def click_ask_agy_button(browser_page):
     the JS bridge and isolates the test to the navigation logic.
     """
     btn = browser_page.locator("[class*='st-key-card_btn_ask_agy'] button").first
-    btn.click(force=True)
+    btn.dispatch_event("click")
     wait_for_streamlit_rerun(browser_page)
 
 
@@ -257,7 +257,7 @@ def click_suggested_chip(browser_page, question):
     btn = browser_page.locator(
         f"[class*='st-key-card_btn_ask_chip_{idx}'] button"
     ).first
-    btn.click(force=True)
+    btn.dispatch_event("click")
     wait_for_streamlit_rerun(browser_page)
 
 
@@ -273,10 +273,12 @@ def assert_no_seed_prompt(browser_page):
     seed_prompt were set, the page would skip the landing and show a
     transcript with the question as the first user turn.
     """
-    # Landing view marker: the suggestion-pill area or input box renders.
-    # If a query auto-fired, the .stChatMessage element would render instead.
-    # Wait for one of the landing markers OR fail if a chat message appears.
-    landing = browser_page.locator("[data-testid='stChatInput'], .landing-pill").first
+    # Landing view markers pinned to ui/pages/ask_mattgpt/landing_view.py:
+    #   - .welcome-title — "Hi, I'm Agy 🐾" heading rendered only on landing
+    #   - .suggested-title — "TRY ASKING:" label above the suggestion chips
+    # If a query auto-fired, the page skips landing (see
+    # ui/pages/ask_mattgpt/__init__.py:48) and these elements never render.
+    landing = browser_page.locator(".welcome-title, .suggested-title").first
     landing.wait_for(state="visible", timeout=15000)
     chat = browser_page.locator(".stChatMessage").count()
     assert chat == 0, (

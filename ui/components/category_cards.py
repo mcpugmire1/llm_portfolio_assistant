@@ -15,6 +15,48 @@ import streamlit as st
 
 from utils.client_utils import is_generic_client
 
+# Ask Agy Anything suggested-question chip strings. Order is load-bearing —
+# index N maps to the hidden Streamlit button card_btn_ask_chip_N and to the
+# visible HTML button.chip in DOM order. The chip-click handler reads from
+# this list by index.
+#
+# SINGLE-CONTRACT TRIPLE: these strings appear in three test files. If they
+# change here, update ALL THREE in lockstep:
+#   - tests/bdd/features/home.feature (scenario text)
+#   - tests/bdd/steps/test_home.py CHIP_QUESTIONS
+#   - tests/eval_rag_quality.py GOLDEN_QUERIES["narrative"] entries 62-64
+# Out-of-sync edits break either the BDD wiring or the eval quality pinning.
+_CHIP_QUESTIONS = [
+    "How did Matt scale a Cloud Innovation Center from 0 to 150+ engineers?",
+    "How does Matt build teams that ship like startups in enterprise?",
+    "How does Matt manage resistance when leading enterprise transformation programs?",
+]
+
+
+def on_chip_click(question: str) -> None:
+    """Handle a suggested-question chip click on the Ask Agy Anything card.
+
+    Mirrors ui/components/story_detail.py::on_ask_this_story exactly, minus
+    the story-specific keys (active_story / active_story_obj) — those would
+    wrongly anchor the response to a single story when the chip questions
+    are intentionally broad.
+
+    Sets the three session-state keys that conversation_view.py:165 reads
+    and pops to auto-fire the query:
+      - seed_prompt: the literal question string (rendered as the user's
+        first turn in the chat transcript)
+      - __ask_from_suggestion__: True — tells backend_service.py:1413 to
+        bypass the nonsense filter (otherwise "How does Matt..." style
+        queries can get redirected)
+      - active_tab: "Ask MattGPT" — routes the rerun to the chat page
+
+    Contract pinned by tests/unit/test_category_cards.py::TestOnChipClick.
+    """
+    st.session_state["seed_prompt"] = question
+    st.session_state["__ask_from_suggestion__"] = True
+    st.session_state["active_tab"] = "Ask MattGPT"
+    st.rerun()
+
 
 def render_category_cards(stories: list[dict]):
     """Render homepage category cards grid - responsive with CSS Grid.
@@ -455,37 +497,170 @@ def render_category_cards(stories: list[dict]):
     # Row spacing (hidden on mobile via CSS)
     st.markdown('<div style="height: 24px;"></div>', unsafe_allow_html=True)
 
-    # === ROW 4: Quick Question card ===
+    # === ROW 4: Ask Agy Anything card (two-column with suggested chips) ===
+    # Layout: left column has the Agy avatar/header/body/primary CTA; right
+    # column has the "Try asking" label and three clickable chip buttons.
+    # Chip CSS includes a ::before { content: '↗' } affordance pinned by the
+    # test_chips_render_with_arrow BDD scenario.
     st.markdown(
         """
-    <div style="background: var(--gradient-purple-hero); color: white; padding: 32px; border-radius: 12px; min-height: 200px; margin-top: 16px;">
-        <div style="display: flex; align-items: center; gap: 24px; margin-bottom: 20px;">
-            <img src="https://raw.githubusercontent.com/mcpugmire1/mattgpt-design-spec/main/brand-kit/chat_avatars/agy_avatar_128_dark.png"
-                 alt="Agy" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
-            <div>
-                <h3 style="font-size: 24px; font-weight: 700; margin: 0 0 4px 0; color: white;">Quick Question</h3>
-                <div style="font-size: 16px; font-weight: 600; color: rgba(255,255,255,0.95);">Ask Agy 🐾 anything</div>
+    <style>
+    .ask-agy-card {
+        background: var(--gradient-purple-hero);
+        color: white;
+        padding: 40px 44px;
+        border-radius: 12px;
+        margin-top: 16px;
+    }
+    .ask-agy-grid {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: stretch;
+        gap: 0;
+    }
+    .ask-agy-left {
+        padding-right: 44px;
+        display: flex;
+        flex-direction: column;
+    }
+    .ask-agy-header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 14px;
+    }
+    .ask-agy-avatar {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        border: 3px solid white;
+        flex-shrink: 0;
+        overflow: hidden;
+    }
+    .ask-agy-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .ask-agy-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: white;
+        line-height: 1.2;
+        margin: 0;
+    }
+    .ask-agy-body {
+        font-size: 15px;
+        line-height: 1.65;
+        color: rgba(255,255,255,0.88);
+        margin-bottom: 24px;
+        flex: 1;
+    }
+    .ask-agy-divider {
+        width: 1px;
+        background: rgba(255,255,255,0.2);
+        margin: 0 8px;
+        align-self: stretch;
+    }
+    .ask-agy-right {
+        padding-left: 44px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+    }
+    .ask-agy-try-label {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.85);
+        margin-bottom: 4px;
+    }
+    .chip {
+        background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.35);
+        border-radius: 8px;
+        padding: 12px 16px;
+        font-size: 13.5px;
+        color: white;
+        text-align: left;
+        cursor: pointer;
+        transition: background 0.15s, border-color 0.15s;
+        line-height: 1.4;
+        font-family: inherit;
+        width: 100%;
+    }
+    .chip:hover {
+        background: rgba(255,255,255,0.22);
+        border-color: rgba(255,255,255,0.6);
+    }
+    .chip::before {
+        content: '↗';
+        float: right;
+        opacity: 0.5;
+        margin-left: 8px;
+        font-size: 12px;
+    }
+    /* Mobile: stack columns, drop divider. */
+    @media (max-width: 768px) {
+        .ask-agy-grid { grid-template-columns: 1fr; }
+        .ask-agy-left { padding-right: 0; }
+        .ask-agy-right { padding-left: 0; padding-top: 24px; }
+        .ask-agy-divider { display: none; }
+    }
+    /* Hide the placeholder Streamlit buttons (the visible chips/anchor
+       handle the user-facing click; these hidden buttons are the actual
+       click receivers bridged via JS). */
+    [class*="st-key-card_btn_ask_agy"] button,
+    [class*="st-key-card_btn_ask_chip_"] button {
+        position: absolute !important;
+        left: -9999px !important;
+        height: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+    }
+    </style>
+    <div class="ask-agy-card">
+      <div class="ask-agy-grid">
+        <div class="ask-agy-left">
+          <div class="ask-agy-header">
+            <div class="ask-agy-avatar">
+              <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_ask_mattgpt.png" alt="Agy">
             </div>
+            <h3 class="ask-agy-title">Ask Agy 🐾 Anything</h3>
+          </div>
+          <div class="ask-agy-body">
+            From building MattGPT to leading global programs, Agy is trained on every project Matt has delivered. Ask him anything, he'll track it down.
+          </div>
+          <a id="btn-ask-agy" class="card-btn-primary" style="align-self: flex-start;">Ask Agy 🐾</a>
         </div>
-        <div style="font-size: 16px; margin-bottom: 16px; color: rgba(255,255,255,0.95); line-height: 1.6;">
-            From building MattGPT to leading global programs — Agy can help you explore 20+ years of transformation experience.
+        <div class="ask-agy-divider"></div>
+        <div class="ask-agy-right">
+          <div class="ask-agy-try-label">Try asking</div>
+          <button class="chip" id="chip-ask-0">"""
+        + _CHIP_QUESTIONS[0]
+        + """</button>
+          <button class="chip" id="chip-ask-1">"""
+        + _CHIP_QUESTIONS[1]
+        + """</button>
+          <button class="chip" id="chip-ask-2">"""
+        + _CHIP_QUESTIONS[2]
+        + """</button>
         </div>
-        <div style="font-size: 14px; font-style: italic; color: rgba(255,255,255,0.85); margin-bottom: 20px;">
-            "How did you build MattGPT?" • "How do you overcome the challenges of scaling to 150+ engineers?"
-        </div>
-        <div>
-            <a id="btn-ask-agy" class="card-btn-primary">Ask Agy 🐾</a>
-        </div>
+      </div>
     </div>
     """,
         unsafe_allow_html=True,
     )
+    # Hidden Streamlit buttons — the JS bridge in the components.html block
+    # below routes visible-chip and Ask Agy anchor clicks here.
     if st.button("", key="card_btn_ask_agy"):
         st.session_state["active_tab"] = "Ask MattGPT"
         st.session_state["skip_home_menu"] = True
         st.rerun()
+    for _idx, _question in enumerate(_CHIP_QUESTIONS):
+        if st.button("", key=f"card_btn_ask_chip_{_idx}"):
+            on_chip_click(_question)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
 
     # JavaScript to wire up the HTML buttons - same pattern as hero.py
     import streamlit.components.v1 as components
@@ -579,6 +754,43 @@ def render_category_cards(stories: list[dict]):
                 };
             }
         }, 200);
+
+    // Ask Agy Anything CHIP wiring — separate multi-firing block.
+    // Re-attaches onclick on every firing without a dataset.wired gate.
+    // Streamlit destroys and recreates this components.html iframe on every
+    // rerun (e.g., when the user returns from Ask MattGPT back to Home),
+    // killing the JS context that owns the chip onclick closures. The
+    // single setTimeout(200ms) pattern above works for the cards because
+    // those typically receive only the entry-point click and the user moves
+    // on — but the chips live on Home, are clicked, route to Ask MattGPT,
+    // then the user often comes back and clicks another chip. That's the
+    // back-and-forth navigation pattern that surfaced the May 12 2026 dead-
+    // closure bug on Cross-Industry landing. Multi-firing setTimeout
+    // (100/300/600/1000ms) re-asserts the wiring from a live closure
+    // regardless of how many iframe destroy/create cycles have happened.
+    // See utils/landing_cards.py build_card_wiring_js for the original
+    // pattern and CLAUDE.md "Click Handling Pattern" for the documented
+    // anti-pattern (dataset.wired gating).
+    function wireAskAgyChips() {
+        const parentDoc = window.parent.document;
+        for (let idx = 0; idx < 3; idx++) {
+            const chip = parentDoc.getElementById('chip-ask-' + idx);
+            if (chip) {
+                chip.onclick = (function(i) {
+                    return function() {
+                        const stBtn = parentDoc.querySelector(
+                            '[class*="st-key-card_btn_ask_chip_' + i + '"] button'
+                        );
+                        if (stBtn) stBtn.click();
+                    };
+                })(idx);
+            }
+        }
+    }
+    setTimeout(wireAskAgyChips, 100);
+    setTimeout(wireAskAgyChips, 300);
+    setTimeout(wireAskAgyChips, 600);
+    setTimeout(wireAskAgyChips, 1000);
     })();
     </script>
     """,

@@ -27,7 +27,7 @@ from unittest.mock import patch
 CHIP_QUESTIONS = [
     "How did Matt scale a Cloud Innovation Center from 0 to 150+ engineers?",
     "How does Matt build teams that ship like startups in enterprise?",
-    "How does Matt handle resistance in large-scale transformations?",
+    "How does Matt manage resistance when leading enterprise transformation programs?",
 ]
 
 

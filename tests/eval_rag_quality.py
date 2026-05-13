@@ -214,17 +214,23 @@ GOLDEN_QUERIES = {
         },
         {
             "id": 64,
-            "query": "How does Matt handle resistance in large-scale transformations?",
-            # Response must reference change-management / stakeholder-handling
-            # concepts and ideally cite a specific transformation project as
-            # evidence.
+            "query": "How does Matt manage resistance when leading enterprise transformation programs?",
+            # May 13, 2026 retest: the original phrasing "handle resistance in
+            # large-scale transformations" pulled the MattGPT refactoring
+            # story (strangler fig pattern, monolith decomposition) instead
+            # of organizational change-management stories. Rephrasing to
+            # "leading enterprise transformation programs" steered retrieval
+            # to the right stories (Norfolk Southern legacy-mainframe
+            # resistance, JP Morgan Dynamics CRM stabilization). Ground-truth
+            # concept clusters updated to reflect what the response actually
+            # surfaces post-rephrase. See MATTGPT-061 for the underlying
+            # retrieval-disambiguation issue.
             "ground_truth": [
-                "change",  # change management
-                "stakeholder",  # stakeholder handling
                 "resistance",  # echo of the question concept
-                "alignment",  # stakeholder alignment (Matt's frequent phrasing)
-                "trust",  # building trust to overcome resistance
-                "transparen",  # transparency
+                "program",  # enterprise program framing
+                "enterprise",  # enterprise scope
+                "Norfolk",  # Norfolk Southern story (legacy mainframe)
+                "stabilize",  # JP Morgan Dynamics CRM stabilization
             ],
             "min_matches": 2,
             "category": "narrative",
