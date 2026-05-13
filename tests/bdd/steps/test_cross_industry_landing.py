@@ -53,6 +53,19 @@ def test_top_cross_industry_capability_lands_with_results():
     """Pins the click bridge / prefilter flow post-refactor."""
 
 
+@scenario(
+    "../features/cross_industry_landing.feature",
+    "Clicking a capability card lands on Explore Stories scrolled to the top",
+)
+def test_cross_industry_capability_click_resets_scroll():
+    """Same regression contract as banking_landing — see that file's docstring
+    on test_banking_capability_click_resets_scroll for the full rationale.
+    Pinned on both landing pages because the bug is in the shared
+    prefilter-handler block of explore_stories.py — either landing page can
+    reproduce it.
+    """
+
+
 # =============================================================================
 # GIVEN — Navigation
 # =============================================================================
@@ -83,6 +96,18 @@ def navigate_to_cross_industry_landing(browser_page, app_url):
     # Wait for the capability cards to render — .capability-card is the
     # per-card class used by Cross-Industry landing markup.
     browser_page.wait_for_selector(".capability-card", timeout=30000)
+
+
+@given("the user has scrolled down to view a capability card")
+def scroll_landing_down(browser_page):
+    """Simulate a user scrolled down to view cards before clicking. See
+    test_banking_landing.py::scroll_landing_down for full rationale on
+    selector choice, 600px scroll amount, and the pre-scroll wait."""
+    browser_page.wait_for_timeout(500)  # let landing's setTimeout(100) fire first
+    browser_page.evaluate(
+        'document.querySelector(\'section[data-testid="stMain"]\').scrollTop = 600'
+    )
+    browser_page.wait_for_timeout(SHORT_WAIT)
 
 
 # =============================================================================
@@ -136,6 +161,21 @@ def assert_active_tab(browser_page, tab_name):
     """Verify navigation landed on the expected tab."""
     if tab_name == "Explore Stories":
         browser_page.wait_for_selector(".results-count", timeout=15000)
+
+
+@then("the Explore Stories page should be scrolled to the top")
+def assert_explore_scrolled_to_top(browser_page):
+    """Verify the Explore Stories page loaded at the top — same contract as
+    test_banking_landing.py. Tolerance: ≤ 50px allows sub-pixel variance.
+    """
+    scroll_top = browser_page.evaluate(
+        'document.querySelector(\'section[data-testid="stMain"]\')?.scrollTop ?? 0'
+    )
+    assert scroll_top <= 50, (
+        f"stMain scrollTop is {scroll_top}px after landing-card click — "
+        f"Explore Stories inherited the landing page's scroll position. Fix "
+        f"lives in the prefilter handler block in explore_stories.py."
+    )
 
 
 @then(parsers.parse("the result count should be greater than {floor:d}"))

@@ -1700,27 +1700,50 @@ def render_explore_stories(
     F = st.session_state["filters"]
 
     # Initialize pre-filters from landing pages (Phase 4)
+    # Track whether any prefilter was consumed so we can reset scroll once at
+    # the end. Streamlit preserves scrollTop on stMain across reruns, so a
+    # landing-card click (which scrolled the user down) lands on Explore
+    # Stories with the hero above the viewport. The pre-May-2026 fix lived
+    # only inside prefilter_era AND targeted the legacy `section.main`
+    # selector (which no longer exists in current Streamlit) — silently
+    # no-op'd for Era *and* never fired for the other prefilters.
+    _prefilter_applied = False
     if "prefilter_industry" in st.session_state:
         F["industry"] = st.session_state.pop("prefilter_industry")
+        _prefilter_applied = True
     if "prefilter_capability" in st.session_state:
         F["capability"] = st.session_state.pop("prefilter_capability")
         # Clear domains when setting capability
         F["domains"] = []
+        _prefilter_applied = True
     if "prefilter_domains" in st.session_state:
         F["domains"] = st.session_state.pop("prefilter_domains")
         # Clear capability when setting domains
         F["capability"] = ""
+        _prefilter_applied = True
     if "prefilter_roles" in st.session_state:
         F["roles"] = st.session_state.pop("prefilter_roles")
+        _prefilter_applied = True
     if "prefilter_view_mode" in st.session_state:
         st.session_state["explore_view_mode"] = st.session_state.pop(
             "prefilter_view_mode"
         )
+        _prefilter_applied = True
     if "prefilter_era" in st.session_state:
         F["era"] = st.session_state.pop("prefilter_era")
-        # Scroll to top
+        _prefilter_applied = True
+
+    if _prefilter_applied:
+        # Target [data-testid='stMain'] — the legacy `section.main` selector
+        # this code used to reference doesn't exist in current Streamlit.
+        # Landing pages (banking_landing.py, cross_industry_landing.py,
+        # ask_mattgpt/landing_view.py) use the same selector for their
+        # on-arrival scroll reset; keep them aligned.
         components.html(
-            '<script>window.parent.document.querySelector("section.main").scrollTo(0, 0);</script>',
+            "<script>"
+            "const main = window.parent.document.querySelector('[data-testid=\"stMain\"]');"
+            "if (main) main.scrollTop = 0;"
+            "</script>",
             height=0,
         )
 

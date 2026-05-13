@@ -108,13 +108,22 @@ def build_card_wiring_js(industry_prefix: str, core_count: int, spec_count: int)
     return f"""
 <script>
 (function() {{
+    // Re-wire on every setTimeout firing — DO NOT gate on a persisted
+    // dataset.wired marker. Streamlit destroys and recreates this
+    // components.html iframe on every rerun, killing the JS context that
+    // owns the onclick function closures. A dataset.wired marker survives
+    // on the parent-document card elements across iframe lifecycles, so
+    // gating on it would skip the re-attach and leave cards bound to dead
+    // closures (clicks become no-ops after 2-3 navigations away and back).
+    // The multi-setTimeout polling defense below (100/300/600/1000ms) is
+    // also intentional iframe-rewire protection — same rationale.
+    // See CLAUDE.md "Click Handling Pattern" for the documented anti-pattern.
     function wireCards() {{
         const parentDoc = window.parent.document;
 
-        // Wire CTA button
+        // Wire CTA button (re-attaches on every firing — see header comment)
         const ctaBtn = parentDoc.getElementById('btn-{industry_prefix.replace("_", "-")}-cta');
-        if (ctaBtn && !ctaBtn.dataset.wired) {{
-            ctaBtn.dataset.wired = 'true';
+        if (ctaBtn) {{
             ctaBtn.onclick = function() {{
                 const stBtn = parentDoc.querySelector('[class*="st-key-card_btn_{industry_prefix}_cta"] button');
                 if (stBtn) stBtn.click();
@@ -133,8 +142,7 @@ def build_card_wiring_js(industry_prefix: str, core_count: int, spec_count: int)
             for (let idx = 0; idx < count; idx++) {{
                 const cardId = `card-{industry_prefix.replace("_", "-")}-${{tier}}-${{idx}}`;
                 const card = parentDoc.getElementById(cardId);
-                if (card && !card.dataset.wired) {{
-                    card.dataset.wired = 'true';
+                if (card) {{
                     card.onclick = function() {{
                         const stBtn = parentDoc.querySelector(
                             `[class*="st-key-card_btn_{industry_prefix}_${{tier}}_${{idx}}"] button`
@@ -146,7 +154,8 @@ def build_card_wiring_js(industry_prefix: str, core_count: int, spec_count: int)
         }});
     }}
 
-    // Run multiple times to catch all cards as they render
+    // Run multiple times to catch all cards as they render AND to defend
+    // against iframe-destruction dead-closure bugs (see header comment).
     setTimeout(wireCards, 100);
     setTimeout(wireCards, 300);
     setTimeout(wireCards, 600);

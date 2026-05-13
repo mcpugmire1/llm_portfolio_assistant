@@ -110,3 +110,38 @@ class TestBuildCardWiringJs:
         assert "['core', 0]" in js
         assert "['spec', 0]" in js
         # No syntax-level crash: the function returned without error.
+
+    def test_js_does_not_gate_card_wiring_on_dataset_wired(self):
+        """JS must NOT skip wiring based on a persisted dataset.wired marker.
+
+        Streamlit destroys and recreates the components.html iframe on every
+        rerun, killing the JS context that owns the onclick function closures.
+        A `dataset.wired = 'true'` marker survives on the parent-document card
+        elements across iframe lifecycles — so a "skip if already wired" gate
+        prevents the NEW iframe from re-attaching its (alive) onclick, leaving
+        the cards bound to dead closures from a destroyed iframe.
+
+        Symptom: cards stop responding to clicks after the user navigates away
+        and back to the landing page (2-3 round-trips typically). Reproduced
+        May 12, 2026 on Cross-Industry landing.
+
+        Fix: re-wire on every setTimeout firing without a dataset.wired check.
+        Redundant attachments within one iframe lifecycle are harmless (each
+        overrides the previous with the same closure); the critical property
+        is that a fresh iframe gets to re-attach with its own alive closure.
+
+        See CLAUDE.md "Click Handling Pattern" for the documented anti-pattern.
+        """
+        from utils.landing_cards import build_card_wiring_js
+
+        js = build_card_wiring_js("banking", core_count=3, spec_count=5)
+
+        assert "!card.dataset.wired" not in js, (
+            "JS gates card-onclick wiring on dataset.wired — this causes "
+            "dead-closure bugs when Streamlit destroys/recreates the iframe. "
+            "Drop the gate; re-attach onclick on every wireCards() firing."
+        )
+        assert "!ctaBtn.dataset.wired" not in js, (
+            "JS gates CTA-button-onclick wiring on dataset.wired — same "
+            "iframe-lifecycle dead-closure bug shape as cards. Drop the gate."
+        )

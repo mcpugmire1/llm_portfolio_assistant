@@ -36,6 +36,21 @@ Feature: Cross-Industry Landing Page Capability Cards
     And the result count should be greater than 0
 
   # ---------------------------------------------------------------------------
+  # SCROLL-POSITION REGRESSION
+  # Same contract as banking_landing.feature — Streamlit preserves scroll
+  # across reruns, so landing-card → Explore handoff inherits the scrolled-
+  # down position from the landing page. Pre-fix: only the prefilter_era
+  # branch in explore_stories.py reset scroll, so landing-card prefilters
+  # (prefilter_capability, prefilter_domains, prefilter_industry) didn't.
+  # ---------------------------------------------------------------------------
+
+  Scenario: Clicking a capability card lands on Explore Stories scrolled to the top
+    Given the user has scrolled down to view a capability card
+    When the user clicks the top capability card
+    Then the active tab should be "Explore Stories"
+    And the Explore Stories page should be scrolled to the top
+
+  # ---------------------------------------------------------------------------
   # DOCUMENTED CONTRACTS — step defs pending (MATTGPT-060)
   # ---------------------------------------------------------------------------
 
