@@ -5,12 +5,11 @@ Cross-industry transformation projects.
 Counts are derived dynamically from JSONL data.
 """
 
-from collections import Counter
-
 import streamlit as st
 import streamlit.components.v1 as components
 
 from ui.components.footer import render_footer
+from utils.landing_cards import build_card_wiring_js, build_landing_cards
 
 
 def render_cross_industry_landing(stories: list[dict]):
@@ -417,7 +416,43 @@ def render_cross_industry_landing(stories: list[dict]):
         color: var(--accent-purple);
         font-weight: 700;
         margin-bottom: 8px;
-        display: block;
+        /* display: inline so the optional .card-clients sibling sits on
+           the same line (mirrors banking_landing.py CSS treatment). */
+        display: inline;
+    }
+    /* Tiered hierarchy (Core / Specialized Capabilities) — added Phase 2
+       part B data-derivation refactor. Mirrors banking_landing.py CSS. */
+    .tier-header {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--text-heading);
+        margin: 32px 0 16px;
+    }
+    .capability-card.muted {
+        opacity: 0.85;
+        padding: 16px;
+    }
+    .capability-card.muted .card-title {
+        font-size: 14px;
+    }
+    /* Subtitle from CAPABILITY_SUBTITLES — italic muted, mirrors
+       ERA_SUBTITLES rendering in timeline_view.py */
+    .card-subtitle {
+        font-size: 13px;
+        font-style: italic;
+        color: var(--text-secondary);
+        line-height: 1.4;
+        margin-bottom: 8px;
+    }
+    .capability-card.muted .card-subtitle {
+        font-size: 12px;
+    }
+    /* Client count meta — only rendered when card count > 1 (signal-driven). */
+    .card-clients {
+        font-size: 13px;
+        color: var(--text-secondary);
+        margin-left: 8px;
+        display: inline;
     }
     .card-desc {
         font-size: 13px;
@@ -448,118 +483,99 @@ def render_cross_industry_landing(stories: list[dict]):
     """
     st.markdown(industries_html, unsafe_allow_html=True)
 
+    # Cards are data-derived (post Era exclusion) — mirrors banking_landing.py
+    # Phase 2 refactor. Contract pinned by tests/unit/test_landing_cards.py.
+    cards = build_landing_cards(stories, industry="Cross Industry")
+    core_cards = [c for c in cards if c["tier"] == "core"]
+    specialized_cards = [c for c in cards if c["tier"] == "specialized"]
+    # Subtitle uses card-derived total so the "Browse N" claim matches what's
+    # actually reachable via cards (post Era exclusion). Differs from
+    # total_projects (which includes narrative stories) by the count of
+    # cross-industry narrative stories.
+    browseable_total = sum(c["count"] for c in cards)
+
     # Categories section - using DIV instead of H2 to prevent anchor generation
     st.markdown(
         '<div class="section-header">Explore by Transformation Capability</div>',
         unsafe_allow_html=True,
     )
     st.markdown(
-        f'<p class="subtitle">Browse {total_projects} cross-industry projects organized by transformation approach and methodology</p>',
+        f'<p class="subtitle">Browse {browseable_total} cross-industry projects organized by transformation approach and methodology</p>',
         unsafe_allow_html=True,
     )
 
-    # Dynamic counts: Solution / Offering occurrences in cross-industry stories
-    capability_counts = Counter(
-        s.get("Solution / Offering", "")
-        for s in cross_industry_stories
-        if s.get("Solution / Offering")
-    )
+    def _render_card_grid(card_list: list[dict], key_prefix: str, *, muted: bool):
+        """Render one tier's cards in a 3-column grid.
 
-    # Cross-industry capability cards (icon, title, description)
-    # Count for each card is looked up dynamically from capability_counts
-    cross_industry_categories = [
-        (
-            "🔧",
-            "Modern Engineering Practices & Solutions",
-            "DevOps, CI/CD, test automation, engineering excellence, quality practices",
-        ),
-        (
-            "🤝",
-            "Cross-Functional Collaboration & Team Enablement",
-            "Breaking down silos, team alignment, collaboration frameworks, culture change",
-        ),
-        (
-            "🎓",
-            "Client Enablement & Sustainable Innovation",
-            "Knowledge transfer, capability building, innovation centers, sustainable practices",
-        ),
-        (
-            "⚡",
-            "Agile Transformation & Delivery",
-            "Scaling agile practices, SAFe, Scrum at scale, delivery acceleration across industries",
-        ),
-        (
-            "💡",
-            "Product Management & Innovation Labs",
-            "Innovation programs, experimentation, lean startup methodology, product discovery",
-        ),
-        (
-            "🚀",
-            "Application Modernization",
-            "Legacy transformation, microservices migration, platform engineering",
-        ),
-        (
-            "🎨",
-            "User-Centered Design & Experience",
-            "UX research, design thinking, customer journey mapping, experience design",
-        ),
-        (
-            "🌩️",
-            "Platform Optimization & Cloud-Native Development",
-            "Platform engineering, developer experience, internal platforms, service catalogs",
-        ),
-        (
-            "📱",
-            "Modern Product Engineering Methodology",
-            "Product thinking, user-centered design, rapid prototyping, product-market fit",
-        ),
-        (
-            "🚢",
-            "DevOps & Continuous Delivery",
-            "Deployment automation, pipeline engineering, continuous integration, release management",
-        ),
-        (
-            "🤖",
-            "AI & Machine Learning Solutions",
-            "Machine learning platforms, AI strategy, intelligent automation, predictive analytics",
-        ),
-    ]
+        Mirrors banking_landing.py _render_card_grid exactly — the only
+        difference is the industry-specific prefix ("cross_industry" vs
+        "banking") and the project label ("cross-industry" vs "banking").
+        """
+        muted_cls = " muted" if muted else ""
+        for row_start in range(0, len(card_list), 3):
+            cols = st.columns(3)
+            for offset in range(3):
+                idx = row_start + offset
+                if idx >= len(card_list):
+                    continue
+                card = card_list[idx]
+                with cols[offset]:
+                    # Meta line — signal-driven client count
+                    project_plural = "s" if card["count"] != 1 else ""
+                    meta = (
+                        f'<span class="card-count">{card["count"]} '
+                        f"cross-industry project{project_plural}</span>"
+                    )
+                    if card["count"] > 1:
+                        client_plural = "s" if card["clients"] != 1 else ""
+                        meta += (
+                            f'<span class="card-clients">· {card["clients"]} '
+                            f"client{client_plural}</span>"
+                        )
 
-    # Render cards in 3-column grid - CLICKABLE CARDS, NO BUTTONS
-    for i in range(0, len(cross_industry_categories), 3):
-        cols = st.columns(3)
-        for j in range(3):
-            if i + j < len(cross_industry_categories):
-                icon, title, desc = cross_industry_categories[i + j]
-                count = capability_counts.get(title, 0)
-                with cols[j]:
-                    # Singular/plural handling
-                    project_text = "project" if count == 1 else "projects"
+                    # Subtitle from CAPABILITY_SUBTITLES (empty-string fallback)
+                    subtitle_html = (
+                        f'<div class="card-subtitle">{card["subtitle"]}</div>'
+                        if card["subtitle"]
+                        else ""
+                    )
 
-                    # Generate safe ID for card
-                    card_id = f"card-cross-industry-{i}-{j}"
-
-                    # Card content - NO BUTTON, whole card is clickable
+                    # ID referenced by build_card_wiring_js JS bridge.
+                    card_id = f"card-cross-industry-{key_prefix}-{idx}"
                     st.markdown(
                         f"""
-                    <div class="capability-card" id="{card_id}" data-title="{title}">
-                        <div class="card-icon">{icon}</div>
-                        <div class="card-title">{title}</div>
-                        <div class="card-count">{count} {project_text}</div>
-                        <div class="card-desc">{desc}</div>
+                    <div class="capability-card{muted_cls}" id="{card_id}" data-title="{card["title"]}">
+                        <div class="card-title">{card["title"]}</div>
+                        {subtitle_html}
+                        <div>{meta}</div>
                     </div>
                     """,
                         unsafe_allow_html=True,
                     )
 
-                    # Hidden Streamlit button (triggers the action)
-                    if st.button("", key=f"card_btn_cross_industry_{i}_{j}"):
-                        # Set pre-filters for Explore Stories
+                    # Hidden Streamlit button — key matches the JS bridge selector.
+                    if st.button("", key=f"card_btn_cross_industry_{key_prefix}_{idx}"):
                         st.session_state["prefilter_industry"] = "Cross Industry"
-                        st.session_state["prefilter_capability"] = title
+                        st.session_state["prefilter_capability"] = card["title"]
                         st.session_state["return_to_landing"] = "cross_industry"
                         st.session_state["active_tab"] = "Explore Stories"
                         st.rerun()
+
+    # Core Capabilities tier — cards with >=3 cross-industry stories
+    st.markdown(
+        '<div class="tier-header">Core Capabilities</div>',
+        unsafe_allow_html=True,
+    )
+    _render_card_grid(core_cards, key_prefix="core", muted=False)
+
+    # Specialized Capabilities tier — cards with <3 cross-industry stories.
+    # Single-story capabilities are intentionally surfaced — see
+    # feedback_dont_hide_thin_capabilities.md in memory.
+    st.markdown(
+        '<div class="tier-header">Specialized Capabilities</div>',
+        unsafe_allow_html=True,
+    )
+    _render_card_grid(specialized_cards, key_prefix="spec", muted=True)
 
     # CTA section with button inside
     st.markdown("<br>", unsafe_allow_html=True)
@@ -582,48 +598,12 @@ def render_cross_industry_landing(stories: list[dict]):
         st.session_state["active_tab"] = "Ask MattGPT"
         st.rerun()
 
-    # JavaScript to wire clickable cards and CTA button to Streamlit buttons
+    # JS click-bridge — shared with banking_landing via utils/landing_cards.
+    # Single source of truth for the wiring contract; drift caught by
+    # tests/unit/test_banking_landing_js.py (cross-industry equivalent
+    # exercises the same function with industry_prefix="cross_industry").
     components.html(
-        """
-<script>
-(function() {
-    function wireCards() {
-        const parentDoc = window.parent.document;
-
-        // Wire CTA button
-        const ctaBtn = parentDoc.getElementById('btn-cross-industry-cta');
-        if (ctaBtn && !ctaBtn.dataset.wired) {
-            ctaBtn.dataset.wired = 'true';
-            ctaBtn.onclick = function() {
-                const stBtn = parentDoc.querySelector('[class*="st-key-card_btn_cross_industry_cta"] button');
-                if (stBtn) stBtn.click();
-            };
-        }
-
-        // Wire all capability cards (click anywhere on card)
-        for (let i = 0; i < 12; i++) {
-            for (let j = 0; j < 3; j++) {
-                const cardId = `card-cross-industry-${i}-${j}`;
-                const card = parentDoc.getElementById(cardId);
-                if (card && !card.dataset.wired) {
-                    card.dataset.wired = 'true';
-                    card.onclick = function() {
-                        const stBtn = parentDoc.querySelector(`[class*="st-key-card_btn_cross_industry_${i}_${j}"] button`);
-                        if (stBtn) stBtn.click();
-                    };
-                }
-            }
-        }
-    }
-
-    // Run multiple times to catch all cards as they render
-    setTimeout(wireCards, 100);
-    setTimeout(wireCards, 300);
-    setTimeout(wireCards, 600);
-    setTimeout(wireCards, 1000);
-})();
-</script>
-""",
+        build_card_wiring_js("cross_industry", len(core_cards), len(specialized_cards)),
         height=0,
     )
 
