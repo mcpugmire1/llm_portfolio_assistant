@@ -41,7 +41,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-045](#mattgpt-045) | Analytics Dashboard | Open | Low | Action | Apr 29, 2026 |
 | [MATTGPT-046](#mattgpt-046) | Latency Benchmarks | Open | Low | Action | Apr 29, 2026 |
 | [MATTGPT-047](#mattgpt-047) | Cost Tracking | Open | Low | Action | Apr 29, 2026 |
-| [MATTGPT-058](#mattgpt-058) | Replace dark-theme setInterval polling with MutationObserver | Open | Low | Refactor | May 12, 2026 |
+| [MATTGPT-058](#mattgpt-058) | Replace dark-theme setInterval polling with MutationObserver | Decided Against | Low | Refactor | May 12, 2026 |
 | [MATTGPT-059](#mattgpt-059) | Add Theme-based prefilter dimension to category cards | Open | Low | Spike | May 12, 2026 |
 | [MATTGPT-060](#mattgpt-060) | BDD coverage gap — assert post-navigation page state, not just navigation | Open | Medium | Action | May 12, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Parked | Low | Action | Pre-2026 |
@@ -650,19 +650,14 @@ Each detail block uses these fields. Not every field is required for every item.
 ### MATTGPT-058
 **Replace dark-theme setInterval polling with MutationObserver**
 
-- **Status:** Open
+- **Status:** Decided Against
 - **Priority:** Low
 - **Type:** Refactor
-- **Issue:** `category_cards.py` (line 506) and `navbar.py` (line 238) each run `setInterval(detectTheme, 500)` that reads parent body's computed background color and toggles `body.dark-theme` class accordingly. Two parallel 500ms polling loops on the home page; `navbar.py`'s interval runs globally on every page via `app.py:46`.
-- **Findings (May 12, 2026 research):**
-  - The `body.dark-theme` class is consumed by `global_styles.py` line 87, which redefines ~30 CSS variables for dark mode. Those variables cascade to `category_cards.py` styling (22 `var()` references). No `.dark-theme` selector exists inside `category_cards.py` itself — it relies entirely on the cascade.
-  - `category_cards.py`'s setInterval is functionally duplicative of `navbar.py`'s identical block — `navbar.py` runs globally, so the class is already maintained when category cards render.
-  - Polling was introduced in commit `548f1bf` (Dec 8 2025: "enhance dark mode support") as a FOUC remediation: the page would otherwise land halfway in light mode before transitioning. Polling defensively re-asserts the class on every re-render.
-- **Options:**
-  - **A.** Remove the setInterval block from `category_cards.py` entirely; `navbar.py`'s interval keeps the class maintained on the home page. Smallest change; loses defense-in-depth if the navbar iframe ever fails.
-  - **B.** Replace BOTH (`category_cards.py` + `navbar.py`) with `MutationObserver` on `parent.document.body` — same pattern landed in `how_agy_modal.py` (commit `9a0c0e8`). Zero polling, fires only on actual theme changes.
-- **Recommendation:** Option B for consistency with the modal work, but Option A is the minimum viable change.
-- **Logged:** May 12, 2026
+- **Why not (May 13, 2026):** Reframed after the May 12 dead-closure card-click investigation. The `setInterval(detectTheme, 500)` polling lives inside a `components.html` iframe, and Streamlit destroys and recreates that iframe on every rerun. A `MutationObserver` attached from inside the iframe loses its callback closure the moment the iframe is recreated, leaving the theme class to drift out of sync — same dead-closure bug shape that caused the Cross-Industry card-click failure. The 500ms polling is iframe-rewire defense: it re-asserts the class from a live closure regardless of how many iframe destroy/create cycles have happened. The `how_agy_modal.py` MutationObserver pattern referenced in the original analysis works there because that observer is attached to a long-lived parent-doc element from a context that survives reruns differently — not transferable to this iframe. Polling is the correct pattern here.
+- **What lives in code now:** an explanatory comment at `ui/components/category_cards.py` near the `setInterval(detectTheme, 500)` line, warning future readers not to "replace polling with MutationObserver" without understanding the iframe lifecycle.
+- **Original analysis (preserved):** `category_cards.py` (line 506) and `navbar.py` (line 238) each run `setInterval(detectTheme, 500)` that reads parent body's computed background color and toggles `body.dark-theme` class. Polling was introduced in commit `548f1bf` (Dec 8 2025: "enhance dark mode support") as a FOUC remediation. The duplication with `navbar.py` is defense-in-depth: if either iframe fails, the other keeps the class maintained.
+- **Lesson:** Understand WHY a pattern exists before proposing a replacement. Same lesson as the theme detection research that triggered this ticket — both times the "anti-pattern" was actually a defense against a specific failure mode.
+- **Logged:** May 12, 2026 / **Closed:** May 13, 2026
 
 ---
 

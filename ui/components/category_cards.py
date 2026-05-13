@@ -505,6 +505,18 @@ def render_category_cards(stories: list[dict]):
             body.classList.remove('dark-theme');
         }
     }
+    // Intentional polling — DO NOT replace with MutationObserver or remove.
+    // Streamlit destroys and recreates this components.html iframe on every
+    // rerun, killing the JS context that owns any single-fire listener. A
+    // MutationObserver attached from inside this iframe loses its callback
+    // closure the moment the iframe is recreated; the theme class then drifts
+    // out of sync. Re-firing every 500ms re-asserts the class from a live
+    // closure regardless of how many iframe-destroy cycles have happened.
+    // Same defense rationale as the multi-setTimeout pattern in
+    // utils/landing_cards.py build_card_wiring_js (see header there).
+    // History: MATTGPT-058 originally proposed replacing this with
+    // MutationObserver — closed May 13 2026 after recognizing the polling
+    // is the iframe-rewire defense, not an anti-pattern.
     setInterval(detectTheme, 500);
     detectTheme();
         setTimeout(function() {
