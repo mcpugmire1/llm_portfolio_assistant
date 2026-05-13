@@ -28,9 +28,9 @@ class TestBuildCardWiringJs:
         'specialized' instead of 'spec'), the bridge will silently miss
         every card.
         """
-        from ui.pages.banking_landing import _build_card_wiring_js
+        from utils.landing_cards import build_card_wiring_js
 
-        js = _build_card_wiring_js(core_count=3, spec_count=5)
+        js = build_card_wiring_js("banking", core_count=3, spec_count=5)
 
         assert "['core', 3]" in js, (
             "JS should iterate tier 'core' with the supplied core_count. "
@@ -49,9 +49,9 @@ class TestBuildCardWiringJs:
         referenced the old card_btn_banking_${i}_${j} pattern after the
         Python side moved to card_btn_banking_{tier}_{idx}.
         """
-        from ui.pages.banking_landing import _build_card_wiring_js
+        from utils.landing_cards import build_card_wiring_js
 
-        js = _build_card_wiring_js(core_count=3, spec_count=5)
+        js = build_card_wiring_js("banking", core_count=3, spec_count=5)
 
         # The querySelector must look up by the (tier, idx) pattern.
         assert "card_btn_banking_${tier}_${idx}" in js, (
@@ -66,9 +66,9 @@ class TestBuildCardWiringJs:
         Catches the case where someone reverts the JS to the pre-refactor
         loop shape but leaves the Python side using tier-prefixed keys.
         """
-        from ui.pages.banking_landing import _build_card_wiring_js
+        from utils.landing_cards import build_card_wiring_js
 
-        js = _build_card_wiring_js(core_count=3, spec_count=5)
+        js = build_card_wiring_js("banking", core_count=3, spec_count=5)
 
         assert "card_btn_banking_${i}_${j}" not in js, (
             "JS still references the pre-refactor (i, j) button-key pattern. "
@@ -87,9 +87,9 @@ class TestBuildCardWiringJs:
         Pairs with the button-key check above — both sides of the bridge
         (visible card id ↔ hidden button key) need to use the same naming.
         """
-        from ui.pages.banking_landing import _build_card_wiring_js
+        from utils.landing_cards import build_card_wiring_js
 
-        js = _build_card_wiring_js(core_count=3, spec_count=5)
+        js = build_card_wiring_js("banking", core_count=3, spec_count=5)
 
         assert "card-banking-${tier}-${idx}" in js, (
             "JS card-ID lookup must reference the (tier, idx) pattern that "
@@ -103,9 +103,9 @@ class TestBuildCardWiringJs:
         Core or Specialized list. The JS should iterate zero times for that
         tier, not crash.
         """
-        from ui.pages.banking_landing import _build_card_wiring_js
+        from utils.landing_cards import build_card_wiring_js
 
-        js = _build_card_wiring_js(core_count=0, spec_count=0)
+        js = build_card_wiring_js("banking", core_count=0, spec_count=0)
 
         assert "['core', 0]" in js
         assert "['spec', 0]" in js

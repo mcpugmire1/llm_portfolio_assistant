@@ -12,71 +12,7 @@ import streamlit.components.v1 as components
 
 from ui.components.footer import render_footer
 from utils.client_utils import is_generic_client
-from utils.landing_cards import build_landing_cards
-
-
-def _build_card_wiring_js(core_count: int, spec_count: int) -> str:
-    """Build the JS click-bridge for Banking landing capability cards.
-
-    Extracted as a pure function so the wiring contract is unit-testable
-    without needing Streamlit running. The bug shape this protects against:
-    button keys (Python side) and JS-bridge selectors drifting apart silently.
-
-    The function emits a script that, for each tier in [(core, N), (spec, M)],
-    wires the visible card div (id="card-banking-{tier}-{idx}") to dispatch
-    a click on the hidden Streamlit button (key=card_btn_banking_{tier}_{idx}).
-    If these patterns ever diverge from what render_banking_landing() actually
-    creates, the test in tests/unit/test_banking_landing_js.py will fail.
-    """
-    return f"""
-<script>
-(function() {{
-    function wireCards() {{
-        const parentDoc = window.parent.document;
-
-        // Wire CTA button
-        const ctaBtn = parentDoc.getElementById('btn-banking-cta');
-        if (ctaBtn && !ctaBtn.dataset.wired) {{
-            ctaBtn.dataset.wired = 'true';
-            ctaBtn.onclick = function() {{
-                const stBtn = parentDoc.querySelector('[class*="st-key-card_btn_banking_cta"] button');
-                if (stBtn) stBtn.click();
-            }};
-        }}
-
-        // Wire capability cards. Both tiers share the same shape — only the
-        // tier prefix in the card ID and button key differs.
-        const tiers = [
-            ['core', {core_count}],
-            ['spec', {spec_count}],
-        ];
-        tiers.forEach(function(tierEntry) {{
-            const tier = tierEntry[0];
-            const count = tierEntry[1];
-            for (let idx = 0; idx < count; idx++) {{
-                const cardId = `card-banking-${{tier}}-${{idx}}`;
-                const card = parentDoc.getElementById(cardId);
-                if (card && !card.dataset.wired) {{
-                    card.dataset.wired = 'true';
-                    card.onclick = function() {{
-                        const stBtn = parentDoc.querySelector(
-                            `[class*="st-key-card_btn_banking_${{tier}}_${{idx}}"] button`
-                        );
-                        if (stBtn) stBtn.click();
-                    }};
-                }}
-            }}
-        }});
-    }}
-
-    // Run multiple times to catch all cards as they render
-    setTimeout(wireCards, 100);
-    setTimeout(wireCards, 300);
-    setTimeout(wireCards, 600);
-    setTimeout(wireCards, 1000);
-}})();
-</script>
-"""
+from utils.landing_cards import build_card_wiring_js, build_landing_cards
 
 
 def render_banking_landing(stories: list[dict]):
@@ -694,11 +630,12 @@ def render_banking_landing(stories: list[dict]):
         st.session_state["active_tab"] = "Ask MattGPT"
         st.rerun()
 
-    # JS click-bridge for cards + CTA button. Logic extracted to
-    # _build_card_wiring_js() (module level) so it's unit-testable in isolation
-    # against the contract in tests/unit/test_banking_landing_js.py.
+    # JS click-bridge for cards + CTA button. Shared with cross_industry_landing
+    # via utils/landing_cards.build_card_wiring_js — both landings consume the
+    # same source so the wiring contract can't drift independently.
+    # Contract pinned by tests/unit/test_banking_landing_js.py.
     components.html(
-        _build_card_wiring_js(len(core_cards), len(specialized_cards)),
+        build_card_wiring_js("banking", len(core_cards), len(specialized_cards)),
         height=0,
     )
 
