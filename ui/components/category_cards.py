@@ -508,7 +508,7 @@ def render_category_cards(stories: list[dict]):
     .ask-agy-card {
         background: var(--gradient-purple-hero);
         color: white;
-        padding: 40px 44px;
+        padding: 56px 56px;
         border-radius: 12px;
         margin-top: 16px;
     }
@@ -539,7 +539,7 @@ def render_category_cards(stories: list[dict]):
     }
     .ask-agy-avatar img { width: 100%; height: 100%; object-fit: cover; }
     .ask-agy-title {
-        font-size: 22px;
+        font-size: 28px;
         font-weight: 700;
         color: white;
         line-height: 1.2;
@@ -566,19 +566,19 @@ def render_category_cards(stories: list[dict]):
         gap: 10px;
     }
     .ask-agy-try-label {
-        font-size: 11px;
+        font-size: 13px;
         font-weight: 600;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: rgba(255,255,255,0.85);
+        color: rgba(255,255,255,1.0);
         margin-bottom: 4px;
     }
     .chip {
         background: rgba(255,255,255,0.12);
-        border: 1px solid rgba(255,255,255,0.35);
+        border: 1px solid rgba(255,255,255,0.7);
         border-radius: 8px;
         padding: 12px 16px;
-        font-size: 13.5px;
+        font-size: 14px;
         color: white;
         text-align: left;
         cursor: pointer;
@@ -589,12 +589,12 @@ def render_category_cards(stories: list[dict]):
     }
     .chip:hover {
         background: rgba(255,255,255,0.22);
-        border-color: rgba(255,255,255,0.6);
+        border-color: rgba(255,255,255,0.9);
     }
     .chip::before {
         content: '↗';
         float: right;
-        opacity: 0.5;
+        opacity: 1.0;
         margin-left: 8px;
         font-size: 12px;
     }
@@ -630,7 +630,7 @@ def render_category_cards(stories: list[dict]):
           <div class="ask-agy-body">
             From building MattGPT to leading global programs, Agy is trained on every project Matt has delivered. Ask him anything, he'll track it down.
           </div>
-          <a id="btn-ask-agy" class="card-btn-primary" style="align-self: flex-start;">Ask Agy 🐾</a>
+          <a id="btn-ask-agy" class="hero-btn hero-btn-primary" style="align-self: flex-start;">Ask Agy 🐾</a>
         </div>
         <div class="ask-agy-divider"></div>
         <div class="ask-agy-right">

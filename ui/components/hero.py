@@ -161,14 +161,14 @@ def render_hero():
                     <span> Hi, I'm Matt Pugmire</span>
                 </div>
                 <h1 style="font-size: 42px; font-weight: 700; margin-bottom: 10px; color: white;">Interview me before you interview me.</h1>
-                <p style="font-size: 18px; color: white; opacity: 0.95; max-width: 700px; margin: 0 auto 16px; line-height: 1.6;">I build products, platforms, and teams. MattGPT lets you explore 20 years of my work — Agy 🐾 will help.
+                <p style="font-size: 18px; color: white; opacity: 0.95; max-width: 700px; margin: 0 auto 16px; line-height: 1.6;">I build products, platforms, and teams. That's Agy, my Plott Hound and AI assistant, trained to track down insights from 20+ years of transformation work.
                 </p>
                 <div style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap;">
-                    <a id="btn-explore" class="hero-btn hero-btn-primary">
-                        Explore Stories
-                    </a>
-                    <a id="btn-ask" class="hero-btn hero-btn-secondary">
+                    <a id="btn-ask" class="hero-btn hero-btn-primary">
                         Ask Agy 🐾
+                    </a>
+                     <a id="btn-explore" class="hero-btn hero-btn-secondary">
+                        Explore Stories
                     </a>
                 </div>
             </div>
