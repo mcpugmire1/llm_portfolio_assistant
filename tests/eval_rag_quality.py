@@ -172,6 +172,63 @@ GOLDEN_QUERIES = {
             "min_matches": 2,
             "category": "narrative",
         },
+        # ---------------------------------------------------------------------
+        # Ask Agy Anything suggested-question chips (May 13, 2026 chip CX).
+        # These three questions are the literal chip text on Home; recruiters
+        # click them expecting curated answers, so response quality must be
+        # pinned. If the chip strings ever change, update home.feature,
+        # tests/unit/test_category_cards.py::CHIP_QUESTIONS, AND these entries
+        # together — the three are a single contract.
+        # ---------------------------------------------------------------------
+        {
+            "id": 62,
+            "query": "How did Matt scale a Cloud Innovation Center from 0 to 150+ engineers?",
+            # Response must reference the CIC by name, Atlanta location, and
+            # the headcount-growth arc that the question explicitly invites.
+            "ground_truth": [
+                "Cloud Innovation Center",
+                "Atlanta",
+                "150",  # headcount target referenced in the question
+                "build",  # 0→1 builder narrative
+                "Accenture",  # the umbrella employer
+            ],
+            "min_matches": 2,
+            "category": "narrative",
+        },
+        {
+            "id": 63,
+            "query": "How does Matt build teams that ship like startups in enterprise?",
+            # Response must reference team structure / delivery culture /
+            # balanced-team patterns. Looser concept clusters since this is a
+            # synthesis query — LLM has wider latitude on phrasing.
+            "ground_truth": [
+                "team",  # core noun
+                "deliver",  # delivery culture
+                "balanced",  # balanced-team pattern from Matt's voice
+                "autonom",  # autonomy / autonomous
+                "trust",  # high-trust culture (Matt's philosophy)
+                "ownership",  # team ownership
+            ],
+            "min_matches": 2,
+            "category": "narrative",
+        },
+        {
+            "id": 64,
+            "query": "How does Matt handle resistance in large-scale transformations?",
+            # Response must reference change-management / stakeholder-handling
+            # concepts and ideally cite a specific transformation project as
+            # evidence.
+            "ground_truth": [
+                "change",  # change management
+                "stakeholder",  # stakeholder handling
+                "resistance",  # echo of the question concept
+                "alignment",  # stakeholder alignment (Matt's frequent phrasing)
+                "trust",  # building trust to overcome resistance
+                "transparen",  # transparency
+            ],
+            "min_matches": 2,
+            "category": "narrative",
+        },
     ],
     # Client Attribution (6) - Accuracy
     "client": [

@@ -65,3 +65,53 @@ Feature: Home Page Category Cards
     Then the active tab should be "Explore Stories"
     And the result count should be less than 113
     And a filter chip "Talent Enablement & Growth" should be visible
+
+  # ---------------------------------------------------------------------------
+  # ASK AGY ANYTHING — suggested-question chips
+  # New CX, May 13 2026. The bottom Quick Question card on Home grows from
+  # one "Ask Agy" button + two static pills into a two-column card:
+  #   left  — Ask Agy avatar + body copy + "Ask Agy 🐾" primary button
+  #   right — "Try asking" label + 3 clickable suggested-question chips
+  #
+  # Plumbing pattern: mirrors ui/components/story_detail.py::on_ask_this_story
+  # exactly. A chip click sets seed_prompt (the literal question string),
+  # __ask_from_suggestion__ (True, to bypass nonsense-filter misfires), and
+  # active_tab ("Ask MattGPT"), then calls st.rerun(). The Ask MattGPT page
+  # (conversation_view.py:165) pops seed_prompt and fires the query
+  # automatically. No new plumbing — just a new entry point onto a paved road.
+  #
+  # The "Ask Agy 🐾" button (left column) is the no-pre-population path —
+  # navigates to Ask MattGPT and lands on the landing view, not a fired query.
+  #
+  # Eval entries 62-64 in tests/eval_rag_quality.py pin the response quality
+  # for the three chip questions (CIC scale, startup-pace teams, resistance
+  # handling).
+  # ---------------------------------------------------------------------------
+
+  Scenario: Ask Agy button navigates without pre-loading a question
+    When the user clicks "Ask Agy 🐾" on the Ask Agy Anything card
+    Then the active tab should be "Ask MattGPT"
+    And no seed prompt should be present in session state
+
+  Scenario: Clicking a suggested chip auto-fires the question on Ask MattGPT
+    When the user clicks the suggested chip "How did Matt scale a Cloud Innovation Center from 0 to 150+ engineers?"
+    Then the active tab should be "Ask MattGPT"
+    And the seed prompt in session state should be "How did Matt scale a Cloud Innovation Center from 0 to 150+ engineers?"
+    And the suggestion flag should be set in session state
+
+  Scenario: Session state cleared after auto-fire
+    Given the user arrived at Ask MattGPT via a chip click
+    When the seed prompt has been consumed by the conversation view
+    Then the seed prompt key should be absent from session state
+    And refreshing the Ask MattGPT page should not re-fire the query
+
+  Scenario: Ask MattGPT renders default landing when no chip was clicked
+    Given the user navigates to Ask MattGPT directly
+    When the page loads with no seed prompt in session state
+    Then the Ask MattGPT landing view should render
+    And no query should be auto-fired
+
+  Scenario: Suggested chips render with directional affordance
+    Then three suggested-question chips should be visible on the Ask Agy Anything card
+    And each chip should display the ↗ directional affordance
+    And each chip should be visually distinct from the "Ask Agy 🐾" primary button
