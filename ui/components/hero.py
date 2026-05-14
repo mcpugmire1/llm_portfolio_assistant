@@ -65,7 +65,7 @@ def render_hero():
 
             .hero-btn-primary {
                 background: white;
-                color: var(--purple-gradient-start);
+                color: var(--purple-gradient-start) !important;
             }
 
             .hero-btn-primary:hover {
@@ -75,7 +75,8 @@ def render_hero():
 
             .hero-btn-secondary {
                 background: rgba(255,255,255,0.2);
-                color: white;
+                color: white !important;
+                backdrop-filter: blur(4px);
             }
 
             .hero-btn-secondary:hover {

@@ -52,10 +52,10 @@ def render_footer():
     <div class="footer-connect" style="background: #2c3e50; color: white; padding: 48px 40px; text-align: center; margin-top: 40px; border-radius: 8px;">
         <h3 style="font-size: 28px; margin-bottom: 12px; color: white;">Let's Connect</h3>
         <p class="footer-desc" style="font-size: 16px; margin-bottom: 8px; opacity: 0.9;">
-            Seeking Director/VP opportunities in <strong>Product Leadership</strong>, <strong>Platform Engineering</strong>, and <strong>Organizational Transformation</strong>
+            I build what's next, modernize what's not, and grow teams along the way.
         </p>
         <p class="footer-avail" style="font-size: 14px; margin-bottom: 32px; opacity: 0.75;">
-            Available immediately • Atlanta-based preferred • Open to relocation and consulting engagements
+            Open to Atlanta and beyond.
         </p>
         <div class="footer-buttons" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
             <a href="mailto:matthew.c.pugmire+MattGPT@gmail.com?subject=Inquiry from MattGPT" style="padding: 12px 28px; background: #8B5CF6; color: white; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease;">
@@ -64,8 +64,8 @@ def render_footer():
             <a href="https://www.linkedin.com/in/matt-pugmire/" target="_blank" style="padding: 12px 28px; background: rgba(255,255,255,0.1); color: white; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease;">
                 LinkedIn
             </a>
-            <a id="btn-footer-ask" style="padding: 12px 28px; background: rgba(255,255,255,0.1); color: white; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease; cursor: pointer;">
-                🐾 Ask Agy
+            <a id="btn-footer-ask" style="padding: 11px 27px; background: transparent; color: white; border: 1px solid rgba(255,255,255,0.7); border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease; cursor: pointer;">
+                Ask Agy <span style="filter: brightness(10); opacity: 0.45;">🐾</span>
             </a>
         </div>
     </div>
