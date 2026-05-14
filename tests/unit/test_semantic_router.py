@@ -89,6 +89,58 @@ SHOULD_BE_REJECTED = [
     "What's Jeff Bezos's leadership style?",
 ]
 
+# =============================================================================
+# MATTGPT-016 — Wrong-person query detection
+# Test groups below are added under MATTGPT-016 work. Three new coverage
+# bands surface known gaps in the current router's purely-score-based
+# is_valid logic:
+#
+#   1. SHOULD_BE_REJECTED_LOWERCASE — case-sensitivity gap. Users type
+#      casually; the proposed regex-based wrong-person detector targets
+#      Title Case patterns and misses lowercase variants without a
+#      KNOWN_WRONG_PEOPLE case-insensitive list.
+#
+#   2. SHOULD_BE_ACCEPTED_CLIENT_NAMES — corpus-entity false-positive
+#      guard. Two-word Title Case spans like "Norfolk Southern" or
+#      "Pivotal Labs" are real clients in the story corpus and must
+#      NOT trip the wrong-person detector even when the query lacks a
+#      Matt-token. Backed by a corpus-derived MATT_CLIENT_NAMES allowlist.
+#
+#   3. SHOULD_BE_ACCEPTED_TECH_TERMS — technical-concept false-positive
+#      guard. "Domain Driven Design" and similar capitalized concepts
+#      should not trigger wrong-person rejection.
+#
+# All four MATTGPT-016 test groups are marked @pytest.mark.xfail so they
+# document the contract change without breaking runs during the staged
+# rollout. When the LOG_ONLY flag flips to enforcement and tests turn
+# GREEN, drop the xfail markers.
+#
+# See BACKLOG.md MATTGPT-016 for the full rollout plan.
+# =============================================================================
+
+# Lowercase wrong-person queries — the case-sensitivity gap.
+SHOULD_BE_REJECTED_LOWERCASE = [
+    "tell me about elon musk",
+    "what's jeff bezos's leadership style?",
+    "tell me about tim cook",
+]
+
+# Two-word Title Case spans that are real corpus entities (clients,
+# partners, programs). These have NO Matt-token by design — the detector
+# must rely on the MATT_CLIENT_NAMES allowlist to keep them accepted.
+SHOULD_BE_ACCEPTED_CLIENT_NAMES = [
+    "Tell me about the Norfolk Southern work",
+    "What was the Pivotal Labs partnership?",
+    "Did Cloud Innovation Center scale?",
+]
+
+# Multi-word capitalized technical concepts. Pattern overlaps with the
+# wrong-person regex but content is on-topic for the portfolio.
+SHOULD_BE_ACCEPTED_TECH_TERMS = [
+    "Tell me about Domain Driven Design experience",
+    "Show me Event Driven Architecture work",
+]
+
 # "Ugly" real-world inputs - typos, vague, overly polite
 UGLY_BUT_VALID = [
     # Typos
@@ -162,6 +214,99 @@ class TestSemanticRouter:
             print(
                 f"⚠️  Ugly input rejected (may need threshold tuning): '{query}' (score: {score:.3f})"
             )
+
+    # =========================================================================
+    # MATTGPT-016 — Wrong-person query detection (xfail until detector lands)
+    #
+    # Contract change: router will reject out_of_scope / personal /
+    # wrong-person queries via is_valid=False. Today the router only
+    # thresholds on score, so these assertions don't yet hold. Marked
+    # xfail to document intent without breaking runs during the staged
+    # rollout. Drop the xfail markers when the LOG_ONLY flag flips to
+    # enforcement and the assertions go GREEN.
+    # =========================================================================
+
+    @pytest.mark.xfail(
+        reason="MATTGPT-016: wrong-person detector + case-insensitive list pending",
+        strict=False,
+    )
+    @pytest.mark.parametrize("query", SHOULD_BE_REJECTED_LOWERCASE)
+    def test_rejects_lowercase_wrong_person_queries(self, query):
+        """Wrong-person queries typed in lowercase must still reject.
+
+        The proposed regex r'\\b[A-Z][a-z]+\\s+[A-Z][a-z]+\\b' only catches
+        Title Case. A case-insensitive KNOWN_WRONG_PEOPLE list closes the
+        casual-typing coverage gap.
+        """
+        is_valid, score, intent, family = self.classifier(query)
+        assert not is_valid, (
+            f"Should reject lowercase wrong-person: '{query}' "
+            f"(score: {score:.3f}, family: {family})"
+        )
+
+    @pytest.mark.xfail(
+        reason="MATTGPT-016: MATT_CLIENT_NAMES allowlist (corpus-derived) pending",
+        strict=False,
+    )
+    @pytest.mark.parametrize("query", SHOULD_BE_ACCEPTED_CLIENT_NAMES)
+    def test_does_not_reject_corpus_client_names(self, query):
+        """Two-word client names from the story corpus (Norfolk Southern,
+        Pivotal Labs, etc.) must not trip the wrong-person detector even
+        when the query has no Matt-token. The corpus-derived allowlist
+        carries the load.
+        """
+        is_valid, score, intent, family = self.classifier(query)
+        assert is_valid, (
+            f"Should accept corpus client name: '{query}' "
+            f"(score: {score:.3f}, family: {family})"
+        )
+        assert family not in ("out_of_scope", "personal"), (
+            f"'{query}' classified as {family} — corpus-entity allowlist "
+            f"or wrong-person detector is over-rejecting."
+        )
+
+    @pytest.mark.xfail(
+        reason="MATTGPT-016: structural detector must not flag multi-word technical concepts",
+        strict=False,
+    )
+    @pytest.mark.parametrize("query", SHOULD_BE_ACCEPTED_TECH_TERMS)
+    def test_does_not_reject_multi_word_tech_concepts(self, query):
+        """Multi-word capitalized technical concepts ("Domain Driven Design",
+        "Event Driven Architecture") must not be mistaken for person names
+        by the wrong-person regex. The Matt-token check should already
+        accept queries with explicit "Matt" anchors — these test cases
+        intentionally include "experience" / "work" tokens that hint at
+        portfolio scope without naming Matt.
+        """
+        is_valid, score, intent, family = self.classifier(query)
+        assert is_valid, (
+            f"Should accept technical concept query: '{query}' "
+            f"(score: {score:.3f}, family: {family})"
+        )
+
+    @pytest.mark.xfail(
+        reason="MATTGPT-016: regression guard activates when canonical phrases land in out_of_scope",
+        strict=False,
+    )
+    @pytest.mark.parametrize("query", SHOULD_BE_ACCEPTED)
+    def test_accepted_queries_not_in_out_of_scope_or_personal(self, query):
+        """Regression guard: adding canonical phrases to out_of_scope (Step 3
+        of the MATTGPT-016 rollout) must not pull legitimate portfolio
+        queries into the redirect families. If this fires after the canonical
+        phrases land, the phrases are too broad and need tightening before
+        flipping the LOG_ONLY flag to enforcement.
+
+        Currently expected to pass (out_of_scope is small). Marked xfail
+        because its purpose materializes only after the canonical phrases
+        commit — at that point an unexpected GREEN here confirms the
+        phrases are well-scoped, and unexpected FAIL flags the need to
+        tune them.
+        """
+        _, _, _, family = self.classifier(query)
+        assert family not in ("out_of_scope", "personal"), (
+            f"'{query}' classified as {family} — canonical phrases added "
+            f"to out_of_scope/personal may be too broad."
+        )
 
     def test_returns_correct_tuple_shape(self):
         """Should return (is_valid, score, intent, family)."""
