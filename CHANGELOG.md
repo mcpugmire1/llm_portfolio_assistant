@@ -6,6 +6,11 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ## May 2026
 
+### Documentation Alignment
+
+**May 11 — Align how_agy_modal + about_matt pipeline depictions to current code (MATTGPT-057)** — `ee730de`, `ec351a3`, `9a0c0e8`
+Replaced stale architecture descriptions in user-facing pages with the current 5-stage pipeline shape (nonsense filters → semantic router → Pinecone → confidence gate → LLM). Dropped factually-false claims: "Semantic + keyword hybrid scoring" (W_KW = 0.0; pipeline is pure semantic), "GitHub Actions / CI/CD pipeline" (no CI exists — see MATTGPT-039), and unverified "6 Industries" stat. Touched `ui/pages/about_matt.py` "How I Built MattGPT" pseudocode, `ui/components/how_agy_modal.py` 3-stage framing expanded to 5-stage. Follow-up commits restyled the modal (pipeline as hero, demoted result pills) and stripped emojis from about_matt + footer for visual weight on deep-dive cards.
+
 ### Triage Agent (Cowork-orchestrated JD triage — new)
 
 **May 10 — Initial scaffold for Cowork-orchestrated JD triage**

@@ -9,18 +9,17 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | ID | Title | Status | Priority | Type | Logged |
 |---|---|---|---|---|---|
 | [MATTGPT-012](#mattgpt-012) | Role Match — Phase 4: Private View | In Progress | High | Action | Apr 2026 |
-| [MATTGPT-014](#mattgpt-014) | Pipeline Test Strategy Decision | Open | High | Spike | Apr 28, 2026 |
+| [MATTGPT-014](#mattgpt-014) | Audit + split skipped Role Match BDD scenarios (BDD for structure, evals for content) | Open | High | Action | Apr 28, 2026 |
 | [MATTGPT-015](#mattgpt-015) | JPM Payments IQ Differentiation | Open | High | Action | Mar 2026 |
 | [MATTGPT-016](#mattgpt-016) | Semantic Router — Wrong-Person Query Detection | Decided Against | High | Issue | Apr 2026 |
-| [MATTGPT-017](#mattgpt-017) | Streamlit Runtime Test Strategy | Open | Medium | Spike | Apr 28, 2026 |
+| [MATTGPT-017](#mattgpt-017) | Wire skipped Role Match logging BDD scenarios (Playwright click + mocked Sheets write) | Open | Medium | Action | Apr 28, 2026 |
 | [MATTGPT-018](#mattgpt-018) | Page-Load Flicker | Open | Medium | Issue | Pre-Apr 2026 |
-| [MATTGPT-019](#mattgpt-019) | Story Count Code Fix | Open | Medium | Refactor | Pre-Apr 2026 |
-| [MATTGPT-020](#mattgpt-020) | Simplify backend_service.py | Open | Medium | Refactor | Pre-Jan 2026 |
+| [MATTGPT-019](#mattgpt-019) | Story Count Code Fix | Open | Low | Refactor | Pre-Apr 2026 |
+| [MATTGPT-020](#mattgpt-020) | Simplify backend_service.py | Decided Against | Medium | Refactor | Pre-Jan 2026 |
 | [MATTGPT-021](#mattgpt-021) | diversify_results() Pinning Bug | Open | Medium | Issue | Apr 2026 |
 | [MATTGPT-022](#mattgpt-022) | Data Quality Cleanup Journey Story | Open | Medium | Action | Mar 2026 |
 | [MATTGPT-039](#mattgpt-039) | Automated Regression Detection (GitHub Actions) | Open | Medium | Action | Apr 29, 2026 |
-| [MATTGPT-040](#mattgpt-040) | Eval Coverage Gaps — Follow-up Queries | Open | Medium | Action | Apr 29, 2026 |
-| [MATTGPT-057](#mattgpt-057) | Architecture documentation alignment | Open | Medium | Action | May 11, 2026 |
+| [MATTGPT-040](#mattgpt-040) | Eval Coverage Gaps — Follow-up Queries | Open | Low | Action | Apr 29, 2026 |
 | [MATTGPT-023](#mattgpt-023) | LLM Meta-Commentary on Q20 (Stochastic) | Open | Low | Issue | Apr 2026 |
 | [MATTGPT-024](#mattgpt-024) | Clarify Hybrid Scoring | Open | Low | Refactor | Pre-2026 |
 | [MATTGPT-025](#mattgpt-025) | Add Error Handling Tests | Open | Low | Action | Pre-2026 |
@@ -114,15 +113,23 @@ Each detail block uses these fields. Not every field is required for every item.
 ---
 
 ### MATTGPT-014
-**Pipeline Test Strategy Decision**
+**Audit + split skipped Role Match BDD scenarios (BDD for structure, evals for content)**
 
 - **Status:** Open
 - **Priority:** High
-- **Type:** Spike
-- **Issue:** 17 BDD scenarios in `test_role_match.py` skipped pending decision on how to test scenarios that depend on OpenAI + Pinecone. Covers match results, evidence chips, profile evidence, preferred qualifications, gap explanations, no-fit-score in recruiter view.
-- **Options:** (1) Mock OpenAI/Pinecone — deterministic, fast, doesn't validate real LLM output. (2) Run against real backends — validates real behavior, slow/costly/non-deterministic. (3) Snapshot testing — capture known-good response, test rendering against it.
-- **Affects:** 17 skipped tests in `test_role_match.py`
-- **Logged:** April 28, 2026
+- **Type:** Action
+- **Issue:** 17 BDD scenarios in `test_role_match.py` skipped because they depend on OpenAI + Pinecone calls. Coverage area: match results, evidence chips, profile evidence, preferred qualifications, gap explanations, no-fit-score in recruiter view.
+- **Decision (May 14, 2026 rationalization):** The original three-option framing (mock / real backends / snapshot) was wrong. It assumed BDD was the right tool for all 17 scenarios. It isn't. The 17 are a mix of two test shapes that need different tools:
+  - **Structural rendering** (does the chip render? does the recruiter view hide the fit score? does the page navigate correctly?) → BDD with mocked OpenAI/Pinecone responses. Deterministic, fast, validates UI plumbing.
+  - **Response content quality** (does the gap explanation correctly identify what's missing? does the right story surface as evidence?) → Eval framework (`tests/eval_rag_quality.py` pattern). Concept-cluster assertions, accepts LLM stochasticity.
+- **Why this resolves the stuck spike:** Trying to BDD content questions is the trap — mocks lie about LLM behavior, real backends are slow/costly, snapshots brittle against LLM drift. The right answer is to *not* BDD the content questions at all.
+- **Concrete next action (Action, not Spike):**
+  1. Audit the 17 skipped scenarios. Categorize each as **Structural** or **Content**.
+  2. Structural ones (likely 8-10 of 17): rewrite with mocked OpenAI/Pinecone fixtures, unskip, include in the pre-commit pytest gate.
+  3. Content ones (likely 5-7 of 17): convert to entries in `tests/eval_rag_quality.py` (concept clusters, min_matches), delete the BDD versions.
+  4. Anything that doesn't fit either bucket: delete or escalate as its own ticket.
+- **Affects:** 17 skipped tests in `test_role_match.py`. Also blocks the pytest-in-pre-commit gate goal (a multi-minute test run isn't viable for pre-commit).
+- **Logged:** April 28, 2026 / **Reframed:** May 14, 2026
 
 ---
 
@@ -160,14 +167,21 @@ Each detail block uses these fields. Not every field is required for every item.
 ---
 
 ### MATTGPT-017
-**Streamlit Runtime Test Strategy**
+**Wire skipped Role Match logging BDD scenarios (Playwright click + mocked Sheets write)**
 
 - **Status:** Open
 - **Priority:** Medium
-- **Type:** Spike
+- **Type:** Action
 - **Issue:** 6 BDD scenarios in `test_role_match_logging.py` skipped because they require Streamlit's button click and session state machinery at runtime. Covers chip interactions (2), action button wiring (3), session correlation across interaction types (1).
-- **Affects:** 6 skipped tests in `test_role_match_logging.py`
-- **Logged:** April 28, 2026
+- **Decision (May 14, 2026 rationalization):** Original Spike framing is no longer accurate. Since April 28, we've quietly proven the runtime-testing pattern across other work — Banking landing scenarios, Cross-Industry landing scenarios, Home page card click scenarios, chip CX scenarios — all run Playwright against a live Streamlit instance, click hidden buttons via `dispatch_event("click")`, and assert post-rerun state. Streamlit runtime testing isn't an open question anymore.
+- **What these 6 scenarios add beyond the existing pattern:** the assertion target is a **Google Sheets logging write**, not a UI state change. The wrinkle is mocking the Sheets writer so the test doesn't hit the real sheet. Same shape as `tests/unit/test_query_logger.py` (committed May 13, 2026), which mocks `Thread` to assert log-call payloads without writing to Google Sheets.
+- **Concrete next action (Action, not Spike):**
+  1. For each of the 6 skipped scenarios, identify the logging call path (`log_role_match_action`, `log_role_match_chip_click`, `log_role_match_assessment`, etc.).
+  2. Apply the existing Playwright pattern for the click interaction (dispatch_event on hidden Streamlit button keyed for the action).
+  3. Mock `services.query_logger._append_row` (or the underlying `Thread` call — same pattern as `test_query_logger.py::TestLogQueryBotFilter`) to capture the would-be-written payload without hitting the real sheet.
+  4. Assert payload structure matches the BDD scenario's contract (event type, session id, action label, etc.).
+- **Affects:** 6 skipped tests in `test_role_match_logging.py`. Test coverage for analytics correctness (chip click → log payload, action button → log payload, session id correlation across event types).
+- **Logged:** April 28, 2026 / **Reframed:** May 14, 2026
 
 ---
 
@@ -189,23 +203,26 @@ Each detail block uses these fields. Not every field is required for every item.
 **Story Count Code Fix**
 
 - **Status:** Open
-- **Priority:** Medium
+- **Priority:** Low
 - **Type:** Refactor
-- **Issue:** Code references "130+" stories in multiple places. Number drifts as stories are added/removed.
-- **Fix:** Remove hardcoded "130+" and derive count from JSONL at runtime, or remove the number entirely.
-- **Logged:** Pre-April 2026
+- **Issue:** Code references "130+" stories in multiple places. Actual corpus is currently 113 stories (May 14, 2026 measurement). Number drifts as stories are added/removed.
+- **Audience reality (May 14, 2026 rationalization):** Recruiters don't count stories — they scan and click. "130+" reads the same as "113" to a human visitor; both signal "lots of stories." The drift is mainly visible to LLMs (or anyone explicitly auditing). Priority dropped from Medium → Low: code-cleanliness concern, not a UX correctness concern.
+- **Fix:** Remove hardcoded "130+" and derive count from JSONL at runtime, or remove the number entirely. Pick up alongside any nearby file edit.
+- **Logged:** Pre-April 2026 / **Rationalized:** May 14, 2026
 
 ---
 
 ### MATTGPT-020
 **Simplify backend_service.py**
 
-- **Status:** Open
-- **Priority:** Medium
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Medium (was)
 - **Type:** Refactor
+- **Why not:** No concrete pain point driving the refactor. The file is large (2,034 lines as of May 14) but functional. Past extractions (prompts.py in Jan 26 `c47ad1f`; Entity Gate / classify_query_intent in Jan 29) addressed earlier shape concerns; subsequent feature work (Role Match, story intelligence) brought the line count back up. Without a specific module wanting to escape or a specific bug attributable to the size, this is a refactor-for-refactor's-sake ticket — exactly the kind of work CLAUDE.md's "80/20 rule" and "don't add abstractions beyond what the task requires" rules push against. Re-open if a specific module wants to escape backend_service.py with a clear functional driver (e.g., "Role Match logic doesn't belong here because X").
+- **Original framing (preserved):**
 - **Issue:** 2,034 lines, imports from 4+ modules. Candidates for extraction: entity detection, prompt building.
 - **Status note (Jan 29, 2026):** Entity Gate removed, classify_query_intent removed. Still large — grew significantly with Role Match, story intelligence, and prompt architecture work.
-- **Logged:** Pre-January 2026
+- **Logged:** Pre-January 2026 / **Closed:** May 14, 2026
 
 ---
 
@@ -231,6 +248,7 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Type:** Action
 - **Issue:** The March 2026 data quality work (CIC pairing, IQ differentiation, Situation enrichment across 85+ stories) is a compelling story about systematic data improvement for AI systems. Not yet captured as a STAR story.
 - **Fix:** Write as STAR story for portfolio. Covers pattern recognition, data quality discipline, measurable impact on retrieval accuracy.
+- **Cross-reference (May 14, 2026 rationalization):** Assess this jointly with MATTGPT-061 (MattGPT portfolio stories over-ranking on organizational leadership queries). Adding this story would be a fifth MattGPT-meta story in the corpus and could worsen the 061 retrieval-overweighting problem. Decide both tickets together — either ship 022 with a 061-aware scope/tagging strategy, or defer 022 until 061's retrieval-quality issue is addressed.
 - **Logged:** March 2026
 
 ---
@@ -241,10 +259,17 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Status:** Open
 - **Priority:** Medium
 - **Type:** Action
-- **Issue:** Eval suite and unit tests are run locally only. No CI pipeline runs them on every PR or push. Drift can land before being detected.
-- **Fix:** Wire `eval_rag_quality.py` and `tests/unit/` into a GitHub Actions workflow. Spec has example YAML at `11-testing-and-quality.md` lines 502-512. No architectural blockers — just hasn't been done.
+- **Issue:** Eval suite and unit tests are run locally only. No CI pipeline runs them on every PR or push. Drift can land before being detected — production deploys via Streamlit Cloud auto-deploy on push to main with no test gate in front of it.
+- **Tiered CI design (added May 14, 2026):** Don't write a "run everything on every PR" workflow — eval suite hits OpenAI (~60 golden queries × per-call cost = real money per run). Cost-vs-coverage trade-off requires tiering:
+  - **Every PR:** unit tests + BDD structural tests (mocked backends). Cheap, fast, catches code regressions.
+  - **Push to main:** above + eval suite. Paid, but catches RAG drift before it reaches users.
+  - **Manual trigger:** full suite for major releases or before significant retrieval-affecting changes.
+- **Soft dependencies (do these first):**
+  - **MATTGPT-014** (reframed May 14 2026 as Action) — audit + split the 17 skipped Role Match BDD scenarios into structural (mocked) and content (evals). Until that lands, CI either fails on skipped tests or skips them silently — neither outcome is useful protection.
+  - **MATTGPT-017** (reframed May 14 2026 as Action) — same shape; 6 skipped logging BDD scenarios need wiring before CI can include them.
+- **Fix:** After 014 + 017 land, wire `eval_rag_quality.py` and `tests/unit/` + BDD into a tiered GitHub Actions workflow. Spec has example YAML at `11-testing-and-quality.md` lines 502-512 (use as starting point; layer the tiers above on top).
 - **Source:** Cross-reference of design spec vs. implementation, April 29, 2026
-- **Logged:** April 29, 2026
+- **Logged:** April 29, 2026 / **Refined:** May 14, 2026
 
 ---
 
@@ -258,24 +283,8 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Root cause:** Multi-turn evaluation requires simulating conversation state — prior query + response feeding into follow-up. Current harness is single-shot.
 - **Fix:** Build multi-turn eval harness that runs first query, captures response and source state, then runs follow-up query with that state, evaluates final response against ground truth.
 - **Affects:** Eval coverage of "Ask Agy About This" button flow, Related Projects follow-ups, conversational drilling.
-- **Logged:** April 29, 2026
-
----
-
-### MATTGPT-057
-**Architecture documentation alignment**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Action
-- **Scope:** Align stale architecture descriptions across user-facing pages and design spec with current pipeline.
-- **Items:**
-  - `ui/pages/about_matt.py` — Update "How I Built MattGPT" pseudocode to depict current pipeline (Query → Nonsense Filters → Semantic Router → out_of_scope check → Pinecone → Confidence Gate → LLM). Keep pseudocode form; function names stay illustrative.
-  - `ui/components/how_agy_modal.py` — Expand 3-stage framing to match same pipeline shape.
-  - `mattgpt-design-spec` — Update "System Architecture Flow" and "5-Stage RAG Pipeline" pages.
-  - Factual fixes: drop "Semantic + keyword hybrid scoring" claim (W_KW = 0.0), remove "GitHub Actions" and "CI/CD pipeline" from Tech Stack (MATTGPT-039 still open), verify or drop "6 Industries" stat.
-- **History:** First flagged Feb 3, 2026. Parked. Re-surfaced May 11, 2026.
-- **Logged:** May 11, 2026
+- **Priority calibration (May 14, 2026):** Dropped Medium → Low. No observed multi-turn failures in production; single-shot eval already at 98.1%. This is "we should test it" not "we know it's broken." Promote if a multi-turn failure is observed.
+- **Logged:** April 29, 2026 / **Rationalized:** May 14, 2026
 
 ---
 
@@ -742,7 +751,8 @@ Each detail block uses these fields. Not every field is required for every item.
   - **B.** Extend the semantic router with a technical-vs-organizational transformation disambiguation — new intent family or sub-classifier.
   - **C.** Edit the MattGPT story copy to reduce overlap with org-leadership vocabulary — narrow the "stakeholders" / "value proposition" framing so it only matches portfolio/build queries.
   - **D.** Same shape as the diversify_results() pinning bug (MATTGPT-021) — pin and re-rank instead of letting raw Pinecone scores decide.
-- **Related:** MATTGPT-021 (diversify_results pinning), MATTGPT-016 (semantic router wrong-person detection). Same broader theme: retrieval over-ranking on semantic overlap without semantic intent disambiguation.
+- **Related:** MATTGPT-021 (diversify_results pinning), MATTGPT-016 (semantic router wrong-person detection — closed Decided Against May 14 2026). Same broader theme: retrieval over-ranking on semantic overlap without semantic intent disambiguation.
+- **Cross-reference with MATTGPT-022 (added May 14, 2026):** Writing another MattGPT-meta story for the corpus (MATTGPT-022 "Data Quality Cleanup Journey Story") could worsen this ticket's over-ranking problem by adding a fifth MattGPT-narrative story competing for retrieval space. Decide 022 jointly with this ticket.
 - **Logged:** May 13, 2026
 
 ---
