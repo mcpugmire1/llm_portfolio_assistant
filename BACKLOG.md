@@ -14,7 +14,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-016](#mattgpt-016) | Semantic Router — Wrong-Person Query Detection | Decided Against | High | Issue | Apr 2026 |
 | [MATTGPT-017](#mattgpt-017) | Wire skipped Role Match logging BDD scenarios (Playwright click + mocked Sheets write) | Open | Medium | Action | Apr 28, 2026 |
 | [MATTGPT-018](#mattgpt-018) | Page-Load Flicker | Open | Medium | Issue | Pre-Apr 2026 |
-| [MATTGPT-019](#mattgpt-019) | Story Count Code Fix | Open | Low | Refactor | Pre-Apr 2026 |
+| [MATTGPT-019](#mattgpt-019) | Story Count Copy — Replace "130+" with "Over 100" | Open | Low | Refactor | Pre-Apr 2026 |
 | [MATTGPT-020](#mattgpt-020) | Simplify backend_service.py | Decided Against | Medium | Refactor | Pre-Jan 2026 |
 | [MATTGPT-021](#mattgpt-021) | diversify_results() Pinning Bug | Open | Medium | Issue | Apr 2026 |
 | [MATTGPT-022](#mattgpt-022) | Data Quality Cleanup Journey Story | Open | Medium | Action | Mar 2026 |
@@ -44,6 +44,14 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-061](#mattgpt-061) | MattGPT portfolio story contaminating organizational leadership queries | Open | Medium | Issue | May 13, 2026 |
 | [MATTGPT-062](#mattgpt-062) | Semantic router cache silently uses stale embeddings when VALID_INTENTS changes | Open | Medium | Refactor | May 14, 2026 |
 | [MATTGPT-063](#mattgpt-063) | Wrong-person queries with names outside nonsense regex produce confused-context RAG answers | Open | Medium | Issue | May 14, 2026 |
+| [MATTGPT-064](#mattgpt-064) | Explore Stories — Table row hover/cursor doesn't apply to data cells (AgGrid selector fix) | Open | Low | Issue | May 15, 2026 |
+| [MATTGPT-065](#mattgpt-065) | Explore Stories — Polish bundle (filter UX, empty states, story details) | Open | Medium | Action | May 15, 2026 |
+| [MATTGPT-066](#mattgpt-066) | Role Match — Sample JD / "Try a sample role" cold-start affordance | Open | Medium | Action | May 15, 2026 |
+| [MATTGPT-067](#mattgpt-067) | Role Match — Result panel and input polish bundle | Open | Low | Action | May 15, 2026 |
+| [MATTGPT-068](#mattgpt-068) | About Matt — Content polish bundle (clickable questions, code expander, anchor nav, stat consolidation) | Open | Medium | Action | May 15, 2026 |
+| [MATTGPT-069](#mattgpt-069) | Home — Stats label contrast (light mode WCAG AA) | Open | Low | Issue | May 15, 2026 |
+| [MATTGPT-070](#mattgpt-070) | Ask MattGPT — Suggestion button cursor pointer | Open | Low | Issue | May 15, 2026 |
+| [MATTGPT-071](#mattgpt-071) | Nonsense rejection banner — redirect chips + hint text (branch-aware copy) | Open | Medium | Action | May 15, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -198,15 +206,17 @@ Each detail block uses these fields. Not every field is required for every item.
 ---
 
 ### MATTGPT-019
-**Story Count Code Fix**
+**Story Count Copy — Replace "130+" with "Over 100"**
 
 - **Status:** Open
 - **Priority:** Low
 - **Type:** Refactor
-- **Issue:** Code references "130+" stories in multiple places. Actual corpus is currently 113 stories (May 14, 2026 measurement). Number drifts as stories are added/removed.
-- **Audience reality (May 14, 2026 rationalization):** Recruiters don't count stories — they scan and click. "130+" reads the same as "113" to a human visitor; both signal "lots of stories." The drift is mainly visible to LLMs (or anyone explicitly auditing). Priority dropped from Medium → Low: code-cleanliness concern, not a UX correctness concern.
-- **Fix:** Remove hardcoded "130+" and derive count from JSONL at runtime, or remove the number entirely. Pick up alongside any nearby file edit.
-- **Logged:** Pre-April 2026 / **Rationalized:** May 14, 2026
+- **Issue:** Code references "130+" stories in multiple places (hero copy, status bar, prompt cards, loading messages, About Matt narrative). Actual corpus is currently 113 stories (May 14, 2026 measurement). The exact number drifts as stories are added/removed, but no copy gets updated to match.
+- **Audience reality:** Recruiters don't count stories — they scan and click. "Over 100" reads the same as "113" or "130+" to a human visitor; all three signal "lots of stories." The exact figure invites scrutiny it doesn't need.
+- **Fix (May 15, 2026 — simpler than original framing):** Find-and-replace every "130+" with "Over 100" (or "100+" where the format fits — e.g., "100+ stories indexed"). No runtime calculation, no JSONL load, no constant to maintain. Always accurate regardless of corpus size, no sync issue across pages.
+  - Rationale for *not* doing runtime calc: deriving from JSONL at load time is a real engineering cost (caching, refresh, cross-page sync) for zero audience value. The drift problem is solved entirely by removing the false precision from the copy.
+- **Scope:** Find every "130+" reference across `ui/`, prompts, and any other source-of-truth copy. ~5-10 locations expected.
+- **Logged:** Pre-April 2026 / **Rationalized:** May 14, 2026 / **Simplified:** May 15, 2026
 
 ---
 
@@ -824,5 +834,163 @@ Each detail block uses these fields. Not every field is required for every item.
   - **C. Retrieval-confidence floor (harden existing partial implementation).** Currently low confidence shows a warning banner but answers anyway. Could be hardened to refuse when top-story relevance is below a threshold. Risk: legit niche queries might fall below the threshold and get rejected.
   - **D. Extend nonsense regex periodically.** Manually add high-profile names as they appear in query logs. Manual but tractable for low-volume traffic.
   - **E. Defer.** Accept the long-tail failure rate; monitor query logs and revisit when frequency/brand-damage warrants action. Current de facto state.
-- **Related:** MATTGPT-016 (Decided Against — same root concern, wrong fix shape), MATTGPT-061 (MattGPT story over-ranking), MATTGPT-021 (diversify_results pinning), MATTGPT-064 (architecture review — if filed).
+- **Related:** MATTGPT-016 (Decided Against — same root concern, wrong fix shape), MATTGPT-061 (MattGPT story over-ranking), MATTGPT-021 (diversify_results pinning).
 - **Logged:** May 14, 2026
+
+---
+
+### MATTGPT-064
+**Explore Stories — Table row hover/cursor doesn't apply to data cells (AgGrid selector fix)**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Issue
+- **Issue:** `global_styles.py:372-384` already defines `cursor: pointer !important` and hover background/border styling for `.ag-theme-streamlit .ag-row`. In production the cursor changes on column headers but **not** on data cells. Diagnosis (May 15, 2026): the rule never wins because (a) `.ag-cell` sits on top of `.ag-row` and the cursor is determined by the topmost element under the pointer, and (b) AgGrid manages hover state via a `.ag-row-hover` class rather than the browser `:hover` pseudo-class — `:hover` on `.ag-row` may never fire reliably because cells consume the pointer events.
+- **Fix:** Selector adjustment, NOT specificity escalation. The existing `!important` declarations are fine.
+  - Change cursor target from `.ag-theme-streamlit .ag-row` to `.ag-theme-streamlit .ag-row .ag-cell`.
+  - Change hover selector from `.ag-theme-streamlit .ag-row:hover` to `.ag-theme-streamlit .ag-row.ag-row-hover`.
+- **Effort:** ~5-10 lines in `global_styles.py:372-384`.
+- **Audience impact:** High-intent recruiter scanning the Table view to find a specific story may not realize rows are clickable until they accidentally click one. Original UX agent flagged this as a "missing CSS" problem; actual root cause is "existing CSS doesn't apply to data cells" — different bug, different fix.
+- **Logged:** May 15, 2026
+
+---
+
+### MATTGPT-065
+**Explore Stories — Polish bundle (filter UX, empty states, story details)**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Items (all in `ui/pages/explore_stories.py` unless noted):**
+  - **Reset Filters conditional render** — currently always visible (line 1890). Compute `any_filter_active = bool(F["q"]) or F["industry"] or F["capability"] or F["domains"] or F["clients"] or F["roles"] ...` and wrap render in `if any_filter_active:`. ~3 lines.
+  - **Empty zero-results state — Table view** — Cards view has Clear filters button (lines 2417-2421), Table view text-only (lines 2122-2132). Copy Cards-view pattern to Table block. ~5 lines.
+  - **Card truncation "Read more →" affordance** — `.card-desc` uses CSS ellipsis (lines 2466-2476), no visual cue. Append `<span class="card-read-more">Read more →</span>` + small CSS rule. ~3 lines.
+  - **Back-to-list from story detail (Table view only)** — Cards view has "✕ Close"; Table view inline detail has no close button (deselecting works by clicking row again, not obvious). Add "← Close detail" at top of Table-view detail. ~5-10 lines.
+  - **Advanced Filters label rename** — currently `"▾ Advanced Filters"` / `"▸ Advanced Filters"` (lines 1882-1883). Rename to `"Filter by Client, Role & Domain"`. ~2 lines.
+  - **Export tooltip** — `ui/components/action_buttons.py:154` Export button has no tooltip. Add `title="Export as PDF"`. ~1 line.
+  - **Story title truncation tooltip** — table cell titles truncate without reveal. Add `title="{full_title}"` attribute on the cell. ~1 line.
+- **Out of scope:** Table row hover/cursor (filed as MATTGPT-064 — different layer, different fix). SHOW dropdown / pagination separation (won't fix per May 15 decision — per-view design is intentional).
+- **Verify-first item:** SHOW per-page resetting (UX agent claim that selection resets across renders). Code at line 2202 uses `st.session_state.get("page_size_select", ...)` — likely already persists. 30-second eye-test before fixing; may be a non-issue.
+- **Effort:** ~25-50 lines total, single file, all low-risk. Natural single-PR bundle.
+- **Logged:** May 15, 2026
+
+---
+
+### MATTGPT-066
+**Role Match — Sample JD / "Try a sample role" cold-start affordance**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Issue:** Empty Role Match page (`role_match.py:1294-1300`) shows only a hint paragraph + textarea with placeholder `"Paste job description here..."`. A recruiter arriving speculatively — without a specific JD in hand — has nothing to engage with. Highest-impact cold-start fix on this page per May 15 UX assessment.
+- **Fix:** Add 1-3 sample JD buttons below the textarea. Clicking pre-fills the textarea via prefilter pattern (set `st.session_state["role_match_jd_input"]` BEFORE the textarea renders to avoid `StreamlitAPIException`).
+- **Implementation notes:**
+  - Define sample JD strings as a module-level constant (e.g., `SAMPLE_JDS = {"Director of Platform Engineering": "...", ...}`). Drift-prone if inlined per CLAUDE.md "no hardcoded enums."
+  - Use prefilter pattern (see `banking_landing.py` → `explore_stories.py` for cross-state reference).
+  - Optional alternative: widget-key versioning if the prefilter approach hits Streamlit state issues.
+- **Effort:** ~30-50 lines, single file. Risk: medium — widget state ordering is the gotcha.
+- **Audience impact:** Direct conversion improvement for speculative recruiter visits (Director/VP recruiters who arrive to "see what the tool does" before they have a specific role). Removes the empty-state barrier for first-time visitors.
+- **Logged:** May 15, 2026
+
+---
+
+### MATTGPT-067
+**Role Match — Result panel and input polish bundle**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Action
+- **Items (all in `ui/pages/role_match.py`):**
+  - **Loading message** — `render_thinking_indicator()` at line 1330 is called bare → uses random dog-themed phrases from `THINKING_MESSAGES`. Pass specific message: `render_thinking_indicator(message="Agy is reviewing over 100 stories…")`. Function already accepts a `message` parameter (see `thinking_indicator.py:39`). ~1 line. Aligns with MATTGPT-019 "Over 100" copy standard.
+  - **Post-result follow-up CTA** — `_render_results_panel` ends after the Preferred section (line 628) with no follow-up affordance. Add "Ask Agy a follow-up →" link/button that navigates to Ask MattGPT. ~10-15 lines.
+  - **Disabled state on empty textarea** — submit button (line 1303) is always enabled; current behavior shows `st.warning("Paste a job description first.")` on empty click (line 1324). Replace with `disabled=not jd_text.strip()` (pattern at `ui/pages/ask_mattgpt/landing_view.py:225-231`). ~2 lines.
+  - **Clear textarea button** — no native Streamlit clear control. Add a small "Clear" button rendered BEFORE the textarea; on click pops `role_match_jd_input` from session_state. Must render before textarea per Streamlit widget state rules. ~5-10 lines.
+- **Story count copy:** Use "over 100" per MATTGPT-019's "Over 100" standard, not "130+".
+- **Effort:** ~20-30 lines total, single file. Natural pair with MATTGPT-066 (same area, same audience).
+- **Logged:** May 15, 2026
+
+---
+
+### MATTGPT-068
+**About Matt — Content polish bundle**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Decisions locked May 15, 2026 (after UX assessment with multiple agents):**
+  - **Sample questions clickable** — 4 questions at `about_matt.py:1199-1204` currently `<li>` plain text in a single `st.markdown` block. Convert to 4 `st.button` calls using the existing chip→Ask pattern: `seed_prompt` + `__ask_from_suggestion__` + `active_tab="Ask MattGPT"` + `st.rerun()` (see `category_cards.py:55-57` and `story_detail.py:203-218` — the pattern is used in 2 existing call sites). Define the four question strings as a module-level constant `ABOUT_MATT_SEED_QUESTIONS` for BDD/eval reuse. Requires splitting the existing markdown blob into pre / button container / post pieces, plus scoped CSS to keep the buttons visually consistent with the styled `<div class="cta-card">`.
+  - **Remove redundant footer (lines 1205-1208)** — once questions are clickable, the "Head to Ask MattGPT in the navigation above to try it yourself" line AND the "Real AI assistant • 130+ projects • Instant answers • Available 24/7" bullets become redundant. The paragraph above already carries every signal. Remove entirely; section ends with the four buttons.
+  - **Code block in `<details><summary>`** — RAG pipeline code at lines 1062-1091 is a wall of Python mid-page. Wrap in native HTML `<details><summary>Show code</summary>...</details>` inside the existing markdown (no st.expander → no markdown-block split needed). Serves both audiences: technical readers expand it, non-technical readers skip past. ~3 lines.
+  - **4x stat — relocate to Career Evolution timeline** — currently in stats bar (line 884) as a 5th stat, inconsistent with Home stats bar (4 stats only — see `hero.py:298-311`). Remove from About Matt stats bar; surface in Career Evolution timeline where the CIC story provides context.
+  - **Merge DevOps & Quality card into CI/CD Pipeline card** — `.details-grid` is 2-column (`about_matt.py:316`), 7 cards → bottom row has 1 orphan (DevOps & Quality, lines 1157-1164). Merge its content into the CI/CD Pipeline card (lines 1129-1137) — both reference CI/CD already, so the merge removes both the orphan and the redundancy in one move.
+  - **Anchor navigation** — page is 3,000+ words. Add `id="career"`, `id="mattgpt"`, `id="competencies"`, `id="philosophy"` to section headers at lines 896, 957, 1218, 1303. Render a nav block (`Career · MattGPT · Competencies · Philosophy`) right after the hero. ~15-20 lines.
+- **Closed per May 15 assessment:** "View Design Specification" format indicator (minor, low ROI for the audience), explicit two-audience signposting labels (anchor nav handles implicitly).
+- **Effort:** ~50-80 lines total, single file. Natural single-PR bundle.
+- **Logged:** May 15, 2026
+
+---
+
+### MATTGPT-069
+**Home — Stats label contrast (light mode WCAG AA fix)**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Issue
+- **Issue:** Stats bar labels in `ui/components/hero.py:262-267` use `color: var(--text-muted)`. In light mode (`ui/styles/global_styles.py:47`), `--text-muted` resolves to `#9CA3AF`. On the white background, the contrast ratio is ~2.85:1 — **fails WCAG AA** (needs 4.5:1 for 14px text). Dark mode (`#6B7280` on dark, line 99) passes at ~4.6:1.
+- **Audience impact:** A recruiter scanning the home page may register the stat numbers (20+, 130+, 300+, 15+) but miss the labels entirely — losing the credibility signal of "Years Experience / Projects Delivered / Professionals Trained / Enterprise Clients."
+- **Fix:** Switch the stats label color from `--text-muted` to `--text-secondary` (`#6B7280` in light mode → ~4.7:1, passes AA). ~1 line. Optional: also bump weight from default to 500 for additional emphasis.
+- **Out of scope (closed per May 15 assessment):** Hero CTA weight rebalance (already done — Ask Agy is primary, Explore is secondary in `hero.py:168-173`); name vs tagline visual prominence (design call — tagline is intentional H1 anchor); explicit seniority signal at hero (design call — recruiters arriving from LinkedIn have context, stats bar reinforces 20+ years).
+- **Logged:** May 15, 2026
+
+---
+
+### MATTGPT-070
+**Ask MattGPT — Suggestion button cursor pointer**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Issue
+- **Issue:** The 6 suggestion buttons on the Ask MattGPT landing page (`ui/pages/ask_mattgpt/landing_view.py:97-135`) are real `st.button(type="secondary")` calls. The CSS rule at `ui/pages/ask_mattgpt/styles.py:288-309` styles them as cards (border, background, padding, hover background) but **does not declare `cursor: pointer`**. Adjacent buttons in the same file DO declare it explicitly (lines 443, 1290, 1399), so it's not being relied upon to inherit from Streamlit defaults. Live testing (May 15, 2026) confirms the pointer does not change on hover — cards appear interactive (purple text, border) but the cursor stays as the default arrow.
+- **Audience impact:** First-time visitor cannot visually confirm the cards are clickable until they actually click one. Cheap trust erosion at the first interaction moment.
+- **Fix:** Add `cursor: pointer !important;` to the existing `button[key^="suggested_"]` rule at lines 288-309. ~1 line.
+- **Out of scope (closed per May 15 assessment):** Input field below the fold (the 6 suggestion buttons are themselves real CTAs that submit queries — input is the secondary path, defensible as-is); status bar developer-facing copy (design call for a technical-leaning portfolio); conversation export/share (already deferred to React migration per `conversation_helpers.py:470` TODO).
+- **Logged:** May 15, 2026
+
+---
+
+### MATTGPT-071
+**Nonsense rejection banner — redirect chips + hint text (branch-aware copy)**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Issue:** Current `render_no_match_banner` (`utils/ui_helpers.py:304`) rejects nonsense/inappropriate queries with copy only — no affordance for the user to recover with a real query. A recruiter who mistypes or fat-fingers gets a dead end. Personal-intent and out-of-scope branches were differentiated in March 2026, but no redirect mechanism was added to either.
+- **Design (locked May 15, 2026 — ready to implement):**
+
+  **Ask MattGPT — Nonsense branch:**
+  - Banner copy: *🐾 Wrong trail. I'm a Plott Hound trained to track Matt's transformation work. Give me a real scent to follow.*
+  - Four chips beneath the banner:
+    - `[Scale a CIC to 150+ engineers]`
+    - `[Build teams that ship like startups]`
+    - `[Lead enterprise transformation]`
+    - `[Modernize payments at scale]`
+
+  **Ask MattGPT — Inappropriate branch:**
+  - Banner copy: *🐾 That's not a trail I'll follow. Ask me about Matt's work instead.*
+  - No chips. Banner stands alone (deliberate — don't reward the query shape with engagement scaffolding).
+
+  **Explore Stories — Nonsense branch:**
+  - Banner + hint line: *"Try transformation work, scaling teams, payments modernization, or enterprise leadership."*
+  - No clickable chips (Explore Stories uses filter UI, not seed prompts) — hint text only.
+
+  **Explore Stories — Inappropriate branch:**
+  - No hint text. Banner stands alone.
+
+- **Implementation notes:**
+  - Chip click pattern: reuse the existing chip→Ask flow (`seed_prompt` + `__ask_from_suggestion__` + `__ask_force_answer__=True` to bypass the nonsense filter on the canonical chip text + rerun). See `category_cards.py:55-57`, `story_detail.py:203-218` — third call site of the same pattern.
+  - Branch detection: `render_no_match_banner` already receives a `reason` parameter that differentiates nonsense vs. personal vs. out_of_scope vs. inappropriate. Extend the function to render chips conditionally on `reason == "nonsense"` AND `page == "ask_mattgpt"`.
+  - Define chip strings as a module-level constant (e.g., `NONSENSE_REDIRECT_CHIPS = [...]`) for BDD/eval reuse, never inline.
+- **Out of scope:** Changing the rejection logic itself (nonsense filter regex, semantic router branches). This ticket is purely the recovery affordance on top of existing branches.
+- **Effort:** ~30-50 lines across `utils/ui_helpers.py` (banner rendering) + chip handler wiring. Single file plus a constants reference.
+- **Audience impact:** Reduces dead-end conversion loss when a recruiter's first query misfires. The four chips also surface high-signal capability themes for users who arrived without a specific question.
+- **Logged:** May 15, 2026 (design carried over from May 14 session)
