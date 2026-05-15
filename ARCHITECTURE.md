@@ -770,20 +770,20 @@ Two related constants prevent overly generic values from triggering entity filte
 | `Sabbatical` | Not a work engagement |
 | `Various`, `N/A`, `""`, `None` | Empty/placeholder values |
 
-**`EXCLUDED_CLIENTS` / `_EXCLUDED_CLIENTS`** — Values excluded from UI counts and pills.
-**Lives in:** `backend_service.py:44-49`, `banking_landing.py:16-22`, `category_cards.py:17-23`
+**Generic-client exclusion (pattern-based, replaces the former `EXCLUDED_CLIENTS` constants):**
+**Lives in:** `utils/client_utils.py` — `is_generic_client(client: str) -> bool`
 
-| Value | Appears In |
-|-------|------------|
-| `Independent` | All |
-| `Career Narrative` | All |
-| `Multiple Clients` | All |
-| `Personal` | backend_service.py |
-| `Various` | All |
-| `Multiple Financial Services Clients` | Landing pages |
-| `Financial Services Client` | Landing pages |
+Per the CLAUDE.md "No Hardcoded Enums for Data-Derived Values" rule, the prior set of hardcoded `EXCLUDED_CLIENTS` constants (replicated across three files and prone to drift) was replaced by a single pattern-matching helper. Call sites import `is_generic_client` and use it as a filter rather than maintaining parallel exclusion lists.
 
-**Note:** These constants are defined separately in each file. If a new exclusion is needed, update all locations.
+| Value pattern | Reason |
+|-------|--------|
+| `Independent`, `Independent Project` | Personal projects, not a real client |
+| `Career Narrative` | Meta-content, not a client |
+| `Multiple Clients`, `Multiple Financial Services Clients` | Aggregate, not a real client |
+| `Financial Services Client(s)` | Anonymized aggregate |
+| `Personal`, `Sabbatical`, `Various`, `N/A`, `""`, `None` | Empty/placeholder values |
+
+**Note:** Single source of truth — if a new exclusion is needed, update `is_generic_client()` once, not multiple files.
 
 ### Layer 3: Retrieval
 
@@ -1064,10 +1064,12 @@ def render_banking_landing(stories: list[dict]):
 **Hydrated Pages:**
 | File | Hydrated Metrics |
 |------|------------------|
-| `banking_landing.py` | Project count, client pills with counts, capability areas |
-| `cross_industry_landing.py` | Project count, industry pills, capability areas |
+| `banking_landing.py` | Project count, client pills with counts, data-derived capability cards (Core ≥3 stories / Specialized <3 stories) via `utils/landing_cards.py::build_landing_cards()` |
+| `cross_industry_landing.py` | Project count, industry pills, data-derived capability cards (same Core/Specialized tier shape) |
 | `category_cards.py` | Banking/Cross-industry project counts, top 3 client pills |
 | `home.py` | Passes STORIES to category_cards |
+
+**Note on the data-derived card pattern** (Phase 2 refactor, May 11-12, 2026): banking_landing.py and cross_industry_landing.py no longer hardcode capability card lists. Cards are derived at runtime from the story corpus by `build_landing_cards(stories, industry)` — eliminates by construction the regression shape where a hardcoded card promises a curated slice that doesn't exist in the data. See `utils/landing_cards.py` and CHANGELOG May 11-12 entries.
 
 **Excluded Clients:** "Career Narrative", "Independent", "Multiple Clients" (excluded from counts and pills)
 
@@ -1829,7 +1831,7 @@ PINECONE_NAMESPACE = "default"
 ```
 
 **External Monitoring:**
-- **UptimeRobot** — HTTP/S monitor configured at https://askmattgpt.streamlit.app. Pings the app every ~5 minutes to prevent Streamlit Cloud sleep. Sends User-Agent containing "UptimeRobot". Filtered from `page_load` logging via `MONITORING_BOT_SIGNATURES` in `config/constants.py`.
+- **UptimeRobot** — HTTP/S monitor configured at https://askmattgpt.streamlit.app. Pings the app every ~5 minutes to prevent Streamlit Cloud sleep. Sends User-Agent containing "UptimeRobot". Filtered from BOTH `page_load` AND `query` event logging via `MONITORING_BOT_SIGNATURES` in `config/constants.py` (checked at `app.py:104` for page_load and `services/query_logger.py::log_query()` via `is_bot()` for queries — extended May 13, 2026). The same signature list also catches `HeadlessChrome` (Chrome agent regression runs) and the legacy `Chrome/103.0.0.0` probe pattern. Bot traffic produces zero rows in the Google Sheet log, keeping conversion/bounce analysis based on real visitors only.
 
 **Python Version:** 3.11+
 
