@@ -44,9 +44,9 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-061](#mattgpt-061) | MattGPT portfolio story contaminating organizational leadership queries | Open | Medium | Issue | May 13, 2026 |
 | [MATTGPT-062](#mattgpt-062) | Semantic router cache silently uses stale embeddings when VALID_INTENTS changes | Open | Medium | Refactor | May 14, 2026 |
 | [MATTGPT-063](#mattgpt-063) | Wrong-person queries with names outside nonsense regex produce confused-context RAG answers | Open | Medium | Issue | May 14, 2026 |
-| [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Parked | Low | Action | Pre-2026 |
-| [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Parked | Low | Action | Apr 29, 2026 |
-| [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Parked | Low | Action | Apr 29, 2026 |
+| [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
+| [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
+| [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-036](#mattgpt-036) | Entity Cluster Promotion Override | Decided Against | — | — | Pre-2026 |
 | [MATTGPT-037](#mattgpt-037) | Score Gap Override (Generic-Above-Named) | Decided Against | — | — | Pre-2026 |
 | [MATTGPT-038](#mattgpt-038) | Centralize Constants (Duplicate of legacy #7) | Decided Against | — | — | Pre-2026 |
@@ -541,35 +541,41 @@ Each detail block uses these fields. Not every field is required for every item.
 ### MATTGPT-010
 **Cross-Browser Testing**
 
-- **Status:** Parked
-- **Priority:** Low
-- **Reason:** Low priority until React migration. Streamlit handles most cross-browser issues.
+- **Status:** Decided Against (May 15, 2026)
+- **Priority:** Low (was)
+- **Why not:** Trigger expired. Original framing parked this until "React migration" (originally targeted Q1 2026). Q1 has passed; still on Streamlit with no active migration work. If React migration ever happens, cross-browser testing falls out naturally as part of that work — no need for a standing ticket waiting on an uncertain trigger. Streamlit currently handles most cross-browser concerns adequately.
+- **Original reason:** Low priority until React migration. Streamlit handles most cross-browser issues.
+- **Closed:** May 15, 2026
 
 ---
 
 ### MATTGPT-048
 **Portfolio Integration (Notion, LinkedIn sync)**
 
-- **Status:** Parked
-- **Priority:** Low
+- **Status:** Decided Against (May 15, 2026)
+- **Priority:** Low (was)
 - **Type:** Action
+- **Why not:** Framing significantly out of date and points at the wrong scope. The April 29 ticket envisioned outbound sync of the MattGPT story corpus to Notion/LinkedIn. The actual workstream that matured (Job Search System, design decisions compiled in Notion May 10) is a different shape entirely — JD ingestion → Notion + engine assessment → back to Notion, with Cowork as the orchestration layer. The explicit Job Search System decision is **"MattGPT chat is portfolio, NOT operational tool"** — meaning the integration work has its proper home in Notion's Job Search System design docs, not in MattGPT's BACKLOG. Closing here. The active work lives where it belongs.
+- **Original framing (preserved):**
 - **Proposed:** Programmatic sync between MattGPT story corpus and external systems (Notion job tracker, LinkedIn experience sections).
 - **Reason parked:** Real idea, no urgency, no foundation work started. Notion sync was already noted as out-of-scope for Role Match v1 ("manual copy of fit score acceptable"). Revisit when traffic patterns or use cases create a forcing function.
 - **Source:** Cross-reference of design spec vs. implementation, April 29, 2026
-- **Logged:** April 29, 2026
+- **Logged:** April 29, 2026 / **Closed:** May 15, 2026
 
 ---
 
 ### MATTGPT-049
 **Job Fit Broader Scope (cover letter export, LinkedIn URL auto-extract)**
 
-- **Status:** Parked
-- **Priority:** Low
+- **Status:** Decided Against (May 15, 2026)
+- **Priority:** Low (was)
 - **Type:** Action
+- **Why not:** Both features are out of step with the Job Search System design decisions (Notion, May 10). LinkedIn intake is handled via Gmail-routed alerts in the actual plan — not URL scraping. Cover letter export isn't in the design at all. Adding either to Role Match would push back against the explicit "MattGPT chat is portfolio, NOT operational tool" decision — they're operational features that belong in the Job Search System workstream if they're built. Same monitoring-without-mechanism pattern as the other Decided-Against tickets from this rationalization pass.
+- **Original framing (preserved):**
 - **Proposed:** Extensions to Role Match: cover letter export from match results, LinkedIn URL parsing to auto-extract job descriptions.
 - **Reason parked:** Natural extensions to Role Match Phase 4, but no user demand signal yet, no architectural hooks. Revisit if Role Match usage signals demand for these features.
 - **Source:** Cross-reference of design spec vs. implementation, April 29, 2026
-- **Logged:** April 29, 2026
+- **Logged:** April 29, 2026 / **Closed:** May 15, 2026
 
 ---
 
