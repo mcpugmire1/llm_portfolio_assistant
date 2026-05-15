@@ -20,28 +20,26 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-022](#mattgpt-022) | Data Quality Cleanup Journey Story | Open | Medium | Action | Mar 2026 |
 | [MATTGPT-039](#mattgpt-039) | Automated Regression Detection (GitHub Actions) | Open | Medium | Action | Apr 29, 2026 |
 | [MATTGPT-040](#mattgpt-040) | Eval Coverage Gaps — Follow-up Queries | Open | Low | Action | Apr 29, 2026 |
-| [MATTGPT-023](#mattgpt-023) | LLM Meta-Commentary on Q20 (Stochastic) | Open | Low | Issue | Apr 2026 |
-| [MATTGPT-024](#mattgpt-024) | Clarify Hybrid Scoring | Open | Low | Refactor | Pre-2026 |
-| [MATTGPT-025](#mattgpt-025) | Add Error Handling Tests | Open | Low | Action | Pre-2026 |
-| [MATTGPT-026](#mattgpt-026) | Clarify Layer Ownership | Open | Low | Refactor | Pre-2026 |
-| [MATTGPT-027](#mattgpt-027) | Quarterly Intent Review | Open | Low | Action | Jan 2026 |
-| [MATTGPT-028](#mattgpt-028) | Share Link Copy Functionality | Open | Low | Issue | Pre-2026 |
-| [MATTGPT-029](#mattgpt-029) | Low-Confidence Banner Edge Cases | Open | Low | Issue | Pre-2026 |
-| [MATTGPT-030](#mattgpt-030) | Related Projects Selection State | Open | Low | Issue | Pre-2026 |
-| [MATTGPT-031](#mattgpt-031) | Semantic Router Error Path Coverage | Open | Low | Action | Pre-2026 |
+| [MATTGPT-023](#mattgpt-023) | LLM Meta-Commentary on Q20 (Stochastic) | Decided Against | Low | Issue | Apr 2026 |
+| [MATTGPT-024](#mattgpt-024) | Clarify Hybrid Scoring | Decided Against | Low | Refactor | Pre-2026 |
+| [MATTGPT-025](#mattgpt-025) | Add Error Handling Tests | Decided Against | Low | Action | Pre-2026 |
+| [MATTGPT-026](#mattgpt-026) | Clarify Layer Ownership | Decided Against | Low | Refactor | Pre-2026 |
+| [MATTGPT-027](#mattgpt-027) | Quarterly Intent Review | Decided Against | Low | Action | Jan 2026 |
+| [MATTGPT-028](#mattgpt-028) | Share Link Copy Functionality | Decided Against | Low | Issue | Pre-2026 |
+| [MATTGPT-029](#mattgpt-029) | Low-Confidence Banner Edge Cases | Decided Against | Low | Issue | Pre-2026 |
+| [MATTGPT-031](#mattgpt-031) | Semantic Router Error Path Coverage | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-032](#mattgpt-032) | LLM Response Broken Markdown | Open | Low | Issue | Pre-2026 |
 | [MATTGPT-033](#mattgpt-033) | Ask Agy Button Shifts on Focus | Open | Low | Issue | Pre-2026 |
-| [MATTGPT-034](#mattgpt-034) | Dead Code Cleanup (Remaining) | Open | Low | Refactor | Pre-2026 |
 | [MATTGPT-035](#mattgpt-035) | Eval Modernization — Semantic Scoring | Open | Low | Spike | Pre-2026 |
-| [MATTGPT-041](#mattgpt-041) | 5P Dimensional Drill-Down | Open | Low | Spike | Apr 29, 2026 |
-| [MATTGPT-042](#mattgpt-042) | 5P Pattern Taxonomy | Open | Low | Spike | Apr 29, 2026 |
-| [MATTGPT-043](#mattgpt-043) | Humane Framing — Intent-to-Tone Mapping | Open | Low | Spike | Apr 29, 2026 |
-| [MATTGPT-044](#mattgpt-044) | Pattern Insights — Structured Templates | Open | Low | Spike | Apr 29, 2026 |
+| [MATTGPT-041](#mattgpt-041) | 5P Dimensional Drill-Down | Decided Against | Low | Spike | Apr 29, 2026 |
+| [MATTGPT-042](#mattgpt-042) | 5P Pattern Taxonomy | Decided Against | Low | Spike | Apr 29, 2026 |
+| [MATTGPT-043](#mattgpt-043) | Humane Framing — Intent-to-Tone Mapping | Decided Against | Low | Spike | Apr 29, 2026 |
+| [MATTGPT-044](#mattgpt-044) | Pattern Insights — Structured Templates | Decided Against | Low | Spike | Apr 29, 2026 |
 | [MATTGPT-045](#mattgpt-045) | Analytics Dashboard | Open | Low | Action | Apr 29, 2026 |
-| [MATTGPT-046](#mattgpt-046) | Latency Benchmarks | Open | Low | Action | Apr 29, 2026 |
-| [MATTGPT-047](#mattgpt-047) | Cost Tracking | Open | Low | Action | Apr 29, 2026 |
+| [MATTGPT-046](#mattgpt-046) | Latency Benchmarks | Decided Against | Low | Action | Apr 29, 2026 |
+| [MATTGPT-047](#mattgpt-047) | Cost Tracking | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-058](#mattgpt-058) | Replace dark-theme setInterval polling with MutationObserver | Decided Against | Low | Refactor | May 12, 2026 |
-| [MATTGPT-059](#mattgpt-059) | Add Theme-based prefilter dimension to category cards | Open | Low | Spike | May 12, 2026 |
+| [MATTGPT-059](#mattgpt-059) | Add Theme-based prefilter dimension to category cards | Decided Against | Low | Spike | May 12, 2026 |
 | [MATTGPT-060](#mattgpt-060) | BDD coverage gap — assert post-navigation page state, not just navigation | Open | Medium | Action | May 12, 2026 |
 | [MATTGPT-061](#mattgpt-061) | MattGPT portfolio story contaminating organizational leadership queries | Open | Medium | Issue | May 13, 2026 |
 | [MATTGPT-062](#mattgpt-062) | Semantic router cache silently uses stale embeddings when VALID_INTENTS changes | Open | Medium | Refactor | May 14, 2026 |
@@ -291,98 +289,111 @@ Each detail block uses these fields. Not every field is required for every item.
 ### MATTGPT-023
 **LLM Meta-Commentary on Q20 (Stochastic)**
 
-- **Status:** Open
-- **Priority:** Low
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
 - **Type:** Issue
+- **Why not:** Stochastic LLM-response flake. "Monitor — if it becomes consistent" was the framing, but nothing actively monitored — the ticket just sat. As of May 14 2026, Q20 isn't in the eval baseline's tracked stochastic failures (Q15 Fiserv and Q55 TDD are the current trackers); the issue may have settled, or just hasn't tripped recently. Accepted as LLM-response cost. The eval suite catches it implicitly if it ever becomes consistent — at which point re-file with concrete reproduction. No standing ticket needed for a known-flake.
+- **Original framing (preserved):**
 - **Issue:** "Who is Matt Pugmire?" sometimes generates meta-commentary ("showcases his") instead of direct biographical content. Stochastic — passes on some runs, fails on others.
 - **Root cause:** LLM occasionally ignores the "never evaluate Matt" prompt instruction for broad biographical queries.
 - **Fix:** Monitor — if it becomes consistent, add Q20-specific prompt reinforcement.
-- **Logged:** April 2026 test audit
+- **Logged:** April 2026 test audit / **Closed:** May 14, 2026
 
 ---
 
 ### MATTGPT-024
 **Clarify Hybrid Scoring**
 
-- **Status:** Open
-- **Priority:** Low
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
 - **Type:** Refactor
+- **Why not:** "Hybrid scoring" framing is itself stale — there is no hybrid scoring. W_KW = 0.0, the pipeline is pure semantic via Pinecone (this was the false claim corrected by MATTGPT-057 alignment work, May 11). What the ticket actually described is that Pinecone returns 0.0-1.0 similarity and our confidence thresholds (CONFIDENCE_HIGH=0.25, CONFIDENCE_LOW=0.15) sit in a narrow band of that range — that's just thresholds operating on raw similarity, not a scoring-system conflict. The proposed fix ("document or align") was vague with no clear audience for the documentation or concrete pain driving the alignment. Close. If a real question about threshold calibration emerges in production (false confidence labels, gate firing wrong), file a new ticket with concrete evidence.
+- **Original framing (preserved):**
 - **Issue:** Pinecone scores (0.0-1.0) don't map clearly to confidence buckets (0.15-0.25).
 - **Fix:** Document or align the scoring systems.
+- **Closed:** May 14, 2026
 
 ---
 
 ### MATTGPT-025
 **Add Error Handling Tests**
 
-- **Status:** Open
-- **Priority:** Low
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
 - **Type:** Action
+- **Why not:** Error handling already exists in production code (FAIL OPEN patterns in semantic_router.py:350, try/except in query_logger.py, etc.). The gap is "tests for those paths," not "the handling itself." No production bugs traceable to missing error-path tests. "Add tests for error paths" is a coding norm/habit, not a discrete ticket — opportunistically add error-path unit tests when wiring up broader test coverage (e.g., during MATTGPT-014 / MATTGPT-017 work). Standing ticket for an undriven coverage gap was just backlog cruft.
+- **Original framing (preserved):**
 - **Issue:** Test suite only covers happy path.
 - **Fix:** Add tests for rate limits, timeouts, embedding failures.
+- **Closed:** May 14, 2026
 
 ---
 
 ### MATTGPT-026
 **Clarify Layer Ownership**
 
-- **Status:** Open
-- **Priority:** Low
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
 - **Type:** Refactor
+- **Why not:** Vague refactor with no concrete pain driver. During May 14 rationalization, the ticket author couldn't recall what specific problem this was originally pointing at — strongest possible signal that it's cruft. Same family as MATTGPT-020 / MATTGPT-024 / MATTGPT-025: pre-2026 "improve the code somehow" tickets without a concrete scope. Re-file if a specific contract or boundary problem emerges in real work.
+- **Original framing (preserved):**
 - **Issue:** Ranking, intent classification, and formatting split across multiple files.
 - **Fix:** Document contracts or refactor boundaries.
+- **Closed:** May 14, 2026
 
 ---
 
 ### MATTGPT-027
 **Quarterly Intent Review**
 
-- **Status:** Open
-- **Priority:** Low
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
 - **Type:** Action
+- **Why not:** "Schedule quarterly review" was 3.5 months overdue at May 14 with no enforced cadence. Reality: intent review is reactive — canonical phrases get touched when actual issues surface (chip CX work, MATTGPT-061 over-ranking, MATTGPT-063 wrong-person), not on a calendar. The reactive model is what's actually working. A standing "schedule review" ticket without a mechanism (calendar reminder? recurring ticket? who owns it?) is just aspirational and aged into cruft.
+- **Original framing (preserved):**
 - **Issue:** 15 intent families with ~20 phrases each in `semantic_router.py`. Phrases drift relevance over time.
 - **Fix:** Schedule quarterly review.
 - **Last review:** January 29, 2026
+- **Closed:** May 14, 2026
 
 ---
 
 ### MATTGPT-028
 **Share Link Copy Functionality**
 
-- **Status:** Open
-- **Priority:** Low
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
 - **Type:** Issue
+- **Why not:** "Verify works across browsers" was a QA verification task without an owner or schedule — same shape as Quarterly Intent Review (MATTGPT-027). Share functionality exists in `action_buttons.py:179` and is wired into Story Detail and Role Match. No production bug reports. If a real cross-browser failure surfaces, re-file as a concrete bug ticket with the failing browser + reproduction. Standing "verify someday" tickets are cruft.
+- **Original framing (preserved):**
 - **Issue:** Verify share link copy-to-clipboard works correctly across browsers.
+- **Closed:** May 14, 2026
 
 ---
 
 ### MATTGPT-029
 **Low-Confidence Banner Edge Cases**
 
-- **Status:** Open
-- **Priority:** Low
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
 - **Type:** Issue
+- **Why not:** Logged in April 2026 test audit sweep as "sometimes triggers incorrectly" — no specific failing query, no reproduction. Thresholds (CONFIDENCE_HIGH=0.25, CONFIDENCE_LOW=0.15) have been stable since January 2026 with no production failures attributable to misfires. Same pattern as MATTGPT-027 (passive monitoring without a mechanism = cruft). Historical context preserved in **docs/ADR.md ADR 018 — Confidence Threshold Calibration for Pinecone Semantic Search**, which captures the December 2025 calibration history and edge cases to watch. If a specific banner misfire surfaces with a reproduction, re-file as a concrete bug ticket.
+- **Original framing (preserved):**
 - **Issue:** Low-confidence banner sometimes triggers incorrectly. Review threshold logic.
-
----
-
-### MATTGPT-030
-**Related Projects Selection State**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Issue
-- **Issue:** Edge cases in purple highlight, close toggle, rapid clicks.
+- **Closed:** May 14, 2026
 
 ---
 
 ### MATTGPT-031
 **Semantic Router Error Path Coverage**
 
-- **Status:** Open
-- **Priority:** Low
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
 - **Type:** Action
+- **Why not:** Same shape as MATTGPT-025 (Add Error Handling Tests, killed May 14): semantic_router.py already has FAIL OPEN error handling at line 350. The gap is tests for it, not the handling itself. No production driver. Opportunistically add error-path tests when wiring up broader coverage during MATTGPT-014 / MATTGPT-017 work; standing "test coverage gap" tickets without a driver are backlog cruft.
+- **Original framing (preserved):**
 - **Issue:** Limited test coverage for semantic router error handling paths.
+- **Closed:** May 14, 2026
 
 ---
 
@@ -407,16 +418,6 @@ Each detail block uses these fields. Not every field is required for every item.
 
 ---
 
-### MATTGPT-034
-**Dead Code Cleanup (Remaining)**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Refactor
-- **Issue:** Audit `services/query_logger.py` (was orphaned; see MATTGPT-013 for current state), `utils/scoring.py` for unused functions, sweep old TODO/FIXME comments.
-
----
-
 ### MATTGPT-035
 **Eval Modernization — Semantic Scoring**
 
@@ -425,15 +426,18 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Type:** Spike
 - **Issue:** Current eval uses keyword matching. Semantic similarity or LLM-as-Judge would be more robust.
 - **Trade-off:** More expensive per run, harder to debug failures. Current concept-cluster approach (Q2/Q5 style) may be good enough.
+- **Don't act on this now (May 14, 2026 rationalization):** The two remaining eval failures (Q15 Fiserv naming, Q55 TDD ranking, per Mar 5 baseline at 61/63 = 96.8%) may be retrieval signal rather than scoring noise — Q15 tests client attribution (`expected_client: "Fiserv"`) and Q55 may interact with the MATTGPT-061 over-ranking pattern (BDD/MattGPT-meta stories potentially outranking the actual TDD story). A semantic scorer would risk masking those signals. Revisit only if the suite grows significantly or new false-negative patterns emerge that concept clusters consistently miss.
 
 ---
 
 ### MATTGPT-041
 **5P Dimensional Drill-Down**
 
-- **Status:** Open
-- **Priority:** Low
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
 - **Type:** Spike
+- **Why not:** No traffic evidence supports building this. Query log audit (May 13, 2026) showed zero queries asking for 5P-dimension drill-down. Same pattern as MATTGPT-040 (eval coverage for follow-up queries) — "we should think about it" not "users are asking for it." Re-file with concrete evidence if dimension-shaped follow-ups start appearing in real query logs.
+- **Original framing (preserved):**
 - **Issue:** Voice guide describes 5P (Person/Place/Purpose/Process/Performance) as a metadata framework for pattern recognition and deep dives. The spec envisions Agy offering to drill into a specific dimension on demand (e.g., "Want me to dig deeper into the process?"). This conversational affordance doesn't exist — Agy can't currently zoom into a single 5P dimension by request.
 - **Current state:** 5P data integration is substantially implemented. `story_intelligence.py` uses all five 5P fields as STAR fallbacks in context assembly. `5PSummary` is embedded in vectors (influences retrieval). Verbatim phrase extraction works via `prompts.py`. What's missing is the *conversational* use — the ability to drill into one dimension.
 - **Spike question:** Is dimension-specific drill-down worth building? Would users ask "tell me more about the process" or "what was Matt's role" as follow-ups? If so, this is a multi-turn conversational feature, not a prompt structure change.
@@ -446,9 +450,11 @@ Each detail block uses these fields. Not every field is required for every item.
 ### MATTGPT-042
 **5P Pattern Taxonomy**
 
-- **Status:** Open
-- **Priority:** Low
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
 - **Type:** Spike
+- **Why not (informed):** Not a "no traffic evidence" close — a "we already tried this direction" close. The prescribed-taxonomy approach (By Outcome / By Methodology / By Challenge) was originally implemented as `theme_guidance` / `get_theme_guidance()` per the Nov 2025 archetype exercise. **Removed in commit `c47ad1f` (Jan 26, 2026 BASE_PROMPT + DELTA refactor) specifically because it generated meta-commentary and evaluation language** — the exact problem the refactor was solving. Re-introducing prescribed pattern categories would regress that fix. Current open-ended `SYNTHESIS_DELTA` approach at 98.4% eval pass rate is good enough; entity cluster promotion handles cross-story synthesis organically. If a specific synthesis-quality complaint surfaces that prescribed taxonomy would clearly address (without re-triggering meta-commentary), re-file with that evidence.
+- **Original framing (preserved):**
 - **Issue:** Voice guide describes structured pattern templates ("By Outcome," "By Methodology," "By Challenge") with explicit category labels for cross-story synthesis. Production synthesis is more open-ended — gives the LLM the stories and asks for patterns via WHY→HOW→WHAT, but doesn't prescribe categories.
 - **Spike question:** Does prescribed taxonomy improve pattern recognition responses, or is the open-ended approach better?
 - **Source:** Voice Guide Implementation Audit, April 29, 2026
@@ -459,9 +465,11 @@ Each detail block uses these fields. Not every field is required for every item.
 ### MATTGPT-043
 **Humane Framing — Intent-to-Tone Mapping**
 
-- **Status:** Open
-- **Priority:** Low
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
 - **Type:** Spike
+- **Why not (informed):** Same pattern as MATTGPT-042 — the ticket itself flagged the risk that "implementing deterministic intent-to-tone mapping risks reintroducing meta-commentary patterns that the current architecture deliberately removed." The previous `theme_guidance` architecture was closer to this vision and was removed in commit `c47ad1f` (Jan 26, 2026 BASE_PROMPT + DELTA refactor) for anti-meta-commentary discipline. The Spike question ("worth the risk?") has the same answer as 042: no, given the previous attempt regressed into the exact problem the refactor fixed. If specific intent-tone failures surface in production with evidence that prescribed mapping (without meta-commentary regression) would fix them, re-file.
+- **Original framing (preserved):**
 - **Issue:** Voice guide describes intent-specific response framing — Agy detects why someone is asking (interview prep vs. vetting vs. curiosity vs. hiring pitch vs. networking) and adapts tone, framing language, and offers accordingly. Specific intent-to-tone mapping is not implemented.
 - **Current state:** Spirit exists via random focus angles in `_generate_agy_response()` (lines 888-896) which inject emphasis on human impact, methodology, scale, leadership, outcomes, or innovation. But this is random, not intent-driven.
 - **Tradeoff:** Implementing deterministic intent-to-tone mapping risks reintroducing meta-commentary patterns that the current architecture deliberately removed. The previous prompt architecture had a `theme_guidance` variable closer to this vision but was replaced for anti-meta-commentary discipline (see commented-out prompt at `backend_service.py` lines 1040-1164).
@@ -474,9 +482,11 @@ Each detail block uses these fields. Not every field is required for every item.
 ### MATTGPT-044
 **Pattern Insights — Structured Templates**
 
-- **Status:** Open
-- **Priority:** Low
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
 - **Type:** Spike
+- **Why not:** Duplicate of MATTGPT-042 (5P Pattern Taxonomy) — same Voice Guide Implementation Audit source, same "By Outcome / By Methodology / By Challenge" prescribed templates, same spike question. Close per 042's informed-rejection rationale: previous `theme_guidance` architecture was removed in commit `c47ad1f` (Jan 26, 2026) for anti-meta-commentary discipline; re-introducing prescribed taxonomy risks regressing that fix.
+- **Original framing (preserved):**
 - **Issue:** Voice guide describes Agy identifying cross-story patterns by outcome, methodology, and challenge with explicit pattern templates. Synthesis mode finds patterns through `SYNTHESIS_DELTA` instructions and entity cluster promotion, but doesn't structure them by prescribed categories.
 - **Spike question:** Does adding structured pattern templates ("By Outcome," "By Methodology," "By Challenge") improve synthesis quality, or is the LLM-driven open-ended approach better?
 - **Source:** Voice Guide Implementation Audit, April 29, 2026
@@ -501,9 +511,11 @@ Each detail block uses these fields. Not every field is required for every item.
 ### MATTGPT-046
 **Latency Benchmarks**
 
-- **Status:** Open
-- **Priority:** Low
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
 - **Type:** Action
+- **Why not:** Single-user portfolio with low organic traffic (~7 organic queries in 30 days per May 13 query log audit). No SLA, no performance commitments, no production performance issues observed. Latency tracking is critical for high-traffic systems but overkill here. Would produce sparse, unactionable data. Re-file if traffic scales significantly or if a specific latency complaint surfaces.
+- **Original framing (preserved):**
 - **Issue:** No latency tracking exists. No `time.time()`, no `perf_counter()`, no duration fields in the logger schema. Can't detect performance regressions over time.
 - **Fix:** Wrap OpenAI API calls and Pinecone search in timing blocks. Add duration column to logger schema. Build reporting view over accumulated data for p50/p95 tracking.
 - **Source:** Cross-reference of design spec vs. implementation, April 29, 2026
@@ -514,14 +526,15 @@ Each detail block uses these fields. Not every field is required for every item.
 ### MATTGPT-047
 **Cost Tracking**
 
-- **Status:** Open
-- **Priority:** Low
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
 - **Type:** Action
+- **Why not:** Same family as MATTGPT-045 (analytics dashboard) and MATTGPT-046 (latency benchmarks) — operational visibility for a low-traffic single-user portfolio. Cost concerns surfaced today (cache regen, eval API costs) were spot questions answerable ad-hoc without per-query tracking. Low organic traffic (~7 queries in 30 days per May 13 audit) = trivial monthly OpenAI bill = no spike to detect. Re-file if cost surprises appear or traffic scales.
+- **Original framing (preserved):**
 - **Issue:** No per-query cost tracking in production. OpenAI response includes `usage.prompt_tokens` and `usage.completion_tokens` but `backend_service.py` doesn't read them. Cost estimates exist only in offline batch scripts (`generate_use_cases.py`, `generate_public_tags.py`).
 - **Fix:** Read token usage from OpenAI response object, log per-query token counts and computed cost. Fold into MATTGPT-013 logger schema work — minimal incremental work if done alongside.
-- **Dependencies:** Coordinate with MATTGPT-013 to avoid double-touching the schema.
 - **Source:** Cross-reference of design spec vs. implementation, April 29, 2026
-- **Logged:** April 29, 2026
+- **Logged:** April 29, 2026 / **Closed:** May 14, 2026
 
 ---
 
@@ -682,9 +695,11 @@ Each detail block uses these fields. Not every field is required for every item.
 ### MATTGPT-059
 **Add Theme-based prefilter dimension to category cards**
 
-- **Status:** Open
-- **Priority:** Low
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
 - **Type:** Spike
+- **Why not:** Ticket author couldn't recall the framing or intent during May 14 rationalization — strongest signal that it's cruft (same call as MATTGPT-026). Adjacent context: the data-derived landing card refactor (Banking + Cross-Industry Phase 1+2, May 11-12) addresses "chips communicate scope" via tiered Core/Specialized cards mapped to Solution/Offering — different path, but covers much of the UX pressure the Theme dimension was meant to relieve. No traffic demand on Explore Stories filters per May 13 query log audit. Re-file if Theme-level filtering becomes a concrete user-driven need with evidence.
+- **Original framing (preserved):**
 - **Context:** Current `prefilter_domains` filters against the `Sub-category` field (45 unique values in data, most have 1-5 stories). Result: cards have to choose between many chips for adequate story coverage or few chips with sparse coverage. The `Theme` field has 7 broader buckets — Execution & Delivery (50), Org & Working-Model Transformation (22), Strategic & Advisory (13), Professional Narrative (10), Talent & Enablement (10), Emerging Tech (5), Risk & Responsible Tech (3) — that could deliver high coverage with few chips.
 - **Why not done now (UX blockers, not implementation cost):**
   - Two chips on a card landing looks sparse. Chips communicate scope ("here's what this view covers") — two doesn't do that job for a recruiter scanning quickly.
@@ -716,16 +731,19 @@ Each detail block uses these fields. Not every field is required for every item.
    And the Domain filter should include the expected product sub-categories
    And the result count should be less than 113
   ```
-- **Coverage targets (one scenario each):**
+- **Current state (May 14, 2026 validation):** `home.feature` has 11 scenarios total. 4 already wired in `test_home.py`: Card 3 regression, plus 3 chip scenarios added during May 13 chip CX work (Ask Agy button no-prefill, chip auto-fire, chip ↗ affordance). 7 still pending step defs.
+- **Coverage targets — pending step defs (7 scenarios):**
   - Card 1 (Banking) — subpage navigation + page-specific content present
   - Card 2 (Cross-Industry) — subpage navigation + page-specific content present
-  - Card 3 (Product Innovation) — `prefilter_domains` applied, result count < total
   - Card 4 (Application Modernization) — `prefilter_capability` applied, result count < total
   - Card 5 (Consulting & Transformation) — `prefilter_domains` applied, result count < total
   - Card 6 (Teams & Talent Development) — `prefilter_domains` applied, result count < total
+  - Ask Agy chip CX — Session state cleared after auto-fire (refresh doesn't re-fire)
+  - Ask Agy chip CX — Ask MattGPT renders default landing when no chip clicked
 - **Lesson framing:** "Verifying the link works isn't the same as verifying the destination state is correct." Every prefilter-triggering button needs a state assertion, not just a navigation assertion.
+- **Related:** MATTGPT-014 (audit + split 17 skipped Role Match BDD scenarios) and MATTGPT-017 (wire 6 skipped logging BDD scenarios) — same thematic cluster: fill in BDD step defs for already-existing acceptance criteria. All three blocked the same "BDD has gaps where manual testing fills in" problem.
 - **Root-cause incident:** May 12, 2026 — Card 3 prefilter discovered broken; Path A fix landed in same session. Pre-existing regression; ship date unknown.
-- **Logged:** May 12, 2026
+- **Logged:** May 12, 2026 / **Refreshed:** May 14, 2026
 
 ---
 

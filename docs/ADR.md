@@ -472,4 +472,40 @@ Chat avatars use high-specificity CSS with `!important`:
 **Consequences:**
 - Any code changing avatar sizing must check this ADR first
 - AI coding assistants should reference this ADR before modifying avatar-related CSS
+
+---
+
+## ADR 018 — Confidence Threshold Calibration for Pinecone Semantic Search
+
+**Date:** 2025-12 (original calibration); 2026-05-14 (promoted to ADR)
+**Status:** Accepted
+
+**Context:**
+The semantic-search pipeline gates query confidence into three buckets — High / Low / None — using two thresholds applied to Pinecone's raw similarity scores. The original thresholds (~0.50) were badly miscalibrated against the corpus and embedding model: legitimate queries like "What problems does Matt solve?" scored 0.381 and got suppressed as low-confidence, while off-topic queries scored 0.075–0.129 and bypassed the gate's intent. Calibration was painful (December 2025 session) — multiple rounds of empirical tuning against real queries before settling on the current values.
+
+**Decision:**
+Set Pinecone confidence thresholds at:
+- `CONFIDENCE_HIGH = 0.25` — top similarity ≥ 0.25 means "found X stories" (no warning banner)
+- `CONFIDENCE_LOW = 0.15` — top similarity ≥ 0.15 but < 0.25 means "relevance may be low" warning banner shown
+- Below `0.15` — "no strong matches" suppression
+
+Both constants live in `config/constants.py` as the single source of truth.
+
+**Rationale:**
+- Empirically calibrated against legitimate vs off-topic queries on the current corpus + embedding model (OpenAI `text-embedding-3-small`, 1536 dims). Lower thresholds than the original ~0.50 because OpenAI's small embedding model produces tighter similarity distributions than the calibration originally assumed.
+- The 0.15 / 0.25 split creates a narrow but useful "soft confidence" band where users see results with a relevance warning — gives them a chance to refine vs. getting either confident results or an outright rejection.
+- Stable since January 2026; no production failures attributable to threshold misfires since calibration landed.
+
+**Edge cases to watch (no active monitoring, surface if observed):**
+- The narrow 0.15–0.25 band is context-dependent — same query shape can land in different buckets depending on retrieval ranking. A query that's "almost" relevant might oscillate across runs.
+- Adding new canonical phrases or significantly changing the corpus could shift the similarity distribution and require recalibration. Last meaningful corpus shift: March 2026 data quality cleanup (85+ stories enriched).
+- If the OpenAI embedding model is ever updated/retired, thresholds will need recalibration against the new distribution.
+
+**Consequences:**
+- Threshold changes require empirical testing against the full eval suite, not theoretical adjustment.
+- The thresholds are NOT a configuration knob to "make rejection stricter" — they're calibrated against the embedding distribution; changing them without recalibrating produces the original problem (legitimate queries blocked).
+- The "low-confidence banner" UX exists because the soft band is intentional; don't collapse it into a binary accept/reject.
+
+**Historical context (migrated from MATTGPT-029, May 14, 2026):**
+The "low-confidence banner edge cases" backlog ticket (logged April 2026 test audit) flagged that the banner "sometimes triggers incorrectly" but had no specific reproduction. The ticket was closed Decided Against on May 14, 2026 with the rationale that without a concrete failing case, there's nothing to investigate. This ADR captures the underlying threshold-calibration history so future investigators have the context if a real misfire ever surfaces.
 - If a new avatar context is added (e.g., Role Match), it maps to one of the two tiers
