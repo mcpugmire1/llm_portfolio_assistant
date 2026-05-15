@@ -28,7 +28,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-028](#mattgpt-028) | Share Link Copy Functionality | Decided Against | Low | Issue | Pre-2026 |
 | [MATTGPT-029](#mattgpt-029) | Low-Confidence Banner Edge Cases | Decided Against | Low | Issue | Pre-2026 |
 | [MATTGPT-031](#mattgpt-031) | Semantic Router Error Path Coverage | Decided Against | Low | Action | Pre-2026 |
-| [MATTGPT-032](#mattgpt-032) | LLM Response Broken Markdown | Open | Low | Issue | Pre-2026 |
+| [MATTGPT-032](#mattgpt-032) | LLM Response Broken Markdown | Decided Against | Low | Issue | Pre-2026 |
 | [MATTGPT-033](#mattgpt-033) | Ask Agy Button Shifts on Focus | Open | Low | Issue | Pre-2026 |
 | [MATTGPT-035](#mattgpt-035) | Eval Modernization — Semantic Scoring | Open | Low | Spike | Pre-2026 |
 | [MATTGPT-041](#mattgpt-041) | 5P Dimensional Drill-Down | Decided Against | Low | Spike | Apr 29, 2026 |
@@ -400,16 +400,14 @@ Each detail block uses these fields. Not every field is required for every item.
 ### MATTGPT-032
 **LLM Response Broken Markdown**
 
-- **Status:** Open
-- **Priority:** Low
+- **Status:** Decided Against (May 15, 2026)
+- **Priority:** Low (was)
 - **Type:** Issue
+- **Why not:** No current production reproduction. Production responses tested May 15 (Scale a CIC, How did Matt achieve 4x faster delivery, etc.) all render bolded text cleanly — `**4X **` trailing-space pattern not observable. Ticket dates to Pre-2026; LLM and post-processing behavior have evolved since. An attempted fix May 15 introduced regression in legitimate bolded text (5 missing-space patterns: "over150", "at4x", "withNorfolk", "bothAccenture", "atCapital") and was reverted; mechanism not fully traced. Same anti-pattern as MATTGPT-027 / -028 / -029 — "watch for this someday" without a forcing function. If the trailing-space `**X **` pattern ever shows up reproducibly in production, file fresh with the actual failing query.
+- **Original framing (preserved):**
 - **Issue:** LLM outputs `**4X **` instead of `**4X**` — space before closing asterisks breaks bold rendering.
 - **Fix:** Post-process regex: `r'\*\*([^*]+)\s+\*\*'` → `**\1**`
-
----
-
-### MATTGPT-033
-**Ask Agy Button Shifts on Focus**
+- **Closed:** May 15, 2026 (after attempted fix introduced regressions; lesson preserved in `feedback_check_production_before_treating_test_failure_as_bug.md`)
 
 - **Status:** Open
 - **Priority:** Low
