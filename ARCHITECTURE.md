@@ -2315,9 +2315,12 @@ If entity detected AND matching story found:
 **3. Diversity Reordering (backend_service.py:diversify_results)**
 ```
 Standard/Behavioral modes only:
-  - Group by client
-  - Interleave to avoid consecutive same-client stories
+  - Pin #1 from Pinecone retrieval (highest semantic relevance)
+  - For slots #2+: named clients first, then generic, then duplicates
+  - Limiting stories per client (max_per_client param)
   - Skip for narrative mode (trust Pinecone semantic ranking)
+  - NO cross-query session state — diversify is deterministic per query
+    (removed May 18, 2026 per ADR 019 / MATTGPT-073)
 ```
 
 **4. Final Selection**
