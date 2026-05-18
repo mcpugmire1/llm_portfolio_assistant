@@ -41,7 +41,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-058](#mattgpt-058) | Replace dark-theme setInterval polling with MutationObserver | Decided Against | Low | Refactor | May 12, 2026 |
 | [MATTGPT-059](#mattgpt-059) | Add Theme-based prefilter dimension to category cards | Decided Against | Low | Spike | May 12, 2026 |
 | [MATTGPT-060](#mattgpt-060) | BDD coverage gap — assert post-navigation page state, not just navigation | Open | Medium | Action | May 12, 2026 |
-| [MATTGPT-061](#mattgpt-061) | MattGPT portfolio story contaminating organizational leadership queries | Open | Medium | Issue | May 13, 2026 |
+| [MATTGPT-061](#mattgpt-061) | MattGPT portfolio story contaminating organizational leadership queries | Resolved | Medium | Issue | May 13, 2026 |
 | [MATTGPT-062](#mattgpt-062) | Semantic router cache silently uses stale embeddings when VALID_INTENTS changes | Open | Medium | Refactor | May 14, 2026 |
 | [MATTGPT-063](#mattgpt-063) | Wrong-person queries with names outside nonsense regex produce confused-context RAG answers | Open | Medium | Issue | May 14, 2026 |
 | [MATTGPT-064](#mattgpt-064) | Explore Stories — Table row hover/cursor doesn't apply to data cells (AgGrid selector fix) | Open | Low | Issue | May 15, 2026 |
@@ -55,6 +55,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-072](#mattgpt-072) | `generate_public_tags.py` — case-insensitive tag dedup | Open | Low | Refactor | May 16, 2026 |
 | [MATTGPT-073](#mattgpt-073) | `last_primary_client` session state produces order-dependent retrieval within multi-turn sessions | Resolved | High | Issue | May 18, 2026 |
 | [MATTGPT-074](#mattgpt-074) | Entity cluster promotion forces synthesis mode when users want depth (e.g., "How did you build the CIC?") | Open | Medium | Issue | May 18, 2026 |
+| [MATTGPT-075](#mattgpt-075) | Developer debug surfaces leak to user-facing UI (sidebar print, telemetry badge) | Open | Medium | Issue | May 18, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -767,9 +768,49 @@ Each detail block uses these fields. Not every field is required for every item.
 ### MATTGPT-061
 **MattGPT portfolio story contaminating organizational leadership queries**
 
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Issue
+- **Status:** Resolved (May 18, 2026)
+- **Resolution summary:** The session-state contamination mechanism that drove the most visible user-facing failures was removed via MATTGPT-073. Validated empirically against 12 production-traffic queries with 11 of 12 producing clean user-visible responses; the single residual failure (Q2 "transformations" polysemy) is a documented structural limit of pure semantic search, scoped to hybrid retrieval (NEXT roadmap), not corpus work.
+- **Empirical evidence base for the resolution (May 18, 2026):**
+  - **12 production-traffic queries tested.** Sources: top-frequency leadership/behavioral queries from the production query log (Apr 13 to May 18) plus Matt's diagnostic set.
+    - Q1 "What kind of leader is Matt?" (5x in production) — clean
+    - Q2 "How does Matt handle resistance in large-scale transformations?" (3x in production) — ❌ contaminated (Strangler Fig wins Pinecone #1 on "transformation" polysemy)
+    - Q3 "How does Matt show up when things go wrong?" (5x) — clean
+    - Q4 "Tell me about MattGPT's product vision?" (regression check) — clean
+    - Q5 "How does Matt manage resistance when leading enterprise transformation programs?" (2x) — clean
+    - Q-Scale "Scale a CIC to 150+ engineers" (3x) — clean (entity filter excludes MattGPT)
+    - Q-Skeptical "How does Matt bring skeptical stakeholders along during large-scale change programs?" (2x) — clean (this was the May 13 contamination case; now resolved)
+    - Q-Teammates "How would Matt's former teammates describe him?" (2x) — clean DESPITE Pinecone returning 4 MattGPT stories in top 8 (LLM correctly filters)
+    - Q-Equip "How did Matt equip teams for New IT ways of working" — clean
+    - Q-Monolith "How do you modernize monoliths into microservices" — clean
+    - Q-Prototype "How did Matt approach rapid prototyping" — clean
+    - Q-4x "How do you achieve 4x faster delivery?" — clean
+    - Q-CrossFn "How do you align cross-functional teams?" — clean
+  - **11 of 12 = 91.7% clean responses on real production-traffic queries.**
+  - **61-query eval suite passing 100% post resolution** (validated twice; first run 69/70 was LLM stochasticity on Q64 that cleared on rerun).
+  - **Q-Teammates is the strongest single signal.** Pinecone top 8 contained 4 MattGPT stories (Product Vision at #3, UX Design at #5, Strangler Fig at #6, RAG Architecture at #7), yet the LLM response contained no MattGPT mention and led with Accenture CIC + servant leadership + $100M+ business. Direct evidence that LLM-level filtering closes the gap between Pinecone-score-level contamination and user-visible response contamination.
+- **Why corpus work alone could not fix the residual Q2 case:**
+  - Saturday's reductive enrichment of Story 69 raised its Q1 score from 0.341 to 0.380 (wrong direction).
+  - The MattGPT stories' content (vision, roadmap, OKRs, scope) is genuinely semantically adjacent to "leadership" concepts. The embedding model correctly identifies this similarity.
+  - "Transformation" is polysemic: technical refactoring vs. organizational change management. Pinecone cannot disambiguate without keyword anchoring.
+  - Three iterations of corpus-side edits demonstrated the ceiling. Additional editorial work risks distorting story content without closing the polysemy gap.
+- **What was actually fixed:**
+  - The cross-query `last_primary_client` session-state mechanism (the dominant user-visible failure pattern). Closed via MATTGPT-073. See ADR 019.
+  - Story 69 body rewrite + Theme change (cleaner story, even if Pinecone score went the wrong way).
+  - Strangler Fig title and body rewrite ("I Built a Monolith by Accident. Here's How I Fixed It"), tag cleanup.
+  - NS Mainframe / "The CIC's First Engagement" rewrite to align with servant-leadership voice across portfolio.
+  - `generate_public_tags.py` Era-aware prompt that prevents future enrichment runs from re-adding contaminating tags to Independent Product Development stories.
+- **What remains (out of scope for -061; tracked separately):**
+  - **Q2 polysemy on "transformations"** — Strangler Fig wins Pinecone #1, leads contaminated response. Structural to pure semantic search. Fixable via hybrid retrieval (NEXT roadmap) or accepted as known tail-quality edge case. Q2's exact phrasing is a diagnostic query, not a frequent production pattern; Q5 (same intent in slightly different words) works cleanly.
+  - **Entity cluster promotion forces synthesis on depth queries** — MATTGPT-074 captures this design tension (e.g., "How did you build the CIC?" gets breadth-synthesis instead of depth). Independent of -061.
+  - **diversify_results pinning/limit bugs** — MATTGPT-021, pre-existing.
+  - **Pinecone debug panel leaking to user UI** — MATTGPT-075, surfaced May 18 2026 during production query replay.
+- **Architectural decisions captured:** ADR 019 (no cross-query session state in diversify_results).
+- **(Original Status / Priority / Type before resolution: Open / Medium / Issue)**
+
+---
+
+**Original ticket content preserved below for historical context** (May 13–16, 2026):
+
 - **Issue:** MattGPT-related stories (Building MattGPT, Strangler Fig refactor, portfolio-narrative voice) surface as top results for organizational-leadership / change-management queries where they are the wrong answer. This is a **longstanding, recurring pattern** — not a single incident. The May 13, 2026 chip CX testing is the trigger for filing the ticket; the underlying retrieval bias has been observed repeatedly. The MattGPT stories have broad semantic overlap with queries about "transformation", "stakeholders", "value proposition", "scale", and "challenge" — so Pinecone ranks them highly for queries that are not about building MattGPT or about Matt's portfolio-building narrative.
 - **Evidence (May 13, 2026 chip CX testing):**
   - **Query:** *"How does Matt handle resistance in large-scale transformations?"*
@@ -1267,4 +1308,25 @@ show_subtitle = context == "ask" and reason != "low_confidence"
 - **Eval validation required:** Sample of CIC depth queries, RBC depth queries, JPM depth queries — measure response quality (depth vs breadth) before and after any fix. The 61-query golden suite may not cover this case; add depth-specific queries if not.
 - **Related:** MATTGPT-061 (broader retrieval contamination), MATTGPT-021 (diversify_results pinning bugs), MATTGPT-073 (session-state contamination, same file). Same module (`backend_service.py`); same broader theme of compensation-layer mechanisms with side effects beyond their stated intent.
 - **Discovered during:** Originally observed during the January 2026 pipeline cleanup (per MEMORY.md "Known Open Issues"). Re-surfaced May 18, 2026 during MATTGPT-073 investigation when Matt asked whether the agentic multi-story-per-client design was being touched by the diversify changes. Confirmed it isn't — but the entity cluster mechanism has its own known issue worth filing as a distinct ticket.
+- **Logged:** May 18, 2026
+
+---
+
+### MATTGPT-075
+**Developer debug surfaces leak to user-facing UI**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Issue
+- **Issue:** Dev-facing debug output is visible in the user-facing UI on the Ask MattGPT page (and possibly other pages). Two specific surfaces observed May 18, 2026 during production query replay:
+  - **Sidebar debug print:** `DEBUG • Loaded 113 stories from echo_star_stories_nlp.jsonl.` rendered at the top of the page above the navbar. Looks like a developer console message in user space.
+  - **Telemetry badge:** `🧪 vector=pinecone, index=matt-portfolio-v2, ns=default, has_last=True` rendered as a status badge near the conversation. Exposes implementation detail (vendor name, index name, namespace) to end users.
+- **Why it matters:** This is a portfolio app targeting Director/VP-level recruiters. Dev-debug surfaces leaking into the user UI undermine the polish credibility the rest of the app projects. The badge in particular tells recruiters how the system is built rather than what it does for them.
+- **Suspected cause:** Debug surfaces gated on the `DEBUG` flag in `config/debug.py`. If `DEBUG=True` is set in the local environment or accidentally in production, these render. Need to confirm: (a) are they gated at all, (b) is `DEBUG` actually True in production, or (c) are they always-on independent of the flag.
+- **Out of scope (separate concerns):**
+  - The "130+ stories indexed" text in the status bar is the hardcoded story count tracked in MATTGPT-019.
+  - The Pinecone debug JSON panel (full retrieval debug with match preview, scores, weights) is a developer dashboard that's been useful during investigation; whether it should ship to production needs its own decision.
+- **Fix shape (open):** Audit all debug surfaces on the Ask MattGPT page (and About Matt, Explore Stories, Role Match for parity). Confirm each is gated on the `DEBUG` flag. Verify `DEBUG=False` in the production Streamlit Cloud environment. If gating is missing, add it.
+- **Effort:** ~30 min audit + small code changes to add `if DEBUG:` guards where missing. Low risk, high recruiter-perceived-polish payoff.
+- **Discovered during:** May 18, 2026 production query replay with Streamlit running locally. Matt's reaction on seeing the debug surfaces: *"we'll need to figure out how to fix the following: [debug output]"*.
 - **Logged:** May 18, 2026
