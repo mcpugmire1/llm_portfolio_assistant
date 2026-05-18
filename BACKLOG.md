@@ -51,7 +51,10 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-068](#mattgpt-068) | About Matt — Content polish bundle (clickable questions, code expander, anchor nav, stat consolidation) | Open | Medium | Action | May 15, 2026 |
 | [MATTGPT-069](#mattgpt-069) | Home — Stats label contrast (light mode WCAG AA) | Open | Low | Issue | May 15, 2026 |
 | [MATTGPT-070](#mattgpt-070) | Ask MattGPT — Suggestion button cursor pointer | Open | Low | Issue | May 15, 2026 |
-| [MATTGPT-071](#mattgpt-071) | Nonsense rejection banner — redirect chips + hint text (branch-aware copy) | Open | Medium | Action | May 15, 2026 |
+| [MATTGPT-071](#mattgpt-071) | Nonsense rejection banner — branch-aware copy + contextual chip sets | Parked (pending MATTGPT-061) | Medium | Action | May 15, 2026 |
+| [MATTGPT-072](#mattgpt-072) | `generate_public_tags.py` — case-insensitive tag dedup | Open | Low | Refactor | May 16, 2026 |
+| [MATTGPT-073](#mattgpt-073) | `last_primary_client` session state produces order-dependent retrieval within multi-turn sessions | Resolved | High | Issue | May 18, 2026 |
+| [MATTGPT-074](#mattgpt-074) | Entity cluster promotion forces synthesis mode when users want depth (e.g., "How did you build the CIC?") | Open | Medium | Issue | May 18, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -774,6 +777,12 @@ Each detail block uses these fields. Not every field is required for every item.
   - **Query:** *"How does Matt bring skeptical stakeholders along during large-scale change programs?"*
     - Response opened with "convincing recruiters of value" framing pulled from the MattGPT portfolio-building narrative, with CIC scaling stats grafted in as evidence. The query is about stakeholder change management; the response is about Matt's career marketing.
   - **Counter-example (works):** *"How does Matt manage resistance when leading enterprise transformation programs?"* — the rephrase that adds "enterprise" + "programs" pulled the right stories (Norfolk Southern + JP Morgan). This is the workaround currently shipped as chip 3 on Home (May 13, 2026).
+- **Evidence (May 16, 2026 — fresh production reproduction during MATTGPT-071 chip validation):**
+  - **Query:** *"What kind of leader is Matt?"* (proposed `personal` branch chip in MATTGPT-071)
+    - Response correctly opened with CIC scaling, servant leadership, psychological safety, and enterprise client work. But the **fourth paragraph** contaminated the answer: *"During his sabbatical, Matt continued to lead by example, building MattGPT, an AI-powered portfolio assistant. This project demonstrated his product thinking and technical capabilities, further solidifying his leadership narrative."*
+    - **Why it's wrong:** an internal sabbatical portfolio project is Matt-as-builder, not Matt-as-org-leader. The query is asking what kind of leader Matt is in professional contexts (teams, clients, transformations); the MattGPT story has no organizational-leadership content. The phrase *"solidifying his leadership narrative"* is meta-commentary about the portfolio's purpose, not actual leadership evidence.
+    - **Pattern match:** identical to the May 13 captures — MattGPT story's high-frequency leadership vocabulary ("leadership narrative", "product thinking", "technical capabilities") wins on semantic similarity against broad org-leadership queries.
+    - **Blocking impact:** This contamination directly damages MATTGPT-071's value. The chip "What kind of leader is Matt?" was designed to redirect users into a credible leadership answer; instead it surfaces a sabbatical-project name-drop. Recruiters who click the chip see Matt's career-marketing meta-narrative when they wanted Matt's leadership substance. -071 chip effectiveness depends on -061 being resolved first.
 - **Hypothesized root cause:** The MattGPT story uses high-frequency leadership vocabulary ("stakeholders", "transformation", "scale", "challenge", "value proposition") describing the META-narrative of *building MattGPT to demonstrate Matt's value to recruiters* — vocabulary that semantically overlaps with queries about Matt's enterprise leadership work. The semantic router doesn't distinguish technical-transformation (refactoring, architecture) from organizational-transformation (change management, capability building), so the highest-ranked story wins regardless of which sense of "transformation" the query intended.
 - **Affected query shape:** Anything containing "transformation", "stakeholders", "resistance", "value", or "scale" without an entity (client name, division) or a domain-specific qualifier ("technical", "engineering", "platform") to anchor retrieval.
 - **Not affected:** Queries with entities ("How did Matt transform JP Morgan payments?") — entity filter dominates, MattGPT story is excluded.
@@ -785,7 +794,79 @@ Each detail block uses these fields. Not every field is required for every item.
   - **D.** Same shape as the diversify_results() pinning bug (MATTGPT-021) — pin and re-rank instead of letting raw Pinecone scores decide.
 - **Related:** MATTGPT-021 (diversify_results pinning), MATTGPT-016 (semantic router wrong-person detection — closed Decided Against May 14 2026). Same broader theme: retrieval over-ranking on semantic overlap without semantic intent disambiguation.
 - **Cross-reference with MATTGPT-022 (added May 14, 2026):** Writing another MattGPT-meta story for the corpus (MATTGPT-022 "Data Quality Cleanup Journey Story") could worsen this ticket's over-ranking problem by adding a fifth MattGPT-narrative story competing for retrieval space. Decide 022 jointly with this ticket.
-- **Logged:** May 13, 2026
+
+**May 16, 2026 — Deep investigation + three iteration cycles**
+
+A full-day session walked through corpus enrichment as the proposed fix. Three iterations produced concrete empirical findings that change the recommendation.
+
+**Two contamination mechanisms identified empirically:**
+
+Capture from 7 diagnostic queries with DEBUG mode on. Pinecone scores and full LLM context tracked across iterations.
+
+| Mechanism | Description | Example |
+|---|---|---|
+| **A — `diversify_results()` promotion** | Pinecone returns mostly on-topic stories; `diversify_results` pulls a sub-optimal off-topic story up to break client homogeneity. The "right" story is demoted out of the final LLM context. | Q1 ("What kind of leader is Matt?"): top 5 Pinecone hits are all on-topic Accenture leadership stories. MattGPT Product Vision sits at #6 with a 0.006 score gap below #5. `diversify_results` promotes it to LLM slot #2 to break the Accenture run, demoting "Sustainable Leadership" out of the LLM context. |
+| **B — Pinecone over-ranks meta-narrative outright** | Pinecone ranks meta-narrative stories at #1 or #2 due to genuine semantic similarity. `diversify_results` doesn't need to promote anything — they're already at the top. | Q2 ("How does Matt handle resistance in large-scale transformations?"): MattGPT Strangler Fig ranks at Pinecone #1 (0.437) — tied with Why Hire Matt. AI-Assisted Dev Workflows at #4 (0.418). |
+
+**Three corpus-enrichment iterations and their outcomes:**
+
+1. **Story 69 (MattGPT Product Vision) body rewrite + Theme change.** Removed "Strategic Positioning" / "Portfolio Differentiation" / "differentiate in senior-level market" framing; Theme changed from `Strategic & Advisory` to `Execution & Delivery`. **Result:** Story 69's Pinecone score on Q1 went UP from 0.341 to 0.377 — the body rewrite concentrated technical product-leadership vocabulary that the embedding model treats as semantically close to "what kind of leader" queries. BUT the LLM produced clean Q1, Q3, Q4 responses despite Story 69 being in context. **Net: validated at user-visible response level on first run; failed on Pinecone-score-reduction goal.**
+
+2. **Competencies cleanup (`Strategic Roadmapping` → `Product Roadmapping`).** Same iteration; no measurable score change.
+
+3. **Strangler Fig story rewrite (new title "I Built a Monolith by Accident. Here's How I Fixed It") + NS Mainframe rewrite ("The CIC's First Engagement: Coaching Modern Engineering at Norfolk Southern").** **Result:** Strangler Fig score barely moved (0.437 → 0.434). NS Mainframe DROPPED from #5 to #7 (0.414 → 0.394) because the softer "coaching" framing removed "resistance/transformation" vocabulary. Story quality improved (servant-leadership voice consistent across portfolio); Q2 retrieval worsened.
+
+**Structural finding (revised May 18, 2026 after follow-up traces):**
+
+Reductive enrichment of contaminating stories alone is insufficient when combined with `is_generic_client`-driven `generic_overflow` placement and session-state-dependent `diversify_results` behavior. Three iterations of reductive-only enrichment produced corpus quality improvements but not full retrieval cleanup. Bidirectional enrichment of legitimate Class 1 stories (sharpening Why Hire Matt / About Matt / Sustainable Leadership with specific client dynamics) and the session-state `diversify_results` behavior remain open.
+
+**What May 18 follow-up traces revealed (corrected from Saturday's framing):**
+
+- **`Project == "Independent Project"` is treated as generic by `is_generic_client`.** MattGPT stories land in `generic_overflow`, not `named_diverse`. Saturday's proposed score-gap fix on `named_diverse[0]` would never trigger on Q1. The fix needs to compare against `(named_diverse + generic_overflow)[0]` to address the slot #2 promotion path.
+- **Q3 "regression" between Saturday morning and evening was session-state, not LLM stochasticity.** A fresh-session Q3 run on May 18 produced a clean response (Why Hire Matt + NS Quality Crisis at LLM slots #1 and #2). The Saturday-evening contamination fired because `last_primary_client = Accenture` from a prior query in the session triggered the line 1293 demotion (gap of 0.001 between Why Hire Matt and MattGPT Product Vision). Filed separately as MATTGPT-073.
+- **The corpus rewrites did materially improve retrieval.** Saturday's Story 69, Strangler Fig, and NS Mainframe rewrites moved Q3 from "leads with MattGPT contamination" to "leads cleanly with NS Quality Crisis" once the session-state bug is excluded. The "diminishing returns" framing was wrong — corpus quality work paid off, and the session-state bug was masquerading as a corpus failure.
+
+**Current Q1 gap state (May 18 measurement):**
+
+- pinned = Why Hire Matt (Accenture, 0.433)
+- slot-#2 candidate from `generic_overflow` = MattGPT Product Vision (IP, 0.380)
+- best duplicate-of-pinned = About Matt Leadership Journey (Accenture, 0.411)
+- gap = 0.411 - 0.380 = **0.031**
+
+A 0.05-threshold gap guard does not trigger at this gap. Bidirectional enrichment to widen the gap from below (raise Class 1 story scores) is the prerequisite that would make the gap-guard fix meaningful for Q1.
+
+**Q2 polysemy diagnosis (verified):**
+
+"Transformation" is polysemic. Strangler Fig is a *technical transformation* (code refactoring); Norfolk Southern Mainframe is an *organizational transformation* (change management). Pure-semantic embedding doesn't distinguish them. Even after rewriting both stories, Strangler Fig still wins Q2 retrieval because its technical-transformation vocabulary genuinely overlaps with the query's surface form. **This is a retrieval-strategy problem, not a corpus problem.**
+
+**The W_KW=0.0 investigation:**
+
+Verified that `utils/scoring.py` has hybrid scoring infrastructure (`_hybrid_score` function) but `W_KW = 0.0` disables the keyword component. The change happened in commit `2209afd` (Nov 10, 2025) buried inside a multi-purpose refactor. The decision was deliberate — a documented architectural simplification away from hybrid scoring after the `_KNOWN_VOCAB` maintenance burden became unreliable in October 2025. The keyword infrastructure remains but is intentionally disabled. **Re-enabling W_KW = 0.2 would be a partial implementation of the NEXT roadmap hybrid retrieval and could regress eval baseline (96.8%, per ADR 018) without proper recalibration.** Captured to prevent future whack-a-mole loops.
+
+**Workaround validated but not durable:**
+
+Chip 3 wording "How does Matt manage resistance when leading enterprise transformation programs?" still pulls the right Norfolk Southern stories — the specific words "enterprise" + "programs" narrow the embedding neighborhood. This works for the SPECIFIC chip wording, not for general queries that don't use those words.
+
+**Fix options — re-scored after May 16 investigation:**
+
+| Option | Mechanism A | Mechanism B | Verdict after empirical testing |
+|---|---|---|---|
+| **A. Metadata-based exclusion** of `Project == "MattGPT Product Development"` for broad behavioral intent_family queries | ✓ Excluded before diversify | ✓ Excluded before Pinecone returns | **Most reliable.** Originally rejected on "no compensation logic" principle; that principle was about not papering over upstream bugs. The Story 69 contamination is not a bug — it's a fundamental property of embedding models with topically-adjacent meta-narrative. A code gate that says "MattGPT stories don't answer broad behavioral leadership questions" is product taxonomy, not compensation. Worth reconsidering. |
+| **B. Router disambiguation** | ✗ Router already classifies correctly | ✗ Not a classification problem | Doesn't apply. Verified empirically. |
+| **C. Corpus enrichment** | Partial; relies on LLM filtering | Partial; doesn't eliminate Pinecone signal | **Has structural ceiling.** Demonstrated across three iterations. Improves story quality but can't fully solve retrieval. LLM stochasticity introduces variance. |
+| **D. Rework `diversify_results` (MATTGPT-021)** | ✓ Fixes promotion logic | ✗ Can't fix "Strangler Fig at Pinecone #1" | Helpful for Mechanism A only. Independent fix on its own merits. |
+| **E. Hybrid retrieval (NEXT roadmap)** | ✓ Keyword anchoring helps | ✓ Keyword anchoring helps | **Architectural fix.** Real work. Real value. Punts the immediate problem until the roadmap item ships. |
+
+**Open question for next session:** (A) hard exclusion gate vs (E) wait for hybrid retrieval architecture work. Pure (C) corpus enrichment is now empirically ruled out as a complete solution.
+
+**What today produced (story-quality wins independent of retrieval outcome):**
+
+- Story 69 (MattGPT Product Vision) body is genuinely cleaner; "I Built a Monolith by Accident" replaces the verbose "Strangler Fig Refactoring" title; NS Mainframe voice now consistent with servant-leadership arc across portfolio
+- Theme change for Story 69 (Strategic & Advisory → Execution & Delivery) corrects a miscategorization
+- W_KW=0.0 history excavated and documented (avoids future whack-a-mole)
+- Empirical floor identified for corpus enrichment as a fix mechanism
+
+**Logged:** May 13, 2026 / **Deep investigation:** May 16, 2026
 
 ---
 
@@ -959,38 +1040,231 @@ Each detail block uses these fields. Not every field is required for every item.
 ---
 
 ### MATTGPT-071
-**Nonsense rejection banner — redirect chips + hint text (branch-aware copy)**
+**Nonsense rejection banner — branch-aware copy + contextual chip sets**
+
+- **Status:** Parked pending MATTGPT-061 (May 16, 2026)
+- **Priority:** Medium
+- **Type:** Action
+- **Why parked:** Chip effectiveness depends on the underlying response being clean. Live testing on May 16 confirmed MATTGPT-061 (MattGPT story over-ranking) contaminates broad org-leadership queries — the proposed `personal` branch chip *"What kind of leader is Matt?"* surfaces the sabbatical project as leadership evidence. Shipping the chips on top of contaminated responses actively damages trust. Fix -061 first, then resume -071 implementation with the spec below.
+
+**Scope:** Differentiate copy and chip sets across all four reason branches in `render_no_match_banner` (`utils/ui_helpers.py:304-427`). Each rejection reason gets contextually-earned copy and chips rather than a single uniform treatment.
+
+**Current branching today** (verified May 15, 2026):
+```python
+if reason == "semantic_router:personal": ...
+elif reason == "semantic_router:out_of_scope": ...
+else:  # rule:*, low_confidence, unknown all fall through to generic copy
+    msg = "🐾 I can't help with that. I'm trained on Matt's transformation work."
+```
+Chip rendering today is gated ONLY on `context == "ask"` — every Ask MattGPT rejection shows the same 4 generic chips regardless of reason.
+
+**Change — explicit 4-branch message layer + reason-aware chip rendering:**
+```python
+# Message layer
+if reason == "semantic_router:personal":
+    msg = "🐾 I'm focused on Matt's professional experience."  # unchanged
+elif reason == "semantic_router:out_of_scope":
+    msg = "🐾 That's outside Matt's experience."  # unchanged
+elif reason.startswith("rule:"):
+    msg = "🐾 Wrong trail. I'm a Plott Hound trained to track Matt's transformation work. Give me a real scent to follow."  # new
+elif reason == "low_confidence":
+    msg = "🐾 I picked up a scent but lost the trail. Try rephrasing your question and I'll track it down."  # new
+else:
+    msg = "🐾 I can't help with that. I'm trained on Matt's transformation work."  # unchanged fallback
+
+# Rendering layer (Ask MattGPT side) — chips and subtitle suppressed for low_confidence
+show_chips = context == "ask" and reason != "low_confidence"
+show_subtitle = context == "ask" and reason != "low_confidence"
+```
+
+**Net behavior matrix:**
+
+| Context | Branch | Banner copy | Subtitle/Hint | Chips |
+|---|---|---|---|---|
+| Ask MattGPT | `semantic_router:personal` | Unchanged | "Ask me about:" | **New personal chip set** |
+| Ask MattGPT | `semantic_router:out_of_scope` | Unchanged | "Ask me about:" | **New out_of_scope chip set** |
+| Ask MattGPT | `rule:*` | **"Wrong trail. I'm a Plott Hound…"** | "Ask me about:" | **New rule:* chip set** |
+| Ask MattGPT | `low_confidence` | **"I picked up a scent but lost the trail. Try rephrasing…"** | **None** | **None** |
+| Ask MattGPT | unknown | Unchanged generic | "Ask me about:" | Unchanged 4 generic chips (or rule:* set — decide at implementation) |
+| Explore Stories | `personal` | Unchanged | Unchanged tailored hint | None |
+| Explore Stories | `out_of_scope` | Unchanged | Unchanged generic hint | None |
+| Explore Stories | `rule:*` | **"Wrong trail…"** | **"Try transformation work, scaling teams, payments modernization, or enterprise leadership."** | None |
+| Explore Stories | `low_confidence` | (not emitted today — Explore Stories has no confidence gate) | — | — |
+
+**Differentiation logic across chip sets:**
+- **`rule:*` chips** answer *"what does Matt DO?"* — capability themes (verbs: scale, build, lead, modernize) for users who came in with nothing on-topic
+- **`personal` chips** answer *"who is Matt PROFESSIONALLY?"* — character, leadership, working approach for users curious about Matt-the-person
+- **`out_of_scope` chips** answer *"where does Matt WORK?"* — concrete named anchors (clients, projects) for users who asked about scope Matt doesn't cover
+- **`low_confidence`** — no chips, just the rephrase prompt; the user's query was probably on-topic, they need to refine not pivot
+
+**Chip sets (DRAFT — chip copy needs live validation against production responses after MATTGPT-061 is fixed):**
+
+**`rule:*` chips** (Matt's capability themes — verbs, broad signal):
+| Label | Click-injected prompt |
+|---|---|
+| Scale a CIC to 150+ engineers | How did Matt scale the CIC to 150+ engineers? |
+| Build teams that ship like startups | How does Matt build teams that ship like startups? |
+| Lead enterprise transformation | Tell me about Matt's enterprise transformation work. |
+| Modernize payments at scale | Tell me about Matt's payments modernization at scale. |
+
+**`personal` chips** (Matt-as-professional — character through work, recruiter-natural language):
+| Label | Click-injected prompt |
+|---|---|
+| What kind of leader is Matt? | What kind of leader is Matt? |
+| How does Matt handle pressure? | How does Matt show up when things go wrong? |
+| Why does Matt do this work? | What drives Matt — why does he do this work? |
+| What do former colleagues say? | How would Matt's former teammates describe him? |
+
+**`out_of_scope` chips** (concrete proof of in-scope work — named clients, specific achievements):
+| Label | Click-injected prompt |
+|---|---|
+| Payments at JP Morgan | Tell me about Matt's payments work at JP Morgan. |
+| Cloud Innovation Center | How did Matt establish and scale the Cloud Innovation Center? |
+| Scaling teams 4 → 150+ | How did Matt scale engineering teams from 4 to 150+? |
+| Modernizing legacy platforms | Tell me about Matt's work modernizing legacy enterprise platforms. |
+
+**Live validation done so far (May 16, 2026):**
+- *"What kind of leader is Matt?"* (personal chip 1) → response correctly opened with CIC + servant leadership + enterprise work, but contaminated by MattGPT sabbatical paragraph (MATTGPT-061 firing). **Chip text is good; underlying retrieval needs -061 fix before validation completes.**
+- Remaining 11 chip prompts: not yet tested.
+
+**Implementation notes:**
+
+- Click-handler pattern stays as-is (same-page session injection: `__inject_user_turn__` + `__ask_from_suggestion__` + `__ask_force_answer__` + `ask_input` + `__clear_banner_after_answer__`). Only labels, prompts, and per-reason chip-set selection change.
+- This banner does **not** use the cross-page chip→Ask pattern at `category_cards.py:55-57` / `story_detail.py:203-218` (those navigate via `seed_prompt` + `active_tab="Ask MattGPT"`). User is already on Ask MattGPT when this fires — session injection is correct.
+- Define each chip set as a module-level constant (e.g., `RULE_CHIPS`, `PERSONAL_CHIPS`, `OUT_OF_SCOPE_CHIPS`) so BDD scenarios and any future eval entries reference the same source-of-truth strings, not inline literals. Per CLAUDE.md "no hardcoded enums for data-derived values."
+- Chip-set selection happens once based on reason; render loop is unchanged.
+
+**Out of scope:**
+- Adding new reason values (no inappropriate/nonsense severity split — `rule:*` branch handles all 33 categories uniformly).
+- Touching `nonsense_filters.jsonl`, the semantic router, or any retrieval/classification logic. Pure rendering change.
+- Migrating to the cross-page chip→Ask pattern.
+- Fixing MATTGPT-061 (separate ticket, blocks resumption of this one).
+
+**Effort:** ~50-70 lines in `utils/ui_helpers.py` + three small chip-set constants. Single file, low risk on the code side. Chip copy validation is the gating step, not the implementation.
+
+**BDD scenarios required before implementation (per CLAUDE.md Testing Protocol):**
+- Ask MattGPT — `rule:*` reason → "Wrong trail" copy + 4 rule:* chips render with correct labels.
+- Ask MattGPT — `semantic_router:personal` reason → existing copy + 4 personal chips render.
+- Ask MattGPT — `semantic_router:out_of_scope` reason → existing copy + 4 out_of_scope chips render.
+- Ask MattGPT — `low_confidence` reason → "Picked up a scent but lost the trail" copy, no subtitle, no chips.
+- Explore Stories — `rule:*` reason → "Wrong trail" copy + new hint text, no chips.
+- Explore Stories — `semantic_router:personal` reason → unchanged hint (regression guard).
+- Explore Stories — `semantic_router:out_of_scope` reason → unchanged hint (regression guard).
+- Clicking a chip in any branch triggers the existing session-injection handler with the correct prompt text.
+
+**Audience impact:** Each rejection reason gets a contextually-earned re-engagement palette. A user who hit `rule:*` gets capability themes; a user who hit `personal` gets character pivots; a user who hit `out_of_scope` gets concrete in-scope anchors; a user who hit `low_confidence` gets honest "rephrase" guidance instead of misleading "wrong trail" copy.
+
+**History:**
+- Original ticket framed as "no chips exist today" — wrong; chips have rendered since March 2026.
+- May 15, 2026 grounding pass uncovered three independent branching layers and the actual chip-rendering logic.
+- May 15 reframe dropped a proposed nonsense-vs-inappropriate severity split (overengineered for actual audience).
+- May 16, 2026 expanded scope from "rule:* only" to "all four branches" after recognizing chip vocabulary should be contextual to reason, not uniform.
+- May 16 parked pending MATTGPT-061 after live validation of *"What kind of leader is Matt?"* surfaced the MattGPT-story contamination pattern. Chip text is sound; underlying retrieval needs the fix first.
+
+**Logged:** May 15, 2026 (full spec finalized May 16, 2026; implementation parked pending MATTGPT-061)
+
+---
+
+### MATTGPT-072
+**`generate_public_tags.py` — case-insensitive tag dedup**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Refactor
+- **Issue:** The merge logic in `generate_public_tags.py` (lines 141-147) uses Python `set()` for dedup, which is exact-string-match only. Case variants of the same concept survive as separate tags. Across multiple enrichment cycles (with LLM casing variation across runs), duplicates accumulate.
+- **Concrete example (NS Mainframe story, May 16, 2026):** the `public_tags` field carries all of: `Agile Transformation` + `agile transformation`, `CI/CD Automation` + `CI/CD automation` (and `CI/CD Pipelines` as a third variant), `Continuous Improvement` + `continuous improvement`, `Lean Engineering` + `lean engineering`, `Developer Enablement` + `developer enablement`, `Test-Driven Development` + `test-driven development`, `Culture Shift` + `cultural change` + `culture change`. 31 tags where ~16 unique concepts would suffice.
+- **Impact:** Not a contamination bug (none of these tags introduce retrieval contamination on their own), but inflates the embedding's keyword surface area for the same concept, creating duplicate semantic weight. Over time, the corpus accumulates noise.
+- **Fix:** Replace `all_tags = set(new_tag_list + existing_tag_list)` with case-insensitive dedup that preserves a canonical casing (e.g., first-seen wins):
+  ```python
+  seen = {}
+  for tag in new_tag_list + existing_tag_list:
+      key = tag.lower()
+      if key not in seen:
+          seen[key] = tag  # preserve original casing
+  all_tags = sorted(seen.values(), key=lambda t: t.lower())
+  ```
+- **Scope:** ~5 lines in `generate_public_tags.py`. Single change. No tests beyond a unit test for the dedup helper (if extracted).
+- **Cleanup propagation:** After landing the script fix, a one-time pass over `echo_star_stories_nlp.jsonl` to dedupe existing case-variant tags would clean up the corpus state. Could be a small standalone script (`tools/dedupe_case_variants.py`) that runs once, OR can be folded into the next regular `generate_public_tags.py` invocation if the dedup logic processes existing tags as well as new ones.
+- **Out of scope:**
+  - Changing the additive-merge contract (`set()` behavior is what's intentional — preserve all distinct tags). This ticket only addresses the case-sensitivity flaw within that contract.
+  - Cleaning up the Excel master tags — those will get normalized on next enrichment pass once the script is fixed.
+- **Discovered during:** MATTGPT-061 deep investigation (May 16, 2026) when reviewing the NS Mainframe story's public_tags. Matt asked: *"Is the script duplicating? I thought it was comparing and appending if missing."* Investigation confirmed the script DOES dedupe — but only on exact string match, missing case variants.
+- **Logged:** May 16, 2026
+
+---
+
+### MATTGPT-073
+**`last_primary_client` session state produces order-dependent retrieval within multi-turn sessions**
+
+- **Status:** Resolved (May 18, 2026 — commit `cf1cb2f`)
+- **Resolution:** Option E applied. The `_last_primary_client` cross-query session state was removed from `diversify_results`. Within-query diversity for slots #2+ is preserved.
+- **Empirical evidence base for the removal:**
+  - **Production log analysis (Apr 13 to May 18, 82 queries, 24 inferred sessions):** 85.4% of queries occur in multi-turn sessions where the mechanism could fire. 45% of consecutive query pairs in those sessions were demotion-eligible (same pinned_client across pairs). The full firing rate is bounded by additional score-gap and client-mismatch conditions but the demotion-eligible upper bound establishes high production reach.
+  - **Saturday May 16 Q3 "regression" root cause confirmed.** Diagnostic reproduction May 18 showed `last_primary_client = Accenture` from a prior query triggering the line 1293 demotion on a 0.001 score gap (Why Hire Matt at 0.350 vs. MattGPT Product Vision at 0.349), promoting MattGPT Product Vision to slot #1. Fresh sessions produced clean responses. The Saturday "LLM stochasticity" attribution was wrong; this bug was the cause.
+  - **Mechanism had no documented justification** beyond a one-line docstring. No ADR, no tests pinning behavior, no design doc, no commit-message-level rationale. The W_KW=0.0 archaeology pattern (digging through git for missing decision context) was repeating.
+  - **Production user behavior actively contradicted the mechanism's design intent.** A six-query session captured Apr 13 (real user drilling into resistance/transformation/scaling) was exactly the case where session-state "diversification" works against user intent.
+  - **Post-removal eval validation (2 runs):** Run 1: 69/70 (98.6%). Run 2: 70/70 (100%). Both runs improved on the 61/63 (96.8%) baseline per ADR 018. The single Run 1 failure (Q64) was LLM stochastic variance that cleared on rerun.
+  - **Diagnostic queries post-removal (5 queries, fresh session):** Q1, Q3, Q4, Q5 all produced clean responses. Q2 contamination unchanged (separate issue under MATTGPT-061: pure-semantic polysemy on "transformation," not addressable through diversify changes).
+- **Architectural decision recorded as ADR 019** (May 18, 2026).
+- **Original Issue:** `diversify_results` (`backend_service.py:1276-1305`) stored `last_primary_client` in session state and used it on the next query to decide whether to demote the new pinned story. **This means the retrieval output for query N depends on queries 1...N-1 within a session.** Real users have multi-turn sessions, so a user who asks "What kind of leader is Matt?" first and then "How does Matt show up when things go wrong?" gets a different (and worse) result than a user who asks Q3 cold. The session-state behavior is almost certainly not the intended design — the mechanism was added to break cross-query client repetition, but in practice it creates order-dependent and order-sensitive responses to the same query.
+- **Compounding issue — too aggressive on near-tied scores:** The line 1293 threshold (`< 0.05`) treats a 0.001 score gap (Pinecone noise) the same as a 0.04 gap (meaningfully different alternative). When the gap is essentially noise, demoting the legitimately-correct top story amplifies that noise into user-visible response variance.
+- **(Original Status / Priority / Type before resolution: Open / High / Issue)**
+- **Issue:** `diversify_results` (`backend_service.py:1276-1305`) stores `last_primary_client` in session state and uses it on the next query to decide whether to demote the new pinned story. **This means the retrieval output for query N depends on queries 1...N-1 within a session.** Real users have multi-turn sessions, so a user who asks "What kind of leader is Matt?" first and then "How does Matt show up when things go wrong?" gets a different (and worse) result than a user who asks Q3 cold. The session-state behavior is almost certainly not the intended design — the mechanism was added to break cross-query client repetition, but in practice it creates order-dependent and order-sensitive responses to the same query.
+- **Compounding issue — too aggressive on near-tied scores:** The line 1293 threshold (`< 0.05`) treats a 0.001 score gap (Pinecone noise) the same as a 0.04 gap (meaningfully different alternative). When the gap is essentially noise, demoting the legitimately-correct top story amplifies that noise into user-visible response variance.
+- **Evidence (May 18, 2026 — surfaced during MATTGPT-061 follow-up investigation):**
+  - **Session context:** User runs Q1 *"What kind of leader is Matt?"*. Pinned = Why Hire Matt (Accenture). `last_primary_client = "Accenture"` gets stored.
+  - **Query:** Same session, user runs Q3 *"How does Matt show up when things go wrong?"*. Pinecone returns:
+    - #1: Why Hire Matt (Accenture, pc=0.350)
+    - #2: MattGPT Product Vision (Independent Project, pc=0.349)
+    - Score gap = **0.001**
+  - **Demotion fires** (line 1293): `pinned_client == last_primary_client` (both Accenture) AND `gap < 0.05` AND `rest[0].Client != last_primary_client`. Why Hire Matt is demoted to slot #2; MattGPT Product Vision becomes the new pinned at slot #1.
+  - **Response contamination:** LLM context now leads with MattGPT Product Vision. Response opens *"During Matt's sabbatical, he embarked on a personal project to build MattGPT..."* — a sabbatical-build story dominating a "how does Matt handle adversity" question.
+  - **Reproduction:** runs cleanly in a FRESH session (no `last_primary_client` state). The bug is specifically intra-session and ordering-dependent.
+- **Why the existing logic is too aggressive:** A 0.001 score gap is essentially Pinecone-noise — it means the two stories are functionally tied as the top answer. The current logic interprets this as "promote the alternative for diversity," but a near-tie is actually the case where the original pinned story has the strongest legitimacy claim (it consistently ranks #1 across different queries with similar topic). Demoting it amplifies retrieval noise into user-visible response variance.
+- **What the existing logic gets right:** Larger gaps (e.g., 0.04) — where the alternative is a meaningfully-different story — are a more defensible case for cross-query diversity. The mechanism in shape is correct; the threshold is mis-tuned for the very-narrow-gap case.
+- **Fix options:**
+  - **A.** Tighten the demotion threshold (e.g., 0.02 instead of 0.05). Only demote when there's a meaningful gap, not Pinecone-noise. Risk: changes baseline behavior across other queries; needs eval validation.
+  - **B.** Don't demote when the pinned story is the same `id` as the previous query's pinned (i.e., when Pinecone consistently identifies the same story as the top answer across consecutive queries, treat that as a strong signal and respect it).
+  - **C.** Add a minimum gap floor: only demote when `0.01 ≤ gap < 0.05`. Below 0.01 the stories are too close to call; demoting introduces noise.
+  - **D.** Per-session story-id deduplication instead of client-level: track which story `id` was pinned last, demote ONLY if the current pinned has the same `id` (genuinely the same story being repeated). Demote less, not more.
+- **Recommendation:** Option B is the cleanest in shape (respect Pinecone's signal when it's consistent across queries). Option A is the smallest code change but needs eval validation. Either way, requires running the 61-query eval suite to confirm no regression on intended cross-query diversity cases.
+- **Related to MATTGPT-061:** The Saturday-evening Q3 contamination that prompted the "did Q3 regress?" diagnosis was actually this bug firing, not corpus-side enrichment failure. Fixing this bug would resolve one of the apparent symptoms of -061's broader contamination pattern. Different mechanism, different fix.
+- **Effort:** ~5-10 lines if Option A (threshold change); ~15-20 lines if Option B (track previous pinned id in session state). Eval validation required regardless.
+- **Discovered during:** May 18, 2026 follow-up trace of Q3 "How does Matt show up when things go wrong?" using fresh session vs. carried-over session state. Fresh session produced clean response (Why Hire Matt + Norfolk Southern Quality Crisis); Saturday-evening session with prior `last_primary_client = Accenture` produced contaminated response (MattGPT Product Vision led).
+- **Logged:** May 18, 2026
+
+---
+
+### MATTGPT-074
+**Entity cluster promotion forces synthesis mode when users want depth (e.g., "How did you build the CIC?")**
 
 - **Status:** Open
 - **Priority:** Medium
-- **Type:** Action
-- **Issue:** Current `render_no_match_banner` (`utils/ui_helpers.py:304`) rejects nonsense/inappropriate queries with copy only — no affordance for the user to recover with a real query. A recruiter who mistypes or fat-fingers gets a dead end. Personal-intent and out-of-scope branches were differentiated in March 2026, but no redirect mechanism was added to either.
-- **Design (locked May 15, 2026 — ready to implement):**
-
-  **Ask MattGPT — Nonsense branch:**
-  - Banner copy: *🐾 Wrong trail. I'm a Plott Hound trained to track Matt's transformation work. Give me a real scent to follow.*
-  - Four chips beneath the banner:
-    - `[Scale a CIC to 150+ engineers]`
-    - `[Build teams that ship like startups]`
-    - `[Lead enterprise transformation]`
-    - `[Modernize payments at scale]`
-
-  **Ask MattGPT — Inappropriate branch:**
-  - Banner copy: *🐾 That's not a trail I'll follow. Ask me about Matt's work instead.*
-  - No chips. Banner stands alone (deliberate — don't reward the query shape with engagement scaffolding).
-
-  **Explore Stories — Nonsense branch:**
-  - Banner + hint line: *"Try transformation work, scaling teams, payments modernization, or enterprise leadership."*
-  - No clickable chips (Explore Stories uses filter UI, not seed prompts) — hint text only.
-
-  **Explore Stories — Inappropriate branch:**
-  - No hint text. Banner stands alone.
-
-- **Implementation notes:**
-  - Chip click pattern: reuse the existing chip→Ask flow (`seed_prompt` + `__ask_from_suggestion__` + `__ask_force_answer__=True` to bypass the nonsense filter on the canonical chip text + rerun). See `category_cards.py:55-57`, `story_detail.py:203-218` — third call site of the same pattern.
-  - Branch detection: `render_no_match_banner` already receives a `reason` parameter that differentiates nonsense vs. personal vs. out_of_scope vs. inappropriate. Extend the function to render chips conditionally on `reason == "nonsense"` AND `page == "ask_mattgpt"`.
-  - Define chip strings as a module-level constant (e.g., `NONSENSE_REDIRECT_CHIPS = [...]`) for BDD/eval reuse, never inline.
-- **Out of scope:** Changing the rejection logic itself (nonsense filter regex, semantic router branches). This ticket is purely the recovery affordance on top of existing branches.
-- **Effort:** ~30-50 lines across `utils/ui_helpers.py` (banner rendering) + chip handler wiring. Single file plus a constants reference.
-- **Audience impact:** Reduces dead-end conversion loss when a recruiter's first query misfires. The four chips also surface high-signal capability themes for users who arrived without a specific question.
-- **Logged:** May 15, 2026 (design carried over from May 14 session)
+- **Type:** Issue
+- **Issue:** The entity cluster promotion logic in `backend_service.py:1617-1629` automatically converts a query to synthesis mode when Pinecone returns 3+ stories from the same entity. The intent is to handle broad client/division questions ("What did Matt do at RBC?") by narrating across all stories rather than focusing on one. But the same mechanism fires for questions where the user wants DEPTH on the primary story, not BREADTH across the corpus.
+- **Concrete failure case (from MEMORY.md):**
+  - **Query:** *"How did you build the CIC?"*
+  - **Expected behavior:** depth on the primary "Building Cloud Innovation Centers" story (the founding narrative), with supporting details from the CIC scaling work
+  - **Actual behavior:** entity cluster promotion fires (10 CIC stories detected), synthesis mode activates, response spans CIC scaling + Atlanta hub + capability development + cross-functional teams + culture work — a thematic survey instead of the foundational depth the question asks for
+- **Code location:** `backend_service.py:1617-1629`
+  ```python
+  # Entity cluster promotion: if Pinecone returned 3+ stories from the
+  # detected entity, the user is asking about a client/division broadly
+  if entity_match and not is_synthesis:
+      ef, ev = entity_match
+      entity_pool_count = sum(1 for s in pool if s.get(ef) == ev)
+      if entity_pool_count >= 3:
+          is_synthesis = True
+  ```
+- **Why the heuristic is wrong:** "3+ entity stories in pool" is a property of CORPUS COMPOSITION, not USER INTENT. A user can ask a depth-question about a client with many stories AND get force-promoted to synthesis because the pool happens to be large. The mechanism is detecting an artifact (corpus density) and treating it as a signal (user intent for breadth).
+- **Affected entities (per corpus audit):** Any client/division with ≥3 stories. Most likely to fire: Accenture (37 stories under Cloud Innovation Center project), JP Morgan Chase (multiple stories under ACCESS Next Generation and Asset Management), Norfolk Southern (multiple stories under Revenue and Shipment Planning), Fiserv (multiple stories under White-Label Card Portal). Any depth-question about these gets converted to synthesis.
+- **Fix options (open):**
+  - **A.** Raise the threshold. 3+ is too low — for Accenture's 37 stories or CIC's 10+ stories, the pool will hit 3+ on almost any broad-leaning Accenture query. Higher threshold (5? 7?) would only force synthesis on the most clearly-breadth queries.
+  - **B.** Use intent_family instead of pool size. Promote to synthesis only when `intent_family == "synthesis"` (already in semantic router) or when the question is structurally a survey ("what did Matt do at X", "tell me about X's work"). Depth questions ("how did you build X", "walk me through X's design") should NOT promote.
+  - **C.** Query-shape detection. Heuristic: "How did you build X" / "Walk me through X" / "Why did you choose X" suggest depth. "What did Matt do at X" / "Tell me about X" / "Show me X's work" suggest breadth. Could be regex-based or another semantic router intent.
+  - **D.** Remove the promotion entirely. Trust the semantic router's intent_family classification. If `intent_family == "synthesis"`, run synthesis mode. Otherwise, run standard mode with the natural entity-anchored pool. The depth-vs-breadth decision moves entirely to the router.
+- **Recommendation:** Likely **B or D** based on the same "no compensation logic on top of Pinecone" principle that's been guiding -061. The router already classifies queries; promoting based on pool composition is a layered compensation that fires in ways the router didn't intend. Eval the router's behavior on depth queries against the affected entities before deciding.
+- **Eval validation required:** Sample of CIC depth queries, RBC depth queries, JPM depth queries — measure response quality (depth vs breadth) before and after any fix. The 61-query golden suite may not cover this case; add depth-specific queries if not.
+- **Related:** MATTGPT-061 (broader retrieval contamination), MATTGPT-021 (diversify_results pinning bugs), MATTGPT-073 (session-state contamination, same file). Same module (`backend_service.py`); same broader theme of compensation-layer mechanisms with side effects beyond their stated intent.
+- **Discovered during:** Originally observed during the January 2026 pipeline cleanup (per MEMORY.md "Known Open Issues"). Re-surfaced May 18, 2026 during MATTGPT-073 investigation when Matt asked whether the agentic multi-story-per-client design was being touched by the diversify changes. Confirmed it isn't — but the entity cluster mechanism has its own known issue worth filing as a distinct ticket.
+- **Logged:** May 18, 2026
