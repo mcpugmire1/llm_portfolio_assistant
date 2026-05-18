@@ -1248,10 +1248,19 @@ def diversify_results(
     1. PRESERVING the #1 Pinecone result as primary (highest semantic match)
     2. Prioritizing real named clients over generic ones for slots #2+
     3. Limiting stories per client
-    4. Avoiding repeating the same client in #1 position across consecutive queries
-       (only when the #2 result is close in score)
 
-    Uses st.session_state["_last_primary_client"] for tracking.
+    Note (May 18, 2026): cross-query session-state diversification was removed
+    per MATTGPT-073. The previous mechanism stored the slot-#1 client in
+    st.session_state["_last_primary_client"] and demoted the new slot #1 on
+    subsequent queries when it matched. Production log analysis (May 18 2026,
+    229 rows, 82 queries, Apr 13 to May 18) showed 85.4% of queries occur in
+    multi-turn sessions where the mechanism could fire; 45% of consecutive
+    query pairs were demotion-eligible. The mechanism had no documented
+    justification (no ADR, no tests, no design doc beyond a one-line
+    docstring) and empirical evidence showed it actively worked against user
+    intent in real production sessions where users drilled into a single
+    topic (e.g., a six-query resistance/transformation/scaling session
+    captured Apr 13 2026). Within-query diversity for slots #2+ is preserved.
 
     Args:
         stories: List of candidate stories (typically from semantic_search).
@@ -1262,8 +1271,7 @@ def diversify_results(
         for slots #2+.
 
     Side Effects:
-        Updates st.session_state["_last_primary_client"] with the Client field
-        from the first result in the returned list.
+        None.
     """
     if not stories:
         return []
@@ -1273,36 +1281,10 @@ def diversify_results(
             f"DEBUG diversify_results: incoming={[s.get('Client') for s in stories[:10]]}"
         )
 
-    last_primary_client = st.session_state.get("_last_primary_client")
-
-    if DEBUG:
-        print(f"DEBUG diversify_results: last_primary_client={last_primary_client}")
-
     # Pin the #1 Pinecone result as primary — it has the highest semantic relevance.
-    # Only allow last_primary_client demotion if the #2 story is close in score.
     pinned = stories[0]
     pinned_client = pinned.get("Client", "Unknown")
     rest = stories[1:]
-
-    # Check if we should demote pinned due to last_primary_client repeat
-    if pinned_client == last_primary_client and len(rest) >= 1:
-        pinned_score = pinned.get("pc", 0.0) or 0.0
-        next_score = rest[0].get("pc", 0.0) or 0.0
-        # Only demote if the next story is close (within 0.05 score gap)
-        if (
-            pinned_score - next_score < 0.05
-            and rest[0].get("Client") != last_primary_client
-        ):
-            if DEBUG:
-                print(
-                    f"DEBUG diversify_results: demoting {pinned_client} (repeat, gap={pinned_score - next_score:.3f})"
-                )
-            pinned, rest = rest[0], [pinned] + rest[1:]
-            pinned_client = pinned.get("Client", "Unknown")
-        elif DEBUG:
-            print(
-                f"DEBUG diversify_results: keeping {pinned_client} as primary despite repeat (gap={pinned_score - next_score:.3f})"
-            )
 
     # Diversify slots #2+ — named clients first, then generic, then duplicates
     seen_clients: set[str] = {pinned_client}
@@ -1323,9 +1305,6 @@ def diversify_results(
 
     # Final assembly: Pinned primary + named clients + generic + duplicates
     result = [pinned] + (named_diverse + generic_overflow + duplicate_overflow)[:6]
-
-    if result:
-        st.session_state["_last_primary_client"] = result[0].get("Client", "Unknown")
 
     if DEBUG:
         print(
@@ -1390,7 +1369,6 @@ def rag_answer(
 
     Side Effects:
         - Updates st.session_state["_known_vocab"] (cached vocabulary)
-        - Updates st.session_state["_last_primary_client"] (via diversify_results)
         - Updates st.session_state["__last_ranked_sources__"] (story IDs)
         - Updates st.session_state["__ask_dbg_*"] fields for debug panel
         - Logs rejected queries to data/offdomain_queries.csv
