@@ -33,11 +33,35 @@ INPUT_FILE = "echo_star_stories.jsonl"
 OUTPUT_FILE = "echo_star_stories_nlp.jsonl"  # Overwrites original after backup
 MODEL = "gpt-4o"  # Use GPT-4o for richer tags
 
+# Stories with these Era values describe independent/solo product engineering
+# work — no external client, no organizational stakeholders to coordinate.
+# A context note is appended to the prompt for these stories so the LLM
+# stops inferring stakeholder coordination, change management, or
+# cross-functional dynamics from technical product content (OKRs, user
+# journeys, scope decisions). See MATTGPT-061 for diagnosis.
+TECHNICAL_ONLY_ERAS = {"Independent Product Development"}
+
 
 # ---------------------------
 # Helper: NLP-based tagger
 # ---------------------------
 def extract_semantic_tags(story):
+    # For Independent Product Development stories, append a context note so
+    # the LLM doesn't hallucinate stakeholder/change-management/coordination
+    # tags from solo technical work. See TECHNICAL_ONLY_ERAS comment above.
+    era = story.get("Era", "")
+    context_note = ""
+    if era in TECHNICAL_ONLY_ERAS:
+        context_note = (
+            "\n**CONTEXT FOR THIS STORY:**\n"
+            "This story documents independent product engineering work — solo or "
+            "small-team development with no external client and no organizational "
+            "stakeholders to coordinate across. Use product engineering and technical "
+            "vocabulary. Avoid business strategy and organizational leadership phrasing — "
+            "do not infer stakeholder coordination, change management, or cross-functional "
+            "dynamics where the work was independent.\n\n"
+        )
+
     prompt = (
         "You are an intelligent assistant that analyzes STAR stories for professional tagging.\n\n"
         "Given the following data, generate a concise, comma-separated list of **semantic tags** that capture:\n\n"
@@ -83,7 +107,8 @@ def extract_semantic_tags(story):
         f"Result: {' '.join(story.get('Result', []))}\n"
         f"Process: {' '.join(story.get('Process', []))}\n"
         f"Performance: {' '.join(story.get('Performance', []))}\n\n"
-        "Output only the semantic tags as a comma-separated string. "
+        + context_note
+        + "Output only the semantic tags as a comma-separated string. "
         "Aim for 8-15 tags that balance behavioral and technical dimensions."
     )
 
