@@ -509,3 +509,52 @@ Both constants live in `config/constants.py` as the single source of truth.
 **Historical context (migrated from MATTGPT-029, May 14, 2026):**
 The "low-confidence banner edge cases" backlog ticket (logged April 2026 test audit) flagged that the banner "sometimes triggers incorrectly" but had no specific reproduction. The ticket was closed Decided Against on May 14, 2026 with the rationale that without a concrete failing case, there's nothing to investigate. This ADR captures the underlying threshold-calibration history so future investigators have the context if a real misfire ever surfaces.
 - If a new avatar context is added (e.g., Role Match), it maps to one of the two tiers
+
+---
+
+## ADR 019 — No Cross-Query Session State in `diversify_results`
+
+**Date:** 2026-05-18
+**Status:** Accepted
+**Related tickets:** MATTGPT-073 (resolved), MATTGPT-061, MATTGPT-021, MATTGPT-074
+
+**Context:**
+The `diversify_results` function in `ui/pages/ask_mattgpt/backend_service.py` was originally written on November 28, 2025 (commit `d657ed0`) with two co-located mechanisms:
+1. **Within-query client diversity** — for a single Pinecone retrieval pool, prefer named clients over generics, limit stories per client, and cap result size. This has clear stated rationale in the commit message ("prevent single-client domination in results") and is genuinely load-bearing.
+2. **Cross-query session-state tracking** — store the slot-#1 client in `st.session_state["_last_primary_client"]` and demote the new pinned story on subsequent queries when it matched. This had no documented rationale beyond a one-line docstring ("avoiding last-used client for primary"). No ADR, no tests pinning the behavior, no design doc, no commit-message-level justification.
+
+The cross-query mechanism evolved over January 2026 to add a 0.05 score-gap threshold (only demote when the alternative was within 0.05 of pinned), narrowing the firing condition but preserving the session-state dependency.
+
+May 2026 investigation under MATTGPT-073 revealed the mechanism was producing order-dependent retrieval contamination in real production sessions:
+- Production log analysis (Apr 13 to May 18, 2026; 82 queries; 24 inferred sessions): 85.4% of queries occur in multi-turn sessions where the mechanism could fire; 45% of consecutive query pairs were demotion-eligible.
+- A reproducible case (May 18, 2026): user runs Q1 "What kind of leader is Matt?" then Q3 "How does Matt show up when things go wrong?" within the same session. `last_primary_client = Accenture` from Q1 triggered the line 1293 demotion on Q3's 0.001 score gap (Why Hire Matt at 0.350 vs. MattGPT Product Vision at 0.349), promoting MattGPT Product Vision to slot #1. Fresh-session Q3 produced a clean response; same-session Q3 produced MattGPT contamination. Saturday May 16's "Q3 regression" attributed to LLM stochasticity was actually this bug firing.
+- A six-query production session captured April 13, 2026 showed a real user drilling into a single topic (resistance/transformation/scaling). The session-state mechanism would actively work against user intent in that pattern, "diversifying" their results away from the topic they were investigating.
+
+**Decision:**
+Remove the cross-query session-state mechanism from `diversify_results` entirely. Specifically:
+- Delete the read of `st.session_state["_last_primary_client"]` and the demotion check (former lines 1276-1305).
+- Delete the write of `st.session_state["_last_primary_client"]` (former line 1328).
+- Preserve all within-query diversity logic (named-clients-first, per-client limits, result-size cap).
+
+Within-query diversity remains the only client-diversity mechanism in the function. There is no cross-query state. The retrieval output for query N is deterministic with respect to query N alone (modulo Pinecone non-determinism and LLM stochasticity at temperature 0.4).
+
+**Rationale:**
+- **No documented justification for the mechanism.** No ADR, no tests, no design doc. The docstring intent ("avoiding last-used client for primary") was speculative — added alongside within-query diversity in the same commit without separate justification or an observed problem it was solving.
+- **Empirical evidence the mechanism was harmful.** Real production user behavior (drilling into a topic) is exactly the pattern where session-state "diversification" works against user intent. The mechanism conflated "same story repeating across queries" (legitimate concern, not implemented) with "same client appearing across queries" (debatable, what was implemented).
+- **Eval validation post-removal.** Two consecutive runs of the 61+ query eval suite: 69/70 (98.6%) and 70/70 (100%), versus the 96.8% baseline from ADR 018. The mechanism wasn't load-bearing for correctness; if anything, removal improved eval pass rate.
+- **The "no compensation logic on top of Pinecone" principle from January 2026 cleanup applies.** Adding speculative compensation gates to the retrieval pipeline accumulates side effects. The within-query diversity is justified delivery competency (no single client should dominate one response); the cross-query state was a layered compensation without a documented use case.
+- **Reversibility.** If a real cross-query use case surfaces, Option D (track story_id rather than client, narrowing the trigger to true same-story repetition) is a safer reintroduction than the original mechanism.
+
+**Consequences:**
+- The retrieval pipeline is now session-independent for `diversify_results`. Same query produces the same Pinecone+diversify output regardless of session history.
+- Multi-turn user behavior (the common case per production logs) no longer triggers order-dependent contamination from this mechanism.
+- LLM stochasticity at temperature 0.4 remains a separate source of variance; this ADR does not address it.
+- Future Claude sessions investigating diversify behavior should not re-add cross-query session state without first documenting (a) the specific production case it's solving, (b) eval evidence the case isn't already handled, and (c) explicit owner sign-off. The pattern of speculative compensation layers accumulating in this function is documented across MATTGPT-021, MATTGPT-061, MATTGPT-073, MATTGPT-074 and should be resisted.
+
+**Edge cases / what this ADR does NOT cover:**
+- **Q2 polysemy** ("How does Matt handle resistance in large-scale transformations?"): Strangler Fig technical-refactoring story still wins Pinecone retrieval over Norfolk Southern organizational-resistance stories because the word "transformation" is polysemic. This is a Pinecone-layer semantic problem, addressed in MATTGPT-061 (bidirectional enrichment) and on the NEXT roadmap (hybrid keyword retrieval). Not in scope for this ADR.
+- **Entity cluster promotion** (`backend_service.py:1617-1629`): a separate mechanism that auto-promotes broad entity queries to synthesis mode. Has its own design tension documented in MATTGPT-074. Not in scope for this ADR.
+- **diversify_results unused parameters** (MATTGPT-021): `max_per_client` is accepted but not actually applied in the function body. Pre-existing bug, separate ticket.
+
+**Methodological note:**
+This ADR was written immediately on resolution per a discipline established May 18, 2026: record the empirical evidence base alongside the decision, not just the decision. The W_KW=0.0 archaeology pattern (digging through git for missing decision context that was never recorded) was repeating before this discipline was articulated. Future decisions on `backend_service.py` orchestration should follow this pattern: write the ADR at the same time as the code change, with the empirical evidence inline.
