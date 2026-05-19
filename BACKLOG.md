@@ -206,7 +206,34 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Root cause:** `streamlit_js_eval` iframe creates a second rerun on first load. The DOM clears between consecutive reruns, producing the flash.
 - **Failed fixes (April 28):** Removing `st.rerun()` after screen-size capture caused a navbar→hero gap regression (iframe stays in DOM). Adding CSS background+min-height to `stAppViewContainer` caused the same gap.
 - **Next approach:** Move `streamlit_js_eval` call to bottom of `app.py` (after all page rendering). Iframe would render below footer instead of between navbar and hero.
-- **Logged:** Pre-April 2026, investigated April 28, 2026
+- **Additional symptom captured May 18, 2026 — Explore Stories specifically:**
+  - On navigation to Explore Stories, the **page header renders correctly** ("Project Stories & Insights" with the gradient banner), but the **content area briefly renders the entire Ask MattGPT intro** — "Ask MattGPT" subheader, the large Agy-with-headphones avatar, "Hi, I'm Agy 🐾", suggestion chips — before the actual AgGrid hydrates. Captured in Chrome DevTools Performance recording.
+  - **Diagnosis:** This is NOT a "large Agy icon placeholder" as I initially described. It's the **wrong page's content rendering briefly under the right page's header.** The Ask MattGPT page's render output is appearing in Explore Stories' content area during a transient state, then getting replaced by the correct AgGrid + filter UI.
+  - **Likely cause:** Streamlit's page-switching state management. When `active_tab` changes from "Ask MattGPT" → "Explore Stories", the navbar/header renders the new page header on the first rerun, but the previous page's content body is still mounted in the DOM until the new page's content fully renders. Possible mechanisms:
+    - `active_tab` toggle triggers a rerun where header re-renders but content body is mid-transition
+    - The Explore Stories page's slow-to-hydrate components (AgGrid JS bootstrap, Pinecone-related fetches) leave a render gap
+    - Streamlit's cached content from the previous page may not be cleared until the new page's first paint is complete
+  - **Investigation entry points:**
+    - `app.py` page routing logic — how does it decide which page to render on `active_tab` change?
+    - The navigation pattern in `category_cards.py:on_chip_click()` and similar cross-page seed_prompt navigation — these set `active_tab` and `st.rerun()`. The rerun may produce the transient state.
+    - Compare against Streamlit's "single page app" page-switch idioms — there are known patterns for cleanly clearing content between page changes.
+  - **Production evidence:** Chrome DevTools Performance recording captured May 18, 2026 immediately after the MATTGPT-073/-061 deploy. Reproducible (intermittent) by navigating from Ask MattGPT → Explore Stories.
+  - **Core Web Vitals from DevTools Performance Insights (May 18, 2026):**
+    - **CLS = 0.69** — "Poor" range (Core Web Vitals threshold for "Poor" is > 0.25). Confirms the wrong-content flash is a real layout shift, not a paint artifact. The original MATTGPT-018 framing said "CLS = 0, so it's a paint issue" — that was true for the blank-frame symptom but NOT for this new wrong-page-content symptom. The two symptoms have different mechanisms.
+    - **LCP = 46ms** — excellent (target < 2500ms). Rules out slow loading as root cause; the page renders fast but renders wrong content during the transition.
+    - **INP** — not measured in this recording (no interaction during capture).
+  - **DevTools timeline observations:**
+    - **30+ cascading CSS animations** during the transition window: scrollbar-color (12 instances), opacity (8 instances), border-left-color / border-top-color / border-bottom-color / border-right-color, background-color. Pattern indicates the entire page tree is re-mounting rather than just the changed pieces.
+    - **Named Streamlit animation `animation-1wgitoe`** firing as part of the page swap — this is Streamlit's auto-generated fade-in class for new content.
+  - **Related insights surfaced (separate issues, not blocking the flicker fix):**
+    - Image delivery: ~1.4 MB potential savings (apy_explore_stories.png, apy_avatar.png larger than needed)
+    - 3rd-party telemetry to webhooks.fivetran.com (not relevant to the flicker)
+  - **Three distinct visual artifacts captured during the same Ask MattGPT → Explore Stories transition (May 18, 2026):**
+    1. **Wrong-page-content flash** — Ask MattGPT intro (Agy avatar, "Hi, I'm Agy 🐾", suggestion chips) renders under the "Project Stories & Insights" Explore Stories header. Captured in DevTools Performance recording frame.
+    2. **Blank-AgGrid state** — Explore Stories page header + filter UI ("Find stories", Industry/Capability dropdowns, Advanced Filters, "Showing 1-20 of 113 projects") render correctly, but the AgGrid content area is empty white space. Purple gradient placeholders visible at the bottom. AgGrid JS bootstrap hasn't completed yet.
+    3. **Agy icon above hero banner** — a small Agy avatar renders transiently at the very top of the page, above the navbar/hero banner. Different location and size than the avatars rendered in normal page layouts.
+  - **Interpretation:** All three are facets of the same page-transition mechanism (page-tree re-mount + cascading animations) but represent different snapshot moments in the render sequence. A fix targeting the root cause (transition state management) should resolve all three.
+- **Logged:** Pre-April 2026, investigated April 28, 2026 (blank-frame symptom); supplemented May 18, 2026 (Explore Stories Agy-icon-flash symptom)
 
 ---
 
