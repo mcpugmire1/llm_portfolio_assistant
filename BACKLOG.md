@@ -57,6 +57,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-074](#mattgpt-074) | Entity cluster promotion forces synthesis mode when users want depth (e.g., "How did you build the CIC?") | Open | Medium | Issue | May 18, 2026 |
 | [MATTGPT-075](#mattgpt-075) | Developer debug surfaces leak to user-facing UI (sidebar print, telemetry badge) | Open | Medium | Issue | May 18, 2026 |
 | [MATTGPT-076](#mattgpt-076) | "How Agy Works" modal iframe overflows / does not resize correctly on mobile | Open | Medium | Issue | May 18, 2026 |
+| [MATTGPT-077](#mattgpt-077) | Subject-pronoun + noun-overlap retrieval contamination — "Matt + X" pulls MattGPT/Strangler Fig stories when X overlaps their vocabulary | Open | Medium-High | Issue | May 19, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -829,6 +830,7 @@ Each detail block uses these fields. Not every field is required for every item.
   - `generate_public_tags.py` Era-aware prompt that prevents future enrichment runs from re-adding contaminating tags to Independent Product Development stories.
 - **What remains (out of scope for -061; tracked separately):**
   - **Q2 polysemy on "transformations"** — Strangler Fig wins Pinecone #1, leads contaminated response. Structural to pure semantic search. Fixable via hybrid retrieval (NEXT roadmap) or accepted as known tail-quality edge case. Q2's exact phrasing is a diagnostic query, not a frequent production pattern; Q5 (same intent in slightly different words) works cleanly.
+  - **Subject-pronoun + noun-overlap free-text contamination** — MATTGPT-077 (May 19, 2026). The broader retrieval-bias pattern that -061's session-state fix did not address: "Matt + [MattGPT/Strangler Fig-overlap noun]" reliably contaminates retrieval; severe-overlap nouns ("refactoring") contaminate even with "you" phrasing. Validated May 19 2026 across 8 production probe queries. -077 gives -061's open structural residual a reproducible mechanism and broader scope.
   - **Entity cluster promotion forces synthesis on depth queries** — MATTGPT-074 captures this design tension (e.g., "How did you build the CIC?" gets breadth-synthesis instead of depth). Independent of -061.
   - **diversify_results pinning/limit bugs** — MATTGPT-021, pre-existing.
   - **Pinecone debug panel leaking to user UI** — MATTGPT-075, surfaced May 18 2026 during production query replay.
@@ -1384,3 +1386,69 @@ show_subtitle = context == "ask" and reason != "low_confidence"
 - **Effort estimate:** A) ~30 min, low fidelity. B) ~2 hours, moderate fidelity. C) ~4-6 hours, highest fidelity but largest refactor.
 - **Discovered during:** May 18, 2026 spot-check of production immediately after the MATTGPT-073/-061 push. Matt clicked into "How Agy Works" while in mobile mode (Chrome desktop with mobile viewport) and observed the iframe sizing issue.
 - **Logged:** May 18, 2026
+
+---
+
+### MATTGPT-077
+**Subject-pronoun + noun-overlap retrieval contamination — "Matt + X" pulls MattGPT/Strangler Fig stories when X overlaps their vocabulary**
+
+- **Status:** Open
+- **Priority:** Medium-High
+- **Type:** Issue
+- **Finding 1 (noun-overlap spectrum + subject-pronoun modifier):** Free-text queries with "Matt" as the subject systematically contaminate retrieval when the noun overlaps MattGPT or Strangler Fig story vocabulary. Subject pronoun is a *modifier*, not a binary gate — moderate-overlap nouns are rescued by switching "Matt" → "you"; severe-overlap nouns are not.
+
+  Probe results (May 19, 2026 — production, fresh sessions):
+
+  | Query | Result | Lead anchor |
+  |---|---|---|
+  | *How does Matt modernize monoliths into microservices?* (3x) | Contaminated 3/3 | Strangler Fig |
+  | *How does Matt approach microservices?* | Clean | Accenture CIC / DDD |
+  | *How does Matt handle legacy modernization?* | Clean | Fortune 500 / DDD |
+  | *How does Matt build MVPs?* | Contaminated | MattGPT product story |
+  | *How does Matt do platform refactoring?* | Contaminated | Strangler Fig |
+  | *How do you modernize monoliths into microservices?* (2x) | Clean 2/2 | Accenture CIC |
+  | *How do you build MVPs?* | Clean | Accenture CIC / Lean Product |
+  | *How do you do platform refactoring?* | **Contaminated** | Strangler Fig |
+
+  The "you + refactoring" disconfirmation (probe 8) is decisive: subject pronoun is NOT solely sufficient to rescue retrieval. "refactoring" appears densely in Strangler Fig's title, body, and metric language (*"5,765 lines", "82% reduction", "12 atomic Git commits"*); the pronoun switch cannot outvote that concentration.
+- **Finding 2 (product self-reference / recursion):** When retrieval pulls the MattGPT or Strangler Fig stories, the LLM response **names the product's own UI pages as portfolio evidence**. Example from *"How do you do platform refactoring?"*: *"Each major page, such as Explore Stories and Ask MattGPT, was pulled out into standalone modules."* This is a product-integrity failure distinct from retrieval correctness — even if the surfaced story is technically valid as a refactoring case study, a recruiter is being told *the tool they are currently using* is Matt's portfolio evidence. The chatbot recommends itself. That breaks the recruiter mental model: they are being shown the tool, not the work.
+- **Finding 3 (concentration mechanism, May 19, 2026 corpus audit):** A `refactor*` vocabulary audit against the actual embedding text (`build_embedding_text` output in `build_custom_embeddings.py`, NOT just STAR fields — embedding models see a flat concatenated string, not field structure) disconfirms the initial "vocabulary scarcity" hypothesis. Four stories use `refactor*` vocabulary in the embedded text. Three measurable signals concentrate retrieval on Strangler Fig:
+
+  | Story | Client | refactor count | Density per 1k chars | First-mention position | Total length |
+  |---|---|---:|---:|---:|---:|
+  | I Built a Monolith by Accident (Strangler Fig) | Independent Project | **11** | **2.137** | **3% (front-loaded)** | 5,148 |
+  | Delivering Multi-Client Customization (White-Lab) | Fiserv | 4 | 1.051 | 22.6% | 3,805 |
+  | Behavior & Test-Driven Development: Zero-Defect Code | Fortune 500 Clients | 4 | 0.580 | **56.8% (back-half)** | 6,898 |
+  | Building Effective AI-Assisted Development Workflows | Independent Project | 1 | 0.278 | 37.0% | 3,594 |
+
+  Strangler Fig outranks Fortune 500 BDD on three signals simultaneously: **2.75× count** (11 vs 4), **3.7× density per 1k chars** (2.137 vs 0.580), and **front-loaded first-mention** (3% of doc vs 56.8% — Strangler's "refactor" lands in the title/theme/Use Cases zone where `build_embedding_text` notes Use Cases as the "strongest retrieval signal"; Fortune 500 BDD's first mention is buried in the back half). Note Fortune 500 BDD is actually the *longer* document (6,898 vs 5,148 chars), so Strangler's win is pure concentration, not length asymmetry. Note also that `build_embedding_text` truncates list-typed STAR fields via `_to_text(..., max_items=2 or 3)`, meaning vocabulary buried beyond those positions never reaches the embedding — earlier raw-STAR-field audits will under-count instances visible to the embedding model.
+- **Hypothesized mechanism:**
+  - "Matt" as a query token embeds the query closer to stories where Matt-the-person is a named protagonist in the story body (MattGPT, Strangler Fig). Accenture/JPM/Capital One stories have less first/third-person "Matt" salience — they describe team and client work.
+  - Noun-overlap sits on a spectrum. When the noun appears densely in the contaminating story body (e.g., "refactoring" in Strangler Fig), the semantic concentration outvotes the subject-pronoun signal entirely.
+- **Affected query shape:**
+  - *"How does Matt [verb] [noun]?"* where noun ∈ {monolith, MVP, refactor*} (current known set; likely larger).
+  - *"How do you [verb] [noun]?"* where noun has severe overlap (refactoring confirmed; other candidates untested).
+  - **Unaffected:** queries with entities ("at JP Morgan", "at the CIC"); queries with non-overlapping nouns ("microservices", "legacy modernization"); queries that don't name Matt as subject for moderate-overlap nouns.
+- **Operational impact:** Free-text recruiter queries on three of Matt's most marketable verbs — *modernize*, *build (MVPs)*, *refactor* — silently surface MattGPT-self-referential responses. Failures are silent: responses read articulate and confident, but anchor on the wrong work. A senior recruiter is *more* likely to use "Matt + verb + technical noun" phrasing than a casual user, because they're cognitively framing the question around Matt-as-candidate. That's the primary user flow. The locked MATTGPT-071 chip set is curated and empirically clean; the free-text path has no protection.
+- **Fix-path ordering (open):**
+  1. **Story-side rewriting / re-embedding — bidirectional, with empirical caveat.** Concrete moves derived from the Finding 3 audit:
+     - **(1a) Reduce Strangler Fig refactor count from 11 → 3-4** (matching named-client density) AND move first-mention out of the front-loaded title/theme/Use Cases zone. Substitute *code cleanup / monolith decomposition / modular extraction* vocabulary; reduce first/third-person "Matt did X" framing in favor of work-as-subject framing.
+     - **(1b) Boost Fortune 500 BDD refactor count from 4 → 7-8** AND move first mention into Use Cases or 5PSummary so it lands in the front-loaded zone instead of the back half (currently 56.8% into the document).
+
+     Builds on the May 16 corpus pass (which addressed organizational/stakeholder leakage but did not address noun concentration / position). **Empirical caveat:** the May 16 Story 69 (MattGPT Product Vision) rewrite raised its Q1 Pinecone score 0.341 → 0.380 (wrong direction — the rewrite intended to reduce contamination but the score got worse). Story-side rewrites of MattGPT/Strangler Fig have empirically backfired once; any future rewrite must be A/B tested against the specific failing query before acceptance.
+  2. **Query-side rewriting.** Strip or normalize "Matt" out of the embedded query at retrieval time; preserve it in the prompt sent to the LLM. Cheap, reversible, sufficient for moderate-overlap nouns (monolith, MVP). **NOT sufficient** for severe-overlap nouns (refactoring) — would need to be paired with #1.
+  3. **Hybrid retrieval (BM25 + semantic).** Keyword weighting on "client", "Fortune 500", "enterprise" pushes named-client stories above MattGPT for queries that contain those keywords. Largest build, but **lowest empirical risk** given the May 16 backfire — touches retrieval scoring without touching the corpus. Addresses both this and Q2 polysemy (MATTGPT-061 residual). Currently on NEXT roadmap.
+- **Operational guidance for chip / eval designers:**
+  - Default to "you" phrasing in chip prompts where the noun has moderate MattGPT/Strangler Fig overlap.
+  - **Avoid severe-overlap nouns entirely in chip prompts** until the corpus-side fix lands. The current MATTGPT-071 rule:* chip set already does this — *"Modernize legacy systems / How does Matt approach legacy system modernization?"* replaced *"Modernize monoliths into microservices / How does Matt modernize monoliths into microservices?"* specifically because of this trap.
+  - Eval queries containing "Matt + monolith/MVP/refactor" patterns may produce contaminated responses — distinguish whether the eval is testing the gate or the underlying retrieval.
+- **Open questions / future probes:**
+  - Is the May 16 `TECHNICAL_ONLY_ERAS` prompt-context note (in `generate_public_tags.py`) inadvertently making Independent Project era stories MORE retrieval-attractive on technical queries by sharpening their technical vocabulary cluster? Would require A/B test with the context note temporarily removed. *(Hypothesis only, untested. May 19 2026.)*
+  - Does the pattern extend to other "Matt + [first-person product verb]" combinations beyond modernize/build/refactor?
+  - Does the same density-asymmetry pattern (Finding 3) show up for "monolith" and "MVP" vocabulary? A parallel audit across those nouns would confirm whether the fix needs to be applied broadly or whether "refactor" is uniquely concentrated in Strangler Fig.
+- **Related:**
+  - **MATTGPT-061** — MattGPT portfolio story contaminating organizational leadership queries. -077 gives -061's open structural residual a reproducible mechanism and broader scope. -061's session-state fix (via -073) closed the dominant *user-visible* failure pattern; -077 documents the remaining structural retrieval-bias failure mode.
+  - **MATTGPT-073** — cross-query session-state fix that closed -061's dominant visible mechanism. -077 is independent of session state (reproduces on cold sessions).
+  - **MATTGPT-071** — chip set validation; the locked chip set was rescued from -077's trap during May 19 production spot-checks.
+- **Discovered during:** May 19, 2026 MATTGPT-071 chip prompt validation against production. The rule:* chip prompt *"How does Matt modernize monoliths into microservices?"* produced 3/3 contaminated responses with Strangler Fig contamination. Investigation expanded to characterize the pattern across 8 probe queries.
+- **Logged:** May 19, 2026
