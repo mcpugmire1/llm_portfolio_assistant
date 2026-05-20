@@ -16,10 +16,26 @@ Feature: Ask MattGPT — Nonsense rejection banner + contextual chip sets
   # "Modernize monoliths into microservices" because the latter triggered
   # MattGPT/Strangler Fig self-referential responses).
   #
-  # Chip label literals live as module-level constants in utils/ui_helpers.py
-  # (RULE_CHIPS, PERSONAL_CHIPS, OUT_OF_SCOPE_CHIPS). BDD step definitions
-  # read those constants — DO NOT inline chip text in this file. This keeps
-  # chip-copy edits from breaking the spec.
+  # Chip label literals AND banner copy live as module-level constants in
+  # utils/ui_helpers.py (RULE_CHIPS, PERSONAL_CHIPS, OUT_OF_SCOPE_CHIPS, and
+  # BANNER_COPY — a dict keyed by reason: "rule", "personal", "out_of_scope",
+  # "low_confidence"). BDD step definitions read those constants — DO NOT
+  # inline chip text or banner copy in this file. This keeps copy edits
+  # from breaking the spec.
+  #
+  # May 19 2026 discovery: render_no_match_banner in utils/ui_helpers.py
+  # already has partial branch-awareness (personal/out_of_scope messages) and
+  # a generic 4-chip suggestion set shared across all branches. The
+  # __inject_user_turn__ / __ask_force_answer__ / __clear_banner_after_answer__
+  # plumbing already exists and is well-tested at tests/unit/test_category_cards.py
+  # and tests/bdd/steps/test_home.py. MATTGPT-071's delta is (1) extract chips
+  # to module constants, (2) branch-aware chip selection, (3) add low_confidence
+  # banner copy + chip suppression, (4) optionally refine rule:* banner copy.
+  #
+  # The @regression tag marks scenarios that test infrastructure already in
+  # production prior to MATTGPT-071 (chip click plumbing, banner-clear flag,
+  # context-aware chip suppression). They're regression guards rather than
+  # primary drivers of the new code.
   #
   # Step definitions pending — committed here as design contract first per
   # CLAUDE.md Testing Protocol (BDD scenarios committed before implementation).
@@ -34,8 +50,10 @@ Feature: Ask MattGPT — Nonsense rejection banner + contextual chip sets
   Scenario: rule:* rejection shows banner and the capability chip set
     When the user submits "Tell me a joke about Matt's career"
     Then the rule:* rejection banner should be displayed
+    And the banner displays the rule:* copy from BANNER_COPY
     And all RULE_CHIPS should be visible
 
+  @regression
   Scenario: Clicking a rule:* chip injects its prompt
     Given the rule:* rejection banner is showing
     When the user clicks the first rule:* chip
@@ -49,8 +67,10 @@ Feature: Ask MattGPT — Nonsense rejection banner + contextual chip sets
   Scenario: personal rejection shows banner and the character chip set
     When the user submits "Is Matt married?"
     Then the personal rejection banner should be displayed
+    And the banner displays the personal copy from BANNER_COPY
     And all PERSONAL_CHIPS should be visible
 
+  @regression
   Scenario: Clicking a personal chip injects its prompt
     Given the personal rejection banner is showing
     When the user clicks the first personal chip
@@ -63,8 +83,10 @@ Feature: Ask MattGPT — Nonsense rejection banner + contextual chip sets
   Scenario: out_of_scope rejection shows banner and the named-anchor chip set
     When the user submits "Tell me about Matt's retail experience"
     Then the out_of_scope rejection banner should be displayed
+    And the banner displays the out_of_scope copy from BANNER_COPY
     And all OUT_OF_SCOPE_CHIPS should be visible
 
+  @regression
   Scenario: Clicking an out_of_scope chip injects its prompt
     Given the out_of_scope rejection banner is showing
     When the user clicks the first out_of_scope chip
@@ -81,6 +103,7 @@ Feature: Ask MattGPT — Nonsense rejection banner + contextual chip sets
   Scenario: low_confidence rejection shows rephrase prompt and NO chips
     When the user submits a query that scores below the confidence threshold
     Then the low_confidence rejection banner should be displayed
+    And the banner displays the low_confidence copy from BANNER_COPY
     And zero chips should be visible
     And a rephrase prompt should be displayed
 
@@ -88,6 +111,7 @@ Feature: Ask MattGPT — Nonsense rejection banner + contextual chip sets
   # STATE LIFECYCLE
   # ---------------------------------------------------------------------------
 
+  @regression
   Scenario: Chip click clears the rejection banner
     Given the rule:* rejection banner is showing
     When the user clicks the first rule:* chip
@@ -110,6 +134,7 @@ Feature: Ask MattGPT — Nonsense rejection banner + contextual chip sets
   # Chips render only when context == "ask". Regression guard against the
   # chip-rendering logic leaking into Explore Stories or other surfaces.
 
+  @regression
   Scenario: Explore Stories suppresses rejection chips entirely
     Given the user navigates to Explore Stories
     When the user types "Tell me a joke about Matt's career" in the search box
