@@ -51,7 +51,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-068](#mattgpt-068) | About Matt — Content polish bundle (clickable questions, code expander, anchor nav, stat consolidation) | Open | Medium | Action | May 15, 2026 |
 | [MATTGPT-069](#mattgpt-069) | Home — Stats label contrast (light mode WCAG AA) | Open | Low | Issue | May 15, 2026 |
 | [MATTGPT-070](#mattgpt-070) | Ask MattGPT — Suggestion button cursor pointer | Open | Low | Issue | May 15, 2026 |
-| [MATTGPT-071](#mattgpt-071) | Nonsense rejection banner — branch-aware copy + contextual chip sets | Parked (pending MATTGPT-061) | Medium | Action | May 15, 2026 |
+| [MATTGPT-071](#mattgpt-071) | Nonsense rejection banner — branch-aware copy + contextual chip sets | In Progress (Red-A complete) | Medium | Action | May 15, 2026 |
 | [MATTGPT-072](#mattgpt-072) | `generate_public_tags.py` — case-insensitive tag dedup | Open | Low | Refactor | May 16, 2026 |
 | [MATTGPT-073](#mattgpt-073) | `last_primary_client` session state produces order-dependent retrieval within multi-turn sessions | Resolved | High | Issue | May 18, 2026 |
 | [MATTGPT-074](#mattgpt-074) | Entity cluster promotion forces synthesis mode when users want depth (e.g., "How did you build the CIC?") | Open | Medium | Issue | May 18, 2026 |
@@ -1113,10 +1113,10 @@ Chip 3 wording "How does Matt manage resistance when leading enterprise transfor
 ### MATTGPT-071
 **Nonsense rejection banner — branch-aware copy + contextual chip sets**
 
-- **Status:** Parked pending MATTGPT-061 (May 16, 2026)
+- **Status:** In Progress (Red-A complete; Red-B pending)
 - **Priority:** Medium
 - **Type:** Action
-- **Why parked:** Chip effectiveness depends on the underlying response being clean. Live testing on May 16 confirmed MATTGPT-061 (MattGPT story over-ranking) contaminates broad org-leadership queries — the proposed `personal` branch chip *"What kind of leader is Matt?"* surfaces the sabbatical project as leadership evidence. Shipping the chips on top of contaminated responses actively damages trust. Fix -061 first, then resume -071 implementation with the spec below.
+- **Dependency cleared (May 19, 2026):** MATTGPT-061's dominant user-visible contamination mechanism closed via MATTGPT-073 session-state fix. -061's residual structural mechanism (subject-pronoun + noun-overlap retrieval bias) filed as MATTGPT-077. With session-state mechanism removed and the chip-prompt swap informed by -077, today's production spot-check of all four rule:* chip prompts produced clean responses. Implementation unblocked.
 
 **Scope:** Differentiate copy and chip sets across all four reason branches in `render_no_match_banner` (`utils/ui_helpers.py:304-427`). Each rejection reason gets contextually-earned copy and chips rather than a single uniform treatment.
 
@@ -1168,17 +1168,21 @@ show_subtitle = context == "ask" and reason != "low_confidence"
 - **`out_of_scope` chips** answer *"where does Matt WORK?"* — concrete named anchors (clients, projects) for users who asked about scope Matt doesn't cover
 - **`low_confidence`** — no chips, just the rephrase prompt; the user's query was probably on-topic, they need to refine not pivot
 
-**Chip sets (DRAFT — chip copy needs live validation against production responses after MATTGPT-061 is fixed):**
+---
 
-**`rule:*` chips** (Matt's capability themes — verbs, broad signal):
+## LOCKED (May 19, 2026)
+
+### Chip sets (production-validated)
+
+**`RULE_CHIPS`** (`rule:*` branch — capability themes):
 | Label | Click-injected prompt |
 |---|---|
 | Scale a CIC to 150+ engineers | How did Matt scale the CIC to 150+ engineers? |
 | Build teams that ship like startups | How does Matt build teams that ship like startups? |
-| Lead enterprise transformation | Tell me about Matt's enterprise transformation work. |
+| Modernize legacy systems | How does Matt approach legacy system modernization? |
 | Modernize payments at scale | Tell me about Matt's payments modernization at scale. |
 
-**`personal` chips** (Matt-as-professional — character through work, recruiter-natural language):
+**`PERSONAL_CHIPS`** (`personal` branch — character through work):
 | Label | Click-injected prompt |
 |---|---|
 | What kind of leader is Matt? | What kind of leader is Matt? |
@@ -1186,7 +1190,7 @@ show_subtitle = context == "ask" and reason != "low_confidence"
 | Why does Matt do this work? | What drives Matt — why does he do this work? |
 | What do former colleagues say? | How would Matt's former teammates describe him? |
 
-**`out_of_scope` chips** (concrete proof of in-scope work — named clients, specific achievements):
+**`OUT_OF_SCOPE_CHIPS`** (`out_of_scope` branch — concrete named anchors):
 | Label | Click-injected prompt |
 |---|---|
 | Payments at JP Morgan | Tell me about Matt's payments work at JP Morgan. |
@@ -1194,9 +1198,77 @@ show_subtitle = context == "ask" and reason != "low_confidence"
 | Scaling teams 4 → 150+ | How did Matt scale engineering teams from 4 to 150+? |
 | Modernizing legacy platforms | Tell me about Matt's work modernizing legacy enterprise platforms. |
 
-**Live validation done so far (May 16, 2026):**
-- *"What kind of leader is Matt?"* (personal chip 1) → response correctly opened with CIC + servant leadership + enterprise work, but contaminated by MattGPT sabbatical paragraph (MATTGPT-061 firing). **Chip text is good; underlying retrieval needs -061 fix before validation completes.**
-- Remaining 11 chip prompts: not yet tested.
+### BANNER_COPY dict (keyed by reason)
+
+```python
+BANNER_COPY = {
+    "rule": "🐾 Wrong trail. I'm a Plott Hound trained to track Matt's transformation work. Give me a real scent to follow.",
+    "personal": "🐾 I'm focused on Matt's professional experience.",  # unchanged from current code
+    "out_of_scope": "🐾 That's outside Matt's experience.",  # unchanged from current code
+    "low_confidence": "🐾 I picked up a scent but lost the trail. Try rephrasing your question and I'll track it down.",
+}
+```
+
+**Explicit:** `low_confidence` renders banner copy + rephrase prompt only. **NO chips.**
+
+### Chip-prompt validation log (May 19, 2026 production runs)
+
+**`rule:*` chip prompts (all CLEAN after the May 19 swap):**
+- *"How did Matt scale the CIC to 150+ engineers?"* → CLEAN (Accenture CIC, 4x velocity, $100M repeat business, servant leadership)
+- *"How does Matt build teams that ship like startups?"* → CLEAN (high-trust, psychological safety, Lean XP, near-zero attrition)
+- *"How does Matt approach legacy system modernization?"* → CLEAN (Fortune 500, DDD, event storming, 12/15-Factor, CI/CD)
+- *"Tell me about Matt's payments modernization at scale"* → CLEAN (JPM ACCESS, 135K+ clients, Coalition Greenwich #1)
+
+**Earlier rejected `rule:*` prompts that didn't survive validation:**
+- *"Tell me about Matt's enterprise transformation work"* — verdict **"underwhelming"** (sprawling, no specific named engagement). "Lead enterprise transformation" chip → dropped.
+- *"What's Matt's signature transformation engagement?"* — verdict **"wow these are off"** (CIC scaling instead of a specific named engagement)
+- *"How does Matt modernize monoliths into microservices?"* — **CONTAMINATED 3/3** with Strangler Fig (Independent Project) instead of Accenture CIC modernization. Root cause: "Matt + monolith" hits MATTGPT-077's noun-overlap trap. **Pivot:** replaced with "Modernize legacy systems" / "How does Matt approach legacy system modernization?" — verified CLEAN.
+
+**`out_of_scope` chip prompts (all CLEAN — production-validated May 19):**
+- *"Tell me about Matt's payments work at JP Morgan"* → CLEAN (ACCESS platform, 135K+ corps, 180+ countries, Coalition Greenwich #1)
+- *"How did Matt establish and scale the Cloud Innovation Center?"* → CLEAN (10-person pilot → 150+, $100M repeat business, 5 US locations)
+- *"How did Matt scale engineering teams from 4 to 150+?"* → CLEAN (Lean XP, "I do, we do, you do" learning model)
+- *"Tell me about Matt's work modernizing legacy enterprise platforms"* → CLEAN (DDD, microservices, CI/CD — same anchor as legacy systems chip, no Strangler Fig contamination)
+
+**`personal` chip prompts:**
+- *"What kind of leader is Matt?"* → CLEAN (post-MATTGPT-073 fix: CIC scaling, servant leadership, $100M repeat, sustainable practices). The May 16 contamination that originally parked this ticket is fixed.
+
+**Phrasing-sensitivity finding (documented as MATTGPT-077):** "Matt + monolith" pulls Strangler Fig 3/3; "you + monolith" pulls Accenture CIC 2/2 CLEAN. Same noun, different pronoun, completely different result. Severe-overlap nouns (refactoring) contaminate regardless of pronoun. This is why the rule:* chip set was rescued from "monoliths into microservices" → "legacy systems."
+
+### Discovery findings (May 19, 2026)
+
+Code reading before Red-B revealed the true delta is significantly smaller than the original scope assumed:
+
+- `render_no_match_banner` (`utils/ui_helpers.py:304-427`) already has partial branch-awareness for `personal` and `out_of_scope` banner copy
+- `low_confidence` reason is **already produced** in `backend_service.py:1663,1722` — not a new classification
+- Chip-click plumbing **already exists** and is well-tested: `__inject_user_turn__` + `__ask_force_answer__` + `__ask_from_suggestion__` + `__clear_banner_after_answer__`. Coverage at `tests/unit/test_category_cards.py` + `tests/bdd/steps/test_home.py`
+- `context="explore"` **already suppresses** chips for Explore Stories (`utils/ui_helpers.py:397`)
+- The existing generic 4-chip suggestion list at `ui/ui_helpers.py:398-415` is what the locked branch-aware constants replace
+
+**Actual delta:** ~50 lines. (1) Extract chips to module constants (`RULE_CHIPS`, `PERSONAL_CHIPS`, `OUT_OF_SCOPE_CHIPS`, `BANNER_COPY`). (2) Make chip selection branch-aware on `reason`. (3) Add `low_confidence` banner copy + chip suppression. (4) Refine `rule:*` banner copy to the Plott Hound metaphor.
+
+### Scenarios → constants map
+
+BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these constants via step definitions (no inline literals):
+
+- `BANNER_COPY` drives scenarios **1, 3, 5, 7** (banner copy assertion per branch)
+- `RULE_CHIPS` / `PERSONAL_CHIPS` / `OUT_OF_SCOPE_CHIPS` drive scenarios **1, 3, 5** (chip visibility per branch)
+- `@regression` tag applied to scenarios **2, 4, 6, 8, 10** — these test pre-existing infrastructure (chip-click plumbing on 3 click scenarios, the banner-clear flag on scenario 8, context-aware chip suppression on scenario 10) rather than new MATTGPT-071 logic
+
+### Commit trail
+
+- **f9cc421** — Original `ask_mattgpt.feature` (10 scenarios, design contract)
+- **dc2296b** — `test_ask_mattgpt.py` + pytest-bdd binding (Red-A proof: 10 scenarios discovered, all undefined-step)
+- **5fd0eb0** — CLAUDE.md Testing Protocol amendment (Red-Blue-Green validation gates formalized)
+- **11e3e19** — Scenario refinements: banner-copy assertions, @regression tags, BANNER_COPY mention in feature header, `regression` marker registration in pytest.ini
+
+### Cross-links
+
+- **MATTGPT-077** — phrasing-sensitivity findings that informed the rule:* chip swap ("Modernize legacy systems" replacing "Modernize monoliths into microservices"). Three confirmed findings (noun-overlap spectrum + subject-pronoun modifier, product self-reference recursion, concentration mechanism).
+- **MATTGPT-073** — closed the dominant user-visible contamination mechanism that had blocked -071. Cross-query session-state fix in `diversify_results`.
+- **MATTGPT-061** — Resolved. Original blocker for -071. Residual structural mechanism is MATTGPT-077.
+
+---
 
 **Implementation notes:**
 
@@ -1231,8 +1303,9 @@ show_subtitle = context == "ask" and reason != "low_confidence"
 - May 15 reframe dropped a proposed nonsense-vs-inappropriate severity split (overengineered for actual audience).
 - May 16, 2026 expanded scope from "rule:* only" to "all four branches" after recognizing chip vocabulary should be contextual to reason, not uniform.
 - May 16 parked pending MATTGPT-061 after live validation of *"What kind of leader is Matt?"* surfaced the MattGPT-story contamination pattern. Chip text is sound; underlying retrieval needs the fix first.
+- May 19, 2026 unparked: MATTGPT-073 closed -061's session-state mechanism; production spot-check of chip prompts surfaced MATTGPT-077 (phrasing sensitivity); rule:* chip set rescued by swapping "monoliths into microservices" → "legacy systems"; all four locked chip sets and banner copy production-validated; BDD scenarios written + bound + refined; Red-A complete.
 
-**Logged:** May 15, 2026 (full spec finalized May 16, 2026; implementation parked pending MATTGPT-061)
+**Logged:** May 15, 2026 (full spec finalized May 16, 2026; chip sets + banner copy LOCKED May 19, 2026 — Red-B pending)
 
 ---
 
