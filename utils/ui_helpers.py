@@ -7,6 +7,66 @@ import streamlit as st
 from config.debug import DEBUG
 from utils.formatting import _format_deep_dive, _format_key_points, _format_narrative
 
+# ============================================================================
+# Branch-aware rejection chip sets — LOCKED May 19, 2026 (MATTGPT-071)
+#
+# Each chip is (label, click-injected prompt). Step definitions in
+# tests/bdd/steps/test_ask_mattgpt.py read these constants as the
+# single source of truth.
+#
+# Production validation log lives in BACKLOG.md MATTGPT-071 "Chip-prompt
+# validation log". See MATTGPT-077 for the phrasing-sensitivity findings
+# that informed the rule:* chip swap ("Modernize legacy systems" replaced
+# "Modernize monoliths into microservices" because the latter triggered
+# MattGPT/Strangler Fig self-referential responses).
+#
+# As of Red-B commit, render_no_match_banner does not yet consume these
+# constants — branch-aware rendering lands in the Blue commit.
+# ============================================================================
+
+RULE_CHIPS = [
+    ("Scale a CIC to 150+ engineers", "How did Matt scale the CIC to 150+ engineers?"),
+    (
+        "Build teams that ship like startups",
+        "How does Matt build teams that ship like startups?",
+    ),
+    ("Modernize legacy systems", "How does Matt approach legacy system modernization?"),
+    (
+        "Modernize payments at scale",
+        "Tell me about Matt's payments modernization at scale.",
+    ),
+]
+
+PERSONAL_CHIPS = [
+    ("What kind of leader is Matt?", "What kind of leader is Matt?"),
+    ("How does Matt handle pressure?", "How does Matt show up when things go wrong?"),
+    ("Why does Matt do this work?", "What drives Matt — why does he do this work?"),
+    (
+        "What do former colleagues say?",
+        "How would Matt's former teammates describe him?",
+    ),
+]
+
+OUT_OF_SCOPE_CHIPS = [
+    ("Payments at JP Morgan", "Tell me about Matt's payments work at JP Morgan."),
+    (
+        "Cloud Innovation Center",
+        "How did Matt establish and scale the Cloud Innovation Center?",
+    ),
+    ("Scaling teams 4 → 150+", "How did Matt scale engineering teams from 4 to 150+?"),
+    (
+        "Modernizing legacy platforms",
+        "Tell me about Matt's work modernizing legacy enterprise platforms.",
+    ),
+]
+
+BANNER_COPY = {
+    "rule": "🐾 Wrong trail. I'm a Plott Hound trained to track Matt's transformation work. Give me a real scent to follow.",
+    "personal": "🐾 I'm focused on Matt's professional experience.",
+    "out_of_scope": "🐾 That's outside Matt's experience.",
+    "low_confidence": "🐾 I picked up a scent but lost the trail. Try rephrasing your question and I'll track it down.",
+}
+
 
 def dbg(*args):
     """Debug output to sidebar (only when DEBUG=True)."""
