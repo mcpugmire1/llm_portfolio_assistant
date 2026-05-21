@@ -147,20 +147,54 @@ def get_banner_text(page) -> str:
 
 
 def get_visible_chip_labels(page) -> list[str]:
-    """Return the labels of all chip buttons currently rendered in any banner.
+    """Return chip labels from the LATEST rejection banner only.
 
-    Banner chips have st.button keys of the form
-    `<key_prefix>_suggest_no_match_<index>_<hash>` where `key_prefix` is set
-    by the caller of render_no_match_banner. At runtime in conversation view
-    it's `transcript_banner_<message_index>` (per
-    conversation_helpers.py:482). The Streamlit-generated CSS class is
-    `st-key-<key>` on the stElementContainer wrapping the button. Selector
-    matches the *_suggest_no_match_* infix to be agnostic to which call
-    site rendered the banner.
+    Chip st.button keys follow the pattern
+    `<key_prefix>_suggest_no_match_<i>_<hash>`. In conversation view the
+    key_prefix is `transcript_banner_<N>` where N is the transcript
+    message index (per conversation_helpers.py:482), incremented for each
+    new rejected message. After multiple rejections the scrollback shows
+    all banners and their chip sets simultaneously — that's correct
+    conversation design (full transcript history). Tests assert against
+    the LATEST chip set (highest N), not the entire scrollback.
+
+    See BACKLOG MATTGPT-071 Scope decisions (May 20, 2026) for the
+    "test bug, not product bug" rationale.
+
+    Returns chip labels from the chip set tied to the highest
+    transcript_banner_<N>. Falls back to all chips if no
+    transcript_banner_ prefix is found (e.g., explore_stories context).
     """
-    chip_buttons = page.locator("[class*='_suggest_no_match_'] button")
-    count = chip_buttons.count()
-    return [chip_buttons.nth(i).inner_text() for i in range(count)]
+    chip_data = page.evaluate(
+        """
+        () => {
+            const chips = [];
+            document.querySelectorAll(
+                "[class*='_suggest_no_match_'] button"
+            ).forEach(btn => {
+                const container = btn.closest("[class*='_suggest_no_match_']");
+                if (!container) return;
+                const stKey = Array.from(container.classList).find(
+                    c => c.startsWith('st-key-') && c.includes('_suggest_no_match_')
+                );
+                if (!stKey) return;
+                // Parse N from st-key-transcript_banner_<N>_suggest_no_match_...
+                const match = stKey.match(/_(\\d+)_suggest_no_match/);
+                const transcriptN = match ? parseInt(match[1]) : -1;
+                chips.push({label: btn.innerText, transcriptN: transcriptN});
+            });
+            return chips;
+        }
+        """
+    )
+    if not chip_data:
+        return []
+    # If we have transcript Ns, scope to highest. Else return all.
+    valid_ns = [c["transcriptN"] for c in chip_data if c["transcriptN"] >= 0]
+    if not valid_ns:
+        return [c["label"] for c in chip_data]
+    max_n = max(valid_ns)
+    return [c["label"] for c in chip_data if c["transcriptN"] == max_n]
 
 
 # =============================================================================
@@ -426,7 +460,25 @@ def then_chip_prompt_in_chat(browser_page):
     in the chat. We can't easily know WHICH chip without tracking state across
     steps, so we assert that there are at least two user messages (the original
     rejected query + the chip-injected prompt).
+
+    The chip-click → __inject_user_turn__ → rerun → conversation_view consumes
+    inject → adds user message cycle takes longer than the default 200ms wait
+    in `wait_for_streamlit_rerun`. Use `wait_for_function` to poll the live
+    DOM until the second message appears, with a 15-second timeout.
+    See BACKLOG MATTGPT-071 Scope decisions (May 20, 2026) for the timing
+    rationale.
     """
+    try:
+        browser_page.wait_for_function(
+            """
+            () => document.querySelectorAll(
+                "[data-testid='stChatMessage']"
+            ).length >= 2
+            """,
+            timeout=15000,
+        )
+    except Exception:
+        pass  # fall through to assertion for a clean error message
     user_messages = browser_page.locator("[data-testid='stChatMessage']")
     count = user_messages.count()
     assert count >= 2, (

@@ -378,11 +378,18 @@ def render_no_match_banner(
         context: "ask" for Ask MattGPT (shows suggestion chips),
                  "explore" for Explore Stories (simpler message, no chips)
     """
-    # Primary message — differentiate by intent family
+    # Primary message — differentiate by intent family.
+    # Reads from BANNER_COPY (LOCKED May 19, 2026 per MATTGPT-071). The
+    # fallback string preserves the legacy catch-all for unknown reasons
+    # (defensive — every known reason value has an explicit branch).
     if reason == "semantic_router:personal":
-        msg = "🐾 I'm focused on Matt's professional experience."
+        msg = BANNER_COPY["personal"]
     elif reason == "semantic_router:out_of_scope":
-        msg = "🐾 That's outside Matt's experience."
+        msg = BANNER_COPY["out_of_scope"]
+    elif reason.startswith("rule:"):
+        msg = BANNER_COPY["rule"]
+    elif reason == "low_confidence":
+        msg = BANNER_COPY["low_confidence"]
     else:
         msg = "🐾 I can't help with that. I'm trained on Matt's transformation work."
 
@@ -453,26 +460,40 @@ def render_no_match_banner(
     banner_html += '</div>'
     st.markdown(banner_html, unsafe_allow_html=True)
 
-    # Only show suggestion chips for Ask MattGPT context
-    if context == "ask":
-        suggestions = [
-            (
-                "Payments modernization",
-                "Tell me about your work modernizing payments platforms.",
-            ),
-            (
-                "Platform engineering & modernization",
-                "Tell me about your work modernizing platforms and engineering foundations.",
-            ),
-            (
-                "Cloud-native architecture",
-                "Tell me about your cloud-native architecture work.",
-            ),
-            (
-                "Innovation in digital products",
-                "Tell me about driving innovation in digital products.",
-            ),
-        ]
+    # Only show suggestion chips for Ask MattGPT context AND when the reason
+    # is not low_confidence (the locked spec: low_confidence shows the
+    # rephrase prompt in the banner copy only — no chips).
+    if context == "ask" and reason != "low_confidence":
+        # Branch-aware chip selection — MATTGPT-071 LOCKED May 19, 2026.
+        # Each branch gets its own contextually-earned chip set from the
+        # module constants in this file.
+        if reason.startswith("rule:"):
+            suggestions = RULE_CHIPS
+        elif reason == "semantic_router:personal":
+            suggestions = PERSONAL_CHIPS
+        elif reason == "semantic_router:out_of_scope":
+            suggestions = OUT_OF_SCOPE_CHIPS
+        else:
+            # Unknown / unclassified reason — preserve the legacy generic
+            # chip set as a defensive fallback.
+            suggestions = [
+                (
+                    "Payments modernization",
+                    "Tell me about your work modernizing payments platforms.",
+                ),
+                (
+                    "Platform engineering & modernization",
+                    "Tell me about your work modernizing platforms and engineering foundations.",
+                ),
+                (
+                    "Cloud-native architecture",
+                    "Tell me about your cloud-native architecture work.",
+                ),
+                (
+                    "Innovation in digital products",
+                    "Tell me about driving innovation in digital products.",
+                ),
+            ]
         cols = st.columns(len(suggestions))
         for i, (label, prompt_text) in enumerate(suggestions):
             with cols[i]:
