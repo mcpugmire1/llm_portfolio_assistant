@@ -58,6 +58,10 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-075](#mattgpt-075) | Developer debug surfaces leak to user-facing UI (sidebar print, telemetry badge) | Open | Medium | Issue | May 18, 2026 |
 | [MATTGPT-076](#mattgpt-076) | "How Agy Works" modal iframe overflows / does not resize correctly on mobile | Open | Medium | Issue | May 18, 2026 |
 | [MATTGPT-077](#mattgpt-077) | Subject-pronoun + noun-overlap retrieval contamination — "Matt + X" pulls MattGPT/Strangler Fig stories when X overlaps their vocabulary | Open | Medium-High | Issue | May 19, 2026 |
+| [MATTGPT-078](#mattgpt-078) | New corpus story — "AI Enablement Before It Had a Name" (resume Option E retrieval anchor) | Open | Medium | Action | May 21, 2026 |
+| [MATTGPT-079](#mattgpt-079) | Role Match coverage gaps — corpus story anchors needed (meta-ticket) | Open | Medium | Action | May 21, 2026 |
+| [MATTGPT-080](#mattgpt-080) | `matt_profile.json` — restructure into parallel evidence sources (identity / skills with provenance / STAR corpus / positioning) | Open | Medium | Architecture | May 21, 2026 |
+| [MATTGPT-081](#mattgpt-081) | Role Match engine — corrective-actions output by asset type (story / resume / LinkedIn / positioning / network / real skill) | Open | Medium | Enhancement | May 21, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -1535,3 +1539,121 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
   - **MATTGPT-071** — chip set validation; the locked chip set was rescued from -077's trap during May 19 production spot-checks.
 - **Discovered during:** May 19, 2026 MATTGPT-071 chip prompt validation against production. The rule:* chip prompt *"How does Matt modernize monoliths into microservices?"* produced 3/3 contaminated responses with Strangler Fig contamination. Investigation expanded to characterize the pattern across 8 probe queries.
 - **Logged:** May 19, 2026
+
+---
+
+### MATTGPT-078
+**New corpus story — "AI Enablement Before It Had a Name" (resume Option E retrieval anchor)**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Why it's needed:** A new resume summary option (Option E) was created targeting Senior Director / VP **AI Enablement** and **AI Transformation** roles. When MattGPT is queried about AI enablement experience, it currently surfaces the MattGPT solo development story and the healthcare AI pilot but **misses the CloudFirst capability transformation work**, which is the strongest evidence for this role type. The CloudFirst and CIC capability stories exist in the corpus but are tagged under talent development and delivery methodology, not AI adoption or enablement. This synthesis story is needed to create a **retrieval anchor** that connects those bodies of work to AI enablement queries specifically.
+- **Target query patterns** (story should surface for):
+  - AI enablement
+  - AI adoption
+  - Organizational readiness
+  - Capability transfer
+  - Change management
+  - AI transformation
+- **Draft (May 21, 2026 — needs final polish + 5P + STAR field mapping before corpus add):**
+
+  > **Story Title:** AI Enablement Before It Had a Name
+  >
+  > **Situation:** Organizations investing in emerging technology consistently underestimate the adoption problem. The technology works. The organization doesn't absorb it. Throughout my career at Accenture, this pattern repeated across clients, practices, and technology waves — from agile transformation to cloud-native development to AI. The gap between what technology could do and what organizations could actually sustain was always the harder problem.
+  >
+  > **Task:** I was repeatedly the person brought in to close that gap. Not to build the technology, but to build the capability around it — so that when the engagement ended, the organization could carry it forward without us.
+  >
+  > **Action:** Across CloudFirst and the Cloud Innovation Center, I built the infrastructure that made new ways of working stick. Designed competency frameworks and skill gap diagnostics used across 300+ professionals. Ran dojo cohorts, 1:1 coaching labs, and immersive training programs that shifted cross-functional teams from traditional IT delivery to product-centric ways of working. Embedded human-centered design, TDD, and discovery practices into client teams so deeply that clients sustained them independently after engagements ended. Piloted production AI systems in healthcare and financial services, including a generative AI chronic disease management platform with HIPAA-compliant data pipelines, building executive confidence for broader implementation. Deepened hands-on AI expertise independently, building a production RAG system using LLMs, vector databases, and eval-driven development.
+  >
+  > **Result:** 300+ professionals reskilled across CloudFirst NA. 150+ practitioners scaled across the CIC. AI pilots that shifted client organizations from reactive to proactive decision-making. A consistent track record of capability transfer that outlasted every engagement — clients adopted practices independently, extended engagements without prompting, and built on foundations we laid without needing us in the room.
+  >
+  > **Through-line:** The discipline is the same regardless of the technology wave. Identify where the capability gap is. Build the adoption methodology. Coach teams through the change. Make it stick. I have been doing AI enablement since before it had that name.
+- **Engineering work to operationalize (after the STAR is finalized):**
+  1. Add to `echo_star_stories.jsonl` with appropriate Title / Client / Era / Theme / Industry metadata (likely Era = "Enterprise Innovation & Transformation" or new cross-era "Capability Transformation" framing; Client likely "Multiple Clients" or "Career Narrative")
+  2. Run `generate_public_tags.py` to enrich with NLP-derived tags + Use Cases + Interview Questions
+  3. Run `build_custom_embeddings.py` to re-embed and upsert to Pinecone
+  4. Validate retrieval against the 6 target query patterns above — confirm this story surfaces in the top-3 for each
+  5. Add eval-suite entries to `tests/eval_rag_quality.py` for any of the 6 target patterns not already covered, pinning retrieval quality
+- **Sibling tickets (story-writing thread):**
+  - **MATTGPT-022** — Data Quality Cleanup Journey Story. Different scope (data quality narrative vs AI enablement narrative); same shape (write STAR → add to corpus → enrich → re-embed). Reviewing the two together helps keep corpus expansion thematically balanced.
+- **Cross-references:**
+  - **MATTGPT-077** (subject-pronoun + noun-overlap retrieval contamination) — when adding the story, audit for the same noun-overlap concerns. "AI" is a high-frequency term in the MattGPT product story; ensure the new story's "AI" vocabulary doesn't get out-competed by Independent-Project-era stories on AI-enablement queries. **Lower retrieval-overweighting risk than MATTGPT-022** because -078 is named-client work (CloudFirst / CIC), not Matt-as-builder content — the noun-overlap with MattGPT/Strangler Fig stories is narrower.
+  - **MATTGPT-072** (case-insensitive tag dedup in `generate_public_tags.py`) — relevant if enrichment surfaces tag collisions.
+  - **MATTGPT-079** — meta-ticket tracking known Role Match coverage gaps. -078 is one of the named sibling story-writing tickets that may close gaps surfaced by -079.
+- **Out of scope for this ticket:**
+  - Resume Option E content (lives separately in resume materials)
+  - Re-tagging existing CloudFirst / CIC stories with AI vocabulary (separate ticket if needed; this story is the retrieval anchor, not a re-tagging pass)
+- **Logged:** May 21, 2026
+
+---
+
+### MATTGPT-079
+**Role Match coverage gaps — corpus story anchors needed (meta-ticket)**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Context:** Role Match assessments surface specific skill/technology/role-archetype gaps where the corpus has no STAR story anchor. Filed as a meta-ticket to track discovery — each gap becomes a candidate for a sibling story-writing ticket (MATTGPT-022 / MATTGPT-078 style) when prioritized for writing.
+- **Known gaps (May 2026)** — surfaced during the NiCE Manager Solutions Architecture JD assessment (May 19, 2026):
+  - Node.js production work (no anchor)
+  - SDK / library development (no anchor)
+  - Specific AI/ML framework experience in enterprise client context (anchors exist via MattGPT solo project; weak in client work) — **MATTGPT-080 candidate first, story only if structured assertion insufficient**
+  - Managing multiple concurrent AI projects (no anchor; large-scale single-project anchors strong)
+  - Leading teams composed of AI Engineers / Software Developers / ML+LLM specialists (CIC anchors team-leadership broadly, not specifically composed of AI/ML specialists)
+  - Direct conflict resolution / employee relations experience (no anchor; tangential evidence in leadership stories) — **likely (b) resume/LinkedIn fix, not corpus**
+- **Decision per gap — use MATTGPT-081's corrective-actions taxonomy:** Before writing a new story for a known gap, decide whether the right fix is:
+  - (a) New STAR story → file a sibling ticket (MATTGPT-022 / MATTGPT-078 style)
+  - (b) Resume / LinkedIn / positioning-doc update → not a corpus issue
+  - (c) MATTGPT-080 `matt_profile.json` restructure → some gaps may be better addressed by structured skill assertions with provenance, not narrative stories
+  - (d) Real skill gap → corpus is honest, no story needed; ignore in this thread
+- **Workflow:** When a new Role Match assessment surfaces a gap not in this list, append it to the "Known gaps" section above with the surfacing JD context. When a gap is prioritized for action, file the sibling ticket (story / profile / resume) and link it back here.
+- **Cross-references:**
+  - **MATTGPT-080** — `matt_profile.json` restructure; addresses gaps better fit for structured skill assertions
+  - **MATTGPT-081** — Role Match engine corrective-actions output; categorizes gaps systematically going forward
+  - **MATTGPT-022** — Data Quality Cleanup Journey Story (sibling story-writing ticket)
+  - **MATTGPT-078** — AI Enablement Before It Had a Name (sibling story-writing ticket; addresses AI enablement gap surfaced during resume Option E work)
+- **Logged:** May 21, 2026
+
+---
+
+### MATTGPT-080
+**`matt_profile.json` — restructure into parallel evidence sources**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Architecture
+- **Context:** `matt_profile.json` currently does three unrelated jobs: identity grounding (name, certs, education), skill enumeration (flat 70+ item list), and positioning narrative (career summary). The matcher LLM treats all of it as undifferentiated context, which is why Role Match returns "missing evidence" for skills that are real but lack STAR story anchors.
+- **Work:** Split into four separate grounding sources:
+  1. **Identity facts** — stable credentials, certs, education
+  2. **Skill assertions with provenance** — technology / methodology / tool + which roles + recency. Skill assertions need provenance attached, not bare claims. Example: *"Kubernetes — CIC platform engineering, 2020-2024."*
+  3. **STAR story corpus** — unchanged, already exists (`echo_star_stories.jsonl`)
+  4. **Positioning docs** — *How I Work and Lead*, *Opportunity Filter* — currently absent from grounding entirely
+- **Dependencies:** Informs **MATTGPT-079** — some "missing evidence" gaps that -079 would otherwise fix via new stories may be better addressed here instead. Decide per gap before writing stories.
+- **Cross-references:**
+  - **MATTGPT-079** — meta-ticket tracking Role Match coverage gaps; -080 changes the decision framework for some of those gaps
+  - **MATTGPT-081** — restructured sources make corrective-action attribution more accurate
+- **Logged:** May 21, 2026
+
+---
+
+### MATTGPT-081
+**Role Match engine — corrective-actions output by asset type**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Enhancement
+- **Context:** Current `compute_recommendation()` produces Apply / Consider / Pass against the story corpus only. A gap result doesn't tell you whether the fix is a new story, a resume update, a LinkedIn keyword, a positioning doc change, a network move, or an actual skill to acquire. These have wildly different effort profiles.
+- **Work:** Add a corrective-actions layer to engine output. Per gap, attribute to one of:
+  - (a) **Story corpus** — no STAR anchor exists
+  - (b) **Resume** — claim missing or buried
+  - (c) **LinkedIn** — keyword or bullet absent
+  - (d) **Positioning docs** — *How I Work and Lead* doesn't claim it
+  - (e) **Network** — no contacts at this company / role type
+  - (f) **Real skill gap** — corpus is honest, acquire it
+
+  Output surfaces with the existing recommendation, not as a separate call.
+- **Cross-references:**
+  - **MATTGPT-080** — restructured `matt_profile.json` sources make attribution more accurate (clearer signal for which asset type a gap belongs to)
+  - **MATTGPT-079** — meta-ticket tracking known gaps; -081 is the engine that categorizes them systematically going forward
+- **Logged:** May 21, 2026
