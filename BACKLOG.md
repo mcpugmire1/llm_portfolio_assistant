@@ -62,6 +62,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-079](#mattgpt-079) | Role Match coverage gaps — corpus story anchors needed (meta-ticket) | Open | Medium | Action | May 21, 2026 |
 | [MATTGPT-080](#mattgpt-080) | `matt_profile.json` — restructure into parallel evidence sources (identity / skills with provenance / STAR corpus / positioning) | Open | Medium | Architecture | May 21, 2026 |
 | [MATTGPT-081](#mattgpt-081) | Role Match engine — corrective-actions output by asset type (story / resume / LinkedIn / positioning / network / real skill) | Open | Medium | Enhancement | May 21, 2026 |
+| [MATTGPT-082](#mattgpt-082) | Q15 eval assertion is over-specified — checks literal client name presence rather than response correctness | Open | Medium | Refactor | May 22, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -1657,3 +1658,25 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
   - **MATTGPT-080** — restructured `matt_profile.json` sources make attribution more accurate (clearer signal for which asset type a gap belongs to)
   - **MATTGPT-079** — meta-ticket tracking known gaps; -081 is the engine that categorizes them systematically going forward
 - **Logged:** May 21, 2026
+
+---
+
+### MATTGPT-082
+**Q15 eval assertion is over-specified — checks literal client name presence rather than response correctness**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Refactor
+- **Issue:** The Q15 test in `tests/eval_rag_quality.py:285-290` checks whether the literal string `"Fiserv"` appears in the response to the query `"Matt's work at Fiserv"`. It currently fails because the LLM describes the Fiserv work in granular detail (white-label card portal, $8.5M project, 47 acceptance criteria, $45M transactions, ADA/AODA compliance, DevOps modernization with Hudson + SonarQube) but doesn't echo the literal client name.
+- **Why this is an eval problem, not a product problem (May 22, 2026 production validation):** Matt tested the query against production and assessed the response as correct and useful for a recruiter — the response accurately describes the Fiserv engagement with specific metrics and project anchors. A recruiter asking *"Matt's work at Fiserv"* gets a substantively correct, detailed answer about that exact engagement. The literal-name match is a poor proxy for response quality.
+- **Mischaracterization in memory:** MEMORY.md previously listed this as `"Q15 Fiserv — LLM doesn't name 'Fiserv' in response. Pre-existing, low priority."` This framing treated it as a product defect (LLM should name the client) that was just deprioritized. Wrong framing — it's a test-quality issue (eval is checking the wrong thing). The "pre-existing low priority" label was never validated as a defect; it was carried forward as a self-citation across sessions until Matt's May 22 production check surfaced the actual response quality.
+- **Fix shape:** Restructure Q15 to check for **response correctness** (does the response describe the Fiserv engagement?) rather than literal client name presence. Approaches:
+  - **(A) Project-anchor check** — assert response contains 2+ of these Fiserv-engagement signature phrases: `"white-label"`, `"card portal"`, `"$8.5M"`, `"47 acceptance"`, `"VisionPLUS"`, `"ADA/AODA"`. Mirrors the concept-cluster pattern used by Q2 / Q5 / Q55 for the same reason: avoid LLM stochasticity on literal-string match.
+  - **(B) Loosen the `client_variants` list** — accept project anchors as variants. Less clean; conflates "name the client" with "describe the engagement."
+  - **(C) Remove Q15 entirely** — if literal client-name attribution isn't a quality signal, the test serves no purpose. Less safe because we lose any regression coverage on this category.
+- **Recommendation:** (A) — project-anchor concept cluster. Same pattern as Q55 and the other recently-added surgical tests. Preserves regression coverage while testing the right thing.
+- **Cross-references:**
+  - MEMORY.md "Eval Baseline" section updated in the same commit to remove the "pre-existing" framing on Q15 and document the validation discipline going forward.
+  - Concept cluster pattern documented in MEMORY.md "Architecture Decisions (Stable)": *"Q2/Q5 use keyword clusters with min_matches instead of verbatim phrases. Reduces LLM stochasticity failures."* — applies directly here.
+- **Discovered during:** May 22, 2026 eval run before push of MATTGPT-071 + -078..-081 stack. Matt reviewed the production response to "Matt's work at Fiserv" and assessed it as substantively correct, surfacing the eval-quality framing. The deeper failure — citing memory entries as "tracked issues" without verifying against BACKLOG — prompted the MEMORY.md cleanup landed in the same commit.
+- **Logged:** May 22, 2026
