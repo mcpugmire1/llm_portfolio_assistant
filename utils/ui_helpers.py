@@ -25,9 +25,9 @@ from utils.formatting import _format_deep_dive, _format_key_points, _format_narr
 # ============================================================================
 
 RULE_CHIPS = [
-    ("Scale a CIC to 150+ engineers", "How did Matt scale the CIC to 150+ engineers?"),
+    ("Scale an org from 0 to 150+", "How did Matt scale the CIC to 150+ engineers?"),
     (
-        "Build teams that ship like startups",
+        "Build teams like a startup",
         "How does Matt build teams that ship like startups?",
     ),
     ("Modernize legacy systems", "How does Matt approach legacy system modernization?"),
@@ -403,19 +403,35 @@ def render_no_match_banner(
     st.markdown(
         """
         <style>
-        .no-match-banner {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        /* Rejection banner — design spec per rejection_banner_wireframe.html
+           (May 21, 2026). Three contracts:
+             1. Chips render INSIDE the lavender bubble (containment fix).
+             2. Responsive grid: 4 columns ≥1280px, 2 columns 768-1279px,
+                1 column <768px.
+             3. Text wraps with uniform chip height via flex centering +
+                min-height — no truncation. */
+
+        /* Bubble container — Streamlit container with key=
+           {key_prefix}_rejection_bubble gets the lavender backdrop. Chips
+           and banner text both render as children of this container.
+           Uses --banner-info-* CSS variables from global_styles.py which
+           carry both light- and dark-mode values automatically. */
+        [class*='_rejection_bubble'] {
             background: var(--banner-info-bg);
-            border-left: 4px solid var(--banner-info-border);
-            padding: 20px 24px;
             border-radius: 12px;
+            padding: 14px 16px;
             margin: 16px 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
+
+        /* Banner text styling. Font size 16px for readability
+           (HCD assessment May 22, 2026). */
         .no-match-banner-msg {
             color: var(--banner-info-text);
             font-weight: 500;
-            font-size: 15px;
-            line-height: 1.6;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 6px;
         }
         .no-match-banner-debug {
             color: var(--banner-info-text);
@@ -424,85 +440,151 @@ def render_no_match_banner(
             font-style: italic;
             margin-top: 8px;
         }
-        .no-match-banner-subtitle {
-            color: var(--banner-info-text);
-            font-weight: 500;
-            margin-top: 12px;
-            font-size: 14px;
-        }
         .no-match-banner-hint {
-            color: var(--accent-purple);
+            color: var(--banner-info-text);
             font-size: 13px;
             margin-top: 8px;
+        }
+
+        /* Chip grid — work WITH Streamlit's flex layout rather than
+           overriding to grid (which May 22, 2026 visual test confirmed
+           gets beaten by Streamlit's inline display:flex). Use flex-wrap
+           on the row + flex-basis on each column to control responsive
+           breakpoints (4 → 2 → 1).
+           Default (≥1280px): 4 columns, each ~25% wide.
+           1280-769px: wrap to 2 columns (50% each).
+           ≤768px: wrap to 1 column (100%). */
+        [class*='_chip_grid'] [data-testid="stHorizontalBlock"] {
+            flex-wrap: wrap !important;
+            gap: 8px !important;
+        }
+        [class*='_chip_grid'] [data-testid="stHorizontalBlock"] [data-testid="column"] {
+            flex: 1 1 calc(25% - 8px) !important;
+            min-width: 0 !important;
+            max-width: none !important;
+            width: auto !important;
+        }
+        @media (max-width: 1280px) {
+            [class*='_chip_grid'] [data-testid="stHorizontalBlock"] [data-testid="column"] {
+                flex-basis: calc(50% - 8px) !important;
+            }
+        }
+        @media (max-width: 768px) {
+            [class*='_chip_grid'] [data-testid="stHorizontalBlock"] [data-testid="column"] {
+                flex-basis: 100% !important;
+            }
+        }
+
+        /* Chip button — spec colors, text wrap, uniform height via
+           min-height + flex centering. !important needed to override
+           Streamlit's default secondary-button cascade. */
+        /* Chip button — uses CSS variables so light/dark mode is handled
+           automatically by global_styles.py. --bg-card flips white →
+           dark-purple between modes; --banner-info-border flips purple
+           shades to maintain contrast; --banner-info-text flips deep →
+           light purple. No hardcoded hex anywhere. */
+        [class*='_suggest_no_match_'] button {
+            background: var(--bg-card) !important;
+            border: 1px solid var(--banner-info-border) !important;
+            color: var(--banner-info-text) !important;
+            border-radius: 8px !important;
+            padding: 9px 12px !important;
+            font-family: 'Source Sans Pro', 'Source Sans 3', sans-serif !important;
+            font-size: 14px !important;
+            font-weight: 500 !important;
+            text-align: center !important;
+            white-space: normal !important;
+            min-height: 56px !important;
+            width: 100% !important;
+            line-height: 1.3 !important;
+        }
+        /* Lock inner text-element styling — Streamlit wraps button text
+           in a <p> or <div> that carries its own theme-derived styles. */
+        [class*='_suggest_no_match_'] button p,
+        [class*='_suggest_no_match_'] button div {
+            color: var(--banner-info-text) !important;
+            font-family: 'Source Sans Pro', 'Source Sans 3', sans-serif !important;
+            font-weight: 500 !important;
+            font-size: 14px !important;
+            letter-spacing: normal !important;
         }
         </style>
         """,
         unsafe_allow_html=True,
     )
 
-    # Build banner HTML based on context
-    banner_html = (
-        f'<div class="no-match-banner"><div class="no-match-banner-msg">{msg}</div>'
-    )
+    # Wrap banner text + chips in a single Streamlit container so chips
+    # render INSIDE the lavender bubble (per wireframe spec). The container's
+    # st-key class drives the bubble background; banner text and chip
+    # widgets are children of the same container, visually contained.
+    with st.container(key=f"{key_prefix}_rejection_bubble"):
+        # Banner HTML — wrapped in <div class="no-match-banner"> as a
+        # presence marker for BDD selectors (the lavender background comes
+        # from the outer Streamlit container, not this inner div).
+        banner_html = (
+            f'<div class="no-match-banner">'
+            f'<div class="no-match-banner-msg">{msg}</div>'
+        )
 
-    if debug_text:
-        banner_html += f'<div class="no-match-banner-debug">{debug_text}</div>'
+        if debug_text:
+            banner_html += f'<div class="no-match-banner-debug">{debug_text}</div>'
 
-    if context == "ask":
-        banner_html += '<div class="no-match-banner-subtitle">Ask me about:</div>'
-    elif reason == "semantic_router:personal":
-        # Personal questions — mirror the Ask MattGPT pivot language
-        banner_html += '<div class="no-match-banner-hint">Try searching for his transformation work, platform engineering, or how he builds teams.</div>'
-    else:
-        # Out of scope / generic — point to portfolio search terms
-        banner_html += '<div class="no-match-banner-hint">Try searching for clients, technologies, or project types from Matt\'s portfolio.</div>'
+        # Ask MattGPT context: no hint text — chips speak for themselves.
+        # Explore Stories context: branch-aware hint text (no chips render
+        # there, so the hint is the only follow-up affordance).
+        if context != "ask":
+            if reason == "semantic_router:personal":
+                banner_html += '<div class="no-match-banner-hint">Try searching for his transformation work, platform engineering, or how he builds teams.</div>'
+            else:
+                banner_html += '<div class="no-match-banner-hint">Try searching for clients, technologies, or project types from Matt\'s portfolio.</div>'
 
-    banner_html += '</div>'
-    st.markdown(banner_html, unsafe_allow_html=True)
+        banner_html += "</div>"
+        st.markdown(banner_html, unsafe_allow_html=True)
 
-    # Only show suggestion chips for Ask MattGPT context AND when the reason
-    # is not low_confidence (the locked spec: low_confidence shows the
-    # rephrase prompt in the banner copy only — no chips).
-    if context == "ask" and reason != "low_confidence":
-        # Branch-aware chip selection — MATTGPT-071 LOCKED May 19, 2026.
-        # Each branch gets its own contextually-earned chip set from the
-        # module constants in this file.
-        if reason.startswith("rule:"):
-            suggestions = RULE_CHIPS
-        elif reason == "semantic_router:personal":
-            suggestions = PERSONAL_CHIPS
-        elif reason == "semantic_router:out_of_scope":
-            suggestions = OUT_OF_SCOPE_CHIPS
-        else:
-            # Unknown / unclassified reason — preserve the legacy generic
-            # chip set as a defensive fallback.
-            suggestions = [
-                (
-                    "Payments modernization",
-                    "Tell me about your work modernizing payments platforms.",
-                ),
-                (
-                    "Platform engineering & modernization",
-                    "Tell me about your work modernizing platforms and engineering foundations.",
-                ),
-                (
-                    "Cloud-native architecture",
-                    "Tell me about your cloud-native architecture work.",
-                ),
-                (
-                    "Innovation in digital products",
-                    "Tell me about driving innovation in digital products.",
-                ),
-            ]
-        cols = st.columns(len(suggestions))
-        for i, (label, prompt_text) in enumerate(suggestions):
-            with cols[i]:
-                if st.button(
-                    label, key=f"{key_prefix}_suggest_no_match_{i}_{hash(label)%10000}"
-                ):
-                    st.session_state["__inject_user_turn__"] = prompt_text
-                    st.session_state["__ask_from_suggestion__"] = True
-                    st.session_state["__ask_force_answer__"] = True
-                    st.session_state["ask_input"] = prompt_text
-                    st.session_state["__clear_banner_after_answer__"] = True
-                    st.rerun()
+        # Chips render INSIDE the bubble. Branch-aware chip selection;
+        # low_confidence shows no chips (spec).
+        if context == "ask" and reason != "low_confidence":
+            if reason.startswith("rule:"):
+                suggestions = RULE_CHIPS
+            elif reason == "semantic_router:personal":
+                suggestions = PERSONAL_CHIPS
+            elif reason == "semantic_router:out_of_scope":
+                suggestions = OUT_OF_SCOPE_CHIPS
+            else:
+                # Unknown reason — legacy generic chip set as defensive fallback
+                suggestions = [
+                    (
+                        "Payments modernization",
+                        "Tell me about your work modernizing payments platforms.",
+                    ),
+                    (
+                        "Platform engineering & modernization",
+                        "Tell me about your work modernizing platforms and engineering foundations.",
+                    ),
+                    (
+                        "Cloud-native architecture",
+                        "Tell me about your cloud-native architecture work.",
+                    ),
+                    (
+                        "Innovation in digital products",
+                        "Tell me about driving innovation in digital products.",
+                    ),
+                ]
+            # Nested container so the chip-grid CSS Grid override scopes
+            # only to these columns, not to other Streamlit columns on the
+            # page.
+            with st.container(key=f"{key_prefix}_chip_grid"):
+                cols = st.columns(len(suggestions))
+                for i, (label, prompt_text) in enumerate(suggestions):
+                    with cols[i]:
+                        if st.button(
+                            label,
+                            key=f"{key_prefix}_suggest_no_match_{i}_{hash(label) % 10000}",
+                            use_container_width=True,
+                        ):
+                            st.session_state["__inject_user_turn__"] = prompt_text
+                            st.session_state["__ask_from_suggestion__"] = True
+                            st.session_state["__ask_force_answer__"] = True
+                            st.session_state["ask_input"] = prompt_text
+                            st.session_state["__clear_banner_after_answer__"] = True
+                            st.rerun()
