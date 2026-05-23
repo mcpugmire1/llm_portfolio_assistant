@@ -9,6 +9,8 @@ Run with: pytest tests/bdd -k explore_stories
 import pytest
 from pytest_bdd import given, parsers, scenarios, then, when
 
+from utils.ui_helpers import BANNER_COPY
+
 # Load the feature file
 scenarios('../features/explore_stories.feature')
 
@@ -1313,3 +1315,61 @@ def verify_specific_view_mode(browser_page, view):
         timeline = browser_page.locator(".timeline-container")
         if timeline.count() == 0:
             pytest.skip("Timeline view content not found")
+
+
+# =============================================================================
+# REJECTION BANNER STEPS — added May 23, 2026 for the rule:* divergence
+# scenario and as a side benefit closing the 2 pending rejection-banner
+# scenarios that have been documented-but-step-def-pending under the
+# MATTGPT-060 pattern (lines 311-321 of explore_stories.feature).
+# =============================================================================
+
+
+@then("the rejection banner should be displayed")
+def rejection_banner_displayed(browser_page):
+    """Wait for the .no-match-banner DOM element to render after a rejected
+    query. The banner is rendered by render_no_match_banner() in
+    utils/ui_helpers.py — present in both Ask MattGPT and Explore Stories
+    surfaces with the same class hook."""
+    browser_page.wait_for_selector(".no-match-banner", timeout=10000)
+    banner = browser_page.locator(".no-match-banner").first
+    assert banner.is_visible(), "Rejection banner should be visible but is not"
+
+
+@then(parsers.parse("the banner displays the {reason} copy from BANNER_COPY"))
+def banner_displays_copy_from_banner_copy(browser_page, reason):
+    """Compare the rendered banner text against the literal value of
+    BANNER_COPY[reason] from utils/ui_helpers.py. The assertion message
+    surfaces a side-by-side diff on failure.
+
+    Gherkin uses 'rule:*' as the human-readable reason marker, but the
+    BANNER_COPY dict key is 'rule' (no colon-star). Normalize the Gherkin
+    reason → dict key here. Mirrors the pattern in
+    tests/bdd/steps/test_ask_mattgpt.py::then_banner_displays_copy.
+    """
+    key = reason.rstrip(":*").rstrip(":")
+    if key not in BANNER_COPY:
+        # Try the raw form (e.g., "personal", "out_of_scope", "low_confidence")
+        key = reason
+    expected = BANNER_COPY[key]
+    banner_msg = browser_page.locator(".no-match-banner-msg").first
+    actual = banner_msg.inner_text()
+    assert actual == expected, (
+        f"BANNER_COPY[{key!r}] mismatch.\n"
+        f"  Expected: {expected!r}\n"
+        f"  Actual:   {actual!r}"
+    )
+
+
+@then("no story results should be shown")
+def no_story_results_shown(browser_page):
+    """After a rejected query, the results area should be empty —
+    no AgGrid rows, no story cards. Verifies the rejection path
+    actually short-circuited the search instead of returning some
+    fallback result set."""
+    ag_rows = browser_page.locator(".ag-row").count()
+    story_cards = browser_page.locator(".fixed-height-card, .story-card").count()
+    assert ag_rows == 0 and story_cards == 0, (
+        f"Expected zero story results after rejection, "
+        f"found {ag_rows} AgGrid rows + {story_cards} story cards"
+    )
