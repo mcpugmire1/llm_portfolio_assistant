@@ -63,6 +63,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-080](#mattgpt-080) | `matt_profile.json` — restructure into parallel evidence sources (identity / skills with provenance / STAR corpus / positioning) | Open | Medium | Architecture | May 21, 2026 |
 | [MATTGPT-081](#mattgpt-081) | Role Match engine — corrective-actions output by asset type (story / resume / LinkedIn / positioning / network / real skill) | Open | Medium | Enhancement | May 21, 2026 |
 | [MATTGPT-082](#mattgpt-082) | Q15 eval assertion is over-specified — checks literal client name presence rather than response correctness | Open | Medium | Refactor | May 22, 2026 |
+| [MATTGPT-083](#mattgpt-083) | Spinner inconsistency — Explore Stories doesn't show thinking indicator for rejected queries (Ask MattGPT does) | Open | Medium | Issue | May 23, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -1680,3 +1681,29 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
   - Concept cluster pattern documented in MEMORY.md "Architecture Decisions (Stable)": *"Q2/Q5 use keyword clusters with min_matches instead of verbatim phrases. Reduces LLM stochasticity failures."* — applies directly here.
 - **Discovered during:** May 22, 2026 eval run before push of MATTGPT-071 + -078..-081 stack. Matt reviewed the production response to "Matt's work at Fiserv" and assessed it as substantively correct, surfacing the eval-quality framing. The deeper failure — citing memory entries as "tracked issues" without verifying against BACKLOG — prompted the MEMORY.md cleanup landed in the same commit.
 - **Logged:** May 22, 2026
+
+---
+
+### MATTGPT-083
+**Spinner inconsistency — Explore Stories doesn't show thinking indicator for rejected queries (Ask MattGPT does)**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Issue
+- **Issue:** The thinking indicator (`render_thinking_indicator()`) appears for **all queries** on Ask MattGPT — rejected and successful — but only appears for **non-rejected queries** on Explore Stories. Visual inconsistency between the two surfaces.
+- **Root cause:**
+  - **Ask MattGPT** (`ui/pages/ask_mattgpt/conversation_view.py:198-204`): spinner rendered BEFORE the entire `send_to_backend()` call. The backend call contains all the gates (nonsense_check, semantic_router, Pinecone, LLM), so the spinner covers everything including rejections.
+  - **Explore Stories** (`ui/pages/explore_stories.py:1962-2022`): spinner rendered AFTER the rejection gates. Specifically, `is_nonsense()` check and semantic_router check both fire BEFORE the spinner code at line 1999. When either rejects the query, `st.stop()` or `return` exits the script before the spinner is reached.
+- **User-facing impact:** On Explore Stories, rejected queries appear to "snap" to the banner with no transition. On Ask MattGPT, the same query type shows the spinner briefly before the banner appears. Inconsistent UX across surfaces.
+- **Fix shape:** Move the spinner code BEFORE the rejection gates in `explore_stories.py`. Wrap all three (nonsense_check, semantic_router, semantic_search) inside the spinner block. Subtleties to handle:
+  - `st.stop()` calls in the current rejection branches skip `finally` blocks — flip those to early-return or restructure the flow so `search_container.empty()` always runs.
+  - Need to ensure the spinner appears even for very-fast rejections (~10ms regex match) so the user perceives the system "thinking" before saying no.
+- **BDD coverage analysis (May 23, 2026):**
+  - 2 existing scenarios in `tests/bdd/features/explore_stories.feature:311-321` for personal + out_of_scope rejection — neither has step definitions. They're documented-but-pending under the MATTGPT-060 pattern.
+  - **Zero scenarios** anywhere assert spinner-during-rejection behavior. Coverage gap.
+  - This ticket should land with new BDD scenarios that explicitly assert spinner presence during rejection on Explore Stories, AND optionally bind the 2 existing rejection-banner scenarios that have been pending step defs.
+- **Cross-references:**
+  - **MATTGPT-060** — BDD coverage gap for post-navigation page state. The 2 unbound rejection-banner scenarios fit that ticket's pattern; -083 could close them as a side effect.
+  - **MATTGPT-071** — the BANNER_COPY work surfaced the visual rendering on Explore Stories, which led to this observation when the rule:* divergence (also being addressed) was being verified.
+- **Discovered during:** May 23, 2026 — Matt noticed during post-deploy shake-out that the spinner wasn't showing for rejected queries on Explore Stories. Compared to Ask MattGPT behavior; confirmed the inconsistency by tracing both code paths.
+- **Logged:** May 23, 2026
