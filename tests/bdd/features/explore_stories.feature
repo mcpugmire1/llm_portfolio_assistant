@@ -319,3 +319,18 @@ Feature: Explore Stories
     And the user presses Enter
     Then the rejection banner should be displayed
     And no story results should be shown
+
+  # Regression guard for May 23, 2026 finding: explore_stories.py passes the
+  # raw nonsense_check category (e.g., "jokes_riddles") to render_no_match_banner
+  # but the BANNER_COPY branching in utils/ui_helpers.py expects the
+  # "rule:<category>" prefix (the Ask MattGPT convention). Result: rule:*
+  # nonsense queries on Explore Stories fall through to the legacy catch-all
+  # banner copy ("I can't help with that...") instead of the locked Plott
+  # Hound copy from BANNER_COPY["rule"]. This scenario locks the correct
+  # behavior so the fix doesn't regress.
+  Scenario: Nonsense-filter query gets the rule:* banner copy on Explore Stories
+    When the user types "Tell me a joke about Matt's career" in the search box
+    And the user presses Enter
+    Then the rejection banner should be displayed
+    And the banner displays the rule:* copy from BANNER_COPY
+    And no story results should be shown
