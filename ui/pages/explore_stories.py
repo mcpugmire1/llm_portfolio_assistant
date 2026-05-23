@@ -1960,9 +1960,16 @@ def render_explore_stories(
             st.session_state.pop(LAST_CONFIDENCE, None)
             st.session_state.pop(LAST_QUERY, None)
 
-            # Display rejection banner and stop execution immediately
+            # Display rejection banner and stop execution immediately.
+            # is_nonsense() returns the bare category string (e.g.,
+            # "jokes_riddles"). render_no_match_banner expects the
+            # "rule:<category>" prefix for the BANNER_COPY["rule"] branch
+            # to fire (mirrors the Ask MattGPT convention at
+            # backend_service.py:1463). Without this prefix, rule:*
+            # nonsense queries on Explore Stories fell through to the
+            # legacy catch-all banner copy. May 23, 2026 fix.
             render_no_match_banner(
-                reason=nonsense_check,
+                reason=f"rule:{nonsense_check}",
                 query=current_query,
                 overlap=None,
                 suppressed=True,
