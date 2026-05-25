@@ -66,6 +66,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-083](#mattgpt-083) | Spinner inconsistency — Explore Stories doesn't show thinking indicator for rejected queries (Ask MattGPT does) | Open | Medium | Issue | May 23, 2026 |
 | [MATTGPT-084](#mattgpt-084) | Ask MattGPT BDD scenarios — chip-click + low_confidence banner-render timing flakes under full-suite load | Open | Medium | Issue | May 23, 2026 |
 | [MATTGPT-085](#mattgpt-085) | `secrets.toml` `MATTGPT_PRIVATE_BYPASS_TOKEN` parity + dead `private_access_code` cleanup + doc drift | Open | Medium | Refactor | May 23, 2026 |
+| [MATTGPT-086](#mattgpt-086) | Query logger — add environment annotation column + filter dev/test traffic out of production analytics | Open | Low | Issue | May 23, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -1750,4 +1751,24 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
   - Create checked-in `.streamlit/secrets.example.toml` template documenting required keys with placeholder values (this ticket)
 - **Cross-references:** MATTGPT-012 (slice 1 where the new env var was introduced without the local migration); `project_jd_match.md` memory references the new var name.
 - **Discovered during:** May 23, 2026 full-suite BDD validation. Surfaced when Matt questioned whether `MATTGPT_PRIVATE_BYPASS_TOKEN` was supposed to still exist — exposing both the missing-secret config AND the docstring drift. Also surfaced an inadvertent exposure of the GCP service account private key in the conversation log (separate, urgent action item: rotate the key).
+- **Logged:** May 23, 2026
+
+---
+
+### MATTGPT-086
+**Query logger — add environment annotation column + filter dev/test traffic out of production analytics**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Issue
+- **Issue:** The Google Sheets query log mixes traffic from all environments — production (real users at `askmattgpt.streamlit.app`), local dev (Matt's testing), BDD test runs (Playwright submitting queries against local Streamlit) — with no column distinguishing the source. Conversion / bounce / usage analytics on the log can't separate signal from noise.
+- **Existing precedent:** Bot filter already removes UptimeRobot, HeadlessChrome, and Chrome/103 probes via `MONITORING_BOT_SIGNATURES` in `config/constants.py`. This is the same shape of concern — local dev + test traffic should be filtered or annotated for production analytics integrity.
+- **Fix-path options:**
+  - **(A) Add `env` column to query_logger schema.** Detect environment via Streamlit Cloud env var (e.g., `STREAMLIT_ENV`) OR via request hostname (`askmattgpt.streamlit.app` vs `localhost:8501`). Write `prod` / `local` / `ci` per row. Analytics filter on the column. Schema becomes 33 columns.
+  - **(B) Skip logging when env is not prod.** No new column; local + test runs simply don't write to the Sheet. Loses local-debug observability but cleanest for production analytics.
+  - **(C) Use a separate Sheet for non-prod traffic.** Add env-aware Sheet selection in query_logger. Cleanest separation but doubles maintenance overhead.
+- **Recommendation:** (A) — preserves all data, adds discriminator that analytics can filter on. (B) is acceptable if local-debug Sheets observability has low value.
+- **Stop-gap until prioritized:** Manually delete test/dev rows from the Sheet during analytics work.
+- **What counts as "junk":** TBD during ticket work. Likely includes BDD test queries (e.g., "Tell me a joke about Matt's career" submitted by Playwright during pytest runs), local dev exploration queries during feature work, manual test queries.
+- **Discovered during:** May 23, 2026 — Matt verified GCP service account key rotation worked locally by triggering a real query and confirming the row appeared in the Sheet. Observed the broader Sheets log filling up with local + test traffic indistinguishable from production user traffic.
 - **Logged:** May 23, 2026
