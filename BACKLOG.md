@@ -64,6 +64,8 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-081](#mattgpt-081) | Role Match engine — corrective-actions output by asset type (story / resume / LinkedIn / positioning / network / real skill) | Open | Medium | Enhancement | May 21, 2026 |
 | [MATTGPT-082](#mattgpt-082) | Q15 eval assertion is over-specified — checks literal client name presence rather than response correctness | Open | Medium | Refactor | May 22, 2026 |
 | [MATTGPT-083](#mattgpt-083) | Spinner inconsistency — Explore Stories doesn't show thinking indicator for rejected queries (Ask MattGPT does) | Open | Medium | Issue | May 23, 2026 |
+| [MATTGPT-084](#mattgpt-084) | Ask MattGPT BDD scenarios — chip-click + low_confidence banner-render timing flakes under full-suite load | Open | Medium | Issue | May 23, 2026 |
+| [MATTGPT-085](#mattgpt-085) | `secrets.toml` `MATTGPT_PRIVATE_BYPASS_TOKEN` parity + dead `private_access_code` cleanup + doc drift | Open | Medium | Refactor | May 23, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -1706,4 +1708,46 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
   - **MATTGPT-060** — BDD coverage gap for post-navigation page state. The 2 unbound rejection-banner scenarios fit that ticket's pattern; -083 could close them as a side effect.
   - **MATTGPT-071** — the BANNER_COPY work surfaced the visual rendering on Explore Stories, which led to this observation when the rule:* divergence (also being addressed) was being verified.
 - **Discovered during:** May 23, 2026 — Matt noticed during post-deploy shake-out that the spinner wasn't showing for rejected queries on Explore Stories. Compared to Ask MattGPT behavior; confirmed the inconsistency by tracing both code paths.
+- **Logged:** May 23, 2026
+
+---
+
+### MATTGPT-084
+**Ask MattGPT BDD scenarios — chip-click + low_confidence banner-render timing flakes under full-suite load**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Issue
+- **Issue:** Two BDD scenarios in `tests/bdd/steps/test_ask_mattgpt.py` timeout intermittently when the full BDD suite runs back-to-back (~30 min) against local Streamlit:
+  - **`test_clicking_a_personal_chip_injects_its_prompt`** — `AssertionError: Expected chat history to contain the original query + the chip prompt as a user message after click; found 1 message(s). assert 1 >= 2`. The chip-click → `__inject_user_turn__` → rerun → user-message-render cycle exceeds the 15s `wait_for_function` timeout in `then_chip_prompt_in_chat`.
+  - **`test_low_confidence_rejection_shows_rephrase_prompt_and_no_chips`** — `playwright._impl._errors.TimeoutError: Page.wait_for_selector ".no-match-banner" Timeout 3000ms exceeded`. Gibberish query (`qzwxvnpfrk plmqcvjxk floogerblerg`) → Pinecone (~1-2s) → low_confidence gate → banner render; 3s ceiling tight when Streamlit is under load from concurrent tests.
+- **Recurrence history:** First seen during MATTGPT-071 Blue iteration (May 20-22, 2026); both passed on re-run. The Blue commit message flagged: *"If recurrence rate is meaningful across future runs, file separately."* Recurred during May 23 full-suite validation — second recurrence in 4 days qualifies as meaningful.
+- **Fix-path options:**
+  - **(A) Bump timeouts.** `then_chip_prompt_in_chat` 15s → 30s. `wait_for_banner` `LONG_WAIT` 3000ms → 8000ms. Smallest change.
+  - **(B) Change wait strategy.** Poll session_state flags (`__inject_user_turn__` consumed, `ask_last_reason` set) rather than DOM state. More robust against rendering variance but requires test-side helper to inspect Streamlit state.
+  - **(C) Mark these scenarios for isolated runs** via pytest marker so they don't compete with full-suite load. Defeats the single-suite goal.
+- **Recommendation:** (A) first (cheap). If timeouts continue to flake at 30s / 8s, escalate to (B).
+- **Cross-references:** MATTGPT-071 Blue commits `8b96ab0` + `d3b0663` (original flake observations and commit-message flag).
+- **Logged:** May 23, 2026
+
+---
+
+### MATTGPT-085
+**`secrets.toml` `MATTGPT_PRIVATE_BYPASS_TOKEN` local-prod parity + dead `private_access_code` cleanup + doc drift**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Refactor
+- **Issue:** Four related doc/config drift problems surfaced during May 23 full-suite BDD validation:
+  1. **`MATTGPT_PRIVATE_BYPASS_TOKEN` missing from local `.streamlit/secrets.toml`.** The env var was introduced in MATTGPT-012 slice 1 (commit `329a8bf`, May 5-6 2026) — but never added to the local secrets file. CI sets it; local doesn't. Result: 7 lock-glyph BDD tests in `test_role_match.py` fail locally with `Expected '🔓', got '🔒'`.
+  2. **`test_role_match.py` docstring documents a decided-against workflow.** The docstring (line 63 area + line 564 area) tells the reader to run `MATTGPT_PRIVATE_BYPASS_TOKEN=test-bypass-token streamlit run app.py` — that command-line env-var prefix approach was decided against in favor of `secrets.toml` parity. Future readers / sessions would follow the rejected workflow.
+  3. **Dead `private_access_code` entry in `secrets.toml`.** MATTGPT-012 slice 1 replaced this with `MATTGPT_PRIVATE_BYPASS_TOKEN` but the old entry was never removed. Confusing for future maintainers.
+  4. **No `secrets.example.toml` template exists.** New developers / future sessions have no checked-in way to discover what secrets are needed without reading production code or asking.
+- **Fix shape:**
+  - Add `MATTGPT_PRIVATE_BYPASS_TOKEN = "test-bypass-token"` to local `.streamlit/secrets.toml` (file is gitignored — Matt to do)
+  - Remove dead `private_access_code` line from local `secrets.toml` (Matt to do)
+  - Update `test_role_match.py` docstring (2 locations): remove decided-against env-var prefix workflow; point at `secrets.toml` as the parity convention (this ticket)
+  - Create checked-in `.streamlit/secrets.example.toml` template documenting required keys with placeholder values (this ticket)
+- **Cross-references:** MATTGPT-012 (slice 1 where the new env var was introduced without the local migration); `project_jd_match.md` memory references the new var name.
+- **Discovered during:** May 23, 2026 full-suite BDD validation. Surfaced when Matt questioned whether `MATTGPT_PRIVATE_BYPASS_TOKEN` was supposed to still exist — exposing both the missing-secret config AND the docstring drift. Also surfaced an inadvertent exposure of the GCP service account private key in the conversation log (separate, urgent action item: rotate the key).
 - **Logged:** May 23, 2026

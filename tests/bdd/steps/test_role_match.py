@@ -60,9 +60,13 @@ Coverage status (April 2026):
     - Lock icon hidden on mobile
     - Browser refresh re-locks the session
     - New tab does not inherit unlocked state
-        (slice 1 step defs assume MATTGPT_PRIVATE_BYPASS_TOKEN is set
-        in the Streamlit run env. Default expected value is
-        "test-bypass-token" — set the env to match before running.)
+        (slice 1 step defs require MATTGPT_PRIVATE_BYPASS_TOKEN in
+        Streamlit secrets — local-prod parity. Add
+        MATTGPT_PRIVATE_BYPASS_TOKEN = "test-bypass-token" to
+        .streamlit/secrets.toml to match the BYPASS_TOKEN fixture
+        in this file. The command-line env-var prefix workflow
+        was decided against in favor of secrets.toml parity.
+        See MATTGPT-085 for the cleanup history.)
 
   Bound but skipped (Phase 4 — Streamlit 1.50 limitation):
     - Pressing Escape inside the popover closes it without unlocking
@@ -80,8 +84,6 @@ Coverage status (April 2026):
     - Story evidence chips are clickable and expand inline (Phase 3
       story chip expansion — implementation does not exist)
 """
-
-import os
 
 import pytest
 from pytest_bdd import given, scenario, then, when
@@ -563,13 +565,18 @@ def action_buttons_not_visible(browser_page):
 # =============================================================================
 # IMPORTANT: production code reads MATTGPT_PRIVATE_BYPASS_TOKEN via get_conf()
 # and has NO default. The literal "test-bypass-token" below is a test-only
-# convention — the value is whatever the developer / CI sets in the Streamlit
-# run env. The fixture default just gives a deterministic value when the env
-# is unset, so the test process and the Streamlit process can agree.
+# convention — the value is whatever the developer / CI sets in Streamlit
+# secrets. The fixture default gives a deterministic value when secrets are
+# unset, so the test process and the Streamlit process agree.
 #
-# Run flow:
-#   MATTGPT_PRIVATE_BYPASS_TOKEN=test-bypass-token streamlit run app.py
-#   pytest tests/bdd -k role_match
+# Local-prod parity setup (decided over command-line env-var prefix workflow):
+#   Add to .streamlit/secrets.toml:
+#     MATTGPT_PRIVATE_BYPASS_TOKEN = "test-bypass-token"
+#   Prod value lives in the Streamlit Cloud secrets UI.
+#   Restart Streamlit so secrets are reloaded, then:
+#     pytest tests/bdd -k role_match
+# See MATTGPT-085 for the cleanup history + .streamlit/secrets.example.toml
+# template.
 
 # --- Selectors ---
 LOCK_ICON_CONTAINER_SELECTOR = ".st-key-lock_icon"
@@ -582,12 +589,28 @@ INCORRECT_PASSWORD = "wrong-password-for-tests"
 # --- Fixtures ---
 @pytest.fixture
 def correct_password() -> str:
-    """The expected unlock password — must match MATTGPT_PRIVATE_BYPASS_TOKEN
-    in the Streamlit run env. Defaults to 'test-bypass-token' so a developer
-    can do `MATTGPT_PRIVATE_BYPASS_TOKEN=test-bypass-token streamlit run app.py`
-    and have the tests agree.
+    """The expected unlock password — read from the same source the app reads
+    from (st.secrets first, then os.environ). True env parity: whatever's in
+    .streamlit/secrets.toml locally OR the Streamlit Cloud secrets UI in prod
+    is what the test types AND what the app compares against.
+
+    May 23, 2026 refactor (MATTGPT-085): previously this used
+    `os.getenv("MATTGPT_PRIVATE_BYPASS_TOKEN", "test-bypass-token")` which
+    forced a divergent test-only value and required a shell-prefix
+    workflow (`MATTGPT_PRIVATE_BYPASS_TOKEN=... streamlit run app.py`) that
+    was later decided against. Reading via get_private_bypass_token()
+    unifies test + app on the same source.
     """
-    return os.getenv("MATTGPT_PRIVATE_BYPASS_TOKEN", "test-bypass-token")
+    from config.constants import get_private_bypass_token
+
+    value = get_private_bypass_token()
+    if not value:
+        raise pytest.UsageError(
+            "MATTGPT_PRIVATE_BYPASS_TOKEN is unset in both st.secrets and "
+            "os.environ. Lock-glyph BDD tests can't unlock without it. "
+            "Add to .streamlit/secrets.toml — see .streamlit/secrets.example.toml."
+        )
+    return value
 
 
 # --- Helpers ---

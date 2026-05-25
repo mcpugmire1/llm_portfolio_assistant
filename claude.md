@@ -295,6 +295,21 @@
 
   If a new file is genuinely needed and is transitory, it goes in `docs/working/` with a lifecycle declaration and a defined deletion target. Permanent new docs at the top level require explicit user approval.
 
+  ## Secrets & Sensitive Output Handling
+
+  Three rules learned the hard way from a real GCP service account private key exposure (May 23, 2026 — when investigating `.streamlit/secrets.toml`, a `grep -v` redaction filter missed multi-line TOML content with embedded `\n` escapes and printed the full RSA private key into the conversation log).
+
+  1. **Never use `grep -v` to redact secrets.** Negative filters are brittle — they only filter what you know to exclude. Multi-line content collapsed onto one line (TOML `private_key = "..."` with `\n` escapes) bypasses them. Always use **positive include filters** that show only the structure you want:
+     - ✅ `grep -oE "^[A-Z_][A-Z_0-9]*" .env` — key names only, never values
+     - ✅ `grep -oE "^[a-z_]+ ?=" secrets.toml` — top-level scalar keys only
+     - ❌ `grep -v "API_KEY\|PRIVATE"` — relies on knowing every possible secret-line pattern
+
+  2. **When inspecting any secrets file, extract keys-only by default.** If a specific value needs verification (e.g., "is `MATTGPT_PRIVATE_BYPASS_TOKEN` set?"), ask the user to confirm rather than print the value. Streamlit `secrets.toml`, `.env`, GCP service account JSON, and similar files should never have their contents printed in any form that includes values — even with filters.
+
+  3. **Hard-cap output for any command touching a secrets file.** Even with a good filter, pipe to `| head -20` or check `| wc -l` first. The May 23 GCP key was thousands of characters on a single TOML line — even partial output of a single line was a full credential leak. Cap line count AND character count if uncertain.
+
+  Applies to: `.streamlit/secrets.toml`, `.env`, `.env.local`, any service-account JSON, any file matching `*secret*` / `*credential*` / `*token*`. When in doubt, ask the user to check directly.
+
   ## Pre-Commit Doc Checklist
 
   Before committing, answer for each:
