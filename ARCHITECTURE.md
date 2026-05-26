@@ -1272,7 +1272,7 @@ Stories are stored in `echo_star_stories_nlp.jsonl` (130+ entries). Each line is
 | **filters.py** | Story filtering for Explore Stories | `matches_filters(story, filters)` |
 | **formatting.py** | Story presentation, metric extraction | `story_has_metric()`, `strongest_metric_line()`, `build_5p_summary()`, `_format_narrative()` |
 | **scoring.py** | Hybrid scoring (semantic + keyword) | `_keyword_score_for_story()`, `_hybrid_score()` |
-| **ui_helpers.py** | Debug logging, UI utilities | `dbg()` |
+| **ui_helpers.py** | Debug logging, branch-aware rejection banner | `dbg()`, `safe_container()`, `render_no_match_banner()`, `BANNER_COPY` / `RULE_CHIPS` / `PERSONAL_CHIPS` / `OUT_OF_SCOPE_CHIPS` |
 
 **client_utils.py Key Function:**
 ```python
