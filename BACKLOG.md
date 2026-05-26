@@ -51,7 +51,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-068](#mattgpt-068) | About Matt — Content polish bundle (clickable questions, code expander, anchor nav, stat consolidation) | Open | Medium | Action | May 15, 2026 |
 | [MATTGPT-069](#mattgpt-069) | Home — Stats label contrast (light mode WCAG AA) | Open | Low | Issue | May 15, 2026 |
 | [MATTGPT-070](#mattgpt-070) | Ask MattGPT — Suggestion button cursor pointer | Open | Low | Issue | May 15, 2026 |
-| [MATTGPT-071](#mattgpt-071) | Nonsense rejection banner — branch-aware copy + contextual chip sets | In Progress (Red-A complete) | Medium | Action | May 15, 2026 |
+| [MATTGPT-071](#mattgpt-071) | Nonsense rejection banner — branch-aware copy + contextual chip sets | Done | Medium | Action | May 15, 2026 |
 | [MATTGPT-072](#mattgpt-072) | `generate_public_tags.py` — case-insensitive tag dedup | Open | Low | Refactor | May 16, 2026 |
 | [MATTGPT-073](#mattgpt-073) | `last_primary_client` session state produces order-dependent retrieval within multi-turn sessions | Resolved | High | Issue | May 18, 2026 |
 | [MATTGPT-074](#mattgpt-074) | Entity cluster promotion forces synthesis mode when users want depth (e.g., "How did you build the CIC?") | Open | Medium | Issue | May 18, 2026 |
@@ -1122,7 +1122,7 @@ Chip 3 wording "How does Matt manage resistance when leading enterprise transfor
 ### MATTGPT-071
 **Nonsense rejection banner — branch-aware copy + contextual chip sets**
 
-- **Status:** In Progress (Red-A complete; Red-B pending)
+- **Status:** Done — shipped May 25, 2026 (rule:* divergence fix on Explore Stories completed the cross-surface parity; Ask MattGPT side shipped earlier in the cycle). Production-validated May 26, 2026: rule:* / personal / out_of_scope branches all render correct branch-aware copy on both surfaces.
 - **Priority:** Medium
 - **Type:** Action
 - **Dependency cleared (May 19, 2026):** MATTGPT-061's dominant user-visible contamination mechanism closed via MATTGPT-073 session-state fix. -061's residual structural mechanism (subject-pronoun + noun-overlap retrieval bias) filed as MATTGPT-077. With session-state mechanism removed and the chip-prompt swap informed by -077, today's production spot-check of all four rule:* chip prompts produced clean responses. Implementation unblocked.
