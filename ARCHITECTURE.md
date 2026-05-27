@@ -1988,7 +1988,7 @@ Some UI content is intentionally curated and NOT derived from data:
 | File | Content | Reason |
 |------|---------|--------|
 | `landing_view.py` | Suggested questions | Curated UX showcase, tied to eval queries |
-| `about_matt.py` | Timeline, company names | Curated CV/resume presentation |
+| `about_matt.py` | Timeline, company names, sample chip questions (`ABOUT_MATT_SEED_QUESTIONS`) | Curated CV/resume presentation |
 
 ### Anti-Patterns (Don't Do This)
 

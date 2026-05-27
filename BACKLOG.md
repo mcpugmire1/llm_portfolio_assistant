@@ -48,7 +48,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-065](#mattgpt-065) | Explore Stories — Polish bundle (filter UX, empty states, story details) | Open | Medium | Action | May 15, 2026 |
 | [MATTGPT-066](#mattgpt-066) | Role Match — Sample JD / "Try a sample role" cold-start affordance | Open | Medium | Action | May 15, 2026 |
 | [MATTGPT-067](#mattgpt-067) | Role Match — Result panel and input polish bundle | Open | Low | Action | May 15, 2026 |
-| [MATTGPT-068](#mattgpt-068) | About Matt — Content polish bundle (clickable questions, code expander, anchor nav, stat consolidation) | Open | Medium | Action | May 15, 2026 |
+| [MATTGPT-068](#mattgpt-068) | About Matt — Content polish bundle (clickable questions, code expander, DevOps card merge) | Done | Medium | Action | May 15, 2026 |
 | [MATTGPT-069](#mattgpt-069) | Home — Stats label contrast (light mode WCAG AA) | Open | Low | Issue | May 15, 2026 |
 | [MATTGPT-070](#mattgpt-070) | Ask MattGPT — Suggestion button cursor pointer | Open | Low | Issue | May 15, 2026 |
 | [MATTGPT-071](#mattgpt-071) | Nonsense rejection banner — branch-aware copy + contextual chip sets | Done | Medium | Action | May 15, 2026 |
@@ -1075,19 +1075,48 @@ Chip 3 wording "How does Matt manage resistance when leading enterprise transfor
 ### MATTGPT-068
 **About Matt — Content polish bundle**
 
-- **Status:** Open
+- **Status:** Done — shipped May 27, 2026 in commit `aac9cf8`. Followed the canonical Red (scenarios) → Red (step defs) → Green → spec-amendment-during-Green cycle. Two locked decisions were reversed after live design review against `about_matt_wireframe.html`; the chip-containment fix was tightened to require true DOM nesting inside the CTA card.
 - **Priority:** Medium
 - **Type:** Action
-- **Decisions locked May 15, 2026 (after UX assessment with multiple agents):**
-  - **Sample questions clickable** — 4 questions at `about_matt.py:1199-1204` currently `<li>` plain text in a single `st.markdown` block. Convert to 4 `st.button` calls using the existing chip→Ask pattern: `seed_prompt` + `__ask_from_suggestion__` + `active_tab="Ask MattGPT"` + `st.rerun()` (see `category_cards.py:55-57` and `story_detail.py:203-218` — the pattern is used in 2 existing call sites). Define the four question strings as a module-level constant `ABOUT_MATT_SEED_QUESTIONS` for BDD/eval reuse. Requires splitting the existing markdown blob into pre / button container / post pieces, plus scoped CSS to keep the buttons visually consistent with the styled `<div class="cta-card">`.
-  - **Remove redundant footer (lines 1205-1208)** — once questions are clickable, the "Head to Ask MattGPT in the navigation above to try it yourself" line AND the "Real AI assistant • 130+ projects • Instant answers • Available 24/7" bullets become redundant. The paragraph above already carries every signal. Remove entirely; section ends with the four buttons.
-  - **Code block in `<details><summary>`** — RAG pipeline code at lines 1062-1091 is a wall of Python mid-page. Wrap in native HTML `<details><summary>Show code</summary>...</details>` inside the existing markdown (no st.expander → no markdown-block split needed). Serves both audiences: technical readers expand it, non-technical readers skip past. ~3 lines.
-  - **4x stat — relocate to Career Evolution timeline** — currently in stats bar (line 884) as a 5th stat, inconsistent with Home stats bar (4 stats only — see `hero.py:298-311`). Remove from About Matt stats bar; surface in Career Evolution timeline where the CIC story provides context.
-  - **Merge DevOps & Quality card into CI/CD Pipeline card** — `.details-grid` is 2-column (`about_matt.py:316`), 7 cards → bottom row has 1 orphan (DevOps & Quality, lines 1157-1164). Merge its content into the CI/CD Pipeline card (lines 1129-1137) — both reference CI/CD already, so the merge removes both the orphan and the redundancy in one move.
-  - **Anchor navigation** — page is 3,000+ words. Add `id="career"`, `id="mattgpt"`, `id="competencies"`, `id="philosophy"` to section headers at lines 896, 957, 1218, 1303. Render a nav block (`Career · MattGPT · Competencies · Philosophy`) right after the hero. ~15-20 lines.
-- **Closed per May 15 assessment:** "View Design Specification" format indicator (minor, low ROI for the audience), explicit two-audience signposting labels (anchor nav handles implicitly).
-- **Effort:** ~50-80 lines total, single file. Natural single-PR bundle.
 - **Logged:** May 15, 2026
+
+**Locked decisions (May 15, 2026) — six items, after UX assessment with multiple agents:**
+  - **Sample questions clickable** — 4 questions at `about_matt.py:1199-1204` currently `<li>` plain text in a single `st.markdown` block. Convert to 4 `st.button` calls using the existing chip→Ask pattern: `seed_prompt` + `__ask_from_suggestion__` + `active_tab="Ask MattGPT"` + `st.rerun()` (see `category_cards.py:55-57` and `story_detail.py:203-218`). Define the four question strings as a module-level constant `ABOUT_MATT_SEED_QUESTIONS` for BDD/eval reuse.
+  - **Remove redundant footer (lines 1205-1208)** — once questions are clickable, the "Head to Ask MattGPT in the navigation above to try it yourself" line AND the "Real AI assistant • 130+ projects • Instant answers • Available 24/7" bullets become redundant.
+  - **Code block in `<details><summary>`** — RAG pipeline code at lines 1062-1091 wrapped in native HTML `<details><summary>Show code</summary>...</details>`. Collapsed by default.
+  - **4x stat — drop from About Matt stats bar** — match Home hero (4 stats). **REVERSED May 27.**
+  - **Merge DevOps & Quality card into CI/CD Pipeline card** — remove the bottom-row orphan in the 2-column details grid.
+  - **Anchor navigation** — add `id="career"` / `id="mattgpt"` / `id="competencies"` / `id="philosophy"` to section headers and render a post-hero nav block. **REVERSED May 27.**
+- **Closed per May 15 assessment:** "View Design Specification" format indicator (low ROI), explicit two-audience signposting labels (originally handled by anchor nav; now moot).
+
+**May 27, 2026 amendments (during Green) — `about_matt_wireframe.html` review:**
+  - **Anchor nav reversed.** Doesn't work reliably in Streamlit without JS hackery; no validated user need. Section header ids reverted. Post-hero nav block removed.
+  - **Stats bar parity reverted.** The 5-card stats bar with `4x Delivery Acceleration` is restored on About Matt. The inconsistency with Home's 4-card bar is accepted — the 4x metric earns its keep on this page where the CIC narrative provides context. Driving factor was visual: the 4-card layout in a 5-column grid was stretching the cards in a way Matt flagged as "looks bad".
+  - **Chip containment tightened.** The first Green pass rendered chip buttons as visual-only siblings below the `.cta-card` div (Streamlit's per-`st.markdown` DOM isolation prevented true nesting). Refactored to render the CTA card via `st.container(key="about_matt_cta_card")` styled via `[class*='st-key-about_matt_cta_card']` so the four `st.button` widgets render as true DOM children of the card container.
+  - **"Try asking questions like:" label removed.** Chips speak for themselves per the wireframe; the label was redundant.
+  - **Chip palette unified.** Buttons reuse `var(--banner-info-border)` / `var(--banner-info-text)` (same variables as the rejection-banner chip set in `utils/ui_helpers.py`) for visual consistency and automatic dark-mode handling.
+
+**BDD scenario contract evolution:**
+  - Red (scenarios) shipped 7 scenarios (`9599bf3`).
+  - Red (step defs) shipped step bindings; all 7 assertion-failed against unchanged production (`81bba31`).
+  - Green + amendments dropped to 5 scenarios (`aac9cf8`):
+    - Deleted Scenario 1 (stats bar = 4 cards) — superseded by stats-bar rollback.
+    - Deleted Scenario 5 (anchor nav + section ids) — superseded by anchor nav reversal.
+    - Tightened Scenarios 2/3 chip locator to scope inside the `[class*='st-key-about_matt_cta_card']` container — enforces DOM-nested containment.
+  - Final gate: **5 / 5 scenarios passing.**
+
+**What shipped (production):**
+  - 4 clickable sample-question buttons in the See It In Action card, rendering DOM-nested inside an `st.container` styled as `.cta-card`. `on_chip_click` plumbing reused from `category_cards.py`.
+  - "Try asking questions like:" label removed.
+  - Old redundant footer (`Head to Ask MattGPT...` / `Real AI assistant • 130+ projects...`) removed.
+  - DevOps & Quality card merged into CI/CD Pipeline card.
+  - 5-Stage RAG Pipeline code block wrapped in collapsed `<details>` with a "Show code" affordance (`▸` → `▾`).
+  - `ABOUT_MATT_SEED_QUESTIONS` module-level constant exposed for BDD/eval reuse.
+  - 5-card stats bar (`Delivery Acceleration` retained on About Matt only).
+
+**What did NOT ship:**
+  - Anchor nav block + section header ids — reversed.
+  - 4x stat removed from About Matt stats bar — reversed.
 
 ---
 
