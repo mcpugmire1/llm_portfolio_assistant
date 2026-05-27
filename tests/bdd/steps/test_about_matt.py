@@ -104,41 +104,23 @@ def navigate_to_about_matt(browser_page, app_url):
 
 
 # =============================================================================
-# SCENARIO 1 — Stats bar parity (4 stats, no Delivery Acceleration)
-# =============================================================================
-
-
-@then(parsers.parse("the About Matt stats bar should contain exactly {n:d} stat cards"))
-def assert_stats_bar_count(browser_page, n):
-    cards = browser_page.locator(".stats-bar .stat-card")
-    actual = cards.count()
-    assert actual == n, (
-        f"Expected {n} stat cards in .stats-bar, found {actual}. "
-        f"About Matt stats bar must match the Home hero (4 stats) — drop the "
-        f"5th 'Delivery Acceleration' card per MATTGPT-068."
-    )
-
-
-@then(
-    parsers.parse('no stat card labeled "{label}" should be visible in the stats bar')
-)
-def assert_stat_label_absent(browser_page, label):
-    labels = browser_page.locator(".stats-bar .stat-label").all_inner_texts()
-    assert label not in labels, (
-        f"Stat label {label!r} is still present in the stats bar (found: {labels}). "
-        f"Per MATTGPT-068, the 4x Delivery Acceleration card belongs in the "
-        f"Career Evolution CIC timeline entry, not the stats bar."
-    )
-
-
-# =============================================================================
-# SCENARIO 2 — Four sample question buttons in See It In Action card
+# SCENARIO 1 — Four sample question buttons in See It In Action card
+# (Was Scenario 2 before the May 27, 2026 amendments dropped anchor nav
+# and reverted the stats-bar parity decision.)
 # =============================================================================
 
 
 def _see_it_in_action_card(page):
-    """Locator for the .cta-card whose heading is 'See It In Action'."""
-    return page.locator(".cta-card", has_text="See It In Action").first
+    """Locator for the See It In Action CTA card.
+
+    Implementation note (May 27, 2026 amendment): the card is rendered via
+    st.container(key="about_matt_cta_card"), which Streamlit emits with a
+    class containing st-key-about_matt_cta_card. The container takes the
+    visual .cta-card styling AND scopes the four sample-question buttons
+    as DOM children — that lets the chip-containment test assert true DOM
+    nesting (per the wireframe), not just visual proximity.
+    """
+    return page.locator("[class*='st-key-about_matt_cta_card']").first
 
 
 # Gherkin uses the literal word "four" rather than the digit 4; bound as a
@@ -157,13 +139,18 @@ def assert_sample_question_button_count(browser_page):
             ".cta-card with 'See It In Action' heading not visible within "
             f"{LONG_TIMEOUT}ms. Underlying error: {exc}"
         ) from exc
-    btns = browser_page.locator("[class*='st-key-about_matt_sample_q_'] button")
+    # Scope the button query INSIDE the card container — per the May 27, 2026
+    # wireframe amendment, the chips must be DOM-nested inside the CTA card,
+    # not visual-only siblings. card.locator(...) enforces that contract.
+    btns = card.locator("[class*='st-key-about_matt_sample_q_'] button")
     actual = btns.count()
     assert actual == EXPECTED_SAMPLE_QUESTION_COUNT, (
         f"Expected {EXPECTED_SAMPLE_QUESTION_COUNT} sample-question buttons "
-        f"(keys like st-key-about_matt_sample_q_<idx>) in the See It In "
-        f"Action card, found {actual}. Per MATTGPT-068, the four <li> "
-        f"prompts at about_matt.py:1199-1204 must become four st.button calls."
+        f"(keys like st-key-about_matt_sample_q_<idx>) DOM-nested inside the "
+        f"See It In Action card container, found {actual}. Per MATTGPT-068 "
+        f"(May 27 wireframe amendment), the four <li> prompts at "
+        f"about_matt.py:1199-1204 must become four st.button calls rendered "
+        f"inside the st.container(key='about_matt_cta_card') wrapper."
     )
 
 
@@ -178,7 +165,8 @@ def assert_button_labels_match_constant(browser_page):
             "as a module-level constant so BDD + eval can import them. "
             f"Import error: {exc}"
         ) from exc
-    btns = browser_page.locator("[class*='st-key-about_matt_sample_q_'] button")
+    card = _see_it_in_action_card(browser_page)
+    btns = card.locator("[class*='st-key-about_matt_sample_q_'] button")
     labels = [btns.nth(i).inner_text().strip() for i in range(btns.count())]
     extras = [label for label in labels if label not in ABOUT_MATT_SEED_QUESTIONS]
     assert not extras, (
@@ -208,7 +196,7 @@ def assert_legacy_li_lines_absent(browser_page):
 
 
 # =============================================================================
-# SCENARIO 3 — Click routes to Ask MattGPT and auto-fires the question
+# SCENARIO 2 — Click routes to Ask MattGPT and auto-fires the question
 # =============================================================================
 
 
@@ -291,7 +279,7 @@ def assert_assistant_response_streams(browser_page):
 
 
 # =============================================================================
-# SCENARIO 4 — Redundant CTA footer copy removed
+# SCENARIO 3 — Redundant CTA footer copy removed
 # =============================================================================
 
 
@@ -307,67 +295,7 @@ def assert_text_absent(browser_page, needle):
 
 
 # =============================================================================
-# SCENARIO 5 — Anchor nav block + section ids
-# =============================================================================
-
-
-def _anchor_nav_locator(page):
-    """The post-hero anchor nav block. Locked class: .about-anchor-nav."""
-    return page.locator(".about-anchor-nav").first
-
-
-@then("an anchor nav block should be visible immediately after the hero")
-def assert_anchor_nav_visible(browser_page):
-    nav = _anchor_nav_locator(browser_page)
-    try:
-        nav.wait_for(state="visible", timeout=CLICK_TIMEOUT)
-    except Exception as exc:
-        raise AssertionError(
-            "Anchor nav block (.about-anchor-nav) not visible. Per "
-            "MATTGPT-068, a nav block with links to #career / #mattgpt / "
-            "#competencies / #philosophy must render immediately after the "
-            f".about-header hero. Underlying error: {exc}"
-        ) from exc
-
-
-@then(parsers.parse('the anchor nav should contain a link to "{href}"'))
-def assert_anchor_nav_link(browser_page, href):
-    nav = _anchor_nav_locator(browser_page)
-    link = nav.locator(f"a[href='{href}']")
-    actual = link.count()
-    assert actual >= 1, (
-        f"Anchor nav does not contain a link to {href!r}. Per "
-        f"MATTGPT-068, the post-hero nav must link to #career, #mattgpt, "
-        f"#competencies, and #philosophy."
-    )
-
-
-@then(
-    parsers.re(
-        r'^the (?P<section>Career Evolution|How I Built MattGPT|Core Competencies|Leadership Philosophy) section header should have id "(?P<expected_id>[^"]+)"$'
-    )
-)
-def assert_section_header_id(browser_page, section, expected_id):
-    # The four section headers are <h2 class="section-title">. We find the
-    # one whose text matches and assert its id attribute matches expected.
-    header = browser_page.locator(f"h2.section-title:has-text('{section}')").first
-    try:
-        header.wait_for(state="visible", timeout=LONG_TIMEOUT)
-    except Exception as exc:
-        raise AssertionError(
-            f"Section header {section!r} (h2.section-title) not visible "
-            f"within {LONG_TIMEOUT}ms. Underlying error: {exc}"
-        ) from exc
-    actual_id = header.get_attribute("id") or ""
-    assert actual_id == expected_id, (
-        f"Section header {section!r} has id={actual_id!r}, expected "
-        f"{expected_id!r}. Per MATTGPT-068, the four section headers must "
-        f"carry the ids referenced by the anchor nav."
-    )
-
-
-# =============================================================================
-# SCENARIO 6 — DevOps & Quality merged into CI/CD Pipeline card
+# SCENARIO 4 — DevOps & Quality merged into CI/CD Pipeline card
 # =============================================================================
 
 
@@ -411,7 +339,7 @@ def assert_detail_card_mentions(browser_page, heading, keyword):
 
 
 # =============================================================================
-# SCENARIO 7 — RAG pipeline code block wrapped in collapsed <details>
+# SCENARIO 5 — RAG pipeline code block wrapped in collapsed <details>
 # =============================================================================
 
 

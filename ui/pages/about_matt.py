@@ -7,6 +7,21 @@ Updated for dark mode compatibility using CSS variables.
 
 import streamlit as st
 
+from ui.components.category_cards import on_chip_click
+
+# Seed prompts for the four clickable sample-question buttons in the
+# "See It In Action" card. Exposed as a module-level constant so BDD tests
+# (tests/bdd/steps/test_about_matt.py) and any future eval pinning can
+# import the exact prompts. Editing this list changes both the rendered
+# button labels AND the auto-fired Ask MattGPT prompts; the two are
+# intentionally identical (DOM-observable contract).
+ABOUT_MATT_SEED_QUESTIONS = [
+    "How did Matt scale engineering teams from 4 to 150+ people?",
+    "What were the biggest challenges at the Accenture Innovation Center?",
+    "Show me examples of agile transformation with measurable outcomes",
+    "How did Matt turn around a failing program?",
+]
+
 
 def render_about_matt():
     """
@@ -364,7 +379,10 @@ def render_about_matt():
     color: var(--text-primary, #333);
 }
 
-.cta-card {
+/* See It In Action CTA card — styles applied to the st.container key
+   (about_matt_cta_card) so the four sample-question buttons render
+   DOM-nested inside the card per the May 27, 2026 wireframe amendment. */
+[class*='st-key-about_matt_cta_card'] {
     max-width: 900px;
     margin: 32px auto 0;
     background: var(--bg-card, white);
@@ -374,19 +392,15 @@ def render_about_matt():
     box-shadow: var(--card-shadow, 0 4px 12px rgba(0, 0, 0, 0.08));
 }
 
-.cta-card h3 {
+[class*='st-key-about_matt_cta_card'] h3 {
     color: var(--text-heading, #333);
 }
 
-.cta-card p {
+[class*='st-key-about_matt_cta_card'] p {
     color: var(--text-secondary, #888);
 }
 
-.cta-card ul {
-    color: var(--text-secondary, #888);
-}
-
-.cta-card strong {
+[class*='st-key-about_matt_cta_card'] strong {
     color: var(--text-primary, #333);
 }
 
@@ -552,6 +566,64 @@ def render_about_matt():
 [data-theme="dark"] .secret-sauce-badge {
     background: rgba(139, 92, 246, 0.2);
     color: #a78bfa;
+}
+
+/* Sample-question chip buttons rendered INSIDE the See It In Action card
+   (MATTGPT-068, May 27, 2026 wireframe amendment). Buttons are children of
+   st.container(key="about_matt_cta_card") so DOM containment matches the
+   wireframe spec. Colors reuse the rejection-banner palette
+   (var(--banner-info-*)) for visual consistency with chip patterns
+   elsewhere AND for automatic dark-mode handling. */
+[class*='st-key-about_matt_sample_q_'] button {
+    width: 100%;
+    text-align: center;
+    background: var(--bg-card, #ffffff);
+    border: 1px solid var(--banner-info-border) !important;
+    color: var(--banner-info-text) !important;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.5;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+    margin-bottom: 8px;
+}
+[class*='st-key-about_matt_sample_q_'] button p,
+[class*='st-key-about_matt_sample_q_'] button div {
+    color: var(--banner-info-text) !important;
+}
+[class*='st-key-about_matt_sample_q_'] button:hover {
+    background: var(--banner-info-bg);
+}
+
+/* Collapsible code block (MATTGPT-068) — wraps the 5-Stage RAG Pipeline
+   snippet in <details> so non-technical readers can skip past it. */
+details:has(.code-block) {
+    margin: 16px 0;
+}
+details:has(.code-block) > summary {
+    cursor: pointer;
+    display: inline-block;
+    padding: 8px 16px;
+    background: var(--accent-purple-bg, rgba(139, 92, 246, 0.08));
+    color: var(--accent-purple, #8B5CF6);
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    user-select: none;
+    list-style: none;
+}
+details:has(.code-block) > summary::-webkit-details-marker {
+    display: none;
+}
+details:has(.code-block) > summary::before {
+    content: '▸ ';
+    display: inline-block;
+    transition: transform 0.15s ease;
+}
+details[open]:has(.code-block) > summary::before {
+    content: '▾ ';
 }
 
 /* ============================================================================
@@ -748,16 +820,15 @@ def render_about_matt():
     }
 
     /* CTA card */
-    .cta-card {
+    [class*='st-key-about_matt_cta_card'] {
         padding: 20px 16px !important;
     }
 
-    .cta-card h3 {
+    [class*='st-key-about_matt_cta_card'] h3 {
         font-size: 18px !important;
     }
 
-    .cta-card p,
-    .cta-card ul {
+    [class*='st-key-about_matt_cta_card'] p {
         font-size: 12px !important;
     }
 
@@ -1059,6 +1130,8 @@ def render_about_matt():
             The Secret Sauce: 5-Stage RAG Pipeline with Context Isolation
         </span>
     </div>
+<details>
+<summary>Show code</summary>
 <div class="code-block"><span class="code-comment"># 5-Stage RAG Pipeline</span>
 <span class="code-comment"># Stage 1: Nonsense filter (regex)</span>
 def is_nonsense(query: str) -&gt; bool:
@@ -1089,6 +1162,7 @@ def generate(stories: list, intent_family: str) -&gt; str:
     <span class="code-string">"GPT-4o reads &lt;primary_story&gt;/&lt;supporting_story&gt; tagged context"</span>
     ctx = build_xml_context(stories)
     return gpt_4o.complete(SYSTEM_PROMPT + ctx)</div>
+</details>
 </div>
     """,
         unsafe_allow_html=True,
@@ -1132,7 +1206,9 @@ def generate(stories: list, intent_family: str) -&gt; str:
             <li><strong>Trigger:</strong> Git push to main</li>
             <li><strong>Mechanism:</strong> GitHub webhook → Streamlit Cloud</li>
             <li><strong>Action:</strong> Auto-rebuild and deploy</li>
-            <li><strong>Coverage:</strong> Code only (data refresh is the separate ingestion pipeline)</li>
+            <li><strong>Testing:</strong> pytest with behavioral tests</li>
+            <li><strong>Monitoring:</strong> Query logging, error tracking</li>
+            <li><strong>Security:</strong> API keys in secrets, no PII</li>
         </ul>
     </div>
     <div class="detail-card">
@@ -1151,15 +1227,6 @@ def generate(stories: list, intent_family: str) -&gt; str:
             <li>Dark mode support with CSS variables</li>
             <li>Story cards with expandable details</li>
             <li>Responsive design with custom CSS</li>
-        </ul>
-    </div>
-    <div class="detail-card">
-        <h4>DevOps & Quality</h4>
-        <ul>
-            <li><strong>CI/CD:</strong> GitHub Webhook → Streamlit Cloud</li>
-            <li><strong>Testing:</strong> pytest with behavioral tests</li>
-            <li><strong>Monitoring:</strong> Query logging, error tracking</li>
-            <li><strong>Security:</strong> API keys in secrets, no PII</li>
         </ul>
     </div>
 </div>
@@ -1186,30 +1253,35 @@ def generate(stories: list, intent_family: str) -&gt; str:
         unsafe_allow_html=True,
     )
 
-    # CTA
-    st.markdown(
-        """
-<div class="cta-card">
-    <h3 style="font-size: 28px; margin: 0 0 16px 0;">See It In Action</h3>
-    <p style="line-height: 1.7; margin-bottom: 20px;">
-        This isn't just a portfolio showcase — <strong>Agy 🐾 is a working AI assistant</strong> that can
-        answer detailed questions about my 130+ projects, methodologies, and outcomes.
-    </p>
-    <p style="font-weight: 600; margin-bottom: 12px;">Try asking questions like:</p>
-    <ul style="line-height: 2; margin-bottom: 24px;">
-        <li>"How did Matt scale engineering teams from 4 to 150+ people?"</li>
-        <li>"What were the biggest challenges at the Accenture Innovation Center?"</li>
-        <li>"Show me examples of agile transformation with measurable outcomes"</li>
-        <li>"Tell me about a time Matt resolved conflict between senior engineers"</li>
-    </ul>
-    <p style="text-align: center; font-size: 14px; color: var(--text-muted, #95a5a6);">
-        Head to <strong>Ask MattGPT</strong> in the navigation above to try it yourself.<br>
-        Real AI assistant • 130+ projects • Instant answers • Available 24/7
-    </p>
-</div>
-        """,
-        unsafe_allow_html=True,
-    )
+    # CTA — See It In Action card (MATTGPT-068, May 27, 2026 wireframe
+    # amendment). The four sample-question prompts that used to be <li> plain
+    # text are now rendered as st.button widgets DOM-nested INSIDE the card
+    # container. The st.container(key=...) wrapper takes the .cta-card visual
+    # styling (via the [class*='st-key-about_matt_cta_card'] CSS selector
+    # above) AND scopes the chip buttons as DOM children — true containment,
+    # not visual-only siblings. Click handlers go through on_chip_click
+    # (ui/components/category_cards.py) which sets seed_prompt +
+    # __ask_from_suggestion__ + active_tab="Ask MattGPT". Prompts come from
+    # ABOUT_MATT_SEED_QUESTIONS at module top.
+    with st.container(key="about_matt_cta_card"):
+        st.markdown(
+            """
+<h3 style="font-size: 28px; margin: 0 0 16px 0;">See It In Action</h3>
+<p style="line-height: 1.7; margin-bottom: 20px;">
+    This isn't just a portfolio showcase — <strong>Agy 🐾 is a working AI assistant</strong> that can
+    answer detailed questions about my 130+ projects, methodologies, and outcomes.
+</p>
+            """,
+            unsafe_allow_html=True,
+        )
+        for idx, question in enumerate(ABOUT_MATT_SEED_QUESTIONS):
+            st.button(
+                question,
+                key=f"about_matt_sample_q_{idx}",
+                on_click=on_chip_click,
+                args=(question,),
+                use_container_width=True,
+            )
 
     # =========================================================================
     # 5. CORE COMPETENCIES
