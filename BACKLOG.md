@@ -4,6 +4,28 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 ---
 
+## Value Prioritized Roadmap (updated 2026-05-28)
+
+**NOW** (suggested order of execution):
+1. **-087 + -092** — Hero code pass: CTA routing + seniority signal bundled (~2 hours, one commit)
+2. **-090** — Decline cleanly on comp / off-scope (30 min, one system-prompt edit)
+3. **-077 mitigation** — Query-side mitigation: strip "Matt" from embedded queries on technical-noun shapes (hours, not days; full hybrid retrieval lives in NEXT)
+4. **-094 probes** — CIC over-concentration + operational under-surfacing probes; parallel-runnable, read-only; informs NEXT content work
+5. **-088** — Role Match scorer alignment (loose dependency on -077 mitigation: do cleaner if you can, not wait until you can)
+6. **-097** — Career-intent refresh (active recruiter failure earns NOW slot)
+
+**NEXT** (queued):
+1. **-015** — JPM Payments IQ differentiation (high-priority since March; upstream of operational surfacing)
+2. **-077 full fix** — Hybrid retrieval (BM25 + semantic); handles severe-overlap nouns and addresses -061 residual
+3. **-089** — Role Match location / work-model / availability parsing
+4. **-074** — Entity cluster forcing synthesis (depth side of CIC; pairs with -094 for over/under pattern)
+5. **-091 audit phase** — Does existing failure content surface on probe queries? Fold into -077/-094 or return Phase 3 write as LATER
+6. **-093** — About Matt strategic restructure toward one-pager direction (multi-week, strategically significant)
+
+(Everything else defaults to LATER.)
+
+---
+
 ## Matrix
 
 | ID | Title | Status | Priority | Type | Logged |
@@ -1527,6 +1549,10 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 - **Status:** Open
 - **Priority:** Medium-High
 - **Type:** Issue
+- **Execution split (May 28, 2026 — see Value Prioritized Roadmap at top of BACKLOG.md):**
+  - **Phase 1 — Query-side mitigation (NOW).** Strip "Matt" from embedded queries on technical-noun shapes; preserve "Matt" in the prompt sent to the LLM. Cheap, reversible, sufficient for moderate-overlap nouns (monolith, MVP). NOT sufficient for severe-overlap nouns (refactoring). Hours of work, not days. Maps to Fix-path option 2 below.
+  - **Phase 2 — Full hybrid retrieval (NEXT).** BM25 + semantic; keyword weighting on "client", "Fortune 500", "enterprise" pushes named-client stories above MattGPT for queries containing those keywords. Handles severe-overlap nouns. **Lowest empirical risk path** given the May 16 story-side rewrite backfire (see Finding 3 caveat). Also addresses MATTGPT-061 residual. Maps to Fix-path option 3 below.
+  - The detailed Fix-path ordering section below remains the canonical reference for option specifics; this annotation adds sequencing decisions made during the May 28, 2026 prioritization pass.
 - **Finding 1 (noun-overlap spectrum + subject-pronoun modifier):** Free-text queries with "Matt" as the subject systematically contaminate retrieval when the noun overlaps MattGPT or Strangler Fig story vocabulary. Subject pronoun is a *modifier*, not a binary gate — moderate-overlap nouns are rescued by switching "Matt" → "you"; severe-overlap nouns are not.
 
   Probe results (May 19, 2026 — production, fresh sessions):
