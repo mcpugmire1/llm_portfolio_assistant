@@ -67,6 +67,13 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-084](#mattgpt-084) | Ask MattGPT BDD scenarios — chip-click + low_confidence banner-render timing flakes under full-suite load | Open | Medium | Issue | May 23, 2026 |
 | [MATTGPT-085](#mattgpt-085) | `secrets.toml` `MATTGPT_PRIVATE_BYPASS_TOKEN` parity + dead `private_access_code` cleanup + doc drift | Open | Medium | Refactor | May 23, 2026 |
 | [MATTGPT-086](#mattgpt-086) | Query logger — add environment annotation column + filter dev/test traffic out of production analytics | Open | Low | Issue | May 23, 2026 |
+| [MATTGPT-087](#mattgpt-087) | Home hero — secondary CTA routing recruiter-intent visitors to Role Match | Open | High | Action | May 28, 2026 |
+| [MATTGPT-088](#mattgpt-088) | Role Match scorer — align with Agy honesty (no Strong Match when chat would say no) | Open | High | Issue | May 28, 2026 |
+| [MATTGPT-089](#mattgpt-089) | Role Match — parse location, work-model, availability as distinct filter class | Open | High | Issue | May 28, 2026 |
+| [MATTGPT-090](#mattgpt-090) | System prompt — decline cleanly on comp / off-scope queries (no silent fallback) | Open | Medium | Action | May 28, 2026 |
+| [MATTGPT-091](#mattgpt-091) | Add a credible failure story to the corpus (sibling to -022 / -078 pattern) | Open | Medium | Action | May 28, 2026 |
+| [MATTGPT-092](#mattgpt-092) | Hero — explicit seniority signal (supersedes May 15 design-call closure) | Open | Medium | Action | May 28, 2026 |
+| [MATTGPT-093](#mattgpt-093) | About Matt — strategic restructure (split / fold / reframe meta-question) | Open | Medium | Action | May 28, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -1801,3 +1808,159 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 - **What counts as "junk":** TBD during ticket work. Likely includes BDD test queries (e.g., "Tell me a joke about Matt's career" submitted by Playwright during pytest runs), local dev exploration queries during feature work, manual test queries.
 - **Discovered during:** May 23, 2026 — Matt verified GCP service account key rotation worked locally by triggering a real query and confirming the row appeared in the Sheet. Observed the broader Sheets log filling up with local + test traffic indistinguishable from production user traffic.
 - **Logged:** May 23, 2026
+
+---
+
+### MATTGPT-087
+**Home hero — secondary CTA routing recruiter-intent visitors to Role Match**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Action
+- **Issue:** Home page hero currently routes all visitors to "Ask Agy" as the primary CTA, with Explore Stories as secondary. Recruiter persona testing (May 27, 2026) showed that recruiters triaging at 90 seconds per profile completely missed Role Match — even though Role Match would have done ~70 sec of the 90-sec job for them. Role Match is buried as the fourth nav item with no visual weight, despite being the surface that actually serves the recruiter's placement-decision job.
+- **Audience impact:** Direct conversion loss. Recruiters bounce or revert to LinkedIn-only sourcing because they never encounter the tool built specifically for their workflow.
+- **Evidence:** Recruiter persona, verbatim: *"The biggest finding from the session isn't about Agy or Role Match individually. It's that the site has a routing problem. A recruiter lands on the homepage and the most prominent CTA is 'Ask Agy' — which is the wrong first surface for the recruiter job. Role Match is buried as the fourth nav item with no visual weight, and it's the surface that actually serves the placement decision."*
+- **Fix:** Add a tertiary CTA in the hero, alongside existing "Ask Agy" (primary) and "Explore Stories" (secondary). Proposed label: *"Recruiting for a role? Match it →"* — verb-led, names the recruiter's actual job, routes to Role Match. Keep visual weight below the primary Ask Agy CTA to avoid distracting other audiences.
+- **Effort:** ~1 hour. Single change in `ui/components/hero.py` CTA section.
+- **Cross-references:**
+  - MATTGPT-066 — Role Match cold-start affordance (complements: addresses what happens once on Role Match without a JD; -087 addresses how recruiter gets there in the first place)
+  - Closes the gap left open by the May 15, 2026 "Hero CTA weight rebalance" assessment (which only considered Ask Agy vs Explore, not Role Match)
+- **Logged:** May 28, 2026
+
+---
+
+### MATTGPT-088
+**Role Match scorer — align with Agy honesty (no Strong Match when chat would say no)**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Issue
+- **Issue:** Role Match scorer over-claims relative to what Agy honestly returns in chat. Specific evidence: Role Match marks *"experience running an in-house engineering organization of 60+ as a direct accountable leader"* as **Strong Match**, while Agy correctly responds that Matt has **not** directly managed an in-house product engineering organization. Same factual question, two surfaces, contradictory answers. The Role Match scorer is the inconsistent one.
+- **Audience impact:** CTO persona (May 27, 2026 test) called this the single biggest credibility hit on the entire site. Quote: *"That inconsistency in his own AI is the kind of thing I'd raise on the call, because if he doesn't see it, that's a signal."* Translated to interview prep: *"Which one is right, and what does the inconsistency tell me about how you'd present your team's work?"* — a defensive answer to that question kills the candidacy.
+- **Counterintuitive insight:** Tightening the scorer to be MORE honest INCREASES credibility, not less. Quote from CTO: *"The 7-out-of-10 partials with specific gap notes are what made the whole artifact credible. A victory-lap scorer would have killed it."*
+- **Fix:** Audit the Role Match scoring logic that maps qualifications to Strong / Partial / Gap. For each Strong Match output, validate against what Agy would return in chat for the equivalent question. Where the scorer is more generous than Agy, downgrade to Partial with the honest reframing as the "Note." Consider routing the scorer's qualification analysis through the same LLM context that drives Agy's chat answers, so the two surfaces share a single source of truth on what the corpus supports.
+- **Effort:** Medium. Requires understanding the existing Role Match scoring path + an audit pass against Agy's actual chat responses for the same JD requirements.
+- **Cross-references:**
+  - MATTGPT-077 — Subject-pronoun + noun-overlap retrieval contamination (upstream — better story differentiation in retrieval makes scorer evaluation easier; -077 fixes which stories get pulled, -088 fixes how the scorer reports on them)
+  - MATTGPT-015 — JPM Payments IQ Differentiation (upstream: better-differentiated stories give the scorer more reliable signal)
+  - MATTGPT-079 — Role Match coverage gaps meta-ticket (related but distinct: -079 tracks coverage gaps where no story exists; -088 is about scorer calibration on existing claims)
+- **Logged:** May 28, 2026
+
+---
+
+### MATTGPT-089
+**Role Match — parse location, work-model, availability as distinct filter class**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Issue
+- **Issue:** Role Match's JD parser drops location, work-model, and availability requirements silently. Recruiter persona pasted a JD with *"Hybrid in NYC, SF, or Atlanta (3 days/week onsite)"* — Role Match parsed 11 qualifications and dropped that one entirely. Other JD requirements all came through clean. The tool answers *"can he do the job"* but not *"can we hire him"* — which means a hiring manager doing first-pass filtering gets an incomplete picture.
+- **Audience impact:** Recruiter persona: *"It is strong at experience matching, blind to logistical filters (location, comp, availability, work model). Those are exactly the filters that get a candidate moved or killed at first pass."* Atlanta-based + "Open to Atlanta and beyond" in the footer would have been a perfect location-match flag if the parser had caught it.
+- **Fix:** Extend Role Match JD parser to recognize a distinct filter class for logistical requirements:
+  - Location / geographic constraints
+  - Work model (remote / hybrid / on-site)
+  - Availability / notice period
+  - Visa / work authorization
+  - (Skip comp — see MATTGPT-090 for separate handling)
+
+  Match these against Matt's profile data (Atlanta + relocation openness from `data/matt_profile.json` or footer copy). Output as a separate section in the Role Match results panel so the hiring manager sees both *"can he do the job"* AND *"can we hire him"* without scrolling.
+- **Effort:** Medium. Parser extension + result panel layout addition + profile data plumbing.
+- **Cross-references:**
+  - MATTGPT-067 — Role Match result panel polish bundle (could fold this in or land as sibling)
+  - MATTGPT-079 — coverage gaps meta (location/work-model are profile data, not story-anchored — different fix path)
+  - MATTGPT-090 — chatbot-side of the same logistical-data gap (comp specifically declined cleanly there; location/work-model surfaced as match output here)
+- **Logged:** May 28, 2026
+
+---
+
+### MATTGPT-090
+**System prompt — decline cleanly on comp / off-scope queries (no silent fallback)**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Issue:** When Agy is asked something Matt shouldn't answer publicly (e.g., comp expectation), it currently produces a soft non-answer rather than a clean decline. Recruiter persona example: asked target role + comp + geo, got 4 paragraphs of narrative — comp went **silent**, relocation got a *"the story does not provide specific details… however, his focus on the right org fit suggests he might consider relocation"* (a dressed-up guess). The silent failure mode is worse than an honest decline because the recruiter can't tell whether the data is missing or being withheld.
+- **Audience impact:** Recruiter persona, verbatim: *"For a recruiter this is the single biggest miss. I cannot pitch Matt to a hiring manager without a comp anchor; I'll burn a screening call to get it... The bot's failure mode there is the real finding: it should decline cleanly ('Matt handles comp conversations directly — reach out') instead of going silent and letting the recruiter guess whether the data is missing or being withheld."*
+- **Fix:** System prompt addition (`prompts.py` or wherever Agy's primary system instruction lives) covering:
+  - **Comp:** Decline with a clear redirect to direct conversation. Suggested: *"Matt handles compensation conversations directly. Reach out at [contact link]."*
+  - **Other off-scope but answerable-elsewhere queries:** Decline with redirect (relocation specifics, references, etc.).
+
+  This is distinct from the existing `personal` intent family handling — those are queries that shouldn't be answered at all (age, religion, etc.). The comp/logistics class IS legitimately answered, just not on the site. Different decline copy required.
+- **Effort:** Small. One-line system prompt addition + 1-2 BDD scenarios to validate the decline shape vs the silent fallback.
+- **Cross-references:**
+  - Existing `personal` intent family in semantic router (different fix path, similar shape)
+  - MATTGPT-089 — location/work-model parsing on Role Match side; this is the chatbot side of the same logistical-data gap
+- **Logged:** May 28, 2026
+
+---
+
+### MATTGPT-091
+**Add a credible failure story to the corpus (sibling to -022 / -078 pattern)**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Issue:** None of the 113 STAR stories in the corpus describes a failure, a hire that didn't work, an architecture call that was wrong, a program that got killed, or a leadership decision in hindsight. Every arc is positive. The only nod to failure is "early failure and experimentation approach" as a suggested chat prompt — neutered language for what should be a leadership lesson with specifics.
+- **Audience impact:** CTO persona flagged this as a structural leadership blind-spot signal: *"Senior leaders who don't talk about who they fought with, what they killed, or who didn't make it on their team are often leaders who avoid the hard conversation. In a VP Eng seat that translates to tolerating mediocre senior reports too long, postponing performance conversations, and protecting reputations over the team's pace."* VP-of-People persona (forwarded scenario, also from CTO transcript) picked up the same signal independently as a hiring concern.
+- **Fix:** Write one (or more) STAR story documenting a real failure or hard call:
+  - The hire that didn't work and what was missed in the first 90 days
+  - The architecture call that was wrong and how the team unwound it
+  - A program or initiative that was killed and why
+  - A performance conversation that should have happened sooner
+
+  Has to be self-aware without being self-deprecating. Has to name what would be done differently. Same craft bar as the existing strongest stories. Goal: one story is enough — proof that Matt CAN write the failure mode honestly, which neutralizes the structural blind-spot read.
+- **Effort:** High-craft, low-coding. ~3-5 hours of writing per story including the STAR framing and embedding regeneration.
+- **Cross-references:**
+  - MATTGPT-022, MATTGPT-078 — sibling story-writing tickets (same pattern)
+  - MATTGPT-079 — Role Match coverage gaps meta (track this story addition as it closes the "failure narrative" gap)
+- **Logged:** May 28, 2026
+
+---
+
+### MATTGPT-092
+**Hero — explicit seniority signal (supersedes May 15 design-call closure)**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Issue:** Hero copy *"Hi, I'm Matt Pugmire / Interview me before you interview me / I build products, platforms, and teams"* does not anchor Matt at a specific leadership level. A recruiter triaging in 5 seconds cannot tell whether he's an IC architect, a Director, a VP, or an SVP. The supporting headline on LinkedIn (*"Engineering Leader | Builds Engineering Organizations from Zero | Enterprise Platform Modernization | AI"*) has the same problem — 4 buzzwords stacked with no level anchor.
+- **Audience impact:** Recruiter persona, verbatim: *"4 buzzwords stacked, no anchor... 'Engineering Leader' could be Director, VP, SVP, CTO. 'From Zero' reads consultancy/services, not in-house product engineering. 'Enterprise Platform Modernization' reads consulting again. 'AI' reads bolted on. I cannot place him on a level in 5 seconds."*
+- **Why this reopens a closed decision:** May 15, 2026 UX assessment closed "explicit seniority signal at hero" as a design call: *"recruiters arriving from LinkedIn have context, stats bar reinforces 20+ years."* That assumption was contradicted by direct evidence from a recruiter persona triage. The closure was made without persona testing data; this ticket reopens with that data.
+- **Fix shape (design call, not locked):** Add a one-line seniority + scope anchor near the hero — could be:
+  - Sub-headline: *"20+ years building and scaling engineering organizations — Director-level leadership at Accenture's Cloud Innovation Center, 0→150+ engineers, $100M+ practice revenue."*
+  - Or a tagline beneath the name: *"Director-level engineering leader. Built Accenture's Cloud Innovation Center 0→150."*
+  - Or a level chip near the avatar: *"Director / VP Engineering."*
+
+  Any of these gives the 5-second recruiter triage an immediate level anchor without sacrificing the interview-metaphor framing. Specific wording: design call, but the principle of explicit-level-signal is the locked decision.
+- **Effort:** Small (~1 hour for any of the above options).
+- **Cross-references:**
+  - May 15, 2026 closure inside MATTGPT-068 detail block — this ticket supersedes that closure
+  - MATTGPT-087 — hero CTA work (related surface area; both touch the hero)
+- **Logged:** May 28, 2026
+
+---
+
+### MATTGPT-093
+**About Matt — strategic restructure (split / fold / reframe meta-question)**
+
+- **Status:** Open — strategic question, not a polish ticket
+- **Priority:** Medium (not Urgent — MATTGPT-068 polish + dim fix shipped May 28; this is the longer-arc question that follows)
+- **Type:** Action / Enhancement
+- **Issue:** About Matt is competing with itself. The page tries to be both (a) deep narrative for the engaged reader who wants the full 3,000-word story, and (b) a conversion surface for the skeptic / decision-maker who needs proof-of-value in 5 seconds. Those audiences are at opposite ends of the funnel and the current single-page structure compromises both.
+- **Evidence:** Two persona transcripts (May 27, 2026):
+  - CTO persona: *"I came close to closing the tab in the first three seconds"* (hero friction); *"You've spent 90 minutes refining four button labels on a page that the wrong audience reads."*
+  - Recruiter persona: *"The site is built around exploration, not extraction"* — the page actively works against the 90-second scan job.
+- **Strategic options (not yet decided):**
+  1. **Split** — Two surfaces: "Quick interview" (skeptic / time-constrained entry; opens with a worked Agy example interaction) + "Full story" (engaged-reader deep narrative). Each surface optimizes for its audience without compromise.
+  2. **Fold** — Kill the About Matt page entirely. Push the bio into Home as a progressive-disclosure block. Let Ask MattGPT carry the narrative load through interactive exploration rather than static read.
+  3. **Reframe in place** — Keep the page but move the conversion moment (sample questions, worked Agy example) above the narrative, demoting the long-form to "for those who want more."
+- **Why this is a meta-ticket, not an implementation ticket:** Each option above is a multi-week project with separate UX, content, and routing implications. This ticket captures the strategic question for prioritization; the implementation ticket gets filed once a direction is chosen.
+- **Related findings worth surfacing during the strategic decision:**
+  - "Interview Matt before you interview him" is the strongest framing on the site and lives only on the Home hero — the About Matt reframe should reinforce it, not duplicate or contradict
+  - The site's medium-is-the-message asset (MattGPT itself demonstrating Matt's AI competence) is currently underused on About Matt
+  - The pre-rendered Agy example interaction discussed in earlier strategic notes is a candidate for the "Quick interview" surface in Option 1
+- **Effort:** Strategic decision: 1-2 hours of conversation + alignment. Implementation: depends on option chosen (small for Reframe in place; large for Split or Fold).
+- **Cross-references:**
+  - MATTGPT-068 — closed May 28, 2026 (the polish + dim fix; this ticket is the longer-arc question)
+  - MATTGPT-077 — MattGPT self-referential responses (related: content-side of the same medium-is-the-message asset)
+- **Logged:** May 28, 2026
