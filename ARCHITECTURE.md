@@ -2069,6 +2069,40 @@ st.markdown('<div data-component="navbar">', unsafe_allow_html=True)
 
 ---
 
+### Pattern 4: Page CSS Placement — Rerun Persistence (MATTGPT-068)
+
+**Page CSS belongs in `ui/styles/global_styles.py`**, injected by
+`apply_global_styles()` from `app.py` on every rerun at a stable position in
+the script. Do **not** put long-lived page styling in an inline `<style>`
+block inside a page's `render_*()` function.
+
+**Why:** Inline `<style>` blocks inside a page render function are stripped by
+Streamlit **position-reconciliation** when a rerun routes to a *different*
+page. The prior page's DOM positions are replaced element-by-element by the
+new page's output, and the page never re-runs its own render — so its first
+markdown element (the `<style>` block) is overwritten and every rule it
+carried disappears at once. The visible symptom is **layout collapse**: grids
+and cards fall back to default block flow during the AI-thinking dim (the 33%
+stale-frame opacity) on chip-click transitions that navigate away
+(e.g., About Matt → Ask MattGPT). `global_styles.py` survives because
+`apply_global_styles()` runs at the top of `app.py` on every rerun, at a
+stable position reconciliation never replaces.
+
+**Namespacing:** When a relocated page's class names collide with classes used
+on other pages, globalizing them would leak styling app-wide. Namespace the
+page-scoped ones — e.g., About Matt's `stats-bar` / `stat-*` / `section-*`
+became `.am-*` so they don't restyle Home / banking / story_detail /
+role_match (which share those class names with different intended styles).
+
+**Precedent:** chip CSS was relocated from `ui/components/category_cards.py`
+first; About Matt's full inline block was relocated under MATTGPT-068.
+
+**Use when:** A page renders custom CSS AND a user action on it can navigate
+to a different page mid-rerun (any chip/button that sets `active_tab` and
+reruns).
+
+---
+
 ## Testing Strategy
 
 ### BDD/E2E Tests (Explore Stories)

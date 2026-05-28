@@ -1003,16 +1003,16 @@ def get_mobile_css() -> str:
             }
 
             /* Stats bar - using actual class names from about_matt.py */
-            .stat-card {
-                padding: 20px 16px !important;
+            .am-stat-card {
+                padding: 6px 2px !important;
             }
 
-            .stat-card .stat-number {
-                font-size: 32px !important;
+            .am-stat-card .am-stat-number {
+                font-size: 18px !important;
             }
 
-            .stat-card .stat-label {
-                font-size: 13px !important;
+            .am-stat-card .am-stat-label {
+                font-size: 8px !important;
             }
 
             /* Timeline - using actual class names */
@@ -1046,12 +1046,12 @@ def get_mobile_css() -> str:
             }
 
             /* Section titles */
-            .section-title {
+            .am-section-title {
                 font-size: 22px !important;
                 margin-bottom: 12px !important;
             }
 
-            .section-subtitle {
+            .am-section-subtitle {
                 font-size: 14px !important;
                 margin-bottom: 16px !important;
             }

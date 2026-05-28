@@ -29,881 +29,12 @@ def render_about_matt():
     Dark mode compatible using CSS variables.
     """
 
-    # =========================================================================
-    # CSS STYLES - Dark Mode Compatible
-    # =========================================================================
-    st.markdown(
-        """
-<style>
-/* ============================================================================
-   ABOUT MATT PAGE STYLES - Dark Mode Compatible
-   ============================================================================ */
-
-/* Header - matches other pages */
-.about-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 32px;
-    min-height: 184px;
-    box-sizing: border-box;
-    margin-top: -60px !important;
-    margin-bottom: 0 !important;
-    color: white;
-}
-
-.about-header-content {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    max-width: 1200px;
-    margin: 0;
-}
-
-.about-header-text h1 {
-    font-size: 36px;
-    font-weight: 700;
-    margin: 0 0 8px 0;
-    color: white;
-}
-
-.about-header-text p {
-    font-size: 16px;
-    margin: 0;
-    opacity: 0.95;
-    color: white;
-}
-
-/* Stats bar */
-.stats-bar {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-    margin: 24px 0;
-    padding: 0 1rem;
-}
-
-@media (max-width: 768px) {
-    .stats-bar { grid-template-columns: repeat(2, 1fr); }
-}
-
-.stat-card {
-    background: var(--bg-card, #ffffff);
-    padding: 28px 20px;
-    border-radius: 12px;
-    text-align: center;
-    border: 1px solid var(--border-color, #e0e0e0);
-    box-shadow: var(--card-shadow, 0 4px 12px rgba(128, 128, 128, 0.1));
-}
-
-.stat-number {
-    font-size: 36px;
-    font-weight: 700;
-    color: var(--accent-purple, #8B5CF6);
-    display: block;
-    margin-bottom: 8px;
-}
-
-.stat-label {
-    color: var(--text-muted, #999999);
-    font-size: 15px;
-    display: block;
-}
-
-/* Section titles */
-.section-title {
-    font-size: 32px;
-    font-weight: 600;
-    text-align: center;
-    margin: 60px 0 12px 0;
-    color: var(--text-heading, #2c3e50);
-}
-
-.section-subtitle {
-    font-size: 16px;
-    color: var(--text-muted, #7f8c8d);
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-/* Career timeline */
-.timeline {
-    max-width: 900px;
-    margin: 0 auto;
-    position: relative;
-    padding-left: 40px;
-}
-
-.timeline::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: linear-gradient(to bottom, #8B5CF6, #7C3AED);
-}
-
-.timeline-item {
-    position: relative;
-    margin-bottom: 30px;
-    padding-left: 30px;
-}
-
-.timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -50px;
-    top: 4px;
-    width: 20px;
-    height: 20px;
-    background: var(--bg-primary, white);
-    border: 4px solid var(--accent-purple, #8B5CF6);
-    border-radius: 50%;
-}
-
-.timeline-year {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--accent-purple, #8B5CF6);
-    margin-bottom: 8px;
-}
-
-.timeline-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--text-heading, #2c3e50);
-    margin-bottom: 6px;
-}
-
-.timeline-company {
-    font-size: 14px;
-    color: var(--text-muted, #7f8c8d);
-    margin-bottom: 8px;
-}
-
-.timeline-desc {
-    font-size: 14px;
-    color: var(--text-secondary, #888);
-    line-height: 1.6;
-}
-
-/* Deep-dive section */
-.deep-dive-section {
-    background: var(--bg-surface, #f8f9fa);
-    padding: 50px 20px;
-    margin: 40px -1rem 0 -1rem;
-}
-
-.deep-dive-card {
-    background: var(--bg-card, white);
-    border: 2px solid var(--border-color, #e0e0e0);
-    border-left: 4px solid var(--accent-purple, #8B5CF6);
-    border-radius: 12px;
-    padding: 32px;
-    margin-bottom: 24px;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.deep-dive-card h3 {
-    color: var(--text-heading, #2c3e50);
-}
-
-.deep-dive-card p {
-    color: var(--text-secondary, #888);
-}
-
-.tech-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-top: 16px;
-}
-
-@media (max-width: 768px) {
-    .tech-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-.tech-item {
-    background: var(--bg-surface, #f8f9fa);
-    border: 2px solid var(--border-color, #e0e0e0);
-    border-radius: 8px;
-    padding: 16px 12px;
-    text-align: center;
-    color: var(--text-primary, #333);
-    transition: all 0.2s ease;
-}
-
-.tech-item:hover {
-    border-color: var(--accent-purple, #8B5CF6);
-}
-
-.flow-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 24px;
-    margin: 24px 0;
-    align-items: center;
-}
-
-@media (max-width: 768px) {
-    .flow-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-.flow-step {
-    background: var(--bg-surface, #f8f9fa);
-    border: 2px solid var(--border-color, #e0e0e0);
-    border-radius: 8px;
-    padding: 16px 12px;
-    text-align: center;
-    position: relative;
-    color: var(--text-primary, #333);
-}
-
-.flow-step:not(:last-child)::after {
-    content: '→';
-    position: absolute;
-    right: -24px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 18px;
-    color: var(--accent-purple, #8B5CF6);
-    font-weight: bold;
-}
-
-.flow-num {
-    width: 28px;
-    height: 28px;
-    background: var(--accent-purple, #8B5CF6);
-    color: white;
-    border-radius: 50%;
-    font-size: 12px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 10px;
-}
-
-.flow-step-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-heading, #333);
-}
-
-.flow-step-desc {
-    font-size: 11px;
-    color: var(--text-muted, #7f8c8d);
-}
-
-/* Code block - works in both modes */
-.code-block {
-    background: #1e1e2e;
-    color: #cdd6f4;
-    border-radius: 8px;
-    padding: 20px;
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
-    font-size: 12px;
-    line-height: 1.6;
-    overflow-x: auto;
-    white-space: pre-wrap;
-    margin-top: 12px;
-}
-
-.code-comment {
-    color: #6c7086;
-}
-
-.code-keyword {
-    color: #cba6f7;
-}
-
-.code-string {
-    color: #a6e3a1;
-}
-
-.code-function {
-    color: #89b4fa;
-}
-
-.details-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-@media (max-width: 768px) {
-    .details-grid { grid-template-columns: 1fr; }
-}
-
-.detail-card {
-    background: var(--bg-card, white);
-    border: 2px solid var(--border-color, #e0e0e0);
-    border-radius: 12px;
-    padding: 24px;
-    transition: all 0.2s ease;
-}
-
-.detail-card:hover {
-    border-color: var(--accent-purple, #8B5CF6);
-}
-
-.detail-card h4 {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--text-heading, #2c3e50);
-    margin: 0 0 16px 0;
-}
-
-.detail-card ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.detail-card li {
-    font-size: 13px;
-    color: var(--text-secondary, #888);
-    line-height: 1.6;
-    padding: 8px 0;
-    border-bottom: 1px solid var(--border-light, #f0f0f0);
-}
-
-.detail-card li:last-child {
-    border-bottom: none;
-}
-
-.detail-card li strong {
-    color: var(--text-primary, #333);
-}
-
-/* See It In Action CTA card — styles applied to the st.container key
-   (about_matt_cta_card) so the four sample-question buttons render
-   DOM-nested inside the card per the May 27, 2026 wireframe amendment. */
-[class*='st-key-about_matt_cta_card'] {
-    max-width: 900px;
-    margin: 32px auto 0;
-    background: var(--bg-card, white);
-    border-left: 4px solid var(--accent-purple, #8B5CF6);
-    border-radius: 12px;
-    padding: 40px;
-    box-shadow: var(--card-shadow, 0 4px 12px rgba(0, 0, 0, 0.08));
-}
-
-[class*='st-key-about_matt_cta_card'] h3 {
-    color: var(--text-heading, #333);
-}
-
-[class*='st-key-about_matt_cta_card'] p {
-    color: var(--text-secondary, #888);
-}
-
-[class*='st-key-about_matt_cta_card'] strong {
-    color: var(--text-primary, #333);
-}
-
-/* Competencies grid */
-.competencies-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 1rem;
-}
-
-@media (max-width: 900px) {
-    .competencies-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 600px) {
-    .competencies-grid { grid-template-columns: 1fr; }
-}
-
-.competency-card {
-    background: var(--bg-card, #fafafa);
-    border: 2px solid var(--border-color, #e0e0e0);
-    border-radius: 12px;
-    padding: 24px;
-    transition: all 0.2s ease;
-}
-
-.competency-card:hover {
-    border-color: var(--accent-purple, #8B5CF6);
-    transform: translateY(-2px);
-}
-
-.competency-card h4 {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--text-heading, #2c3e50);
-    margin: 12px 0 16px 0;
-}
-
-.competency-card ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.competency-card li {
-    font-size: 13px;
-    color: var(--text-secondary, #888);
-    padding: 6px 0;
-}
-
-.competency-card-accent {
-    width: 32px;
-    height: 3px;
-    background: var(--accent-purple, #8B5CF6);
-    border-radius: 2px;
-    margin-bottom: 12px;
-}
-
-/* Philosophy grid - gradient cards work in both modes */
-.philosophy-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 1rem;
-}
-
-@media (max-width: 768px) {
-    .philosophy-grid { grid-template-columns: 1fr; }
-}
-
-.philosophy-card {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border-radius: 12px;
-    padding: 32px;
-    transition: all 0.2s ease;
-}
-
-.philosophy-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
-}
-
-.philosophy-card h3 {
-    font-size: 20px;
-    margin: 0 0 16px 0;
-    color: white;
-}
-
-.philosophy-card p {
-    font-size: 15px;
-    line-height: 1.7;
-    opacity: 0.95;
-    margin: 0;
-    color: white;
-}
-
-/* Contact section - gradient works in both modes */
-.contact-section {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 60px 20px;
-    margin: 60px -1rem 0 -1rem;
-    text-align: center;
-}
-
-.contact-section h2 {
-    font-size: 32px;
-    color: white;
-    margin-bottom: 16px;
-}
-
-.contact-section p {
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.contact-buttons {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 32px;
-}
-
-.contact-btn {
-    padding: 14px 28px;
-    background: rgba(255, 255, 255, 0.15);
-    border: 2px solid white;
-    border-radius: 8px;
-    color: white;
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: 600;
-    transition: all 0.2s ease;
-}
-
-.contact-btn:hover {
-    background: white;
-    color: #8B5CF6;
-}
-
-.contact-btn.primary {
-    background: white;
-    color: #8B5CF6;
-}
-
-/* Secret sauce badge */
-.secret-sauce-badge {
-    display: inline-block;
-    background: var(--accent-purple-bg, #e3f2fd);
-    color: var(--accent-purple, #1976d2);
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: 600;
-}
-
-/* Dark mode adjustments */
-[data-theme="dark"] .secret-sauce-badge {
-    background: rgba(139, 92, 246, 0.2);
-    color: #a78bfa;
-}
-
-/* Sample-question chip buttons rendered INSIDE the See It In Action card
-   (MATTGPT-068, May 27, 2026 wireframe amendment). Buttons are children of
-   st.container(key="about_matt_cta_card") so DOM containment matches the
-   wireframe spec. Colors reuse the rejection-banner palette
-   (var(--banner-info-*)) for visual consistency with chip patterns
-   elsewhere AND for automatic dark-mode handling. */
-[class*='st-key-about_matt_sample_q_'] button {
-    width: 100%;
-    text-align: center;
-    background: var(--bg-card, #ffffff);
-    border: 1px solid var(--banner-info-border) !important;
-    color: var(--banner-info-text) !important;
-    padding: 12px 18px;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 500;
-    line-height: 1.5;
-    cursor: pointer;
-    transition: background 0.15s ease, border-color 0.15s ease;
-    margin-bottom: 8px;
-}
-[class*='st-key-about_matt_sample_q_'] button p,
-[class*='st-key-about_matt_sample_q_'] button div {
-    color: var(--banner-info-text) !important;
-}
-[class*='st-key-about_matt_sample_q_'] button:hover {
-    background: var(--banner-info-bg);
-}
-
-/* Collapsible code block (MATTGPT-068) — wraps the 5-Stage RAG Pipeline
-   snippet in <details> so non-technical readers can skip past it. */
-details:has(.code-block) {
-    margin: 16px 0;
-}
-details:has(.code-block) > summary {
-    cursor: pointer;
-    display: inline-block;
-    padding: 8px 16px;
-    background: var(--accent-purple-bg, rgba(139, 92, 246, 0.08));
-    color: var(--accent-purple, #8B5CF6);
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 600;
-    user-select: none;
-    list-style: none;
-}
-details:has(.code-block) > summary::-webkit-details-marker {
-    display: none;
-}
-details:has(.code-block) > summary::before {
-    content: '▸ ';
-    display: inline-block;
-    transition: transform 0.15s ease;
-}
-details[open]:has(.code-block) > summary::before {
-    content: '▾ ';
-}
-
-/* ============================================================================
-   MOBILE RESPONSIVE STYLES (<768px)
-   ============================================================================ */
-@media (max-width: 767px) {
-    /* Header */
-    .about-header {
-        padding: 20px 16px 29px 16px !important;
-        min-height: auto !important;
-        margin-top: -24px !important;
-    }
-
-    .about-header-content {
-        flex-direction: row !important;
-        text-align: left !important;
-        gap: 12px !important;
-        align-items: flex-start !important;
-    }
-
-    .about-header-content img {
-        width: 64px !important;
-        height: 64px !important;
-    }
-
-    .about-header-text h1 {
-        font-size: 22px !important;
-    }
-
-    .about-header-text p {
-        font-size: 12px !important;
-    }
-
-    .about-header-text p:last-of-type {
-            display: none !important;
-    }
-
-    /* Stats bar */
-    .stats-bar {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 10px !important;
-        margin: 16px 0 !important;
-        padding: 0 8px !important;
-    }
-
-    .stat-card {
-        padding: 16px 12px !important;
-    }
-
-    .stat-number {
-        font-size: 24px !important;
-        margin-bottom: 4px !important;
-    }
-
-    .stat-label {
-        font-size: 11px !important;
-    }
-
-    /* Section titles */
-    .section-title {
-        font-size: 20px !important;
-        margin: 32px 0 8px 0 !important;
-    }
-
-    .section-subtitle {
-        font-size: 13px !important;
-        margin-bottom: 20px !important;
-    }
-
-    /* Timeline */
-    .timeline {
-        padding-left: 24px !important;
-    }
-
-    .timeline::before {
-        width: 3px !important;
-    }
-
-    .timeline-item {
-        padding-left: 20px !important;
-        margin-bottom: 20px !important;
-    }
-
-    .timeline-item::before {
-        left: -34px !important;
-        width: 16px !important;
-        height: 16px !important;
-        border-width: 3px !important;
-    }
-
-    .timeline-year {
-        font-size: 12px !important;
-    }
-
-    .timeline-title {
-        font-size: 14px !important;
-    }
-
-    .timeline-company {
-        font-size: 12px !important;
-    }
-
-    .timeline-desc {
-        font-size: 12px !important;
-    }
-
-    /* Deep-dive section */
-    .deep-dive-section {
-        padding: 24px 12px !important;
-        margin: 24px -1rem 0 -1rem !important;
-    }
-
-    .deep-dive-card {
-        padding: 16px !important;
-        margin-bottom: 16px !important;
-        flex-direction: column !important;
-    }
-
-    .deep-dive-card img {
-        width: 120px !important;
-        margin: 0 auto 12px auto !important;
-        order: -1;
-    }
-
-    .deep-dive-card h3 {
-        font-size: 16px !important;
-    }
-
-    .deep-dive-card p {
-        font-size: 12px !important;
-    }
-
-    /* Tech grid */
-    .tech-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 8px !important;
-    }
-
-    .tech-item {
-        padding: 10px 8px !important;
-        font-size: 11px !important;
-    }
-
-    /* Flow grid */
-    .flow-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 16px !important;
-    }
-
-    .flow-step {
-        padding: 12px 8px !important;
-    }
-
-    .flow-step:not(:last-child)::after {
-        display: none !important;
-    }
-
-    .flow-num {
-        width: 22px !important;
-        height: 22px !important;
-        font-size: 10px !important;
-    }
-
-    .flow-step-title {
-        font-size: 11px !important;
-    }
-
-    .flow-step-desc {
-        font-size: 9px !important;
-    }
-
-    /* Code block */
-    .code-block {
-        padding: 12px !important;
-        font-size: 9px !important;
-    }
-
-    /* Details grid */
-    .details-grid {
-        grid-template-columns: 1fr !important;
-        gap: 12px !important;
-    }
-
-    .detail-card {
-        padding: 14px !important;
-    }
-
-    .detail-card h4 {
-        font-size: 14px !important;
-    }
-
-    .detail-card ul {
-        font-size: 11px !important;
-    }
-
-    /* CTA card */
-    [class*='st-key-about_matt_cta_card'] {
-        padding: 20px 16px !important;
-    }
-
-    [class*='st-key-about_matt_cta_card'] h3 {
-        font-size: 18px !important;
-    }
-
-    [class*='st-key-about_matt_cta_card'] p {
-        font-size: 12px !important;
-    }
-
-    /* Competencies grid */
-    .competencies-grid {
-        gap: 12px !important;
-        padding: 0 8px !important;
-    }
-
-    .competency-card {
-        padding: 16px !important;
-    }
-
-    .competency-card h4 {
-        font-size: 14px !important;
-        margin: 8px 0 10px 0 !important;
-    }
-
-    .competency-card div {
-        font-size: 24px !important;
-    }
-
-    .competency-card li {
-        font-size: 11px !important;
-        padding: 4px 0 !important;
-    }
-
-    /* Philosophy grid */
-    .philosophy-grid {
-        grid-template-columns: 1fr !important;
-        gap: 12px !important;
-    }
-
-    .philosophy-card {
-        padding: 20px !important;
-    }
-
-    .philosophy-card h3 {
-        font-size: 16px !important;
-        margin-bottom: 10px !important;
-    }
-
-    .philosophy-card p {
-        font-size: 12px !important;
-        line-height: 1.5 !important;
-    }
-
-    /* Contact section */
-    .contact-section {
-        padding: 32px 16px !important;
-        margin: 32px -1rem 0 -1rem !important;
-    }
-
-    .contact-section h2 {
-        font-size: 20px !important;
-    }
-
-    .contact-section p {
-        font-size: 13px !important;
-    }
-
-    .contact-buttons {
-        gap: 10px !important;
-        margin-top: 20px !important;
-    }
-
-    .contact-btn {
-        padding: 10px 16px !important;
-        font-size: 12px !important;
-    }
-}
-</style>
-        """,
-        unsafe_allow_html=True,
-    )
+    # About Matt page CSS now lives in ui/styles/global_styles.py
+    # (apply_global_styles): injected on every rerun at a stable position
+    # so it survives Streamlit position-reconciliation during chip-click
+    # page transitions (MATTGPT-068). App-wide collision-prone selectors
+    # (stats-bar / stat-* / section-*) are namespaced .am-* to avoid
+    # leaking onto other pages.
 
     # =========================================================================
     # 1. HERO SECTION
@@ -934,26 +65,26 @@ details[open]:has(.code-block) > summary::before {
     # =========================================================================
     st.markdown(
         """
-<div class="stats-bar">
-    <div class="stat-card">
-        <span class="stat-number">20+</span>
-        <span class="stat-label">Years Experience</span>
+<div class="am-stats-bar">
+    <div class="am-stat-card">
+        <span class="am-stat-number">20+</span>
+        <span class="am-stat-label">Years Experience</span>
     </div>
-    <div class="stat-card">
-        <span class="stat-number">130+</span>
-        <span class="stat-label">Projects Delivered</span>
+    <div class="am-stat-card">
+        <span class="am-stat-number">130+</span>
+        <span class="am-stat-label">Projects Delivered</span>
     </div>
-    <div class="stat-card">
-        <span class="stat-number">300+</span>
-        <span class="stat-label">Professionals Trained</span>
+    <div class="am-stat-card">
+        <span class="am-stat-number">300+</span>
+        <span class="am-stat-label">Professionals Trained</span>
     </div>
-    <div class="stat-card">
-        <span class="stat-number">15+</span>
-        <span class="stat-label">Enterprise Clients</span>
+    <div class="am-stat-card">
+        <span class="am-stat-number">15+</span>
+        <span class="am-stat-label">Enterprise Clients</span>
     </div>
-    <div class="stat-card">
-        <span class="stat-number">4x</span>
-        <span class="stat-label">Delivery Acceleration</span>
+    <div class="am-stat-card">
+        <span class="am-stat-number">4x</span>
+        <span class="am-stat-label">Delivery Acceleration</span>
     </div>
 </div>
         """,
@@ -964,10 +95,10 @@ details[open]:has(.code-block) > summary::before {
     # 3. CAREER TIMELINE
     # =========================================================================
     st.markdown(
-        '<h2 class="section-title">Career Evolution</h2>', unsafe_allow_html=True
+        '<h2 class="am-section-title">Career Evolution</h2>', unsafe_allow_html=True
     )
     st.markdown(
-        '<p class="section-subtitle">From engineer to director—building, modernizing, and leading along the way</p>',
+        '<p class="am-section-subtitle">From engineer to director—building, modernizing, and leading along the way</p>',
         unsafe_allow_html=True,
     )
 
@@ -1025,11 +156,11 @@ details[open]:has(.code-block) > summary::before {
     # 4. MATTGPT DEEP-DIVE
     # =========================================================================
     st.markdown(
-        '<h2 class="section-title" style="margin-top: 60px;">How I Built MattGPT</h2>',
+        '<h2 class="am-section-title" style="margin-top: 60px;">How I Built MattGPT</h2>',
         unsafe_allow_html=True,
     )
     st.markdown(
-        '<p class="section-subtitle">A technical deep-dive into the system architecture behind this portfolio</p>',
+        '<p class="am-section-subtitle">A technical deep-dive into the system architecture behind this portfolio</p>',
         unsafe_allow_html=True,
     )
 
@@ -1063,7 +194,7 @@ details[open]:has(.code-block) > summary::before {
             traits define how this AI assistant works: determined to find the right insights, skilled at tracking down
             relevant experience across 130+ projects.
         </p>
-        <p style="font-style: italic; color: var(--text-muted, #7f8c8d);">
+        <p style="font-style: italic; color: var(--text-secondary, #6B7280);">
             It felt right to keep his name part of the work we loved doing together.
         </p>
     </div>
@@ -1254,12 +385,12 @@ def generate(stories: list, intent_family: str) -&gt; str:
     )
 
     # CTA — See It In Action card (MATTGPT-068, May 27, 2026 wireframe
-    # amendment). The four sample-question prompts that used to be <li> plain
-    # text are now rendered as st.button widgets DOM-nested INSIDE the card
-    # container. The st.container(key=...) wrapper takes the .cta-card visual
-    # styling (via the [class*='st-key-about_matt_cta_card'] CSS selector
-    # above) AND scopes the chip buttons as DOM children — true containment,
-    # not visual-only siblings. Click handlers go through on_chip_click
+    # amendment). The four sample-question prompts are rendered as st.button
+    # widgets DOM-nested INSIDE the card container. The st.container(key=...)
+    # wrapper takes the .cta-card visual styling (via the
+    # [class*='st-key-about_matt_cta_card'] CSS selector above) AND scopes
+    # the chip buttons as DOM children — true containment, not visual-only
+    # siblings. Click handlers go through on_chip_click
     # (ui/components/category_cards.py) which sets seed_prompt +
     # __ask_from_suggestion__ + active_tab="Ask MattGPT". Prompts come from
     # ABOUT_MATT_SEED_QUESTIONS at module top.
@@ -1268,8 +399,8 @@ def generate(stories: list, intent_family: str) -&gt; str:
             """
 <h3 style="font-size: 28px; margin: 0 0 16px 0;">See It In Action</h3>
 <p style="line-height: 1.7; margin-bottom: 20px;">
-    This isn't just a portfolio showcase — <strong>Agy 🐾 is a working AI assistant</strong> that can
-    answer detailed questions about my 130+ projects, methodologies, and outcomes.
+    This isn't just a portfolio showcase — <strong>Agy is a working AI assistant</strong> that can
+    answer detailed questions about my projects, methodologies, and outcomes.
 </p>
             """,
             unsafe_allow_html=True,
@@ -1287,10 +418,10 @@ def generate(stories: list, intent_family: str) -&gt; str:
     # 5. CORE COMPETENCIES
     # =========================================================================
     st.markdown(
-        '<h2 class="section-title">Core Competencies</h2>', unsafe_allow_html=True
+        '<h2 class="am-section-title">Core Competencies</h2>', unsafe_allow_html=True
     )
     st.markdown(
-        '<p class="section-subtitle">Technical expertise meets organizational transformation</p>',
+        '<p class="am-section-subtitle">Technical expertise meets organizational transformation</p>',
         unsafe_allow_html=True,
     )
 
@@ -1372,10 +503,11 @@ def generate(stories: list, intent_family: str) -&gt; str:
     # 6. LEADERSHIP PHILOSOPHY
     # =========================================================================
     st.markdown(
-        '<h2 class="section-title">Leadership Philosophy</h2>', unsafe_allow_html=True
+        '<h2 class="am-section-title">Leadership Philosophy</h2>',
+        unsafe_allow_html=True,
     )
     st.markdown(
-        '<p class="section-subtitle">How I approach transformation and team development</p>',
+        '<p class="am-section-subtitle">How I approach transformation and team development</p>',
         unsafe_allow_html=True,
     )
 
