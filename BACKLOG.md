@@ -74,6 +74,10 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-091](#mattgpt-091) | Add a credible failure story to the corpus (sibling to -022 / -078 pattern) | Open | Medium | Action | May 28, 2026 |
 | [MATTGPT-092](#mattgpt-092) | Hero — explicit seniority signal (supersedes May 15 design-call closure) | Open | Medium | Action | May 28, 2026 |
 | [MATTGPT-093](#mattgpt-093) | About Matt — strategic restructure (split / fold / reframe meta-question) | Open | Medium | Action | May 28, 2026 |
+| [MATTGPT-094](#mattgpt-094) | Retrieval concentration audit — CIC over-weighting + operational story under-surfacing (hypotheses to verify) | Open | High | Investigation | May 28, 2026 |
+| [MATTGPT-095](#mattgpt-095) | Anti-consulting bias in story framing — corpus reads "consulting" as default register when it shouldn't | Open | Medium | Action | May 28, 2026 |
+| [MATTGPT-096](#mattgpt-096) | Methodology context dropped during synthesis — TDD/BDD and ways-of-working substance gets compressed out of metric claims (hypothesis to verify) | Open | Medium | Issue | May 28, 2026 |
+| [MATTGPT-097](#mattgpt-097) | Career-intent framing refresh — corpus predates current role taxonomy; refresh framing AND tighten register | Open | Medium | Action | May 28, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -1895,25 +1899,38 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 ---
 
 ### MATTGPT-091
-**Add a credible failure story to the corpus (sibling to -022 / -078 pattern)**
+**Failure stories — audit existing corpus content first, then write only if needed (re-scoped May 28, 2026)**
 
-- **Status:** Open
+- **Status:** Open (re-scoped May 28, 2026 — see Reconciliation note below)
 - **Priority:** Medium
-- **Type:** Action
-- **Issue:** None of the 113 STAR stories in the corpus describes a failure, a hire that didn't work, an architecture call that was wrong, a program that got killed, or a leadership decision in hindsight. Every arc is positive. The only nod to failure is "early failure and experimentation approach" as a suggested chat prompt — neutered language for what should be a leadership lesson with specifics.
+- **Type:** Investigation + conditional Action
+- **Reconciliation (May 28, 2026):** Original framing assumed failure stories needed to be written from scratch. Matt's review of persona findings flagged that some failure content may already exist in the corpus but not surface on failure-shaped queries — which would make this primarily a retrieval / surfacing problem (MATTGPT-094 family) rather than a write-from-scratch problem. Ticket scope re-structured into phased work: audit existing content first, then either close-and-redirect to -094 OR proceed to write-task. Original write-task content preserved as Phase 3 fallback below.
+- **Issue (original framing):** None of the 113 STAR stories obviously surfaces a failure, a hire that didn't work, an architecture call that was wrong, a program that got killed, or a leadership decision in hindsight when queried directly. Every arc on Agy reads positive. The only nod to failure is "early failure and experimentation approach" as a suggested chat prompt — neutered language for what should be a leadership lesson with specifics.
 - **Audience impact:** CTO persona flagged this as a structural leadership blind-spot signal: *"Senior leaders who don't talk about who they fought with, what they killed, or who didn't make it on their team are often leaders who avoid the hard conversation. In a VP Eng seat that translates to tolerating mediocre senior reports too long, postponing performance conversations, and protecting reputations over the team's pace."* VP-of-People persona (forwarded scenario, also from CTO transcript) picked up the same signal independently as a hiring concern.
-- **Fix:** Write one (or more) STAR story documenting a real failure or hard call:
-  - The hire that didn't work and what was missed in the first 90 days
-  - The architecture call that was wrong and how the team unwound it
-  - A program or initiative that was killed and why
-  - A performance conversation that should have happened sooner
+- **Phased scope (May 28, 2026 re-scope):**
+  - **Phase 1 — Audit existing corpus** for stories tagged with or containing failure / hard-decision / lesson-learned / hire-that-didn't-work / killed-program content. Catalog what's there with a short note on craft strength.
+  - **Phase 2 — Diagnose via probe queries** on failure-shaped topics:
+    - *"Tell me about a time Matt's approach didn't work"*
+    - *"Has Matt had to remove a senior hire?"*
+    - *"Tell me about a program Matt killed"*
+    - *"What's a leadership decision Matt would make differently in hindsight?"*
 
-  Has to be self-aware without being self-deprecating. Has to name what would be done differently. Same craft bar as the existing strongest stories. Goal: one story is enough — proof that Matt CAN write the failure mode honestly, which neutralizes the structural blind-spot read.
-- **Effort:** High-craft, low-coding. ~3-5 hours of writing per story including the STAR framing and embedding regeneration.
+    Compare retrieved content to Phase 1 catalog. Two outcomes:
+    - **Surfacing problem** (existing failure content exists AND passes craft bar AND doesn't surface): close -091, re-file as a sub-investigation under MATTGPT-094 (retrieval / surfacing family).
+    - **Content problem** (failure content doesn't exist, OR exists but doesn't pass craft bar): proceed to Phase 3.
+  - **Phase 3 — Write (original scope, conditional on Phase 2 outcome):** Write one (or more) STAR story documenting a real failure or hard call:
+    - The hire that didn't work and what was missed in the first 90 days
+    - The architecture call that was wrong and how the team unwound it
+    - A program or initiative that was killed and why
+    - A performance conversation that should have happened sooner
+
+    Has to be self-aware without being self-deprecating. Has to name what would be done differently. Same craft bar as the existing strongest stories. Goal: one story is enough — proof that Matt CAN write the failure mode honestly, which neutralizes the structural blind-spot read.
+- **Effort:** Phase 1 audit + Phase 2 probe: ~1-2 hours. Phase 3 write (if needed): ~3-5 hours per story.
 - **Cross-references:**
-  - MATTGPT-022, MATTGPT-078 — sibling story-writing tickets (same pattern)
-  - MATTGPT-079 — Role Match coverage gaps meta (track this story addition as it closes the "failure narrative" gap)
-- **Logged:** May 28, 2026
+  - MATTGPT-022, MATTGPT-078 — sibling story-writing tickets (Phase 3 pattern if write-task scope returns)
+  - MATTGPT-079 — Role Match coverage gaps meta (track this story addition as it closes the "failure narrative" gap, whether by surfacing or by write)
+  - **MATTGPT-094** (added May 28, 2026) — retrieval / surfacing family; if Phase 2 reveals existing failure content doesn't surface, the fix belongs there
+- **Logged:** May 28, 2026 (original); re-scoped May 28, 2026 (post-persona-review reconciliation)
 
 ---
 
@@ -1959,8 +1976,152 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
   - "Interview Matt before you interview him" is the strongest framing on the site and lives only on the Home hero — the About Matt reframe should reinforce it, not duplicate or contradict
   - The site's medium-is-the-message asset (MattGPT itself demonstrating Matt's AI competence) is currently underused on About Matt
   - The pre-rendered Agy example interaction discussed in earlier strategic notes is a candidate for the "Quick interview" surface in Option 1
+  - **TL;DR + export-button pattern** (leveraging existing `action_buttons.py` infrastructure on Story Detail / Role Match): candidate implementation path under Options 1 and 2. The strategic direction decision shapes whether the export lives on a new About Matt one-pager (Option 1's "Quick interview" surface) or as a standalone `/recruiter` route. Originally discussed as a separate "MATTGPT-094" candidate during May 28, 2026 persona-finding review; folded here for traceability. Same canonical content serves three audiences (warm decision-maker quick orientation, referrer enablement for warm intros, recruiter triage), with primary value in the first two — the third is Matt's strategic circumvention target via networking.
 - **Effort:** Strategic decision: 1-2 hours of conversation + alignment. Implementation: depends on option chosen (small for Reframe in place; large for Split or Fold).
 - **Cross-references:**
   - MATTGPT-068 — closed May 28, 2026 (the polish + dim fix; this ticket is the longer-arc question)
   - MATTGPT-077 — MattGPT self-referential responses (related: content-side of the same medium-is-the-message asset)
+- **Logged:** May 28, 2026
+
+---
+
+### MATTGPT-094
+**Retrieval concentration audit — CIC over-weighting + operational story under-surfacing (hypotheses to verify)**
+
+- **Status:** Open — hypotheses to verify before committing to a fix
+- **Priority:** High
+- **Type:** Investigation
+- **Issue:** Two related retrieval-bias hypotheses surfaced during May 28, 2026 review of persona-test results plus Matt's own corpus insight. Both point at retrieval concentration / surfacing failures rather than corpus content quality.
+
+  **Sub-hypothesis A — CIC over-concentration on broad queries.** The CIC flagship story ("Building Cloud Innovation Centers (CIC)") may over-dominate retrieval results for broad-experience queries (target role, leadership work, transformation work) at the expense of other real client work (JPM, RBC, Fiserv, Capital One, AT&T). Evidence from persona transcripts: the recruiter's landing-view answer was CIC-dominated; the "has Matt managed in-house eng" answer led with CIC (0→150, 4X, $100M); the career-intent answer again centered CIC. Concrete testable mechanism: the CIC flagship had a prior embedding dilution fix that boosted retrieval; the boost may have over-corrected past correct into over-concentration.
+
+  **Sub-hypothesis B — operational stories exist but don't surface.** Matt has JPM stories with big enterprise releases, Sev-1 defects, global rollouts, up-to-5am on-call work that EXIST in the corpus but don't surface on operational queries. The fix isn't writing new content (that's MATTGPT-091's adjacent question); it's making sure the operational substance that's already there gets retrieved when operational queries arrive.
+- **Why these are framed as hypotheses to verify (not confirmed bugs):** Same discipline as MATTGPT-077. Multiple anecdotal data points across persona transcripts AND owner-knowledge suggest the pattern is real, but probe queries are needed to confirm the mechanism before designing a fix.
+- **Audience impact:** If sub-A is confirmed, decision-makers querying broadly read Matt as "one-big-thing leader" (CIC) rather than "18-year-range portfolio across financial services, telecom, and technology waves." If sub-B is confirmed, recruiters/CTOs querying operationally don't see the Sev-1 / on-call / enterprise-release substance that addresses their "can he run incidents?" question. Both are credibility-reducing in different ways.
+- **Important context from existing backlog:** Line 1622 in BACKLOG.md (-078 detail) framed CIC as having **lower retrieval-overweighting risk** because it's named-client work. This ticket is a deliberate re-examination of that framing in light of persona evidence — not a contradiction, a check on whether that framing still holds at the queries we now know matter.
+- **Investigation plan (probe-test methodology, same shape as MATTGPT-077):**
+  - **Probe set A (CIC concentration):**
+    - *"What's Matt's experience?"*
+    - *"Tell me about Matt's leadership work"*
+    - *"Tell me about Matt's transformation work"*
+    - *"What banks has Matt worked with?"* (CIC should NOT dominate; JPM/RBC/Capital One/Fiserv should)
+    - *"Tell me about Matt's experience at JP Morgan"* (should pull JPM stories, NOT CIC)
+  - **Probe set B (operational under-surfacing):**
+    - *"Tell me about a Sev-1 Matt handled"*
+    - *"Has Matt run on-call rotations?"*
+    - *"Tell me about Matt's experience with global enterprise releases"*
+    - *"What's Matt's operational background?"*
+  - For each probe: check top-3 retrieval results + assess whether CIC dominates (A) or operational stories surface (B).
+  - Document findings as a probe results table (same format as -077's findings table).
+- **Fix path (conditional on investigation results):**
+  - If sub-A confirmed: retune CIC story's embedding weight / retrieval boost; may need treatment similar to -077's chip-prompt swap pattern at the chip level
+  - If sub-B confirmed: investigate whether operational JPM stories have weak vocabulary anchors that don't match operational query terms, OR retrieval scoring prioritizes other content
+  - If neither confirmed: close as "verified, not a problem"
+  - If sub-A and sub-B point at same root cause (e.g., retrieval scoring heuristics favor named-client + scale metrics over operational-detail content): single fix may address both
+- **Effort:** Investigation 2-3 hours (probe runs + analysis). Fix effort depends on findings.
+- **Cross-references:**
+  - MATTGPT-077 — same retrieval-bias family (different stories, different sub-mechanism); methodology pattern for this investigation
+  - MATTGPT-061 — story-selection variance in same retrieval cluster
+  - MATTGPT-021, MATTGPT-022 — earlier retrieval-bias work
+  - MATTGPT-079 — Role Match coverage gaps meta-ticket (sub-B's "operational stories don't surface" overlaps with -079's gap-tracking concept)
+  - MATTGPT-091 — adjacent question (whether failure stories are a write problem or surfacing problem); if Phase 2 of -091 reveals existing failure content doesn't surface, the fix moves here
+- **Logged:** May 28, 2026
+
+---
+
+### MATTGPT-095
+**Anti-consulting bias in story framing — corpus reads "consulting" as default register when it shouldn't**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Issue:** 20 years at a consultancy means consultants worked for Matt; engineering organizations Matt led; Fortune 500 clients chose Matt's teams over alternatives. That's not a negative position. But the current corpus framing across multiple stories lets the consulting context read as the default register — emphasis on engagements, methodologies, client relationships, advisory work — when the underlying substance (people Matt hired, technology Matt shipped, organizations Matt built) is often closer to in-house engineering leadership than the framing suggests.
+- **Preserve-consulting-reality guardrail:** This is NOT a ticket to erase consulting context, hide that Matt's career is consulting-heavy, or rewrite stories to falsely present as in-house work. Consulting IS Matt's career; the work IS real; the clients ARE the engagements. The fix is FRAMING within that reality — surface the engineering substance (org built, code shipped, incidents owned, people hired) as the primary signal, with the consulting context as the deployment vehicle, not vice versa. Anything that pretends the consulting context didn't exist would be misrepresentation and is explicitly out of scope.
+- **Audience impact:** CTO persona's specific concern about *"20 years at Accenture means frameworks, programs, and operating-model thinking are his defaults"* reads partly from the corpus framing. Recruiter persona's observation that *"every project is consulting"* is a fair read of the surface, but understates the leadership/engineering depth underneath. Decision-makers screening for VP Eng / SVP Eng roles need to see the engineering-leader substance; the current corpus framing makes them work too hard to extract it.
+- **Distinct from existing tickets:**
+  - MATTGPT-043 (Decided Against — Humane Framing intent-to-tone mapping) is about response-tone shaping at LLM-output time. -095 is about how the underlying corpus stories are FRAMED. Different layer.
+  - MATTGPT-077 is about retrieval contamination (wrong stories surface). -095 is about how the CORRECTLY-retrieved stories read.
+  - MATTGPT-097 (career-intent framing refresh) is about ONE specific story class. -095 is the systemic question across the corpus.
+- **Fix shape:** Audit corpus stories for places where the leadership/engineering substance is positioned as supporting evidence FOR a consulting narrative rather than the primary substance with consulting as context. Rewrite framing — not facts — to surface the engineering/leadership substance first. Examples (illustrative, not exhaustive):
+  - *"Led Accenture's CIC delivering for Fortune 500 clients"* → emphasizes consulting deployment
+  - vs. *"Built and led an engineering organization that scaled to 150+ engineers, $100M+ practice revenue; deployed at Fortune 500 clients"* → emphasizes engineering substance with consulting as context
+
+  Both are true; the second positions Matt where his actual decision-making time was spent.
+- **Effort:** Medium-craft writing work. ~4-6 hours of corpus audit + targeted reframing. Affects multiple stories. Should NOT be a one-pass rewrite; iterative against persona-test follow-ups to confirm the reframing actually shifts how Agy responds.
+- **Cross-references:**
+  - MATTGPT-077 — distinct (retrieval bias vs framing bias) but sibling concerns
+  - MATTGPT-091 — adjacent (failure story addition can model "engineering substance first" framing)
+  - MATTGPT-097 — narrower scope (career-intent stories specifically); -095 is the broader corpus question
+- **Logged:** May 28, 2026
+
+---
+
+### MATTGPT-096
+**Methodology context dropped during synthesis — TDD/BDD and ways-of-working substance gets compressed out of metric claims (hypothesis to verify)**
+
+- **Status:** Open — hypothesis to verify before fix
+- **Priority:** Medium
+- **Type:** Issue
+- **Issue:** Top-line corpus metrics (*"4x faster delivery," "zero production defects across 150 engineers," "82% reduction in defect-escape rate"*) are not standalone consulting-deck claims — they're outcomes produced by specific methodology (TDD, BDD, pair programming, hypothesis-driven development, "New Ways of Working" capability development). The methodology IS the story; the numbers are the proof. But when Agy synthesizes responses for queries about delivery acceleration, engineering practices, or transformation outcomes, the numbers tend to surface as headline claims while the methodology context that makes them credible gets compressed out. Result: numbers read as marketing-deck headers rather than evidence-of-substance.
+- **Hypothesis-to-verify framing:** The loss could be happening at either (or both) of two layers:
+  - **Retrieval layer:** story chunks that contain the methodology context may not surface alongside chunks that contain the metrics, OR the retrieval scoring weights metric-bearing sentences higher than methodology-bearing sentences
+  - **Synthesis layer:** the LLM compresses methodology context out during response synthesis even when both methodology and metrics are present in the retrieved context
+
+  Different layer = different fix. Investigation needs to determine which before committing to an approach.
+- **Sharpening note relative to CTO persona's "metric hygiene" finding:** The CTO persona prescribed adding baselines + methodology footnotes to top-line stats as a presentation fix. -096 is sharper: the methodology footnotes EXIST in the corpus (the stories document TDD/BDD/pair-programming context); they're being dropped. The fix isn't to ADD them at the surface; it's to PRESERVE them through retrieval and synthesis.
+- **Audience impact:** Engineering hiring CTOs reading the metric-as-headline format see consulting-deck claims; reading the metric-with-methodology format see evidence of substance. The CTO persona caught this: *"$300M revenue is consulting revenue not product revenue"* / *"4x faster than a Fortune 500 baseline is a low bar."* Those reactions soften if the methodology context comes through — because the substance is what makes the numbers credible to an engineer.
+- **Investigation plan:**
+  - Probe queries:
+    - *"How did Matt achieve 4x delivery acceleration?"*
+    - *"What practices did Matt use at the CIC?"*
+    - *"Tell me about Matt's approach to test-driven development"*
+    - *"What's the methodology behind Matt's zero-defect claims?"*
+  - For each probe: capture full retrieved context (what chunks did Pinecone return) AND the synthesized response. Compare:
+    - Does the retrieved context include methodology language? If no → retrieval-layer problem
+    - If retrieved context includes methodology language but response doesn't → synthesis-layer problem
+    - If both layers drop it → both fixes needed
+  - Document findings in a probe results table; expected output for each query at each layer.
+- **Fix path (conditional):**
+  - **Retrieval-layer fix:** retune chunking / embedding to keep methodology + metric language anchored together; possibly add methodology-anchor metadata for re-ranking
+  - **Synthesis-layer fix:** system prompt addition that specifies "when surfacing metric claims, retain the methodology context that produced them"
+  - Both layers: combine both fixes
+- **Effort:** Investigation 2-3 hours. Fix effort depends on layer (synthesis-layer fix is small; retrieval-layer fix could be substantial).
+- **Cross-references:**
+  - MATTGPT-077 — retrieval-bias family (different mechanism, same investigation discipline)
+  - MATTGPT-088 — Role Match scorer alignment (different surface; -096 is the Ask MattGPT chat side of related credibility concern)
+  - CTO persona "metric hygiene" finding — adjacent but distinct fix path (footnotes vs methodology preservation)
+  - MATTGPT-094 — same investigation discipline (probe-test before fix design)
+- **Logged:** May 28, 2026
+
+---
+
+### MATTGPT-097
+**Career-intent framing refresh — corpus predates current role taxonomy; refresh framing AND tighten register**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Issue:** Career-intent stories in the corpus (*Independent Project – Career Intent – What I'm Looking For Next*, *Accenture – Transition Story – Why I'm Exploring Opportunities*, possibly others) predate the role taxonomy Matt has been building/refining in 2026 (the target role thinking that's downstream of MATTGPT-078 — AI Enablement Option E and related resume options). Result: when Agy is asked *"what's Matt looking for,"* the response uses stale framing — abstract values (*"clarity, empathy, and purpose"*), aspirational language (*"scale products, modernize platforms, and elevate engineering culture"*) — that doesn't reflect the more concrete role-target thinking Matt has since developed.
+- **Subsumes earlier prose-register concern:** During May 28, 2026 persona-test review, a separate "career-intent prose register" concern was discussed (informally referenced as a "MATTGPT-094" candidate at that point). That concern — that the career-intent stories are written in pitch-register prose rather than scannable concrete preferences — is the SAME stories with overlapping fix work. Both problems should be addressed in the same refresh pass; treating them as two separate tickets would risk one happening without the other. -097 explicitly covers both the framing problem (stale role targets) AND the register problem (pitch prose).
+- **Audience impact:** Recruiter persona's *"clarity, empathy, and purpose"* complaint — *"pitch language, not keyword-searchable signal. I can't paste that into a Boolean string"* — is the register problem. The framing problem (stale role targets) is one Matt observed independently and is at least as important for hiring conversations where Matt's specific target list matters.
+- **Distinct from existing tickets:**
+  - MATTGPT-078 — adds ONE new story (AI Enablement). -097 refreshes EXISTING career-intent stories. Different stories, different work, related but distinct.
+  - MATTGPT-094 (this ticket batch) — retrieval-bias investigation. -097 is content-quality work on the surfaced stories.
+  - MATTGPT-093 — About Matt strategic restructure. -097's content output may feed -093's reimagining of About Matt (whatever direction it takes will need refreshed career-intent content as the source-of-truth).
+  - MATTGPT-095 — broader anti-consulting bias question across the corpus. -097 is narrower scope (career-intent stories specifically).
+- **Fix scope:**
+  - **Framing refresh** — update career-intent stories to reflect the current role taxonomy:
+    - Specific target titles (Director / VP / SVP Engineering, Head of Platform, Field CTO, AI Enablement leader, etc.)
+    - Specific company stages / industries (regulated B2B fintech, enterprise modernization, AI CoE programs)
+    - Concrete preferences (0-to-1 vs steady-state, hands-on vs strategy-only, etc.) over abstract values
+  - **Register tighten** — replace pitch-register prose with scannable, fact-anchored preferences:
+    - *"Clarity, empathy, and purpose"* → *"hands-on with engineers and PMs, not strategy decks; 0-to-1 builder vs steady-state operator"*
+    - *"Scale products, modernize platforms, and elevate engineering culture"* → *"platform engineering at 1000-5000 person enterprise modernizing legacy banking systems, OR AI Innovation Center build at F500"*
+  - Keep Matt's voice; optimize for scan-time AND keyword-searchability.
+- **Effort:** Medium-craft writing work. ~3-5 hours including STAR field updates and embedding regeneration.
+- **Cross-references:**
+  - MATTGPT-078 — sibling story-writing work (different story, related role-taxonomy work)
+  - MATTGPT-079 — Role Match coverage gaps meta (-097 may close coverage gaps surfaced for current target roles)
+  - MATTGPT-093 — About Matt restructure (-097's refreshed content feeds whatever direction -093 takes)
+  - MATTGPT-095 — broader corpus framing question; -097 is the career-intent slice
 - **Logged:** May 28, 2026
