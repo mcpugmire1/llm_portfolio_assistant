@@ -229,7 +229,7 @@ def render_stats_bar():
     framing rather than a title chip):
     - Level (Senior leader)
     - Engineers led (150+)
-    - Tenure (18 yrs Accenture)
+    - Tenure (18+ years at Accenture)
     - Geo (Atlanta · relocate ok)
     """
 
@@ -306,8 +306,8 @@ def render_stats_bar():
                 <div class="stat-label">Engineers led</div>
             </div>
             <div class="stat">
-                <div class="stat-number">18 yrs</div>
-                <div class="stat-label">Accenture</div>
+                <div class="stat-number">18+ years</div>
+                <div class="stat-label">At Accenture</div>
             </div>
             <div class="stat">
                 <div class="stat-number">Atlanta · relocate ok</div>
