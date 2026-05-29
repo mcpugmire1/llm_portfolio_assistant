@@ -89,7 +89,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-084](#mattgpt-084) | Ask MattGPT BDD scenarios — chip-click + low_confidence banner-render timing flakes under full-suite load | Open | Medium | Issue | May 23, 2026 |
 | [MATTGPT-085](#mattgpt-085) | `secrets.toml` `MATTGPT_PRIVATE_BYPASS_TOKEN` parity + dead `private_access_code` cleanup + doc drift | Open | Medium | Refactor | May 23, 2026 |
 | [MATTGPT-086](#mattgpt-086) | Query logger — add environment annotation column + filter dev/test traffic out of production analytics | Open | Low | Issue | May 23, 2026 |
-| [MATTGPT-087](#mattgpt-087) | Home hero — secondary CTA routing recruiter-intent visitors to Role Match | Open | High | Action | May 28, 2026 |
+| [MATTGPT-087](#mattgpt-087) | Home hero — recruiter-routing CTA to Role Match | Open | High | Action | May 28, 2026 |
 | [MATTGPT-088](#mattgpt-088) | Role Match scorer — align with Agy honesty (no Strong Match when chat would say no) | Open | High | Issue | May 28, 2026 |
 | [MATTGPT-089](#mattgpt-089) | Role Match — parse location, work-model, availability as distinct filter class | Open | High | Issue | May 28, 2026 |
 | [MATTGPT-090](#mattgpt-090) | System prompt — decline cleanly on comp / off-scope queries (no silent fallback) | Open | Medium | Action | May 28, 2026 |
@@ -1843,7 +1843,7 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 ---
 
 ### MATTGPT-087
-**Home hero — secondary CTA routing recruiter-intent visitors to Role Match**
+**Home hero — recruiter-routing CTA to Role Match**
 
 - **Status:** Open
 - **Priority:** High
@@ -1851,7 +1851,8 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 - **Issue:** Home page hero currently routes all visitors to "Ask Agy" as the primary CTA, with Explore Stories as secondary. Recruiter persona testing (May 27, 2026) showed that recruiters triaging at 90 seconds per profile completely missed Role Match — even though Role Match would have done ~70 sec of the 90-sec job for them. Role Match is buried as the fourth nav item with no visual weight, despite being the surface that actually serves the recruiter's placement-decision job.
 - **Audience impact:** Direct conversion loss. Recruiters bounce or revert to LinkedIn-only sourcing because they never encounter the tool built specifically for their workflow.
 - **Evidence:** Recruiter persona, verbatim: *"The biggest finding from the session isn't about Agy or Role Match individually. It's that the site has a routing problem. A recruiter lands on the homepage and the most prominent CTA is 'Ask Agy' — which is the wrong first surface for the recruiter job. Role Match is buried as the fourth nav item with no visual weight, and it's the surface that actually serves the placement decision."*
-- **Fix:** Add a tertiary CTA in the hero, alongside existing "Ask Agy" (primary) and "Explore Stories" (secondary). Proposed label: *"Recruiting for a role? Match it →"* — verb-led, names the recruiter's actual job, routes to Role Match. Keep visual weight below the primary Ask Agy CTA to avoid distracting other audiences.
+- **Fix (CTA structure locked from May 29, 2026 wireframe):** Hero carries two CTAs — **Role Match as the primary CTA**, label *"Recruiting for a role? Match it →"* (verb-led, names the recruiter's job, routes to Role Match), and **Ask Agy as the secondary CTA** (*"Want to dig deeper? Ask Agy"*). **No Explore Stories CTA in the hero** — Explore is reached via the top nav ("My Work"). The label *"Recruiting for a role? Match it →"* is locked from the wireframe (not a proposal).
+- **Supersedes:** the May 28, 2026 "tertiary CTA, weight below the primary Ask Agy" framing is retired. The May 29 wireframe inverts it — recruiter routing is the **primary** CTA, not a tertiary one, and there is no Explore Stories CTA in the hero.
 - **Effort:** ~1 hour. Single change in `ui/components/hero.py` CTA section.
 - **Cross-references:**
   - MATTGPT-066 — Role Match cold-start affordance (complements: addresses what happens once on Role Match without a JD; -087 addresses how recruiter gets there in the first place)
