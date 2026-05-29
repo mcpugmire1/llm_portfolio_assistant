@@ -100,6 +100,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-095](#mattgpt-095) | Anti-consulting bias in story framing — corpus reads "consulting" as default register when it shouldn't | Open | Medium | Action | May 28, 2026 |
 | [MATTGPT-096](#mattgpt-096) | Methodology context dropped during synthesis — TDD/BDD and ways-of-working substance gets compressed out of metric claims (hypothesis to verify) | Open | Medium | Issue | May 28, 2026 |
 | [MATTGPT-097](#mattgpt-097) | Career-intent framing refresh — corpus predates current role taxonomy; refresh framing AND tighten register | Open | Medium | Action | May 28, 2026 |
+| [MATTGPT-098](#mattgpt-098) | Explore Stories default state — exclude Professional Narrative + sort Start_Date desc (match Timeline behavior) | Open | Medium | Action | May 29, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -2152,3 +2153,36 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
   - MATTGPT-093 — About Matt restructure (-097's refreshed content feeds whatever direction -093 takes)
   - MATTGPT-095 — broader corpus framing question; -097 is the career-intent slice
 - **Logged:** May 28, 2026
+
+---
+
+### MATTGPT-098
+**Explore Stories default state — exclude Professional Narrative + sort Start_Date desc (match Timeline behavior)**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Issue:** Explore Stories Table and Cards views default to alphabetical title sort with no Category exclusion. Result: "About Matt: My Leadership Journey" and other behavioral/narrative stories surface at the top of an A-Z list, giving a recruiter or hiring manager landing on the surface a weak first impression that doesn't represent Matt's project work. UX research (Baymard, others) is clear that alphabetical default sort on content corpora is anti-pattern when the initial sample doesn't represent the category — users discard the surface because it doesn't look relevant at first sight.
+- **Current behavior asymmetry:** Timeline view already handles this correctly via `EXCLUDED_ERA = "Leadership & Professional Narrative"` (see `ui/components/timeline_view.py:42`) — the 10 behavioral stories are excluded from the era-grouped timeline. Table and Cards views do not apply the same exclusion, so the same 10 stories pollute the default browse.
+- **Data shape (verified May 29, 2026):**
+  - `Category == "Professional Narrative"` = 10 stories
+  - `Era == "Leadership & Professional Narrative"` = same 10 stories (1:1 overlap)
+  - `Start_Date` is `YYYY-MM` string format — directly sortable, no parsing needed
+  - 113 stories total → 103 project stories after exclusion
+- **Fix:**
+  - On default load of Explore Stories, filter out stories where `Category == "Professional Narrative"` (or use Era-based exclusion for consistency with Timeline)
+  - Sort remaining stories by `Start_Date` descending (most recent first)
+  - Behavioral stories remain reachable via Category filter in Advanced Filters — user can opt in
+  - Apply to BOTH Table and Cards views (Timeline already correct)
+  - Sortable columns continue to work as today — this only changes the default state, not the available sorts
+- **Why Start_Date desc, not End_Date desc:** Simpler. Start_Date is the project's start, which aligns with how Matt narrates the work ("In 2019, I joined CIC and..."). End_Date desc was considered but introduces edge cases for long-running or ongoing projects.
+- **Why not change in this ticket:**
+  - No filter architecture change (Advanced Filters stays as-is — UX research supports the progressive-disclosure pattern)
+  - No view switcher or pagination change
+  - No detail pane change (auto-scroll already handles spatial connection)
+  - This is one default-state change, not a redesign
+- **Effort:** Small. Two-file change (Table view sort/filter, Cards view sort/filter). No wireframe needed — the visual surface is unchanged; only the initial story set and order differ.
+- **Cross-references:**
+  - `ui/components/timeline_view.py:42` — existing `EXCLUDED_ERA` pattern to mirror
+  - MATTGPT-065 — polish bundle (consider folding this in if -065 hasn't shipped yet, or ship standalone if -065 is already scoped)
+- **Logged:** May 29, 2026
