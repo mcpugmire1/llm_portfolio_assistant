@@ -225,12 +225,13 @@ def render_stats_bar():
     """
     Render portfolio statistics bar.
 
-    Displays 4 positioning tiles (MATTGPT-092 — function-level "Senior leader"
-    framing rather than a title chip):
+    Displays 4 stat tiles. The Level tile carries function-level "Senior leader"
+    framing per MATTGPT-092 (scope/outcome anchor, not a title chip); the other
+    three are production portfolio metrics kept from the prior stats bar:
     - Level (Senior leader)
-    - Engineers led (150+)
-    - Tenure (18+ years at Accenture)
-    - Geo (Atlanta · relocate ok)
+    - Projects Delivered (130+)
+    - Professionals Trained (300+)
+    - Enterprise Clients (15+)
     """
 
     st.markdown(
@@ -302,16 +303,16 @@ def render_stats_bar():
                 <div class="stat-label">Level</div>
             </div>
             <div class="stat">
-                <div class="stat-number">150+</div>
-                <div class="stat-label">Engineers led</div>
+                <div class="stat-number">130+</div>
+                <div class="stat-label">Projects Delivered</div>
             </div>
             <div class="stat">
-                <div class="stat-number">18+ years</div>
-                <div class="stat-label">At Accenture</div>
+                <div class="stat-number">300+</div>
+                <div class="stat-label">Professionals Trained</div>
             </div>
             <div class="stat">
-                <div class="stat-number">Atlanta · relocate ok</div>
-                <div class="stat-label">Geo</div>
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Enterprise Clients</div>
             </div>
         </div>
         """,
