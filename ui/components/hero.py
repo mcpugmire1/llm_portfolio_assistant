@@ -164,6 +164,8 @@ def render_hero():
                 <h1 style="font-size: 42px; font-weight: 700; margin-bottom: 10px; color: white;">Interview me before you interview me.</h1>
                 <p style="font-size: 18px; color: white; opacity: 0.95; max-width: 700px; margin: 0 auto 16px; line-height: 1.6;">I build products, platforms, and teams. That's Agy, my Plott Hound and AI assistant, trained to track down insights from 20+ years of transformation work.
                 </p>
+                <p style="font-size: 18px; color: white; opacity: 0.95; max-width: 700px; margin: 0 auto 16px; line-height: 1.6;">In active search for a role where building the engineering organization, establishing the culture, and delivering results are part of the same job.
+                </p>
                 <div style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap;">
                     <a id="btn-role-match" class="hero-btn hero-btn-primary">
                         Recruiting for a role? Match it →
@@ -223,11 +225,12 @@ def render_stats_bar():
     """
     Render portfolio statistics bar.
 
-    Displays 4 key metrics:
-    - Years of experience
-    - Projects delivered
-    - Professionals trained
-    - Enterprise clients
+    Displays 4 positioning tiles (MATTGPT-092 — function-level "Senior leader"
+    framing rather than a title chip):
+    - Level (Senior leader)
+    - Engineers led (150+)
+    - Tenure (18 yrs Accenture)
+    - Geo (Atlanta · relocate ok)
     """
 
     st.markdown(
@@ -295,20 +298,20 @@ def render_stats_bar():
         </style>
         <div class="stats-bar">
             <div class="stat">
-                <div class="stat-number">20+</div>
-                <div class="stat-label">Years Experience</div>
+                <div class="stat-number">Senior leader</div>
+                <div class="stat-label">Level</div>
             </div>
             <div class="stat">
-                <div class="stat-number">130+</div>
-                <div class="stat-label">Projects Delivered</div>
+                <div class="stat-number">150+</div>
+                <div class="stat-label">Engineers led</div>
             </div>
             <div class="stat">
-                <div class="stat-number">300+</div>
-                <div class="stat-label">Professionals Trained</div>
+                <div class="stat-number">18 yrs</div>
+                <div class="stat-label">Accenture</div>
             </div>
             <div class="stat">
-                <div class="stat-number">15+</div>
-                <div class="stat-label">Enterprise Clients</div>
+                <div class="stat-number">Atlanta · relocate ok</div>
+                <div class="stat-label">Geo</div>
             </div>
         </div>
         """,
