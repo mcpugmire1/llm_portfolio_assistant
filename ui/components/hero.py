@@ -15,14 +15,14 @@ def render_hero():
     Includes:
     - MattGPT logo
     - Job title and tagline
-    - Explore Stories and Ask Agy buttons
+    - Role Match (primary) and Ask Agy (secondary) buttons (MATTGPT-087)
     """
 
     st.markdown(
         """
         <style>
             /* Hide the trigger buttons */
-            [class*="st-key-hero_explore"],
+            [class*="st-key-hero_role_match"],
             [class*="st-key-hero_ask"] {
                 display: none !important;
             }
@@ -165,11 +165,11 @@ def render_hero():
                 <p style="font-size: 18px; color: white; opacity: 0.95; max-width: 700px; margin: 0 auto 16px; line-height: 1.6;">I build products, platforms, and teams. That's Agy, my Plott Hound and AI assistant, trained to track down insights from 20+ years of transformation work.
                 </p>
                 <div style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap;">
-                    <a id="btn-ask" class="hero-btn hero-btn-primary">
-                        Ask Agy 🐾
+                    <a id="btn-role-match" class="hero-btn hero-btn-primary">
+                        Recruiting for a role? Match it →
                     </a>
-                     <a id="btn-explore" class="hero-btn hero-btn-secondary">
-                        Explore Stories
+                    <a id="btn-ask" class="hero-btn hero-btn-secondary">
+                        Want to dig deeper? Ask Agy 🐾
                     </a>
                 </div>
             </div>
@@ -186,12 +186,12 @@ def render_hero():
         setTimeout(function() {
             const parentDoc = window.parent.document;
 
-            const btnExplore = parentDoc.getElementById('btn-explore');
+            const btnRoleMatch = parentDoc.getElementById('btn-role-match');
             const btnAsk = parentDoc.getElementById('btn-ask');
 
-            if (btnExplore) {
-                btnExplore.onclick = function() {
-                    const stBtn = parentDoc.querySelector('[class*="st-key-hero_explore"] button');
+            if (btnRoleMatch) {
+                btnRoleMatch.onclick = function() {
+                    const stBtn = parentDoc.querySelector('[class*="st-key-hero_role_match"] button');
                     if (stBtn) stBtn.click();
                 };
             }
@@ -210,8 +210,8 @@ def render_hero():
     )
 
     # Hidden Streamlit buttons that get triggered by the HTML buttons
-    if st.button("", key="hero_explore"):
-        st.session_state["active_tab"] = "Explore Stories"
+    if st.button("", key="hero_role_match"):
+        st.session_state["active_tab"] = "Role Match"
         st.rerun()
 
     if st.button("", key="hero_ask"):
