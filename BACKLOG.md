@@ -103,6 +103,11 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-097](#mattgpt-097) | Career-intent framing refresh — corpus predates current role taxonomy; refresh framing AND tighten register | Open | Medium | Action | May 28, 2026 |
 | [MATTGPT-098](#mattgpt-098) | Explore Stories default state — exclude Professional Narrative + sort Start_Date desc (match Timeline behavior) | Open | Medium | Action | May 29, 2026 |
 | [MATTGPT-099](#mattgpt-099) | Role Match — assess and decide comp handling on JDs that include comp expectations | Open | Medium | Investigation + Action | May 29, 2026 |
+| [MATTGPT-100](#mattgpt-100) | Navigation labels — rename to Home / My Work / Ask Agy / Role Match / My Profile (wireframe-locked) | Open | Medium | Refactor | May 30, 2026 |
+| [MATTGPT-101](#mattgpt-101) | Why Agy? modal + "?" badge on Agy avatar (uniform placement) | Open | Medium | Action | May 30, 2026 |
+| [MATTGPT-102](#mattgpt-102) | How I Built MattGPT — relocate from About Matt section to standalone deep-link surface (no main nav entry) | Open | Medium | Action | May 30, 2026 |
+| [MATTGPT-103](#mattgpt-103) | Agy intro line — resolve "20+ years of work" inconsistency with stats bar (Years tile dropped) | Open | Low | Refactor | May 30, 2026 |
+| [MATTGPT-104](#mattgpt-104) | Banking + Cross-Industry landing pages — math reconciliation bug (33 vs 32 vs 48 vs 57 inconsistency) | Open | Medium | Issue | May 30, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -2212,3 +2217,123 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
   - MATTGPT-090 — Decided Against, but its closure note points here for the Role Match-side gap; consistency with `services/semantic_router.py:192-209` is the cross-surface anchor
   - MATTGPT-088 — Role Match scorer honesty discipline (the "no Strong Match when chat would say no" principle applies here too: Role Match shouldn't silently disclose what chat declines)
 - **Logged:** May 29, 2026
+
+---
+
+### MATTGPT-100
+**Navigation labels — rename to Home / My Work / Ask Agy / Role Match / My Profile (wireframe-locked)**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Refactor
+- **Issue:** Current navigation labels (Home / Explore Stories / Ask MattGPT / Role Match / About Matt) do not match the wireframe-locked labels (Home / **My Work** / **Ask Agy** / Role Match / **My Profile**). The new labels were locked during the May 29, 2026 design pass and reflect the recruiter-framing direction: *"My Work"* reads as portfolio scope (not a generic verb), *"Ask Agy"* centers on the assistant's brand identity (per Why Agy modal work), *"My Profile"* matches recruiter conventions (LinkedIn-shaped framing).
+- **Why now:** Other wireframe-driven work (Why Agy modal, How I Built deep-link surface) routes from these labels. Renaming late risks broken cross-surface links and stale routing references.
+- **Fix:** Mechanical find-and-replace across:
+  - Primary nav config / `app.py` tab definitions
+  - `ui/components/navbar.py` (if labels are defined there)
+  - Any hardcoded label strings in landing pages or modals that reference old names
+  - BDD test fixtures that assert nav-label text (e.g., `tests/bdd/features/home.feature` and any `home_*.feature` or `nav_*.feature` that match on labels)
+  - Any session-state values keyed on tab names (`active_tab` values must update if they encode the label text)
+- **Effort:** Small (~30-60 min). Mechanical but touches multiple files; verification needs a clickthrough on all 5 nav items + any cross-surface routing.
+- **Cross-references:**
+  - MATTGPT-093 — About Matt strategic restructure. -100 is JUST the label rename; -093's structural decision (split / fold / reframe) is independent.
+  - MATTGPT-101 — Why Agy modal (the "Ask Agy" rename anchors the assistant's brand identity that the modal explains)
+- **Logged:** May 30, 2026
+
+---
+
+### MATTGPT-101
+**Why Agy? modal + "?" badge on Agy avatar (uniform placement)**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Issue:** Wireframe lock (May 29, 2026) introduces a brand-identity modal that answers *"Why is the assistant called Agy?"* — Plott Hound origin + breed-to-RAG mapping (*"Plott Hounds are bred for tracking: determined, loyal, hard to shake. Those same traits define how I work..."*). Modal is triggered by a *"?"* badge placed on Agy's avatar wherever the avatar appears (Home, Ask Agy Landing, Ask Agy Conversation, Banking, Cross-Industry).
+- **Why bundled (modal + badge in one ticket):** The badge IS the modal's trigger. Splitting them creates a half-shipped state — badge with nowhere to go, or modal with no entry point. Single ticket keeps the entry-to-content pair atomic.
+- **Locked content (from May 29, 2026 wireframe):**
+  - Headline: *"Why Agy?"*
+  - Body: *"I'm named for Matt's Plott Hound. Plott Hounds are bred for tracking: determined, loyal, hard to shake. Those same traits define how I work: I track down the right stories from 130+ projects across 20+ years, hold onto the trail when the question gets tricky, and don't pretend to know what isn't in the corpus."*
+  - Italicized companion line: *"It felt right to keep his name part of the work we loved doing together."*
+  - Footer link: *"Curious how I was built? Read the technical deep-dive"* → routes to How I Built MattGPT surface (MATTGPT-102)
+- **Content notes:** The locked body references "130+ projects" and "20+ years" — both should align with MATTGPT-019's standardization (currently shifting to "100+") and MATTGPT-103's Agy-intro decision. If those land first, this ticket inherits the resolved copy.
+- **Fix shape:**
+  - New component: `ui/components/why_agy_modal.py` (mirrors `ui/components/how_agy_modal.py` structure where applicable)
+  - New "?" badge: small CSS overlay positioned top-right of the Agy avatar wherever it renders; clickable, with `data-testid` for BDD selectors. New CSS tokens in `global_styles.py` (badge size, color, positioning) — no hex fallbacks, use CSS variables only per CLAUDE.md
+  - Wire badge → modal open across the 5 surfaces (Home, Ask Agy Landing, Ask Agy Conversation, Banking Landing, Cross-Industry Landing) where Agy avatar appears
+  - Modal close: X button, backdrop click, Escape key. Desktop overlay pattern; mobile bottom-sheet pattern.
+  - No state navigation — modal is overlay only, returns user to the surface they were on
+- **Effort:** Small-medium (~2-3 hours). New component with locked content + new CSS for badge + wiring across 5 surfaces.
+- **Cross-references:**
+  - MATTGPT-102 — How I Built MattGPT (modal's footer link routes there)
+  - MATTGPT-076 — How Agy Searches modal mobile fix (sibling modal; check whether mobile bottom-sheet pattern can be shared)
+  - MATTGPT-019 — Story count copy ("130+" in locked content should align)
+  - MATTGPT-103 — Agy intro line copy decision ("20+ years" in locked content should align)
+- **Logged:** May 30, 2026
+
+---
+
+### MATTGPT-102
+**How I Built MattGPT — relocate from About Matt section to standalone deep-link surface (no main nav entry)**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Issue:** Wireframe lock (May 29, 2026) relocates the "How I Built MattGPT" technical deep-dive content from its current home (a section within the About Matt page) to a standalone deep-link surface. The surface is NOT in the main nav — it's reached only via Why Agy modal footer link (MATTGPT-101), Profile signals panel, or other contextual entry points. Once relocated, the "How I Built" block must be removed from About Matt to avoid duplicate content.
+- **Why a surface, not a modal:** Content is substantial (system architecture diagram, tech stack grid, 5-stage RAG pipeline detail, CI/CD pipeline detail, "See It In Action" sample questions). Too much for a focused modal — a scrollable modal of this length reads as a misuse of the modal pattern.
+- **Why no main nav entry:** This is a credibility-building credential for engaged readers (technical hiring managers, curious recruiters), not a primary surface for cold visitors. Deep-link-only entry preserves the "not the main attraction" framing while still letting it ship as a real page.
+- **Fix shape:**
+  - New page: `ui/pages/how_i_built.py` (relocates existing content from About Matt's "How I Built" section as-is — no rewriting in this ticket)
+  - Page renders without active nav-tab state (deep-link only); navbar still renders for orientation but no tab is highlighted
+  - "← Back to X" context-aware affordance at top-left of page, using `session_state.previous_tab` (same pattern as Banking + Cross-Industry landings)
+  - Fallback when `previous_tab` is None: "← Back to Home"
+  - About Matt: remove the How I Built block to avoid duplicate content (separate edit, same commit)
+  - Routing: Why Agy modal footer link routes here (handled in MATTGPT-101)
+- **Effort:** Medium (~2-3 hours). Content extraction is mechanical; back-button logic is small; routing wiring is straightforward.
+- **Cross-references:**
+  - MATTGPT-101 — Why Agy modal (entry point)
+  - MATTGPT-093 — About Matt strategic restructure. -102's relocation is locked independent of -093's strategic direction (split / fold / reframe). The How I Built block leaves About Matt regardless of which structural option -093 picks.
+  - Banking + Cross-Industry landings — reference implementation for the "no nav tab + back affordance" pattern
+- **Logged:** May 30, 2026
+
+---
+
+### MATTGPT-103
+**Agy intro line — resolve "20+ years of work" inconsistency with stats bar (Years tile dropped)**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Refactor
+- **Issue:** Home hero Agy intro line currently reads *"That's Agy, my Plott Hound and AI assistant, ready to track down insights from 20+ years of work."* The *"20+ years"* signal is the same one that was dropped from the stats bar's Years tile (May 29, 2026, MATTGPT-092) for ageism + non-positioning reasons. Leaving the years number in the Agy intro partially undoes that mitigation.
+- **Decision (open — three working options):**
+  1. **Drop the number:** *"That's Agy, my Plott Hound and AI assistant, ready to track down insights from across Matt's career."*
+  2. **Swap to project count + sector breadth:** *"That's Agy, my Plott Hound and AI assistant, ready to track down insights from 100+ projects across financial services and enterprise platforms."* (Also aligns with MATTGPT-019's "100+" standardization.)
+  3. **Leave as-is** — read the line as functional/corpus scope (telling the user how big Agy's data set is) rather than personal positioning. The years here describe the data, not Matt's age.
+- **Fix:** Once decision lands, one-line copy change in `ui/components/hero.py`.
+- **Effort:** Trivial (~5 min once decision lands).
+- **Cross-references:**
+  - MATTGPT-019 — Story count copy. Option (b) would align the Agy intro with the broader find/replace pass.
+  - MATTGPT-092 — Hero seniority signal. -092 established the principle that the Years signal was dropped from positioning surfaces; -103 is the consistency check on the Agy intro line.
+  - MATTGPT-101 — Why Agy modal locked content also references "20+ years" — whatever -103 decides should propagate to the modal copy.
+- **Logged:** May 30, 2026
+
+---
+
+### MATTGPT-104
+**Banking + Cross-Industry landing pages — math reconciliation bug (33 vs 32 vs 48 vs 57 inconsistency)**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Issue
+- **Issue:** During the May 29, 2026 wireframe pass, project/story counts on the Banking landing page displayed inconsistent numbers across different rendering points (observed: 33 vs 32 vs 48 vs 57). Similar inconsistency observed on the Cross-Industry landing. Root cause is a bug in the dynamic-generation code that produces these counts, not a corpus tagging issue or wireframe specification gap (Matt's call during the wireframe review).
+- **Why a separate ticket (not folded into MATTGPT-065):** MATTGPT-065 is scoped specifically to Explore Stories polish (filter UX, empty states, story details). Banking + Cross-Industry landing pages are different surfaces with their own count-generation logic and dynamic story-rendering paths. The earlier framing during the May 29 wireframe pass that this would fold into -065 was wrong.
+- **Audience impact:** Recruiters land on the Banking page expecting to see Matt's banking work. Inconsistent counts read as data-quality issues — undermines the polish that the rest of the site projects. *"Why does the page say 33 projects in one place and 57 in another?"* is the kind of thing a hiring manager flags on a call.
+- **Fix shape:**
+  - **Investigate** the four count values (33 / 32 / 48 / 57) — trace each to its source (filter query, story tag aggregation, hardcoded value, prefilter routing artifact, etc.)
+  - **Reconcile to single source of truth** — same filter query / same aggregation logic, consistent across all display points on a given page
+  - **Apply to both** Banking and Cross-Industry landings (same pattern likely produces the same bug shape on Cross-Industry)
+  - **Verify** the corrected counts match the actual filtered-story count when the user clicks into Explore Stories with the same filter applied
+- **Effort:** Small-medium (~1-2 hours including investigation + fix + verification across both surfaces).
+- **Cross-references:**
+  - MATTGPT-065 — Explore Stories polish bundle (sibling polish work but different surface; this ticket explicitly does NOT fold into -065)
+  - MATTGPT-019 — Story count copy (different concern — that's about hardcoded "130+"; this is about dynamic counts on landing pages)
+- **Logged:** May 30, 2026
