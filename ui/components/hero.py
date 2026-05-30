@@ -40,8 +40,13 @@ def render_hero():
                 max-width: 1200px;
                 margin: 0 auto;
                 text-align: center;
-                padding: 50px 40px;
+                padding: 25px 30px;
                 color: white;
+            }
+
+            .hero-content h1 {
+                padding: 0 !important;
+                margin: 0 0 10px 0 !important;
             }
 
             .hero-btn {
@@ -103,7 +108,7 @@ def render_hero():
                 .hero-content > div:first-of-type {
                     margin-bottom: 16px !important;
                 }
-                .hero-content img[alt="MattGPT with Agy"] {
+                .hero-content img {
                     max-width: 140px !important;
                 }
 
@@ -115,7 +120,7 @@ def render_hero():
 
                 /* Title */
                 .hero-content h1 {
-                    font-size: 22px !important;
+                    font-size: 20px !important;
                     margin-bottom: 10px !important;
                 }
 
@@ -129,7 +134,7 @@ def render_hero():
 
                 /* Second paragraph (Agy) - hide on mobile */
                 .hero-content p:nth-of-type(2) {
-                    display: none !important;
+                    display: 1 !important;
                 }
 
                 /* Button container - row on mobile */
@@ -148,30 +153,32 @@ def render_hero():
                     padding: 10px 16px !important;
                     font-size: 13px !important;
                 }
+                .hero-btn-prefix {
+                    display: none;
+                }
             }
         </style>
         <div class="hero-gradient-wrapper">
             <div class="hero-content">
-                <div style="display: flex; justify-content: center; margin-bottom: 32px;">
+                <div style="display: flex; justify-content: center; margin-bottom: 16px;">
                     <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/matt_agy_hero.png"
                          alt="Matt and Agy"
-                         style="max-width: 440px; width: 100%; height: auto; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));">
+                         style="max-width: 280px; width: 100%; height: auto; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));">
                 </div>
-                <div style="font-size: 22px; margin-bottom: 10px; color: white; opacity: 0.95;">
-                    <span></span>
+                <div style="font-size: 18px; margin-bottom: 1px; color: white; opacity: 0.95;">
                     <span> Hi, I'm Matt Pugmire</span>
                 </div>
-                <h1 style="font-size: 40px; font-weight: 700; margin-bottom: 10px; color: white;">Interview me before you interview me.</h1>
-                <p style="font-size: 17px; color: white; opacity: 0.95; max-width: 700px; margin: 0 auto 8px; line-height: 1.6;">In active search for a role where building the engineering organization, establishing the culture, and delivering results are part of the same job.
+                <h1 style="font-size: 40px; font-weight: 700; padding-top: 0 !important; margin-top: 0 !important; margin-bottom: 10px; color: white;">Interview me before you interview me.</h1>
+                <p style="font-size: 17px; color: white; opacity: 0.95; max-width: 700px; margin: 0 auto 8px; line-height: 1.6;">In active search for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job.
                 </p>
                 <p style="font-size: 13px; color: white; opacity: 0.7; max-width: 600px; margin: 6px auto 18px; line-height: 1.55;">That's Agy, my Plott Hound and AI assistant, ready to track down insights from 20+ years of work.
                 </p>
                 <div style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap;">
                     <a id="btn-role-match" class="hero-btn hero-btn-primary">
-                        Recruiting for a role? Match it →
+                        <span class="hero-btn-prefix">Recruiting for a role? </span>Match it →
                     </a>
                     <a id="btn-ask" class="hero-btn hero-btn-secondary">
-                        Want to dig deeper? Ask Agy 🐾
+                        <span class="hero-btn-prefix">Want to dig deeper? </span>Ask Agy 🐾
                     </a>
                 </div>
             </div>
@@ -225,11 +232,13 @@ def render_stats_bar():
     """
     Render portfolio statistics bar.
 
-    Displays 4 stat tiles. The Level tile carries function-level "Senior leader"
-    framing per MATTGPT-092 (scope/outcome anchor, not a title chip); the other
-    three are production portfolio metrics kept from the prior stats bar:
-    - Level (Senior leader)
-    - Projects Delivered (130+)
+    Displays 4 stat tiles. The Leadership tile carries function-level
+    "Product engineering" framing per MATTGPT-092 (scope/outcome anchor, not a
+    title chip), with a "Product eng" mobile variant (≤768px) via the dual
+    .stat-desktop / .stat-mobile span pattern. The other three are production
+    portfolio metrics:
+    - Leadership (Product engineering / "Product eng" on mobile)
+    - Projects Delivered (100+)
     - Professionals Trained (300+)
     - Enterprise Clients (15+)
     """
@@ -269,6 +278,7 @@ def render_stats_bar():
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
+        .stat-mobile { display: none; }
 
         @media (max-width: 768px) {
             .stats-bar {
@@ -279,13 +289,15 @@ def render_stats_bar():
                 padding: 6px 2px !important;
             }
             .stat-number {
-                font-size: 18px !important;
+                font-size: 14px !important;
                 margin-bottom: 2px !important;
             }
             .stat-label {
                 font-size: 8px !important;
                 letter-spacing: 0 !important;
             }
+            .stat-desktop { display: none !important; }
+            .stat-mobile { display: inline !important; }
         }
 
         @media (max-width: 380px) {
@@ -299,11 +311,14 @@ def render_stats_bar():
         </style>
         <div class="stats-bar">
             <div class="stat">
-                <div class="stat-number">Senior leader</div>
-                <div class="stat-label">Level</div>
+                <div class="stat-number">
+                    <span class="stat-desktop">Product engineering</span>
+                    <span class="stat-mobile">Product eng</span>
+                </div>
+                <div class="stat-label">Leadership</div>
             </div>
             <div class="stat">
-                <div class="stat-number">130+</div>
+                <div class="stat-number">100+</div>
                 <div class="stat-label">Projects Delivered</div>
             </div>
             <div class="stat">
