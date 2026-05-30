@@ -4,16 +4,26 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 ---
 
-## Value Prioritized Roadmap (updated 2026-05-28)
+## Value Prioritized Roadmap (updated 2026-05-30)
 
 **NOW** (suggested order of execution):
-1. **-087 + -092** — Hero code pass: CTA routing + seniority signal bundled (~2 hours, one commit)
-2. **-077 mitigation** — Query-side mitigation: strip "Matt" from embedded queries on technical-noun shapes (hours, not days; full hybrid retrieval lives in NEXT)
-3. **-094 probes** — CIC over-concentration + operational under-surfacing probes; parallel-runnable, read-only; informs NEXT content work
-4. **-088** — Role Match scorer alignment (loose dependency on -077 mitigation: do cleaner if you can, not wait until you can)
-5. **-097** — Career-intent refresh (active recruiter failure earns NOW slot)
 
-(MATTGPT-090 removed from NOW — closed as Decided Against May 29, 2026. Personal Intent Family in `services/semantic_router.py:192-209` already handles comp queries with the warm decline; no system prompt edit needed.)
+*Low-hanging UI batch (small wins; Saturday May 30, 2026):*
+1. **-100** — Navigation labels rename (Home / My Work / Ask Agy / Role Match / My Profile). Locked, mechanical, but blast radius across ~10 files (`session_state["active_tab"]` values coupled to display labels). 30-60 min.
+2. **-104** — Banking + Cross-Industry landing math reconciliation bug. Phase 1 audit (~30 min) → Phase 2 fix (~1 hour).
+3. **-102** — How I Built MattGPT deep-link surface. New page, content extracted from About Matt's How I Built section, no main nav entry, back-affordance pattern mirrors Banking/CI. ~2-3 hours. Sequenced before -101 so -101's modal footer link can route to a live page, not a placeholder.
+4. **-101** — Why Agy? modal + "?" badge on Agy avatar (bundled). New component + new CSS tokens + wiring across 5 surfaces where avatar appears. ~2-3 hours. Footer link to -102 ships live (depends on -102 landing first).
+
+*Heavier conceptual work (saved for fresh brain):*
+5. **-077 mitigation** — Query-side mitigation: strip "Matt" from embedded queries on technical-noun shapes (hours, not days; full hybrid retrieval lives in NEXT)
+6. **-094 probes** — CIC over-concentration + operational under-surfacing probes; parallel-runnable, read-only; informs NEXT content work
+7. **-088** — Role Match scorer alignment (loose dependency on -077 mitigation: do cleaner if you can, not wait until you can)
+8. **-097** — Career-intent refresh (active recruiter failure earns NOW slot)
+
+*Recently shipped (off NOW list):*
+- **MATTGPT-087 + MATTGPT-092** — Shipped May 29-30, 2026 on `feature/ui-redesign` branch. Hero CTA inversion + scope/outcome anchor + stats restructure.
+- **MATTGPT-090** — Closed as Decided Against May 29, 2026. Personal Intent Family in `services/semantic_router.py:192-209` already handles comp queries with the warm decline; no system prompt edit needed.
+- **MATTGPT-103** — Closed as Decided Against May 30, 2026. "20+ years of work" in the Agy intro line reads as functional/corpus-scope (telling the user how big Agy's data set is), not as personal positioning. Different surface, different role; the anti-bias play that drove the Years tile drop doesn't transfer to the Agy intro.
 
 **NEXT** (queued):
 1. **-015** — JPM Payments IQ differentiation (high-priority since March; upstream of operational surfacing)
@@ -106,7 +116,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-100](#mattgpt-100) | Navigation labels — rename to Home / My Work / Ask Agy / Role Match / My Profile (wireframe-locked) | Open | Medium | Refactor | May 30, 2026 |
 | [MATTGPT-101](#mattgpt-101) | Why Agy? modal + "?" badge on Agy avatar (uniform placement) | Open | Medium | Action | May 30, 2026 |
 | [MATTGPT-102](#mattgpt-102) | How I Built MattGPT — relocate from About Matt section to standalone deep-link surface (no main nav entry) | Open | Medium | Action | May 30, 2026 |
-| [MATTGPT-103](#mattgpt-103) | Agy intro line — resolve "20+ years of work" inconsistency with stats bar (Years tile dropped) | Open | Low | Refactor | May 30, 2026 |
+| [MATTGPT-103](#mattgpt-103) | Agy intro line — resolve "20+ years of work" inconsistency with stats bar (Years tile dropped) | Decided Against | Low | Refactor | May 30, 2026 |
 | [MATTGPT-104](#mattgpt-104) | Banking + Cross-Industry landing pages — math reconciliation bug (33 vs 32 vs 48 vs 57 inconsistency) | Open | Medium | Issue | May 30, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -2300,10 +2310,11 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 ### MATTGPT-103
 **Agy intro line — resolve "20+ years of work" inconsistency with stats bar (Years tile dropped)**
 
-- **Status:** Open
+- **Status:** Decided Against (May 30, 2026)
 - **Priority:** Low
 - **Type:** Refactor
-- **Issue:** Home hero Agy intro line currently reads *"That's Agy, my Plott Hound and AI assistant, ready to track down insights from 20+ years of work."* The *"20+ years"* signal is the same one that was dropped from the stats bar's Years tile (May 29, 2026, MATTGPT-092) for ageism + non-positioning reasons. Leaving the years number in the Agy intro partially undoes that mitigation.
+- **Decided Against (May 30, 2026):** The "inconsistency" framing was wrong. The stats bar and the Agy intro line are different surfaces doing different jobs. The stats bar is a credentialing surface (recruiter 5-second scan) where the anti-bias play matters most — that's why the Years tile was dropped in MATTGPT-092. The Agy intro line is grounding-the-AI-assistant copy — it tells the user that Agy has a real corpus of career experience to draw from. The "20+ years of work" token there reads as *corpus scope* (how much data the AI has), not as *personal positioning* (how old the candidate is). The anti-bias play that drove the Years tile drop doesn't transfer to a surface doing different work. Closing without a code change; the line stays as-is in `ui/components/hero.py:174`.
+- **Earlier framing (superseded):** Home hero Agy intro line currently reads *"That's Agy, my Plott Hound and AI assistant, ready to track down insights from 20+ years of work."* The *"20+ years"* signal is the same one that was dropped from the stats bar's Years tile (May 29, 2026, MATTGPT-092) for ageism + non-positioning reasons. Leaving the years number in the Agy intro partially undoes that mitigation.
 - **Decision (open — three working options):**
   1. **Drop the number:** *"That's Agy, my Plott Hound and AI assistant, ready to track down insights from across Matt's career."*
   2. **Swap to project count + sector breadth:** *"That's Agy, my Plott Hound and AI assistant, ready to track down insights from 100+ projects across financial services and enterprise platforms."* (Also aligns with MATTGPT-019's "100+" standardization.)
