@@ -8,11 +8,12 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 **NOW** (suggested order of execution):
 1. **-087 + -092** — Hero code pass: CTA routing + seniority signal bundled (~2 hours, one commit)
-2. **-090** — Decline cleanly on comp / off-scope (30 min, one system-prompt edit)
-3. **-077 mitigation** — Query-side mitigation: strip "Matt" from embedded queries on technical-noun shapes (hours, not days; full hybrid retrieval lives in NEXT)
-4. **-094 probes** — CIC over-concentration + operational under-surfacing probes; parallel-runnable, read-only; informs NEXT content work
-5. **-088** — Role Match scorer alignment (loose dependency on -077 mitigation: do cleaner if you can, not wait until you can)
-6. **-097** — Career-intent refresh (active recruiter failure earns NOW slot)
+2. **-077 mitigation** — Query-side mitigation: strip "Matt" from embedded queries on technical-noun shapes (hours, not days; full hybrid retrieval lives in NEXT)
+3. **-094 probes** — CIC over-concentration + operational under-surfacing probes; parallel-runnable, read-only; informs NEXT content work
+4. **-088** — Role Match scorer alignment (loose dependency on -077 mitigation: do cleaner if you can, not wait until you can)
+5. **-097** — Career-intent refresh (active recruiter failure earns NOW slot)
+
+(MATTGPT-090 removed from NOW — closed as Decided Against May 29, 2026. Personal Intent Family in `services/semantic_router.py:192-209` already handles comp queries with the warm decline; no system prompt edit needed.)
 
 **NEXT** (queued):
 1. **-015** — JPM Payments IQ differentiation (high-priority since March; upstream of operational surfacing)
@@ -92,7 +93,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-087](#mattgpt-087) | Home hero — recruiter-routing CTA to Role Match | Open | High | Action | May 28, 2026 |
 | [MATTGPT-088](#mattgpt-088) | Role Match scorer — align with Agy honesty (no Strong Match when chat would say no) | Open | High | Issue | May 28, 2026 |
 | [MATTGPT-089](#mattgpt-089) | Role Match — parse location, work-model, availability as distinct filter class | Open | High | Issue | May 28, 2026 |
-| [MATTGPT-090](#mattgpt-090) | System prompt — decline cleanly on comp / off-scope queries (no silent fallback) | Open | Medium | Action | May 28, 2026 |
+| [MATTGPT-090](#mattgpt-090) | System prompt — decline cleanly on comp / off-scope queries (no silent fallback) | Decided Against | Medium | Action | May 28, 2026 |
 | [MATTGPT-091](#mattgpt-091) | Add a credible failure story to the corpus (sibling to -022 / -078 pattern) | Open | Medium | Action | May 28, 2026 |
 | [MATTGPT-092](#mattgpt-092) | Hero — explicit seniority signal (supersedes May 15 design-call closure) | Open | Medium | Action | May 28, 2026 |
 | [MATTGPT-093](#mattgpt-093) | About Matt — strategic restructure (split / fold / reframe meta-question) | Open | Medium | Action | May 28, 2026 |
@@ -1909,10 +1910,11 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 ### MATTGPT-090
 **System prompt — decline cleanly on comp / off-scope queries (no silent fallback)**
 
-- **Status:** Open
+- **Status:** Decided Against (May 29, 2026)
 - **Priority:** Medium
 - **Type:** Action
-- **Issue:** When Agy is asked something Matt shouldn't answer publicly (e.g., comp expectation), it currently produces a soft non-answer rather than a clean decline. Recruiter persona example: asked target role + comp + geo, got 4 paragraphs of narrative — comp went **silent**, relocation got a *"the story does not provide specific details… however, his focus on the right org fit suggests he might consider relocation"* (a dressed-up guess). The silent failure mode is worse than an honest decline because the recruiter can't tell whether the data is missing or being withheld.
+- **Decided Against (May 29, 2026):** Production behavior already handles this cleanly. The `personal` intent family in `services/semantic_router.py:192-209` includes salary canonical phrases (*"What's Matt's salary"*, *"How much does Matt make"*) alongside age/identity/etc., and produces the warm-decline pivot (*"🐾 I'm focused on Matt's professional experience"*). Production-verified May 29, 2026 during wireframe review — the silent-fallback failure mode described in the original Issue does not reproduce. The ticket's premise that comp needs a *different* decline copy than age/identity (because comp IS legitimately answered elsewhere) is theoretically defensible but didn't survive the production check — the existing warm pivot is sufficient. **The remaining asymmetry** — Role Match parser silently dropping comp/location/work-model JD requirements — is now scoped under MATTGPT-089 (Role Match parses location, work-model, availability as distinct filter class), which is the correct home for it.
+- **Issue (original framing — superseded):** When Agy is asked something Matt shouldn't answer publicly (e.g., comp expectation), it currently produces a soft non-answer rather than a clean decline. Recruiter persona example: asked target role + comp + geo, got 4 paragraphs of narrative — comp went **silent**, relocation got a *"the story does not provide specific details… however, his focus on the right org fit suggests he might consider relocation"* (a dressed-up guess). The silent failure mode is worse than an honest decline because the recruiter can't tell whether the data is missing or being withheld.
 - **Audience impact:** Recruiter persona, verbatim: *"For a recruiter this is the single biggest miss. I cannot pitch Matt to a hiring manager without a comp anchor; I'll burn a screening call to get it... The bot's failure mode there is the real finding: it should decline cleanly ('Matt handles comp conversations directly — reach out') instead of going silent and letting the recruiter guess whether the data is missing or being withheld."*
 - **Fix:** System prompt addition (`prompts.py` or wherever Agy's primary system instruction lives) covering:
   - **Comp:** Decline with a clear redirect to direct conversation. Suggested: *"Matt handles compensation conversations directly. Reach out at [contact link]."*
