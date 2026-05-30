@@ -119,6 +119,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-103](#mattgpt-103) | Agy intro line — resolve "20+ years of work" inconsistency with stats bar (Years tile dropped) | Decided Against | Low | Refactor | May 30, 2026 |
 | [MATTGPT-104](#mattgpt-104) | Banking + Cross-Industry landing pages — math reconciliation bug (33 vs 32 vs 48 vs 57 inconsistency) | Open | Medium | Issue | May 30, 2026 |
 | [MATTGPT-105](#mattgpt-105) | Explore Stories — Cards / Timeline / Table views lose CSS styling during Streamlit rerun (same family as MATTGPT-068) | Open | Medium | Issue | May 30, 2026 |
+| [MATTGPT-106](#mattgpt-106) | Navbar desktop layout — add MattGPT brand element, restructure to space-between (align with mobile + wireframe) | Open | Medium | Action | May 30, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -2370,4 +2371,24 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 - **Cross-references:**
   - **MATTGPT-068** — same fix pattern, applied to About Matt; canonical reference implementation. See its detail block + the in-code comment block at `ui/styles/global_styles.py:613-619` for the rationale.
   - MATTGPT-065 — Explore Stories polish bundle; -105 is the same surface but a structural rendering concern, not polish
+- **Logged:** May 30, 2026
+
+---
+
+### MATTGPT-106
+**Navbar desktop layout — add MattGPT brand element, restructure to space-between (align with mobile + wireframe)**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Issue:** Desktop navbar currently distributes 5 nav items evenly across the full width (`space-evenly`) with no brand element on the left. The May 29, 2026 wireframe and the existing mobile navbar both use the conventional brand-left + nav-right (`space-between`) pattern. Desktop is the outlier — it's missing the persistent brand identity anchor that the mobile header provides, and it doesn't match the wireframe.
+- **Fix (3 specific changes per visual diff):**
+  1. **Brand element on left:** text "MattGPT" or text + small Agy avatar (matching mobile header structure)
+  2. **Layout shift:** change from `justify-content: space-evenly` to `space-between`, with brand left and 5 nav items grouped right
+  3. **Column widths:** current CSS forces all columns to 20%. Brand column needs ~25-30%; the 5 nav cols split the remaining width. Cleaner option: render brand as HTML/markdown outside the column grid and keep the 5 nav cols evenly distributed within their share of the bar
+- **Audience impact:** Persistent brand anchor on every desktop view; conventional layout matches recruiter/CTO/referrer mental model from every other site they visit; brings desktop into structural alignment with mobile.
+- **Effort:** Small (~1-2 hours). CSS layout work + brand-element render block. BDD scope: brand element renders, 5 nav items still render right, no regression to existing nav-click routing.
+- **Cross-references:**
+  - **MATTGPT-100** — Nav label rename (shipped); -106 is the layout-shape pair that didn't fit in -100's mechanical-rename scope
+  - **MATTGPT-101** — Why Agy modal + "?" badge on Agy avatar. If the brand element includes the Agy avatar, the badge placement may need coordination with -101's design. May want to ship -106 before -101, or coordinate the avatar treatment in one pass.
 - **Logged:** May 30, 2026
