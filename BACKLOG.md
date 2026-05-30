@@ -118,6 +118,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-102](#mattgpt-102) | How I Built MattGPT — relocate from About Matt section to standalone deep-link surface (no main nav entry) | Open | Medium | Action | May 30, 2026 |
 | [MATTGPT-103](#mattgpt-103) | Agy intro line — resolve "20+ years of work" inconsistency with stats bar (Years tile dropped) | Decided Against | Low | Refactor | May 30, 2026 |
 | [MATTGPT-104](#mattgpt-104) | Banking + Cross-Industry landing pages — math reconciliation bug (33 vs 32 vs 48 vs 57 inconsistency) | Open | Medium | Issue | May 30, 2026 |
+| [MATTGPT-105](#mattgpt-105) | Explore Stories — Cards / Timeline / Table views lose CSS styling during Streamlit rerun (same family as MATTGPT-068) | Open | Medium | Issue | May 30, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -2347,4 +2348,26 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 - **Cross-references:**
   - MATTGPT-065 — Explore Stories polish bundle (sibling polish work but different surface; this ticket explicitly does NOT fold into -065)
   - MATTGPT-019 — Story count copy (different concern — that's about hardcoded "130+"; this is about dynamic counts on landing pages)
+- **Logged:** May 30, 2026
+
+---
+
+### MATTGPT-105
+**Explore Stories — Cards / Timeline / Table views lose CSS styling during Streamlit rerun (same family as MATTGPT-068)**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Issue
+- **Issue:** Clicking "Ask Agy About This" on a story card (Cards view) or the equivalent trigger on Timeline view causes the page to re-render with the "Chasing down the answer..." thinking-indicator dim, but the underlying card / timeline styling collapses alongside the dim — story cards lose their bordered containers, titles lose their styled positioning, the timeline structure flattens to plain text. The HTML structure survives but unstyled.
+- **Mechanism:** Same MATTGPT-068 family. Inline `<style>` blocks injected within render-function scope get garbage-collected from the DOM when the containing render scope is detached during Streamlit's rerun. The dim is the expected thinking-indicator state; the style-strip on top is the bug.
+- **Audience impact:** Visible visual regression during chat-triggering interactions. A recruiter or hiring manager clicking "Ask Agy About This" sees a styled page collapse to plain typography right before the chat transition completes. Undermines the polish the rest of the site projects.
+- **Discovered during:** May 30, 2026 MATTGPT-100 navigation label rename pass. User clicked "Ask Agy About This" on a Cards-view story; observed both the dim AND structural style loss. Verified the same pattern on Timeline view.
+- **Fix shape:** Relocate inline CSS to `ui/styles/global_styles.py`, which is re-injected on every rerun via `apply_global_styles()` in `app.py:43` at a stable position. Same fix shape as MATTGPT-068 (which relocated About Matt's page-local CSS for the same reason).
+- **Scope (3 render paths):**
+  - `ui/pages/explore_stories.py` — inline `<style>` blocks at lines 488, 644, 1761, 2229, 2293 (5+ injection sites covering both Table and Cards views)
+  - `ui/components/timeline_view.py:159` — inline `<style>` block (Timeline view)
+- **Effort:** Medium. Mechanical CSS relocation with namespacing for collision-prone classes (mirror -068's `.am-*` pattern — likely `.es-*` for Explore Stories). Risk: missing a selector reference during the move; need to verify all 3 views render correctly post-relocation.
+- **Cross-references:**
+  - **MATTGPT-068** — same fix pattern, applied to About Matt; canonical reference implementation. See its detail block + the in-code comment block at `ui/styles/global_styles.py:613-619` for the rationale.
+  - MATTGPT-065 — Explore Stories polish bundle; -105 is the same surface but a structural rendering concern, not polish
 - **Logged:** May 30, 2026
