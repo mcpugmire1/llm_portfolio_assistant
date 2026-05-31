@@ -2465,9 +2465,12 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
   2. 3-column grid instead of 2 (with responsive breakpoints to 2 cols at ≤1024px, 1 col at ≤640px)
   3. Simpler card content — drop the inline buttons and italic example-question lines; the card itself is the click target. The "what could I ask Agy" job moves entirely to the Ask Agy Anything section below the cards. Net effect: cards become roughly half their current height.
 
-- **Implementation notes (confirmed May 31, 2026):**
-  - **Anchor tags, not buttons.** Whole card is the click target via `<a href="?route=...">`. If current routing uses Streamlit query params or button callbacks, swap to anchor + appropriate href. Visual stays the same; the click semantics change.
+- **Implementation notes (confirmed May 31, 2026 — scope locked to Option A after current-code review):**
+  - **Keep existing JS bridge + hidden Streamlit button + `active_tab` / `prefilter_*` routing pattern.** Current `category_cards.py` (lines 297-466 and beyond) uses HTML card + hidden `st.button("", key="card_btn_*")` + JS click bridge + `st.session_state["active_tab"] = "..."` + `prefilter_*` writes. This pattern stays. -107 is visual-only redesign; routing model is out of scope.
+  - **Routing migration is out of scope for -107.** If anchor-tag + query-param routing (`<a href="?route=X">`) is wanted later for accessibility / URL-shareability, file as a separate ticket (e.g., -108). That migration requires app.py route handler + removing 6 hidden buttons + replicating prefilter setup. ~2-3 hours additional work; doesn't fit in this wireframe-alignment scope.
+  - **Whole card clickable (if possible).** Drop the visible "My Work →" / equivalent gradient button from the bottom of each card. Make the entire card container the click target (extend the existing JS bridge listener from the bottom anchor to the card container). If the bridge can't be cleanly extended, fall back to keeping a small visual click affordance.
   - **Emojis for icons (matches production).** Move to SVG / Tabler icons later as a separate ticket — out of scope for -107.
+  - **CSS location.** Current `category_cards.py` has inline `<style>` blocks (lines 90-294). Per the -105 / MATTGPT-068 rerun-persistence pattern, this CSS may also be vulnerable to rerun stripping on the Home page. Worth eyeballing during implementation — if symptoms appear, relocate to `global_styles.py` (could fold into -105's CSS-relocation scope or file standalone).
 
 - **Effort:** Small-medium. Raw implementation 30-60 min (CSS update + HTML restructure in `ui/components/category_cards.py`). Add ~15-30 min if shipping with full BDD discipline (scenarios: 3 columns at desktop, unified treatment across all 6, click routes correctly per card).
 
