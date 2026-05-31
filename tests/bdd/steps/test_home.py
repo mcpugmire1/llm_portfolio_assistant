@@ -125,10 +125,10 @@ def click_view_product_work(browser_page):
 def assert_active_tab(browser_page, tab_name):
     """Verify navigation landed on the expected tab.
 
-    For Explore Stories: the .results-count element is unique to that page,
-    so its presence is a reliable proxy for active_tab == "Explore Stories".
+    For My Work: the .results-count element is unique to that page,
+    so its presence is a reliable proxy for active_tab == "My Work".
     """
-    if tab_name == "Explore Stories":
+    if tab_name == "My Work":
         browser_page.wait_for_selector(".results-count", timeout=15000)
     else:
         # Other tabs (Banking, Cross-Industry, Home) — assertion stubbed
@@ -174,7 +174,7 @@ def assert_result_count_below(browser_page, limit):
 )
 def test_ask_agy_button_no_prefill():
     """The "Ask Agy 🐾" primary button is the no-pre-population path —
-    navigates to Ask MattGPT and lands on the landing view, not a fired query.
+    navigates to Ask Agy and lands on the landing view, not a fired query.
     Pre-implementation: button still exists in current category_cards.py, so
     this should pass against current code. Post-chip-implementation: keeps
     the button distinct from the chips it sits next to.
@@ -183,7 +183,7 @@ def test_ask_agy_button_no_prefill():
 
 @scenario(
     "../features/home.feature",
-    "Clicking a suggested chip auto-fires the question on Ask MattGPT",
+    "Clicking a suggested chip auto-fires the question on Ask Agy",
 )
 def test_chip_click_sets_seed_prompt():
     """Core regression for the chip CX. After click, session state must
@@ -209,7 +209,7 @@ def test_chips_render_with_arrow():
 # - "Session state cleared after auto-fire" — requires Streamlit rerun
 #   inspection across page transitions; covered by the conversation_view
 #   .pop() chain unit-tested elsewhere.
-# - "Ask MattGPT renders default landing when no chip was clicked" — covered
+# - "Ask Agy renders default landing when no chip was clicked" — covered
 #   by the default render path in landing_view.py.
 
 
@@ -268,7 +268,7 @@ def assert_no_seed_prompt(browser_page):
     """Negative assertion for the Ask Agy button path.
 
     Streamlit session state isn't directly readable from Playwright, so we
-    use the proxy: the Ask MattGPT page renders the landing view (input box +
+    use the proxy: the Ask Agy page renders the landing view (input box +
     suggestion chips) instead of an auto-fired conversation transcript. If
     seed_prompt were set, the page would skip the landing and show a
     transcript with the question as the first user turn.
@@ -385,7 +385,7 @@ def assert_filter_chip_visible(browser_page, value):
     if chip.count() == 0:
         chip = browser_page.locator(f"p:has-text('✕'):has-text('{value}')").first
     assert chip.count() > 0, (
-        f"No filter chip with text {value!r} is visible on Explore Stories. "
+        f"No filter chip with text {value!r} is visible on My Work. "
         f"Card 3 prefilter did not apply the expected Sub-category — the "
         f"page may show 'All' as the active filter state instead."
     )

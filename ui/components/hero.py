@@ -224,7 +224,7 @@ def render_hero():
         st.rerun()
 
     if st.button("", key="hero_ask"):
-        st.session_state["active_tab"] = "Ask MattGPT"
+        st.session_state["active_tab"] = "Ask Agy"
         st.rerun()
 
 

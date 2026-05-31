@@ -191,10 +191,10 @@ div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-t
     with st.container():
         labels = [
             ("Home", "Home"),
-            ("Explore Stories", "Explore Stories"),
-            ("Ask MattGPT", "Ask MattGPT"),
+            ("My Work", "My Work"),
+            ("Ask Agy", "Ask Agy"),
             ("Role Match", "Role Match"),
-            ("About Matt", "About Matt"),
+            ("My Profile", "My Profile"),
         ]
 
         cols = st.columns(len(labels), gap="small")
@@ -209,16 +209,16 @@ div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-t
                     disabled=(name == current_tab),
                 ):
                     st.session_state["active_tab"] = name
-                    if name == "Explore Stories":
+                    if name == "My Work":
                         st.session_state["_just_switched_to_explore"] = True
                     st.rerun()
 
     # Mobile menu JS
     active_home = "active" if current_tab == "Home" else ""
-    active_explore = "active" if current_tab == "Explore Stories" else ""
-    active_ask = "active" if current_tab == "Ask MattGPT" else ""
+    active_explore = "active" if current_tab == "My Work" else ""
+    active_ask = "active" if current_tab == "Ask Agy" else ""
     active_role = "active" if current_tab == "Role Match" else ""
-    active_about = "active" if current_tab == "About Matt" else ""
+    active_about = "active" if current_tab == "My Profile" else ""
 
     js_code = """
     <script>
@@ -261,7 +261,7 @@ div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-t
         var dropdown = document.createElement('nav');
         dropdown.className = 'mobile-nav-dropdown';
         dropdown.id = 'mobile-nav-dropdown';
-        dropdown.innerHTML = '<a href="#" id="mobile-nav-home" class="ACTIVE_HOME">Home</a><a href="#" id="mobile-nav-explore" class="ACTIVE_EXPLORE">Explore Stories</a><a href="#" id="mobile-nav-ask" class="ACTIVE_ASK">Ask MattGPT</a><a href="#" id="mobile-nav-role" class="ACTIVE_ROLE">Role Match</a><a href="#" id="mobile-nav-about" class="ACTIVE_ABOUT">About Matt</a><a href="#" id="mobile-nav-settings" style="border-top:1px solid rgba(255,255,255,0.2);margin-top:8px;padding-top:16px;">⚙️ Settings</a>';
+        dropdown.innerHTML = '<a href="#" id="mobile-nav-home" class="ACTIVE_HOME">Home</a><a href="#" id="mobile-nav-explore" class="ACTIVE_EXPLORE">My Work</a><a href="#" id="mobile-nav-ask" class="ACTIVE_ASK">Ask Agy</a><a href="#" id="mobile-nav-role" class="ACTIVE_ROLE">Role Match</a><a href="#" id="mobile-nav-about" class="ACTIVE_ABOUT">My Profile</a><a href="#" id="mobile-nav-settings" style="border-top:1px solid rgba(255,255,255,0.2);margin-top:8px;padding-top:16px;">⚙️ Settings</a>';
         doc.body.insertBefore(dropdown, doc.body.firstChild);
 
         // Event handlers
@@ -285,10 +285,10 @@ div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-t
         // Nav link handlers
         var links = {
             'mobile-nav-home': 'topnav_Home',
-            'mobile-nav-explore': 'topnav_Explore',
-            'mobile-nav-ask': 'topnav_Ask',
-            'mobile-nav-role': 'topnav_Role',
-            'mobile-nav-about': 'topnav_About'
+            'mobile-nav-explore': 'topnav_My-Work',
+            'mobile-nav-ask': 'topnav_Ask-Agy',
+            'mobile-nav-role': 'topnav_Role-Match',
+            'mobile-nav-about': 'topnav_My-Profile'
         };
 
         Object.keys(links).forEach(function(id) {

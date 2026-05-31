@@ -1,5 +1,5 @@
 """
-Utility Functions for Ask MattGPT
+Utility Functions for Ask Agy
 
 Shared helper functions for story selection, transcript management,
 and UI component rendering.
@@ -88,7 +88,7 @@ def get_context_story(stories: list[dict]) -> dict | None:
 
 def choose_story_for_ask(top_story: dict | None, stories: list[dict]) -> dict | None:
     """
-    Choose which story to use for Ask MattGPT.
+    Choose which story to use for Ask Agy.
 
     Prefer Pinecone top result unless a one-shot context lock is set.
 
@@ -190,7 +190,7 @@ def story_has_metric(s: dict) -> bool:
 
 def push_user_turn(text: str):
     """
-    Add user message to Ask MattGPT transcript.
+    Add user message to Ask Agy transcript.
 
     Args:
         text: User's message
@@ -201,7 +201,7 @@ def push_user_turn(text: str):
 
 def push_assistant_turn(text: str):
     """
-    Add assistant message to Ask MattGPT transcript.
+    Add assistant message to Ask Agy transcript.
 
     Args:
         text: Assistant's message

@@ -6,7 +6,7 @@ Feature: Home Hero — Recruiter Routing CTA
   # MATTGPT-087. CTA structure locked from the May 29, 2026 wireframe: the hero
   # carries two CTAs — Role Match (primary, "Recruiting for a role? Match it",
   # routes to Role Match) and Ask Agy (secondary, "Want to dig deeper? Ask Agy").
-  # No Explore Stories CTA in the hero; Explore is reached via the top nav.
+  # No My Work CTA in the hero; Explore is reached via the top nav.
   # Supersedes the May 28 "tertiary CTA below Ask Agy" framing.
   #
   # Assertions are DOM-observable only (button labels visible, target surface

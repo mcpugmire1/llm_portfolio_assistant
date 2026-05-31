@@ -558,7 +558,7 @@ def render_cross_industry_landing(stories: list[dict]):
                         st.session_state["prefilter_industry"] = "Cross Industry"
                         st.session_state["prefilter_capability"] = card["title"]
                         st.session_state["return_to_landing"] = "cross_industry"
-                        st.session_state["active_tab"] = "Explore Stories"
+                        st.session_state["active_tab"] = "My Work"
                         st.rerun()
 
     # Core Capabilities tier — cards with >=3 cross-industry stories
@@ -595,7 +595,7 @@ def render_cross_industry_landing(stories: list[dict]):
 
     # Hidden Streamlit button for CTA
     if st.button("", key="card_btn_cross_industry_cta"):
-        st.session_state["active_tab"] = "Ask MattGPT"
+        st.session_state["active_tab"] = "Ask Agy"
         st.rerun()
 
     # JS click-bridge — shared with banking_landing via utils/landing_cards.

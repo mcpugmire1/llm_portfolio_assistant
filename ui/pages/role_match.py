@@ -514,7 +514,7 @@ def _render_results_panel(result_payload: dict, stories: list[dict]) -> None:
     own st.markdown call so that hidden Streamlit buttons (for chip click
     handling) and an inline render_story_detail call (for the expanded chip,
     if any) can be interleaved between cards. The Cards-view pattern from
-    Explore Stories — see ui/pages/explore_stories.py:2393-2487 — was the
+    My Work — see ui/pages/explore_stories.py:2393-2487 — was the
     direct inspiration.
 
     Args:
@@ -1323,7 +1323,7 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
                 if not jd_text.strip():
                     st.warning("Paste a job description first.")
                 else:
-                    # Match the Ask MattGPT pattern: st.empty() container + render_thinking_indicator()
+                    # Match the Ask Agy pattern: st.empty() container + render_thinking_indicator()
                     # The indicator is a fixed-position overlay so it covers the whole viewport.
                     loading_container = st.empty()
                     with loading_container:

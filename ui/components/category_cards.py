@@ -48,13 +48,13 @@ def on_chip_click(question: str) -> None:
       - __ask_from_suggestion__: True — tells backend_service.py:1413 to
         bypass the nonsense filter (otherwise "How does Matt..." style
         queries can get redirected)
-      - active_tab: "Ask MattGPT" — routes the rerun to the chat page
+      - active_tab: "Ask Agy" — routes the rerun to the chat page
 
     Contract pinned by tests/unit/test_category_cards.py::TestOnChipClick.
     """
     st.session_state["seed_prompt"] = question
     st.session_state["__ask_from_suggestion__"] = True
-    st.session_state["active_tab"] = "Ask MattGPT"
+    st.session_state["active_tab"] = "Ask Agy"
     st.rerun()
 
 
@@ -317,7 +317,7 @@ def render_category_cards(stories: list[dict]):
                 {banking_pills}
             </div>
             <div style="margin-top: auto;">
-                <a id="btn-banking" class="card-btn-gradient">Explore Stories →</a>
+                <a id="btn-banking" class="card-btn-gradient">My Work →</a>
             </div>
         </div>
         </div>
@@ -353,7 +353,7 @@ def render_category_cards(stories: list[dict]):
                 {cross_pills_html}
             </div>
             <div style="margin-top: auto;">
-                <a id="btn-cross-industry" class="card-btn-gradient">Explore Stories →</a>
+                <a id="btn-cross-industry" class="card-btn-gradient">My Work →</a>
             </div>
         </div>
         </div>
@@ -399,7 +399,7 @@ def render_category_cards(stories: list[dict]):
                     "Digital Product Development & Delivery",
                     "Client Product Innovation & Co-Creation",
                 ]
-                st.session_state["active_tab"] = "Explore Stories"
+                st.session_state["active_tab"] = "My Work"
                 st.rerun()
 
     with col4:
@@ -422,7 +422,7 @@ def render_category_cards(stories: list[dict]):
         if st.button("", key="card_btn_modernization"):
             if st.session_state.get("active_tab") == "Home":
                 st.session_state["prefilter_capability"] = "Application Modernization"
-                st.session_state["active_tab"] = "Explore Stories"
+                st.session_state["active_tab"] = "My Work"
                 st.rerun()
 
     # Row spacing (hidden on mobile via CSS)
@@ -463,7 +463,7 @@ def render_category_cards(stories: list[dict]):
                     "Process Optimization & Automation",
                     "Security & Compliance Solutions",
                 ]
-                st.session_state["active_tab"] = "Explore Stories"
+                st.session_state["active_tab"] = "My Work"
                 st.rerun()
 
     with col6:
@@ -491,7 +491,7 @@ def render_category_cards(stories: list[dict]):
                     "Psychological Safety & Innovation Culture",
                     "Talent Enablement & Growth",
                 ]
-                st.session_state["active_tab"] = "Explore Stories"
+                st.session_state["active_tab"] = "My Work"
                 st.rerun()
 
     # Row spacing (hidden on mobile via CSS)
@@ -653,7 +653,7 @@ def render_category_cards(stories: list[dict]):
     # Hidden Streamlit buttons — the JS bridge in the components.html block
     # below routes visible-chip and Ask Agy anchor clicks here.
     if st.button("", key="card_btn_ask_agy"):
-        st.session_state["active_tab"] = "Ask MattGPT"
+        st.session_state["active_tab"] = "Ask Agy"
         st.session_state["skip_home_menu"] = True
         st.rerun()
     for _idx, _question in enumerate(_CHIP_QUESTIONS):
@@ -758,11 +758,11 @@ def render_category_cards(stories: list[dict]):
     // Ask Agy Anything CHIP wiring — separate multi-firing block.
     // Re-attaches onclick on every firing without a dataset.wired gate.
     // Streamlit destroys and recreates this components.html iframe on every
-    // rerun (e.g., when the user returns from Ask MattGPT back to Home),
+    // rerun (e.g., when the user returns from Ask Agy back to Home),
     // killing the JS context that owns the chip onclick closures. The
     // single setTimeout(200ms) pattern above works for the cards because
     // those typically receive only the entry-point click and the user moves
-    // on — but the chips live on Home, are clicked, route to Ask MattGPT,
+    // on — but the chips live on Home, are clicked, route to Ask Agy,
     // then the user often comes back and clicks another chip. That's the
     // back-and-forth navigation pattern that surfaced the May 12 2026 dead-
     // closure bug on Cross-Industry landing. Multi-firing setTimeout

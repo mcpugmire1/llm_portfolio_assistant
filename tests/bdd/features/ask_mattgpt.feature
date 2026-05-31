@@ -1,4 +1,4 @@
-Feature: Ask MattGPT — Nonsense rejection banner + contextual chip sets
+Feature: Ask Agy — Nonsense rejection banner + contextual chip sets
   As a recruiter who submits a query that can't be answered
   I want the rejection banner to explain the reason and offer relevant follow-ups
   So that a dead-end query becomes a productive redirect into Matt's portfolio
@@ -41,7 +41,7 @@ Feature: Ask MattGPT — Nonsense rejection banner + contextual chip sets
   # CLAUDE.md Testing Protocol (BDD scenarios committed before implementation).
 
   Background:
-    Given the user navigates to Ask MattGPT
+    Given the user navigates to Ask Agy
 
   # ---------------------------------------------------------------------------
   # BRANCH 1: rule:* (nonsense filter pattern matched)
@@ -143,11 +143,11 @@ Feature: Ask MattGPT — Nonsense rejection banner + contextual chip sets
   # CONTEXT GUARD
   # ---------------------------------------------------------------------------
   # Chips render only when context == "ask". Regression guard against the
-  # chip-rendering logic leaking into Explore Stories or other surfaces.
+  # chip-rendering logic leaking into My Work or other surfaces.
 
   @regression
-  Scenario: Explore Stories suppresses rejection chips entirely
-    Given the user navigates to Explore Stories
+  Scenario: My Work suppresses rejection chips entirely
+    Given the user navigates to My Work
     When the user types "Tell me a joke about Matt's career" in the search box
     And the user presses Enter
     Then the rejection banner should be displayed

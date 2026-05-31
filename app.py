@@ -33,7 +33,7 @@ from ui.styles.global_styles import apply_global_styles
 load_dotenv()
 
 st.set_page_config(
-    page_title="MattGPT | Matt Pugmire",
+    page_title="MattGPT | Matt Pugmire | Product Engineering Leader",
     page_icon="🐾",
     layout="wide",
     initial_sidebar_state="collapsed",  # Hide sidebar - we use top navbar instead
@@ -149,29 +149,6 @@ if DEBUG:
             st.write({k: v for k, v in dbg_state.items() if k != "stats"})
             st.write("Index stats:")
             st.json(dbg_state.get("stats", {}))
-
-# --- Tab navigation helpers ---
-_ALIASES = {"Stories": "Explore Stories"}
-
-
-def normalize_tab(name: str) -> str:
-    return _ALIASES.get(name, name)
-
-
-def goto(tab_name: str):
-    tab = normalize_tab(tab_name)
-    st.session_state["active_tab"] = tab
-    # If we are navigating to Home, ensure the Home pills do NOT auto-jump
-    # by marking the first render as a fresh mount.
-    if tab == "Home":
-        st.session_state["__home_first_mount__"] = True
-    # Stop this render immediately; the next run will paint the new tab.
-    st.stop()
-
-
-# Coerce any legacy/old values that may still be in session state
-if st.session_state.get("active_tab") == "Stories":
-    st.session_state["active_tab"] = "Explore Stories"
 
 
 # =========================
@@ -335,7 +312,7 @@ if 'story' in st.query_params:
     story_from_url = st.query_params['story']
     if st.session_state.get('_deeplink_story') != story_from_url:
         st.session_state['active_story'] = story_from_url
-        st.session_state['active_tab'] = 'Explore Stories'
+        st.session_state['active_tab'] = 'My Work'
         st.session_state['explore_view_mode'] = 'Cards'
         st.session_state['_deeplink_story'] = story_from_url
         st.rerun()
@@ -346,7 +323,7 @@ if 'story' in st.query_params:
 
 
 def _clear_explore_state():
-    """Reset all Explore Stories state for a fresh slate on navigation away."""
+    """Reset all My Work state for a fresh slate on navigation away."""
     st.session_state.pop("return_to_landing", None)
     st.session_state["filters"] = {
         "personas": [],
@@ -415,7 +392,7 @@ def build_facets(stories):
 
 
 # =========================
-# UI — Home / Stories / Ask / About
+# UI — Home / My Work / Ask Agy / Role Match / My Profile
 # =========================
 industries, capabilities, clients, domains, roles, tags, personas_all = build_facets(
     STORIES
@@ -442,7 +419,7 @@ elif st.session_state["active_tab"] == "Cross-Industry":
     render_cross_industry_landing(STORIES)
 
 # --- REFACTORED STORIES ---
-elif st.session_state["active_tab"] == "Explore Stories":
+elif st.session_state["active_tab"] == "My Work":
     from ui.pages.explore_stories import render_explore_stories
 
     render_explore_stories(
@@ -456,8 +433,8 @@ elif st.session_state["active_tab"] == "Explore Stories":
         personas_all,
     )
 
-# --- ASK MATTGPT ---
-elif st.session_state["active_tab"] == "Ask MattGPT":
+# --- ASK AGY ---
+elif st.session_state["active_tab"] == "Ask Agy":
     _clear_explore_state()
     from ui.pages.ask_mattgpt import render_ask_mattgpt
 
@@ -470,8 +447,8 @@ elif st.session_state["active_tab"] == "Role Match":
 
     render_role_match(STORIES)
 
-# --- ABOUT ---
-elif st.session_state["active_tab"] == "About Matt":
+# --- MY PROFILE ---
+elif st.session_state["active_tab"] == "My Profile":
     _clear_explore_state()
     from ui.pages.about_matt import render_about_matt
 
@@ -480,9 +457,7 @@ elif st.session_state["active_tab"] == "About Matt":
 # --- INVALID TAB FALLBACK ---
 else:
     st.error(f"❌ Unknown page: {st.session_state['active_tab']}")
-    st.info(
-        "Valid pages: Home, Explore Stories, Ask MattGPT, About Matt, Banking, Cross-Industry"
-    )
+    st.info("Valid pages: Home, My Work, Ask Agy, My Profile, Banking, Cross-Industry")
     # Reset to home
     st.session_state["active_tab"] = "Home"
     st.rerun()

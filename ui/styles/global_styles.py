@@ -483,7 +483,7 @@ def apply_global_styles():
             .stat-label { font-size: 12px !important; }
 
             /* ========================================
-               EXPLORE STORIES - Mobile Compact Layout
+               EXPLORE STORIES/MY WORK - Mobile Compact Layout
                ======================================== */
 
             /* Hero - Compact on mobile */
@@ -610,10 +610,10 @@ def apply_global_styles():
             .stChatMessage img { width: 50px !important; height: 50px !important; }
         }
 
-        /* About Matt sample-question chip buttons (MATTGPT-068).
+        /* My Profile sample-question chip buttons (MATTGPT-068).
            Lives in global styles (not inside render_about_matt) so the CSS is
            re-injected on every Streamlit script rerun and persists across the
-           page transition to Ask MattGPT — keeping the chips correctly styled
+           page transition to Ask Agy — keeping the chips correctly styled
            during the stale-frame dim while the new page renders. Moving the
            rules to render_about_matt scope caused a visible de-style flash
            during chip-click → AI thinking transitions. */
@@ -653,13 +653,13 @@ def apply_global_styles():
         }
 
         /* ============================================================
-           ABOUT MATT PAGE CSS — relocated from render_about_matt()
+           ABOUT MATT/MY PROFILE PAGE CSS — relocated from render_about_matt()
            inline <style> so it persists through Streamlit reruns
            (MATTGPT-068). Page-scoped classes; collision-prone ones
            namespaced .am-*.
            ============================================================ */
 /* ============================================================================
-   ABOUT MATT PAGE STYLES - Dark Mode Compatible
+   ABOUT MATT/MY PROFILE PAGE STYLES - Dark Mode Compatible
    ============================================================================ */
 
 /* Header - matches other pages */
@@ -1196,7 +1196,7 @@ def apply_global_styles():
 /* Sample-question chip buttons (MATTGPT-068, [class*='st-key-about_matt_sample_q_'])
    live in ui/styles/global_styles.py — not here — so the rules are re-injected
    on every Streamlit script rerun and persist across the page transition to
-   Ask MattGPT. See the comment block in global_styles.py for the full
+   Ask Agy. See the comment block in global_styles.py for the full
    rationale (chip-click → AI thinking dim regression). */
 
 /* Collapsible code block (MATTGPT-068) — wraps the 5-Stage RAG Pipeline

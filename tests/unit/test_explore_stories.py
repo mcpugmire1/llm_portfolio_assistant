@@ -367,7 +367,7 @@ class TestRemoveFilterValueQueryRemoval:
 # =============================================================================
 #
 # When user clicks a capability card on Banking or Cross-Industry landing,
-# session_state["return_to_landing"] is set so that Explore Stories renders
+# session_state["return_to_landing"] is set so that My Work renders
 # a "← Banking" / "← Cross Industry" breadcrumb back-link.
 #
 # Bug: reset_all_filters deletes ALL session state except a small preserve_keys
@@ -419,7 +419,7 @@ class TestResetFiltersPreservesReturnToLanding:
     def test_return_to_landing_banking_survives_reset(self):
         """If user arrived from Banking landing, breadcrumb state must persist after Reset."""
         session_state = {
-            "active_tab": "Explore Stories",
+            "active_tab": "My Work",
             "return_to_landing": "banking",
             "filters": {"q": "payments"},
             "_widget_version_q": 3,
@@ -436,7 +436,7 @@ class TestResetFiltersPreservesReturnToLanding:
     def test_return_to_landing_cross_industry_survives_reset(self):
         """Same contract for Cross-Industry arrivals."""
         session_state = {
-            "active_tab": "Explore Stories",
+            "active_tab": "My Work",
             "return_to_landing": "cross_industry",
             "filters": {"industry": "Cross Industry"},
         }
@@ -449,7 +449,7 @@ class TestResetFiltersPreservesReturnToLanding:
     def test_other_session_state_still_cleared(self):
         """Preservation is targeted — other state still gets reset."""
         session_state = {
-            "active_tab": "Explore Stories",
+            "active_tab": "My Work",
             "return_to_landing": "banking",
             "filters": {"q": "stale query"},
             "__last_search_results__": ["stale"],

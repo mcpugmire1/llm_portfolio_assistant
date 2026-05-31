@@ -1,5 +1,5 @@
 """
-BDD Step Definitions for Ask MattGPT — Nonsense rejection banner + chip sets.
+BDD Step Definitions for Ask Agy — Nonsense rejection banner + chip sets.
 
 Implements the 10 scenarios in tests/bdd/features/ask_mattgpt.feature.
 Step definitions use Playwright (via the shared browser_page fixture in
@@ -58,17 +58,17 @@ def _wait_for_navbar_stable(page, timeout: int = 30000) -> None:
 
     Mirrors tests/bdd/steps/test_role_match.py:_wait_for_navbar_stable —
     Streamlit converts spaces in container keys to dashes in CSS class names,
-    so `key="topnav_Ask MattGPT"` produces class `st-key-topnav_Ask-MattGPT`.
+    so `key="topnav_Ask Agy"` produces class `st-key-topnav_Ask-Agy`.
     """
     page.wait_for_function(
         """
         () => {
             const classes = [
                 'st-key-topnav_Home',
-                'st-key-topnav_Explore-Stories',
-                'st-key-topnav_Ask-MattGPT',
+                'st-key-topnav_My-Work',
+                'st-key-topnav_Ask-Agy',
                 'st-key-topnav_Role-Match',
-                'st-key-topnav_About-Matt'
+                'st-key-topnav_My-Profile'
             ];
             return classes.every(c => document.querySelector('.' + c) !== null);
         }
@@ -79,8 +79,8 @@ def _wait_for_navbar_stable(page, timeout: int = 30000) -> None:
 
 # Desktop navbar selectors — Streamlit converts spaces in container keys
 # to dashes in CSS class names.
-ASK_MATTGPT_NAV_SELECTOR = ".st-key-topnav_Ask-MattGPT button"
-EXPLORE_STORIES_NAV_SELECTOR = ".st-key-topnav_Explore-Stories button"
+ASK_AGY_NAV_SELECTOR = ".st-key-topnav_Ask-Agy button"
+MY_WORK_NAV_SELECTOR = ".st-key-topnav_My-Work button"
 
 
 # =============================================================================
@@ -89,7 +89,7 @@ EXPLORE_STORIES_NAV_SELECTOR = ".st-key-topnav_Explore-Stories button"
 
 
 def submit_query(page, query: str):
-    """Type a query into Ask MattGPT and submit.
+    """Type a query into Ask Agy and submit.
 
     Two render paths:
       - First query: landing view → st.text_input(key="landing_input") +
@@ -202,9 +202,9 @@ def get_visible_chip_labels(page) -> list[str]:
 # =============================================================================
 
 
-@given("the user navigates to Ask MattGPT")
+@given("the user navigates to Ask Agy")
 def navigate_to_ask_mattgpt(browser_page, app_url):
-    """Navigate to the Ask MattGPT page via the desktop navbar.
+    """Navigate to the Ask Agy page via the desktop navbar.
 
     Wait for the landing view's input (st.text_input keyed "landing_input")
     to render. Conversation view's st.chat_input only appears after a query
@@ -213,18 +213,18 @@ def navigate_to_ask_mattgpt(browser_page, app_url):
     browser_page.goto(app_url)
     browser_page.wait_for_load_state("networkidle")
     _wait_for_navbar_stable(browser_page)
-    browser_page.locator(ASK_MATTGPT_NAV_SELECTOR).first.click()
+    browser_page.locator(ASK_AGY_NAV_SELECTOR).first.click()
     wait_for_streamlit_rerun(browser_page)
     browser_page.wait_for_selector("[class*='st-key-landing_input']", timeout=15000)
 
 
-@given("the user navigates to Explore Stories")
+@given("the user navigates to My Work")
 def navigate_to_explore_stories(browser_page, app_url):
-    """Navigate to Explore Stories via the desktop navbar."""
+    """Navigate to My Work via the desktop navbar."""
     browser_page.goto(app_url)
     browser_page.wait_for_load_state("networkidle")
     _wait_for_navbar_stable(browser_page)
-    browser_page.locator(EXPLORE_STORIES_NAV_SELECTOR).first.click()
+    browser_page.locator(MY_WORK_NAV_SELECTOR).first.click()
     wait_for_streamlit_rerun(browser_page)
 
 
@@ -288,7 +288,7 @@ def when_response_generated(browser_page):
 
 @when(parsers.parse('the user types "{query}" in the search box'))
 def when_user_types_in_search(browser_page, query):
-    """Explore Stories search box."""
+    """My Work search box."""
     search = browser_page.locator("input[type='text']").first
     search.fill(query)
 
@@ -337,7 +337,7 @@ def then_banner_displayed(browser_page, reason):
 
 @then("the rejection banner should be displayed")
 def then_rejection_banner_displayed(browser_page):
-    """Generic version for Explore Stories context."""
+    """Generic version for My Work context."""
     banner = browser_page.locator(".no-match-banner").first
     assert banner.is_visible(), "Rejection banner not visible"
 
@@ -444,7 +444,7 @@ def then_no_chips_visible(browser_page):
 @then("zero chips should be visible")
 def then_zero_chips_visible(browser_page):
     """Equivalent to 'no chips' — phrased differently in low_confidence
-    and Explore Stories scenarios for readability."""
+    and My Work scenarios for readability."""
     visible = get_visible_chip_labels(browser_page)
     assert len(visible) == 0, f"Expected zero chips; found {len(visible)}: {visible!r}"
 

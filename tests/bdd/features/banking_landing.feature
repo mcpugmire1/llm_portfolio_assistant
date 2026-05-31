@@ -24,20 +24,20 @@ Feature: Banking Landing Page Capability Cards
   # ---------------------------------------------------------------------------
   # REGRESSION TEST — fully wired
   # The contract pinned here is what the data-derivation refactor guarantees:
-  # any card visible on the page leads to a non-empty Explore Stories result.
+  # any card visible on the page leads to a non-empty My Work result.
   # If this fails, the page is showing a card that doesn't exist in the data.
   # ---------------------------------------------------------------------------
 
-  Scenario: Clicking the top Core capability card lands on a filtered Explore Stories with results
+  Scenario: Clicking the top Core capability card lands on a filtered My Work with results
     When the user clicks the top capability card
-    Then the active tab should be "Explore Stories"
+    Then the active tab should be "My Work"
     And the result count should be greater than 0
 
   # ---------------------------------------------------------------------------
   # SCROLL-POSITION REGRESSION
   # Landing → Explore handoff must reset scroll. Streamlit preserves scroll
   # position across reruns by default, so a user who scrolled down to click a
-  # capability card ends up on Explore Stories still scrolled down — the hero
+  # capability card ends up on My Work still scrolled down — the hero
   # and filter strip render above the viewport. Pre-fix: only the
   # prefilter_era branch in explore_stories.py reset scroll, so Timeline →
   # Explore worked but landing-card → Explore didn't. Same symptom class as
@@ -45,11 +45,11 @@ Feature: Banking Landing Page Capability Cards
   # handoff.
   # ---------------------------------------------------------------------------
 
-  Scenario: Clicking a capability card lands on Explore Stories scrolled to the top
+  Scenario: Clicking a capability card lands on My Work scrolled to the top
     Given the user has scrolled down to view a capability card
     When the user clicks the top capability card
-    Then the active tab should be "Explore Stories"
-    And the Explore Stories page should be scrolled to the top
+    Then the active tab should be "My Work"
+    And the My Work page should be scrolled to the top
 
   # ---------------------------------------------------------------------------
   # DOCUMENTED CONTRACTS — step defs pending (MATTGPT-060)

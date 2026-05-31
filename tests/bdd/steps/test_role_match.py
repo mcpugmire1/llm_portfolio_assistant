@@ -341,10 +341,10 @@ def _wait_for_navbar_stable(page, timeout: int = 30000) -> None:
         () => {
             const classes = [
                 'st-key-topnav_Home',
-                'st-key-topnav_Explore-Stories',
-                'st-key-topnav_Ask-MattGPT',
+                'st-key-topnav_My-Work',
+                'st-key-topnav_Ask-Agy',
                 'st-key-topnav_Role-Match',
-                'st-key-topnav_About-Matt'
+                'st-key-topnav_My-Profile'
             ];
             return classes.every(c => document.querySelector('.' + c) !== null);
         }
@@ -465,33 +465,31 @@ def page_shows_input_and_button(browser_page):
     ).first.is_visible(), '"Match this role" button not visible'
 
 
-@then(
-    '"Role Match" appears in the navigation bar between "Ask MattGPT" and "About Matt"'
-)
+@then('"Role Match" appears in the navigation bar between "Ask Agy" and "My Profile"')
 def role_match_in_navbar_between_ask_and_about(browser_page):
     # All three labels must be present and visible in the navbar.
     assert (
-        browser_page.locator("button:has-text('Ask MattGPT'):visible").count() > 0
-    ), "'Ask MattGPT' nav button not visible"
+        browser_page.locator("button:has-text('Ask Agy'):visible").count() > 0
+    ), "'Ask Agy' nav button not visible"
     assert (
         browser_page.locator("button:has-text('Role Match'):visible").count() > 0
     ), "'Role Match' nav button not visible"
     assert (
-        browser_page.locator("button:has-text('About Matt'):visible").count() > 0
-    ), "'About Matt' nav button not visible"
+        browser_page.locator("button:has-text('My Profile'):visible").count() > 0
+    ), "'My Profile' nav button not visible"
 
-    # Order: Role Match should appear after Ask MattGPT and before About Matt.
+    # Order: Role Match should appear after Ask Agy and before My Profile.
     # Use bounding boxes to verify left-to-right ordering.
-    ask = browser_page.locator("button:has-text('Ask MattGPT'):visible").first
+    ask = browser_page.locator("button:has-text('Ask Agy'):visible").first
     role = browser_page.locator("button:has-text('Role Match'):visible").first
-    about = browser_page.locator("button:has-text('About Matt'):visible").first
+    about = browser_page.locator("button:has-text('My Profile'):visible").first
 
     ask_box = ask.bounding_box()
     role_box = role.bounding_box()
     about_box = about.bounding_box()
     assert ask_box and role_box and about_box, "Could not measure nav button positions"
     assert ask_box["x"] < role_box["x"] < about_box["x"], (
-        "Role Match nav button not positioned between Ask MattGPT and About Matt "
+        "Role Match nav button not positioned between Ask Agy and My Profile "
         f"(ask.x={ask_box['x']}, role.x={role_box['x']}, about.x={about_box['x']})"
     )
 
@@ -820,8 +818,8 @@ def when_user_submits_empty(browser_page):
 
 @when("the user navigates to another tab and returns to Role Match")
 def when_user_navigates_away_and_back(browser_page):
-    """In-app navigation — click About Matt then click Role Match."""
-    browser_page.locator(".st-key-topnav_About-Matt button").first.click()
+    """In-app navigation — click My Profile then click Role Match."""
+    browser_page.locator(".st-key-topnav_My-Profile button").first.click()
     wait_for_streamlit_rerun(browser_page)
     browser_page.locator(ROLE_MATCH_NAV_SELECTOR).first.click()
     wait_for_streamlit_rerun(browser_page)

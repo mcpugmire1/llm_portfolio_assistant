@@ -5,7 +5,7 @@ Why this exists: the May 13, 2026 chip CX adds three suggested-question
 chips to the Quick Question card on Home. Each chip must set the same three
 session-state keys that ui/components/story_detail.py::on_ask_this_story
 sets — seed_prompt (literal question), __ask_from_suggestion__ (True), and
-active_tab ("Ask MattGPT") — and call st.rerun(). The consumer side
+active_tab ("Ask Agy") — and call st.rerun(). The consumer side
 (conversation_view.py::165) already handles the rest by popping seed_prompt
 and firing the query.
 
@@ -83,7 +83,7 @@ class TestOnChipClick:
         )
 
     def test_sets_active_tab_to_ask_mattgpt(self):
-        """The handler navigates to Ask MattGPT by setting active_tab.
+        """The handler navigates to Ask Agy by setting active_tab.
         No skip_home_menu / other flags are needed — conversation_view's
         seed_prompt check handles the routing on the consumer side.
         """
@@ -96,8 +96,8 @@ class TestOnChipClick:
         ):
             category_cards.on_chip_click(CHIP_QUESTIONS[0])
 
-        assert state.get("active_tab") == "Ask MattGPT", (
-            f"active_tab must route to 'Ask MattGPT' after chip click. "
+        assert state.get("active_tab") == "Ask Agy", (
+            f"active_tab must route to 'Ask Agy' after chip click. "
             f"Got: {state.get('active_tab')!r}"
         )
 

@@ -13,7 +13,7 @@ from ui.components.category_cards import on_chip_click
 # "See It In Action" card. Exposed as a module-level constant so BDD tests
 # (tests/bdd/steps/test_about_matt.py) and any future eval pinning can
 # import the exact prompts. Editing this list changes both the rendered
-# button labels AND the auto-fired Ask MattGPT prompts; the two are
+# button labels AND the auto-fired Ask Agy prompts; the two are
 # intentionally identical (DOM-observable contract).
 ABOUT_MATT_SEED_QUESTIONS = [
     "How did Matt scale engineering teams from 4 to 150+ people?",
@@ -367,7 +367,7 @@ def generate(stories: list, intent_family: str) -&gt; str:
 
     # Design Spec Link
     st.markdown(
-        """
+        """I
 <div class="deep-dive-card" style="margin-top: 2rem; margin-bottom: 2rem;">
     <p style="margin: 0; font-size: 1rem; line-height: 1.6; text-align: center;">
         I documented the entire product development process — from strategy through architecture to implementation.
@@ -392,7 +392,7 @@ def generate(stories: list, intent_family: str) -&gt; str:
     # the chip buttons as DOM children — true containment, not visual-only
     # siblings. Click handlers go through on_chip_click
     # (ui/components/category_cards.py) which sets seed_prompt +
-    # __ask_from_suggestion__ + active_tab="Ask MattGPT". Prompts come from
+    # __ask_from_suggestion__ + active_tab="Ask Agy". Prompts come from
     # ABOUT_MATT_SEED_QUESTIONS at module top.
     with st.container(key="about_matt_cta_card"):
         st.markdown(

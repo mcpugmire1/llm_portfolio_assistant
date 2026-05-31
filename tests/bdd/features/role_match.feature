@@ -9,7 +9,7 @@ Feature: Role Match page
 
   Scenario: Role Match tab appears in navigation
     Given the user is on any page
-    Then "Role Match" appears in the navigation bar between "Ask MattGPT" and "About Matt"
+    Then "Role Match" appears in the navigation bar between "Ask Agy" and "My Profile"
 
   Scenario: Clicking Role Match tab navigates to the page
     Given the user is on any page

@@ -1,10 +1,10 @@
-Feature: Explore Stories
+Feature: My Work
   As a visitor to MattGPT
   I want to browse and filter Matt's transformation stories
   So that I can find relevant experience for my needs
 
   Background:
-    Given the user navigates to the Explore Stories page
+    Given the user navigates to the My Work page
     And the page has finished loading
 
   # =============================================================================
@@ -164,23 +164,23 @@ Feature: Explore Stories
     When the user clicks on a story card
     Then the "Ask Agy About This" button should be visible
 
-  Scenario: Ask Agy navigates to Ask MattGPT with context
+  Scenario: Ask Agy navigates to Ask Agy with context
     Given the user has opened a story detail
     When the user clicks "Ask Agy About This"
-    Then the page should navigate to Ask MattGPT
+    Then the page should navigate to Ask Agy
     And the question should reference the story
 
   Scenario: Ask Agy works from Table view
     Given the user is in Table view
     When the user clicks on a story row
     And the user clicks "Ask Agy About This"
-    Then the page should navigate to Ask MattGPT
+    Then the page should navigate to Ask Agy
 
   Scenario: Ask Agy works from Cards view
     Given the user is in Cards view
     When the user clicks on a story card
     And the user clicks "Ask Agy About This"
-    Then the page should navigate to Ask MattGPT
+    Then the page should navigate to Ask Agy
 
   # =============================================================================
   # DEEPLINKS
@@ -236,32 +236,32 @@ Feature: Explore Stories
   # NAVIGATION - ALWAYS START FRESH
   # =============================================================================
 
-  # UX Rule: Explore Stories is a browsing experience, not a working session.
+  # UX Rule: My Work is a browsing experience, not a working session.
   # Users expect a fresh start when they navigate back.
   # Retaining state creates confusion ("why is this old story showing?").
   # 0 extra steps to start fresh vs 2-3 steps to clear stale state.
 
-  Scenario: Navigation to Explore Stories always starts fresh
-    Given the user was previously on Explore Stories with filters and a story open
+  Scenario: Navigation to My Work always starts fresh
+    Given the user was previously on My Work with filters and a story open
     When the user navigates away and returns
     Then all filters should be cleared
     And the search box should be empty
     And no story detail should be open
 
-  Scenario: Return from Ask MattGPT starts fresh
+  Scenario: Return from Ask Agy starts fresh
     Given the user has searched for "payments"
     And the user has selected "Financial Services / Banking" from the Industry filter
     And the user has opened a story detail
     When the user clicks "Ask Agy About This"
-    And the user navigates back to Explore Stories
+    And the user navigates back to My Work
     Then all filters should be cleared
     And the search box should be empty
     And no story detail should be open
 
-  Scenario: Return from About page starts fresh
+  Scenario: Return from My Profile page starts fresh
     Given the user has searched for "payments"
-    When the user navigates to About Matt
-    And the user navigates back to Explore Stories
+    When the user navigates to My Profile
+    And the user navigates back to My Work
     Then all filters should be cleared
     And the search box should be empty
 
@@ -323,12 +323,12 @@ Feature: Explore Stories
   # Regression guard for May 23, 2026 finding: explore_stories.py passes the
   # raw nonsense_check category (e.g., "jokes_riddles") to render_no_match_banner
   # but the BANNER_COPY branching in utils/ui_helpers.py expects the
-  # "rule:<category>" prefix (the Ask MattGPT convention). Result: rule:*
-  # nonsense queries on Explore Stories fall through to the legacy catch-all
+  # "rule:<category>" prefix (the Ask Agy convention). Result: rule:*
+  # nonsense queries on My Work fall through to the legacy catch-all
   # banner copy ("I can't help with that...") instead of the locked Plott
   # Hound copy from BANNER_COPY["rule"]. This scenario locks the correct
   # behavior so the fix doesn't regress.
-  Scenario: Nonsense-filter query gets the rule:* banner copy on Explore Stories
+  Scenario: Nonsense-filter query gets the rule:* banner copy on My Work
     When the user types "Tell me a joke about Matt's career" in the search box
     And the user presses Enter
     Then the rejection banner should be displayed

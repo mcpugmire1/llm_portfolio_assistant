@@ -97,5 +97,5 @@ def render_footer():
 
     # Hidden Streamlit button
     if st.button("", key="footer_ask"):
-        st.session_state["active_tab"] = "Ask MattGPT"
+        st.session_state["active_tab"] = "Ask Agy"
         st.rerun()

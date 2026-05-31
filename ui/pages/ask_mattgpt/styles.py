@@ -1,21 +1,21 @@
 """
-Ask MattGPT Styles Module
+Ask Agy Styles Module
 
-Centralized CSS styles for Ask MattGPT landing and conversation views.
+Centralized CSS styles for Ask Agy landing and conversation views.
 Extracted from inline styles to improve maintainability.
 """
 
 """
-Ask MattGPT Styles Module
+Ask Agy Styles Module
 
-Centralized CSS styles for Ask MattGPT landing and conversation views.
+Centralized CSS styles for Ask Agy landing and conversation views.
 Extracted from inline styles to improve maintainability.
 """
 
 
 def get_landing_css() -> str:
     """
-    CSS styles for Ask MattGPT landing page.
+    CSS styles for Ask Agy landing page.
 
     Includes:
     - Purple header with Agy avatar
@@ -852,7 +852,7 @@ def get_loading_animation_css() -> str:
 
 def get_conversation_css() -> str:
     """
-    CSS styles for Ask MattGPT conversation view.
+    CSS styles for Ask Agy conversation view.
 
     Includes:
     - Conversation header

@@ -529,7 +529,7 @@ def render_banking_landing(stories: list[dict]):
         flow did (prefilter_industry, prefilter_capability, return_to_landing).
         The prefilter_capability value is now data-derived (a real Solution/
         Offering string from the corpus), so the Capability dropdown widget
-        on Explore Stories can't silently sanitize it to "All" anymore.
+        on My Work can't silently sanitize it to "All" anymore.
         """
         muted_cls = " muted" if muted else ""
         for row_start in range(0, len(card_list), 3):
@@ -588,7 +588,7 @@ def render_banking_landing(stories: list[dict]):
                         )
                         st.session_state["prefilter_capability"] = card["title"]
                         st.session_state["return_to_landing"] = "banking"
-                        st.session_state["active_tab"] = "Explore Stories"
+                        st.session_state["active_tab"] = "My Work"
                         st.rerun()
 
     # Core Capabilities tier — cards with >=3 banking stories
@@ -627,7 +627,7 @@ def render_banking_landing(stories: list[dict]):
 
     # Hidden Streamlit button for CTA
     if st.button("", key="card_btn_banking_cta"):
-        st.session_state["active_tab"] = "Ask MattGPT"
+        st.session_state["active_tab"] = "Ask Agy"
         st.rerun()
 
     # JS click-bridge for cards + CTA button. Shared with cross_industry_landing

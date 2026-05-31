@@ -1,7 +1,7 @@
 """
-Ask MattGPT Landing View
+Ask Agy Landing View
 
-Landing page UI for Ask MattGPT with:
+Landing page UI for Ask Agy with:
 - Purple hero header with Agy introduction
 - Status bar showing system readiness
 - Suggestion chips for quick starts
@@ -29,7 +29,7 @@ from ui.pages.ask_mattgpt.styles import get_landing_css
 
 def render_landing_page(stories: list[dict]):
     """
-    Render the Ask MattGPT landing page (empty state) matching the wireframe.
+    Render the Ask Agy landing page (empty state) matching the wireframe.
     NAVBAR IS RENDERED BY PARENT - NO NAVBAR CSS HERE
     """
 
@@ -79,7 +79,7 @@ def render_landing_page(stories: list[dict]):
             </div>
             <h2 class="welcome-title">Hi, I'm Agy 🐾</h2>
             <p class="intro-text-primary">
-                Go deeper than a resume. Ask me anything about Matt's 130+ projects—I'll connect the dots.
+                Go deeper than a resume. Ask me anything about Matt's 100+ projects—I'll connect the dots.
             </p>
             <p style="font-size: 13px; font-style: italic; color: var(--text-muted); margin-top: 2px; margin-bottom: 0;">
                 Named in honor of Matt's Plott Hound companion.
@@ -241,7 +241,7 @@ def render_landing_page(stories: list[dict]):
 
     st.markdown('</div>', unsafe_allow_html=True)
     st.markdown(
-        '<p class="powered-by-text">Powered by OpenAI GPT-4o with semantic search across 130+ project case studies</p>',
+        '<p class="powered-by-text">Powered by OpenAI GPT-4o with semantic search across 100+ project case studies</p>',
         unsafe_allow_html=True,
     )
 

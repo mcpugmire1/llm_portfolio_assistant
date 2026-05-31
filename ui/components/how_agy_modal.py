@@ -823,7 +823,7 @@ def get_technical_details_html() -> str:
                 <!-- Stats Bar -->
                 <div class="stats-bar">
                     <div class="stat">
-                        <div class="stat-value">130+</div>
+                        <div class="stat-value">100+</div>
                         <div class="stat-label">Stories</div>
                     </div>
                     <div class="stat-divider"></div>

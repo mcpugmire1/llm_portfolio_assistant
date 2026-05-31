@@ -1,7 +1,7 @@
 """
 Conversation View Helper Functions
 
-Rendering helpers specific to Ask MattGPT conversation view.
+Rendering helpers specific to Ask Agy conversation view.
 Extracted from monolithic ask_mattgpt.py in Phase 5.1.
 """
 
@@ -673,7 +673,7 @@ def _render_ask_transcript(stories: list[dict]):
                                             # Preserve active_tab before any state changes
                                             if "active_tab" not in st.session_state:
                                                 st.session_state["active_tab"] = (
-                                                    "Ask MattGPT"
+                                                    "Ask Agy"
                                                 )
 
                                             if current_expanded == expanded_key:

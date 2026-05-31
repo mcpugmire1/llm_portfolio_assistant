@@ -3,8 +3,8 @@
 Why this exists: until May 13, 2026, log_query() had no bot filter. The
 page_load path was guarded in app.py (MONITORING_BOT_SIGNATURES check) and
 the role_match path was guarded at call sites (is_bot() in role_match.py
-and action_buttons.py), but log_query() — used by Ask Agy and Explore
-Stories — logged unconditionally. Result: HeadlessChrome and UptimeRobot
+and action_buttons.py), but log_query() — used by Ask Agy and My
+Work — logged unconditionally. Result: HeadlessChrome and UptimeRobot
 queries leaked into the production query log alongside real user queries,
 making conversion / bounce analysis unreliable.
 
@@ -33,7 +33,7 @@ class TestLogQueryBotFilter:
         """HeadlessChrome UA must not trigger a row append.
 
         The Chrome agent's regression tests run under a HeadlessChrome UA and
-        send real queries (e.g., "banking" on Explore Stories). Pre-fix, those
+        send real queries (e.g., "banking" on My Work). Pre-fix, those
         landed in the production log — the May 12 query-log dump showed 4
         HeadlessChrome "banking" queries that should never have been written.
         """
@@ -48,7 +48,7 @@ class TestLogQueryBotFilter:
             patch.object(query_logger.st, "context", ctx),
             patch.object(query_logger, "Thread") as mock_thread,
         ):
-            query_logger.log_query("banking", page="Explore Stories")
+            query_logger.log_query("banking", page="My Work")
             mock_thread.assert_not_called()
 
     def test_log_query_skipped_for_uptimerobot(self):

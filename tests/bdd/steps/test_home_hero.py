@@ -2,7 +2,7 @@
 BDD step bindings for the Home hero recruiter-routing CTA (MATTGPT-087).
 
 Red (step defs) commit: step definitions are implemented and bound via the
-scenarios() loader. Against the current hero (Ask Agy primary, Explore Stories
+scenarios() loader. Against the current hero (Ask Agy primary, My Work
 secondary, NO recruiter CTA) both scenarios fail with assertion errors — the
 recruiter-routing CTA does not exist yet. The hero.py production change lands in
 the Green commit per the CLAUDE.md testing protocol.

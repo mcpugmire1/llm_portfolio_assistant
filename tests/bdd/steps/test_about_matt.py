@@ -1,8 +1,8 @@
 """
-BDD Step Definitions for About Matt — Content polish bundle (MATTGPT-068).
+BDD Step Definitions for My Profile — Content polish bundle (MATTGPT-068).
 
 Red (step defs) gate state: step definitions bound, scenarios run end-to-end
-against the unchanged About Matt page. All 7 are expected to fail with
+against the unchanged My Profile page. All 7 are expected to fail with
 AssertionError (not StepDefinitionNotFoundError, not ImportError, not
 raw TimeoutError before any assertion runs). The Green commit will add the
 production code that flips these to passing.
@@ -55,15 +55,15 @@ def _wait_for_streamlit_rerun(page):
 
 
 # =============================================================================
-# GIVEN — Navigation to About Matt
+# GIVEN — Navigation to My Profile
 # =============================================================================
 
 
-@given("the user navigates to the About Matt page")
+@given("the user navigates to the My Profile page")
 def navigate_to_about_matt(browser_page, app_url):
-    """Open the app and click the About Matt tab in the top nav.
+    """Open the app and click the My Profile tab in the top nav.
 
-    The .about-header div is unique to About Matt (ui/pages/about_matt.py
+    The .about-header div is unique to My Profile (ui/pages/about_matt.py
     line 842) and is the first element rendered on the page — its visibility
     confirms the active_tab switch landed and the page rendered.
 
@@ -80,14 +80,16 @@ def navigate_to_about_matt(browser_page, app_url):
     browser_page.goto(app_url)
     browser_page.wait_for_load_state("networkidle")
     try:
-        nav_btn = browser_page.locator("[class*='st-key-topnav_About'] button").first
+        nav_btn = browser_page.locator(
+            "[class*='st-key-topnav_My-Profile'] button"
+        ).first
         nav_btn.wait_for(state="visible", timeout=NAV_TIMEOUT)
         nav_btn.dispatch_event("click")
     except Exception as exc:
         raise AssertionError(
-            "About Matt top-nav button not found within "
+            "My Profile top-nav button not found within "
             f"{NAV_TIMEOUT}ms. Selector "
-            "'[class*=\"st-key-topnav_About\"] button' did not match a "
+            "'[class*=\"st-key-topnav_My-Profile\"] button' did not match a "
             "visible element — navbar key pattern may have changed. "
             f"Underlying error: {exc}"
         ) from exc
@@ -96,7 +98,7 @@ def navigate_to_about_matt(browser_page, app_url):
         browser_page.wait_for_selector(".about-header", timeout=LONG_TIMEOUT)
     except Exception as exc:
         raise AssertionError(
-            "About Matt page did not render within "
+            "My Profile page did not render within "
             f"{LONG_TIMEOUT}ms after clicking the top-nav button. "
             "Expected .about-header div not visible — page structure may "
             f"have changed. Underlying error: {exc}"
@@ -196,7 +198,7 @@ def assert_legacy_li_lines_absent(browser_page):
 
 
 # =============================================================================
-# SCENARIO 2 — Click routes to Ask MattGPT and auto-fires the question
+# SCENARIO 2 — Click routes to Ask Agy and auto-fires the question
 # =============================================================================
 
 
@@ -218,18 +220,18 @@ def click_first_sample_question(browser_page):
     _wait_for_streamlit_rerun(browser_page)
 
 
-@then("the Ask MattGPT conversation view should be visible")
+@then("the Ask Agy conversation view should be visible")
 def assert_ask_mattgpt_conversation_visible(browser_page):
-    # .stChatMessage is unique to the Ask MattGPT conversation view —
+    # .stChatMessage is unique to the Ask Agy conversation view —
     # the landing view doesn't render chat messages. Its presence proves
     # the active_tab switch + seed-prompt auto-fire both happened.
     try:
         browser_page.wait_for_selector(".stChatMessage", timeout=LONG_TIMEOUT)
     except Exception as exc:
         raise AssertionError(
-            "Ask MattGPT conversation view did not render within "
+            "Ask Agy conversation view did not render within "
             f"{LONG_TIMEOUT}ms after clicking a sample question. Per "
-            "MATTGPT-068, click routing must set active_tab='Ask MattGPT' "
+            "MATTGPT-068, click routing must set active_tab='Ask Agy' "
             "and trigger seed_prompt auto-fire so a chat transcript appears. "
             f"Underlying error: {exc}"
         ) from exc
@@ -287,7 +289,7 @@ def assert_assistant_response_streams(browser_page):
 def assert_text_absent(browser_page, needle):
     body_text = browser_page.locator("body").inner_text()
     assert needle not in body_text, (
-        f"Text {needle!r} is still present on the About Matt page. "
+        f"Text {needle!r} is still present on the My Profile page. "
         f"Per MATTGPT-068, the redundant CTA footer copy at "
         f"about_matt.py:1205-1208 must be removed once sample questions are "
         f"clickable."

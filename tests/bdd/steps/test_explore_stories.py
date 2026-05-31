@@ -1,5 +1,5 @@
 """
-BDD Step Definitions for Explore Stories
+BDD Step Definitions for My Work
 
 These step definitions use Playwright for browser automation.
 Install with: pip install pytest-bdd playwright
@@ -48,7 +48,7 @@ def wait_for_streamlit_rerun(page):
 # =============================================================================
 
 
-# Selector for detecting Ask MattGPT page (landing OR conversation view)
+# Selector for detecting Ask Agy page (landing OR conversation view)
 ASK_MATTGPT_SELECTORS = (
     ".st-key-intro_section, [data-testid='stChatInput'], .conversation-powered-by"
 )
@@ -59,16 +59,14 @@ ASK_MATTGPT_SELECTORS = (
 # =============================================================================
 
 
-@given("the user navigates to the Explore Stories page")
+@given("the user navigates to the My Work page")
 def navigate_to_explore(browser_page, app_url):
     browser_page.goto(app_url)
     browser_page.wait_for_load_state("networkidle")
-    # Wait for Streamlit to finish loading - look for any button with "Explore Stories" text
-    browser_page.wait_for_selector("button:has-text('Explore Stories')", timeout=30000)
-    # Click Explore Stories button (avoid hidden mobile nav by using visible filter)
-    nav_button = browser_page.locator(
-        "button:has-text('Explore Stories'):visible"
-    ).first
+    # Wait for Streamlit to finish loading - look for any button with "My Work" text
+    browser_page.wait_for_selector("button:has-text('My Work')", timeout=30000)
+    # Click My Work button (avoid hidden mobile nav by using visible filter)
+    nav_button = browser_page.locator("button:has-text('My Work'):visible").first
     nav_button.click()
     browser_page.wait_for_load_state("networkidle")
 
@@ -76,7 +74,7 @@ def navigate_to_explore(browser_page, app_url):
 @given("the page has finished loading")
 def wait_for_page_load(browser_page):
     browser_page.wait_for_load_state("networkidle")
-    # Wait for Explore Stories page content - results count is always present
+    # Wait for My Work page content - results count is always present
     browser_page.wait_for_selector(".results-count", timeout=30000)
     # Wait for AgGrid to fully render (it loads async after Streamlit reruns)
     # AgGrid can take a while in headless mode
@@ -255,14 +253,12 @@ def verify_story_count(browser_page, count):
     pass
 
 
-@given("the user was previously on Explore Stories with filters and a story open")
+@given("the user was previously on My Work with filters and a story open")
 def user_was_previously_on_explore(browser_page, app_url):
-    # Navigate to Explore Stories
+    # Navigate to My Work
     browser_page.goto(app_url)
     browser_page.wait_for_load_state("networkidle")
-    nav_button = browser_page.locator(
-        "button:has-text('Explore Stories'):visible"
-    ).first
+    nav_button = browser_page.locator("button:has-text('My Work'):visible").first
     nav_button.click()
     browser_page.wait_for_load_state("networkidle")
 
@@ -518,13 +514,13 @@ def click_close_button(browser_page):
 def click_ask_agy(browser_page):
     # The Ask Agy button is an anchor with id "btn-ask-story"
     # Clicking it triggers JS that clicks a hidden Streamlit button
-    # Then Streamlit navigates to Ask MattGPT page
+    # Then Streamlit navigates to Ask Agy page
 
-    # Selectors for Ask MattGPT page (landing OR conversation view)
+    # Selectors for Ask Agy page (landing OR conversation view)
     ask_page_selector = ".ask-header-landing, .ask-header-conversation, .st-key-intro_section, [data-testid='stChatInput']"
 
     # Try the anchor button first
-    btn = browser_page.locator("#btn-ask-story, a:has-text('Ask Agy')").first
+    btn = browser_page.locator("#btn-ask-story").first
     if btn.count() > 0:
         btn.click()
         # Wait longer for JS + Streamlit rerun + page render
@@ -533,8 +529,8 @@ def click_ask_agy(browser_page):
         wait_for_content(browser_page, ask_page_selector, timeout=15000)
         return
 
-    # Fallback to any element with "Ask Agy" text
-    text_btn = browser_page.locator("text=Ask Agy").first
+    # Fallback to story-detail card button text (unique — mobile nav doesn't say "About This")
+    text_btn = browser_page.locator("text=About This").first
     if text_btn.count() > 0:
         text_btn.click()
         browser_page.wait_for_load_state("networkidle")
@@ -561,9 +557,9 @@ def click_share(browser_page):
 def navigate_with_params(browser_page, app_url, url_params):
     browser_page.goto(f"{app_url}{url_params}")
     browser_page.wait_for_load_state("networkidle")
-    # Deeplinks trigger a Streamlit rerun - wait for Explore Stories to load
+    # Deeplinks trigger a Streamlit rerun - wait for My Work to load
     if "?story=" in url_params:
-        # Wait for the page to redirect and render Explore Stories
+        # Wait for the page to redirect and render My Work
         wait_for_content(browser_page, ".results-count", timeout=15000)
         # Wait for story detail to open (deeplinks should auto-open the story)
         wait_for_content(
@@ -646,21 +642,19 @@ def rapid_toggle(browser_page, filter_name, times):
         browser_page.wait_for_timeout(100)
 
 
-@when("the user navigates to About Matt")
+@when("the user navigates to My Profile")
 def navigate_to_about(browser_page):
-    about_btn = browser_page.locator("button:has-text('About Matt'):visible").first
+    about_btn = browser_page.locator("button:has-text('My Profile'):visible").first
     about_btn.click()
     browser_page.wait_for_load_state("networkidle")
 
 
-@when("the user navigates back to Explore Stories")
+@when("the user navigates back to My Work")
 def navigate_back_to_explore(browser_page):
-    nav_button = browser_page.locator(
-        "button:has-text('Explore Stories'):visible"
-    ).first
+    nav_button = browser_page.locator("button:has-text('My Work'):visible").first
     nav_button.click()
     browser_page.wait_for_load_state("networkidle")
-    # Wait for Explore Stories page to fully load
+    # Wait for My Work page to fully load
     wait_for_content(browser_page, ".results-count", timeout=10000)
     # Allow Streamlit state to settle
     browser_page.wait_for_timeout(CONTENT_WAIT)
@@ -673,10 +667,8 @@ def navigate_away_and_return(browser_page):
     home_btn.click()
     browser_page.wait_for_load_state("networkidle")
 
-    # Navigate back to Explore Stories
-    nav_button = browser_page.locator(
-        "button:has-text('Explore Stories'):visible"
-    ).first
+    # Navigate back to My Work
+    nav_button = browser_page.locator("button:has-text('My Work'):visible").first
     nav_button.click()
     browser_page.wait_for_load_state("networkidle")
 
@@ -688,7 +680,7 @@ def navigate_away_and_return(browser_page):
 
 @then("the results count should update")
 def verify_results_count(browser_page):
-    # Results count div is always present on Explore Stories
+    # Results count div is always present on My Work
     wait_for_streamlit_rerun(browser_page)
     # The results count is rendered with class "results-count"
     count = browser_page.wait_for_selector(".results-count", timeout=10000)
@@ -848,18 +840,18 @@ def verify_client_role_filter(browser_page):
 @then(parsers.parse('the Era filter should be set to "{era}"'))
 def verify_era_filter(browser_page, era):
     # After clicking "Explore all" from Timeline, the Era filter should be set
-    # Wait for Explore Stories page to load
+    # Wait for My Work page to load
     wait_for_content(browser_page, ".results-count", timeout=5000)
 
     # Look for any Era filter/selectbox that shows a value (not "All Eras")
     era_select = browser_page.locator("[data-testid='stSelectbox']")
     if era_select.count() > 0:
-        # Check that we're on Explore Stories with some era filter active
+        # Check that we're on My Work with some era filter active
         results = browser_page.locator(".results-count")
-        assert results.is_visible(), "Should be on Explore Stories page with results"
+        assert results.is_visible(), "Should be on My Work page with results"
         return
 
-    # Fallback: just verify we're on Explore Stories with filtered results
+    # Fallback: just verify we're on My Work with filtered results
     assert browser_page.locator(".results-count").is_visible()
 
 
@@ -1085,27 +1077,16 @@ def verify_story_list(browser_page):
 
 @then('the "Ask Agy About This" button should be visible')
 def verify_ask_agy_button(browser_page):
-    # Ask Agy button is an anchor with id "btn-ask-story" or contains "Ask Agy" text
-    wait_for_content(
-        browser_page, "#btn-ask-story, a:has-text('Ask Agy')", timeout=5000
-    )
-
-    # Check for the anchor button
-    btn = browser_page.locator("#btn-ask-story, a:has-text('Ask Agy')")
-    if btn.count() > 0 and btn.first.is_visible():
-        return
-
-    # Check for any text containing "Ask Agy"
-    text = browser_page.locator("text=Ask Agy")
-    if text.count() > 0 and text.first.is_visible():
-        return
-
-    raise AssertionError("Ask Agy button not visible")
+    # Story-detail "Ask Agy 🐾 About This" button has unique ID #btn-ask-story
+    # (story_detail.py:867). Text-based fallbacks were removed because "Ask Agy"
+    # also appears on the (hidden) mobile-nav link after the MATTGPT-100 rename.
+    btn = browser_page.locator("#btn-ask-story").first
+    btn.wait_for(state="visible", timeout=5000)
 
 
-@then("the page should navigate to Ask MattGPT")
+@then("the page should navigate to Ask Agy")
 def verify_navigate_to_ask(browser_page):
-    # Check for Ask MattGPT page elements (header is most reliable)
+    # Check for Ask Agy page elements (header is most reliable)
     ask_page_selector = ".ask-header-landing, .ask-header-conversation, .st-key-intro_section, [data-testid='stChatInput']"
     browser_page.wait_for_selector(ask_page_selector, timeout=15000)
 
@@ -1148,13 +1129,11 @@ def verify_clipboard(browser_page, shared_browser, app_url):
 
     try:
         # Navigate to localhost with the story parameter
-        # First go to the app and click Explore Stories
+        # First go to the app and click My Work
         new_page.goto(app_url)
         new_page.wait_for_load_state("networkidle")
-        new_page.wait_for_selector("button:has-text('Explore Stories')", timeout=30000)
-        nav_button = new_page.locator(
-            "button:has-text('Explore Stories'):visible"
-        ).first
+        new_page.wait_for_selector("button:has-text('My Work')", timeout=30000)
+        nav_button = new_page.locator("button:has-text('My Work'):visible").first
         nav_button.click()
         new_page.wait_for_load_state("networkidle")
 
@@ -1329,7 +1308,7 @@ def verify_specific_view_mode(browser_page, view):
 def rejection_banner_displayed(browser_page):
     """Wait for the .no-match-banner DOM element to render after a rejected
     query. The banner is rendered by render_no_match_banner() in
-    utils/ui_helpers.py — present in both Ask MattGPT and Explore Stories
+    utils/ui_helpers.py — present in both Ask Agy and My Work
     surfaces with the same class hook."""
     browser_page.wait_for_selector(".no-match-banner", timeout=10000)
     banner = browser_page.locator(".no-match-banner").first

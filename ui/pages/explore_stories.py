@@ -1,7 +1,7 @@
 """
-Explore Stories Page - Refactored & Bug-Free
+My Work Page - Refactored & Bug-Free
 
-Browse 130+ project case studies with advanced filtering.
+Browse 100+ project case studies with advanced filtering.
 Includes semantic search, faceted filters, and pagination.
 
 FIXES:
@@ -101,8 +101,8 @@ def reset_all_filters(stories: list[dict]):
         "explore_view_mode",
         "page_size_select",
         "_prev_explore_view_mode",
-        # Preserves breadcrumb back-link state. When a user arrives at Explore
-        # Stories from a landing page (Banking / Cross-Industry), that landing
+        # Preserves breadcrumb back-link state. When a user arrives at My
+        # Work from a landing page (Banking / Cross-Industry), that landing
         # sets session_state["return_to_landing"]. Without this preserve entry,
         # clicking Reset Filters silently drops the back-link — the breadcrumb
         # chip vanishes even though the user came in via a landing flow.
@@ -163,7 +163,7 @@ def reset_all_filters(stories: list[dict]):
 
     # CRITICAL: Preserve the active tab
     if "active_tab" not in st.session_state:
-        st.session_state["active_tab"] = "Explore Stories"
+        st.session_state["active_tab"] = "My Work"
 
 
 def remove_filter_value(filter_key: str, value: str):
@@ -416,7 +416,7 @@ def render_filter_chips(filters: dict, stories: list[dict]) -> bool:
 
         # CRITICAL: Preserve the active tab before rerunning
         if "active_tab" not in st.session_state:
-            st.session_state["active_tab"] = "Explore Stories"
+            st.session_state["active_tab"] = "My Work"
 
         st.rerun()
         return True
@@ -616,7 +616,7 @@ def render_explore_stories(
     personas_all: list[str],
 ):
     """
-    Render the Explore Stories page with filters and project listings.
+    Render the My Work page with filters and project listings.
 
     FIXES:
     - Domain Category now actually filters
@@ -643,7 +643,7 @@ def render_explore_stories(
 
     explore_css = """<style>
     /* =============================================================================
-       EXPLORE STORIES CSS - CLEANED UP
+       MY WORK CSS - CLEANED UP
        Redundancies removed, device-specific rules preserved
        ============================================================================= */
 
@@ -1690,11 +1690,6 @@ def render_explore_stories(
     """
     st.markdown(explore_css, unsafe_allow_html=True)
 
-    legacy = {"Stories": "Explore Stories"}
-    cur = st.session_state.get("active_tab", "Home")
-    if cur in legacy:
-        st.session_state["active_tab"] = legacy[cur]
-
     st.markdown("<a id='stories_top'></a>", unsafe_allow_html=True)
 
     F = st.session_state["filters"]
@@ -1702,8 +1697,8 @@ def render_explore_stories(
     # Initialize pre-filters from landing pages (Phase 4)
     # Track whether any prefilter was consumed so we can reset scroll once at
     # the end. Streamlit preserves scrollTop on stMain across reruns, so a
-    # landing-card click (which scrolled the user down) lands on Explore
-    # Stories with the hero above the viewport. The pre-May-2026 fix lived
+    # landing-card click (which scrolled the user down) lands on My
+    # Work with the hero above the viewport. The pre-May-2026 fix lived
     # only inside prefilter_era AND targeted the legacy `section.main`
     # selector (which no longer exists in current Streamlit) — silently
     # no-op'd for Era *and* never fired for the other prefilters.
@@ -1964,9 +1959,9 @@ def render_explore_stories(
             # is_nonsense() returns the bare category string (e.g.,
             # "jokes_riddles"). render_no_match_banner expects the
             # "rule:<category>" prefix for the BANNER_COPY["rule"] branch
-            # to fire (mirrors the Ask MattGPT convention at
+            # to fire (mirrors the Ask Agy convention at
             # backend_service.py:1463). Without this prefix, rule:*
-            # nonsense queries on Explore Stories fell through to the
+            # nonsense queries on My Work fell through to the
             # legacy catch-all banner copy. May 23, 2026 fix.
             render_no_match_banner(
                 reason=f"rule:{nonsense_check}",
@@ -1984,7 +1979,7 @@ def render_explore_stories(
             if intent_family in ("personal", "out_of_scope"):
                 log_query(
                     current_query,
-                    "Explore Stories",
+                    "My Work",
                     intent_family=intent_family,
                     redirect_reason=f"semantic_router:{intent_family}",
                 )
@@ -2019,7 +2014,7 @@ def render_explore_stories(
                 st.session_state[LAST_QUERY] = current_query
                 log_query(
                     current_query,
-                    "Explore Stories",
+                    "My Work",
                     intent_family=intent_family,
                     confidence=confidence,
                     result_count=len(view),

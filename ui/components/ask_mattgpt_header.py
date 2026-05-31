@@ -1,5 +1,5 @@
 """
-Ask MattGPT Header Component
+Ask Agy Header Component
 
 Unified header component for both Landing and Conversation views.
 Includes header, "How Agy searches" button, modal wrapper, and status bar.
@@ -36,7 +36,7 @@ import streamlit.components.v1 as components
 
 def get_header_css() -> str:
     """
-    Returns CSS for the Ask MattGPT header, modal, and status bar.
+    Returns CSS for the Ask Agy header, modal, and status bar.
 
     Features:
     - 64px avatar with dark mode halo
@@ -47,7 +47,7 @@ def get_header_css() -> str:
     return """
     <style>
     /* ============================================================================
-       ASK MATTGPT HEADER - Used by both Landing and Conversation views
+       ASK MATTGPT/ASK AGY HEADER - Used by both Landing and Conversation views
        ============================================================================ */
 
     /* Base header styles - shared between views */
@@ -526,7 +526,7 @@ def get_header_css() -> str:
 
 def render_header(include_button: bool = True, view: str = "landing") -> None:
     """
-    Render the Ask MattGPT header.
+    Render the Ask Agy header.
 
     Args:
         include_button: Whether to include the "How Agy searches" button
@@ -566,7 +566,7 @@ def render_header(include_button: bool = True, view: str = "landing") -> None:
                         src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png"
                         alt="Agy"/>
                     <div class="header-text">
-                        <h1>Ask MattGPT</h1>
+                        <h1>Ask Agy</h1>
                         <p>Meet Agy 🐾 — Tracking down insights from 20+ years of transformation experience</p>
                     </div>
                 </div>
@@ -698,7 +698,7 @@ def render_status_bar() -> str:
             <span>Pinecone index <span class="status-value">ready</span></span>
         </div>
         <div class="status-item">
-            <span>130+ stories <span class="status-value">indexed</span></span>
+            <span>100+ stories <span class="status-value">indexed</span></span>
         </div>
     </div>
     """
@@ -1690,7 +1690,7 @@ def get_technical_details_html() -> str:
                 <!-- Stats Bar -->
                 <div class="stats-bar">
                     <div class="stat">
-                        <div class="stat-value">130+</div>
+                        <div class="stat-value">100+</div>
                         <div class="stat-label">Stories</div>
                     </div>
                     <div class="stat-divider"></div>

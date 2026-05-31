@@ -1,5 +1,5 @@
 """
-Timeline View Component for Explore Stories - V3 (Era-based)
+Timeline View Component for My Work - V3 (Era-based)
 
 Era-based timeline with progressive disclosure.
 - Groups stories by Era (career phase), not Role

@@ -1,5 +1,5 @@
 """
-Ask MattGPT Conversation View
+Ask Agy Conversation View
 
 Active conversation UI with:
 - Purple header with Agy branding
@@ -285,12 +285,12 @@ def render_conversation_view(stories: list[dict]):
     # ============================================================================
 
     user_input_local = None
-    if st.session_state.get("active_tab") == "Ask MattGPT":
+    if st.session_state.get("active_tab") == "Ask Agy":
         user_input_local = st.chat_input("Ask a follow-up...", key="ask_chat_input1")
 
         # Add "Powered by" text below input
         st.markdown(
-            '<div class="conversation-powered-by">Powered by OpenAI GPT-4o with semantic search across 130+ project case studies</div>',
+            '<div class="conversation-powered-by">Powered by OpenAI GPT-4o with semantic search across 100+ project case studies</div>',
             unsafe_allow_html=True,
         )
 

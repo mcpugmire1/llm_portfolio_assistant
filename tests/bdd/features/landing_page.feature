@@ -1,10 +1,10 @@
 Feature: Landing Page
-  As a visitor to Ask MattGPT
+  As a visitor to Ask Agy
   I want a clear and inviting landing page
   So that I understand how to interact with Agy and explore Matt's experience
 
   Background:
-    Given the user navigates to the Ask MattGPT page
+    Given the user navigates to the Ask Agy page
 
   # =============================================================================
   # VISUAL ELEMENTS

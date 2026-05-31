@@ -1,5 +1,5 @@
-Feature: About Matt — Content polish bundle (MATTGPT-068)
-  As a recruiter or hiring manager landing on About Matt
+Feature: My Profile — Content polish bundle (MATTGPT-068)
+  As a recruiter or hiring manager landing on My Profile
   I want the page to be scannable, interactive, and free of redundant content
   So that I can navigate to the section I need and try the AI assistant directly
   from the page that pitches it.
@@ -13,7 +13,7 @@ Feature: About Matt — Content polish bundle (MATTGPT-068)
   #     reliably in Streamlit without JS hackery; no validated user need.
   #     Section header ids and the post-hero nav are no longer required.
   #   - Stats bar parity (originally decision 1) — reverted. The 5-card
-  #     stats bar with "4x Delivery Acceleration" is restored on About Matt;
+  #     stats bar with "4x Delivery Acceleration" is restored on My Profile;
   #     the inconsistency with the Home hero's 4-card bar is accepted.
   # The chip-containment fix was also tightened to require true DOM nesting
   # inside the CTA card rather than the visual-only treatment of the
@@ -24,14 +24,14 @@ Feature: About Matt — Content polish bundle (MATTGPT-068)
   #      1199-1204 are currently <li> plain text inside a single st.markdown
   #      block. Convert to four st.button calls using the chip→Ask pattern from
   #      category_cards.py:55-57 / story_detail.py:203-218 (set seed_prompt +
-  #      __ask_from_suggestion__ + active_tab="Ask MattGPT", then st.rerun()).
+  #      __ask_from_suggestion__ + active_tab="Ask Agy", then st.rerun()).
   #      Define the four prompt strings as ABOUT_MATT_SEED_QUESTIONS at module
   #      scope so BDD + eval can import them. Per the May 27 wireframe, the
   #      buttons must render INSIDE the CTA card container (DOM-nested), not
   #      as visual-only siblings below it.
   #
   #   2. Click routing — when a sample question button is clicked, the user
-  #      should land on Ask MattGPT with the prompt pre-loaded and auto-fired.
+  #      should land on Ask Agy with the prompt pre-loaded and auto-fired.
   #      Assertion strategy is DOM-observable end-to-end UX (navigation visible,
   #      user message in chat, assistant response streaming) — Playwright cannot
   #      read st.session_state, so session-state assertions are deliberately
@@ -41,7 +41,7 @@ Feature: About Matt — Content polish bundle (MATTGPT-068)
   #      active_tab were set correctly.
   #
   #   3. Footer copy removal — once questions are clickable, the "Head to Ask
-  #      MattGPT in the navigation above" sentence and the "Real AI assistant •
+  #      Agy in the navigation above" sentence and the "Real AI assistant •
   #      130+ projects • Instant answers • Available 24/7" bullets (lines
   #      1205-1208) are redundant. Remove entirely. The May 27 wireframe also
   #      drops the "Try asking questions like:" label — chips speak for
@@ -61,12 +61,12 @@ Feature: About Matt — Content polish bundle (MATTGPT-068)
   #      by default — non-technical readers skip past, technical readers expand.
   #
   # CLAUDE.md "Streamlit markdown call count" rule applies to this page if any
-  # change touches CSS injection order. About Matt does NOT use the
-  # .conversation-header negative margin (that's role_match.py / Ask MattGPT),
+  # change touches CSS injection order. My Profile does NOT use the
+  # .conversation-header negative margin (that's role_match.py / Ask Agy),
   # but the principle of consolidating st.markdown calls still applies.
 
   Background:
-    Given the user navigates to the About Matt page
+    Given the user navigates to the My Profile page
 
   # ---------------------------------------------------------------------------
   # SAMPLE QUESTIONS CLICKABLE — buttons replace <li> text (decisions 1, 2)
@@ -77,9 +77,9 @@ Feature: About Matt — Content polish bundle (MATTGPT-068)
     And each button label should match a string in ABOUT_MATT_SEED_QUESTIONS
     And the four legacy <li> sample-question lines should not be present as plain text
 
-  Scenario: Clicking a sample question routes to Ask MattGPT and auto-fires the question
+  Scenario: Clicking a sample question routes to Ask Agy and auto-fires the question
     When the user clicks the first sample question button
-    Then the Ask MattGPT conversation view should be visible
+    Then the Ask Agy conversation view should be visible
     And a user message matching that button's label should be visible in the chat
     And an assistant response should begin streaming in the chat
 
@@ -88,7 +88,7 @@ Feature: About Matt — Content polish bundle (MATTGPT-068)
   # ---------------------------------------------------------------------------
 
   Scenario: Redundant CTA footer copy is absent from the See It In Action card
-    Then the text "Head to Ask MattGPT in the navigation above to try it yourself" should not appear on the page
+    Then the text "Head to Ask Agy in the navigation above to try it yourself" should not appear on the page
     And the text "Real AI assistant • 130+ projects • Instant answers • Available 24/7" should not appear on the page
 
   # ---------------------------------------------------------------------------

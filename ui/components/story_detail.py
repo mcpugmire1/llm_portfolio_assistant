@@ -2,7 +2,7 @@
 Story Detail Component - Shared Renderer
 
 Displays full STAR narrative with sidebar metadata.
-Used by both Explore Stories and Ask MattGPT pages.
+Used by both My Work and Ask Agy pages.
 """
 
 import streamlit as st
@@ -194,7 +194,7 @@ def on_ask_this_story(detail: dict):
     Sets up seed prompt for chip injection flow.
     """
     current_tab = st.session_state.get("active_tab", "")
-    is_in_ask_mattgpt = current_tab == "Ask MattGPT"
+    is_in_ask_mattgpt = current_tab == "Ask Agy"
 
     # Set story context
     st.session_state["active_story"] = detail.get("id")
@@ -214,8 +214,8 @@ def on_ask_this_story(detail: dict):
         st.session_state["transcript_source_expanded_id"] = None
         st.session_state["transcript_source_expanded_msg"] = None
     else:
-        # Navigate to Ask MattGPT
-        st.session_state["active_tab"] = "Ask MattGPT"
+        # Navigate to Ask Agy
+        st.session_state["active_tab"] = "Ask Agy"
 
     st.rerun()
 
