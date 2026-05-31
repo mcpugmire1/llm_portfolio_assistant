@@ -23,22 +23,82 @@ def render_navbar(current_tab: str = "Home"):
     # CSS only - mobile HTML injected via components.html
     st.markdown(
         """<style>
-div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) {
+/* Strip Streamlit's inner block margins specifically inside the brand column */
+div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"]:first-child div[data-testid="stVerticalBlock"] {
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 0 !important;
+}
+        /* Strip Streamlit's default element margin/padding from the brand container */
+div[data-testid="stColumn"]:has(.navbar-brand) div[data-testid="stBlock"] {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Outer block: the navbar itself */
+div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]):has(div[data-testid="stHorizontalBlock"]) {
     background: var(--dark-navy) !important;
-    padding: 16px 40px !important;
+    padding: 0 40px !important;
     margin: 40px 0 0 0 !important;
-    height: 72px !important;
+    min-height: 72px !important;
     border-radius: 0 !important;
+    align-items: center !important;
     position: relative !important;
     z-index: 999998 !important;
-    justify-content: space-evenly !important;
 }
-div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-testid="column"] {
-    background: var(--dark-navy) !important;
-    flex: 1 1 calc(20% - 1rem) !important;
-    width: calc(20% - 1rem) !important;
-    min-width: calc(20% - 1rem) !important;
-    max-width: calc(20% - 1rem) !important;
+
+/* Outer columns (brand_col, nav_container): center their content */
+div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]):has(div[data-testid="stHorizontalBlock"]) > div[data-testid="stColumn"] {
+    display: flex !important;
+    align-items: center !important;
+    min-height: 72px !important;
+}
+
+/* Inner block: transparent container, right-justify buttons */
+div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]):not(:has(div[data-testid="stHorizontalBlock"])) {
+    justify-content: flex-end !important;
+    align-items: center !important;
+    min-height: 72px !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+}
+
+/* Nav columns: natural width */
+div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]):not(:has(div[data-testid="stHorizontalBlock"])) > div[data-testid="stColumn"] {
+flex: 0 1 auto !important;
+    width: auto !important;
+    min-width: auto !important;
+    max-width: none !important;
+    background: transparent !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* Brand: just text, no positioning */
+/* Brand column needs position: relative to anchor the absolutely-positioned
+   .navbar-brand inside it. Streamlit's stMarkdown wrapper layers were
+   ignoring flex centering, so we use absolute positioning instead. */
+div[data-testid="stColumn"]:has(.navbar-brand) {
+    position: relative !important;
+    min-height: 72px !important;
+}
+.navbar-brand {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    left: 0 !important;
+    color: white;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    line-height: 1;
+}
+/* Strip default paragraph margin inside the brand column */
+div[data-testid="stColumn"]:first-child p {
+    margin-bottom: 0 !important;
 }
 [class*="st-key-topnav_"] button {
     background: transparent !important;
@@ -50,6 +110,7 @@ div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-t
     margin-top: 0 !important;
     white-space: nowrap !important;
     font-size: 14px !important;
+    width: auto !important;
 }
 [class*="st-key-topnav_"] button:hover {
     background: rgba(255, 255, 255, 0.1) !important;
@@ -187,20 +248,33 @@ div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-t
         unsafe_allow_html=True,
     )
 
-    # Desktop navigation buttons
-    with st.container():
-        labels = [
-            ("Home", "Home"),
-            ("My Work", "My Work"),
-            ("Ask Agy", "Ask Agy"),
-            ("Role Match", "Role Match"),
-            ("My Profile", "My Profile"),
-        ]
+    # Desktop navigation: brand-left (MATTGPT-106) + 5 nav buttons grouped right.
+    # Outer columns split [1, 4] = brand (~20%) + nav container (~80%). The 5
+    # nav buttons live inside the nav_container's nested 5-column block so the
+    # existing stHorizontalBlock:has([class*="st-key-topnav_"]) CSS scopes to
+    # the nested row only — the outer brand+container block doesn't get the
+    # navbar styling. Brand cell uses its own .navbar-brand styling (dark-navy
+    # bg, 72px height, 40px top margin) to align visually with the nav row.
+    labels = [
+        ("Home", "Home"),
+        ("My Work", "My Work"),
+        ("Ask Agy", "Ask Agy"),
+        ("Role Match", "Role Match"),
+        ("My Profile", "My Profile"),
+    ]
 
-        cols = st.columns(len(labels), gap="small")
+    brand_col, nav_container = st.columns([1, 4])
 
+    with brand_col:
+        st.markdown(
+            '<div class="navbar-brand">MattGPT</div>',
+            unsafe_allow_html=True,
+        )
+
+    with nav_container:
+        nav_cols = st.columns(len(labels), gap="small")
         for i, (label, name) in enumerate(labels):
-            with cols[i]:
+            with nav_cols[i]:
                 if st.button(
                     label,
                     use_container_width=True,
