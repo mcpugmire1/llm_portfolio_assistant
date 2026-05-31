@@ -120,6 +120,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-104](#mattgpt-104) | Banking + Cross-Industry landing pages — math reconciliation bug (33 vs 32 vs 48 vs 57 inconsistency) | Open | Medium | Issue | May 30, 2026 |
 | [MATTGPT-105](#mattgpt-105) | Explore Stories — Cards / Timeline / Table views lose CSS styling during Streamlit rerun (same family as MATTGPT-068) | Open | Medium | Issue | May 30, 2026 |
 | [MATTGPT-106](#mattgpt-106) | Navbar desktop layout — add MattGPT brand element, restructure to space-between (align with mobile + wireframe) | Open | Medium | Action | May 30, 2026 |
+| [MATTGPT-107](#mattgpt-107) | Home category cards redesign — unify card treatment, 3-column grid, compact content (align with wireframe) | Open | Medium | Action | May 31, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -2392,3 +2393,87 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
   - **MATTGPT-100** — Nav label rename (shipped); -106 is the layout-shape pair that didn't fit in -100's mechanical-rename scope
   - **MATTGPT-101** — Why Agy modal + "?" badge on Agy avatar. If the brand element includes the Agy avatar, the badge placement may need coordination with -101's design. May want to ship -106 before -101, or coordinate the avatar treatment in one pass.
 - **Logged:** May 30, 2026
+
+---
+
+### MATTGPT-107
+**Home category cards redesign — unify card treatment, 3-column grid, compact content (align with wireframe)**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Issue:** Home page category cards section was missed in the May 30, 2026 wireframe-driven ticket inventory. Production currently shows: 2-column grid, top 2 cards (Banking + Cross-Industry) with purple gradient + white text, remaining 4 with light bg, taller cards (~5 lines of content) with inline buttons + italic example-question lines. Wireframe (lines 76-85 of `MATTGPT_WIREFRAMES.html`) specs: 3-column grid, unified light-bg treatment across all 6 cards, compact cards (~3 lines of content), card itself as click target (no inline buttons, no example-question lines).
+- **Delta from production to wireframe (per the spec analysis):**
+
+  | Item | Production now | Wireframe spec |
+  |---|---|---|
+  | Columns | 2 | 3 |
+  | Top 2 cards | Purple gradient, white text | Same as other 4 (unified light bg) |
+  | Card content | Icon + title + description + (project pills OR italic Q examples) + button | Icon + title + one meta line |
+  | Card height | Tall (~5 content lines) | Compact (~3 content lines) |
+
+  Quick question strip stays as production has it (separate concern).
+
+- **Fix (CSS + HTML, well-specced):**
+
+  **Section header** (`.section-header` / `.section-header h2`):
+  ```css
+  .section-header { text-align: center; margin: 32px 0 20px 0; }
+  .section-header h2 { font-size: 24px; font-weight: 500; color: var(--text-primary); margin: 0; padding: 0; }
+  @media (max-width: 767px) {
+      .section-header { margin: 16px 0 12px 0; }
+      .section-header h2 { font-size: 18px; }
+  }
+  ```
+
+  **Card grid + cards** (`.home-cat-grid` / `.home-cat-card`):
+  ```css
+  .home-cat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      padding: 0 24px 32px;
+  }
+  .home-cat-card {
+      background: var(--color-bg-secondary, #f7f6f3);
+      border: 1px solid var(--color-border-tertiary, #dfdcd5);
+      border-radius: 8px;
+      padding: 24px;
+      cursor: pointer;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      text-decoration: none;
+      color: inherit;
+  }
+  .home-cat-card:hover {
+      border-color: var(--color-border-secondary, #c9c5bd);
+      transform: translateY(-1px);
+  }
+  .home-cat-icon { font-size: 28px; line-height: 1; }
+  .home-cat-title { font-size: 16px; font-weight: 600; margin: 0; color: var(--text-primary); }
+  .home-cat-meta { font-size: 13px; color: var(--color-text-secondary); margin: 0; line-height: 1.5; }
+  @media (max-width: 1024px) { .home-cat-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .home-cat-grid { grid-template-columns: 1fr; padding: 0 16px 24px; } .home-cat-card { padding: 18px; } }
+  ```
+
+  **HTML structure for the 6 cards** (drop the buttons, drop the italic Q lines, unify treatment): card content is icon + title + one meta line. Card itself is the click target via `<a href="?route=...">`. See the spec analysis for the full 6-card HTML.
+
+- **Three real changes from current production:**
+  1. Unified card treatment — drop the purple gradient on the top 2 cards (Banking + Cross-Industry)
+  2. 3-column grid instead of 2 (with responsive breakpoints to 2 cols at ≤1024px, 1 col at ≤640px)
+  3. Simpler card content — drop the inline buttons and italic example-question lines; the card itself is the click target. The "what could I ask Agy" job moves entirely to the Ask Agy Anything section below the cards. Net effect: cards become roughly half their current height.
+
+- **Implementation notes (confirmed May 31, 2026):**
+  - **Anchor tags, not buttons.** Whole card is the click target via `<a href="?route=...">`. If current routing uses Streamlit query params or button callbacks, swap to anchor + appropriate href. Visual stays the same; the click semantics change.
+  - **Emojis for icons (matches production).** Move to SVG / Tabler icons later as a separate ticket — out of scope for -107.
+
+- **Effort:** Small-medium. Raw implementation 30-60 min (CSS update + HTML restructure in `ui/components/category_cards.py`). Add ~15-30 min if shipping with full BDD discipline (scenarios: 3 columns at desktop, unified treatment across all 6, click routes correctly per card).
+
+- **Cross-references:**
+  - **Yesterday's wireframe-driven inventory miss** — this ticket should have been filed alongside -100 through -106 on May 30; surfaced today (May 31) when Matt pointed at the wireframe spec.
+  - **MATTGPT-104** — Banking + Cross-Industry math reconciliation. -104 fixes the count discrepancies on the landing pages those cards route to; -107 is the cards themselves on the Home page.
+  - **MATTGPT-101** — Why Agy modal. Different surface; no direct dependency.
+
+- **Logged:** May 31, 2026
