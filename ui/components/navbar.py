@@ -133,6 +133,15 @@ div[data-testid="stColumn"]:first-child p {
         height: 0 !important;
         overflow: hidden !important;
     }
+    /* Also collapse the desktop navbar's outer stLayoutWrapper on mobile.
+       The offscreen-positioning rule above hides the inner block visually
+       but the wrapper still reserves ~184px of vertical flow below the
+       fixed mobile header. Hiding the wrapper removes that gap entirely.
+       The mobile dropdown is unaffected — it's a separate fixed-position
+       element built from .mobile-nav-dropdown by the components.html JS. */
+    div[data-testid="stLayoutWrapper"]:has([class*="st-key-topnav_"]) {
+        display: none !important;
+    }
     .mobile-header {
         display: flex !important;
         position: fixed;
