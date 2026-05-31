@@ -87,13 +87,16 @@ def test_card3_product_innovation_prefilter():
 def navigate_to_home(browser_page, app_url):
     """Home is the default tab when the app loads — no navigation needed.
 
-    Waits for the "View Product Work" anchor to render, which signals the
+    Waits for the Product Innovation card to render, which signals the
     category cards section has finished loading.
     """
     browser_page.goto(app_url)
     browser_page.wait_for_load_state("networkidle")
-    # The Card 3 anchor is a stable target proving category cards have rendered.
-    browser_page.wait_for_selector("a#btn-product", timeout=30000)
+    # MATTGPT-107: Cards are now whole-card click targets (id="card-X").
+    # The Card 3 div is a stable target proving category cards have rendered.
+    # Previously used <a id="btn-product"> which was the inline anchor button;
+    # -107 dropped inline buttons in favor of whole-card click.
+    browser_page.wait_for_selector("#card-product", timeout=30000)
 
 
 # =============================================================================
@@ -105,7 +108,7 @@ def navigate_to_home(browser_page, app_url):
 def click_view_product_work(browser_page):
     """Click Card 3.
 
-    The visible link is <a id="btn-product">; its click is bridged via JS in
+    The visible target is <div id="card-product">; its click is bridged via JS in
     category_cards.py to a hidden st.button(key="card_btn_product"). We click
     the hidden Streamlit button directly with force=True — bypasses the JS
     bridge and isolates the test to the prefilter business logic (the JS

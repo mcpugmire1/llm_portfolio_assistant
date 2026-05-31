@@ -470,9 +470,9 @@ def get_mobile_css() -> str:
                HOME PAGE - HERO SECTION
                ======================================== */
 
-            /* Hero gradient wrapper */
+            /* Hero gradient wrapper — clear the 56px fixed mobile header */
             .hero-gradient-wrapper {
-                margin-top: 0 !important;
+                margin-top: 56px !important;
             }
 
             .hero-content {

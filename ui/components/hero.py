@@ -100,8 +100,10 @@ def render_hero():
                     padding: 20px 16px !important;
                 }
                 .hero-gradient-wrapper {
-                    margin-top: -20px !important;
-
+                    /* 56px clears the fixed mobile header (z-index 999999).
+                       Was -20px (desktop layout artifact) which pulled the
+                       hero up into the area covered by the header. */
+                    margin-top: 56px !important;
                 }
 
                 /* Logo - much smaller */
@@ -340,12 +342,29 @@ def render_section_title(title: str):
     st.markdown(
         f"""
         <style>
+            /* MATTGPT-107: tightened section-header per wireframe alignment.
+               Drops vertical footprint from ~125px to ~69px by removing the
+               32px of phantom Streamlit anchor-element padding, tightening
+               margins (40/24 -> 24/16), and hiding the hover anchor-icon.
+               The .section-header :has() selectors below scope the
+               padding-killing rules to this component only — Banking and
+               Cross-Industry landing pages render `.section-header` as a
+               <div>, not <h2>, so their layouts are unaffected. */
             .section-header h2 {{
-                font-size: 36px;
-                font-weight: 700;
-                color: var(--text-heading);
-                margin: 40px 0 24px 0;
+                font-size: 24px;
+                font-weight: 500;
+                color: var(--text-primary);
+                margin: 8px 0 16px 0 !important;
+                padding: 0 !important;
             }}
+            .section-header [data-testid="stHeadingWithActionElements"] {{
+                padding: 0 !important;
+                margin: 0 !important;
+            }}
+            .section-header [data-testid="stHeaderActionElements"] {{
+                display: none !important;
+            }}
+
             @media (max-width: 767px) {{
                 .section-header {{
                     margin: 0 !important;
@@ -353,24 +372,12 @@ def render_section_title(title: str):
                 }}
                 .section-header h2 {{
                     font-size: 18px !important;
-                    margin: 8px 0 8px 0 !important;
+                    margin: 8px 0 !important;
                     white-space: nowrap !important;
+
                 }}
                 .section-header h2 span:first-child {{
                     font-size: 16px !important;
-                }}
-                /* Kill Streamlit's wrapper padding */
-                .section-header [data-testid="stHeadingWithActionElements"] {{
-                    padding: 0 !important;
-                    margin: 0 !important;
-                }}
-                .section-header .st-emotion-cache-ua1rfn {{
-                    padding: 0 !important;
-                    margin: 0 !important;
-                }}
-                /* Hide the anchor link icon */
-                .section-header [data-testid="stHeaderActionElements"] {{
-                    display: none !important;
                 }}
             }}
         </style>

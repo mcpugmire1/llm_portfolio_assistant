@@ -49,7 +49,7 @@ def render_footer():
         }
     }
     </style>
-    <div class="footer-connect" style="background: #2c3e50; color: white; padding: 48px 40px; text-align: center; margin-top: 40px; border-radius: 8px;">
+    <div class="footer-connect" style="background: #2c3e50; color: white; padding: 24px 40px; text-align: center; margin-top: 16px; border-radius: 8px;">
         <h3 style="font-size: 28px; margin-bottom: 12px; color: white;">Let's Connect</h3>
         <p class="footer-desc" style="font-size: 16px; margin-bottom: 8px; opacity: 0.9;">
             I build what's next, modernize what's not, and grow teams along the way.
