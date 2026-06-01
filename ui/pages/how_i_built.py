@@ -20,48 +20,43 @@ position-reconciliation per the MATTGPT-068 relocation rationale.
 
 import streamlit as st
 
-# Map of from-param slug → human-readable surface label and active_tab value.
-# Used for the context-aware back link.
+# Map of from-param slug → human-readable surface label.
+# Used for the context-aware back link. Defaults to "profile" → "My Profile"
+# when no from slug is provided (sensible fallback per MATTGPT-102 ticket).
 FROM_LABELS = {
-    "home": ("Home", "Home"),
-    "my-work": ("My Work", "My Work"),
-    "ask-agy": ("Ask Agy", "Ask Agy"),
-    "role-match": ("Role Match", "Role Match"),
-    "profile": ("My Profile", "My Profile"),
-    "banking": ("Banking", "Banking"),
-    "cross-industry": ("Cross-Industry", "Cross-Industry"),
+    "home": "Home",
+    "my-work": "My Work",
+    "ask-agy": "Ask Agy",
+    "role-match": "Role Match",
+    "profile": "My Profile",
+    "banking": "Banking",
+    "cross-industry": "Cross-Industry",
 }
 
 
-def _resolve_back_target(from_slug: str | None) -> tuple[str, str]:
-    """Resolve the back-link label + active_tab target from the from slug.
-
-    Defaults to ("My Profile", "My Profile") if the slug is missing or
-    unrecognized (sensible fallback per MATTGPT-102 ticket spec).
-    """
+def _resolve_back(from_slug: str | None) -> tuple[str, str]:
+    """Resolve (label, slug-for-href). Defaults to ("My Profile", "profile")."""
     if from_slug and from_slug in FROM_LABELS:
-        return FROM_LABELS[from_slug]
-    return ("My Profile", "My Profile")
+        return (FROM_LABELS[from_slug], from_slug)
+    return ("My Profile", "profile")
 
 
 def render_how_i_built():
     """Render the How I Built MattGPT deep-link surface.
 
-    Reads session_state["how_i_built_from"] (set by the app.py route handler
+    Reads session_state["how_i_built_from"] (set by app.py's ?route= handler
     from the ?from=<surface-slug> query param) to render a context-aware
-    back link at the top.
+    back link. The back link is a subtle text anchor (matching the existing
+    "← Banking" breadcrumb pattern), not a styled CTA button. href routes
+    through app.py's ?nav=<slug> handler which maps the slug to active_tab.
     """
-    # Context-aware back link
+    # Context-aware back link — subtle anchor, not CTA
     from_slug = st.session_state.get("how_i_built_from")
-    back_label, back_tab = _resolve_back_target(from_slug)
-    if st.button(f"← Back to {back_label}", key="how_i_built_back"):
-        st.session_state["active_tab"] = back_tab
-        # Clear the from state so a subsequent direct nav doesn't carry the
-        # stale slug.
-        st.session_state.pop("how_i_built_from", None)
-        # Clear the URL query params so the route doesn't re-trigger.
-        st.query_params.clear()
-        st.rerun()
+    back_label, back_slug = _resolve_back(from_slug)
+    st.markdown(
+        f'<a href="?nav={back_slug}" class="back-link">← {back_label}</a>',
+        unsafe_allow_html=True,
+    )
 
     # Section heading
     st.markdown(

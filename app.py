@@ -42,8 +42,12 @@ st.set_page_config(
 # Apply global styles once per session
 apply_global_styles()
 
-# Render navbar (shows on all pages)
-render_navbar(current_tab=st.session_state.get("active_tab", "Home"))
+# Render navbar — hidden on secondary deep-link-only surfaces (MATTGPT-102 +
+# future). Secondary surfaces have their own back-link affordance; the main
+# top nav would compete with the back link and confuse the "where am I" model.
+SECONDARY_SURFACES = {"How I Built"}
+if st.session_state.get("active_tab", "Home") not in SECONDARY_SURFACES:
+    render_navbar(current_tab=st.session_state.get("active_tab", "Home"))
 
 # ---- first-mount guard ----
 if not st.session_state.get("__first_mount_rerun__", False):
@@ -332,6 +336,33 @@ if 'route' in st.query_params and st.query_params['route'] == 'how-i-built':
         if from_slug:
             st.session_state['how_i_built_from'] = from_slug
         st.session_state['_deeplink_route'] = 'how-i-built'
+        st.rerun()
+
+# =========================
+# Generic nav-link URL handler: ?nav=<surface-slug>
+# =========================
+# MATTGPT-102. Used by back-link anchors on secondary deep-link surfaces
+# (How I Built and any future no-top-nav secondary surface). Maps slug
+# to active_tab and clears the URL param so subsequent reloads don't
+# re-trigger. Reusable across all secondary surfaces.
+_NAV_SLUG_TO_TAB = {
+    "home": "Home",
+    "my-work": "My Work",
+    "ask-agy": "Ask Agy",
+    "role-match": "Role Match",
+    "profile": "My Profile",
+    "banking": "Banking",
+    "cross-industry": "Cross-Industry",
+}
+if 'nav' in st.query_params:
+    nav_slug = st.query_params['nav']
+    if nav_slug in _NAV_SLUG_TO_TAB:
+        st.session_state['active_tab'] = _NAV_SLUG_TO_TAB[nav_slug]
+        # Clear secondary-surface state so it doesn't follow the user back.
+        st.session_state.pop('how_i_built_from', None)
+        st.session_state.pop('_deeplink_route', None)
+        # Clear the URL params so reload doesn't re-trigger.
+        st.query_params.clear()
         st.rerun()
 
 # =========================

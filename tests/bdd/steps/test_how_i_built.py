@@ -106,9 +106,7 @@ def assert_the_problem_card_visible(browser_page):
 @then("the back link should be visible")
 def assert_back_link_visible(browser_page):
     # The Green render will use a link/button with text containing "Back to".
-    back_link = browser_page.locator(
-        "a:has-text('Back to'), button:has-text('Back to')"
-    ).first
+    back_link = browser_page.locator("a.back-link").first
     try:
         back_link.wait_for(state="visible", timeout=LONG_TIMEOUT)
     except Exception as exc:
@@ -122,9 +120,7 @@ def assert_back_link_visible(browser_page):
 
 @then(parsers.parse('the back link text should contain "{expected_label}"'))
 def assert_back_link_text(browser_page, expected_label):
-    back_link = browser_page.locator(
-        "a:has-text('Back to'), button:has-text('Back to')"
-    ).first
+    back_link = browser_page.locator("a.back-link").first
     back_link.wait_for(state="visible", timeout=LONG_TIMEOUT)
     text = back_link.inner_text()
     assert expected_label in text, (

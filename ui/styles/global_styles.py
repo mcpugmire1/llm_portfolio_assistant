@@ -742,6 +742,25 @@ def apply_global_styles():
     color: var(--text-heading, #2c3e50);
 }
 
+/* Back-link affordance for secondary surfaces (MATTGPT-102 + future
+   no-top-nav secondary surfaces — How I Built, etc.). Subtle text-style
+   anchor matching the existing "← Banking" breadcrumb pattern on My Work;
+   not a CTA button. Routes through app.py's ?nav=<slug> handler. */
+.back-link {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgb(107, 33, 168);
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0 0 16px 0;
+}
+.back-link:hover {
+    text-decoration: underline;
+}
+
 .am-section-subtitle {
     font-size: 16px;
     color: var(--text-muted, #7f8c8d);
