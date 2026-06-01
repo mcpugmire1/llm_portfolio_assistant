@@ -1,5 +1,19 @@
 # Architecture Documentation
 
+> **Naming convention note (May 30-31, 2026 — MATTGPT-100 + MATTGPT-106 + MATTGPT-107):**
+>
+> Display labels were renamed via Strategy B (coordinated rename across UI labels + `session_state["active_tab"]` routing values):
+>
+> | Old display label | New display label | session_state value | Module/file name |
+> |---|---|---|---|
+> | Explore Stories | **My Work** | `"My Work"` | `ui/pages/explore_stories.py` (unchanged) |
+> | Ask MattGPT | **Ask Agy** | `"Ask Agy"` | `ui/pages/ask_mattgpt/` (unchanged) |
+> | About Matt | **My Profile** | `"My Profile"` | `ui/pages/about_matt.py` (unchanged) |
+>
+> Streamlit converts spaces in keys to dashes for CSS classes: `key="topnav_My Work"` produces class `st-key-topnav_My-Work`. References below to "Ask MattGPT", "Explore Stories", or "About Matt" as MODULE / FUNCTION / PACKAGE names (e.g., `ask_mattgpt_header.py`, `render_about_matt()`, `tests/bdd/features/about_matt.feature`) refer to the unchanged code structure — only the user-facing labels and routing values changed.
+>
+> Additionally: Home navbar is now brand-left + space-between layout (MATTGPT-106); category cards are 3-col grid with unified light-bg treatment and whole-card click targets (MATTGPT-107).
+
 ## Table of Contents
 
 ### 📋 Overview
@@ -313,7 +327,7 @@ def handle_ask_about_this(detail: dict):
     st.session_state["active_story_obj"] = detail
     st.session_state["__ctx_locked__"] = True
     st.session_state["__ask_from_suggestion__"] = True
-    st.session_state["active_tab"] = "Ask MattGPT"
+    st.session_state["active_tab"] = "Ask Agy"  # was "Ask MattGPT" pre-MATTGPT-100
     st.rerun()
 ```
 
@@ -333,7 +347,7 @@ MAX_STORIES_PER_ERA = 6
 # "View in Explore" navigation
 st.session_state["prefilter_era"] = era_name
 st.session_state["prefilter_view_mode"] = "table"
-st.session_state["active_tab"] = "Explore Stories"
+st.session_state["active_tab"] = "My Work"  # was "Explore Stories" pre-MATTGPT-100
 ```
 
 ---
@@ -1000,7 +1014,7 @@ st.session_state["active_story"] = story_id                      # Story ID for 
 st.session_state["active_story_obj"] = story_dict                # Full story object
 st.session_state["__ctx_locked__"] = True                        # Lock context to this story
 st.session_state["__ask_from_suggestion__"] = True               # Bypass off-domain filters
-st.session_state["active_tab"] = "Ask MattGPT"                   # Navigate to Ask MattGPT
+st.session_state["active_tab"] = "Ask Agy"  # was "Ask MattGPT" pre-MATTGPT-100. Navigate to Ask Agy
 st.rerun()
 ```
 
@@ -1024,7 +1038,7 @@ if st.session_state.get("__ctx_locked__"):
 # Used by banking_landing.py, cross_industry_landing.py → Explore Stories
 st.session_state["prefilter_industry"] = "Financial Services"
 st.session_state["prefilter_capability"] = "Platform Engineering"
-st.session_state["active_tab"] = "Explore Stories"
+st.session_state["active_tab"] = "My Work"  # was "Explore Stories" pre-MATTGPT-100
 
 # Consumed in explore_stories.py BEFORE widgets render
 if "prefilter_industry" in st.session_state:

@@ -74,6 +74,8 @@
   5. **Streamlit class names like `st-emotion-cache-*` change between versions** — Target `data-testid` or `.st-key-*` classes instead
   6. **Use existing CSS variables** — Check `global_styles.py` for `--bg-card`, `--border-color`, `--text-primary`, `--accent-purple`, etc. Don't invent new ones.
   7. **Container keys for targeting** — Use `st.container(key="my_container")` then target with `.st-key-my_container` in CSS
+  8. **DevTools-inspection BEFORE proposing CSS fixes** — For any layout/alignment/positioning/sizing issue, ask Matt to inspect the element in DevTools (or run DevTools AI) and paste the computed styles before proposing CSS. Source-code reasoning misses Streamlit's wrapper-layer surprises (`stMarkdown` / `stMarkdownContainer` / `stVerticalBlock` wrappers often have their own `align-self`, `display`, or `padding` that defeats centering rules applied to the parent column). May 31, 2026: 3 sequential CSS attempts on MATTGPT-106 wasted ~30 min when DevTools AI produced the actual diagnosis in one pass. See `memory/feedback_devtools_before_css_guessing.md`.
+  9. **Streamlit transforms spaces in `key=` to dashes in CSS class names** — `key="topnav_My Work"` produces class `st-key-topnav_My-Work` (space → dash, not underscore, not preserved). Use the dash form in CSS/JS/BDD selectors for multi-word keys. Don't sanitize the key in Python to avoid the transform — that introduces a divergent convention. See `memory/reference_streamlit_key_class_transformation.md`.
 
   ## Streamlit Patterns (Learned the Hard Way)
 
@@ -333,6 +335,7 @@
   - Verify root cause before accepting complex solutions
   - Check simple things first: regex, config, cache, typos
   - If Claude proposes 50+ lines, ask "is there a simpler way?"
+  - **Effort estimates without consulting padding** — When Claude gives an estimate, the headline number must be the raw implementation time (the minutes/hours to write the code, run the test, and ship). BDD discipline overhead and discovery risk are listed as separate explicit add-ons, not multiplied into a padded single number. Pattern observed May 30-31, 2026: a 30-min change quoted as "2-3 hours" because Claude silently folded "+BDD overhead + risk buffer" into the headline. Matt's response, twice: *"2-3 hours?????"* / *"hmm. seems a lot should be 15 min or 30 max."* See `memory/feedback_estimate_without_padding.md`.
 
   ## No Hardcoded Enums for Data-Derived Values
 
