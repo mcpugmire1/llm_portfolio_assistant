@@ -318,6 +318,23 @@ if 'story' in st.query_params:
         st.rerun()
 
 # =========================
+# Deep-link handling: ?route=how-i-built[&from=<surface-slug>]
+# =========================
+# MATTGPT-102. The How I Built MattGPT surface is not in the main nav —
+# reached only via this URL deep-link (from Why Agy modal footer, Ask Agy
+# Landing Why Agy section, Profile signals panel, or external sharing).
+# The optional from param drives the context-aware back link rendered on
+# how_i_built.py; defaults to "My Profile" if missing.
+if 'route' in st.query_params and st.query_params['route'] == 'how-i-built':
+    if st.session_state.get('_deeplink_route') != 'how-i-built':
+        st.session_state['active_tab'] = 'How I Built'
+        from_slug = st.query_params.get('from')
+        if from_slug:
+            st.session_state['how_i_built_from'] = from_slug
+        st.session_state['_deeplink_route'] = 'how-i-built'
+        st.rerun()
+
+# =========================
 # Helpers
 # =========================
 
@@ -454,10 +471,19 @@ elif st.session_state["active_tab"] == "My Profile":
 
     render_about_matt()
 
+# --- HOW I BUILT MATTGPT (deep-link only, no main nav entry, MATTGPT-102) ---
+elif st.session_state["active_tab"] == "How I Built":
+    _clear_explore_state()
+    from ui.pages.how_i_built import render_how_i_built
+
+    render_how_i_built()
+
 # --- INVALID TAB FALLBACK ---
 else:
     st.error(f"❌ Unknown page: {st.session_state['active_tab']}")
-    st.info("Valid pages: Home, My Work, Ask Agy, My Profile, Banking, Cross-Industry")
+    st.info(
+        "Valid pages: Home, My Work, Ask Agy, My Profile, Banking, Cross-Industry, How I Built"
+    )
     # Reset to home
     st.session_state["active_tab"] = "Home"
     st.rerun()
