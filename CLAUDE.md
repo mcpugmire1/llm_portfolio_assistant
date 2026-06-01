@@ -259,6 +259,8 @@
   - Provide full file replacements (not patches) unless asked otherwise
   - Backup before modifying: `cp file.py file.py.bak`
   - Keep reference docs/comments when rewriting files
+  - **Cross-check the artifact, not just the verbal scope.** When a wireframe/spec is shared AND verbal scope is given, the artifact is truth on copy/structure/sizing — match it exactly or flag the conflict explicitly. Don't silently implement the verbal literally and leave stale copy. See `memory/feedback_artifact_over_verbal_scope.md`. May 29, 2026 (-092 hero copy missed the wireframe's replacement of the framing line).
+  - **Visual spacing: give baseline + lever, let the user call the value.** For margins/gaps/padding/sizing adjustments, don't pick a specific magnitude and commit to it. Name the controlling rule + `file:line`, suggest a baseline as a starting point, let Matt eyeball and call the final value. Iterate. See `memory/feedback_visual_tuning.md`. May 28, 2026 (-15px overshoot — committed to a magnitude without seeing the visual result).
 
   ### Testing Protocol
   - **BDD scenarios must be written and committed before any implementation code.** This is non-negotiable. Write scenarios in `tests/bdd/features/`, commit them with a descriptive message, then begin implementation. No exceptions. If a spec is provided, BDD scenarios come first.
@@ -276,6 +278,9 @@
   April 2026 incident: a commit-then-push chain executed when only the commit had been approved. The push triggered an unauthorized production deploy. The fix is procedural — separate gates, separate words.
   - **After any change to UI files (`ui/pages/`, `ui/components/`, `ui/styles/`), restart Streamlit before running BDD tests.**
   - **After any change to `explore_stories.py`, run the BDD suite before presenting the change for review.** Unit tests and evals validate backend logic — only BDD tests exercise the rendering layer.
+  - **BDD scenarios must assert DOM-observable behavior, not session state.** Playwright cannot read `st.session_state`. For chip/button click routing, assert navigation visible + user-message echo + assistant-response streaming — NOT `seed_prompt` / `active_tab` dict reads. See `memory/feedback_bdd_dom_observable.md`. May 26, 2026 (MATTGPT-068 Scenario 3 — caught before Red step defs gate).
+  - **One "go" ships the full Red (scenarios) → Red (step defs) → Green cycle.** Don't re-ask for approval between gates after the initial "go" on a ticket. Re-ask only on **substantive new design decisions** (not scope clarifications, not catches like "test selector still references old class"). See `memory/feedback_one_go_ships_cycle.md`. May 30, 2026.
+  - **Eval failure discipline rule:** any eval failure should be validated against production before being labeled "pre-existing" or "stochastic" in memory or BACKLOG. Memory entries that pre-frame failures as accepted are unvalidated until cross-referenced to a BACKLOG ticket. If a "known issue" in memory isn't in BACKLOG, it's an unvalidated note — not a tracked issue. May 22, 2026.
 
   ### Don't
   - Ask about priorities or trade-offs before starting
@@ -286,6 +291,17 @@
   - **Invent new patterns when existing ones work** — If banking_landing.py does X, timeline_view.py should do X the same way
   - **Hardcode values that are already CSS variables** — Always check global_styles.py first
   - **Generate fantasy roadmaps** — No "100K users", "99.9% SLA", "enterprise customers" nonsense
+
+  ### Parallel Claude Code Sessions
+  When multiple Claude Code sessions are running concurrently against the same project directory, they share **one git working tree and one staging area**. Any `git commit` issued by either session will include every file currently staged, regardless of which session staged it. The committing session has no awareness that the staged contents include another session's work.
+
+  **Rules to prevent cross-contamination:**
+  - **Stage specific files by name** (`git add path/to/file`), never `git add -A` or `git add .`. The unstaged-file warning Streamlit's pre-commit shows is normal in parallel-session mode — pre-commit stashes them and restores them around the commit.
+  - **Before staging, check `git status`** to see what's already modified by the other session. If unrelated files are staged, coordinate to commit them first or unstage them temporarily.
+  - **Coordinate the commit timing** — Session A stages → Session A commits → Session A reports SHA → Session B stages → Session B commits. Never have two sessions with staged changes at the same moment.
+  - **Prefer worktree isolation for true parallelism** — `git worktree add ../project-branchname` gives each session its own working tree and staging area.
+
+  May 26, 2026 incident: a CLAUDE.md edit from one session landed inside another session's MATTGPT-068 Red (scenarios) commit (`9599bf3`) — committing session had no awareness it bundled unrelated work. See `memory/feedback_parallel_sessions_staging_collision.md`.
 
   ### Documentation Restraint
   Default to **not** creating new markdown files. Most analysis, investigation results, and intermediate findings belong in commit messages, BACKLOG entries, ADRs, or inline updates to existing docs — not in standalone files.
