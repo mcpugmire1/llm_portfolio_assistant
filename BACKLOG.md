@@ -129,6 +129,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-105](#mattgpt-105) | Explore Stories — Cards / Timeline / Table views lose CSS styling during Streamlit rerun (same family as MATTGPT-068) | Open | Medium | Issue | May 30, 2026 |
 | [MATTGPT-106](#mattgpt-106) | Navbar desktop layout — add MattGPT brand element, restructure to space-between (align with mobile + wireframe) | Open | Medium | Action | May 30, 2026 |
 | [MATTGPT-107](#mattgpt-107) | Home category cards redesign — unify card treatment, 3-column grid, compact content (align with wireframe) | Open | Medium | Action | May 31, 2026 |
+| [MATTGPT-108](#mattgpt-108) | Home category cards — add capability-based counts to the 4 non-industry cards (resolve asymmetry from -107 / -104) | Open | Medium | Action | June 1, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -2506,3 +2507,35 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
   - **MATTGPT-101** — Why Agy modal. Different surface; no direct dependency.
 
 - **Logged:** May 31, 2026
+
+---
+
+### MATTGPT-108
+**Home category cards — add capability-based counts to the 4 non-industry cards (resolve asymmetry from -107 / -104)**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Issue:** After MATTGPT-104 landed (post-Era counts for Banking + Cross-Industry), the Home category cards section has a visible asymmetry — 2 cards (Banking + Cross-Industry) show `{N} projects · {client list}` in their meta, while the other 4 cards (Product Innovation, Application Modernization, Consulting & Transformation, Teams & Talent Development) show descriptive-only copy with no count. Matt's eyeball check June 1, 2026: *"we dropped the counts from the 'Product Innovation', 'Application Mod', Consulting and Teams — seems off balance."*
+- **Why the asymmetry exists today:** Banking + Cross-Industry are **industry-based** (`Industry == "Financial Services / Banking"` / `Industry == "Cross Industry"` — clean single-field filter → clean count). The other 4 are **capability-based** — stories can carry multiple capability tags, and the corpus dimension that maps to each card name isn't a single hardcoded field. The wireframe deliverable baked in this asymmetry; production followed.
+- **Audience impact:** A recruiter scanning Home expects all 6 cards to read consistently. The 2 cards with counts implicitly suggest "more depth here"; the 4 without read as either thinner or less curated. Visual hierarchy should be intentional, not an accident of which corpus field maps cleanly.
+- **Fix (Option A from the May 31, 2026 -104 follow-up discussion):**
+  1. **Phase 1 — Audit:** For each of the 4 non-industry cards, identify the corpus dimension(s) that should source the count. Candidates per card:
+     - Product Innovation & Strategy: probably `Theme` containing "Product" OR a capability tag like `Capability == "Product Innovation"` (if it exists)
+     - Application Modernization: `Capability == "Application Modernization"` or equivalent
+     - Consulting & Transformation: harder — may need multi-field OR (capabilities related to advisory / transformation / change management)
+     - Teams & Talent Development: `Capability == "Talent Development"` or `Theme` containing "Talent" / "Team" / "Coaching"
+     Cross-reference with `build_landing_cards()` in `utils/landing_cards.py` (which already categorizes stories by capability) — that aggregation logic may be directly reusable.
+  2. **Phase 2 — Implement:** In `ui/components/category_cards.py:402-437`, replace the static descriptive meta on the 4 cards with `{N} projects · {qualifier}` matching the Banking + Cross-Industry pattern. Qualifier could be the top 2-3 clients/themes/capabilities for that card's bucket (parallel to how Banking shows top clients).
+  3. **Phase 3 — Apply post-Era filter:** All counts must use the post-Era convention (exclude Professional Narrative) per MATTGPT-104's standing rule. Use the same helper pattern as banking_landing.py / cross_industry_landing.py.
+- **Scope (out):**
+  - No card REORDERING — keep the existing 6-card layout from MATTGPT-107.
+  - No new cards.
+  - No card-treatment changes (purple gradient, hover, etc.) — visual treatment stays per -107.
+  - Quick Question / Ask Agy Anything strip below the cards is a separate concern.
+- **Effort:** Medium — Phase 1 audit could take 30-60 min (corpus dimension exploration); Phase 2 implementation is straightforward (~30 min once the dimensions are picked); Phase 3 filter is mechanical (~5 min). Total ~1-2 hours.
+- **Cross-references:**
+  - **MATTGPT-107** — Home category cards redesign. -108 finishes the consistency story -107 started; -107 dropped italic Q lines / inline buttons to compact the cards, -108 brings the 4 non-industry cards into the same meta-format consistency as Banking + Cross-Industry.
+  - **MATTGPT-104** — Post-Era project counts. -108's counts must use the same post-Era convention.
+  - `utils/landing_cards.py:build_landing_cards` — existing capability-aggregation logic; may be reusable for the 4 cards' count source.
+- **Logged:** June 1, 2026
