@@ -23,8 +23,14 @@ def render_cross_industry_landing(stories: list[dict]):
     Streamlit limitation that cannot be overridden without converting to multipage app.
     """
     # === DYNAMIC COUNTS (derived from JSONL) ===
+    # MATTGPT-104: post-Era counts — exclude Professional Narrative stories
+    # so hero/stats agree with the landing card grid + Home / Timeline /
+    # Explore Stories. Without this, hero showed 57 while card grid showed 48.
     cross_industry_stories = [
-        s for s in stories if s.get("Industry") == "Cross Industry"
+        s
+        for s in stories
+        if s.get("Industry") == "Cross Industry"
+        and s.get("Category") != "Professional Narrative"
     ]
     total_projects = len(cross_industry_stories)
 

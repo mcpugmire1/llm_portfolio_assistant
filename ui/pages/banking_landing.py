@@ -26,8 +26,15 @@ def render_banking_landing(stories: list[dict]):
     Streamlit limitation that cannot be overridden without converting to multipage app.
     """
     # === DYNAMIC COUNTS (derived from JSONL) ===
+    # MATTGPT-104: post-Era counts — exclude Professional Narrative stories
+    # so hero/stats agree with the landing card grid (which already excludes
+    # narrative via build_landing_cards) and with Home / Timeline / Explore
+    # Stories. Without this, hero showed 33 while card grid showed 32.
     banking_stories = [
-        s for s in stories if s.get("Industry") == "Financial Services / Banking"
+        s
+        for s in stories
+        if s.get("Industry") == "Financial Services / Banking"
+        and s.get("Category") != "Professional Narrative"
     ]
     total_projects = len(banking_stories)
 

@@ -65,11 +65,21 @@ def render_category_cards(stories: list[dict]):
         stories: Full story corpus from JSONL.
     """
     # === DYNAMIC COUNTS (derived from JSONL) ===
+    # MATTGPT-104: post-Era counts — exclude Professional Narrative stories
+    # to align with landing page card grids + Timeline + (post-MATTGPT-098)
+    # Explore Stories. Without this exclusion, Home card meta showed 33/57
+    # while landing card grids showed 32/48 for the same Industry filter.
     banking_stories = [
-        s for s in stories if s.get("Industry") == "Financial Services / Banking"
+        s
+        for s in stories
+        if s.get("Industry") == "Financial Services / Banking"
+        and s.get("Category") != "Professional Narrative"
     ]
     cross_industry_stories = [
-        s for s in stories if s.get("Industry") == "Cross Industry"
+        s
+        for s in stories
+        if s.get("Industry") == "Cross Industry"
+        and s.get("Category") != "Professional Narrative"
     ]
 
     # Banking client counts (top 3, excluding generic)
