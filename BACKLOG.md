@@ -4,15 +4,20 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 ---
 
-## Value Prioritized Roadmap (updated 2026-05-30)
+## Value Prioritized Roadmap (updated 2026-05-31)
 
 **NOW** (suggested order of execution):
 
-*Low-hanging UI batch (small wins; Saturday May 30, 2026):*
-1. **-100** — Navigation labels rename (Home / My Work / Ask Agy / Role Match / My Profile). Locked, mechanical, but blast radius across ~10 files (`session_state["active_tab"]` values coupled to display labels). 30-60 min.
-2. **-104** — Banking + Cross-Industry landing math reconciliation bug. Phase 1 audit (~30 min) → Phase 2 fix (~1 hour).
-3. **-102** — How I Built MattGPT deep-link surface. New page, content extracted from About Matt's How I Built section, no main nav entry, back-affordance pattern mirrors Banking/CI. ~2-3 hours. Sequenced before -101 so -101's modal footer link can route to a live page, not a placeholder.
-4. **-101** — Why Agy? modal + "?" badge on Agy avatar (bundled). New component + new CSS tokens + wiring across 5 surfaces where avatar appears. ~2-3 hours. Footer link to -102 ships live (depends on -102 landing first).
+*Cross-surface count reconciliation chain (May 31 sequencing — order matters):*
+1. **-098** — Explore Stories default state (filter `Professional Narrative` + sort `Start_Date desc`, mirror Timeline's `EXCLUDED_ERA` pattern at `ui/components/timeline_view.py:42`). ~30 min raw. **Ship before -104** — establishes post-Era as the convention on Explore Stories before -104 brings the other outliers in line.
+2. **-104** — Banking + Cross-Industry math reconciliation. **Depends on -098 shipping first.** Scope expanded per May 31 audit (`utils/landing_cards.py` filter analysis): landing hero/stats + Home card meta align to post-Era counts (32/48), matching landing card grids + Timeline + (post-098) Explore Stories. Shipping -104 BEFORE -098 would create a new cross-surface inconsistency (Home shows 32, Explore Stories shows 33 for the same filter). ~30-60 min raw + 3 files (banking_landing.py, cross_industry_landing.py, category_cards.py).
+
+*New surfaces / components:*
+3. **-102** — How I Built MattGPT deep-link surface. New page, content extracted from About Matt's How I Built section, no main nav entry, back-affordance pattern mirrors Banking/CI. ~2-3 hours raw. Sequenced before -101 so -101's modal footer link can route to a live page, not a placeholder.
+4. **-101** — Why Agy? modal + "?" badge on Agy avatar (bundled). New component + new CSS tokens + wiring across 5 surfaces where avatar appears. ~2-3 hours raw + 5-surface wiring risk if Agy avatar isn't a shared component. Footer link to -102 ships live (depends on -102 landing first).
+
+*Polish (slot anywhere):*
+- **-105** — Explore Stories CSS rerun regression (same family as MATTGPT-068). Not blocking; can ship any time.
 
 *Heavier conceptual work (saved for fresh brain):*
 5. **-077 mitigation** — Query-side mitigation: strip "Matt" from embedded queries on technical-noun shapes (hours, not days; full hybrid retrieval lives in NEXT)
@@ -22,6 +27,9 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 *Recently shipped (off NOW list):*
 - **MATTGPT-087 + MATTGPT-092** — Shipped May 29-30, 2026 on `feature/ui-redesign` branch. Hero CTA inversion + scope/outcome anchor + stats restructure.
+- **MATTGPT-100** — Shipped May 30, 2026. Navigation label rename (Strategy B coordinated rename across display labels + `session_state["active_tab"]` keys + BDD fixtures). 4-10x the "30-60 min mechanical" estimate due to hidden coupling discovery (~50 files of stragglers, mobile-nav class-name encoding, BDD selector collisions).
+- **MATTGPT-106** — Shipped May 31, 2026. Navbar desktop brand-left + space-between layout, brand vertical centering (absolute positioning to bypass Streamlit stMarkdown wrapper layers).
+- **MATTGPT-107** — Shipped visually May 31, 2026 (b2192bb home polish + other session's category cards work). Home category cards redesign + section header tighten + ask-agy-card margin trim + footer compaction + mobile hero header clearance. BDD discipline closure (other session's Red gates + Green commit against `home_category_cards.feature`) pending verification.
 - **MATTGPT-090** — Closed as Decided Against May 29, 2026. Personal Intent Family in `services/semantic_router.py:192-209` already handles comp queries with the warm decline; no system prompt edit needed.
 - **MATTGPT-103** — Closed as Decided Against May 30, 2026. "20+ years of work" in the Agy intro line reads as functional/corpus-scope (telling the user how big Agy's data set is), not as personal positioning. Different surface, different role; the anti-bias play that drove the Years tile drop doesn't transfer to the Agy intro.
 
@@ -2206,7 +2214,9 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 - **Cross-references:**
   - `ui/components/timeline_view.py:42` — existing `EXCLUDED_ERA` pattern to mirror
   - MATTGPT-065 — polish bundle (consider folding this in if -065 hasn't shipped yet, or ship standalone if -065 is already scoped)
+  - **MATTGPT-104 depends on this ticket.** -098 must ship first to establish post-Era as the convention on Explore Stories; -104 then brings landing hero/stats + Home card meta into alignment. Shipping -104 first would create a worse interim state (Home shows 32, Explore Stories shows 33 for the same filter). See -104 detail block + NOW roadmap rationale.
 - **Logged:** May 29, 2026
+- **Dependency note added:** May 31, 2026
 
 ---
 
@@ -2338,16 +2348,32 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 - **Status:** Open
 - **Priority:** Medium
 - **Type:** Issue
+- **Blocked by:** **MATTGPT-098** (Explore Stories default state — exclude Professional Narrative). Sequencing rationale: -098 establishes post-Era as the standing convention on Explore Stories (Timeline + landing card grids already use it). -104's reconciliation target IS the post-Era count, so -104 must ship after -098 to keep cross-surface navigation consistent. Shipping -104 first would create a new bug: Home shows 32, Explore Stories still shows 33 for the same Industry filter.
 - **Issue:** During the May 29, 2026 wireframe pass, project/story counts on the Banking landing page displayed inconsistent numbers across different rendering points (observed: 33 vs 32 vs 48 vs 57). Similar inconsistency observed on the Cross-Industry landing. Root cause is a bug in the dynamic-generation code that produces these counts, not a corpus tagging issue or wireframe specification gap (Matt's call during the wireframe review).
 - **Why a separate ticket (not folded into MATTGPT-065):** MATTGPT-065 is scoped specifically to Explore Stories polish (filter UX, empty states, story details). Banking + Cross-Industry landing pages are different surfaces with their own count-generation logic and dynamic story-rendering paths. The earlier framing during the May 29 wireframe pass that this would fold into -065 was wrong.
 - **Audience impact:** Recruiters land on the Banking page expecting to see Matt's banking work. Inconsistent counts read as data-quality issues — undermines the polish that the rest of the site projects. *"Why does the page say 33 projects in one place and 57 in another?"* is the kind of thing a hiring manager flags on a call.
-- **Fix shape:**
-  - **Investigate** the four count values (33 / 32 / 48 / 57) — trace each to its source (filter query, story tag aggregation, hardcoded value, prefilter routing artifact, etc.)
-  - **Reconcile to single source of truth** — same filter query / same aggregation logic, consistent across all display points on a given page
-  - **Apply to both** Banking and Cross-Industry landings (same pattern likely produces the same bug shape on Cross-Industry)
-  - **Verify** the corrected counts match the actual filtered-story count when the user clicks into Explore Stories with the same filter applied
-- **Effort:** Small-medium (~1-2 hours including investigation + fix + verification across both surfaces).
+- **Phase 1 audit (complete — May 31, 2026):** All 4 displayed numbers trace to 2 filter regimes; no mystery values, no hardcoded counts.
+
+  | Filter | Banking | Cross-Industry |
+  |---|---|---|
+  | `Industry == X` (raw) | **33** | **57** |
+  | `Industry == X` + `Era != "Leadership & Professional Narrative"` | **32** | **48** |
+
+  Delta = narrative stories per industry (1 Banking, 9 Cross-Industry). `utils/landing_cards.py:53-59` applies the post-Era filter to card aggregation; the landing hero/stats use a plain industry filter. Detailed render-point map:
+
+  | Surface | File | Value | Source |
+  |---|---|---|---|
+  | Banking hero subtitle + stats bar | `banking_landing.py:74, 87` | 33 | `total_projects = len(banking_stories)` at line 32 |
+  | Banking "Browse N" subtitle + per-card counts | `banking_landing.py:521, 548` | 32 | `browseable_total = sum(c["count"] for c in cards)` at line 513 |
+  | Cross-Industry hero subtitle + stats bar | `cross_industry_landing.py:66, 79` | 57 | `total_projects = len(cross_industry_stories)` at line 29 |
+  | Cross-Industry "Browse N" subtitle + per-card counts | `cross_industry_landing.py:503` | 48 | `browseable_total = sum(c["count"] for c in cards)` at line 495 |
+  | Home card meta (post-MATTGPT-107) | `category_cards.py` | 33 / 57 | `len(banking_stories)` / `len(cross_industry_stories)` |
+  | Explore Stories filtered by `Industry=X` | `explore_stories.py` | 33 / 57 (today) → 32 / 48 (post-098) | raw industry filter |
+
+- **Phase 2 fix (after -098 ships):** Align landing hero/stats + Home card meta to post-Era counts (32/48). Touch points: `banking_landing.py` (line 32 source change), `cross_industry_landing.py` (line 29 source change), `category_cards.py` (Home card meta dynamic counts switch to post-Era). ~30-60 min raw. Landing subtitle copy stays as-is ("Browse 32 banking projects..."). Final state: every project-count surface displays the same number per industry.
+- **Effort:** Small-medium (Phase 1 done; Phase 2 ~30-60 min including verification across both surfaces).
 - **Cross-references:**
+  - **MATTGPT-098 (blocker)** — must ship first; see Blocked-by note above.
   - MATTGPT-065 — Explore Stories polish bundle (sibling polish work but different surface; this ticket explicitly does NOT fold into -065)
   - MATTGPT-019 — Story count copy (different concern — that's about hardcoded "130+"; this is about dynamic counts on landing pages)
 - **Logged:** May 30, 2026
