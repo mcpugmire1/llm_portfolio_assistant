@@ -161,30 +161,31 @@ def assert_sort_descending(browser_page):
     aggrid_frame = browser_page.frame_locator(
         "[data-testid='stCustomComponentV1']"
     ).first
-    rows = aggrid_frame.locator(".ag-row")
-    # Wait for at least 2 rows to render. AgGrid can take time to mount.
-    rows.nth(1).wait_for(state="visible", timeout=LONG_TIMEOUT)
-    row_count = rows.count()
-    assert row_count >= 2, (
-        f"Need at least 2 visible Table rows to assert sort order; found "
-        f"{row_count}. MATTGPT-098 sort assertion cannot run."
+    # Wait for AgGrid cells (not just rows) to render. AgGrid virtualizes
+    # cell content; waiting on .ag-cell ensures the cell DOM has populated
+    # before we try to read text from it. Use the Start_Date column's
+    # col-id attribute directly so we don't have to navigate row → cell.
+    date_cells = aggrid_frame.locator(".ag-cell[col-id='Start_Date']")
+    date_cells.first.wait_for(state="visible", timeout=LONG_TIMEOUT)
+    cell_count = date_cells.count()
+    assert cell_count >= 2, (
+        f"Need at least 2 visible Start_Date cells to assert sort order; "
+        f"found {cell_count}. MATTGPT-098 sort assertion cannot run."
     )
-    # Parse Start_Date from full row text (avoids AgGrid cell-attribute
-    # variability). The Start_Date column renders YYYY-MM strings — find
-    # the first 4-digit-year-dash-2-digit-month token in each row.
-    date_pattern = re.compile(r"\b(\d{4}-\d{2})\b")
-    first_text = rows.nth(0).inner_text()
-    second_text = rows.nth(1).inner_text()
-    first_match = date_pattern.search(first_text)
-    second_match = date_pattern.search(second_text)
-    assert (
-        first_match is not None
-    ), f"Could not find YYYY-MM Start_Date in first row text: {first_text!r}"
-    assert (
-        second_match is not None
-    ), f"Could not find YYYY-MM Start_Date in second row text: {second_text!r}"
-    first_date = first_match.group(1)
-    second_date = second_match.group(1)
+    # Read text_content (not inner_text) — more robust to AgGrid's
+    # visibility semantics for virtualized cells.
+    first_date = date_cells.nth(0).text_content().strip()
+    second_date = date_cells.nth(1).text_content().strip()
+    # Sanity check — Start_Date column should render YYYY-MM strings.
+    date_pattern = re.compile(r"^\d{4}-\d{2}$")
+    assert date_pattern.match(first_date), (
+        f"First Start_Date cell text is not YYYY-MM format: {first_date!r}. "
+        f"Cell may not have rendered or column structure has changed."
+    )
+    assert date_pattern.match(second_date), (
+        f"Second Start_Date cell text is not YYYY-MM format: {second_date!r}. "
+        f"Cell may not have rendered or column structure has changed."
+    )
     assert first_date >= second_date, (
         f"Default sort should be Start_Date descending. First row "
         f"Start_Date={first_date!r}, second row Start_Date={second_date!r}. "

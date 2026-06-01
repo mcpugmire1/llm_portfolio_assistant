@@ -1926,7 +1926,17 @@ def render_explore_stories(
     # Check if search was intentionally triggered (by form submission)
     search_triggered = st.session_state.pop("__search_triggered__", False)
     current_query = F["q"].strip()
-    view = stories  # Default view: all stories
+    # MATTGPT-098: default view excludes Professional Narrative stories
+    # (matching Timeline's EXCLUDED_ERA convention at timeline_view.py:42)
+    # and sorts by Start_Date descending (most-recent-first). User can still
+    # sort by clicking AgGrid column headers; this only changes the default
+    # state. Narrative stories remain in the corpus + reachable via search
+    # / Sub-category filter / direct deep-link, just not in the default view.
+    view = sorted(
+        [s for s in stories if s.get("Category") != "Professional Narrative"],
+        key=lambda s: s.get("Start_Date", ""),
+        reverse=True,
+    )
 
     # Cache keys for readability
     LAST_RESULTS = "__last_search_results__"
@@ -2098,7 +2108,15 @@ def render_explore_stories(
         if has_filters:
             view = [s for s in stories if matches_filters(s, F)]
         else:
-            view = stories
+            # MATTGPT-098: default view (no filters active) applies the
+            # Professional Narrative exclusion + Start_Date desc sort.
+            # Mirrors the initial default at line 1935 above; both branches
+            # must apply the default state to avoid resetting it here.
+            view = sorted(
+                [s for s in stories if s.get("Category") != "Professional Narrative"],
+                key=lambda s: s.get("Start_Date", ""),
+                reverse=True,
+            )
 
         # Filter-only feedback banner (no search query active)
         if has_filters and not F.get("q"):
