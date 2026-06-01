@@ -1,14 +1,150 @@
 """
 BDD step bindings for the How I Built MattGPT deep-link surface (MATTGPT-102).
 
-Red (scenarios) commit: scenarios are bound via the scenarios() loader with
-NO step definitions yet, so every step resolves to undefined-step state
-(StepDefinitionNotFoundError). Step definitions land in the Red (step defs)
-commit; the new ui/pages/how_i_built.py + the relocation from about_matt.py
-+ the ?route=how-i-built query param handler in app.py land in the Green
-commit, per the CLAUDE.md testing protocol.
+Red (step defs) commit: step definitions are bound; assertions target the
+DOM landmarks that will be rendered by the Green implementation. Against
+current production (no ui/pages/how_i_built.py, no ?route= handler, How I
+Built section still on About Matt):
+  - Scenarios 1-3: FAIL — ?route=how-i-built doesn't render a new page;
+    visiting the URL lands on Home (or wherever active_tab points by default).
+    The expected DOM landmarks (heading, deep-dive card, back link) won't be
+    visible there.
+  - Scenario 4: FAILS — My Profile page still contains the How I Built block
+    (about_matt.py:159 has the heading).
+
+The Green commit adds the new page, the ?route= handler, the back-link
+component, and removes the block from about_matt.py.
+
+URL-driven navigation uses Playwright's page.goto(); back-link locator
+matches any element with text containing "Back to" (the Green render
+will use a fixed shape like '<a class="back-link">← Back to {label}</a>').
 """
 
-from pytest_bdd import scenarios
+from pytest_bdd import given, parsers, scenarios, then
 
 scenarios("../features/how_i_built.feature")
+
+# =============================================================================
+# CONSTANTS
+# =============================================================================
+
+LONG_TIMEOUT = 30000
+SHORT_WAIT = 200
+
+
+def _wait_for_streamlit_rerun(page):
+    page.wait_for_load_state("networkidle")
+    page.wait_for_timeout(SHORT_WAIT)
+
+
+# =============================================================================
+# GIVEN — Navigation
+# =============================================================================
+
+
+@given(parsers.parse('the user navigates to "{url_path}"'))
+def navigate_to_url_path(browser_page, app_url, url_path):
+    """Navigate to a URL path on the app — strip leading slash so the path
+    appends cleanly to app_url. Used for ?route=how-i-built[&from=X] URLs.
+    """
+    # Strip leading slash if present, since app_url is typically a full URL
+    # like http://localhost:8501 without a trailing slash.
+    suffix = url_path.lstrip("/")
+    full_url = app_url.rstrip("/") + "/" + suffix
+    browser_page.goto(full_url)
+    _wait_for_streamlit_rerun(browser_page)
+
+
+@given("the user navigates to the My Profile page")
+def navigate_to_my_profile(browser_page, app_url):
+    """Open the app and click the My Profile nav button."""
+    browser_page.goto(app_url)
+    browser_page.wait_for_load_state("networkidle")
+    browser_page.wait_for_selector(
+        "button:has-text('My Profile')", timeout=LONG_TIMEOUT
+    )
+    nav_button = browser_page.locator("button:has-text('My Profile'):visible").first
+    nav_button.click()
+    _wait_for_streamlit_rerun(browser_page)
+    # My Profile page has a unique landmark; wait for the page to render.
+    browser_page.wait_for_selector(
+        ".am-section-title, .about-header", timeout=LONG_TIMEOUT
+    )
+
+
+# =============================================================================
+# THEN — Heading + content visibility
+# =============================================================================
+
+
+@then('the "How I Built MattGPT" heading should be visible')
+def assert_how_i_built_heading_visible(browser_page):
+    heading = browser_page.locator("h2:has-text('How I Built MattGPT')").first
+    try:
+        heading.wait_for(state="visible", timeout=LONG_TIMEOUT)
+    except Exception as exc:
+        raise AssertionError(
+            "How I Built MattGPT heading not visible. MATTGPT-102: the "
+            f"?route=how-i-built handler doesn't render the new page yet. "
+            f"Underlying error: {exc}"
+        ) from exc
+
+
+@then('the "The Problem" deep-dive card should be visible')
+def assert_the_problem_card_visible(browser_page):
+    card = browser_page.locator(".deep-dive-card:has(h3:has-text('The Problem'))").first
+    try:
+        card.wait_for(state="visible", timeout=LONG_TIMEOUT)
+    except Exception as exc:
+        raise AssertionError(
+            "'The Problem' deep-dive card not visible on the How I Built "
+            "surface. MATTGPT-102: content relocation from about_matt.py "
+            f"is incomplete. Underlying error: {exc}"
+        ) from exc
+
+
+@then("the back link should be visible")
+def assert_back_link_visible(browser_page):
+    # The Green render will use a link/button with text containing "Back to".
+    back_link = browser_page.locator(
+        "a:has-text('Back to'), button:has-text('Back to')"
+    ).first
+    try:
+        back_link.wait_for(state="visible", timeout=LONG_TIMEOUT)
+    except Exception as exc:
+        raise AssertionError(
+            "Back link not visible on the How I Built surface. MATTGPT-102: "
+            "the back-link component isn't rendered yet. Expected an element "
+            "with text containing 'Back to'. "
+            f"Underlying error: {exc}"
+        ) from exc
+
+
+@then(parsers.parse('the back link text should contain "{expected_label}"'))
+def assert_back_link_text(browser_page, expected_label):
+    back_link = browser_page.locator(
+        "a:has-text('Back to'), button:has-text('Back to')"
+    ).first
+    back_link.wait_for(state="visible", timeout=LONG_TIMEOUT)
+    text = back_link.inner_text()
+    assert expected_label in text, (
+        f"Back link text should contain {expected_label!r}, found: {text!r}. "
+        f"MATTGPT-102: from-param → label mapping isn't wired correctly."
+    )
+
+
+# =============================================================================
+# THEN — Content removal from My Profile
+# =============================================================================
+
+
+@then('the "How I Built MattGPT" heading should NOT be visible on the My Profile page')
+def assert_no_how_i_built_on_profile(browser_page):
+    # Locate any heading on the page containing "How I Built MattGPT".
+    headings = browser_page.locator(":text('How I Built MattGPT')")
+    count = headings.count()
+    assert count == 0, (
+        f"My Profile page still contains {count} element(s) referencing 'How I "
+        f"Built MattGPT'. MATTGPT-102: content should be relocated to the new "
+        f"deep-link surface, not duplicated on My Profile."
+    )
