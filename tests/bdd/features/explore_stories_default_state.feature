@@ -23,23 +23,22 @@ Feature: Explore Stories default state — exclude Professional Narrative + sort
   # OPT-IN: Professional Narrative stories remain reachable via Advanced
   # Filters → Category filter. User can surface them deliberately.
   #
-  # Scenarios assert DOM-observable state — story-row visibility,
-  # Category/Era column values, Start_Date ordering across visible rows.
-  # No st.session_state reads — see feedback_bdd_dom_observable. Per
-  # the "No hardcoded story titles in tests" rule, title-matching is
-  # avoided; assertions use Category / Era / Start_Date column values.
+  # DOM-observable note: the AgGrid Table view displays only the columns
+  # Title / Client / Role / Start_Date (explore_stories.py:2310-2317).
+  # Category and Era are NOT displayed in the grid — so scenarios assert
+  # the FILTER's effect via the visible results count (.results-count
+  # element) rather than via per-row Category/Era checks. Start_Date IS
+  # displayed and is used directly for the sort-order assertion.
 
   Background:
     Given the user navigates to the My Work page
 
   Scenario: Default view excludes Professional Narrative stories
-    Then no visible story row should be tagged Category "Professional Narrative"
-    And no visible story row should be tagged Era "Leadership & Professional Narrative"
+    Then the visible Table results count should equal the corpus total minus the 10 Professional Narrative stories
 
   Scenario: Default view sorts stories by Start_Date descending
-    Then the first visible story row's Start_Date should be >= the second visible story row's Start_Date
-    And the first visible story row's Era should be one of the recent eras
+    Then the first visible Table row's Start_Date should be greater than or equal to the second visible Table row's Start_Date
 
   Scenario: Professional Narrative stories remain reachable via Category filter
     When the user selects "Professional Narrative" from the Category filter in Advanced Filters
-    Then at least one visible story row should be tagged Category "Professional Narrative"
+    Then the visible Table results count should equal 10
