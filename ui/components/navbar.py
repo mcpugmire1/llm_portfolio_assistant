@@ -23,8 +23,10 @@ def render_navbar(current_tab: str = "Home"):
     # CSS only - mobile HTML injected via components.html
     st.markdown(
         """<style>
-/* Strip Streamlit's inner block margins specifically inside the brand column */
-div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"]:first-child div[data-testid="stVerticalBlock"] {
+/* Strip Streamlit's inner block margins inside the navbar brand column only.
+   Guard matches rules 2-5 below — prevents hitting other stHorizontalBlock
+   layouts on the page (e.g. Ask Agy suggestion chip grid left column). */
+div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-testid="stColumn"]:first-child div[data-testid="stVerticalBlock"] {
     margin: 0 !important;
     padding: 0 !important;
     gap: 0 !important;

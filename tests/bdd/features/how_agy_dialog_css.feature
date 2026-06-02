@@ -23,14 +23,14 @@ Feature: How Agy Searches dialog — CSS correctness regression guards (MATTGPT-
     And the step title color should match the resolved value of --text-primary
     And the card description color should match the resolved value of --text-secondary
     And the query card font-size should be 13px
-    And the pipeline summary font-size should be 12px
 
   Scenario Outline: Modal renders single-column cards on mobile
     Given the viewport is resized to <width>px wide
     Then the search cards should render in a single column
     And the desktop pipeline flow should not be visible
     And the mobile pipeline summary should be visible
-    And the footer button should fill the dialog content width
+    And the pipeline summary font-size should be 12px
+    And the footer button should be full width
 
     Examples:
       | width |
