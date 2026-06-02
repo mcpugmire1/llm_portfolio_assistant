@@ -2282,19 +2282,30 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
   - Italicized companion line: *"It felt right to keep his name part of the work we loved doing together."*
   - Footer link: *"Curious how I was built? Read the technical deep-dive →"* → routes to How I Built MattGPT surface (MATTGPT-102)
   - **"130+"** updated to **"100+"** per MATTGPT-019 cross-cutting decision
-- **Implementation pattern (decided June 1, 2026):**
-  - Use **`@st.dialog`** — native Streamlit 1.50 centered overlay. Closes via X button, Escape key, or backdrop click. No custom HTML/JS needed for the overlay itself.
-  - Trigger: hidden `st.button` + JS bridge pattern (same as `ask_mattgpt_header.py:539-585` "How Agy searches" trigger). Reuse existing badge wiring pattern.
+- **Implementation pattern (decided June 1-2, 2026):**
+  - Use **`@st.dialog`** — native Streamlit 1.50 centered overlay. Closes via X button, Escape key, or backdrop click.
+  - Trigger: hidden `st.button` + JS bridge (same as `ask_mattgpt_header.py:539-585`). Badge click → JS fires hidden button → session flag → `st.rerun()` → dialog opens.
   - Image: reuse `AgyMattCartoon-Transparent.png` already in `how_i_built.py`
-  - No state navigation — modal is overlay only, user returns to current surface on dismiss
-- **Wire badge across 5 surfaces:** Home, Ask Agy Landing, Ask Agy Conversation, Banking Landing, Cross-Industry Landing
-- **Ask Agy Landing note:** Landing already has an inline "Why Agy?" section (static body content). The badge trigger on the Landing header avatar coexists with this intentionally — different moments (inline = narrative flow, badge = on-demand). Do NOT remove the inline section.
-- **Effort:** Small-medium (~2-3 hours raw). New component + badge CSS + wiring across 5 surfaces.
+  - **Footer link to How I Built:** `st.button("Curious how I was built? Read the technical deep-dive →")` at the bottom of the dialog. On click: `show_why_agy = False`, `show_how_i_built = True`, `st.rerun()`. Sequential dialog pattern — `elif` not `if` in the rendering block (proven in `poc_badge.py` June 2, 2026). Ship behavior first, polish button styling (CSS override to remove default border/bg) on first visual review.
+  - **Session state rendering pattern (critical — must use elif):**
+    ```python
+    if st.session_state.show_why_agy:
+        why_agy_dialog()
+    elif st.session_state.show_how_i_built:
+        how_i_built_dialog()
+    ```
+    Two `if` statements causes `StreamlitAPIException: Only one dialog is allowed to be opened at the same time`. `elif` prevents both flags being true on the same script run.
+- **Wire badge across surfaces — desktop vs mobile (decided June 2, 2026):**
+  - **Body/hero avatars (Home hero, Ask Agy Landing body):** Badge on all viewports — large standalone avatars, tappable at any size. Badge reads correctly at desktop and mobile.
+  - **Header avatars (Ask Agy, Banking, Cross-Industry):** Badge on desktop only. On mobile the header avatar is a ~30px compact brand mark — badge reads as visual noise, tap area too small.
+  - **Mobile nav header avatar:** No badge. Make it tappable (cursor pointer signals interactivity). Users who saw the badge on the body avatar know the avatar opens Why Agy. No hamburger menu entry needed — body avatar is the discovery path on mobile.
+- **Ask Agy Landing note:** Landing has an inline "Why Agy?" section (static body content). Badge on header avatar coexists intentionally — different moments. Do NOT remove the inline section.
+- **Effort:** Small-medium (~2-3 hours raw). New component + badge CSS + wiring across surfaces + mobile handling.
 - **Cross-references:**
-  - MATTGPT-102 — How I Built MattGPT (modal footer link routes there; Why Agy block moves out of How I Built into this modal)
-  - MATTGPT-110 — How Agy Searches → `@st.dialog` migration (sibling modal, same pattern)
-  - MATTGPT-019 — Story count copy ("100+" already applied in locked content above)
-- **Logged:** May 30, 2026. Implementation pattern locked June 1-2, 2026.
+  - MATTGPT-102 — How I Built MattGPT (footer link opens this modal sequentially)
+  - MATTGPT-110 — How Agy Searches (sibling `@st.dialog`; same session flag + elif pattern)
+  - MATTGPT-019 — Story count copy ("100+" already applied)
+- **Logged:** May 30, 2026. Implementation pattern + mobile approach locked June 2, 2026.
 
 ---
 
