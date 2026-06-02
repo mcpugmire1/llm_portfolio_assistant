@@ -2599,13 +2599,13 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
   - **Remove "Technical Details" block** from the modal — it's build content (Pinecone top-K, 1536 dims, confidence gate, XML tags) sitting inside the runtime trust story, and it's a near-verbatim duplicate of How I Built's pipeline sections. Cut it.
   - **Keep everything else** — the narrative flow (You Ask → Agy Searches → You Get Results) and the trust points (filters noise, refuses weak matches, won't fabricate). This is the runtime trust story; it stays.
   - **Add bridge link** at the bottom: *"Want the technical details? See how I built it →"* → routes to How I Built surface (MATTGPT-102).
-- **Implementation pattern:**
-  - Replace `show_how_modal` session state flag + inline conditional block with `@st.dialog` decorator
-  - Trigger: existing "How Agy searches" button in `ask_mattgpt_header.py` — keep button label, keep JS bridge, just open `@st.dialog` instead of toggling inline content
-  - No back-link needed — `@st.dialog` is an overlay, dismiss returns user exactly where they were
-  - Update `landing_view.py` and `conversation_view.py` to remove the `if st.session_state.get("show_how_modal")` conditional block and `render_modal_wrapper_*` calls
-- **Surfaces affected:** Ask Agy Landing, Ask Agy Conversation
-- **Effort:** Small (~1-2 hours raw). Mechanical pattern swap + content trim.
+- **Implementation — due diligence required before building:**
+  1. **Button label toggle must be removed.** `ask_mattgpt_header.py:548-552` currently flips the button between `🔍 How Agy searches` and `✕ Close` based on `show_how_modal` session state. With `@st.dialog` the close affordance moves to the dialog's built-in X / Escape / backdrop — the button stays as `🔍 How Agy searches` always. The `is_open` check, the `how-agy-btn-close` CSS class, and the close-button wiring JS (`render_modal_close_wiring_js` at `ask_mattgpt_header.py:647-685`) all come out. BDD selectors that assert the `✕ Close` label state will need updating.
+  2. **Iframe rendering inside `@st.dialog` is unverified.** The modal content renders as two `components.html()` iframes (`get_how_agy_flow_html()` height=1180, `get_technical_details_html()` height=850) on both Landing (`landing_view.py:65-66`) and Conversation (`conversation_view.py:123-124`). Streamlit's `@st.dialog` wraps content in a fixed-height scrollable container. It is not confirmed that `components.html()` iframes render correctly inside `@st.dialog` — height negotiation between the dialog container and the iframe may behave unexpectedly. **Must PoC this before committing to the pattern.** If iframes don't render cleanly inside `@st.dialog`, the content may need to be rewritten as native Streamlit components or `st.markdown()` + `unsafe_allow_html=True` instead.
+  3. **`show_how_modal` session state key is used in multiple places** — `ask_mattgpt_header.py:24`, `landing_view.py:63`, `conversation_view.py:121`. All references come out when the inline expander is removed.
+  4. **`render_modal_wrapper_start()` / `render_modal_wrapper_end()`** calls in both page files come out. The CSS classes `.how-agy-modal-wrapper` / `.how-agy-modal-container` (defined in `get_header_css()`) may be unused after migration — audit and remove to avoid dead CSS.
+- **Surfaces affected:** Ask Agy Landing (`landing_view.py`), Ask Agy Conversation (`conversation_view.py`), header component (`ask_mattgpt_header.py`)
+- **Effort:** Small-Medium (~1-3 hours raw depending on iframe PoC result). Mechanical if iframes work inside dialog; moderate rewrite if they don't.
 - **Cross-references:**
   - MATTGPT-101 — Why Agy modal (sibling `@st.dialog`; same implementation pattern)
   - MATTGPT-102 — How I Built (bridge link target; Technical Details content moves there)
