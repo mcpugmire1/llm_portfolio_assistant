@@ -2295,6 +2295,7 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
         how_i_built_dialog()
     ```
     Two `if` statements causes `StreamlitAPIException: Only one dialog is allowed to be opened at the same time`. `elif` prevents both flags being true on the same script run.
+- **Badge design (decided June 2, 2026):** Option B — italic *i*, 16×16px dark circle, white border. Reads as "about/learn more" rather than help-seeking "?". CSS: `font-style: italic; font-family: Georgia, serif; font-weight: 700; font-size: 9px; color: white;`
 - **Wire badge across surfaces — desktop vs mobile (decided June 2, 2026):**
   - **Body/hero avatars (Home hero, Ask Agy Landing body):** Badge on all viewports — large standalone avatars, tappable at any size. Badge reads correctly at desktop and mobile.
   - **Header avatars (Ask Agy, Banking, Cross-Industry):** Badge on desktop only. On mobile the header avatar is a ~30px compact brand mark — badge reads as visual noise, tap area too small.
