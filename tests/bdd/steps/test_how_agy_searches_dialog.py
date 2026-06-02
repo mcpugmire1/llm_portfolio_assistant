@@ -22,7 +22,7 @@ DOM landmarks:
   - Conversation nav: submit a query first to reach conversation view
 """
 
-from pytest_bdd import given, scenarios, then, when
+from pytest_bdd import given, parsers, scenarios, then, when
 
 scenarios("../features/how_agy_searches_dialog.feature")
 
@@ -121,7 +121,7 @@ def assert_dialog_visible(browser_page):
         ) from exc
 
 
-@then('the dialog should contain the text "{text}"')
+@then(parsers.parse('the dialog should contain the text "{text}"'))
 def assert_dialog_contains_text(browser_page, text):
     locator = browser_page.locator(f"[role='dialog'] :text('{text}')")
     try:

@@ -535,21 +535,19 @@ def render_header(include_button: bool = True, view: str = "landing") -> None:
     # Inject header CSS (self-contained)
     st.markdown(get_header_css(), unsafe_allow_html=True)
 
-    # Hidden Streamlit button for state management
+    # Hidden Streamlit button — opens How Agy Searches dialog via active_dialog flag.
+    # No longer toggles show_how_modal; dialog close is handled by @st.dialog (X/Escape/backdrop).
+    # Button label is always "How Agy searches" — no ✕ Close state needed.
     if st.button("trigger", key="how_agy_trigger"):
-        st.session_state["show_how_modal"] = not st.session_state.get(
-            "show_how_modal", False
-        )
+        st.session_state["active_dialog"] = "how_agy"
         st.rerun()
 
-    # Build button HTML - text changes based on modal state
+    # Build button HTML — always shows "How Agy searches" (no open/close state)
     button_html = ""
     if include_button:
-        is_open = st.session_state.get("show_how_modal", False)
-        if is_open:
-            button_html = '<button class="how-agy-btn how-agy-btn-close" id="how-agy-btn">✕ Close</button>'
-        else:
-            button_html = '<button class="how-agy-btn" id="how-agy-btn">🔍 How Agy searches</button>'
+        button_html = (
+            '<button class="how-agy-btn" id="how-agy-btn">🔍 How Agy searches</button>'
+        )
 
     # Determine header class based on view
     header_class = (

@@ -14,14 +14,9 @@ import streamlit.components.v1 as components
 
 from ui.components.ask_mattgpt_header import (
     render_header,
-    render_modal_wrapper_end,
-    render_modal_wrapper_start,
     render_status_bar,
 )
-from ui.components.how_agy_modal import (
-    get_how_agy_flow_html,
-    get_technical_details_html,
-)
+from ui.components.how_agy_dialog import render_how_agy_dialog
 from ui.components.thinking_indicator import render_thinking_indicator
 from ui.pages.ask_mattgpt.backend_service import send_to_backend
 from ui.pages.ask_mattgpt.styles import get_landing_css
@@ -59,12 +54,12 @@ def render_landing_page(stories: list[dict]):
     # Header with button
     render_header(include_button=True, view="landing")
 
-    # Modal (if open)
-    if st.session_state.get("show_how_modal", False):
-        st.markdown(render_modal_wrapper_start(), unsafe_allow_html=True)
-        components.html(get_how_agy_flow_html(), height=1180)
-        components.html(get_technical_details_html(), height=850)
-        st.markdown(render_modal_wrapper_end(), unsafe_allow_html=True)
+    # How Agy Searches dialog (MATTGPT-110) — @st.dialog, no inline expander.
+    # active_dialog flag set by how_agy_trigger button in ask_mattgpt_header.py.
+    # Clear flag after call so X/Escape/backdrop dismiss doesn't reopen on next rerun.
+    if st.session_state.get("active_dialog") == "how_agy":
+        render_how_agy_dialog()
+        st.session_state.pop("active_dialog", None)
 
     # === STATUS BAR ===
     st.markdown(render_status_bar(), unsafe_allow_html=True)
