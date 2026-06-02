@@ -123,7 +123,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-099](#mattgpt-099) | Role Match — assess and decide comp handling on JDs that include comp expectations | Open | Medium | Investigation + Action | May 29, 2026 |
 | [MATTGPT-100](#mattgpt-100) | Navigation labels — rename to Home / My Work / Ask Agy / Role Match / My Profile (wireframe-locked) | Open | Medium | Refactor | May 30, 2026 |
 | [MATTGPT-101](#mattgpt-101) | Why Agy? modal + "?" badge on Agy avatar (uniform placement) | Open | Medium | Action | May 30, 2026 |
-| [MATTGPT-102](#mattgpt-102) | How I Built MattGPT — relocate from About Matt section to standalone deep-link surface (no main nav entry) | Open | Medium | Action | May 30, 2026 |
+| [MATTGPT-102](#mattgpt-102) | How I Built MattGPT — `@st.dialog` modal (replaces standalone page; no back button, X to close) | Open | Medium | Action | May 30, 2026 |
 | [MATTGPT-103](#mattgpt-103) | Agy intro line — resolve "20+ years of work" inconsistency with stats bar (Years tile dropped) | Decided Against | Low | Refactor | May 30, 2026 |
 | [MATTGPT-104](#mattgpt-104) | Banking + Cross-Industry landing pages — math reconciliation bug (33 vs 32 vs 48 vs 57 inconsistency) | Open | Medium | Issue | May 30, 2026 |
 | [MATTGPT-105](#mattgpt-105) | Explore Stories — Cards / Timeline / Table views lose CSS styling during Streamlit rerun (same family as MATTGPT-068) | Open | Medium | Issue | May 30, 2026 |
@@ -2299,32 +2299,41 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 ---
 
 ### MATTGPT-102
-**How I Built MattGPT — standalone deep-link surface (page structure + content finalized June 2, 2026)**
+**How I Built MattGPT — `@st.dialog` modal (pattern finalized June 2, 2026)**
 
-- **Status:** Open (page exists at `ui/pages/how_i_built.py`, committed `55f43e5`; back-link mechanism unresolved — see below)
+- **Status:** Open (existing `ui/pages/how_i_built.py` standalone page to be replaced by a `@st.dialog` component)
 - **Priority:** Medium
 - **Type:** Action
-- **Page structure (PoC'd and approved June 2, 2026):**
-  1. Title + subtitle
+- **Pattern decision (June 2, 2026 PoC — `poc_how_i_built_modal.py`):** How I Built is a `@st.dialog`, NOT a standalone page. Same pattern as Why Agy (MATTGPT-101) and How Agy Searches (MATTGPT-110). X / Escape / backdrop closes — no back button, no routing. The standalone page approach was wrong; a page with no nav and no back button strands the user. Modal with X is consistent and clean. PoC confirmed content scrolls cleanly at `width="large"`.
+- **Content structure (PoC'd and approved June 2, 2026):**
+  1. Subtitle: *"A technical deep-dive into the system architecture behind this portfolio"*
   2. **The Problem** — static intro card
   3. **Tech Stack** — 6-item grid
-  4. **System Architecture Flow** — 5-step build-time data lifecycle diagram (kept as-is)
-  5. **Per-query Runtime Pipeline** — NEW stepped component (numbered purple circles, vertical spine, 3 bullets per stage). Replaces the old "Secret Sauce" code block + show/hide expander. Content: Filters noisy input → Detects intent → Retrieves stories → Refuses weak matches → Synthesizes response
-  6. **Detail cards** (2-col grid): Data Pipeline, Embeddings Strategy, CI/CD Pipeline, RAG with GPT-4o, Frontend (full-width). **5-Stage RAG Pipeline card removed** — covered by the stepped component. All remaining cards kept self-contained (no dedup — section-level completeness beats global terseness for a scannable reference page)
-  7. **CTA row** (2-col): "View the source" → GitHub repo + "Read the design spec" → Jekyll spec. Intro line: *"See it for yourself — the proof is in the code and the process."* Repo card first (CTO-first ordering).
-- **Why Agy block removed from this page** — relocated to Why Agy modal (MATTGPT-101). How I Built starts with The Problem, not the brand story.
-- **Back-link:** How I Built IS a standalone surface (navigated to, not overlaid), so it DOES need a context-aware back affordance. Why Agy modal and How Agy Searches do NOT need back links — they're overlays that dismiss in place. Back-link mechanism for How I Built is currently broken (`href="?nav=..."` — Streamlit-hostile). **Must be replaced with `st.button` + `session_state` + `st.rerun()`, mirroring the `return_to_landing` + breadcrumb chip pattern in `explore_stories.py:1748`.** This is the open implementation gap before -102 can be closed.
-- **Entry points** (none wired yet — all pending their respective tickets):
-  - Why Agy modal footer link (MATTGPT-101)
-  - Ask Agy Landing "Curious how I was built?" link (Ask Agy refresh)
+  4. **System Architecture Flow** — 5-step build-time data lifecycle diagram
+  5. **Per-query Runtime Pipeline** — stepped component (numbered purple circles, vertical spine, 3 bullets per stage). Replaces old "Secret Sauce" code block. Content: Filters noisy input → Detects intent → Retrieves stories → Refuses weak matches → Synthesizes response
+  6. **Detail cards** (2-col grid): Data Pipeline, Embeddings Strategy, CI/CD Pipeline, RAG with GPT-4o, Frontend (full-width). 5-Stage RAG Pipeline card removed — covered by stepped component. Cards self-contained (no dedup).
+  7. **CTA row** (2-col): "View the source" → GitHub repo + "Read the design spec" → Jekyll spec. Intro: *"See it for yourself — the proof is in the code and the process."* Repo first (CTO-first ordering).
+- **Why Agy block** — NOT in this modal. Lives in Why Agy modal (MATTGPT-101) only.
+- **No back button** — modal closes with X / Escape / backdrop.
+- **Implementation:**
+  - Create `ui/components/how_i_built_modal.py` with `@st.dialog("How I Built MattGPT", width="large")`
+  - CSS: hardcoded light values throughout (no CSS vars — avoids dark/light mix inside dialog)
+  - Delete `ui/pages/how_i_built.py` (standalone page superseded)
+  - Remove `?route=how-i-built`, `?nav=`, `?from=` handlers from `app.py`
+  - Remove `SECONDARY_SURFACES` / `How I Built` entry from `app.py` navbar suppression
+  - Remove `how_i_built_from` + `_deeplink_route` session state keys from `app.py`
+  - Remove `How I Built` branch from `app.py` routing (`elif active_tab == "How I Built"`)
+  - Wire entry points via `st.button` setting `show_how_i_built = True` + `st.rerun()`
+- **Entry points** (all pending their tickets):
+  - Why Agy modal footer `st.button` (MATTGPT-101)
+  - Ask Agy Landing "Curious how I was built?" `st.button` (Ask Agy refresh)
   - Profile signals panel (Profile v2)
-- **Effort remaining:** ~1-2 hours. Back-link mechanism fix + entry point wiring when -101 ships.
+- **Effort:** ~2-3 hours. New modal component + app.py cleanup + entry point wiring.
 - **Cross-references:**
-  - MATTGPT-101 — Why Agy modal (primary entry point; Why Agy content moved there)
-  - MATTGPT-110 — How Agy Searches → `@st.dialog` (sibling surface decision; bridge link from How Agy to How I Built)
-  - MATTGPT-109 — Jekyll spec sync (How I Built content restructure needs to be reflected in spec)
-  - `explore_stories.py:1748` — reference implementation for context-aware back affordance
-- **Logged:** May 30, 2026. Page structure finalized June 2, 2026.
+  - MATTGPT-101 — Why Agy modal (sibling; footer link triggers this modal)
+  - MATTGPT-110 — How Agy Searches (sibling; bridge link "See how I built it →" triggers this modal)
+  - MATTGPT-109 — Jekyll spec sync (wireframe section 8 now modal treatment, not page)
+- **Logged:** May 30, 2026. Modal pattern finalized June 2, 2026.
 
 ---
 
