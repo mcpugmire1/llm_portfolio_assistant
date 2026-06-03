@@ -119,19 +119,19 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-095](#mattgpt-095) | Anti-consulting bias in story framing — corpus reads "consulting" as default register when it shouldn't | Open | Medium | Action | May 28, 2026 |
 | [MATTGPT-096](#mattgpt-096) | Methodology context dropped during synthesis — TDD/BDD and ways-of-working substance gets compressed out of metric claims (hypothesis to verify) | Open | Medium | Issue | May 28, 2026 |
 | [MATTGPT-097](#mattgpt-097) | Career-intent framing refresh — corpus predates current role taxonomy; refresh framing AND tighten register | Open | Medium | Action | May 28, 2026 |
-| [MATTGPT-098](#mattgpt-098) | Explore Stories default state — exclude Professional Narrative + sort Start_Date desc (match Timeline behavior) | Open | Medium | Action | May 29, 2026 |
+| [MATTGPT-098](#mattgpt-098) | Explore Stories default state — exclude Professional Narrative + sort Start_Date desc (match Timeline behavior) | Done | Medium | Action | May 29, 2026 |
 | [MATTGPT-099](#mattgpt-099) | Role Match — assess and decide comp handling on JDs that include comp expectations | Open | Medium | Investigation + Action | May 29, 2026 |
-| [MATTGPT-100](#mattgpt-100) | Navigation labels — rename to Home / My Work / Ask Agy / Role Match / My Profile (wireframe-locked) | Open | Medium | Refactor | May 30, 2026 |
+| [MATTGPT-100](#mattgpt-100) | Navigation labels — rename to Home / My Work / Ask Agy / Role Match / My Profile (wireframe-locked) | Done | Medium | Refactor | May 30, 2026 |
 | [MATTGPT-101](#mattgpt-101) | Why Agy? modal + "?" badge on Agy avatar (uniform placement) | Open | Medium | Action | May 30, 2026 |
-| [MATTGPT-102](#mattgpt-102) | How I Built MattGPT — `@st.dialog` modal (replaces standalone page; no back button, X to close) | Open | Medium | Action | May 30, 2026 |
+| [MATTGPT-102](#mattgpt-102) | How I Built MattGPT — `@st.dialog` modal (replaces standalone page; no back button, X to close) | Done | Medium | Action | May 30, 2026 |
 | [MATTGPT-103](#mattgpt-103) | Agy intro line — resolve "20+ years of work" inconsistency with stats bar (Years tile dropped) | Decided Against | Low | Refactor | May 30, 2026 |
-| [MATTGPT-104](#mattgpt-104) | Banking + Cross-Industry landing pages — math reconciliation bug (33 vs 32 vs 48 vs 57 inconsistency) | Open | Medium | Issue | May 30, 2026 |
+| [MATTGPT-104](#mattgpt-104) | Banking + Cross-Industry landing pages — math reconciliation bug (33 vs 32 vs 48 vs 57 inconsistency) | Done | Medium | Issue | May 30, 2026 |
 | [MATTGPT-105](#mattgpt-105) | Explore Stories — Cards / Timeline / Table views lose CSS styling during Streamlit rerun (same family as MATTGPT-068) | Open | Medium | Issue | May 30, 2026 |
-| [MATTGPT-106](#mattgpt-106) | Navbar desktop layout — add MattGPT brand element, restructure to space-between (align with mobile + wireframe) | Open | Medium | Action | May 30, 2026 |
-| [MATTGPT-107](#mattgpt-107) | Home category cards redesign — unify card treatment, 3-column grid, compact content (align with wireframe) | Open | Medium | Action | May 31, 2026 |
+| [MATTGPT-106](#mattgpt-106) | Navbar desktop layout — add MattGPT brand element, restructure to space-between (align with mobile + wireframe) | Done | Medium | Action | May 30, 2026 |
+| [MATTGPT-107](#mattgpt-107) | Home category cards redesign — unify card treatment, 3-column grid, compact content (align with wireframe) | Done | Medium | Action | May 31, 2026 |
 | [MATTGPT-108](#mattgpt-108) | Home category cards — add capability-based counts to the 4 non-industry cards (resolve asymmetry from -107 / -104) | Open | Medium | Action | June 1, 2026 |
 | [MATTGPT-109](#mattgpt-109) | mattgpt-design-spec Jekyll site — sync UI refresh changes (nav labels, navbar, cards, How I Built, How Agy Searches, Why Agy modal, user journeys) | Open | High | Action | June 1, 2026 |
-| [MATTGPT-110](#mattgpt-110) | How Agy Searches — migrate inline expander to `@st.dialog` + remove Technical Details block | Open | Medium | Action | June 2, 2026 |
+| [MATTGPT-110](#mattgpt-110) | How Agy Searches — migrate inline expander to `@st.dialog` + remove Technical Details block | Done | Medium | Action | June 2, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -2612,7 +2612,8 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 ### MATTGPT-110
 **How Agy Searches — migrate inline expander to `@st.dialog` + remove Technical Details block**
 
-- **Status:** Open
+- **Status:** Done
+- **Resolved:** June 2, 2026 — `37806a7` (dialog migration, 5/5 BDD passing) + `e24c1cb` (navbar CSS scope fix + dialog CSS regression guards, 5/5 passing)
 - **Priority:** Medium
 - **Type:** Action
 - **Decision (June 1, 2026 PoC):** `@st.dialog` is confirmed as the right pattern for "How Agy Searches." The PoC showed the dialog version is significantly better than the current inline expander — content gets its own focused container, the conversation/page stays intact behind the overlay, and dismiss (X / Escape / backdrop) is clean. The inline expander pushes the entire conversation down the page, creating significant UX friction on the Conversation view specifically.

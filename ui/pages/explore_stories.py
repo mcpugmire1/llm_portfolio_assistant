@@ -632,8 +632,8 @@ def render_explore_stories(
     <div class="conversation-header-content">
         <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_explore_stories.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
         <div class="conversation-header-text">
-            <h1>Project Stories & Insights</h1>
-            <p>Browse 130+ transformation case studies, or ask Agy 🐾 for the deeper context</p>
+            <h1>Matt's Project Portfolio</h1>
+            <p>Meet Agy 🐾 — Tracking down insights across 100+ projects</p>
         </div>
     </div>
 </div>

@@ -722,7 +722,7 @@ def render_role_match(stories: list[dict]):
     min-height: 184px;
     box-sizing: border-box;
     border-radius: 0;
-    margin: -3rem 0 0 0;
+    margin: -2rem 0 0 0;
 }
 
 .conversation-header-content {
@@ -768,7 +768,7 @@ def render_role_match(stories: list[dict]):
         <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
         <div class="conversation-header-text">
             <h1>Role Match</h1>
-            <p>Drop a job description. Agy will show you evidence where Matt fits — and where he doesn't.</p>
+            <p>Drop a job description — Agy shows where Matt fits, and where he doesn't.</p>
         </div>
     </div>
 </div>

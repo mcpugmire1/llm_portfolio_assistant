@@ -253,7 +253,7 @@ def render_stats_bar():
             grid-template-columns: repeat(4, 1fr);
             border-bottom: 2px solid var(--border-color);
             margin-bottom: 30px;
-            margin-top: -15px;
+            margin-top: 1px;
         }
 
         .stat {

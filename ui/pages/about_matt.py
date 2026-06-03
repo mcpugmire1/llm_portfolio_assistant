@@ -48,10 +48,9 @@ def render_about_matt():
              style="width: 120px; height: 120px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.2); object-fit: cover; background: rgba(255,255,255,0.1);"
              alt="Matt Pugmire">
         <div class="about-header-text">
-            <h1>Matt Pugmire</h1>
-            <p style="font-size: 17px; margin-bottom: 12px;">Technology & Transformation Leader | Platform Engineering | Digital Product Development | AI & Cloud</p>
-            <p style="font-size: 14px; opacity: 0.9; line-height: 1.6; max-width: 800px;">
-                I build new capabilities — products, platforms, and teams — using modern engineering, cloud, and AI.
+            <h1 style="margin-bottom: 4px;">Matt Pugmire</h1>
+            <p style="font-size: 17px; opacity: 0.9; line-height: 1.6; max-width: 800px;">
+                Engineering leader · builds organizations from zero · platform modernization · AI · Atlanta · open to relocate
             </p>
         </div>
     </div>

@@ -182,6 +182,17 @@ def apply_global_styles():
             display: none !important;
         }
 
+        /* Collapse zero-contribution Streamlit wrapper elements so they don't
+           generate phantom gap spacing in the parent stVerticalBlock (gap: 16px).
+           Covers: style-only markdown injections (MATTGPT-107, promoted global),
+           zero-height iframe injections (components.html height=0), empty wrappers.
+           All components.html calls in this codebase use height=0 — no visible
+           iframes are hidden by the stIFrame selector. */
+        div[data-testid="stElementContainer"]:has(> div[data-testid="stMarkdown"] > div[data-testid="stMarkdownContainer"] > style:only-child),
+        div[data-testid="stElementContainer"]:has(> [data-testid="stIFrame"]) {
+            display: none !important;
+        }
+
         /* ========================================
            UNIVERSAL LAYOUT RESET
            ======================================== */
@@ -722,7 +733,7 @@ def apply_global_styles():
     padding: 32px;
     min-height: 184px;
     box-sizing: border-box;
-    margin-top: -60px !important;
+    margin-top: -32px !important;
     margin-bottom: 0 !important;
     color: white;
 }

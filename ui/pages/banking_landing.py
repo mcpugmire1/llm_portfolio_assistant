@@ -75,11 +75,10 @@ def render_banking_landing(stories: list[dict]):
         render_why_agy_dialog()
         st.session_state.pop("active_dialog", None)
 
-    st.markdown(
-        '<style>[class*="st-key-why_agy_banking_trigger"] { display: none !important; }</style>',
-        unsafe_allow_html=True,
-    )
-    if st.button("", key="why_agy_banking_trigger"):
+    # Hidden trigger — position:absolute+height:0 removes from flow (no layout space).
+    # Must come before the hero so CSS in the hero's <style> block can target it.
+    # Pattern mirrors ask_mattgpt_header.py how_agy_trigger handling exactly.
+    if st.button("trigger", key="why_agy_banking_trigger"):
         st.session_state["active_dialog"] = "why_agy"
         st.rerun()
     components.html(
@@ -112,9 +111,26 @@ def render_banking_landing(stories: list[dict]):
         height=0,
     )
 
-    # Hero header with Agy avatar (deep blue headphones - authority, trust)
+    # Hero — CSS for trigger hiding embedded here (same st.markdown = same
+    # stMarkdownContainer, no extra DOM element before the hero).
     st.markdown(
         f"""
+<style>
+[class*="st-key-why_agy_banking_trigger"] {{
+    position: absolute !important;
+    left: -9999px !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}}
+div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_banking_trigger"]) {{
+    position: absolute !important;
+    left: -9999px !important;
+    height: 0 !important;
+    overflow: hidden !important;
+}}
+</style>
 <div class="conversation-header">
     <div class="conversation-header-content">
         <div style="position: relative; display: inline-block; flex-shrink: 0;">
@@ -218,7 +234,7 @@ def render_banking_landing(stories: list[dict]):
         min-height: 184px;
         box-sizing: border-box;
         border-radius: 0;
-        margin: -3rem 0 0 0;
+        margin: -2rem 0 0 0;
     }
 
     .conversation-header-content {

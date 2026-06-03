@@ -62,13 +62,13 @@ def get_header_css() -> str:
 
     /* Landing page header */
     .ask-header-landing {
-        margin-top: -80px !important;
+        margin-top: -64px !important;
         margin-bottom: 0 !important;
     }
 
     /* Conversation view header */
     .ask-header-conversation {
-        margin-top: -80px !important;
+        margin-top: -64px !important;
         margin-bottom: 0 !important;
     }
 
@@ -235,6 +235,16 @@ def get_header_css() -> str:
         left: -9999px !important;
         opacity: 0 !important;
         pointer-events: none !important;
+        height: 0 !important;
+        overflow: hidden !important;
+    }
+    /* Also zero the outer stElementContainer wrappers — the inner button being
+       position:absolute leaves the wrapper as a flex item that still contributes
+       height to the layout. :has() removes the wrapper from flow entirely. */
+    div[data-testid="stElementContainer"]:has([class*="st-key-how_agy_trigger"]),
+    div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_header_trigger"]) {
+        position: absolute !important;
+        left: -9999px !important;
         height: 0 !important;
         overflow: hidden !important;
     }
@@ -446,6 +456,13 @@ def get_header_css() -> str:
         padding: 0 !important;
         overflow: hidden !important;
     }
+    div[data-testid="stElementContainer"]:has([class*="st-key-how_agy_trigger"]),
+    div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_header_trigger"]) {
+        position: absolute !important;
+        left: -9999px !important;
+        height: 0 !important;
+        overflow: hidden !important;
+    }
 
     /* Kill gaps on all elements between header and status bar */
     .ask-header-landing + *,
@@ -575,7 +592,7 @@ def render_header(include_button: bool = True, view: str = "landing") -> None:
                     </div>
                     <div class="header-text">
                         <h1>Ask Agy</h1>
-                        <p>Meet Agy 🐾 — Tracking down insights from 20+ years of transformation experience</p>
+                        <p>Meet Agy 🐾 — Tracking down insights across 100+ projects</p>
                     </div>
                 </div>
                 """

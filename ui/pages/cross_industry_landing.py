@@ -9,6 +9,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 from ui.components.footer import render_footer
+from ui.components.why_agy_dialog import render_why_agy_dialog
 from utils.landing_cards import build_card_wiring_js, build_landing_cards
 
 
@@ -61,15 +62,74 @@ def render_cross_industry_landing(stories: list[dict]):
         height=0,
     )
 
-    # Hero header with Agy avatar (green headphones - versatility, growth)
+    if st.session_state.get("active_dialog") == "why_agy":
+        render_why_agy_dialog()
+        st.session_state.pop("active_dialog", None)
+
+    # Hidden trigger — position:absolute+height:0 removes from flow (no layout space).
+    # Pattern mirrors ask_mattgpt_header.py how_agy_trigger handling exactly.
+    if st.button("trigger", key="why_agy_cross_trigger"):
+        st.session_state["active_dialog"] = "why_agy"
+        st.rerun()
+    components.html(
+        """
+<script>
+(function() {
+    function wireBadge() {
+        var parentDoc = window.parent.document;
+        var badge = parentDoc.getElementById('why-agy-badge-cross');
+        var btn = parentDoc.querySelector('[class*="st-key-why_agy_cross_trigger"] button');
+        if (badge && btn && !badge.dataset.wired) {
+            badge.dataset.wired = 'true';
+            badge.addEventListener('pointerdown', function(e) {
+                e.preventDefault();
+                btn.click();
+            });
+            return true;
+        }
+        return false;
+    }
+    if (!wireBadge()) {
+        var attempts = 0;
+        var iv = setInterval(function() {
+            if (wireBadge() || ++attempts > 10) clearInterval(iv);
+        }, 200);
+    }
+})();
+</script>
+""",
+        height=0,
+    )
+
+    # Hero — CSS for trigger hiding embedded here (same st.markdown = same
+    # stMarkdownContainer, no extra DOM element before the hero).
     st.markdown(
         f"""
+<style>
+[class*="st-key-why_agy_cross_trigger"] {{
+    position: absolute !important;
+    left: -9999px !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}}
+div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_cross_trigger"]) {{
+    position: absolute !important;
+    left: -9999px !important;
+    height: 0 !important;
+    overflow: hidden !important;
+}}
+</style>
 <div class="conversation-header">
     <div class="conversation-header-content">
-        <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_cross_industry.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
+        <div style="position: relative; display: inline-block; flex-shrink: 0;">
+            <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_cross_industry.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
+            <span class="why-agy-badge--header" id="why-agy-badge-cross">i</span>
+        </div>
         <div class="conversation-header-text">
-            <h1>Agy's Cross-Industry Playbook</h1>
-            <p>Tracking proven methods across {total_projects} transformation capabilities — ask Agy 🐾 to find what's repeatable</p>
+            <h1>Matt's Cross-Industry Expertise</h1>
+            <p> {total_projects} projects across 6 industries — trust Agy 🐾 to surface the patterns that travel</p>
         </div>
     </div>
 </div>
@@ -139,7 +199,7 @@ def render_cross_industry_landing(stories: list[dict]):
         min-height: 184px;
         box-sizing: border-box;
         border-radius: 0;
-        margin: -3rem 0 0 0;
+        margin: -2rem 0 0 0;
     }
 
     .conversation-header-content {
