@@ -45,6 +45,18 @@ Feature: Why Agy? — "i" badge triggers origin story dialog
     Given I navigate to the Cross-Industry landing page at viewport width 1280
     Then the header avatar has a visible "i" badge
 
+  # ── Role Match header ────────────────────────────────────
+
+  Scenario: Badge renders on Role Match header avatar on desktop
+    Given I navigate to the Role Match page at viewport width 1280
+    Then the header avatar has a visible "i" badge
+
+  # ── My Work header ────────────────────────────────────────
+
+  Scenario: Badge renders on My Work header avatar on desktop
+    Given I navigate to the My Work page at viewport width 1280
+    Then the header avatar has a visible "i" badge
+
   # ── Dialog content (triggered via Ask Agy landing body) ───
 
   Scenario: Clicking badge opens Why Agy dialog

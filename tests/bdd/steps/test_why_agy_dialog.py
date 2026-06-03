@@ -52,6 +52,10 @@ BANKING_CARD_BTN = "[class*='st-key-card_btn_banking'] button"
 BANKING_READY = ".capability-card"
 CROSS_CARD_BTN = "[class*='st-key-card_btn_cross_industry'] button"
 CROSS_READY = ".capability-card"
+ROLE_MATCH_BTN = "[class*='st-key-topnav_Role-Match'] button"
+ROLE_MATCH_READY = ".conversation-header"
+MY_WORK_BTN = "[class*='st-key-topnav_My-Work'] button"
+MY_WORK_READY = ".conversation-header"
 
 # Badge selectors
 BADGE_HERO = ".hero-gradient-wrapper .why-agy-badge"
@@ -113,6 +117,26 @@ def _nav_cross(page, app_url, width):
     page.wait_for_selector(CROSS_READY, timeout=LONG_TIMEOUT)
 
 
+def _nav_role_match(page, app_url, width):
+    page.set_viewport_size({"width": width, "height": 844})
+    page.goto(app_url)
+    page.wait_for_load_state("networkidle")
+    page.wait_for_selector(ROLE_MATCH_BTN, state="attached", timeout=LONG_TIMEOUT)
+    page.locator(ROLE_MATCH_BTN).first.dispatch_event("click")
+    _wait(page)
+    page.wait_for_selector(ROLE_MATCH_READY, timeout=LONG_TIMEOUT)
+
+
+def _nav_my_work(page, app_url, width):
+    page.set_viewport_size({"width": width, "height": 844})
+    page.goto(app_url)
+    page.wait_for_load_state("networkidle")
+    page.wait_for_selector(MY_WORK_BTN, state="attached", timeout=LONG_TIMEOUT)
+    page.locator(MY_WORK_BTN).first.dispatch_event("click")
+    _wait(page)
+    page.wait_for_selector(MY_WORK_READY, timeout=LONG_TIMEOUT)
+
+
 # =============================================================================
 # GIVEN — Background
 # =============================================================================
@@ -153,6 +177,16 @@ def navigate_banking_viewport(browser_page, app_url, width):
 )
 def navigate_cross_viewport(browser_page, app_url, width):
     _nav_cross(browser_page, app_url, width)
+
+
+@given(parsers.parse("I navigate to the Role Match page at viewport width {width:d}"))
+def navigate_role_match_viewport(browser_page, app_url, width):
+    _nav_role_match(browser_page, app_url, width)
+
+
+@given(parsers.parse("I navigate to the My Work page at viewport width {width:d}"))
+def navigate_my_work_viewport(browser_page, app_url, width):
+    _nav_my_work(browser_page, app_url, width)
 
 
 # =============================================================================
