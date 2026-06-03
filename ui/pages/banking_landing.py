@@ -11,6 +11,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 from ui.components.footer import render_footer
+from ui.components.why_agy_dialog import render_why_agy_dialog
 from utils.client_utils import is_generic_client
 from utils.landing_cards import build_card_wiring_js, build_landing_cards
 
@@ -70,12 +71,56 @@ def render_banking_landing(stories: list[dict]):
         height=0,
     )
 
+    if st.session_state.get("active_dialog") == "why_agy":
+        render_why_agy_dialog()
+        st.session_state.pop("active_dialog", None)
+
+    st.markdown(
+        '<style>[class*="st-key-why_agy_banking_trigger"] { display: none !important; }</style>',
+        unsafe_allow_html=True,
+    )
+    if st.button("", key="why_agy_banking_trigger"):
+        st.session_state["active_dialog"] = "why_agy"
+        st.rerun()
+    components.html(
+        """
+<script>
+(function() {
+    function wireBadge() {
+        var parentDoc = window.parent.document;
+        var badge = parentDoc.getElementById('why-agy-badge-banking');
+        var btn = parentDoc.querySelector('[class*="st-key-why_agy_banking_trigger"] button');
+        if (badge && btn && !badge.dataset.wired) {
+            badge.dataset.wired = 'true';
+            badge.addEventListener('pointerdown', function(e) {
+                e.preventDefault();
+                btn.click();
+            });
+            return true;
+        }
+        return false;
+    }
+    if (!wireBadge()) {
+        var attempts = 0;
+        var iv = setInterval(function() {
+            if (wireBadge() || ++attempts > 10) clearInterval(iv);
+        }, 200);
+    }
+})();
+</script>
+""",
+        height=0,
+    )
+
     # Hero header with Agy avatar (deep blue headphones - authority, trust)
     st.markdown(
         f"""
 <div class="conversation-header">
     <div class="conversation-header-content">
-        <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_banking.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
+        <div style="position: relative; display: inline-block; flex-shrink: 0;">
+            <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_banking.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
+            <span class="why-agy-badge--header" id="why-agy-badge-banking">i</span>
+        </div>
         <div class="conversation-header-text">
             <h1>Matt's Financial Services Expertise</h1>
             <p>{total_projects} projects across {num_capabilities} specialized areas — trust Agy 🐾 to filter decades of domain experience</p>

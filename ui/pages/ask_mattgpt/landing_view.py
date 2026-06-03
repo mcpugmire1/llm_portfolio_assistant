@@ -18,6 +18,7 @@ from ui.components.ask_mattgpt_header import (
 )
 from ui.components.how_agy_dialog import render_how_agy_dialog
 from ui.components.thinking_indicator import render_thinking_indicator
+from ui.components.why_agy_dialog import render_why_agy_dialog
 from ui.pages.ask_mattgpt.backend_service import send_to_backend
 from ui.pages.ask_mattgpt.styles import get_landing_css
 
@@ -57,7 +58,10 @@ def render_landing_page(stories: list[dict]):
     # How Agy Searches dialog (MATTGPT-110) — @st.dialog, no inline expander.
     # active_dialog flag set by how_agy_trigger button in ask_mattgpt_header.py.
     # Clear flag after call so X/Escape/backdrop dismiss doesn't reopen on next rerun.
-    if st.session_state.get("active_dialog") == "how_agy":
+    if st.session_state.get("active_dialog") == "why_agy":
+        render_why_agy_dialog()
+        st.session_state.pop("active_dialog", None)
+    elif st.session_state.get("active_dialog") == "how_agy":
         render_how_agy_dialog()
         st.session_state.pop("active_dialog", None)
 
@@ -69,8 +73,9 @@ def render_landing_page(stories: list[dict]):
         st.markdown(
             """
         <div class="main-intro-section">
-            <div class="main-avatar">
+            <div class="main-avatar" style="position: relative; display: inline-block;">
                 <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png" alt="Agy"/>
+                <span class="why-agy-badge" id="why-agy-badge-landing">i</span>
             </div>
             <h2 class="welcome-title">Hi, I'm Agy 🐾</h2>
             <p class="intro-text-primary">
@@ -82,6 +87,44 @@ def render_landing_page(stories: list[dict]):
         </div>
         """,
             unsafe_allow_html=True,
+        )
+
+        # Hidden trigger for Why Agy badge — badge click fires this via JS bridge.
+        st.markdown(
+            '<style>[class*="st-key-why_agy_landing_body_trigger"] { display: none !important; }</style>',
+            unsafe_allow_html=True,
+        )
+        if st.button("", key="why_agy_landing_body_trigger"):
+            st.session_state["active_dialog"] = "why_agy"
+            st.rerun()
+        components.html(
+            """
+<script>
+(function() {
+    function wireBadge() {
+        var parentDoc = window.parent.document;
+        var badge = parentDoc.getElementById('why-agy-badge-landing');
+        var btn = parentDoc.querySelector('[class*="st-key-why_agy_landing_body_trigger"] button');
+        if (badge && btn && !badge.dataset.wired) {
+            badge.dataset.wired = 'true';
+            badge.addEventListener('pointerdown', function(e) {
+                e.preventDefault();
+                btn.click();
+            });
+            return true;
+        }
+        return false;
+    }
+    if (!wireBadge()) {
+        var attempts = 0;
+        var iv = setInterval(function() {
+            if (wireBadge() || ++attempts > 10) clearInterval(iv);
+        }, 200);
+    }
+})();
+</script>
+""",
+            height=0,
         )
 
         st.markdown(

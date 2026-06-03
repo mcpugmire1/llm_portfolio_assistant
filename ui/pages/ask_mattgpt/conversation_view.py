@@ -22,6 +22,7 @@ from ui.components.ask_mattgpt_header import (
 )
 from ui.components.how_agy_dialog import render_how_agy_dialog
 from ui.components.thinking_indicator import render_thinking_indicator
+from ui.components.why_agy_dialog import render_why_agy_dialog
 
 # Import from refactored modules
 from ui.pages.ask_mattgpt.backend_service import send_to_backend
@@ -113,7 +114,10 @@ def render_conversation_view(stories: list[dict]):
     # ============================================================================
     # @st.dialog replaces inline expander. active_dialog flag set by header trigger.
     # Clear flag after call so X/Escape/backdrop dismiss doesn't reopen on next rerun.
-    if st.session_state.get("active_dialog") == "how_agy":
+    if st.session_state.get("active_dialog") == "why_agy":
+        render_why_agy_dialog()
+        st.session_state.pop("active_dialog", None)
+    elif st.session_state.get("active_dialog") == "how_agy":
         render_how_agy_dialog()
         st.session_state.pop("active_dialog", None)
 

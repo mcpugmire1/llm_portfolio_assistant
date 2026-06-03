@@ -29,9 +29,9 @@ Feature: Why Agy? — "i" badge triggers origin story dialog
     Given I navigate to the "Ask Agy" page at viewport width 1280
     Then the Ask Agy header avatar has a visible "i" badge
 
-  Scenario: No badge on Ask Agy header avatar on mobile
+  Scenario: Badge renders on Ask Agy header avatar on mobile
     Given I navigate to the "Ask Agy" page at viewport width 390
-    Then the Ask Agy header avatar does not have a visible "i" badge
+    Then the Ask Agy header avatar has a visible "i" badge
 
   # ── Banking Landing header (desktop only) ─────────────────
 

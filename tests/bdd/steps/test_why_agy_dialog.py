@@ -242,19 +242,6 @@ def assert_ask_agy_header_badge_visible(browser_page):
         ) from exc
 
 
-@then('the Ask Agy header avatar does not have a visible "i" badge')
-def assert_ask_agy_header_badge_hidden_mobile(browser_page):
-    badge = browser_page.locator(BADGE_ASK_AGY_HEADER)
-    # Badge may be present in the DOM but CSS hides it at ≤768px (display: none).
-    # is_visible() returns False for display:none elements.
-    is_visible = badge.count() > 0 and badge.first.is_visible()
-    assert not is_visible, (
-        "Expected .why-agy-badge--header inside ask-header to be hidden at mobile "
-        "viewport (≤768px) but it was visible. "
-        "MATTGPT-101: mobile CSS exclusion not applied to header badge."
-    )
-
-
 @then('the header avatar has a visible "i" badge')
 def assert_header_badge_visible(browser_page):
     # Shared assertion for Banking and Cross-Industry landing pages.

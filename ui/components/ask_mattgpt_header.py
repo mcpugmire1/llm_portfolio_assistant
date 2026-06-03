@@ -228,8 +228,9 @@ def get_header_css() -> str:
         background: rgba(255, 255, 255, 0.4);
     }
 
-    /* Hide the Streamlit trigger button */
-    [class*="st-key-how_agy_trigger"] {
+    /* Hide the Streamlit trigger buttons */
+    [class*="st-key-how_agy_trigger"],
+    [class*="st-key-why_agy_header_trigger"] {
         position: absolute !important;
         left: -9999px !important;
         opacity: 0 !important;
@@ -433,8 +434,9 @@ def get_header_css() -> str:
         padding-top: 0 !important;
     }
 
-    /* Hide the trigger button container AND remove its space */
-    [class*="st-key-how_agy_trigger"] {
+    /* Hide the trigger button containers AND remove their space */
+    [class*="st-key-how_agy_trigger"],
+    [class*="st-key-why_agy_header_trigger"] {
         position: absolute !important;
         left: -9999px !important;
         opacity: 0 !important;
@@ -542,6 +544,11 @@ def render_header(include_button: bool = True, view: str = "landing") -> None:
         st.session_state["active_dialog"] = "how_agy"
         st.rerun()
 
+    # Hidden trigger for Why Agy badge — wired via JS bridge below.
+    if st.button("", key="why_agy_header_trigger"):
+        st.session_state["active_dialog"] = "why_agy"
+        st.rerun()
+
     # Build button HTML — always shows "How Agy searches" (no open/close state)
     button_html = ""
     if include_button:
@@ -560,9 +567,12 @@ def render_header(include_button: bool = True, view: str = "landing") -> None:
         <div class="{header_class}">
             <div class="header-content" style="display: flex; justify-content: space-between; ">
                 <div style="display: flex; align-items: flex-start; gap: 24px;">
-                    <img class="header-agy-avatar"
-                        src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png"
-                        alt="Agy"/>
+                    <div style="position: relative; display: inline-block; flex-shrink: 0;">
+                        <img class="header-agy-avatar"
+                            src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png"
+                            alt="Agy"/>
+                        <span class="why-agy-badge--header" id="why-agy-badge-header">i</span>
+                    </div>
                     <div class="header-text">
                         <h1>Ask Agy</h1>
                         <p>Meet Agy 🐾 — Tracking down insights from 20+ years of transformation experience</p>
@@ -581,6 +591,40 @@ def render_header(include_button: bool = True, view: str = "landing") -> None:
     # Wire the HTML button to the Streamlit button
     if include_button:
         render_button_wiring_js()
+
+    # Wire the badge to its hidden trigger (always, not conditional on include_button)
+    components.html(
+        """
+        <script>
+        (function() {
+            function wireBadge() {
+                var parentDoc = window.parent.document;
+                var badge = parentDoc.getElementById('why-agy-badge-header');
+                var btn = parentDoc.querySelector('[class*="st-key-why_agy_header_trigger"] button');
+                if (badge && btn && !badge.dataset.wired) {
+                    badge.dataset.wired = 'true';
+                    // pointerdown fires immediately on both mouse and touch —
+                    // avoids the 300ms click delay on mobile that makes the badge
+                    // appear unresponsive on tap.
+                    badge.addEventListener('pointerdown', function(e) {
+                        e.preventDefault();
+                        btn.click();
+                    });
+                    return true;
+                }
+                return false;
+            }
+            if (!wireBadge()) {
+                var attempts = 0;
+                var iv = setInterval(function() {
+                    if (wireBadge() || ++attempts > 10) clearInterval(iv);
+                }, 200);
+            }
+        })();
+        </script>
+        """,
+        height=0,
+    )
 
 
 def render_button_wiring_js() -> None:

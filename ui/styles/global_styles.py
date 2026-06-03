@@ -60,6 +60,7 @@ def apply_global_styles():
             --banner-info-bg: rgba(139, 92, 246, 0.05);
             --banner-info-border: #8B5CF6;
             --banner-info-text: #6B21A8;
+            --badge-bg: #FFFFFF;
 
             /* Tables */
             --table-header-bg: #F9FAFB;
@@ -112,6 +113,7 @@ def apply_global_styles():
             --banner-info-bg: rgba(139, 92, 246, 0.15);
             --banner-info-border: #A78BFA;
             --banner-info-text: #C4B5FD;
+            --badge-bg: #FFFFFF;
 
             /* Tables */
             --table-header-bg: #1E1E2E;
@@ -608,6 +610,58 @@ def apply_global_styles():
             }
             .header-agy-avatar { width: 80px !important; height: 80px !important; }
             .stChatMessage img { width: 50px !important; height: 50px !important; }
+        }
+
+        /* ========================================
+           WHY AGY BADGE — MATTGPT-101
+           ======================================== */
+        .why-agy-badge,
+        .why-agy-badge--header {
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--dark-navy);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-style: italic;
+            font-family: Georgia, serif;
+            font-weight: 700;
+            font-size: 11px;
+            color: var(--badge-bg);
+            transition: transform 0.15s ease;
+            z-index: 10;
+            user-select: none;
+            line-height: 1;
+        }
+        /* Body avatars sit on white/light card — gray border separates from background */
+        .why-agy-badge {
+            border: 2px solid var(--border-color);
+        }
+        /* Header avatars sit on purple gradient — white border lifts off the gradient */
+        .why-agy-badge--header {
+            border: 2px solid var(--badge-bg);
+        }
+        .why-agy-badge:hover,
+        .why-agy-badge--header:hover {
+            transform: scale(1.15);
+        }
+        /* Hero badge — offset from edge on the 280px illustration */
+        .hero-gradient-wrapper .why-agy-badge {
+            bottom: 10px;
+            right: 10px;
+        }
+        /* Mobile: avatars scale to 60-64px; -2px/-2px lands badge center at circle edge */
+        @media (max-width: 768px) {
+            .why-agy-badge,
+            .why-agy-badge--header {
+                right: -2px;
+                bottom: -2px;
+            }
         }
 
         /* My Profile sample-question chip buttons (MATTGPT-068).
