@@ -86,7 +86,7 @@ Coverage status (April 2026):
 """
 
 import pytest
-from pytest_bdd import given, scenario, then, when
+from pytest_bdd import given, parsers, scenario, then, when
 
 # =============================================================================
 # WAIT UTILITIES — Same constants as test_explore_stories.py
@@ -172,6 +172,12 @@ def test_mobile_desktop_only_message():
 
 @scenario("../features/role_match.feature", "Desktop shows full Role Match interface")
 def test_desktop_shows_full_interface():
+    pass
+
+
+# Regression guard — mobile gate broken 3x via CSS/JS changes to global_styles.py / app.py
+@scenario("../features/role_match.feature", "Role Match shows mobile gate at 375px")
+def test_role_match_shows_mobile_gate_at_375px():
     pass
 
 
@@ -388,6 +394,22 @@ def viewport_mobile(browser_page):
 def viewport_desktop(browser_page):
     browser_page.set_viewport_size({"width": 1280, "height": 900})
     browser_page.wait_for_timeout(SHORT_WAIT)
+
+
+@then(parsers.parse('the page contains "{text}"'))
+def page_contains_text(browser_page, text):
+    locator = browser_page.locator(f"text={text}")
+    assert (
+        locator.count() > 0
+    ), f"Expected page to contain '{text}' but it was not found."
+
+
+@then("the textarea is not visible")
+def textarea_not_visible(browser_page):
+    textarea = browser_page.locator(ROLE_MATCH_INPUT_SELECTOR)
+    assert (
+        not textarea.is_visible()
+    ), "Expected textarea to be hidden on mobile but it was visible."
 
 
 @given("the user has not submitted a job description")
