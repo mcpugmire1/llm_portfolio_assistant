@@ -396,6 +396,18 @@ def viewport_desktop(browser_page):
     browser_page.wait_for_timeout(SHORT_WAIT)
 
 
+@given(parsers.parse("the user is on a device with viewport width {width:d}px"))
+def given_viewport_at_explicit_width(browser_page, app_url, width):
+    """Set viewport to an explicit width BEFORE navigating so streamlit_js_eval
+    captures the correct viewport width on first render."""
+    browser_page.set_viewport_size({"width": width, "height": 800})
+    browser_page.goto(app_url)
+    browser_page.wait_for_load_state("networkidle")
+    _wait_for_navbar_stable(browser_page)
+    browser_page.locator(ROLE_MATCH_NAV_SELECTOR).first.click()
+    wait_for_streamlit_rerun(browser_page)
+
+
 @then(parsers.parse('the page contains "{text}"'))
 def page_contains_text(browser_page, text):
     locator = browser_page.locator(f"text={text}")

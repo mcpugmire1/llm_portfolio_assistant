@@ -456,7 +456,7 @@ Feature: Role Match page
   # global_styles.py + app.py). Fixed by: key="screen_size_capture" + window.innerWidth.
   # Uses the existing <1024px navigation step (375px catches real mobile, not just 1000px).
   Scenario: Role Match shows mobile gate at 375px
-    Given the user is on a device with viewport width less than 1024px
+    Given the user is on a device with viewport width 375px
     Then the page contains "Best experienced on desktop"
     And the page contains "Role Match requires a wider screen to display the two-column layout."
     And the textarea is not visible
