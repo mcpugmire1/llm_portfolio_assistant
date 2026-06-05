@@ -20,7 +20,7 @@ matches any element with text containing "Back to" (the Green render
 will use a fixed shape like '<a class="back-link">← Back to {label}</a>').
 """
 
-from pytest_bdd import given, parsers, scenarios, then
+from pytest_bdd import given, parsers, scenarios, then, when
 
 scenarios("../features/how_i_built.feature")
 
@@ -37,8 +37,84 @@ def _wait_for_streamlit_rerun(page):
     page.wait_for_timeout(SHORT_WAIT)
 
 
+ASK_AGY_NAV_BTN = "[class*='st-key-topnav_Ask-Agy'] button"
+LANDING_READY = "[class*='st-key-landing_input']"
+
+
 # =============================================================================
-# GIVEN — Navigation
+# GIVEN / WHEN — Dialog entry path scenarios
+# =============================================================================
+
+
+@given(parsers.parse('I navigate to the "Ask Agy" page at viewport width {width:d}'))
+def navigate_ask_agy_at_width(browser_page, app_url, width):
+    browser_page.goto(app_url)
+    browser_page.wait_for_load_state("networkidle")
+    browser_page.wait_for_selector(
+        ASK_AGY_NAV_BTN, state="attached", timeout=LONG_TIMEOUT
+    )
+    browser_page.locator(ASK_AGY_NAV_BTN).first.dispatch_event("click")
+    browser_page.wait_for_load_state("networkidle")
+    browser_page.wait_for_timeout(SHORT_WAIT)
+    browser_page.wait_for_selector(LANDING_READY, timeout=LONG_TIMEOUT)
+
+
+@given("the user is on the Ask Agy landing page")
+def navigate_to_ask_agy_landing(browser_page, app_url):
+    browser_page.goto(app_url)
+    browser_page.wait_for_load_state("networkidle")
+    browser_page.wait_for_selector(
+        ASK_AGY_NAV_BTN, state="attached", timeout=LONG_TIMEOUT
+    )
+    browser_page.locator(ASK_AGY_NAV_BTN).first.dispatch_event("click")
+    browser_page.wait_for_load_state("networkidle")
+    browser_page.wait_for_timeout(SHORT_WAIT)
+    browser_page.wait_for_selector(LANDING_READY, timeout=LONG_TIMEOUT)
+
+
+@given('I click the "i" badge on the Agy intro avatar')
+def click_landing_body_badge(browser_page):
+    badge = browser_page.locator(".main-avatar .why-agy-badge")
+    badge.wait_for(state="attached", timeout=LONG_TIMEOUT)
+    badge.click()
+    browser_page.wait_for_load_state("networkidle")
+    browser_page.wait_for_timeout(SHORT_WAIT)
+
+
+@given('a dialog with title "Why Agy?" is visible')
+def assert_why_agy_dialog_open(browser_page):
+    browser_page.wait_for_selector(
+        "[role='dialog'] :text('Why Agy?')", timeout=LONG_TIMEOUT
+    )
+
+
+@given('the user clicks the "How Agy searches" button')
+def click_how_agy_searches_btn(browser_page):
+    btn = browser_page.locator("button:has-text('How Agy searches'):visible").first
+    btn.wait_for(state="visible", timeout=LONG_TIMEOUT)
+    btn.click()
+    browser_page.wait_for_load_state("networkidle")
+    browser_page.wait_for_timeout(SHORT_WAIT)
+
+
+@given("the How Agy Searches dialog is visible")
+def assert_how_agy_searches_dialog_open(browser_page):
+    browser_page.wait_for_selector(
+        "[role='dialog'] :text('How Agy searches')", timeout=LONG_TIMEOUT
+    )
+
+
+@when(parsers.parse('I click the button "{text}"'))
+def click_button_in_dialog(browser_page, text):
+    btn = browser_page.locator(f"[role='dialog'] button:has-text('{text}')").first
+    btn.wait_for(state="visible", timeout=LONG_TIMEOUT)
+    btn.click()
+    browser_page.wait_for_load_state("networkidle")
+    browser_page.wait_for_timeout(SHORT_WAIT)
+
+
+# =============================================================================
+# GIVEN — Navigation (standalone page scenarios)
 # =============================================================================
 
 
@@ -127,6 +203,24 @@ def assert_back_link_text(browser_page, expected_label):
         f"Back link text should contain {expected_label!r}, found: {text!r}. "
         f"MATTGPT-102: from-param → label mapping isn't wired correctly."
     )
+
+
+# =============================================================================
+# THEN — Dialog visibility (How I Built as @st.dialog)
+# =============================================================================
+
+
+@then(parsers.parse('a dialog with title "{title}" is visible'))
+def assert_dialog_with_title_visible(browser_page, title):
+    try:
+        browser_page.wait_for_selector(
+            f"[role='dialog'] :text('{title}')", timeout=LONG_TIMEOUT
+        )
+    except Exception as exc:
+        raise AssertionError(
+            f"Expected a dialog titled '{title}' but it was not found. "
+            f"MATTGPT-102: render_how_i_built_dialog() not yet implemented."
+        ) from exc
 
 
 # =============================================================================
