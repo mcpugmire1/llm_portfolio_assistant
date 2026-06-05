@@ -62,3 +62,20 @@ Feature: How I Built MattGPT deep-link surface (MATTGPT-102)
   Scenario: My Profile page no longer contains the How I Built section
     Given the user navigates to the My Profile page
     Then the "How I Built MattGPT" heading should NOT be visible on the My Profile page
+
+  # Dialog entry paths — How I Built as @st.dialog triggered sequentially
+  # from Why Agy and How Agy Searches footer buttons.
+
+  Scenario: Why Agy footer button opens How I Built dialog
+    Given I navigate to the "Ask Agy" page at viewport width 1280
+    And I click the "i" badge on the Agy intro avatar
+    And a dialog with title "Why Agy?" is visible
+    When I click the button "Curious how I was built? Read the technical deep-dive →"
+    Then a dialog with title "How I Built MattGPT" is visible
+
+  Scenario: How Agy Searches footer button opens How I Built dialog
+    Given the user is on the Ask Agy landing page
+    And the user clicks the "How Agy searches" button
+    And the How Agy Searches dialog is visible
+    When the user clicks "See how I built it →"
+    Then a dialog with title "How I Built MattGPT" is visible
