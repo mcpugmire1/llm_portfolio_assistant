@@ -254,6 +254,9 @@
 
   ### Do
   - **Check existing codebase patterns FIRST** — Before proposing any solution, search for how similar problems are already solved
+  - **Pre-flight before writing code for any ticket touching existing files:** Name the files it touches, name the patterns those files already use, flag any cross-surface couplings, confirm existing test coverage. Catches hidden coupling (MATTGPT-100: active_tab across ~50 files), Streamlit wrapper surprises (MATTGPT-106), and pattern violations (MATTGPT-107: JS bridge pattern almost greenfielded over). Do this before proposing anything. June 2026.
+  - **Default is build-on-top-of, not replace-with.** When a ticket touches existing code, extend or adapt the existing pattern. Only propose replacing when you can name in a comment why the existing pattern fails for this case. June 2026.
+  - **Artifacts for user review go in chat, not /tmp.** Edit tool calls show diffs inline. Writing a diff to /tmp/file.diff creates a local-only artifact the user cannot see. June 2026.
   - Give direct solutions immediately
   - Execute the work, don't discuss it
   - Provide full file replacements (not patches) unless asked otherwise
