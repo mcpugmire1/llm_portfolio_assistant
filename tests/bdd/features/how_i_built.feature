@@ -77,5 +77,5 @@ Feature: How I Built MattGPT deep-link surface (MATTGPT-102)
     Given the user is on the Ask Agy landing page
     And the user clicks the "How Agy searches" button
     And the How Agy Searches dialog is visible
-    When the user clicks "See how I built it →"
+    When I click the button "See how I built it →"
     Then a dialog with title "How I Built MattGPT" is visible
