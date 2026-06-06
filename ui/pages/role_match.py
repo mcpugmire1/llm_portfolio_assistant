@@ -18,8 +18,10 @@ from ui.components.action_buttons import (
     get_action_buttons_html,
     render_action_button_handlers,
 )
+from ui.components.how_i_built_dialog import render_how_i_built_dialog
 from ui.components.story_detail import render_story_detail
 from ui.components.thinking_indicator import render_thinking_indicator
+from ui.components.why_agy_dialog import render_why_agy_dialog
 
 # =============================================================================
 # RESULTS RENDERING HELPERS
@@ -701,6 +703,13 @@ def render_role_match(stories: list[dict]):
             "role_match_jd_persisted"
         ]
 
+    if st.session_state.get("active_dialog") == "why_agy":
+        render_why_agy_dialog()
+        st.session_state.pop("active_dialog", None)
+    elif st.session_state.get("active_dialog") == "how_i_built":
+        render_how_i_built_dialog()
+        st.session_state.pop("active_dialog", None)
+
     # =========================================================================
     # CSS STYLES (page hero only)
     # =========================================================================
@@ -735,11 +744,16 @@ def render_role_match(stories: list[dict]):
 
 .conversation-agy-avatar {
     flex-shrink: 0;
-    width: 120px !important;
-    height: 120px !important;
     border-radius: 50% !important;
     border: 4px solid white !important;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+}
+
+@media (min-width: 768px) {
+    .conversation-agy-avatar {
+        width: 120px !important;
+        height: 120px !important;
+    }
 }
 
 .conversation-header-text h1 {
@@ -753,6 +767,13 @@ def render_role_match(stories: list[dict]):
     margin: 0.5rem 0 0 0;
     font-size: 1.1rem;
 }
+[class*="st-key-why_agy_role_match_trigger"] {
+    display: none !important;
+}
+
+div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_role_match_trigger"]) {
+    display: none !important;
+}
 </style>
 """,
         unsafe_allow_html=True,
@@ -765,7 +786,10 @@ def render_role_match(stories: list[dict]):
         """
 <div class="conversation-header">
     <div class="conversation-header-content">
-        <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
+        <div style="position: relative; display: inline-block; flex-shrink: 0;">
+            <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
+            <span class="why-agy-badge--header" id="why-agy-badge-role-match">i</span>
+        </div>
         <div class="conversation-header-text">
             <h1>Role Match</h1>
             <p>Drop a job description — Agy shows where Matt fits, and where he doesn't.</p>
@@ -774,6 +798,40 @@ def render_role_match(stories: list[dict]):
 </div>
 """,
         unsafe_allow_html=True,
+    )
+    if st.button("trigger", key="why_agy_role_match_trigger"):
+        st.session_state["active_dialog"] = "why_agy"
+        st.rerun()
+    import streamlit.components.v1 as components  # noqa: PLC0415
+
+    components.html(
+        """
+<script>
+(function() {
+    function wireBadge() {
+        var parentDoc = window.parent.document;
+        var badge = parentDoc.getElementById('why-agy-badge-role-match');
+        var btn = parentDoc.querySelector('[class*="st-key-why_agy_role_match_trigger"] button');
+        if (badge && btn && !badge.dataset.wired) {
+            badge.dataset.wired = 'true';
+            badge.addEventListener('pointerdown', function(e) {
+                e.preventDefault();
+                btn.click();
+            });
+            return true;
+        }
+        return false;
+    }
+    if (!wireBadge()) {
+        var attempts = 0;
+        var iv = setInterval(function() {
+            if (wireBadge() || ++attempts > 10) clearInterval(iv);
+        }, 200);
+    }
+})();
+</script>
+""",
+        height=0,
     )
 
     # =========================================================================
@@ -784,7 +842,7 @@ def render_role_match(stories: list[dict]):
     # width or wider. Tablets in the 768-1023px range previously slipped
     # through the gate and rendered the workspace in a cramped state.
     screen_width = st.session_state.get("_browser_screen_size", "")
-    if screen_width and int(screen_width) < 1024:
+    if not screen_width or int(screen_width) < 1024:
         st.markdown(
             """
             <div style="text-align: center; padding: 60px 20px; color: var(--text-secondary);">

@@ -198,7 +198,9 @@ llm_portfolio_assistant/
 │   │   ├── footer.py                  # Footer
 │   │   ├── story_detail.py            # Story Detail Component (shared renderer)
 │   │   ├── ask_mattgpt_header.py      # Unified Ask MattGPT header
-│   │   ├── how_agy_modal.py           # "How Agy Searches" modal
+│   │   ├── why_agy_dialog.py          # "Why Agy?" @st.dialog (identity + origin story)
+│   │   ├── how_agy_dialog.py          # "How Agy Searches" @st.dialog (3-step RAG flow)
+│   │   ├── how_i_built_dialog.py      # "How I Built MattGPT" @st.dialog (MATTGPT-102)
 │   │   ├── category_cards.py          # Landing page capability cards
 │   │   ├── hero.py                    # Hero section component
 │   │   ├── lock_icon.py               # Private-view gate (popover + password, fail-closed)
@@ -314,8 +316,10 @@ Reusable UI components shared across multiple pages.
 | **category_cards.py** | Industry/capability exploration cards | Home | `render_category_cards()` |
 | **story_detail.py** | Full STAR narrative with sidebar | Explore Stories, Ask MattGPT (Related Projects) | `render_story_detail(detail, key_suffix, stories)` |
 | **timeline_view.py** | Era-based timeline with collapsible sections | Explore Stories | `render_timeline_view(stories, on_story_click)` |
-| **ask_mattgpt_header.py** | Unified header + "How Agy Searches" button | Ask MattGPT (Landing + Conversation) | `render_ask_header()`, `get_ask_header_css()` |
-| **how_agy_modal.py** | "How Agy Finds Your Stories" modal content | Ask MattGPT | `get_how_agy_flow_html()`, `get_how_agy_modal_html()` |
+| **ask_mattgpt_header.py** | Unified header + dialog trigger buttons | Ask MattGPT (Landing + Conversation) | `render_ask_header()`, `get_ask_header_css()` |
+| **why_agy_dialog.py** | "Why Agy?" identity + origin story | Ask MattGPT, Home footer | `render_why_agy_dialog()` |
+| **how_agy_dialog.py** | "How Agy Searches" 3-step RAG flow | Ask MattGPT, Home footer | `render_how_agy_dialog()` |
+| **how_i_built_dialog.py** | "How I Built MattGPT" technical deep-dive — architecture, pipeline, CTA chips → Ask Agy | Ask MattGPT, Home footer | `render_how_i_built_dialog()` |
 | **thinking_indicator.py** | Animated loading indicator | Ask MattGPT, Explore Stories | `render_thinking_indicator()` |
 
 **story_detail.py Key Pattern:**

@@ -132,6 +132,11 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-108](#mattgpt-108) | Home category cards — add capability-based counts to the 4 non-industry cards (resolve asymmetry from -107 / -104) | Open | Medium | Action | June 1, 2026 |
 | [MATTGPT-109](#mattgpt-109) | mattgpt-design-spec Jekyll site — sync UI refresh changes (nav labels, navbar, cards, How I Built, How Agy Searches, Why Agy modal, user journeys) | Open | High | Action | June 1, 2026 |
 | [MATTGPT-110](#mattgpt-110) | How Agy Searches — migrate inline expander to `@st.dialog` + remove Technical Details block | Done | Medium | Action | June 2, 2026 |
+| [MATTGPT-111](#mattgpt-111) | My Work / Banking / Cross-Industry — back-link not dark-mode compliant (white pill on dark bg) | Open | Low | Issue | June 3, 2026 |
+| [MATTGPT-112](#mattgpt-112) | How Agy Searches dialog — too tall for mobile viewport + content not scrolled to top on open (375/430px) | Open | Low | Issue | June 3, 2026 |
+| [MATTGPT-113](#mattgpt-113) | Ask Agy landing — mobile polish pass (seed question chips + header height + button placement) | Open | Medium | Action | June 4, 2026 |
+| [MATTGPT-114](#mattgpt-114) | Page header typography — standardize title + subtitle via shared CSS classes across all 7 surfaces | Open | Medium | Refactor | June 5, 2026 |
+| [MATTGPT-115](#mattgpt-115) | Lock icon — browser console warning: password field not in native form (st.popover portal breaks form containment) | Open | Low | Issue | June 6, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -2633,3 +2638,63 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
   - MATTGPT-102 — How I Built (bridge link target; Technical Details content moves there)
   - MATTGPT-076 — How Agy Searches mobile fix (check whether migration to `@st.dialog` resolves the iframe overflow issue naturally)
 - **Logged:** June 2, 2026
+
+---
+
+### MATTGPT-114
+**Page header typography — standardize title + subtitle via shared CSS classes across all 7 surfaces**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Refactor
+- **Issue:** Header h1 and subtitle typography is inconsistent across pages — mix of inline styles, page-specific CSS rules, and global rules. Root cause of visual inconsistencies that are difficult to attribute to UI refresh changes vs pre-existing drift.
+- **Fix:** Add two shared CSS classes to `global_styles.py`:
+  ```css
+  .page-header-title  { font-size: 2rem !important; font-weight: 700 !important; color: white !important; padding: 0 !important; margin: 0 0 8px 0 !important; line-height: 1.2 !important; }
+  .page-header-subtitle { font-size: 1.1rem !important; font-weight: 400 !important; color: white !important; opacity: 0.95 !important; margin: 0 !important; line-height: 1.6 !important; }
+  ```
+  Then apply `class="page-header-title"` to every header h1 and `class="page-header-subtitle"` to every header p across all 7 surfaces.
+- **Surface checklist:**
+  1. `explore_stories.py` — My Work `.conversation-header` h1 + p
+  2. `role_match.py` — Role Match `.conversation-header` h1 + p
+  3. `banking_landing.py` — Banking h1 + p + avatar size fix (64→120px, remove inline border)
+  4. `cross_industry_landing.py` — Cross-Industry h1 + p + avatar size fix
+  5. `ask_mattgpt_header.py` — Ask Agy (landing + conversation) `.header-text` h1 + p CSS rules → delete, replaced by shared class in HTML
+  6. `about_matt.py` — My Profile h1 + p
+- **Acceptance criteria:**
+  - All 7 surfaces: title at 2rem, 700 weight, white, no Streamlit heading padding
+  - All 7 surfaces: subtitle at 1.1rem, 0.95 opacity, white, 8px top margin
+  - No inline font-size, font-weight, opacity, margin, or padding on any header h1 or p
+  - My Work and Role Match visually unchanged (regression check)
+- **Logged:** June 5, 2026
+
+---
+
+### MATTGPT-115
+**Lock icon — browser console warning: password field not in native form**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Issue
+- **Issue:** Chrome fires `[DOM] Password field is not contained in a form` when the Role Match lock icon popover is open. `st.popover` uses a portal — it teleports its DOM nodes to a different location in the document. `st.form` creates a native `<form>` element, but the portal moves the children (including the `<input type="password">`) outside the form's DOM subtree. Chrome's password-manager detection fires because the containment check fails.
+- **Functional impact:** None. Streamlit's form submission logic is Python-level. The password check, fail-closed behavior, and session state update all work correctly. The warning is purely Chrome's password manager saying it can't hook into the field.
+- **Desirability of fix:** Low. Password manager NOT saving this internal access code is actually correct behavior. `autocomplete="new-password"` is already set by Streamlit on `type="password"` fields; the containment check fires before Chrome reads autocomplete.
+- **Fix options (all non-trivial):**
+  1. Replace `st.form` + `st.form_submit_button` with `st.text_input` + `st.button` + widget-key versioning for clear-on-submit. Does not fix the containment warning (still no native form wrapping).
+  2. Replace the entire popover body with a `components.html` custom form — full control over HTML structure, native `<form>` wrapping possible, but requires a JS bridge to report submission back to Streamlit.
+- **Affects:** `ui/components/lock_icon.py` — `st.popover` + `st.form` combination.
+- **Logged:** June 6, 2026
+
+---
+
+### MATTGPT-111
+**My Work / Banking / Cross-Industry — back-link not dark-mode compliant**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Issue
+- **Issue:** The "← Banking" / "← Cross-Industry" back-link pill on My Work renders as a white pill with purple text in dark mode — white background has no contrast against the dark page background.
+- **Root cause:** `.back-link` CSS in `global_styles.py` uses hardcoded or light-mode-only background. Dark mode override missing.
+- **Fix:** Add `body.dark-theme .back-link` override to use `var(--bg-card)` or `var(--bg-surface)` for background and `var(--accent-purple)` for text color — same variables used in light mode but resolved to dark values.
+- **Affects:** My Work (`explore_stories.py`) when navigated from Banking or Cross-Industry landing pages.
+- **Logged:** June 3, 2026

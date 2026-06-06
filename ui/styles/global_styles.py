@@ -184,12 +184,16 @@ def apply_global_styles():
 
         /* Collapse zero-contribution Streamlit wrapper elements so they don't
            generate phantom gap spacing in the parent stVerticalBlock (gap: 16px).
-           Covers: style-only markdown injections (MATTGPT-107, promoted global),
-           zero-height iframe injections (components.html height=0), empty wrappers.
-           All components.html calls in this codebase use height=0 — no visible
-           iframes are hidden by the stIFrame selector. */
+           Covers: style-only markdown injections (MATTGPT-107, promoted global)
+           and zero-height iframe injections (components.html height=0).
+           Excludes st-key-screen_size_capture — streamlit_js_eval iframe that
+           captures viewport width for the Role Match mobile gate. The clean key
+           (no double underscores) generates a valid CSS class that :not() can
+           target. window.innerWidth in that iframe returns correct viewport width
+           since the iframe is not hidden. */
         div[data-testid="stElementContainer"]:has(> div[data-testid="stMarkdown"] > div[data-testid="stMarkdownContainer"] > style:only-child),
-        div[data-testid="stElementContainer"]:has(> [data-testid="stIFrame"]) {
+        div[data-testid="stElementContainer"]:has(> div[data-testid="stMarkdown"] > div[data-testid="stMarkdownContainer"] > script:only-child),
+        div[data-testid="stElementContainer"]:has(> [data-testid="stIFrame"]):not([class*="st-key-screen_size_capture"]) {
             display: none !important;
         }
 
@@ -413,7 +417,7 @@ def apply_global_styles():
            RESPONSIVE - MOBILE OVERRIDES INLINED
            ======================================== */
 
-        @media (max-width: 767px) {
+        @media (max-width: 768px) {
             /* Global: Prevent horizontal scroll */
             html, body, [data-testid="stAppViewContainer"], .main {
                 overflow-x: hidden !important;
@@ -502,7 +506,7 @@ def apply_global_styles():
             /* Hero - Compact on mobile */
             .conversation-header {
                 padding: 16px !important;
-                margin: -1rem 0 0 0 !important;
+                margin: 60px 0 0 0 !important;
             }
             .conversation-header-content {
                 flex-direction: row !important;
@@ -510,8 +514,8 @@ def apply_global_styles():
                 align-items: center !important;
             }
             .conversation-agy-avatar {
-                width: 56px !important;
-                height: 56px !important;
+                width: 64px !important;
+                height: 64px !important;
                 flex-shrink: 0 !important;
             }
             .conversation-header-text h1 {
@@ -661,10 +665,17 @@ def apply_global_styles():
         .why-agy-badge--header:hover {
             transform: scale(1.15);
         }
-        /* Hero badge — offset from edge on the 280px illustration */
-        .hero-gradient-wrapper .why-agy-badge {
-            bottom: 10px;
+        /* Hero badge — on the illustration wrapper (280px img), not the full section.
+           40px from bottom places it near Agy's head area in the lower-right. */
+        .hero-illustration-wrapper .why-agy-badge {
+            bottom: 40px;
             right: 10px;
+        }
+        @media (max-width: 768px) {
+            .hero-illustration-wrapper .why-agy-badge {
+                bottom: 20px;
+                right: 5px;
+            }
         }
         /* Mobile: avatars scale to 60-64px; -2px/-2px lands badge center at circle edge */
         @media (max-width: 768px) {
@@ -674,6 +685,47 @@ def apply_global_styles():
                 bottom: -2px;
             }
         }
+
+        /* ========================================
+           HOW I BUILT DIALOG — Per-query runtime pipeline (MATTGPT-102)
+           Spine + numbered step pattern, consistent with timeline visual language.
+           ======================================== */
+        .hib-runtime-wrapper { position: relative; display: flex; flex-direction: column; gap: 0; }
+        .hib-runtime-wrapper::before { content: ''; position: absolute; left: 15px; top: 32px; bottom: 32px; width: 2px; background: var(--border-color); z-index: 0; }
+        .hib-runtime-step { display: flex; gap: 16px; align-items: flex-start; padding-bottom: 16px; position: relative; z-index: 1; }
+        .hib-runtime-num { width: 32px; height: 32px; border-radius: 50%; background: var(--accent-purple); color: white; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 0 0 3px var(--bg-card), 0 0 0 5px var(--accent-purple-light); }
+        .hib-runtime-card { flex: 1; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px 16px; }
+        .hib-runtime-card h4 { font-size: 13px; font-weight: 600; color: var(--text-primary); margin: 0 0 8px; }
+        .hib-runtime-card ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; }
+        .hib-runtime-card li { font-size: 12px; color: var(--text-secondary); line-height: 1.5; padding-left: 12px; position: relative; }
+        .hib-runtime-card li::before { content: "·"; position: absolute; left: 0; color: var(--accent-purple); font-weight: 700; }
+        @media (max-width: 768px) {
+            .hib-runtime-num { width: 28px; height: 28px; font-size: 12px; }
+            .hib-runtime-wrapper::before { left: 13px; }
+            .hib-runtime-card { padding: 10px 12px; }
+            .hib-runtime-card h4 { font-size: 12px; }
+            .hib-runtime-card li { font-size: 11px; }
+        }
+
+        /* ========================================
+           HOW I BUILT DIALOG — Go-deeper + CTA (MATTGPT-102)
+           ======================================== */
+        .hib-block { border: 0.5px solid var(--border-color); border-radius: 10px; padding: 14px 16px; margin-top: 16px; max-width: 900px; margin-left: auto; margin-right: auto; }
+        .hib-godeeper-lead { font-size: 12px; color: var(--text-secondary); margin: 4px 0 10px; }
+        .hib-godeeper-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .hib-godeeper-card { border: 0.5px solid var(--border-color); border-radius: 10px; padding: 14px 16px; }
+        .hib-godeeper-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+        .hib-godeeper-top svg { color: var(--text-primary); flex-shrink: 0; }
+        .hib-godeeper-ttl { font-size: 13px; font-weight: 500; color: var(--text-primary); }
+        .hib-godeeper-desc { font-size: 11px; color: var(--text-secondary); line-height: 1.5; margin: 0 0 8px; }
+        .hib-godeeper-link { font-size: 11px; color: var(--accent-purple); font-weight: 500; display: inline-flex; align-items: center; gap: 4px; text-decoration: none; }
+        .hib-godeeper-link:hover { text-decoration: underline; }
+        .hib-cta-block { padding: 14px 16px; background: var(--bg-surface); border-radius: 10px; border-left: 2px solid #7e5fd4; margin-top: 16px; max-width: 900px; margin-left: auto; margin-right: auto; }
+        .hib-cta-h { font-size: 14px; font-weight: 500; color: var(--text-primary); margin: 0 0 6px; }
+        .hib-cta-sub { font-size: 12px; color: var(--text-secondary); margin: 0 0 10px; line-height: 1.5; }
+        .hib-cta-prompts { display: flex; flex-direction: column; gap: 6px; }
+        .hib-cta-prompt { background: var(--bg-card, #fff); border: 0.5px solid rgba(120, 80, 220, 0.3); border-radius: 8px; padding: 9px 12px; font-size: 11px; color: #6d4cc4; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.15s ease; user-select: none; }
+        .hib-cta-prompt:hover { background: var(--accent-purple-bg); }
 
         /* My Profile sample-question chip buttons (MATTGPT-068).
            Lives in global styles (not inside render_about_matt) so the CSS is
@@ -717,6 +769,9 @@ def apply_global_styles():
             background: var(--accent-purple-bg);
         }
 
+        /* How I Built dialog — hidden bridge buttons (MATTGPT-102). Chips are HTML spans; st.button elements are hidden triggers only. */
+        [class*='st-key-hib_prompt_'] { display: none !important; }
+
         /* ============================================================
            ABOUT MATT/MY PROFILE PAGE CSS — relocated from render_about_matt()
            inline <style> so it persists through Streamlit reruns
@@ -747,7 +802,7 @@ def apply_global_styles():
 }
 
 .about-header-text h1 {
-    font-size: 36px;
+    font-size: 32px;
     font-weight: 700;
     margin: 0 0 8px 0;
     color: white;
@@ -961,7 +1016,7 @@ def apply_global_styles():
 
 .flow-step {
     background: var(--bg-surface, #f8f9fa);
-    border: 2px solid var(--border-color, #e0e0e0);
+    border: 1px solid var(--border-color, #e0e0e0);
     border-radius: 8px;
     padding: 16px 12px;
     text-align: center;
@@ -981,13 +1036,13 @@ def apply_global_styles():
 }
 
 .flow-num {
-    width: 28px;
-    height: 28px;
-    background: var(--accent-purple, #8B5CF6);
-    color: white;
+    width: 18px;
+    height: 18px;
+    background: var(--accent-purple-bg);
+    color: var(--accent-purple-text);
     border-radius: 50%;
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 10px;
+    font-weight: 500;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1315,12 +1370,12 @@ details[open]:has(.code-block) > summary::before {
 /* ============================================================================
    MOBILE RESPONSIVE STYLES (<768px)
    ============================================================================ */
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     /* Header */
     .about-header {
         padding: 20px 16px 29px 16px !important;
         min-height: auto !important;
-        margin-top: -24px !important;
+        margin-top: 60px !important;  /* clear 60px fixed mobile nav */
     }
 
     .about-header-content {
@@ -1343,9 +1398,9 @@ details[open]:has(.code-block) > summary::before {
         font-size: 12px !important;
     }
 
-    .about-header-text p:last-of-type {
-            display: none !important;
-    }
+    /* Removed: was hiding the second <p> (tagline) on mobile.
+       about_matt.py now uses a single <p> for the subtitle — this rule
+       was suppressing it. No replacement needed. */
 
     /* Stats bar */
     .am-stats-bar {
