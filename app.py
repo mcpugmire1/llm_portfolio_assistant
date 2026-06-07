@@ -124,18 +124,18 @@ if not st.session_state.get("__first_mount_rerun__", False):
 if "_browser_screen_size" not in st.session_state:
     from streamlit_js_eval import streamlit_js_eval
 
-    # Use screen.width (physical display resolution) rather than
-    # window.innerWidth. The streamlit_js_eval library runs inside a
-    # components.html iframe with height=0 — on Streamlit Cloud that
-    # iframe can have width=0, so window.innerWidth reports 0 and the
-    # Role Match mobile gate (< 1024px) fires on desktop browsers.
-    # screen.width returns the actual display resolution and is immune
-    # to iframe/container sizing issues. It doesn't account for browser
-    # zoom, but for a "phone vs desktop" gate at 1024px the device
-    # class determination is reliable.
+    # Use window.innerWidth (viewport width) to correctly detect mobile.
+    # screen.width returns physical monitor resolution (e.g. 3840 on Retina)
+    # regardless of viewport size — the mobile gate never fires on desktop.
+    # window.innerWidth is safe now because:
+    #   1. key="screen_size_capture" generates a valid CSS class
+    #      (st-key-screen_size_capture) that the stIFrame exclusion can target
+    #   2. The stIFrame collapse rule excludes this iframe via
+    #      :not([class*="st-key-screen_size_capture"]) so it's never hidden
+    #   3. The iframe is visible and executes correctly, returning viewport width
     _screen = streamlit_js_eval(
-        js_expressions="String(window.screen.width)",
-        key="__screen_size__",
+        js_expressions="String(window.innerWidth)",
+        key="screen_size_capture",
     )
     if _screen:
         st.session_state["_browser_screen_size"] = _screen
