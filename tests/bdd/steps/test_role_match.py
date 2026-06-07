@@ -398,13 +398,17 @@ def viewport_desktop(browser_page):
 
 @given(parsers.parse("the user is on a device with viewport width {width:d}px"))
 def given_viewport_at_explicit_width(browser_page, app_url, width):
-    """Set viewport to an explicit width BEFORE navigating so streamlit_js_eval
-    captures the correct viewport width on first render."""
+    """Set viewport BEFORE navigating so streamlit_js_eval captures correct width.
+    On mobile the desktop nav is CSS-hidden — uses the mobile hamburger dropdown.
+    Dropdown open state is style.display='block' (not a CSS class), so we wait
+    for #mobile-nav-dropdown to be visible rather than checking a class."""
     browser_page.set_viewport_size({"width": width, "height": 800})
     browser_page.goto(app_url)
     browser_page.wait_for_load_state("networkidle")
     _wait_for_navbar_stable(browser_page)
-    browser_page.locator(ROLE_MATCH_NAV_SELECTOR).first.click()
+    browser_page.locator("#mobile-hamburger").click()
+    browser_page.locator("#mobile-nav-dropdown").wait_for(state="visible", timeout=5000)
+    browser_page.locator("#mobile-nav-role").click()
     wait_for_streamlit_rerun(browser_page)
 
 

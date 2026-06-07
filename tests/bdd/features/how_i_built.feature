@@ -69,7 +69,7 @@ Feature: How I Built MattGPT deep-link surface (MATTGPT-102)
   Scenario: Why Agy footer button opens How I Built dialog
     Given I navigate to the "Ask Agy" page at viewport width 1280
     And I click the "i" badge on the Agy intro avatar
-    And a dialog with title "Why Agy?" is visible
+    And a dialog with title "Hi, I'm Agy" is visible
     When I click the button "Curious how I was built? Read the technical deep-dive →"
     Then a dialog with title "How I Built MattGPT" is visible
 

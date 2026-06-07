@@ -74,17 +74,19 @@ def navigate_to_ask_agy_landing(browser_page, app_url):
 
 @given('I click the "i" badge on the Agy intro avatar')
 def click_landing_body_badge(browser_page):
-    badge = browser_page.locator(".main-avatar .why-agy-badge")
+    # At 1280px the header renders #why-agy-badge-header (.why-agy-badge--header),
+    # not the body .main-avatar .why-agy-badge span.
+    badge = browser_page.locator("#why-agy-badge-header")
     badge.wait_for(state="attached", timeout=LONG_TIMEOUT)
     badge.click()
     browser_page.wait_for_load_state("networkidle")
     browser_page.wait_for_timeout(SHORT_WAIT)
 
 
-@given('a dialog with title "Why Agy?" is visible')
+@given('a dialog with title "Hi, I\'m Agy" is visible')
 def assert_why_agy_dialog_open(browser_page):
     browser_page.wait_for_selector(
-        "[role='dialog'] :text('Why Agy?')", timeout=LONG_TIMEOUT
+        "[role='dialog'] :text(\"Hi, I'm Agy\")", timeout=LONG_TIMEOUT
     )
 
 
