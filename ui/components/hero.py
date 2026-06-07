@@ -21,10 +21,17 @@ def render_hero():
     st.markdown(
         """
         <style>
-            /* Hide the trigger buttons */
+            /* Hide the trigger buttons and collapse their stElementContainer wrappers */
             [class*="st-key-hero_role_match"],
-            [class*="st-key-hero_ask"] {
+            [class*="st-key-hero_ask"],
+            [class*="st-key-why_agy_hero_trigger"] {
                 display: none !important;
+            }
+            div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_hero_trigger"]) {
+                position: absolute !important;
+                left: -9999px !important;
+                height: 0 !important;
+                overflow: hidden !important;
             }
 
             /* Pull hero up to sit flush under navbar */
@@ -101,9 +108,12 @@ def render_hero():
                 }
                 .hero-gradient-wrapper {
                     /* 56px clears the fixed mobile header (z-index 999999).
-                       Was -20px (desktop layout artifact) which pulled the
-                       hero up into the area covered by the header. */
+                       -16px sides break out of Streamlit container padding
+                       for edge-to-edge treatment matching other page headers. */
                     margin-top: 56px !important;
+                    margin-left: -16px !important;
+                    margin-right: -16px !important;
+                    width: calc(100% + 32px) !important;
                 }
 
                 /* Logo - much smaller */
@@ -163,9 +173,12 @@ def render_hero():
         <div class="hero-gradient-wrapper">
             <div class="hero-content">
                 <div style="display: flex; justify-content: center; margin-bottom: 16px;">
-                    <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/matt_agy_hero.png"
-                         alt="Matt and Agy"
-                         style="max-width: 280px; width: 100%; height: auto; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));">
+                    <div class="hero-illustration-wrapper" style="position: relative; display: inline-block;">
+                        <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/matt_agy_hero.png"
+                             alt="Matt and Agy"
+                             style="max-width: 280px; width: 100%; height: auto; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));">
+                        <span class="why-agy-badge" id="why-agy-badge-hero">i</span>
+                    </div>
                 </div>
                 <div style="font-size: 18px; margin-bottom: 1px; color: white; opacity: 0.95;">
                     <span> Hi, I'm Matt Pugmire</span>
@@ -228,6 +241,41 @@ def render_hero():
     if st.button("", key="hero_ask"):
         st.session_state["active_tab"] = "Ask Agy"
         st.rerun()
+
+    # Why Agy badge trigger — hidden button + JS bridge
+    if st.button("trigger", key="why_agy_hero_trigger"):
+        st.session_state["active_dialog"] = "why_agy"
+        st.rerun()
+
+    components.html(
+        """
+<script>
+(function() {
+    function wireBadge() {
+        var parentDoc = window.parent.document;
+        var badge = parentDoc.getElementById('why-agy-badge-hero');
+        var btn = parentDoc.querySelector('[class*="st-key-why_agy_hero_trigger"] button');
+        if (badge && btn && !badge.dataset.wired) {
+            badge.dataset.wired = 'true';
+            badge.addEventListener('pointerdown', function(e) {
+                e.preventDefault();
+                btn.click();
+            });
+            return true;
+        }
+        return false;
+    }
+    if (!wireBadge()) {
+        var attempts = 0;
+        var iv = setInterval(function() {
+            if (wireBadge() || ++attempts > 10) clearInterval(iv);
+        }, 200);
+    }
+})();
+</script>
+""",
+        height=0,
+    )
 
 
 def render_stats_bar():

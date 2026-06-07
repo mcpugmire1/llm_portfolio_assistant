@@ -32,9 +32,11 @@ from config.debug import DEBUG
 from services.query_logger import log_query
 from services.rag_service import semantic_search
 from services.semantic_router import is_portfolio_query_semantic
+from ui.components.how_i_built_dialog import render_how_i_built_dialog
 from ui.components.story_detail import render_story_detail
 from ui.components.thinking_indicator import render_thinking_indicator
 from ui.components.timeline_view import render_timeline_view
+from ui.components.why_agy_dialog import render_why_agy_dialog
 from utils.filters import matches_filters
 from utils.ui_helpers import render_no_match_banner, safe_container
 from utils.validation import is_nonsense
@@ -625,20 +627,78 @@ def render_explore_stories(
     """
     # Note: Mobile CSS is injected globally via navbar.py
 
+    if st.session_state.get("active_dialog") == "why_agy":
+        render_why_agy_dialog()
+        st.session_state.pop("active_dialog", None)
+    elif st.session_state.get("active_dialog") == "how_i_built":
+        render_how_i_built_dialog()
+        st.session_state.pop("active_dialog", None)
+
     # Hero header with Agy avatar (gray headphones)
     st.markdown(
         """
+<style>
+[class*="st-key-why_agy_my_work_trigger"] {
+    position: absolute !important;
+    left: -9999px !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_my_work_trigger"]) {
+    position: absolute !important;
+    left: -9999px !important;
+    height: 0 !important;
+    overflow: hidden !important;
+}
+</style>
 <div class="conversation-header">
     <div class="conversation-header-content">
-        <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_explore_stories.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
+        <div style="position: relative; display: inline-block; flex-shrink: 0;">
+            <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_explore_stories.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
+            <span class="why-agy-badge--header" id="why-agy-badge-my-work">i</span>
+        </div>
         <div class="conversation-header-text">
             <h1>Matt's Project Portfolio</h1>
-            <p>Meet Agy 🐾 — Tracking down insights across 100+ projects</p>
+            <p>100+ transformation stories — trust Agy 🐾 to find the ones that fit</p>
         </div>
     </div>
 </div>
 """,
         unsafe_allow_html=True,
+    )
+    if st.button("trigger", key="why_agy_my_work_trigger"):
+        st.session_state["active_dialog"] = "why_agy"
+        st.rerun()
+    components.html(
+        """
+<script>
+(function() {
+    function wireBadge() {
+        var parentDoc = window.parent.document;
+        var badge = parentDoc.getElementById('why-agy-badge-my-work');
+        var btn = parentDoc.querySelector('[class*="st-key-why_agy_my_work_trigger"] button');
+        if (badge && btn && !badge.dataset.wired) {
+            badge.dataset.wired = 'true';
+            badge.addEventListener('pointerdown', function(e) {
+                e.preventDefault();
+                btn.click();
+            });
+            return true;
+        }
+        return false;
+    }
+    if (!wireBadge()) {
+        var attempts = 0;
+        var iv = setInterval(function() {
+            if (wireBadge() || ++attempts > 10) clearInterval(iv);
+        }, 200);
+    }
+})();
+</script>
+""",
+        height=0,
     )
 
     explore_css = """<style>
@@ -672,7 +732,7 @@ def render_explore_stories(
         width: 120px !important;
         height: 120px !important;
         border-radius: 50% !important;
-        border: 3px solid white !important;
+        border: 4px solid white !important;
         box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
     }
 
@@ -1418,7 +1478,7 @@ def render_explore_stories(
         .conversation-header {
             padding: 20px 16px !important;
             min-height: auto !important;
-            margin: -8px 0 0 0 !important;
+            margin: 60px 0 0 0 !important;  /* clear 60px fixed mobile nav */
         }
 
         .conversation-header-content {
