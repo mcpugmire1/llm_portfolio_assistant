@@ -2672,11 +2672,17 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 ---
 
 ### MATTGPT-116
-**Evaluate retiring how_i_built.py standalone route**
+**Evaluate and close: standalone route retirement, DevTools limitation, viewport revert pair**
 
 - **Status:** Open
 - **Priority:** Low
 - **Type:** Refactor
+- **All three items are "evaluate and close" — no urgency, deferred June 7, 2026.**
+
+---
+
+**Item 1: Retire how_i_built.py standalone route**
+
 - **Background:** `ui/pages/how_i_built.py` was the original standalone deep-link surface for "How I Built MattGPT", accessible via `?route=how_i_built`. MATTGPT-102 introduced `ui/components/how_i_built_dialog.py` as an `@st.dialog` overlay triggered by footer buttons across all surfaces. The dialog has fully superseded the standalone page as the user-facing entry point.
 - **Finding (June 6, 2026):** No button, link, card, or footer in the current app generates `?route=how_i_built`. The only code that references the route is the handler in `app.py:508-510` itself. The `dialog_mode: bool = False` param added to `render_how_i_built()` in the MATTGPT-102 Green commit was written to suppress the back link when called from the dialog — but `how_i_built_dialog.py` has its own complete standalone implementation and never calls `render_how_i_built()`. The param is unused.
 - **Scope if retired:**
@@ -2685,7 +2691,26 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
   3. Remove `dialog_mode` param from `render_how_i_built()` (now unreachable)
   4. Update `ARCHITECTURE.md` file listing
 - **Risk:** Low — no UI surfaces it. Could be reached via a bookmarked or shared direct URL, but that's an edge case with graceful degradation (app.py would fall through to default route).
-- **Logged:** June 6, 2026
+
+---
+
+**Item 2: DevTools mobile simulation limitation + one known failing BDD test**
+
+- **Background:** `test_desktop_shows_full_interface` is currently failing (confirmed June 7, 2026). Root cause: `app.py` commit `d4354fc` switched viewport capture from `screen.width` to `window.innerWidth` with a new key (`screen_size_capture`). With the old key, `_browser_screen_size` resolved before Playwright reached Role Match. With the new key it doesn't — `screen_width` is `""`, the race guard (`not screen_width or int(screen_width) < 1024`) fires, workspace never renders.
+- **DevTools limitation (separate):** The session-once capture pattern in `app.py` means resizing in DevTools after initial load never updates `_browser_screen_size`. The `window.innerWidth` change does not fix this — it's a session-once architectural limitation. DevTools mobile simulation remains unreliable for the Role Match gate regardless of which expression is used.
+- **Acceptable short-term:** One failing test while today's session focuses on My Profile and Role Match UI (unrelated to mobile gate).
+
+---
+
+**Item 3: Two-file revert pair (app.py + global_styles.py)**
+
+- **CRITICAL pairing rule:** `app.py` and `global_styles.py` changed together in commit `d4354fc`. They MUST revert together. `app.py` references the new iframe key (`screen_size_capture`) which is excluded from the stIFrame collapse rule in `global_styles.py` via `:not([class*="st-key-screen_size_capture"])`. Reverting only `app.py` leaves an orphaned CSS exclusion; reverting only `global_styles.py` collapses the active capture iframe. Always revert both in a single commit.
+- **Revert scope (two files only):**
+  - `app.py`: restore `js_expressions="String(window.screen.width)"` and `key="__screen_size__"`
+  - `global_styles.py`: restore prior stIFrame collapse rule (remove `screen_size_capture` exclusion)
+  - `role_match.py` race guard: **DO NOT revert** — `not screen_width or int(screen_width) < 1024` is the correct production fix for the Streamlit Cloud empty-string case (April 2026). Reverting it re-introduces the false-positive mobile gate bug.
+- **After revert:** Run `test_desktop_shows_full_interface` in isolation to confirm passes before committing.
+- **Logged:** June 7, 2026
 
 ---
 
