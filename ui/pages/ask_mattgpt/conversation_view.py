@@ -21,6 +21,7 @@ from ui.components.ask_mattgpt_header import (
     render_status_bar,
 )
 from ui.components.how_agy_dialog import render_how_agy_dialog
+from ui.components.how_i_built_dialog import render_how_i_built_dialog
 from ui.components.thinking_indicator import render_thinking_indicator
 from ui.components.why_agy_dialog import render_why_agy_dialog
 
@@ -119,6 +120,9 @@ def render_conversation_view(stories: list[dict]):
         st.session_state.pop("active_dialog", None)
     elif st.session_state.get("active_dialog") == "how_agy":
         render_how_agy_dialog()
+        st.session_state.pop("active_dialog", None)
+    elif st.session_state.get("active_dialog") == "how_i_built":
+        render_how_i_built_dialog()
         st.session_state.pop("active_dialog", None)
 
     # ============================================================================

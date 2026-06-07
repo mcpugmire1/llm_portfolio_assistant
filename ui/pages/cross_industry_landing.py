@@ -9,6 +9,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 from ui.components.footer import render_footer
+from ui.components.how_i_built_dialog import render_how_i_built_dialog
 from ui.components.why_agy_dialog import render_why_agy_dialog
 from utils.landing_cards import build_card_wiring_js, build_landing_cards
 
@@ -64,6 +65,9 @@ def render_cross_industry_landing(stories: list[dict]):
 
     if st.session_state.get("active_dialog") == "why_agy":
         render_why_agy_dialog()
+        st.session_state.pop("active_dialog", None)
+    elif st.session_state.get("active_dialog") == "how_i_built":
+        render_how_i_built_dialog()
         st.session_state.pop("active_dialog", None)
 
     # Hidden trigger — position:absolute+height:0 removes from flow (no layout space).
@@ -290,7 +294,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_cross_trigger"
         .conversation-header {
             padding: 20px 16px !important;
             min-height: auto !important;
-            margin: -24px 0 0 0 !important;
+            margin: 60px 0 0 0 !important;  /* clear 60px fixed mobile nav */
         }
         .conversation-header-content {
             flex-direction: row !important;

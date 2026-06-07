@@ -41,8 +41,13 @@ def _resolve_back(from_slug: str | None) -> tuple[str, str]:
     return ("My Profile", "profile")
 
 
-def render_how_i_built():
+def render_how_i_built(dialog_mode: bool = False):
     """Render the How I Built MattGPT deep-link surface.
+
+    Args:
+        dialog_mode: When True (called from @st.dialog), suppresses the back
+            link — the dialog's X button serves as the close affordance.
+            Defaults to False so the standalone page route is unaffected.
 
     Reads session_state["how_i_built_from"] (set by app.py's ?route= handler
     from the ?from=<surface-slug> query param) to render a context-aware
@@ -50,13 +55,14 @@ def render_how_i_built():
     "← Banking" breadcrumb pattern), not a styled CTA button. href routes
     through app.py's ?nav=<slug> handler which maps the slug to active_tab.
     """
-    # Context-aware back link — subtle anchor, not CTA
-    from_slug = st.session_state.get("how_i_built_from")
-    back_label, back_slug = _resolve_back(from_slug)
-    st.markdown(
-        f'<a href="?nav={back_slug}" class="back-link">← {back_label}</a>',
-        unsafe_allow_html=True,
-    )
+    if not dialog_mode:
+        # Context-aware back link — subtle anchor, not CTA (standalone page only)
+        from_slug = st.session_state.get("how_i_built_from")
+        back_label, back_slug = _resolve_back(from_slug)
+        st.markdown(
+            f'<a href="?nav={back_slug}" class="back-link">← {back_label}</a>',
+            unsafe_allow_html=True,
+        )
 
     # Section heading
     st.markdown(
