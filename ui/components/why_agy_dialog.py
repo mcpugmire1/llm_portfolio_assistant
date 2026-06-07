@@ -45,7 +45,7 @@ _CSS = """
     flex: 1;
 }
 .why-agy-body p {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.7;
     color: var(--text-primary);
     margin-bottom: 10px;
@@ -81,6 +81,11 @@ _CSS = """
     background: var(--accent-purple-bg) !important;
     border-color: var(--accent-purple) !important;
 }
+
+[class*="st-key-why_agy_to_hib"] button p {
+    font-size: 14px !important;
+}
+
 </style>
 """
 
@@ -122,7 +127,7 @@ _DARK_THEME_JS = """
 """
 
 
-@st.dialog("Why Agy?")
+@st.dialog("Hi, I'm Agy 🐾")
 def render_why_agy_dialog():
     """Why Agy? origin story as @st.dialog — native Streamlit, no iframes.
 
@@ -134,11 +139,13 @@ def render_why_agy_dialog():
     with st.container(key="why_agy_dialog_content"):
         st.markdown(
             """
+
 <div class="why-agy-avatar-row">
     <div class="why-agy-body">
-        <p>I'm named for Matt's Plott Hound. Plott Hounds are bred for tracking: determined, loyal, hard to shake.
-        Those same traits define how I work: I track down the right stories from 100+ projects across 20+ years,
-        hold onto the trail when the question gets tricky, and don't pretend to know what isn't in the corpus.</p>
+        <p>I'm named for Matt's Plott Hound. Plott Hounds are bred for tracking — determined, loyal, hard to shake once they're on a trail. That's exactly how I work.
+        </p>
+        <p>Ask me about Matt's work and I'll track down the right story. I'm trained on 100+ stories from his career — not a keyword search, not a resume summary. I find what's relevant, or I tell you honestly when I can't.
+        </p>
         <em class="why-agy-closing">It felt right to keep his name part of the work we loved doing together.</em>
     </div>
     <img class="why-agy-illustration"

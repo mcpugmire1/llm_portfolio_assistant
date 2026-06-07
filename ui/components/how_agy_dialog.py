@@ -26,6 +26,13 @@ import streamlit.components.v1 as components
 
 _CSS = """
 <style>
+@media (max-width: 768px) {
+    [role="dialog"] {
+        max-height: 90vh !important;
+        overflow-y: auto !important;
+    }
+}
+
 /* Dark theme variable overrides — scoped to this dialog's container only.
    JS applies .dark-theme to [class*="st-key-how_agy_dialog_content"] when
    body.dark-theme is detected on the parent page. Values mirror
@@ -144,6 +151,18 @@ def render_how_agy_dialog():
     dark theme JS can target it via [class*="st-key-how_agy_dialog_content"].
     """
     st.markdown(_CSS, unsafe_allow_html=True)
+
+    # Scroll dialog content to top on open — needed on mobile where the
+    # dialog may render with its internal container scrolled mid-content.
+    components.html(
+        """<script>
+        setTimeout(function() {
+            var d = window.parent.document.querySelector('[role="dialog"] > div');
+            if (d) d.scrollTop = 0;
+        }, 100);
+        </script>""",
+        height=0,
+    )
 
     with st.container(key="how_agy_dialog_content"):
         # Step 1: You Ask
