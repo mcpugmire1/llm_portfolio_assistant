@@ -137,6 +137,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-113](#mattgpt-113) | Ask Agy landing — mobile polish pass (seed question chips + header height + button placement) | Open | Medium | Action | June 4, 2026 |
 | [MATTGPT-114](#mattgpt-114) | Page header typography — standardize title + subtitle via shared CSS classes across all 7 surfaces | Open | Medium | Refactor | June 5, 2026 |
 | [MATTGPT-115](#mattgpt-115) | Lock icon — browser console warning: password field not in native form (st.popover portal breaks form containment) | Open | Low | Issue | June 6, 2026 |
+| [MATTGPT-116](#mattgpt-116) | Evaluate retiring how_i_built.py standalone route — superseded by How I Built dialog | Open | Low | Refactor | June 6, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -2667,6 +2668,24 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
   - No inline font-size, font-weight, opacity, margin, or padding on any header h1 or p
   - My Work and Role Match visually unchanged (regression check)
 - **Logged:** June 5, 2026
+
+---
+
+### MATTGPT-116
+**Evaluate retiring how_i_built.py standalone route**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Refactor
+- **Background:** `ui/pages/how_i_built.py` was the original standalone deep-link surface for "How I Built MattGPT", accessible via `?route=how_i_built`. MATTGPT-102 introduced `ui/components/how_i_built_dialog.py` as an `@st.dialog` overlay triggered by footer buttons across all surfaces. The dialog has fully superseded the standalone page as the user-facing entry point.
+- **Finding (June 6, 2026):** No button, link, card, or footer in the current app generates `?route=how_i_built`. The only code that references the route is the handler in `app.py:508-510` itself. The `dialog_mode: bool = False` param added to `render_how_i_built()` in the MATTGPT-102 Green commit was written to suppress the back link when called from the dialog — but `how_i_built_dialog.py` has its own complete standalone implementation and never calls `render_how_i_built()`. The param is unused.
+- **Scope if retired:**
+  1. Delete `ui/pages/how_i_built.py`
+  2. Remove `?route=how_i_built` handler from `app.py` (~lines 331-362, 508-510)
+  3. Remove `dialog_mode` param from `render_how_i_built()` (now unreachable)
+  4. Update `ARCHITECTURE.md` file listing
+- **Risk:** Low — no UI surfaces it. Could be reached via a bookmarked or shared direct URL, but that's an edge case with graceful degradation (app.py would fall through to default route).
+- **Logged:** June 6, 2026
 
 ---
 
