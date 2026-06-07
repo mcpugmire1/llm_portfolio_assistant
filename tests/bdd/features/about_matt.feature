@@ -69,21 +69,6 @@ Feature: My Profile — Content polish bundle (MATTGPT-068)
     Given the user navigates to the My Profile page
 
   # ---------------------------------------------------------------------------
-  # SAMPLE QUESTIONS CLICKABLE — buttons replace <li> text (decisions 1, 2)
-  # ---------------------------------------------------------------------------
-
-  Scenario: Four sample question buttons render with labels from ABOUT_MATT_SEED_QUESTIONS
-    Then four sample question buttons should be visible in the See It In Action card
-    And each button label should match a string in ABOUT_MATT_SEED_QUESTIONS
-    And the four legacy <li> sample-question lines should not be present as plain text
-
-  Scenario: Clicking a sample question routes to Ask Agy and auto-fires the question
-    When the user clicks the first sample question button
-    Then the Ask Agy conversation view should be visible
-    And a user message matching that button's label should be visible in the chat
-    And an assistant response should begin streaming in the chat
-
-  # ---------------------------------------------------------------------------
   # FOOTER COPY REMOVAL (decision 3)
   # ---------------------------------------------------------------------------
 
@@ -92,21 +77,111 @@ Feature: My Profile — Content polish bundle (MATTGPT-068)
     And the text "Real AI assistant • 130+ projects • Instant answers • Available 24/7" should not appear on the page
 
   # ---------------------------------------------------------------------------
-  # DEVOPS & QUALITY MERGE (decision 4)
+  # SEE IT IN ACTION REMOVAL (MATTGPT-093)
+  # CTA card relocated to How I Built MattGPT dialog (how_i_built_dialog.py §9).
   # ---------------------------------------------------------------------------
 
-  Scenario: DevOps & Quality card is absent and CI/CD Pipeline card carries the merged bullets
-    Then no detail card with the heading "DevOps & Quality" should be visible
-    And the "CI/CD Pipeline" detail card should be visible
-    And the "CI/CD Pipeline" detail card should mention testing
-    And the "CI/CD Pipeline" detail card should mention monitoring
-    And the "CI/CD Pipeline" detail card should mention security
+  Scenario: See It In Action heading is not present on the page
+    Then the text "See It In Action" should not appear on the page
 
   # ---------------------------------------------------------------------------
-  # CODE BLOCK COLLAPSED BY DEFAULT (decision 5)
+  # CAREER EVOLUTION TIMELINE — row 7 update (MATTGPT-093, Item 1)
+  # Liquid Studio stays. Count stays at 7. Sabbatical closes to 2023-2026.
+  # Rows 2 (2019-2023) and 3 (2016-2023) are concurrent — intentional.
   # ---------------------------------------------------------------------------
 
-  Scenario: RAG pipeline code block is wrapped in a collapsed details element
-    Then the 5-Stage RAG Pipeline code block should be wrapped in a <details> element
-    And that <details> element should not have the "open" attribute
-    And a <summary> element should be visible as the affordance to expand the code
+  Scenario: Career Evolution timeline has exactly seven entries
+    Then the career evolution timeline should have 7 entries
+
+  Scenario: Concurrent Accenture roles 2019-2023 and 2016-2023 are both present
+    Then the career timeline should contain period "2019-2023"
+    And the career timeline should contain period "2016-2023"
+
+  Scenario: Liquid Studio row is present in the timeline
+    Then the career timeline should contain "Liquid Studio"
+
+  Scenario: Pre-Accenture row names both Cendian Corporation and Wellfound Technology
+    Then the career timeline should contain "Cendian Corporation"
+    And the career timeline should contain "Wellfound Technology"
+
+  Scenario: Sabbatical row shows 2023-2026 not 2023-Present
+    Then the career timeline should contain period "2023-2026"
+    And the career timeline should not contain "2023–Present"
+
+  # ---------------------------------------------------------------------------
+  # COMPETENCY RENAME (MATTGPT-093, Item 2)
+  # ---------------------------------------------------------------------------
+
+  Scenario: Agile at Scale competency is renamed to Product delivery at scale
+    Then the competencies grid should contain a card with heading "Product delivery at scale"
+    And the competencies grid should not contain a card with heading "Agile at Scale"
+
+  # ---------------------------------------------------------------------------
+  # HOW I LEAD (MATTGPT-093, Item 3)
+  # ---------------------------------------------------------------------------
+
+  Scenario: Leadership section is titled How I Lead
+    Then the section heading "How I Lead" should be visible
+    And the section heading "Leadership Philosophy" should not be visible
+
+  Scenario: How I Lead section contains the four locked values
+    Then the How I Lead section should contain "Outcomes over output"
+    And the How I Lead section should contain "Experimentation over certainty"
+    And the How I Lead section should contain "High-trust, sustainable teams"
+    And the How I Lead section should contain "Grow the people"
+
+  Scenario: Replaced leadership values are absent from How I Lead
+    Then the How I Lead section should not contain "Servant Leadership"
+    And the How I Lead section should not contain "Continuous Learning"
+    And the How I Lead section should not contain "Experimentation Culture"
+
+  # ---------------------------------------------------------------------------
+  # SIGNALS PANEL — replaces stats bar (MATTGPT-093, expanded scope)
+  # ---------------------------------------------------------------------------
+
+  Scenario: Stats bar is not present in the DOM on My Profile
+    Then the profile stats bar should not be present in the DOM
+
+  Scenario: Signals panel is present with six tiles
+    Then the signals panel should be visible
+    And the signals panel should have 6 tiles
+
+  Scenario: Signals panel tile values match the wireframe spec
+    Then the signals panel should contain "Senior leader"
+    And the signals panel should contain "Director, Cloud Innovation Center"
+    And the signals panel should contain "150+ practitioners"
+    And the signals panel should contain "Atlanta"
+    And the signals panel should contain "Active search"
+    And the signals panel should contain "Hybrid or in-person"
+
+  # ---------------------------------------------------------------------------
+  # IN MY OWN WORDS — voice block (MATTGPT-093, expanded scope)
+  # Step defs scope assertions to the "In my own words" container.
+  # ---------------------------------------------------------------------------
+
+  Scenario: In my own words section is present with correct heading
+    Then the section heading "In my own words" should be visible
+
+  Scenario: In my own words voice block contains the brand line and referral close
+    Then the "In my own words" section should contain "I build what's next, modernize what's not"
+    And the "In my own words" section should contain "Career built through networking and referrals"
+
+  # ---------------------------------------------------------------------------
+  # FOR A REFERRER — snippet and action buttons (MATTGPT-093, expanded scope)
+  # Step defs scope button assertions to the "For a referrer" container.
+  # ---------------------------------------------------------------------------
+
+  Scenario: For a referrer section is present with correct heading
+    Then the section heading "For a referrer" should be visible
+
+  Scenario: For a referrer section contains snippet text and action buttons
+    Then the "For a referrer" section should contain a copy snippet block
+    And a "Copy snippet" button should be visible within the "For a referrer" section
+    And a "Download PDF" button should be visible within the "For a referrer" section
+
+  # ---------------------------------------------------------------------------
+  # PROFILE HEADER SUBTITLE — locked target text for feature/ui-redesign branch (MATTGPT-093)
+  # ---------------------------------------------------------------------------
+
+  Scenario: Profile header subtitle matches the locked production text
+    Then the profile header should contain "Engineering leader · builds organizations from zero · platform modernization · AI · Atlanta · open to relocate"
