@@ -6,6 +6,7 @@ Updated for dark mode compatibility using CSS variables.
 """
 
 import streamlit as st
+import streamlit.components.v1 as components
 
 
 def render_about_matt():
@@ -133,10 +134,145 @@ def render_about_matt():
             f'<p class="prof-copy-h">Copy this intro language</p>'
             f'<p class="am-referrer-snippet prof-copy-snippet">{_REFERRER_SNIPPET}</p>'
             f'<div class="prof-copy-actions">'
-            f'<span class="prof-act-btn">{_SVG_COPY}&nbsp;Copy snippet</span>'
-            f'<span class="prof-act-btn">{_SVG_DOWNLOAD}&nbsp;Download PDF</span>'
+            f'<span id="am-copy-snippet-btn" class="prof-act-btn">{_SVG_COPY}&nbsp;Copy snippet</span>'
+            f'<span id="am-download-pdf-btn" class="prof-act-btn">{_SVG_DOWNLOAD}&nbsp;Download PDF</span>'
             f'</div>',
             unsafe_allow_html=True,
+        )
+
+    # JS wiring: delegated parentDoc listener (MATTGPT-118).
+    # Delegated pattern matches how_i_built_dialog.py: listener on parentDoc survives
+    # React reconciliation; per-element onclick is lost when React replaces inner DOM.
+    # navigator.clipboard.writeText() used over execCommand — works reliably in headless
+    # Chromium; both .then() and .catch() show ✓ Copied! so clipboard success is not
+    # required for the confirmation feedback.
+    _snippet_js_literal = repr(_REFERRER_SNIPPET)
+    components.html(
+        f"""
+<script>
+(function() {{
+    var parentDoc = window.parent.document;
+    var snippetText = {_snippet_js_literal};
+    parentDoc.addEventListener('click', function(e) {{
+        var copyBtn = e.target.closest ? e.target.closest('#am-copy-snippet-btn') : null;
+        if (copyBtn) {{
+            e.preventDefault();
+            var origHTML = copyBtn.innerHTML;
+            var showConfirm = function() {{
+                copyBtn.innerHTML = '✓ Copied!';
+                copyBtn.style.borderColor = '#10B981';
+                copyBtn.style.color = '#10B981';
+                setTimeout(function() {{
+                    copyBtn.innerHTML = origHTML;
+                    copyBtn.style.borderColor = '';
+                    copyBtn.style.color = '';
+                }}, 2000);
+            }};
+            window.parent.navigator.clipboard.writeText(snippetText).then(showConfirm).catch(showConfirm);
+            return;
+        }}
+        var dlBtn = e.target.closest ? e.target.closest('#am-download-pdf-btn') : null;
+        if (dlBtn) {{
+            var stBtn = parentDoc.querySelector('[class*="st-key-am_download_pdf"] button');
+            if (stBtn) stBtn.click();
+        }}
+    }});
+}})();
+</script>
+""",
+        height=0,
+    )
+
+    if st.button("", key="am_download_pdf"):
+        _export_html = (
+            "<!DOCTYPE html><html><head><meta charset='utf-8'>"
+            "<title>Matt Pugmire</title><style>"
+            "body{font-family:Arial,sans-serif;max-width:740px;margin:40px auto;color:#1F2937;font-size:14px;line-height:1.6}"
+            "h1{font-size:24px;margin:0 0 4px;font-weight:700}"
+            ".sub{color:#6B7280;font-size:12px;margin:0 0 28px}"
+            "h2{font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:#6B7280;margin:24px 0 10px;font-weight:700;border-bottom:1px solid #E5E7EB;padding-bottom:4px}"
+            ".signals{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 4px}"
+            ".tile{background:#F9FAFB;border-radius:6px;padding:8px 12px}"
+            ".tile-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.4px;color:#6B7280;margin:0 0 2px}"
+            ".tile-val{font-size:13px;font-weight:500;margin:0}"
+            "p.voice{font-size:13px;color:#374151;margin:0 0 10px;line-height:1.65}"
+            "p.voice:last-child{margin:0}"
+            ".comp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 4px}"
+            ".comp-card{background:#F9FAFB;border-radius:6px;padding:8px 12px}"
+            ".comp-name{font-size:12px;font-weight:600;margin:0 0 3px}"
+            ".comp-desc{font-size:11px;color:#6B7280;margin:0;line-height:1.4}"
+            ".lead-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:0 0 4px}"
+            ".lead-card{background:#F9FAFB;border-radius:6px;padding:8px 12px}"
+            ".lead-h{font-size:12px;font-weight:600;margin:0 0 3px;color:#8B5CF6}"
+            ".lead-p{font-size:11px;color:#6B7280;margin:0;line-height:1.4}"
+            ".tl{border-left:2px solid #E5E7EB;padding-left:16px;margin:0 0 4px}"
+            ".tl-item{margin-bottom:12px;position:relative}"
+            ".tl-item::before{content:'';position:absolute;left:-21px;top:4px;width:8px;height:8px;border-radius:50%;background:#8B5CF6}"
+            ".tl-period{font-size:11px;color:#8B5CF6;font-weight:600;margin:0}"
+            ".tl-role{font-size:13px;font-weight:500;margin:2px 0 1px}"
+            ".tl-org{font-size:11px;color:#6B7280;margin:0 0 2px}"
+            ".tl-desc{font-size:11px;color:#374151;margin:0;line-height:1.45}"
+            ".footer{margin-top:32px;padding-top:12px;border-top:1px solid #E5E7EB;font-size:11px;color:#6B7280;text-align:center}"
+            "@media print{body{margin:20px}}"
+            "</style></head><body>"
+            "<h1>Matt Pugmire</h1>"
+            "<p class='sub'>Engineering leader &middot; builds organizations from zero &middot; platform modernization &middot; AI &middot; Atlanta &middot; open to relocate</p>"
+            "<h2>Signals</h2><div class='signals'>"
+            "<div class='tile'><p class='tile-lbl'>Level</p><p class='tile-val'>Senior leader</p></div>"
+            "<div class='tile'><p class='tile-lbl'>Most recent</p><p class='tile-val'>Director, Cloud Innovation Center</p></div>"
+            "<div class='tile'><p class='tile-lbl'>Peak team</p><p class='tile-val'>150+ practitioners</p></div>"
+            "<div class='tile'><p class='tile-lbl'>Geo</p><p class='tile-val'>Atlanta &middot; relocate ok</p></div>"
+            "<div class='tile'><p class='tile-lbl'>Status</p><p class='tile-val'>Active search</p></div>"
+            "<div class='tile'><p class='tile-lbl'>Work mode</p><p class='tile-val'>Hybrid or in-person</p></div>"
+            "</div>"
+            "<h2>In My Own Words</h2>"
+            "<p class='voice'>I build what&#39;s next, modernize what&#39;s not, and grow teams along the way. "
+            "Before the Cloud Innovation Center I was the person JPMorgan called to build payments infrastructure "
+            "across 12 countries with a 60-engineer team. The CIC was the same work at a different scale, bringing "
+            "product culture into the enterprise: 150+ practitioners, 30+ products, $100M+ in repeat business.</p>"
+            "<p class='voice'>Early in my career, we specified everything upfront and found out if it worked at the very end. "
+            "I work the opposite way now: prototypes in days, a working MVP in weeks, quality built in from the "
+            "first commit rather than tested in afterward, with modern engineering and AI tightening the loop. "
+            "That is when a team becomes a system that delivers, and the people on it do work they are proud of.</p>"
+            "<p class='voice'>Career built through networking and referrals, not cold applications. "
+            "If you&#39;ve found me, you&#39;ve probably been told to.</p>"
+            "<h2>Core Competencies</h2><div class='comp-grid'>"
+            "<div class='comp-card'><p class='comp-name'>Product &amp; Innovation</p><p class='comp-desc'>From discovery and prototypes to enterprise platforms, built around outcomes.</p></div>"
+            "<div class='comp-card'><p class='comp-name'>Modern Engineering</p><p class='comp-desc'>Cloud-native and event-driven, with quality engineered in so defects stay out of production.</p></div>"
+            "<div class='comp-card'><p class='comp-name'>Product delivery at scale</p><p class='comp-desc'>Scaling product delivery across teams: SAFe, Team Topologies, and the operating model that keeps it fast.</p></div>"
+            "<div class='comp-card'><p class='comp-name'>Transformation Leadership</p><p class='comp-desc'>Moving organizations from IT delivery to product operating models, and making the shift stick.</p></div>"
+            "<div class='comp-card'><p class='comp-name'>Team Building</p><p class='comp-desc'>Building cross-functional product teams from zero, and the capability to keep them growing.</p></div>"
+            "<div class='comp-card'><p class='comp-name'>AI &amp; Emerging Tech</p><p class='comp-desc'>RAG, vector search, and eval-driven development; built hands-on.</p></div>"
+            "</div>"
+            "<h2>How I Lead</h2><div class='lead-grid'>"
+            "<div class='lead-card'><p class='lead-h'>Outcomes over output</p><p class='lead-p'>I measure a team by what it changes, not how much it produces.</p></div>"
+            "<div class='lead-card'><p class='lead-h'>Experimentation over certainty</p><p class='lead-p'>I trust what a prototype teaches me over what a plan promises.</p></div>"
+            "<div class='lead-card'><p class='lead-h'>High-trust, sustainable teams</p><p class='lead-p'>I build teams where ten people do what twenty usually do, and can still do it next quarter.</p></div>"
+            "<div class='lead-card'><p class='lead-h'>Grow the people</p><p class='lead-p'>I develop people with the same discipline I bring to building systems.</p></div>"
+            "</div>"
+            "<h2>Career Evolution</h2><div class='tl'>"
+            "<div class='tl-item'><p class='tl-period'>2023&#8211;2026</p><p class='tl-role'>Sabbatical | Innovation &amp; Upskilling</p><p class='tl-org'>Independent</p><p class='tl-desc'>Sabbatical to recharge, refocus, and reskill &#8212; with MattGPT as tangible proof of the work.</p></div>"
+            "<div class='tl-item'><p class='tl-period'>2019&#8211;2023</p><p class='tl-role'>Director, Cloud Innovation Center</p><p class='tl-org'>Accenture</p><p class='tl-desc'>Launched Innovation Centers (150+ engineers) &#183; 30+ products &#183; $100M+ in repeat business &#183; 4x faster delivery.</p></div>"
+            "<div class='tl-item'><p class='tl-period'>2016&#8211;2023</p><p class='tl-role'>Capability Development Lead, CloudFirst</p><p class='tl-org'>Accenture</p><p class='tl-desc'>Enterprise capability development, engineering enablement, and culture transformation.</p></div>"
+            "<div class='tl-item'><p class='tl-period'>2018&#8211;2019</p><p class='tl-role'>Cloud Native Architecture Lead, Liquid Studio</p><p class='tl-org'>Accenture</p><p class='tl-desc'>Cloud-native prototyping and product shaping through rapid experimentation and modern engineering practices.</p></div>"
+            "<div class='tl-item'><p class='tl-period'>2009&#8211;2017</p><p class='tl-role'>Sr. Technology Architecture Manager, Financial Services</p><p class='tl-org'>Accenture</p><p class='tl-desc'>Financial services platform modernization and architecture at global scale.</p></div>"
+            "<div class='tl-item'><p class='tl-period'>2005&#8211;2009</p><p class='tl-role'>Technology Manager</p><p class='tl-org'>Accenture</p><p class='tl-desc'>Enterprise integration and solution architecture for large-scale telecom and enterprise platforms.</p></div>"
+            "<div class='tl-item'><p class='tl-period'>2000&#8211;2005</p><p class='tl-role'>Startups &amp; Consulting</p><p class='tl-org'>Cendian Corporation &#183; Wellfound Technology</p><p class='tl-desc'>Building B2B and supply-chain platforms using enterprise integration technologies.</p></div>"
+            "</div>"
+            "<div class='footer'>For the full resume, reach out: matthew.c.pugmire+MattGPT@gmail.com | linkedin.com/in/matt-pugmire</div>"
+            "</body></html>"
+        )
+        _escaped_doc = _export_html.replace("\\", "\\\\").replace("`", "\\`")
+        components.html(
+            f"""
+            <script>
+                var printWindow = window.open('', '_blank');
+                printWindow.document.write(`{_escaped_doc}`);
+                printWindow.document.close();
+                printWindow.print();
+            </script>
+            """,
+            height=0,
         )
 
     # =========================================================================

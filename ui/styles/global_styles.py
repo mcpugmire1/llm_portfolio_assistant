@@ -773,6 +773,9 @@ def apply_global_styles():
         /* How I Built dialog — hidden bridge buttons (MATTGPT-102). Chips are HTML spans; st.button elements are hidden triggers only. */
         [class*='st-key-hib_prompt_'] { display: none !important; }
 
+        /* My Profile — hidden download-PDF bridge button (MATTGPT-118). */
+        [class*='st-key-am_download_pdf'] { display: none !important; }
+
         /* ============================================================
            ABOUT MATT/MY PROFILE PAGE CSS — relocated from render_about_matt()
            inline <style> so it persists through Streamlit reruns
