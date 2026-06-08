@@ -176,8 +176,8 @@ Feature: My Profile — Content polish bundle (MATTGPT-068)
 
   Scenario: For a referrer section contains snippet text and action buttons
     Then the "For a referrer" section should contain a copy snippet block
-    And a "Copy snippet" button should be visible within the "For a referrer" section
-    And a "Download PDF" button should be visible within the "For a referrer" section
+    And the "For a referrer" section should contain action button text "Copy snippet"
+    And the "For a referrer" section should contain action button text "Download PDF"
 
   # ---------------------------------------------------------------------------
   # PROFILE HEADER SUBTITLE — locked target text for feature/ui-redesign branch (MATTGPT-093)

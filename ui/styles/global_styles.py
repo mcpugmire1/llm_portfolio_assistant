@@ -36,6 +36,7 @@ def apply_global_styles():
             /* Backgrounds */
             --bg-card: #FFFFFF;
             --bg-surface: #F9FAFB;
+            --bg-warm: #f7f6f3;
             --bg-primary: #FFFFFF;
             --bg-hover: #F3F4F6;
             --bg-input: #FFFFFF;
@@ -853,6 +854,57 @@ def apply_global_styles():
     display: block;
 }
 
+/* Signals panel — MATTGPT-093 (replaces stats bar) */
+.am-signals-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 16px 0 24px;
+}
+
+.am-signal-tile {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.am-signal-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+}
+
+.am-signal-value {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+    .am-signals-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Referrer snippet block — MATTGPT-093 */
+.am-referrer-snippet {
+    background: var(--bg-surface);
+    border-left: 3px solid var(--accent-purple);
+    border-radius: 0 6px 6px 0;
+    padding: 14px 18px;
+    margin: 12px 0 16px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-primary);
+}
+
+
 /* Section titles */
 .am-section-title {
     font-size: 32px;
@@ -1265,6 +1317,387 @@ def apply_global_styles():
     opacity: 0.95;
     margin: 0;
     color: white;
+}
+
+/* =============================================================================
+ * My Profile — prof-* visual language (MATTGPT-093)
+ * New classes scoped to about_matt.py. Existing am-* classes (used by
+ * how_i_built.py and other pages) are left untouched.
+ * Where BDD tests reference am-* class names, about_matt.py dual-classes
+ * elements — BDD locators find the am-* class, and prof-* CSS wins the
+ * cascade because it is defined after the am-* block in this file.
+ * ============================================================================= */
+
+/* Reset browser user-agent margin-block on all prof-* paragraph elements.
+   Without this, UA stylesheet margin-block-start/end: 1em inflates spacing
+   inside signal tiles, voice block, copy block, cards, and timeline rows. */
+.prof-signal-lbl, .prof-signal-val,
+.prof-voice-p,
+.prof-copy-h, .prof-copy-snippet,
+.prof-comp-name, .prof-comp-desc,
+.prof-phil-h, .prof-phil-p,
+.prof-timeline-period, .prof-timeline-role, .prof-timeline-org, .prof-timeline-desc {
+    margin-block-start: 0 !important;
+    margin-block-end: 0 !important;
+}
+
+/* Status badge — "● In active conversations" green pill above name */
+.prof-status-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    color: #2e7d32;
+    background: #e7f4e8;
+    border-radius: 12px;
+    padding: 3px 9px;
+    margin-bottom: 4px;
+}
+
+/* !important needed because dual-classed p elements also carry
+   .am-section-title (32px centered) — prof-section-h must win */
+.prof-section-h {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    color: var(--text-secondary) !important;
+    margin: 0 0 8px !important;
+    text-align: left !important;
+}
+
+/* Signals: wireframe spec — 3-col grid, no border, bg-surface tiles */
+.prof-signals-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 10px !important;
+    margin: 0 !important;
+}
+
+/* Scoped selector beats .am-signal-tile without !important wars */
+[class*='st-key-am_signals_panel'] .am-signal-tile {
+    background: var(--bg-surface) !important;
+    border: none !important;
+    border-radius: 6px !important;
+    padding: 10px 12px !important;
+    gap: 3px !important;
+}
+
+div[data-testid="stMarkdown"]:has(.prof-section-h),
+div[data-testid="stMarkdownContainer"]:has(.prof-section-h) {
+    margin-top: 22px !important;
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+}
+
+[class*='st-key-am_signals_panel'] > div {
+    padding: 0 !important;
+}
+
+/* Root cause B fix — the keyed container div IS the flex parent (gap: 16px lives here,
+   not on a child stVerticalBlock). Target the containers directly. */
+[class*='st-key-am_signals_panel'],
+[class*='st-key-am_in_my_own_words'],
+[class*='st-key-am_for_a_referrer'],
+[class*='st-key-am_competencies'],
+[class*='st-key-am_how_i_lead'],
+[class*='st-key-am_career_evolution'] {
+    gap: 4px !important;
+}
+
+[class*='st-key-am_signals_panel'] [data-testid="stMarkdownContainer"],
+[class*='st-key-am_in_my_own_words'] [data-testid="stMarkdownContainer"],
+[class*='st-key-am_for_a_referrer'] [data-testid="stMarkdownContainer"],
+[class*='st-key-am_competencies'] [data-testid="stMarkdownContainer"],
+[class*='st-key-am_how_i_lead'] [data-testid="stMarkdownContainer"],
+[class*='st-key-am_career_evolution'] [data-testid="stMarkdownContainer"] {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.prof-signal-lbl {
+    font-size: 10px !important;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin: 0 0 2px !important;
+}
+
+.prof-signal-val {
+    font-size: 12px !important;
+    font-weight: 500;
+    margin: 0;
+    color: var(--text-primary);
+}
+
+/* Voice block — wireframe: .prof-voice-p per paragraph */
+.prof-voice-p {
+    font-size: 13px !important;
+    line-height: 1.65 !important;
+    color: var(--text-primary) !important;
+    margin: 0 0 10px !important;
+}
+
+.prof-voice-p:last-child {
+    margin: 0;
+}
+
+/* Referrer copy block: info-bg outer container + white inner snippet */
+.prof-copy-block {
+    background: var(--accent-purple-bg);
+    border-left: 2px solid var(--accent-purple);
+    border-radius: 0 6px 6px 0;
+    padding: 14px 16px;
+    margin: 10px 0 14px;
+}
+
+.prof-copy-h {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: var(--accent-purple) !important;
+    margin: 0 0 6px 0 !important;
+}
+
+/* Inner snippet (dual-classed with am-referrer-snippet for BDD compat) */
+.prof-copy-snippet {
+    background: var(--bg-card) !important;
+    border-left: none !important;
+    border-radius: 6px !important;
+    padding: 9px 11px !important;
+    margin: 6px 0 !important;
+    font-size: 12px !important;
+    font-style: italic !important;
+    line-height: 1.5 !important;
+    color: var(--text-secondary) !important;
+}
+
+/* Flex row for Copy snippet + Download PDF buttons */
+.prof-copy-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.prof-act-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 5px 10px;
+    border: 0.5px solid var(--border-color) !important;
+    border-radius: 6px;
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    cursor: default;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+/* Competency grid: override max-width/margin/padding/gap */
+.prof-comp-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 8px !important;
+}
+
+/* Compound selector (0-2-0) beats .competency-card (0-1-0) on all properties */
+.competency-card.prof-comp-card {
+    background: var(--bg-surface) !important;
+    border: none !important;
+    border-radius: 6px !important;
+    padding: 11px 12px !important;
+    transition: background 0.15s ease;
+}
+
+.competency-card.prof-comp-card:hover {
+    border-color: transparent !important;
+    transform: none !important;
+    background: var(--bg-hover) !important;
+}
+
+/* Beats .competency-card h4 (0-1-1) with compound selector (0-2-1).
+   padding: 0 overrides Streamlit's h4 { padding: 8px 0 16px } default */
+.competency-card.prof-comp-card h4,
+.competency-card.prof-comp-card .prof-comp-name {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: var(--text-primary) !important;
+    margin: 0 0 3px !important;
+    padding: 0 !important;
+}
+
+.competency-card.prof-comp-card p,
+.competency-card.prof-comp-card .prof-comp-desc {
+    font-size: 11px !important;
+    color: var(--text-secondary) !important;
+    line-height: 1.4 !important;
+    margin: 0 !important;
+}
+
+/* How I Lead — wireframe grid class: .prof-philosophy */
+.prof-philosophy {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+}
+
+.prof-phil-card {
+    background: var(--bg-surface) !important;
+    border: none !important;
+    border-radius: 6px !important;
+    padding: 11px 13px !important;
+}
+
+.prof-phil-h {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: var(--accent-purple) !important;
+    margin: 0 0 3px !important;
+}
+
+.prof-phil-p {
+    font-size: 11px !important;
+    line-height: 1.45 !important;
+    color: var(--text-primary) !important;
+    margin: 0 !important;
+}
+
+/* Compound selectors (0-2-0 / 0-2-1) beat Streamlit's internal
+   [data-testid="stMarkdownContainer"] p (0-1-1) rule for font-size */
+.prof-phil-card .prof-phil-h {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: var(--accent-purple) !important;
+    margin: 0 0 3px !important;
+}
+
+.prof-phil-card .prof-phil-p {
+    font-size: 11px !important;
+    line-height: 1.45 !important;
+    color: var(--text-primary) !important;
+    margin: 0 !important;
+}
+
+/* For a referrer: style the Streamlit container as the info-box so
+   st.button() elements land visually inside the styled region */
+[class*='st-key-am_for_a_referrer'] {
+    background: var(--accent-purple-bg);
+    border-left: 2px solid var(--accent-purple);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 16px;
+    margin: 10px 0 14px;
+}
+
+/* Referrer columns shrink to button content width — removes the large gap
+   between Copy snippet and Download PDF that the 1:1:2 column ratio creates */
+[class*='st-key-am_for_a_referrer'] [data-testid="stHorizontalBlock"] {
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+}
+
+[class*='st-key-am_for_a_referrer'] [data-testid="column"] {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+}
+
+/* Action buttons inside "For a referrer" — wireframe .wf-act-btn spec.
+   Scoped to container so this beats Streamlit's global .stButton > button rule */
+[class*='st-key-am_for_a_referrer'] .stButton > button {
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    padding: 5px 10px !important;
+    border: 0.5px solid var(--border-color) !important;
+    border-radius: 6px !important;
+    background: var(--bg-card) !important;
+    color: var(--text-secondary) !important;
+    box-shadow: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    line-height: 1.4 !important;
+    width: auto !important;
+    margin-top: 4px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    max-width: fit-content !important;
+}
+
+/* Timeline: matches wireframe — simple left border, solid purple dot */
+.prof-timeline {
+    padding-left: 6px !important;
+    border-left: 2px solid var(--border-color) !important;
+    max-width: none !important;
+    margin: 0 !important;
+}
+
+.prof-timeline::before {
+    display: none;
+}
+
+.prof-timeline .timeline-item {
+    padding: 0 0 12px 16px !important;
+    margin-bottom: 0 !important;
+}
+
+.prof-timeline .timeline-item::before {
+    left: -7px !important;
+    top: 4px !important;
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 50% !important;
+    background: var(--accent-purple) !important;
+    border: none !important;
+}
+
+.prof-timeline-period { font-size: 11px !important; color: var(--accent-purple) !important; font-weight: 500 !important; margin: 0 !important; }
+.prof-timeline-role   { font-size: 13px !important; font-weight: 500 !important; margin: 2px 0 1px !important; color: var(--text-primary) !important; }
+.prof-timeline-org    { font-size: 11px !important; color: var(--text-secondary) !important; margin: 0 0 3px !important; }
+.prof-timeline-desc   { font-size: 11px !important; color: var(--text-primary) !important; margin: 0 !important; line-height: 1.45 !important; }
+
+/* prof-* mobile overrides — use !important to beat existing am-*/timeline-*
+   mobile overrides that also use !important */
+@media (max-width: 768px) {
+    .prof-section-h {
+        font-size: 12px !important;
+        margin: 0 0 8px !important;
+    }
+    .prof-signals-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .prof-comp-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        padding: 0 !important;
+    }
+    .prof-comp-name {
+        font-size: 12px !important;
+        margin: 0 0 3px !important;
+    }
+    .prof-comp-desc {
+        font-size: 11px !important;
+    }
+    .prof-philosophy {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+    }
+    .prof-phil-h {
+        font-size: 12px !important;
+    }
+    .prof-phil-p {
+        font-size: 11px !important;
+    }
+    .prof-timeline .timeline-item {
+        padding: 0 0 10px 14px !important;
+    }
+    .prof-timeline-role { font-size: 12px !important; }
 }
 
 /* Contact section - gradient works in both modes */
