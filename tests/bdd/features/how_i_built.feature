@@ -79,3 +79,27 @@ Feature: How I Built MattGPT deep-link surface (MATTGPT-102)
     And the How Agy Searches dialog is visible
     When I click the button "See how I built it →"
     Then a dialog with title "How I Built MattGPT" is visible
+
+  # "See It In Action" prompt chips (MATTGPT-117).
+  # Replaces equivalent coverage previously on About Matt (removed MATTGPT-093).
+  # DOM-observable assertions only. Chips are .hib-cta-prompt spans bridged
+  # via delegated parentDoc JS listener in how_i_built_dialog.py section 9.
+
+  Scenario: How I Built dialog contains a "See It In Action" section with 4 prompt chips
+    Given the user is on the Ask Agy landing page
+    And the user clicks the "How Agy searches" button
+    And the How Agy Searches dialog is visible
+    When I click the button "See how I built it →"
+    Then a dialog with title "How I Built MattGPT" is visible
+    And the How I Built dialog contains a "See It In Action" section
+    And the "See It In Action" section contains 4 prompt chips
+
+  Scenario: Clicking a prompt chip in the How I Built dialog routes to Ask Agy
+    Given the user is on the Ask Agy landing page
+    And the user clicks the "How Agy searches" button
+    And the How Agy Searches dialog is visible
+    When I click the button "See how I built it →"
+    And a dialog with title "How I Built MattGPT" is visible
+    And I click the first prompt chip in the "See It In Action" section
+    Then the How I Built dialog is dismissed
+    And the Ask Agy conversation view is visible
