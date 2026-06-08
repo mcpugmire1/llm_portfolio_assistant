@@ -320,6 +320,23 @@ Feature: My Work
     Then the rejection banner should be displayed
     And no story results should be shown
 
+  # =============================================================================
+  # TWO-ROW FILTER BAR (MATTGPT-065)
+  # =============================================================================
+
+  Scenario: Row 2 filters always visible on desktop without toggle
+    Given the user navigates to the My Work page
+    And the viewport width is 1280px
+    When the page loads
+    Then the Client filter should be visible
+    And the Role filter should be visible
+    And the Domain filter should be visible
+
+  Scenario: Row 2 filters hidden on mobile viewport
+    Given the user navigates to the My Work page
+    When the viewport is resized to 375px wide
+    Then the row 2 filter bar should not be visible
+
   # Regression guard for May 23, 2026 finding: explore_stories.py passes the
   # raw nonsense_check category (e.g., "jokes_riddles") to render_no_match_banner
   # but the BANNER_COPY branching in utils/ui_helpers.py expects the
