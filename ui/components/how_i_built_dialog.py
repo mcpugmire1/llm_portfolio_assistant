@@ -67,7 +67,7 @@ def render_how_i_built_dialog():
     # 3. System Architecture Flow
     st.markdown(
         """<div class="deep-dive-card">
-    <h3 style="text-align:center;margin:0 0 24px;">System Architecture Flow</h3>
+    <h3 style="margin:0 0 24px;">System Architecture Flow</h3>
     <p style="font-size:12px;color:var(--text-secondary);margin:0 0 16px;">How data moves through the system, from raw Excel stories to a deployed RAG pipeline.</p>
     <div class="flow-grid">
         <div class="flow-step"><div class="flow-num">1</div><div class="flow-step-title">Data Ingestion</div><div class="flow-step-desc">Excel → JSONL with STAR format</div></div>

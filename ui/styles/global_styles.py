@@ -711,7 +711,7 @@ def apply_global_styles():
         /* ========================================
            HOW I BUILT DIALOG — Go-deeper + CTA (MATTGPT-102)
            ======================================== */
-        .hib-block { border: 0.5px solid var(--border-color); border-radius: 10px; padding: 14px 16px; margin-top: 16px; max-width: 900px; margin-left: auto; margin-right: auto; }
+        .hib-block { border: 0.5px solid var(--border-color); border-radius: 10px; padding: 14px 16px; margin-top: 16px; margin-left: 0; margin-right: 0; }
         .hib-godeeper-lead { font-size: 12px; color: var(--text-secondary); margin: 4px 0 10px; }
         .hib-godeeper-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .hib-godeeper-card { border: 0.5px solid var(--border-color); border-radius: 10px; padding: 14px 16px; }
@@ -721,7 +721,7 @@ def apply_global_styles():
         .hib-godeeper-desc { font-size: 11px; color: var(--text-secondary); line-height: 1.5; margin: 0 0 8px; }
         .hib-godeeper-link { font-size: 11px; color: var(--accent-purple); font-weight: 500; display: inline-flex; align-items: center; gap: 4px; text-decoration: none; }
         .hib-godeeper-link:hover { text-decoration: underline; }
-        .hib-cta-block { padding: 14px 16px; background: var(--bg-surface); border-radius: 10px; border-left: 2px solid #7e5fd4; margin-top: 16px; max-width: 900px; margin-left: auto; margin-right: auto; }
+        .hib-cta-block { padding: 14px 16px; background: var(--bg-surface); border-radius: 10px; border-left: 2px solid #7e5fd4; margin-top: 16px; margin-left: 0; margin-right: 0; }
         .hib-cta-h { font-size: 14px; font-weight: 500; color: var(--text-primary); margin: 0 0 6px; }
         .hib-cta-sub { font-size: 12px; color: var(--text-secondary); margin: 0 0 10px; line-height: 1.5; }
         .hib-cta-prompts { display: flex; flex-direction: column; gap: 6px; }
@@ -1016,9 +1016,8 @@ def apply_global_styles():
     border-radius: 12px;
     padding: 32px;
     margin-bottom: 24px;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .deep-dive-card h3 {
@@ -1146,8 +1145,7 @@ def apply_global_styles():
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
-    max-width: 900px;
-    margin: 0 auto;
+    margin: 0;
 }
 
 @media (max-width: 768px) {
