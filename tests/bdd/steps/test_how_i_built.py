@@ -212,6 +212,7 @@ def assert_back_link_text(browser_page, expected_label):
 # =============================================================================
 
 
+@when(parsers.parse('a dialog with title "{title}" is visible'))
 @then(parsers.parse('a dialog with title "{title}" is visible'))
 def assert_dialog_with_title_visible(browser_page, title):
     try:
@@ -240,3 +241,80 @@ def assert_no_how_i_built_on_profile(browser_page):
         f"Built MattGPT'. MATTGPT-102: content should be relocated to the new "
         f"deep-link surface, not duplicated on My Profile."
     )
+
+
+# =============================================================================
+# MATTGPT-117 — "See It In Action" section + prompt chip routing
+# =============================================================================
+
+
+@then('the How I Built dialog contains a "See It In Action" section')
+def assert_see_it_in_action_section_visible(browser_page):
+    try:
+        browser_page.wait_for_selector(
+            "[role='dialog'] .hib-cta-block", timeout=LONG_TIMEOUT
+        )
+    except Exception as exc:
+        raise AssertionError(
+            "The 'See It In Action' section (.hib-cta-block) not found inside "
+            "the How I Built dialog. MATTGPT-117: section 9 of "
+            "how_i_built_dialog.py must render a .hib-cta-block container. "
+            f"Underlying error: {exc}"
+        ) from exc
+
+
+@then(parsers.parse('the "See It In Action" section contains {count:d} prompt chips'))
+def assert_prompt_chip_count(browser_page, count):
+    chips = browser_page.locator("[role='dialog'] .hib-cta-prompt")
+    actual = chips.count()
+    assert actual == count, (
+        f"Expected {count} prompt chips (.hib-cta-prompt) inside the How I Built "
+        f"dialog, found {actual}. MATTGPT-117: how_i_built_dialog.py section 9 "
+        f"must render exactly {count} .hib-cta-prompt spans."
+    )
+
+
+@when('I click the first prompt chip in the "See It In Action" section')
+def click_first_prompt_chip(browser_page):
+    chip = browser_page.locator(
+        "[role='dialog'] .hib-cta-prompt[data-hib-idx='0']"
+    ).first
+    try:
+        chip.wait_for(state="visible", timeout=LONG_TIMEOUT)
+        chip.click()
+    except Exception as exc:
+        raise AssertionError(
+            "First prompt chip (.hib-cta-prompt[data-hib-idx='0']) not visible "
+            "inside the How I Built dialog. MATTGPT-117: how_i_built_dialog.py "
+            f"section 9 must render the chip. Underlying error: {exc}"
+        ) from exc
+    browser_page.wait_for_load_state("networkidle")
+    browser_page.wait_for_timeout(SHORT_WAIT)
+
+
+@then("the How I Built dialog is dismissed")
+def assert_dialog_dismissed(browser_page):
+    try:
+        browser_page.wait_for_selector(
+            "[role='dialog']", state="hidden", timeout=LONG_TIMEOUT
+        )
+    except Exception as exc:
+        raise AssertionError(
+            "How I Built dialog is still visible after clicking a prompt chip. "
+            "MATTGPT-117: clicking a chip should set active_dialog=None and "
+            f"rerun. Underlying error: {exc}"
+        ) from exc
+
+
+@then("the Ask Agy conversation view is visible")
+def assert_conversation_view_visible(browser_page):
+    try:
+        browser_page.wait_for_selector(
+            "[data-testid='stChatInput']", timeout=LONG_TIMEOUT
+        )
+    except Exception as exc:
+        raise AssertionError(
+            "Ask Agy conversation view (stChatInput) not visible after chip click. "
+            "MATTGPT-117: chip click must set active_tab='Ask Agy' and route to "
+            f"the conversation view. Underlying error: {exc}"
+        ) from exc
