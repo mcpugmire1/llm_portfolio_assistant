@@ -179,6 +179,10 @@ Feature: My Profile — Content polish bundle (MATTGPT-068)
     And the "For a referrer" section should contain action button text "Copy snippet"
     And the "For a referrer" section should contain action button text "Download PDF"
 
+  Scenario: Clicking Copy snippet shows a Copied confirmation then reverts
+    When the user clicks the "Copy snippet" action button in the "For a referrer" section
+    Then the "Copy snippet" button should show "✓ Copied!" confirmation
+
   # ---------------------------------------------------------------------------
   # PROFILE HEADER SUBTITLE — locked target text for feature/ui-redesign branch (MATTGPT-093)
   # ---------------------------------------------------------------------------
