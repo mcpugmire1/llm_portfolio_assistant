@@ -1340,6 +1340,55 @@ def banner_displays_copy_from_banner_copy(browser_page, reason):
     )
 
 
+# =============================================================================
+# TWO-ROW FILTER BAR (MATTGPT-065)
+# =============================================================================
+
+
+@given("the viewport width is 1280px")
+def set_viewport_desktop(browser_page):
+    browser_page.set_viewport_size({"width": 1280, "height": 900})
+    browser_page.wait_for_timeout(SHORT_WAIT)
+
+
+@when("the page loads")
+def wait_for_page_stable(browser_page):
+    browser_page.wait_for_load_state("networkidle")
+    browser_page.wait_for_timeout(SHORT_WAIT)
+
+
+@when("the viewport is resized to 375px wide")
+def resize_to_mobile(browser_page):
+    browser_page.set_viewport_size({"width": 375, "height": 800})
+    browser_page.wait_for_timeout(SHORT_WAIT)
+
+
+@then("the Client filter should be visible")
+def client_filter_visible(browser_page):
+    el = browser_page.locator("[class*='st-key-r2_client']").first
+    assert el.is_visible(), "Client filter (r2_client) not visible on desktop"
+
+
+@then("the Role filter should be visible")
+def role_filter_visible(browser_page):
+    el = browser_page.locator("[class*='st-key-r2_role']").first
+    assert el.is_visible(), "Role filter (r2_role) not visible on desktop"
+
+
+@then("the Domain filter should be visible")
+def domain_filter_visible(browser_page):
+    el = browser_page.locator("[class*='st-key-r2_domain']").first
+    assert el.is_visible(), "Domain filter (r2_domain) not visible on desktop"
+
+
+@then("the row 2 filter bar should not be visible")
+def row2_filter_bar_hidden(browser_page):
+    el = browser_page.locator("[class*='st-key-r2_row']").first
+    assert (
+        not el.is_visible()
+    ), "Row 2 filter bar should be hidden on mobile but is visible"
+
+
 @then("no story results should be shown")
 def no_story_results_shown(browser_page):
     """After a rejected query, the results area should be empty —
