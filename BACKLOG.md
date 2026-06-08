@@ -138,6 +138,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-114](#mattgpt-114) | Page header typography — standardize title + subtitle via shared CSS classes across all 7 surfaces | Open | Medium | Refactor | June 5, 2026 |
 | [MATTGPT-115](#mattgpt-115) | Lock icon — browser console warning: password field not in native form (st.popover portal breaks form containment) | Open | Low | Issue | June 6, 2026 |
 | [MATTGPT-116](#mattgpt-116) | Evaluate retiring how_i_built.py standalone route — superseded by How I Built dialog | Open | Low | Refactor | June 6, 2026 |
+| [MATTGPT-117](#mattgpt-117) | How I Built dialog — BDD coverage for "See It In Action" prompt buttons and Ask Agy routing | Open | Medium | Action | June 7, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -2711,6 +2712,24 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
   - `role_match.py` race guard: **DO NOT revert** — `not screen_width or int(screen_width) < 1024` is the correct production fix for the Streamlit Cloud empty-string case (April 2026). Reverting it re-introduces the false-positive mobile gate bug.
 - **After revert:** Run `test_desktop_shows_full_interface` in isolation to confirm passes before committing.
 - **Logged:** June 7, 2026
+
+---
+
+### MATTGPT-117
+**How I Built dialog — BDD coverage for "See It In Action" prompt buttons and Ask Agy routing**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Logged:** June 7, 2026
+
+**Issue:** `how_i_built_dialog.py` section 9 renders four sample-question prompt buttons that route to Ask Agy via the `on_chip_click` contract (sets `seed_prompt` + `__ask_from_suggestion__` + `active_tab="Ask Agy"`). The MATTGPT-068 scenarios that previously tested this behavior on `about_matt.py` were deleted when the CTA card was removed from My Profile as part of MATTGPT-093. No equivalent BDD coverage exists for the dialog.
+
+**Fix:** Add two scenarios to `tests/bdd/features/how_i_built.feature`:
+1. Four prompt buttons are visible in the dialog "See It In Action" block.
+2. Clicking a prompt button routes to Ask Agy and fires the question.
+
+**Effort:** ~10–15 lines. Step definitions likely reusable from existing Ask Agy chip-click steps.
 
 ---
 
