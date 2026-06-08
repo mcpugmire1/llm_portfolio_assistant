@@ -23,7 +23,7 @@ Run with: pytest tests/bdd/steps/test_about_matt.py -v
 Requires: streamlit run app.py on localhost:8501.
 """
 
-from pytest_bdd import given, parsers, scenarios, then
+from pytest_bdd import given, parsers, scenarios, then, when
 
 scenarios("../features/about_matt.feature")
 
@@ -387,3 +387,49 @@ def assert_profile_header_contains(browser_page, text):
         f"Per MATTGPT-093, the subtitle must match the locked target text "
         f"for the feature/ui-redesign branch."
     )
+
+
+# ---------------------------------------------------------------------------
+# MATTGPT-118 — Copy snippet clipboard + ✓ Copied! confirmation
+# ---------------------------------------------------------------------------
+
+
+@when(
+    'the user clicks the "Copy snippet" action button in the "For a referrer" section'
+)
+def click_copy_snippet_button(browser_page):
+    section = browser_page.locator("[class*='st-key-am_for_a_referrer']").first
+    try:
+        section.wait_for(state="visible", timeout=LONG_TIMEOUT)
+    except Exception as exc:
+        raise AssertionError(
+            "'For a referrer' section not visible — cannot click Copy snippet. "
+            f"Underlying error: {exc}"
+        ) from exc
+    btn = section.locator(".prof-act-btn:has-text('Copy snippet')").first
+    try:
+        btn.wait_for(state="visible", timeout=CLICK_TIMEOUT)
+        btn.click()
+    except Exception as exc:
+        raise AssertionError(
+            "Copy snippet .prof-act-btn not found or not clickable inside "
+            "'For a referrer' section. MATTGPT-118: the span must have class "
+            f"prof-act-btn and contain text 'Copy snippet'. Underlying error: {exc}"
+        ) from exc
+    browser_page.wait_for_timeout(SHORT_WAIT)
+
+
+@then(parsers.parse('the "Copy snippet" button should show "{label}" confirmation'))
+def assert_copy_snippet_confirmation(browser_page, label):
+    section = browser_page.locator("[class*='st-key-am_for_a_referrer']").first
+    try:
+        section.wait_for(state="visible", timeout=LONG_TIMEOUT)
+        section.locator(f".prof-act-btn:has-text('{label}')").first.wait_for(
+            state="visible", timeout=CLICK_TIMEOUT
+        )
+    except Exception as exc:
+        raise AssertionError(
+            f"Copy snippet button did not show {label!r} confirmation after click. "
+            "MATTGPT-118: the JS clipboard handler must change the span label to "
+            f"{label!r} on successful copy. Underlying error: {exc}"
+        ) from exc
