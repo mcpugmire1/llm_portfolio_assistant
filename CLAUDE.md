@@ -284,6 +284,15 @@
   - **BDD scenarios must assert DOM-observable behavior, not session state.** Playwright cannot read `st.session_state`. For chip/button click routing, assert navigation visible + user-message echo + assistant-response streaming — NOT `seed_prompt` / `active_tab` dict reads. See `memory/feedback_bdd_dom_observable.md`. May 26, 2026 (MATTGPT-068 Scenario 3 — caught before Red step defs gate).
   - **One "go" ships the full Red (scenarios) → Red (step defs) → Green cycle.** Don't re-ask for approval between gates after the initial "go" on a ticket. Re-ask only on **substantive new design decisions** (not scope clarifications, not catches like "test selector still references old class"). See `memory/feedback_one_go_ships_cycle.md`. May 30, 2026.
   - **Eval failure discipline rule:** any eval failure should be validated against production before being labeled "pre-existing" or "stochastic" in memory or BACKLOG. Memory entries that pre-frame failures as accepted are unvalidated until cross-referenced to a BACKLOG ticket. If a "known issue" in memory isn't in BACKLOG, it's an unvalidated note — not a tracked issue. May 22, 2026.
+  - **On a second Playwright selector timeout, screenshot before iterating.** Wrap the failing call in try/except, take a screenshot on failure, and read it before proposing any selector fix. Remove the wrapper once green. Example:
+    ```python
+    try:
+        option.click(timeout=5000)
+    except Exception:
+        browser_page.screenshot(path=f'/tmp/pw_debug_{label}.png')
+        raise
+    ```
+    One screenshot beats three guessed selector fixes. June 2026 (MATTGPT-065).
 
   ### Don't
   - Ask about priorities or trade-offs before starting
@@ -316,6 +325,24 @@
   - A code comment near the relevant change
 
   If a new file is genuinely needed and is transitory, it goes in `docs/working/` with a lifecycle declaration and a defined deletion target. Permanent new docs at the top level require explicit user approval.
+
+  ### Backlog Maintenance
+
+  **Trigger:** Before picking up the next item on the NOW list — not scheduled, not PR-gated.
+
+  **Sync anchor:** `BACKLOG.md` contains a `<!-- last-backlog-sync: <sha> -->` comment at the top. The agent reads this, runs `git log <sha>..HEAD --oneline` for the commit range, then updates the comment on each run.
+
+  **Agent inputs:** `BACKLOG.md`, `CHANGELOG.md`, `git log <sha>..HEAD --oneline` since last sync.
+
+  **Agent actions (propose before writing anything):**
+  1. For each resolved ticket: remove the matrix row AND the detail block from `BACKLOG.md`. Write a `CHANGELOG.md` entry in the existing format (paragraph + commit hash + ticket ref). Both surfaces, always.
+  2. **ARCHITECTURE.md flag:** if any files in `ui/pages/`, `ui/components/`, or `services/` appear in the commit range and `ARCHITECTURE.md` is NOT in that same range, surface the specific filenames and flag for review. Do not assess significance — let Matt decide.
+  3. Update `<!-- last-backlog-sync: <sha> -->` to HEAD.
+  4. Nothing writes until Matt approves the proposed diff.
+
+  **Decided Against items:** Stay in `BACKLOG.md` permanently in their own closed section. Not shipped, not archived to `CHANGELOG.md`. Agent never touches them during routine passes.
+
+  **What does NOT go in CHANGELOG.md:** Decided Against items. `CHANGELOG.md` is a ship record only.
 
   ## Secrets & Sensitive Output Handling
 
