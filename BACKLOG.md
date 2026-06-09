@@ -5,35 +5,57 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 ---
 
-## Value Prioritized Roadmap (updated 2026-05-31)
+## Value Prioritized Roadmap (updated 2026-06-09)
 
-**NOW** (suggested order of execution):
+**NOW** (UI redesign sprint — merge to `main` + production deploy):
 
-*Cross-surface count reconciliation chain (May 31 sequencing — order matters):*
-1. **-098** — Explore Stories default state (filter `Professional Narrative` + sort `Start_Date desc`, mirror Timeline's `EXCLUDED_ERA` pattern at `ui/components/timeline_view.py:42`). ~30 min raw. **Ship before -104** — establishes post-Era as the convention on Explore Stories before -104 brings the other outliers in line.
-2. **-104** — Banking + Cross-Industry math reconciliation. **Depends on -098 shipping first.** Scope expanded per May 31 audit (`utils/landing_cards.py` filter analysis): landing hero/stats + Home card meta align to post-Era counts (32/48), matching landing card grids + Timeline + (post-098) Explore Stories. Shipping -104 BEFORE -098 would create a new cross-surface inconsistency (Home shows 32, Explore Stories shows 33 for the same filter). ~30-60 min raw + 3 files (banking_landing.py, cross_industry_landing.py, category_cards.py).
+*Bundle 1 — Quick CSS wins (one commit):*
+- **-111** — Back-link dark mode fix
+- **-112** — How Agy Searches dialog mobile polish
+- **-069** — Stats label contrast
+- **-070** — Suggestion button cursor
 
-*New surfaces / components:*
-3. **-102** — How I Built MattGPT deep-link surface. New page, content extracted from About Matt's How I Built section, no main nav entry, back-affordance pattern mirrors Banking/CI. ~2-3 hours raw. Sequenced before -101 so -101's modal footer link can route to a live page, not a placeholder.
-4. **-101** — Why Agy? modal + "?" badge on Agy avatar (bundled). New component + new CSS tokens + wiring across 5 surfaces where avatar appears. ~2-3 hours raw + 5-surface wiring risk if Agy avatar isn't a shared component. Footer link to -102 ships live (depends on -102 landing first).
+*Bundle 2 — Explore Stories cleanup:*
+- **-105** — CSS rerun regression (same family as MATTGPT-068)
+- **-064** — AgGrid row hover
+- **-119** — My Work mobile Filters toggle
 
-*Polish (slot anywhere):*
-- **-105** — Explore Stories CSS rerun regression (same family as MATTGPT-068). Not blocking; can ship any time.
+*Bundle 3 — Retirement + housekeeping:*
+- **-116** — Retire how_i_built.py standalone route
 
-*Heavier conceptual work (saved for fresh brain):*
-5. **-077 mitigation** — Query-side mitigation: strip "Matt" from embedded queries on technical-noun shapes (hours, not days; full hybrid retrieval lives in NEXT)
-6. **-094 probes** — CIC over-concentration + operational under-surfacing probes; parallel-runnable, read-only; informs NEXT content work
-7. **-088** — Role Match scorer alignment (loose dependency on -077 mitigation: do cleaner if you can, not wait until you can)
-8. **-097** — Career-intent refresh (active recruiter failure earns NOW slot)
+*Bundle 4 — Role Match UX:*
+- **-066** — Sample JD cold-start
+- **-067** — Result panel polish
+
+*Bundle 5 — Mobile + typography:*
+- **-113** — Ask Agy landing mobile polish
+- **-114** — Page header typography
+
+*Bundle 6 — Home:*
+- **-108** — Category cards capability counts
+
+**→ Merge `feature/ui-redesign` → `main`** (production deploy)
+
+*Queued for after UI deploy:*
+- **-077 mitigation** — Query-side mitigation: strip "Matt" from embedded queries on technical-noun shapes (hours, not days; full hybrid retrieval lives in NEXT)
+- **-094 probes** — CIC over-concentration + operational under-surfacing probes; parallel-runnable, read-only; informs NEXT content work
+- **-088** — Role Match scorer alignment (loose dependency on -077 mitigation: do cleaner if you can, not wait until you can)
+- **-097** — Career-intent refresh (active recruiter failure earns NOW slot)
 
 *Recently shipped (off NOW list):*
-- **MATTGPT-087 + MATTGPT-092** — Shipped May 29-30, 2026 on `feature/ui-redesign` branch. Hero CTA inversion + scope/outcome anchor + stats restructure.
-- **MATTGPT-100** — Shipped May 30, 2026. Navigation label rename (Strategy B coordinated rename across display labels + `session_state["active_tab"]` keys + BDD fixtures). 4-10x the "30-60 min mechanical" estimate due to hidden coupling discovery (~50 files of stragglers, mobile-nav class-name encoding, BDD selector collisions).
-- **MATTGPT-106** — Shipped May 31, 2026. Navbar desktop brand-left + space-between layout, brand vertical centering (absolute positioning to bypass Streamlit stMarkdown wrapper layers).
-- **MATTGPT-107** — Shipped visually May 31, 2026 (b2192bb home polish + other session's category cards work). Home category cards redesign + section header tighten + ask-agy-card margin trim + footer compaction + mobile hero header clearance. BDD discipline closure (other session's Red gates + Green commit against `home_category_cards.feature`) pending verification.
-- **MATTGPT-065** — Resolved June 9, 2026. Two-row permanent filter bar shipped on `feature/ui-redesign` (commit `3015942`). Remaining polish items (empty states, truncation cue, tooltips) deferred — no new ticket.
-- **MATTGPT-090** — Closed as Decided Against May 29, 2026. Personal Intent Family in `services/semantic_router.py:192-209` already handles comp queries with the warm decline; no system prompt edit needed.
-- **MATTGPT-103** — Closed as Decided Against May 30, 2026. "20+ years of work" in the Agy intro line reads as functional/corpus-scope (telling the user how big Agy's data set is), not as personal positioning. Different surface, different role; the anti-bias play that drove the Years tile drop doesn't transfer to the Agy intro.
+- **MATTGPT-118** — Resolved June 2026. My Profile Copy snippet + Download PDF (referrer workflow). Delegated parentDoc listener + navigator.clipboard; hidden st.button bridge + window.open/print. 20/20 BDD passing (`983a86d`).
+- **MATTGPT-093** — Resolved June 2026. My Profile visual-language reconciliation. 19/19 BDD passing (`4bbdb26`).
+- **MATTGPT-098** — Shipped May 29, 2026. Explore Stories default state — exclude Professional Narrative + sort Start_Date desc.
+- **MATTGPT-101** — Shipped May 30, 2026. Why Agy? modal + "?" badge on Agy avatar.
+- **MATTGPT-102** — Shipped May 30, 2026. How I Built MattGPT — `@st.dialog` modal (replaces standalone page).
+- **MATTGPT-104** — Shipped May 30, 2026. Banking + Cross-Industry math reconciliation (post-Era counts aligned across all surfaces).
+- **MATTGPT-087 + MATTGPT-092** — Shipped May 29-30, 2026. Hero CTA inversion + scope/outcome anchor + stats restructure.
+- **MATTGPT-100** — Shipped May 30, 2026. Navigation label rename (Strategy B — 50+ files, BDD fixtures).
+- **MATTGPT-106** — Shipped May 31, 2026. Navbar desktop brand-left + space-between layout.
+- **MATTGPT-107** — Shipped May 31, 2026. Home category cards redesign + layout polish.
+- **MATTGPT-065** — Resolved June 9, 2026. Two-row permanent filter bar on My Work (`3015942`).
+- **MATTGPT-090** — Closed as Decided Against May 29, 2026.
+- **MATTGPT-103** — Closed as Decided Against May 30, 2026.
 
 **NEXT** (queued):
 1. **-015** — JPM Payments IQ differentiation (high-priority since March; upstream of operational surfacing)
@@ -41,7 +63,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 3. **-089** — Role Match location / work-model / availability parsing
 4. **-074** — Entity cluster forcing synthesis (depth side of CIC; pairs with -094 for over/under pattern)
 5. **-091 audit phase** — Does existing failure content surface on probe queries? Fold into -077/-094 or return Phase 3 write as LATER
-6. **-093** — About Matt strategic restructure toward one-pager direction (multi-week, strategically significant)
+6. **-120** — CLAUDE.md restructure (Critical Rules fast-reference block + rules-first format). Trigger: before next feature sprint after UI redesign deploy.
 
 (Everything else defaults to LATER.)
 
@@ -141,7 +163,9 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-115](#mattgpt-115) | Lock icon — browser console warning: password field not in native form (st.popover portal breaks form containment) | Open | Low | Issue | June 6, 2026 |
 | [MATTGPT-116](#mattgpt-116) | Evaluate retiring how_i_built.py standalone route — superseded by How I Built dialog | Open | Low | Refactor | June 6, 2026 |
 | [MATTGPT-117](#mattgpt-117) | How I Built dialog — BDD coverage for "See It In Action" prompt buttons and Ask Agy routing | Resolved | Medium | Action | June 7, 2026 |
+| [MATTGPT-118](#mattgpt-118) | My Profile — Copy snippet + Download PDF buttons (referrer workflow) | Done | Medium | Action | June 8, 2026 |
 | [MATTGPT-119](#mattgpt-119) | My Work mobile — "Filters ▾" toggle to show/hide Row 2 (Client, Role, Domain) on mobile | Open | Medium | Action | June 8, 2026 |
+| [MATTGPT-120](#mattgpt-120) | CLAUDE.md restructure — Critical Rules fast-reference block + rules-first format throughout | Open | Medium | Action | June 9, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -2792,3 +2816,13 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
   - Row 2 opens as an additional row below the search/industry/capability row
 - **BDD required before implementation** — Red (scenarios) → Red (step defs) → Green.
 - **Logged:** June 8, 2026
+
+### MATTGPT-120
+**CLAUDE.md restructure — Critical Rules fast-reference block + rules-first format throughout**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Goal:** Make CLAUDE.md scannable for new Claude Code sessions. Two parts: (1) Critical Rules fast-reference block at the top — 10-15 non-negotiable imperative rules, readable in 30 seconds; (2) Full restructure — rules-first format throughout, incident narratives moved to memory pointers, overlapping sections consolidated (CSS Rules + Streamlit Patterns → one section). Part 1 is one commit. Part 2 is a dedicated session.
+- **Trigger:** Before the next feature sprint after the UI redesign deploy.
+- **Logged:** June 9, 2026
