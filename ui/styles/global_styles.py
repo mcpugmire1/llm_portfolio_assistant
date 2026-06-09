@@ -692,8 +692,8 @@ def apply_global_styles():
            Spine + numbered step pattern, consistent with timeline visual language.
            ======================================== */
         .hib-runtime-wrapper { position: relative; display: flex; flex-direction: column; gap: 0; }
-        .hib-runtime-wrapper::before { content: ''; position: absolute; left: 15px; top: 32px; bottom: 32px; width: 2px; background: var(--border-color); z-index: 0; }
-        .hib-runtime-step { display: flex; gap: 16px; align-items: flex-start; padding-bottom: 16px; position: relative; z-index: 1; }
+        .hib-runtime-wrapper::before { content: ''; position: absolute; left: 15px; top: 24px; bottom: 24px; width: 2px; background: var(--border-color); z-index: 0; }
+        .hib-runtime-step { display: flex; gap: 16px; align-items: flex-start; padding-bottom: 10px; position: relative; z-index: 1; }
         .hib-runtime-num { width: 32px; height: 32px; border-radius: 50%; background: var(--accent-purple); color: white; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 0 0 3px var(--bg-card), 0 0 0 5px var(--accent-purple-light); }
         .hib-runtime-card { flex: 1; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px 16px; }
         .hib-runtime-card h4 { font-size: 13px; font-weight: 600; color: var(--text-primary); margin: 0 0 8px; }
@@ -713,20 +713,21 @@ def apply_global_styles():
            ======================================== */
         .hib-block { border: 0.5px solid var(--border-color); border-radius: 10px; padding: 14px 16px; margin-top: 16px; margin-left: 0; margin-right: 0; }
         .hib-godeeper-lead { font-size: 12px; color: var(--text-secondary); margin: 4px 0 10px; }
-        .hib-godeeper-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .hib-godeeper-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .hib-godeeper-card { border: 0.5px solid var(--border-color); border-radius: 10px; padding: 14px 16px; }
         .hib-godeeper-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
         .hib-godeeper-top svg { color: var(--text-primary); flex-shrink: 0; }
         .hib-godeeper-ttl { font-size: 13px; font-weight: 500; color: var(--text-primary); }
-        .hib-godeeper-desc { font-size: 11px; color: var(--text-secondary); line-height: 1.5; margin: 0 0 8px; }
+        .hib-godeeper-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin: 0 0 8px; }
         .hib-godeeper-link { font-size: 11px; color: var(--accent-purple); font-weight: 500; display: inline-flex; align-items: center; gap: 4px; text-decoration: none; }
         .hib-godeeper-link:hover { text-decoration: underline; }
-        .hib-cta-block { padding: 14px 16px; background: var(--bg-surface); border-radius: 10px; border-left: 2px solid #7e5fd4; margin-top: 16px; margin-left: 0; margin-right: 0; }
-        .hib-cta-h { font-size: 14px; font-weight: 500; color: var(--text-primary); margin: 0 0 6px; }
-        .hib-cta-sub { font-size: 12px; color: var(--text-secondary); margin: 0 0 10px; line-height: 1.5; }
-        .hib-cta-prompts { display: flex; flex-direction: column; gap: 6px; }
-        .hib-cta-prompt { background: var(--bg-card, #fff); border: 0.5px solid rgba(120, 80, 220, 0.3); border-radius: 8px; padding: 9px 12px; font-size: 11px; color: #6d4cc4; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.15s ease; user-select: none; }
-        .hib-cta-prompt:hover { background: var(--accent-purple-bg); }
+        .hib-cta-block { padding: 0; border-radius: 0; margin-top: 8px; }
+        .hib-cta-block .hib-cta-sub { font-size: 14px; color: var(--text-secondary); margin: 0 0 10px; line-height: 1.5; }
+        .hib-cta-block .hib-cta-h { font-size: 13px; font-weight: 500; color: var(--text-secondary); margin: 0 0 8px; letter-spacing: 0.03em; text-transform: uppercase; }
+
+        .hib-cta-prompts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .hib-cta-prompt { background: var(--accent-purple-bg, rgba(109, 76, 196, 0.04)); border: 1px solid rgba(120, 80, 220, 0.3); border-radius: 8px; padding: 9px 12px; font-size: 13px; color: #6d4cc4; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.15s ease; user-select: none; }
+        .hib-cta-prompt:hover {     background: rgba(109, 76, 196, 0.12); border-color: rgba(120, 80, 220, 0.6);}
 
         /* My Profile sample-question chip buttons (MATTGPT-068).
            Lives in global styles (not inside render_about_matt) so the CSS is
@@ -1017,8 +1018,8 @@ def apply_global_styles():
     border: 2px solid var(--border-color, #e0e0e0);
     border-left: 4px solid var(--accent-purple, #8B5CF6);
     border-radius: 12px;
-    padding: 32px;
-    margin-bottom: 24px;
+    padding: 20px;
+    margin-bottom: 12px;
     margin-left: 0;
     margin-right: 0;
 }
@@ -1034,8 +1035,8 @@ def apply_global_styles():
 .tech-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-top: 16px;
+    gap: 10px;
+    margin-top: 8px;
 }
 
 @media (max-width: 768px) {
@@ -1046,7 +1047,7 @@ def apply_global_styles():
     background: var(--bg-surface, #f8f9fa);
     border: 2px solid var(--border-color, #e0e0e0);
     border-radius: 8px;
-    padding: 16px 12px;
+    padding: 8px 12px;
     text-align: center;
     color: var(--text-primary, #333);
     transition: all 0.2s ease;
@@ -1059,8 +1060,8 @@ def apply_global_styles():
 .flow-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 24px;
-    margin: 24px 0;
+    gap: 12px;
+    margin: 8px 0;
     align-items: center;
 }
 
@@ -1072,7 +1073,7 @@ def apply_global_styles():
     background: var(--bg-surface, #f8f9fa);
     border: 1px solid var(--border-color, #e0e0e0);
     border-radius: 8px;
-    padding: 16px 12px;
+    padding: 10px 12px;
     text-align: center;
     position: relative;
     color: var(--text-primary, #333);
@@ -1147,7 +1148,7 @@ def apply_global_styles():
 .details-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
+    gap: 16px;
     margin: 0;
 }
 
@@ -1159,7 +1160,7 @@ def apply_global_styles():
     background: var(--bg-card, white);
     border: 2px solid var(--border-color, #e0e0e0);
     border-radius: 12px;
-    padding: 24px;
+    padding: 12px;
     transition: all 0.2s ease;
 }
 
@@ -1171,7 +1172,7 @@ def apply_global_styles():
     font-size: 16px;
     font-weight: 600;
     color: var(--text-heading, #2c3e50);
-    margin: 0 0 16px 0;
+    margin: 0 0 6px 0;
 }
 
 .detail-card ul {
@@ -1184,7 +1185,7 @@ def apply_global_styles():
     font-size: 13px;
     color: var(--text-secondary, #888);
     line-height: 1.6;
-    padding: 8px 0;
+    padding: 3px 0;
     border-bottom: 1px solid var(--border-light, #f0f0f0);
 }
 
@@ -1924,7 +1925,7 @@ details[open]:has(.code-block) > summary::before {
     }
 
     .deep-dive-card h3 {
-        font-size: 16px !important;
+        font-size: 8px !important;
     }
 
     .deep-dive-card p {
@@ -2073,6 +2074,62 @@ details[open]:has(.code-block) > summary::before {
     .contact-btn {
         padding: 10px 16px !important;
         font-size: 12px !important;
+    }
+}
+
+/* ── Two-row filter bar (MATTGPT-065) ── */
+
+/* Separator between row 1 and row 2 — confirmed via DevTools: st-key-r2_row is stVerticalBlock */
+[class*="st-key-r2_row"] {
+    border-top: 0.5px solid var(--border-color) !important;
+    padding-top: 8px !important;
+}
+
+/* Row 2 compact dropdowns */
+[class*="st-key-r2_client"] [data-baseweb="select"] > div:first-child,
+[class*="st-key-r2_role"] [data-baseweb="select"] > div:first-child,
+[class*="st-key-r2_domain"] [data-baseweb="select"] > div:first-child {
+    padding: 5px 10px !important;
+    font-size: 12px !important;
+}
+
+/* Remove default top margin Streamlit adds to buttons in form/filter rows */
+[class*="st-key-r2_reset"] button,
+[data-testid="stFormSubmitButton"] button {
+    margin-top: 0 !important;
+}
+
+/* Reset button — visible border in light and dark mode */
+[class*="st-key-r2_reset"] button {
+    background: transparent !important;
+    border: 1px solid var(--text-secondary) !important;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+    color: var(--text-secondary) !important;
+    font-size: 12px !important;
+    padding: 4px 10px !important;
+    font-weight: 400 !important;
+}
+[class*="st-key-r2_reset"] button:hover {
+    color: var(--text-primary) !important;
+    background: var(--bg-hover) !important;
+}
+
+/* Bottom-align all widgets in both filter rows */
+[class*="st-key-r2_row"] [data-testid="stHorizontalBlock"],
+[data-testid="stForm"] [data-testid="stHorizontalBlock"] {
+    align-items: flex-end !important;
+}
+
+/* Row 2 column gap — tighter than default 16px */
+[class*="st-key-r2_row"] [data-testid="stHorizontalBlock"] {
+    gap: 8px !important;
+}
+
+/* Mobile: hide row 2 entirely */
+@media (max-width: 767px) {
+    [class*="st-key-r2_row"] {
+        display: none !important;
     }
 }
 

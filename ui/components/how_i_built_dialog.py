@@ -35,7 +35,7 @@ def render_how_i_built_dialog():
     )
 
     st.markdown(
-        '<p style="font-size:13px;color:var(--text-secondary);margin:0 0 20px;">A technical deep-dive into the system architecture behind this portfolio.</p>',
+        '<p style="font-size:15px;color:var(--text-secondary);margin:0 0 20px;">A technical deep-dive into the system architecture behind this portfolio.</p>',
         unsafe_allow_html=True,
     )
 
@@ -51,7 +51,7 @@ def render_how_i_built_dialog():
     # 2. Tech Stack
     st.markdown(
         """<div class="deep-dive-card">
-    <h3 style="margin:0 0 16px;">Tech Stack</h3>
+    <h3 style="margin:0 0 8px;">Tech Stack</h3>
     <div class="tech-grid" style="grid-template-columns:repeat(3,1fr);">
         <div class="tech-item"><div style="font-size:28px;">🐍</div><div style="font-size:11px;font-weight:600;">Python 3.11</div></div>
         <div class="tech-item"><div style="font-size:28px;">⚡</div><div style="font-size:11px;font-weight:600;">Streamlit</div></div>
@@ -68,7 +68,7 @@ def render_how_i_built_dialog():
     st.markdown(
         """<div class="deep-dive-card">
     <h3 style="margin:0 0 24px;">System Architecture Flow</h3>
-    <p style="font-size:12px;color:var(--text-secondary);margin:0 0 16px;">How data moves through the system, from raw Excel stories to a deployed RAG pipeline.</p>
+    <p style="font-size:14px;color:var(--text-secondary);margin:0 0 16px;">How data moves through the system, from raw Excel stories to a deployed RAG pipeline.</p>
     <div class="flow-grid">
         <div class="flow-step"><div class="flow-num">1</div><div class="flow-step-title">Data Ingestion</div><div class="flow-step-desc">Excel → JSONL with STAR format</div></div>
         <div class="flow-step"><div class="flow-num">2</div><div class="flow-step-title">Embeddings</div><div class="flow-step-desc">OpenAI text-embedding-3-small</div></div>
@@ -83,8 +83,8 @@ def render_how_i_built_dialog():
     # 4. Per-query Runtime Pipeline
     st.markdown(
         """<div class="deep-dive-card">
-    <p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--text-secondary);margin:0 0 4px;">Per-query runtime pipeline</p>
-    <p style="font-size:12px;color:var(--text-secondary);margin:0 0 14px;">What happens on every query, from the moment a user types to the moment Agy responds.</p>
+    <h3 style="margin:0 0 24px;">Per-query Runtime Pipeline</h3>
+    <p style="font-size:14px;color:var(--text-secondary);margin:0 0 14px;">What happens on every query, from the moment a user types to the moment Agy responds.</p>
     <div class="hib-runtime-wrapper">
         <div class="hib-runtime-step"><div class="hib-runtime-num">1</div><div class="hib-runtime-card"><h4>Filters irrelevant/noisy input</h4><ul><li>Regex-based nonsense rejection, sub-millisecond</li><li>Catches homework asks, gibberish, off-domain queries</li><li>No LLM cost for rejected queries</li></ul></div></div>
         <div class="hib-runtime-step"><div class="hib-runtime-num">2</div><div class="hib-runtime-card"><h4>Detects interview intent</h4><ul><li>Semantic router classifies into 15 intent families</li><li>Background, behavioral, technical, leadership, synthesis</li><li>Detects out-of-scope and personal queries before retrieval</li></ul></div></div>
@@ -98,7 +98,7 @@ def render_how_i_built_dialog():
 
     # 5–7. Detail grid (Data Pipeline, Embeddings, CI/CD, RAG, Frontend)
     st.markdown(
-        """<div class="details-grid">
+        """<div class="deep-dive-card"> <h3 style="margin:0 0 24px;">Implementation Details</h3><div class="details-grid">
     <div class="detail-card">
         <h4>Data Pipeline</h4>
         <ul>
@@ -145,7 +145,7 @@ def render_how_i_built_dialog():
             <li>Responsive design with custom CSS</li>
         </ul>
     </div>
-</div>""",
+</div></div>""",
         unsafe_allow_html=True,
     )
 
@@ -155,9 +155,7 @@ def render_how_i_built_dialog():
     _SVG_EXT = '<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>'
     _SVG_ARR = '<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>'
     st.markdown(
-        '<div class="hib-block">'
-        f'<p class="hib-cta-h">Go Deeper</p>'
-        f'<p class="hib-godeeper-lead"></p><div class="hib-godeeper-grid">'
+        '<div class="deep-dive-card"><h3>Go Deeper</h3><div class="hib-godeeper-grid">'
         f'<div class="hib-godeeper-card"><div class="hib-godeeper-top">{_SVG_GITHUB}<span class="hib-godeeper-ttl">View the source</span></div><p class="hib-godeeper-desc">The full codebase behind everything above: the RAG pipeline, data ingestion, and behavioral tests.</p><a href="https://github.com/mcpugmire1/llm_portfolio_assistant" target="_blank" class="hib-godeeper-link">View on GitHub {_SVG_EXT}</a></div>'
         f'<div class="hib-godeeper-card"><div class="hib-godeeper-top">{_SVG_FILE}<span class="hib-godeeper-ttl">Read the design spec</span></div><p class="hib-godeeper-desc">The end-to-end product process: strategy, architecture, and design decisions, documented in full.</p><a href="https://mcpugmire1.github.io/mattgpt-design-spec/" target="_blank" class="hib-godeeper-link">View the full specification {_SVG_ARR}</a></div>'
         '</div></div>',
@@ -174,15 +172,15 @@ def render_how_i_built_dialog():
         "How did Matt turn around a failing program?",
     ]
     st.markdown(
-        '<div class="hib-cta-block">'
-        '<p class="hib-cta-h">See It In Action</p>'
+        '<div class="deep-dive-card"><h3>See It In Action</h3><div class="hib-cta-block">'
         '<p class="hib-cta-sub">This isn\'t just a portfolio showcase. <strong>Agy is a working AI assistant</strong> that can answer detailed questions about my projects, methodologies, and outcomes.</p>'
+        '<p class="hib-cta-h">Try asking Agy →</p>'
         '<div class="hib-cta-prompts">'
         f'<span class="hib-cta-prompt" data-hib-idx="0">How did Matt scale engineering teams from 4 to 150+ people?{_SVG_ARR}</span>'
         f'<span class="hib-cta-prompt" data-hib-idx="1">What were the biggest challenges at the Accenture Innovation Center?{_SVG_ARR}</span>'
         f'<span class="hib-cta-prompt" data-hib-idx="2">Show me examples of agile transformation with measurable outcomes{_SVG_ARR}</span>'
         f'<span class="hib-cta-prompt" data-hib-idx="3">How did Matt turn around a failing program?{_SVG_ARR}</span>'
-        '</div></div>',
+        '</div></div></div>',
         unsafe_allow_html=True,
     )
     for i, prompt in enumerate(_PROMPTS):
