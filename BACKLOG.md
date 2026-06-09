@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: 223aabf -->
+<!-- last-backlog-sync: 5d8ad22 -->
 
 Work state for the MattGPT project. The matrix below is the scannable view. Detail blocks for each item follow, linked by ID. Completed items live in `CHANGELOG.md`. Architectural decisions live in `docs/ADR.md`. Current system state lives in `ARCHITECTURE.md`.
 
