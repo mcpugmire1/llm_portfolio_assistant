@@ -1816,11 +1816,11 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_my_work_trigge
         _bc_label = "← Banking" if _return_landing == "banking" else "← Cross Industry"
         st.markdown(
             f"""
-            <span id="breadcrumb-chip" style="display: inline-flex; align-items: center; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; border: 1px solid #E5E7EB; background: white; color: #6B21A8; transition: all 0.15s ease; margin-top: -1rem;">
+            <span id="breadcrumb-chip" style="display: inline-flex; align-items: center; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--accent-purple); transition: all 0.15s ease; margin-top: -1rem;">
                 <a id="breadcrumb-return" style="color: inherit; text-decoration: none; cursor: pointer;">{_bc_label}</a>
             </span>
             <style>
-            #breadcrumb-chip:hover {{ border-color: #8B5CF6; background: #F5F3FF; color: #7C3AED; box-shadow: 0 2px 6px rgba(139, 92, 246, 0.15); }}
+            #breadcrumb-chip:hover {{ border-color: var(--accent-purple); background: var(--accent-purple-bg); color: var(--accent-purple-hover); box-shadow: 0 2px 6px rgba(139, 92, 246, 0.15); }}
             [class*="st-key-breadcrumb_return_landing"] {{ display: none !important; }}
             </style>
             """,

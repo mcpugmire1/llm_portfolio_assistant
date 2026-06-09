@@ -156,10 +156,11 @@ def render_how_agy_dialog():
     # dialog may render with its internal container scrolled mid-content.
     components.html(
         """<script>
-        setTimeout(function() {
-            var d = window.parent.document.querySelector('[role="dialog"] > div');
-            if (d) d.scrollTop = 0;
-        }, 100);
+        (function scrollToTop() {
+            var el = window.parent.document.querySelector('[role="dialog"]');
+            if (el) { el.scrollTop = 0; }
+            else { setTimeout(scrollToTop, 50); }
+        })();
         </script>""",
         height=0,
     )

@@ -324,7 +324,7 @@ def render_stats_bar():
 
         .stat-label {
             font-size: 14px;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
