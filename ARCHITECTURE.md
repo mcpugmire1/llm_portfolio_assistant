@@ -84,7 +84,7 @@
 **Project:** MattGPT Portfolio Assistant - AI-powered career story search and chat interface
 **Tech Stack:** Streamlit, OpenAI GPT-4o, Pinecone vector DB, Python 3.11+
 **Data Corpus:** 130+ STAR-formatted transformation project stories
-**Last Updated:** May 10, 2026
+**Last Updated:** June 8, 2026
 
 ### Key Achievements
 
@@ -353,6 +353,84 @@ st.session_state["prefilter_era"] = era_name
 st.session_state["prefilter_view_mode"] = "table"
 st.session_state["active_tab"] = "My Work"  # was "Explore Stories" pre-MATTGPT-100
 ```
+
+---
+
+### Interactive Click Handling Patterns
+
+Three distinct patterns exist in the codebase. Read this before building any new click handler. **Start with Pattern 1; only escalate when it provably fails.**
+
+#### Pattern 1 — Plain `st.button` + scoped CSS (default)
+
+**Use when:** The clickable element can visually be a Streamlit button (styled away via CSS).
+
+**Canonical example:** `ui/pages/ask_mattgpt/conversation_helpers.py` — Related Projects source chips (~line 626). Button is styled as a chip via `[class*="st-key-{stable_key}"] button` CSS. Click is handled by the standard Streamlit WebSocket → Python rerun cycle. No JS, no HTML bridge.
+
+```python
+if st.button(label, key=f"chip_{idx}"):
+    handle_chip_click(idx)
+```
+
+**Why this is the default:** Zero fragility. React reconciliation never affects it. Streamlit reruns don't kill anything.
+
+#### Pattern 2 — Delegated `parentDoc` listener + hidden `st.button` bridge
+
+**Use when:** The clickable element must be a raw HTML element (not a Streamlit button), and per-element `onclick` would die on React reconciliation.
+
+**Canonical examples:**
+- `ui/components/how_i_built_dialog.py` — `.hib-cta-prompt` chips (MATTGPT-117)
+- `ui/pages/about_matt.py` — Copy snippet + Download PDF spans (MATTGPT-118)
+- `ui/pages/explore_stories.py` — Cards view delegated listener
+
+**Key rules:**
+1. Listener lives on `parentDoc` (the Streamlit page's `document`), not on individual elements. This survives React DOM reconciliation because `parentDoc` itself is never replaced.
+2. Use `e.target.closest(selector)` inside the handler to find the target dynamically.
+3. For clipboard: use `window.parent.navigator.clipboard.writeText()` (async API). Both `.then()` and `.catch()` should show confirmation so feedback fires regardless of clipboard permission state in headless test environments.
+4. For Streamlit-triggered actions (anything requiring a Python rerun): find `parentDoc.querySelector('[class*="st-key-{key}"] button')` and call `.click()` — hidden button fires the Streamlit rerun.
+
+```python
+# Hidden bridge button (Python side)
+if st.button("", key="am_download_pdf"):
+    # handler runs after Streamlit rerun
+
+# JS side — delegated listener
+components.html("""
+<script>
+(function() {
+    var parentDoc = window.parent.document;
+    parentDoc.addEventListener('click', function(e) {
+        var btn = e.target.closest('#my-html-btn');
+        if (!btn) return;
+        // For clipboard:
+        window.parent.navigator.clipboard.writeText(text).then(showConfirm).catch(showConfirm);
+        // For Streamlit bridge:
+        var stBtn = parentDoc.querySelector('[class*="st-key-am_download_pdf"] button');
+        if (stBtn) stBtn.click();
+    });
+})();
+</script>""", height=0)
+```
+
+**CSS for hidden bridge buttons** (in `global_styles.py`):
+```css
+[class*='st-key-am_download_pdf'] { display: none !important; }
+```
+
+**Why NOT per-element `onclick`:** React's `dangerouslySetInnerHTML` reconciliation replaces inner DOM nodes on every Streamlit rerun, killing per-element event bindings from the `components.html` iframe's JS context. Delegates on `parentDoc` survive because `parentDoc` is never replaced. See April 2026 incident in CLAUDE.md.
+
+#### Pattern 3 — Per-element `addEventListener` (deprecated, do not use)
+
+Legacy pattern — per-element bindings inside `components.html` iframes. Dies on Streamlit rerun (iframe is recreated, destroying the JS context). **Do not introduce new instances.** See CLAUDE.md "Interactive Click Handling — STOP, Read This First" for the full incident history.
+
+---
+
+### My Profile Page (`ui/pages/about_matt.py`)
+
+**MATTGPT-118 (June 2026):** Added Copy snippet + Download PDF interaction to the "For a referrer" section.
+
+- **Copy snippet:** HTML `<span id="am-copy-snippet-btn">` wired via Pattern 2 delegated listener. Calls `window.parent.navigator.clipboard.writeText()`. Both `.then` and `.catch` change the span label to `✓ Copied!` (green, 2s timeout) so feedback fires regardless of clipboard permission state.
+- **Download PDF:** HTML `<span id="am-download-pdf-btn">` → JS finds `[class*="st-key-am_download_pdf"] button` → `.click()` → Streamlit rerun → Python handler opens `window.open` + `printWindow.print()` with a full printable HTML doc (signals, voice, competencies, How I Lead, career timeline). Pattern matches `action_buttons.py`.
+- Both interactions share a single `components.html` delegated listener block registered once per page render.
 
 ---
 
@@ -1147,6 +1225,38 @@ LAST_QUERY = "__explore_last_query__"         # Query that produced cache
 - has_metric → `story_has_metric(s)`
 - q (keyword) → token-based ALL match on Title, Client, Purpose, Process, Performance, tags
 
+### Explore Stories Two-Row Filter Bar (MATTGPT-065)
+
+**Shipped:** June 2026. Replaced the collapsible "▸ Advanced Filters" toggle with a permanent two-row filter bar.
+
+**Row 1 (unchanged):** Search box + Industry selectbox + Capability selectbox — `st.columns([2, 1, 1])`.
+
+**Row 2 (new):** Client + Role + Domain selectboxes + Reset button — always visible on desktop, hidden on mobile via CSS.
+
+```python
+# Row 2 container key — used for CSS mobile-hide
+with st.container(key="r2_row"):
+    c1, c2, c3, c4 = st.columns([1, 1, 1, 0.4])
+    with c1:
+        clients_version = st.session_state.get("_widget_version_clients", 0)
+        sel_client = st.selectbox("Client", options=["All"] + clients,
+                                  index=client_index, key=f"r2_client_v{clients_version}")
+        F["clients"] = [] if sel_client == "All" else [sel_client]
+```
+
+**CSS mobile-hide pattern** (in `global_styles.py`):
+```css
+@media (max-width: 767px) {
+    [class*="st-key-r2_row"] { display: none !important; }
+}
+```
+
+**Widget key versioning:** Row 2 selectboxes use `key=f"r2_{field}_v{version}"` so the Reset button can force a widget rebuild by incrementing `st.session_state["_widget_version_clients"]` (and `_roles`, `_domains` equivalents). Without versioning, Streamlit re-uses the old widget value even after session state is cleared.
+
+**`F["clients"]` is always a list:** `matches_filters()` expects `F["clients"]` to be `[]` (all) or `["Capital One"]` (filtered). Never set it to a bare string — this breaks the IN-list logic in `utils/filters.py`.
+
+**MATTGPT-119 (backlog):** Mobile "Filters ▾" toggle to reveal/hide Row 2 on small viewports. Row 2 is CSS-hidden on mobile until that ships.
+
 ### Known Limitations
 
 1. **Synthesis + specific topic:** "Tell me about Matt's rapid prototyping work" classified as synthesis but should find the specific rapid prototyping story. Current workaround: synthesis now uses user query embedding.
@@ -1206,6 +1316,9 @@ Central reference for all session state keys used across the application.
 | `__explore_last_confidence__` | `str` | Cached confidence level |
 | `__explore_last_query__` | `str` | Query that produced cache |
 | `page_offset` | `int` | Pagination offset |
+| `_widget_version_clients` | `int` | Row 2 Client selectbox rebuild counter (Reset increments) |
+| `_widget_version_roles` | `int` | Row 2 Role selectbox rebuild counter |
+| `_widget_version_domains` | `int` | Row 2 Domain selectbox rebuild counter |
 
 **Prefilter Keys (cross-page navigation):**
 | Key | Purpose | Consumed By |
