@@ -58,21 +58,12 @@ Feature: My Work
     Then the Industry filter should be cleared
     And more stories should be displayed
 
-  Scenario: Advanced filters expand on click
-    When the user clicks "Advanced Filters"
-    Then the advanced filter section should be visible
-    And the Client multiselect should be visible
-    And the Role multiselect should be visible
-    And the Domain multiselect should be visible
+  Scenario: Client filter narrows results
+    When the user selects "Capital One" from the Client filter
+    Then all displayed stories should have Client "Capital One"
 
-  Scenario: Client multiselect filter works
-    Given the advanced filters are expanded
-    When the user selects "JP Morgan Chase" from the Client filter
-    Then all displayed stories should have Client "JP Morgan Chase"
-
-  Scenario: Multiple advanced filters combine
-    Given the advanced filters are expanded
-    When the user selects "JP Morgan Chase" from the Client filter
+  Scenario: Multiple filters combine
+    When the user selects "Capital One" from the Client filter
     And the user selects "Director" from the Role filter
     Then all displayed stories should match both Client and Role
 

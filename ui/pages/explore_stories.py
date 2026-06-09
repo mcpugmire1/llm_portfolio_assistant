@@ -530,6 +530,23 @@ def render_pagination(total_results: int, page_size: int, offset: int, view_mode
         height: 0 !important;
         overflow: hidden !important;
     }}
+    @media (max-width: 480px) {{
+        .pagination {{
+            flex-wrap: wrap;
+            gap: 4px;
+            justify-content: center;
+        }}
+        .pagination button {{
+            min-width: 32px;
+            padding: 4px 6px;
+            font-size: 11px;
+        }}
+        .pagination .page-info {{
+            width: 100%;
+            text-align: center;
+            font-size: 11px;
+        }}
+    }}
     </style>
     <div class="pagination">
         {buttons_html}
@@ -1563,28 +1580,17 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_my_work_trigge
             margin: 0 !important;
         }
 
-        /* Form row */
+        /* Search form: keep input+button inline; input takes available space */
         [data-testid="stForm"] [data-testid="stHorizontalBlock"] {
             flex-direction: row !important;
         }
-        [data-testid="stForm"] [data-testid="stColumn"]:last-child {
-            display: none !important;
-        }
         [data-testid="stForm"] [data-testid="stColumn"]:first-child {
-            flex: 1 1 100% !important;
-            max-width: 100% !important;
-            min-width: 100% !important;
-            width: 100% !important;
-            margin: 0 !important;
+            flex: 1 1 auto !important;
+            min-width: 0 !important;
         }
 
-        /* Hide form submit, spacer, Advanced/Reset, chips, expander */
-        [data-testid="stFormSubmitButton"],
-        .stFormSubmitButton,
+        /* Hide spacer div, chips, expander */
         [data-testid="stForm"] div[style*="height: 23px"],
-        [data-testid="stHorizontalBlock"]:has([class*="st-key-btn_toggle_advanced"]),
-        [class*="st-key-btn_toggle_advanced"],
-        [class*="st-key-btn_reset_filters"],
         .st-key-chip_row,
         [data-testid="stExpander"] {
             display: none !important;
@@ -1860,7 +1866,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_my_work_trigge
     # ==================================================================
     with safe_container(border=True):
         # PRIMARY FILTERS ROW: Search (with inline button) | Industry | Capability
-        search_col, industry_col, capability_col = st.columns([2, 1, 1.5])
+        search_col, industry_col, capability_col = st.columns([2, 1, 1])
 
         with search_col:
             search_version = st.session_state.get("_widget_version_q", 0)
@@ -1928,57 +1934,65 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_my_work_trigge
                 "" if selected_capability == "All" else selected_capability
             )
 
-        # ADVANCED FILTERS (Collapsed by default)
-        show_advanced = st.session_state.get("show_advanced_filters", False)
-
-        # Compact button row - pushed left with empty spacer column
-        col_toggle, col_reset, _ = st.columns([0.35, 0.25, 1.4])
-        with col_toggle:
-            toggle_label = (
-                "▾ Advanced Filters" if show_advanced else "▸ Advanced Filters"
-            )
-            if st.button(toggle_label, key="btn_toggle_advanced"):
-                st.session_state["show_advanced_filters"] = not show_advanced
-                st.rerun()
-
-        with col_reset:
-            if st.button("Reset Filters", key="btn_reset_filters"):
-                reset_all_filters(stories)
-                st.rerun()
-
-        if show_advanced:
-            st.markdown("---")
-            c1, c2, c3 = st.columns([1.5, 1, 1.5])
+        # ROW 2 — always visible on desktop, hidden on mobile via CSS (MATTGPT-065)
+        with st.container(key="r2_row"):
+            c1, c2, c3, c4 = st.columns([1, 1, 1, 0.4])
 
             with c1:
-                # Client filter (multiselect)
                 clients_version = st.session_state.get("_widget_version_clients", 0)
-                F["clients"] = st.multiselect(
-                    "Client",
-                    clients,
-                    default=F.get("clients", []),
-                    key=f"facet_clients_v{clients_version}",
+                client_options = ["All"] + clients
+                current_client_val = (F.get("clients") or [""])[0]
+                client_index = (
+                    client_options.index(current_client_val)
+                    if current_client_val in client_options
+                    else 0
                 )
+                sel_client = st.selectbox(
+                    "Client",
+                    options=client_options,
+                    index=client_index,
+                    key=f"r2_client_v{clients_version}",
+                )
+                F["clients"] = [] if sel_client == "All" else [sel_client]
 
             with c2:
-                # Role filter (multiselect)
                 roles_version = st.session_state.get("_widget_version_roles", 0)
-                F["roles"] = st.multiselect(
-                    "Role",
-                    roles,
-                    default=F.get("roles", []),
-                    key=f"facet_roles_v{roles_version}",
+                role_options = ["All"] + roles
+                current_role_val = (F.get("roles") or [""])[0]
+                role_index = (
+                    role_options.index(current_role_val)
+                    if current_role_val in role_options
+                    else 0
                 )
+                sel_role = st.selectbox(
+                    "Role",
+                    options=role_options,
+                    index=role_index,
+                    key=f"r2_role_v{roles_version}",
+                )
+                F["roles"] = [] if sel_role == "All" else [sel_role]
 
             with c3:
-                # Domain filter (multiselect) - now uses Sub-category directly
                 domains_version = st.session_state.get("_widget_version_domains", 0)
-                F["domains"] = st.multiselect(
-                    "Domain",
-                    options=domains,
-                    default=F.get("domains", []),
-                    key=f"facet_domains_v{domains_version}",
+                domain_options = ["All"] + domains
+                current_domain_val = (F.get("domains") or [""])[0]
+                domain_index = (
+                    domain_options.index(current_domain_val)
+                    if current_domain_val in domain_options
+                    else 0
                 )
+                sel_domain = st.selectbox(
+                    "Domain",
+                    options=domain_options,
+                    index=domain_index,
+                    key=f"r2_domain_v{domains_version}",
+                )
+                F["domains"] = [] if sel_domain == "All" else [sel_domain]
+
+            with c4:
+                if st.button("Reset filters", key="r2_reset", use_container_width=True):
+                    reset_all_filters(stories)
+                    st.rerun()
     # =========================================================================
     # SEARCH & FILTERING LOGIC (Guarded and Cached)
     # =========================================================================

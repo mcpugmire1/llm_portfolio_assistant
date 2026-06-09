@@ -122,7 +122,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-098](#mattgpt-098) | Explore Stories default state — exclude Professional Narrative + sort Start_Date desc (match Timeline behavior) | Done | Medium | Action | May 29, 2026 |
 | [MATTGPT-099](#mattgpt-099) | Role Match — assess and decide comp handling on JDs that include comp expectations | Open | Medium | Investigation + Action | May 29, 2026 |
 | [MATTGPT-100](#mattgpt-100) | Navigation labels — rename to Home / My Work / Ask Agy / Role Match / My Profile (wireframe-locked) | Done | Medium | Refactor | May 30, 2026 |
-| [MATTGPT-101](#mattgpt-101) | Why Agy? modal + "?" badge on Agy avatar (uniform placement) | Open | Medium | Action | May 30, 2026 |
+| [MATTGPT-101](#mattgpt-101) | Why Agy? modal + "?" badge on Agy avatar (uniform placement) | Done | Medium | Action | May 30, 2026 |
 | [MATTGPT-102](#mattgpt-102) | How I Built MattGPT — `@st.dialog` modal (replaces standalone page; no back button, X to close) | Done | Medium | Action | May 30, 2026 |
 | [MATTGPT-103](#mattgpt-103) | Agy intro line — resolve "20+ years of work" inconsistency with stats bar (Years tile dropped) | Decided Against | Low | Refactor | May 30, 2026 |
 | [MATTGPT-104](#mattgpt-104) | Banking + Cross-Industry landing pages — math reconciliation bug (33 vs 32 vs 48 vs 57 inconsistency) | Done | Medium | Issue | May 30, 2026 |
@@ -139,6 +139,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-115](#mattgpt-115) | Lock icon — browser console warning: password field not in native form (st.popover portal breaks form containment) | Open | Low | Issue | June 6, 2026 |
 | [MATTGPT-116](#mattgpt-116) | Evaluate retiring how_i_built.py standalone route — superseded by How I Built dialog | Open | Low | Refactor | June 6, 2026 |
 | [MATTGPT-117](#mattgpt-117) | How I Built dialog — BDD coverage for "See It In Action" prompt buttons and Ask Agy routing | Resolved | Medium | Action | June 7, 2026 |
+| [MATTGPT-119](#mattgpt-119) | My Work mobile — "Filters ▾" toggle to show/hide Row 2 (Client, Role, Domain) on mobile | Open | Medium | Action | June 8, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -1095,17 +1096,28 @@ Chip 3 wording "How does Matt manage resistance when leading enterprise transfor
 - **Priority:** Medium
 - **Type:** Action
 - **Items (all in `ui/pages/explore_stories.py` unless noted):**
-  - **Reset Filters conditional render** — currently always visible (line 1890). Compute `any_filter_active = bool(F["q"]) or F["industry"] or F["capability"] or F["domains"] or F["clients"] or F["roles"] ...` and wrap render in `if any_filter_active:`. ~3 lines.
+
+  **Filter bar — two-row redesign (PoC validated June 2026, replaces Advanced Filters toggle):**
+  - **Desktop:** Row 1 (Search | Industry | Capability) + Row 2 (Client | Role | Domain | Reset) always visible; no "▸ Advanced Filters" toggle.
+  - **Mobile:** All filters behind a single "Filters" toggle.
+  - **Row 1 CSS target:** Row 1 selectboxes render at Streamlit default (`1rem`); normalize with `[class*="st-key-{key}"] [data-baseweb="select"] span, div { font-size: 1rem !important }` if they appear larger than the text input.
+  - **Row 2 wrapper:** `st.container(key="r2_row")` — CSS applies `border-top: 0.5px solid var(--border-color); padding-top: 8px` on the container's first child div. No separate `<hr>` or div element for the separator.
+  - **Row 2 dropdowns:** `label_visibility="collapsed"` in Python; CSS for compact size: `[data-baseweb="select"] > div:first-child { padding: 5px 10px !important; font-size: 12px !important; min-height: 0 !important; }`. Also hide label elements via `display: none !important` on `label` and `[data-testid="stWidgetLabel"]` — labels are what makes row 2 tall, not the dropdowns themselves.
+  - **Reset:** `st.markdown('<span class="es-reset">Reset</span>')` + off-screen `st.button("", key="r2_reset_hidden")`. Wire via delegated `parentDoc.addEventListener('click', ...)` checking `e.target.closest('.es-reset')` — same pattern as `how_i_built_dialog.py`'s `.hib-cta-prompt` chips, NOT `element.onclick` (per-element onclick is killed by React DOM reconciliation on rerun). CSS: `.es-reset { font-size: 12px; color: var(--text-secondary); cursor: pointer; }`.
+  - **CSS key note:** `label_visibility="collapsed"` alone is not sufficient — the label element still takes vertical space. Must also hide via CSS.
+
+  **Remaining polish items (unchanged from original scope):**
   - **Empty zero-results state — Table view** — Cards view has Clear filters button (lines 2417-2421), Table view text-only (lines 2122-2132). Copy Cards-view pattern to Table block. ~5 lines.
   - **Card truncation "Read more →" affordance** — `.card-desc` uses CSS ellipsis (lines 2466-2476), no visual cue. Append `<span class="card-read-more">Read more →</span>` + small CSS rule. ~3 lines.
   - **Back-to-list from story detail (Table view only)** — Cards view has "✕ Close"; Table view inline detail has no close button (deselecting works by clicking row again, not obvious). Add "← Close detail" at top of Table-view detail. ~5-10 lines.
-  - **Advanced Filters label rename** — currently `"▾ Advanced Filters"` / `"▸ Advanced Filters"` (lines 1882-1883). Rename to `"Filter by Client, Role & Domain"`. ~2 lines.
   - **Export tooltip** — `ui/components/action_buttons.py:154` Export button has no tooltip. Add `title="Export as PDF"`. ~1 line.
   - **Story title truncation tooltip** — table cell titles truncate without reveal. Add `title="{full_title}"` attribute on the cell. ~1 line.
-- **Out of scope:** Table row hover/cursor (filed as MATTGPT-064 — different layer, different fix). SHOW dropdown / pagination separation (won't fix per May 15 decision — per-view design is intentional).
-- **Verify-first item:** SHOW per-page resetting (UX agent claim that selection resets across renders). Code at line 2202 uses `st.session_state.get("page_size_select", ...)` — likely already persists. 30-second eye-test before fixing; may be a non-issue.
-- **Effort:** ~25-50 lines total, single file, all low-risk. Natural single-PR bundle.
-- **Logged:** May 15, 2026
+
+- **Decided against:** Inline accordion (render_story_detail beneath clicked row). Requires replacing AgGrid — Master/Detail only supports sub-grids or static HTML, not Streamlit components. Cost too high for the UX gain. Current pattern (detail panel at bottom of page) stays.
+- **Out of scope:** Table row hover/cursor (MATTGPT-064). SHOW dropdown / pagination separation (won't fix per May 15 decision).
+- **Wireframe:** Updated with My Work filter bar + Table + Cards + Timeline specs (June 2026 session).
+- **Effort:** Filter bar ~1-2 hours raw (CSS dial-in against explore_stories.py's full CSS system with DevTools). Polish items ~25-50 lines total.
+- **Logged:** May 15, 2026 | **Updated:** June 2026 (two-row filter bar approved via PoC)
 
 ---
 
@@ -2278,7 +2290,7 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 ### MATTGPT-101
 **Why Agy? modal + "?" badge on Agy avatar (uniform placement)**
 
-- **Status:** Open
+- **Status:** Done — shipped on feature/ui-redesign branch. `why_agy_dialog.py` implements `@st.dialog("Hi, I'm Agy 🐾")`. Badge + hidden-trigger wired across all surfaces: hero (Home), header (Ask Agy), landing body (Ask Agy), banking header, cross-industry header, My Work header, Role Match header. BDD coverage in `tests/bdd/features/why_agy_dialog.feature` + `test_why_agy_dialog.py`. BACKLOG updated June 8, 2026.
 - **Priority:** Medium
 - **Type:** Action
 - **Issue:** Wireframe lock (May 29, 2026) introduces a brand-identity modal that answers *"Why is the assistant called Agy?"* — Plott Hound origin + breed-to-RAG mapping. Modal is triggered by a *"?"* badge placed on Agy's avatar wherever the avatar appears (Home, Ask Agy Landing, Ask Agy Conversation, Banking, Cross-Industry).
@@ -2758,3 +2770,21 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 - **Fix:** Add `body.dark-theme .back-link` override to use `var(--bg-card)` or `var(--bg-surface)` for background and `var(--accent-purple)` for text color — same variables used in light mode but resolved to dark values.
 - **Affects:** My Work (`explore_stories.py`) when navigated from Banking or Cross-Industry landing pages.
 - **Logged:** June 3, 2026
+
+---
+
+### MATTGPT-119
+**My Work mobile — "Filters ▾" toggle to show/hide Row 2 (Client, Role, Domain) on mobile**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Context:** MATTGPT-065 ships Row 2 (Client, Role, Domain) always visible on desktop and hidden on mobile via CSS. On mobile there is no affordance to access Row 2 filters at all. A "Filters ▾" toggle button should appear on mobile to show/hide Row 2.
+- **Investigate first:** Check whether any BDD scenarios for this behavior already exist in `tests/bdd/features/explore_stories.feature` before writing new ones.
+- **Spec:**
+  - "Filters ▾" button appears only on mobile (hidden on desktop via CSS)
+  - Tapping it toggles Row 2 visibility (show/hide) via session state
+  - Button label reflects state: "Filters ▾" (closed) / "Filters ▴" (open)
+  - Row 2 opens as an additional row below the search/industry/capability row
+- **BDD required before implementation** — Red (scenarios) → Red (step defs) → Green.
+- **Logged:** June 8, 2026

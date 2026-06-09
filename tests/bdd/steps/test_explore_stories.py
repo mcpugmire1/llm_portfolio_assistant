@@ -326,23 +326,20 @@ def clear_search(browser_page):
 
 @when(parsers.parse('the user selects "{value}" from the {filter_name} filter'))
 def select_filter(browser_page, value, filter_name):
-    # Handle both selectbox and multiselect
-    if filter_name in ["Client", "Role", "Domain"]:
-        # Multiselect
-        multiselect = browser_page.locator(
-            f"[data-testid='stMultiSelect']:has(label:has-text('{filter_name}'))"
-        ).first
-        multiselect.click()
-        option = browser_page.locator(f"[role='option']:has-text('{value}')").first
-        option.click()
-    else:
-        # Selectbox
-        select = browser_page.locator(
-            f"[data-testid='stSelectbox']:has(label:has-text('{filter_name}'))"
-        ).first
-        select.click()
-        option = browser_page.locator(f"[role='option']:has-text('{value}')").first
-        option.click()
+    select = browser_page.locator(
+        f"[data-testid='stSelectbox']:has(label:has-text('{filter_name}'))"
+    ).first
+    trigger = select.locator("input[role='combobox']")
+    trigger.scroll_into_view_if_needed()
+    trigger.click()
+    from playwright.sync_api import expect as pw_expect
+
+    pw_expect(trigger).to_have_attribute("aria-expanded", "true")
+    # Options mount elsewhere under #root — aria-controls ID doesn't scope them.
+    # Use the accessibility tree: wait for any option to be visible, then
+    # get_by_role searches the full a11y tree with built-in auto-wait.
+    browser_page.wait_for_selector("[role='option']", state="visible", timeout=5000)
+    browser_page.get_by_role("option", name=value, exact=True).click()
     browser_page.wait_for_load_state("networkidle")
 
 
@@ -1005,8 +1002,12 @@ def verify_story_id(browser_page, story_id):
     # Look for story title containing keywords from the ID
     keywords = story_id.replace("-", " ").split()[:3]  # First 3 words
     for keyword in keywords:
-        if browser_page.locator(f".detail-header:has-text('{keyword}')").count() > 0:
-            return
+        if "'" not in keyword:  # apostrophe breaks CSS :has-text() parser
+            if (
+                browser_page.locator(f".detail-header:has-text('{keyword}')").count()
+                > 0
+            ):
+                return
         if browser_page.locator(f"text=/{keyword}/i").count() > 0:
             return
     # Just verify a detail panel is open
