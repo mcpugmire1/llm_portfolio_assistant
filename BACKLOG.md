@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: 3015942 -->
+<!-- last-backlog-sync: 765c14e -->
 
 Work state for the MattGPT project. The matrix below is the scannable view. Detail blocks for each item follow, linked by ID. Completed items live in `CHANGELOG.md`. Architectural decisions live in `docs/ADR.md`. Current system state lives in `ARCHITECTURE.md`.
 
@@ -110,13 +110,13 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-084](#mattgpt-084) | Ask MattGPT BDD scenarios — chip-click + low_confidence banner-render timing flakes under full-suite load | Open | Medium | Issue | May 23, 2026 |
 | [MATTGPT-085](#mattgpt-085) | `secrets.toml` `MATTGPT_PRIVATE_BYPASS_TOKEN` parity + dead `private_access_code` cleanup + doc drift | Open | Medium | Refactor | May 23, 2026 |
 | [MATTGPT-086](#mattgpt-086) | Query logger — add environment annotation column + filter dev/test traffic out of production analytics | Open | Low | Issue | May 23, 2026 |
-| [MATTGPT-087](#mattgpt-087) | Home hero — recruiter-routing CTA to Role Match | Open | High | Action | May 28, 2026 |
+| [MATTGPT-087](#mattgpt-087) | Home hero — recruiter-routing CTA to Role Match | Resolved | High | Action | May 28, 2026 |
 | [MATTGPT-088](#mattgpt-088) | Role Match scorer — align with Agy honesty (no Strong Match when chat would say no) | Open | High | Issue | May 28, 2026 |
 | [MATTGPT-089](#mattgpt-089) | Role Match — parse location, work-model, availability as distinct filter class | Open | High | Issue | May 28, 2026 |
 | [MATTGPT-090](#mattgpt-090) | System prompt — decline cleanly on comp / off-scope queries (no silent fallback) | Decided Against | Medium | Action | May 28, 2026 |
 | [MATTGPT-091](#mattgpt-091) | Add a credible failure story to the corpus (sibling to -022 / -078 pattern) | Open | Medium | Action | May 28, 2026 |
-| [MATTGPT-092](#mattgpt-092) | Hero — explicit seniority signal (supersedes May 15 design-call closure) | Open | Medium | Action | May 28, 2026 |
-| [MATTGPT-093](#mattgpt-093) | About Matt — strategic restructure (split / fold / reframe meta-question) | Open | Medium | Action | May 28, 2026 |
+| [MATTGPT-092](#mattgpt-092) | Hero — explicit seniority signal (supersedes May 15 design-call closure) | Resolved | Medium | Action | May 28, 2026 |
+| [MATTGPT-093](#mattgpt-093) | About Matt — strategic restructure (split / fold / reframe meta-question) | Resolved | Medium | Action | May 28, 2026 |
 | [MATTGPT-094](#mattgpt-094) | Retrieval concentration audit — CIC over-weighting + operational story under-surfacing (hypotheses to verify) | Open | High | Investigation | May 28, 2026 |
 | [MATTGPT-095](#mattgpt-095) | Anti-consulting bias in story framing — corpus reads "consulting" as default register when it shouldn't | Open | Medium | Action | May 28, 2026 |
 | [MATTGPT-096](#mattgpt-096) | Methodology context dropped during synthesis — TDD/BDD and ways-of-working substance gets compressed out of metric claims (hypothesis to verify) | Open | Medium | Issue | May 28, 2026 |
@@ -1899,7 +1899,7 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 ### MATTGPT-087
 **Home hero — recruiter-routing CTA to Role Match**
 
-- **Status:** Open
+- **Status:** Resolved (June 2026) — Green commit `2076cb4`. Role Match is primary CTA, Ask Agy demoted to secondary, Explore Stories CTA removed from hero.
 - **Priority:** High
 - **Type:** Action
 - **Issue:** Home page hero currently routes all visitors to "Ask Agy" as the primary CTA, with Explore Stories as secondary. Recruiter persona testing (May 27, 2026) showed that recruiters triaging at 90 seconds per profile completely missed Role Match — even though Role Match would have done ~70 sec of the 90-sec job for them. Role Match is buried as the fourth nav item with no visual weight, despite being the surface that actually serves the recruiter's placement-decision job.
@@ -2021,7 +2021,7 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 ### MATTGPT-092
 **Hero — explicit seniority signal (supersedes May 15 design-call closure)**
 
-- **Status:** Open
+- **Status:** Resolved (June 2026) — satisfied by My Profile Signals panel (MATTGPT-093 work). "LEVEL: Senior leader" is the top-left signal, first thing a recruiter sees. Matches the locked principle: scope anchor, not a title chip. Better surface than the hero for this signal.
 - **Priority:** Medium
 - **Type:** Action
 - **Issue:** Hero copy *"Hi, I'm Matt Pugmire / Interview me before you interview me / I build products, platforms, and teams"* does not anchor Matt at a specific leadership level. A recruiter triaging in 5 seconds cannot tell whether he's an IC architect, a Director, a VP, or an SVP. The supporting headline on LinkedIn (*"Engineering Leader | Builds Engineering Organizations from Zero | Enterprise Platform Modernization | AI"*) has the same problem — 4 buzzwords stacked with no level anchor.
@@ -2043,7 +2043,7 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 ### MATTGPT-093
 **About Matt — strategic restructure (split / fold / reframe meta-question)**
 
-- **Status:** Open — strategic question, not a polish ticket
+- **Status:** Resolved (June 2026) — My Profile visual-language reconciliation shipped at commit `4bbdb26`. Green: 19/19 BDD scenarios passing.
 - **Priority:** Medium (not Urgent — MATTGPT-068 polish + dim fix shipped May 28; this is the longer-arc question that follows)
 - **Type:** Action / Enhancement
 - **Issue:** About Matt is competing with itself. The page tries to be both (a) deep narrative for the engaged reader who wants the full 3,000-word story, and (b) a conversion surface for the skeptic / decision-maker who needs proof-of-value in 5 seconds. Those audiences are at opposite ends of the funnel and the current single-page structure compromises both.
