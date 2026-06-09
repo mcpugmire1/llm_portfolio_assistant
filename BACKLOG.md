@@ -1,4 +1,5 @@
 # MattGPT Backlog
+<!-- last-backlog-sync: 3015942 -->
 
 Work state for the MattGPT project. The matrix below is the scannable view. Detail blocks for each item follow, linked by ID. Completed items live in `CHANGELOG.md`. Architectural decisions live in `docs/ADR.md`. Current system state lives in `ARCHITECTURE.md`.
 
@@ -30,6 +31,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 - **MATTGPT-100** — Shipped May 30, 2026. Navigation label rename (Strategy B coordinated rename across display labels + `session_state["active_tab"]` keys + BDD fixtures). 4-10x the "30-60 min mechanical" estimate due to hidden coupling discovery (~50 files of stragglers, mobile-nav class-name encoding, BDD selector collisions).
 - **MATTGPT-106** — Shipped May 31, 2026. Navbar desktop brand-left + space-between layout, brand vertical centering (absolute positioning to bypass Streamlit stMarkdown wrapper layers).
 - **MATTGPT-107** — Shipped visually May 31, 2026 (b2192bb home polish + other session's category cards work). Home category cards redesign + section header tighten + ask-agy-card margin trim + footer compaction + mobile hero header clearance. BDD discipline closure (other session's Red gates + Green commit against `home_category_cards.feature`) pending verification.
+- **MATTGPT-065** — Resolved June 9, 2026. Two-row permanent filter bar shipped on `feature/ui-redesign` (commit `3015942`). Remaining polish items (empty states, truncation cue, tooltips) deferred — no new ticket.
 - **MATTGPT-090** — Closed as Decided Against May 29, 2026. Personal Intent Family in `services/semantic_router.py:192-209` already handles comp queries with the warm decline; no system prompt edit needed.
 - **MATTGPT-103** — Closed as Decided Against May 30, 2026. "20+ years of work" in the Agy intro line reads as functional/corpus-scope (telling the user how big Agy's data set is), not as personal positioning. Different surface, different role; the anti-bias play that drove the Years tile drop doesn't transfer to the Agy intro.
 
@@ -86,7 +88,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-062](#mattgpt-062) | Semantic router cache silently uses stale embeddings when VALID_INTENTS changes | Open | Medium | Refactor | May 14, 2026 |
 | [MATTGPT-063](#mattgpt-063) | Wrong-person queries with names outside nonsense regex produce confused-context RAG answers | Open | Medium | Issue | May 14, 2026 |
 | [MATTGPT-064](#mattgpt-064) | Explore Stories — Table row hover/cursor doesn't apply to data cells (AgGrid selector fix) | Open | Low | Issue | May 15, 2026 |
-| [MATTGPT-065](#mattgpt-065) | Explore Stories — Polish bundle (filter UX, empty states, story details) | Open | Medium | Action | May 15, 2026 |
+| [MATTGPT-065](#mattgpt-065) | Explore Stories — Polish bundle (filter UX, empty states, story details) | Resolved | Medium | Action | May 15, 2026 |
 | [MATTGPT-066](#mattgpt-066) | Role Match — Sample JD / "Try a sample role" cold-start affordance | Open | Medium | Action | May 15, 2026 |
 | [MATTGPT-067](#mattgpt-067) | Role Match — Result panel and input polish bundle | Open | Low | Action | May 15, 2026 |
 | [MATTGPT-068](#mattgpt-068) | About Matt — Content polish bundle (clickable questions, code expander, DevOps card merge) | Done | Medium | Action | May 15, 2026 |
@@ -1092,12 +1094,14 @@ Chip 3 wording "How does Matt manage resistance when leading enterprise transfor
 ### MATTGPT-065
 **Explore Stories — Polish bundle (filter UX, empty states, story details)**
 
-- **Status:** Open
+- **Status:** Resolved (June 9, 2026)
+- **Shipped:** Two-row permanent filter bar on `feature/ui-redesign` (commit `3015942`). Row 1: Search / Industry / Capability; Row 2: Client / Role / Domain + Reset, always visible on desktop, CSS-hidden on mobile via `[class*="st-key-r2_row"] { display: none !important }` at `max-width: 767px`. MATTGPT-119 logged for mobile Filters ▾ toggle.
+- **Deferred (no new ticket):** Remaining polish items below were always secondary to the filter bar. Small, low-risk, slot in whenever convenient.
 - **Priority:** Medium
 - **Type:** Action
 - **Items (all in `ui/pages/explore_stories.py` unless noted):**
 
-  **Filter bar — two-row redesign (PoC validated June 2026, replaces Advanced Filters toggle):**
+  **Filter bar — two-row redesign (PoC validated June 2026, replaces Advanced Filters toggle) — SHIPPED:**
   - **Desktop:** Row 1 (Search | Industry | Capability) + Row 2 (Client | Role | Domain | Reset) always visible; no "▸ Advanced Filters" toggle.
   - **Mobile:** All filters behind a single "Filters" toggle.
   - **Row 1 CSS target:** Row 1 selectboxes render at Streamlit default (`1rem`); normalize with `[class*="st-key-{key}"] [data-baseweb="select"] span, div { font-size: 1rem !important }` if they appear larger than the text input.
