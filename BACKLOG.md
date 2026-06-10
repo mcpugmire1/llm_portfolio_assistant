@@ -166,6 +166,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-118](#mattgpt-118) | My Profile — Copy snippet + Download PDF buttons (referrer workflow) | Done | Medium | Action | June 8, 2026 |
 | [MATTGPT-119](#mattgpt-119) | My Work mobile — "Filters ▾" toggle to show/hide Row 2 (Client, Role, Domain) on mobile | Open | Medium | Action | June 8, 2026 |
 | [MATTGPT-120](#mattgpt-120) | CLAUDE.md restructure — Critical Rules fast-reference block + rules-first format throughout | Open | Medium | Action | June 9, 2026 |
+| [MATTGPT-121](#mattgpt-121) | Why Agy dialog — mobile layout fix (375px viewport); title font-size override pending DevTools selector confirmation | Open | Medium | Bug | June 9, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -2817,6 +2818,23 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
   - Row 2 opens as an additional row below the search/industry/capability row
 - **BDD required before implementation** — Red (scenarios) → Red (step defs) → Green.
 - **Logged:** June 8, 2026
+
+### MATTGPT-121
+**Why Agy dialog — mobile layout fix (375px viewport)**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug / Polish
+- **Goal:** Fix cramped mobile layout on the Why Agy dialog at 375px. Dialog renders at 374×645px against a 661px viewport — 16px breathing room, no visible scroll affordance. Image floats right at 100px, leaving body text in a ~230px column at full desktop font size.
+- **Fix already partially shipped (June 9, 2026):** `@media (max-width: 480px)` block added to `_CSS` in `ui/components/why_agy_dialog.py`:
+  - `.why-agy-avatar-row` → `flex-direction: column; align-items: center` (stacks image above text)
+  - `.why-agy-illustration` → `max-width: 70px` (shrinks image)
+  - `.why-agy-body p` → `font-size: 14px` (reduces body copy from 16px)
+  - `[role="dialog"]` → `max-height: 88vh; overflow-y: auto` (safety net)
+- **Remaining:** Dialog title ("Hi, I'm Agy 🐾") still renders at 24px on mobile. Target is 20px. Selector is unknown — Streamlit renders the `@st.dialog` title as a `<p>` (not `<h2>`), but the exact selector was not confirmed via DevTools. `[role="dialog"] p:first-of-type` is risky (may match body paragraphs). Needs DevTools inspection to identify the correct selector before adding the title font-size override.
+- **Logged:** June 9, 2026
+
+---
 
 ### MATTGPT-120
 **CLAUDE.md restructure — Critical Rules fast-reference block + rules-first format throughout**

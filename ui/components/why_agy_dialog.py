@@ -86,6 +86,26 @@ _CSS = """
     font-size: 14px !important;
 }
 
+@media (max-width: 480px) {
+    [role="dialog"] {
+        max-height: 88vh !important;
+        overflow-y: auto !important;
+    }
+    .why-agy-avatar-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+    .why-agy-illustration {
+        max-width: 70px !important;
+        width: 70px !important;
+    }
+    .why-agy-body p {
+        font-size: 14px !important;
+        line-height: 1.6;
+    }
+}
+
 </style>
 """
 
