@@ -1353,7 +1353,7 @@ def render_explore_stories(
                             .find(function(f) { return f.src && f.src.includes('st_aggrid'); });
                         if (!agIframe) return;
                         try {
-                            var root = agIframe.contentDocument.querySelector('.ag-theme-streamlit');
+                            var root = agIframe.contentDocument.querySelector('.ag-root-wrapper');
                             if (!root) return;
                             root.style.setProperty('--ag-row-hover-color', 'rgba(167,139,250,0.15)');
                             root.style.setProperty('--ag-selected-row-background-color', 'rgba(167,139,250,0.2)');
