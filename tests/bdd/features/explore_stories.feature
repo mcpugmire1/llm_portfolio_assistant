@@ -328,6 +328,34 @@ Feature: My Work
     When the viewport is resized to 375px wide
     Then the row 2 filter bar should not be visible
 
+  # MATTGPT-119 — Mobile Filters ▾ toggle for Row 2 (Client, Role, Domain)
+  # =============================================================================
+
+  Scenario: Filters toggle button is visible on mobile
+    Given the user navigates to the My Work page
+    When the viewport is resized to 375px wide
+    Then a button with text containing "Filters" should be visible
+
+  Scenario: Filters toggle button is hidden on desktop
+    Given the user navigates to the My Work page
+    And the viewport width is 1280px
+    Then no button with text containing "Filters" should be visible
+
+  Scenario: Tapping Filters toggle shows Row 2 on mobile
+    Given the user navigates to the My Work page
+    When the viewport is resized to 375px wide
+    And the user clicks the "Filters ▾" button
+    Then the row 2 filter bar should be visible
+    And a button with text containing "Filters ▴" should be visible
+
+  Scenario: Tapping Filters toggle again hides Row 2 on mobile
+    Given the user navigates to the My Work page
+    When the viewport is resized to 375px wide
+    And the user clicks the "Filters ▾" button
+    And the user clicks the "Filters ▴" button
+    Then the row 2 filter bar should not be visible
+    And a button with text containing "Filters ▾" should be visible
+
   # Regression guard for May 23, 2026 finding: explore_stories.py passes the
   # raw nonsense_check category (e.g., "jokes_riddles") to render_no_match_banner
   # but the BANNER_COPY branching in utils/ui_helpers.py expects the
