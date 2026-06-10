@@ -14,7 +14,7 @@ results-count text). Against current production:
 The Green commit lands the default-state change to explore_stories.py.
 
 Implementation notes per existing patterns in test_explore_stories.py:
-  - .results-count text format: "Showing X–Y of N projects"
+  - .es-results-count text format: "Showing X–Y of N projects"
     (explore_stories.py:2236). Parse N via regex "of\\s+(\\d+)".
   - AgGrid .ag-row elements are accessible directly on browser_page —
     NOT inside a frame_locator. Existing test_explore_stories.py:80-83
@@ -83,19 +83,19 @@ def _wait_for_streamlit_rerun(page):
 
 
 def _read_results_count(page):
-    """Parse the .results-count element's displayed TOTAL count.
+    """Parse the .es-results-count element's displayed TOTAL count.
 
     The element text is rendered as "Showing X–Y of N projects" by
     explore_stories.py:2236. We want N (the total), not X (the page start).
     Regex: "of\\s+(\\d+)" captures the digits immediately after "of".
     """
-    elem = page.locator(".results-count").first
+    elem = page.locator(".es-results-count").first
     elem.wait_for(state="visible", timeout=RESULTS_COUNT_TIMEOUT)
     text = elem.inner_text()
     match = re.search(r"of\s+(\d+)", text)
     if not match:
         raise AssertionError(
-            f".results-count text does not match the expected 'Showing X-Y "
+            f".es-results-count text does not match the expected 'Showing X-Y "
             f"of N projects' format: {text!r}. Has the rendering changed?"
         )
     return int(match.group(1))
@@ -117,7 +117,7 @@ def navigate_to_my_work(browser_page, app_url):
     nav_button = browser_page.locator("button:has-text('My Work'):visible").first
     nav_button.click()
     _wait_for_streamlit_rerun(browser_page)
-    browser_page.wait_for_selector(".results-count", timeout=LONG_TIMEOUT)
+    browser_page.wait_for_selector(".es-results-count", timeout=LONG_TIMEOUT)
     # Wait for AgGrid Table view to render (default view).
     try:
         browser_page.wait_for_selector(".ag-root-wrapper", timeout=LONG_TIMEOUT)

@@ -86,11 +86,11 @@ def click_my_work(browser_page):
 
 @then("the project-stories filter UI should be shown")
 def assert_filter_ui_shown(browser_page):
-    # .results-count is unique to Explore Stories — same DOM-observable proxy
+    # .es-results-count is unique to Explore Stories — same DOM-observable proxy
     # used in test_home.py for navigation to that surface (file name stays
     # explore_stories.py per the Strategy B scope; only the display label and
     # session_state["active_tab"] string change in Green).
-    count_el = browser_page.locator(".results-count").first
+    count_el = browser_page.locator(".es-results-count").first
     count_el.wait_for(state="visible", timeout=15000)
     assert count_el.count() > 0, (
         "Explore Stories filter UI did not render after clicking the renamed "

@@ -21,7 +21,7 @@ Selectors:
                             — nav button container class; substring match
                               survives the MATTGPT-100 label rename and
                               any future Streamlit class normalization.
-  - .results-count          — Explore Stories filter UI proxy (same DOM
+  - .es-results-count          — Explore Stories filter UI proxy (same DOM
                               marker used by test_nav_labels.py).
 """
 
@@ -105,11 +105,11 @@ def click_my_work(browser_page):
 
 @then("the project-stories filter UI should be shown")
 def assert_filter_ui_shown(browser_page):
-    # .results-count is the DOM-observable proxy for the Explore Stories
+    # .es-results-count is the DOM-observable proxy for the Explore Stories
     # surface (same marker used by test_nav_labels.py). If the layout
     # change breaks the Streamlit click bridge or the routing wire-up,
     # this assertion will fail because no filter UI renders.
-    count_el = browser_page.locator(".results-count").first
+    count_el = browser_page.locator(".es-results-count").first
     count_el.wait_for(state="visible", timeout=LONG_WAIT)
     assert count_el.count() > 0, (
         "Explore Stories filter UI did not render after clicking the "

@@ -160,7 +160,7 @@ def assert_section_header_present(browser_page, header_text):
 def assert_active_tab(browser_page, tab_name):
     """Verify navigation landed on the expected tab."""
     if tab_name == "My Work":
-        browser_page.wait_for_selector(".results-count", timeout=15000)
+        browser_page.wait_for_selector(".es-results-count", timeout=15000)
 
 
 @then("the My Work page should be scrolled to the top")
@@ -181,7 +181,7 @@ def assert_explore_scrolled_to_top(browser_page):
 @then(parsers.parse("the result count should be greater than {floor:d}"))
 def assert_result_count_above(browser_page, floor):
     """Verify the prefilter narrowed results to at least one story."""
-    count_el = browser_page.locator(".results-count").first
+    count_el = browser_page.locator(".es-results-count").first
     count_el.wait_for(state="visible", timeout=10000)
     text = count_el.inner_text()
     match = re.search(r"of\s+(\d+)\s+project", text)

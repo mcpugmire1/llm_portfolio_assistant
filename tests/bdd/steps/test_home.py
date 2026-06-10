@@ -128,11 +128,11 @@ def click_view_product_work(browser_page):
 def assert_active_tab(browser_page, tab_name):
     """Verify navigation landed on the expected tab.
 
-    For My Work: the .results-count element is unique to that page,
+    For My Work: the .es-results-count element is unique to that page,
     so its presence is a reliable proxy for active_tab == "My Work".
     """
     if tab_name == "My Work":
-        browser_page.wait_for_selector(".results-count", timeout=15000)
+        browser_page.wait_for_selector(".es-results-count", timeout=15000)
     else:
         # Other tabs (Banking, Cross-Industry, Home) — assertion stubbed
         # until those scenarios get full step defs (MATTGPT-060).
@@ -143,12 +143,12 @@ def assert_active_tab(browser_page, tab_name):
 def assert_result_count_below(browser_page, limit):
     """Verify the prefilter narrowed results below the unfiltered corpus size.
 
-    The .results-count text renders as "Showing N–M of TOTAL projects". We
+    The .es-results-count text renders as "Showing N–M of TOTAL projects". We
     extract TOTAL and assert it's below the limit. If the prefilter silently
     fails (the May 12 bug shape), TOTAL would be 113 — the full corpus —
     and this assertion fires.
     """
-    count_el = browser_page.locator(".results-count").first
+    count_el = browser_page.locator(".es-results-count").first
     count_el.wait_for(state="visible", timeout=10000)
     text = count_el.inner_text()
     # Pattern: "Showing 1–10 of 10 projects" — extract the number after "of".
