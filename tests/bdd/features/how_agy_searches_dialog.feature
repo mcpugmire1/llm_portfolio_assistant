@@ -47,4 +47,3 @@ Feature: How Agy Searches — migrate inline expander to @st.dialog (MATTGPT-110
     When the user clicks the "How Agy searches" button
     Then a dialog titled "How Agy searches" should be visible
     And the dialog content should be scrolled to the top
-    And the page should be scrolled to the top

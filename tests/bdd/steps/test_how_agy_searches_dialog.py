@@ -13,6 +13,12 @@ Green: replaces inline expander with @st.dialog in landing_view.py and
 conversation_view.py; rewrites get_how_agy_flow_html() content as native
 Streamlit; removes Technical Details block; adds footer st.button.
 
+Scroll-to-top follow-up (June 10, 2026 — Chrome Claude analysis):
+  - Scenario 6: FAILS on window.scrollY — page scroll not reset on dialog open
+    (window.parent.scrollTo not yet called). dialog.scrollTop may already be 0
+    from c8ce37d. Green: add window.parent.scrollTo(0,0) to scroll IIFE in
+    how_agy_dialog.py alongside mobile CSS compaction.
+
 DOM landmarks:
   - Dialog: [role='dialog'] (Streamlit @st.dialog renders this)
   - Dialog title: [role='dialog'] :text("How Agy searches")
@@ -60,6 +66,15 @@ def _nav_to_ask_agy(browser_page, app_url):
 # =============================================================================
 # GIVEN — Navigation
 # =============================================================================
+
+
+@given("the page has been scrolled down")
+def scroll_page_down(browser_page):
+    # stMain is Streamlit's real scroll container — window.scrollY is always 0
+    browser_page.evaluate(
+        "document.querySelector('[data-testid=\"stMain\"]').scrollTop = 600"
+    )
+    browser_page.wait_for_timeout(SHORT_WAIT)
 
 
 @given("the user navigates to the Ask Agy landing page")
@@ -155,6 +170,25 @@ def assert_no_inline_wrapper(browser_page):
         f"Found {count} .how-agy-modal-wrapper element(s) in page body. "
         "MATTGPT-110: inline expander wrapper still present — migration incomplete."
     )
+
+
+@then("the dialog content should be scrolled to the top")
+def assert_dialog_scroll_at_top(browser_page):
+    try:
+        dialog = browser_page.locator(DIALOG_SELECTOR).first
+        dialog.wait_for(state="visible", timeout=LONG_TIMEOUT)
+        scroll_top = dialog.evaluate("el => el.scrollTop")
+        assert scroll_top == 0, (
+            f"Expected dialog.scrollTop = 0 but got {scroll_top}. "
+            "MATTGPT-110: dialog content not scrolled to top on open."
+        )
+    except AssertionError:
+        raise
+    except Exception as exc:
+        raise AssertionError(
+            "Could not evaluate dialog.scrollTop — dialog may not be visible. "
+            "MATTGPT-110: scroll-to-top check failed."
+        ) from exc
 
 
 @then('the dialog should contain a button with text "See how I built it"')

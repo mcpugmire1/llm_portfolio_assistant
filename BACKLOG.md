@@ -9,14 +9,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 **NOW** (UI redesign sprint — merge to `main` + production deploy):
 
-*Bundle 1 — Quick CSS wins (one commit):*
-- **-111** — Back-link dark mode fix
-- **-112** — How Agy Searches dialog mobile polish
-- **-069** — Stats label contrast
-- **-070** — Suggestion button cursor
-
 *Bundle 2 — Explore Stories cleanup:*
-- **-105** — CSS rerun regression (same family as MATTGPT-068)
 - **-064** — AgGrid row hover
 - **-119** — My Work mobile Filters toggle
 
@@ -114,7 +107,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-066](#mattgpt-066) | Role Match — Sample JD / "Try a sample role" cold-start affordance | Open | Medium | Action | May 15, 2026 |
 | [MATTGPT-067](#mattgpt-067) | Role Match — Result panel and input polish bundle | Open | Low | Action | May 15, 2026 |
 | [MATTGPT-068](#mattgpt-068) | About Matt — Content polish bundle (clickable questions, code expander, DevOps card merge) | Done | Medium | Action | May 15, 2026 |
-| [MATTGPT-069](#mattgpt-069) | Home — Stats label contrast (light mode WCAG AA) | Open | Low | Issue | May 15, 2026 |
+| [MATTGPT-069](#mattgpt-069) | Home — Stats label contrast (light mode WCAG AA) | Done | Low | Issue | May 15, 2026 |
 | [MATTGPT-070](#mattgpt-070) | Ask MattGPT — Suggestion button cursor pointer | Decided Against | Low | Issue | May 15, 2026 |
 | [MATTGPT-071](#mattgpt-071) | Nonsense rejection banner — branch-aware copy + contextual chip sets | Done | Medium | Action | May 15, 2026 |
 | [MATTGPT-072](#mattgpt-072) | `generate_public_tags.py` — case-insensitive tag dedup | Open | Low | Refactor | May 16, 2026 |
@@ -155,8 +148,8 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-108](#mattgpt-108) | Home category cards — add capability-based counts to the 4 non-industry cards (resolve asymmetry from -107 / -104) | Open | Medium | Action | June 1, 2026 |
 | [MATTGPT-109](#mattgpt-109) | mattgpt-design-spec Jekyll site — sync UI refresh changes (nav labels, navbar, cards, How I Built, How Agy Searches, Why Agy modal, user journeys) | Open | High | Action | June 1, 2026 |
 | [MATTGPT-110](#mattgpt-110) | How Agy Searches — migrate inline expander to `@st.dialog` + remove Technical Details block | Done | Medium | Action | June 2, 2026 |
-| [MATTGPT-111](#mattgpt-111) | My Work / Banking / Cross-Industry — back-link not dark-mode compliant (white pill on dark bg) | Open | Low | Issue | June 3, 2026 |
-| [MATTGPT-112](#mattgpt-112) | How Agy Searches dialog — too tall for mobile viewport + content not scrolled to top on open (375/430px) | Open | Low | Issue | June 3, 2026 |
+| [MATTGPT-111](#mattgpt-111) | My Work / Banking / Cross-Industry — back-link not dark-mode compliant (white pill on dark bg) | Done | Low | Issue | June 3, 2026 |
+| [MATTGPT-112](#mattgpt-112) | How Agy Searches dialog — too tall for mobile viewport + content not scrolled to top on open (375/430px) | Done | Low | Issue | June 3, 2026 |
 | [MATTGPT-113](#mattgpt-113) | Ask Agy landing — mobile polish pass (seed question chips + header height + button placement) | Open | Medium | Action | June 4, 2026 |
 | [MATTGPT-114](#mattgpt-114) | Page header typography — standardize title + subtitle via shared CSS classes across all 7 surfaces | Open | Medium | Refactor | June 5, 2026 |
 | [MATTGPT-115](#mattgpt-115) | Lock icon — browser console warning: password field not in native form (st.popover portal breaks form containment) | Open | Low | Issue | June 6, 2026 |
@@ -2660,6 +2653,23 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
   - MATTGPT-102 — How I Built (bridge link target; Technical Details content moves there)
   - MATTGPT-076 — How Agy Searches mobile fix (check whether migration to `@st.dialog` resolves the iframe overflow issue naturally)
 - **Logged:** June 2, 2026
+
+**Mobile height compaction + scroll-to-top (both breakpoints) — Chrome Claude analysis (June 10, 2026):**
+
+Content `scrollHeight` at 375px settled at ~968px against a ~595px usable dialog area — ~370px overflow requiring scroll. Total CSS savings: ~96px. After savings, content ~872px; Sections 1–2 fully visible on open; Section 3 reachable with one scroll.
+
+Ranked savings — all additions to `@media (max-width: 640px)` block in `_CSS`:
+
+| Selector | Change | Saving |
+|---|---|---|
+| `.search-card` | `padding: 16px` → `padding: 10px` | 12px × 5 cards = **60px** |
+| `.result-card` | `padding: 18px top+bottom` → `padding: 12px` | **12px** |
+| `.result-wrapper` | `padding: 14px` → `padding: 10px` | **8px** |
+| `.cards-row` | `margin-bottom: 12px` → `8px` (×2 rows) | **8px** |
+| `.pipeline-summary` | `margin-bottom: 16px` → `8px` | **8px** |
+| vblock_gap (Streamlit 16px block gap) | **Skip** — no safe scoped selector inside dialog | 0 |
+
+JS note: `el.scrollTop = 0` already shipped (`c8ce37d`) — scrolls the dialog's internal container. Additional fix confirmed via Chrome Claude DevTools (June 10, 2026): `[data-testid="stMain"]` is Streamlit's real scroll container (`window.scrollY` is always 0 — Streamlit uses full-viewport flex layout). When `stMain.scrollTop = 600`, the dialog renders 483px above the viewport (`dialog_rect.top = -483`). Fix: add `document.querySelector('[data-testid="stMain"]').scrollTop = 0` to the scroll IIFE in `how_agy_dialog.py` alongside `el.scrollTop = 0`. Combine with the mobile CSS compaction changes — same file, one commit.
 
 ---
 
