@@ -2250,6 +2250,40 @@ changes, pagination).
 
 ---
 
+### Pattern 5: AgGrid Styling — Iframe Boundary Constraint (MATTGPT-064)
+
+**CSS rules in `global_styles.py` cannot reach the AgGrid iframe.** AgGrid
+renders inside a separate `iframe` document. CSS injected into the parent
+page's `<head>` — including everything in `global_styles.py` — stops at the
+iframe boundary. Any `.ag-theme-streamlit .ag-row` rules in `global_styles.py`
+are effectively dead code; they never apply to AgGrid's DOM.
+
+**Two delivery mechanisms for AgGrid styles:**
+
+**1. Python-side (static row properties):** Pass `opts["rowStyle"]` to
+`GridOptionsBuilder` — AgGrid applies it inside its own render, no iframe
+boundary involved. Example: `opts["rowStyle"] = {"cursor": "pointer"}`.
+
+**2. JS injection (CSS variable overrides):** Inject a `components.html`
+snippet *after* the `AgGrid(...)` call. Reach into `iframe.contentDocument`
+and call `root.style.setProperty(...)` on the AgGrid root element.
+
+**Guard selector:** Use `.ag-root-wrapper`, not `.ag-theme-streamlit`.
+The theme class is `.ag-theme-streamlit` in light mode and
+`.ag-theme-streamlit-dark` in dark mode. MattGPT always runs dark, so
+`.ag-theme-streamlit` returns `null` and the injection silently bails on
+every call. `.ag-root-wrapper` is theme-agnostic and always present once
+AgGrid renders.
+
+**Three-fire pattern (immediate + 500ms + 1500ms):** The AgGrid iframe may
+not be fully loaded when `components.html` first fires. Three calls cover:
+initial load, post-CSS-parse, and post-Streamlit-rerun iframe recreation.
+
+**Precedent:** `ui/pages/explore_stories.py` Table view render path
+(`3a5e1bc`, `6590450` — June 2026).
+
+---
+
 ## Testing Strategy
 
 ### BDD/E2E Tests (Explore Stories)

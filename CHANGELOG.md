@@ -8,8 +8,28 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### CSS Architecture
 
+**June 9 — Bundle 1 CSS polish — back-link dark mode, How Agy scroll-to-top, stats label contrast (MATTGPT-111, -112, -069)** — `c8ce37d`
+Three low-priority CSS/JS fixes shipped in one commit. Back-link breadcrumb pill (`explore_stories.py`): replaced hardcoded hex colors with CSS variables (`--bg-card`, `--accent-purple`, `--border-color`) — fixes white-pill-on-dark-background in dark mode (MATTGPT-111). How Agy Searches dialog (`how_agy_dialog.py`): scroll-to-top JS selector fixed from `[role="dialog"] > div` (overflow: visible, never scrolls) to `[role="dialog"]` (actual scrollable container, confirmed via DevTools); switched from fixed 100ms `setTimeout` to self-retrying IIFE (MATTGPT-112). Hero stats labels (`hero.py`): `var(--text-muted)` fails WCAG AA in both light (2.54:1) and dark (3.91:1) modes; swapped to `var(--text-secondary)` which passes in both (4.83:1 light, 7.44:1 dark), confirmed via DevTools CSSOM (MATTGPT-069).
+
 **June 10 — Consolidate CSS to global_styles.py; fix rerun regression (MATTGPT-105)** — `191032b`
 All `st.markdown()` CSS injections across `footer.py`, `thinking_indicator.py`, `timeline_view.py`, `story_detail.py`, and `explore_stories.py` relocated to `global_styles.py` with `es-*` HTML class namespace. Eliminates the rerun garbage-collection bug where inline `<style>` blocks injected inside render functions were stripped from the DOM during Streamlit's mid-rerun pause. Also fixed a live production JS bug: the delegated click listener in `explore_stories.py` was still targeting `.fixed-height-card` after the HTML rename, silently breaking card clicks in Cards view. BDD selectors updated across 7 step-def files to match renamed HTML classes.
+
+
+### Ask Agy
+
+**June 10 — How Agy dialog — mobile height compaction + stMain scroll reset (MATTGPT-110 follow-up)** — `8f9a1b5`, `be2872e`
+Mobile viewport fix for the How Agy Searches dialog. CSS compaction across 5 selectors inside `@media (max-width: 640px)` in `_CSS` — `.search-card`, `.result-card`, `.result-wrapper`, `.cards-row`, `.pipeline-summary` padding/margin reductions totaling ~96px savings, bringing content from ~968px to ~872px against a ~595px usable area (Sections 1–2 fully visible on open; Section 3 reachable with one scroll). Scroll-to-top fix: `stMain.scrollTop = 0` added alongside existing `el.scrollTop = 0` in the scroll IIFE — `[data-testid="stMain"]` is Streamlit's real scroll container (confirmed via Chrome Claude DevTools; `window.scrollY` is always 0 under Streamlit's full-viewport flex layout). BDD regression guard: 2 scenarios covering scroll-to-top behavior added and passing.
+
+**June 2 — How Agy Searches — migrate inline expander to `@st.dialog`, remove Technical Details block (MATTGPT-110)** — `37806a7`, `e24c1cb`
+Replaced the inline collapsible expander on Ask Agy (Landing + Conversation views) with a `@st.dialog` overlay. Technical Details block removed — near-verbatim build content already covered in How I Built, sitting inside the runtime trust story where it didn't belong. Button label toggle and close-wiring JS removed from `ask_mattgpt_header.py`; `@st.dialog`'s built-in X / Escape / backdrop handles close. Bridge link added at bottom: "Want the technical details? See how I built it →". `show_how_modal` session state key and `render_modal_wrapper_start/end()` calls removed from both page files. BDD: 5/5 passing. CSS regression guards for navbar scope added in follow-up commit `e24c1cb`.
+
+### Explore Stories
+
+**June 10 — AgGrid Table view — row cursor + purple hover color, dark-mode selector fix (MATTGPT-064)** — `3a5e1bc`, `6590450`
+Two-part fix for AgGrid Table view styling. Root cause: CSS rules in `global_styles.py` cannot reach AgGrid's iframe — the iframe boundary blocks parent-doc stylesheets. Fix 1: Python `rowStyle = {"cursor": "pointer"}` on `GridOptionsBuilder` (bypasses iframe entirely). Fix 2: `components.html` JS injection reaching into `iframe.contentDocument` to set `--ag-row-hover-color: rgba(167,139,250,0.15)` and `--ag-selected-row-background-color: rgba(167,139,250,0.2)`. Dark-mode fix: guard selector changed from `.ag-theme-streamlit` (null in dark mode — actual class is `.ag-theme-streamlit-dark`) to `.ag-root-wrapper` (theme-agnostic). Three-fire timing pattern (immediate + 500ms + 1500ms) covers iframe load delay and post-rerun iframe recreation. Dead CSS removed from `global_styles.py`. Pattern documented in ARCHITECTURE.md as Pattern 5.
+
+**June 10 — My Work mobile — "Filters ▾" toggle for Row 2 (Client, Role, Domain) (MATTGPT-119)** — `b65900e`
+Added a "Filters ▾" toggle button to My Work, visible only on mobile (hidden on desktop via CSS). Tapping it toggles Row 2 visibility (Client, Role, Domain dropdowns) via `es_mobile_r2_open` session state; container key swap (`r2_row` ↔ `r2_row_open`) drives CSS show/hide without widget state loss. Required three CSS cascade fixes: (1) column-stacker rule gained 4th `:not(:has([data-testid="stFormSubmitButton"]))` exclusion — specificity (0,3,1) was overriding the stForm `flex-direction: row !important` rule; (2) facet rule gained same exclusion to prevent `flex-wrap: wrap` applying to the search form; (3) `[data-testid="stForm"] [data-testid="stColumn"]:last-child` rule added to block Streamlit's `min-width: calc(100% - 1.5rem)` from squeezing the submit button. BDD: 4/4 new scenarios passing, 2 regression guards confirmed.
 
 ---
 

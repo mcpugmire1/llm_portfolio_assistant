@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: ad3b72f -->
+<!-- last-backlog-sync: 6590450 -->
 
 Work state for the MattGPT project. The matrix below is the scannable view. Detail blocks for each item follow, linked by ID. Completed items live in `CHANGELOG.md`. Architectural decisions live in `docs/ADR.md`. Current system state lives in `ARCHITECTURE.md`.
 
@@ -102,7 +102,6 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-061](#mattgpt-061) | MattGPT portfolio story contaminating organizational leadership queries | Resolved | Medium | Issue | May 13, 2026 |
 | [MATTGPT-062](#mattgpt-062) | Semantic router cache silently uses stale embeddings when VALID_INTENTS changes | Open | Medium | Refactor | May 14, 2026 |
 | [MATTGPT-063](#mattgpt-063) | Wrong-person queries with names outside nonsense regex produce confused-context RAG answers | Open | Medium | Issue | May 14, 2026 |
-| [MATTGPT-064](#mattgpt-064) | Explore Stories — Table row hover/cursor doesn't apply to data cells (AgGrid selector fix) | Open | Low | Issue | May 15, 2026 |
 | [MATTGPT-065](#mattgpt-065) | Explore Stories — Polish bundle (filter UX, empty states, story details) | Resolved | Medium | Action | May 15, 2026 |
 | [MATTGPT-066](#mattgpt-066) | Role Match — Sample JD / "Try a sample role" cold-start affordance | Open | Medium | Action | May 15, 2026 |
 | [MATTGPT-067](#mattgpt-067) | Role Match — Result panel and input polish bundle | Open | Low | Action | May 15, 2026 |
@@ -147,7 +146,6 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-107](#mattgpt-107) | Home category cards redesign — unify card treatment, 3-column grid, compact content (align with wireframe) | Done | Medium | Action | May 31, 2026 |
 | [MATTGPT-108](#mattgpt-108) | Home category cards — add capability-based counts to the 4 non-industry cards (resolve asymmetry from -107 / -104) | Open | Medium | Action | June 1, 2026 |
 | [MATTGPT-109](#mattgpt-109) | mattgpt-design-spec Jekyll site — sync UI refresh changes (nav labels, navbar, cards, How I Built, How Agy Searches, Why Agy modal, user journeys) | Open | High | Action | June 1, 2026 |
-| [MATTGPT-110](#mattgpt-110) | How Agy Searches — migrate inline expander to `@st.dialog` + remove Technical Details block | Done | Medium | Action | June 2, 2026 |
 | [MATTGPT-111](#mattgpt-111) | My Work / Banking / Cross-Industry — back-link not dark-mode compliant (white pill on dark bg) | Done | Low | Issue | June 3, 2026 |
 | [MATTGPT-112](#mattgpt-112) | How Agy Searches dialog — too tall for mobile viewport + content not scrolled to top on open (375/430px) | Done | Low | Issue | June 3, 2026 |
 | [MATTGPT-113](#mattgpt-113) | Ask Agy landing — mobile polish pass (seed question chips + header height + button placement) | Open | Medium | Action | June 4, 2026 |
@@ -156,10 +154,10 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-116](#mattgpt-116) | Evaluate retiring how_i_built.py standalone route — superseded by How I Built dialog | Open | Low | Refactor | June 6, 2026 |
 | [MATTGPT-117](#mattgpt-117) | How I Built dialog — BDD coverage for "See It In Action" prompt buttons and Ask Agy routing | Resolved | Medium | Action | June 7, 2026 |
 | [MATTGPT-118](#mattgpt-118) | My Profile — Copy snippet + Download PDF buttons (referrer workflow) | Done | Medium | Action | June 8, 2026 |
-| [MATTGPT-119](#mattgpt-119) | My Work mobile — "Filters ▾" toggle to show/hide Row 2 (Client, Role, Domain) on mobile | Open | Medium | Action | June 8, 2026 |
 | [MATTGPT-120](#mattgpt-120) | CLAUDE.md restructure — Critical Rules fast-reference block + rules-first format throughout | Open | Medium | Action | June 9, 2026 |
 | [MATTGPT-121](#mattgpt-121) | Why Agy dialog — mobile layout fix (375px viewport); title font-size override pending DevTools selector confirmation | Open | Medium | Bug | June 9, 2026 |
 | [MATTGPT-122](#mattgpt-122) | My Work — Cards view BDD timing: test_view_switching_preserves_open_story_detail fails (components.html iframe listener not attached at click time) | Open | Low | Issue | June 10, 2026 |
+| [MATTGPT-123](#mattgpt-123) | My Work mobile — filter layout compaction (inline labels, 3-col grid, Reset as text link) | Open | Medium | Action | June 10, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -1090,22 +1088,6 @@ Chip 3 wording "How does Matt manage resistance when leading enterprise transfor
   - **E. Defer.** Accept the long-tail failure rate; monitor query logs and revisit when frequency/brand-damage warrants action. Current de facto state.
 - **Related:** MATTGPT-016 (Decided Against — same root concern, wrong fix shape), MATTGPT-061 (MattGPT story over-ranking), MATTGPT-021 (diversify_results pinning).
 - **Logged:** May 14, 2026
-
----
-
-### MATTGPT-064
-**Explore Stories — Table row hover/cursor doesn't apply to data cells (AgGrid selector fix)**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Issue
-- **Issue:** `global_styles.py:372-384` already defines `cursor: pointer !important` and hover background/border styling for `.ag-theme-streamlit .ag-row`. In production the cursor changes on column headers but **not** on data cells. Diagnosis (May 15, 2026): the rule never wins because (a) `.ag-cell` sits on top of `.ag-row` and the cursor is determined by the topmost element under the pointer, and (b) AgGrid manages hover state via a `.ag-row-hover` class rather than the browser `:hover` pseudo-class — `:hover` on `.ag-row` may never fire reliably because cells consume the pointer events.
-- **Fix:** Selector adjustment, NOT specificity escalation. The existing `!important` declarations are fine.
-  - Change cursor target from `.ag-theme-streamlit .ag-row` to `.ag-theme-streamlit .ag-row .ag-cell`.
-  - Change hover selector from `.ag-theme-streamlit .ag-row:hover` to `.ag-theme-streamlit .ag-row.ag-row-hover`.
-- **Effort:** ~5-10 lines in `global_styles.py:372-384`.
-- **Audience impact:** High-intent recruiter scanning the Table view to find a specific story may not realize rows are clickable until they accidentally click one. Original UX agent flagged this as a "missing CSS" problem; actual root cause is "existing CSS doesn't apply to data cells" — different bug, different fix.
-- **Logged:** May 15, 2026
 
 ---
 
@@ -2629,50 +2611,6 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 
 ---
 
-### MATTGPT-110
-**How Agy Searches — migrate inline expander to `@st.dialog` + remove Technical Details block**
-
-- **Status:** Done
-- **Resolved:** June 2, 2026 — `37806a7` (dialog migration, 5/5 BDD passing) + `e24c1cb` (navbar CSS scope fix + dialog CSS regression guards, 5/5 passing)
-- **Priority:** Medium
-- **Type:** Action
-- **Decision (June 1, 2026 PoC):** `@st.dialog` is confirmed as the right pattern for "How Agy Searches." The PoC showed the dialog version is significantly better than the current inline expander — content gets its own focused container, the conversation/page stays intact behind the overlay, and dismiss (X / Escape / backdrop) is clean. The inline expander pushes the entire conversation down the page, creating significant UX friction on the Conversation view specifically.
-- **Content change (run-vs-build split, decided June 1-2, 2026):**
-  - **Remove "Technical Details" block** from the modal — it's build content (Pinecone top-K, 1536 dims, confidence gate, XML tags) sitting inside the runtime trust story, and it's a near-verbatim duplicate of How I Built's pipeline sections. Cut it.
-  - **Keep everything else** — the narrative flow (You Ask → Agy Searches → You Get Results) and the trust points (filters noise, refuses weak matches, won't fabricate). This is the runtime trust story; it stays.
-  - **Add bridge link** at the bottom: *"Want the technical details? See how I built it →"* → routes to How I Built surface (MATTGPT-102).
-- **Implementation — due diligence required before building:**
-  1. **Button label toggle must be removed.** `ask_mattgpt_header.py:548-552` currently flips the button between `🔍 How Agy searches` and `✕ Close` based on `show_how_modal` session state. With `@st.dialog` the close affordance moves to the dialog's built-in X / Escape / backdrop — the button stays as `🔍 How Agy searches` always. The `is_open` check, the `how-agy-btn-close` CSS class, and the close-button wiring JS (`render_modal_close_wiring_js` at `ask_mattgpt_header.py:647-685`) all come out. BDD selectors that assert the `✕ Close` label state will need updating.
-  2. **Iframe rendering inside `@st.dialog` is unverified.** The modal content renders as two `components.html()` iframes (`get_how_agy_flow_html()` height=1180, `get_technical_details_html()` height=850) on both Landing (`landing_view.py:65-66`) and Conversation (`conversation_view.py:123-124`). Streamlit's `@st.dialog` wraps content in a fixed-height scrollable container. It is not confirmed that `components.html()` iframes render correctly inside `@st.dialog` — height negotiation between the dialog container and the iframe may behave unexpectedly. **Must PoC this before committing to the pattern.** If iframes don't render cleanly inside `@st.dialog`, the content may need to be rewritten as native Streamlit components or `st.markdown()` + `unsafe_allow_html=True` instead.
-  3. **`show_how_modal` session state key is used in multiple places** — `ask_mattgpt_header.py:24`, `landing_view.py:63`, `conversation_view.py:121`. All references come out when the inline expander is removed.
-  4. **`render_modal_wrapper_start()` / `render_modal_wrapper_end()`** calls in both page files come out. The CSS classes `.how-agy-modal-wrapper` / `.how-agy-modal-container` (defined in `get_header_css()`) may be unused after migration — audit and remove to avoid dead CSS.
-- **Surfaces affected:** Ask Agy Landing (`landing_view.py`), Ask Agy Conversation (`conversation_view.py`), header component (`ask_mattgpt_header.py`)
-- **Effort:** Small-Medium (~1-3 hours raw depending on iframe PoC result). Mechanical if iframes work inside dialog; moderate rewrite if they don't.
-- **Cross-references:**
-  - MATTGPT-101 — Why Agy modal (sibling `@st.dialog`; same implementation pattern)
-  - MATTGPT-102 — How I Built (bridge link target; Technical Details content moves there)
-  - MATTGPT-076 — How Agy Searches mobile fix (check whether migration to `@st.dialog` resolves the iframe overflow issue naturally)
-- **Logged:** June 2, 2026
-
-**Mobile height compaction + scroll-to-top (both breakpoints) — Chrome Claude analysis (June 10, 2026):**
-
-Content `scrollHeight` at 375px settled at ~968px against a ~595px usable dialog area — ~370px overflow requiring scroll. Total CSS savings: ~96px. After savings, content ~872px; Sections 1–2 fully visible on open; Section 3 reachable with one scroll.
-
-Ranked savings — all additions to `@media (max-width: 640px)` block in `_CSS`:
-
-| Selector | Change | Saving |
-|---|---|---|
-| `.search-card` | `padding: 16px` → `padding: 10px` | 12px × 5 cards = **60px** |
-| `.result-card` | `padding: 18px top+bottom` → `padding: 12px` | **12px** |
-| `.result-wrapper` | `padding: 14px` → `padding: 10px` | **8px** |
-| `.cards-row` | `margin-bottom: 12px` → `8px` (×2 rows) | **8px** |
-| `.pipeline-summary` | `margin-bottom: 16px` → `8px` | **8px** |
-| vblock_gap (Streamlit 16px block gap) | **Skip** — no safe scoped selector inside dialog | 0 |
-
-JS note: `el.scrollTop = 0` already shipped (`c8ce37d`) — scrolls the dialog's internal container. Additional fix confirmed via Chrome Claude DevTools (June 10, 2026): `[data-testid="stMain"]` is Streamlit's real scroll container (`window.scrollY` is always 0 — Streamlit uses full-viewport flex layout). When `stMain.scrollTop = 600`, the dialog renders 483px above the viewport (`dialog_rect.top = -483`). Fix: add `document.querySelector('[data-testid="stMain"]').scrollTop = 0` to the scroll IIFE in `how_agy_dialog.py` alongside `el.scrollTop = 0`. Combine with the mobile CSS compaction changes — same file, one commit.
-
----
-
 ### MATTGPT-114
 **Page header typography — standardize title + subtitle via shared CSS classes across all 7 surfaces**
 
@@ -2791,22 +2729,6 @@ JS note: `el.scrollTop = 0` already shipped (`c8ce37d`) — scrolls the dialog's
 
 ---
 
-### MATTGPT-119
-**My Work mobile — "Filters ▾" toggle to show/hide Row 2 (Client, Role, Domain) on mobile**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Action
-- **Context:** MATTGPT-065 ships Row 2 (Client, Role, Domain) always visible on desktop and hidden on mobile via CSS. On mobile there is no affordance to access Row 2 filters at all. A "Filters ▾" toggle button should appear on mobile to show/hide Row 2.
-- **Investigate first:** Check whether any BDD scenarios for this behavior already exist in `tests/bdd/features/explore_stories.feature` before writing new ones.
-- **Spec:**
-  - "Filters ▾" button appears only on mobile (hidden on desktop via CSS)
-  - Tapping it toggles Row 2 visibility (show/hide) via session state
-  - Button label reflects state: "Filters ▾" (closed) / "Filters ▴" (open)
-  - Row 2 opens as an additional row below the search/industry/capability row
-- **BDD required before implementation** — Red (scenarios) → Red (step defs) → Green.
-- **Logged:** June 8, 2026
-
 ### MATTGPT-121
 **Why Agy dialog — mobile layout fix (375px viewport)**
 
@@ -2834,6 +2756,148 @@ JS note: `el.scrollTop = 0` already shipped (`c8ce37d`) — scrolls the dialog's
 - **Evidence:** Fix 1 assert surfaced: "Detail panel never opened after card click — DOM had: 0 header(s)". Live app confirmed working (Chrome Claude's direct `element.click()` on the button bypassed the listener entirely). Playwright's UI click goes through the iframe listener path, racing the iframe setup.
 - **Fix shape:** After switching to Cards view, wait explicitly for the `components.html` iframe's JS to fire before clicking. Candidate: `wait_for_timeout(1000)` after cards appear, or wait for a zero-height `[data-testid='stCustomComponentV1']` iframe. Alternatively, add a retry loop around the click + wait_for_content.
 - **Note:** This test was never green before MATTGPT-105 — it always failed at an earlier step for different reasons. -105 advanced the failure mode to expose the timing issue. Not a -105 regression.
+- **Logged:** June 10, 2026
+
+---
+
+### MATTGPT-123
+**My Work mobile — filter layout compaction (inline labels, 3-col grid, Reset as text link)**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Context:** MATTGPT-119 ships the Filters ▾ toggle. This ticket compacts the layout inside the open Row 2 panel. Target: Industry/Capability as label + dropdown on one row; Client/Role/Domain as a 3-column grid with `::before` injected field names; Reset demoted to underlined text link; Filters toggle full-width.
+- **Scope:** `global_styles.py` — additions to the `@media (max-width: 767px)` block only. No Python changes required. The `::before` label approach keeps "All" as the actual `<option>` value; `matches_filters` logic is untouched.
+
+**CSS to add inside `@media (max-width: 767px)`:**
+
+```css
+/* ── FIND STORIES: hide label ── */
+[data-testid="stForm"] [data-testid="stWidgetLabel"] {
+  display: none !important;
+}
+
+/* ── INDUSTRY / CAPABILITY: label + dropdown inline ── */
+[class*="st-key-facet_industry_v2"] [data-testid="stSelectbox"],
+[class*="st-key-facet_capability_v2"] [data-testid="stSelectbox"] {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+[class*="st-key-facet_industry_v2"] [data-testid="stWidgetLabel"],
+[class*="st-key-facet_capability_v2"] [data-testid="stWidgetLabel"] {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-height: 0 !important;
+  font-size: 12px !important;
+  line-height: 1 !important;
+  margin-bottom: 0 !important;
+  white-space: nowrap !important;
+}
+[class*="st-key-facet_industry_v2"] [data-testid="stSelectbox"] > div:last-child,
+[class*="st-key-facet_capability_v2"] [data-testid="stSelectbox"] > div:last-child {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+}
+
+/* ── ADVANCED FILTERS: hide Streamlit labels (replaced by ::before) ── */
+[class*="st-key-r2_client_v2"] [data-testid="stWidgetLabel"],
+[class*="st-key-r2_role_v2"] [data-testid="stWidgetLabel"],
+[class*="st-key-r2_domain_v2"] [data-testid="stWidgetLabel"] {
+  display: none !important;
+}
+
+/* ── ADVANCED FILTERS: inject field name into select control ── */
+[class*="st-key-r2_client_v2"] [data-baseweb="select"] > div:first-child::before {
+  content: "Client" !important;
+  font-size: 10px !important;
+  color: rgb(156, 163, 175) !important;
+  padding-left: 8px !important;
+  padding-right: 4px !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+}
+[class*="st-key-r2_role_v2"] [data-baseweb="select"] > div:first-child::before {
+  content: "Role" !important;
+  font-size: 10px !important;
+  color: rgb(156, 163, 175) !important;
+  padding-left: 8px !important;
+  padding-right: 4px !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+}
+[class*="st-key-r2_domain_v2"] [data-baseweb="select"] > div:first-child::before {
+  content: "Domain" !important;
+  font-size: 10px !important;
+  color: rgb(156, 163, 175) !important;
+  padding-left: 8px !important;
+  padding-right: 4px !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+}
+
+/* ── ADVANCED FILTERS: 3-column grid layout ── */
+[class*="st-key-r2_row_open"] [data-testid="stHorizontalBlock"] {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
+  gap: 6px !important;
+  align-items: center !important;
+}
+[class*="st-key-r2_row_open"] [data-testid="stColumn"] {
+  min-width: 0 !important;
+  width: 100% !important;
+}
+
+/* ── COMPACT DROPDOWN PADDING (all filters) ── */
+[class*="st-key-facet_"] [data-baseweb="select"] > div:first-child,
+[class*="st-key-r2_"] [data-baseweb="select"] > div:first-child {
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+}
+
+/* ── TIGHTEN INTER-ROW GAP ── */
+[data-testid="stVerticalBlock"]:has([class*="st-key-facet_"]) {
+  gap: 6px !important;
+}
+[data-testid="stForm"] {
+  margin-bottom: 0px !important;
+}
+
+/* ── SEARCH BUTTON: nudge up to align with input midpoint ── */
+[data-testid="stFormSubmitButton"] button {
+  margin-top: -3px !important;
+}
+```
+
+**Punch list — 4 items requiring DevTools DOM inspection before writing final CSS:**
+
+1. **Filters toggle button not full-width** — `width: 100%` on the button itself isn't enough; intermediate parent containers constrain it. Walk up from the Filters button via DevTools (`parentElement` chain) to find which ancestor is constraining width (`stElementContainer` or `stButton` wrapper likely needs `width: 100%` too). Target that container.
+
+2. **Stray character in Role (and Client/Domain) dropdown** — `::before` injects the label correctly but the SVG chevron's `<title>open</title>` may leak text into the rendered output. Run `document.querySelector('[class*="st-key-r2_role_v2"] [data-baseweb="select"]').innerHTML` in DevTools to confirm. If confirmed, add to all three advanced filters:
+   ```css
+   [class*="st-key-r2_"] [data-baseweb="select"] svg title {
+     display: none !important;
+   }
+   ```
+
+3. **Reset filters button selector** — Confirmed DOM chain: `data-testid="stBaseButton-secondary"` on `<button>`, `data-testid="stButton"` on wrapper, `data-testid="stElementContainer"` + `class="st-key-r2_reset"` on container. Verify `[class*="st-key-r2_reset"] [data-testid="stBaseButton-secondary"]` matches in DevTools before committing:
+   ```css
+   [class*="st-key-r2_reset"] [data-testid="stBaseButton-secondary"] {
+     border: none !important;
+     background: transparent !important;
+     color: rgb(156, 163, 175) !important;
+     font-size: 11px !important;
+     padding: 2px 8px !important;
+     width: auto !important;
+     text-decoration: underline !important;
+     text-underline-offset: 2px !important;
+   }
+   ```
+
+4. **Column-stacker `@media` exclusion for r2 hblock** — The existing column-stacker rule at `@media (max-width: 768px)` will catch the `r2_row_open` hblock and override the grid. Add a 5th `:not()` clause using `r2_client_v2` as the discriminator: `:not(:has([class*="st-key-r2_client_v2"]))`. Confirm via `document.querySelector('[class*="st-key-r2_row_open"] [data-testid="stHorizontalBlock"]')` in DevTools before finalizing.
+
+- **BDD required before implementation** — Red (scenarios) → Red (step defs) → Green.
 - **Logged:** June 10, 2026
 
 ---
