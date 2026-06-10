@@ -392,13 +392,7 @@ def apply_global_styles():
             border-bottom: 1px solid var(--border-color) !important;
             border-left: 3px solid transparent !important;
             transition: all 0.2s ease !important;
-            cursor: pointer !important;
             min-height: 70px !important;
-        }
-
-        .ag-theme-streamlit .ag-row:hover {
-            background: var(--table-row-hover-bg) !important;
-            border-left: 3px solid var(--accent-purple) !important;
         }
 
         .ag-theme-streamlit .ag-cell {

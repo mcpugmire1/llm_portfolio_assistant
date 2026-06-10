@@ -1325,6 +1325,7 @@ def render_explore_stories(
             opts["suppressHorizontalScroll"] = (
                 False  # False = allow horizontal scroll/swipe
             )
+            opts["rowStyle"] = {"cursor": "pointer"}
 
             grid = AgGrid(
                 df_view,
@@ -1334,6 +1335,28 @@ def render_explore_stories(
                 theme="streamlit",
                 fit_columns_on_grid_load=True,
                 height=TABLE_HEIGHT,
+            )
+
+            components.html(
+                """<script>
+                (function() {
+                    function inject() {
+                        var agIframe = Array.from(window.parent.document.querySelectorAll('iframe'))
+                            .find(function(f) { return f.src && f.src.includes('st_aggrid'); });
+                        if (!agIframe) return;
+                        try {
+                            var root = agIframe.contentDocument.querySelector('.ag-theme-streamlit');
+                            if (!root) return;
+                            root.style.setProperty('--ag-row-hover-color', 'rgba(167,139,250,0.15)');
+                            root.style.setProperty('--ag-selected-row-background-color', 'rgba(167,139,250,0.2)');
+                        } catch(e) {}
+                    }
+                    inject();
+                    setTimeout(inject, 500);
+                    setTimeout(inject, 1500);
+                })();
+                </script>""",
+                height=0,
             )
 
             if isinstance(grid, dict):
