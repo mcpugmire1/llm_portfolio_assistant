@@ -1400,6 +1400,53 @@ def row2_filter_bar_hidden(browser_page):
     ), "Row 2 filter bar should be hidden on mobile but is visible"
 
 
+@then("the row 2 filter bar should be visible")
+def row2_filter_bar_visible(browser_page):
+    el = browser_page.locator("[class*='st-key-r2_row']").first
+    assert el.is_visible(), (
+        "Row 2 filter bar should be visible after toggle but is hidden. "
+        "MATTGPT-119: Filters toggle may not be showing Row 2."
+    )
+
+
+@then(parsers.parse('a button with text containing "{text}" should be visible'))
+def button_with_text_visible(browser_page, text):
+    # Scoped to the mobile filters toggle container to avoid false positives
+    # from other buttons containing "filter" (e.g., "Reset filters")
+    btn = browser_page.locator(
+        f"[class*='st-key-es_mobile_filters_toggle'] button:has-text('{text}')"
+    ).first
+    assert btn.is_visible(), (
+        f"Expected a visible mobile Filters toggle button containing '{text}' but none found. "
+        "MATTGPT-119: mobile Filters toggle button may not be rendered."
+    )
+
+
+@then(parsers.parse('no button with text containing "{text}" should be visible'))
+def button_with_text_not_visible(browser_page, text):
+    # Scoped to the mobile filters toggle container — avoids matching "Reset filters"
+    btn = browser_page.locator(
+        f"[class*='st-key-es_mobile_filters_toggle'] button:has-text('{text}')"
+    )
+    count = btn.count()
+    visible = any(btn.nth(i).is_visible() for i in range(count))
+    assert not visible, (
+        f"Expected mobile Filters toggle button containing '{text}' to be hidden but it is visible. "
+        "MATTGPT-119: Filters toggle button should be hidden on desktop."
+    )
+
+
+@when(parsers.parse('the user clicks the "{label}" button'))
+def click_button_by_label(browser_page, label):
+    btn = browser_page.locator(
+        f"[class*='st-key-es_mobile_filters_toggle'] button:has-text('{label}')"
+    ).first
+    btn.wait_for(state="visible", timeout=30000)
+    btn.click()
+    browser_page.wait_for_load_state("networkidle")
+    browser_page.wait_for_timeout(SHORT_WAIT)
+
+
 @then("no story results should be shown")
 def no_story_results_shown(browser_page):
     """After a rejected query, the results area should be empty —
