@@ -322,23 +322,6 @@ if 'story' in st.query_params:
         st.rerun()
 
 # =========================
-# Deep-link handling: ?route=how-i-built[&from=<surface-slug>]
-# =========================
-# MATTGPT-102. The How I Built MattGPT surface is not in the main nav —
-# reached only via this URL deep-link (from Why Agy modal footer, Ask Agy
-# Landing Why Agy section, Profile signals panel, or external sharing).
-# The optional from param drives the context-aware back link rendered on
-# how_i_built.py; defaults to "My Profile" if missing.
-if 'route' in st.query_params and st.query_params['route'] == 'how-i-built':
-    if st.session_state.get('_deeplink_route') != 'how-i-built':
-        st.session_state['active_tab'] = 'How I Built'
-        from_slug = st.query_params.get('from')
-        if from_slug:
-            st.session_state['how_i_built_from'] = from_slug
-        st.session_state['_deeplink_route'] = 'how-i-built'
-        st.rerun()
-
-# =========================
 # Generic nav-link URL handler: ?nav=<surface-slug>
 # =========================
 # MATTGPT-102. Used by back-link anchors on secondary deep-link surfaces
@@ -358,9 +341,6 @@ if 'nav' in st.query_params:
     nav_slug = st.query_params['nav']
     if nav_slug in _NAV_SLUG_TO_TAB:
         st.session_state['active_tab'] = _NAV_SLUG_TO_TAB[nav_slug]
-        # Clear secondary-surface state so it doesn't follow the user back.
-        st.session_state.pop('how_i_built_from', None)
-        st.session_state.pop('_deeplink_route', None)
         # Clear the URL params so reload doesn't re-trigger.
         st.query_params.clear()
         st.rerun()
@@ -501,13 +481,6 @@ elif st.session_state["active_tab"] == "My Profile":
     from ui.pages.about_matt import render_about_matt
 
     render_about_matt()
-
-# --- HOW I BUILT MATTGPT (deep-link only, no main nav entry, MATTGPT-102) ---
-elif st.session_state["active_tab"] == "How I Built":
-    _clear_explore_state()
-    from ui.pages.how_i_built import render_how_i_built
-
-    render_how_i_built()
 
 # --- INVALID TAB FALLBACK ---
 else:

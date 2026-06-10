@@ -1329,7 +1329,7 @@ def apply_global_styles():
 /* =============================================================================
  * My Profile — prof-* visual language (MATTGPT-093)
  * New classes scoped to about_matt.py. Existing am-* classes (used by
- * how_i_built.py and other pages) are left untouched.
+ * other pages) are left untouched.
  * Where BDD tests reference am-* class names, about_matt.py dual-classes
  * elements — BDD locators find the am-* class, and prof-* CSS wins the
  * cascade because it is defined after the am-* block in this file.

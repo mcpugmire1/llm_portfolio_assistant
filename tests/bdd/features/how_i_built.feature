@@ -44,21 +44,6 @@ Feature: How I Built MattGPT deep-link surface (MATTGPT-102)
   # and post-click navigation for the return path. No st.session_state reads
   # per the BDD DOM-observable rule.
 
-  Scenario: URL deep-link renders the How I Built page
-    Given the user navigates to "/?route=how-i-built"
-    Then the "How I Built MattGPT" heading should be visible
-    And the "The Problem" deep-dive card should be visible
-
-  Scenario: Back link displays the origin surface when from param is provided
-    Given the user navigates to "/?route=how-i-built&from=ask-agy"
-    Then the back link should be visible
-    And the back link text should contain "Ask Agy"
-
-  Scenario: Back link defaults to My Profile when from param is missing
-    Given the user navigates to "/?route=how-i-built"
-    Then the back link should be visible
-    And the back link text should contain "My Profile"
-
   Scenario: My Profile page no longer contains the How I Built section
     Given the user navigates to the My Profile page
     Then the "How I Built MattGPT" heading should NOT be visible on the My Profile page
