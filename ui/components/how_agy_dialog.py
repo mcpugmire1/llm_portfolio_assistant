@@ -82,7 +82,11 @@ _CSS = """
 @media (max-width: 640px) {
     .desktop-only { display: none !important; }
     .mobile-only { display: block; font-size: 12px !important; color: var(--text-secondary); line-height: 1.8; padding: 10px 14px; }
-    .cards-row { grid-template-columns: 1fr; }
+    .cards-row { grid-template-columns: 1fr; margin-bottom: 8px; }
+    .search-card { padding: 10px !important; }
+    .result-wrapper { padding: 10px; }
+    .result-card { padding: 12px; }
+    .pipeline-summary { margin-bottom: 8px; }
     .result-title { font-size: 14px !important; }
     .result-desc { font-size: 12px !important; }
 }
@@ -158,7 +162,11 @@ def render_how_agy_dialog():
         """<script>
         (function scrollToTop() {
             var el = window.parent.document.querySelector('[role="dialog"]');
-            if (el) { el.scrollTop = 0; }
+            if (el) {
+                el.scrollTop = 0;
+                var stMain = window.parent.document.querySelector('[data-testid="stMain"]');
+                if (stMain) { stMain.scrollTop = 0; }
+            }
             else { setTimeout(scrollToTop, 50); }
         })();
         </script>""",
