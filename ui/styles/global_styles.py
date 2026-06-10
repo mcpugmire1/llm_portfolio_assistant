@@ -424,7 +424,7 @@ def apply_global_styles():
                 max-width: 100% !important;
             }
             /* Columns stack - except nav, results row, and landing input row */
-            div[data-testid="stHorizontalBlock"]:not(:has([class*="st-key-topnav_"])):not(:has([data-testid="stButtonGroup"])):not(:has(.st-key-landing_input)):not(:has([data-testid="stFormSubmitButton"])) {
+            div[data-testid="stHorizontalBlock"]:not(:has([class*="st-key-topnav_"])):not(:has([data-testid="stButtonGroup"])):not(:has(.st-key-landing_input)):not(:has([data-testid="stFormSubmitButton"])):not(:has([class*="st-key-r2_client_v2"])) {
                 flex-direction: column !important;
                 gap: 0 !important;
             }
@@ -439,7 +439,7 @@ def apply_global_styles():
                 min-width: 0 !important;
                 max-width: none !important;
             }
-            div[data-testid="stHorizontalBlock"]:not(:has([class*="st-key-topnav_"])):not(:has([data-testid="stButtonGroup"])):not(:has(.st-key-landing_input)):not(:has([data-testid="stFormSubmitButton"])) > div[data-testid="stColumn"] {
+            div[data-testid="stHorizontalBlock"]:not(:has([class*="st-key-topnav_"])):not(:has([data-testid="stButtonGroup"])):not(:has(.st-key-landing_input)):not(:has([data-testid="stFormSubmitButton"])):not(:has([class*="st-key-r2_client_v2"])) > div[data-testid="stColumn"] {
                 width: 100% !important;
                 min-width: 100% !important;
                 flex: 1 1 100% !important;
@@ -2119,10 +2119,12 @@ details[open]:has(.code-block) > summary::before {
     background: var(--bg-hover) !important;
 }
 
-/* Bottom-align all widgets in both filter rows */
-[class*="st-key-r2_row"] [data-testid="stHorizontalBlock"],
-[data-testid="stForm"] [data-testid="stHorizontalBlock"] {
+/* Bottom-align Row 2 widgets; center-align search form (MATTGPT-123: split from combined rule) */
+[class*="st-key-r2_row"] [data-testid="stHorizontalBlock"] {
     align-items: flex-end !important;
+}
+[data-testid="stForm"] [data-testid="stHorizontalBlock"] {
+    align-items: center !important;
 }
 
 /* Row 2 column gap — tighter than default 16px */
@@ -2156,6 +2158,134 @@ details[open]:has(.code-block) > summary::before {
     }
     [class*="st-key-r2_row_open"] {
         display: block !important;
+    }
+}
+
+/* ── MATTGPT-123: mobile filter layout compaction ── */
+@media (max-width: 767px) {
+    /* FIND STORIES: hide search form label */
+    [data-testid="stForm"] [data-testid="stWidgetLabel"] {
+        display: none !important;
+    }
+
+    /* INDUSTRY / CAPABILITY: label + dropdown inline on one row */
+    [class*="st-key-facet_industry_v"] [data-testid="stSelectbox"],
+    [class*="st-key-facet_capability_v"] [data-testid="stSelectbox"] {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 6px !important;
+    }
+    [class*="st-key-facet_industry_v"] [data-testid="stWidgetLabel"],
+    [class*="st-key-facet_capability_v"] [data-testid="stWidgetLabel"] {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        min-height: 0 !important;
+        font-size: 12px !important;
+        line-height: 1 !important;
+        margin-bottom: 0 !important;
+        white-space: nowrap !important;
+    }
+    [class*="st-key-facet_industry_v"] [data-testid="stSelectbox"] > div:last-child,
+    [class*="st-key-facet_capability_v"] [data-testid="stSelectbox"] > div:last-child {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+    }
+
+    /* ADVANCED FILTERS: hide labels — position in 3-col grid provides context */
+    [class*="st-key-r2_client_v"] [data-testid="stWidgetLabel"],
+    [class*="st-key-r2_role_v"] [data-testid="stWidgetLabel"],
+    [class*="st-key-r2_domain_v"] [data-testid="stWidgetLabel"] {
+        display: none !important;
+    }
+
+    /* ADVANCED FILTERS: inject field name via ::before on select control */
+    [class*="st-key-r2_client_v"] [data-baseweb="select"] > div:first-child::before {
+        content: "Client" !important;
+        font-size: 10px !important;
+        color: rgb(156, 163, 175) !important;
+        padding-left: 8px !important;
+        padding-right: 4px !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+    }
+    [class*="st-key-r2_role_v"] [data-baseweb="select"] > div:first-child::before {
+        content: "Role" !important;
+        font-size: 10px !important;
+        color: rgb(156, 163, 175) !important;
+        padding-left: 8px !important;
+        padding-right: 4px !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+    }
+    [class*="st-key-r2_domain_v"] [data-baseweb="select"] > div:first-child::before {
+        content: "Domain" !important;
+        font-size: 10px !important;
+        color: rgb(156, 163, 175) !important;
+        padding-left: 8px !important;
+        padding-right: 4px !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+    }
+
+    /* ADVANCED FILTERS: prevent ::before from crushing value div */
+    [class*="st-key-r2_client_v"] [data-baseweb="select"] > div:first-child,
+    [class*="st-key-r2_role_v"] [data-baseweb="select"] > div:first-child,
+    [class*="st-key-r2_domain_v"] [data-baseweb="select"] > div:first-child {
+        overflow: hidden !important;
+    }
+
+    /* ADVANCED FILTERS: 3-column grid (item 4 — column stacker excluded via 5th :not above) */
+    [class*="st-key-r2_row_open"] [data-testid="stHorizontalBlock"] {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr 1fr !important;
+        gap: 6px !important;
+        align-items: center !important;
+    }
+    [class*="st-key-r2_row_open"] [data-testid="stColumn"] {
+        min-width: 0 !important;
+        width: 100% !important;
+    }
+
+    /* COMPACT DROPDOWN PADDING (all filters) */
+    [class*="st-key-facet_"] [data-baseweb="select"] > div:first-child,
+    [class*="st-key-r2_"] [data-baseweb="select"] > div:first-child {
+        padding-top: 5px !important;
+        padding-bottom: 5px !important;
+    }
+
+    /* RESET FILTERS: demote to text link (item 3) */
+    [class*="st-key-r2_reset"] [data-testid="stBaseButton-secondary"] {
+        border: none !important;
+        background: transparent !important;
+        color: rgb(156, 163, 175) !important;
+        font-size: 11px !important;
+        padding: 2px 8px !important;
+        width: auto !important;
+        text-decoration: underline !important;
+        text-underline-offset: 2px !important;
+    }
+
+    /* FILTERS TOGGLE: full-width (item 1 — stLayoutWrapper ancestor also constrained) */
+    [class*="st-key-es_mobile_filters_toggle"] [data-testid="stLayoutWrapper"],
+    [class*="st-key-es_mobile_filters_toggle"] [data-testid="stElementContainer"],
+    [class*="st-key-es_mobile_filters_toggle"] [data-testid="stButton"],
+    [class*="st-key-es_mobile_filters_toggle"] button {
+        width: 100% !important;
+    }
+
+    /* TIGHTEN INTER-ROW GAP */
+    [data-testid="stVerticalBlock"]:has([class*="st-key-facet_"]) {
+        gap: 6px !important;
+    }
+    [data-testid="stForm"] {
+        margin-top: 3px !important;
+        margin-bottom: 0px !important;
+    }
+
+    /* SEARCH BUTTON: collapse hidden label gap in submit button column */
+    [data-testid="stForm"] [data-testid="stColumn"]:last-child [data-testid="stVerticalBlock"] {
+        gap: 0 !important;
     }
 }
 
