@@ -4,6 +4,15 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ---
 
+## June 2026
+
+### CSS Architecture
+
+**June 10 — Consolidate CSS to global_styles.py; fix rerun regression (MATTGPT-105)** — `191032b`
+All `st.markdown()` CSS injections across `footer.py`, `thinking_indicator.py`, `timeline_view.py`, `story_detail.py`, and `explore_stories.py` relocated to `global_styles.py` with `es-*` HTML class namespace. Eliminates the rerun garbage-collection bug where inline `<style>` blocks injected inside render functions were stripped from the DOM during Streamlit's mid-rerun pause. Also fixed a live production JS bug: the delegated click listener in `explore_stories.py` was still targeting `.fixed-height-card` after the HTML rename, silently breaking card clicks in Cards view. BDD selectors updated across 7 step-def files to match renamed HTML classes.
+
+---
+
 ## May 2026
 
 ### Documentation Alignment

@@ -2226,11 +2226,27 @@ became `.am-*` so they don't restyle Home / banking / story_detail /
 role_match (which share those class names with different intended styles).
 
 **Precedent:** chip CSS was relocated from `ui/components/category_cards.py`
-first; About Matt's full inline block was relocated under MATTGPT-068.
+first; About Matt's full inline block was relocated under MATTGPT-068;
+My Work / Explore Stories' full inline block was relocated under MATTGPT-105.
+
+**Applies within a single page too (MATTGPT-105):** The same stripping occurs
+during mid-rerun pauses *within the same page* — not only on page transitions.
+When `render_thinking_indicator()` fires on My Work (Cards view) after "Ask Agy
+About This", Streamlit partially replaces the DOM during its rerun pause. Inline
+`<style>` blocks injected inside the page's render functions are in the
+replacement window; `global_styles.py` is not, because `apply_global_styles()`
+runs at `app.py:43` before any render path executes.
+
+**Namespace convention (`es-*`):** When page-scoped CSS is relocated to
+`global_styles.py` it gains app-wide scope, so collision-prone class names must
+be prefixed. Pattern: `es-` for My Work/Explore Stories (`.es-fixed-height-card`,
+`.es-pagination`, `.es-results-count`, etc.). Apply the prefix to any class that
+previously had implicit page scope via inline injection.
 
 **Use when:** A page renders custom CSS AND a user action on it can navigate
 to a different page mid-rerun (any chip/button that sets `active_tab` and
-reruns).
+reruns), OR can trigger a rerun on the same page (thinking indicator, filter
+changes, pagination).
 
 ---
 

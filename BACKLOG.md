@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: 5d8ad22 -->
+<!-- last-backlog-sync: ad3b72f -->
 
 Work state for the MattGPT project. The matrix below is the scannable view. Detail blocks for each item follow, linked by ID. Completed items live in `CHANGELOG.md`. Architectural decisions live in `docs/ADR.md`. Current system state lives in `ARCHITECTURE.md`.
 
@@ -150,7 +150,6 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-102](#mattgpt-102) | How I Built MattGPT — `@st.dialog` modal (replaces standalone page; no back button, X to close) | Done | Medium | Action | May 30, 2026 |
 | [MATTGPT-103](#mattgpt-103) | Agy intro line — resolve "20+ years of work" inconsistency with stats bar (Years tile dropped) | Decided Against | Low | Refactor | May 30, 2026 |
 | [MATTGPT-104](#mattgpt-104) | Banking + Cross-Industry landing pages — math reconciliation bug (33 vs 32 vs 48 vs 57 inconsistency) | Done | Medium | Issue | May 30, 2026 |
-| [MATTGPT-105](#mattgpt-105) | Explore Stories — Cards / Timeline / Table views lose CSS styling during Streamlit rerun (same family as MATTGPT-068) | Open | Medium | Issue | May 30, 2026 |
 | [MATTGPT-106](#mattgpt-106) | Navbar desktop layout — add MattGPT brand element, restructure to space-between (align with mobile + wireframe) | Done | Medium | Action | May 30, 2026 |
 | [MATTGPT-107](#mattgpt-107) | Home category cards redesign — unify card treatment, 3-column grid, compact content (align with wireframe) | Done | Medium | Action | May 31, 2026 |
 | [MATTGPT-108](#mattgpt-108) | Home category cards — add capability-based counts to the 4 non-industry cards (resolve asymmetry from -107 / -104) | Open | Medium | Action | June 1, 2026 |
@@ -167,6 +166,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-119](#mattgpt-119) | My Work mobile — "Filters ▾" toggle to show/hide Row 2 (Client, Role, Domain) on mobile | Open | Medium | Action | June 8, 2026 |
 | [MATTGPT-120](#mattgpt-120) | CLAUDE.md restructure — Critical Rules fast-reference block + rules-first format throughout | Open | Medium | Action | June 9, 2026 |
 | [MATTGPT-121](#mattgpt-121) | Why Agy dialog — mobile layout fix (375px viewport); title font-size override pending DevTools selector confirmation | Open | Medium | Bug | June 9, 2026 |
+| [MATTGPT-122](#mattgpt-122) | My Work — Cards view BDD timing: test_view_switching_preserves_open_story_detail fails (components.html iframe listener not attached at click time) | Open | Low | Issue | June 10, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -2458,28 +2458,6 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 
 ---
 
-### MATTGPT-105
-**Explore Stories — Cards / Timeline / Table views lose CSS styling during Streamlit rerun (same family as MATTGPT-068)**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Issue
-- **Issue:** Clicking "Ask Agy About This" on a story card (Cards view) or the equivalent trigger on Timeline view causes the page to re-render with the "Chasing down the answer..." thinking-indicator dim, but the underlying card / timeline styling collapses alongside the dim — story cards lose their bordered containers, titles lose their styled positioning, the timeline structure flattens to plain text. The HTML structure survives but unstyled.
-- **Mechanism:** Same MATTGPT-068 family. Inline `<style>` blocks injected within render-function scope get garbage-collected from the DOM when the containing render scope is detached during Streamlit's rerun. The dim is the expected thinking-indicator state; the style-strip on top is the bug.
-- **Audience impact:** Visible visual regression during chat-triggering interactions. A recruiter or hiring manager clicking "Ask Agy About This" sees a styled page collapse to plain typography right before the chat transition completes. Undermines the polish the rest of the site projects.
-- **Discovered during:** May 30, 2026 MATTGPT-100 navigation label rename pass. User clicked "Ask Agy About This" on a Cards-view story; observed both the dim AND structural style loss. Verified the same pattern on Timeline view.
-- **Fix shape:** Relocate inline CSS to `ui/styles/global_styles.py`, which is re-injected on every rerun via `apply_global_styles()` in `app.py:43` at a stable position. Same fix shape as MATTGPT-068 (which relocated About Matt's page-local CSS for the same reason).
-- **Scope (3 render paths):**
-  - `ui/pages/explore_stories.py` — inline `<style>` blocks at lines 488, 644, 1761, 2229, 2293 (5+ injection sites covering both Table and Cards views)
-  - `ui/components/timeline_view.py:159` — inline `<style>` block (Timeline view)
-- **Effort:** Medium. Mechanical CSS relocation with namespacing for collision-prone classes (mirror -068's `.am-*` pattern — likely `.es-*` for Explore Stories). Risk: missing a selector reference during the move; need to verify all 3 views render correctly post-relocation.
-- **Cross-references:**
-  - **MATTGPT-068** — same fix pattern, applied to About Matt; canonical reference implementation. See its detail block + the in-code comment block at `ui/styles/global_styles.py:613-619` for the rationale.
-  - MATTGPT-065 — Explore Stories polish bundle; -105 is the same surface but a structural rendering concern, not polish
-- **Logged:** May 30, 2026
-
----
-
 ### MATTGPT-106
 **Navbar desktop layout — add MattGPT brand element, restructure to space-between (align with mobile + wireframe)**
 
@@ -2833,6 +2811,20 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
   - `[role="dialog"]` → `max-height: 88vh; overflow-y: auto` (safety net)
 - **Remaining:** Dialog title ("Hi, I'm Agy 🐾") still renders at 24px on mobile. Target is 20px. Selector is unknown — Streamlit renders the `@st.dialog` title as a `<p>` (not `<h2>`), but the exact selector was not confirmed via DevTools. `[role="dialog"] p:first-of-type` is risky (may match body paragraphs). Needs DevTools inspection to identify the correct selector before adding the title font-size override.
 - **Logged:** June 9, 2026
+
+---
+
+### MATTGPT-122
+**My Work — Cards view BDD timing failure: test_view_switching_preserves_open_story_detail**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Issue
+- **Issue:** `user_has_opened_specific_story` clicks a Cards view card via Playwright UI click, which must be caught by the `components.html` delegated JS listener to trigger the hidden `st.button`. After `wait_for_streamlit_rerun` (networkidle + 200ms), the listener may not yet be attached — the iframe is still loading — so the click goes unhandled, story detail never opens, and `verify_detail_open` asserts 0 headers.
+- **Evidence:** Fix 1 assert surfaced: "Detail panel never opened after card click — DOM had: 0 header(s)". Live app confirmed working (Chrome Claude's direct `element.click()` on the button bypassed the listener entirely). Playwright's UI click goes through the iframe listener path, racing the iframe setup.
+- **Fix shape:** After switching to Cards view, wait explicitly for the `components.html` iframe's JS to fire before clicking. Candidate: `wait_for_timeout(1000)` after cards appear, or wait for a zero-height `[data-testid='stCustomComponentV1']` iframe. Alternatively, add a retry loop around the click + wait_for_content.
+- **Note:** This test was never green before MATTGPT-105 — it always failed at an earlier step for different reasons. -105 advanced the failure mode to expose the timing issue. Not a -105 regression.
+- **Logged:** June 10, 2026
 
 ---
 
