@@ -424,11 +424,22 @@ def apply_global_styles():
                 max-width: 100% !important;
             }
             /* Columns stack - except nav, results row, and landing input row */
-            div[data-testid="stHorizontalBlock"]:not(:has([class*="st-key-topnav_"])):not(:has([data-testid="stButtonGroup"])):not(:has(.st-key-landing_input)) {
+            div[data-testid="stHorizontalBlock"]:not(:has([class*="st-key-topnav_"])):not(:has([data-testid="stButtonGroup"])):not(:has(.st-key-landing_input)):not(:has([data-testid="stFormSubmitButton"])) {
                 flex-direction: column !important;
                 gap: 0 !important;
             }
-            div[data-testid="stHorizontalBlock"]:not(:has([class*="st-key-topnav_"])):not(:has([data-testid="stButtonGroup"])):not(:has(.st-key-landing_input)) > div[data-testid="stColumn"] {
+            /* Search form: keep input+button inline.
+               flex-wrap: nowrap overrides Streamlit's base wrap rule. */
+            [data-testid="stForm"] [data-testid="stHorizontalBlock"] {
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+            }
+            [data-testid="stForm"] [data-testid="stColumn"]:last-child {
+                flex: 0 0 auto !important;
+                min-width: 0 !important;
+                max-width: none !important;
+            }
+            div[data-testid="stHorizontalBlock"]:not(:has([class*="st-key-topnav_"])):not(:has([data-testid="stButtonGroup"])):not(:has(.st-key-landing_input)):not(:has([data-testid="stFormSubmitButton"])) > div[data-testid="stColumn"] {
                 width: 100% !important;
                 min-width: 100% !important;
                 flex: 1 1 100% !important;
@@ -2084,7 +2095,6 @@ details[open]:has(.code-block) > summary::before {
 [class*="st-key-r2_role"] [data-baseweb="select"] > div:first-child,
 [class*="st-key-r2_domain"] [data-baseweb="select"] > div:first-child {
     padding: 5px 10px !important;
-    font-size: 12px !important;
 }
 
 /* Remove default top margin Streamlit adds to buttons in form/filter rows */
@@ -2120,10 +2130,32 @@ details[open]:has(.code-block) > summary::before {
     gap: 8px !important;
 }
 
-/* Mobile: hide row 2 entirely */
+/* Mobile Filters toggle button — visible only on mobile (MATTGPT-119) */
+[class*="st-key-es_mobile_filters_toggle"] {
+    display: none !important;
+}
+@media (max-width: 767px) {
+    [class*="st-key-es_mobile_filters_toggle"] {
+        display: block !important;
+    }
+    [class*="st-key-es_mobile_filters_toggle"] button {
+        font-size: 13px !important;
+        padding: 4px 12px !important;
+        background: transparent !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: 4px !important;
+        color: var(--text-secondary) !important;
+        box-shadow: none !important;
+    }
+}
+
+/* Mobile: hide row 2 by default; show when open (key swap, MATTGPT-119) */
 @media (max-width: 767px) {
     [class*="st-key-r2_row"] {
         display: none !important;
+    }
+    [class*="st-key-r2_row_open"] {
+        display: block !important;
     }
 }
 
@@ -2975,7 +3007,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_my_work_trigge
         }
 
         /* Filter columns layout */
-        [data-testid="stHorizontalBlock"]:has([class*="st-key-facet_"]) {
+        [data-testid="stHorizontalBlock"]:has([class*="st-key-facet_"]):not(:has([data-testid="stFormSubmitButton"])) {
             display: flex !important;
             flex-direction: row !important;
             flex-wrap: wrap !important;
@@ -3020,10 +3052,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_my_work_trigge
             margin: 0 !important;
         }
 
-        /* Search form: keep input+button inline; input takes available space */
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] {
-            flex-direction: row !important;
-        }
+        /* Search form column sizing — rule moved to mobile stacking block above (source-order fix) */
         [data-testid="stForm"] [data-testid="stColumn"]:first-child {
             flex: 1 1 auto !important;
             min-width: 0 !important;

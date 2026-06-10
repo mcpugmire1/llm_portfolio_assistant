@@ -819,8 +819,16 @@ def render_explore_stories(
                 "" if selected_capability == "All" else selected_capability
             )
 
-        # ROW 2 — always visible on desktop, hidden on mobile via CSS (MATTGPT-065)
-        with st.container(key="r2_row"):
+        # MOBILE FILTERS TOGGLE — shown only on mobile via CSS (MATTGPT-119)
+        is_r2_open = st.session_state.get("es_mobile_r2_open", False)
+        toggle_label = "Filters ▴" if is_r2_open else "Filters ▾"
+        if st.button(toggle_label, key="es_mobile_filters_toggle"):
+            st.session_state["es_mobile_r2_open"] = not is_r2_open
+            st.rerun()
+
+        # ROW 2 — always visible on desktop; on mobile shown/hidden via key swap (MATTGPT-065, MATTGPT-119)
+        r2_key = "r2_row_open" if is_r2_open else "r2_row"
+        with st.container(key=r2_key):
             c1, c2, c3, c4 = st.columns([1, 1, 1, 0.4])
 
             with c1:
