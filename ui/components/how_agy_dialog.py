@@ -51,26 +51,26 @@ _CSS = """
     --pill-bg: #374151;
     --pill-text: #E5E7EB;
 }
-.step-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+.step-header { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
 .step-num { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--accent-purple), var(--accent-purple-hover)); color: white; font-size: 20px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 12px rgba(139,92,246,0.4); }
 .step-title { font-size: 22px; font-weight: 700; color: var(--text-primary); margin: 0; }
 .step-content { margin-left: 58px; }
-.query-card { background: var(--bg-card); border: 2px solid var(--accent-purple-light); border-radius: 12px; padding: 20px 24px; font-style: italic; font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
-.flow-arrow { text-align: center; color: var(--accent-purple); font-size: 36px; margin: 16px 0; }
-.pipeline-flow { background: var(--bg-card); border: 2px solid var(--border-color); border-radius: 12px; padding: 14px 20px; display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+.query-card { background: var(--bg-card); border: 2px solid var(--accent-purple-light); border-radius: 12px; padding: 12px 20px; font-style: italic; font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+.flow-arrow { text-align: center; color: var(--accent-purple); font-size: 36px; line-height: 1; margin: 4px 0; }
+.pipeline-flow { background: var(--bg-card); border: 2px solid var(--border-color); border-radius: 12px; padding: 10px 20px; display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
 .pill-stage { padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; background: var(--bg-card); color: var(--text-secondary); border: 1px solid var(--border-color); }
 .pill-arrow { color: var(--text-secondary); font-size: 11px; opacity: 0.5; }
 .cards-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
 .search-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 16px; box-shadow: var(--card-shadow); }
-.search-card.hero { border: 2px solid var(--accent-purple); box-shadow: 0 4px 14px rgba(139,92,246,0.15); padding: 20px; margin-bottom: 12px; }
+.search-card.hero { border: 2px solid var(--accent-purple); box-shadow: 0 4px 14px rgba(139,92,246,0.15); padding: 16px; margin-bottom: 12px; }
 .card-title { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
 .search-card.hero .card-title { font-size: 15px; }
 .card-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
 .search-card.hero .card-desc { font-size: 13px; }
-.result-wrapper { border: 3px solid var(--accent-purple); border-radius: 12px; padding: 20px; box-shadow: 0 6px 18px rgba(139,92,246,0.2); }
+.result-wrapper { border: 3px solid var(--accent-purple); border-radius: 12px; padding: 14px; box-shadow: 0 6px 18px rgba(139,92,246,0.2); }
 .result-card { background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 10px; padding: 18px; margin-bottom: 16px; }
-.result-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
-.result-desc { font-size: 14px; opacity: 0.95; line-height: 1.6; }
+.result-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+.result-desc { font-size: 12px; opacity: 0.95; line-height: 1.6; }
 .pills-row { display: flex; gap: 8px; flex-wrap: wrap; }
 .tag { padding: 6px 12px; border-radius: 18px; font-size: 12px; font-weight: 500; }
 .tag-purple { background: var(--accent-purple-bg); color: var(--accent-purple); }
