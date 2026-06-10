@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: 40aeb8e -->
+<!-- last-backlog-sync: 9a55fbd -->
 
 Work state for the MattGPT project. The matrix below is the scannable view. Detail blocks for each item follow, linked by ID. Completed items live in `CHANGELOG.md`. Architectural decisions live in `docs/ADR.md`. Current system state lives in `ARCHITECTURE.md`.
 
@@ -8,9 +8,6 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-06-09)
 
 **NOW** (UI redesign sprint — merge to `main` + production deploy):
-
-*Bundle 3 — Retirement + housekeeping:*
-- **-116** — Retire how_i_built.py standalone route
 
 *Bundle 4 — Role Match UX:*
 - **-066** — Sample JD cold-start
@@ -32,6 +29,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 - **-097** — Career-intent refresh (active recruiter failure earns NOW slot)
 
 *Recently shipped (off NOW list):*
+- **MATTGPT-116** — Resolved June 2026. Retired how_i_built.py standalone route (superseded by dialog). Removed ?route=how-i-built handler + elif render block from app.py; deleted standalone page; updated feature file (3 route scenarios removed, 5 dialog scenarios passing). Items 2+3 (viewport revert) resolved as no-op — revert prescription was wrong, test passing, mobile detection correct. (`9a55fbd`)
 - **MATTGPT-123** — Resolved June 2026. My Work mobile filter layout compaction. Industry/Capability inline label+dropdown; Client/Role/Domain 3-col grid, labels hidden, field names via `::before`; Reset as underlined text link; Filters toggle full-width. CSS-only (`global_styles.py`). 4/4 BDD passing (`40aeb8e`).
 - **MATTGPT-118** — Resolved June 2026. My Profile Copy snippet + Download PDF (referrer workflow). Delegated parentDoc listener + navigator.clipboard; hidden st.button bridge + window.open/print. 20/20 BDD passing (`983a86d`).
 - **MATTGPT-093** — Resolved June 2026. My Profile visual-language reconciliation. 19/19 BDD passing (`4bbdb26`).
@@ -148,7 +146,6 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-113](#mattgpt-113) | Ask Agy landing — mobile polish pass (seed question chips + header height + button placement) | Open | Medium | Action | June 4, 2026 |
 | [MATTGPT-114](#mattgpt-114) | Page header typography — standardize title + subtitle via shared CSS classes across all 7 surfaces | Open | Medium | Refactor | June 5, 2026 |
 | [MATTGPT-115](#mattgpt-115) | Lock icon — browser console warning: password field not in native form (st.popover portal breaks form containment) | Open | Low | Issue | June 6, 2026 |
-| [MATTGPT-116](#mattgpt-116) | Evaluate retiring how_i_built.py standalone route — superseded by How I Built dialog | Open | Low | Refactor | June 6, 2026 |
 | [MATTGPT-117](#mattgpt-117) | How I Built dialog — BDD coverage for "See It In Action" prompt buttons and Ask Agy routing | Resolved | Medium | Action | June 7, 2026 |
 | [MATTGPT-118](#mattgpt-118) | My Profile — Copy snippet + Download PDF buttons (referrer workflow) | Done | Medium | Action | June 8, 2026 |
 | [MATTGPT-120](#mattgpt-120) | CLAUDE.md restructure — Critical Rules fast-reference block + rules-first format throughout | Open | Medium | Action | June 9, 2026 |
@@ -2635,50 +2632,6 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 - **Logged:** June 5, 2026
 
 ---
-
-### MATTGPT-116
-**Evaluate and close: standalone route retirement, DevTools limitation, viewport revert pair**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Refactor
-- **All three items are "evaluate and close" — no urgency, deferred June 7, 2026.**
-
----
-
-**Item 1: Retire how_i_built.py standalone route**
-
-- **Background:** `ui/pages/how_i_built.py` was the original standalone deep-link surface for "How I Built MattGPT", accessible via `?route=how_i_built`. MATTGPT-102 introduced `ui/components/how_i_built_dialog.py` as an `@st.dialog` overlay triggered by footer buttons across all surfaces. The dialog has fully superseded the standalone page as the user-facing entry point.
-- **Finding (June 6, 2026):** No button, link, card, or footer in the current app generates `?route=how_i_built`. The only code that references the route is the handler in `app.py:508-510` itself. The `dialog_mode: bool = False` param added to `render_how_i_built()` in the MATTGPT-102 Green commit was written to suppress the back link when called from the dialog — but `how_i_built_dialog.py` has its own complete standalone implementation and never calls `render_how_i_built()`. The param is unused.
-- **Scope if retired:**
-  1. Delete `ui/pages/how_i_built.py`
-  2. Remove `?route=how_i_built` handler from `app.py` (~lines 331-362, 508-510)
-  3. Remove `dialog_mode` param from `render_how_i_built()` (now unreachable)
-  4. Update `ARCHITECTURE.md` file listing
-- **Risk:** Low — no UI surfaces it. Could be reached via a bookmarked or shared direct URL, but that's an edge case with graceful degradation (app.py would fall through to default route).
-
----
-
-**Item 2: DevTools mobile simulation limitation + one known failing BDD test**
-
-- **Background:** `test_desktop_shows_full_interface` is currently failing (confirmed June 7, 2026). Root cause: `app.py` commit `d4354fc` switched viewport capture from `screen.width` to `window.innerWidth` with a new key (`screen_size_capture`). With the old key, `_browser_screen_size` resolved before Playwright reached Role Match. With the new key it doesn't — `screen_width` is `""`, the race guard (`not screen_width or int(screen_width) < 1024`) fires, workspace never renders.
-- **DevTools limitation (separate):** The session-once capture pattern in `app.py` means resizing in DevTools after initial load never updates `_browser_screen_size`. The `window.innerWidth` change does not fix this — it's a session-once architectural limitation. DevTools mobile simulation remains unreliable for the Role Match gate regardless of which expression is used.
-- **Acceptable short-term:** One failing test while today's session focuses on My Profile and Role Match UI (unrelated to mobile gate).
-
----
-
-**Item 3: Two-file revert pair (app.py + global_styles.py)**
-
-- **CRITICAL pairing rule:** `app.py` and `global_styles.py` changed together in commit `d4354fc`. They MUST revert together. `app.py` references the new iframe key (`screen_size_capture`) which is excluded from the stIFrame collapse rule in `global_styles.py` via `:not([class*="st-key-screen_size_capture"])`. Reverting only `app.py` leaves an orphaned CSS exclusion; reverting only `global_styles.py` collapses the active capture iframe. Always revert both in a single commit.
-- **Revert scope (two files only):**
-  - `app.py`: restore `js_expressions="String(window.screen.width)"` and `key="__screen_size__"`
-  - `global_styles.py`: restore prior stIFrame collapse rule (remove `screen_size_capture` exclusion)
-  - `role_match.py` race guard: **DO NOT revert** — `not screen_width or int(screen_width) < 1024` is the correct production fix for the Streamlit Cloud empty-string case (April 2026). Reverting it re-introduces the false-positive mobile gate bug.
-- **After revert:** Run `test_desktop_shows_full_interface` in isolation to confirm passes before committing.
-- **Logged:** June 7, 2026
-
----
-
 ### MATTGPT-117
 **How I Built dialog — BDD coverage for "See It In Action" prompt buttons and Ask Agy routing**
 
