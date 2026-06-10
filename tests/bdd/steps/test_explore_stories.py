@@ -1392,6 +1392,39 @@ def domain_filter_visible(browser_page):
     assert el.is_visible(), "Domain filter (r2_domain) not visible on desktop"
 
 
+@then("the Industry filter label should be visible")
+def industry_filter_label_visible(browser_page):
+    # MATTGPT-123: _v2 key required — Green will need Python key bump on the Industry selectbox
+    el = browser_page.locator(
+        "[class*='st-key-facet_industry_v2'] [data-testid='stWidgetLabel']"
+    ).first
+    assert el.is_visible(), (
+        "Industry filter label not visible — MATTGPT-123: inline label may not be rendering. "
+        "Check that the stForm label-hide rule is not catching this element."
+    )
+
+
+@then("the Capability filter label should be visible")
+def capability_filter_label_visible(browser_page):
+    # MATTGPT-123: _v2 key required — Green will need Python key bump on the Capability selectbox
+    el = browser_page.locator(
+        "[class*='st-key-facet_capability_v2'] [data-testid='stWidgetLabel']"
+    ).first
+    assert el.is_visible(), (
+        "Capability filter label not visible — MATTGPT-123: inline label may not be rendering. "
+        "Check that the stForm label-hide rule is not catching this element."
+    )
+
+
+@then("the Reset filters button should be visible")
+def reset_filters_button_visible(browser_page):
+    el = browser_page.locator("[class*='st-key-r2_reset'] button").first
+    assert el.is_visible(), (
+        "Reset filters button not visible — MATTGPT-123: text-link styling may be "
+        "accidentally hiding the element instead of just restyling it."
+    )
+
+
 @then("the row 2 filter bar should not be visible")
 def row2_filter_bar_hidden(browser_page):
     el = browser_page.locator("[class*='st-key-r2_row']").first
