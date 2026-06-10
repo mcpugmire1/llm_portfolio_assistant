@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: 6590450 -->
+<!-- last-backlog-sync: 40aeb8e -->
 
 Work state for the MattGPT project. The matrix below is the scannable view. Detail blocks for each item follow, linked by ID. Completed items live in `CHANGELOG.md`. Architectural decisions live in `docs/ADR.md`. Current system state lives in `ARCHITECTURE.md`.
 
@@ -8,10 +8,6 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-06-09)
 
 **NOW** (UI redesign sprint — merge to `main` + production deploy):
-
-*Bundle 2 — Explore Stories cleanup:*
-- **-064** — AgGrid row hover
-- **-119** — My Work mobile Filters toggle
 
 *Bundle 3 — Retirement + housekeeping:*
 - **-116** — Retire how_i_built.py standalone route
@@ -36,6 +32,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 - **-097** — Career-intent refresh (active recruiter failure earns NOW slot)
 
 *Recently shipped (off NOW list):*
+- **MATTGPT-123** — Resolved June 2026. My Work mobile filter layout compaction. Industry/Capability inline label+dropdown; Client/Role/Domain 3-col grid, labels hidden, field names via `::before`; Reset as underlined text link; Filters toggle full-width. CSS-only (`global_styles.py`). 4/4 BDD passing (`40aeb8e`).
 - **MATTGPT-118** — Resolved June 2026. My Profile Copy snippet + Download PDF (referrer workflow). Delegated parentDoc listener + navigator.clipboard; hidden st.button bridge + window.open/print. 20/20 BDD passing (`983a86d`).
 - **MATTGPT-093** — Resolved June 2026. My Profile visual-language reconciliation. 19/19 BDD passing (`4bbdb26`).
 - **MATTGPT-098** — Shipped May 29, 2026. Explore Stories default state — exclude Professional Narrative + sort Start_Date desc.
@@ -157,7 +154,6 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-120](#mattgpt-120) | CLAUDE.md restructure — Critical Rules fast-reference block + rules-first format throughout | Open | Medium | Action | June 9, 2026 |
 | [MATTGPT-121](#mattgpt-121) | Why Agy dialog — mobile layout fix (375px viewport); title font-size override pending DevTools selector confirmation | Open | Medium | Bug | June 9, 2026 |
 | [MATTGPT-122](#mattgpt-122) | My Work — Cards view BDD timing: test_view_switching_preserves_open_story_detail fails (components.html iframe listener not attached at click time) | Open | Low | Issue | June 10, 2026 |
-| [MATTGPT-123](#mattgpt-123) | My Work mobile — filter layout compaction (inline labels, 3-col grid, Reset as text link) | Open | Medium | Action | June 10, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -2757,151 +2753,6 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 - **Fix shape:** After switching to Cards view, wait explicitly for the `components.html` iframe's JS to fire before clicking. Candidate: `wait_for_timeout(1000)` after cards appear, or wait for a zero-height `[data-testid='stCustomComponentV1']` iframe. Alternatively, add a retry loop around the click + wait_for_content.
 - **Note:** This test was never green before MATTGPT-105 — it always failed at an earlier step for different reasons. -105 advanced the failure mode to expose the timing issue. Not a -105 regression.
 - **Logged:** June 10, 2026
-
----
-
-### MATTGPT-123
-**My Work mobile — filter layout compaction (inline labels, 3-col grid, Reset as text link)**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Action
-- **Context:** MATTGPT-119 ships the Filters ▾ toggle. This ticket compacts the layout inside the open Row 2 panel. Target: Industry/Capability as label + dropdown on one row; Client/Role/Domain as a 3-column grid with `::before` injected field names; Reset demoted to underlined text link; Filters toggle full-width.
-- **Scope:** `global_styles.py` — additions to the `@media (max-width: 767px)` block only. No Python changes required. The `::before` label approach keeps "All" as the actual `<option>` value; `matches_filters` logic is untouched.
-
-**CSS to add inside `@media (max-width: 767px)`:**
-
-```css
-/* ── FIND STORIES: hide label ── */
-[data-testid="stForm"] [data-testid="stWidgetLabel"] {
-  display: none !important;
-}
-
-/* ── INDUSTRY / CAPABILITY: label + dropdown inline ── */
-[class*="st-key-facet_industry_v2"] [data-testid="stSelectbox"],
-[class*="st-key-facet_capability_v2"] [data-testid="stSelectbox"] {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  gap: 6px !important;
-}
-[class*="st-key-facet_industry_v2"] [data-testid="stWidgetLabel"],
-[class*="st-key-facet_capability_v2"] [data-testid="stWidgetLabel"] {
-  flex: 0 0 auto !important;
-  width: auto !important;
-  min-height: 0 !important;
-  font-size: 12px !important;
-  line-height: 1 !important;
-  margin-bottom: 0 !important;
-  white-space: nowrap !important;
-}
-[class*="st-key-facet_industry_v2"] [data-testid="stSelectbox"] > div:last-child,
-[class*="st-key-facet_capability_v2"] [data-testid="stSelectbox"] > div:last-child {
-  flex: 1 1 auto !important;
-  min-width: 0 !important;
-}
-
-/* ── ADVANCED FILTERS: hide Streamlit labels (replaced by ::before) ── */
-[class*="st-key-r2_client_v2"] [data-testid="stWidgetLabel"],
-[class*="st-key-r2_role_v2"] [data-testid="stWidgetLabel"],
-[class*="st-key-r2_domain_v2"] [data-testid="stWidgetLabel"] {
-  display: none !important;
-}
-
-/* ── ADVANCED FILTERS: inject field name into select control ── */
-[class*="st-key-r2_client_v2"] [data-baseweb="select"] > div:first-child::before {
-  content: "Client" !important;
-  font-size: 10px !important;
-  color: rgb(156, 163, 175) !important;
-  padding-left: 8px !important;
-  padding-right: 4px !important;
-  white-space: nowrap !important;
-  flex-shrink: 0 !important;
-}
-[class*="st-key-r2_role_v2"] [data-baseweb="select"] > div:first-child::before {
-  content: "Role" !important;
-  font-size: 10px !important;
-  color: rgb(156, 163, 175) !important;
-  padding-left: 8px !important;
-  padding-right: 4px !important;
-  white-space: nowrap !important;
-  flex-shrink: 0 !important;
-}
-[class*="st-key-r2_domain_v2"] [data-baseweb="select"] > div:first-child::before {
-  content: "Domain" !important;
-  font-size: 10px !important;
-  color: rgb(156, 163, 175) !important;
-  padding-left: 8px !important;
-  padding-right: 4px !important;
-  white-space: nowrap !important;
-  flex-shrink: 0 !important;
-}
-
-/* ── ADVANCED FILTERS: 3-column grid layout ── */
-[class*="st-key-r2_row_open"] [data-testid="stHorizontalBlock"] {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr 1fr !important;
-  gap: 6px !important;
-  align-items: center !important;
-}
-[class*="st-key-r2_row_open"] [data-testid="stColumn"] {
-  min-width: 0 !important;
-  width: 100% !important;
-}
-
-/* ── COMPACT DROPDOWN PADDING (all filters) ── */
-[class*="st-key-facet_"] [data-baseweb="select"] > div:first-child,
-[class*="st-key-r2_"] [data-baseweb="select"] > div:first-child {
-  padding-top: 5px !important;
-  padding-bottom: 5px !important;
-}
-
-/* ── TIGHTEN INTER-ROW GAP ── */
-[data-testid="stVerticalBlock"]:has([class*="st-key-facet_"]) {
-  gap: 6px !important;
-}
-[data-testid="stForm"] {
-  margin-bottom: 0px !important;
-}
-
-/* ── SEARCH BUTTON: nudge up to align with input midpoint ── */
-[data-testid="stFormSubmitButton"] button {
-  margin-top: -3px !important;
-}
-```
-
-**Punch list — 4 items requiring DevTools DOM inspection before writing final CSS:**
-
-1. **Filters toggle button not full-width** — `width: 100%` on the button itself isn't enough; intermediate parent containers constrain it. Walk up from the Filters button via DevTools (`parentElement` chain) to find which ancestor is constraining width (`stElementContainer` or `stButton` wrapper likely needs `width: 100%` too). Target that container.
-
-2. **Stray character in Role (and Client/Domain) dropdown** — `::before` injects the label correctly but the SVG chevron's `<title>open</title>` may leak text into the rendered output. Run `document.querySelector('[class*="st-key-r2_role_v2"] [data-baseweb="select"]').innerHTML` in DevTools to confirm. If confirmed, add to all three advanced filters:
-   ```css
-   [class*="st-key-r2_"] [data-baseweb="select"] svg title {
-     display: none !important;
-   }
-   ```
-
-3. **Reset filters button selector** — Confirmed DOM chain: `data-testid="stBaseButton-secondary"` on `<button>`, `data-testid="stButton"` on wrapper, `data-testid="stElementContainer"` + `class="st-key-r2_reset"` on container. Verify `[class*="st-key-r2_reset"] [data-testid="stBaseButton-secondary"]` matches in DevTools before committing:
-   ```css
-   [class*="st-key-r2_reset"] [data-testid="stBaseButton-secondary"] {
-     border: none !important;
-     background: transparent !important;
-     color: rgb(156, 163, 175) !important;
-     font-size: 11px !important;
-     padding: 2px 8px !important;
-     width: auto !important;
-     text-decoration: underline !important;
-     text-underline-offset: 2px !important;
-   }
-   ```
-
-4. **Column-stacker `@media` exclusion for r2 hblock** — The existing column-stacker rule at `@media (max-width: 768px)` will catch the `r2_row_open` hblock and override the grid. Add a 5th `:not()` clause using `r2_client_v2` as the discriminator: `:not(:has([class*="st-key-r2_client_v2"]))`. Confirm via `document.querySelector('[class*="st-key-r2_row_open"] [data-testid="stHorizontalBlock"]')` in DevTools before finalizing.
-
-- **BDD required before implementation** — Red (scenarios) → Red (step defs) → Green.
-- **Logged:** June 10, 2026
-
----
-
 ### MATTGPT-120
 **CLAUDE.md restructure — Critical Rules fast-reference block + rules-first format throughout**
 

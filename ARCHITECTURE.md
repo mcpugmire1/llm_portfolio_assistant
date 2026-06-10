@@ -1244,18 +1244,15 @@ with st.container(key="r2_row"):
         F["clients"] = [] if sel_client == "All" else [sel_client]
 ```
 
-**CSS mobile-hide pattern** (in `global_styles.py`):
-```css
-@media (max-width: 767px) {
-    [class*="st-key-r2_row"] { display: none !important; }
-}
-```
+**CSS mobile pattern** (in `global_styles.py`):
+
+- `[class*="st-key-r2_row"]` hidden on mobile; `[class*="st-key-r2_row_open"]` shown when toggle is active (MATTGPT-119, shipped June 2026).
+- `es_mobile_filters_toggle` button (full-width) sits between Row 1 and Row 2, toggles `es_mobile_r2_open` session state (MATTGPT-119).
+- Row 2 on mobile: 3-column grid, Streamlit labels hidden, field names injected via `::before` pseudo-element on the select control (MATTGPT-123, shipped June 2026).
 
 **Widget key versioning:** Row 2 selectboxes use `key=f"r2_{field}_v{version}"` so the Reset button can force a widget rebuild by incrementing `st.session_state["_widget_version_clients"]` (and `_roles`, `_domains` equivalents). Without versioning, Streamlit re-uses the old widget value even after session state is cleared.
 
 **`F["clients"]` is always a list:** `matches_filters()` expects `F["clients"]` to be `[]` (all) or `["Capital One"]` (filtered). Never set it to a bare string — this breaks the IN-list logic in `utils/filters.py`.
-
-**MATTGPT-119 (backlog):** Mobile "Filters ▾" toggle to reveal/hide Row 2 on small viewports. Row 2 is CSS-hidden on mobile until that ships.
 
 ### Known Limitations
 
@@ -2281,6 +2278,28 @@ initial load, post-CSS-parse, and post-Streamlit-rerun iframe recreation.
 
 **Precedent:** `ui/pages/explore_stories.py` Table view render path
 (`3a5e1bc`, `6590450` — June 2026).
+
+---
+
+### Pattern 6: Mobile Column Stacker — Exclusion Maintenance
+
+`global_styles.py` contains a mobile CSS rule that forces all `stHorizontalBlock` elements to stack vertically on screens ≤767px. Any horizontal block that must remain horizontal on mobile requires a `:not(:has(...))` exclusion added to **both** the `stHorizontalBlock` rule and the `> div[data-testid="stColumn"]` child rule (same exclusion chain on both).
+
+**Current exclusions (5 total, ~line 427):**
+```css
+div[data-testid="stHorizontalBlock"]
+  :not(:has([class*="st-key-topnav_"]))           /* navbar */
+  :not(:has([data-testid="stButtonGroup"]))        /* button groups */
+  :not(:has(.st-key-landing_input))               /* Ask MattGPT landing input */
+  :not(:has([data-testid="stFormSubmitButton"]))   /* Explore Stories search form */
+  :not(:has([class*="st-key-r2_client_v2"])) {    /* Row 2 advanced filter grid */
+    flex-direction: column !important;
+}
+```
+
+**Rule:** When a new horizontal block must stay horizontal on mobile, add a 6th `:not(:has(...))` clause using a selector that uniquely identifies a child of that block. Update both the `stHorizontalBlock` rule and the `> div[data-testid="stColumn"]` child rule.
+
+**Maintenance note:** The `r2_client_v2` exclusion matches the `_v2` versioned widget key at the time of writing. If widget versioning bumps (e.g., `_v3` after a Reset), this selector becomes stale and the column stacker will re-capture the grid. Consider widening to `[class*="st-key-r2_client_v"]` if versioning is expected to increment.
 
 ---
 
