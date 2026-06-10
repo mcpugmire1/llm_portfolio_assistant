@@ -356,6 +356,37 @@ Feature: My Work
     Then the row 2 filter bar should not be visible
     And a button with text containing "Filters ▾" should be visible
 
+  # MATTGPT-123 — Mobile filter layout compaction
+  # =============================================================================
+
+  Scenario: Industry and Capability labels visible inline on mobile
+    Given the user navigates to the My Work page
+    When the viewport is resized to 375px wide
+    Then the Industry filter label should be visible
+    And the Capability filter label should be visible
+
+  Scenario: Advanced filter dropdowns all accessible in Row 2 on mobile
+    Given the user navigates to the My Work page
+    When the viewport is resized to 375px wide
+    And the user clicks the "Filters ▾" button
+    Then the Client filter should be visible
+    And the Role filter should be visible
+    And the Domain filter should be visible
+
+  Scenario: Reset filters visible when Row 2 is open on mobile
+    Given the user navigates to the My Work page
+    When the viewport is resized to 375px wide
+    And the user clicks the "Filters ▾" button
+    Then the Reset filters button should be visible
+
+  Scenario: Desktop regression — Row 2 layout unaffected at 1280px
+    Given the user navigates to the My Work page
+    And the viewport width is 1280px
+    Then the Client filter should be visible
+    And the Role filter should be visible
+    And the Domain filter should be visible
+    And the Industry filter label should be visible
+
   # Regression guard for May 23, 2026 finding: explore_stories.py passes the
   # raw nonsense_check category (e.g., "jokes_riddles") to render_no_match_banner
   # but the BANNER_COPY branching in utils/ui_helpers.py expects the
