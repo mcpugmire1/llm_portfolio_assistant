@@ -460,3 +460,35 @@ Feature: Role Match page
     Then the page contains "Best experienced on desktop"
     And the page contains "Role Match requires a wider screen to display the two-column layout."
     And the textarea is not visible
+
+  # MATTGPT-067 — Input controls and post-result CTA
+
+  Scenario: Match button is disabled when the JD textarea is empty
+    Given I navigate to the Role Match page
+    When the JD textarea is empty
+    Then the "Match this role 🐾" button is disabled
+
+  Scenario: Match button enables when JD text is entered
+    Given I navigate to the Role Match page
+    When I type a job description into the textarea
+    Then the "Match this role 🐾" button is enabled
+
+  Scenario: Clear button is not visible when textarea is empty
+    Given I navigate to the Role Match page
+    Then no "Clear" button is visible
+
+  Scenario: Clear button is visible when textarea contains text
+    Given I navigate to the Role Match page
+    And the JD textarea contains text
+    Then a "Clear" button is visible
+
+  Scenario: Clicking clear empties the textarea and disables the match button
+    Given I navigate to the Role Match page
+    And the JD textarea contains text
+    When I click the "Clear" button
+    Then the JD textarea is empty
+    And the "Match this role 🐾" button is disabled
+
+  Scenario: No follow-up CTA is visible before submission
+    Given I navigate to the Role Match page
+    Then no follow-up CTA is visible

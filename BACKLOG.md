@@ -215,6 +215,38 @@ Each detail block uses these fields. Not every field is required for every item.
 - Set via Streamlit Cloud dashboard → Settings → Secrets, NOT committed to repo.
 - Local dev uses inline env var or shell export (e.g. `MATTGPT_PRIVATE_BYPASS_TOKEN=test-bypass-token streamlit run app.py`); production uses the Streamlit Cloud secret manager.
 
+**Private overlay spec update (June 11, 2026)**
+- Wireframe v3 separates empty state (-066) and public populated state (-067) as distinct frames. Private state frame (-012) is preserved and labeled. The following supplements the Phase 4 spec with private overlay content logic.
+
+**Evaluation grid — open design decision**
+- Current wireframe: 2×2 grid, 4 equal-weight tiles (Overall fit / Recommendation / Comp alignment / Work mode).
+- Problem: Overall fit and Recommendation are decisions. Comp alignment and Work mode are prerequisites. Equal visual weight misrepresents the hierarchy.
+- Options: (A) Keep 2×2 as-is. (B) 2-tile top row (Overall fit + Recommendation) + logistics row (Comp alignment + Work mode) at reduced visual weight. Option B communicates the decision/prerequisite split.
+- **Decision needed before implementation.**
+
+**Strategic fit notes — content logic**
+- Purpose: "so what" interpretation layer above the raw match data — why this role is or isn't a fit beyond the requirement checklist.
+- Content categories: domain alignment signal (depth vs adjacent); scale/pattern parallels (where Matt's proof points map to role needs); gap contextualization (explainable vs blocking vs irrelevant).
+- Inputs: match results + Opportunity Filter dimensions + How I Work and Lead positioning docs.
+- Output shape: 2–4 prose bullets per assessment, generated per JD (not hardcoded).
+
+**Action items — content logic**
+- Purpose: concrete next steps if Matt decides to pursue. Decision support, not assessment.
+- Content categories: channel recommendation (direct / network / referral); prep recommendations (which stories to lead with, which materials to create); network activation (connections at company from Notion target list); corrective actions (which asset type to fix per the six-type framework when a gap is addressable).
+- Inputs: match results + company/role metadata + network data (Notion) + corrective actions framework.
+- Output shape: 2–4 actionable bullets per assessment, generated per JD.
+
+**Open: LLM-generated vs rule-based**
+- Strategic fit notes → fully LLM-generated (requires synthesis across match data + positioning docs).
+- Action items → partially rule-based: channel + network activation rule-based from Notion data; prep recommendations LLM-augmented.
+- **Decision needed before implementation.**
+
+**Public vs private state contract**
+- Public (recruiter) sees: results header, legend, summary block, per-requirement cards with evidence chips and gap notes, post-result "Ask Agy a follow-up" CTA.
+- Private (Matt authenticated) sees: everything in public, plus "My evaluation" block above summary: evaluation grid tiles, strategic fit notes, action items. Purple-tinted block with "PRIVATE · MATT ONLY" badge.
+- Comp alignment tile → private only. Verdict/recommendation (Apply/Consider/Pass) → private only.
+- Lock icon: `ti-lock` (closed) in public state; `ti-lock-open` (open) in private state with purple-tinted active state.
+
 ---
 
 ### MATTGPT-014
@@ -1119,37 +1151,38 @@ Chip 3 wording "How does Matt manage resistance when leading enterprise transfor
 ---
 
 ### MATTGPT-066
-**Role Match — Sample JD / "Try a sample role" cold-start affordance**
+**Role Match — Demo fixture / "See it in action" empty-state affordance**
 
 - **Status:** Open
 - **Priority:** Medium
 - **Type:** Action
-- **Issue:** Empty Role Match page (`role_match.py:1294-1300`) shows only a hint paragraph + textarea with placeholder `"Paste job description here..."`. A recruiter arriving speculatively — without a specific JD in hand — has nothing to engage with. Highest-impact cold-start fix on this page per May 15 UX assessment.
-- **Fix:** Add 1-3 sample JD buttons below the textarea. Clicking pre-fills the textarea via prefilter pattern (set `st.session_state["role_match_jd_input"]` BEFORE the textarea renders to avoid `StreamlitAPIException`).
+- **Issue:** Empty Role Match page shows only a hint paragraph + textarea. An exploratory visitor arriving to see what the tool does — not with a JD in hand — has nothing to engage with.
+- **Fix:** Add a single "See it in action →" button below the textarea. Clicking pre-fills the textarea with one composite demo JD via prefilter pattern.
+- **Scope revision (June 11, 2026):** Original framing ("1-3 sample JDs for recruiters") replaced. One well-crafted composite JD showcases the tool's full range better than multiple thin samples. Audience reframed from "recruiters" to "exploratory visitors." Single button over a button row.
+- **Status:** Parked pending demo JD content from Matt. Implementation is straightforward once the composite JD text is available.
 - **Implementation notes:**
-  - Define sample JD strings as a module-level constant (e.g., `SAMPLE_JDS = {"Director of Platform Engineering": "...", ...}`). Drift-prone if inlined per CLAUDE.md "no hardcoded enums."
-  - Use prefilter pattern (see `banking_landing.py` → `explore_stories.py` for cross-state reference).
-  - Optional alternative: widget-key versioning if the prefilter approach hits Streamlit state issues.
-- **Effort:** ~30-50 lines, single file. Risk: medium — widget state ordering is the gotcha.
-- **Audience impact:** Direct conversion improvement for speculative recruiter visits (Director/VP recruiters who arrive to "see what the tool does" before they have a specific role). Removes the empty-state barrier for first-time visitors.
+  - Define demo JD as a module-level constant `DEMO_JD` in `role_match.py`. Single string, not a dict.
+  - Use prefilter pattern (see `banking_landing.py` → `explore_stories.py`).
+- **Effort:** ~10-15 lines, single file. Blocker: JD content.
 - **Logged:** May 15, 2026
+- **Revised:** June 11, 2026
 
 ---
 
 ### MATTGPT-067
-**Role Match — Result panel and input polish bundle**
+**Role Match — Input controls and post-result CTA polish bundle**
 
 - **Status:** Open
 - **Priority:** Low
 - **Type:** Action
 - **Items (all in `ui/pages/role_match.py`):**
-  - **Loading message** — `render_thinking_indicator()` at line 1330 is called bare → uses random dog-themed phrases from `THINKING_MESSAGES`. Pass specific message: `render_thinking_indicator(message="Agy is reviewing over 100 stories…")`. Function already accepts a `message` parameter (see `thinking_indicator.py:39`). ~1 line. Aligns with MATTGPT-019 "Over 100" copy standard.
-  - **Post-result follow-up CTA** — `_render_results_panel` ends after the Preferred section (line 628) with no follow-up affordance. Add "Ask Agy a follow-up →" link/button that navigates to Ask MattGPT. ~10-15 lines.
-  - **Disabled state on empty textarea** — submit button (line 1303) is always enabled; current behavior shows `st.warning("Paste a job description first.")` on empty click (line 1324). Replace with `disabled=not jd_text.strip()` (pattern at `ui/pages/ask_mattgpt/landing_view.py:225-231`). ~2 lines.
-  - **Clear textarea button** — no native Streamlit clear control. Add a small "Clear" button rendered BEFORE the textarea; on click pops `role_match_jd_input` from session_state. Must render before textarea per Streamlit widget state rules. ~5-10 lines.
-- **Story count copy:** Use "over 100" per MATTGPT-019's "Over 100" standard, not "130+".
-- **Effort:** ~20-30 lines total, single file. Natural pair with MATTGPT-066 (same area, same audience).
+  - **Disabled state on empty textarea** — submit button is always enabled; current behavior shows `st.warning("Paste a job description first.")` on empty click. Replace with `disabled=not jd_text.strip()` (pattern at `ui/pages/ask_mattgpt/landing_view.py:225-231`). ~2 lines.
+  - **Clear textarea button** — no native Streamlit clear control. Add a "Clear" button rendered BEFORE the textarea; on click pops `role_match_jd_input` from session_state. Must render before textarea per Streamlit widget state rules. Visible only when textarea contains text (wireframe: no clear button in empty state). ~5-10 lines.
+  - **Post-result follow-up CTA** — `_render_results_panel` ends after the Preferred section with no follow-up affordance. Add "Ask Agy a follow-up →" button that navigates to Ask MattGPT. Exact placement and label to be confirmed by Chrome Claude wireframe diff. ~10-15 lines.
+- **Dropped (June 11, 2026):** Loading message — random dog phrases from `THINKING_MESSAGES` are on-brand; no change needed.
+- **Effort:** ~20-25 lines total, single file.
 - **Logged:** May 15, 2026
+- **Revised:** June 11, 2026
 
 ---
 

@@ -760,6 +760,55 @@ def test_new_tab_does_not_inherit():
     pass
 
 
+# --- MATTGPT-067 scenario bindings ---
+
+
+@scenario(
+    "../features/role_match.feature",
+    "Match button is disabled when the JD textarea is empty",
+)
+def test_match_button_disabled_when_empty():
+    pass
+
+
+@scenario(
+    "../features/role_match.feature", "Match button enables when JD text is entered"
+)
+def test_match_button_enables_with_text():
+    pass
+
+
+@scenario(
+    "../features/role_match.feature",
+    "Clear button is not visible when textarea is empty",
+)
+def test_clear_button_hidden_when_empty():
+    pass
+
+
+@scenario(
+    "../features/role_match.feature",
+    "Clear button is visible when textarea contains text",
+)
+def test_clear_button_visible_with_text():
+    pass
+
+
+@scenario(
+    "../features/role_match.feature",
+    "Clicking clear empties the textarea and disables the match button",
+)
+def test_clear_empties_textarea_and_disables_button():
+    pass
+
+
+@scenario(
+    "../features/role_match.feature", "No follow-up CTA is visible before submission"
+)
+def test_no_followup_cta_before_submission():
+    pass
+
+
 # --- GIVEN steps (Phase 4 slice 1) ---
 
 
