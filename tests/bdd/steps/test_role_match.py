@@ -194,10 +194,6 @@ def test_action_buttons_hidden_without_results():
 # =============================================================================
 
 
-@pytest.mark.skip(
-    reason="Contradicts implementation — button is intentionally always enabled. "
-    "Empty submissions show a warning. Update feature file to match."
-)
 @scenario("../features/role_match.feature", "Empty text area disables the match button")
 def test_empty_text_area_disables_button():
     pass
@@ -668,6 +664,13 @@ def _read_lock_glyph(page) -> str:
 
 
 # --- Scenario bindings ---
+_LOCK_SKIP_REASON = (
+    "Lock icon hidden from public view pending MATTGPT-012 Phase 4 private overlay. "
+    "Re-enable when lock CSS hide is removed and private view ships."
+)
+
+
+@pytest.mark.skip(reason=_LOCK_SKIP_REASON)
 @scenario(
     "../features/role_match.feature",
     "Lock icon is visible on the Role Match results panel",
@@ -676,16 +679,19 @@ def test_lock_icon_visible_on_results_panel():
     pass
 
 
+@pytest.mark.skip(reason=_LOCK_SKIP_REASON)
 @scenario("../features/role_match.feature", "Clicking lock icon opens password popover")
 def test_clicking_lock_opens_popover():
     pass
 
 
+@pytest.mark.skip(reason=_LOCK_SKIP_REASON)
 @scenario("../features/role_match.feature", "Correct password unlocks private view")
 def test_correct_password_unlocks():
     pass
 
 
+@pytest.mark.skip(reason=_LOCK_SKIP_REASON)
 @scenario(
     "../features/role_match.feature", "Incorrect password does not unlock private view"
 )
@@ -693,16 +699,19 @@ def test_incorrect_password_keeps_locked():
     pass
 
 
+@pytest.mark.skip(reason=_LOCK_SKIP_REASON)
 @scenario("../features/role_match.feature", "Private mode persists within session")
 def test_private_mode_persists():
     pass
 
 
+@pytest.mark.skip(reason=_LOCK_SKIP_REASON)
 @scenario("../features/role_match.feature", "Empty password submission is a no-op")
 def test_empty_password_no_op():
     pass
 
 
+@pytest.mark.skip(reason=_LOCK_SKIP_REASON)
 @scenario(
     "../features/role_match.feature",
     "Wrong password followed by correct password still unlocks",
@@ -711,11 +720,13 @@ def test_retry_after_wrong_unlocks():
     pass
 
 
+@pytest.mark.skip(reason=_LOCK_SKIP_REASON)
 @scenario("../features/role_match.feature", "Password input is masked")
 def test_password_input_masked():
     pass
 
 
+@pytest.mark.skip(reason=_LOCK_SKIP_REASON)
 @scenario(
     "../features/role_match.feature", "Lock glyph reflects __private_mode__ state"
 )
@@ -723,6 +734,7 @@ def test_lock_glyph_reflects_state():
     pass
 
 
+@pytest.mark.skip(reason=_LOCK_SKIP_REASON)
 @scenario(
     "../features/role_match.feature", "Clicking the unlocked icon re-locks the session"
 )
@@ -750,11 +762,13 @@ def test_lock_icon_hidden_on_mobile():
     pass
 
 
+@pytest.mark.skip(reason=_LOCK_SKIP_REASON)
 @scenario("../features/role_match.feature", "Browser refresh re-locks the session")
 def test_refresh_relocks():
     pass
 
 
+@pytest.mark.skip(reason=_LOCK_SKIP_REASON)
 @scenario("../features/role_match.feature", "New tab does not inherit unlocked state")
 def test_new_tab_does_not_inherit():
     pass
@@ -1182,7 +1196,7 @@ def then_no_rate_limit(browser_page):
 # MATTGPT-067 — Input controls and post-result CTA step definitions
 # =============================================================================
 
-ROLE_MATCH_CLEAR_SELECTOR = ".st-key-role_match_clear button"
+ROLE_MATCH_CLEAR_SELECTOR = '[class*="st-key-role_match_clear"] button'
 ROLE_MATCH_FOLLOWUP_CTA_PARTIAL = "Have questions about the results"
 
 _SAMPLE_JD = (
@@ -1204,13 +1218,15 @@ def when_textarea_is_empty(browser_page):
 @when("I type a job description into the textarea")
 def when_type_jd_into_textarea(browser_page):
     browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.fill(_SAMPLE_JD)
-    browser_page.wait_for_timeout(SHORT_WAIT)
+    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.press("Tab")
+    wait_for_streamlit_rerun(browser_page)
 
 
 @given("the JD textarea contains text")
 def given_textarea_contains_text(browser_page):
     browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.fill(_SAMPLE_JD)
-    browser_page.wait_for_timeout(SHORT_WAIT)
+    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.press("Tab")
+    wait_for_streamlit_rerun(browser_page)
 
 
 @then('the "Match this role 🐾" button is disabled')
@@ -1257,3 +1273,16 @@ def then_no_followup_cta_visible(browser_page):
         f"button:has-text('{ROLE_MATCH_FOLLOWUP_CTA_PARTIAL}')"
     ).count()
     assert count == 0, f"Expected no follow-up CTA before submission, found {count}"
+
+
+# Step defs for pre-existing "Empty text area disables the match button" scenario
+@given("the text area is empty")
+def given_text_area_is_empty(browser_page):
+    value = browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.input_value()
+    assert value == "", f"Expected empty textarea on page load, got: {value!r}"
+
+
+@then('the "Match this role" button is disabled')
+def then_match_role_button_disabled_no_emoji(browser_page):
+    btn = browser_page.locator(ROLE_MATCH_SUBMIT_SELECTOR).first
+    assert btn.is_disabled(), "Expected 'Match this role' button to be disabled"

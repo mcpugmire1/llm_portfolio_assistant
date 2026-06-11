@@ -8,6 +8,7 @@ Architecture: See ADR 016 and services/jd_assessor.py
 """
 
 import html
+from pathlib import Path
 from urllib.parse import urlencode
 
 import streamlit as st
@@ -674,6 +675,13 @@ def _render_results_section(
                     )
 
 
+_DEMO_JD_PATH = Path(__file__).parent.parent.parent / "data" / "demo_jd.txt"
+
+
+def _load_demo_jd() -> str:
+    return _DEMO_JD_PATH.read_text(encoding="utf-8").strip()
+
+
 def render_role_match(stories: list[dict]):
     """Render the Role Match page.
 
@@ -774,6 +782,36 @@ def render_role_match(stories: list[dict]):
 div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_role_match_trigger"]) {
     display: none !important;
 }
+[class*="st-key-lock_icon"] {
+    display: none !important;
+}
+/* Clear and demo JD — st.button styled as text links */
+[class*="st-key-role_match_clear"] button,
+[class*="st-key-role_match_demo_jd"] button {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    cursor: pointer !important;
+}
+[class*="st-key-role_match_clear"] button {
+    color: var(--text-secondary) !important;
+    font-size: 12px !important;
+}
+[class*="st-key-role_match_clear"] button:hover,
+[class*="st-key-role_match_demo_jd"] button:hover {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    text-decoration: underline !important;
+}
+[class*="st-key-role_match_demo_jd"] button {
+    color: var(--accent-purple) !important;
+}
 </style>
 """,
         unsafe_allow_html=True,
@@ -792,7 +830,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_role_match_tri
         </div>
         <div class="conversation-header-text">
             <h1>Role Match</h1>
-            <p>Drop a job description — Agy shows where Matt fits, and where he doesn't.</p>
+            <p>Agy shows where Matt fits, and where he doesn't.</p>
         </div>
     </div>
 </div>
@@ -991,6 +1029,14 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
     color: var(--text-secondary);
     line-height: 1.5;
     margin: 0 0 16px 0 !important;
+    padding: 0;
+}
+.role-match-demo-hint {
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 8px 0 0 0 !important;
     padding: 0;
 }
 /* The left column's vertical block has `gap: 0` to keep the textarea
@@ -1341,28 +1387,68 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
             # Hint text — plain secondary-color, sits above the textarea.
             # Per role_match_mockup_v2.html, the hint lives in the LEFT
             # column only and is NOT duplicated in the right column.
+            if st.session_state.pop("role_match_load_demo", False):
+                st.session_state["role_match_jd_input"] = _load_demo_jd()
+            if st.session_state.pop("role_match_clear_flag", False):
+                st.session_state["role_match_jd_input"] = ""
+                st.session_state.pop("role_match_matched_jd", None)
+
+            jd_preview = st.session_state.get("role_match_jd_input", "")
             st.markdown(
-                '<p class="role-match-jd-hint">'
-                "Paste a job description below. Agy will match each "
-                "requirement and you can click any chip to explore the story."
-                "</p>",
+                '<p class="role-match-jd-hint">Paste a job description below.</p>',
                 unsafe_allow_html=True,
             )
+            if jd_preview.strip():
+                if st.button("✕ Clear", key="role_match_clear"):
+                    st.session_state["role_match_clear_flag"] = True
+                    st.rerun()
 
             jd_text = st.text_area(
                 "Job description",
                 height=400,
-                placeholder="Paste job description here...",
                 key="role_match_jd_input",
                 label_visibility="collapsed",
             )
 
+            matched_jd = st.session_state.get("role_match_matched_jd", "")
+            has_results = bool(st.session_state.get("role_match_result"))
+            if not jd_text.strip():
+                btn_label, btn_type, btn_disabled = (
+                    "Match this role 🐾",
+                    "primary",
+                    True,
+                )
+            elif has_results and jd_text.strip() == matched_jd:
+                btn_label, btn_type, btn_disabled = (
+                    "Update Match 🐾",
+                    "secondary",
+                    False,
+                )
+            elif has_results:
+                btn_label, btn_type, btn_disabled = "Update Match 🐾", "primary", False
+            else:
+                btn_label, btn_type, btn_disabled = (
+                    "Match this role 🐾",
+                    "primary",
+                    False,
+                )
+
             with st.container(key="role_match_submit"):
                 submit_clicked = st.button(
-                    "Match this role 🐾",
-                    type="primary",
+                    btn_label,
+                    type=btn_type,
                     use_container_width=True,
+                    disabled=btn_disabled,
                 )
+
+            if not jd_text.strip():
+                st.markdown(
+                    '<p class="role-match-demo-hint">Don\'t have a job description handy?</p>',
+                    unsafe_allow_html=True,
+                )
+                if st.button("Try an example →", key="role_match_demo_jd"):
+                    st.session_state["role_match_load_demo"] = True
+                    st.rerun()
 
         # ----- RIGHT: results area — Agy thinking indicator during processing, results or empty state otherwise -----
         with results_col:
@@ -1377,80 +1463,78 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
                 render_lock_icon()
 
             # Process click first so the thinking indicator appears before results render
-            if submit_clicked:
-                if not jd_text.strip():
-                    st.warning("Paste a job description first.")
-                else:
-                    # Match the Ask Agy pattern: st.empty() container + render_thinking_indicator()
-                    # The indicator is a fixed-position overlay so it covers the whole viewport.
-                    loading_container = st.empty()
-                    with loading_container:
-                        render_thinking_indicator()
-                    try:
-                        from services.jd_assessor import run_assessment
+            if submit_clicked and jd_text.strip():
+                # Match the Ask Agy pattern: st.empty() container + render_thinking_indicator()
+                # The indicator is a fixed-position overlay so it covers the whole viewport.
+                loading_container = st.empty()
+                with loading_container:
+                    render_thinking_indicator()
+                try:
+                    from services.jd_assessor import run_assessment
 
-                        result = run_assessment(jd_text, stories)
-                        st.session_state["role_match_result"] = result
-                        # Persist the JD text in a NON-widget session key so
-                        # we can restore the textarea after a navigation away
-                        # and back. Streamlit garbage-collects widget state
-                        # for widgets that aren't currently in the page tree
-                        # (e.g., when the user navigates to Home), but
-                        # role_match_result survives because it's a regular
-                        # session_state key. Without this persisted copy the
-                        # user comes back to an empty textarea sitting next
-                        # to populated results — a confusing inconsistency.
-                        st.session_state["role_match_jd_persisted"] = jd_text
-                        st.session_state.pop("role_match_error", None)
-                    except Exception as e:  # noqa: BLE001
-                        st.session_state["role_match_error"] = str(e)
-                        st.session_state.pop("role_match_result", None)
-                    finally:
-                        loading_container.empty()
+                    result = run_assessment(jd_text, stories)
+                    st.session_state["role_match_result"] = result
+                    st.session_state["role_match_matched_jd"] = jd_text.strip()
+                    # Persist the JD text in a NON-widget session key so
+                    # we can restore the textarea after a navigation away
+                    # and back. Streamlit garbage-collects widget state
+                    # for widgets that aren't currently in the page tree
+                    # (e.g., when the user navigates to Home), but
+                    # role_match_result survives because it's a regular
+                    # session_state key. Without this persisted copy the
+                    # user comes back to an empty textarea sitting next
+                    # to populated results — a confusing inconsistency.
+                    st.session_state["role_match_jd_persisted"] = jd_text
+                    st.session_state.pop("role_match_error", None)
+                except Exception as e:  # noqa: BLE001
+                    st.session_state["role_match_error"] = str(e)
+                    st.session_state.pop("role_match_result", None)
+                finally:
+                    loading_container.empty()
 
-                    # Log OUTSIDE try/except so a logging failure can't
-                    # interfere with the assessment result. Only log when
-                    # a result was successfully stored.
-                    if st.session_state.get("role_match_result"):
-                        from services.query_logger import (
-                            is_bot,
-                            log_role_match_assessment,
+                # Log OUTSIDE try/except so a logging failure can't
+                # interfere with the assessment result. Only log when
+                # a result was successfully stored.
+                if st.session_state.get("role_match_result"):
+                    from services.query_logger import (
+                        is_bot,
+                        log_role_match_assessment,
+                    )
+
+                    if not is_bot():
+                        result = st.session_state["role_match_result"]
+                        extraction = result.get("extraction") or {}
+                        results_list = result.get("results") or []
+                        log_role_match_assessment(
+                            role_title=extraction.get("role_title") or "",
+                            company=extraction.get("company") or "",
+                            jd_format=extraction.get("jd_format") or "",
+                            required_count=sum(
+                                1
+                                for r in results_list
+                                if r.get("category") == "required"
+                            ),
+                            preferred_count=sum(
+                                1
+                                for r in results_list
+                                if r.get("category") == "preferred"
+                            ),
+                            strong_count=sum(
+                                1
+                                for r in results_list
+                                if r.get("match_status") == "strong"
+                            ),
+                            partial_count=sum(
+                                1
+                                for r in results_list
+                                if r.get("match_status") == "partial"
+                            ),
+                            gap_count=sum(
+                                1
+                                for r in results_list
+                                if r.get("match_status") == "gap"
+                            ),
                         )
-
-                        if not is_bot():
-                            result = st.session_state["role_match_result"]
-                            extraction = result.get("extraction") or {}
-                            results_list = result.get("results") or []
-                            log_role_match_assessment(
-                                role_title=extraction.get("role_title") or "",
-                                company=extraction.get("company") or "",
-                                jd_format=extraction.get("jd_format") or "",
-                                required_count=sum(
-                                    1
-                                    for r in results_list
-                                    if r.get("category") == "required"
-                                ),
-                                preferred_count=sum(
-                                    1
-                                    for r in results_list
-                                    if r.get("category") == "preferred"
-                                ),
-                                strong_count=sum(
-                                    1
-                                    for r in results_list
-                                    if r.get("match_status") == "strong"
-                                ),
-                                partial_count=sum(
-                                    1
-                                    for r in results_list
-                                    if r.get("match_status") == "partial"
-                                ),
-                                gap_count=sum(
-                                    1
-                                    for r in results_list
-                                    if r.get("match_status") == "gap"
-                                ),
-                            )
             # Render: error → results → empty state, in priority order
             if st.session_state.get("role_match_error"):
                 st.markdown(
@@ -1461,12 +1545,19 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
                 )
             elif st.session_state.get("role_match_result"):
                 _render_results_panel(st.session_state["role_match_result"], stories)
+                if st.session_state["role_match_result"].get("results"):
+                    if st.button(
+                        "Have questions about the results? Ask Agy →",
+                        key="role_match_followup_cta",
+                    ):
+                        st.session_state["active_tab"] = "Ask Agy"
+                        st.rerun()
             else:
                 st.markdown(
                     """
                     <div style="display: flex; align-items: center; justify-content: center; min-height: 400px;">
                         <p style="color: var(--text-secondary); font-size: 16px; text-align: center; margin: 0; font-family: inherit;">
-                            Agy will match each requirement to Matt's career stories.
+                            Agy will map each requirement to Matt's real project experience.
                         </p>
                     </div>
                     """,
