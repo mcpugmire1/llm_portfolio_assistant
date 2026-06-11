@@ -1176,3 +1176,84 @@ def then_no_rate_limit(browser_page):
     assert "🔓" in glyph, (
         "Retry should succeed — no rate-limit lockout. " f"Got glyph: {glyph!r}"
     )
+
+
+# =============================================================================
+# MATTGPT-067 — Input controls and post-result CTA step definitions
+# =============================================================================
+
+ROLE_MATCH_CLEAR_SELECTOR = ".st-key-role_match_clear button"
+ROLE_MATCH_FOLLOWUP_CTA_PARTIAL = "Have questions about the results"
+
+_SAMPLE_JD = (
+    "Director of Engineering — platform modernization and cloud-native transformation."
+)
+
+
+@given("I navigate to the Role Match page")
+def given_navigate_to_role_match_page(browser_page, app_url):
+    _navigate_to_role_match(browser_page, app_url)
+
+
+@when("the JD textarea is empty")
+def when_textarea_is_empty(browser_page):
+    value = browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.input_value()
+    assert value == "", f"Expected empty textarea on initial load, got: {value!r}"
+
+
+@when("I type a job description into the textarea")
+def when_type_jd_into_textarea(browser_page):
+    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.fill(_SAMPLE_JD)
+    browser_page.wait_for_timeout(SHORT_WAIT)
+
+
+@given("the JD textarea contains text")
+def given_textarea_contains_text(browser_page):
+    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.fill(_SAMPLE_JD)
+    browser_page.wait_for_timeout(SHORT_WAIT)
+
+
+@then('the "Match this role 🐾" button is disabled')
+def then_match_button_disabled(browser_page):
+    btn = browser_page.locator(ROLE_MATCH_SUBMIT_SELECTOR).first
+    assert btn.is_disabled(), "Expected 'Match this role 🐾' button to be disabled"
+
+
+@then('the "Match this role 🐾" button is enabled')
+def then_match_button_enabled(browser_page):
+    btn = browser_page.locator(ROLE_MATCH_SUBMIT_SELECTOR).first
+    assert btn.is_enabled(), "Expected 'Match this role 🐾' button to be enabled"
+
+
+@then('no "Clear" button is visible')
+def then_no_clear_button_visible(browser_page):
+    count = browser_page.locator(ROLE_MATCH_CLEAR_SELECTOR).count()
+    assert count == 0, f"Expected no Clear button in empty state, found {count}"
+
+
+@then('a "Clear" button is visible')
+def then_clear_button_visible(browser_page):
+    btn = browser_page.locator(ROLE_MATCH_CLEAR_SELECTOR).first
+    assert (
+        btn.is_visible()
+    ), "Expected 'Clear' button to be visible when textarea has text"
+
+
+@when('I click the "Clear" button')
+def when_click_clear_button(browser_page):
+    browser_page.locator(ROLE_MATCH_CLEAR_SELECTOR).first.click()
+    wait_for_streamlit_rerun(browser_page)
+
+
+@then("the JD textarea is empty")
+def then_textarea_is_empty(browser_page):
+    value = browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.input_value()
+    assert value == "", f"Expected empty textarea after clear, got: {value!r}"
+
+
+@then("no follow-up CTA is visible")
+def then_no_followup_cta_visible(browser_page):
+    count = browser_page.locator(
+        f"button:has-text('{ROLE_MATCH_FOLLOWUP_CTA_PARTIAL}')"
+    ).count()
+    assert count == 0, f"Expected no follow-up CTA before submission, found {count}"
