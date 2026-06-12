@@ -162,6 +162,7 @@ def get_header_css() -> str:
             text-align: left !important;
             gap: 10px !important;
             flex-wrap: wrap !important;
+            position: relative;
             justify-content: center !important;
         }
 
@@ -175,6 +176,9 @@ def get_header_css() -> str:
         .header-text h1 {
             font-size: 20px !important;
             margin-bottom: 4px !important;
+            white-space: nowrap !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
         }
 
         .header-text p {
@@ -193,9 +197,10 @@ def get_header_css() -> str:
         }
 
         .ask-header-conversation .how-agy-btn {
-            margin-bottom: -4px !important;
-            position: relative !important;
-            top: -7px !important;
+            position: absolute !important;
+            top: 2px !important;
+            right: 16px !important;
+            margin: 0 !important;
 
         }
 
@@ -212,14 +217,14 @@ def get_header_css() -> str:
         }
 
         .how-agy-btn {
-                order: 3;
-                width: auto !important;
-                min-width: unset !important;
-                padding: 8px 14px !important;
-                font-size: 12px !important;
-                margin-bottom: 4px !important;
-                align-self: center !important;
-            }
+            position: absolute !important;
+            top: 1px !important;
+            right: 16px !important;
+            font-size: 10px !important;
+            padding: 4px 8px !important;
+            margin: 0 !important;
+        }
+
     }
 
     /* ============================================================================
