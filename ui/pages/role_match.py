@@ -14,6 +14,7 @@ from urllib.parse import urlencode
 import streamlit as st
 
 from scripts.utils import slugify
+from services.role_match_summary import build_discussion_points, compute_summary_counts
 from ui.components.action_buttons import (
     get_action_buttons_css,
     get_action_buttons_html,
@@ -175,7 +176,7 @@ def _render_requirement_card(
                 st.markdown(
                     '<div class="role-match-profile-evidence">'
                     '<span class="role-match-verified-dot"></span>'
-                    f" Verified profile · {relevance}"
+                    f" Verified skill · {relevance}"
                     "</div>",
                     unsafe_allow_html=True,
                 )
@@ -424,6 +425,54 @@ def _build_export_html(result_payload: dict) -> str:
     required_html = _render_section("Required Qualifications", required)
     preferred_html = _render_section("Preferred Qualifications", preferred)
 
+    # Summary section — appears above requirements in the export
+    _ex_counts = compute_summary_counts(results)
+    _ex_points = build_discussion_points(results)
+    _ex_rc = _ex_counts["required"]
+    _ex_pc = _ex_counts["preferred"]
+
+    def _ex_count_line(label: str, c: dict) -> str:
+        parts = []
+        if c["strong"] > 0:
+            parts.append(f'{c["strong"]} ✓ strong')
+        if c["partial"] > 0:
+            parts.append(f'{c["partial"]} ~ partial')
+        if c["gap"] > 0:
+            parts.append(f'{c["gap"]} ✗ gap')
+        return f"{label}: {', '.join(parts)}" if parts else ""
+
+    _ex_count_lines = [
+        line
+        for line in [
+            _ex_count_line("Required", _ex_rc),
+            _ex_count_line("Preferred", _ex_pc),
+        ]
+        if line
+    ]
+    _ex_dp_count = sum(
+        1
+        for p in _ex_points
+        if not p.get("is_overflow_indicator") and not p.get("is_zero_case")
+    )
+    _ex_point_rows = []
+    for _pt in _ex_points:
+        if _pt.get("is_zero_case"):
+            _ex_point_rows.append(f'<li>{html.escape(_pt["text"])}</li>')
+        elif _pt.get("is_overflow_indicator"):
+            _ex_point_rows.append(f'<li><em>{html.escape(_pt["text"])}</em></li>')
+        else:
+            _ex_point_rows.append(
+                f'<li><strong>{html.escape(_pt["label_type"])}</strong> — {html.escape(_pt["text"])}</li>'
+            )
+    summary_export_html = (
+        '<div class="summary-section">'
+        '<h2 class="section-title">SUMMARY</h2>'
+        f'<p class="summary-counts">{"  |  ".join(_ex_count_lines)}</p>'
+        f'<p><strong>Discussion points ({_ex_dp_count})</strong></p>'
+        f'<ul>{"".join(_ex_point_rows)}</ul>'
+        "</div>"
+    )
+
     return f"""
         <!DOCTYPE html>
         <html>
@@ -434,6 +483,8 @@ def _build_export_html(result_payload: dict) -> str:
                 h1 {{ color: #1F2937; font-size: 24px; margin-bottom: 4px; }}
                 .meta {{ color: #6B7280; font-size: 14px; margin-bottom: 24px; }}
                 .section-title {{ color: #8B5CF6; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin: 24px 0 12px 0; }}
+                .summary-section {{ margin-bottom: 24px; padding: 16px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 8px; }}
+                .summary-counts {{ font-size: 13px; color: #6B7280; margin: 0 0 8px 0; }}
                 .req {{ display: flex; gap: 10px; align-items: center; margin: 0 0 4px 0; padding: 12px 0 0 0; }}
                 .req-text {{ font-size: 14px; font-weight: 500; color: #1F2937; line-height: 1.45; margin: 0; padding: 0; }}
                 /* Status badge — explicit margin/padding zero and line-height
@@ -452,6 +503,7 @@ def _build_export_html(result_payload: dict) -> str:
         <body>
             <h1>Role Match — {role}</h1>
             <div class="meta">{header_meta}</div>
+            {summary_export_html}
             {required_html}
             {preferred_html}
         </body>
@@ -575,17 +627,96 @@ def _render_results_panel(result_payload: dict, stories: list[dict]) -> None:
         # divider
         '<span style="width:1px;height:14px;background:var(--border-color);'
         'display:inline-block;"></span>'
-        # 🔗 = clickable story
+        # 🔗 = project evidence
         '<div style="display:inline-flex;align-items:center;gap:6px;">'
-        "🔗 = clickable story</div>"
-        # ● = profile evidence
+        "🔗 = project evidence</div>"
+        # ● = verified skill
         '<div style="display:inline-flex;align-items:center;gap:6px;">'
         '<span style="width:8px;height:8px;border-radius:50%;'
         'background:var(--success-color);display:inline-block;"></span>'
-        " = profile evidence</div>"
+        " = verified skill</div>"
         "</div>"
     )
     st.markdown(legend_html, unsafe_allow_html=True)
+
+    # Summary block — counts line + discussion points, between legend and sections.
+    _counts = compute_summary_counts(results)
+    _points = build_discussion_points(results)
+    _rc = _counts["required"]
+    _pc = _counts["preferred"]
+    # --success-color is in global_styles.py; --warning-color/--error-color are not → keep fallbacks.
+    _gs = "color:var(--success-color);font-weight:600;"
+    _ga = "color:var(--warning-color,#F59E0B);font-weight:600;"
+    _gr = "color:var(--error-color,#EF4444);font-weight:600;"
+
+    def _count_spans(c: dict) -> str:
+        """Render colored count spans, omitting any count that is zero."""
+        parts = []
+        if c["strong"] > 0:
+            parts.append(
+                f'<span class="count-strong" style="{_gs}">{c["strong"]} ✓</span>'
+            )
+        if c["partial"] > 0:
+            parts.append(
+                f'<span class="count-partial" style="{_ga}">{c["partial"]} ~</span>'
+            )
+        if c["gap"] > 0:
+            parts.append(f'<span class="count-gap" style="{_gr}">{c["gap"]} ✗</span>')
+        return "&nbsp;".join(parts)
+
+    _req_spans = _count_spans(_rc)
+    _pref_spans = _count_spans(_pc)
+    _section_parts = []
+    if _req_spans:
+        _section_parts.append(f"Required:&nbsp;{_req_spans}")
+    if _pref_spans:
+        _section_parts.append(f"Preferred:&nbsp;{_pref_spans}")
+    _counts_line = (
+        '<div class="role-match-summary-counts"'
+        ' style="font-size:13px;color:var(--text-secondary);margin:6px 0 10px 0;">'
+        + "&nbsp;&nbsp;|&nbsp;&nbsp;".join(_section_parts)
+        + "</div>"
+    )
+
+    _dp_count = sum(
+        1
+        for p in _points
+        if not p.get("is_overflow_indicator") and not p.get("is_zero_case")
+    )
+    _point_items = []
+    for _pt in _points:
+        _txt = html.escape(_pt["text"])
+        if _pt.get("is_zero_case"):
+            _point_items.append(
+                f'<li style="list-style:none;padding:2px 0;color:var(--success-color);">{_txt}</li>'
+            )
+        elif _pt.get("is_overflow_indicator"):
+            _point_items.append(
+                f'<li style="list-style:none;padding:2px 0;color:var(--text-secondary);font-style:italic;">{_txt}</li>'
+            )
+        else:
+            _lc = (
+                "var(--error-color,#EF4444)"
+                if "Gap" in _pt["label_type"]
+                else "var(--warning-color,#F59E0B)"
+            )
+            _point_items.append(
+                f'<li style="list-style:none;padding:2px 0;">'
+                f'<span style="font-size:11px;font-weight:700;color:{_lc};margin-right:6px;">'
+                f"{html.escape(_pt['label_type'])}</span>{_txt}</li>"
+            )
+    _summary_html = (
+        '<div class="role-match-summary"'
+        ' style="background:var(--bg-card);border:1px solid var(--border-color);'
+        'border-radius:10px;padding:12px 16px;margin-bottom:14px;">'
+        '<div style="font-size:11px;font-weight:700;text-transform:uppercase;'
+        'letter-spacing:0.08em;color:var(--text-secondary);margin-bottom:6px;">SUMMARY</div>'
+        + _counts_line
+        + f'<div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin:8px 0 4px 0;">Discussion points ({_dp_count})</div>'
+        f'<ul style="margin:0;padding:0;font-size:13px;color:var(--text-primary);">{"".join(_point_items)}</ul>'
+        "</div>"
+    )
+    st.markdown(_summary_html, unsafe_allow_html=True)
 
     # Hint text lives in the LEFT column above the textarea (rendered in
     # render_role_match), NOT in the right column above the results panel.
@@ -785,32 +916,42 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_role_match_tri
 [class*="st-key-lock_icon"] {
     display: none !important;
 }
-/* Clear and demo JD — st.button styled as text links */
-[class*="st-key-role_match_clear"] button,
-[class*="st-key-role_match_demo_jd"] button {
+/* Clear — st.button styled as a text link (inline affordance, not a CTA) */
+[class*="st-key-role_match_clear"] button {
     background: none !important;
     border: none !important;
     box-shadow: none !important;
     padding: 0 !important;
     min-height: 0 !important;
     height: auto !important;
-    font-size: 13px !important;
+    font-size: 12px !important;
     font-weight: 400 !important;
+    color: var(--text-secondary) !important;
     cursor: pointer !important;
 }
-[class*="st-key-role_match_clear"] button {
-    color: var(--text-secondary) !important;
-    font-size: 12px !important;
-}
-[class*="st-key-role_match_clear"] button:hover,
-[class*="st-key-role_match_demo_jd"] button:hover {
+[class*="st-key-role_match_clear"] button:hover {
     background: none !important;
     border: none !important;
     box-shadow: none !important;
     text-decoration: underline !important;
 }
-[class*="st-key-role_match_demo_jd"] button {
-    color: var(--accent-purple) !important;
+
+/* Demo JD and post-result CTA — outlined buttons, footer-matched treatment.
+   5% accent-purple fill gives substance; 8px radius and font-weight: 600
+   match the footer pill. Hover lifts to 10% fill + accent border. */
+[class*="st-key-role_match_demo_jd"] button,
+[class*="st-key-role_match_followup_cta"] button {
+    background: rgba(139, 92, 246, 0.05) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 8px !important;
+    padding: 10px 20px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+}
+[class*="st-key-role_match_demo_jd"] button:hover,
+[class*="st-key-role_match_followup_cta"] button:hover {
+    background: rgba(139, 92, 246, 0.06) !important;
+    border-color: var(--accent-purple) !important;
 }
 </style>
 """,
@@ -830,7 +971,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_role_match_tri
         </div>
         <div class="conversation-header-text">
             <h1>Role Match</h1>
-            <p>Agy shows where Matt fits, and where he doesn't.</p>
+            <p>Agy shows where Matt fits your role, and where he doesn't.</p>
         </div>
     </div>
 </div>
@@ -1046,6 +1187,10 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
 .st-key-role_match_workspace [data-testid="stColumn"]:first-child
     [data-testid="stElementContainer"]:has(.role-match-jd-hint) {
     margin-bottom: 16px !important;
+}
+.st-key-role_match_workspace [data-testid="stColumn"]
+    [data-testid="stElementContainer"]:has(.role-match-demo-hint) {
+    margin-bottom: 8px !important;
 }
 
 /* === V3 design pivot (April 2026) ===
@@ -1391,7 +1536,14 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
                 st.session_state["role_match_jd_input"] = _load_demo_jd()
             if st.session_state.pop("role_match_clear_flag", False):
                 st.session_state["role_match_jd_input"] = ""
-                st.session_state.pop("role_match_matched_jd", None)
+                for _k in (
+                    "role_match_result",
+                    "role_match_matched_jd",
+                    "role_match_jd_persisted",
+                    "role_match_active_evidence",
+                    "role_match_error",
+                ):
+                    st.session_state.pop(_k, None)
 
             jd_preview = st.session_state.get("role_match_jd_input", "")
             st.markdown(
@@ -1410,19 +1562,13 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
                 label_visibility="collapsed",
             )
 
-            matched_jd = st.session_state.get("role_match_matched_jd", "")
-            has_results = bool(st.session_state.get("role_match_result"))
-            if not jd_text.strip():
+            _result_payload = st.session_state.get("role_match_result") or {}
+            has_results = bool(_result_payload.get("results"))
+            if len(jd_text.split()) < 30:
                 btn_label, btn_type, btn_disabled = (
                     "Match this role 🐾",
                     "primary",
                     True,
-                )
-            elif has_results and jd_text.strip() == matched_jd:
-                btn_label, btn_type, btn_disabled = (
-                    "Update Match 🐾",
-                    "secondary",
-                    False,
                 )
             elif has_results:
                 btn_label, btn_type, btn_disabled = "Update Match 🐾", "primary", False
@@ -1446,7 +1592,7 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
                     '<p class="role-match-demo-hint">Don\'t have a job description handy?</p>',
                     unsafe_allow_html=True,
                 )
-                if st.button("Try an example →", key="role_match_demo_jd"):
+                if st.button("Try an example 🔍", key="role_match_demo_jd"):
                     st.session_state["role_match_load_demo"] = True
                     st.rerun()
 
@@ -1539,17 +1685,17 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
             if st.session_state.get("role_match_error"):
                 st.markdown(
                     '<div style="padding: 24px; color: var(--text-secondary);">'
-                    "<strong>Couldn't run the assessment.</strong><br>"
-                    f"{html.escape(st.session_state['role_match_error'])}</div>",
+                    "<strong>Something went wrong. Please try again.</strong></div>",
                     unsafe_allow_html=True,
                 )
             elif st.session_state.get("role_match_result"):
                 _render_results_panel(st.session_state["role_match_result"], stories)
                 if st.session_state["role_match_result"].get("results"):
-                    if st.button(
-                        "Have questions about the results? Ask Agy →",
-                        key="role_match_followup_cta",
-                    ):
+                    st.markdown(
+                        '<p class="role-match-demo-hint">Have questions about the results?</p>',
+                        unsafe_allow_html=True,
+                    )
+                    if st.button("Ask Agy 🐾", key="role_match_followup_cta"):
                         st.session_state["active_tab"] = "Ask Agy"
                         st.rerun()
             else:

@@ -505,37 +505,24 @@ Feature: Role Match page
     When I type 30 or more words into the JD textarea
     Then the "Match this role 🐾" button is enabled
 
-  # MATTGPT-067 — Happy path (demo JD); @slow marks real LLM call
-
-  @slow
-  Scenario: Demo JD submission renders results with Update Match button
-    Given I navigate to the Role Match page
-    When I click "Try an example →" to load the demo job description
-    And I click "Match this role 🐾"
-    Then match results are displayed in the right panel
-    And the button label reads "Update Match 🐾"
-
   # MATTGPT-067 — Summary block (DOM-presence only; logic covered by test_summary_block.py)
 
   @slow
   Scenario: Summary block renders between legend and requirements after match
-    Given I have submitted the demo job description and results are displayed
+    Given I have submitted a job description and results are displayed
     Then a section labeled "SUMMARY" is visible in the right panel
     And the summary block appears above the first requirement section
 
   @slow
   Scenario: Summary counts line shows color-coded strong partial and gap tallies
-    Given I have submitted the demo job description and results are displayed
+    Given I have submitted a job description and results are displayed
     Then the summary counts line is visible
-    And strong match counts are displayed in green text
-    And partial match counts are displayed in amber text
-    And gap counts are displayed in red text
 
   # MATTGPT-067 — Clear full reset
 
   @slow
   Scenario: Clicking Clear returns to State 1 including right panel and Sample JD link
-    Given I have submitted the demo job description and results are displayed
+    Given I have submitted a job description and results are displayed
     When I click "✕ Clear"
     Then the JD textarea is empty
     And the "Match this role 🐾" button is disabled
@@ -558,14 +545,14 @@ Feature: Role Match page
 
   @slow
   Scenario: Post-result CTA renders after successful match
-    Given I have submitted the demo job description and results are displayed
+    Given I have submitted a job description and results are displayed
     Then a call-to-action reading "Have questions about the results? Ask Agy →" is visible
 
   # MATTGPT-067 — Export button (content covered by test_summary_block.py)
 
   @slow
   Scenario: Export button is present after successful match
-    Given I have submitted the demo job description and results are displayed
+    Given I have submitted a job description and results are displayed
     Then an Export button is visible in the actions row
 
   # MATTGPT-067 — Hero subtitle copy

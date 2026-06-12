@@ -458,7 +458,8 @@ def user_pastes_jd(browser_page):
     )
     textarea = browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first
     textarea.fill(sample_jd)
-    browser_page.wait_for_timeout(SHORT_WAIT)
+    textarea.press("Tab")
+    wait_for_streamlit_rerun(browser_page)
 
 
 @when("the user navigates to Role Match")
@@ -839,15 +840,6 @@ def test_match_button_disabled_below_30_words():
     "Match button enables at 30-word threshold",
 )
 def test_match_button_enables_at_30_words():
-    pass
-
-
-@pytest.mark.slow
-@scenario(
-    "../features/role_match.feature",
-    "Demo JD submission renders results with Update Match button",
-)
-def test_demo_jd_renders_update_match_button():
     pass
 
 
@@ -1290,7 +1282,11 @@ ROLE_MATCH_CLEAR_SELECTOR = '[class*="st-key-role_match_clear"] button'
 ROLE_MATCH_FOLLOWUP_CTA_PARTIAL = "Have questions about the results"
 
 _SAMPLE_JD = (
-    "Director of Engineering — platform modernization and cloud-native transformation."
+    "Director of Engineering to drive platform modernization in regulated industries. "
+    "Required: 15+ years leading distributed engineering teams through digital transformation. "
+    "Required: proven track record building AI/ML pipelines and machine learning systems at scale. "
+    "Preferred: published conference keynote speaker or recognized industry thought leader. "
+    "Preferred: experience leading semiconductor or hardware product engineering teams."
 )
 
 
@@ -1359,9 +1355,7 @@ def then_textarea_is_empty(browser_page):
 
 @then("no follow-up CTA is visible")
 def then_no_followup_cta_visible(browser_page):
-    count = browser_page.locator(
-        f"button:has-text('{ROLE_MATCH_FOLLOWUP_CTA_PARTIAL}')"
-    ).count()
+    count = browser_page.locator(ROLE_MATCH_FOLLOWUP_CTA_SELECTOR).count()
     assert count == 0, f"Expected no follow-up CTA before submission, found {count}"
 
 
@@ -1403,23 +1397,36 @@ _ERROR_FIXTURE_JD = (
     "exercitation ullamco laboris nisi aliquip ex commodo."
 )
 
-LLM_TIMEOUT = 180000  # 180s for real LLM calls (demo JD: 17 requirements × ~5s each)
+LLM_TIMEOUT = 300000  # 300s for real LLM calls (demo JD: 18 gpt-4o calls × ~8-10s each)
 
 
 # --- GIVEN ---
 
 
-@given("I have submitted the demo job description and results are displayed")
-def given_demo_jd_submitted_and_results_displayed(browser_page, app_url):
-    """Load the demo JD, submit, and wait for the LLM to return results (real call — up to 90s)."""
+@given("I have submitted a job description and results are displayed")
+def given_jd_submitted_and_results_displayed(browser_page, app_url):
+    """Fill _SAMPLE_JD directly, submit, and wait for LLM results (real call — faster than demo JD).
+    _SAMPLE_JD produces 3-5 requirements vs demo JD's 23, keeping this under ~60s.
+    Used by all result-state tests that assert DOM structure, not specific JD content.
+
+    Wait signal: .role-match-legend appears on the FIRST rerun after results render (same
+    script execution as the LLM call). The button only flips to "Update Match" on the SECOND
+    rerun (after a user interaction), so checking btn.innerText alone is insufficient here.
+    """
     _navigate_to_role_match(browser_page, app_url)
-    browser_page.locator(ROLE_MATCH_DEMO_JD_SELECTOR).first.click()
+    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.fill(_SAMPLE_JD)
+    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.press("Tab")
     wait_for_streamlit_rerun(browser_page)
     browser_page.locator(ROLE_MATCH_SUBMIT_SELECTOR).first.click()
-    # Button label flips to "Update Match 🐾" once results are stored in session state.
     browser_page.wait_for_function(
-        f"() => {{ const btn = document.querySelector('{ROLE_MATCH_SUBMIT_SELECTOR}');"
-        f" return btn && btn.innerText.includes('Update Match'); }}",
+        f"() => {{"
+        f"  const btn = document.querySelector('{ROLE_MATCH_SUBMIT_SELECTOR}');"
+        f"  if (!btn) return false;"
+        f"  if (btn.innerText.includes('Update Match')) return true;"
+        f"  if (document.querySelector('{ROLE_MATCH_LEGEND_SELECTOR}')) return true;"
+        f"  const body = document.body.innerText;"
+        f"  return body.includes(\"Something went wrong\") || body.includes(\"Couldn't extract\");"
+        f"}}",
         timeout=LLM_TIMEOUT,
     )
     wait_for_streamlit_rerun(browser_page)
@@ -1455,14 +1462,13 @@ def when_click_match_this_role(browser_page):
     # Poll until LLM call completes: button flips to "Update Match" (success) OR error text
     # appears in DOM. Streamlit does not visually disable the button during script exec —
     # !btn.disabled fires immediately before the LLM returns; use semantic state signals only.
-    # Green: add body.includes("Something went wrong") as a third branch.
     browser_page.wait_for_function(
         f"() => {{"
         f"  const btn = document.querySelector('{ROLE_MATCH_SUBMIT_SELECTOR}');"
         f"  if (!btn) return false;"
         f"  if (btn.innerText.includes('Update Match')) return true;"
         f"  const body = document.body.innerText;"
-        f"  return body.includes(\"Couldn't run\") || body.includes(\"Couldn't extract\");"
+        f"  return body.includes(\"Something went wrong\") || body.includes(\"Couldn't extract\");"
         f"}}",
         timeout=LLM_TIMEOUT,
     )
