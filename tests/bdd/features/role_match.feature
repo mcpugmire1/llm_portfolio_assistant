@@ -48,8 +48,8 @@ Feature: Role Match page
     And the legend includes a green ✓ swatch labeled "Strong match"
     And the legend includes an amber ~ swatch labeled "Partial"
     And the legend includes a red ✗ swatch labeled "Gap"
-    And the legend includes a 🔗 swatch labeled "= clickable story"
-    And the legend includes a green dot swatch labeled "= profile evidence"
+    And the legend includes a 🔗 swatch labeled "project evidence"
+    And the legend includes a green dot swatch labeled "verified skill"
 
   Scenario: Match results show required qualifications with status badges
     Given the user has submitted a job description
@@ -72,7 +72,7 @@ Feature: Role Match page
     Given the user has submitted a job description
     When the match results are displayed
     Then all qualifications are listed with individual match statuses
-    And no summary count, fit score, or recommendation is visible
+    And no fit score or recommendation is visible
 
   Scenario: Partial match shows gap explanation
     Given a requirement is assessed as partial match
@@ -492,3 +492,85 @@ Feature: Role Match page
   Scenario: No follow-up CTA is visible before submission
     Given I navigate to the Role Match page
     Then no follow-up CTA is visible
+
+  # MATTGPT-067 — 30-word guard
+
+  Scenario: Match button stays disabled below 30-word threshold
+    Given I navigate to the Role Match page
+    When I type fewer than 30 words into the JD textarea
+    Then the "Match this role 🐾" button is disabled
+
+  Scenario: Match button enables at 30-word threshold
+    Given I navigate to the Role Match page
+    When I type 30 or more words into the JD textarea
+    Then the "Match this role 🐾" button is enabled
+
+  # MATTGPT-067 — Happy path (demo JD); @slow marks real LLM call
+
+  @slow
+  Scenario: Demo JD submission renders results with Update Match button
+    Given I navigate to the Role Match page
+    When I click "Try an example →" to load the demo job description
+    And I click "Match this role 🐾"
+    Then match results are displayed in the right panel
+    And the button label reads "Update Match 🐾"
+
+  # MATTGPT-067 — Summary block (DOM-presence only; logic covered by test_summary_block.py)
+
+  @slow
+  Scenario: Summary block renders between legend and requirements after match
+    Given I have submitted the demo job description and results are displayed
+    Then a section labeled "SUMMARY" is visible in the right panel
+    And the summary block appears above the first requirement section
+
+  @slow
+  Scenario: Summary counts line shows color-coded strong partial and gap tallies
+    Given I have submitted the demo job description and results are displayed
+    Then the summary counts line is visible
+    And strong match counts are displayed in green text
+    And partial match counts are displayed in amber text
+    And gap counts are displayed in red text
+
+  # MATTGPT-067 — Clear full reset
+
+  @slow
+  Scenario: Clicking Clear returns to State 1 including right panel and Sample JD link
+    Given I have submitted the demo job description and results are displayed
+    When I click "✕ Clear"
+    Then the JD textarea is empty
+    And the "Match this role 🐾" button is disabled
+    And the right panel shows "Agy will map each requirement to Matt's real project experience."
+    And the "✕ Clear" button is not visible
+    And the "Try an example →" link is visible
+
+  # MATTGPT-067 — Error state (extraction failure)
+
+  Scenario: Submitting a non-JD text shows extraction error with no summary and no CTA
+    Given I navigate to the Role Match page
+    When I type a 35-word non-JD placeholder text into the JD textarea
+    And I click "Match this role 🐾"
+    Then the right panel shows "Couldn't extract any requirements from this job description."
+    And no "SUMMARY" section is visible in the right panel
+    And no "Have questions about the results?" CTA is visible
+    And the button label reads "Match this role 🐾"
+
+  # MATTGPT-067 — Post-result CTA
+
+  @slow
+  Scenario: Post-result CTA renders after successful match
+    Given I have submitted the demo job description and results are displayed
+    Then a call-to-action reading "Have questions about the results? Ask Agy →" is visible
+
+  # MATTGPT-067 — Export button (content covered by test_summary_block.py)
+
+  @slow
+  Scenario: Export button is present after successful match
+    Given I have submitted the demo job description and results are displayed
+    Then an Export button is visible in the actions row
+
+  # MATTGPT-067 — Hero subtitle copy
+
+  @smoke
+  Scenario: Hero subtitle shows updated copy
+    Given I navigate to the Role Match page
+    Then the hero subtitle reads "Agy shows where Matt fits your role, and where he doesn't."

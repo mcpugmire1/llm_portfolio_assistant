@@ -823,6 +823,96 @@ def test_no_followup_cta_before_submission():
     pass
 
 
+# --- MATTGPT-067 (reopened) — 30-word guard + summary block + clear reset + error state ---
+
+
+@scenario(
+    "../features/role_match.feature",
+    "Match button stays disabled below 30-word threshold",
+)
+def test_match_button_disabled_below_30_words():
+    pass
+
+
+@scenario(
+    "../features/role_match.feature",
+    "Match button enables at 30-word threshold",
+)
+def test_match_button_enables_at_30_words():
+    pass
+
+
+@pytest.mark.slow
+@scenario(
+    "../features/role_match.feature",
+    "Demo JD submission renders results with Update Match button",
+)
+def test_demo_jd_renders_update_match_button():
+    pass
+
+
+@pytest.mark.slow
+@scenario(
+    "../features/role_match.feature",
+    "Summary block renders between legend and requirements after match",
+)
+def test_summary_block_renders_between_legend_and_requirements():
+    pass
+
+
+@pytest.mark.slow
+@scenario(
+    "../features/role_match.feature",
+    "Summary counts line shows color-coded strong partial and gap tallies",
+)
+def test_summary_counts_color_coded():
+    pass
+
+
+@pytest.mark.slow
+@scenario(
+    "../features/role_match.feature",
+    "Clicking Clear returns to State 1 including right panel and Sample JD link",
+)
+def test_clear_returns_to_state_1_full():
+    pass
+
+
+@scenario(
+    "../features/role_match.feature",
+    "Submitting a non-JD text shows extraction error with no summary and no CTA",
+)
+def test_error_state_extraction_failure():
+    pass
+
+
+@pytest.mark.slow
+@scenario(
+    "../features/role_match.feature",
+    "Post-result CTA renders after successful match",
+)
+def test_post_result_cta_renders():
+    pass
+
+
+@pytest.mark.slow
+@scenario(
+    "../features/role_match.feature",
+    "Export button is present after successful match",
+)
+def test_export_button_present_after_match():
+    pass
+
+
+@pytest.mark.smoke
+@scenario(
+    "../features/role_match.feature",
+    "Hero subtitle shows updated copy",
+)
+def test_hero_subtitle_copy():
+    pass
+
+
 # --- GIVEN steps (Phase 4 slice 1) ---
 
 
