@@ -1376,3 +1376,245 @@ def given_text_area_is_empty(browser_page):
 def then_match_role_button_disabled_no_emoji(browser_page):
     btn = browser_page.locator(ROLE_MATCH_SUBMIT_SELECTOR).first
     assert btn.is_disabled(), "Expected 'Match this role' button to be disabled"
+
+
+# =============================================================================
+# MATTGPT-067 (reopened) — 30-word guard, summary block, clear reset, error state
+# =============================================================================
+
+ROLE_MATCH_DEMO_JD_SELECTOR = '[class*="st-key-role_match_demo_jd"] button'
+ROLE_MATCH_FOLLOWUP_CTA_SELECTOR = '[class*="st-key-role_match_followup_cta"] button'
+ROLE_MATCH_LEGEND_SELECTOR = ".role-match-legend"
+ROLE_MATCH_SUMMARY_SELECTOR = ".role-match-summary"
+ROLE_MATCH_SUMMARY_COUNTS_SELECTOR = ".role-match-summary-counts"
+
+# < 30 words (~9 words — well below threshold)
+_SHORT_JD = "Director Engineering platform modernization cloud transformation leadership innovation technology."
+# 36 words — reliably above 30
+_LONG_JD_30_PLUS = (
+    "Senior Engineering Leader at a global enterprise. We are looking for an experienced "
+    "engineering executive to own platform modernization, organizational design, and talent "
+    "development for a large multi-team engineering organization serving millions of users."
+)
+# 35+ words of lorem ipsum — not a real JD; should produce 0 requirements
+_ERROR_FIXTURE_JD = (
+    "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor "
+    "incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud "
+    "exercitation ullamco laboris nisi aliquip ex commodo."
+)
+
+LLM_TIMEOUT = 180000  # 180s for real LLM calls (demo JD: 17 requirements × ~5s each)
+
+
+# --- GIVEN ---
+
+
+@given("I have submitted the demo job description and results are displayed")
+def given_demo_jd_submitted_and_results_displayed(browser_page, app_url):
+    """Load the demo JD, submit, and wait for the LLM to return results (real call — up to 90s)."""
+    _navigate_to_role_match(browser_page, app_url)
+    browser_page.locator(ROLE_MATCH_DEMO_JD_SELECTOR).first.click()
+    wait_for_streamlit_rerun(browser_page)
+    browser_page.locator(ROLE_MATCH_SUBMIT_SELECTOR).first.click()
+    # Button label flips to "Update Match 🐾" once results are stored in session state.
+    browser_page.wait_for_function(
+        f"() => {{ const btn = document.querySelector('{ROLE_MATCH_SUBMIT_SELECTOR}');"
+        f" return btn && btn.innerText.includes('Update Match'); }}",
+        timeout=LLM_TIMEOUT,
+    )
+    wait_for_streamlit_rerun(browser_page)
+
+
+# --- WHEN ---
+
+
+@when("I type fewer than 30 words into the JD textarea")
+def when_type_fewer_than_30_words(browser_page):
+    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.fill(_SHORT_JD)
+    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.press("Tab")
+    wait_for_streamlit_rerun(browser_page)
+
+
+@when("I type 30 or more words into the JD textarea")
+def when_type_30_or_more_words(browser_page):
+    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.fill(_LONG_JD_30_PLUS)
+    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.press("Tab")
+    wait_for_streamlit_rerun(browser_page)
+
+
+@when('I click "Try an example →" to load the demo job description')
+def when_click_demo_jd_link(browser_page):
+    browser_page.locator(ROLE_MATCH_DEMO_JD_SELECTOR).first.click()
+    wait_for_streamlit_rerun(browser_page)
+
+
+@when('I click "Match this role 🐾"')
+def when_click_match_this_role(browser_page):
+    """Submit the JD. Waits for Streamlit to finish processing (either results or error)."""
+    browser_page.locator(ROLE_MATCH_SUBMIT_SELECTOR).first.click()
+    # Poll until LLM call completes: button flips to "Update Match" (success) OR error text
+    # appears in DOM. Streamlit does not visually disable the button during script exec —
+    # !btn.disabled fires immediately before the LLM returns; use semantic state signals only.
+    # Green: add body.includes("Something went wrong") as a third branch.
+    browser_page.wait_for_function(
+        f"() => {{"
+        f"  const btn = document.querySelector('{ROLE_MATCH_SUBMIT_SELECTOR}');"
+        f"  if (!btn) return false;"
+        f"  if (btn.innerText.includes('Update Match')) return true;"
+        f"  const body = document.body.innerText;"
+        f"  return body.includes(\"Couldn't run\") || body.includes(\"Couldn't extract\");"
+        f"}}",
+        timeout=LLM_TIMEOUT,
+    )
+    wait_for_streamlit_rerun(browser_page)
+
+
+@when("I type a 35-word non-JD placeholder text into the JD textarea")
+def when_type_non_jd_placeholder(browser_page):
+    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.fill(_ERROR_FIXTURE_JD)
+    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.press("Tab")
+    wait_for_streamlit_rerun(browser_page)
+
+
+@when('I click "✕ Clear"')
+def when_click_x_clear(browser_page):
+    browser_page.locator(ROLE_MATCH_CLEAR_SELECTOR).first.click()
+    wait_for_streamlit_rerun(browser_page)
+
+
+# --- THEN ---
+
+
+@then("match results are displayed in the right panel")
+def then_match_results_displayed(browser_page):
+    legend = browser_page.locator(ROLE_MATCH_LEGEND_SELECTOR).first
+    assert legend.is_visible(), "Expected results legend to be visible after match"
+
+
+@then('the button label reads "Update Match 🐾"')
+def then_button_label_update_match(browser_page):
+    btn = browser_page.locator(ROLE_MATCH_SUBMIT_SELECTOR).first
+    label = btn.inner_text()
+    assert (
+        "Update Match" in label
+    ), f"Expected 'Update Match 🐾' button label, got: {label!r}"
+
+
+@then('a section labeled "SUMMARY" is visible in the right panel')
+def then_summary_section_visible(browser_page):
+    summary = browser_page.locator(ROLE_MATCH_SUMMARY_SELECTOR).first
+    assert summary.is_visible(), "Expected SUMMARY section to be visible after match"
+
+
+@then("the summary block appears above the first requirement section")
+def then_summary_block_above_requirements(browser_page):
+    summary = browser_page.locator(ROLE_MATCH_SUMMARY_SELECTOR).first
+    req = browser_page.locator('[class*="st-key-role_match_req_"]').first
+    assert summary.is_visible(), "SUMMARY section not visible"
+    assert req.is_visible(), "No requirement rows found"
+    summary_y = summary.bounding_box()["y"]
+    req_y = req.bounding_box()["y"]
+    assert (
+        summary_y < req_y
+    ), f"Summary (y={summary_y:.0f}) must appear above first requirement (y={req_y:.0f})"
+
+
+@then("the summary counts line is visible")
+def then_summary_counts_line_visible(browser_page):
+    counts = browser_page.locator(ROLE_MATCH_SUMMARY_COUNTS_SELECTOR).first
+    assert counts.is_visible(), "Expected summary counts line to be visible"
+
+
+@then("strong match counts are displayed in green text")
+def then_strong_counts_green(browser_page):
+    strong_el = browser_page.locator(
+        f"{ROLE_MATCH_SUMMARY_COUNTS_SELECTOR} .count-strong"
+    ).first
+    assert strong_el.is_visible(), "Expected green strong-match count element"
+
+
+@then("partial match counts are displayed in amber text")
+def then_partial_counts_amber(browser_page):
+    partial_el = browser_page.locator(
+        f"{ROLE_MATCH_SUMMARY_COUNTS_SELECTOR} .count-partial"
+    ).first
+    assert partial_el.is_visible(), "Expected amber partial-match count element"
+
+
+@then("gap counts are displayed in red text")
+def then_gap_counts_red(browser_page):
+    gap_el = browser_page.locator(
+        f"{ROLE_MATCH_SUMMARY_COUNTS_SELECTOR} .count-gap"
+    ).first
+    assert gap_el.is_visible(), "Expected red gap count element"
+
+
+@then(parsers.parse('the right panel shows "{text}"'))
+def then_right_panel_shows_text(browser_page, text):
+    assert (
+        browser_page.get_by_text(text).count() > 0
+    ), f"Expected right panel to contain: {text!r}"
+
+
+@then('the "✕ Clear" button is not visible')
+def then_x_clear_button_not_visible(browser_page):
+    count = browser_page.locator(ROLE_MATCH_CLEAR_SELECTOR).count()
+    assert (
+        count == 0
+    ), f"Expected ✕ Clear button to be absent after reset, found {count}"
+
+
+@then('the "Try an example →" link is visible')
+def then_try_example_link_visible(browser_page):
+    link = browser_page.locator(ROLE_MATCH_DEMO_JD_SELECTOR).first
+    assert (
+        link.is_visible()
+    ), 'Expected "Try an example →" link to be visible after clear'
+
+
+@then('no "SUMMARY" section is visible in the right panel')
+def then_no_summary_section_visible(browser_page):
+    count = browser_page.locator(ROLE_MATCH_SUMMARY_SELECTOR).count()
+    assert count == 0, f"Expected no SUMMARY section in error state, found {count}"
+
+
+@then('no "Have questions about the results?" CTA is visible')
+def then_no_cta_after_error(browser_page):
+    count = browser_page.locator(ROLE_MATCH_FOLLOWUP_CTA_SELECTOR).count()
+    assert count == 0, f"Expected no CTA in error state, found {count}"
+
+
+@then('the button label reads "Match this role 🐾"')
+def then_button_label_match_this_role(browser_page):
+    btn = browser_page.locator(ROLE_MATCH_SUBMIT_SELECTOR).first
+    label = btn.inner_text()
+    assert (
+        "Match this role" in label
+    ), f"Expected 'Match this role 🐾' label in error state, got: {label!r}"
+
+
+@then(
+    'a call-to-action reading "Have questions about the results? Ask Agy →" is visible'
+)
+def then_cta_visible(browser_page):
+    cta = browser_page.locator(ROLE_MATCH_FOLLOWUP_CTA_SELECTOR).first
+    assert (
+        cta.is_visible()
+    ), 'Expected post-result CTA "Have questions about the results?" to be visible'
+    label = cta.inner_text()
+    assert (
+        "Ask Agy" in label
+    ), f"Expected CTA label to contain 'Ask Agy', got: {label!r}"
+
+
+@then("an Export button is visible in the actions row")
+def then_export_button_visible(browser_page):
+    export = browser_page.locator("#btn-role-match-export").first
+    assert export.is_visible(), "Expected Export button to be visible in actions row"
+
+
+@then(parsers.parse('the hero subtitle reads "{subtitle}"'))
+def then_hero_subtitle_reads(browser_page, subtitle):
+    elem = browser_page.locator(".conversation-header-text p").first
+    actual = elem.inner_text().strip()
+    assert actual == subtitle, f"Expected hero subtitle {subtitle!r}, got {actual!r}"
