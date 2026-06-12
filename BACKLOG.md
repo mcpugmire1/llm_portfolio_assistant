@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: 9a55fbd -->
+<!-- last-backlog-sync: a2d002b -->
 
 Work state for the MattGPT project. The matrix below is the scannable view. Detail blocks for each item follow, linked by ID. Completed items live in `CHANGELOG.md`. Architectural decisions live in `docs/ADR.md`. Current system state lives in `ARCHITECTURE.md`.
 
@@ -67,7 +67,6 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-016](#mattgpt-016) | Semantic Router — Wrong-Person Query Detection | Decided Against | High | Issue | Apr 2026 |
 | [MATTGPT-017](#mattgpt-017) | Wire skipped Role Match logging BDD scenarios (Playwright click + mocked Sheets write) | Open | Medium | Action | Apr 28, 2026 |
 | [MATTGPT-018](#mattgpt-018) | Page-Load Flicker | Open | Medium | Issue | Pre-Apr 2026 |
-| [MATTGPT-019](#mattgpt-019) | Story Count Copy — Replace "130+" with "Over 100" | Open | Low | Refactor | Pre-Apr 2026 |
 | [MATTGPT-020](#mattgpt-020) | Simplify backend_service.py | Decided Against | Medium | Refactor | Pre-Jan 2026 |
 | [MATTGPT-021](#mattgpt-021) | diversify_results() Pinning Bug | Open | Medium | Issue | Apr 2026 |
 | [MATTGPT-022](#mattgpt-022) | Data Quality Cleanup Journey Story | Open | Medium | Action | Mar 2026 |
@@ -99,7 +98,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-063](#mattgpt-063) | Wrong-person queries with names outside nonsense regex produce confused-context RAG answers | Open | Medium | Issue | May 14, 2026 |
 | [MATTGPT-065](#mattgpt-065) | Explore Stories — Polish bundle (filter UX, empty states, story details) | Resolved | Medium | Action | May 15, 2026 |
 | [MATTGPT-066](#mattgpt-066) | Role Match — Sample JD / "Try a sample role" cold-start affordance | Open | Medium | Action | May 15, 2026 |
-| [MATTGPT-067](#mattgpt-067) | Role Match — Result panel and input polish bundle | Open | Low | Action | May 15, 2026 |
+| [MATTGPT-067](#mattgpt-067) | Role Match — Result panel and input polish bundle | Done | High | Action | May 15, 2026 |
 | [MATTGPT-068](#mattgpt-068) | About Matt — Content polish bundle (clickable questions, code expander, DevOps card merge) | Done | Medium | Action | May 15, 2026 |
 | [MATTGPT-069](#mattgpt-069) | Home — Stats label contrast (light mode WCAG AA) | Done | Low | Issue | May 15, 2026 |
 | [MATTGPT-070](#mattgpt-070) | Ask MattGPT — Suggestion button cursor pointer | Decided Against | Low | Issue | May 15, 2026 |
@@ -151,6 +150,9 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-120](#mattgpt-120) | CLAUDE.md restructure — Critical Rules fast-reference block + rules-first format throughout | Open | Medium | Action | June 9, 2026 |
 | [MATTGPT-121](#mattgpt-121) | Why Agy dialog — mobile layout fix (375px viewport); title font-size override pending DevTools selector confirmation | Open | Medium | Bug | June 9, 2026 |
 | [MATTGPT-122](#mattgpt-122) | My Work — Cards view BDD timing: test_view_switching_preserves_open_story_detail fails (components.html iframe listener not attached at click time) | Open | Low | Issue | June 10, 2026 |
+| [MATTGPT-125](#mattgpt-125) | CLAUDE.md targeted fixes — confirmed bugs + confirmed gaps from June 12 audit | Open | Medium | Action | June 12, 2026 |
+| [MATTGPT-126](#mattgpt-126) | Ask Agy landing — input border invisible on page load (CSS injection race) | Open | Low | Issue | June 12, 2026 |
+| [MATTGPT-127](#mattgpt-127) | Replace hardcoded `ASSESSMENT_MODEL` in `jd_assessor.py` with `get_conf()` env var pattern | Open | Low | Refactor | June 12, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -363,20 +365,6 @@ Each detail block uses these fields. Not every field is required for every item.
 
 ---
 
-### MATTGPT-019
-**Story Count Copy — Replace "130+" with "Over 100"**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Refactor
-- **Issue:** Code references "130+" stories in multiple places (hero copy, status bar, prompt cards, loading messages, About Matt narrative). Actual corpus is currently 113 stories (May 14, 2026 measurement). The exact number drifts as stories are added/removed, but no copy gets updated to match.
-- **Audience reality:** Recruiters don't count stories — they scan and click. "Over 100" reads the same as "113" or "130+" to a human visitor; all three signal "lots of stories." The exact figure invites scrutiny it doesn't need.
-- **Fix (May 15, 2026 — simpler than original framing):** Find-and-replace every "130+" with "Over 100" (or "100+" where the format fits — e.g., "100+ stories indexed"). No runtime calculation, no JSONL load, no constant to maintain. Always accurate regardless of corpus size, no sync issue across pages.
-  - Rationale for *not* doing runtime calc: deriving from JSONL at load time is a real engineering cost (caching, refresh, cross-page sync) for zero audience value. The drift problem is solved entirely by removing the false precision from the copy.
-- **Scope:** Find every "130+" reference across `ui/`, prompts, and any other source-of-truth copy. ~5-10 locations expected.
-- **Logged:** Pre-April 2026 / **Rationalized:** May 14, 2026 / **Simplified:** May 15, 2026
-
----
 
 ### MATTGPT-020
 **Simplify backend_service.py**
@@ -1167,22 +1155,13 @@ Chip 3 wording "How does Matt manage resistance when leading enterprise transfor
 - **Logged:** May 15, 2026
 - **Revised:** June 11, 2026
 
+**Copy finalized (June 11, 2026)**
+- Link text: "Don't have a job description handy?" (tertiary, `--text-secondary`) + "Try an example →" (accent, `--accent-purple`) on separate lines via `st.markdown` + `st.button`
+- Demo JD title: "Senior Engineering Leader, Product Platform"
+- Demo JD shipped as `data/demo_jd.txt` (61 lines, composite fictional role) — commit `6c39d8c`
+- Capability development / organizational enablement at scale requirement to be added to Required section of demo JD before production deploy
+
 ---
-
-### MATTGPT-067
-**Role Match — Input controls and post-result CTA polish bundle**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Action
-- **Items (all in `ui/pages/role_match.py`):**
-  - **Disabled state on empty textarea** — submit button is always enabled; current behavior shows `st.warning("Paste a job description first.")` on empty click. Replace with `disabled=not jd_text.strip()` (pattern at `ui/pages/ask_mattgpt/landing_view.py:225-231`). ~2 lines.
-  - **Clear textarea button** — no native Streamlit clear control. Add a "Clear" button rendered BEFORE the textarea; on click pops `role_match_jd_input` from session_state. Must render before textarea per Streamlit widget state rules. Visible only when textarea contains text (wireframe: no clear button in empty state). ~5-10 lines.
-  - **Post-result follow-up CTA** — `_render_results_panel` ends after the Preferred section with no follow-up affordance. Add "Ask Agy a follow-up →" button that navigates to Ask MattGPT. Exact placement and label to be confirmed by Chrome Claude wireframe diff. ~10-15 lines.
-- **Dropped (June 11, 2026):** Loading message — random dog phrases from `THINKING_MESSAGES` are on-brand; no change needed.
-- **Effort:** ~20-25 lines total, single file.
-- **Logged:** May 15, 2026
-- **Revised:** June 11, 2026
 
 ---
 
@@ -2637,6 +2616,43 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 
 ---
 
+### MATTGPT-113
+**Ask Agy landing — mobile polish pass (seed question chips + header height + button placement)**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Logged:** June 4, 2026
+
+**Issue:** Three problems, one pass — doing them separately means re-evaluating the page twice.
+
+1. **Seed question chips redesign** — Current seed questions are full-sentence blocks that take up too much vertical space on mobile (54px height, 295px wide, wrap to 2 lines). They're plain `st.button()` calls in a 2-column grid — no `.ask-chip` or `.seed` class exists. Fix requires **new short chip text** (Python change to seed question list, e.g. "💳 Payments modernization") + CSS chip styling. CSS-only font truncation is too blunt and doesn't produce the "compact chip" intent.
+2. **Header height (201px on mobile vs ~125px on other pages)** — Rule `.ask-header-landing { min-height: 184px }` exists. Mobile override `min-height: auto !important` at `max-width: 768px` is already in place but not enough — the "How Agy searches" button falling to its own row inflates the height. Also: H1 `font-size: 2rem` on mobile makes the title 74px tall. Both need fixing together.
+3. **"How Agy searches" button inline with title** — Button class `.how-agy-btn` with `flex-shrink: 0` is in a separate Streamlit widget that renders after the markdown title block — not in the same flex row. **CSS-only fix:** `position: absolute; right: 32px; top: 50%; transform: translateY(-50%)` on `.how-agy-btn`, with `position: relative` on the header container. Pulls the button to the right of the header regardless of Streamlit's column flow.
+
+**Chrome Claude DevTools findings (June 12, 2026):**
+- Title H1 measured: `top: ~102, height: 74px` — `font-size: 2rem` is too large on mobile; reduce to `1.4rem` or `1.5rem`
+- Button measured: `top: 188, left: 102` — confirms it's below the title+subtitle stack, not beside it
+- Mobile min-height override fires correctly but button row is additive
+
+**Files:** `ui/pages/ask_mattgpt/landing_view.py`, `ui/pages/ask_mattgpt/styles.py`, `ui/components/ask_mattgpt_header.py`
+
+**Fix summary:**
+
+| Issue | Root cause | Fix type |
+|---|---|---|
+| Header too tall | Button falls to its own row + H1 2rem font | CSS: absolute positioning on `.how-agy-btn` + reduce H1 font-size on mobile |
+| Button not inline | Separate Streamlit widget, not in same flex row | CSS absolute positioning (cleanest path) |
+| Chips too wide/tall | Full-sentence labels in 2-col grid | New short chip text (Python) + CSS chip styling |
+
+**Acceptance criteria:**
+- Header height ~125px on mobile (matches other pages)
+- "How Agy searches" button sits to the right of title on same row
+- Seed questions render as compact single-line chips
+- Desktop (≥1024px): no regression
+
+---
+
 ### MATTGPT-114
 **Page header typography — standardize title + subtitle via shared CSS classes across all 7 surfaces**
 
@@ -2748,3 +2764,70 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 - **Goal:** Make CLAUDE.md scannable for new Claude Code sessions. Two parts: (1) Critical Rules fast-reference block at the top — 10-15 non-negotiable imperative rules, readable in 30 seconds; (2) Full restructure — rules-first format throughout, incident narratives moved to memory pointers, overlapping sections consolidated (CSS Rules + Streamlit Patterns → one section). Part 1 is one commit. Part 2 is a dedicated session.
 - **Trigger:** Before the next feature sprint after the UI redesign deploy.
 - **Logged:** June 9, 2026
+
+### MATTGPT-125
+**CLAUDE.md targeted fixes — confirmed bugs + confirmed gaps from June 12 audit**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Source:** 7-angle multi-agent audit of CLAUDE.md, June 12, 2026. 8 findings; 4 confirmed, 4 plausible.
+- **Confirmed fixes (no design decision needed):**
+  1. Screenshot example has unbound `label` variable (line 292) — crashes with NameError if copied literally. Fix: replace `label` with a concrete string or mark it as a placeholder.
+  2. "Effort estimates without consulting padding" heading (line 384) reads as "don't consult anyone about padding" — opposite of intended meaning. Fix: rename to "Effort estimates — no padding" or similar.
+  3. Backlog ARCHITECTURE.md flag scope too narrow (line 339) — only watches `ui/pages/`, `ui/components/`, `services/`. Changes to `utils/` and `config/` slip through silently. Fix: add those directories to the watched list.
+  4. Backlog sync SHA fallback missing (line 333) — if `<!-- last-backlog-sync: SHA -->` is missing or the SHA is unresolvable, `git log <sha>..HEAD` either errors or diffs the entire history. No fallback defined. Especially critical in Cowork automated-agent context. Fix: add a fallback clause (e.g., prompt Matt if SHA is missing; default to last 20 commits if SHA is unresolvable).
+- **Plausible fixes (need Matt's call before Executor touches):**
+  5. CSS Rule 8 scope gap (line 77) — DevTools inspection gated on layout/alignment/positioning/sizing only. Color and typography have the same Streamlit wrapper-layer failure mode but are ungated. Fix: broaden the trigger list, or reframe as "any CSS property where the rendered value differs from what source code predicts."
+  6. Three contradictory rule pairs — no tiebreaker stated:
+     - Pre-flight ("research first, don't propose anything") vs "Execute the work, don't discuss it" (lines 257/261)
+     - "Default is build-on-top-of" vs "Provide full file replacements" (lines 258/262)
+     - "One go ships the full cycle" vs "Paste validation output and wait — treat as separate gates" (lines 285/275)
+     These need precedence rules, not just rewording. Coordinate with MATTGPT-120 restructure.
+- **Deferred (Cowork context needed):**
+  - Sync anchor mechanism — "since last sync" is ambiguous without a stored reference point; risk of diffing entire history in automated agent context.
+  - Agent trigger conditions — what qualifies as "resolved," handling of Decided Against items, HISTORY.md retirement ownership. Needs a dedicated session with Cowork context before writing into CLAUDE.md.
+- **Relationship to MATTGPT-120:** Items 1-4 are standalone fixes that can ship before -120. Items 5-6 should be resolved as part of the -120 restructure (they require design decisions that the restructure will formalize).
+- **Logged:** June 12, 2026
+
+---
+
+### MATTGPT-127
+**Replace hardcoded `ASSESSMENT_MODEL` in `jd_assessor.py` with `get_conf()` env var pattern**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Refactor
+- **File:** `services/jd_assessor.py`, `config/constants.py`
+- **Logged:** June 12, 2026
+
+**Issue:** `ASSESSMENT_MODEL = "gpt-4o"` is hardcoded at `jd_assessor.py:185` and passed directly to the OpenAI API at lines 205 and 287. Per CLAUDE.md config rules, model names that may change between environments belong as env vars read via `get_conf()`.
+
+**Fix:** `ASSESSMENT_MODEL = get_conf("ASSESSMENT_MODEL") or "gpt-4o"` — one line. Same audit needed for `DEFAULT_CHAT_MODEL` in `constants.py`.
+
+**Note:** `gpt-4o` is the correct value for production (mini produces subpar assessment reasoning). This is a configuration hygiene fix, not a model change.
+
+---
+
+### MATTGPT-126
+**Ask Agy landing — input border invisible on page load (CSS injection race)**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Issue
+- **File:** `ui/styles/global_styles.py`
+- **Logged:** June 12, 2026
+
+**Symptom:** The Ask Agy landing page text input (`key="landing_input"`) renders without a visible border on initial page load, then the border appears after a brief flash. Intermittent — sometimes caught before CSS injects, sometimes not.
+
+**Root cause:** CSS injection race. Streamlit's emotion CSS sets `border-*-style: none` on all four sides of the input (classes `.st-bh` through `.st-bl`). The override rule in `global_styles.py` (`div[data-testid="stTextInput"] input { border: 2px solid var(--border-color) }`) is injected via `st.markdown`, which runs after initial DOM render. Without `!important`, it loses to the already-applied emotion rules during the render window.
+
+**Also noted:** A stale scoped rule targeting `.st-key-landing_input .st-bz, .st-c0, .st-c1, .st-c2 { border-color: transparent !important }` in the codebase is dead code — emotion class hashes have drifted. Safe to remove.
+
+**Fix:** Add `!important` to the existing border rule in `global_styles.py`:
+```css
+div[data-testid="stTextInput"] input {
+  border: 2px solid var(--border-color) !important;
+}
+```
+`!important` is justified here — explicitly overriding Streamlit's own styling system is the stated purpose of the rule. Remove the stale `.st-bz/.st-c0/.st-c1/.st-c2` dead code in the same pass.

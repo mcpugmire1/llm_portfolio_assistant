@@ -8,6 +8,9 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### CSS Architecture
 
+**June 12 — Story count copy — confirmed "130+" has no user-facing runtime references (MATTGPT-019)**
+Audit confirmed zero user-facing `130+` references in active production code. All UI Python files already use `100+` or derive counts dynamically. Remaining `130+` occurrences are in dead code (`mobile_overrides.py` — never imported), design docs (`ARCHITECTURE.md`, `WIREFRAMES.md`), and `mattgpt_system_prompt.md` (not read at runtime). Ticket closed as resolved.
+
 **June 9 — Bundle 1 CSS polish — back-link dark mode, How Agy scroll-to-top, stats label contrast (MATTGPT-111, -112, -069)** — `c8ce37d`
 Three low-priority CSS/JS fixes shipped in one commit. Back-link breadcrumb pill (`explore_stories.py`): replaced hardcoded hex colors with CSS variables (`--bg-card`, `--accent-purple`, `--border-color`) — fixes white-pill-on-dark-background in dark mode (MATTGPT-111). How Agy Searches dialog (`how_agy_dialog.py`): scroll-to-top JS selector fixed from `[role="dialog"] > div` (overflow: visible, never scrolls) to `[role="dialog"]` (actual scrollable container, confirmed via DevTools); switched from fixed 100ms `setTimeout` to self-retrying IIFE (MATTGPT-112). Hero stats labels (`hero.py`): `var(--text-muted)` fails WCAG AA in both light (2.54:1) and dark (3.91:1) modes; swapped to `var(--text-secondary)` which passes in both (4.83:1 light, 7.44:1 dark), confirmed via DevTools CSSOM (MATTGPT-069).
 
@@ -22,6 +25,11 @@ Mobile viewport fix for the How Agy Searches dialog. CSS compaction across 5 sel
 
 **June 2 — How Agy Searches — migrate inline expander to `@st.dialog`, remove Technical Details block (MATTGPT-110)** — `37806a7`, `e24c1cb`
 Replaced the inline collapsible expander on Ask Agy (Landing + Conversation views) with a `@st.dialog` overlay. Technical Details block removed — near-verbatim build content already covered in How I Built, sitting inside the runtime trust story where it didn't belong. Button label toggle and close-wiring JS removed from `ask_mattgpt_header.py`; `@st.dialog`'s built-in X / Escape / backdrop handles close. Bridge link added at bottom: "Want the technical details? See how I built it →". `show_how_modal` session state key and `render_modal_wrapper_start/end()` calls removed from both page files. BDD: 5/5 passing. CSS regression guards for navbar scope added in follow-up commit `e24c1cb`.
+
+### Role Match
+
+**June 11–12 — Result panel + input polish bundle (MATTGPT-067)** — `6c39d8c`, `ac3d3dd`, `a2d002b`
+Input controls: 30-word gate disables submit until sufficient JD text; Clear button (text link) empties textarea and pops all 5 session-state keys; Sample JD affordance ("Don't have a job description handy? / Try an example"). Summary block between legend and requirements: counts line (Required / Preferred tallies) + Discussion points (required gaps + partials + preferred gaps; preferred partials excluded). Legend relabeled "project evidence" / "verified skill"; card copy updated to "Verified skill" throughout. Post-result CTA copy changed to "Explore Matt's experience in depth." — honest framing that doesn't imply Agy has result context. UI fixes: right-column height anchor (`height_anchor = st.empty()`) prevents layout collapse during blocking LLM call; followup CTA gap rule scoped to `role_match_followup_block` container (was collapsing all inter-card gaps when results showed); `role_match_ev_*` expansion container gets 16px bottom margin to prevent overlay on next requirement card. BDD: 23/23 passing. Unit: 30/30 (`test_summary_block.py`).
 
 ### Explore Stories
 
