@@ -1188,9 +1188,19 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
     [data-testid="stElementContainer"]:has(.role-match-jd-hint) {
     margin-bottom: 16px !important;
 }
-.st-key-role_match_workspace [data-testid="stColumn"]
+.st-key-role_match_workspace [data-testid="stColumn"]:first-child
     [data-testid="stElementContainer"]:has(.role-match-demo-hint) {
-    margin-bottom: 8px !important;
+    margin-bottom: 24px !important;
+}
+/* Right panel: tighten the gap between hint and CTA button.
+   Scoped to .st-key-role_match_followup_block so the gap collapse only
+   affects the hint+CTA container, not the entire results column block. */
+.st-key-role_match_followup_block [data-testid="stVerticalBlock"] {
+    gap: 0.25rem !important;
+}
+.st-key-role_match_followup_block
+    [data-testid="stElementContainer"]:has(.role-match-demo-hint) {
+    margin-bottom: 0 !important;
 }
 
 /* === V3 design pivot (April 2026) ===
@@ -1257,6 +1267,12 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
 }
 [class*="st-key-role_match_evidence_"] [data-testid="stElementContainer"] .stMarkdown {
     width: auto !important;
+}
+
+/* Expanded story detail container — bottom margin separates it from the
+   next requirement card below. Starting value 16px; tune to taste. */
+[class*="st-key-role_match_ev_"] {
+    margin-bottom: 16px !important;
 }
 
 /* Profile evidence — block-level argumentative prose, NOT a pill. The
@@ -1615,6 +1631,15 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
                 loading_container = st.empty()
                 with loading_container:
                     render_thinking_indicator()
+                # Height anchor: render_thinking_indicator() is fixed-position and
+                # contributes no flow height. Without this, the right column collapses
+                # to near-zero during the blocking LLM call, floating the footer up.
+                # Must be rendered BEFORE run_assessment() blocks so it's in the DOM
+                # during the call (Streamlit renders incrementally).
+                height_anchor = st.empty()
+                height_anchor.markdown(
+                    '<div style="min-height:400px;"></div>', unsafe_allow_html=True
+                )
                 try:
                     from services.jd_assessor import run_assessment
 
@@ -1637,6 +1662,7 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
                     st.session_state.pop("role_match_result", None)
                 finally:
                     loading_container.empty()
+                    height_anchor.empty()
 
                 # Log OUTSIDE try/except so a logging failure can't
                 # interfere with the assessment result. Only log when
@@ -1691,13 +1717,14 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
             elif st.session_state.get("role_match_result"):
                 _render_results_panel(st.session_state["role_match_result"], stories)
                 if st.session_state["role_match_result"].get("results"):
-                    st.markdown(
-                        '<p class="role-match-demo-hint">Have questions about the results?</p>',
-                        unsafe_allow_html=True,
-                    )
-                    if st.button("Ask Agy 🐾", key="role_match_followup_cta"):
-                        st.session_state["active_tab"] = "Ask Agy"
-                        st.rerun()
+                    with st.container(key="role_match_followup_block"):
+                        st.markdown(
+                            '<p class="role-match-demo-hint">Explore Matt\'s experience in depth.</p>',
+                            unsafe_allow_html=True,
+                        )
+                        if st.button("Ask Agy 🐾", key="role_match_followup_cta"):
+                            st.session_state["active_tab"] = "Ask Agy"
+                            st.rerun()
             else:
                 st.markdown(
                     """
