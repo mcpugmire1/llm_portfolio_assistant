@@ -731,8 +731,12 @@ def apply_global_styles():
         .hib-cta-block .hib-cta-h { font-size: 13px; font-weight: 500; color: var(--text-secondary); margin: 0 0 8px; letter-spacing: 0.03em; text-transform: uppercase; }
 
         .hib-cta-prompts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        .hib-cta-prompt { background: var(--accent-purple-bg, rgba(109, 76, 196, 0.04)); border: 1px solid rgba(120, 80, 220, 0.3); border-radius: 8px; padding: 9px 12px; font-size: 13px; color: #6d4cc4; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.15s ease; user-select: none; }
-        .hib-cta-prompt:hover {     background: rgba(109, 76, 196, 0.12); border-color: rgba(120, 80, 220, 0.6);}
+        .hib-cta-prompt { background: var(--accent-purple-bg, rgba(109, 76, 196, 0.04)); border: 1px solid rgba(120, 80, 220, 0.3); border-radius: 8px; padding: 9px 12px; font-size: 13px; color: var(--accent-purple); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.15s ease, border-color 0.15s ease; user-select: none; }
+        .hib-cta-prompt:hover {
+            background: rgba(139, 92, 246, 0.15);   /* was rgba(109,76,196,0.12) — wrong purple, wrong direction */
+            border-color: var(--accent-purple);
+            }
+
 
         /* My Profile sample-question chip buttons (MATTGPT-068).
            Lives in global styles (not inside render_about_matt) so the CSS is
