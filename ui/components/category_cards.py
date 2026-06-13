@@ -9,11 +9,7 @@ Counts are derived dynamically from JSONL data.
 MOBILE CSS: Card heights are handled here. Layout/spacing handled by mobile_overrides.py
 """
 
-from collections import Counter
-
 import streamlit as st
-
-from utils.client_utils import is_generic_client
 
 # Ask Agy Anything suggested-question chip strings. Order is load-bearing —
 # index N maps to the hidden Streamlit button card_btn_ask_chip_N and to the
@@ -69,31 +65,6 @@ def render_category_cards(stories: list[dict]):
     # to align with landing page card grids + Timeline + (post-MATTGPT-098)
     # Explore Stories. Without this exclusion, Home card meta showed 33/57
     # while landing card grids showed 32/48 for the same Industry filter.
-    banking_stories = [
-        s
-        for s in stories
-        if s.get("Industry") == "Financial Services / Banking"
-        and s.get("Category") != "Professional Narrative"
-    ]
-    cross_industry_stories = [
-        s
-        for s in stories
-        if s.get("Industry") == "Cross Industry"
-        and s.get("Category") != "Professional Narrative"
-    ]
-
-    # Banking client counts (top 3, excluding generic)
-    banking_clients = Counter(
-        s.get("Client", "Unknown")
-        for s in banking_stories
-        if not is_generic_client(s.get("Client"))
-    )
-    top_banking_clients = banking_clients.most_common(3)
-
-    # Cross-industry: show Accenture and telecom clients
-    telecom_stories = [s for s in stories if s.get("Industry") == "Telecommunications"]
-    accenture_stories = [s for s in stories if s.get("Client") == "Accenture"]
-
     # === END DYNAMIC COUNTS ===
 
     # Inject card and button styles
@@ -393,48 +364,38 @@ def render_category_cards(stories: list[dict]):
     #   1, 2 — dynamic project counts + top-client names from JSONL
     #   3-6  — wireframe-locked descriptive copy (no inline button, no
     #          italic example-question line; the whole card is the click).
-    banking_clients_inline = (
-        ", ".join(name for name, _ in top_banking_clients) or "JP Morgan, RBC, Fiserv"
-    )
-    cross_industry_segments = []
-    if telecom_stories:
-        cross_industry_segments.append("Telecom")
-    if accenture_stories:
-        cross_industry_segments.append("Accenture")
-    cross_industry_inline = ", ".join(cross_industry_segments) or "Telecom, Accenture"
-
-    cards_html = f"""
+    cards_html = """
 <div class="matt-container">
 <div class="home-cat-grid">
 <div class="home-cat-card" id="card-banking">
 <div class="home-cat-icon">🏦</div>
 <p class="home-cat-title">Financial Services / Banking</p>
-<p class="home-cat-meta">{len(banking_stories)} projects · {banking_clients_inline}</p>
+<p class="home-cat-meta">Payments infrastructure, CRM, and platform modernization across global banking and financial services.</p>
 </div>
 <div class="home-cat-card" id="card-cross-industry">
 <div class="home-cat-icon">🌐</div>
 <p class="home-cat-title">Cross-Industry Transformation</p>
-<p class="home-cat-meta">{len(cross_industry_stories)} projects · {cross_industry_inline}</p>
+<p class="home-cat-meta">Cloud-native products and platform modernization across telecom, healthcare, transportation, and enterprise.</p>
 </div>
 <div class="home-cat-card" id="card-product">
 <div class="home-cat-icon">🚀</div>
 <p class="home-cat-title">Product Innovation &amp; Strategy</p>
-<p class="home-cat-meta">Cloud-native prototypes to enterprise platforms that transform businesses</p>
+<p class="home-cat-meta">Greenfield products from discovery to production. Cloud-native, human-centered, AI-integrated.</p>
 </div>
 <div class="home-cat-card" id="card-modernization">
 <div class="home-cat-icon">⚙️</div>
 <p class="home-cat-title">Application Modernization</p>
-<p class="home-cat-meta">Event-driven design, microservices, zero-defect delivery</p>
+<p class="home-cat-meta">Legacy systems modernized without disrupting the business that depends on them. Mainframes to microservices, delivery velocity restored.</p>
 </div>
 <div class="home-cat-card" id="card-consulting">
 <div class="home-cat-icon">💡</div>
 <p class="home-cat-title">Consulting &amp; Transformation</p>
-<p class="home-cat-meta">Fortune 500 advisory, operating models, 3-20x acceleration</p>
+<p class="home-cat-meta">Senior technical advisory and program leadership for Fortune 500 transformations. Solutions architecture, PMO, and program recovery.</p>
 </div>
 <div class="home-cat-card" id="card-teams">
 <div class="home-cat-icon">👥</div>
 <p class="home-cat-title">Teams &amp; Talent Development</p>
-<p class="home-cat-meta">Innovation centers, servant leadership, upskilling programs</p>
+<p class="home-cat-meta">Engineering organizations built from zero. 300+ practitioners reskilled. Capability and culture built to outlast the engagement.</p>
 </div>
 </div>
 </div>
