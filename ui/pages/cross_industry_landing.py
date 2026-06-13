@@ -293,7 +293,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_cross_trigger"
         /* Header - compact and stacked */
         .conversation-header {
             padding: 20px 16px !important;
-            min-height: auto !important;
+            min-height: 145.59px !important;
             margin: 60px 0 0 0 !important;  /* clear 60px fixed mobile nav */
         }
         .conversation-header-content {

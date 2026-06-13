@@ -489,7 +489,6 @@ def apply_global_styles():
             .capability-card { height: auto !important; min-height: 260px !important; }
             /* Header */
             .ask-header { flex-direction: column !important; text-align: center !important; padding: 20px 16px !important; gap: 12px !important; }
-            .header-agy-avatar { width: 64px !important; height: 64px !important; }
             .header-text h1 { font-size: 22px !important; }
             /* Chat */
             .stChatMessage img, [data-testid="stChatMessage"] img { width: 40px !important; height: 40px !important; }
@@ -518,11 +517,6 @@ def apply_global_styles():
                 flex-direction: row !important;
                 gap: 12px !important;
                 align-items: center !important;
-            }
-            .conversation-agy-avatar {
-                width: 64px !important;
-                height: 64px !important;
-                flex-shrink: 0 !important;
             }
             .conversation-header-text h1 {
                 font-size: 1.25rem !important;
@@ -629,7 +623,6 @@ def apply_global_styles():
                 flex: 0 0 48% !important;
                 min-width: 48% !important;
             }
-            .header-agy-avatar { width: 80px !important; height: 80px !important; }
             .stChatMessage img { width: 50px !important; height: 50px !important; }
         }
 
@@ -805,6 +798,7 @@ def apply_global_styles():
     margin-top: -32px !important;
     margin-bottom: 0 !important;
     color: white;
+    position: relative;
 }
 
 .about-header-content {
@@ -813,6 +807,17 @@ def apply_global_styles():
     gap: 24px;
     max-width: 1200px;
     margin: 0;
+}
+
+.about-header-avatar {
+    flex-shrink: 0 !important;
+    width: 120px !important;
+    height: 120px !important;
+    border-radius: 50% !important;
+    border: 4px solid white !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+    object-fit: cover !important;
+    background: rgba(255, 255, 255, 0.1) !important;
 }
 
 .about-header-text h1 {
@@ -1361,7 +1366,10 @@ def apply_global_styles():
     background: #e7f4e8;
     border-radius: 12px;
     padding: 3px 9px;
-    margin-bottom: 4px;
+    position: absolute;
+    top: 50%;
+    right: 32px;
+    transform: translateY(-50%);
 }
 
 /* !important needed because dual-classed p elements also carry
@@ -1817,8 +1825,8 @@ details[open]:has(.code-block) > summary::before {
 @media (max-width: 768px) {
     /* Header */
     .about-header {
-        padding: 20px 16px 29px 16px !important;
-        min-height: auto !important;
+        padding: 20px 16px 20px 16px !important;
+        min-height: 145.59px !important;
         margin-top: 60px !important;  /* clear 60px fixed mobile nav */
     }
 
@@ -1829,9 +1837,10 @@ details[open]:has(.code-block) > summary::before {
         align-items: flex-start !important;
     }
 
-    .about-header-content img {
+    .about-header-avatar {
         width: 64px !important;
         height: 64px !important;
+        border: 4px solid white !important;
     }
 
     .about-header-text h1 {
@@ -1839,7 +1848,12 @@ details[open]:has(.code-block) > summary::before {
     }
 
     .about-header-text p {
+        margin-top: -6px !important;
         font-size: 12px !important;
+    }
+
+    .prof-status-badge {
+        display: none !important;
     }
 
     /* Removed: was hiding the second <p> (tagline) on mobile.
@@ -3100,7 +3114,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_my_work_trigge
            ----------------------------------------- */
         .conversation-header {
             padding: 20px 16px !important;
-            min-height: auto !important;
+            min-height: 145.59px !important;
             margin: 60px 0 0 0 !important;  /* clear 60px fixed mobile nav */
         }
 
@@ -3114,7 +3128,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_my_work_trigge
         .conversation-agy-avatar {
             width: 64px !important;
             height: 64px !important;
-            border: 3px solid white !important;
+            border: 4px solid white !important;
         }
 
         .conversation-header-text h1 {

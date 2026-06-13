@@ -130,102 +130,7 @@ def get_header_css() -> str:
         color: white;
     }
 
-    /* ============================================================================
-       MOBILE RESPONSIVE (<768px)
-       ============================================================================ */
-    @media (max-width: 768px) {
-            .status-bar {
-                margin-left: -16px !important;
-                margin-right: -16px !important;
-                padding-left: 16px !important;
-                padding-right: 16px !important;
-            }
 
-        .ask-header-landing {
-            padding: 20px 16px 33px 16px !important;
-            min-height: auto !important;
-            margin: 52px -16px 0px -16px !important;
-            overflow: visible !important;
-        }
-
-       .ask-header-conversation {
-            padding: 20px 16px 33px 16px !important;
-            min-height: auto !important;
-            margin: 52px -16px 0px -16px !important;  /* clear nav + edge-to-edge */
-            overflow: visible !important;
-            position: relative !important;
-        }
-
-        .header-content {
-            flex-direction: row !important;
-            align-items: flex-start !important;
-            text-align: left !important;
-            gap: 10px !important;
-            flex-wrap: wrap !important;
-            position: relative;
-            justify-content: center !important;
-        }
-
-        .header-agy-avatar {
-            width: 64px !important;
-            height: 64px !important;
-            border: 3px solid white !important;
-        }
-
-
-        .header-text h1 {
-            font-size: 20px !important;
-            margin-bottom: 4px !important;
-            white-space: nowrap !important;
-            padding-top: 0 !important;
-            padding-bottom: 0 !important;
-        }
-
-        .header-text p {
-            font-size: 13px !important;
-            line-height: 1.4 !important;
-        }
-
-
-        .ask-header-landing .how-agy-btn,
-        .ask-header-conversation .how-agy-btn {
-            font-size: 11px !important;
-            padding: 3px 10px !important;
-            height: auto !important;
-            min-height: unset !important;
-            margin-top: 2px !important;
-        }
-
-        .ask-header-conversation .how-agy-btn {
-            position: absolute !important;
-            top: 2px !important;
-            right: 16px !important;
-            margin: 0 !important;
-
-        }
-
-        .how-agy-modal-wrapper {
-            margin-top: 20px !important;
-        }
-
-        div[data-testid="stMarkdownContainer"] > div.how-agy-modal-wrapper {
-            margin-top: 8px !important;
-        }
-
-        [data-testid="stMarkdownContainer"]:has(.how-agy-modal-wrapper) {
-            margin-top: 8px !important;
-        }
-
-        .how-agy-btn {
-            position: absolute !important;
-            top: 1px !important;
-            right: 16px !important;
-            font-size: 10px !important;
-            padding: 4px 8px !important;
-            margin: 0 !important;
-        }
-
-    }
 
     /* ============================================================================
        HOW AGY SEARCHES BUTTON - Glass morphism style
@@ -503,6 +408,113 @@ def get_header_css() -> str:
         padding-bottom: 15px !important;
         padding-left: 15px !important;
         padding-right: 15px !important;
+    }
+
+     /* ============================================================================
+       MOBILE RESPONSIVE (<768px) — must come AFTER global .status-bar reset above
+       so mobile margin-top: 40px wins the cascade on narrow viewports.
+       ============================================================================ */
+    @media (max-width: 768px) {
+            .status-bar {
+                margin-left: -16px !important;
+                margin-right: -16px !important;
+                padding-left: 16px !important;
+                padding-right: 16px !important;
+                margin-top: 14px !important;
+            }
+
+        .ask-header-landing {
+            padding: 20px 16px 20px 16px !important;
+            min-height: 145.59px !important;
+            margin: 60px -16px 0px -16px !important;
+            overflow: visible !important;
+        }
+
+       .ask-header-conversation {
+            padding: 20px 16px 20px 16px !important;
+            min-height: 145.59px !important;
+            margin: 60px -16px 0px -16px !important;  /* clear nav + edge-to-edge */
+            overflow: visible !important;
+            position: relative !important;
+        }
+
+        .header-content {
+            flex-direction: row !important;
+            align-items: flex-start !important;
+            text-align: left !important;
+            gap: 12px !important;
+            flex-wrap: wrap !important;
+            position: relative;
+            justify-content: flex-start !important;
+            padding-left: 10px !important;
+        }
+
+        .header-content > div:first-child {
+            gap: 12px !important;
+        }
+
+        .header-agy-avatar {
+            width: 64px !important;
+            height: 64px !important;
+            border: 4px solid white !important;
+        }
+
+
+        .header-text h1 {
+            font-size: 20px !important;
+            margin-top: 20px !important;
+            margin-bottom: 4px !important;
+            white-space: nowrap !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+        }
+
+        .header-text p {
+            margin-top: 22px !important;
+            font-size: 13px !important;
+            line-height: 1.4 !important;
+        }
+
+
+        .ask-header-landing .how-agy-btn,
+        .ask-header-conversation .how-agy-btn {
+            font-size: 11px !important;
+            padding: 3px 10px !important;
+            height: auto !important;
+            min-height: unset !important;
+            margin-top: 2px !important;
+        }
+
+
+        .ask-header-conversation .how-agy-btn {
+            position: absolute !important;
+            top: 2px !important;
+            right: 16px !important;
+            margin: 0 !important;
+
+        }
+
+        .how-agy-modal-wrapper {
+            margin-top: 20px !important;
+        }
+
+        div[data-testid="stMarkdownContainer"] > div.how-agy-modal-wrapper {
+            margin-top: 8px !important;
+        }
+
+        [data-testid="stMarkdownContainer"]:has(.how-agy-modal-wrapper) {
+            margin-top: 8px !important;
+        }
+
+        .how-agy-btn {
+            position: absolute !important;
+            top: 1px !important;
+            right: 16px !important;
+            font-size: 10px !important;
+            padding: 4px 8px !important;
+            margin: 0 !important;
+        }
+
     }
 
     /* Extend background DOWN to cover purple header bleed-through */

@@ -328,7 +328,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_banking_trigge
         /* Header - compact and stacked */
         .conversation-header {
             padding: 20px 16px !important;
-            min-height: auto !important;
+            min-height: 145.59px !important;
             margin: 60px 0 0 0 !important;  /* clear 60px fixed mobile nav (nav bottom 60 - header top -16 = 76) */
         }
         .conversation-header-content {

@@ -31,17 +31,16 @@ def render_about_matt():
 <div class="about-header">
     <div class="about-header-content">
         <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/MattCartoon-Transparent.png"
-             width="120" height="120"
-             style="width: 120px; height: 120px; border-radius: 50%; border: 4px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.2); object-fit: cover; background: rgba(255,255,255,0.1);"
+             class="about-header-avatar"
              alt="Matt Pugmire">
         <div class="about-header-text">
-            <span class="prof-status-badge">● In active conversations</span>
             <h1>Matt Pugmire</h1>
-            <p style="line-height: 1.6; max-width: 800px;">
-                Engineering leader · builds organizations from zero · platform modernization · AI · Atlanta · open to relocate
+            <p>
+                Engineering leader · platform modernization · AI · Atlanta · open to relocate
             </p>
         </div>
     </div>
+    <span class="prof-status-badge">● In active conversations</span>
 </div>
         """,
         unsafe_allow_html=True,
