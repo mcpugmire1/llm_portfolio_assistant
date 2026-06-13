@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: b7f88d5 -->
+<!-- last-backlog-sync: ff6c788 -->
 
 Work state for the MattGPT project. The matrix below is the scannable view. Detail blocks for each item follow, linked by ID. Completed items live in `CHANGELOG.md`. Architectural decisions live in `docs/ADR.md`. Current system state lives in `ARCHITECTURE.md`.
 
@@ -138,12 +138,12 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-104](#mattgpt-104) | Banking + Cross-Industry landing pages — math reconciliation bug (33 vs 32 vs 48 vs 57 inconsistency) | Done | Medium | Issue | May 30, 2026 |
 | [MATTGPT-106](#mattgpt-106) | Navbar desktop layout — add MattGPT brand element, restructure to space-between (align with mobile + wireframe) | Done | Medium | Action | May 30, 2026 |
 | [MATTGPT-107](#mattgpt-107) | Home category cards redesign — unify card treatment, 3-column grid, compact content (align with wireframe) | Done | Medium | Action | May 31, 2026 |
-| [MATTGPT-108](#mattgpt-108) | Home category cards — add capability-based counts to the 4 non-industry cards (resolve asymmetry from -107 / -104) | Open | Medium | Action | June 1, 2026 |
+| [MATTGPT-108](#mattgpt-108) | Home category cards — add capability-based counts to the 4 non-industry cards (resolve asymmetry from -107 / -104) | Done | Medium | Action | June 1, 2026 |
 | [MATTGPT-109](#mattgpt-109) | mattgpt-design-spec Jekyll site — sync UI refresh changes (nav labels, navbar, cards, How I Built, How Agy Searches, Why Agy modal, user journeys) | Open | High | Action | June 1, 2026 |
 | [MATTGPT-111](#mattgpt-111) | My Work / Banking / Cross-Industry — back-link not dark-mode compliant (white pill on dark bg) | Done | Low | Issue | June 3, 2026 |
 | [MATTGPT-112](#mattgpt-112) | How Agy Searches dialog — too tall for mobile viewport + content not scrolled to top on open (375/430px) | Done | Low | Issue | June 3, 2026 |
 | [MATTGPT-113](#mattgpt-113) | Ask Agy landing — mobile polish pass (seed question chips + header height + button placement) | Done | Medium | Action | June 4, 2026 |
-| [MATTGPT-114](#mattgpt-114) | Page header typography — standardize title + subtitle via shared CSS classes across all 7 surfaces | Open | Medium | Refactor | June 5, 2026 |
+| [MATTGPT-114](#mattgpt-114) | Page header typography — standardize title + subtitle via shared CSS classes across all 7 surfaces | Done | Medium | Refactor | June 5, 2026 |
 | [MATTGPT-115](#mattgpt-115) | Lock icon — browser console warning: password field not in native form (st.popover portal breaks form containment) | Open | Low | Issue | June 6, 2026 |
 | [MATTGPT-117](#mattgpt-117) | How I Built dialog — BDD coverage for "See It In Action" prompt buttons and Ask Agy routing | Resolved | Medium | Action | June 7, 2026 |
 | [MATTGPT-118](#mattgpt-118) | My Profile — Copy snippet + Download PDF buttons (referrer workflow) | Done | Medium | Action | June 8, 2026 |
@@ -2545,36 +2545,6 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 
 ---
 
-### MATTGPT-108
-**Home category cards — add capability-based counts to the 4 non-industry cards (resolve asymmetry from -107 / -104)**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Action
-- **Issue:** After MATTGPT-104 landed (post-Era counts for Banking + Cross-Industry), the Home category cards section has a visible asymmetry — 2 cards (Banking + Cross-Industry) show `{N} projects · {client list}` in their meta, while the other 4 cards (Product Innovation, Application Modernization, Consulting & Transformation, Teams & Talent Development) show descriptive-only copy with no count. Matt's eyeball check June 1, 2026: *"we dropped the counts from the 'Product Innovation', 'Application Mod', Consulting and Teams — seems off balance."*
-- **Why the asymmetry exists today:** Banking + Cross-Industry are **industry-based** (`Industry == "Financial Services / Banking"` / `Industry == "Cross Industry"` — clean single-field filter → clean count). The other 4 are **capability-based** — stories can carry multiple capability tags, and the corpus dimension that maps to each card name isn't a single hardcoded field. The wireframe deliverable baked in this asymmetry; production followed.
-- **Audience impact:** A recruiter scanning Home expects all 6 cards to read consistently. The 2 cards with counts implicitly suggest "more depth here"; the 4 without read as either thinner or less curated. Visual hierarchy should be intentional, not an accident of which corpus field maps cleanly.
-- **Fix (Option A from the May 31, 2026 -104 follow-up discussion):**
-  1. **Phase 1 — Audit:** For each of the 4 non-industry cards, identify the corpus dimension(s) that should source the count. Candidates per card:
-     - Product Innovation & Strategy: probably `Theme` containing "Product" OR a capability tag like `Capability == "Product Innovation"` (if it exists)
-     - Application Modernization: `Capability == "Application Modernization"` or equivalent
-     - Consulting & Transformation: harder — may need multi-field OR (capabilities related to advisory / transformation / change management)
-     - Teams & Talent Development: `Capability == "Talent Development"` or `Theme` containing "Talent" / "Team" / "Coaching"
-     Cross-reference with `build_landing_cards()` in `utils/landing_cards.py` (which already categorizes stories by capability) — that aggregation logic may be directly reusable.
-  2. **Phase 2 — Implement:** In `ui/components/category_cards.py:402-437`, replace the static descriptive meta on the 4 cards with `{N} projects · {qualifier}` matching the Banking + Cross-Industry pattern. Qualifier could be the top 2-3 clients/themes/capabilities for that card's bucket (parallel to how Banking shows top clients).
-  3. **Phase 3 — Apply post-Era filter:** All counts must use the post-Era convention (exclude Professional Narrative) per MATTGPT-104's standing rule. Use the same helper pattern as banking_landing.py / cross_industry_landing.py.
-- **Scope (out):**
-  - No card REORDERING — keep the existing 6-card layout from MATTGPT-107.
-  - No new cards.
-  - No card-treatment changes (purple gradient, hover, etc.) — visual treatment stays per -107.
-  - Quick Question / Ask Agy Anything strip below the cards is a separate concern.
-- **Effort:** Medium — Phase 1 audit could take 30-60 min (corpus dimension exploration); Phase 2 implementation is straightforward (~30 min once the dimensions are picked); Phase 3 filter is mechanical (~5 min). Total ~1-2 hours.
-- **Cross-references:**
-  - **MATTGPT-107** — Home category cards redesign. -108 finishes the consistency story -107 started; -107 dropped italic Q lines / inline buttons to compact the cards, -108 brings the 4 non-industry cards into the same meta-format consistency as Banking + Cross-Industry.
-  - **MATTGPT-104** — Post-Era project counts. -108's counts must use the same post-Era convention.
-  - `utils/landing_cards.py:build_landing_cards` — existing capability-aggregation logic; may be reusable for the 4 cards' count source.
-- **Logged:** June 1, 2026
-
 ---
 
 ### MATTGPT-109
@@ -2615,33 +2585,6 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 - **Logged:** June 1, 2026
 
 ---
-
-### MATTGPT-114
-**Page header typography — standardize title + subtitle via shared CSS classes across all 7 surfaces**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Refactor
-- **Issue:** Header h1 and subtitle typography is inconsistent across pages — mix of inline styles, page-specific CSS rules, and global rules. Root cause of visual inconsistencies that are difficult to attribute to UI refresh changes vs pre-existing drift.
-- **Fix:** Add two shared CSS classes to `global_styles.py`:
-  ```css
-  .page-header-title  { font-size: 2rem !important; font-weight: 700 !important; color: white !important; padding: 0 !important; margin: 0 0 8px 0 !important; line-height: 1.2 !important; }
-  .page-header-subtitle { font-size: 1.1rem !important; font-weight: 400 !important; color: white !important; opacity: 0.95 !important; margin: 0 !important; line-height: 1.6 !important; }
-  ```
-  Then apply `class="page-header-title"` to every header h1 and `class="page-header-subtitle"` to every header p across all 7 surfaces.
-- **Surface checklist:**
-  1. `explore_stories.py` — My Work `.conversation-header` h1 + p
-  2. `role_match.py` — Role Match `.conversation-header` h1 + p
-  3. `banking_landing.py` — Banking h1 + p + avatar size fix (64→120px, remove inline border)
-  4. `cross_industry_landing.py` — Cross-Industry h1 + p + avatar size fix
-  5. `ask_mattgpt_header.py` — Ask Agy (landing + conversation) `.header-text` h1 + p CSS rules → delete, replaced by shared class in HTML
-  6. `about_matt.py` — My Profile h1 + p
-- **Acceptance criteria:**
-  - All 7 surfaces: title at 2rem, 700 weight, white, no Streamlit heading padding
-  - All 7 surfaces: subtitle at 1.1rem, 0.95 opacity, white, 8px top margin
-  - No inline font-size, font-weight, opacity, margin, or padding on any header h1 or p
-  - My Work and Role Match visually unchanged (regression check)
-- **Logged:** June 5, 2026
 
 ---
 ### MATTGPT-117
