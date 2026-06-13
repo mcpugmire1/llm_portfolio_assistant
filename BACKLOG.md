@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: a2d002b -->
+<!-- last-backlog-sync: b7f88d5 -->
 
 Work state for the MattGPT project. The matrix below is the scannable view. Detail blocks for each item follow, linked by ID. Completed items live in `CHANGELOG.md`. Architectural decisions live in `docs/ADR.md`. Current system state lives in `ARCHITECTURE.md`.
 
@@ -142,7 +142,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-109](#mattgpt-109) | mattgpt-design-spec Jekyll site — sync UI refresh changes (nav labels, navbar, cards, How I Built, How Agy Searches, Why Agy modal, user journeys) | Open | High | Action | June 1, 2026 |
 | [MATTGPT-111](#mattgpt-111) | My Work / Banking / Cross-Industry — back-link not dark-mode compliant (white pill on dark bg) | Done | Low | Issue | June 3, 2026 |
 | [MATTGPT-112](#mattgpt-112) | How Agy Searches dialog — too tall for mobile viewport + content not scrolled to top on open (375/430px) | Done | Low | Issue | June 3, 2026 |
-| [MATTGPT-113](#mattgpt-113) | Ask Agy landing — mobile polish pass (seed question chips + header height + button placement) | Open | Medium | Action | June 4, 2026 |
+| [MATTGPT-113](#mattgpt-113) | Ask Agy landing — mobile polish pass (seed question chips + header height + button placement) | Done | Medium | Action | June 4, 2026 |
 | [MATTGPT-114](#mattgpt-114) | Page header typography — standardize title + subtitle via shared CSS classes across all 7 surfaces | Open | Medium | Refactor | June 5, 2026 |
 | [MATTGPT-115](#mattgpt-115) | Lock icon — browser console warning: password field not in native form (st.popover portal breaks form containment) | Open | Low | Issue | June 6, 2026 |
 | [MATTGPT-117](#mattgpt-117) | How I Built dialog — BDD coverage for "See It In Action" prompt buttons and Ask Agy routing | Resolved | Medium | Action | June 7, 2026 |
@@ -2613,43 +2613,6 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
   - **MATTGPT-100, -106, -107** — nav / navbar / cards changes already shipped
   - **MATTGPT-093** — About Matt strategic restructure; spec's About Matt wireframe needs to reflect Profile v2 direction
 - **Logged:** June 1, 2026
-
----
-
-### MATTGPT-113
-**Ask Agy landing — mobile polish pass (seed question chips + header height + button placement)**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Action
-- **Logged:** June 4, 2026
-
-**Issue:** Three problems, one pass — doing them separately means re-evaluating the page twice.
-
-1. **Seed question chips redesign** — Current seed questions are full-sentence blocks that take up too much vertical space on mobile (54px height, 295px wide, wrap to 2 lines). They're plain `st.button()` calls in a 2-column grid — no `.ask-chip` or `.seed` class exists. Fix requires **new short chip text** (Python change to seed question list, e.g. "💳 Payments modernization") + CSS chip styling. CSS-only font truncation is too blunt and doesn't produce the "compact chip" intent.
-2. **Header height (201px on mobile vs ~125px on other pages)** — Rule `.ask-header-landing { min-height: 184px }` exists. Mobile override `min-height: auto !important` at `max-width: 768px` is already in place but not enough — the "How Agy searches" button falling to its own row inflates the height. Also: H1 `font-size: 2rem` on mobile makes the title 74px tall. Both need fixing together.
-3. **"How Agy searches" button inline with title** — Button class `.how-agy-btn` with `flex-shrink: 0` is in a separate Streamlit widget that renders after the markdown title block — not in the same flex row. **CSS-only fix:** `position: absolute; right: 32px; top: 50%; transform: translateY(-50%)` on `.how-agy-btn`, with `position: relative` on the header container. Pulls the button to the right of the header regardless of Streamlit's column flow.
-
-**Chrome Claude DevTools findings (June 12, 2026):**
-- Title H1 measured: `top: ~102, height: 74px` — `font-size: 2rem` is too large on mobile; reduce to `1.4rem` or `1.5rem`
-- Button measured: `top: 188, left: 102` — confirms it's below the title+subtitle stack, not beside it
-- Mobile min-height override fires correctly but button row is additive
-
-**Files:** `ui/pages/ask_mattgpt/landing_view.py`, `ui/pages/ask_mattgpt/styles.py`, `ui/components/ask_mattgpt_header.py`
-
-**Fix summary:**
-
-| Issue | Root cause | Fix type |
-|---|---|---|
-| Header too tall | Button falls to its own row + H1 2rem font | CSS: absolute positioning on `.how-agy-btn` + reduce H1 font-size on mobile |
-| Button not inline | Separate Streamlit widget, not in same flex row | CSS absolute positioning (cleanest path) |
-| Chips too wide/tall | Full-sentence labels in 2-col grid | New short chip text (Python) + CSS chip styling |
-
-**Acceptance criteria:**
-- Header height ~125px on mobile (matches other pages)
-- "How Agy searches" button sits to the right of title on same row
-- Seed questions render as compact single-line chips
-- Desktop (≥1024px): no regression
 
 ---
 

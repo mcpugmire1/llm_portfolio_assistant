@@ -20,6 +20,9 @@ All `st.markdown()` CSS injections across `footer.py`, `thinking_indicator.py`, 
 
 ### Ask Agy
 
+**June 13 — Ask Agy landing — mobile chip grid redesign + dialog fixes (MATTGPT-113)** — `ff175e9`, `b7f88d5`
+Mobile seed question chips redesigned as pill-shaped flex-wrap chips with short labels. Python mobile branch skips `st.columns()` on mobile (eliminates the stHorizontalBlock nuclear CSS rule conflict); desktop keeps 2-column grid with full questions. 3-tuples `(icon, short_label, full_question)` added to each chip. CSS: `.st-key-chip_grid` flex-wrap container with doubled-class specificity trick to beat global `stVerticalBlock gap: 4px` rule. Header height absolute-positioning fix shipped in `e7e079a`. Bonus fixes: Implementation Details grid (`details-grid`) single-column collapse on mobile corrected (two `1fr` rules → `repeat(2, 1fr)`); `deep-dive-card h3` font-size typo `8px` → `18px`.
+
 **June 10 — How Agy dialog — mobile height compaction + stMain scroll reset (MATTGPT-110 follow-up)** — `8f9a1b5`, `be2872e`
 Mobile viewport fix for the How Agy Searches dialog. CSS compaction across 5 selectors inside `@media (max-width: 640px)` in `_CSS` — `.search-card`, `.result-card`, `.result-wrapper`, `.cards-row`, `.pipeline-summary` padding/margin reductions totaling ~96px savings, bringing content from ~968px to ~872px against a ~595px usable area (Sections 1–2 fully visible on open; Section 3 reachable with one scroll). Scroll-to-top fix: `stMain.scrollTop = 0` added alongside existing `el.scrollTop = 0` in the scroll IIFE — `[data-testid="stMain"]` is Streamlit's real scroll container (confirmed via Chrome Claude DevTools; `window.scrollY` is always 0 under Streamlit's full-viewport flex layout). BDD regression guard: 2 scenarios covering scroll-to-top behavior added and passing.
 
