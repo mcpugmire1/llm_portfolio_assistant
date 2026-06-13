@@ -139,42 +139,78 @@ def render_landing_page(stories: list[dict]):
         qs = [
             (
                 "💳",
+                "Payments at JP Morgan",
                 "How did Matt modernize payments across 12+ countries at JP Morgan?",
             ),
-            ("🔬", "Tell me about Matt's early failure and experimentation approach"),
-            ("🚀", "How does Matt build teams that ship like startups in enterprise?"),
+            (
+                "🔬",
+                "Failure & experiments",
+                "Tell me about Matt's early failure and experimentation approach",
+            ),
+            (
+                "🚀",
+                "Startup-speed teams",
+                "How does Matt build teams that ship like startups in enterprise?",
+            ),
             (
                 "🏗️",
+                "Cloud Innovation Center",
                 "How did Matt establish and expand the Cloud Innovation Center in Atlanta?",
             ),
-            ("📈", "How did Matt scale learning and talent development at Accenture?"),
-            ("💥", "How does Matt handle resistance and failure in transformations?"),
+            (
+                "📈",
+                "Talent development",
+                "How did Matt scale learning and talent development at Accenture?",
+            ),
+            (
+                "💥",
+                "Leading through resistance",
+                "How does Matt handle resistance and failure in transformations?",
+            ),
         ]
 
-        c1, c2 = st.columns(2, gap="small")
+        is_mobile = int(st.session_state.get("_browser_screen_size") or "1024") < 768
 
         # Disable all buttons when any is processing
         disabled = st.session_state.get("processing_suggestion", False)
 
-        for i, (icon, q) in enumerate(qs):
-            with c1 if i % 2 == 0 else c2:
-                if st.button(
-                    f"{icon}  {q}",
-                    key=f"suggested_{i}",
-                    type="secondary",
-                    use_container_width=True,
-                    disabled=disabled,
-                ):
-                    # Set state and trigger rerun to show loading state
-                    # NOTE: Don't set "landing_input" - it's controlled by the widget
-                    st.session_state["ask_transcript"] = []
-                    st.session_state["processing_suggestion"] = True
-                    st.session_state["pending_query"] = q
-                    st.session_state["ask_input_value"] = q
-                    st.session_state["__ask_force_answer__"] = (
-                        True  # 🔥 BYPASS NONSENSE FILTER
-                    )
-                    st.rerun()
+        with st.container(key="chip_grid"):
+            if is_mobile:
+                # No st.columns() — CSS flex-wraps the chips directly as pills
+                for i, (icon, short_label, q) in enumerate(qs):
+                    if st.button(
+                        f"{icon}  {short_label}",
+                        key=f"suggested_{i}",
+                        type="secondary",
+                        disabled=disabled,
+                    ):
+                        st.session_state["ask_transcript"] = []
+                        st.session_state["processing_suggestion"] = True
+                        st.session_state["pending_query"] = q
+                        st.session_state["ask_input_value"] = q
+                        st.session_state["__ask_force_answer__"] = (
+                            True  # 🔥 BYPASS NONSENSE FILTER
+                        )
+                        st.rerun()
+            else:
+                c1, c2 = st.columns(2, gap="small")
+                for i, (icon, _short_label, q) in enumerate(qs):
+                    with c1 if i % 2 == 0 else c2:
+                        if st.button(
+                            f"{icon}  {q}",
+                            key=f"suggested_{i}",
+                            type="secondary",
+                            use_container_width=True,
+                            disabled=disabled,
+                        ):
+                            st.session_state["ask_transcript"] = []
+                            st.session_state["processing_suggestion"] = True
+                            st.session_state["pending_query"] = q
+                            st.session_state["ask_input_value"] = q
+                            st.session_state["__ask_force_answer__"] = (
+                                True  # 🔥 BYPASS NONSENSE FILTER
+                            )
+                            st.rerun()
 
     # === THINKING INDICATOR ===
     loading_placeholder = st.empty()

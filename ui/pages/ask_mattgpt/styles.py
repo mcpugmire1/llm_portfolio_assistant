@@ -624,13 +624,28 @@ def get_landing_css() -> str:
                 padding: 0 16px !important;
             }
 
-            /* Suggestion chips container - COMPACT */
-            div[data-testid="stHorizontalBlock"]:has(button[key^="suggested_"]) {
-                grid-template-columns: 1fr !important;
-                width: calc(100% - 24px) !important;
-                max-width: calc(100% - 24px) !important;
-                gap: 4px !important;
-                margin-bottom: 12px !important;
+            /* MATTGPT-113: chip flex-wrap pill grid — no st.columns() on mobile, no stHorizontalBlock to fight */
+            .st-key-chip_grid {
+                display: flex !important;
+                flex-direction: row !important;
+                flex-wrap: wrap !important;
+                gap: 8px !important;
+                margin-left: -16px !important;
+                margin-right: -16px !important;
+                width: calc(100% + 32px) !important;
+            }
+            .st-key-chip_grid .stVerticalBlock {
+                display: contents !important;
+            }
+            .st-key-chip_grid .stElementContainer {
+                width: auto !important;
+                float: none !important;
+                margin-right: 0 !important;
+            }
+            .st-key-chip_grid [class*="st-key-suggested_"] button {
+                width: auto !important;
+                white-space: nowrap !important;
+                border-radius: 20px !important;
             }
 
             /* Suggestion buttons - MUCH more compact */
