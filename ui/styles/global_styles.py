@@ -1162,7 +1162,7 @@ def apply_global_styles():
 }
 
 @media (max-width: 768px) {
-    .details-grid { grid-template-columns: 1fr; }
+    .details-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 .detail-card {
@@ -1934,7 +1934,7 @@ details[open]:has(.code-block) > summary::before {
     }
 
     .deep-dive-card h3 {
-        font-size: 8px !important;
+        font-size: 18px !important;
     }
 
     .deep-dive-card p {
@@ -1988,7 +1988,7 @@ details[open]:has(.code-block) > summary::before {
 
     /* Details grid */
     .details-grid {
-        grid-template-columns: 1fr !important;
+        grid-template-columns: repeat(2, 1fr) !important;
         gap: 12px !important;
     }
 

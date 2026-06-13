@@ -620,19 +620,31 @@ def get_landing_css() -> str:
             /* "TRY ASKING" title */
             .suggested-title {
                 font-size: 10px !important;
-                margin-bottom: 6px !important;
+                margin-bottom: 12px !important;
                 padding: 0 16px !important;
             }
 
-            /* MATTGPT-113: chip flex-wrap pill grid — no st.columns() on mobile, no stHorizontalBlock to fight */
+            /* MATTGPT-113: chip flex-wrap pill grid */
             .st-key-chip_grid {
                 display: flex !important;
                 flex-direction: row !important;
                 flex-wrap: wrap !important;
+                align-items: flex-start !important;
+                padding-top: 8px !important;
+            }
+            /* doubled class to beat global .stVerticalBlock gap: 4px rule */
+            .st-key-chip_grid.st-key-chip_grid {
                 gap: 8px !important;
-                margin-left: -16px !important;
-                margin-right: -16px !important;
-                width: calc(100% + 32px) !important;
+            }
+            .st-key-chip_grid.st-key-chip_grid [data-testid="stHorizontalBlock"] {
+                display: flex !important;
+                flex-direction: row !important;
+                flex-wrap: wrap !important;
+                gap: 8px !important;
+                align-items: flex-start !important;
+            }
+            .st-key-chip_grid [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
+                display: contents !important;
             }
             .st-key-chip_grid .stVerticalBlock {
                 display: contents !important;
@@ -642,10 +654,18 @@ def get_landing_css() -> str:
                 float: none !important;
                 margin-right: 0 !important;
             }
+            .st-key-chip_grid [class*="st-key-suggested_"] {
+                flex: 0 0 auto !important;
+                width: fit-content !important;
+                min-width: fit-content !important;
+                height: fit-content !important;
+                align-self: flex-start !important;
+            }
             .st-key-chip_grid [class*="st-key-suggested_"] button {
                 width: auto !important;
                 white-space: nowrap !important;
                 border-radius: 20px !important;
+                margin-top: 0 !important;
             }
 
             /* Suggestion buttons - MUCH more compact */
