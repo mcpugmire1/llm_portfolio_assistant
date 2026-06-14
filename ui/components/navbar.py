@@ -381,6 +381,12 @@ div[data-testid="stColumn"]:first-child p {
             if (link) {
                 link.onclick = function(e) {
                     e.preventDefault();
+                    // Hide Ask Agy avatars before the rerun fires (mobile path)
+                    doc.querySelectorAll('.header-agy-avatar, .main-avatar img').forEach(function(el) {
+                        el.style.opacity = '0';
+                        el.style.transition = 'none';
+                    });
+                    doc.body.offsetHeight;
                     var btn = doc.querySelector('[class*="st-key-' + links[id] + '"] button');
                     if (btn) btn.click();
                     dropdown.style.display = 'none';
