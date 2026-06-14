@@ -2435,6 +2435,18 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_my_work_trigge
         box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
     }
 
+    /* Suppress avatar flash during Streamlit page transitions.
+       CSS is global so the rule stays in CSSOM when navigating away from Ask Agy,
+       keeping stale avatar elements at opacity:0 for the 150ms main-thread block window. */
+    .main-avatar img,
+    .header-agy-avatar {
+        animation: agiAvatarReveal 0.15s ease-out 0.15s both;
+    }
+    @keyframes agiAvatarReveal {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
     .conversation-header-text h1 {
         color: white !important;
         margin: 0;

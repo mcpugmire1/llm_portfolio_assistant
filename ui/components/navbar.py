@@ -333,7 +333,7 @@ div[data-testid="stColumn"]:first-child p {
         var header = document.createElement('div');
         header.className = 'mobile-header';
         header.id = 'mobile-header';
-        header.innerHTML = '<button class="mobile-hamburger" id="mobile-hamburger" aria-label="Menu"><span></span><span></span><span></span></button><div class="mobile-brand"><img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png" alt="Agy"><span>MattGPT</span></div><div class="mobile-spacer"></div>';
+        header.innerHTML = '<button class="mobile-hamburger" id="mobile-hamburger" aria-label="Menu"><span></span><span></span><span></span></button><div class="mobile-brand"><img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png" width="44" height="44" alt="Agy"><span>MattGPT</span></div><div class="mobile-spacer"></div>';
         doc.body.insertBefore(header, doc.body.firstChild);
 
         // Create overlay
@@ -401,6 +401,32 @@ div[data-testid="stColumn"]:first-child p {
                 overlay.style.display = 'none';
                 hamburger.classList.remove('open');
             };
+        }
+
+        // Hide Ask Agy avatars before the Streamlit rerun fires.
+        // mousedown fires before React's synthetic onClick (which triggers the rerun),
+        // giving the browser time to paint opacity:0 before the transition starts.
+        // capture:true ensures we run before React's delegation handler.
+        // One-time setup via flag prevents duplicate listeners across reruns.
+        if (!doc.body.__agiNavAvatarHideV2) {
+            function _hideAgyAvatars() {
+                doc.querySelectorAll('.header-agy-avatar, .main-avatar img').forEach(function(el) {
+                    el.style.opacity = '0';
+                    el.style.transition = 'none';
+                });
+                doc.body.offsetHeight; // force synchronous layout so paint commits before click fires
+            }
+            doc.body.addEventListener('mousedown', function(e) {
+                if (e.target.closest && e.target.closest('[class*="st-key-topnav_"]')) {
+                    _hideAgyAvatars();
+                }
+            }, true);
+            doc.body.addEventListener('touchstart', function(e) {
+                if (e.target.closest && e.target.closest('[class*="st-key-topnav_"]')) {
+                    _hideAgyAvatars();
+                }
+            }, {capture: true, passive: true});
+            doc.body.__agiNavAvatarHideV2 = true;
         }
     })();
     </script>
