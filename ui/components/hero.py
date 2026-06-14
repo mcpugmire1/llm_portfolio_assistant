@@ -186,7 +186,7 @@ def render_hero():
                 <h1 style="font-size: 40px; font-weight: 700; padding-top: 0 !important; margin-top: 0 !important; margin-bottom: 10px; color: white;">Interview me before you interview me.</h1>
                 <p style="font-size: 17px; color: white; opacity: 0.95; max-width: 700px; margin: 0 auto 8px; line-height: 1.6;">In active search for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job.
                 </p>
-                <p style="font-size: 14px; color: white; opacity: 0.9; max-width: 600px; margin: 6px auto 18px; line-height: 1.55;">That's Agy, my Plott Hound and AI assistant, ready to track down insights from two decades of work.
+                <p style="font-size: 14px; color: white; opacity: 0.9; max-width: 600px; margin: 6px auto 18px; line-height: 1.55;">That's Agy, my Plott Hound and AI assistant, ready to track down insights across my full project history.
                 </p>
                 <div style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap;">
                     <a id="btn-role-match" class="hero-btn hero-btn-primary">

@@ -636,7 +636,7 @@ def render_header(include_button: bool = True, view: str = "landing") -> None:
                     </div>
                     <div class="header-text">
                         <h1>Ask Agy</h1>
-                        <p>Meet Agy 🐾, tracking down insights across 100+ projects.</p>
+                        <p>Meet Agy 🐾, tracking down insights across 100+ stories.</p>
                     </div>
                 </div>
                 """

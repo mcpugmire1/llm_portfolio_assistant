@@ -83,7 +83,7 @@ def render_landing_page(stories: list[dict]):
             </div>
             <h2 class="welcome-title">Hi, I'm Agy 🐾</h2>
             <p class="intro-text-primary">
-                Go deeper than a resume. Ask me anything about Matt's 100+ projects—I'll connect the dots.
+                Go deeper than a resume. Ask me anything about Matt's 100+ stories. I'll connect the dots.
             </p>
             <p style="font-size: 13px; font-style: italic; color: var(--text-muted); margin-top: 2px; margin-bottom: 0;">
                 Named in honor of Matt's Plott Hound companion.
@@ -319,7 +319,7 @@ def render_landing_page(stories: list[dict]):
 
     st.markdown('</div>', unsafe_allow_html=True)
     st.markdown(
-        '<p class="powered-by-text">Powered by OpenAI GPT-4o with semantic search across 100+ project case studies</p>',
+        '<p class="powered-by-text">Powered by OpenAI GPT-4o with semantic search across 100+ case studies</p>',
         unsafe_allow_html=True,
     )
 

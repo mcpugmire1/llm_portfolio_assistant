@@ -153,6 +153,9 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-125](#mattgpt-125) | CLAUDE.md targeted fixes — confirmed bugs + confirmed gaps from June 12 audit | Open | Medium | Action | June 12, 2026 |
 | [MATTGPT-126](#mattgpt-126) | Ask Agy landing — input border invisible on page load (CSS injection race) | Open | Low | Issue | June 12, 2026 |
 | [MATTGPT-127](#mattgpt-127) | Replace hardcoded `ASSESSMENT_MODEL` in `jd_assessor.py` with `get_conf()` env var pattern | Open | Low | Refactor | June 12, 2026 |
+| [MATTGPT-128](#mattgpt-128) | Displayed-source faithfulness — source cards must substantiate the claims in the answer | Open | High | Issue | June 14, 2026 |
+| [MATTGPT-129](#mattgpt-129) | Content elaboration per era — expand 5 under-documented operational stories | Open | High | Action | June 14, 2026 |
+| [MATTGPT-130](#mattgpt-130) | "practitioners" canonical everywhere — UI, eval golden set, corpus re-embed in lockstep | Open | Medium | Action | June 14, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -2737,3 +2740,89 @@ div[data-testid="stTextInput"] input {
 }
 ```
 `!important` is justified here — explicitly overriding Streamlit's own styling system is the stated purpose of the rule. Remove the stale `.st-bz/.st-c0/.st-c1/.st-c2` dead code in the same pass.
+
+---
+
+### MATTGPT-128
+**Displayed-source faithfulness — source cards must substantiate the claims in the answer**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Issue
+- **Logged:** June 14, 2026
+- **Depends on:** MATTGPT-080 (positioning docs separated from STAR stories), MATTGPT-094 (retrieval diversity)
+
+**Symptom (production-confirmed June 14, 2026):** Agy answered a Fiserv commercial-impact query with accurate numbers ($8.5M, 3% under budget, $500K penalties avoided) but the displayed source cards showed JP Morgan and Norfolk Southern — not the Fiserv STAR story. A recruiter who clicks to verify a claim finds the wrong sources. Observed across multiple probes: "Why Hire Matt" was cited as a source for a largest-team question AND an early-career telecom question, neither of which it substantiates.
+
+**Root cause (design fork — must be resolved before implementation):**
+Source cards currently display Pinecone retrieval top-k by score. That is a different set from what the LLM actually grounded the answer in. The likely Fiserv mechanism: the specific numbers came from the "Why Hire Matt" aggregate positioning doc (which summarizes wins across clients and ranks high on almost every query), while the Fiserv STAR story never entered the top-k. The cards honestly showed what was retrieved; the honest set was wrong.
+
+Two design options:
+- **Option A — Fix retrieval so the right story enters top-k.** Depends on -094 (retrieval diversity) and -080 (positioning docs separated so they can't crowd out STAR stories). Cards continue to show top-k; faithfulness improves as a consequence. No new display logic.
+- **Option B — Display what the answer was grounded in.** Requires the LLM to emit provenance (story IDs it drew from) alongside the answer, then surface those as the source cards. Decouples display from retrieval ranking. More engineering; higher faithfulness ceiling.
+
+**Acceptance criteria:**
+- For a set of client-specific queries (Fiserv, RBC, Capital One, AT&T), the named client's STAR story appears in the displayed source cards.
+- "Why Hire Matt" and MattGPT positioning docs do not appear as the sole sources for client-specific factual claims.
+
+**Eval to add:**
+For each client-specific probe query, assert `client_name in [s.get("Client") for s in displayed_sources]`. Mirrors the client-attribution pattern in Q15.
+
+**Note:** Option A cannot be fully evaluated until -080 ships (STAR stories and positioning docs separated in the index). Do not close this ticket with Option B alone unless Option A is explicitly decided against.
+
+---
+
+### MATTGPT-129
+**Content elaboration per era — expand 5 under-documented operational stories**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Action
+- **Logged:** June 14, 2026
+
+**Context:** Better retrieval diversity (-094) cannot surface depth that was never written. The five stories below are the strongest under-documented operational arc nodes — era-spread, no CIC, no JP Morgan. Each is tagged by effort mode. The two expand-from-logged ones can proceed immediately; the recovery ones route through elicitation.
+
+**Stories, tagged by effort mode:**
+
+1. **AT&T Southeast CRM Replacement (2005–2009)** — `expand-from-logged`
+   Facts already in corpus, compressed: $5M program, 40,000 daily DSL orders protected, $1B annual revenue at risk, foundation for 22-state architecture. Lowest effort; highest arc value; anchors the earliest era with hard numbers.
+
+2. **Fiserv $8.5M White-Label Card Portal recovery** — `expand-from-logged`
+   Rich facts already logged: $8.5M, 3% under budget, $255K saved, 47 acceptance criteria, zero critical defects at launch, $45M in transactions processed, $500K in Q4 penalties avoided, $3M contract extension. Cleanest ownable recovery story in the corpus. Write to STAR depth.
+
+3. **AT&T Mobility Service Delivery Platform** — `expand + light recovery`
+   Asset is logged; outcome metrics need reconstruction. Elicitation prompt: what was the before/after on service delivery throughput or customer impact?
+
+4. **Launchpad AWS enablement (200+ certifications)** — `expand + recovery`
+   Feeds the prototyping/Innovation era (currently 6 stories — thinnest era). Also doubles as People-and-Culture evidence outside the CIC. Elicitation: what was the certification count, timeline, and downstream delivery impact?
+
+5. **Capital One scaling development capacity** — `needs-recovery`
+   Two thin stories currently; surfaced as a source in production probes but light on specifics. Full elicitation needed before expansion.
+
+**Acceptance criteria:**
+- Each story reaches STAR depth: Situation (context + stakes), Task (scope + constraints), Action (what Matt specifically did), Result (quantified outcome).
+- No story references are expanded by paraphrasing existing thin content — only confirmed facts.
+- Stories 1 and 2 (expand-from-logged) completed before Stories 3–5 (recovery-dependent).
+
+**Sequencing:** Stories 3–5 are blocked on elicitation. Do not let recovery stories block Stories 1 and 2.
+
+---
+
+### MATTGPT-130
+**"practitioners" canonical everywhere — UI, eval golden set, corpus re-embed in lockstep**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Logged:** June 14, 2026
+
+**Context:** "engineers" vs "practitioners" drifts across three coupled surfaces. The UI fix (category_cards.py, about_matt.py) landed June 14, 2026. The eval golden set and embedded corpus still say "engineers," so retrieval keeps returning it and the eval suite is desynced from the UI.
+
+**Surfaces to update in lockstep:**
+1. ~~UI suggested prompts and page copy~~ — done June 14, 2026.
+2. **Eval golden set** — `tests/` canonical queries that reference "150+ engineers" → "practitioners". Grep: `grep -rn "150+ engineers\|engineers" tests/`.
+3. **Corpus content** — any STAR story whose Action/Result text says "engineers" when referring to CIC practitioners. Stories whose text changes must be re-embedded (delete from Pinecone, re-upsert).
+
+**Risk:** Changing only surface 1 leaves eval queries testing a term the UI no longer uses. Changing surfaces 2+3 without re-embedding leaves the index returning "engineers" on practitioner queries.
+
+**Acceptance criterion:** `grep -rn "150+ engineers" ui/ tests/ data/` returns 0 hits (excluding code comments and regex patterns in backend_service.py).

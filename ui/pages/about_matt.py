@@ -60,8 +60,8 @@ def render_about_matt():
             '<div class="am-signal-tile prof-signal-tile"><p class="prof-signal-lbl">Level</p><p class="prof-signal-val">Senior leader</p></div>'
             '<div class="am-signal-tile prof-signal-tile"><p class="prof-signal-lbl">Most recent</p><p class="prof-signal-val">Director, Cloud Innovation Center</p></div>'
             '<div class="am-signal-tile prof-signal-tile"><p class="prof-signal-lbl">Peak team</p><p class="prof-signal-val">150+ practitioners</p></div>'
-            '<div class="am-signal-tile prof-signal-tile"><p class="prof-signal-lbl">Geo</p><p class="prof-signal-val">Atlanta · relocate ok</p></div>'
-            '<div class="am-signal-tile prof-signal-tile"><p class="prof-signal-lbl">Status</p><p class="prof-signal-val">Active search</p></div>'
+            '<div class="am-signal-tile prof-signal-tile"><p class="prof-signal-lbl">Geo</p><p class="prof-signal-val">Atlanta · open to relocate</p></div>'
+            '<div class="am-signal-tile prof-signal-tile"><p class="prof-signal-lbl">Status</p><p class="prof-signal-val">Active conversations</p></div>'
             '<div class="am-signal-tile prof-signal-tile"><p class="prof-signal-lbl">Work mode</p><p class="prof-signal-val">Hybrid or in-person</p></div>'
             "</div>",
             unsafe_allow_html=True,
@@ -79,16 +79,17 @@ def render_about_matt():
             unsafe_allow_html=True,
         )
         st.markdown(
-            '<p class="prof-voice-p">I build what\'s next, modernize what\'s not, and grow teams along the way. '
-            'Before the Cloud Innovation Center I was the person JPMorgan called to build payments infrastructure '
-            'across 12 countries with a 60-engineer team. The CIC was the same work at a different scale, bringing '
-            'product culture into the enterprise: 150+ practitioners, 30+ products, $100M+ in repeat business.</p>'
-            '<p class="prof-voice-p">Early in my career, we specified everything upfront and found out if it worked at the very end. '
-            'I work the opposite way now: prototypes in days, a working MVP in weeks, quality built in from the '
-            'first commit rather than tested in afterward, with modern engineering and AI tightening the loop. '
-            'That is when a team becomes a system that delivers, and the people on it do work they are proud of.</p>'
-            '<p class="prof-voice-p">Career built through networking and referrals, not cold applications. '
-            'If you\'ve found me, you\'ve probably been told to.</p>',
+            '<p class="prof-voice-p">I build what\'s next, modernize what\'s not, and grow teams along the way.</p>'
+            '<p class="prof-voice-p">My foundation is in financial services technology at JPMorgan, Fiserv, RBC, and HSBC. '
+            'At JPMorgan I led several programs, the largest a 60+ person global team delivering the ACCESS payments platform '
+            'across 12 countries. That\'s where I learned to modernize regulated, high-stakes platforms without breaking them.</p>'
+            '<p class="prof-voice-p">Most recently I built Accenture\'s Cloud Innovation Center from zero to a 150+ practitioner '
+            'practice of engineers, architects, product managers, and HCD designers, serving 15+ Fortune 500 clients with no '
+            'dedicated sales team and generating $100M+ in repeat business. The work itself created the demand.</p>'
+            '<p class="prof-voice-p">I used to work in a world where we specified everything upfront and found out at the very end '
+            'whether it worked. I work the opposite way now: prototypes in days, a working MVP in weeks, quality built in from '
+            'the first commit, with modern engineering and AI tightening the loop. That\'s how a team becomes a system that '
+            'delivers, and the people on it do work they\'re proud of.</p>',
             unsafe_allow_html=True,
         )
 
@@ -118,11 +119,11 @@ def render_about_matt():
         '</svg>'
     )
     _REFERRER_SNIPPET = (
-        "Matt Pugmire is a senior product engineering leader with a track record of building at scale across two eras. "
-        "He built global payments infrastructure for JPMorgan across 12 countries with a 60-engineer team, then scaled "
-        "Accenture’s Cloud Innovation Center from zero to 150+ practitioners, 30+ products, and $100M+ in repeat business. "
-        "In active conversations for Head of Engineering and senior leadership roles. "
-        "Atlanta-based, open to relocate."
+        "Matt Pugmire is a senior product engineering leader who modernizes regulated, high-stakes platforms across "
+        "financial services and the enterprise. He led a 60+ person global team at JPMorgan and built Accenture's "
+        "Cloud Innovation Center from zero to a 150+ practitioner practice serving 15+ Fortune 500 clients, generating "
+        "$100M+ in repeat business with no dedicated sales team. He's now building hands-on with AI. "
+        "In active conversations for senior engineering leadership roles. Atlanta-based, open to relocate."
     )
     with st.container(key="am_for_a_referrer"):
         st.markdown(
@@ -220,28 +221,29 @@ def render_about_matt():
             "<div class='tile'><p class='tile-lbl'>Level</p><p class='tile-val'>Senior leader</p></div>"
             "<div class='tile'><p class='tile-lbl'>Most recent</p><p class='tile-val'>Director, Cloud Innovation Center</p></div>"
             "<div class='tile'><p class='tile-lbl'>Peak team</p><p class='tile-val'>150+ practitioners</p></div>"
-            "<div class='tile'><p class='tile-lbl'>Geo</p><p class='tile-val'>Atlanta &middot; relocate ok</p></div>"
-            "<div class='tile'><p class='tile-lbl'>Status</p><p class='tile-val'>Active search</p></div>"
+            "<div class='tile'><p class='tile-lbl'>Geo</p><p class='tile-val'>Atlanta &middot; open to relocate</p></div>"
+            "<div class='tile'><p class='tile-lbl'>Status</p><p class='tile-val'>Active conversations</p></div>"
             "<div class='tile'><p class='tile-lbl'>Work mode</p><p class='tile-val'>Hybrid or in-person</p></div>"
             "</div>"
             "<h2>In My Own Words</h2>"
-            "<p class='voice'>I build what&#39;s next, modernize what&#39;s not, and grow teams along the way. "
-            "Before the Cloud Innovation Center I was the person JPMorgan called to build payments infrastructure "
-            "across 12 countries with a 60-engineer team. The CIC was the same work at a different scale, bringing "
-            "product culture into the enterprise: 150+ practitioners, 30+ products, $100M+ in repeat business.</p>"
-            "<p class='voice'>Early in my career, we specified everything upfront and found out if it worked at the very end. "
-            "I work the opposite way now: prototypes in days, a working MVP in weeks, quality built in from the "
-            "first commit rather than tested in afterward, with modern engineering and AI tightening the loop. "
-            "That is when a team becomes a system that delivers, and the people on it do work they are proud of.</p>"
-            "<p class='voice'>Career built through networking and referrals, not cold applications. "
-            "If you&#39;ve found me, you&#39;ve probably been told to.</p>"
+            "<p class='voice'>I build what&#39;s next, modernize what&#39;s not, and grow teams along the way.</p>"
+            "<p class='voice'>My foundation is in financial services technology at JPMorgan, Fiserv, RBC, and HSBC. "
+            "At JPMorgan I led several programs, the largest a 60+ person global team delivering the ACCESS payments platform "
+            "across 12 countries. That&#39;s where I learned to modernize regulated, high-stakes platforms without breaking them.</p>"
+            "<p class='voice'>Most recently I built Accenture&#39;s Cloud Innovation Center from zero to a 150+ practitioner "
+            "practice of engineers, architects, product managers, and HCD designers, serving 15+ Fortune 500 clients with no "
+            "dedicated sales team and generating $100M+ in repeat business. The work itself created the demand.</p>"
+            "<p class='voice'>I used to work in a world where we specified everything upfront and found out at the very end "
+            "whether it worked. I work the opposite way now: prototypes in days, a working MVP in weeks, quality built in from "
+            "the first commit, with modern engineering and AI tightening the loop. That&#39;s how a team becomes a system that "
+            "delivers, and the people on it do work they&#39;re proud of.</p>"
             "<h2>Core Competencies</h2><div class='comp-grid'>"
-            "<div class='comp-card'><p class='comp-name'>Product &amp; Innovation</p><p class='comp-desc'>From discovery and prototypes to enterprise platforms, built around outcomes.</p></div>"
-            "<div class='comp-card'><p class='comp-name'>Modern Engineering</p><p class='comp-desc'>Cloud-native and event-driven, with quality engineered in so defects stay out of production.</p></div>"
-            "<div class='comp-card'><p class='comp-name'>Product delivery at scale</p><p class='comp-desc'>Scaling product delivery across teams: SAFe, Team Topologies, and the operating model that keeps it fast.</p></div>"
-            "<div class='comp-card'><p class='comp-name'>Transformation Leadership</p><p class='comp-desc'>Moving organizations from IT delivery to product operating models, and making the shift stick.</p></div>"
-            "<div class='comp-card'><p class='comp-name'>Team Building</p><p class='comp-desc'>Building cross-functional product teams from zero, and the capability to keep them growing.</p></div>"
-            "<div class='comp-card'><p class='comp-name'>AI &amp; Emerging Tech</p><p class='comp-desc'>RAG, vector search, and eval-driven development; built hands-on.</p></div>"
+            "<div class='comp-card'><p class='comp-name'>Product &amp; Discovery</p><p class='comp-desc'>Discovery, framing, and prototyping that settle what to build before the build starts.</p></div>"
+            "<div class='comp-card'><p class='comp-name'>Modern Engineering</p><p class='comp-desc'>Cloud-native and event-driven, quality engineered in from the first commit. TDD, pair programming, CI/CD.</p></div>"
+            "<div class='comp-card'><p class='comp-name'>Organization Building</p><p class='comp-desc'>Engineering organizations and the operating model that scales them. Team Topologies, delivery rhythm, practices that outlast the org chart.</p></div>"
+            "<div class='comp-card'><p class='comp-name'>Enterprise Transformation</p><p class='comp-desc'>Regulated enterprises moved from IT delivery to a product operating model, and the change holds.</p></div>"
+            "<div class='comp-card'><p class='comp-name'>People &amp; Culture</p><p class='comp-desc'>Cross-functional teams built from zero, plus the reskilling and mentorship that keep them growing.</p></div>"
+            "<div class='comp-card'><p class='comp-name'>AI &amp; Emerging Tech</p><p class='comp-desc'>RAG, vector search, and eval-driven development, built hands-on.</p></div>"
             "</div>"
             "<h2>How I Lead</h2><div class='lead-grid'>"
             "<div class='lead-card'><p class='lead-h'>Outcomes over output</p><p class='lead-p'>I measure a team by what it changes, not how much it produces.</p></div>"
@@ -250,8 +252,8 @@ def render_about_matt():
             "<div class='lead-card'><p class='lead-h'>Grow the people</p><p class='lead-p'>I develop people with the same discipline I bring to building systems.</p></div>"
             "</div>"
             "<h2>Career Evolution</h2><div class='tl'>"
-            "<div class='tl-item'><p class='tl-period'>2023&#8211;2026</p><p class='tl-role'>Sabbatical | Innovation &amp; Upskilling</p><p class='tl-org'>Independent</p><p class='tl-desc'>Sabbatical to recharge, refocus, and reskill &#8212; with MattGPT as tangible proof of the work.</p></div>"
-            "<div class='tl-item'><p class='tl-period'>2019&#8211;2023</p><p class='tl-role'>Director, Cloud Innovation Center</p><p class='tl-org'>Accenture</p><p class='tl-desc'>Launched Innovation Centers (150+ engineers) &#183; 30+ products &#183; $100M+ in repeat business &#183; 4x faster delivery.</p></div>"
+            "<div class='tl-item'><p class='tl-period'>2023&#8211;2026</p><p class='tl-role'>Sabbatical | Innovation &amp; Upskilling</p><p class='tl-org'>Independent</p><p class='tl-desc'>Sabbatical to recharge, refocus, and reskill. MattGPT is tangible proof of the work.</p></div>"
+            "<div class='tl-item'><p class='tl-period'>2019&#8211;2023</p><p class='tl-role'>Director, Cloud Innovation Center</p><p class='tl-org'>Accenture</p><p class='tl-desc'>Launched Innovation Centers (150+ practitioners) &#183; 30+ products &#183; $100M+ in repeat business &#183; 4x faster delivery.</p></div>"
             "<div class='tl-item'><p class='tl-period'>2016&#8211;2023</p><p class='tl-role'>Capability Development Lead, CloudFirst</p><p class='tl-org'>Accenture</p><p class='tl-desc'>Enterprise capability development, engineering enablement, and culture transformation.</p></div>"
             "<div class='tl-item'><p class='tl-period'>2018&#8211;2019</p><p class='tl-role'>Cloud Native Architecture Lead, Liquid Studio</p><p class='tl-org'>Accenture</p><p class='tl-desc'>Cloud-native prototyping and product shaping through rapid experimentation and modern engineering practices.</p></div>"
             "<div class='tl-item'><p class='tl-period'>2009&#8211;2017</p><p class='tl-role'>Sr. Technology Architecture Manager, Financial Services</p><p class='tl-org'>Accenture</p><p class='tl-desc'>Financial services platform modernization and architecture at global scale.</p></div>"
@@ -290,28 +292,28 @@ def render_about_matt():
             """
 <div class="competencies-grid prof-comp-grid">
     <div class="competency-card prof-comp-card">
-        <h4 class="prof-comp-name">Product &amp; Innovation</h4>
-        <p class="prof-comp-desc">From discovery and prototypes to enterprise platforms, built around outcomes.</p>
+        <h4 class="prof-comp-name">Product &amp; Discovery</h4>
+        <p class="prof-comp-desc">Discovery, framing, and prototyping that settle what to build before the build starts.</p>
     </div>
     <div class="competency-card prof-comp-card">
         <h4 class="prof-comp-name">Modern Engineering</h4>
-        <p class="prof-comp-desc">Cloud-native and event-driven, with quality engineered in so defects stay out of production.</p>
+        <p class="prof-comp-desc">Cloud-native and event-driven, quality engineered in from the first commit. TDD, pair programming, CI/CD.</p>
     </div>
     <div class="competency-card prof-comp-card">
-        <h4 class="prof-comp-name">Product delivery at scale</h4>
-        <p class="prof-comp-desc">Scaling product delivery across teams: SAFe, Team Topologies, and the operating model that keeps it fast.</p>
+        <h4 class="prof-comp-name">Organization Building</h4>
+        <p class="prof-comp-desc">Engineering organizations and the operating model that scales them. Team Topologies, delivery rhythm, practices that outlast the org chart.</p>
     </div>
     <div class="competency-card prof-comp-card">
-        <h4 class="prof-comp-name">Transformation Leadership</h4>
-        <p class="prof-comp-desc">Moving organizations from IT delivery to product operating models, and making the shift stick.</p>
+        <h4 class="prof-comp-name">Enterprise Transformation</h4>
+        <p class="prof-comp-desc">Regulated enterprises moved from IT delivery to a product operating model, and the change holds.</p>
     </div>
     <div class="competency-card prof-comp-card">
-        <h4 class="prof-comp-name">Team Building</h4>
-        <p class="prof-comp-desc">Building cross-functional product teams from zero, and the capability to keep them growing.</p>
+        <h4 class="prof-comp-name">People &amp; Culture</h4>
+        <p class="prof-comp-desc">Cross-functional teams built from zero, plus the reskilling and mentorship that keep them growing.</p>
     </div>
     <div class="competency-card prof-comp-card">
         <h4 class="prof-comp-name">AI &amp; Emerging Tech</h4>
-        <p class="prof-comp-desc">RAG, vector search, and eval-driven development; built hands-on.</p>
+        <p class="prof-comp-desc">RAG, vector search, and eval-driven development, built hands-on.</p>
     </div>
 </div>
             """,
@@ -375,13 +377,13 @@ def render_about_matt():
         <p class="timeline-year prof-timeline-period">2023–2026</p>
         <p class="prof-timeline-role">Sabbatical | Innovation &amp; Upskilling</p>
         <p class="prof-timeline-org">Independent</p>
-        <p class="prof-timeline-desc">Sabbatical to recharge, refocus, and reskill — with MattGPT as tangible proof of the work.</p>
+        <p class="prof-timeline-desc">Sabbatical to recharge, refocus, and reskill. MattGPT is tangible proof of the work.</p>
     </div>
     <div class="timeline-item prof-timeline-item">
         <p class="timeline-year prof-timeline-period">2019–2023</p>
         <p class="prof-timeline-role">Director, Cloud Innovation Center</p>
         <p class="prof-timeline-org">Accenture</p>
-        <p class="prof-timeline-desc">Launched Innovation Centers (150+ engineers) • 30+ products • $100M+ in repeat business • 4x faster delivery.</p>
+        <p class="prof-timeline-desc">Launched Innovation Centers (150+ practitioners) • 30+ products • $100M+ in repeat business • 4x faster delivery.</p>
     </div>
     <div class="timeline-item prof-timeline-item">
         <p class="timeline-year prof-timeline-period">2016–2023</p>

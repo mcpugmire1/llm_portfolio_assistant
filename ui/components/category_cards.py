@@ -23,7 +23,7 @@ import streamlit as st
 #   - tests/eval_rag_quality.py GOLDEN_QUERIES["narrative"] entries 62-64
 # Out-of-sync edits break either the BDD wiring or the eval quality pinning.
 _CHIP_QUESTIONS = [
-    "How did Matt scale a Cloud Innovation Center from 0 to 150+ engineers?",
+    "How did Matt scale a Cloud Innovation Center from 0 to 150+ practitioners?",
     "How does Matt build teams that ship like startups in enterprise?",
     "How does Matt manage resistance when leading enterprise transformation programs?",
 ]
