@@ -31,7 +31,7 @@ Feature: Landing page + Home card project counts align with post-Era convention 
     Then the Cross-Industry hero subtitle should contain the post-Era Cross-Industry count
     And the Cross-Industry stats bar should display the post-Era Cross-Industry count
 
-  Scenario: Home category cards display post-Era project counts
+  Scenario: Home category cards display descriptive copy
     Given the user navigates to the home page
-    Then the Banking category card should display the post-Era Banking count
-    And the Cross-Industry category card should display the post-Era Cross-Industry count
+    Then the Banking category card meta should contain "Payments infrastructure"
+    And the Cross-Industry category card meta should contain "Cloud-native products"

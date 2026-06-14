@@ -112,9 +112,15 @@ Feature: My Profile — Content polish bundle (MATTGPT-068)
   # COMPETENCY RENAME (MATTGPT-093, Item 2)
   # ---------------------------------------------------------------------------
 
-  Scenario: Agile at Scale competency is renamed to Product delivery at scale
-    Then the competencies grid should contain a card with heading "Product delivery at scale"
+  Scenario: Core competencies show the six current headings
+    Then the competencies grid should contain a card with heading "Product & Discovery"
+    And the competencies grid should contain a card with heading "Modern Engineering"
+    And the competencies grid should contain a card with heading "Organization Building"
+    And the competencies grid should contain a card with heading "Enterprise Transformation"
+    And the competencies grid should contain a card with heading "People & Culture"
+    And the competencies grid should contain a card with heading "AI & Emerging Tech"
     And the competencies grid should not contain a card with heading "Agile at Scale"
+    And the competencies grid should not contain a card with heading "Product delivery at scale"
 
   # ---------------------------------------------------------------------------
   # HOW I LEAD (MATTGPT-093, Item 3)
@@ -151,7 +157,7 @@ Feature: My Profile — Content polish bundle (MATTGPT-068)
     And the signals panel should contain "Director, Cloud Innovation Center"
     And the signals panel should contain "150+ practitioners"
     And the signals panel should contain "Atlanta"
-    And the signals panel should contain "Active search"
+    And the signals panel should contain "Active conversations"
     And the signals panel should contain "Hybrid or in-person"
 
   # ---------------------------------------------------------------------------
@@ -164,7 +170,7 @@ Feature: My Profile — Content polish bundle (MATTGPT-068)
 
   Scenario: In my own words voice block contains the brand line and referral close
     Then the "In my own words" section should contain "I build what's next, modernize what's not"
-    And the "In my own words" section should contain "Career built through networking and referrals"
+    And the "In my own words" section should contain "The work itself created the demand"
 
   # ---------------------------------------------------------------------------
   # FOR A REFERRER — snippet and action buttons (MATTGPT-093, expanded scope)
@@ -188,4 +194,4 @@ Feature: My Profile — Content polish bundle (MATTGPT-068)
   # ---------------------------------------------------------------------------
 
   Scenario: Profile header subtitle matches the locked production text
-    Then the profile header should contain "Engineering leader · builds organizations from zero · platform modernization · AI · Atlanta · open to relocate"
+    Then the profile header should contain "Engineering leader · platform modernization · AI · Atlanta · open to relocate"

@@ -25,7 +25,7 @@ import json
 import re
 from pathlib import Path
 
-from pytest_bdd import given, scenarios, then
+from pytest_bdd import given, parsers, scenarios, then
 
 scenarios("../features/post_era_project_counts.feature")
 
@@ -218,33 +218,23 @@ def assert_cross_industry_stats_post_era(browser_page):
     )
 
 
-@then("the Banking category card should display the post-Era Banking count")
-def assert_home_banking_card_post_era(browser_page):
-    stories = _load_corpus()
-    expected = _post_era_count(stories, BANKING_INDUSTRY)
+@then(parsers.parse('the Banking category card meta should contain "{text}"'))
+def assert_home_banking_card_meta_contains(browser_page, text):
     meta = browser_page.locator("#card-banking .home-cat-meta").first
     meta.wait_for(state="visible", timeout=LONG_TIMEOUT)
-    text = meta.inner_text()
-    actual = _read_count_from_text(text)
-    assert actual == expected, (
-        f"Home Banking category card should show {expected} (post-Era), "
-        f"found {actual} in card text: {text!r}. MATTGPT-104: Home card "
-        f"meta still uses raw len(banking_stories)."
+    actual = meta.inner_text()
+    assert text in actual, (
+        f"Banking card meta should contain {text!r}, got: {actual!r}. "
+        f"MATTGPT-108: Home cards now use descriptive copy, not counts."
     )
 
 
-@then(
-    "the Cross-Industry category card should display the post-Era Cross-Industry count"
-)
-def assert_home_cross_industry_card_post_era(browser_page):
-    stories = _load_corpus()
-    expected = _post_era_count(stories, CROSS_INDUSTRY)
+@then(parsers.parse('the Cross-Industry category card meta should contain "{text}"'))
+def assert_home_cross_industry_card_meta_contains(browser_page, text):
     meta = browser_page.locator("#card-cross-industry .home-cat-meta").first
     meta.wait_for(state="visible", timeout=LONG_TIMEOUT)
-    text = meta.inner_text()
-    actual = _read_count_from_text(text)
-    assert actual == expected, (
-        f"Home Cross-Industry category card should show {expected} (post-Era), "
-        f"found {actual} in card text: {text!r}. MATTGPT-104: Home card "
-        f"meta still uses raw len(cross_industry_stories)."
+    actual = meta.inner_text()
+    assert text in actual, (
+        f"Cross-Industry card meta should contain {text!r}, got: {actual!r}. "
+        f"MATTGPT-108: Home cards now use descriptive copy, not counts."
     )
