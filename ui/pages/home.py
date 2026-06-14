@@ -5,9 +5,13 @@ Hero section with portfolio overview, category cards, and CTAs.
 This is the main landing page users see when they first visit.
 """
 
+import streamlit as st
+
 from ui.components.category_cards import render_category_cards
 from ui.components.footer import render_footer
 from ui.components.hero import render_hero, render_section_title, render_stats_bar
+from ui.components.how_i_built_dialog import render_how_i_built_dialog
+from ui.components.why_agy_dialog import render_why_agy_dialog
 
 
 def render_home_page(stories: list[dict] | None = None):
@@ -24,6 +28,13 @@ def render_home_page(stories: list[dict] | None = None):
     4. Category exploration cards
     5. Footer with contact information
     """
+
+    if st.session_state.get("active_dialog") == "why_agy":
+        render_why_agy_dialog()
+        st.session_state.pop("active_dialog", None)
+    elif st.session_state.get("active_dialog") == "how_i_built":
+        render_how_i_built_dialog()
+        st.session_state.pop("active_dialog", None)
 
     # Hero section
     render_hero()

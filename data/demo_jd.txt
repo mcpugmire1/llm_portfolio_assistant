@@ -1,0 +1,61 @@
+Senior Engineering Leader, Product Platform
+
+Company context (fictional): Established enterprise company with a core platform that drives revenue, a growing product portfolio, and an engineering organization that has outgrown its current structure. Leadership recognizes that engineering needs to operate as a strategic function, not a delivery service.
+
+
+About the role
+
+We're looking for a senior engineering leader to own the build-out and evolution of our product engineering organization. This is not a maintenance role. Our platform serves millions of users in a regulated environment, and we need someone who can modernize it without disrupting the business that depends on it — while simultaneously building the engineering culture and capability to sustain that evolution long-term.
+
+You will report to the CTO and partner directly with Product, Design, and Business leadership. You will own engineering strategy, organizational design, talent development, and delivery outcomes.
+
+
+What you will own
+
+
+Lead and scale a cross-functional product engineering organization (150-300 engineers, product managers, and designers)
+Define the engineering operating model: hiring philosophy, team structure, delivery practices, quality standards, and career development
+Drive platform modernization across a legacy core while maintaining business continuity
+Establish AI-assisted engineering practices with guardrails for quality, security, and responsible adoption
+Partner with C-suite to translate business strategy into technical roadmap and organizational priorities
+Build a culture of sustainable delivery — high throughput without heroics
+
+
+
+Required qualifications
+
+
+10+ years of progressive software engineering experience, including hands-on development earlier in career
+5+ years leading engineering managers and senior technical leaders in a multi-team environment
+Demonstrated experience building or scaling an engineering organization (from early stage to 100+ or inheriting and restructuring an existing org)
+Cloud-native architecture experience (AWS, Azure, or GCP) at the platform level
+Track record of legacy platform modernization in production environments without business disruption
+Cross-functional leadership experience — engineering, product, and design operating as integrated units
+Experience establishing or maturing engineering delivery practices (CI/CD, automated testing, observability, release management)
+Regulated industry experience (financial services, healthcare, government, or equivalent complexity)
+Demonstrated ability to translate business strategy into engineering roadmap and organizational structure
+AI/ML adoption strategy — practical experience introducing AI-assisted development practices into an engineering organization
+Modern technology stack fluency across frontend and backend (React or equivalent, Python/Node.js/Go, containerized microservices)
+Budget ownership or P&L accountability for an engineering function
+
+
+
+Preferred qualifications
+
+
+Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background
+Healthcare, insurance, or life sciences domain knowledge
+Hands-on Kubernetes experience at production scale (cluster management, service mesh, multi-tenant orchestration)
+Graduate degree in a technical field (Computer Science, Engineering, Information Technology, or related)
+Published thought leadership or conference speaking on engineering culture, modernization, or AI adoption
+
+
+
+Location
+
+Multiple office locations. Hybrid or in-person preferred. Open to relocation for the right candidate.
+
+
+Compensation
+
+Competitive with market for senior engineering leadership. Equity participation included.

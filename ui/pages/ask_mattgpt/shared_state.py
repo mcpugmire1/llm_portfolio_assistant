@@ -1,5 +1,5 @@
 """
-Shared State Management for Ask MattGPT
+Shared State Management for Ask Agy
 
 Provides explicit namespacing and ownership of session state keys.
 Prevents state collisions between landing and conversation views.
@@ -9,7 +9,7 @@ import streamlit as st
 
 
 class AskMattGPTState:
-    """Manages session state for Ask MattGPT with clear view boundaries."""
+    """Manages session state for Ask Agy with clear view boundaries."""
 
     # ========== SHARED STATE ==========
     # Used by both landing and conversation views
@@ -169,8 +169,8 @@ class AskMattGPTState:
         """Set show_ask_panel flag."""
         st.session_state["show_ask_panel"] = value
 
-    # ========== EXPLORE STORIES INTEGRATION ==========
-    # Manages state when coming from Explore Stories
+    # ========== MY WORK INTEGRATION ==========
+    # Manages state when coming from My Work
 
     @staticmethod
     def get_active_story() -> str | None:
@@ -213,7 +213,7 @@ class AskMattGPTState:
 
     @staticmethod
     def clear_explore_stories_state():
-        """Clear Explore Stories-specific state when entering Ask MattGPT."""
+        """Clear My Work-specific state when entering Ask Agy."""
         st.session_state.pop("active_story", None)
         st.session_state.pop("active_story_obj", None)
         st.session_state.pop("transcript_source_expanded_id", None)
@@ -233,7 +233,7 @@ class AskMattGPTState:
 
 # Convenience function for initialization
 def init_ask_mattgpt_state():
-    """Initialize all Ask MattGPT session state with defaults."""
+    """Initialize all Ask Agy session state with defaults."""
     if "ask_transcript" not in st.session_state:
         st.session_state["ask_transcript"] = []
     if "filters" not in st.session_state:

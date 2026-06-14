@@ -4,7 +4,7 @@ BDD Step Definitions for Banking Landing Page Capability Cards.
 Currently only the regression scenario is wired up — it pins the contract
 that the data-derivation refactor (Phase 2, May 12 2026) is supposed to
 guarantee: every visible capability card on the Banking landing leads to a
-non-empty Explore Stories result. If any card has 0 backing stories, the
+non-empty My Work result. If any card has 0 backing stories, the
 data-derivation broke or someone added a hardcoded card.
 
 Other scenarios in banking_landing.feature are documented acceptance
@@ -34,7 +34,7 @@ def wait_for_streamlit_rerun(page):
 
 @scenario(
     "../features/banking_landing.feature",
-    "Clicking a capability card lands on Explore Stories scrolled to the top",
+    "Clicking a capability card lands on My Work scrolled to the top",
 )
 def test_banking_capability_click_resets_scroll():
     """Regression test for the landing → Explore scroll-position bug (May 12 2026).
@@ -43,7 +43,7 @@ def test_banking_capability_click_resets_scroll():
     explore_stories.py reset scroll only inside the prefilter_era branch, so
     Timeline → Explore worked but landing-card → Explore (which sets
     prefilter_capability / prefilter_domains / prefilter_industry) inherited
-    the landing page's scrolled-down position. Users landed on Explore Stories
+    the landing page's scrolled-down position. Users landed on My Work
     with the hero and filter strip above the viewport. Fix hoists the
     scrollTo(0,0) call out so it fires for ANY consumed prefilter.
     """
@@ -51,7 +51,7 @@ def test_banking_capability_click_resets_scroll():
 
 @scenario(
     "../features/banking_landing.feature",
-    "Clicking the top Core capability card lands on a filtered Explore Stories with results",
+    "Clicking the top Core capability card lands on a filtered My Work with results",
 )
 def test_top_banking_capability_lands_with_results():
     """Regression test for the data-derivation refactor.
@@ -59,8 +59,8 @@ def test_top_banking_capability_lands_with_results():
     Prior to the refactor: banking_landing.py rendered a hardcoded list of 15
     capability cards, 4 of which had zero matching banking stories. Clicking
     those broken cards (Compliance & Risk Solutions, Cloud Transformation,
-    Application Modernization, Adoption Enablement) landed users on Explore
-    Stories with the capability filter silently sanitized to "All" — showing
+    Application Modernization, Adoption Enablement) landed users on My Work
+    with the capability filter silently sanitized to "All" — showing
     113 unfiltered stories instead of the promised banking slice.
 
     After the refactor: cards are derived from build_landing_cards(), which
@@ -166,16 +166,16 @@ def click_top_capability_card(browser_page):
 def assert_active_tab(browser_page, tab_name):
     """Verify navigation landed on the expected tab.
 
-    For Explore Stories: .results-count is unique to that page; its presence
-    is a reliable proxy for active_tab == "Explore Stories".
+    For My Work: .es-results-count is unique to that page; its presence
+    is a reliable proxy for active_tab == "My Work".
     """
-    if tab_name == "Explore Stories":
-        browser_page.wait_for_selector(".results-count", timeout=15000)
+    if tab_name == "My Work":
+        browser_page.wait_for_selector(".es-results-count", timeout=15000)
 
 
-@then("the Explore Stories page should be scrolled to the top")
+@then("the My Work page should be scrolled to the top")
 def assert_explore_scrolled_to_top(browser_page):
-    """Verify the Explore Stories page loaded at the top.
+    """Verify the My Work page loaded at the top.
 
     Streamlit preserves scroll across reruns by default. The fix in the
     prefilter handler block of explore_stories.py forces the main content
@@ -195,7 +195,7 @@ def assert_explore_scrolled_to_top(browser_page):
     )
     assert scroll_top <= 50, (
         f"stMain scrollTop is {scroll_top}px after landing-card click — "
-        f"Explore Stories inherited the landing page's scroll position "
+        f"My Work inherited the landing page's scroll position "
         f"instead of resetting to top. Fix lives in the prefilter handler "
         f"block in explore_stories.py — scroll-to-top must fire for ANY "
         f"consumed prefilter and target [data-testid='stMain']."
@@ -209,7 +209,7 @@ def assert_result_count_above(browser_page, floor):
     If the count is 0, the card we clicked has no backing banking stories —
     a broken card slipped through the data-derivation contract.
     """
-    count_el = browser_page.locator(".results-count").first
+    count_el = browser_page.locator(".es-results-count").first
     count_el.wait_for(state="visible", timeout=10000)
     text = count_el.inner_text()
     # Pattern: "Showing 1–N of TOTAL projects" — extract TOTAL.

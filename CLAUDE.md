@@ -74,6 +74,8 @@
   5. **Streamlit class names like `st-emotion-cache-*` change between versions** — Target `data-testid` or `.st-key-*` classes instead
   6. **Use existing CSS variables** — Check `global_styles.py` for `--bg-card`, `--border-color`, `--text-primary`, `--accent-purple`, etc. Don't invent new ones.
   7. **Container keys for targeting** — Use `st.container(key="my_container")` then target with `.st-key-my_container` in CSS
+  8. **DevTools-inspection BEFORE proposing CSS fixes** — For any layout/alignment/positioning/sizing issue, ask Matt to inspect the element in DevTools (or run DevTools AI) and paste the computed styles before proposing CSS. Source-code reasoning misses Streamlit's wrapper-layer surprises (`stMarkdown` / `stMarkdownContainer` / `stVerticalBlock` wrappers often have their own `align-self`, `display`, or `padding` that defeats centering rules applied to the parent column). May 31, 2026: 3 sequential CSS attempts on MATTGPT-106 wasted ~30 min when DevTools AI produced the actual diagnosis in one pass. See `memory/feedback_devtools_before_css_guessing.md`.
+  9. **Streamlit transforms spaces in `key=` to dashes in CSS class names** — `key="topnav_My Work"` produces class `st-key-topnav_My-Work` (space → dash, not underscore, not preserved). Use the dash form in CSS/JS/BDD selectors for multi-word keys. Don't sanitize the key in Python to avoid the transform — that introduces a divergent convention. See `memory/reference_streamlit_key_class_transformation.md`.
 
   ## Streamlit Patterns (Learned the Hard Way)
 
@@ -252,11 +254,16 @@
 
   ### Do
   - **Check existing codebase patterns FIRST** — Before proposing any solution, search for how similar problems are already solved
+  - **Pre-flight before writing code for any ticket touching existing files:** Name the files it touches, name the patterns those files already use, flag any cross-surface couplings, confirm existing test coverage. Catches hidden coupling (MATTGPT-100: active_tab across ~50 files), Streamlit wrapper surprises (MATTGPT-106), and pattern violations (MATTGPT-107: JS bridge pattern almost greenfielded over). Do this before proposing anything. June 2026.
+  - **Default is build-on-top-of, not replace-with.** When a ticket touches existing code, extend or adapt the existing pattern. Only propose replacing when you can name in a comment why the existing pattern fails for this case. June 2026.
+  - **Artifacts for user review go in chat, not /tmp.** Edit tool calls show diffs inline. Writing a diff to /tmp/file.diff creates a local-only artifact the user cannot see. June 2026.
   - Give direct solutions immediately
   - Execute the work, don't discuss it
   - Provide full file replacements (not patches) unless asked otherwise
   - Backup before modifying: `cp file.py file.py.bak`
   - Keep reference docs/comments when rewriting files
+  - **Cross-check the artifact, not just the verbal scope.** When a wireframe/spec is shared AND verbal scope is given, the artifact is truth on copy/structure/sizing — match it exactly or flag the conflict explicitly. Don't silently implement the verbal literally and leave stale copy. See `memory/feedback_artifact_over_verbal_scope.md`. May 29, 2026 (-092 hero copy missed the wireframe's replacement of the framing line).
+  - **Visual spacing: give baseline + lever, let the user call the value.** For margins/gaps/padding/sizing adjustments, don't pick a specific magnitude and commit to it. Name the controlling rule + `file:line`, suggest a baseline as a starting point, let Matt eyeball and call the final value. Iterate. See `memory/feedback_visual_tuning.md`. May 28, 2026 (-15px overshoot — committed to a magnitude without seeing the visual result).
 
   ### Testing Protocol
   - **BDD scenarios must be written and committed before any implementation code.** This is non-negotiable. Write scenarios in `tests/bdd/features/`, commit them with a descriptive message, then begin implementation. No exceptions. If a spec is provided, BDD scenarios come first.
@@ -274,6 +281,18 @@
   April 2026 incident: a commit-then-push chain executed when only the commit had been approved. The push triggered an unauthorized production deploy. The fix is procedural — separate gates, separate words.
   - **After any change to UI files (`ui/pages/`, `ui/components/`, `ui/styles/`), restart Streamlit before running BDD tests.**
   - **After any change to `explore_stories.py`, run the BDD suite before presenting the change for review.** Unit tests and evals validate backend logic — only BDD tests exercise the rendering layer.
+  - **BDD scenarios must assert DOM-observable behavior, not session state.** Playwright cannot read `st.session_state`. For chip/button click routing, assert navigation visible + user-message echo + assistant-response streaming — NOT `seed_prompt` / `active_tab` dict reads. See `memory/feedback_bdd_dom_observable.md`. May 26, 2026 (MATTGPT-068 Scenario 3 — caught before Red step defs gate).
+  - **One "go" ships the full Red (scenarios) → Red (step defs) → Green cycle.** Don't re-ask for approval between gates after the initial "go" on a ticket. Re-ask only on **substantive new design decisions** (not scope clarifications, not catches like "test selector still references old class"). See `memory/feedback_one_go_ships_cycle.md`. May 30, 2026.
+  - **Eval failure discipline rule:** any eval failure should be validated against production before being labeled "pre-existing" or "stochastic" in memory or BACKLOG. Memory entries that pre-frame failures as accepted are unvalidated until cross-referenced to a BACKLOG ticket. If a "known issue" in memory isn't in BACKLOG, it's an unvalidated note — not a tracked issue. May 22, 2026.
+  - **On a second Playwright selector timeout, screenshot before iterating.** Wrap the failing call in try/except, take a screenshot on failure, and read it before proposing any selector fix. Remove the wrapper once green. Example:
+    ```python
+    try:
+        option.click(timeout=5000)
+    except Exception:
+        browser_page.screenshot(path=f'/tmp/pw_debug_{label}.png')
+        raise
+    ```
+    One screenshot beats three guessed selector fixes. June 2026 (MATTGPT-065).
 
   ### Don't
   - Ask about priorities or trade-offs before starting
@@ -285,6 +304,17 @@
   - **Hardcode values that are already CSS variables** — Always check global_styles.py first
   - **Generate fantasy roadmaps** — No "100K users", "99.9% SLA", "enterprise customers" nonsense
 
+  ### Parallel Claude Code Sessions
+  When multiple Claude Code sessions are running concurrently against the same project directory, they share **one git working tree and one staging area**. Any `git commit` issued by either session will include every file currently staged, regardless of which session staged it. The committing session has no awareness that the staged contents include another session's work.
+
+  **Rules to prevent cross-contamination:**
+  - **Stage specific files by name** (`git add path/to/file`), never `git add -A` or `git add .`. The unstaged-file warning Streamlit's pre-commit shows is normal in parallel-session mode — pre-commit stashes them and restores them around the commit.
+  - **Before staging, check `git status`** to see what's already modified by the other session. If unrelated files are staged, coordinate to commit them first or unstage them temporarily.
+  - **Coordinate the commit timing** — Session A stages → Session A commits → Session A reports SHA → Session B stages → Session B commits. Never have two sessions with staged changes at the same moment.
+  - **Prefer worktree isolation for true parallelism** — `git worktree add ../project-branchname` gives each session its own working tree and staging area.
+
+  May 26, 2026 incident: a CLAUDE.md edit from one session landed inside another session's MATTGPT-068 Red (scenarios) commit (`9599bf3`) — committing session had no awareness it bundled unrelated work. See `memory/feedback_parallel_sessions_staging_collision.md`.
+
   ### Documentation Restraint
   Default to **not** creating new markdown files. Most analysis, investigation results, and intermediate findings belong in commit messages, BACKLOG entries, ADRs, or inline updates to existing docs — not in standalone files.
 
@@ -295,6 +325,24 @@
   - A code comment near the relevant change
 
   If a new file is genuinely needed and is transitory, it goes in `docs/working/` with a lifecycle declaration and a defined deletion target. Permanent new docs at the top level require explicit user approval.
+
+  ### Backlog Maintenance
+
+  **Trigger:** Before picking up the next item on the NOW list — not scheduled, not PR-gated.
+
+  **Sync anchor:** `BACKLOG.md` contains a `<!-- last-backlog-sync: <sha> -->` comment at the top. The agent reads this, runs `git log <sha>..HEAD --oneline` for the commit range, then updates the comment on each run.
+
+  **Agent inputs:** `BACKLOG.md`, `CHANGELOG.md`, `git log <sha>..HEAD --oneline` since last sync.
+
+  **Agent actions (propose before writing anything):**
+  1. For each resolved ticket: remove the matrix row AND the detail block from `BACKLOG.md`. Write a `CHANGELOG.md` entry in the existing format (paragraph + commit hash + ticket ref). Both surfaces, always.
+  2. **ARCHITECTURE.md flag:** if any files in `ui/pages/`, `ui/components/`, or `services/` appear in the commit range and `ARCHITECTURE.md` is NOT in that same range, surface the specific filenames and flag for review. Do not assess significance — let Matt decide.
+  3. Update `<!-- last-backlog-sync: <sha> -->` to HEAD.
+  4. Nothing writes until Matt approves the proposed diff.
+
+  **Decided Against items:** Stay in `BACKLOG.md` permanently in their own closed section. Not shipped, not archived to `CHANGELOG.md`. Agent never touches them during routine passes.
+
+  **What does NOT go in CHANGELOG.md:** Decided Against items. `CHANGELOG.md` is a ship record only.
 
   ## Secrets & Sensitive Output Handling
 
@@ -333,6 +381,7 @@
   - Verify root cause before accepting complex solutions
   - Check simple things first: regex, config, cache, typos
   - If Claude proposes 50+ lines, ask "is there a simpler way?"
+  - **Effort estimates without consulting padding** — When Claude gives an estimate, the headline number must be the raw implementation time (the minutes/hours to write the code, run the test, and ship). BDD discipline overhead and discovery risk are listed as separate explicit add-ons, not multiplied into a padded single number. Pattern observed May 30-31, 2026: a 30-min change quoted as "2-3 hours" because Claude silently folded "+BDD overhead + risk buffer" into the headline. Matt's response, twice: *"2-3 hours?????"* / *"hmm. seems a lot should be 15 min or 30 max."* See `memory/feedback_estimate_without_padding.md`.
 
   ## No Hardcoded Enums for Data-Derived Values
 

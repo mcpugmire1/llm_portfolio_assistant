@@ -1,10 +1,10 @@
-Feature: Explore Stories
+Feature: My Work
   As a visitor to MattGPT
   I want to browse and filter Matt's transformation stories
   So that I can find relevant experience for my needs
 
   Background:
-    Given the user navigates to the Explore Stories page
+    Given the user navigates to the My Work page
     And the page has finished loading
 
   # =============================================================================
@@ -58,21 +58,12 @@ Feature: Explore Stories
     Then the Industry filter should be cleared
     And more stories should be displayed
 
-  Scenario: Advanced filters expand on click
-    When the user clicks "Advanced Filters"
-    Then the advanced filter section should be visible
-    And the Client multiselect should be visible
-    And the Role multiselect should be visible
-    And the Domain multiselect should be visible
+  Scenario: Client filter narrows results
+    When the user selects "Capital One" from the Client filter
+    Then all displayed stories should have Client "Capital One"
 
-  Scenario: Client multiselect filter works
-    Given the advanced filters are expanded
-    When the user selects "JP Morgan Chase" from the Client filter
-    Then all displayed stories should have Client "JP Morgan Chase"
-
-  Scenario: Multiple advanced filters combine
-    Given the advanced filters are expanded
-    When the user selects "JP Morgan Chase" from the Client filter
+  Scenario: Multiple filters combine
+    When the user selects "Capital One" from the Client filter
     And the user selects "Director" from the Role filter
     Then all displayed stories should match both Client and Role
 
@@ -164,23 +155,23 @@ Feature: Explore Stories
     When the user clicks on a story card
     Then the "Ask Agy About This" button should be visible
 
-  Scenario: Ask Agy navigates to Ask MattGPT with context
+  Scenario: Ask Agy navigates to Ask Agy with context
     Given the user has opened a story detail
     When the user clicks "Ask Agy About This"
-    Then the page should navigate to Ask MattGPT
+    Then the page should navigate to Ask Agy
     And the question should reference the story
 
   Scenario: Ask Agy works from Table view
     Given the user is in Table view
     When the user clicks on a story row
     And the user clicks "Ask Agy About This"
-    Then the page should navigate to Ask MattGPT
+    Then the page should navigate to Ask Agy
 
   Scenario: Ask Agy works from Cards view
     Given the user is in Cards view
     When the user clicks on a story card
     And the user clicks "Ask Agy About This"
-    Then the page should navigate to Ask MattGPT
+    Then the page should navigate to Ask Agy
 
   # =============================================================================
   # DEEPLINKS
@@ -236,32 +227,32 @@ Feature: Explore Stories
   # NAVIGATION - ALWAYS START FRESH
   # =============================================================================
 
-  # UX Rule: Explore Stories is a browsing experience, not a working session.
+  # UX Rule: My Work is a browsing experience, not a working session.
   # Users expect a fresh start when they navigate back.
   # Retaining state creates confusion ("why is this old story showing?").
   # 0 extra steps to start fresh vs 2-3 steps to clear stale state.
 
-  Scenario: Navigation to Explore Stories always starts fresh
-    Given the user was previously on Explore Stories with filters and a story open
+  Scenario: Navigation to My Work always starts fresh
+    Given the user was previously on My Work with filters and a story open
     When the user navigates away and returns
     Then all filters should be cleared
     And the search box should be empty
     And no story detail should be open
 
-  Scenario: Return from Ask MattGPT starts fresh
+  Scenario: Return from Ask Agy starts fresh
     Given the user has searched for "payments"
     And the user has selected "Financial Services / Banking" from the Industry filter
     And the user has opened a story detail
     When the user clicks "Ask Agy About This"
-    And the user navigates back to Explore Stories
+    And the user navigates back to My Work
     Then all filters should be cleared
     And the search box should be empty
     And no story detail should be open
 
-  Scenario: Return from About page starts fresh
+  Scenario: Return from My Profile page starts fresh
     Given the user has searched for "payments"
-    When the user navigates to About Matt
-    And the user navigates back to Explore Stories
+    When the user navigates to My Profile
+    And the user navigates back to My Work
     Then all filters should be cleared
     And the search box should be empty
 
@@ -320,15 +311,91 @@ Feature: Explore Stories
     Then the rejection banner should be displayed
     And no story results should be shown
 
+  # =============================================================================
+  # TWO-ROW FILTER BAR (MATTGPT-065)
+  # =============================================================================
+
+  Scenario: Row 2 filters always visible on desktop without toggle
+    Given the user navigates to the My Work page
+    And the viewport width is 1280px
+    When the page loads
+    Then the Client filter should be visible
+    And the Role filter should be visible
+    And the Domain filter should be visible
+
+  Scenario: Row 2 filters hidden on mobile viewport
+    Given the user navigates to the My Work page
+    When the viewport is resized to 375px wide
+    Then the row 2 filter bar should not be visible
+
+  # MATTGPT-119 — Mobile Filters ▾ toggle for Row 2 (Client, Role, Domain)
+  # =============================================================================
+
+  Scenario: Filters toggle button is visible on mobile
+    Given the user navigates to the My Work page
+    When the viewport is resized to 375px wide
+    Then a button with text containing "Filters" should be visible
+
+  Scenario: Filters toggle button is hidden on desktop
+    Given the user navigates to the My Work page
+    And the viewport width is 1280px
+    Then no button with text containing "Filters" should be visible
+
+  Scenario: Tapping Filters toggle shows Row 2 on mobile
+    Given the user navigates to the My Work page
+    When the viewport is resized to 375px wide
+    And the user clicks the "Filters ▾" button
+    Then the row 2 filter bar should be visible
+    And a button with text containing "Filters ▴" should be visible
+
+  Scenario: Tapping Filters toggle again hides Row 2 on mobile
+    Given the user navigates to the My Work page
+    When the viewport is resized to 375px wide
+    And the user clicks the "Filters ▾" button
+    And the user clicks the "Filters ▴" button
+    Then the row 2 filter bar should not be visible
+    And a button with text containing "Filters ▾" should be visible
+
+  # MATTGPT-123 — Mobile filter layout compaction
+  # =============================================================================
+
+  Scenario: Industry and Capability labels visible inline on mobile
+    Given the user navigates to the My Work page
+    When the viewport is resized to 375px wide
+    Then the Industry filter label should be visible
+    And the Capability filter label should be visible
+
+  Scenario: Advanced filter dropdowns all accessible in Row 2 on mobile
+    Given the user navigates to the My Work page
+    When the viewport is resized to 375px wide
+    And the user clicks the "Filters ▾" button
+    Then the Client filter should be visible
+    And the Role filter should be visible
+    And the Domain filter should be visible
+
+  Scenario: Reset filters visible when Row 2 is open on mobile
+    Given the user navigates to the My Work page
+    When the viewport is resized to 375px wide
+    And the user clicks the "Filters ▾" button
+    Then the Reset filters button should be visible
+
+  Scenario: Desktop regression — Row 2 layout unaffected at 1280px
+    Given the user navigates to the My Work page
+    And the viewport width is 1280px
+    Then the Client filter should be visible
+    And the Role filter should be visible
+    And the Domain filter should be visible
+    And the Industry filter label should be visible
+
   # Regression guard for May 23, 2026 finding: explore_stories.py passes the
   # raw nonsense_check category (e.g., "jokes_riddles") to render_no_match_banner
   # but the BANNER_COPY branching in utils/ui_helpers.py expects the
-  # "rule:<category>" prefix (the Ask MattGPT convention). Result: rule:*
-  # nonsense queries on Explore Stories fall through to the legacy catch-all
+  # "rule:<category>" prefix (the Ask Agy convention). Result: rule:*
+  # nonsense queries on My Work fall through to the legacy catch-all
   # banner copy ("I can't help with that...") instead of the locked Plott
   # Hound copy from BANNER_COPY["rule"]. This scenario locks the correct
   # behavior so the fix doesn't regress.
-  Scenario: Nonsense-filter query gets the rule:* banner copy on Explore Stories
+  Scenario: Nonsense-filter query gets the rule:* banner copy on My Work
     When the user types "Tell me a joke about Matt's career" in the search box
     And the user presses Enter
     Then the rejection banner should be displayed

@@ -4,7 +4,7 @@ Feature: Helpful button on story detail
   So that the portfolio owner receives feedback on which stories resonate
 
   Background:
-    Given the user navigates to the Explore Stories page
+    Given the user navigates to the My Work page
     And the page has finished loading
     And the user has opened a story detail
 

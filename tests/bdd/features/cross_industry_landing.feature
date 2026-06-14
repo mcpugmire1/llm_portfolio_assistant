@@ -30,9 +30,9 @@ Feature: Cross-Industry Landing Page Capability Cards
   Scenario: Cross-Industry landing displays the Core Capabilities tier header
     Then the page should display a "Core Capabilities" section header
 
-  Scenario: Clicking the top Core capability card lands on a filtered Explore Stories with results
+  Scenario: Clicking the top Core capability card lands on a filtered My Work with results
     When the user clicks the top capability card
-    Then the active tab should be "Explore Stories"
+    Then the active tab should be "My Work"
     And the result count should be greater than 0
 
   # ---------------------------------------------------------------------------
@@ -44,11 +44,11 @@ Feature: Cross-Industry Landing Page Capability Cards
   # (prefilter_capability, prefilter_domains, prefilter_industry) didn't.
   # ---------------------------------------------------------------------------
 
-  Scenario: Clicking a capability card lands on Explore Stories scrolled to the top
+  Scenario: Clicking a capability card lands on My Work scrolled to the top
     Given the user has scrolled down to view a capability card
     When the user clicks the top capability card
-    Then the active tab should be "Explore Stories"
-    And the Explore Stories page should be scrolled to the top
+    Then the active tab should be "My Work"
+    And the My Work page should be scrolled to the top
 
   # ---------------------------------------------------------------------------
   # DOCUMENTED CONTRACTS — step defs pending (MATTGPT-060)

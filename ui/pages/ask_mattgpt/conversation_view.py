@@ -1,5 +1,5 @@
 """
-Ask MattGPT Conversation View
+Ask Agy Conversation View
 
 Active conversation UI with:
 - Purple header with Agy branding
@@ -14,20 +14,16 @@ Phase 5.1 Complete: All helper functions extracted to conversation_helpers.py
 import re
 
 import streamlit as st
-import streamlit.components.v1 as components
 
 from config.debug import DEBUG
 from ui.components.ask_mattgpt_header import (
     render_header,
-    render_modal_wrapper_end,
-    render_modal_wrapper_start,
     render_status_bar,
 )
-from ui.components.how_agy_modal import (
-    get_how_agy_flow_html,
-    get_technical_details_html,
-)
+from ui.components.how_agy_dialog import render_how_agy_dialog
+from ui.components.how_i_built_dialog import render_how_i_built_dialog
 from ui.components.thinking_indicator import render_thinking_indicator
+from ui.components.why_agy_dialog import render_why_agy_dialog
 
 # Import from refactored modules
 from ui.pages.ask_mattgpt.backend_service import send_to_backend
@@ -115,15 +111,19 @@ def render_conversation_view(stories: list[dict]):
     render_header(include_button=True, view="conversation")
 
     # ============================================================================
-    # HOW AGY SEARCHES MODAL
+    # HOW AGY SEARCHES DIALOG (MATTGPT-110)
     # ============================================================================
-    # Modal (if open)
-    if st.session_state.get("show_how_modal", False):
-        st.markdown(render_modal_wrapper_start(), unsafe_allow_html=True)
-        components.html(get_how_agy_flow_html(), height=1180)
-        components.html(get_technical_details_html(), height=850)
-        st.markdown(render_modal_wrapper_end(), unsafe_allow_html=True)
-        # Remove: render_modal_close_wiring_js()
+    # @st.dialog replaces inline expander. active_dialog flag set by header trigger.
+    # Clear flag after call so X/Escape/backdrop dismiss doesn't reopen on next rerun.
+    if st.session_state.get("active_dialog") == "why_agy":
+        render_why_agy_dialog()
+        st.session_state.pop("active_dialog", None)
+    elif st.session_state.get("active_dialog") == "how_agy":
+        render_how_agy_dialog()
+        st.session_state.pop("active_dialog", None)
+    elif st.session_state.get("active_dialog") == "how_i_built":
+        render_how_i_built_dialog()
+        st.session_state.pop("active_dialog", None)
 
     # ============================================================================
     # STATUS BAR
@@ -285,12 +285,12 @@ def render_conversation_view(stories: list[dict]):
     # ============================================================================
 
     user_input_local = None
-    if st.session_state.get("active_tab") == "Ask MattGPT":
+    if st.session_state.get("active_tab") == "Ask Agy":
         user_input_local = st.chat_input("Ask a follow-up...", key="ask_chat_input1")
 
         # Add "Powered by" text below input
         st.markdown(
-            '<div class="conversation-powered-by">Powered by OpenAI GPT-4o with semantic search across 130+ project case studies</div>',
+            '<div class="conversation-powered-by">Powered by OpenAI GPT-4o with semantic search across 100+ case studies</div>',
             unsafe_allow_html=True,
         )
 

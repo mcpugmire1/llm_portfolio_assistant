@@ -15,16 +15,23 @@ def render_hero():
     Includes:
     - MattGPT logo
     - Job title and tagline
-    - Explore Stories and Ask Agy buttons
+    - Role Match (primary) and Ask Agy (secondary) buttons (MATTGPT-087)
     """
 
     st.markdown(
         """
         <style>
-            /* Hide the trigger buttons */
-            [class*="st-key-hero_explore"],
-            [class*="st-key-hero_ask"] {
+            /* Hide the trigger buttons and collapse their stElementContainer wrappers */
+            [class*="st-key-hero_role_match"],
+            [class*="st-key-hero_ask"],
+            [class*="st-key-why_agy_hero_trigger"] {
                 display: none !important;
+            }
+            div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_hero_trigger"]) {
+                position: absolute !important;
+                left: -9999px !important;
+                height: 0 !important;
+                overflow: hidden !important;
             }
 
             /* Pull hero up to sit flush under navbar */
@@ -40,8 +47,13 @@ def render_hero():
                 max-width: 1200px;
                 margin: 0 auto;
                 text-align: center;
-                padding: 50px 40px;
+                padding: 25px 30px;
                 color: white;
+            }
+
+            .hero-content h1 {
+                padding: 0 !important;
+                margin: 0 0 10px 0 !important;
             }
 
             .hero-btn {
@@ -95,15 +107,20 @@ def render_hero():
                     padding: 20px 16px !important;
                 }
                 .hero-gradient-wrapper {
-                    margin-top: -20px !important;
-
+                    /* 56px clears the fixed mobile header (z-index 999999).
+                       -16px sides break out of Streamlit container padding
+                       for edge-to-edge treatment matching other page headers. */
+                    margin-top: 56px !important;
+                    margin-left: -16px !important;
+                    margin-right: -16px !important;
+                    width: calc(100% + 32px) !important;
                 }
 
                 /* Logo - much smaller */
                 .hero-content > div:first-of-type {
                     margin-bottom: 16px !important;
                 }
-                .hero-content img[alt="MattGPT with Agy"] {
+                .hero-content img {
                     max-width: 140px !important;
                 }
 
@@ -115,7 +132,7 @@ def render_hero():
 
                 /* Title */
                 .hero-content h1 {
-                    font-size: 22px !important;
+                    font-size: 20px !important;
                     margin-bottom: 10px !important;
                 }
 
@@ -129,7 +146,7 @@ def render_hero():
 
                 /* Second paragraph (Agy) - hide on mobile */
                 .hero-content p:nth-of-type(2) {
-                    display: none !important;
+                    display: 1 !important;
                 }
 
                 /* Button container - row on mobile */
@@ -148,28 +165,35 @@ def render_hero():
                     padding: 10px 16px !important;
                     font-size: 13px !important;
                 }
+                .hero-btn-prefix {
+                    display: none;
+                }
             }
         </style>
         <div class="hero-gradient-wrapper">
             <div class="hero-content">
-                <div style="display: flex; justify-content: center; margin-bottom: 32px;">
-                    <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/matt_agy_hero.png"
-                         alt="Matt and Agy"
-                         style="max-width: 440px; width: 100%; height: auto; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));">
+                <div style="display: flex; justify-content: center; margin-bottom: 16px;">
+                    <div class="hero-illustration-wrapper" style="position: relative; display: inline-block;">
+                        <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/matt_agy_hero.png"
+                             alt="Matt and Agy"
+                             style="max-width: 280px; width: 100%; height: auto; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));">
+                        <span class="why-agy-badge" id="why-agy-badge-hero">i</span>
+                    </div>
                 </div>
-                <div style="font-size: 22px; margin-bottom: 10px; color: white; opacity: 0.95;">
-                    <span></span>
+                <div style="font-size: 18px; margin-bottom: 1px; color: white; opacity: 0.95;">
                     <span> Hi, I'm Matt Pugmire</span>
                 </div>
-                <h1 style="font-size: 42px; font-weight: 700; margin-bottom: 10px; color: white;">Interview me before you interview me.</h1>
-                <p style="font-size: 18px; color: white; opacity: 0.95; max-width: 700px; margin: 0 auto 16px; line-height: 1.6;">I build products, platforms, and teams. That's Agy, my Plott Hound and AI assistant, trained to track down insights from 20+ years of transformation work.
+                <h1 style="font-size: 40px; font-weight: 700; padding-top: 0 !important; margin-top: 0 !important; margin-bottom: 10px; color: white;">Interview me before you interview me.</h1>
+                <p style="font-size: 17px; color: white; opacity: 0.95; max-width: 700px; margin: 0 auto 8px; line-height: 1.6;">In active search for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job.
+                </p>
+                <p style="font-size: 14px; color: white; opacity: 0.9; max-width: 600px; margin: 6px auto 18px; line-height: 1.55;">That's Agy, my Plott Hound and AI assistant, ready to track down insights across my full project history.
                 </p>
                 <div style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap;">
-                    <a id="btn-ask" class="hero-btn hero-btn-primary">
-                        Ask Agy 🐾
+                    <a id="btn-role-match" class="hero-btn hero-btn-primary">
+                        <span class="hero-btn-prefix">Recruiting for a role? </span>Match it →
                     </a>
-                     <a id="btn-explore" class="hero-btn hero-btn-secondary">
-                        Explore Stories
+                    <a id="btn-ask" class="hero-btn hero-btn-secondary">
+                        <span class="hero-btn-prefix">Want to dig deeper? </span>Ask Agy 🐾
                     </a>
                 </div>
             </div>
@@ -186,12 +210,12 @@ def render_hero():
         setTimeout(function() {
             const parentDoc = window.parent.document;
 
-            const btnExplore = parentDoc.getElementById('btn-explore');
+            const btnRoleMatch = parentDoc.getElementById('btn-role-match');
             const btnAsk = parentDoc.getElementById('btn-ask');
 
-            if (btnExplore) {
-                btnExplore.onclick = function() {
-                    const stBtn = parentDoc.querySelector('[class*="st-key-hero_explore"] button');
+            if (btnRoleMatch) {
+                btnRoleMatch.onclick = function() {
+                    const stBtn = parentDoc.querySelector('[class*="st-key-hero_role_match"] button');
                     if (stBtn) stBtn.click();
                 };
             }
@@ -210,24 +234,63 @@ def render_hero():
     )
 
     # Hidden Streamlit buttons that get triggered by the HTML buttons
-    if st.button("", key="hero_explore"):
-        st.session_state["active_tab"] = "Explore Stories"
+    if st.button("", key="hero_role_match"):
+        st.session_state["active_tab"] = "Role Match"
         st.rerun()
 
     if st.button("", key="hero_ask"):
-        st.session_state["active_tab"] = "Ask MattGPT"
+        st.session_state["active_tab"] = "Ask Agy"
         st.rerun()
+
+    # Why Agy badge trigger — hidden button + JS bridge
+    if st.button("trigger", key="why_agy_hero_trigger"):
+        st.session_state["active_dialog"] = "why_agy"
+        st.rerun()
+
+    components.html(
+        """
+<script>
+(function() {
+    function wireBadge() {
+        var parentDoc = window.parent.document;
+        var badge = parentDoc.getElementById('why-agy-badge-hero');
+        var btn = parentDoc.querySelector('[class*="st-key-why_agy_hero_trigger"] button');
+        if (badge && btn && !badge.dataset.wired) {
+            badge.dataset.wired = 'true';
+            badge.addEventListener('pointerdown', function(e) {
+                e.preventDefault();
+                btn.click();
+            });
+            return true;
+        }
+        return false;
+    }
+    if (!wireBadge()) {
+        var attempts = 0;
+        var iv = setInterval(function() {
+            if (wireBadge() || ++attempts > 10) clearInterval(iv);
+        }, 200);
+    }
+})();
+</script>
+""",
+        height=0,
+    )
 
 
 def render_stats_bar():
     """
     Render portfolio statistics bar.
 
-    Displays 4 key metrics:
-    - Years of experience
-    - Projects delivered
-    - Professionals trained
-    - Enterprise clients
+    Displays 4 stat tiles. The Leadership tile carries function-level
+    "Product engineering" framing per MATTGPT-092 (scope/outcome anchor, not a
+    title chip), with a "Product eng" mobile variant (≤768px) via the dual
+    .stat-desktop / .stat-mobile span pattern. The other three are production
+    portfolio metrics:
+    - Leadership (Product engineering / "Product eng" on mobile)
+    - Projects Delivered (100+)
+    - Professionals Trained (300+)
+    - Enterprise Clients (15+)
     """
 
     st.markdown(
@@ -238,7 +301,7 @@ def render_stats_bar():
             grid-template-columns: repeat(4, 1fr);
             border-bottom: 2px solid var(--border-color);
             margin-bottom: 30px;
-            margin-top: -15px;
+            margin-top: 1px;
         }
 
         .stat {
@@ -252,7 +315,7 @@ def render_stats_bar():
         }
 
         .stat-number {
-            font-size: 36px;
+            font-size: 18px;
             font-weight: 700;
             color: var(--purple-gradient-start);
             margin-bottom: 8px;
@@ -261,10 +324,11 @@ def render_stats_bar():
 
         .stat-label {
             font-size: 14px;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
+        .stat-mobile { display: none; }
 
         @media (max-width: 768px) {
             .stats-bar {
@@ -275,13 +339,15 @@ def render_stats_bar():
                 padding: 6px 2px !important;
             }
             .stat-number {
-                font-size: 18px !important;
+                font-size: 14px !important;
                 margin-bottom: 2px !important;
             }
             .stat-label {
                 font-size: 8px !important;
                 letter-spacing: 0 !important;
             }
+            .stat-desktop { display: none !important; }
+            .stat-mobile { display: inline !important; }
         }
 
         @media (max-width: 380px) {
@@ -295,11 +361,14 @@ def render_stats_bar():
         </style>
         <div class="stats-bar">
             <div class="stat">
-                <div class="stat-number">20+</div>
-                <div class="stat-label">Years Experience</div>
+                <div class="stat-number">
+                    <span class="stat-desktop">Product engineering</span>
+                    <span class="stat-mobile">Product eng</span>
+                </div>
+                <div class="stat-label">Leadership</div>
             </div>
             <div class="stat">
-                <div class="stat-number">130+</div>
+                <div class="stat-number">100+</div>
                 <div class="stat-label">Projects Delivered</div>
             </div>
             <div class="stat">
@@ -321,12 +390,29 @@ def render_section_title(title: str):
     st.markdown(
         f"""
         <style>
+            /* MATTGPT-107: tightened section-header per wireframe alignment.
+               Drops vertical footprint from ~125px to ~69px by removing the
+               32px of phantom Streamlit anchor-element padding, tightening
+               margins (40/24 -> 24/16), and hiding the hover anchor-icon.
+               The .section-header :has() selectors below scope the
+               padding-killing rules to this component only — Banking and
+               Cross-Industry landing pages render `.section-header` as a
+               <div>, not <h2>, so their layouts are unaffected. */
             .section-header h2 {{
-                font-size: 36px;
-                font-weight: 700;
-                color: var(--text-heading);
-                margin: 40px 0 24px 0;
+                font-size: 24px;
+                font-weight: 500;
+                color: var(--text-primary);
+                margin: 8px 0 16px 0 !important;
+                padding: 0 !important;
             }}
+            .section-header [data-testid="stHeadingWithActionElements"] {{
+                padding: 0 !important;
+                margin: 0 !important;
+            }}
+            .section-header [data-testid="stHeaderActionElements"] {{
+                display: none !important;
+            }}
+
             @media (max-width: 767px) {{
                 .section-header {{
                     margin: 0 !important;
@@ -334,24 +420,12 @@ def render_section_title(title: str):
                 }}
                 .section-header h2 {{
                     font-size: 18px !important;
-                    margin: 8px 0 8px 0 !important;
+                    margin: 8px 0 !important;
                     white-space: nowrap !important;
+
                 }}
                 .section-header h2 span:first-child {{
                     font-size: 16px !important;
-                }}
-                /* Kill Streamlit's wrapper padding */
-                .section-header [data-testid="stHeadingWithActionElements"] {{
-                    padding: 0 !important;
-                    margin: 0 !important;
-                }}
-                .section-header .st-emotion-cache-ua1rfn {{
-                    padding: 0 !important;
-                    margin: 0 !important;
-                }}
-                /* Hide the anchor link icon */
-                .section-header [data-testid="stHeaderActionElements"] {{
-                    display: none !important;
                 }}
             }}
         </style>

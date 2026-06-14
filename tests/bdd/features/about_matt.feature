@@ -1,5 +1,5 @@
-Feature: About Matt — Content polish bundle (MATTGPT-068)
-  As a recruiter or hiring manager landing on About Matt
+Feature: My Profile — Content polish bundle (MATTGPT-068)
+  As a recruiter or hiring manager landing on My Profile
   I want the page to be scannable, interactive, and free of redundant content
   So that I can navigate to the section I need and try the AI assistant directly
   from the page that pitches it.
@@ -13,7 +13,7 @@ Feature: About Matt — Content polish bundle (MATTGPT-068)
   #     reliably in Streamlit without JS hackery; no validated user need.
   #     Section header ids and the post-hero nav are no longer required.
   #   - Stats bar parity (originally decision 1) — reverted. The 5-card
-  #     stats bar with "4x Delivery Acceleration" is restored on About Matt;
+  #     stats bar with "4x Delivery Acceleration" is restored on My Profile;
   #     the inconsistency with the Home hero's 4-card bar is accepted.
   # The chip-containment fix was also tightened to require true DOM nesting
   # inside the CTA card rather than the visual-only treatment of the
@@ -24,14 +24,14 @@ Feature: About Matt — Content polish bundle (MATTGPT-068)
   #      1199-1204 are currently <li> plain text inside a single st.markdown
   #      block. Convert to four st.button calls using the chip→Ask pattern from
   #      category_cards.py:55-57 / story_detail.py:203-218 (set seed_prompt +
-  #      __ask_from_suggestion__ + active_tab="Ask MattGPT", then st.rerun()).
+  #      __ask_from_suggestion__ + active_tab="Ask Agy", then st.rerun()).
   #      Define the four prompt strings as ABOUT_MATT_SEED_QUESTIONS at module
   #      scope so BDD + eval can import them. Per the May 27 wireframe, the
   #      buttons must render INSIDE the CTA card container (DOM-nested), not
   #      as visual-only siblings below it.
   #
   #   2. Click routing — when a sample question button is clicked, the user
-  #      should land on Ask MattGPT with the prompt pre-loaded and auto-fired.
+  #      should land on Ask Agy with the prompt pre-loaded and auto-fired.
   #      Assertion strategy is DOM-observable end-to-end UX (navigation visible,
   #      user message in chat, assistant response streaming) — Playwright cannot
   #      read st.session_state, so session-state assertions are deliberately
@@ -41,7 +41,7 @@ Feature: About Matt — Content polish bundle (MATTGPT-068)
   #      active_tab were set correctly.
   #
   #   3. Footer copy removal — once questions are clickable, the "Head to Ask
-  #      MattGPT in the navigation above" sentence and the "Real AI assistant •
+  #      Agy in the navigation above" sentence and the "Real AI assistant •
   #      130+ projects • Instant answers • Available 24/7" bullets (lines
   #      1205-1208) are redundant. Remove entirely. The May 27 wireframe also
   #      drops the "Try asking questions like:" label — chips speak for
@@ -61,52 +61,137 @@ Feature: About Matt — Content polish bundle (MATTGPT-068)
   #      by default — non-technical readers skip past, technical readers expand.
   #
   # CLAUDE.md "Streamlit markdown call count" rule applies to this page if any
-  # change touches CSS injection order. About Matt does NOT use the
-  # .conversation-header negative margin (that's role_match.py / Ask MattGPT),
+  # change touches CSS injection order. My Profile does NOT use the
+  # .conversation-header negative margin (that's role_match.py / Ask Agy),
   # but the principle of consolidating st.markdown calls still applies.
 
   Background:
-    Given the user navigates to the About Matt page
-
-  # ---------------------------------------------------------------------------
-  # SAMPLE QUESTIONS CLICKABLE — buttons replace <li> text (decisions 1, 2)
-  # ---------------------------------------------------------------------------
-
-  Scenario: Four sample question buttons render with labels from ABOUT_MATT_SEED_QUESTIONS
-    Then four sample question buttons should be visible in the See It In Action card
-    And each button label should match a string in ABOUT_MATT_SEED_QUESTIONS
-    And the four legacy <li> sample-question lines should not be present as plain text
-
-  Scenario: Clicking a sample question routes to Ask MattGPT and auto-fires the question
-    When the user clicks the first sample question button
-    Then the Ask MattGPT conversation view should be visible
-    And a user message matching that button's label should be visible in the chat
-    And an assistant response should begin streaming in the chat
+    Given the user navigates to the My Profile page
 
   # ---------------------------------------------------------------------------
   # FOOTER COPY REMOVAL (decision 3)
   # ---------------------------------------------------------------------------
 
   Scenario: Redundant CTA footer copy is absent from the See It In Action card
-    Then the text "Head to Ask MattGPT in the navigation above to try it yourself" should not appear on the page
+    Then the text "Head to Ask Agy in the navigation above to try it yourself" should not appear on the page
     And the text "Real AI assistant • 130+ projects • Instant answers • Available 24/7" should not appear on the page
 
   # ---------------------------------------------------------------------------
-  # DEVOPS & QUALITY MERGE (decision 4)
+  # SEE IT IN ACTION REMOVAL (MATTGPT-093)
+  # CTA card relocated to How I Built MattGPT dialog (how_i_built_dialog.py §9).
   # ---------------------------------------------------------------------------
 
-  Scenario: DevOps & Quality card is absent and CI/CD Pipeline card carries the merged bullets
-    Then no detail card with the heading "DevOps & Quality" should be visible
-    And the "CI/CD Pipeline" detail card should be visible
-    And the "CI/CD Pipeline" detail card should mention testing
-    And the "CI/CD Pipeline" detail card should mention monitoring
-    And the "CI/CD Pipeline" detail card should mention security
+  Scenario: See It In Action heading is not present on the page
+    Then the text "See It In Action" should not appear on the page
 
   # ---------------------------------------------------------------------------
-  # CODE BLOCK COLLAPSED BY DEFAULT (decision 5)
+  # CAREER EVOLUTION TIMELINE — row 7 update (MATTGPT-093, Item 1)
+  # Liquid Studio stays. Count stays at 7. Sabbatical closes to 2023-2026.
+  # Rows 2 (2019-2023) and 3 (2016-2023) are concurrent — intentional.
   # ---------------------------------------------------------------------------
 
-  Scenario: RAG pipeline code block is wrapped in a collapsed details element
-    Then the 5-Stage RAG Pipeline code block should be wrapped in a <details> element
-    And that <details> element should not have the "open" attribute
-    And a <summary> element should be visible as the affordance to expand the code
+  Scenario: Career Evolution timeline has exactly seven entries
+    Then the career evolution timeline should have 7 entries
+
+  Scenario: Concurrent Accenture roles 2019-2023 and 2016-2023 are both present
+    Then the career timeline should contain period "2019-2023"
+    And the career timeline should contain period "2016-2023"
+
+  Scenario: Liquid Studio row is present in the timeline
+    Then the career timeline should contain "Liquid Studio"
+
+  Scenario: Pre-Accenture row names both Cendian Corporation and Wellfound Technology
+    Then the career timeline should contain "Cendian Corporation"
+    And the career timeline should contain "Wellfound Technology"
+
+  Scenario: Sabbatical row shows 2023-2026 not 2023-Present
+    Then the career timeline should contain period "2023-2026"
+    And the career timeline should not contain "2023–Present"
+
+  # ---------------------------------------------------------------------------
+  # COMPETENCY RENAME (MATTGPT-093, Item 2)
+  # ---------------------------------------------------------------------------
+
+  Scenario: Core competencies show the six current headings
+    Then the competencies grid should contain a card with heading "Product & Discovery"
+    And the competencies grid should contain a card with heading "Modern Engineering"
+    And the competencies grid should contain a card with heading "Organization Building"
+    And the competencies grid should contain a card with heading "Enterprise Transformation"
+    And the competencies grid should contain a card with heading "People & Culture"
+    And the competencies grid should contain a card with heading "AI & Emerging Tech"
+    And the competencies grid should not contain a card with heading "Agile at Scale"
+    And the competencies grid should not contain a card with heading "Product delivery at scale"
+
+  # ---------------------------------------------------------------------------
+  # HOW I LEAD (MATTGPT-093, Item 3)
+  # ---------------------------------------------------------------------------
+
+  Scenario: Leadership section is titled How I Lead
+    Then the section heading "How I Lead" should be visible
+    And the section heading "Leadership Philosophy" should not be visible
+
+  Scenario: How I Lead section contains the four locked values
+    Then the How I Lead section should contain "Outcomes over output"
+    And the How I Lead section should contain "Experimentation over certainty"
+    And the How I Lead section should contain "High-trust, sustainable teams"
+    And the How I Lead section should contain "Grow the people"
+
+  Scenario: Replaced leadership values are absent from How I Lead
+    Then the How I Lead section should not contain "Servant Leadership"
+    And the How I Lead section should not contain "Continuous Learning"
+    And the How I Lead section should not contain "Experimentation Culture"
+
+  # ---------------------------------------------------------------------------
+  # SIGNALS PANEL — replaces stats bar (MATTGPT-093, expanded scope)
+  # ---------------------------------------------------------------------------
+
+  Scenario: Stats bar is not present in the DOM on My Profile
+    Then the profile stats bar should not be present in the DOM
+
+  Scenario: Signals panel is present with six tiles
+    Then the signals panel should be visible
+    And the signals panel should have 6 tiles
+
+  Scenario: Signals panel tile values match the wireframe spec
+    Then the signals panel should contain "Senior leader"
+    And the signals panel should contain "Director, Cloud Innovation Center"
+    And the signals panel should contain "150+ practitioners"
+    And the signals panel should contain "Atlanta"
+    And the signals panel should contain "Active conversations"
+    And the signals panel should contain "Hybrid or in-person"
+
+  # ---------------------------------------------------------------------------
+  # IN MY OWN WORDS — voice block (MATTGPT-093, expanded scope)
+  # Step defs scope assertions to the "In my own words" container.
+  # ---------------------------------------------------------------------------
+
+  Scenario: In my own words section is present with correct heading
+    Then the section heading "In my own words" should be visible
+
+  Scenario: In my own words voice block contains the brand line and referral close
+    Then the "In my own words" section should contain "I build what's next, modernize what's not"
+    And the "In my own words" section should contain "The work itself created the demand"
+
+  # ---------------------------------------------------------------------------
+  # FOR A REFERRER — snippet and action buttons (MATTGPT-093, expanded scope)
+  # Step defs scope button assertions to the "For a referrer" container.
+  # ---------------------------------------------------------------------------
+
+  Scenario: For a referrer section is present with correct heading
+    Then the section heading "For a referrer" should be visible
+
+  Scenario: For a referrer section contains snippet text and action buttons
+    Then the "For a referrer" section should contain a copy snippet block
+    And the "For a referrer" section should contain action button text "Copy snippet"
+    And the "For a referrer" section should contain action button text "Download PDF"
+
+  Scenario: Clicking Copy snippet shows a Copied confirmation then reverts
+    When the user clicks the "Copy snippet" action button in the "For a referrer" section
+    Then the "Copy snippet" button should show "✓ Copied!" confirmation
+
+  # ---------------------------------------------------------------------------
+  # PROFILE HEADER SUBTITLE — locked target text for feature/ui-redesign branch (MATTGPT-093)
+  # ---------------------------------------------------------------------------
+
+  Scenario: Profile header subtitle matches the locked production text
+    Then the profile header should contain "Engineering leader · platform modernization · AI · Atlanta · open to relocate"

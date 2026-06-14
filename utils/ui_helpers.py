@@ -182,7 +182,7 @@ def render_sources_chips(
 ):
     """Render Sources as compact, 2-line chips.
     - stay_here=True: switch the active story + modes inline on Ask (no tab jump)
-    - stay_here=False: legacy behavior (navigate to Explore Stories)
+    - stay_here=False: legacy behavior (navigate to My Work)
     """
     if not sources:
         return
@@ -354,7 +354,7 @@ def render_sources_chips(
                                     }
                                 ]
                         else:
-                            st.session_state["active_tab"] = "Explore Stories"
+                            st.session_state["active_tab"] = "My Work"
                         st.rerun()
             batch = []
 
@@ -375,8 +375,8 @@ def render_no_match_banner(
     Unified warning banner for 'no confident match' situations.
 
     Args:
-        context: "ask" for Ask MattGPT (shows suggestion chips),
-                 "explore" for Explore Stories (simpler message, no chips)
+        context: "ask" for Ask Agy (shows suggestion chips),
+                 "explore" for My Work (simpler message, no chips)
     """
     # Primary message — differentiate by intent family.
     # Reads from BANNER_COPY (LOCKED May 19, 2026 per MATTGPT-071). The
@@ -529,8 +529,8 @@ def render_no_match_banner(
         if debug_text:
             banner_html += f'<div class="no-match-banner-debug">{debug_text}</div>'
 
-        # Ask MattGPT context: no hint text — chips speak for themselves.
-        # Explore Stories context: branch-aware hint text (no chips render
+        # Ask Agy context: no hint text — chips speak for themselves.
+        # My Work context: branch-aware hint text (no chips render
         # there, so the hint is the only follow-up affordance).
         if context != "ask":
             if reason == "semantic_router:personal":

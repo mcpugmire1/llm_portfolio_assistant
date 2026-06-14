@@ -33,7 +33,7 @@ from ui.styles.global_styles import apply_global_styles
 load_dotenv()
 
 st.set_page_config(
-    page_title="MattGPT | Matt Pugmire",
+    page_title="MattGPT | Matt Pugmire | Product Engineering Leader",
     page_icon="🐾",
     layout="wide",
     initial_sidebar_state="collapsed",  # Hide sidebar - we use top navbar instead
@@ -42,8 +42,17 @@ st.set_page_config(
 # Apply global styles once per session
 apply_global_styles()
 
-# Render navbar (shows on all pages)
-render_navbar(current_tab=st.session_state.get("active_tab", "Home"))
+# Render navbar — hidden on secondary deep-link-only surfaces (MATTGPT-102 +
+# future). Secondary surfaces have their own back-link affordance; the main
+# top nav would compete with the back link and confuse the "where am I" model.
+SECONDARY_SURFACES = {"How I Built"}
+if st.session_state.get("active_tab", "Home") not in SECONDARY_SURFACES:
+    render_navbar(current_tab=st.session_state.get("active_tab", "Home"))
+
+# Initialize active_tab before any rerun can fire (first-mount and screen-size
+# reruns at lines below both execute before the old setdefault at line ~145,
+# leaving active_tab unset when line 429 is reached on a fresh session).
+st.session_state.setdefault("active_tab", "Home")
 
 # ---- first-mount guard ----
 if not st.session_state.get("__first_mount_rerun__", False):
@@ -120,18 +129,18 @@ if not st.session_state.get("__first_mount_rerun__", False):
 if "_browser_screen_size" not in st.session_state:
     from streamlit_js_eval import streamlit_js_eval
 
-    # Use screen.width (physical display resolution) rather than
-    # window.innerWidth. The streamlit_js_eval library runs inside a
-    # components.html iframe with height=0 — on Streamlit Cloud that
-    # iframe can have width=0, so window.innerWidth reports 0 and the
-    # Role Match mobile gate (< 1024px) fires on desktop browsers.
-    # screen.width returns the actual display resolution and is immune
-    # to iframe/container sizing issues. It doesn't account for browser
-    # zoom, but for a "phone vs desktop" gate at 1024px the device
-    # class determination is reliable.
+    # Use window.innerWidth (viewport width) to correctly detect mobile.
+    # screen.width returns physical monitor resolution (e.g. 3840 on Retina)
+    # regardless of viewport size — the mobile gate never fires on desktop.
+    # window.innerWidth is safe now because:
+    #   1. key="screen_size_capture" generates a valid CSS class
+    #      (st-key-screen_size_capture) that the stIFrame exclusion can target
+    #   2. The stIFrame collapse rule excludes this iframe via
+    #      :not([class*="st-key-screen_size_capture"]) so it's never hidden
+    #   3. The iframe is visible and executes correctly, returning viewport width
     _screen = streamlit_js_eval(
-        js_expressions="String(window.screen.width)",
-        key="__screen_size__",
+        js_expressions="String(window.innerWidth)",
+        key="screen_size_capture",
     )
     if _screen:
         st.session_state["_browser_screen_size"] = _screen
@@ -149,29 +158,6 @@ if DEBUG:
             st.write({k: v for k, v in dbg_state.items() if k != "stats"})
             st.write("Index stats:")
             st.json(dbg_state.get("stats", {}))
-
-# --- Tab navigation helpers ---
-_ALIASES = {"Stories": "Explore Stories"}
-
-
-def normalize_tab(name: str) -> str:
-    return _ALIASES.get(name, name)
-
-
-def goto(tab_name: str):
-    tab = normalize_tab(tab_name)
-    st.session_state["active_tab"] = tab
-    # If we are navigating to Home, ensure the Home pills do NOT auto-jump
-    # by marking the first render as a fresh mount.
-    if tab == "Home":
-        st.session_state["__home_first_mount__"] = True
-    # Stop this render immediately; the next run will paint the new tab.
-    st.stop()
-
-
-# Coerce any legacy/old values that may still be in session state
-if st.session_state.get("active_tab") == "Stories":
-    st.session_state["active_tab"] = "Explore Stories"
 
 
 # =========================
@@ -335,9 +321,33 @@ if 'story' in st.query_params:
     story_from_url = st.query_params['story']
     if st.session_state.get('_deeplink_story') != story_from_url:
         st.session_state['active_story'] = story_from_url
-        st.session_state['active_tab'] = 'Explore Stories'
+        st.session_state['active_tab'] = 'My Work'
         st.session_state['explore_view_mode'] = 'Cards'
         st.session_state['_deeplink_story'] = story_from_url
+        st.rerun()
+
+# =========================
+# Generic nav-link URL handler: ?nav=<surface-slug>
+# =========================
+# MATTGPT-102. Used by back-link anchors on secondary deep-link surfaces
+# (How I Built and any future no-top-nav secondary surface). Maps slug
+# to active_tab and clears the URL param so subsequent reloads don't
+# re-trigger. Reusable across all secondary surfaces.
+_NAV_SLUG_TO_TAB = {
+    "home": "Home",
+    "my-work": "My Work",
+    "ask-agy": "Ask Agy",
+    "role-match": "Role Match",
+    "profile": "My Profile",
+    "banking": "Banking",
+    "cross-industry": "Cross-Industry",
+}
+if 'nav' in st.query_params:
+    nav_slug = st.query_params['nav']
+    if nav_slug in _NAV_SLUG_TO_TAB:
+        st.session_state['active_tab'] = _NAV_SLUG_TO_TAB[nav_slug]
+        # Clear the URL params so reload doesn't re-trigger.
+        st.query_params.clear()
         st.rerun()
 
 # =========================
@@ -346,7 +356,7 @@ if 'story' in st.query_params:
 
 
 def _clear_explore_state():
-    """Reset all Explore Stories state for a fresh slate on navigation away."""
+    """Reset all My Work state for a fresh slate on navigation away."""
     st.session_state.pop("return_to_landing", None)
     st.session_state["filters"] = {
         "personas": [],
@@ -415,7 +425,7 @@ def build_facets(stories):
 
 
 # =========================
-# UI — Home / Stories / Ask / About
+# UI — Home / My Work / Ask Agy / Role Match / My Profile
 # =========================
 industries, capabilities, clients, domains, roles, tags, personas_all = build_facets(
     STORIES
@@ -442,7 +452,7 @@ elif st.session_state["active_tab"] == "Cross-Industry":
     render_cross_industry_landing(STORIES)
 
 # --- REFACTORED STORIES ---
-elif st.session_state["active_tab"] == "Explore Stories":
+elif st.session_state["active_tab"] == "My Work":
     from ui.pages.explore_stories import render_explore_stories
 
     render_explore_stories(
@@ -456,8 +466,8 @@ elif st.session_state["active_tab"] == "Explore Stories":
         personas_all,
     )
 
-# --- ASK MATTGPT ---
-elif st.session_state["active_tab"] == "Ask MattGPT":
+# --- ASK AGY ---
+elif st.session_state["active_tab"] == "Ask Agy":
     _clear_explore_state()
     from ui.pages.ask_mattgpt import render_ask_mattgpt
 
@@ -470,8 +480,8 @@ elif st.session_state["active_tab"] == "Role Match":
 
     render_role_match(STORIES)
 
-# --- ABOUT ---
-elif st.session_state["active_tab"] == "About Matt":
+# --- MY PROFILE ---
+elif st.session_state["active_tab"] == "My Profile":
     _clear_explore_state()
     from ui.pages.about_matt import render_about_matt
 
@@ -481,7 +491,7 @@ elif st.session_state["active_tab"] == "About Matt":
 else:
     st.error(f"❌ Unknown page: {st.session_state['active_tab']}")
     st.info(
-        "Valid pages: Home, Explore Stories, Ask MattGPT, About Matt, Banking, Cross-Industry"
+        "Valid pages: Home, My Work, Ask Agy, My Profile, Banking, Cross-Industry, How I Built"
     )
     # Reset to home
     st.session_state["active_tab"] = "Home"

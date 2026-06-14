@@ -16,40 +16,7 @@ def render_footer():
     # =========================================================================
     st.markdown(
         """
-    <style>
-    /* Hide the footer trigger button */
-    [class*="st-key-footer_ask"] {
-        display: none !important;
-    }
-
-    /* Mobile responsive footer */
-    @media (max-width: 767px) {
-        .footer-connect {
-            padding: 24px 16px !important;
-            margin-top: 24px !important;
-        }
-        .footer-connect h3 {
-            font-size: 20px !important;
-            margin-bottom: 8px !important;
-        }
-        .footer-connect .footer-desc {
-            font-size: 13px !important;
-            margin-bottom: 6px !important;
-        }
-        .footer-connect .footer-avail {
-            font-size: 11px !important;
-            margin-bottom: 16px !important;
-        }
-        .footer-connect .footer-buttons {
-            gap: 8px !important;
-        }
-        .footer-connect .footer-buttons a {
-            padding: 10px 16px !important;
-            font-size: 12px !important;
-        }
-    }
-    </style>
-    <div class="footer-connect" style="background: #2c3e50; color: white; padding: 48px 40px; text-align: center; margin-top: 40px; border-radius: 8px;">
+    <div class="footer-connect" style="background: #2c3e50; color: white; padding: 24px 40px; text-align: center; margin-top: 16px; border-radius: 8px;">
         <h3 style="font-size: 28px; margin-bottom: 12px; color: white;">Let's Connect</h3>
         <p class="footer-desc" style="font-size: 16px; margin-bottom: 8px; opacity: 0.9;">
             I build what's next, modernize what's not, and grow teams along the way.
@@ -97,5 +64,5 @@ def render_footer():
 
     # Hidden Streamlit button
     if st.button("", key="footer_ask"):
-        st.session_state["active_tab"] = "Ask MattGPT"
+        st.session_state["active_tab"] = "Ask Agy"
         st.rerun()

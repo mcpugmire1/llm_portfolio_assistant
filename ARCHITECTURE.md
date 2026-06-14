@@ -1,5 +1,19 @@
 # Architecture Documentation
 
+> **Naming convention note (May 30-31, 2026 — MATTGPT-100 + MATTGPT-106 + MATTGPT-107):**
+>
+> Display labels were renamed via Strategy B (coordinated rename across UI labels + `session_state["active_tab"]` routing values):
+>
+> | Old display label | New display label | session_state value | Module/file name |
+> |---|---|---|---|
+> | Explore Stories | **My Work** | `"My Work"` | `ui/pages/explore_stories.py` (unchanged) |
+> | Ask MattGPT | **Ask Agy** | `"Ask Agy"` | `ui/pages/ask_mattgpt/` (unchanged) |
+> | About Matt | **My Profile** | `"My Profile"` | `ui/pages/about_matt.py` (unchanged) |
+>
+> Streamlit converts spaces in keys to dashes for CSS classes: `key="topnav_My Work"` produces class `st-key-topnav_My-Work`. References below to "Ask MattGPT", "Explore Stories", or "About Matt" as MODULE / FUNCTION / PACKAGE names (e.g., `ask_mattgpt_header.py`, `render_about_matt()`, `tests/bdd/features/about_matt.feature`) refer to the unchanged code structure — only the user-facing labels and routing values changed.
+>
+> Additionally: Home navbar is now brand-left + space-between layout (MATTGPT-106); category cards are 3-col grid with unified light-bg treatment and whole-card click targets (MATTGPT-107).
+
 ## Table of Contents
 
 ### 📋 Overview
@@ -70,7 +84,7 @@
 **Project:** MattGPT Portfolio Assistant - AI-powered career story search and chat interface
 **Tech Stack:** Streamlit, OpenAI GPT-4o, Pinecone vector DB, Python 3.11+
 **Data Corpus:** 130+ STAR-formatted transformation project stories
-**Last Updated:** May 10, 2026
+**Last Updated:** June 8, 2026
 
 ### Key Achievements
 
@@ -184,7 +198,9 @@ llm_portfolio_assistant/
 │   │   ├── footer.py                  # Footer
 │   │   ├── story_detail.py            # Story Detail Component (shared renderer)
 │   │   ├── ask_mattgpt_header.py      # Unified Ask MattGPT header
-│   │   ├── how_agy_modal.py           # "How Agy Searches" modal
+│   │   ├── why_agy_dialog.py          # "Why Agy?" @st.dialog (identity + origin story)
+│   │   ├── how_agy_dialog.py          # "How Agy Searches" @st.dialog (3-step RAG flow)
+│   │   ├── how_i_built_dialog.py      # "How I Built MattGPT" @st.dialog (MATTGPT-102)
 │   │   ├── category_cards.py          # Landing page capability cards
 │   │   ├── hero.py                    # Hero section component
 │   │   ├── lock_icon.py               # Private-view gate (popover + password, fail-closed)
@@ -300,8 +316,10 @@ Reusable UI components shared across multiple pages.
 | **category_cards.py** | Industry/capability exploration cards | Home | `render_category_cards()` |
 | **story_detail.py** | Full STAR narrative with sidebar | Explore Stories, Ask MattGPT (Related Projects) | `render_story_detail(detail, key_suffix, stories)` |
 | **timeline_view.py** | Era-based timeline with collapsible sections | Explore Stories | `render_timeline_view(stories, on_story_click)` |
-| **ask_mattgpt_header.py** | Unified header + "How Agy Searches" button | Ask MattGPT (Landing + Conversation) | `render_ask_header()`, `get_ask_header_css()` |
-| **how_agy_modal.py** | "How Agy Finds Your Stories" modal content | Ask MattGPT | `get_how_agy_flow_html()`, `get_how_agy_modal_html()` |
+| **ask_mattgpt_header.py** | Unified header + dialog trigger buttons | Ask MattGPT (Landing + Conversation) | `render_ask_header()`, `get_ask_header_css()` |
+| **why_agy_dialog.py** | "Why Agy?" identity + origin story | Ask MattGPT, Home footer | `render_why_agy_dialog()` |
+| **how_agy_dialog.py** | "How Agy Searches" 3-step RAG flow | Ask MattGPT, Home footer | `render_how_agy_dialog()` |
+| **how_i_built_dialog.py** | "How I Built MattGPT" technical deep-dive — architecture, pipeline, CTA chips → Ask Agy | Ask MattGPT, Home footer | `render_how_i_built_dialog()` |
 | **thinking_indicator.py** | Animated loading indicator | Ask MattGPT, Explore Stories | `render_thinking_indicator()` |
 
 **story_detail.py Key Pattern:**
@@ -313,7 +331,7 @@ def handle_ask_about_this(detail: dict):
     st.session_state["active_story_obj"] = detail
     st.session_state["__ctx_locked__"] = True
     st.session_state["__ask_from_suggestion__"] = True
-    st.session_state["active_tab"] = "Ask MattGPT"
+    st.session_state["active_tab"] = "Ask Agy"  # was "Ask MattGPT" pre-MATTGPT-100
     st.rerun()
 ```
 
@@ -333,8 +351,86 @@ MAX_STORIES_PER_ERA = 6
 # "View in Explore" navigation
 st.session_state["prefilter_era"] = era_name
 st.session_state["prefilter_view_mode"] = "table"
-st.session_state["active_tab"] = "Explore Stories"
+st.session_state["active_tab"] = "My Work"  # was "Explore Stories" pre-MATTGPT-100
 ```
+
+---
+
+### Interactive Click Handling Patterns
+
+Three distinct patterns exist in the codebase. Read this before building any new click handler. **Start with Pattern 1; only escalate when it provably fails.**
+
+#### Pattern 1 — Plain `st.button` + scoped CSS (default)
+
+**Use when:** The clickable element can visually be a Streamlit button (styled away via CSS).
+
+**Canonical example:** `ui/pages/ask_mattgpt/conversation_helpers.py` — Related Projects source chips (~line 626). Button is styled as a chip via `[class*="st-key-{stable_key}"] button` CSS. Click is handled by the standard Streamlit WebSocket → Python rerun cycle. No JS, no HTML bridge.
+
+```python
+if st.button(label, key=f"chip_{idx}"):
+    handle_chip_click(idx)
+```
+
+**Why this is the default:** Zero fragility. React reconciliation never affects it. Streamlit reruns don't kill anything.
+
+#### Pattern 2 — Delegated `parentDoc` listener + hidden `st.button` bridge
+
+**Use when:** The clickable element must be a raw HTML element (not a Streamlit button), and per-element `onclick` would die on React reconciliation.
+
+**Canonical examples:**
+- `ui/components/how_i_built_dialog.py` — `.hib-cta-prompt` chips (MATTGPT-117)
+- `ui/pages/about_matt.py` — Copy snippet + Download PDF spans (MATTGPT-118)
+- `ui/pages/explore_stories.py` — Cards view delegated listener
+
+**Key rules:**
+1. Listener lives on `parentDoc` (the Streamlit page's `document`), not on individual elements. This survives React DOM reconciliation because `parentDoc` itself is never replaced.
+2. Use `e.target.closest(selector)` inside the handler to find the target dynamically.
+3. For clipboard: use `window.parent.navigator.clipboard.writeText()` (async API). Both `.then()` and `.catch()` should show confirmation so feedback fires regardless of clipboard permission state in headless test environments.
+4. For Streamlit-triggered actions (anything requiring a Python rerun): find `parentDoc.querySelector('[class*="st-key-{key}"] button')` and call `.click()` — hidden button fires the Streamlit rerun.
+
+```python
+# Hidden bridge button (Python side)
+if st.button("", key="am_download_pdf"):
+    # handler runs after Streamlit rerun
+
+# JS side — delegated listener
+components.html("""
+<script>
+(function() {
+    var parentDoc = window.parent.document;
+    parentDoc.addEventListener('click', function(e) {
+        var btn = e.target.closest('#my-html-btn');
+        if (!btn) return;
+        // For clipboard:
+        window.parent.navigator.clipboard.writeText(text).then(showConfirm).catch(showConfirm);
+        // For Streamlit bridge:
+        var stBtn = parentDoc.querySelector('[class*="st-key-am_download_pdf"] button');
+        if (stBtn) stBtn.click();
+    });
+})();
+</script>""", height=0)
+```
+
+**CSS for hidden bridge buttons** (in `global_styles.py`):
+```css
+[class*='st-key-am_download_pdf'] { display: none !important; }
+```
+
+**Why NOT per-element `onclick`:** React's `dangerouslySetInnerHTML` reconciliation replaces inner DOM nodes on every Streamlit rerun, killing per-element event bindings from the `components.html` iframe's JS context. Delegates on `parentDoc` survive because `parentDoc` is never replaced. See April 2026 incident in CLAUDE.md.
+
+#### Pattern 3 — Per-element `addEventListener` (deprecated, do not use)
+
+Legacy pattern — per-element bindings inside `components.html` iframes. Dies on Streamlit rerun (iframe is recreated, destroying the JS context). **Do not introduce new instances.** See CLAUDE.md "Interactive Click Handling — STOP, Read This First" for the full incident history.
+
+---
+
+### My Profile Page (`ui/pages/about_matt.py`)
+
+**MATTGPT-118 (June 2026):** Added Copy snippet + Download PDF interaction to the "For a referrer" section.
+
+- **Copy snippet:** HTML `<span id="am-copy-snippet-btn">` wired via Pattern 2 delegated listener. Calls `window.parent.navigator.clipboard.writeText()`. Both `.then` and `.catch` change the span label to `✓ Copied!` (green, 2s timeout) so feedback fires regardless of clipboard permission state.
+- **Download PDF:** HTML `<span id="am-download-pdf-btn">` → JS finds `[class*="st-key-am_download_pdf"] button` → `.click()` → Streamlit rerun → Python handler opens `window.open` + `printWindow.print()` with a full printable HTML doc (signals, voice, competencies, How I Lead, career timeline). Pattern matches `action_buttons.py`.
+- Both interactions share a single `components.html` delegated listener block registered once per page render.
 
 ---
 
@@ -1000,7 +1096,7 @@ st.session_state["active_story"] = story_id                      # Story ID for 
 st.session_state["active_story_obj"] = story_dict                # Full story object
 st.session_state["__ctx_locked__"] = True                        # Lock context to this story
 st.session_state["__ask_from_suggestion__"] = True               # Bypass off-domain filters
-st.session_state["active_tab"] = "Ask MattGPT"                   # Navigate to Ask MattGPT
+st.session_state["active_tab"] = "Ask Agy"  # was "Ask MattGPT" pre-MATTGPT-100. Navigate to Ask Agy
 st.rerun()
 ```
 
@@ -1024,7 +1120,7 @@ if st.session_state.get("__ctx_locked__"):
 # Used by banking_landing.py, cross_industry_landing.py → Explore Stories
 st.session_state["prefilter_industry"] = "Financial Services"
 st.session_state["prefilter_capability"] = "Platform Engineering"
-st.session_state["active_tab"] = "Explore Stories"
+st.session_state["active_tab"] = "My Work"  # was "Explore Stories" pre-MATTGPT-100
 
 # Consumed in explore_stories.py BEFORE widgets render
 if "prefilter_industry" in st.session_state:
@@ -1129,6 +1225,35 @@ LAST_QUERY = "__explore_last_query__"         # Query that produced cache
 - has_metric → `story_has_metric(s)`
 - q (keyword) → token-based ALL match on Title, Client, Purpose, Process, Performance, tags
 
+### Explore Stories Two-Row Filter Bar (MATTGPT-065)
+
+**Shipped:** June 2026. Replaced the collapsible "▸ Advanced Filters" toggle with a permanent two-row filter bar.
+
+**Row 1 (unchanged):** Search box + Industry selectbox + Capability selectbox — `st.columns([2, 1, 1])`.
+
+**Row 2 (new):** Client + Role + Domain selectboxes + Reset button — always visible on desktop, hidden on mobile via CSS.
+
+```python
+# Row 2 container key — used for CSS mobile-hide
+with st.container(key="r2_row"):
+    c1, c2, c3, c4 = st.columns([1, 1, 1, 0.4])
+    with c1:
+        clients_version = st.session_state.get("_widget_version_clients", 0)
+        sel_client = st.selectbox("Client", options=["All"] + clients,
+                                  index=client_index, key=f"r2_client_v{clients_version}")
+        F["clients"] = [] if sel_client == "All" else [sel_client]
+```
+
+**CSS mobile pattern** (in `global_styles.py`):
+
+- `[class*="st-key-r2_row"]` hidden on mobile; `[class*="st-key-r2_row_open"]` shown when toggle is active (MATTGPT-119, shipped June 2026).
+- `es_mobile_filters_toggle` button (full-width) sits between Row 1 and Row 2, toggles `es_mobile_r2_open` session state (MATTGPT-119).
+- Row 2 on mobile: 3-column grid, Streamlit labels hidden, field names injected via `::before` pseudo-element on the select control (MATTGPT-123, shipped June 2026).
+
+**Widget key versioning:** Row 2 selectboxes use `key=f"r2_{field}_v{version}"` so the Reset button can force a widget rebuild by incrementing `st.session_state["_widget_version_clients"]` (and `_roles`, `_domains` equivalents). Without versioning, Streamlit re-uses the old widget value even after session state is cleared.
+
+**`F["clients"]` is always a list:** `matches_filters()` expects `F["clients"]` to be `[]` (all) or `["Capital One"]` (filtered). Never set it to a bare string — this breaks the IN-list logic in `utils/filters.py`.
+
 ### Known Limitations
 
 1. **Synthesis + specific topic:** "Tell me about Matt's rapid prototyping work" classified as synthesis but should find the specific rapid prototyping story. Current workaround: synthesis now uses user query embedding.
@@ -1188,6 +1313,9 @@ Central reference for all session state keys used across the application.
 | `__explore_last_confidence__` | `str` | Cached confidence level |
 | `__explore_last_query__` | `str` | Query that produced cache |
 | `page_offset` | `int` | Pagination offset |
+| `_widget_version_clients` | `int` | Row 2 Client selectbox rebuild counter (Reset increments) |
+| `_widget_version_roles` | `int` | Row 2 Role selectbox rebuild counter |
+| `_widget_version_domains` | `int` | Row 2 Domain selectbox rebuild counter |
 
 **Prefilter Keys (cross-page navigation):**
 | Key | Purpose | Consumed By |
@@ -2095,11 +2223,83 @@ became `.am-*` so they don't restyle Home / banking / story_detail /
 role_match (which share those class names with different intended styles).
 
 **Precedent:** chip CSS was relocated from `ui/components/category_cards.py`
-first; About Matt's full inline block was relocated under MATTGPT-068.
+first; About Matt's full inline block was relocated under MATTGPT-068;
+My Work / Explore Stories' full inline block was relocated under MATTGPT-105.
+
+**Applies within a single page too (MATTGPT-105):** The same stripping occurs
+during mid-rerun pauses *within the same page* — not only on page transitions.
+When `render_thinking_indicator()` fires on My Work (Cards view) after "Ask Agy
+About This", Streamlit partially replaces the DOM during its rerun pause. Inline
+`<style>` blocks injected inside the page's render functions are in the
+replacement window; `global_styles.py` is not, because `apply_global_styles()`
+runs at `app.py:43` before any render path executes.
+
+**Namespace convention (`es-*`):** When page-scoped CSS is relocated to
+`global_styles.py` it gains app-wide scope, so collision-prone class names must
+be prefixed. Pattern: `es-` for My Work/Explore Stories (`.es-fixed-height-card`,
+`.es-pagination`, `.es-results-count`, etc.). Apply the prefix to any class that
+previously had implicit page scope via inline injection.
 
 **Use when:** A page renders custom CSS AND a user action on it can navigate
 to a different page mid-rerun (any chip/button that sets `active_tab` and
-reruns).
+reruns), OR can trigger a rerun on the same page (thinking indicator, filter
+changes, pagination).
+
+---
+
+### Pattern 5: AgGrid Styling — Iframe Boundary Constraint (MATTGPT-064)
+
+**CSS rules in `global_styles.py` cannot reach the AgGrid iframe.** AgGrid
+renders inside a separate `iframe` document. CSS injected into the parent
+page's `<head>` — including everything in `global_styles.py` — stops at the
+iframe boundary. Any `.ag-theme-streamlit .ag-row` rules in `global_styles.py`
+are effectively dead code; they never apply to AgGrid's DOM.
+
+**Two delivery mechanisms for AgGrid styles:**
+
+**1. Python-side (static row properties):** Pass `opts["rowStyle"]` to
+`GridOptionsBuilder` — AgGrid applies it inside its own render, no iframe
+boundary involved. Example: `opts["rowStyle"] = {"cursor": "pointer"}`.
+
+**2. JS injection (CSS variable overrides):** Inject a `components.html`
+snippet *after* the `AgGrid(...)` call. Reach into `iframe.contentDocument`
+and call `root.style.setProperty(...)` on the AgGrid root element.
+
+**Guard selector:** Use `.ag-root-wrapper`, not `.ag-theme-streamlit`.
+The theme class is `.ag-theme-streamlit` in light mode and
+`.ag-theme-streamlit-dark` in dark mode. MattGPT always runs dark, so
+`.ag-theme-streamlit` returns `null` and the injection silently bails on
+every call. `.ag-root-wrapper` is theme-agnostic and always present once
+AgGrid renders.
+
+**Three-fire pattern (immediate + 500ms + 1500ms):** The AgGrid iframe may
+not be fully loaded when `components.html` first fires. Three calls cover:
+initial load, post-CSS-parse, and post-Streamlit-rerun iframe recreation.
+
+**Precedent:** `ui/pages/explore_stories.py` Table view render path
+(`3a5e1bc`, `6590450` — June 2026).
+
+---
+
+### Pattern 6: Mobile Column Stacker — Exclusion Maintenance
+
+`global_styles.py` contains a mobile CSS rule that forces all `stHorizontalBlock` elements to stack vertically on screens ≤767px. Any horizontal block that must remain horizontal on mobile requires a `:not(:has(...))` exclusion added to **both** the `stHorizontalBlock` rule and the `> div[data-testid="stColumn"]` child rule (same exclusion chain on both).
+
+**Current exclusions (5 total, ~line 427):**
+```css
+div[data-testid="stHorizontalBlock"]
+  :not(:has([class*="st-key-topnav_"]))           /* navbar */
+  :not(:has([data-testid="stButtonGroup"]))        /* button groups */
+  :not(:has(.st-key-landing_input))               /* Ask MattGPT landing input */
+  :not(:has([data-testid="stFormSubmitButton"]))   /* Explore Stories search form */
+  :not(:has([class*="st-key-r2_client_v2"])) {    /* Row 2 advanced filter grid */
+    flex-direction: column !important;
+}
+```
+
+**Rule:** When a new horizontal block must stay horizontal on mobile, add a 6th `:not(:has(...))` clause using a selector that uniquely identifies a child of that block. Update both the `stHorizontalBlock` rule and the `> div[data-testid="stColumn"]` child rule.
+
+**Maintenance note:** The `r2_client_v2` exclusion matches the `_v2` versioned widget key at the time of writing. If widget versioning bumps (e.g., `_v3` after a Reset), this selector becomes stale and the column stacker will re-capture the grid. Consider widening to `[class*="st-key-r2_client_v"]` if versioning is expected to increment.
 
 ---
 

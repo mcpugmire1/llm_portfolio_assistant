@@ -86,7 +86,7 @@ Coverage status (April 2026):
 """
 
 import pytest
-from pytest_bdd import given, scenario, then, when
+from pytest_bdd import given, parsers, scenario, then, when
 
 # =============================================================================
 # WAIT UTILITIES — Same constants as test_explore_stories.py
@@ -175,6 +175,12 @@ def test_desktop_shows_full_interface():
     pass
 
 
+# Regression guard — mobile gate broken 3x via CSS/JS changes to global_styles.py / app.py
+@scenario("../features/role_match.feature", "Role Match shows mobile gate at 375px")
+def test_role_match_shows_mobile_gate_at_375px():
+    pass
+
+
 @scenario(
     "../features/role_match.feature",
     "Action buttons appear only when results are present",
@@ -188,10 +194,6 @@ def test_action_buttons_hidden_without_results():
 # =============================================================================
 
 
-@pytest.mark.skip(
-    reason="Contradicts implementation — button is intentionally always enabled. "
-    "Empty submissions show a warning. Update feature file to match."
-)
 @scenario("../features/role_match.feature", "Empty text area disables the match button")
 def test_empty_text_area_disables_button():
     pass
@@ -341,10 +343,10 @@ def _wait_for_navbar_stable(page, timeout: int = 30000) -> None:
         () => {
             const classes = [
                 'st-key-topnav_Home',
-                'st-key-topnav_Explore-Stories',
-                'st-key-topnav_Ask-MattGPT',
+                'st-key-topnav_My-Work',
+                'st-key-topnav_Ask-Agy',
                 'st-key-topnav_Role-Match',
-                'st-key-topnav_About-Matt'
+                'st-key-topnav_My-Profile'
             ];
             return classes.every(c => document.querySelector('.' + c) !== null);
         }
@@ -390,6 +392,38 @@ def viewport_desktop(browser_page):
     browser_page.wait_for_timeout(SHORT_WAIT)
 
 
+@given(parsers.parse("the user is on a device with viewport width {width:d}px"))
+def given_viewport_at_explicit_width(browser_page, app_url, width):
+    """Set viewport BEFORE navigating so streamlit_js_eval captures correct width.
+    On mobile the desktop nav is CSS-hidden — uses the mobile hamburger dropdown.
+    Dropdown open state is style.display='block' (not a CSS class), so we wait
+    for #mobile-nav-dropdown to be visible rather than checking a class."""
+    browser_page.set_viewport_size({"width": width, "height": 800})
+    browser_page.goto(app_url)
+    browser_page.wait_for_load_state("networkidle")
+    _wait_for_navbar_stable(browser_page)
+    browser_page.locator("#mobile-hamburger").click()
+    browser_page.locator("#mobile-nav-dropdown").wait_for(state="visible", timeout=5000)
+    browser_page.locator("#mobile-nav-role").click()
+    wait_for_streamlit_rerun(browser_page)
+
+
+@then(parsers.parse('the page contains "{text}"'))
+def page_contains_text(browser_page, text):
+    locator = browser_page.locator(f"text={text}")
+    assert (
+        locator.count() > 0
+    ), f"Expected page to contain '{text}' but it was not found."
+
+
+@then("the textarea is not visible")
+def textarea_not_visible(browser_page):
+    textarea = browser_page.locator(ROLE_MATCH_INPUT_SELECTOR)
+    assert (
+        not textarea.is_visible()
+    ), "Expected textarea to be hidden on mobile but it was visible."
+
+
 @given("the user has not submitted a job description")
 def user_has_not_submitted_jd(browser_page, app_url):
     """Land on Role Match without ever clicking submit."""
@@ -424,7 +458,8 @@ def user_pastes_jd(browser_page):
     )
     textarea = browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first
     textarea.fill(sample_jd)
-    browser_page.wait_for_timeout(SHORT_WAIT)
+    textarea.press("Tab")
+    wait_for_streamlit_rerun(browser_page)
 
 
 @when("the user navigates to Role Match")
@@ -465,33 +500,31 @@ def page_shows_input_and_button(browser_page):
     ).first.is_visible(), '"Match this role" button not visible'
 
 
-@then(
-    '"Role Match" appears in the navigation bar between "Ask MattGPT" and "About Matt"'
-)
+@then('"Role Match" appears in the navigation bar between "Ask Agy" and "My Profile"')
 def role_match_in_navbar_between_ask_and_about(browser_page):
     # All three labels must be present and visible in the navbar.
     assert (
-        browser_page.locator("button:has-text('Ask MattGPT'):visible").count() > 0
-    ), "'Ask MattGPT' nav button not visible"
+        browser_page.locator("button:has-text('Ask Agy'):visible").count() > 0
+    ), "'Ask Agy' nav button not visible"
     assert (
         browser_page.locator("button:has-text('Role Match'):visible").count() > 0
     ), "'Role Match' nav button not visible"
     assert (
-        browser_page.locator("button:has-text('About Matt'):visible").count() > 0
-    ), "'About Matt' nav button not visible"
+        browser_page.locator("button:has-text('My Profile'):visible").count() > 0
+    ), "'My Profile' nav button not visible"
 
-    # Order: Role Match should appear after Ask MattGPT and before About Matt.
+    # Order: Role Match should appear after Ask Agy and before My Profile.
     # Use bounding boxes to verify left-to-right ordering.
-    ask = browser_page.locator("button:has-text('Ask MattGPT'):visible").first
+    ask = browser_page.locator("button:has-text('Ask Agy'):visible").first
     role = browser_page.locator("button:has-text('Role Match'):visible").first
-    about = browser_page.locator("button:has-text('About Matt'):visible").first
+    about = browser_page.locator("button:has-text('My Profile'):visible").first
 
     ask_box = ask.bounding_box()
     role_box = role.bounding_box()
     about_box = about.bounding_box()
     assert ask_box and role_box and about_box, "Could not measure nav button positions"
     assert ask_box["x"] < role_box["x"] < about_box["x"], (
-        "Role Match nav button not positioned between Ask MattGPT and About Matt "
+        "Role Match nav button not positioned between Ask Agy and My Profile "
         f"(ask.x={ask_box['x']}, role.x={role_box['x']}, about.x={about_box['x']})"
     )
 
@@ -632,6 +665,13 @@ def _read_lock_glyph(page) -> str:
 
 
 # --- Scenario bindings ---
+_LOCK_SKIP_REASON = (
+    "Lock icon hidden from public view pending MATTGPT-012 Phase 4 private overlay. "
+    "Re-enable when lock CSS hide is removed and private view ships."
+)
+
+
+@pytest.mark.skip(reason=_LOCK_SKIP_REASON)
 @scenario(
     "../features/role_match.feature",
     "Lock icon is visible on the Role Match results panel",
@@ -640,16 +680,19 @@ def test_lock_icon_visible_on_results_panel():
     pass
 
 
+@pytest.mark.skip(reason=_LOCK_SKIP_REASON)
 @scenario("../features/role_match.feature", "Clicking lock icon opens password popover")
 def test_clicking_lock_opens_popover():
     pass
 
 
+@pytest.mark.skip(reason=_LOCK_SKIP_REASON)
 @scenario("../features/role_match.feature", "Correct password unlocks private view")
 def test_correct_password_unlocks():
     pass
 
 
+@pytest.mark.skip(reason=_LOCK_SKIP_REASON)
 @scenario(
     "../features/role_match.feature", "Incorrect password does not unlock private view"
 )
@@ -657,16 +700,19 @@ def test_incorrect_password_keeps_locked():
     pass
 
 
+@pytest.mark.skip(reason=_LOCK_SKIP_REASON)
 @scenario("../features/role_match.feature", "Private mode persists within session")
 def test_private_mode_persists():
     pass
 
 
+@pytest.mark.skip(reason=_LOCK_SKIP_REASON)
 @scenario("../features/role_match.feature", "Empty password submission is a no-op")
 def test_empty_password_no_op():
     pass
 
 
+@pytest.mark.skip(reason=_LOCK_SKIP_REASON)
 @scenario(
     "../features/role_match.feature",
     "Wrong password followed by correct password still unlocks",
@@ -675,11 +721,13 @@ def test_retry_after_wrong_unlocks():
     pass
 
 
+@pytest.mark.skip(reason=_LOCK_SKIP_REASON)
 @scenario("../features/role_match.feature", "Password input is masked")
 def test_password_input_masked():
     pass
 
 
+@pytest.mark.skip(reason=_LOCK_SKIP_REASON)
 @scenario(
     "../features/role_match.feature", "Lock glyph reflects __private_mode__ state"
 )
@@ -687,6 +735,7 @@ def test_lock_glyph_reflects_state():
     pass
 
 
+@pytest.mark.skip(reason=_LOCK_SKIP_REASON)
 @scenario(
     "../features/role_match.feature", "Clicking the unlocked icon re-locks the session"
 )
@@ -714,13 +763,145 @@ def test_lock_icon_hidden_on_mobile():
     pass
 
 
+@pytest.mark.skip(reason=_LOCK_SKIP_REASON)
 @scenario("../features/role_match.feature", "Browser refresh re-locks the session")
 def test_refresh_relocks():
     pass
 
 
+@pytest.mark.skip(reason=_LOCK_SKIP_REASON)
 @scenario("../features/role_match.feature", "New tab does not inherit unlocked state")
 def test_new_tab_does_not_inherit():
+    pass
+
+
+# --- MATTGPT-067 scenario bindings ---
+
+
+@scenario(
+    "../features/role_match.feature",
+    "Match button is disabled when the JD textarea is empty",
+)
+def test_match_button_disabled_when_empty():
+    pass
+
+
+@scenario(
+    "../features/role_match.feature", "Match button enables when JD text is entered"
+)
+def test_match_button_enables_with_text():
+    pass
+
+
+@scenario(
+    "../features/role_match.feature",
+    "Clear button is not visible when textarea is empty",
+)
+def test_clear_button_hidden_when_empty():
+    pass
+
+
+@scenario(
+    "../features/role_match.feature",
+    "Clear button is visible when textarea contains text",
+)
+def test_clear_button_visible_with_text():
+    pass
+
+
+@scenario(
+    "../features/role_match.feature",
+    "Clicking clear empties the textarea and disables the match button",
+)
+def test_clear_empties_textarea_and_disables_button():
+    pass
+
+
+@scenario(
+    "../features/role_match.feature", "No follow-up CTA is visible before submission"
+)
+def test_no_followup_cta_before_submission():
+    pass
+
+
+# --- MATTGPT-067 (reopened) — 30-word guard + summary block + clear reset + error state ---
+
+
+@scenario(
+    "../features/role_match.feature",
+    "Match button stays disabled below 30-word threshold",
+)
+def test_match_button_disabled_below_30_words():
+    pass
+
+
+@scenario(
+    "../features/role_match.feature",
+    "Match button enables at 30-word threshold",
+)
+def test_match_button_enables_at_30_words():
+    pass
+
+
+@pytest.mark.slow
+@scenario(
+    "../features/role_match.feature",
+    "Summary block renders between legend and requirements after match",
+)
+def test_summary_block_renders_between_legend_and_requirements():
+    pass
+
+
+@pytest.mark.slow
+@scenario(
+    "../features/role_match.feature",
+    "Summary counts line shows color-coded strong partial and gap tallies",
+)
+def test_summary_counts_color_coded():
+    pass
+
+
+@pytest.mark.slow
+@scenario(
+    "../features/role_match.feature",
+    "Clicking Clear returns to State 1 including right panel and Sample JD link",
+)
+def test_clear_returns_to_state_1_full():
+    pass
+
+
+@scenario(
+    "../features/role_match.feature",
+    "Submitting a non-JD text shows extraction error with no summary and no CTA",
+)
+def test_error_state_extraction_failure():
+    pass
+
+
+@pytest.mark.slow
+@scenario(
+    "../features/role_match.feature",
+    "Post-result CTA renders after successful match",
+)
+def test_post_result_cta_renders():
+    pass
+
+
+@pytest.mark.slow
+@scenario(
+    "../features/role_match.feature",
+    "Export button is present after successful match",
+)
+def test_export_button_present_after_match():
+    pass
+
+
+@pytest.mark.smoke
+@scenario(
+    "../features/role_match.feature",
+    "Hero subtitle shows updated copy",
+)
+def test_hero_subtitle_copy():
     pass
 
 
@@ -820,8 +1001,8 @@ def when_user_submits_empty(browser_page):
 
 @when("the user navigates to another tab and returns to Role Match")
 def when_user_navigates_away_and_back(browser_page):
-    """In-app navigation — click About Matt then click Role Match."""
-    browser_page.locator(".st-key-topnav_About-Matt button").first.click()
+    """In-app navigation — click My Profile then click Role Match."""
+    browser_page.locator(".st-key-topnav_My-Profile button").first.click()
     wait_for_streamlit_rerun(browser_page)
     browser_page.locator(ROLE_MATCH_NAV_SELECTOR).first.click()
     wait_for_streamlit_rerun(browser_page)
@@ -1091,3 +1272,355 @@ def then_no_rate_limit(browser_page):
     assert "🔓" in glyph, (
         "Retry should succeed — no rate-limit lockout. " f"Got glyph: {glyph!r}"
     )
+
+
+# =============================================================================
+# MATTGPT-067 — Input controls and post-result CTA step definitions
+# =============================================================================
+
+ROLE_MATCH_CLEAR_SELECTOR = '[class*="st-key-role_match_clear"] button'
+ROLE_MATCH_FOLLOWUP_CTA_PARTIAL = "Have questions about the results"
+
+_SAMPLE_JD = (
+    "Director of Engineering to drive platform modernization in regulated industries. "
+    "Required: 15+ years leading distributed engineering teams through digital transformation. "
+    "Required: proven track record building AI/ML pipelines and machine learning systems at scale. "
+    "Preferred: published conference keynote speaker or recognized industry thought leader. "
+    "Preferred: experience leading semiconductor or hardware product engineering teams."
+)
+
+
+@given("I navigate to the Role Match page")
+def given_navigate_to_role_match_page(browser_page, app_url):
+    _navigate_to_role_match(browser_page, app_url)
+
+
+@when("the JD textarea is empty")
+def when_textarea_is_empty(browser_page):
+    value = browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.input_value()
+    assert value == "", f"Expected empty textarea on initial load, got: {value!r}"
+
+
+@when("I type a job description into the textarea")
+def when_type_jd_into_textarea(browser_page):
+    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.fill(_SAMPLE_JD)
+    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.press("Tab")
+    wait_for_streamlit_rerun(browser_page)
+
+
+@given("the JD textarea contains text")
+def given_textarea_contains_text(browser_page):
+    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.fill(_SAMPLE_JD)
+    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.press("Tab")
+    wait_for_streamlit_rerun(browser_page)
+
+
+@then('the "Match this role 🐾" button is disabled')
+def then_match_button_disabled(browser_page):
+    btn = browser_page.locator(ROLE_MATCH_SUBMIT_SELECTOR).first
+    assert btn.is_disabled(), "Expected 'Match this role 🐾' button to be disabled"
+
+
+@then('the "Match this role 🐾" button is enabled')
+def then_match_button_enabled(browser_page):
+    btn = browser_page.locator(ROLE_MATCH_SUBMIT_SELECTOR).first
+    assert btn.is_enabled(), "Expected 'Match this role 🐾' button to be enabled"
+
+
+@then('no "Clear" button is visible')
+def then_no_clear_button_visible(browser_page):
+    count = browser_page.locator(ROLE_MATCH_CLEAR_SELECTOR).count()
+    assert count == 0, f"Expected no Clear button in empty state, found {count}"
+
+
+@then('a "Clear" button is visible')
+def then_clear_button_visible(browser_page):
+    btn = browser_page.locator(ROLE_MATCH_CLEAR_SELECTOR).first
+    assert (
+        btn.is_visible()
+    ), "Expected 'Clear' button to be visible when textarea has text"
+
+
+@when('I click the "Clear" button')
+def when_click_clear_button(browser_page):
+    browser_page.locator(ROLE_MATCH_CLEAR_SELECTOR).first.click()
+    wait_for_streamlit_rerun(browser_page)
+
+
+@then("the JD textarea is empty")
+def then_textarea_is_empty(browser_page):
+    value = browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.input_value()
+    assert value == "", f"Expected empty textarea after clear, got: {value!r}"
+
+
+@then("no follow-up CTA is visible")
+def then_no_followup_cta_visible(browser_page):
+    count = browser_page.locator(ROLE_MATCH_FOLLOWUP_CTA_SELECTOR).count()
+    assert count == 0, f"Expected no follow-up CTA before submission, found {count}"
+
+
+# Step defs for pre-existing "Empty text area disables the match button" scenario
+@given("the text area is empty")
+def given_text_area_is_empty(browser_page):
+    value = browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.input_value()
+    assert value == "", f"Expected empty textarea on page load, got: {value!r}"
+
+
+@then('the "Match this role" button is disabled')
+def then_match_role_button_disabled_no_emoji(browser_page):
+    btn = browser_page.locator(ROLE_MATCH_SUBMIT_SELECTOR).first
+    assert btn.is_disabled(), "Expected 'Match this role' button to be disabled"
+
+
+# =============================================================================
+# MATTGPT-067 (reopened) — 30-word guard, summary block, clear reset, error state
+# =============================================================================
+
+ROLE_MATCH_DEMO_JD_SELECTOR = '[class*="st-key-role_match_demo_jd"] button'
+ROLE_MATCH_FOLLOWUP_CTA_SELECTOR = '[class*="st-key-role_match_followup_cta"] button'
+ROLE_MATCH_LEGEND_SELECTOR = ".role-match-legend"
+ROLE_MATCH_SUMMARY_SELECTOR = ".role-match-summary"
+ROLE_MATCH_SUMMARY_COUNTS_SELECTOR = ".role-match-summary-counts"
+
+# < 30 words (~9 words — well below threshold)
+_SHORT_JD = "Director Engineering platform modernization cloud transformation leadership innovation technology."
+# 36 words — reliably above 30
+_LONG_JD_30_PLUS = (
+    "Senior Engineering Leader at a global enterprise. We are looking for an experienced "
+    "engineering executive to own platform modernization, organizational design, and talent "
+    "development for a large multi-team engineering organization serving millions of users."
+)
+# 35+ words of lorem ipsum — not a real JD; should produce 0 requirements
+_ERROR_FIXTURE_JD = (
+    "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor "
+    "incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud "
+    "exercitation ullamco laboris nisi aliquip ex commodo."
+)
+
+LLM_TIMEOUT = 300000  # 300s for real LLM calls (demo JD: 18 gpt-4o calls × ~8-10s each)
+
+
+# --- GIVEN ---
+
+
+@given("I have submitted a job description and results are displayed")
+def given_jd_submitted_and_results_displayed(browser_page, app_url):
+    """Fill _SAMPLE_JD directly, submit, and wait for LLM results (real call — faster than demo JD).
+    _SAMPLE_JD produces 3-5 requirements vs demo JD's 23, keeping this under ~60s.
+    Used by all result-state tests that assert DOM structure, not specific JD content.
+
+    Wait signal: .role-match-legend appears on the FIRST rerun after results render (same
+    script execution as the LLM call). The button only flips to "Update Match" on the SECOND
+    rerun (after a user interaction), so checking btn.innerText alone is insufficient here.
+    """
+    _navigate_to_role_match(browser_page, app_url)
+    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.fill(_SAMPLE_JD)
+    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.press("Tab")
+    wait_for_streamlit_rerun(browser_page)
+    browser_page.locator(ROLE_MATCH_SUBMIT_SELECTOR).first.click()
+    browser_page.wait_for_function(
+        f"() => {{"
+        f"  const btn = document.querySelector('{ROLE_MATCH_SUBMIT_SELECTOR}');"
+        f"  if (!btn) return false;"
+        f"  if (btn.innerText.includes('Update Match')) return true;"
+        f"  if (document.querySelector('{ROLE_MATCH_LEGEND_SELECTOR}')) return true;"
+        f"  const body = document.body.innerText;"
+        f"  return body.includes(\"Something went wrong\") || body.includes(\"Couldn't extract\");"
+        f"}}",
+        timeout=LLM_TIMEOUT,
+    )
+    wait_for_streamlit_rerun(browser_page)
+
+
+# --- WHEN ---
+
+
+@when("I type fewer than 30 words into the JD textarea")
+def when_type_fewer_than_30_words(browser_page):
+    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.fill(_SHORT_JD)
+    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.press("Tab")
+    wait_for_streamlit_rerun(browser_page)
+
+
+@when("I type 30 or more words into the JD textarea")
+def when_type_30_or_more_words(browser_page):
+    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.fill(_LONG_JD_30_PLUS)
+    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.press("Tab")
+    wait_for_streamlit_rerun(browser_page)
+
+
+@when('I click "Try an example →" to load the demo job description')
+def when_click_demo_jd_link(browser_page):
+    browser_page.locator(ROLE_MATCH_DEMO_JD_SELECTOR).first.click()
+    wait_for_streamlit_rerun(browser_page)
+
+
+@when('I click "Match this role 🐾"')
+def when_click_match_this_role(browser_page):
+    """Submit the JD. Waits for Streamlit to finish processing (either results or error)."""
+    browser_page.locator(ROLE_MATCH_SUBMIT_SELECTOR).first.click()
+    # Poll until LLM call completes: button flips to "Update Match" (success) OR error text
+    # appears in DOM. Streamlit does not visually disable the button during script exec —
+    # !btn.disabled fires immediately before the LLM returns; use semantic state signals only.
+    browser_page.wait_for_function(
+        f"() => {{"
+        f"  const btn = document.querySelector('{ROLE_MATCH_SUBMIT_SELECTOR}');"
+        f"  if (!btn) return false;"
+        f"  if (btn.innerText.includes('Update Match')) return true;"
+        f"  const body = document.body.innerText;"
+        f"  return body.includes(\"Something went wrong\") || body.includes(\"Couldn't extract\");"
+        f"}}",
+        timeout=LLM_TIMEOUT,
+    )
+    wait_for_streamlit_rerun(browser_page)
+
+
+@when("I type a 35-word non-JD placeholder text into the JD textarea")
+def when_type_non_jd_placeholder(browser_page):
+    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.fill(_ERROR_FIXTURE_JD)
+    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.press("Tab")
+    wait_for_streamlit_rerun(browser_page)
+
+
+@when('I click "✕ Clear"')
+def when_click_x_clear(browser_page):
+    browser_page.locator(ROLE_MATCH_CLEAR_SELECTOR).first.click()
+    wait_for_streamlit_rerun(browser_page)
+
+
+# --- THEN ---
+
+
+@then("match results are displayed in the right panel")
+def then_match_results_displayed(browser_page):
+    legend = browser_page.locator(ROLE_MATCH_LEGEND_SELECTOR).first
+    assert legend.is_visible(), "Expected results legend to be visible after match"
+
+
+@then('the button label reads "Update Match 🐾"')
+def then_button_label_update_match(browser_page):
+    btn = browser_page.locator(ROLE_MATCH_SUBMIT_SELECTOR).first
+    label = btn.inner_text()
+    assert (
+        "Update Match" in label
+    ), f"Expected 'Update Match 🐾' button label, got: {label!r}"
+
+
+@then('a section labeled "SUMMARY" is visible in the right panel')
+def then_summary_section_visible(browser_page):
+    summary = browser_page.locator(ROLE_MATCH_SUMMARY_SELECTOR).first
+    assert summary.is_visible(), "Expected SUMMARY section to be visible after match"
+
+
+@then("the summary block appears above the first requirement section")
+def then_summary_block_above_requirements(browser_page):
+    summary = browser_page.locator(ROLE_MATCH_SUMMARY_SELECTOR).first
+    req = browser_page.locator('[class*="st-key-role_match_req_"]').first
+    assert summary.is_visible(), "SUMMARY section not visible"
+    assert req.is_visible(), "No requirement rows found"
+    summary_y = summary.bounding_box()["y"]
+    req_y = req.bounding_box()["y"]
+    assert (
+        summary_y < req_y
+    ), f"Summary (y={summary_y:.0f}) must appear above first requirement (y={req_y:.0f})"
+
+
+@then("the summary counts line is visible")
+def then_summary_counts_line_visible(browser_page):
+    counts = browser_page.locator(ROLE_MATCH_SUMMARY_COUNTS_SELECTOR).first
+    assert counts.is_visible(), "Expected summary counts line to be visible"
+
+
+@then("strong match counts are displayed in green text")
+def then_strong_counts_green(browser_page):
+    strong_el = browser_page.locator(
+        f"{ROLE_MATCH_SUMMARY_COUNTS_SELECTOR} .count-strong"
+    ).first
+    assert strong_el.is_visible(), "Expected green strong-match count element"
+
+
+@then("partial match counts are displayed in amber text")
+def then_partial_counts_amber(browser_page):
+    partial_el = browser_page.locator(
+        f"{ROLE_MATCH_SUMMARY_COUNTS_SELECTOR} .count-partial"
+    ).first
+    assert partial_el.is_visible(), "Expected amber partial-match count element"
+
+
+@then("gap counts are displayed in red text")
+def then_gap_counts_red(browser_page):
+    gap_el = browser_page.locator(
+        f"{ROLE_MATCH_SUMMARY_COUNTS_SELECTOR} .count-gap"
+    ).first
+    assert gap_el.is_visible(), "Expected red gap count element"
+
+
+@then(parsers.parse('the right panel shows "{text}"'))
+def then_right_panel_shows_text(browser_page, text):
+    assert (
+        browser_page.get_by_text(text).count() > 0
+    ), f"Expected right panel to contain: {text!r}"
+
+
+@then('the "✕ Clear" button is not visible')
+def then_x_clear_button_not_visible(browser_page):
+    count = browser_page.locator(ROLE_MATCH_CLEAR_SELECTOR).count()
+    assert (
+        count == 0
+    ), f"Expected ✕ Clear button to be absent after reset, found {count}"
+
+
+@then('the "Try an example →" link is visible')
+def then_try_example_link_visible(browser_page):
+    link = browser_page.locator(ROLE_MATCH_DEMO_JD_SELECTOR).first
+    assert (
+        link.is_visible()
+    ), 'Expected "Try an example →" link to be visible after clear'
+
+
+@then('no "SUMMARY" section is visible in the right panel')
+def then_no_summary_section_visible(browser_page):
+    count = browser_page.locator(ROLE_MATCH_SUMMARY_SELECTOR).count()
+    assert count == 0, f"Expected no SUMMARY section in error state, found {count}"
+
+
+@then('no "Have questions about the results?" CTA is visible')
+def then_no_cta_after_error(browser_page):
+    count = browser_page.locator(ROLE_MATCH_FOLLOWUP_CTA_SELECTOR).count()
+    assert count == 0, f"Expected no CTA in error state, found {count}"
+
+
+@then('the button label reads "Match this role 🐾"')
+def then_button_label_match_this_role(browser_page):
+    btn = browser_page.locator(ROLE_MATCH_SUBMIT_SELECTOR).first
+    label = btn.inner_text()
+    assert (
+        "Match this role" in label
+    ), f"Expected 'Match this role 🐾' label in error state, got: {label!r}"
+
+
+@then(
+    'a call-to-action reading "Have questions about the results? Ask Agy →" is visible'
+)
+def then_cta_visible(browser_page):
+    cta = browser_page.locator(ROLE_MATCH_FOLLOWUP_CTA_SELECTOR).first
+    assert (
+        cta.is_visible()
+    ), 'Expected post-result CTA "Have questions about the results?" to be visible'
+    label = cta.inner_text()
+    assert (
+        "Ask Agy" in label
+    ), f"Expected CTA label to contain 'Ask Agy', got: {label!r}"
+
+
+@then("an Export button is visible in the actions row")
+def then_export_button_visible(browser_page):
+    export = browser_page.locator("#btn-role-match-export").first
+    assert export.is_visible(), "Expected Export button to be visible in actions row"
+
+
+@then(parsers.parse('the hero subtitle reads "{subtitle}"'))
+def then_hero_subtitle_reads(browser_page, subtitle):
+    elem = browser_page.locator(".conversation-header-text p").first
+    actual = elem.inner_text().strip()
+    assert actual == subtitle, f"Expected hero subtitle {subtitle!r}, got {actual!r}"

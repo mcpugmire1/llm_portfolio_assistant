@@ -1,5 +1,5 @@
 """
-Backend Service for Ask MattGPT
+Backend Service for Ask Agy
 
 Handles RAG (Retrieval-Augmented Generation) and OpenAI integration.
 Includes nonsense detection, semantic search orchestration, and Agy response generation.
@@ -244,14 +244,14 @@ def generate_dynamic_dna(stories: list[dict], clients: set[str]) -> str:
 Software Engineer → Solution Architect → Director → Cloud Innovation Center Leader
 - Accenture: March 2005 - September 2023 (18+ years)
 - Built CIC from 0 to {p_count}+ practitioners (Atlanta, Tampa)
-- Currently: Sabbatical, building MattGPT, targeting Director/VP roles
+- Currently: Sabbatical, building MattGPT, targeting senior product engineering leadership roles
 
 **Career Eras (for timeline context):**
 - 2005-2009: Enterprise Integration ({telecom_str})
 - 2009-2018: Payments & Architecture ({banking_str})
 - 2018-2019: Cloud Innovation (Liquid Studio)
 - 2019-2023: CIC Director (scaled 0→{p_count}, Fortune 500 transformation)
-- 2023-Present: Sabbatical (MattGPT, job search)
+- 2023-2026: Sabbatical (MattGPT, job search)
 
 **The {len(SYNTHESIS_THEMES)} Themes of Matt's Work (use these for synthesis):**
 {themes_text}
@@ -1342,7 +1342,7 @@ def rag_answer(
 ) -> dict[str, Any]:
     """Main RAG (Retrieval-Augmented Generation) orchestration function.
 
-    Coordinates the full Ask MattGPT pipeline:
+    Coordinates the full Ask Agy pipeline:
     1. Mode detection (narrative/key_points/deep_dive shortcuts)
     2. Off-domain query filtering (rules, LLM guard, token overlap)
     3. Semantic search for relevant stories

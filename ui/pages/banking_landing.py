@@ -11,6 +11,8 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 from ui.components.footer import render_footer
+from ui.components.how_i_built_dialog import render_how_i_built_dialog
+from ui.components.why_agy_dialog import render_why_agy_dialog
 from utils.client_utils import is_generic_client
 from utils.landing_cards import build_card_wiring_js, build_landing_cards
 
@@ -26,8 +28,15 @@ def render_banking_landing(stories: list[dict]):
     Streamlit limitation that cannot be overridden without converting to multipage app.
     """
     # === DYNAMIC COUNTS (derived from JSONL) ===
+    # MATTGPT-104: post-Era counts — exclude Professional Narrative stories
+    # so hero/stats agree with the landing card grid (which already excludes
+    # narrative via build_landing_cards) and with Home / Timeline / Explore
+    # Stories. Without this, hero showed 33 while card grid showed 32.
     banking_stories = [
-        s for s in stories if s.get("Industry") == "Financial Services / Banking"
+        s
+        for s in stories
+        if s.get("Industry") == "Financial Services / Banking"
+        and s.get("Category") != "Professional Narrative"
     ]
     total_projects = len(banking_stories)
 
@@ -63,15 +72,78 @@ def render_banking_landing(stories: list[dict]):
         height=0,
     )
 
-    # Hero header with Agy avatar (deep blue headphones - authority, trust)
+    if st.session_state.get("active_dialog") == "why_agy":
+        render_why_agy_dialog()
+        st.session_state.pop("active_dialog", None)
+    elif st.session_state.get("active_dialog") == "how_i_built":
+        render_how_i_built_dialog()
+        st.session_state.pop("active_dialog", None)
+
+    # Hidden trigger — position:absolute+height:0 removes from flow (no layout space).
+    # Must come before the hero so CSS in the hero's <style> block can target it.
+    # Pattern mirrors ask_mattgpt_header.py how_agy_trigger handling exactly.
+    if st.button("trigger", key="why_agy_banking_trigger"):
+        st.session_state["active_dialog"] = "why_agy"
+        st.rerun()
+    components.html(
+        """
+<script>
+(function() {
+    function wireBadge() {
+        var parentDoc = window.parent.document;
+        var badge = parentDoc.getElementById('why-agy-badge-banking');
+        var btn = parentDoc.querySelector('[class*="st-key-why_agy_banking_trigger"] button');
+        if (badge && btn && !badge.dataset.wired) {
+            badge.dataset.wired = 'true';
+            badge.addEventListener('pointerdown', function(e) {
+                e.preventDefault();
+                btn.click();
+            });
+            return true;
+        }
+        return false;
+    }
+    if (!wireBadge()) {
+        var attempts = 0;
+        var iv = setInterval(function() {
+            if (wireBadge() || ++attempts > 10) clearInterval(iv);
+        }, 200);
+    }
+})();
+</script>
+""",
+        height=0,
+    )
+
+    # Hero — CSS for trigger hiding embedded here (same st.markdown = same
+    # stMarkdownContainer, no extra DOM element before the hero).
     st.markdown(
         f"""
+<style>
+[class*="st-key-why_agy_banking_trigger"] {{
+    position: absolute !important;
+    left: -9999px !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}}
+div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_banking_trigger"]) {{
+    position: absolute !important;
+    left: -9999px !important;
+    height: 0 !important;
+    overflow: hidden !important;
+}}
+</style>
 <div class="conversation-header">
     <div class="conversation-header-content">
-        <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_banking.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
+        <div style="position: relative; display: inline-block; flex-shrink: 0;">
+            <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_banking.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
+            <span class="why-agy-badge--header" id="why-agy-badge-banking">i</span>
+        </div>
         <div class="conversation-header-text">
             <h1>Matt's Financial Services Expertise</h1>
-            <p>{total_projects} projects across {num_capabilities} specialized areas — trust Agy 🐾 to filter decades of domain experience</p>
+            <p>{total_projects} projects across {num_capabilities} specialized areas. Trust Agy 🐾 to filter decades of domain experience.</p>
         </div>
     </div>
 </div>
@@ -166,7 +238,7 @@ def render_banking_landing(stories: list[dict]):
         min-height: 184px;
         box-sizing: border-box;
         border-radius: 0;
-        margin: -3rem 0 0 0;
+        margin: -2rem 0 0 0;
     }
 
     .conversation-header-content {
@@ -256,8 +328,8 @@ def render_banking_landing(stories: list[dict]):
         /* Header - compact and stacked */
         .conversation-header {
             padding: 20px 16px !important;
-            min-height: auto !important;
-            margin: -24px 0 0 0 !important;  /* top right bottom left */
+            min-height: 145.59px !important;
+            margin: 60px 0 0 0 !important;  /* clear 60px fixed mobile nav (nav bottom 60 - header top -16 = 76) */
         }
         .conversation-header-content {
             flex-direction: row !important;
@@ -529,7 +601,7 @@ def render_banking_landing(stories: list[dict]):
         flow did (prefilter_industry, prefilter_capability, return_to_landing).
         The prefilter_capability value is now data-derived (a real Solution/
         Offering string from the corpus), so the Capability dropdown widget
-        on Explore Stories can't silently sanitize it to "All" anymore.
+        on My Work can't silently sanitize it to "All" anymore.
         """
         muted_cls = " muted" if muted else ""
         for row_start in range(0, len(card_list), 3):
@@ -588,7 +660,7 @@ def render_banking_landing(stories: list[dict]):
                         )
                         st.session_state["prefilter_capability"] = card["title"]
                         st.session_state["return_to_landing"] = "banking"
-                        st.session_state["active_tab"] = "Explore Stories"
+                        st.session_state["active_tab"] = "My Work"
                         st.rerun()
 
     # Core Capabilities tier — cards with >=3 banking stories
@@ -627,7 +699,7 @@ def render_banking_landing(stories: list[dict]):
 
     # Hidden Streamlit button for CTA
     if st.button("", key="card_btn_banking_cta"):
-        st.session_state["active_tab"] = "Ask MattGPT"
+        st.session_state["active_tab"] = "Ask Agy"
         st.rerun()
 
     # JS click-bridge for cards + CTA button. Shared with cross_industry_landing

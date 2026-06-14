@@ -1,7 +1,7 @@
 """
-Explore Stories Page - Refactored & Bug-Free
+My Work Page - Refactored & Bug-Free
 
-Browse 130+ project case studies with advanced filtering.
+Browse 100+ project case studies with advanced filtering.
 Includes semantic search, faceted filters, and pagination.
 
 FIXES:
@@ -32,9 +32,11 @@ from config.debug import DEBUG
 from services.query_logger import log_query
 from services.rag_service import semantic_search
 from services.semantic_router import is_portfolio_query_semantic
+from ui.components.how_i_built_dialog import render_how_i_built_dialog
 from ui.components.story_detail import render_story_detail
 from ui.components.thinking_indicator import render_thinking_indicator
 from ui.components.timeline_view import render_timeline_view
+from ui.components.why_agy_dialog import render_why_agy_dialog
 from utils.filters import matches_filters
 from utils.ui_helpers import render_no_match_banner, safe_container
 from utils.validation import is_nonsense
@@ -101,8 +103,8 @@ def reset_all_filters(stories: list[dict]):
         "explore_view_mode",
         "page_size_select",
         "_prev_explore_view_mode",
-        # Preserves breadcrumb back-link state. When a user arrives at Explore
-        # Stories from a landing page (Banking / Cross-Industry), that landing
+        # Preserves breadcrumb back-link state. When a user arrives at My
+        # Work from a landing page (Banking / Cross-Industry), that landing
         # sets session_state["return_to_landing"]. Without this preserve entry,
         # clicking Reset Filters silently drops the back-link — the breadcrumb
         # chip vanishes even though the user came in via a landing flow.
@@ -163,7 +165,7 @@ def reset_all_filters(stories: list[dict]):
 
     # CRITICAL: Preserve the active tab
     if "active_tab" not in st.session_state:
-        st.session_state["active_tab"] = "Explore Stories"
+        st.session_state["active_tab"] = "My Work"
 
 
 def remove_filter_value(filter_key: str, value: str):
@@ -416,7 +418,7 @@ def render_filter_chips(filters: dict, stories: list[dict]) -> bool:
 
         # CRITICAL: Preserve the active tab before rerunning
         if "active_tab" not in st.session_state:
-            st.session_state["active_tab"] = "Explore Stories"
+            st.session_state["active_tab"] = "My Work"
 
         st.rerun()
         return True
@@ -485,51 +487,7 @@ def render_pagination(total_results: int, page_size: int, offset: int, view_mode
 
     st.markdown(
         f"""
-    <style>
-    .pagination {{
-        padding: 20px 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
-    }}
-    .pagination button {{
-        padding: 8px 14px;
-        border: 1px solid var(--border-color);
-        background: var(--bg-card);
-        color: var(--text-secondary);
-        cursor: pointer;
-        border-radius: 4px;
-        font-size: 13px;
-        font-weight: 500;
-        transition: all 0.2s ease;
-    }}
-    .pagination button:hover:not(:disabled):not(.active) {{
-        background: var(--bg-hover);
-    }}
-    .pagination button.active {{
-        background: var(--accent-purple);
-        color: white;
-        border-color: var(--accent-purple);
-    }}
-    .pagination button:disabled {{
-        opacity: 0.4;
-        cursor: not-allowed;
-    }}
-    .pagination .page-info {{
-        padding: 0 12px;
-        color: var(--text-muted);
-        font-size: 13px;
-    }}
-    /* Hide Streamlit pagination triggers */
-    [class*="st-key-pg_trigger_"] {{
-        position: absolute !important;
-        left: -9999px !important;
-        height: 0 !important;
-        overflow: hidden !important;
-    }}
-    </style>
-    <div class="pagination">
+    <div class="es-pagination">
         {buttons_html}
     </div>
     """,
@@ -568,7 +526,7 @@ def render_pagination(total_results: int, page_size: int, offset: int, view_mode
 
             // Use event delegation on the pagination container
             parentDoc.addEventListener('click', function(e) {{
-                var btn = e.target.closest('.pagination button');
+                var btn = e.target.closest('.es-pagination button');
                 if (!btn || btn.disabled || btn.classList.contains('active')) return;
 
                 e.preventDefault();
@@ -616,7 +574,7 @@ def render_explore_stories(
     personas_all: list[str],
 ):
     """
-    Render the Explore Stories page with filters and project listings.
+    Render the My Work page with filters and project listings.
 
     FIXES:
     - Domain Category now actually filters
@@ -625,1075 +583,63 @@ def render_explore_stories(
     """
     # Note: Mobile CSS is injected globally via navbar.py
 
+    if st.session_state.get("active_dialog") == "why_agy":
+        render_why_agy_dialog()
+        st.session_state.pop("active_dialog", None)
+    elif st.session_state.get("active_dialog") == "how_i_built":
+        render_how_i_built_dialog()
+        st.session_state.pop("active_dialog", None)
+
     # Hero header with Agy avatar (gray headphones)
     st.markdown(
         """
 <div class="conversation-header">
     <div class="conversation-header-content">
-        <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_explore_stories.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
+        <div style="position: relative; display: inline-block; flex-shrink: 0;">
+            <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_explore_stories.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
+            <span class="why-agy-badge--header" id="why-agy-badge-my-work">i</span>
+        </div>
         <div class="conversation-header-text">
-            <h1>Project Stories & Insights</h1>
-            <p>Browse 130+ transformation case studies, or ask Agy 🐾 for the deeper context</p>
+            <h1>Matt's Project Portfolio</h1>
+            <p>100+ transformation stories. Trust Agy 🐾 to find the ones that fit.</p>
         </div>
     </div>
 </div>
 """,
         unsafe_allow_html=True,
     )
-
-    explore_css = """<style>
-    /* =============================================================================
-       EXPLORE STORIES CSS - CLEANED UP
-       Redundancies removed, device-specific rules preserved
-       ============================================================================= */
-
-    /* =============================================================================
-       HERO SECTION
-       ============================================================================= */
-    .conversation-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 2rem;
-        min-height: 184px;
-        box-sizing: border-box;
-        border-radius: 0;
-        margin: -2rem 0 0 0;
-    }
-
-    .conversation-header-content {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-        max-width: 1200px;
-        margin: 0;
-    }
-
-    .conversation-agy-avatar {
-        flex-shrink: 0;
-        width: 120px !important;
-        height: 120px !important;
-        border-radius: 50% !important;
-        border: 3px solid white !important;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
-    }
-
-    .conversation-header-text h1 {
-        color: white !important;
-        margin: 0;
-        font-size: 2rem;
-    }
-
-    .conversation-header-text p {
-        color: rgba(255, 255, 255, 0.9);
-        margin: 0.5rem 0 0 0;
-        font-size: 1.1rem;
-    }
-
-    /* =============================================================================
-       PRINT STYLES
-       ============================================================================= */
-    @media print {
-        header[data-testid="stHeader"],
-        div[data-testid="stDecoration"],
-        div[data-testid="stToolbar"],
-        div[data-testid="stStatusWidget"],
-        button,
-        .stButton,
-        footer {
-            display: none !important;
+    if st.button("trigger", key="why_agy_my_work_trigger"):
+        st.session_state["active_dialog"] = "why_agy"
+        st.rerun()
+    components.html(
+        """
+<script>
+(function() {
+    function wireBadge() {
+        var parentDoc = window.parent.document;
+        var badge = parentDoc.getElementById('why-agy-badge-my-work');
+        var btn = parentDoc.querySelector('[class*="st-key-why_agy_my_work_trigger"] button');
+        if (badge && btn && !badge.dataset.wired) {
+            badge.dataset.wired = 'true';
+            badge.addEventListener('pointerdown', function(e) {
+                e.preventDefault();
+                btn.click();
+            });
+            return true;
         }
-
-        .main .block-container,
-        [data-testid="stVerticalBlock"],
-        [data-testid="stHorizontalBlock"],
-        div[data-baseweb="block"] {
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-        }
-
-        body {
-            background: white !important;
-        }
-
-        * {
-            color: black !important;
-        }
-
-        .story-detail-pane {
-            page-break-before: always;
-        }
-    }
-
-    /* =============================================================================
-       FILTER SECTION - BASE STYLES
-       ============================================================================= */
-    .main [data-testid="stContainer"] {
-        padding: 12px 16px !important;
-    }
-
-    .main [data-testid="stContainer"] [data-testid="stVerticalBlock"] > div {
-        margin-bottom: 2px !important;
-    }
-
-    .main [data-testid="stForm"] {
-        padding: 0 !important;
-        border: none !important;
-        background: transparent !important;
-    }
-
-    .main [data-testid="stForm"] [data-testid="stVerticalBlock"] > div {
-        margin-bottom: 0 !important;
-    }
-
-    .main [data-testid="stFormSubmitButton"] button {
-        padding: 6px 12px !important;
-        min-height: 38px !important;
-        height: 38px !important;
-    }
-
-    /* Advanced/Reset buttons */
-    [class*="st-key-btn_toggle_advanced"] button,
-    [class*="st-key-btn_reset_filters"] button {
-        padding: 4px 12px !important;
-        font-size: 12px !important;
-        background: transparent !important;
-        border: 1px solid var(--border-color) !important;
-        color: var(--text-muted) !important;
-        min-height: 32px !important;
-    }
-
-    [class*="st-key-btn_toggle_advanced"] button:hover,
-    [class*="st-key-btn_reset_filters"] button:hover {
-        background: var(--bg-hover) !important;
-    }
-
-    .explore-filters {
-        background: var(--bg-surface);
-        padding: 30px;
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    /* Filter chip row - force horizontal flex layout */
-    .st-key-chip_row,
-    .st-key-chip_row > div,
-    .st-key-chip_row > div > div {
-        display: flex !important;
-        flex-wrap: wrap !important;
-        flex-direction: row !important;
-        gap: 6px !important;
-        align-items: center !important;
-    }
-    .st-key-chip_row [data-testid="element-container"] {
-        width: auto !important;
-        flex: none !important;
-    }
-
-    /* Filter chip buttons - pill styling */
-    .st-key-chip_row [class*="st-key-chip_"] button {
-        border-radius: 16px !important;
-        font-size: 12px !important;
-        padding: 4px 10px !important;
-        font-weight: 500 !important;
-        white-space: nowrap !important;
-        transition: all 0.15s ease !important;
-        background: var(--bg-card) !important;
-        color: var(--text-primary) !important;
-        border: 1px solid var(--border-color) !important;
-    }
-    .st-key-chip_row [class*="st-key-chip_"] button p {
-        font-size: 12px !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        color: inherit !important;
-    }
-    .st-key-chip_row [class*="st-key-chip_"] button:hover {
-        border-color: #EF4444 !important;
-        color: #DC2626 !important;
-        background: #FEF2F2 !important;
-    }
-    /* "Clear all" chip - surface bg to distinguish */
-    .st-key-chip_row .st-key-chip_clear_all button {
-        background: var(--bg-surface) !important;
-        color: var(--text-secondary) !important;
-        border: 1px solid var(--border-color) !important;
-    }
-    .st-key-chip_row .st-key-chip_clear_all button:hover {
-        border-color: #EF4444 !important;
-        color: #DC2626 !important;
-        background: #FEF2F2 !important;
-    }
-
-
-    /* =============================================================================
-       FORM INPUTS - BASE STYLES
-       ============================================================================= */
-
-    [data-baseweb="input"],
-    [data-baseweb="base-input"],
-    [data-baseweb="input"] input {
-            min-height: 44px !important;
-            height: 44px !important;
-        }
-
-    .main .stTextInput > div > div > input {
-        height: 44px !important;
-        min-height: 44px !important;
-        width: 100% !important;
-        padding: 10px 14px !important;
-        border: 2px solid var(--border-color) !important;
-        border-radius: 6px !important;
-        font-size: 14px !important;
-        background: var(--bg-input) !important;
-        color: var(--text-primary) !important;
-    }
-
-    .main .stTextInput > div > div > input:focus {
-        border-color: var(--accent-purple) !important;
-        outline: none !important;
-    }
-
-    /* Search form submit button */
-    [class*="search_form"] button[kind="secondaryFormSubmit"],
-    [class*="search_form"] button[type="submit"],
-    .stForm button[kind="secondaryFormSubmit"] {
-        width: 40px !important;
-        min-width: 40px !important;
-        max-width: 40px !important;
-        height: 40px !important;
-        padding: 0 !important;
-        border: 2px solid var(--border-color) !important;
-        border-radius: 6px !important;
-        background: var(--bg-card) !important;
-        color: var(--text-secondary) !important;
-        font-size: 16px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-    }
-
-    [class*="search_form"] button[kind="secondaryFormSubmit"]:hover,
-    [class*="search_form"] button[type="submit"]:hover,
-    .stForm button[kind="secondaryFormSubmit"]:hover {
-        border-color: var(--accent-purple) !important;
-        background: var(--bg-hover) !important;
-    }
-
-    /* Selectbox */
-    .main .stSelectbox > div > div {
-        padding: 8px !important;
-        border: 2px solid var(--border-color) !important;
-        border-radius: 4px !important;
-        font-size: 14px !important;
-        background: var(--bg-input) !important;
-        color: var(--text-primary) !important;
-    }
-
-    .main .stSelectbox > div > div:focus-within {
-        border-color: var(--accent-purple) !important;
-        outline: none !important;
-    }
-
-    /* Multiselect */
-    .main .stMultiSelect > div > div {
-        padding: 8px !important;
-        border: 2px solid var(--border-color) !important;
-        border-radius: 4px !important;
-        font-size: 14px !important;
-        background: var(--bg-input) !important;
-        color: var(--text-primary) !important;
-    }
-
-    .main .stMultiSelect > div > div:focus-within {
-        border-color: var(--accent-purple) !important;
-    }
-
-    /* Labels */
-    .main label[data-testid="stWidgetLabel"] {
-        font-size: 12px !important;
-        font-weight: 600 !important;
-        color: var(--text-secondary) !important;
-        text-transform: uppercase !important;
-        margin-bottom: 4px !important;
-    }
-
-    /* =============================================================================
-       SEGMENTED CONTROL (Table/Cards/Timeline toggle)
-       ============================================================================= */
-
-    /* Active button - emotion class override */
-    button.st-emotion-cache-1umuqkm.e8vg11g13,
-    button.st-emotion-cache-1umuqkm.e8vg11g13:active,
-    button.st-emotion-cache-1umuqkm.e8vg11g13:focus,
-    button.st-emotion-cache-1umuqkm.e8vg11g13:hover {
-        background: #8B5CF6 !important;
-        background-color: #8B5CF6 !important;
-        border: 1px solid #8B5CF6 !important;
-        color: white !important;
-    }
-
-    button.st-emotion-cache-1umuqkm.e8vg11g13 p,
-    button.st-emotion-cache-1umuqkm.e8vg11g13 * {
-        color: white !important;
-    }
-
-    /* Inactive button - emotion class */
-    button.st-emotion-cache-2mqt7m.e8vg11g12,
-    button.st-emotion-cache-2mqt7m.e8vg11g12:active,
-    button.st-emotion-cache-2mqt7m.e8vg11g12:focus {
-        background: var(--bg-card) !important;
-        background-color: var(--bg-card) !important;
-        border: 1px solid var(--border-color) !important;
-        color: var(--text-secondary) !important;
-    }
-
-    button.st-emotion-cache-2mqt7m.e8vg11g12 p,
-    button.st-emotion-cache-2mqt7m.e8vg11g12 * {
-        color: var(--text-secondary) !important;
-    }
-
-    button.st-emotion-cache-2mqt7m.e8vg11g12:hover {
-        background: var(--bg-hover) !important;
-        background-color: var(--bg-hover) !important;
-    }
-
-    /* Active button - kind attribute fallback */
-    button[kind="segmented_controlActive"],
-    button[kind="segmented_controlActive"]:active,
-    button[kind="segmented_controlActive"]:focus,
-    button[kind="segmented_controlActive"]:hover,
-    [data-testid="stBaseButton-segmented_controlActive"] {
-        background: #8B5CF6 !important;
-        border: 1px solid #8B5CF6 !important;
-        color: white !important;
-    }
-
-    button[kind="segmented_controlActive"] p,
-    button[kind="segmented_controlActive"] div,
-    button[kind="segmented_controlActive"] *,
-    [data-testid="stBaseButton-segmented_controlActive"] p,
-    [data-testid="stBaseButton-segmented_controlActive"] * {
-        color: white !important;
-    }
-
-    /* Inactive button - kind attribute fallback */
-    button[kind="segmented_control"],
-    button[kind="segmented_control"]:active,
-    button[kind="segmented_control"]:focus,
-    [data-testid="stBaseButton-segmented_control"] {
-        background: var(--bg-card) !important;
-        border: 1px solid var(--border-color) !important;
-        color: var(--text-secondary) !important;
-    }
-
-    button[kind="segmented_control"] p,
-    button[kind="segmented_control"] div,
-    button[kind="segmented_control"] *,
-    [data-testid="stBaseButton-segmented_control"] p,
-    [data-testid="stBaseButton-segmented_control"] * {
-        color: var(--text-secondary) !important;
-    }
-
-    button[kind="segmented_control"]:hover {
-        background: var(--bg-hover) !important;
-        border-color: var(--text-muted) !important;
-    }
-
-    .stButtonGroup p,
-    [data-testid="stButtonGroup"] p {
-        color: inherit !important;
-    }
-
-    /* =============================================================================
-       TABLE STYLES
-       ============================================================================= */
-    .main table {
-        border-collapse: collapse !important;
-    }
-    .main thead {
-        background: var(--table-header-bg) !important;
-    }
-    .main th {
-        padding: 12px !important;
-        font-size: 12px !important;
-        font-weight: 600 !important;
-        color: var(--text-primary) !important;
-        text-transform: uppercase !important;
-        border-bottom: 2px solid var(--border-color) !important;
-        text-align: left !important;
-    }
-    .main td {
-        padding: 16px 12px !important;
-        border-bottom: 1px solid var(--border-color) !important;
-        font-size: 14px !important;
-        color: var(--text-primary) !important;
-    }
-    .main td a {
-        color: var(--accent-purple) !important;
-        font-weight: 500 !important;
-        text-decoration: none !important;
-    }
-    .main td a:hover {
-        text-decoration: underline !important;
-    }
-
-    .client-badge {
-        display: inline-block !important;
-        padding: 4px 10px !important;
-        background: var(--accent-purple-bg) !important;
-        color: var(--accent-purple) !important;
-        border-radius: 12px !important;
-        font-size: 12px !important;
-        font-weight: 500 !important;
-    }
-
-    .domain-tag {
-        font-size: 12px !important;
-        color: var(--text-muted) !important;
-    }
-
-    .ag-row-selected {
-        background: #F3E8FF !important;
-        border-left: 4px solid #8B5CF6 !important;
-    }
-    .ag-row-selected td {
-        font-weight: 500 !important;
-    }
-
-    /* =============================================================================
-       BUTTON STYLES
-       ============================================================================= */
-    .main .stButton > button {
-        padding: 6px 14px !important;
-        border: 1px solid var(--border-color) !important;
-        background: var(--bg-card) !important;
-        cursor: pointer !important;
-        font-size: 13px !important;
-        font-weight: 500 !important;
-        border-radius: 6px !important;
-        color: var(--text-secondary) !important;
-        transition: all 0.2s ease !important;
-    }
-
-    .main .stButton > button:hover {
-        background: var(--bg-hover) !important;
-    }
-
-    .card-btn-view-details {
-        display: inline-block;
-        padding: 10px 20px;
-        background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-purple-hover) 100%);
-        border: none;
-        border-radius: 8px;
-        color: white !important;
-        font-weight: 600;
-        font-size: 14px;
-        text-decoration: none !important;
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 2px 8px rgba(139, 92, 246, 0.25), 0 1px 3px var(--shadow-color);
-    }
-
-    .card-btn-view-details:hover {
-        background: linear-gradient(135deg, var(--accent-purple-hover) 0%, #6D28D9 100%);
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4), 0 3px 6px rgba(0, 0, 0, 0.15);
-        text-decoration: none !important;
-    }
-
-    /* Hide card trigger buttons */
-    [class*="st-key-card_btn_"] {
-        position: absolute !important;
-        left: -9999px !important;
-        height: 0 !important;
-        overflow: hidden !important;
-    }
-
-    /* Hide timeline trigger buttons */
-    [class*="st-key-timeline_story_"],
-    [class*="st-key-timeline_explore_"],
-    [class*="st-key-timeline_toggle_"] {
-        position: absolute !important;
-        left: -9999px !important;
-        height: 0 !important;
-        overflow: hidden !important;
-    }
-
-    /* Ask Agy button */
-    [class*="st-key-ask_from_detail"] .stButton > button[kind="primary"],
-    div[class*="st-key-ask_from_detail"] button[data-testid="stBaseButton-primary"] {
-        background: var(--accent-purple) !important;
-        border: 2px solid var(--accent-purple) !important;
-        border-radius: 8px !important;
-        padding: 12px 28px !important;
-        font-weight: 600 !important;
-        font-size: 15px !important;
-        transition: all 0.2s ease !important;
-    }
-
-    [class*="st-key-ask_from_detail"] .stButton > button[kind="primary"]:hover,
-    div[class*="st-key-ask_from_detail"] button[data-testid="stBaseButton-primary"]:hover {
-        background: var(--accent-purple-hover) !important;
-        border-color: var(--accent-purple-hover) !important;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3) !important;
-    }
-
-    /* =============================================================================
-       CARDS GRID
-       ============================================================================= */
-    .story-cards-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-        gap: 20px;
-        margin-bottom: 24px;
-    }
-
-    .fixed-height-card {
-        background: var(--bg-card) !important;
-        padding: 24px !important;
-        border-radius: 8px !important;
-        border: 1px solid var(--border-color) !important;
-        height: 380px !important;
-        display: flex !important;
-        flex-direction: column !important;
-        box-shadow: var(--card-shadow) !important;
-        transition: all 0.2s ease !important;
-        cursor: pointer !important;
-    }
-
-    .fixed-height-card:hover {
-        box-shadow: var(--hover-shadow) !important;
-        border-color: var(--accent-purple) !important;
-        transform: translateY(-2px) !important;
-    }
-
-    .fixed-height-card.active {
-        border-color: var(--accent-purple) !important;
-        box-shadow: 0 0 0 3px var(--accent-purple-light) !important;
-    }
-
-    .card-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 12px;
-    }
-
-    .card-title {
-        font-size: 18px;
-        font-weight: 600;
-        margin: 0;
-        line-height: 1.4;
-        color: var(--text-heading) !important;
-        flex: 1;
-    }
-
-    .card-client-badge {
-        background: var(--accent-purple-bg);
-        color: var(--accent-purple);
-        padding: 4px 12px;
-        border-radius: 12px;
-        font-size: 12px;
-        font-weight: 500;
-        white-space: nowrap;
-        margin-left: 12px;
-    }
-
-    .card-desc {
-        color: var(--text-secondary) !important;
-        line-height: 1.6 !important;
-        font-size: 14px !important;
-        overflow: hidden !important;
-        display: -webkit-box !important;
-        -webkit-line-clamp: 3 !important;
-        -webkit-box-orient: vertical !important;
-        flex-grow: 1 !important;
-        margin-bottom: 16px !important;
-    }
-
-    .card-footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: auto;
-        padding-top: 12px;
-        border-top: 1px solid var(--border-color);
-    }
-
-    .card-role {
-        font-size: 12px;
-        color: var(--text-muted);
-        font-weight: 500;
-    }
-
-    .card-domain-tag {
-        background: var(--bg-surface);
-        color: var(--text-secondary);
-        padding: 4px 10px;
-        border-radius: 6px;
-        font-size: 11px;
-        font-weight: 500;
-    }
-    .card-meta {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-top: 12px;
-        border-top: 1px solid var(--border-color);
-        margin-top: auto;
-    }
-
-    .role-badge {
-        font-size: 11px;
-        font-weight: 500;
-        color: var(--text-secondary);
-        max-width: 180px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    .domain-tag {
-        font-size: 11px;
-        color: var(--text-muted);
-        text-align: right;
-        max-width: 150px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    /* Selected card state */
-    .fixed-height-card.selected {
-        border-color: var(--accent-purple) !important;
-        box-shadow: 0 0 0 3px var(--accent-purple-light) !important;
-    }
-
-    /* Close hint on selected card */
-    .card-close-hint {
-        text-align: center;
-        font-size: 12px;
-        color: var(--accent-purple);
-        margin-top: 12px;
-        padding-top: 12px;
-        border-top: 1px solid var(--border-color);
-    }
-
-    /* Detail connector arrow */
-    .detail-connector {
-        display: flex;
-        justify-content: center;
-        margin: -10px 0 10px 0;
-    }
-
-    .detail-arrow-up {
-        width: 0;
-        height: 0;
-        border-left: 12px solid transparent;
-        border-right: 12px solid transparent;
-        border-bottom: 12px solid var(--accent-purple);
-    }
-
-    .card-close-hint {
-        font-size: 11px;
-        margin-top: 8px;
-        padding-top: 8px;
-    }
-
-
-    /* Selected card becomes Close button */
-    .card-close-state {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        min-height: 280px;
-        color: var(--accent-purple);
-    }
-
-    .card-close-state .close-x {
-        font-size: 36px;
-        font-weight: 300;
-        margin-bottom: 8px;
-    }
-
-    .card-close-state .close-text {
-        font-size: 14px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    /* =============================================================================
-       SPACING ADJUSTMENTS
-       ============================================================================= */
-    .main .stMultiSelect, .main .stSelectbox, .main .stTextInput {
-        margin-bottom: 0px !important;
-        margin-top: 0px !important;
-    }
-
-    .main [data-testid="stVerticalBlock"] > div {
-        gap: 8px !important;
-    }
-
-    .main .stButton {
-        margin-top: 0px !important;
-        margin-bottom: 0px !important;
-    }
-
-    /* Scope to explore page content only — exclude navbar */
-    div[data-testid="stHorizontalBlock"]:not(:has([class*="st-key-topnav_"])):has(> div:nth-child(5)) > div:nth-child(3) {
-        flex: 0 0 75px !important;
-        max-width: 75px !important;
-    }
-
-    /* =============================================================================
-       SHOW DROPDOWN - ALL BREAKPOINTS (CONSOLIDATED)
-       ============================================================================= */
-    [class*="st-key-page_size_select"] {
-        max-width: 80px !important;
-        min-width: 70px !important;
-        width: 80px !important;
-    }
-
-    [class*="st-key-page_size_select"] > div {
-        min-width: 70px !important;
-        max-width: 80px !important;
-    }
-
-    /* Results row - force single line */
-    [data-testid="stHorizontalBlock"]:has([class*="st-key-page_size_select"]) {
-        display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: nowrap !important;
-        align-items: center !important;
-        gap: 12px !important;
-    }
-
-    [data-testid="stHorizontalBlock"]:has([class*="st-key-page_size_select"]) > [data-testid="stColumn"] {
-        flex: 0 0 auto !important;
-        width: auto !important;
-        min-width: 0 !important;
-    }
-
-    [data-testid="stHorizontalBlock"]:has([class*="st-key-page_size_select"]) > [data-testid="stColumn"]:first-child {
-        flex: 1 1 auto !important;
-    }
-
-    /* =============================================================================
-       TABLET (768px - 1024px)
-       ============================================================================= */
-    @media (min-width: 768px) and (max-width: 1024px) {
-        /* Hide form submit button */
-        [data-testid="stForm"] [data-testid="stColumn"]:last-child {
-            display: none !important;
-        }
-
-        /* Keep filter columns horizontal */
-        [data-testid="stVerticalBlockBorderWrapper"] [data-testid="stHorizontalBlock"] {
-            flex-wrap: nowrap !important;
-            flex-direction: row !important;
-        }
-
-        [data-testid="stVerticalBlockBorderWrapper"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
-            flex: 1 1 0 !important;
-            min-width: 0 !important;
-        }
-
-        /* Results row - hide SHOW label and spacer */
-        [data-testid="stHorizontalBlock"]:has([data-testid="stButtonGroup"]) > [data-testid="stColumn"]:nth-child(2),
-        [data-testid="stHorizontalBlock"]:has([data-testid="stButtonGroup"]) > [data-testid="stColumn"]:nth-child(4) {
-            display: none !important;
-        }
-    }
-
-    /* =============================================================================
-       MOBILE (< 768px)
-       ============================================================================= */
-    @media (max-width: 767px) {
-        /* -----------------------------------------
-           HERO - Compact
-           ----------------------------------------- */
-        .conversation-header {
-            padding: 20px 16px !important;
-            min-height: auto !important;
-            margin: -8px 0 0 0 !important;
-        }
-
-        .conversation-header-content {
-            flex-direction: row !important;
-            text-align: left !important;
-            gap: 12px !important;
-            align-items: flex-start !important;
-        }
-
-        .conversation-agy-avatar {
-            width: 64px !important;
-            height: 64px !important;
-            border: 3px solid white !important;
-        }
-
-        .conversation-header-text h1 {
-            font-size: 20px !important;
-        }
-
-        .conversation-header-text p {
-            font-size: 13px !important;
-        }
-
-        /* -----------------------------------------
-           FILTER SECTION
-           ----------------------------------------- */
-        [data-testid="stVerticalBlockBorderWrapper"] {
-            padding: 12px !important;
-        }
-
-        /* Hide all labels */
-        [data-testid="stVerticalBlockBorderWrapper"] label,
-        [data-testid="stVerticalBlockBorderWrapper"] [data-testid="stWidgetLabel"] {
-            display: none !important;
-            position: absolute !important;
-            left: -9999px !important;
-        }
-
-        /* Filter columns layout */
-        [data-testid="stHorizontalBlock"]:has([class*="st-key-facet_"]) {
-            display: flex !important;
-            flex-direction: row !important;
-            flex-wrap: wrap !important;
-            gap: 8px !important;
-        }
-
-        /* Search - full width */
-        [data-testid="stColumn"]:has([class*="st-key-facet_q"]) {
-            flex: 0 0 100% !important;
-            min-width: 100% !important;
-            max-width: 100% !important;
-            width: 100% !important;
-            margin: 0 0 4px 0 !important;
-        }
-
-        /* Fix dropdown text truncation */
-        .stSelectbox [data-baseweb="select"] > div {
-            min-width: 100% !important;
-            overflow: visible !important;
-        }
-
-        .stSelectbox [data-baseweb="select"] span {
-            overflow: visible !important;
-            text-overflow: unset !important;
-        }
-
-        /* Industry - 50% */
-        [data-testid="stColumn"]:has([class*="st-key-facet_industry"]) {
-            flex: 0 0 calc(50% - 4px) !important;
-            min-width: calc(50% - 4px) !important;
-            max-width: calc(50% - 4px) !important;
-            width: calc(50% - 4px) !important;
-            margin: 0 !important;
-        }
-
-        /* Capability - 50% */
-        [data-testid="stColumn"]:has([class*="st-key-facet_capability"]) {
-            flex: 0 0 calc(50% - 4px) !important;
-            min-width: calc(50% - 4px) !important;
-            max-width: calc(50% - 4px) !important;
-            width: calc(50% - 4px) !important;
-            margin: 0 !important;
-        }
-
-        /* Form row */
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] {
-            flex-direction: row !important;
-        }
-        [data-testid="stForm"] [data-testid="stColumn"]:last-child {
-            display: none !important;
-        }
-        [data-testid="stForm"] [data-testid="stColumn"]:first-child {
-            flex: 1 1 100% !important;
-            max-width: 100% !important;
-            min-width: 100% !important;
-            width: 100% !important;
-            margin: 0 !important;
-        }
-
-        /* Hide form submit, spacer, Advanced/Reset, chips, expander */
-        [data-testid="stFormSubmitButton"],
-        .stFormSubmitButton,
-        [data-testid="stForm"] div[style*="height: 23px"],
-        [data-testid="stHorizontalBlock"]:has([class*="st-key-btn_toggle_advanced"]),
-        [class*="st-key-btn_toggle_advanced"],
-        [class*="st-key-btn_reset_filters"],
-        .st-key-chip_row,
-        [data-testid="stExpander"] {
-            display: none !important;
-        }
-
-        /* Compact inputs */
-        .stTextInput > div > div > input {
-            padding: 12px 14px !important;
-            font-size: 15px !important;
-            border-radius: 8px !important;
-        }
-
-        .stSelectbox > div > div {
-            padding: 10px 12px !important;
-            font-size: 15px !important;
-            min-height: 44px !important;
-            border-radius: 8px !important;
-        }
-
-        .stSelectbox [data-baseweb="select"] > div {
-            display: flex !important;
-            align-items: center !important;
-        }
-
-        [data-testid="stVerticalBlockBorderWrapper"] [data-testid="stVerticalBlock"] {
-            gap: 8px !important;
-        }
-
-        [data-testid="stVerticalBlockBorderWrapper"] [data-testid="stVerticalBlock"] > div {
-            margin-bottom: 0 !important;
-        }
-
-        /* -----------------------------------------
-           RESULTS ROW
-           ----------------------------------------- */
-        [data-testid="stHorizontalBlock"]:has([data-testid="stButtonGroup"]) {
-            flex-direction: row !important;
-            align-items: center !important;
-            gap: 8px !important;
-        }
-
-        [data-testid="stHorizontalBlock"]:has([data-testid="stButtonGroup"]) > [data-testid="stColumn"]:nth-child(2),
-        [data-testid="stHorizontalBlock"]:has([data-testid="stButtonGroup"]) > [data-testid="stColumn"]:nth-child(3),
-        [data-testid="stHorizontalBlock"]:has([data-testid="stButtonGroup"]) > [data-testid="stColumn"]:nth-child(4) {
-            display: none !important;
-        }
-
-        [data-testid="stHorizontalBlock"]:has([data-testid="stButtonGroup"]) > [data-testid="stColumn"]:first-child {
-            flex: 1 !important;
-            min-width: 0 !important;
-            margin: 0 !important;
-        }
-
-        [data-testid="stHorizontalBlock"]:has([data-testid="stButtonGroup"]) > [data-testid="stColumn"]:last-child {
-            flex: 0 0 auto !important;
-            min-width: 120px !important;
-            width: auto !important;
-            margin: 0 !important;
-        }
-
-        /* Button group horizontal */
-        [data-testid="stButtonGroup"],
-        [data-testid="stButtonGroup"] > div,
-        .stButtonGroup,
-        .stButtonGroup > div {
-            flex-direction: row !important;
-            flex-wrap: nowrap !important;
-            display: flex !important;
-            width: auto !important;
-        }
-
-        [data-testid="stButtonGroup"] button {
-            padding: 6px 10px !important;
-            font-size: 12px !important;
-            min-width: auto !important;
-            width: auto !important;
-            white-space: nowrap !important;
-        }
-        /* Results count - prevent wrapping */
-        .results-count {
-            font-size: 12px !important;
-            white-space: nowrap !important;
-        }
-
-        /* Fix selectbox showing "..." - ensure minimum width */
-        .stSelectbox [data-baseweb="select"] {
-            min-width: 100% !important;
-        }
-
-        /* Hide SHOW label on mobile */
-        [data-testid="stHorizontalBlock"]:has([class*="st-key-page_size_select"]) > [data-testid="stColumn"]:nth-child(2) {
-            display: none !important;
-        }
-        /* -----------------------------------------
-        TABLE
-        ----------------------------------------- */
-        .ag-root-wrapper {
-            overflow-x: auto !important;
-            -webkit-overflow-scrolling: touch !important;
-        }
-
-        .ag-header,
-        .ag-body-viewport {
-            min-width: 600px !important;
-        }
-
-        .ag-header-cell[col-id="Domain"],
-        .ag-cell[col-id="Domain"],
-        div[col-id="Domain"] {
-            display: none !important;
-            width: 0 !important;
-            min-width: 0 !important;
-            max-width: 0 !important;
-            padding: 0 !important;
-            border: none !important;
-            overflow: hidden !important;
-        }
-
-        .ag-cell {
-            padding: 8px !important;
-            font-size: 13px !important;
-        }
-
-        .ag-header-cell {
-            padding: 8px !important;
-            font-size: 11px !important;
-        }
-
-        /* -----------------------------------------
-           CARDS
-           ----------------------------------------- */
-        .story-cards-grid {
-            grid-template-columns: 1fr !important;
-        }
-
-        .fixed-height-card {
-            height: auto !important;
-            min-height: 280px !important;
-        }
-
-        /* -----------------------------------------
-           PAGINATION
-           ----------------------------------------- */
-        .pagination {
-            flex-wrap: wrap !important;
-            gap: 6px !important;
-            padding: 12px 0 !important;
-        }
-
-        .pagination button {
-            padding: 8px 12px !important;
-            font-size: 12px !important;
-        }
-
-        .pagination .page-info {
-            width: 100% !important;
-            text-align: center !important;
-            order: -1 !important;
-            padding: 0 0 8px 0 !important;
-        }
-    }
-    </style>
-    """
-    st.markdown(explore_css, unsafe_allow_html=True)
-
-    legacy = {"Stories": "Explore Stories"}
-    cur = st.session_state.get("active_tab", "Home")
-    if cur in legacy:
-        st.session_state["active_tab"] = legacy[cur]
+        return false;
+    }
+    if (!wireBadge()) {
+        var attempts = 0;
+        var iv = setInterval(function() {
+            if (wireBadge() || ++attempts > 10) clearInterval(iv);
+        }, 200);
+    }
+})();
+</script>
+""",
+        height=0,
+    )
 
     st.markdown("<a id='stories_top'></a>", unsafe_allow_html=True)
 
@@ -1702,8 +648,8 @@ def render_explore_stories(
     # Initialize pre-filters from landing pages (Phase 4)
     # Track whether any prefilter was consumed so we can reset scroll once at
     # the end. Streamlit preserves scrollTop on stMain across reruns, so a
-    # landing-card click (which scrolled the user down) lands on Explore
-    # Stories with the hero above the viewport. The pre-May-2026 fix lived
+    # landing-card click (which scrolled the user down) lands on My
+    # Work with the hero above the viewport. The pre-May-2026 fix lived
     # only inside prefilter_era AND targeted the legacy `section.main`
     # selector (which no longer exists in current Streamlit) — silently
     # no-op'd for Era *and* never fired for the other prefilters.
@@ -1755,11 +701,11 @@ def render_explore_stories(
         _bc_label = "← Banking" if _return_landing == "banking" else "← Cross Industry"
         st.markdown(
             f"""
-            <span id="breadcrumb-chip" style="display: inline-flex; align-items: center; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; border: 1px solid #E5E7EB; background: white; color: #6B21A8; transition: all 0.15s ease; margin-top: -1rem;">
+            <span id="breadcrumb-chip" style="display: inline-flex; align-items: center; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--accent-purple); transition: all 0.15s ease; margin-top: -1rem;">
                 <a id="breadcrumb-return" style="color: inherit; text-decoration: none; cursor: pointer;">{_bc_label}</a>
             </span>
             <style>
-            #breadcrumb-chip:hover {{ border-color: #8B5CF6; background: #F5F3FF; color: #7C3AED; box-shadow: 0 2px 6px rgba(139, 92, 246, 0.15); }}
+            #breadcrumb-chip:hover {{ border-color: var(--accent-purple); background: var(--accent-purple-bg); color: var(--accent-purple-hover); box-shadow: 0 2px 6px rgba(139, 92, 246, 0.15); }}
             [class*="st-key-breadcrumb_return_landing"] {{ display: none !important; }}
             </style>
             """,
@@ -1805,7 +751,7 @@ def render_explore_stories(
     # ==================================================================
     with safe_container(border=True):
         # PRIMARY FILTERS ROW: Search (with inline button) | Industry | Capability
-        search_col, industry_col, capability_col = st.columns([2, 1, 1.5])
+        search_col, industry_col, capability_col = st.columns([2, 1, 1])
 
         with search_col:
             search_version = st.session_state.get("_widget_version_q", 0)
@@ -1873,57 +819,73 @@ def render_explore_stories(
                 "" if selected_capability == "All" else selected_capability
             )
 
-        # ADVANCED FILTERS (Collapsed by default)
-        show_advanced = st.session_state.get("show_advanced_filters", False)
+        # MOBILE FILTERS TOGGLE — shown only on mobile via CSS (MATTGPT-119)
+        is_r2_open = st.session_state.get("es_mobile_r2_open", False)
+        toggle_label = "Filters ▴" if is_r2_open else "Filters ▾"
+        if st.button(toggle_label, key="es_mobile_filters_toggle"):
+            st.session_state["es_mobile_r2_open"] = not is_r2_open
+            st.rerun()
 
-        # Compact button row - pushed left with empty spacer column
-        col_toggle, col_reset, _ = st.columns([0.35, 0.25, 1.4])
-        with col_toggle:
-            toggle_label = (
-                "▾ Advanced Filters" if show_advanced else "▸ Advanced Filters"
-            )
-            if st.button(toggle_label, key="btn_toggle_advanced"):
-                st.session_state["show_advanced_filters"] = not show_advanced
-                st.rerun()
-
-        with col_reset:
-            if st.button("Reset Filters", key="btn_reset_filters"):
-                reset_all_filters(stories)
-                st.rerun()
-
-        if show_advanced:
-            st.markdown("---")
-            c1, c2, c3 = st.columns([1.5, 1, 1.5])
+        # ROW 2 — always visible on desktop; on mobile shown/hidden via key swap (MATTGPT-065, MATTGPT-119)
+        r2_key = "r2_row_open" if is_r2_open else "r2_row"
+        with st.container(key=r2_key):
+            c1, c2, c3, c4 = st.columns([1, 1, 1, 0.4])
 
             with c1:
-                # Client filter (multiselect)
                 clients_version = st.session_state.get("_widget_version_clients", 0)
-                F["clients"] = st.multiselect(
-                    "Client",
-                    clients,
-                    default=F.get("clients", []),
-                    key=f"facet_clients_v{clients_version}",
+                client_options = ["All"] + clients
+                current_client_val = (F.get("clients") or [""])[0]
+                client_index = (
+                    client_options.index(current_client_val)
+                    if current_client_val in client_options
+                    else 0
                 )
+                sel_client = st.selectbox(
+                    "Client",
+                    options=client_options,
+                    index=client_index,
+                    key=f"r2_client_v{clients_version}",
+                )
+                F["clients"] = [] if sel_client == "All" else [sel_client]
 
             with c2:
-                # Role filter (multiselect)
                 roles_version = st.session_state.get("_widget_version_roles", 0)
-                F["roles"] = st.multiselect(
-                    "Role",
-                    roles,
-                    default=F.get("roles", []),
-                    key=f"facet_roles_v{roles_version}",
+                role_options = ["All"] + roles
+                current_role_val = (F.get("roles") or [""])[0]
+                role_index = (
+                    role_options.index(current_role_val)
+                    if current_role_val in role_options
+                    else 0
                 )
+                sel_role = st.selectbox(
+                    "Role",
+                    options=role_options,
+                    index=role_index,
+                    key=f"r2_role_v{roles_version}",
+                )
+                F["roles"] = [] if sel_role == "All" else [sel_role]
 
             with c3:
-                # Domain filter (multiselect) - now uses Sub-category directly
                 domains_version = st.session_state.get("_widget_version_domains", 0)
-                F["domains"] = st.multiselect(
-                    "Domain",
-                    options=domains,
-                    default=F.get("domains", []),
-                    key=f"facet_domains_v{domains_version}",
+                domain_options = ["All"] + domains
+                current_domain_val = (F.get("domains") or [""])[0]
+                domain_index = (
+                    domain_options.index(current_domain_val)
+                    if current_domain_val in domain_options
+                    else 0
                 )
+                sel_domain = st.selectbox(
+                    "Domain",
+                    options=domain_options,
+                    index=domain_index,
+                    key=f"r2_domain_v{domains_version}",
+                )
+                F["domains"] = [] if sel_domain == "All" else [sel_domain]
+
+            with c4:
+                if st.button("Reset filters", key="r2_reset", use_container_width=True):
+                    reset_all_filters(stories)
+                    st.rerun()
     # =========================================================================
     # SEARCH & FILTERING LOGIC (Guarded and Cached)
     # =========================================================================
@@ -1931,7 +893,17 @@ def render_explore_stories(
     # Check if search was intentionally triggered (by form submission)
     search_triggered = st.session_state.pop("__search_triggered__", False)
     current_query = F["q"].strip()
-    view = stories  # Default view: all stories
+    # MATTGPT-098: default view excludes Professional Narrative stories
+    # (matching Timeline's EXCLUDED_ERA convention at timeline_view.py:42)
+    # and sorts by Start_Date descending (most-recent-first). User can still
+    # sort by clicking AgGrid column headers; this only changes the default
+    # state. Narrative stories remain in the corpus + reachable via search
+    # / Sub-category filter / direct deep-link, just not in the default view.
+    view = sorted(
+        [s for s in stories if s.get("Category") != "Professional Narrative"],
+        key=lambda s: s.get("Start_Date", ""),
+        reverse=True,
+    )
 
     # Cache keys for readability
     LAST_RESULTS = "__last_search_results__"
@@ -1964,9 +936,9 @@ def render_explore_stories(
             # is_nonsense() returns the bare category string (e.g.,
             # "jokes_riddles"). render_no_match_banner expects the
             # "rule:<category>" prefix for the BANNER_COPY["rule"] branch
-            # to fire (mirrors the Ask MattGPT convention at
+            # to fire (mirrors the Ask Agy convention at
             # backend_service.py:1463). Without this prefix, rule:*
-            # nonsense queries on Explore Stories fell through to the
+            # nonsense queries on My Work fell through to the
             # legacy catch-all banner copy. May 23, 2026 fix.
             render_no_match_banner(
                 reason=f"rule:{nonsense_check}",
@@ -1984,7 +956,7 @@ def render_explore_stories(
             if intent_family in ("personal", "out_of_scope"):
                 log_query(
                     current_query,
-                    "Explore Stories",
+                    "My Work",
                     intent_family=intent_family,
                     redirect_reason=f"semantic_router:{intent_family}",
                 )
@@ -2019,7 +991,7 @@ def render_explore_stories(
                 st.session_state[LAST_QUERY] = current_query
                 log_query(
                     current_query,
-                    "Explore Stories",
+                    "My Work",
                     intent_family=intent_family,
                     confidence=confidence,
                     result_count=len(view),
@@ -2103,7 +1075,15 @@ def render_explore_stories(
         if has_filters:
             view = [s for s in stories if matches_filters(s, F)]
         else:
-            view = stories
+            # MATTGPT-098: default view (no filters active) applies the
+            # Professional Narrative exclusion + Start_Date desc sort.
+            # Mirrors the initial default at line 1935 above; both branches
+            # must apply the default state to avoid resetting it here.
+            view = sorted(
+                [s for s in stories if s.get("Category") != "Professional Narrative"],
+                key=lambda s: s.get("Start_Date", ""),
+                reverse=True,
+            )
 
         # Filter-only feedback banner (no search query active)
         if has_filters and not F.get("q"):
@@ -2237,7 +1217,7 @@ def render_explore_stories(
 
     with col1:
         results_html = f"""
-        <div class="results-count" style="display: flex; align-items: center; min-height: 44px; color: var(--text-color); font-size: 14px; white-space: nowrap;">
+        <div class="es-results-count" style="display: flex; align-items: center; min-height: 44px; color: var(--text-color); font-size: 14px; white-space: nowrap;">
             <span>Showing</span>&nbsp;<strong>{start}&ndash;{end}</strong>&nbsp;<span>of</span>&nbsp;<strong>{total_results}</strong>&nbsp;<span>projects</span>
         </div>
         """
@@ -2287,27 +1267,9 @@ def render_explore_stories(
         # Mobile swipe hint (hidden on tablet/desktop via CSS)
         st.markdown(
             """
-            <div class="table-swipe-hint">
+            <div class="es-table-swipe-hint">
                 <span>← Swipe to see more columns →</span>
             </div>
-            <style>
-            .table-swipe-hint {
-                display: none;
-                text-align: center;
-                padding: 8px 16px;
-                background: var(--bg-surface);
-                border: 1px solid var(--border-color);
-                border-radius: 8px;
-                margin-bottom: 12px;
-                font-size: 13px;
-                color: var(--text-muted);
-            }
-            @media (max-width: 767px) {
-                .table-swipe-hint {
-                    display: block;
-                }
-            }
-            </style>
             """,
             unsafe_allow_html=True,
         )
@@ -2348,7 +1310,7 @@ def render_explore_stories(
                 maxWidth=170,
                 cellRenderer="""
                     function(params) {
-                        return '<span class="client-badge">' + params.value + '</span>';
+                        return '<span class="es-client-badge">' + params.value + '</span>';
                     }
                 """,
             )
@@ -2371,6 +1333,7 @@ def render_explore_stories(
             opts["suppressHorizontalScroll"] = (
                 False  # False = allow horizontal scroll/swipe
             )
+            opts["rowStyle"] = {"cursor": "pointer"}
 
             grid = AgGrid(
                 df_view,
@@ -2380,6 +1343,28 @@ def render_explore_stories(
                 theme="streamlit",
                 fit_columns_on_grid_load=True,
                 height=TABLE_HEIGHT,
+            )
+
+            components.html(
+                """<script>
+                (function() {
+                    function inject() {
+                        var agIframe = Array.from(window.parent.document.querySelectorAll('iframe'))
+                            .find(function(f) { return f.src && f.src.includes('st_aggrid'); });
+                        if (!agIframe) return;
+                        try {
+                            var root = agIframe.contentDocument.querySelector('.ag-root-wrapper');
+                            if (!root) return;
+                            root.style.setProperty('--ag-row-hover-color', 'rgba(167,139,250,0.15)');
+                            root.style.setProperty('--ag-selected-row-background-color', 'rgba(167,139,250,0.2)');
+                        } catch(e) {}
+                    }
+                    inject();
+                    setTimeout(inject, 500);
+                    setTimeout(inject, 1500);
+                })();
+                </script>""",
+                height=0,
             )
 
             if isinstance(grid, dict):
@@ -2461,8 +1446,8 @@ def render_explore_stories(
 
                         if is_selected:
                             card_html = f"""
-                            <div class="fixed-height-card selected" data-story-id="{story_id}" style="margin-bottom: 20px; cursor: pointer;">
-                                <div class="card-close-state">
+                            <div class="es-fixed-height-card selected" data-story-id="{story_id}" style="margin-bottom: 20px; cursor: pointer;">
+                                <div class="es-card-close-state">
                                     <span class="close-x">✕</span>
                                     <span class="close-text">Close</span>
                                 </div>
@@ -2470,15 +1455,15 @@ def render_explore_stories(
                             """
                         else:
                             card_html = f"""
-                            <div class="fixed-height-card" data-story-id="{story_id}" style="margin-bottom: 20px; cursor: pointer;">
-                                <div class="card-header">
-                                    <div class="card-title">{title}</div>
-                                    <span class="card-client-badge">{client}</span>
+                            <div class="es-fixed-height-card" data-story-id="{story_id}" style="margin-bottom: 20px; cursor: pointer;">
+                                <div class="es-card-header">
+                                    <div class="es-card-title">{title}</div>
+                                    <span class="es-card-client-badge">{client}</span>
                                 </div>
-                                <p class="card-desc">{summary}</p>
-                                <div class="card-meta">
-                                    <span class="role-badge">{role}</span>
-                                    <span class="domain-tag">{domain}</span>
+                                <p class="es-card-desc">{summary}</p>
+                                <div class="es-card-meta">
+                                    <span class="es-role-badge">{role}</span>
+                                    <span class="es-domain-tag">{domain}</span>
                                 </div>
                             </div>
                             """
@@ -2515,7 +1500,7 @@ def render_explore_stories(
                     var parentDoc = window.parent.document;
 
                     parentDoc.addEventListener('click', function(e) {
-                        var card = e.target.closest('.fixed-height-card');
+                        var card = e.target.closest('.es-fixed-height-card');
                         if (!card) return;
 
                         var storyId = card.getAttribute('data-story-id');

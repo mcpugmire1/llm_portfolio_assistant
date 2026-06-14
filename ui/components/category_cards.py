@@ -9,11 +9,7 @@ Counts are derived dynamically from JSONL data.
 MOBILE CSS: Card heights are handled here. Layout/spacing handled by mobile_overrides.py
 """
 
-from collections import Counter
-
 import streamlit as st
-
-from utils.client_utils import is_generic_client
 
 # Ask Agy Anything suggested-question chip strings. Order is load-bearing —
 # index N maps to the hidden Streamlit button card_btn_ask_chip_N and to the
@@ -27,7 +23,7 @@ from utils.client_utils import is_generic_client
 #   - tests/eval_rag_quality.py GOLDEN_QUERIES["narrative"] entries 62-64
 # Out-of-sync edits break either the BDD wiring or the eval quality pinning.
 _CHIP_QUESTIONS = [
-    "How did Matt scale a Cloud Innovation Center from 0 to 150+ engineers?",
+    "How did Matt scale a Cloud Innovation Center from 0 to 150+ practitioners?",
     "How does Matt build teams that ship like startups in enterprise?",
     "How does Matt manage resistance when leading enterprise transformation programs?",
 ]
@@ -48,13 +44,13 @@ def on_chip_click(question: str) -> None:
       - __ask_from_suggestion__: True — tells backend_service.py:1413 to
         bypass the nonsense filter (otherwise "How does Matt..." style
         queries can get redirected)
-      - active_tab: "Ask MattGPT" — routes the rerun to the chat page
+      - active_tab: "Ask Agy" — routes the rerun to the chat page
 
     Contract pinned by tests/unit/test_category_cards.py::TestOnChipClick.
     """
     st.session_state["seed_prompt"] = question
     st.session_state["__ask_from_suggestion__"] = True
-    st.session_state["active_tab"] = "Ask MattGPT"
+    st.session_state["active_tab"] = "Ask Agy"
     st.rerun()
 
 
@@ -65,25 +61,10 @@ def render_category_cards(stories: list[dict]):
         stories: Full story corpus from JSONL.
     """
     # === DYNAMIC COUNTS (derived from JSONL) ===
-    banking_stories = [
-        s for s in stories if s.get("Industry") == "Financial Services / Banking"
-    ]
-    cross_industry_stories = [
-        s for s in stories if s.get("Industry") == "Cross Industry"
-    ]
-
-    # Banking client counts (top 3, excluding generic)
-    banking_clients = Counter(
-        s.get("Client", "Unknown")
-        for s in banking_stories
-        if not is_generic_client(s.get("Client"))
-    )
-    top_banking_clients = banking_clients.most_common(3)
-
-    # Cross-industry: show Accenture and telecom clients
-    telecom_stories = [s for s in stories if s.get("Industry") == "Telecommunications"]
-    accenture_stories = [s for s in stories if s.get("Client") == "Accenture"]
-
+    # MATTGPT-104: post-Era counts — exclude Professional Narrative stories
+    # to align with landing page card grids + Timeline + (post-MATTGPT-098)
+    # Explore Stories. Without this exclusion, Home card meta showed 33/57
+    # while landing card grids showed 32/48 for the same Industry filter.
     # === END DYNAMIC COUNTS ===
 
     # Inject card and button styles
@@ -160,6 +141,84 @@ def render_category_cards(stories: list[dict]):
         transform: translateY(-2px);
         box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);
         text-decoration: none !important;
+    }
+
+    /* MATTGPT-107: Collapse stElementContainer wrappers whose markdown
+       holds only a <style> tag. Streamlit wraps every st.markdown call in
+       an stElementContainer regardless of whether the content is visible,
+       and the wrapper takes part in stVerticalBlock spacing. Between
+       render_section_title's <h2> and this component's cards grid, the
+       CSS-injection stElementContainer below contributed ~55px of phantom
+       vertical gap. The rule below applies globally to the document so it
+       benefits any style-only injection on Home — including the one this
+       rule itself lives in (CSS rules in a <style> tag still take effect
+       even when an ancestor is display:none, so the self-hide is fine). */
+    div[data-testid="stElementContainer"]:has(> div[data-testid="stMarkdown"] > div[data-testid="stMarkdownContainer"] > style:only-child) {
+        display: none !important;
+    }
+    /* Empty stMarkdownContainer (e.g., a markdown call that produced no
+       output after parsing). Saves ~56px in the panel-to-footer region
+       on the home page where intermediate empty containers stacked. */
+    div[data-testid="stElementContainer"]:has(> div[data-testid="stMarkdown"] > div[data-testid="stMarkdownContainer"]:empty) {
+        display: none !important;
+    }
+    /* Truly-empty stElementContainer (no markdown child at all). Covers
+       the edge case where Streamlit emitted a wrapper with no body. */
+    div[data-testid="stElementContainer"]:empty {
+        display: none !important;
+    }
+
+    /* === MATTGPT-107: Home category cards (3-col grid, unified treatment) ===
+       Wireframe-locked values from MATTGPT_WIREFRAMES.html lines 77-82.
+       Replaces the legacy 2-col Streamlit-columns layout (matt-container +
+       .capability-card / inline anchor buttons + .hints). Whole-card click
+       handled by the components.html JS bridge below (listens on the card
+       id="card-X" divs and dispatches to hidden Streamlit buttons whose
+       active_tab / prefilter_* routing logic is unchanged from production). */
+    .home-cat-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        padding: 0 24px 18px;
+    }
+    .home-cat-card {
+        background: var(--bg-surface);
+        border: 0.5px solid var(--border-color);
+        border-radius: 6px;
+        padding: 14px;
+        cursor: pointer;
+        transition: border-color 0.15s ease, transform 0.15s ease;
+        display: flex;
+        flex-direction: column;
+        color: var(--text-primary);
+    }
+    .home-cat-card:hover {
+        border-color: var(--text-secondary);
+        transform: translateY(-1px);
+    }
+    .home-cat-icon {
+        font-size: 18px;
+        line-height: 1;
+        margin-bottom: 6px;
+    }
+    .home-cat-title {
+        font-size: 12px;
+        font-weight: 500;
+        margin: 0 0 3px 0;
+        color: var(--text-primary);
+    }
+    .home-cat-meta {
+        font-size: 11px;
+        color: var(--text-secondary);
+        margin: 0;
+        line-height: 1.5;
+    }
+    @media (max-width: 1024px) {
+        .home-cat-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+        .home-cat-grid { grid-template-columns: 1fr; padding: 0 16px 24px; }
+        .home-cat-card { padding: 12px; }
     }
 
     /* Capability card container (theme-aware) */
@@ -294,205 +353,115 @@ def render_category_cards(stories: list[dict]):
         unsafe_allow_html=True,
     )
 
-    st.markdown('<div class="matt-container">', unsafe_allow_html=True)
+    # === MATTGPT-107: Six category cards in a single 3-col CSS grid ===
+    # Whole-card click target: each card div has id="card-X". The JS bridge
+    # in the components.html block below listens for clicks on these IDs
+    # and dispatches to the hidden Streamlit buttons further down, whose
+    # active_tab / prefilter_* routing logic is unchanged from production.
+    # -107 is visual-only redesign; routing model is out of scope.
+    #
+    # Card-meta lines:
+    #   1, 2 — dynamic project counts + top-client names from JSONL
+    #   3-6  — wireframe-locked descriptive copy (no inline button, no
+    #          italic example-question line; the whole card is the click).
+    cards_html = """
+<div class="matt-container">
+<div class="home-cat-grid">
+<div class="home-cat-card" id="card-banking">
+<div class="home-cat-icon">🏦</div>
+<p class="home-cat-title">Financial Services / Banking</p>
+<p class="home-cat-meta">Payments infrastructure, CRM, and platform modernization across global banking and financial services.</p>
+</div>
+<div class="home-cat-card" id="card-cross-industry">
+<div class="home-cat-icon">🌐</div>
+<p class="home-cat-title">Cross-Industry Transformation</p>
+<p class="home-cat-meta">Cloud-native products and platform modernization across telecom, healthcare, transportation, and enterprise.</p>
+</div>
+<div class="home-cat-card" id="card-product">
+<div class="home-cat-icon">🚀</div>
+<p class="home-cat-title">Product Innovation &amp; Strategy</p>
+<p class="home-cat-meta">Greenfield products from discovery to production. Cloud-native, human-centered, AI-integrated.</p>
+</div>
+<div class="home-cat-card" id="card-modernization">
+<div class="home-cat-icon">⚙️</div>
+<p class="home-cat-title">Application Modernization</p>
+<p class="home-cat-meta">Legacy systems modernized without disrupting the business that depends on them. Mainframes to microservices, delivery velocity restored.</p>
+</div>
+<div class="home-cat-card" id="card-consulting">
+<div class="home-cat-icon">💡</div>
+<p class="home-cat-title">Consulting &amp; Transformation</p>
+<p class="home-cat-meta">Senior technical advisory and program leadership for Fortune 500 transformations. Solutions architecture, PMO, and program recovery.</p>
+</div>
+<div class="home-cat-card" id="card-teams">
+<div class="home-cat-icon">👥</div>
+<p class="home-cat-title">Teams &amp; Talent Development</p>
+<p class="home-cat-meta">Engineering organizations built from zero. 300+ practitioners reskilled. Capability and culture built to outlast the engagement.</p>
+</div>
+</div>
+</div>
+"""
+    st.markdown(cards_html, unsafe_allow_html=True)
 
-    # === ROW 1: Industry cards (purple gradient) ===
-    col1, col2 = st.columns(2)
+    # Hidden Streamlit buttons — same keys + routing logic as pre-MATTGPT-107.
+    # The JS bridge below maps clicks on .home-cat-card[id="card-X"] divs to
+    # these via querySelector on [class*="st-key-card_btn_X"] button.
+    if st.button("", key="card_btn_banking"):
+        st.session_state["active_tab"] = "Banking"
+        st.rerun()
 
-    with col1:
-        # Generate banking client pills dynamically
-        banking_pills = "".join(
-            f'<span style="background: rgba(255,255,255,0.25); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">{client} ({count})</span>'
-            for client, count in top_banking_clients
-        )
-        st.markdown(
-            f"""
-        <div class="card-mobile-spacing">
-        <div style="background: var(--gradient-purple-hero); color: white; padding: 32px; border-radius: 12px; height: 380px; display: flex; flex-direction: column;">
-            <div style="font-size: 48px; margin-bottom: 16px;">🏦</div>
-            <h3 style="color: white; font-size: 24px; font-weight: 700; margin: 0 0 8px 0;">Financial Services / Banking</h3>
-            <div style="color: rgba(255,255,255,0.9); font-size: 16px; font-weight: 600; margin-bottom: 16px;">{len(banking_stories)} projects</div>
-            <div style="color: rgba(255,255,255,0.95); margin-bottom: 16px; line-height: 1.5; font-size: 15px;">Banking modernization, payments, compliance, core banking systems</div>
-            <div style="display: flex; flex-wrap: wrap; gap: 8px; flex-grow: 1; align-items: flex-start; margin-bottom: 20px;">
-                {banking_pills}
-            </div>
-            <div style="margin-top: auto;">
-                <a id="btn-banking" class="card-btn-gradient">Explore Stories →</a>
-            </div>
-        </div>
-        </div>
-        """,
-            unsafe_allow_html=True,
-        )
-        if st.button("", key="card_btn_banking"):
-            st.session_state["active_tab"] = "Banking"
+    if st.button("", key="card_btn_cross_industry"):
+        st.session_state["active_tab"] = "Cross-Industry"
+        st.rerun()
+
+    if st.button("", key="card_btn_product"):
+        if st.session_state.get("active_tab") == "Home":
+            # Switched from prefilter_capability="Product Leadership" (not a valid
+            # Solution/Offering value, silently sanitized to "All" → 113 unfiltered).
+            # See BACKLOG MATTGPT-060 for the BDD gap that let this ship.
+            st.session_state["prefilter_domains"] = [
+                "User-Centered Product Strategy & Innovation",
+                "Product Strategy & Innovation",
+                "Product Management",
+                "Digital Product Development & Delivery",
+                "Client Product Innovation & Co-Creation",
+            ]
+            st.session_state["active_tab"] = "My Work"
             st.rerun()
 
-    with col2:
-        # Cross-industry pills: Telecom + Accenture
-        cross_pills = []
-        if telecom_stories:
-            cross_pills.append(
-                f'<span style="background: rgba(255,255,255,0.25); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">Telecom ({len(telecom_stories)})</span>'
-            )
-        if accenture_stories:
-            cross_pills.append(
-                f'<span style="background: rgba(255,255,255,0.25); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;">Accenture ({len(accenture_stories)})</span>'
-            )
-        cross_pills_html = "".join(cross_pills)
-
-        st.markdown(
-            f"""
-        <div class="card-mobile-spacing">
-        <div style="background: var(--gradient-purple-hero); color: white; padding: 32px; border-radius: 12px; height: 380px; display: flex; flex-direction: column;">
-            <div style="font-size: 48px; margin-bottom: 16px;">🌐</div>
-            <h3 style="color: white; font-size: 24px; font-weight: 700; margin: 0 0 8px 0;">Cross-Industry Transformation</h3>
-            <div style="color: rgba(255,255,255,0.9); font-size: 16px; font-weight: 600; margin-bottom: 16px;">{len(cross_industry_stories)} projects</div>
-            <div style="color: rgba(255,255,255,0.95); margin-bottom: 16px; line-height: 1.5; font-size: 15px;">Agile transformation, cloud innovation, platform engineering</div>
-            <div style="display: flex; flex-wrap: wrap; gap: 8px; flex-grow: 1; align-items: flex-start; margin-bottom: 20px;">
-                {cross_pills_html}
-            </div>
-            <div style="margin-top: auto;">
-                <a id="btn-cross-industry" class="card-btn-gradient">Explore Stories →</a>
-            </div>
-        </div>
-        </div>
-        """,
-            unsafe_allow_html=True,
-        )
-        if st.button("", key="card_btn_cross_industry"):
-            st.session_state["active_tab"] = "Cross-Industry"
+    if st.button("", key="card_btn_modernization"):
+        if st.session_state.get("active_tab") == "Home":
+            st.session_state["prefilter_capability"] = "Application Modernization"
+            st.session_state["active_tab"] = "My Work"
             st.rerun()
 
-    # Row spacing (hidden on mobile via CSS)
-    st.markdown('<div style="height: 24px;"></div>', unsafe_allow_html=True)
+    if st.button("", key="card_btn_consulting"):
+        if st.session_state.get("active_tab") == "Home":
+            # Trimmed from 18 → 8 domains. Product-related domains moved to
+            # Card 3 (Product Innovation); 1-story long-tail dropped to reduce
+            # filter-chip noise. ~29 stories covered (vs 43 prior).
+            st.session_state["prefilter_domains"] = [
+                "Agile Planning & Value-Driven Delivery",
+                "Leadership & Continuous Improvement",
+                "Agile Transformation & Leadership Enablement",
+                "Technology Strategy & Advisory Services",
+                "Strategic Client Partnerships",
+                "Cross-Functional Collaboration & Alignment",
+                "Process Optimization & Automation",
+                "Security & Compliance Solutions",
+            ]
+            st.session_state["active_tab"] = "My Work"
+            st.rerun()
 
-    # === ROW 2: Capability cards ===
-    col3, col4 = st.columns(2)
-
-    with col3:
-        st.markdown(
-            """
-        <div class="card-mobile-spacing">
-        <div class="capability-card">
-            <div style="font-size: 40px; margin-bottom: 16px;">🚀</div>
-            <h3>Product Innovation &amp; Strategy</h3>
-            <div class="description">From cloud-native prototypes to enterprise platforms — launching products that transform businesses</div>
-            <div class="hints">"How did Matt launch products?" • "How did Matt approach rapid prototyping?"</div>
-            <div>
-                <a id="btn-product" class="card-btn-outline">View Product Work →</a>
-            </div>
-        </div>
-        </div>
-        """,
-            unsafe_allow_html=True,
-        )
-        if st.button("", key="card_btn_product"):
-            if st.session_state.get("active_tab") == "Home":
-                # Switched from prefilter_capability="Product Leadership" (not a valid
-                # Solution/Offering value, silently sanitized to "All" → 113 unfiltered).
-                # See BACKLOG MATTGPT-060 for the BDD gap that let this ship.
-                st.session_state["prefilter_domains"] = [
-                    "User-Centered Product Strategy & Innovation",
-                    "Product Strategy & Innovation",
-                    "Product Management",
-                    "Digital Product Development & Delivery",
-                    "Client Product Innovation & Co-Creation",
-                ]
-                st.session_state["active_tab"] = "Explore Stories"
-                st.rerun()
-
-    with col4:
-        st.markdown(
-            """
-        <div class="card-mobile-spacing">
-        <div class="capability-card">
-            <div style="font-size: 40px; margin-bottom: 16px;">⚙️</div>
-            <h3>Application Modernization</h3>
-            <div class="description">Modernizing legacy apps with event-driven design, microservices, and zero-defect delivery</div>
-            <div class="hints">"How do you modernize monoliths into microservices?" • "How do you approach application rationalization?"</div>
-            <div>
-                <a id="btn-modernization" class="card-btn-outline">View Case Studies →</a>
-            </div>
-        </div>
-        </div>
-        """,
-            unsafe_allow_html=True,
-        )
-        if st.button("", key="card_btn_modernization"):
-            if st.session_state.get("active_tab") == "Home":
-                st.session_state["prefilter_capability"] = "Application Modernization"
-                st.session_state["active_tab"] = "Explore Stories"
-                st.rerun()
-
-    # Row spacing (hidden on mobile via CSS)
-    st.markdown('<div style="height: 24px;"></div>', unsafe_allow_html=True)
-
-    # === ROW 3: Capability cards ===
-    col5, col6 = st.columns(2)
-
-    with col5:
-        st.markdown(
-            """
-        <div class="card-mobile-spacing">
-        <div class="capability-card">
-            <div style="font-size: 40px; margin-bottom: 16px;">💡</div>
-            <h3>Consulting &amp; Transformation</h3>
-            <div class="description">Fortune 500 advisory, operating models, 3-20x acceleration, New Ways of Working</div>
-            <div class="hints">"How do you achieve 4x faster delivery?" • "How do you align cross-functional teams?"</div>
-            <div>
-                <a id="btn-consulting" class="card-btn-outline">Browse Transformations →</a>
-            </div>
-        </div>
-        </div>
-        """,
-            unsafe_allow_html=True,
-        )
-        if st.button("", key="card_btn_consulting"):
-            if st.session_state.get("active_tab") == "Home":
-                # Trimmed from 18 → 8 domains. Product-related domains moved to
-                # Card 3 (Product Innovation); 1-story long-tail dropped to reduce
-                # filter-chip noise. ~29 stories covered (vs 43 prior).
-                st.session_state["prefilter_domains"] = [
-                    "Agile Planning & Value-Driven Delivery",
-                    "Leadership & Continuous Improvement",
-                    "Agile Transformation & Leadership Enablement",
-                    "Technology Strategy & Advisory Services",
-                    "Strategic Client Partnerships",
-                    "Cross-Functional Collaboration & Alignment",
-                    "Process Optimization & Automation",
-                    "Security & Compliance Solutions",
-                ]
-                st.session_state["active_tab"] = "Explore Stories"
-                st.rerun()
-
-    with col6:
-        st.markdown(
-            """
-        <div class="card-mobile-spacing">
-        <div class="capability-card">
-            <div style="font-size: 40px; margin-bottom: 16px;">👥</div>
-            <h3>Teams &amp; Talent Development</h3>
-            <div class="description">Innovation centers, servant leadership, upskilling programs</div>
-            <div class="hints">"How did you scale the innovation center to 150+ people?" • "How did you equip teams for New IT ways of working?"</div>
-            <div>
-                <a id="btn-teams" class="card-btn-outline">Check Team Stories →</a>
-            </div>
-        </div>
-        </div>
-        """,
-            unsafe_allow_html=True,
-        )
-        if st.button("", key="card_btn_teams"):
-            if st.session_state.get("active_tab") == "Home":
-                st.session_state["prefilter_domains"] = [
-                    "Client Upskilling & Enablement",
-                    "Cross-Functional Team Enablement",
-                    "Psychological Safety & Innovation Culture",
-                    "Talent Enablement & Growth",
-                ]
-                st.session_state["active_tab"] = "Explore Stories"
-                st.rerun()
+    if st.button("", key="card_btn_teams"):
+        if st.session_state.get("active_tab") == "Home":
+            st.session_state["prefilter_domains"] = [
+                "Client Upskilling & Enablement",
+                "Cross-Functional Team Enablement",
+                "Psychological Safety & Innovation Culture",
+                "Talent Enablement & Growth",
+            ]
+            st.session_state["active_tab"] = "My Work"
+            st.rerun()
 
     # Row spacing (hidden on mobile via CSS)
     st.markdown('<div style="height: 24px;"></div>', unsafe_allow_html=True)
@@ -508,9 +477,24 @@ def render_category_cards(stories: list[dict]):
     .ask-agy-card {
         background: var(--gradient-purple-hero);
         color: white;
-        padding: 56px 56px;
+        padding: 28px 56px 32px 56px;
         border-radius: 12px;
-        margin-top: 16px;
+        margin-top: 8px;
+    }
+    /* MATTGPT-107: kill the phantom Streamlit anchor padding inside the
+       ask-agy-card heading. Same pattern as the section-header tighten
+       in hero.py — the <h3> Streamlit wraps with stHeadingWithActionElements
+       picks up 12px top + 16px bottom anchor padding by default, plus a
+       hover anchor-icon that's irrelevant inside a styled panel. */
+    .ask-agy-card .ask-agy-title {
+        padding: 0 !important;
+    }
+    .ask-agy-card [data-testid="stHeadingWithActionElements"] {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .ask-agy-card [data-testid="stHeaderActionElements"] {
+        display: none !important;
     }
     .ask-agy-grid {
         display: grid;
@@ -573,23 +557,28 @@ def render_category_cards(stories: list[dict]):
         color: rgba(255,255,255,1.0);
         margin-bottom: 4px;
     }
+    /* MATTGPT-107: chip styling matched to the hero secondary CTA
+       (.cta-secondary in hero.py) — solid 2px white border + 0.2 bg +
+       weight 600 — so the "Try asking" chips read as clickable objects
+       and the design language stays consistent across the
+       "interact with Agy" surfaces (hero CTA + Ask Agy panel chips). */
     .chip {
-        background: rgba(255,255,255,0.12);
-        border: 1px solid rgba(255,255,255,0.7);
+        background: rgba(255,255,255,0.2);
+        border: 2px solid rgb(255,255,255);
         border-radius: 8px;
         padding: 12px 16px;
         font-size: 14px;
+        font-weight: 600;
         color: white;
         text-align: left;
         cursor: pointer;
-        transition: background 0.15s, border-color 0.15s;
+        transition: background 0.15s;
         line-height: 1.4;
         font-family: inherit;
         width: 100%;
     }
     .chip:hover {
-        background: rgba(255,255,255,0.22);
-        border-color: rgba(255,255,255,0.9);
+        background: rgba(255,255,255,0.3);
     }
     .chip::before {
         content: '↗';
@@ -653,7 +642,7 @@ def render_category_cards(stories: list[dict]):
     # Hidden Streamlit buttons — the JS bridge in the components.html block
     # below routes visible-chip and Ask Agy anchor clicks here.
     if st.button("", key="card_btn_ask_agy"):
-        st.session_state["active_tab"] = "Ask MattGPT"
+        st.session_state["active_tab"] = "Ask Agy"
         st.session_state["skip_home_menu"] = True
         st.rerun()
     for _idx, _question in enumerate(_CHIP_QUESTIONS):
@@ -697,51 +686,55 @@ def render_category_cards(stories: list[dict]):
         setTimeout(function() {
             const parentDoc = window.parent.document;
 
-            const btnBanking = parentDoc.getElementById('btn-banking');
-            const btnCrossIndustry = parentDoc.getElementById('btn-cross-industry');
-            const btnProduct = parentDoc.getElementById('btn-product');
-            const btnModernization = parentDoc.getElementById('btn-modernization');
-            const btnConsulting = parentDoc.getElementById('btn-consulting');
-            const btnTeams = parentDoc.getElementById('btn-teams');
+            // MATTGPT-107: card divs (id="card-X") replaced the inline
+            // anchor buttons (id="btn-X"). Whole-card click dispatches to
+            // the same hidden Streamlit buttons (key="card_btn_X") whose
+            // routing logic is unchanged from pre-MATTGPT-107.
+            const cardBanking = parentDoc.getElementById('card-banking');
+            const cardCrossIndustry = parentDoc.getElementById('card-cross-industry');
+            const cardProduct = parentDoc.getElementById('card-product');
+            const cardModernization = parentDoc.getElementById('card-modernization');
+            const cardConsulting = parentDoc.getElementById('card-consulting');
+            const cardTeams = parentDoc.getElementById('card-teams');
             const btnAskAgy = parentDoc.getElementById('btn-ask-agy');
 
-            if (btnBanking) {
-                btnBanking.onclick = function() {
+            if (cardBanking) {
+                cardBanking.onclick = function() {
                     const stBtn = parentDoc.querySelector('[class*="st-key-card_btn_banking"] button');
                     if (stBtn) stBtn.click();
                 };
             }
 
-            if (btnCrossIndustry) {
-                btnCrossIndustry.onclick = function() {
+            if (cardCrossIndustry) {
+                cardCrossIndustry.onclick = function() {
                     const stBtn = parentDoc.querySelector('[class*="st-key-card_btn_cross_industry"] button');
                     if (stBtn) stBtn.click();
                 };
             }
 
-            if (btnProduct) {
-                btnProduct.onclick = function() {
+            if (cardProduct) {
+                cardProduct.onclick = function() {
                     const stBtn = parentDoc.querySelector('[class*="st-key-card_btn_product"] button');
                     if (stBtn) stBtn.click();
                 };
             }
 
-            if (btnModernization) {
-                btnModernization.onclick = function() {
+            if (cardModernization) {
+                cardModernization.onclick = function() {
                     const stBtn = parentDoc.querySelector('[class*="st-key-card_btn_modernization"] button');
                     if (stBtn) stBtn.click();
                 };
             }
 
-            if (btnConsulting) {
-                btnConsulting.onclick = function() {
+            if (cardConsulting) {
+                cardConsulting.onclick = function() {
                     const stBtn = parentDoc.querySelector('[class*="st-key-card_btn_consulting"] button');
                     if (stBtn) stBtn.click();
                 };
             }
 
-            if (btnTeams) {
-                btnTeams.onclick = function() {
+            if (cardTeams) {
+                cardTeams.onclick = function() {
                     const stBtn = parentDoc.querySelector('[class*="st-key-card_btn_teams"] button');
                     if (stBtn) stBtn.click();
                 };
@@ -758,11 +751,11 @@ def render_category_cards(stories: list[dict]):
     // Ask Agy Anything CHIP wiring — separate multi-firing block.
     // Re-attaches onclick on every firing without a dataset.wired gate.
     // Streamlit destroys and recreates this components.html iframe on every
-    // rerun (e.g., when the user returns from Ask MattGPT back to Home),
+    // rerun (e.g., when the user returns from Ask Agy back to Home),
     // killing the JS context that owns the chip onclick closures. The
     // single setTimeout(200ms) pattern above works for the cards because
     // those typically receive only the entry-point click and the user moves
-    // on — but the chips live on Home, are clicked, route to Ask MattGPT,
+    // on — but the chips live on Home, are clicked, route to Ask Agy,
     // then the user often comes back and clicks another chip. That's the
     // back-and-forth navigation pattern that surfaced the May 12 2026 dead-
     // closure bug on Cross-Industry landing. Multi-firing setTimeout

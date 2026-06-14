@@ -6,21 +6,7 @@ Updated for dark mode compatibility using CSS variables.
 """
 
 import streamlit as st
-
-from ui.components.category_cards import on_chip_click
-
-# Seed prompts for the four clickable sample-question buttons in the
-# "See It In Action" card. Exposed as a module-level constant so BDD tests
-# (tests/bdd/steps/test_about_matt.py) and any future eval pinning can
-# import the exact prompts. Editing this list changes both the rendered
-# button labels AND the auto-fired Ask MattGPT prompts; the two are
-# intentionally identical (DOM-observable contract).
-ABOUT_MATT_SEED_QUESTIONS = [
-    "How did Matt scale engineering teams from 4 to 150+ people?",
-    "What were the biggest challenges at the Accenture Innovation Center?",
-    "Show me examples of agile transformation with measurable outcomes",
-    "How did Matt turn around a failing program?",
-]
+import streamlit.components.v1 as components
 
 
 def render_about_matt():
@@ -29,12 +15,13 @@ def render_about_matt():
     Dark mode compatible using CSS variables.
     """
 
-    # About Matt page CSS now lives in ui/styles/global_styles.py
-    # (apply_global_styles): injected on every rerun at a stable position
-    # so it survives Streamlit position-reconciliation during chip-click
-    # page transitions (MATTGPT-068). App-wide collision-prone selectors
-    # (stats-bar / stat-* / section-*) are namespaced .am-* to avoid
-    # leaking onto other pages.
+    # About Matt page CSS lives in ui/styles/global_styles.py (apply_global_styles)
+    # so it survives Streamlit position-reconciliation during chip-click transitions
+    # (MATTGPT-068). am-* namespace prevents leaking to other pages.
+    #
+    # Visual language (MATTGPT-093): prof-* classes match wireframe exactly.
+    # BDD compat via dual-classing — am-section-title kept on section labels so
+    # BDD locators work; prof-section-h !important wins the cascade.
 
     # =========================================================================
     # 1. HERO SECTION
@@ -44,508 +31,394 @@ def render_about_matt():
 <div class="about-header">
     <div class="about-header-content">
         <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/MattCartoon-Transparent.png"
-             width="120" height="120"
-             style="width: 120px; height: 120px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.2); object-fit: cover; background: rgba(255,255,255,0.1);"
+             class="about-header-avatar"
              alt="Matt Pugmire">
         <div class="about-header-text">
             <h1>Matt Pugmire</h1>
-            <p style="font-size: 17px; margin-bottom: 12px;">Technology & Transformation Leader | Platform Engineering | Digital Product Development | AI & Cloud</p>
-            <p style="font-size: 14px; opacity: 0.9; line-height: 1.6; max-width: 800px;">
-                I build new capabilities — products, platforms, and teams — using modern engineering, cloud, and AI.
+            <p>
+                Engineering leader · platform modernization · AI · Atlanta · open to relocate
             </p>
         </div>
     </div>
+    <span class="prof-status-badge">● In active conversations</span>
 </div>
         """,
         unsafe_allow_html=True,
     )
 
     # =========================================================================
-    # 2. STATS BAR
+    # 2. SIGNALS PANEL (replaces stats bar — MATTGPT-093)
+    # BDD: .am-signal-tile count inside [class*='st-key-am_signals_panel'].
+    # Dual-class tiles: am-signal-tile (BDD) + prof-signal-tile (visual).
+    # Inner labels/values use wireframe class names: prof-signal-lbl/prof-signal-val.
     # =========================================================================
-    st.markdown(
-        """
-<div class="am-stats-bar">
-    <div class="am-stat-card">
-        <span class="am-stat-number">20+</span>
-        <span class="am-stat-label">Years Experience</span>
-    </div>
-    <div class="am-stat-card">
-        <span class="am-stat-number">130+</span>
-        <span class="am-stat-label">Projects Delivered</span>
-    </div>
-    <div class="am-stat-card">
-        <span class="am-stat-number">300+</span>
-        <span class="am-stat-label">Professionals Trained</span>
-    </div>
-    <div class="am-stat-card">
-        <span class="am-stat-number">15+</span>
-        <span class="am-stat-label">Enterprise Clients</span>
-    </div>
-    <div class="am-stat-card">
-        <span class="am-stat-number">4x</span>
-        <span class="am-stat-label">Delivery Acceleration</span>
-    </div>
-</div>
-        """,
-        unsafe_allow_html=True,
-    )
+
+    with st.container(key="am_signals_panel"):
+        st.markdown('<p class="prof-section-h">Signals</p>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="am-signals-grid prof-signals-grid">'
+            '<div class="am-signal-tile prof-signal-tile"><p class="prof-signal-lbl">Level</p><p class="prof-signal-val">Senior leader</p></div>'
+            '<div class="am-signal-tile prof-signal-tile"><p class="prof-signal-lbl">Most recent</p><p class="prof-signal-val">Director, Cloud Innovation Center</p></div>'
+            '<div class="am-signal-tile prof-signal-tile"><p class="prof-signal-lbl">Peak team</p><p class="prof-signal-val">150+ practitioners</p></div>'
+            '<div class="am-signal-tile prof-signal-tile"><p class="prof-signal-lbl">Geo</p><p class="prof-signal-val">Atlanta · open to relocate</p></div>'
+            '<div class="am-signal-tile prof-signal-tile"><p class="prof-signal-lbl">Status</p><p class="prof-signal-val">Active conversations</p></div>'
+            '<div class="am-signal-tile prof-signal-tile"><p class="prof-signal-lbl">Work mode</p><p class="prof-signal-val">Hybrid or in-person</p></div>'
+            "</div>",
+            unsafe_allow_html=True,
+        )
 
     # =========================================================================
-    # 3. CAREER TIMELINE
+    # 3. IN MY OWN WORDS — voice block (MATTGPT-093)
+    # BDD: .am-section-title (heading text, page-wide), st-key-am_in_my_own_words (content).
+    # Section label is <p> not <h2> — matches wireframe; !important in prof-section-h wins.
+    # Prose verbatim from wireframe spec — do not paraphrase.
     # =========================================================================
-    st.markdown(
-        '<h2 class="am-section-title">Career Evolution</h2>', unsafe_allow_html=True
-    )
-    st.markdown(
-        '<p class="am-section-subtitle">From engineer to director—building, modernizing, and leading along the way</p>',
-        unsafe_allow_html=True,
-    )
-
-    st.markdown(
-        """
-<div class="timeline">
-    <div class="timeline-item">
-        <div class="timeline-year">2023–Present</div>
-        <div class="timeline-title">Sabbatical | Innovation & Upskilling</div>
-        <div class="timeline-company">Independent</div>
-        <div class="timeline-desc">Sabbatical to recharge, refocus, and reskill — with MattGPT as tangible proof of the work.</div>
-    </div>
-    <div class="timeline-item">
-        <div class="timeline-year">2019–2023</div>
-        <div class="timeline-title">Director, Cloud Innovation Center</div>
-        <div class="timeline-company">Accenture</div>
-        <div class="timeline-desc">Launched Innovation Centers (150+ engineers) • 30+ products • $300M+ revenue • 4x faster delivery.</div>
-    </div>
-    <div class="timeline-item">
-        <div class="timeline-year">2016–2023</div>
-        <div class="timeline-title">Capability Development Lead, CloudFirst</div>
-        <div class="timeline-company">Accenture</div>
-        <div class="timeline-desc">Enterprise capability development, engineering enablement, and culture transformation.</div>
-    </div>
-    <div class="timeline-item">
-        <div class="timeline-year">2018–2019</div>
-        <div class="timeline-title">Cloud Native Architecture Lead, Liquid Studio</div>
-        <div class="timeline-company">Accenture</div>
-        <div class="timeline-desc">Cloud-native prototyping and product shaping through rapid experimentation and modern engineering practices.</div>
-    </div>
-    <div class="timeline-item">
-        <div class="timeline-year">2009–2017</div>
-        <div class="timeline-title">Sr. Technology Architecture Manager, Financial Services</div>
-        <div class="timeline-company">Accenture</div>
-        <div class="timeline-desc">Financial services platform modernization and architecture at global scale.</div>
-    </div>
-    <div class="timeline-item">
-        <div class="timeline-year">2005–2009</div>
-        <div class="timeline-title">Technology Manager</div>
-        <div class="timeline-company">Accenture</div>
-        <div class="timeline-desc">Enterprise integration and solution architecture for large-scale telecom and enterprise platforms.</div>
-    </div>
-    <div class="timeline-item">
-        <div class="timeline-year">2000–2005</div>
-        <div class="timeline-title">Startups & Consulting</div>
-        <div class="timeline-company">Including Cendian Corp</div>
-        <div class="timeline-desc">Building B2B and supply-chain platforms using enterprise integration technologies.</div>
-    </div>
-</div>
-        """,
-        unsafe_allow_html=True,
-    )
+    with st.container(key="am_in_my_own_words"):
+        st.markdown(
+            '<p class="am-section-title prof-section-h">In my own words</p>',
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            '<p class="prof-voice-p">I build what\'s next, modernize what\'s not, and grow teams along the way.</p>'
+            '<p class="prof-voice-p">My foundation is in financial services technology at JPMorgan, Fiserv, RBC, and HSBC. '
+            'At JPMorgan I led several programs, the largest a 60+ person global team delivering the ACCESS payments platform '
+            'across 12 countries. That\'s where I learned to modernize regulated, high-stakes platforms without breaking them.</p>'
+            '<p class="prof-voice-p">Most recently I built Accenture\'s Cloud Innovation Center from zero to a 150+ practitioner '
+            'practice of engineers, architects, product managers, and HCD designers, serving 15+ Fortune 500 clients with no '
+            'dedicated sales team and generating $100M+ in repeat business. The work itself created the demand.</p>'
+            '<p class="prof-voice-p">I used to work in a world where we specified everything upfront and found out at the very end '
+            'whether it worked. I work the opposite way now: prototypes in days, a working MVP in weeks, quality built in from '
+            'the first commit, with modern engineering and AI tightening the loop. That\'s how a team becomes a system that '
+            'delivers, and the people on it do work they\'re proud of.</p>',
+            unsafe_allow_html=True,
+        )
 
     # =========================================================================
-    # 4. MATTGPT DEEP-DIVE
+    # 4. FOR A REFERRER — copy snippet and action buttons (MATTGPT-093)
+    # BDD: .am-section-title (heading, page-wide), .am-referrer-snippet (snippet),
+    # st-key-am_for_a_referrer (container), buttons by label text inside container.
+    # Heading is BEFORE the container so the container IS the info-box (styled via CSS).
+    # prof-copy-snippet dual-classes am-referrer-snippet for BDD + white box styling.
+    # Snippet verbatim from wireframe spec — do not paraphrase.
     # =========================================================================
-    st.markdown(
-        '<h2 class="am-section-title" style="margin-top: 60px;">How I Built MattGPT</h2>',
-        unsafe_allow_html=True,
+    # Inline SVG icons for action buttons (ti-copy / ti-file-download pattern)
+    _SVG_COPY = (
+        '<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" '
+        'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
+        '<rect x="8" y="8" width="12" height="12" rx="2"/>'
+        '<path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>'
+        '</svg>'
     )
-    st.markdown(
-        '<p class="am-section-subtitle">A technical deep-dive into the system architecture behind this portfolio</p>',
-        unsafe_allow_html=True,
+    _SVG_DOWNLOAD = (
+        '<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" '
+        'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
+        '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>'
+        '<polyline points="14,2 14,8 20,8"/>'
+        '<line x1="12" y1="18" x2="12" y2="12"/>'
+        '<polyline points="9,15 12,18 15,15"/>'
+        '</svg>'
     )
-
-    # Problem section
-    st.markdown(
-        """
-<div class="deep-dive-card">
-    <h3 style="margin: 0 0 12px 0;">The Problem</h3>
-    <p style="line-height: 1.7;">
-        Traditional portfolios are static PDFs that don't scale. Recruiters and hiring managers can't easily
-        search 130+ projects by methodology, outcome, or domain. I wanted to create an <strong>intelligent,
-        conversational interface</strong> that understands intent and surfaces relevant experience.
-    </p>
-</div>
-    """,
-        unsafe_allow_html=True,
+    _REFERRER_SNIPPET = (
+        "Matt Pugmire is a senior product engineering leader who modernizes regulated, high-stakes platforms across "
+        "financial services and the enterprise. He led a 60+ person global team at JPMorgan and built Accenture's "
+        "Cloud Innovation Center from zero to a 150+ practitioner practice serving 15+ Fortune 500 clients, generating "
+        "$100M+ in repeat business with no dedicated sales team. He's now building hands-on with AI. "
+        "In active conversations for senior engineering leadership roles. Atlanta-based, open to relocate."
     )
+    with st.container(key="am_for_a_referrer"):
+        st.markdown(
+            '<p class="am-section-title prof-section-h">For a referrer</p>',
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            f'<p class="prof-copy-h">Copy this intro language</p>'
+            f'<p class="am-referrer-snippet prof-copy-snippet">{_REFERRER_SNIPPET}</p>'
+            f'<div class="prof-copy-actions">'
+            f'<span id="am-copy-snippet-btn" class="prof-act-btn">{_SVG_COPY}&nbsp;Copy snippet</span>'
+            f'<span id="am-download-pdf-btn" class="prof-act-btn">{_SVG_DOWNLOAD}&nbsp;Download PDF</span>'
+            f'</div>',
+            unsafe_allow_html=True,
+        )
 
-    # Agy story
-    st.markdown(
-        """
-<div class="deep-dive-card" style="display: flex; gap: 24px; align-items: center;">
-    <div style="flex: 1;">
-        <h3 style="margin: 0 0 12px 0;">🐾 Why "Agy"?</h3>
-        <p style="line-height: 1.7; margin-bottom: 12px;">
-            When I started building this AI assistant, there was only one name that made sense: Agy, named in honor
-            of my Plott Hound who was my companion through 20+ years of transformation work.
-        </p>
-        <p style="line-height: 1.7; margin-bottom: 12px;">
-            Plott Hounds are bred for determination and tracking skills—they don't give up on a trail. Those same
-            traits define how this AI assistant works: determined to find the right insights, skilled at tracking down
-            relevant experience across 130+ projects.
-        </p>
-        <p style="font-style: italic; color: var(--text-secondary, #6B7280);">
-            It felt right to keep his name part of the work we loved doing together.
-        </p>
-    </div>
-    <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/AgyMattCartoon-Transparent.png"
-         style="width: 160px; height: auto; flex-shrink: 0; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));"
-         alt="Matt and Agy">
-</div>
-    """,
-        unsafe_allow_html=True,
-    )
-
-    # Tech Stack
-    st.markdown(
-        """
-<div class="deep-dive-card">
-    <h3 style="margin: 0 0 16px 0;">Tech Stack</h3>
-    <div class="tech-grid" style="grid-template-columns: repeat(3, 1fr);">
-        <div class="tech-item"><div style="font-size: 28px;">🐍</div><div style="font-size: 11px; font-weight: 600;">Python 3.11</div></div>
-        <div class="tech-item"><div style="font-size: 28px;">⚡</div><div style="font-size: 11px; font-weight: 600;">Streamlit</div></div>
-        <div class="tech-item"><div style="font-size: 28px;">🤖</div><div style="font-size: 11px; font-weight: 600;">OpenAI GPT-4o</div></div>
-        <div class="tech-item"><div style="font-size: 28px;">📌</div><div style="font-size: 11px; font-weight: 600;">Pinecone</div></div>
-        <div class="tech-item"><div style="font-size: 28px;">🧠</div><div style="font-size: 11px; font-weight: 600;">text-embedding-3-small</div></div>
-        <div class="tech-item"><div style="font-size: 28px;">🔀</div><div style="font-size: 11px; font-weight: 600;">GitHub Webhook</div></div>
-    </div>
-</div>
-    """,
-        unsafe_allow_html=True,
-    )
-
-    # Architecture Flow
-    st.markdown(
-        """
-<div class="deep-dive-card">
-    <h3 style="text-align: center; margin: 0 0 24px 0;">System Architecture Flow</h3>
-    <div class="flow-grid">
-        <div class="flow-step">
-            <div class="flow-num">1</div>
-            <div class="flow-step-title">Data Ingestion</div>
-            <div class="flow-step-desc">Excel → JSONL with STAR format</div>
-        </div>
-        <div class="flow-step">
-            <div class="flow-num">2</div>
-            <div class="flow-step-title">Embeddings</div>
-            <div class="flow-step-desc">OpenAI text-embedding-3-small</div>
-        </div>
-        <div class="flow-step">
-            <div class="flow-num">3</div>
-            <div class="flow-step-title">Vector Store</div>
-            <div class="flow-step-desc">Pinecone with metadata filters</div>
-        </div>
-        <div class="flow-step">
-            <div class="flow-num">4</div>
-            <div class="flow-step-title">Intent & Entity</div>
-            <div class="flow-step-desc">Query classification + entity pinning</div>
-        </div>
-        <div class="flow-step">
-            <div class="flow-num">5</div>
-            <div class="flow-step-title">RAG + GPT-4o</div>
-            <div class="flow-step-desc">XML-isolated context → generation</div>
-        </div>
-    </div>
-    <div style="text-align: center; margin: 24px 0 16px 0;">
-        <span class="secret-sauce-badge">
-            The Secret Sauce: 5-Stage RAG Pipeline with Context Isolation
-        </span>
-    </div>
-<details>
-<summary>Show code</summary>
-<div class="code-block"><span class="code-comment"># 5-Stage RAG Pipeline</span>
-<span class="code-comment"># Stage 1: Nonsense filter (regex)</span>
-def is_nonsense(query: str) -&gt; bool:
-    <span class="code-string">"Fast regex rejection of clearly off-topic queries"</span>
-    return matches_blocked_patterns(query)
-
-<span class="code-comment"># Stage 2: Semantic router (embedding-based, no LLM call)</span>
-def route(query: str) -&gt; tuple[str, float]:
-    <span class="code-string">"Embedding similarity → intent family + score; flags out_of_scope"</span>
-    return router.classify(query)  <span class="code-comment"># → (intent_family, score)</span>
-
-<span class="code-comment"># Stage 3: Pinecone retrieval with entity-aware pinning</span>
-def retrieve(query: str) -&gt; list:
-    <span class="code-string">"Vector search; pin a known-entity story to #1 when detected"</span>
-    results = pinecone.search(embed(query))
-    entity = detect_entity(query)  <span class="code-comment"># NER on known clients/divisions</span>
-    if entity:
-        results = pin_to_top(results, entity)
-    return results
-
-<span class="code-comment"># Stage 4: Confidence gating</span>
-def confidence_gate(results: list) -&gt; list:
-    <span class="code-string">"Drop low-similarity hits below the semantic confidence floor"</span>
-    return [r for r in results if r.pc_score &gt;= CONFIDENCE_HIGH]
-
-<span class="code-comment"># Stage 5: LLM generation with XML context isolation</span>
-def generate(stories: list, intent_family: str) -&gt; str:
-    <span class="code-string">"GPT-4o reads &lt;primary_story&gt;/&lt;supporting_story&gt; tagged context"</span>
-    ctx = build_xml_context(stories)
-    return gpt_4o.complete(SYSTEM_PROMPT + ctx)</div>
-</details>
-</div>
-    """,
-        unsafe_allow_html=True,
+    # JS wiring: delegated parentDoc listener (MATTGPT-118).
+    # Delegated pattern matches how_i_built_dialog.py: listener on parentDoc survives
+    # React reconciliation; per-element onclick is lost when React replaces inner DOM.
+    # navigator.clipboard.writeText() used over execCommand — works reliably in headless
+    # Chromium; both .then() and .catch() show ✓ Copied! so clipboard success is not
+    # required for the confirmation feedback.
+    _snippet_js_literal = repr(_REFERRER_SNIPPET)
+    components.html(
+        f"""
+<script>
+(function() {{
+    var parentDoc = window.parent.document;
+    var snippetText = {_snippet_js_literal};
+    parentDoc.addEventListener('click', function(e) {{
+        var copyBtn = e.target.closest ? e.target.closest('#am-copy-snippet-btn') : null;
+        if (copyBtn) {{
+            e.preventDefault();
+            var origHTML = copyBtn.innerHTML;
+            var showConfirm = function() {{
+                copyBtn.innerHTML = '✓ Copied!';
+                copyBtn.style.borderColor = '#10B981';
+                copyBtn.style.color = '#10B981';
+                setTimeout(function() {{
+                    copyBtn.innerHTML = origHTML;
+                    copyBtn.style.borderColor = '';
+                    copyBtn.style.color = '';
+                }}, 2000);
+            }};
+            window.parent.navigator.clipboard.writeText(snippetText).then(showConfirm).catch(showConfirm);
+            return;
+        }}
+        var dlBtn = e.target.closest ? e.target.closest('#am-download-pdf-btn') : null;
+        if (dlBtn) {{
+            var stBtn = parentDoc.querySelector('[class*="st-key-am_download_pdf"] button');
+            if (stBtn) stBtn.click();
+        }}
+    }});
+}})();
+</script>
+""",
+        height=0,
     )
 
-    # Technical details grid
-    st.markdown(
-        """
-<div class="details-grid">
-    <div class="detail-card">
-        <h4>Data Pipeline</h4>
-        <ul>
-            <li>Excel master sheet with 130+ STAR stories</li>
-            <li>Python script converts to JSONL with rich metadata</li>
-            <li>5P framework: Person, Place, Purpose, Performance, Process</li>
-            <li>Automated validation ensures consistency</li>
-        </ul>
-    </div>
-    <div class="detail-card">
-        <h4>Embeddings Strategy</h4>
-        <ul>
-            <li><strong>Model:</strong> OpenAI text-embedding-3-small (1536 dim)</li>
-            <li><strong>Chunking:</strong> Full STAR story per vector</li>
-            <li><strong>Metadata:</strong> Category, client, themes indexed</li>
-            <li><strong>Refresh:</strong> Re-index via data ingestion pipeline (Excel → JSONL → enrich → embed → Pinecone)</li>
-        </ul>
-    </div>
-    <div class="detail-card">
-        <h4>5-Stage RAG Pipeline</h4>
-        <ul>
-            <li><strong>Stage 1:</strong> Nonsense filter (fast regex rejection)</li>
-            <li><strong>Stage 2:</strong> Semantic router (intent + out-of-scope detection)</li>
-            <li><strong>Stage 3:</strong> Pinecone retrieval with entity-aware pinning</li>
-            <li><strong>Stage 4:</strong> Confidence gating (threshold: 0.25)</li>
-            <li><strong>Stage 5:</strong> LLM generation (GPT-4o with XML context isolation)</li>
-        </ul>
-    </div>
-    <div class="detail-card">
-        <h4>CI/CD Pipeline</h4>
-        <ul>
-            <li><strong>Trigger:</strong> Git push to main</li>
-            <li><strong>Mechanism:</strong> GitHub webhook → Streamlit Cloud</li>
-            <li><strong>Action:</strong> Auto-rebuild and deploy</li>
-            <li><strong>Testing:</strong> pytest with behavioral tests</li>
-            <li><strong>Monitoring:</strong> Query logging, error tracking</li>
-            <li><strong>Security:</strong> API keys in secrets, no PII</li>
-        </ul>
-    </div>
-    <div class="detail-card">
-        <h4>RAG with GPT-4o</h4>
-        <ul>
-            <li><strong>Context Isolation:</strong> XML tags prevent cross-story bleed</li>
-            <li><strong>Texture Preservation:</strong> Quotes distinctive phrases verbatim</li>
-            <li><strong>Synthesis Mode:</strong> Multi-theme responses for broad queries</li>
-            <li><strong>Source Citations:</strong> Links to full STAR stories</li>
-        </ul>
-    </div>
-    <div class="detail-card">
-        <h4>Frontend (Streamlit)</h4>
-        <ul>
-            <li>Conversational chat interface with history</li>
-            <li>Dark mode support with CSS variables</li>
-            <li>Story cards with expandable details</li>
-            <li>Responsive design with custom CSS</li>
-        </ul>
-    </div>
-</div>
-        """,
-        unsafe_allow_html=True,
-    )
+    if st.button("", key="am_download_pdf"):
+        _export_html = (
+            "<!DOCTYPE html><html><head><meta charset='utf-8'>"
+            "<title>Matt Pugmire</title><style>"
+            "body{font-family:Arial,sans-serif;max-width:740px;margin:40px auto;color:#1F2937;font-size:14px;line-height:1.6}"
+            "h1{font-size:24px;margin:0 0 4px;font-weight:700}"
+            ".sub{color:#6B7280;font-size:12px;margin:0 0 28px}"
+            "h2{font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:#6B7280;margin:24px 0 10px;font-weight:700;border-bottom:1px solid #E5E7EB;padding-bottom:4px}"
+            ".signals{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 4px}"
+            ".tile{background:#F9FAFB;border-radius:6px;padding:8px 12px}"
+            ".tile-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.4px;color:#6B7280;margin:0 0 2px}"
+            ".tile-val{font-size:13px;font-weight:500;margin:0}"
+            "p.voice{font-size:13px;color:#374151;margin:0 0 10px;line-height:1.65}"
+            "p.voice:last-child{margin:0}"
+            ".comp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 4px}"
+            ".comp-card{background:#F9FAFB;border-radius:6px;padding:8px 12px}"
+            ".comp-name{font-size:12px;font-weight:600;margin:0 0 3px}"
+            ".comp-desc{font-size:11px;color:#6B7280;margin:0;line-height:1.4}"
+            ".lead-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:0 0 4px}"
+            ".lead-card{background:#F9FAFB;border-radius:6px;padding:8px 12px}"
+            ".lead-h{font-size:12px;font-weight:600;margin:0 0 3px;color:#8B5CF6}"
+            ".lead-p{font-size:11px;color:#6B7280;margin:0;line-height:1.4}"
+            ".tl{border-left:2px solid #E5E7EB;padding-left:16px;margin:0 0 4px}"
+            ".tl-item{margin-bottom:12px;position:relative}"
+            ".tl-item::before{content:'';position:absolute;left:-21px;top:4px;width:8px;height:8px;border-radius:50%;background:#8B5CF6}"
+            ".tl-period{font-size:11px;color:#8B5CF6;font-weight:600;margin:0}"
+            ".tl-role{font-size:13px;font-weight:500;margin:2px 0 1px}"
+            ".tl-org{font-size:11px;color:#6B7280;margin:0 0 2px}"
+            ".tl-desc{font-size:11px;color:#374151;margin:0;line-height:1.45}"
+            ".footer{margin-top:32px;padding-top:12px;border-top:1px solid #E5E7EB;font-size:11px;color:#6B7280;text-align:center}"
+            "@media print{body{margin:20px}}"
+            "</style></head><body>"
+            "<h1>Matt Pugmire</h1>"
+            "<p class='sub'>Engineering leader &middot; builds organizations from zero &middot; platform modernization &middot; AI &middot; Atlanta &middot; open to relocate</p>"
+            "<h2>Signals</h2><div class='signals'>"
+            "<div class='tile'><p class='tile-lbl'>Level</p><p class='tile-val'>Senior leader</p></div>"
+            "<div class='tile'><p class='tile-lbl'>Most recent</p><p class='tile-val'>Director, Cloud Innovation Center</p></div>"
+            "<div class='tile'><p class='tile-lbl'>Peak team</p><p class='tile-val'>150+ practitioners</p></div>"
+            "<div class='tile'><p class='tile-lbl'>Geo</p><p class='tile-val'>Atlanta &middot; open to relocate</p></div>"
+            "<div class='tile'><p class='tile-lbl'>Status</p><p class='tile-val'>Active conversations</p></div>"
+            "<div class='tile'><p class='tile-lbl'>Work mode</p><p class='tile-val'>Hybrid or in-person</p></div>"
+            "</div>"
+            "<h2>In My Own Words</h2>"
+            "<p class='voice'>I build what&#39;s next, modernize what&#39;s not, and grow teams along the way.</p>"
+            "<p class='voice'>My foundation is in financial services technology at JPMorgan, Fiserv, RBC, and HSBC. "
+            "At JPMorgan I led several programs, the largest a 60+ person global team delivering the ACCESS payments platform "
+            "across 12 countries. That&#39;s where I learned to modernize regulated, high-stakes platforms without breaking them.</p>"
+            "<p class='voice'>Most recently I built Accenture&#39;s Cloud Innovation Center from zero to a 150+ practitioner "
+            "practice of engineers, architects, product managers, and HCD designers, serving 15+ Fortune 500 clients with no "
+            "dedicated sales team and generating $100M+ in repeat business. The work itself created the demand.</p>"
+            "<p class='voice'>I used to work in a world where we specified everything upfront and found out at the very end "
+            "whether it worked. I work the opposite way now: prototypes in days, a working MVP in weeks, quality built in from "
+            "the first commit, with modern engineering and AI tightening the loop. That&#39;s how a team becomes a system that "
+            "delivers, and the people on it do work they&#39;re proud of.</p>"
+            "<h2>Core Competencies</h2><div class='comp-grid'>"
+            "<div class='comp-card'><p class='comp-name'>Product &amp; Discovery</p><p class='comp-desc'>Discovery, framing, and prototyping that settle what to build before the build starts.</p></div>"
+            "<div class='comp-card'><p class='comp-name'>Modern Engineering</p><p class='comp-desc'>Cloud-native and event-driven, quality engineered in from the first commit. TDD, pair programming, CI/CD.</p></div>"
+            "<div class='comp-card'><p class='comp-name'>Organization Building</p><p class='comp-desc'>Engineering organizations and the operating model that scales them. Team Topologies, delivery rhythm, practices that outlast the org chart.</p></div>"
+            "<div class='comp-card'><p class='comp-name'>Enterprise Transformation</p><p class='comp-desc'>Regulated enterprises moved from IT delivery to a product operating model, and the change holds.</p></div>"
+            "<div class='comp-card'><p class='comp-name'>People &amp; Culture</p><p class='comp-desc'>Cross-functional teams built from zero, plus the reskilling and mentorship that keep them growing.</p></div>"
+            "<div class='comp-card'><p class='comp-name'>AI &amp; Emerging Tech</p><p class='comp-desc'>RAG, vector search, and eval-driven development, built hands-on.</p></div>"
+            "</div>"
+            "<h2>How I Lead</h2><div class='lead-grid'>"
+            "<div class='lead-card'><p class='lead-h'>Outcomes over output</p><p class='lead-p'>I measure a team by what it changes, not how much it produces.</p></div>"
+            "<div class='lead-card'><p class='lead-h'>Experimentation over certainty</p><p class='lead-p'>I trust what a prototype teaches me over what a plan promises.</p></div>"
+            "<div class='lead-card'><p class='lead-h'>High-trust, sustainable teams</p><p class='lead-p'>I build teams where ten people do what twenty usually do, and can still do it next quarter.</p></div>"
+            "<div class='lead-card'><p class='lead-h'>Grow the people</p><p class='lead-p'>I develop people with the same discipline I bring to building systems.</p></div>"
+            "</div>"
+            "<h2>Career Evolution</h2><div class='tl'>"
+            "<div class='tl-item'><p class='tl-period'>2023&#8211;2026</p><p class='tl-role'>Sabbatical | Innovation &amp; Upskilling</p><p class='tl-org'>Independent</p><p class='tl-desc'>Sabbatical to recharge, refocus, and reskill. MattGPT is tangible proof of the work.</p></div>"
+            "<div class='tl-item'><p class='tl-period'>2019&#8211;2023</p><p class='tl-role'>Director, Cloud Innovation Center</p><p class='tl-org'>Accenture</p><p class='tl-desc'>Launched Innovation Centers (150+ practitioners) &#183; 30+ products &#183; $100M+ in repeat business &#183; 4x faster delivery.</p></div>"
+            "<div class='tl-item'><p class='tl-period'>2016&#8211;2023</p><p class='tl-role'>Capability Development Lead, CloudFirst</p><p class='tl-org'>Accenture</p><p class='tl-desc'>Enterprise capability development, engineering enablement, and culture transformation.</p></div>"
+            "<div class='tl-item'><p class='tl-period'>2018&#8211;2019</p><p class='tl-role'>Cloud Native Architecture Lead, Liquid Studio</p><p class='tl-org'>Accenture</p><p class='tl-desc'>Cloud-native prototyping and product shaping through rapid experimentation and modern engineering practices.</p></div>"
+            "<div class='tl-item'><p class='tl-period'>2009&#8211;2017</p><p class='tl-role'>Sr. Technology Architecture Manager, Financial Services</p><p class='tl-org'>Accenture</p><p class='tl-desc'>Financial services platform modernization and architecture at global scale.</p></div>"
+            "<div class='tl-item'><p class='tl-period'>2005&#8211;2009</p><p class='tl-role'>Technology Manager</p><p class='tl-org'>Accenture</p><p class='tl-desc'>Enterprise integration and solution architecture for large-scale telecom and enterprise platforms.</p></div>"
+            "<div class='tl-item'><p class='tl-period'>2000&#8211;2005</p><p class='tl-role'>Startups &amp; Consulting</p><p class='tl-org'>Cendian Corporation &#183; Wellfound Technology</p><p class='tl-desc'>Building B2B and supply-chain platforms using enterprise integration technologies.</p></div>"
+            "</div>"
+            "<div class='footer'>For the full resume, reach out: matthew.c.pugmire+MattGPT@gmail.com | linkedin.com/in/matt-pugmire</div>"
+            "</body></html>"
+        )
+        _escaped_doc = _export_html.replace("\\", "\\\\").replace("`", "\\`")
+        components.html(
+            f"""
+            <script>
+                var printWindow = window.open('', '_blank');
+                printWindow.document.write(`{_escaped_doc}`);
+                printWindow.document.close();
+                printWindow.print();
+            </script>
+            """,
+            height=0,
+        )
 
-    # Design Spec Link
-    st.markdown(
-        """
-<div class="deep-dive-card" style="margin-top: 2rem; margin-bottom: 2rem;">
-    <p style="margin: 0; font-size: 1rem; line-height: 1.6; text-align: center;">
-        I documented the entire product development process — from strategy through architecture to implementation.
-        <a href="https://mcpugmire1.github.io/mattgpt-design-spec/"
-           target="_blank"
-           rel="noopener noreferrer"
-           style="color: #8B5CF6; text-decoration: none; font-weight: 600; margin-left: 0.25rem; white-space: nowrap;">
-            View Design Specification →
-        </a>
-    </p>
-</div>
-
-        """,
-        unsafe_allow_html=True,
-    )
-
-    # CTA — See It In Action card (MATTGPT-068, May 27, 2026 wireframe
-    # amendment). The four sample-question prompts are rendered as st.button
-    # widgets DOM-nested INSIDE the card container. The st.container(key=...)
-    # wrapper takes the .cta-card visual styling (via the
-    # [class*='st-key-about_matt_cta_card'] CSS selector above) AND scopes
-    # the chip buttons as DOM children — true containment, not visual-only
-    # siblings. Click handlers go through on_chip_click
-    # (ui/components/category_cards.py) which sets seed_prompt +
-    # __ask_from_suggestion__ + active_tab="Ask MattGPT". Prompts come from
-    # ABOUT_MATT_SEED_QUESTIONS at module top.
-    with st.container(key="about_matt_cta_card"):
+    # =========================================================================
+    # 5. CORE COMPETENCIES (MATTGPT-093: "Agile at Scale" -> "Product delivery at scale")
+    # BDD: .competencies-grid .competency-card h4 (heading text).
+    # Dual-class grid + cards; h4 kept for BDD, prof-comp-name class styles it.
+    # prof-comp-desc replaces old bullet lists.
+    # No subtitle — wireframe has none.
+    # =========================================================================
+    with st.container(key="am_competencies"):
+        st.markdown(
+            '<p class="am-section-title prof-section-h">Core Competencies</p>',
+            unsafe_allow_html=True,
+        )
         st.markdown(
             """
-<h3 style="font-size: 28px; margin: 0 0 16px 0;">See It In Action</h3>
-<p style="line-height: 1.7; margin-bottom: 20px;">
-    This isn't just a portfolio showcase — <strong>Agy is a working AI assistant</strong> that can
-    answer detailed questions about my projects, methodologies, and outcomes.
-</p>
+<div class="competencies-grid prof-comp-grid">
+    <div class="competency-card prof-comp-card">
+        <h4 class="prof-comp-name">Product &amp; Discovery</h4>
+        <p class="prof-comp-desc">Discovery, framing, and prototyping that settle what to build before the build starts.</p>
+    </div>
+    <div class="competency-card prof-comp-card">
+        <h4 class="prof-comp-name">Modern Engineering</h4>
+        <p class="prof-comp-desc">Cloud-native and event-driven, quality engineered in from the first commit. TDD, pair programming, CI/CD.</p>
+    </div>
+    <div class="competency-card prof-comp-card">
+        <h4 class="prof-comp-name">Organization Building</h4>
+        <p class="prof-comp-desc">Engineering organizations and the operating model that scales them. Team Topologies, delivery rhythm, practices that outlast the org chart.</p>
+    </div>
+    <div class="competency-card prof-comp-card">
+        <h4 class="prof-comp-name">Enterprise Transformation</h4>
+        <p class="prof-comp-desc">Regulated enterprises moved from IT delivery to a product operating model, and the change holds.</p>
+    </div>
+    <div class="competency-card prof-comp-card">
+        <h4 class="prof-comp-name">People &amp; Culture</h4>
+        <p class="prof-comp-desc">Cross-functional teams built from zero, plus the reskilling and mentorship that keep them growing.</p>
+    </div>
+    <div class="competency-card prof-comp-card">
+        <h4 class="prof-comp-name">AI &amp; Emerging Tech</h4>
+        <p class="prof-comp-desc">RAG, vector search, and eval-driven development, built hands-on.</p>
+    </div>
+</div>
             """,
             unsafe_allow_html=True,
         )
-        for idx, question in enumerate(ABOUT_MATT_SEED_QUESTIONS):
-            st.button(
-                question,
-                key=f"about_matt_sample_q_{idx}",
-                on_click=on_chip_click,
-                args=(question,),
-                use_container_width=True,
-            )
 
     # =========================================================================
-    # 5. CORE COMPETENCIES
+    # 6. HOW I LEAD (MATTGPT-093: "Leadership Philosophy" -> "How I Lead",
+    #    4 locked value/claim pairs; no subtitle — wireframe has none)
+    # BDD: .am-section-title (heading), .philosophy-grid inner_text (card content).
+    # Grid: philosophy-grid (BDD) + prof-philosophy (visual, wireframe class).
+    # Cards: prof-phil-card. Content: prof-phil-h + prof-phil-p (<p> tags per wireframe).
     # =========================================================================
-    st.markdown(
-        '<h2 class="am-section-title">Core Competencies</h2>', unsafe_allow_html=True
-    )
-    st.markdown(
-        '<p class="am-section-subtitle">Technical expertise meets organizational transformation</p>',
-        unsafe_allow_html=True,
-    )
-
-    st.markdown(
-        """
-<div class="competencies-grid">
-    <div class="competency-card">
-        <div class="competency-card-accent"></div>
-        <h4>Product & Innovation</h4>
-        <ul>
-            <li>→ Lean Product Management</li>
-            <li>→ Hypothesis-Driven Development</li>
-            <li>→ OKRs & North Star Metrics</li>
-            <li>→ Product-Market Fit Validation</li>
-            <li>→ Design Thinking & Prototyping</li>
-        </ul>
+    with st.container(key="am_how_i_lead"):
+        st.markdown(
+            '<p class="am-section-title prof-section-h">How I Lead</p>',
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            """
+<div class="philosophy-grid prof-philosophy">
+    <div class="prof-phil-card">
+        <p class="prof-phil-h">Outcomes over output</p>
+        <p class="prof-phil-p">I measure a team by what it changes, not how much it produces.</p>
     </div>
-    <div class="competency-card">
-        <div class="competency-card-accent"></div>
-        <h4>Modern Engineering</h4>
-        <ul>
-            <li>→ Cloud-Native Microservices</li>
-            <li>→ Event-Driven Architecture</li>
-            <li>→ CI/CD & DevOps Practices</li>
-            <li>→ TDD/BDD & Extreme Programming</li>
-            <li>→ Platform Engineering</li>
-        </ul>
+    <div class="prof-phil-card">
+        <p class="prof-phil-h">Experimentation over certainty</p>
+        <p class="prof-phil-p">I trust what a prototype teaches me over what a plan promises.</p>
     </div>
-    <div class="competency-card">
-        <div class="competency-card-accent"></div>
-        <h4>Agile at Scale</h4>
-        <ul>
-            <li>→ SAFe, LeSS, Scrum@Scale</li>
-            <li>→ Team Topologies</li>
-            <li>→ Organizational Design</li>
-            <li>→ Servant Leadership</li>
-            <li>→ Continuous Improvement</li>
-        </ul>
+    <div class="prof-phil-card">
+        <p class="prof-phil-h">High-trust, sustainable teams</p>
+        <p class="prof-phil-p">I build teams where ten people do what twenty usually do, and can still do it next quarter.</p>
     </div>
-    <div class="competency-card">
-        <div class="competency-card-accent"></div>
-        <h4>Transformation Leadership</h4>
-        <ul>
-            <li>→ Change Management</li>
-            <li>→ Stakeholder Engagement</li>
-            <li>→ Executive Communication</li>
-            <li>→ Value Stream Mapping</li>
-            <li>→ Business Agility</li>
-        </ul>
-    </div>
-    <div class="competency-card">
-        <div class="competency-card-accent"></div>
-        <h4>Team Building</h4>
-        <ul>
-            <li>→ Talent Development & Coaching</li>
-            <li>→ Innovation Center Setup</li>
-            <li>→ Cross-Functional Collaboration</li>
-            <li>→ Performance Management</li>
-            <li>→ Culture Transformation</li>
-        </ul>
-    </div>
-    <div class="competency-card">
-        <div class="competency-card-accent"></div>
-        <h4>AI & Emerging Tech</h4>
-        <ul>
-            <li>→ GenAI Application Development</li>
-            <li>→ Vector Databases & RAG</li>
-            <li>→ LLM Integration (GPT-4, Claude)</li>
-            <li>→ Semantic Search & NLP</li>
-            <li>→ Python & Data Engineering</li>
-        </ul>
+    <div class="prof-phil-card">
+        <p class="prof-phil-h">Grow the people</p>
+        <p class="prof-phil-p">I develop people with the same discipline I bring to building systems.</p>
     </div>
 </div>
-        """,
-        unsafe_allow_html=True,
-    )
+            """,
+            unsafe_allow_html=True,
+        )
 
     # =========================================================================
-    # 6. LEADERSHIP PHILOSOPHY
+    # 7. CAREER TIMELINE (MATTGPT-093)
+    # BDD: .timeline .timeline-item (count=7), .timeline .timeline-year (period text),
+    # .timeline inner_text (Cendian/Wellfound/Liquid Studio/2023-2026 checks).
+    # Dual-class outer (timeline + prof-timeline) and items (timeline-item + prof-timeline-item).
+    # Period uses dual-class (timeline-year + prof-timeline-period); rest wireframe only.
+    # No subtitle — wireframe has none.
+    # Intentional divergence from wireframe: 7 entries vs 4. See CLAUDE.md.
     # =========================================================================
-    st.markdown(
-        '<h2 class="am-section-title">Leadership Philosophy</h2>',
-        unsafe_allow_html=True,
-    )
-    st.markdown(
-        '<p class="am-section-subtitle">How I approach transformation and team development</p>',
-        unsafe_allow_html=True,
-    )
-
-    st.markdown(
-        """
-<div class="philosophy-grid">
-    <div class="philosophy-card">
-        <h3>Outcomes Over Output</h3>
-        <p>
-            I don't measure success by velocity or features shipped. I measure it by business outcomes,
-            customer impact, and organizational capability built. Focus on what moves the needle.
-        </p>
+    with st.container(key="am_career_evolution"):
+        st.markdown(
+            '<p class="am-section-title prof-section-h">Career Evolution</p>',
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            """
+<div class="timeline prof-timeline">
+    <div class="timeline-item prof-timeline-item">
+        <p class="timeline-year prof-timeline-period">2023–2026</p>
+        <p class="prof-timeline-role">Sabbatical | Innovation &amp; Upskilling</p>
+        <p class="prof-timeline-org">Independent</p>
+        <p class="prof-timeline-desc">Sabbatical to recharge, refocus, and reskill. MattGPT is tangible proof of the work.</p>
     </div>
-    <div class="philosophy-card">
-        <h3>Experimentation Culture</h3>
-        <p>
-            Innovation requires safe-to-fail environments. I create spaces where teams can test hypotheses,
-            learn from failures fast, and iterate toward product-market fit. Data informs decisions.
-        </p>
+    <div class="timeline-item prof-timeline-item">
+        <p class="timeline-year prof-timeline-period">2019–2023</p>
+        <p class="prof-timeline-role">Director, Cloud Innovation Center</p>
+        <p class="prof-timeline-org">Accenture</p>
+        <p class="prof-timeline-desc">Launched Innovation Centers (150+ practitioners) • 30+ products • $100M+ in repeat business • 4x faster delivery.</p>
     </div>
-    <div class="philosophy-card">
-        <h3>Servant Leadership</h3>
-        <p>
-            My job is to remove blockers, amplify team voices, and create conditions for excellence.
-            The best ideas come from the people closest to the work. I ask questions, not give answers.
-        </p>
+    <div class="timeline-item prof-timeline-item">
+        <p class="timeline-year prof-timeline-period">2016–2023</p>
+        <p class="prof-timeline-role">Capability Development Lead, CloudFirst</p>
+        <p class="prof-timeline-org">Accenture</p>
+        <p class="prof-timeline-desc">Enterprise capability development, engineering enablement, and culture transformation.</p>
     </div>
-    <div class="philosophy-card">
-        <h3>Continuous Learning</h3>
-        <p>
-            Technology evolves fast. Organizations that don't invest in upskilling fall behind. I build
-            learning cultures through coaching, mentorship, and hands-on practice. Growth is strategic.
-        </p>
+    <div class="timeline-item prof-timeline-item">
+        <p class="timeline-year prof-timeline-period">2018–2019</p>
+        <p class="prof-timeline-role">Cloud Native Architecture Lead, Liquid Studio</p>
+        <p class="prof-timeline-org">Accenture</p>
+        <p class="prof-timeline-desc">Cloud-native prototyping and product shaping through rapid experimentation and modern engineering practices.</p>
+    </div>
+    <div class="timeline-item prof-timeline-item">
+        <p class="timeline-year prof-timeline-period">2009–2017</p>
+        <p class="prof-timeline-role">Sr. Technology Architecture Manager, Financial Services</p>
+        <p class="prof-timeline-org">Accenture</p>
+        <p class="prof-timeline-desc">Financial services platform modernization and architecture at global scale.</p>
+    </div>
+    <div class="timeline-item prof-timeline-item">
+        <p class="timeline-year prof-timeline-period">2005–2009</p>
+        <p class="prof-timeline-role">Technology Manager</p>
+        <p class="prof-timeline-org">Accenture</p>
+        <p class="prof-timeline-desc">Enterprise integration and solution architecture for large-scale telecom and enterprise platforms.</p>
+    </div>
+    <div class="timeline-item prof-timeline-item">
+        <p class="timeline-year prof-timeline-period">2000–2005</p>
+        <p class="prof-timeline-role">Startups &amp; Consulting</p>
+        <p class="prof-timeline-org">Cendian Corporation · Wellfound Technology</p>
+        <p class="prof-timeline-desc">Building B2B and supply-chain platforms using enterprise integration technologies.</p>
     </div>
 </div>
-        """,
-        unsafe_allow_html=True,
-    )
+            """,
+            unsafe_allow_html=True,
+        )
 
     # =========================================================================
     # FOOTER (imported from shared component)

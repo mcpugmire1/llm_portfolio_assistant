@@ -9,7 +9,7 @@ Feature: Role Match page
 
   Scenario: Role Match tab appears in navigation
     Given the user is on any page
-    Then "Role Match" appears in the navigation bar between "Ask MattGPT" and "About Matt"
+    Then "Role Match" appears in the navigation bar between "Ask Agy" and "My Profile"
 
   Scenario: Clicking Role Match tab navigates to the page
     Given the user is on any page
@@ -48,8 +48,8 @@ Feature: Role Match page
     And the legend includes a green ✓ swatch labeled "Strong match"
     And the legend includes an amber ~ swatch labeled "Partial"
     And the legend includes a red ✗ swatch labeled "Gap"
-    And the legend includes a 🔗 swatch labeled "= clickable story"
-    And the legend includes a green dot swatch labeled "= profile evidence"
+    And the legend includes a 🔗 swatch labeled "project evidence"
+    And the legend includes a green dot swatch labeled "verified skill"
 
   Scenario: Match results show required qualifications with status badges
     Given the user has submitted a job description
@@ -72,7 +72,7 @@ Feature: Role Match page
     Given the user has submitted a job description
     When the match results are displayed
     Then all qualifications are listed with individual match statuses
-    And no summary count, fit score, or recommendation is visible
+    And no fit score or recommendation is visible
 
   Scenario: Partial match shows gap explanation
     Given a requirement is assessed as partial match
@@ -451,3 +451,113 @@ Feature: Role Match page
     Given the user is on a device with viewport width less than 768px
     And results are displayed
     Then the action buttons are not visible
+
+  # Regression guard — Role Match mobile gate (broken 3x via CSS/JS changes to
+  # global_styles.py + app.py). Fixed by: key="screen_size_capture" + window.innerWidth.
+  # Uses the existing <1024px navigation step (375px catches real mobile, not just 1000px).
+  Scenario: Role Match shows mobile gate at 375px
+    Given the user is on a device with viewport width 375px
+    Then the page contains "Best experienced on desktop"
+    And the page contains "Role Match requires a wider screen to display the two-column layout."
+    And the textarea is not visible
+
+  # MATTGPT-067 — Input controls and post-result CTA
+
+  Scenario: Match button is disabled when the JD textarea is empty
+    Given I navigate to the Role Match page
+    When the JD textarea is empty
+    Then the "Match this role 🐾" button is disabled
+
+  Scenario: Match button enables when JD text is entered
+    Given I navigate to the Role Match page
+    When I type a job description into the textarea
+    Then the "Match this role 🐾" button is enabled
+
+  Scenario: Clear button is not visible when textarea is empty
+    Given I navigate to the Role Match page
+    Then no "Clear" button is visible
+
+  Scenario: Clear button is visible when textarea contains text
+    Given I navigate to the Role Match page
+    And the JD textarea contains text
+    Then a "Clear" button is visible
+
+  Scenario: Clicking clear empties the textarea and disables the match button
+    Given I navigate to the Role Match page
+    And the JD textarea contains text
+    When I click the "Clear" button
+    Then the JD textarea is empty
+    And the "Match this role 🐾" button is disabled
+
+  Scenario: No follow-up CTA is visible before submission
+    Given I navigate to the Role Match page
+    Then no follow-up CTA is visible
+
+  # MATTGPT-067 — 30-word guard
+
+  Scenario: Match button stays disabled below 30-word threshold
+    Given I navigate to the Role Match page
+    When I type fewer than 30 words into the JD textarea
+    Then the "Match this role 🐾" button is disabled
+
+  Scenario: Match button enables at 30-word threshold
+    Given I navigate to the Role Match page
+    When I type 30 or more words into the JD textarea
+    Then the "Match this role 🐾" button is enabled
+
+  # MATTGPT-067 — Summary block (DOM-presence only; logic covered by test_summary_block.py)
+
+  @slow
+  Scenario: Summary block renders between legend and requirements after match
+    Given I have submitted a job description and results are displayed
+    Then a section labeled "SUMMARY" is visible in the right panel
+    And the summary block appears above the first requirement section
+
+  @slow
+  Scenario: Summary counts line shows color-coded strong partial and gap tallies
+    Given I have submitted a job description and results are displayed
+    Then the summary counts line is visible
+
+  # MATTGPT-067 — Clear full reset
+
+  @slow
+  Scenario: Clicking Clear returns to State 1 including right panel and Sample JD link
+    Given I have submitted a job description and results are displayed
+    When I click "✕ Clear"
+    Then the JD textarea is empty
+    And the "Match this role 🐾" button is disabled
+    And the right panel shows "Agy will map each requirement to Matt's real project experience."
+    And the "✕ Clear" button is not visible
+    And the "Try an example →" link is visible
+
+  # MATTGPT-067 — Error state (extraction failure)
+
+  Scenario: Submitting a non-JD text shows extraction error with no summary and no CTA
+    Given I navigate to the Role Match page
+    When I type a 35-word non-JD placeholder text into the JD textarea
+    And I click "Match this role 🐾"
+    Then the right panel shows "Couldn't extract any requirements from this job description."
+    And no "SUMMARY" section is visible in the right panel
+    And no "Have questions about the results?" CTA is visible
+    And the button label reads "Match this role 🐾"
+
+  # MATTGPT-067 — Post-result CTA
+
+  @slow
+  Scenario: Post-result CTA renders after successful match
+    Given I have submitted a job description and results are displayed
+    Then a call-to-action reading "Have questions about the results? Ask Agy →" is visible
+
+  # MATTGPT-067 — Export button (content covered by test_summary_block.py)
+
+  @slow
+  Scenario: Export button is present after successful match
+    Given I have submitted a job description and results are displayed
+    Then an Export button is visible in the actions row
+
+  # MATTGPT-067 — Hero subtitle copy
+
+  @smoke
+  Scenario: Hero subtitle shows updated copy
+    Given I navigate to the Role Match page
+    Then the hero subtitle reads "Agy shows where Matt fits your role, and where he doesn't."

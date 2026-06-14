@@ -1,18 +1,42 @@
 # MattGPT Backlog
+<!-- last-backlog-sync: 6aed6b9 -->
 
 Work state for the MattGPT project. The matrix below is the scannable view. Detail blocks for each item follow, linked by ID. Completed items live in `CHANGELOG.md`. Architectural decisions live in `docs/ADR.md`. Current system state lives in `ARCHITECTURE.md`.
 
 ---
 
-## Value Prioritized Roadmap (updated 2026-05-28)
+## Value Prioritized Roadmap (updated 2026-06-14)
 
-**NOW** (suggested order of execution):
-1. **-087 + -092** — Hero code pass: CTA routing + seniority signal bundled (~2 hours, one commit)
-2. **-090** — Decline cleanly on comp / off-scope (30 min, one system-prompt edit)
-3. **-077 mitigation** — Query-side mitigation: strip "Matt" from embedded queries on technical-noun shapes (hours, not days; full hybrid retrieval lives in NEXT)
-4. **-094 probes** — CIC over-concentration + operational under-surfacing probes; parallel-runnable, read-only; informs NEXT content work
-5. **-088** — Role Match scorer alignment (loose dependency on -077 mitigation: do cleaner if you can, not wait until you can)
-6. **-097** — Career-intent refresh (active recruiter failure earns NOW slot)
+**→ Merge `feature/ui-redesign` → `main`** (production deploy — release gate cleared)
+
+**NOW** (post-merge):
+- **-077 mitigation** — Query-side mitigation: strip "Matt" from embedded queries on technical-noun shapes (hours, not days; full hybrid retrieval lives in NEXT)
+- **-094 probes** — CIC over-concentration + operational under-surfacing probes; parallel-runnable, read-only; informs NEXT content work
+- **-088** — Role Match scorer alignment (loose dependency on -077 mitigation: do cleaner if you can, not wait until you can)
+- **-097** — Career-intent refresh (active recruiter failure earns NOW slot)
+
+*Recently shipped (off NOW list):*
+- **MATTGPT-018** — Resolved June 2026. Page-transition Agy avatar flash. HTML `width`/`height` constraints on avatar `<img>` elements; `mousedown`+`capture:true` JS listener pre-hides before React rerun fires; mobile `link.onclick` inline hide; global `agiAvatarReveal` CSS animation as fallback. (`bda7ba8`, `3659173`)
+- **MATTGPT-066** — Resolved June 2026. Role Match sample JD cold-start affordance. Shipped as part of MATTGPT-067 bundle. (`6c39d8c`)
+- **MATTGPT-067** — Resolved June 2026. Role Match result panel + input polish. 30-word gate, Clear button, Sample JD, summary block, legend relabeling. 23/23 BDD, 30/30 unit. (`6c39d8c`, `ac3d3dd`, `a2d002b`)
+- **MATTGPT-113** — Resolved June 2026. Ask Agy mobile chip grid + header height. (`ff175e9`, `b7f88d5`)
+- **MATTGPT-114** — Resolved June 2026. Page header typography standardization. (`9658e02`)
+- **MATTGPT-108** — Resolved June 2026. Home category cards descriptive copy. (`ff6c788`)
+- **MATTGPT-116** — Resolved June 2026. Retired how_i_built.py standalone route (superseded by dialog). Removed ?route=how-i-built handler + elif render block from app.py; deleted standalone page; updated feature file (3 route scenarios removed, 5 dialog scenarios passing). Items 2+3 (viewport revert) resolved as no-op — revert prescription was wrong, test passing, mobile detection correct. (`9a55fbd`)
+- **MATTGPT-123** — Resolved June 2026. My Work mobile filter layout compaction. Industry/Capability inline label+dropdown; Client/Role/Domain 3-col grid, labels hidden, field names via `::before`; Reset as underlined text link; Filters toggle full-width. CSS-only (`global_styles.py`). 4/4 BDD passing (`40aeb8e`).
+- **MATTGPT-118** — Resolved June 2026. My Profile Copy snippet + Download PDF (referrer workflow). Delegated parentDoc listener + navigator.clipboard; hidden st.button bridge + window.open/print. 20/20 BDD passing (`983a86d`).
+- **MATTGPT-093** — Resolved June 2026. My Profile visual-language reconciliation. 19/19 BDD passing (`4bbdb26`).
+- **MATTGPT-098** — Shipped May 29, 2026. Explore Stories default state — exclude Professional Narrative + sort Start_Date desc.
+- **MATTGPT-101** — Shipped May 30, 2026. Why Agy? modal + "?" badge on Agy avatar.
+- **MATTGPT-102** — Shipped May 30, 2026. How I Built MattGPT — `@st.dialog` modal (replaces standalone page).
+- **MATTGPT-104** — Shipped May 30, 2026. Banking + Cross-Industry math reconciliation (post-Era counts aligned across all surfaces).
+- **MATTGPT-087 + MATTGPT-092** — Shipped May 29-30, 2026. Hero CTA inversion + scope/outcome anchor + stats restructure.
+- **MATTGPT-100** — Shipped May 30, 2026. Navigation label rename (Strategy B — 50+ files, BDD fixtures).
+- **MATTGPT-106** — Shipped May 31, 2026. Navbar desktop brand-left + space-between layout.
+- **MATTGPT-107** — Shipped May 31, 2026. Home category cards redesign + layout polish.
+- **MATTGPT-065** — Resolved June 9, 2026. Two-row permanent filter bar on My Work (`3015942`).
+- **MATTGPT-090** — Closed as Decided Against May 29, 2026.
+- **MATTGPT-103** — Closed as Decided Against May 30, 2026.
 
 **NEXT** (queued):
 1. **-015** — JPM Payments IQ differentiation (high-priority since March; upstream of operational surfacing)
@@ -20,7 +44,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 3. **-089** — Role Match location / work-model / availability parsing
 4. **-074** — Entity cluster forcing synthesis (depth side of CIC; pairs with -094 for over/under pattern)
 5. **-091 audit phase** — Does existing failure content surface on probe queries? Fold into -077/-094 or return Phase 3 write as LATER
-6. **-093** — About Matt strategic restructure toward one-pager direction (multi-week, strategically significant)
+6. **-120** — CLAUDE.md restructure (Critical Rules fast-reference block + rules-first format). Trigger: before next feature sprint after UI redesign deploy.
 
 (Everything else defaults to LATER.)
 
@@ -35,8 +59,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-015](#mattgpt-015) | JPM Payments IQ Differentiation | Open | High | Action | Mar 2026 |
 | [MATTGPT-016](#mattgpt-016) | Semantic Router — Wrong-Person Query Detection | Decided Against | High | Issue | Apr 2026 |
 | [MATTGPT-017](#mattgpt-017) | Wire skipped Role Match logging BDD scenarios (Playwright click + mocked Sheets write) | Open | Medium | Action | Apr 28, 2026 |
-| [MATTGPT-018](#mattgpt-018) | Page-Load Flicker | Open | Medium | Issue | Pre-Apr 2026 |
-| [MATTGPT-019](#mattgpt-019) | Story Count Copy — Replace "130+" with "Over 100" | Open | Low | Refactor | Pre-Apr 2026 |
+| [MATTGPT-018](#mattgpt-018) | Page-Load Flicker | Done | Medium | Issue | Pre-Apr 2026 |
 | [MATTGPT-020](#mattgpt-020) | Simplify backend_service.py | Decided Against | Medium | Refactor | Pre-Jan 2026 |
 | [MATTGPT-021](#mattgpt-021) | diversify_results() Pinning Bug | Open | Medium | Issue | Apr 2026 |
 | [MATTGPT-022](#mattgpt-022) | Data Quality Cleanup Journey Story | Open | Medium | Action | Mar 2026 |
@@ -66,13 +89,12 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-061](#mattgpt-061) | MattGPT portfolio story contaminating organizational leadership queries | Resolved | Medium | Issue | May 13, 2026 |
 | [MATTGPT-062](#mattgpt-062) | Semantic router cache silently uses stale embeddings when VALID_INTENTS changes | Open | Medium | Refactor | May 14, 2026 |
 | [MATTGPT-063](#mattgpt-063) | Wrong-person queries with names outside nonsense regex produce confused-context RAG answers | Open | Medium | Issue | May 14, 2026 |
-| [MATTGPT-064](#mattgpt-064) | Explore Stories — Table row hover/cursor doesn't apply to data cells (AgGrid selector fix) | Open | Low | Issue | May 15, 2026 |
-| [MATTGPT-065](#mattgpt-065) | Explore Stories — Polish bundle (filter UX, empty states, story details) | Open | Medium | Action | May 15, 2026 |
-| [MATTGPT-066](#mattgpt-066) | Role Match — Sample JD / "Try a sample role" cold-start affordance | Open | Medium | Action | May 15, 2026 |
-| [MATTGPT-067](#mattgpt-067) | Role Match — Result panel and input polish bundle | Open | Low | Action | May 15, 2026 |
+| [MATTGPT-065](#mattgpt-065) | Explore Stories — Polish bundle (filter UX, empty states, story details) | Resolved | Medium | Action | May 15, 2026 |
+| [MATTGPT-066](#mattgpt-066) | Role Match — Sample JD / "Try a sample role" cold-start affordance | Done | Medium | Action | May 15, 2026 |
+| [MATTGPT-067](#mattgpt-067) | Role Match — Result panel and input polish bundle | Done | High | Action | May 15, 2026 |
 | [MATTGPT-068](#mattgpt-068) | About Matt — Content polish bundle (clickable questions, code expander, DevOps card merge) | Done | Medium | Action | May 15, 2026 |
-| [MATTGPT-069](#mattgpt-069) | Home — Stats label contrast (light mode WCAG AA) | Open | Low | Issue | May 15, 2026 |
-| [MATTGPT-070](#mattgpt-070) | Ask MattGPT — Suggestion button cursor pointer | Open | Low | Issue | May 15, 2026 |
+| [MATTGPT-069](#mattgpt-069) | Home — Stats label contrast (light mode WCAG AA) | Done | Low | Issue | May 15, 2026 |
+| [MATTGPT-070](#mattgpt-070) | Ask MattGPT — Suggestion button cursor pointer | Decided Against | Low | Issue | May 15, 2026 |
 | [MATTGPT-071](#mattgpt-071) | Nonsense rejection banner — branch-aware copy + contextual chip sets | Done | Medium | Action | May 15, 2026 |
 | [MATTGPT-072](#mattgpt-072) | `generate_public_tags.py` — case-insensitive tag dedup | Open | Low | Refactor | May 16, 2026 |
 | [MATTGPT-073](#mattgpt-073) | `last_primary_client` session state produces order-dependent retrieval within multi-turn sessions | Resolved | High | Issue | May 18, 2026 |
@@ -89,18 +111,44 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-084](#mattgpt-084) | Ask MattGPT BDD scenarios — chip-click + low_confidence banner-render timing flakes under full-suite load | Open | Medium | Issue | May 23, 2026 |
 | [MATTGPT-085](#mattgpt-085) | `secrets.toml` `MATTGPT_PRIVATE_BYPASS_TOKEN` parity + dead `private_access_code` cleanup + doc drift | Open | Medium | Refactor | May 23, 2026 |
 | [MATTGPT-086](#mattgpt-086) | Query logger — add environment annotation column + filter dev/test traffic out of production analytics | Open | Low | Issue | May 23, 2026 |
-| [MATTGPT-087](#mattgpt-087) | Home hero — secondary CTA routing recruiter-intent visitors to Role Match | Open | High | Action | May 28, 2026 |
+| [MATTGPT-087](#mattgpt-087) | Home hero — recruiter-routing CTA to Role Match | Resolved | High | Action | May 28, 2026 |
 | [MATTGPT-088](#mattgpt-088) | Role Match scorer — align with Agy honesty (no Strong Match when chat would say no) | Open | High | Issue | May 28, 2026 |
 | [MATTGPT-089](#mattgpt-089) | Role Match — parse location, work-model, availability as distinct filter class | Open | High | Issue | May 28, 2026 |
-| [MATTGPT-090](#mattgpt-090) | System prompt — decline cleanly on comp / off-scope queries (no silent fallback) | Open | Medium | Action | May 28, 2026 |
+| [MATTGPT-090](#mattgpt-090) | System prompt — decline cleanly on comp / off-scope queries (no silent fallback) | Decided Against | Medium | Action | May 28, 2026 |
 | [MATTGPT-091](#mattgpt-091) | Add a credible failure story to the corpus (sibling to -022 / -078 pattern) | Open | Medium | Action | May 28, 2026 |
-| [MATTGPT-092](#mattgpt-092) | Hero — explicit seniority signal (supersedes May 15 design-call closure) | Open | Medium | Action | May 28, 2026 |
-| [MATTGPT-093](#mattgpt-093) | About Matt — strategic restructure (split / fold / reframe meta-question) | Open | Medium | Action | May 28, 2026 |
+| [MATTGPT-092](#mattgpt-092) | Hero — explicit seniority signal (supersedes May 15 design-call closure) | Resolved | Medium | Action | May 28, 2026 |
+| [MATTGPT-093](#mattgpt-093) | About Matt — strategic restructure (split / fold / reframe meta-question) | Resolved | Medium | Action | May 28, 2026 |
 | [MATTGPT-094](#mattgpt-094) | Retrieval concentration audit — CIC over-weighting + operational story under-surfacing (hypotheses to verify) | Open | High | Investigation | May 28, 2026 |
 | [MATTGPT-095](#mattgpt-095) | Anti-consulting bias in story framing — corpus reads "consulting" as default register when it shouldn't | Open | Medium | Action | May 28, 2026 |
 | [MATTGPT-096](#mattgpt-096) | Methodology context dropped during synthesis — TDD/BDD and ways-of-working substance gets compressed out of metric claims (hypothesis to verify) | Open | Medium | Issue | May 28, 2026 |
 | [MATTGPT-097](#mattgpt-097) | Career-intent framing refresh — corpus predates current role taxonomy; refresh framing AND tighten register | Open | Medium | Action | May 28, 2026 |
-| [MATTGPT-098](#mattgpt-098) | Explore Stories default state — exclude Professional Narrative + sort Start_Date desc (match Timeline behavior) | Open | Medium | Action | May 29, 2026 |
+| [MATTGPT-098](#mattgpt-098) | Explore Stories default state — exclude Professional Narrative + sort Start_Date desc (match Timeline behavior) | Done | Medium | Action | May 29, 2026 |
+| [MATTGPT-099](#mattgpt-099) | Role Match — assess and decide comp handling on JDs that include comp expectations | Open | Medium | Investigation + Action | May 29, 2026 |
+| [MATTGPT-100](#mattgpt-100) | Navigation labels — rename to Home / My Work / Ask Agy / Role Match / My Profile (wireframe-locked) | Done | Medium | Refactor | May 30, 2026 |
+| [MATTGPT-101](#mattgpt-101) | Why Agy? modal + "?" badge on Agy avatar (uniform placement) | Done | Medium | Action | May 30, 2026 |
+| [MATTGPT-102](#mattgpt-102) | How I Built MattGPT — `@st.dialog` modal (replaces standalone page; no back button, X to close) | Done | Medium | Action | May 30, 2026 |
+| [MATTGPT-103](#mattgpt-103) | Agy intro line — resolve "20+ years of work" inconsistency with stats bar (Years tile dropped) | Decided Against | Low | Refactor | May 30, 2026 |
+| [MATTGPT-104](#mattgpt-104) | Banking + Cross-Industry landing pages — math reconciliation bug (33 vs 32 vs 48 vs 57 inconsistency) | Done | Medium | Issue | May 30, 2026 |
+| [MATTGPT-106](#mattgpt-106) | Navbar desktop layout — add MattGPT brand element, restructure to space-between (align with mobile + wireframe) | Done | Medium | Action | May 30, 2026 |
+| [MATTGPT-107](#mattgpt-107) | Home category cards redesign — unify card treatment, 3-column grid, compact content (align with wireframe) | Done | Medium | Action | May 31, 2026 |
+| [MATTGPT-108](#mattgpt-108) | Home category cards — add capability-based counts to the 4 non-industry cards (resolve asymmetry from -107 / -104) | Done | Medium | Action | June 1, 2026 |
+| [MATTGPT-109](#mattgpt-109) | mattgpt-design-spec Jekyll site — sync UI refresh changes (nav labels, navbar, cards, How I Built, How Agy Searches, Why Agy modal, user journeys) | Open | High | Action | June 1, 2026 |
+| [MATTGPT-111](#mattgpt-111) | My Work / Banking / Cross-Industry — back-link not dark-mode compliant (white pill on dark bg) | Done | Low | Issue | June 3, 2026 |
+| [MATTGPT-112](#mattgpt-112) | How Agy Searches dialog — too tall for mobile viewport + content not scrolled to top on open (375/430px) | Done | Low | Issue | June 3, 2026 |
+| [MATTGPT-113](#mattgpt-113) | Ask Agy landing — mobile polish pass (seed question chips + header height + button placement) | Done | Medium | Action | June 4, 2026 |
+| [MATTGPT-114](#mattgpt-114) | Page header typography — standardize title + subtitle via shared CSS classes across all 7 surfaces | Done | Medium | Refactor | June 5, 2026 |
+| [MATTGPT-115](#mattgpt-115) | Lock icon — browser console warning: password field not in native form (st.popover portal breaks form containment) | Open | Low | Issue | June 6, 2026 |
+| [MATTGPT-117](#mattgpt-117) | How I Built dialog — BDD coverage for "See It In Action" prompt buttons and Ask Agy routing | Resolved | Medium | Action | June 7, 2026 |
+| [MATTGPT-118](#mattgpt-118) | My Profile — Copy snippet + Download PDF buttons (referrer workflow) | Done | Medium | Action | June 8, 2026 |
+| [MATTGPT-120](#mattgpt-120) | CLAUDE.md restructure — Critical Rules fast-reference block + rules-first format throughout | Open | Medium | Action | June 9, 2026 |
+| [MATTGPT-121](#mattgpt-121) | Why Agy dialog — mobile layout fix (375px viewport); title font-size override pending DevTools selector confirmation | Open | Medium | Bug | June 9, 2026 |
+| [MATTGPT-122](#mattgpt-122) | My Work — Cards view BDD timing: test_view_switching_preserves_open_story_detail fails (components.html iframe listener not attached at click time) | Open | Low | Issue | June 10, 2026 |
+| [MATTGPT-125](#mattgpt-125) | CLAUDE.md targeted fixes — confirmed bugs + confirmed gaps from June 12 audit | Open | Medium | Action | June 12, 2026 |
+| [MATTGPT-126](#mattgpt-126) | Ask Agy landing — input border invisible on page load (CSS injection race) | Open | Low | Issue | June 12, 2026 |
+| [MATTGPT-127](#mattgpt-127) | Replace hardcoded `ASSESSMENT_MODEL` in `jd_assessor.py` with `get_conf()` env var pattern | Open | Low | Refactor | June 12, 2026 |
+| [MATTGPT-128](#mattgpt-128) | Displayed-source faithfulness — source cards must substantiate the claims in the answer | Open | High | Issue | June 14, 2026 |
+| [MATTGPT-129](#mattgpt-129) | Content elaboration per era — expand 5 under-documented operational stories | Open | High | Action | June 14, 2026 |
+| [MATTGPT-130](#mattgpt-130) | "practitioners" canonical everywhere — UI, eval golden set, corpus re-embed in lockstep | Open | Medium | Action | June 14, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -164,6 +212,38 @@ Each detail block uses these fields. Not every field is required for every item.
 - Without it, the lock icon renders, the popover opens, but submission is a silent no-op (fail-closed by design — production state must not leak).
 - Set via Streamlit Cloud dashboard → Settings → Secrets, NOT committed to repo.
 - Local dev uses inline env var or shell export (e.g. `MATTGPT_PRIVATE_BYPASS_TOKEN=test-bypass-token streamlit run app.py`); production uses the Streamlit Cloud secret manager.
+
+**Private overlay spec update (June 11, 2026)**
+- Wireframe v3 separates empty state (-066) and public populated state (-067) as distinct frames. Private state frame (-012) is preserved and labeled. The following supplements the Phase 4 spec with private overlay content logic.
+
+**Evaluation grid — open design decision**
+- Current wireframe: 2×2 grid, 4 equal-weight tiles (Overall fit / Recommendation / Comp alignment / Work mode).
+- Problem: Overall fit and Recommendation are decisions. Comp alignment and Work mode are prerequisites. Equal visual weight misrepresents the hierarchy.
+- Options: (A) Keep 2×2 as-is. (B) 2-tile top row (Overall fit + Recommendation) + logistics row (Comp alignment + Work mode) at reduced visual weight. Option B communicates the decision/prerequisite split.
+- **Decision needed before implementation.**
+
+**Strategic fit notes — content logic**
+- Purpose: "so what" interpretation layer above the raw match data — why this role is or isn't a fit beyond the requirement checklist.
+- Content categories: domain alignment signal (depth vs adjacent); scale/pattern parallels (where Matt's proof points map to role needs); gap contextualization (explainable vs blocking vs irrelevant).
+- Inputs: match results + Opportunity Filter dimensions + How I Work and Lead positioning docs.
+- Output shape: 2–4 prose bullets per assessment, generated per JD (not hardcoded).
+
+**Action items — content logic**
+- Purpose: concrete next steps if Matt decides to pursue. Decision support, not assessment.
+- Content categories: channel recommendation (direct / network / referral); prep recommendations (which stories to lead with, which materials to create); network activation (connections at company from Notion target list); corrective actions (which asset type to fix per the six-type framework when a gap is addressable).
+- Inputs: match results + company/role metadata + network data (Notion) + corrective actions framework.
+- Output shape: 2–4 actionable bullets per assessment, generated per JD.
+
+**Open: LLM-generated vs rule-based**
+- Strategic fit notes → fully LLM-generated (requires synthesis across match data + positioning docs).
+- Action items → partially rule-based: channel + network activation rule-based from Notion data; prep recommendations LLM-augmented.
+- **Decision needed before implementation.**
+
+**Public vs private state contract**
+- Public (recruiter) sees: results header, legend, summary block, per-requirement cards with evidence chips and gap notes, post-result "Ask Agy a follow-up" CTA.
+- Private (Matt authenticated) sees: everything in public, plus "My evaluation" block above summary: evaluation grid tiles, strategic fit notes, action items. Purple-tinted block with "PRIVATE · MATT ONLY" badge.
+- Comp alignment tile → private only. Verdict/recommendation (Apply/Consider/Pass) → private only.
+- Lock icon: `ti-lock` (closed) in public state; `ti-lock-open` (open) in private state with purple-tinted active state.
 
 ---
 
@@ -237,62 +317,6 @@ Each detail block uses these fields. Not every field is required for every item.
   4. Assert payload structure matches the BDD scenario's contract (event type, session id, action label, etc.).
 - **Affects:** 6 skipped tests in `test_role_match_logging.py`. Test coverage for analytics correctness (chip click → log payload, action button → log payload, session id correlation across event types).
 - **Logged:** April 28, 2026 / **Reframed:** May 14, 2026
-
----
-
-### MATTGPT-018
-**Page-Load Flicker**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Issue
-- **Issue:** Streamlit rerun cycle on first page load causes a visible blank/gray frame between two valid renders. Pre-existing in committed code, confirmed via Performance recording (CLS = 0, so it's a paint issue, not a layout shift).
-- **Root cause:** `streamlit_js_eval` iframe creates a second rerun on first load. The DOM clears between consecutive reruns, producing the flash.
-- **Failed fixes (April 28):** Removing `st.rerun()` after screen-size capture caused a navbar→hero gap regression (iframe stays in DOM). Adding CSS background+min-height to `stAppViewContainer` caused the same gap.
-- **Next approach:** Move `streamlit_js_eval` call to bottom of `app.py` (after all page rendering). Iframe would render below footer instead of between navbar and hero.
-- **Additional symptom captured May 18, 2026 — Explore Stories specifically:**
-  - On navigation to Explore Stories, the **page header renders correctly** ("Project Stories & Insights" with the gradient banner), but the **content area briefly renders the entire Ask MattGPT intro** — "Ask MattGPT" subheader, the large Agy-with-headphones avatar, "Hi, I'm Agy 🐾", suggestion chips — before the actual AgGrid hydrates. Captured in Chrome DevTools Performance recording.
-  - **Diagnosis:** This is NOT a "large Agy icon placeholder" as I initially described. It's the **wrong page's content rendering briefly under the right page's header.** The Ask MattGPT page's render output is appearing in Explore Stories' content area during a transient state, then getting replaced by the correct AgGrid + filter UI.
-  - **Likely cause:** Streamlit's page-switching state management. When `active_tab` changes from "Ask MattGPT" → "Explore Stories", the navbar/header renders the new page header on the first rerun, but the previous page's content body is still mounted in the DOM until the new page's content fully renders. Possible mechanisms:
-    - `active_tab` toggle triggers a rerun where header re-renders but content body is mid-transition
-    - The Explore Stories page's slow-to-hydrate components (AgGrid JS bootstrap, Pinecone-related fetches) leave a render gap
-    - Streamlit's cached content from the previous page may not be cleared until the new page's first paint is complete
-  - **Investigation entry points:**
-    - `app.py` page routing logic — how does it decide which page to render on `active_tab` change?
-    - The navigation pattern in `category_cards.py:on_chip_click()` and similar cross-page seed_prompt navigation — these set `active_tab` and `st.rerun()`. The rerun may produce the transient state.
-    - Compare against Streamlit's "single page app" page-switch idioms — there are known patterns for cleanly clearing content between page changes.
-  - **Production evidence:** Chrome DevTools Performance recording captured May 18, 2026 immediately after the MATTGPT-073/-061 deploy. Reproducible (intermittent) by navigating from Ask MattGPT → Explore Stories.
-  - **Core Web Vitals from DevTools Performance Insights (May 18, 2026):**
-    - **CLS = 0.69** — "Poor" range (Core Web Vitals threshold for "Poor" is > 0.25). Confirms the wrong-content flash is a real layout shift, not a paint artifact. The original MATTGPT-018 framing said "CLS = 0, so it's a paint issue" — that was true for the blank-frame symptom but NOT for this new wrong-page-content symptom. The two symptoms have different mechanisms.
-    - **LCP = 46ms** — excellent (target < 2500ms). Rules out slow loading as root cause; the page renders fast but renders wrong content during the transition.
-    - **INP** — not measured in this recording (no interaction during capture).
-  - **DevTools timeline observations:**
-    - **30+ cascading CSS animations** during the transition window: scrollbar-color (12 instances), opacity (8 instances), border-left-color / border-top-color / border-bottom-color / border-right-color, background-color. Pattern indicates the entire page tree is re-mounting rather than just the changed pieces.
-    - **Named Streamlit animation `animation-1wgitoe`** firing as part of the page swap — this is Streamlit's auto-generated fade-in class for new content.
-  - **Related insights surfaced (separate issues, not blocking the flicker fix):**
-    - Image delivery: ~1.4 MB potential savings (apy_explore_stories.png, apy_avatar.png larger than needed)
-    - 3rd-party telemetry to webhooks.fivetran.com (not relevant to the flicker)
-  - **Three distinct visual artifacts captured during the same Ask MattGPT → Explore Stories transition (May 18, 2026):**
-    1. **Wrong-page-content flash** — Ask MattGPT intro (Agy avatar, "Hi, I'm Agy 🐾", suggestion chips) renders under the "Project Stories & Insights" Explore Stories header. Captured in DevTools Performance recording frame.
-    2. **Blank-AgGrid state** — Explore Stories page header + filter UI ("Find stories", Industry/Capability dropdowns, Advanced Filters, "Showing 1-20 of 113 projects") render correctly, but the AgGrid content area is empty white space. Purple gradient placeholders visible at the bottom. AgGrid JS bootstrap hasn't completed yet.
-    3. **Agy icon above hero banner** — a small Agy avatar renders transiently at the very top of the page, above the navbar/hero banner. Different location and size than the avatars rendered in normal page layouts.
-  - **Interpretation:** All three are facets of the same page-transition mechanism (page-tree re-mount + cascading animations) but represent different snapshot moments in the render sequence. A fix targeting the root cause (transition state management) should resolve all three.
-- **Logged:** Pre-April 2026, investigated April 28, 2026 (blank-frame symptom); supplemented May 18, 2026 (Explore Stories Agy-icon-flash symptom)
-
----
-
-### MATTGPT-019
-**Story Count Copy — Replace "130+" with "Over 100"**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Refactor
-- **Issue:** Code references "130+" stories in multiple places (hero copy, status bar, prompt cards, loading messages, About Matt narrative). Actual corpus is currently 113 stories (May 14, 2026 measurement). The exact number drifts as stories are added/removed, but no copy gets updated to match.
-- **Audience reality:** Recruiters don't count stories — they scan and click. "Over 100" reads the same as "113" or "130+" to a human visitor; all three signal "lots of stories." The exact figure invites scrutiny it doesn't need.
-- **Fix (May 15, 2026 — simpler than original framing):** Find-and-replace every "130+" with "Over 100" (or "100+" where the format fits — e.g., "100+ stories indexed"). No runtime calculation, no JSONL load, no constant to maintain. Always accurate regardless of corpus size, no sync issue across pages.
-  - Rationale for *not* doing runtime calc: deriving from JSONL at load time is a real engineering cost (caching, refresh, cross-page sync) for zero audience value. The drift problem is solved entirely by removing the false precision from the copy.
-- **Scope:** Find every "130+" reference across `ui/`, prompts, and any other source-of-truth copy. ~5-10 locations expected.
-- **Logged:** Pre-April 2026 / **Rationalized:** May 14, 2026 / **Simplified:** May 15, 2026
 
 ---
 
@@ -1034,75 +1058,37 @@ Chip 3 wording "How does Matt manage resistance when leading enterprise transfor
 
 ---
 
-### MATTGPT-064
-**Explore Stories — Table row hover/cursor doesn't apply to data cells (AgGrid selector fix)**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Issue
-- **Issue:** `global_styles.py:372-384` already defines `cursor: pointer !important` and hover background/border styling for `.ag-theme-streamlit .ag-row`. In production the cursor changes on column headers but **not** on data cells. Diagnosis (May 15, 2026): the rule never wins because (a) `.ag-cell` sits on top of `.ag-row` and the cursor is determined by the topmost element under the pointer, and (b) AgGrid manages hover state via a `.ag-row-hover` class rather than the browser `:hover` pseudo-class — `:hover` on `.ag-row` may never fire reliably because cells consume the pointer events.
-- **Fix:** Selector adjustment, NOT specificity escalation. The existing `!important` declarations are fine.
-  - Change cursor target from `.ag-theme-streamlit .ag-row` to `.ag-theme-streamlit .ag-row .ag-cell`.
-  - Change hover selector from `.ag-theme-streamlit .ag-row:hover` to `.ag-theme-streamlit .ag-row.ag-row-hover`.
-- **Effort:** ~5-10 lines in `global_styles.py:372-384`.
-- **Audience impact:** High-intent recruiter scanning the Table view to find a specific story may not realize rows are clickable until they accidentally click one. Original UX agent flagged this as a "missing CSS" problem; actual root cause is "existing CSS doesn't apply to data cells" — different bug, different fix.
-- **Logged:** May 15, 2026
-
----
-
 ### MATTGPT-065
 **Explore Stories — Polish bundle (filter UX, empty states, story details)**
 
-- **Status:** Open
+- **Status:** Resolved (June 9, 2026)
+- **Shipped:** Two-row permanent filter bar on `feature/ui-redesign` (commit `3015942`). Row 1: Search / Industry / Capability; Row 2: Client / Role / Domain + Reset, always visible on desktop, CSS-hidden on mobile via `[class*="st-key-r2_row"] { display: none !important }` at `max-width: 767px`. MATTGPT-119 logged for mobile Filters ▾ toggle.
+- **Deferred (no new ticket):** Remaining polish items below were always secondary to the filter bar. Small, low-risk, slot in whenever convenient.
 - **Priority:** Medium
 - **Type:** Action
 - **Items (all in `ui/pages/explore_stories.py` unless noted):**
-  - **Reset Filters conditional render** — currently always visible (line 1890). Compute `any_filter_active = bool(F["q"]) or F["industry"] or F["capability"] or F["domains"] or F["clients"] or F["roles"] ...` and wrap render in `if any_filter_active:`. ~3 lines.
+
+  **Filter bar — two-row redesign (PoC validated June 2026, replaces Advanced Filters toggle) — SHIPPED:**
+  - **Desktop:** Row 1 (Search | Industry | Capability) + Row 2 (Client | Role | Domain | Reset) always visible; no "▸ Advanced Filters" toggle.
+  - **Mobile:** All filters behind a single "Filters" toggle.
+  - **Row 1 CSS target:** Row 1 selectboxes render at Streamlit default (`1rem`); normalize with `[class*="st-key-{key}"] [data-baseweb="select"] span, div { font-size: 1rem !important }` if they appear larger than the text input.
+  - **Row 2 wrapper:** `st.container(key="r2_row")` — CSS applies `border-top: 0.5px solid var(--border-color); padding-top: 8px` on the container's first child div. No separate `<hr>` or div element for the separator.
+  - **Row 2 dropdowns:** `label_visibility="collapsed"` in Python; CSS for compact size: `[data-baseweb="select"] > div:first-child { padding: 5px 10px !important; font-size: 12px !important; min-height: 0 !important; }`. Also hide label elements via `display: none !important` on `label` and `[data-testid="stWidgetLabel"]` — labels are what makes row 2 tall, not the dropdowns themselves.
+  - **Reset:** `st.markdown('<span class="es-reset">Reset</span>')` + off-screen `st.button("", key="r2_reset_hidden")`. Wire via delegated `parentDoc.addEventListener('click', ...)` checking `e.target.closest('.es-reset')` — same pattern as `how_i_built_dialog.py`'s `.hib-cta-prompt` chips, NOT `element.onclick` (per-element onclick is killed by React DOM reconciliation on rerun). CSS: `.es-reset { font-size: 12px; color: var(--text-secondary); cursor: pointer; }`.
+  - **CSS key note:** `label_visibility="collapsed"` alone is not sufficient — the label element still takes vertical space. Must also hide via CSS.
+
+  **Remaining polish items (unchanged from original scope):**
   - **Empty zero-results state — Table view** — Cards view has Clear filters button (lines 2417-2421), Table view text-only (lines 2122-2132). Copy Cards-view pattern to Table block. ~5 lines.
   - **Card truncation "Read more →" affordance** — `.card-desc` uses CSS ellipsis (lines 2466-2476), no visual cue. Append `<span class="card-read-more">Read more →</span>` + small CSS rule. ~3 lines.
   - **Back-to-list from story detail (Table view only)** — Cards view has "✕ Close"; Table view inline detail has no close button (deselecting works by clicking row again, not obvious). Add "← Close detail" at top of Table-view detail. ~5-10 lines.
-  - **Advanced Filters label rename** — currently `"▾ Advanced Filters"` / `"▸ Advanced Filters"` (lines 1882-1883). Rename to `"Filter by Client, Role & Domain"`. ~2 lines.
   - **Export tooltip** — `ui/components/action_buttons.py:154` Export button has no tooltip. Add `title="Export as PDF"`. ~1 line.
   - **Story title truncation tooltip** — table cell titles truncate without reveal. Add `title="{full_title}"` attribute on the cell. ~1 line.
-- **Out of scope:** Table row hover/cursor (filed as MATTGPT-064 — different layer, different fix). SHOW dropdown / pagination separation (won't fix per May 15 decision — per-view design is intentional).
-- **Verify-first item:** SHOW per-page resetting (UX agent claim that selection resets across renders). Code at line 2202 uses `st.session_state.get("page_size_select", ...)` — likely already persists. 30-second eye-test before fixing; may be a non-issue.
-- **Effort:** ~25-50 lines total, single file, all low-risk. Natural single-PR bundle.
-- **Logged:** May 15, 2026
 
----
-
-### MATTGPT-066
-**Role Match — Sample JD / "Try a sample role" cold-start affordance**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Action
-- **Issue:** Empty Role Match page (`role_match.py:1294-1300`) shows only a hint paragraph + textarea with placeholder `"Paste job description here..."`. A recruiter arriving speculatively — without a specific JD in hand — has nothing to engage with. Highest-impact cold-start fix on this page per May 15 UX assessment.
-- **Fix:** Add 1-3 sample JD buttons below the textarea. Clicking pre-fills the textarea via prefilter pattern (set `st.session_state["role_match_jd_input"]` BEFORE the textarea renders to avoid `StreamlitAPIException`).
-- **Implementation notes:**
-  - Define sample JD strings as a module-level constant (e.g., `SAMPLE_JDS = {"Director of Platform Engineering": "...", ...}`). Drift-prone if inlined per CLAUDE.md "no hardcoded enums."
-  - Use prefilter pattern (see `banking_landing.py` → `explore_stories.py` for cross-state reference).
-  - Optional alternative: widget-key versioning if the prefilter approach hits Streamlit state issues.
-- **Effort:** ~30-50 lines, single file. Risk: medium — widget state ordering is the gotcha.
-- **Audience impact:** Direct conversion improvement for speculative recruiter visits (Director/VP recruiters who arrive to "see what the tool does" before they have a specific role). Removes the empty-state barrier for first-time visitors.
-- **Logged:** May 15, 2026
-
----
-
-### MATTGPT-067
-**Role Match — Result panel and input polish bundle**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Action
-- **Items (all in `ui/pages/role_match.py`):**
-  - **Loading message** — `render_thinking_indicator()` at line 1330 is called bare → uses random dog-themed phrases from `THINKING_MESSAGES`. Pass specific message: `render_thinking_indicator(message="Agy is reviewing over 100 stories…")`. Function already accepts a `message` parameter (see `thinking_indicator.py:39`). ~1 line. Aligns with MATTGPT-019 "Over 100" copy standard.
-  - **Post-result follow-up CTA** — `_render_results_panel` ends after the Preferred section (line 628) with no follow-up affordance. Add "Ask Agy a follow-up →" link/button that navigates to Ask MattGPT. ~10-15 lines.
-  - **Disabled state on empty textarea** — submit button (line 1303) is always enabled; current behavior shows `st.warning("Paste a job description first.")` on empty click (line 1324). Replace with `disabled=not jd_text.strip()` (pattern at `ui/pages/ask_mattgpt/landing_view.py:225-231`). ~2 lines.
-  - **Clear textarea button** — no native Streamlit clear control. Add a small "Clear" button rendered BEFORE the textarea; on click pops `role_match_jd_input` from session_state. Must render before textarea per Streamlit widget state rules. ~5-10 lines.
-- **Story count copy:** Use "over 100" per MATTGPT-019's "Over 100" standard, not "130+".
-- **Effort:** ~20-30 lines total, single file. Natural pair with MATTGPT-066 (same area, same audience).
-- **Logged:** May 15, 2026
+- **Decided against:** Inline accordion (render_story_detail beneath clicked row). Requires replacing AgGrid — Master/Detail only supports sub-grids or static HTML, not Streamlit components. Cost too high for the UX gain. Current pattern (detail panel at bottom of page) stays.
+- **Out of scope:** Table row hover/cursor (MATTGPT-064). SHOW dropdown / pagination separation (won't fix per May 15 decision).
+- **Wireframe:** Updated with My Work filter bar + Table + Cards + Timeline specs (June 2026 session).
+- **Effort:** Filter bar ~1-2 hours raw (CSS dial-in against explore_stories.py's full CSS system with DevTools). Polish items ~25-50 lines total.
+- **Logged:** May 15, 2026 | **Updated:** June 2026 (two-row filter bar approved via PoC)
 
 ---
 
@@ -1171,12 +1157,13 @@ Chip 3 wording "How does Matt manage resistance when leading enterprise transfor
 ### MATTGPT-070
 **Ask MattGPT — Suggestion button cursor pointer**
 
-- **Status:** Open
+- **Status:** Decided Against — Not Reproducible (June 9, 2026)
 - **Priority:** Low
 - **Type:** Issue
 - **Issue:** The 6 suggestion buttons on the Ask MattGPT landing page (`ui/pages/ask_mattgpt/landing_view.py:97-135`) are real `st.button(type="secondary")` calls. The CSS rule at `ui/pages/ask_mattgpt/styles.py:288-309` styles them as cards (border, background, padding, hover background) but **does not declare `cursor: pointer`**. Adjacent buttons in the same file DO declare it explicitly (lines 443, 1290, 1399), so it's not being relied upon to inherit from Streamlit defaults. Live testing (May 15, 2026) confirms the pointer does not change on hover — cards appear interactive (purple text, border) but the cursor stays as the default arrow.
 - **Audience impact:** First-time visitor cannot visually confirm the cards are clickable until they actually click one. Cheap trust erosion at the first interaction moment.
 - **Fix:** Add `cursor: pointer !important;` to the existing `button[key^="suggested_"]` rule at lines 288-309. ~1 line.
+- **Closed June 9, 2026 — not reproducible.** DevTools inspection confirmed all 6 buttons already compute `cursor: pointer` from Streamlit's base stylesheet. Root cause: `button[key^="suggested_"]` is a dead selector — Streamlit renders the `key=` param as a class on the container (`.st-key-suggested_0`), not as an HTML attribute on the `<button>` element. The entire rule block at `styles.py:288-309` matches 0 elements in the live DOM. No fix needed; cursor is correct via Streamlit's own CSS.
 - **Out of scope (closed per May 15 assessment):** Input field below the fold (the 6 suggestion buttons are themselves real CTAs that submit queries — input is the secondary path, defensible as-is); status bar developer-facing copy (design call for a technical-leaning portfolio); conversation export/share (already deferred to React migration per `conversation_helpers.py:470` TODO).
 - **Logged:** May 15, 2026
 
@@ -1843,15 +1830,16 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 ---
 
 ### MATTGPT-087
-**Home hero — secondary CTA routing recruiter-intent visitors to Role Match**
+**Home hero — recruiter-routing CTA to Role Match**
 
-- **Status:** Open
+- **Status:** Resolved (June 2026) — Green commit `2076cb4`. Role Match is primary CTA, Ask Agy demoted to secondary, Explore Stories CTA removed from hero.
 - **Priority:** High
 - **Type:** Action
 - **Issue:** Home page hero currently routes all visitors to "Ask Agy" as the primary CTA, with Explore Stories as secondary. Recruiter persona testing (May 27, 2026) showed that recruiters triaging at 90 seconds per profile completely missed Role Match — even though Role Match would have done ~70 sec of the 90-sec job for them. Role Match is buried as the fourth nav item with no visual weight, despite being the surface that actually serves the recruiter's placement-decision job.
 - **Audience impact:** Direct conversion loss. Recruiters bounce or revert to LinkedIn-only sourcing because they never encounter the tool built specifically for their workflow.
 - **Evidence:** Recruiter persona, verbatim: *"The biggest finding from the session isn't about Agy or Role Match individually. It's that the site has a routing problem. A recruiter lands on the homepage and the most prominent CTA is 'Ask Agy' — which is the wrong first surface for the recruiter job. Role Match is buried as the fourth nav item with no visual weight, and it's the surface that actually serves the placement decision."*
-- **Fix:** Add a tertiary CTA in the hero, alongside existing "Ask Agy" (primary) and "Explore Stories" (secondary). Proposed label: *"Recruiting for a role? Match it →"* — verb-led, names the recruiter's actual job, routes to Role Match. Keep visual weight below the primary Ask Agy CTA to avoid distracting other audiences.
+- **Fix (CTA structure locked from May 29, 2026 wireframe):** Hero carries two CTAs — **Role Match as the primary CTA**, label *"Recruiting for a role? Match it →"* (verb-led, names the recruiter's job, routes to Role Match), and **Ask Agy as the secondary CTA** (*"Want to dig deeper? Ask Agy"*). **No Explore Stories CTA in the hero** — Explore is reached via the top nav ("My Work"). The label *"Recruiting for a role? Match it →"* is locked from the wireframe (not a proposal).
+- **Supersedes:** the May 28, 2026 "tertiary CTA, weight below the primary Ask Agy" framing is retired. The May 29 wireframe inverts it — recruiter routing is the **primary** CTA, not a tertiary one, and there is no Explore Stories CTA in the hero.
 - **Effort:** ~1 hour. Single change in `ui/components/hero.py` CTA section.
 - **Cross-references:**
   - MATTGPT-066 — Role Match cold-start affordance (complements: addresses what happens once on Role Match without a JD; -087 addresses how recruiter gets there in the first place)
@@ -1908,10 +1896,11 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 ### MATTGPT-090
 **System prompt — decline cleanly on comp / off-scope queries (no silent fallback)**
 
-- **Status:** Open
+- **Status:** Decided Against (May 29, 2026)
 - **Priority:** Medium
 - **Type:** Action
-- **Issue:** When Agy is asked something Matt shouldn't answer publicly (e.g., comp expectation), it currently produces a soft non-answer rather than a clean decline. Recruiter persona example: asked target role + comp + geo, got 4 paragraphs of narrative — comp went **silent**, relocation got a *"the story does not provide specific details… however, his focus on the right org fit suggests he might consider relocation"* (a dressed-up guess). The silent failure mode is worse than an honest decline because the recruiter can't tell whether the data is missing or being withheld.
+- **Decided Against (May 29, 2026):** Production behavior already handles this cleanly. The `personal` intent family in `services/semantic_router.py:192-209` includes salary canonical phrases (*"What's Matt's salary"*, *"How much does Matt make"*) alongside age/identity/etc., and produces the warm-decline pivot (*"🐾 I'm focused on Matt's professional experience"*). Production-verified May 29, 2026 during wireframe review — the silent-fallback failure mode described in the original Issue does not reproduce. The ticket's premise that comp needs a *different* decline copy than age/identity (because comp IS legitimately answered elsewhere) is theoretically defensible but didn't survive the production check — the existing warm pivot is sufficient. **The remaining asymmetry** splits into two tickets: MATTGPT-089 (parse location / work-model / availability as a distinct filter class — explicitly excludes comp) and **MATTGPT-099** (assess and decide Role Match's comp handling on JDs that include comp expectations — different fix path because comp can't be matched against profile data, only declined). The earlier framing that pointed all of the asymmetry at -089 was wrong; -089's body explicitly says *"Skip comp — see MATTGPT-090 for separate handling,"* so a separate ticket was needed once -090 itself was closed.
+- **Issue (original framing — superseded):** When Agy is asked something Matt shouldn't answer publicly (e.g., comp expectation), it currently produces a soft non-answer rather than a clean decline. Recruiter persona example: asked target role + comp + geo, got 4 paragraphs of narrative — comp went **silent**, relocation got a *"the story does not provide specific details… however, his focus on the right org fit suggests he might consider relocation"* (a dressed-up guess). The silent failure mode is worse than an honest decline because the recruiter can't tell whether the data is missing or being withheld.
 - **Audience impact:** Recruiter persona, verbatim: *"For a recruiter this is the single biggest miss. I cannot pitch Matt to a hiring manager without a comp anchor; I'll burn a screening call to get it... The bot's failure mode there is the real finding: it should decline cleanly ('Matt handles comp conversations directly — reach out') instead of going silent and letting the recruiter guess whether the data is missing or being withheld."*
 - **Fix:** System prompt addition (`prompts.py` or wherever Agy's primary system instruction lives) covering:
   - **Comp:** Decline with a clear redirect to direct conversation. Suggested: *"Matt handles compensation conversations directly. Reach out at [contact link]."*
@@ -1965,18 +1954,17 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 ### MATTGPT-092
 **Hero — explicit seniority signal (supersedes May 15 design-call closure)**
 
-- **Status:** Open
+- **Status:** Resolved (June 2026) — satisfied by My Profile Signals panel (MATTGPT-093 work). "LEVEL: Senior leader" is the top-left signal, first thing a recruiter sees. Matches the locked principle: scope anchor, not a title chip. Better surface than the hero for this signal.
 - **Priority:** Medium
 - **Type:** Action
 - **Issue:** Hero copy *"Hi, I'm Matt Pugmire / Interview me before you interview me / I build products, platforms, and teams"* does not anchor Matt at a specific leadership level. A recruiter triaging in 5 seconds cannot tell whether he's an IC architect, a Director, a VP, or an SVP. The supporting headline on LinkedIn (*"Engineering Leader | Builds Engineering Organizations from Zero | Enterprise Platform Modernization | AI"*) has the same problem — 4 buzzwords stacked with no level anchor.
 - **Audience impact:** Recruiter persona, verbatim: *"4 buzzwords stacked, no anchor... 'Engineering Leader' could be Director, VP, SVP, CTO. 'From Zero' reads consultancy/services, not in-house product engineering. 'Enterprise Platform Modernization' reads consulting again. 'AI' reads bolted on. I cannot place him on a level in 5 seconds."*
 - **Why this reopens a closed decision:** May 15, 2026 UX assessment closed "explicit seniority signal at hero" as a design call: *"recruiters arriving from LinkedIn have context, stats bar reinforces 20+ years."* That assumption was contradicted by direct evidence from a recruiter persona triage. The closure was made without persona testing data; this ticket reopens with that data.
-- **Fix shape (design call, not locked):** Add a one-line seniority + scope anchor near the hero — could be:
-  - Sub-headline: *"20+ years building and scaling engineering organizations — Director-level leadership at Accenture's Cloud Innovation Center, 0→150+ engineers, $100M+ practice revenue."*
-  - Or a tagline beneath the name: *"Director-level engineering leader. Built Accenture's Cloud Innovation Center 0→150."*
-  - Or a level chip near the avatar: *"Director / VP Engineering."*
-
-  Any of these gives the 5-second recruiter triage an immediate level anchor without sacrificing the interview-metaphor framing. Specific wording: design call, but the principle of explicit-level-signal is the locked decision.
+- **Fix shape (principle locked May 29, 2026 — scope/outcome anchor, NOT a title chip):** Add a scope/outcome anchor in the hero. Do **not** add a level chip or concrete title claim. The recruiter "can't place in 5 seconds" finding is solved by narrowing the range through scope (org built, tenure, function), not by declaring Director-vs-VP — Matt's actual target taxonomy is broader (VP / Head of Engineering / Director of Platform Engineering / Field CTO / AI Enablement Lead / Internal AI or Cloud Innovation Center leadership), and naming two titles forecloses the rest.
+  - **Prose-block copy (locked):** *"In active search for a role where building the engineering organization, establishing the culture, and delivering results are part of the same job."* The load-bearing clause *"are part of the same job"* is the positioning claim — it signals builder-operator (vs strategy-only) without naming a level. Replaces the earlier wireframe placeholder *"currently in active search for VP and Head of Engineering roles"* which had the title trap.
+  - **Stats "Level" tile (apply same principle, not locked copy):** No concrete title chips like *"Director · VP target"*. Options that satisfy the principle: *"Senior leader"* (function), *"20+ years"* (tenure), *"0→150 scope"* (outcome). Pick one; all three solve the recruiter finding without the title trap.
+  - **Subtitle:** *"Senior engineering leader"* (already in wireframe) is fine — it's one notch sharper than the LinkedIn *"Engineering Leader"* the recruiter persona flagged as too vague, but still range-friendly.
+  - **Earlier "three options" framing retired:** Original ticket body listed sub-headline / tagline-beneath-name / level-chip-near-avatar as design options. The level-chip option is now explicitly out. The principle (scope/outcome anchor) supersedes the option list.
 - **Effort:** Small (~1 hour for any of the above options).
 - **Cross-references:**
   - May 15, 2026 closure inside MATTGPT-068 detail block — this ticket supersedes that closure
@@ -1988,7 +1976,7 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 ### MATTGPT-093
 **About Matt — strategic restructure (split / fold / reframe meta-question)**
 
-- **Status:** Open — strategic question, not a polish ticket
+- **Status:** Resolved (June 2026) — My Profile visual-language reconciliation shipped at commit `4bbdb26`. Green: 19/19 BDD scenarios passing.
 - **Priority:** Medium (not Urgent — MATTGPT-068 polish + dim fix shipped May 28; this is the longer-arc question that follows)
 - **Type:** Action / Enhancement
 - **Issue:** About Matt is competing with itself. The page tries to be both (a) deep narrative for the engaged reader who wants the full 3,000-word story, and (b) a conversion surface for the skeptic / decision-maker who needs proof-of-value in 5 seconds. Those audiences are at opposite ends of the funnel and the current single-page structure compromises both.
@@ -2185,4 +2173,580 @@ BDD scenarios in `tests/bdd/features/ask_mattgpt.feature` reference these consta
 - **Cross-references:**
   - `ui/components/timeline_view.py:42` — existing `EXCLUDED_ERA` pattern to mirror
   - MATTGPT-065 — polish bundle (consider folding this in if -065 hasn't shipped yet, or ship standalone if -065 is already scoped)
+  - **MATTGPT-104 depends on this ticket.** -098 must ship first to establish post-Era as the convention on Explore Stories; -104 then brings landing hero/stats + Home card meta into alignment. Shipping -104 first would create a worse interim state (Home shows 32, Explore Stories shows 33 for the same filter). See -104 detail block + NOW roadmap rationale.
 - **Logged:** May 29, 2026
+- **Dependency note added:** May 31, 2026
+
+---
+
+### MATTGPT-099
+**Role Match — assess and decide comp handling on JDs that include comp expectations**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Investigation + Action
+- **Issue:** Role Match's JD parser currently has no defined behavior for JDs that include comp expectations (e.g., *"Salary: $200-280K base + equity"*). Likely current behavior is silent drop (consistent with how location / work-model / availability are silently dropped per MATTGPT-089's findings), but this is unverified — could also be hallucinated match, surfaced as a gap, or treated as a qualification requiring an answer. No ticket previously owned this — MATTGPT-089 explicitly excluded comp (*"Skip comp — see MATTGPT-090 for separate handling"*), and MATTGPT-090 (closed Decided Against May 29, 2026) only covered the chatbot-side comp decline. The Role Match-side gap fell between the two tickets.
+- **Why this is its own ticket (not folded into -089):** Comp can't be **matched** against profile data — only **declined** — because Matt doesn't disclose comp publicly (per the Personal Intent Family decision codified in `services/semantic_router.py:192-209`). Location / work-model / availability (the -089 scope) can match against profile data (Atlanta + relocation openness from `data/matt_profile.json` or footer copy). Different UX shape, different fix path.
+- **Working direction (May 29, 2026 — exact language TBD):** Surface comp as a recognized JD requirement with a non-disclosure treatment — e.g., *"Not assessed publicly — direct conversation"* — rather than silently dropping it (which produces the same recruiter confusion as the chat-side silent fallback that drove the original -090 framing). Exact copy and result-panel placement are open design calls.
+- **Phased scope:**
+  - **Phase 1 — Audit current behavior:** Paste 3-5 JDs that include comp into Role Match. Capture exactly what happens: silently dropped, hallucinated match, surfaced as gap, or other. Document in a probe results note.
+  - **Phase 2 — Design call:** Pick the non-disclosure pattern. Options to consider: (a) surface-with-note in the Match results panel (treating comp like location/work-model with a "not publicly assessed" label); (b) route to chat where Personal Intent Family handles the decline; (c) inline note in the qualifications list without a dedicated tile; (d) something else. Cross-surface consistency matters — whatever pattern lands should align with how chat declines comp (warm pivot, not silent).
+  - **Phase 3 — Implementation:** Small parser extension + result panel addition once design lands. Likely similar scope to -089 (small, scoped change in the Role Match JD parser + result rendering).
+- **Audience impact:** Recruiter persona finding (May 27, 2026) called out comp as *"the single biggest miss"* on the chat side. Now closed there (-090 Decided Against). But the Role Match side has the same recruiter sitting there with the same expectation — paste a JD, get a complete answer to "can we hire him." Silent drop on comp on Role Match reintroduces the same recruiter-confusion failure mode that the chat side now correctly avoids.
+- **Effort:** Phase 1 audit: ~30 min. Phase 2 design call: short conversation. Phase 3 implementation: ~1-2 hours.
+- **Cross-references:**
+  - MATTGPT-089 — sibling JD-parser ticket (location / work-model / availability); -089 explicitly excludes comp, -099 owns it
+  - MATTGPT-090 — Decided Against, but its closure note points here for the Role Match-side gap; consistency with `services/semantic_router.py:192-209` is the cross-surface anchor
+  - MATTGPT-088 — Role Match scorer honesty discipline (the "no Strong Match when chat would say no" principle applies here too: Role Match shouldn't silently disclose what chat declines)
+- **Logged:** May 29, 2026
+
+---
+
+### MATTGPT-100
+**Navigation labels — rename to Home / My Work / Ask Agy / Role Match / My Profile (wireframe-locked)**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Refactor
+- **Issue:** Current navigation labels (Home / Explore Stories / Ask MattGPT / Role Match / About Matt) do not match the wireframe-locked labels (Home / **My Work** / **Ask Agy** / Role Match / **My Profile**). The new labels were locked during the May 29, 2026 design pass and reflect the recruiter-framing direction: *"My Work"* reads as portfolio scope (not a generic verb), *"Ask Agy"* centers on the assistant's brand identity (per Why Agy modal work), *"My Profile"* matches recruiter conventions (LinkedIn-shaped framing).
+- **Why now:** Other wireframe-driven work (Why Agy modal, How I Built deep-link surface) routes from these labels. Renaming late risks broken cross-surface links and stale routing references.
+- **Fix:** Mechanical find-and-replace across:
+  - Primary nav config / `app.py` tab definitions
+  - `ui/components/navbar.py` (if labels are defined there)
+  - Any hardcoded label strings in landing pages or modals that reference old names
+  - BDD test fixtures that assert nav-label text (e.g., `tests/bdd/features/home.feature` and any `home_*.feature` or `nav_*.feature` that match on labels)
+  - Any session-state values keyed on tab names (`active_tab` values must update if they encode the label text)
+- **Effort:** Small (~30-60 min). Mechanical but touches multiple files; verification needs a clickthrough on all 5 nav items + any cross-surface routing.
+- **Cross-references:**
+  - MATTGPT-093 — About Matt strategic restructure. -100 is JUST the label rename; -093's structural decision (split / fold / reframe) is independent.
+  - MATTGPT-101 — Why Agy modal (the "Ask Agy" rename anchors the assistant's brand identity that the modal explains)
+- **Logged:** May 30, 2026
+
+---
+
+### MATTGPT-101
+**Why Agy? modal + "?" badge on Agy avatar (uniform placement)**
+
+- **Status:** Done — shipped on feature/ui-redesign branch. `why_agy_dialog.py` implements `@st.dialog("Hi, I'm Agy 🐾")`. Badge + hidden-trigger wired across all surfaces: hero (Home), header (Ask Agy), landing body (Ask Agy), banking header, cross-industry header, My Work header, Role Match header. BDD coverage in `tests/bdd/features/why_agy_dialog.feature` + `test_why_agy_dialog.py`. BACKLOG updated June 8, 2026.
+- **Priority:** Medium
+- **Type:** Action
+- **Issue:** Wireframe lock (May 29, 2026) introduces a brand-identity modal that answers *"Why is the assistant called Agy?"* — Plott Hound origin + breed-to-RAG mapping. Modal is triggered by a *"?"* badge placed on Agy's avatar wherever the avatar appears (Home, Ask Agy Landing, Ask Agy Conversation, Banking, Cross-Industry).
+- **Why bundled (modal + badge in one ticket):** The badge IS the modal's trigger. Splitting them creates a half-shipped state — badge with nowhere to go, or modal with no entry point. Single ticket keeps the entry-to-content pair atomic.
+- **Locked content (confirmed June 1-2, 2026 PoC):**
+  - Same image + copy as the "Why Agy?" block in `ui/pages/how_i_built.py` (Matt + Agy illustrated image, Plott Hound origin paragraph, italic closing line)
+  - Body: *"I'm named for Matt's Plott Hound. Plott Hounds are bred for tracking: determined, loyal, hard to shake. Those same traits define how I work: I track down the right stories from 100+ projects across 20+ years, hold onto the trail when the question gets tricky, and don't pretend to know what isn't in the corpus."*
+  - Italicized companion line: *"It felt right to keep his name part of the work we loved doing together."*
+  - Footer link: *"Curious how I was built? Read the technical deep-dive →"* → routes to How I Built MattGPT surface (MATTGPT-102)
+  - **"130+"** updated to **"100+"** per MATTGPT-019 cross-cutting decision
+- **Implementation pattern (decided June 1-2, 2026):**
+  - Use **`@st.dialog`** — native Streamlit 1.50 centered overlay. Closes via X button, Escape key, or backdrop click.
+  - Trigger: hidden `st.button` + JS bridge (same as `ask_mattgpt_header.py:539-585`). Badge click → JS fires hidden button → session flag → `st.rerun()` → dialog opens.
+  - Image: reuse `AgyMattCartoon-Transparent.png` already in `how_i_built.py`
+  - **Footer link to How I Built:** `st.button("Curious how I was built? Read the technical deep-dive →")` at the bottom of the dialog. On click: `show_why_agy = False`, `show_how_i_built = True`, `st.rerun()`. Sequential dialog pattern — `elif` not `if` in the rendering block (proven in `poc_badge.py` June 2, 2026). Ship behavior first, polish button styling (CSS override to remove default border/bg) on first visual review.
+  - **Session state rendering pattern (critical — must use elif):**
+    ```python
+    if st.session_state.show_why_agy:
+        why_agy_dialog()
+    elif st.session_state.show_how_i_built:
+        how_i_built_dialog()
+    ```
+    Two `if` statements causes `StreamlitAPIException: Only one dialog is allowed to be opened at the same time`. `elif` prevents both flags being true on the same script run.
+- **Badge design (decided June 2, 2026):** Option B — italic *i*, 16×16px dark circle, white border. Reads as "about/learn more" rather than help-seeking "?". CSS: `font-style: italic; font-family: Georgia, serif; font-weight: 700; font-size: 9px; color: white;`
+- **Wire badge across surfaces — desktop vs mobile (decided June 2, 2026):**
+  - **Body/hero avatars (Home hero, Ask Agy Landing body):** Badge on all viewports — large standalone avatars, tappable at any size. Badge reads correctly at desktop and mobile.
+  - **Header avatars (Ask Agy, Banking, Cross-Industry):** Badge on desktop only. On mobile the header avatar is a ~30px compact brand mark — badge reads as visual noise, tap area too small.
+  - **Mobile nav header avatar:** No badge. Make it tappable (cursor pointer signals interactivity). Users who saw the badge on the body avatar know the avatar opens Why Agy. No hamburger menu entry needed — body avatar is the discovery path on mobile.
+- **Ask Agy Landing note:** Landing has an inline "Why Agy?" section (static body content). Badge on header avatar coexists intentionally — different moments. Do NOT remove the inline section.
+- **Effort:** Small-medium (~2-3 hours raw). New component + badge CSS + wiring across surfaces + mobile handling.
+- **Cross-references:**
+  - MATTGPT-102 — How I Built MattGPT (footer link opens this modal sequentially)
+  - MATTGPT-110 — How Agy Searches (sibling `@st.dialog`; same session flag + elif pattern)
+  - MATTGPT-019 — Story count copy ("100+" already applied)
+- **Logged:** May 30, 2026. Implementation pattern + mobile approach locked June 2, 2026.
+
+---
+
+### MATTGPT-102
+**How I Built MattGPT — `@st.dialog` modal (pattern finalized June 2, 2026)**
+
+- **Status:** Open (existing `ui/pages/how_i_built.py` standalone page to be replaced by a `@st.dialog` component)
+- **Priority:** Medium
+- **Type:** Action
+- **Pattern decision (June 2, 2026 PoC — `poc_how_i_built_modal.py`):** How I Built is a `@st.dialog`, NOT a standalone page. Same pattern as Why Agy (MATTGPT-101) and How Agy Searches (MATTGPT-110). X / Escape / backdrop closes — no back button, no routing. The standalone page approach was wrong; a page with no nav and no back button strands the user. Modal with X is consistent and clean. PoC confirmed content scrolls cleanly at `width="large"`.
+- **Content structure (PoC'd and approved June 2, 2026):**
+  1. Subtitle: *"A technical deep-dive into the system architecture behind this portfolio"*
+  2. **The Problem** — static intro card
+  3. **Tech Stack** — 6-item grid
+  4. **System Architecture Flow** — 5-step build-time data lifecycle diagram
+  5. **Per-query Runtime Pipeline** — stepped component (numbered purple circles, vertical spine, 3 bullets per stage). Replaces old "Secret Sauce" code block. Content: Filters noisy input → Detects intent → Retrieves stories → Refuses weak matches → Synthesizes response
+  6. **Detail cards** (2-col grid): Data Pipeline, Embeddings Strategy, CI/CD Pipeline, RAG with GPT-4o, Frontend (full-width). 5-Stage RAG Pipeline card removed — covered by stepped component. Cards self-contained (no dedup).
+  7. **CTA row** (2-col): "View the source" → GitHub repo + "Read the design spec" → Jekyll spec. Intro: *"See it for yourself — the proof is in the code and the process."* Repo first (CTO-first ordering).
+- **Why Agy block** — NOT in this modal. Lives in Why Agy modal (MATTGPT-101) only.
+- **No back button** — modal closes with X / Escape / backdrop.
+- **Implementation:**
+  - Create `ui/components/how_i_built_modal.py` with `@st.dialog("How I Built MattGPT", width="large")`
+  - CSS: hardcoded light values throughout (no CSS vars — avoids dark/light mix inside dialog)
+  - Delete `ui/pages/how_i_built.py` (standalone page superseded)
+  - Remove `?route=how-i-built`, `?nav=`, `?from=` handlers from `app.py`
+  - Remove `SECONDARY_SURFACES` / `How I Built` entry from `app.py` navbar suppression
+  - Remove `how_i_built_from` + `_deeplink_route` session state keys from `app.py`
+  - Remove `How I Built` branch from `app.py` routing (`elif active_tab == "How I Built"`)
+  - Wire entry points via `st.button` setting `show_how_i_built = True` + `st.rerun()`
+- **Entry points** (all pending their tickets):
+  - Why Agy modal footer `st.button` (MATTGPT-101)
+  - Ask Agy Landing "Curious how I was built?" `st.button` (Ask Agy refresh)
+  - Profile signals panel (Profile v2)
+- **Effort:** ~2-3 hours. New modal component + app.py cleanup + entry point wiring.
+- **Cross-references:**
+  - MATTGPT-101 — Why Agy modal (sibling; footer link triggers this modal)
+  - MATTGPT-110 — How Agy Searches (sibling; bridge link "See how I built it →" triggers this modal)
+  - MATTGPT-109 — Jekyll spec sync (wireframe section 8 now modal treatment, not page)
+- **Logged:** May 30, 2026. Modal pattern finalized June 2, 2026.
+
+---
+
+### MATTGPT-103
+**Agy intro line — resolve "20+ years of work" inconsistency with stats bar (Years tile dropped)**
+
+- **Status:** Decided Against (May 30, 2026)
+- **Priority:** Low
+- **Type:** Refactor
+- **Decided Against (May 30, 2026):** The "inconsistency" framing was wrong. The stats bar and the Agy intro line are different surfaces doing different jobs. The stats bar is a credentialing surface (recruiter 5-second scan) where the anti-bias play matters most — that's why the Years tile was dropped in MATTGPT-092. The Agy intro line is grounding-the-AI-assistant copy — it tells the user that Agy has a real corpus of career experience to draw from. The "20+ years of work" token there reads as *corpus scope* (how much data the AI has), not as *personal positioning* (how old the candidate is). The anti-bias play that drove the Years tile drop doesn't transfer to a surface doing different work. Closing without a code change; the line stays as-is in `ui/components/hero.py:174`.
+- **Earlier framing (superseded):** Home hero Agy intro line currently reads *"That's Agy, my Plott Hound and AI assistant, ready to track down insights from 20+ years of work."* The *"20+ years"* signal is the same one that was dropped from the stats bar's Years tile (May 29, 2026, MATTGPT-092) for ageism + non-positioning reasons. Leaving the years number in the Agy intro partially undoes that mitigation.
+- **Decision (open — three working options):**
+  1. **Drop the number:** *"That's Agy, my Plott Hound and AI assistant, ready to track down insights from across Matt's career."*
+  2. **Swap to project count + sector breadth:** *"That's Agy, my Plott Hound and AI assistant, ready to track down insights from 100+ projects across financial services and enterprise platforms."* (Also aligns with MATTGPT-019's "100+" standardization.)
+  3. **Leave as-is** — read the line as functional/corpus scope (telling the user how big Agy's data set is) rather than personal positioning. The years here describe the data, not Matt's age.
+- **Fix:** Once decision lands, one-line copy change in `ui/components/hero.py`.
+- **Effort:** Trivial (~5 min once decision lands).
+- **Cross-references:**
+  - MATTGPT-019 — Story count copy. Option (b) would align the Agy intro with the broader find/replace pass.
+  - MATTGPT-092 — Hero seniority signal. -092 established the principle that the Years signal was dropped from positioning surfaces; -103 is the consistency check on the Agy intro line.
+  - MATTGPT-101 — Why Agy modal locked content also references "20+ years" — whatever -103 decides should propagate to the modal copy.
+- **Logged:** May 30, 2026
+
+---
+
+### MATTGPT-104
+**Banking + Cross-Industry landing pages — math reconciliation bug (33 vs 32 vs 48 vs 57 inconsistency)**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Issue
+- **Blocked by:** **MATTGPT-098** (Explore Stories default state — exclude Professional Narrative). Sequencing rationale: -098 establishes post-Era as the standing convention on Explore Stories (Timeline + landing card grids already use it). -104's reconciliation target IS the post-Era count, so -104 must ship after -098 to keep cross-surface navigation consistent. Shipping -104 first would create a new bug: Home shows 32, Explore Stories still shows 33 for the same Industry filter.
+- **Issue:** During the May 29, 2026 wireframe pass, project/story counts on the Banking landing page displayed inconsistent numbers across different rendering points (observed: 33 vs 32 vs 48 vs 57). Similar inconsistency observed on the Cross-Industry landing. Root cause is a bug in the dynamic-generation code that produces these counts, not a corpus tagging issue or wireframe specification gap (Matt's call during the wireframe review).
+- **Why a separate ticket (not folded into MATTGPT-065):** MATTGPT-065 is scoped specifically to Explore Stories polish (filter UX, empty states, story details). Banking + Cross-Industry landing pages are different surfaces with their own count-generation logic and dynamic story-rendering paths. The earlier framing during the May 29 wireframe pass that this would fold into -065 was wrong.
+- **Audience impact:** Recruiters land on the Banking page expecting to see Matt's banking work. Inconsistent counts read as data-quality issues — undermines the polish that the rest of the site projects. *"Why does the page say 33 projects in one place and 57 in another?"* is the kind of thing a hiring manager flags on a call.
+- **Phase 1 audit (complete — May 31, 2026):** All 4 displayed numbers trace to 2 filter regimes; no mystery values, no hardcoded counts.
+
+  | Filter | Banking | Cross-Industry |
+  |---|---|---|
+  | `Industry == X` (raw) | **33** | **57** |
+  | `Industry == X` + `Era != "Leadership & Professional Narrative"` | **32** | **48** |
+
+  Delta = narrative stories per industry (1 Banking, 9 Cross-Industry). `utils/landing_cards.py:53-59` applies the post-Era filter to card aggregation; the landing hero/stats use a plain industry filter. Detailed render-point map:
+
+  | Surface | File | Value | Source |
+  |---|---|---|---|
+  | Banking hero subtitle + stats bar | `banking_landing.py:74, 87` | 33 | `total_projects = len(banking_stories)` at line 32 |
+  | Banking "Browse N" subtitle + per-card counts | `banking_landing.py:521, 548` | 32 | `browseable_total = sum(c["count"] for c in cards)` at line 513 |
+  | Cross-Industry hero subtitle + stats bar | `cross_industry_landing.py:66, 79` | 57 | `total_projects = len(cross_industry_stories)` at line 29 |
+  | Cross-Industry "Browse N" subtitle + per-card counts | `cross_industry_landing.py:503` | 48 | `browseable_total = sum(c["count"] for c in cards)` at line 495 |
+  | Home card meta (post-MATTGPT-107) | `category_cards.py` | 33 / 57 | `len(banking_stories)` / `len(cross_industry_stories)` |
+  | Explore Stories filtered by `Industry=X` | `explore_stories.py` | 33 / 57 (today) → 32 / 48 (post-098) | raw industry filter |
+
+- **Phase 2 fix (after -098 ships):** Align landing hero/stats + Home card meta to post-Era counts (32/48). Touch points: `banking_landing.py` (line 32 source change), `cross_industry_landing.py` (line 29 source change), `category_cards.py` (Home card meta dynamic counts switch to post-Era). ~30-60 min raw. Landing subtitle copy stays as-is ("Browse 32 banking projects..."). Final state: every project-count surface displays the same number per industry.
+- **Effort:** Small-medium (Phase 1 done; Phase 2 ~30-60 min including verification across both surfaces).
+- **Cross-references:**
+  - **MATTGPT-098 (blocker)** — must ship first; see Blocked-by note above.
+  - MATTGPT-065 — Explore Stories polish bundle (sibling polish work but different surface; this ticket explicitly does NOT fold into -065)
+  - MATTGPT-019 — Story count copy (different concern — that's about hardcoded "130+"; this is about dynamic counts on landing pages)
+- **Logged:** May 30, 2026
+
+---
+
+### MATTGPT-106
+**Navbar desktop layout — add MattGPT brand element, restructure to space-between (align with mobile + wireframe)**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Issue:** Desktop navbar currently distributes 5 nav items evenly across the full width (`space-evenly`) with no brand element on the left. The May 29, 2026 wireframe and the existing mobile navbar both use the conventional brand-left + nav-right (`space-between`) pattern. Desktop is the outlier — it's missing the persistent brand identity anchor that the mobile header provides, and it doesn't match the wireframe.
+- **Fix (3 specific changes per visual diff):**
+  1. **Brand element on left:** text "MattGPT" or text + small Agy avatar (matching mobile header structure)
+  2. **Layout shift:** change from `justify-content: space-evenly` to `space-between`, with brand left and 5 nav items grouped right
+  3. **Column widths:** current CSS forces all columns to 20%. Brand column needs ~25-30%; the 5 nav cols split the remaining width. Cleaner option: render brand as HTML/markdown outside the column grid and keep the 5 nav cols evenly distributed within their share of the bar
+- **Audience impact:** Persistent brand anchor on every desktop view; conventional layout matches recruiter/CTO/referrer mental model from every other site they visit; brings desktop into structural alignment with mobile.
+- **Effort:** Small (~1-2 hours). CSS layout work + brand-element render block. BDD scope: brand element renders, 5 nav items still render right, no regression to existing nav-click routing.
+- **Cross-references:**
+  - **MATTGPT-100** — Nav label rename (shipped); -106 is the layout-shape pair that didn't fit in -100's mechanical-rename scope
+  - **MATTGPT-101** — Why Agy modal + "?" badge on Agy avatar. If the brand element includes the Agy avatar, the badge placement may need coordination with -101's design. May want to ship -106 before -101, or coordinate the avatar treatment in one pass.
+- **Logged:** May 30, 2026
+
+---
+
+### MATTGPT-107
+**Home category cards redesign — unify card treatment, 3-column grid, compact content (align with wireframe)**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Issue:** Home page category cards section was missed in the May 30, 2026 wireframe-driven ticket inventory. Production currently shows: 2-column grid, top 2 cards (Banking + Cross-Industry) with purple gradient + white text, remaining 4 with light bg, taller cards (~5 lines of content) with inline buttons + italic example-question lines. Wireframe (lines 76-85 of `MATTGPT_WIREFRAMES.html`) specs: 3-column grid, unified light-bg treatment across all 6 cards, compact cards (~3 lines of content), card itself as click target (no inline buttons, no example-question lines).
+- **Delta from production to wireframe (per the spec analysis):**
+
+  | Item | Production now | Wireframe spec |
+  |---|---|---|
+  | Columns | 2 | 3 |
+  | Top 2 cards | Purple gradient, white text | Same as other 4 (unified light bg) |
+  | Card content | Icon + title + description + (project pills OR italic Q examples) + button | Icon + title + one meta line |
+  | Card height | Tall (~5 content lines) | Compact (~3 content lines) |
+
+  Quick question strip stays as production has it (separate concern).
+
+- **Fix (CSS + HTML, well-specced):**
+
+  **Section header** (`.section-header` / `.section-header h2`):
+  ```css
+  .section-header { text-align: center; margin: 32px 0 20px 0; }
+  .section-header h2 { font-size: 24px; font-weight: 500; color: var(--text-primary); margin: 0; padding: 0; }
+  @media (max-width: 767px) {
+      .section-header { margin: 16px 0 12px 0; }
+      .section-header h2 { font-size: 18px; }
+  }
+  ```
+
+  **Card grid + cards** (`.home-cat-grid` / `.home-cat-card`):
+  ```css
+  .home-cat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      padding: 0 24px 32px;
+  }
+  .home-cat-card {
+      background: var(--color-bg-secondary, #f7f6f3);
+      border: 1px solid var(--color-border-tertiary, #dfdcd5);
+      border-radius: 8px;
+      padding: 24px;
+      cursor: pointer;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      text-decoration: none;
+      color: inherit;
+  }
+  .home-cat-card:hover {
+      border-color: var(--color-border-secondary, #c9c5bd);
+      transform: translateY(-1px);
+  }
+  .home-cat-icon { font-size: 28px; line-height: 1; }
+  .home-cat-title { font-size: 16px; font-weight: 600; margin: 0; color: var(--text-primary); }
+  .home-cat-meta { font-size: 13px; color: var(--color-text-secondary); margin: 0; line-height: 1.5; }
+  @media (max-width: 1024px) { .home-cat-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .home-cat-grid { grid-template-columns: 1fr; padding: 0 16px 24px; } .home-cat-card { padding: 18px; } }
+  ```
+
+  **HTML structure for the 6 cards** (drop the buttons, drop the italic Q lines, unify treatment): card content is icon + title + one meta line. Card itself is the click target via `<a href="?route=...">`. See the spec analysis for the full 6-card HTML.
+
+- **Three real changes from current production:**
+  1. Unified card treatment — drop the purple gradient on the top 2 cards (Banking + Cross-Industry)
+  2. 3-column grid instead of 2 (with responsive breakpoints to 2 cols at ≤1024px, 1 col at ≤640px)
+  3. Simpler card content — drop the inline buttons and italic example-question lines; the card itself is the click target. The "what could I ask Agy" job moves entirely to the Ask Agy Anything section below the cards. Net effect: cards become roughly half their current height.
+
+- **Implementation notes (confirmed May 31, 2026 — scope locked to Option A after current-code review):**
+  - **Keep existing JS bridge + hidden Streamlit button + `active_tab` / `prefilter_*` routing pattern.** Current `category_cards.py` (lines 297-466 and beyond) uses HTML card + hidden `st.button("", key="card_btn_*")` + JS click bridge + `st.session_state["active_tab"] = "..."` + `prefilter_*` writes. This pattern stays. -107 is visual-only redesign; routing model is out of scope.
+  - **Routing migration is out of scope for -107.** If anchor-tag + query-param routing (`<a href="?route=X">`) is wanted later for accessibility / URL-shareability, file as a separate ticket (e.g., -108). That migration requires app.py route handler + removing 6 hidden buttons + replicating prefilter setup. ~2-3 hours additional work; doesn't fit in this wireframe-alignment scope.
+  - **Whole card clickable (if possible).** Drop the visible "My Work →" / equivalent gradient button from the bottom of each card. Make the entire card container the click target (extend the existing JS bridge listener from the bottom anchor to the card container). If the bridge can't be cleanly extended, fall back to keeping a small visual click affordance.
+  - **Emojis for icons (matches production).** Move to SVG / Tabler icons later as a separate ticket — out of scope for -107.
+  - **CSS location.** Current `category_cards.py` has inline `<style>` blocks (lines 90-294). Per the -105 / MATTGPT-068 rerun-persistence pattern, this CSS may also be vulnerable to rerun stripping on the Home page. Worth eyeballing during implementation — if symptoms appear, relocate to `global_styles.py` (could fold into -105's CSS-relocation scope or file standalone).
+
+- **Effort:** Small-medium. Raw implementation 30-60 min (CSS update + HTML restructure in `ui/components/category_cards.py`). Add ~15-30 min if shipping with full BDD discipline (scenarios: 3 columns at desktop, unified treatment across all 6, click routes correctly per card).
+
+- **Cross-references:**
+  - **Yesterday's wireframe-driven inventory miss** — this ticket should have been filed alongside -100 through -106 on May 30; surfaced today (May 31) when Matt pointed at the wireframe spec.
+  - **MATTGPT-104** — Banking + Cross-Industry math reconciliation. -104 fixes the count discrepancies on the landing pages those cards route to; -107 is the cards themselves on the Home page.
+  - **MATTGPT-101** — Why Agy modal. Different surface; no direct dependency.
+
+- **Logged:** May 31, 2026
+
+---
+
+---
+
+### MATTGPT-109
+**mattgpt-design-spec Jekyll site — update as a first-class credibility artifact (not housekeeping)**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Action
+- **Purpose (reframed June 1, 2026):** The spec is NOT the bottom rung of a technical-depth funnel. It is a **standalone credibility artifact** aimed squarely at the technical hiring manager or CTO doing due diligence — a full product blueprint proving product leadership, technical execution, and design thinking end-to-end. It also serves as a build-it-yourself guide for engineers who want to replicate the approach. This reframe changes both the urgency and the scope: drift is a credibility liability, not housekeeping. A sharp evaluator noticing the docs lag the product undercuts the entire message at the worst moment.
+- **Origin context (why this matters):** MattGPT was built partly to reconstruct a professional record lost when Matt left Accenture — credentials, references, code, documents, all gone at notification. The STAR corpus was rebuilt from memory. The spec is the artifact that proves the reconstruction was deliberate and rigorous, not just "I built a RAG app." That story is currently invisible in the spec.
+- **Active credibility liabilities (as of June 1, 2026):**
+  - "Last Updated December 2025" timestamp — app has shipped 10+ significant changes since
+  - Contact line still says "Digital Transformation Director" — stale title, wrong positioning
+  - Nav labels throughout still say "About Matt", "Ask MattGPT", "Explore Stories" — old structure
+  - Wireframes dated October 2025 — predate the entire `feature/ui-redesign` branch
+  - No mention of Why Agy modal, How I Built standalone surface, or the three-tier disclosure model
+- **Discoverability gap:** The spec is currently buried three hops deep (Agy → How I Built → footer link). The technical hiring manager it's built for has to dig the most to find it. Needs a direct, clearly labeled entry point — first-class link from My Profile signals panel and from How I Built.
+- **Scope of content updates needed:**
+  - **Positioning** — update "What This Demonstrates" and intro to reflect the reconstruction origin + deliberate credibility artifact framing
+  - **Nav labels** — Home / My Work / Ask Agy / Role Match / My Profile throughout (MATTGPT-100)
+  - **Navbar + cards** — reflect shipped redesign (MATTGPT-106, -107)
+  - **How Agy Searches** — document migration to `@st.dialog`; remove Technical Details block (run-vs-build split)
+  - **How I Built** — document as standalone surface (MATTGPT-102); tour-level content, not triplicate pipeline tellings
+  - **Why Agy modal** — document new component + badge placement across 5 surfaces (MATTGPT-101)
+  - **User journeys / wireframes** — update to reflect 9 current surfaces including secondary surfaces (Banking, Cross-Industry, How I Built) with back affordances
+  - **ARCHITECTURE.md sync** — spec architecture docs should reflect current lean pipeline
+  - **Timestamp + contact line** — "Last Updated" and positioning copy
+- **Discoverability fix (in-app, separate from spec content):**
+  - Add direct link to spec from My Profile signals panel (pending Profile v2 signals panel work)
+  - Ensure How I Built's "View Design Specification →" link is prominent, not a footer afterthought
+- **Timing:** Hold until in-flight app work stabilizes (-101, -102 mechanism, -105, -108). Then update spec in one deliberate pass — not piecemeal. The spec should reflect a stable, coherent state of the app, not a moving target.
+- **Effort:** Medium-High (~4-6 hours). Content updates across 12 doc pages + wireframes + positioning copy. No structural changes to the Jekyll site itself, but the positioning rewrite (origin story, "What This Demonstrates") needs care.
+- **Cross-references:**
+  - **MATTGPT-101** — Why Agy modal (new surface to document in spec)
+  - **MATTGPT-102** — How I Built standalone surface + content trim
+  - **MATTGPT-100, -106, -107** — nav / navbar / cards changes already shipped
+  - **MATTGPT-093** — About Matt strategic restructure; spec's About Matt wireframe needs to reflect Profile v2 direction
+- **Logged:** June 1, 2026
+
+---
+
+---
+### MATTGPT-117
+**How I Built dialog — BDD coverage for "See It In Action" prompt buttons and Ask Agy routing**
+
+- **Status:** Resolved
+- **Priority:** Medium
+- **Type:** Action
+- **Logged:** June 7, 2026
+- **Resolved:** June 8, 2026
+
+**Issue:** `how_i_built_dialog.py` section 9 renders four sample-question prompt buttons that route to Ask Agy via the `on_chip_click` contract (sets `seed_prompt` + `__ask_from_suggestion__` + `active_tab="Ask Agy"`). The MATTGPT-068 scenarios that previously tested this behavior on `about_matt.py` were deleted when the CTA card was removed from My Profile as part of MATTGPT-093. No equivalent BDD coverage exists for the dialog.
+
+**Resolution:** Added two scenarios to `tests/bdd/features/how_i_built.feature`: section visibility + 4-chip count, and chip-click → Ask Agy routing (first chip). Green: 8/8. Commits 3278128 (Red scenarios), e790f8d (Green step defs).
+
+---
+
+### MATTGPT-115
+**Lock icon — browser console warning: password field not in native form**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Issue
+- **Issue:** Chrome fires `[DOM] Password field is not contained in a form` when the Role Match lock icon popover is open. `st.popover` uses a portal — it teleports its DOM nodes to a different location in the document. `st.form` creates a native `<form>` element, but the portal moves the children (including the `<input type="password">`) outside the form's DOM subtree. Chrome's password-manager detection fires because the containment check fails.
+- **Functional impact:** None. Streamlit's form submission logic is Python-level. The password check, fail-closed behavior, and session state update all work correctly. The warning is purely Chrome's password manager saying it can't hook into the field.
+- **Desirability of fix:** Low. Password manager NOT saving this internal access code is actually correct behavior. `autocomplete="new-password"` is already set by Streamlit on `type="password"` fields; the containment check fires before Chrome reads autocomplete.
+- **Fix options (all non-trivial):**
+  1. Replace `st.form` + `st.form_submit_button` with `st.text_input` + `st.button` + widget-key versioning for clear-on-submit. Does not fix the containment warning (still no native form wrapping).
+  2. Replace the entire popover body with a `components.html` custom form — full control over HTML structure, native `<form>` wrapping possible, but requires a JS bridge to report submission back to Streamlit.
+- **Affects:** `ui/components/lock_icon.py` — `st.popover` + `st.form` combination.
+- **Logged:** June 6, 2026
+
+---
+
+### MATTGPT-111
+**My Work / Banking / Cross-Industry — back-link not dark-mode compliant**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Issue
+- **Issue:** The "← Banking" / "← Cross-Industry" back-link pill on My Work renders as a white pill with purple text in dark mode — white background has no contrast against the dark page background.
+- **Root cause:** `.back-link` CSS in `global_styles.py` uses hardcoded or light-mode-only background. Dark mode override missing.
+- **Fix:** Add `body.dark-theme .back-link` override to use `var(--bg-card)` or `var(--bg-surface)` for background and `var(--accent-purple)` for text color — same variables used in light mode but resolved to dark values.
+- **Affects:** My Work (`explore_stories.py`) when navigated from Banking or Cross-Industry landing pages.
+- **Logged:** June 3, 2026
+
+---
+
+### MATTGPT-121
+**Why Agy dialog — mobile layout fix (375px viewport)**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug / Polish
+- **Goal:** Fix cramped mobile layout on the Why Agy dialog at 375px. Dialog renders at 374×645px against a 661px viewport — 16px breathing room, no visible scroll affordance. Image floats right at 100px, leaving body text in a ~230px column at full desktop font size.
+- **Fix already partially shipped (June 9, 2026):** `@media (max-width: 480px)` block added to `_CSS` in `ui/components/why_agy_dialog.py`:
+  - `.why-agy-avatar-row` → `flex-direction: column; align-items: center` (stacks image above text)
+  - `.why-agy-illustration` → `max-width: 70px` (shrinks image)
+  - `.why-agy-body p` → `font-size: 14px` (reduces body copy from 16px)
+  - `[role="dialog"]` → `max-height: 88vh; overflow-y: auto` (safety net)
+- **Remaining:** Dialog title ("Hi, I'm Agy 🐾") still renders at 24px on mobile. Target is 20px. Selector is unknown — Streamlit renders the `@st.dialog` title as a `<p>` (not `<h2>`), but the exact selector was not confirmed via DevTools. `[role="dialog"] p:first-of-type` is risky (may match body paragraphs). Needs DevTools inspection to identify the correct selector before adding the title font-size override.
+- **Logged:** June 9, 2026
+
+---
+
+### MATTGPT-122
+**My Work — Cards view BDD timing failure: test_view_switching_preserves_open_story_detail**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Issue
+- **Issue:** `user_has_opened_specific_story` clicks a Cards view card via Playwright UI click, which must be caught by the `components.html` delegated JS listener to trigger the hidden `st.button`. After `wait_for_streamlit_rerun` (networkidle + 200ms), the listener may not yet be attached — the iframe is still loading — so the click goes unhandled, story detail never opens, and `verify_detail_open` asserts 0 headers.
+- **Evidence:** Fix 1 assert surfaced: "Detail panel never opened after card click — DOM had: 0 header(s)". Live app confirmed working (Chrome Claude's direct `element.click()` on the button bypassed the listener entirely). Playwright's UI click goes through the iframe listener path, racing the iframe setup.
+- **Fix shape:** After switching to Cards view, wait explicitly for the `components.html` iframe's JS to fire before clicking. Candidate: `wait_for_timeout(1000)` after cards appear, or wait for a zero-height `[data-testid='stCustomComponentV1']` iframe. Alternatively, add a retry loop around the click + wait_for_content.
+- **Note:** This test was never green before MATTGPT-105 — it always failed at an earlier step for different reasons. -105 advanced the failure mode to expose the timing issue. Not a -105 regression.
+- **Logged:** June 10, 2026
+### MATTGPT-120
+**CLAUDE.md restructure — Critical Rules fast-reference block + rules-first format throughout**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Goal:** Make CLAUDE.md scannable for new Claude Code sessions. Two parts: (1) Critical Rules fast-reference block at the top — 10-15 non-negotiable imperative rules, readable in 30 seconds; (2) Full restructure — rules-first format throughout, incident narratives moved to memory pointers, overlapping sections consolidated (CSS Rules + Streamlit Patterns → one section). Part 1 is one commit. Part 2 is a dedicated session.
+- **Trigger:** Before the next feature sprint after the UI redesign deploy.
+- **Logged:** June 9, 2026
+
+### MATTGPT-125
+**CLAUDE.md targeted fixes — confirmed bugs + confirmed gaps from June 12 audit**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Source:** 7-angle multi-agent audit of CLAUDE.md, June 12, 2026. 8 findings; 4 confirmed, 4 plausible.
+- **Confirmed fixes (no design decision needed):**
+  1. Screenshot example has unbound `label` variable (line 292) — crashes with NameError if copied literally. Fix: replace `label` with a concrete string or mark it as a placeholder.
+  2. "Effort estimates without consulting padding" heading (line 384) reads as "don't consult anyone about padding" — opposite of intended meaning. Fix: rename to "Effort estimates — no padding" or similar.
+  3. Backlog ARCHITECTURE.md flag scope too narrow (line 339) — only watches `ui/pages/`, `ui/components/`, `services/`. Changes to `utils/` and `config/` slip through silently. Fix: add those directories to the watched list.
+  4. Backlog sync SHA fallback missing (line 333) — if `<!-- last-backlog-sync: SHA -->` is missing or the SHA is unresolvable, `git log <sha>..HEAD` either errors or diffs the entire history. No fallback defined. Especially critical in Cowork automated-agent context. Fix: add a fallback clause (e.g., prompt Matt if SHA is missing; default to last 20 commits if SHA is unresolvable).
+- **Plausible fixes (need Matt's call before Executor touches):**
+  5. CSS Rule 8 scope gap (line 77) — DevTools inspection gated on layout/alignment/positioning/sizing only. Color and typography have the same Streamlit wrapper-layer failure mode but are ungated. Fix: broaden the trigger list, or reframe as "any CSS property where the rendered value differs from what source code predicts."
+  6. Three contradictory rule pairs — no tiebreaker stated:
+     - Pre-flight ("research first, don't propose anything") vs "Execute the work, don't discuss it" (lines 257/261)
+     - "Default is build-on-top-of" vs "Provide full file replacements" (lines 258/262)
+     - "One go ships the full cycle" vs "Paste validation output and wait — treat as separate gates" (lines 285/275)
+     These need precedence rules, not just rewording. Coordinate with MATTGPT-120 restructure.
+- **Deferred (Cowork context needed):**
+  - Sync anchor mechanism — "since last sync" is ambiguous without a stored reference point; risk of diffing entire history in automated agent context.
+  - Agent trigger conditions — what qualifies as "resolved," handling of Decided Against items, HISTORY.md retirement ownership. Needs a dedicated session with Cowork context before writing into CLAUDE.md.
+- **Relationship to MATTGPT-120:** Items 1-4 are standalone fixes that can ship before -120. Items 5-6 should be resolved as part of the -120 restructure (they require design decisions that the restructure will formalize).
+- **Logged:** June 12, 2026
+
+---
+
+### MATTGPT-127
+**Replace hardcoded `ASSESSMENT_MODEL` in `jd_assessor.py` with `get_conf()` env var pattern**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Refactor
+- **File:** `services/jd_assessor.py`, `config/constants.py`
+- **Logged:** June 12, 2026
+
+**Issue:** `ASSESSMENT_MODEL = "gpt-4o"` is hardcoded at `jd_assessor.py:185` and passed directly to the OpenAI API at lines 205 and 287. Per CLAUDE.md config rules, model names that may change between environments belong as env vars read via `get_conf()`.
+
+**Fix:** `ASSESSMENT_MODEL = get_conf("ASSESSMENT_MODEL") or "gpt-4o"` — one line. Same audit needed for `DEFAULT_CHAT_MODEL` in `constants.py`.
+
+**Note:** `gpt-4o` is the correct value for production (mini produces subpar assessment reasoning). This is a configuration hygiene fix, not a model change.
+
+---
+
+### MATTGPT-126
+**Ask Agy landing — input border invisible on page load (CSS injection race)**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Issue
+- **File:** `ui/styles/global_styles.py`
+- **Logged:** June 12, 2026
+
+**Symptom:** The Ask Agy landing page text input (`key="landing_input"`) renders without a visible border on initial page load, then the border appears after a brief flash. Intermittent — sometimes caught before CSS injects, sometimes not.
+
+**Root cause:** CSS injection race. Streamlit's emotion CSS sets `border-*-style: none` on all four sides of the input (classes `.st-bh` through `.st-bl`). The override rule in `global_styles.py` (`div[data-testid="stTextInput"] input { border: 2px solid var(--border-color) }`) is injected via `st.markdown`, which runs after initial DOM render. Without `!important`, it loses to the already-applied emotion rules during the render window.
+
+**Also noted:** A stale scoped rule targeting `.st-key-landing_input .st-bz, .st-c0, .st-c1, .st-c2 { border-color: transparent !important }` in the codebase is dead code — emotion class hashes have drifted. Safe to remove.
+
+**Fix:** Add `!important` to the existing border rule in `global_styles.py`:
+```css
+div[data-testid="stTextInput"] input {
+  border: 2px solid var(--border-color) !important;
+}
+```
+`!important` is justified here — explicitly overriding Streamlit's own styling system is the stated purpose of the rule. Remove the stale `.st-bz/.st-c0/.st-c1/.st-c2` dead code in the same pass.
+
+---
+
+### MATTGPT-128
+**Displayed-source faithfulness — source cards must substantiate the claims in the answer**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Issue
+- **Logged:** June 14, 2026
+- **Depends on:** MATTGPT-080 (positioning docs separated from STAR stories), MATTGPT-094 (retrieval diversity)
+
+**Symptom (production-confirmed June 14, 2026):** Agy answered a Fiserv commercial-impact query with accurate numbers ($8.5M, 3% under budget, $500K penalties avoided) but the displayed source cards showed JP Morgan and Norfolk Southern — not the Fiserv STAR story. A recruiter who clicks to verify a claim finds the wrong sources. Observed across multiple probes: "Why Hire Matt" was cited as a source for a largest-team question AND an early-career telecom question, neither of which it substantiates.
+
+**Root cause (design fork — must be resolved before implementation):**
+Source cards currently display Pinecone retrieval top-k by score. That is a different set from what the LLM actually grounded the answer in. The likely Fiserv mechanism: the specific numbers came from the "Why Hire Matt" aggregate positioning doc (which summarizes wins across clients and ranks high on almost every query), while the Fiserv STAR story never entered the top-k. The cards honestly showed what was retrieved; the honest set was wrong.
+
+Two design options:
+- **Option A — Fix retrieval so the right story enters top-k.** Depends on -094 (retrieval diversity) and -080 (positioning docs separated so they can't crowd out STAR stories). Cards continue to show top-k; faithfulness improves as a consequence. No new display logic.
+- **Option B — Display what the answer was grounded in.** Requires the LLM to emit provenance (story IDs it drew from) alongside the answer, then surface those as the source cards. Decouples display from retrieval ranking. More engineering; higher faithfulness ceiling.
+
+**Acceptance criteria:**
+- For a set of client-specific queries (Fiserv, RBC, Capital One, AT&T), the named client's STAR story appears in the displayed source cards.
+- "Why Hire Matt" and MattGPT positioning docs do not appear as the sole sources for client-specific factual claims.
+
+**Eval to add:**
+For each client-specific probe query, assert `client_name in [s.get("Client") for s in displayed_sources]`. Mirrors the client-attribution pattern in Q15.
+
+**Note:** Option A cannot be fully evaluated until -080 ships (STAR stories and positioning docs separated in the index). Do not close this ticket with Option B alone unless Option A is explicitly decided against.
+
+---
+
+### MATTGPT-129
+**Content elaboration per era — expand 5 under-documented operational stories**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Action
+- **Logged:** June 14, 2026
+
+**Context:** Better retrieval diversity (-094) cannot surface depth that was never written. The five stories below are the strongest under-documented operational arc nodes — era-spread, no CIC, no JP Morgan. Each is tagged by effort mode. The two expand-from-logged ones can proceed immediately; the recovery ones route through elicitation.
+
+**Stories, tagged by effort mode:**
+
+1. **AT&T Southeast CRM Replacement (2005–2009)** — `expand-from-logged`
+   Facts already in corpus, compressed: $5M program, 40,000 daily DSL orders protected, $1B annual revenue at risk, foundation for 22-state architecture. Lowest effort; highest arc value; anchors the earliest era with hard numbers.
+
+2. **Fiserv $8.5M White-Label Card Portal recovery** — `expand-from-logged`
+   Rich facts already logged: $8.5M, 3% under budget, $255K saved, 47 acceptance criteria, zero critical defects at launch, $45M in transactions processed, $500K in Q4 penalties avoided, $3M contract extension. Cleanest ownable recovery story in the corpus. Write to STAR depth.
+
+3. **AT&T Mobility Service Delivery Platform** — `expand + light recovery`
+   Asset is logged; outcome metrics need reconstruction. Elicitation prompt: what was the before/after on service delivery throughput or customer impact?
+
+4. **Launchpad AWS enablement (200+ certifications)** — `expand + recovery`
+   Feeds the prototyping/Innovation era (currently 6 stories — thinnest era). Also doubles as People-and-Culture evidence outside the CIC. Elicitation: what was the certification count, timeline, and downstream delivery impact?
+
+5. **Capital One scaling development capacity** — `needs-recovery`
+   Two thin stories currently; surfaced as a source in production probes but light on specifics. Full elicitation needed before expansion.
+
+**Acceptance criteria:**
+- Each story reaches STAR depth: Situation (context + stakes), Task (scope + constraints), Action (what Matt specifically did), Result (quantified outcome).
+- No story references are expanded by paraphrasing existing thin content — only confirmed facts.
+- Stories 1 and 2 (expand-from-logged) completed before Stories 3–5 (recovery-dependent).
+
+**Sequencing:** Stories 3–5 are blocked on elicitation. Do not let recovery stories block Stories 1 and 2.
+
+---
+
+### MATTGPT-130
+**"practitioners" canonical everywhere — UI, eval golden set, corpus re-embed in lockstep**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Logged:** June 14, 2026
+
+**Context:** "engineers" vs "practitioners" drifts across three coupled surfaces. The UI fix (category_cards.py, about_matt.py) landed June 14, 2026. The eval golden set and embedded corpus still say "engineers," so retrieval keeps returning it and the eval suite is desynced from the UI.
+
+**Surfaces to update in lockstep:**
+1. ~~UI suggested prompts and page copy~~ — done June 14, 2026.
+2. **Eval golden set** — `tests/` canonical queries that reference "150+ engineers" → "practitioners". Grep: `grep -rn "150+ engineers\|engineers" tests/`.
+3. **Corpus content** — any STAR story whose Action/Result text says "engineers" when referring to CIC practitioners. Stories whose text changes must be re-embedded (delete from Pinecone, re-upsert).
+
+**Risk:** Changing only surface 1 leaves eval queries testing a term the UI no longer uses. Changing surfaces 2+3 without re-embedding leaves the index returning "engineers" on practitioner queries.
+
+**Acceptance criterion:** `grep -rn "150+ engineers" ui/ tests/ data/` returns 0 hits (excluding code comments and regex patterns in backend_service.py).

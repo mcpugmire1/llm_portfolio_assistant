@@ -1,21 +1,21 @@
 """
-Ask MattGPT Styles Module
+Ask Agy Styles Module
 
-Centralized CSS styles for Ask MattGPT landing and conversation views.
+Centralized CSS styles for Ask Agy landing and conversation views.
 Extracted from inline styles to improve maintainability.
 """
 
 """
-Ask MattGPT Styles Module
+Ask Agy Styles Module
 
-Centralized CSS styles for Ask MattGPT landing and conversation views.
+Centralized CSS styles for Ask Agy landing and conversation views.
 Extracted from inline styles to improve maintainability.
 """
 
 
 def get_landing_css() -> str:
     """
-    CSS styles for Ask MattGPT landing page.
+    CSS styles for Ask Agy landing page.
 
     Includes:
     - Purple header with Agy avatar
@@ -620,17 +620,52 @@ def get_landing_css() -> str:
             /* "TRY ASKING" title */
             .suggested-title {
                 font-size: 10px !important;
-                margin-bottom: 6px !important;
+                margin-bottom: 12px !important;
                 padding: 0 16px !important;
             }
 
-            /* Suggestion chips container - COMPACT */
-            div[data-testid="stHorizontalBlock"]:has(button[key^="suggested_"]) {
-                grid-template-columns: 1fr !important;
-                width: calc(100% - 24px) !important;
-                max-width: calc(100% - 24px) !important;
-                gap: 4px !important;
-                margin-bottom: 12px !important;
+            /* MATTGPT-113: chip flex-wrap pill grid */
+            .st-key-chip_grid {
+                display: flex !important;
+                flex-direction: row !important;
+                flex-wrap: wrap !important;
+                align-items: flex-start !important;
+                padding-top: 8px !important;
+            }
+            /* doubled class to beat global .stVerticalBlock gap: 4px rule */
+            .st-key-chip_grid.st-key-chip_grid {
+                gap: 8px !important;
+            }
+            .st-key-chip_grid.st-key-chip_grid [data-testid="stHorizontalBlock"] {
+                display: flex !important;
+                flex-direction: row !important;
+                flex-wrap: wrap !important;
+                gap: 8px !important;
+                align-items: flex-start !important;
+            }
+            .st-key-chip_grid [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
+                display: contents !important;
+            }
+            .st-key-chip_grid .stVerticalBlock {
+                display: contents !important;
+            }
+            .st-key-chip_grid .stElementContainer {
+                width: auto !important;
+                float: none !important;
+                margin-right: 0 !important;
+            }
+            .st-key-chip_grid [class*="st-key-suggested_"] {
+                flex: 0 0 auto !important;
+                width: fit-content !important;
+                min-width: fit-content !important;
+                height: fit-content !important;
+                align-self: flex-start !important;
+            }
+            .st-key-chip_grid [class*="st-key-suggested_"] button {
+                width: auto !important;
+                white-space: nowrap !important;
+                border-radius: 20px !important;
+                margin-top: 0 !important;
             }
 
             /* Suggestion buttons - MUCH more compact */
@@ -852,7 +887,7 @@ def get_loading_animation_css() -> str:
 
 def get_conversation_css() -> str:
     """
-    CSS styles for Ask MattGPT conversation view.
+    CSS styles for Ask Agy conversation view.
 
     Includes:
     - Conversation header

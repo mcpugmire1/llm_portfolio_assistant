@@ -1,5 +1,5 @@
 """
-Ask MattGPT Test Suite
+MattGPT Test Suite
 
 Test organization:
 - unit/: Fast unit tests for individual functions

@@ -1,5 +1,5 @@
 """
-BDD Step Definitions for Explore Stories
+BDD Step Definitions for My Work
 
 These step definitions use Playwright for browser automation.
 Install with: pip install pytest-bdd playwright
@@ -48,7 +48,7 @@ def wait_for_streamlit_rerun(page):
 # =============================================================================
 
 
-# Selector for detecting Ask MattGPT page (landing OR conversation view)
+# Selector for detecting Ask Agy page (landing OR conversation view)
 ASK_MATTGPT_SELECTORS = (
     ".st-key-intro_section, [data-testid='stChatInput'], .conversation-powered-by"
 )
@@ -59,16 +59,14 @@ ASK_MATTGPT_SELECTORS = (
 # =============================================================================
 
 
-@given("the user navigates to the Explore Stories page")
+@given("the user navigates to the My Work page")
 def navigate_to_explore(browser_page, app_url):
     browser_page.goto(app_url)
     browser_page.wait_for_load_state("networkidle")
-    # Wait for Streamlit to finish loading - look for any button with "Explore Stories" text
-    browser_page.wait_for_selector("button:has-text('Explore Stories')", timeout=30000)
-    # Click Explore Stories button (avoid hidden mobile nav by using visible filter)
-    nav_button = browser_page.locator(
-        "button:has-text('Explore Stories'):visible"
-    ).first
+    # Wait for Streamlit to finish loading - look for any button with "My Work" text
+    browser_page.wait_for_selector("button:has-text('My Work')", timeout=30000)
+    # Click My Work button (avoid hidden mobile nav by using visible filter)
+    nav_button = browser_page.locator("button:has-text('My Work'):visible").first
     nav_button.click()
     browser_page.wait_for_load_state("networkidle")
 
@@ -76,8 +74,8 @@ def navigate_to_explore(browser_page, app_url):
 @given("the page has finished loading")
 def wait_for_page_load(browser_page):
     browser_page.wait_for_load_state("networkidle")
-    # Wait for Explore Stories page content - results count is always present
-    browser_page.wait_for_selector(".results-count", timeout=30000)
+    # Wait for My Work page content - results count is always present
+    browser_page.wait_for_selector(".es-results-count", timeout=30000)
     # Wait for AgGrid to fully render (it loads async after Streamlit reruns)
     # AgGrid can take a while in headless mode
     try:
@@ -105,7 +103,7 @@ def user_has_opened_detail(browser_page):
     # Wait for any story content to appear
     wait_for_content(
         browser_page,
-        ".fixed-height-card, [data-testid='stCustomComponentV1'], .story-card",
+        ".es-fixed-height-card, [data-testid='stCustomComponentV1'], .es-story-card",
         timeout=10000,
     )
 
@@ -121,28 +119,32 @@ def user_has_opened_detail(browser_page):
             wait_for_streamlit_rerun(browser_page)
             if wait_for_content(
                 browser_page,
-                "#btn-share-story, .detail-header, .star-label",
+                "#btn-share-story, .es-detail-header, .star-label",
                 timeout=10000,
             ):
                 return
 
     # Try Cards view (if visible)
-    cards = browser_page.locator(".fixed-height-card")
+    cards = browser_page.locator(".es-fixed-height-card")
     if cards.count() > 0 and cards.first.is_visible():
         cards.first.click()
         wait_for_streamlit_rerun(browser_page)
         if wait_for_content(
-            browser_page, "#btn-share-story, .detail-header, .star-label", timeout=10000
+            browser_page,
+            "#btn-share-story, .es-detail-header, .star-label",
+            timeout=10000,
         ):
             return
 
     # Try Timeline story cards
-    timeline = browser_page.locator(".story-card")
+    timeline = browser_page.locator(".es-story-card")
     if timeline.count() > 0 and timeline.first.is_visible():
         timeline.first.click()
         wait_for_streamlit_rerun(browser_page)
         if wait_for_content(
-            browser_page, "#btn-share-story, .detail-header, .star-label", timeout=10000
+            browser_page,
+            "#btn-share-story, .es-detail-header, .star-label",
+            timeout=10000,
         ):
             return
 
@@ -153,14 +155,14 @@ def user_has_opened_detail(browser_page):
     if view_btn.count() > 0:
         view_btn.click()
         wait_for_streamlit_rerun(browser_page)
-        wait_for_content(browser_page, ".fixed-height-card", timeout=10000)
-        cards = browser_page.locator(".fixed-height-card")
+        wait_for_content(browser_page, ".es-fixed-height-card", timeout=10000)
+        cards = browser_page.locator(".es-fixed-height-card")
         if cards.count() > 0:
             cards.first.click()
             wait_for_streamlit_rerun(browser_page)
             wait_for_content(
                 browser_page,
-                "#btn-share-story, .detail-header, .star-label",
+                "#btn-share-story, .es-detail-header, .star-label",
                 timeout=10000,
             )
             return
@@ -173,14 +175,16 @@ def user_has_opened_specific_story(browser_page, story_id):
     # Story IDs may have additional suffix (e.g., "|client-name")
     # Use partial match with *= selector
     story = browser_page.locator(
-        f"[data-story-id*='{story_id}'], .fixed-height-card:has-text('{story_id.replace('-', ' ')}')"
+        f"[data-story-id*='{story_id}'], .es-fixed-height-card:has-text('{story_id.replace('-', ' ')}')"
     ).first
     if story.count() == 0:
         # Fallback: just click any story card
-        story = browser_page.locator(".fixed-height-card").first
+        story = browser_page.locator(".es-fixed-height-card").first
     story.click()
     wait_for_streamlit_rerun(browser_page)
-    wait_for_content(browser_page, ".detail-header, .star-label", timeout=5000)
+    assert wait_for_content(
+        browser_page, ".es-detail-header, .star-label", timeout=5000
+    ), f"Detail panel never opened after card click — DOM had: {browser_page.locator('.es-detail-header').count()} header(s)"
 
 
 @given(parsers.parse('the user has selected "{value}" from the {filter_name} filter'))
@@ -228,9 +232,9 @@ def user_is_in_view(browser_page, view):
             browser_page, "[data-testid='stCustomComponentV1']", timeout=10000
         )
     elif view == "Cards":
-        wait_for_content(browser_page, ".fixed-height-card", timeout=10000)
+        wait_for_content(browser_page, ".es-fixed-height-card", timeout=10000)
     elif view == "Timeline":
-        wait_for_content(browser_page, ".timeline-container", timeout=10000)
+        wait_for_content(browser_page, ".es-timeline-container", timeout=10000)
 
 
 @given(parsers.parse("the user preference is {view} view"))
@@ -255,14 +259,12 @@ def verify_story_count(browser_page, count):
     pass
 
 
-@given("the user was previously on Explore Stories with filters and a story open")
+@given("the user was previously on My Work with filters and a story open")
 def user_was_previously_on_explore(browser_page, app_url):
-    # Navigate to Explore Stories
+    # Navigate to My Work
     browser_page.goto(app_url)
     browser_page.wait_for_load_state("networkidle")
-    nav_button = browser_page.locator(
-        "button:has-text('Explore Stories'):visible"
-    ).first
+    nav_button = browser_page.locator("button:has-text('My Work'):visible").first
     nav_button.click()
     browser_page.wait_for_load_state("networkidle")
 
@@ -280,11 +282,11 @@ def user_was_previously_on_explore(browser_page, app_url):
 
     # Open a story
     story = browser_page.locator(
-        ".fixed-height-card, .ag-root-wrapper .ag-row, .story-card"
+        ".es-fixed-height-card, .ag-root-wrapper .ag-row, .es-story-card"
     ).first
     if story.is_visible():
         story.click()
-        wait_for_content(browser_page, ".detail-header, .star-label", timeout=5000)
+        wait_for_content(browser_page, ".es-detail-header, .star-label", timeout=5000)
 
 
 # =============================================================================
@@ -330,23 +332,20 @@ def clear_search(browser_page):
 
 @when(parsers.parse('the user selects "{value}" from the {filter_name} filter'))
 def select_filter(browser_page, value, filter_name):
-    # Handle both selectbox and multiselect
-    if filter_name in ["Client", "Role", "Domain"]:
-        # Multiselect
-        multiselect = browser_page.locator(
-            f"[data-testid='stMultiSelect']:has(label:has-text('{filter_name}'))"
-        ).first
-        multiselect.click()
-        option = browser_page.locator(f"[role='option']:has-text('{value}')").first
-        option.click()
-    else:
-        # Selectbox
-        select = browser_page.locator(
-            f"[data-testid='stSelectbox']:has(label:has-text('{filter_name}'))"
-        ).first
-        select.click()
-        option = browser_page.locator(f"[role='option']:has-text('{value}')").first
-        option.click()
+    select = browser_page.locator(
+        f"[data-testid='stSelectbox']:has(label:has-text('{filter_name}'))"
+    ).first
+    trigger = select.locator("input[role='combobox']")
+    trigger.scroll_into_view_if_needed()
+    trigger.click()
+    from playwright.sync_api import expect as pw_expect
+
+    pw_expect(trigger).to_have_attribute("aria-expanded", "true")
+    # Options mount elsewhere under #root — aria-controls ID doesn't scope them.
+    # Use the accessibility tree: wait for any option to be visible, then
+    # get_by_role searches the full a11y tree with built-in auto-wait.
+    browser_page.wait_for_selector("[role='option']", state="visible", timeout=5000)
+    browser_page.get_by_role("option", name=value, exact=True).click()
     browser_page.wait_for_load_state("networkidle")
 
 
@@ -395,7 +394,7 @@ def click_reset(browser_page):
     reset_btn.click()
     wait_for_streamlit_rerun(browser_page)
     # Wait for content to reappear after reset
-    wait_for_content(browser_page, ".results-count", timeout=5000)
+    wait_for_content(browser_page, ".es-results-count", timeout=5000)
 
 
 @when(parsers.parse("the user switches to {view} view"))
@@ -419,9 +418,9 @@ def switch_view(browser_page, view):
             browser_page, "[data-testid='stCustomComponentV1']", timeout=10000
         )
     elif view == "Cards":
-        wait_for_content(browser_page, ".fixed-height-card", timeout=10000)
+        wait_for_content(browser_page, ".es-fixed-height-card", timeout=10000)
     elif view == "Timeline":
-        wait_for_content(browser_page, ".timeline-container", timeout=10000)
+        wait_for_content(browser_page, ".es-timeline-container", timeout=10000)
 
 
 @when("the user clicks on a story card")
@@ -429,16 +428,16 @@ def click_story_card(browser_page):
     # Wait for any story content to appear first
     wait_for_content(
         browser_page,
-        ".fixed-height-card, [data-testid='stCustomComponentV1'], .story-card",
+        ".es-fixed-height-card, [data-testid='stCustomComponentV1'], .es-story-card",
         timeout=5000,
     )
 
     # Try Cards view first (prioritize since we might be explicitly in Cards view)
-    cards = browser_page.locator(".fixed-height-card")
+    cards = browser_page.locator(".es-fixed-height-card")
     if cards.count() > 0 and cards.first.is_visible():
         cards.first.click()
         wait_for_streamlit_rerun(browser_page)
-        wait_for_content(browser_page, ".detail-header, .star-label", timeout=10000)
+        wait_for_content(browser_page, ".es-detail-header, .star-label", timeout=10000)
         return
 
     # Try AgGrid rows (Table view, inside iframe)
@@ -453,17 +452,19 @@ def click_story_card(browser_page):
             cell.wait_for(state="visible", timeout=10000)
             cell.click()
             wait_for_streamlit_rerun(browser_page)
-            wait_for_content(browser_page, ".detail-header, .star-label", timeout=10000)
+            wait_for_content(
+                browser_page, ".es-detail-header, .star-label", timeout=10000
+            )
             return
         except Exception:
             pass  # Fall through to try other views
 
     # Try Timeline story cards (direct DOM access)
-    timeline_cards = browser_page.locator(".story-card")
+    timeline_cards = browser_page.locator(".es-story-card")
     if timeline_cards.count() > 0:
         timeline_cards.first.click()
         wait_for_streamlit_rerun(browser_page)
-        wait_for_content(browser_page, ".detail-header, .star-label", timeout=10000)
+        wait_for_content(browser_page, ".es-detail-header, .star-label", timeout=10000)
         return
 
     pytest.skip("No clickable story elements found")
@@ -488,14 +489,14 @@ def click_story_row(browser_page):
     # AgGrid selection triggers a Streamlit rerun
     wait_for_streamlit_rerun(browser_page)
     # Wait for the detail panel to appear
-    wait_for_content(browser_page, ".detail-header, .star-label", timeout=10000)
+    wait_for_content(browser_page, ".es-detail-header, .star-label", timeout=10000)
 
 
 @when("the user clicks the close button")
 def click_close_button(browser_page):
     # Story detail closes by clicking the selected card again (no explicit close button)
     # Find the selected card and click it
-    selected_card = browser_page.locator(".fixed-height-card.selected")
+    selected_card = browser_page.locator(".es-fixed-height-card.selected")
     if selected_card.count() > 0 and selected_card.first.is_visible():
         selected_card.first.click()
         wait_for_streamlit_rerun(browser_page)
@@ -504,7 +505,7 @@ def click_close_button(browser_page):
         return
 
     # For default view (Cards), just click any visible card to toggle
-    any_card = browser_page.locator(".fixed-height-card").first
+    any_card = browser_page.locator(".es-fixed-height-card").first
     if any_card.count() > 0 and any_card.is_visible():
         any_card.click()
         wait_for_streamlit_rerun(browser_page)
@@ -518,13 +519,13 @@ def click_close_button(browser_page):
 def click_ask_agy(browser_page):
     # The Ask Agy button is an anchor with id "btn-ask-story"
     # Clicking it triggers JS that clicks a hidden Streamlit button
-    # Then Streamlit navigates to Ask MattGPT page
+    # Then Streamlit navigates to Ask Agy page
 
-    # Selectors for Ask MattGPT page (landing OR conversation view)
+    # Selectors for Ask Agy page (landing OR conversation view)
     ask_page_selector = ".ask-header-landing, .ask-header-conversation, .st-key-intro_section, [data-testid='stChatInput']"
 
     # Try the anchor button first
-    btn = browser_page.locator("#btn-ask-story, a:has-text('Ask Agy')").first
+    btn = browser_page.locator("#btn-ask-story").first
     if btn.count() > 0:
         btn.click()
         # Wait longer for JS + Streamlit rerun + page render
@@ -533,8 +534,8 @@ def click_ask_agy(browser_page):
         wait_for_content(browser_page, ask_page_selector, timeout=15000)
         return
 
-    # Fallback to any element with "Ask Agy" text
-    text_btn = browser_page.locator("text=Ask Agy").first
+    # Fallback to story-detail card button text (unique — mobile nav doesn't say "About This")
+    text_btn = browser_page.locator("text=About This").first
     if text_btn.count() > 0:
         text_btn.click()
         browser_page.wait_for_load_state("networkidle")
@@ -561,45 +562,47 @@ def click_share(browser_page):
 def navigate_with_params(browser_page, app_url, url_params):
     browser_page.goto(f"{app_url}{url_params}")
     browser_page.wait_for_load_state("networkidle")
-    # Deeplinks trigger a Streamlit rerun - wait for Explore Stories to load
+    # Deeplinks trigger a Streamlit rerun - wait for My Work to load
     if "?story=" in url_params:
-        # Wait for the page to redirect and render Explore Stories
-        wait_for_content(browser_page, ".results-count", timeout=15000)
+        # Wait for the page to redirect and render My Work
+        wait_for_content(browser_page, ".es-results-count", timeout=15000)
         # Wait for story detail to open (deeplinks should auto-open the story)
         wait_for_content(
-            browser_page, ".detail-header, .star-label, #btn-share-story", timeout=10000
+            browser_page,
+            ".es-detail-header, .star-label, #btn-share-story",
+            timeout=10000,
         )
 
 
 @when(parsers.parse('the user clicks "View in Explore" for "{era}"'))
 def click_view_in_explore(browser_page, era):
-    # Timeline view uses .explore-all-link divs with "Explore all X stories" text
+    # Timeline view uses .es-explore-all-link divs with "Explore all X stories" text
     # Wait for timeline content
-    wait_for_content(browser_page, ".timeline-group", timeout=5000)
+    wait_for_content(browser_page, ".es-timeline-group", timeout=5000)
 
     # Click on the first expanded era's explore link (most recent era is auto-expanded)
     explore_link = browser_page.locator(
-        ".timeline-group.expanded .explore-all-link"
+        ".es-timeline-group.expanded .es-explore-all-link"
     ).first
     if explore_link.count() > 0:
         explore_link.click()
         wait_for_streamlit_rerun(browser_page)
-        wait_for_content(browser_page, ".results-count", timeout=5000)
+        wait_for_content(browser_page, ".es-results-count", timeout=5000)
         return
 
     # If no expanded group, try clicking the first era header to expand it
-    group_header = browser_page.locator(".timeline-group .group-header").first
+    group_header = browser_page.locator(".es-timeline-group .es-group-header").first
     if group_header.count() > 0:
         group_header.click()
         browser_page.wait_for_timeout(SHORT_WAIT)
 
         # Now click the explore link
         explore_link = browser_page.locator(
-            ".timeline-group.expanded .explore-all-link"
+            ".es-timeline-group.expanded .es-explore-all-link"
         ).first
         explore_link.click()
         wait_for_streamlit_rerun(browser_page)
-        wait_for_content(browser_page, ".results-count", timeout=5000)
+        wait_for_content(browser_page, ".es-results-count", timeout=5000)
         return
 
     pytest.skip("No Timeline explore links found")
@@ -646,22 +649,20 @@ def rapid_toggle(browser_page, filter_name, times):
         browser_page.wait_for_timeout(100)
 
 
-@when("the user navigates to About Matt")
+@when("the user navigates to My Profile")
 def navigate_to_about(browser_page):
-    about_btn = browser_page.locator("button:has-text('About Matt'):visible").first
+    about_btn = browser_page.locator("button:has-text('My Profile'):visible").first
     about_btn.click()
     browser_page.wait_for_load_state("networkidle")
 
 
-@when("the user navigates back to Explore Stories")
+@when("the user navigates back to My Work")
 def navigate_back_to_explore(browser_page):
-    nav_button = browser_page.locator(
-        "button:has-text('Explore Stories'):visible"
-    ).first
+    nav_button = browser_page.locator("button:has-text('My Work'):visible").first
     nav_button.click()
     browser_page.wait_for_load_state("networkidle")
-    # Wait for Explore Stories page to fully load
-    wait_for_content(browser_page, ".results-count", timeout=10000)
+    # Wait for My Work page to fully load
+    wait_for_content(browser_page, ".es-results-count", timeout=10000)
     # Allow Streamlit state to settle
     browser_page.wait_for_timeout(CONTENT_WAIT)
 
@@ -673,10 +674,8 @@ def navigate_away_and_return(browser_page):
     home_btn.click()
     browser_page.wait_for_load_state("networkidle")
 
-    # Navigate back to Explore Stories
-    nav_button = browser_page.locator(
-        "button:has-text('Explore Stories'):visible"
-    ).first
+    # Navigate back to My Work
+    nav_button = browser_page.locator("button:has-text('My Work'):visible").first
     nav_button.click()
     browser_page.wait_for_load_state("networkidle")
 
@@ -688,19 +687,19 @@ def navigate_away_and_return(browser_page):
 
 @then("the results count should update")
 def verify_results_count(browser_page):
-    # Results count div is always present on Explore Stories
+    # Results count div is always present on My Work
     wait_for_streamlit_rerun(browser_page)
     # The results count is rendered with class "results-count"
-    count = browser_page.wait_for_selector(".results-count", timeout=10000)
+    count = browser_page.wait_for_selector(".es-results-count", timeout=10000)
     assert count.is_visible()
 
 
 @then(parsers.parse('the results should contain stories with "{term1}" or "{term2}"'))
 def verify_results_contain_terms(browser_page, term1, term2):
     # Wait for content to render
-    wait_for_content(browser_page, ".results-count", timeout=5000)
+    wait_for_content(browser_page, ".es-results-count", timeout=5000)
     # Verify results exist by checking the results count text
-    results_text = browser_page.locator(".results-count").inner_text()
+    results_text = browser_page.locator(".es-results-count").inner_text()
     # Check for various formats
     has_results = (
         "Found" in results_text
@@ -727,7 +726,7 @@ def verify_detail_closed(browser_page):
 def verify_new_results(browser_page):
     # Just verify results are present
     stories = browser_page.locator(
-        ".fixed-height-card, .ag-root-wrapper .ag-row, .story-card"
+        ".es-fixed-height-card, .ag-root-wrapper .ag-row, .es-story-card"
     )
     assert stories.count() >= 0
 
@@ -749,8 +748,8 @@ def verify_text_visible(browser_page, text):
 @then("all stories should be displayed")
 def verify_all_stories(browser_page):
     # Check for results count showing projects/stories
-    wait_for_content(browser_page, ".results-count", timeout=5000)
-    count = browser_page.locator(".results-count").first
+    wait_for_content(browser_page, ".es-results-count", timeout=5000)
+    count = browser_page.locator(".es-results-count").first
     assert count.is_visible()
     # Verify it shows content (not "0 results")
     text = count.inner_text()
@@ -787,7 +786,7 @@ def verify_active_filter(browser_page, value):
 
     # Just verify some filter indication exists
     assert browser_page.locator(
-        ".results-count"
+        ".es-results-count"
     ).is_visible(), f"Filter '{value}' not shown in active filters"
 
 
@@ -848,19 +847,19 @@ def verify_client_role_filter(browser_page):
 @then(parsers.parse('the Era filter should be set to "{era}"'))
 def verify_era_filter(browser_page, era):
     # After clicking "Explore all" from Timeline, the Era filter should be set
-    # Wait for Explore Stories page to load
-    wait_for_content(browser_page, ".results-count", timeout=5000)
+    # Wait for My Work page to load
+    wait_for_content(browser_page, ".es-results-count", timeout=5000)
 
     # Look for any Era filter/selectbox that shows a value (not "All Eras")
     era_select = browser_page.locator("[data-testid='stSelectbox']")
     if era_select.count() > 0:
-        # Check that we're on Explore Stories with some era filter active
-        results = browser_page.locator(".results-count")
-        assert results.is_visible(), "Should be on Explore Stories page with results"
+        # Check that we're on My Work with some era filter active
+        results = browser_page.locator(".es-results-count")
+        assert results.is_visible(), "Should be on My Work page with results"
         return
 
-    # Fallback: just verify we're on Explore Stories with filtered results
-    assert browser_page.locator(".results-count").is_visible()
+    # Fallback: just verify we're on My Work with filtered results
+    assert browser_page.locator(".es-results-count").is_visible()
 
 
 @then("results should be filtered to that era")
@@ -909,7 +908,7 @@ def verify_view_mode(browser_page, view):
     elif view == "Cards":
         # Wait for Cards view content to appear
         try:
-            browser_page.wait_for_selector(".fixed-height-card", timeout=10000)
+            browser_page.wait_for_selector(".es-fixed-height-card", timeout=10000)
         except Exception:
             # If Cards view didn't render, check if we're in Table view instead
             # (Reset may have reverted to default view - this is acceptable behavior)
@@ -918,7 +917,7 @@ def verify_view_mode(browser_page, view):
                 pytest.skip(
                     "View mode reset to Table (default) after Reset - acceptable behavior"
                 )
-        cards = browser_page.locator(".fixed-height-card")
+        cards = browser_page.locator(".es-fixed-height-card")
         if cards.count() == 0:
             # Check if Table view is showing instead
             table = browser_page.locator("[data-testid='stCustomComponentV1']")
@@ -929,10 +928,10 @@ def verify_view_mode(browser_page, view):
             raise AssertionError("Cards view content not found")
     elif view == "Timeline":
         try:
-            browser_page.wait_for_selector(".timeline-container", timeout=10000)
+            browser_page.wait_for_selector(".es-timeline-container", timeout=10000)
         except Exception:
             pass
-        assert browser_page.locator(".timeline-container").count() > 0
+        assert browser_page.locator(".es-timeline-container").count() > 0
 
 
 @then("stories should be displayed in a table format")
@@ -957,7 +956,7 @@ def verify_table_columns(browser_page):
 
 @then("stories should be displayed as cards")
 def verify_cards_format(browser_page):
-    cards = browser_page.locator(".fixed-height-card")
+    cards = browser_page.locator(".es-fixed-height-card")
     assert cards.count() > 0
 
 
@@ -969,7 +968,7 @@ def verify_card_content(browser_page):
 
 @then("stories should be grouped by career era")
 def verify_timeline_groups(browser_page):
-    eras = browser_page.locator(".timeline-group, .timeline-container")
+    eras = browser_page.locator(".es-timeline-group, .es-timeline-container")
     assert eras.count() > 0
 
 
@@ -1002,8 +1001,8 @@ def verify_filter_preserved(browser_page, filter_name, value):
 
 @then("the story detail should still be open")
 def verify_detail_open(browser_page):
-    # Story detail shows with .detail-header and .star-label elements
-    detail = browser_page.locator(".detail-header, .star-label")
+    # Story detail shows with .es-detail-header and .star-label elements
+    detail = browser_page.locator(".es-detail-header, .star-label")
     assert detail.first.is_visible(), "Story detail not visible"
 
 
@@ -1013,22 +1012,26 @@ def verify_story_id(browser_page, story_id):
     # Look for story title containing keywords from the ID
     keywords = story_id.replace("-", " ").split()[:3]  # First 3 words
     for keyword in keywords:
-        if browser_page.locator(f".detail-header:has-text('{keyword}')").count() > 0:
-            return
+        if "'" not in keyword:  # apostrophe breaks CSS :has-text() parser
+            if (
+                browser_page.locator(f".es-detail-header:has-text('{keyword}')").count()
+                > 0
+            ):
+                return
         if browser_page.locator(f"text=/{keyword}/i").count() > 0:
             return
     # Just verify a detail panel is open
-    detail = browser_page.locator(".detail-header, .star-label")
+    detail = browser_page.locator(".es-detail-header, .star-label")
     assert detail.first.is_visible(), f"Story detail with '{story_id}' not found"
 
 
 @then("the story detail panel should open")
 def verify_detail_panel_open(browser_page):
-    # Story detail panel has .detail-header and STAR sections
-    wait_for_content(browser_page, ".detail-header, .star-label", timeout=5000)
+    # Story detail panel has .es-detail-header and STAR sections
+    wait_for_content(browser_page, ".es-detail-header, .star-label", timeout=5000)
 
     # Check for detail header (primary indicator)
-    detail_header = browser_page.locator(".detail-header")
+    detail_header = browser_page.locator(".es-detail-header")
     if detail_header.count() > 0 and detail_header.first.is_visible():
         return
 
@@ -1078,34 +1081,23 @@ def verify_detail_section(browser_page, section):
 @then("the story list should be visible")
 def verify_story_list(browser_page):
     stories = browser_page.locator(
-        ".fixed-height-card, .ag-root-wrapper, .timeline-container"
+        ".es-fixed-height-card, .ag-root-wrapper, .es-timeline-container"
     )
     assert stories.first.is_visible()
 
 
 @then('the "Ask Agy About This" button should be visible')
 def verify_ask_agy_button(browser_page):
-    # Ask Agy button is an anchor with id "btn-ask-story" or contains "Ask Agy" text
-    wait_for_content(
-        browser_page, "#btn-ask-story, a:has-text('Ask Agy')", timeout=5000
-    )
-
-    # Check for the anchor button
-    btn = browser_page.locator("#btn-ask-story, a:has-text('Ask Agy')")
-    if btn.count() > 0 and btn.first.is_visible():
-        return
-
-    # Check for any text containing "Ask Agy"
-    text = browser_page.locator("text=Ask Agy")
-    if text.count() > 0 and text.first.is_visible():
-        return
-
-    raise AssertionError("Ask Agy button not visible")
+    # Story-detail "Ask Agy 🐾 About This" button has unique ID #btn-ask-story
+    # (story_detail.py:867). Text-based fallbacks were removed because "Ask Agy"
+    # also appears on the (hidden) mobile-nav link after the MATTGPT-100 rename.
+    btn = browser_page.locator("#btn-ask-story").first
+    btn.wait_for(state="visible", timeout=5000)
 
 
-@then("the page should navigate to Ask MattGPT")
+@then("the page should navigate to Ask Agy")
 def verify_navigate_to_ask(browser_page):
-    # Check for Ask MattGPT page elements (header is most reliable)
+    # Check for Ask Agy page elements (header is most reliable)
     ask_page_selector = ".ask-header-landing, .ask-header-conversation, .st-key-intro_section, [data-testid='stChatInput']"
     browser_page.wait_for_selector(ask_page_selector, timeout=15000)
 
@@ -1148,13 +1140,11 @@ def verify_clipboard(browser_page, shared_browser, app_url):
 
     try:
         # Navigate to localhost with the story parameter
-        # First go to the app and click Explore Stories
+        # First go to the app and click My Work
         new_page.goto(app_url)
         new_page.wait_for_load_state("networkidle")
-        new_page.wait_for_selector("button:has-text('Explore Stories')", timeout=30000)
-        nav_button = new_page.locator(
-            "button:has-text('Explore Stories'):visible"
-        ).first
+        new_page.wait_for_selector("button:has-text('My Work')", timeout=30000)
+        nav_button = new_page.locator("button:has-text('My Work'):visible").first
         nav_button.click()
         new_page.wait_for_load_state("networkidle")
 
@@ -1164,10 +1154,10 @@ def verify_clipboard(browser_page, shared_browser, app_url):
         new_page.wait_for_load_state("networkidle")
 
         # Wait for story detail to open
-        wait_for_content(new_page, ".detail-header, .star-label", timeout=10000)
+        wait_for_content(new_page, ".es-detail-header, .star-label", timeout=10000)
 
         # Verify story detail is visible
-        detail = new_page.locator(".detail-header, .star-label")
+        detail = new_page.locator(".es-detail-header, .star-label")
         assert detail.first.is_visible(), "Story detail did not open from deeplink URL"
     finally:
         new_page.close()
@@ -1177,7 +1167,7 @@ def verify_clipboard(browser_page, shared_browser, app_url):
 @then("the pagination should show page numbers")
 def verify_pagination(browser_page):
     pagination = browser_page.locator(
-        ".pagination, button:has-text('Next'), button:has-text('Previous')"
+        ".es-pagination, button:has-text('Next'), button:has-text('Previous')"
     )
     assert pagination.count() > 0
 
@@ -1200,7 +1190,7 @@ def verify_different_stories(browser_page):
 @then(parsers.parse("up to {count:d} stories should be displayed per page"))
 def verify_page_size(browser_page, count):
     stories = browser_page.locator(
-        ".fixed-height-card, .ag-root-wrapper .ag-row, .story-card"
+        ".es-fixed-height-card, .ag-root-wrapper .ag-row, .es-story-card"
     )
     assert stories.count() <= count
 
@@ -1271,10 +1261,10 @@ def verify_no_crash(browser_page):
 
 @then("the story detail should be open")
 def verify_story_detail_open(browser_page):
-    # Story detail renders with .detail-header, .star-label, and #btn-share-story
+    # Story detail renders with .es-detail-header, .star-label, and #btn-share-story
     # Wait longer for deeplinks which trigger a Streamlit rerun
     found = wait_for_content(
-        browser_page, ".detail-header, .star-label, #btn-share-story", timeout=15000
+        browser_page, ".es-detail-header, .star-label, #btn-share-story", timeout=15000
     )
 
     if found:
@@ -1298,8 +1288,8 @@ def verify_story_detail_open(browser_page):
 def verify_specific_view_mode(browser_page, view):
     wait_for_streamlit_rerun(browser_page)
     if view == "Cards":
-        wait_for_content(browser_page, ".fixed-height-card", timeout=5000)
-        cards = browser_page.locator(".fixed-height-card")
+        wait_for_content(browser_page, ".es-fixed-height-card", timeout=5000)
+        cards = browser_page.locator(".es-fixed-height-card")
         if cards.count() == 0:
             pytest.skip("Cards view content not found")
     elif view == "Table":
@@ -1311,8 +1301,8 @@ def verify_specific_view_mode(browser_page, view):
         if aggrid_iframe.count() == 0:
             pytest.skip("Table view content not found (AgGrid iframe)")
     elif view == "Timeline":
-        wait_for_content(browser_page, ".timeline-container", timeout=5000)
-        timeline = browser_page.locator(".timeline-container")
+        wait_for_content(browser_page, ".es-timeline-container", timeout=5000)
+        timeline = browser_page.locator(".es-timeline-container")
         if timeline.count() == 0:
             pytest.skip("Timeline view content not found")
 
@@ -1329,7 +1319,7 @@ def verify_specific_view_mode(browser_page, view):
 def rejection_banner_displayed(browser_page):
     """Wait for the .no-match-banner DOM element to render after a rejected
     query. The banner is rendered by render_no_match_banner() in
-    utils/ui_helpers.py — present in both Ask MattGPT and Explore Stories
+    utils/ui_helpers.py — present in both Ask Agy and My Work
     surfaces with the same class hook."""
     browser_page.wait_for_selector(".no-match-banner", timeout=10000)
     banner = browser_page.locator(".no-match-banner").first
@@ -1361,6 +1351,135 @@ def banner_displays_copy_from_banner_copy(browser_page, reason):
     )
 
 
+# =============================================================================
+# TWO-ROW FILTER BAR (MATTGPT-065)
+# =============================================================================
+
+
+@given("the viewport width is 1280px")
+def set_viewport_desktop(browser_page):
+    browser_page.set_viewport_size({"width": 1280, "height": 900})
+    browser_page.wait_for_timeout(SHORT_WAIT)
+
+
+@when("the page loads")
+def wait_for_page_stable(browser_page):
+    browser_page.wait_for_load_state("networkidle")
+    browser_page.wait_for_timeout(SHORT_WAIT)
+
+
+@when("the viewport is resized to 375px wide")
+def resize_to_mobile(browser_page):
+    browser_page.set_viewport_size({"width": 375, "height": 800})
+    browser_page.wait_for_timeout(SHORT_WAIT)
+
+
+@then("the Client filter should be visible")
+def client_filter_visible(browser_page):
+    el = browser_page.locator("[class*='st-key-r2_client']").first
+    assert el.is_visible(), "Client filter (r2_client) not visible on desktop"
+
+
+@then("the Role filter should be visible")
+def role_filter_visible(browser_page):
+    el = browser_page.locator("[class*='st-key-r2_role']").first
+    assert el.is_visible(), "Role filter (r2_role) not visible on desktop"
+
+
+@then("the Domain filter should be visible")
+def domain_filter_visible(browser_page):
+    el = browser_page.locator("[class*='st-key-r2_domain']").first
+    assert el.is_visible(), "Domain filter (r2_domain) not visible on desktop"
+
+
+@then("the Industry filter label should be visible")
+def industry_filter_label_visible(browser_page):
+    # MATTGPT-123: _v2 key required — Green will need Python key bump on the Industry selectbox
+    el = browser_page.locator(
+        "[class*='st-key-facet_industry_v2'] [data-testid='stWidgetLabel']"
+    ).first
+    assert el.is_visible(), (
+        "Industry filter label not visible — MATTGPT-123: inline label may not be rendering. "
+        "Check that the stForm label-hide rule is not catching this element."
+    )
+
+
+@then("the Capability filter label should be visible")
+def capability_filter_label_visible(browser_page):
+    # MATTGPT-123: _v2 key required — Green will need Python key bump on the Capability selectbox
+    el = browser_page.locator(
+        "[class*='st-key-facet_capability_v2'] [data-testid='stWidgetLabel']"
+    ).first
+    assert el.is_visible(), (
+        "Capability filter label not visible — MATTGPT-123: inline label may not be rendering. "
+        "Check that the stForm label-hide rule is not catching this element."
+    )
+
+
+@then("the Reset filters button should be visible")
+def reset_filters_button_visible(browser_page):
+    el = browser_page.locator("[class*='st-key-r2_reset'] button").first
+    assert el.is_visible(), (
+        "Reset filters button not visible — MATTGPT-123: text-link styling may be "
+        "accidentally hiding the element instead of just restyling it."
+    )
+
+
+@then("the row 2 filter bar should not be visible")
+def row2_filter_bar_hidden(browser_page):
+    el = browser_page.locator("[class*='st-key-r2_row']").first
+    assert (
+        not el.is_visible()
+    ), "Row 2 filter bar should be hidden on mobile but is visible"
+
+
+@then("the row 2 filter bar should be visible")
+def row2_filter_bar_visible(browser_page):
+    el = browser_page.locator("[class*='st-key-r2_row']").first
+    assert el.is_visible(), (
+        "Row 2 filter bar should be visible after toggle but is hidden. "
+        "MATTGPT-119: Filters toggle may not be showing Row 2."
+    )
+
+
+@then(parsers.parse('a button with text containing "{text}" should be visible'))
+def button_with_text_visible(browser_page, text):
+    # Scoped to the mobile filters toggle container to avoid false positives
+    # from other buttons containing "filter" (e.g., "Reset filters")
+    btn = browser_page.locator(
+        f"[class*='st-key-es_mobile_filters_toggle'] button:has-text('{text}')"
+    ).first
+    assert btn.is_visible(), (
+        f"Expected a visible mobile Filters toggle button containing '{text}' but none found. "
+        "MATTGPT-119: mobile Filters toggle button may not be rendered."
+    )
+
+
+@then(parsers.parse('no button with text containing "{text}" should be visible'))
+def button_with_text_not_visible(browser_page, text):
+    # Scoped to the mobile filters toggle container — avoids matching "Reset filters"
+    btn = browser_page.locator(
+        f"[class*='st-key-es_mobile_filters_toggle'] button:has-text('{text}')"
+    )
+    count = btn.count()
+    visible = any(btn.nth(i).is_visible() for i in range(count))
+    assert not visible, (
+        f"Expected mobile Filters toggle button containing '{text}' to be hidden but it is visible. "
+        "MATTGPT-119: Filters toggle button should be hidden on desktop."
+    )
+
+
+@when(parsers.parse('the user clicks the "{label}" button'))
+def click_button_by_label(browser_page, label):
+    btn = browser_page.locator(
+        f"[class*='st-key-es_mobile_filters_toggle'] button:has-text('{label}')"
+    ).first
+    btn.wait_for(state="visible", timeout=30000)
+    btn.click()
+    browser_page.wait_for_load_state("networkidle")
+    browser_page.wait_for_timeout(SHORT_WAIT)
+
+
 @then("no story results should be shown")
 def no_story_results_shown(browser_page):
     """After a rejected query, the results area should be empty —
@@ -1368,7 +1487,7 @@ def no_story_results_shown(browser_page):
     actually short-circuited the search instead of returning some
     fallback result set."""
     ag_rows = browser_page.locator(".ag-row").count()
-    story_cards = browser_page.locator(".fixed-height-card, .story-card").count()
+    story_cards = browser_page.locator(".es-fixed-height-card, .es-story-card").count()
     assert ag_rows == 0 and story_cards == 0, (
         f"Expected zero story results after rejection, "
         f"found {ag_rows} AgGrid rows + {story_cards} story cards"

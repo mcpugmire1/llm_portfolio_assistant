@@ -1,7 +1,7 @@
 """
-Ask MattGPT Landing View
+Ask Agy Landing View
 
-Landing page UI for Ask MattGPT with:
+Landing page UI for Ask Agy with:
 - Purple hero header with Agy introduction
 - Status bar showing system readiness
 - Suggestion chips for quick starts
@@ -14,22 +14,19 @@ import streamlit.components.v1 as components
 
 from ui.components.ask_mattgpt_header import (
     render_header,
-    render_modal_wrapper_end,
-    render_modal_wrapper_start,
     render_status_bar,
 )
-from ui.components.how_agy_modal import (
-    get_how_agy_flow_html,
-    get_technical_details_html,
-)
+from ui.components.how_agy_dialog import render_how_agy_dialog
+from ui.components.how_i_built_dialog import render_how_i_built_dialog
 from ui.components.thinking_indicator import render_thinking_indicator
+from ui.components.why_agy_dialog import render_why_agy_dialog
 from ui.pages.ask_mattgpt.backend_service import send_to_backend
 from ui.pages.ask_mattgpt.styles import get_landing_css
 
 
 def render_landing_page(stories: list[dict]):
     """
-    Render the Ask MattGPT landing page (empty state) matching the wireframe.
+    Render the Ask Agy landing page (empty state) matching the wireframe.
     NAVBAR IS RENDERED BY PARENT - NO NAVBAR CSS HERE
     """
 
@@ -59,12 +56,18 @@ def render_landing_page(stories: list[dict]):
     # Header with button
     render_header(include_button=True, view="landing")
 
-    # Modal (if open)
-    if st.session_state.get("show_how_modal", False):
-        st.markdown(render_modal_wrapper_start(), unsafe_allow_html=True)
-        components.html(get_how_agy_flow_html(), height=1180)
-        components.html(get_technical_details_html(), height=850)
-        st.markdown(render_modal_wrapper_end(), unsafe_allow_html=True)
+    # How Agy Searches dialog (MATTGPT-110) — @st.dialog, no inline expander.
+    # active_dialog flag set by how_agy_trigger button in ask_mattgpt_header.py.
+    # Clear flag after call so X/Escape/backdrop dismiss doesn't reopen on next rerun.
+    if st.session_state.get("active_dialog") == "why_agy":
+        render_why_agy_dialog()
+        st.session_state.pop("active_dialog", None)
+    elif st.session_state.get("active_dialog") == "how_agy":
+        render_how_agy_dialog()
+        st.session_state.pop("active_dialog", None)
+    elif st.session_state.get("active_dialog") == "how_i_built":
+        render_how_i_built_dialog()
+        st.session_state.pop("active_dialog", None)
 
     # === STATUS BAR ===
     st.markdown(render_status_bar(), unsafe_allow_html=True)
@@ -74,12 +77,13 @@ def render_landing_page(stories: list[dict]):
         st.markdown(
             """
         <div class="main-intro-section">
-            <div class="main-avatar">
-                <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png" alt="Agy"/>
+            <div class="main-avatar" style="position: relative; display: inline-block;">
+                <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png" width="120" height="120" alt="Agy"/>
+                <span class="why-agy-badge" id="why-agy-badge-landing">i</span>
             </div>
             <h2 class="welcome-title">Hi, I'm Agy 🐾</h2>
             <p class="intro-text-primary">
-                Go deeper than a resume. Ask me anything about Matt's 130+ projects—I'll connect the dots.
+                Go deeper than a resume. Ask me anything about Matt's 100+ stories. I'll connect the dots.
             </p>
             <p style="font-size: 13px; font-style: italic; color: var(--text-muted); margin-top: 2px; margin-bottom: 0;">
                 Named in honor of Matt's Plott Hound companion.
@@ -87,6 +91,44 @@ def render_landing_page(stories: list[dict]):
         </div>
         """,
             unsafe_allow_html=True,
+        )
+
+        # Hidden trigger for Why Agy badge — badge click fires this via JS bridge.
+        st.markdown(
+            '<style>[class*="st-key-why_agy_landing_body_trigger"] { display: none !important; }</style>',
+            unsafe_allow_html=True,
+        )
+        if st.button("", key="why_agy_landing_body_trigger"):
+            st.session_state["active_dialog"] = "why_agy"
+            st.rerun()
+        components.html(
+            """
+<script>
+(function() {
+    function wireBadge() {
+        var parentDoc = window.parent.document;
+        var badge = parentDoc.getElementById('why-agy-badge-landing');
+        var btn = parentDoc.querySelector('[class*="st-key-why_agy_landing_body_trigger"] button');
+        if (badge && btn && !badge.dataset.wired) {
+            badge.dataset.wired = 'true';
+            badge.addEventListener('pointerdown', function(e) {
+                e.preventDefault();
+                btn.click();
+            });
+            return true;
+        }
+        return false;
+    }
+    if (!wireBadge()) {
+        var attempts = 0;
+        var iv = setInterval(function() {
+            if (wireBadge() || ++attempts > 10) clearInterval(iv);
+        }, 200);
+    }
+})();
+</script>
+""",
+            height=0,
         )
 
         st.markdown(
@@ -97,42 +139,78 @@ def render_landing_page(stories: list[dict]):
         qs = [
             (
                 "💳",
+                "Payments at JP Morgan",
                 "How did Matt modernize payments across 12+ countries at JP Morgan?",
             ),
-            ("🔬", "Tell me about Matt's early failure and experimentation approach"),
-            ("🚀", "How does Matt build teams that ship like startups in enterprise?"),
+            (
+                "🔬",
+                "Failure & experiments",
+                "Tell me about Matt's early failure and experimentation approach",
+            ),
+            (
+                "🚀",
+                "Startup-speed teams",
+                "How does Matt build teams that ship like startups in enterprise?",
+            ),
             (
                 "🏗️",
+                "Cloud Innovation Center",
                 "How did Matt establish and expand the Cloud Innovation Center in Atlanta?",
             ),
-            ("📈", "How did Matt scale learning and talent development at Accenture?"),
-            ("💥", "How does Matt handle resistance and failure in transformations?"),
+            (
+                "📈",
+                "Talent development",
+                "How did Matt scale learning and talent development at Accenture?",
+            ),
+            (
+                "💥",
+                "Leading through resistance",
+                "How does Matt handle resistance and failure in transformations?",
+            ),
         ]
 
-        c1, c2 = st.columns(2, gap="small")
+        is_mobile = int(st.session_state.get("_browser_screen_size") or "1024") < 768
 
         # Disable all buttons when any is processing
         disabled = st.session_state.get("processing_suggestion", False)
 
-        for i, (icon, q) in enumerate(qs):
-            with c1 if i % 2 == 0 else c2:
-                if st.button(
-                    f"{icon}  {q}",
-                    key=f"suggested_{i}",
-                    type="secondary",
-                    use_container_width=True,
-                    disabled=disabled,
-                ):
-                    # Set state and trigger rerun to show loading state
-                    # NOTE: Don't set "landing_input" - it's controlled by the widget
-                    st.session_state["ask_transcript"] = []
-                    st.session_state["processing_suggestion"] = True
-                    st.session_state["pending_query"] = q
-                    st.session_state["ask_input_value"] = q
-                    st.session_state["__ask_force_answer__"] = (
-                        True  # 🔥 BYPASS NONSENSE FILTER
-                    )
-                    st.rerun()
+        with st.container(key="chip_grid"):
+            if is_mobile:
+                # No st.columns() — CSS flex-wraps the chips directly as pills
+                for i, (icon, short_label, q) in enumerate(qs):
+                    if st.button(
+                        f"{icon}  {short_label}",
+                        key=f"suggested_{i}",
+                        type="secondary",
+                        disabled=disabled,
+                    ):
+                        st.session_state["ask_transcript"] = []
+                        st.session_state["processing_suggestion"] = True
+                        st.session_state["pending_query"] = q
+                        st.session_state["ask_input_value"] = q
+                        st.session_state["__ask_force_answer__"] = (
+                            True  # 🔥 BYPASS NONSENSE FILTER
+                        )
+                        st.rerun()
+            else:
+                c1, c2 = st.columns(2, gap="small")
+                for i, (icon, _short_label, q) in enumerate(qs):
+                    with c1 if i % 2 == 0 else c2:
+                        if st.button(
+                            f"{icon}  {q}",
+                            key=f"suggested_{i}",
+                            type="secondary",
+                            use_container_width=True,
+                            disabled=disabled,
+                        ):
+                            st.session_state["ask_transcript"] = []
+                            st.session_state["processing_suggestion"] = True
+                            st.session_state["pending_query"] = q
+                            st.session_state["ask_input_value"] = q
+                            st.session_state["__ask_force_answer__"] = (
+                                True  # 🔥 BYPASS NONSENSE FILTER
+                            )
+                            st.rerun()
 
     # === THINKING INDICATOR ===
     loading_placeholder = st.empty()
@@ -241,7 +319,7 @@ def render_landing_page(stories: list[dict]):
 
     st.markdown('</div>', unsafe_allow_html=True)
     st.markdown(
-        '<p class="powered-by-text">Powered by OpenAI GPT-4o with semantic search across 130+ project case studies</p>',
+        '<p class="powered-by-text">Powered by OpenAI GPT-4o with semantic search across 100+ case studies</p>',
         unsafe_allow_html=True,
     )
 

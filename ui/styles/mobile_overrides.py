@@ -470,9 +470,9 @@ def get_mobile_css() -> str:
                HOME PAGE - HERO SECTION
                ======================================== */
 
-            /* Hero gradient wrapper */
+            /* Hero gradient wrapper — clear the 56px fixed mobile header */
             .hero-gradient-wrapper {
-                margin-top: 0 !important;
+                margin-top: 56px !important;
             }
 
             .hero-content {
@@ -834,7 +834,7 @@ def get_mobile_css() -> str:
             }
 
             /* Story card - wireframe: 20px padding, full width */
-            .fixed-height-card {
+            .es-fixed-height-card {
                 padding: 20px !important;
                 height: auto !important;
                 min-height: 280px !important;
@@ -842,46 +842,23 @@ def get_mobile_css() -> str:
             }
 
             /* Card title */
-            .card-title,
-            .fixed-height-card h3 {
+            .es-card-title,
+            .es-fixed-height-card h3 {
                 font-size: 16px !important;
                 line-height: 1.4 !important;
                 margin-bottom: 8px !important;
             }
 
             /* Card client badge */
-            .card-client-badge {
+            .es-card-client-badge {
                 font-size: 11px !important;
                 padding: 3px 8px !important;
             }
 
             /* Card description */
-            .card-desc {
+            .es-card-desc {
                 font-size: 14px !important;
                 -webkit-line-clamp: 4 !important;
-            }
-
-            /* Card footer */
-            .card-footer {
-                flex-direction: column !important;
-                align-items: flex-start !important;
-                gap: 8px !important;
-            }
-
-            .card-role {
-                font-size: 12px !important;
-            }
-
-            .card-domain-tag {
-                font-size: 11px !important;
-            }
-
-            /* View details button - full width */
-            .card-btn-view-details {
-                width: 100% !important;
-                text-align: center !important;
-                padding: 12px 16px !important;
-                font-size: 14px !important;
             }
 
             /* Hidden card buttons */
@@ -896,19 +873,19 @@ def get_mobile_css() -> str:
                PAGINATION - MOBILE
                ======================================== */
 
-            .pagination {
+            .es-pagination {
                 flex-wrap: wrap !important;
                 gap: 6px !important;
                 padding: 16px 12px !important;
             }
 
-            .pagination button {
+            .es-pagination button {
                 padding: 8px 10px !important;
                 font-size: 12px !important;
                 min-width: 36px !important;
             }
 
-            .pagination .page-info {
+            .es-pagination .page-info {
                 width: 100% !important;
                 text-align: center !important;
                 order: -1 !important;

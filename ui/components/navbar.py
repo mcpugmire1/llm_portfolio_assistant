@@ -23,22 +23,84 @@ def render_navbar(current_tab: str = "Home"):
     # CSS only - mobile HTML injected via components.html
     st.markdown(
         """<style>
-div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) {
+/* Strip Streamlit's inner block margins inside the navbar brand column only.
+   Guard matches rules 2-5 below — prevents hitting other stHorizontalBlock
+   layouts on the page (e.g. Ask Agy suggestion chip grid left column). */
+div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-testid="stColumn"]:first-child div[data-testid="stVerticalBlock"] {
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 0 !important;
+}
+        /* Strip Streamlit's default element margin/padding from the brand container */
+div[data-testid="stColumn"]:has(.navbar-brand) div[data-testid="stBlock"] {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Outer block: the navbar itself */
+div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]):has(div[data-testid="stHorizontalBlock"]) {
     background: var(--dark-navy) !important;
-    padding: 16px 40px !important;
+    padding: 0 40px !important;
     margin: 40px 0 0 0 !important;
-    height: 72px !important;
+    min-height: 72px !important;
     border-radius: 0 !important;
+    align-items: center !important;
     position: relative !important;
     z-index: 999998 !important;
-    justify-content: space-evenly !important;
 }
-div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-testid="column"] {
-    background: var(--dark-navy) !important;
-    flex: 1 1 calc(20% - 1rem) !important;
-    width: calc(20% - 1rem) !important;
-    min-width: calc(20% - 1rem) !important;
-    max-width: calc(20% - 1rem) !important;
+
+/* Outer columns (brand_col, nav_container): center their content */
+div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]):has(div[data-testid="stHorizontalBlock"]) > div[data-testid="stColumn"] {
+    display: flex !important;
+    align-items: center !important;
+    min-height: 72px !important;
+}
+
+/* Inner block: transparent container, right-justify buttons */
+div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]):not(:has(div[data-testid="stHorizontalBlock"])) {
+    justify-content: flex-end !important;
+    align-items: center !important;
+    min-height: 72px !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+}
+
+/* Nav columns: natural width */
+div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]):not(:has(div[data-testid="stHorizontalBlock"])) > div[data-testid="stColumn"] {
+flex: 0 1 auto !important;
+    width: auto !important;
+    min-width: auto !important;
+    max-width: none !important;
+    background: transparent !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* Brand: just text, no positioning */
+/* Brand column needs position: relative to anchor the absolutely-positioned
+   .navbar-brand inside it. Streamlit's stMarkdown wrapper layers were
+   ignoring flex centering, so we use absolute positioning instead. */
+div[data-testid="stColumn"]:has(.navbar-brand) {
+    position: relative !important;
+    min-height: 72px !important;
+}
+.navbar-brand {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    left: 0 !important;
+    color: white;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    line-height: 1;
+}
+/* Strip default paragraph margin inside the brand column */
+div[data-testid="stColumn"]:first-child p {
+    margin-bottom: 0 !important;
 }
 [class*="st-key-topnav_"] button {
     background: transparent !important;
@@ -50,6 +112,7 @@ div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-t
     margin-top: 0 !important;
     white-space: nowrap !important;
     font-size: 14px !important;
+    width: auto !important;
 }
 [class*="st-key-topnav_"] button:hover {
     background: rgba(255, 255, 255, 0.1) !important;
@@ -71,6 +134,15 @@ div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-t
         left: -9999px !important;
         height: 0 !important;
         overflow: hidden !important;
+    }
+    /* Also collapse the desktop navbar's outer stLayoutWrapper on mobile.
+       The offscreen-positioning rule above hides the inner block visually
+       but the wrapper still reserves ~184px of vertical flow below the
+       fixed mobile header. Hiding the wrapper removes that gap entirely.
+       The mobile dropdown is unaffected — it's a separate fixed-position
+       element built from .mobile-nav-dropdown by the components.html JS. */
+    div[data-testid="stLayoutWrapper"]:has([class*="st-key-topnav_"]) {
+        display: none !important;
     }
     .mobile-header {
         display: flex !important;
@@ -187,20 +259,33 @@ div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-t
         unsafe_allow_html=True,
     )
 
-    # Desktop navigation buttons
-    with st.container():
-        labels = [
-            ("Home", "Home"),
-            ("Explore Stories", "Explore Stories"),
-            ("Ask MattGPT", "Ask MattGPT"),
-            ("Role Match", "Role Match"),
-            ("About Matt", "About Matt"),
-        ]
+    # Desktop navigation: brand-left (MATTGPT-106) + 5 nav buttons grouped right.
+    # Outer columns split [1, 4] = brand (~20%) + nav container (~80%). The 5
+    # nav buttons live inside the nav_container's nested 5-column block so the
+    # existing stHorizontalBlock:has([class*="st-key-topnav_"]) CSS scopes to
+    # the nested row only — the outer brand+container block doesn't get the
+    # navbar styling. Brand cell uses its own .navbar-brand styling (dark-navy
+    # bg, 72px height, 40px top margin) to align visually with the nav row.
+    labels = [
+        ("Home", "Home"),
+        ("My Work", "My Work"),
+        ("Ask Agy", "Ask Agy"),
+        ("Role Match", "Role Match"),
+        ("My Profile", "My Profile"),
+    ]
 
-        cols = st.columns(len(labels), gap="small")
+    brand_col, nav_container = st.columns([1, 4])
 
+    with brand_col:
+        st.markdown(
+            '<div class="navbar-brand">MattGPT</div>',
+            unsafe_allow_html=True,
+        )
+
+    with nav_container:
+        nav_cols = st.columns(len(labels), gap="small")
         for i, (label, name) in enumerate(labels):
-            with cols[i]:
+            with nav_cols[i]:
                 if st.button(
                     label,
                     use_container_width=True,
@@ -209,16 +294,16 @@ div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-t
                     disabled=(name == current_tab),
                 ):
                     st.session_state["active_tab"] = name
-                    if name == "Explore Stories":
+                    if name == "My Work":
                         st.session_state["_just_switched_to_explore"] = True
                     st.rerun()
 
     # Mobile menu JS
     active_home = "active" if current_tab == "Home" else ""
-    active_explore = "active" if current_tab == "Explore Stories" else ""
-    active_ask = "active" if current_tab == "Ask MattGPT" else ""
+    active_explore = "active" if current_tab == "My Work" else ""
+    active_ask = "active" if current_tab == "Ask Agy" else ""
     active_role = "active" if current_tab == "Role Match" else ""
-    active_about = "active" if current_tab == "About Matt" else ""
+    active_about = "active" if current_tab == "My Profile" else ""
 
     js_code = """
     <script>
@@ -248,7 +333,7 @@ div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-t
         var header = document.createElement('div');
         header.className = 'mobile-header';
         header.id = 'mobile-header';
-        header.innerHTML = '<button class="mobile-hamburger" id="mobile-hamburger" aria-label="Menu"><span></span><span></span><span></span></button><div class="mobile-brand"><img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png" alt="Agy"><span>MattGPT</span></div><div class="mobile-spacer"></div>';
+        header.innerHTML = '<button class="mobile-hamburger" id="mobile-hamburger" aria-label="Menu"><span></span><span></span><span></span></button><div class="mobile-brand"><img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png" width="44" height="44" alt="Agy"><span>MattGPT</span></div><div class="mobile-spacer"></div>';
         doc.body.insertBefore(header, doc.body.firstChild);
 
         // Create overlay
@@ -261,7 +346,7 @@ div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-t
         var dropdown = document.createElement('nav');
         dropdown.className = 'mobile-nav-dropdown';
         dropdown.id = 'mobile-nav-dropdown';
-        dropdown.innerHTML = '<a href="#" id="mobile-nav-home" class="ACTIVE_HOME">Home</a><a href="#" id="mobile-nav-explore" class="ACTIVE_EXPLORE">Explore Stories</a><a href="#" id="mobile-nav-ask" class="ACTIVE_ASK">Ask MattGPT</a><a href="#" id="mobile-nav-role" class="ACTIVE_ROLE">Role Match</a><a href="#" id="mobile-nav-about" class="ACTIVE_ABOUT">About Matt</a><a href="#" id="mobile-nav-settings" style="border-top:1px solid rgba(255,255,255,0.2);margin-top:8px;padding-top:16px;">⚙️ Settings</a>';
+        dropdown.innerHTML = '<a href="#" id="mobile-nav-home" class="ACTIVE_HOME">Home</a><a href="#" id="mobile-nav-explore" class="ACTIVE_EXPLORE">My Work</a><a href="#" id="mobile-nav-ask" class="ACTIVE_ASK">Ask Agy</a><a href="#" id="mobile-nav-role" class="ACTIVE_ROLE">Role Match</a><a href="#" id="mobile-nav-about" class="ACTIVE_ABOUT">My Profile</a><a href="#" id="mobile-nav-settings" style="border-top:1px solid rgba(255,255,255,0.2);margin-top:8px;padding-top:16px;">⚙️ Settings</a>';
         doc.body.insertBefore(dropdown, doc.body.firstChild);
 
         // Event handlers
@@ -285,10 +370,10 @@ div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-t
         // Nav link handlers
         var links = {
             'mobile-nav-home': 'topnav_Home',
-            'mobile-nav-explore': 'topnav_Explore',
-            'mobile-nav-ask': 'topnav_Ask',
-            'mobile-nav-role': 'topnav_Role',
-            'mobile-nav-about': 'topnav_About'
+            'mobile-nav-explore': 'topnav_My-Work',
+            'mobile-nav-ask': 'topnav_Ask-Agy',
+            'mobile-nav-role': 'topnav_Role-Match',
+            'mobile-nav-about': 'topnav_My-Profile'
         };
 
         Object.keys(links).forEach(function(id) {
@@ -296,6 +381,12 @@ div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-t
             if (link) {
                 link.onclick = function(e) {
                     e.preventDefault();
+                    // Hide Ask Agy avatars before the rerun fires (mobile path)
+                    doc.querySelectorAll('.header-agy-avatar, .main-avatar img').forEach(function(el) {
+                        el.style.opacity = '0';
+                        el.style.transition = 'none';
+                    });
+                    doc.body.offsetHeight;
                     var btn = doc.querySelector('[class*="st-key-' + links[id] + '"] button');
                     if (btn) btn.click();
                     dropdown.style.display = 'none';
@@ -316,6 +407,32 @@ div[data-testid="stHorizontalBlock"]:has([class*="st-key-topnav_"]) > div[data-t
                 overlay.style.display = 'none';
                 hamburger.classList.remove('open');
             };
+        }
+
+        // Hide Ask Agy avatars before the Streamlit rerun fires.
+        // mousedown fires before React's synthetic onClick (which triggers the rerun),
+        // giving the browser time to paint opacity:0 before the transition starts.
+        // capture:true ensures we run before React's delegation handler.
+        // One-time setup via flag prevents duplicate listeners across reruns.
+        if (!doc.body.__agiNavAvatarHideV2) {
+            function _hideAgyAvatars() {
+                doc.querySelectorAll('.header-agy-avatar, .main-avatar img').forEach(function(el) {
+                    el.style.opacity = '0';
+                    el.style.transition = 'none';
+                });
+                doc.body.offsetHeight; // force synchronous layout so paint commits before click fires
+            }
+            doc.body.addEventListener('mousedown', function(e) {
+                if (e.target.closest && e.target.closest('[class*="st-key-topnav_"]')) {
+                    _hideAgyAvatars();
+                }
+            }, true);
+            doc.body.addEventListener('touchstart', function(e) {
+                if (e.target.closest && e.target.closest('[class*="st-key-topnav_"]')) {
+                    _hideAgyAvatars();
+                }
+            }, {capture: true, passive: true});
+            doc.body.__agiNavAvatarHideV2 = true;
         }
     })();
     </script>

@@ -1,5 +1,5 @@
 """
-BDD Step Definitions for Ask MattGPT
+BDD Step Definitions for Ask Agy
 
 These step definitions use Playwright for browser automation.
 Install with: pip install pytest-bdd playwright
@@ -50,7 +50,7 @@ def app_url():
 # =============================================================================
 
 
-@given("the user navigates to the Ask MattGPT page")
+@given("the user navigates to the Ask Agy page")
 def navigate_to_landing(browser_page, app_url):
     browser_page.goto(app_url)
     browser_page.wait_for_load_state("networkidle")

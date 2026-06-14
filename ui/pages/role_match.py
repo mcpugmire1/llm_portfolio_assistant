@@ -8,18 +8,22 @@ Architecture: See ADR 016 and services/jd_assessor.py
 """
 
 import html
+from pathlib import Path
 from urllib.parse import urlencode
 
 import streamlit as st
 
 from scripts.utils import slugify
+from services.role_match_summary import build_discussion_points, compute_summary_counts
 from ui.components.action_buttons import (
     get_action_buttons_css,
     get_action_buttons_html,
     render_action_button_handlers,
 )
+from ui.components.how_i_built_dialog import render_how_i_built_dialog
 from ui.components.story_detail import render_story_detail
 from ui.components.thinking_indicator import render_thinking_indicator
+from ui.components.why_agy_dialog import render_why_agy_dialog
 
 # =============================================================================
 # RESULTS RENDERING HELPERS
@@ -172,7 +176,7 @@ def _render_requirement_card(
                 st.markdown(
                     '<div class="role-match-profile-evidence">'
                     '<span class="role-match-verified-dot"></span>'
-                    f" Verified profile · {relevance}"
+                    f" Verified skill · {relevance}"
                     "</div>",
                     unsafe_allow_html=True,
                 )
@@ -421,6 +425,54 @@ def _build_export_html(result_payload: dict) -> str:
     required_html = _render_section("Required Qualifications", required)
     preferred_html = _render_section("Preferred Qualifications", preferred)
 
+    # Summary section — appears above requirements in the export
+    _ex_counts = compute_summary_counts(results)
+    _ex_points = build_discussion_points(results)
+    _ex_rc = _ex_counts["required"]
+    _ex_pc = _ex_counts["preferred"]
+
+    def _ex_count_line(label: str, c: dict) -> str:
+        parts = []
+        if c["strong"] > 0:
+            parts.append(f'{c["strong"]} ✓ strong')
+        if c["partial"] > 0:
+            parts.append(f'{c["partial"]} ~ partial')
+        if c["gap"] > 0:
+            parts.append(f'{c["gap"]} ✗ gap')
+        return f"{label}: {', '.join(parts)}" if parts else ""
+
+    _ex_count_lines = [
+        line
+        for line in [
+            _ex_count_line("Required", _ex_rc),
+            _ex_count_line("Preferred", _ex_pc),
+        ]
+        if line
+    ]
+    _ex_dp_count = sum(
+        1
+        for p in _ex_points
+        if not p.get("is_overflow_indicator") and not p.get("is_zero_case")
+    )
+    _ex_point_rows = []
+    for _pt in _ex_points:
+        if _pt.get("is_zero_case"):
+            _ex_point_rows.append(f'<li>{html.escape(_pt["text"])}</li>')
+        elif _pt.get("is_overflow_indicator"):
+            _ex_point_rows.append(f'<li><em>{html.escape(_pt["text"])}</em></li>')
+        else:
+            _ex_point_rows.append(
+                f'<li><strong>{html.escape(_pt["label_type"])}</strong> — {html.escape(_pt["text"])}</li>'
+            )
+    summary_export_html = (
+        '<div class="summary-section">'
+        '<h2 class="section-title">SUMMARY</h2>'
+        f'<p class="summary-counts">{"  |  ".join(_ex_count_lines)}</p>'
+        f'<p><strong>Discussion points ({_ex_dp_count})</strong></p>'
+        f'<ul>{"".join(_ex_point_rows)}</ul>'
+        "</div>"
+    )
+
     return f"""
         <!DOCTYPE html>
         <html>
@@ -431,6 +483,8 @@ def _build_export_html(result_payload: dict) -> str:
                 h1 {{ color: #1F2937; font-size: 24px; margin-bottom: 4px; }}
                 .meta {{ color: #6B7280; font-size: 14px; margin-bottom: 24px; }}
                 .section-title {{ color: #8B5CF6; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin: 24px 0 12px 0; }}
+                .summary-section {{ margin-bottom: 24px; padding: 16px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 8px; }}
+                .summary-counts {{ font-size: 13px; color: #6B7280; margin: 0 0 8px 0; }}
                 .req {{ display: flex; gap: 10px; align-items: center; margin: 0 0 4px 0; padding: 12px 0 0 0; }}
                 .req-text {{ font-size: 14px; font-weight: 500; color: #1F2937; line-height: 1.45; margin: 0; padding: 0; }}
                 /* Status badge — explicit margin/padding zero and line-height
@@ -449,6 +503,7 @@ def _build_export_html(result_payload: dict) -> str:
         <body>
             <h1>Role Match — {role}</h1>
             <div class="meta">{header_meta}</div>
+            {summary_export_html}
             {required_html}
             {preferred_html}
         </body>
@@ -514,7 +569,7 @@ def _render_results_panel(result_payload: dict, stories: list[dict]) -> None:
     own st.markdown call so that hidden Streamlit buttons (for chip click
     handling) and an inline render_story_detail call (for the expanded chip,
     if any) can be interleaved between cards. The Cards-view pattern from
-    Explore Stories — see ui/pages/explore_stories.py:2393-2487 — was the
+    My Work — see ui/pages/explore_stories.py:2393-2487 — was the
     direct inspiration.
 
     Args:
@@ -572,17 +627,96 @@ def _render_results_panel(result_payload: dict, stories: list[dict]) -> None:
         # divider
         '<span style="width:1px;height:14px;background:var(--border-color);'
         'display:inline-block;"></span>'
-        # 🔗 = clickable story
+        # 🔗 = project evidence
         '<div style="display:inline-flex;align-items:center;gap:6px;">'
-        "🔗 = clickable story</div>"
-        # ● = profile evidence
+        "🔗 = project evidence</div>"
+        # ● = verified skill
         '<div style="display:inline-flex;align-items:center;gap:6px;">'
         '<span style="width:8px;height:8px;border-radius:50%;'
         'background:var(--success-color);display:inline-block;"></span>'
-        " = profile evidence</div>"
+        " = verified skill</div>"
         "</div>"
     )
     st.markdown(legend_html, unsafe_allow_html=True)
+
+    # Summary block — counts line + discussion points, between legend and sections.
+    _counts = compute_summary_counts(results)
+    _points = build_discussion_points(results)
+    _rc = _counts["required"]
+    _pc = _counts["preferred"]
+    # --success-color is in global_styles.py; --warning-color/--error-color are not → keep fallbacks.
+    _gs = "color:var(--success-color);font-weight:600;"
+    _ga = "color:var(--warning-color,#F59E0B);font-weight:600;"
+    _gr = "color:var(--error-color,#EF4444);font-weight:600;"
+
+    def _count_spans(c: dict) -> str:
+        """Render colored count spans, omitting any count that is zero."""
+        parts = []
+        if c["strong"] > 0:
+            parts.append(
+                f'<span class="count-strong" style="{_gs}">{c["strong"]} ✓</span>'
+            )
+        if c["partial"] > 0:
+            parts.append(
+                f'<span class="count-partial" style="{_ga}">{c["partial"]} ~</span>'
+            )
+        if c["gap"] > 0:
+            parts.append(f'<span class="count-gap" style="{_gr}">{c["gap"]} ✗</span>')
+        return "&nbsp;".join(parts)
+
+    _req_spans = _count_spans(_rc)
+    _pref_spans = _count_spans(_pc)
+    _section_parts = []
+    if _req_spans:
+        _section_parts.append(f"Required:&nbsp;{_req_spans}")
+    if _pref_spans:
+        _section_parts.append(f"Preferred:&nbsp;{_pref_spans}")
+    _counts_line = (
+        '<div class="role-match-summary-counts"'
+        ' style="font-size:13px;color:var(--text-secondary);margin:6px 0 10px 0;">'
+        + "&nbsp;&nbsp;|&nbsp;&nbsp;".join(_section_parts)
+        + "</div>"
+    )
+
+    _dp_count = sum(
+        1
+        for p in _points
+        if not p.get("is_overflow_indicator") and not p.get("is_zero_case")
+    )
+    _point_items = []
+    for _pt in _points:
+        _txt = html.escape(_pt["text"])
+        if _pt.get("is_zero_case"):
+            _point_items.append(
+                f'<li style="list-style:none;padding:2px 0;color:var(--success-color);">{_txt}</li>'
+            )
+        elif _pt.get("is_overflow_indicator"):
+            _point_items.append(
+                f'<li style="list-style:none;padding:2px 0;color:var(--text-secondary);font-style:italic;">{_txt}</li>'
+            )
+        else:
+            _lc = (
+                "var(--error-color,#EF4444)"
+                if "Gap" in _pt["label_type"]
+                else "var(--warning-color,#F59E0B)"
+            )
+            _point_items.append(
+                f'<li style="list-style:none;padding:2px 0;">'
+                f'<span style="font-size:11px;font-weight:700;color:{_lc};margin-right:6px;">'
+                f"{html.escape(_pt['label_type'])}</span>{_txt}</li>"
+            )
+    _summary_html = (
+        '<div class="role-match-summary"'
+        ' style="background:var(--bg-card);border:1px solid var(--border-color);'
+        'border-radius:10px;padding:12px 16px;margin-bottom:14px;">'
+        '<div style="font-size:11px;font-weight:700;text-transform:uppercase;'
+        'letter-spacing:0.08em;color:var(--text-secondary);margin-bottom:6px;">SUMMARY</div>'
+        + _counts_line
+        + f'<div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin:8px 0 4px 0;">Discussion points ({_dp_count})</div>'
+        f'<ul style="margin:0;padding:0;font-size:13px;color:var(--text-primary);">{"".join(_point_items)}</ul>'
+        "</div>"
+    )
+    st.markdown(_summary_html, unsafe_allow_html=True)
 
     # Hint text lives in the LEFT column above the textarea (rendered in
     # render_role_match), NOT in the right column above the results panel.
@@ -672,6 +806,13 @@ def _render_results_section(
                     )
 
 
+_DEMO_JD_PATH = Path(__file__).parent.parent.parent / "data" / "demo_jd.txt"
+
+
+def _load_demo_jd() -> str:
+    return _DEMO_JD_PATH.read_text(encoding="utf-8").strip()
+
+
 def render_role_match(stories: list[dict]):
     """Render the Role Match page.
 
@@ -701,6 +842,13 @@ def render_role_match(stories: list[dict]):
             "role_match_jd_persisted"
         ]
 
+    if st.session_state.get("active_dialog") == "why_agy":
+        render_why_agy_dialog()
+        st.session_state.pop("active_dialog", None)
+    elif st.session_state.get("active_dialog") == "how_i_built":
+        render_how_i_built_dialog()
+        st.session_state.pop("active_dialog", None)
+
     # =========================================================================
     # CSS STYLES (page hero only)
     # =========================================================================
@@ -722,7 +870,7 @@ def render_role_match(stories: list[dict]):
     min-height: 184px;
     box-sizing: border-box;
     border-radius: 0;
-    margin: -3rem 0 0 0;
+    margin: -2rem 0 0 0;
 }
 
 .conversation-header-content {
@@ -735,11 +883,16 @@ def render_role_match(stories: list[dict]):
 
 .conversation-agy-avatar {
     flex-shrink: 0;
-    width: 120px !important;
-    height: 120px !important;
     border-radius: 50% !important;
     border: 4px solid white !important;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+}
+
+@media (min-width: 768px) {
+    .conversation-agy-avatar {
+        width: 120px !important;
+        height: 120px !important;
+    }
 }
 
 .conversation-header-text h1 {
@@ -753,6 +906,53 @@ def render_role_match(stories: list[dict]):
     margin: 0.5rem 0 0 0;
     font-size: 1.1rem;
 }
+[class*="st-key-why_agy_role_match_trigger"] {
+    display: none !important;
+}
+
+div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_role_match_trigger"]) {
+    display: none !important;
+}
+[class*="st-key-lock_icon"] {
+    display: none !important;
+}
+/* Clear — st.button styled as a text link (inline affordance, not a CTA) */
+[class*="st-key-role_match_clear"] button {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    color: var(--text-secondary) !important;
+    cursor: pointer !important;
+}
+[class*="st-key-role_match_clear"] button:hover {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    text-decoration: underline !important;
+}
+
+/* Demo JD and post-result CTA — outlined buttons, footer-matched treatment.
+   5% accent-purple fill gives substance; 8px radius and font-weight: 600
+   match the footer pill. Hover lifts to 10% fill + accent border. */
+[class*="st-key-role_match_demo_jd"] button,
+[class*="st-key-role_match_followup_cta"] button {
+    background: rgba(139, 92, 246, 0.05) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 8px !important;
+    padding: 10px 20px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+}
+[class*="st-key-role_match_demo_jd"] button:hover,
+[class*="st-key-role_match_followup_cta"] button:hover {
+    background: rgba(139, 92, 246, 0.06) !important;
+    border-color: var(--accent-purple) !important;
+}
 </style>
 """,
         unsafe_allow_html=True,
@@ -765,15 +965,52 @@ def render_role_match(stories: list[dict]):
         """
 <div class="conversation-header">
     <div class="conversation-header-content">
-        <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
+        <div style="position: relative; display: inline-block; flex-shrink: 0;">
+            <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
+            <span class="why-agy-badge--header" id="why-agy-badge-role-match">i</span>
+        </div>
         <div class="conversation-header-text">
             <h1>Role Match</h1>
-            <p>Drop a job description. Agy will show you evidence where Matt fits — and where he doesn't.</p>
+            <p>Agy shows where Matt fits your role, and where he doesn't.</p>
         </div>
     </div>
 </div>
 """,
         unsafe_allow_html=True,
+    )
+    if st.button("trigger", key="why_agy_role_match_trigger"):
+        st.session_state["active_dialog"] = "why_agy"
+        st.rerun()
+    import streamlit.components.v1 as components  # noqa: PLC0415
+
+    components.html(
+        """
+<script>
+(function() {
+    function wireBadge() {
+        var parentDoc = window.parent.document;
+        var badge = parentDoc.getElementById('why-agy-badge-role-match');
+        var btn = parentDoc.querySelector('[class*="st-key-why_agy_role_match_trigger"] button');
+        if (badge && btn && !badge.dataset.wired) {
+            badge.dataset.wired = 'true';
+            badge.addEventListener('pointerdown', function(e) {
+                e.preventDefault();
+                btn.click();
+            });
+            return true;
+        }
+        return false;
+    }
+    if (!wireBadge()) {
+        var attempts = 0;
+        var iv = setInterval(function() {
+            if (wireBadge() || ++attempts > 10) clearInterval(iv);
+        }, 200);
+    }
+})();
+</script>
+""",
+        height=0,
     )
 
     # =========================================================================
@@ -784,7 +1021,7 @@ def render_role_match(stories: list[dict]):
     # width or wider. Tablets in the 768-1023px range previously slipped
     # through the gate and rendered the workspace in a cramped state.
     screen_width = st.session_state.get("_browser_screen_size", "")
-    if screen_width and int(screen_width) < 1024:
+    if not screen_width or int(screen_width) < 1024:
         st.markdown(
             """
             <div style="text-align: center; padding: 60px 20px; color: var(--text-secondary);">
@@ -935,6 +1172,14 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
     margin: 0 0 16px 0 !important;
     padding: 0;
 }
+.role-match-demo-hint {
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 8px 0 0 0 !important;
+    padding: 0;
+}
 /* The left column's vertical block has `gap: 0` to keep the textarea
    attached to its submit button. That rule also collapses the breathing
    room between the hint paragraph and the textarea, so we restore it
@@ -942,6 +1187,20 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
 .st-key-role_match_workspace [data-testid="stColumn"]:first-child
     [data-testid="stElementContainer"]:has(.role-match-jd-hint) {
     margin-bottom: 16px !important;
+}
+.st-key-role_match_workspace [data-testid="stColumn"]:first-child
+    [data-testid="stElementContainer"]:has(.role-match-demo-hint) {
+    margin-bottom: 24px !important;
+}
+/* Right panel: tighten the gap between hint and CTA button.
+   Scoped to .st-key-role_match_followup_block so the gap collapse only
+   affects the hint+CTA container, not the entire results column block. */
+.st-key-role_match_followup_block [data-testid="stVerticalBlock"] {
+    gap: 0.25rem !important;
+}
+.st-key-role_match_followup_block
+    [data-testid="stElementContainer"]:has(.role-match-demo-hint) {
+    margin-bottom: 0 !important;
 }
 
 /* === V3 design pivot (April 2026) ===
@@ -1008,6 +1267,12 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
 }
 [class*="st-key-role_match_evidence_"] [data-testid="stElementContainer"] .stMarkdown {
     width: auto !important;
+}
+
+/* Expanded story detail container — bottom margin separates it from the
+   next requirement card below. Starting value 16px; tune to taste. */
+[class*="st-key-role_match_ev_"] {
+    margin-bottom: 16px !important;
 }
 
 /* Profile evidence — block-level argumentative prose, NOT a pill. The
@@ -1283,28 +1548,69 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
             # Hint text — plain secondary-color, sits above the textarea.
             # Per role_match_mockup_v2.html, the hint lives in the LEFT
             # column only and is NOT duplicated in the right column.
+            if st.session_state.pop("role_match_load_demo", False):
+                st.session_state["role_match_jd_input"] = _load_demo_jd()
+            if st.session_state.pop("role_match_clear_flag", False):
+                st.session_state["role_match_jd_input"] = ""
+                for _k in (
+                    "role_match_result",
+                    "role_match_matched_jd",
+                    "role_match_jd_persisted",
+                    "role_match_active_evidence",
+                    "role_match_error",
+                ):
+                    st.session_state.pop(_k, None)
+
+            jd_preview = st.session_state.get("role_match_jd_input", "")
             st.markdown(
-                '<p class="role-match-jd-hint">'
-                "Paste a job description below. Agy will match each "
-                "requirement and you can click any chip to explore the story."
-                "</p>",
+                '<p class="role-match-jd-hint">Paste a job description below.</p>',
                 unsafe_allow_html=True,
             )
+            if jd_preview.strip():
+                if st.button("✕ Clear", key="role_match_clear"):
+                    st.session_state["role_match_clear_flag"] = True
+                    st.rerun()
 
             jd_text = st.text_area(
                 "Job description",
                 height=400,
-                placeholder="Paste job description here...",
                 key="role_match_jd_input",
                 label_visibility="collapsed",
             )
 
+            _result_payload = st.session_state.get("role_match_result") or {}
+            has_results = bool(_result_payload.get("results"))
+            if len(jd_text.split()) < 30:
+                btn_label, btn_type, btn_disabled = (
+                    "Match this role 🐾",
+                    "primary",
+                    True,
+                )
+            elif has_results:
+                btn_label, btn_type, btn_disabled = "Update Match 🐾", "primary", False
+            else:
+                btn_label, btn_type, btn_disabled = (
+                    "Match this role 🐾",
+                    "primary",
+                    False,
+                )
+
             with st.container(key="role_match_submit"):
                 submit_clicked = st.button(
-                    "Match this role 🐾",
-                    type="primary",
+                    btn_label,
+                    type=btn_type,
                     use_container_width=True,
+                    disabled=btn_disabled,
                 )
+
+            if not jd_text.strip():
+                st.markdown(
+                    '<p class="role-match-demo-hint">Don\'t have a job description handy?</p>',
+                    unsafe_allow_html=True,
+                )
+                if st.button("Try an example 🔍", key="role_match_demo_jd"):
+                    st.session_state["role_match_load_demo"] = True
+                    st.rerun()
 
         # ----- RIGHT: results area — Agy thinking indicator during processing, results or empty state otherwise -----
         with results_col:
@@ -1319,96 +1625,112 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
                 render_lock_icon()
 
             # Process click first so the thinking indicator appears before results render
-            if submit_clicked:
-                if not jd_text.strip():
-                    st.warning("Paste a job description first.")
-                else:
-                    # Match the Ask MattGPT pattern: st.empty() container + render_thinking_indicator()
-                    # The indicator is a fixed-position overlay so it covers the whole viewport.
-                    loading_container = st.empty()
-                    with loading_container:
-                        render_thinking_indicator()
-                    try:
-                        from services.jd_assessor import run_assessment
+            if submit_clicked and jd_text.strip():
+                # Match the Ask Agy pattern: st.empty() container + render_thinking_indicator()
+                # The indicator is a fixed-position overlay so it covers the whole viewport.
+                loading_container = st.empty()
+                with loading_container:
+                    render_thinking_indicator()
+                # Height anchor: render_thinking_indicator() is fixed-position and
+                # contributes no flow height. Without this, the right column collapses
+                # to near-zero during the blocking LLM call, floating the footer up.
+                # Must be rendered BEFORE run_assessment() blocks so it's in the DOM
+                # during the call (Streamlit renders incrementally).
+                height_anchor = st.empty()
+                height_anchor.markdown(
+                    '<div style="min-height:400px;"></div>', unsafe_allow_html=True
+                )
+                try:
+                    from services.jd_assessor import run_assessment
 
-                        result = run_assessment(jd_text, stories)
-                        st.session_state["role_match_result"] = result
-                        # Persist the JD text in a NON-widget session key so
-                        # we can restore the textarea after a navigation away
-                        # and back. Streamlit garbage-collects widget state
-                        # for widgets that aren't currently in the page tree
-                        # (e.g., when the user navigates to Home), but
-                        # role_match_result survives because it's a regular
-                        # session_state key. Without this persisted copy the
-                        # user comes back to an empty textarea sitting next
-                        # to populated results — a confusing inconsistency.
-                        st.session_state["role_match_jd_persisted"] = jd_text
-                        st.session_state.pop("role_match_error", None)
-                    except Exception as e:  # noqa: BLE001
-                        st.session_state["role_match_error"] = str(e)
-                        st.session_state.pop("role_match_result", None)
-                    finally:
-                        loading_container.empty()
+                    result = run_assessment(jd_text, stories)
+                    st.session_state["role_match_result"] = result
+                    st.session_state["role_match_matched_jd"] = jd_text.strip()
+                    # Persist the JD text in a NON-widget session key so
+                    # we can restore the textarea after a navigation away
+                    # and back. Streamlit garbage-collects widget state
+                    # for widgets that aren't currently in the page tree
+                    # (e.g., when the user navigates to Home), but
+                    # role_match_result survives because it's a regular
+                    # session_state key. Without this persisted copy the
+                    # user comes back to an empty textarea sitting next
+                    # to populated results — a confusing inconsistency.
+                    st.session_state["role_match_jd_persisted"] = jd_text
+                    st.session_state.pop("role_match_error", None)
+                except Exception as e:  # noqa: BLE001
+                    st.session_state["role_match_error"] = str(e)
+                    st.session_state.pop("role_match_result", None)
+                finally:
+                    loading_container.empty()
+                    height_anchor.empty()
 
-                    # Log OUTSIDE try/except so a logging failure can't
-                    # interfere with the assessment result. Only log when
-                    # a result was successfully stored.
-                    if st.session_state.get("role_match_result"):
-                        from services.query_logger import (
-                            is_bot,
-                            log_role_match_assessment,
+                # Log OUTSIDE try/except so a logging failure can't
+                # interfere with the assessment result. Only log when
+                # a result was successfully stored.
+                if st.session_state.get("role_match_result"):
+                    from services.query_logger import (
+                        is_bot,
+                        log_role_match_assessment,
+                    )
+
+                    if not is_bot():
+                        result = st.session_state["role_match_result"]
+                        extraction = result.get("extraction") or {}
+                        results_list = result.get("results") or []
+                        log_role_match_assessment(
+                            role_title=extraction.get("role_title") or "",
+                            company=extraction.get("company") or "",
+                            jd_format=extraction.get("jd_format") or "",
+                            required_count=sum(
+                                1
+                                for r in results_list
+                                if r.get("category") == "required"
+                            ),
+                            preferred_count=sum(
+                                1
+                                for r in results_list
+                                if r.get("category") == "preferred"
+                            ),
+                            strong_count=sum(
+                                1
+                                for r in results_list
+                                if r.get("match_status") == "strong"
+                            ),
+                            partial_count=sum(
+                                1
+                                for r in results_list
+                                if r.get("match_status") == "partial"
+                            ),
+                            gap_count=sum(
+                                1
+                                for r in results_list
+                                if r.get("match_status") == "gap"
+                            ),
                         )
-
-                        if not is_bot():
-                            result = st.session_state["role_match_result"]
-                            extraction = result.get("extraction") or {}
-                            results_list = result.get("results") or []
-                            log_role_match_assessment(
-                                role_title=extraction.get("role_title") or "",
-                                company=extraction.get("company") or "",
-                                jd_format=extraction.get("jd_format") or "",
-                                required_count=sum(
-                                    1
-                                    for r in results_list
-                                    if r.get("category") == "required"
-                                ),
-                                preferred_count=sum(
-                                    1
-                                    for r in results_list
-                                    if r.get("category") == "preferred"
-                                ),
-                                strong_count=sum(
-                                    1
-                                    for r in results_list
-                                    if r.get("match_status") == "strong"
-                                ),
-                                partial_count=sum(
-                                    1
-                                    for r in results_list
-                                    if r.get("match_status") == "partial"
-                                ),
-                                gap_count=sum(
-                                    1
-                                    for r in results_list
-                                    if r.get("match_status") == "gap"
-                                ),
-                            )
             # Render: error → results → empty state, in priority order
             if st.session_state.get("role_match_error"):
                 st.markdown(
                     '<div style="padding: 24px; color: var(--text-secondary);">'
-                    "<strong>Couldn't run the assessment.</strong><br>"
-                    f"{html.escape(st.session_state['role_match_error'])}</div>",
+                    "<strong>Something went wrong. Please try again.</strong></div>",
                     unsafe_allow_html=True,
                 )
             elif st.session_state.get("role_match_result"):
                 _render_results_panel(st.session_state["role_match_result"], stories)
+                if st.session_state["role_match_result"].get("results"):
+                    with st.container(key="role_match_followup_block"):
+                        st.markdown(
+                            '<p class="role-match-demo-hint">Explore Matt\'s experience in depth.</p>',
+                            unsafe_allow_html=True,
+                        )
+                        if st.button("Ask Agy 🐾", key="role_match_followup_cta"):
+                            st.session_state["active_tab"] = "Ask Agy"
+                            st.rerun()
             else:
                 st.markdown(
                     """
                     <div style="display: flex; align-items: center; justify-content: center; min-height: 400px;">
                         <p style="color: var(--text-secondary); font-size: 16px; text-align: center; margin: 0; font-family: inherit;">
-                            Agy will match each requirement to Matt's career stories.
+                            Agy will map each requirement to Matt's real project experience.
                         </p>
                     </div>
                     """,

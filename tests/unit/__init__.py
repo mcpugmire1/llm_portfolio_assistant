@@ -1,1 +1,1 @@
-"""Unit tests for Ask MattGPT core functionality."""
+"""Unit tests for MattGPT core functionality."""

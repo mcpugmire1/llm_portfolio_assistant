@@ -1,5 +1,5 @@
 """
-Timeline View Component for Explore Stories - V3 (Era-based)
+Timeline View Component for My Work - V3 (Era-based)
 
 Era-based timeline with progressive disclosure.
 - Groups stories by Era (career phase), not Role
@@ -149,405 +149,6 @@ def group_stories_by_era(stories: list[dict]) -> dict[str, dict]:
 
 
 # =============================================================================
-# CSS STYLES
-# =============================================================================
-
-
-def get_timeline_css() -> str:
-    """Return CSS for collapsible timeline view using app's CSS variables."""
-    return """
-    <style>
-    /* =============================================================================
-       TIMELINE VIEW - COLLAPSIBLE GROUPS (ERA-BASED)
-       Uses app's existing CSS variables from global_styles.py
-       ============================================================================= */
-
-    .timeline-container {
-        position: relative;
-        max-width: 900px;
-        margin: 0 auto;
-        padding-left: 220px;
-        font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-
-    /* Main vertical line */
-    .timeline-container::before {
-        content: '';
-        position: absolute;
-        left: 200px;
-        top: 20px;
-        bottom: 20px;
-        width: 3px;
-        background: linear-gradient(to bottom, #8b5cf6, #a78bfa, #c4b5fd);
-        border-radius: 2px;
-    }
-
-    /* Timeline Group */
-    .timeline-group {
-        position: relative;
-        margin-bottom: 24px;
-    }
-
-    /* Group Header */
-    .group-header {
-        position: relative;
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        padding: 8px 0;
-        cursor: pointer;
-        user-select: none;
-    }
-
-    /* Timeline dot */
-    .timeline-dot {
-        position: absolute;
-        left: -24px;
-        width: 14px;
-        height: 14px;
-        background: var(--bg-card);
-        border: 3px solid var(--accent-purple);
-        border-radius: 50%;
-        z-index: 2;
-        transition: all 0.2s;
-    }
-
-    .timeline-group.expanded .timeline-dot {
-        background: var(--accent-purple);
-        box-shadow: 0 0 0 4px var(--accent-purple-light);
-    }
-
-    .group-header:hover .timeline-dot {
-        transform: scale(1.2);
-    }
-
-    /* Era Badge - positioned to left of timeline */
-    .era-badge {
-        position: absolute;
-        left: -220px;
-        width: 190px;
-        text-align: right;
-        padding-right: 20px;
-        line-height: 1.3;
-    }
-
-    .era-title {
-        display: block;
-        font-size: 14px;
-        font-weight: 600;
-        color: var(--text-primary);
-        margin-bottom: 4px;
-    }
-
-    .era-dates {
-        display: block;
-        font-size: 12px;
-        color: var(--accent-purple);
-        font-weight: 500;
-    }
-
-    /* Group info box */
-    .group-info {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        padding: 12px 16px;
-        background: var(--bg-surface);
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
-        transition: all 0.2s;
-        min-width: 200px;
-    }
-
-    .group-info-header {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
-
-    .group-header:hover .group-info {
-        border-color: var(--accent-purple);
-        background: var(--bg-hover);
-    }
-
-    .expand-icon {
-        font-size: 12px;
-        color: var(--text-muted);
-        transition: transform 0.2s;
-    }
-
-    .timeline-group.expanded .expand-icon {
-        transform: rotate(90deg);
-    }
-
-    .story-count {
-        font-size: 14px;
-        color: var(--text-secondary);
-    }
-
-    .story-count strong {
-        color: var(--text-primary);
-    }
-
-    .era-subtitle {
-        font-size: 12px;
-        color: var(--text-muted);
-        font-style: italic;
-    }
-
-    /* Stories container - hidden by default */
-    .stories-container {
-        display: none;
-        padding-left: 20px;
-        padding-top: 12px;
-    }
-
-    .timeline-group.expanded .stories-container {
-        display: block;
-    }
-
-    /* Individual story card */
-    .story-card {
-        position: relative;
-        padding: 16px 20px;
-        margin-bottom: 12px;
-        margin-left: 30px;
-        background: var(--bg-card);
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
-        cursor: pointer;
-        transition: all 0.2s;
-    }
-
-    .story-card::before {
-        content: '';
-        position: absolute;
-        left: -30px;
-        top: 50%;
-        width: 20px;
-        height: 2px;
-        background: var(--border-color);
-    }
-
-    .story-card::after {
-        content: '';
-        position: absolute;
-        left: -14px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 8px;
-        height: 8px;
-        background: var(--bg-card);
-        border: 2px solid var(--accent-purple-light);
-        border-radius: 50%;
-    }
-
-    .story-card:hover {
-        border-color: var(--accent-purple);
-        background: var(--bg-hover);
-        box-shadow: var(--hover-shadow);
-        transform: translateX(4px);
-    }
-
-    .story-card.selected {
-        border-color: var(--accent-purple);
-        background: var(--accent-purple-bg);
-        box-shadow: 0 0 0 3px var(--accent-purple-light);
-    }
-
-    .story-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        gap: 12px;
-        margin-bottom: 8px;
-    }
-
-    .story-title {
-        font-size: 15px;
-        font-weight: 600;
-        color: var(--text-primary);
-        line-height: 1.4;
-        flex: 1;
-    }
-
-    .client-badge {
-        background: var(--accent-purple-bg);
-        color: var(--accent-purple);
-        padding: 4px 10px;
-        border-radius: 12px;
-        font-size: 11px;
-        font-weight: 500;
-        white-space: nowrap;
-    }
-
-    .story-meta {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 12px;
-        color: var(--text-muted);
-    }
-
-    .role-badge {
-        background: var(--bg-surface);
-        color: var(--text-secondary);
-        padding: 2px 8px;
-        border-radius: 4px;
-        font-size: 11px;
-        font-weight: 500;
-    }
-
-    .story-meta-divider {
-        color: var(--border-color);
-    }
-
-    /* Explore all link */
-    .explore-all-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        margin-left: 30px;
-        margin-top: 8px;
-        padding: 10px 16px;
-        font-size: 13px;
-        font-weight: 500;
-        color: var(--accent-purple);
-        background: transparent;
-        border: 1px dashed var(--accent-purple-light);
-        border-radius: 6px;
-        cursor: pointer;
-        transition: all 0.2s;
-    }
-
-    .explore-all-link:hover {
-        background: var(--accent-purple-bg);
-        color: var(--accent-purple-hover);
-    }
-
-    /* =============================================================================
-       MOBILE RESPONSIVE - Single-column layout
-       Standard pattern: line on left, all content to right
-       ============================================================================= */
-
-    @media (max-width: 767px) {
-        .timeline-container {
-            padding-left: 40px;
-            max-width: 100%;
-        }
-
-        .timeline-container::before {
-            left: 15px;
-        }
-
-        /* Era badge moves above the card, not to the left */
-        .era-badge {
-            position: relative;
-            left: 0;
-            width: 100%;
-            text-align: left;
-            padding-right: 0;
-            padding-left: 0;
-            margin-bottom: 4px;
-        }
-
-        .era-title {
-            font-size: 14px;
-            font-weight: 600;
-            display: inline;
-        }
-
-        .era-dates {
-            font-size: 12px;
-            display: inline;
-            margin-left: 8px;
-        }
-
-        .timeline-dot {
-            left: -29px;
-            width: 12px;
-            height: 12px;
-        }
-
-        .group-header {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 4px;
-        }
-
-        .group-info {
-            width: 100%;
-        }
-
-        .timeline-group {
-            margin-bottom: 20px;
-        }
-
-        .story-card {
-            padding: 12px 16px;
-            margin-left: 0;
-            margin-right: 0;
-        }
-
-        .story-card::before,
-        .story-card::after {
-            display: none;
-        }
-
-        /* Stack header vertically on mobile */
-        .story-header {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 8px;
-        }
-
-        .story-title {
-            font-size: 14px;
-            /* Limit to 2 lines */
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .client-badge {
-            font-size: 10px;
-            padding: 3px 8px;
-            max-width: 100%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        /* Stack meta vertically too */
-        .story-meta {
-            flex-wrap: wrap;
-            gap: 4px 8px;
-        }
-
-        .explore-all-link {
-            margin-left: 0;
-            font-size: 12px;
-            padding: 10px 12px;
-        }
-    }
-
-    /* =============================================================================
-       HIDDEN TRIGGER BUTTONS
-       ============================================================================= */
-
-    [class*="st-key-timeline_story_"],
-    [class*="st-key-timeline_explore_"],
-    [class*="st-key-timeline_toggle_"] {
-        position: absolute !important;
-        left: -9999px !important;
-        height: 0 !important;
-        overflow: hidden !important;
-    }
-    </style>
-    """
-
-
-# =============================================================================
 # RENDER FUNCTIONS
 # =============================================================================
 
@@ -559,22 +160,22 @@ def render_story_card(story: dict, index: int) -> str:
     role = story.get("Role", "")
     theme = story.get("Theme", "")
 
-    client_html = f'<span class="client-badge">{client}</span>' if client else ""
+    client_html = f'<span class="es-tl-client-badge">{client}</span>' if client else ""
 
     # Build meta line with role badge and theme
     meta_parts = []
     if role:
-        meta_parts.append(f'<span class="role-badge">{role}</span>')
+        meta_parts.append(f'<span class="es-tl-role-badge">{role}</span>')
     if theme:
         if meta_parts:
-            meta_parts.append('<span class="story-meta-divider">•</span>')
+            meta_parts.append('<span class="es-story-meta-divider">•</span>')
         meta_parts.append(f'<span>{theme}</span>')
 
     meta_html = (
-        f'<div class="story-meta">{"".join(meta_parts)}</div>' if meta_parts else ""
+        f'<div class="es-story-meta">{"".join(meta_parts)}</div>' if meta_parts else ""
     )
 
-    return f'<div class="story-card" data-story-index="{index}"><div class="story-header"><span class="story-title">{title}</span>{client_html}</div>{meta_html}</div>'
+    return f'<div class="es-story-card" data-story-index="{index}"><div class="es-story-header"><span class="es-story-title">{title}</span>{client_html}</div>{meta_html}</div>'
 
 
 def render_timeline_group(
@@ -594,19 +195,19 @@ def render_timeline_group(
         cards_html += render_story_card(story, start_index + i)
 
     # Explore link
-    explore_html = f'<div class="explore-all-link" data-era="{era}" data-group-index="{group_index}">Explore all {total_count} stories <span class="arrow">→</span></div>'
+    explore_html = f'<div class="es-explore-all-link" data-era="{era}" data-group-index="{group_index}">Explore all {total_count} stories <span class="arrow">→</span></div>'
 
     # Subtitle HTML
-    subtitle_html = f'<div class="era-subtitle">{subtitle}</div>' if subtitle else ""
+    subtitle_html = f'<div class="es-era-subtitle">{subtitle}</div>' if subtitle else ""
 
     # Build group HTML (single line to avoid st.markdown parsing issues)
-    group_header = f'<div class="group-header"><div class="era-badge"><span class="era-title">{era}</span><span class="era-dates">{date_range}</span></div><div class="timeline-dot"></div><div class="group-info"><div class="group-info-header"><span class="expand-icon">▶</span><span class="story-count"><strong>{total_count}</strong> stories</span></div>{subtitle_html}</div></div>'
+    group_header = f'<div class="es-group-header"><div class="es-era-badge"><span class="es-era-title">{era}</span><span class="es-era-dates">{date_range}</span></div><div class="es-timeline-dot"></div><div class="es-group-info"><div class="es-group-info-header"><span class="es-expand-icon">▶</span><span class="es-story-count"><strong>{total_count}</strong> stories</span></div>{subtitle_html}</div></div>'
 
     stories_container = (
-        f'<div class="stories-container">{cards_html}{explore_html}</div>'
+        f'<div class="es-stories-container">{cards_html}{explore_html}</div>'
     )
 
-    return f'<div class="timeline-group {expanded_class}" data-group-index="{group_index}">{group_header}{stories_container}</div>'
+    return f'<div class="es-timeline-group {expanded_class}" data-group-index="{group_index}">{group_header}{stories_container}</div>'
 
 
 def render_timeline_view(
@@ -628,11 +229,8 @@ def render_timeline_view(
         st.info("No stories found matching your filters.")
         return
 
-    # Inject CSS
-    st.markdown(get_timeline_css(), unsafe_allow_html=True)
-
     # Build timeline HTML
-    html = '<div class="timeline-container">'
+    html = '<div class="es-timeline-container">'
 
     card_index = 0
     story_map = {}
@@ -693,10 +291,10 @@ def render_timeline_view(
             var parentDoc = window.parent.document;
 
             // Toggle group expand/collapse
-            parentDoc.querySelectorAll('.group-header').forEach(function(header) {
+            parentDoc.querySelectorAll('.es-group-header').forEach(function(header) {
                 header.addEventListener('click', function(e) {
-                    if (e.target.closest('.story-card') || e.target.closest('.explore-all-link')) return;
-                    var group = this.closest('.timeline-group');
+                    if (e.target.closest('.es-story-card') || e.target.closest('.es-explore-all-link')) return;
+                    var group = this.closest('.es-timeline-group');
                     if (group) {
                         group.classList.toggle('expanded');
                     }
@@ -704,14 +302,14 @@ def render_timeline_view(
             });
 
             // Story card clicks
-            parentDoc.querySelectorAll('.story-card').forEach(function(card) {
+            parentDoc.querySelectorAll('.es-story-card').forEach(function(card) {
                 card.addEventListener('click', function(e) {
                     e.stopPropagation();
                     var index = this.getAttribute('data-story-index');
                     if (index === null) return;
 
                     // Remove selected from all
-                    parentDoc.querySelectorAll('.story-card').forEach(function(c) {
+                    parentDoc.querySelectorAll('.es-story-card').forEach(function(c) {
                         c.classList.remove('selected');
                     });
                     this.classList.add('selected');
@@ -726,7 +324,7 @@ def render_timeline_view(
             });
 
             // Explore all clicks
-            parentDoc.querySelectorAll('.explore-all-link').forEach(function(link) {
+            parentDoc.querySelectorAll('.es-explore-all-link').forEach(function(link) {
                 link.addEventListener('click', function(e) {
                     e.stopPropagation();
                     var groupIndex = this.getAttribute('data-group-index');

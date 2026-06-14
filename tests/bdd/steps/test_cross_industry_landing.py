@@ -47,7 +47,7 @@ def test_cross_industry_landing_has_core_capabilities_header():
 
 @scenario(
     "../features/cross_industry_landing.feature",
-    "Clicking the top Core capability card lands on a filtered Explore Stories with results",
+    "Clicking the top Core capability card lands on a filtered My Work with results",
 )
 def test_top_cross_industry_capability_lands_with_results():
     """Pins the click bridge / prefilter flow post-refactor."""
@@ -55,7 +55,7 @@ def test_top_cross_industry_capability_lands_with_results():
 
 @scenario(
     "../features/cross_industry_landing.feature",
-    "Clicking a capability card lands on Explore Stories scrolled to the top",
+    "Clicking a capability card lands on My Work scrolled to the top",
 )
 def test_cross_industry_capability_click_resets_scroll():
     """Same regression contract as banking_landing — see that file's docstring
@@ -159,13 +159,13 @@ def assert_section_header_present(browser_page, header_text):
 @then(parsers.parse('the active tab should be "{tab_name}"'))
 def assert_active_tab(browser_page, tab_name):
     """Verify navigation landed on the expected tab."""
-    if tab_name == "Explore Stories":
-        browser_page.wait_for_selector(".results-count", timeout=15000)
+    if tab_name == "My Work":
+        browser_page.wait_for_selector(".es-results-count", timeout=15000)
 
 
-@then("the Explore Stories page should be scrolled to the top")
+@then("the My Work page should be scrolled to the top")
 def assert_explore_scrolled_to_top(browser_page):
-    """Verify the Explore Stories page loaded at the top — same contract as
+    """Verify the My Work page loaded at the top — same contract as
     test_banking_landing.py. Tolerance: ≤ 50px allows sub-pixel variance.
     """
     scroll_top = browser_page.evaluate(
@@ -173,7 +173,7 @@ def assert_explore_scrolled_to_top(browser_page):
     )
     assert scroll_top <= 50, (
         f"stMain scrollTop is {scroll_top}px after landing-card click — "
-        f"Explore Stories inherited the landing page's scroll position. Fix "
+        f"My Work inherited the landing page's scroll position. Fix "
         f"lives in the prefilter handler block in explore_stories.py."
     )
 
@@ -181,7 +181,7 @@ def assert_explore_scrolled_to_top(browser_page):
 @then(parsers.parse("the result count should be greater than {floor:d}"))
 def assert_result_count_above(browser_page, floor):
     """Verify the prefilter narrowed results to at least one story."""
-    count_el = browser_page.locator(".results-count").first
+    count_el = browser_page.locator(".es-results-count").first
     count_el.wait_for(state="visible", timeout=10000)
     text = count_el.inner_text()
     match = re.search(r"of\s+(\d+)\s+project", text)

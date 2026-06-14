@@ -2,7 +2,7 @@
 Story Detail Component - Shared Renderer
 
 Displays full STAR narrative with sidebar metadata.
-Used by both Explore Stories and Ask MattGPT pages.
+Used by both My Work and Ask Agy pages.
 """
 
 import streamlit as st
@@ -194,7 +194,7 @@ def on_ask_this_story(detail: dict):
     Sets up seed prompt for chip injection flow.
     """
     current_tab = st.session_state.get("active_tab", "")
-    is_in_ask_mattgpt = current_tab == "Ask MattGPT"
+    is_in_ask_mattgpt = current_tab == "Ask Agy"
 
     # Set story context
     st.session_state["active_story"] = detail.get("id")
@@ -214,8 +214,8 @@ def on_ask_this_story(detail: dict):
         st.session_state["transcript_source_expanded_id"] = None
         st.session_state["transcript_source_expanded_msg"] = None
     else:
-        # Navigate to Ask MattGPT
-        st.session_state["active_tab"] = "Ask MattGPT"
+        # Navigate to Ask Agy
+        st.session_state["active_tab"] = "Ask Agy"
 
     st.rerun()
 
@@ -313,182 +313,32 @@ def render_story_detail(
     actions_html = ""
     if show_actions:
         actions_html = (
-            '<div class="detail-actions">'
-            f'<button class="detail-action-btn{" helpful-confirmed" if is_helpful_confirmed else ""}" '
+            '<div class="es-detail-actions">'
+            f'<button class="es-detail-action-btn{" helpful-confirmed" if is_helpful_confirmed else ""}" '
             f'id="btn-helpful-story"{" disabled" if is_helpful_confirmed else ""}>'
             f'<span class="btn-label">{"👍 Helpful ✓" if is_helpful_confirmed else "Helpful"}</span></button>'
-            '<button class="detail-action-btn" id="btn-share-story">'
+            '<button class="es-detail-action-btn" id="btn-share-story">'
             '<span>🔗</span><span class="btn-label">Share</span></button>'
-            '<button class="detail-action-btn" id="btn-export-story">'
+            '<button class="es-detail-action-btn" id="btn-export-story">'
             '<span>📄</span><span class="btn-label">Export</span></button>'
             "</div>"
         )
 
     header_html = f"""
-    <style>
-    /* Action buttons - matches wireframe exactly */
-    .detail-header {{
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 20px;
-        padding-bottom: 16px;
-        border-bottom: 2px solid var(--border-color, #e0e0e0);
-        background: linear-gradient(180deg, var(--accent-purple-bg) 0%, transparent 100%);
-        padding-top: 16px;
-        scroll-margin-top: 80px;
-    }}
-
-    .detail-title-section {{
-        flex: 1;
-    }}
-
-    .detail-title {{
-        font-size: 24px !important;
-        font-weight: 700 !important;
-        color: var(--accent-purple-text) !important;
-        margin-bottom: 12px !important;
-        line-height: 1.3 !important;
-    }}
-
-    .detail-meta {{
-        display: flex;
-        gap: 20px;
-        flex-wrap: wrap;
-        align-items: center;
-    }}
-
-    .detail-meta-item {{
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        font-size: 14px;
-        color: var(--text-muted, #7f8c8d);
-    }}
-
-    .detail-meta-item strong {{
-        color: var(--text-primary, #2c3e50);
-    }}
-
-    .detail-actions {{
-        display: flex;
-        gap: 8px;
-        flex-shrink: 0;
-    }}
-
-    .detail-action-btn {{
-        padding: 8px 16px;
-        border: 2px solid var(--border-color, #e0e0e0);
-        background: var(--bg-card, white);
-        border-radius: 6px;
-        font-size: 13px;
-        font-weight: 600;
-        color: var(--text-secondary, #555);
-        cursor: pointer;
-        transition: all 0.2s ease;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-    }}
-
-    .detail-action-btn:hover {{
-        border-color: var(--accent-purple, #8B5CF6);
-        color: var(--accent-purple, #8B5CF6);
-    }}
-
-    /* Hide Streamlit trigger buttons */
-    [class*="st-key-share_"],
-    [class*="st-key-export_"],
-    [class*="st-key-helpful_"] {{
-        position: absolute !important;
-        left: -9999px !important;
-        height: 0 !important;
-        overflow: hidden !important;
-    }}
-
-    /* Helpful button confirmed state */
-    .detail-action-btn.helpful-confirmed {{
-        background: var(--success-color) !important;
-        border-color: var(--success-color) !important;
-        color: white !important;
-        cursor: default;
-        opacity: 1;
-    }}
-    .detail-action-btn.helpful-confirmed:hover {{
-        border-color: var(--success-color) !important;
-        color: white !important;
-    }}
-
-    /* Mobile: optimized for scanning, not reading */
-    @media (max-width: 768px) {{
-        .detail-header {{
-            flex-direction: column;
-            gap: 12px;
-        }}
-
-        .detail-title {{
-            font-size: 18px !important;
-        }}
-
-        .detail-meta {{
-            gap: 6px 12px;
-            font-size: 12px;
-        }}
-
-        .detail-meta-item {{
-            font-size: 12px;
-        }}
-
-        .detail-meta-item .meta-icon {{
-            display: none;
-        }}
-
-        .detail-meta-item:not(:first-child)::before {{
-            content: "•";
-            margin-right: 6px;
-            color: var(--text-muted);
-        }}
-
-        /* Hide Share/Export on mobile - these are desktop actions */
-        .detail-actions {{
-            display: none !important;
-        }}
-
-        /* STAR sections: truncate to 3 lines on mobile */
-        .star-content {{
-            display: -webkit-box !important;
-            -webkit-line-clamp: 3 !important;
-            -webkit-box-orient: vertical !important;
-            overflow: hidden !important;
-        }}
-
-        /* Tighter spacing between STAR sections on mobile */
-        .star-section {{
-            margin-bottom: 16px !important;
-        }}
-    }}
-
-    /* Ensure star-content has no extra margin */
-    .star-content {{
-        margin: 0 !important;
-        padding: 0 !important;
-    }}
-    </style>
-
-    <div class="detail-header">
-        <div class="detail-title-section">
-            <div class="detail-title">{title}</div>
-            <div class="detail-meta">
-                <div class="detail-meta-item">
+    <div class="es-detail-header">
+        <div class="es-detail-title-section">
+            <div class="es-detail-title">{title}</div>
+            <div class="es-detail-meta">
+                <div class="es-detail-meta-item">
                     <span class="meta-icon">💼</span>
                     <strong>{client}</strong>
                 </div>
-                <div class="detail-meta-item">
+                <div class="es-detail-meta-item">
                     <span class="meta-icon">👤</span>
                     <span>{role}</span>
                 </div>
-                {'<div class="detail-meta-item"><span class="meta-icon">📅</span><span>' + date_range + '</span></div>' if date_range else ''}
-                <div class="detail-meta-item">
+                {'<div class="es-detail-meta-item"><span class="meta-icon">📅</span><span>' + date_range + '</span></div>' if date_range else ''}
+                <div class="es-detail-meta-item">
                     <span class="meta-icon">📁</span>
                     <span>{domain}</span>
                 </div>
@@ -660,7 +510,7 @@ def render_story_detail(
 
             // Micro-scroll with offset for navbar
             setTimeout(function() {{
-                var detail = parentDoc.querySelector('.detail-header');
+                var detail = parentDoc.querySelector('.es-detail-header');
                 if (detail) {{
                     var rect = detail.getBoundingClientRect();
                     var scrollTop = window.parent.scrollY + rect.top - 100;
@@ -821,50 +671,10 @@ def render_story_detail(
     btn_key = f"ask_story_{key_suffix}_{story_id_safe}"
     st.markdown(
         """
-        <style>
-        .card-btn-primary {
-            display: inline-block;
-            padding: 14px 28px;
-            background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
-            border: none;
-            border-radius: 8px;
-            color: white !important;
-            font-weight: 600;
-            font-size: 15px;
-            text-decoration: none !important;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .card-btn-primary:hover {
-            background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);
-            text-decoration: none !important;
-        }
-        [class*="st-key-ask_story_"] {
-            display: none !important;
-        }
-        [class*="st-key-btn_page_"] .stButton > button,
-        [class*="st-key-btn_first_"] .stButton > button,
-        [class*="st-key-btn_prev_"] .stButton > button,
-        [class*="st-key-btn_next_"] .stButton > button,
-        [class*="st-key-btn_last_"] .stButton > button {
-            padding: 8px 16px !important;
-            font-size: 13px !important;
-            border-radius: 6px !important;
-            border: 1px solid var(--border-color) !important;
-            background: var(--bg-card) !important;
-            color: var(--text-secondary) !important;
-            margin-top: 0 !important;
-            box-shadow: none !important;
-            width: auto !important;
-        }
-        </style>
         <br>
         <p style='text-align: center; margin-bottom: 20px; color: var(--text-secondary); font-size: 14px;'>💬 Want to know more about this project?</p>
         <div style="text-align: center;">
-            <a id="btn-ask-story" class="card-btn-primary">Ask Agy 🐾 About This</a>
+            <a id="btn-ask-story" class="es-card-btn-primary">Ask Agy 🐾 About This</a>
         </div>
         """,
         unsafe_allow_html=True,
