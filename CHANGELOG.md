@@ -8,6 +8,12 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### CSS Architecture
 
+**June 13 — Mobile header consistency — min-height floor + avatar alignment across 6 pages (MATTGPT-114)** — `9658e02`
+Resolved via a min-height floor approach rather than the original shared-CSS-class plan. Added `min-height: 145.59px` to all purple header mobile blocks (`.conversation-header`, `.about-header`, `.ask-header-landing`, `.ask-header-conversation`) so all pages share a consistent header height regardless of content length. Fixed Banking and Cross-Industry page-level `min-height: auto !important` overrides that were blocking the global floor. Fixed CSS cascade in `ask_mattgpt_header.py` — moved `@media (max-width: 768px)` block after the global `.status-bar` reset so mobile `margin-top` wins. Aligned Ask Agy header to match `.conversation-header` structure (no negative margin bleed); inner flex gap `24px → 12px`. `about_matt.py`: `.about-header-avatar` class applied, badge absolutely positioned (`top: 50%; transform: translateY(-50%); right: 32px`), subtitle shortened, `deep-dive-card h3` `8px → 18px`. `global_styles.py`: avatar base rule, mobile badge hidden, orphaned duplicate avatar rules removed.
+
+**June 13 — Home category cards — descriptive meta copy for all 6 cards (MATTGPT-108)** — `ff6c788`
+Revised approach: replaced dynamic `{N} projects · {client list}` strings with static descriptive copy across all 6 cards. Original plan (add counts to the 4 non-industry cards) rejected as the wrong signal — counts were volume noise, not quality signal. Instead, Banking and Cross-Industry had their count/client strings replaced with capability-scoped descriptions matching the other four cards, achieving parity by subtracting rather than adding. One or two tight sentences per card, core message first. Removed now-unused computation variables (`banking_clients_inline`, `cross_industry_inline`, `cross_industry_stories` and upstream dependencies).
+
 **June 12 — Story count copy — confirmed "130+" has no user-facing runtime references (MATTGPT-019)**
 Audit confirmed zero user-facing `130+` references in active production code. All UI Python files already use `100+` or derive counts dynamically. Remaining `130+` occurrences are in dead code (`mobile_overrides.py` — never imported), design docs (`ARCHITECTURE.md`, `WIREFRAMES.md`), and `mattgpt_system_prompt.md` (not read at runtime). Ticket closed as resolved.
 
