@@ -601,7 +601,7 @@ def render_explore_stories(
         </div>
         <div class="conversation-header-text">
             <h1>Matt's Project Portfolio</h1>
-            <p>100+ transformation stories — trust Agy 🐾 to find the ones that fit</p>
+            <p>100+ transformation stories. Trust Agy 🐾 to find the ones that fit.</p>
         </div>
     </div>
 </div>

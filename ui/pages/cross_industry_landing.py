@@ -133,7 +133,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_cross_trigger"
         </div>
         <div class="conversation-header-text">
             <h1>Matt's Cross-Industry Expertise</h1>
-            <p> {total_projects} projects across 6 industries — trust Agy 🐾 to surface the patterns that travel</p>
+            <p>{total_projects} projects across 6 industries. Trust Agy 🐾 to surface the patterns that travel.</p>
         </div>
     </div>
 </div>

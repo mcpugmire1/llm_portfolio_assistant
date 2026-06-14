@@ -143,7 +143,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_banking_trigge
         </div>
         <div class="conversation-header-text">
             <h1>Matt's Financial Services Expertise</h1>
-            <p>{total_projects} projects across {num_capabilities} specialized areas — trust Agy 🐾 to filter decades of domain experience</p>
+            <p>{total_projects} projects across {num_capabilities} specialized areas. Trust Agy 🐾 to filter decades of domain experience.</p>
         </div>
     </div>
 </div>
