@@ -1,34 +1,27 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: ff6c788 -->
+<!-- last-backlog-sync: 6aed6b9 -->
 
 Work state for the MattGPT project. The matrix below is the scannable view. Detail blocks for each item follow, linked by ID. Completed items live in `CHANGELOG.md`. Architectural decisions live in `docs/ADR.md`. Current system state lives in `ARCHITECTURE.md`.
 
 ---
 
-## Value Prioritized Roadmap (updated 2026-06-09)
+## Value Prioritized Roadmap (updated 2026-06-14)
 
-**NOW** (UI redesign sprint — merge to `main` + production deploy):
+**→ Merge `feature/ui-redesign` → `main`** (production deploy — release gate cleared)
 
-*Bundle 4 — Role Match UX:*
-- **-066** — Sample JD cold-start
-- **-067** — Result panel polish
-
-*Bundle 5 — Mobile + typography:*
-- **-113** — Ask Agy landing mobile polish
-- **-114** — Page header typography
-
-*Bundle 6 — Home:*
-- **-108** — Category cards capability counts
-
-**→ Merge `feature/ui-redesign` → `main`** (production deploy)
-
-*Queued for after UI deploy:*
+**NOW** (post-merge):
 - **-077 mitigation** — Query-side mitigation: strip "Matt" from embedded queries on technical-noun shapes (hours, not days; full hybrid retrieval lives in NEXT)
 - **-094 probes** — CIC over-concentration + operational under-surfacing probes; parallel-runnable, read-only; informs NEXT content work
 - **-088** — Role Match scorer alignment (loose dependency on -077 mitigation: do cleaner if you can, not wait until you can)
 - **-097** — Career-intent refresh (active recruiter failure earns NOW slot)
 
 *Recently shipped (off NOW list):*
+- **MATTGPT-018** — Resolved June 2026. Page-transition Agy avatar flash. HTML `width`/`height` constraints on avatar `<img>` elements; `mousedown`+`capture:true` JS listener pre-hides before React rerun fires; mobile `link.onclick` inline hide; global `agiAvatarReveal` CSS animation as fallback. (`bda7ba8`, `3659173`)
+- **MATTGPT-066** — Resolved June 2026. Role Match sample JD cold-start affordance. Shipped as part of MATTGPT-067 bundle. (`6c39d8c`)
+- **MATTGPT-067** — Resolved June 2026. Role Match result panel + input polish. 30-word gate, Clear button, Sample JD, summary block, legend relabeling. 23/23 BDD, 30/30 unit. (`6c39d8c`, `ac3d3dd`, `a2d002b`)
+- **MATTGPT-113** — Resolved June 2026. Ask Agy mobile chip grid + header height. (`ff175e9`, `b7f88d5`)
+- **MATTGPT-114** — Resolved June 2026. Page header typography standardization. (`9658e02`)
+- **MATTGPT-108** — Resolved June 2026. Home category cards descriptive copy. (`ff6c788`)
 - **MATTGPT-116** — Resolved June 2026. Retired how_i_built.py standalone route (superseded by dialog). Removed ?route=how-i-built handler + elif render block from app.py; deleted standalone page; updated feature file (3 route scenarios removed, 5 dialog scenarios passing). Items 2+3 (viewport revert) resolved as no-op — revert prescription was wrong, test passing, mobile detection correct. (`9a55fbd`)
 - **MATTGPT-123** — Resolved June 2026. My Work mobile filter layout compaction. Industry/Capability inline label+dropdown; Client/Role/Domain 3-col grid, labels hidden, field names via `::before`; Reset as underlined text link; Filters toggle full-width. CSS-only (`global_styles.py`). 4/4 BDD passing (`40aeb8e`).
 - **MATTGPT-118** — Resolved June 2026. My Profile Copy snippet + Download PDF (referrer workflow). Delegated parentDoc listener + navigator.clipboard; hidden st.button bridge + window.open/print. 20/20 BDD passing (`983a86d`).
@@ -66,7 +59,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-015](#mattgpt-015) | JPM Payments IQ Differentiation | Open | High | Action | Mar 2026 |
 | [MATTGPT-016](#mattgpt-016) | Semantic Router — Wrong-Person Query Detection | Decided Against | High | Issue | Apr 2026 |
 | [MATTGPT-017](#mattgpt-017) | Wire skipped Role Match logging BDD scenarios (Playwright click + mocked Sheets write) | Open | Medium | Action | Apr 28, 2026 |
-| [MATTGPT-018](#mattgpt-018) | Page-Load Flicker | Open | Medium | Issue | Pre-Apr 2026 |
+| [MATTGPT-018](#mattgpt-018) | Page-Load Flicker | Done | Medium | Issue | Pre-Apr 2026 |
 | [MATTGPT-020](#mattgpt-020) | Simplify backend_service.py | Decided Against | Medium | Refactor | Pre-Jan 2026 |
 | [MATTGPT-021](#mattgpt-021) | diversify_results() Pinning Bug | Open | Medium | Issue | Apr 2026 |
 | [MATTGPT-022](#mattgpt-022) | Data Quality Cleanup Journey Story | Open | Medium | Action | Mar 2026 |
@@ -97,7 +90,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-062](#mattgpt-062) | Semantic router cache silently uses stale embeddings when VALID_INTENTS changes | Open | Medium | Refactor | May 14, 2026 |
 | [MATTGPT-063](#mattgpt-063) | Wrong-person queries with names outside nonsense regex produce confused-context RAG answers | Open | Medium | Issue | May 14, 2026 |
 | [MATTGPT-065](#mattgpt-065) | Explore Stories — Polish bundle (filter UX, empty states, story details) | Resolved | Medium | Action | May 15, 2026 |
-| [MATTGPT-066](#mattgpt-066) | Role Match — Sample JD / "Try a sample role" cold-start affordance | Open | Medium | Action | May 15, 2026 |
+| [MATTGPT-066](#mattgpt-066) | Role Match — Sample JD / "Try a sample role" cold-start affordance | Done | Medium | Action | May 15, 2026 |
 | [MATTGPT-067](#mattgpt-067) | Role Match — Result panel and input polish bundle | Done | High | Action | May 15, 2026 |
 | [MATTGPT-068](#mattgpt-068) | About Matt — Content polish bundle (clickable questions, code expander, DevOps card merge) | Done | Medium | Action | May 15, 2026 |
 | [MATTGPT-069](#mattgpt-069) | Home — Stats label contrast (light mode WCAG AA) | Done | Low | Issue | May 15, 2026 |
@@ -326,48 +319,6 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Logged:** April 28, 2026 / **Reframed:** May 14, 2026
 
 ---
-
-### MATTGPT-018
-**Page-Load Flicker**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Issue
-- **Issue:** Streamlit rerun cycle on first page load causes a visible blank/gray frame between two valid renders. Pre-existing in committed code, confirmed via Performance recording (CLS = 0, so it's a paint issue, not a layout shift).
-- **Root cause:** `streamlit_js_eval` iframe creates a second rerun on first load. The DOM clears between consecutive reruns, producing the flash.
-- **Failed fixes (April 28):** Removing `st.rerun()` after screen-size capture caused a navbar→hero gap regression (iframe stays in DOM). Adding CSS background+min-height to `stAppViewContainer` caused the same gap.
-- **Next approach:** Move `streamlit_js_eval` call to bottom of `app.py` (after all page rendering). Iframe would render below footer instead of between navbar and hero.
-- **Additional symptom captured May 18, 2026 — Explore Stories specifically:**
-  - On navigation to Explore Stories, the **page header renders correctly** ("Project Stories & Insights" with the gradient banner), but the **content area briefly renders the entire Ask MattGPT intro** — "Ask MattGPT" subheader, the large Agy-with-headphones avatar, "Hi, I'm Agy 🐾", suggestion chips — before the actual AgGrid hydrates. Captured in Chrome DevTools Performance recording.
-  - **Diagnosis:** This is NOT a "large Agy icon placeholder" as I initially described. It's the **wrong page's content rendering briefly under the right page's header.** The Ask MattGPT page's render output is appearing in Explore Stories' content area during a transient state, then getting replaced by the correct AgGrid + filter UI.
-  - **Likely cause:** Streamlit's page-switching state management. When `active_tab` changes from "Ask MattGPT" → "Explore Stories", the navbar/header renders the new page header on the first rerun, but the previous page's content body is still mounted in the DOM until the new page's content fully renders. Possible mechanisms:
-    - `active_tab` toggle triggers a rerun where header re-renders but content body is mid-transition
-    - The Explore Stories page's slow-to-hydrate components (AgGrid JS bootstrap, Pinecone-related fetches) leave a render gap
-    - Streamlit's cached content from the previous page may not be cleared until the new page's first paint is complete
-  - **Investigation entry points:**
-    - `app.py` page routing logic — how does it decide which page to render on `active_tab` change?
-    - The navigation pattern in `category_cards.py:on_chip_click()` and similar cross-page seed_prompt navigation — these set `active_tab` and `st.rerun()`. The rerun may produce the transient state.
-    - Compare against Streamlit's "single page app" page-switch idioms — there are known patterns for cleanly clearing content between page changes.
-  - **Production evidence:** Chrome DevTools Performance recording captured May 18, 2026 immediately after the MATTGPT-073/-061 deploy. Reproducible (intermittent) by navigating from Ask MattGPT → Explore Stories.
-  - **Core Web Vitals from DevTools Performance Insights (May 18, 2026):**
-    - **CLS = 0.69** — "Poor" range (Core Web Vitals threshold for "Poor" is > 0.25). Confirms the wrong-content flash is a real layout shift, not a paint artifact. The original MATTGPT-018 framing said "CLS = 0, so it's a paint issue" — that was true for the blank-frame symptom but NOT for this new wrong-page-content symptom. The two symptoms have different mechanisms.
-    - **LCP = 46ms** — excellent (target < 2500ms). Rules out slow loading as root cause; the page renders fast but renders wrong content during the transition.
-    - **INP** — not measured in this recording (no interaction during capture).
-  - **DevTools timeline observations:**
-    - **30+ cascading CSS animations** during the transition window: scrollbar-color (12 instances), opacity (8 instances), border-left-color / border-top-color / border-bottom-color / border-right-color, background-color. Pattern indicates the entire page tree is re-mounting rather than just the changed pieces.
-    - **Named Streamlit animation `animation-1wgitoe`** firing as part of the page swap — this is Streamlit's auto-generated fade-in class for new content.
-  - **Related insights surfaced (separate issues, not blocking the flicker fix):**
-    - Image delivery: ~1.4 MB potential savings (apy_explore_stories.png, apy_avatar.png larger than needed)
-    - 3rd-party telemetry to webhooks.fivetran.com (not relevant to the flicker)
-  - **Three distinct visual artifacts captured during the same Ask MattGPT → Explore Stories transition (May 18, 2026):**
-    1. **Wrong-page-content flash** — Ask MattGPT intro (Agy avatar, "Hi, I'm Agy 🐾", suggestion chips) renders under the "Project Stories & Insights" Explore Stories header. Captured in DevTools Performance recording frame.
-    2. **Blank-AgGrid state** — Explore Stories page header + filter UI ("Find stories", Industry/Capability dropdowns, Advanced Filters, "Showing 1-20 of 113 projects") render correctly, but the AgGrid content area is empty white space. Purple gradient placeholders visible at the bottom. AgGrid JS bootstrap hasn't completed yet.
-    3. **Agy icon above hero banner** — a small Agy avatar renders transiently at the very top of the page, above the navbar/hero banner. Different location and size than the avatars rendered in normal page layouts.
-  - **Interpretation:** All three are facets of the same page-transition mechanism (page-tree re-mount + cascading animations) but represent different snapshot moments in the render sequence. A fix targeting the root cause (transition state management) should resolve all three.
-- **Logged:** Pre-April 2026, investigated April 28, 2026 (blank-frame symptom); supplemented May 18, 2026 (Explore Stories Agy-icon-flash symptom)
-
----
-
 
 ### MATTGPT-020
 **Simplify backend_service.py**
@@ -1138,33 +1089,6 @@ Chip 3 wording "How does Matt manage resistance when leading enterprise transfor
 - **Wireframe:** Updated with My Work filter bar + Table + Cards + Timeline specs (June 2026 session).
 - **Effort:** Filter bar ~1-2 hours raw (CSS dial-in against explore_stories.py's full CSS system with DevTools). Polish items ~25-50 lines total.
 - **Logged:** May 15, 2026 | **Updated:** June 2026 (two-row filter bar approved via PoC)
-
----
-
-### MATTGPT-066
-**Role Match — Demo fixture / "See it in action" empty-state affordance**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Action
-- **Issue:** Empty Role Match page shows only a hint paragraph + textarea. An exploratory visitor arriving to see what the tool does — not with a JD in hand — has nothing to engage with.
-- **Fix:** Add a single "See it in action →" button below the textarea. Clicking pre-fills the textarea with one composite demo JD via prefilter pattern.
-- **Scope revision (June 11, 2026):** Original framing ("1-3 sample JDs for recruiters") replaced. One well-crafted composite JD showcases the tool's full range better than multiple thin samples. Audience reframed from "recruiters" to "exploratory visitors." Single button over a button row.
-- **Status:** Parked pending demo JD content from Matt. Implementation is straightforward once the composite JD text is available.
-- **Implementation notes:**
-  - Define demo JD as a module-level constant `DEMO_JD` in `role_match.py`. Single string, not a dict.
-  - Use prefilter pattern (see `banking_landing.py` → `explore_stories.py`).
-- **Effort:** ~10-15 lines, single file. Blocker: JD content.
-- **Logged:** May 15, 2026
-- **Revised:** June 11, 2026
-
-**Copy finalized (June 11, 2026)**
-- Link text: "Don't have a job description handy?" (tertiary, `--text-secondary`) + "Try an example →" (accent, `--accent-purple`) on separate lines via `st.markdown` + `st.button`
-- Demo JD title: "Senior Engineering Leader, Product Platform"
-- Demo JD shipped as `data/demo_jd.txt` (61 lines, composite fictional role) — commit `6c39d8c`
-- Capability development / organizational enablement at scale requirement to be added to Required section of demo JD before production deploy
-
----
 
 ---
 
