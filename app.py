@@ -49,6 +49,11 @@ SECONDARY_SURFACES = {"How I Built"}
 if st.session_state.get("active_tab", "Home") not in SECONDARY_SURFACES:
     render_navbar(current_tab=st.session_state.get("active_tab", "Home"))
 
+# Initialize active_tab before any rerun can fire (first-mount and screen-size
+# reruns at lines below both execute before the old setdefault at line ~145,
+# leaving active_tab unset when line 429 is reached on a fresh session).
+st.session_state.setdefault("active_tab", "Home")
+
 # ---- first-mount guard ----
 if not st.session_state.get("__first_mount_rerun__", False):
     st.session_state["__first_mount_rerun__"] = True
