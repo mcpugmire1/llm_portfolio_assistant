@@ -148,7 +148,7 @@ def navigate_to_cross_industry_landing(browser_page, app_url):
     _click_category_card(
         browser_page,
         card_id="card-cross-industry",
-        landing_marker_selector="h1:has-text('Cross-Industry Playbook')",
+        landing_marker_selector="h1:has-text('Cross-Industry')",
     )
 
 

@@ -333,7 +333,7 @@ div[data-testid="stColumn"]:first-child p {
         var header = document.createElement('div');
         header.className = 'mobile-header';
         header.id = 'mobile-header';
-        header.innerHTML = '<button class="mobile-hamburger" id="mobile-hamburger" aria-label="Menu"><span></span><span></span><span></span></button><div class="mobile-brand"><img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png" width="44" height="44" alt="Agy"><span>MattGPT</span></div><div class="mobile-spacer"></div>';
+        header.innerHTML = '<button class="mobile-hamburger" id="mobile-hamburger" aria-label="Menu"><span></span><span></span><span></span></button><div class="mobile-brand"><img src="/app/static/agy_avatar.png" width="44" height="44" alt="Agy"><span>MattGPT</span></div><div class="mobile-spacer"></div>';
         doc.body.insertBefore(header, doc.body.firstChild);
 
         // Create overlay
@@ -341,6 +341,44 @@ div[data-testid="stColumn"]:first-child p {
         overlay.className = 'mobile-nav-overlay';
         overlay.id = 'mobile-nav-overlay';
         doc.body.insertBefore(overlay, doc.body.firstChild);
+
+        // Page transition overlay — injected into the parent window via <script> tag (MATTGPT-018).
+        // Overlay, maskNav(), setTimeout, and click listener all live in parent window scope so
+        // they survive Streamlit destroying the components.html iframe on every rerun. Anything
+        // defined in the iframe (closures, timers, listeners) dies with the iframe.
+        if (!window.parent.__maskNav) {
+            var ptScript = doc.createElement('script');
+            ptScript.text = `(function(){
+                var ov = document.createElement('div');
+                ov.id = 'page-transition-overlay';
+                ov.style.cssText = 'position:fixed;inset:0;z-index:9997;opacity:0;pointer-events:none;';
+                document.body.appendChild(ov);
+                window.__maskNav = function() {
+                    ov.style.background = getComputedStyle(document.body).backgroundColor;
+                    ov.style.transition = 'none';
+                    ov.style.opacity = '1';
+                    setTimeout(function() {
+                        ov.style.transition = 'opacity 0.08s ease-in';
+                        ov.style.opacity = '0';
+                    }, 150);
+                };
+                document.addEventListener('click', function(e) {
+                    if (e.target.closest('[class*="st-key-topnav_"] button')) window.__maskNav();
+                });
+            })();`;
+            doc.head.appendChild(ptScript);
+        }
+
+        // Preload all static images on first page load so they're cache-warm before navigation
+        if (!doc.body.__imgPreloaded) {
+            doc.body.__imgPreloaded = true;
+            ['/app/static/agy_avatar.png', '/app/static/agy_explore_stories.png',
+             '/app/static/agy_ask_mattgpt.png', '/app/static/matt_agy_hero.png',
+             '/app/static/agy_banking.png', '/app/static/agy_cross_industry.png',
+             '/app/static/MattCartoon-Transparent.png', '/app/static/AgyMattCartoon-Transparent.png',
+             '/app/static/chase_48px_1.png', '/app/static/chase_48px_2.png', '/app/static/chase_48px_3.png'
+            ].forEach(function(src) { new Image().src = src; });
+        }
 
         // Create dropdown with active states
         var dropdown = document.createElement('nav');
@@ -381,12 +419,7 @@ div[data-testid="stColumn"]:first-child p {
             if (link) {
                 link.onclick = function(e) {
                     e.preventDefault();
-                    // Hide Ask Agy avatars before the rerun fires (mobile path)
-                    doc.querySelectorAll('.header-agy-avatar, .main-avatar img').forEach(function(el) {
-                        el.style.opacity = '0';
-                        el.style.transition = 'none';
-                    });
-                    doc.body.offsetHeight;
+                    if (window.parent.__maskNav) window.parent.__maskNav();
                     var btn = doc.querySelector('[class*="st-key-' + links[id] + '"] button');
                     if (btn) btn.click();
                     dropdown.style.display = 'none';
@@ -409,31 +442,6 @@ div[data-testid="stColumn"]:first-child p {
             };
         }
 
-        // Hide Ask Agy avatars before the Streamlit rerun fires.
-        // mousedown fires before React's synthetic onClick (which triggers the rerun),
-        // giving the browser time to paint opacity:0 before the transition starts.
-        // capture:true ensures we run before React's delegation handler.
-        // One-time setup via flag prevents duplicate listeners across reruns.
-        if (!doc.body.__agiNavAvatarHideV2) {
-            function _hideAgyAvatars() {
-                doc.querySelectorAll('.header-agy-avatar, .main-avatar img').forEach(function(el) {
-                    el.style.opacity = '0';
-                    el.style.transition = 'none';
-                });
-                doc.body.offsetHeight; // force synchronous layout so paint commits before click fires
-            }
-            doc.body.addEventListener('mousedown', function(e) {
-                if (e.target.closest && e.target.closest('[class*="st-key-topnav_"]')) {
-                    _hideAgyAvatars();
-                }
-            }, true);
-            doc.body.addEventListener('touchstart', function(e) {
-                if (e.target.closest && e.target.closest('[class*="st-key-topnav_"]')) {
-                    _hideAgyAvatars();
-                }
-            }, {capture: true, passive: true});
-            doc.body.__agiNavAvatarHideV2 = true;
-        }
     })();
     </script>
     """

@@ -612,7 +612,7 @@ def render_category_cards(stories: list[dict]):
         <div class="ask-agy-left">
           <div class="ask-agy-header">
             <div class="ask-agy-avatar">
-              <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_ask_mattgpt.png" alt="Agy">
+              <img src="/app/static/agy_ask_mattgpt.png" alt="Agy">
             </div>
             <h3 class="ask-agy-title">Ask Agy 🐾 Anything</h3>
           </div>

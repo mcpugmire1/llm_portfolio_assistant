@@ -30,7 +30,7 @@ def render_about_matt():
         """
 <div class="about-header">
     <div class="about-header-content">
-        <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/MattCartoon-Transparent.png"
+        <img src="/app/static/MattCartoon-Transparent.png"
              class="about-header-avatar"
              alt="Matt Pugmire">
         <div class="about-header-text">

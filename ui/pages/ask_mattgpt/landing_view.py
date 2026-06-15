@@ -78,7 +78,7 @@ def render_landing_page(stories: list[dict]):
             """
         <div class="main-intro-section">
             <div class="main-avatar" style="position: relative; display: inline-block;">
-                <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png" width="120" height="120" alt="Agy"/>
+                <img src="/app/static/agy_avatar.png" width="120" height="120" alt="Agy"/>
                 <span class="why-agy-badge" id="why-agy-badge-landing">i</span>
             </div>
             <h2 class="welcome-title">Hi, I'm Agy 🐾</h2>

@@ -94,9 +94,9 @@ def click_recruiter_cta(browser_page):
 
 @then("the Role Match surface should be shown")
 def assert_role_match_shown(browser_page):
-    # DOM-observable proxy for active_tab == 'Role Match': the Role Match
-    # landing renders "Drop a job description..." (role_match.py:771).
-    marker = browser_page.locator("text=/Drop a job description/i").first
+    # DOM-observable proxy for active_tab == 'Role Match': the workspace
+    # container (.st-key-role_match_workspace) renders only on this page.
+    marker = browser_page.locator(".st-key-role_match_workspace").first
     marker.wait_for(state="visible", timeout=15000)
     assert (
         marker.count() > 0

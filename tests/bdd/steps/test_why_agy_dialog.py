@@ -64,7 +64,7 @@ BADGE_ASK_AGY_HEADER = "[class*='ask-header'] .why-agy-badge--header"
 BADGE_HEADER = ".why-agy-badge--header"  # unambiguous on Banking / Cross-Industry
 
 # Dialog
-DIALOG_TITLE = "[role='dialog'] :text('Why Agy?')"
+DIALOG_TITLE = "[role='dialog'] :text(\"Hi, I'm Agy\")"
 
 
 # =============================================================================
@@ -210,8 +210,8 @@ def click_landing_body_badge(browser_page):
 # =============================================================================
 
 
-@given('a dialog with title "Why Agy?" is visible')
-@then('a dialog with title "Why Agy?" is visible')
+@given("a dialog with title \"Hi, I'm Agy 🐾\" is visible")
+@then("a dialog with title \"Hi, I'm Agy 🐾\" is visible")
 def assert_why_agy_dialog_visible(browser_page):
     try:
         browser_page.wait_for_selector(DIALOG_TITLE, timeout=LONG_TIMEOUT)
@@ -339,7 +339,7 @@ def assert_dialog_footer_button(browser_page, text):
         ) from exc
 
 
-@then('no dialog with title "Why Agy?" is visible')
+@then("no dialog with title \"Hi, I'm Agy 🐾\" is visible")
 def assert_why_agy_dialog_gone(browser_page):
     dialog = browser_page.locator(DIALOG_TITLE)
     try:

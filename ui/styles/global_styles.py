@@ -2435,9 +2435,6 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_my_work_trigge
         box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
     }
 
-    /* Suppress avatar flash during Streamlit page transitions.
-       CSS is global so the rule stays in CSSOM when navigating away from Ask Agy,
-       keeping stale avatar elements at opacity:0 for the 150ms main-thread block window. */
     .main-avatar img,
     .header-agy-avatar {
         animation: agiAvatarReveal 0.15s ease-out 0.15s both;
@@ -4024,10 +4021,10 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_my_work_trigge
                 background: rgba(0, 0, 0, 0.6);
             }
             @keyframes chaseAnimation {
-                0% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
-                33.33% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_2.png'); }
-                66.66% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_3.png'); }
-                100% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
+                0% { content: url('/app/static/chase_48px_1.png'); }
+                33.33% { content: url('/app/static/chase_48px_2.png'); }
+                66.66% { content: url('/app/static/chase_48px_3.png'); }
+                100% { content: url('/app/static/chase_48px_1.png'); }
             }
             .thinking-ball {
                 width: 40px;

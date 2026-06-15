@@ -13,3 +13,8 @@
 # local development. "poll" works on both Cloud (no inotify overhead)
 # and local (file change detection still fires, just via polling).
 fileWatcherType = "poll"
+# Serve files from ./static/ at /app/static/<filename>.
+# agy_avatar.png is vendored here from the brand-kit CDN (MATTGPT-018) —
+# cross-origin GitHub Pages fetches during intermediate Streamlit reruns
+# cause canceled requests and blank-frame blips on every page navigation.
+enableStaticServing = true
