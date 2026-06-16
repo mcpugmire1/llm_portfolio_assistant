@@ -174,7 +174,7 @@ def render_hero():
             <div class="hero-content">
                 <div style="display: flex; justify-content: center; margin-bottom: 16px;">
                     <div class="hero-illustration-wrapper" style="position: relative; display: inline-block;">
-                        <img src="/app/static/matt_agy_hero.png"
+                        <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/matt_agy_hero.png"
                              alt="Matt and Agy"
                              style="max-width: 280px; width: 100%; height: auto; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));">
                         <span class="why-agy-badge" id="why-agy-badge-hero">i</span>

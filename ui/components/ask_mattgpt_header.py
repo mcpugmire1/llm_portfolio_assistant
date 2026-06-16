@@ -629,7 +629,7 @@ def render_header(include_button: bool = True, view: str = "landing") -> None:
                 <div style="display: flex; align-items: flex-start; gap: 24px;">
                     <div style="position: relative; display: inline-block; flex-shrink: 0;">
                         <img class="header-agy-avatar"
-                            src="/app/static/agy_avatar.png"
+                            src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png"
                             width="120" height="120"
                             alt="Agy"/>
                         <span class="why-agy-badge--header" id="why-agy-badge-header">i</span>

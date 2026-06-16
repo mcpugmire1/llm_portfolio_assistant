@@ -333,7 +333,7 @@ div[data-testid="stColumn"]:first-child p {
         var header = document.createElement('div');
         header.className = 'mobile-header';
         header.id = 'mobile-header';
-        header.innerHTML = '<button class="mobile-hamburger" id="mobile-hamburger" aria-label="Menu"><span></span><span></span><span></span></button><div class="mobile-brand"><img src="/app/static/agy_avatar.png" width="44" height="44" alt="Agy"><span>MattGPT</span></div><div class="mobile-spacer"></div>';
+        header.innerHTML = '<button class="mobile-hamburger" id="mobile-hamburger" aria-label="Menu"><span></span><span></span><span></span></button><div class="mobile-brand"><img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png" width="44" height="44" alt="Agy"><span>MattGPT</span></div><div class="mobile-spacer"></div>';
         doc.body.insertBefore(header, doc.body.firstChild);
 
         // Create overlay
@@ -372,11 +372,11 @@ div[data-testid="stColumn"]:first-child p {
         // Preload all static images on first page load so they're cache-warm before navigation
         if (!doc.body.__imgPreloaded) {
             doc.body.__imgPreloaded = true;
-            ['/app/static/agy_avatar.png', '/app/static/agy_explore_stories.png',
-             '/app/static/agy_ask_mattgpt.png', '/app/static/matt_agy_hero.png',
-             '/app/static/agy_banking.png', '/app/static/agy_cross_industry.png',
-             '/app/static/MattCartoon-Transparent.png', '/app/static/AgyMattCartoon-Transparent.png',
-             '/app/static/chase_48px_1.png', '/app/static/chase_48px_2.png', '/app/static/chase_48px_3.png'
+            ['https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png', 'https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_explore_stories.png',
+             'https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_ask_mattgpt.png', 'https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/matt_agy_hero.png',
+             'https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_banking.png', 'https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_cross_industry.png',
+             'https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/MattCartoon-Transparent.png', 'https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/AgyMattCartoon-Transparent.png',
+             'https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png', 'https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_2.png', 'https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_3.png'
             ].forEach(function(src) { new Image().src = src; });
         }
 

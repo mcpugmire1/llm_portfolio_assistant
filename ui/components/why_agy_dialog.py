@@ -169,7 +169,7 @@ def render_why_agy_dialog():
         <em class="why-agy-closing">It felt right to keep his name part of the work we loved doing together.</em>
     </div>
     <img class="why-agy-illustration"
-         src="/app/static/AgyMattCartoon-Transparent.png"
+         src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/AgyMattCartoon-Transparent.png"
          alt="Matt and Agy"/>
 </div>
 """,

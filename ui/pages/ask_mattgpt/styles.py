@@ -871,10 +871,10 @@ def get_loading_animation_css() -> str:
     return """
         <style>
         @keyframes chaseAnimation {
-            0% { content: url('/app/static/chase_48px_1.png'); }
-            33.33% { content: url('/app/static/chase_48px_2.png'); }
-            66.66% { content: url('/app/static/chase_48px_3.png'); }
-            100% { content: url('/app/static/chase_48px_1.png'); }
+            0% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
+            33.33% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_2.png'); }
+            66.66% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_3.png'); }
+            100% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
         }
         .thinking-ball {
             width: 48px;

@@ -128,7 +128,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_cross_trigger"
 <div class="conversation-header">
     <div class="conversation-header-content">
         <div style="position: relative; display: inline-block; flex-shrink: 0;">
-            <img class="conversation-agy-avatar" src="/app/static/agy_cross_industry.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
+            <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_cross_industry.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
             <span class="why-agy-badge--header" id="why-agy-badge-cross">i</span>
         </div>
         <div class="conversation-header-text">
