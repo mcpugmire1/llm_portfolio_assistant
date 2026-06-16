@@ -26,7 +26,7 @@ import streamlit.components.v1.components  # noqa: F401 — pre-import so the
 # components.components.MarshallComponentException. Streamlit 1.50.0 doesn't
 # auto-import the submodule; AgGrid 0.3.4.post3 assumes it does.
 from dotenv import load_dotenv
-from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode, JsCode
+from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode
 
 from config.debug import DEBUG
 from services.query_logger import log_query
@@ -62,7 +62,7 @@ MAX_ACHIEVEMENTS_SHOWN = 4
 
 # AgGrid availability check
 try:
-    from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode, JsCode
+    from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode
 
     _HAS_AGGRID = True
 except Exception:
@@ -1308,11 +1308,11 @@ def render_explore_stories(
                 flex=1,
                 minWidth=110,
                 maxWidth=170,
-                cellRenderer=JsCode("""
+                cellRenderer="""
                     function(params) {
                         return '<span class="es-client-badge">' + params.value + '</span>';
                     }
-                """),
+                """,
             )
             gob.configure_column("Role", flex=1, minWidth=120, maxWidth=300)
             gob.configure_column(
@@ -1327,6 +1327,7 @@ def render_explore_stories(
             gob.configure_pagination(enabled=False)
 
             opts = gob.build()
+            opts.pop("preSelectAllRows", None)
             opts["suppressRowClickSelection"] = False
             opts["rowSelection"] = "single"
             opts["rowHeight"] = TABLE_ROW_HEIGHT
@@ -1343,6 +1344,7 @@ def render_explore_stories(
                 theme="streamlit",
                 fit_columns_on_grid_load=True,
                 height=TABLE_HEIGHT,
+                key="stories_grid",
             )
 
             components.html(

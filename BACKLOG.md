@@ -149,6 +149,8 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-128](#mattgpt-128) | Displayed-source faithfulness — source cards must substantiate the claims in the answer | Open | High | Issue | June 14, 2026 |
 | [MATTGPT-129](#mattgpt-129) | Content elaboration per era — expand 5 under-documented operational stories | Open | High | Action | June 14, 2026 |
 | [MATTGPT-130](#mattgpt-130) | "practitioners" canonical everywhere — UI, eval golden set, corpus re-embed in lockstep | Open | Medium | Action | June 14, 2026 |
+| [MATTGPT-131](#mattgpt-131) | BDD selector bug — `test_industry_and_capability_labels_visible_inline_on_mobile` fails in marathon run | Open | Low | Bug | June 15, 2026 |
+| [MATTGPT-132](#mattgpt-132) | AG Grid Client column badge rendering — cellRenderer approach fails in st_aggrid React stack | Open | Low | Bug | June 15, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -2729,6 +2731,41 @@ For each client-specific probe query, assert `client_name in [s.get("Client") fo
 - Stories 1 and 2 (expand-from-logged) completed before Stories 3–5 (recovery-dependent).
 
 **Sequencing:** Stories 3–5 are blocked on elicitation. Do not let recovery stories block Stories 1 and 2.
+
+---
+
+### MATTGPT-132
+**AG Grid Client column badge rendering — cellRenderer fails in st_aggrid React stack**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Bug
+- **Logged:** June 15, 2026
+
+**Context:** The Client column in My Work Table view has a `cellRenderer` that wraps values in `<span class="es-client-badge">`. Three approaches attempted June 15, 2026 — all failed:
+1. Raw string (pre-existing) — AG Grid treats it as a component name lookup, logs "Looking for component [...] but it wasn't found" warning. Cell shows plain text value.
+2. `JsCode()` wrapper with HTML string return — warning gone, but st_aggrid React stack renders the HTML string as text content, not innerHTML.
+3. `JsCode()` wrapper with `document.createElement` return — React error #31: "Objects are not valid as a React child (found: [object HTMLSpanElement])".
+
+Chrome Claude identified the correct path: `div + innerHTML assignment` approach — the renderer function assigns to `eGridCell.innerHTML` directly rather than returning a value. This bypasses React's reconciler.
+
+**Acceptance criterion:** Client column shows styled badges in Table view with no console warnings and no React errors.
+
+---
+
+### MATTGPT-131
+**BDD selector bug — `test_industry_and_capability_labels_visible_inline_on_mobile` fails in marathon run**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Bug (test only)
+- **Logged:** June 15, 2026
+
+**Context:** `test_industry_and_capability_labels_visible_inline_on_mobile` fails in the full BDD suite marathon run (52 passed, 1 failed). The feature is correct in both local and production at 375px — Chrome Claude confirmed `st-key-facet_industry_v2`, `stWidgetLabel`, `display: flex`, `visibility: visible`, bounding rect 48x14px fully within viewport. The label is present and Playwright-visible in the live app.
+
+**Root cause:** Not yet confirmed. Candidates: (1) the selector hardcodes `facet_industry_v2` but `_widget_version_industry` in a fresh BDD session starts at 0 (`facet_industry_v0`), making the substring match fail; (2) marathon-run resource pressure causes the DOM assertion to fire before the label renders after a 375px viewport resize. Scenario 18 of 54, fires at 31 min into a 31-min run.
+
+**Acceptance criterion:** Scenario passes in isolation (`pytest tests/bdd/steps/test_explore_stories.py::test_industry_and_capability_labels_visible_inline_on_mobile -v`) and in the full suite without flake.
 
 ---
 
