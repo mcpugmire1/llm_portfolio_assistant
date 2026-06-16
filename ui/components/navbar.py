@@ -8,6 +8,8 @@ Mobile (<768px): Hamburger menu with dropdown
 import streamlit as st
 import streamlit.components.v1 as components
 
+from ui.image_assets import AGY_AVATAR_SMALL_B64
+
 
 def render_navbar(current_tab: str = "Home"):
     """
@@ -333,7 +335,7 @@ div[data-testid="stColumn"]:first-child p {
         var header = document.createElement('div');
         header.className = 'mobile-header';
         header.id = 'mobile-header';
-        header.innerHTML = '<button class="mobile-hamburger" id="mobile-hamburger" aria-label="Menu"><span></span><span></span><span></span></button><div class="mobile-brand"><img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png" width="44" height="44" alt="Agy"><span>MattGPT</span></div><div class="mobile-spacer"></div>';
+        header.innerHTML = '<button class="mobile-hamburger" id="mobile-hamburger" aria-label="Menu"><span></span><span></span><span></span></button><div class="mobile-brand"><img src="NAVBAR_AVATAR_SRC" width="44" height="44" alt="Agy"><span>MattGPT</span></div><div class="mobile-spacer"></div>';
         doc.body.insertBefore(header, doc.body.firstChild);
 
         // Create overlay
@@ -451,5 +453,6 @@ div[data-testid="stColumn"]:first-child p {
     js_code = js_code.replace('ACTIVE_ASK', active_ask)
     js_code = js_code.replace('ACTIVE_ROLE', active_role)
     js_code = js_code.replace('ACTIVE_ABOUT', active_about)
+    js_code = js_code.replace('NAVBAR_AVATAR_SRC', AGY_AVATAR_SMALL_B64)
 
     components.html(js_code, height=0)

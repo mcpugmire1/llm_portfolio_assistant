@@ -33,6 +33,8 @@ Usage:
 import streamlit as st
 import streamlit.components.v1 as components
 
+from ui.image_assets import AGY_AVATAR_B64
+
 
 def get_header_css() -> str:
     """
@@ -629,7 +631,7 @@ def render_header(include_button: bool = True, view: str = "landing") -> None:
                 <div style="display: flex; align-items: flex-start; gap: 24px;">
                     <div style="position: relative; display: inline-block; flex-shrink: 0;">
                         <img class="header-agy-avatar"
-                            src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png"
+                            src="{AGY_AVATAR_B64}"
                             width="120" height="120"
                             alt="Agy"/>
                         <span class="why-agy-badge--header" id="why-agy-badge-header">i</span>

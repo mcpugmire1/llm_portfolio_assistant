@@ -151,6 +151,8 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-130](#mattgpt-130) | "practitioners" canonical everywhere — UI, eval golden set, corpus re-embed in lockstep | Open | Medium | Action | June 14, 2026 |
 | [MATTGPT-131](#mattgpt-131) | BDD selector bug — `test_industry_and_capability_labels_visible_inline_on_mobile` fails in marathon run | Open | Low | Bug | June 15, 2026 |
 | [MATTGPT-132](#mattgpt-132) | AG Grid Client column badge rendering — cellRenderer approach fails in st_aggrid React stack | Open | Low | Bug | June 15, 2026 |
+| [MATTGPT-133](#mattgpt-133) | BDD skip — `test_ask_agy_works_from_table_view` skips when AgGrid iframe row interaction doesn't open detail panel | Open | Low | Bug | June 16, 2026 |
+| [MATTGPT-134](#mattgpt-134) | BDD skip — `test_deeplink_respects_view_mode` skips because deeplink navigation does not preserve pre-set view mode | Open | Low | Bug | June 16, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -2731,6 +2733,34 @@ For each client-specific probe query, assert `client_name in [s.get("Client") fo
 - Stories 1 and 2 (expand-from-logged) completed before Stories 3–5 (recovery-dependent).
 
 **Sequencing:** Stories 3–5 are blocked on elicitation. Do not let recovery stories block Stories 1 and 2.
+
+---
+
+### MATTGPT-134
+**BDD skip — `test_deeplink_respects_view_mode` — deeplink navigation does not preserve pre-set view mode**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Bug
+- **Logged:** June 16, 2026
+
+**Context:** Scenario skips at `pytest.skip("Cards view content not found")` in `tests/bdd/steps/test_explore_stories.py` (line 1294). The scenario sets Cards view preference (`Given the user preference is Cards view`), then navigates via deeplink (`When the user navigates to "?story=..."`). The `Then the view should be Cards view` step finds zero `.es-fixed-height-card` elements — the deeplink navigation reverts to Table (the default view) instead of preserving the pre-navigation Cards preference.
+
+**Acceptance criterion:** Either (a) deeplink preserves the active view mode and the scenario passes end-to-end, or (b) the behavior is confirmed intentional (deeplinks always start in Table view) and the scenario is updated to match the confirmed behavior.
+
+---
+
+### MATTGPT-133
+**BDD skip — `test_ask_agy_works_from_table_view` — AgGrid row click doesn't reliably expose Ask Agy button in headless Playwright**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Bug
+- **Logged:** June 16, 2026
+
+**Context:** Scenario skips at `pytest.skip("Ask Agy button not found")` in `tests/bdd/steps/test_explore_stories.py` (line 546). The scenario follows: `Given the user is in Table view` → `When the user clicks on a story row`. After the row click, the step looks for `#btn-ask-story` inside the story detail panel, but the element is not reliably found. The AgGrid iframe interaction sequence (frame_locator → `.ag-row` click → detail panel open → Ask Agy button visible) is fragile in headless Playwright. The equivalent Cards-view scenario (`test_ask_agy_works_from_cards_view`) passes reliably.
+
+**Acceptance criterion:** `test_ask_agy_works_from_table_view` passes reliably in isolation and as part of the full BDD suite, with no `pytest.skip` guard.
 
 ---
 

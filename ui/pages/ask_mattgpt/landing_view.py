@@ -20,6 +20,7 @@ from ui.components.how_agy_dialog import render_how_agy_dialog
 from ui.components.how_i_built_dialog import render_how_i_built_dialog
 from ui.components.thinking_indicator import render_thinking_indicator
 from ui.components.why_agy_dialog import render_why_agy_dialog
+from ui.image_assets import AGY_AVATAR_B64
 from ui.pages.ask_mattgpt.backend_service import send_to_backend
 from ui.pages.ask_mattgpt.styles import get_landing_css
 
@@ -75,10 +76,10 @@ def render_landing_page(stories: list[dict]):
     with st.container(key="intro_section"):
         # === MAIN INTRO SECTION ===
         st.markdown(
-            """
+            f"""
         <div class="main-intro-section">
             <div class="main-avatar" style="position: relative; display: inline-block;">
-                <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png" width="120" height="120" alt="Agy"/>
+                <img src="{AGY_AVATAR_B64}" width="120" height="120" alt="Agy"/>
                 <span class="why-agy-badge" id="why-agy-badge-landing">i</span>
             </div>
             <h2 class="welcome-title">Hi, I'm Agy 🐾</h2>

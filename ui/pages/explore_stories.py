@@ -37,6 +37,7 @@ from ui.components.story_detail import render_story_detail
 from ui.components.thinking_indicator import render_thinking_indicator
 from ui.components.timeline_view import render_timeline_view
 from ui.components.why_agy_dialog import render_why_agy_dialog
+from ui.image_assets import AGY_EXPLORE_STORIES_B64
 from utils.filters import matches_filters
 from utils.ui_helpers import render_no_match_banner, safe_container
 from utils.validation import is_nonsense
@@ -592,11 +593,11 @@ def render_explore_stories(
 
     # Hero header with Agy avatar (gray headphones)
     st.markdown(
-        """
+        f"""
 <div class="conversation-header">
     <div class="conversation-header-content">
         <div style="position: relative; display: inline-block; flex-shrink: 0;">
-            <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_explore_stories.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
+            <img class="conversation-agy-avatar" src="{AGY_EXPLORE_STORIES_B64}" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
             <span class="why-agy-badge--header" id="why-agy-badge-my-work">i</span>
         </div>
         <div class="conversation-header-text">
