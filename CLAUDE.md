@@ -9,7 +9,7 @@
   - **Frontend:** Streamlit (Python 3.11)
   - **Vector DB:** Pinecone (semantic search)
   - **Embeddings:** OpenAI text-embedding-3-small (1536 dims)
-  - **Generation:** OpenAI GPT-4o-mini
+  - **Generation:** OpenAI GPT-4o
   - **Data:** 130+ STAR stories in JSONL, 5P framework
 
   ## File Structure
@@ -534,8 +534,8 @@
   ```python
   # RAG Service (Pinecone result confidence)
   CONFIDENCE_HIGH = 0.25  # "Found X stories"
-  CONFIDENCE_LOW = 0.15   # "Relevance may be low"
-  # Below 0.15 = "No strong matches"
+  CONFIDENCE_LOW = 0.20   # "Relevance may be low"
+  # Below 0.20 = "No strong matches"
   ```
 
   ## RAG Pipeline Cleanup (Jan 29, 2026)
