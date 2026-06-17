@@ -5,31 +5,27 @@ Read these before every session. Each one has caused a real incident.
 
 - **Read this entire file before proposing any edit to it.** Synthesize across all sections first. Do not add a section after reading two lines.
 - **When a simple fix is visible while working in a file, fix it.** Do not defer trivial corrections under the pretense of scope management.
-- **Before citing a constraint as the reason for an approach, verify the constraint exists in the actual file.** Show the evidence. If the constraint doesn't exist, use the simplest direct substitution — f-string with the constant inline. (June 2026: .replace() pattern built for a CSS brace problem that affected 3 lines, not 4000.)
-- **Push is a separate gate from commit — always.** `git push origin main` triggers a production deploy on Streamlit Cloud. A commit approval is not a push approval. Stop after committing and wait for an explicit "push" instruction. Never chain `git commit && git push`. (April 2026)
-- **BDD scenarios before any implementation code — no exceptions.** First action on any ticket: write scenarios in `tests/bdd/features/` and bind them with `scenarios()` in `test_*.py`. Not logistics. Not split decisions. Scenarios first. (May 2026)
-- **Paste literal test output at every gate — never self-summarize.** "Looks good, ready to commit?" is not a gate. Paste the literal `pytest` output before requesting commit approval at every Red and Green commit.
+- **No em dashes anywhere in this repo.** Not in docs, not in commits, not in this file. Use a colon, comma, or rewrite the sentence.
+- **Before citing a constraint as the reason for an approach, verify the constraint exists in the actual file.** Show the evidence. If the constraint doesn't exist, use the simplest direct substitution: f-string with the constant inline. (June 2026: .replace() pattern built for a CSS brace problem that affected 3 lines, not 4000.)
+- **Push is a separate gate from commit, always.** `git push origin main` triggers a production deploy on Streamlit Cloud. A commit approval is not a push approval. Stop after committing and wait for an explicit "push" instruction. Never chain `git commit && git push`. (April 2026)
+- **BDD scenarios before any implementation code, no exceptions.** First action on any ticket: write scenarios in `tests/bdd/features/` and bind them with `scenarios()` in `test_*.py`. Not logistics. Not split decisions. Scenarios first. (May 2026)
+- **Paste literal test output at every gate, never self-summarize.** "Looks good, ready to commit?" is not a gate. Paste the literal `pytest` output before requesting commit approval at every Red and Green commit.
 - **One "go" ships the full Red → Red → Green cycle.** After Matt says "go" on a ticket, run all three gates without re-asking between them. Re-ask only when a substantive new design decision surfaces mid-cycle.
-- **Pre-flight before touching any existing file.** Name the files the ticket touches, the patterns those files use, any cross-surface couplings, and existing test coverage — before proposing anything. (June 2026)
+- **Pre-flight before touching any existing file.** Name the files the ticket touches, the patterns those files use, any cross-surface couplings, and existing test coverage, before proposing anything. (June 2026)
 - **Read existing patterns before building anything new.** Check `conversation_helpers.py` before any click handler. Check `banking_landing.py` before any cross-page navigation. Build on top; replace only when you can name in a comment why the existing pattern fails. (April 2026)
-- **Stage specific files by name — never `git add -A` or `git add .`.** Parallel sessions share one staging area. (May 2026)
+- **Stage specific files by name, never `git add -A` or `git add .`.** Parallel sessions share one staging area. (May 2026)
 - **Never use `grep -v` to redact secrets.** Use positive include filters (keys only). Applies to `.streamlit/secrets.toml`, `.env`, any service-account JSON. (May 2026)
 - **Artifacts for user review go in chat, not /tmp.** Edit tool calls show diffs inline. Writing to /tmp creates a local-only artifact Matt cannot see. (June 2026)
-- **DevTools before any CSS proposal.** For any layout, alignment, positioning, sizing, color, or typography issue — ask Matt to paste computed styles from DevTools before proposing a fix. Source-code reasoning misses Streamlit's wrapper-layer surprises. (May 2026)
+- **DevTools before any CSS proposal.** For any layout, alignment, positioning, sizing, color, or typography issue: ask Matt to paste computed styles from DevTools before proposing a fix. Source-code reasoning misses Streamlit's wrapper-layer surprises. (May 2026)
+- **Unexpected test failures are your problem until proven otherwise.** When tests fail on code you touched, investigate before labeling anything pre-existing. Run the failures in isolation, read the output, and either fix them or produce evidence they existed before your change. "I didn't touch that code" is not evidence. Presenting options and waiting is not investigating.
+- **Working notes do not replace BACKLOG tickets.** Any bug, regression, or unvalidated behavior written to a working note must also produce a BACKLOG entry before the session proceeds. A finding that only exists in `docs/working/` or a notes file has no owner and will not be acted on. "I noted it" is not the same as "it is tracked."
 
 ---
 
-## Project Overview
-AI-powered portfolio assistant showcasing Matt's 20+ years of digital transformation experience. Named after his late Plott Hound "Agy" (short for Agador Spartacus from "The Birdcage"). Deployed at askmattgpt.streamlit.app.
+## Tech Stack
+See [Design Specification](https://mcpugmire1.github.io/mattgpt-design-spec/) for the canonical tech stack and system architecture. Do not duplicate tech stack facts here.
 
 Read `ARCHITECTURE.md` for full system context.
-
-## Tech Stack
-- **Frontend:** Streamlit (Python 3.11)
-- **Vector DB:** Pinecone (semantic search)
-- **Embeddings:** OpenAI text-embedding-3-small (1536 dims)
-- **Generation:** OpenAI GPT-4o
-- **Data:** 130+ STAR stories in JSONL, 5P framework
 
 ## File Structure
 ```
@@ -53,6 +49,7 @@ ui/components/          # Shared components
   timeline_view.py      # Era-based Timeline (5 career phases)
   story_detail.py       # Story detail modal
   how_agy_modal.py      # "How Agy Searches" modal
+  how_i_built_dialog.py # "How I Built MattGPT" dialog
   ask_mattgpt_header.py # Unified header component
   category_cards.py     # Landing page capability cards
   thinking_indicator.py # Loading/processing indicator
@@ -72,6 +69,9 @@ utils/                  # Helpers
 
 config/                 # Settings
   debug.py, settings.py, constants.py
+
+data/
+  echo_star_stories_nlp.jsonl   # STAR story corpus (source of truth)
 ```
 
 ## Code Conventions
@@ -82,20 +82,20 @@ config/                 # Settings
 - Container keys for CSS targeting: `.st-key-{key_name}` selectors
 
 ## CSS Rules
-1. **Scope mobile CSS** — use wrapper classes (`.explore-page`) or page-specific selectors
-2. **Never use generic selectors** — `div[data-testid="stColumn"]` leaks everywhere
-3. **Mobile changes go in `@media (max-width: 767px)` blocks** — don't touch desktop rules
+1. **Scope mobile CSS** - use wrapper classes (`.explore-page`) or page-specific selectors
+2. **Never use generic selectors** - `div[data-testid="stColumn"]` leaks everywhere
+3. **Mobile changes go in `@media (max-width: 767px)` blocks** - don't touch desktop rules
 4. **Test at breakpoints:** 375px (iPhone SE), 767px (tablet boundary), 1024px+ (desktop)
-5. **Streamlit class names like `st-emotion-cache-*` change between versions** — target `data-testid` or `.st-key-*` instead
-6. **Use existing CSS variables** — check `global_styles.py` for `--bg-card`, `--border-color`, `--text-primary`, `--accent-purple`, etc.
-7. **Container keys for targeting** — `st.container(key="my_container")` then target `.st-key-my_container`
-8. **DevTools before any CSS proposal** — see Critical Rules. Applies to layout, alignment, positioning, sizing, color, and typography.
-9. **Streamlit transforms spaces in `key=` to dashes in CSS class names** — `key="topnav_My Work"` produces `.st-key-topnav_My-Work`. Use the dash form in CSS/JS/BDD selectors.
+5. **Streamlit class names like `st-emotion-cache-*` change between versions** - target `data-testid` or `.st-key-*` instead
+6. **Use existing CSS variables** - check `global_styles.py` for `--bg-card`, `--border-color`, `--text-primary`, `--accent-purple`, etc.
+7. **Container keys for targeting** - `st.container(key="my_container")` then target `.st-key-my_container`
+8. **DevTools before any CSS proposal** - see Critical Rules. Applies to layout, alignment, positioning, sizing, color, and typography.
+9. **Streamlit transforms spaces in `key=` to dashes in CSS class names** - `key="topnav_My Work"` produces `.st-key-topnav_My-Work`. Use the dash form in CSS/JS/BDD selectors.
 
 ## Streamlit Patterns
 
 ### Session State & Widget Keys
-- **Never modify a session state key after its widget renders** — `StreamlitAPIException`
+- **Never modify a session state key after its widget renders** - causes `StreamlitAPIException`
 - **Use prefilter pattern for cross-page navigation:**
   ```python
   # Source page (e.g., timeline_view.py):
@@ -106,14 +106,14 @@ config/                 # Settings
   if "prefilter_role" in st.session_state:
       F["role"] = st.session_state.pop("prefilter_role")
   ```
-- **Check existing patterns first** — see `banking_landing.py` → `explore_stories.py`
+- **Check existing patterns first** - see `banking_landing.py` → `explore_stories.py`
 
 ### HTML in Streamlit
-- **`st.markdown()` with complex nested HTML often renders as raw text** — use single-line HTML strings
-- **For interactive HTML, use `components.html()`** — clicks require JS to trigger hidden `st.button()` elements
-- **JS in iframes can't directly access parent** — use `window.parent.document` with timeout for DOM readiness
+- **`st.markdown()` with complex nested HTML often renders as raw text** - use single-line HTML strings
+- **For interactive HTML, use `components.html()`** - clicks require JS to trigger hidden `st.button()` elements
+- **JS in iframes can't directly access parent** - use `window.parent.document` with timeout for DOM readiness
 
-### Interactive Click Handling — Read This First
+### Interactive Click Handling - Read This First
 Two proven patterns exist. Use them in this order:
 
 **Pattern 1 (default): `st.button` + scoped CSS**
@@ -125,14 +125,14 @@ See `ui/pages/explore_stories.py`, Cards view rendering (~lines 2393-2487). List
 Do not build a third pattern without a documented reason why neither of these works. April 2026: ~100 lines of JS bridge code were written and then abandoned when switching to Pattern 1 fixed the problem.
 
 ### Streamlit Markdown Call Count Affects Layout
-Each `st.markdown()` call creates a DOM element. On pages using `.conversation-header`, the negative margin (`-3rem`) is tuned to a specific number of preceding markdown elements. Extra `st.markdown()` calls — even containing only `<style>` tags — break visual alignment. Consolidate CSS injections; place additional injections after hero content, before `render_footer()`. Browser CSS parsing is order-independent so bottom-of-page injection is functionally equivalent.
+Each `st.markdown()` call creates a DOM element. On pages using `.conversation-header`, the negative margin (`-3rem`) is tuned to a specific number of preceding markdown elements. Extra `st.markdown()` calls, even containing only `<style>` tags, break visual alignment. Consolidate CSS injections; place additional injections after hero content, before `render_footer()`. Browser CSS parsing is order-independent so bottom-of-page injection is functionally equivalent.
 
 ## Behavioral Rules
 
 ### Before starting any ticket
-1. **Pre-flight** (see Critical Rules) — name the files, patterns, couplings, and test coverage
-2. **Pre-implementation reasoning gate** — before proposing any implementation, state in one sentence what the current code does, one sentence what the change does, and one sentence why it's better than the simplest alternative. If that third sentence can't be written confidently, stop and ask — do not default to the more complex approach.
-3. **Default is build-on-top-of, not replace-with** — extend the existing pattern; only propose replacing when you can name in a comment why it fails
+1. **Pre-flight** (see Critical Rules) - name the files, patterns, couplings, and test coverage
+2. **Pre-implementation reasoning gate** - before proposing any implementation, state in one sentence what the current code does, one sentence what the change does, and one sentence why it's better than the simplest alternative. If that third sentence can't be written confidently, stop and ask. Do not default to the more complex approach.
+3. **Default is build-on-top-of, not replace-with** - extend the existing pattern; only propose replacing when you can name in a comment why it fails
 4. **BDD scenarios first** (see Testing Protocol)
 
 ### During implementation
@@ -154,7 +154,7 @@ Each `st.markdown()` call creates a DOM element. On pages using `.conversation-h
 ### Parallel sessions
 When multiple Claude Code sessions run concurrently, they share one git working tree and one staging area.
 - Stage specific files by name (see Critical Rules)
-- Check `git status` before staging — see what the other session has modified
+- Check `git status` before staging to see what the other session has modified
 - Coordinate commit timing: Session A stages → commits → reports SHA → Session B stages → commits
 - For true parallelism: `git worktree add ../project-branchname`
 
@@ -171,10 +171,10 @@ One "go" from Matt ships the full cycle without re-asking between gates. Re-ask 
 - **Refactor (optional):** Clean up while keeping tests passing.
 
 ### Validation rules
-- **Paste literal pytest output at every gate** — never self-summarize (see Critical Rules)
-- **Scope per-gate runs to the relevant test file** — `pytest tests/bdd/steps/test_X.py -v`, not the full suite
+- **Paste literal pytest output at every gate** - never self-summarize (see Critical Rules)
+- **Scope per-gate runs to the relevant test file** - `pytest tests/bdd/steps/test_X.py -v`, not the full suite
 - **A `.feature` file without its `test_*.py` binding is documentation, not a test**
-- **BDD scenarios must assert DOM-observable behavior** — Playwright cannot read `st.session_state`; assert navigation visible + user-message echo + assistant-response streaming
+- **BDD scenarios must assert DOM-observable behavior** - Playwright cannot read `st.session_state`; assert navigation visible + user-message echo + assistant-response streaming
 - **After any change to UI files, restart Streamlit before running BDD tests**
 - **After any change to `explore_stories.py`, run the BDD suite before presenting for review**
 - **On a second Playwright selector timeout, screenshot before iterating:**
@@ -191,19 +191,19 @@ One "go" from Matt ships the full cycle without re-asking between gates. Re-ask 
 Three rules from a real GCP private key exposure (May 2026):
 
 1. **Never use `grep -v` to redact secrets** (see Critical Rules). Use positive include filters:
-   - `grep -oE "^[A-Z_][A-Z_0-9]*" .env` — key names only
-   - `grep -oE "^[a-z_]+ ?=" secrets.toml` — top-level scalar keys only
+   - `grep -oE "^[A-Z_][A-Z_0-9]*" .env` - key names only
+   - `grep -oE "^[a-z_]+ ?=" secrets.toml` - top-level scalar keys only
 2. **When inspecting any secrets file, extract keys-only by default.** Ask Matt to confirm values rather than printing them.
-3. **Hard-cap output for any command touching a secrets file** — pipe to `| head -20`.
+3. **Hard-cap output for any command touching a secrets file** - pipe to `| head -20`.
 
 Applies to: `.streamlit/secrets.toml`, `.env`, `.env.local`, any service-account JSON, any file matching `*secret*` / `*credential*` / `*token*`.
 
 ## Pre-Commit Doc Checklist
 Before committing, answer for each:
-- **ARCHITECTURE.md** — Does this change a pattern, surface, or fact stated here?
-- **mattgpt-design-spec** (Jekyll repo) — Does this change anything in the user-facing spec?
-- **how_agy_modal.py** — Does this change anything described in the Ask MattGPT architecture exposition?
-- **about_matt.py** — Does this change anything described in the "How I Built MattGPT" section?
+- **ARCHITECTURE.md** - Does this change a pattern, surface, or fact stated here?
+- **mattgpt-design-spec** (Jekyll repo) - Does this change anything in the user-facing spec?
+- **how_agy_modal.py** - Does this change anything described in the Ask MattGPT architecture exposition?
+- **about_matt.py** - Does this change anything described in the "How I Built MattGPT" section?
 
 If yes to any: the doc-update commit pairs with this code commit. Same session, same push. Not a follow-up.
 
@@ -252,10 +252,10 @@ Never hardcode specific story titles in eval tests. Use index-based selection; f
 
 ## Nonsense Filter Rules
 `nonsense_filters.jsonl` contains regex patterns to block off-topic queries. Rules for adding patterns:
-1. Test against real queries first — will this block "Tell me about Matt's X"?
-2. Avoid common verbs — "solve", "build", "create", "manage" appear in legitimate queries
-3. Prefer multi-word phrases — `"homework help"` safer than `"homework"`
-4. Use word boundaries — `\b(word)\b` prevents partial matches
+1. Test against real queries first - will this block "Tell me about Matt's X"?
+2. Avoid common verbs - "solve", "build", "create", "manage" appear in legitimate queries
+3. Prefer multi-word phrases - `"homework help"` safer than `"homework"`
+4. Use word boundaries - `\b(word)\b` prevents partial matches
 5. Don't duplicate the semantic scoring gate (< 0.55 already catches gibberish)
 
 ## Pinecone Metadata Casing
@@ -275,10 +275,10 @@ else:
 
 ## Configuration Rules
 Priority order:
-1. **Derive from data** — if computable from source data, do that
-2. **Environment variable** — if it changes between environments or is a secret
-3. **`config/constants.py`** — if it's application logic that must be consistent
-4. **Local constant with comment** — only if truly file-specific
+1. **Derive from data** - if computable from source data, do that
+2. **Environment variable** - if it changes between environments or is a secret
+3. **`config/constants.py`** - if it's application logic that must be consistent
+4. **Local constant with comment** - only if truly file-specific
 
 If hardcoded values are duplicated across files, that's a bug. Centralize immediately.
 
@@ -291,36 +291,19 @@ Query → Nonsense Filters → Semantic Router → out_of_scope check → Pineco
 
 **Entity detection:** Client, Employer, Division, Title. Hard filters: Client, Employer, Division, Project, Place. Soft filters: Title.
 
-**Context exclusion prefixes:** "after", "leaving", "before", "transition from", "left" — prevent entity filtering.
+**Context exclusion prefixes:** "after", "leaving", "before", "transition from", "left" - prevent entity filtering.
 
-**Verbatim phrases (sacred vocabulary):** "builder" — use exactly in Professional Narrative responses.
+**Verbatim phrases (sacred vocabulary):** "builder" - use exactly in Professional Narrative responses.
 
-**Confidence thresholds:**
-```python
-CONFIDENCE_HIGH = 0.25  # "Found X stories"
-CONFIDENCE_LOW = 0.20   # "Relevance may be low"
-# Below 0.20 = "No strong matches"
-```
+**Confidence thresholds:** See `config/constants.py`. Do not duplicate values here.
 
 ## Quality Standards
 - Every claim, metric, or statement must be factually accurate
-- No AI fabrications — real stories from real experience only
-- Mobile must not break desktop — test both after any CSS change
+- No AI fabrications - real stories from real experience only
+- Mobile must not break desktop - test both after any CSS change
 
 ## CSS Variable Reference
-```css
---accent-purple: #8B5CF6
---accent-purple-hover: #7C3AED
---accent-purple-bg: rgba(139, 92, 246, 0.08)
---accent-purple-light: rgba(139, 92, 246, 0.2)
---bg-card: #FFFFFF
---bg-surface: #F9FAFB
---bg-hover: #F3F4F6
---text-primary: #1F2937
---text-secondary: #6B7280
---border-color: #E5E7EB
---hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.15)
-```
+See `global_styles.py` for the full variable set. Do not duplicate values here. Key variables: `--accent-purple`, `--bg-card`, `--bg-surface`, `--text-primary`, `--text-secondary`, `--border-color`, `--hover-shadow`.
 
 ## Deployment
 ```bash
