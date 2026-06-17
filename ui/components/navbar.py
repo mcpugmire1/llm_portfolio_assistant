@@ -310,6 +310,7 @@ div[data-testid="stColumn"]:first-child p {
     js_code = """
     <script>
     (function() {
+        if (window.parent.innerWidth > 767) return;
         var doc = window.parent.document;
 
         // Theme detection
