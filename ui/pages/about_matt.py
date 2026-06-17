@@ -8,6 +8,25 @@ Updated for dark mode compatibility using CSS variables.
 import streamlit as st
 import streamlit.components.v1 as components
 
+from ui.image_assets import MATT_CARTOON_B64
+
+_ABOUT_HTML = f"""
+<div class="about-header">
+    <div class="about-header-content">
+        <img src="{MATT_CARTOON_B64}"
+             class="about-header-avatar"
+             alt="Matt Pugmire">
+        <div class="about-header-text">
+            <h1>Matt Pugmire</h1>
+            <p>
+                Engineering leader · platform modernization · AI · Atlanta · open to relocate
+            </p>
+        </div>
+    </div>
+    <span class="prof-status-badge">● In active conversations</span>
+</div>
+        """
+
 
 def render_about_matt():
     """
@@ -26,25 +45,7 @@ def render_about_matt():
     # =========================================================================
     # 1. HERO SECTION
     # =========================================================================
-    st.markdown(
-        """
-<div class="about-header">
-    <div class="about-header-content">
-        <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/MattCartoon-Transparent.png"
-             class="about-header-avatar"
-             alt="Matt Pugmire">
-        <div class="about-header-text">
-            <h1>Matt Pugmire</h1>
-            <p>
-                Engineering leader · platform modernization · AI · Atlanta · open to relocate
-            </p>
-        </div>
-    </div>
-    <span class="prof-status-badge">● In active conversations</span>
-</div>
-        """,
-        unsafe_allow_html=True,
-    )
+    st.markdown(_ABOUT_HTML, unsafe_allow_html=True)
 
     # =========================================================================
     # 2. SIGNALS PANEL (replaces stats bar — MATTGPT-093)

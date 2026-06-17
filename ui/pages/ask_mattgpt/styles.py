@@ -5,12 +5,28 @@ Centralized CSS styles for Ask Agy landing and conversation views.
 Extracted from inline styles to improve maintainability.
 """
 
-"""
-Ask Agy Styles Module
+from ui.image_assets import CHASE_48PX_1_B64, CHASE_48PX_2_B64, CHASE_48PX_3_B64
 
-Centralized CSS styles for Ask Agy landing and conversation views.
-Extracted from inline styles to improve maintainability.
-"""
+_LOADING_ANIMATION_CSS = f"""
+        <style>
+        @keyframes chaseAnimation {{
+            0% {{ content: url('{CHASE_48PX_1_B64}'); }}
+            33.33% {{ content: url('{CHASE_48PX_2_B64}'); }}
+            66.66% {{ content: url('{CHASE_48PX_3_B64}'); }}
+            100% {{ content: url('{CHASE_48PX_1_B64}'); }}
+        }}
+        .thinking-ball {{
+            width: 48px;
+            height: 48px;
+            animation: chaseAnimation 0.9s steps(3) infinite;
+        }}
+        </style>
+    """
+
+
+def get_loading_animation_css() -> str:
+    """Loading indicator animation CSS (used in both views)."""
+    return _LOADING_ANIMATION_CSS
 
 
 def get_landing_css() -> str:
@@ -862,25 +878,6 @@ def get_landing_css() -> str:
             }
         }
 
-        </style>
-    """
-
-
-def get_loading_animation_css() -> str:
-    """Loading indicator animation CSS (used in both views)."""
-    return """
-        <style>
-        @keyframes chaseAnimation {
-            0% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
-            33.33% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_2.png'); }
-            66.66% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_3.png'); }
-            100% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
-        }
-        .thinking-ball {
-            width: 48px;
-            height: 48px;
-            animation: chaseAnimation 0.9s steps(3) infinite;
-        }
         </style>
     """
 

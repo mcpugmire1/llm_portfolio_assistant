@@ -11,6 +11,8 @@ MOBILE CSS: Card heights are handled here. Layout/spacing handled by mobile_over
 
 import streamlit as st
 
+from ui.image_assets import AGY_ASK_MATTGPT_B64
+
 # Ask Agy Anything suggested-question chip strings. Order is load-bearing —
 # index N maps to the hidden Streamlit button card_btn_ask_chip_N and to the
 # visible HTML button.chip in DOM order. The chip-click handler reads from
@@ -612,7 +614,9 @@ def render_category_cards(stories: list[dict]):
         <div class="ask-agy-left">
           <div class="ask-agy-header">
             <div class="ask-agy-avatar">
-              <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_ask_mattgpt.png" alt="Agy">
+              <img src=\""""
+        + AGY_ASK_MATTGPT_B64
+        + """\" alt="Agy">
             </div>
             <h3 class="ask-agy-title">Ask Agy 🐾 Anything</h3>
           </div>

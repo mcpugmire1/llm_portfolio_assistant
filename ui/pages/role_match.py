@@ -24,6 +24,22 @@ from ui.components.how_i_built_dialog import render_how_i_built_dialog
 from ui.components.story_detail import render_story_detail
 from ui.components.thinking_indicator import render_thinking_indicator
 from ui.components.why_agy_dialog import render_why_agy_dialog
+from ui.image_assets import AGY_AVATAR_64_B64
+
+_HEADER_HTML = f"""
+<div class="conversation-header">
+    <div class="conversation-header-content">
+        <div style="position: relative; display: inline-block; flex-shrink: 0;">
+            <img class="conversation-agy-avatar" src="{AGY_AVATAR_64_B64}" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
+            <span class="why-agy-badge--header" id="why-agy-badge-role-match">i</span>
+        </div>
+        <div class="conversation-header-text">
+            <h1>Role Match</h1>
+            <p>Agy shows where Matt fits your role, and where he doesn't.</p>
+        </div>
+    </div>
+</div>
+"""
 
 # =============================================================================
 # RESULTS RENDERING HELPERS
@@ -961,23 +977,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_role_match_tri
     # =========================================================================
     # HEADER
     # =========================================================================
-    st.markdown(
-        """
-<div class="conversation-header">
-    <div class="conversation-header-content">
-        <div style="position: relative; display: inline-block; flex-shrink: 0;">
-            <img class="conversation-agy-avatar" src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png" width="64" height="64" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;" alt="Agy"/>
-            <span class="why-agy-badge--header" id="why-agy-badge-role-match">i</span>
-        </div>
-        <div class="conversation-header-text">
-            <h1>Role Match</h1>
-            <p>Agy shows where Matt fits your role, and where he doesn't.</p>
-        </div>
-    </div>
-</div>
-""",
-        unsafe_allow_html=True,
-    )
+    st.markdown(_HEADER_HTML, unsafe_allow_html=True)
     if st.button("trigger", key="why_agy_role_match_trigger"):
         st.session_state["active_dialog"] = "why_agy"
         st.rerun()

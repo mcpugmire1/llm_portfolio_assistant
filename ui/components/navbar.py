@@ -346,17 +346,6 @@ div[data-testid="stColumn"]:first-child p {
 
 
 
-        // Preload all static images on first page load so they're cache-warm before navigation
-        if (!doc.body.__imgPreloaded) {
-            doc.body.__imgPreloaded = true;
-            ['https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_avatar.png', 'https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_explore_stories.png',
-             'https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_ask_mattgpt.png', 'https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/matt_agy_hero.png',
-             'https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_banking.png', 'https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_cross_industry.png',
-             'https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/MattCartoon-Transparent.png', 'https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/AgyMattCartoon-Transparent.png',
-             'https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png', 'https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_2.png', 'https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_3.png'
-            ].forEach(function(src) { new Image().src = src; });
-        }
-
         // Create dropdown with active states
         var dropdown = document.createElement('nav');
         dropdown.className = 'mobile-nav-dropdown';

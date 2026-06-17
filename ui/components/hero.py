@@ -7,19 +7,10 @@ Large gradient hero with portfolio overview and CTAs.
 import streamlit as st
 import streamlit.components.v1 as components
 
+from ui.image_assets import MATT_AGY_HERO_B64
 
-def render_hero():
+_HERO_HTML = (
     """
-    Render hero section with logo, headline, and CTA buttons.
-
-    Includes:
-    - MattGPT logo
-    - Job title and tagline
-    - Role Match (primary) and Ask Agy (secondary) buttons (MATTGPT-087)
-    """
-
-    st.markdown(
-        """
         <style>
             /* Hide the trigger buttons and collapse their stElementContainer wrappers */
             [class*="st-key-hero_role_match"],
@@ -174,7 +165,9 @@ def render_hero():
             <div class="hero-content">
                 <div style="display: flex; justify-content: center; margin-bottom: 16px;">
                     <div class="hero-illustration-wrapper" style="position: relative; display: inline-block;">
-                        <img src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/matt_agy_hero.png"
+                        <img src=\""""
+    + MATT_AGY_HERO_B64
+    + """\"
                              alt="Matt and Agy"
                              style="max-width: 280px; width: 100%; height: auto; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));">
                         <span class="why-agy-badge" id="why-agy-badge-hero">i</span>
@@ -198,9 +191,13 @@ def render_hero():
                 </div>
             </div>
         </div>
-        """,
-        unsafe_allow_html=True,
-    )
+        """
+)
+
+
+def render_hero():
+    """Render hero section with gradient background, illustration, and CTA buttons."""
+    st.markdown(_HERO_HTML, unsafe_allow_html=True)
 
     # JavaScript to wire up the HTML buttons
     components.html(

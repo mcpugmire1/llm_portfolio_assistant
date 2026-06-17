@@ -11,6 +11,7 @@ import streamlit as st
 
 from config.debug import DEBUG
 from ui.components.story_detail import render_story_detail
+from ui.image_assets import AGY_ASK_MATTGPT_B64, MATT_CARTOON_B64
 
 # Import from existing modules
 from ui.pages.ask_mattgpt.story_intelligence import THEME_TO_PATTERN
@@ -281,7 +282,7 @@ def _render_ask_transcript(stories: list[dict]):
         if m.get("type") == "card":
             with st.chat_message(
                 "assistant",
-                avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_ask_mattgpt.png",
+                avatar=AGY_ASK_MATTGPT_B64,
             ):
                 # Snapshot with the same visual shell as the live answer card
                 st.markdown('<div class="answer-card">', unsafe_allow_html=True)
@@ -477,7 +478,7 @@ def _render_ask_transcript(stories: list[dict]):
         if m.get("type") == "banner":
             with st.chat_message(
                 "assistant",
-                avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_ask_mattgpt.png",
+                avatar=AGY_ASK_MATTGPT_B64,
             ):
                 render_no_match_banner(
                     reason=m.get("reason", ""),
@@ -497,7 +498,7 @@ def _render_ask_transcript(stories: list[dict]):
 
             with st.chat_message(
                 "assistant",
-                avatar="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_ask_mattgpt.png",
+                avatar=AGY_ASK_MATTGPT_B64,
             ):
                 # Show conversational response text
                 st.markdown(m.get("text", ""))
@@ -757,9 +758,9 @@ def _render_ask_transcript(stories: list[dict]):
 
         # Set custom avatars
         if role == "assistant":
-            avatar = "https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/agy_ask_mattgpt.png"
+            avatar = AGY_ASK_MATTGPT_B64
         else:
-            avatar = "https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/MattCartoon-Transparent.png"
+            avatar = MATT_CARTOON_B64
 
         with st.chat_message(role, avatar=avatar):
             st.write(m.get("text", ""))

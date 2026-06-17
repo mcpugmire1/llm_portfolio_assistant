@@ -21,6 +21,24 @@ from that wrapper only.
 import streamlit as st
 import streamlit.components.v1 as components
 
+from ui.image_assets import AGY_MATT_CARTOON_B64
+
+_BODY_HTML = f"""
+
+<div class="why-agy-avatar-row">
+    <div class="why-agy-body">
+        <p>I'm named for Matt's Plott Hound. Plott Hounds are bred for tracking — determined, loyal, hard to shake once they're on a trail. That's exactly how I work.
+        </p>
+        <p>Ask me about Matt's work and I'll track down the right story. I'm trained on 100+ stories from his career — not a keyword search, not a resume summary. I find what's relevant, or I tell you honestly when I can't.
+        </p>
+        <em class="why-agy-closing">It felt right to keep his name part of the work we loved doing together.</em>
+    </div>
+    <img class="why-agy-illustration"
+         src="{AGY_MATT_CARTOON_B64}"
+         alt="Matt and Agy"/>
+</div>
+"""
+
 _CSS = """
 <style>
 [class*="st-key-why_agy_dialog_content"].dark-theme {
@@ -157,24 +175,7 @@ def render_why_agy_dialog():
     st.markdown(_CSS, unsafe_allow_html=True)
 
     with st.container(key="why_agy_dialog_content"):
-        st.markdown(
-            """
-
-<div class="why-agy-avatar-row">
-    <div class="why-agy-body">
-        <p>I'm named for Matt's Plott Hound. Plott Hounds are bred for tracking — determined, loyal, hard to shake once they're on a trail. That's exactly how I work.
-        </p>
-        <p>Ask me about Matt's work and I'll track down the right story. I'm trained on 100+ stories from his career — not a keyword search, not a resume summary. I find what's relevant, or I tell you honestly when I can't.
-        </p>
-        <em class="why-agy-closing">It felt right to keep his name part of the work we loved doing together.</em>
-    </div>
-    <img class="why-agy-illustration"
-         src="https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/chat_avatars/AgyMattCartoon-Transparent.png"
-         alt="Matt and Agy"/>
-</div>
-""",
-            unsafe_allow_html=True,
-        )
+        st.markdown(_BODY_HTML, unsafe_allow_html=True)
 
         st.markdown(
             "<hr style='margin: 20px 0 8px; border-color: var(--border-color);'>",

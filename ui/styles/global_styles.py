@@ -12,15 +12,10 @@ Shared styles applied across all pages:
 
 import streamlit as st
 
+from ui.image_assets import CHASE_48PX_1_B64, CHASE_48PX_2_B64, CHASE_48PX_3_B64
 
-def apply_global_styles():
+_CSS = (
     """
-    Apply global CSS once per session.
-
-    Returns early if already applied to avoid redundant style injection.
-    """
-    st.markdown(
-        """
         <style>
         /* ========================================
            CSS VARIABLES - DESIGN SYSTEM
@@ -4021,10 +4016,18 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_my_work_trigge
                 background: rgba(0, 0, 0, 0.6);
             }
             @keyframes chaseAnimation {
-                0% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
-                33.33% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_2.png'); }
-                66.66% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_3.png'); }
-                100% { content: url('https://mcpugmire1.github.io/mattgpt-design-spec/brand-kit/thinking_indicator/chase_48px_1.png'); }
+                0% { content: url('"""
+    + CHASE_48PX_1_B64
+    + """'); }
+                33.33% { content: url('"""
+    + CHASE_48PX_2_B64
+    + """'); }
+                66.66% { content: url('"""
+    + CHASE_48PX_3_B64
+    + """'); }
+                100% { content: url('"""
+    + CHASE_48PX_1_B64
+    + """'); }
             }
             .thinking-ball {
                 width: 40px;
@@ -4080,6 +4083,11 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_my_work_trigge
             }
 
         </style>
-        """,
-        unsafe_allow_html=True,
-    )
+        """
+)
+
+
+def apply_global_styles():
+    """Apply global CSS. Called on every rerun — Streamlit must see this call
+    each run to keep injected styles in the DOM during reconciliation."""
+    st.markdown(_CSS, unsafe_allow_html=True)
