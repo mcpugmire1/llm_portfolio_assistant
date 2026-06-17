@@ -1,623 +1,334 @@
-  # MattGPT - Claude Working Agreement
+# MattGPT - Claude Working Agreement
 
-  ## Project Overview
-  AI-powered portfolio assistant showcasing Matt's 20+ years of digital transformation experience. Named after his late Plott Hound "Agy" (short for Agador Spartacus from "The Birdcage"). Deployed at askmattgpt.streamlit.app.
+## Critical Rules
+Read these before every session. Each one has caused a real incident.
 
-  Read `ARCHITECTURE.md` for full system context.
+- **Read this entire file before proposing any edit to it.** Synthesize across all sections first. Do not add a section after reading two lines.
+- **When a simple fix is visible while working in a file, fix it.** Do not defer trivial corrections under the pretense of scope management.
+- **Before citing a constraint as the reason for an approach, verify the constraint exists in the actual file.** Show the evidence. If the constraint doesn't exist, use the simplest direct substitution — f-string with the constant inline. (June 2026: .replace() pattern built for a CSS brace problem that affected 3 lines, not 4000.)
+- **Push is a separate gate from commit — always.** `git push origin main` triggers a production deploy on Streamlit Cloud. A commit approval is not a push approval. Stop after committing and wait for an explicit "push" instruction. Never chain `git commit && git push`. (April 2026)
+- **BDD scenarios before any implementation code — no exceptions.** First action on any ticket: write scenarios in `tests/bdd/features/` and bind them with `scenarios()` in `test_*.py`. Not logistics. Not split decisions. Scenarios first. (May 2026)
+- **Paste literal test output at every gate — never self-summarize.** "Looks good, ready to commit?" is not a gate. Paste the literal `pytest` output before requesting commit approval at every Red and Green commit.
+- **One "go" ships the full Red → Red → Green cycle.** After Matt says "go" on a ticket, run all three gates without re-asking between them. Re-ask only when a substantive new design decision surfaces mid-cycle.
+- **Pre-flight before touching any existing file.** Name the files the ticket touches, the patterns those files use, any cross-surface couplings, and existing test coverage — before proposing anything. (June 2026)
+- **Read existing patterns before building anything new.** Check `conversation_helpers.py` before any click handler. Check `banking_landing.py` before any cross-page navigation. Build on top; replace only when you can name in a comment why the existing pattern fails. (April 2026)
+- **Stage specific files by name — never `git add -A` or `git add .`.** Parallel sessions share one staging area. (May 2026)
+- **Never use `grep -v` to redact secrets.** Use positive include filters (keys only). Applies to `.streamlit/secrets.toml`, `.env`, any service-account JSON. (May 2026)
+- **Artifacts for user review go in chat, not /tmp.** Edit tool calls show diffs inline. Writing to /tmp creates a local-only artifact Matt cannot see. (June 2026)
+- **DevTools before any CSS proposal.** For any layout, alignment, positioning, sizing, color, or typography issue — ask Matt to paste computed styles from DevTools before proposing a fix. Source-code reasoning misses Streamlit's wrapper-layer surprises. (May 2026)
 
-  ## Tech Stack
-  - **Frontend:** Streamlit (Python 3.11)
-  - **Vector DB:** Pinecone (semantic search)
-  - **Embeddings:** OpenAI text-embedding-3-small (1536 dims)
-  - **Generation:** OpenAI GPT-4o
-  - **Data:** 130+ STAR stories in JSONL, 5P framework
+---
 
-  ## File Structure
-  ```
-  ui/pages/               # Page components
-    explore_stories.py    # Story browsing with Table/Card/Timeline views
-    ask_mattgpt/          # Modular chat interface (8 files)
-      __init__.py         # Router
-      landing_view.py     # Landing page with capability cards
-      conversation_view.py # Chat conversation UI
-      conversation_helpers.py # Message rendering, Related Projects UX
-      backend_service.py  # RAG pipeline integration
-      styles.py           # Chat-specific CSS
-      story_intelligence.py # Theme/persona inference
-      shared_state.py     # Session state management
-      utils.py            # Shared utilities
-    about_matt.py         # About page
-    banking_landing.py    # Banking industry landing
-    cross_industry_landing.py # Cross-industry landing
+## Project Overview
+AI-powered portfolio assistant showcasing Matt's 20+ years of digital transformation experience. Named after his late Plott Hound "Agy" (short for Agador Spartacus from "The Birdcage"). Deployed at askmattgpt.streamlit.app.
 
-  ui/components/          # Shared components
-    timeline_view.py      # Era-based Timeline (5 career phases)
-    story_detail.py       # Story detail modal
-    how_agy_modal.py      # "How Agy Searches" modal
-    ask_mattgpt_header.py # Unified header component
-    category_cards.py     # Landing page capability cards
-    thinking_indicator.py # Loading/processing indicator
-    navbar.py             # Top navigation
-    footer.py             # Footer
+Read `ARCHITECTURE.md` for full system context.
 
-  ui/styles/              # CSS
-    global_styles.py      # Shared CSS + mobile breakpoints + CSS variables
-    mobile_overrides.py   # Additional mobile CSS
+## Tech Stack
+- **Frontend:** Streamlit (Python 3.11)
+- **Vector DB:** Pinecone (semantic search)
+- **Embeddings:** OpenAI text-embedding-3-small (1536 dims)
+- **Generation:** OpenAI GPT-4o
+- **Data:** 130+ STAR stories in JSONL, 5P framework
 
-  services/               # Business logic
-    rag_service.py        # Semantic search orchestration
-    pinecone_service.py   # Vector database integration
+## File Structure
+```
+ui/pages/               # Page components
+  explore_stories.py    # Story browsing with Table/Card/Timeline views
+  ask_mattgpt/          # Modular chat interface (8 files)
+    __init__.py         # Router
+    landing_view.py     # Landing page with capability cards
+    conversation_view.py # Chat conversation UI
+    conversation_helpers.py # Message rendering, Related Projects UX
+    backend_service.py  # RAG pipeline integration
+    styles.py           # Chat-specific CSS
+    story_intelligence.py # Theme/persona inference
+    shared_state.py     # Session state management
+    utils.py            # Shared utilities
+  about_matt.py         # About page
+  banking_landing.py    # Banking industry landing
+  cross_industry_landing.py # Cross-industry landing
 
-  utils/                  # Helpers
-    filters.py            # Story filtering logic
-    scoring.py            # Confidence scoring
-    formatting.py         # STAR story presentation
-    validation.py         # Input validation
+ui/components/          # Shared components
+  timeline_view.py      # Era-based Timeline (5 career phases)
+  story_detail.py       # Story detail modal
+  how_agy_modal.py      # "How Agy Searches" modal
+  ask_mattgpt_header.py # Unified header component
+  category_cards.py     # Landing page capability cards
+  thinking_indicator.py # Loading/processing indicator
+  navbar.py             # Top navigation
+  footer.py             # Footer
 
-  config/                 # Settings
-    debug.py              # DEBUG flag
-    settings.py           # Configuration helpers
-  ```
+ui/styles/              # CSS
+  global_styles.py      # Shared CSS + mobile breakpoints + CSS variables
+  mobile_overrides.py   # Additional mobile CSS
 
-  ## Code Conventions
-  - Filter state lives in `st.session_state["filters"]`
-  - CSS variables defined in `global_styles.py` (use them, don't hardcode colors)
-  - Widget versioning pattern: `key=f"widget_name_v{version}"` for forced refreshes
-  - Use `safe_container()` wrapper for bordered sections
-  - Container keys for CSS targeting: `.st-key-{key_name}` selectors
+services/               # Business logic
+  rag_service.py        # Semantic search orchestration
+  pinecone_service.py   # Vector database integration
 
-  ## CSS Rules (Learned the Hard Way)
-  1. **Scope mobile CSS** — Use wrapper classes (`.explore-page`) or page-specific selectors
-  2. **Never use generic selectors** — `div[data-testid="stColumn"]` leaks everywhere
-  3. **Mobile changes go in `@media (max-width: 768px)` blocks** — Don't touch desktop rules
-  4. **Test at breakpoints:** 375px (iPhone SE), 768px (tablet), 1024px+ (desktop)
-  5. **Streamlit class names like `st-emotion-cache-*` change between versions** — Target `data-testid` or `.st-key-*` classes instead
-  6. **Use existing CSS variables** — Check `global_styles.py` for `--bg-card`, `--border-color`, `--text-primary`, `--accent-purple`, etc. Don't invent new ones.
-  7. **Container keys for targeting** — Use `st.container(key="my_container")` then target with `.st-key-my_container` in CSS
-  8. **DevTools-inspection BEFORE proposing CSS fixes** — For any layout/alignment/positioning/sizing issue, ask Matt to inspect the element in DevTools (or run DevTools AI) and paste the computed styles before proposing CSS. Source-code reasoning misses Streamlit's wrapper-layer surprises (`stMarkdown` / `stMarkdownContainer` / `stVerticalBlock` wrappers often have their own `align-self`, `display`, or `padding` that defeats centering rules applied to the parent column). May 31, 2026: 3 sequential CSS attempts on MATTGPT-106 wasted ~30 min when DevTools AI produced the actual diagnosis in one pass. See `memory/feedback_devtools_before_css_guessing.md`.
-  9. **Streamlit transforms spaces in `key=` to dashes in CSS class names** — `key="topnav_My Work"` produces class `st-key-topnav_My-Work` (space → dash, not underscore, not preserved). Use the dash form in CSS/JS/BDD selectors for multi-word keys. Don't sanitize the key in Python to avoid the transform — that introduces a divergent convention. See `memory/reference_streamlit_key_class_transformation.md`.
+utils/                  # Helpers
+  filters.py, scoring.py, formatting.py, validation.py
 
-  ## Streamlit Patterns (Learned the Hard Way)
+config/                 # Settings
+  debug.py, settings.py, constants.py
+```
 
-  ### Session State & Widget Keys
-  - **Never modify a session state key after its widget renders** — You'll get `StreamlitAPIException`
-  - **Use prefilter pattern for cross-page navigation:**
-    ```python
-    # In source page (e.g., timeline_view.py):
-    st.session_state["prefilter_role"] = role
-    st.rerun()
-    
-    # In target page (e.g., explore_stories.py), BEFORE widgets render:
-    if "prefilter_role" in st.session_state:
-        F["role"] = st.session_state.pop("prefilter_role")
-    ```
-  - **Check existing patterns first** — See `banking_landing.py` → `explore_stories.py` for navigation with filters
+## Code Conventions
+- Filter state lives in `st.session_state["filters"]`
+- CSS variables defined in `global_styles.py` (use them, don't hardcode colors)
+- Widget versioning pattern: `key=f"widget_name_v{version}"` for forced refreshes
+- Use `safe_container()` wrapper for bordered sections
+- Container keys for CSS targeting: `.st-key-{key_name}` selectors
 
-  ### HTML in Streamlit
-  - **`st.markdown()` with complex nested HTML often renders as raw text** — Use single-line HTML strings (no pretty formatting)
-  - **For interactive HTML, use `components.html()`** — But clicks require JS to trigger hidden `st.button()` elements
-  - **JS in iframes can't directly access parent** — Use `window.parent.document` with timeout for DOM readiness
+## CSS Rules
+1. **Scope mobile CSS** — use wrapper classes (`.explore-page`) or page-specific selectors
+2. **Never use generic selectors** — `div[data-testid="stColumn"]` leaks everywhere
+3. **Mobile changes go in `@media (max-width: 767px)` blocks** — don't touch desktop rules
+4. **Test at breakpoints:** 375px (iPhone SE), 767px (tablet boundary), 1024px+ (desktop)
+5. **Streamlit class names like `st-emotion-cache-*` change between versions** — target `data-testid` or `.st-key-*` instead
+6. **Use existing CSS variables** — check `global_styles.py` for `--bg-card`, `--border-color`, `--text-primary`, `--accent-purple`, etc.
+7. **Container keys for targeting** — `st.container(key="my_container")` then target `.st-key-my_container`
+8. **DevTools before any CSS proposal** — see Critical Rules. Applies to layout, alignment, positioning, sizing, color, and typography.
+9. **Streamlit transforms spaces in `key=` to dashes in CSS class names** — `key="topnav_My Work"` produces `.st-key-topnav_My-Work`. Use the dash form in CSS/JS/BDD selectors.
 
-  ### Interactive Click Handling — STOP, Read This First
+## Streamlit Patterns
 
-  **Before building any click handler, hidden button, or JS bridge for an
-  interactive chip, card, button, or list item:**
-
-  1. **Read `ui/pages/ask_mattgpt/conversation_helpers.py`** (search for
-     `st.button`, especially around the "related stories" / source-chip
-     rendering near line 626). This is the **plain `st.button` + scoped CSS**
-     pattern. The button click is handled directly by Streamlit's WebSocket
-     → Python rerun cycle. No HTML chip, no JS bridge, no hidden trigger.
-     The same button serves as both "open" and "close" affordance via a
-     state-dependent label. The visual chip appearance comes from CSS
-     targeting `[class*="st-key-{stable_key}"] button`.
-  2. **Read `ui/pages/explore_stories.py`** (Cards view rendering, lines
-     ~2393-2487). This is the **delegated `parentDoc.addEventListener('click', ...)`**
-     pattern. Used when you genuinely need an HTML chip (not a button) AND
-     a hidden Streamlit trigger button bridged via JS. Listener is on
-     `parentDoc`, not on individual elements, so it survives React DOM
-     reconciliation across reruns.
-
-  **The codebase already has two proven patterns. Do not build a third
-  pattern without a documented reason why neither of the existing two
-  works for your case.**
-
-  **Strong default:** start with the Ask MattGPT pattern (`st.button` +
-  scoped CSS). Reach for the Cards-view delegated-listener pattern only
-  when the visual or interaction requirements genuinely cannot be met by
-  styling a Streamlit button. Reach for a brand-new pattern only when both
-  documented patterns demonstrably fail and you can write down WHY in a
-  code comment that names the specific limitation.
-
-  **April 2026 incident:** Phase 3 Role Match chip expansion was built as a
-  per-element `addEventListener` on `data-req-idx`/`data-ev-idx` HTML chips
-  bridged to hidden Streamlit buttons. Click bridge worked for the first
-  click, then silently failed for subsequent chip clicks because Streamlit
-  destroys and recreates the `components.html` iframe on every rerun,
-  killing the JS context that owned the listener function. Switching to a
-  delegated `parentDoc` listener didn't help because the same iframe
-  destruction killed *that* listener too. The eventual fix was to abandon
-  the JS bridge entirely and switch to plain `st.button` with scoped CSS,
-  matching `conversation_helpers.py` exactly. **Roughly 100 lines of JS
-  bridge code, two failed debug rounds, and one unnecessary CLAUDE.md
-  warning would have been avoided by reading conversation_helpers.py
-  first.** Don't repeat this.
-
-  ### Click Handling Pattern (third option, only with documented reason)
-
-  **DO NOT use this pattern by default.** This is the historical reference
-  for the most fragile of the three patterns — pure HTML elements with
-  per-element JS click bindings. It is included here for understanding the
-  evolution of patterns in the codebase, NOT as a recommended approach.
-  See the "Interactive Click Handling — STOP, Read This First" section
-  above for the patterns you should actually use.
-
+### Session State & Widget Keys
+- **Never modify a session state key after its widget renders** — `StreamlitAPIException`
+- **Use prefilter pattern for cross-page navigation:**
   ```python
-  # 1. Render HTML with data attributes
-  st.markdown('<div class="card" data-index="0">...</div>', unsafe_allow_html=True)
+  # Source page (e.g., timeline_view.py):
+  st.session_state["prefilter_role"] = role
+  st.rerun()
 
-  # 2. Hidden buttons for each clickable item
-  for idx in range(len(items)):
-      if st.button("", key=f"card_{idx}"):
-          handle_click(items[idx])
-
-  # 3. JS to wire clicks (in components.html with height=0)
-  js = """
-  <script>
-  setTimeout(function() {
-      document.querySelectorAll('.card').forEach(function(card) {
-          card.addEventListener('click', function() {
-              var idx = this.getAttribute('data-index');
-              var btn = document.querySelector('[class*="st-key-card_' + idx + '"] button');
-              if (btn) btn.click();
-          });
-      });
-  }, 100);
-  </script>
-  """
-  components.html(js, height=0)
-
-  # 4. CSS to hide the buttons
-  [class*="st-key-card_"] { position: absolute !important; left: -9999px !important; }
+  # Target page (e.g., explore_stories.py), BEFORE widgets render:
+  if "prefilter_role" in st.session_state:
+      F["role"] = st.session_state.pop("prefilter_role")
   ```
+- **Check existing patterns first** — see `banking_landing.py` → `explore_stories.py`
 
-  **Why this pattern is fragile:** per-element `addEventListener` calls live
-  inside the `components.html` iframe's JS context. When Streamlit reruns
-  (which happens after every interaction), the iframe is destroyed and
-  recreated, killing the JS context that owns the listener functions. The
-  listeners attached to chip DOM nodes from inside the iframe become dead
-  references on the parent document. Some clicks fire, others don't, with
-  no consistent reproduction. If you find yourself needing this pattern,
-  use the **Cards view delegated-listener pattern** (which has the listener
-  on `parentDoc` and re-binds on every rerun) instead.
+### HTML in Streamlit
+- **`st.markdown()` with complex nested HTML often renders as raw text** — use single-line HTML strings
+- **For interactive HTML, use `components.html()`** — clicks require JS to trigger hidden `st.button()` elements
+- **JS in iframes can't directly access parent** — use `window.parent.document` with timeout for DOM readiness
 
-  ### Era-Based Timeline Pattern
+### Interactive Click Handling — Read This First
+Two proven patterns exist. Use them in this order:
+
+**Pattern 1 (default): `st.button` + scoped CSS**
+See `ui/pages/ask_mattgpt/conversation_helpers.py` around line 626. Plain `st.button` styled via CSS targeting `[class*="st-key-{stable_key}"] button`. No JS bridge. No hidden trigger. This is the right starting point for any clickable element.
+
+**Pattern 2 (when Pattern 1 genuinely can't meet the visual requirement): delegated `parentDoc` listener**
+See `ui/pages/explore_stories.py`, Cards view rendering (~lines 2393-2487). Listener on `parentDoc`, not individual elements, so it survives React DOM reconciliation across reruns.
+
+Do not build a third pattern without a documented reason why neither of these works. April 2026: ~100 lines of JS bridge code were written and then abandoned when switching to Pattern 1 fixed the problem.
+
+### Streamlit Markdown Call Count Affects Layout
+Each `st.markdown()` call creates a DOM element. On pages using `.conversation-header`, the negative margin (`-3rem`) is tuned to a specific number of preceding markdown elements. Extra `st.markdown()` calls — even containing only `<style>` tags — break visual alignment. Consolidate CSS injections; place additional injections after hero content, before `render_footer()`. Browser CSS parsing is order-independent so bottom-of-page injection is functionally equivalent.
+
+## Behavioral Rules
+
+### Before starting any ticket
+1. **Pre-flight** (see Critical Rules) — name the files, patterns, couplings, and test coverage
+2. **Pre-implementation reasoning gate** — before proposing any implementation, state in one sentence what the current code does, one sentence what the change does, and one sentence why it's better than the simplest alternative. If that third sentence can't be written confidently, stop and ask — do not default to the more complex approach.
+3. **Default is build-on-top-of, not replace-with** — extend the existing pattern; only propose replacing when you can name in a comment why it fails
+4. **BDD scenarios first** (see Testing Protocol)
+
+### During implementation
+- Give direct solutions immediately after pre-flight
+- Backup before modifying: `cp file.py file.py.bak`
+- Keep reference docs/comments when rewriting files
+- Do not make changes outside the requested scope
+- Do not add dependencies without flagging it
+- Do not hardcode values that are already CSS variables
+- Do not invent new patterns when existing ones work
+
+### On specs and wireframes
+- **Cross-check the artifact, not just the verbal scope.** When a wireframe/spec AND verbal scope are given, the artifact is truth on copy/structure/sizing. Match it exactly or flag the conflict explicitly. (May 2026)
+- **Visual spacing: give baseline + lever, let Matt call the value.** For margins/gaps/padding, name the controlling rule + `file:line`, suggest a starting point, let Matt eyeball and call the final value. (May 2026)
+
+### On estimates
+- **Headline number = raw implementation time only.** BDD overhead and discovery risk are listed as explicit add-ons, not folded into the headline. A 30-min change is quoted as 30 min, not "2-3 hours."
+
+### Parallel sessions
+When multiple Claude Code sessions run concurrently, they share one git working tree and one staging area.
+- Stage specific files by name (see Critical Rules)
+- Check `git status` before staging — see what the other session has modified
+- Coordinate commit timing: Session A stages → commits → reports SHA → Session B stages → commits
+- For true parallelism: `git worktree add ../project-branchname`
+
+## Testing Protocol
+
+**The non-negotiable:** BDD scenarios are written and committed before any implementation code. No exceptions. If a spec is provided, scenarios come first.
+
+### Red-Green cycle
+One "go" from Matt ships the full cycle without re-asking between gates. Re-ask only on substantive new design decisions.
+
+- **Red (scenarios commit):** Write scenarios in `tests/bdd/features/X.feature` AND bind via `scenarios("../features/X.feature")` in `tests/bdd/steps/test_X.py`. Run `pytest tests/bdd/steps/test_X.py -v`, confirm all scenarios discovered and all in undefined-step state. Commit message proof: `Red (scenarios): N scenarios discovered, all N undefined-step.`
+- **Red (step defs commit):** Write step definitions. Confirm scenarios run end-to-end and fail with assertion errors (not undefined-step or import errors). Commit message proof: `Red (step defs): N scenarios bound, N assertion failures, 0 undefined-step / import errors.`
+- **Green (production code commit):** Write minimum production code to pass. Confirm all pass. Commit message proof: `Green: N / N scenarios passing.`
+- **Refactor (optional):** Clean up while keeping tests passing.
+
+### Validation rules
+- **Paste literal pytest output at every gate** — never self-summarize (see Critical Rules)
+- **Scope per-gate runs to the relevant test file** — `pytest tests/bdd/steps/test_X.py -v`, not the full suite
+- **A `.feature` file without its `test_*.py` binding is documentation, not a test**
+- **BDD scenarios must assert DOM-observable behavior** — Playwright cannot read `st.session_state`; assert navigation visible + user-message echo + assistant-response streaming
+- **After any change to UI files, restart Streamlit before running BDD tests**
+- **After any change to `explore_stories.py`, run the BDD suite before presenting for review**
+- **On a second Playwright selector timeout, screenshot before iterating:**
   ```python
-  # Timeline groups stories by career phase, not chronological
-  ERA_ORDER = [
-      "Integration & Platform Foundations (2005-2008)",
-      "Banking & Capital Markets (2008-2013)",
-      "Platform Leadership (2014-2018)",
-      "Innovation Center (2019-2023)",
-      "Current Work (2024-2025)"
-  ]
-
-  # Each era is collapsible with story count badge
-  # Clicking a story opens detail modal
-  # "View in Explore" link navigates with Era filter applied
+  try:
+      option.click(timeout=5000)
+  except Exception:
+      browser_page.screenshot(path='/tmp/pw_debug_selector.png')
+      raise
   ```
+- **Eval failure discipline:** Any eval failure must be validated against production before being labeled "pre-existing" or "stochastic." If a "known issue" isn't in BACKLOG, it's an unvalidated note.
+
+## Secrets & Sensitive Output Handling
+Three rules from a real GCP private key exposure (May 2026):
 
-  ### Related Projects UX Pattern
-  ```python
-  # Selected state with visual feedback
-  # - Purple highlight on selected card
-  # - "✕ Close" toggle appears when selected
-  # - Clicking same card again deselects
-  # - Only one related project selected at a time
-  ```
-
-  ## Layout & Spacing Rules
-
-  ### Streamlit markdown call count affects navbar/hero gap
-
-  Each `st.markdown()` call creates an `stMarkdownContainer` DOM element.
-  The `.conversation-header` negative margin (`-3rem`) is tuned to compensate
-  for a specific number of preceding markdown elements. Adding an extra
-  `st.markdown()` call before the hero banner — **even one containing only
-  `<style>` tags** — breaks the visual alignment by adding ~16px of gap.
-
-  **Rule:** On any page that uses `.conversation-header`, consolidate all
-  CSS injections into as few `st.markdown()` calls as possible *before* the
-  hero. If additional CSS must be injected separately (e.g., needs f-string
-  interpolation that the literal-string hero block can't accommodate), place
-  it **after** the hero and workspace content, immediately before
-  `render_footer()`.
-
-  Browser CSS parsing does not depend on source order — a `<style>` block at
-  the bottom of the document still applies to elements rendered above it.
-  So the bottom-of-page injection pattern is functionally equivalent for
-  styling purposes, but it preserves the DOM structure that the hero's
-  negative margin was tuned for.
-
-  **Why this matters (April 2026 incident):** Phase 3 of the Role Match
-  build added a second `st.markdown()` block between the hero CSS and the
-  hero `<div>` to inject `get_action_buttons_css()`. The visible result was
-  a ~16px gap between the navbar and the hero banner. The fix was to move
-  the second `st.markdown()` to the bottom of `render_role_match`, right
-  before `render_footer()`. The `.conversation-header` negative margin was
-  not changed.
-
-  See `ui/pages/role_match.py` for the in-code comment that warns against
-  re-introducing the regression at the top CSS block.
-
-  ## Behavioral Rules
-
-  ### Do
-  - **Check existing codebase patterns FIRST** — Before proposing any solution, search for how similar problems are already solved
-  - **Pre-flight before writing code for any ticket touching existing files:** Name the files it touches, name the patterns those files already use, flag any cross-surface couplings, confirm existing test coverage. Catches hidden coupling (MATTGPT-100: active_tab across ~50 files), Streamlit wrapper surprises (MATTGPT-106), and pattern violations (MATTGPT-107: JS bridge pattern almost greenfielded over). Do this before proposing anything. June 2026.
-  - **Default is build-on-top-of, not replace-with.** When a ticket touches existing code, extend or adapt the existing pattern. Only propose replacing when you can name in a comment why the existing pattern fails for this case. June 2026.
-  - **Artifacts for user review go in chat, not /tmp.** Edit tool calls show diffs inline. Writing a diff to /tmp/file.diff creates a local-only artifact the user cannot see. June 2026.
-  - Give direct solutions immediately
-  - Execute the work, don't discuss it
-  - Provide full file replacements (not patches) unless asked otherwise
-  - Backup before modifying: `cp file.py file.py.bak`
-  - Keep reference docs/comments when rewriting files
-  - **Cross-check the artifact, not just the verbal scope.** When a wireframe/spec is shared AND verbal scope is given, the artifact is truth on copy/structure/sizing — match it exactly or flag the conflict explicitly. Don't silently implement the verbal literally and leave stale copy. See `memory/feedback_artifact_over_verbal_scope.md`. May 29, 2026 (-092 hero copy missed the wireframe's replacement of the framing line).
-  - **Visual spacing: give baseline + lever, let the user call the value.** For margins/gaps/padding/sizing adjustments, don't pick a specific magnitude and commit to it. Name the controlling rule + `file:line`, suggest a baseline as a starting point, let Matt eyeball and call the final value. Iterate. See `memory/feedback_visual_tuning.md`. May 28, 2026 (-15px overshoot — committed to a magnitude without seeing the visual result).
-
-  ### Testing Protocol
-  - **BDD scenarios must be written and committed before any implementation code.** This is non-negotiable. Write scenarios in `tests/bdd/features/`, commit them with a descriptive message, then begin implementation. No exceptions. If a spec is provided, BDD scenarios come first.
-  - **Red-Green-Refactor validation gates apply to every BDD commit.** Canonical Pivotal/Beck TDD terminology — **Red is failing, Green is passing implementation, Refactor (sometimes called Blue) is cleanup.** Do not invert this ordering. Earlier revisions of this doc used "Red-Blue-Green" with Blue and Green swapped from canonical; that frame is retired. The cycle splits Red into two commits (scenarios, then step defs) for discipline, but the Red → Green → Refactor sequence is canonical.
-    - **Red (scenarios commit):** Write scenarios in `tests/bdd/features/X.feature` AND bind them to pytest-bdd via `tests/bdd/steps/test_X.py` with `scenarios("../features/X.feature")`. Run `pytest tests/bdd/steps/test_X.py -v` and confirm: all scenarios discovered, all in undefined-step state (`StepDefinitionNotFoundError`). Commit only after this validation. Include 1-line proof in commit message: `Red (scenarios): N scenarios discovered, all N in undefined-step state.`
-    - **Red (step defs commit):** Write step definitions. Run the scoped suite and confirm: scenarios run end-to-end, fail with **assertion errors** (not undefined-step or import errors). Commit message proof: `Red (step defs): N scenarios bound, N assertion failures, 0 undefined-step / import errors.` The step-defs commit and the Green commit land separately — do not pair them.
-    - **Green (production code commit):** Write minimum production code to make tests pass. Run the scoped suite, confirm all pass. Commit message proof: `Green: N / N scenarios passing.`
-    - **Refactor (optional, sometimes called Blue):** Clean up production code while keeping tests passing. Re-run to confirm no regressions.
-  - **Validation output is the proof — paste it to the user before requesting commit approval.** At every gate (Red scenarios, Red step defs, Green), run the scoped pytest and paste the literal output into your response. Do not self-summarize ("looks good, ready to commit?") — that bypasses the gate. The user needs the literal output to confirm pass/fail against the expected state. Validation and commit are two separate gates; treat them like commit and push.
-  - **Scope per-gate runs to the relevant test file**, not the full suite. `pytest tests/bdd/steps/test_X.py -v` gives a clean signal; `pytest tests/bdd/` mixes in unrelated failures (e.g., pre-existing Streamlit-not-running errors) that obscure the gate's pass/fail. The full suite still gets run before review of large changes (existing `explore_stories.py` rule below), but not as a per-commit gate.
-  - **A `.feature` file without its `test_*.py` binding is documentation, not a test.** pytest-bdd discovers scenarios via the `scenarios()` call in `test_*.py`. Committing a `.feature` file alone moves design intent forward but leaves the test runner blind. The Red (scenarios) gate enforces the binding.
-  - **The "Run tests proactively" memory principle applies at every gate**, not just at "claim complete." Each gate is its own proactive run.
-  - **Commit and push are two separate gates requiring two separate approvals.** A commit approval ("commit", "yes commit") is not a push approval. After committing, stop and wait. Do not run `git push` until the user explicitly types "push", "go ahead and push", or similar. Combining `git commit && git push` in a single command is not acceptable. This rule exists because pushing to `origin/main` triggers a production deploy on Streamlit Cloud — it is irreversible without a force push.
-
-  April 2026 incident: a commit-then-push chain executed when only the commit had been approved. The push triggered an unauthorized production deploy. The fix is procedural — separate gates, separate words.
-  - **After any change to UI files (`ui/pages/`, `ui/components/`, `ui/styles/`), restart Streamlit before running BDD tests.**
-  - **After any change to `explore_stories.py`, run the BDD suite before presenting the change for review.** Unit tests and evals validate backend logic — only BDD tests exercise the rendering layer.
-  - **BDD scenarios must assert DOM-observable behavior, not session state.** Playwright cannot read `st.session_state`. For chip/button click routing, assert navigation visible + user-message echo + assistant-response streaming — NOT `seed_prompt` / `active_tab` dict reads. See `memory/feedback_bdd_dom_observable.md`. May 26, 2026 (MATTGPT-068 Scenario 3 — caught before Red step defs gate).
-  - **One "go" ships the full Red (scenarios) → Red (step defs) → Green cycle.** Don't re-ask for approval between gates after the initial "go" on a ticket. Re-ask only on **substantive new design decisions** (not scope clarifications, not catches like "test selector still references old class"). See `memory/feedback_one_go_ships_cycle.md`. May 30, 2026.
-  - **Eval failure discipline rule:** any eval failure should be validated against production before being labeled "pre-existing" or "stochastic" in memory or BACKLOG. Memory entries that pre-frame failures as accepted are unvalidated until cross-referenced to a BACKLOG ticket. If a "known issue" in memory isn't in BACKLOG, it's an unvalidated note — not a tracked issue. May 22, 2026.
-  - **On a second Playwright selector timeout, screenshot before iterating.** Wrap the failing call in try/except, take a screenshot on failure, and read it before proposing any selector fix. Remove the wrapper once green. Example:
-    ```python
-    try:
-        option.click(timeout=5000)
-    except Exception:
-        browser_page.screenshot(path=f'/tmp/pw_debug_{label}.png')
-        raise
-    ```
-    One screenshot beats three guessed selector fixes. June 2026 (MATTGPT-065).
-
-  ### Don't
-  - Ask about priorities or trade-offs before starting
-  - Add dependencies without flagging it
-  - Over-engineer (80/20 rule applies)
-  - Make changes outside the requested scope
-  - Be condescending, rude, or defeatist
-  - **Invent new patterns when existing ones work** — If banking_landing.py does X, timeline_view.py should do X the same way
-  - **Hardcode values that are already CSS variables** — Always check global_styles.py first
-  - **Generate fantasy roadmaps** — No "100K users", "99.9% SLA", "enterprise customers" nonsense
-
-  ### Parallel Claude Code Sessions
-  When multiple Claude Code sessions are running concurrently against the same project directory, they share **one git working tree and one staging area**. Any `git commit` issued by either session will include every file currently staged, regardless of which session staged it. The committing session has no awareness that the staged contents include another session's work.
-
-  **Rules to prevent cross-contamination:**
-  - **Stage specific files by name** (`git add path/to/file`), never `git add -A` or `git add .`. The unstaged-file warning Streamlit's pre-commit shows is normal in parallel-session mode — pre-commit stashes them and restores them around the commit.
-  - **Before staging, check `git status`** to see what's already modified by the other session. If unrelated files are staged, coordinate to commit them first or unstage them temporarily.
-  - **Coordinate the commit timing** — Session A stages → Session A commits → Session A reports SHA → Session B stages → Session B commits. Never have two sessions with staged changes at the same moment.
-  - **Prefer worktree isolation for true parallelism** — `git worktree add ../project-branchname` gives each session its own working tree and staging area.
+1. **Never use `grep -v` to redact secrets** (see Critical Rules). Use positive include filters:
+   - `grep -oE "^[A-Z_][A-Z_0-9]*" .env` — key names only
+   - `grep -oE "^[a-z_]+ ?=" secrets.toml` — top-level scalar keys only
+2. **When inspecting any secrets file, extract keys-only by default.** Ask Matt to confirm values rather than printing them.
+3. **Hard-cap output for any command touching a secrets file** — pipe to `| head -20`.
 
-  May 26, 2026 incident: a CLAUDE.md edit from one session landed inside another session's MATTGPT-068 Red (scenarios) commit (`9599bf3`) — committing session had no awareness it bundled unrelated work. See `memory/feedback_parallel_sessions_staging_collision.md`.
+Applies to: `.streamlit/secrets.toml`, `.env`, `.env.local`, any service-account JSON, any file matching `*secret*` / `*credential*` / `*token*`.
 
-  ### Documentation Restraint
-  Default to **not** creating new markdown files. Most analysis, investigation results, and intermediate findings belong in commit messages, BACKLOG entries, ADRs, or inline updates to existing docs — not in standalone files.
+## Pre-Commit Doc Checklist
+Before committing, answer for each:
+- **ARCHITECTURE.md** — Does this change a pattern, surface, or fact stated here?
+- **mattgpt-design-spec** (Jekyll repo) — Does this change anything in the user-facing spec?
+- **how_agy_modal.py** — Does this change anything described in the Ask MattGPT architecture exposition?
+- **about_matt.py** — Does this change anything described in the "How I Built MattGPT" section?
 
-  Before creating a new `.md` file, justify why it can't go into:
-  - An existing doc (ARCHITECTURE.md, BACKLOG.md, ADR.md, HISTORY.md)
-  - A commit message
-  - A BACKLOG entry detail block
-  - A code comment near the relevant change
+If yes to any: the doc-update commit pairs with this code commit. Same session, same push. Not a follow-up.
 
-  If a new file is genuinely needed and is transitory, it goes in `docs/working/` with a lifecycle declaration and a defined deletion target. Permanent new docs at the top level require explicit user approval.
+Always triggers this check:
+- New file in `services/`, `ui/pages/`, `utils/`, or `config/`
+- Model, embedding, or vector store change
+- Pipeline stage added/removed/renamed
+- Schema change in story corpus, query logger, or any `config_*.json`
 
-  ### Backlog Maintenance
-
-  **Trigger:** Before picking up the next item on the NOW list — not scheduled, not PR-gated.
-
-  **Sync anchor:** `BACKLOG.md` contains a `<!-- last-backlog-sync: <sha> -->` comment at the top. The agent reads this, runs `git log <sha>..HEAD --oneline` for the commit range, then updates the comment on each run.
-
-  **Agent inputs:** `BACKLOG.md`, `CHANGELOG.md`, `git log <sha>..HEAD --oneline` since last sync.
-
-  **Agent actions (propose before writing anything):**
-  1. For each resolved ticket: remove the matrix row AND the detail block from `BACKLOG.md`. Write a `CHANGELOG.md` entry in the existing format (paragraph + commit hash + ticket ref). Both surfaces, always.
-  2. **ARCHITECTURE.md flag:** if any files in `ui/pages/`, `ui/components/`, or `services/` appear in the commit range and `ARCHITECTURE.md` is NOT in that same range, surface the specific filenames and flag for review. Do not assess significance — let Matt decide.
-  3. Update `<!-- last-backlog-sync: <sha> -->` to HEAD.
-  4. Nothing writes until Matt approves the proposed diff.
-
-  **Decided Against items:** Stay in `BACKLOG.md` permanently in their own closed section. Not shipped, not archived to `CHANGELOG.md`. Agent never touches them during routine passes.
-
-  **What does NOT go in CHANGELOG.md:** Decided Against items. `CHANGELOG.md` is a ship record only.
-
-  ## Secrets & Sensitive Output Handling
-
-  Three rules learned the hard way from a real GCP service account private key exposure (May 23, 2026 — when investigating `.streamlit/secrets.toml`, a `grep -v` redaction filter missed multi-line TOML content with embedded `\n` escapes and printed the full RSA private key into the conversation log).
-
-  1. **Never use `grep -v` to redact secrets.** Negative filters are brittle — they only filter what you know to exclude. Multi-line content collapsed onto one line (TOML `private_key = "..."` with `\n` escapes) bypasses them. Always use **positive include filters** that show only the structure you want:
-     - ✅ `grep -oE "^[A-Z_][A-Z_0-9]*" .env` — key names only, never values
-     - ✅ `grep -oE "^[a-z_]+ ?=" secrets.toml` — top-level scalar keys only
-     - ❌ `grep -v "API_KEY\|PRIVATE"` — relies on knowing every possible secret-line pattern
-
-  2. **When inspecting any secrets file, extract keys-only by default.** If a specific value needs verification (e.g., "is `MATTGPT_PRIVATE_BYPASS_TOKEN` set?"), ask the user to confirm rather than print the value. Streamlit `secrets.toml`, `.env`, GCP service account JSON, and similar files should never have their contents printed in any form that includes values — even with filters.
-
-  3. **Hard-cap output for any command touching a secrets file.** Even with a good filter, pipe to `| head -20` or check `| wc -l` first. The May 23 GCP key was thousands of characters on a single TOML line — even partial output of a single line was a full credential leak. Cap line count AND character count if uncertain.
-
-  Applies to: `.streamlit/secrets.toml`, `.env`, `.env.local`, any service-account JSON, any file matching `*secret*` / `*credential*` / `*token*`. When in doubt, ask the user to check directly.
-
-  ## Pre-Commit Doc Checklist
-
-  Before committing, answer for each:
-
-  - **ARCHITECTURE.md** — Does this change a pattern, surface, or fact stated here?
-  - **mattgpt-design-spec** (Jekyll repo) — Does this change anything in the user-facing spec?
-  - **how_agy_modal.py** — Does this change anything described in the Ask MattGPT architecture exposition?
-  - **about_matt.py** — Does this change anything described in the "How I Built MattGPT" section?
-
-  If yes to any: the doc-update commit pairs with this code commit. Same session, same push. Not a follow-up.
-
-  Triggers that always require this check:
-  - New file in `services/` or `ui/pages/`
-  - Model, embedding, or vector store change
-  - Pipeline stage added/removed/renamed
-  - Schema change in story corpus, query logger, or any `config_*.json`
-
-  ## Working with Claude
-  - Start with "what's the minimal fix?" before architectural changes
-  - Verify root cause before accepting complex solutions
-  - Check simple things first: regex, config, cache, typos
-  - If Claude proposes 50+ lines, ask "is there a simpler way?"
-  - **Effort estimates without consulting padding** — When Claude gives an estimate, the headline number must be the raw implementation time (the minutes/hours to write the code, run the test, and ship). BDD discipline overhead and discovery risk are listed as separate explicit add-ons, not multiplied into a padded single number. Pattern observed May 30-31, 2026: a 30-min change quoted as "2-3 hours" because Claude silently folded "+BDD overhead + risk buffer" into the headline. Matt's response, twice: *"2-3 hours?????"* / *"hmm. seems a lot should be 15 min or 30 max."* See `memory/feedback_estimate_without_padding.md`.
-
-  ## No Hardcoded Enums for Data-Derived Values
-
-  **NEVER hardcode lists of values that come from story data (clients, industries, themes, eras, etc.)**
-
-  ❌ BAD:
-  ```python
-  EXCLUDED_CLIENTS = {"Multiple Clients", "Career Narrative", "Independent"}
-  if client in {"JP Morgan", "Capital One", "RBC"}:
-  ```
-
-  ✅ GOOD:
-  ```python
-  # Pattern-based (no maintenance)
-  from utils.client_utils import is_generic_client
-  if is_generic_client(client):
-
-  # Or derived from data at runtime
-  named_clients = {s.get("Client") for s in stories if not is_generic_client(s.get("Client"))}
-  ```
-
-  **Why:** Hardcoded lists drift, duplicate across files, and break when data changes. If a value comes from the JSONL, the code should derive it or use pattern matching — never enumerate it.
-
-  **If you need a list:** Create ONE source of truth in `utils/` or `constants/`, import everywhere.
-
-  ## No Hardcoded Story Titles in Tests
-
-  **NEVER hardcode specific story titles in eval tests or test fixtures.**
-
-  Story titles change frequently during data cleanup. Hardcoded titles cause brittle tests.
-
-  ❌ BAD:
-  ```python
-  {
-      "query": "Tell me more about: Implementing Responsible AI Governance...",
-      "expected_title": "Implementing Responsible AI Governance...",
-  }
-  ```
-
-  ✅ GOOD:
-  ```python
-  {
-      "story_index": 0,  # Dynamically select by index
-      # Query and expected_title built at runtime from stories[story_index]
-  }
-  ```
-
-  **Why:** Story titles are edited regularly. Index-based selection is stable. If you need specific story characteristics, filter by Client, Domain, or Era instead of hardcoding titles.
-
-  ## Nonsense Filter Rules (Learned the Hard Way)
-
-  The `nonsense_filters.jsonl` file contains regex patterns to block off-topic queries. **Be extremely careful with word choices.**
-
-  ### The "solve" Incident (Dec 2025)
-  - **Problem:** Added "solve" to homework pattern → blocked "What problems does Matt solve?"
-  - **Root cause:** Overly broad word in regex matched legitimate portfolio queries
-  - **Fix:** Removed "solve" from pattern (commit `2dab2dc`)
-
-  ### Rules for Adding Patterns
-  1. **Test against real queries first** — Will this block "Tell me about Matt's X"?
-  2. **Avoid common verbs** — Words like "solve", "build", "create", "manage" appear in legitimate queries
-  3. **Prefer multi-word phrases** — `"homework help"` is safer than `"homework"` alone
-  4. **Use word boundaries** — `\b(word)\b` prevents partial matches
-  5. **Don't duplicate the entity gate's job** — Semantic scoring (< 0.55) already catches gibberish like "asdfghjkl"
-
-  ### Pattern Testing
-  ```python
-  # Always test new patterns against these legitimate queries:
-  test_queries = [
-      "What problems does Matt solve?",
-      "How did Matt transform delivery?",
-      "Tell me about stakeholder alignment",
-      "What's Matt's leadership philosophy?",
-  ]
-  ```
-
-  ## Pinecone Metadata Casing Protocol (Learned the Hard Way)
-
-  Pinecone metadata fields use **lowercase field names** but values have inconsistent casing. When building entity filters in `pinecone_service.py`, follow these rules:
-
-  ### Lowercase Values (must call `.lower()`)
-  | Field | Example Value |
-  |-------|---------------|
-  | `division` | `"cloud innovation center"` |
-  | `employer` | `"accenture"` |
-  | `project` | `"cloud innovation center"` |
-  | `industry` | `"cross industry"` |
-  | `complexity` | `"internal"` |
-
-  ### PascalCase Values (preserve original case)
-  | Field | Example Value |
-  |-------|---------------|
-  | `client` | `"Accenture"` |
-  | `role` | `"Director"` |
-  | `title` | `"Scaling CIC Impact..."` |
-  | `domain` | `"Leadership & Talent Development"` |
-
-  ### The Q29 Incident (Jan 2026)
-  - **Problem:** Entity filter `division = "Cloud Innovation Center"` returned 0 hits
-  - **Root cause:** Pinecone stores `division` values lowercase (`"cloud innovation center"`)
-  - **Fix:** Field-specific lowercasing in `pinecone_service.py:198`
-
-  ### Implementation
-  ```python
-  # In pinecone_service.py
-  if pc_field == "division":
-      pc_value = entity_value.lower()
-  else:
-      pc_value = entity_value  # Keep PascalCase for client, role, etc.
-  ```
-
-  ## Quality Standards
-  - **"Can you defend it?"** — Every claim, metric, or statement must be factually accurate
-  - **No AI fabrications** — Real stories from real experience only
-  - **Mobile must not break desktop** — Test both after any CSS change
-
-  ## Current Status (December 2025)
-  - ✅ Era-based Timeline view (complete)
-  - ✅ Mobile responsive implementation (complete)
-  - ✅ Filter redesign - Primary + Advanced (complete)
-  - ✅ Related Projects UX (complete)
-  - ✅ Design spec documentation sync (complete)
-  - 🎯 React + FastAPI migration (Q1 2026)
-
-  ## Quick Reference
-
-  ### Breakpoints
-  | Device | Width | Layout |
-  |--------|-------|--------|
-  | Mobile | <768px | Single column, stacked |
-  | Tablet | 768-1023px | 2 columns |
-  | Desktop | ≥1024px | Full layout |
-
-  ### CSS Variables (from global_styles.py)
-  ```css
-  --accent-purple: #8B5CF6
-  --accent-purple-hover: #7C3AED
-  --accent-purple-bg: rgba(139, 92, 246, 0.08)
-  --accent-purple-light: rgba(139, 92, 246, 0.2)
-  --bg-card: #FFFFFF
-  --bg-surface: #F9FAFB
-  --bg-hover: #F3F4F6
-  --text-primary: #1F2937
-  --text-secondary: #6B7280
-  --border-color: #E5E7EB
-  --hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.15)
-  ```
-
-  ### Confidence Thresholds
-  ```python
-  # RAG Service (Pinecone result confidence)
-  CONFIDENCE_HIGH = 0.25  # "Found X stories"
-  CONFIDENCE_LOW = 0.20   # "Relevance may be low"
-  # Below 0.20 = "No strong matches"
-  ```
-
-  ## RAG Pipeline Cleanup (Jan 29, 2026)
-
-  Major simplification removing redundant gates. Eval: 98.1% (51/52).
-
-  ### What Was Removed
-
-  | Component | Why Removed |
-  |-----------|-------------|
-  | **Entity Gate** (bouncer) | Rejected valid queries like TICARA when no entity detected + low semantic score |
-  | **classify_query_intent** LLM | Expensive ($0.0001/query), brittle (didn't recognize story titles), redundant |
-  | **Title hard filtering** | Filtered to 1 result, breaking Related Projects UX |
-
-  ### Current Pipeline (Lean)
-  ```
-  Query → Nonsense Filters → Semantic Router → out_of_scope check → Pinecone → Confidence Gate → LLM
-  ```
-
-  ### What Semantic Router Now Handles
-  - **Intent families** (15): background, behavioral, delivery, team_scaling, leadership, technical, domain_payments, domain_healthcare, stakeholders, innovation, agile_transformation, narrative, synthesis, out_of_scope, personal
-  - **Synthesis detection**: `intent_family == "synthesis"` (no LLM call)
-  - **Out of scope detection**: `intent_family == "out_of_scope"` → graceful redirect before Pinecone
-  - **Personal query detection**: `intent_family == "personal"` → warm professional redirect
-  - **Title detection**: Detected but uses SOFT filtering (semantic search ranks naturally, no Pinecone filter)
-
-  ### Entity Detection (Still Active)
-  - Detects: Client, Employer, Division, Title
-  - Hard filters: Client, Employer, Division, Project, Place (applies Pinecone metadata filter)
-  - Soft filters: Title (detected for analytics/pinning, but semantic search handles ranking)
-
-  ### Context Exclusion Prefixes
-  These words before an entity name prevent entity filtering:
-  - "after", "leaving", "before", "transition from", "left"
-  - Example: "career transition after Accenture" → broad search, not Accenture filter
-
-  ### Verbatim Phrases (Sacred Vocabulary)
-  When responding to Professional Narrative queries, the LLM must use these exact phrases:
-  - "builder"
-  Note: "0-to-1" exists in public_tags but not in STAR fields (5PSummary, Situation, Task,
-  Action, Result). Do not include it in verbatim phrase tests that search STAR fields only.
-  "modernizer", "complexity to clarity", "build something from nothing", and
-  "not looking for a maintenance role" were removed from story data during Mar 2026
-  data quality cleanup. Do not reference them in prompts or tests.
-
-  ### Common Fixes
-  - **Widget won't reset:** Increment version key, delete old widget keys
-  - **CSS not applying:** Check specificity, add `!important` if scoped correctly
-  - **Columns stacking wrong:** Streamlit auto-stacks below ~640px, use CSS grid instead
-  - **Session state error on widget key:** Use prefilter pattern (set before widget renders, pop when reading)
-  - **HTML rendering as text:** Remove newlines/indentation from f-string HTML
-  - **Import conflicts:** Check you're not importing same function from two different files (last import wins)
-
-  ## Configuration & Hardcoding Rules
-
-  **Never hardcode values that might need to change or are used in multiple places.**
-
-  Priority order:
-  1. **Derive from data** — If it can be computed from source data, do that (see `utils/client_utils.py` pattern)
-  2. **Environment variable** — If it changes between environments or is a secret (API keys, index names)
-  3. **config/constants.py** — If it's application logic that must be consistent (thresholds, model names, field lists, banned phrases)
-  4. **Local constant with comment** — Only if truly file-specific and unlikely to be needed elsewhere
-
-  **Before adding any hardcoded value, ask:**
-  - "Will I need this value somewhere else?" → constants.py
-  - "Could this drift out of sync with something?" → constants.py
-  - "Is this derived from story data?" → Compute it, don't hardcode it
-
-  **If you find hardcoded values duplicated across files, that's a bug. Centralize immediately.**
-
-  See `config/constants.py` for the single source of truth for thresholds, models, banned phrases, and entity fields.
-
-  ## Deployment
-  ```bash
-  # Local
-  streamlit run app.py
-
-  # Deploy (Streamlit Cloud)
-  git push origin main
-  ```
-
-  ## Related Documentation
-  - [Design Specification](https://mcpugmire1.github.io/mattgpt-design-spec/) - Full product blueprint
-  - [API Reference](https://mcpugmire1.github.io/mattgpt-design-spec/docs/09-api-reference) - Function signatures
-  - [Data Model](https://mcpugmire1.github.io/mattgpt-design-spec/docs/10-data-model) - JSONL schema
+## Backlog Maintenance
+**Trigger:** Before picking up the next item on the NOW list.
+
+**Sync anchor:** `BACKLOG.md` contains `<!-- last-backlog-sync: <sha> -->` at the top. Read this, run `git log <sha>..HEAD --oneline` for the commit range, then update the comment. If the SHA is missing or unresolvable, prompt Matt before proceeding; do not default to diffing the entire history.
+
+**Inputs:** `BACKLOG.md`, `CHANGELOG.md`, `git log <sha>..HEAD --oneline` since last sync.
+
+**Actions (propose before writing anything):**
+1. For each resolved ticket: remove the matrix row AND detail block from `BACKLOG.md`. Write a `CHANGELOG.md` entry (paragraph + commit hash + ticket ref). Both surfaces, always.
+2. **ARCHITECTURE.md flag:** if any files in `ui/pages/`, `ui/components/`, `services/`, `utils/`, or `config/` appear in the commit range and `ARCHITECTURE.md` is NOT in that range, surface the specific filenames and flag for review.
+3. Update `<!-- last-backlog-sync: <sha> -->` to HEAD.
+4. Nothing writes until Matt approves the proposed diff.
+
+**Decided Against items:** Stay in `BACKLOG.md` permanently. Never moved to `CHANGELOG.md`.
+
+## Documentation Restraint
+Default to **not** creating new markdown files. Most findings belong in commit messages, BACKLOG entries, ADRs, or inline updates to existing docs.
+
+Before creating a new `.md` file, justify why it can't go into an existing doc, a commit message, a BACKLOG entry, or a code comment. Transitory files go in `docs/working/` with a lifecycle declaration. Permanent new top-level docs require explicit approval.
+
+## No Hardcoded Enums for Data-Derived Values
+Never hardcode lists of values that come from story data (clients, industries, themes, eras).
+
+```python
+# BAD
+if client in {"JP Morgan", "Capital One", "RBC"}:
+
+# GOOD
+from utils.client_utils import is_generic_client
+if is_generic_client(client):
+```
+
+If a value comes from the JSONL, derive it or use pattern matching. One source of truth in `utils/` or `config/`, imported everywhere.
+
+## No Hardcoded Story Titles in Tests
+Never hardcode specific story titles in eval tests. Use index-based selection; filter by Client, Domain, or Era instead.
+
+## Nonsense Filter Rules
+`nonsense_filters.jsonl` contains regex patterns to block off-topic queries. Rules for adding patterns:
+1. Test against real queries first — will this block "Tell me about Matt's X"?
+2. Avoid common verbs — "solve", "build", "create", "manage" appear in legitimate queries
+3. Prefer multi-word phrases — `"homework help"` safer than `"homework"`
+4. Use word boundaries — `\b(word)\b` prevents partial matches
+5. Don't duplicate the semantic scoring gate (< 0.55 already catches gibberish)
+
+## Pinecone Metadata Casing
+Lowercase field names; values have inconsistent casing:
+
+| Field | Casing | Example |
+|-------|--------|---------|
+| `division`, `employer`, `project`, `industry`, `complexity` | lowercase | `"cloud innovation center"` |
+| `client`, `role`, `title`, `domain` | PascalCase | `"Accenture"` |
+
+```python
+if pc_field == "division":
+    pc_value = entity_value.lower()
+else:
+    pc_value = entity_value
+```
+
+## Configuration Rules
+Priority order:
+1. **Derive from data** — if computable from source data, do that
+2. **Environment variable** — if it changes between environments or is a secret
+3. **`config/constants.py`** — if it's application logic that must be consistent
+4. **Local constant with comment** — only if truly file-specific
+
+If hardcoded values are duplicated across files, that's a bug. Centralize immediately.
+
+## RAG Pipeline
+```
+Query → Nonsense Filters → Semantic Router → out_of_scope check → Pinecone → Confidence Gate → LLM
+```
+
+**Intent families (15):** background, behavioral, delivery, team_scaling, leadership, technical, domain_payments, domain_healthcare, stakeholders, innovation, agile_transformation, narrative, synthesis, out_of_scope, personal
+
+**Entity detection:** Client, Employer, Division, Title. Hard filters: Client, Employer, Division, Project, Place. Soft filters: Title.
+
+**Context exclusion prefixes:** "after", "leaving", "before", "transition from", "left" — prevent entity filtering.
+
+**Verbatim phrases (sacred vocabulary):** "builder" — use exactly in Professional Narrative responses.
+
+**Confidence thresholds:**
+```python
+CONFIDENCE_HIGH = 0.25  # "Found X stories"
+CONFIDENCE_LOW = 0.20   # "Relevance may be low"
+# Below 0.20 = "No strong matches"
+```
+
+## Quality Standards
+- Every claim, metric, or statement must be factually accurate
+- No AI fabrications — real stories from real experience only
+- Mobile must not break desktop — test both after any CSS change
+
+## CSS Variable Reference
+```css
+--accent-purple: #8B5CF6
+--accent-purple-hover: #7C3AED
+--accent-purple-bg: rgba(139, 92, 246, 0.08)
+--accent-purple-light: rgba(139, 92, 246, 0.2)
+--bg-card: #FFFFFF
+--bg-surface: #F9FAFB
+--bg-hover: #F3F4F6
+--text-primary: #1F2937
+--text-secondary: #6B7280
+--border-color: #E5E7EB
+--hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.15)
+```
+
+## Deployment
+```bash
+streamlit run app.py        # local
+git push origin main        # triggers Streamlit Cloud deploy
+```
+
+## Related Documentation
+- [Design Specification](https://mcpugmire1.github.io/mattgpt-design-spec/)
+- [API Reference](https://mcpugmire1.github.io/mattgpt-design-spec/docs/09-api-reference)
+- [Data Model](https://mcpugmire1.github.io/mattgpt-design-spec/docs/10-data-model)
