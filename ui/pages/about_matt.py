@@ -119,11 +119,10 @@ def render_about_matt():
         '</svg>'
     )
     _REFERRER_SNIPPET = (
-        "Matt Pugmire is a senior product engineering leader who modernizes regulated, high-stakes platforms across "
-        "financial services and the enterprise. He led a 60+ person global team at JPMorgan and built Accenture's "
-        "Cloud Innovation Center from zero to a 150+ practitioner practice serving 15+ Fortune 500 clients, generating "
-        "$100M+ in repeat business with no dedicated sales team. He's now building hands-on with AI. "
-        "In active conversations for senior engineering leadership roles. Atlanta-based, open to relocate."
+        "Matt Pugmire is a senior product engineering leader who builds engineering organizations, modernizes platforms, "
+        "and grows teams along the way. He has led teams of 60+ across 12 countries, built a practice from zero to "
+        "150+ practitioners, and delivered for 15+ Fortune 500 clients across financial services, healthcare, telecom, "
+        "and government. In active conversations for senior engineering leadership roles. Atlanta-based, open to relocate."
     )
     with st.container(key="am_for_a_referrer"):
         st.markdown(
