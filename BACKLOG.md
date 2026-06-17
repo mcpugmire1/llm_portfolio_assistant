@@ -153,6 +153,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-132](#mattgpt-132) | AG Grid Client column badge rendering — cellRenderer approach fails in st_aggrid React stack | Open | Low | Bug | June 15, 2026 |
 | [MATTGPT-133](#mattgpt-133) | BDD skip — `test_ask_agy_works_from_table_view` skips when AgGrid iframe row interaction doesn't open detail panel | Open | Low | Bug | June 16, 2026 |
 | [MATTGPT-134](#mattgpt-134) | BDD skip — `test_deeplink_respects_view_mode` skips because deeplink navigation does not preserve pre-set view mode | Open | Low | Bug | June 16, 2026 |
+| [MATTGPT-135](#mattgpt-135) | Gate mobile navbar IIFE behind viewport check — runs unconditionally on every rerun | Open | Low | Perf | June 16, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -2733,6 +2734,20 @@ For each client-specific probe query, assert `client_name in [s.get("Client") fo
 - Stories 1 and 2 (expand-from-logged) completed before Stories 3–5 (recovery-dependent).
 
 **Sequencing:** Stories 3–5 are blocked on elicitation. Do not let recovery stories block Stories 1 and 2.
+
+---
+
+### MATTGPT-135
+**Gate mobile navbar IIFE behind viewport check — runs unconditionally on every rerun**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Perf
+- **Logged:** June 16, 2026
+
+**Context:** The mobile navbar IIFE in `ui/components/navbar.py` runs on every Streamlit rerun regardless of viewport width. It injects the mobile header, wires up the hamburger menu, and runs DOM queries unconditionally. On desktop viewports this is wasted work — the mobile header is hidden by CSS but the JS still executes, adds DOM nodes, and attaches event listeners. Observed during MATTGPT-018 performance investigation.
+
+**Acceptance criterion:** Mobile navbar IIFE is gated behind a `window.innerWidth` check (or equivalent) so it is a no-op on viewports above the mobile breakpoint (768px). Desktop navigation reruns should show no mobile header DOM mutations in the Performance trace.
 
 ---
 
