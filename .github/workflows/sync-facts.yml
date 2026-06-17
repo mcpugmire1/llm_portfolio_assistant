@@ -1,0 +1,34 @@
+name: Sync facts to design spec
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  sync-facts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Extract facts
+        run: python scripts/extract_facts.py
+
+      - name: Dispatch to design spec
+        env:
+          PAT: ${{ secrets.DOCS_REPO_PAT }}
+        run: |
+          curl -f -X POST \
+            -H "Authorization: token $PAT" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/mcpugmire1/mattgpt-design-spec/dispatches \
+            -d "$(jq -n --argjson facts "$(cat facts.json)" \
+                  '{event_type: "facts-updated", client_payload: {facts: $facts}}')"
