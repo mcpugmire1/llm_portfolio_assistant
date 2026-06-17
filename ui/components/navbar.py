@@ -344,32 +344,7 @@ div[data-testid="stColumn"]:first-child p {
         overlay.id = 'mobile-nav-overlay';
         doc.body.insertBefore(overlay, doc.body.firstChild);
 
-        // Page transition overlay — injected into the parent window via <script> tag (MATTGPT-018).
-        // Overlay, maskNav(), setTimeout, and click listener all live in parent window scope so
-        // they survive Streamlit destroying the components.html iframe on every rerun. Anything
-        // defined in the iframe (closures, timers, listeners) dies with the iframe.
-        if (!window.parent.__maskNav) {
-            var ptScript = doc.createElement('script');
-            ptScript.text = `(function(){
-                var ov = document.createElement('div');
-                ov.id = 'page-transition-overlay';
-                ov.style.cssText = 'position:fixed;inset:0;z-index:9997;opacity:0;pointer-events:none;';
-                document.body.appendChild(ov);
-                window.__maskNav = function() {
-                    ov.style.background = getComputedStyle(document.body).backgroundColor;
-                    ov.style.transition = 'none';
-                    ov.style.opacity = '1';
-                    setTimeout(function() {
-                        ov.style.transition = 'opacity 0.08s ease-in';
-                        ov.style.opacity = '0';
-                    }, 150);
-                };
-                document.addEventListener('click', function(e) {
-                    if (e.target.closest('[class*="st-key-topnav_"] button')) window.__maskNav();
-                });
-            })();`;
-            doc.head.appendChild(ptScript);
-        }
+
 
         // Preload all static images on first page load so they're cache-warm before navigation
         if (!doc.body.__imgPreloaded) {
