@@ -568,6 +568,7 @@ def mobile_gate_message_visible(browser_page):
 @then("the two-column layout is displayed (JD input left, results right)")
 def two_column_layout_visible(browser_page):
     workspace = browser_page.locator(ROLE_MATCH_WORKSPACE_SELECTOR)
+    workspace.first.wait_for(state="visible", timeout=10000)
     assert workspace.first.is_visible(), "Workspace card not visible on desktop"
     # The workspace contains exactly two stColumn children — input on left, results on right.
     columns = browser_page.locator(
@@ -1310,8 +1311,7 @@ def when_type_jd_into_textarea(browser_page):
 
 @given("the JD textarea contains text")
 def given_textarea_contains_text(browser_page):
-    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.fill(_SAMPLE_JD)
-    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.press("Tab")
+    browser_page.locator(ROLE_MATCH_DEMO_JD_SELECTOR).first.click()
     wait_for_streamlit_rerun(browser_page)
 
 
@@ -1345,6 +1345,9 @@ def then_clear_button_visible(browser_page):
 def when_click_clear_button(browser_page):
     browser_page.locator(ROLE_MATCH_CLEAR_SELECTOR).first.click()
     wait_for_streamlit_rerun(browser_page)
+    browser_page.wait_for_selector(
+        ROLE_MATCH_CLEAR_SELECTOR, state="hidden", timeout=5000
+    )
 
 
 @then("the JD textarea is empty")
@@ -1486,6 +1489,9 @@ def when_type_non_jd_placeholder(browser_page):
 def when_click_x_clear(browser_page):
     browser_page.locator(ROLE_MATCH_CLEAR_SELECTOR).first.click()
     wait_for_streamlit_rerun(browser_page)
+    browser_page.wait_for_selector(
+        ROLE_MATCH_CLEAR_SELECTOR, state="hidden", timeout=5000
+    )
 
 
 # --- THEN ---
