@@ -310,10 +310,9 @@ div[data-testid="stColumn"]:first-child p {
     js_code = """
     <script>
     (function() {
-        if (window.parent.innerWidth > 767) return;
         var doc = window.parent.document;
 
-        // Theme detection
+        // Theme detection - runs on all viewports
         function detectTheme() {
             var body = doc.body;
             var bg = window.parent.getComputedStyle(body).backgroundColor;
@@ -325,6 +324,8 @@ div[data-testid="stColumn"]:first-child p {
         }
         setInterval(detectTheme, 500);
         detectTheme();
+
+        if (window.parent.innerWidth > 767) return;
 
         // Remove existing mobile nav if present
         ['mobile-header', 'mobile-nav-overlay', 'mobile-nav-dropdown'].forEach(function(id) {
