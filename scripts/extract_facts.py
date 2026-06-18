@@ -98,7 +98,24 @@ facts["bdd_summary"] = (
 )
 
 # ---------------------------------------------------------------------------
-# 5. Unit test files — tests/unit/test_*.py
+# 5. Eval query count — tests/eval_rag_quality.py
+#    Count "id": <number>, lines (literal integers) — excludes result refs
+#    which use variable names not literals.
+# ---------------------------------------------------------------------------
+import re  # noqa: E402
+
+eval_file = REPO_ROOT / "tests" / "eval_rag_quality.py"
+if eval_file.exists():
+    eval_content = eval_file.read_text()
+    eval_query_count = len(re.findall(r'"id":\s*\d+,', eval_content))
+    facts["eval_query_count"] = eval_query_count
+    facts["eval_summary"] = f"{eval_query_count}/{eval_query_count}"
+else:
+    facts["eval_query_count"] = 0
+    facts["eval_summary"] = "0/0"
+
+# ---------------------------------------------------------------------------
+# 6. Unit test files — tests/unit/test_*.py
 # ---------------------------------------------------------------------------
 unit_dir = REPO_ROOT / "tests" / "unit"
 if unit_dir.exists():
