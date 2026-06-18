@@ -1342,19 +1342,20 @@ def render_explore_stories(
             )
             opts["rowStyle"] = {"cursor": "pointer"}
 
-            _is_dark = st.get_option("theme.base") == "dark"
             _badge_css = {
                 ".es-client-badge": {
                     "display": "inline-block !important",
                     "padding": "4px 10px !important",
-                    "background": "rgba(139, 92, 246, 0.15) !important"
-                    if _is_dark
-                    else "rgba(139, 92, 246, 0.08) !important",
-                    "color": "#A78BFA !important" if _is_dark else "#8B5CF6 !important",
+                    "background": "rgba(139, 92, 246, 0.08) !important",
+                    "color": "#8B5CF6 !important",
                     "border-radius": "12px !important",
                     "font-size": "12px !important",
                     "font-weight": "500 !important",
-                }
+                },
+                ".ag-root-wrapper": {
+                    "--ag-row-hover-color": "rgba(167, 139, 250, 0.15)",
+                    "--ag-selected-row-background-color": "rgba(167, 139, 250, 0.2)",
+                },
             }
 
             grid = AgGrid(
@@ -1368,28 +1369,6 @@ def render_explore_stories(
                 height=TABLE_HEIGHT,
                 key="stories_grid",
                 custom_css=_badge_css,
-            )
-
-            components.html(
-                """<script>
-                (function() {
-                    function inject() {
-                        var agIframe = Array.from(window.parent.document.querySelectorAll('iframe'))
-                            .find(function(f) { return f.src && f.src.includes('st_aggrid'); });
-                        if (!agIframe) return;
-                        try {
-                            var root = agIframe.contentDocument.querySelector('.ag-root-wrapper');
-                            if (!root) return;
-                            root.style.setProperty('--ag-row-hover-color', 'rgba(167,139,250,0.15)');
-                            root.style.setProperty('--ag-selected-row-background-color', 'rgba(167,139,250,0.2)');
-                        } catch(e) {}
-                    }
-                    inject();
-                    setTimeout(inject, 500);
-                    setTimeout(inject, 1500);
-                })();
-                </script>""",
-                height=0,
             )
 
             if isinstance(grid, dict):
