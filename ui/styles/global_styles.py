@@ -2103,12 +2103,6 @@ details[open]:has(.code-block) > summary::before {
     padding-top: 8px !important;
 }
 
-/* Row 2 compact dropdowns */
-[class*="st-key-r2_client"] [data-baseweb="select"] > div:first-child,
-[class*="st-key-r2_role"] [data-baseweb="select"] > div:first-child,
-[class*="st-key-r2_domain"] [data-baseweb="select"] > div:first-child {
-    padding: 5px 10px !important;
-}
 
 /* Remove default top margin Streamlit adds to buttons in form/filter rows */
 [class*="st-key-r2_reset"] button,
