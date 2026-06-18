@@ -16,6 +16,8 @@ from ui.image_assets import CHASE_48PX_1_B64, CHASE_48PX_2_B64, CHASE_48PX_3_B64
 
 _CSS = (
     """
+        <link rel="preload" href="/~/+/component/st_aggrid.agGrid/bootstrap.min.css" as="style">
+        <link rel="preload" href="/~/+/component/st_aggrid.agGrid/static/js/main.3d60143d.js" as="script">
         <style>
         /* ========================================
            CSS VARIABLES - DESIGN SYSTEM
