@@ -150,10 +150,12 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-129](#mattgpt-129) | Content elaboration per era — expand 5 under-documented operational stories | Open | High | Action | June 14, 2026 |
 | [MATTGPT-130](#mattgpt-130) | "practitioners" canonical everywhere — UI, eval golden set, corpus re-embed in lockstep | Open | Medium | Action | June 14, 2026 |
 | [MATTGPT-131](#mattgpt-131) | BDD selector bug — `test_industry_and_capability_labels_visible_inline_on_mobile` fails in marathon run | Open | Low | Bug | June 15, 2026 |
-| [MATTGPT-132](#mattgpt-132) | AG Grid Client column badge rendering — cellRenderer approach fails in st_aggrid React stack | Open | Low | Bug | June 15, 2026 |
+| [MATTGPT-132](#mattgpt-132) | AG Grid Client column badge rendering — cellRenderer approach fails in st_aggrid React stack | Done | Low | Bug | June 15, 2026 |
 | [MATTGPT-133](#mattgpt-133) | BDD skip — `test_ask_agy_works_from_table_view` skips when AgGrid iframe row interaction doesn't open detail panel | Open | Low | Bug | June 16, 2026 |
 | [MATTGPT-134](#mattgpt-134) | BDD skip — `test_deeplink_respects_view_mode` skips because deeplink navigation does not preserve pre-set view mode | Open | Low | Bug | June 16, 2026 |
-| [MATTGPT-135](#mattgpt-135) | Gate mobile navbar IIFE behind viewport check — runs unconditionally on every rerun | Open | Low | Perf | June 16, 2026 |
+| [MATTGPT-135](#mattgpt-135) | Gate mobile navbar IIFE behind viewport check — runs unconditionally on every rerun | Done | Low | Perf | June 16, 2026 |
+| [MATTGPT-136](#mattgpt-136) | Dark mode design system audit — --accent-purple not overridden in body.dark-theme | Open | Low | Refactor | June 18, 2026 |
+| [MATTGPT-137](#mattgpt-137) | AgGrid bootstrap.min.css render-blocking on Ask Agy → My Work transition | Open | Low | Perf | June 18, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -2740,14 +2742,17 @@ For each client-specific probe query, assert `client_name in [s.get("Client") fo
 ### MATTGPT-135
 **Gate mobile navbar IIFE behind viewport check — runs unconditionally on every rerun**
 
-- **Status:** Open
+- **Status:** Done
 - **Priority:** Low
 - **Type:** Perf
 - **Logged:** June 16, 2026
+- **Resolved:** June 17, 2026 — `1bbe8e6` (preload revert), MATTGPT-135 fix committed in earlier session
 
-**Context:** The mobile navbar IIFE in `ui/components/navbar.py` runs on every Streamlit rerun regardless of viewport width. It injects the mobile header, wires up the hamburger menu, and runs DOM queries unconditionally. On desktop viewports this is wasted work — the mobile header is hidden by CSS but the JS still executes, adds DOM nodes, and attaches event listeners. Observed during MATTGPT-018 performance investigation.
+**Context:** The mobile navbar IIFE in `ui/components/navbar.py` ran on every Streamlit rerun regardless of viewport width. It injected the mobile header, wired up the hamburger menu, and ran DOM queries unconditionally. On desktop viewports this was wasted work and caused a double-avatar flash during page transitions.
 
-**Acceptance criterion:** Mobile navbar IIFE is gated behind a `window.innerWidth` check (or equivalent) so it is a no-op on viewports above the mobile breakpoint (768px). Desktop navigation reruns should show no mobile header DOM mutations in the Performance trace.
+**Fix:** Added `if (window.parent.innerWidth > 767) return;` at the top of the IIFE. Key: must use `window.parent.innerWidth` not `window.innerWidth` because the IIFE runs inside a srcdoc iframe whose own viewport width differs from the parent page. Breakpoint is > 767px (not 768px as originally written in the ticket).
+
+**BDD:** 2 scenarios in `tests/bdd/features/navbar_mobile_viewport_gate.feature` — desktop no-inject + mobile inject. Both passing.
 
 ---
 
@@ -2782,19 +2787,15 @@ For each client-specific probe query, assert `client_name in [s.get("Client") fo
 ### MATTGPT-132
 **AG Grid Client column badge rendering — cellRenderer fails in st_aggrid React stack**
 
-- **Status:** Open
+- **Status:** Done
 - **Priority:** Low
 - **Type:** Bug
 - **Logged:** June 15, 2026
+- **Resolved:** June 18, 2026
 
-**Context:** The Client column in My Work Table view has a `cellRenderer` that wraps values in `<span class="es-client-badge">`. Three approaches attempted June 15, 2026 — all failed:
-1. Raw string (pre-existing) — AG Grid treats it as a component name lookup, logs "Looking for component [...] but it wasn't found" warning. Cell shows plain text value.
-2. `JsCode()` wrapper with HTML string return — warning gone, but st_aggrid React stack renders the HTML string as text content, not innerHTML.
-3. `JsCode()` wrapper with `document.createElement` return — React error #31: "Objects are not valid as a React child (found: [object HTMLSpanElement])".
+**Fix:** Class-based `ClientBadgeRenderer` using AG Grid 29's `init(params)` / `getGui()` contract. `getGui()` returns the DOM element directly, bypassing React's reconciler. Also added `enable_enterprise_modules=False` (drops full Enterprise bundle — eliminates license warning) and Python-side dark mode detection via `st.get_option("theme.base")` to pass hardcoded color values into `custom_css` at render time (CSS variables don't cross the AgGrid iframe boundary).
 
-Chrome Claude identified the correct path: `div + innerHTML assignment` approach — the renderer function assigns to `eGridCell.innerHTML` directly rather than returning a value. This bypasses React's reconciler.
-
-**Acceptance criterion:** Client column shows styled badges in Table view with no console warnings and no React errors.
+**Dark mode approach:** `_is_dark = st.get_option("theme.base") == "dark"` resolves at render time. Brief lag after user toggles Streamlit theme toggle is expected (only updates on next rerun). Accepted as Streamlit architectural limitation.
 
 ---
 
@@ -2832,3 +2833,41 @@ Chrome Claude identified the correct path: `div + innerHTML assignment` approach
 **Risk:** Changing only surface 1 leaves eval queries testing a term the UI no longer uses. Changing surfaces 2+3 without re-embedding leaves the index returning "engineers" on practitioner queries.
 
 **Acceptance criterion:** `grep -rn "150+ engineers" ui/ tests/ data/` returns 0 hits (excluding code comments and regex patterns in backend_service.py).
+
+---
+
+### MATTGPT-136
+**Dark mode design system audit — --accent-purple not overridden in body.dark-theme**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Refactor
+- **Logged:** June 18, 2026
+
+**Context:** `body.dark-theme` in `global_styles.py` overrides `--accent-purple-text` to `#A78BFA` (lighter purple for dark backgrounds) but does NOT override `--accent-purple` or `--accent-purple-bg`. There are 41 usages of `var(--accent-purple)` across the stylesheet spanning text, borders, opaque backgrounds, and semi-transparent tints. In dark mode all 41 resolve to the same `#8B5CF6` as light mode, which may have contrast issues on dark backgrounds.
+
+**Why deferred:** A blanket override of `--accent-purple` to `#A78BFA` in dark mode affects all 41 usages simultaneously. The usages split into three semantic categories with different risk profiles: (1) text/interactive — genuinely need lighter value for contrast; (2) opaque fills/buttons — design choice, either can work; (3) semi-transparent tints derived from the variable — hue change could look off. Changing blindly risks breaking categories 2 and 3 while fixing 1.
+
+**Fix approach:** Visual audit in dark mode across all pages before adding the override. Document which of the 41 usages fall into each category. Override `--accent-purple` only if a majority of usages are category 1, or introduce a new `--accent-purple-accessible` variable for text contexts.
+
+**Acceptance criterion:** Dark mode visual review complete, override decision documented, no contrast failures on text usages of --accent-purple in dark mode.
+
+---
+
+### MATTGPT-137
+**AgGrid bootstrap.min.css render-blocking on Ask Agy → My Work transition**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Perf
+- **Logged:** June 18, 2026
+
+**Context:** `bootstrap.min.css` served by Streamlit Cloud's AgGrid component has `cache-control: public` with no `max-age`, causing 195ms server revalidation round-trips on every Ask Agy → My Work page transition. This contributes to the "blep" (layout shift / flash) on My Work load.
+
+**What was tried:** `<link rel="preload">` tags added to the top of `_CSS` in `global_styles.py`. Failed: Streamlit's `st.markdown()` parser breaks when `<link>` tags precede `<style>` in the injected string — the entire CSS renders as visible text on the page. Reverted (`6b1ea2a`).
+
+**Constraints:** Cache headers on Streamlit Cloud's component server are not configurable from the Python layer. The issue is upstream of the application.
+
+**Potential approaches:** (1) `components.html` injection of a `<link rel="preload">` tag into `window.parent.document.head` — bypasses the st.markdown parser, injects directly into parent document head. (2) Accept as Streamlit Cloud infrastructure limitation and close. (3) Watch for Streamlit Cloud cache header improvements.
+
+**Acceptance criterion:** Either bootstrap.min.css shows as `(from memory cache)` or `(disk cache)` on the Ask Agy → My Work transition DevTools Network tab, or ticket is closed as Decided Against with documented rationale.

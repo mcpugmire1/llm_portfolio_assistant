@@ -26,7 +26,7 @@ import streamlit.components.v1.components  # noqa: F401 — pre-import so the
 # components.components.MarshallComponentException. Streamlit 1.50.0 doesn't
 # auto-import the submodule; AgGrid 0.3.4.post3 assumes it does.
 from dotenv import load_dotenv
-from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode
+from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode, JsCode
 
 from config.debug import DEBUG
 from services.query_logger import log_query
@@ -63,7 +63,7 @@ MAX_ACHIEVEMENTS_SHOWN = 4
 
 # AgGrid availability check
 try:
-    from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode
+    from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode, JsCode
 
     _HAS_AGGRID = True
 except Exception:
@@ -1309,11 +1309,16 @@ def render_explore_stories(
                 flex=1,
                 minWidth=110,
                 maxWidth=170,
-                cellRenderer="""
-                    function(params) {
-                        return '<span class="es-client-badge">' + params.value + '</span>';
+                cellRenderer=JsCode("""
+                    class ClientBadgeRenderer {
+                        init(params) {
+                            this.eGui = document.createElement('span');
+                            this.eGui.className = 'es-client-badge';
+                            this.eGui.textContent = params.value;
+                        }
+                        getGui() { return this.eGui; }
                     }
-                """,
+                """),
             )
             gob.configure_column("Role", flex=1, minWidth=120, maxWidth=300)
             gob.configure_column(
@@ -1337,15 +1342,32 @@ def render_explore_stories(
             )
             opts["rowStyle"] = {"cursor": "pointer"}
 
+            _is_dark = st.get_option("theme.base") == "dark"
+            _badge_css = {
+                ".es-client-badge": {
+                    "display": "inline-block !important",
+                    "padding": "4px 10px !important",
+                    "background": "rgba(139, 92, 246, 0.15) !important"
+                    if _is_dark
+                    else "rgba(139, 92, 246, 0.08) !important",
+                    "color": "#A78BFA !important" if _is_dark else "#8B5CF6 !important",
+                    "border-radius": "12px !important",
+                    "font-size": "12px !important",
+                    "font-weight": "500 !important",
+                }
+            }
+
             grid = AgGrid(
                 df_view,
                 gridOptions=opts,
                 update_mode=GridUpdateMode.SELECTION_CHANGED,
                 allow_unsafe_jscode=True,
+                enable_enterprise_modules=False,
                 theme="streamlit",
                 fit_columns_on_grid_load=True,
                 height=TABLE_HEIGHT,
                 key="stories_grid",
+                custom_css=_badge_css,
             )
 
             components.html(
