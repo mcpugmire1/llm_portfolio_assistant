@@ -533,6 +533,10 @@ def get_landing_css() -> str:
             }
         }
 
+        /* MATTGPT-018: fadeInUp disabled. The 707ms entrance ran concurrent with the
+           navigation reconcile and held partial frames for its full duration on Ask Agy
+           lands. Uncomment to restore Agy's entrance wave. */
+        /*
         .welcome-title {
             animation: fadeInUp 0.6s ease-out;
         }
@@ -546,6 +550,7 @@ def get_landing_css() -> str:
             animation: fadeInUp 0.6s ease-out 0.4s;
             animation-fill-mode: both;
         }
+        */
 
         /* Hide trigger button */
         button[key="how_works_landing"] {

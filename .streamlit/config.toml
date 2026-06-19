@@ -1,3 +1,9 @@
+[browser]
+gatherUsageStats = false
+
+[logger]
+level = "warning"
+
 [server]
 # Use poll-based file watching instead of the default watchdog (inotify).
 #
