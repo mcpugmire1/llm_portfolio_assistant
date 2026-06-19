@@ -268,7 +268,6 @@ from ui.pages.ask_mattgpt.backend_service import sync_portfolio_metadata  # noqa
 
 sync_portfolio_metadata(STORIES)
 
-
 # =========================
 # Session state
 # =========================
@@ -342,6 +341,7 @@ _NAV_SLUG_TO_TAB = {
     "banking": "Banking",
     "cross-industry": "Cross-Industry",
 }
+_TAB_TO_NAV_SLUG = {tab: slug for slug, tab in _NAV_SLUG_TO_TAB.items()}
 if 'nav' in st.query_params:
     nav_slug = st.query_params['nav']
     if nav_slug in _NAV_SLUG_TO_TAB:
@@ -431,68 +431,70 @@ industries, capabilities, clients, domains, roles, tags, personas_all = build_fa
     STORIES
 )
 
-if st.session_state["active_tab"] == "Home":
-    _clear_explore_state()
-    from ui.pages.home import render_home_page
+_page_slug = _TAB_TO_NAV_SLUG.get(st.session_state["active_tab"], "unknown")
+with st.container(key=f"page_{_page_slug}"):
+    if st.session_state["active_tab"] == "Home":
+        _clear_explore_state()
+        from ui.pages.home import render_home_page
 
-    render_home_page(STORIES)
+        render_home_page(STORIES)
 
-# --- BANKING LANDING ---
-elif st.session_state["active_tab"] == "Banking":
-    _clear_explore_state()
-    from ui.pages.banking_landing import render_banking_landing
+    # --- BANKING LANDING ---
+    elif st.session_state["active_tab"] == "Banking":
+        _clear_explore_state()
+        from ui.pages.banking_landing import render_banking_landing
 
-    render_banking_landing(STORIES)
+        render_banking_landing(STORIES)
 
-# --- CROSS-INDUSTRY LANDING ---
-elif st.session_state["active_tab"] == "Cross-Industry":
-    _clear_explore_state()
-    from ui.pages.cross_industry_landing import render_cross_industry_landing
+    # --- CROSS-INDUSTRY LANDING ---
+    elif st.session_state["active_tab"] == "Cross-Industry":
+        _clear_explore_state()
+        from ui.pages.cross_industry_landing import render_cross_industry_landing
 
-    render_cross_industry_landing(STORIES)
+        render_cross_industry_landing(STORIES)
 
-# --- REFACTORED STORIES ---
-elif st.session_state["active_tab"] == "My Work":
-    from ui.pages.explore_stories import render_explore_stories
+    # --- REFACTORED STORIES ---
+    elif st.session_state["active_tab"] == "My Work":
+        from ui.pages.explore_stories import render_explore_stories
 
-    render_explore_stories(
-        STORIES,
-        industries,
-        capabilities,
-        clients,
-        domains,
-        roles,
-        tags,
-        personas_all,
-    )
+        render_explore_stories(
+            STORIES,
+            industries,
+            capabilities,
+            clients,
+            domains,
+            roles,
+            tags,
+            personas_all,
+        )
 
-# --- ASK AGY ---
-elif st.session_state["active_tab"] == "Ask Agy":
-    _clear_explore_state()
-    from ui.pages.ask_mattgpt import render_ask_mattgpt
+    # --- ASK AGY ---
+    elif st.session_state["active_tab"] == "Ask Agy":
+        _clear_explore_state()
+        from ui.pages.ask_mattgpt import render_ask_mattgpt
 
-    render_ask_mattgpt(STORIES)
+        render_ask_mattgpt(STORIES)
 
-# --- ROLE MATCH ---
-elif st.session_state["active_tab"] == "Role Match":
-    _clear_explore_state()
-    from ui.pages.role_match import render_role_match
+    # --- ROLE MATCH ---
+    elif st.session_state["active_tab"] == "Role Match":
+        _clear_explore_state()
+        from ui.pages.role_match import render_role_match
 
-    render_role_match(STORIES)
+        render_role_match(STORIES)
 
-# --- MY PROFILE ---
-elif st.session_state["active_tab"] == "My Profile":
-    _clear_explore_state()
-    from ui.pages.about_matt import render_about_matt
+    # --- MY PROFILE ---
+    elif st.session_state["active_tab"] == "My Profile":
+        _clear_explore_state()
+        from ui.pages.about_matt import render_about_matt
 
-    render_about_matt()
+        render_about_matt()
 
-# --- INVALID TAB FALLBACK ---
-else:
-    st.error(f"❌ Unknown page: {st.session_state['active_tab']}")
-    st.info(
-        "Valid pages: Home, My Work, Ask Agy, My Profile, Banking, Cross-Industry, How I Built"
-    )
-    # Reset to home
-    st.session_state["active_tab"] = "Home"
-    st.rerun()
+    # --- INVALID TAB FALLBACK ---
+    else:
+        st.error(f"❌ Unknown page: {st.session_state['active_tab']}")
+        st.info(
+            "Valid pages: Home, My Work, Ask Agy, My Profile, Banking, Cross-Industry, How I Built"
+        )
+        # Reset to home
+        st.session_state["active_tab"] = "Home"
+        st.rerun()

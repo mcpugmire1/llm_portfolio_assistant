@@ -78,6 +78,26 @@ _CSS = (
             --dark-navy: #2c3e50;
             --dark-navy-hover: #34495e;
         }
+        /* Constrain transitions to paint/composite-only properties. Many rules
+           use `transition: all` (several with !important), which tweens every
+           property (padding, border-width, font-size, radius, scrollbar-color)
+           whenever styles recompute. On a tab swap the stylesheet re-injects and
+           elements reconcile, so `all` animates the whole page for 0.2-0.3s,
+           stretching a 1-frame DOM swap into a visible cross-fade (the
+           double-Agy) and animating layout props (the CLS "Animation" culprit).
+           MATTGPT-018.
+
+           Specificity is deliberate: a bare `*` (0,0,0) loses the cascade to
+           `.main .stButton > button { transition: all !important }` (0,2,1),
+           leaving Streamlit buttons (the scrollbar-color culprit in the trace)
+           still animating. `[class][class][class]` is (0,3,0), outranks them,
+           and still matches every styled element. Do NOT simplify to `*`. */
+        [class][class][class],
+        [class][class][class]::before,
+        [class][class][class]::after {
+            transition-property: background-color, border-color, color, box-shadow, transform, opacity !important;
+        }
+
         /* ========================================
         DARK MODE OVERRIDES
         ======================================== */

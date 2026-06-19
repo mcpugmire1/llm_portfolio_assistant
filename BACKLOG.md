@@ -16,7 +16,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 - **-097** — Career-intent refresh (active recruiter failure earns NOW slot)
 
 *Recently shipped (off NOW list):*
-- **MATTGPT-018** — Resolved June 2026. Page-transition Agy avatar flash. HTML `width`/`height` constraints on avatar `<img>` elements; `mousedown`+`capture:true` JS listener pre-hides before React rerun fires; mobile `link.onclick` inline hide; global `agiAvatarReveal` CSS animation as fallback. (`bda7ba8`, `3659173`)
+- **MATTGPT-018** — Reopened June 18, 2026. Prior fix attempts (`bda7ba8`, `3659173`, `7d5e440`) addressed wrong mechanism. Root cause confirmed as client-side iframe recreation. Detail block updated; fix direction pending gate.
 - **MATTGPT-066** — Resolved June 2026. Role Match sample JD cold-start affordance. Shipped as part of MATTGPT-067 bundle. (`6c39d8c`)
 - **MATTGPT-067** — Resolved June 2026. Role Match result panel + input polish. 30-word gate, Clear button, Sample JD, summary block, legend relabeling. 23/23 BDD, 30/30 unit. (`6c39d8c`, `ac3d3dd`, `a2d002b`)
 - **MATTGPT-113** — Resolved June 2026. Ask Agy mobile chip grid + header height. (`ff175e9`, `b7f88d5`)
@@ -59,7 +59,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-015](#mattgpt-015) | JPM Payments IQ Differentiation | Open | High | Action | Mar 2026 |
 | [MATTGPT-016](#mattgpt-016) | Semantic Router — Wrong-Person Query Detection | Decided Against | High | Issue | Apr 2026 |
 | [MATTGPT-017](#mattgpt-017) | Wire skipped Role Match logging BDD scenarios (Playwright click + mocked Sheets write) | Open | Medium | Action | Apr 28, 2026 |
-| [MATTGPT-018](#mattgpt-018) | Page-Load Flicker | Done | Medium | Issue | Pre-Apr 2026 |
+| [MATTGPT-018](#mattgpt-018) | Page-Load Flicker / blep | Open | Medium | Issue | Pre-Apr 2026 |
 | [MATTGPT-020](#mattgpt-020) | Simplify backend_service.py | Decided Against | Medium | Refactor | Pre-Jan 2026 |
 | [MATTGPT-021](#mattgpt-021) | diversify_results() Pinning Bug | Open | Medium | Issue | Apr 2026 |
 | [MATTGPT-022](#mattgpt-022) | Data Quality Cleanup Journey Story | Open | Medium | Action | Mar 2026 |
@@ -156,6 +156,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-135](#mattgpt-135) | Gate mobile navbar IIFE behind viewport check — runs unconditionally on every rerun | Done | Low | Perf | June 16, 2026 |
 | [MATTGPT-136](#mattgpt-136) | Dark mode design system audit — --accent-purple not overridden in body.dark-theme | Open | Low | Refactor | June 18, 2026 |
 | [MATTGPT-137](#mattgpt-137) | AgGrid bootstrap.min.css render-blocking on Ask Agy → My Work transition | Open | Low | Perf | June 18, 2026 |
+| [MATTGPT-138](#mattgpt-138) | BDD: page teardown invariant + CLS budget guard (MATTGPT-018 regression lock) | Open | Medium | Action | June 19, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -190,6 +191,27 @@ Each detail block uses these fields. Not every field is required for every item.
 ---
 
 ## Detail Blocks
+
+### MATTGPT-018
+**Page-Load Flicker (blep / avatar flash) — My Work**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Issue
+- **Issue:** Visible page flicker on every navigation to My Work. Reported at various times as "avatar flash," "CDN flash," and "blep" — same user-visible phenomenon, never properly root-caused until June 2026.
+- **Root cause (confirmed June 18, 2026):** Full element-tree rebuild on every navigation. Streamlit tears down and reconstructs the entire My Work page on each navigation — grid, cards, filter bar, inline HTML — and the compositor presents 20–44 partial frames during the 200–335ms reconcile window. Server Python runs in 18–23ms; the cost is entirely client-side page-weight. Confirmed by two gates: (1) disabling all 5 `components.html` calls in `explore_stories.py` left partial frames unchanged — iframes are not the lever; (2) stubbing My Work to a single `st.write()` produced 0 partial frames and ~80ms main-thread, while Ask Agy (still full page) held at 18–38 partial frames in the same recording. Same app, same framework, same navbar — only page weight differed.
+- **Prior fix attempts (addressed wrong mechanism):** mousedown pre-hide + HTML dimension constraints (`bda7ba8`), mobile nav onclick inline hide (`3659173`), maskNav overlay removal (`7d5e440`). Each addressed a surface symptom; none reached the rebuild cost.
+- **What does NOT fix this:** iframe consolidation (iframes are not the lever — gate 1 proved this); `@st.fragment` (fragments only reduce in-place interaction rerenders, not page-to-page navigation rebuilds).
+- **Fix direction:** Page-weight reduction on My Work. Less DOM to build = shorter reconcile = fewer partial frames. Levers in priority order:
+  - Reduce cards rendered per page (smaller `page_size` default cuts DOM nodes proportionally)
+  - Lazy or deferred grid render (AgGrid serializes 113 rows on every navigation — deferring or paginating server-side reduces first-paint cost)
+  - Reduce inline HTML weight in cards and filter bar
+  - Incremental add-back gate to isolate the biggest contributor: add grid back to stub first and re-record; if partial frames snap back, grid is the dominant weight and deferring it alone buys most of the win
+- **Listener leak (separate bug, same file):** Lines 521 and 1501 in `explore_stories.py` lack the `dataset.wired = 'true'` idempotency guard, stacking duplicate listeners on every rerun. Fix independently — does not affect the blep.
+- **Related pages (separate tickets TBD):** Ask Agy landing and about_matt show the same blep pattern in the trace — same root cause, not yet filed.
+- **Logged:** Pre-Apr 2026 (root cause confirmed June 18, 2026)
+
+---
 
 ### MATTGPT-012
 **Role Match — Phase 4: Private View**
@@ -2851,6 +2873,33 @@ For each client-specific probe query, assert `client_name in [s.get("Client") fo
 **Fix approach:** Visual audit in dark mode across all pages before adding the override. Document which of the 41 usages fall into each category. Override `--accent-purple` only if a majority of usages are category 1, or introduce a new `--accent-purple-accessible` variable for text contexts.
 
 **Acceptance criterion:** Dark mode visual review complete, override decision documented, no contrast failures on text usages of --accent-purple in dark mode.
+
+---
+
+### MATTGPT-138
+**BDD: page teardown invariant + CLS budget guard (MATTGPT-018 regression lock)**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Logged:** June 19, 2026
+
+**Context:** The MATTGPT-018 blep root cause was stale Ask Agy DOM bleeding through onto My Work during navigation — two Agy avatars on screen at once because Streamlit reconciled the new page tree onto the old one instead of tearing it down. Fixed by wrapping each page's render in a tab-keyed `st.container` (`_page_slug` key). The `transition: all` animation sweep was a concurrent contributor, fixed by a `transition-property` constraint in `global_styles.py`. Neither fix has a regression guard. This ticket adds two: (1) a deterministic DOM teardown invariant, and (2) a calibrated CLS budget.
+
+**Teardown invariant (implement first — deterministic, no thresholds):**
+Navigate Ask Agy → My Work, wait for settle, assert `.st-key-intro_section` count is 0 and no Ask Agy DOM remains. Assert reverse direction. Catches "stale page survived the swap" — the regression that would reappear if the keyed container is stripped. Playwright, real Chromium. Two scenarios in `tests/bdd/features/page_teardown.feature`, steps in `tests/bdd/steps/test_page_teardown.py`. See Chrome Claude spec (June 19, 2026 session) for full scenario and step text.
+
+**CLS budget guard (implement second — calibrated, not a placeholder):**
+Cold-load CLS ceiling: 0.25 (observed ~0.24 in DevTools — locks "no worse than today," ratchet down toward 0.10 as CLS is fixed). Transition shift: MEASURE FIRST on post-fix state, then set ceiling just above that reading. Do NOT use the 1.00 placeholder from the spec as a real budget. Install a `PerformanceObserver` for `layout-shift` entries. Two distinct metrics: `read_cls` (filtered, `!hadRecentInput` — matches official CLS) and `read_transition_shift` (all entries including post-click — catches the avatar shift that CLS excludes because it happens within 500ms of a tab click). Helper in `tests/bdd/steps/vitals_helpers.py`, scenarios in `tests/bdd/features/web_vitals.feature`, steps in `tests/bdd/steps/test_web_vitals.py`.
+
+**Honest catches:**
+- Teardown tests inspect the settled DOM only — they cannot see the transient flash. The eye-on-the-transition is still the only confirmation the flash is gone.
+- `TRANSITION_SHIFT_MAX = 1.00` in the spec is a measurement placeholder, not a real budget. Run the test pre-fix and post-fix, read the printed value, then set the ceiling just above the post-fix number.
+- INP is out of scope: currently 0ms, lab INP is noisy, defer until a regression appears.
+
+**Acceptance criteria:**
+- `pytest tests/bdd -k "page_teardown"` — 2/2 passing, deterministic
+- `pytest tests/bdd -k "web_vitals"` — 2/2 passing with `TRANSITION_SHIFT_MAX` set to a measured (not placeholder) value
 
 ---
 
