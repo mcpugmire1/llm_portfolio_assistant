@@ -2446,7 +2446,7 @@ User Query
 │ - Entity filter ($or across 6 fields) if hard   │
 │ - Title: NO filter (semantic search ranks it)   │
 │ - UI filters (industry, domain, role)           │
-│ - Returns top 7 candidates                      │
+│ - Returns top 10 candidates (SEARCH_TOP_K)       │
 └─────────────────────────────────────────────────┘
     ↓
 ┌─────────────────────────────────────────────────┐
@@ -2458,9 +2458,9 @@ User Query
     ↓
 ┌─────────────────────────────────────────────────┐
 │ Layer 6: Post-Retrieval Processing              │
-│ STANDARD: entity_pin → diversify_results() → 7 │
-│ NARRATIVE: sort by score (skip diversity) → 7   │
-│ SYNTHESIS: theme-filter → named-clients-first   │
+│ STANDARD: entity_pin → diversify_results() → 5 │
+│ NARRATIVE: sort by score (skip diversity) → 5   │
+│ SYNTHESIS: theme-filter → named-clients-first → 7 │
 └─────────────────────────────────────────────────┘
     ↓
 ┌─────────────────────────────────────────────────┐
@@ -2559,8 +2559,8 @@ Standard/Behavioral modes only:
 
 **4. Final Selection**
 ```
-Standard: top 7 after diversity
-Narrative: top 7 by Pinecone score (no reorder)
+Standard: top 5 after diversity
+Narrative: top 5 by Pinecone score (no reorder)
 Synthesis: up to 9 (3 per theme × 3 themes)
 ```
 
