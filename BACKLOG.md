@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: 4a152cb -->
+<!-- last-backlog-sync: e9b8b13 -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -151,10 +151,8 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-129](#mattgpt-129) | Content elaboration per era — expand 5 under-documented operational stories | Open | High | Action | June 14, 2026 |
 | [MATTGPT-130](#mattgpt-130) | "practitioners" canonical everywhere — UI, eval golden set, corpus re-embed in lockstep | Open | Medium | Action | June 14, 2026 |
 | [MATTGPT-131](#mattgpt-131) | BDD selector bug — `test_industry_and_capability_labels_visible_inline_on_mobile` fails in marathon run | Open | Low | Bug | June 15, 2026 |
-| [MATTGPT-132](#mattgpt-132) | AG Grid Client column badge rendering — cellRenderer approach fails in st_aggrid React stack | Done | Low | Bug | June 15, 2026 |
 | [MATTGPT-133](#mattgpt-133) | BDD skip — `test_ask_agy_works_from_table_view` skips when AgGrid iframe row interaction doesn't open detail panel | Open | Low | Bug | June 16, 2026 |
 | [MATTGPT-134](#mattgpt-134) | BDD skip — `test_deeplink_respects_view_mode` skips because deeplink navigation does not preserve pre-set view mode | Open | Low | Bug | June 16, 2026 |
-| [MATTGPT-135](#mattgpt-135) | Gate mobile navbar IIFE behind viewport check — runs unconditionally on every rerun | Done | Low | Perf | June 16, 2026 |
 | [MATTGPT-136](#mattgpt-136) | Dark mode design system audit — --accent-purple not overridden in body.dark-theme | Open | Low | Refactor | June 18, 2026 |
 | [MATTGPT-137](#mattgpt-137) | AgGrid bootstrap.min.css render-blocking on Ask Agy → My Work transition | Open | Low | Perf | June 18, 2026 |
 | [MATTGPT-138](#mattgpt-138) | BDD: page teardown invariant + CLS budget guard (MATTGPT-018 regression lock) | Decided Against | Medium | Action | June 19, 2026 |
@@ -2764,23 +2762,6 @@ For each client-specific probe query, assert `client_name in [s.get("Client") fo
 
 ---
 
-### MATTGPT-135
-**Gate mobile navbar IIFE behind viewport check — runs unconditionally on every rerun**
-
-- **Status:** Done
-- **Priority:** Low
-- **Type:** Perf
-- **Logged:** June 16, 2026
-- **Resolved:** June 17, 2026 — `1bbe8e6` (preload revert), MATTGPT-135 fix committed in earlier session
-
-**Context:** The mobile navbar IIFE in `ui/components/navbar.py` ran on every Streamlit rerun regardless of viewport width. It injected the mobile header, wired up the hamburger menu, and ran DOM queries unconditionally. On desktop viewports this was wasted work and caused a double-avatar flash during page transitions.
-
-**Fix:** Added `if (window.parent.innerWidth > 767) return;` at the top of the IIFE. Key: must use `window.parent.innerWidth` not `window.innerWidth` because the IIFE runs inside a srcdoc iframe whose own viewport width differs from the parent page. Breakpoint is > 767px (not 768px as originally written in the ticket).
-
-**BDD:** 2 scenarios in `tests/bdd/features/navbar_mobile_viewport_gate.feature` — desktop no-inject + mobile inject. Both passing.
-
----
-
 ### MATTGPT-134
 **BDD skip — `test_deeplink_respects_view_mode` — deeplink navigation does not preserve pre-set view mode**
 
@@ -2806,21 +2787,6 @@ For each client-specific probe query, assert `client_name in [s.get("Client") fo
 **Context:** Scenario skips at `pytest.skip("Ask Agy button not found")` in `tests/bdd/steps/test_explore_stories.py` (line 546). The scenario follows: `Given the user is in Table view` → `When the user clicks on a story row`. After the row click, the step looks for `#btn-ask-story` inside the story detail panel, but the element is not reliably found. The AgGrid iframe interaction sequence (frame_locator → `.ag-row` click → detail panel open → Ask Agy button visible) is fragile in headless Playwright. The equivalent Cards-view scenario (`test_ask_agy_works_from_cards_view`) passes reliably.
 
 **Acceptance criterion:** `test_ask_agy_works_from_table_view` passes reliably in isolation and as part of the full BDD suite, with no `pytest.skip` guard.
-
----
-
-### MATTGPT-132
-**AG Grid Client column badge rendering — cellRenderer fails in st_aggrid React stack**
-
-- **Status:** Done
-- **Priority:** Low
-- **Type:** Bug
-- **Logged:** June 15, 2026
-- **Resolved:** June 18, 2026
-
-**Fix:** Class-based `ClientBadgeRenderer` using AG Grid 29's `init(params)` / `getGui()` contract. `getGui()` returns the DOM element directly, bypassing React's reconciler. Also added `enable_enterprise_modules=False` (drops full Enterprise bundle — eliminates license warning) and Python-side dark mode detection via `st.get_option("theme.base")` to pass hardcoded color values into `custom_css` at render time (CSS variables don't cross the AgGrid iframe boundary).
-
-**Dark mode approach:** `_is_dark = st.get_option("theme.base") == "dark"` resolves at render time. Brief lag after user toggles Streamlit theme toggle is expected (only updates on next rerun). Accepted as Streamlit architectural limitation.
 
 ---
 
