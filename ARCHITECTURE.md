@@ -364,7 +364,7 @@ Three distinct patterns exist in the codebase. Read this before building any new
 
 **Use when:** The clickable element can visually be a Streamlit button (styled away via CSS).
 
-**Canonical example:** `ui/pages/ask_mattgpt/conversation_helpers.py` — Related Projects source chips (~line 626). Button is styled as a chip via `[class*="st-key-{stable_key}"] button` CSS. Click is handled by the standard Streamlit WebSocket → Python rerun cycle. No JS, no HTML bridge.
+**Canonical example:** `ui/pages/ask_mattgpt/conversation_helpers.py` — Related Projects source chips. Button is styled as a chip via `[class*="st-key-{stable_key}"] button` CSS. Click is handled by the standard Streamlit WebSocket → Python rerun cycle. No JS, no HTML bridge.
 
 ```python
 if st.button(label, key=f"chip_{idx}"):
@@ -830,7 +830,7 @@ Structured logs added to diagnose "I can't help with that" issues in production.
 
 #### Multi-Field Entity Search
 - **Job:** Search across ALL entity fields when entity detected, not just the primary field
-- **Lives in:** `services/pinecone_service.py:189-216`
+- **Lives in:** `services/pinecone_service.py`
 - **Implementation:** Uses Pinecone `$or` operator to search across 6 fields simultaneously
 - **Note:** Entity DETECTION checks 4 fields (Client, Employer, Division, Title), but Title uses soft filtering. Pinecone SEARCH spans 6 fields for hard-filtered entities.
 - **Fields searched:** `client`, `employer`, `division`, `project`, `place`, `title`
@@ -855,7 +855,7 @@ Structured logs added to diagnose "I can't help with that" issues in production.
 Two related constants prevent overly generic values from triggering entity filters or appearing in UI:
 
 **`EXCLUDED_ENTITIES`** — Values too generic to filter on in Pinecone queries.
-**Lives in:** `backend_service.py:302-312`
+**Lives in:** `backend_service.py`
 
 | Value | Reason |
 |-------|--------|
@@ -953,7 +953,7 @@ Per the CLAUDE.md "No Hardcoded Enums for Data-Derived Values" rule, the prior s
 
 **MATT_DNA Ground Truth** (dynamically generated from JSONL — January 2026):
 
-The `MATT_DNA` grounding prompt is now generated dynamically via `generate_dynamic_dna()` in `backend_service.py:160-273`. Client names are derived from the JSONL story data, ensuring the prompt never drifts from the source of truth.
+The `MATT_DNA` grounding prompt is now generated dynamically via `generate_dynamic_dna()` in `backend_service.py`. Client names are derived from the JSONL story data, ensuring the prompt never drifts from the source of truth.
 
 **Dynamic Elements (derived from JSONL):**
 - **Banking clients:** Derived from stories where `Industry = "Financial Services / Banking"`
@@ -1200,7 +1200,7 @@ User Interaction
 └──────────────────────────────────────────────────────────────┘
 ```
 
-**Code Location:** `explore_stories.py:1805-1900`
+**Code Location:** `explore_stories.py`
 
 **Cache Keys:**
 ```python
@@ -1959,7 +1959,7 @@ PINECONE_NAMESPACE = "default"
 ```
 
 **External Monitoring:**
-- **UptimeRobot** — HTTP/S monitor configured at https://askmattgpt.streamlit.app. Pings the app every ~5 minutes to prevent Streamlit Cloud sleep. Sends User-Agent containing "UptimeRobot". Filtered from BOTH `page_load` AND `query` event logging via `MONITORING_BOT_SIGNATURES` in `config/constants.py` (checked at `app.py:104` for page_load and `services/query_logger.py::log_query()` via `is_bot()` for queries — extended May 13, 2026). The same signature list also catches `HeadlessChrome` (Chrome agent regression runs) and the legacy `Chrome/103.0.0.0` probe pattern. Bot traffic produces zero rows in the Google Sheet log, keeping conversion/bounce analysis based on real visitors only.
+- **UptimeRobot** — HTTP/S monitor configured at https://askmattgpt.streamlit.app. Pings the app every ~5 minutes to prevent Streamlit Cloud sleep. Sends User-Agent containing "UptimeRobot". Filtered from BOTH `page_load` AND `query` event logging via `MONITORING_BOT_SIGNATURES` in `config/constants.py` (checked in `app.py` for page_load and `services/query_logger.py` via `is_bot()` for queries — extended May 13, 2026). The same signature list also catches `HeadlessChrome` (Chrome agent regression runs) and the legacy `Chrome/103.0.0.0` probe pattern. Bot traffic produces zero rows in the Google Sheet log, keeping conversion/bounce analysis based on real visitors only.
 
 **Python Version:** 3.11+
 
@@ -2017,7 +2017,7 @@ The `MATT_DNA` grounding prompt—injected into every LLM call—is now rendered
 | Telecom clients | Stories where `Industry = "Telecommunications"` | AT&T |
 | Transport clients | Stories where `Industry = "Transportation & Logistics"` | Norfolk Southern |
 
-**Implementation:** `backend_service.py:generate_dynamic_dna()` (lines 160-273)
+**Implementation:** `backend_service.py` — `generate_dynamic_dna()`
 
 **Why:** Previously hardcoded "JPMorgan" drifted from JSONL canonical name "JP Morgan Chase". Dynamic derivation ensures the LLM never hallucinates client names that don't exist in the data.
 
@@ -2034,7 +2034,7 @@ When a user asks about an entity (e.g., "Accenture work"), the system now search
 | `place` | lowercase | `"accenture"` |
 | `title` | PascalCase | `"Driving Cloud-Native Innovation..."` |
 
-**Implementation:** `pinecone_service.py:189-216`
+**Implementation:** `pinecone_service.py`
 
 **Note (Jan 29, 2026):** Title entities use **soft filtering** — they're detected but don't create a Pinecone metadata filter. This ensures Related Projects populate naturally via semantic search.
 
@@ -2232,7 +2232,7 @@ When `render_thinking_indicator()` fires on My Work (Cards view) after "Ask Agy
 About This", Streamlit partially replaces the DOM during its rerun pause. Inline
 `<style>` blocks injected inside the page's render functions are in the
 replacement window; `global_styles.py` is not, because `apply_global_styles()`
-runs at `app.py:43` before any render path executes.
+runs at the top of `app.py` before any render path executes.
 
 **Namespace convention (`es-*`):** When page-scoped CSS is relocated to
 `global_styles.py` it gains app-wide scope, so collision-prone class names must
@@ -2285,7 +2285,7 @@ initial load, post-CSS-parse, and post-Streamlit-rerun iframe recreation.
 
 `global_styles.py` contains a mobile CSS rule that forces all `stHorizontalBlock` elements to stack vertically on screens ≤767px. Any horizontal block that must remain horizontal on mobile requires a `:not(:has(...))` exclusion added to **both** the `stHorizontalBlock` rule and the `> div[data-testid="stColumn"]` child rule (same exclusion chain on both).
 
-**Current exclusions (5 total, ~line 427):**
+**Current exclusions (5 total):**
 ```css
 div[data-testid="stHorizontalBlock"]
   :not(:has([class*="st-key-topnav_"]))           /* navbar */
