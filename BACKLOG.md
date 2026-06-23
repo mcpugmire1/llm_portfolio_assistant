@@ -1,5 +1,7 @@
 # MattGPT Backlog
 <!-- last-backlog-sync: 4a152cb -->
+<!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
+<!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
 Work state for the MattGPT project. The matrix below is the scannable view. Detail blocks for each item follow, linked by ID. Completed items live in `CHANGELOG.md`. Architectural decisions live in `docs/ADR.md`. Current system state lives in `ARCHITECTURE.md`.
 
@@ -160,6 +162,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-140](#mattgpt-140) | Fix hardcoded model names in backend_service.py and jd_assessor.py — use constants.py | Open | Low | Refactor | June 20, 2026 |
 | [MATTGPT-141](#mattgpt-141) | Remove dead ENTITY_GATE_THRESHOLD constant from config/constants.py | Open | Low | Refactor | June 22, 2026 |
 | [MATTGPT-142](#mattgpt-142) | BDD sequential rejection test: wait_for_banner is not count-aware, assertion runs before second rejection renders | Open | Low | Bug | June 23, 2026 |
+| [MATTGPT-143](#mattgpt-143) | BDD app_url fixture hardcodes port 8501 with no env-var override | Parked | Low | Bug | June 23, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -2992,6 +2995,17 @@ Cold-load CLS ceiling: 0.25 (observed ~0.24 in DevTools — locks "no worse than
 **Acceptance criterion:** Either bootstrap.min.css shows as `(from memory cache)` or `(disk cache)` on the Ask Agy → My Work transition DevTools Network tab, or ticket is closed as Decided Against with documented rationale.
 
 ---
+
+### MATTGPT-143
+**BDD: app_url fixture hardcodes port 8501 with no override**
+
+- **Status:** Parked
+- **Priority:** Low
+- **Type:** Bug
+- **Issue:** `tests/bdd/steps/conftest.py` line 78 returns `"http://localhost:8501"` with no mechanism to override. When two concurrent Streamlit sessions are running (e.g., during parallel feature development), BDD tests silently target the wrong app — tests may pass or fail against stale or unrelated state with no obvious error.
+- **Fix:** Replace the hardcoded return with `os.environ.get("STREAMLIT_TEST_URL", "http://localhost:8501")` in `conftest.py`. All test files inherit automatically since they consume `app_url` from the shared fixture.
+- **Why parked:** Low-frequency scenario; not blocking current work. Revisit when concurrent Streamlit sessions become a regular workflow.
+- **Logged:** June 23, 2026
 
 ### MATTGPT-142
 **BDD: sequential rejection test wait_for_banner not count-aware**
