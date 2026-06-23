@@ -194,24 +194,66 @@ def render_landing_page(stories: list[dict]):
                         )
                         st.rerun()
             else:
-                c1, c2 = st.columns(2, gap="small")
+                # MATTGPT-139 PoC: static HTML chips + hidden st.button receivers
+                # + JS bridge (Home category_cards pattern). Swaps 6 visible
+                # st.button widgets in st.columns for static HTML, to measure
+                # whether removing live baseweb widgets from the visible tree
+                # shrinks the nav reconcile window (baseline ~667ms / ~105ms).
+                chips_html = (
+                    '<style>'
+                    '.suggested-chips-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;}'
+                    '.suggested-chip{background:var(--bg-surface);border:1px solid var(--border-color);'
+                    'border-radius:8px;padding:12px 16px;font-size:14px;font-weight:500;color:var(--text-primary);'
+                    'text-align:left;cursor:pointer;line-height:1.4;font-family:inherit;width:100%;'
+                    'transition:border-color .15s ease,transform .15s ease;}'
+                    '.suggested-chip:hover{border-color:var(--text-secondary);transform:translateY(-1px);}'
+                    '[class*="st-key-suggested_"] button{position:absolute!important;left:-9999px!important;'
+                    'height:0!important;padding:0!important;margin:0!important;border:none!important;}'
+                    '</style>'
+                    '<div class="suggested-chips-grid">'
+                )
                 for i, (icon, _short_label, q) in enumerate(qs):
-                    with c1 if i % 2 == 0 else c2:
-                        if st.button(
-                            f"{icon}  {q}",
-                            key=f"suggested_{i}",
-                            type="secondary",
-                            use_container_width=True,
-                            disabled=disabled,
-                        ):
-                            st.session_state["ask_transcript"] = []
-                            st.session_state["processing_suggestion"] = True
-                            st.session_state["pending_query"] = q
-                            st.session_state["ask_input_value"] = q
-                            st.session_state["__ask_force_answer__"] = (
-                                True  # 🔥 BYPASS NONSENSE FILTER
-                            )
-                            st.rerun()
+                    chips_html += f'<button class="suggested-chip" id="chip-suggested-{i}">{icon}&nbsp;&nbsp;{q}</button>'
+                chips_html += '</div>'
+                st.markdown(chips_html, unsafe_allow_html=True)
+
+                # Hidden receivers: bare buttons, no columns, identical click logic.
+                for i, (_icon, _short_label, q) in enumerate(qs):
+                    if st.button("", key=f"suggested_{i}", disabled=disabled):
+                        st.session_state["ask_transcript"] = []
+                        st.session_state["processing_suggestion"] = True
+                        st.session_state["pending_query"] = q
+                        st.session_state["ask_input_value"] = q
+                        st.session_state["__ask_force_answer__"] = True
+                        st.rerun()
+
+                components.html(
+                    """
+<script>
+(function() {
+    function wireChips() {
+        var parentDoc = window.parent.document;
+        for (var i = 0; i < 6; i++) {
+            var chip = parentDoc.getElementById('chip-suggested-' + i);
+            if (chip) {
+                chip.onclick = (function(idx) {
+                    return function() {
+                        var btn = parentDoc.querySelector('[class*="st-key-suggested_' + idx + '"] button');
+                        if (btn) btn.click();
+                    };
+                })(i);
+            }
+        }
+    }
+    setTimeout(wireChips, 100);
+    setTimeout(wireChips, 300);
+    setTimeout(wireChips, 600);
+    setTimeout(wireChips, 1000);
+})();
+</script>
+""",
+                    height=0,
+                )
 
     # === THINKING INDICATOR ===
     loading_placeholder = st.empty()
