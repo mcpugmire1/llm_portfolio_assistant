@@ -7,16 +7,15 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 ## Value Prioritized Roadmap (updated 2026-06-14)
 
-**→ Merge `feature/ui-redesign` → `main`** (production deploy — release gate cleared)
-
-**NOW** (post-merge):
+**NOW** 
+- **MATTGPT-018** — Reopened June 18, 2026. Prior fix attempts (`bda7ba8`, `3659173`, `7d5e440`) addressed wrong mechanism. Root cause confirmed as client-side iframe recreation. Detail block updated; fix direction pending gate.
+- **MATTGPT-139** — Convert Ask Agy landing chips to static HTML + JS bridge (blep fix; template is `category_cards.py`; baseline 667ms partial-frame window, 105ms reconcile)
 - **-077 mitigation** — Query-side mitigation: strip "Matt" from embedded queries on technical-noun shapes (hours, not days; full hybrid retrieval lives in NEXT)
 - **-094 probes** — CIC over-concentration + operational under-surfacing probes; parallel-runnable, read-only; informs NEXT content work
 - **-088** — Role Match scorer alignment (loose dependency on -077 mitigation: do cleaner if you can, not wait until you can)
 - **-097** — Career-intent refresh (active recruiter failure earns NOW slot)
 
 *Recently shipped (off NOW list):*
-- **MATTGPT-018** — Reopened June 18, 2026. Prior fix attempts (`bda7ba8`, `3659173`, `7d5e440`) addressed wrong mechanism. Root cause confirmed as client-side iframe recreation. Detail block updated; fix direction pending gate.
 - **MATTGPT-066** — Resolved June 2026. Role Match sample JD cold-start affordance. Shipped as part of MATTGPT-067 bundle. (`6c39d8c`)
 - **MATTGPT-067** — Resolved June 2026. Role Match result panel + input polish. 30-word gate, Clear button, Sample JD, summary block, legend relabeling. 23/23 BDD, 30/30 unit. (`6c39d8c`, `ac3d3dd`, `a2d002b`)
 - **MATTGPT-113** — Resolved June 2026. Ask Agy mobile chip grid + header height. (`ff175e9`, `b7f88d5`)
@@ -157,6 +156,10 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-136](#mattgpt-136) | Dark mode design system audit — --accent-purple not overridden in body.dark-theme | Open | Low | Refactor | June 18, 2026 |
 | [MATTGPT-137](#mattgpt-137) | AgGrid bootstrap.min.css render-blocking on Ask Agy → My Work transition | Open | Low | Perf | June 18, 2026 |
 | [MATTGPT-138](#mattgpt-138) | BDD: page teardown invariant + CLS budget guard (MATTGPT-018 regression lock) | Open | Medium | Action | June 19, 2026 |
+| [MATTGPT-139](#mattgpt-139) | Perf: convert Ask Agy landing chips to static HTML + JS bridge (MATTGPT-018 blep fix) | Open | High | Perf | June 19, 2026 |
+| [MATTGPT-140](#mattgpt-140) | Fix hardcoded model names in backend_service.py and jd_assessor.py — use constants.py | Open | Low | Refactor | June 20, 2026 |
+| [MATTGPT-141](#mattgpt-141) | Remove dead ENTITY_GATE_THRESHOLD constant from config/constants.py | Open | Low | Refactor | June 22, 2026 |
+| [MATTGPT-142](#mattgpt-142) | BDD sequential rejection test: wait_for_banner is not count-aware, assertion runs before second rejection renders | Open | Low | Bug | June 23, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -198,18 +201,15 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Status:** Open
 - **Priority:** Medium
 - **Type:** Issue
-- **Issue:** Visible page flicker on every navigation to My Work. Reported at various times as "avatar flash," "CDN flash," and "blep" — same user-visible phenomenon, never properly root-caused until June 2026.
-- **Root cause (confirmed June 18, 2026):** Full element-tree rebuild on every navigation. Streamlit tears down and reconstructs the entire My Work page on each navigation — grid, cards, filter bar, inline HTML — and the compositor presents 20–44 partial frames during the 200–335ms reconcile window. Server Python runs in 18–23ms; the cost is entirely client-side page-weight. Confirmed by two gates: (1) disabling all 5 `components.html` calls in `explore_stories.py` left partial frames unchanged — iframes are not the lever; (2) stubbing My Work to a single `st.write()` produced 0 partial frames and ~80ms main-thread, while Ask Agy (still full page) held at 18–38 partial frames in the same recording. Same app, same framework, same navbar — only page weight differed.
-- **Prior fix attempts (addressed wrong mechanism):** mousedown pre-hide + HTML dimension constraints (`bda7ba8`), mobile nav onclick inline hide (`3659173`), maskNav overlay removal (`7d5e440`). Each addressed a surface symptom; none reached the rebuild cost.
-- **What does NOT fix this:** iframe consolidation (iframes are not the lever — gate 1 proved this); `@st.fragment` (fragments only reduce in-place interaction rerenders, not page-to-page navigation rebuilds).
-- **Fix direction:** Page-weight reduction on My Work. Less DOM to build = shorter reconcile = fewer partial frames. Levers in priority order:
-  - Reduce cards rendered per page (smaller `page_size` default cuts DOM nodes proportionally)
-  - Lazy or deferred grid render (AgGrid serializes 113 rows on every navigation — deferring or paginating server-side reduces first-paint cost)
-  - Reduce inline HTML weight in cards and filter bar
-  - Incremental add-back gate to isolate the biggest contributor: add grid back to stub first and re-record; if partial frames snap back, grid is the dominant weight and deferring it alone buys most of the win
-- **Listener leak (separate bug, same file):** Lines 521 and 1501 in `explore_stories.py` lack the `dataset.wired = 'true'` idempotency guard, stacking duplicate listeners on every rerun. Fix independently — does not affect the blep.
-- **Related pages (separate tickets TBD):** Ask Agy landing and about_matt show the same blep pattern in the trace — same root cause, not yet filed.
-- **Logged:** Pre-Apr 2026 (root cause confirmed June 18, 2026)
+- **Issue:** Visible page flicker on every navigation to My Work. Reported at various times as "avatar flash," "CDN flash," and "blep" — same user-visible phenomenon, diagnosed across eight probes in June 2026.
+- **Root cause (confirmed June 22, 2026, eight probes):** framework-bounded full-page repaint on navigation. Teardown is sub-millisecond (MutationObserver: all Ask Agy elements gone within 1ms of swap). The cost is My Work mounting: filter-bar selectboxes resolve from skeletons ~93ms, AgGrid iframe mounts ~268ms, ~270ms partial-frame window. No single widget owns the full cost.
+- **Probes run:** (1) view/library swap — no change; (2) iframe/components.html removal — no change; (3) library deferral — no change; (4) Ask Agy chips → static HTML — 40% Ask Agy span reduction, kept; (5) grid-out (forced non-AgGrid path) — window collapsed ~270ms toward ~100ms, AgGrid owns ~170ms of mount cost (includes bootstrap.min.css revalidation, production-only, partially addressable via MATTGPT-137); (6) text_input removal — 17ms delta, noise; (7) constant container key (key="page_root") — ran, no change, teardown already sub-ms, remount-vs-reconcile not the lever; (8) full stub — 0 partial frames, confirms framework origin.
+- **Confirmed partial win (banked):** Ask Agy chip conversion, st.button → static HTML + JS bridge (landing_view.py desktop branch), 40% span reduction. Productionize under MATTGPT-139 (mobile path, disabled state, BDD tests).
+- **What does NOT fix this:** iframe consolidation; `@st.fragment`; Ask Agy lightening alone (wrong end of swap); filter-bar selectbox conversion (dead end — AgGrid floor at ~268ms remains); constant container key (probe 7, closed null).
+- **Prior fix attempts (wrong mechanism):** `bda7ba8`, `3659173`, `7d5e440`.
+- **Listener leak (separate bug, same file):** Lines ~521 and ~1501 in `explore_stories.py` lack the `dataset.wired='true'` guard. Fix independently; does not affect the blep.
+- **Closeable path:** not closeable without leaving Streamlit's full-page-repaint model or replacing AgGrid. Bank the chip win; stop probing. Optional: MATTGPT-137 (production CSS preload) shortens, does not end.
+- **Logged:** Pre-Apr 2026 (root cause confirmed June 22, 2026)
 
 ---
 
@@ -2876,6 +2876,64 @@ For each client-specific probe query, assert `client_name in [s.get("Client") fo
 
 ---
 
+### MATTGPT-140
+**Fix hardcoded model names in backend_service.py and jd_assessor.py**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Refactor
+- **Logged:** June 20, 2026
+
+`constants.py` defines `DEFAULT_CHAT_MODEL = "gpt-4o"` and `DEFAULT_CLASSIFICATION_MODEL = "gpt-4o-mini"` with a usage comment pointing to `get_conf()`. Neither is imported in production callers:
+- `backend_service.py` line 952: `model="gpt-4o"` hardcoded
+- `backend_service.py` line 681: `model="gpt-4o-mini"` hardcoded
+- `jd_assessor.py` line 185: `ASSESSMENT_MODEL = "gpt-4o"` hardcoded locally
+
+`pinecone_service.py` and `semantic_router.py` correctly import `DEFAULT_EMBEDDING_MODEL`. Fix: import `DEFAULT_CHAT_MODEL` in `backend_service.py` and `jd_assessor.py` and replace the string literals. Also remove or repurpose `DEFAULT_CLASSIFICATION_MODEL` — the `classify_query_intent` LLM call it was built for was removed Jan 2026.
+
+**Acceptance criteria:** No model name string literal in any production file outside `config/constants.py`.
+
+---
+
+### MATTGPT-141
+**Remove dead ENTITY_GATE_THRESHOLD constant from config/constants.py**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Refactor
+- **Logged:** June 22, 2026
+
+`ENTITY_GATE_THRESHOLD = 0.30` at line 62 of `config/constants.py` is never imported
+or referenced outside that file. The Entity Gate was removed Jan 2026; this constant
+is a leftover with a misleading history comment ("Lowered from 0.55 to allow narrative
+queries"). Fix: delete the constant and its comment.
+
+**Acceptance criteria:** `ENTITY_GATE_THRESHOLD` does not appear in any file in the repo.
+
+---
+
+### MATTGPT-139
+**Perf: convert Ask Agy landing chips to static HTML + JS bridge (MATTGPT-018 blep fix)**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Perf
+- **Logged:** June 19, 2026
+
+**Root cause (confirmed June 19, 2026):** The blep discriminator is widget type, not page weight or iframe count. Pages whose visible surface is static HTML (Home) swap cleanly. Pages with live Streamlit widgets in the visible tree (Ask Agy landing: 6 `st.button` chips + `st.text_input`; My Work: `st.selectbox` filter bar + AgGrid) linger during navigation because baseweb React components mount, reconcile, and tear down slowly. The entire page subtree is held open by the heaviest widget in it.
+
+**Proof:** Home renders its "Try asking" chips as static HTML `<button class="chip">` elements inside `st.markdown`, wired to hidden `st.button` receivers via a JS bridge. The Ask Agy landing renders the same concept as 6 real `st.button(key="suggested_i")` widgets inside `st.columns`. Same content, opposite implementation. Home's chips don't blep. The landing's do.
+
+**The fix:** Convert the 6 suggestion chips from `st.button` to static HTML inside the intro markdown, wired to hidden `st.buttons` via the JS bridge. The template to copy is `category_cards.py`: `chip-ask-N` buttons, `card_btn_ask_chip_N` hidden receivers, `on_chip_click`, and the `wireAskAgyChips` multi-fire bridge.
+
+**Known edge:** `st.text_input` must stay a real widget (can't bridge a text input cleanly). Open question: does removing the 6 chip widgets alone kill the blep, or does the lone input still hold the teardown window open? Answer by converting chips first and eyeballing the swap.
+
+**My Work note:** Selectboxes could move to the HTML-bridge pattern; AgGrid cannot (it's an iframe component). My Work's blep may not fully clear the way Home does even after full chip conversion. Separate investigation.
+
+**Acceptance criteria:** Navigate Ask Agy → My Work, no visible Ask Agy content during the swap. Before/after trace numbers: ~667ms partial-frame window and ~105ms React reconcile are the pre-fix baseline (June 19 trace).
+
+---
+
 ### MATTGPT-138
 **BDD: page teardown invariant + CLS budget guard (MATTGPT-018 regression lock)**
 
@@ -2920,3 +2978,18 @@ Cold-load CLS ceiling: 0.25 (observed ~0.24 in DevTools — locks "no worse than
 **Potential approaches:** (1) `components.html` injection of a `<link rel="preload">` tag into `window.parent.document.head` — bypasses the st.markdown parser, injects directly into parent document head. (2) Accept as Streamlit Cloud infrastructure limitation and close. (3) Watch for Streamlit Cloud cache header improvements.
 
 **Acceptance criterion:** Either bootstrap.min.css shows as `(from memory cache)` or `(disk cache)` on the Ask Agy → My Work transition DevTools Network tab, or ticket is closed as Decided Against with documented rationale.
+
+---
+
+### MATTGPT-142
+**BDD: sequential rejection test wait_for_banner not count-aware**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Bug
+- **Issue:** `test_sequential_rejections_swap_chip_sets_per_branch` fails because `wait_for_banner` waits for `.no-match-banner` to exist, not for a new one. After the first rejection renders a banner, subsequent `wait_for_banner` calls return immediately. The `all PERSONAL_CHIPS should be visible` assertion runs before the second rejection has processed, so `get_visible_chip_labels` sees only the first rejection's RULE_CHIPS (highest transcript_banner_N is still the first rejection's index).
+- **Root cause:** `wait_for_banner` is not count-aware. `then_banner_displayed` also only checks `.no-match-banner` presence without verifying it is the banner for the current query.
+- **Production behavior:** Correct. "Is Matt married?" returns "I'm focused on Matt's professional experience." and PERSONAL_CHIPS render as expected (confirmed manually June 23, 2026).
+- **Fix:** In the sequential scenario, count existing `.no-match-banner` elements before submission and wait for that count to increase. Pass expected count into `wait_for_banner`, or add a dedicated `wait_for_nth_banner(n)` helper.
+- **Affects:** `tests/bdd/steps/test_ask_mattgpt.py` — `test_sequential_rejections_swap_chip_sets_per_branch`
+- **Logged:** June 23, 2026
