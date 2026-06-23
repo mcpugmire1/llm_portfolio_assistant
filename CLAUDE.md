@@ -214,6 +214,58 @@ Always triggers this check:
 - Schema change in story corpus, query logger, or any `config_*.json`
 
 ## Backlog Maintenance
+
+### Status Enum
+Six values only. Do not invent others.
+
+| Status | Meaning |
+|--------|---------|
+| Open | Not started, no blocker |
+| In Progress | Actively being worked |
+| Blocked | Waiting on a specific ticket - name it in `Dependencies:` |
+| Done | Shipped. Remove from BACKLOG.md, write to CHANGELOG.md |
+| Parked | Valid but on conscious hold. No specific blocker, just not now |
+| Decided Against | Ruled out with documented reasoning. Permanent |
+
+"Resolved" is not a valid status.
+
+### Ticket Lifecycle
+
+**Creating a ticket:**
+1. Find the current highest ID: `grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1`. New ID = that number + 1. Never eyeball the matrix to guess.
+2. Add matrix row in ID order.
+3. Add detail block at end of Detail Blocks section.
+4. Required fields: Status, Priority, Type, Issue, Logged.
+5. If it belongs in NOW or NEXT, add it to the roadmap immediately.
+
+**Status transitions:**
+- Open → In Progress → Done
+- Open / In Progress → Blocked (add blocking ticket ID to `Dependencies:`)
+- Blocked → Open (when the blocking ticket closes)
+- Any active status → Parked or Decided Against
+
+**When marking Done:**
+- Add `Resolved: <date> + <commit hash>` to the detail block.
+- Remove the matrix row AND the detail block from BACKLOG.md.
+- Write a CHANGELOG.md entry (paragraph + commit hash + ticket ref).
+- All three in the same edit. Never partial.
+
+**When marking Decided Against:**
+- Add a one-line reason to the detail block. Required - future context depends on it.
+- Leave the matrix row and detail block in place permanently.
+
+**When marking Blocked:**
+- Name the blocking ticket in `Dependencies:` in the detail block.
+- Do not mark a ticket Done while any listed dependency is not Done or Decided Against.
+
+### What Goes Where
+- **CHANGELOG.md:** Done items only. Ship record.
+- **BACKLOG.md:** Everything else - Open, In Progress, Blocked, Parked, Decided Against. None of these move to CHANGELOG.md.
+
+### Matrix and Detail Block Invariant
+Always in sync. Touch one, touch the other. A matrix row without a detail block is invalid. A detail block without a matrix row is invalid.
+
+### Maintenance Pass
 **Trigger:** Before picking up the next item on the NOW list.
 
 **Sync anchor:** `BACKLOG.md` contains `<!-- last-backlog-sync: <sha> -->` at the top. Read this, run `git log <sha>..HEAD --oneline` for the commit range, then update the comment. If the SHA is missing or unresolvable, prompt Matt before proceeding; do not default to diffing the entire history.
@@ -221,12 +273,10 @@ Always triggers this check:
 **Inputs:** `BACKLOG.md`, `CHANGELOG.md`, `git log <sha>..HEAD --oneline` since last sync.
 
 **Actions (propose before writing anything):**
-1. For each resolved ticket: remove the matrix row AND detail block from `BACKLOG.md`. Write a `CHANGELOG.md` entry (paragraph + commit hash + ticket ref). Both surfaces, always.
+1. Check for any tickets marked Done in the matrix that still have a detail block in BACKLOG.md or are missing a CHANGELOG.md entry - these were not fully closed at ship time. Complete the cleanup now: remove matrix row AND detail block, write CHANGELOG.md entry.
 2. **ARCHITECTURE.md flag:** if any files in `ui/pages/`, `ui/components/`, `services/`, `utils/`, or `config/` appear in the commit range and `ARCHITECTURE.md` is NOT in that range, surface the specific filenames and flag for review.
 3. Update `<!-- last-backlog-sync: <sha> -->` to HEAD.
 4. Nothing writes until Matt approves the proposed diff.
-
-**Decided Against items:** Stay in `BACKLOG.md` permanently. Never moved to `CHANGELOG.md`.
 
 ## Documentation Restraint
 Default to **not** creating new markdown files. Most findings belong in commit messages, BACKLOG entries, ADRs, or inline updates to existing docs.
