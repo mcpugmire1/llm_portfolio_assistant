@@ -156,7 +156,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-136](#mattgpt-136) | Dark mode design system audit — --accent-purple not overridden in body.dark-theme | Open | Low | Refactor | June 18, 2026 |
 | [MATTGPT-137](#mattgpt-137) | AgGrid bootstrap.min.css render-blocking on Ask Agy → My Work transition | Open | Low | Perf | June 18, 2026 |
 | [MATTGPT-138](#mattgpt-138) | BDD: page teardown invariant + CLS budget guard (MATTGPT-018 regression lock) | Decided Against | Medium | Action | June 19, 2026 |
-| [MATTGPT-139](#mattgpt-139) | Perf: convert Ask Agy landing chips to static HTML + JS bridge (MATTGPT-018 blep fix) | Open | High | Perf | June 19, 2026 |
+| [MATTGPT-139](#mattgpt-139) | Perf: Ask Agy landing — static HTML chips deliver 40% nav span reduction | Open | High | Perf | June 19, 2026 |
 | [MATTGPT-140](#mattgpt-140) | Fix hardcoded model names in backend_service.py and jd_assessor.py — use constants.py | Open | Low | Refactor | June 20, 2026 |
 | [MATTGPT-141](#mattgpt-141) | Remove dead ENTITY_GATE_THRESHOLD constant from config/constants.py | Open | Low | Refactor | June 22, 2026 |
 | [MATTGPT-142](#mattgpt-142) | BDD sequential rejection test: wait_for_banner is not count-aware, assertion runs before second rejection renders | Open | Low | Bug | June 23, 2026 |
@@ -2913,24 +2913,35 @@ queries"). Fix: delete the constant and its comment.
 ---
 
 ### MATTGPT-139
-**Perf: convert Ask Agy landing chips to static HTML + JS bridge (MATTGPT-018 blep fix)**
+**Perf: Ask Agy landing — static HTML chips deliver 40% nav span reduction**
 
 - **Status:** Open
 - **Priority:** High
 - **Type:** Perf
 - **Logged:** June 19, 2026
 
-**Root cause (confirmed June 19, 2026):** The blep discriminator is widget type, not page weight or iframe count. Pages whose visible surface is static HTML (Home) swap cleanly. Pages with live Streamlit widgets in the visible tree (Ask Agy landing: 6 `st.button` chips + `st.text_input`; My Work: `st.selectbox` filter bar + AgGrid) linger during navigation because baseweb React components mount, reconcile, and tear down slowly. The entire page subtree is held open by the heaviest widget in it.
+**Finding (confirmed June 22, 2026):** Converting 6 `st.button` chips + `st.columns` to static HTML + hidden receiver JS bridge reduced the navigation span window from ~667ms to 400ms (40% reduction) and FunctionCall cost from ~105ms to 82.5ms. Three signals agree: span, scripting time, and frequency. The widget-type hypothesis held.
 
-**Proof:** Home renders its "Try asking" chips as static HTML `<button class="chip">` elements inside `st.markdown`, wired to hidden `st.button` receivers via a JS bridge. The Ask Agy landing renders the same concept as 6 real `st.button(key="suggested_i")` widgets inside `st.columns`. Same content, opposite implementation. Home's chips don't blep. The landing's do.
+**Measured results:**
+| Metric | Baseline | PoC |
+|---|---|---|
+| Largest cluster span | ~667ms | 400ms |
+| FunctionCall total | ~105ms | 82.5ms |
 
-**The fix:** Convert the 6 suggestion chips from `st.button` to static HTML inside the intro markdown, wired to hidden `st.buttons` via the JS bridge. The template to copy is `category_cards.py`: `chip-ask-N` buttons, `card_btn_ask_chip_N` hidden receivers, `on_chip_click`, and the `wireAskAgyChips` multi-fire bridge.
+**Floor confirmed:** `st.text_input` probed separately (MATTGPT-018 probe #6) — 17ms delta, noise. 400ms is the practical floor for the chip-conversion approach. The blep is narrower but not eliminated; this ticket owns the 40% win, not full blep resolution.
 
-**Known edge:** `st.text_input` must stay a real widget (can't bridge a text input cleanly). Open question: does removing the 6 chip widgets alone kill the blep, or does the lone input still hold the teardown window open? Answer by converting chips first and eyeballing the swap.
+**PoC state (June 22, 2026):** Desktop branch converted in `landing_view.py`. Mobile branch untouched. Disabled state dropped in PoC. CSS inlined in the component, not yet in `global_styles.py`. BDD unbound (`landing_page.feature` binding commented out in `test_steps.py`).
 
-**My Work note:** Selectboxes could move to the HTML-bridge pattern; AgGrid cannot (it's an iframe component). My Work's blep may not fully clear the way Home does even after full chip conversion. Separate investigation.
+**Productionization requirements:**
+1. **Mobile path refactor:** Mobile branch still uses `st.button` with short labels + flex-wrap CSS tuned for Streamlit buttons. Converting to static HTML requires rethinking that layout — the short-label constraint was a `st.button` limitation; mobile CSS approach needs its own design pass.
+2. **JS bridge counter:** Bridge hardcodes `for (var i = 0; i < 6; i++)` — silently breaks if `qs` list length changes. Drive from `len(qs)`, not a magic number.
+3. **Disabled state:** Re-add processing-lock during query submission (dropped in PoC). HTML chips need a CSS class toggle or `pointer-events: none` on the grid container.
+4. **CSS to global_styles.py:** `.suggested-chips-grid` and `.suggested-chip` rules are inlined in the component; move to `global_styles.py`.
+5. **BDD:** Uncomment binding in `test_steps.py`. Update scenarios that reference `st.button`-specific behavior (disabled state, Streamlit button selectors) to match HTML chip pattern.
 
-**Acceptance criteria:** Navigate Ask Agy → My Work, no visible Ask Agy content during the swap. Before/after trace numbers: ~667ms partial-frame window and ~105ms React reconcile are the pre-fix baseline (June 19 trace).
+**My Work note:** Selectboxes could move to the HTML-bridge pattern; AgGrid cannot (iframe component). My Work's blep will not fully clear even after chip conversion — separate investigation if warranted.
+
+**Acceptance criteria:** Desktop and mobile chips functional (click fires correct query). Disabled state propagates during processing. BDD suite green. Re-measure nav span on a clean machine after productionization and set the regression ceiling from that reading — the 400ms PoC number is a local cafe trace, not a verified baseline.
 
 ---
 
