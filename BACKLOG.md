@@ -8,7 +8,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-06-14)
 
 **NOW** 
-- **MATTGPT-018** — Reopened June 18, 2026. Prior fix attempts (`bda7ba8`, `3659173`, `7d5e440`) addressed wrong mechanism. Root cause confirmed as client-side iframe recreation. Detail block updated; fix direction pending gate.
+- **MATTGPT-018** — 8 probes run June 22-23, 2026. Root cause alleged to be framework-bounded full-page repaint (not client-side iframe recreation — prior diagnosis was wrong). Keepers: fadeInUp disabled + config.toml (`f40032b`); transition-property constraint in `global_styles.py` (from `eab4711`). Note: `eab4711` also added tab-keyed `st.container` (_page_slug) — that portion is net-zero, reverted by `7807a2a`. MATTGPT-138 (teardown guard) decided against. Chip conversion banked under MATTGPT-139. Not closeable without leaving Streamlit per current diagnosis — diagnosis confidence noted as uncertain (Opus session was confused about slug history).
 - **MATTGPT-139** — Convert Ask Agy landing chips to static HTML + JS bridge (blep fix; template is `category_cards.py`; baseline 667ms partial-frame window, 105ms reconcile)
 - **-077 mitigation** — Query-side mitigation: strip "Matt" from embedded queries on technical-noun shapes (hours, not days; full hybrid retrieval lives in NEXT)
 - **-094 probes** — CIC over-concentration + operational under-surfacing probes; parallel-runnable, read-only; informs NEXT content work
@@ -155,7 +155,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-135](#mattgpt-135) | Gate mobile navbar IIFE behind viewport check — runs unconditionally on every rerun | Done | Low | Perf | June 16, 2026 |
 | [MATTGPT-136](#mattgpt-136) | Dark mode design system audit — --accent-purple not overridden in body.dark-theme | Open | Low | Refactor | June 18, 2026 |
 | [MATTGPT-137](#mattgpt-137) | AgGrid bootstrap.min.css render-blocking on Ask Agy → My Work transition | Open | Low | Perf | June 18, 2026 |
-| [MATTGPT-138](#mattgpt-138) | BDD: page teardown invariant + CLS budget guard (MATTGPT-018 regression lock) | Open | Medium | Action | June 19, 2026 |
+| [MATTGPT-138](#mattgpt-138) | BDD: page teardown invariant + CLS budget guard (MATTGPT-018 regression lock) | Decided Against | Medium | Action | June 19, 2026 |
 | [MATTGPT-139](#mattgpt-139) | Perf: convert Ask Agy landing chips to static HTML + JS bridge (MATTGPT-018 blep fix) | Open | High | Perf | June 19, 2026 |
 | [MATTGPT-140](#mattgpt-140) | Fix hardcoded model names in backend_service.py and jd_assessor.py — use constants.py | Open | Low | Refactor | June 20, 2026 |
 | [MATTGPT-141](#mattgpt-141) | Remove dead ENTITY_GATE_THRESHOLD constant from config/constants.py | Open | Low | Refactor | June 22, 2026 |
@@ -2937,10 +2937,11 @@ queries"). Fix: delete the constant and its comment.
 ### MATTGPT-138
 **BDD: page teardown invariant + CLS budget guard (MATTGPT-018 regression lock)**
 
-- **Status:** Open
+- **Status:** Decided Against
 - **Priority:** Medium
 - **Type:** Action
 - **Logged:** June 19, 2026
+- **Decided Against:** The tab-keyed container this guard was written to protect was reverted June 23, 2026 as a null probe (7807a2a). No fix mechanism exists to guard. If a real blep fix lands, file a new guard ticket at that time.
 
 **Context:** The MATTGPT-018 blep root cause was stale Ask Agy DOM bleeding through onto My Work during navigation — two Agy avatars on screen at once because Streamlit reconciled the new page tree onto the old one instead of tearing it down. Fixed by wrapping each page's render in a tab-keyed `st.container` (`_page_slug` key). The `transition: all` animation sweep was a concurrent contributor, fixed by a `transition-property` constraint in `global_styles.py`. Neither fix has a regression guard. This ticket adds two: (1) a deterministic DOM teardown invariant, and (2) a calibrated CLS budget.
 
