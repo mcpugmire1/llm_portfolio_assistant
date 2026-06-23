@@ -6,6 +6,19 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ## June 2026
 
+### My Profile
+
+**June 2026 — My Profile visual-language reconciliation (MATTGPT-093)** — `4bbdb46`
+About Matt strategic restructure resolved as a visual-language reconciliation. CTO and recruiter persona findings (May 27) drove a surface redesign that retained the single-page structure while improving the recruiter-facing conversion moment. 19/19 BDD scenarios passing.
+
+**June 8 — My Profile — Copy snippet + Download PDF buttons (MATTGPT-118)** — `223aabf`
+Added Copy snippet and Download PDF affordances. Copy uses delegated parentDoc listener + navigator.clipboard. PDF uses hidden st.button bridge + window.open/print. 20/20 BDD scenarios passing.
+
+### How I Built
+
+**June 8 — How I Built dialog — BDD coverage for "See It In Action" prompt buttons (MATTGPT-117)** — `97c7d51`, `3278128`
+Added 2 BDD scenarios to `how_i_built.feature`: section visibility + 4-chip count, and chip-click → Ask Agy routing (first chip). 8/8 passing. Closes coverage gap left when MATTGPT-068 scenarios were removed from `about_matt.py` during MATTGPT-093.
+
 ### CSS Architecture
 
 **June 17 — Gate mobile navbar IIFE behind viewport check (MATTGPT-135)** — `f818469`, `74ce328`
@@ -43,10 +56,16 @@ Replaced the inline collapsible expander on Ask Agy (Landing + Conversation view
 
 ### Role Match
 
+**June 2026 — Role Match sample JD cold-start affordance (MATTGPT-066)** — `6c39d8c`
+Bundled with MATTGPT-067. See MATTGPT-067 entry below for full details — "Sample JD affordance" in the input controls section covers this ticket's scope.
+
 **June 11–12 — Result panel + input polish bundle (MATTGPT-067)** — `6c39d8c`, `ac3d3dd`, `a2d002b`
 Input controls: 30-word gate disables submit until sufficient JD text; Clear button (text link) empties textarea and pops all 5 session-state keys; Sample JD affordance ("Don't have a job description handy? / Try an example"). Summary block between legend and requirements: counts line (Required / Preferred tallies) + Discussion points (required gaps + partials + preferred gaps; preferred partials excluded). Legend relabeled "project evidence" / "verified skill"; card copy updated to "Verified skill" throughout. Post-result CTA copy changed to "Explore Matt's experience in depth." — honest framing that doesn't imply Agy has result context. UI fixes: right-column height anchor (`height_anchor = st.empty()`) prevents layout collapse during blocking LLM call; followup CTA gap rule scoped to `role_match_followup_block` container (was collapsing all inter-card gaps when results showed); `role_match_ev_*` expansion container gets 16px bottom margin to prevent overlay on next requirement card. BDD: 23/23 passing. Unit: 30/30 (`test_summary_block.py`).
 
 ### Explore Stories
+
+**June 9 — My Work two-row permanent filter bar (MATTGPT-065)** — `765c14e`, `3015942`
+Added a permanent two-row filter bar to My Work desktop. Row 1: Search / Industry / Capability. Row 2: Client / Role / Domain + Reset (always visible on desktop, CSS-hidden on mobile). `st.container(key="r2_row")` with border-top separator. `label_visibility="collapsed"` alone insufficient (label still takes vertical space) — Row 2 labels hidden via CSS as well. Mobile counterpart filed as MATTGPT-119.
 
 **June 18 — AG Grid Client badge rendering — cellRenderer rewrite + Enterprise bundle drop (MATTGPT-132)** — `a809c57`
 Fixed the AgGrid Client column badge in My Work Table view. Root cause: function-based `cellRenderer` fails in the st_aggrid React stack — the reconciler replaces the return value on rerender, losing the DOM node. Fix: class-based `ClientBadgeRenderer` using AG Grid 29's `init(params)` / `getGui()` contract, which returns the DOM element directly and bypasses React's reconciler. Also dropped `enable_enterprise_modules=False` to eliminate the license warning. Dark mode: Python-side detection via `st.get_option("theme.base")` passes hardcoded color values into `custom_css` at render time (CSS variables don't cross the AgGrid iframe boundary). Brief theme-toggle lag accepted as Streamlit architectural limitation.
@@ -66,6 +85,48 @@ Added a "Filters ▾" toggle button to My Work, visible only on mobile (hidden o
 ---
 
 ## May 2026
+
+### RAG Pipeline
+
+**May 18 — Remove last_primary_client cross-query session state (MATTGPT-073)** — `3773c6b`
+Option E applied. Removed `_last_primary_client` from `diversify_results` in `backend_service.py`. The mechanism stored the previous query's pinned client in session state and used it to demote stories on subsequent queries — making retrieval output for query N dependent on queries 1…N-1. Production log analysis (82 queries, 24 sessions) showed 45% of consecutive pairs were demotion-eligible. Post-removal eval: 70/70 (100%). Architectural decision recorded as ADR 019.
+
+**May 18 — MattGPT portfolio story contamination in leadership queries resolved (MATTGPT-061)** — `02f6c79`
+The dominant contamination mechanism — session-state demotion in MATTGPT-073 — removed. Validated against 12 production-traffic leadership queries: 11/12 clean responses (91.7%). 61-query eval suite 100% passing. Single residual failure (Q2 "transformations" polysemy) is a structural semantic search limit scoped to hybrid retrieval (see BACKLOG).
+
+### Ask Agy
+
+**May 25 — Nonsense rejection banner — branch-aware copy + contextual chip sets (MATTGPT-071)** — `c642575`
+Differentiated copy and chip sets across all four reason branches in `render_no_match_banner`. Each rejection reason (rule:*, personal, out_of_scope) gets contextually appropriate copy and chips rather than a uniform fallback. Production-validated May 26: all branches render correct copy on both Ask Agy and My Work surfaces.
+
+### UI Redesign Sprint
+
+**May 27 — About Matt content polish bundle (MATTGPT-068)** — `efd6e00`
+Sample questions converted from `<li>` text to `st.button` chips routing to Ask Agy via `seed_prompt` + `__ask_from_suggestion__` pattern. Code block wrapped in `<details><summary>` expander (collapsed by default). DevOps card merged into CI/CD Pipeline card. CTA card rendered as `st.container(key="about_matt_cta_card")` for true DOM nesting of chip buttons. BDD: Red/Red/Green cycle completed.
+
+**May 29-30 — Home hero CTA inversion + seniority signal (MATTGPT-087 + MATTGPT-092)** — `ef133b2`
+Role Match promoted to primary hero CTA; Ask Agy demoted to secondary. Explore Stories CTA removed from hero (reached via nav). Recruiter persona finding: Role Match was invisible when Ask Agy was primary. Seniority signal added to My Profile as a "LEVEL: Senior leader" signals panel — scope/outcome anchor, not a title chip, to avoid the title trap.
+
+**May 29 — Explore Stories default state: exclude Professional Narrative + sort by date (MATTGPT-098)** — `856c908`
+On default load, exclude Category == "Professional Narrative" (10 stories) and sort by Start_Date descending. Mirrors Timeline's EXCLUDED_ERA behavior. Behavioral stories remain reachable via Category filter. Applied to both Table and Cards views. Prerequisite for MATTGPT-104 math reconciliation.
+
+**May 30 — Navigation labels rename (MATTGPT-100)** — `3c97d97`
+Renamed tabs to: Home / My Work / Ask Agy / Role Match / My Profile. Updated across ~50 files: app.py tab definitions, navbar.py, session_state active_tab values, BDD fixtures, and landing page routing references. Mobile nav required separate handling (Streamlit transforms key spaces to dashes in CSS class names).
+
+**May 30 — Why Agy? modal + "?" badge on Agy avatar (MATTGPT-101)** — `e1c2699`
+New `why_agy_dialog.py` using `@st.dialog`. Badge wired across 7 surfaces: hero (Home), header + landing body (Ask Agy), banking header, cross-industry header, My Work header, Role Match header. Desktop-only in headers (30px mobile avatar too small); body/hero avatars show badge on all viewports. Sequential dialog pattern (`elif` not `if`) prevents StreamlitAPIException when Why Agy and How I Built open in sequence.
+
+**May 30 — How I Built MattGPT dialog (MATTGPT-102)** — `b6ab8ae`
+Replaced standalone `how_i_built.py` page with `@st.dialog` component. Removed `?route=how-i-built`, `?nav=`, `?from=` handlers from `app.py`; deleted standalone page; cleaned up `SECONDARY_SURFACES` and related session state keys. Content: subtitle, The Problem card, Tech Stack 6-item grid, System Architecture Flow (5-step lifecycle), Runtime Pipeline (numbered purple circles), Detail cards, CTA row.
+
+**May 30 — Banking + Cross-Industry story count math reconciliation (MATTGPT-104)** — `19e03ba`
+Landing hero/stats and Home card meta aligned to post-Era counts (32 Banking, 48 Cross-Industry), matching Timeline and My Work (post MATTGPT-098). Depended on MATTGPT-098 shipping first to establish post-Era as the cross-surface convention.
+
+**May 31 — Navbar desktop layout: brand-left + space-between (MATTGPT-106)** — `3c97d97`
+Added MattGPT brand element to desktop navbar left. Layout changed from `justify-content: space-evenly` (5 nav items full-width) to `space-between` (brand left, 5 items right). Brings desktop into structural alignment with mobile navbar and wireframe.
+
+**May 31 — Home category cards redesign: 3-column grid + unified card treatment (MATTGPT-107)** — `19e03ba`
+Redesigned from 2-column to 3-column grid. Unified light-bg treatment across all 6 cards (purple gradient removed from Banking/Cross-Industry top cards). Compact content (~3 lines vs ~5). Card itself is click target — inline buttons and italic example-question lines removed.
 
 ### Documentation Alignment
 
