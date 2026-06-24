@@ -13,7 +13,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 1. **-075** — Validate debug-surface leak. Confirm `DEBUG=False` on Streamlit Cloud + prod check. Likely closes as add-missing-guards or no-op.
 2. **-080** — `matt_profile.json` restructure. Blocker for -088: scorer and Agy chat need stable shared grounding before alignment work makes sense.
 3. **-088** — Role Match scorer honesty, on top of -080. Biggest single credibility hit (CTO persona: AI contradicting itself). Gates -012 private-view quality.
-4. **-094 probes** — CIC over-concentration + operational under-surfacing. Read-only. Open question: run before -080 to shape the restructure, or in parallel. Not yet resolved.
+4. **-094 probes** — CIC over-concentration + operational under-surfacing. In progress. Running before -080 — findings shape the restructure.
 5. **-077 mitigation** — Query-side: strip "Matt" from embedded queries on technical-noun shapes. Protects primary free-text recruiter flow from MattGPT self-referential answers.
 6. **-097** — Career-intent refresh. Timely for active outreach; makes "what's Matt looking for" keyword-searchable.
 7. **-129 stories 1+2** — AT&T SE CRM + Fiserv expand-from-logged stories (no elicitation block yet). Operational depth pairing with -094 sub-hypothesis B.
@@ -88,7 +88,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-089](#mattgpt-089) | Role Match — parse location, work-model, availability as distinct filter class | Open | High | Issue | May 28, 2026 |
 | [MATTGPT-090](#mattgpt-090) | System prompt — decline cleanly on comp / off-scope queries (no silent fallback) | Decided Against | Medium | Action | May 28, 2026 |
 | [MATTGPT-091](#mattgpt-091) | Add a credible failure story to the corpus (sibling to -022 / -078 pattern) | Open | Medium | Action | May 28, 2026 |
-| [MATTGPT-094](#mattgpt-094) | Retrieval concentration audit — CIC over-weighting + operational story under-surfacing (hypotheses to verify) | Open | High | Investigation | May 28, 2026 |
+| [MATTGPT-094](#mattgpt-094) | Retrieval concentration audit — CIC over-weighting + operational story under-surfacing (hypotheses to verify) | In Progress | High | Investigation | May 28, 2026 |
 | [MATTGPT-095](#mattgpt-095) | Anti-consulting bias in story framing — corpus reads "consulting" as default register when it shouldn't | Open | Medium | Action | May 28, 2026 |
 | [MATTGPT-096](#mattgpt-096) | Methodology context dropped during synthesis — TDD/BDD and ways-of-working substance gets compressed out of metric claims (hypothesis to verify) | Open | Medium | Issue | May 28, 2026 |
 | [MATTGPT-097](#mattgpt-097) | Career-intent framing refresh — corpus predates current role taxonomy; refresh framing AND tighten register | Open | Medium | Action | May 28, 2026 |
