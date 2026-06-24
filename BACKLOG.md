@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: ed05e0c -->
+<!-- last-backlog-sync: 722972b -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -10,8 +10,8 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-06-14)
 
 **NOW** 
-- **MATTGPT-018** — 8 probes run June 22-23, 2026. Root cause alleged to be framework-bounded full-page repaint (not client-side iframe recreation — prior diagnosis was wrong). Keepers: fadeInUp disabled + config.toml (`f40032b`); transition-property constraint in `global_styles.py` (from `eab4711`). Note: `eab4711` also added tab-keyed `st.container` (_page_slug) — that portion is net-zero, reverted by `7807a2a`. MATTGPT-138 (teardown guard) decided against. Chip conversion banked under MATTGPT-139. Not closeable without leaving Streamlit per current diagnosis — diagnosis confidence noted as uncertain (Opus session was confused about slug history).
-- **MATTGPT-139** — Convert Ask Agy landing chips to static HTML + JS bridge (blep fix; template is `category_cards.py`; baseline 667ms partial-frame window, 105ms reconcile)
+- **MATTGPT-018** — 8 probes run June 22-23, 2026. Root cause alleged to be framework-bounded full-page repaint (not client-side iframe recreation — prior diagnosis was wrong). Keepers: fadeInUp disabled + config.toml (`f40032b`); transition-property constraint in `global_styles.py` (from `eab4711`). Note: `eab4711` also added tab-keyed `st.container` (_page_slug) — that portion is net-zero, reverted by `7807a2a`. MATTGPT-138 (teardown guard) decided against. Chip conversion shipped as MATTGPT-139 (400ms floor, 40% reduction). Not closeable without leaving Streamlit per current diagnosis — diagnosis confidence noted as uncertain (Opus session was confused about slug history).
+
 - **-077 mitigation** — Query-side mitigation: strip "Matt" from embedded queries on technical-noun shapes (hours, not days; full hybrid retrieval lives in NEXT)
 - **-094 probes** — CIC over-concentration + operational under-surfacing probes; parallel-runnable, read-only; informs NEXT content work
 - **-088** — Role Match scorer alignment (loose dependency on -077 mitigation: do cleaner if you can, not wait until you can)
@@ -109,7 +109,6 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-136](#mattgpt-136) | Dark mode design system audit — --accent-purple not overridden in body.dark-theme | Open | Low | Refactor | June 18, 2026 |
 | [MATTGPT-137](#mattgpt-137) | AgGrid bootstrap.min.css render-blocking on Ask Agy → My Work transition | Open | Low | Perf | June 18, 2026 |
 | [MATTGPT-138](#mattgpt-138) | BDD: page teardown invariant + CLS budget guard (MATTGPT-018 regression lock) | Decided Against | Medium | Action | June 19, 2026 |
-| [MATTGPT-139](#mattgpt-139) | Perf: Ask Agy landing — static HTML chips deliver 40% nav span reduction | Open | High | Perf | June 19, 2026 |
 | [MATTGPT-140](#mattgpt-140) | Fix hardcoded model names in backend_service.py and jd_assessor.py — use constants.py | Open | Low | Refactor | June 20, 2026 |
 | [MATTGPT-141](#mattgpt-141) | Remove dead ENTITY_GATE_THRESHOLD constant from config/constants.py | Open | Low | Refactor | June 22, 2026 |
 | [MATTGPT-142](#mattgpt-142) | BDD sequential rejection test: wait_for_banner is not count-aware, assertion runs before second rejection renders | Open | Low | Bug | June 23, 2026 |
@@ -158,7 +157,7 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Issue:** Visible page flicker on every navigation to My Work. Reported at various times as "avatar flash," "CDN flash," and "blep" — same user-visible phenomenon, diagnosed across eight probes in June 2026.
 - **Root cause (confirmed June 22, 2026, eight probes):** framework-bounded full-page repaint on navigation. Teardown is sub-millisecond (MutationObserver: all Ask Agy elements gone within 1ms of swap). The cost is My Work mounting: filter-bar selectboxes resolve from skeletons ~93ms, AgGrid iframe mounts ~268ms, ~270ms partial-frame window. No single widget owns the full cost.
 - **Probes run:** (1) view/library swap — no change; (2) iframe/components.html removal — no change; (3) library deferral — no change; (4) Ask Agy chips → static HTML — 40% Ask Agy span reduction, kept; (5) grid-out (forced non-AgGrid path) — window collapsed ~270ms toward ~100ms, AgGrid owns ~170ms of mount cost (includes bootstrap.min.css revalidation, production-only, partially addressable via MATTGPT-137); (6) text_input removal — 17ms delta, noise; (7) constant container key (key="page_root") — ran, no change, teardown already sub-ms, remount-vs-reconcile not the lever; (8) full stub — 0 partial frames, confirms framework origin.
-- **Confirmed partial win (banked):** Ask Agy chip conversion, st.button → static HTML + JS bridge (landing_view.py desktop branch), 40% span reduction. Productionize under MATTGPT-139 (mobile path, disabled state, BDD tests).
+- **Confirmed partial win (shipped as MATTGPT-139):** Ask Agy chip conversion, st.button → static HTML + JS bridge, desktop + mobile, 40% span reduction (667ms → 400ms). CHANGELOG June 2026.
 - **What does NOT fix this:** iframe consolidation; `@st.fragment`; Ask Agy lightening alone (wrong end of swap); filter-bar selectbox conversion (dead end — AgGrid floor at ~268ms remains); constant container key (probe 7, closed null).
 - **Prior fix attempts (wrong mechanism):** `bda7ba8`, `3659173`, `7d5e440`.
 - **Listener leak (separate bug, same file):** Lines ~521 and ~1501 in `explore_stories.py` lack the `dataset.wired='true'` guard. Fix independently; does not affect the blep.
@@ -1954,39 +1953,6 @@ is a leftover with a misleading history comment ("Lowered from 0.55 to allow nar
 queries"). Fix: delete the constant and its comment.
 
 **Acceptance criteria:** `ENTITY_GATE_THRESHOLD` does not appear in any file in the repo.
-
----
-
-### MATTGPT-139
-**Perf: Ask Agy landing — static HTML chips deliver 40% nav span reduction**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Perf
-- **Logged:** June 19, 2026
-
-**Finding (confirmed June 22, 2026):** Converting 6 `st.button` chips + `st.columns` to static HTML + hidden receiver JS bridge reduced the navigation span window from ~667ms to 400ms (40% reduction) and FunctionCall cost from ~105ms to 82.5ms. Three signals agree: span, scripting time, and frequency. The widget-type hypothesis held.
-
-**Measured results:**
-| Metric | Baseline | PoC |
-|---|---|---|
-| Largest cluster span | ~667ms | 400ms |
-| FunctionCall total | ~105ms | 82.5ms |
-
-**Floor confirmed:** `st.text_input` probed separately (MATTGPT-018 probe #6) — 17ms delta, noise. 400ms is the practical floor for the chip-conversion approach. The blep is narrower but not eliminated; this ticket owns the 40% win, not full blep resolution.
-
-**PoC state (June 22, 2026):** Desktop branch converted in `landing_view.py`. Mobile branch untouched. Disabled state dropped in PoC. CSS inlined in the component, not yet in `global_styles.py`. BDD unbound (`landing_page.feature` binding commented out in `test_steps.py`).
-
-**Productionization requirements:**
-1. **Mobile path refactor:** Mobile branch still uses `st.button` with short labels + flex-wrap CSS tuned for Streamlit buttons. Converting to static HTML requires rethinking that layout — the short-label constraint was a `st.button` limitation; mobile CSS approach needs its own design pass.
-2. **JS bridge counter:** Bridge hardcodes `for (var i = 0; i < 6; i++)` — silently breaks if `qs` list length changes. Drive from `len(qs)`, not a magic number.
-3. **Disabled state:** Re-add processing-lock during query submission (dropped in PoC). HTML chips need a CSS class toggle or `pointer-events: none` on the grid container.
-4. **CSS to global_styles.py:** `.suggested-chips-grid` and `.suggested-chip` rules are inlined in the component; move to `global_styles.py`.
-5. **BDD:** Uncomment binding in `test_steps.py`. Update scenarios that reference `st.button`-specific behavior (disabled state, Streamlit button selectors) to match HTML chip pattern.
-
-**My Work note:** Selectboxes could move to the HTML-bridge pattern; AgGrid cannot (iframe component). My Work's blep will not fully clear even after chip conversion — separate investigation if warranted.
-
-**Acceptance criteria:** Desktop and mobile chips functional (click fires correct query). Disabled state propagates during processing. BDD suite green. Re-measure nav span on a clean machine after productionization and set the regression ceiling from that reading — the 400ms PoC number is a local cafe trace, not a verified baseline.
 
 ---
 

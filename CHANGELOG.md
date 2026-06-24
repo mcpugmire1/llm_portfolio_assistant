@@ -6,6 +6,11 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ## June 2026
 
+### Ask Agy Performance
+
+**June 2026 — Ask Agy landing chips: st.button → static HTML + JS bridge (MATTGPT-139)** — `4e8e461`, `722972b`
+Converted 6 `st.button` chips + `st.columns` on the Ask Agy landing page to static HTML with a hidden receiver JS bridge (pattern from `category_cards.py`). Reduced navigation span window from ~667ms to ~400ms (40% reduction); FunctionCall cost from ~105ms to 82.5ms. Desktop and mobile paths both converted. Disabled state added via CSS pointer-events on the grid container during query submission. `.suggested-chips-grid` / `.suggested-chip` rules moved to `global_styles.py`. BDD: 14/14 scenarios passing. The 400ms floor is the practical limit of the chip-conversion approach — blep is narrower but not eliminated (see MATTGPT-018).
+
 ### My Profile
 
 **June 2026 — My Profile visual-language reconciliation (MATTGPT-093)** — `4bbdb46`
