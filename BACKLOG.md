@@ -10,13 +10,14 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-06-24)
 
 **NOW**
-1. **-075** — Validate debug-surface leak. Confirm `DEBUG=False` on Streamlit Cloud + prod check. Likely closes as add-missing-guards or no-op.
-2. **-080** — `matt_profile.json` restructure. Blocker for -088: scorer and Agy chat need stable shared grounding before alignment work makes sense.
-3. **-088** — Role Match scorer honesty, on top of -080. Biggest single credibility hit (CTO persona: AI contradicting itself). Gates -012 private-view quality.
-4. **-094 probes** — CIC over-concentration + operational under-surfacing. In progress. Running before -080 — findings shape the restructure.
-5. **-077 mitigation** — Query-side: strip "Matt" from embedded queries on technical-noun shapes. Protects primary free-text recruiter flow from MattGPT self-referential answers.
-6. **-097** — Career-intent refresh. Timely for active outreach; makes "what's Matt looking for" keyword-searchable.
-7. **-129 stories 1+2** — AT&T SE CRM + Fiserv expand-from-logged stories (no elicitation block yet). Operational depth pairing with -094 sub-hypothesis B.
+1. **-144** — AgGrid iframe re-init on filter rerun trace. Quick investigation; answer either closes it or reopens -018.
+2. **-075** — Validate debug-surface leak. Confirm `DEBUG=False` on Streamlit Cloud + prod check. Likely closes as add-missing-guards or no-op.
+3. **-080** — `matt_profile.json` restructure. Blocker for -088: scorer and Agy chat need stable shared grounding before alignment work makes sense.
+4. **-088** — Role Match scorer honesty, on top of -080. Biggest single credibility hit (CTO persona: AI contradicting itself). Gates -012 private-view quality.
+5. **-094 probes** — CIC over-concentration + operational under-surfacing. In progress. Running before -080 — findings shape the restructure.
+6. **-077 mitigation** — Query-side: strip "Matt" from embedded queries on technical-noun shapes. Protects primary free-text recruiter flow from MattGPT self-referential answers.
+7. **-097** — Career-intent refresh. Timely for active outreach; makes "what's Matt looking for" keyword-searchable.
+8. **-129 stories 1+2** — AT&T SE CRM + Fiserv expand-from-logged stories (no elicitation block yet). Operational depth pairing with -094 sub-hypothesis B.
 
 **NEXT** (queued):
 1. **-128** — Source faithfulness. Unlocked once -080 + -094 land. Second-biggest trust item: recruiter clicks to verify a claim, gets wrong source cards.
@@ -115,6 +116,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-141](#mattgpt-141) | Remove dead ENTITY_GATE_THRESHOLD constant from config/constants.py | Open | Low | Refactor | June 22, 2026 |
 | [MATTGPT-142](#mattgpt-142) | BDD sequential rejection test: wait_for_banner is not count-aware, assertion runs before second rejection renders | Open | Low | Bug | June 23, 2026 |
 | [MATTGPT-143](#mattgpt-143) | BDD app_url fixture hardcodes port 8501 with no env-var override | Parked | Low | Bug | June 23, 2026 |
+| [MATTGPT-144](#mattgpt-144) | AgGrid iframe re-init on filter rerun — blank/slow grid; possible shared root with the blep (-018) | Open | Medium | Investigation | Jun 24, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -2016,6 +2018,43 @@ Cold-load CLS ceiling: 0.25 (observed ~0.24 in DevTools — locks "no worse than
 - **Fix:** Replace the hardcoded return with `os.environ.get("STREAMLIT_TEST_URL", "http://localhost:8501")` in `conftest.py`. All test files inherit automatically since they consume `app_url` from the shared fixture.
 - **Why parked:** Low-frequency scenario; not blocking current work. Revisit when concurrent Streamlit sessions become a regular workflow.
 - **Logged:** June 23, 2026
+
+---
+
+### MATTGPT-144
+**AgGrid iframe re-initializes on filter rerun — blank/slow grid; possible shared root with the blep (MATTGPT-018)**
+
+- **Status:** Open — trace before committing to a fix
+- **Priority:** Medium (escalate if the trace confirms this is the blep's root, since that reopens -018's framework-bounded conclusion)
+- **Type:** Investigation
+- **Logged:** June 24, 2026
+
+**Symptom (observed June 24, 2026, Chrome Claude manual session at 1720px viewport):** After a filter selection triggers a Streamlit rerun, the My Work AgGrid custom-component iframe reloads but its React root stays empty — the grid area renders blank well past 13s. The native Streamlit chrome (filter chip, result count) updates correctly; only the AgGrid iframe fails to re-initialize promptly. The iframe was observed reloading multiple times and re-fetching its JS bundle long after reload.
+
+**Metrics are soft — do not anchor on them.** The "~180s to JS re-fetch" and "2.8MB bundle" figures come from a messy manual exploratory session with hand-timed waits, not a clean measurement. They establish "very long," not a real number. The only clean prior measurement in this family is -018's ~268ms AgGrid iframe settle on My Work page-nav. The two-order-of-magnitude gap between that and the manual-session stall is unexplained and is itself part of what the trace needs to resolve.
+
+**Hypothesis (to verify, not concluded):** The same AgGrid custom-component re-init mechanism may underlie both this filter-rerun stall and the blep (MATTGPT-018). -018 was diagnosed as framework-bounded full-page repaint with AgGrid owning ~170-268ms of the mount; that diagnosis was flagged in -018's own NOW note as coming from a session confused about slug history. If the trace shows the iframe tearing down and re-fetching its bundle on every rerun, then -018 is partly AgGrid re-init, not purely Streamlit repaint, and -018 comes off Parked for revisiting.
+
+**Ruled out as cause (June 24, 2026 investigation):** Not the mobile filter CSS (every changed rule is media-gated <=767/<=480px, inert at the 1280px and 1720px viewports where the symptom appears). Not the eab4711/f40032b perf commits. Not the keyed page container (reverted, 7807a2a, and wrong layer for an in-page rerun anyway). Not es-* selector drift (all es- selectors the BDD test uses are present in story_detail.py / timeline_view.py / explore_stories.py / global_styles.py). The explore_stories networkidle wait-strategy fix (same session) masks the BDD test symptom but does not touch this cause — green tests after that fix must NOT be read as this being resolved.
+
+**Investigation plan (trace-first, same discipline as -077 / -094):**
+- Capture a clean AgGrid iframe lifecycle trace on a filter rerun: known viewport, freshly restarted server (not the shared 8501 instance — a stale shared server produced false signal during the -018/BDD work).
+- Determine: (1) does the iframe tear down and re-fetch its bundle on every filter rerun, or reconcile in place? (2) is the cost a fixed per-rerun characteristic of st_aggrid 0.3.4, or pathological/variable? (3) does the same teardown/re-fetch appear on the My Work page-nav path (the -018 blep)?
+- Compare the filter-rerun trace against the -018 My Work mount trace. Same mechanism = shared root.
+
+**Decision fork (after trace, do not pre-decide):**
+- If iframe re-inits on every rerun and it is fixed per-rerun cost: weigh a real fix (stable component identity / avoid remount on data change) vs accept-as-known-characteristic of the iframe component.
+- If pathological/variable: dig into the trigger (bundle cache revalidation — see -137 — vs remount).
+- If confirmed shared with -018: reopen -018, correct its framework-bounded framing.
+- If not reproducible on a clean server: close as "verified, not a product problem; was shared-server / wait-strategy artifact."
+
+**Cross-references:**
+- MATTGPT-018 — blep / page-load flicker (Parked); candidate shared root
+- MATTGPT-137 — AgGrid bootstrap.min.css render-blocking / cache revalidation (adjacent; may explain the bundle-fetch lateness)
+- MATTGPT-122, -133 — AgGrid iframe BDD fragility (same component, same re-init timing issue surfacing in tests)
+- explore_stories networkidle wait-strategy fix (June 24, 2026) — masks the test symptom; does not address this cause
+
+---
 
 ### MATTGPT-142
 **BDD: sequential rejection test wait_for_banner not count-aware**
