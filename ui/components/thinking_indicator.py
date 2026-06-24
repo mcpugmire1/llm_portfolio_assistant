@@ -45,7 +45,7 @@ def render_thinking_indicator(message=None):
         f"""
         <div class="thinking-backdrop"></div>
         <div class="thinking-modal">
-            <img class="thinking-ball" src="..." alt=""/>
+            <div class="thinking-ball">🎾</div>
             <span class="thinking-text">
                 <span class="thinking-paw">🐾</span>{message}
             </span>

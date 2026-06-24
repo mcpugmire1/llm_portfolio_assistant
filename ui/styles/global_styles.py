@@ -12,10 +12,7 @@ Shared styles applied across all pages:
 
 import streamlit as st
 
-from ui.image_assets import CHASE_48PX_1_B64, CHASE_48PX_2_B64, CHASE_48PX_3_B64
-
-_CSS = (
-    """
+_CSS = """
         <style>
         /* ========================================
            CSS VARIABLES - DESIGN SYSTEM
@@ -191,10 +188,10 @@ _CSS = (
             display: none !important;
         }
         /* Hide ONLY Streamlit's default alert/info boxes, NOT our custom markdown */
-        .stAlert:not(:has(img[class*="thinking-ball"])),
-        [data-testid="stAlert"]:not(:has(img[class*="thinking-ball"])),
-        div[data-baseweb="notification"]:not(:has(img[class*="thinking-ball"])),
-        div[kind="info"]:not(:has(img[class*="thinking-ball"])) {
+        .stAlert:not(:has([class*="thinking-ball"])),
+        [data-testid="stAlert"]:not(:has([class*="thinking-ball"])),
+        div[data-baseweb="notification"]:not(:has([class*="thinking-ball"])),
+        div[kind="info"]:not(:has([class*="thinking-ball"])) {
             display: none !important;
         }
 
@@ -4017,88 +4014,76 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_my_work_trigge
     }
 
         /* ── Thinking Indicator ── */
-.thinking-backdrop {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.4);
-                z-index: 99998;
-            }
-            [data-theme="dark"] .thinking-backdrop {
-                background: rgba(0, 0, 0, 0.6);
-            }
-            @keyframes chaseAnimation {
-                0% { content: url('"""
-    + CHASE_48PX_1_B64
-    + """'); }
-                33.33% { content: url('"""
-    + CHASE_48PX_2_B64
-    + """'); }
-                66.66% { content: url('"""
-    + CHASE_48PX_3_B64
-    + """'); }
-                100% { content: url('"""
-    + CHASE_48PX_1_B64
-    + """'); }
-            }
-            .thinking-ball {
-                width: 40px;
-                height: 40px;
-                animation: chaseAnimation 0.9s steps(3) infinite;
-            }
+        .thinking-backdrop {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 99998;
+        }
+        [data-theme="dark"] .thinking-backdrop { background: rgba(0, 0, 0, 0.6); }
+
+        @keyframes ballBounce {
+            0%   { transform: translateY(0px)   scaleX(1.35) scaleY(0.68); }
+            15%  { transform: translateY(0px)   scaleX(1)    scaleY(1);    }
+            100% { transform: translateY(-80px) scaleX(1)    scaleY(1);    }
+        }
+        @keyframes ballShadow {
+            0%   { transform: translateX(-50%) translateY(0px)  scaleX(1.5);  opacity: 0.22; }
+            100% { transform: translateX(-50%) translateY(80px) scaleX(0.35); opacity: 0.05; }
+        }
+
+        .thinking-ball {
+            animation: ballBounce 0.45s infinite alternate cubic-bezier(0.4, 0, 0.6, 1) !important;
+            display: inline-block !important;
+            position: relative !important;
+            transform-origin: bottom center !important;
+            font-size: 20px !important;
+            line-height: 1 !important;
+            flex-shrink: 0 !important;
+            user-select: none !important;
+        }
+        .thinking-ball::after {
+            content: '' !important;
+            position: absolute !important;
+            bottom: -4px !important;
+            left: 50% !important;
+            width: 20px !important;
+            height: 3px !important;
+            border-radius: 50% !important;
+            background: rgba(0, 0, 0, 0.18) !important;
+            animation: ballShadow 0.45s infinite alternate cubic-bezier(0.4, 0, 0.6, 1) !important;
+        }
+        .thinking-modal {
+            position: fixed;
+            bottom: 140px; left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-card);
+            padding: 16px 24px;
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            white-space: nowrap;
+            overflow: visible;
+        }
+        .thinking-text { color: var(--text-primary); font-weight: 500; font-size: 15px; }
+        .thinking-paw  { font-size: 20px; margin-right: 6px; }
+
+        @media (max-width: 767px) {
             .thinking-modal {
-                position: fixed;
-                bottom: 140px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: var(--bg-card);
-                padding: 12px 24px;
-                border-radius: 24px;
-                border: 1px solid var(--border-color);
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-                z-index: 99999;
-                display: flex;
-                align-items: center;
-                gap: 12px;
-                white-space: nowrap;
+                padding: 12px 16px; gap: 8px;
+                bottom: 100px; max-width: 90vw; white-space: normal;
             }
-            .thinking-text {
-                color: var(--text-primary);
-                font-weight: 500;
-                font-size: 15px;
-            }
-            .thinking-paw {
-                font-size: 20px;
-                margin-right: 6px;
-            }
-            @media (max-width: 767px) {
-                .thinking-modal {
-                    padding: 10px 16px;
-                    gap: 8px;
-                    bottom: 100px;
-                    max-width: 90vw;
-                    white-space: normal;
-                }
-                .thinking-ball {
-                    width: 32px;
-                    height: 32px;
-                    flex-shrink: 0;
-                }
-                .thinking-text {
-                    font-size: 13px;
-                    line-height: 1.3;
-                }
-                .thinking-paw {
-                    font-size: 16px;
-                    margin-right: 4px;
-                }
-            }
+            .thinking-ball { font-size: 16px !important; }
+            .thinking-text { font-size: 13px; line-height: 1.3; }
+            .thinking-paw  { font-size: 16px; margin-right: 4px; }
+        }
 
         </style>
         """
-)
 
 
 def apply_global_styles():
