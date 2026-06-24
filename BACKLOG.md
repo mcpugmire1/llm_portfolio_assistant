@@ -9,19 +9,23 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 ## Value Prioritized Roadmap (updated 2026-06-24)
 
-**NOW** 
-- **-077 mitigation** — Query-side mitigation: strip "Matt" from embedded queries on technical-noun shapes (hours, not days; full hybrid retrieval lives in NEXT)
-- **-094 probes** — CIC over-concentration + operational under-surfacing probes; parallel-runnable, read-only; informs NEXT content work
-- **-088** — Role Match scorer alignment (loose dependency on -077 mitigation: do cleaner if you can, not wait until you can)
-- **-097** — Career-intent refresh (active recruiter failure earns NOW slot)
+**NOW**
+1. **-075** — Validate debug-surface leak. Confirm `DEBUG=False` on Streamlit Cloud + prod check. Likely closes as add-missing-guards or no-op.
+2. **-080** — `matt_profile.json` restructure. Blocker for -088: scorer and Agy chat need stable shared grounding before alignment work makes sense.
+3. **-088** — Role Match scorer honesty, on top of -080. Biggest single credibility hit (CTO persona: AI contradicting itself). Gates -012 private-view quality.
+4. **-094 probes** — CIC over-concentration + operational under-surfacing. Read-only. Open question: run before -080 to shape the restructure, or in parallel. Not yet resolved.
+5. **-077 mitigation** — Query-side: strip "Matt" from embedded queries on technical-noun shapes. Protects primary free-text recruiter flow from MattGPT self-referential answers.
+6. **-097** — Career-intent refresh. Timely for active outreach; makes "what's Matt looking for" keyword-searchable.
+7. **-129 stories 1+2** — AT&T SE CRM + Fiserv expand-from-logged stories (no elicitation block yet). Operational depth pairing with -094 sub-hypothesis B.
 
 **NEXT** (queued):
-1. **-015** — JPM Payments IQ differentiation (high-priority since March; upstream of operational surfacing)
-2. **-077 full fix** — Hybrid retrieval (BM25 + semantic); handles severe-overlap nouns and addresses -061 residual
-3. **-089** — Role Match location / work-model / availability parsing
-4. **-074** — Entity cluster forcing synthesis (depth side of CIC; pairs with -094 for over/under pattern)
-5. **-091 audit phase** — Does existing failure content surface on probe queries? Fold into -077/-094 or return Phase 3 write as LATER
-6. **-120** — CLAUDE.md restructure (Critical Rules fast-reference block + rules-first format). Trigger: before next feature sprint after UI redesign deploy.
+1. **-128** — Source faithfulness. Unlocked once -080 + -094 land. Second-biggest trust item: recruiter clicks to verify a claim, gets wrong source cards.
+2. **-089** — Logistics filter class: location / work-model / availability. Atlanta + relocation-open status currently dropped silently.
+3. **-015** — JPM Payments IQ differentiation. Cheap data pass; upstream of operational surfacing; cleaner signal for -094/-128/-088.
+4. **-077 full fix** — Hybrid retrieval (BM25 + semantic). Handles severe-overlap nouns; closes -061 residual.
+5. **-094 fixes** — Conditional on probe findings.
+6. **-074** — Entity cluster synthesis forcing. "How did you build the CIC" returns a survey instead of depth on a marquee query.
+7. **-096** — Methodology-context preservation. The methodology is what makes the metrics credible to an engineer.
 
 (Everything else defaults to LATER.)
 
