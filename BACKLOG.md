@@ -117,6 +117,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-142](#mattgpt-142) | BDD sequential rejection test: wait_for_banner is not count-aware, assertion runs before second rejection renders | Open | Low | Bug | June 23, 2026 |
 | [MATTGPT-143](#mattgpt-143) | BDD app_url fixture hardcodes port 8501 with no env-var override | Parked | Low | Bug | June 23, 2026 |
 | [MATTGPT-144](#mattgpt-144) | AgGrid iframe re-init on filter rerun — blank/slow grid; possible shared root with the blep (-018) | Open | Medium | Investigation | Jun 24, 2026 |
+| [MATTGPT-145](#mattgpt-145) | Mobile filter breakpoints overlap — r2-label show/hide depends on !important cascade order, not design | Open | Low | Refactor | Jun 24, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -2068,3 +2069,44 @@ Cold-load CLS ceiling: 0.25 (observed ~0.24 in DevTools — locks "no worse than
 - **Fix:** In the sequential scenario, count existing `.no-match-banner` elements before submission and wait for that count to increase. Pass expected count into `wait_for_banner`, or add a dedicated `wait_for_nth_banner(n)` helper.
 - **Affects:** `tests/bdd/steps/test_ask_mattgpt.py` — `test_sequential_rejections_swap_chip_sets_per_branch`
 - **Logged:** June 23, 2026
+
+---
+
+### MATTGPT-145
+**Mobile filter breakpoints overlap — r2-label show/hide works by cascade order, not by design**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Refactor
+- **Logged:** June 24, 2026
+- **File:** `ui/styles/global_styles.py`
+
+**Issue:** The mobile filter layout uses two overlapping media blocks that fight over the same property on the same elements. `@media (max-width: 767px)` (block ~2189-2325) sets the Client/Role/Domain (r2) filter labels to `display: none` (line ~2223) and injects the field name via `::before` instead (lines ~2227-2253). `@media (max-width: 480px)` (block ~2338-2396) sets those same r2 labels to `display: block` (line ~2376) to show real labels stacked above the dropdowns. Because `max-width: 767px` is an upper bound with no floor, it also matches every width <=480, so at phone widths BOTH rules apply to the same elements simultaneously. Both carry `!important` at equal specificity, so the winner is decided purely by source order. The 480px block currently sits later in the file, so `display: block` wins and the phone rendering is correct.
+
+**Why it matters:** The behavior is correct today but only by accident of file order. There is no specificity margin protecting it (both sides are `!important`). If the stylesheet order shifts, a block moves, or the injection order changes, the 767px `display: none` would win and the r2 labels would silently vanish on phones. Silent failure, no error, surfaces later as a "why did mobile labels disappear" investigation. Validated working June 24, 2026 via Chrome Claude at the effective mobile width (note: Streamlit floors `window.innerWidth` at ~406px in this environment, so 375px and 430px both render at 406px; both the 480px and 767px blocks are active there).
+
+**Intended three-tier design (correct; only the expression is fragile):**
+- **>=768px (desktop):** full filter bar, inline labels. No mobile blocks apply.
+- **481-767px (mid band):** r2 labels hidden; field name injected as `::before` pseudo-content on the select control (compact, label rides inside the control).
+- **<=480px (narrow phone, the 375/406 reality):** r2 labels shown as real labels above the dropdowns; `::before` injection suppressed (block ~2328-2335, `content: none`); controls full-width; padding/gaps/fonts reduced. This is MORE compensation than the mid band, not the same.
+
+The bug is that the mid-band rules have no lower bound, so they leak into the <=480 range where the phone tier explicitly reverses them.
+
+**Fix (behavior-preserving — same rendered output at every width):**
+1. Floor the conflicting mid-band rules so they stop reaching the phone range. Move ONLY these from `@media (max-width: 767px)` into a new bounded `@media (min-width: 481px) and (max-width: 767px)` block:
+   - r2-label hide (`st-key-r2_{client,role,domain}_v ... stWidgetLabel { display: none }`, ~2220-2223)
+   - `::before` field-name injection for r2 (`content: "Client"/"Role"/"Domain"`, ~2227-2246) and its paired "prevent ::before from crushing the value div" rule (~2255-2258)
+2. With those floored at 481, they no longer apply at <=480, so the `content: none` suppression block (~2328-2335) becomes redundant — delete it.
+3. **Do NOT rebound the rest of the 767px block.** The `stForm` label hide (~2191), the Industry/Capability label sizing (~2203), and the general mobile filter-bar layout are genuine all-mobile-widths compensation that must stay active at 375px. Only the three r2 rules the phone tier reverses get the floor. Mechanically: split block 2189-2325 into two — keep all-mobile rules at `max-width: 767px`, move the r2-hide + `::before`-injection rules into the new `min-width: 481px and max-width: 767px` block.
+
+**Acceptance criteria:**
+- r2 labels render `display: block` (real labels above) at <=480px and `display: none` + `::before` injection at 481-767px, with no two `!important` rules applying to the same element at the same width.
+- Removing or reordering any single mobile block does not change r2-label visibility at any width (no cascade-order dependency).
+- Industry/Capability labels and general mobile filter layout unchanged at 375px.
+- Visual parity with current behavior confirmed at <=480 and in the 481-767 band.
+
+**Cross-references:**
+- The mobile filter CSS this refactors was added in the explore_stories mobile-fix work (validated and committed June 24, 2026). Do this as the opening move of any future session that touches mobile filter CSS — it makes the cascade safe before edits land on top of it.
+- MATTGPT-123, MATTGPT-119 — prior mobile filter work that established the current block structure.
+
+**Note:** Effort estimate intentionally omitted — small, but requires careful splitting. Validate in the browser after the change, not from source (source-order reasoning is exactly what's fragile here).
