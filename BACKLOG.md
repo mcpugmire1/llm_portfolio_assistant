@@ -7,11 +7,9 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 ---
 
-## Value Prioritized Roadmap (updated 2026-06-14)
+## Value Prioritized Roadmap (updated 2026-06-24)
 
 **NOW** 
-- **MATTGPT-018** — 8 probes run June 22-23, 2026. Root cause alleged to be framework-bounded full-page repaint (not client-side iframe recreation — prior diagnosis was wrong). Keepers: fadeInUp disabled + config.toml (`f40032b`); transition-property constraint in `global_styles.py` (from `eab4711`). Note: `eab4711` also added tab-keyed `st.container` (_page_slug) — that portion is net-zero, reverted by `7807a2a`. MATTGPT-138 (teardown guard) decided against. Chip conversion shipped as MATTGPT-139 (400ms floor, 40% reduction). Not closeable without leaving Streamlit per current diagnosis — diagnosis confidence noted as uncertain (Opus session was confused about slug history).
-
 - **-077 mitigation** — Query-side mitigation: strip "Matt" from embedded queries on technical-noun shapes (hours, not days; full hybrid retrieval lives in NEXT)
 - **-094 probes** — CIC over-concentration + operational under-surfacing probes; parallel-runnable, read-only; informs NEXT content work
 - **-088** — Role Match scorer alignment (loose dependency on -077 mitigation: do cleaner if you can, not wait until you can)
@@ -38,7 +36,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-015](#mattgpt-015) | JPM Payments IQ Differentiation | Open | High | Action | Mar 2026 |
 | [MATTGPT-016](#mattgpt-016) | Semantic Router — Wrong-Person Query Detection | Decided Against | High | Issue | Apr 2026 |
 | [MATTGPT-017](#mattgpt-017) | Wire skipped Role Match logging BDD scenarios (Playwright click + mocked Sheets write) | Open | Medium | Action | Apr 28, 2026 |
-| [MATTGPT-018](#mattgpt-018) | Page-Load Flicker / blep | Open | Medium | Issue | Pre-Apr 2026 |
+| [MATTGPT-018](#mattgpt-018) | Page-Load Flicker / blep | Parked | Medium | Issue | Pre-Apr 2026 |
 | [MATTGPT-020](#mattgpt-020) | Simplify backend_service.py | Decided Against | Medium | Refactor | Pre-Jan 2026 |
 | [MATTGPT-021](#mattgpt-021) | diversify_results() Pinning Bug | Open | Medium | Issue | Apr 2026 |
 | [MATTGPT-022](#mattgpt-022) | Data Quality Cleanup Journey Story | Open | Medium | Action | Mar 2026 |
@@ -151,7 +149,7 @@ Each detail block uses these fields. Not every field is required for every item.
 ### MATTGPT-018
 **Page-Load Flicker (blep / avatar flash) — My Work**
 
-- **Status:** Open
+- **Status:** Parked — not closeable without leaving Streamlit per current diagnosis. 8 probes exhausted; AgGrid mount floor (~268ms) is the remaining cost. Revisit if AgGrid is replaced or Streamlit adds fragment-level navigation.
 - **Priority:** Medium
 - **Type:** Issue
 - **Issue:** Visible page flicker on every navigation to My Work. Reported at various times as "avatar flash," "CDN flash," and "blep" — same user-visible phenomenon, diagnosed across eight probes in June 2026.
