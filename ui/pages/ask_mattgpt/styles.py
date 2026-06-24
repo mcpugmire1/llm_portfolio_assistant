@@ -251,98 +251,51 @@ def get_landing_css() -> str:
             padding: 0 32px;
         }
 
-        /* BUTTON CONTAINER - Grid layout (inside white card) */
-       div[data-testid="stHorizontalBlock"]:has(button[key^="suggested_"]) {
-            display: grid !important;
-            grid-template-columns: repeat(2, 1fr) !important; /* Keep columns flexible */
-            grid-template-rows: repeat(3, auto) !important;
-            gap: 8px !important;
-
-            /* === CORE FIX: Use calc() to force a narrow, centered container === */
-            /* This makes the grid content narrower and centered by forcing 32px margins (64px total). */
-            width: calc(100% - 64px) !important;
-            max-width: calc(100% - 64px) !important;
-            margin: 0 auto 48px !important; /* Centers the new narrower block */
-
-            padding: 0 !important;
-            background: transparent !important;
-            border-radius: 0 !important;
-            box-shadow: none !important;
-        }
-        /* STREAMLIT COLUMN OVERRIDE (CRITICAL - Flexbox Centering) */
-        div[data-testid="stHorizontalBlock"]:has(button[key^="suggested_"]) > div[data-testid="column"] > div {
-            display: flex !important;
-            justify-content: center !important; /* Center the button horizontally */
-            width: 100% !important; /* Maintain full width of the cell */
+        /* CHIP GRID - desktop 2-column layout */
+        .suggested-chips-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            width: calc(100% - 64px);
+            max-width: calc(100% - 64px);
+            margin: 0 auto 16px;
+            padding: 0;
         }
 
-        /* Streamlit Element Container Cleanup */
-        div[data-testid="stHorizontalBlock"]:has(button[key^="suggested_"]) > div[data-testid="column"] {
-            display: contents !important; /* KEEPING YOUR GRID SETUP */
-        }
-
-       div[data-testid="stHorizontalBlock"]:has(button[key^="suggested_"]) .stElementContainer {
-            background: transparent !important;
-            padding: 0 !important;
-            margin: 0 !important;
-
-            /* === NEW EXTREME FIX === */
-            width: 90% !important;
-            float: right !important; /* Float it to one side */
-            margin-right: 5% !important; /* Force margin on the floating side */
-        }
-
-        /* Force grid row positions - column 1 renders first (0,2,4), then column 2 (1,3,5) */
-        .st-key-suggested_0 { grid-row: 1 !important; grid-column: 1 !important; }
-        .st-key-suggested_2 { grid-row: 2 !important; grid-column: 1 !important; }
-        .st-key-suggested_4 { grid-row: 3 !important; grid-column: 1 !important; }
-        .st-key-suggested_1 { grid-row: 1 !important; grid-column: 2 !important; }
-        .st-key-suggested_3 { grid-row: 2 !important; grid-column: 2 !important; }
-        .st-key-suggested_5 { grid-row: 3 !important; grid-column: 2 !important; }
-
-        /* Suggested question buttons - match wireframe .example-q */
-        button[key^="suggested_"] {
-            background: var(--bg-surface) !important;
-            border: 1px solid var(--border-color) !important;
-            border-radius: 6px !important;
-            padding: 10px 14px !important;
-            text-align: left !important;
+        /* Suggestion chips - MATTGPT-139 */
+        .suggested-chip {
+            background: var(--bg-card) !important;
+            border: 2px solid var(--border-color) !important;
+            border-radius: 8px !important;
+            padding: 14px 28px !important;
+            text-align: center !important;
+            cursor: pointer !important;
             transition: all 0.2s ease !important;
-            min-height: auto !important;
-            max-height: none !important;
             height: auto !important;
-            display: flex !important;
+            display: inline-flex !important;
             align-items: center !important;
-            justify-content: flex-start !important;
+            justify-content: center !important;
             gap: 8px !important;
             box-shadow: none !important;
-
             width: 100% !important;
-
-            /* Remove any margin overrides */
-            margin-left: unset !important;
-            margin-right: unset !important;
+            font-size: 15px !important;
+            font-weight: 400 !important;
+            font-style: normal !important;
+            color: var(--accent-purple) !important;
+            line-height: 1.4 !important;
+            font-family: inherit !important;
         }
 
-        button[key^="suggested_"]:hover {
+        .suggested-chip:hover {
             background: var(--bg-hover) !important;
             transform: translateY(-1px) !important;
         }
 
-        button[key^="suggested_"] p {
-            font-size: 14px !important;
-            font-weight: 400 !important;
-            font-style: italic !important;
-            color: var(--text-primary) !important;
-            line-height: 1.4 !important;
-            margin: 0 !important;
-            text-align: left !important;
-        }
-
-        button[key^="suggested_"] div {
-            text-align: left !important;
-            justify-content: flex-start !important;
-            width: 100% !important;
+        /* Hidden receivers - display:none removes layout contribution entirely.
+           JS bridge calls .click() directly on the button element, which works
+           even when the parent is display:none. */
+        [class*="st-key-suggested_"] {
+            display: none !important;
         }
 
         /* Landing input container */
@@ -645,75 +598,21 @@ def get_landing_css() -> str:
                 padding: 0 16px !important;
             }
 
-            /* MATTGPT-113: chip flex-wrap pill grid */
-            .st-key-chip_grid {
-                display: flex !important;
-                flex-direction: row !important;
-                flex-wrap: wrap !important;
-                align-items: flex-start !important;
-                padding-top: 8px !important;
+            /* Mobile chip pill layout - forced 2-col grid matches production st.columns layout */
+            .suggested-chips-mobile {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-auto-rows: 1fr;
+                gap: 8px;
+                padding: 0 8px 16px;
             }
-            /* doubled class to beat global .stVerticalBlock gap: 4px rule */
-            .st-key-chip_grid.st-key-chip_grid {
-                gap: 8px !important;
-            }
-            .st-key-chip_grid.st-key-chip_grid [data-testid="stHorizontalBlock"] {
-                display: flex !important;
-                flex-direction: row !important;
-                flex-wrap: wrap !important;
-                gap: 8px !important;
-                align-items: flex-start !important;
-            }
-            .st-key-chip_grid [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
-                display: contents !important;
-            }
-            .st-key-chip_grid .stVerticalBlock {
-                display: contents !important;
-            }
-            .st-key-chip_grid .stElementContainer {
-                width: auto !important;
-                float: none !important;
-                margin-right: 0 !important;
-            }
-            .st-key-chip_grid [class*="st-key-suggested_"] {
-                flex: 0 0 auto !important;
-                width: fit-content !important;
-                min-width: fit-content !important;
-                height: fit-content !important;
-                align-self: flex-start !important;
-            }
-            .st-key-chip_grid [class*="st-key-suggested_"] button {
-                width: auto !important;
-                white-space: nowrap !important;
+
+            /* Override desktop chip styles for mobile pills */
+            .suggested-chip {
                 border-radius: 20px !important;
-                margin-top: 0 !important;
-            }
-
-            /* Suggestion buttons - MUCH more compact */
-            button[key^="suggested_"],
-            [class*="st-key-suggested_"] button,
-            .stButton button[key^="suggested_"] {
+                width: 100% !important;
                 padding: 8px 12px !important;
-                min-height: 36px !important;
-                border-radius: 4px !important;
-            }
-
-            button[key^="suggested_"] p,
-            [class*="st-key-suggested_"] button p,
-            .stButton button p {
                 font-size: 13px !important;
-                line-height: 1.3 !important;
-            }
-
-            /* Form buttons (suggestion chips) - force smaller */
-            div[data-testid="stForm"] button {
-                padding: 8px 12px !important;
-                min-height: auto !important;
-            }
-
-            div[data-testid="stForm"] button p {
-                font-size: 13px !important;
-                line-height: 1.3 !important;
             }
 
             /* KILL gaps in vertical blocks */
@@ -731,6 +630,11 @@ def get_landing_css() -> str:
             .landing-input-container {
                 margin: 12px auto 0 !important;
                 padding: 0 16px !important;
+            }
+
+            /* Cancel the global .stButton > button { margin-top: 10px } for the Ask Agy button */
+            .st-key-landing_ask button {
+                margin-top: 0 !important;
             }
 
             /* Force input + button to stay on same row on mobile */

@@ -226,32 +226,23 @@ def verify_receivers_disabled(browser_page):
 # =============================================================================
 
 
-@then("there should be exactly 6 Streamlit suggestion buttons")
-def verify_six_mobile_buttons(browser_page):
-    # :visible excludes hidden desktop receivers pushed off-screen via CSS.
-    assert (
-        browser_page.locator('[class*="st-key-suggested_"] button:visible').count() == 6
-    )
-
-
-@then("the buttons should display short labels not full query text")
-def verify_mobile_short_labels(browser_page):
-    # :visible excludes hidden desktop receivers. Full query text is always >50 chars;
-    # short labels are <=30 chars.
-    buttons = browser_page.locator('[class*="st-key-suggested_"] button:visible')
-    for i in range(buttons.count()):
-        text = buttons.nth(i).inner_text().strip()
+@then("the chips should display short labels not full query text")
+def verify_short_labels_on_chips(browser_page):
+    # Short labels top out at ~30 chars (longest: "Leading through resistance" + emoji + spaces).
+    # Shortest full query is 62 chars. Threshold 40 gives breathing room without letting
+    # full queries through.
+    chips = browser_page.locator(".suggested-chip")
+    for i in range(chips.count()):
+        text = chips.nth(i).inner_text().strip()
         assert (
-            len(text) <= 30
-        ), f"Button {i} looks like full query text ({len(text)} chars): {text}"
+            len(text) <= 40
+        ), f"Chip {i} looks like full query text ({len(text)} chars): {text}"
 
 
-@then(parsers.parse('the first button should contain "{label}"'))
-def verify_first_button_label(browser_page, label):
-    text = browser_page.locator(
-        '[class*="st-key-suggested_0"] button:visible'
-    ).inner_text()
-    assert label in text, f"Expected '{label}' in first button, got: '{text}'"
+@then(parsers.parse('the first chip should contain "{label}"'))
+def verify_first_chip_label(browser_page, label):
+    text = browser_page.locator(".suggested-chip").first.inner_text()
+    assert label in text, f"Expected '{label}' in first chip, got: '{text}'"
 
 
 # =============================================================================

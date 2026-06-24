@@ -58,12 +58,14 @@ Feature: Ask Agy Landing Page
   # SUGGESTION CHIPS -- MOBILE (st.button, unchanged path)
   # =============================================================================
 
-  Scenario: Mobile path still uses Streamlit buttons
+  Scenario: Mobile path uses HTML chips with short labels
     Given the viewport is 375px wide
     And the user navigates to the Ask Agy page
-    Then there should be exactly 6 Streamlit suggestion buttons
-    And the buttons should display short labels not full query text
-    And the first button should contain "Payments at JP Morgan"
+    Then there should be exactly 6 suggestion chips in the chip grid
+    And each chip should have an emoji icon
+    And the suggestion chips should be HTML button elements with class "suggested-chip"
+    And the chips should display short labels not full query text
+    And the first chip should contain "Payments at JP Morgan"
 
   # =============================================================================
   # INPUT AREA
