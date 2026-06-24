@@ -35,9 +35,20 @@ def wait_for_content(page, selector, timeout=10000):
 
 
 def wait_for_streamlit_rerun(page):
-    """Wait for Streamlit to complete a rerun after an action."""
-    page.wait_for_load_state("networkidle")
-    # Brief pause for Streamlit's internal state sync
+    """Wait for Streamlit to complete a rerun by watching data-test-script-state."""
+    from playwright.sync_api import expect as pw_expect
+
+    stapp = page.locator('[data-testid="stApp"]')
+    # Catch the running state; may already be done if rerun was fast.
+    try:
+        pw_expect(stapp).to_have_attribute(
+            "data-test-script-state", "running", timeout=2000
+        )
+    except Exception:
+        pass
+    pw_expect(stapp).to_have_attribute(
+        "data-test-script-state", "notRunning", timeout=15000
+    )
     page.wait_for_timeout(SHORT_WAIT)
 
 
@@ -346,35 +357,31 @@ def select_filter(browser_page, value, filter_name):
     # get_by_role searches the full a11y tree with built-in auto-wait.
     browser_page.wait_for_selector("[role='option']", state="visible", timeout=5000)
     browser_page.get_by_role("option", name=value, exact=True).click()
-    browser_page.wait_for_load_state("networkidle")
+    wait_for_streamlit_rerun(browser_page)
 
 
 @when(parsers.parse('the user clicks the "{value}" filter chip to remove it'))
 def click_filter_chip(browser_page, value):
     # Filter chips have format: "✕ {FilterValue}" as a button/paragraph
-    # Wait for the chip to be visible before trying to click
     wait_for_content(
         browser_page, "button:has-text('✕'), p:has-text('✕')", timeout=5000
     )
 
-    # Try to find the close button for this filter (matches partial text too)
     chip = browser_page.locator(f"button:has-text('✕'):has-text('{value}')").first
     if chip.count() > 0:
         chip.click()
-        browser_page.wait_for_load_state("networkidle")
+        wait_for_streamlit_rerun(browser_page)
         return
 
-    # Try the paragraph version
     chip = browser_page.locator(f"p:has-text('✕'):has-text('{value}')").first
     if chip.count() > 0:
         chip.click()
-        browser_page.wait_for_load_state("networkidle")
+        wait_for_streamlit_rerun(browser_page)
         return
 
-    # Fallback: find any element with the filter value and a close icon
     chip = browser_page.locator(f"[role='button']:has-text('{value}')").first
     chip.click()
-    browser_page.wait_for_load_state("networkidle")
+    wait_for_streamlit_rerun(browser_page)
 
 
 @when('the user clicks "Advanced Filters"')
