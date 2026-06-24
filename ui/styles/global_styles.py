@@ -2311,6 +2311,88 @@ details[open]:has(.code-block) > summary::before {
     [data-testid="stForm"] [data-testid="stColumn"]:last-child [data-testid="stVerticalBlock"] {
         gap: 0 !important;
     }
+
+    /* Force Industry/Capability and ALL their wrappers to full width */
+    [class*="st-key-facet_industry_v"],
+    [class*="st-key-facet_capability_v"],
+    [class*="st-key-facet_industry_v"] [data-testid="stElementContainer"],
+    [class*="st-key-facet_capability_v"] [data-testid="stElementContainer"],
+    [class*="st-key-facet_industry_v"] [data-baseweb="select"],
+    [class*="st-key-facet_capability_v"] [data-baseweb="select"] {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+/* ::before suppression must come AFTER the 767px block that injects content: "Client"/"Role"/"Domain" */
+@media (max-width: 767px) {
+    [class*="st-key-r2_client_v"] [data-baseweb="select"] > div:first-child::before,
+    [class*="st-key-r2_role_v"] [data-baseweb="select"] > div:first-child::before,
+    [class*="st-key-r2_domain_v"] [data-baseweb="select"] > div:first-child::before {
+        content: none !important;
+        display: none !important;
+    }
+}
+
+/* ── Narrow phone filter fixes (≤480px) ── */
+@media (max-width: 480px) {
+    /* Reduce block container side padding to reclaim horizontal space */
+    .block-container {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+
+    /* Row 1: tighten gap so two 167px columns fit in ~342px container */
+    div[data-testid="stHorizontalBlock"]:has([class*="st-key-facet_industry_v"]) {
+        gap: 6px !important;
+    }
+
+    /* Industry / Capability / r2 filters: switch inline label → label above dropdown.
+       stElementContainer parent added to beat Streamlit emotion-class specificity. */
+    div[data-testid="stElementContainer"][class*="st-key-facet_industry_v"] [data-testid="stSelectbox"],
+    div[data-testid="stElementContainer"][class*="st-key-facet_capability_v"] [data-testid="stSelectbox"],
+    div[data-testid="stElementContainer"][class*="st-key-r2_client_v"] [data-testid="stSelectbox"],
+    div[data-testid="stElementContainer"][class*="st-key-r2_role_v"] [data-testid="stSelectbox"],
+    div[data-testid="stElementContainer"][class*="st-key-r2_domain_v"] [data-testid="stSelectbox"] {
+        flex-direction: column !important;
+        gap: 2px !important;
+    }
+    [class*="st-key-facet_industry_v"] [data-testid="stWidgetLabel"],
+    [class*="st-key-facet_capability_v"] [data-testid="stWidgetLabel"] {
+        flex: unset !important;
+        width: auto !important;
+        font-size: 12px !important;
+        font-weight: 400 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* Client / Role / Domain: show real labels above */
+    [class*="st-key-r2_client_v"] [data-testid="stWidgetLabel"],
+    [class*="st-key-r2_role_v"] [data-testid="stWidgetLabel"],
+    [class*="st-key-r2_domain_v"] [data-testid="stWidgetLabel"] {
+        display: block !important;
+        font-size: 12px !important;
+        font-weight: 400 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* Full-width cascade for narrow phone select controls */
+    [class*="st-key-facet_industry_v"] [data-testid="stSelectbox"] > div:last-child,
+    [class*="st-key-facet_capability_v"] [data-testid="stSelectbox"] > div:last-child {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* Reset filters: flush to bottom of card */
+    [class*="st-key-r2_reset"] {
+        margin-bottom: 0 !important;
+    }
 }
 
 
