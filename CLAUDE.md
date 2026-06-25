@@ -188,21 +188,14 @@ One "go" from Matt ships the full cycle without re-asking between gates. Re-ask 
 - **Eval failure discipline:** Any eval failure must be validated against production before being labeled "pre-existing" or "stochastic." If a "known issue" isn't in BACKLOG, it's an unvalidated note.
 
 ### Canvas-Rendered Grids (st.dataframe) - BDD Constraints
-`st.dataframe` renders rows, cells, column headers, and selection controls to an HTML canvas, not the DOM. This has hard consequences for BDD that are not obvious.
 
-**What BDD CAN assert on an `st.dataframe` surface:**
-- Grid mounted: `[data-testid="stDataFrame"]` and `[data-testid="data-grid-canvas"]` present and visible. Wait explicitly for `data-grid-canvas` after the rerun -- the canvas paints after Streamlit completes, not during.
-- Filter pipeline worked: parse count from `.es-results-count` and compare direction before/after. Never assert hardcoded counts. The count element is absent in the no-match state.
-- Detail pipeline worked: reach a story via deeplink (`?story=id`), which sets `active_story` with no canvas interaction, then assert `.es-detail-header`.
+`st.dataframe` renders rows, cells, column headers, and selection controls to an HTML canvas, not the DOM. Full explanation, verified selectors, and origin: see `ARCHITECTURE.md` (st.dataframe canvas constraint). (MATTGPT-144)
 
-**What BDD CANNOT assert, ever, on an `st.dataframe` surface:**
-- Row content (text is painted to canvas, not in the DOM; no selector reaches it)
-- That rows visually rendered (a blank grid and a populated grid are indistinguishable to DOM queries -- this is the MATTGPT-144 failure mode)
-- Row selection driven from a test (the checkbox is canvas-drawn; keyboard nav lands on a data cell, not the row marker; coordinate-clicking is brittle and must not be used)
+**CAN assert:** grid mounted (`[data-testid="stDataFrame"]` + `[data-testid="data-grid-canvas"]`, waiting explicitly for canvas paint); filter pipeline worked (count direction from `.es-results-count`); detail pipeline worked (deeplink `?story=id` then assert `.es-detail-header`).
 
-**Rule:** Visual row-rendering correctness on any `st.dataframe` surface is covered by manual visual check, NOT automated BDD. A green BDD suite does not prove the grid painted its rows. Document this explicitly in any test file asserting against `st.dataframe` so green is never mistaken for full coverage. Any future surface adopting `st.dataframe` inherits all of the above. If whole-row-click or keyboard row selection is a hard requirement, `st.dataframe` cannot provide it -- self-rendered HTML rows (the Cards pattern) are the accessible, testable alternative.
+**CANNOT assert, ever:** row content, visual row rendering, canvas-driven row selection. A green BDD suite does not prove the grid painted its rows. Visual row-rendering correctness is manual visual check, not optional.
 
-See `ARCHITECTURE.md` (st.dataframe canvas constraint) for full explanation and verified selectors. (MATTGPT-144)
+Any new `st.dataframe` surface inherits all of the above. If whole-row-click or keyboard row selection is a hard requirement, use self-rendered HTML rows (the Cards pattern).
 
 ## Secrets & Sensitive Output Handling
 Three rules from a real GCP private key exposure (May 2026):
