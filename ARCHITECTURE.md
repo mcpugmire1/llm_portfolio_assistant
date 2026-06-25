@@ -69,13 +69,9 @@
 
 ### 📊 Appendix: RAG Pipeline Audit
 - [RAG Pipeline Audit (January 2026)](#rag-pipeline-audit-january-2026)
-  - [Data Flow Map](#data-flow-map)
   - [Embedding Analysis](#embedding-analysis)
-  - [Ranking Pipeline Order of Operations](#ranking-pipeline-order-of-operations)
-  - [Test Coverage Analysis](#test-coverage-analysis)
   - [Architecture Issues](#architecture-issues)
   - [Hardcoded Values Audit](#hardcoded-values-audit)
-  - [Summary Findings](#summary-findings)
 
 ---
 
@@ -84,67 +80,7 @@
 **Project:** MattGPT Portfolio Assistant - AI-powered career story search and chat interface
 **Tech Stack:** Streamlit, OpenAI GPT-4o, Pinecone vector DB, Python 3.11+
 **Data Corpus:** 130+ STAR-formatted transformation project stories
-**Last Updated:** June 8, 2026
-
-### Key Achievements
-
-**95.1% Code Reduction in Core Router**
-- `app.py`: 5,765 lines → 284 lines
-- Eliminated 1,400+ lines of dead code (zombie functions, commented blocks, unused imports)
-- Modularized monolithic `ask_mattgpt.py` (4,696 lines) into 8-file directory structure
-
-**Modern CSS Architecture**
-- Implemented CSS variables for light/dark mode support
-- Standardized avatar sizing (64px headers, 60px chat)
-- Solved Streamlit emotion-cache override challenges
-- Consistent purple brand (#8B5CF6) across all views
-
-**Component-Based Structure**
-- 8 reusable UI components (142 KB)
-- 4 business logic services (28 KB)
-- 6 shared utility modules (27 KB)
-- Minimal circular dependencies (one deferred import for `sync_portfolio_metadata`)
-
-### Current State (May 2026)
-
-**Role Match feature (April–May 2026):** JD-to-portfolio fit assessment. Phases 1-3 (recruiter view, AgGrid results panel, action buttons, share/export) shipped April 2026. Phase 4 slice 1 (private-view lock icon + password gate UI shell, fail-closed: deployment state must not leak) shipped May 2026. Engine: `services/jd_assessor.py` three-stage pipeline + deterministic `compute_recommendation()` scoring. See `BACKLOG.md` MATTGPT-012 for Phase 4 slices 2 (agentic bypass) and 3 (private assessment view).
-
-**Triage Agent surface (May 2026):** Engine-as-adapter pattern. `services/jd_assessor.py` is now shared by two surfaces — the interactive Streamlit Role Match page and `scripts/assess_jd.py` (CLI for external agent orchestration, schema-versioned JSON envelope over stdin/stdout). Orchestration assets live in `agent/triage/` (synthesis prompt, filter config) — source of truth in this repo, copied to Cowork's designated folder. `agent/discovery/` reserved for v2 ATS push-model discovery. See `tests/unit/test_assess_jd.py` for the CLI contract.
-
-**Prompt Architecture Refactor (Jan 26, 2026) — 93-97% structural pass rate:**
-- Created `prompts.py` with clean BASE_PROMPT + SYNTHESIS_DELTA + STANDARD_DELTA architecture
-- BASE_PROMPT establishes Agy as fact-relayer, not evaluator (prevents meta-commentary)
-- Removed `get_theme_guidance()` which had conflicting "Emphasize:" instructions
-- Removed `BANNED_PHRASES_CLEANUP` post-processing bandaid
-- Fixed hardcoded client exclusions → pattern-based `is_generic_client()`
-- Added structural assertion tests: `assert_no_meta_commentary()`, `assert_agy_voice()`, `assert_no_hardcoded_drift()`
-- Meta-commentary failures reduced from 10/31 → 1-2/31
-- `backend_service.py` reduced by 564 lines
-
-**RAG Quality Sprint (Jan 21-24, 2026) — 100% eval pass rate (31/31):**
-- Model upgrade: GPT-4o-mini → GPT-4o (temperature 0.4 standard / 0.2 synthesis)
-- XML Context Isolation: `<primary_story>` / `<supporting_story>` tags prevent cross-story bleed
-- Narrative skip-diversity: narrative queries trust Pinecone semantic ranking (no diversity reorder)
-- Entity pinning: detected entities pin matching story to #1 in standard mode
-- Multi-Field Entity Gate: searches across 5 entity fields via Pinecone `$or`
-- Dynamic MATT_DNA + SYNTHESIS_THEMES: derived from JSONL at startup (Single Source of Truth)
-- Fact-pairing + texture rules: metrics stay pinned to source, distinctive phrases preserved verbatim
-- UI Hydration: all landing page counts derived dynamically from story data
-- Breadcrumb chip navigation, compact filter chips, updated about/modal pages
-
-**Ask MattGPT Modular Architecture:**
-- Landing view with capability cards and sample queries
-- Conversation view with RAG-powered responses
-- Unified header component across all views
-- "How Agy Searches" modal with 3-step flow visualization
-- Dark mode support via CSS variables
-
-**Core Features:**
-- Semantic search across 130+ project stories
-- Query validation via nonsense filter + Pinecone confidence gating
-- Context-aware follow-up questions
-- Story intelligence (theme/persona inference)
-- Responsive chat UI with thinking indicators
+**Last Updated:** June 25, 2026
 
 ### What This Document Contains
 
@@ -440,84 +376,6 @@ See [HISTORY.md](HISTORY.md) for the full evolution story including the Oct-Nov 
 
 ---
 
-**Problem:**
-- No dark mode support
-- Hardcoded colors throughout components
-- Difficult to maintain consistent theming
-
-**Solution:** Define CSS variables in `ui/styles/global_styles.py`:
-
-```css
-/* Light Mode (default) */
-:root {
-    /* Brand */
-    --accent-purple: #8B5CF6;
-    --accent-purple-hover: #7C3AED;
-
-    /* Backgrounds */
-    --bg-card: #FFFFFF;
-    --bg-surface: #F9FAFB;
-    --bg-primary: #FFFFFF;
-
-    /* Text */
-    --text-heading: #111827;
-    --text-primary: #1F2937;
-    --text-secondary: #6B7280;
-
-    /* Chat */
-    --chat-ai-bg: #F9FAFB;
-    --chat-ai-border: #8B5CF6;
-    --chat-user-bg: #FBFBFC;
-
-    /* Borders */
-    --border-color: #E5E7EB;
-}
-
-/* Dark Mode (override) */
-body.dark-theme {
-    --bg-card: #1E1E2E;
-    --bg-surface: #262633;
-    --bg-primary: #0E1117;
-
-    --text-heading: #F9FAFB;
-    --text-primary: #E5E7EB;
-    --text-secondary: #9CA3AF;
-    --accent-purple-text: #A78BFA;  /* Lighter for dark BG */
-
-    --chat-ai-bg: #1E1E2E;
-    --chat-user-bg: #282435;  /* Purple-tinted dark */
-
-    --border-color: #374151;
-}
-```
-
-**Usage in Components:**
-```css
-.chat-message {
-    background: var(--chat-ai-bg);
-    color: var(--text-primary);
-    border: 1px solid var(--border-color);
-}
-```
-
-**Benefits:**
-- Automatic dark mode via variable overrides
-- Single source of truth for colors
-- No Python-to-CSS bridging
-- Native browser support
-- Fallback values supported: `var(--bg-card, #FFFFFF)`
-
-**Trade-offs:**
-- **Pro:** Clean separation of concerns
-- **Pro:** Easy to add new color schemes
-- **Pro:** Works with Streamlit's theme system
-- **Con:** Must test both light and dark modes for every change
-- **Con:** Older browsers need fallbacks (not an issue for modern stack)
-
-**Supersedes:** ADR-002 (Python theme.py approach)
-
----
-
 ### Avatar Sizing Standards
 
 See **ADR 017** in `docs/ADR.md` for the full decision record.
@@ -697,77 +555,78 @@ PINECONE_NAMESPACE=default
 
 ### Production RAG Pipeline
 
-See [RAG Pipeline Audit → Data Flow Map](#data-flow-map) for the canonical query→response diagram (9-layer trace with removal history).
-
----
-
-### Synthesis Mode (Updated January 2026)
-
-**Problem:** RAG retrieves individual stories well but struggles with big-picture questions like "What are common themes?" or "What patterns do you see?" — these need holistic context, not a single story.
-
-**Solution:** Intent-aware retrieval that changes strategy based on query type, with entity-first classification.
-
-**Intent Classification (Semantic Router Only - Jan 29, 2026):**
-
-All intent classification uses the embedding-based semantic router (`services/semantic_router.py`) which maps queries to 15 intent families without LLM cost. Entity detection runs in parallel to identify company/project/title mentions.
+**Query → Response Trace (Updated Jan 29, 2026):**
 
 ```
-Query → Semantic Router (embedding similarity against 106+ intent embeddings)
-      → Entity Detection (substring matching against known entities + exact title match)
-      → Intent Family Resolution:
-        - background, behavioral, delivery, team_scaling, leadership
-        - technical, domain_payments, domain_healthcare, stakeholders
-        - innovation, agile_transformation, narrative, synthesis, out_of_scope, personal
+User Query
+    ↓
+┌─────────────────────────────────────────────────┐
+│ Layer 1: Rules-Based Rejection (Free)           │
+│ - nonsense_filters.jsonl patterns               │
+│ - is_nonsense() regex validation                │
+└─────────────────────────────────────────────────┘
+    ↓ (passed)
+┌─────────────────────────────────────────────────┐
+│ Layer 2: Semantic Router (Cheap)                │
+│ - Embed query with text-embedding-3-small       │
+│ - Compare against 106+ intent embeddings        │
+│ - 15 families including narrative, synthesis, out_of_scope, personal │
+│ - HARD_ACCEPT=0.80, SOFT_ACCEPT=0.40            │
+└─────────────────────────────────────────────────┘
+    ↓ (accepted, returns intent_family)
+┌─────────────────────────────────────────────────┐
+│ Layer 3: Fast Exit Checks                       │
+│ - out_of_scope: intent_family check → redirect  │
+│ - detect_entity(): Client, Employer, Div, Title │
+│ - Title = SOFT filter (no Pinecone metadata)    │
+└─────────────────────────────────────────────────┘
+    ↓
+┌─────────────────────────────────────────────────┐
+│ Layer 4: Pinecone Vector Search                 │
+│ - Query embedding → vector search               │
+│ - Entity filter ($or across 6 fields) if hard   │
+│ - Title: NO filter (semantic search ranks it)   │
+│ - UI filters (industry, domain, role)           │
+│ - Returns top 10 candidates (SEARCH_TOP_K)       │
+└─────────────────────────────────────────────────┘
+    ↓
+┌─────────────────────────────────────────────────┐
+│ Layer 5: Confidence Gate                        │
+│ - HIGH (≥0.25): proceed normally                │
+│ - LOW (≥0.20): proceed with warning             │
+│ - NONE (<0.20): "I couldn't find..."            │
+└─────────────────────────────────────────────────┘
+    ↓
+┌─────────────────────────────────────────────────┐
+│ Layer 6: Post-Retrieval Processing              │
+│ STANDARD: entity_pin → diversify_results() → 5 │
+│ NARRATIVE: sort by score (skip diversity) → 5   │
+│ SYNTHESIS: theme-filter → named-clients-first → 7 │
+└─────────────────────────────────────────────────┘
+    ↓
+┌─────────────────────────────────────────────────┐
+│ Layer 7: Context Assembly                       │
+│ - XML isolation: <primary_story> tags           │
+│ - MATT_DNA ground truth injection               │
+│ - Mode-specific prompt selection                │
+└─────────────────────────────────────────────────┘
+    ↓
+┌─────────────────────────────────────────────────┐
+│ Layer 8: LLM Generation (OpenAI GPT-4o)         │
+│ - Temperature: 0.4 (standard) / 0.2 (synthesis) │
+│ - Max tokens: 700                               │
+│ - Fact-pairing + texture rules                  │
+└─────────────────────────────────────────────────┘
+    ↓
+┌─────────────────────────────────────────────────┐
+│ Layer 9: Response Formatting                    │
+│ - Extract answer + sources                      │
+│ - Related Projects display                      │
+│ - Meta-commentary cleanup                       │
+└─────────────────────────────────────────────────┘
+    ↓
+User Response
 ```
-
-The semantic router handles all intent classification — synthesis detection (`intent_family == "synthesis"`), out_of_scope detection, and all other families — via embedding similarity alone.
-
-**Key Rule:** Entity detection OVERRIDES verb patterns.
-- "How did Matt scale at Accenture?" → `client` (not synthesis)
-- "What are Matt's core themes?" → `synthesis` (no entity)
-
-**Retrieval Strategies:**
-
-| Intent | Stories Retrieved | Retrieval Method |
-|--------|-------------------|------------------|
-| synthesis | 7-9 (up to 3 per theme) | Theme-filtered search, named-clients-first sorting |
-| narrative | 7 | Sort by Pinecone score (skip diversity) |
-| client | 7 | Entity pin to #1 → diversify_results() |
-| behavioral | 7 | Entity pin (if detected) → diversify_results() |
-| technical | 7 | Entity pin (if detected) → diversify_results() |
-| background | 7 | Entity pin (if detected) → diversify_results() |
-| general | 7 | Entity pin (if detected) → diversify_results() |
-
-**Synthesis Retrieval (get_synthesis_stories):**
-1. Embed USER's actual query (not fixed theme keywords)
-2. For each theme: Pinecone query with `filter={"Theme": theme}` + user embedding
-3. If entity detected: Add entity filter (e.g., `{"Division": "Cloud Innovation Center"}`)
-4. Up to 3 stories per theme, skip themes with no entity-scoped results
-5. Sort by score, then named-clients-first (JP Morgan/RBC beat "Independent")
-6. Return top 9 stories
-
-**Entity Detection:**
-Checks fields in order: Client, Employer, Division (Project and Place excluded — semantic search handles those naturally)
-- "CIC" matches Division: "Cloud Innovation Center"
-- "JPMorgan" matches Client: "JP Morgan Chase"
-- Excludes generic values: "Multiple Clients", "Independent"
-
-**Synthesis Prompt Mode:**
-- Different system prompt focused on patterns/themes
-- Asks for breadth across stories, not depth on one
-- Structure: Theme → Evidence from 2-4 clients → Insight
-- Dynamic client list derived from retrieved stories (no hardcoded names)
-- Longer responses (250-400 words)
-
-**Cost:**
-- Intent classification: ~$0.0000002 per query (embedding similarity, no LLM call)
-- LLM generation: GPT-4o (~$0.01-0.02 per query, 700 max tokens)
-- Total per query: ~$0.02
-
-**Self-Maintenance:**
-- Semantic router handles novel phrasings via embedding similarity
-- New story themes automatically picked up via `sync_portfolio_metadata()` at startup
-- MATT_DNA prompt regenerated on each deploy with current client/theme data
 
 ---
 
@@ -917,17 +776,112 @@ Per the CLAUDE.md "No Hardcoded Enums for Data-Derived Values" rule, the prior s
 #### Synthesis Mode
 - **Job:** Answer "what are Matt's themes/patterns/philosophy" questions
 - **Triggers:** Intent = `synthesis` (no entity + cross-cutting question)
-- **Retrieval:**
-  1. User query → OpenAI embedding (NOT fixed theme keywords)
-  2. For each theme: Pinecone query with `filter={"Theme": theme}` + user embedding
-  3. If entity detected: Add entity filter (e.g., `{"Theme": theme, "Client": "Accenture"}`)
-  4. Up to 3 stories per theme
-  5. Skip themes with no results for detected entity
-  6. **Named-clients-first:** Sort named clients (JP Morgan, RBC) above generic (Independent, Career Narrative)
+
+**Intent Classification (Semantic Router Only - Jan 29, 2026):**
+
+All intent classification uses the embedding-based semantic router (`services/semantic_router.py`) which maps queries to 15 intent families without LLM cost. Entity detection runs in parallel to identify company/project/title mentions.
+
+```
+Query → Semantic Router (embedding similarity against 106+ intent embeddings)
+      → Entity Detection (substring matching against known entities + exact title match)
+      → Intent Family Resolution:
+        - background, behavioral, delivery, team_scaling, leadership
+        - technical, domain_payments, domain_healthcare, stakeholders
+        - innovation, agile_transformation, narrative, synthesis, out_of_scope, personal
+```
+
+The semantic router handles all intent classification — synthesis detection (`intent_family == "synthesis"`), out_of_scope detection, and all other families — via embedding similarity alone.
+
+**Key Rule:** Entity detection OVERRIDES verb patterns.
+- "How did Matt scale at Accenture?" → `client` (not synthesis)
+- "What are Matt's core themes?" → `synthesis` (no entity)
+
+**Retrieval Strategies:**
+
+| Intent | Stories Retrieved | Retrieval Method |
+|--------|-------------------|------------------|
+| synthesis | 7-9 (up to 3 per theme) | Theme-filtered search, named-clients-first sorting |
+| narrative | 7 | Sort by Pinecone score (skip diversity) |
+| client | 7 | Entity pin to #1 → diversify_results() |
+| behavioral | 7 | Entity pin (if detected) → diversify_results() |
+| technical | 7 | Entity pin (if detected) → diversify_results() |
+| background | 7 | Entity pin (if detected) → diversify_results() |
+| general | 7 | Entity pin (if detected) → diversify_results() |
+
+**Synthesis Retrieval (get_synthesis_stories):**
+1. Embed USER's actual query (not fixed theme keywords)
+2. For each theme: Pinecone query with `filter={"Theme": theme}` + user embedding
+3. If entity detected: Add entity filter (e.g., `{"Division": "Cloud Innovation Center"}`)
+4. Up to 3 stories per theme, skip themes with no entity-scoped results
+5. Sort by score, then named-clients-first (JP Morgan/RBC beat "Independent")
+6. Return top 9 stories
+
+**Entity Detection:**
+Checks fields in order: Client, Employer, Division (Project and Place excluded — semantic search handles those naturally)
+- "CIC" matches Division: "Cloud Innovation Center"
+- "JPMorgan" matches Client: "JP Morgan Chase"
+- Excludes generic values: "Multiple Clients", "Independent"
+
+**Synthesis Prompt Mode:**
+- Different system prompt focused on patterns/themes
+- Asks for breadth across stories, not depth on one
+- Structure: Theme → Evidence from 2-4 clients → Insight
+- Dynamic client list derived from retrieved stories (no hardcoded names)
+- Longer responses (250-400 words)
+
 - **Lives in:** `backend_service.py:get_synthesis_stories()`
 - **Story limit:** 9 stories to LLM context
 - **MUST use:** User's actual query embedding for semantic relevance
 - **MUST NOT:** Ignore user's query for fixed theme keywords (previous bug)
+
+**Cost:**
+- Intent classification: ~$0.0000002 per query (embedding similarity, no LLM call)
+- LLM generation: GPT-4o (~$0.01-0.02 per query, 700 max tokens)
+- Total per query: ~$0.02
+
+**Self-Maintenance:**
+- Semantic router handles novel phrasings via embedding similarity
+- New story themes automatically picked up via `sync_portfolio_metadata()` at startup
+- MATT_DNA prompt regenerated on each deploy with current client/theme data
+
+#### Ranking Pipeline Order of Operations
+
+**1. Pinecone Search (services/pinecone_service.py)**
+```
+query_vector → Pinecone.query(top_k=100, filter=entity_filters)
+↓
+Returns: [(story_id, score, metadata), ...] sorted by cosine similarity
+```
+
+**2. Entity Pinning (backend_service.py)**
+```
+If entity detected AND matching story found:
+  Move matching story to position 0
+  Rest maintain Pinecone order
+```
+
+**3. Diversity Reordering (backend_service.py:diversify_results)**
+```
+Standard/Behavioral modes only:
+  - Pin #1 from Pinecone retrieval (highest semantic relevance)
+  - For slots #2+: named clients first, then generic, then duplicates
+  - Limiting stories per client (max_per_client param)
+  - Skip for narrative mode (trust Pinecone semantic ranking)
+  - NO cross-query session state — diversify is deterministic per query
+    (removed May 18, 2026 per ADR 019 / MATTGPT-073)
+```
+
+**4. Final Selection**
+```
+Standard: top 5 after diversity
+Narrative: top 5 by Pinecone score (no reorder)
+Synthesis: up to 9 (3 per theme × 3 themes)
+```
+
+**Scoring Formula:**
+- Primary: Pinecone cosine similarity (0.0 - 1.0)
+- No secondary scoring layer
+- Confidence thresholds: HIGH=0.25, LOW=0.20 (from config/constants.py)
 
 ### Layer 4: Response Generation
 
@@ -1070,7 +1024,7 @@ def _log_bandaid(bandaid_name: str, details: str):
 
 ### Data Flow Diagram
 
-See [RAG Pipeline Audit → Data Flow Map](#data-flow-map) for the canonical query→response diagram (9-layer trace with removal history).
+See [Production RAG Pipeline](#production-rag-pipeline) for the canonical query→response diagram (9-layer trace).
 
 ### Cross-Page Navigation into Ask MattGPT
 
@@ -1760,9 +1714,12 @@ Query logging to Google Sheets, capturing enriched data for every search across 
 - **Error handling:** Silent failure (try/except pass) — logging should never break the app
 - **Browser context:** Captured in main Streamlit thread before spawning daemon (st.context is thread-local)
 
-**Schema (11 columns):**
+**Schema (32 columns — source of truth: `services/query_logger.py:HEADERS`):**
+
+Core event columns (all event types):
 | Column | Source | Notes |
 |--------|--------|-------|
+| Event Type | log function | "query", "page_load", "feedback", "role_match_assessment", etc. |
 | Timestamp | `datetime.now()` | Server-side UTC |
 | Query | function param | User's search text |
 | Page | function param | "Ask Agy" or "Explore Stories" |
@@ -1774,6 +1731,30 @@ Query logging to Google Sheets, capturing enriched data for every search across 
 | Screen Width | `streamlit_js_eval` | Viewport width for CSS breakpoint analysis |
 | Timezone | `st.context.timezone` | User's timezone |
 | Referrer | `st.context.headers` | Captured on first mount via first-mount guard |
+| Sources | function param | Retrieved story titles |
+| Rating | function param | Feedback rating |
+| Turn Index | function param | Conversation turn number |
+| Msg Hash | function param | Message hash for dedup |
+| UTM Source | query string | Campaign tracking |
+| UTM Medium | query string | Campaign tracking |
+| UTM Campaign | query string | Campaign tracking |
+| UTM Content | query string | Campaign tracking |
+| UTM Term | query string | Campaign tracking |
+
+Role Match columns (added April 2026):
+| Column | Notes |
+|--------|-------|
+| Role Title | JD-extracted role |
+| Company | JD-extracted company |
+| JD Format | Format classification |
+| Required Count | Requirement counts from assessment |
+| Preferred Count | |
+| Strong Count | Story match counts |
+| Partial Count | |
+| Gap Count | |
+| Session ID | |
+| Story Title | Matched story |
+| Client | Matched story client |
 
 **Logging Points:**
 | Location | Count | Points |
@@ -1867,7 +1848,7 @@ def semantic_search(q: str, stories: list, top_k: int = SEARCH_TOP_K, filters: d
 #### Query Pipeline
 - **Embedding:** 1 query = 10-20 tokens = $0.0000002
 - **Pinecone:** Free tier (up to 100K queries/month)
-- **GPT-4o-mini:** ~500 tokens per response = $0.00015
+- **GPT-4o:** ~500 tokens per response = $0.01-0.02
 - **Total per query:** ~$0.0002 (negligible)
 
 #### Pinecone Index
@@ -2023,41 +2004,11 @@ The `MATT_DNA` grounding prompt—injected into every LLM call—is now rendered
 
 #### 2. Multi-Field Entity Search
 
-When a user asks about an entity (e.g., "Accenture work"), the system now searches across **six metadata fields** using Pinecone's `$or` operator—not just the `client` field.
-
-| Field | Casing | Example Match |
-|-------|--------|---------------|
-| `client` | PascalCase | `"Accenture"` |
-| `employer` | lowercase | `"accenture"` |
-| `division` | lowercase | `"cloud innovation center"` |
-| `project` | lowercase | `"accenture"` |
-| `place` | lowercase | `"accenture"` |
-| `title` | PascalCase | `"Driving Cloud-Native Innovation..."` |
-
-**Implementation:** `pinecone_service.py`
-
-**Note (Jan 29, 2026):** Title entities use **soft filtering** — they're detected but don't create a Pinecone metadata filter. This ensures Related Projects populate naturally via semantic search.
-
-**Why:** Closed the "entity blind spot" where stories with `Client="Confidential Healthcare Provider"` but `Employer="Accenture"` weren't found for Accenture queries. The CIC stories were particularly affected since many had `Division="Cloud Innovation Center"` but generic client names.
+See [Component Contracts → Multi-Field Entity Search](#multi-field-entity-search) for the full field table, casing rules, and implementation detail.
 
 #### 3. UI Hydration
 
-Landing pages now receive the full `stories` list and compute counts dynamically at render time—no hardcoded metrics.
-
-| Page | Hydrated Values |
-|------|-----------------|
-| `banking_landing.py` | Project count, client pills with counts, capability count |
-| `cross_industry_landing.py` | Project count, industry pills, capability count |
-| `category_cards.py` | Banking/Cross-industry counts, top 3 client pills |
-
-**Implementation:** All landing pages accept `stories: list[dict]` parameter; `app.py` passes `STORIES` to each.
-
-**Why:** Previously had hardcoded "12 projects" that drifted as JSONL grew. Removed phantom industries ("Manufacturing", "Retail & Consumer Goods") that were wireframe leftovers with zero stories.
-
-**See also:**
-- [MATT_DNA Ground Truth](#matt_dna-ground-truth-dynamically-generated-from-jsonl--january-2026) — Full prompt template
-- [Multi-Field Entity Search](#2-multi-field-entity-search) — Component contract details
-- [UI Hydration Pattern](#ui-hydration-pattern-january-2026) — Code examples
+See [Component Contracts → UI Hydration Pattern](#ui-hydration-pattern-january-2026) for the full implementation, code examples, and hydrated page inventory.
 
 ### Master Data Source
 
@@ -2394,6 +2345,30 @@ pytest tests/unit -v
 - `test_filters.py` - Filter logic
 - `test_formatting.py` - STAR story formatting
 
+### st.dataframe Canvas Constraint (MATTGPT-144)
+
+`st.dataframe` renders rows, cells, column headers, and selection controls to an HTML canvas, not the DOM. This has hard consequences for testing that are not obvious and cost a full investigation to establish.
+
+**What BDD/Playwright CAN verify:**
+
+- Grid mounted: `[data-testid="stDataFrame"]` and `[data-testid="data-grid-canvas"]` present and visible. The canvas paints AFTER the Streamlit rerun completes, so any assertion must explicitly wait for `data-grid-canvas`, not just `wait_for_streamlit_rerun`.
+- Filter pipeline worked: parse count from `.es-results-count` and compare direction before/after. Never assert hardcoded counts. The count element is absent in the no-match state.
+- Detail pipeline worked: reach a story via deeplink (`?story=id`), which sets `active_story` with no canvas interaction, then assert `.es-detail-header`.
+
+**What BDD/Playwright CANNOT verify, ever:**
+
+- Row content (text is painted to canvas, not in the DOM; no selector reaches it).
+- That rows visually rendered (a blank grid and a populated grid are indistinguishable to DOM queries -- this is exactly the MATTGPT-144 failure mode).
+- Row selection driven from a test. The selection checkbox is canvas-drawn (`checkboxStyle: "square"`), not an `<input>`. Keyboard nav reaches the canvas (focusable, tabIndex 0, main document not iframe) but ArrowDown lands on a data cell and Space opens the cell editor, not the row marker. Coordinate-clicking is brittle (depends on exact row-pixel math and paint timing) and must not be used.
+
+**Rules:**
+
+- Visual row-rendering correctness on any `st.dataframe` surface is covered by manual visual check (the MATTGPT-144 20-click filter test), NOT automated BDD. A green BDD suite does not prove the grid painted its rows. Document this explicitly in any test file that asserts against `st.dataframe` so green is never mistaken for full coverage.
+- Any new surface that adopts `st.dataframe` inherits all of the above. Plan for manual visual verification of row rendering; do not design BDD that purports to assert canvas row content or canvas-driven selection.
+- If whole-row-click or keyboard row selection is a hard requirement, `st.dataframe` cannot provide it. Self-rendered HTML rows (the Cards pattern) are the accessible, testable alternative.
+
+**Origin:** Established during the MATTGPT-144 AgGrid to st.dataframe migration. The prior AgGrid BDD was green while the grid was broken because its assertions were `pass` no-ops AND the one real assertion targeted `.ag-row` inside an iframe. The canvas constraint means the naive replacement ("assert N rows rendered") is impossible, which is why the manual visual check is load-bearing, not optional.
+
 ---
 
 ## Mobile Responsiveness
@@ -2410,82 +2385,7 @@ See [BACKLOG.md](BACKLOG.md) for current open work.
 
 ## RAG Pipeline Audit (January 2026)
 
-Comprehensive audit of the RAG (Retrieval-Augmented Generation) pipeline covering data flow, embedding analysis, ranking operations, test coverage, and architecture issues.
-
-### Data Flow Map
-
-**Query → Response Trace (Updated Jan 29, 2026):**
-
-```
-User Query
-    ↓
-┌─────────────────────────────────────────────────┐
-│ Layer 1: Rules-Based Rejection (Free)           │
-│ - nonsense_filters.jsonl patterns               │
-│ - is_nonsense() regex validation                │
-└─────────────────────────────────────────────────┘
-    ↓ (passed)
-┌─────────────────────────────────────────────────┐
-│ Layer 2: Semantic Router (Cheap)                │
-│ - Embed query with text-embedding-3-small       │
-│ - Compare against 106+ intent embeddings        │
-│ - 15 families including narrative, synthesis, out_of_scope, personal │
-│ - HARD_ACCEPT=0.80, SOFT_ACCEPT=0.40            │
-└─────────────────────────────────────────────────┘
-    ↓ (accepted, returns intent_family)
-┌─────────────────────────────────────────────────┐
-│ Layer 3: Fast Exit Checks                       │
-│ - out_of_scope: intent_family check → redirect  │
-│ - detect_entity(): Client, Employer, Div, Title │
-│ - Title = SOFT filter (no Pinecone metadata)    │
-└─────────────────────────────────────────────────┘
-    ↓
-┌─────────────────────────────────────────────────┐
-│ Layer 4: Pinecone Vector Search                 │
-│ - Query embedding → vector search               │
-│ - Entity filter ($or across 6 fields) if hard   │
-│ - Title: NO filter (semantic search ranks it)   │
-│ - UI filters (industry, domain, role)           │
-│ - Returns top 10 candidates (SEARCH_TOP_K)       │
-└─────────────────────────────────────────────────┘
-    ↓
-┌─────────────────────────────────────────────────┐
-│ Layer 5: Confidence Gate                        │
-│ - HIGH (≥0.25): proceed normally                │
-│ - LOW (≥0.20): proceed with warning             │
-│ - NONE (<0.20): "I couldn't find..."            │
-└─────────────────────────────────────────────────┘
-    ↓
-┌─────────────────────────────────────────────────┐
-│ Layer 6: Post-Retrieval Processing              │
-│ STANDARD: entity_pin → diversify_results() → 5 │
-│ NARRATIVE: sort by score (skip diversity) → 5   │
-│ SYNTHESIS: theme-filter → named-clients-first → 7 │
-└─────────────────────────────────────────────────┘
-    ↓
-┌─────────────────────────────────────────────────┐
-│ Layer 7: Context Assembly                       │
-│ - XML isolation: <primary_story> tags           │
-│ - MATT_DNA ground truth injection               │
-│ - Mode-specific prompt selection                │
-└─────────────────────────────────────────────────┘
-    ↓
-┌─────────────────────────────────────────────────┐
-│ Layer 8: LLM Generation (OpenAI GPT-4o)         │
-│ - Temperature: 0.4 (standard) / 0.2 (synthesis) │
-│ - Max tokens: 700                               │
-│ - Fact-pairing + texture rules                  │
-└─────────────────────────────────────────────────┘
-    ↓
-┌─────────────────────────────────────────────────┐
-│ Layer 9: Response Formatting                    │
-│ - Extract answer + sources                      │
-│ - Related Projects display                      │
-│ - Meta-commentary cleanup                       │
-└─────────────────────────────────────────────────┘
-    ↓
-User Response
-```
+Audit of the RAG (Retrieval-Augmented Generation) pipeline covering embedding analysis, architecture issues, and hardcoded values.
 
 ### Embedding Analysis
 
@@ -2498,89 +2398,6 @@ User Response
 | Story embeddings | `build_custom_embeddings.py` | 1536 | Retrieved from Pinecone for story matching |
 | Query embeddings | `pinecone_service.py` | 1536 | Generated at runtime for semantic search |
 | Intent centroids | `semantic_router.py` | 1536 | 11 pre-computed intent family embeddings |
-
-**Embedding Fields Used (from JSONL):**
-
-Stories are embedded using `build_embedding_text()` which concatenates:
-```python
-# Header: [Title] [Theme] in Industry (Sub-category)
-header_bits = [f"[{title}]", f"[{theme}]", f"in {industry}", f"({sub_category})"]
-
-# Body sections
-parts = [
-    f"Summary: {summary_5p}",
-    f"Situation: {situation}",  # STAR fields ARE embedded
-    f"Task: {task}",
-    f"Action: {action}",
-    f"Result: {result}",
-    f"Process: {process_text}",
-    f"Keywords: {tags}",
-]
-```
-
-**Fields embedded:**
-- Title
-- Theme, Industry, Sub-category (behavioral context)
-- 5PSummary (concise overview)
-- STAR fields: Situation, Task, Action, Result (2-3 items each)
-- Process (max 3 items)
-- public_tags (keywords)
-
-**Fields NOT embedded** (metadata only, used for filtering):
-- Client, Employer, Division
-- Role, Era
-
-### Ranking Pipeline Order of Operations
-
-**1. Pinecone Search (services/pinecone_service.py)**
-```
-query_vector → Pinecone.query(top_k=100, filter=entity_filters)
-↓
-Returns: [(story_id, score, metadata), ...] sorted by cosine similarity
-```
-
-**2. Entity Pinning (backend_service.py)**
-```
-If entity detected AND matching story found:
-  Move matching story to position 0
-  Rest maintain Pinecone order
-```
-
-**3. Diversity Reordering (backend_service.py:diversify_results)**
-```
-Standard/Behavioral modes only:
-  - Pin #1 from Pinecone retrieval (highest semantic relevance)
-  - For slots #2+: named clients first, then generic, then duplicates
-  - Limiting stories per client (max_per_client param)
-  - Skip for narrative mode (trust Pinecone semantic ranking)
-  - NO cross-query session state — diversify is deterministic per query
-    (removed May 18, 2026 per ADR 019 / MATTGPT-073)
-```
-
-**4. Final Selection**
-```
-Standard: top 5 after diversity
-Narrative: top 5 by Pinecone score (no reorder)
-Synthesis: up to 9 (3 per theme × 3 themes)
-```
-
-**Scoring Formula:**
-- Primary: Pinecone cosine similarity (0.0 - 1.0)
-- No secondary scoring layer
-- Confidence thresholds: HIGH=0.25, LOW=0.20 (from config/constants.py)
-
-### Test Coverage Analysis
-
-**Eval Framework:** `tests/eval_rag_quality.py` — 98.1% pass rate (60/61 queries across 8 categories, March 2026).
-
-See [Component Contracts → Testing Strategy](#testing-strategy) for the current category breakdown.
-
-**Test File Structure:**
-- `tests/test_benchmark_rag.py` - Main eval suite
-- `data/borderline_queries.csv` - Edge case query log
-- `tests/test_boost_narrative.py` - Narrative boost tests
-
-Test coverage gaps are tracked in [BACKLOG.md](BACKLOG.md) (MATTGPT-040).
 
 ### Architecture Issues
 
@@ -2649,31 +2466,17 @@ temperature=0.4  # standard mode
 temperature=0.2  # synthesis mode
 ```
 
-**Location:** backend_service.py (line ~945)
+**Location:** `backend_service.py`
 
 **6. Token Limits**
 
 ```python
-max_tokens=700  # generation (backend_service.py line ~958)
+max_tokens=700  # generation (backend_service.py)
 ```
 
 **7. Pinecone Index Name**
 
 ✅ **RESOLVED:** Index name is now read from `get_conf("PINECONE_INDEX_NAME")` in `pinecone_service.py`. Current value: `matt-portfolio-v2`.
-
-### Summary Findings
-
-**Strengths:**
-- Multi-layer gating prevents garbage queries efficiently
-- Entity detection adds precision to broad queries
-- Mode-specific retrieval (standard/narrative/synthesis) improves relevance
-- XML context isolation prevents cross-story bleed
-- Dynamic MATT_DNA derived from single source of truth
-- Clean prompt architecture in `prompts.py` (BASE_PROMPT + DELTA pattern)
-- Structural assertion tests catch meta-commentary and voice drift
-- Pattern-based client filtering via `is_generic_client()` (no hardcoded lists)
-
-Known weaknesses and recommended actions are tracked in [BACKLOG.md](BACKLOG.md).
 
 ---
 
