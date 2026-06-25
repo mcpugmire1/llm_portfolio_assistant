@@ -161,12 +161,6 @@ Feature: My Work
     Then the page should navigate to Ask Agy
     And the question should reference the story
 
-  Scenario: Ask Agy works from Table view
-    Given the user is in Table view
-    When the user clicks on a story row
-    And the user clicks "Ask Agy About This"
-    Then the page should navigate to Ask Agy
-
   Scenario: Ask Agy works from Cards view
     Given the user is in Cards view
     When the user clicks on a story card
@@ -182,16 +176,22 @@ Feature: My Work
     Then the story detail should be open
     And the story should be "Building JP Morgan's Global Payments Gateway Across 12 Countries"
 
-  Scenario: Deeplink respects view mode
-    Given the user preference is Cards view
+  Scenario: Deeplink opens story detail from non-default view
+    Given the user is in Cards view
     When the user navigates to "?story=building-jp-morgans-global-payments-gateway-across-12-countries%7Cjp-morgan-chase"
-    Then the view should be Cards view
-    And the story detail should be open
+    Then the story detail should be open
+    And the story should be "Building JP Morgan's Global Payments Gateway Across 12 Countries"
 
   Scenario: Share link generates correct URL
     Given the user has opened a story detail
     When the user clicks the Share button
     Then the clipboard should contain the story deeplink URL
+
+  Scenario: Share button shows Copied confirmation then reverts
+    Given the user has opened a story detail
+    When the user clicks the Share button
+    Then the Share button should show a Copied confirmation
+    And the Share button should revert to its default label
 
   # =============================================================================
   # PAGINATION

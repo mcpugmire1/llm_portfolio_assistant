@@ -6,6 +6,8 @@ Install with: pip install pytest-bdd playwright
 Run with: pytest tests/bdd -k explore_stories
 """
 
+import re
+
 import pytest
 from pytest_bdd import given, parsers, scenarios, then, when
 
@@ -23,6 +25,37 @@ scenarios('../features/explore_stories.feature')
 SHORT_WAIT = 200  # Quick UI updates
 MEDIUM_WAIT = 500  # Component renders
 CONTENT_WAIT = 1000  # Content loading after navigation
+
+# =============================================================================
+# COVERAGE BOUNDARIES — st.dataframe (Glide Data Grid) era
+# =============================================================================
+# BDD CAN assert: filter pipeline (count direction via .es-results-count),
+#   grid mount (.stDataFrame canvas visible), detail panel (deeplink or card click),
+#   rejection state (.no-match-banner + absent stDataFrame).
+# BDD CANNOT assert: canvas row content (text/values per row),
+#   row selection via click (GDG canvas is not DOM-clickable from Playwright).
+# Manual coverage: 20-click visual check verifies row selection -> detail open.
+# Ticket: MATTGPT-144 (poc/mattgpt-144-stdataframe-table).
+# =============================================================================
+
+
+def _read_count(page):
+    """Extract total story count from the '.es-results-count' text.
+
+    The rendered text is 'Showing N-M of TOTAL projects' where the
+    spacing between tokens is a mix of &nbsp; (U+00A0), regular spaces,
+    and newlines (inner_text/textContent surface these inconsistently).
+    Collapse all whitespace to single spaces before matching so the
+    regex is robust to markup spacing changes. Returns 0 if the element
+    is absent (e.g. the no-match/rejection state, where no count renders).
+    """
+    locator = page.locator(".es-results-count")
+    if locator.count() == 0:
+        return 0
+    raw = locator.first.text_content() or ""
+    text = re.sub(r"\s+", " ", raw).strip()
+    m = re.search(r"of (\d+)", text)
+    return int(m.group(1)) if m else 0
 
 
 def wait_for_content(page, selector, timeout=10000):
@@ -79,22 +112,23 @@ def navigate_to_explore(browser_page, app_url):
     # Click My Work button (avoid hidden mobile nav by using visible filter)
     nav_button = browser_page.locator("button:has-text('My Work'):visible").first
     nav_button.click()
-    browser_page.wait_for_load_state("networkidle")
+    # stDataFrame on My Work causes continuous XHR — networkidle never settles.
+    wait_for_streamlit_rerun(browser_page)
 
 
 @given("the page has finished loading")
 def wait_for_page_load(browser_page):
-    browser_page.wait_for_load_state("networkidle")
+    wait_for_streamlit_rerun(browser_page)
     # Wait for My Work page content - results count is always present
     browser_page.wait_for_selector(".es-results-count", timeout=30000)
-    # Wait for AgGrid to fully render (it loads async after Streamlit reruns)
-    # AgGrid can take a while in headless mode
+    # Wait for stDataFrame to mount (Table is the default view)
     try:
-        browser_page.wait_for_selector(".ag-root-wrapper", timeout=30000)
-        browser_page.wait_for_selector(".ag-row", timeout=15000)
+        browser_page.wait_for_selector('[data-testid="stDataFrame"]', timeout=15000)
     except Exception:
-        # If AgGrid not visible, we might be in Cards or Timeline view
+        # Cards or Timeline view — stDataFrame not expected
         pass
+    # Store baseline count for count-direction assertions in Then steps
+    browser_page._es_baseline_count = _read_count(browser_page)
 
 
 @given("the user has searched for {query}")
@@ -105,7 +139,7 @@ def user_has_searched(browser_page, query):
     ).first
     search_input.fill(query)
     search_input.press("Enter")
-    browser_page.wait_for_load_state("networkidle")
+    wait_for_streamlit_rerun(browser_page)
 
 
 @given("the user has opened a story detail")
@@ -114,26 +148,9 @@ def user_has_opened_detail(browser_page):
     # Wait for any story content to appear
     wait_for_content(
         browser_page,
-        ".es-fixed-height-card, [data-testid='stCustomComponentV1'], .es-story-card",
+        ".es-fixed-height-card, [data-testid='stDataFrame'], .es-story-card",
         timeout=10000,
     )
-
-    # Try AgGrid rows first (Table view - inside iframe)
-    aggrid_iframe = browser_page.locator("[data-testid='stCustomComponentV1']")
-    if aggrid_iframe.count() > 0 and aggrid_iframe.first.is_visible():
-        aggrid_frame = browser_page.frame_locator(
-            "[data-testid='stCustomComponentV1']"
-        ).first
-        rows = aggrid_frame.locator(".ag-row")
-        if rows.count() > 0:
-            rows.first.click()
-            wait_for_streamlit_rerun(browser_page)
-            if wait_for_content(
-                browser_page,
-                "#btn-share-story, .es-detail-header, .star-label",
-                timeout=10000,
-            ):
-                return
 
     # Try Cards view (if visible)
     cards = browser_page.locator(".es-fixed-height-card")
@@ -160,6 +177,9 @@ def user_has_opened_detail(browser_page):
             return
 
     # Last resort: switch to Cards view
+    # stDataFrame's initial mount triggers a Streamlit rerun that briefly removes
+    # stButtonGroup from the DOM. Wait for it before checking count.
+    wait_for_content(browser_page, "[data-testid='stButtonGroup']", timeout=10000)
     view_btn = browser_page.locator(
         "[data-testid='stButtonGroup'] button:has-text('Cards')"
     ).first
@@ -206,7 +226,7 @@ def user_has_selected_filter(browser_page, value, filter_name):
     select.click()
     option = browser_page.locator(f"[role='option']:has-text('{value}')").first
     option.click()
-    browser_page.wait_for_load_state("networkidle")
+    wait_for_streamlit_rerun(browser_page)
 
 
 @given("the advanced filters are expanded")
@@ -239,19 +259,11 @@ def user_is_in_view(browser_page, view):
     wait_for_streamlit_rerun(browser_page)
     # Wait for the specific view content
     if view == "Table":
-        wait_for_content(
-            browser_page, "[data-testid='stCustomComponentV1']", timeout=10000
-        )
+        wait_for_content(browser_page, '[data-testid="stDataFrame"]', timeout=10000)
     elif view == "Cards":
         wait_for_content(browser_page, ".es-fixed-height-card", timeout=10000)
     elif view == "Timeline":
         wait_for_content(browser_page, ".es-timeline-container", timeout=10000)
-
-
-@given(parsers.parse("the user preference is {view} view"))
-def user_preference_view(browser_page, view):
-    # Same as setting view
-    user_is_in_view(browser_page, view)
 
 
 @given(parsers.parse("the user is on page {page_num:d}"))
@@ -261,7 +273,7 @@ def user_is_on_page(browser_page, page_num):
             "button:has-text('Next'), button:has-text('>')"
         ).first
         next_btn.click()
-        browser_page.wait_for_load_state("networkidle")
+        wait_for_streamlit_rerun(browser_page)
 
 
 @given(parsers.parse("there are more than {count:d} stories"))
@@ -277,7 +289,7 @@ def user_was_previously_on_explore(browser_page, app_url):
     browser_page.wait_for_load_state("networkidle")
     nav_button = browser_page.locator("button:has-text('My Work'):visible").first
     nav_button.click()
-    browser_page.wait_for_load_state("networkidle")
+    wait_for_streamlit_rerun(browser_page)
 
     # Set a filter
     select = browser_page.locator(
@@ -289,12 +301,10 @@ def user_was_previously_on_explore(browser_page, app_url):
             1
         )  # First non-empty option
         option.click()
-        browser_page.wait_for_load_state("networkidle")
+        wait_for_streamlit_rerun(browser_page)
 
     # Open a story
-    story = browser_page.locator(
-        ".es-fixed-height-card, .ag-root-wrapper .ag-row, .es-story-card"
-    ).first
+    story = browser_page.locator(".es-fixed-height-card, .es-story-card").first
     if story.is_visible():
         story.click()
         wait_for_content(browser_page, ".es-detail-header, .star-label", timeout=5000)
@@ -328,7 +338,7 @@ def press_enter(browser_page):
         "input[placeholder*='modern platforms'], input[placeholder*='Find stories']"
     ).first
     search_input.press("Enter")
-    browser_page.wait_for_load_state("networkidle")
+    wait_for_streamlit_rerun(browser_page)
 
 
 @when("the user clears the search box")
@@ -338,7 +348,7 @@ def clear_search(browser_page):
     ).first
     search_input.fill("")
     search_input.press("Enter")
-    browser_page.wait_for_load_state("networkidle")
+    wait_for_streamlit_rerun(browser_page)
 
 
 @when(parsers.parse('the user selects "{value}" from the {filter_name} filter'))
@@ -366,6 +376,8 @@ def click_filter_chip(browser_page, value):
     wait_for_content(
         browser_page, "button:has-text('✕'), p:has-text('✕')", timeout=5000
     )
+    # Capture count before removal for verify_more_stories direction check
+    browser_page._es_prefilterclear_count = _read_count(browser_page)
 
     chip = browser_page.locator(f"button:has-text('✕'):has-text('{value}')").first
     if chip.count() > 0:
@@ -395,6 +407,8 @@ def click_advanced_filters(browser_page):
 
 @when("the user clicks the Reset button")
 def click_reset(browser_page):
+    # Capture count before reset for direction checks
+    browser_page._es_prefilterclear_count = _read_count(browser_page)
     reset_btn = browser_page.locator(
         "button:has-text('Reset'), button:has-text('Clear')"
     ).first
@@ -421,9 +435,7 @@ def switch_view(browser_page, view):
     wait_for_streamlit_rerun(browser_page)
     # Wait for the specific view content
     if view == "Table":
-        wait_for_content(
-            browser_page, "[data-testid='stCustomComponentV1']", timeout=10000
-        )
+        wait_for_content(browser_page, '[data-testid="stDataFrame"]', timeout=10000)
     elif view == "Cards":
         wait_for_content(browser_page, ".es-fixed-height-card", timeout=10000)
     elif view == "Timeline":
@@ -435,7 +447,7 @@ def click_story_card(browser_page):
     # Wait for any story content to appear first
     wait_for_content(
         browser_page,
-        ".es-fixed-height-card, [data-testid='stCustomComponentV1'], .es-story-card",
+        ".es-fixed-height-card, [data-testid='stDataFrame'], .es-story-card",
         timeout=5000,
     )
 
@@ -447,24 +459,8 @@ def click_story_card(browser_page):
         wait_for_content(browser_page, ".es-detail-header, .star-label", timeout=10000)
         return
 
-    # Try AgGrid rows (Table view, inside iframe)
-    aggrid_iframe = browser_page.locator("[data-testid='stCustomComponentV1']")
-    if aggrid_iframe.count() > 0 and aggrid_iframe.first.is_visible():
-        aggrid_frame = browser_page.frame_locator(
-            "[data-testid='stCustomComponentV1']"
-        ).first
-        # Click on a cell to trigger row selection
-        cell = aggrid_frame.locator(".ag-row .ag-cell").first
-        try:
-            cell.wait_for(state="visible", timeout=10000)
-            cell.click()
-            wait_for_streamlit_rerun(browser_page)
-            wait_for_content(
-                browser_page, ".es-detail-header, .star-label", timeout=10000
-            )
-            return
-        except Exception:
-            pass  # Fall through to try other views
+    # st.dataframe (Table view) rows are canvas-rendered; not clickable from Playwright.
+    # Fall through to Timeline cards if in Table view.
 
     # Try Timeline story cards (direct DOM access)
     timeline_cards = browser_page.locator(".es-story-card")
@@ -474,29 +470,27 @@ def click_story_card(browser_page):
         wait_for_content(browser_page, ".es-detail-header, .star-label", timeout=10000)
         return
 
-    pytest.skip("No clickable story elements found")
-
-
-@when("the user clicks on a story row")
-def click_story_row(browser_page):
-    # AgGrid table is inside an iframe - wait for it
-    wait_for_content(browser_page, "[data-testid='stCustomComponentV1']", timeout=15000)
-
-    # Get the iframe element and switch to its frame
-    aggrid_frame = browser_page.frame_locator(
-        "[data-testid='stCustomComponentV1']"
+    # Last resort: switch to Cards view (same pattern as user_has_opened_detail)
+    wait_for_content(browser_page, "[data-testid='stButtonGroup']", timeout=10000)
+    view_btn = browser_page.locator(
+        "[data-testid='stButtonGroup'] button:has-text('Cards')"
     ).first
+    if view_btn.count() > 0:
+        view_btn.click()
+        wait_for_streamlit_rerun(browser_page)
+        wait_for_content(browser_page, ".es-fixed-height-card", timeout=10000)
+        cards = browser_page.locator(".es-fixed-height-card")
+        if cards.count() > 0:
+            cards.first.click()
+            wait_for_streamlit_rerun(browser_page)
+            wait_for_content(
+                browser_page, ".es-detail-header, .star-label", timeout=10000
+            )
+            return
 
-    # Wait for rows to appear within the iframe
-    row = aggrid_frame.locator(".ag-row").first
-    row.wait_for(state="visible", timeout=10000)
-
-    # Click on the row itself (not just a cell) to trigger selection
-    row.click()
-    # AgGrid selection triggers a Streamlit rerun
-    wait_for_streamlit_rerun(browser_page)
-    # Wait for the detail panel to appear
-    wait_for_content(browser_page, ".es-detail-header, .star-label", timeout=10000)
+    pytest.fail(
+        "No clickable story elements found — Cards view switch failed or no stories loaded"
+    )
 
 
 @when("the user clicks the close button")
@@ -535,8 +529,8 @@ def click_ask_agy(browser_page):
     btn = browser_page.locator("#btn-ask-story").first
     if btn.count() > 0:
         btn.click()
-        # Wait longer for JS + Streamlit rerun + page render
-        browser_page.wait_for_load_state("networkidle")
+        # Wait for JS + Streamlit rerun + page render; skip networkidle (LLM streaming)
+        wait_for_streamlit_rerun(browser_page)
         browser_page.wait_for_timeout(MEDIUM_WAIT)
         wait_for_content(browser_page, ask_page_selector, timeout=15000)
         return
@@ -545,7 +539,7 @@ def click_ask_agy(browser_page):
     text_btn = browser_page.locator("text=About This").first
     if text_btn.count() > 0:
         text_btn.click()
-        browser_page.wait_for_load_state("networkidle")
+        wait_for_streamlit_rerun(browser_page)
         browser_page.wait_for_timeout(MEDIUM_WAIT)
         wait_for_content(browser_page, ask_page_selector, timeout=15000)
         return
@@ -556,19 +550,25 @@ def click_ask_agy(browser_page):
 @when("the user clicks the Share button")
 def click_share(browser_page):
     # Share button in story detail has id="btn-share-story"
-    # Wait for the button to be visible first (longer timeout for detail to render)
     if not wait_for_content(browser_page, "#btn-share-story", timeout=15000):
-        pytest.skip("Share button not found - story detail may not be open")
+        pytest.fail("Share button not found after 15s — story detail did not open")
+    # The onclick handler is wired from inside the components.html iframe via
+    # setTimeout(..., 500) in story_detail.py. Poll until the handler is bound
+    # rather than sleeping a fixed amount.
+    browser_page.wait_for_function(
+        "() => { const b = document.getElementById('btn-share-story'); "
+        "return b && b.onclick !== null; }",
+        timeout=5000,
+    )
     share_btn = browser_page.locator("#btn-share-story").first
     share_btn.click()
-    # Wait for clipboard copy to complete
     browser_page.wait_for_timeout(MEDIUM_WAIT)
 
 
 @when(parsers.parse('the user navigates to "{url_params}"'))
 def navigate_with_params(browser_page, app_url, url_params):
     browser_page.goto(f"{app_url}{url_params}")
-    browser_page.wait_for_load_state("networkidle")
+    wait_for_streamlit_rerun(browser_page)
     # Deeplinks trigger a Streamlit rerun - wait for My Work to load
     if "?story=" in url_params:
         # Wait for the page to redirect and render My Work
@@ -621,7 +621,7 @@ def click_next_page(browser_page):
         "button:has-text('Next'), button:has-text('>')"
     ).first
     next_btn.click()
-    browser_page.wait_for_load_state("networkidle")
+    wait_for_streamlit_rerun(browser_page)
 
 
 @when(parsers.parse("the user changes page size to {size:d}"))
@@ -660,14 +660,15 @@ def rapid_toggle(browser_page, filter_name, times):
 def navigate_to_about(browser_page):
     about_btn = browser_page.locator("button:has-text('My Profile'):visible").first
     about_btn.click()
-    browser_page.wait_for_load_state("networkidle")
+    wait_for_streamlit_rerun(browser_page)
 
 
 @when("the user navigates back to My Work")
 def navigate_back_to_explore(browser_page):
     nav_button = browser_page.locator("button:has-text('My Work'):visible").first
     nav_button.click()
-    browser_page.wait_for_load_state("networkidle")
+    # stDataFrame on My Work causes continuous XHR — networkidle never settles.
+    wait_for_streamlit_rerun(browser_page)
     # Wait for My Work page to fully load
     wait_for_content(browser_page, ".es-results-count", timeout=10000)
     # Allow Streamlit state to settle
@@ -679,12 +680,16 @@ def navigate_away_and_return(browser_page):
     # Navigate to Home
     home_btn = browser_page.locator("button:has-text('Home'):visible").first
     home_btn.click()
-    browser_page.wait_for_load_state("networkidle")
+    wait_for_streamlit_rerun(browser_page)
 
     # Navigate back to My Work
     nav_button = browser_page.locator("button:has-text('My Work'):visible").first
     nav_button.click()
-    browser_page.wait_for_load_state("networkidle")
+    # stDataFrame on My Work causes continuous XHR — networkidle never settles.
+    wait_for_streamlit_rerun(browser_page)
+    # Wait for results count to be ready and refresh baseline for Then checks
+    wait_for_content(browser_page, ".es-results-count", timeout=10000)
+    browser_page._es_baseline_count = _read_count(browser_page)
 
 
 # =============================================================================
@@ -731,11 +736,9 @@ def verify_detail_closed(browser_page):
 
 @then("the results should reflect the new search")
 def verify_new_results(browser_page):
-    # Just verify results are present
-    stories = browser_page.locator(
-        ".es-fixed-height-card, .ag-root-wrapper .ag-row, .es-story-card"
-    )
-    assert stories.count() >= 0
+    # Verify results count is present — content change is confirmed by the count text
+    count_el = browser_page.locator(".es-results-count")
+    assert count_el.count() > 0 and count_el.first.is_visible()
 
 
 @then(parsers.parse('the page should show "{text}"'))
@@ -765,15 +768,24 @@ def verify_all_stories(browser_page):
 
 @then("no filters should be active")
 def verify_no_active_filters(browser_page):
-    # Should have no active filter chips (or only placeholder)
-    # TODO: Implement actual assertion once filter chip selectors are finalized
-    pass
+    # Filter chips render as st.button elements keyed with chip_ prefix
+    chips = browser_page.locator(
+        "[class*='st-key-chip_']:not([class*='st-key-chip_clear_all']) "
+        "button[data-testid='stBaseButton-secondary']"
+    )
+    assert chips.count() == 0, f"Expected no active filter chips, found {chips.count()}"
 
 
 @then(parsers.parse('all displayed stories should have {filter_type} "{value}"'))
 def verify_filtered_results(browser_page, filter_type, value):
-    # This would require inspecting story data - simplified check
-    pass
+    # Canvas rows are not DOM-queryable; assert via count direction.
+    # A valid filter reduces or maintains (never increases) the story count.
+    filtered = _read_count(browser_page)
+    baseline = getattr(browser_page, "_es_baseline_count", filtered)
+    assert filtered <= baseline, (
+        f"Filtered count {filtered} exceeds baseline {baseline} "
+        f"— {filter_type}={value!r} filter had no effect"
+    )
 
 
 @then(parsers.parse('the active filters should show "{value}"'))
@@ -805,17 +817,32 @@ def verify_multiple_active_filters(browser_page, value1, value2):
 
 @then("all displayed stories should match both filters")
 def verify_combined_filters(browser_page):
-    pass  # Would require data inspection
+    # Count-direction proxy: two filters applied -> count <= single-filter count
+    combined = _read_count(browser_page)
+    baseline = getattr(browser_page, "_es_baseline_count", combined + 1)
+    assert (
+        combined <= baseline
+    ), f"Combined-filter count {combined} exceeds baseline {baseline}"
 
 
 @then(parsers.parse("the {filter_name} filter should be cleared"))
 def verify_filter_cleared(browser_page, filter_name):
-    pass  # Would check select value is empty/default
+    # After clearing a chip, count should be >= pre-clear count
+    current = _read_count(browser_page)
+    pre_clear = getattr(browser_page, "_es_prefilterclear_count", 0)
+    assert current >= pre_clear, (
+        f"Count after clearing {filter_name!r} filter ({current}) "
+        f"is less than pre-clear count ({pre_clear})"
+    )
 
 
 @then("more stories should be displayed")
 def verify_more_stories(browser_page):
-    pass  # Would compare count before/after
+    current = _read_count(browser_page)
+    pre_clear = getattr(browser_page, "_es_prefilterclear_count", 0)
+    assert (
+        current > pre_clear
+    ), f"Expected more stories after filter removal ({current} > {pre_clear})"
 
 
 @then("the advanced filter section should be visible")
@@ -848,7 +875,12 @@ def verify_multiselect_visible(browser_page, multiselect_name):
 
 @then("all displayed stories should match both Client and Role")
 def verify_client_role_filter(browser_page):
-    pass  # Would require data inspection
+    # Count-direction proxy: dual filter reduces or maintains count vs baseline
+    combined = _read_count(browser_page)
+    baseline = getattr(browser_page, "_es_baseline_count", combined + 1)
+    assert (
+        combined <= baseline
+    ), f"Client+Role filter count {combined} exceeds baseline {baseline}"
 
 
 @then(parsers.parse('the Era filter should be set to "{era}"'))
@@ -871,12 +903,32 @@ def verify_era_filter(browser_page, era):
 
 @then("results should be filtered to that era")
 def verify_era_results(browser_page):
-    pass  # Would require data inspection
+    # Era filter is active — count must be > 0 and <= baseline
+    era_count = _read_count(browser_page)
+    assert era_count > 0, "Era filter returned 0 results — expected some stories"
+    baseline = getattr(browser_page, "_es_baseline_count", era_count + 1)
+    assert (
+        era_count <= baseline
+    ), f"Era-filtered count {era_count} exceeds baseline {baseline}"
 
 
 @then("all filters should be cleared")
 def verify_all_filters_cleared(browser_page):
-    pass  # Would check all selects are default
+    # No filter chips should be visible after Reset
+    chips = browser_page.locator(
+        "[class*='st-key-chip_']:not([class*='st-key-chip_clear_all']) "
+        "button[data-testid='stBaseButton-secondary']"
+    )
+    assert (
+        chips.count() == 0
+    ), f"Expected no filter chips after Reset, found {chips.count()}"
+    # Count should be restored to (or near) baseline
+    current = _read_count(browser_page)
+    baseline = getattr(browser_page, "_es_baseline_count", 0)
+    if baseline > 0:
+        assert (
+            current >= baseline
+        ), f"Post-reset count {current} is less than baseline {baseline}"
 
 
 @then("the search box should be empty")
@@ -903,15 +955,13 @@ def verify_view_mode(browser_page, view):
     wait_for_streamlit_rerun(browser_page)
 
     if view == "Table":
-        # AgGrid is inside an iframe
         try:
-            browser_page.wait_for_selector(
-                "[data-testid='stCustomComponentV1']", timeout=10000
-            )
+            browser_page.wait_for_selector('[data-testid="stDataFrame"]', timeout=10000)
         except Exception:
             pass
-        aggrid_iframe = browser_page.locator("[data-testid='stCustomComponentV1']")
-        assert aggrid_iframe.count() > 0, "Table view (AgGrid iframe) not found"
+        assert (
+            browser_page.locator('[data-testid="stDataFrame"]').count() > 0
+        ), "Table view (stDataFrame) not found"
     elif view == "Cards":
         # Wait for Cards view content to appear
         try:
@@ -919,7 +969,7 @@ def verify_view_mode(browser_page, view):
         except Exception:
             # If Cards view didn't render, check if we're in Table view instead
             # (Reset may have reverted to default view - this is acceptable behavior)
-            table = browser_page.locator("[data-testid='stCustomComponentV1']")
+            table = browser_page.locator('[data-testid="stDataFrame"]')
             if table.count() > 0:
                 pytest.skip(
                     "View mode reset to Table (default) after Reset - acceptable behavior"
@@ -927,7 +977,7 @@ def verify_view_mode(browser_page, view):
         cards = browser_page.locator(".es-fixed-height-card")
         if cards.count() == 0:
             # Check if Table view is showing instead
-            table = browser_page.locator("[data-testid='stCustomComponentV1']")
+            table = browser_page.locator('[data-testid="stDataFrame"]')
             if table.count() > 0:
                 pytest.skip(
                     "View mode reset to Table (default) after Reset - acceptable behavior"
@@ -943,16 +993,14 @@ def verify_view_mode(browser_page, view):
 
 @then("stories should be displayed in a table format")
 def verify_table_format(browser_page):
-    # Wait for AgGrid iframe to appear (it's a custom Streamlit component)
-    browser_page.wait_for_selector("[data-testid='stCustomComponentV1']", timeout=20000)
-
-    # Verify AgGrid loaded with rows
-    aggrid_frame = browser_page.frame_locator(
-        "[data-testid='stCustomComponentV1']"
-    ).first
-    rows = aggrid_frame.locator(".ag-row")
-    row_count = rows.count()
-    assert row_count > 0, f"No rows in AgGrid table (found {row_count})"
+    # st.dataframe replaces AgGrid. GDG canvas mounting is the proxy assertion.
+    browser_page.wait_for_selector('[data-testid="stDataFrame"]', timeout=20000)
+    canvas_count = browser_page.locator('[data-testid="data-grid-canvas"]').count()
+    if canvas_count == 0:
+        canvas_count = browser_page.locator(
+            '[data-testid="stDataFrame"] canvas'
+        ).count()
+    assert canvas_count > 0, "st.dataframe GDG canvas not found — grid did not mount"
 
 
 @then("the table should have columns for Title, Client, Role")
@@ -996,7 +1044,11 @@ def verify_search_query(browser_page, query):
 
 @then("results should still be filtered")
 def verify_still_filtered(browser_page):
-    pass
+    current = _read_count(browser_page)
+    baseline = getattr(browser_page, "_es_baseline_count", current + 1)
+    assert (
+        current < baseline
+    ), f"Expected a filtered count (<{baseline}) after navigation, got {current}"
 
 
 @then(parsers.parse('the {filter_name} filter should still be "{value}"'))
@@ -1088,7 +1140,7 @@ def verify_detail_section(browser_page, section):
 @then("the story list should be visible")
 def verify_story_list(browser_page):
     stories = browser_page.locator(
-        ".es-fixed-height-card, .ag-root-wrapper, .es-timeline-container"
+        ".es-fixed-height-card, [data-testid='stDataFrame'], .es-timeline-container"
     )
     assert stories.first.is_visible()
 
@@ -1111,8 +1163,14 @@ def verify_navigate_to_ask(browser_page):
 
 @then("the question should reference the story")
 def verify_question_references_story(browser_page):
-    # Would check input or pending question
-    pass
+    from playwright.sync_api import expect as pw_expect
+
+    # seed_prompt ("Tell me more about: {Title}") fires multiple Streamlit reruns
+    # before surfacing as the first user message in the conversation.
+    seed_msg = browser_page.locator(
+        "[data-testid='stChatMessage']:has-text('Tell me more about:')"
+    )
+    pw_expect(seed_msg.first).to_be_visible(timeout=15000)
 
 
 @then("the clipboard should contain the story deeplink URL")
@@ -1171,6 +1229,22 @@ def verify_clipboard(browser_page, shared_browser, app_url):
         new_context.close()
 
 
+@then("the Share button should show a Copied confirmation")
+def verify_share_copied_state(browser_page):
+    from playwright.sync_api import expect as pw_expect
+
+    share_btn = browser_page.locator("#btn-share-story")
+    pw_expect(share_btn).to_contain_text("Copied!", timeout=2000)
+
+
+@then("the Share button should revert to its default label")
+def verify_share_reverts(browser_page):
+    from playwright.sync_api import expect as pw_expect
+
+    share_btn = browser_page.locator("#btn-share-story")
+    pw_expect(share_btn).to_contain_text("Share", timeout=4000)
+
+
 @then("the pagination should show page numbers")
 def verify_pagination(browser_page):
     pagination = browser_page.locator(
@@ -1196,10 +1270,13 @@ def verify_different_stories(browser_page):
 
 @then(parsers.parse("up to {count:d} stories should be displayed per page"))
 def verify_page_size(browser_page, count):
-    stories = browser_page.locator(
-        ".es-fixed-height-card, .ag-root-wrapper .ag-row, .es-story-card"
+    # Cards and Timeline: count DOM card elements directly
+    card_count = (
+        browser_page.locator(".es-fixed-height-card").count()
+        + browser_page.locator(".es-story-card").count()
     )
-    assert stories.count() <= count
+    if card_count > 0:
+        assert card_count <= count, f"Found {card_count} cards, expected <= {count}"
 
 
 @then(parsers.parse("the page should reset to {page_num:d}"))
@@ -1257,7 +1334,7 @@ def verify_consistent_state(browser_page):
 
 @then("the query should be processed")
 def verify_query_processed(browser_page):
-    browser_page.wait_for_load_state("networkidle")
+    wait_for_streamlit_rerun(browser_page)
 
 
 @then("no crash should occur")
@@ -1287,31 +1364,10 @@ def verify_story_detail_open(browser_page):
     if share_btn.count() > 0 and share_btn.first.is_visible():
         return
 
-    # Skip if story detail isn't visible
-    pytest.skip("Story detail not visible (possible iframe issue)")
-
-
-@then(parsers.parse("the view should be {view} view"))
-def verify_specific_view_mode(browser_page, view):
-    wait_for_streamlit_rerun(browser_page)
-    if view == "Cards":
-        wait_for_content(browser_page, ".es-fixed-height-card", timeout=5000)
-        cards = browser_page.locator(".es-fixed-height-card")
-        if cards.count() == 0:
-            pytest.skip("Cards view content not found")
-    elif view == "Table":
-        # AgGrid is inside an iframe
-        wait_for_content(
-            browser_page, "[data-testid='stCustomComponentV1']", timeout=5000
-        )
-        aggrid_iframe = browser_page.locator("[data-testid='stCustomComponentV1']")
-        if aggrid_iframe.count() == 0:
-            pytest.skip("Table view content not found (AgGrid iframe)")
-    elif view == "Timeline":
-        wait_for_content(browser_page, ".es-timeline-container", timeout=5000)
-        timeline = browser_page.locator(".es-timeline-container")
-        if timeline.count() == 0:
-            pytest.skip("Timeline view content not found")
+    pytest.fail(
+        "Story detail not visible — expected .es-detail-header, .star-label, "
+        "or #btn-share-story to be present and visible"
+    )
 
 
 # =============================================================================
@@ -1371,7 +1427,7 @@ def set_viewport_desktop(browser_page):
 
 @when("the page loads")
 def wait_for_page_stable(browser_page):
-    browser_page.wait_for_load_state("networkidle")
+    wait_for_streamlit_rerun(browser_page)
     browser_page.wait_for_timeout(SHORT_WAIT)
 
 
@@ -1483,19 +1539,19 @@ def click_button_by_label(browser_page, label):
     ).first
     btn.wait_for(state="visible", timeout=30000)
     btn.click()
-    browser_page.wait_for_load_state("networkidle")
+    wait_for_streamlit_rerun(browser_page)
     browser_page.wait_for_timeout(SHORT_WAIT)
 
 
 @then("no story results should be shown")
 def no_story_results_shown(browser_page):
-    """After a rejected query, the results area should be empty —
-    no AgGrid rows, no story cards. Verifies the rejection path
-    actually short-circuited the search instead of returning some
-    fallback result set."""
-    ag_rows = browser_page.locator(".ag-row").count()
+    """After a rejected query, story rendering must be absent.
+    st.dataframe replaces AgGrid; proxy is the stDataFrame widget + card count.
+    Anti-vacuous check: temporarily remove either assert and this step passes on
+    a page with stories — restore immediately after confirming failure."""
+    dataframe_count = browser_page.locator('[data-testid="stDataFrame"]').count()
     story_cards = browser_page.locator(".es-fixed-height-card, .es-story-card").count()
-    assert ag_rows == 0 and story_cards == 0, (
+    assert dataframe_count == 0 and story_cards == 0, (
         f"Expected zero story results after rejection, "
-        f"found {ag_rows} AgGrid rows + {story_cards} story cards"
+        f"found {dataframe_count} stDataFrame widget(s) + {story_cards} story card(s)"
     )
