@@ -291,9 +291,28 @@ Always in sync. Touch one, touch the other. A matrix row without a detail block 
 
 **Actions (propose before writing anything):**
 1. Check for any tickets marked Done in the matrix that still have a detail block in BACKLOG.md or are missing a CHANGELOG.md entry - these were not fully closed at ship time. Complete the cleanup now: remove matrix row AND detail block, write CHANGELOG.md entry.
-2. **ARCHITECTURE.md flag:** if any files in `ui/pages/`, `ui/components/`, `services/`, `utils/`, or `config/` appear in the commit range and `ARCHITECTURE.md` is NOT in that range, surface the specific filenames and flag for review.
+2. Architecture Sync: run the Architecture Sync pass (see section below) using the same commit range. The two passes share one anchor and one approval gate.
 3. Update `<!-- last-backlog-sync: <sha> -->` to HEAD.
 4. Nothing writes until Matt approves the proposed diff.
+
+## Architecture Sync
+
+**Trigger:** Run alongside the Backlog Maintenance pass, or on demand. Uses the same `<!-- last-backlog-sync: <sha> -->` anchor and commit range.
+
+**Inputs:** `ARCHITECTURE.md`, `git log <sha>..HEAD --oneline` (same range as the backlog pass).
+
+**Step 1: Classify commits**
+For each commit in the range, classify:
+- New file in `services/`, `ui/pages/`, `ui/components/`, `utils/`, `config/` - likely needs ARCHITECTURE.md update
+- Change to an existing pattern (click handling, session state, CSS architecture, RAG pipeline) - likely needs ARCHITECTURE.md update
+- New constraint discovered (canvas BDD, widget key rules, etc.) - needs ARCHITECTURE.md entry
+- Bug fix or style tweak with no structural implication - skip
+
+**Step 2: Propose specific text**
+For each structural change: name the section and paste the exact proposed text. Nothing vague. If the right section does not exist, propose the section header too.
+
+**Step 3: Approval gate**
+Nothing writes until Matt approves the full proposed diff. One approval covers all ARCHITECTURE.md changes from this pass.
 
 ## Documentation Restraint
 Default to **not** creating new markdown files. Most findings belong in commit messages, BACKLOG entries, ADRs, or inline updates to existing docs.
