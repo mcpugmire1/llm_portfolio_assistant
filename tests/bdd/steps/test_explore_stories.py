@@ -565,6 +565,45 @@ def click_share(browser_page):
     browser_page.wait_for_timeout(MEDIUM_WAIT)
 
 
+@when("the user clicks the Helpful button")
+def click_helpful(browser_page):
+    if not wait_for_content(browser_page, "#btn-helpful-story", timeout=15000):
+        pytest.fail("Helpful button not found after 15s — story detail did not open")
+    # onclick wired via setTimeout(..., 500); also guard against already-confirmed
+    # (disabled) state so the poll exits cleanly even on first-rerun re-render.
+    # Clicking Helpful triggers log_feedback() as a side effect — this is expected
+    # in test runs; the assertion tests DOM state only, not the write.
+    browser_page.wait_for_function(
+        "() => { const b = document.getElementById('btn-helpful-story'); "
+        "return b && b.onclick !== null && !b.disabled; }",
+        timeout=5000,
+    )
+    browser_page.locator("#btn-helpful-story").click()
+    wait_for_streamlit_rerun(browser_page)
+
+
+@when("the user clicks the Export button")
+def click_export(browser_page):
+    if not wait_for_content(browser_page, "#btn-export-story", timeout=15000):
+        pytest.fail("Export button not found after 15s — story detail did not open")
+    # Capture the story title now so the Then step can assert the popup contains it.
+    title_locator = browser_page.locator(".es-detail-title")
+    browser_page._export_story_title = (
+        title_locator.first.text_content().strip() if title_locator.count() > 0 else ""
+    )
+    # onclick wired via setTimeout(..., 500)
+    browser_page.wait_for_function(
+        "() => { const b = document.getElementById('btn-export-story'); "
+        "return b && b.onclick !== null; }",
+        timeout=5000,
+    )
+    # Export triggers window.open('', '_blank') from inside a components.html iframe
+    # after Streamlit processes the click. Register the popup listener BEFORE clicking.
+    with browser_page.expect_popup(timeout=30000) as popup_info:
+        browser_page.locator("#btn-export-story").click()
+    browser_page._export_popup = popup_info.value
+
+
 @when(parsers.parse('the user navigates to "{url_params}"'))
 def navigate_with_params(browser_page, app_url, url_params):
     browser_page.goto(f"{app_url}{url_params}")
@@ -739,20 +778,6 @@ def verify_new_results(browser_page):
     # Verify results count is present — content change is confirmed by the count text
     count_el = browser_page.locator(".es-results-count")
     assert count_el.count() > 0 and count_el.first.is_visible()
-
-
-@then(parsers.parse('the page should show "{text}"'))
-def verify_text_visible(browser_page, text):
-    element = browser_page.locator(f"text={text}")
-    # Try to find the text with a short wait
-    found = wait_for_content(browser_page, f"text={text}", timeout=3000)
-    if not found:
-        if "not found" in text.lower() or "no stories" in text.lower():
-            # App may not show empty state for all search terms
-            pytest.skip(
-                f"App doesn't display '{text}' message (search may still return results)"
-            )
-        assert element.is_visible(), f"Text '{text}' not visible on page"
 
 
 @then("all stories should be displayed")
@@ -963,26 +988,10 @@ def verify_view_mode(browser_page, view):
             browser_page.locator('[data-testid="stDataFrame"]').count() > 0
         ), "Table view (stDataFrame) not found"
     elif view == "Cards":
-        # Wait for Cards view content to appear
-        try:
-            browser_page.wait_for_selector(".es-fixed-height-card", timeout=10000)
-        except Exception:
-            # If Cards view didn't render, check if we're in Table view instead
-            # (Reset may have reverted to default view - this is acceptable behavior)
-            table = browser_page.locator('[data-testid="stDataFrame"]')
-            if table.count() > 0:
-                pytest.skip(
-                    "View mode reset to Table (default) after Reset - acceptable behavior"
-                )
-        cards = browser_page.locator(".es-fixed-height-card")
-        if cards.count() == 0:
-            # Check if Table view is showing instead
-            table = browser_page.locator('[data-testid="stDataFrame"]')
-            if table.count() > 0:
-                pytest.skip(
-                    "View mode reset to Table (default) after Reset - acceptable behavior"
-                )
-            raise AssertionError("Cards view content not found")
+        wait_for_content(browser_page, ".es-fixed-height-card", timeout=10000)
+        assert (
+            browser_page.locator(".es-fixed-height-card").count() > 0
+        ), "Cards view content not found"
     elif view == "Timeline":
         try:
             browser_page.wait_for_selector(".es-timeline-container", timeout=10000)
@@ -1243,6 +1252,43 @@ def verify_share_reverts(browser_page):
 
     share_btn = browser_page.locator("#btn-share-story")
     pw_expect(share_btn).to_contain_text("Share", timeout=4000)
+
+
+@then("the Helpful button should show confirmed state")
+def verify_helpful_confirmed(browser_page):
+    from playwright.sync_api import expect as pw_expect
+
+    btn = browser_page.locator("#btn-helpful-story")
+    # Auto-polls through Streamlit's two-rerun cycle (click → st.rerun() → re-render)
+    pw_expect(btn).to_contain_text("Helpful ✓", timeout=15000)
+    assert (
+        btn.get_attribute("disabled") is not None
+    ), "Helpful button should be disabled after confirmation"
+
+
+@then("a new window should open with the story content")
+def verify_export_popup(browser_page):
+    popup = getattr(browser_page, "_export_popup", None)
+    assert popup is not None, (
+        "Export popup was not captured — window.open may have been blocked "
+        "in headless Chromium (check components.html iframe sandbox permissions)"
+    )
+    popup.wait_for_load_state("domcontentloaded", timeout=10000)
+    content = popup.content()
+    # The native print dialog fires automatically inside the popup. It is browser
+    # chrome (OS-level dialog) and is not testable from Playwright. In headless
+    # Chromium it is suppressed silently. We assert DOM-observable content only.
+    expected_title = getattr(browser_page, "_export_story_title", "")
+    if expected_title:
+        assert expected_title in content, (
+            f"Expected story title '{expected_title}' in export popup content; "
+            f"first 300 chars: {content[:300]}"
+        )
+    else:
+        assert (
+            "SITUATION" in content
+        ), "Export popup missing STAR story structure — expected 'SITUATION' section"
+    popup.close()
 
 
 @then("the pagination should show page numbers")

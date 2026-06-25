@@ -147,6 +147,16 @@ Feature: My Work
     Then the story detail should be closed
     And the story list should be visible
 
+  Scenario: Helpful button enters confirmed state
+    Given the user has opened a story detail
+    When the user clicks the Helpful button
+    Then the Helpful button should show confirmed state
+
+  Scenario: Export opens a printable story view
+    Given the user has opened a story detail
+    When the user clicks the Export button
+    Then a new window should open with the story content
+
   # =============================================================================
   # ASK AGY ABOUT THIS
   # =============================================================================
