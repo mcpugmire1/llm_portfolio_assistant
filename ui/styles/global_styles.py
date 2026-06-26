@@ -4164,6 +4164,39 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_my_work_trigge
             .thinking-paw  { font-size: 16px; margin-right: 4px; }
         }
 
+        /* ============================================================
+           MATTGPT-018: Kill cross-navigation avatar "blep".
+           Streamlit (1.50) retains prior-run elements in the DOM with
+           data-stale="true" on their stElementContainer until they are
+           pruned at script-finish; it applies NO opacity dim to stale
+           content containers (verified in the frontend bundle:
+           StyledElementContainer ignores isStale in its style body, and
+           only transient widgets -- balloons/snow -- use hideIfStale).
+           The flat router in app.py renders each page into the same main
+           container with no per-page boundary, so on Ask Agy -> (My Work |
+           Role Match) the incoming page's header paints at its delta-path
+           while the outgoing Ask Agy landing hero (heavy 120px avatar +
+           "Hi, I'm Agy" greeting) sits stale at FULL opacity over it for the
+           ~50ms reconciliation window, then vanishes. That is the lingering
+           avatar.
+
+           Fix: hide the STALE landing-hero containers during that window,
+           the same pattern Streamlit uses for its own transient stale
+           elements. Scoped to .main-intro-section and .ask-header-landing
+           so it fires only when those specific blocks are stale. Deliberately
+           excludes .ask-header-conversation: that header is re-rendered
+           in place on every in-conversation follow-up, where a stale-hide
+           would read as a header blink. No DOM nesting added and no header
+           margin calibrations touched, so the structural -32px/-48px
+           baselines are unaffected. visibility:hidden (not display:none)
+           keeps the box in flow so surrounding stale siblings don't reflow
+           during teardown.
+           ============================================================ */
+        [data-testid="stElementContainer"][data-stale="true"]:has(.main-intro-section),
+        [data-testid="stElementContainer"][data-stale="true"]:has(.ask-header-landing) {
+            visibility: hidden !important;
+        }
+
         </style>
         """
 
