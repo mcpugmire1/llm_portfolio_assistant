@@ -2231,6 +2231,32 @@ div[data-testid="stHorizontalBlock"]
 
 ---
 
+### Pattern 7: Stale-Element Navigation Ghosting — Visibility Suppression (MATTGPT-018)
+
+**Streamlit 1.50+ retains prior-run elements in the DOM during a rerun.** Each element's `stElementContainer` carries `data-stale="true"` from the moment the rerun starts until the element is either replaced at its delta-path or pruned at script-finish. Streamlit applies no opacity or visibility treatment to stale content containers: verified in the frontend bundle, where `StyledElementContainer` destructures `isStale` but does not use it in its style body, and only transient widgets (balloons, snow) are hidden when stale via `hideIfStale`. So a stale content element stays painted at full opacity until it is pruned.
+
+The router in `app.py` is a flat dispatch that renders every page into the same main container with no per-page boundary. Combined with the above, content from the outgoing page stays painted over the incoming page during the reconciliation window (~50ms, longer when the destination does data work before its first paint). When the outgoing element is large and visually prominent, this reads as a ghost over the new page. MATTGPT-018 symptom: the Ask Agy landing hero (120px avatar + "Hi, I'm Agy" greeting) ghosting into My Work and bleeding beneath the Role Match header.
+
+**Mitigation pattern:**
+
+```css
+[data-testid="stElementContainer"][data-stale="true"]:has(.target-class) {
+    visibility: hidden;
+}
+```
+
+Use `visibility: hidden` (not `display: none`) to suppress the paint without removing the box from flow. This is the same pattern Streamlit uses internally for its transient stale elements. Scope to the offending class only.
+
+**Rules:**
+- Do not hide stale containers broadly and do not target `[data-stale="false"]` — both widen the blast radius to every element on every rerun.
+- Exclude classes that re-render in place on same-page reruns. For MATTGPT-018, `.ask-header-conversation` was excluded because hiding it on in-conversation follow-ups would read as a header blink.
+
+**Diagnostic note:** A navigation "blep" of this kind is a stale-content visual artifact, not a timing stall. Performance traces show clean frames and uniform per-navigation reconciliation cost whether or not the artifact is visible. When a user names a specific, repeating symptom ("it's always the avatar"), the diagnosis must account for that symptom, not aggregate numbers. The MATTGPT-018 root cause was found by following the named symptom to a project-side element, after timing analysis had twice concluded "framework-internal."
+
+**Verification:** For any future change to this rule or the hero render path, confirm `data-stale="true"` still lands on the `stElementContainer` wrapping the target (DevTools or the MutationObserver BDD harness in `tests/bdd/.../navigation_stale_hero.feature`). The fix is silently a no-op if Streamlit changes the stale-marking contract on upgrade.
+
+---
+
 ## Testing Strategy
 
 ### BDD/E2E Tests (Explore Stories)
