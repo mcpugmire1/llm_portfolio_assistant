@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: 722972b -->
+<!-- last-backlog-sync: a6b427c -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
