@@ -6,6 +6,11 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ## June 2026
 
+### CSS Architecture
+
+**June 2026 — Page-load blep: re-add visibility:hidden on Ask Agy stale hero during nav (MATTGPT-018)** — `a6b427c`
+Re-added CSS rule to `global_styles.py` hiding Ask Agy landing hero containers during the Streamlit stale-element retention window on navigation. Both selectors (`.main-intro-section`, `.ask-header-landing`) with `visibility: hidden !important`. Mechanism comment restored including deliberate `.ask-header-conversation` exclusion. Unit test added in `tests/unit/test_global_styles.py`: whitespace-tolerant assertion that selectors and `visibility: hidden !important` are present as a unit in `_CSS`, catching both rule deletion and mutation to a no-op value. 3/3 BDD scenarios passing.
+
 ### My Work
 
 **June 2026 — My Work Table view: migrate from st_aggrid (iframe) to st.dataframe / Glide Data Grid (MATTGPT-144)** — `77dc1cb`

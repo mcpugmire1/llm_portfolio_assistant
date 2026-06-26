@@ -40,7 +40,6 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-015](#mattgpt-015) | JPM Payments IQ Differentiation | Open | High | Action | Mar 2026 |
 | [MATTGPT-016](#mattgpt-016) | Semantic Router — Wrong-Person Query Detection | Decided Against | High | Issue | Apr 2026 |
 | [MATTGPT-017](#mattgpt-017) | Wire skipped Role Match logging BDD scenarios (Playwright click + mocked Sheets write) | Open | Medium | Action | Apr 28, 2026 |
-| [MATTGPT-018](#mattgpt-018) | Page-Load Flicker / blep | Parked | Medium | Issue | Pre-Apr 2026 |
 | [MATTGPT-020](#mattgpt-020) | Simplify backend_service.py | Decided Against | Medium | Refactor | Pre-Jan 2026 |
 | [MATTGPT-021](#mattgpt-021) | diversify_results() Pinning Bug | Open | Medium | Issue | Apr 2026 |
 | [MATTGPT-022](#mattgpt-022) | Data Quality Cleanup Journey Story | Open | Medium | Action | Mar 2026 |
@@ -152,30 +151,6 @@ Each detail block uses these fields. Not every field is required for every item.
 ---
 
 ## Detail Blocks
-
-### MATTGPT-018
-**Page-Load Flicker (blep / avatar flash) — My Work**
-
-- **Status:** Parked — not closeable without leaving Streamlit per current diagnosis. 8 probes exhausted; AgGrid mount floor (~268ms) is the remaining cost. Revisit if AgGrid is replaced or Streamlit adds fragment-level navigation.
-- **Priority:** Medium
-- **Type:** Issue
-- **Issue:** Visible page flicker on every navigation to My Work. Reported at various times as "avatar flash," "CDN flash," and "blep" — same user-visible phenomenon, diagnosed across eight probes in June 2026.
-- **Root cause (confirmed June 22, 2026, eight probes):** framework-bounded full-page repaint on navigation. Teardown is sub-millisecond (MutationObserver: all Ask Agy elements gone within 1ms of swap). The cost is My Work mounting: filter-bar selectboxes resolve from skeletons ~93ms, AgGrid iframe mounts ~268ms, ~270ms partial-frame window. No single widget owns the full cost.
-- **Probes run:** (1) view/library swap — no change; (2) iframe/components.html removal — no change; (3) library deferral — no change; (4) Ask Agy chips → static HTML — 40% Ask Agy span reduction, kept; (5) grid-out (forced non-AgGrid path) — window collapsed ~270ms toward ~100ms, AgGrid owns ~170ms of mount cost (includes bootstrap.min.css revalidation, production-only, partially addressable via MATTGPT-137); (6) text_input removal — 17ms delta, noise; (7) constant container key (key="page_root") — ran, no change, teardown already sub-ms, remount-vs-reconcile not the lever; (8) full stub — 0 partial frames, confirms framework origin.
-- **Confirmed partial win (shipped as MATTGPT-139):** Ask Agy chip conversion, st.button → static HTML + JS bridge, desktop + mobile, 40% span reduction (667ms → 400ms). CHANGELOG June 2026.
-- **What does NOT fix this:** iframe consolidation; `@st.fragment`; Ask Agy lightening alone (wrong end of swap); filter-bar selectbox conversion (dead end — AgGrid floor at ~268ms remains); constant container key (probe 7, closed null).
-- **Prior fix attempts (wrong mechanism):** `bda7ba8`, `3659173`, `7d5e440`.
-- **Listener leak (separate bug, same file):** Lines ~521 and ~1501 in `explore_stories.py` lack the `dataset.wired='true'` guard. Fix independently; does not affect the blep.
-- **Closeable path:** not closeable without leaving Streamlit's full-page-repaint model or replacing AgGrid. Bank the chip win; stop probing. Optional: MATTGPT-137 (production CSS preload) shortens, does not end.
-- **Logged:** Pre-Apr 2026 (root cause confirmed June 22, 2026)
-
-**New evidence June 25, 2026 — reframes root cause:**
-- Blep observed on Ask Agy → Role Match (not just Ask Agy → My Work), with prior page content ("Ask Agy") visibly bleeding through the incoming page during the transition. This is page-agnostic: My Work and AgGrid were never the cause, they were where the investigation was looking.
-- Performance trace (Trace-20260625T090122) at the transition (~6,045ms) shows the busy window is dominated by navigation/frame-lifecycle events, not paint weight: `LocalFrame::DetachImpl` (x9), `DocumentLoader::CommitNavigation` (x10), `FrameLoader::CommitDocumentLoader` (x10), `RenderFrameImpl::CommitNavigation` (x4), `HTMLFrameOwnerElement::LoadOrRedirectSubframe` (x4). Actual paint cost in the window is small (~5ms across 212 paints; `UpdateLayoutTree` ~33ms). Time is in JS (`RunTask`/`FunctionCall`) and the subframe detach/commit machinery.
-- **Reframed hypothesis:** the blep is a component-subframe detach/recommit timing artifact at the navigation boundary. Every page carries component iframes (nav bridges, why-agy, streamlit-js-eval, pagination bridge); on tab switch these detach and re-commit, and the compositor briefly shows the page being left until the new commits land. This is page-agnostic — explains (a) why no My Work view or table swap ever fixed it, (b) why st.dataframe (MATTGPT-144 PoC) did not touch the blep, and (c) why it appears on Ask Agy → Role Match.
-- Supersedes the "My Work content paints in too many incremental pieces" framing (My-Work-only sample). The June 22 "framework-bounded" conclusion was built on that sample; this reframes from "My Work is heavy" to "tab navigation re-commits all component subframes." Status remains Parked; this is a sharper lead (subframe commit timing) if/when reopened. Not pursued now; PoC focus is MATTGPT-144.
-
----
 
 ### MATTGPT-012
 **Role Match — Phase 4: Private View**
