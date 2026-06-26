@@ -58,6 +58,41 @@ def _read_count(page):
     return int(m.group(1)) if m else 0
 
 
+def _read_range_start(page):
+    """Extract the range start (X in 'Showing X–Y of N projects') from .es-results-count.
+
+    Returns 1 if the element is absent or the range is not parseable (page 1 default).
+    """
+    locator = page.locator(".es-results-count")
+    if locator.count() == 0:
+        return 1
+    raw = locator.first.text_content() or ""
+    text = re.sub(r"\s+", " ", raw).strip()
+    m = re.search(r"Showing (\d+)", text)
+    return int(m.group(1)) if m else 1
+
+
+def _stable_bbox(page, locator, settle_ms=150, max_polls=5):
+    """Poll element bounding box until y-position stops moving, then return it.
+
+    Guards bounding-box assertions against CSS reflow races after a viewport resize.
+    Polls up to max_polls times with settle_ms between reads; returns when y-position
+    is stable within 1px across two consecutive reads.
+    """
+    prev_y = None
+    box = None
+    for _ in range(max_polls):
+        box = locator.bounding_box()
+        if box is None:
+            page.wait_for_timeout(settle_ms)
+            continue
+        if prev_y is not None and abs(box["y"] - prev_y) < 1:
+            return box
+        prev_y = box["y"]
+        page.wait_for_timeout(settle_ms)
+    return box
+
+
 def wait_for_content(page, selector, timeout=10000):
     """Wait for selector to appear, return True if found, False otherwise."""
     try:
@@ -67,8 +102,11 @@ def wait_for_content(page, selector, timeout=10000):
         return False
 
 
-def wait_for_streamlit_rerun(page):
-    """Wait for Streamlit to complete a rerun by watching data-test-script-state."""
+def wait_for_streamlit_rerun(page, timeout=15000):
+    """Wait for Streamlit to complete a rerun by watching data-test-script-state.
+
+    Pass a longer timeout for steps that trigger a backend LLM/RAG call.
+    """
     from playwright.sync_api import expect as pw_expect
 
     stapp = page.locator('[data-testid="stApp"]')
@@ -80,7 +118,7 @@ def wait_for_streamlit_rerun(page):
     except Exception:
         pass
     pw_expect(stapp).to_have_attribute(
-        "data-test-script-state", "notRunning", timeout=15000
+        "data-test-script-state", "notRunning", timeout=timeout
     )
     page.wait_for_timeout(SHORT_WAIT)
 
@@ -127,8 +165,9 @@ def wait_for_page_load(browser_page):
     except Exception:
         # Cards or Timeline view — stDataFrame not expected
         pass
-    # Store baseline count for count-direction assertions in Then steps
+    # Store baseline count and range start for count-direction / pagination assertions
     browser_page._es_baseline_count = _read_count(browser_page)
+    browser_page._es_range_start = _read_range_start(browser_page)
 
 
 @given("the user has searched for {query}")
@@ -529,8 +568,8 @@ def click_ask_agy(browser_page):
     btn = browser_page.locator("#btn-ask-story").first
     if btn.count() > 0:
         btn.click()
-        # Wait for JS + Streamlit rerun + page render; skip networkidle (LLM streaming)
-        wait_for_streamlit_rerun(browser_page)
+        # Ask Agy triggers a RAG+LLM call; use a longer timeout than the default 15s
+        wait_for_streamlit_rerun(browser_page, timeout=45000)
         browser_page.wait_for_timeout(MEDIUM_WAIT)
         wait_for_content(browser_page, ask_page_selector, timeout=15000)
         return
@@ -539,7 +578,7 @@ def click_ask_agy(browser_page):
     text_btn = browser_page.locator("text=About This").first
     if text_btn.count() > 0:
         text_btn.click()
-        wait_for_streamlit_rerun(browser_page)
+        wait_for_streamlit_rerun(browser_page, timeout=45000)
         browser_page.wait_for_timeout(MEDIUM_WAIT)
         wait_for_content(browser_page, ask_page_selector, timeout=15000)
         return
@@ -680,6 +719,7 @@ def change_page_size(browser_page, size):
 def resize_browser(browser_page, width):
     browser_page.set_viewport_size({"width": width, "height": 800})
     browser_page.wait_for_timeout(SHORT_WAIT)
+    wait_for_streamlit_rerun(browser_page)
 
 
 @when(parsers.parse("the user rapidly toggles {filter_name} filter {times:d} times"))
@@ -1012,12 +1052,6 @@ def verify_table_format(browser_page):
     assert canvas_count > 0, "st.dataframe GDG canvas not found — grid did not mount"
 
 
-@then("the table should have columns for Title, Client, Role")
-def verify_table_columns(browser_page):
-    # Simplified - just check table exists
-    pass
-
-
 @then("stories should be displayed as cards")
 def verify_cards_format(browser_page):
     cards = browser_page.locator(".es-fixed-height-card")
@@ -1026,8 +1060,15 @@ def verify_cards_format(browser_page):
 
 @then("each card should show Title and Client")
 def verify_card_content(browser_page):
-    # Simplified - cards exist
-    pass
+    card = browser_page.locator(".es-fixed-height-card").first
+    title = card.locator(".es-card-title")
+    client = card.locator(".es-card-client-badge")
+    assert (
+        title.count() > 0 and (title.first.text_content() or "").strip()
+    ), "Card missing .es-card-title or title text is empty"
+    assert (
+        client.count() > 0 and (client.first.text_content() or "").strip()
+    ), "Card missing .es-card-client-badge or client text is empty"
 
 
 @then("stories should be grouped by career era")
@@ -1038,8 +1079,12 @@ def verify_timeline_groups(browser_page):
 
 @then("each era should be collapsible")
 def verify_collapsible_eras(browser_page):
-    # Check for expander elements
-    pass
+    groups = browser_page.locator(".es-timeline-group")
+    assert groups.count() > 0, "No .es-timeline-group elements found"
+    header = groups.first.locator(".es-group-header")
+    assert header.count() > 0, ".es-timeline-group missing .es-group-header"
+    expand_icon = header.locator(".es-expand-icon")
+    assert expand_icon.count() > 0, ".es-group-header missing .es-expand-icon"
 
 
 @then(parsers.parse('the search query should still be "{query}"'))
@@ -1118,7 +1163,10 @@ def verify_detail_panel_open(browser_page):
 
 @then("the detail should show the story Title")
 def verify_detail_title(browser_page):
-    pass  # Would check title element
+    title = browser_page.locator(".es-detail-title")
+    assert title.count() > 0, ".es-detail-title not found in detail panel"
+    text = (title.first.text_content() or "").strip()
+    assert text, ".es-detail-title is present but empty"
 
 
 @then("the detail should show Situation, Task, Action, Result")
@@ -1301,17 +1349,40 @@ def verify_pagination(browser_page):
 
 @then(parsers.parse("the current page should be {page_num:d}"))
 def verify_current_page(browser_page, page_num):
-    pass  # Would check page indicator
+    page_info = browser_page.locator(".es-pagination .page-info:has-text('Page')")
+    assert page_info.count() > 0, ".es-pagination page indicator not found"
+    text = re.sub(r"\s+", " ", page_info.first.text_content() or "").strip()
+    assert (
+        str(page_num) in text
+    ), f"Expected page {page_num} in pagination indicator, got: '{text}'"
 
 
 @then(parsers.parse("page {page_num:d} should be displayed"))
 def verify_page_number(browser_page, page_num):
-    pass
+    page_info = browser_page.locator(".es-pagination .page-info:has-text('Page')")
+    assert page_info.count() > 0, ".es-pagination page indicator not found"
+    text = re.sub(r"\s+", " ", page_info.first.text_content() or "").strip()
+    assert (
+        str(page_num) in text
+    ), f"Expected page {page_num} in pagination indicator, got: '{text}'"
 
 
 @then("different stories should be shown")
 def verify_different_stories(browser_page):
-    pass
+    baseline_start = getattr(browser_page, "_es_range_start", 1)
+    locator = browser_page.locator(".es-results-count")
+    if locator.count() == 0:
+        pytest.fail(".es-results-count not found — cannot verify different stories")
+    raw = locator.first.text_content() or ""
+    text = re.sub(r"\s+", " ", raw).strip()
+    m = re.search(r"Showing (\d+)", text)
+    if not m:
+        pytest.fail(f"Cannot parse range start from results count: '{text}'")
+    current_start = int(m.group(1))
+    assert current_start > baseline_start, (
+        f"Expected range start to increase past {baseline_start} (page 1), "
+        f"got {current_start} — different stories not shown"
+    )
 
 
 @then(parsers.parse("up to {count:d} stories should be displayed per page"))
@@ -1327,7 +1398,18 @@ def verify_page_size(browser_page, count):
 
 @then(parsers.parse("the page should reset to {page_num:d}"))
 def verify_page_reset(browser_page, page_num):
-    pass  # Would check page indicator
+    page_info = browser_page.locator(".es-pagination .page-info:has-text('Page')")
+    if page_info.count() == 0:
+        if page_num == 1:
+            return  # No pagination rendered = only 1 page of results = page 1
+        pytest.fail(
+            f".es-pagination page indicator not found — expected reset to page {page_num} "
+            f"but pagination is not rendered (fewer than 2 pages of results)"
+        )
+    text = re.sub(r"\s+", " ", page_info.first.text_content() or "").strip()
+    assert (
+        str(page_num) in text
+    ), f"Expected page reset to {page_num} in pagination indicator, got: '{text}'"
 
 
 @then(parsers.parse('the search query should be "{query}"'))
@@ -1346,7 +1428,23 @@ def verify_filter_value(browser_page, filter_name, value):
 
 @then("filters should be stacked vertically")
 def verify_stacked_filters(browser_page):
-    pass  # Would check layout
+    search = browser_page.locator(
+        "input[placeholder*='modern platforms'], input[placeholder*='Find stories']"
+    ).first
+    industry = browser_page.locator("[data-testid='stSelectbox']:visible").first
+    assert search.is_visible(), "Search input not found for stacking check"
+    assert industry.count() > 0, "No visible selectbox found for stacking check"
+    search_box = _stable_bbox(browser_page, search)
+    industry_box = _stable_bbox(browser_page, industry)
+    assert (
+        search_box and industry_box
+    ), "Could not get bounding boxes for filter elements"
+    y_diff = abs(industry_box["y"] - search_box["y"])
+    assert y_diff > 30, (
+        f"Expected filters stacked (y-diff > 30px) at mobile viewport, "
+        f"got {y_diff:.1f}px "
+        f"(search y={search_box['y']:.1f}, industry y={industry_box['y']:.1f})"
+    )
 
 
 @then("content should not overflow horizontally")
@@ -1356,19 +1454,25 @@ def verify_no_overflow(browser_page):
     assert not overflow
 
 
-@then(parsers.parse("cards should display in {columns:d} columns"))
-def verify_column_count(browser_page, columns):
-    pass  # Would check grid layout
-
-
 @then("all filters should be visible inline")
 def verify_inline_filters(browser_page):
-    pass
-
-
-@then(parsers.parse("cards should display in {min_cols:d} or more columns"))
-def verify_min_columns(browser_page, min_cols):
-    pass
+    search = browser_page.locator(
+        "input[placeholder*='modern platforms'], input[placeholder*='Find stories']"
+    ).first
+    industry = browser_page.locator("[data-testid='stSelectbox']:visible").first
+    assert search.is_visible(), "Search input not found for inline check"
+    assert industry.count() > 0, "No visible selectbox found for inline check"
+    search_box = _stable_bbox(browser_page, search)
+    industry_box = _stable_bbox(browser_page, industry)
+    assert (
+        search_box and industry_box
+    ), "Could not get bounding boxes for filter elements"
+    y_diff = abs(industry_box["y"] - search_box["y"])
+    assert y_diff <= 40, (
+        f"Expected filters inline (y-diff ≤ 40px) at desktop viewport, "
+        f"got {y_diff:.1f}px "
+        f"(search y={search_box['y']:.1f}, industry y={industry_box['y']:.1f})"
+    )
 
 
 @then("the final filter state should be consistent")

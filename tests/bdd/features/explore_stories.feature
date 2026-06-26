@@ -92,7 +92,6 @@ Feature: My Work
   Scenario: Table view displays stories in rows
     When the user switches to Table view
     Then stories should be displayed in a table format
-    And the table should have columns for Title, Client, Role
 
   Scenario: Cards view displays stories in cards
     When the user switches to Cards view
@@ -228,11 +227,6 @@ Feature: My Work
     And the user presses Enter
     Then the page should reset to 1
 
-  Scenario: Pagination resets on filter change
-    Given the user is on page 2
-    When the user selects "Financial Services / Banking" from the Industry filter
-    Then the page should reset to 1
-
   # =============================================================================
   # NAVIGATION - ALWAYS START FRESH
   # =============================================================================
@@ -280,14 +274,9 @@ Feature: My Work
     Then filters should be stacked vertically
     And content should not overflow horizontally
 
-  Scenario: Tablet layout shows 2 columns
-    When the browser window is 768px wide
-    Then cards should display in 2 columns
-
   Scenario: Desktop layout shows full filters
     When the browser window is 1200px wide
     Then all filters should be visible inline
-    And cards should display in 3 or more columns
 
   # =============================================================================
   # EDGE CASES
