@@ -151,6 +151,12 @@ Each `st.markdown()` call creates a DOM element. On pages using `.conversation-h
 ### On estimates
 - **Headline number = raw implementation time only.** BDD overhead and discovery risk are listed as explicit add-ons, not folded into the headline. A 30-min change is quoted as 30 min, not "2-3 hours."
 
+### On debugging and diagnosis
+- **A repeated, specific, concrete observation is a constraint the diagnosis must satisfy, not an anecdote to explain away.** When instrument data and a consistent human observation conflict, the observation usually means the instrument is measuring the wrong thing, not that the observation is noise.
+- **"The framework" is not a stopping point.** Framework-internal is often partly true and always unactionable. Keep going until the explanation accounts for the specific named symptom, which always lands somewhere project-side.
+- **When Matt names a specific thing, verify you are looking at exactly that thing before reasoning about it.** Anchor to the named element, component, or behavior and confirm it before theorizing. Reasoning about the wrong frame is not diagnosis.
+- **This is not a rule about deference.** Wrong theories get killed with evidence regardless of whose they are. The rule is about how to treat a specific class of input: a repeated, named, concrete symptom is a falsification test, not color commentary.
+
 ### Parallel sessions
 When multiple Claude Code sessions run concurrently, they share one git working tree and one staging area.
 - Stage specific files by name (see Critical Rules)
@@ -291,6 +297,8 @@ Always in sync. Touch one, touch the other. A matrix row without a detail block 
 ## Architecture Sync
 
 **Trigger:** Run alongside the Backlog Maintenance pass, or on demand. Uses the same `<!-- last-backlog-sync: <sha> -->` anchor and commit range.
+
+**Who runs it:** The dedicated Architecture Sync Cowork process, not Code. Code's job is to write a commit message that fully describes any structural change. That commit message is the handoff. The sync process reads the commit range and proposes ARCHITECTURE.md updates for Matt's approval before writing anything. Code never edits ARCHITECTURE.md directly.
 
 **Inputs:** `ARCHITECTURE.md`, `git log <sha>..HEAD --oneline` (same range as the backlog pass).
 
