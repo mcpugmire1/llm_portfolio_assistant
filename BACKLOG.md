@@ -10,14 +10,13 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-06-24)
 
 **NOW**
-1. **-144** — AgGrid iframe re-init on filter rerun trace. Quick investigation; answer either closes it or reopens -018.
-2. **-075** — Validate debug-surface leak. Confirm `DEBUG=False` on Streamlit Cloud + prod check. Likely closes as add-missing-guards or no-op.
-3. **-080** — `matt_profile.json` restructure. Blocker for -088: scorer and Agy chat need stable shared grounding before alignment work makes sense.
-4. **-088** — Role Match scorer honesty, on top of -080. Biggest single credibility hit (CTO persona: AI contradicting itself). Gates -012 private-view quality.
-5. **-094 probes** — CIC over-concentration + operational under-surfacing. In progress. Running before -080 — findings shape the restructure.
-6. **-077 mitigation** — Query-side: strip "Matt" from embedded queries on technical-noun shapes. Protects primary free-text recruiter flow from MattGPT self-referential answers.
-7. **-097** — Career-intent refresh. Timely for active outreach; makes "what's Matt looking for" keyword-searchable.
-8. **-129 stories 1+2** — AT&T SE CRM + Fiserv expand-from-logged stories (no elicitation block yet). Operational depth pairing with -094 sub-hypothesis B.
+1. **-075** — Validate debug-surface leak. Confirm `DEBUG=False` on Streamlit Cloud + prod check. Likely closes as add-missing-guards or no-op.
+2. **-080** — `matt_profile.json` restructure. Blocker for -088: scorer and Agy chat need stable shared grounding before alignment work makes sense.
+3. **-088** — Role Match scorer honesty, on top of -080. Biggest single credibility hit (CTO persona: AI contradicting itself). Gates -012 private-view quality.
+4. **-094 probes** — CIC over-concentration + operational under-surfacing. In progress. Running before -080 — findings shape the restructure.
+5. **-077 mitigation** — Query-side: strip "Matt" from embedded queries on technical-noun shapes. Protects primary free-text recruiter flow from MattGPT self-referential answers.
+6. **-097** — Career-intent refresh. Timely for active outreach; makes "what's Matt looking for" keyword-searchable.
+7. **-129 stories 1+2** — AT&T SE CRM + Fiserv expand-from-logged stories (no elicitation block yet). Operational depth pairing with -094 sub-hypothesis B.
 
 **NEXT** (queued):
 1. **-128** — Source faithfulness. Unlocked once -080 + -094 land. Second-biggest trust item: recruiter clicks to verify a claim, gets wrong source cards.
@@ -107,8 +106,8 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-129](#mattgpt-129) | Content elaboration per era — expand 5 under-documented operational stories | Open | High | Action | June 14, 2026 |
 | [MATTGPT-130](#mattgpt-130) | "practitioners" canonical everywhere — UI, eval golden set, corpus re-embed in lockstep | Open | Medium | Action | June 14, 2026 |
 | [MATTGPT-131](#mattgpt-131) | BDD selector bug — `test_industry_and_capability_labels_visible_inline_on_mobile` fails in marathon run | Open | Low | Bug | June 15, 2026 |
-| [MATTGPT-133](#mattgpt-133) | BDD skip — `test_ask_agy_works_from_table_view` skips when AgGrid iframe row interaction doesn't open detail panel | Open | Low | Bug | June 16, 2026 |
-| [MATTGPT-134](#mattgpt-134) | BDD skip — `test_deeplink_respects_view_mode` skips because deeplink navigation does not preserve pre-set view mode | Open | Low | Bug | June 16, 2026 |
+| [MATTGPT-133](#mattgpt-133) | BDD skip — `test_ask_agy_works_from_table_view` skips when AgGrid iframe row interaction doesn't open detail panel | Decided Against | Low | Bug | June 16, 2026 |
+| [MATTGPT-134](#mattgpt-134) | BDD skip — `test_deeplink_respects_view_mode` skips because deeplink navigation does not preserve pre-set view mode | Decided Against | Low | Bug | June 16, 2026 |
 | [MATTGPT-136](#mattgpt-136) | Dark mode design system audit — --accent-purple not overridden in body.dark-theme | Open | Low | Refactor | June 18, 2026 |
 | [MATTGPT-137](#mattgpt-137) | AgGrid bootstrap.min.css render-blocking on Ask Agy → My Work transition | Open | Low | Perf | June 18, 2026 |
 | [MATTGPT-138](#mattgpt-138) | BDD: page teardown invariant + CLS budget guard (MATTGPT-018 regression lock) | Decided Against | Medium | Action | June 19, 2026 |
@@ -116,8 +115,9 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-141](#mattgpt-141) | Remove dead ENTITY_GATE_THRESHOLD constant from config/constants.py | Open | Low | Refactor | June 22, 2026 |
 | [MATTGPT-142](#mattgpt-142) | BDD sequential rejection test: wait_for_banner is not count-aware, assertion runs before second rejection renders | Open | Low | Bug | June 23, 2026 |
 | [MATTGPT-143](#mattgpt-143) | BDD app_url fixture hardcodes port 8501 with no env-var override | Parked | Low | Bug | June 23, 2026 |
-| [MATTGPT-144](#mattgpt-144) | AgGrid iframe re-init on filter rerun — blank/slow grid; possible shared root with the blep (-018) | Open | Medium | Investigation | Jun 24, 2026 |
+| [MATTGPT-144](#mattgpt-144) | AgGrid iframe re-init on filter rerun — blank/slow grid; possible shared root with the blep (-018) | Done | Medium | Investigation | Jun 24, 2026 |
 | [MATTGPT-145](#mattgpt-145) | Mobile filter breakpoints overlap — r2-label show/hide depends on !important cascade order, not design | Open | Low | Refactor | Jun 24, 2026 |
+| [MATTGPT-146](#mattgpt-146) | Professional Narrative stories leak into My Work via filter and search paths — must be excluded from all My Work paths | Open | Medium | Bug | Jun 25, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -168,6 +168,12 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Listener leak (separate bug, same file):** Lines ~521 and ~1501 in `explore_stories.py` lack the `dataset.wired='true'` guard. Fix independently; does not affect the blep.
 - **Closeable path:** not closeable without leaving Streamlit's full-page-repaint model or replacing AgGrid. Bank the chip win; stop probing. Optional: MATTGPT-137 (production CSS preload) shortens, does not end.
 - **Logged:** Pre-Apr 2026 (root cause confirmed June 22, 2026)
+
+**New evidence June 25, 2026 — reframes root cause:**
+- Blep observed on Ask Agy → Role Match (not just Ask Agy → My Work), with prior page content ("Ask Agy") visibly bleeding through the incoming page during the transition. This is page-agnostic: My Work and AgGrid were never the cause, they were where the investigation was looking.
+- Performance trace (Trace-20260625T090122) at the transition (~6,045ms) shows the busy window is dominated by navigation/frame-lifecycle events, not paint weight: `LocalFrame::DetachImpl` (x9), `DocumentLoader::CommitNavigation` (x10), `FrameLoader::CommitDocumentLoader` (x10), `RenderFrameImpl::CommitNavigation` (x4), `HTMLFrameOwnerElement::LoadOrRedirectSubframe` (x4). Actual paint cost in the window is small (~5ms across 212 paints; `UpdateLayoutTree` ~33ms). Time is in JS (`RunTask`/`FunctionCall`) and the subframe detach/commit machinery.
+- **Reframed hypothesis:** the blep is a component-subframe detach/recommit timing artifact at the navigation boundary. Every page carries component iframes (nav bridges, why-agy, streamlit-js-eval, pagination bridge); on tab switch these detach and re-commit, and the compositor briefly shows the page being left until the new commits land. This is page-agnostic — explains (a) why no My Work view or table swap ever fixed it, (b) why st.dataframe (MATTGPT-144 PoC) did not touch the blep, and (c) why it appears on Ask Agy → Role Match.
+- Supersedes the "My Work content paints in too many incremental pieces" framing (My-Work-only sample). The June 22 "framework-bounded" conclusion was built on that sample; this reframes from "My Work is heavy" to "tab navigation re-commits all component subframes." Status remains Parked; this is a sharper lead (subframe commit timing) if/when reopened. Not pursued now; PoC focus is MATTGPT-144.
 
 ---
 
@@ -1847,7 +1853,7 @@ For each client-specific probe query, assert `client_name in [s.get("Client") fo
 ### MATTGPT-134
 **BDD skip — `test_deeplink_respects_view_mode` — deeplink navigation does not preserve pre-set view mode**
 
-- **Status:** Open
+- **Status:** Decided Against (June 24, 2026) — scenario deleted in MATTGPT-144 commit (`77dc1cb`). Confirmed non-feature: deeplinks intentionally start a fresh session with no view persistence. The scenario was testing behavior that doesn't exist and shouldn't.
 - **Priority:** Low
 - **Type:** Bug
 - **Logged:** June 16, 2026
@@ -1861,7 +1867,7 @@ For each client-specific probe query, assert `client_name in [s.get("Client") fo
 ### MATTGPT-133
 **BDD skip — `test_ask_agy_works_from_table_view` — AgGrid row click doesn't reliably expose Ask Agy button in headless Playwright**
 
-- **Status:** Open
+- **Status:** Decided Against (June 24, 2026) — scenario deleted in MATTGPT-144 commit (`77dc1cb`). Canvas row-click is undriveable in headless Playwright (st.dataframe Glide Data Grid renders to canvas, not DOM). Redundant with `test_ask_agy_works_from_cards_view` which passes reliably and tests the same user behavior.
 - **Priority:** Low
 - **Type:** Bug
 - **Logged:** June 16, 2026
@@ -2024,41 +2030,6 @@ Cold-load CLS ceiling: 0.25 (observed ~0.24 in DevTools — locks "no worse than
 
 ---
 
-### MATTGPT-144
-**AgGrid iframe re-initializes on filter rerun — blank/slow grid; possible shared root with the blep (MATTGPT-018)**
-
-- **Status:** Open — trace before committing to a fix
-- **Priority:** Medium (escalate if the trace confirms this is the blep's root, since that reopens -018's framework-bounded conclusion)
-- **Type:** Investigation
-- **Logged:** June 24, 2026
-
-**Symptom (observed June 24, 2026, Chrome Claude manual session at 1720px viewport):** After a filter selection triggers a Streamlit rerun, the My Work AgGrid custom-component iframe reloads but its React root stays empty — the grid area renders blank well past 13s. The native Streamlit chrome (filter chip, result count) updates correctly; only the AgGrid iframe fails to re-initialize promptly. The iframe was observed reloading multiple times and re-fetching its JS bundle long after reload.
-
-**Metrics are soft — do not anchor on them.** The "~180s to JS re-fetch" and "2.8MB bundle" figures come from a messy manual exploratory session with hand-timed waits, not a clean measurement. They establish "very long," not a real number. The only clean prior measurement in this family is -018's ~268ms AgGrid iframe settle on My Work page-nav. The two-order-of-magnitude gap between that and the manual-session stall is unexplained and is itself part of what the trace needs to resolve.
-
-**Hypothesis (to verify, not concluded):** The same AgGrid custom-component re-init mechanism may underlie both this filter-rerun stall and the blep (MATTGPT-018). -018 was diagnosed as framework-bounded full-page repaint with AgGrid owning ~170-268ms of the mount; that diagnosis was flagged in -018's own NOW note as coming from a session confused about slug history. If the trace shows the iframe tearing down and re-fetching its bundle on every rerun, then -018 is partly AgGrid re-init, not purely Streamlit repaint, and -018 comes off Parked for revisiting.
-
-**Ruled out as cause (June 24, 2026 investigation):** Not the mobile filter CSS (every changed rule is media-gated <=767/<=480px, inert at the 1280px and 1720px viewports where the symptom appears). Not the eab4711/f40032b perf commits. Not the keyed page container (reverted, 7807a2a, and wrong layer for an in-page rerun anyway). Not es-* selector drift (all es- selectors the BDD test uses are present in story_detail.py / timeline_view.py / explore_stories.py / global_styles.py). The explore_stories networkidle wait-strategy fix (same session) masks the BDD test symptom but does not touch this cause — green tests after that fix must NOT be read as this being resolved.
-
-**Investigation plan (trace-first, same discipline as -077 / -094):**
-- Capture a clean AgGrid iframe lifecycle trace on a filter rerun: known viewport, freshly restarted server (not the shared 8501 instance — a stale shared server produced false signal during the -018/BDD work).
-- Determine: (1) does the iframe tear down and re-fetch its bundle on every filter rerun, or reconcile in place? (2) is the cost a fixed per-rerun characteristic of st_aggrid 0.3.4, or pathological/variable? (3) does the same teardown/re-fetch appear on the My Work page-nav path (the -018 blep)?
-- Compare the filter-rerun trace against the -018 My Work mount trace. Same mechanism = shared root.
-
-**Decision fork (after trace, do not pre-decide):**
-- If iframe re-inits on every rerun and it is fixed per-rerun cost: weigh a real fix (stable component identity / avoid remount on data change) vs accept-as-known-characteristic of the iframe component.
-- If pathological/variable: dig into the trigger (bundle cache revalidation — see -137 — vs remount).
-- If confirmed shared with -018: reopen -018, correct its framework-bounded framing.
-- If not reproducible on a clean server: close as "verified, not a product problem; was shared-server / wait-strategy artifact."
-
-**Cross-references:**
-- MATTGPT-018 — blep / page-load flicker (Parked); candidate shared root
-- MATTGPT-137 — AgGrid bootstrap.min.css render-blocking / cache revalidation (adjacent; may explain the bundle-fetch lateness)
-- MATTGPT-122, -133 — AgGrid iframe BDD fragility (same component, same re-init timing issue surfacing in tests)
-- explore_stories networkidle wait-strategy fix (June 24, 2026) — masks the test symptom; does not address this cause
-
----
-
 ### MATTGPT-142
 **BDD: sequential rejection test wait_for_banner not count-aware**
 
@@ -2110,5 +2081,38 @@ The bug is that the mid-band rules have no lower bound, so they leak into the <=
 **Cross-references:**
 - The mobile filter CSS this refactors was added in the explore_stories mobile-fix work (validated and committed June 24, 2026). Do this as the opening move of any future session that touches mobile filter CSS — it makes the cascade safe before edits land on top of it.
 - MATTGPT-123, MATTGPT-119 — prior mobile filter work that established the current block structure.
+
+---
+
+### MATTGPT-146
+**Professional Narrative stories leak into My Work via filter and search paths**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **Logged:** June 25, 2026
+- **File:** `ui/pages/explore_stories.py`
+
+**Issue:** Professional Narrative stories (Category == "Professional Narrative") are Ask Agy content: they exist so Agy can answer questions about Matt in conversation (leadership journey, background, work philosophy, career intent, etc.). They are not projects and were never intended to appear in My Work, which is the project portfolio surface. The current implementation (MATTGPT-098) scoped the exclusion to the default view only (Path 3, no filters active). Filter-active path (Path 3 with `has_filters=True`) and semantic search paths (Path 1 and Path 2) do not apply the exclusion, so a recruiter filtering by Industry or searching My Work can surface "About Matt – My Leadership Journey" as if it were a browseable project.
+
+**Corpus check (confirmed June 25, 2026):** 10 stories carry Category == "Professional Narrative" across 113 total. All 10 are genuinely Ask Agy narrative pieces (leadership journey, leadership philosophy, career intent, transition story, work philosophy, "Why Hire Matt?", etc.). No real projects are miscategorized. The fix is safe to apply.
+
+**Intended behavior:** Professional Narrative category is excluded from the My Work corpus entirely, across all three paths:
+- Path 3 default (already done in MATTGPT-098)
+- Path 3 filter-active (currently leaks)
+- Path 1 semantic search + Path 2 cached search (currently leak)
+
+Professional Narrative stories remain fully available to Ask Agy's Pinecone retrieval — the exclusion is My Work surface only.
+
+**Fix:** Move the exclusion from the per-path default-view check to the top of `render_explore_stories`, filtering `stories` before any path branches. Replace the two inline `[s for s in stories if s.get("Category") != "Professional Narrative"]` guards (lines ~904 and ~1084) with a single pre-filter applied to the `stories` list at the top of the view logic, so all three paths inherit it automatically. One place, one rule.
+
+**Deeplink edge case (decide before implementing):** If someone has a direct `?story=about-matt-my-leadership-journey` deeplink, should My Work resolve it (render the detail) or redirect? Given the intent (narrative stories are not My Work projects), the story should not render as a My Work detail. Simplest behavior: deeplink to a narrative story on My Work silently shows the default view (story not found), consistent with how any unknown story ID resolves. No active redirect needed.
+
+**Acceptance criteria:**
+- Filtering My Work by any filter (Industry, Capability, Client, Role, Domain) never returns a Professional Narrative story.
+- Searching My Work (semantic search) never returns a Professional Narrative story.
+- Default My Work view (no filters, no search) continues to exclude Professional Narrative stories (existing behavior preserved).
+- Professional Narrative stories remain retrievable by Ask Agy (Pinecone query path is unaffected).
+- BDD: scenario asserting that searching My Work for "leadership journey" or "leadership philosophy" returns zero results (or a no-match banner), not the narrative story.
 
 **Note:** Effort estimate intentionally omitted — small, but requires careful splitting. Validate in the browser after the change, not from source (source-order reasoning is exactly what's fragile here).

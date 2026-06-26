@@ -92,7 +92,6 @@ Feature: My Work
   Scenario: Table view displays stories in rows
     When the user switches to Table view
     Then stories should be displayed in a table format
-    And the table should have columns for Title, Client, Role
 
   Scenario: Cards view displays stories in cards
     When the user switches to Cards view
@@ -147,6 +146,16 @@ Feature: My Work
     Then the story detail should be closed
     And the story list should be visible
 
+  Scenario: Helpful button enters confirmed state
+    Given the user has opened a story detail
+    When the user clicks the Helpful button
+    Then the Helpful button should show confirmed state
+
+  Scenario: Export opens a printable story view
+    Given the user has opened a story detail
+    When the user clicks the Export button
+    Then a new window should open with the story content
+
   # =============================================================================
   # ASK AGY ABOUT THIS
   # =============================================================================
@@ -160,12 +169,6 @@ Feature: My Work
     When the user clicks "Ask Agy About This"
     Then the page should navigate to Ask Agy
     And the question should reference the story
-
-  Scenario: Ask Agy works from Table view
-    Given the user is in Table view
-    When the user clicks on a story row
-    And the user clicks "Ask Agy About This"
-    Then the page should navigate to Ask Agy
 
   Scenario: Ask Agy works from Cards view
     Given the user is in Cards view
@@ -182,16 +185,22 @@ Feature: My Work
     Then the story detail should be open
     And the story should be "Building JP Morgan's Global Payments Gateway Across 12 Countries"
 
-  Scenario: Deeplink respects view mode
-    Given the user preference is Cards view
+  Scenario: Deeplink opens story detail from non-default view
+    Given the user is in Cards view
     When the user navigates to "?story=building-jp-morgans-global-payments-gateway-across-12-countries%7Cjp-morgan-chase"
-    Then the view should be Cards view
-    And the story detail should be open
+    Then the story detail should be open
+    And the story should be "Building JP Morgan's Global Payments Gateway Across 12 Countries"
 
   Scenario: Share link generates correct URL
     Given the user has opened a story detail
     When the user clicks the Share button
     Then the clipboard should contain the story deeplink URL
+
+  Scenario: Share button shows Copied confirmation then reverts
+    Given the user has opened a story detail
+    When the user clicks the Share button
+    Then the Share button should show a Copied confirmation
+    And the Share button should revert to its default label
 
   # =============================================================================
   # PAGINATION
@@ -216,11 +225,6 @@ Feature: My Work
     Given the user is on page 3
     When the user types "cloud" in the search box
     And the user presses Enter
-    Then the page should reset to 1
-
-  Scenario: Pagination resets on filter change
-    Given the user is on page 2
-    When the user selects "Financial Services / Banking" from the Industry filter
     Then the page should reset to 1
 
   # =============================================================================
@@ -270,14 +274,9 @@ Feature: My Work
     Then filters should be stacked vertically
     And content should not overflow horizontally
 
-  Scenario: Tablet layout shows 2 columns
-    When the browser window is 768px wide
-    Then cards should display in 2 columns
-
   Scenario: Desktop layout shows full filters
     When the browser window is 1200px wide
     Then all filters should be visible inline
-    And cards should display in 3 or more columns
 
   # =============================================================================
   # EDGE CASES

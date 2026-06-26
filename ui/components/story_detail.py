@@ -257,7 +257,7 @@ def render_story_detail(
         st.markdown(
             """
             <div style="background: var(--banner-info-bg); border-left: 4px solid var(--accent-purple); padding: 12px 16px; margin: 16px 0;">
-                <span style="color: var(--accent-purple); font-size: 14px;">🐾 Click a row/card above to view details.</span>
+                <span style="color: var(--accent-purple); font-size: 14px;">🐾 Check a row or click a card above to view details.</span>
             </div>
             """,
             unsafe_allow_html=True,

@@ -26,7 +26,6 @@ import streamlit.components.v1.components  # noqa: F401 — pre-import so the
 # components.components.MarshallComponentException. Streamlit 1.50.0 doesn't
 # auto-import the submodule; AgGrid 0.3.4.post3 assumes it does.
 from dotenv import load_dotenv
-from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode, JsCode
 
 from config.debug import DEBUG
 from services.query_logger import log_query
@@ -63,8 +62,6 @@ MAX_ACHIEVEMENTS_SHOWN = 4
 
 # AgGrid availability check
 try:
-    from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode, JsCode
-
     _HAS_AGGRID = True
 except Exception:
     _HAS_AGGRID = False
@@ -1219,7 +1216,7 @@ def render_explore_stories(
     with col1:
         results_html = f"""
         <div class="es-results-count" style="display: flex; align-items: center; min-height: 44px; color: var(--text-color); font-size: 14px; white-space: nowrap;">
-            <span>Showing</span>&nbsp;<strong>{start}&ndash;{end}</strong>&nbsp;<span>of</span>&nbsp;<strong>{total_results}</strong>&nbsp;<span>projects</span>
+            <span>Showing</span>&nbsp;<strong>{start}&ndash;{end}</strong>&nbsp;<span>of</span>&nbsp;<strong>{total_results}</strong>&nbsp;<span>stories</span>
         </div>
         """
         st.markdown(results_html, unsafe_allow_html=True)
@@ -1293,101 +1290,63 @@ def render_explore_stories(
 
         show_df = df[show_cols] if show_cols else df
 
-        if not _HAS_AGGRID:
-            st.warning(
-                "Row-click requires st-aggrid. Install: `pip install streamlit-aggrid`"
-            )
-            st.dataframe(show_df, hide_index=True, use_container_width=True)
-        else:
-            df_view = df[["ID"] + show_cols] if show_cols else df
-            gob = GridOptionsBuilder.from_dataframe(df_view)
-            gob.configure_default_column(resizable=True, sortable=True, filter=True)
-            gob.configure_column("ID", hide=True)
-            gob.configure_column("Title", flex=3, minWidth=300, tooltipField="Title")
-            gob.configure_column(
-                "Client",
-                flex=1,
-                minWidth=110,
-                maxWidth=170,
-                cellRenderer=JsCode("""
-                    class ClientBadgeRenderer {
-                        init(params) {
-                            this.eGui = document.createElement('span');
-                            this.eGui.className = 'es-client-badge';
-                            this.eGui.textContent = params.value;
-                        }
-                        getGui() { return this.eGui; }
-                    }
-                """),
-            )
-            gob.configure_column("Role", flex=1, minWidth=120, maxWidth=300)
-            gob.configure_column(
-                "Start_Date",
-                flex=0.5,
-                minWidth=100,
-                maxWidth=140,
-                headerName="Start Date",
-            )
-
-            gob.configure_selection(selection_mode="single", use_checkbox=False)
-            gob.configure_pagination(enabled=False)
-
-            opts = gob.build()
-            opts.pop("preSelectAllRows", None)
-            opts["suppressRowClickSelection"] = False
-            opts["rowSelection"] = "single"
-            opts["rowHeight"] = TABLE_ROW_HEIGHT
-            opts["suppressHorizontalScroll"] = (
-                False  # False = allow horizontal scroll/swipe
-            )
-            opts["rowStyle"] = {"cursor": "pointer"}
-
-            _badge_css = {
-                ".es-client-badge": {
-                    "display": "inline-block !important",
-                    "padding": "4px 10px !important",
-                    "background": "rgba(139, 92, 246, 0.08) !important",
-                    "color": "#8B5CF6 !important",
-                    "border-radius": "12px !important",
-                    "font-size": "12px !important",
-                    "font-weight": "500 !important",
-                },
-                ".ag-root-wrapper": {
-                    "--ag-row-hover-color": "rgba(167, 139, 250, 0.15)",
-                    "--ag-selected-row-background-color": "rgba(167, 139, 250, 0.2)",
-                },
+        # KNOWN: st.dataframe selection color is canvas-drawn. primaryColor in config.toml
+        # does not reach GDG's theme in Streamlit 1.50.0. CSS hue-rotate is the best
+        # available workaround — clean in light mode, slightly imperfect in dark mode.
+        # Deeper fixes (GDG CSS vars, JS setProperty) don't survive GDG's render cycle.
+        st.markdown(
+            """<style>
+            [data-testid="stDataFrame"] canvas {
+                filter: hue-rotate(262deg) saturate(88%);
             }
+            [data-testid="stDataFrame"] > div {
+                background: var(--table-row-bg) !important;
+                border: 1px solid var(--border-color) !important;
+                border-radius: 12px !important;
+            }
+            button[aria-label="Show/hide columns"] {
+                display: none !important;
+            }
+            </style>""",
+            unsafe_allow_html=True,
+        )
 
-            grid = AgGrid(
-                df_view,
-                gridOptions=opts,
-                update_mode=GridUpdateMode.SELECTION_CHANGED,
-                allow_unsafe_jscode=True,
-                enable_enterprise_modules=False,
-                theme="streamlit",
-                fit_columns_on_grid_load=True,
-                height=TABLE_HEIGHT,
-                key="stories_grid",
-                custom_css=_badge_css,
+        if not st.session_state.get("active_story"):
+            st.markdown(
+                "<p style='font-size:13px; color:var(--text-secondary); margin:0 0 8px 0;'>"
+                "🐾 Check any row to read the full story.</p>",
+                unsafe_allow_html=True,
             )
 
-            if isinstance(grid, dict):
-                sr = grid.get("selected_rows") or grid.get("selectedRows") or []
-            else:
-                sr = getattr(grid, "selected_rows", None)
+        # Dynamic height: size to the rows actually shown so there's no dead
+        # zone. show_df is the filtered+paginated slice, so len() reflects both
+        # the active filter and the SHOW page-size (10/20/50).
+        _ROW_PX = 35  # confirm against actual render
+        _HEADER_PX = 38  # confirm against actual render
+        _dyn_height = _HEADER_PX + max(1, len(show_df)) * _ROW_PX + 2
 
-            if isinstance(sr, pd.DataFrame):
-                sel_rows = sr.to_dict("records")
-            elif isinstance(sr, list):
-                sel_rows = sr
-            elif isinstance(sr, dict):
-                sel_rows = [sr]
-            else:
-                sel_rows = []
+        # iteration-2 (poc/mattgpt-144): native selection wired to detail.
+        selection = st.dataframe(
+            show_df,
+            hide_index=True,
+            width="stretch",
+            height=_dyn_height,
+            on_select="rerun",
+            selection_mode="single-row",
+            key="stories_df",
+            column_config={
+                "Title": st.column_config.TextColumn("Title", width="large"),
+                "Client": st.column_config.TextColumn("Client", width="medium"),
+                "Role": st.column_config.TextColumn("Role", width="medium"),
+                "Start_Date": st.column_config.TextColumn("Start Date", width="small"),
+            },
+        )
 
-            if sel_rows:
-                st.session_state["active_story"] = sel_rows[0].get("ID")
-                # Clear other active story sources to prevent conflicts
+        _sel_rows = selection["selection"]["rows"]
+        if _sel_rows:
+            _idx = _sel_rows[0]
+            if 0 <= _idx < len(view_paginated):
+                st.session_state["active_story"] = view_paginated[_idx].get("id")
                 st.session_state.pop("active_story_obj", None)
                 st.session_state.pop("active_story_title", None)
                 st.session_state.pop("active_story_client", None)
