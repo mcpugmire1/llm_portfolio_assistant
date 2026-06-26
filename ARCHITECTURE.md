@@ -79,12 +79,12 @@
 
 **Project:** MattGPT Portfolio Assistant - AI-powered career story search and chat interface
 **Tech Stack:** Streamlit, OpenAI GPT-4o, Pinecone vector DB, Python 3.11+
-**Data Corpus:** 130+ STAR-formatted transformation project stories
-**Last Updated:** June 25, 2026
+**Data Corpus:** 100+ STAR-formatted transformation project stories
+**Last Updated:** June 26, 2026
 
 ### What This Document Contains
 
-1. **System Overview:** Current file structure, components, services (as of Jan 2026)
+1. **System Overview:** Current file structure, components, services
 2. **Data Pipeline:** Excel → JSONL → Embeddings → Pinecone → RAG
 3. **CSS Architecture:** Scoping patterns, emotion-cache strategies, dark mode
 4. **Mobile Roadmap:** Known issues, breakpoint strategy, implementation phases
@@ -167,7 +167,7 @@ llm_portfolio_assistant/
 │   │   ├── __init__.py
 │   │   └── global_styles.py        # Shared CSS overrides
 │
-├── echo_star_stories.jsonl         # Raw story corpus (130 stories)
+├── echo_star_stories.jsonl         # Raw story corpus (100+ stories)
 ├── echo_star_stories_nlp.jsonl     # NLP-enriched story corpus (production)
 ├── nonsense_filters.jsonl          # Off-domain query rules
 │
@@ -203,7 +203,7 @@ The application initialization order is critical—later steps depend on earlier
 ┌──────────────────────────────────────────────────────────────┐
 │  1. load_star_stories(DATA_FILE)                             │
 │     - Reads echo_star_stories_nlp.jsonl                      │
-│     - Returns STORIES list (130+ dicts)                      │
+│     - Returns STORIES list (100+ dicts)                      │
 │     - Enforces stable IDs, normalizes list fields            │
 └──────────────────────────────────────────────────────────────┘
                               ↓
@@ -425,7 +425,7 @@ Semantic Search Results → RAG → GPT-4o → User
 - Sheet: `"STAR Stories - Interview Ready"`
 
 **Output:**
-- `echo_star_stories.jsonl` (130+ records)
+- `echo_star_stories.jsonl` (100+ records)
 
 **Key Features:**
 - **Merge strategy:** Preserves existing `public_tags`, `content`, `id` fields
@@ -436,7 +436,7 @@ Semantic Search Results → RAG → GPT-4o → User
 **Fields Extracted:**
 ```python
 {
-    "id": "story_123",
+    "id": "platform-modernization|jpmc",
     "Title": "Scaled Engineering Team from 4 to 150+",
     "Client": "Fortune 500 Bank",
     "Industry": "Financial Services",
@@ -525,7 +525,7 @@ def build_embedding_text(story):
 **Metadata Stored in Pinecone:**
 ```python
 {
-    "id": "story_123",
+    "id": "platform-modernization|jpmc",
     "title": "Scaled Engineering Team...",
     "client": "Fortune 500 Bank",
     "industry": "Financial Services",
@@ -538,7 +538,7 @@ def build_embedding_text(story):
 ```
 
 **Processing Stats:**
-- ~130 stories in ~30 seconds
+- ~100+ stories in ~30 seconds
 - Cost: $0.0008 per full re-index
 - OpenAI API: text-embedding-3-small @ $0.02 per 1M tokens
 
@@ -569,7 +569,7 @@ User Query
 ┌─────────────────────────────────────────────────┐
 │ Layer 2: Semantic Router (Cheap)                │
 │ - Embed query with text-embedding-3-small       │
-│ - Compare against 106+ intent embeddings        │
+│ - Compare against intent phrase embeddings (15 families) │
 │ - 15 families including narrative, synthesis, out_of_scope, personal │
 │ - HARD_ACCEPT=0.80, SOFT_ACCEPT=0.40            │
 └─────────────────────────────────────────────────┘
@@ -691,7 +691,7 @@ Structured logs added to diagnose "I can't help with that" issues in production.
 - **Job:** Search across ALL entity fields when entity detected, not just the primary field
 - **Lives in:** `services/pinecone_service.py`
 - **Implementation:** Uses Pinecone `$or` operator to search across 6 fields simultaneously
-- **Note:** Entity DETECTION checks 4 fields (Client, Employer, Division, Title), but Title uses soft filtering. Pinecone SEARCH spans 6 fields for hard-filtered entities.
+- **Note:** Entity DETECTION checks 3 hard fields (Client, Employer, Division), with Title as a separate soft path (detected but no Pinecone filter applied). Pinecone SEARCH spans 6 fields for hard-filtered entities.
 - **Fields searched:** `client`, `employer`, `division`, `project`, `place`, `title`
 - **Casing rules:**
   - **Lowercase fields:** `division`, `employer`, `project`, `place` → `.lower()` applied
@@ -703,7 +703,8 @@ Structured logs added to diagnose "I can't help with that" issues in production.
       {"employer": {"$eq": "accenture"}},
       {"division": {"$eq": "accenture"}},
       {"project": {"$eq": "accenture"}},
-      {"place": {"$eq": "accenture"}}
+      {"place": {"$eq": "accenture"}},
+      {"title": {"$eq": "Accenture"}}
   ]}
   ```
 - **Why:** Fixes "entity blind spot" where stories with `Client="Confidential"` but `Employer="Accenture"` weren't found
@@ -782,7 +783,7 @@ Per the CLAUDE.md "No Hardcoded Enums for Data-Derived Values" rule, the prior s
 All intent classification uses the embedding-based semantic router (`services/semantic_router.py`) which maps queries to 15 intent families without LLM cost. Entity detection runs in parallel to identify company/project/title mentions.
 
 ```
-Query → Semantic Router (embedding similarity against 106+ intent embeddings)
+Query → Semantic Router (embedding similarity against intent phrase embeddings across 15 families)
       → Entity Detection (substring matching against known entities + exact title match)
       → Intent Family Resolution:
         - background, behavioral, delivery, team_scaling, leadership
@@ -1211,7 +1212,7 @@ with st.container(key="r2_row"):
 ### Known Limitations
 
 1. **Synthesis + specific topic:** "Tell me about Matt's rapid prototyping work" classified as synthesis but should find the specific rapid prototyping story. Current workaround: synthesis now uses user query embedding.
-2. ~~**Multi-client stories:** Stories with `Client="Multiple Clients"` won't match entity filters.~~ **FIXED (Jan 2026):** Multi-Field Entity Gate now searches across 5 fields using Pinecone `$or` operator. Entity detection narrowed to 3 fields (Client, Employer, Division) to prevent false positives.
+2. ~~**Multi-client stories:** Stories with `Client="Multiple Clients"` won't match entity filters.~~ **FIXED (Jan 2026):** Multi-Field Entity Gate now searches across 6 fields using Pinecone `$or` operator. Entity detection uses 3 hard fields (Client, Employer, Division) plus Title as a soft path.
 3. **Ground truth fidelity:** LLM paraphrases instead of quoting verbatim despite `[[CORE BRAND DNA]]` markers.
 4. **Deprecated documentation:** `mattgpt_system_prompt.md` documents the original "MattGPT" persona (pre-Agy). The current Agy voice is documented in this file under Component Contracts → Agy Voice Generator.
 5. **LLM stochasticity:** Eval may show occasional failures due to LLM response variability. Re-running typically passes. Semantic similarity scoring would address this (see BACKLOG.md → MATTGPT-035 (Eval Modernization — Semantic Scoring)).
@@ -1290,7 +1291,7 @@ Central reference for all session state keys used across the application.
 
 ### JSONL Story Schema
 
-Stories are stored in `echo_star_stories_nlp.jsonl` (130+ entries). Each line is a JSON object.
+Stories are stored in `echo_star_stories_nlp.jsonl` (100+ entries). Each line is a JSON object.
 
 **Core Fields:**
 | Field | Type | Example | Description |
@@ -1805,7 +1806,7 @@ filters = {
     "domain": "Platform Engineering"
 }
 
-# Entity filter (January 2026) - uses $or across 5 fields
+# Entity filter (January 2026) - uses $or across 6 fields
 filters = {
     "entity_field": "client",
     "entity_value": "Accenture"
@@ -1813,7 +1814,7 @@ filters = {
 # Translates to: {"$or": [{client: "Accenture"}, {employer: "accenture"}, ...]}
 ```
 
-**Multi-Field Entity Gate:** When `entity_field` and `entity_value` are provided, the service builds a Pinecone `$or` clause that searches across `client`, `employer`, `division`, `project`, and `place` fields simultaneously. See Component Contracts → Multi-Field Entity Gate for details.
+**Multi-Field Entity Gate:** When `entity_field` and `entity_value` are provided, the service builds a Pinecone `$or` clause that searches across `client`, `employer`, `division`, `project`, `place`, and `title` fields simultaneously. See Component Contracts → Multi-Field Entity Gate for details.
 
 ---
 
@@ -1841,7 +1842,7 @@ def semantic_search(q: str, stories: list, top_k: int = SEARCH_TOP_K, filters: d
 #### Embedding Generation
 - **Model:** text-embedding-3-small (1536 dims)
 - **Cost:** $0.02 per 1M tokens
-- **130 stories @ ~300 tokens each** = ~39K tokens
+- **100+ stories @ ~300 tokens each** = ~39K tokens
 - **Total cost:** ~$0.0008 per full re-index
 - **Time:** ~30 seconds for full corpus
 
@@ -1853,7 +1854,7 @@ def semantic_search(q: str, stories: list, top_k: int = SEARCH_TOP_K, filters: d
 
 #### Pinecone Index
 - **Dimensions:** 1536
-- **Records:** 130
+- **Records:** 100+
 - **Storage:** ~0.7 MB (tiny)
 - **Queries/month:** ~1,000 (well within free tier)
 
@@ -2246,7 +2247,7 @@ pytest tests/bdd -v
 pytest tests/bdd -k "search_returns_relevant" -v
 ```
 
-**Coverage:** 57 scenarios across search, filters, view switching, story detail/STAR, detail-panel actions (Share/Helpful/Export), Ask Agy navigation, deeplinks, pagination, navigation/reset, responsive layout, two-row filter bar (MATTGPT-065/119/123), and rejection-banner edge cases. The feature file `tests/bdd/features/explore_stories.feature` is the source of truth for the scenario inventory — do not re-hardcode a per-category count here (it has churned repeatedly and drifts). Run `pytest tests/bdd/steps/test_explore_stories.py` for the current pass state.
+**Coverage:** 55 scenarios across search, filters, view switching, story detail/STAR, detail-panel actions (Share/Helpful/Export), Ask Agy navigation, deeplinks, pagination, navigation/reset, responsive layout, two-row filter bar (MATTGPT-065/119/123), and rejection-banner edge cases. The feature file `tests/bdd/features/explore_stories.feature` is the source of truth for the scenario inventory — do not re-hardcode a per-category count here (it has churned repeatedly and drifts). Run `pytest tests/bdd/steps/test_explore_stories.py` for the current pass state.
 
 **Key Test Patterns:**
 ```python
@@ -2373,7 +2374,7 @@ Audit of the RAG (Retrieval-Augmented Generation) pipeline covering embedding an
 |-------------|--------|------------|---------|
 | Story embeddings | `build_custom_embeddings.py` | 1536 | Retrieved from Pinecone for story matching |
 | Query embeddings | `pinecone_service.py` | 1536 | Generated at runtime for semantic search |
-| Intent centroids | `semantic_router.py` | 1536 | 11 pre-computed intent family embeddings |
+| Intent centroids | `semantic_router.py` | 1536 | one pre-computed embedding per example phrase (~126 phrases across 15 families) |
 
 ### Architecture Issues
 
