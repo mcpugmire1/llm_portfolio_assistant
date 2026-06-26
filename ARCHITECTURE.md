@@ -2198,37 +2198,13 @@ changes, pagination).
 
 ---
 
-### Pattern 5: AgGrid Styling — Iframe Boundary Constraint (MATTGPT-064)
+### Pattern 5: AgGrid Styling — Iframe Boundary Constraint (MATTGPT-064) — SUPERSEDED (MATTGPT-144)
 
-**CSS rules in `global_styles.py` cannot reach the AgGrid iframe.** AgGrid
-renders inside a separate `iframe` document. CSS injected into the parent
-page's `<head>` — including everything in `global_styles.py` — stops at the
-iframe boundary. Any `.ag-theme-streamlit .ag-row` rules in `global_styles.py`
-are effectively dead code; they never apply to AgGrid's DOM.
+Retired June 2026. My Work Table view migrated off AgGrid to `st.dataframe` (MATTGPT-144). AgGrid is no longer used in the Table render path, so the iframe-boundary styling mechanisms below no longer apply to any live component.
 
-**Two delivery mechanisms for AgGrid styles:**
+The underlying lesson remains true and is why the migration eliminated a class of bug: AgGrid rendered inside a separate `iframe` document, so CSS injected into the parent page's `<head>` (everything in `global_styles.py`) stopped at the iframe boundary, and the iframe's intermittent failure to paint rows was the MATTGPT-144 blank-grid symptom. `st.dataframe` renders to a canvas in the main document (no iframe), which structurally removes that failure mode but introduces a different constraint (canvas-not-DOM) — see Testing Strategy → st.dataframe Canvas Constraint.
 
-**1. Python-side (static row properties):** Pass `opts["rowStyle"]` to
-`GridOptionsBuilder` — AgGrid applies it inside its own render, no iframe
-boundary involved. Example: `opts["rowStyle"] = {"cursor": "pointer"}`.
-
-**2. JS injection (CSS variable overrides):** Inject a `components.html`
-snippet *after* the `AgGrid(...)` call. Reach into `iframe.contentDocument`
-and call `root.style.setProperty(...)` on the AgGrid root element.
-
-**Guard selector:** Use `.ag-root-wrapper`, not `.ag-theme-streamlit`.
-The theme class is `.ag-theme-streamlit` in light mode and
-`.ag-theme-streamlit-dark` in dark mode. MattGPT always runs dark, so
-`.ag-theme-streamlit` returns `null` and the injection silently bails on
-every call. `.ag-root-wrapper` is theme-agnostic and always present once
-AgGrid renders.
-
-**Three-fire pattern (immediate + 500ms + 1500ms):** The AgGrid iframe may
-not be fully loaded when `components.html` first fires. Three calls cover:
-initial load, post-CSS-parse, and post-Streamlit-rerun iframe recreation.
-
-**Precedent:** `ui/pages/explore_stories.py` Table view render path
-(`3a5e1bc`, `6590450` — June 2026).
+(Original Python-side `rowStyle` / JS-injection / `.ag-root-wrapper` guard / three-fire details removed; recover from git history at commit `3a5e1bc`/`6590450` if AgGrid is ever reintroduced elsewhere.)
 
 ---
 
@@ -2260,7 +2236,7 @@ div[data-testid="stHorizontalBlock"]
 
 **Location:** `tests/bdd/`
 **Framework:** pytest-bdd + Playwright
-**Runtime:** ~25 minutes (browser session reuse)
+**Runtime:** ~7 minutes (browser session reuse)
 
 ```bash
 # Run all BDD tests
@@ -2270,19 +2246,7 @@ pytest tests/bdd -v
 pytest tests/bdd -k "search_returns_relevant" -v
 ```
 
-**Coverage (43 scenarios):**
-| Category | Scenarios | Status |
-|----------|-----------|--------|
-| Search flow | 3 | ✅ All passing |
-| Filter combinations | 7 | ✅ All passing |
-| View switching | 6 | ✅ All passing |
-| Story detail/STAR | 4 | ✅ All passing |
-| Ask Agy navigation | 4 | ✅ All passing |
-| Deeplinks | 3 | ✅ All passing |
-| Pagination | 5 | ✅ All passing |
-| Navigation/Reset | 5 | ✅ All passing |
-| Responsive layout | 3 | ✅ All passing |
-| Edge cases | 3 | ✅ All passing |
+**Coverage:** 57 scenarios across search, filters, view switching, story detail/STAR, detail-panel actions (Share/Helpful/Export), Ask Agy navigation, deeplinks, pagination, navigation/reset, responsive layout, two-row filter bar (MATTGPT-065/119/123), and rejection-banner edge cases. The feature file `tests/bdd/features/explore_stories.feature` is the source of truth for the scenario inventory — do not re-hardcode a per-category count here (it has churned repeatedly and drifts). Run `pytest tests/bdd/steps/test_explore_stories.py` for the current pass state.
 
 **Key Test Patterns:**
 ```python
@@ -2306,10 +2270,18 @@ def browser_page(shared_browser):
     yield page
     context.close()
 
-# Streamlit-specific waits
+# Streamlit-specific waits — watches data-test-script-state, NOT networkidle.
+# st.dataframe's Glide Data Grid generates continuous XHR, so networkidle
+# never settles on any table-rendering path (30s timeout). See networkidle
+# note under st.dataframe Canvas Constraint.
 def wait_for_streamlit_rerun(page):
-    page.wait_for_load_state("networkidle")
-    page.wait_for_timeout(200)  # Allow state sync
+    stapp = page.locator('[data-testid="stApp"]')
+    try:
+        expect(stapp).to_have_attribute("data-test-script-state", "running", timeout=2000)
+    except Exception:
+        pass
+    expect(stapp).to_have_attribute("data-test-script-state", "notRunning", timeout=15000)
+    page.wait_for_timeout(200)
 ```
 
 ### RAG Eval Tests
@@ -2368,6 +2340,10 @@ pytest tests/unit -v
 - If whole-row-click or keyboard row selection is a hard requirement, `st.dataframe` cannot provide it. Self-rendered HTML rows (the Cards pattern) are the accessible, testable alternative.
 
 **Origin:** Established during the MATTGPT-144 AgGrid to st.dataframe migration. The prior AgGrid BDD was green while the grid was broken because its assertions were `pass` no-ops AND the one real assertion targeted `.ag-row` inside an iframe. The canvas constraint means the naive replacement ("assert N rows rendered") is impossible, which is why the manual visual check is load-bearing, not optional.
+
+**`networkidle` never settles (the cascade trap):**
+
+The Glide Data Grid generates continuous background XHR. `page.wait_for_load_state("networkidle")` therefore never reaches idle on any path that renders the grid, and times out at 30s. During the migration this caused cascade failures: one networkidle timeout left the browser in a state that failed every downstream scenario, while each scenario passed in isolation. Every table-rendering/navigation step must use `wait_for_streamlit_rerun()` (watches `data-test-script-state`), not `networkidle`. The only acceptable remaining `networkidle` waits are initial page `goto`s and fresh `new_context` loads, where the grid isn't yet mounted. Incident: MATTGPT-144.
 
 ---
 
