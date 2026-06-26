@@ -10,13 +10,12 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-06-24)
 
 **NOW**
-1. **-075** — Validate debug-surface leak. Confirm `DEBUG=False` on Streamlit Cloud + prod check. Likely closes as add-missing-guards or no-op.
-2. **-080** — `matt_profile.json` restructure. Blocker for -088: scorer and Agy chat need stable shared grounding before alignment work makes sense.
-3. **-088** — Role Match scorer honesty, on top of -080. Biggest single credibility hit (CTO persona: AI contradicting itself). Gates -012 private-view quality.
-4. **-094 probes** — CIC over-concentration + operational under-surfacing. In progress. Running before -080 — findings shape the restructure.
-5. **-077 mitigation** — Query-side: strip "Matt" from embedded queries on technical-noun shapes. Protects primary free-text recruiter flow from MattGPT self-referential answers.
-6. **-097** — Career-intent refresh. Timely for active outreach; makes "what's Matt looking for" keyword-searchable.
-7. **-129 stories 1+2** — AT&T SE CRM + Fiserv expand-from-logged stories (no elicitation block yet). Operational depth pairing with -094 sub-hypothesis B.
+1. **-080** — `matt_profile.json` restructure. Blocker for -088: scorer and Agy chat need stable shared grounding before alignment work makes sense.
+2. **-088** — Role Match scorer honesty, on top of -080. Biggest single credibility hit (CTO persona: AI contradicting itself). Gates -012 private-view quality.
+3. **-094 probes** — CIC over-concentration + operational under-surfacing. In progress. Running before -080 — findings shape the restructure.
+4. **-077 mitigation** — Query-side: strip "Matt" from embedded queries on technical-noun shapes. Protects primary free-text recruiter flow from MattGPT self-referential answers.
+5. **-097** — Career-intent refresh. Timely for active outreach; makes "what's Matt looking for" keyword-searchable.
+6. **-129 stories 1+2** — AT&T SE CRM + Fiserv expand-from-logged stories (no elicitation block yet). Operational depth pairing with -094 sub-hypothesis B.
 
 **NEXT** (queued):
 1. **-128** — Source faithfulness. Unlocked once -080 + -094 land. Second-biggest trust item: recruiter clicks to verify a claim, gets wrong source cards.
@@ -71,7 +70,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-070](#mattgpt-070) | Ask MattGPT — Suggestion button cursor pointer | Decided Against | Low | Issue | May 15, 2026 |
 | [MATTGPT-072](#mattgpt-072) | `generate_public_tags.py` — case-insensitive tag dedup | Open | Low | Refactor | May 16, 2026 |
 | [MATTGPT-074](#mattgpt-074) | Entity cluster promotion forces synthesis mode when users want depth (e.g., "How did you build the CIC?") | Open | Medium | Issue | May 18, 2026 |
-| [MATTGPT-075](#mattgpt-075) | Developer debug surfaces leak to user-facing UI (sidebar print, telemetry badge) | Open | Medium | Issue | May 18, 2026 |
+| [MATTGPT-075](#mattgpt-075) | Developer debug surfaces leak to user-facing UI (sidebar print, telemetry badge) | Decided Against | Medium | Issue | May 18, 2026 |
 | [MATTGPT-076](#mattgpt-076) | "How Agy Works" modal iframe overflows / does not resize correctly on mobile | Open | Medium | Issue | May 18, 2026 |
 | [MATTGPT-077](#mattgpt-077) | Subject-pronoun + noun-overlap retrieval contamination — "Matt + X" pulls MattGPT/Strangler Fig stories when X overlaps their vocabulary | Open | Medium-High | Issue | May 19, 2026 |
 | [MATTGPT-078](#mattgpt-078) | New corpus story — "AI Enablement Before It Had a Name" (resume Option E retrieval anchor) | Open | Medium | Action | May 21, 2026 |
@@ -961,7 +960,7 @@ Each detail block uses these fields. Not every field is required for every item.
 ### MATTGPT-075
 **Developer debug surfaces leak to user-facing UI**
 
-- **Status:** Open
+- **Status:** Decided Against (June 24, 2026) — not a defect. Both reported surfaces (sidebar "Loaded N stories" print, telemetry badge) are gated on `DEBUG`, which is hardcoded `False` in `config/debug.py` and ships False to prod. Parity scan of Ask MattGPT, About Matt, Explore Stories, and Role Match found no ungated user-facing debug surface; the one debug line in Explore Stories is DEBUG-gated and prints to server logs, not the UI. May 18 sighting was a local DEBUG=True session, not a prod leak. No code change.
 - **Priority:** Medium
 - **Type:** Issue
 - **Issue:** Dev-facing debug output is visible in the user-facing UI on the Ask MattGPT page (and possibly other pages). Two specific surfaces observed May 18, 2026 during production query replay:
