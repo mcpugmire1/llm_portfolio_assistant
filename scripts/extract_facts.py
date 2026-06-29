@@ -66,7 +66,7 @@ jsonl_path = REPO_ROOT / "echo_star_stories_nlp.jsonl"
 if jsonl_path.exists():
     lines = [ln for ln in jsonl_path.read_text().splitlines() if ln.strip()]
     facts["story_count"] = len(lines)
-    facts["story_count_label"] = f"{(len(lines) // 10) * 10}+"
+    facts["story_count_label"] = f"{(len(lines) // 100) * 100}+"
 else:
     facts["story_count"] = None
     facts["story_count_label"] = "100+"
