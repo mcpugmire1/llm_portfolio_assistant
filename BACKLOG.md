@@ -69,7 +69,6 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-115](#mattgpt-115) | Lock icon — browser console warning: password field not in native form (st.popover portal breaks form containment) | Open | Low | Issue | June 6, 2026 |
 | [MATTGPT-121](#mattgpt-121) | Why Agy dialog — mobile layout fix (375px viewport); one rule remaining: title font-size 24px → 20px, selector confirmed | Open | Low | Bug | June 9, 2026 |
 | [MATTGPT-122](#mattgpt-122) | My Work — Cards view BDD timing: test_view_switching_preserves_open_story_detail fails (components.html iframe listener not attached at click time) | Open | Low | Issue | June 10, 2026 |
-| [MATTGPT-125](#mattgpt-125) | CLAUDE.md targeted fixes — confirmed bugs + confirmed gaps from June 12 audit | Open | Medium | Action | June 12, 2026 |
 | [MATTGPT-126](#mattgpt-126) | Ask Agy landing — input border invisible on page load (CSS injection race) | Open | Low | Issue | June 12, 2026 |
 | [MATTGPT-128](#mattgpt-128) | Displayed-source faithfulness — source cards must substantiate the claims in the answer | Open | High | Issue | June 14, 2026 |
 | [MATTGPT-129](#mattgpt-129) | Content elaboration per era — expand 5 under-documented operational stories | Open | High | Action | June 14, 2026 |
@@ -1074,32 +1073,6 @@ Add this to the existing `@media (max-width: 480px)` block. `[role="dialog"] p:f
 - **Fix shape:** After switching to Cards view, wait explicitly for the `components.html` iframe's JS to fire before clicking. Candidate: `wait_for_timeout(1000)` after cards appear, or wait for a zero-height `[data-testid='stCustomComponentV1']` iframe. Alternatively, add a retry loop around the click + wait_for_content.
 - **Note:** This test was never green before MATTGPT-105 — it always failed at an earlier step for different reasons. -105 advanced the failure mode to expose the timing issue. Not a -105 regression.
 - **Logged:** June 10, 2026
-### MATTGPT-125
-**CLAUDE.md targeted fixes — confirmed bugs + confirmed gaps from June 12 audit**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Action
-- **Source:** 7-angle multi-agent audit of CLAUDE.md, June 12, 2026. 8 findings; 4 confirmed, 4 plausible.
-- **Confirmed fixes (no design decision needed):**
-  1. Screenshot example has unbound `label` variable (line 292) — crashes with NameError if copied literally. Fix: replace `label` with a concrete string or mark it as a placeholder.
-  2. "Effort estimates without consulting padding" heading (line 384) reads as "don't consult anyone about padding" — opposite of intended meaning. Fix: rename to "Effort estimates — no padding" or similar.
-  3. Backlog ARCHITECTURE.md flag scope too narrow (line 339) — only watches `ui/pages/`, `ui/components/`, `services/`. Changes to `utils/` and `config/` slip through silently. Fix: add those directories to the watched list.
-  4. Backlog sync SHA fallback missing (line 333) — if `<!-- last-backlog-sync: SHA -->` is missing or the SHA is unresolvable, `git log <sha>..HEAD` either errors or diffs the entire history. No fallback defined. Especially critical in Cowork automated-agent context. Fix: add a fallback clause (e.g., prompt Matt if SHA is missing; default to last 20 commits if SHA is unresolvable).
-- **Plausible fixes (need Matt's call before Executor touches):**
-  5. CSS Rule 8 scope gap (line 77) — DevTools inspection gated on layout/alignment/positioning/sizing only. Color and typography have the same Streamlit wrapper-layer failure mode but are ungated. Fix: broaden the trigger list, or reframe as "any CSS property where the rendered value differs from what source code predicts."
-  6. Three contradictory rule pairs — no tiebreaker stated:
-     - Pre-flight ("research first, don't propose anything") vs "Execute the work, don't discuss it" (lines 257/261)
-     - "Default is build-on-top-of" vs "Provide full file replacements" (lines 258/262)
-     - "One go ships the full cycle" vs "Paste validation output and wait — treat as separate gates" (lines 285/275)
-     These need precedence rules, not just rewording. Coordinate with MATTGPT-120 restructure.
-- **Deferred (Cowork context needed):**
-  - Sync anchor mechanism — "since last sync" is ambiguous without a stored reference point; risk of diffing entire history in automated agent context.
-  - Agent trigger conditions — what qualifies as "resolved," handling of Decided Against items, HISTORY.md retirement ownership. Needs a dedicated session with Cowork context before writing into CLAUDE.md.
-- **Relationship to MATTGPT-120:** Items 1-4 are standalone fixes that can ship before -120. Items 5-6 should be resolved as part of the -120 restructure (they require design decisions that the restructure will formalize).
-- **Logged:** June 12, 2026
-
----
 
 ### MATTGPT-126
 **Ask Agy landing — input border invisible on page load (CSS injection race)**

@@ -8,8 +8,12 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Process
 
-**June 2026 — CLAUDE.md restructure: Critical Rules block + rules-first format throughout (MATTGPT-120)**
-Two-part restructure completed. Part 1: Critical Rules fast-reference block at the top — 17 incident-tied imperative rules, readable in 30 seconds. Part 2: Full rules-first format throughout — narrative stripped to one-line incident citations, CSS Rules and Streamlit Patterns trimmed, Working with Claude section removed, stale content removed. Goal achieved: CLAUDE.md is now scannable for new Claude sessions without reading prose blocks to extract the constraints.
+**June 2026 — CLAUDE.md restructure + targeted fixes (MATTGPT-120, MATTGPT-125)**
+Shipped together; -125 targeted fixes were prerequisites for or resolved by the -120 restructure.
+
+-120 (restructure): Critical Rules fast-reference block at top — 17 incident-tied imperative rules, readable in 30 seconds. Full rules-first format throughout — narrative stripped to one-line incident citations, CSS Rules and Streamlit Patterns trimmed, Working with Claude section removed, stale content removed.
+
+-125 (targeted fixes, all 6 items resolved): Unbound `label` variable in screenshot example fixed (concrete string). "Effort estimates without consulting padding" heading renamed. ARCHITECTURE.md watch list broadened to include `utils/` and `config/`. SHA fallback added (prompt Matt if anchor missing). CSS Rule 8 DevTools trigger broadened to cover color and typography. Three contradictory rule pairs resolved by the restructure: pre-flight vs. execute addressed by pre-implementation reasoning gate; build-on-top-of vs. replace addressed by explicit "name why it fails" rule; one-go vs. separate gates resolved by the Red/Green cycle as the defined gate structure. Deferred sync anchor and agent trigger conditions resolved in the Backlog Maintenance and Architecture Sync section restructure.
 
 ### Design Spec (mattgpt-design-spec Jekyll)
 
