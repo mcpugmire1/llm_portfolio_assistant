@@ -1598,38 +1598,42 @@ Each detail block uses these fields. Not every field is required for every item.
 ### MATTGPT-109
 **mattgpt-design-spec Jekyll site — update as a first-class credibility artifact (not housekeeping)**
 
-- **Status:** Open
+- **Status:** Open — partially done. June 15-16 audit (`b9695bf`-`9f9c06d`) closed the credibility-critical drift. Wireframe and secondary-surface documentation updates still open (see below).
 - **Priority:** High
 - **Type:** Action
 - **Purpose (reframed June 1, 2026):** The spec is NOT the bottom rung of a technical-depth funnel. It is a **standalone credibility artifact** aimed squarely at the technical hiring manager or CTO doing due diligence — a full product blueprint proving product leadership, technical execution, and design thinking end-to-end. It also serves as a build-it-yourself guide for engineers who want to replicate the approach. This reframe changes both the urgency and the scope: drift is a credibility liability, not housekeeping. A sharp evaluator noticing the docs lag the product undercuts the entire message at the worst moment.
 - **Origin context (why this matters):** MattGPT was built partly to reconstruct a professional record lost when Matt left Accenture — credentials, references, code, documents, all gone at notification. The STAR corpus was rebuilt from memory. The spec is the artifact that proves the reconstruction was deliberate and rigorous, not just "I built a RAG app." That story is currently invisible in the spec.
-- **Active credibility liabilities (as of June 1, 2026):**
+- **June 15-16 audit — closed (commits `b9695bf`-`9f9c06d`):**
+  - Nav labels corrected in docs 01, 02, 03, 09, 11, 12
+  - Story count updated to 100+
+  - Eval baseline updated
+  - Missing components added: `why_agy_dialog.py`, `lock_icon.py`, `role_match.py`
+  - Role Match wireframes added
+  - `index.md` and `CONTEXT.md` refreshed
+- **Still open:**
+  - Stale nav labels in docs 08 and 09 — ambiguous (in technical/code-context headers describing Python module names, not UI labels). Worth resolving but a judgment call.
+  - Wireframes not updated: no wireframe for How I Built dialog, Why Agy dialog, Banking/Cross-Industry sub-pages with back affordances, or the new My Profile layout. `explore_stories_*` naming still throughout the wireframe directory.
+  - User journeys not updated to reflect 9 current surfaces.
+  - Discoverability fix (direct spec link from My Profile signals panel) — hold on this was "pending Profile v2 signals panel work." That work shipped as MATTGPT-093. Dependency expired; discoverability fix is now unblocked.
+- **Active credibility liabilities (as of June 1, 2026 — partially resolved above):**
   - "Last Updated December 2025" timestamp — app has shipped 10+ significant changes since
   - Contact line still says "Digital Transformation Director" — stale title, wrong positioning
-  - Nav labels throughout still say "About Matt", "Ask MattGPT", "Explore Stories" — old structure
+  - Nav labels throughout still say "About Matt", "Ask MattGPT", "Explore Stories" — old structure (partially fixed in June audit)
   - Wireframes dated October 2025 — predate the entire `feature/ui-redesign` branch
   - No mention of Why Agy modal, How I Built standalone surface, or the three-tier disclosure model
-- **Discoverability gap:** The spec is currently buried three hops deep (Agy → How I Built → footer link). The technical hiring manager it's built for has to dig the most to find it. Needs a direct, clearly labeled entry point — first-class link from My Profile signals panel and from How I Built.
-- **Scope of content updates needed:**
-  - **Positioning** — update "What This Demonstrates" and intro to reflect the reconstruction origin + deliberate credibility artifact framing
-  - **Nav labels** — Home / My Work / Ask Agy / Role Match / My Profile throughout (MATTGPT-100)
-  - **Navbar + cards** — reflect shipped redesign (MATTGPT-106, -107)
-  - **How Agy Searches** — document migration to `@st.dialog`; remove Technical Details block (run-vs-build split)
-  - **How I Built** — document as standalone surface (MATTGPT-102); tour-level content, not triplicate pipeline tellings
-  - **Why Agy modal** — document new component + badge placement across 5 surfaces (MATTGPT-101)
-  - **User journeys / wireframes** — update to reflect 9 current surfaces including secondary surfaces (Banking, Cross-Industry, How I Built) with back affordances
-  - **ARCHITECTURE.md sync** — spec architecture docs should reflect current lean pipeline
-  - **Timestamp + contact line** — "Last Updated" and positioning copy
-- **Discoverability fix (in-app, separate from spec content):**
-  - Add direct link to spec from My Profile signals panel (pending Profile v2 signals panel work)
-  - Ensure How I Built's "View Design Specification →" link is prominent, not a footer afterthought
-- **Timing:** Hold until in-flight app work stabilizes (-101, -102 mechanism, -105, -108). Then update spec in one deliberate pass — not piecemeal. The spec should reflect a stable, coherent state of the app, not a moving target.
-- **Effort:** Medium-High (~4-6 hours). Content updates across 12 doc pages + wireframes + positioning copy. No structural changes to the Jekyll site itself, but the positioning rewrite (origin story, "What This Demonstrates") needs care.
+- **Discoverability gap:** The spec is currently buried three hops deep (Agy → How I Built → footer link). Needs a direct, clearly labeled entry point — first-class link from My Profile signals panel (now unblocked) and from How I Built.
+- **Remaining scope:**
+  - **Wireframes** — How I Built dialog, Why Agy dialog, Banking/Cross-Industry with back affordances, My Profile layout
+  - **User journeys** — update to reflect 9 current surfaces including secondary surfaces
+  - **Discoverability fix** — add direct link to spec from My Profile signals panel (unblocked)
+  - **Stale nav labels** — docs 08/09 judgment call
+  - **Positioning** — "What This Demonstrates" and intro reflecting reconstruction origin + credibility artifact framing
+- **Effort (remaining):** Medium (~3-4 hours). The credibility-critical drift is closed; what's left is wireframes, user journeys, and positioning copy.
 - **Cross-references:**
-  - **MATTGPT-101** — Why Agy modal (new surface to document in spec)
-  - **MATTGPT-102** — How I Built standalone surface + content trim
-  - **MATTGPT-100, -106, -107** — nav / navbar / cards changes already shipped
-  - **MATTGPT-093** — About Matt strategic restructure; spec's About Matt wireframe needs to reflect Profile v2 direction
+  - **MATTGPT-101** — Why Agy modal (document in spec)
+  - **MATTGPT-102** — How I Built dialog (document in spec)
+  - **MATTGPT-100, -106, -107** — nav / navbar / cards changes shipped
+  - **MATTGPT-093** — My Profile shipped; discoverability fix now unblocked
 - **Logged:** June 1, 2026
 
 ---
