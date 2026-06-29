@@ -71,7 +71,6 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-072](#mattgpt-072) | `generate_public_tags.py` — case-insensitive tag dedup | Open | Low | Refactor | May 16, 2026 |
 | [MATTGPT-074](#mattgpt-074) | Entity cluster promotion forces synthesis mode when users want depth (e.g., "How did you build the CIC?") | Open | Medium | Issue | May 18, 2026 |
 | [MATTGPT-075](#mattgpt-075) | Developer debug surfaces leak to user-facing UI (sidebar print, telemetry badge) | Decided Against | Medium | Issue | May 18, 2026 |
-| [MATTGPT-076](#mattgpt-076) | "How Agy Works" modal iframe overflows / does not resize correctly on mobile | Open | Medium | Issue | May 18, 2026 |
 | [MATTGPT-077](#mattgpt-077) | Subject-pronoun + noun-overlap retrieval contamination — "Matt + X" pulls MattGPT/Strangler Fig stories when X overlaps their vocabulary | Open | Medium-High | Issue | May 19, 2026 |
 | [MATTGPT-078](#mattgpt-078) | New corpus story — "AI Enablement Before It Had a Name" (resume Option E retrieval anchor) | Open | Medium | Action | May 21, 2026 |
 | [MATTGPT-079](#mattgpt-079) | Role Match coverage gaps — corpus story anchors needed (meta-ticket) | Open | Medium | Action | May 21, 2026 |
@@ -974,32 +973,6 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Fix shape (open):** Audit all debug surfaces on the Ask MattGPT page (and About Matt, Explore Stories, Role Match for parity). Confirm each is gated on the `DEBUG` flag. Verify `DEBUG=False` in the production Streamlit Cloud environment. If gating is missing, add it.
 - **Effort:** ~30 min audit + small code changes to add `if DEBUG:` guards where missing. Low risk, high recruiter-perceived-polish payoff.
 - **Discovered during:** May 18, 2026 production query replay with Streamlit running locally. Matt's reaction on seeing the debug surfaces: *"we'll need to figure out how to fix the following: [debug output]"*.
-- **Logged:** May 18, 2026
-
----
-
-### MATTGPT-076
-**"How Agy Works" modal iframe overflows / does not resize correctly on mobile**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Issue
-- **Issue:** On mobile viewports, the "How Agy Works" modal (`ui/components/how_agy_modal.py`) does not size its content iframes correctly. Observed May 18, 2026 in production after the latest deploy. Two failure modes visible:
-  - **Modal content overflows the viewport.** Detail cards inside the modal (Filters input, Detects intent, Retrieves grounded stories, Refuses weak matches, Synthesizes response) render at desktop heights inside a mobile viewport. Bottom cards get cut off or push the page layout downward awkwardly.
-  - **Status bar layout breaks at the bottom.** The status bar (`Semantic search active · Pinecone index ready · 130+ stories indexed`) is positioned at the bottom of the modal area but conflicts with the Streamlit "Manage app" floating menu, creating visual collision and partial occlusion.
-- **Likely cause:** The modal renders its content via `components.html(get_how_agy_flow_html(), height=1180)` and `components.html(get_technical_details_html(), height=850)`. These fixed pixel heights are tuned for desktop. Streamlit's `components.html` iframe doesn't auto-resize to mobile content height, so:
-  - Below desktop width, the iframe still claims 1180 / 850px of vertical space
-  - Content inside the iframe wraps and overflows because its CSS isn't mobile-responsive within the constrained iframe width
-- **Out of scope (separate concerns):**
-  - The "130+ stories indexed" copy still hardcoded — tracked under MATTGPT-019.
-  - The dev-debug surfaces visible in the same screenshots — tracked under MATTGPT-075.
-- **Fix shape (open):**
-  - **A.** Replace fixed-pixel `height=` with a mobile-aware breakpoint (e.g., compute height conditionally based on `st.session_state["_browser_screen_size"]` if available).
-  - **B.** Re-author the iframe HTML to be responsive (media queries inside the `get_how_agy_flow_html()` content + a JS auto-height observer that posts the measured height to the parent).
-  - **C.** Replace the iframe-based approach with native Streamlit components (st.markdown + st.container with CSS) so Streamlit's own responsive layout handles mobile. Biggest refactor; cleanest result.
-- **Audience impact:** "How Agy Works" is a credibility-building modal targeting technical hiring managers and curious recruiters. Visible layout breakage on mobile undermines the polish the rest of the app projects. Mobile is a meaningful share of recruiter traffic.
-- **Effort estimate:** A) ~30 min, low fidelity. B) ~2 hours, moderate fidelity. C) ~4-6 hours, highest fidelity but largest refactor.
-- **Discovered during:** May 18, 2026 spot-check of production immediately after the MATTGPT-073/-061 push. Matt clicked into "How Agy Works" while in mobile mode (Chrome desktop with mobile viewport) and observed the iframe sizing issue.
 - **Logged:** May 18, 2026
 
 ---

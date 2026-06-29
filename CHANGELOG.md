@@ -8,6 +8,9 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### CSS Architecture
 
+**June 2026 — "How Agy Works" modal mobile layout fix (MATTGPT-076)**
+Fix Option C applied: replaced `components.html` iframes with fixed pixel heights (`height=1180`, `height=850`) with native Streamlit `stMarkdown` / `stMarkdownContainer` elements. Modal now reflows correctly on mobile — cards stack single-column, content scrolls within the modal, no viewport overflow. Desktop two-column grid unaffected. Validated at 390×844 (iPhone) and desktop.
+
 **June 2026 — Page-load blep: re-add visibility:hidden on Ask Agy stale hero during nav (MATTGPT-018)** — `a6b427c`
 Re-added CSS rule to `global_styles.py` hiding Ask Agy landing hero containers during the Streamlit stale-element retention window on navigation. Both selectors (`.main-intro-section`, `.ask-header-landing`) with `visibility: hidden !important`. Mechanism comment restored including deliberate `.ask-header-conversation` exclusion. Unit test added in `tests/unit/test_global_styles.py`: whitespace-tolerant assertion that selectors and `visibility: hidden !important` are present as a unit in `_CSS`, catching both rule deletion and mutation to a no-op value. 3/3 BDD scenarios passing.
 
