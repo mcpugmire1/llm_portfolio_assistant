@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: a6b427c -->
+<!-- last-backlog-sync: 11e4728 -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -40,7 +40,6 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-016](#mattgpt-016) | Semantic Router — Wrong-Person Query Detection | Decided Against | High | Issue | Apr 2026 |
 | [MATTGPT-017](#mattgpt-017) | Wire skipped Role Match logging BDD scenarios (Playwright click + mocked Sheets write) | Open | Medium | Action | Apr 28, 2026 |
 | [MATTGPT-020](#mattgpt-020) | Simplify backend_service.py | Decided Against | Medium | Refactor | Pre-Jan 2026 |
-| [MATTGPT-021](#mattgpt-021) | diversify_results() Pinning Bug | Open | Medium | Issue | Apr 2026 |
 | [MATTGPT-022](#mattgpt-022) | Data Quality Cleanup Journey Story | Open | Medium | Action | Mar 2026 |
 | [MATTGPT-039](#mattgpt-039) | Automated Regression Detection (GitHub Actions) | Open | Medium | Action | Apr 29, 2026 |
 | [MATTGPT-040](#mattgpt-040) | Eval Coverage Gaps — Follow-up Queries | Open | Low | Action | Apr 29, 2026 |
@@ -79,7 +78,6 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-082](#mattgpt-082) | Q15 eval assertion is over-specified — checks literal client name presence rather than response correctness | Open | Medium | Refactor | May 22, 2026 |
 | [MATTGPT-083](#mattgpt-083) | Spinner inconsistency — Explore Stories doesn't show thinking indicator for rejected queries (Ask MattGPT does) | Open | Medium | Issue | May 23, 2026 |
 | [MATTGPT-084](#mattgpt-084) | Ask MattGPT BDD scenarios — chip-click + low_confidence banner-render timing flakes under full-suite load | Open | Medium | Issue | May 23, 2026 |
-| [MATTGPT-085](#mattgpt-085) | `secrets.toml` `MATTGPT_PRIVATE_BYPASS_TOKEN` parity + dead `private_access_code` cleanup + doc drift | Open | Medium | Refactor | May 23, 2026 |
 | [MATTGPT-086](#mattgpt-086) | Query logger — add environment annotation column + filter dev/test traffic out of production analytics | Open | Low | Issue | May 23, 2026 |
 | [MATTGPT-088](#mattgpt-088) | Role Match scorer — align with Agy honesty (no Strong Match when chat would say no) | Open | High | Issue | May 28, 2026 |
 | [MATTGPT-089](#mattgpt-089) | Role Match — parse location, work-model, availability as distinct filter class | Open | High | Issue | May 28, 2026 |
@@ -106,7 +104,6 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-133](#mattgpt-133) | BDD skip — `test_ask_agy_works_from_table_view` skips when AgGrid iframe row interaction doesn't open detail panel | Decided Against | Low | Bug | June 16, 2026 |
 | [MATTGPT-134](#mattgpt-134) | BDD skip — `test_deeplink_respects_view_mode` skips because deeplink navigation does not preserve pre-set view mode | Decided Against | Low | Bug | June 16, 2026 |
 | [MATTGPT-136](#mattgpt-136) | Dark mode design system audit — --accent-purple not overridden in body.dark-theme | Open | Low | Refactor | June 18, 2026 |
-| [MATTGPT-137](#mattgpt-137) | AgGrid bootstrap.min.css render-blocking on Ask Agy → My Work transition | Open | Low | Perf | June 18, 2026 |
 | [MATTGPT-138](#mattgpt-138) | BDD: page teardown invariant + CLS budget guard (MATTGPT-018 regression lock) | Decided Against | Medium | Action | June 19, 2026 |
 | [MATTGPT-140](#mattgpt-140) | Fix hardcoded model names in backend_service.py and jd_assessor.py — use constants.py | Open | Low | Refactor | June 20, 2026 |
 | [MATTGPT-141](#mattgpt-141) | Remove dead ENTITY_GATE_THRESHOLD constant from config/constants.py | Open | Low | Refactor | June 22, 2026 |
@@ -300,19 +297,6 @@ Each detail block uses these fields. Not every field is required for every item.
 
 ---
 
-### MATTGPT-021
-**diversify_results() Pinning Bug**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Issue
-- **Issue:** Two related bugs in `diversify_results()`. (1) Pinned story (result #1) is not counted toward `max_per_client` limit — a client can appear `max_per_client + 1` times. (2) Client diversity reordering breaks score ordering guarantee — test expects descending scores but diversification shuffles order.
-- **Root cause:** Pinning logic (line ~1313 in backend_service.py) tracks `seen_clients` but doesn't include the pinned result in the count.
-- **Fix:** Count pinned client toward limit, then restore score ordering after diversification pass.
-- **Affects:** 2 failing tests (`test_limits_single_client_stories`, `test_maintains_overall_order`)
-- **Logged:** April 2026 test audit
-
----
 
 ### MATTGPT-022
 **Data Quality Cleanup Journey Story**
@@ -1233,27 +1217,6 @@ Each detail block uses these fields. Not every field is required for every item.
 
 ---
 
-### MATTGPT-085
-**`secrets.toml` `MATTGPT_PRIVATE_BYPASS_TOKEN` local-prod parity + dead `private_access_code` cleanup + doc drift**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Refactor
-- **Issue:** Four related doc/config drift problems surfaced during May 23 full-suite BDD validation:
-  1. **`MATTGPT_PRIVATE_BYPASS_TOKEN` missing from local `.streamlit/secrets.toml`.** The env var was introduced in MATTGPT-012 slice 1 (commit `329a8bf`, May 5-6 2026) — but never added to the local secrets file. CI sets it; local doesn't. Result: 7 lock-glyph BDD tests in `test_role_match.py` fail locally with `Expected '🔓', got '🔒'`.
-  2. **`test_role_match.py` docstring documents a decided-against workflow.** The docstring (line 63 area + line 564 area) tells the reader to run `MATTGPT_PRIVATE_BYPASS_TOKEN=test-bypass-token streamlit run app.py` — that command-line env-var prefix approach was decided against in favor of `secrets.toml` parity. Future readers / sessions would follow the rejected workflow.
-  3. **Dead `private_access_code` entry in `secrets.toml`.** MATTGPT-012 slice 1 replaced this with `MATTGPT_PRIVATE_BYPASS_TOKEN` but the old entry was never removed. Confusing for future maintainers.
-  4. **No `secrets.example.toml` template exists.** New developers / future sessions have no checked-in way to discover what secrets are needed without reading production code or asking.
-- **Fix shape:**
-  - Add `MATTGPT_PRIVATE_BYPASS_TOKEN = "test-bypass-token"` to local `.streamlit/secrets.toml` (file is gitignored — Matt to do)
-  - Remove dead `private_access_code` line from local `secrets.toml` (Matt to do)
-  - Update `test_role_match.py` docstring (2 locations): remove decided-against env-var prefix workflow; point at `secrets.toml` as the parity convention (this ticket)
-  - Create checked-in `.streamlit/secrets.example.toml` template documenting required keys with placeholder values (this ticket)
-- **Cross-references:** MATTGPT-012 (slice 1 where the new env var was introduced without the local migration); `project_jd_match.md` memory references the new var name.
-- **Discovered during:** May 23, 2026 full-suite BDD validation. Surfaced when Matt questioned whether `MATTGPT_PRIVATE_BYPASS_TOKEN` was supposed to still exist — exposing both the missing-secret config AND the docstring drift. Also surfaced an inadvertent exposure of the GCP service account private key in the conversation log (separate, urgent action item: rotate the key).
-- **Logged:** May 23, 2026
-
----
 
 ### MATTGPT-086
 **Query logger — add environment annotation column + filter dev/test traffic out of production analytics**
@@ -1948,25 +1911,6 @@ Cold-load CLS ceiling: 0.25 (observed ~0.24 in DevTools — locks "no worse than
 
 ---
 
-### MATTGPT-137
-**AgGrid bootstrap.min.css render-blocking on Ask Agy → My Work transition**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Perf
-- **Logged:** June 18, 2026
-
-**Context:** `bootstrap.min.css` served by Streamlit Cloud's AgGrid component has `cache-control: public` with no `max-age`, causing 195ms server revalidation round-trips on every Ask Agy → My Work page transition. This contributes to the "blep" (layout shift / flash) on My Work load.
-
-**What was tried:** `<link rel="preload">` tags added to the top of `_CSS` in `global_styles.py`. Failed: Streamlit's `st.markdown()` parser breaks when `<link>` tags precede `<style>` in the injected string — the entire CSS renders as visible text on the page. Reverted (`6b1ea2a`).
-
-**Constraints:** Cache headers on Streamlit Cloud's component server are not configurable from the Python layer. The issue is upstream of the application.
-
-**Potential approaches:** (1) `components.html` injection of a `<link rel="preload">` tag into `window.parent.document.head` — bypasses the st.markdown parser, injects directly into parent document head. (2) Accept as Streamlit Cloud infrastructure limitation and close. (3) Watch for Streamlit Cloud cache header improvements.
-
-**Acceptance criterion:** Either bootstrap.min.css shows as `(from memory cache)` or `(disk cache)` on the Ask Agy → My Work transition DevTools Network tab, or ticket is closed as Decided Against with documented rationale.
-
----
 
 ### MATTGPT-143
 **BDD: app_url fixture hardcodes port 8501 with no override**

@@ -19,6 +19,9 @@ Re-added CSS rule to `global_styles.py` hiding Ask Agy landing hero containers d
 **June 2026 — My Work Table view: migrate from st_aggrid (iframe) to st.dataframe / Glide Data Grid (MATTGPT-144)** — `77dc1cb`
 Replaced st_aggrid with st.dataframe (Glide Data Grid) in the My Work Table view. Eliminates the AgGrid custom-component iframe re-init on filter rerun (the -144 symptom) and removes the AgGrid bootstrap.min.css 195ms revalidation round-trip on page nav. BDD: 55/55 passing, 0 skipped. Key test changes: removed all AgGrid iframe / `.ag-row` / `frame_locator` assertions; added `st.dataframe` canvas-mount proxy (`data-grid-canvas`); replaced `networkidle` waits with `wait_for_streamlit_rerun` (Glide Data Grid's continuous XHR never settles networkidle); converted empty `pass` stubs to count-direction logic via `_read_count()`; added Cards-view-switch fallback in `click_story_card` (3 scenarios now run instead of skip); added Share "Copied!" confirmation scenario. Deleted 2 scenarios: Table-row Ask Agy (canvas row-click undriveable, redundant with Cards) and deeplink-respects-view-mode (non-feature: deeplinks intentionally start fresh session). Guard proof: breaking `no_story_results_shown` fails both rejection scenarios; non-vacuous.
 
+**June 2026 — AgGrid bootstrap.min.css render-blocking resolved as side effect of st.dataframe migration (MATTGPT-137)**
+`st_aggrid` removed from all `ui/` files as part of MATTGPT-144. The bootstrap.min.css 195ms server revalidation round-trip on Ask Agy → My Work transitions no longer occurs because the AgGrid custom component and its bundled assets are gone. No direct fix required.
+
 ### Ask Agy Performance
 
 **June 2026 — Ask Agy landing chips: st.button → static HTML + JS bridge (MATTGPT-139)** — `4e8e461`, `722972b`
@@ -109,6 +112,9 @@ Added a "Filters ▾" toggle button to My Work, visible only on mobile (hidden o
 **May 18 — Remove last_primary_client cross-query session state (MATTGPT-073)** — `3773c6b`
 Option E applied. Removed `_last_primary_client` from `diversify_results` in `backend_service.py`. The mechanism stored the previous query's pinned client in session state and used it to demote stories on subsequent queries — making retrieval output for query N dependent on queries 1…N-1. Production log analysis (82 queries, 24 sessions) showed 45% of consecutive pairs were demotion-eligible. Post-removal eval: 70/70 (100%). Architectural decision recorded as ADR 019.
 
+**May 18 — diversify_results() pinning bug resolved as side effect of MATTGPT-073 (MATTGPT-021)**
+The `diversify_results()` rewrite during MATTGPT-073 corrected the two original bugs: slot #1 is now pinned unconditionally (no client-count toward the diversity limit), and score ordering is preserved after the diversity pass. The `_last_primary_client` cross-query session state mechanism that was the root cause is gone. Confirmed in `backend_service.py:1242-1315` — no session state written, no demotion applied to slot #1.
+
 **May 18 — MattGPT portfolio story contamination in leadership queries resolved (MATTGPT-061)** — `02f6c79`
 The dominant contamination mechanism — session-state demotion in MATTGPT-073 — removed. Validated against 12 production-traffic leadership queries: 11/12 clean responses (91.7%). 61-query eval suite 100% passing. Single residual failure (Q2 "transformations" polysemy) is a structural semantic search limit scoped to hybrid retrieval (see BACKLOG).
 
@@ -157,6 +163,9 @@ Replaced stale architecture descriptions in user-facing pages with the current 5
 Enables Cowork (Claude Desktop) to drive JD triage against the existing engine by exposing it as a CLI surface and putting orchestration assets in version control as source of truth. `scripts/assess_jd.py` wraps `run_assessment()` + `compute_recommendation()` from `services/jd_assessor.py`, reads JD from stdin, and emits a schema-versioned JSON envelope; self-bootstraps `sys.path` so it works regardless of invocation context (subprocess, Cowork shell, pytest). `agent/triage/synthesis_prompt.md` carries the three-layer assessment logic (capability + filter + thin fit) with Pass-mode voice for high-volume discovery readiness; `agent/triage/filter_config.json` encodes Matt's hard rules (geographic, comp) + redline phrases. `agent/README.md` documents the layout and the Cowork setup checklist. `agent/discovery/` reserved as a placeholder for v2 ATS-based push-model discovery. `tests/unit/test_assess_jd.py` covers three contract surfaces: empty stdin (error JSON), missing JSONL (graceful error JSON), and valid-JD envelope shape (engine mocked in-process via `unittest.mock`). Architecture follow-up to update `mattgpt-design-spec/architecture.md` pending separately.
 
 ### Infrastructure
+
+**May 2026 — secrets.toml local-prod parity + dead private_access_code cleanup (MATTGPT-085)**
+`MATTGPT_PRIVATE_BYPASS_TOKEN` added to local `.streamlit/secrets.toml`; dead `private_access_code` entry removed. Local BDD suite now passes the 7 lock-glyph Role Match scenarios without environment variable prefix workarounds. `test_role_match.py` docstring updated (two locations) to remove the rejected command-line env-var prefix workflow and point at `secrets.toml` parity as the convention.
 
 **May 6 — Reduce log noise on Streamlit Cloud (file watcher → poll)**
 Streamlit's default watchdog (inotify) file watcher exhausted the kernel's per-host inotify instance limit on Streamlit Cloud's multi-tenant VMs, spamming the production log with non-fatal `OSError: [Errno 24] inotify instance limit reached` tracebacks (one per watched directory). Added `.streamlit/config.toml` with `fileWatcherType = "poll"` — no inotify overhead on Cloud (which never benefited from file watching anyway, since deploys come from git push), and the "Source file changed" toast still fires locally via polling. `"none"` rejected because it would silently disable the local toast.
