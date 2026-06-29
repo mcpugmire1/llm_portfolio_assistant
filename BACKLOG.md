@@ -67,7 +67,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-097](#mattgpt-097) | Career-intent framing refresh — corpus predates current role taxonomy; refresh framing AND tighten register | Open | Medium | Action | May 28, 2026 |
 | [MATTGPT-099](#mattgpt-099) | Role Match — assess and decide comp handling on JDs that include comp expectations | Open | Medium | Investigation + Action | May 29, 2026 |
 | [MATTGPT-115](#mattgpt-115) | Lock icon — browser console warning: password field not in native form (st.popover portal breaks form containment) | Open | Low | Issue | June 6, 2026 |
-| [MATTGPT-121](#mattgpt-121) | Why Agy dialog — mobile layout fix (375px viewport); title font-size override pending DevTools selector confirmation | Open | Medium | Bug | June 9, 2026 |
+| [MATTGPT-121](#mattgpt-121) | Why Agy dialog — mobile layout fix (375px viewport); one rule remaining: title font-size 24px → 20px, selector confirmed | Open | Low | Bug | June 9, 2026 |
 | [MATTGPT-122](#mattgpt-122) | My Work — Cards view BDD timing: test_view_switching_preserves_open_story_detail fails (components.html iframe listener not attached at click time) | Open | Low | Issue | June 10, 2026 |
 | [MATTGPT-125](#mattgpt-125) | CLAUDE.md targeted fixes — confirmed bugs + confirmed gaps from June 12 audit | Open | Medium | Action | June 12, 2026 |
 | [MATTGPT-126](#mattgpt-126) | Ask Agy landing — input border invisible on page load (CSS injection race) | Open | Low | Issue | June 12, 2026 |
@@ -1032,6 +1032,36 @@ Each detail block uses these fields. Not every field is required for every item.
 
 ---
 
+### MATTGPT-121
+**Why Agy dialog — mobile layout fix (375px viewport)**
+
+- **Status:** Open
+- **Priority:** Low (downgraded from Medium — heavy lifting done, one line remains)
+- **Type:** Bug / Polish
+- **File:** `ui/components/why_agy_dialog.py`
+- **Logged:** June 9, 2026
+
+**Already shipped (commit `ad3b72f`):** `@media (max-width: 480px)` block in `why_agy_dialog.py` lines 107–124:
+- `[role="dialog"]` → `max-height: 88vh; overflow-y: auto` (scroll safety)
+- `.why-agy-avatar-row` → `flex-direction: column; align-items: center; gap: 12px` (stacks image above text)
+- `.why-agy-illustration` → `max-width: 70px; width: 70px !important` (shrinks image)
+- `.why-agy-body p` → `font-size: 14px; line-height: 1.6` (reduces body copy)
+
+Note: image is in a flex row (`display: flex; gap: 20px; flex-shrink: 0`), not a float — ticket originally said "floats right," which was wrong.
+
+**Remaining — one CSS rule:** Dialog title `"Hi, I'm Agy 🐾"` (renamed in commit `56230f2`, before the mobile fix) renders at 24px, font-weight 600 on mobile. Target: 20px.
+
+Selector confirmed via live DOM inspection (Chrome Claude, June 2026). Title `<p>` sits inside `[data-testid="stMarkdownContainer"]` in the dialog's title area, structurally separate from `.why-agy-body` paragraphs. Safe selector:
+
+```css
+[role="dialog"] [data-testid="stMarkdownContainer"] p {
+    font-size: 20px !important;
+}
+```
+
+Add this to the existing `@media (max-width: 480px)` block. `[role="dialog"] p:first-of-type` (original proposal) is fragile and should not be used.
+
+---
 
 ### MATTGPT-122
 **My Work — Cards view BDD timing failure: test_view_switching_preserves_open_story_detail**
