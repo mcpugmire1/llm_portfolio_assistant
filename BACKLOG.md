@@ -287,13 +287,15 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Status:** Open
 - **Priority:** Low
 - **Type:** Bug
-- **File:** `ui/styles/global_styles.py`
+- **File:** `ui/pages/ask_mattgpt/styles.py`
 - **Logged:** Pre-2026
 
 **Issue:** The Ask Agy button (landing page and conversation page) has two related visual defects: it sits slightly below and taller than the adjacent text input, and it shifts on focus due to an inherited Streamlit focus ring.
 
 **Misalignment — root cause (Chrome Claude, June 2026):**
 Streamlit's `stBaseButton-primary` applies `margin-top: 10px` by default, pushing the button 10px down inside its column. The `stHorizontalBlock` row uses `align-items: center`, sizing to the tallest child (60px = 50px button + 10px margin) and centering the input — but the button is offset 10px from the top of its own column, not truly centered. Result: button top sits ~2px below input top, button bottom sits ~7px below input bottom. Secondary mismatch: custom CSS sets `min-height: 48px` and `padding: 12px 32px`, making the button 6px taller than the 44px input before the margin is considered.
+
+**Partial fix already shipped:** `margin-top: 0 !important` added for mobile in MATTGPT-139 (`styles.py` line 640). Desktop misalignment still open.
 
 **Focus shift — root cause:**
 Streamlit's base class rule (`.st-emotion-cache-1cl4umz:focus-visible`) injects a red `box-shadow` ring (`rgba(255,75,75,0.5)`) not suppressed by the custom `.st-key-landing_ask` rules. Combined with `transition: all 0.2s ease`, the ring animates in on focus, producing a visible paint-layer shift.
