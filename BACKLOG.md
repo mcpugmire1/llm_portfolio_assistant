@@ -67,12 +67,10 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-097](#mattgpt-097) | Career-intent framing refresh — corpus predates current role taxonomy; refresh framing AND tighten register | Open | Medium | Action | May 28, 2026 |
 | [MATTGPT-099](#mattgpt-099) | Role Match — assess and decide comp handling on JDs that include comp expectations | Open | Medium | Investigation + Action | May 29, 2026 |
 | [MATTGPT-115](#mattgpt-115) | Lock icon — browser console warning: password field not in native form (st.popover portal breaks form containment) | Open | Low | Issue | June 6, 2026 |
-| [MATTGPT-120](#mattgpt-120) | CLAUDE.md restructure — Critical Rules fast-reference block + rules-first format throughout | Open | Medium | Action | June 9, 2026 |
 | [MATTGPT-121](#mattgpt-121) | Why Agy dialog — mobile layout fix (375px viewport); title font-size override pending DevTools selector confirmation | Open | Medium | Bug | June 9, 2026 |
 | [MATTGPT-122](#mattgpt-122) | My Work — Cards view BDD timing: test_view_switching_preserves_open_story_detail fails (components.html iframe listener not attached at click time) | Open | Low | Issue | June 10, 2026 |
 | [MATTGPT-125](#mattgpt-125) | CLAUDE.md targeted fixes — confirmed bugs + confirmed gaps from June 12 audit | Open | Medium | Action | June 12, 2026 |
 | [MATTGPT-126](#mattgpt-126) | Ask Agy landing — input border invisible on page load (CSS injection race) | Open | Low | Issue | June 12, 2026 |
-| [MATTGPT-127](#mattgpt-127) | Replace hardcoded `ASSESSMENT_MODEL` in `jd_assessor.py` with `get_conf()` env var pattern | Open | Low | Refactor | June 12, 2026 |
 | [MATTGPT-128](#mattgpt-128) | Displayed-source faithfulness — source cards must substantiate the claims in the answer | Open | High | Issue | June 14, 2026 |
 | [MATTGPT-129](#mattgpt-129) | Content elaboration per era — expand 5 under-documented operational stories | Open | High | Action | June 14, 2026 |
 | [MATTGPT-130](#mattgpt-130) | "practitioners" canonical everywhere — UI, eval golden set, corpus re-embed in lockstep | Open | Medium | Action | June 14, 2026 |
@@ -130,6 +128,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-075](#mattgpt-075) | Developer debug surfaces leak to user-facing UI (sidebar print, telemetry badge) | Decided Against | Medium | Issue | May 18, 2026 |
 | [MATTGPT-090](#mattgpt-090) | System prompt — decline cleanly on comp / off-scope queries (no silent fallback) | Decided Against | Medium | Action | May 28, 2026 |
 | [MATTGPT-103](#mattgpt-103) | Agy intro line — resolve "20+ years of work" inconsistency with stats bar (Years tile dropped) | Decided Against | Low | Refactor | May 30, 2026 |
+| [MATTGPT-127](#mattgpt-127) | Replace hardcoded `ASSESSMENT_MODEL` in `jd_assessor.py` with `get_conf()` env var pattern | Decided Against | Low | Refactor | June 12, 2026 |
 | [MATTGPT-133](#mattgpt-133) | BDD skip — `test_ask_agy_works_from_table_view` skips when AgGrid iframe row interaction doesn't open detail panel | Decided Against | Low | Bug | June 16, 2026 |
 | [MATTGPT-134](#mattgpt-134) | BDD skip — `test_deeplink_respects_view_mode` skips because deeplink navigation does not preserve pre-set view mode | Decided Against | Low | Bug | June 16, 2026 |
 | [MATTGPT-138](#mattgpt-138) | BDD: page teardown invariant + CLS budget guard (MATTGPT-018 regression lock) | Decided Against | Medium | Action | June 19, 2026 |
@@ -1033,32 +1032,6 @@ Each detail block uses these fields. Not every field is required for every item.
 
 ---
 
-### MATTGPT-120
-**CLAUDE.md restructure — Critical Rules fast-reference block + rules-first format throughout**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Action
-- **Goal:** Make CLAUDE.md scannable for new Claude Code sessions. Two parts: (1) Critical Rules fast-reference block at the top — 10-15 non-negotiable imperative rules, readable in 30 seconds; (2) Full restructure — rules-first format throughout, incident narratives moved to memory pointers, overlapping sections consolidated (CSS Rules + Streamlit Patterns → one section). Part 1 is one commit. Part 2 is a dedicated session.
-- **Trigger:** Before the next feature sprint after the UI redesign deploy.
-- **Logged:** June 9, 2026
-
-### MATTGPT-121
-**Why Agy dialog — mobile layout fix (375px viewport)**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Bug / Polish
-- **Goal:** Fix cramped mobile layout on the Why Agy dialog at 375px. Dialog renders at 374×645px against a 661px viewport — 16px breathing room, no visible scroll affordance. Image floats right at 100px, leaving body text in a ~230px column at full desktop font size.
-- **Fix already partially shipped (June 9, 2026):** `@media (max-width: 480px)` block added to `_CSS` in `ui/components/why_agy_dialog.py`:
-  - `.why-agy-avatar-row` → `flex-direction: column; align-items: center` (stacks image above text)
-  - `.why-agy-illustration` → `max-width: 70px` (shrinks image)
-  - `.why-agy-body p` → `font-size: 14px` (reduces body copy from 16px)
-  - `[role="dialog"]` → `max-height: 88vh; overflow-y: auto` (safety net)
-- **Remaining:** Dialog title ("Hi, I'm Agy 🐾") still renders at 24px on mobile. Target is 20px. Selector is unknown — Streamlit renders the `@st.dialog` title as a `<p>` (not `<h2>`), but the exact selector was not confirmed via DevTools. `[role="dialog"] p:first-of-type` is risky (may match body paragraphs). Needs DevTools inspection to identify the correct selector before adding the title font-size override.
-- **Logged:** June 9, 2026
-
----
 
 ### MATTGPT-122
 **My Work — Cards view BDD timing failure: test_view_switching_preserves_open_story_detail**
@@ -1123,22 +1096,6 @@ div[data-testid="stTextInput"] input {
 
 ---
 
-### MATTGPT-127
-**Replace hardcoded `ASSESSMENT_MODEL` in `jd_assessor.py` with `get_conf()` env var pattern**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Refactor
-- **File:** `services/jd_assessor.py`, `config/constants.py`
-- **Logged:** June 12, 2026
-
-**Issue:** `ASSESSMENT_MODEL = "gpt-4o"` is hardcoded at `jd_assessor.py:185` and passed directly to the OpenAI API at lines 205 and 287. Per CLAUDE.md config rules, model names that may change between environments belong as env vars read via `get_conf()`.
-
-**Fix:** `ASSESSMENT_MODEL = get_conf("ASSESSMENT_MODEL") or "gpt-4o"` — one line. Same audit needed for `DEFAULT_CHAT_MODEL` in `constants.py`.
-
-**Note:** `gpt-4o` is the correct value for production (mini produces subpar assessment reasoning). This is a configuration hygiene fix, not a model change.
-
----
 
 ### MATTGPT-128
 **Displayed-source faithfulness — source cards must substantiate the claims in the answer**
@@ -1275,6 +1232,8 @@ For each client-specific probe query, assert `client_name in [s.get("Client") fo
 
 `pinecone_service.py` and `semantic_router.py` correctly import `DEFAULT_EMBEDDING_MODEL`. Fix: import `DEFAULT_CHAT_MODEL` in `backend_service.py` and `jd_assessor.py` and replace the string literals. Also remove or repurpose `DEFAULT_CLASSIFICATION_MODEL` — the `classify_query_intent` LLM call it was built for was removed Jan 2026.
 
+**Note (from MATTGPT-127):** `gpt-4o` is the correct model for `jd_assessor.py` in production — `gpt-4o-mini` produces subpar assessment reasoning. Do not substitute mini when replacing the literal.
+
 **Acceptance criteria:** No model name string literal in any production file outside `config/constants.py`.
 
 ---
@@ -1333,23 +1292,29 @@ queries"). Fix: delete the constant and its comment.
 - **Logged:** June 24, 2026
 - **File:** `ui/styles/global_styles.py`
 
-**Issue:** The mobile filter layout uses two overlapping media blocks that fight over the same property on the same elements. `@media (max-width: 767px)` (block ~2189-2325) sets the Client/Role/Domain (r2) filter labels to `display: none` (line ~2223) and injects the field name via `::before` instead (lines ~2227-2253). `@media (max-width: 480px)` (block ~2338-2396) sets those same r2 labels to `display: block` (line ~2376) to show real labels stacked above the dropdowns. Because `max-width: 767px` is an upper bound with no floor, it also matches every width <=480, so at phone widths BOTH rules apply to the same elements simultaneously. Both carry `!important` at equal specificity, so the winner is decided purely by source order. The 480px block currently sits later in the file, so `display: block` wins and the phone rendering is correct.
+**Issue:** The mobile filter layout uses three overlapping media blocks that fight over the same properties at phone widths. Code-reviewed against the repo June 2026 — line numbers confirmed exact.
 
-**Why it matters:** The behavior is correct today but only by accident of file order. There is no specificity margin protecting it (both sides are `!important`). If the stylesheet order shifts, a block moves, or the injection order changes, the 767px `display: none` would win and the r2 labels would silently vanish on phones. Silent failure, no error, surfaces later as a "why did mobile labels disappear" investigation. Validated working June 24, 2026 via Chrome Claude at the effective mobile width (note: Streamlit floors `window.innerWidth` at ~406px in this environment, so 375px and 430px both render at 406px; both the 480px and 767px blocks are active there).
+- **Block A** `@media (max-width: 767px)` lines 2189–2325: sets r2 labels to `display: none !important` (line 2223); injects field name via `::before` (lines 2227–2253); "prevent crushing" rule at lines 2255–2260.
+- **Block B** `@media (max-width: 767px)` lines 2327–2335: a standalone second 767px block (not a 480px block). Comment: "::before suppression must come AFTER the 767px block that injects content". Sets `::before` to `content: none !important` and `display: none !important` — cancels Block A's injection. Also fires at ≤480px, making the cascade three-deep at phone widths.
+- **Block C** `@media (max-width: 480px)` lines 2338–2396: sets r2 labels to `display: block !important` (line 2376).
+
+All three fire simultaneously at ≤480px. All carry `!important` at equal specificity — source order decides. Block C sits last, so `display: block` currently wins and phone rendering is correct, but only by accident of file position.
+
+**Why it matters:** Silent failure mode. If any block moves or the file order shifts, the 767px `display: none` wins and r2 labels silently vanish on phones — no error, surfaces later as a mystery regression. Validated working June 24, 2026 via Chrome Claude (note: Streamlit floors `window.innerWidth` at ~406px, so 375px and 430px both render at 406px; all three blocks are active there).
 
 **Intended three-tier design (correct; only the expression is fragile):**
 - **>=768px (desktop):** full filter bar, inline labels. No mobile blocks apply.
-- **481-767px (mid band):** r2 labels hidden; field name injected as `::before` pseudo-content on the select control (compact, label rides inside the control).
-- **<=480px (narrow phone, the 375/406 reality):** r2 labels shown as real labels above the dropdowns; `::before` injection suppressed (block ~2328-2335, `content: none`); controls full-width; padding/gaps/fonts reduced. This is MORE compensation than the mid band, not the same.
+- **481-767px (mid band):** r2 labels hidden; field name injected as `::before` pseudo-content (compact, label rides inside the control).
+- **<=480px (narrow phone):** r2 labels shown as real labels above dropdowns; `::before` injection suppressed; controls full-width; padding/gaps/fonts reduced.
 
-The bug is that the mid-band rules have no lower bound, so they leak into the <=480 range where the phone tier explicitly reverses them.
+The bug is that Blocks A and B have no lower bound, so they leak into the ≤480px range where Block C explicitly reverses them.
 
 **Fix (behavior-preserving — same rendered output at every width):**
-1. Floor the conflicting mid-band rules so they stop reaching the phone range. Move ONLY these from `@media (max-width: 767px)` into a new bounded `@media (min-width: 481px) and (max-width: 767px)` block:
-   - r2-label hide (`st-key-r2_{client,role,domain}_v ... stWidgetLabel { display: none }`, ~2220-2223)
-   - `::before` field-name injection for r2 (`content: "Client"/"Role"/"Domain"`, ~2227-2246) and its paired "prevent ::before from crushing the value div" rule (~2255-2258)
-2. With those floored at 481, they no longer apply at <=480, so the `content: none` suppression block (~2328-2335) becomes redundant — delete it.
-3. **Do NOT rebound the rest of the 767px block.** The `stForm` label hide (~2191), the Industry/Capability label sizing (~2203), and the general mobile filter-bar layout are genuine all-mobile-widths compensation that must stay active at 375px. Only the three r2 rules the phone tier reverses get the floor. Mechanically: split block 2189-2325 into two — keep all-mobile rules at `max-width: 767px`, move the r2-hide + `::before`-injection rules into the new `min-width: 481px and max-width: 767px` block.
+1. Floor the conflicting mid-band rules by moving ONLY these from Block A into a new `@media (min-width: 481px) and (max-width: 767px)` block:
+   - r2-label hide (lines ~2220–2223)
+   - `::before` field-name injection for r2 (lines ~2227–2246) and paired "prevent crushing" rule (lines ~2255–2260)
+2. With the injection floored at 481px, Block B (the standalone 767px suppression block at lines 2327–2335) becomes redundant — it exists only to cancel the injection at ≤480px, and the injection no longer fires there. Delete it. Note: Block B is a 767px block, not a 480px block — don't go looking for it in the 480px section.
+3. **Do NOT rebound the rest of Block A.** `stForm` label hide (~2191), Industry/Capability label sizing (~2203), and general mobile filter-bar layout are genuine all-mobile compensation that must stay active at 375px. Only the three r2 rules that Block C reverses get the floor.
 
 **Acceptance criteria:**
 - r2 labels render `display: block` (real labels above) at <=480px and `display: none` + `::before` injection at 481-767px, with no two `!important` rules applying to the same element at the same width.
@@ -1926,6 +1891,18 @@ Professional Narrative stories remain fully available to Ask Agy's Pinecone retr
 
 ---
 
+### MATTGPT-127
+**Replace hardcoded `ASSESSMENT_MODEL` in `jd_assessor.py` with `get_conf()` env var pattern**
+
+- **Status:** Decided Against — superseded by MATTGPT-140, which covers the same file and all other hardcoded model literals in the same pass. The `get_conf()` env var approach is also superseded: -140 uses `constants.py` imports, which is simpler and consistent with how `DEFAULT_EMBEDDING_MODEL` is already handled.
+- **Priority:** Low
+- **Type:** Refactor
+- **File:** `services/jd_assessor.py`, `config/constants.py`
+- **Logged:** June 12, 2026
+
+**Note preserved for -140:** `gpt-4o` is the correct model for `jd_assessor.py` in production. `gpt-4o-mini` produces subpar assessment reasoning. Do not substitute mini when replacing the literal.
+
+---
 ### MATTGPT-133
 **BDD skip — `test_ask_agy_works_from_table_view` — AgGrid row click doesn't reliably expose Ask Agy button in headless Playwright**
 

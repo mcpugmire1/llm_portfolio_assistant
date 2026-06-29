@@ -6,6 +6,11 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ## June 2026
 
+### Process
+
+**June 2026 — CLAUDE.md restructure: Critical Rules block + rules-first format throughout (MATTGPT-120)**
+Two-part restructure completed. Part 1: Critical Rules fast-reference block at the top — 17 incident-tied imperative rules, readable in 30 seconds. Part 2: Full rules-first format throughout — narrative stripped to one-line incident citations, CSS Rules and Streamlit Patterns trimmed, Working with Claude section removed, stale content removed. Goal achieved: CLAUDE.md is now scannable for new Claude sessions without reading prose blocks to extract the constraints.
+
 ### Design Spec (mattgpt-design-spec Jekyll)
 
 **June 2026 — Design spec nav label fixes + story_count_label floor correction (MATTGPT-109)**
