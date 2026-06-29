@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: 11e4728 -->
+<!-- last-backlog-sync: cdc32cf -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -89,7 +89,6 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-097](#mattgpt-097) | Career-intent framing refresh — corpus predates current role taxonomy; refresh framing AND tighten register | Open | Medium | Action | May 28, 2026 |
 | [MATTGPT-099](#mattgpt-099) | Role Match — assess and decide comp handling on JDs that include comp expectations | Open | Medium | Investigation + Action | May 29, 2026 |
 | [MATTGPT-103](#mattgpt-103) | Agy intro line — resolve "20+ years of work" inconsistency with stats bar (Years tile dropped) | Decided Against | Low | Refactor | May 30, 2026 |
-| [MATTGPT-109](#mattgpt-109) | mattgpt-design-spec Jekyll site — sync UI refresh changes (nav labels, navbar, cards, How I Built, How Agy Searches, Why Agy modal, user journeys) | Open | High | Action | June 1, 2026 |
 | [MATTGPT-115](#mattgpt-115) | Lock icon — browser console warning: password field not in native form (st.popover portal breaks form containment) | Open | Low | Issue | June 6, 2026 |
 | [MATTGPT-120](#mattgpt-120) | CLAUDE.md restructure — Critical Rules fast-reference block + rules-first format throughout | Open | Medium | Action | June 9, 2026 |
 | [MATTGPT-121](#mattgpt-121) | Why Agy dialog — mobile layout fix (375px viewport); title font-size override pending DevTools selector confirmation | Open | Medium | Bug | June 9, 2026 |
@@ -1531,50 +1530,6 @@ Each detail block uses these fields. Not every field is required for every item.
 
 ---
 
-### MATTGPT-109
-**mattgpt-design-spec Jekyll site — update as a first-class credibility artifact (not housekeeping)**
-
-- **Status:** Open — partially done. June 15-16 audit (`b9695bf`-`9f9c06d`) closed the credibility-critical drift. Wireframe and secondary-surface documentation updates still open (see below).
-- **Priority:** High
-- **Type:** Action
-- **Purpose (reframed June 1, 2026):** The spec is NOT the bottom rung of a technical-depth funnel. It is a **standalone credibility artifact** aimed squarely at the technical hiring manager or CTO doing due diligence — a full product blueprint proving product leadership, technical execution, and design thinking end-to-end. It also serves as a build-it-yourself guide for engineers who want to replicate the approach. This reframe changes both the urgency and the scope: drift is a credibility liability, not housekeeping. A sharp evaluator noticing the docs lag the product undercuts the entire message at the worst moment.
-- **Origin context (why this matters):** MattGPT was built partly to reconstruct a professional record lost when Matt left Accenture — credentials, references, code, documents, all gone at notification. The STAR corpus was rebuilt from memory. The spec is the artifact that proves the reconstruction was deliberate and rigorous, not just "I built a RAG app." That story is currently invisible in the spec.
-- **June 15-16 audit — closed (commits `b9695bf`-`9f9c06d`):**
-  - Nav labels corrected in docs 01, 02, 03, 09, 11, 12
-  - Story count updated to 100+
-  - Eval baseline updated
-  - Missing components added: `why_agy_dialog.py`, `lock_icon.py`, `role_match.py`
-  - Role Match wireframes added
-  - `index.md` and `CONTEXT.md` refreshed
-- **Still open:**
-  - Stale nav labels in docs 08 and 09 — ambiguous (in technical/code-context headers describing Python module names, not UI labels). Worth resolving but a judgment call.
-  - Wireframes not updated: no wireframe for How I Built dialog, Why Agy dialog, Banking/Cross-Industry sub-pages with back affordances, or the new My Profile layout. `explore_stories_*` naming still throughout the wireframe directory.
-  - User journeys not updated to reflect 9 current surfaces.
-  - Discoverability fix (direct spec link from My Profile signals panel) — hold on this was "pending Profile v2 signals panel work." That work shipped as MATTGPT-093. Dependency expired; discoverability fix is now unblocked.
-- **Active credibility liabilities (as of June 1, 2026 — partially resolved above):**
-  - "Last Updated December 2025" timestamp — app has shipped 10+ significant changes since
-  - Contact line still says "Digital Transformation Director" — stale title, wrong positioning
-  - Nav labels throughout still say "About Matt", "Ask MattGPT", "Explore Stories" — old structure (partially fixed in June audit)
-  - Wireframes dated October 2025 — predate the entire `feature/ui-redesign` branch
-  - No mention of Why Agy modal, How I Built standalone surface, or the three-tier disclosure model
-- **Discoverability gap:** The spec is currently buried three hops deep (Agy → How I Built → footer link). Needs a direct, clearly labeled entry point — first-class link from My Profile signals panel (now unblocked) and from How I Built.
-- **Remaining scope:**
-  - **Wireframes** — How I Built dialog, Why Agy dialog, Banking/Cross-Industry with back affordances, My Profile layout
-  - **Discoverability fix** — add direct link to spec from My Profile signals panel (unblocked)
-  - **Stale nav labels** — docs 08/09 judgment call
-  - **Positioning** — "What This Demonstrates" and intro reflecting reconstruction origin + credibility artifact framing
-- **Note:** User journeys already covered in Jekyll; handed off separately.
-- **Effort (remaining):** Medium (~2-3 hours). The credibility-critical drift is closed; what's left is wireframes, positioning copy, and discoverability fix.
-- **Cross-references:**
-  - **MATTGPT-101** — Why Agy modal (document in spec)
-  - **MATTGPT-102** — How I Built dialog (document in spec)
-  - **MATTGPT-100, -106, -107** — nav / navbar / cards changes shipped
-  - **MATTGPT-093** — My Profile shipped; discoverability fix now unblocked
-- **Logged:** June 1, 2026
-
----
-
----
 ### MATTGPT-115
 **Lock icon — browser console warning: password field not in native form**
 

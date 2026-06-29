@@ -6,6 +6,11 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ## June 2026
 
+### Design Spec (mattgpt-design-spec Jekyll)
+
+**June 2026 — Design spec nav label fixes + story_count_label floor correction (MATTGPT-109)**
+Closed the remaining spec drift from the June 15-16 audit pass. Nav labels in docs 08 and 09 corrected (Explore Stories -> My Work, Ask MattGPT -> Ask Agy). Stale wireframes dropped — they had no links from any published page, so removal is zero user-facing impact. Discoverability fix (My Profile spec link) ruled a leftover: the How I Built dialog already has a "Read the design spec" card, closing the gap. Positioning addition scratched: `index.md` already opens with "Read it as the audit, not the pitch" — an explicit framing paragraph risks tipping into the register it avoids. `extract_facts.py` floor corrected: `story_count_label` now uses a 100-step floor (`// 100 * 100`) so the label stays "100+" until 200 stories rather than incrementing at each 10-story threshold. `_data/facts.yml` reverted from "110+" to "100+". Commits: Jekyll nav labels rebased onto `d99da4c`; app repo `6f0957f`; Jekyll facts `54ac532`.
+
 ### CSS Architecture
 
 **June 2026 — "How Agy Works" modal mobile layout fix (MATTGPT-076)**
