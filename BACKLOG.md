@@ -153,6 +153,8 @@ Each detail block uses these fields. Not every field is required for every item.
 
 ## Detail Blocks
 
+### Active Tickets
+
 ### MATTGPT-012
 **Role Match — Phase 4: Private View**
 
@@ -249,27 +251,6 @@ Each detail block uses these fields. Not every field is required for every item.
 
 ---
 
-### MATTGPT-016
-**Semantic Router — Wrong-Person Query Detection**
-
-- **Status:** Decided Against (May 14, 2026)
-- **Priority:** High (was)
-- **Type:** Issue
-- **Why not:** May 14, 2026 investigation surfaced two facts that invalidated the ticket's framing:
-  1. **Production already rejects these queries** via `nonsense_filters.jsonl` regex (catches `elon musk`, `jeff bezos`, `tell me a joke`, etc.) — completely upstream of the semantic router. The 3 failing unit tests call `is_portfolio_query_semantic()` in isolation, bypassing the actual production pipeline. The tests were aimed at the wrong gate.
-  2. **The proposed canonical-phrases fix doesn't generalize.** During implementation, added wrong-person phrases to `out_of_scope` + family-based `is_valid` logic. Made the 3 specific tests pass. But the query "What's it like to work with Donald Trump?" still produced a confused-context RAG answer in BOTH production and local-with-fix — Trump isn't in the nonsense regex AND the canonical phrases don't generalize to the "What's it like to work with X" structural shape. So the fix adds redundant coverage for exact shapes already covered upstream while failing to address the real failure mode (names outside the regex with structural shapes outside the canonical phrases).
-- **Real unsolved problem:** filed separately as MATTGPT-063 with the Trump query as evidence.
-- **Action taken:** code changes from the in-progress fix reverted. Test scaffold from Step 1 (commit `bc280a2`) remains in main; cleanup of the 3 wrong-layer test cases + Step 1 speculative scaffolding deferred to a future small commit.
-- **Original ticket context (preserved below for history):**
-- **Issue:** Queries about other people score high against valid intent families. Bezos leadership query scores 0.664 as "leadership" — strong match to a wrong subject.
-- **Root cause:** Semantic router has no entity/person detection. Only checks embedding similarity to intent families.
-- **Fix (rejected):** Add canonical wrong-person phrases to `out_of_scope` family. Same mechanism that already handles off-topic queries — fills a gap, not a new gate layer.
-- **Rejected approaches:** Person-name detection before routing (adds gate layer, history shows added gates create complexity and get backed out); lower SOFT_ACCEPT threshold (tried before, caused false rejections on legitimate queries).
-- **Affects:** 3 failing tests (Bezos, Elon Musk, "Tell me a joke" scoring 0.429 as "behavioral")
-- **Logged:** April 2026 test audit / **Closed:** May 14, 2026
-
----
-
 ### MATTGPT-017
 **Wire skipped Role Match logging BDD scenarios (Playwright click + mocked Sheets write)**
 
@@ -289,21 +270,6 @@ Each detail block uses these fields. Not every field is required for every item.
 
 ---
 
-### MATTGPT-020
-**Simplify backend_service.py**
-
-- **Status:** Decided Against (May 14, 2026)
-- **Priority:** Medium (was)
-- **Type:** Refactor
-- **Why not:** No concrete pain point driving the refactor. The file is large (2,034 lines as of May 14) but functional. Past extractions (prompts.py in Jan 26 `c47ad1f`; Entity Gate / classify_query_intent in Jan 29) addressed earlier shape concerns; subsequent feature work (Role Match, story intelligence) brought the line count back up. Without a specific module wanting to escape or a specific bug attributable to the size, this is a refactor-for-refactor's-sake ticket — exactly the kind of work CLAUDE.md's "80/20 rule" and "don't add abstractions beyond what the task requires" rules push against. Re-open if a specific module wants to escape backend_service.py with a clear functional driver (e.g., "Role Match logic doesn't belong here because X").
-- **Original framing (preserved):**
-- **Issue:** 2,034 lines, imports from 4+ modules. Candidates for extraction: entity detection, prompt building.
-- **Status note (Jan 29, 2026):** Entity Gate removed, classify_query_intent removed. Still large — grew significantly with Role Match, story intelligence, and prompt architecture work.
-- **Logged:** Pre-January 2026 / **Closed:** May 14, 2026
-
----
-
-
 ### MATTGPT-022
 **Data Quality Cleanup Journey Story**
 
@@ -314,6 +280,18 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Fix:** Write as STAR story for portfolio. Covers pattern recognition, data quality discipline, measurable impact on retrieval accuracy.
 - **Cross-reference (May 14, 2026 rationalization):** Assess this jointly with MATTGPT-061 (MattGPT portfolio stories over-ranking on organizational leadership queries). Adding this story would be a fifth MattGPT-meta story in the corpus and could worsen the 061 retrieval-overweighting problem. Decide both tickets together — either ship 022 with a 061-aware scope/tagging strategy, or defer 022 until 061's retrieval-quality issue is addressed.
 - **Logged:** March 2026
+
+---
+
+### MATTGPT-035
+**Eval Modernization — Semantic Scoring**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Spike
+- **Issue:** Current eval uses keyword matching. Semantic similarity or LLM-as-Judge would be more robust.
+- **Trade-off:** More expensive per run, harder to debug failures. Current concept-cluster approach (Q2/Q5 style) may be good enough.
+- **Don't act on this now (May 14, 2026 rationalization):** The two remaining eval failures (Q15 Fiserv naming, Q55 TDD ranking, per Mar 5 baseline at 61/63 = 96.8%) may be retrieval signal rather than scoring noise — Q15 tests client attribution (`expected_client: "Fiserv"`) and Q55 may interact with the MATTGPT-061 over-ranking pattern (BDD/MattGPT-meta stories potentially outranking the actual TDD story). A semantic scorer would risk masking those signals. Revisit only if the suite grows significantly or new false-negative patterns emerge that concept clusters consistently miss.
 
 ---
 
@@ -352,212 +330,6 @@ Each detail block uses these fields. Not every field is required for every item.
 
 ---
 
-### MATTGPT-023
-**LLM Meta-Commentary on Q20 (Stochastic)**
-
-- **Status:** Decided Against (May 14, 2026)
-- **Priority:** Low (was)
-- **Type:** Issue
-- **Why not:** Stochastic LLM-response flake. "Monitor — if it becomes consistent" was the framing, but nothing actively monitored — the ticket just sat. As of May 14 2026, Q20 isn't in the eval baseline's tracked stochastic failures (Q15 Fiserv and Q55 TDD are the current trackers); the issue may have settled, or just hasn't tripped recently. Accepted as LLM-response cost. The eval suite catches it implicitly if it ever becomes consistent — at which point re-file with concrete reproduction. No standing ticket needed for a known-flake.
-- **Original framing (preserved):**
-- **Issue:** "Who is Matt Pugmire?" sometimes generates meta-commentary ("showcases his") instead of direct biographical content. Stochastic — passes on some runs, fails on others.
-- **Root cause:** LLM occasionally ignores the "never evaluate Matt" prompt instruction for broad biographical queries.
-- **Fix:** Monitor — if it becomes consistent, add Q20-specific prompt reinforcement.
-- **Logged:** April 2026 test audit / **Closed:** May 14, 2026
-
----
-
-### MATTGPT-024
-**Clarify Hybrid Scoring**
-
-- **Status:** Decided Against (May 14, 2026)
-- **Priority:** Low (was)
-- **Type:** Refactor
-- **Why not:** "Hybrid scoring" framing is itself stale — there is no hybrid scoring. W_KW = 0.0, the pipeline is pure semantic via Pinecone (this was the false claim corrected by MATTGPT-057 alignment work, May 11). What the ticket actually described is that Pinecone returns 0.0-1.0 similarity and our confidence thresholds (CONFIDENCE_HIGH=0.25, CONFIDENCE_LOW=0.15) sit in a narrow band of that range — that's just thresholds operating on raw similarity, not a scoring-system conflict. The proposed fix ("document or align") was vague with no clear audience for the documentation or concrete pain driving the alignment. Close. If a real question about threshold calibration emerges in production (false confidence labels, gate firing wrong), file a new ticket with concrete evidence.
-- **Original framing (preserved):**
-- **Issue:** Pinecone scores (0.0-1.0) don't map clearly to confidence buckets (0.15-0.25).
-- **Fix:** Document or align the scoring systems.
-- **Closed:** May 14, 2026
-
----
-
-### MATTGPT-025
-**Add Error Handling Tests**
-
-- **Status:** Decided Against (May 14, 2026)
-- **Priority:** Low (was)
-- **Type:** Action
-- **Why not:** Error handling already exists in production code (FAIL OPEN patterns in semantic_router.py:350, try/except in query_logger.py, etc.). The gap is "tests for those paths," not "the handling itself." No production bugs traceable to missing error-path tests. "Add tests for error paths" is a coding norm/habit, not a discrete ticket — opportunistically add error-path unit tests when wiring up broader test coverage (e.g., during MATTGPT-014 / MATTGPT-017 work). Standing ticket for an undriven coverage gap was just backlog cruft.
-- **Original framing (preserved):**
-- **Issue:** Test suite only covers happy path.
-- **Fix:** Add tests for rate limits, timeouts, embedding failures.
-- **Closed:** May 14, 2026
-
----
-
-### MATTGPT-026
-**Clarify Layer Ownership**
-
-- **Status:** Decided Against (May 14, 2026)
-- **Priority:** Low (was)
-- **Type:** Refactor
-- **Why not:** Vague refactor with no concrete pain driver. During May 14 rationalization, the ticket author couldn't recall what specific problem this was originally pointing at — strongest possible signal that it's cruft. Same family as MATTGPT-020 / MATTGPT-024 / MATTGPT-025: pre-2026 "improve the code somehow" tickets without a concrete scope. Re-file if a specific contract or boundary problem emerges in real work.
-- **Original framing (preserved):**
-- **Issue:** Ranking, intent classification, and formatting split across multiple files.
-- **Fix:** Document contracts or refactor boundaries.
-- **Closed:** May 14, 2026
-
----
-
-### MATTGPT-027
-**Quarterly Intent Review**
-
-- **Status:** Decided Against (May 14, 2026)
-- **Priority:** Low (was)
-- **Type:** Action
-- **Why not:** "Schedule quarterly review" was 3.5 months overdue at May 14 with no enforced cadence. Reality: intent review is reactive — canonical phrases get touched when actual issues surface (chip CX work, MATTGPT-061 over-ranking, MATTGPT-063 wrong-person), not on a calendar. The reactive model is what's actually working. A standing "schedule review" ticket without a mechanism (calendar reminder? recurring ticket? who owns it?) is just aspirational and aged into cruft.
-- **Original framing (preserved):**
-- **Issue:** 15 intent families with ~20 phrases each in `semantic_router.py`. Phrases drift relevance over time.
-- **Fix:** Schedule quarterly review.
-- **Last review:** January 29, 2026
-- **Closed:** May 14, 2026
-
----
-
-### MATTGPT-028
-**Share Link Copy Functionality**
-
-- **Status:** Decided Against (May 14, 2026)
-- **Priority:** Low (was)
-- **Type:** Issue
-- **Why not:** "Verify works across browsers" was a QA verification task without an owner or schedule — same shape as Quarterly Intent Review (MATTGPT-027). Share functionality exists in `action_buttons.py:179` and is wired into Story Detail and Role Match. No production bug reports. If a real cross-browser failure surfaces, re-file as a concrete bug ticket with the failing browser + reproduction. Standing "verify someday" tickets are cruft.
-- **Original framing (preserved):**
-- **Issue:** Verify share link copy-to-clipboard works correctly across browsers.
-- **Closed:** May 14, 2026
-
----
-
-### MATTGPT-029
-**Low-Confidence Banner Edge Cases**
-
-- **Status:** Decided Against (May 14, 2026)
-- **Priority:** Low (was)
-- **Type:** Issue
-- **Why not:** Logged in April 2026 test audit sweep as "sometimes triggers incorrectly" — no specific failing query, no reproduction. Thresholds (CONFIDENCE_HIGH=0.25, CONFIDENCE_LOW=0.15) have been stable since January 2026 with no production failures attributable to misfires. Same pattern as MATTGPT-027 (passive monitoring without a mechanism = cruft). Historical context preserved in **docs/ADR.md ADR 018 — Confidence Threshold Calibration for Pinecone Semantic Search**, which captures the December 2025 calibration history and edge cases to watch. If a specific banner misfire surfaces with a reproduction, re-file as a concrete bug ticket.
-- **Original framing (preserved):**
-- **Issue:** Low-confidence banner sometimes triggers incorrectly. Review threshold logic.
-- **Closed:** May 14, 2026
-
----
-
-### MATTGPT-031
-**Semantic Router Error Path Coverage**
-
-- **Status:** Decided Against (May 14, 2026)
-- **Priority:** Low (was)
-- **Type:** Action
-- **Why not:** Same shape as MATTGPT-025 (Add Error Handling Tests, killed May 14): semantic_router.py already has FAIL OPEN error handling at line 350. The gap is tests for it, not the handling itself. No production driver. Opportunistically add error-path tests when wiring up broader coverage during MATTGPT-014 / MATTGPT-017 work; standing "test coverage gap" tickets without a driver are backlog cruft.
-- **Original framing (preserved):**
-- **Issue:** Limited test coverage for semantic router error handling paths.
-- **Closed:** May 14, 2026
-
----
-
-### MATTGPT-032
-**LLM Response Broken Markdown**
-
-- **Status:** Decided Against (May 15, 2026)
-- **Priority:** Low (was)
-- **Type:** Issue
-- **Why not:** No current production reproduction. Production responses tested May 15 (Scale a CIC, How did Matt achieve 4x faster delivery, etc.) all render bolded text cleanly — `**4X **` trailing-space pattern not observable. Ticket dates to Pre-2026; LLM and post-processing behavior have evolved since. An attempted fix May 15 introduced regression in legitimate bolded text (5 missing-space patterns: "over150", "at4x", "withNorfolk", "bothAccenture", "atCapital") and was reverted; mechanism not fully traced. Same anti-pattern as MATTGPT-027 / -028 / -029 — "watch for this someday" without a forcing function. If the trailing-space `**X **` pattern ever shows up reproducibly in production, file fresh with the actual failing query.
-- **Original framing (preserved):**
-- **Issue:** LLM outputs `**4X **` instead of `**4X**` — space before closing asterisks breaks bold rendering.
-- **Fix:** Post-process regex: `r'\*\*([^*]+)\s+\*\*'` → `**\1**`
-- **Closed:** May 15, 2026 (after attempted fix introduced regressions; lesson preserved in `feedback_check_production_before_treating_test_failure_as_bug.md`)
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Issue
-- **Issue:** Button shifts position when focused. CSS fix for focus state needed.
-
----
-
-### MATTGPT-035
-**Eval Modernization — Semantic Scoring**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Spike
-- **Issue:** Current eval uses keyword matching. Semantic similarity or LLM-as-Judge would be more robust.
-- **Trade-off:** More expensive per run, harder to debug failures. Current concept-cluster approach (Q2/Q5 style) may be good enough.
-- **Don't act on this now (May 14, 2026 rationalization):** The two remaining eval failures (Q15 Fiserv naming, Q55 TDD ranking, per Mar 5 baseline at 61/63 = 96.8%) may be retrieval signal rather than scoring noise — Q15 tests client attribution (`expected_client: "Fiserv"`) and Q55 may interact with the MATTGPT-061 over-ranking pattern (BDD/MattGPT-meta stories potentially outranking the actual TDD story). A semantic scorer would risk masking those signals. Revisit only if the suite grows significantly or new false-negative patterns emerge that concept clusters consistently miss.
-
----
-
-### MATTGPT-041
-**5P Dimensional Drill-Down**
-
-- **Status:** Decided Against (May 14, 2026)
-- **Priority:** Low (was)
-- **Type:** Spike
-- **Why not:** No traffic evidence supports building this. Query log audit (May 13, 2026) showed zero queries asking for 5P-dimension drill-down. Same pattern as MATTGPT-040 (eval coverage for follow-up queries) — "we should think about it" not "users are asking for it." Re-file with concrete evidence if dimension-shaped follow-ups start appearing in real query logs.
-- **Original framing (preserved):**
-- **Issue:** Voice guide describes 5P (Person/Place/Purpose/Process/Performance) as a metadata framework for pattern recognition and deep dives. The spec envisions Agy offering to drill into a specific dimension on demand (e.g., "Want me to dig deeper into the process?"). This conversational affordance doesn't exist — Agy can't currently zoom into a single 5P dimension by request.
-- **Current state:** 5P data integration is substantially implemented. `story_intelligence.py` uses all five 5P fields as STAR fallbacks in context assembly. `5PSummary` is embedded in vectors (influences retrieval). Verbatim phrase extraction works via `prompts.py`. What's missing is the *conversational* use — the ability to drill into one dimension.
-- **Spike question:** Is dimension-specific drill-down worth building? Would users ask "tell me more about the process" or "what was Matt's role" as follow-ups? If so, this is a multi-turn conversational feature, not a prompt structure change.
-- **Note:** The voice guide does NOT describe a 5P narrative arc for response structure. It describes 5P as input enrichment and a lens for pattern recognition — not as a replacement for WHY→HOW→WHAT output structure.
-- **Source:** Voice Guide Implementation Audit, April 29, 2026
-- **Logged:** April 29, 2026
-
----
-
-### MATTGPT-042
-**5P Pattern Taxonomy**
-
-- **Status:** Decided Against (May 14, 2026)
-- **Priority:** Low (was)
-- **Type:** Spike
-- **Why not (informed):** Not a "no traffic evidence" close — a "we already tried this direction" close. The prescribed-taxonomy approach (By Outcome / By Methodology / By Challenge) was originally implemented as `theme_guidance` / `get_theme_guidance()` per the Nov 2025 archetype exercise. **Removed in commit `c47ad1f` (Jan 26, 2026 BASE_PROMPT + DELTA refactor) specifically because it generated meta-commentary and evaluation language** — the exact problem the refactor was solving. Re-introducing prescribed pattern categories would regress that fix. Current open-ended `SYNTHESIS_DELTA` approach at 98.4% eval pass rate is good enough; entity cluster promotion handles cross-story synthesis organically. If a specific synthesis-quality complaint surfaces that prescribed taxonomy would clearly address (without re-triggering meta-commentary), re-file with that evidence.
-- **Original framing (preserved):**
-- **Issue:** Voice guide describes structured pattern templates ("By Outcome," "By Methodology," "By Challenge") with explicit category labels for cross-story synthesis. Production synthesis is more open-ended — gives the LLM the stories and asks for patterns via WHY→HOW→WHAT, but doesn't prescribe categories.
-- **Spike question:** Does prescribed taxonomy improve pattern recognition responses, or is the open-ended approach better?
-- **Source:** Voice Guide Implementation Audit, April 29, 2026
-- **Logged:** April 29, 2026
-
----
-
-### MATTGPT-043
-**Humane Framing — Intent-to-Tone Mapping**
-
-- **Status:** Decided Against (May 14, 2026)
-- **Priority:** Low (was)
-- **Type:** Spike
-- **Why not (informed):** Same pattern as MATTGPT-042 — the ticket itself flagged the risk that "implementing deterministic intent-to-tone mapping risks reintroducing meta-commentary patterns that the current architecture deliberately removed." The previous `theme_guidance` architecture was closer to this vision and was removed in commit `c47ad1f` (Jan 26, 2026 BASE_PROMPT + DELTA refactor) for anti-meta-commentary discipline. The Spike question ("worth the risk?") has the same answer as 042: no, given the previous attempt regressed into the exact problem the refactor fixed. If specific intent-tone failures surface in production with evidence that prescribed mapping (without meta-commentary regression) would fix them, re-file.
-- **Original framing (preserved):**
-- **Issue:** Voice guide describes intent-specific response framing — Agy detects why someone is asking (interview prep vs. vetting vs. curiosity vs. hiring pitch vs. networking) and adapts tone, framing language, and offers accordingly. Specific intent-to-tone mapping is not implemented.
-- **Current state:** Spirit exists via random focus angles in `_generate_agy_response()` (lines 888-896) which inject emphasis on human impact, methodology, scale, leadership, outcomes, or innovation. But this is random, not intent-driven.
-- **Tradeoff:** Implementing deterministic intent-to-tone mapping risks reintroducing meta-commentary patterns that the current architecture deliberately removed. The previous prompt architecture had a `theme_guidance` variable closer to this vision but was replaced for anti-meta-commentary discipline (see commented-out prompt at `backend_service.py` lines 1040-1164).
-- **Spike: Evaluate whether deterministic intent-to-tone mapping is worth the anti-meta-commentary risk.**
-- **Source:** Voice Guide Implementation Audit, April 29, 2026
-- **Logged:** April 29, 2026
-
----
-
-### MATTGPT-044
-**Pattern Insights — Structured Templates**
-
-- **Status:** Decided Against (May 14, 2026)
-- **Priority:** Low (was)
-- **Type:** Spike
-- **Why not:** Duplicate of MATTGPT-042 (5P Pattern Taxonomy) — same Voice Guide Implementation Audit source, same "By Outcome / By Methodology / By Challenge" prescribed templates, same spike question. Close per 042's informed-rejection rationale: previous `theme_guidance` architecture was removed in commit `c47ad1f` (Jan 26, 2026) for anti-meta-commentary discipline; re-introducing prescribed taxonomy risks regressing that fix.
-- **Original framing (preserved):**
-- **Issue:** Voice guide describes Agy identifying cross-story patterns by outcome, methodology, and challenge with explicit pattern templates. Synthesis mode finds patterns through `SYNTHESIS_DELTA` instructions and entity cluster promotion, but doesn't structure them by prescribed categories.
-- **Spike question:** Does adding structured pattern templates ("By Outcome," "By Methodology," "By Challenge") improve synthesis quality, or is the LLM-driven open-ended approach better?
-- **Source:** Voice Guide Implementation Audit, April 29, 2026
-- **Logged:** April 29, 2026
-
----
-
 ### MATTGPT-045
 **Analytics Dashboard**
 
@@ -569,219 +341,6 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Dependencies:** MATTGPT-013 (logger schema extension) should be complete first.
 - **Source:** Cross-reference of design spec vs. implementation, April 29, 2026
 - **Logged:** April 29, 2026
-
----
-
-### MATTGPT-046
-**Latency Benchmarks**
-
-- **Status:** Decided Against (May 14, 2026)
-- **Priority:** Low (was)
-- **Type:** Action
-- **Why not:** Single-user portfolio with low organic traffic (~7 organic queries in 30 days per May 13 query log audit). No SLA, no performance commitments, no production performance issues observed. Latency tracking is critical for high-traffic systems but overkill here. Would produce sparse, unactionable data. Re-file if traffic scales significantly or if a specific latency complaint surfaces.
-- **Original framing (preserved):**
-- **Issue:** No latency tracking exists. No `time.time()`, no `perf_counter()`, no duration fields in the logger schema. Can't detect performance regressions over time.
-- **Fix:** Wrap OpenAI API calls and Pinecone search in timing blocks. Add duration column to logger schema. Build reporting view over accumulated data for p50/p95 tracking.
-- **Source:** Cross-reference of design spec vs. implementation, April 29, 2026
-- **Logged:** April 29, 2026
-
----
-
-### MATTGPT-047
-**Cost Tracking**
-
-- **Status:** Decided Against (May 14, 2026)
-- **Priority:** Low (was)
-- **Type:** Action
-- **Why not:** Same family as MATTGPT-045 (analytics dashboard) and MATTGPT-046 (latency benchmarks) — operational visibility for a low-traffic single-user portfolio. Cost concerns surfaced today (cache regen, eval API costs) were spot questions answerable ad-hoc without per-query tracking. Low organic traffic (~7 queries in 30 days per May 13 audit) = trivial monthly OpenAI bill = no spike to detect. Re-file if cost surprises appear or traffic scales.
-- **Original framing (preserved):**
-- **Issue:** No per-query cost tracking in production. OpenAI response includes `usage.prompt_tokens` and `usage.completion_tokens` but `backend_service.py` doesn't read them. Cost estimates exist only in offline batch scripts (`generate_use_cases.py`, `generate_public_tags.py`).
-- **Fix:** Read token usage from OpenAI response object, log per-query token counts and computed cost. Fold into MATTGPT-013 logger schema work — minimal incremental work if done alongside.
-- **Source:** Cross-reference of design spec vs. implementation, April 29, 2026
-- **Logged:** April 29, 2026 / **Closed:** May 14, 2026
-
----
-
-### MATTGPT-010
-**Cross-Browser Testing**
-
-- **Status:** Decided Against (May 15, 2026)
-- **Priority:** Low (was)
-- **Why not:** Trigger expired. Original framing parked this until "React migration" (originally targeted Q1 2026). Q1 has passed; still on Streamlit with no active migration work. If React migration ever happens, cross-browser testing falls out naturally as part of that work — no need for a standing ticket waiting on an uncertain trigger. Streamlit currently handles most cross-browser concerns adequately.
-- **Original reason:** Low priority until React migration. Streamlit handles most cross-browser issues.
-- **Closed:** May 15, 2026
-
----
-
-### MATTGPT-048
-**Portfolio Integration (Notion, LinkedIn sync)**
-
-- **Status:** Decided Against (May 15, 2026)
-- **Priority:** Low (was)
-- **Type:** Action
-- **Why not:** Framing significantly out of date and points at the wrong scope. The April 29 ticket envisioned outbound sync of the MattGPT story corpus to Notion/LinkedIn. The actual workstream that matured (Job Search System, design decisions compiled in Notion May 10) is a different shape entirely — JD ingestion → Notion + engine assessment → back to Notion, with Cowork as the orchestration layer. The explicit Job Search System decision is **"MattGPT chat is portfolio, NOT operational tool"** — meaning the integration work has its proper home in Notion's Job Search System design docs, not in MattGPT's BACKLOG. Closing here. The active work lives where it belongs.
-- **Original framing (preserved):**
-- **Proposed:** Programmatic sync between MattGPT story corpus and external systems (Notion job tracker, LinkedIn experience sections).
-- **Reason parked:** Real idea, no urgency, no foundation work started. Notion sync was already noted as out-of-scope for Role Match v1 ("manual copy of fit score acceptable"). Revisit when traffic patterns or use cases create a forcing function.
-- **Source:** Cross-reference of design spec vs. implementation, April 29, 2026
-- **Logged:** April 29, 2026 / **Closed:** May 15, 2026
-
----
-
-### MATTGPT-049
-**Job Fit Broader Scope (cover letter export, LinkedIn URL auto-extract)**
-
-- **Status:** Decided Against (May 15, 2026)
-- **Priority:** Low (was)
-- **Type:** Action
-- **Why not:** Both features are out of step with the Job Search System design decisions (Notion, May 10). LinkedIn intake is handled via Gmail-routed alerts in the actual plan — not URL scraping. Cover letter export isn't in the design at all. Adding either to Role Match would push back against the explicit "MattGPT chat is portfolio, NOT operational tool" decision — they're operational features that belong in the Job Search System workstream if they're built. Same monitoring-without-mechanism pattern as the other Decided-Against tickets from this rationalization pass.
-- **Original framing (preserved):**
-- **Proposed:** Extensions to Role Match: cover letter export from match results, LinkedIn URL parsing to auto-extract job descriptions.
-- **Reason parked:** Natural extensions to Role Match Phase 4, but no user demand signal yet, no architectural hooks. Revisit if Role Match usage signals demand for these features.
-- **Source:** Cross-reference of design spec vs. implementation, April 29, 2026
-- **Logged:** April 29, 2026 / **Closed:** May 15, 2026
-
----
-
-### MATTGPT-036
-**Entity Cluster Promotion Override**
-
-- **Status:** Decided Against
-- **Proposed:** Override synthesis mode when 3+ stories from the same entity are in the Pinecone pool (e.g., "How did you build the CIC?" gets 10 CIC stories → forces synthesis).
-- **Why not:** Overriding would break legitimate synthesis queries like "Tell me about all your CIC work." The real fix is better data differentiation so the right story ranks clearly #1, not routing logic.
-
----
-
-### MATTGPT-037
-**Score Gap Override (Generic-Above-Named)**
-
-- **Status:** Decided Against
-- **Proposed:** Boost named client stories over "Fortune 500 Clients" generic stories in Pinecone results.
-- **Why not:** Adds a ranking layer on top of semantic search. Better to fix at the data level — enrich generic stories with distinguishing context, or merge them into named client stories where appropriate.
-
----
-
-### MATTGPT-038
-**Centralize Constants (Duplicate)**
-
-- **Status:** Decided Against
-- **Proposed:** Separate request to centralize constants.
-- **Why not:** Duplicate. Consolidated into `config/constants.py` as the single source of truth (see CHANGELOG.md, January 2026).
-
----
-
-### MATTGPT-050
-**Dynamic Intent Expansion**
-
-- **Status:** Decided Against
-- **Proposed:** Use LLM to generate new canonical examples from accepted queries, dynamically expanding the semantic router's intent family phrases rather than hardcoding them.
-- **Why not:** Architectural constraint. The data pipeline (Excel → JSONL → embeddings → Pinecone) is one-directional by design — no write-back path. Dynamic expansion would require building a feedback-to-pipeline bridge that doesn't exist. Manual curation at 15 families is working (98.1% eval pass rate). Eval suite validates router changes more reliably than automated derivation would. Spec assumed a different architecture (database-backed React migration); current architecture deliberately avoids that.
-- **Source:** Cross-reference triage, April 29, 2026
-- **Logged:** April 29, 2026
-
----
-
-### MATTGPT-051
-**User Feedback Loop — Closed-Loop Retraining**
-
-- **Status:** Decided Against
-- **Proposed:** "Was this answer helpful?" → retrain router. Closed-loop machine learning where thumbs-up/thumbs-down data flows back into the semantic router to automatically adjust thresholds, expand intents, or shift family assignments.
-- **Why not:** Architectural constraint. Read-only data layer doesn't support closed-loop retraining. Data pipeline is one-directional by design. Feedback collection IS implemented (`log_feedback()` in `query_logger.py`, helpful/export buttons wired) and provides observable signal for manual eval-driven iteration. Closed-loop retraining assumes a writable data layer that doesn't exist.
-- **Note:** Feedback collection is the valuable half and is implemented. Only the automated retraining half is unbuildable on current architecture.
-- **Source:** Cross-reference triage, April 29, 2026
-- **Logged:** April 29, 2026
-
----
-
-### MATTGPT-052
-**A/B Testing on Thresholds**
-
-- **Status:** Decided Against
-- **Proposed:** A/B testing infrastructure to experiment with confidence threshold values (e.g., 0.40 vs 0.45 for soft accept).
-- **Why not:** Thresholds tuned through eval-driven iteration (SOFT_ACCEPT 0.72 → 0.40, etc.) at 98.1% eval pass rate. A/B testing infrastructure not justified at current traffic volume — insufficient signal for statistical significance. Eval suite validates threshold changes more reliably than user-traffic A/B tests.
-- **Source:** Cross-reference triage, April 29, 2026
-- **Logged:** April 29, 2026
-
----
-
-### MATTGPT-053
-**A/B Testing Framework**
-
-- **Status:** Decided Against
-- **Proposed:** General testing infrastructure for prompt variants, threshold variants, etc.
-- **Why not:** Same reasoning as MATTGPT-052. Insufficient traffic for statistical significance, eval suite is the better validation tool. Note: this is essentially a duplicate of MATTGPT-052 from a different spec section.
-- **Source:** Cross-reference triage, April 29, 2026
-- **Logged:** April 29, 2026
-
----
-
-### MATTGPT-054
-**Query Rewriting and Spell-check**
-
-- **Status:** Decided Against
-- **Proposed:** Preprocess user queries to fix typos and rewrite ambiguous queries before they hit the RAG pipeline.
-- **Why not:** Embedding-based semantic routing already handles typos and ambiguous queries. Validated by `UGLY_BUT_VALID` test suite in semantic router unit tests (e.g., `"Tell me abot Matts backgroun"`, `"Whats Matt's experiance with agile?"` — all pass). Embedding model handles misspellings via subword tokenization. LLM-based query rewriting would add latency and cost without measurable improvement.
-- **Source:** Cross-reference triage, April 29, 2026
-- **Logged:** April 29, 2026
-
----
-
-### MATTGPT-055
-**PWA Capabilities**
-
-- **Status:** Decided Against
-- **Proposed:** Progressive Web App features — manifest.json, service worker, offline support.
-- **Why not:** Portfolio app requires live API calls (OpenAI, Pinecone) for core functionality. Offline support via service worker would only cache static UI shells — the RAG pipeline cannot function offline. Mobile responsive design covers the actual use case.
-- **Source:** Cross-reference triage, April 29, 2026
-- **Logged:** April 29, 2026
-
----
-
-### MATTGPT-056
-**True Wireflows (Miro)**
-
-- **Status:** Decided Against
-- **Proposed:** Screen-to-screen UI interaction diagrams maintained in Miro, with export pipeline (SVG, embed, or screenshots) into the design spec.
-- **Why not:** Screen-to-screen interaction flows documented using Mermaid diagrams in Jekyll pages. Miro-based wireflows replaced by in-repo diagrams that version with the codebase.
-- **Source:** Cross-reference triage, April 29, 2026
-- **Logged:** April 29, 2026
-
----
-
-### MATTGPT-058
-**Replace dark-theme setInterval polling with MutationObserver**
-
-- **Status:** Decided Against
-- **Priority:** Low
-- **Type:** Refactor
-- **Why not (May 13, 2026):** Reframed after the May 12 dead-closure card-click investigation. The `setInterval(detectTheme, 500)` polling lives inside a `components.html` iframe, and Streamlit destroys and recreates that iframe on every rerun. A `MutationObserver` attached from inside the iframe loses its callback closure the moment the iframe is recreated, leaving the theme class to drift out of sync — same dead-closure bug shape that caused the Cross-Industry card-click failure. The 500ms polling is iframe-rewire defense: it re-asserts the class from a live closure regardless of how many iframe destroy/create cycles have happened. The `how_agy_modal.py` MutationObserver pattern referenced in the original analysis works there because that observer is attached to a long-lived parent-doc element from a context that survives reruns differently — not transferable to this iframe. Polling is the correct pattern here.
-- **What lives in code now:** an explanatory comment at `ui/components/category_cards.py` near the `setInterval(detectTheme, 500)` line, warning future readers not to "replace polling with MutationObserver" without understanding the iframe lifecycle.
-- **Original analysis (preserved):** `category_cards.py` (line 506) and `navbar.py` (line 238) each run `setInterval(detectTheme, 500)` that reads parent body's computed background color and toggles `body.dark-theme` class. Polling was introduced in commit `548f1bf` (Dec 8 2025: "enhance dark mode support") as a FOUC remediation. The duplication with `navbar.py` is defense-in-depth: if either iframe fails, the other keeps the class maintained.
-- **Lesson:** Understand WHY a pattern exists before proposing a replacement. Same lesson as the theme detection research that triggered this ticket — both times the "anti-pattern" was actually a defense against a specific failure mode.
-- **Logged:** May 12, 2026 / **Closed:** May 13, 2026
-
----
-
-### MATTGPT-059
-**Add Theme-based prefilter dimension to category cards**
-
-- **Status:** Decided Against (May 14, 2026)
-- **Priority:** Low (was)
-- **Type:** Spike
-- **Why not:** Ticket author couldn't recall the framing or intent during May 14 rationalization — strongest signal that it's cruft (same call as MATTGPT-026). Adjacent context: the data-derived landing card refactor (Banking + Cross-Industry Phase 1+2, May 11-12) addresses "chips communicate scope" via tiered Core/Specialized cards mapped to Solution/Offering — different path, but covers much of the UX pressure the Theme dimension was meant to relieve. No traffic demand on Explore Stories filters per May 13 query log audit. Re-file if Theme-level filtering becomes a concrete user-driven need with evidence.
-- **Original framing (preserved):**
-- **Context:** Current `prefilter_domains` filters against the `Sub-category` field (45 unique values in data, most have 1-5 stories). Result: cards have to choose between many chips for adequate story coverage or few chips with sparse coverage. The `Theme` field has 7 broader buckets — Execution & Delivery (50), Org & Working-Model Transformation (22), Strategic & Advisory (13), Professional Narrative (10), Talent & Enablement (10), Emerging Tech (5), Risk & Responsible Tech (3) — that could deliver high coverage with few chips.
-- **Why not done now (UX blockers, not implementation cost):**
-  - Two chips on a card landing looks sparse. Chips communicate scope ("here's what this view covers") — two doesn't do that job for a recruiter scanning quickly.
-  - Theme labels are more abstract than Sub-category labels. "Org & Working-Model Transformation" is harder to parse at a glance than "Agile Transformation & Leadership Enablement." May need a friendly-alias layer.
-  - Path A (surgical Sub-category trim) ships the immediate Card 3 + Card 5 fix without new infrastructure (MATTGPT-current).
-- **What it would take (small implementation):**
-  - `prefilter_theme` key handling in `explore_stories.py` (~10 lines)
-  - Theme dropdown widget in the filter UI (~20 lines)
-  - Theme filter logic in `utils/filters.py` (~3 lines)
-  - Decision on chip presentation: render underlying Sub-category chips, or a single high-level "Filtered by Theme: X" chip
-- **Recommendation:** Hold until a UX pass solves the chip-density and label-abstraction problems. Theme filtering is the right architectural foundation but the chip display needs more thought before it ships.
-- **Logged:** May 12, 2026
 
 ---
 
@@ -867,21 +426,6 @@ Each detail block uses these fields. Not every field is required for every item.
 
 ---
 
-### MATTGPT-070
-**Ask MattGPT — Suggestion button cursor pointer**
-
-- **Status:** Decided Against — Not Reproducible (June 9, 2026)
-- **Priority:** Low
-- **Type:** Issue
-- **Issue:** The 6 suggestion buttons on the Ask MattGPT landing page (`ui/pages/ask_mattgpt/landing_view.py:97-135`) are real `st.button(type="secondary")` calls. The CSS rule at `ui/pages/ask_mattgpt/styles.py:288-309` styles them as cards (border, background, padding, hover background) but **does not declare `cursor: pointer`**. Adjacent buttons in the same file DO declare it explicitly (lines 443, 1290, 1399), so it's not being relied upon to inherit from Streamlit defaults. Live testing (May 15, 2026) confirms the pointer does not change on hover — cards appear interactive (purple text, border) but the cursor stays as the default arrow.
-- **Audience impact:** First-time visitor cannot visually confirm the cards are clickable until they actually click one. Cheap trust erosion at the first interaction moment.
-- **Fix:** Add `cursor: pointer !important;` to the existing `button[key^="suggested_"]` rule at lines 288-309. ~1 line.
-- **Closed June 9, 2026 — not reproducible.** DevTools inspection confirmed all 6 buttons already compute `cursor: pointer` from Streamlit's base stylesheet. Root cause: `button[key^="suggested_"]` is a dead selector — Streamlit renders the `key=` param as a class on the container (`.st-key-suggested_0`), not as an HTML attribute on the `<button>` element. The entire rule block at `styles.py:288-309` matches 0 elements in the live DOM. No fix needed; cursor is correct via Streamlit's own CSS.
-- **Out of scope (closed per May 15 assessment):** Input field below the fold (the 6 suggestion buttons are themselves real CTAs that submit queries — input is the secondary path, defensible as-is); status bar developer-facing copy (design call for a technical-leaning portfolio); conversation export/share (already deferred to React migration per `conversation_helpers.py:470` TODO).
-- **Logged:** May 15, 2026
-
----
-
 ### MATTGPT-072
 **`generate_public_tags.py` — case-insensitive tag dedup**
 
@@ -942,27 +486,6 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Eval validation required:** Sample of CIC depth queries, RBC depth queries, JPM depth queries — measure response quality (depth vs breadth) before and after any fix. The 61-query golden suite may not cover this case; add depth-specific queries if not.
 - **Related:** MATTGPT-061 (broader retrieval contamination), MATTGPT-021 (diversify_results pinning bugs), MATTGPT-073 (session-state contamination, same file). Same module (`backend_service.py`); same broader theme of compensation-layer mechanisms with side effects beyond their stated intent.
 - **Discovered during:** Originally observed during the January 2026 pipeline cleanup (per MEMORY.md "Known Open Issues"). Re-surfaced May 18, 2026 during MATTGPT-073 investigation when Matt asked whether the agentic multi-story-per-client design was being touched by the diversify changes. Confirmed it isn't — but the entity cluster mechanism has its own known issue worth filing as a distinct ticket.
-- **Logged:** May 18, 2026
-
----
-
-### MATTGPT-075
-**Developer debug surfaces leak to user-facing UI**
-
-- **Status:** Decided Against (June 24, 2026) — not a defect. Both reported surfaces (sidebar "Loaded N stories" print, telemetry badge) are gated on `DEBUG`, which is hardcoded `False` in `config/debug.py` and ships False to prod. Parity scan of Ask MattGPT, About Matt, Explore Stories, and Role Match found no ungated user-facing debug surface; the one debug line in Explore Stories is DEBUG-gated and prints to server logs, not the UI. May 18 sighting was a local DEBUG=True session, not a prod leak. No code change.
-- **Priority:** Medium
-- **Type:** Issue
-- **Issue:** Dev-facing debug output is visible in the user-facing UI on the Ask MattGPT page (and possibly other pages). Two specific surfaces observed May 18, 2026 during production query replay:
-  - **Sidebar debug print:** `DEBUG • Loaded 113 stories from echo_star_stories_nlp.jsonl.` rendered at the top of the page above the navbar. Looks like a developer console message in user space.
-  - **Telemetry badge:** `🧪 vector=pinecone, index=matt-portfolio-v2, ns=default, has_last=True` rendered as a status badge near the conversation. Exposes implementation detail (vendor name, index name, namespace) to end users.
-- **Why it matters:** This is a portfolio app targeting Director/VP-level recruiters. Dev-debug surfaces leaking into the user UI undermine the polish credibility the rest of the app projects. The badge in particular tells recruiters how the system is built rather than what it does for them.
-- **Suspected cause:** Debug surfaces gated on the `DEBUG` flag in `config/debug.py`. If `DEBUG=True` is set in the local environment or accidentally in production, these render. Need to confirm: (a) are they gated at all, (b) is `DEBUG` actually True in production, or (c) are they always-on independent of the flag.
-- **Out of scope (separate concerns):**
-  - The "130+ stories indexed" text in the status bar is the hardcoded story count tracked in MATTGPT-019.
-  - The Pinecone debug JSON panel (full retrieval debug with match preview, scores, weights) is a developer dashboard that's been useful during investigation; whether it should ship to production needs its own decision.
-- **Fix shape (open):** Audit all debug surfaces on the Ask MattGPT page (and About Matt, Explore Stories, Role Match for parity). Confirm each is gated on the `DEBUG` flag. Verify `DEBUG=False` in the production Streamlit Cloud environment. If gating is missing, add it.
-- **Effort:** ~30 min audit + small code changes to add `if DEBUG:` guards where missing. Low risk, high recruiter-perceived-polish payoff.
-- **Discovered during:** May 18, 2026 production query replay with Streamlit running locally. Matt's reaction on seeing the debug surfaces: *"we'll need to figure out how to fix the following: [debug output]"*.
 - **Logged:** May 18, 2026
 
 ---
@@ -1290,28 +813,6 @@ Each detail block uses these fields. Not every field is required for every item.
 
 ---
 
-### MATTGPT-090
-**System prompt — decline cleanly on comp / off-scope queries (no silent fallback)**
-
-- **Status:** Decided Against (May 29, 2026)
-- **Priority:** Medium
-- **Type:** Action
-- **Decided Against (May 29, 2026):** Production behavior already handles this cleanly. The `personal` intent family in `services/semantic_router.py:192-209` includes salary canonical phrases (*"What's Matt's salary"*, *"How much does Matt make"*) alongside age/identity/etc., and produces the warm-decline pivot (*"🐾 I'm focused on Matt's professional experience"*). Production-verified May 29, 2026 during wireframe review — the silent-fallback failure mode described in the original Issue does not reproduce. The ticket's premise that comp needs a *different* decline copy than age/identity (because comp IS legitimately answered elsewhere) is theoretically defensible but didn't survive the production check — the existing warm pivot is sufficient. **The remaining asymmetry** splits into two tickets: MATTGPT-089 (parse location / work-model / availability as a distinct filter class — explicitly excludes comp) and **MATTGPT-099** (assess and decide Role Match's comp handling on JDs that include comp expectations — different fix path because comp can't be matched against profile data, only declined). The earlier framing that pointed all of the asymmetry at -089 was wrong; -089's body explicitly says *"Skip comp — see MATTGPT-090 for separate handling,"* so a separate ticket was needed once -090 itself was closed.
-- **Issue (original framing — superseded):** When Agy is asked something Matt shouldn't answer publicly (e.g., comp expectation), it currently produces a soft non-answer rather than a clean decline. Recruiter persona example: asked target role + comp + geo, got 4 paragraphs of narrative — comp went **silent**, relocation got a *"the story does not provide specific details… however, his focus on the right org fit suggests he might consider relocation"* (a dressed-up guess). The silent failure mode is worse than an honest decline because the recruiter can't tell whether the data is missing or being withheld.
-- **Audience impact:** Recruiter persona, verbatim: *"For a recruiter this is the single biggest miss. I cannot pitch Matt to a hiring manager without a comp anchor; I'll burn a screening call to get it... The bot's failure mode there is the real finding: it should decline cleanly ('Matt handles comp conversations directly — reach out') instead of going silent and letting the recruiter guess whether the data is missing or being withheld."*
-- **Fix:** System prompt addition (`prompts.py` or wherever Agy's primary system instruction lives) covering:
-  - **Comp:** Decline with a clear redirect to direct conversation. Suggested: *"Matt handles compensation conversations directly. Reach out at [contact link]."*
-  - **Other off-scope but answerable-elsewhere queries:** Decline with redirect (relocation specifics, references, etc.).
-
-  This is distinct from the existing `personal` intent family handling — those are queries that shouldn't be answered at all (age, religion, etc.). The comp/logistics class IS legitimately answered, just not on the site. Different decline copy required.
-- **Effort:** Small. One-line system prompt addition + 1-2 BDD scenarios to validate the decline shape vs the silent fallback.
-- **Cross-references:**
-  - Existing `personal` intent family in semantic router (different fix path, similar shape)
-  - MATTGPT-089 — location/work-model parsing on Role Match side; this is the chatbot side of the same logistical-data gap
-- **Logged:** May 28, 2026
-
----
-
 ### MATTGPT-091
 **Failure stories — audit existing corpus content first, then write only if needed (re-scoped May 28, 2026)**
 
@@ -1515,28 +1016,6 @@ Each detail block uses these fields. Not every field is required for every item.
 
 ---
 
-### MATTGPT-103
-**Agy intro line — resolve "20+ years of work" inconsistency with stats bar (Years tile dropped)**
-
-- **Status:** Decided Against (May 30, 2026)
-- **Priority:** Low
-- **Type:** Refactor
-- **Decided Against (May 30, 2026):** The "inconsistency" framing was wrong. The stats bar and the Agy intro line are different surfaces doing different jobs. The stats bar is a credentialing surface (recruiter 5-second scan) where the anti-bias play matters most — that's why the Years tile was dropped in MATTGPT-092. The Agy intro line is grounding-the-AI-assistant copy — it tells the user that Agy has a real corpus of career experience to draw from. The "20+ years of work" token there reads as *corpus scope* (how much data the AI has), not as *personal positioning* (how old the candidate is). The anti-bias play that drove the Years tile drop doesn't transfer to a surface doing different work. Closing without a code change; the line stays as-is in `ui/components/hero.py:174`.
-- **Earlier framing (superseded):** Home hero Agy intro line currently reads *"That's Agy, my Plott Hound and AI assistant, ready to track down insights from 20+ years of work."* The *"20+ years"* signal is the same one that was dropped from the stats bar's Years tile (May 29, 2026, MATTGPT-092) for ageism + non-positioning reasons. Leaving the years number in the Agy intro partially undoes that mitigation.
-- **Decision (open — three working options):**
-  1. **Drop the number:** *"That's Agy, my Plott Hound and AI assistant, ready to track down insights from across Matt's career."*
-  2. **Swap to project count + sector breadth:** *"That's Agy, my Plott Hound and AI assistant, ready to track down insights from 100+ projects across financial services and enterprise platforms."* (Also aligns with MATTGPT-019's "100+" standardization.)
-  3. **Leave as-is** — read the line as functional/corpus scope (telling the user how big Agy's data set is) rather than personal positioning. The years here describe the data, not Matt's age.
-- **Fix:** Once decision lands, one-line copy change in `ui/components/hero.py`.
-- **Effort:** Trivial (~5 min once decision lands).
-- **Cross-references:**
-  - MATTGPT-019 — Story count copy. Option (b) would align the Agy intro with the broader find/replace pass.
-  - MATTGPT-092 — Hero seniority signal. -092 established the principle that the Years signal was dropped from positioning surfaces; -103 is the consistency check on the Agy intro line.
-  - MATTGPT-101 — Why Agy modal locked content also references "20+ years" — whatever -103 decides should propagate to the modal copy.
-- **Logged:** May 30, 2026
-
----
-
 ### MATTGPT-115
 **Lock icon — browser console warning: password field not in native form**
 
@@ -1553,6 +1032,16 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Logged:** June 6, 2026
 
 ---
+
+### MATTGPT-120
+**CLAUDE.md restructure — Critical Rules fast-reference block + rules-first format throughout**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Goal:** Make CLAUDE.md scannable for new Claude Code sessions. Two parts: (1) Critical Rules fast-reference block at the top — 10-15 non-negotiable imperative rules, readable in 30 seconds; (2) Full restructure — rules-first format throughout, incident narratives moved to memory pointers, overlapping sections consolidated (CSS Rules + Streamlit Patterns → one section). Part 1 is one commit. Part 2 is a dedicated session.
+- **Trigger:** Before the next feature sprint after the UI redesign deploy.
+- **Logged:** June 9, 2026
 
 ### MATTGPT-121
 **Why Agy dialog — mobile layout fix (375px viewport)**
@@ -1582,16 +1071,6 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Fix shape:** After switching to Cards view, wait explicitly for the `components.html` iframe's JS to fire before clicking. Candidate: `wait_for_timeout(1000)` after cards appear, or wait for a zero-height `[data-testid='stCustomComponentV1']` iframe. Alternatively, add a retry loop around the click + wait_for_content.
 - **Note:** This test was never green before MATTGPT-105 — it always failed at an earlier step for different reasons. -105 advanced the failure mode to expose the timing issue. Not a -105 regression.
 - **Logged:** June 10, 2026
-### MATTGPT-120
-**CLAUDE.md restructure — Critical Rules fast-reference block + rules-first format throughout**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Action
-- **Goal:** Make CLAUDE.md scannable for new Claude Code sessions. Two parts: (1) Critical Rules fast-reference block at the top — 10-15 non-negotiable imperative rules, readable in 30 seconds; (2) Full restructure — rules-first format throughout, incident narratives moved to memory pointers, overlapping sections consolidated (CSS Rules + Streamlit Patterns → one section). Part 1 is one commit. Part 2 is a dedicated session.
-- **Trigger:** Before the next feature sprint after the UI redesign deploy.
-- **Logged:** June 9, 2026
-
 ### MATTGPT-125
 **CLAUDE.md targeted fixes — confirmed bugs + confirmed gaps from June 12 audit**
 
@@ -1619,23 +1098,6 @@ Each detail block uses these fields. Not every field is required for every item.
 
 ---
 
-### MATTGPT-127
-**Replace hardcoded `ASSESSMENT_MODEL` in `jd_assessor.py` with `get_conf()` env var pattern**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Refactor
-- **File:** `services/jd_assessor.py`, `config/constants.py`
-- **Logged:** June 12, 2026
-
-**Issue:** `ASSESSMENT_MODEL = "gpt-4o"` is hardcoded at `jd_assessor.py:185` and passed directly to the OpenAI API at lines 205 and 287. Per CLAUDE.md config rules, model names that may change between environments belong as env vars read via `get_conf()`.
-
-**Fix:** `ASSESSMENT_MODEL = get_conf("ASSESSMENT_MODEL") or "gpt-4o"` — one line. Same audit needed for `DEFAULT_CHAT_MODEL` in `constants.py`.
-
-**Note:** `gpt-4o` is the correct value for production (mini produces subpar assessment reasoning). This is a configuration hygiene fix, not a model change.
-
----
-
 ### MATTGPT-126
 **Ask Agy landing — input border invisible on page load (CSS injection race)**
 
@@ -1658,6 +1120,23 @@ div[data-testid="stTextInput"] input {
 }
 ```
 `!important` is justified here — explicitly overriding Streamlit's own styling system is the stated purpose of the rule. Remove the stale `.st-bz/.st-c0/.st-c1/.st-c2` dead code in the same pass.
+
+---
+
+### MATTGPT-127
+**Replace hardcoded `ASSESSMENT_MODEL` in `jd_assessor.py` with `get_conf()` env var pattern**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Refactor
+- **File:** `services/jd_assessor.py`, `config/constants.py`
+- **Logged:** June 12, 2026
+
+**Issue:** `ASSESSMENT_MODEL = "gpt-4o"` is hardcoded at `jd_assessor.py:185` and passed directly to the OpenAI API at lines 205 and 287. Per CLAUDE.md config rules, model names that may change between environments belong as env vars read via `get_conf()`.
+
+**Fix:** `ASSESSMENT_MODEL = get_conf("ASSESSMENT_MODEL") or "gpt-4o"` — one line. Same audit needed for `DEFAULT_CHAT_MODEL` in `constants.py`.
+
+**Note:** `gpt-4o` is the correct value for production (mini produces subpar assessment reasoning). This is a configuration hygiene fix, not a model change.
 
 ---
 
@@ -1726,50 +1205,6 @@ For each client-specific probe query, assert `client_name in [s.get("Client") fo
 
 ---
 
-### MATTGPT-134
-**BDD skip — `test_deeplink_respects_view_mode` — deeplink navigation does not preserve pre-set view mode**
-
-- **Status:** Decided Against (June 24, 2026) — scenario deleted in MATTGPT-144 commit (`77dc1cb`). Confirmed non-feature: deeplinks intentionally start a fresh session with no view persistence. The scenario was testing behavior that doesn't exist and shouldn't.
-- **Priority:** Low
-- **Type:** Bug
-- **Logged:** June 16, 2026
-
-**Context:** Scenario skips at `pytest.skip("Cards view content not found")` in `tests/bdd/steps/test_explore_stories.py` (line 1294). The scenario sets Cards view preference (`Given the user preference is Cards view`), then navigates via deeplink (`When the user navigates to "?story=..."`). The `Then the view should be Cards view` step finds zero `.es-fixed-height-card` elements — the deeplink navigation reverts to Table (the default view) instead of preserving the pre-navigation Cards preference.
-
-**Acceptance criterion:** Either (a) deeplink preserves the active view mode and the scenario passes end-to-end, or (b) the behavior is confirmed intentional (deeplinks always start in Table view) and the scenario is updated to match the confirmed behavior.
-
----
-
-### MATTGPT-133
-**BDD skip — `test_ask_agy_works_from_table_view` — AgGrid row click doesn't reliably expose Ask Agy button in headless Playwright**
-
-- **Status:** Decided Against (June 24, 2026) — scenario deleted in MATTGPT-144 commit (`77dc1cb`). Canvas row-click is undriveable in headless Playwright (st.dataframe Glide Data Grid renders to canvas, not DOM). Redundant with `test_ask_agy_works_from_cards_view` which passes reliably and tests the same user behavior.
-- **Priority:** Low
-- **Type:** Bug
-- **Logged:** June 16, 2026
-
-**Context:** Scenario skips at `pytest.skip("Ask Agy button not found")` in `tests/bdd/steps/test_explore_stories.py` (line 546). The scenario follows: `Given the user is in Table view` → `When the user clicks on a story row`. After the row click, the step looks for `#btn-ask-story` inside the story detail panel, but the element is not reliably found. The AgGrid iframe interaction sequence (frame_locator → `.ag-row` click → detail panel open → Ask Agy button visible) is fragile in headless Playwright. The equivalent Cards-view scenario (`test_ask_agy_works_from_cards_view`) passes reliably.
-
-**Acceptance criterion:** `test_ask_agy_works_from_table_view` passes reliably in isolation and as part of the full BDD suite, with no `pytest.skip` guard.
-
----
-
-### MATTGPT-131
-**BDD selector bug — `test_industry_and_capability_labels_visible_inline_on_mobile` fails in marathon run**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Bug (test only)
-- **Logged:** June 15, 2026
-
-**Context:** `test_industry_and_capability_labels_visible_inline_on_mobile` fails in the full BDD suite marathon run (52 passed, 1 failed). The feature is correct in both local and production at 375px — Chrome Claude confirmed `st-key-facet_industry_v2`, `stWidgetLabel`, `display: flex`, `visibility: visible`, bounding rect 48x14px fully within viewport. The label is present and Playwright-visible in the live app.
-
-**Root cause:** Not yet confirmed. Candidates: (1) the selector hardcodes `facet_industry_v2` but `_widget_version_industry` in a fresh BDD session starts at 0 (`facet_industry_v0`), making the substring match fail; (2) marathon-run resource pressure causes the DOM assertion to fire before the label renders after a 375px viewport resize. Scenario 18 of 54, fires at 31 min into a 31-min run.
-
-**Acceptance criterion:** Scenario passes in isolation (`pytest tests/bdd/steps/test_explore_stories.py::test_industry_and_capability_labels_visible_inline_on_mobile -v`) and in the full suite without flake.
-
----
-
 ### MATTGPT-130
 **"practitioners" canonical everywhere — UI, eval golden set, corpus re-embed in lockstep**
 
@@ -1788,6 +1223,22 @@ For each client-specific probe query, assert `client_name in [s.get("Client") fo
 **Risk:** Changing only surface 1 leaves eval queries testing a term the UI no longer uses. Changing surfaces 2+3 without re-embedding leaves the index returning "engineers" on practitioner queries.
 
 **Acceptance criterion:** `grep -rn "150+ engineers" ui/ tests/ data/` returns 0 hits (excluding code comments and regex patterns in backend_service.py).
+
+---
+
+### MATTGPT-131
+**BDD selector bug — `test_industry_and_capability_labels_visible_inline_on_mobile` fails in marathon run**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Bug (test only)
+- **Logged:** June 15, 2026
+
+**Context:** `test_industry_and_capability_labels_visible_inline_on_mobile` fails in the full BDD suite marathon run (52 passed, 1 failed). The feature is correct in both local and production at 375px — Chrome Claude confirmed `st-key-facet_industry_v2`, `stWidgetLabel`, `display: flex`, `visibility: visible`, bounding rect 48x14px fully within viewport. The label is present and Playwright-visible in the live app.
+
+**Root cause:** Not yet confirmed. Candidates: (1) the selector hardcodes `facet_industry_v2` but `_widget_version_industry` in a fresh BDD session starts at 0 (`facet_industry_v0`), making the substring match fail; (2) marathon-run resource pressure causes the DOM assertion to fire before the label renders after a 375px viewport resize. Scenario 18 of 54, fires at 31 min into a 31-min run.
+
+**Acceptance criterion:** Scenario passes in isolation (`pytest tests/bdd/steps/test_explore_stories.py::test_industry_and_capability_labels_visible_inline_on_mobile -v`) and in the full suite without flake.
 
 ---
 
@@ -1845,48 +1296,6 @@ queries"). Fix: delete the constant and its comment.
 
 ---
 
-### MATTGPT-138
-**BDD: page teardown invariant + CLS budget guard (MATTGPT-018 regression lock)**
-
-- **Status:** Decided Against
-- **Priority:** Medium
-- **Type:** Action
-- **Logged:** June 19, 2026
-- **Decided Against:** The tab-keyed container this guard was written to protect was reverted June 23, 2026 as a null probe (7807a2a). No fix mechanism exists to guard. If a real blep fix lands, file a new guard ticket at that time.
-
-**Context:** The MATTGPT-018 blep root cause was stale Ask Agy DOM bleeding through onto My Work during navigation — two Agy avatars on screen at once because Streamlit reconciled the new page tree onto the old one instead of tearing it down. Fixed by wrapping each page's render in a tab-keyed `st.container` (`_page_slug` key). The `transition: all` animation sweep was a concurrent contributor, fixed by a `transition-property` constraint in `global_styles.py`. Neither fix has a regression guard. This ticket adds two: (1) a deterministic DOM teardown invariant, and (2) a calibrated CLS budget.
-
-**Teardown invariant (implement first — deterministic, no thresholds):**
-Navigate Ask Agy → My Work, wait for settle, assert `.st-key-intro_section` count is 0 and no Ask Agy DOM remains. Assert reverse direction. Catches "stale page survived the swap" — the regression that would reappear if the keyed container is stripped. Playwright, real Chromium. Two scenarios in `tests/bdd/features/page_teardown.feature`, steps in `tests/bdd/steps/test_page_teardown.py`. See Chrome Claude spec (June 19, 2026 session) for full scenario and step text.
-
-**CLS budget guard (implement second — calibrated, not a placeholder):**
-Cold-load CLS ceiling: 0.25 (observed ~0.24 in DevTools — locks "no worse than today," ratchet down toward 0.10 as CLS is fixed). Transition shift: MEASURE FIRST on post-fix state, then set ceiling just above that reading. Do NOT use the 1.00 placeholder from the spec as a real budget. Install a `PerformanceObserver` for `layout-shift` entries. Two distinct metrics: `read_cls` (filtered, `!hadRecentInput` — matches official CLS) and `read_transition_shift` (all entries including post-click — catches the avatar shift that CLS excludes because it happens within 500ms of a tab click). Helper in `tests/bdd/steps/vitals_helpers.py`, scenarios in `tests/bdd/features/web_vitals.feature`, steps in `tests/bdd/steps/test_web_vitals.py`.
-
-**Honest catches:**
-- Teardown tests inspect the settled DOM only — they cannot see the transient flash. The eye-on-the-transition is still the only confirmation the flash is gone.
-- `TRANSITION_SHIFT_MAX = 1.00` in the spec is a measurement placeholder, not a real budget. Run the test pre-fix and post-fix, read the printed value, then set the ceiling just above the post-fix number.
-- INP is out of scope: currently 0ms, lab INP is noisy, defer until a regression appears.
-
-**Acceptance criteria:**
-- `pytest tests/bdd -k "page_teardown"` — 2/2 passing, deterministic
-- `pytest tests/bdd -k "web_vitals"` — 2/2 passing with `TRANSITION_SHIFT_MAX` set to a measured (not placeholder) value
-
----
-
-
-### MATTGPT-143
-**BDD: app_url fixture hardcodes port 8501 with no override**
-
-- **Status:** Parked
-- **Priority:** Low
-- **Type:** Bug
-- **Issue:** `tests/bdd/steps/conftest.py` line 78 returns `"http://localhost:8501"` with no mechanism to override. When two concurrent Streamlit sessions are running (e.g., during parallel feature development), BDD tests silently target the wrong app — tests may pass or fail against stale or unrelated state with no obvious error.
-- **Fix:** Replace the hardcoded return with `os.environ.get("STREAMLIT_TEST_URL", "http://localhost:8501")` in `conftest.py`. All test files inherit automatically since they consume `app_url` from the shared fixture.
-- **Why parked:** Low-frequency scenario; not blocking current work. Revisit when concurrent Streamlit sessions become a regular workflow.
-- **Logged:** June 23, 2026
-
----
-
 ### MATTGPT-142
 **BDD: sequential rejection test wait_for_banner not count-aware**
 
@@ -1898,6 +1307,19 @@ Cold-load CLS ceiling: 0.25 (observed ~0.24 in DevTools — locks "no worse than
 - **Production behavior:** Correct. "Is Matt married?" returns "I'm focused on Matt's professional experience." and PERSONAL_CHIPS render as expected (confirmed manually June 23, 2026).
 - **Fix:** In the sequential scenario, count existing `.no-match-banner` elements before submission and wait for that count to increase. Pass expected count into `wait_for_banner`, or add a dedicated `wait_for_nth_banner(n)` helper.
 - **Affects:** `tests/bdd/steps/test_ask_mattgpt.py` — `test_sequential_rejections_swap_chip_sets_per_branch`
+- **Logged:** June 23, 2026
+
+---
+
+### MATTGPT-143
+**BDD: app_url fixture hardcodes port 8501 with no override**
+
+- **Status:** Parked
+- **Priority:** Low
+- **Type:** Bug
+- **Issue:** `tests/bdd/steps/conftest.py` line 78 returns `"http://localhost:8501"` with no mechanism to override. When two concurrent Streamlit sessions are running (e.g., during parallel feature development), BDD tests silently target the wrong app — tests may pass or fail against stale or unrelated state with no obvious error.
+- **Fix:** Replace the hardcoded return with `os.environ.get("STREAMLIT_TEST_URL", "http://localhost:8501")` in `conftest.py`. All test files inherit automatically since they consume `app_url` from the shared fixture.
+- **Why parked:** Low-frequency scenario; not blocking current work. Revisit when concurrent Streamlit sessions become a regular workflow.
 - **Logged:** June 23, 2026
 
 ---
@@ -1973,3 +1395,591 @@ Professional Narrative stories remain fully available to Ask Agy's Pinecone retr
 - BDD: scenario asserting that searching My Work for "leadership journey" or "leadership philosophy" returns zero results (or a no-match banner), not the narrative story.
 
 **Note:** Effort estimate intentionally omitted — small, but requires careful splitting. Validate in the browser after the change, not from source (source-order reasoning is exactly what's fragile here).
+
+---
+
+### Decided Against
+
+> **Read only — do not add blocks here directly.**
+> Blocks are moved here from Active Tickets above when a ticket's status changes to Decided Against. New tickets always start in Active Tickets. See CLAUDE.md § Backlog Maintenance for the full lifecycle.
+
+### MATTGPT-010
+**Cross-Browser Testing**
+
+- **Status:** Decided Against (May 15, 2026)
+- **Priority:** Low (was)
+- **Why not:** Trigger expired. Original framing parked this until "React migration" (originally targeted Q1 2026). Q1 has passed; still on Streamlit with no active migration work. If React migration ever happens, cross-browser testing falls out naturally as part of that work — no need for a standing ticket waiting on an uncertain trigger. Streamlit currently handles most cross-browser concerns adequately.
+- **Original reason:** Low priority until React migration. Streamlit handles most cross-browser issues.
+- **Closed:** May 15, 2026
+
+---
+
+### MATTGPT-016
+**Semantic Router — Wrong-Person Query Detection**
+
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** High (was)
+- **Type:** Issue
+- **Why not:** May 14, 2026 investigation surfaced two facts that invalidated the ticket's framing:
+  1. **Production already rejects these queries** via `nonsense_filters.jsonl` regex (catches `elon musk`, `jeff bezos`, `tell me a joke`, etc.) — completely upstream of the semantic router. The 3 failing unit tests call `is_portfolio_query_semantic()` in isolation, bypassing the actual production pipeline. The tests were aimed at the wrong gate.
+  2. **The proposed canonical-phrases fix doesn't generalize.** During implementation, added wrong-person phrases to `out_of_scope` + family-based `is_valid` logic. Made the 3 specific tests pass. But the query "What's it like to work with Donald Trump?" still produced a confused-context RAG answer in BOTH production and local-with-fix — Trump isn't in the nonsense regex AND the canonical phrases don't generalize to the "What's it like to work with X" structural shape. So the fix adds redundant coverage for exact shapes already covered upstream while failing to address the real failure mode (names outside the regex with structural shapes outside the canonical phrases).
+- **Real unsolved problem:** filed separately as MATTGPT-063 with the Trump query as evidence.
+- **Action taken:** code changes from the in-progress fix reverted. Test scaffold from Step 1 (commit `bc280a2`) remains in main; cleanup of the 3 wrong-layer test cases + Step 1 speculative scaffolding deferred to a future small commit.
+- **Original ticket context (preserved below for history):**
+- **Issue:** Queries about other people score high against valid intent families. Bezos leadership query scores 0.664 as "leadership" — strong match to a wrong subject.
+- **Root cause:** Semantic router has no entity/person detection. Only checks embedding similarity to intent families.
+- **Fix (rejected):** Add canonical wrong-person phrases to `out_of_scope` family. Same mechanism that already handles off-topic queries — fills a gap, not a new gate layer.
+- **Rejected approaches:** Person-name detection before routing (adds gate layer, history shows added gates create complexity and get backed out); lower SOFT_ACCEPT threshold (tried before, caused false rejections on legitimate queries).
+- **Affects:** 3 failing tests (Bezos, Elon Musk, "Tell me a joke" scoring 0.429 as "behavioral")
+- **Logged:** April 2026 test audit / **Closed:** May 14, 2026
+
+---
+
+### MATTGPT-020
+**Simplify backend_service.py**
+
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Medium (was)
+- **Type:** Refactor
+- **Why not:** No concrete pain point driving the refactor. The file is large (2,034 lines as of May 14) but functional. Past extractions (prompts.py in Jan 26 `c47ad1f`; Entity Gate / classify_query_intent in Jan 29) addressed earlier shape concerns; subsequent feature work (Role Match, story intelligence) brought the line count back up. Without a specific module wanting to escape or a specific bug attributable to the size, this is a refactor-for-refactor's-sake ticket — exactly the kind of work CLAUDE.md's "80/20 rule" and "don't add abstractions beyond what the task requires" rules push against. Re-open if a specific module wants to escape backend_service.py with a clear functional driver (e.g., "Role Match logic doesn't belong here because X").
+- **Original framing (preserved):**
+- **Issue:** 2,034 lines, imports from 4+ modules. Candidates for extraction: entity detection, prompt building.
+- **Status note (Jan 29, 2026):** Entity Gate removed, classify_query_intent removed. Still large — grew significantly with Role Match, story intelligence, and prompt architecture work.
+- **Logged:** Pre-January 2026 / **Closed:** May 14, 2026
+
+---
+
+
+### MATTGPT-023
+**LLM Meta-Commentary on Q20 (Stochastic)**
+
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
+- **Type:** Issue
+- **Why not:** Stochastic LLM-response flake. "Monitor — if it becomes consistent" was the framing, but nothing actively monitored — the ticket just sat. As of May 14 2026, Q20 isn't in the eval baseline's tracked stochastic failures (Q15 Fiserv and Q55 TDD are the current trackers); the issue may have settled, or just hasn't tripped recently. Accepted as LLM-response cost. The eval suite catches it implicitly if it ever becomes consistent — at which point re-file with concrete reproduction. No standing ticket needed for a known-flake.
+- **Original framing (preserved):**
+- **Issue:** "Who is Matt Pugmire?" sometimes generates meta-commentary ("showcases his") instead of direct biographical content. Stochastic — passes on some runs, fails on others.
+- **Root cause:** LLM occasionally ignores the "never evaluate Matt" prompt instruction for broad biographical queries.
+- **Fix:** Monitor — if it becomes consistent, add Q20-specific prompt reinforcement.
+- **Logged:** April 2026 test audit / **Closed:** May 14, 2026
+
+---
+
+### MATTGPT-024
+**Clarify Hybrid Scoring**
+
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
+- **Type:** Refactor
+- **Why not:** "Hybrid scoring" framing is itself stale — there is no hybrid scoring. W_KW = 0.0, the pipeline is pure semantic via Pinecone (this was the false claim corrected by MATTGPT-057 alignment work, May 11). What the ticket actually described is that Pinecone returns 0.0-1.0 similarity and our confidence thresholds (CONFIDENCE_HIGH=0.25, CONFIDENCE_LOW=0.15) sit in a narrow band of that range — that's just thresholds operating on raw similarity, not a scoring-system conflict. The proposed fix ("document or align") was vague with no clear audience for the documentation or concrete pain driving the alignment. Close. If a real question about threshold calibration emerges in production (false confidence labels, gate firing wrong), file a new ticket with concrete evidence.
+- **Original framing (preserved):**
+- **Issue:** Pinecone scores (0.0-1.0) don't map clearly to confidence buckets (0.15-0.25).
+- **Fix:** Document or align the scoring systems.
+- **Closed:** May 14, 2026
+
+---
+
+### MATTGPT-025
+**Add Error Handling Tests**
+
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
+- **Type:** Action
+- **Why not:** Error handling already exists in production code (FAIL OPEN patterns in semantic_router.py:350, try/except in query_logger.py, etc.). The gap is "tests for those paths," not "the handling itself." No production bugs traceable to missing error-path tests. "Add tests for error paths" is a coding norm/habit, not a discrete ticket — opportunistically add error-path unit tests when wiring up broader test coverage (e.g., during MATTGPT-014 / MATTGPT-017 work). Standing ticket for an undriven coverage gap was just backlog cruft.
+- **Original framing (preserved):**
+- **Issue:** Test suite only covers happy path.
+- **Fix:** Add tests for rate limits, timeouts, embedding failures.
+- **Closed:** May 14, 2026
+
+---
+
+### MATTGPT-026
+**Clarify Layer Ownership**
+
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
+- **Type:** Refactor
+- **Why not:** Vague refactor with no concrete pain driver. During May 14 rationalization, the ticket author couldn't recall what specific problem this was originally pointing at — strongest possible signal that it's cruft. Same family as MATTGPT-020 / MATTGPT-024 / MATTGPT-025: pre-2026 "improve the code somehow" tickets without a concrete scope. Re-file if a specific contract or boundary problem emerges in real work.
+- **Original framing (preserved):**
+- **Issue:** Ranking, intent classification, and formatting split across multiple files.
+- **Fix:** Document contracts or refactor boundaries.
+- **Closed:** May 14, 2026
+
+---
+
+### MATTGPT-027
+**Quarterly Intent Review**
+
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
+- **Type:** Action
+- **Why not:** "Schedule quarterly review" was 3.5 months overdue at May 14 with no enforced cadence. Reality: intent review is reactive — canonical phrases get touched when actual issues surface (chip CX work, MATTGPT-061 over-ranking, MATTGPT-063 wrong-person), not on a calendar. The reactive model is what's actually working. A standing "schedule review" ticket without a mechanism (calendar reminder? recurring ticket? who owns it?) is just aspirational and aged into cruft.
+- **Original framing (preserved):**
+- **Issue:** 15 intent families with ~20 phrases each in `semantic_router.py`. Phrases drift relevance over time.
+- **Fix:** Schedule quarterly review.
+- **Last review:** January 29, 2026
+- **Closed:** May 14, 2026
+
+---
+
+### MATTGPT-028
+**Share Link Copy Functionality**
+
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
+- **Type:** Issue
+- **Why not:** "Verify works across browsers" was a QA verification task without an owner or schedule — same shape as Quarterly Intent Review (MATTGPT-027). Share functionality exists in `action_buttons.py:179` and is wired into Story Detail and Role Match. No production bug reports. If a real cross-browser failure surfaces, re-file as a concrete bug ticket with the failing browser + reproduction. Standing "verify someday" tickets are cruft.
+- **Original framing (preserved):**
+- **Issue:** Verify share link copy-to-clipboard works correctly across browsers.
+- **Closed:** May 14, 2026
+
+---
+
+### MATTGPT-029
+**Low-Confidence Banner Edge Cases**
+
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
+- **Type:** Issue
+- **Why not:** Logged in April 2026 test audit sweep as "sometimes triggers incorrectly" — no specific failing query, no reproduction. Thresholds (CONFIDENCE_HIGH=0.25, CONFIDENCE_LOW=0.15) have been stable since January 2026 with no production failures attributable to misfires. Same pattern as MATTGPT-027 (passive monitoring without a mechanism = cruft). Historical context preserved in **docs/ADR.md ADR 018 — Confidence Threshold Calibration for Pinecone Semantic Search**, which captures the December 2025 calibration history and edge cases to watch. If a specific banner misfire surfaces with a reproduction, re-file as a concrete bug ticket.
+- **Original framing (preserved):**
+- **Issue:** Low-confidence banner sometimes triggers incorrectly. Review threshold logic.
+- **Closed:** May 14, 2026
+
+---
+
+### MATTGPT-031
+**Semantic Router Error Path Coverage**
+
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
+- **Type:** Action
+- **Why not:** Same shape as MATTGPT-025 (Add Error Handling Tests, killed May 14): semantic_router.py already has FAIL OPEN error handling at line 350. The gap is tests for it, not the handling itself. No production driver. Opportunistically add error-path tests when wiring up broader coverage during MATTGPT-014 / MATTGPT-017 work; standing "test coverage gap" tickets without a driver are backlog cruft.
+- **Original framing (preserved):**
+- **Issue:** Limited test coverage for semantic router error handling paths.
+- **Closed:** May 14, 2026
+
+---
+
+### MATTGPT-032
+**LLM Response Broken Markdown**
+
+- **Status:** Decided Against (May 15, 2026)
+- **Priority:** Low (was)
+- **Type:** Issue
+- **Why not:** No current production reproduction. Production responses tested May 15 (Scale a CIC, How did Matt achieve 4x faster delivery, etc.) all render bolded text cleanly — `**4X **` trailing-space pattern not observable. Ticket dates to Pre-2026; LLM and post-processing behavior have evolved since. An attempted fix May 15 introduced regression in legitimate bolded text (5 missing-space patterns: "over150", "at4x", "withNorfolk", "bothAccenture", "atCapital") and was reverted; mechanism not fully traced. Same anti-pattern as MATTGPT-027 / -028 / -029 — "watch for this someday" without a forcing function. If the trailing-space `**X **` pattern ever shows up reproducibly in production, file fresh with the actual failing query.
+- **Original framing (preserved):**
+- **Issue:** LLM outputs `**4X **` instead of `**4X**` — space before closing asterisks breaks bold rendering.
+- **Fix:** Post-process regex: `r'\*\*([^*]+)\s+\*\*'` → `**\1**`
+- **Closed:** May 15, 2026 (after attempted fix introduced regressions; lesson preserved in `feedback_check_production_before_treating_test_failure_as_bug.md`)
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Issue
+- **Issue:** Button shifts position when focused. CSS fix for focus state needed.
+
+---
+
+### MATTGPT-036
+**Entity Cluster Promotion Override**
+
+- **Status:** Decided Against
+- **Proposed:** Override synthesis mode when 3+ stories from the same entity are in the Pinecone pool (e.g., "How did you build the CIC?" gets 10 CIC stories → forces synthesis).
+- **Why not:** Overriding would break legitimate synthesis queries like "Tell me about all your CIC work." The real fix is better data differentiation so the right story ranks clearly #1, not routing logic.
+
+---
+
+### MATTGPT-037
+**Score Gap Override (Generic-Above-Named)**
+
+- **Status:** Decided Against
+- **Proposed:** Boost named client stories over "Fortune 500 Clients" generic stories in Pinecone results.
+- **Why not:** Adds a ranking layer on top of semantic search. Better to fix at the data level — enrich generic stories with distinguishing context, or merge them into named client stories where appropriate.
+
+---
+
+### MATTGPT-038
+**Centralize Constants (Duplicate)**
+
+- **Status:** Decided Against
+- **Proposed:** Separate request to centralize constants.
+- **Why not:** Duplicate. Consolidated into `config/constants.py` as the single source of truth (see CHANGELOG.md, January 2026).
+
+---
+
+### MATTGPT-041
+**5P Dimensional Drill-Down**
+
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
+- **Type:** Spike
+- **Why not:** No traffic evidence supports building this. Query log audit (May 13, 2026) showed zero queries asking for 5P-dimension drill-down. Same pattern as MATTGPT-040 (eval coverage for follow-up queries) — "we should think about it" not "users are asking for it." Re-file with concrete evidence if dimension-shaped follow-ups start appearing in real query logs.
+- **Original framing (preserved):**
+- **Issue:** Voice guide describes 5P (Person/Place/Purpose/Process/Performance) as a metadata framework for pattern recognition and deep dives. The spec envisions Agy offering to drill into a specific dimension on demand (e.g., "Want me to dig deeper into the process?"). This conversational affordance doesn't exist — Agy can't currently zoom into a single 5P dimension by request.
+- **Current state:** 5P data integration is substantially implemented. `story_intelligence.py` uses all five 5P fields as STAR fallbacks in context assembly. `5PSummary` is embedded in vectors (influences retrieval). Verbatim phrase extraction works via `prompts.py`. What's missing is the *conversational* use — the ability to drill into one dimension.
+- **Spike question:** Is dimension-specific drill-down worth building? Would users ask "tell me more about the process" or "what was Matt's role" as follow-ups? If so, this is a multi-turn conversational feature, not a prompt structure change.
+- **Note:** The voice guide does NOT describe a 5P narrative arc for response structure. It describes 5P as input enrichment and a lens for pattern recognition — not as a replacement for WHY→HOW→WHAT output structure.
+- **Source:** Voice Guide Implementation Audit, April 29, 2026
+- **Logged:** April 29, 2026
+
+---
+
+### MATTGPT-042
+**5P Pattern Taxonomy**
+
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
+- **Type:** Spike
+- **Why not (informed):** Not a "no traffic evidence" close — a "we already tried this direction" close. The prescribed-taxonomy approach (By Outcome / By Methodology / By Challenge) was originally implemented as `theme_guidance` / `get_theme_guidance()` per the Nov 2025 archetype exercise. **Removed in commit `c47ad1f` (Jan 26, 2026 BASE_PROMPT + DELTA refactor) specifically because it generated meta-commentary and evaluation language** — the exact problem the refactor was solving. Re-introducing prescribed pattern categories would regress that fix. Current open-ended `SYNTHESIS_DELTA` approach at 98.4% eval pass rate is good enough; entity cluster promotion handles cross-story synthesis organically. If a specific synthesis-quality complaint surfaces that prescribed taxonomy would clearly address (without re-triggering meta-commentary), re-file with that evidence.
+- **Original framing (preserved):**
+- **Issue:** Voice guide describes structured pattern templates ("By Outcome," "By Methodology," "By Challenge") with explicit category labels for cross-story synthesis. Production synthesis is more open-ended — gives the LLM the stories and asks for patterns via WHY→HOW→WHAT, but doesn't prescribe categories.
+- **Spike question:** Does prescribed taxonomy improve pattern recognition responses, or is the open-ended approach better?
+- **Source:** Voice Guide Implementation Audit, April 29, 2026
+- **Logged:** April 29, 2026
+
+---
+
+### MATTGPT-043
+**Humane Framing — Intent-to-Tone Mapping**
+
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
+- **Type:** Spike
+- **Why not (informed):** Same pattern as MATTGPT-042 — the ticket itself flagged the risk that "implementing deterministic intent-to-tone mapping risks reintroducing meta-commentary patterns that the current architecture deliberately removed." The previous `theme_guidance` architecture was closer to this vision and was removed in commit `c47ad1f` (Jan 26, 2026 BASE_PROMPT + DELTA refactor) for anti-meta-commentary discipline. The Spike question ("worth the risk?") has the same answer as 042: no, given the previous attempt regressed into the exact problem the refactor fixed. If specific intent-tone failures surface in production with evidence that prescribed mapping (without meta-commentary regression) would fix them, re-file.
+- **Original framing (preserved):**
+- **Issue:** Voice guide describes intent-specific response framing — Agy detects why someone is asking (interview prep vs. vetting vs. curiosity vs. hiring pitch vs. networking) and adapts tone, framing language, and offers accordingly. Specific intent-to-tone mapping is not implemented.
+- **Current state:** Spirit exists via random focus angles in `_generate_agy_response()` (lines 888-896) which inject emphasis on human impact, methodology, scale, leadership, outcomes, or innovation. But this is random, not intent-driven.
+- **Tradeoff:** Implementing deterministic intent-to-tone mapping risks reintroducing meta-commentary patterns that the current architecture deliberately removed. The previous prompt architecture had a `theme_guidance` variable closer to this vision but was replaced for anti-meta-commentary discipline (see commented-out prompt at `backend_service.py` lines 1040-1164).
+- **Spike: Evaluate whether deterministic intent-to-tone mapping is worth the anti-meta-commentary risk.**
+- **Source:** Voice Guide Implementation Audit, April 29, 2026
+- **Logged:** April 29, 2026
+
+---
+
+### MATTGPT-044
+**Pattern Insights — Structured Templates**
+
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
+- **Type:** Spike
+- **Why not:** Duplicate of MATTGPT-042 (5P Pattern Taxonomy) — same Voice Guide Implementation Audit source, same "By Outcome / By Methodology / By Challenge" prescribed templates, same spike question. Close per 042's informed-rejection rationale: previous `theme_guidance` architecture was removed in commit `c47ad1f` (Jan 26, 2026) for anti-meta-commentary discipline; re-introducing prescribed taxonomy risks regressing that fix.
+- **Original framing (preserved):**
+- **Issue:** Voice guide describes Agy identifying cross-story patterns by outcome, methodology, and challenge with explicit pattern templates. Synthesis mode finds patterns through `SYNTHESIS_DELTA` instructions and entity cluster promotion, but doesn't structure them by prescribed categories.
+- **Spike question:** Does adding structured pattern templates ("By Outcome," "By Methodology," "By Challenge") improve synthesis quality, or is the LLM-driven open-ended approach better?
+- **Source:** Voice Guide Implementation Audit, April 29, 2026
+- **Logged:** April 29, 2026
+
+---
+
+### MATTGPT-046
+**Latency Benchmarks**
+
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
+- **Type:** Action
+- **Why not:** Single-user portfolio with low organic traffic (~7 organic queries in 30 days per May 13 query log audit). No SLA, no performance commitments, no production performance issues observed. Latency tracking is critical for high-traffic systems but overkill here. Would produce sparse, unactionable data. Re-file if traffic scales significantly or if a specific latency complaint surfaces.
+- **Original framing (preserved):**
+- **Issue:** No latency tracking exists. No `time.time()`, no `perf_counter()`, no duration fields in the logger schema. Can't detect performance regressions over time.
+- **Fix:** Wrap OpenAI API calls and Pinecone search in timing blocks. Add duration column to logger schema. Build reporting view over accumulated data for p50/p95 tracking.
+- **Source:** Cross-reference of design spec vs. implementation, April 29, 2026
+- **Logged:** April 29, 2026
+
+---
+
+### MATTGPT-047
+**Cost Tracking**
+
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
+- **Type:** Action
+- **Why not:** Same family as MATTGPT-045 (analytics dashboard) and MATTGPT-046 (latency benchmarks) — operational visibility for a low-traffic single-user portfolio. Cost concerns surfaced today (cache regen, eval API costs) were spot questions answerable ad-hoc without per-query tracking. Low organic traffic (~7 queries in 30 days per May 13 audit) = trivial monthly OpenAI bill = no spike to detect. Re-file if cost surprises appear or traffic scales.
+- **Original framing (preserved):**
+- **Issue:** No per-query cost tracking in production. OpenAI response includes `usage.prompt_tokens` and `usage.completion_tokens` but `backend_service.py` doesn't read them. Cost estimates exist only in offline batch scripts (`generate_use_cases.py`, `generate_public_tags.py`).
+- **Fix:** Read token usage from OpenAI response object, log per-query token counts and computed cost. Fold into MATTGPT-013 logger schema work — minimal incremental work if done alongside.
+- **Source:** Cross-reference of design spec vs. implementation, April 29, 2026
+- **Logged:** April 29, 2026 / **Closed:** May 14, 2026
+
+---
+
+### MATTGPT-048
+**Portfolio Integration (Notion, LinkedIn sync)**
+
+- **Status:** Decided Against (May 15, 2026)
+- **Priority:** Low (was)
+- **Type:** Action
+- **Why not:** Framing significantly out of date and points at the wrong scope. The April 29 ticket envisioned outbound sync of the MattGPT story corpus to Notion/LinkedIn. The actual workstream that matured (Job Search System, design decisions compiled in Notion May 10) is a different shape entirely — JD ingestion → Notion + engine assessment → back to Notion, with Cowork as the orchestration layer. The explicit Job Search System decision is **"MattGPT chat is portfolio, NOT operational tool"** — meaning the integration work has its proper home in Notion's Job Search System design docs, not in MattGPT's BACKLOG. Closing here. The active work lives where it belongs.
+- **Original framing (preserved):**
+- **Proposed:** Programmatic sync between MattGPT story corpus and external systems (Notion job tracker, LinkedIn experience sections).
+- **Reason parked:** Real idea, no urgency, no foundation work started. Notion sync was already noted as out-of-scope for Role Match v1 ("manual copy of fit score acceptable"). Revisit when traffic patterns or use cases create a forcing function.
+- **Source:** Cross-reference of design spec vs. implementation, April 29, 2026
+- **Logged:** April 29, 2026 / **Closed:** May 15, 2026
+
+---
+
+### MATTGPT-049
+**Job Fit Broader Scope (cover letter export, LinkedIn URL auto-extract)**
+
+- **Status:** Decided Against (May 15, 2026)
+- **Priority:** Low (was)
+- **Type:** Action
+- **Why not:** Both features are out of step with the Job Search System design decisions (Notion, May 10). LinkedIn intake is handled via Gmail-routed alerts in the actual plan — not URL scraping. Cover letter export isn't in the design at all. Adding either to Role Match would push back against the explicit "MattGPT chat is portfolio, NOT operational tool" decision — they're operational features that belong in the Job Search System workstream if they're built. Same monitoring-without-mechanism pattern as the other Decided-Against tickets from this rationalization pass.
+- **Original framing (preserved):**
+- **Proposed:** Extensions to Role Match: cover letter export from match results, LinkedIn URL parsing to auto-extract job descriptions.
+- **Reason parked:** Natural extensions to Role Match Phase 4, but no user demand signal yet, no architectural hooks. Revisit if Role Match usage signals demand for these features.
+- **Source:** Cross-reference of design spec vs. implementation, April 29, 2026
+- **Logged:** April 29, 2026 / **Closed:** May 15, 2026
+
+---
+
+### MATTGPT-050
+**Dynamic Intent Expansion**
+
+- **Status:** Decided Against
+- **Proposed:** Use LLM to generate new canonical examples from accepted queries, dynamically expanding the semantic router's intent family phrases rather than hardcoding them.
+- **Why not:** Architectural constraint. The data pipeline (Excel → JSONL → embeddings → Pinecone) is one-directional by design — no write-back path. Dynamic expansion would require building a feedback-to-pipeline bridge that doesn't exist. Manual curation at 15 families is working (98.1% eval pass rate). Eval suite validates router changes more reliably than automated derivation would. Spec assumed a different architecture (database-backed React migration); current architecture deliberately avoids that.
+- **Source:** Cross-reference triage, April 29, 2026
+- **Logged:** April 29, 2026
+
+---
+
+### MATTGPT-051
+**User Feedback Loop — Closed-Loop Retraining**
+
+- **Status:** Decided Against
+- **Proposed:** "Was this answer helpful?" → retrain router. Closed-loop machine learning where thumbs-up/thumbs-down data flows back into the semantic router to automatically adjust thresholds, expand intents, or shift family assignments.
+- **Why not:** Architectural constraint. Read-only data layer doesn't support closed-loop retraining. Data pipeline is one-directional by design. Feedback collection IS implemented (`log_feedback()` in `query_logger.py`, helpful/export buttons wired) and provides observable signal for manual eval-driven iteration. Closed-loop retraining assumes a writable data layer that doesn't exist.
+- **Note:** Feedback collection is the valuable half and is implemented. Only the automated retraining half is unbuildable on current architecture.
+- **Source:** Cross-reference triage, April 29, 2026
+- **Logged:** April 29, 2026
+
+---
+
+### MATTGPT-052
+**A/B Testing on Thresholds**
+
+- **Status:** Decided Against
+- **Proposed:** A/B testing infrastructure to experiment with confidence threshold values (e.g., 0.40 vs 0.45 for soft accept).
+- **Why not:** Thresholds tuned through eval-driven iteration (SOFT_ACCEPT 0.72 → 0.40, etc.) at 98.1% eval pass rate. A/B testing infrastructure not justified at current traffic volume — insufficient signal for statistical significance. Eval suite validates threshold changes more reliably than user-traffic A/B tests.
+- **Source:** Cross-reference triage, April 29, 2026
+- **Logged:** April 29, 2026
+
+---
+
+### MATTGPT-053
+**A/B Testing Framework**
+
+- **Status:** Decided Against
+- **Proposed:** General testing infrastructure for prompt variants, threshold variants, etc.
+- **Why not:** Same reasoning as MATTGPT-052. Insufficient traffic for statistical significance, eval suite is the better validation tool. Note: this is essentially a duplicate of MATTGPT-052 from a different spec section.
+- **Source:** Cross-reference triage, April 29, 2026
+- **Logged:** April 29, 2026
+
+---
+
+### MATTGPT-054
+**Query Rewriting and Spell-check**
+
+- **Status:** Decided Against
+- **Proposed:** Preprocess user queries to fix typos and rewrite ambiguous queries before they hit the RAG pipeline.
+- **Why not:** Embedding-based semantic routing already handles typos and ambiguous queries. Validated by `UGLY_BUT_VALID` test suite in semantic router unit tests (e.g., `"Tell me abot Matts backgroun"`, `"Whats Matt's experiance with agile?"` — all pass). Embedding model handles misspellings via subword tokenization. LLM-based query rewriting would add latency and cost without measurable improvement.
+- **Source:** Cross-reference triage, April 29, 2026
+- **Logged:** April 29, 2026
+
+---
+
+### MATTGPT-055
+**PWA Capabilities**
+
+- **Status:** Decided Against
+- **Proposed:** Progressive Web App features — manifest.json, service worker, offline support.
+- **Why not:** Portfolio app requires live API calls (OpenAI, Pinecone) for core functionality. Offline support via service worker would only cache static UI shells — the RAG pipeline cannot function offline. Mobile responsive design covers the actual use case.
+- **Source:** Cross-reference triage, April 29, 2026
+- **Logged:** April 29, 2026
+
+---
+
+### MATTGPT-056
+**True Wireflows (Miro)**
+
+- **Status:** Decided Against
+- **Proposed:** Screen-to-screen UI interaction diagrams maintained in Miro, with export pipeline (SVG, embed, or screenshots) into the design spec.
+- **Why not:** Screen-to-screen interaction flows documented using Mermaid diagrams in Jekyll pages. Miro-based wireflows replaced by in-repo diagrams that version with the codebase.
+- **Source:** Cross-reference triage, April 29, 2026
+- **Logged:** April 29, 2026
+
+---
+
+### MATTGPT-058
+**Replace dark-theme setInterval polling with MutationObserver**
+
+- **Status:** Decided Against
+- **Priority:** Low
+- **Type:** Refactor
+- **Why not (May 13, 2026):** Reframed after the May 12 dead-closure card-click investigation. The `setInterval(detectTheme, 500)` polling lives inside a `components.html` iframe, and Streamlit destroys and recreates that iframe on every rerun. A `MutationObserver` attached from inside the iframe loses its callback closure the moment the iframe is recreated, leaving the theme class to drift out of sync — same dead-closure bug shape that caused the Cross-Industry card-click failure. The 500ms polling is iframe-rewire defense: it re-asserts the class from a live closure regardless of how many iframe destroy/create cycles have happened. The `how_agy_modal.py` MutationObserver pattern referenced in the original analysis works there because that observer is attached to a long-lived parent-doc element from a context that survives reruns differently — not transferable to this iframe. Polling is the correct pattern here.
+- **What lives in code now:** an explanatory comment at `ui/components/category_cards.py` near the `setInterval(detectTheme, 500)` line, warning future readers not to "replace polling with MutationObserver" without understanding the iframe lifecycle.
+- **Original analysis (preserved):** `category_cards.py` (line 506) and `navbar.py` (line 238) each run `setInterval(detectTheme, 500)` that reads parent body's computed background color and toggles `body.dark-theme` class. Polling was introduced in commit `548f1bf` (Dec 8 2025: "enhance dark mode support") as a FOUC remediation. The duplication with `navbar.py` is defense-in-depth: if either iframe fails, the other keeps the class maintained.
+- **Lesson:** Understand WHY a pattern exists before proposing a replacement. Same lesson as the theme detection research that triggered this ticket — both times the "anti-pattern" was actually a defense against a specific failure mode.
+- **Logged:** May 12, 2026 / **Closed:** May 13, 2026
+
+---
+
+### MATTGPT-059
+**Add Theme-based prefilter dimension to category cards**
+
+- **Status:** Decided Against (May 14, 2026)
+- **Priority:** Low (was)
+- **Type:** Spike
+- **Why not:** Ticket author couldn't recall the framing or intent during May 14 rationalization — strongest signal that it's cruft (same call as MATTGPT-026). Adjacent context: the data-derived landing card refactor (Banking + Cross-Industry Phase 1+2, May 11-12) addresses "chips communicate scope" via tiered Core/Specialized cards mapped to Solution/Offering — different path, but covers much of the UX pressure the Theme dimension was meant to relieve. No traffic demand on Explore Stories filters per May 13 query log audit. Re-file if Theme-level filtering becomes a concrete user-driven need with evidence.
+- **Original framing (preserved):**
+- **Context:** Current `prefilter_domains` filters against the `Sub-category` field (45 unique values in data, most have 1-5 stories). Result: cards have to choose between many chips for adequate story coverage or few chips with sparse coverage. The `Theme` field has 7 broader buckets — Execution & Delivery (50), Org & Working-Model Transformation (22), Strategic & Advisory (13), Professional Narrative (10), Talent & Enablement (10), Emerging Tech (5), Risk & Responsible Tech (3) — that could deliver high coverage with few chips.
+- **Why not done now (UX blockers, not implementation cost):**
+  - Two chips on a card landing looks sparse. Chips communicate scope ("here's what this view covers") — two doesn't do that job for a recruiter scanning quickly.
+  - Theme labels are more abstract than Sub-category labels. "Org & Working-Model Transformation" is harder to parse at a glance than "Agile Transformation & Leadership Enablement." May need a friendly-alias layer.
+  - Path A (surgical Sub-category trim) ships the immediate Card 3 + Card 5 fix without new infrastructure (MATTGPT-current).
+- **What it would take (small implementation):**
+  - `prefilter_theme` key handling in `explore_stories.py` (~10 lines)
+  - Theme dropdown widget in the filter UI (~20 lines)
+  - Theme filter logic in `utils/filters.py` (~3 lines)
+  - Decision on chip presentation: render underlying Sub-category chips, or a single high-level "Filtered by Theme: X" chip
+- **Recommendation:** Hold until a UX pass solves the chip-density and label-abstraction problems. Theme filtering is the right architectural foundation but the chip display needs more thought before it ships.
+- **Logged:** May 12, 2026
+
+---
+
+### MATTGPT-070
+**Ask MattGPT — Suggestion button cursor pointer**
+
+- **Status:** Decided Against — Not Reproducible (June 9, 2026)
+- **Priority:** Low
+- **Type:** Issue
+- **Issue:** The 6 suggestion buttons on the Ask MattGPT landing page (`ui/pages/ask_mattgpt/landing_view.py:97-135`) are real `st.button(type="secondary")` calls. The CSS rule at `ui/pages/ask_mattgpt/styles.py:288-309` styles them as cards (border, background, padding, hover background) but **does not declare `cursor: pointer`**. Adjacent buttons in the same file DO declare it explicitly (lines 443, 1290, 1399), so it's not being relied upon to inherit from Streamlit defaults. Live testing (May 15, 2026) confirms the pointer does not change on hover — cards appear interactive (purple text, border) but the cursor stays as the default arrow.
+- **Audience impact:** First-time visitor cannot visually confirm the cards are clickable until they actually click one. Cheap trust erosion at the first interaction moment.
+- **Fix:** Add `cursor: pointer !important;` to the existing `button[key^="suggested_"]` rule at lines 288-309. ~1 line.
+- **Closed June 9, 2026 — not reproducible.** DevTools inspection confirmed all 6 buttons already compute `cursor: pointer` from Streamlit's base stylesheet. Root cause: `button[key^="suggested_"]` is a dead selector — Streamlit renders the `key=` param as a class on the container (`.st-key-suggested_0`), not as an HTML attribute on the `<button>` element. The entire rule block at `styles.py:288-309` matches 0 elements in the live DOM. No fix needed; cursor is correct via Streamlit's own CSS.
+- **Out of scope (closed per May 15 assessment):** Input field below the fold (the 6 suggestion buttons are themselves real CTAs that submit queries — input is the secondary path, defensible as-is); status bar developer-facing copy (design call for a technical-leaning portfolio); conversation export/share (already deferred to React migration per `conversation_helpers.py:470` TODO).
+- **Logged:** May 15, 2026
+
+---
+
+### MATTGPT-075
+**Developer debug surfaces leak to user-facing UI**
+
+- **Status:** Decided Against (June 24, 2026) — not a defect. Both reported surfaces (sidebar "Loaded N stories" print, telemetry badge) are gated on `DEBUG`, which is hardcoded `False` in `config/debug.py` and ships False to prod. Parity scan of Ask MattGPT, About Matt, Explore Stories, and Role Match found no ungated user-facing debug surface; the one debug line in Explore Stories is DEBUG-gated and prints to server logs, not the UI. May 18 sighting was a local DEBUG=True session, not a prod leak. No code change.
+- **Priority:** Medium
+- **Type:** Issue
+- **Issue:** Dev-facing debug output is visible in the user-facing UI on the Ask MattGPT page (and possibly other pages). Two specific surfaces observed May 18, 2026 during production query replay:
+  - **Sidebar debug print:** `DEBUG • Loaded 113 stories from echo_star_stories_nlp.jsonl.` rendered at the top of the page above the navbar. Looks like a developer console message in user space.
+  - **Telemetry badge:** `🧪 vector=pinecone, index=matt-portfolio-v2, ns=default, has_last=True` rendered as a status badge near the conversation. Exposes implementation detail (vendor name, index name, namespace) to end users.
+- **Why it matters:** This is a portfolio app targeting Director/VP-level recruiters. Dev-debug surfaces leaking into the user UI undermine the polish credibility the rest of the app projects. The badge in particular tells recruiters how the system is built rather than what it does for them.
+- **Suspected cause:** Debug surfaces gated on the `DEBUG` flag in `config/debug.py`. If `DEBUG=True` is set in the local environment or accidentally in production, these render. Need to confirm: (a) are they gated at all, (b) is `DEBUG` actually True in production, or (c) are they always-on independent of the flag.
+- **Out of scope (separate concerns):**
+  - The "130+ stories indexed" text in the status bar is the hardcoded story count tracked in MATTGPT-019.
+  - The Pinecone debug JSON panel (full retrieval debug with match preview, scores, weights) is a developer dashboard that's been useful during investigation; whether it should ship to production needs its own decision.
+- **Fix shape (open):** Audit all debug surfaces on the Ask MattGPT page (and About Matt, Explore Stories, Role Match for parity). Confirm each is gated on the `DEBUG` flag. Verify `DEBUG=False` in the production Streamlit Cloud environment. If gating is missing, add it.
+- **Effort:** ~30 min audit + small code changes to add `if DEBUG:` guards where missing. Low risk, high recruiter-perceived-polish payoff.
+- **Discovered during:** May 18, 2026 production query replay with Streamlit running locally. Matt's reaction on seeing the debug surfaces: *"we'll need to figure out how to fix the following: [debug output]"*.
+- **Logged:** May 18, 2026
+
+---
+
+### MATTGPT-090
+**System prompt — decline cleanly on comp / off-scope queries (no silent fallback)**
+
+- **Status:** Decided Against (May 29, 2026)
+- **Priority:** Medium
+- **Type:** Action
+- **Decided Against (May 29, 2026):** Production behavior already handles this cleanly. The `personal` intent family in `services/semantic_router.py:192-209` includes salary canonical phrases (*"What's Matt's salary"*, *"How much does Matt make"*) alongside age/identity/etc., and produces the warm-decline pivot (*"🐾 I'm focused on Matt's professional experience"*). Production-verified May 29, 2026 during wireframe review — the silent-fallback failure mode described in the original Issue does not reproduce. The ticket's premise that comp needs a *different* decline copy than age/identity (because comp IS legitimately answered elsewhere) is theoretically defensible but didn't survive the production check — the existing warm pivot is sufficient. **The remaining asymmetry** splits into two tickets: MATTGPT-089 (parse location / work-model / availability as a distinct filter class — explicitly excludes comp) and **MATTGPT-099** (assess and decide Role Match's comp handling on JDs that include comp expectations — different fix path because comp can't be matched against profile data, only declined). The earlier framing that pointed all of the asymmetry at -089 was wrong; -089's body explicitly says *"Skip comp — see MATTGPT-090 for separate handling,"* so a separate ticket was needed once -090 itself was closed.
+- **Issue (original framing — superseded):** When Agy is asked something Matt shouldn't answer publicly (e.g., comp expectation), it currently produces a soft non-answer rather than a clean decline. Recruiter persona example: asked target role + comp + geo, got 4 paragraphs of narrative — comp went **silent**, relocation got a *"the story does not provide specific details… however, his focus on the right org fit suggests he might consider relocation"* (a dressed-up guess). The silent failure mode is worse than an honest decline because the recruiter can't tell whether the data is missing or being withheld.
+- **Audience impact:** Recruiter persona, verbatim: *"For a recruiter this is the single biggest miss. I cannot pitch Matt to a hiring manager without a comp anchor; I'll burn a screening call to get it... The bot's failure mode there is the real finding: it should decline cleanly ('Matt handles comp conversations directly — reach out') instead of going silent and letting the recruiter guess whether the data is missing or being withheld."*
+- **Fix:** System prompt addition (`prompts.py` or wherever Agy's primary system instruction lives) covering:
+  - **Comp:** Decline with a clear redirect to direct conversation. Suggested: *"Matt handles compensation conversations directly. Reach out at [contact link]."*
+  - **Other off-scope but answerable-elsewhere queries:** Decline with redirect (relocation specifics, references, etc.).
+
+  This is distinct from the existing `personal` intent family handling — those are queries that shouldn't be answered at all (age, religion, etc.). The comp/logistics class IS legitimately answered, just not on the site. Different decline copy required.
+- **Effort:** Small. One-line system prompt addition + 1-2 BDD scenarios to validate the decline shape vs the silent fallback.
+- **Cross-references:**
+  - Existing `personal` intent family in semantic router (different fix path, similar shape)
+  - MATTGPT-089 — location/work-model parsing on Role Match side; this is the chatbot side of the same logistical-data gap
+- **Logged:** May 28, 2026
+
+---
+
+### MATTGPT-103
+**Agy intro line — resolve "20+ years of work" inconsistency with stats bar (Years tile dropped)**
+
+- **Status:** Decided Against (May 30, 2026)
+- **Priority:** Low
+- **Type:** Refactor
+- **Decided Against (May 30, 2026):** The "inconsistency" framing was wrong. The stats bar and the Agy intro line are different surfaces doing different jobs. The stats bar is a credentialing surface (recruiter 5-second scan) where the anti-bias play matters most — that's why the Years tile was dropped in MATTGPT-092. The Agy intro line is grounding-the-AI-assistant copy — it tells the user that Agy has a real corpus of career experience to draw from. The "20+ years of work" token there reads as *corpus scope* (how much data the AI has), not as *personal positioning* (how old the candidate is). The anti-bias play that drove the Years tile drop doesn't transfer to a surface doing different work. Closing without a code change; the line stays as-is in `ui/components/hero.py:174`.
+- **Earlier framing (superseded):** Home hero Agy intro line currently reads *"That's Agy, my Plott Hound and AI assistant, ready to track down insights from 20+ years of work."* The *"20+ years"* signal is the same one that was dropped from the stats bar's Years tile (May 29, 2026, MATTGPT-092) for ageism + non-positioning reasons. Leaving the years number in the Agy intro partially undoes that mitigation.
+- **Decision (open — three working options):**
+  1. **Drop the number:** *"That's Agy, my Plott Hound and AI assistant, ready to track down insights from across Matt's career."*
+  2. **Swap to project count + sector breadth:** *"That's Agy, my Plott Hound and AI assistant, ready to track down insights from 100+ projects across financial services and enterprise platforms."* (Also aligns with MATTGPT-019's "100+" standardization.)
+  3. **Leave as-is** — read the line as functional/corpus scope (telling the user how big Agy's data set is) rather than personal positioning. The years here describe the data, not Matt's age.
+- **Fix:** Once decision lands, one-line copy change in `ui/components/hero.py`.
+- **Effort:** Trivial (~5 min once decision lands).
+- **Cross-references:**
+  - MATTGPT-019 — Story count copy. Option (b) would align the Agy intro with the broader find/replace pass.
+  - MATTGPT-092 — Hero seniority signal. -092 established the principle that the Years signal was dropped from positioning surfaces; -103 is the consistency check on the Agy intro line.
+  - MATTGPT-101 — Why Agy modal locked content also references "20+ years" — whatever -103 decides should propagate to the modal copy.
+- **Logged:** May 30, 2026
+
+---
+
+### MATTGPT-133
+**BDD skip — `test_ask_agy_works_from_table_view` — AgGrid row click doesn't reliably expose Ask Agy button in headless Playwright**
+
+- **Status:** Decided Against (June 24, 2026) — scenario deleted in MATTGPT-144 commit (`77dc1cb`). Canvas row-click is undriveable in headless Playwright (st.dataframe Glide Data Grid renders to canvas, not DOM). Redundant with `test_ask_agy_works_from_cards_view` which passes reliably and tests the same user behavior.
+- **Priority:** Low
+- **Type:** Bug
+- **Logged:** June 16, 2026
+
+**Context:** Scenario skips at `pytest.skip("Ask Agy button not found")` in `tests/bdd/steps/test_explore_stories.py` (line 546). The scenario follows: `Given the user is in Table view` → `When the user clicks on a story row`. After the row click, the step looks for `#btn-ask-story` inside the story detail panel, but the element is not reliably found. The AgGrid iframe interaction sequence (frame_locator → `.ag-row` click → detail panel open → Ask Agy button visible) is fragile in headless Playwright. The equivalent Cards-view scenario (`test_ask_agy_works_from_cards_view`) passes reliably.
+
+**Acceptance criterion:** `test_ask_agy_works_from_table_view` passes reliably in isolation and as part of the full BDD suite, with no `pytest.skip` guard.
+
+---
+
+### MATTGPT-134
+**BDD skip — `test_deeplink_respects_view_mode` — deeplink navigation does not preserve pre-set view mode**
+
+- **Status:** Decided Against (June 24, 2026) — scenario deleted in MATTGPT-144 commit (`77dc1cb`). Confirmed non-feature: deeplinks intentionally start a fresh session with no view persistence. The scenario was testing behavior that doesn't exist and shouldn't.
+- **Priority:** Low
+- **Type:** Bug
+- **Logged:** June 16, 2026
+
+**Context:** Scenario skips at `pytest.skip("Cards view content not found")` in `tests/bdd/steps/test_explore_stories.py` (line 1294). The scenario sets Cards view preference (`Given the user preference is Cards view`), then navigates via deeplink (`When the user navigates to "?story=..."`). The `Then the view should be Cards view` step finds zero `.es-fixed-height-card` elements — the deeplink navigation reverts to Table (the default view) instead of preserving the pre-navigation Cards preference.
+
+**Acceptance criterion:** Either (a) deeplink preserves the active view mode and the scenario passes end-to-end, or (b) the behavior is confirmed intentional (deeplinks always start in Table view) and the scenario is updated to match the confirmed behavior.
+
+---
+
+### MATTGPT-138
+**BDD: page teardown invariant + CLS budget guard (MATTGPT-018 regression lock)**
+
+- **Status:** Decided Against
+- **Priority:** Medium
+- **Type:** Action
+- **Logged:** June 19, 2026
+- **Decided Against:** The tab-keyed container this guard was written to protect was reverted June 23, 2026 as a null probe (7807a2a). No fix mechanism exists to guard. If a real blep fix lands, file a new guard ticket at that time.
+
+**Context:** The MATTGPT-018 blep root cause was stale Ask Agy DOM bleeding through onto My Work during navigation — two Agy avatars on screen at once because Streamlit reconciled the new page tree onto the old one instead of tearing it down. Fixed by wrapping each page's render in a tab-keyed `st.container` (`_page_slug` key). The `transition: all` animation sweep was a concurrent contributor, fixed by a `transition-property` constraint in `global_styles.py`. Neither fix has a regression guard. This ticket adds two: (1) a deterministic DOM teardown invariant, and (2) a calibrated CLS budget.
+
+**Teardown invariant (implement first — deterministic, no thresholds):**
+Navigate Ask Agy → My Work, wait for settle, assert `.st-key-intro_section` count is 0 and no Ask Agy DOM remains. Assert reverse direction. Catches "stale page survived the swap" — the regression that would reappear if the keyed container is stripped. Playwright, real Chromium. Two scenarios in `tests/bdd/features/page_teardown.feature`, steps in `tests/bdd/steps/test_page_teardown.py`. See Chrome Claude spec (June 19, 2026 session) for full scenario and step text.
+
+**CLS budget guard (implement second — calibrated, not a placeholder):**
+Cold-load CLS ceiling: 0.25 (observed ~0.24 in DevTools — locks "no worse than today," ratchet down toward 0.10 as CLS is fixed). Transition shift: MEASURE FIRST on post-fix state, then set ceiling just above that reading. Do NOT use the 1.00 placeholder from the spec as a real budget. Install a `PerformanceObserver` for `layout-shift` entries. Two distinct metrics: `read_cls` (filtered, `!hadRecentInput` — matches official CLS) and `read_transition_shift` (all entries including post-click — catches the avatar shift that CLS excludes because it happens within 500ms of a tab click). Helper in `tests/bdd/steps/vitals_helpers.py`, scenarios in `tests/bdd/features/web_vitals.feature`, steps in `tests/bdd/steps/test_web_vitals.py`.
+
+**Honest catches:**
+- Teardown tests inspect the settled DOM only — they cannot see the transient flash. The eye-on-the-transition is still the only confirmation the flash is gone.
+- `TRANSITION_SHIFT_MAX = 1.00` in the spec is a measurement placeholder, not a real budget. Run the test pre-fix and post-fix, read the printed value, then set the ceiling just above the post-fix number.
+- INP is out of scope: currently 0ms, lab INP is noisy, defer until a regression appears.
+
+**Acceptance criteria:**
+- `pytest tests/bdd -k "page_teardown"` — 2/2 passing, deterministic
+- `pytest tests/bdd -k "web_vitals"` — 2/2 passing with `TRANSITION_SHIFT_MAX` set to a measured (not placeholder) value
+
+---
+
+
