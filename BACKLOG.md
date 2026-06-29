@@ -69,7 +69,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-115](#mattgpt-115) | Lock icon — browser console warning: password field not in native form (st.popover portal breaks form containment) | Open | Low | Issue | June 6, 2026 |
 | [MATTGPT-121](#mattgpt-121) | Why Agy dialog — mobile layout fix (375px viewport); one rule remaining: title font-size 24px → 20px, selector confirmed | Open | Low | Bug | June 9, 2026 |
 | [MATTGPT-122](#mattgpt-122) | My Work — Cards view BDD timing: test_view_switching_preserves_open_story_detail fails (components.html iframe listener not attached at click time) | Open | Low | Issue | June 10, 2026 |
-| [MATTGPT-126](#mattgpt-126) | Ask Agy landing — input border invisible on page load (CSS injection race) | Open | Low | Issue | June 12, 2026 |
+| [MATTGPT-126](#mattgpt-126) | Ask Agy landing — input border flash on load; dead-code cleanup in styles.py (wrong file in original ticket) | Open | Low | Issue | June 12, 2026 |
 | [MATTGPT-128](#mattgpt-128) | Displayed-source faithfulness — source cards must substantiate the claims in the answer | Open | High | Issue | June 14, 2026 |
 | [MATTGPT-129](#mattgpt-129) | Content elaboration per era — expand 5 under-documented operational stories | Open | High | Action | June 14, 2026 |
 | [MATTGPT-130](#mattgpt-130) | "practitioners" canonical everywhere — UI, eval golden set, corpus re-embed in lockstep | Open | Medium | Action | June 14, 2026 |
@@ -1080,22 +1080,19 @@ Add this to the existing `@media (max-width: 480px)` block. `[role="dialog"] p:f
 - **Status:** Open
 - **Priority:** Low
 - **Type:** Issue
-- **File:** `ui/styles/global_styles.py`
+- **File:** `ui/pages/ask_mattgpt/styles.py` (not global_styles.py — original ticket had wrong file)
 - **Logged:** June 12, 2026
 
-**Symptom:** The Ask Agy landing page text input (`key="landing_input"`) renders without a visible border on initial page load, then the border appears after a brief flash. Intermittent — sometimes caught before CSS injects, sometimes not.
+**Symptom:** Ask Agy landing input (`key="landing_input"`) intermittently renders without a visible border on initial page load. Plausible Streamlit failure mode — `st.markdown` style injection runs after initial DOM render.
 
-**Root cause:** CSS injection race. Streamlit's emotion CSS sets `border-*-style: none` on all four sides of the input (classes `.st-bh` through `.st-bl`). The override rule in `global_styles.py` (`div[data-testid="stTextInput"] input { border: 2px solid var(--border-color) }`) is injected via `st.markdown`, which runs after initial DOM render. Without `!important`, it loses to the already-applied emotion rules during the render window.
+**Code-reviewed June 2026 (Chrome Claude):**
+- The `div[data-testid="stTextInput"] input` rule is in `ui/pages/ask_mattgpt/styles.py` line 348, not `global_styles.py`. `global_styles.py` has no selector of that form.
+- `!important` is already on the border rule (`styles.py` line 352: `border: 2px solid var(--border-color) !important`). The proposed fix has already shipped.
+- If the flash is still observed, root cause is elsewhere — likely the `div[data-baseweb="input"]` wrapper border rules (`styles.py` lines 373–378) that suppress Streamlit's red-border default, not the `<input>` border rule itself.
 
-**Also noted:** A stale scoped rule targeting `.st-key-landing_input .st-bz, .st-c0, .st-c1, .st-c2 { border-color: transparent !important }` in the codebase is dead code — emotion class hashes have drifted. Safe to remove.
+**Confirmed remaining work:** Dead-code cleanup. `styles.py` lines 388–396 contain stale emotion-hash selectors (`.st-key-landing_input .st-bz, .st-c0, .st-c1, .st-c2`) that set border colors transparent. These `.st-bX` two-character classes are Streamlit emotion hashes that regenerate per build and are no longer matching anything. Safe to delete.
 
-**Fix:** Add `!important` to the existing border rule in `global_styles.py`:
-```css
-div[data-testid="stTextInput"] input {
-  border: 2px solid var(--border-color) !important;
-}
-```
-`!important` is justified here — explicitly overriding Streamlit's own styling system is the stated purpose of the rule. Remove the stale `.st-bz/.st-c0/.st-c1/.st-c2` dead code in the same pass.
+**If flash is still observed:** Fresh investigation starting from `styles.py` — not global_styles.py, and not the `<input>` border rule (already has `!important`). Suspect: `div[data-baseweb="input"]` wrapper border suppression interacting with load order.
 
 ---
 
