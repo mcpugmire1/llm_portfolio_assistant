@@ -1560,11 +1560,11 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Discoverability gap:** The spec is currently buried three hops deep (Agy → How I Built → footer link). Needs a direct, clearly labeled entry point — first-class link from My Profile signals panel (now unblocked) and from How I Built.
 - **Remaining scope:**
   - **Wireframes** — How I Built dialog, Why Agy dialog, Banking/Cross-Industry with back affordances, My Profile layout
-  - **User journeys** — update to reflect 9 current surfaces including secondary surfaces
   - **Discoverability fix** — add direct link to spec from My Profile signals panel (unblocked)
   - **Stale nav labels** — docs 08/09 judgment call
   - **Positioning** — "What This Demonstrates" and intro reflecting reconstruction origin + credibility artifact framing
-- **Effort (remaining):** Medium (~3-4 hours). The credibility-critical drift is closed; what's left is wireframes, user journeys, and positioning copy.
+- **Note:** User journeys already covered in Jekyll; handed off separately.
+- **Effort (remaining):** Medium (~2-3 hours). The credibility-critical drift is closed; what's left is wireframes, positioning copy, and discoverability fix.
 - **Cross-references:**
   - **MATTGPT-101** — Why Agy modal (document in spec)
   - **MATTGPT-102** — How I Built dialog (document in spec)
