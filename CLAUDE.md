@@ -249,8 +249,8 @@ Six values only. Do not invent others.
 
 **Creating a ticket:**
 1. Find the current highest ID: `grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1`. New ID = that number + 1. Never eyeball the matrix to guess.
-2. Add matrix row in ID order.
-3. Add detail block at end of Detail Blocks section.
+2. Add matrix row in ID order in the **Active Matrix** table (never the Decided Against table).
+3. Add detail block in ID order under **Detail Blocks > Active Tickets** (never the Decided Against subsection).
 4. Required fields: Status, Priority, Type, Issue, Logged.
 5. If it belongs in NOW or NEXT, add it to the roadmap immediately.
 
@@ -268,7 +268,9 @@ Six values only. Do not invent others.
 
 **When marking Decided Against:**
 - Add a one-line reason to the detail block. Required - future context depends on it.
-- Leave the matrix row and detail block in place permanently.
+- Move the matrix row from the Active Matrix table to the **Decided Against** table below it.
+- Move the detail block from **Detail Blocks > Active Tickets** to **Detail Blocks > Decided Against**.
+- Both moves happen in the same edit. Never partial.
 
 **When marking Blocked:**
 - Name the blocking ticket in `Dependencies:` in the detail block.
