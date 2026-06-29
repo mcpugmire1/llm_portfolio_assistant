@@ -384,7 +384,11 @@ def get_landing_css() -> str:
             border-color: transparent !important;
         }
 
-        /* Kill Streamlit's atomic border classes */
+        /* Guards against Streamlit emotion classes setting a pink/red inner border
+           on the landing input. Hashes (.st-bz etc.) drift between builds and may
+           not currently match any live DOM classes, but the cost if they return is
+           high: this required multi-iteration remediation historically. Keep as
+           insurance; unmatched selectors are a no-op. */
         .st-key-landing_input .st-bz,
         .st-key-landing_input .st-c0,
         .st-key-landing_input .st-c1,
