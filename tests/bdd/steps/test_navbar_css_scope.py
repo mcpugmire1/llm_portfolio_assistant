@@ -35,32 +35,27 @@ def navigate_to_ask_agy(browser_page, app_url):
         "[class*='st-key-landing_input']", timeout=LONG_TIMEOUT
     )
     browser_page.wait_for_selector(
-        "[class*='st-key-suggested_0']", timeout=LONG_TIMEOUT
+        "[class*='st-key-suggested_0']", timeout=LONG_TIMEOUT, state="attached"
     )
 
 
 @then("the left chip column row-gap should equal the right chip column row-gap")
 def assert_chip_columns_equal_gap(browser_page):
+    # Chip grid is a CSS grid (.suggested-chips-grid); both visual columns share one
+    # rowGap property. Check it from both sides by reading the same element twice —
+    # equal-gap assertion holds trivially but catching a 0 value is the regression guard.
     left_gap = browser_page.evaluate("""() => {
-        const chip = document.querySelector('[class*="st-key-suggested_0"]');
-        if (!chip) return null;
-        const col = chip.closest('[data-testid="stColumn"]');
-        if (!col) return null;
-        const vblock = col.querySelector('[data-testid="stVerticalBlock"]');
-        if (!vblock) return null;
-        return parseFloat(window.getComputedStyle(vblock).rowGap) || 0;
+        const grid = document.querySelector('.suggested-chips-grid');
+        if (!grid) return null;
+        return parseFloat(window.getComputedStyle(grid).rowGap) || 0;
     }""")
     right_gap = browser_page.evaluate("""() => {
-        const chip = document.querySelector('[class*="st-key-suggested_1"]');
-        if (!chip) return null;
-        const col = chip.closest('[data-testid="stColumn"]');
-        if (!col) return null;
-        const vblock = col.querySelector('[data-testid="stVerticalBlock"]');
-        if (!vblock) return null;
-        return parseFloat(window.getComputedStyle(vblock).rowGap) || 0;
+        const grid = document.querySelector('.suggested-chips-grid');
+        if (!grid) return null;
+        return parseFloat(window.getComputedStyle(grid).rowGap) || 0;
     }""")
-    assert left_gap is not None, "Could not find left chip column stVerticalBlock"
-    assert right_gap is not None, "Could not find right chip column stVerticalBlock"
+    assert left_gap is not None, "Could not find .suggested-chips-grid"
+    assert right_gap is not None, "Could not find .suggested-chips-grid"
     assert left_gap == right_gap, (
         f"Chip grid columns have unequal row-gap: left={left_gap}px, right={right_gap}px. "
         "Likely a broad CSS gap-zeroing rule without :has([class*='st-key-topnav_']) guard."
@@ -70,18 +65,14 @@ def assert_chip_columns_equal_gap(browser_page):
 @then("the left chip column row-gap should be greater than 0px")
 def assert_left_chip_gap_nonzero(browser_page):
     left_gap = browser_page.evaluate("""() => {
-        const chip = document.querySelector('[class*="st-key-suggested_0"]');
-        if (!chip) return null;
-        const col = chip.closest('[data-testid="stColumn"]');
-        if (!col) return null;
-        const vblock = col.querySelector('[data-testid="stVerticalBlock"]');
-        if (!vblock) return null;
-        return parseFloat(window.getComputedStyle(vblock).rowGap) || 0;
+        const grid = document.querySelector('.suggested-chips-grid');
+        if (!grid) return null;
+        return parseFloat(window.getComputedStyle(grid).rowGap) || 0;
     }""")
-    assert left_gap is not None, "Could not find left chip column stVerticalBlock"
+    assert left_gap is not None, "Could not find .suggested-chips-grid"
     assert left_gap > 0, (
-        f"Left chip column row-gap is {left_gap}px — chip grid spacing collapsed. "
-        "A CSS rule is zeroing gap on the left column's stVerticalBlock."
+        f"Chip grid row-gap is {left_gap}px — chip grid spacing collapsed. "
+        "A CSS rule is zeroing gap on .suggested-chips-grid."
     )
 
 

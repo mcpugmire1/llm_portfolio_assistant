@@ -64,12 +64,13 @@ def get_header_css() -> str:
 
     /* Landing page header */
     .ask-header-landing {
-        /* HEADER POSITION — DO NOT TOUCH WITHOUT READING THIS:
-        margin-top is calibrated to the MattGPT custom navbar height (72px, bottom=112px).
-        Value: -32px pulls the header up so it tucks under the navbar, matching the
-        conversation-header pages (My Work, Role Match, Banking, Cross-Industry) which
-        all use -32px. Changing this breaks visual symmetry across all 7 pages.
-        Audit baseline: avatar.topFromNavBottom=16px on all pages. June 2026. */
+        /*HEADER POSITION — DO NOT TOUCH WITHOUT READING THIS:
+        margin-top: -32px — re-audited June 2026. Earlier -48px assumed conversation's
+        container sat 16px lower in the DOM than landing; that gap no longer exists.
+        Measured: at -48px avatar topFromNavBottom=0px (flush to navbar, 16px too high);
+        landing=16px. -32px lands conversation at 16px, matching landing (navbar bottom 112,
+        avatar top 128 both views). Status bar stays flush. If you touch this, re-measure
+        avatar.topFromNavBottom and hold it at 16px. */
 
         margin-top: -32px !important;
         /* padding-top: 32px matches the conversation-header baseline — do not reduce
@@ -81,11 +82,15 @@ def get_header_css() -> str:
 
     /* Conversation view header */
     .ask-header-conversation {
-        /* margin-top: -48px (not -32px like landing) — conversation view's stElementContainer
-        sits 16px lower in the DOM than landing due to extra stVerticalBlock gap.
-        Status bar overlap was a separate issue, fixed by zeroing status bar negative margins.
-        Do not unify with landing value. Audit confirmed June 2026. */
-        margin-top: -48px !important;
+        /*HEADER POSITION — DO NOT TOUCH WITHOUT READING THIS:
+        margin-top: -32px — re-audited June 2026. Earlier -48px assumed conversation's
+        container sat 16px lower in the DOM than landing; that gap no longer exists.
+        Measured: at -48px avatar topFromNavBottom=0px (flush to navbar, 16px too high);
+        landing=16px. -32px lands conversation at 16px, matching landing (navbar bottom 112,
+        avatar top 128 both views). Status bar stays flush. If you touch this, re-measure
+        avatar.topFromNavBottom and hold it at 16px. */
+
+        margin-top: -32px !important;
         padding-top: 32px !important;
         min-height: 184px !important;
         margin-bottom: 0 !important;

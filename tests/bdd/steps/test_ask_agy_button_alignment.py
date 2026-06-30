@@ -2,23 +2,20 @@
 
 Landing page: landing_ask button sits in a column adjacent to the text input.
 Streamlit's stBaseButton-primary applies margin-top: 10px by default, pushing
-the button down. Custom CSS also sets min-height: 48px vs the input's 44px.
+the button down.
 
-Conversation page: stChatInputSubmitButton sits inside Streamlit's stChatInput
-widget. Streamlit applies transform: translateY(0.5px) as a baseline nudge.
-Height target is 48px to match the textarea.
+Conversation page: stChatInputSubmitButton sits inside an absolutely-positioned
+40px-tall wrapper inside Streamlit's stChatInput widget. Streamlit applies
+transform: translateY(0.5px) as a baseline nudge.
 
-Focus ring: both buttons inherit Streamlit's red :focus-visible box-shadow via
-transition: all, which animates the ring in on focus. Fix replaces transition: all
-with explicit properties and adds a purple :focus-visible override.
-
-Focus steps use page.keyboard.press("Tab") from an adjacent element rather than
-.focus() — :focus-visible only fires for keyboard-initiated focus, not
-programmatic focus(). SHORT_WAIT after Tab gives the transition time to settle.
+Focus ring coverage is in tests/unit/test_ask_agy_button_css.py:
+- Landing button: Tab triggers on_change navigation before :focus-visible is readable.
+- Conversation submit button: Streamlit intercepts Tab in the textarea; focus
+  drops to BODY instead of moving to the submit button.
 """
 
 from playwright.sync_api import expect as pw_expect
-from pytest_bdd import given, scenarios, then, when
+from pytest_bdd import given, scenarios, then
 
 scenarios("../features/ask_agy_button_alignment.feature")
 
@@ -28,8 +25,6 @@ LANDING_BUTTON_SELECTOR = ".st-key-landing_ask button"
 LANDING_INPUT_SELECTOR = "[class*='st-key-landing_input'] input"
 CHAT_SUBMIT_SELECTOR = "button[data-testid='stChatInputSubmitButton']"
 CHAT_TEXTAREA_SELECTOR = "textarea[data-testid='stChatInputTextArea']"
-PURPLE_RGB = "139, 92, 246"
-RED_RGB = "255, 75, 75"
 
 
 def _wait_for_streamlit(page, timeout=15000):
@@ -76,19 +71,6 @@ def navigate_to_ask_agy_conversation(browser_page, app_url):
 
 
 # =============================================================================
-# WHEN
-# =============================================================================
-
-
-@when("the conversation submit button receives keyboard focus")
-def focus_conversation_submit(browser_page):
-    # Tab from the textarea to guarantee :focus-visible fires (not programmatic focus)
-    browser_page.locator(CHAT_TEXTAREA_SELECTOR).focus()
-    browser_page.keyboard.press("Tab")
-    browser_page.wait_for_timeout(SHORT_WAIT)
-
-
-# =============================================================================
 # THEN — landing button
 # =============================================================================
 
@@ -120,43 +102,17 @@ def verify_landing_button_min_height(browser_page):
 # =============================================================================
 
 
-@then("the conversation submit button computed min-height is 48px")
+@then("the conversation submit button computed min-height is auto")
 def verify_chat_submit_min_height(browser_page):
+    # The button sits in a position:absolute 40px-tall wrapper; any min-height
+    # greater than 40px causes upward overflow. Leave Streamlit's layout in control.
     min_height = browser_page.evaluate(
         f"""() => {{
             const btn = document.querySelector("{CHAT_SUBMIT_SELECTOR}");
             return window.getComputedStyle(btn).minHeight;
         }}"""
     )
-    assert min_height == "48px", f"Expected min-height 48px, got {min_height!r}"
-
-
-@then("the conversation submit button box-shadow contains the purple focus color")
-def verify_chat_submit_purple_shadow(browser_page):
-    shadow = browser_page.evaluate(
-        f"""() => {{
-            const btn = document.querySelector("{CHAT_SUBMIT_SELECTOR}");
-            return window.getComputedStyle(btn).boxShadow;
-        }}"""
-    )
-    assert (
-        PURPLE_RGB in shadow
-    ), f"Expected purple ({PURPLE_RGB}) in box-shadow, got {shadow!r}"
-
-
-@then(
-    "the conversation submit button box-shadow does not contain the red Streamlit color"
-)
-def verify_chat_submit_no_red_shadow(browser_page):
-    shadow = browser_page.evaluate(
-        f"""() => {{
-            const btn = document.querySelector("{CHAT_SUBMIT_SELECTOR}");
-            return window.getComputedStyle(btn).boxShadow;
-        }}"""
-    )
-    assert (
-        RED_RGB not in shadow
-    ), f"Expected no red ({RED_RGB}) in box-shadow, got {shadow!r}"
+    assert min_height == "auto", f"Expected min-height auto, got {min_height!r}"
 
 
 @then("the conversation submit button transform Y translation is zero")

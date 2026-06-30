@@ -86,6 +86,7 @@ Coverage status (April 2026):
 """
 
 import pytest
+from playwright.sync_api import expect as pw_expect
 from pytest_bdd import given, parsers, scenario, then, when
 
 # =============================================================================
@@ -106,9 +107,20 @@ def wait_for_content(page, selector, timeout=10000):
         return False
 
 
-def wait_for_streamlit_rerun(page):
-    """Wait for Streamlit to complete a rerun after an action."""
-    page.wait_for_load_state("networkidle")
+def wait_for_streamlit_rerun(page, timeout=15000):
+    """Wait for Streamlit script to finish via data-test-script-state attribute.
+    Avoids networkidle which times out because Streamlit's WebSocket never idles.
+    """
+    stapp = page.locator('[data-testid="stApp"]')
+    try:
+        pw_expect(stapp).to_have_attribute(
+            "data-test-script-state", "running", timeout=2000
+        )
+    except Exception:
+        pass
+    pw_expect(stapp).to_have_attribute(
+        "data-test-script-state", "notRunning", timeout=timeout
+    )
     page.wait_for_timeout(SHORT_WAIT)
 
 

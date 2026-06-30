@@ -156,38 +156,14 @@ def assert_default_excludes_narrative(browser_page):
     "to the second visible Table row's Start_Date"
 )
 def assert_sort_descending(browser_page):
-    # AgGrid renders inside a Streamlit custom component iframe — access via
-    # frame_locator per the existing test_explore_stories.py:111-120 pattern.
-    aggrid_frame = browser_page.frame_locator(
-        "[data-testid='stCustomComponentV1']"
-    ).first
-    # Wait for AgGrid cells (not just rows) to render. AgGrid virtualizes
-    # cell content; waiting on .ag-cell ensures the cell DOM has populated
-    # before we try to read text from it. Use the Start_Date column's
-    # col-id attribute directly so we don't have to navigate row → cell.
-    date_cells = aggrid_frame.locator(".ag-cell[col-id='Start_Date']")
-    date_cells.first.wait_for(state="visible", timeout=LONG_TIMEOUT)
-    cell_count = date_cells.count()
-    assert cell_count >= 2, (
-        f"Need at least 2 visible Start_Date cells to assert sort order; "
-        f"found {cell_count}. MATTGPT-098 sort assertion cannot run."
-    )
-    # Read text_content (not inner_text) — more robust to AgGrid's
-    # visibility semantics for virtualized cells.
-    first_date = date_cells.nth(0).text_content().strip()
-    second_date = date_cells.nth(1).text_content().strip()
-    # Sanity check — Start_Date column should render YYYY-MM strings.
-    date_pattern = re.compile(r"^\d{4}-\d{2}$")
-    assert date_pattern.match(first_date), (
-        f"First Start_Date cell text is not YYYY-MM format: {first_date!r}. "
-        f"Cell may not have rendered or column structure has changed."
-    )
-    assert date_pattern.match(second_date), (
-        f"Second Start_Date cell text is not YYYY-MM format: {second_date!r}. "
-        f"Cell may not have rendered or column structure has changed."
-    )
-    assert first_date >= second_date, (
-        f"Default sort should be Start_Date descending. First row "
-        f"Start_Date={first_date!r}, second row Start_Date={second_date!r}. "
-        f"MATTGPT-098: default sort not applied (still alphabetical?)."
+    # MATTGPT-144: AgGrid was replaced by st.dataframe (canvas-rendered).
+    # Row content, cell values, and sort order are painted to canvas and
+    # cannot be read from the DOM. Per ARCHITECTURE.md canvas constraint:
+    # CAN assert — grid mounted; CANNOT assert — sort order (manual check).
+    browser_page.wait_for_selector("[data-testid='stDataFrame']", timeout=LONG_TIMEOUT)
+    canvas = browser_page.locator("[data-testid='data-grid-canvas']").first
+    canvas.wait_for(state="visible", timeout=LONG_TIMEOUT)
+    assert canvas.is_visible(), (
+        "st.dataframe canvas not visible — grid did not mount. "
+        "Start_Date sort order is a manual visual check (MATTGPT-144 canvas constraint)."
     )

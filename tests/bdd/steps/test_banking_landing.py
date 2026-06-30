@@ -212,8 +212,9 @@ def assert_result_count_above(browser_page, floor):
     count_el = browser_page.locator(".es-results-count").first
     count_el.wait_for(state="visible", timeout=10000)
     text = count_el.inner_text()
-    # Pattern: "Showing 1–N of TOTAL projects" — extract TOTAL.
-    match = re.search(r"of\s+(\d+)\s+project", text)
+    # Pattern: "Showing 1–N of TOTAL stories" — extract TOTAL.
+    # MATTGPT-144: count markup changed from "projects" to "stories" with &nbsp; separators.
+    match = re.search(r"of\s+(\d+)\s+stor", text)
     assert match, f"Could not parse total count from results-count text: {text!r}"
     actual = int(match.group(1))
     assert actual > floor, (

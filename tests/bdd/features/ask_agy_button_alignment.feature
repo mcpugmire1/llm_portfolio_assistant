@@ -1,8 +1,12 @@
 Feature: Ask Agy button alignment and focus ring
 
-  # Landing button focus ring is covered by test_ask_agy_button_css.py (unit test):
-  # the on_change callback navigates away on any text commit, making :focus-visible
-  # untestable in E2E without racing the navigation. CSS unit assertion is deterministic.
+  # Focus ring :focus-visible coverage is in test_ask_agy_button_css.py (unit test)
+  # for both buttons:
+  # - Landing button: on_change navigates away on any text commit; Tab triggers
+  #   navigation before focus-visible state can be read.
+  # - Conversation submit button: Streamlit intercepts Tab in the chat textarea;
+  #   document.activeElement drops to BODY instead of moving to the button.
+  # CSS unit assertions are deterministic and cover what E2E cannot.
 
   Scenario: Landing Ask button has zero top margin on desktop
     Given the user navigates to the Ask Agy landing page
@@ -12,15 +16,9 @@ Feature: Ask Agy button alignment and focus ring
     Given the user navigates to the Ask Agy landing page
     Then the landing Ask button computed min-height is 44px
 
-  Scenario: Conversation submit button min-height matches the textarea height
+  Scenario: Conversation submit button min-height does not override the container
     Given the user navigates to the Ask Agy conversation page
-    Then the conversation submit button computed min-height is 48px
-
-  Scenario: Conversation submit button focus ring is purple not red
-    Given the user navigates to the Ask Agy conversation page
-    When the conversation submit button receives keyboard focus
-    Then the conversation submit button box-shadow contains the purple focus color
-    And the conversation submit button box-shadow does not contain the red Streamlit color
+    Then the conversation submit button computed min-height is auto
 
   Scenario: Conversation submit button has no vertical translation
     Given the user navigates to the Ask Agy conversation page

@@ -409,21 +409,32 @@ def get_landing_css() -> str:
             border: none !important;
             color: white !important;
             font-weight: 600 !important;
-            padding: 12px 32px !important;
+            padding: 10px 32px !important;
             border-radius: 12px !important;
             font-size: 16px !important;
-            transition: all 0.2s ease !important;
+            transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease !important;
             cursor: pointer !important;
             height: auto !important;
-            min-height: 48px !important;
+            min-height: 44px !important;
             white-space: nowrap !important;
             min-width: fit-content !important;
+            margin-top: 0 !important;
         }
 
-        button[key="landing_ask"]:hover:not(:disabled),
-        .st-key-landing_ask button:hover:not(:disabled) {
-            background: #7C3AED !important;
+        .stMain .st-key-landing_ask button:hover {
+            background: var(--accent-purple-hover) !important;
+            background-color: var(--accent-purple-hover) !important;
             color: white !important;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        .st-key-landing_ask button:focus {
+            outline: none !important;
+        }
+
+        .st-key-landing_ask button:focus-visible {
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.5) !important;
             transform: scale(1.02) !important;
         }
 
@@ -1233,11 +1244,20 @@ def get_conversation_css() -> str:
             font-size: 15px !important;
             font-weight: 600 !important;
             cursor: pointer !important;
-            transition: all 0.2s ease !important;
+            transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease !important;
             min-width: auto !important;
             width: auto !important;
             height: auto !important;
             min-height: auto !important;
+            transform: none !important;
+        }
+
+        button[data-testid="stChatInputSubmitButton"]:focus {
+            outline: none !important;
+        }
+
+        button[data-testid="stChatInputSubmitButton"]:focus-visible {
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.5) !important;
         }
 
         /* Hide SVG with maximum specificity */
@@ -1259,14 +1279,25 @@ def get_conversation_css() -> str:
             font-weight: 600 !important;
         }
 
-        /* Hover state with maximum specificity */
-        button[data-testid="stChatInputSubmitButton"]:hover,
-        button[data-testid="stChatInputSubmitButton"].st-emotion-cache-1vabq37:hover {
-            background: #7C3AED !important;
-            background-color: #7C3AED !important;
-            transform: translateY(-1px) !important;
-            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3) !important;
+        /* Hover state — stable data-testid selector only; no emotion cache class */
+        button[data-testid="stChatInputSubmitButton"]:hover {
+            background: var(--accent-purple-hover) !important;
+            background-color: var(--accent-purple-hover) !important;
+            color: white !important;
+            transform: none !important;
+            box-shadow: none !important;
         }
+
+        /* Center the submit button on the 48px textarea. Streamlit absolutely
+           positions the button wrapper and centers it on its own 40px button row,
+           whose center sits 1.5px above the forced-48px textarea center. This nudges
+           the wrapper down to coincide. Verified in-browser: delta 0, symmetric 2.5px
+           gaps. Tied to the textarea's 48px min/max-height. */
+        .st-key-ask_chat_input1 [data-testid="stChatInput"] div:has(> button[data-testid="stChatInputSubmitButton"]) {
+            align-items: center !important;
+            transform: translateY(1.5px) !important;
+        }
+
         /* Target BaseWeb wrappers specifically */
         [data-baseweb="textarea"],
         [data-baseweb="base-input"] {
@@ -1405,7 +1436,7 @@ def get_conversation_css() -> str:
 
         /* Button vertical alignment */
         button[data-testid="stChatInputSubmitButton"] {
-            transform: translateY(.5px) !important;
+            transform: none !important;
         }
 
         /* ============================================================================
