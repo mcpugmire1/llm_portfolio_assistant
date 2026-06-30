@@ -19,6 +19,7 @@ Read these before every session. Each one has caused a real incident.
 - **DevTools before any CSS proposal.** For any layout, alignment, positioning, sizing, color, or typography issue: ask Matt to paste computed styles from DevTools before proposing a fix. Source-code reasoning misses Streamlit's wrapper-layer surprises. (May 2026)
 - **Unexpected test failures are your problem until proven otherwise.** When tests fail on code you touched, investigate before labeling anything pre-existing. Run the failures in isolation, read the output, and either fix them or produce evidence they existed before your change. "I didn't touch that code" is not evidence. Presenting options and waiting is not investigating.
 - **Working notes do not replace BACKLOG tickets.** Any bug, regression, or unvalidated behavior written to a working note must also produce a BACKLOG entry before the session proceeds. A finding that only exists in `docs/working/` or a notes file has no owner and will not be acted on. "I noted it" is not the same as "it is tracked."
+- **A structural refactor invalidates values and selectors anchored to the old structure.** Navbar height, container classes, DOM nesting: when these change, re-audit what's calibrated to them. (June 2026: navbar refactor orphaned the `-48px` header calibration; `.main` → `.stMain` killed every `.main` rule. Both surfaced in production, not at change time.)
 
 ---
 
@@ -192,6 +193,7 @@ One "go" from Matt ships the full cycle without re-asking between gates. Re-ask 
       raise
   ```
 - **Eval failure discipline:** Any eval failure must be validated against production before being labeled "pre-existing" or "stochastic." If a "known issue" isn't in BACKLOG, it's an unvalidated note.
+- **A test run is not complete until every failure has an isolation run and a traceback attached.** No failure may be labeled pre-existing without a git bisect or a prior passing-run artifact proving it predates the current change. "Not touched by my change" is not evidence; file proximity to the diff is not evidence either way until checked. Acknowledging this rule and then waiting is not the same as following it. (June 2026: BDD failures repeatedly classified as pre-existing without isolation runs, after the rule had already been read and stated back.)
 
 ### Canvas-Rendered Grids (st.dataframe) - BDD Constraints
 
