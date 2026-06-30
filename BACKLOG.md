@@ -81,6 +81,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-143](#mattgpt-143) | BDD app_url fixture hardcodes port 8501 with no env-var override | Parked | Low | Bug | June 23, 2026 |
 | [MATTGPT-145](#mattgpt-145) | Mobile filter breakpoints overlap — r2-label show/hide depends on !important cascade order, not design | Open | Low | Refactor | Jun 24, 2026 |
 | [MATTGPT-146](#mattgpt-146) | Professional Narrative stories leak into My Work via filter and search paths — must be excluded from all My Work paths | Open | Medium | Bug | Jun 25, 2026 |
+| [MATTGPT-147](#mattgpt-147) | Stale `@pytest.mark.skip` on `test_mobile_desktop_only_message` — decorator predates step def | Open | Low | Bug | July 1, 2026 |
 
 ---
 
@@ -2004,4 +2005,26 @@ Cold-load CLS ceiling: 0.25 (observed ~0.24 in DevTools — locks "no worse than
 
 ---
 
+
+### MATTGPT-147
+**Stale `@pytest.mark.skip` on `test_mobile_desktop_only_message` — decorator predates step def**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Bug
+- **File:** `tests/bdd/steps/test_role_match.py`
+- **Logged:** July 1, 2026
+
+**Issue:** `test_mobile_desktop_only_message` is skipped by a stale decorator at lines 170–175. The skip reason says "Needs hamburger interaction" — but that interaction was implemented at lines 403–416 (`given_viewport_at_explicit_width`). The decorator was written before the step def existed and was never removed.
+
+**Action:** Remove the `@pytest.mark.skip` decorator at lines 170–175. Run in isolation:
+```
+pytest tests/bdd/steps/test_role_match.py::test_mobile_desktop_only_message -v
+```
+If it passes, commit. If it fails, the step def has a bug — diagnose before committing.
+
+**Acceptance criteria:**
+- `test_mobile_desktop_only_message` passes in isolation and in the full suite with no skip decorator.
+
+---
 
