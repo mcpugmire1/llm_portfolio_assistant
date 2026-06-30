@@ -84,6 +84,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-147](#mattgpt-147) | Stale `@pytest.mark.skip` on `test_mobile_desktop_only_message` — decorator predates step def | Open | Low | Bug | July 1, 2026 |
 | [MATTGPT-148](#mattgpt-148) | `.main` selector sweep — 36 dead selectors in `global_styles.py` need swapping to `.stMain` | Open | Low | Refactor | July 1, 2026 |
 | [MATTGPT-149](#mattgpt-149) | Rejection bubble dark mode — `[class*='_rejection_bubble']` uses `var(--banner-info-bg)` with no dark mode override | Open | Low | Bug | July 1, 2026 |
+| [MATTGPT-150](#mattgpt-150) | MATTGPT-144 test fallout — decouple BDD assertions from display copy and stranded AgGrid selectors | Open | Medium | Refactor / Test | July 1, 2026 |
 
 ---
 
@@ -2069,6 +2070,42 @@ If it passes, commit. If it fails, the step def has a bug — diagnose before co
 **Acceptance criteria:**
 - Rejection bubble background is visually appropriate in both light and dark mode.
 - No other surfaces that use `var(--banner-info-bg)` are unintentionally affected.
+
+---
+
+### MATTGPT-150
+**MATTGPT-144 test fallout — decouple BDD assertions from display copy and stranded AgGrid selectors**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Refactor / Test
+- **Logged:** July 1, 2026
+- **Dependencies:** None. MATTGPT-144 Done.
+
+**Issue:** The AgGrid → st.dataframe migration left three coupling problems in the BDD suite caught reactively during a full-suite run. Production functionality is confirmed working. This ticket addresses the test debt.
+
+**Finding 1: Count noun is not a shared constant.**
+`explore_stories.py:1219` renders the noun `stories` as an inline literal inside the `.es-results-count` HTML string. Three tests (`test_banking_landing.py`, `test_cross_industry_landing.py`, `test_home.py`) match against it with the regex prefix `of\s+(\d+)\s+stor`. A copy change in that one line breaks all three tests silently. Additionally, `test_home.py:146` has a stale docstring still reading "projects" from before the migration.
+
+Action: extract the noun to a named constant in `explore_stories.py`, import and reference it in the three test files. Fix the stale docstring in `test_home.py:146`.
+
+**Finding 2: Sort-order assertion is now a canvas-mount check only.**
+`test_explore_stories_default_state.py::assert_sort_descending` (lines 158–169) was rewritten to wait for `[data-testid="stDataFrame"]` and `[data-testid="data-grid-canvas"]`. It no longer verifies sort order — that is a manual visual check per the ARCHITECTURE.md canvas constraint. Production sort confirmed working visually.
+
+Action: add a data-layer assertion in `test_explore_stories_default_state.py` that verifies `Start_Date` values in `view_paginated` are descending before the dataframe receives them. The corpus is already loaded in that file. This covers the behavior without touching the canvas.
+
+**Finding 3: Stranded `.ag-root-wrapper` / `.ag-row` waits in a silent `try/except`.**
+`test_explore_stories_default_state.py:123–124` still waits for `.ag-root-wrapper` and `.ag-row` inside a `try/except` that swallows the timeout. These selectors will never match now that `st.dataframe` replaced AgGrid. They produce a ~30s silent wait on every run of that test.
+
+Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consistent with the rest of the file. Remove the `try/except` — the dataframe mount is the correct gate and should fail loudly if it times out.
+
+**Sweep:** `grep tests/bdd/steps/ -r` for `.ag-`, `stCustomComponentV1`, and `frame_locator` to confirm no other stranded AgGrid selectors remain across the full suite.
+
+**Acceptance criteria:**
+- Count noun extracted to a constant; three test files reference it; stale docstring in `test_home.py:146` corrected.
+- `assert_sort_descending` asserts actual sort order at the data layer, not just canvas mount.
+- `.ag-root-wrapper` / `.ag-row` waits replaced with `stDataFrame` selector; `try/except` removed.
+- Full BDD suite passes with 0 failed, skip count unchanged.
 
 ---
 
