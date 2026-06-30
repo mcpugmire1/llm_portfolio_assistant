@@ -41,7 +41,6 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-022](#mattgpt-022) | Data Quality Cleanup Journey Story | Open | Medium | Action | Mar 2026 |
 | [MATTGPT-039](#mattgpt-039) | Automated Regression Detection (GitHub Actions) | Open | Medium | Action | Apr 29, 2026 |
 | [MATTGPT-040](#mattgpt-040) | Eval Coverage Gaps — Follow-up Queries | Open | Low | Action | Apr 29, 2026 |
-| [MATTGPT-033](#mattgpt-033) | Ask Agy Button — vertical misalignment with input + red focus ring shift; fix CSS confirmed | Open | Low | Bug | Pre-2026 |
 | [MATTGPT-035](#mattgpt-035) | Eval Modernization — Semantic Scoring | Open | Low | Spike | Pre-2026 |
 | [MATTGPT-045](#mattgpt-045) | Analytics Dashboard | Open | Low | Action | Apr 29, 2026 |
 | [MATTGPT-060](#mattgpt-060) | BDD coverage gap — assert post-navigation page state, not just navigation | Open | Medium | Action | May 12, 2026 |
@@ -282,52 +281,6 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Fix:** Write as STAR story for portfolio. Covers pattern recognition, data quality discipline, measurable impact on retrieval accuracy.
 - **Cross-reference (May 14, 2026 rationalization):** Assess this jointly with MATTGPT-061 (MattGPT portfolio stories over-ranking on organizational leadership queries). Adding this story would be a fifth MattGPT-meta story in the corpus and could worsen the 061 retrieval-overweighting problem. Decide both tickets together — either ship 022 with a 061-aware scope/tagging strategy, or defer 022 until 061's retrieval-quality issue is addressed.
 - **Logged:** March 2026
-
----
-
-### MATTGPT-033
-**Ask Agy Button — Vertical Misalignment with Input + Focus Shift**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Bug
-- **File:** `ui/pages/ask_mattgpt/styles.py`
-- **Logged:** Pre-2026
-
-**Issue:** The Ask Agy button (landing page and conversation page) has two related visual defects: it sits slightly below and taller than the adjacent text input, and it shifts on focus due to an inherited Streamlit focus ring.
-
-**Misalignment — root cause (Chrome Claude, June 2026):**
-Streamlit's `stBaseButton-primary` applies `margin-top: 10px` by default, pushing the button 10px down inside its column. The `stHorizontalBlock` row uses `align-items: center`, sizing to the tallest child (60px = 50px button + 10px margin) and centering the input — but the button is offset 10px from the top of its own column, not truly centered. Result: button top sits ~2px below input top, button bottom sits ~7px below input bottom. Secondary mismatch: custom CSS sets `min-height: 48px` and `padding: 12px 32px`, making the button 6px taller than the 44px input before the margin is considered.
-
-**Partial fix already shipped:** `margin-top: 0 !important` added for mobile in MATTGPT-139 (`styles.py` line 640). Desktop misalignment still open.
-
-**Focus shift — root cause:**
-Streamlit's base class rule (`.st-emotion-cache-1cl4umz:focus-visible`) injects a red `box-shadow` ring (`rgba(255,75,75,0.5)`) not suppressed by the custom `.st-key-landing_ask` rules. Combined with `transition: all 0.2s ease`, the ring animates in on focus, producing a visible paint-layer shift.
-
-**Fix:**
-```css
-.st-key-landing_ask button {
-    margin-top: 0px;
-    min-height: 44px;
-    padding: 10px 32px;
-    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.st-key-landing_ask button:focus { outline: none; }
-
-.st-key-landing_ask button:focus-visible {
-    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.5);
-    transform: scale(1.02);
-}
-```
-
-Apply the same fix to the equivalent button key on the conversation page — root cause is identical.
-
-**Acceptance criteria:**
-- Button top and bottom edges align with the text input at all viewport widths.
-- No visible position shift on keyboard focus.
-- Focus ring is purple-matched (`rgba(139, 92, 246, 0.5)`), not Streamlit's default red.
-- Hover `transform: scale(1.02)` unchanged.
 
 ---
 
@@ -2088,6 +2041,8 @@ If it passes, commit. If it fails, the step def has a bug — diagnose before co
 `explore_stories.py:1219` renders the noun `stories` as an inline literal inside the `.es-results-count` HTML string. Three tests (`test_banking_landing.py`, `test_cross_industry_landing.py`, `test_home.py`) match against it with the regex prefix `of\s+(\d+)\s+stor`. A copy change in that one line breaks all three tests silently. Additionally, `test_home.py:146` has a stale docstring still reading "projects" from before the migration.
 
 Action: extract the noun to a named constant in `explore_stories.py`, import and reference it in the three test files. Fix the stale docstring in `test_home.py:146`.
+
+**Partial progress (commit `1be5953`):** Regex fixed in all three test files (`of\s+(\d+)\s+project` → `of\s+(\d+)\s+stor`). Constant extraction and `test_home.py:146` docstring fix still open.
 
 **Finding 2: Sort-order assertion is now a canvas-mount check only.**
 `test_explore_stories_default_state.py::assert_sort_descending` (lines 158–169) was rewritten to wait for `[data-testid="stDataFrame"]` and `[data-testid="data-grid-canvas"]`. It no longer verifies sort order — that is a manual visual check per the ARCHITECTURE.md canvas constraint. Production sort confirmed working visually.

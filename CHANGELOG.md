@@ -4,6 +4,13 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ---
 
+## July 2026
+
+### Ask Agy
+
+**July 1, 2026 — Ask Agy button alignment + focus ring fix (MATTGPT-033)** — `1be5953`
+Fixed two related visual defects on the Ask Agy landing and conversation pages. Alignment: `styles.py` landing Ask button set to `margin-top: 0; min-height: 44px`; conversation submit button `min-height: auto`, `translateY` override removed; `ask_mattgpt_header.py` `.ask-header-conversation` `margin-top` adjusted `-48px → -32px`. Focus ring: replaced Streamlit's inherited red `box-shadow` ring with a purple-matched `rgba(139, 92, 246, 0.5)` ring scoped to `.st-key-landing_ask button:focus-visible`. BDD: 5 new scenarios in `ask_agy_button_alignment.feature` + unit tests in `test_ask_agy_button_css.py`. Bundled BDD hardening (no production code): `test_navbar_css_scope.py` wait state fix; `test_role_match.py` `networkidle` → `data-test-script-state` pattern; count-parse regex fix in `test_banking_landing.py`, `test_cross_industry_landing.py`, `test_home.py`; dead AgGrid `.ag-cell` selectors replaced in `test_explore_stories_default_state.py`. 197/197 passing, 36 skips unchanged.
+
 ## June 2026
 
 ### Process
