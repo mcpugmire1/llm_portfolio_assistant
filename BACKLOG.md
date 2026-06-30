@@ -82,6 +82,8 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-145](#mattgpt-145) | Mobile filter breakpoints overlap — r2-label show/hide depends on !important cascade order, not design | Open | Low | Refactor | Jun 24, 2026 |
 | [MATTGPT-146](#mattgpt-146) | Professional Narrative stories leak into My Work via filter and search paths — must be excluded from all My Work paths | Open | Medium | Bug | Jun 25, 2026 |
 | [MATTGPT-147](#mattgpt-147) | Stale `@pytest.mark.skip` on `test_mobile_desktop_only_message` — decorator predates step def | Open | Low | Bug | July 1, 2026 |
+| [MATTGPT-148](#mattgpt-148) | `.main` selector sweep — 36 dead selectors in `global_styles.py` need swapping to `.stMain` | Open | Low | Refactor | July 1, 2026 |
+| [MATTGPT-149](#mattgpt-149) | Rejection bubble dark mode — `[class*='_rejection_bubble']` uses `var(--banner-info-bg)` with no dark mode override | Open | Low | Bug | July 1, 2026 |
 
 ---
 
@@ -2025,6 +2027,48 @@ If it passes, commit. If it fails, the step def has a bug — diagnose before co
 
 **Acceptance criteria:**
 - `test_mobile_desktop_only_message` passes in isolation and in the full suite with no skip decorator.
+
+---
+
+### MATTGPT-148
+**`.main` selector sweep — 36 dead selectors in `global_styles.py` need swapping to `.stMain`**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Refactor
+- **File:** `ui/styles/global_styles.py`
+- **Logged:** July 1, 2026
+
+**Issue:** `.main` does not exist in current Streamlit. The correct selector is `.stMain`. `global_styles.py` contains 36 rules scoped to `.main[^a-zA-Z]` — all dead selectors that match nothing. Any layout or spacing rules under these selectors are silently not applying.
+
+**Action:**
+1. Confirm count: `grep -n "\.main[^a-zA-Z]" ui/styles/global_styles.py`
+2. Review each occurrence — verify intent is `.stMain` before swapping (some may be legitimate class names that happen to start with `.main`).
+3. Swap confirmed dead selectors to `.stMain`.
+4. Smoke-test desktop and mobile after change — dead selectors becoming live may reveal previously masked layout shifts.
+
+**Acceptance criteria:**
+- Zero `.main` selectors in `global_styles.py` that should be `.stMain`.
+- No visual regression at desktop and 375px mobile after the swap.
+
+---
+
+### MATTGPT-149
+**Rejection bubble dark mode — `[class*='_rejection_bubble']` missing dark mode override**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Bug
+- **File:** `ui/styles/global_styles.py` (or wherever `_rejection_bubble` is defined)
+- **Logged:** July 1, 2026
+
+**Issue:** The rejection bubble component uses `var(--banner-info-bg)` for its background. There is no `body.dark-theme` override for this variable or this selector, so the bubble renders with the light-mode background color in dark mode.
+
+**Fix:** Add a `body.dark-theme` override — either for `--banner-info-bg` directly (if it's safe to change globally) or scoped to `[class*='_rejection_bubble']` specifically. Confirm the override value against the dark mode palette in `global_styles.py` before applying.
+
+**Acceptance criteria:**
+- Rejection bubble background is visually appropriate in both light and dark mode.
+- No other surfaces that use `var(--banner-info-bg)` are unintentionally affected.
 
 ---
 
