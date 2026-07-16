@@ -85,6 +85,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-149](#mattgpt-149) | Rejection bubble dark mode — `[class*='_rejection_bubble']` uses `var(--banner-info-bg)` with no dark mode override | Open | Low | Bug | July 1, 2026 |
 | [MATTGPT-150](#mattgpt-150) | MATTGPT-144 test fallout — decouple BDD assertions from display copy and stranded AgGrid selectors | Open | Medium | Refactor / Test | July 1, 2026 |
 | [MATTGPT-151](#mattgpt-151) | Corpus em dash cleanup — replace em dashes in master Excel with contextually correct punctuation | Open | Low | Action | July 1, 2026 |
+| [MATTGPT-152](#mattgpt-152) | Move debug output from UI sidecar to terminal log only | Parked | Low | Refactor | July 16, 2026 |
 
 ---
 
@@ -2093,6 +2094,31 @@ Most instances are comma replacements. Per-row samples reviewed: S2 (comma), U3 
 - Re-ingest and push to production stays with Matt after the scrub is complete.
 
 **Sequencing:** Do not fold into active corpus work (-094, -129, etc.). Stand-alone Cowork job, runs on its own time.
+
+---
+
+### MATTGPT-152
+**Move debug output from UI sidecar to terminal log only**
+
+- **Status:** Parked
+- **Priority:** Low
+- **Type:** Refactor
+- **File:** `utils/ui_helpers.py`, `services/backend_service.py`, `ui/pages/ask_mattgpt/conversation_view.py`
+- **Logged:** July 16, 2026
+
+**Issue:** Debug output currently appears in the Streamlit UI sidebar as well as the terminal. When `DEBUG=True`, `dbg()` in `utils/ui_helpers.py` calls `st.sidebar.write("🧪", *args)` at four call sites in `backend_service.py` (lines 1400, 1502, 1694, 1936). A second debug block in `conversation_view.py` (lines 140-152) renders a static `st.caption` showing `VECTOR_BACKEND`, `PINECONE_INDEX_NAME`, and `PINECONE_NAMESPACE`. Goal is terminal-only.
+
+**Proposed change (3 files, confirmed low-risk):**
+
+1. `utils/ui_helpers.py:75` -- `st.sidebar.write("🧪", *args)` to `print("🧪", *args)`. Redirects all four `dbg()` call sites to stdout.
+2. `services/backend_service.py` -- add `PINECONE_INDEX_NAME`, `VECTOR_BACKEND` to the `pinecone_service` import and log them in the startup sanity check block (after DNA Status line), so the config values that are currently sidecar-only land in the terminal instead.
+3. `conversation_view.py:140-152` -- remove the entire `# DEBUG INFO` block. After step 2, these values are in the terminal log and the sidecar block is redundant.
+
+**Constraint:** `__ask_dbg_*` session state writes in `backend_service.py` are orphan keys (set, never rendered) -- leave untouched.
+
+**No BDD cycle needed:** debug-mode-only output, no DOM-observable behavior changes.
+
+**Parked because:** 080 is higher priority. Revisit when 080 closes.
 
 ---
 
