@@ -86,6 +86,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-150](#mattgpt-150) | MATTGPT-144 test fallout — decouple BDD assertions from display copy and stranded AgGrid selectors | Open | Medium | Refactor / Test | July 1, 2026 |
 | [MATTGPT-151](#mattgpt-151) | Corpus em dash cleanup — replace em dashes in master Excel with contextually correct punctuation | Open | Low | Action | July 1, 2026 |
 | [MATTGPT-152](#mattgpt-152) | Move debug output from UI sidecar to terminal log only | Parked | Low | Refactor | July 16, 2026 |
+| [MATTGPT-153](#mattgpt-153) | Q64 eval stochastic — replace phrase-cluster with concept-cluster robust to story-selection variance | Open | Low | Refactor / Test | July 16, 2026 |
 
 ---
 
@@ -453,6 +454,7 @@ Each detail block uses these fields. Not every field is required for every item.
   - Changing the additive-merge contract (`set()` behavior is what's intentional — preserve all distinct tags). This ticket only addresses the case-sensitivity flaw within that contract.
   - Cleaning up the Excel master tags — those will get normalized on next enrichment pass once the script is fixed.
 - **Discovered during:** MATTGPT-061 deep investigation (May 16, 2026) when reviewing the NS Mainframe story's public_tags. Matt asked: *"Is the script duplicating? I thought it was comparing and appending if missing."* Investigation confirmed the script DOES dedupe — but only on exact string match, missing case variants.
+- **Additional issue (July 16, 2026):** Script re-tags all 113 stories on every run, sequentially, with gpt-4o — even stories that haven't changed. Runtime is dominated by unchanged stories. Fix: hash the prompt-relevant fields (Title, Role, Industry, Theme, Competencies, Use Case(s), Situation, Task, Action, Result, Process, Performance) per story; load existing `echo_star_stories_nlp.jsonl` at startup; if a story's hash matches the prior run, copy existing `public_tags` and skip the API call. Only re-tag stories where content changed. Secondary: parallelize the remaining API calls with `ThreadPoolExecutor` (10 concurrent). Tertiary: evaluate gpt-4o-mini for this extractive tagging task — likely sufficient quality at a fraction of the latency.
 - **Logged:** May 16, 2026
 
 ---
@@ -2119,6 +2121,31 @@ Most instances are comma replacements. Per-row samples reviewed: S2 (comma), U3 
 **No BDD cycle needed:** debug-mode-only output, no DOM-observable behavior changes.
 
 **Parked because:** 080 is higher priority. Revisit when 080 closes.
+
+---
+
+### MATTGPT-153
+**Q64 eval stochastic -- replace phrase-cluster with concept-cluster robust to story-selection variance**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Refactor / Test
+- **Sibling:** MATTGPT-082 (same root cause: eval checking the wrong thing)
+- **Logged:** July 16, 2026
+
+**Issue:** Q64 ("How does Matt manage resistance when leading enterprise transformation programs?") is stochastic. The LLM alternates between surfacing CloudFirst/Ways of Working (which contains "resistance" but not "Norfolk" or "stabilize") and other stories, producing variable phrase-match counts across runs. The test requires 2 of 5 phrases; variable story selection means the threshold is not reliably met.
+
+**Evidence:**
+- Failing in July 16, 2026 eval (68/70). Failure documented in test comment at line 218.
+- Prior passing run: July 15, 2026 (70/70).
+- Stochastic behavior first noted May 23, 2026.
+
+**Fix shape (two options, pick one before implementing):**
+
+1. Same approach as Q2/Q5/Q55: replace phrase-cluster check with a concept-cluster that's robust to story-selection variance. Concepts like "resistance", "enterprise transformation", "stakeholder alignment" should pass regardless of which story the LLM pulls.
+2. Verify whether CloudFirst/Ways of Working is actually a correct answer for this query (resistance in enterprise transformation). If yes, update ground truth vocabulary to include its terminology so either story path passes.
+
+**Pre-flight before implementing:** check what the Q2/Q5/Q55 concept-cluster pattern looks like and apply the same structure here.
 
 ---
 
