@@ -84,6 +84,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-148](#mattgpt-148) | `.main` selector sweep — 36 dead selectors in `global_styles.py` need swapping to `.stMain` | Open | Low | Refactor | July 1, 2026 |
 | [MATTGPT-149](#mattgpt-149) | Rejection bubble dark mode — `[class*='_rejection_bubble']` uses `var(--banner-info-bg)` with no dark mode override | Open | Low | Bug | July 1, 2026 |
 | [MATTGPT-150](#mattgpt-150) | MATTGPT-144 test fallout — decouple BDD assertions from display copy and stranded AgGrid selectors | Open | Medium | Refactor / Test | July 1, 2026 |
+| [MATTGPT-151](#mattgpt-151) | Corpus em dash cleanup — replace em dashes in master Excel with contextually correct punctuation | Open | Low | Action | July 1, 2026 |
 
 ---
 
@@ -2061,6 +2062,37 @@ Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consiste
 - `assert_sort_descending` asserts actual sort order at the data layer, not just canvas mount.
 - `.ag-root-wrapper` / `.ag-row` waits replaced with `stDataFrame` selector; `try/except` removed.
 - Full BDD suite passes with 0 failed, skip count unchanged.
+
+---
+
+### MATTGPT-151
+**Corpus em dash cleanup — replace em dashes in master Excel with contextually correct punctuation**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Action
+- **Owner:** Cowork (text scrub); Matt (re-ingest + push); Code does not touch this
+- **File:** Master Excel (STAR Stories - Interview Ready sheet); output: `echo_star_stories.jsonl` / `echo_star_stories_nlp.jsonl` after re-ingest
+- **Logged:** July 1, 2026
+
+**Issue:** Em dashes exist in the master Excel because they were authored there — the pipeline is unidirectional (master → JSONL) so they are never regenerated. Confirmed: no script fix needed, scrub sticks.
+
+**Scope:** Corpus-wide. A tracking tab in the master Excel has been started listing cell references and em dash counts. Three replacement types cover almost all cases:
+- **Comma** — clause continuation ("strategies — and to help" → "strategies, and to help")
+- **Colon** — what follows explains or lists ("anti-patterns — developers were" → "anti-patterns: developers were")
+- **Sentence split** — two independent thoughts that read better as two sentences
+
+Most instances are comma replacements. Per-row samples reviewed: S2 (comma), U3 (colon), AB3 (comma), AB4 (comma), Q6 (comma).
+
+**Action column in the tracking tab:** "Replacement type" (comma / colon / split) — not per-cell rewritten prose. Cowork works the tab row by row, applies the replacement type, and flags anything ambiguous rather than guessing.
+
+**Cowork constraints:**
+- Edit master only. Do not touch the JSONL or the pipeline.
+- No naive find-and-replace. Replacement type must be determined per em dash by reading the surrounding clause.
+- Flag ambiguous cases rather than guessing.
+- Re-ingest and push to production stays with Matt after the scrub is complete.
+
+**Sequencing:** Do not fold into active corpus work (-094, -129, etc.). Stand-alone Cowork job, runs on its own time.
 
 ---
 
