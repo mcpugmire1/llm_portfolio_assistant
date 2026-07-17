@@ -12,19 +12,17 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 **NOW**
 1. **-080** — `matt_profile.json` restructure. Blocker for -088: scorer and Agy chat need stable shared grounding before alignment work makes sense.
 2. **-088** — Role Match scorer honesty, on top of -080. Biggest single credibility hit (CTO persona: AI contradicting itself). Gates -012 private-view quality.
-3. **-094 probes** — CIC over-concentration + operational under-surfacing. In progress. Running before -080 — findings shape the restructure.
-4. **-077 mitigation** — Query-side: strip "Matt" from embedded queries on technical-noun shapes. Protects primary free-text recruiter flow from MattGPT self-referential answers.
-5. **-097** — Career-intent refresh. Timely for active outreach; makes "what's Matt looking for" keyword-searchable.
-6. **-129 stories 1+2** — AT&T SE CRM + Fiserv expand-from-logged stories (no elicitation block yet). Operational depth pairing with -094 sub-hypothesis B.
+3. **-077 mitigation** — Query-side: strip "Matt" from embedded queries on technical-noun shapes. Protects primary free-text recruiter flow from MattGPT self-referential answers.
+4. **-097** — Career-intent refresh. Timely for active outreach; makes "what's Matt looking for" keyword-searchable.
+5. **-129 stories 1+2** — AT&T SE CRM + Fiserv expand-from-logged stories (no elicitation block yet). Operational depth work.
 
 **NEXT** (queued):
-1. **-128** — Source faithfulness. Unlocked once -080 + -094 land. Second-biggest trust item: recruiter clicks to verify a claim, gets wrong source cards.
+1. **-128** — Source faithfulness. Unlocked once -080 lands. Second-biggest trust item: recruiter clicks to verify a claim, gets wrong source cards.
 2. **-089** — Logistics filter class: location / work-model / availability. Atlanta + relocation-open status currently dropped silently.
-3. **-015** — JPM Payments IQ differentiation. Cheap data pass; upstream of operational surfacing; cleaner signal for -094/-128/-088.
+3. **-015** — JPM Payments IQ differentiation. Cheap data pass; upstream of operational surfacing; cleaner signal for -128/-088.
 4. **-077 full fix** — Hybrid retrieval (BM25 + semantic). Handles severe-overlap nouns; closes -061 residual.
-5. **-094 fixes** — Conditional on probe findings.
-6. **-074** — Entity cluster synthesis forcing. "How did you build the CIC" returns a survey instead of depth on a marquee query.
-7. **-096** — Methodology-context preservation. The methodology is what makes the metrics credible to an engineer.
+5. **-074** — Entity cluster synthesis forcing. "How did you build the CIC" returns a survey instead of depth on a marquee query.
+6. **-096** — Methodology-context preservation. The methodology is what makes the metrics credible to an engineer.
 
 (Everything else defaults to LATER.)
 
