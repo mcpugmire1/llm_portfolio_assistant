@@ -8,6 +8,16 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Ask Agy
 
+**July 16, 2026 — Retrieval concentration investigation closed (MATTGPT-094)**
+
+Investigation into two retrieval-bias hypotheses, both resolved.
+
+Sub-A (CIC over-concentration on broad queries): disproven. Probe data showed CIC absent from top results on broad queries. What leads vague queries is the Professional Narrative cluster (Why Hire Matt, About Matt), which recedes as queries get specific. `diversify_results` self-corrects downstream. No retrieval fix needed.
+
+Sub-B (operational story under-surfacing): confirmed vocabulary gap. Terms like "Sev-1" and "on-call" were absent from the corpus despite the substance existing in JPM and AT&T CRM stories. Tagged both stories with operational vocabulary. Verified in prod: "Matt's experience with Sev-1 resolution" now surfaces both clients and synthesizes a pattern. Fix confirmed.
+
+Spawned follow-on: MATTGPT-154 (operational-breadth tagging pass -- remaining corpus stories where operational vocabulary anchors are still missing).
+
 **July 1, 2026 — Ask Agy button alignment + focus ring fix (MATTGPT-033)** — `1be5953`
 Fixed two related visual defects on the Ask Agy landing and conversation pages. Alignment: `styles.py` landing Ask button set to `margin-top: 0; min-height: 44px`; conversation submit button `min-height: auto`, `translateY` override removed; `ask_mattgpt_header.py` `.ask-header-conversation` `margin-top` adjusted `-48px → -32px`. Focus ring: replaced Streamlit's inherited red `box-shadow` ring with a purple-matched `rgba(139, 92, 246, 0.5)` ring scoped to `.st-key-landing_ask button:focus-visible`. BDD: 5 new scenarios in `ask_agy_button_alignment.feature` + unit tests in `test_ask_agy_button_css.py`. Bundled BDD hardening (no production code): `test_navbar_css_scope.py` wait state fix; `test_role_match.py` `networkidle` → `data-test-script-state` pattern; count-parse regex fix in `test_banking_landing.py`, `test_cross_industry_landing.py`, `test_home.py`; dead AgGrid `.ag-cell` selectors replaced in `test_explore_stories_default_state.py`. 197/197 passing, 36 skips unchanged.
 

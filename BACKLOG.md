@@ -60,7 +60,6 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-088](#mattgpt-088) | Role Match scorer — align with Agy honesty (no Strong Match when chat would say no) | Open | High | Issue | May 28, 2026 |
 | [MATTGPT-089](#mattgpt-089) | Role Match — parse location, work-model, availability as distinct filter class | Open | High | Issue | May 28, 2026 |
 | [MATTGPT-091](#mattgpt-091) | Add a credible failure story to the corpus (sibling to -022 / -078 pattern) | Open | Medium | Action | May 28, 2026 |
-| [MATTGPT-094](#mattgpt-094) | Retrieval concentration audit — CIC over-weighting + operational story under-surfacing (hypotheses to verify) | In Progress | High | Investigation | May 28, 2026 |
 | [MATTGPT-095](#mattgpt-095) | Anti-consulting bias in story framing — corpus reads "consulting" as default register when it shouldn't | Open | Medium | Action | May 28, 2026 |
 | [MATTGPT-096](#mattgpt-096) | Methodology context dropped during synthesis — TDD/BDD and ways-of-working substance gets compressed out of metric claims (hypothesis to verify) | Open | Medium | Issue | May 28, 2026 |
 | [MATTGPT-097](#mattgpt-097) | Career-intent framing refresh — corpus predates current role taxonomy; refresh framing AND tighten register | Open | Medium | Action | May 28, 2026 |
@@ -87,6 +86,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-151](#mattgpt-151) | Corpus em dash cleanup — replace em dashes in master Excel with contextually correct punctuation | Open | Low | Action | July 1, 2026 |
 | [MATTGPT-152](#mattgpt-152) | Move debug output from UI sidecar to terminal log only | Parked | Low | Refactor | July 16, 2026 |
 | [MATTGPT-153](#mattgpt-153) | Q64 eval stochastic — replace phrase-cluster with concept-cluster robust to story-selection variance | Open | Low | Refactor / Test | July 16, 2026 |
+| [MATTGPT-154](#mattgpt-154) | Operational-breadth tagging pass — surface operational ownership into all corpus stories where it's genuinely true | Open | Medium | Action | July 16, 2026 |
 
 ---
 
@@ -851,50 +851,6 @@ Each detail block uses these fields. Not every field is required for every item.
   - MATTGPT-079 — Role Match coverage gaps meta (track this story addition as it closes the "failure narrative" gap, whether by surfacing or by write)
   - **MATTGPT-094** (added May 28, 2026) — retrieval / surfacing family; if Phase 2 reveals existing failure content doesn't surface, the fix belongs there
 - **Logged:** May 28, 2026 (original); re-scoped May 28, 2026 (post-persona-review reconciliation)
-
----
-
-### MATTGPT-094
-**Retrieval concentration audit — CIC over-weighting + operational story under-surfacing (hypotheses to verify)**
-
-- **Status:** Open — hypotheses to verify before committing to a fix
-- **Priority:** High
-- **Type:** Investigation
-- **Issue:** Two related retrieval-bias hypotheses surfaced during May 28, 2026 review of persona-test results plus Matt's own corpus insight. Both point at retrieval concentration / surfacing failures rather than corpus content quality.
-
-  **Sub-hypothesis A — CIC over-concentration on broad queries.** The CIC flagship story ("Building Cloud Innovation Centers (CIC)") may over-dominate retrieval results for broad-experience queries (target role, leadership work, transformation work) at the expense of other real client work (JPM, RBC, Fiserv, Capital One, AT&T). Evidence from persona transcripts: the recruiter's landing-view answer was CIC-dominated; the "has Matt managed in-house eng" answer led with CIC (0→150, 4X, $100M); the career-intent answer again centered CIC. Concrete testable mechanism: the CIC flagship had a prior embedding dilution fix that boosted retrieval; the boost may have over-corrected past correct into over-concentration.
-
-  **Sub-hypothesis B — operational stories exist but don't surface.** Matt has JPM stories with big enterprise releases, Sev-1 defects, global rollouts, up-to-5am on-call work that EXIST in the corpus but don't surface on operational queries. The fix isn't writing new content (that's MATTGPT-091's adjacent question); it's making sure the operational substance that's already there gets retrieved when operational queries arrive.
-- **Why these are framed as hypotheses to verify (not confirmed bugs):** Same discipline as MATTGPT-077. Multiple anecdotal data points across persona transcripts AND owner-knowledge suggest the pattern is real, but probe queries are needed to confirm the mechanism before designing a fix.
-- **Audience impact:** If sub-A is confirmed, decision-makers querying broadly read Matt as "one-big-thing leader" (CIC) rather than "18-year-range portfolio across financial services, telecom, and technology waves." If sub-B is confirmed, recruiters/CTOs querying operationally don't see the Sev-1 / on-call / enterprise-release substance that addresses their "can he run incidents?" question. Both are credibility-reducing in different ways.
-- **Important context from existing backlog:** Line 1622 in BACKLOG.md (-078 detail) framed CIC as having **lower retrieval-overweighting risk** because it's named-client work. This ticket is a deliberate re-examination of that framing in light of persona evidence — not a contradiction, a check on whether that framing still holds at the queries we now know matter.
-- **Investigation plan (probe-test methodology, same shape as MATTGPT-077):**
-  - **Probe set A (CIC concentration):**
-    - *"What's Matt's experience?"*
-    - *"Tell me about Matt's leadership work"*
-    - *"Tell me about Matt's transformation work"*
-    - *"What banks has Matt worked with?"* (CIC should NOT dominate; JPM/RBC/Capital One/Fiserv should)
-    - *"Tell me about Matt's experience at JP Morgan"* (should pull JPM stories, NOT CIC)
-  - **Probe set B (operational under-surfacing):**
-    - *"Tell me about a Sev-1 Matt handled"*
-    - *"Has Matt run on-call rotations?"*
-    - *"Tell me about Matt's experience with global enterprise releases"*
-    - *"What's Matt's operational background?"*
-  - For each probe: check top-3 retrieval results + assess whether CIC dominates (A) or operational stories surface (B).
-  - Document findings as a probe results table (same format as -077's findings table).
-- **Fix path (conditional on investigation results):**
-  - If sub-A confirmed: retune CIC story's embedding weight / retrieval boost; may need treatment similar to -077's chip-prompt swap pattern at the chip level
-  - If sub-B confirmed: investigate whether operational JPM stories have weak vocabulary anchors that don't match operational query terms, OR retrieval scoring prioritizes other content
-  - If neither confirmed: close as "verified, not a problem"
-  - If sub-A and sub-B point at same root cause (e.g., retrieval scoring heuristics favor named-client + scale metrics over operational-detail content): single fix may address both
-- **Effort:** Investigation 2-3 hours (probe runs + analysis). Fix effort depends on findings.
-- **Cross-references:**
-  - MATTGPT-077 — same retrieval-bias family (different stories, different sub-mechanism); methodology pattern for this investigation
-  - MATTGPT-061 — story-selection variance in same retrieval cluster
-  - MATTGPT-021, MATTGPT-022 — earlier retrieval-bias work
-  - MATTGPT-079 — Role Match coverage gaps meta-ticket (sub-B's "operational stories don't surface" overlaps with -079's gap-tracking concept)
-  - MATTGPT-091 — adjacent question (whether failure stories are a write problem or surfacing problem); if Phase 2 of -091 reveals existing failure content doesn't surface, the fix moves here
-- **Logged:** May 28, 2026
 
 ---
 
@@ -2146,6 +2102,28 @@ Most instances are comma replacements. Per-row samples reviewed: S2 (comma), U3 
 2. Verify whether CloudFirst/Ways of Working is actually a correct answer for this query (resistance in enterprise transformation). If yes, update ground truth vocabulary to include its terminology so either story path passes.
 
 **Pre-flight before implementing:** check what the Q2/Q5/Q55 concept-cluster pattern looks like and apply the same structure here.
+
+---
+
+### MATTGPT-154
+**Operational-breadth tagging pass -- surface operational ownership into all corpus stories where it's genuinely true**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Spawned from:** MATTGPT-094 (retrieval concentration investigation, Sub-B finding)
+- **Logged:** July 16, 2026
+
+**Issue:** The MATTGPT-094 investigation confirmed that operational stories were under-surfacing due to a vocabulary gap: terms like "Sev-1" and "on-call" were absent from the corpus. The fix in -094 tagged AT&T CRM and JPM stories, and prod verified those two stories now surface correctly on operational queries. But one or two examples isn't enough density. There are additional corpus stories where operational ownership is genuinely true and the vocabulary anchors are still missing.
+
+**Scope:** Audit the corpus for stories where Matt had real operational accountability (on-call, incident response, enterprise release ownership, Sev-1 involvement, production stability) that isn't currently tagged with operational vocabulary. Add the vocabulary where the substance is real. Do not add it where it isn't.
+
+**Constraints:**
+- Vocabulary additions must reflect actual story substance. No inflation.
+- AT&T CRM and JPM stories are already done (in prod as of MATTGPT-094). Don't re-touch them.
+- After tagging, run the Sub-B probe set to confirm surfacing improves: "Tell me about a Sev-1 Matt handled", "Has Matt run on-call rotations?", "Tell me about Matt's experience with global enterprise releases", "What's Matt's operational background?"
+
+**Not in scope:** Re-writing story framing (that's MATTGPT-095). Not a corpus content quality pass, purely a vocabulary/tagging pass so retrieval matches the substance that's already there.
 
 ---
 
