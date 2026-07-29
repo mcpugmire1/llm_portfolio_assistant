@@ -8,6 +8,10 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Ask Agy
 
+**July 29, 2026 — Corpus em dash cleanup complete (MATTGPT-151)**
+
+All em dashes removed from master Excel (MPugmire - STAR Stories - 28JUL26v1.xlsx), verified across all 29 fields and all rows. Pipeline is unidirectional (master → JSONL), so the scrub is permanent. Re-ingest and push to production stays with Matt. Confirmed clean by Code session cross-checking the saved file.
+
 **July 16, 2026 — Retrieval concentration investigation closed (MATTGPT-094)**
 
 Investigation into two retrieval-bias hypotheses, both resolved.

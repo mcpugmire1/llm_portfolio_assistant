@@ -81,10 +81,11 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-148](#mattgpt-148) | `.main` selector sweep — 36 dead selectors in `global_styles.py` need swapping to `.stMain` | Open | Low | Refactor | July 1, 2026 |
 | [MATTGPT-149](#mattgpt-149) | Rejection bubble dark mode — `[class*='_rejection_bubble']` uses `var(--banner-info-bg)` with no dark mode override | Open | Low | Bug | July 1, 2026 |
 | [MATTGPT-150](#mattgpt-150) | MATTGPT-144 test fallout — decouple BDD assertions from display copy and stranded AgGrid selectors | Open | Medium | Refactor / Test | July 1, 2026 |
-| [MATTGPT-151](#mattgpt-151) | Corpus em dash cleanup — replace em dashes in master Excel with contextually correct punctuation | Open | Low | Action | July 1, 2026 |
 | [MATTGPT-152](#mattgpt-152) | Move debug output from UI sidecar to terminal log only | Parked | Low | Refactor | July 16, 2026 |
 | [MATTGPT-153](#mattgpt-153) | Q64 eval stochastic — replace phrase-cluster with concept-cluster robust to story-selection variance | Open | Low | Refactor / Test | July 16, 2026 |
 | [MATTGPT-154](#mattgpt-154) | Operational-breadth tagging pass — surface operational ownership into all corpus stories where it's genuinely true | Open | Medium | Action | July 16, 2026 |
+| [MATTGPT-155](#mattgpt-155) | New corpus story — sell-side commercial story (HSBC-anchored): pricing/costing, resourcing, outcome-based contracting | Open | Medium | Action | July 29, 2026 |
+| [MATTGPT-156](#mattgpt-156) | Vendor commercial/spend management gap — decide whether corpus-zero on invoice/rate-card/procurement is a real claim or honest gap | Open | Low | Investigation | July 29, 2026 |
 
 ---
 
@@ -654,7 +655,27 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Cross-references:**
   - **MATTGPT-079** — meta-ticket tracking Role Match coverage gaps; -080 changes the decision framework for some of those gaps
   - **MATTGPT-081** — restructured sources make corrective-action attribution more accurate
+  - **MATTGPT-088** — gated on -080 exit criterion passing
 - **Logged:** May 21, 2026
+
+**Pre-drop worklist (from retiring -080 migration doc, July 29, 2026):**
+
+1. **Retrieval-latency audit** -- sweep every skill with status "Resolved on tags only" and confirm Use Case(s) field has supporting evidence. Vendor Management already confirmed retrieval-latent (tags-only, no Use Case evidence in corpus). Apply same check to all remaining Resolved-on-tags-only skills.
+2. **Database fix batch** -- Use Case field edits needed on: Network Engineering story, Octane story, TICARA story. Also run the detector batch to catch any remaining skills where tag resolution isn't backed by retrieval.
+3. **Re-embed** -- after database fix batch lands, re-embed affected stories so retrieval reflects the Use Case additions.
+4. **Re-run structured-JD A/B** -- two data points already run, not fully passed. Exit criterion requires the database re-run to confirm.
+
+**Exit criterion for -080:** structured-JD A/B passes cleanly after the database fix batch + re-embed. -088 does not start until this criterion is met.
+
+**Durable dispositions (preserve through -080 closure):**
+- **Do-not-re-open list:** skills removed after deliberate review; do not surface as gaps in future sessions without new evidence.
+- **Single-home ceilings:** Azure, Aurora, ElastiCache -- each has one story home; do not expand to additional stories without a real new use case.
+- **Dropped from corpus:** PostgreSQL, TypeScript, ECMAScript -- removed as not credibly claim-worthy at seniority level.
+- **Vendor cluster collapsed:** consolidated into existing Vendor Management (coordination) skill; separate "vendor spend/procurement" claim is MATTGPT-156 (decide-later).
+- **P&L resolved via dedicated story:** buy-side P&L has its own story ("Owning the P&L..."); sell-side commercial story is MATTGPT-155.
+- **Vendor Management retrieval-latent:** confirmed tags-only; no Use Case evidence in corpus. Part of retrieval-latency audit above.
+
+**Architectural rationale (§11 convergence from retiring doc):** The profile restructure and the scorer re-calibration (-088) converge on a single architectural principle: the corpus and the structured grounding must agree on what Matt can claim before either surface makes an assertion. -080 fixes the grounding layer (provenance-attached skill assertions replacing bare claims). -088 fixes the scoring surface (no Strong Match when grounding doesn't support it). Neither lands correctly without the other, which is why -088 is gated.
 
 ---
 
@@ -776,6 +797,7 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Status:** Open
 - **Priority:** High
 - **Type:** Issue
+- **Gating (July 29, 2026):** Do not start -088 until MATTGPT-080 exit criterion passes (structured-JD A/B confirmed after database fix batch + re-embed). The grounding layer must be stable before scorer re-calibration makes sense.
 - **Scope clarification (May 29, 2026):** This ticket is specifically about **cross-surface consistency on the same factual question** (Role Match scorer vs Agy chat answer), not about general scoring strictness or model granularity. Two adjacent concerns that get conflated and should NOT be folded in here: (a) "scoring inflates one tier" critiques (binary Strong/Partial/Gap can't carry "Strong-with-nuance" distinctions like Director-vs-VP tenure) — that's a model-granularity concern, separate work; (b) verdict-line / overall-fit summaries — separate UX decision, see MATTGPT-089 area work. -088's audit produces downgraded Notes that plug into the existing Partial-with-Note rendering pattern; no UI changes required for -088 itself.
 - **Issue:** Role Match scorer over-claims relative to what Agy honestly returns in chat. Specific evidence: Role Match marks *"experience running an in-house engineering organization of 60+ as a direct accountable leader"* as **Strong Match**, while Agy correctly responds that Matt has **not** directly managed an in-house product engineering organization. Same factual question, two surfaces, contradictory answers. The Role Match scorer is the inconsistent one.
 - **Audience impact:** CTO persona (May 27, 2026 test) called this the single biggest credibility hit on the entire site. Quote: *"That inconsistency in his own AI is the kind of thing I'd raise on the call, because if he doesn't see it, that's a signal."* Translated to interview prep: *"Which one is right, and what does the inconsistency tell me about how you'd present your team's work?"* — a defensive answer to that question kills the candidacy.
@@ -2022,36 +2044,6 @@ Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consiste
 
 ---
 
-### MATTGPT-151
-**Corpus em dash cleanup — replace em dashes in master Excel with contextually correct punctuation**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Action
-- **Owner:** Cowork (text scrub); Matt (re-ingest + push); Code does not touch this
-- **File:** Master Excel (STAR Stories - Interview Ready sheet); output: `echo_star_stories.jsonl` / `echo_star_stories_nlp.jsonl` after re-ingest
-- **Logged:** July 1, 2026
-
-**Issue:** Em dashes exist in the master Excel because they were authored there — the pipeline is unidirectional (master → JSONL) so they are never regenerated. Confirmed: no script fix needed, scrub sticks.
-
-**Scope:** Corpus-wide. A tracking tab in the master Excel has been started listing cell references and em dash counts. Three replacement types cover almost all cases:
-- **Comma** — clause continuation ("strategies — and to help" → "strategies, and to help")
-- **Colon** — what follows explains or lists ("anti-patterns — developers were" → "anti-patterns: developers were")
-- **Sentence split** — two independent thoughts that read better as two sentences
-
-Most instances are comma replacements. Per-row samples reviewed: S2 (comma), U3 (colon), AB3 (comma), AB4 (comma), Q6 (comma).
-
-**Action column in the tracking tab:** "Replacement type" (comma / colon / split) — not per-cell rewritten prose. Cowork works the tab row by row, applies the replacement type, and flags anything ambiguous rather than guessing.
-
-**Cowork constraints:**
-- Edit master only. Do not touch the JSONL or the pipeline.
-- No naive find-and-replace. Replacement type must be determined per em dash by reading the surrounding clause.
-- Flag ambiguous cases rather than guessing.
-- Re-ingest and push to production stays with Matt after the scrub is complete.
-
-**Sequencing:** Do not fold into active corpus work (-094, -129, etc.). Stand-alone Cowork job, runs on its own time.
-
----
 
 ### MATTGPT-152
 **Move debug output from UI sidecar to terminal log only**
@@ -2122,6 +2114,47 @@ Most instances are comma replacements. Per-row samples reviewed: S2 (comma), U3 
 - After tagging, run the Sub-B probe set to confirm surfacing improves: "Tell me about a Sev-1 Matt handled", "Has Matt run on-call rotations?", "Tell me about Matt's experience with global enterprise releases", "What's Matt's operational background?"
 
 **Not in scope:** Re-writing story framing (that's MATTGPT-095). Not a corpus content quality pass, purely a vocabulary/tagging pass so retrieval matches the substance that's already there.
+
+---
+
+### MATTGPT-155
+**New corpus story -- sell-side commercial story (HSBC-anchored): pricing/costing, resourcing, outcome-based contracting**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Logged:** July 29, 2026
+
+**Issue:** The corpus has a buy-side commercial story ("Owning the P&L...") but zero sell-side commercial substance. Matt's sell-side experience -- pricing/costing with CFM, LCR/UCR resourcing, estimating, managing CRs and SOW expansions, transitioning from hours-times-rate to outcome-based contracting -- is a distinct and material capability. HSBC is the anchor client: $10M SOW built via ROM, pricing model, and staffing plan.
+
+**Do not bundle with the buy-side P&L story.** These are different commercial motions (sell to client vs. manage margin on a delivery). Keep as a separate story.
+
+**Story scope:**
+- Pricing and costing using CFM (commercial financial model)
+- LCR/UCR resourcing and rate-card discipline
+- Estimating at proposal stage; managing CRs and SOW expansions in delivery
+- Transition from hours-times-rate to outcome-based contracting
+- Anchor: HSBC $10M SOW -- ROM, pricing model, staffing plan
+
+**Elicitation note:** Follow the same elicitation-first approach as -078/-129. Do not write the story without a session to pull the specific numbers and decision moments.
+
+---
+
+### MATTGPT-156
+**Vendor commercial/spend management gap -- decide whether corpus-zero on invoice/rate-card/procurement is a real claim or honest gap**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Investigation
+- **Logged:** July 29, 2026
+
+**Issue:** The corpus has zero content on invoice approval, rate-card management, third-party spend, procurement, or vendor governance. This is distinct from the existing Vendor Management (coordination/relationship) skill in the corpus. The question to answer before writing anything: does Matt have real claims here worth a story, or is this an honest gap?
+
+**Decision gate:** If yes, a story or structured assertion belongs in the corpus. If no, record as a documented honest gap so it doesn't re-surface as a question each session.
+
+**Scope of the gap:** invoice/rate-card management, third-party spend oversight, procurement process, vendor governance (budget accountability, not just relationship management).
+
+**Constraint:** Do not conflate with the existing Vendor Management (coordination) skill, which covers vendor selection, relationship, and delivery oversight. This is specifically about the commercial/spend side.
 
 ---
 
