@@ -86,6 +86,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-154](#mattgpt-154) | Operational-breadth tagging pass — surface operational ownership into all corpus stories where it's genuinely true | Open | Medium | Action | July 16, 2026 |
 | [MATTGPT-155](#mattgpt-155) | New corpus story — sell-side commercial story (HSBC-anchored): pricing/costing, resourcing, outcome-based contracting | Open | Medium | Action | July 29, 2026 |
 | [MATTGPT-156](#mattgpt-156) | Vendor commercial/spend management gap — decide whether corpus-zero on invoice/rate-card/procurement is a real claim or honest gap | Open | Low | Investigation | July 29, 2026 |
+| [MATTGPT-157](#mattgpt-157) | Re-evaluate keyword weight (W_KW) for specific-term query swamping — predict-then-test before any code change | Open | Medium | Investigation / Action | July 29, 2026 |
 
 ---
 
@@ -2155,6 +2156,38 @@ Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consiste
 **Scope of the gap:** invoice/rate-card management, third-party spend oversight, procurement process, vendor governance (budget accountability, not just relationship management).
 
 **Constraint:** Do not conflate with the existing Vendor Management (coordination) skill, which covers vendor selection, relationship, and delivery oversight. This is specifically about the commercial/spend side.
+
+---
+
+### MATTGPT-157
+**Re-evaluate keyword weight (W_KW) for specific-term query swamping -- predict-then-test before any code change**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Investigation / Action
+- **File:** `services/pinecone_service.py` (`_hybrid_score`, W_KW constant)
+- **Logged:** July 29, 2026
+
+**Issue:** Hybrid retrieval scoring has `W_KW=0.0` (`W_PC=1.0`) in `pinecone_service.py`, disabling the keyword component entirely. The keyword scorer (`_keyword_score_for_story`) is functioning and produces differentiated values, but they contribute nothing to ranking. This causes specific-noun queries ("Sev-1," "Redis," etc.) to be swamped by broad modernization/narrative stories that share generic terms ("modern," "cloud," "transformation") over the stories that actually contain the specific term. Observed in: the Strangler-Fig-vs-Norfolk-Southern case (May 2026) and the database-requirement retrieval session (July 2026).
+
+**History -- do not re-litigate:** `W_KW` went 0.2 to 0.0 in commit `2209afd` (bundled refactor, no documented quality rationale). The "disabled, semantic preferred" comment was a retroactive label added later, not a finding. The vocab-based query-gate that caused the original December 2025 "innovation" blocking is a separate mechanism (`_KNOWN_VOCAB` in the `if not hits` path plus `enforce_overlap` fallback in `rag_service.semantic_search`), independent of `_hybrid_score`. Re-enabling `W_KW` cannot reintroduce the innovation-blocking behavior. Confirmed via code read July 2026.
+
+**Scope -- this is NOT a database fix.** The database-requirement gap is a corpus-shape truth (relational depth 2006-2012, no Postgres/Redis, single-project managed stores), not a retrieval artifact. Arithmetic showed the W_KW crossover for database stories is ~0.5 (a drastic global change), and pool-presence checks showed TICARA/Network Eng are not in the candidate pool at all. This ticket targets the general specific-term-swamping class where the relevant stories ARE in the pool but mis-ranked. Do not justify scope expansion to databases.
+
+**Two complications to evaluate before committing to any weight:**
+
+1. **Generic-term dilution.** The keyword scorer weights all overlapping terms equally -- "modern"/"architecture" count the same as specific nouns. Re-enabling W_KW at a low weight lifts generic-overlap stories as much as specific-term stories. A full fix may require term-weighted keyword matching (technical nouns weighted higher), but that reintroduces a vocabulary-maintenance burden -- the same class of problem that got keyword zeroed originally. Evaluate whether a flat low weight helps enough before committing to term-weighting.
+
+2. **-077 interaction.** Keyword overlap on "Matt" and client names could inflate narrative stories (About Matt / Why Hire Matt) on name-bearing queries. Any W_KW re-enable must be tested against a name-bearing query, not just topic queries.
+
+**Method (predict-then-test, in this order):**
+
+1. Before any code change: compute blended scores from existing trace `pc`/`kw` values at candidate weights (0.2, 0.3) for a holdout set: a working query (P&L), an operational query (Sev-1), a name-bearing query, and the "innovation" canary.
+2. Predict rank changes arithmetically. Only proceed to code if arithmetic is promising.
+3. Run the holdout: confirm specific-term class improves without regressing working queries, re-breaking the innovation canary, or inflating narrative stories on the name-bearing query.
+4. Re-check confidence-band calibration: `CONFIDENCE_HIGH=0.25` was tuned for pc-only; adding a kw term shifts blended scores up.
+
+**Decision gate:** Re-enable `W_KW` at a tested weight only if the holdout passes. If flat weighting cannot separate specific from generic overlap, the real fix is term-weighted keyword (separate sub-decision; weigh against vocab-maintenance cost). If neither is clean, leave `W_KW=0.0` and document that pure-semantic is retained deliberately rather than by accident.
 
 ---
 
