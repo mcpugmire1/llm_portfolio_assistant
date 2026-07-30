@@ -40,6 +40,9 @@ VALID_INTENTS = {
         "Who is Matt Pugmire?",
         "Who is Matt?",
         "What's Matt's professional experience?",
+        "What industries has Matt worked in?",
+        "What sectors has Matt worked in?",
+        "What industries does Matt have experience in?",
     ],
     "behavioral": [
         "Tell me about a time Matt failed",
