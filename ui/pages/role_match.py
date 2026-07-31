@@ -192,7 +192,7 @@ def _render_requirement_card(
                 st.markdown(
                     '<div class="role-match-profile-evidence">'
                     '<span class="role-match-verified-dot"></span>'
-                    f" Verified skill · {relevance}"
+                    f" Profile · {relevance}"
                     "</div>",
                     unsafe_allow_html=True,
                 )
@@ -422,7 +422,7 @@ def _build_export_html(result_payload: dict) -> str:
                     if ev_type == "profile":
                         relevance = html.escape(ev.get("relevance", ""))
                         rows.append(
-                            f'<div class="evidence profile"><strong>Verified skill</strong> — {relevance}</div>'
+                            f'<div class="evidence profile"><strong>Profile</strong> — {relevance}</div>'
                         )
                     else:
                         title_text = html.escape(ev.get("story_title") or "Untitled")
@@ -646,11 +646,11 @@ def _render_results_panel(result_payload: dict, stories: list[dict]) -> None:
         # 🔗 = project evidence
         '<div style="display:inline-flex;align-items:center;gap:6px;">'
         "🔗 = project evidence</div>"
-        # ● = verified skill
+        # ● = profile
         '<div style="display:inline-flex;align-items:center;gap:6px;">'
         '<span style="width:8px;height:8px;border-radius:50%;'
-        'background:var(--success-color);display:inline-block;"></span>'
-        " = verified skill</div>"
+        'background:var(--text-secondary);display:inline-block;"></span>'
+        " = profile</div>"
         "</div>"
     )
     st.markdown(legend_html, unsafe_allow_html=True)
@@ -1318,7 +1318,7 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--success-color);
+    background: var(--text-secondary);
     display: inline-block;
 }
 .role-match-chip-verified--no-dot .role-match-verified-dot {
