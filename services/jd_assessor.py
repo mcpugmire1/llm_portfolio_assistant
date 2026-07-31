@@ -155,14 +155,12 @@ def load_matt_profile() -> str:
         if e.get("note"):
             education_notes.append(e["note"])
     education = " and ".join(education_parts)
-    skills = ", ".join(profile["skills"])
 
     certs = ", ".join(profile.get("certifications", []))
 
     result = f"{profile['career_summary']} " f"He holds a {education}."
     for note in education_notes:
         result += f" {note}"
-    result += f" Matt's verified skills include: {skills}."
     if certs:
         result += f" Certifications: {certs}."
 
@@ -184,7 +182,7 @@ def build_assessment_prompt() -> str:
 
 ASSESSMENT_MODEL = "gpt-4o"
 ASSESSMENT_TEMPERATURE = 0.0
-DEFAULT_TOP_K = 3
+DEFAULT_TOP_K = 5
 
 
 def _get_openai_client() -> OpenAI:
