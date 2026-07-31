@@ -2051,6 +2051,7 @@ Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consiste
 - Failing in July 16, 2026 eval (68/70). Failure documented in test comment at line 218.
 - Prior passing run: July 15, 2026 (70/70).
 - Stochastic behavior first noted May 23, 2026.
+- July 31, 2026: failing again. Full-suite run matched 1/2 phrases ("resistance"); isolation run matched 0/2. Two runs minutes apart, different phrase hit counts. Confirms story-selection variance as root cause.
 
 **Fix shape (two options, pick one before implementing):**
 
