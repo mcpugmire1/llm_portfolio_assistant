@@ -682,21 +682,25 @@ Skills array present vs. absent produced zero assessment flips across three JDs 
 
 Note: item 3 is coupled to the citation investigation below. If the empty-evidence finding is a real assessor defect, the "does profile count as a citation" decision must land before or with the drop.
 
-**Citation investigation (open, gated -- handed to Code, July 29, 2026):**
-- Trigger: structured JD #7, condition B, TOP_K=5 produced a partial verdict with empty evidence, observed 2 of 3 runs.
-- Step 1 (gate): pull raw assessor output for that case. Determine whether empty evidence is a real assessor defect or a harness parse bug (a schema bug fooled the harness once already this cycle). If harness bug: investigation closes, no rule needed.
-- Step 2 (if real): decide explicitly whether "profile" counts as a citation. Affects drop brief item 3.
-- Step 3 (if real): fix is a one-line prompt extension (existing rule requires citation for Strong; extend to Partial). Not a subsystem.
-- Step 4: re-validate at 5 runs, not 3. Current evidence rests on a single 2-of-3 observation.
+**TOP_K finding (July 30, 2026):** The assessor's `DEFAULT_TOP_K` was 3 while Ask Agy passes 5 stories to the LLM. At 3, the Fiserv enablement requirement scored partial with ranks 4 and 5 (AI-Powered Chronic Disease Management, Building Effective AI-Assisted Development Workflows) cut off -- both more responsive than the three it saw. Raised to 5. Validated across all three JDs: Fiserv zero movement, demo product-company holds gap, structured database moves gap to partial. A candidate-score floor was considered and rejected as curve-fitted and discontinuous.
 
-**Session dispositions (July 29, 2026 -- durable, do not re-open without new evidence):**
+**Citation investigation (July 29, 2026 -- CORRECTED July 30, 2026):**
+~~Original trigger: apparent uncited partial on structured JD #7, condition B, TOP_K=5, observed 2 of 3 runs.~~
+
+Correction: the `b_evidence_run1` column was empty because run 1 returned gap, and empty evidence on a gap is correct. There was no ungrounded verdict. The proposed no-partial-without-citation prompt rule has no evidence behind it and should be evaluated on its own merits if pursued -- not treated as a confirmed bug fix. Citation investigation is closed.
+
+Note: item 3 of the drop brief ("verify assessment prompt treats profile as facts-only") was coupled to this investigation. With the investigation closed, item 3 is now an independent verification step, not a gate.
+
+**Session dispositions (July 29-30, 2026 -- durable, do not re-open without new evidence):**
 - **Confidence floor:** dead. Curve-fit to one observation; do not build.
-- **TOP_K=5:** stands, conditional on citation rule making it safe.
-- **Database gap:** confirmed honest gap. An uncited partial is not a correction (consistent with MATTGPT-157 scope: not a retrieval artifact).
+- **TOP_K=5:** stands. No citation-rule gate required.
+- **Database gap:** partial and gap are both defensible at TOP_K=5; neither is settled. See MATTGPT-157 verdict update for context.
 - **Intents/industries false-positive:** fixed and committed.
 - **Salary guard:** validated working.
 
-**Exit criterion for -080:** drop brief implementation passes BDD + citation investigation resolves (or is determined to be a harness bug). -088 does not start until exit criterion is met.
+**Re-validation caveat (July 30, 2026):** All three JD results rest on 3-run modes. Two movements were 2-of-3 (database requirement: gap to partial; Kubernetes on demo JD). Re-validation at 5 runs was specified and has not been run. Do not read these numbers as firmer than the evidence supports.
+
+**Exit criterion for -080:** drop brief implementation passes BDD. -088 does not start until exit criterion is met.
 
 **Durable dispositions (preserve through -080 closure):**
 - **Do-not-re-open list:** skills removed after deliberate review; do not surface as gaps in future sessions without new evidence.
@@ -2189,6 +2193,10 @@ Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consiste
 
 **Constraint:** Do not conflate with the existing Vendor Management (coordination) skill, which covers vendor selection, relationship, and delivery oversight. This is specifically about the commercial/spend side.
 
+**Partial resolution (July 29, 2026):** Confirmed real claim: Matt reviewed and approved contract fee and cost submissions from Bottomline Technologies to JP Morgan across the ACCESS program, with authority to reject items before payment. Now in the corpus as an Action bullet and a `Vendor Invoice Review & Approval` competency on "Building the Payment Engine Behind JP Morgan ACCESS." Deliberately not surfaced into that story's Use Case(s) -- the story's thesis is payments engineering and the field is already at 473 of 600 characters.
+
+**Remaining question:** Whether vendor commercial management warrants its own story. Evidence is currently Action/Competencies-level on one story, so it will not retrieve on a vendor-spend query. Rate-card management, procurement process, and vendor governance remain corpus-zero. RBC confirmed not applicable; the invoice review was ACCESS only.
+
 ---
 
 ### MATTGPT-157
@@ -2204,7 +2212,11 @@ Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consiste
 
 **History -- do not re-litigate:** `W_KW` went 0.2 to 0.0 in commit `2209afd` (bundled refactor, no documented quality rationale). The "disabled, semantic preferred" comment was a retroactive label added later, not a finding. The vocab-based query-gate that caused the original December 2025 "innovation" blocking is a separate mechanism (`_KNOWN_VOCAB` in the `if not hits` path plus `enforce_overlap` fallback in `rag_service.semantic_search`), independent of `_hybrid_score`. Re-enabling `W_KW` cannot reintroduce the innovation-blocking behavior. Confirmed via code read July 2026.
 
-**Scope -- this is NOT a database fix.** The database-requirement gap is a corpus-shape truth (relational depth 2006-2012, no Postgres -- Redis-equivalent exists via ElastiCache but is a single-home ceiling, single-project managed stores), not a retrieval artifact. Arithmetic showed the W_KW crossover for database stories is ~0.5 (a drastic global change), and pool-presence checks showed TICARA/Network Eng are not in the candidate pool at all. This ticket targets the general specific-term-swamping class where the relevant stories ARE in the pool but mis-ranked. Do not justify scope expansion to databases.
+**Scope -- this is NOT a database fix.** The database requirement is not a retrieval artifact for this ticket's purposes: relational depth is 2006-2012, no Postgres, Redis-equivalent exists via ElastiCache but as a single-home, single-project managed store. Arithmetic showed the W_KW crossover for database stories is ~0.5 (a drastic global change). Pool-presence checks showed TICARA and AT&T Network Engineering are not in the candidate pool at all; Project Octane is, at rank 3 under the extractor's stripped query. Do not justify scope expansion to databases.
+
+**Verdict update (July 30, 2026):** At TOP_K=5 the assessor returns partial, not gap, on the structured JD database requirement, citing Octane's ElastiCache line via the prompt's managed-service equivalence rule. The earlier "honest gap" disposition was recorded at TOP_K=3 across 3 runs (gap|partial|partial, one run from partial). Partial and gap are both defensible; neither is settled. Do not treat gap as fact.
+
+**Provenance note:** The ElastiCache sentence in Octane's Use Case(s) was added July 29, 2026 specifically to make the story retrievable for database queries. It is accurate (Summit reference app, AWS AppSync with ElastiCache as the sync layer) but recent and purpose-built, not long-standing corpus content.
 
 **Two complications to evaluate before committing to any weight:**
 
