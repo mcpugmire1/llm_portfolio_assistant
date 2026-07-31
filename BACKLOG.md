@@ -49,7 +49,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-077](#mattgpt-077) | Subject-pronoun + noun-overlap retrieval contamination — "Matt + X" pulls MattGPT/Strangler Fig stories when X overlaps their vocabulary | Open | Medium-High | Issue | May 19, 2026 |
 | [MATTGPT-078](#mattgpt-078) | New corpus story — "AI Enablement Before It Had a Name" (resume Option E retrieval anchor) | Open | Medium | Action | May 21, 2026 |
 | [MATTGPT-079](#mattgpt-079) | Role Match coverage gaps — corpus story anchors needed (meta-ticket) | Open | Medium | Action | May 21, 2026 |
-| [MATTGPT-080](#mattgpt-080) | `matt_profile.json` — restructure into parallel evidence sources (identity / skills with provenance / STAR corpus / positioning) | Open | Medium | Architecture | May 21, 2026 |
+| [MATTGPT-080](#mattgpt-080) | `matt_profile.json` — restructure into parallel evidence sources (identity / skills with provenance / STAR corpus / positioning) | In Progress | Medium | Architecture | May 21, 2026 |
 | [MATTGPT-081](#mattgpt-081) | Role Match engine — corrective-actions output by asset type (story / resume / LinkedIn / positioning / network / real skill) | Open | Medium | Enhancement | May 21, 2026 |
 | [MATTGPT-082](#mattgpt-082) | Q15 eval assertion is over-specified — checks literal client name presence rather than response correctness | Open | Medium | Refactor | May 22, 2026 |
 | [MATTGPT-083](#mattgpt-083) | Spinner inconsistency — Explore Stories doesn't show thinking indicator for rejected queries (Ask MattGPT does) | Open | Medium | Issue | May 23, 2026 |
@@ -395,6 +395,7 @@ Each detail block uses these fields. Not every field is required for every item.
   - **C.** Hash-based cache key — derive the cache filename from a hash of `VALID_INTENTS` contents (e.g., `intent_embeddings.<sha256>.json`). A cache miss is automatic and unambiguous when the inputs change. Old cache files can be garbage-collected on a schedule.
 - **Recommendation:** Option B is the right long-term shape — cheap, transparent, no silent stale state. Option A is a one-line safety net that could ship first as a guard.
 - **Out of scope for MATTGPT-016:** The current wrong-person fix follows the existing "delete and regenerate" workflow (the documented contract) and commits a regenerated cache. This ticket addresses the underlying fragility, not the immediate fix.
+- **Status note (July 29, 2026):** Staleness risk confirmed active -- no longer hypothetical. VALID_INTENTS changes occurred during July 2026 -080 validation sessions. Priority review warranted before next VALID_INTENTS change.
 - **Logged:** May 14, 2026 (surfaced during MATTGPT-016 implementation scoping)
 
 ---
@@ -561,6 +562,7 @@ Each detail block uses these fields. Not every field is required for every item.
   - **MATTGPT-073** — cross-query session-state fix that closed -061's dominant visible mechanism. -077 is independent of session state (reproduces on cold sessions).
   - **MATTGPT-071** — chip set validation; the locked chip set was rescued from -077's trap during May 19 production spot-checks.
 - **Discovered during:** May 19, 2026 MATTGPT-071 chip prompt validation against production. The rule:* chip prompt *"How does Matt modernize monoliths into microservices?"* produced 3/3 contaminated responses with Strangler Fig contamination. Investigation expanded to characterize the pattern across 8 probe queries.
+- **New evidence (July 29, 2026):** Narrative/MattGPT over-concentration observed again across 18 example queries captured during the -080 validation sessions. Query list to be attached when available. Confirms the pattern is not limited to the original 8 probe queries.
 - **Logged:** May 19, 2026
 
 ---
@@ -630,6 +632,7 @@ Each detail block uses these fields. Not every field is required for every item.
   - (b) Resume / LinkedIn / positioning-doc update → not a corpus issue
   - (c) MATTGPT-080 `matt_profile.json` restructure → some gaps may be better addressed by structured skill assertions with provenance, not narrative stories
   - (d) Real skill gap → corpus is honest, no story needed; ignore in this thread
+- **Candidate additions (July 29, 2026 -080 session):** CIC-era hands-on technical stories are under-written. Candidates include: Spring Boot (if hands-on); AI-enablement work outside Liquid Studio/CIC scope (distinct from MATTGPT-078's framing). Evaluate whether structured assertion or new story is the right fix before filing sibling tickets.
 - **Workflow:** When a new Role Match assessment surfaces a gap not in this list, append it to the "Known gaps" section above with the surfacing JD context. When a gap is prioritized for action, file the sibling ticket (story / profile / resume) and link it back here.
 - **Cross-references:**
   - **MATTGPT-080** — `matt_profile.json` restructure; addresses gaps better fit for structured skill assertions
@@ -659,14 +662,41 @@ Each detail block uses these fields. Not every field is required for every item.
   - **MATTGPT-088** — gated on -080 exit criterion passing
 - **Logged:** May 21, 2026
 
-**Pre-drop worklist (from retiring -080 migration doc, July 29, 2026):**
+**Pre-drop worklist (from retiring -080 migration doc, July 29, 2026) -- SUPERSEDED by July 29 session results below.** Leaving for audit trail; do not treat as outstanding work.
 
-1. **Retrieval-latency audit** -- sweep every skill with status "Resolved on tags only" and confirm Use Case(s) field has supporting evidence. Vendor Management already confirmed retrieval-latent (tags-only, no Use Case evidence in corpus). Apply same check to all remaining Resolved-on-tags-only skills.
-2. **Database fix batch** -- Use Case field edits needed on: Network Engineering story, Octane story, TICARA story. Also run the detector batch to catch any remaining skills where tag resolution isn't backed by retrieval.
-3. **Re-embed** -- after database fix batch lands, re-embed affected stories so retrieval reflects the Use Case additions.
-4. **Re-run structured-JD A/B** -- two data points already run, not fully passed. Exit criterion requires the database re-run to confirm.
+~~1. Retrieval-latency audit~~
+~~2. Database fix batch (Network Eng / Octane / TICARA)~~
+~~3. Re-embed~~
+~~4. Re-run structured-JD A/B~~
 
-**Exit criterion for -080:** structured-JD A/B passes cleanly after the database fix batch + re-embed. -088 does not start until this criterion is met.
+**A/B validation results (July 29, 2026 session -- supersedes worklist):**
+
+Skills array present vs. absent produced zero assessment flips across three JDs (demo, structured, Fiserv). The array carries no signal the assessor uses. Drop is unblocked and safe.
+
+**Drop brief (approved, ready for implementation):**
+1. Remove skills array from `matt_profile.json`
+2. Edit `load_matt_profile()` to stop building the skills clause; handle absent key cleanly
+3. Verify assessment prompt treats "profile" as facts-only
+4. BDD-first: 5 scenarios committed before implementation
+5. No re-embed required (profile is not embedded)
+
+Note: item 3 is coupled to the citation investigation below. If the empty-evidence finding is a real assessor defect, the "does profile count as a citation" decision must land before or with the drop.
+
+**Citation investigation (open, gated -- handed to Code, July 29, 2026):**
+- Trigger: structured JD #7, condition B, TOP_K=5 produced a partial verdict with empty evidence, observed 2 of 3 runs.
+- Step 1 (gate): pull raw assessor output for that case. Determine whether empty evidence is a real assessor defect or a harness parse bug (a schema bug fooled the harness once already this cycle). If harness bug: investigation closes, no rule needed.
+- Step 2 (if real): decide explicitly whether "profile" counts as a citation. Affects drop brief item 3.
+- Step 3 (if real): fix is a one-line prompt extension (existing rule requires citation for Strong; extend to Partial). Not a subsystem.
+- Step 4: re-validate at 5 runs, not 3. Current evidence rests on a single 2-of-3 observation.
+
+**Session dispositions (July 29, 2026 -- durable, do not re-open without new evidence):**
+- **Confidence floor:** dead. Curve-fit to one observation; do not build.
+- **TOP_K=5:** stands, conditional on citation rule making it safe.
+- **Database gap:** confirmed honest gap. An uncited partial is not a correction (consistent with MATTGPT-157 scope: not a retrieval artifact).
+- **Intents/industries false-positive:** fixed and committed.
+- **Salary guard:** validated working.
+
+**Exit criterion for -080:** drop brief implementation passes BDD + citation investigation resolves (or is determined to be a harness bug). -088 does not start until exit criterion is met.
 
 **Durable dispositions (preserve through -080 closure):**
 - **Do-not-re-open list:** skills removed after deliberate review; do not surface as gaps in future sessions without new evidence.
@@ -1142,6 +1172,8 @@ For each client-specific probe query, assert `client_name in [s.get("Client") fo
 - Stories 1 and 2 (expand-from-logged) completed before Stories 3–5 (recovery-dependent).
 
 **Sequencing:** Stories 3–5 are blocked on elicitation. Do not let recovery stories block Stories 1 and 2.
+
+**Candidate additions (July 29, 2026 -080 session):** CIC-era hands-on technical stories flagged as under-written: Spring Boot (if hands-on); AI-enablement work outside Liquid Studio/CIC scope (distinct from MATTGPT-078). Evaluate for addition to this list or as separate story tickets before next elaboration pass.
 
 ---
 
@@ -2172,7 +2204,7 @@ Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consiste
 
 **History -- do not re-litigate:** `W_KW` went 0.2 to 0.0 in commit `2209afd` (bundled refactor, no documented quality rationale). The "disabled, semantic preferred" comment was a retroactive label added later, not a finding. The vocab-based query-gate that caused the original December 2025 "innovation" blocking is a separate mechanism (`_KNOWN_VOCAB` in the `if not hits` path plus `enforce_overlap` fallback in `rag_service.semantic_search`), independent of `_hybrid_score`. Re-enabling `W_KW` cannot reintroduce the innovation-blocking behavior. Confirmed via code read July 2026.
 
-**Scope -- this is NOT a database fix.** The database-requirement gap is a corpus-shape truth (relational depth 2006-2012, no Postgres/Redis, single-project managed stores), not a retrieval artifact. Arithmetic showed the W_KW crossover for database stories is ~0.5 (a drastic global change), and pool-presence checks showed TICARA/Network Eng are not in the candidate pool at all. This ticket targets the general specific-term-swamping class where the relevant stories ARE in the pool but mis-ranked. Do not justify scope expansion to databases.
+**Scope -- this is NOT a database fix.** The database-requirement gap is a corpus-shape truth (relational depth 2006-2012, no Postgres -- Redis-equivalent exists via ElastiCache but is a single-home ceiling, single-project managed stores), not a retrieval artifact. Arithmetic showed the W_KW crossover for database stories is ~0.5 (a drastic global change), and pool-presence checks showed TICARA/Network Eng are not in the candidate pool at all. This ticket targets the general specific-term-swamping class where the relevant stories ARE in the pool but mis-ranked. Do not justify scope expansion to databases.
 
 **Two complications to evaluate before committing to any weight:**
 
