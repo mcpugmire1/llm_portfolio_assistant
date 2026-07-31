@@ -10,14 +10,13 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-06-24)
 
 **NOW**
-1. **-080** — `matt_profile.json` restructure. Blocker for -088: scorer and Agy chat need stable shared grounding before alignment work makes sense.
-2. **-088** — Role Match scorer honesty, on top of -080. Biggest single credibility hit (CTO persona: AI contradicting itself). Gates -012 private-view quality.
-3. **-077 mitigation** — Query-side: strip "Matt" from embedded queries on technical-noun shapes. Protects primary free-text recruiter flow from MattGPT self-referential answers.
-4. **-097** — Career-intent refresh. Timely for active outreach; makes "what's Matt looking for" keyword-searchable.
-5. **-129 stories 1+2** — AT&T SE CRM + Fiserv expand-from-logged stories (no elicitation block yet). Operational depth work.
+1. **-088** — Role Match scorer honesty. Biggest single credibility hit (CTO persona: AI contradicting itself). Gates -012 private-view quality. Unblocked as of -080 closure.
+2. **-077 mitigation** — Query-side: strip "Matt" from embedded queries on technical-noun shapes. Protects primary free-text recruiter flow from MattGPT self-referential answers.
+3. **-097** — Career-intent refresh. Timely for active outreach; makes "what's Matt looking for" keyword-searchable.
+4. **-129 stories 1+2** — AT&T SE CRM + Fiserv expand-from-logged stories (no elicitation block yet). Operational depth work.
 
 **NEXT** (queued):
-1. **-128** — Source faithfulness. Unlocked once -080 lands. Second-biggest trust item: recruiter clicks to verify a claim, gets wrong source cards.
+1. **-128** — Source faithfulness. Unlocked. Second-biggest trust item: recruiter clicks to verify a claim, gets wrong source cards.
 2. **-089** — Logistics filter class: location / work-model / availability. Atlanta + relocation-open status currently dropped silently.
 3. **-015** — JPM Payments IQ differentiation. Cheap data pass; upstream of operational surfacing; cleaner signal for -128/-088.
 4. **-077 full fix** — Hybrid retrieval (BM25 + semantic). Handles severe-overlap nouns; closes -061 residual.
@@ -49,7 +48,6 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-077](#mattgpt-077) | Subject-pronoun + noun-overlap retrieval contamination — "Matt + X" pulls MattGPT/Strangler Fig stories when X overlaps their vocabulary | Open | Medium-High | Issue | May 19, 2026 |
 | [MATTGPT-078](#mattgpt-078) | New corpus story — "AI Enablement Before It Had a Name" (resume Option E retrieval anchor) | Open | Medium | Action | May 21, 2026 |
 | [MATTGPT-079](#mattgpt-079) | Role Match coverage gaps — corpus story anchors needed (meta-ticket) | Open | Medium | Action | May 21, 2026 |
-| [MATTGPT-080](#mattgpt-080) | `matt_profile.json` — restructure into parallel evidence sources (identity / skills with provenance / STAR corpus / positioning) | In Progress | Medium | Architecture | May 21, 2026 |
 | [MATTGPT-081](#mattgpt-081) | Role Match engine — corrective-actions output by asset type (story / resume / LinkedIn / positioning / network / real skill) | Open | Medium | Enhancement | May 21, 2026 |
 | [MATTGPT-082](#mattgpt-082) | Q15 eval assertion is over-specified — checks literal client name presence rather than response correctness | Open | Medium | Refactor | May 22, 2026 |
 | [MATTGPT-083](#mattgpt-083) | Spinner inconsistency — Explore Stories doesn't show thinking indicator for rejected queries (Ask MattGPT does) | Open | Medium | Issue | May 23, 2026 |
@@ -87,6 +85,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-155](#mattgpt-155) | New corpus story — sell-side commercial story (HSBC-anchored): pricing/costing, resourcing, outcome-based contracting | Open | Medium | Action | July 29, 2026 |
 | [MATTGPT-156](#mattgpt-156) | Vendor commercial/spend management gap — decide whether corpus-zero on invoice/rate-card/procurement is a real claim or honest gap | Open | Low | Investigation | July 29, 2026 |
 | [MATTGPT-157](#mattgpt-157) | Re-evaluate keyword weight (W_KW) for specific-term query swamping — predict-then-test before any code change | Open | Medium | Investigation / Action | July 29, 2026 |
+| [MATTGPT-158](#mattgpt-158) | Gap notes state absence without transferability; decide audience and reframe | Open | Medium | Investigation / Action | July 31, 2026 |
 
 ---
 
@@ -643,77 +642,6 @@ Each detail block uses these fields. Not every field is required for every item.
 
 ---
 
-### MATTGPT-080
-**`matt_profile.json` — restructure into parallel evidence sources**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Architecture
-- **Context:** `matt_profile.json` currently does three unrelated jobs: identity grounding (name, certs, education), skill enumeration (flat 70+ item list), and positioning narrative (career summary). The matcher LLM treats all of it as undifferentiated context, which is why Role Match returns "missing evidence" for skills that are real but lack STAR story anchors.
-- **Work:** Split into four separate grounding sources:
-  1. **Identity facts** — stable credentials, certs, education
-  2. **Skill assertions with provenance** — technology / methodology / tool + which roles + recency. Skill assertions need provenance attached, not bare claims. Example: *"Kubernetes — CIC platform engineering, 2020-2024."*
-  3. **STAR story corpus** — unchanged, already exists (`echo_star_stories.jsonl`)
-  4. **Positioning docs** — *How I Work and Lead*, *Opportunity Filter* — currently absent from grounding entirely
-- **Dependencies:** Informs **MATTGPT-079** — some "missing evidence" gaps that -079 would otherwise fix via new stories may be better addressed here instead. Decide per gap before writing stories.
-- **Cross-references:**
-  - **MATTGPT-079** — meta-ticket tracking Role Match coverage gaps; -080 changes the decision framework for some of those gaps
-  - **MATTGPT-081** — restructured sources make corrective-action attribution more accurate
-  - **MATTGPT-088** — gated on -080 exit criterion passing
-- **Logged:** May 21, 2026
-
-**Pre-drop worklist (from retiring -080 migration doc, July 29, 2026) -- SUPERSEDED by July 29 session results below.** Leaving for audit trail; do not treat as outstanding work.
-
-~~1. Retrieval-latency audit~~
-~~2. Database fix batch (Network Eng / Octane / TICARA)~~
-~~3. Re-embed~~
-~~4. Re-run structured-JD A/B~~
-
-**A/B validation results (July 29, 2026 session -- supersedes worklist):**
-
-Skills array present vs. absent produced zero assessment flips across three JDs (demo, structured, Fiserv). The array carries no signal the assessor uses. Drop is unblocked and safe.
-
-**Drop brief (approved, ready for implementation):**
-1. Remove skills array from `matt_profile.json`
-2. Edit `load_matt_profile()` to stop building the skills clause; handle absent key cleanly
-3. Verify assessment prompt treats "profile" as facts-only
-4. BDD-first: 5 scenarios committed before implementation
-5. No re-embed required (profile is not embedded)
-
-Note: item 3 is coupled to the citation investigation below. If the empty-evidence finding is a real assessor defect, the "does profile count as a citation" decision must land before or with the drop.
-
-**TOP_K finding (July 30, 2026):** The assessor's `DEFAULT_TOP_K` was 3 while Ask Agy passes 5 stories to the LLM. At 3, the Fiserv enablement requirement scored partial with ranks 4 and 5 (AI-Powered Chronic Disease Management, Building Effective AI-Assisted Development Workflows) cut off -- both more responsive than the three it saw. Raised to 5. Validated across all three JDs: Fiserv zero movement, demo product-company holds gap, structured database moves gap to partial. A candidate-score floor was considered and rejected as curve-fitted and discontinuous.
-
-**Citation investigation (July 29, 2026 -- CORRECTED July 30, 2026):**
-~~Original trigger: apparent uncited partial on structured JD #7, condition B, TOP_K=5, observed 2 of 3 runs.~~
-
-Correction: the `b_evidence_run1` column was empty because run 1 returned gap, and empty evidence on a gap is correct. There was no ungrounded verdict. The proposed no-partial-without-citation prompt rule has no evidence behind it and should be evaluated on its own merits if pursued -- not treated as a confirmed bug fix. Citation investigation is closed.
-
-Note: item 3 of the drop brief ("verify assessment prompt treats profile as facts-only") was coupled to this investigation. With the investigation closed, item 3 is now an independent verification step, not a gate.
-
-**Session dispositions (July 29-30, 2026 -- durable, do not re-open without new evidence):**
-- **Confidence floor:** dead. Curve-fit to one observation; do not build.
-- **TOP_K=5:** stands. No citation-rule gate required.
-- **Database gap:** partial and gap are both defensible at TOP_K=5; neither is settled. See MATTGPT-157 verdict update for context.
-- **Intents/industries false-positive:** fixed and committed.
-- **Salary guard:** validated working.
-
-**Re-validation caveat (July 30, 2026):** All three JD results rest on 3-run modes. Two movements were 2-of-3 (database requirement: gap to partial; Kubernetes on demo JD). Re-validation at 5 runs was specified and has not been run. Do not read these numbers as firmer than the evidence supports.
-
-**Exit criterion for -080:** drop brief implementation passes BDD. -088 does not start until exit criterion is met.
-
-**Durable dispositions (preserve through -080 closure):**
-- **Do-not-re-open list:** skills removed after deliberate review; do not surface as gaps in future sessions without new evidence.
-- **Single-home ceilings:** Azure, Aurora, ElastiCache -- each has one story home; do not expand to additional stories without a real new use case.
-- **Dropped from corpus:** PostgreSQL, TypeScript, ECMAScript -- removed as not credibly claim-worthy at seniority level.
-- **Vendor cluster collapsed:** consolidated into existing Vendor Management (coordination) skill; separate "vendor spend/procurement" claim is MATTGPT-156 (decide-later).
-- **P&L resolved via dedicated story:** buy-side P&L has its own story ("Owning the P&L..."); sell-side commercial story is MATTGPT-155.
-- **Vendor Management retrieval-latent:** confirmed tags-only; no Use Case evidence in corpus. Part of retrieval-latency audit above.
-
-**Architectural rationale (§11 convergence from retiring doc):** The profile restructure and the scorer re-calibration (-088) converge on a single architectural principle: the corpus and the structured grounding must agree on what Matt can claim before either surface makes an assertion. -080 fixes the grounding layer (provenance-attached skill assertions replacing bare claims). -088 fixes the scoring surface (no Strong Match when grounding doesn't support it). Neither lands correctly without the other, which is why -088 is gated.
-
----
-
 ### MATTGPT-081
 **Role Match engine — corrective-actions output by asset type**
 
@@ -832,7 +760,7 @@ Note: item 3 of the drop brief ("verify assessment prompt treats profile as fact
 - **Status:** Open
 - **Priority:** High
 - **Type:** Issue
-- **Gating (July 29, 2026):** Do not start -088 until MATTGPT-080 exit criterion passes (structured-JD A/B confirmed after database fix batch + re-embed). The grounding layer must be stable before scorer re-calibration makes sense.
+- **Gating (July 29, 2026 -- resolved July 31, 2026):** Was gated on MATTGPT-080 exit criterion. -080 is now Done. -088 is unblocked.
 - **Scope clarification (May 29, 2026):** This ticket is specifically about **cross-surface consistency on the same factual question** (Role Match scorer vs Agy chat answer), not about general scoring strictness or model granularity. Two adjacent concerns that get conflated and should NOT be folded in here: (a) "scoring inflates one tier" critiques (binary Strong/Partial/Gap can't carry "Strong-with-nuance" distinctions like Director-vs-VP tenure) — that's a model-granularity concern, separate work; (b) verdict-line / overall-fit summaries — separate UX decision, see MATTGPT-089 area work. -088's audit produces downgraded Notes that plug into the existing Partial-with-Note rendering pattern; no UI changes required for -088 itself.
 - **Issue:** Role Match scorer over-claims relative to what Agy honestly returns in chat. Specific evidence: Role Match marks *"experience running an in-house engineering organization of 60+ as a direct accountable leader"* as **Strong Match**, while Agy correctly responds that Matt has **not** directly managed an in-house product engineering organization. Same factual question, two surfaces, contradictory answers. The Role Match scorer is the inconsistent one.
 - **Audience impact:** CTO persona (May 27, 2026 test) called this the single biggest credibility hit on the entire site. Quote: *"That inconsistency in his own AI is the kind of thing I'd raise on the call, because if he doesn't see it, that's a signal."* Translated to interview prep: *"Which one is right, and what does the inconsistency tell me about how you'd present your team's work?"* — a defensive answer to that question kills the candidacy.
@@ -2232,6 +2160,29 @@ Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consiste
 4. Re-check confidence-band calibration: `CONFIDENCE_HIGH=0.25` was tuned for pc-only; adding a kw term shifts blended scores up.
 
 **Decision gate:** Re-enable `W_KW` at a tested weight only if the holdout passes. If flat weighting cannot separate specific from generic overlap, the real fix is term-weighted keyword (separate sub-decision; weigh against vocab-maintenance cost). If neither is clean, leave `W_KW=0.0` and document that pure-semantic is retained deliberately rather than by accident.
+
+---
+
+### MATTGPT-158
+**Gap notes state absence without transferability; decide audience and reframe**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Investigation / Action
+- **File:** `services/jd_assessor.py` (assessor prompt)
+- **Logged:** July 31, 2026
+
+**Issue:** When a requirement scores partial or gap, the assessor emits what is missing and stops. Observed on the Fiserv enablement requirement: at TOP_K=3 the note read "specific focus on AI tools and capabilities is missing"; at TOP_K=5, with better candidates in the pool, it improved to "delivering training sessions" but still only named the shortfall. Neither version says that the same enablement motion was delivered repeatedly for other emerging technologies, nor what would close the distance.
+
+**Prior decision this depends on:** Role Match's audience is not settled, and the right output differs by audience. For Matt's own use, a blunt absence is the useful signal: apply or don't, and know what you'll be asked to defend. For a recruiter or hiring manager, a bare absence is the portfolio arguing against its owner, and reads as a reason to stop. Decide this before writing any prompt change, because it governs the shape of every gap note, not just this field.
+
+**Proposed direction if audience is external or both:** Extend the assessor's existing managed-service equivalence rule (which already treats ElastiCache as evidence for Redis) to cover methodology. When a method is demonstrated repeatedly and only the subject matter differs, name the method, name the transfer, and state what would close the gap. Keep this in the explanation only. The verdict must not move on transferability.
+
+**Constraint -- this is the reason to be careful:** "Hasn't done X but has done Y, which is similar" is the same reasoning shape as the skills array that MATTGPT-080 just removed. Transferability in the score reintroduces the over-claim. Transferability in the prose does not. Hold that line.
+
+**Also consider:** Flagging under-specified requirements rather than silently resolving them by literal reading. "AI tools and capabilities" is broad enough that a narrow reading and a hiring-manager reading give different verdicts, and saying so is more useful than picking one.
+
+**Acceptance:** Re-run all three JDs and confirm every verdict is unchanged while partial and gap notes carry the transfer case where one genuinely exists. Any verdict movement means the change leaked into scoring and must be reverted.
 
 ---
 

@@ -8,6 +8,20 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Ask Agy
 
+**July 31, 2026 — `matt_profile.json` skills array drop complete (MATTGPT-080)**
+
+Skills array removed from `matt_profile.json`; `load_matt_profile()` updated to handle the absent key cleanly; assessment prompt verified facts-only. BDD-first cycle completed before implementation. No re-embed required (profile is not embedded).
+
+Validated across three JDs (demo, structured, Fiserv) at TOP_K=5: zero recommendation flips across all conditions. Complete picture:
+
+| JD | Pre-drop A | Pre-drop B | Post-drop A | Post-drop B |
+|---|---|---|---|---|
+| Demo | Apply/High | Apply/High | Apply/High | Apply/High |
+| Structured | Apply/High | Apply/High | Apply/High | Apply/High |
+| Fiserv | Consider/Medium | Consider/Medium | Consider/Medium | Consider/Medium |
+
+Three findings recorded on closure: (1) The TOP_K=5 baseline supersedes all TOP_K=3 data from this session; a "Consider/Medium" figure circulated mid-session from a pre-parity run and should not be read as current. (2) The array's demonstrated effect was one requirement out of 60: database #7 on the structured JD moving from strong to partial in condition A. That is the only proven contribution across three JDs -- true finding, smaller than the session effort implied. (3) Exit criterion passed with two honest gaps standing: product-company experience (demo JD) and COBOL/IBM template noise (Fiserv). Neither is a corpus defect. -088 is now unblocked.
+
 **July 29, 2026 — Corpus em dash cleanup complete (MATTGPT-151)**
 
 All em dashes removed from master Excel (MPugmire - STAR Stories - 28JUL26v1.xlsx), verified across all 29 fields and all rows. Pipeline is unidirectional (master → JSONL), so the scrub is permanent. Re-ingest and push to production stays with Matt. Confirmed clean by Code session cross-checking the saved file.
