@@ -123,3 +123,25 @@ def output_has_template_keys(context):
     assert (
         "gap_explanation" in context["result"]
     ), "Output missing 'gap_explanation' -- template may not have been applied"
+
+
+TRACEABILITY_FRAGMENT = "trace to specific text in the grounding context"
+OMISSION_FRAGMENT = "omit the profile evidence entirely"
+
+
+@then("the output contains the profile traceability instruction")
+def output_has_traceability_rule(context):
+    assert TRACEABILITY_FRAGMENT in context["result"], (
+        f"Traceability rule missing from built prompt.\n"
+        f"Expected fragment: {TRACEABILITY_FRAGMENT!r}\n"
+        f"Got: {context['result']}"
+    )
+
+
+@then("the output contains the profile omission instruction")
+def output_has_omission_instruction(context):
+    assert OMISSION_FRAGMENT in context["result"], (
+        f"Profile omission instruction missing from built prompt.\n"
+        f"Expected fragment: {OMISSION_FRAGMENT!r}\n"
+        f"Got: {context['result']}"
+    )

@@ -28,3 +28,17 @@ Feature: Profile grounding string excludes skills array
     When build_assessment_prompt is called
     Then the output contains "match_status" and "gap_explanation"
     And the output does not contain "ZZZ_SENTINEL_SKILL_DO_NOT_USE"
+
+  # Profile evidence traceability: these two scenarios are wiring checks.
+  # They verify the rule text is present in the built prompt, not that the LLM
+  # honours it. Behavioral validation lives in the JD re-run and the eval suite.
+
+  Scenario: build_assessment_prompt contains the profile evidence traceability rule
+    Given a profile whose skills array contains "ZZZ_SENTINEL_SKILL_DO_NOT_USE"
+    When build_assessment_prompt is called
+    Then the output contains the profile traceability instruction
+
+  Scenario: build_assessment_prompt instructs model to omit profile evidence when grounding has no match
+    Given a profile whose skills array contains "ZZZ_SENTINEL_SKILL_DO_NOT_USE"
+    When build_assessment_prompt is called
+    Then the output contains the profile omission instruction
