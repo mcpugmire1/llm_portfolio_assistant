@@ -2198,19 +2198,24 @@ Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consiste
 - **First documented:** June 26, 2026 backlog prioritization session
 - **Logged:** July 31, 2026
 
-**Issue:** `jd_assessor.py` makes one sequential `gpt-4o` call per JD requirement. The demo JD has roughly 23 requirements and measured at approximately 336 seconds end to end on June 24, 2026. The `assess` loop dominates; `extract` is a large N-independent cost (~22s local on the demo JD) and is the floor regardless of parallelism.
+**Issue:** `jd_assessor.py` makes one sequential `gpt-4o` call per JD requirement. The demo JD has roughly 23 requirements. The `assess` loop dominates; `extract` is a large N-independent cost (~22s local on the demo JD) and is the floor regardless of parallelism.
 
-**Measurement caveat:** The 336-second figure is from June 24, 2026 at TOP_K=3. TOP_K was raised to 5 on July 31, 2026, which increases context per call. The current sequential cost is higher than the recorded baseline. Treat 336s as a lower bound and re-measure before quoting a number.
+**Historical measurement:** 336 seconds end to end, measured June 16, 2026 at TOP_K=3. This predates the TOP_K=5 change made July 31, 2026, which increases context per call. The current sequential cost is higher than the recorded figure. Re-measure before optimizing; do not quote 336s as the current number.
 
-**Proposed fix:** Parallelize the `assess` calls using `asyncio` or a `ThreadPoolExecutor`, keeping `gpt-4o` and the same per-requirement judgment logic unchanged. Estimated improvement: two to three minutes down to fifteen to twenty seconds (based on June 2026 estimate; re-validate after implementation). `extract` remains sequential as it is N-independent and is the floor.
+**Root cause and fix:** Sequential per-requirement calls with `gpt-4o` is the confirmed root cause. The fix is concurrency -- parallelize the `assess` calls using `asyncio` or a `ThreadPoolExecutor` -- not a model downgrade. Per-requirement reasoning with `gpt-4o` is what makes the scorer credible (confirmed in MATTGPT-088 scope work: mini produces subpar assessment reasoning). Dropping to mini would make -088 worse, not better. Estimated improvement after parallelization: two to three minutes down to fifteen to twenty seconds (June 2026 estimate; re-validate after implementation).
+
+**Why this went unfiled twice:** Surfaced June 16, 2026 during -067 release-gate work and classified as backend optimization rather than UI polish -- correctly kept out of that gate, but not filed. Sat as a latency reference note in -088 and -099 without an owner through June 26, when it was identified as unfiled in a backlog prioritization session and still not filed. Same pattern as MATTGPT-155 (sell-side story) and MATTGPT-156 (vendor spend): context notes in other tickets are not tickets, and findings without an owner evaporate. Filed here so it has one.
+
+**Perceived-performance half (independent of the concurrency fix):** What the user sees during a two-minute wait -- whether it looks like progress or like a hang -- is a separate concern that can land even if concurrency work slips. Connects to MATTGPT-083 (spinner inconsistency). Worth addressing regardless of when the async fix ships.
 
 **Constraints:**
-- Do not swap `gpt-4o` for `gpt-4o-mini` in this pass. Prior finding (MATTGPT-127/MATTGPT-140) confirmed mini produces subpar assessment reasoning for this task.
-- Keep per-requirement judgment logic identical. This is a concurrency change, not a prompt or scoring change.
+- Do not swap `gpt-4o` for `gpt-4o-mini`. This is a concurrency change, not a prompt or scoring change.
+- Keep per-requirement judgment logic identical.
 - Re-run all three JDs to confirm verdicts are unchanged after parallelization.
 
 **Cross-references:**
 - Latency context noted (not ticketed) in MATTGPT-088 and MATTGPT-099 detail blocks.
+- MATTGPT-083 -- spinner inconsistency; perceived-performance half connects here.
 
 ---
 
