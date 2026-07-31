@@ -86,6 +86,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-156](#mattgpt-156) | Vendor commercial/spend management gap — decide whether corpus-zero on invoice/rate-card/procurement is a real claim or honest gap | Open | Low | Investigation | July 29, 2026 |
 | [MATTGPT-157](#mattgpt-157) | Re-evaluate keyword weight (W_KW) for specific-term query swamping — predict-then-test before any code change | Open | Medium | Investigation / Action | July 29, 2026 |
 | [MATTGPT-158](#mattgpt-158) | Gap notes state absence without transferability; decide audience and reframe | Open | Medium | Investigation / Action | July 31, 2026 |
+| [MATTGPT-159](#mattgpt-159) | Role Match performance — parallelize per-requirement assessor calls; sequential gpt-4o loop is the bottleneck | Open | Medium | Performance | July 31, 2026 |
 
 ---
 
@@ -2183,6 +2184,33 @@ Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consiste
 **Also consider:** Flagging under-specified requirements rather than silently resolving them by literal reading. "AI tools and capabilities" is broad enough that a narrow reading and a hiring-manager reading give different verdicts, and saying so is more useful than picking one.
 
 **Acceptance:** Re-run all three JDs and confirm every verdict is unchanged while partial and gap notes carry the transfer case where one genuinely exists. Any verdict movement means the change leaked into scoring and must be reverted.
+
+---
+
+### MATTGPT-159
+**Role Match performance -- parallelize per-requirement assessor calls; sequential gpt-4o loop is the bottleneck**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Performance
+- **File:** `services/jd_assessor.py`
+- **Surfaced:** June 16, 2026 (during -067 release-gate work; classified backend optimization, kept out of that gate)
+- **First documented:** June 26, 2026 backlog prioritization session
+- **Logged:** July 31, 2026
+
+**Issue:** `jd_assessor.py` makes one sequential `gpt-4o` call per JD requirement. The demo JD has roughly 23 requirements and measured at approximately 336 seconds end to end on June 24, 2026. The `assess` loop dominates; `extract` is a large N-independent cost (~22s local on the demo JD) and is the floor regardless of parallelism.
+
+**Measurement caveat:** The 336-second figure is from June 24, 2026 at TOP_K=3. TOP_K was raised to 5 on July 31, 2026, which increases context per call. The current sequential cost is higher than the recorded baseline. Treat 336s as a lower bound and re-measure before quoting a number.
+
+**Proposed fix:** Parallelize the `assess` calls using `asyncio` or a `ThreadPoolExecutor`, keeping `gpt-4o` and the same per-requirement judgment logic unchanged. Estimated improvement: two to three minutes down to fifteen to twenty seconds (based on June 2026 estimate; re-validate after implementation). `extract` remains sequential as it is N-independent and is the floor.
+
+**Constraints:**
+- Do not swap `gpt-4o` for `gpt-4o-mini` in this pass. Prior finding (MATTGPT-127/MATTGPT-140) confirmed mini produces subpar assessment reasoning for this task.
+- Keep per-requirement judgment logic identical. This is a concurrency change, not a prompt or scoring change.
+- Re-run all three JDs to confirm verdicts are unchanged after parallelization.
+
+**Cross-references:**
+- Latency context noted (not ticketed) in MATTGPT-088 and MATTGPT-099 detail blocks.
 
 ---
 
