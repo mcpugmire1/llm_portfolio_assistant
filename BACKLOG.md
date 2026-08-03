@@ -14,6 +14,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 2. **-077 mitigation** — Query-side: strip "Matt" from embedded queries on technical-noun shapes. Protects primary free-text recruiter flow from MattGPT self-referential answers.
 3. **-097** — Career-intent refresh. Timely for active outreach; makes "what's Matt looking for" keyword-searchable.
 4. **-129 stories 1+2** — AT&T SE CRM + Fiserv expand-from-logged stories (no elicitation block yet). Operational depth work.
+5. **-161** — Career span hardcoded across surfaces. Fourth instance this week of a value stated once and quoted forward past validity. Violates no-hardcoded-data-derived-values rule.
 
 **NEXT** (queued):
 1. **-128** — Source faithfulness. Unlocked. Second-biggest trust item: recruiter clicks to verify a claim, gets wrong source cards.
@@ -87,6 +88,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-157](#mattgpt-157) | Re-evaluate keyword weight (W_KW) for specific-term query swamping — predict-then-test before any code change | Open | Medium | Investigation / Action | July 29, 2026 |
 | [MATTGPT-159](#mattgpt-159) | Role Match performance — parallelize per-requirement assessor calls; sequential gpt-4o loop is the bottleneck | Open | Medium | Performance | July 31, 2026 |
 | [MATTGPT-160](#mattgpt-160) | JD extractor clause-dropping — 7 of 23 requirements on demo JD lose qualifiers during extraction | Open | Medium | Bug | July 31, 2026 |
+| [MATTGPT-161](#mattgpt-161) | Career span duplicated and hardcoded across surfaces — consolidate to a single derived or configured source | Open | High | Refactor | August 3, 2026 |
 
 ---
 
@@ -2213,6 +2215,39 @@ Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consiste
 **Probe script:** `probe_db_extraction.py` (repo root) contains tooling for investigating this defect. It runs `extract_requirements()` on the structured JD, compares extracted text to source, and tests full-text vs stripped retrieval through Pinecone at top-40. Re-use this rather than building a new probe.
 
 **Constraint:** This is a separate defect from MATTGPT-157 (W_KW keyword weighting). The clause-dropping happens at extraction time, before retrieval scoring. Do not conflate.
+
+---
+
+### MATTGPT-161
+**Career span duplicated and hardcoded across surfaces -- consolidate to a single derived or configured source**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Refactor
+- **Files:** `services/backend_service.py` (lines 245, 254 confirmed), `data/matt_profile.json` (`career_summary` -- removed August 3), design-spec repo (public-facing; scan needed)
+- **Logged:** August 3, 2026
+
+**Problem:** The same derived value is implemented independently in multiple places with different values, some wrong. `backend_service.py` computes `current_year - 2005` for the startup banner and `MATT_DNA`, hardcodes "18+ years" at line 245, and hardcodes "2023-2026" at line 254 (goes stale in January). `career_summary` in `matt_profile.json` carried "18+ years at Accenture" until removed August 3 -- the assessor was citing that string as profile evidence on tenure requirements, surfaced during MATTGPT-158 validation. This is the fourth instance this week of a value stated once and quoted forward past its validity. Violates the no-hardcoded-data-derived-values rule in CLAUDE.md and the anti-patterns section in ARCHITECTURE.md.
+
+**Two decisions, in this order:**
+
+1. **Where the value comes from.** Three candidates:
+   - Derived at startup in `sync_portfolio_metadata()` alongside `SYNTHESIS_THEMES` and `_KNOWN_CLIENTS` -- matches the existing pattern for corpus-derived globals.
+   - `constants.py` -- fits the file's role but means hardcoding or placing corpus logic in config.
+   - Environment configuration -- the honest option if the value cannot be derived.
+
+   This depends on an unsettled question: the corpus starts in 2005, but the 2005 resume shows the career starting in 1997. If pre-2005 stories are added, derivation from the corpus works. If not, the anchor must be configured. **Decide this once and record the decision.** Do not resolve it implicitly in multiple places again.
+
+2. **Whether it surfaces at all.** Separate from where it lives. `about_matt.py` establishes depth through named programs, scale metrics, and date ranges without stating a total. That is the established pattern, consistent with the ageism-signal rule applied to the resume, corpus, and `career_summary`. A consolidated value may exist and be referenced nowhere visible to users.
+
+**Known consumers (confirmed and suspected):**
+- `backend_service.py` lines 245 and 254 -- startup banner and `MATT_DNA`
+- `matt_profile.json` `career_summary` -- removed August 3 (was also reaching the assessor as citable grounding)
+- Design-spec repo -- public-facing, scan required
+
+**Required work:** Repo-wide scan for year-count patterns (`\d{2}\+?\s*years`, `current_year\s*-\s*20\d{2}`, literal "2005") across this repo and the design-spec repo before implementing anything.
+
+**Constraint:** Tenure requirements on JDs are legitimate and the right answer is the assessor reasoning from story dates (demonstrated working on Fiserv requirement #8 -- see MATTGPT-088). Do not reintroduce a hardcoded span to compensate for tenure-inference variance. These are separate problems with separate fixes.
 
 ---
 
