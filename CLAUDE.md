@@ -319,6 +319,11 @@ For each structural change: name the section and paste the exact proposed text. 
 **Step 3: Approval gate**
 Nothing writes until Matt approves the full proposed diff. One approval covers all ARCHITECTURE.md changes from this pass.
 
+**ARCHITECTURE.md content rules:**
+- No ticket numbers in body text. They function as changelog entries and cause bloat. History belongs in CHANGELOG.md; ARCHITECTURE.md describes current state.
+- Ticket numbers are allowed in section headers only as provenance anchors.
+- Entries cite date and outcome, not ticket numbers. If traceability to a specific change is needed, use the commit hash.
+
 ## Documentation Restraint
 Default to **not** creating new markdown files. Most findings belong in commit messages, BACKLOG entries, ADRs, or inline updates to existing docs.
 
