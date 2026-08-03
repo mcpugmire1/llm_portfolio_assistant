@@ -5,10 +5,11 @@ Pure unit tests -- no Playwright, no API calls. Patches builtins.open with a
 synthetic fixture so tests are hermetic and independent of the real
 matt_profile.json. Runs in milliseconds.
 
-MATTGPT-080: Confirms that load_matt_profile() and build_assessment_prompt()
-ignore the skills key in the profile JSON. The code guarantee lives here, not
-in the data file -- so a stray skills array in the JSON cannot leak into the
-grounding string.
+MATTGPT-080: Confirms load_matt_profile() ignores the skills key.
+MATTGPT-158: Confirms load_matt_profile() excludes career_summary prose and
+retains only discrete facts (education + certifications). Confirms the
+discrete-facts-only rule is present in the built prompt and the counterfactual
+verdict clause is absent.
 """
 
 import json
@@ -33,6 +34,11 @@ EDUCATION = [
     }
 ]
 
+CERTIFICATIONS = ["AWS Certified Solutions Architect"]
+
+DISCRETE_FACTS_FRAGMENT = "Only discrete facts are citable as profile evidence"
+COUNTERFACTUAL_CLAUSE = "Omitting profile evidence must not change the verdict"
+
 
 def _make_profile():
     return {
@@ -40,7 +46,7 @@ def _make_profile():
         "career_summary": CAREER_SUMMARY,
         "education": EDUCATION,
         "skills": [SENTINEL, "Platform Modernization", "Cloud-Native Architecture"],
-        "certifications": ["AWS Certified Solutions Architect"],
+        "certifications": CERTIFICATIONS,
     }
 
 
@@ -95,12 +101,12 @@ def output_omits_sentinel(context):
     )
 
 
-@then("the output contains the career summary text")
-def output_has_summary(context):
-    assert CAREER_SUMMARY in context["result"], (
-        f"Output missing career summary.\n"
-        f"Expected: {CAREER_SUMMARY}\n"
-        f"Got: {context['result']}"
+@then("the output does not contain the career summary text")
+def output_excludes_summary(context):
+    assert CAREER_SUMMARY not in context["result"], (
+        f"career_summary prose must be excluded from assessment grounding.\n"
+        f"Found: {CAREER_SUMMARY!r}\n"
+        f"In: {context['result']}"
     )
 
 
@@ -115,6 +121,13 @@ def output_has_education(context):
     ), f"Institution '{edu['institution']}' missing from output:\n{context['result']}"
 
 
+@then("the output contains the certifications text")
+def output_has_certifications(context):
+    assert (
+        CERTIFICATIONS[0] in context["result"]
+    ), f"Certification '{CERTIFICATIONS[0]}' missing from output:\n{context['result']}"
+
+
 @then('the output contains "match_status" and "gap_explanation"')
 def output_has_template_keys(context):
     assert (
@@ -125,23 +138,19 @@ def output_has_template_keys(context):
     ), "Output missing 'gap_explanation' -- template may not have been applied"
 
 
-TRACEABILITY_FRAGMENT = "trace to specific text in the grounding context"
-OMISSION_FRAGMENT = "omit the profile evidence entirely"
-
-
-@then("the output contains the profile traceability instruction")
-def output_has_traceability_rule(context):
-    assert TRACEABILITY_FRAGMENT in context["result"], (
-        f"Traceability rule missing from built prompt.\n"
-        f"Expected fragment: {TRACEABILITY_FRAGMENT!r}\n"
+@then("the output contains the discrete facts profile rule")
+def output_has_discrete_facts_rule(context):
+    assert DISCRETE_FACTS_FRAGMENT in context["result"], (
+        f"Discrete-facts-only rule missing from built prompt.\n"
+        f"Expected fragment: {DISCRETE_FACTS_FRAGMENT!r}\n"
         f"Got: {context['result']}"
     )
 
 
-@then("the output contains the profile omission instruction")
-def output_has_omission_instruction(context):
-    assert OMISSION_FRAGMENT in context["result"], (
-        f"Profile omission instruction missing from built prompt.\n"
-        f"Expected fragment: {OMISSION_FRAGMENT!r}\n"
-        f"Got: {context['result']}"
+@then("the output does not contain the counterfactual verdict clause")
+def output_lacks_counterfactual_clause(context):
+    assert COUNTERFACTUAL_CLAUSE not in context["result"], (
+        f"Counterfactual clause must be absent from prompt.\n"
+        f"Found: {COUNTERFACTUAL_CLAUSE!r}\n"
+        f"In: {context['result']}"
     )
