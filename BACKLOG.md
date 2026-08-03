@@ -87,6 +87,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-157](#mattgpt-157) | Re-evaluate keyword weight (W_KW) for specific-term query swamping — predict-then-test before any code change | Open | Medium | Investigation / Action | July 29, 2026 |
 | [MATTGPT-158](#mattgpt-158) | Gap notes state absence without transferability; decide audience and reframe | Open | Medium | Investigation / Action | July 31, 2026 |
 | [MATTGPT-159](#mattgpt-159) | Role Match performance — parallelize per-requirement assessor calls; sequential gpt-4o loop is the bottleneck | Open | Medium | Performance | July 31, 2026 |
+| [MATTGPT-160](#mattgpt-160) | JD extractor clause-dropping — 7 of 23 requirements on demo JD lose qualifiers during extraction | Open | Medium | Bug | July 31, 2026 |
 
 ---
 
@@ -2163,8 +2164,6 @@ Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consiste
 
 **Decision gate:** Re-enable `W_KW` at a tested weight only if the holdout passes. If flat weighting cannot separate specific from generic overlap, the real fix is term-weighted keyword (separate sub-decision; weigh against vocab-maintenance cost). If neither is clean, leave `W_KW=0.0` and document that pure-semantic is retained deliberately rather than by accident.
 
-**Probe script:** `probe_db_extraction.py` (repo root) contains tooling for the database pool-presence investigation: runs `extract_requirements()` on the structured JD, tests full-text vs stripped retrieval through Pinecone at top-40 with TICARA/AT&T Network Eng/Octane highlighted, and runs `assess_requirement()` 3x per phrasing under condition B. If W_KW work reaches database stories, re-run this script rather than rebuilding the probe from scratch.
-
 ---
 
 ### MATTGPT-158
@@ -2219,6 +2218,24 @@ Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consiste
 **Cross-references:**
 - Latency context noted (not ticketed) in MATTGPT-088 and MATTGPT-099 detail blocks.
 - MATTGPT-083 -- spinner inconsistency; perceived-performance half connects here.
+- MATTGPT-160 -- extraction clause-dropping; separate defect in the same file.
+
+---
+
+### MATTGPT-160
+**JD extractor clause-dropping -- 7 of 23 requirements on demo JD lose qualifiers during extraction**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `services/jd_assessor.py` (`extract_requirements()`)
+- **Logged:** July 31, 2026
+
+**Issue:** `extract_requirements()` drops qualifiers from JD requirements during extraction. On the demo JD, 7 of 23 requirements lost qualifiers -- the extracted text is narrower than what the JD actually requires. Downstream effect: the assessor evaluates a stripped version of the requirement, which can produce verdicts (strong, partial, gap) that don't reflect what the hiring manager wrote.
+
+**Probe script:** `probe_db_extraction.py` (repo root) contains tooling for investigating this defect. It runs `extract_requirements()` on the structured JD, compares extracted text to source, and tests full-text vs stripped retrieval through Pinecone at top-40. Re-use this rather than building a new probe.
+
+**Constraint:** This is a separate defect from MATTGPT-157 (W_KW keyword weighting). The clause-dropping happens at extraction time, before retrieval scoring. Do not conflate.
 
 ---
 
