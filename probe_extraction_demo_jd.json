@@ -1,0 +1,140 @@
+{
+  "role_title": "Senior Engineering Leader, Product Platform",
+  "company": "Undisclosed",
+  "jd_format": "bulleted",
+  "required_qualifications": [
+    {
+      "requirement": "10+ years of progressive software engineering experience",
+      "source_text": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+      "type": "experience"
+    },
+    {
+      "requirement": "5+ years leading engineering managers and senior technical leaders",
+      "source_text": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+      "type": "experience"
+    },
+    {
+      "requirement": "Experience building or scaling an engineering organization",
+      "source_text": "Demonstrated experience building or scaling an engineering organization (from early stage to 100+ or inheriting and restructuring an existing org)",
+      "type": "experience"
+    },
+    {
+      "requirement": "Cloud-native architecture experience at the platform level",
+      "source_text": "Cloud-native architecture experience (AWS, Azure, or GCP) at the platform level",
+      "type": "experience"
+    },
+    {
+      "requirement": "Track record of legacy platform modernization without business disruption",
+      "source_text": "Track record of legacy platform modernization in production environments without business disruption",
+      "type": "experience"
+    },
+    {
+      "requirement": "Cross-functional leadership experience",
+      "source_text": "Cross-functional leadership experience \u2014 engineering, product, and design operating as integrated units",
+      "type": "experience"
+    },
+    {
+      "requirement": "Experience establishing or maturing engineering delivery practices",
+      "source_text": "Experience establishing or maturing engineering delivery practices (CI/CD, automated testing, observability, release management)",
+      "type": "experience"
+    },
+    {
+      "requirement": "Regulated industry experience",
+      "source_text": "Regulated industry experience (financial services, healthcare, government, or equivalent complexity)",
+      "type": "domain"
+    },
+    {
+      "requirement": "Ability to translate business strategy into engineering roadmap",
+      "source_text": "Demonstrated ability to translate business strategy into engineering roadmap and organizational structure",
+      "type": "skill"
+    },
+    {
+      "requirement": "AI/ML adoption strategy experience",
+      "source_text": "AI/ML adoption strategy \u2014 practical experience introducing AI-assisted development practices into an engineering organization",
+      "type": "experience"
+    },
+    {
+      "requirement": "Modern technology stack fluency",
+      "source_text": "Modern technology stack fluency across frontend and backend (React or equivalent, Python/Node.js/Go, containerized microservices)",
+      "type": "skill"
+    },
+    {
+      "requirement": "Budget ownership or P&L accountability for an engineering function",
+      "source_text": "Budget ownership or P&L accountability for an engineering function",
+      "type": "experience"
+    }
+  ],
+  "preferred_qualifications": [
+    {
+      "requirement": "Product company experience",
+      "source_text": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+      "type": "experience"
+    },
+    {
+      "requirement": "Healthcare, insurance, or life sciences domain knowledge",
+      "source_text": "Healthcare, insurance, or life sciences domain knowledge",
+      "type": "domain"
+    },
+    {
+      "requirement": "Hands-on Kubernetes experience at production scale",
+      "source_text": "Hands-on Kubernetes experience at production scale (cluster management, service mesh, multi-tenant orchestration)",
+      "type": "experience"
+    },
+    {
+      "requirement": "Graduate degree in a technical field",
+      "source_text": "Graduate degree in a technical field (Computer Science, Engineering, Information Technology, or related)",
+      "type": "education"
+    },
+    {
+      "requirement": "Published thought leadership or conference speaking",
+      "source_text": "Published thought leadership or conference speaking on engineering culture, modernization, or AI adoption",
+      "type": "experience"
+    }
+  ],
+  "implicit_requirements": [
+    {
+      "requirement": "Experience leading and scaling a cross-functional product engineering organization",
+      "inferred_from": "Lead and scale a cross-functional product engineering organization (150-300 engineers, product managers, and designers)",
+      "confidence": "high"
+    },
+    {
+      "requirement": "Experience defining engineering operating models",
+      "inferred_from": "Define the engineering operating model: hiring philosophy, team structure, delivery practices, quality standards, and career development",
+      "confidence": "high"
+    },
+    {
+      "requirement": "Experience driving platform modernization",
+      "inferred_from": "Drive platform modernization across a legacy core while maintaining business continuity",
+      "confidence": "high"
+    },
+    {
+      "requirement": "Experience establishing AI-assisted engineering practices",
+      "inferred_from": "Establish AI-assisted engineering practices with guardrails for quality, security, and responsible adoption",
+      "confidence": "high"
+    },
+    {
+      "requirement": "Experience partnering with C-suite to translate business strategy",
+      "inferred_from": "Partner with C-suite to translate business strategy into technical roadmap and organizational priorities",
+      "confidence": "high"
+    },
+    {
+      "requirement": "Experience building a culture of sustainable delivery",
+      "inferred_from": "Build a culture of sustainable delivery \u2014 high throughput without heroics",
+      "confidence": "high"
+    }
+  ],
+  "key_responsibilities": [
+    "Lead and scale a cross-functional product engineering organization",
+    "Define the engineering operating model",
+    "Drive platform modernization across a legacy core",
+    "Establish AI-assisted engineering practices",
+    "Partner with C-suite to translate business strategy into technical roadmap",
+    "Build a culture of sustainable delivery"
+  ],
+  "seniority_signals": [
+    "Report to the CTO",
+    "Partner directly with Product, Design, and Business leadership",
+    "Own engineering strategy, organizational design, talent development, and delivery outcomes",
+    "Budget ownership or P&L accountability for an engineering function"
+  ]
+}

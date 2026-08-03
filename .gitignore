@@ -99,3 +99,9 @@ data/offdomain_queries.csv
 
 # CI fact extraction output
 facts.json
+
+# Probe output (regenerates on every run)
+*_results.csv
+probe_pinecone_nouns.csv
+query_log_parsed.csv
+retrieval_gap_flags.csv

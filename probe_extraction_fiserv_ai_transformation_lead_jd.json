@@ -1,0 +1,120 @@
+{
+  "role_title": "A.I. Transformation Lead",
+  "company": "Fiserv",
+  "jd_format": "hybrid",
+  "required_qualifications": [
+    {
+      "requirement": "Bachelor's degree in Computer Science, Data Science, Artificial Intelligence, Machine Learning, or a related field",
+      "source_text": "Bachelor's degree in Computer Science, Data Science, Artificial Intelligence, Machine Learning, or a related field",
+      "type": "education"
+    },
+    {
+      "requirement": "Strong foundation in machine learning, natural language processing, data analytics, and AI platforms",
+      "source_text": "Strong foundation in machine learning, natural language processing, data analytics, and AI platforms",
+      "type": "skill"
+    },
+    {
+      "requirement": "Experience working with structured and unstructured data, model lifecycle management, and enterprise data ecosystems",
+      "source_text": "Experience working with structured and unstructured data, model lifecycle management, and enterprise data ecosystems",
+      "type": "experience"
+    },
+    {
+      "requirement": "Ability to analyze complex data sets, assess business problems, and derive actionable, data-driven insights",
+      "source_text": "Ability to analyze complex data sets, assess business problems, and derive actionable, data-driven insights",
+      "type": "skill"
+    },
+    {
+      "requirement": "Excellent verbal and written communication skills with the ability to explain technical concepts to diverse audiences",
+      "source_text": "Excellent verbal and written communication skills with the ability to explain technical concepts to diverse audiences",
+      "type": "skill"
+    },
+    {
+      "requirement": "Proven ability to influence stakeholders and drive alignment across cross-functional teams",
+      "source_text": "Proven ability to influence stakeholders and drive alignment across cross-functional teams",
+      "type": "skill"
+    },
+    {
+      "requirement": "Demonstrated experience leading projects in complex, cross-functional environments",
+      "source_text": "Demonstrated experience leading projects in complex, cross-functional environments",
+      "type": "experience"
+    },
+    {
+      "requirement": "5-10 years of experience in artificial intelligence, machine learning, data analytics, software development, or related technical disciplines",
+      "source_text": "5-10 years of experience in artificial intelligence, machine learning, data analytics, software development, or related technical disciplines",
+      "type": "experience"
+    }
+  ],
+  "preferred_qualifications": [
+    {
+      "requirement": "Advanced degree in Computer Science, Data Science, Artificial Intelligence, Machine Learning, or a related field",
+      "source_text": "advanced degree preferred",
+      "type": "education"
+    },
+    {
+      "requirement": "Prior experience within the payments, financial services, or regulated industry environment",
+      "source_text": "Prior experience within the payments, financial services, or regulated industry environment strongly preferred",
+      "type": "experience"
+    },
+    {
+      "requirement": "Software Development experience",
+      "source_text": "Software Development experience",
+      "type": "experience"
+    },
+    {
+      "requirement": "Experience with Cobol Programming",
+      "source_text": "Cobol Programming",
+      "type": "skill"
+    },
+    {
+      "requirement": "Experience with IBM tools, monitoring tools, RMF, DB2 utilities, Platinum Detector",
+      "source_text": "IBM tools, monitoring tools, RMF, DB2 utilities, Platinum Detector, etc.",
+      "type": "skill"
+    }
+  ],
+  "implicit_requirements": [
+    {
+      "requirement": "Experience leading the design, development, and deployment of AI and machine learning solutions",
+      "inferred_from": "Lead the design, development, and deployment of AI and machine learning solutions across business and technology platforms",
+      "confidence": "high"
+    },
+    {
+      "requirement": "Experience ensuring seamless integration of AI solutions with existing systems, data pipelines, and operational processes",
+      "inferred_from": "Ensure seamless integration of AI solutions with existing systems, data pipelines, and operational processes",
+      "confidence": "high"
+    },
+    {
+      "requirement": "Experience acting as a trusted advisor and liaison between technical teams and non-technical stakeholders",
+      "inferred_from": "Act as a trusted advisor and liaison between technical teams and non-technical stakeholders",
+      "confidence": "high"
+    },
+    {
+      "requirement": "Experience supporting organizational readiness by delivering training, best practices, and enablement sessions on AI tools and capabilities",
+      "inferred_from": "Support organizational readiness by delivering training, best practices, and enablement sessions on AI tools and capabilities",
+      "confidence": "high"
+    },
+    {
+      "requirement": "Experience monitoring AI system performance, accuracy, and business impact post implementation",
+      "inferred_from": "Monitor AI system performance, accuracy, and business impact post implementation",
+      "confidence": "high"
+    }
+  ],
+  "key_responsibilities": [
+    "Partner with clients and internal stakeholders to understand business objectives and identify high impact AI use cases",
+    "Define AI roadmaps and transformation strategies aligned to organizational priorities and long-term value creation",
+    "Lead the design, development, and deployment of AI and machine learning solutions across business and technology platforms",
+    "Ensure seamless integration of AI solutions with existing systems, data pipelines, and operational processes",
+    "Assess data readiness, quality, and governance to support AI initiatives",
+    "Design and guide the development of AI/ML models tailored to specific business challenges and operational workflows",
+    "Act as a trusted advisor and liaison between technical teams and non-technical stakeholders",
+    "Translate complex AI concepts into clear, actionable insights and business recommendations for executive and operational audiences",
+    "Support organizational readiness by delivering training, best practices, and enablement sessions on AI tools and capabilities",
+    "Drive adoption by embedding AI solutions into day-to-day workflows and decision-making processes",
+    "Monitor AI system performance, accuracy, and business impact post implementation",
+    "Ensure AI solutions comply with ethical standards, regulatory requirements, data privacy policies, and internal governance frameworks"
+  ],
+  "seniority_signals": [
+    "Experience leading projects in complex, cross-functional environments",
+    "Proven ability to influence stakeholders and drive alignment across cross-functional teams",
+    "5-10 years of experience in artificial intelligence, machine learning, data analytics, software development, or related technical disciplines"
+  ]
+}

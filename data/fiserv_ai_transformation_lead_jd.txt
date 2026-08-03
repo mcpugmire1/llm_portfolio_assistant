@@ -1,0 +1,62 @@
+Job Title: A.I. Transformation Lead
+Company: Fiserv
+
+What Does an AI Transformation Consultant Do?
+
+The AI Transformation Consultant leads the end-to-end design, implementation, and adoption of artificial intelligence solutions that drive measurable business outcomes. This role partners closely with business leaders, product teams, and technical experts to identify high value AI use cases, translate business needs into scalable AI capabilities, and ensure successful deployment across the organization. The consultant serves as a critical bridge between strategy and execution—enabling change adoption, governance, and ethical use of AI while ensuring alignment with enterprise systems, regulatory requirements, and performance objectives.
+
+Key Responsibilities
+
+AI Strategy & Use Case Development
+- Partner with clients and internal stakeholders to understand business objectives and identify high impact AI use cases.
+- Define AI roadmaps and transformation strategies aligned to organizational priorities and long-term value creation.
+
+AI Solution Design & Implementation
+- Lead the design, development, and deployment of AI and machine learning solutions across business and technology platforms.
+- Ensure seamless integration of AI solutions with existing systems, data pipelines, and operational processes.
+
+Data Analysis & Model Development
+- Assess data readiness, quality, and governance to support AI initiatives.
+- Design and guide the development of AI/ML models tailored to specific business challenges and operational workflows.
+
+Stakeholder & Change Management
+- Act as a trusted advisor and liaison between technical teams and non-technical stakeholders.
+- Translate complex AI concepts into clear, actionable insights and business recommendations for executive and operational audiences.
+
+Training, Adoption & Enablement
+- Support organizational readiness by delivering training, best practices, and enablement sessions on AI tools and capabilities.
+- Drive adoption by embedding AI solutions into day-to-day workflows and decision-making processes.
+
+Performance, Governance & Ethics
+- Monitor AI system performance, accuracy, and business impact post implementation.
+- Ensure AI solutions comply with ethical standards, regulatory requirements, data privacy policies, and internal governance frameworks.
+
+Basic Qualifications
+
+Education
+- Bachelor's degree in Computer Science, Data Science, Artificial Intelligence, Machine Learning, or a related field; advanced degree preferred.
+
+Technical Expertise
+- Strong foundation in machine learning, natural language processing, data analytics, and AI platforms.
+- Experience working with structured and unstructured data, model lifecycle management, and enterprise data ecosystems.
+
+Analytical & Problem-Solving Skills
+- Ability to analyze complex data sets, assess business problems, and derive actionable, data-driven insights.
+
+Communication & Influence
+- Excellent verbal and written communication skills with the ability to explain technical concepts to diverse audiences.
+- Proven ability to influence stakeholders and drive alignment across cross-functional teams.
+
+Project & Program Leadership
+- Demonstrated experience leading projects in complex, cross-functional environments.
+- Ability to manage multiple initiatives, prioritize work, and deliver results in fast-paced settings.
+
+Education & Experience
+- Bachelor's degree in Computer Science, Data Science, or a related field, or equivalent practical experience.
+- 5-10 years of experience in artificial intelligence, machine learning, data analytics, software development, or related technical disciplines.
+- Prior experience within the payments, financial services, or regulated industry environment strongly preferred.
+
+Experience that would be great to have (preferred):
+- Software Development experience
+- Cobol Programming
+- IBM tools, monitoring tools, RMF, DB2 utilities, Platinum Detector, etc.

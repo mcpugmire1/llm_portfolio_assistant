@@ -1,0 +1,146 @@
+{
+  "role_title": "Director of Engineering",
+  "company": "RiskTech Solutions",
+  "jd_format": "hybrid",
+  "required_qualifications": [
+    {
+      "requirement": "Bachelor's Degree in Computer Science or related field",
+      "source_text": "Bachelor's Degree in Computer Science or related field.",
+      "type": "education"
+    },
+    {
+      "requirement": "10+ years of professional software development experience",
+      "source_text": "10+ years of professional software development experience.",
+      "type": "experience"
+    },
+    {
+      "requirement": "5+ years managing managers and senior engineering leaders",
+      "source_text": "5+ years managing managers and senior engineering leaders.",
+      "type": "experience"
+    },
+    {
+      "requirement": "Proficient in at least one strongly-typed language such as Java, C/C++, or C#",
+      "source_text": "Proficient in at least one strongly-typed language (Java, C/C++, C#, etc.).",
+      "type": "skill"
+    },
+    {
+      "requirement": "Experience with a modern backend framework such as Node.js, Python/FastAPI, or Go and a frontend framework such as React or Vue",
+      "source_text": "Experience with a modern backend framework (e.g. Node.js, Python/FastAPI, or Go) and a frontend framework (e.g. React or Vue).",
+      "type": "skill"
+    },
+    {
+      "requirement": "Cloud-native experience with AWS, Azure, or GCP",
+      "source_text": "Cloud-native experience (AWS, Azure, or GCP)",
+      "type": "skill"
+    },
+    {
+      "requirement": "Experience with modern relational and NoSQL databases such as SQL Server, PostgreSQL, or Redis",
+      "source_text": "Experience with modern relational and NoSQL databases (SQL Server, PostgreSQL, or Redis).",
+      "type": "skill"
+    },
+    {
+      "requirement": "Experience modernizing legacy systems into modular or service-oriented architecture",
+      "source_text": "Experience modernizing legacy systems into modular or service-oriented architecture.",
+      "type": "experience"
+    },
+    {
+      "requirement": "Demonstrated experience leading large-scale platform or shared services organizations",
+      "source_text": "Demonstrated experience leading large-scale platform or shared services organizations.",
+      "type": "experience"
+    },
+    {
+      "requirement": "Strong working knowledge of application security, secure coding practices, and risk mitigation",
+      "source_text": "Strong working knowledge of application security, secure coding practices, and risk mitigation.",
+      "type": "skill"
+    },
+    {
+      "requirement": "Working knowledge of AI tools in software development including code generation, testing, documentation, and observability",
+      "source_text": "Working knowledge of AI tools in software development (code generation, testing, documentation, observability)",
+      "type": "skill"
+    }
+  ],
+  "preferred_qualifications": [
+    {
+      "requirement": "Agile/Scrum experience",
+      "source_text": "Agile/Scrum experience",
+      "type": "experience"
+    },
+    {
+      "requirement": "Insurance or risk management domain knowledge",
+      "source_text": "Insurance or risk management domain knowledge",
+      "type": "domain"
+    },
+    {
+      "requirement": "Experience managing client product implementations",
+      "source_text": "Experience managing client product implementations",
+      "type": "experience"
+    },
+    {
+      "requirement": "Experience with building mobile applications using React Native",
+      "source_text": "Experience with building mobile applications using React Native",
+      "type": "skill"
+    }
+  ],
+  "implicit_requirements": [
+    {
+      "requirement": "Experience leading platform modernization efforts",
+      "inferred_from": "Define and execute the platform modernization roadmap",
+      "confidence": "high"
+    },
+    {
+      "requirement": "Experience with API-driven and service-oriented design principles",
+      "inferred_from": "Promote modular, API-driven, and service-oriented design principles.",
+      "confidence": "high"
+    },
+    {
+      "requirement": "Experience partnering with product-aligned engineering teams",
+      "inferred_from": "Partner with IRM and Insurance Product Directors to balance platform enablement with delivery timelines.",
+      "confidence": "high"
+    },
+    {
+      "requirement": "Experience in establishing SLAs and engagement models",
+      "inferred_from": "Establish clear SLAs and engagement models for shared capabilities.",
+      "confidence": "medium"
+    },
+    {
+      "requirement": "Experience in AI-assisted engineering practices",
+      "inferred_from": "Lead adoption of AI-assisted engineering practices across the platform organization.",
+      "confidence": "high"
+    },
+    {
+      "requirement": "Experience in secure-by-design principles",
+      "inferred_from": "Embed secure-by-design principles across the platform.",
+      "confidence": "high"
+    }
+  ],
+  "key_responsibilities": [
+    "Define and execute the platform modernization roadmap",
+    "Deliver shared platform services for IRM and Insurance engineering teams",
+    "Drive architectural improvements across APIs, data, caching, CI/CD, observability, identity, and cloud infrastructure",
+    "Promote modular, API-driven, and service-oriented design principles",
+    "Operate the Platform team as a force multiplier for product-aligned engineering teams",
+    "Partner with IRM and Insurance Product Directors to balance platform enablement with delivery timelines",
+    "Establish clear SLAs and engagement models for shared capabilities",
+    "Promote knowledge sharing and cross-team collaboration",
+    "Lead adoption of AI-assisted engineering practices",
+    "Establish guardrails for responsible AI usage",
+    "Partner with leadership to define measurable AI productivity and quality metrics",
+    "Provide leadership, management, and technical vision to the Platform engineering organization",
+    "Manage managers and senior technical leaders",
+    "Inspire and motivate teams to deliver innovative solutions",
+    "Lead hiring, performance management, compensation, and career development processes",
+    "Mentor engineering leaders and foster a culture of design excellence and continuous learning",
+    "Identify and coordinate technical training opportunities",
+    "Stimulate knowledge sharing and elevate best practices across teams",
+    "Embed secure-by-design principles across the platform",
+    "Partner with Security and Architecture to ensure compliance with industry standards and regulatory expectations",
+    "Strengthen identity, authentication, authorization, secrets management, and data protection strategies"
+  ],
+  "seniority_signals": [
+    "5+ years managing managers and senior engineering leaders",
+    "Demonstrated experience leading large-scale platform or shared services organizations",
+    "Provide leadership, management, and technical vision to the Platform engineering organization",
+    "Manage managers and senior technical leaders",
+    "Lead hiring, performance management, compensation, and career development processes"
+  ]
+}
