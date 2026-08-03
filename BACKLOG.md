@@ -2163,6 +2163,8 @@ Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consiste
 
 **Decision gate:** Re-enable `W_KW` at a tested weight only if the holdout passes. If flat weighting cannot separate specific from generic overlap, the real fix is term-weighted keyword (separate sub-decision; weigh against vocab-maintenance cost). If neither is clean, leave `W_KW=0.0` and document that pure-semantic is retained deliberately rather than by accident.
 
+**Probe script:** `probe_db_extraction.py` (repo root) contains tooling for the database pool-presence investigation: runs `extract_requirements()` on the structured JD, tests full-text vs stripped retrieval through Pinecone at top-40 with TICARA/AT&T Network Eng/Octane highlighted, and runs `assess_requirement()` 3x per phrasing under condition B. If W_KW work reaches database stories, re-run this script rather than rebuilding the probe from scratch.
+
 ---
 
 ### MATTGPT-158
