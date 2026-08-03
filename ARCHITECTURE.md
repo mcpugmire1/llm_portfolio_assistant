@@ -32,6 +32,8 @@
   - [Stage 2: Manual Enrichment](#stage-2-manual-enrichment)
   - [Stage 3: Embedding Generation](#stage-3-embedding-generation)
   - [Production RAG Pipeline](#production-rag-pipeline)
+  - [Component Contracts (Ask Agy)](#component-contracts-updated-january-2026)
+  - [Role Match / JD Assessment Pipeline](#role-match--jd-assessment-pipeline)
   - [Key Services](#key-services)
   - [Cost & Performance](#cost--performance)
   - [Data Refresh Workflow](#data-refresh-workflow)
@@ -80,7 +82,7 @@
 **Project:** MattGPT Portfolio Assistant - AI-powered career story search and chat interface
 **Tech Stack:** Streamlit, OpenAI GPT-4o, Pinecone vector DB, Python 3.11+
 **Data Corpus:** 100+ STAR-formatted transformation project stories
-**Last Updated:** June 26, 2026
+**Last Updated:** August 3, 2026
 
 ### What This Document Contains
 
@@ -920,7 +922,7 @@ The `MATT_DNA` grounding prompt is now generated dynamically via `generate_dynam
 Identity: "I build what's next, modernize what's not, and grow teams along the way."
 
 Career Arc: Software Engineer → Solution Architect → Director → CIC Leader
-- Accenture: March 2005 - September 2023 (18+ years)
+- Accenture: March 2005 - September 2023  # "(18+ years)" annotation is frozen from curation date, not a live computation. Do not restate a year count here -- it will become inaccurate. Duration derives from the date range. (MATTGPT-157-adjacent: same pattern of a computed value hardcoded where it will drift.)
 - Built CIC from 0 to 150+ practitioners
 
 Themes of Matt's Work (dynamically derived from JSONL Theme field):
@@ -1209,6 +1211,70 @@ with st.container(key="r2_row"):
 
 **`F["clients"]` is always a list:** `matches_filters()` expects `F["clients"]` to be `[]` (all) or `["Capital One"]` (filtered). Never set it to a bare string — this breaks the IN-list logic in `utils/filters.py`.
 
+---
+
+### Role Match / JD Assessment Pipeline
+
+**Entry point:** `ui/pages/role_match.py` (page) + `services/jd_assessor.py` (engine)
+
+**Purpose:** Accepts a job description and returns a structured assessment of Matt's fit: per-requirement verdicts (Strong / Partial / Gap), an overall recommendation, and supporting evidence drawn from the STAR corpus.
+
+#### Three-Stage Pipeline
+
+```
+JD Input
+  → Stage 1: Extraction          gpt-4o, one call
+  → Stage 2: Retrieval           Pinecone per requirement, DEFAULT_TOP_K = 5
+  → Stage 3: Assessment          gpt-4o, one call per requirement (sequential)
+  → compute_recommendation()     Aggregates verdicts to Strong / Likely / Partial / Gap
+```
+
+Stage 3 is sequential, not parallelized: one GPT-4o call per extracted requirement. For a JD with 10 requirements, that is 10 serial LLM calls. This is the primary latency driver on longer JDs.
+
+#### Retrieval Parameters
+
+`DEFAULT_TOP_K = 5`, raised from 3 on July 31, 2026. The mismatch that surfaced the calibration gap: Role Match was retrieving at TOP_K=3 while Ask Agy retrieves 10 stories, passes them through `diversify_results()` (which returns 7), and feeds 5 to the LLM. Two surfaces reading at different depths -- Role Match underretrieved relative to Ask Agy's calibrated depth.
+
+#### Assessment Grounding (load_matt_profile)
+
+`load_matt_profile()` emits **education and certifications only**. It does NOT emit the skills array or career_summary:
+
+- Skills array removed: assertion surface competes with corpus evidence. If profile skills are injected, the LLM uses them to assert verdicts rather than finding grounding in STAR stories.
+- career_summary excluded: the LLM cited both the career_summary and story evidence, but paraphrased the profile prose into citations with no traceable source. Removing it forces all citation grounding to the corpus.
+
+Both removals enforce the same principle: grounding must come from retrieved corpus evidence, not the profile.
+
+#### Prompt Rules (enforced in jd_assessor.py)
+
+- **Managed-service equivalence rule:** Maps managed services to their underlying open-source technology. ElastiCache is treated as Redis. RDS covers PostgreSQL and SQL Server. Aurora is MySQL and PostgreSQL compatible. This is what allowed the assessor to credit ElastiCache experience against a Redis requirement.
+- **Discrete-facts-only profile evidence:** The LLM may only cite discrete, verifiable facts from the profile (degree, certification name). It may not cite or paraphrase career_summary.
+- **gap_explanation format:** Starts with "Note:" and is under 15 words. Enforced in prompt; verified in probe harness.
+
+#### Known Defects
+
+1. **Extraction drops qualifying clauses:** On paragraph-format JDs, extraction coarsens requirements and drops qualifiers. Observed examples from the demo JD: "including hands-on development earlier in career," "AWS, Azure, or GCP," "in production environments without business disruption." On bulleted JDs this is rare (1-2 drops vs. 7 on the demo JD). Verdicts are therefore scored against softer requirements than the JD states.
+2. **No extraction validation gate:** Stage 2 and 3 run on whatever Stage 1 returns. There is no schema check or minimum-requirement count guard before retrieval begins.
+
+#### Probe Harness (probe_assessor.py)
+
+Single-condition probe script at repo root (`probe_assessor.py`). Freezes Stage 1 extraction output per JD using a hash guard, so repeated runs skip re-extraction and test Stage 3 in isolation.
+
+**Key finding:** Verdict variance across repeated runs was entirely due to extraction drift (Stage 1). Once extraction is frozen, Stage 3 (the assessor) produces zero variance. Assessor noise floor is zero; extraction is the instability surface.
+
+#### Query Logger Events (Role Match)
+
+Three event types (see Query Logger section for column definitions):
+
+| Event | Trigger | Key Fields |
+|-------|---------|------------|
+| `role_match_assessment` | Successful assessment submission | role_title, company, jd_format, required/preferred/strong/partial/gap counts, session_id |
+| `role_match_chip_click` | Story chip expanded (open path only, not close) | story_title, client, session_id |
+| `role_match_action` | Action button click (helpful/copy_report/export) | rating=action, role_title, session_id |
+
+Bot filter: `is_bot()` in `query_logger.py` checks User-Agent against `MONITORING_BOT_SIGNATURES`. Role Match logging call sites guard with `is_bot()` before spawning log threads.
+
+---
+
 ### Known Limitations
 
 1. **Synthesis + specific topic:** "Tell me about Matt's rapid prototyping work" classified as synthesis but should find the specific rapid prototyping story. Current workaround: synthesis now uses user query embedding.
@@ -1388,7 +1454,7 @@ def matches_filters(s: dict, F: dict | None = None) -> bool:
 **scoring.py Weights:**
 ```python
 W_PC = 1.0  # Semantic (Pinecone) weight
-W_KW = 0.0  # Keyword weight (disabled by default)
+W_KW = 0.0  # Keyword weight. Zeroed in commit 2209afd (December 2025) as part of a bundled scoring refactor; MATTGPT-157 was the ticket filed after the fact. The keyword scorer still runs and computes values that are silently discarded. "Disabled by default" implies a toggle -- there is none. This is known quality debt: no A/B rationale, no eval comparison.
 ```
 
 ---
@@ -1602,11 +1668,11 @@ Defined in `ui/styles/global_styles.py`. Use these instead of hardcoding colors.
 | `test_structural_assertions.py` | ✅ NEW: Meta-commentary, voice, and drift checks |
 
 **Current Status (March 2026):**
-- RAG quality: 98.1% pass rate (60/61 golden queries across 8 categories)
+- RAG quality: 98.6% pass rate (69/70 test items, 64 unique queries across 8 categories; Q43-Q49 parametrized)
 - Structural: 93-97% pass rate (meta-commentary varies with LLM stochasticity)
 
 **eval_rag_quality.py:**
-- Runs 61 golden queries across 8 categories: narrative, client, intent, edge, surgical, entity_detection, marketing, context_story
+- Runs 64 unique queries across 8 categories: narrative, client, intent, edge, surgical, entity_detection, marketing, context_story. Q43-Q49 are parametrized, producing 70 total test items.
 - Checks: voice consistency, ground truth matches, client attribution, client bolding, entity detection, context bypass
 - Outputs JSON results to `tests/eval_results/`
 
@@ -1622,7 +1688,7 @@ Defined in `ui/styles/global_styles.py`. Use these instead of hardcoding colors.
 | `marketing` | 3 | Marketing/recruiter question handling |
 | `context_story` | 3 | "Ask Agy About This" button flow |
 
-**Current eval pass rate:** 98.1% (60/61 queries across 8 categories, March 2026). Full progression history in [HISTORY.md](HISTORY.md).
+**Current eval pass rate:** 98.6% (69/70 test items, 64 unique queries across 8 categories; Q43-Q49 parametrized; August 2026). Full progression history in [HISTORY.md](HISTORY.md).
 
 **Running Eval:**
 ```bash
@@ -2322,13 +2388,13 @@ def wait_for_streamlit_rerun(page):
 pytest tests/eval/test_eval_rag_quality.py -v
 ```
 
-**Coverage:** 61 golden queries testing:
+**Coverage:** 64 unique queries (70 test items; Q43-Q49 parametrized) testing:
 - Entity detection (clients, projects, roles)
 - Semantic search relevance
 - Response quality (no hallucinations)
 - Intent classification
 
-**Current Score:** 98.1% (60/61 passing)
+**Current Score:** 98.6% (69/70 passing)
 
 ### Unit Tests
 
