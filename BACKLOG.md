@@ -85,7 +85,6 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-155](#mattgpt-155) | New corpus story — sell-side commercial story (HSBC-anchored): pricing/costing, resourcing, outcome-based contracting | Open | Medium | Action | July 29, 2026 |
 | [MATTGPT-156](#mattgpt-156) | Vendor commercial/spend management gap — decide whether corpus-zero on invoice/rate-card/procurement is a real claim or honest gap | Open | Low | Investigation | July 29, 2026 |
 | [MATTGPT-157](#mattgpt-157) | Re-evaluate keyword weight (W_KW) for specific-term query swamping — predict-then-test before any code change | Open | Medium | Investigation / Action | July 29, 2026 |
-| [MATTGPT-158](#mattgpt-158) | Gap notes state absence without transferability; decide audience and reframe | Open | Medium | Investigation / Action | July 31, 2026 |
 | [MATTGPT-159](#mattgpt-159) | Role Match performance — parallelize per-requirement assessor calls; sequential gpt-4o loop is the bottleneck | Open | Medium | Performance | July 31, 2026 |
 | [MATTGPT-160](#mattgpt-160) | JD extractor clause-dropping — 7 of 23 requirements on demo JD lose qualifiers during extraction | Open | Medium | Bug | July 31, 2026 |
 
@@ -774,6 +773,7 @@ Each detail block uses these fields. Not every field is required for every item.
   - MATTGPT-077 — Subject-pronoun + noun-overlap retrieval contamination (upstream — better story differentiation in retrieval makes scorer evaluation easier; -077 fixes which stories get pulled, -088 fixes how the scorer reports on them)
   - MATTGPT-015 — JPM Payments IQ Differentiation (upstream: better-differentiated stories give the scorer more reliable signal)
   - MATTGPT-079 — Role Match coverage gaps meta-ticket (related but distinct: -079 tracks coverage gaps where no story exists; -088 is about scorer calibration on existing claims)
+- **Tenure inference finding (July 31, 2026 -- from MATTGPT-158 validation):** The assessor infers tenure from story dates rather than explicit corpus claims, producing inconsistent verdicts across JDs on duration requirements. Reproducible pair: Fiserv #8 resolves strong on a duration claim derived from story dates; demo #1 and structured #2 don't. Same inference mechanism, different outcomes. This is a specific instance of the scorer over-claiming relative to what the corpus explicitly supports -- squarely in -088 scope.
 - **Logged:** May 28, 2026
 
 ---
@@ -2163,29 +2163,6 @@ Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consiste
 4. Re-check confidence-band calibration: `CONFIDENCE_HIGH=0.25` was tuned for pc-only; adding a kw term shifts blended scores up.
 
 **Decision gate:** Re-enable `W_KW` at a tested weight only if the holdout passes. If flat weighting cannot separate specific from generic overlap, the real fix is term-weighted keyword (separate sub-decision; weigh against vocab-maintenance cost). If neither is clean, leave `W_KW=0.0` and document that pure-semantic is retained deliberately rather than by accident.
-
----
-
-### MATTGPT-158
-**Gap notes state absence without transferability; decide audience and reframe**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Investigation / Action
-- **File:** `services/jd_assessor.py` (assessor prompt)
-- **Logged:** July 31, 2026
-
-**Issue:** When a requirement scores partial or gap, the assessor emits what is missing and stops. Observed on the Fiserv enablement requirement: at TOP_K=3 the note read "specific focus on AI tools and capabilities is missing"; at TOP_K=5, with better candidates in the pool, it improved to "delivering training sessions" but still only named the shortfall. Neither version says that the same enablement motion was delivered repeatedly for other emerging technologies, nor what would close the distance.
-
-**Prior decision this depends on:** Role Match's audience is not settled, and the right output differs by audience. For Matt's own use, a blunt absence is the useful signal: apply or don't, and know what you'll be asked to defend. For a recruiter or hiring manager, a bare absence is the portfolio arguing against its owner, and reads as a reason to stop. Decide this before writing any prompt change, because it governs the shape of every gap note, not just this field.
-
-**Proposed direction if audience is external or both:** Extend the assessor's existing managed-service equivalence rule (which already treats ElastiCache as evidence for Redis) to cover methodology. When a method is demonstrated repeatedly and only the subject matter differs, name the method, name the transfer, and state what would close the gap. Keep this in the explanation only. The verdict must not move on transferability.
-
-**Constraint -- this is the reason to be careful:** "Hasn't done X but has done Y, which is similar" is the same reasoning shape as the skills array that MATTGPT-080 just removed. Transferability in the score reintroduces the over-claim. Transferability in the prose does not. Hold that line.
-
-**Also consider:** Flagging under-specified requirements rather than silently resolving them by literal reading. "AI tools and capabilities" is broad enough that a narrow reading and a hiring-manager reading give different verdicts, and saying so is more useful than picking one.
-
-**Acceptance:** Re-run all three JDs and confirm every verdict is unchanged while partial and gap notes carry the transfer case where one genuinely exists. Any verdict movement means the change leaked into scoring and must be reverted.
 
 ---
 

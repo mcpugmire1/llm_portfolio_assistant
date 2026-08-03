@@ -8,6 +8,20 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Ask Agy
 
+**July 31, 2026 — Profile grounding restructured; fabricated citations eliminated (MATTGPT-158)** — `45abd91`
+
+Root cause was structural, not a prompt defect. `career_summary` prose in the grounding was a citable surface, and the model paraphrased it into evidence strings with no traceable source. An earlier traceability rule failed because a paraphrase of prose does trace to prose -- the rule was correct in form but the wrong instrument for the problem.
+
+Fix: `load_matt_profile()` now emits discrete facts only -- education and certifications. `career_summary` excluded from assessment grounding entirely, not relabeled or fenced. Prompt rule replaced: only discrete facts are citable as profile evidence. The counterfactual clause ("omitting profile evidence must not change the verdict") deleted as unenforceable -- it asks the model to evaluate a run it cannot make.
+
+Validation: three JDs, five runs each, frozen extraction. 62 requirements, zero verdict variance except one. Fabricated citations gone on every JD. Three profile citations remain, all degrees, all traceable to the education field. Pre-registered expectations held: structured tenure stayed partial, demo tenure moved strong to partial, degree unchanged.
+
+Finding worth carrying forward: two requirements moved that never held a profile citation -- structured #3 (managing managers, strong to partial) and #13 (insurance domain, partial to gap). The prose was doing ambient work beyond citation. The harness invariant "removing profile grounding may only affect profile-cited requirements" was wrong. Grounding is in the prompt whether cited or not.
+
+Shipped alongside: UI label "Verified skill" changed to "Profile" with a neutral dot (the label asserted verification and called a degree a skill). Year count and unresolved revenue figure removed from `career_summary`.
+
+Follow-ons: MATTGPT-088 (tenure inference from story dates, reproducible pair identified), MATTGPT-160 (extractor clause-dropping), MATTGPT-159 (sequential assessor calls). All previously filed.
+
 **July 31, 2026 — `matt_profile.json` skills array drop complete (MATTGPT-080)**
 
 Skills array removed from `matt_profile.json`; `load_matt_profile()` updated to handle the absent key cleanly; assessment prompt verified facts-only. BDD-first cycle completed before implementation. No re-embed required (profile is not embedded).
