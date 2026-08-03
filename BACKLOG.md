@@ -89,6 +89,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-159](#mattgpt-159) | Role Match performance — parallelize per-requirement assessor calls; sequential gpt-4o loop is the bottleneck | Open | Medium | Performance | July 31, 2026 |
 | [MATTGPT-160](#mattgpt-160) | JD extractor clause-dropping — 7 of 23 requirements on demo JD lose qualifiers during extraction | Open | Medium | Bug | July 31, 2026 |
 | [MATTGPT-161](#mattgpt-161) | Career span duplicated and hardcoded across surfaces — consolidate to a single derived or configured source | Open | High | Refactor | August 3, 2026 |
+| [MATTGPT-162](#mattgpt-162) | Embedding exception misclassified as low-confidence rejection — visitor sees no-match banner instead of error message | Open | High | Bug | August 3, 2026 |
 
 ---
 
@@ -565,6 +566,10 @@ Each detail block uses these fields. Not every field is required for every item.
   - **MATTGPT-071** — chip set validation; the locked chip set was rescued from -077's trap during May 19 production spot-checks.
 - **Discovered during:** May 19, 2026 MATTGPT-071 chip prompt validation against production. The rule:* chip prompt *"How does Matt modernize monoliths into microservices?"* produced 3/3 contaminated responses with Strangler Fig contamination. Investigation expanded to characterize the pattern across 8 probe queries.
 - **New evidence (July 29, 2026):** Narrative/MattGPT over-concentration observed again across 18 example queries captured during the -080 validation sessions. Query list to be attached when available. Confirms the pattern is not limited to the original 8 probe queries.
+- **Trace session findings (August 3, 2026):**
+  - Why Hire Matt is a broad career-shape attractor independent of name. Rank 1 on "What did Matt build at Accenture" (entity filter applied, score 0.601) and "Has Matt directly managed engineering teams?" (no entity, score 0.521). Confirms the narrative-cluster dominance pattern on broad management queries.
+  - Building CIC surfaces in entity-triggered synthesis (named directly, rank 2) but is absent from the pool entirely on broader management queries. Not diversified out -- not retrieved. Distinct from the CIC over-concentration finding in MATTGPT-094 (closed); that was CIC dominating, this is CIC missing on a class of query where it would be relevant.
+  - Diversification behaves better on natural-register queries than earlier imperative traces suggested. On a management query it promoted AT&T, Capital One, and Norfolk Southern over reflective stories. The reflective-story dominance pattern was partly an artifact of unnatural phrasing in the earlier probes.
 - **Logged:** May 19, 2026
 
 ---
@@ -770,6 +775,7 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Counterintuitive insight:** Tightening the scorer to be MORE honest INCREASES credibility, not less. Quote from CTO: *"The 7-out-of-10 partials with specific gap notes are what made the whole artifact credible. A victory-lap scorer would have killed it."*
 - **Fix:** Audit the Role Match scoring logic that maps qualifications to Strong / Partial / Gap. For each Strong Match output, validate against what Agy would return in chat for the equivalent question. Where the scorer is more generous than Agy, downgrade to Partial with the honest reframing as the "Note." Consider routing the scorer's qualification analysis through the same LLM context that drives Agy's chat answers, so the two surfaces share a single source of truth on what the corpus supports.
 - **Effort:** Medium. Requires understanding the existing Role Match scoring path + an audit pass against Agy's actual chat responses for the same JD requirements.
+- **Consultancy-vs-in-house distinction (August 3, 2026 trace session):** The management query "Has Matt directly managed engineering teams?" got answered affirmatively across three earlier phrasings in the session. A natural-register retry was run but the full response was not read before the session ended. This distinction -- whether Agy correctly distinguishes consulting-context management from in-house direct management -- is the core of the original -088 defect and needs a full read of what Agy actually said on that natural-register phrasing before the audit begins. Do not assume the May 27 finding still holds; do not assume it has been fixed.
 - **Flag for re-verification:** The core evidence -- Role Match marking the "60+ in-house engineering org" claim as Strong while Agy answers honestly -- is from May 27, 2026. The corpus has changed substantially since, including the P&L story and two days of Use Case edits in July-August 2026. Re-run that question against the current corpus before treating the May 27 result as current.
 - **Retrieval parity resolved (July 31, 2026):** `DEFAULT_TOP_K` raised from 3 to 5. Ask Agy passes 5 stories to the LLM; the assessor now passes 5 candidates per requirement. The depth mismatch that was a mechanical driver of cross-surface disagreement is gone. What remains under this ticket is assessor reasoning, not retrieval depth.
 - **Duration-requirement inference (July 31 to August 3, 2026 -- from MATTGPT-158 validation):** The assessor will infer a duration claim from story dates in some phrasings and refuse to in others, on the same corpus with the same evidence available.
@@ -2262,6 +2268,27 @@ Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consiste
 **Required work:** Repo-wide scan for year-count patterns (`\d{2}\+?\s*years`, `current_year\s*-\s*20\d{2}`, literal "2005") across this repo and the design-spec repo before implementing anything.
 
 **Constraint:** Tenure requirements on JDs are legitimate and the right answer is the assessor reasoning from story dates (demonstrated working on Fiserv requirement #8 -- see MATTGPT-088). Do not reintroduce a hardcoded span to compensate for tenure-inference variance. These are separate problems with separate fixes.
+
+---
+
+### MATTGPT-162
+**Embedding exception misclassified as low-confidence rejection -- visitor sees no-match banner instead of error message**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **File:** `services/rag_service.py` (embedding call + Pinecone query path)
+- **Logged:** August 3, 2026
+
+**Issue:** When the semantic router succeeds but the OpenAI embedding call fails, the system catches the exception, continues with a null vector, queries Pinecone, gets `pool_size=115` with `top_score=0.000`, and fires `[QUERY_REJECTED] reason=low_pinecone`. Visitor sees the no-match banner instead of the "quick breather" API error message. The failure is silent and misattributed.
+
+**Discriminator already in logs:** `pool_size=115` with `top_score=0.000` is only produced by a null vector. Genuine low-confidence retrieval returns `pool_size=10` with non-zero scores. This makes the condition detectable post-hoc from logs, but the visitor experience is wrong in real time.
+
+**Context from August 3 trace session:** An earlier "Speak to a specific client engagement" failure in the same session produced the same null-vector condition but showed the correct response because the router had also failed, which triggered `[API_ERROR_DETECTED]` upstream. The January observability work only covers the router-fails-too case. When the router succeeds and only the embedding call fails, the error path is not reached.
+
+**Fix direction:** Short-circuit to the API error response at the embedding exception, before Pinecone is called. The null vector should never reach the retrieval stage.
+
+**Acceptance:** Simulate an embedding failure with the router succeeding; confirm visitor sees the "quick breather" message, not the no-match banner. Confirm genuine low-confidence queries (non-null vector, non-zero scores, small pool) are unaffected.
 
 ---
 
