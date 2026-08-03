@@ -770,12 +770,26 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Counterintuitive insight:** Tightening the scorer to be MORE honest INCREASES credibility, not less. Quote from CTO: *"The 7-out-of-10 partials with specific gap notes are what made the whole artifact credible. A victory-lap scorer would have killed it."*
 - **Fix:** Audit the Role Match scoring logic that maps qualifications to Strong / Partial / Gap. For each Strong Match output, validate against what Agy would return in chat for the equivalent question. Where the scorer is more generous than Agy, downgrade to Partial with the honest reframing as the "Note." Consider routing the scorer's qualification analysis through the same LLM context that drives Agy's chat answers, so the two surfaces share a single source of truth on what the corpus supports.
 - **Effort:** Medium. Requires understanding the existing Role Match scoring path + an audit pass against Agy's actual chat responses for the same JD requirements.
-- **Latency context (measured June 24, 2026, `jd_assessor.py`):** 1+N sequential gpt-4o calls; loop is linear in N requirements. `assess` dominates; `extract` is a large N-independent cost (~22s local on the demo JD). Parallelizing `assess` buys ~3-4x but `extract` is the floor. Relevant when evaluating whether scorer changes add meaningful latency.
+- **Flag for re-verification:** The core evidence -- Role Match marking the "60+ in-house engineering org" claim as Strong while Agy answers honestly -- is from May 27, 2026. The corpus has changed substantially since, including the P&L story and two days of Use Case edits in July-August 2026. Re-run that question against the current corpus before treating the May 27 result as current.
+- **Retrieval parity resolved (July 31, 2026):** `DEFAULT_TOP_K` raised from 3 to 5. Ask Agy passes 5 stories to the LLM; the assessor now passes 5 candidates per requirement. The depth mismatch that was a mechanical driver of cross-surface disagreement is gone. What remains under this ticket is assessor reasoning, not retrieval depth.
+- **Duration-requirement inference (July 31 to August 3, 2026 -- from MATTGPT-158 validation):** The assessor will infer a duration claim from story dates in some phrasings and refuse to in others, on the same corpus with the same evidence available.
+
+  - **Bounded ranges resolve strong.** Fiserv #8, "5 to 10 years of experience in artificial intelligence, machine learning," returns strong 5 of 5 on story evidence with no profile citation.
+  - **Open-ended floors resolve partial** with a note that the duration is not explicitly stated. Demo #1, "10+ years of progressive software engineering experience," and structured #2, "10+ years of professional software development experience," both return partial. Structured #3, "5+ years managing managers and senior engineering leaders," also returns partial, placing "5+" with the floors rather than the ranges.
+
+  The variable is requirement wording, not JD, not corpus, not retrieval. Every candidate story carries `Start_Date` and `End_Date` in metadata in all cases.
+
+  Direction of the defect: the assessor **under-claims** here. It declines to reason from evidence it holds. That is the opposite of the over-claiming this ticket documents elsewhere, and the remedy is the reverse: get the assessor to reason consistently from story dates rather than waiting for an explicit statement of years. It belongs in -088 because it is the same root problem -- scorer verdict not matching what the corpus supports -- in the other direction.
+
+  Constraint: the fix is not a number in the grounding. Year counts were removed from `career_summary` on August 3 and are being removed from `MATT_DNA` under MATTGPT-161. Reintroducing one to satisfy a duration requirement would reverse both.
+
+- **Baselines for audit work:** `probe_158_single_demo_jd_results.csv`, `probe_158_single_structured_jd_results.csv`, `probe_158_single_fiserv_jd_results.csv` (repo root). Single-condition, 5 runs each, frozen extraction, generated August 3 after the MATTGPT-158 restructure. 62 requirements with zero variance except demo #1. Capture current scorer behavior before any -088 change; make post-fix comparison possible. Run via `probe_assessor.py`.
 - **Cross-references:**
-  - MATTGPT-077 — Subject-pronoun + noun-overlap retrieval contamination (upstream — better story differentiation in retrieval makes scorer evaluation easier; -077 fixes which stories get pulled, -088 fixes how the scorer reports on them)
-  - MATTGPT-015 — JPM Payments IQ Differentiation (upstream: better-differentiated stories give the scorer more reliable signal)
-  - MATTGPT-079 — Role Match coverage gaps meta-ticket (related but distinct: -079 tracks coverage gaps where no story exists; -088 is about scorer calibration on existing claims)
-- **Tenure inference finding (July 31, 2026 -- from MATTGPT-158 validation):** The assessor infers tenure from story dates rather than explicit corpus claims, producing inconsistent verdicts across JDs on duration requirements. Reproducible pair: Fiserv #8 resolves strong on a duration claim derived from story dates; demo #1 and structured #2 don't. Same inference mechanism, different outcomes. This is a specific instance of the scorer over-claiming relative to what the corpus explicitly supports -- squarely in -088 scope.
+  - MATTGPT-077 — Subject-pronoun + noun-overlap retrieval contamination (upstream)
+  - MATTGPT-015 — JPM Payments IQ Differentiation (upstream)
+  - MATTGPT-079 — Role Match coverage gaps meta-ticket (related but distinct)
+  - MATTGPT-159 — Sequential assessor call latency (latency concern moved here)
+  - MATTGPT-161 — Career span consolidation (constraint: do not reintroduce hardcoded year counts)
 - **Logged:** May 28, 2026
 
 ---
