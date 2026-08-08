@@ -84,7 +84,9 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-154](#mattgpt-154) | Operational-breadth tagging pass — surface operational ownership into all corpus stories where it's genuinely true | Open | Medium | Action | July 16, 2026 |
 | [MATTGPT-155](#mattgpt-155) | New corpus story — sell-side commercial story (HSBC-anchored): pricing/costing, resourcing, outcome-based contracting | Open | Medium | Action | July 29, 2026 |
 | [MATTGPT-156](#mattgpt-156) | Vendor commercial/spend management gap — decide whether corpus-zero on invoice/rate-card/procurement is a real claim or honest gap | Open | Low | Investigation | July 29, 2026 |
-| [MATTGPT-157](#mattgpt-157) | Re-evaluate keyword weight (W_KW) for specific-term query swamping — predict-then-test before any code change | Open | Medium | Investigation / Action | July 29, 2026 |
+| [MATTGPT-171](#mattgpt-171) | Phrase-aware matching: stopword-only phrases invisible to token-overlap scorer at any W_KW weight | Open | Low | Investigation | August 8, 2026 |
+| [MATTGPT-172](#mattgpt-172) | CIC-cluster consolidation: 48% corpus density in 2019-2023 block causes cluster-drift dominance on broad queries | Open | Medium | Action | August 8, 2026 |
+| [MATTGPT-173](#mattgpt-173) | Role Match JD validation: no defined behavior for malformed or comp-only JD inputs | Open | Medium | Issue | August 8, 2026 |
 | [MATTGPT-159](#mattgpt-159) | Role Match performance — parallelize per-requirement assessor calls; sequential gpt-4o loop is the bottleneck | Open | Medium | Performance | July 31, 2026 |
 | [MATTGPT-160](#mattgpt-160) | JD extractor clause-dropping — 7 of 23 requirements on demo JD lose qualifiers during extraction | Open | Medium | Bug | July 31, 2026 |
 | [MATTGPT-161](#mattgpt-161) | Career span duplicated and hardcoded across surfaces — consolidate to a single derived or configured source | Open | High | Refactor | August 3, 2026 |
@@ -575,9 +577,12 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Discovered during:** May 19, 2026 MATTGPT-071 chip prompt validation against production. The rule:* chip prompt *"How does Matt modernize monoliths into microservices?"* produced 3/3 contaminated responses with Strangler Fig contamination. Investigation expanded to characterize the pattern across 8 probe queries.
 - **New evidence (July 29, 2026):** Narrative/MattGPT over-concentration observed again across 18 example queries captured during the -080 validation sessions. Query list to be attached when available. Confirms the pattern is not limited to the original 8 probe queries.
 - **Trace session findings (August 3, 2026):**
-  - Why Hire Matt is a broad career-shape attractor independent of name. Rank 1 on "What did Matt build at Accenture" (entity filter applied, score 0.601) and "Has Matt directly managed engineering teams?" (no entity, score 0.521). Confirms the narrative-cluster dominance pattern on broad management queries.
+  - Why Hire Matt is a broad career-shape attractor independent of name. Rank 1 on "What did Matt build at Accenture" (entity filter applied, score 0.601) and "Has Matt directly managed engineering teams?" (no entity, score 0.521). Confirms the narrative-cluster dominance pattern on broad management queries. Primary home for this finding: MATTGPT-169 (positioning-story attractor, different mechanism from -077 Findings 1-3).
   - Building CIC surfaces in entity-triggered synthesis (named directly, rank 2) but is absent from the pool entirely on broader management queries. Not diversified out -- not retrieved. Distinct from the CIC over-concentration finding in MATTGPT-094 (closed); that was CIC dominating, this is CIC missing on a class of query where it would be relevant.
   - Diversification behaves better on natural-register queries than earlier imperative traces suggested. On a management query it promoted AT&T, Capital One, and Norfolk Southern over reflective stories. The reflective-story dominance pattern was partly an artifact of unnatural phrasing in the earlier probes.
+- **Probe resolutions (August 8, 2026):**
+  - **Q1 closed.** Revenue Competencies story edit plus W_KW re-enable (commit f5641e7) together resolved the Q1 retrieval contamination. The story edit reduced vocabulary overlap; W_KW adding keyword signal moved specific-term stories above the contaminating cluster for this probe. No further action on Q1.
+  - **Q4 closed as probe-phrasing defect.** The failing assertion was testing a bare "service boundaries" phrasing that does not represent realistic query shape. Probe was producing a false signal, not a real retrieval problem. Residue: add a grep to the eval suite for bare "service boundaries" queries and update or remove any that lack a realistic context clause. Suite-hygiene item, not a retrieval fix.
 - **Logged:** May 19, 2026
 
 ---
@@ -2136,42 +2141,6 @@ Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consiste
 
 ---
 
-### MATTGPT-157
-**Re-evaluate keyword weight (W_KW) for specific-term query swamping -- predict-then-test before any code change**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Investigation / Action
-- **File:** `services/pinecone_service.py` (`_hybrid_score`, W_KW constant)
-- **Logged:** July 29, 2026
-
-**Issue:** Hybrid retrieval scoring has `W_KW=0.0` (`W_PC=1.0`) in `pinecone_service.py`, disabling the keyword component entirely. The keyword scorer (`_keyword_score_for_story`) is functioning and produces differentiated values, but they contribute nothing to ranking. This causes specific-noun queries ("Sev-1," "Redis," etc.) to be swamped by broad modernization/narrative stories that share generic terms ("modern," "cloud," "transformation") over the stories that actually contain the specific term. Observed in: the Strangler-Fig-vs-Norfolk-Southern case (May 2026) and the database-requirement retrieval session (July 2026).
-
-**History -- do not re-litigate:** `W_KW` went 0.2 to 0.0 in commit `2209afd` (bundled refactor, no documented quality rationale). The "disabled, semantic preferred" comment was a retroactive label added later, not a finding. The vocab-based query-gate that caused the original December 2025 "innovation" blocking is a separate mechanism (`_KNOWN_VOCAB` in the `if not hits` path plus `enforce_overlap` fallback in `rag_service.semantic_search`), independent of `_hybrid_score`. Re-enabling `W_KW` cannot reintroduce the innovation-blocking behavior. Confirmed via code read July 2026.
-
-**Scope -- this is NOT a database fix.** The database requirement is not a retrieval artifact for this ticket's purposes: relational depth is 2006-2012, no Postgres, Redis-equivalent exists via ElastiCache but as a single-home, single-project managed store. Arithmetic showed the W_KW crossover for database stories is ~0.5 (a drastic global change). Pool-presence checks showed TICARA and AT&T Network Engineering are not in the candidate pool at all; Project Octane is, at rank 3 under the extractor's stripped query. Do not justify scope expansion to databases.
-
-**Verdict update (July 30, 2026):** At TOP_K=5 the assessor returns partial, not gap, on the structured JD database requirement, citing Octane's ElastiCache line via the prompt's managed-service equivalence rule. The earlier "honest gap" disposition was recorded at TOP_K=3 across 3 runs (gap|partial|partial, one run from partial). Partial and gap are both defensible; neither is settled. Do not treat gap as fact.
-
-**Provenance note:** The ElastiCache sentence in Octane's Use Case(s) was added July 29, 2026 specifically to make the story retrievable for database queries. It is accurate (Summit reference app, AWS AppSync with ElastiCache as the sync layer) but recent and purpose-built, not long-standing corpus content.
-
-**Two complications to evaluate before committing to any weight:**
-
-1. **Generic-term dilution.** The keyword scorer weights all overlapping terms equally -- "modern"/"architecture" count the same as specific nouns. Re-enabling W_KW at a low weight lifts generic-overlap stories as much as specific-term stories. A full fix may require term-weighted keyword matching (technical nouns weighted higher), but that reintroduces a vocabulary-maintenance burden -- the same class of problem that got keyword zeroed originally. Evaluate whether a flat low weight helps enough before committing to term-weighting.
-
-2. **-077 interaction.** Keyword overlap on "Matt" and client names could inflate narrative stories (About Matt / Why Hire Matt) on name-bearing queries. Any W_KW re-enable must be tested against a name-bearing query, not just topic queries.
-
-**Method (predict-then-test, in this order):**
-
-1. Before any code change: compute blended scores from existing trace `pc`/`kw` values at candidate weights (0.2, 0.3) for a holdout set: a working query (P&L), an operational query (Sev-1), a name-bearing query, and the "innovation" canary.
-2. Predict rank changes arithmetically. Only proceed to code if arithmetic is promising.
-3. Run the holdout: confirm specific-term class improves without regressing working queries, re-breaking the innovation canary, or inflating narrative stories on the name-bearing query.
-4. Re-check confidence-band calibration: `CONFIDENCE_HIGH=0.25` was tuned for pc-only; adding a kw term shifts blended scores up.
-
-**Decision gate:** Re-enable `W_KW` at a tested weight only if the holdout passes. If flat weighting cannot separate specific from generic overlap, the real fix is term-weighted keyword (separate sub-decision; weigh against vocab-maintenance cost). If neither is clean, leave `W_KW=0.0` and document that pure-semantic is retained deliberately rather than by accident.
-
----
-
 ### MATTGPT-159
 **Role Match performance -- parallelize per-requirement assessor calls; sequential gpt-4o loop is the bottleneck**
 
@@ -2438,5 +2407,63 @@ Option A recalibrates the classifier. Option B adds an upstream gate. They compo
 **CIC concentration consequence:** When "Why Hire Matt?" wins as primary story, the answer draws from four years of CIC evidence and under-represents the earlier career. This is a distinct problem from retrieval dominance and should be documented in MATTGPT-079 if not already there -- the story itself may need scope expansion or the diversification must be career-span-aware rather than client-variety-aware.
 
 **Cross-references:** MATTGPT-077 (retrieval contamination, different mechanism -- noun-overlap vs. positioning-story density), MATTGPT-168 (slot-1 false relevance claim compounds this defect at the prompting layer), MATTGPT-079 (Role Match coverage gaps -- CIC concentration in evidence is a related corpus-shape issue).
+
+---
+
+### MATTGPT-171
+**Phrase-aware matching: stopword-only phrases invisible to token-overlap scorer at any W_KW weight**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Investigation
+- **Logged:** August 8, 2026
+
+**Issue:** The token-overlap keyword scorer (`_keyword_score_for_story`) tokenizes and filters stopwords before computing overlap. Phrases composed entirely of stopwords -- "I do, we do, you do" being the concrete test case -- reduce to an empty token set after stopword removal. The overlap score is zero regardless of W_KW weight. These phrases are invisible to keyword scoring.
+
+**Consequence:** Queries containing instructional phrasing, relational language, or other high-stopword constructions cannot benefit from W_KW even at elevated weights. The W_KW re-enable (MATTGPT-157/f5641e7) does not help these queries; retrieval falls back to pure semantic.
+
+**Test case:** "I do, we do, you do" -- a coaching/instructional register query. After stopword removal, no scoring terms remain. Confirm that W_KW=0 and W_KW=current produce identical rankings for this query.
+
+**Investigation scope:** (1) Confirm the empty-token behavior in the scorer. (2) Determine whether the affected query class (high-stopword, instructional register) actually surfaces retrieval problems in production before designing a fix. The scorer's behavior may be correct -- stopword-only phrases carry little semantic specificity, and pure-semantic via Pinecone may already handle them adequately. (3) If retrieval problems exist, evaluate whether the fix is phrase-level matching (before stopword removal), bigram indexing, or a different path.
+
+---
+
+### MATTGPT-172
+**CIC-cluster consolidation: 2019-2023 corpus density causes cluster-drift dominance on broad queries**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Logged:** August 8, 2026
+
+**Issue:** 48% of STAR stories are anchored in the 2019-2023 CIC/CloudFirst era. This concentration means any broad query that doesn't trigger entity filtering or narrative mode resolves to whichever CIC-adjacent story is densest for that query's vocabulary. The problem is structural: MATTGPT-094 (closed) documented CIC dominating broad management queries in May 2026, and MATTGPT-169 documents "Why Hire Matt" (CIC-evidence-heavy) dominating career-shaped queries in August 2026. The dominant story changes as the corpus shifts, but the root cause is constant.
+
+**Proposed action:** Audit the CIC-era story set for semantic redundancy. Stories that cover the same competency (e.g., team leadership, stakeholder management, delivery at scale) at the same client with similar vocabulary are competing rather than complementing. Options: (a) merge redundant stories into a single richer story with a broader evidence base; (b) differentiate vocabulary so each story occupies a distinct retrieval niche; (c) explicitly add pre-2005 and 2005-2013 era stories to reduce the CIC fraction (already tracked in MATTGPT-079 as a coverage gap). Options compose.
+
+**Scope clarification:** This is a corpus-composition action, not a retrieval tuning ticket. Do not address by changing W_KW, diversification parameters, or retrieval logic -- the density is the underlying variable. Retrieval tuning on a dense corpus produces MATTGPT-094's whack-a-mole outcome.
+
+**Cross-references:** MATTGPT-094 (closed -- documented the CIC dominance pattern and whack-a-mole diagnosis), MATTGPT-169 (positioning-story attractor, same root cause), MATTGPT-079 (pre-2005 corpus gap -- adding early-career stories is one consolidation lever).
+
+---
+
+### MATTGPT-173
+**Role Match JD validation: no defined behavior for malformed or atypical JD inputs**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Issue
+- **Logged:** August 8, 2026
+
+**Issue:** Role Match's JD intake has no validation layer. The pipeline assumes a well-formed JD with requirements, qualifications, and role context. Observed failure modes and undefined behaviors:
+
+- **Comp-only JDs or JDs leading with salary ranges:** MATTGPT-099 (closed as Decided Against) established that the chatbot handles comp decline correctly. The Role Match assessment path is separate -- behavior on a JD where comp dominates the text is unverified. May silently drop, hallucinate a match, or emit a confusing assessment.
+- **Extremely short JDs:** A one-paragraph job post has insufficient signal for the extractor. Current behavior on extraction failure is unverified.
+- **Non-JD input:** Pasting a company overview, a recruiter note, or a requirements doc instead of a JD. Extractor may return requirements; assessment may proceed with misleading output.
+
+**Investigation first:** Before designing validation, run the three failure-mode inputs (comp-heavy JD, short JD, non-JD text) through the current pipeline and document actual behavior. The fix depends on what the pipeline does, not what it's assumed to do.
+
+**Fix shape (after investigation):** Likely a pre-extraction validation gate that checks minimum text length, presence of requirement-shaped language, and optionally warns the user if comp-only content is detected. Should not silently proceed with an extraction the gate suspects is malformed.
+
+**Cross-references:** MATTGPT-089 (location/work-model/availability parsing -- adjacent input-handling gap), MATTGPT-099 (closed DA -- comp handling on chatbot side; Role Match side is distinct).
 
 ---

@@ -6,6 +6,20 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ## August 2026
 
+### Ask Agy
+
+**August 8, 2026 — W_KW re-enabled at tested weight; keyword scoring live in hybrid retrieval (MATTGPT-157 / MATTGPT-170)** -- `f5641e7`
+
+Investigation (MATTGPT-157) completed per the predict-then-test method: blended scores computed arithmetically from existing trace values at candidate weights before any code change; holdout run against a working query (P&L), an operational query (Sev-1), a name-bearing query, and the "innovation" canary. Prediction confirmed -- specific-term class improved, canary held, name-bearing queries did not inflate narrative stories. Code change proceeded.
+
+Implementation record (MATTGPT-170, closed on creation): W_KW re-enabled in `services/pinecone_service.py` at the tested weight. E2 pre-registration was struck during the holdout (flat weighting at the initial candidate value did not cleanly separate specific from generic overlap); E3 was re-filed with a revised weight that passed. Shipped at f5641e7.
+
+Revert lever: set `W_KW=0.0` in `pinecone_service.py`. This returns the system to pure-semantic mode (W_PC=1.0). The `_keyword_score_for_story` function remains wired and functional at 0.0 -- no code removal needed, one constant change.
+
+Known residual (filed as MATTGPT-171): stopword-only phrases (e.g., "I do, we do, you do") reduce to an empty token set after stopword removal. Token-overlap score is zero regardless of W_KW weight. This is an investigation item, not a regression -- behavior was identical before and after the re-enable.
+
+---
+
 ### Role Match
 
 **August 5, 2026 — -088 investigation closed; condition in ticket title no longer exists (MATTGPT-088)**
