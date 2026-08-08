@@ -50,9 +50,12 @@ N_RUNS = 5
 TOP_K = 5
 JD_PATH = Path("tests/bdd/fixtures/jd_extraction/structured_jd.txt")
 STORIES_JSONL = Path("echo_star_stories_nlp.jsonl")
-OUTPUT_CSV = Path("probe_158_single_structured_jd_results.csv")
+OUTPUT_CSV = Path("probe_088_structured_post_mgmt_results.csv")
 # Sidecar: saved once, reused on subsequent runs so requirement text is frozen.
 # Delete this file to force a fresh Stage 1 extraction.
+# Note: probe_158_single_*_results.csv baselines (August 3) predate the management
+# anchor story added August 5 (commit 01c3cc1). Structured JD requirement 3
+# ("5+ years managing managers") has moved from partial to strong since those runs.
 EXTRACTION_CACHE_PATH = Path(f"probe_extraction_{JD_PATH.stem}.json")
 
 SPECIAL_WATCH_TERMS = [
