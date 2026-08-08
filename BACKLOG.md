@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: 0196e89 -->
+<!-- last-backlog-sync: 01c3cc1 -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -10,8 +10,8 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-06-24)
 
 **NOW**
-1. **-088** — Role Match scorer honesty. Biggest single credibility hit (CTO persona: AI contradicting itself). Gates -012 private-view quality. Unblocked as of -080 closure.
-2. **-077 mitigation** — Query-side: strip "Matt" from embedded queries on technical-noun shapes. Protects primary free-text recruiter flow from MattGPT self-referential answers.
+1. **-077 mitigation** — Query-side: strip "Matt" from embedded queries on technical-noun shapes. Protects primary free-text recruiter flow from MattGPT self-referential answers.
+2. **-168** — diversify_results picks slot 1 but prompt tells the model it was ranked highest for the question (false on no-entity path). Compounds with -077 on the same query: -077 gets the wrong story to slot 1, -168 makes the model build around it and resist correction.
 3. **-097** — Career-intent refresh. Timely for active outreach; makes "what's Matt looking for" keyword-searchable.
 4. **-129 stories 1+2** — AT&T SE CRM + Fiserv expand-from-logged stories (no elicitation block yet). Operational depth work.
 5. **-161** — Career span hardcoded across surfaces. Fourth instance this week of a value stated once and quoted forward past validity. Violates no-hardcoded-data-derived-values rule.
@@ -19,8 +19,8 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 **NEXT** (queued):
 1. **-128** — Source faithfulness. Unlocked. Second-biggest trust item: recruiter clicks to verify a claim, gets wrong source cards.
 2. **-089** — Logistics filter class: location / work-model / availability. Atlanta + relocation-open status currently dropped silently.
-3. **-015** — JPM Payments IQ differentiation. Cheap data pass; upstream of operational surfacing; cleaner signal for -128/-088.
-4. **-077 full fix** — Hybrid retrieval (BM25 + semantic). Handles severe-overlap nouns; closes -061 residual.
+3. **-015** — JPM Payments IQ differentiation. Cheap data pass; upstream of operational surfacing; cleaner signal for -128.
+4. **-077 full fix** — Hybrid retrieval (BM25 + semantic). Handles severe-overlap nouns.
 5. **-074** — Entity cluster synthesis forcing. "How did you build the CIC" returns a survey instead of depth on a marquee query.
 6. **-096** — Methodology-context preservation. The methodology is what makes the metrics credible to an engineer.
 
@@ -54,7 +54,6 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-083](#mattgpt-083) | Spinner inconsistency — Explore Stories doesn't show thinking indicator for rejected queries (Ask MattGPT does) | Open | Medium | Issue | May 23, 2026 |
 | [MATTGPT-084](#mattgpt-084) | Ask MattGPT BDD scenarios — chip-click + low_confidence banner-render timing flakes under full-suite load | Open | Medium | Issue | May 23, 2026 |
 | [MATTGPT-086](#mattgpt-086) | Query logger — add environment annotation column + filter dev/test traffic out of production analytics | Open | Low | Issue | May 23, 2026 |
-| [MATTGPT-088](#mattgpt-088) | Role Match scorer — align with Agy honesty (no Strong Match when chat would say no) | Open | High | Issue | May 28, 2026 |
 | [MATTGPT-089](#mattgpt-089) | Role Match — parse location, work-model, availability as distinct filter class | Open | High | Issue | May 28, 2026 |
 | [MATTGPT-091](#mattgpt-091) | Add a credible failure story to the corpus (sibling to -022 / -078 pattern) | Open | Medium | Action | May 28, 2026 |
 | [MATTGPT-095](#mattgpt-095) | Anti-consulting bias in story framing — corpus reads "consulting" as default register when it shouldn't | Open | Medium | Action | May 28, 2026 |
@@ -90,6 +89,12 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-160](#mattgpt-160) | JD extractor clause-dropping — 7 of 23 requirements on demo JD lose qualifiers during extraction | Open | Medium | Bug | July 31, 2026 |
 | [MATTGPT-161](#mattgpt-161) | Career span duplicated and hardcoded across surfaces — consolidate to a single derived or configured source | Open | High | Refactor | August 3, 2026 |
 | [MATTGPT-162](#mattgpt-162) | Embedding exception misclassified as low-confidence rejection — visitor sees no-match banner instead of error message | Open | High | Bug | August 3, 2026 |
+| [MATTGPT-168](#mattgpt-168) | diversify_results picks slot 1 in standard mode but prompt asserts it was ranked highest for the question — mismatch since Jan 2026 | Open | High | Bug | August 5, 2026 |
+| [MATTGPT-163](#mattgpt-163) | Personal-query guard false positive — professional org questions intercepted as private family | Open | High | Bug | August 3, 2026 |
+| [MATTGPT-165](#mattgpt-165) | nonsense_filters.jsonl has two live generations — gen-1 blocks legitimate queries gen-2 was meant to permit | Open | Medium | Bug | August 3, 2026 |
+| [MATTGPT-166](#mattgpt-166) | Arc stories invisible to entity-scoped queries — Fortune 500 Clients / Cross-Division placeholder metadata excluded from client filters | Open | Medium | Issue | August 3, 2026 |
+| [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
+| [MATTGPT-169](#mattgpt-169) | Positioning-story attractor on career-shaped queries: "Why Hire Matt?" dominates broad management retrieval independent of technical-noun overlap | Open | High | Investigation + Action | August 5, 2026 |
 
 ---
 
@@ -140,6 +145,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-133](#mattgpt-133) | BDD skip — `test_ask_agy_works_from_table_view` skips when AgGrid iframe row interaction doesn't open detail panel | Decided Against | Low | Bug | June 16, 2026 |
 | [MATTGPT-134](#mattgpt-134) | BDD skip — `test_deeplink_respects_view_mode` skips because deeplink navigation does not preserve pre-set view mode | Decided Against | Low | Bug | June 16, 2026 |
 | [MATTGPT-138](#mattgpt-138) | BDD: page teardown invariant + CLS budget guard (MATTGPT-018 regression lock) | Decided Against | Medium | Action | June 19, 2026 |
+| [MATTGPT-164](#mattgpt-164) | Wrong-person queries reach retrieval — Satya Nadella passes all gates, returns Accenture content | Decided Against | High | Bug | August 3, 2026 |
 
 ## Schema
 
@@ -285,7 +291,6 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Type:** Action
 - **Issue:** The March 2026 data quality work (CIC pairing, IQ differentiation, Situation enrichment across 85+ stories) is a compelling story about systematic data improvement for AI systems. Not yet captured as a STAR story.
 - **Fix:** Write as STAR story for portfolio. Covers pattern recognition, data quality discipline, measurable impact on retrieval accuracy.
-- **Cross-reference (May 14, 2026 rationalization):** Assess this jointly with MATTGPT-061 (MattGPT portfolio stories over-ranking on organizational leadership queries). Adding this story would be a fifth MattGPT-meta story in the corpus and could worsen the 061 retrieval-overweighting problem. Decide both tickets together — either ship 022 with a 061-aware scope/tagging strategy, or defer 022 until 061's retrieval-quality issue is addressed.
 - **Logged:** March 2026
 
 ---
@@ -429,7 +434,7 @@ Each detail block uses these fields. Not every field is required for every item.
   - **C. Retrieval-confidence floor (harden existing partial implementation).** Currently low confidence shows a warning banner but answers anyway. Could be hardened to refuse when top-story relevance is below a threshold. Risk: legit niche queries might fall below the threshold and get rejected.
   - **D. Extend nonsense regex periodically.** Manually add high-profile names as they appear in query logs. Manual but tractable for low-volume traffic.
   - **E. Defer.** Accept the long-tail failure rate; monitor query logs and revisit when frequency/brand-damage warrants action. Current de facto state.
-- **Related:** MATTGPT-016 (Decided Against — same root concern, wrong fix shape), MATTGPT-061 (MattGPT story over-ranking), MATTGPT-021 (diversify_results pinning).
+- **Related:** MATTGPT-016 (Decided Against — same root concern, wrong fix shape), MATTGPT-021 (diversify_results pinning).
 - **Logged:** May 14, 2026
 
 ---
@@ -459,6 +464,9 @@ Each detail block uses these fields. Not every field is required for every item.
   - Cleaning up the Excel master tags — those will get normalized on next enrichment pass once the script is fixed.
 - **Discovered during:** MATTGPT-061 deep investigation (May 16, 2026) when reviewing the NS Mainframe story's public_tags. Matt asked: *"Is the script duplicating? I thought it was comparing and appending if missing."* Investigation confirmed the script DOES dedupe — but only on exact string match, missing case variants.
 - **Additional issue (July 16, 2026):** Script re-tags all 113 stories on every run, sequentially, with gpt-4o — even stories that haven't changed. Runtime is dominated by unchanged stories. Fix: hash the prompt-relevant fields (Title, Role, Industry, Theme, Competencies, Use Case(s), Situation, Task, Action, Result, Process, Performance) per story; load existing `echo_star_stories_nlp.jsonl` at startup; if a story's hash matches the prior run, copy existing `public_tags` and skip the API call. Only re-tag stories where content changed. Secondary: parallelize the remaining API calls with `ThreadPoolExecutor` (10 concurrent). Tertiary: evaluate gpt-4o-mini for this extractive tagging task — likely sufficient quality at a fraction of the latency.
+- **Vocabulary additions to preserve through dedupe (August 5, 2026):** The following tags were added to corpus stories but are not yet in the script's canonical vocabulary, so they risk being dropped or case-clobbered on the next enrichment run. Preserve these through whatever normalization the fix applies: `refactor`, `rearchitect` (from handoff notes), `Pair Rotation`, `Remote Pairing`, `Backlog Quality`, `User Story Writing`, `Definition of Done`, `Team Working Agreement` (from Making It Stick story, hand-cased August 5).
+- **Instance note (August 5, 2026):** The Making It Stick story's `public_tags` were hand-normalized for casing after a mixed-case generation run. Those hand-fixes are at risk when the script next runs. Preserve on regeneration.
+- **Open decision this ticket owns:** Canonical casing convention for generated tags. Current generated output is mixed (e.g., `Pair Programming` title case alongside `client upskilling` lowercase). Options: lowercase everywhere (matches retrieval-surface role and eliminates display-layer ambiguity); title case everywhere (display-friendly but retrieval-irrelevant); first-seen wins (script-convenient but unpredictable). Decide and encode in the script before the next enrichment run.
 - **Logged:** May 16, 2026
 
 ---
@@ -493,8 +501,9 @@ Each detail block uses these fields. Not every field is required for every item.
   - **D.** Remove the promotion entirely. Trust the semantic router's intent_family classification. If `intent_family == "synthesis"`, run synthesis mode. Otherwise, run standard mode with the natural entity-anchored pool. The depth-vs-breadth decision moves entirely to the router.
 - **Recommendation:** Likely **B or D** based on the same "no compensation logic on top of Pinecone" principle that's been guiding -061. The router already classifies queries; promoting based on pool composition is a layered compensation that fires in ways the router didn't intend. Eval the router's behavior on depth queries against the affected entities before deciding.
 - **Eval validation required:** Sample of CIC depth queries, RBC depth queries, JPM depth queries — measure response quality (depth vs breadth) before and after any fix. The 61-query golden suite may not cover this case; add depth-specific queries if not.
-- **Related:** MATTGPT-061 (broader retrieval contamination), MATTGPT-021 (diversify_results pinning bugs), MATTGPT-073 (session-state contamination, same file). Same module (`backend_service.py`); same broader theme of compensation-layer mechanisms with side effects beyond their stated intent.
+- **Related:** MATTGPT-021 (diversify_results pinning bugs), MATTGPT-073 (session-state contamination, same file). Same module (`backend_service.py`); same broader theme of compensation-layer mechanisms with side effects beyond their stated intent.
 - **Discovered during:** Originally observed during the January 2026 pipeline cleanup (per MEMORY.md "Known Open Issues"). Re-surfaced May 18, 2026 during MATTGPT-073 investigation when Matt asked whether the agentic multi-story-per-client design was being touched by the diversify changes. Confirmed it isn't — but the entity cluster mechanism has its own known issue worth filing as a distinct ticket.
+- **Additional exhibit (August 3, 2026):** Query: "who reported to Matt at the Cloud Innovation Center" -- entity detected on Division (Cloud Innovation Center), promoted to synthesis with 10 stories in pool, returned a themed portfolio survey opening with "Looking across Matt's portfolio, I see clear patterns." A specific factual question about direct reports was answered with breadth across the entire CIC portfolio. Cleaner exhibit than the "How did you build the CIC?" case above because the question's scope is unambiguous -- the user asked for a person-list, not a narrative. Same mechanism, same wrong outcome.
 - **Logged:** May 18, 2026
 
 ---
@@ -561,8 +570,7 @@ Each detail block uses these fields. Not every field is required for every item.
   - Does the pattern extend to other "Matt + [first-person product verb]" combinations beyond modernize/build/refactor?
   - Does the same density-asymmetry pattern (Finding 3) show up for "monolith" and "MVP" vocabulary? A parallel audit across those nouns would confirm whether the fix needs to be applied broadly or whether "refactor" is uniquely concentrated in Strangler Fig.
 - **Related:**
-  - **MATTGPT-061** — MattGPT portfolio story contaminating organizational leadership queries. -077 gives -061's open structural residual a reproducible mechanism and broader scope. -061's session-state fix (via -073) closed the dominant *user-visible* failure pattern; -077 documents the remaining structural retrieval-bias failure mode.
-  - **MATTGPT-073** — cross-query session-state fix that closed -061's dominant visible mechanism. -077 is independent of session state (reproduces on cold sessions).
+  - **MATTGPT-073** — cross-query session-state fix (closed). -077 is independent of session state (reproduces on cold sessions).
   - **MATTGPT-071** — chip set validation; the locked chip set was rescued from -077's trap during May 19 production spot-checks.
 - **Discovered during:** May 19, 2026 MATTGPT-071 chip prompt validation against production. The rule:* chip prompt *"How does Matt modernize monoliths into microservices?"* produced 3/3 contaminated responses with Strangler Fig contamination. Investigation expanded to characterize the pattern across 8 probe queries.
 - **New evidence (July 29, 2026):** Narrative/MattGPT over-concentration observed again across 18 example queries captured during the -080 validation sessions. Query list to be attached when available. Confirms the pattern is not limited to the original 8 probe queries.
@@ -640,6 +648,9 @@ Each detail block uses these fields. Not every field is required for every item.
   - (c) MATTGPT-080 `matt_profile.json` restructure → some gaps may be better addressed by structured skill assertions with provenance, not narrative stories
   - (d) Real skill gap → corpus is honest, no story needed; ignore in this thread
 - **Candidate additions (July 29, 2026 -080 session):** CIC-era hands-on technical stories are under-written. Candidates include: Spring Boot (if hands-on); AI-enablement work outside Liquid Studio/CIC scope (distinct from MATTGPT-078's framing). Evaluate whether structured assertion or new story is the right fix before filing sibling tickets.
+- **Coverage gaps with identified source material (August 5, 2026 -- surfaced during MATTGPT-088 diagnostic on structured JD):**
+  - **"10+ years of professional software development experience" -- partial, 5/5.** Corpus starts in 2005 at Solution Architect level. The requirement's clause is about early hands-on IC development. Source material identified: the 2005 resume shows 1997 to 2005 individual-contributor engineering across Cendian, Well Found Technology, Lockheed Martin, GE Power Systems, and others, plus Oracle Certified Professional 8i certification. Decision path per -081 taxonomy: likely (b) resume / (c) LinkedIn -- the years and companies exist, the corpus anchor may not need to be a STAR story. Decide before writing.
+  - **Insurance or risk management domain knowledge -- gap, 5/5.** Previously recorded as an honest corpus limit. Source material now identified: the CIC FY23 deck shows two Nationwide engagements: a Transformer application modernization and a ways-of-working academy. Corpus verdict is currently correct (no story exists), but this is not a permanent gap -- material is available. Decision path: (a) new STAR story using Nationwide as anchor, once the story is written the gap closes.
 - **Workflow:** When a new Role Match assessment surfaces a gap not in this list, append it to the "Known gaps" section above with the surfacing JD context. When a gap is prioritized for action, file the sibling ticket (story / profile / resume) and link it back here.
 - **Cross-references:**
   - **MATTGPT-080** — `matt_profile.json` restructure; addresses gaps better fit for structured skill assertions
@@ -762,44 +773,6 @@ Each detail block uses these fields. Not every field is required for every item.
 
 ---
 
-### MATTGPT-088
-**Role Match scorer — align with Agy honesty (no Strong Match when chat would say no)**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Issue
-- **Gating (July 29, 2026 -- resolved July 31, 2026):** Was gated on MATTGPT-080 exit criterion. -080 is now Done. -088 is unblocked.
-- **Scope clarification (May 29, 2026):** This ticket is specifically about **cross-surface consistency on the same factual question** (Role Match scorer vs Agy chat answer), not about general scoring strictness or model granularity. Two adjacent concerns that get conflated and should NOT be folded in here: (a) "scoring inflates one tier" critiques (binary Strong/Partial/Gap can't carry "Strong-with-nuance" distinctions like Director-vs-VP tenure) — that's a model-granularity concern, separate work; (b) verdict-line / overall-fit summaries — separate UX decision, see MATTGPT-089 area work. -088's audit produces downgraded Notes that plug into the existing Partial-with-Note rendering pattern; no UI changes required for -088 itself.
-- **Issue:** Role Match scorer over-claims relative to what Agy honestly returns in chat. Specific evidence: Role Match marks *"experience running an in-house engineering organization of 60+ as a direct accountable leader"* as **Strong Match**, while Agy correctly responds that Matt has **not** directly managed an in-house product engineering organization. Same factual question, two surfaces, contradictory answers. The Role Match scorer is the inconsistent one.
-- **Audience impact:** CTO persona (May 27, 2026 test) called this the single biggest credibility hit on the entire site. Quote: *"That inconsistency in his own AI is the kind of thing I'd raise on the call, because if he doesn't see it, that's a signal."* Translated to interview prep: *"Which one is right, and what does the inconsistency tell me about how you'd present your team's work?"* — a defensive answer to that question kills the candidacy.
-- **Counterintuitive insight:** Tightening the scorer to be MORE honest INCREASES credibility, not less. Quote from CTO: *"The 7-out-of-10 partials with specific gap notes are what made the whole artifact credible. A victory-lap scorer would have killed it."*
-- **Fix:** Audit the Role Match scoring logic that maps qualifications to Strong / Partial / Gap. For each Strong Match output, validate against what Agy would return in chat for the equivalent question. Where the scorer is more generous than Agy, downgrade to Partial with the honest reframing as the "Note." Consider routing the scorer's qualification analysis through the same LLM context that drives Agy's chat answers, so the two surfaces share a single source of truth on what the corpus supports.
-- **Effort:** Medium. Requires understanding the existing Role Match scoring path + an audit pass against Agy's actual chat responses for the same JD requirements.
-- **Consultancy-vs-in-house distinction (August 3, 2026 trace session):** The management query "Has Matt directly managed engineering teams?" got answered affirmatively across three earlier phrasings in the session. A natural-register retry was run but the full response was not read before the session ended. This distinction -- whether Agy correctly distinguishes consulting-context management from in-house direct management -- is the core of the original -088 defect and needs a full read of what Agy actually said on that natural-register phrasing before the audit begins. Do not assume the May 27 finding still holds; do not assume it has been fixed.
-- **Flag for re-verification:** The core evidence -- Role Match marking the "60+ in-house engineering org" claim as Strong while Agy answers honestly -- is from May 27, 2026. The corpus has changed substantially since, including the P&L story and two days of Use Case edits in July-August 2026. Re-run that question against the current corpus before treating the May 27 result as current.
-- **Retrieval parity resolved (July 31, 2026):** `DEFAULT_TOP_K` raised from 3 to 5. Ask Agy passes 5 stories to the LLM; the assessor now passes 5 candidates per requirement. The depth mismatch that was a mechanical driver of cross-surface disagreement is gone. What remains under this ticket is assessor reasoning, not retrieval depth.
-- **Duration-requirement inference (July 31 to August 3, 2026 -- from MATTGPT-158 validation):** The assessor will infer a duration claim from story dates in some phrasings and refuse to in others, on the same corpus with the same evidence available.
-
-  - **Bounded ranges resolve strong.** Fiserv #8, "5 to 10 years of experience in artificial intelligence, machine learning," returns strong 5 of 5 on story evidence with no profile citation.
-  - **Open-ended floors resolve partial** with a note that the duration is not explicitly stated. Demo #1, "10+ years of progressive software engineering experience," and structured #2, "10+ years of professional software development experience," both return partial. Structured #3, "5+ years managing managers and senior engineering leaders," also returns partial, placing "5+" with the floors rather than the ranges.
-
-  The variable is requirement wording, not JD, not corpus, not retrieval. Every candidate story carries `Start_Date` and `End_Date` in metadata in all cases.
-
-  Direction of the defect: the assessor **under-claims** here. It declines to reason from evidence it holds. That is the opposite of the over-claiming this ticket documents elsewhere, and the remedy is the reverse: get the assessor to reason consistently from story dates rather than waiting for an explicit statement of years. It belongs in -088 because it is the same root problem -- scorer verdict not matching what the corpus supports -- in the other direction.
-
-  Constraint: the fix is not a number in the grounding. Year counts were removed from `career_summary` on August 3 and are being removed from `MATT_DNA` under MATTGPT-161. Reintroducing one to satisfy a duration requirement would reverse both.
-
-- **Baselines for audit work:** `probe_158_single_demo_jd_results.csv`, `probe_158_single_structured_jd_results.csv`, `probe_158_single_fiserv_jd_results.csv` (repo root). Single-condition, 5 runs each, frozen extraction, generated August 3 after the MATTGPT-158 restructure. 62 requirements with zero variance except demo #1. Capture current scorer behavior before any -088 change; make post-fix comparison possible. Run via `probe_assessor.py`.
-- **Cross-references:**
-  - MATTGPT-077 — Subject-pronoun + noun-overlap retrieval contamination (upstream)
-  - MATTGPT-015 — JPM Payments IQ Differentiation (upstream)
-  - MATTGPT-079 — Role Match coverage gaps meta-ticket (related but distinct)
-  - MATTGPT-159 — Sequential assessor call latency (latency concern moved here)
-  - MATTGPT-161 — Career span consolidation (constraint: do not reintroduce hardcoded year counts)
-- **Logged:** May 28, 2026
-
----
-
 ### MATTGPT-089
 **Role Match — parse location, work-model, availability as distinct filter class**
 
@@ -856,7 +829,6 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Cross-references:**
   - MATTGPT-022, MATTGPT-078 — sibling story-writing tickets (Phase 3 pattern if write-task scope returns)
   - MATTGPT-079 — Role Match coverage gaps meta (track this story addition as it closes the "failure narrative" gap, whether by surfacing or by write)
-  - **MATTGPT-094** (added May 28, 2026) — retrieval / surfacing family; if Phase 2 reveals existing failure content doesn't surface, the fix belongs there
 - **Logged:** May 28, 2026 (original); re-scoped May 28, 2026 (post-persona-review reconciliation)
 
 ---
@@ -922,7 +894,6 @@ Each detail block uses these fields. Not every field is required for every item.
   - MATTGPT-077 — retrieval-bias family (different mechanism, same investigation discipline)
   - MATTGPT-088 — Role Match scorer alignment (different surface; -096 is the Ask MattGPT chat side of related credibility concern)
   - CTO persona "metric hygiene" finding — adjacent but distinct fix path (footnotes vs methodology preservation)
-  - MATTGPT-094 — same investigation discipline (probe-test before fix design)
 - **Logged:** May 28, 2026
 
 ---
@@ -938,7 +909,6 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Audience impact:** Recruiter persona's *"clarity, empathy, and purpose"* complaint — *"pitch language, not keyword-searchable signal. I can't paste that into a Boolean string"* — is the register problem. The framing problem (stale role targets) is one Matt observed independently and is at least as important for hiring conversations where Matt's specific target list matters.
 - **Distinct from existing tickets:**
   - MATTGPT-078 — adds ONE new story (AI Enablement). -097 refreshes EXISTING career-intent stories. Different stories, different work, related but distinct.
-  - MATTGPT-094 (this ticket batch) — retrieval-bias investigation. -097 is content-quality work on the surfaced stories.
   - MATTGPT-093 — About Matt strategic restructure. -097's content output may feed -093's reimagining of About Matt (whatever direction it takes will need refreshed career-intent content as the source-of-truth).
   - MATTGPT-095 — broader anti-consulting bias question across the corpus. -097 is narrower scope (career-intent stories specifically).
 - **Fix scope:**
@@ -1073,7 +1043,7 @@ Originally flagged as removable dead code (emotion hashes drift between builds a
 - **Priority:** High
 - **Type:** Issue
 - **Logged:** June 14, 2026
-- **Depends on:** MATTGPT-080 (positioning docs separated from STAR stories), MATTGPT-094 (retrieval diversity)
+- **Depends on:** MATTGPT-080 (positioning docs separated from STAR stories)
 
 **Symptom (production-confirmed June 14, 2026):** Agy answered a Fiserv commercial-impact query with accurate numbers ($8.5M, 3% under budget, $500K penalties avoided) but the displayed source cards showed JP Morgan and Norfolk Southern — not the Fiserv STAR story. A recruiter who clicks to verify a claim finds the wrong sources. Observed across multiple probes: "Why Hire Matt" was cited as a source for a largest-team question AND an early-career telecom question, neither of which it substantiates.
 
@@ -1331,6 +1301,8 @@ Professional Narrative stories remain fully available to Ask Agy's Pinecone retr
 - BDD: scenario asserting that searching My Work for "leadership journey" or "leadership philosophy" returns zero results (or a no-match banner), not the narrative story.
 
 **Note:** Effort estimate intentionally omitted — small, but requires careful splitting. Validate in the browser after the change, not from source (source-order reasoning is exactly what's fragile here).
+
+**Related -- code adjacency:** MATTGPT-166 (Arc stories invisible to entity-scoped queries via Fortune 500 Clients / Cross-Division placeholder metadata) is a different symptom but touches the same metadata-driven filtering code. Whoever works either ticket will be in the same module. Read both detail blocks before starting either.
 
 ---
 
@@ -1930,6 +1902,18 @@ Cold-load CLS ceiling: 0.25 (observed ~0.24 in DevTools — locks "no worse than
 
 ---
 
+### MATTGPT-164
+**Wrong-person queries reach retrieval -- Satya Nadella passes all gates, returns Accenture content**
+
+- **Status:** Decided Against (duplicate of MATTGPT-063)
+- **Priority:** High (was)
+- **Type:** Bug
+- **Why not:** Confirmed duplicate of MATTGPT-063, "Wrong-person queries with names outside nonsense regex produce confused-context RAG answers," which is open and covers exactly this class of failure. The Satya Nadella trace from August 3, 2026 is a valid exhibit for -063 and should be added there when that ticket is picked up.
+- **CRITICAL note preserved:** The MATTGPT-016 Decided Against reasoning ("production already handles this via celebrity regex") is falsified by the Nadella trace. The celebrity regex does not cover names outside its finite list. Any executor picking up MATTGPT-063 must read -016's DA rationale critically and treat the regex-based approach as insufficient for the full class of wrong-person queries.
+- **Logged:** August 3, 2026
+
+---
+
 
 ### MATTGPT-147
 **Stale `@pytest.mark.skip` on `test_mobile_desktop_only_message` — decorator predates step def**
@@ -2292,3 +2276,167 @@ Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consiste
 
 ---
 
+### MATTGPT-168
+**diversify_results picks slot 1 in standard mode but prompt asserts it was ranked highest for the question**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **Files:** `ui/pages/ask_mattgpt/backend_service.py` (line 1934), `ui/pages/ask_mattgpt/prompts.py` (lines 75-80)
+- **Logged:** August 5, 2026
+
+**Issue:** In standard mode with no entity match and non-narrative intent, `diversify_results(candidates)` runs over all candidates and its output becomes `ranked_stories`. `ranked_stories[0]` is wrapped in `<primary_story>` and the prompt tells the model: "the primary story was ranked highest for this question -- build your entire response around it and resist supporting stories even if they seem more interesting."
+
+That is a factual claim to the model that is false on this path. `diversify_results` optimizes for client variety, not relevance. Slot 1 is whichever story survives client-diversity filtering first. The model is then instructed to resist better evidence -- the management story, the correct answer -- on the basis of a ranking that never happened. That's not a cosmetic comment problem; it's the system actively overriding the right answer using a false premise.
+
+**Code path (confirmed):**
+- Entity mode: `ranked = [pinned] + diversify_results(others)` -- slot 1 IS the top entity-relevant story. Prompt claim is accurate here.
+- Narrative mode: `ranked = sorted(candidates, key=pc, reverse=True)` -- slot 1 IS the top Pinecone score. Prompt claim is accurate here.
+- Standard mode, no entity: `ranked = diversify_results(candidates)` -- slot 1 is diversification output. Prompt claim is **false**.
+
+**Concrete exhibit (August 3 trace):** Query "Has Matt directly managed engineering teams?" -- no entity detected, non-narrative intent. Why Hire Matt and the management story both score 0.476. Why Hire Matt was already first in Pinecone ordering. `diversify_results` kept it at slot 1 and moved the management story from position 2 to position 4 by inserting AT&T and Capital One for client variety. The prompt then instructed the LLM to build the entire response around Why Hire Matt and actively resist the management story. The LLM complied. The result was a Professional Narrative answer to a direct operational question.
+
+**Design gap, not regression:** Confirmed via `git log -S "primary_story"`. The XML isolation and slot-1 designation were introduced together in commit 1c96315 (Jan 23, 2026). The entity path was implemented correctly from day one: `[pinned] + diversify_results(others)` -- pin first, then diversify the rest. The no-entity path was always `diversify_results(candidates)` with no pre-diversification pin. The asymmetry is in the same file, same function, same commit. The entity path got the right pattern; the no-entity path didn't. That's what makes the fix obvious: apply the same pattern.
+
+**Fix options:**
+- **A (preferred):** Apply the entity-pin pattern to the no-entity path. Extract `candidates[0]` (top Pinecone score) before diversification, pin to slot 1, run `diversify_results` on the rest. Makes the prompt claim accurate. One line change at line 1934.
+- **B:** Update the prompt to remove the relevance-ordering claim for non-entity paths. Honest but doesn't fix the behavioral problem -- the LLM still builds around whichever story diversification happens to put first.
+
+Option A is the right fix. Option B is a prerequisite comment correction that should ship regardless.
+
+**Compounds with MATTGPT-077 on the same query:** -077 is why Why Hire Matt reaches 0.476 on "Has Matt directly managed engineering teams?" (retrieval contamination). -168 is why the LLM then builds its entire answer around it (false relevance claim + resist instruction). The two defects hit the same query at different pipeline stages. Working -077 alone reduces the probability of the wrong story reaching slot 1 but doesn't close this gap -- any query where diversification reorders is still affected regardless of retrieval quality.
+
+**Pre-registered validation (required before merge):** Pinning slot 1 changes what the LLM builds every standard-mode answer around -- not just the queries where diversification currently misfires. Run the full eval golden suite before and after the fix. If answers shift on queries unrelated to this defect, that movement is worth seeing before it reaches production. A passing eval doesn't mean the fix is neutral; read the diff on changed answers, not just the pass count.
+
+**Cross-references:** MATTGPT-077 (retrieval contamination, upstream cause), MATTGPT-074 (entity-cluster promotion overriding relevance, different mechanism, same post-retrieval override theme).
+
+---
+
+### MATTGPT-163
+**Personal-query guard false positive -- professional org questions intercepted as private family**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **Logged:** August 3, 2026
+
+**Issue:** "How many direct reports did Matt have" is intercepted by the personal-query family classifier with score 0.618, classified as `family=personal`. The visitor sees an out-of-scope rejection. The query is a legitimate organizational question about management scope -- not a privacy-sensitive personal query (salary, SSN, home address, family composition).
+
+**Compound failure pattern from August 3 trace session:** The same personal family is producing errors in both directions. July trace: "How much money did Matt make at Accenture" was classified as `family=delivery` (false negative -- should be personal). August trace: "How many direct reports did Matt have" classified as `family=personal` (false positive -- should reach retrieval). The family boundary is miscalibrated in both directions.
+
+**Fix options (compose; may ship together or sequentially):**
+- **A.** Add professional counter-examples to the personal family semantic anchors -- queries about org size, team composition, reporting relationships, and headcount should score low against the personal family anchor. Touches `semantic_router.py`. Independent of MATTGPT-165. **However: adding counter-examples changes `VALID_INTENTS`, which triggers the stale-cache defect described in MATTGPT-062. Verify -062 is closed or manually invalidate the cache before deploying Approach A.**
+- **B.** Build a deterministic keyword pre-filter for genuine privacy categories (salary / compensation, SSN, DOB, home address, relationship/family status) that fires before the semantic classifier. Hard-blocks privacy-sensitive patterns; leaves org-structure queries to the router. Touches `nonsense_filters.jsonl`. **If this approach is chosen, verify MATTGPT-165 (nonsense_filters.jsonl dedup) is closed first before adding new patterns to that file.**
+
+Option A recalibrates the classifier. Option B adds an upstream gate. They compose -- A alone risks residual false positives on edge cases; B alone doesn't fix the miscalibration. Recommended: A first (independent, unblocked), then B after MATTGPT-165 closes.
+
+**Validation:** After fix, "How many direct reports did Matt have" must reach retrieval. "How much money did Matt make at Accenture" must be blocked (personal family, correct outcome). "How many people reported to Matt at the CIC" must reach retrieval.
+
+---
+
+### MATTGPT-165
+**nonsense_filters.jsonl has two live generations -- gen-1 blocks legitimate queries gen-2 was meant to permit**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **Note:** If MATTGPT-163 is implemented via Approach B (keyword pre-filter adding patterns to this file), this ticket should land first. If MATTGPT-163 is implemented via Approach A (semantic anchor recalibration in `semantic_router.py`), no ordering dependency exists.
+- **Logged:** August 3, 2026
+
+**Issue:** A December commit appended an improved second block of patterns to `nonsense_filters.jsonl` without removing the original first block. Both generations are now loaded and evaluated. This creates a harmful narrowing defect: `credit card` in gen-1 was intentionally tightened to `credit card number` in gen-2 (to stop blocking product-domain queries), but gen-1 still fires. "Tell me about the credit card portal work" is blocked by the gen-1 pattern and never reaches retrieval, even though gen-2 was explicitly written to allow it.
+
+**Two deliverables (must ship together):**
+1. Deduplicate `nonsense_filters.jsonl` -- keep gen-2 versions, remove gen-1 originals where a gen-2 supersedes them.
+2. Add a loader guard in the filter-loading path (`services/rag_service.py` or wherever the file is parsed at startup) that asserts no exact-duplicate patterns exist. Raises at startup, not silently at query time.
+
+**Dependency note:** Any privacy-category additions to `nonsense_filters.jsonl` (e.g., MATTGPT-163 Option B keyword pre-filter) must land AFTER this deduplication. Writing new patterns into a file with two live generations risks the same problem recurring.
+
+**Validation:** "Tell me about the credit card portal work" must reach retrieval after fix. Loader guard must raise on a manually introduced duplicate pattern in a test run.
+
+---
+
+### MATTGPT-166
+**Arc stories invisible to entity-scoped queries -- Fortune 500 Clients / Cross-Division placeholder metadata excluded from client filters**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Issue
+- **Logged:** August 3, 2026
+
+**Issue:** Arc stories -- corpus stories that document career-wide patterns rather than a single named engagement -- use `Client: Fortune 500 Clients` and `Division: Cross-Division` as metadata placeholders. These values do not match any specific client entity. When a query triggers entity filtering on a named client (JP Morgan, RBC, Fiserv, HSBC), arc stories are excluded from the retrieval pool entirely.
+
+**Concrete example:** "Owning the P&L" is a story about financial accountability and commercial ownership across large engagements. It is directly relevant to JP Morgan, RBC, Fiserv, and HSBC client-scoped queries. It never surfaces for any of them because its Client metadata is `Fortune 500 Clients`, not a matching entity value.
+
+**Impact:** Queries scoped to any large named client miss arc stories that may be the most directly relevant content for demonstrating cross-engagement patterns (P&L ownership, executive stakeholder management, program governance). The entity filter, intended to tighten retrieval, is instead excluding high-signal stories.
+
+**Decision required -- three paths (do not implement before choosing):**
+- **A. Accept the tradeoff.** Arc stories are corpus-wide by design; entity filtering is for single-engagement precision. The two modes are intentionally separate. No fix.
+- **B. Wildcard arc-story metadata.** Entity filters return arc stories alongside entity-specific stories when their placeholder values match a defined arc-story pattern (e.g., `Client == "Fortune 500 Clients"` always passes entity filters). Simpler implementation; risk is surfacing arc stories on narrow queries where they reduce precision.
+- **C. Compound metadata.** Arc stories carry both the placeholder AND a list of the specific clients they cover. Entity filters match against the compound list. Most precise; most implementation effort; requires a corpus audit to populate the client lists.
+
+**Recommendation:** Evaluate Option A honestly first. If arc stories genuinely document patterns that are client-agnostic, excluding them from client-scoped queries may be the right behavior. If they are materially relevant to named-client queries (as the P&L story appears to be), Option B is the lowest-risk fix.
+
+**Related -- code adjacency:** MATTGPT-146 (Professional Narrative stories leak into My Work via filter and search paths) is a different symptom but touches the same metadata-driven filtering code. Whoever works either ticket will be in the same module. Read both detail blocks before starting either.
+
+---
+
+### MATTGPT-167
+**Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently**
+
+- **Status:** Parked
+- **Priority:** Medium
+- **Type:** Action
+- **Logged:** August 3, 2026
+
+**Issue:** Entity detection currently covers four fields: Client, Employer, Division, Title. Project and Place appear as queryable dimensions across the corpus but are not in `ENTITY_DETECTION_FIELDS`. Queries like "who worked on the White-Label Card Portal" or "what did Matt work on in Chicago" cannot benefit from entity-anchored retrieval.
+
+**Specification (complete -- ready to implement if activated):**
+- Widen `ENTITY_DETECTION_FIELDS` from four to five fields, adding Project and Place.
+- Replace the single `EXCLUDED_DIVISION_VALUES` set with a per-field exclusion map:
+  - Project exclusions: Innovation, Methodology, Platform Modernization, Personal Growth, Career Narrative, Accelerated Delivery (generic project labels that appear in many stories and would over-constrain retrieval)
+  - Place exclusions: Career Narrative, Personal (Sabbatical) (non-geographic place values)
+- 34 distinct Project values and 15 distinct Place values confirmed in corpus audit (August 3, 2026).
+
+**Pre-registered probes:**
+- "Who worked on the White-Label Card Portal" -- should trigger Project entity detection on White-Label Card Portal
+- "What did Matt work on in Chicago" -- should trigger Place entity detection on Chicago
+
+**Why parked:** The motivating case from the August 3 trace session resolved differently (via a different retrieval path). No confirmed failing probe exists at time of filing. The specification is complete and pre-registered probes are defined -- re-activate when a concrete failing case is confirmed in production.
+
+**Prior art -- read before unparking:** MATTGPT-036 (Entity Cluster Promotion Override, Decided Against) and MATTGPT-037 (Score Gap Override, Decided Against) are both retrieval-override mechanisms that were rejected. The DA rationale for each may apply to the per-field exclusion map approach in this ticket. Read both DA blocks and confirm the objection does not carry over before activating this work.
+
+---
+
+### MATTGPT-169
+**Positioning-story attractor on career-shaped queries: "Why Hire Matt?" dominates broad management retrieval independent of technical-noun overlap**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Investigation + Action
+- **Descended from:** MATTGPT-094 (closed -- retrieval concentration investigation, Sub-A re-scope)
+- **Logged:** August 5, 2026
+
+**Issue:** "Why Hire Matt?" is a broad attractor on career and management queries regardless of technical-noun overlap. It wins the top of the retrieval pool on questions about management scope, Accenture work, engineering leadership, and career shape, and reaches the LLM as the primary story. When it wins, the answer reflects one four-year CIC period -- the story's evidence is almost entirely from 2019 to 2023.
+
+**Evidence (August 5, 2026 trace):**
+- Rank 1 at 0.503: "Has Matt directly managed engineering teams" (no entity detected, non-narrative intent)
+- Rank 1 at 0.521: "Has Matt directly managed engineering teams?" (natural register)
+- Rank 1 at 0.601: "What did Matt build at Accenture" (entity filter on Accenture applied)
+- Rank 1 at 0.476: "Has Matt directly managed an in-house engineering organization" (tied with the management story)
+- Rank 3 at 0.521: "Speak to a specific client engagement story" (no name in query at all)
+
+**Name sensitivity confirmed:** Same management question scores 0.490 with "Matt," 0.419 with "he," absent from top 10 without either subject. Presence of the name is amplifying retrieval probability, not just filtering -- consistent with the story's title ("Why Hire Matt") embedding close to queries that include the subject's name.
+
+**Mechanism differs from MATTGPT-077 Findings 1-3.** The story is a positioning document with the subject's name in its title and a personal-pitch body. It embeds close to any career-shaped question regardless of technical-noun density. The -077 Phase 1 mitigation (strip "Matt" on technical-noun query shapes) does not fire on "directly managed engineering teams," "what did Matt build," or "specific client engagement." These are not technical-noun queries.
+
+**Third cluster observation in the whack-a-mole series (from MATTGPT-094 re-scope):** MATTGPT-094's July conclusion was that dense vocabulary clusters dominate broad retrieval and the dominant cluster shifts as corpus composition changes -- CIC in May (before positioning docs were separated), MattGPT/Strangler Fig in July (noun-overlap mechanism, now tracked in -077). August's observation: "Why Hire Matt?" / Professional Narrative cluster on career-shaped queries. The pattern is structural, not a one-off. Fixing any single dominant story without addressing the underlying density dynamic produces the next attractor.
+
+**Escape routes (inherited from MATTGPT-094):**
+- **Route 1 -- Fan-out on broad queries:** On queries where no entity is detected and intent is not narrative, retrieve from multiple clusters (management, delivery, technical, leadership) rather than a single top-k result. Reduces the probability of any one story dominating. Implementation approach unresolved -- needs scoping.
+- **Route 2 -- Break the rank-verdict coupling:** Decouple which story the LLM receives as primary from diversification output order. MATTGPT-094 gated this route on -080 (complete) and -088 (closed August 5, 2026). Both gates are now clear. Reassess whether the mechanism is still the right design, or whether MATTGPT-168 (false relevance claim in the slot-1 prompt instruction) is the more surgical fix for the same coupling. Route 2 and -168 may overlap -- read -168 before scoping Route 2 independently.
+
+**CIC concentration consequence:** When "Why Hire Matt?" wins as primary story, the answer draws from four years of CIC evidence and under-represents the earlier career. This is a distinct problem from retrieval dominance and should be documented in MATTGPT-079 if not already there -- the story itself may need scope expansion or the diversification must be career-span-aware rather than client-variety-aware.
+
+**Cross-references:** MATTGPT-077 (retrieval contamination, different mechanism -- noun-overlap vs. positioning-story density), MATTGPT-168 (slot-1 false relevance claim compounds this defect at the prompting layer), MATTGPT-079 (Role Match coverage gaps -- CIC concentration in evidence is a related corpus-shape issue).
+
+---

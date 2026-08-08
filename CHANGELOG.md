@@ -4,6 +4,24 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ---
 
+## August 2026
+
+### Role Match
+
+**August 5, 2026 — -088 investigation closed; condition in ticket title no longer exists (MATTGPT-088)**
+
+Three findings on closure:
+
+(1) The May 2026 contradiction -- Role Match marking "in-house engineering org of 60+" as Strong Match while Agy correctly said no -- resolved through corpus changes rather than a targeted fix. Both surfaces now agree. The condition in the ticket title is falsified.
+
+(2) The duration-inference inconsistency hypothesis (assessor infers duration from bounded ranges but not open-ended floors) was falsified by matched-pair test. Identical five-story pools across phrasing variants; structured requirement 3 ("5+ years managing managers") moved from partial to strong once the management story existed in the corpus. The variable was content availability, not phrasing sensitivity. Requirement 2 ("10+ years of professional software development") stays partial: a corpus content gap (career starts 2005 at Solution Architect level; pre-2005 hands-on development is undocumented), not an assessor defect.
+
+(3) The remaining evidence-divergence finding -- surfaces reaching the same verdict from different stories -- has a confirmed mechanism, now split across two active tickets: MATTGPT-077 (retrieval contamination pulling Why Hire Matt to slot 1 on management queries) and MATTGPT-168 (slot-1 binding instructing the LLM to build its entire answer around that story and resist correction). The fix lives there.
+
+Baselines (`probe_158_single_*.csv`, repo root) generated August 3 predate the management story added August 5. Structured requirement 3 has moved from partial to strong since. Note in `probe_assessor.py` at the extraction cache declaration.
+
+---
+
 ## July 2026
 
 ### Ask Agy
