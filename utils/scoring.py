@@ -12,7 +12,7 @@ from utils.validation import _tokenize
 
 # Import weight constants
 W_PC = 1.0  # semantic (Pinecone vector match)
-W_KW = 0.0  # keyword/token overlap
+W_KW = 0.15  # keyword/token overlap
 
 
 def _keyword_score_for_story(s: dict[str, Any], query: str) -> float:
@@ -90,8 +90,7 @@ def _hybrid_score(
         kw_score: Keyword overlap score from _keyword_score_for_story()
             (0.0-1.0). None or invalid values default to 0.0.
         w_pc: Weight for Pinecone score. Defaults to W_PC (1.0).
-        w_kw: Weight for keyword score. Defaults to W_KW (0.0, disabled
-            by default as semantic search is preferred).
+        w_kw: Weight for keyword score. Defaults to W_KW (0.15).
 
     Returns:
         Float hybrid score. With default weights (1.0, 0.0), returns just
