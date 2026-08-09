@@ -82,7 +82,7 @@
 **Project:** MattGPT Portfolio Assistant - AI-powered career story search and chat interface
 **Tech Stack:** Streamlit, OpenAI GPT-4o, Pinecone vector DB, Python 3.11+
 **Data Corpus:** 100+ STAR-formatted transformation project stories
-**Last Updated:** August 3, 2026
+**Last Updated:** August 9, 2026
 
 ### What This Document Contains
 
@@ -584,12 +584,13 @@ User Query
 └─────────────────────────────────────────────────┘
     ↓
 ┌─────────────────────────────────────────────────┐
-│ Layer 4: Pinecone Vector Search                 │
+│ Layer 4: Pinecone Vector Search + Keyword Blend │
 │ - Query embedding → vector search               │
 │ - Entity filter ($or across 6 fields) if hard   │
 │ - Title: NO filter (semantic search ranks it)   │
 │ - UI filters (industry, domain, role)           │
-│ - Returns top 10 candidates (SEARCH_TOP_K)       │
+│ - Returns top 10 candidates (SEARCH_TOP_K)      │
+│ - blend = 1.0·pc + 0.15·kw applied to ranking  │
 └─────────────────────────────────────────────────┘
     ↓
 ┌─────────────────────────────────────────────────┐
@@ -882,8 +883,7 @@ Synthesis: up to 9 (3 per theme × 3 themes)
 ```
 
 **Scoring Formula:**
-- Primary: Pinecone cosine similarity (0.0 - 1.0)
-- No secondary scoring layer
+- `blend = 1.0·pc + 0.15·kw` where pc = Pinecone cosine similarity, kw = naive token overlap from `_keyword_score_for_story()` (commit f5641e7; see CHANGELOG -157/-170)
 - Confidence thresholds: HIGH=0.25, LOW=0.20 (from config/constants.py)
 
 ### Layer 4: Response Generation
@@ -1454,7 +1454,7 @@ def matches_filters(s: dict, F: dict | None = None) -> bool:
 **scoring.py Weights:**
 ```python
 W_PC = 1.0  # Semantic (Pinecone) weight
-W_KW = 0.0  # Keyword weight. Zeroed in commit 2209afd (December 2025) as part of a bundled scoring refactor; MATTGPT-157 was the ticket filed after the fact. The keyword scorer still runs and computes values that are silently discarded. "Disabled by default" implies a toggle -- there is none. This is known quality debt: no A/B rationale, no eval comparison.
+W_KW = 0.15  # Keyword weight. Activated in commit f5641e7 via pre-registered experiment; results recorded in CHANGELOG (-157/-170). blend = 1.0·pc + 0.15·kw where kw is naive token overlap from _keyword_score_for_story().
 ```
 
 ---
@@ -1668,7 +1668,7 @@ Defined in `ui/styles/global_styles.py`. Use these instead of hardcoding colors.
 | `test_structural_assertions.py` | ✅ NEW: Meta-commentary, voice, and drift checks |
 
 **Current Status (March 2026):**
-- RAG quality: 98.6% pass rate (69/70 test items, 64 unique queries across 8 categories; Q43-Q49 parametrized)
+- RAG quality: 70/70 (100%) as of Aug 8–9, 2026 runs — 64 unique queries across 8 categories; Q43-Q49 parametrized. See Known Limitations re: LLM stochasticity.
 - Structural: 93-97% pass rate (meta-commentary varies with LLM stochasticity)
 
 **eval_rag_quality.py:**
@@ -1688,7 +1688,7 @@ Defined in `ui/styles/global_styles.py`. Use these instead of hardcoding colors.
 | `marketing` | 3 | Marketing/recruiter question handling |
 | `context_story` | 3 | "Ask Agy About This" button flow |
 
-**Current eval pass rate:** 98.6% (69/70 test items, 64 unique queries across 8 categories; Q43-Q49 parametrized; August 2026). Full progression history in [HISTORY.md](HISTORY.md).
+**Current eval pass rate:** 70/70 (100%) as of Aug 8–9, 2026 runs — 64 unique queries, 70 test items (Q43-Q49 parametrized). LLM stochasticity can cause 98.6% ↔ 100% flapping; see Known Limitations. Full progression history in [HISTORY.md](HISTORY.md).
 
 **Running Eval:**
 ```bash
@@ -2394,7 +2394,7 @@ pytest tests/eval/test_eval_rag_quality.py -v
 - Response quality (no hallucinations)
 - Intent classification
 
-**Current Score:** 98.6% (69/70 passing)
+**Current Score:** 70/70 (100%) as of Aug 8–9, 2026 runs (subject to LLM stochasticity; see Known Limitations)
 
 ### Unit Tests
 
