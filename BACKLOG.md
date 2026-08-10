@@ -87,6 +87,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-171](#mattgpt-171) | Phrase-aware matching: stopword-only phrases invisible to token-overlap scorer at any W_KW weight | Open | Low | Investigation | August 8, 2026 |
 | [MATTGPT-172](#mattgpt-172) | CIC-cluster consolidation: 48% corpus density in 2019-2023 block causes cluster-drift dominance on broad queries | Open | Medium | Action | August 8, 2026 |
 | [MATTGPT-173](#mattgpt-173) | Role Match JD validation: no defined behavior for malformed or comp-only JD inputs | Open | Medium | Issue | August 8, 2026 |
+| [MATTGPT-174](#mattgpt-174) | Confidence gate mislabels low-signal pools — noise-floor pools clear CONFIDENCE_HIGH and print "high" | Open | Medium | Defect/Design | August 11, 2026 |
 | [MATTGPT-159](#mattgpt-159) | Role Match performance — parallelize per-requirement assessor calls; sequential gpt-4o loop is the bottleneck | Open | Medium | Performance | July 31, 2026 |
 | [MATTGPT-160](#mattgpt-160) | JD extractor clause-dropping — 7 of 23 requirements on demo JD lose qualifiers during extraction | Open | Medium | Bug | July 31, 2026 |
 | [MATTGPT-161](#mattgpt-161) | Career span duplicated and hardcoded across surfaces — consolidate to a single derived or configured source | Open | High | Refactor | August 3, 2026 |
@@ -585,6 +586,11 @@ Each detail block uses these fields. Not every field is required for every item.
   - **Q1 closed.** Revenue Competencies story edit plus W_KW re-enable (commit f5641e7) together resolved the Q1 retrieval contamination. The story edit reduced vocabulary overlap; W_KW adding keyword signal moved specific-term stories above the contaminating cluster for this probe. No further action on Q1.
   - **Q4 closed as probe-phrasing defect.** The failing assertion was testing a bare "service boundaries" phrasing that does not represent realistic query shape. Probe was producing a false signal, not a real retrieval problem. Residue: add a grep to the eval suite for bare "service boundaries" queries and update or remove any that lack a realistic context clause. Suite-hygiene item, not a retrieval fix.
 - **Scope note -- stranger-name queries (August 8, 2026):** The Phase 1 strip (`_substitute_matt_subject`) does not fix, and does not worsen, wrong-person query behavior. "How does Nadella approach microservices" retrieves Matt's stories and answers fluently with nothing flagging the mismatch -- the strip is unaffected either way, because the embedded query still returns semantically relevant Matt stories regardless of whether "Matt" is present. This was briefly characterized as benign; that characterization was wrong. Retrieval producing a coherent answer about the wrong person, with nothing signaling the mismatch, is a trust defect -- the same family as the confidence problems this work addresses elsewhere. It is MATTGPT-063's live defect, not a side effect of the strip, and out of -077's scope. The strip neither fixes nor worsens it.
+- **Step A probe results (August 11, 2026):**
+  - **"Matt?" -- pre-existing contamination, now filed as MATTGPT-174.** Router scored 0.797 valid, family=background. Confidence gate passed at pc 0.291 (high). Pool flat 0.20–0.29; 5 of 10 pool hits and 4 of 7 LLM stories self-referential Independent Project stories. Router measures on-topic-ness -- a bare name is maximally on-topic with zero retrievable intent, so the router correctly routes and the confidence gate becomes the only protection. Gate does not catch it: 0.291 clears CONFIDENCE_HIGH=0.25 (noise-floor calibration, not match-strength calibration). Filed as MATTGPT-174.
+  - **"he?" -- gate-caught cleanly.** Router scored 0.255 invalid, confidence none, QUERY_REJECTED low_pinecone. No contamination.
+  - **Structural protection confirmed:** "Matt?" routes to family=background, which is in the never-strip list. The substitution gate cannot produce a bare-pronoun degenerate query in production from this path. The never-strip list is the protection here, not the confidence gate.
+  - **W_KW property (context for MATTGPT-174, not a -077 defect):** Single-token queries trivially max keyword overlap (kw=1.0 on "Matt?"), which elects the lead story on degenerate queries. This is a degenerate-query artifact of flat keyword scoring, not a retrieval-quality regression from the W_KW re-enable. Recorded here for provenance; the confidence ticket owns the design response.
 - **Logged:** May 19, 2026
 
 ---
@@ -2467,5 +2473,39 @@ Option A recalibrates the classifier. Option B adds an upstream gate. They compo
 **Fix shape (after investigation):** Likely a pre-extraction validation gate that checks minimum text length, presence of requirement-shaped language, and optionally warns the user if comp-only content is detected. Should not silently proceed with an extraction the gate suspects is malformed.
 
 **Cross-references:** MATTGPT-089 (location/work-model/availability parsing -- adjacent input-handling gap), MATTGPT-099 (closed DA -- comp handling on chatbot side; Role Match side is distinct).
+
+---
+
+### MATTGPT-174
+**Confidence gate mislabels low-signal pools -- noise-floor pools clear CONFIDENCE_HIGH and print "high"**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Defect/Design
+- **Files:** `config/constants.py` (CONFIDENCE_HIGH, CONFIDENCE_LOW), `rag_service.py` (gate logic -- verify coupling note below before touching)
+- **Related:** MATTGPT-162 (null-vector / embedding exception mislabeled -- same orbit)
+- **Logged:** August 11, 2026
+
+**Issue:** RAG confidence labels answer "is there any signal at all" (noise-floor gate) but present to the user as match strength. `CONFIDENCE_HIGH = 0.25` in `config/constants.py` was calibrated to filter phantom-similarity noise; corpus evidence puts genuinely strong matches at 0.4–0.6. A flat noise-band pool where every story scores 0.20–0.29 clears the bar and the UI prints "high." The label is technically accurate by the gate's own standard and misleading by the user's reasonable interpretation.
+
+**Evidence, three cases:**
+
+1. **"I do, we do, you do"** (August 11, 2026): top_score 0.260, gated as high. Target story absent from top 10. Pool flat; nothing in the pool is actually relevant.
+
+2. **"Matt?" step-A probe** (August 11, 2026): top_score 0.291, gated as high. Pool flat 0.20–0.29. 5 of 10 pool hits and 4 of 7 LLM stories self-referential Independent Project stories. Router scored 0.797 valid (family=background) -- router measures on-topic-ness; a bare name is maximally on-topic with zero retrievable intent. The confidence gate is the only downstream protection and it does not fire.
+
+3. **MATTGPT-162 null-vector shape**: existing ticket; same gate-clears-on-noise failure mode, different upstream cause.
+
+**Coupling note (verify in `rag_service.py` from debug output before any fix, not from source reasoning):** The gate reads the pc component of the blend-chosen lead story. Keyword score never enters the gated number directly, but kw elects which story's pc gets evaluated -- "Matt?" demonstrates this: why-hire-matt leads on kw=1.0 (single-token query trivially maxes keyword overlap), and the gate reads its 0.291 pc. Confirm this coupling is still the live behavior before designing around it.
+
+**Design direction (not a spec -- calibrate from eval suite, no numbers in the ticket):** Two-factor gate using absolute bands first, distribution gap consulted only in the ambiguous middle band.
+
+- Calibration constraint the bands must satisfy: database query pool (0.32–0.3886, genuinely bad match) and enablement pool (0.51–0.5643, genuinely good match) show that score bunching alone does not distinguish quality; the floor's placement between those regimes must come from data. Calibrate from the eval suite's 70 logged score distributions, not from the three evidence cases above.
+- The ambiguous middle band (between the noise floor and the genuine-match floor) is where distribution gap adds signal -- a tightly bunched mid-band pool with no clear leader is a different confidence picture than the same mean score with one clear outlier.
+- Do not move the numbers before running the calibration pass. Moving CONFIDENCE_HIGH without a distribution audit risks false rejections on legitimate niche queries.
+
+**Evidence provenance:** Cases 1 and 2 surfaced during MATTGPT-077 Phase 1 step-A probe session (August 11, 2026). See -077 Step A probe results note for retrieval and router details.
+
+**Cross-references:** MATTGPT-162 (same gate orbit, embedding-exception upstream cause), MATTGPT-077 (step-A probe session -- evidence provenance), MATTGPT-171 (phrase-aware matching -- "I do, we do, you do" is Case 1's query).
 
 ---
