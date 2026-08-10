@@ -436,7 +436,8 @@ Each detail block uses these fields. Not every field is required for every item.
   - **C. Retrieval-confidence floor (harden existing partial implementation).** Currently low confidence shows a warning banner but answers anyway. Could be hardened to refuse when top-story relevance is below a threshold. Risk: legit niche queries might fall below the threshold and get rejected.
   - **D. Extend nonsense regex periodically.** Manually add high-profile names as they appear in query logs. Manual but tractable for low-volume traffic.
   - **E. Defer.** Accept the long-tail failure rate; monitor query logs and revisit when frequency/brand-damage warrants action. Current de facto state.
-- **Related:** MATTGPT-016 (Decided Against — same root concern, wrong fix shape), MATTGPT-021 (diversify_results pinning).
+- **Design connection to MATTGPT-077 (August 8, 2026):** The Phase 1 strip work in -077 built `_substitute_matt_subject`, a token-level detector that classifies each query token as "Matt-or-a-variant" or "not." That detector is one branch away from -063's trigger: asking "is this a name token that isn't Matt?" is the same detection logic with a different branch outcome -- instead of substituting, emit a mismatch response ("I only have Matt's work; did you mean...?"). When -063 is picked up, `_substitute_matt_subject`'s token layer is the right starting point. Do not build a separate name detector; extend what's already there. This is not scope for -077's ship -- it's a handoff note for whoever opens -063 next.
+- **Related:** MATTGPT-016 (Decided Against -- same root concern, wrong fix shape), MATTGPT-021 (diversify_results pinning), MATTGPT-077 (strip implementation whose token layer is the starting point for -063's fix).
 - **Logged:** May 14, 2026
 
 ---
@@ -583,6 +584,7 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Probe resolutions (August 8, 2026):**
   - **Q1 closed.** Revenue Competencies story edit plus W_KW re-enable (commit f5641e7) together resolved the Q1 retrieval contamination. The story edit reduced vocabulary overlap; W_KW adding keyword signal moved specific-term stories above the contaminating cluster for this probe. No further action on Q1.
   - **Q4 closed as probe-phrasing defect.** The failing assertion was testing a bare "service boundaries" phrasing that does not represent realistic query shape. Probe was producing a false signal, not a real retrieval problem. Residue: add a grep to the eval suite for bare "service boundaries" queries and update or remove any that lack a realistic context clause. Suite-hygiene item, not a retrieval fix.
+- **Scope note -- stranger-name queries (August 8, 2026):** The Phase 1 strip (`_substitute_matt_subject`) does not fix, and does not worsen, wrong-person query behavior. "How does Nadella approach microservices" retrieves Matt's stories and answers fluently with nothing flagging the mismatch -- the strip is unaffected either way, because the embedded query still returns semantically relevant Matt stories regardless of whether "Matt" is present. This was briefly characterized as benign; that characterization was wrong. Retrieval producing a coherent answer about the wrong person, with nothing signaling the mismatch, is a trust defect -- the same family as the confidence problems this work addresses elsewhere. It is MATTGPT-063's live defect, not a side effect of the strip, and out of -077's scope. The strip neither fixes nor worsens it.
 - **Logged:** May 19, 2026
 
 ---
