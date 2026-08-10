@@ -1,5 +1,5 @@
 """
-BDD step definitions for query_strip_077.feature.
+BDD step definitions for query_substitution_077.feature.
 
 Pure unit tests -- no Playwright, no API calls, no Pinecone.
 Tests _substitute_matt_subject() and _build_retrieval_query() in utils/scoring.py.
@@ -8,7 +8,7 @@ Tests _substitute_matt_subject() and _build_retrieval_query() in utils/scoring.p
 import pytest
 from pytest_bdd import given, parsers, scenarios, then, when
 
-scenarios("../features/query_strip_077.feature")
+scenarios("../features/query_substitution_077.feature")
 
 
 @pytest.fixture

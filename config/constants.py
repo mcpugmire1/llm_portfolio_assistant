@@ -54,6 +54,11 @@ CONFIDENCE_LOW = 0.20  # Raised from 0.15 to filter phantom similarity noise
 PINECONE_MIN_SIM = 0.15  # Minimum similarity for Pinecone results
 SEARCH_TOP_K = 10  # Stories to fetch from Pinecone (headroom for reranking/filtering)
 
+# Intent families where "Matt"/"Matt's" is substituted with "he"/"his" in the
+# retrieval query so self-referential name tokens don't bias embeddings toward
+# Independent Project stories. The LLM receives the original query verbatim.
+SUBSTITUTION_FAMILIES = frozenset({"technical", "team_scaling", "agile_transformation"})
+
 # =============================================================================
 # ENTITY GATE THRESHOLD
 # =============================================================================

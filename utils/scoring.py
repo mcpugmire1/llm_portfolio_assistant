@@ -5,6 +5,7 @@ This module provides hybrid scoring functionality that combines semantic
 for story search results.
 """
 
+import re
 from typing import Any
 
 from utils.formatting import build_5p_summary
@@ -115,3 +116,24 @@ def _hybrid_score(
         kw = 0.0
 
     return (pc * float(w_pc)) + (kw * float(w_kw))
+
+
+def _substitute_matt_subject(query: str) -> str:
+    # Possessive first to avoid double-substitution ("Matt's" -> "his", "Matt" -> "he").
+    result = re.sub(r"\bMatt's\b", "his", query, flags=re.IGNORECASE)
+    result = re.sub(r"\bMatt\b", "he", result, flags=re.IGNORECASE)
+    # Capitalize only when the substitution lands at string position zero.
+    if result and result[0].islower() and not query[0].islower():
+        result = result[0].upper() + result[1:]
+    return result
+
+
+def _build_retrieval_query(query: str, intent_family: str) -> str:
+    # Substituted query feeds both embedding and keyword scorer -- matches the
+    # tested arm-C configuration from the Aug 2026 A/B/C probe. Original query
+    # flows to the LLM prompt and all user-facing surfaces untouched.
+    from config.constants import SUBSTITUTION_FAMILIES
+
+    if intent_family in SUBSTITUTION_FAMILIES:
+        return _substitute_matt_subject(query)
+    return query

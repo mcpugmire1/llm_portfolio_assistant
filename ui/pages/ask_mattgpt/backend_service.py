@@ -38,6 +38,7 @@ from utils.formatting import (
     _format_narrative,
     build_5p_summary,
 )
+from utils.scoring import _build_retrieval_query
 from utils.ui_helpers import dbg
 from utils.validation import is_nonsense, token_overlap_ratio
 
@@ -1572,9 +1573,15 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
                     f"DEBUG: Title entity '{entity_value[:50]}...' - using soft filtering (no Pinecone filter)"
                 )
 
-        # Semantic search
+        # Semantic search -- substituted query feeds both embedding and keyword scorer.
+        # Arm-C evidence (Aug 2026 A/B/C probe) was generated with the transformed
+        # string reaching both signals; implementation must match the tested config.
+        # Original query flows to the LLM prompt and all user-facing surfaces untouched.
+        retrieval_q = _build_retrieval_query(
+            question or filters.get("q", ""), intent_family
+        )
         search_result = semantic_search(
-            question or filters.get("q", ""),
+            retrieval_q,
             search_filters,
             stories=stories,
             top_k=SEARCH_TOP_K,

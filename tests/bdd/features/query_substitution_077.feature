@@ -86,3 +86,8 @@ Feature: MATTGPT-077 retrieval query pronoun substitution for Matt-subject queri
     Given the query "How do you modernize monoliths into microservices?" and intent family "technical"
     When _build_retrieval_query is called
     Then the retrieval query equals "How do you modernize monoliths into microservices?"
+
+  Scenario: case-insensitive match substitutes lowercase "matt" without capitalizing
+    Given the query "how does matt build mvps?" and intent family "team_scaling"
+    When _build_retrieval_query is called
+    Then the retrieval query equals "how does he build mvps?"
