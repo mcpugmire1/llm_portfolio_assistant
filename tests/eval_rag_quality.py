@@ -1040,6 +1040,12 @@ def evaluate_query(
             "tags": [],
         }
         rag_result = rag_fn(query, filters, stories)
+
+        if rag_result.get("degraded"):
+            result.error = "fatal_fallback triggered (degraded=True)"
+            result.passed = False
+            return result
+
         response = rag_result.get("answer_md", "")
         result.response = response
 
@@ -1259,6 +1265,12 @@ def evaluate_query(
 
                 # Call rag_answer through normal flow (Title detection should find it)
                 rag_result = rag_fn(dynamic_query, {}, stories)
+
+                if rag_result.get("degraded"):
+                    result.error = "fatal_fallback triggered (degraded=True)"
+                    result.passed = False
+                    return result
+
                 response = rag_result.get("answer_md", "")
                 sources = rag_result.get("sources", [])
                 result.response = response

@@ -6,6 +6,7 @@ Includes nonsense detection, semantic search orchestration, and Agy response gen
 """
 
 import csv
+import logging
 import os
 import re
 from concurrent.futures import ThreadPoolExecutor
@@ -51,6 +52,8 @@ from .story_intelligence import (
     build_story_context_for_rag,
     infer_story_theme,
 )
+
+logger = logging.getLogger(__name__)
 
 # SEARCH_TOP_K imported from config.constants
 
@@ -1703,8 +1706,8 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
                     if sid not in seen:
                         pool.append(s)
                         seen.add(sid)
-            except Exception:
-                pass
+            except Exception as e:
+                logger.warning("suggestion pool widening skipped: %s", e, exc_info=True)
 
         if DEBUG:
             dbg(f"ask: pool_size={len(pool) if pool else 0}")
@@ -1752,6 +1755,7 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
         # Fatal error fallback
         if DEBUG:
             print(f"DEBUG rag_answer fatal error: {e}")
+        logger.exception("rag_answer fatal error: %s", e)
         try:
             ranked = sorted(
                 stories,
@@ -1767,6 +1771,7 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
                 "sources": [],
                 "modes": {},
                 "default_mode": "narrative",
+                "degraded": True,
             }
 
         st.session_state["__ask_dbg_decision"] = "fatal_fallback"
@@ -1783,6 +1788,7 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
             "sources": sources,
             "modes": modes,
             "default_mode": "narrative",
+            "degraded": True,
         }
 
     # Rank stories based on intent type
@@ -2033,4 +2039,5 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
         "sources": sources,
         "modes": modes,
         "default_mode": "narrative",
+        "degraded": False,
     }
