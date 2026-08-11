@@ -1577,9 +1577,18 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
         # Arm-C evidence (Aug 2026 A/B/C probe) was generated with the transformed
         # string reaching both signals; implementation must match the tested config.
         # Original query flows to the LLM prompt and all user-facing surfaces untouched.
-        retrieval_q = _build_retrieval_query(
-            question or filters.get("q", ""), intent_family
-        )
+        _raw_q = question or filters.get("q", "")
+        retrieval_q = _build_retrieval_query(_raw_q, intent_family)
+        if DEBUG:
+            _fired = retrieval_q != _raw_q
+            print(
+                f"DEBUG substitution: family={intent_family} fired={_fired}"
+                + (
+                    f" original={_raw_q!r} → retrieval={retrieval_q!r}"
+                    if _fired
+                    else f" query={_raw_q!r}"
+                )
+            )
         search_result = semantic_search(
             retrieval_q,
             search_filters,
@@ -1948,6 +1957,14 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
         ranked = [x for x in pool if isinstance(x, dict)][:3] or (
             pool[:1] if pool else []
         )
+
+    if not ranked:
+        ranked = diversify_results(pool) or (pool[:1] if pool else [])
+        is_synthesis = False
+        if DEBUG:
+            print(
+                "DEBUG synthesis guard: empty ranked, falling back to non-synthesis path"
+            )
 
     st.session_state["__ask_dbg_decision"] = (
         f"ok_ranked:{ranked[0].get('id')}" if ranked else "rank_empty"
