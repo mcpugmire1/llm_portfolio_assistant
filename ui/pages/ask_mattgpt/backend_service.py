@@ -748,7 +748,7 @@ def _score_story_for_prompt(story: dict[str, Any], prompt: str) -> float:
         score += 5.0
 
     # Check tags
-    tags = story.get("public_tags", "").lower()
+    tags = " ".join(story.get("public_tags", []) or []).lower()
     if prompt_lower in tags:
         score += 3.0
 
