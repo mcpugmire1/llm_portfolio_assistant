@@ -88,6 +88,11 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-172](#mattgpt-172) | CIC-cluster consolidation: 48% corpus density in 2019-2023 block causes cluster-drift dominance on broad queries | Open | Medium | Action | August 8, 2026 |
 | [MATTGPT-173](#mattgpt-173) | Role Match JD validation: no defined behavior for malformed or comp-only JD inputs | Open | Medium | Issue | August 8, 2026 |
 | [MATTGPT-174](#mattgpt-174) | Confidence gate mislabels low-signal pools — noise-floor pools clear CONFIDENCE_HIGH and print "high" | Open | Medium | Defect/Design | August 11, 2026 |
+| [MATTGPT-175](#mattgpt-175) | W_KW trace payload reports 0.0 while ranking runs at 0.15 — lying instrument invalidates weight annotations in probe and eval records | Open | High | Bug | August 11, 2026 |
+| [MATTGPT-176](#mattgpt-176) | Dead code: zero-caller function, 200-line commented block, duplicate typed-alias map | Open | Low | Refactor | August 11, 2026 |
+| [MATTGPT-177](#mattgpt-177) | token_overlap_ratio bound violation — repeated in-vocab tokens inflate ratio above 1.0; docstring example independently wrong | Open | Medium | Bug | August 11, 2026 |
+| [MATTGPT-178](#mattgpt-178) | Tokenizer divergence in utils/validation.py — _tokenize and token_overlap_ratio split on different character sets, undercounting technical-term overlap | Open | High | Bug | August 11, 2026 |
+| [MATTGPT-179](#mattgpt-179) | formatting.py schema migration: phantom schema, story_has_metric filter, nine-field remap, three test files to rebuild | Open | High | Bug + Refactor | August 11, 2026 |
 | [MATTGPT-159](#mattgpt-159) | Role Match performance — parallelize per-requirement assessor calls; sequential gpt-4o loop is the bottleneck | Open | Medium | Performance | July 31, 2026 |
 | [MATTGPT-160](#mattgpt-160) | JD extractor clause-dropping — 7 of 23 requirements on demo JD lose qualifiers during extraction | Open | Medium | Bug | July 31, 2026 |
 | [MATTGPT-161](#mattgpt-161) | Career span duplicated and hardcoded across surfaces — consolidate to a single derived or configured source | Open | High | Refactor | August 3, 2026 |
@@ -1209,6 +1214,8 @@ or referenced outside that file. The Entity Gate was removed Jan 2026; this cons
 is a leftover with a misleading history comment ("Lowered from 0.55 to allow narrative
 queries"). Fix: delete the constant and its comment.
 
+**Confirmed August 11, 2026:** `grep -rn "ENTITY_GATE_THRESHOLD" --include="*.py"` finds only `config/constants.py`. The constant's own inline comment ("Used by backend_service.py to decide if a query passes the semantic gate") is false -- it is not imported by backend_service.py or any other file. The ticket's premise and fix (delete constant and its comment) are correct. The constants.py comment is the thing to delete, not a source of conflicting evidence.
+
 **Acceptance criteria:** `ENTITY_GATE_THRESHOLD` does not appear in any file in the repo.
 
 ---
@@ -1397,6 +1404,11 @@ Professional Narrative stories remain fully available to Ask Agy's Pinecone retr
 - **Priority:** Low (was)
 - **Type:** Refactor
 - **Why not:** "Hybrid scoring" framing is itself stale — there is no hybrid scoring. W_KW = 0.0, the pipeline is pure semantic via Pinecone (this was the false claim corrected by MATTGPT-057 alignment work, May 11). What the ticket actually described is that Pinecone returns 0.0-1.0 similarity and our confidence thresholds (CONFIDENCE_HIGH=0.25, CONFIDENCE_LOW=0.15) sit in a narrow band of that range — that's just thresholds operating on raw similarity, not a scoring-system conflict. The proposed fix ("document or align") was vague with no clear audience for the documentation or concrete pain driving the alignment. Close. If a real question about threshold calibration emerges in production (false confidence labels, gate firing wrong), file a new ticket with concrete evidence.
+- **August 11, 2026 annotation -- two facts in this block are now false:**
+  1. "There is no hybrid scoring. W_KW = 0.0." W_KW was re-enabled at 0.15 on August 8 (commit f5641e7, MATTGPT-157 closed). Hybrid scoring is live.
+  2. "CONFIDENCE_LOW = 0.15." `constants.py` now has CONFIDENCE_LOW = 0.20.
+  The DA reasoning stands -- the ticket was vague and the closure was correct. But the architecture description it used to justify closure is no longer accurate and should not be read as a current statement.
+  The revival condition this ticket wrote ("if a real question about threshold calibration emerges in production, file a new ticket with concrete evidence") is exactly MATTGPT-174, filed August 11. -024 predicted its own successor. -174 is the live ticket.
 - **Original framing (preserved):**
 - **Issue:** Pinecone scores (0.0-1.0) don't map clearly to confidence buckets (0.15-0.25).
 - **Fix:** Document or align the scoring systems.
@@ -1467,6 +1479,7 @@ Professional Narrative stories remain fully available to Ask Agy's Pinecone retr
 - **Priority:** Low (was)
 - **Type:** Issue
 - **Why not:** Logged in April 2026 test audit sweep as "sometimes triggers incorrectly" — no specific failing query, no reproduction. Thresholds (CONFIDENCE_HIGH=0.25, CONFIDENCE_LOW=0.15) have been stable since January 2026 with no production failures attributable to misfires. Same pattern as MATTGPT-027 (passive monitoring without a mechanism = cruft). Historical context preserved in **docs/ADR.md ADR 018 — Confidence Threshold Calibration for Pinecone Semantic Search**, which captures the December 2025 calibration history and edge cases to watch. If a specific banner misfire surfaces with a reproduction, re-file as a concrete bug ticket.
+- **August 11, 2026 annotation -- one fact in this block is now false:** "CONFIDENCE_LOW=0.15 have been stable since January 2026." `constants.py` now has CONFIDENCE_LOW=0.20. The DA reasoning stands. The revival condition ("specific banner misfire with reproduction, re-file as a concrete bug ticket") is met by MATTGPT-174's three evidence cases ("I do, we do, you do" at 0.260, "Matt?" at 0.291, -162 null-vector shape). -174 is the live ticket.
 - **Original framing (preserved):**
 - **Issue:** Low-confidence banner sometimes triggers incorrectly. Review threshold logic.
 - **Closed:** May 14, 2026
@@ -2423,20 +2436,25 @@ Option A recalibrates the classifier. Option B adds an upstream gate. They compo
 ---
 
 ### MATTGPT-171
-**Phrase-aware matching: stopword-only phrases invisible to token-overlap scorer at any W_KW weight**
+**Phrase-aware matching: short-token filter leaves single stopword token for instructional phrases; scorer behavior under-characterized**
 
 - **Status:** Open
 - **Priority:** Low
 - **Type:** Investigation
 - **Logged:** August 8, 2026
+- **Mechanism corrected:** August 11, 2026 (see below)
 
-**Issue:** The token-overlap keyword scorer (`_keyword_score_for_story`) tokenizes and filters stopwords before computing overlap. Phrases composed entirely of stopwords -- "I do, we do, you do" being the concrete test case -- reduce to an empty token set after stopword removal. The overlap score is zero regardless of W_KW weight. These phrases are invisible to keyword scoring.
+**Mechanism correction (August 11, 2026 -- supersedes original framing):** The original issue stated that `_tokenize` "filters stopwords before computing overlap" and that "I do, we do, you do" reduces to an empty token set. Both claims are wrong.
 
-**Consequence:** Queries containing instructional phrasing, relational language, or other high-stopword constructions cannot benefit from W_KW even at elevated weights. The W_KW re-enable (MATTGPT-157/f5641e7) does not help these queries; retrieval falls back to pure semantic.
+Verified: `_tokenize("I do, we do, you do")` returns `['you']`. `_tokenize` does not filter stopwords -- `_STOPWORDS` is used only by `token_overlap_ratio`, not by `_tokenize`. The real filter is `len >= 3`: "I" (len 1), "do" (len 2), "we" (len 2) are dropped; "you" (len 3) survives.
 
-**Test case:** "I do, we do, you do" -- a coaching/instructional register query. After stopword removal, no scoring terms remain. Confirm that W_KW=0 and W_KW=current produce identical rankings for this query.
+The phrase is not invisible to keyword scoring. It scores on a single stopword token ("you"), which can match stories that contain "you."
 
-**Investigation scope:** (1) Confirm the empty-token behavior in the scorer. (2) Determine whether the affected query class (high-stopword, instructional register) actually surfaces retrieval problems in production before designing a fix. The scorer's behavior may be correct -- stopword-only phrases carry little semantic specificity, and pure-semantic via Pinecone may already handle them adequately. (3) If retrieval problems exist, evaluate whether the fix is phrase-level matching (before stopword removal), bigram indexing, or a different path.
+**Revised consequence:** The original test instruction ("confirm W_KW=0 and W_KW=current produce identical rankings") may not hold, since "you" is a real scoring token. The affected query class is not zero-token phrases but single-token phrases where the surviving token is a stopword with broad corpus distribution.
+
+**Coupling to MATTGPT-178 open stopword question:** MATTGPT-178 notes that `_STOPWORDS` is used only by `token_overlap_ratio` and raises the question of whether it was intended to apply to `_tokenize` as well. If `_tokenize` gains the `_STOPWORDS` filter to address that question, "you" would drop from this example and the original empty-token premise would become true retroactively. These two investigations should not be resolved independently -- the stopword scoping decision in -178 directly determines the mechanism this ticket is investigating.
+
+**Investigation scope (revised):** (1) Verify "you" matching behavior in the scorer against real corpus stories. (2) Determine whether single-surviving-stopword queries surface retrieval problems in production. (3) Do not design a fix before the -178 stopword scoping question is resolved -- the fix space depends on that answer.
 
 ---
 
@@ -2502,6 +2520,10 @@ Option A recalibrates the classifier. Option B adds an upstream gate. They compo
 
 **Coupling note (verify in `rag_service.py` from debug output before any fix, not from source reasoning):** The gate reads the pc component of the blend-chosen lead story. Keyword score never enters the gated number directly, but kw elects which story's pc gets evaluated -- "Matt?" demonstrates this: why-hire-matt leads on kw=1.0 (single-token query trivially maxes keyword overlap), and the gate reads its 0.291 pc. Confirm this coupling is still the live behavior before designing around it.
 
+**Inherited obligation from MATTGPT-157 step 4 (August 11, 2026):** MATTGPT-157's method included a step 4: "Re-check confidence-band calibration: `CONFIDENCE_HIGH=0.25` was tuned for pc-only; adding a kw term shifts blended scores up." That step was never completed before -157 was closed. The obligation passes to -174.
+
+Two models conflict and cannot both be operative: -157's step 4 assumes the gate reads the blended score (so W_KW raising blended values shifts what the gate sees). This ticket's coupling note assumes the gate reads the pc component only (so W_KW cannot shift the gated value -- it only elects which story's pc is gated). These are incompatible. This ticket's model is better evidenced (from observed debug output). If it is confirmed from `rag_service.py`, the step 4 calibration obligation dissolves: W_KW re-enable does not shift gated values, and no recalibration is needed from that source. The broader calibration audit this ticket already calls for (from eval suite distributions) covers the threshold question independently.
+
 **Design direction (not a spec -- calibrate from eval suite, no numbers in the ticket):** Two-factor gate using absolute bands first, distribution gap consulted only in the ambiguous middle band.
 
 - Calibration constraint the bands must satisfy: database query pool (0.32–0.3886, genuinely bad match) and enablement pool (0.51–0.5643, genuinely good match) show that score bunching alone does not distinguish quality; the floor's placement between those regimes must come from data. Calibrate from the eval suite's 70 logged score distributions, not from the three evidence cases above.
@@ -2511,5 +2533,162 @@ Option A recalibrates the classifier. Option B adds an upstream gate. They compo
 **Evidence provenance:** Cases 1 and 2 surfaced during MATTGPT-077 Phase 1 step-A probe session (August 11, 2026). See -077 Step A probe results note for retrieval and router details.
 
 **Cross-references:** MATTGPT-162 (same gate orbit, embedding-exception upstream cause), MATTGPT-077 (step-A probe session -- evidence provenance), MATTGPT-171 (phrase-aware matching -- "I do, we do, you do" is Case 1's query).
+
+---
+
+### MATTGPT-175
+**W_KW trace payload reports 0.0 while ranking runs at 0.15 -- lying instrument invalidates weight annotations in probe and eval records**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **Files:** `services/pinecone_service.py` (lines 97-98, 281), `config/constants.py`, `utils/scoring.py`
+- **Logged:** August 11, 2026
+
+**Issue:** `pinecone_service.py` imports `_hybrid_score` from `utils.scoring` (line 19) and calls it at line 316 with no weight arguments. The function picks up its defaults -- W_PC=1.0, W_KW=0.15 -- from `utils/scoring.py`. That is the live blend.
+
+Lines 97-98 define module-local constants W_PC=1.0 and W_KW=0.0. Line 281 emits these into a trace/debug payload as `{"W_PC": W_PC, "W_KW": W_KW}`. The payload reports keyword weighting is off; the ranking one line later runs it at 0.15. The instrument lies.
+
+**Arithmetic proof (Fiserv trace, August 11):** pc=0.580, kw=0.667, blend=0.680. `0.580 + 0.15 × 0.667 = 0.680` exactly. The live path used 0.15. The trace payload reported 0.0.
+
+**What is proven:** Line 281 emits the module-local pair (W_KW=0.0) into the trace payload. Line 316 blends using the imported `_hybrid_score` defaults (W_KW=0.15). These are two different values for the same conceptual weight, in the same module, three lines apart.
+
+**What is unverified:** Whether the E1-E4 pre-registered experiment or the eval suite consumed the trace payload's `weights` key and used it for anything beyond display. If they did, weight annotations in those records are wrong while rank flips remain real (rank comes from actual ranking, not from the reported weight). If they did not, the defect is confined to the trace payload itself. Verify before concluding the experiment record is corrupted.
+
+**Violation:** `config/constants.py` opens with "NEVER duplicate these values in other files." W_PC and W_KW are not in `constants.py`; they are in `utils/scoring.py` as defaults. The module-local copies in `pinecone_service.py` are the duplication the rule was written to prevent, and they diverged silently.
+
+**Fix:** Three steps, in order:
+1. Add W_PC and W_KW to `config/constants.py` as the single authoritative source.
+2. Update `utils/scoring.py` to import W_PC and W_KW from `constants.py` rather than defining them as defaults.
+3. Delete `pinecone_service.py` lines 97-98. Line 281's trace payload then reads whatever `constants.py` holds and will be accurate.
+
+No behavior change to ranking. The fix corrects the instrument, not the weight.
+
+**Before fixing:** Verify whether any probe harness (probe_077_stepA.py or similar) reads the `weights` key from the trace payload and uses it for anything other than display. If so, the harness results carry wrong weight metadata and should be re-annotated.
+
+---
+
+### MATTGPT-176
+**Dead code: zero-caller function, 200-line commented block, duplicate typed-alias map**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Refactor
+- **Files:** `ui/pages/ask_mattgpt/utils.py` (line 237), `ui/pages/ask_mattgpt/backend_service.py` (lines 1044-1243, 1412-1421), `ui/pages/ask_mattgpt/conversation_view.py` (line 305)
+- **Logged:** August 11, 2026
+
+**Three items -- work independently, ship together or separately:**
+
+1. **Dead function:** `push_card_snapshot_from_state` at `utils.py:237` has zero callers. Confirmed via grep. Remove the function and any imports that exist solely for it.
+
+2. **Commented-out legacy block:** `_generate_agy_response` at `backend_service.py:1044-1243` -- 200 lines of legacy response-generation logic, commented out. Survived the `6cba8d9` cleanup pass that removed 430 similar lines from the same file. Note for whoever picks this up: `6cba8d9` claimed to have cleared this class of commented-out legacy code; this block's survival was not intentional, it was missed. Remove. If git history is needed, it is in the commit log; commented-out code in a live module is not a backup strategy.
+
+3. **Duplicate typed-alias map:** `backend_service.py:1412-1421` contains a typed-alias map independent of the one at `conversation_view.py:305`. Two implementations of the same feature with no documented reason for divergence. Before removing either copy: (a) confirm both maps are identical in content; if they differ, the divergence is a separate bug to file. (b) Identify which call path uses which copy and make `conversation_view.py:305` the canonical one, or document why the backend copy must exist.
+
+**Note on `_format_narrative`:** An earlier claim in this investigation that `_format_narrative` output "poisons every query" was retracted. Verified: `_format_narrative` feeds `answer_context`, used only at `backend_service.py:1041`, the API-failure fallback path. It does not enter the LLM prompt on normal query paths. No ticket warranted; noted here for provenance since the retraction happened in the same investigation session.
+
+---
+
+### MATTGPT-177
+**token_overlap_ratio bound violation -- repeated in-vocab tokens inflate ratio above 1.0; docstring example independently wrong**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `utils/validation.py` (last two lines of `token_overlap_ratio`)
+- **Failing test:** `tests/unit/test_scoring_contracts.py::test_token_overlap_ratio_stays_within_unit_interval` (failing by design -- pre-registers the expected fix)
+- **Logged:** August 11, 2026
+
+**Issue:** `hits = sum(1 for t in toks if t in vocab)` iterates the non-deduped token list. Dividing by `max(1, len(set(toks)))` dedupes the denominator but not the numerator. Any repeated in-vocab token inflates the ratio above the documented [0.0, 1.0] range.
+
+**Verified:**
+- `token_overlap_ratio("aws aws aws", {"aws"})` returns 3.0
+- `token_overlap_ratio("platform platform", {"platform"})` returns 2.0
+
+**Docstring bug (independent of the bound violation):** The docstring's third example documents `"platform and some unrelated words"` as returning 0.5. Actual return value is 0.25. The docstring is wrong regardless of which bug is fixed first.
+
+**Fix (two edits, ship together):**
+1. Change the numerator to dedupe before counting: `sum(1 for t in set(toks) if t in vocab)`. The denominator `len(set(toks))` is then consistent with the numerator and the ratio stays within [0.0, 1.0].
+2. Correct the docstring's third example: `"platform and some unrelated words"` is documented as 0.5, actual return is 0.25. The input has no repeated tokens (4 unique non-stopword tokens, 4 total), so the fix cannot change this result -- 0.25 is correct unconditionally. Write 0.25 into the docstring directly.
+
+**Severity gate (verify before closing):** Grep all callers of `token_overlap_ratio`. If any caller gates on a value near 1.0 (e.g., `if ratio > 0.8: reject`), an inflated ratio passes a gate it shouldn't. That would upgrade severity from Medium to High. If no caller thresholds against a near-1.0 value, the defect is a correctness issue without a confirmed downstream behavioral consequence.
+
+**Cross-references:** MATTGPT-178 (tokenizer divergence in the same function -- fix both together; they interact at the character-class level before this arithmetic runs).
+
+---
+
+### MATTGPT-178
+**Tokenizer divergence in utils/validation.py -- _tokenize and token_overlap_ratio split on different character sets, undercounting technical-term overlap**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **File:** `utils/validation.py`
+- **Related:** MATTGPT-157 (closed -- specific-term query swamping; same term class affected here), MATTGPT-177 (bound violation in the same function)
+- **Logged:** August 11, 2026
+
+**Issue:** Two tokenizers in the same module disagree on symbol-bearing characters.
+
+- `_tokenize` uses `_WORD_RX = [A-Za-z0-9+#\-_.]+` -- keeps `+`, `#`, `-`, `.` as word characters.
+- `token_overlap_ratio` uses `re.split(r"[^\w]+")` where `\w = [A-Za-z0-9_]` -- those same characters become separators.
+
+**Verified divergence:**
+
+| Input | `_tokenize` output | `token_overlap_ratio` tokens |
+|---|---|---|
+| `c++` | `['c++']` | `[]` |
+| `.net` | `['.net']` | `['net']` |
+| `node.js` | `['node.js']` | `['node']` |
+| `ci/cd` | `[]` | `[]` |
+
+**Retrieval consequence:** If the vocab is built with `_tokenize` (as the docstring at line 199 states), symbol-bearing technical terms exist in the vocab in a form `token_overlap_ratio` can never produce. Overlap is systematically undercounted for exactly the technical vocabulary the scorer exists to recognize -- `c++`, `.net`, `node.js`, and similar terms contribute zero overlap regardless of their presence in the story. This is the same term class MATTGPT-157 diagnosed as getting swamped in retrieval.
+
+**Unverified prerequisite (verify before fixing):** Confirm that `initialize_vocab` actually builds the vocab using `_tokenize`. The docstring asserts this; the function itself was not read during this investigation. The answer determines which tokenizer is the wrong one: if vocab is built with `_tokenize`, fix `token_overlap_ratio` to use the same regex. If vocab is built with `re.split(r"[^\w]+")`, fix `_tokenize` (and accept that `c++` becomes `['c']`).
+
+**Additional finding (note -- may warrant a separate ticket):** `_STOPWORDS` is defined in this module and used only by `token_overlap_ratio`, not by `_tokenize`. As a result, the keyword scorer treats "how," "you," and other stopwords as content tokens when building the overlap. Whether this is a defect or intended behavior depends on the scorer's design intent. If `_STOPWORDS` was meant to apply to all tokenization in this module, that's a third bug here. If it was intentionally scoped to `token_overlap_ratio` only, document that intent explicitly so future editors don't "fix" it.
+
+---
+
+### MATTGPT-179
+**formatting.py schema migration: phantom schema, story_has_metric filter, nine-field remap, three test files to rebuild**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug + Refactor
+- **Logged:** August 11, 2026
+- **Sequencing note:** Scope of this ticket depends on whether the typed-command surface is kept. Resolve that decision before starting -- it changes what the migration must cover.
+
+**Issue:** `formatting.py` operates against a phantom schema -- field names the code expects do not match what the JSONL actually carries. The nine-field mapping has been verified against the corpus (August 11, 2026):
+
+| Code field | JSONL field | Type |
+|---|---|---|
+| `why` | `Purpose` | str |
+| `how` | `Process` | list |
+| `what` | `Performance` | list |
+| `title` | `Title` | str |
+| `client` | `Client` | str |
+| `star.situation` | `Situation` | list |
+| `star.task` | `Task` | list |
+| `star.action` | `Action` | list |
+| `star.result` | `Result` | list |
+
+All list fields are already lists in the JSONL -- no wrapping needed, no design gaps. The mismatch is in field naming, not structure.
+
+**`story_has_metric` / `has_metric` filter:** `story_has_metric` is a function in `formatting.py` that reads `s.get("what")` and `s.get("star", {}).get("result")` -- both phantom field names. The JSONL carries `Performance` and `Result`. The function returns False for every story regardless of content. Verified: a story with "Reduced latency by 60%" in `Performance` returns False; `matches_filters(story, {"has_metric": True})` returns False with it. The `has_metric` filter itself is not broken -- it calls `story_has_metric`, which is. After item 1's migration corrects the field names, `story_has_metric` reads `Performance` and `Result` and the filter works. No separate fix needed; item 1 closes this.
+
+**Test fixture blind spot:** `test_formatting.py`, `test_filters.py`, and `test_scoring.py:85` use fixture data that was not updated when the JSONL schema was established. Tests pass against the phantom schema, not the live one. A test suite passing against stale fixtures gives false confidence -- these three files need to be rebuilt against the verified nine-field mapping.
+
+**Stale assertions and docstrings from f5641e7 (August 8 W_KW re-enable):**
+- Four assertions in `test_scoring.py` are currently failing (red since August 8): `test_default_weights_use_semantic_only` (got 0.89, expected 0.8), `test_handles_none_pc_score` (got 0.09, expected 0.0), `test_handles_invalid_pc_score_type` (got 0.075, expected 0.0), `test_default_weights_favor_semantic` (got 0.15, expected 0.0). These assert against blend values computed at W_KW=0.0 and have not been updated for W_KW=0.15.
+- The Returns block and Example block in `_hybrid_score` (utils/scoring.py) are stale -- they document the 0.0/1.0 defaults. The Args line was already fixed by f5641e7. Update Returns and Example to reflect 0.15/1.0 and the constants.py sourcing (pending MATTGPT-175's fix).
+
+**Live user-facing surface (confirmed):** Typing `deep dive` in Ask Agy returns a truncated 5PSummary instead of the full STAR breakdown. The path is `conversation_view.py:338`. The RAG path builds the modes dict at `backend_service.py:1437` and `2001`. Phantom field names in `formatting.py` are producing degraded output on this surface now.
+
+**Severity correction for `_format_narrative` (do not escalate):** `_format_narrative` output feeds `answer_context`, which is used only at `backend_service.py:1041` -- the API-failure fallback path. It does not enter the LLM prompt on normal query paths. An earlier claim in this investigation that it "poisons every query" was retracted and verified false. The live user-facing surface note above applies to other formatting paths in this migration, not to `_format_narrative` specifically.
+
+**Scope summary (three work items, may split into sub-tickets when sequencing is clear):**
+1. Migrate `formatting.py` field references to the verified nine-field mapping. This also fixes `story_has_metric` -- once it reads `Performance` and `Result`, the `has_metric` filter works with no further change.
+2. Rebuild test fixtures in `test_formatting.py`, `test_filters.py`, `test_scoring.py` against the live schema. Update the four currently-failing `test_scoring.py` assertions for W_KW=0.15.
+3. Update the Returns block and Example block in `_hybrid_score` (utils/scoring.py) to reflect 0.15/1.0 defaults.
 
 ---
