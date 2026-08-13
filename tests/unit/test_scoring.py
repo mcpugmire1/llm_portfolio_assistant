@@ -119,11 +119,11 @@ class TestHybridScore:
     """Tests for _hybrid_score() function."""
 
     def test_default_weights_use_semantic_only(self):
-        """Should use only Pinecone score with default weights (1.0, 0.0)."""
+        """Should blend scores with default weights (W_PC=1.0, W_KW=0.15)."""
         from utils.scoring import _hybrid_score
 
         result = _hybrid_score(0.8, 0.6)
-        assert result == 0.8  # w_pc=1.0, w_kw=0.0 -> only pc_score
+        assert result == 0.89  # 0.8 * 1.0 + 0.6 * 0.15 = 0.89
 
     def test_custom_weights_blend_scores(self):
         """Should blend scores with custom weights."""
@@ -138,7 +138,7 @@ class TestHybridScore:
         from utils.scoring import _hybrid_score
 
         result = _hybrid_score(None, 0.6)
-        assert result == 0.0  # None defaults to 0.0
+        assert result == 0.09  # pc=0.0, kw=0.6: 0.0 * 1.0 + 0.6 * 0.15 = 0.09
 
     def test_handles_none_kw_score(self):
         """Should handle None kw_score gracefully."""
@@ -152,7 +152,7 @@ class TestHybridScore:
         from utils.scoring import _hybrid_score
 
         result = _hybrid_score("invalid", 0.5)
-        assert result == 0.0  # Invalid defaults to 0.0
+        assert result == 0.075  # pc=0.0, kw=0.5: 0.0 * 1.0 + 0.5 * 0.15 = 0.075
 
     def test_handles_invalid_kw_score_type(self):
         """Should handle invalid types for kw_score."""
@@ -212,4 +212,19 @@ class TestScoringConstants:
 
         assert W_PC >= W_KW  # Semantic preferred or equal
         assert W_PC == 1.0  # Full semantic weight
-        assert W_KW == 0.0  # Keyword disabled by default
+        assert W_KW == 0.15  # Keyword weight (raised from 0.0 Aug 8, 2026 -- f5641e7)
+
+    def test_weights_have_single_source(self):
+        """W_KW and W_PC must be the same object in all consumers.
+
+        Regression guard for MATTGPT-175: pinecone_service.py previously
+        defined W_KW=0.0 locally while scoring.py ran at 0.15, causing the
+        trace payload to report the wrong weight. Any redefinition will
+        break this test.
+        """
+        from config.constants import W_KW as c_kw, W_PC as c_pc
+        from services.pinecone_service import W_KW as p_kw, W_PC as p_pc
+        from utils.scoring import W_KW as s_kw, W_PC as s_pc
+
+        assert c_kw == s_kw == p_kw
+        assert c_pc == s_pc == p_pc

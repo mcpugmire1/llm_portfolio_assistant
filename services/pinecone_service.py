@@ -13,6 +13,8 @@ from config.constants import (
     PINECONE_LOWERCASE_FIELDS,
     PINECONE_MIN_SIM,
     SEARCH_TOP_K,
+    W_KW,
+    W_PC,
 )
 from config.debug import DEBUG
 from config.settings import get_conf
@@ -93,11 +95,8 @@ _DEF_DIM = 1536  # OpenAI text-embedding-3-small dimension
 # PINECONE_MIN_SIM imported from config/constants.py
 DATA_FILE = os.getenv("STORIES_JSONL", "echo_star_stories_nlp.jsonl")
 
-# Hybrid score weights
-W_PC = 1.0
-W_KW = 0.0
-
 # SEARCH_TOP_K imported from config.constants
+# W_PC, W_KW imported from config.constants
 
 
 # =========================

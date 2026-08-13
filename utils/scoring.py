@@ -8,12 +8,9 @@ for story search results.
 import re
 from typing import Any
 
+from config.constants import W_KW, W_PC
 from utils.formatting import build_5p_summary
 from utils.validation import _tokenize
-
-# Import weight constants
-W_PC = 1.0  # semantic (Pinecone vector match)
-W_KW = 0.15  # keyword/token overlap
 
 
 def _keyword_score_for_story(s: dict[str, Any], query: str) -> float:
@@ -94,13 +91,12 @@ def _hybrid_score(
         w_kw: Weight for keyword score. Defaults to W_KW (0.15).
 
     Returns:
-        Float hybrid score. With default weights (1.0, 0.0), returns just
-        the Pinecone score. With custom weights, returns weighted sum:
-        (pc_score * w_pc) + (kw_score * w_kw)
+        Float hybrid score. With default weights (1.0, 0.15), returns
+        weighted sum: (pc_score * w_pc) + (kw_score * w_kw)
 
     Example:
-        >>> _hybrid_score(0.8, 0.6)  # Default: semantic only
-        0.8
+        >>> _hybrid_score(0.8, 0.6)  # Default weights (W_PC=1.0, W_KW=0.15)
+        0.89
         >>> _hybrid_score(0.8, 0.6, w_pc=0.7, w_kw=0.3)  # Blended
         0.74
         >>> _hybrid_score(None, 0.5)  # Handles None

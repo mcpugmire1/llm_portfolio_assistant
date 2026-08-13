@@ -66,5 +66,5 @@ def test_matches_filters_passes_has_metric_gate_for_story_with_metric():
 
 
 def test_hybrid_score_matches_docstring_stated_value():
-    # scoring.py docstring example: _hybrid_score(0.8, 0.6)  # Default: semantic only → 0.8
-    assert _hybrid_score(0.8, 0.6) == 0.8
+    # scoring.py docstring example: _hybrid_score(0.8, 0.6)  # W_PC=1.0, W_KW=0.15 -> 0.89
+    assert _hybrid_score(0.8, 0.6) == 0.89

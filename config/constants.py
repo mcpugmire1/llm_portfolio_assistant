@@ -52,6 +52,15 @@ CONFIDENCE_HIGH = 0.25  # Strong match - show "Found X stories"
 CONFIDENCE_LOW = 0.20  # Raised from 0.15 to filter phantom similarity noise
 
 # =============================================================================
+# HYBRID SCORE WEIGHTS
+# =============================================================================
+# Single source of truth. utils/scoring.py and services/pinecone_service.py
+# both import from here. Do not redefine locally.
+
+W_PC = 1.0  # Pinecone semantic similarity weight
+W_KW = 0.15  # Keyword overlap weight (raised from 0.0 Aug 8, 2026 -- f5641e7)
+
+# =============================================================================
 # PINECONE THRESHOLDS
 # =============================================================================
 
