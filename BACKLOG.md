@@ -1347,6 +1347,839 @@ Professional Narrative stories remain fully available to Ask Agy's Pinecone retr
 
 ---
 
+### MATTGPT-147
+**Stale `@pytest.mark.skip` on `test_mobile_desktop_only_message` — decorator predates step def**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Bug
+- **File:** `tests/bdd/steps/test_role_match.py`
+- **Logged:** July 1, 2026
+
+**Issue:** `test_mobile_desktop_only_message` is skipped by a stale decorator at lines 170–175. The skip reason says "Needs hamburger interaction" — but that interaction was implemented at lines 403–416 (`given_viewport_at_explicit_width`). The decorator was written before the step def existed and was never removed.
+
+**Action:** Remove the `@pytest.mark.skip` decorator at lines 170–175. Run in isolation:
+```
+pytest tests/bdd/steps/test_role_match.py::test_mobile_desktop_only_message -v
+```
+If it passes, commit. If it fails, the step def has a bug — diagnose before committing.
+
+**Acceptance criteria:**
+- `test_mobile_desktop_only_message` passes in isolation and in the full suite with no skip decorator.
+
+---
+
+### MATTGPT-148
+**`.main` selector sweep — 36 dead selectors in `global_styles.py` need swapping to `.stMain`**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Refactor
+- **File:** `ui/styles/global_styles.py`
+- **Logged:** July 1, 2026
+
+**Issue:** `.main` does not exist in current Streamlit. The correct selector is `.stMain`. `global_styles.py` contains 36 rules scoped to `.main[^a-zA-Z]` — all dead selectors that match nothing. Any layout or spacing rules under these selectors are silently not applying.
+
+**Action:**
+1. Confirm count: `grep -n "\.main[^a-zA-Z]" ui/styles/global_styles.py`
+2. Review each occurrence — verify intent is `.stMain` before swapping (some may be legitimate class names that happen to start with `.main`).
+3. Swap confirmed dead selectors to `.stMain`.
+4. Smoke-test desktop and mobile after change — dead selectors becoming live may reveal previously masked layout shifts.
+
+**Acceptance criteria:**
+- Zero `.main` selectors in `global_styles.py` that should be `.stMain`.
+- No visual regression at desktop and 375px mobile after the swap.
+
+---
+
+### MATTGPT-149
+**Rejection bubble dark mode — `[class*='_rejection_bubble']` missing dark mode override**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Bug
+- **File:** `ui/styles/global_styles.py` (or wherever `_rejection_bubble` is defined)
+- **Logged:** July 1, 2026
+
+**Issue:** The rejection bubble component uses `var(--banner-info-bg)` for its background. There is no `body.dark-theme` override for this variable or this selector, so the bubble renders with the light-mode background color in dark mode.
+
+**Fix:** Add a `body.dark-theme` override — either for `--banner-info-bg` directly (if it's safe to change globally) or scoped to `[class*='_rejection_bubble']` specifically. Confirm the override value against the dark mode palette in `global_styles.py` before applying.
+
+**Acceptance criteria:**
+- Rejection bubble background is visually appropriate in both light and dark mode.
+- No other surfaces that use `var(--banner-info-bg)` are unintentionally affected.
+
+---
+
+### MATTGPT-150
+**MATTGPT-144 test fallout — decouple BDD assertions from display copy and stranded AgGrid selectors**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Refactor / Test
+- **Logged:** July 1, 2026
+- **Dependencies:** None. MATTGPT-144 Done.
+
+**Issue:** The AgGrid → st.dataframe migration left three coupling problems in the BDD suite caught reactively during a full-suite run. Production functionality is confirmed working. This ticket addresses the test debt.
+
+**Finding 1: Count noun is not a shared constant.**
+`explore_stories.py:1219` renders the noun `stories` as an inline literal inside the `.es-results-count` HTML string. Three tests (`test_banking_landing.py`, `test_cross_industry_landing.py`, `test_home.py`) match against it with the regex prefix `of\s+(\d+)\s+stor`. A copy change in that one line breaks all three tests silently. Additionally, `test_home.py:146` has a stale docstring still reading "projects" from before the migration.
+
+Action: extract the noun to a named constant in `explore_stories.py`, import and reference it in the three test files. Fix the stale docstring in `test_home.py:146`.
+
+**Partial progress (commit `1be5953`):** Regex fixed in all three test files (`of\s+(\d+)\s+project` → `of\s+(\d+)\s+stor`). Constant extraction and `test_home.py:146` docstring fix still open.
+
+**Finding 2: Sort-order assertion is now a canvas-mount check only.**
+`test_explore_stories_default_state.py::assert_sort_descending` (lines 158–169) was rewritten to wait for `[data-testid="stDataFrame"]` and `[data-testid="data-grid-canvas"]`. It no longer verifies sort order — that is a manual visual check per the ARCHITECTURE.md canvas constraint. Production sort confirmed working visually.
+
+Action: add a data-layer assertion in `test_explore_stories_default_state.py` that verifies `Start_Date` values in `view_paginated` are descending before the dataframe receives them. The corpus is already loaded in that file. This covers the behavior without touching the canvas.
+
+**Finding 3: Stranded `.ag-root-wrapper` / `.ag-row` waits in a silent `try/except`.**
+`test_explore_stories_default_state.py:123–124` still waits for `.ag-root-wrapper` and `.ag-row` inside a `try/except` that swallows the timeout. These selectors will never match now that `st.dataframe` replaced AgGrid. They produce a ~30s silent wait on every run of that test.
+
+Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consistent with the rest of the file. Remove the `try/except` — the dataframe mount is the correct gate and should fail loudly if it times out.
+
+**Sweep:** `grep tests/bdd/steps/ -r` for `.ag-`, `stCustomComponentV1`, and `frame_locator` to confirm no other stranded AgGrid selectors remain across the full suite.
+
+**Acceptance criteria:**
+- Count noun extracted to a constant; three test files reference it; stale docstring in `test_home.py:146` corrected.
+- `assert_sort_descending` asserts actual sort order at the data layer, not just canvas mount.
+- `.ag-root-wrapper` / `.ag-row` waits replaced with `stDataFrame` selector; `try/except` removed.
+- Full BDD suite passes with 0 failed, skip count unchanged.
+
+---
+
+
+### MATTGPT-152
+**Move debug output from UI sidecar to terminal log only**
+
+- **Status:** Parked
+- **Priority:** Low
+- **Type:** Refactor
+- **File:** `utils/ui_helpers.py`, `services/backend_service.py`, `ui/pages/ask_mattgpt/conversation_view.py`
+- **Logged:** July 16, 2026
+
+**Issue:** Debug output currently appears in the Streamlit UI sidebar as well as the terminal. When `DEBUG=True`, `dbg()` in `utils/ui_helpers.py` calls `st.sidebar.write("🧪", *args)` at four call sites in `backend_service.py` (lines 1400, 1502, 1694, 1936). A second debug block in `conversation_view.py` (lines 140-152) renders a static `st.caption` showing `VECTOR_BACKEND`, `PINECONE_INDEX_NAME`, and `PINECONE_NAMESPACE`. Goal is terminal-only.
+
+**Proposed change (3 files, confirmed low-risk):**
+
+1. `utils/ui_helpers.py:75` -- `st.sidebar.write("🧪", *args)` to `print("🧪", *args)`. Redirects all four `dbg()` call sites to stdout.
+2. `services/backend_service.py` -- add `PINECONE_INDEX_NAME`, `VECTOR_BACKEND` to the `pinecone_service` import and log them in the startup sanity check block (after DNA Status line), so the config values that are currently sidecar-only land in the terminal instead.
+3. `conversation_view.py:140-152` -- remove the entire `# DEBUG INFO` block. After step 2, these values are in the terminal log and the sidecar block is redundant.
+
+**Constraint:** `__ask_dbg_*` session state writes in `backend_service.py` are orphan keys (set, never rendered) -- leave untouched.
+
+**No BDD cycle needed:** debug-mode-only output, no DOM-observable behavior changes.
+
+**Parked because:** 080 is higher priority. Revisit when 080 closes.
+
+---
+
+### MATTGPT-153
+**Q64 eval stochastic -- replace phrase-cluster with concept-cluster robust to story-selection variance**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Refactor / Test
+- **Sibling:** MATTGPT-082 (same root cause: eval checking the wrong thing)
+- **Logged:** July 16, 2026
+
+**Issue:** Q64 ("How does Matt manage resistance when leading enterprise transformation programs?") is stochastic. The LLM alternates between surfacing CloudFirst/Ways of Working (which contains "resistance" but not "Norfolk" or "stabilize") and other stories, producing variable phrase-match counts across runs. The test requires 2 of 5 phrases; variable story selection means the threshold is not reliably met.
+
+**Evidence:**
+- Failing in July 16, 2026 eval (68/70). Failure documented in test comment at line 218.
+- Prior passing run: July 15, 2026 (70/70).
+- Stochastic behavior first noted May 23, 2026.
+- July 31, 2026: failing again. Full-suite run matched 1/2 phrases ("resistance"); isolation run matched 0/2. Two runs minutes apart, different phrase hit counts. Confirms story-selection variance as root cause.
+
+**Fix shape (two options, pick one before implementing):**
+
+1. Same approach as Q2/Q5/Q55: replace phrase-cluster check with a concept-cluster that's robust to story-selection variance. Concepts like "resistance", "enterprise transformation", "stakeholder alignment" should pass regardless of which story the LLM pulls.
+2. Verify whether CloudFirst/Ways of Working is actually a correct answer for this query (resistance in enterprise transformation). If yes, update ground truth vocabulary to include its terminology so either story path passes.
+
+**Pre-flight before implementing:** check what the Q2/Q5/Q55 concept-cluster pattern looks like and apply the same structure here.
+
+---
+
+### MATTGPT-154
+**Operational-breadth tagging pass -- surface operational ownership into all corpus stories where it's genuinely true**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Spawned from:** MATTGPT-094 (retrieval concentration investigation, Sub-B finding)
+- **Logged:** July 16, 2026
+
+**Issue:** The MATTGPT-094 investigation confirmed that operational stories were under-surfacing due to a vocabulary gap: terms like "Sev-1" and "on-call" were absent from the corpus. The fix in -094 tagged AT&T CRM and JPM stories, and prod verified those two stories now surface correctly on operational queries. But one or two examples isn't enough density. There are additional corpus stories where operational ownership is genuinely true and the vocabulary anchors are still missing.
+
+**Scope:** Audit the corpus for stories where Matt had real operational accountability (on-call, incident response, enterprise release ownership, Sev-1 involvement, production stability) that isn't currently tagged with operational vocabulary. Add the vocabulary where the substance is real. Do not add it where it isn't.
+
+**Constraints:**
+- Vocabulary additions must reflect actual story substance. No inflation.
+- AT&T CRM and JPM stories are already done (in prod as of MATTGPT-094). Don't re-touch them.
+- After tagging, run the Sub-B probe set to confirm surfacing improves: "Tell me about a Sev-1 Matt handled", "Has Matt run on-call rotations?", "Tell me about Matt's experience with global enterprise releases", "What's Matt's operational background?"
+
+**Not in scope:** Re-writing story framing (that's MATTGPT-095). Not a corpus content quality pass, purely a vocabulary/tagging pass so retrieval matches the substance that's already there.
+
+---
+
+### MATTGPT-155
+**New corpus story -- sell-side commercial story (HSBC-anchored): pricing/costing, resourcing, outcome-based contracting**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Logged:** July 29, 2026
+
+**Issue:** The corpus has a buy-side commercial story ("Owning the P&L...") but zero sell-side commercial substance. Matt's sell-side experience -- pricing/costing with CFM, LCR/UCR resourcing, estimating, managing CRs and SOW expansions, transitioning from hours-times-rate to outcome-based contracting -- is a distinct and material capability. HSBC is the anchor client: $10M SOW built via ROM, pricing model, and staffing plan.
+
+**Do not bundle with the buy-side P&L story.** These are different commercial motions (sell to client vs. manage margin on a delivery). Keep as a separate story.
+
+**Story scope:**
+- Pricing and costing using CFM (commercial financial model)
+- LCR/UCR resourcing and rate-card discipline
+- Estimating at proposal stage; managing CRs and SOW expansions in delivery
+- Transition from hours-times-rate to outcome-based contracting
+- Anchor: HSBC $10M SOW -- ROM, pricing model, staffing plan
+
+**Elicitation note:** Follow the same elicitation-first approach as -078/-129. Do not write the story without a session to pull the specific numbers and decision moments.
+
+---
+
+### MATTGPT-156
+**Vendor commercial/spend management gap -- decide whether corpus-zero on invoice/rate-card/procurement is a real claim or honest gap**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Investigation
+- **Logged:** July 29, 2026
+
+**Issue:** The corpus has zero content on invoice approval, rate-card management, third-party spend, procurement, or vendor governance. This is distinct from the existing Vendor Management (coordination/relationship) skill in the corpus. The question to answer before writing anything: does Matt have real claims here worth a story, or is this an honest gap?
+
+**Decision gate:** If yes, a story or structured assertion belongs in the corpus. If no, record as a documented honest gap so it doesn't re-surface as a question each session.
+
+**Scope of the gap:** invoice/rate-card management, third-party spend oversight, procurement process, vendor governance (budget accountability, not just relationship management).
+
+**Constraint:** Do not conflate with the existing Vendor Management (coordination) skill, which covers vendor selection, relationship, and delivery oversight. This is specifically about the commercial/spend side.
+
+**Partial resolution (July 29, 2026):** Confirmed real claim: Matt reviewed and approved contract fee and cost submissions from Bottomline Technologies to JP Morgan across the ACCESS program, with authority to reject items before payment. Now in the corpus as an Action bullet and a `Vendor Invoice Review & Approval` competency on "Building the Payment Engine Behind JP Morgan ACCESS." Deliberately not surfaced into that story's Use Case(s) -- the story's thesis is payments engineering and the field is already at 473 of 600 characters.
+
+**Remaining question:** Whether vendor commercial management warrants its own story. Evidence is currently Action/Competencies-level on one story, so it will not retrieve on a vendor-spend query. Rate-card management, procurement process, and vendor governance remain corpus-zero. RBC confirmed not applicable; the invoice review was ACCESS only.
+
+---
+
+### MATTGPT-159
+**Role Match performance -- parallelize per-requirement assessor calls; sequential gpt-4o loop is the bottleneck**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Performance
+- **File:** `services/jd_assessor.py`
+- **Surfaced:** June 16, 2026 (during -067 release-gate work; classified backend optimization, kept out of that gate)
+- **First documented:** June 26, 2026 backlog prioritization session
+- **Logged:** July 31, 2026
+
+**Issue:** `jd_assessor.py` makes one sequential `gpt-4o` call per JD requirement. The demo JD has roughly 23 requirements. The `assess` loop dominates; `extract` is a large N-independent cost (~22s local on the demo JD) and is the floor regardless of parallelism.
+
+**Historical measurement:** 336 seconds end to end, measured June 16, 2026 at TOP_K=3. This predates the TOP_K=5 change made July 31, 2026, which increases context per call. The current sequential cost is higher than the recorded figure. Re-measure before optimizing; do not quote 336s as the current number.
+
+**Root cause and fix:** Sequential per-requirement calls with `gpt-4o` is the confirmed root cause. The fix is concurrency -- parallelize the `assess` calls using `asyncio` or a `ThreadPoolExecutor` -- not a model downgrade. Per-requirement reasoning with `gpt-4o` is what makes the scorer credible (confirmed in MATTGPT-088 scope work: mini produces subpar assessment reasoning). Dropping to mini would make -088 worse, not better. Estimated improvement after parallelization: two to three minutes down to fifteen to twenty seconds (June 2026 estimate; re-validate after implementation).
+
+**Why this went unfiled twice:** Surfaced June 16, 2026 during -067 release-gate work and classified as backend optimization rather than UI polish -- correctly kept out of that gate, but not filed. Sat as a latency reference note in -088 and -099 without an owner through June 26, when it was identified as unfiled in a backlog prioritization session and still not filed. Same pattern as MATTGPT-155 (sell-side story) and MATTGPT-156 (vendor spend): context notes in other tickets are not tickets, and findings without an owner evaporate. Filed here so it has one.
+
+**Perceived-performance half (independent of the concurrency fix):** What the user sees during a two-minute wait -- whether it looks like progress or like a hang -- is a separate concern that can land even if concurrency work slips. Connects to MATTGPT-083 (spinner inconsistency). Worth addressing regardless of when the async fix ships.
+
+**Constraints:**
+- Do not swap `gpt-4o` for `gpt-4o-mini`. This is a concurrency change, not a prompt or scoring change.
+- Keep per-requirement judgment logic identical.
+- Re-run all three JDs to confirm verdicts are unchanged after parallelization.
+
+**Cross-references:**
+- Latency context noted (not ticketed) in MATTGPT-088 and MATTGPT-099 detail blocks.
+- MATTGPT-083 -- spinner inconsistency; perceived-performance half connects here.
+- MATTGPT-160 -- extraction clause-dropping; separate defect in the same file.
+
+---
+
+### MATTGPT-160
+**JD extractor clause-dropping -- 7 of 23 requirements on demo JD lose qualifiers during extraction**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `services/jd_assessor.py` (`extract_requirements()`)
+- **Logged:** July 31, 2026
+
+**Issue:** `extract_requirements()` drops qualifiers from JD requirements during extraction. On the demo JD, 7 of 23 requirements lost qualifiers -- the extracted text is narrower than what the JD actually requires. Downstream effect: the assessor evaluates a stripped version of the requirement, which can produce verdicts (strong, partial, gap) that don't reflect what the hiring manager wrote.
+
+**Probe script:** `probe_db_extraction.py` (repo root) contains tooling for investigating this defect. It runs `extract_requirements()` on the structured JD, compares extracted text to source, and tests full-text vs stripped retrieval through Pinecone at top-40. Re-use this rather than building a new probe.
+
+**Constraint:** This is a separate defect from MATTGPT-157 (W_KW keyword weighting). The clause-dropping happens at extraction time, before retrieval scoring. Do not conflate.
+
+---
+
+### MATTGPT-161
+**Career span duplicated and hardcoded across surfaces -- consolidate to a single derived or configured source**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Refactor
+- **Files:** `services/backend_service.py` (lines 245, 254 confirmed), `data/matt_profile.json` (`career_summary` -- removed August 3), design-spec repo (public-facing; scan needed)
+- **Logged:** August 3, 2026
+
+**Problem:** The same derived value is implemented independently in multiple places with different values, some wrong. `backend_service.py` computes `current_year - 2005` for the startup banner and `MATT_DNA`, hardcodes "18+ years" at line 245, and hardcodes "2023-2026" at line 254 (goes stale in January). `career_summary` in `matt_profile.json` carried "18+ years at Accenture" until removed August 3 -- the assessor was citing that string as profile evidence on tenure requirements, surfaced during MATTGPT-158 validation. This is the fourth instance this week of a value stated once and quoted forward past its validity. Violates the no-hardcoded-data-derived-values rule in CLAUDE.md and the anti-patterns section in ARCHITECTURE.md.
+
+**Two decisions, in this order:**
+
+1. **Where the value comes from.** Three candidates:
+   - Derived at startup in `sync_portfolio_metadata()` alongside `SYNTHESIS_THEMES` and `_KNOWN_CLIENTS` -- matches the existing pattern for corpus-derived globals.
+   - `constants.py` -- fits the file's role but means hardcoding or placing corpus logic in config.
+   - Environment configuration -- the honest option if the value cannot be derived.
+
+   This depends on an unsettled question: the corpus starts in 2005, but the 2005 resume shows the career starting in 1997. If pre-2005 stories are added, derivation from the corpus works. If not, the anchor must be configured. **Decide this once and record the decision.** Do not resolve it implicitly in multiple places again.
+
+2. **Whether it surfaces at all.** Separate from where it lives. `about_matt.py` establishes depth through named programs, scale metrics, and date ranges without stating a total. That is the established pattern, consistent with the ageism-signal rule applied to the resume, corpus, and `career_summary`. A consolidated value may exist and be referenced nowhere visible to users.
+
+**Known consumers (confirmed and suspected):**
+- `backend_service.py` lines 245 and 254 -- startup banner and `MATT_DNA`
+- `matt_profile.json` `career_summary` -- removed August 3 (was also reaching the assessor as citable grounding)
+- Design-spec repo -- public-facing, scan required
+
+**Required work:** Repo-wide scan for year-count patterns (`\d{2}\+?\s*years`, `current_year\s*-\s*20\d{2}`, literal "2005") across this repo and the design-spec repo before implementing anything.
+
+**Constraint:** Tenure requirements on JDs are legitimate and the right answer is the assessor reasoning from story dates (demonstrated working on Fiserv requirement #8 -- see MATTGPT-088). Do not reintroduce a hardcoded span to compensate for tenure-inference variance. These are separate problems with separate fixes.
+
+---
+
+### MATTGPT-162
+**Embedding exception misclassified as low-confidence rejection -- visitor sees no-match banner instead of error message**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **File:** `services/rag_service.py` (embedding call + Pinecone query path)
+- **Logged:** August 3, 2026
+
+**Issue:** When the semantic router succeeds but the OpenAI embedding call fails, the system catches the exception, continues with a null vector, queries Pinecone, gets `pool_size=115` with `top_score=0.000`, and fires `[QUERY_REJECTED] reason=low_pinecone`. Visitor sees the no-match banner instead of the "quick breather" API error message. The failure is silent and misattributed.
+
+**Discriminator already in logs:** `pool_size=115` with `top_score=0.000` is only produced by a null vector. Genuine low-confidence retrieval returns `pool_size=10` with non-zero scores. This makes the condition detectable post-hoc from logs, but the visitor experience is wrong in real time.
+
+**Context from August 3 trace session:** An earlier "Speak to a specific client engagement" failure in the same session produced the same null-vector condition but showed the correct response because the router had also failed, which triggered `[API_ERROR_DETECTED]` upstream. The January observability work only covers the router-fails-too case. When the router succeeds and only the embedding call fails, the error path is not reached.
+
+**Fix direction:** Short-circuit to the API error response at the embedding exception, before Pinecone is called. The null vector should never reach the retrieval stage.
+
+**Acceptance:** Simulate an embedding failure with the router succeeding; confirm visitor sees the "quick breather" message, not the no-match banner. Confirm genuine low-confidence queries (non-null vector, non-zero scores, small pool) are unaffected.
+
+---
+
+### MATTGPT-163
+**Personal-query guard false positive -- professional org questions intercepted as private family**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **Logged:** August 3, 2026
+
+**Issue:** "How many direct reports did Matt have" is intercepted by the personal-query family classifier with score 0.618, classified as `family=personal`. The visitor sees an out-of-scope rejection. The query is a legitimate organizational question about management scope -- not a privacy-sensitive personal query (salary, SSN, home address, family composition).
+
+**Compound failure pattern from August 3 trace session:** The same personal family is producing errors in both directions. July trace: "How much money did Matt make at Accenture" was classified as `family=delivery` (false negative -- should be personal). August trace: "How many direct reports did Matt have" classified as `family=personal` (false positive -- should reach retrieval). The family boundary is miscalibrated in both directions.
+
+**Fix options (compose; may ship together or sequentially):**
+- **A.** Add professional counter-examples to the personal family semantic anchors -- queries about org size, team composition, reporting relationships, and headcount should score low against the personal family anchor. Touches `semantic_router.py`. Independent of MATTGPT-165. **However: adding counter-examples changes `VALID_INTENTS`, which triggers the stale-cache defect described in MATTGPT-062. Verify -062 is closed or manually invalidate the cache before deploying Approach A.**
+- **B.** Build a deterministic keyword pre-filter for genuine privacy categories (salary / compensation, SSN, DOB, home address, relationship/family status) that fires before the semantic classifier. Hard-blocks privacy-sensitive patterns; leaves org-structure queries to the router. Touches `nonsense_filters.jsonl`. **If this approach is chosen, verify MATTGPT-165 (nonsense_filters.jsonl dedup) is closed first before adding new patterns to that file.**
+
+Option A recalibrates the classifier. Option B adds an upstream gate. They compose -- A alone risks residual false positives on edge cases; B alone doesn't fix the miscalibration. Recommended: A first (independent, unblocked), then B after MATTGPT-165 closes.
+
+**Validation:** After fix, "How many direct reports did Matt have" must reach retrieval. "How much money did Matt make at Accenture" must be blocked (personal family, correct outcome). "How many people reported to Matt at the CIC" must reach retrieval.
+
+---
+
+### MATTGPT-165
+**nonsense_filters.jsonl has two live generations -- gen-1 blocks legitimate queries gen-2 was meant to permit**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **Note:** If MATTGPT-163 is implemented via Approach B (keyword pre-filter adding patterns to this file), this ticket should land first. If MATTGPT-163 is implemented via Approach A (semantic anchor recalibration in `semantic_router.py`), no ordering dependency exists.
+- **Logged:** August 3, 2026
+
+**Issue:** A December commit appended an improved second block of patterns to `nonsense_filters.jsonl` without removing the original first block. Both generations are now loaded and evaluated. This creates a harmful narrowing defect: `credit card` in gen-1 was intentionally tightened to `credit card number` in gen-2 (to stop blocking product-domain queries), but gen-1 still fires. "Tell me about the credit card portal work" is blocked by the gen-1 pattern and never reaches retrieval, even though gen-2 was explicitly written to allow it.
+
+**Two deliverables (must ship together):**
+1. Deduplicate `nonsense_filters.jsonl` -- keep gen-2 versions, remove gen-1 originals where a gen-2 supersedes them.
+2. Add a loader guard in the filter-loading path (`services/rag_service.py` or wherever the file is parsed at startup) that asserts no exact-duplicate patterns exist. Raises at startup, not silently at query time.
+
+**Dependency note:** Any privacy-category additions to `nonsense_filters.jsonl` (e.g., MATTGPT-163 Option B keyword pre-filter) must land AFTER this deduplication. Writing new patterns into a file with two live generations risks the same problem recurring.
+
+**Validation:** "Tell me about the credit card portal work" must reach retrieval after fix. Loader guard must raise on a manually introduced duplicate pattern in a test run.
+
+---
+
+### MATTGPT-166
+**Arc stories invisible to entity-scoped queries -- Fortune 500 Clients / Cross-Division placeholder metadata excluded from client filters**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Issue
+- **Logged:** August 3, 2026
+
+**Issue:** Arc stories -- corpus stories that document career-wide patterns rather than a single named engagement -- use `Client: Fortune 500 Clients` and `Division: Cross-Division` as metadata placeholders. These values do not match any specific client entity. When a query triggers entity filtering on a named client (JP Morgan, RBC, Fiserv, HSBC), arc stories are excluded from the retrieval pool entirely.
+
+**Concrete example:** "Owning the P&L" is a story about financial accountability and commercial ownership across large engagements. It is directly relevant to JP Morgan, RBC, Fiserv, and HSBC client-scoped queries. It never surfaces for any of them because its Client metadata is `Fortune 500 Clients`, not a matching entity value.
+
+**Impact:** Queries scoped to any large named client miss arc stories that may be the most directly relevant content for demonstrating cross-engagement patterns (P&L ownership, executive stakeholder management, program governance). The entity filter, intended to tighten retrieval, is instead excluding high-signal stories.
+
+**Decision required -- three paths (do not implement before choosing):**
+- **A. Accept the tradeoff.** Arc stories are corpus-wide by design; entity filtering is for single-engagement precision. The two modes are intentionally separate. No fix.
+- **B. Wildcard arc-story metadata.** Entity filters return arc stories alongside entity-specific stories when their placeholder values match a defined arc-story pattern (e.g., `Client == "Fortune 500 Clients"` always passes entity filters). Simpler implementation; risk is surfacing arc stories on narrow queries where they reduce precision.
+- **C. Compound metadata.** Arc stories carry both the placeholder AND a list of the specific clients they cover. Entity filters match against the compound list. Most precise; most implementation effort; requires a corpus audit to populate the client lists.
+
+**Recommendation:** Evaluate Option A honestly first. If arc stories genuinely document patterns that are client-agnostic, excluding them from client-scoped queries may be the right behavior. If they are materially relevant to named-client queries (as the P&L story appears to be), Option B is the lowest-risk fix.
+
+**Related -- code adjacency:** MATTGPT-146 (Professional Narrative stories leak into My Work via filter and search paths) is a different symptom but touches the same metadata-driven filtering code. Whoever works either ticket will be in the same module. Read both detail blocks before starting either.
+
+---
+
+### MATTGPT-167
+**Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently**
+
+- **Status:** Parked
+- **Priority:** Medium
+- **Type:** Action
+- **Logged:** August 3, 2026
+
+**Issue:** Entity detection currently covers four fields: Client, Employer, Division, Title. Project and Place appear as queryable dimensions across the corpus but are not in `ENTITY_DETECTION_FIELDS`. Queries like "who worked on the White-Label Card Portal" or "what did Matt work on in Chicago" cannot benefit from entity-anchored retrieval.
+
+**Specification (complete -- ready to implement if activated):**
+- Widen `ENTITY_DETECTION_FIELDS` from four to five fields, adding Project and Place.
+- Replace the single `EXCLUDED_DIVISION_VALUES` set with a per-field exclusion map:
+  - Project exclusions: Innovation, Methodology, Platform Modernization, Personal Growth, Career Narrative, Accelerated Delivery (generic project labels that appear in many stories and would over-constrain retrieval)
+  - Place exclusions: Career Narrative, Personal (Sabbatical) (non-geographic place values)
+- 34 distinct Project values and 15 distinct Place values confirmed in corpus audit (August 3, 2026).
+
+**Pre-registered probes:**
+- "Who worked on the White-Label Card Portal" -- should trigger Project entity detection on White-Label Card Portal
+- "What did Matt work on in Chicago" -- should trigger Place entity detection on Chicago
+
+**Why parked:** The motivating case from the August 3 trace session resolved differently (via a different retrieval path). No confirmed failing probe exists at time of filing. The specification is complete and pre-registered probes are defined -- re-activate when a concrete failing case is confirmed in production.
+
+**Prior art -- read before unparking:** MATTGPT-036 (Entity Cluster Promotion Override, Decided Against) and MATTGPT-037 (Score Gap Override, Decided Against) are both retrieval-override mechanisms that were rejected. The DA rationale for each may apply to the per-field exclusion map approach in this ticket. Read both DA blocks and confirm the objection does not carry over before activating this work.
+
+---
+
+### MATTGPT-168
+**diversify_results picks slot 1 in standard mode but prompt asserts it was ranked highest for the question**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **Files:** `ui/pages/ask_mattgpt/backend_service.py` (line 1934), `ui/pages/ask_mattgpt/prompts.py` (lines 75-80)
+- **Logged:** August 5, 2026
+
+**Issue:** In standard mode with no entity match and non-narrative intent, `diversify_results(candidates)` runs over all candidates and its output becomes `ranked_stories`. `ranked_stories[0]` is wrapped in `<primary_story>` and the prompt tells the model: "the primary story was ranked highest for this question -- build your entire response around it and resist supporting stories even if they seem more interesting."
+
+That is a factual claim to the model that is false on this path. `diversify_results` optimizes for client variety, not relevance. Slot 1 is whichever story survives client-diversity filtering first. The model is then instructed to resist better evidence -- the management story, the correct answer -- on the basis of a ranking that never happened. That's not a cosmetic comment problem; it's the system actively overriding the right answer using a false premise.
+
+**Code path (confirmed):**
+- Entity mode: `ranked = [pinned] + diversify_results(others)` -- slot 1 IS the top entity-relevant story. Prompt claim is accurate here.
+- Narrative mode: `ranked = sorted(candidates, key=pc, reverse=True)` -- slot 1 IS the top Pinecone score. Prompt claim is accurate here.
+- Standard mode, no entity: `ranked = diversify_results(candidates)` -- slot 1 is diversification output. Prompt claim is **false**.
+
+**Concrete exhibit (August 3 trace):** Query "Has Matt directly managed engineering teams?" -- no entity detected, non-narrative intent. Why Hire Matt and the management story both score 0.476. Why Hire Matt was already first in Pinecone ordering. `diversify_results` kept it at slot 1 and moved the management story from position 2 to position 4 by inserting AT&T and Capital One for client variety. The prompt then instructed the LLM to build the entire response around Why Hire Matt and actively resist the management story. The LLM complied. The result was a Professional Narrative answer to a direct operational question.
+
+**Design gap, not regression:** Confirmed via `git log -S "primary_story"`. The XML isolation and slot-1 designation were introduced together in commit 1c96315 (Jan 23, 2026). The entity path was implemented correctly from day one: `[pinned] + diversify_results(others)` -- pin first, then diversify the rest. The no-entity path was always `diversify_results(candidates)` with no pre-diversification pin. The asymmetry is in the same file, same function, same commit. The entity path got the right pattern; the no-entity path didn't. That's what makes the fix obvious: apply the same pattern.
+
+**Fix options:**
+- **A (preferred):** Apply the entity-pin pattern to the no-entity path. Extract `candidates[0]` (top Pinecone score) before diversification, pin to slot 1, run `diversify_results` on the rest. Makes the prompt claim accurate. One line change at line 1934.
+- **B:** Update the prompt to remove the relevance-ordering claim for non-entity paths. Honest but doesn't fix the behavioral problem -- the LLM still builds around whichever story diversification happens to put first.
+
+Option A is the right fix. Option B is a prerequisite comment correction that should ship regardless.
+
+**Compounds with MATTGPT-077 on the same query:** -077 is why Why Hire Matt reaches 0.476 on "Has Matt directly managed engineering teams?" (retrieval contamination). -168 is why the LLM then builds its entire answer around it (false relevance claim + resist instruction). The two defects hit the same query at different pipeline stages. Working -077 alone reduces the probability of the wrong story reaching slot 1 but doesn't close this gap -- any query where diversification reorders is still affected regardless of retrieval quality.
+
+**Pre-registered validation (required before merge):** Pinning slot 1 changes what the LLM builds every standard-mode answer around -- not just the queries where diversification currently misfires. Run the full eval golden suite before and after the fix. If answers shift on queries unrelated to this defect, that movement is worth seeing before it reaches production. A passing eval doesn't mean the fix is neutral; read the diff on changed answers, not just the pass count.
+
+**Cross-references:** MATTGPT-077 (retrieval contamination, upstream cause), MATTGPT-074 (entity-cluster promotion overriding relevance, different mechanism, same post-retrieval override theme).
+
+---
+
+### MATTGPT-169
+**Positioning-story attractor on career-shaped queries: "Why Hire Matt?" dominates broad management retrieval independent of technical-noun overlap**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Investigation + Action
+- **Descended from:** MATTGPT-094 (closed -- retrieval concentration investigation, Sub-A re-scope)
+- **Logged:** August 5, 2026
+
+**Issue:** "Why Hire Matt?" is a broad attractor on career and management queries regardless of technical-noun overlap. It wins the top of the retrieval pool on questions about management scope, Accenture work, engineering leadership, and career shape, and reaches the LLM as the primary story. When it wins, the answer reflects one four-year CIC period -- the story's evidence is almost entirely from 2019 to 2023.
+
+**Evidence (August 5, 2026 trace):**
+- Rank 1 at 0.503: "Has Matt directly managed engineering teams" (no entity detected, non-narrative intent)
+- Rank 1 at 0.521: "Has Matt directly managed engineering teams?" (natural register)
+- Rank 1 at 0.601: "What did Matt build at Accenture" (entity filter on Accenture applied)
+- Rank 1 at 0.476: "Has Matt directly managed an in-house engineering organization" (tied with the management story)
+- Rank 3 at 0.521: "Speak to a specific client engagement story" (no name in query at all)
+
+**Name sensitivity confirmed:** Same management question scores 0.490 with "Matt," 0.419 with "he," absent from top 10 without either subject. Presence of the name is amplifying retrieval probability, not just filtering -- consistent with the story's title ("Why Hire Matt") embedding close to queries that include the subject's name.
+
+**Mechanism differs from MATTGPT-077 Findings 1-3.** The story is a positioning document with the subject's name in its title and a personal-pitch body. It embeds close to any career-shaped question regardless of technical-noun density. The -077 Phase 1 mitigation (strip "Matt" on technical-noun query shapes) does not fire on "directly managed engineering teams," "what did Matt build," or "specific client engagement." These are not technical-noun queries.
+
+**Third cluster observation in the whack-a-mole series (from MATTGPT-094 re-scope):** MATTGPT-094's July conclusion was that dense vocabulary clusters dominate broad retrieval and the dominant cluster shifts as corpus composition changes -- CIC in May (before positioning docs were separated), MattGPT/Strangler Fig in July (noun-overlap mechanism, now tracked in -077). August's observation: "Why Hire Matt?" / Professional Narrative cluster on career-shaped queries. The pattern is structural, not a one-off. Fixing any single dominant story without addressing the underlying density dynamic produces the next attractor.
+
+**Escape routes (inherited from MATTGPT-094):**
+- **Route 1 -- Fan-out on broad queries:** On queries where no entity is detected and intent is not narrative, retrieve from multiple clusters (management, delivery, technical, leadership) rather than a single top-k result. Reduces the probability of any one story dominating. Implementation approach unresolved -- needs scoping.
+- **Route 2 -- Break the rank-verdict coupling:** Decouple which story the LLM receives as primary from diversification output order. MATTGPT-094 gated this route on -080 (complete) and -088 (closed August 5, 2026). Both gates are now clear. Reassess whether the mechanism is still the right design, or whether MATTGPT-168 (false relevance claim in the slot-1 prompt instruction) is the more surgical fix for the same coupling. Route 2 and -168 may overlap -- read -168 before scoping Route 2 independently.
+
+**CIC concentration consequence:** When "Why Hire Matt?" wins as primary story, the answer draws from four years of CIC evidence and under-represents the earlier career. This is a distinct problem from retrieval dominance and should be documented in MATTGPT-079 if not already there -- the story itself may need scope expansion or the diversification must be career-span-aware rather than client-variety-aware.
+
+**Cross-references:** MATTGPT-077 (retrieval contamination, different mechanism -- noun-overlap vs. positioning-story density), MATTGPT-168 (slot-1 false relevance claim compounds this defect at the prompting layer), MATTGPT-079 (Role Match coverage gaps -- CIC concentration in evidence is a related corpus-shape issue).
+
+---
+
+### MATTGPT-171
+**Phrase-aware matching: short-token filter leaves single stopword token for instructional phrases; scorer behavior under-characterized**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Investigation
+- **Logged:** August 8, 2026
+- **Mechanism corrected:** August 11, 2026 (see below)
+
+**Mechanism correction (August 11, 2026 -- supersedes original framing):** The original issue stated that `_tokenize` "filters stopwords before computing overlap" and that "I do, we do, you do" reduces to an empty token set. Both claims are wrong.
+
+Verified: `_tokenize("I do, we do, you do")` returns `['you']`. `_tokenize` does not filter stopwords -- `_STOPWORDS` is used only by `token_overlap_ratio`, not by `_tokenize`. The real filter is `len >= 3`: "I" (len 1), "do" (len 2), "we" (len 2) are dropped; "you" (len 3) survives.
+
+The phrase is not invisible to keyword scoring. It scores on a single stopword token ("you"), which can match stories that contain "you."
+
+**Revised consequence:** The original test instruction ("confirm W_KW=0 and W_KW=current produce identical rankings") may not hold, since "you" is a real scoring token. The affected query class is not zero-token phrases but single-token phrases where the surviving token is a stopword with broad corpus distribution.
+
+**Coupling to MATTGPT-178 open stopword question:** MATTGPT-178 notes that `_STOPWORDS` is used only by `token_overlap_ratio` and raises the question of whether it was intended to apply to `_tokenize` as well. If `_tokenize` gains the `_STOPWORDS` filter to address that question, "you" would drop from this example and the original empty-token premise would become true retroactively. These two investigations should not be resolved independently -- the stopword scoping decision in -178 directly determines the mechanism this ticket is investigating.
+
+**Investigation scope (revised):** (1) Verify "you" matching behavior in the scorer against real corpus stories. (2) Determine whether single-surviving-stopword queries surface retrieval problems in production. (3) Do not design a fix before the -178 stopword scoping question is resolved -- the fix space depends on that answer.
+
+---
+
+### MATTGPT-172
+**CIC-cluster consolidation: 2019-2023 corpus density causes cluster-drift dominance on broad queries**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Logged:** August 8, 2026
+
+**Issue:** 48% of STAR stories are anchored in the 2019-2023 CIC/CloudFirst era. This concentration means any broad query that doesn't trigger entity filtering or narrative mode resolves to whichever CIC-adjacent story is densest for that query's vocabulary. The problem is structural: MATTGPT-094 (closed) documented CIC dominating broad management queries in May 2026, and MATTGPT-169 documents "Why Hire Matt" (CIC-evidence-heavy) dominating career-shaped queries in August 2026. The dominant story changes as the corpus shifts, but the root cause is constant.
+
+**Proposed action:** Audit the CIC-era story set for semantic redundancy. Stories that cover the same competency (e.g., team leadership, stakeholder management, delivery at scale) at the same client with similar vocabulary are competing rather than complementing. Options: (a) merge redundant stories into a single richer story with a broader evidence base; (b) differentiate vocabulary so each story occupies a distinct retrieval niche; (c) explicitly add pre-2005 and 2005-2013 era stories to reduce the CIC fraction (already tracked in MATTGPT-079 as a coverage gap). Options compose.
+
+**Scope clarification:** This is a corpus-composition action, not a retrieval tuning ticket. Do not address by changing W_KW, diversification parameters, or retrieval logic -- the density is the underlying variable. Retrieval tuning on a dense corpus produces MATTGPT-094's whack-a-mole outcome.
+
+**Cross-references:** MATTGPT-094 (closed -- documented the CIC dominance pattern and whack-a-mole diagnosis), MATTGPT-169 (positioning-story attractor, same root cause), MATTGPT-079 (pre-2005 corpus gap -- adding early-career stories is one consolidation lever).
+
+---
+
+### MATTGPT-173
+**Role Match JD validation: no defined behavior for malformed or atypical JD inputs**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Issue
+- **Logged:** August 8, 2026
+
+**Issue:** Role Match's JD intake has no validation layer. The pipeline assumes a well-formed JD with requirements, qualifications, and role context. Observed failure modes and undefined behaviors:
+
+- **Comp-only JDs or JDs leading with salary ranges:** MATTGPT-099 (closed as Decided Against) established that the chatbot handles comp decline correctly. The Role Match assessment path is separate -- behavior on a JD where comp dominates the text is unverified. May silently drop, hallucinate a match, or emit a confusing assessment.
+- **Extremely short JDs:** A one-paragraph job post has insufficient signal for the extractor. Current behavior on extraction failure is unverified.
+- **Non-JD input:** Pasting a company overview, a recruiter note, or a requirements doc instead of a JD. Extractor may return requirements; assessment may proceed with misleading output.
+
+**Investigation first:** Before designing validation, run the three failure-mode inputs (comp-heavy JD, short JD, non-JD text) through the current pipeline and document actual behavior. The fix depends on what the pipeline does, not what it's assumed to do.
+
+**Fix shape (after investigation):** Likely a pre-extraction validation gate that checks minimum text length, presence of requirement-shaped language, and optionally warns the user if comp-only content is detected. Should not silently proceed with an extraction the gate suspects is malformed.
+
+**Cross-references:** MATTGPT-089 (location/work-model/availability parsing -- adjacent input-handling gap), MATTGPT-099 (closed DA -- comp handling on chatbot side; Role Match side is distinct).
+
+---
+
+### MATTGPT-174
+**Confidence gate mislabels low-signal pools -- noise-floor pools clear CONFIDENCE_HIGH and print "high"**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Defect/Design
+- **Files:** `config/constants.py` (CONFIDENCE_HIGH, CONFIDENCE_LOW), `rag_service.py` (gate logic -- verify coupling note below before touching)
+- **Related:** MATTGPT-162 (null-vector / embedding exception mislabeled -- same orbit)
+- **Logged:** August 11, 2026
+
+**Issue:** RAG confidence labels answer "is there any signal at all" (noise-floor gate) but present to the user as match strength. `CONFIDENCE_HIGH = 0.25` in `config/constants.py` was calibrated to filter phantom-similarity noise; corpus evidence puts genuinely strong matches at 0.4–0.6. A flat noise-band pool where every story scores 0.20–0.29 clears the bar and the UI prints "high." The label is technically accurate by the gate's own standard and misleading by the user's reasonable interpretation.
+
+**Evidence, three cases:**
+
+1. **"I do, we do, you do"** (August 11, 2026): top_score 0.260, gated as high. Target story absent from top 10. Pool flat; nothing in the pool is actually relevant.
+
+2. **"Matt?" step-A probe** (August 11, 2026): top_score 0.291, gated as high. Pool flat 0.20–0.29. 5 of 10 pool hits and 4 of 7 LLM stories self-referential Independent Project stories. Router scored 0.797 valid (family=background) -- router measures on-topic-ness; a bare name is maximally on-topic with zero retrievable intent. The confidence gate is the only downstream protection and it does not fire.
+
+3. **MATTGPT-162 null-vector shape**: existing ticket; same gate-clears-on-noise failure mode, different upstream cause.
+
+**Coupling note (verify in `rag_service.py` from debug output before any fix, not from source reasoning):** The gate reads the pc component of the blend-chosen lead story. Keyword score never enters the gated number directly, but kw elects which story's pc gets evaluated -- "Matt?" demonstrates this: why-hire-matt leads on kw=1.0 (single-token query trivially maxes keyword overlap), and the gate reads its 0.291 pc. Confirm this coupling is still the live behavior before designing around it.
+
+**Inherited obligation from MATTGPT-157 step 4 (August 11, 2026):** MATTGPT-157's method included a step 4: "Re-check confidence-band calibration: `CONFIDENCE_HIGH=0.25` was tuned for pc-only; adding a kw term shifts blended scores up." That step was never completed before -157 was closed. The obligation passes to -174.
+
+Two models conflict and cannot both be operative: -157's step 4 assumes the gate reads the blended score (so W_KW raising blended values shifts what the gate sees). This ticket's coupling note assumes the gate reads the pc component only (so W_KW cannot shift the gated value -- it only elects which story's pc is gated). These are incompatible. This ticket's model is better evidenced (from observed debug output). If it is confirmed from `rag_service.py`, the step 4 calibration obligation dissolves: W_KW re-enable does not shift gated values, and no recalibration is needed from that source. The broader calibration audit this ticket already calls for (from eval suite distributions) covers the threshold question independently.
+
+**Design direction (not a spec -- calibrate from eval suite, no numbers in the ticket):** Two-factor gate using absolute bands first, distribution gap consulted only in the ambiguous middle band.
+
+- Calibration constraint the bands must satisfy: database query pool (0.32–0.3886, genuinely bad match) and enablement pool (0.51–0.5643, genuinely good match) show that score bunching alone does not distinguish quality; the floor's placement between those regimes must come from data. Calibrate from the eval suite's 70 logged score distributions, not from the three evidence cases above.
+- The ambiguous middle band (between the noise floor and the genuine-match floor) is where distribution gap adds signal -- a tightly bunched mid-band pool with no clear leader is a different confidence picture than the same mean score with one clear outlier.
+- Do not move the numbers before running the calibration pass. Moving CONFIDENCE_HIGH without a distribution audit risks false rejections on legitimate niche queries.
+
+**Evidence provenance:** Cases 1 and 2 surfaced during MATTGPT-077 Phase 1 step-A probe session (August 11, 2026). See -077 Step A probe results note for retrieval and router details.
+
+**Cross-references:** MATTGPT-162 (same gate orbit, embedding-exception upstream cause), MATTGPT-077 (step-A probe session -- evidence provenance), MATTGPT-171 (phrase-aware matching -- "I do, we do, you do" is Case 1's query).
+
+---
+
+### MATTGPT-175
+**W_KW trace payload reports 0.0 while ranking runs at 0.15 -- lying instrument invalidates weight annotations in probe and eval records**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **Files:** `services/pinecone_service.py` (lines 97-98, 281), `config/constants.py`, `utils/scoring.py`
+- **Logged:** August 11, 2026
+
+**Issue:** `pinecone_service.py` imports `_hybrid_score` from `utils.scoring` (line 19) and calls it at line 316 with no weight arguments. The function picks up its defaults -- W_PC=1.0, W_KW=0.15 -- from `utils/scoring.py`. That is the live blend.
+
+Lines 97-98 define module-local constants W_PC=1.0 and W_KW=0.0. Line 281 emits these into a trace/debug payload as `{"W_PC": W_PC, "W_KW": W_KW}`. The payload reports keyword weighting is off; the ranking one line later runs it at 0.15. The instrument lies.
+
+**Arithmetic proof (Fiserv trace, August 11):** pc=0.580, kw=0.667, blend=0.680. `0.580 + 0.15 × 0.667 = 0.680` exactly. The live path used 0.15. The trace payload reported 0.0.
+
+**What is proven:** Line 281 emits the module-local pair (W_KW=0.0) into the trace payload. Line 316 blends using the imported `_hybrid_score` defaults (W_KW=0.15). These are two different values for the same conceptual weight, in the same module, three lines apart.
+
+**What is unverified:** Whether the E1-E4 pre-registered experiment or the eval suite consumed the trace payload's `weights` key and used it for anything beyond display. If they did, weight annotations in those records are wrong while rank flips remain real (rank comes from actual ranking, not from the reported weight). If they did not, the defect is confined to the trace payload itself. Verify before concluding the experiment record is corrupted.
+
+**Violation:** `config/constants.py` opens with "NEVER duplicate these values in other files." W_PC and W_KW are not in `constants.py`; they are in `utils/scoring.py` as defaults. The module-local copies in `pinecone_service.py` are the duplication the rule was written to prevent, and they diverged silently.
+
+**Fix:** Three steps, in order:
+1. Add W_PC and W_KW to `config/constants.py` as the single authoritative source.
+2. Update `utils/scoring.py` to import W_PC and W_KW from `constants.py` rather than defining them as defaults.
+3. Delete `pinecone_service.py` lines 97-98. Line 281's trace payload then reads whatever `constants.py` holds and will be accurate.
+
+No behavior change to ranking. The fix corrects the instrument, not the weight.
+
+**Before fixing:** Verify whether any probe harness (probe_077_stepA.py or similar) reads the `weights` key from the trace payload and uses it for anything other than display. If so, the harness results carry wrong weight metadata and should be re-annotated.
+
+---
+
+### MATTGPT-176
+**Dead code: zero-caller function, 200-line commented block, duplicate typed-alias map**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Refactor
+- **Files:** `ui/pages/ask_mattgpt/utils.py` (line 237), `ui/pages/ask_mattgpt/backend_service.py` (lines 1044-1243, 1412-1421), `ui/pages/ask_mattgpt/conversation_view.py` (line 305)
+- **Logged:** August 11, 2026
+
+**Three items -- work independently, ship together or separately:**
+
+1. **Dead function:** `push_card_snapshot_from_state` at `utils.py:237` has zero callers. Confirmed via grep. Remove the function and any imports that exist solely for it.
+
+2. **Commented-out legacy block:** `_generate_agy_response` at `backend_service.py:1044-1243` -- 200 lines of legacy response-generation logic, commented out. Survived the `6cba8d9` cleanup pass that removed 430 similar lines from the same file. Note for whoever picks this up: `6cba8d9` claimed to have cleared this class of commented-out legacy code; this block's survival was not intentional, it was missed. Remove. If git history is needed, it is in the commit log; commented-out code in a live module is not a backup strategy.
+
+3. **Duplicate typed-alias map:** `backend_service.py:1412-1421` contains a typed-alias map independent of the one at `conversation_view.py:305`. Two implementations of the same feature with no documented reason for divergence. Before removing either copy: (a) confirm both maps are identical in content; if they differ, the divergence is a separate bug to file. (b) Identify which call path uses which copy and make `conversation_view.py:305` the canonical one, or document why the backend copy must exist.
+
+**Note on `_format_narrative`:** An earlier claim in this investigation that `_format_narrative` output "poisons every query" was retracted. Verified: `_format_narrative` feeds `answer_context`, used only at `backend_service.py:1041`, the API-failure fallback path. It does not enter the LLM prompt on normal query paths. No ticket warranted; noted here for provenance since the retraction happened in the same investigation session.
+
+---
+
+### MATTGPT-177
+**token_overlap_ratio bound violation -- repeated in-vocab tokens inflate ratio above 1.0; docstring example independently wrong**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `utils/validation.py` (last two lines of `token_overlap_ratio`)
+- **Failing test:** `tests/unit/test_scoring_contracts.py::test_token_overlap_ratio_stays_within_unit_interval` (failing by design -- pre-registers the expected fix)
+- **Logged:** August 11, 2026
+
+**Issue:** `hits = sum(1 for t in toks if t in vocab)` iterates the non-deduped token list. Dividing by `max(1, len(set(toks)))` dedupes the denominator but not the numerator. Any repeated in-vocab token inflates the ratio above the documented [0.0, 1.0] range.
+
+**Verified:**
+- `token_overlap_ratio("aws aws aws", {"aws"})` returns 3.0
+- `token_overlap_ratio("platform platform", {"platform"})` returns 2.0
+
+**Docstring bug (independent of the bound violation):** The docstring's third example documents `"platform and some unrelated words"` as returning 0.5. Actual return value is 0.25. The docstring is wrong regardless of which bug is fixed first.
+
+**Fix (two edits, ship together):**
+1. Change the numerator to dedupe before counting: `sum(1 for t in set(toks) if t in vocab)`. The denominator `len(set(toks))` is then consistent with the numerator and the ratio stays within [0.0, 1.0].
+2. Correct the docstring's third example: `"platform and some unrelated words"` is documented as 0.5, actual return is 0.25. The input has no repeated tokens (4 unique non-stopword tokens, 4 total), so the fix cannot change this result -- 0.25 is correct unconditionally. Write 0.25 into the docstring directly.
+
+**Severity gate (verify before closing):** Grep all callers of `token_overlap_ratio`. If any caller gates on a value near 1.0 (e.g., `if ratio > 0.8: reject`), an inflated ratio passes a gate it shouldn't. That would upgrade severity from Medium to High. If no caller thresholds against a near-1.0 value, the defect is a correctness issue without a confirmed downstream behavioral consequence.
+
+**Cross-references:** MATTGPT-178 (tokenizer divergence in the same function -- fix both together; they interact at the character-class level before this arithmetic runs).
+
+---
+
+### MATTGPT-178
+**Tokenizer divergence in utils/validation.py -- _tokenize and token_overlap_ratio split on different character sets, undercounting technical-term overlap**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **File:** `utils/validation.py`
+- **Related:** MATTGPT-157 (closed -- specific-term query swamping; same term class affected here), MATTGPT-177 (bound violation in the same function)
+- **Logged:** August 11, 2026
+
+**Issue:** Two tokenizers in the same module disagree on symbol-bearing characters.
+
+- `_tokenize` uses `_WORD_RX = [A-Za-z0-9+#\-_.]+` -- keeps `+`, `#`, `-`, `.` as word characters.
+- `token_overlap_ratio` uses `re.split(r"[^\w]+")` where `\w = [A-Za-z0-9_]` -- those same characters become separators.
+
+**Verified divergence:**
+
+| Input | `_tokenize` output | `token_overlap_ratio` tokens |
+|---|---|---|
+| `c++` | `['c++']` | `[]` |
+| `.net` | `['.net']` | `['net']` |
+| `node.js` | `['node.js']` | `['node']` |
+| `ci/cd` | `[]` | `[]` |
+
+**Retrieval consequence:** If the vocab is built with `_tokenize` (as the docstring at line 199 states), symbol-bearing technical terms exist in the vocab in a form `token_overlap_ratio` can never produce. Overlap is systematically undercounted for exactly the technical vocabulary the scorer exists to recognize -- `c++`, `.net`, `node.js`, and similar terms contribute zero overlap regardless of their presence in the story. This is the same term class MATTGPT-157 diagnosed as getting swamped in retrieval.
+
+**Unverified prerequisite (verify before fixing):** Confirm that `initialize_vocab` actually builds the vocab using `_tokenize`. The docstring asserts this; the function itself was not read during this investigation. The answer determines which tokenizer is the wrong one: if vocab is built with `_tokenize`, fix `token_overlap_ratio` to use the same regex. If vocab is built with `re.split(r"[^\w]+")`, fix `_tokenize` (and accept that `c++` becomes `['c']`).
+
+**Additional finding (note -- may warrant a separate ticket):** `_STOPWORDS` is defined in this module and used only by `token_overlap_ratio`, not by `_tokenize`. As a result, the keyword scorer treats "how," "you," and other stopwords as content tokens when building the overlap. Whether this is a defect or intended behavior depends on the scorer's design intent. If `_STOPWORDS` was meant to apply to all tokenization in this module, that's a third bug here. If it was intentionally scoped to `token_overlap_ratio` only, document that intent explicitly so future editors don't "fix" it.
+
+---
+
+### MATTGPT-179
+**formatting.py dead formatters -- both entrances orphaned, phantom schema in unreachable code; consider folding into MATTGPT-176**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Refactor
+- **Logged:** August 11, 2026
+
+**Issue:** Both entrances to `formatting.py`'s formatter functions are confirmed orphaned:
+
+- Typed alias map at `conversation_view.py:305-312`: originates in the September 2025 monolith, carried through modularization with no design intent. Not reachable by any user-facing path.
+- Deep Dive pill at `conversation_helpers.py:395`: does not render in the UI. Confirmed by inspection August 11, 2026.
+
+Nothing a visitor can reach exercises `_format_narrative`, `_format_key_points`, or `_format_deep_dive`. These are dead code.
+
+**Consider folding into MATTGPT-176** (dead code bundle). They are separate only because the phantom schema finding adds context about what the correct fields are, preserved below in case this code is ever revived.
+
+**Schema mapping (verified August 11, 2026 against corpus):**
+
+| Code field | JSONL field | Type |
+|---|---|---|
+| `why` | `Purpose` | str |
+| `how` | `Process` | list |
+| `what` | `Performance` | list |
+| `title` | `Title` | str |
+| `client` | `Client` | str |
+| `star.situation` | `Situation` | list |
+| `star.task` | `Task` | list |
+| `star.action` | `Action` | list |
+| `star.result` | `Result` | list |
+
+All list fields are already lists in the JSONL. The mismatch is field naming only, not structure.
+
+**`story_has_metric` / `has_metric` filter:** `story_has_metric` is a function in `formatting.py` that reads `s.get("what")` and `s.get("star", {}).get("result")` -- both phantom field names. The JSONL carries `Performance` and `Result`. The function returns False for every story regardless of content. If this code is ever revived and field names are corrected, `story_has_metric` reads `Performance` and `Result` and the filter works with no further change.
+
+**Severity correction for `_format_narrative` (do not escalate):** `_format_narrative` output feeds `answer_context`, used only at `backend_service.py:1041` -- the API-failure fallback path. It does not enter the LLM prompt on normal query paths. An earlier claim that it "poisons every query" was retracted and verified false. The orphaned-entrances finding above is the correct framing.
+
+**Stale assertions and docstrings from f5641e7 (August 8 W_KW re-enable):**
+- Four assertions in `test_scoring.py` are currently failing (red since August 8): `test_default_weights_use_semantic_only` (got 0.89, expected 0.8), `test_handles_none_pc_score` (got 0.09, expected 0.0), `test_handles_invalid_pc_score_type` (got 0.075, expected 0.0), `test_default_weights_favor_semantic` (got 0.15, expected 0.0). These assert against blend values computed at W_KW=0.0 and have not been updated for W_KW=0.15.
+- The Returns block and Example block in `_hybrid_score` (`utils/scoring.py`) are stale -- they document the 0.0/1.0 defaults. The Args line was already fixed by f5641e7. Update Returns and Example to reflect 0.15/1.0 and the constants.py sourcing (pending MATTGPT-175's fix).
+
+**Work items:**
+1. Delete `formatting.py` formatter functions (or fold entire ticket into MATTGPT-176).
+2. Update the four failing `test_scoring.py` assertions for W_KW=0.15. Update Returns and Example block in `_hybrid_score`.
+
+---
+
+### MATTGPT-180
+**Test fixture blind spot: test_formatting.py, test_filters.py, test_scoring.py:85 pass against phantom schema**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **Logged:** August 11, 2026
+
+**Issue:** Three test files build fixtures using the phantom field names (`why`, `how`, `what`, `star.situation`, etc.) rather than the verified JSONL schema (`Purpose`, `Process`, `Performance`, `Situation`, etc.). Because the tests operate on their own in-memory dicts, they pass against the phantom schema with no coverage of the actual data the production code reads.
+
+Specific location: `test_scoring.py:85` constructs a fixture dict using phantom field names. `test_formatting.py` and `test_filters.py` do the same throughout.
+
+**Why this matters:** This is not a cleanup item. It is the reason the `formatting.py` phantom schema defect was invisible -- a passing test suite is meaningless if the fixtures do not match production data shape. Any refactor or fix that passes these tests is unverified.
+
+**Recurrence prevention rule:** Story fixtures must be built by calling `load_star_stories()` (or an equivalent helper that reads from `data/echo_star_stories_nlp.jsonl`) and selecting by index, Client, Domain, or Era. Inline fixture dicts built from field names guessed from code are not valid. This rule applies to all three files and any future test file that handles story objects.
+
+**Work items:**
+1. Rebuild fixtures in `test_formatting.py`, `test_filters.py`, and `test_scoring.py:85` using `load_star_stories()`.
+2. Confirm previously-passing tests still pass after fixture replacement (a test that breaks on correct fixtures was never actually testing the thing it claimed to test -- investigate each failure before discarding).
+
+---
+
+### MATTGPT-181
+**Early-career story slate: Well Found / F-22, Lockheed Martin STRATCOM, Cendian B2B/EDI -- closes pre-2005 corpus gap**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action (story-writing)
+- **Logged:** August 12, 2026
+- **Parent ticket:** MATTGPT-079 (coverage gaps meta)
+
+**Issue:** The corpus currently starts at 2005 (Solution Architect level). Role Match assessments against requirements like "10+ years professional software development experience" return partial matches because no STAR story anchors the 1997-2005 individual-contributor period. Decision is (a) new STAR stories, not resume or LinkedIn fix. This is committed work with drafts pending.
+
+**Record scope:** Starts at 2000 by Matt's ruling, which extends the 1997-2005 framing from the 2005 resume. No de-aging; the history is the pitch. Drafts from Matt's firsthand account with the 2005 resume as evidence backbone.
+
+**Three-item slate (drafts pending):**
+1. Well Found Technology / F-22 origin -- early-career anchor; aerospace / defense context.
+2. Lockheed Martin STRATCOM -- carries the 2002 TDD and pairing conviction; foundational engineering philosophy thread.
+3. Cendian B2B/EDI -- Norfolk Southern ancestor; supply chain / B2B integration thread.
+
+Adjunct-professor work folds in; placement TBD after drafts surface.
+
+**Work:** Write three STAR drafts from Matt's firsthand account, cross-referenced against the 2005 resume. Before ingestion, verify each draft against the full JSONL authoring schema by reading an existing story from `data/echo_star_stories_nlp.jsonl` -- the authoring schema includes fields like `5PSummary`, `Competencies`, `Theme`, `Era`, and `public_tags` that the -179 code-to-JSONL mapping does not cover. Do not use the -179 table as the authoring spec; it is a formatter code translation, not an ingestion checklist.
+
+**Cross-references:**
+- **MATTGPT-079** -- coverage gaps meta; pre-2005 gap tracked there as `[Decided]`
+- **MATTGPT-022** -- Data Quality Cleanup Journey (sibling story-writing ticket pattern)
+- **MATTGPT-078** -- AI Enablement Before It Had a Name (sibling story-writing ticket)
+
+---
+
+### MATTGPT-182
+**Eval and probe harnesses bypass loader normalization -- public_tags reaches scorer as str, contributing zero keyword tokens in every measurement run**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **Logged:** August 12, 2026
+
+**Issue:** `echo_star_stories_nlp.jsonl` stores `public_tags` as a comma-separated string (verified: type str on schema dump, August 11). `app.py`'s `load_star_stories()` parses it to a list at lines 239-240 via `_split_tags()` before any story reaches the retrieval stack. The app path is correct.
+
+`tests/eval_rag_quality.py` (lines 1328, 1769, 1862) and the four probe scripts (`probe_077_step0.py`, `probe_077_step05.py`, `probe_077_stepA.py`, `probe_assessor.py`) load the corpus with raw `json.loads` and never apply that normalization. All four call `rag_answer()` directly, which reaches `semantic_search` -> `_hybrid_score` -> `_keyword_score_for_story`. In `_keyword_score_for_story`, `' '.join()` over a string character-separates it. Every resulting token fails the `len >= 3` filter in `_tokenize`. `public_tags` contributes zero keyword tokens in every eval and probe run, while contributing normally in the app.
+
+**Verified by direct A/B on the live functions (August 11):** identical story, identical query. Raw dict scores 0.25, loader-normalized dict scores 0.375. Behavior unchanged since 764252b (October 2025).
+
+**Consequence -- the measurement record, not production:**
+- Production is correct. No visitor-facing defect. Do not escalate on that basis.
+- Every probe number and eval score on record was computed with one of nine haystack fields dark, against a production path where it is live.
+- The 64/64 eval run (August 11) is internally consistent and valid as a regression check, but is not measuring the production scorer.
+- MATTGPT-077's Step 0 re-baseline (August 11) has the same property. "P5/P8 still LEAD" was determined tags-dark. Whether they lead in production is unmeasured.
+- f5641e7 calibrated W_KW=0.15 on E1-E4 evidence from this path. The rank flips were real but occurred in a tags-dark regime. Whether 0.15 is right when tags contribute is untested.
+
+**Fix:** Extract `_split_tags()` and `_ensure_list()` from `app.py` into a shared loader that `app.py`, `eval_rag_quality.py`, and all four probes call. Do not duplicate the normalization into each script -- that recreates the same drift in five places.
+
+**Exit criterion:** After the fix, re-run the eval suite and MATTGPT-077 Step 0. Numbers will move. This is instrument correction, not regression. Do not compare results across the fix boundary; establish a new baseline and treat prior probe and eval numbers as belonging to a different regime.
+
+**Blocks:** MATTGPT-077 Phase 2. The cluster cull / rewrite path is scoped against a P5/P8 determination from the miscalibrated instrument. Re-measure before scoping that work.
+
+**Related:** MATTGPT-180 (test fixture blind spot -- same root cause, different surface: fixtures that do not come from the loader).
+
+---
+
 ### Decided Against
 
 > **Read only — do not add blocks here directly.**
@@ -1962,835 +2795,3 @@ Cold-load CLS ceiling: 0.25 (observed ~0.24 in DevTools — locks "no worse than
 ---
 
 
-### MATTGPT-147
-**Stale `@pytest.mark.skip` on `test_mobile_desktop_only_message` — decorator predates step def**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Bug
-- **File:** `tests/bdd/steps/test_role_match.py`
-- **Logged:** July 1, 2026
-
-**Issue:** `test_mobile_desktop_only_message` is skipped by a stale decorator at lines 170–175. The skip reason says "Needs hamburger interaction" — but that interaction was implemented at lines 403–416 (`given_viewport_at_explicit_width`). The decorator was written before the step def existed and was never removed.
-
-**Action:** Remove the `@pytest.mark.skip` decorator at lines 170–175. Run in isolation:
-```
-pytest tests/bdd/steps/test_role_match.py::test_mobile_desktop_only_message -v
-```
-If it passes, commit. If it fails, the step def has a bug — diagnose before committing.
-
-**Acceptance criteria:**
-- `test_mobile_desktop_only_message` passes in isolation and in the full suite with no skip decorator.
-
----
-
-### MATTGPT-148
-**`.main` selector sweep — 36 dead selectors in `global_styles.py` need swapping to `.stMain`**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Refactor
-- **File:** `ui/styles/global_styles.py`
-- **Logged:** July 1, 2026
-
-**Issue:** `.main` does not exist in current Streamlit. The correct selector is `.stMain`. `global_styles.py` contains 36 rules scoped to `.main[^a-zA-Z]` — all dead selectors that match nothing. Any layout or spacing rules under these selectors are silently not applying.
-
-**Action:**
-1. Confirm count: `grep -n "\.main[^a-zA-Z]" ui/styles/global_styles.py`
-2. Review each occurrence — verify intent is `.stMain` before swapping (some may be legitimate class names that happen to start with `.main`).
-3. Swap confirmed dead selectors to `.stMain`.
-4. Smoke-test desktop and mobile after change — dead selectors becoming live may reveal previously masked layout shifts.
-
-**Acceptance criteria:**
-- Zero `.main` selectors in `global_styles.py` that should be `.stMain`.
-- No visual regression at desktop and 375px mobile after the swap.
-
----
-
-### MATTGPT-149
-**Rejection bubble dark mode — `[class*='_rejection_bubble']` missing dark mode override**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Bug
-- **File:** `ui/styles/global_styles.py` (or wherever `_rejection_bubble` is defined)
-- **Logged:** July 1, 2026
-
-**Issue:** The rejection bubble component uses `var(--banner-info-bg)` for its background. There is no `body.dark-theme` override for this variable or this selector, so the bubble renders with the light-mode background color in dark mode.
-
-**Fix:** Add a `body.dark-theme` override — either for `--banner-info-bg` directly (if it's safe to change globally) or scoped to `[class*='_rejection_bubble']` specifically. Confirm the override value against the dark mode palette in `global_styles.py` before applying.
-
-**Acceptance criteria:**
-- Rejection bubble background is visually appropriate in both light and dark mode.
-- No other surfaces that use `var(--banner-info-bg)` are unintentionally affected.
-
----
-
-### MATTGPT-150
-**MATTGPT-144 test fallout — decouple BDD assertions from display copy and stranded AgGrid selectors**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Refactor / Test
-- **Logged:** July 1, 2026
-- **Dependencies:** None. MATTGPT-144 Done.
-
-**Issue:** The AgGrid → st.dataframe migration left three coupling problems in the BDD suite caught reactively during a full-suite run. Production functionality is confirmed working. This ticket addresses the test debt.
-
-**Finding 1: Count noun is not a shared constant.**
-`explore_stories.py:1219` renders the noun `stories` as an inline literal inside the `.es-results-count` HTML string. Three tests (`test_banking_landing.py`, `test_cross_industry_landing.py`, `test_home.py`) match against it with the regex prefix `of\s+(\d+)\s+stor`. A copy change in that one line breaks all three tests silently. Additionally, `test_home.py:146` has a stale docstring still reading "projects" from before the migration.
-
-Action: extract the noun to a named constant in `explore_stories.py`, import and reference it in the three test files. Fix the stale docstring in `test_home.py:146`.
-
-**Partial progress (commit `1be5953`):** Regex fixed in all three test files (`of\s+(\d+)\s+project` → `of\s+(\d+)\s+stor`). Constant extraction and `test_home.py:146` docstring fix still open.
-
-**Finding 2: Sort-order assertion is now a canvas-mount check only.**
-`test_explore_stories_default_state.py::assert_sort_descending` (lines 158–169) was rewritten to wait for `[data-testid="stDataFrame"]` and `[data-testid="data-grid-canvas"]`. It no longer verifies sort order — that is a manual visual check per the ARCHITECTURE.md canvas constraint. Production sort confirmed working visually.
-
-Action: add a data-layer assertion in `test_explore_stories_default_state.py` that verifies `Start_Date` values in `view_paginated` are descending before the dataframe receives them. The corpus is already loaded in that file. This covers the behavior without touching the canvas.
-
-**Finding 3: Stranded `.ag-root-wrapper` / `.ag-row` waits in a silent `try/except`.**
-`test_explore_stories_default_state.py:123–124` still waits for `.ag-root-wrapper` and `.ag-row` inside a `try/except` that swallows the timeout. These selectors will never match now that `st.dataframe` replaced AgGrid. They produce a ~30s silent wait on every run of that test.
-
-Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consistent with the rest of the file. Remove the `try/except` — the dataframe mount is the correct gate and should fail loudly if it times out.
-
-**Sweep:** `grep tests/bdd/steps/ -r` for `.ag-`, `stCustomComponentV1`, and `frame_locator` to confirm no other stranded AgGrid selectors remain across the full suite.
-
-**Acceptance criteria:**
-- Count noun extracted to a constant; three test files reference it; stale docstring in `test_home.py:146` corrected.
-- `assert_sort_descending` asserts actual sort order at the data layer, not just canvas mount.
-- `.ag-root-wrapper` / `.ag-row` waits replaced with `stDataFrame` selector; `try/except` removed.
-- Full BDD suite passes with 0 failed, skip count unchanged.
-
----
-
-
-### MATTGPT-152
-**Move debug output from UI sidecar to terminal log only**
-
-- **Status:** Parked
-- **Priority:** Low
-- **Type:** Refactor
-- **File:** `utils/ui_helpers.py`, `services/backend_service.py`, `ui/pages/ask_mattgpt/conversation_view.py`
-- **Logged:** July 16, 2026
-
-**Issue:** Debug output currently appears in the Streamlit UI sidebar as well as the terminal. When `DEBUG=True`, `dbg()` in `utils/ui_helpers.py` calls `st.sidebar.write("🧪", *args)` at four call sites in `backend_service.py` (lines 1400, 1502, 1694, 1936). A second debug block in `conversation_view.py` (lines 140-152) renders a static `st.caption` showing `VECTOR_BACKEND`, `PINECONE_INDEX_NAME`, and `PINECONE_NAMESPACE`. Goal is terminal-only.
-
-**Proposed change (3 files, confirmed low-risk):**
-
-1. `utils/ui_helpers.py:75` -- `st.sidebar.write("🧪", *args)` to `print("🧪", *args)`. Redirects all four `dbg()` call sites to stdout.
-2. `services/backend_service.py` -- add `PINECONE_INDEX_NAME`, `VECTOR_BACKEND` to the `pinecone_service` import and log them in the startup sanity check block (after DNA Status line), so the config values that are currently sidecar-only land in the terminal instead.
-3. `conversation_view.py:140-152` -- remove the entire `# DEBUG INFO` block. After step 2, these values are in the terminal log and the sidecar block is redundant.
-
-**Constraint:** `__ask_dbg_*` session state writes in `backend_service.py` are orphan keys (set, never rendered) -- leave untouched.
-
-**No BDD cycle needed:** debug-mode-only output, no DOM-observable behavior changes.
-
-**Parked because:** 080 is higher priority. Revisit when 080 closes.
-
----
-
-### MATTGPT-153
-**Q64 eval stochastic -- replace phrase-cluster with concept-cluster robust to story-selection variance**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Refactor / Test
-- **Sibling:** MATTGPT-082 (same root cause: eval checking the wrong thing)
-- **Logged:** July 16, 2026
-
-**Issue:** Q64 ("How does Matt manage resistance when leading enterprise transformation programs?") is stochastic. The LLM alternates between surfacing CloudFirst/Ways of Working (which contains "resistance" but not "Norfolk" or "stabilize") and other stories, producing variable phrase-match counts across runs. The test requires 2 of 5 phrases; variable story selection means the threshold is not reliably met.
-
-**Evidence:**
-- Failing in July 16, 2026 eval (68/70). Failure documented in test comment at line 218.
-- Prior passing run: July 15, 2026 (70/70).
-- Stochastic behavior first noted May 23, 2026.
-- July 31, 2026: failing again. Full-suite run matched 1/2 phrases ("resistance"); isolation run matched 0/2. Two runs minutes apart, different phrase hit counts. Confirms story-selection variance as root cause.
-
-**Fix shape (two options, pick one before implementing):**
-
-1. Same approach as Q2/Q5/Q55: replace phrase-cluster check with a concept-cluster that's robust to story-selection variance. Concepts like "resistance", "enterprise transformation", "stakeholder alignment" should pass regardless of which story the LLM pulls.
-2. Verify whether CloudFirst/Ways of Working is actually a correct answer for this query (resistance in enterprise transformation). If yes, update ground truth vocabulary to include its terminology so either story path passes.
-
-**Pre-flight before implementing:** check what the Q2/Q5/Q55 concept-cluster pattern looks like and apply the same structure here.
-
----
-
-### MATTGPT-154
-**Operational-breadth tagging pass -- surface operational ownership into all corpus stories where it's genuinely true**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Action
-- **Spawned from:** MATTGPT-094 (retrieval concentration investigation, Sub-B finding)
-- **Logged:** July 16, 2026
-
-**Issue:** The MATTGPT-094 investigation confirmed that operational stories were under-surfacing due to a vocabulary gap: terms like "Sev-1" and "on-call" were absent from the corpus. The fix in -094 tagged AT&T CRM and JPM stories, and prod verified those two stories now surface correctly on operational queries. But one or two examples isn't enough density. There are additional corpus stories where operational ownership is genuinely true and the vocabulary anchors are still missing.
-
-**Scope:** Audit the corpus for stories where Matt had real operational accountability (on-call, incident response, enterprise release ownership, Sev-1 involvement, production stability) that isn't currently tagged with operational vocabulary. Add the vocabulary where the substance is real. Do not add it where it isn't.
-
-**Constraints:**
-- Vocabulary additions must reflect actual story substance. No inflation.
-- AT&T CRM and JPM stories are already done (in prod as of MATTGPT-094). Don't re-touch them.
-- After tagging, run the Sub-B probe set to confirm surfacing improves: "Tell me about a Sev-1 Matt handled", "Has Matt run on-call rotations?", "Tell me about Matt's experience with global enterprise releases", "What's Matt's operational background?"
-
-**Not in scope:** Re-writing story framing (that's MATTGPT-095). Not a corpus content quality pass, purely a vocabulary/tagging pass so retrieval matches the substance that's already there.
-
----
-
-### MATTGPT-155
-**New corpus story -- sell-side commercial story (HSBC-anchored): pricing/costing, resourcing, outcome-based contracting**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Action
-- **Logged:** July 29, 2026
-
-**Issue:** The corpus has a buy-side commercial story ("Owning the P&L...") but zero sell-side commercial substance. Matt's sell-side experience -- pricing/costing with CFM, LCR/UCR resourcing, estimating, managing CRs and SOW expansions, transitioning from hours-times-rate to outcome-based contracting -- is a distinct and material capability. HSBC is the anchor client: $10M SOW built via ROM, pricing model, and staffing plan.
-
-**Do not bundle with the buy-side P&L story.** These are different commercial motions (sell to client vs. manage margin on a delivery). Keep as a separate story.
-
-**Story scope:**
-- Pricing and costing using CFM (commercial financial model)
-- LCR/UCR resourcing and rate-card discipline
-- Estimating at proposal stage; managing CRs and SOW expansions in delivery
-- Transition from hours-times-rate to outcome-based contracting
-- Anchor: HSBC $10M SOW -- ROM, pricing model, staffing plan
-
-**Elicitation note:** Follow the same elicitation-first approach as -078/-129. Do not write the story without a session to pull the specific numbers and decision moments.
-
----
-
-### MATTGPT-156
-**Vendor commercial/spend management gap -- decide whether corpus-zero on invoice/rate-card/procurement is a real claim or honest gap**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Investigation
-- **Logged:** July 29, 2026
-
-**Issue:** The corpus has zero content on invoice approval, rate-card management, third-party spend, procurement, or vendor governance. This is distinct from the existing Vendor Management (coordination/relationship) skill in the corpus. The question to answer before writing anything: does Matt have real claims here worth a story, or is this an honest gap?
-
-**Decision gate:** If yes, a story or structured assertion belongs in the corpus. If no, record as a documented honest gap so it doesn't re-surface as a question each session.
-
-**Scope of the gap:** invoice/rate-card management, third-party spend oversight, procurement process, vendor governance (budget accountability, not just relationship management).
-
-**Constraint:** Do not conflate with the existing Vendor Management (coordination) skill, which covers vendor selection, relationship, and delivery oversight. This is specifically about the commercial/spend side.
-
-**Partial resolution (July 29, 2026):** Confirmed real claim: Matt reviewed and approved contract fee and cost submissions from Bottomline Technologies to JP Morgan across the ACCESS program, with authority to reject items before payment. Now in the corpus as an Action bullet and a `Vendor Invoice Review & Approval` competency on "Building the Payment Engine Behind JP Morgan ACCESS." Deliberately not surfaced into that story's Use Case(s) -- the story's thesis is payments engineering and the field is already at 473 of 600 characters.
-
-**Remaining question:** Whether vendor commercial management warrants its own story. Evidence is currently Action/Competencies-level on one story, so it will not retrieve on a vendor-spend query. Rate-card management, procurement process, and vendor governance remain corpus-zero. RBC confirmed not applicable; the invoice review was ACCESS only.
-
----
-
-### MATTGPT-159
-**Role Match performance -- parallelize per-requirement assessor calls; sequential gpt-4o loop is the bottleneck**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Performance
-- **File:** `services/jd_assessor.py`
-- **Surfaced:** June 16, 2026 (during -067 release-gate work; classified backend optimization, kept out of that gate)
-- **First documented:** June 26, 2026 backlog prioritization session
-- **Logged:** July 31, 2026
-
-**Issue:** `jd_assessor.py` makes one sequential `gpt-4o` call per JD requirement. The demo JD has roughly 23 requirements. The `assess` loop dominates; `extract` is a large N-independent cost (~22s local on the demo JD) and is the floor regardless of parallelism.
-
-**Historical measurement:** 336 seconds end to end, measured June 16, 2026 at TOP_K=3. This predates the TOP_K=5 change made July 31, 2026, which increases context per call. The current sequential cost is higher than the recorded figure. Re-measure before optimizing; do not quote 336s as the current number.
-
-**Root cause and fix:** Sequential per-requirement calls with `gpt-4o` is the confirmed root cause. The fix is concurrency -- parallelize the `assess` calls using `asyncio` or a `ThreadPoolExecutor` -- not a model downgrade. Per-requirement reasoning with `gpt-4o` is what makes the scorer credible (confirmed in MATTGPT-088 scope work: mini produces subpar assessment reasoning). Dropping to mini would make -088 worse, not better. Estimated improvement after parallelization: two to three minutes down to fifteen to twenty seconds (June 2026 estimate; re-validate after implementation).
-
-**Why this went unfiled twice:** Surfaced June 16, 2026 during -067 release-gate work and classified as backend optimization rather than UI polish -- correctly kept out of that gate, but not filed. Sat as a latency reference note in -088 and -099 without an owner through June 26, when it was identified as unfiled in a backlog prioritization session and still not filed. Same pattern as MATTGPT-155 (sell-side story) and MATTGPT-156 (vendor spend): context notes in other tickets are not tickets, and findings without an owner evaporate. Filed here so it has one.
-
-**Perceived-performance half (independent of the concurrency fix):** What the user sees during a two-minute wait -- whether it looks like progress or like a hang -- is a separate concern that can land even if concurrency work slips. Connects to MATTGPT-083 (spinner inconsistency). Worth addressing regardless of when the async fix ships.
-
-**Constraints:**
-- Do not swap `gpt-4o` for `gpt-4o-mini`. This is a concurrency change, not a prompt or scoring change.
-- Keep per-requirement judgment logic identical.
-- Re-run all three JDs to confirm verdicts are unchanged after parallelization.
-
-**Cross-references:**
-- Latency context noted (not ticketed) in MATTGPT-088 and MATTGPT-099 detail blocks.
-- MATTGPT-083 -- spinner inconsistency; perceived-performance half connects here.
-- MATTGPT-160 -- extraction clause-dropping; separate defect in the same file.
-
----
-
-### MATTGPT-160
-**JD extractor clause-dropping -- 7 of 23 requirements on demo JD lose qualifiers during extraction**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Bug
-- **File:** `services/jd_assessor.py` (`extract_requirements()`)
-- **Logged:** July 31, 2026
-
-**Issue:** `extract_requirements()` drops qualifiers from JD requirements during extraction. On the demo JD, 7 of 23 requirements lost qualifiers -- the extracted text is narrower than what the JD actually requires. Downstream effect: the assessor evaluates a stripped version of the requirement, which can produce verdicts (strong, partial, gap) that don't reflect what the hiring manager wrote.
-
-**Probe script:** `probe_db_extraction.py` (repo root) contains tooling for investigating this defect. It runs `extract_requirements()` on the structured JD, compares extracted text to source, and tests full-text vs stripped retrieval through Pinecone at top-40. Re-use this rather than building a new probe.
-
-**Constraint:** This is a separate defect from MATTGPT-157 (W_KW keyword weighting). The clause-dropping happens at extraction time, before retrieval scoring. Do not conflate.
-
----
-
-### MATTGPT-161
-**Career span duplicated and hardcoded across surfaces -- consolidate to a single derived or configured source**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Refactor
-- **Files:** `services/backend_service.py` (lines 245, 254 confirmed), `data/matt_profile.json` (`career_summary` -- removed August 3), design-spec repo (public-facing; scan needed)
-- **Logged:** August 3, 2026
-
-**Problem:** The same derived value is implemented independently in multiple places with different values, some wrong. `backend_service.py` computes `current_year - 2005` for the startup banner and `MATT_DNA`, hardcodes "18+ years" at line 245, and hardcodes "2023-2026" at line 254 (goes stale in January). `career_summary` in `matt_profile.json` carried "18+ years at Accenture" until removed August 3 -- the assessor was citing that string as profile evidence on tenure requirements, surfaced during MATTGPT-158 validation. This is the fourth instance this week of a value stated once and quoted forward past its validity. Violates the no-hardcoded-data-derived-values rule in CLAUDE.md and the anti-patterns section in ARCHITECTURE.md.
-
-**Two decisions, in this order:**
-
-1. **Where the value comes from.** Three candidates:
-   - Derived at startup in `sync_portfolio_metadata()` alongside `SYNTHESIS_THEMES` and `_KNOWN_CLIENTS` -- matches the existing pattern for corpus-derived globals.
-   - `constants.py` -- fits the file's role but means hardcoding or placing corpus logic in config.
-   - Environment configuration -- the honest option if the value cannot be derived.
-
-   This depends on an unsettled question: the corpus starts in 2005, but the 2005 resume shows the career starting in 1997. If pre-2005 stories are added, derivation from the corpus works. If not, the anchor must be configured. **Decide this once and record the decision.** Do not resolve it implicitly in multiple places again.
-
-2. **Whether it surfaces at all.** Separate from where it lives. `about_matt.py` establishes depth through named programs, scale metrics, and date ranges without stating a total. That is the established pattern, consistent with the ageism-signal rule applied to the resume, corpus, and `career_summary`. A consolidated value may exist and be referenced nowhere visible to users.
-
-**Known consumers (confirmed and suspected):**
-- `backend_service.py` lines 245 and 254 -- startup banner and `MATT_DNA`
-- `matt_profile.json` `career_summary` -- removed August 3 (was also reaching the assessor as citable grounding)
-- Design-spec repo -- public-facing, scan required
-
-**Required work:** Repo-wide scan for year-count patterns (`\d{2}\+?\s*years`, `current_year\s*-\s*20\d{2}`, literal "2005") across this repo and the design-spec repo before implementing anything.
-
-**Constraint:** Tenure requirements on JDs are legitimate and the right answer is the assessor reasoning from story dates (demonstrated working on Fiserv requirement #8 -- see MATTGPT-088). Do not reintroduce a hardcoded span to compensate for tenure-inference variance. These are separate problems with separate fixes.
-
----
-
-### MATTGPT-162
-**Embedding exception misclassified as low-confidence rejection -- visitor sees no-match banner instead of error message**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Bug
-- **File:** `services/rag_service.py` (embedding call + Pinecone query path)
-- **Logged:** August 3, 2026
-
-**Issue:** When the semantic router succeeds but the OpenAI embedding call fails, the system catches the exception, continues with a null vector, queries Pinecone, gets `pool_size=115` with `top_score=0.000`, and fires `[QUERY_REJECTED] reason=low_pinecone`. Visitor sees the no-match banner instead of the "quick breather" API error message. The failure is silent and misattributed.
-
-**Discriminator already in logs:** `pool_size=115` with `top_score=0.000` is only produced by a null vector. Genuine low-confidence retrieval returns `pool_size=10` with non-zero scores. This makes the condition detectable post-hoc from logs, but the visitor experience is wrong in real time.
-
-**Context from August 3 trace session:** An earlier "Speak to a specific client engagement" failure in the same session produced the same null-vector condition but showed the correct response because the router had also failed, which triggered `[API_ERROR_DETECTED]` upstream. The January observability work only covers the router-fails-too case. When the router succeeds and only the embedding call fails, the error path is not reached.
-
-**Fix direction:** Short-circuit to the API error response at the embedding exception, before Pinecone is called. The null vector should never reach the retrieval stage.
-
-**Acceptance:** Simulate an embedding failure with the router succeeding; confirm visitor sees the "quick breather" message, not the no-match banner. Confirm genuine low-confidence queries (non-null vector, non-zero scores, small pool) are unaffected.
-
----
-
-### MATTGPT-168
-**diversify_results picks slot 1 in standard mode but prompt asserts it was ranked highest for the question**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Bug
-- **Files:** `ui/pages/ask_mattgpt/backend_service.py` (line 1934), `ui/pages/ask_mattgpt/prompts.py` (lines 75-80)
-- **Logged:** August 5, 2026
-
-**Issue:** In standard mode with no entity match and non-narrative intent, `diversify_results(candidates)` runs over all candidates and its output becomes `ranked_stories`. `ranked_stories[0]` is wrapped in `<primary_story>` and the prompt tells the model: "the primary story was ranked highest for this question -- build your entire response around it and resist supporting stories even if they seem more interesting."
-
-That is a factual claim to the model that is false on this path. `diversify_results` optimizes for client variety, not relevance. Slot 1 is whichever story survives client-diversity filtering first. The model is then instructed to resist better evidence -- the management story, the correct answer -- on the basis of a ranking that never happened. That's not a cosmetic comment problem; it's the system actively overriding the right answer using a false premise.
-
-**Code path (confirmed):**
-- Entity mode: `ranked = [pinned] + diversify_results(others)` -- slot 1 IS the top entity-relevant story. Prompt claim is accurate here.
-- Narrative mode: `ranked = sorted(candidates, key=pc, reverse=True)` -- slot 1 IS the top Pinecone score. Prompt claim is accurate here.
-- Standard mode, no entity: `ranked = diversify_results(candidates)` -- slot 1 is diversification output. Prompt claim is **false**.
-
-**Concrete exhibit (August 3 trace):** Query "Has Matt directly managed engineering teams?" -- no entity detected, non-narrative intent. Why Hire Matt and the management story both score 0.476. Why Hire Matt was already first in Pinecone ordering. `diversify_results` kept it at slot 1 and moved the management story from position 2 to position 4 by inserting AT&T and Capital One for client variety. The prompt then instructed the LLM to build the entire response around Why Hire Matt and actively resist the management story. The LLM complied. The result was a Professional Narrative answer to a direct operational question.
-
-**Design gap, not regression:** Confirmed via `git log -S "primary_story"`. The XML isolation and slot-1 designation were introduced together in commit 1c96315 (Jan 23, 2026). The entity path was implemented correctly from day one: `[pinned] + diversify_results(others)` -- pin first, then diversify the rest. The no-entity path was always `diversify_results(candidates)` with no pre-diversification pin. The asymmetry is in the same file, same function, same commit. The entity path got the right pattern; the no-entity path didn't. That's what makes the fix obvious: apply the same pattern.
-
-**Fix options:**
-- **A (preferred):** Apply the entity-pin pattern to the no-entity path. Extract `candidates[0]` (top Pinecone score) before diversification, pin to slot 1, run `diversify_results` on the rest. Makes the prompt claim accurate. One line change at line 1934.
-- **B:** Update the prompt to remove the relevance-ordering claim for non-entity paths. Honest but doesn't fix the behavioral problem -- the LLM still builds around whichever story diversification happens to put first.
-
-Option A is the right fix. Option B is a prerequisite comment correction that should ship regardless.
-
-**Compounds with MATTGPT-077 on the same query:** -077 is why Why Hire Matt reaches 0.476 on "Has Matt directly managed engineering teams?" (retrieval contamination). -168 is why the LLM then builds its entire answer around it (false relevance claim + resist instruction). The two defects hit the same query at different pipeline stages. Working -077 alone reduces the probability of the wrong story reaching slot 1 but doesn't close this gap -- any query where diversification reorders is still affected regardless of retrieval quality.
-
-**Pre-registered validation (required before merge):** Pinning slot 1 changes what the LLM builds every standard-mode answer around -- not just the queries where diversification currently misfires. Run the full eval golden suite before and after the fix. If answers shift on queries unrelated to this defect, that movement is worth seeing before it reaches production. A passing eval doesn't mean the fix is neutral; read the diff on changed answers, not just the pass count.
-
-**Cross-references:** MATTGPT-077 (retrieval contamination, upstream cause), MATTGPT-074 (entity-cluster promotion overriding relevance, different mechanism, same post-retrieval override theme).
-
----
-
-### MATTGPT-163
-**Personal-query guard false positive -- professional org questions intercepted as private family**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Bug
-- **Logged:** August 3, 2026
-
-**Issue:** "How many direct reports did Matt have" is intercepted by the personal-query family classifier with score 0.618, classified as `family=personal`. The visitor sees an out-of-scope rejection. The query is a legitimate organizational question about management scope -- not a privacy-sensitive personal query (salary, SSN, home address, family composition).
-
-**Compound failure pattern from August 3 trace session:** The same personal family is producing errors in both directions. July trace: "How much money did Matt make at Accenture" was classified as `family=delivery` (false negative -- should be personal). August trace: "How many direct reports did Matt have" classified as `family=personal` (false positive -- should reach retrieval). The family boundary is miscalibrated in both directions.
-
-**Fix options (compose; may ship together or sequentially):**
-- **A.** Add professional counter-examples to the personal family semantic anchors -- queries about org size, team composition, reporting relationships, and headcount should score low against the personal family anchor. Touches `semantic_router.py`. Independent of MATTGPT-165. **However: adding counter-examples changes `VALID_INTENTS`, which triggers the stale-cache defect described in MATTGPT-062. Verify -062 is closed or manually invalidate the cache before deploying Approach A.**
-- **B.** Build a deterministic keyword pre-filter for genuine privacy categories (salary / compensation, SSN, DOB, home address, relationship/family status) that fires before the semantic classifier. Hard-blocks privacy-sensitive patterns; leaves org-structure queries to the router. Touches `nonsense_filters.jsonl`. **If this approach is chosen, verify MATTGPT-165 (nonsense_filters.jsonl dedup) is closed first before adding new patterns to that file.**
-
-Option A recalibrates the classifier. Option B adds an upstream gate. They compose -- A alone risks residual false positives on edge cases; B alone doesn't fix the miscalibration. Recommended: A first (independent, unblocked), then B after MATTGPT-165 closes.
-
-**Validation:** After fix, "How many direct reports did Matt have" must reach retrieval. "How much money did Matt make at Accenture" must be blocked (personal family, correct outcome). "How many people reported to Matt at the CIC" must reach retrieval.
-
----
-
-### MATTGPT-165
-**nonsense_filters.jsonl has two live generations -- gen-1 blocks legitimate queries gen-2 was meant to permit**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Bug
-- **Note:** If MATTGPT-163 is implemented via Approach B (keyword pre-filter adding patterns to this file), this ticket should land first. If MATTGPT-163 is implemented via Approach A (semantic anchor recalibration in `semantic_router.py`), no ordering dependency exists.
-- **Logged:** August 3, 2026
-
-**Issue:** A December commit appended an improved second block of patterns to `nonsense_filters.jsonl` without removing the original first block. Both generations are now loaded and evaluated. This creates a harmful narrowing defect: `credit card` in gen-1 was intentionally tightened to `credit card number` in gen-2 (to stop blocking product-domain queries), but gen-1 still fires. "Tell me about the credit card portal work" is blocked by the gen-1 pattern and never reaches retrieval, even though gen-2 was explicitly written to allow it.
-
-**Two deliverables (must ship together):**
-1. Deduplicate `nonsense_filters.jsonl` -- keep gen-2 versions, remove gen-1 originals where a gen-2 supersedes them.
-2. Add a loader guard in the filter-loading path (`services/rag_service.py` or wherever the file is parsed at startup) that asserts no exact-duplicate patterns exist. Raises at startup, not silently at query time.
-
-**Dependency note:** Any privacy-category additions to `nonsense_filters.jsonl` (e.g., MATTGPT-163 Option B keyword pre-filter) must land AFTER this deduplication. Writing new patterns into a file with two live generations risks the same problem recurring.
-
-**Validation:** "Tell me about the credit card portal work" must reach retrieval after fix. Loader guard must raise on a manually introduced duplicate pattern in a test run.
-
----
-
-### MATTGPT-166
-**Arc stories invisible to entity-scoped queries -- Fortune 500 Clients / Cross-Division placeholder metadata excluded from client filters**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Issue
-- **Logged:** August 3, 2026
-
-**Issue:** Arc stories -- corpus stories that document career-wide patterns rather than a single named engagement -- use `Client: Fortune 500 Clients` and `Division: Cross-Division` as metadata placeholders. These values do not match any specific client entity. When a query triggers entity filtering on a named client (JP Morgan, RBC, Fiserv, HSBC), arc stories are excluded from the retrieval pool entirely.
-
-**Concrete example:** "Owning the P&L" is a story about financial accountability and commercial ownership across large engagements. It is directly relevant to JP Morgan, RBC, Fiserv, and HSBC client-scoped queries. It never surfaces for any of them because its Client metadata is `Fortune 500 Clients`, not a matching entity value.
-
-**Impact:** Queries scoped to any large named client miss arc stories that may be the most directly relevant content for demonstrating cross-engagement patterns (P&L ownership, executive stakeholder management, program governance). The entity filter, intended to tighten retrieval, is instead excluding high-signal stories.
-
-**Decision required -- three paths (do not implement before choosing):**
-- **A. Accept the tradeoff.** Arc stories are corpus-wide by design; entity filtering is for single-engagement precision. The two modes are intentionally separate. No fix.
-- **B. Wildcard arc-story metadata.** Entity filters return arc stories alongside entity-specific stories when their placeholder values match a defined arc-story pattern (e.g., `Client == "Fortune 500 Clients"` always passes entity filters). Simpler implementation; risk is surfacing arc stories on narrow queries where they reduce precision.
-- **C. Compound metadata.** Arc stories carry both the placeholder AND a list of the specific clients they cover. Entity filters match against the compound list. Most precise; most implementation effort; requires a corpus audit to populate the client lists.
-
-**Recommendation:** Evaluate Option A honestly first. If arc stories genuinely document patterns that are client-agnostic, excluding them from client-scoped queries may be the right behavior. If they are materially relevant to named-client queries (as the P&L story appears to be), Option B is the lowest-risk fix.
-
-**Related -- code adjacency:** MATTGPT-146 (Professional Narrative stories leak into My Work via filter and search paths) is a different symptom but touches the same metadata-driven filtering code. Whoever works either ticket will be in the same module. Read both detail blocks before starting either.
-
----
-
-### MATTGPT-167
-**Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently**
-
-- **Status:** Parked
-- **Priority:** Medium
-- **Type:** Action
-- **Logged:** August 3, 2026
-
-**Issue:** Entity detection currently covers four fields: Client, Employer, Division, Title. Project and Place appear as queryable dimensions across the corpus but are not in `ENTITY_DETECTION_FIELDS`. Queries like "who worked on the White-Label Card Portal" or "what did Matt work on in Chicago" cannot benefit from entity-anchored retrieval.
-
-**Specification (complete -- ready to implement if activated):**
-- Widen `ENTITY_DETECTION_FIELDS` from four to five fields, adding Project and Place.
-- Replace the single `EXCLUDED_DIVISION_VALUES` set with a per-field exclusion map:
-  - Project exclusions: Innovation, Methodology, Platform Modernization, Personal Growth, Career Narrative, Accelerated Delivery (generic project labels that appear in many stories and would over-constrain retrieval)
-  - Place exclusions: Career Narrative, Personal (Sabbatical) (non-geographic place values)
-- 34 distinct Project values and 15 distinct Place values confirmed in corpus audit (August 3, 2026).
-
-**Pre-registered probes:**
-- "Who worked on the White-Label Card Portal" -- should trigger Project entity detection on White-Label Card Portal
-- "What did Matt work on in Chicago" -- should trigger Place entity detection on Chicago
-
-**Why parked:** The motivating case from the August 3 trace session resolved differently (via a different retrieval path). No confirmed failing probe exists at time of filing. The specification is complete and pre-registered probes are defined -- re-activate when a concrete failing case is confirmed in production.
-
-**Prior art -- read before unparking:** MATTGPT-036 (Entity Cluster Promotion Override, Decided Against) and MATTGPT-037 (Score Gap Override, Decided Against) are both retrieval-override mechanisms that were rejected. The DA rationale for each may apply to the per-field exclusion map approach in this ticket. Read both DA blocks and confirm the objection does not carry over before activating this work.
-
----
-
-### MATTGPT-169
-**Positioning-story attractor on career-shaped queries: "Why Hire Matt?" dominates broad management retrieval independent of technical-noun overlap**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Investigation + Action
-- **Descended from:** MATTGPT-094 (closed -- retrieval concentration investigation, Sub-A re-scope)
-- **Logged:** August 5, 2026
-
-**Issue:** "Why Hire Matt?" is a broad attractor on career and management queries regardless of technical-noun overlap. It wins the top of the retrieval pool on questions about management scope, Accenture work, engineering leadership, and career shape, and reaches the LLM as the primary story. When it wins, the answer reflects one four-year CIC period -- the story's evidence is almost entirely from 2019 to 2023.
-
-**Evidence (August 5, 2026 trace):**
-- Rank 1 at 0.503: "Has Matt directly managed engineering teams" (no entity detected, non-narrative intent)
-- Rank 1 at 0.521: "Has Matt directly managed engineering teams?" (natural register)
-- Rank 1 at 0.601: "What did Matt build at Accenture" (entity filter on Accenture applied)
-- Rank 1 at 0.476: "Has Matt directly managed an in-house engineering organization" (tied with the management story)
-- Rank 3 at 0.521: "Speak to a specific client engagement story" (no name in query at all)
-
-**Name sensitivity confirmed:** Same management question scores 0.490 with "Matt," 0.419 with "he," absent from top 10 without either subject. Presence of the name is amplifying retrieval probability, not just filtering -- consistent with the story's title ("Why Hire Matt") embedding close to queries that include the subject's name.
-
-**Mechanism differs from MATTGPT-077 Findings 1-3.** The story is a positioning document with the subject's name in its title and a personal-pitch body. It embeds close to any career-shaped question regardless of technical-noun density. The -077 Phase 1 mitigation (strip "Matt" on technical-noun query shapes) does not fire on "directly managed engineering teams," "what did Matt build," or "specific client engagement." These are not technical-noun queries.
-
-**Third cluster observation in the whack-a-mole series (from MATTGPT-094 re-scope):** MATTGPT-094's July conclusion was that dense vocabulary clusters dominate broad retrieval and the dominant cluster shifts as corpus composition changes -- CIC in May (before positioning docs were separated), MattGPT/Strangler Fig in July (noun-overlap mechanism, now tracked in -077). August's observation: "Why Hire Matt?" / Professional Narrative cluster on career-shaped queries. The pattern is structural, not a one-off. Fixing any single dominant story without addressing the underlying density dynamic produces the next attractor.
-
-**Escape routes (inherited from MATTGPT-094):**
-- **Route 1 -- Fan-out on broad queries:** On queries where no entity is detected and intent is not narrative, retrieve from multiple clusters (management, delivery, technical, leadership) rather than a single top-k result. Reduces the probability of any one story dominating. Implementation approach unresolved -- needs scoping.
-- **Route 2 -- Break the rank-verdict coupling:** Decouple which story the LLM receives as primary from diversification output order. MATTGPT-094 gated this route on -080 (complete) and -088 (closed August 5, 2026). Both gates are now clear. Reassess whether the mechanism is still the right design, or whether MATTGPT-168 (false relevance claim in the slot-1 prompt instruction) is the more surgical fix for the same coupling. Route 2 and -168 may overlap -- read -168 before scoping Route 2 independently.
-
-**CIC concentration consequence:** When "Why Hire Matt?" wins as primary story, the answer draws from four years of CIC evidence and under-represents the earlier career. This is a distinct problem from retrieval dominance and should be documented in MATTGPT-079 if not already there -- the story itself may need scope expansion or the diversification must be career-span-aware rather than client-variety-aware.
-
-**Cross-references:** MATTGPT-077 (retrieval contamination, different mechanism -- noun-overlap vs. positioning-story density), MATTGPT-168 (slot-1 false relevance claim compounds this defect at the prompting layer), MATTGPT-079 (Role Match coverage gaps -- CIC concentration in evidence is a related corpus-shape issue).
-
----
-
-### MATTGPT-171
-**Phrase-aware matching: short-token filter leaves single stopword token for instructional phrases; scorer behavior under-characterized**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Investigation
-- **Logged:** August 8, 2026
-- **Mechanism corrected:** August 11, 2026 (see below)
-
-**Mechanism correction (August 11, 2026 -- supersedes original framing):** The original issue stated that `_tokenize` "filters stopwords before computing overlap" and that "I do, we do, you do" reduces to an empty token set. Both claims are wrong.
-
-Verified: `_tokenize("I do, we do, you do")` returns `['you']`. `_tokenize` does not filter stopwords -- `_STOPWORDS` is used only by `token_overlap_ratio`, not by `_tokenize`. The real filter is `len >= 3`: "I" (len 1), "do" (len 2), "we" (len 2) are dropped; "you" (len 3) survives.
-
-The phrase is not invisible to keyword scoring. It scores on a single stopword token ("you"), which can match stories that contain "you."
-
-**Revised consequence:** The original test instruction ("confirm W_KW=0 and W_KW=current produce identical rankings") may not hold, since "you" is a real scoring token. The affected query class is not zero-token phrases but single-token phrases where the surviving token is a stopword with broad corpus distribution.
-
-**Coupling to MATTGPT-178 open stopword question:** MATTGPT-178 notes that `_STOPWORDS` is used only by `token_overlap_ratio` and raises the question of whether it was intended to apply to `_tokenize` as well. If `_tokenize` gains the `_STOPWORDS` filter to address that question, "you" would drop from this example and the original empty-token premise would become true retroactively. These two investigations should not be resolved independently -- the stopword scoping decision in -178 directly determines the mechanism this ticket is investigating.
-
-**Investigation scope (revised):** (1) Verify "you" matching behavior in the scorer against real corpus stories. (2) Determine whether single-surviving-stopword queries surface retrieval problems in production. (3) Do not design a fix before the -178 stopword scoping question is resolved -- the fix space depends on that answer.
-
----
-
-### MATTGPT-172
-**CIC-cluster consolidation: 2019-2023 corpus density causes cluster-drift dominance on broad queries**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Action
-- **Logged:** August 8, 2026
-
-**Issue:** 48% of STAR stories are anchored in the 2019-2023 CIC/CloudFirst era. This concentration means any broad query that doesn't trigger entity filtering or narrative mode resolves to whichever CIC-adjacent story is densest for that query's vocabulary. The problem is structural: MATTGPT-094 (closed) documented CIC dominating broad management queries in May 2026, and MATTGPT-169 documents "Why Hire Matt" (CIC-evidence-heavy) dominating career-shaped queries in August 2026. The dominant story changes as the corpus shifts, but the root cause is constant.
-
-**Proposed action:** Audit the CIC-era story set for semantic redundancy. Stories that cover the same competency (e.g., team leadership, stakeholder management, delivery at scale) at the same client with similar vocabulary are competing rather than complementing. Options: (a) merge redundant stories into a single richer story with a broader evidence base; (b) differentiate vocabulary so each story occupies a distinct retrieval niche; (c) explicitly add pre-2005 and 2005-2013 era stories to reduce the CIC fraction (already tracked in MATTGPT-079 as a coverage gap). Options compose.
-
-**Scope clarification:** This is a corpus-composition action, not a retrieval tuning ticket. Do not address by changing W_KW, diversification parameters, or retrieval logic -- the density is the underlying variable. Retrieval tuning on a dense corpus produces MATTGPT-094's whack-a-mole outcome.
-
-**Cross-references:** MATTGPT-094 (closed -- documented the CIC dominance pattern and whack-a-mole diagnosis), MATTGPT-169 (positioning-story attractor, same root cause), MATTGPT-079 (pre-2005 corpus gap -- adding early-career stories is one consolidation lever).
-
----
-
-### MATTGPT-173
-**Role Match JD validation: no defined behavior for malformed or atypical JD inputs**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Issue
-- **Logged:** August 8, 2026
-
-**Issue:** Role Match's JD intake has no validation layer. The pipeline assumes a well-formed JD with requirements, qualifications, and role context. Observed failure modes and undefined behaviors:
-
-- **Comp-only JDs or JDs leading with salary ranges:** MATTGPT-099 (closed as Decided Against) established that the chatbot handles comp decline correctly. The Role Match assessment path is separate -- behavior on a JD where comp dominates the text is unverified. May silently drop, hallucinate a match, or emit a confusing assessment.
-- **Extremely short JDs:** A one-paragraph job post has insufficient signal for the extractor. Current behavior on extraction failure is unverified.
-- **Non-JD input:** Pasting a company overview, a recruiter note, or a requirements doc instead of a JD. Extractor may return requirements; assessment may proceed with misleading output.
-
-**Investigation first:** Before designing validation, run the three failure-mode inputs (comp-heavy JD, short JD, non-JD text) through the current pipeline and document actual behavior. The fix depends on what the pipeline does, not what it's assumed to do.
-
-**Fix shape (after investigation):** Likely a pre-extraction validation gate that checks minimum text length, presence of requirement-shaped language, and optionally warns the user if comp-only content is detected. Should not silently proceed with an extraction the gate suspects is malformed.
-
-**Cross-references:** MATTGPT-089 (location/work-model/availability parsing -- adjacent input-handling gap), MATTGPT-099 (closed DA -- comp handling on chatbot side; Role Match side is distinct).
-
----
-
-### MATTGPT-174
-**Confidence gate mislabels low-signal pools -- noise-floor pools clear CONFIDENCE_HIGH and print "high"**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Defect/Design
-- **Files:** `config/constants.py` (CONFIDENCE_HIGH, CONFIDENCE_LOW), `rag_service.py` (gate logic -- verify coupling note below before touching)
-- **Related:** MATTGPT-162 (null-vector / embedding exception mislabeled -- same orbit)
-- **Logged:** August 11, 2026
-
-**Issue:** RAG confidence labels answer "is there any signal at all" (noise-floor gate) but present to the user as match strength. `CONFIDENCE_HIGH = 0.25` in `config/constants.py` was calibrated to filter phantom-similarity noise; corpus evidence puts genuinely strong matches at 0.4–0.6. A flat noise-band pool where every story scores 0.20–0.29 clears the bar and the UI prints "high." The label is technically accurate by the gate's own standard and misleading by the user's reasonable interpretation.
-
-**Evidence, three cases:**
-
-1. **"I do, we do, you do"** (August 11, 2026): top_score 0.260, gated as high. Target story absent from top 10. Pool flat; nothing in the pool is actually relevant.
-
-2. **"Matt?" step-A probe** (August 11, 2026): top_score 0.291, gated as high. Pool flat 0.20–0.29. 5 of 10 pool hits and 4 of 7 LLM stories self-referential Independent Project stories. Router scored 0.797 valid (family=background) -- router measures on-topic-ness; a bare name is maximally on-topic with zero retrievable intent. The confidence gate is the only downstream protection and it does not fire.
-
-3. **MATTGPT-162 null-vector shape**: existing ticket; same gate-clears-on-noise failure mode, different upstream cause.
-
-**Coupling note (verify in `rag_service.py` from debug output before any fix, not from source reasoning):** The gate reads the pc component of the blend-chosen lead story. Keyword score never enters the gated number directly, but kw elects which story's pc gets evaluated -- "Matt?" demonstrates this: why-hire-matt leads on kw=1.0 (single-token query trivially maxes keyword overlap), and the gate reads its 0.291 pc. Confirm this coupling is still the live behavior before designing around it.
-
-**Inherited obligation from MATTGPT-157 step 4 (August 11, 2026):** MATTGPT-157's method included a step 4: "Re-check confidence-band calibration: `CONFIDENCE_HIGH=0.25` was tuned for pc-only; adding a kw term shifts blended scores up." That step was never completed before -157 was closed. The obligation passes to -174.
-
-Two models conflict and cannot both be operative: -157's step 4 assumes the gate reads the blended score (so W_KW raising blended values shifts what the gate sees). This ticket's coupling note assumes the gate reads the pc component only (so W_KW cannot shift the gated value -- it only elects which story's pc is gated). These are incompatible. This ticket's model is better evidenced (from observed debug output). If it is confirmed from `rag_service.py`, the step 4 calibration obligation dissolves: W_KW re-enable does not shift gated values, and no recalibration is needed from that source. The broader calibration audit this ticket already calls for (from eval suite distributions) covers the threshold question independently.
-
-**Design direction (not a spec -- calibrate from eval suite, no numbers in the ticket):** Two-factor gate using absolute bands first, distribution gap consulted only in the ambiguous middle band.
-
-- Calibration constraint the bands must satisfy: database query pool (0.32–0.3886, genuinely bad match) and enablement pool (0.51–0.5643, genuinely good match) show that score bunching alone does not distinguish quality; the floor's placement between those regimes must come from data. Calibrate from the eval suite's 70 logged score distributions, not from the three evidence cases above.
-- The ambiguous middle band (between the noise floor and the genuine-match floor) is where distribution gap adds signal -- a tightly bunched mid-band pool with no clear leader is a different confidence picture than the same mean score with one clear outlier.
-- Do not move the numbers before running the calibration pass. Moving CONFIDENCE_HIGH without a distribution audit risks false rejections on legitimate niche queries.
-
-**Evidence provenance:** Cases 1 and 2 surfaced during MATTGPT-077 Phase 1 step-A probe session (August 11, 2026). See -077 Step A probe results note for retrieval and router details.
-
-**Cross-references:** MATTGPT-162 (same gate orbit, embedding-exception upstream cause), MATTGPT-077 (step-A probe session -- evidence provenance), MATTGPT-171 (phrase-aware matching -- "I do, we do, you do" is Case 1's query).
-
----
-
-### MATTGPT-175
-**W_KW trace payload reports 0.0 while ranking runs at 0.15 -- lying instrument invalidates weight annotations in probe and eval records**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Bug
-- **Files:** `services/pinecone_service.py` (lines 97-98, 281), `config/constants.py`, `utils/scoring.py`
-- **Logged:** August 11, 2026
-
-**Issue:** `pinecone_service.py` imports `_hybrid_score` from `utils.scoring` (line 19) and calls it at line 316 with no weight arguments. The function picks up its defaults -- W_PC=1.0, W_KW=0.15 -- from `utils/scoring.py`. That is the live blend.
-
-Lines 97-98 define module-local constants W_PC=1.0 and W_KW=0.0. Line 281 emits these into a trace/debug payload as `{"W_PC": W_PC, "W_KW": W_KW}`. The payload reports keyword weighting is off; the ranking one line later runs it at 0.15. The instrument lies.
-
-**Arithmetic proof (Fiserv trace, August 11):** pc=0.580, kw=0.667, blend=0.680. `0.580 + 0.15 × 0.667 = 0.680` exactly. The live path used 0.15. The trace payload reported 0.0.
-
-**What is proven:** Line 281 emits the module-local pair (W_KW=0.0) into the trace payload. Line 316 blends using the imported `_hybrid_score` defaults (W_KW=0.15). These are two different values for the same conceptual weight, in the same module, three lines apart.
-
-**What is unverified:** Whether the E1-E4 pre-registered experiment or the eval suite consumed the trace payload's `weights` key and used it for anything beyond display. If they did, weight annotations in those records are wrong while rank flips remain real (rank comes from actual ranking, not from the reported weight). If they did not, the defect is confined to the trace payload itself. Verify before concluding the experiment record is corrupted.
-
-**Violation:** `config/constants.py` opens with "NEVER duplicate these values in other files." W_PC and W_KW are not in `constants.py`; they are in `utils/scoring.py` as defaults. The module-local copies in `pinecone_service.py` are the duplication the rule was written to prevent, and they diverged silently.
-
-**Fix:** Three steps, in order:
-1. Add W_PC and W_KW to `config/constants.py` as the single authoritative source.
-2. Update `utils/scoring.py` to import W_PC and W_KW from `constants.py` rather than defining them as defaults.
-3. Delete `pinecone_service.py` lines 97-98. Line 281's trace payload then reads whatever `constants.py` holds and will be accurate.
-
-No behavior change to ranking. The fix corrects the instrument, not the weight.
-
-**Before fixing:** Verify whether any probe harness (probe_077_stepA.py or similar) reads the `weights` key from the trace payload and uses it for anything other than display. If so, the harness results carry wrong weight metadata and should be re-annotated.
-
----
-
-### MATTGPT-176
-**Dead code: zero-caller function, 200-line commented block, duplicate typed-alias map**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Refactor
-- **Files:** `ui/pages/ask_mattgpt/utils.py` (line 237), `ui/pages/ask_mattgpt/backend_service.py` (lines 1044-1243, 1412-1421), `ui/pages/ask_mattgpt/conversation_view.py` (line 305)
-- **Logged:** August 11, 2026
-
-**Three items -- work independently, ship together or separately:**
-
-1. **Dead function:** `push_card_snapshot_from_state` at `utils.py:237` has zero callers. Confirmed via grep. Remove the function and any imports that exist solely for it.
-
-2. **Commented-out legacy block:** `_generate_agy_response` at `backend_service.py:1044-1243` -- 200 lines of legacy response-generation logic, commented out. Survived the `6cba8d9` cleanup pass that removed 430 similar lines from the same file. Note for whoever picks this up: `6cba8d9` claimed to have cleared this class of commented-out legacy code; this block's survival was not intentional, it was missed. Remove. If git history is needed, it is in the commit log; commented-out code in a live module is not a backup strategy.
-
-3. **Duplicate typed-alias map:** `backend_service.py:1412-1421` contains a typed-alias map independent of the one at `conversation_view.py:305`. Two implementations of the same feature with no documented reason for divergence. Before removing either copy: (a) confirm both maps are identical in content; if they differ, the divergence is a separate bug to file. (b) Identify which call path uses which copy and make `conversation_view.py:305` the canonical one, or document why the backend copy must exist.
-
-**Note on `_format_narrative`:** An earlier claim in this investigation that `_format_narrative` output "poisons every query" was retracted. Verified: `_format_narrative` feeds `answer_context`, used only at `backend_service.py:1041`, the API-failure fallback path. It does not enter the LLM prompt on normal query paths. No ticket warranted; noted here for provenance since the retraction happened in the same investigation session.
-
----
-
-### MATTGPT-177
-**token_overlap_ratio bound violation -- repeated in-vocab tokens inflate ratio above 1.0; docstring example independently wrong**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Bug
-- **File:** `utils/validation.py` (last two lines of `token_overlap_ratio`)
-- **Failing test:** `tests/unit/test_scoring_contracts.py::test_token_overlap_ratio_stays_within_unit_interval` (failing by design -- pre-registers the expected fix)
-- **Logged:** August 11, 2026
-
-**Issue:** `hits = sum(1 for t in toks if t in vocab)` iterates the non-deduped token list. Dividing by `max(1, len(set(toks)))` dedupes the denominator but not the numerator. Any repeated in-vocab token inflates the ratio above the documented [0.0, 1.0] range.
-
-**Verified:**
-- `token_overlap_ratio("aws aws aws", {"aws"})` returns 3.0
-- `token_overlap_ratio("platform platform", {"platform"})` returns 2.0
-
-**Docstring bug (independent of the bound violation):** The docstring's third example documents `"platform and some unrelated words"` as returning 0.5. Actual return value is 0.25. The docstring is wrong regardless of which bug is fixed first.
-
-**Fix (two edits, ship together):**
-1. Change the numerator to dedupe before counting: `sum(1 for t in set(toks) if t in vocab)`. The denominator `len(set(toks))` is then consistent with the numerator and the ratio stays within [0.0, 1.0].
-2. Correct the docstring's third example: `"platform and some unrelated words"` is documented as 0.5, actual return is 0.25. The input has no repeated tokens (4 unique non-stopword tokens, 4 total), so the fix cannot change this result -- 0.25 is correct unconditionally. Write 0.25 into the docstring directly.
-
-**Severity gate (verify before closing):** Grep all callers of `token_overlap_ratio`. If any caller gates on a value near 1.0 (e.g., `if ratio > 0.8: reject`), an inflated ratio passes a gate it shouldn't. That would upgrade severity from Medium to High. If no caller thresholds against a near-1.0 value, the defect is a correctness issue without a confirmed downstream behavioral consequence.
-
-**Cross-references:** MATTGPT-178 (tokenizer divergence in the same function -- fix both together; they interact at the character-class level before this arithmetic runs).
-
----
-
-### MATTGPT-178
-**Tokenizer divergence in utils/validation.py -- _tokenize and token_overlap_ratio split on different character sets, undercounting technical-term overlap**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Bug
-- **File:** `utils/validation.py`
-- **Related:** MATTGPT-157 (closed -- specific-term query swamping; same term class affected here), MATTGPT-177 (bound violation in the same function)
-- **Logged:** August 11, 2026
-
-**Issue:** Two tokenizers in the same module disagree on symbol-bearing characters.
-
-- `_tokenize` uses `_WORD_RX = [A-Za-z0-9+#\-_.]+` -- keeps `+`, `#`, `-`, `.` as word characters.
-- `token_overlap_ratio` uses `re.split(r"[^\w]+")` where `\w = [A-Za-z0-9_]` -- those same characters become separators.
-
-**Verified divergence:**
-
-| Input | `_tokenize` output | `token_overlap_ratio` tokens |
-|---|---|---|
-| `c++` | `['c++']` | `[]` |
-| `.net` | `['.net']` | `['net']` |
-| `node.js` | `['node.js']` | `['node']` |
-| `ci/cd` | `[]` | `[]` |
-
-**Retrieval consequence:** If the vocab is built with `_tokenize` (as the docstring at line 199 states), symbol-bearing technical terms exist in the vocab in a form `token_overlap_ratio` can never produce. Overlap is systematically undercounted for exactly the technical vocabulary the scorer exists to recognize -- `c++`, `.net`, `node.js`, and similar terms contribute zero overlap regardless of their presence in the story. This is the same term class MATTGPT-157 diagnosed as getting swamped in retrieval.
-
-**Unverified prerequisite (verify before fixing):** Confirm that `initialize_vocab` actually builds the vocab using `_tokenize`. The docstring asserts this; the function itself was not read during this investigation. The answer determines which tokenizer is the wrong one: if vocab is built with `_tokenize`, fix `token_overlap_ratio` to use the same regex. If vocab is built with `re.split(r"[^\w]+")`, fix `_tokenize` (and accept that `c++` becomes `['c']`).
-
-**Additional finding (note -- may warrant a separate ticket):** `_STOPWORDS` is defined in this module and used only by `token_overlap_ratio`, not by `_tokenize`. As a result, the keyword scorer treats "how," "you," and other stopwords as content tokens when building the overlap. Whether this is a defect or intended behavior depends on the scorer's design intent. If `_STOPWORDS` was meant to apply to all tokenization in this module, that's a third bug here. If it was intentionally scoped to `token_overlap_ratio` only, document that intent explicitly so future editors don't "fix" it.
-
----
-
-### MATTGPT-179
-**formatting.py dead formatters -- both entrances orphaned, phantom schema in unreachable code; consider folding into MATTGPT-176**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Refactor
-- **Logged:** August 11, 2026
-
-**Issue:** Both entrances to `formatting.py`'s formatter functions are confirmed orphaned:
-
-- Typed alias map at `conversation_view.py:305-312`: originates in the September 2025 monolith, carried through modularization with no design intent. Not reachable by any user-facing path.
-- Deep Dive pill at `conversation_helpers.py:395`: does not render in the UI. Confirmed by inspection August 11, 2026.
-
-Nothing a visitor can reach exercises `_format_narrative`, `_format_key_points`, or `_format_deep_dive`. These are dead code.
-
-**Consider folding into MATTGPT-176** (dead code bundle). They are separate only because the phantom schema finding adds context about what the correct fields are, preserved below in case this code is ever revived.
-
-**Schema mapping (verified August 11, 2026 against corpus):**
-
-| Code field | JSONL field | Type |
-|---|---|---|
-| `why` | `Purpose` | str |
-| `how` | `Process` | list |
-| `what` | `Performance` | list |
-| `title` | `Title` | str |
-| `client` | `Client` | str |
-| `star.situation` | `Situation` | list |
-| `star.task` | `Task` | list |
-| `star.action` | `Action` | list |
-| `star.result` | `Result` | list |
-
-All list fields are already lists in the JSONL. The mismatch is field naming only, not structure.
-
-**`story_has_metric` / `has_metric` filter:** `story_has_metric` is a function in `formatting.py` that reads `s.get("what")` and `s.get("star", {}).get("result")` -- both phantom field names. The JSONL carries `Performance` and `Result`. The function returns False for every story regardless of content. If this code is ever revived and field names are corrected, `story_has_metric` reads `Performance` and `Result` and the filter works with no further change.
-
-**Severity correction for `_format_narrative` (do not escalate):** `_format_narrative` output feeds `answer_context`, used only at `backend_service.py:1041` -- the API-failure fallback path. It does not enter the LLM prompt on normal query paths. An earlier claim that it "poisons every query" was retracted and verified false. The orphaned-entrances finding above is the correct framing.
-
-**Stale assertions and docstrings from f5641e7 (August 8 W_KW re-enable):**
-- Four assertions in `test_scoring.py` are currently failing (red since August 8): `test_default_weights_use_semantic_only` (got 0.89, expected 0.8), `test_handles_none_pc_score` (got 0.09, expected 0.0), `test_handles_invalid_pc_score_type` (got 0.075, expected 0.0), `test_default_weights_favor_semantic` (got 0.15, expected 0.0). These assert against blend values computed at W_KW=0.0 and have not been updated for W_KW=0.15.
-- The Returns block and Example block in `_hybrid_score` (`utils/scoring.py`) are stale -- they document the 0.0/1.0 defaults. The Args line was already fixed by f5641e7. Update Returns and Example to reflect 0.15/1.0 and the constants.py sourcing (pending MATTGPT-175's fix).
-
-**Work items:**
-1. Delete `formatting.py` formatter functions (or fold entire ticket into MATTGPT-176).
-2. Update the four failing `test_scoring.py` assertions for W_KW=0.15. Update Returns and Example block in `_hybrid_score`.
-
----
-
-### MATTGPT-180
-**Test fixture blind spot: test_formatting.py, test_filters.py, test_scoring.py:85 pass against phantom schema**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Bug
-- **Logged:** August 11, 2026
-
-**Issue:** Three test files build fixtures using the phantom field names (`why`, `how`, `what`, `star.situation`, etc.) rather than the verified JSONL schema (`Purpose`, `Process`, `Performance`, `Situation`, etc.). Because the tests operate on their own in-memory dicts, they pass against the phantom schema with no coverage of the actual data the production code reads.
-
-Specific location: `test_scoring.py:85` constructs a fixture dict using phantom field names. `test_formatting.py` and `test_filters.py` do the same throughout.
-
-**Why this matters:** This is not a cleanup item. It is the reason the `formatting.py` phantom schema defect was invisible -- a passing test suite is meaningless if the fixtures do not match production data shape. Any refactor or fix that passes these tests is unverified.
-
-**Recurrence prevention rule:** Story fixtures must be built by calling `load_star_stories()` (or an equivalent helper that reads from `data/echo_star_stories_nlp.jsonl`) and selecting by index, Client, Domain, or Era. Inline fixture dicts built from field names guessed from code are not valid. This rule applies to all three files and any future test file that handles story objects.
-
-**Work items:**
-1. Rebuild fixtures in `test_formatting.py`, `test_filters.py`, and `test_scoring.py:85` using `load_star_stories()`.
-2. Confirm previously-passing tests still pass after fixture replacement (a test that breaks on correct fixtures was never actually testing the thing it claimed to test -- investigate each failure before discarding).
-
----
-
-### MATTGPT-181
-**Early-career story slate: Well Found / F-22, Lockheed Martin STRATCOM, Cendian B2B/EDI -- closes pre-2005 corpus gap**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Action (story-writing)
-- **Logged:** August 12, 2026
-- **Parent ticket:** MATTGPT-079 (coverage gaps meta)
-
-**Issue:** The corpus currently starts at 2005 (Solution Architect level). Role Match assessments against requirements like "10+ years professional software development experience" return partial matches because no STAR story anchors the 1997-2005 individual-contributor period. Decision is (a) new STAR stories, not resume or LinkedIn fix. This is committed work with drafts pending.
-
-**Record scope:** Starts at 2000 by Matt's ruling, which extends the 1997-2005 framing from the 2005 resume. No de-aging; the history is the pitch. Drafts from Matt's firsthand account with the 2005 resume as evidence backbone.
-
-**Three-item slate (drafts pending):**
-1. Well Found Technology / F-22 origin -- early-career anchor; aerospace / defense context.
-2. Lockheed Martin STRATCOM -- carries the 2002 TDD and pairing conviction; foundational engineering philosophy thread.
-3. Cendian B2B/EDI -- Norfolk Southern ancestor; supply chain / B2B integration thread.
-
-Adjunct-professor work folds in; placement TBD after drafts surface.
-
-**Work:** Write three STAR drafts from Matt's firsthand account, cross-referenced against the 2005 resume. Before ingestion, verify each draft against the full JSONL authoring schema by reading an existing story from `data/echo_star_stories_nlp.jsonl` -- the authoring schema includes fields like `5PSummary`, `Competencies`, `Theme`, `Era`, and `public_tags` that the -179 code-to-JSONL mapping does not cover. Do not use the -179 table as the authoring spec; it is a formatter code translation, not an ingestion checklist.
-
-**Cross-references:**
-- **MATTGPT-079** -- coverage gaps meta; pre-2005 gap tracked there as `[Decided]`
-- **MATTGPT-022** -- Data Quality Cleanup Journey (sibling story-writing ticket pattern)
-- **MATTGPT-078** -- AI Enablement Before It Had a Name (sibling story-writing ticket)
-
----
-
-### MATTGPT-182
-**Eval and probe harnesses bypass loader normalization -- public_tags reaches scorer as str, contributing zero keyword tokens in every measurement run**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Bug
-- **Logged:** August 12, 2026
-
-**Issue:** `echo_star_stories_nlp.jsonl` stores `public_tags` as a comma-separated string (verified: type str on schema dump, August 11). `app.py`'s `load_star_stories()` parses it to a list at lines 239-240 via `_split_tags()` before any story reaches the retrieval stack. The app path is correct.
-
-`tests/eval_rag_quality.py` (lines 1328, 1769, 1862) and the four probe scripts (`probe_077_step0.py`, `probe_077_step05.py`, `probe_077_stepA.py`, `probe_assessor.py`) load the corpus with raw `json.loads` and never apply that normalization. All four call `rag_answer()` directly, which reaches `semantic_search` -> `_hybrid_score` -> `_keyword_score_for_story`. In `_keyword_score_for_story`, `' '.join()` over a string character-separates it. Every resulting token fails the `len >= 3` filter in `_tokenize`. `public_tags` contributes zero keyword tokens in every eval and probe run, while contributing normally in the app.
-
-**Verified by direct A/B on the live functions (August 11):** identical story, identical query. Raw dict scores 0.25, loader-normalized dict scores 0.375. Behavior unchanged since 764252b (October 2025).
-
-**Consequence -- the measurement record, not production:**
-- Production is correct. No visitor-facing defect. Do not escalate on that basis.
-- Every probe number and eval score on record was computed with one of nine haystack fields dark, against a production path where it is live.
-- The 64/64 eval run (August 11) is internally consistent and valid as a regression check, but is not measuring the production scorer.
-- MATTGPT-077's Step 0 re-baseline (August 11) has the same property. "P5/P8 still LEAD" was determined tags-dark. Whether they lead in production is unmeasured.
-- f5641e7 calibrated W_KW=0.15 on E1-E4 evidence from this path. The rank flips were real but occurred in a tags-dark regime. Whether 0.15 is right when tags contribute is untested.
-
-**Fix:** Extract `_split_tags()` and `_ensure_list()` from `app.py` into a shared loader that `app.py`, `eval_rag_quality.py`, and all four probes call. Do not duplicate the normalization into each script -- that recreates the same drift in five places.
-
-**Exit criterion:** After the fix, re-run the eval suite and MATTGPT-077 Step 0. Numbers will move. This is instrument correction, not regression. Do not compare results across the fix boundary; establish a new baseline and treat prior probe and eval numbers as belonging to a different regime.
-
-**Blocks:** MATTGPT-077 Phase 2. The cluster cull / rewrite path is scoped against a P5/P8 determination from the miscalibrated instrument. Re-measure before scoping that work.
-
-**Related:** MATTGPT-180 (test fixture blind spot -- same root cause, different surface: fixtures that do not come from the loader).
-
----
