@@ -6,7 +6,6 @@ unsynced (SYNTHESIS_THEMES=[]), reproducing the genuine crash condition
 observed in the inline diagnostic harness.
 """
 
-import json
 import sys
 from pathlib import Path
 from unittest.mock import MagicMock, patch
@@ -22,6 +21,8 @@ if "streamlit" not in sys.modules:
     sys.modules["streamlit"] = _st_mock
     sys.modules["streamlit.components"] = MagicMock()
     sys.modules["streamlit.components.v1"] = MagicMock()
+
+from utils.corpus_loader import load_stories  # noqa: E402
 
 scenarios("../features/synthesis_guard.feature")
 
@@ -60,7 +61,7 @@ def ctx():
 
 @given("stories are loaded for the synthesis guard test")
 def given_stories(ctx):
-    ctx["stories"] = [json.loads(line) for line in open("echo_star_stories_nlp.jsonl")]
+    ctx["stories"] = load_stories("echo_star_stories_nlp.jsonl")
 
 
 @given("portfolio theme metadata is empty")

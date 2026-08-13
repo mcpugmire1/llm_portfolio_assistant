@@ -1,6 +1,5 @@
 """Debug trace: run a single query through the full RAG pipeline with verbose logging."""
 
-import json
 import sys
 from pathlib import Path
 from unittest.mock import MagicMock, patch
@@ -12,20 +11,11 @@ import config.debug
 
 config.debug.DEBUG = True
 
+from utils.corpus_loader import load_stories  # noqa: E402
+
 # Mock Streamlit
 mock_st = MagicMock()
 mock_st.session_state = {}
-
-
-def load_stories():
-    """Load story corpus from JSONL file."""
-    story_path = Path(__file__).parent.parent / "echo_star_stories_nlp.jsonl"
-    stories = []
-    with open(story_path) as f:
-        for line in f:
-            if line.strip():
-                stories.append(json.loads(line))
-    return stories
 
 
 def trace_query(query: str):
@@ -43,7 +33,9 @@ def trace_query(query: str):
                     sync_portfolio_metadata,
                 )
 
-                stories = load_stories()
+                stories = load_stories(
+                    str(Path(__file__).parent.parent / "echo_star_stories_nlp.jsonl")
+                )
                 print(f"[1] Loaded {len(stories)} stories")
 
                 # Sync SYNTHESIS_THEMES and MATT_DNA from story data

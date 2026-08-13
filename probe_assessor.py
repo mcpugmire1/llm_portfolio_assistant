@@ -40,6 +40,7 @@ from services.pinecone_service import (
     _extract_match_fields,
     _init_pinecone,
 )
+from utils.corpus_loader import load_stories
 
 load_dotenv()
 
@@ -85,14 +86,7 @@ DATABASE_DETAIL_TERMS = [
 
 
 def _load_corpus() -> dict:
-    corpus = {}
-    with open(STORIES_JSONL) as f:
-        for line in f:
-            s = json.loads(line)
-            sid = s.get("id")
-            if sid:
-                corpus[str(sid)] = s
-    return corpus
+    return {s["id"]: s for s in load_stories(str(STORIES_JSONL))}
 
 
 def _retrieve_candidates(idx, query: str, corpus: dict) -> list:

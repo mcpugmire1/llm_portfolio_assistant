@@ -1,38 +1,21 @@
 """Contract tests for properties claimed by scoring, validation, formatting, and filter docstrings."""
 
+from utils.corpus_loader import normalize_story
 from utils.filters import matches_filters
 from utils.formatting import story_has_metric
 from utils.scoring import _hybrid_score
 from utils.validation import token_overlap_ratio
 
 # ---------------------------------------------------------------------------
-# Fixture helpers -- replicate load_star_stories() normalization from app.py
+# Fixture helpers -- normalization now delegates to the shared corpus loader
 # ---------------------------------------------------------------------------
-
-
-def _ensure_list(v):
-    if v is None:
-        return []
-    if isinstance(v, list):
-        return [x for x in v if str(x).strip()]
-    return [str(v)] if str(v).strip() else []
-
-
-def _split_tags(s):
-    if not s:
-        return []
-    if isinstance(s, list):
-        return [str(x).strip() for x in s if str(x).strip()]
-    return [t.strip() for t in str(s).split(",") if t.strip()]
 
 
 def _normalized_story():
     """Return a story dict shaped the way load_star_stories() produces it.
 
-    Applies the same two normalization steps from app.py: list fields coerced
-    via _ensure_list(), public_tags parsed from comma-separated string via
-    _split_tags(). No synthetic keys added; shape matches what production
-    stories look like after the loader runs.
+    Delegates normalization to normalize_story() from utils.corpus_loader so
+    that this fixture stays in sync with app.py automatically.
     """
     raw = {
         "id": "test-001",
@@ -43,7 +26,7 @@ def _normalized_story():
         "Industry": "Financial Services",
         "Solution / Offering": "Cloud Migration",
         "Era": "Accenture",
-        # Raw string form -- _ensure_list normalizes to list
+        # Raw string form -- normalize_story coerces to list
         "Performance": "Reduced latency by 60%",
         "Process": "Migrated core services to AWS",
         "Situation": None,
@@ -52,25 +35,12 @@ def _normalized_story():
         "Result": None,
         "Competencies": None,
         "Use Case(s)": None,
-        # Comma-separated string -- _split_tags parses to list
+        # Comma-separated string -- normalize_story parses to list
         "public_tags": "cloud,aws",
     }
     story = dict(raw)
     story["id"] = str(story["id"]).strip()
-    for field in (
-        "Situation",
-        "Task",
-        "Action",
-        "Result",
-        "Process",
-        "Performance",
-        "Competencies",
-        "Use Case(s)",
-    ):
-        if field in story:
-            story[field] = _ensure_list(story[field])
-    if isinstance(story.get("public_tags"), str):
-        story["public_tags"] = _split_tags(story["public_tags"])
+    normalize_story(story)
     return story
 
 

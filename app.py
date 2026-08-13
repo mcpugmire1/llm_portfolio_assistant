@@ -26,6 +26,7 @@ from ui.components.navbar import render_navbar
 # Local imports - components
 from ui.pages.home import render_home_page
 from ui.styles.global_styles import apply_global_styles
+from utils.corpus_loader import normalize_story
 
 # =========================
 # UI — Home / Stories / Ask / About
@@ -166,22 +167,6 @@ if DEBUG:
 DATA_FILE = os.getenv("STORIES_JSONL", "echo_star_stories_nlp.jsonl")  # optional
 
 
-def _ensure_list(v):
-    if v is None:
-        return []
-    if isinstance(v, list):
-        return [x for x in v if str(x).strip()]
-    return [str(v)] if str(v).strip() else []
-
-
-def _split_tags(s):
-    if not s:
-        return []
-    if isinstance(s, list):
-        return [str(x).strip() for x in s if str(x).strip()]
-    return [t.strip() for t in str(s).split(",") if t.strip()]
-
-
 def load_star_stories(path: str):
     """Load JSONL records as-is, preserving all fields from source data.
 
@@ -221,23 +206,7 @@ def load_star_stories(path: str):
             # Ensure id is a string
             story["id"] = str(story_id).strip()
 
-            # Normalize list fields (accept strings or arrays) - this is data cleaning, not business logic
-            for field in [
-                "Situation",
-                "Task",
-                "Action",
-                "Result",
-                "Process",
-                "Performance",
-                "Competencies",
-                "Use Case(s)",
-            ]:
-                if field in story:
-                    story[field] = _ensure_list(story[field])
-
-            # Parse public_tags from comma-separated string to list - this is data cleaning
-            if "public_tags" in story and isinstance(story["public_tags"], str):
-                story["public_tags"] = _split_tags(story["public_tags"])
+            normalize_story(story)
 
             stories.append(story)
 

@@ -29,6 +29,7 @@ import pytest
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from config.constants import META_COMMENTARY_PATTERNS
+from utils.corpus_loader import load_stories  # noqa: E402
 
 # =============================================================================
 # CONSTANTS - Imported from config/constants.py
@@ -1317,16 +1318,9 @@ def evaluate_query(
 @pytest.fixture(scope="module")
 def stories():
     """Load story corpus."""
-    import json
-    from pathlib import Path
-
-    story_path = Path(__file__).parent.parent / "echo_star_stories_nlp.jsonl"
-    stories = []
-    with open(story_path) as f:
-        for line in f:
-            if line.strip():
-                stories.append(json.loads(line))
-    return stories
+    return load_stories(
+        str(Path(__file__).parent.parent / "echo_star_stories_nlp.jsonl")
+    )
 
 
 @pytest.fixture(scope="module")
@@ -1756,17 +1750,13 @@ def generate_report(results: list[EvalResult]) -> dict:
 
 def run_full_evaluation() -> dict:
     """Run full evaluation suite and return report."""
-    import json
     from pathlib import Path
     from unittest.mock import MagicMock, patch
 
     # Load stories
-    story_path = Path(__file__).parent.parent / "echo_star_stories_nlp.jsonl"
-    stories = []
-    with open(story_path) as f:
-        for line in f:
-            if line.strip():
-                stories.append(json.loads(line))
+    stories = load_stories(
+        str(Path(__file__).parent.parent / "echo_star_stories_nlp.jsonl")
+    )
 
     print(f"Loaded {len(stories)} stories")
 
@@ -1849,17 +1839,13 @@ def run_surgical_diagnostics():
 
     Captures Intent Family, Detected Entity, and Retrieval Confidence for each query.
     """
-    import json
     from pathlib import Path
     from unittest.mock import MagicMock, patch
 
     # Load stories
-    story_path = Path(__file__).parent.parent / "echo_star_stories_nlp.jsonl"
-    stories = []
-    with open(story_path) as f:
-        for line in f:
-            if line.strip():
-                stories.append(json.loads(line))
+    stories = load_stories(
+        str(Path(__file__).parent.parent / "echo_star_stories_nlp.jsonl")
+    )
 
     print(f"Loaded {len(stories)} stories")
     print("\n" + "=" * 80)
