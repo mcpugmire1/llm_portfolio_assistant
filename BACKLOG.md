@@ -7,16 +7,14 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 ---
 
-## Value Prioritized Roadmap (updated 2026-08-12)
+## Value Prioritized Roadmap (updated 2026-08-13)
 
 **NOW**
-1. **-182** — Extract shared loader normalization (public_tags). Every eval and probe run has been measuring with public_tags dark; production path is correct. Fix the instrument before any further measurement.
-2. **Re-baseline** — After -182: re-run eval suite and MATTGPT-077 Step 0. Numbers will move; this is instrument correction. Treat all prior probe and eval numbers as a different regime. Gates -077 Phase 2.
-3. **-077 Phase 2** — Cluster cull / rewrite path, now scoped against accurate re-baseline. P5/P8 determination was tags-dark; re-measure before scoping the work.
-4. **-168** — diversify_results picks slot 1 but prompt tells the model it was ranked highest for the question (false on no-entity path). Sits after re-baseline: -077 and -168 compound on the same query, so you want -077's real state before judging how much -168 matters on its own. Independent enough to move earlier if needed -- the false claim is there regardless of which story reached slot 1.
-5. **-181** — Early-career story slate (Well Found / F-22, Lockheed STRATCOM, Cendian B2B/EDI). Parallel corpus work; adds evidence, doesn't reshape retrieval, doesn't block on the measurement thread.
-6. **-129 stories 3-5** — AT&T Mobility, Launchpad AWS, Capital One. Stories 1+2 acceptance criterion met (confirmed August 12, 2026). Stories 3-5 blocked on elicitation.
-7. **-175** — W_KW trace lie: delete stale module-local weights in pinecone_service.py, move to constants.py. Instrument cleanup; pairs with the re-baseline work.
+1. **-077 Phase 2** — Cluster cull / rewrite path. -182 done, re-baseline ran (August 13). Subject substitution disconfirmed as the lever; Phase 2 targets embedding distance.
+2. **-168** — diversify_results picks slot 1 but prompt tells the model it was ranked highest for the question (false on no-entity path). Independent enough to move earlier if needed -- the false claim is there regardless of which story reached slot 1.
+3. **-181** — Early-career story slate (Well Found / F-22, Lockheed STRATCOM, Cendian B2B/EDI). Parallel corpus work; adds evidence, doesn't reshape retrieval, doesn't block on the measurement thread.
+4. **-129 stories 3-5** — AT&T Mobility, Launchpad AWS, Capital One. Stories 1+2 done. Stories 3-5 blocked on elicitation.
+5. **-175** — W_KW trace lie: delete stale module-local weights in pinecone_service.py, move to constants.py. Instrument cleanup.
 
 **NEXT** (queued):
 1. **-015** — JPM Payments IQ differentiation. Cheap data pass; upstream of operational surfacing; feeds cleaner signal for -128.
@@ -31,7 +29,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 10. **-074** — Entity cluster synthesis forcing. "How did you build the CIC" returns a survey instead of depth on a marquee query.
 11. **-096** — Methodology-context preservation. The methodology is what makes the metrics credible to an engineer.
 
-(Everything else defaults to LATER.)
+(Everything else defaults to LATER, including -179, -183.)
 
 ---
 
@@ -113,7 +111,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-180](#mattgpt-180) | Test fixture blind spot: test_formatting.py, test_filters.py, test_scoring.py build on phantom schema and pass against it | Open | High | Bug | August 11, 2026 |
 | [MATTGPT-181](#mattgpt-181) | Early-career story slate (Well Found / F-22, Lockheed STRATCOM, Cendian B2B/EDI) -- closes pre-2005 corpus gap | Open | Medium | Action | August 12, 2026 |
 | [MATTGPT-182](#mattgpt-182) | Eval and probe harnesses bypass loader normalization -- public_tags reaches scorer as str, contributing zero keyword tokens in every measurement run | Open | High | Bug | August 12, 2026 |
-| [MATTGPT-183](#mattgpt-183) | has_metric filter always returns False -- story_has_metric reads phantom field names (what, star.result) instead of Performance, Result | Open | Medium | Bug | August 13, 2026 |
+| [MATTGPT-183](#mattgpt-183) | has_metric filter dead -- nothing in UI sets it to True; remove rather than fix | Open | Low | Refactor | August 13, 2026 |
 
 ---
 
@@ -2103,7 +2101,7 @@ All list fields are already lists in the JSONL. The mismatch is field naming onl
 **Work items:**
 1. Delete the three dead functions from `formatting.py`: `_format_narrative`, `_format_key_points`, `_format_deep_dive`. Do not touch `build_5p_summary` (live -- imported by `utils/scoring.py:11`), `strongest_metric_line` (live -- called by `build_5p_summary` at line 120), or `story_has_metric` (live defect -- see MATTGPT-183). The module stays.
 
-**Sequencing note:** MATTGPT-183 also touches `formatting.py` (fixes `story_has_metric`'s field names). Both tickets edit the same file. Do them in the same commit or ensure -183's fix is applied before -179's deletion pass so the diff is clean. Do not let -179's deletion accidentally remove `story_has_metric`.
+**Sequencing note:** MATTGPT-183 removes the `has_metric` filter branch, which removes `story_has_metric`'s only importer. Once -183 lands, `story_has_metric` in `formatting.py` becomes dead and moves to this ticket's deletion list. Until -183 lands, leave `story_has_metric` alone.
 
 ---
 
@@ -2190,22 +2188,29 @@ Adjunct-professor work folds in; placement TBD after drafts surface.
 ---
 
 ### MATTGPT-183
-**has_metric filter always returns False -- story_has_metric reads phantom field names**
+**has_metric filter dead -- remove rather than fix**
 
 - **Status:** Open
-- **Priority:** Medium
-- **Type:** Bug
+- **Priority:** Low
+- **Type:** Refactor
 - **Logged:** August 13, 2026
 
-**Issue:** `story_has_metric` in `formatting.py` reads `s.get("what")` and `s.get("star", {}).get("result")`. Neither field exists in the JSONL. The corpus carries `Performance` and `Result`. The function returns False for every story regardless of content.
+**Issue:** `has_metric` is initialized to `False` at `explore_stories.py:129` and `:725`, read at `:362` and `:1069`, and cleared at `:411`. Nothing in the UI ever sets it to `True`. The chip at line 362 can never render. The filter key is dead.
 
-`story_has_metric` is imported by `utils/filters.py` and gates the live `has_metric` filter. Any query or filter that sets `has_metric: True` matches nothing. The filter is silently broken.
+`utils/filters.py` imports `story_has_metric` from `formatting.py` to gate this branch. `story_has_metric` reads phantom field names (`what`, `star.result`) and returns False for every story -- but that doesn't matter, because the branch is unreachable regardless. The defect is the dead filter, not the broken function.
 
-**Fix:** In `formatting.py`, change `s.get("what")` to `s.get("Performance")` and `s.get("star", {}).get("result")` to `s.get("Result")`. Two field-name corrections; no structural change.
+**Note -- second story_has_metric:** `ui/pages/ask_mattgpt/utils.py:168` has a sibling implementation that reads `s.get("Performance", [])` correctly. That one is unaffected. `filters.py` imports from `formatting.py`, not from `utils.py`.
 
-**Note:** `story_has_metric` was previously described in MATTGPT-179 as unreachable code. That was wrong -- it is imported and called on the live filter path. MATTGPT-179 is dead formatters; this defect is separate.
+**Fix (removal, not repair):**
+1. Remove the `has_metric` branch from `matches_filters` in `utils/filters.py`.
+2. Remove the chip and clear logic from `explore_stories.py` (lines 362-363, 410-411).
+3. Remove `has_metric` key from both filter initializers (`explore_stories.py:129`, `:725`).
+4. Delete `test_filters.py:116` (tests the dead branch against a phantom-schema fixture; passing tells you nothing).
+5. `story_has_metric` in `formatting.py` then has no importer and becomes dead code -- add it to MATTGPT-179's deletion list.
 
-**Cross-references:** MATTGPT-179 (dead formatters in formatting.py -- both tickets edit the same file; coordinate or combine into one commit; -179 deletes three dead functions but leaves `strongest_metric_line` live, as it is called by `build_5p_summary` at line 120), MATTGPT-180 (test fixture blind spot -- test_filters.py fixtures may not catch this because they use phantom schema).
+**Note -- personas:** `personas` in `filters.py` is already self-documented as dead ("not used -- field doesn't exist in data"). `conversation_helpers.py:121` reads it for badge rendering; the badges never render because the field is absent from corpus stories. Same class; not in scope for this ticket but worth a cleanup pass alongside it.
+
+**Cross-references:** MATTGPT-179 (once -183's removal lands, `story_has_metric` in `formatting.py` becomes dead -- add to -179's deletion list at that point), MATTGPT-180 (test_filters.py:116 is a phantom-schema fixture that should be deleted, not rebuilt).
 
 ---
 
