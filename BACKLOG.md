@@ -112,6 +112,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-181](#mattgpt-181) | Early-career story slate (Well Found / F-22, Lockheed STRATCOM, Cendian B2B/EDI) -- closes pre-2005 corpus gap | Open | Medium | Action | August 12, 2026 |
 | [MATTGPT-182](#mattgpt-182) | Eval and probe harnesses bypass loader normalization -- public_tags reaches scorer as str, contributing zero keyword tokens in every measurement run | Open | High | Bug | August 12, 2026 |
 | [MATTGPT-183](#mattgpt-183) | has_metric filter dead -- nothing in UI sets it to True; remove rather than fix | Open | Low | Refactor | August 13, 2026 |
+| [MATTGPT-184](#mattgpt-184) | ask_mattgpt/utils.py module audit -- six dead functions, four duplicating live helpers elsewhere | Open | Low | Refactor | August 13, 2026 |
 
 ---
 
@@ -2214,9 +2215,38 @@ Adjunct-professor work folds in; placement TBD after drafts surface.
 
 ---
 
+### MATTGPT-184
+**ask_mattgpt/utils.py module audit -- six dead functions, four duplicating live helpers elsewhere**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Refactor
+- **Logged:** August 13, 2026
+
+**Issue:** Verified August 13, 2026 by recursive grep from repo root (excluding venv and archive). Each of the following six functions appears only at its own definition and in `tests/unit/test_utils.py`. No production caller.
+
+| Function | Location | Notes |
+|---|---|---|
+| `choose_story_for_ask` | `utils.py:89` | Dead |
+| `related_stories` | `utils.py:128` | Dead -- not the Related Projects feature. That feature is live in `conversation_helpers.py:629`, built from `sources`/`src_idx`, not this function. |
+| `story_has_metric` | `utils.py:168` | Dead -- reads `Performance` correctly (unlike the `formatting.py` sibling), but has no caller. See MATTGPT-183. |
+| `split_tags` | `utils.py:298` | Dead -- duplicates `utils/corpus_loader._split_tags` (live, see MATTGPT-182) |
+| `slug` | `utils.py:315` | Dead -- duplicates `utils/ui_helpers._slug` (live, called at `:246`). Note: a separate `slugify` function exists twice more (`scripts/utils.py:10`, `generate_jsonl_from_excel.py:65`) -- out of scope here but worth a consolidation pass. |
+| `shorten_middle` | `utils.py:328` | Dead -- duplicates `utils/ui_helpers._shorten_middle` (live, called at `:137`, `:245`) |
+
+Confirmed live, do not delete: `get_context_story`, `story_modes`, `is_empty_conversation`, `ensure_ask_bootstrap`, `push_assistant_turn`, `push_conversational_answer`, `push_user_turn`. Imported by `conversation_view.py:39`, `conversation_helpers.py:18`, `__init__.py:24`.
+
+**Work:** Delete the six dead functions and their corresponding test classes in `tests/unit/test_utils.py`.
+
+**Framing note:** This module was a local grab-bag that was partly superseded as shared helpers moved to `utils/`. The deletion is cleanup; it does not address the accumulation pattern.
+
+**Cross-references:** MATTGPT-180 (tests passing against code production never exercises -- same pattern), MATTGPT-176 (dead code bundle, consider folding), MATTGPT-183 (`story_has_metric` in `formatting.py` becomes fully dead once -183 removes the `has_metric` branch -- unrelated to the sibling in this module).
+
+---
+
 ### Decided Against
 
-> **Read only — do not add blocks here directly.**
+> **Read only -- do not add blocks here directly.**
 > Blocks are moved here from Active Tickets above when a ticket's status changes to Decided Against. New tickets always start in Active Tickets. See CLAUDE.md § Backlog Maintenance for the full lifecycle.
 
 ### MATTGPT-010
