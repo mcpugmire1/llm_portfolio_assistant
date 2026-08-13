@@ -112,6 +112,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-182](#mattgpt-182) | Eval and probe harnesses bypass loader normalization -- public_tags reaches scorer as str, contributing zero keyword tokens in every measurement run | Open | High | Bug | August 12, 2026 |
 | [MATTGPT-183](#mattgpt-183) | has_metric filter dead -- nothing in UI sets it to True; remove rather than fix | Open | Low | Refactor | August 13, 2026 |
 | [MATTGPT-184](#mattgpt-184) | ask_mattgpt/utils.py module audit -- six dead functions, four duplicating live helpers elsewhere | Open | Low | Refactor | August 13, 2026 |
+| [MATTGPT-185](#mattgpt-185) | Query negation unsupported -- "outside of MattGPT" returns MattGPT stories | Open | Medium | Enhancement | August 13, 2026 |
 
 ---
 
@@ -2219,6 +2220,34 @@ Confirmed live, do not delete: `get_context_story`, `story_modes`, `is_empty_con
 **Framing note:** This module was a local grab-bag that was partly superseded as shared helpers moved to `utils/`. The deletion is cleanup; it does not address the accumulation pattern.
 
 **Cross-references:** MATTGPT-180 (tests passing against code production never exercises -- same pattern), MATTGPT-176 (dead code bundle, consider folding), MATTGPT-183 (`story_has_metric` in `formatting.py` becomes fully dead once -183 removes the `has_metric` branch -- unrelated to the sibling in this module).
+
+---
+
+### MATTGPT-185
+**Query negation unsupported -- "outside of MattGPT" returns MattGPT stories**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Enhancement
+- **Logged:** August 13, 2026
+
+**Issue:** Verified August 13, 2026 from query_log_parsed.csv. Three consecutive attempts to steer retrieval away from the Independent Project cluster, all returned MattGPT-led results:
+
+| Query | top_score | spread | Result |
+|---|---|---|---|
+| "Talk to me more about matt's experience in Iterative Development?" | 0.589 | 0.111 | mattgpt_led |
+| "outside of MattGPT, does matt have experience with Iterative Development?" | 0.581 | 0.136 | mattgpt_led |
+| "Do NOT TALK about MattGPT -- but rather tell me about projects where Matt did Iterative Development?" | 0.584 | 0.121 | mattgpt_led |
+
+**Mechanism:** Embeddings do not represent negation. "Do not talk about MattGPT" embeds close to MattGPT content, so escalating the exclusion makes the semantic match stronger, not weaker. No prompt or ranking change can fix this -- the excluded stories are the ones retrieval surfaces.
+
+**Available mechanism:** Pinecone metadata filters support `$ne` and `$nin`. The codebase already builds `$or` entity filters across six fields (ARCHITECTURE.md §entity filtering). An exclusion filter is the same shape inverted. The hard part is detection, not filtering: recognizing "outside of X", "not X", "other than X", "besides X", "excluding X", "aside from X" and resolving X against known entity values. `detect_entity()` already does substring matching against `ENTITY_DETECTION_FIELDS` and `ENTITY_ALIASES`, so the resolution half exists.
+
+**Tension to resolve before building:** This adds a detection layer with a phrase list, which is the pattern the Jan-Feb 2026 simplification work removed (entity gate, `classify_query_intent`, banned phrases -- each removal improved eval). Counter-argument: this changes what retrieval searches rather than correcting retrieval's output, which puts it closer to the entity filter that was kept than the entity gate that was removed. Decide that before scoping the build.
+
+**User impact:** A visitor who notices the portfolio leaning on a side project and tries to redirect gets the same answer, more emphatically, each time they try.
+
+**Cross-references:** MATTGPT-077 (Independent Project / MattGPT vocabulary concentration is why MattGPT dominates these pools in the first place), MATTGPT-172 (CIC consolidation -- reducing Independent Project density is the upstream lever; this ticket handles the explicit-exclusion case).
 
 ---
 
