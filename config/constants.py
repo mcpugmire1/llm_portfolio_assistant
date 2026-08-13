@@ -37,7 +37,11 @@ DEFAULT_EMBEDDING_MODEL = "text-embedding-3-small"  # 1536 dimensions
 
 HARD_ACCEPT = 0.80  # Clearly on-topic, no question
 SOFT_ACCEPT = 0.40  # Accept but log as borderline for review
-# Below SOFT_ACCEPT = router rejects (but search fallback may still work)
+# These are advisory. The router's valid flag does not reject queries:
+# backend_service.py uses it only in is_trusted_behavioral, which can
+# rescue a low-confidence query from the Pinecone gate but never causes
+# a rejection. Explore Stories discards the flag entirely. The only
+# rejection path is CONFIDENCE_LOW below.
 
 # =============================================================================
 # RAG CONFIDENCE THRESHOLDS
