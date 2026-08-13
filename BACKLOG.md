@@ -10,7 +10,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-08-13)
 
 **NOW**
-1. **-186** — slot 1 amplified without regard to margin; tie or near-tie at slot 1 gets 80% of the answer. Exhibits: 0.476 tie (Aug 3), 0.020 gap in 0.054-wide pool (Aug 13). Descended from -168 (closed).
+1. **-168** — slot 1 amplified without regard to margin; tie or near-tie at slot 1 gets 80% of the answer. Exhibits: 0.476 tie (Aug 3), 0.020 gap in 0.054-wide pool (Aug 13). Original premise disconfirmed (Fix A was a no-op); rewritten in place August 13.
 2. **-181** — Early-career story slate (Well Found / F-22, Lockheed STRATCOM, Cendian B2B/EDI). Parallel corpus work; doesn't block on the measurement thread.
 3. **-129 stories 3-5** — AT&T Mobility, Launchpad AWS, Capital One. Stories 1+2 done. Stories 3-5 blocked on elicitation.
 4. **-175** — W_KW trace lie: delete stale module-local weights in pinecone_service.py, move to constants.py. Instrument cleanup.
@@ -18,7 +18,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 **NEXT** (queued):
 1. **-015** — JPM Payments IQ differentiation. Cheap data pass; upstream of operational surfacing; feeds cleaner signal for -128.
 2. **-128** — Source faithfulness. Unlocked. Recruiter clicks to verify a claim, gets wrong source cards -- direct trust failure.
-3. **-077** — Re-measure P5/P8 after -181 corpus additions. Phase 1 shipped (627f6f4). Phase 2 (cluster cull) premise disconfirmed via -172 parking. Phase 3 (BM25) can't reach P5/P8 -- vocabulary mismatch, no stemmer. If -181 changes the pool composition, the problem may partly dissolve; if not, the residual is a vocabulary problem and stemming is the answer.
+3. **-077** — Re-measure P5/P8 after -181 corpus additions. Phase 1 shipped (627f6f4). Phase 2 (MattGPT cluster cull -- 9 stories, 3.8x corpus share -- still the target; distinct from the CIC cull in -172, which was parked). Phase 3 (BM25) can't reach P5/P8 -- vocabulary mismatch, no stemmer. If -181 changes the pool composition, the problem may partly dissolve; if not, Phase 2 scoping proceeds and Phase 3 becomes the vocabulary answer.
 4. **-169** — Positioning-story attractor on career-shaped queries.
 5. **-180** — Test fixture blind spot (test_formatting.py, test_filters.py, test_scoring.py).
 6. **-161** — Career span hardcoded across surfaces.
@@ -27,7 +27,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 9. **-074** — Entity cluster synthesis forcing. "How did you build the CIC" returns a survey instead of depth on a marquee query.
 10. **-096** — Methodology-context preservation. The methodology is what makes the metrics credible to an engineer.
 
-(Everything else defaults to LATER, including -179, -183.)
+(Everything else defaults to LATER, including -179, -183, -184.)
 
 ---
 
@@ -95,7 +95,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-165](#mattgpt-165) | nonsense_filters.jsonl has two live generations — gen-1 blocks legitimate queries gen-2 was meant to permit | Open | Medium | Bug | August 3, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories invisible to entity-scoped queries — Fortune 500 Clients / Cross-Division placeholder metadata excluded from client filters | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
-| [MATTGPT-186](#mattgpt-186) | Slot 1 is amplified without regard to margin -- tie or near-tie at slot 1 gets 80% of the answer | Open | High | Bug | August 13, 2026 |
+| [MATTGPT-168](#mattgpt-168) | Slot 1 is amplified without regard to margin -- tie or near-tie at slot 1 gets 80% of the answer | Open | High | Bug | August 5, 2026 |
 | [MATTGPT-169](#mattgpt-169) | Positioning-story attractor on career-shaped queries: "Why Hire Matt?" dominates broad management retrieval independent of technical-noun overlap | Open | High | Investigation + Action | August 5, 2026 |
 | [MATTGPT-171](#mattgpt-171) | Phrase-aware matching: stopword-only phrases invisible to token-overlap scorer at any W_KW weight | Open | Low | Investigation | August 8, 2026 |
 | [MATTGPT-172](#mattgpt-172) | CIC-cluster consolidation: CIC is 52/114 (46%) of corpus; Division concentration causes cluster-drift dominance on broad queries | Parked | Medium | Action | August 8, 2026 |
@@ -614,8 +614,8 @@ Each detail block uses these fields. Not every field is required for every item.
   - **P5 keyword gap narrowed.** Verified August 13 after MATTGPT-182 fix (loader normalization applied). On P5, Rearchitecting Live Railroad Systems scored kw=0.250 vs. kw=0.125 in the August 12 raw-dict reproduction. One additional token, consistent with a "Refactoring" public_tag reaching the scorer that the story's own prose never contains -- the title says "Rearchitecting" and the tokenizer does no stemming. Speed-Win held at kw=0.375 across both runs: "refactoring" already reached the scorer via its Process bullet, and the scorer intersects token sets, so a duplicate tag adds nothing. Net: P5 keyword gap narrowed from 3-1 to 3-2; blend gap from ~0.078 to ~0.060. Status unchanged at LEAD.
   - **General shape of tag impact:** Tags only move a score where they introduce vocabulary the other eight haystack fields lack. Expect small, concentrated corpus-wide impact rather than broad drift.
   - **Subject substitution disconfirmed as lever for these probes.** Across all four probe pairs (P1/P6, P4/P7, P5/P8, P2/P3), the "How does Matt..." and "How do you..." variants produced identical status. This disconfirms subject substitution (`_substitute_matt_subject`) as the lever for these probes. P5/P8 identity re-confirms the May 19 finding; P1/P6 and P4/P7 are new. It does not rule out query rewriting generally -- a rewrite that adds vocabulary rather than removing a name is untested by this probe set.
-- **Sequencing note (August 13, 2026):** Demoted to NEXT, behind -172. Phase 1 shipped (627f6f4). Phase 2 (cluster cull / rewrite) is -172's work -- proceeding there. Phase 3 (BM25) cannot reach P5/P8: the query says "platform refactoring," Rearchitecting Live Railroad Systems says "rearchitecting" / "rearchitecture" -- no stemmer, no match. What remains in -077 is two probes (P5/P8) with no viable retrieval mechanism until the CIC/Independent Project vocabulary density changes. Re-measure P5/P8 after -172 lands. If consolidation changes the pool composition, the problem may partly dissolve; if not, the residual is a vocabulary problem and adding BM25 with a stemmer (MATTGPT-178) becomes the answer.
-- **Status note:** Phase 1 Green landed at 627f6f4. Phase 2 (cluster cull / rewrite) is -172's work. No further -077 action until -172 lands and P5/P8 are re-measured.
+- **Sequencing note (August 13, 2026):** Demoted to NEXT, behind -181. Phase 1 shipped (627f6f4). Phase 2 target is the MattGPT / Independent Project cluster (9 stories each, 3.8x their corpus share) -- distinct from the CIC cull that was -172's scope. -172 was parked (premise disconfirmed: CIC leads 26% of queries against 46% corpus share, under-represented not dominant). Phase 2's premise is intact; the MattGPT cluster is still overrepresented. Phase 3 (BM25) cannot reach P5/P8: the query says "platform refactoring," Rearchitecting Live Railroad Systems says "rearchitecting" / "rearchitecture" -- no stemmer, no match. Re-measure P5/P8 after -181 corpus additions. If the additions change pool composition, the problem may partly dissolve; if not, Phase 2 scoping proceeds and Phase 3 addresses the vocabulary gap.
+- **Status note:** Phase 1 Green landed at 627f6f4. Phase 2 (MattGPT cluster cull) premise intact -- awaiting -181 re-measurement before scoping.
 - **Logged:** May 19, 2026
 
 ---
@@ -1773,6 +1773,35 @@ Option A recalibrates the classifier. Option B adds an upstream gate. They compo
 
 ---
 
+### MATTGPT-168
+**Slot 1 is amplified without regard to margin -- tie or near-tie at slot 1 gets 80% of the answer**
+
+- **Status:** Open (rewritten August 13, 2026 -- original premise disconfirmed; see investigation below)
+- **Priority:** High
+- **Type:** Bug
+- **Files:** `ui/pages/ask_mattgpt/prompts.py` (line 171), `ui/pages/ask_mattgpt/backend_service.py` (line 829)
+- **Logged:** August 5, 2026
+
+**Issue:** `ranked_stories[0]` is wrapped in `<primary_story>` and `prompts.py:171` requires at least 80% of the response to come from it, forbidding the model from building around a supporting story. Nothing in the pipeline checks whether slot 1's win was decisive. A story that leads by 0.000 gets the same treatment as one leading by 0.072.
+
+**Exhibit 1 (August 3, 2026):** "Has Matt directly managed engineering teams?" Why Hire Matt and the management story both scored 0.476 -- a tie. Why Hire Matt held slot 1 by Pinecone ordering. The model built the entire answer around it; the result was a Professional Narrative response to a direct operational question.
+
+**Exhibit 2 (August 13, 2026):** "how did Matt handle a Sev-1 defect?" Pool spanned 0.298 to 0.352. Leader was 0.020 clear of second in a 0.054-wide band. Slot 1 was a MattGPT story; the Fiserv story with actual Sev-1 evidence sat at rank 5, reached the LLM at position 2, and was capped at 20% by the floor.
+
+Compare a clean case: the Fiserv entity query led at 0.580 with a 0.072 gap to second. Same pin, same 80% floor, decisively different margin.
+
+**What will not fix it:** Lowering the 80% floor. On both exhibits the response would still be mostly the wrong story. Only a different slot 1 changes the answer.
+
+**Floor consistency note:** The floor does not always bind. On "Tell me about a Sev-1 Matt handled" (August 13), MattGPT led at 0.303 and the model answered from Fiserv at slot 3 anyway. The floor's effect is inconsistent and not fully characterized.
+
+**Do not fix by re-pinning:** The original ticket (August 5) proposed extracting `candidates[0]` before diversification. Verified August 13: `diversify_results` already pins `stories[0]` unconditionally at line 1289. The function partitions `stories[1:]` by Client bucket; it never reads a score. Input arrives score-sorted from Pinecone, so slot 1 is the top-scored story on every path. The proposed pin is a no-op.
+
+**Where margin information could live:** The confidence gate (MATTGPT-174 shipped Top Score logging). The gate is currently the only stage positioned to carry spread as well as level. A gate that reads both could conditionally suppress the 80% floor or widen the primary story window when slot 1's margin is below a threshold.
+
+**Cross-references:** MATTGPT-174 (gate calibration -- margin information needs to be computed somewhere; this is the candidate), MATTGPT-077 and MATTGPT-169 (why the wrong story reaches slot 1 in the first place).
+
+---
+
 ### MATTGPT-169
 **Positioning-story attractor on career-shaped queries: "Why Hire Matt?" dominates broad management retrieval independent of technical-noun overlap**
 
@@ -2217,36 +2246,6 @@ Confirmed live, do not delete: `get_context_story`, `story_modes`, `is_empty_con
 **User impact:** A visitor who notices the portfolio leaning on a side project and tries to redirect gets the same answer, more emphatically, each time they try.
 
 **Cross-references:** MATTGPT-077 (Independent Project / MattGPT vocabulary concentration is why MattGPT dominates these pools in the first place), MATTGPT-172 (CIC consolidation -- reducing Independent Project density is the upstream lever; this ticket handles the explicit-exclusion case).
-
----
-
-### MATTGPT-186
-**Slot 1 is amplified without regard to margin -- tie or near-tie at slot 1 gets 80% of the answer**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Bug
-- **Files:** `ui/pages/ask_mattgpt/prompts.py` (line 171), `ui/pages/ask_mattgpt/backend_service.py` (line 829)
-- **Logged:** August 13, 2026
-- **Descended from:** MATTGPT-168 (closed -- original premise disconfirmed; this ticket carries the surviving defect)
-
-**Issue:** `ranked_stories[0]` is wrapped in `<primary_story>` and `prompts.py:171` requires at least 80% of the response to come from it, forbidding the model from building around a supporting story. Nothing in the pipeline checks whether slot 1's win was decisive. A story that leads by 0.000 gets the same treatment as one leading by 0.072.
-
-**Exhibit 1 (August 3, 2026):** "Has Matt directly managed engineering teams?" Why Hire Matt and the management story both scored 0.476 -- a tie. Why Hire Matt held slot 1 by Pinecone ordering. The model built the entire answer around it; the result was a Professional Narrative response to a direct operational question.
-
-**Exhibit 2 (August 13, 2026):** "how did Matt handle a Sev-1 defect?" Pool spanned 0.298 to 0.352. Leader was 0.020 clear of second in a 0.054-wide band. Slot 1 was a MattGPT story; the Fiserv story with actual Sev-1 evidence sat at rank 5, reached the LLM at position 2, and was capped at 20% by the floor.
-
-Compare a clean case: the Fiserv entity query led at 0.580 with a 0.072 gap to second. Same pin, same 80% floor, decisively different margin.
-
-**What will not fix it:** Lowering the 80% floor. On both exhibits the response would still be mostly the wrong story. Only a different slot 1 changes the answer.
-
-**Floor consistency note:** The floor does not always bind. On "Tell me about a Sev-1 Matt handled" (August 13), MattGPT led at 0.303 and the model answered from Fiserv at slot 3 anyway. The floor's effect is inconsistent and not fully characterized.
-
-**Do not fix by re-pinning:** MATTGPT-168 proposed extracting `candidates[0]` before diversification; `diversify_results` already pins `stories[0]` unconditionally at line 1289. That change is a no-op. See MATTGPT-168 (closed) for the full disconfirmation.
-
-**Where margin information could live:** The confidence gate (MATTGPT-174 shipped Top Score logging). The gate is currently the only stage positioned to carry spread as well as level. A gate that reads both could conditionally suppress the 80% floor or widen the primary story window when slot 1's margin is below a threshold.
-
-**Cross-references:** MATTGPT-174 (gate calibration -- margin information needs to be computed somewhere; this is the candidate), MATTGPT-077 and MATTGPT-169 (why the wrong story reaches slot 1 in the first place), MATTGPT-168 (closed, premise disconfirmed -- original framing incorrect).
 
 ---
 
