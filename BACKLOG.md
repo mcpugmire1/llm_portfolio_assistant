@@ -105,7 +105,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-172](#mattgpt-172) | CIC-cluster consolidation: CIC is 52/114 (46%) of corpus; Division concentration causes cluster-drift dominance on broad queries | Open | Medium | Action | August 8, 2026 |
 | [MATTGPT-173](#mattgpt-173) | Role Match JD validation: no defined behavior for malformed or comp-only JD inputs | Open | Medium | Issue | August 8, 2026 |
 | [MATTGPT-174](#mattgpt-174) | Confidence gate mislabels low-signal pools — noise-floor pools clear CONFIDENCE_HIGH and print "high" | Open | Medium | Defect/Design | August 11, 2026 |
-| [MATTGPT-175](#mattgpt-175) | W_KW trace payload reports 0.0 while ranking runs at 0.15 — lying instrument invalidates weight annotations in probe and eval records | Open | High | Bug | August 11, 2026 |
+| [MATTGPT-175](#mattgpt-175) | W_KW trace payload reports 0.0 while ranking runs at 0.15 | Open | High | Bug | August 11, 2026 |
 | [MATTGPT-176](#mattgpt-176) | Dead code: zero-caller function, 200-line commented block, duplicate typed-alias map | Open | Low | Refactor | August 11, 2026 |
 | [MATTGPT-177](#mattgpt-177) | token_overlap_ratio bound violation — repeated in-vocab tokens inflate ratio above 1.0; docstring example independently wrong | Open | Medium | Bug | August 11, 2026 |
 | [MATTGPT-178](#mattgpt-178) | Tokenizer divergence in utils/validation.py — _tokenize and token_overlap_ratio split on different character sets, undercounting technical-term overlap | Open | High | Bug | August 11, 2026 |
@@ -113,6 +113,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-180](#mattgpt-180) | Test fixture blind spot: test_formatting.py, test_filters.py, test_scoring.py build on phantom schema and pass against it | Open | High | Bug | August 11, 2026 |
 | [MATTGPT-181](#mattgpt-181) | Early-career story slate (Well Found / F-22, Lockheed STRATCOM, Cendian B2B/EDI) -- closes pre-2005 corpus gap | Open | Medium | Action | August 12, 2026 |
 | [MATTGPT-182](#mattgpt-182) | Eval and probe harnesses bypass loader normalization -- public_tags reaches scorer as str, contributing zero keyword tokens in every measurement run | Open | High | Bug | August 12, 2026 |
+| [MATTGPT-183](#mattgpt-183) | has_metric filter always returns False -- story_has_metric reads phantom field names (what, star.result) instead of Performance, Result | Open | Medium | Bug | August 13, 2026 |
 
 ---
 
@@ -1886,7 +1887,7 @@ The concentration is a Division cluster, not a 2019-2023 date block -- Era value
 
 **Scope clarification:** This is a corpus-composition action, not a retrieval tuning ticket. Do not address by changing W_KW, diversification parameters, or retrieval logic -- the density is the underlying variable. Retrieval tuning on a dense corpus produces MATTGPT-094's whack-a-mole outcome.
 
-**Cross-references:** MATTGPT-094 (closed -- documented the CIC dominance pattern and whack-a-mole diagnosis), MATTGPT-169 (positioning-story attractor, same root cause), MATTGPT-079 (pre-2005 corpus gap -- adding early-career stories is one consolidation lever).
+**Cross-references:** MATTGPT-094 (closed -- documented the CIC dominance pattern and whack-a-mole diagnosis), MATTGPT-169 (positioning-story attractor, same root cause), MATTGPT-181 (early-career story slate -- adding pre-2005 stories is one consolidation lever).
 
 ---
 
@@ -1951,7 +1952,7 @@ Two models conflict and cannot both be operative: -157's step 4 assumes the gate
 ---
 
 ### MATTGPT-175
-**W_KW trace payload reports 0.0 while ranking runs at 0.15 -- lying instrument invalidates weight annotations in probe and eval records**
+**W_KW trace payload reports 0.0 while ranking runs at 0.15**
 
 - **Status:** Open
 - **Priority:** High
@@ -1974,7 +1975,7 @@ Lines 97-98 define module-local constants W_PC=1.0 and W_KW=0.0. Line 281 emits 
 **Fix:** Four steps, in order:
 1. Add W_PC and W_KW to `config/constants.py` as the single authoritative source.
 2. Update `utils/scoring.py` to import W_PC and W_KW from `constants.py` rather than defining them as defaults.
-3. Delete `pinecone_service.py` lines 97-98. Line 281's trace payload then reads whatever `constants.py` holds and will be accurate.
+3. Delete `pinecone_service.py` lines 97-98 and add `from config.constants import W_PC, W_KW` at the top of the file. Line 281's trace payload then reads whatever `constants.py` holds and will be accurate. (Without the import, deleting lines 97-98 leaves line 281 with a NameError.)
 4. In the same edit as step 2: update the `_hybrid_score` Returns and Example block in `utils/scoring.py` to reflect W_KW=0.15. Update the four failing `test_scoring.py` assertions (`test_default_weights_use_semantic_only`, `test_handles_none_pc_score`, `test_handles_invalid_pc_score_type`, `test_default_weights_favor_semantic`) for W_KW=0.15. Context: these four assertions were correct when written against the W_KW=0.0 default. They became wrong on August 8 when f5641e7 raised W_KW to 0.15 without updating them. This is stale-test cleanup trailing from that commit, not a new defect. Step 4 belongs with steps 2-3 in a single edit to `utils/scoring.py`.
 
 No behavior change to ranking. The fix corrects the instrument, not the weight.
@@ -2077,7 +2078,7 @@ No behavior change to ranking. The fix corrects the instrument, not the weight.
 - Typed alias map at `conversation_view.py:305-312`: originates in the September 2025 monolith, carried through modularization with no design intent. Not reachable by any user-facing path.
 - Deep Dive pill at `conversation_helpers.py:395`: does not render in the UI. Confirmed by inspection August 11, 2026.
 
-Nothing a visitor can reach exercises `_format_narrative`, `_format_key_points`, or `_format_deep_dive`. These are dead code.
+Nothing a visitor can reach exercises `_format_narrative`, `_format_key_points`, `_format_deep_dive`, or `strongest_metric_line`. These four are dead code. The module stays -- `build_5p_summary` is imported by `utils/scoring.py:11` as one of the nine haystack parts in `_keyword_score_for_story`, and `story_has_metric` is imported by `utils/filters.py` (see MATTGPT-183).
 
 **Consider folding into MATTGPT-176** (dead code bundle). They are separate only because the phantom schema finding adds context about what the correct fields are, preserved below in case this code is ever revived.
 
@@ -2097,12 +2098,10 @@ Nothing a visitor can reach exercises `_format_narrative`, `_format_key_points`,
 
 All list fields are already lists in the JSONL. The mismatch is field naming only, not structure.
 
-**`story_has_metric` / `has_metric` filter:** `story_has_metric` is a function in `formatting.py` that reads `s.get("what")` and `s.get("star", {}).get("result")` -- both phantom field names. The JSONL carries `Performance` and `Result`. The function returns False for every story regardless of content. If this code is ever revived and field names are corrected, `story_has_metric` reads `Performance` and `Result` and the filter works with no further change.
-
 **Severity correction for `_format_narrative` (do not escalate):** `_format_narrative` output feeds `answer_context`, used only at `backend_service.py:1041` -- the API-failure fallback path. It does not enter the LLM prompt on normal query paths. An earlier claim that it "poisons every query" was retracted and verified false. The orphaned-entrances finding above is the correct framing.
 
 **Work items:**
-1. Delete `formatting.py` formatter functions (or fold entire ticket into MATTGPT-176).
+1. Delete the four dead functions from `formatting.py`: `_format_narrative`, `_format_key_points`, `_format_deep_dive`, `strongest_metric_line`. Do not delete `build_5p_summary` (live -- imported by `utils/scoring.py`) or `story_has_metric` (live defect -- see MATTGPT-183). The module stays.
 
 ---
 
@@ -2120,10 +2119,10 @@ Specific location: `test_scoring.py:85` constructs a fixture dict using phantom 
 
 **Why this matters:** This is not a cleanup item. It is the reason the `formatting.py` phantom schema defect was invisible -- a passing test suite is meaningless if the fixtures do not match production data shape. Any refactor or fix that passes these tests is unverified.
 
-**Recurrence prevention rule:** Story fixtures must be built by calling `load_star_stories()` (or an equivalent helper that reads from `data/echo_star_stories_nlp.jsonl`) and selecting by index, Client, Domain, or Era. Inline fixture dicts built from field names guessed from code are not valid. This rule applies to all three files and any future test file that handles story objects.
+**Recurrence prevention rule:** Story fixtures must be built by calling `utils.corpus_loader.load_stories()` (reads from `echo_star_stories_nlp.jsonl` at repo root, applies full normalization) and selecting by index, Client, Domain, or Era. Do not call `app.py`'s `load_star_stories()` from tests -- it fires `st.set_page_config()` at import. Inline fixture dicts built from field names guessed from code are not valid. This rule applies to all three files and any future test file that handles story objects.
 
 **Work items:**
-1. Rebuild fixtures in `test_formatting.py`, `test_filters.py`, and `test_scoring.py:85` using `load_star_stories()`.
+1. Rebuild fixtures in `test_formatting.py`, `test_filters.py`, and `test_scoring.py:85` using `utils.corpus_loader.load_stories()`.
 2. Confirm previously-passing tests still pass after fixture replacement (a test that breaks on correct fixtures was never actually testing the thing it claimed to test -- investigate each failure before discarding).
 
 ---
@@ -2185,6 +2184,26 @@ Adjunct-professor work folds in; placement TBD after drafts surface.
 **Blocks:** MATTGPT-077 Phase 2. The cluster cull / rewrite path is scoped against a P5/P8 determination from the miscalibrated instrument. Re-measure before scoping that work.
 
 **Related:** MATTGPT-180 (test fixture blind spot -- same root cause, different surface: fixtures that do not come from the loader).
+
+---
+
+### MATTGPT-183
+**has_metric filter always returns False -- story_has_metric reads phantom field names**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **Logged:** August 13, 2026
+
+**Issue:** `story_has_metric` in `formatting.py` reads `s.get("what")` and `s.get("star", {}).get("result")`. Neither field exists in the JSONL. The corpus carries `Performance` and `Result`. The function returns False for every story regardless of content.
+
+`story_has_metric` is imported by `utils/filters.py` and gates the live `has_metric` filter. Any query or filter that sets `has_metric: True` matches nothing. The filter is silently broken.
+
+**Fix:** In `formatting.py`, change `s.get("what")` to `s.get("Performance")` and `s.get("star", {}).get("result")` to `s.get("Result")`. Two field-name corrections; no structural change.
+
+**Note:** `story_has_metric` was previously described in MATTGPT-179 as unreachable code. That was wrong -- it is imported and called on the live filter path. MATTGPT-179 is dead formatters; this defect is separate.
+
+**Cross-references:** MATTGPT-179 (dead formatters in formatting.py -- module context), MATTGPT-180 (test fixture blind spot -- test_filters.py fixtures may not catch this because they use phantom schema).
 
 ---
 
