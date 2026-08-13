@@ -44,9 +44,9 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-015](#mattgpt-015) | JPM Payments IQ Differentiation | Open | High | Action | Mar 2026 |
 | [MATTGPT-017](#mattgpt-017) | Wire skipped Role Match logging BDD scenarios (Playwright click + mocked Sheets write) | Open | Medium | Action | Apr 28, 2026 |
 | [MATTGPT-022](#mattgpt-022) | Data Quality Cleanup Journey Story | Open | Medium | Action | Mar 2026 |
+| [MATTGPT-035](#mattgpt-035) | Eval Modernization — Semantic Scoring | Open | Low | Spike | Pre-2026 |
 | [MATTGPT-039](#mattgpt-039) | Automated Regression Detection (GitHub Actions) | Open | Medium | Action | Apr 29, 2026 |
 | [MATTGPT-040](#mattgpt-040) | Eval Coverage Gaps — Follow-up Queries | Open | Low | Action | Apr 29, 2026 |
-| [MATTGPT-035](#mattgpt-035) | Eval Modernization — Semantic Scoring | Open | Low | Spike | Pre-2026 |
 | [MATTGPT-045](#mattgpt-045) | Analytics Dashboard | Open | Low | Action | Apr 29, 2026 |
 | [MATTGPT-060](#mattgpt-060) | BDD coverage gap — assert post-navigation page state, not just navigation | Open | Medium | Action | May 12, 2026 |
 | [MATTGPT-062](#mattgpt-062) | Semantic router cache silently uses stale embeddings when VALID_INTENTS changes | Open | Medium | Refactor | May 14, 2026 |
@@ -91,6 +91,16 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-154](#mattgpt-154) | Operational-breadth tagging pass — surface operational ownership into all corpus stories where it's genuinely true | Open | Medium | Action | July 16, 2026 |
 | [MATTGPT-155](#mattgpt-155) | New corpus story — sell-side commercial story (HSBC-anchored): pricing/costing, resourcing, outcome-based contracting | Open | Medium | Action | July 29, 2026 |
 | [MATTGPT-156](#mattgpt-156) | Vendor commercial/spend management gap — decide whether corpus-zero on invoice/rate-card/procurement is a real claim or honest gap | Open | Low | Investigation | July 29, 2026 |
+| [MATTGPT-159](#mattgpt-159) | Role Match performance — parallelize per-requirement assessor calls; sequential gpt-4o loop is the bottleneck | Open | Medium | Performance | July 31, 2026 |
+| [MATTGPT-160](#mattgpt-160) | JD extractor clause-dropping — 7 of 23 requirements on demo JD lose qualifiers during extraction | Open | Medium | Bug | July 31, 2026 |
+| [MATTGPT-161](#mattgpt-161) | Career span duplicated and hardcoded across surfaces — consolidate to a single derived or configured source | Open | High | Refactor | August 3, 2026 |
+| [MATTGPT-162](#mattgpt-162) | Embedding exception misclassified as low-confidence rejection — visitor sees no-match banner instead of error message | Open | High | Bug | August 3, 2026 |
+| [MATTGPT-163](#mattgpt-163) | Personal-query guard false positive — professional org questions intercepted as private family | Open | High | Bug | August 3, 2026 |
+| [MATTGPT-165](#mattgpt-165) | nonsense_filters.jsonl has two live generations — gen-1 blocks legitimate queries gen-2 was meant to permit | Open | Medium | Bug | August 3, 2026 |
+| [MATTGPT-166](#mattgpt-166) | Arc stories invisible to entity-scoped queries — Fortune 500 Clients / Cross-Division placeholder metadata excluded from client filters | Open | Medium | Issue | August 3, 2026 |
+| [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
+| [MATTGPT-168](#mattgpt-168) | diversify_results picks slot 1 in standard mode but prompt asserts it was ranked highest for the question — mismatch since Jan 2026 | Open | High | Bug | August 5, 2026 |
+| [MATTGPT-169](#mattgpt-169) | Positioning-story attractor on career-shaped queries: "Why Hire Matt?" dominates broad management retrieval independent of technical-noun overlap | Open | High | Investigation + Action | August 5, 2026 |
 | [MATTGPT-171](#mattgpt-171) | Phrase-aware matching: stopword-only phrases invisible to token-overlap scorer at any W_KW weight | Open | Low | Investigation | August 8, 2026 |
 | [MATTGPT-172](#mattgpt-172) | CIC-cluster consolidation: 48% corpus density in 2019-2023 block causes cluster-drift dominance on broad queries | Open | Medium | Action | August 8, 2026 |
 | [MATTGPT-173](#mattgpt-173) | Role Match JD validation: no defined behavior for malformed or comp-only JD inputs | Open | Medium | Issue | August 8, 2026 |
@@ -103,16 +113,6 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-180](#mattgpt-180) | Test fixture blind spot: test_formatting.py, test_filters.py, test_scoring.py build on phantom schema and pass against it | Open | High | Bug | August 11, 2026 |
 | [MATTGPT-181](#mattgpt-181) | Early-career story slate (Well Found / F-22, Lockheed STRATCOM, Cendian B2B/EDI) -- closes pre-2005 corpus gap | Open | Medium | Action | August 12, 2026 |
 | [MATTGPT-182](#mattgpt-182) | Eval and probe harnesses bypass loader normalization -- public_tags reaches scorer as str, contributing zero keyword tokens in every measurement run | Open | High | Bug | August 12, 2026 |
-| [MATTGPT-159](#mattgpt-159) | Role Match performance — parallelize per-requirement assessor calls; sequential gpt-4o loop is the bottleneck | Open | Medium | Performance | July 31, 2026 |
-| [MATTGPT-160](#mattgpt-160) | JD extractor clause-dropping — 7 of 23 requirements on demo JD lose qualifiers during extraction | Open | Medium | Bug | July 31, 2026 |
-| [MATTGPT-161](#mattgpt-161) | Career span duplicated and hardcoded across surfaces — consolidate to a single derived or configured source | Open | High | Refactor | August 3, 2026 |
-| [MATTGPT-162](#mattgpt-162) | Embedding exception misclassified as low-confidence rejection — visitor sees no-match banner instead of error message | Open | High | Bug | August 3, 2026 |
-| [MATTGPT-168](#mattgpt-168) | diversify_results picks slot 1 in standard mode but prompt asserts it was ranked highest for the question — mismatch since Jan 2026 | Open | High | Bug | August 5, 2026 |
-| [MATTGPT-163](#mattgpt-163) | Personal-query guard false positive — professional org questions intercepted as private family | Open | High | Bug | August 3, 2026 |
-| [MATTGPT-165](#mattgpt-165) | nonsense_filters.jsonl has two live generations — gen-1 blocks legitimate queries gen-2 was meant to permit | Open | Medium | Bug | August 3, 2026 |
-| [MATTGPT-166](#mattgpt-166) | Arc stories invisible to entity-scoped queries — Fortune 500 Clients / Cross-Division placeholder metadata excluded from client filters | Open | Medium | Issue | August 3, 2026 |
-| [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
-| [MATTGPT-169](#mattgpt-169) | Positioning-story attractor on career-shaped queries: "Why Hire Matt?" dominates broad management retrieval independent of technical-noun overlap | Open | High | Investigation + Action | August 5, 2026 |
 
 ---
 
@@ -533,9 +533,10 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Status:** Open
 - **Priority:** Medium-High
 - **Type:** Issue
-- **Execution split (May 28, 2026 — see Value Prioritized Roadmap at top of BACKLOG.md):**
-  - **Phase 1 — Query-side mitigation (NOW).** Strip "Matt" from embedded queries on technical-noun shapes; preserve "Matt" in the prompt sent to the LLM. Cheap, reversible, sufficient for moderate-overlap nouns (monolith, MVP). NOT sufficient for severe-overlap nouns (refactoring). Hours of work, not days. Maps to Fix-path option 2 below.
-  - **Phase 2 — Full hybrid retrieval (NEXT).** BM25 + semantic; keyword weighting on "client", "Fortune 500", "enterprise" pushes named-client stories above MattGPT for queries containing those keywords. Handles severe-overlap nouns. **Lowest empirical risk path** given the May 16 story-side rewrite backfire (see Finding 3 caveat). Also addresses MATTGPT-061 residual. Maps to Fix-path option 3 below.
+- **Execution split (May 28, 2026; updated August 12, 2026 — see Value Prioritized Roadmap at top of BACKLOG.md):**
+  - **Phase 1 — Query-side mitigation (done, Green at 627f6f4).** Strip "Matt" from embedded queries on technical-noun shapes; preserve "Matt" in the prompt sent to the LLM. Cheap, reversible, sufficient for moderate-overlap nouns (monolith, MVP). NOT sufficient for severe-overlap nouns (refactoring). Maps to Fix-path option 2 below.
+  - **Phase 2 — Cluster cull / rewrite (NOW, blocked on re-baseline).** Scope determined by P5/P8 Step 0 measurement. Blocked on MATTGPT-182 (eval/probe harnesses use tags-dark scorer; P5/P8 determination was made in that regime). Re-run Step 0 after -182 fix before scoping this work.
+  - **Phase 3 — Full hybrid retrieval.** BM25 + semantic; keyword weighting on "client", "Fortune 500", "enterprise" pushes named-client stories above MattGPT for queries containing those keywords. Handles severe-overlap nouns. **Lowest empirical risk path** given the May 16 story-side rewrite backfire (see Finding 3 caveat). Also addresses MATTGPT-061 residual. Maps to Fix-path option 3 below.
   - The detailed Fix-path ordering section below remains the canonical reference for option specifics; this annotation adds sequencing decisions made during the May 28, 2026 prioritization pass.
 - **Finding 1 (noun-overlap spectrum + subject-pronoun modifier):** Free-text queries with "Matt" as the subject systematically contaminate retrieval when the noun overlaps MattGPT or Strangler Fig story vocabulary. Subject pronoun is a *modifier*, not a binary gate — moderate-overlap nouns are rescued by switching "Matt" → "you"; severe-overlap nouns are not.
 
@@ -609,7 +610,7 @@ Each detail block uses these fields. Not every field is required for every item.
   - **Belt-and-suspenders correction (August 11, 2026 -- supersedes "structural protection confirmed" above):** Gate-caught behavior demonstrated for "he?" (router invalid 0.255, confidence none, QUERY_REJECTED low_pinecone). The family-gate belt -- "Matt?" routes to background, a never-substitute family -- is demonstrated for that single string only. Router stability across bare-name variants (Matt, matt?, Matthew?, Pugmire?) is undemonstrated pending the router-probe rider in step E. Do not read the prior note as establishing general prevention across the variant class.
 - **Router-position note (August 11, 2026):** Probes substituted upstream of the router; production substitutes downstream of it, by design. This is an improvement over the tested configuration, not a compromise: the router classifies the real query, removing the probes' classify-on-transformed-input circularity, while the retrieval-signal configuration (substituted string to embedding and keyword scorer) is identical to arm C.
 - **Implementation naming and config facts (August 11, 2026):** Constant shipped as `SUBSTITUTION_FAMILIES` (renamed from STRIP_FAMILIES pre-consumer; name matched to behavior after the deletion design lost the A/B/C experiment framing). Substitution is case-insensitive (`re.IGNORECASE`, decided August 11) with a 14th BDD scenario covering lowercase. Capitalization applies only when the substitution lands at string position zero.
-- **Status note:** No status change to -077. Implementation is mid-cycle (Green pending). Status moves when the step-E table is graded and the ship rule resolves.
+- **Status note:** Phase 1 Green landed at 627f6f4. Phase 2 (cluster cull / rewrite) is blocked on MATTGPT-182 re-baseline. No status change to -077 overall until Phase 2 scope is determined and executed.
 - **Logged:** May 19, 2026
 
 ---
@@ -1082,7 +1083,7 @@ Originally flagged as removable dead code (emotion hashes drift between builds a
 - **Priority:** High
 - **Type:** Issue
 - **Logged:** June 14, 2026
-- **Depends on:** MATTGPT-080 (positioning docs separated from STAR stories)
+- **Depends on:** ~~MATTGPT-080~~ (shipped)
 
 **Symptom (production-confirmed June 14, 2026):** Agy answered a Fiserv commercial-impact query with accurate numbers ($8.5M, 3% under budget, $500K penalties avoided) but the displayed source cards showed JP Morgan and Norfolk Southern — not the Fiserv STAR story. A recruiter who clicks to verify a claim finds the wrong sources. Observed across multiple probes: "Why Hire Matt" was cited as a source for a largest-team question AND an early-career telecom question, neither of which it substantiates.
 
@@ -1090,7 +1091,7 @@ Originally flagged as removable dead code (emotion hashes drift between builds a
 Source cards currently display Pinecone retrieval top-k by score. That is a different set from what the LLM actually grounded the answer in. The likely Fiserv mechanism: the specific numbers came from the "Why Hire Matt" aggregate positioning doc (which summarizes wins across clients and ranks high on almost every query), while the Fiserv STAR story never entered the top-k. The cards honestly showed what was retrieved; the honest set was wrong.
 
 Two design options:
-- **Option A — Fix retrieval so the right story enters top-k.** Depends on -094 (retrieval diversity) and -080 (positioning docs separated so they can't crowd out STAR stories). Cards continue to show top-k; faithfulness improves as a consequence. No new display logic.
+- **Option A — Fix retrieval so the right story enters top-k.** Depends on -094 (retrieval diversity). -080 (positioning docs separated from STAR stories) has shipped; that blocker is cleared. Cards continue to show top-k; faithfulness improves as a consequence. No new display logic.
 - **Option B — Display what the answer was grounded in.** Requires the LLM to emit provenance (story IDs it drew from) alongside the answer, then surface those as the source cards. Decouples display from retrieval ranking. More engineering; higher faithfulness ceiling.
 
 **Acceptance criteria:**
@@ -1100,7 +1101,7 @@ Two design options:
 **Eval to add:**
 For each client-specific probe query, assert `client_name in [s.get("Client") for s in displayed_sources]`. Mirrors the client-attribution pattern in Q15.
 
-**Note:** Option A cannot be fully evaluated until -080 ships (STAR stories and positioning docs separated in the index). Do not close this ticket with Option B alone unless Option A is explicitly decided against.
+**Note:** -080 has shipped (STAR stories and positioning docs now separated in the index). Option A is unblocked on that dependency. Do not close this ticket with Option B alone unless Option A is explicitly decided against.
 
 ---
 
