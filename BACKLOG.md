@@ -111,6 +111,9 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-183](#mattgpt-183) | has_metric filter dead -- nothing in UI sets it to True; remove rather than fix | Open | Low | Refactor | August 13, 2026 |
 | [MATTGPT-184](#mattgpt-184) | ask_mattgpt/utils.py module audit -- six dead functions, four duplicating live helpers elsewhere | Open | Low | Refactor | August 13, 2026 |
 | [MATTGPT-185](#mattgpt-185) | Query negation unsupported -- "outside of MattGPT" returns MattGPT stories | Open | Medium | Enhancement | August 13, 2026 |
+| [MATTGPT-187](#mattgpt-187) | diversify_results max_per_client parameter is documented but never implemented | Open | Medium | Bug | August 13, 2026 |
+| [MATTGPT-188](#mattgpt-188) | Semantic router accepts off-topic queries about other people | Open | Medium | Bug | August 13, 2026 |
+| [MATTGPT-189](#mattgpt-189) | test_global_styles_no_cdn asserts a feature removed in 2cbe5f5 | Open | Low | Test | August 13, 2026 |
 
 ---
 
@@ -2246,6 +2249,75 @@ Confirmed live, do not delete: `get_context_story`, `story_modes`, `is_empty_con
 **User impact:** A visitor who notices the portfolio leaning on a side project and tries to redirect gets the same answer, more emphatically, each time they try.
 
 **Cross-references:** MATTGPT-077 (Independent Project / MattGPT vocabulary concentration is why MattGPT dominates these pools in the first place), MATTGPT-172 (CIC consolidation -- reducing Independent Project density is the upstream lever; this ticket handles the explicit-exclusion case).
+
+---
+
+### MATTGPT-187
+**diversify_results max_per_client parameter is documented but never implemented**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `ui/pages/ask_mattgpt/backend_service.py:1246-1319`
+- **Logged:** August 13, 2026
+
+**Issue:** The signature takes `max_per_client: int = 1` and the docstring says "Limiting stories per client." The parameter is never referenced in the body. Stories beyond the first per client go into `duplicate_overflow` and are concatenated onto the result rather than dropped.
+
+Two failing tests assert the documented contract:
+- `test_limits_single_client_stories` -- asserts `jpmc_count <= 1`, gets 2. Input `[JPMC, JPMC, Capital One, Takeda, AmEx]` returns `[JPMC, Capital One, Takeda, AmEx, JPMC]`.
+- `test_maintains_overall_order` -- asserts descending score order, gets `[0.95, 0.82, 0.78, 0.75, 0.88]`. The duplicate JPMC at 0.88 is bumped to the end.
+
+**Decision required before fixing:** Is the intent to drop duplicates or to demote them? The tests assert drop. The code demotes. Callers pass `max_per_client=3` at `backend_service.py:1937`, which only means something under the drop interpretation.
+
+Note the second test also asserts score ordering, which the function cannot preserve by design -- it partitions by client bucket and never reads a score. That assertion may be testing the wrong contract regardless of how the first question is resolved.
+
+**Cross-references:** MATTGPT-168 (records this finding in its body -- this is the ticket that owns it), MATTGPT-177 (covers the first of the six untracked failures; this covers two more).
+
+---
+
+### MATTGPT-188
+**Semantic router accepts off-topic queries about other people**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `services/semantic_router.py`
+- **Logged:** August 13, 2026
+
+**Issue:** Three `test_rejects_invalid_queries` cases fail. The router scores queries about other people against intent phrases matched on question shape rather than subject:
+
+| Query | Score | Family |
+|---|---|---|
+| "Tell me a joke" | 0.429 | behavioral |
+| "Tell me about Elon Musk" | 0.401 | technical |
+| "What's Jeff Bezos's leadership style?" | 0.664 | leadership |
+
+All clear `SOFT_ACCEPT = 0.40`.
+
+**Not fixable by raising the threshold.** Logged production behavioral queries score 0.499 to 0.605 (query_log_parsed.csv), so a threshold above 0.664 would reject legitimate traffic. The router has no signal distinguishing "Matt's leadership style" from "Bezos's leadership style" -- the phrasings embed nearly identically.
+
+**Live behavior, not just a test failure:** `semantic_valid` is not a rejection gate (see MATTGPT-174, closed), so these queries proceed to Pinecone regardless of score. Determine what a visitor asking about Bezos actually receives before scoping a fix.
+
+Note: the eval suite already contains "Tell me about Elon Musk" as a golden query, so whatever the intended behavior is, it is specified somewhere.
+
+**Cross-references:** MATTGPT-174 (closed -- three thresholds now found outside their operating range: CONFIDENCE_HIGH too low, HARD_ACCEPT too high, SOFT_ACCEPT here), MATTGPT-063 (wrong-person query detection -- same failure mode, different ticket).
+
+---
+
+### MATTGPT-189
+**test_global_styles_no_cdn asserts a feature removed in 2cbe5f5**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Test
+- **File:** `tests/unit/test_base64_precomputation.py:19`
+- **Logged:** August 13, 2026
+
+**Issue:** The test asserts `'data:image/webp;base64'` appears in `global_styles._CSS`. The Chase sprite base64 images were added in 5089ec6 and deliberately removed in 2cbe5f5 (June 24, 2026), which replaced the GIF thinking indicator with a pure CSS emoji animation. The test was not updated and now asserts the presence of something intentionally deleted.
+
+**Fix:** Delete the test. Also check whether the rest of `test_base64_precomputation.py` still covers live behavior or whether the whole file is stale.
+
+**Cross-references:** MATTGPT-177 (untracked test failures -- same category), MATTGPT-180 (test fixture blind spot -- tests passing against code production never exercises).
 
 ---
 
