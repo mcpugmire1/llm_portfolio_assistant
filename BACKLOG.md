@@ -7,22 +7,29 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 ---
 
-## Value Prioritized Roadmap (updated 2026-06-24)
+## Value Prioritized Roadmap (updated 2026-08-12)
 
 **NOW**
-1. **-077 mitigation** — Query-side: strip "Matt" from embedded queries on technical-noun shapes. Protects primary free-text recruiter flow from MattGPT self-referential answers.
-2. **-168** — diversify_results picks slot 1 but prompt tells the model it was ranked highest for the question (false on no-entity path). Compounds with -077 on the same query: -077 gets the wrong story to slot 1, -168 makes the model build around it and resist correction.
-3. **-097** — Career-intent refresh. Timely for active outreach; makes "what's Matt looking for" keyword-searchable.
-4. **-129 stories 1+2** — AT&T SE CRM + Fiserv expand-from-logged stories (no elicitation block yet). Operational depth work.
-5. **-161** — Career span hardcoded across surfaces. Fourth instance this week of a value stated once and quoted forward past validity. Violates no-hardcoded-data-derived-values rule.
+1. **-182** — Extract shared loader normalization (public_tags). Every eval and probe run has been measuring with public_tags dark; production path is correct. Fix the instrument before any further measurement.
+2. **Re-baseline** — After -182: re-run eval suite and MATTGPT-077 Step 0. Numbers will move; this is instrument correction. Treat all prior probe and eval numbers as a different regime. Gates -077 Phase 2.
+3. **-077 Phase 2** — Cluster cull / rewrite path, now scoped against accurate re-baseline. P5/P8 determination was tags-dark; re-measure before scoping the work.
+4. **-168** — diversify_results picks slot 1 but prompt tells the model it was ranked highest for the question (false on no-entity path). Sits after re-baseline: -077 and -168 compound on the same query, so you want -077's real state before judging how much -168 matters on its own. Independent enough to move earlier if needed -- the false claim is there regardless of which story reached slot 1.
+5. **-181** — Early-career story slate (Well Found / F-22, Lockheed STRATCOM, Cendian B2B/EDI). Parallel corpus work; adds evidence, doesn't reshape retrieval, doesn't block on the measurement thread.
+6. **-129 stories 1+2** — AT&T SE CRM + Fiserv expand-from-logged stories. Parallel corpus work alongside -181, same reasoning.
+7. **-175** — W_KW trace lie: delete stale module-local weights in pinecone_service.py, move to constants.py. Instrument cleanup; pairs with the re-baseline work.
 
 **NEXT** (queued):
-1. **-128** — Source faithfulness. Unlocked. Second-biggest trust item: recruiter clicks to verify a claim, gets wrong source cards.
-2. **-089** — Logistics filter class: location / work-model / availability. Atlanta + relocation-open status currently dropped silently.
-3. **-015** — JPM Payments IQ differentiation. Cheap data pass; upstream of operational surfacing; cleaner signal for -128.
-4. **-077 full fix** — Hybrid retrieval (BM25 + semantic). Handles severe-overlap nouns.
-5. **-074** — Entity cluster synthesis forcing. "How did you build the CIC" returns a survey instead of depth on a marquee query.
-6. **-096** — Methodology-context preservation. The methodology is what makes the metrics credible to an engineer.
+1. **-015** — JPM Payments IQ differentiation. Cheap data pass; upstream of operational surfacing; feeds cleaner signal for -128.
+2. **-128** — Source faithfulness. Unlocked. Recruiter clicks to verify a claim, gets wrong source cards -- direct trust failure.
+3. **Density re-measure** — Measure corpus density across eras and clients after -077 Phase 2 stabilizes. Gates -172 diagnosis.
+4. **-172** — CIC-cluster consolidation. Needs stable corpus and density measurement before the right consolidation move is clear.
+5. **-169** — Positioning-story attractor on career-shaped queries.
+6. **-180** — Test fixture blind spot (test_formatting.py, test_filters.py, test_scoring.py).
+7. **-161** — Career span hardcoded across surfaces.
+8. **-097** — Career-intent refresh. Below -172: career-intent reframing changes corpus shape, and -172 needs a stable corpus to be diagnosed against.
+9. **-089** — Logistics filter class: location / work-model / availability. Atlanta + relocation-open status currently dropped silently.
+10. **-074** — Entity cluster synthesis forcing. "How did you build the CIC" returns a survey instead of depth on a marquee query.
+11. **-096** — Methodology-context preservation. The methodology is what makes the metrics credible to an engineer.
 
 (Everything else defaults to LATER.)
 
@@ -92,7 +99,10 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-176](#mattgpt-176) | Dead code: zero-caller function, 200-line commented block, duplicate typed-alias map | Open | Low | Refactor | August 11, 2026 |
 | [MATTGPT-177](#mattgpt-177) | token_overlap_ratio bound violation — repeated in-vocab tokens inflate ratio above 1.0; docstring example independently wrong | Open | Medium | Bug | August 11, 2026 |
 | [MATTGPT-178](#mattgpt-178) | Tokenizer divergence in utils/validation.py — _tokenize and token_overlap_ratio split on different character sets, undercounting technical-term overlap | Open | High | Bug | August 11, 2026 |
-| [MATTGPT-179](#mattgpt-179) | formatting.py schema migration: phantom schema, story_has_metric filter, nine-field remap, three test files to rebuild | Open | High | Bug + Refactor | August 11, 2026 |
+| [MATTGPT-179](#mattgpt-179) | Dead formatters in formatting.py — both entrances orphaned, phantom schema in unreachable code; consider folding into MATTGPT-176 | Open | Low | Refactor | August 11, 2026 |
+| [MATTGPT-180](#mattgpt-180) | Test fixture blind spot: test_formatting.py, test_filters.py, test_scoring.py build on phantom schema and pass against it | Open | High | Bug | August 11, 2026 |
+| [MATTGPT-181](#mattgpt-181) | Early-career story slate (Well Found / F-22, Lockheed STRATCOM, Cendian B2B/EDI) -- closes pre-2005 corpus gap | Open | Medium | Action | August 12, 2026 |
+| [MATTGPT-182](#mattgpt-182) | Eval and probe harnesses bypass loader normalization -- public_tags reaches scorer as str, contributing zero keyword tokens in every measurement run | Open | High | Bug | August 12, 2026 |
 | [MATTGPT-159](#mattgpt-159) | Role Match performance — parallelize per-requirement assessor calls; sequential gpt-4o loop is the bottleneck | Open | Medium | Performance | July 31, 2026 |
 | [MATTGPT-160](#mattgpt-160) | JD extractor clause-dropping — 7 of 23 requirements on demo JD lose qualifiers during extraction | Open | Medium | Bug | July 31, 2026 |
 | [MATTGPT-161](#mattgpt-161) | Career span duplicated and hardcoded across surfaces — consolidate to a single derived or configured source | Open | High | Refactor | August 3, 2026 |
@@ -657,28 +667,35 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Priority:** Medium
 - **Type:** Action
 - **Context:** Role Match assessments surface specific skill/technology/role-archetype gaps where the corpus has no STAR story anchor. Filed as a meta-ticket to track discovery — each gap becomes a candidate for a sibling story-writing ticket (MATTGPT-022 / MATTGPT-078 style) when prioritized for writing.
+- **Gap status values:** `[Open]` = no decision made; `[Decided]` = fix path chosen, work pending; `[Written]` = story drafted or corpus addition made.
 - **Known gaps (May 2026)** — surfaced during the NiCE Manager Solutions Architecture JD assessment (May 19, 2026):
-  - Node.js production work (no anchor)
-  - SDK / library development (no anchor)
-  - Specific AI/ML framework experience in enterprise client context (anchors exist via MattGPT solo project; weak in client work) — **MATTGPT-080 candidate first, story only if structured assertion insufficient**
-  - Managing multiple concurrent AI projects (no anchor; large-scale single-project anchors strong)
-  - Leading teams composed of AI Engineers / Software Developers / ML+LLM specialists (CIC anchors team-leadership broadly, not specifically composed of AI/ML specialists)
-  - Direct conflict resolution / employee relations experience (no anchor; tangential evidence in leadership stories) — **likely (b) resume/LinkedIn fix, not corpus**
+  - `[Open]` Node.js production work (no anchor)
+  - `[Open]` SDK / library development (no anchor)
+  - `[Open]` Specific AI/ML framework experience in enterprise client context (anchors exist via MattGPT solo project; weak in client work) — **MATTGPT-080 candidate first, story only if structured assertion insufficient**
+  - `[Open]` Managing multiple concurrent AI projects (no anchor; large-scale single-project anchors strong)
+  - `[Open]` Leading teams composed of AI Engineers / Software Developers / ML+LLM specialists (CIC anchors team-leadership broadly, not specifically composed of AI/ML specialists)
+  - `[Open]` Direct conflict resolution / employee relations experience (no anchor; tangential evidence in leadership stories) — **likely (b) resume/LinkedIn fix, not corpus**
 - **Decision per gap — use MATTGPT-081's corrective-actions taxonomy:** Before writing a new story for a known gap, decide whether the right fix is:
   - (a) New STAR story → file a sibling ticket (MATTGPT-022 / MATTGPT-078 style)
   - (b) Resume / LinkedIn / positioning-doc update → not a corpus issue
   - (c) MATTGPT-080 `matt_profile.json` restructure → some gaps may be better addressed by structured skill assertions with provenance, not narrative stories
   - (d) Real skill gap → corpus is honest, no story needed; ignore in this thread
-- **Candidate additions (July 29, 2026 -080 session):** CIC-era hands-on technical stories are under-written. Candidates include: Spring Boot (if hands-on); AI-enablement work outside Liquid Studio/CIC scope (distinct from MATTGPT-078's framing). Evaluate whether structured assertion or new story is the right fix before filing sibling tickets.
+- **Candidate additions (July 29, 2026 -080 session):** CIC-era hands-on technical stories are under-written. Candidates include:
+  - `[Open]` Spring Boot (if hands-on) — evaluate whether structured assertion or new story is the right fix before filing sibling ticket.
+  - `[Open]` AI-enablement work outside Liquid Studio/CIC scope (distinct from MATTGPT-078's framing) — same evaluation needed.
 - **Coverage gaps with identified source material (August 5, 2026 -- surfaced during MATTGPT-088 diagnostic on structured JD):**
-  - **"10+ years of professional software development experience" -- partial, 5/5.** Corpus starts in 2005 at Solution Architect level. The requirement's clause is about early hands-on IC development. Source material identified: the 2005 resume shows 1997 to 2005 individual-contributor engineering across Cendian, Well Found Technology, Lockheed Martin, GE Power Systems, and others, plus Oracle Certified Professional 8i certification. Decision path per -081 taxonomy: likely (b) resume / (c) LinkedIn -- the years and companies exist, the corpus anchor may not need to be a STAR story. Decide before writing.
-  - **Insurance or risk management domain knowledge -- gap, 5/5.** Previously recorded as an honest corpus limit. Source material now identified: the CIC FY23 deck shows two Nationwide engagements: a Transformer application modernization and a ways-of-working academy. Corpus verdict is currently correct (no story exists), but this is not a permanent gap -- material is available. Decision path: (a) new STAR story using Nationwide as anchor, once the story is written the gap closes.
+  - `[Decided]` **"10+ years of professional software development experience" -- partial, 5/5.** Corpus starts in 2005 at Solution Architect level. Source material: the 2005 resume shows 1997-2005 individual-contributor engineering across Cendian, Well Found Technology, Lockheed Martin, GE Power Systems, and others, plus Oracle Certified Professional 8i certification. **Decision: (a) new STAR stories.** Three-item slate with drafts pending: Well Found Technology / F-22 origin; Lockheed Martin STRATCOM (carries the 2002 TDD and pairing conviction); Cendian B2B/EDI (Norfolk Southern ancestor). Adjunct-professor work folds in, placement TBD. Record starts at 2000 by Matt's ruling. No de-aging; the history is the pitch. Drafts from Matt's firsthand account with the 2005 resume as evidence backbone. Filed as **MATTGPT-181**.
+  - `[Open]` **Insurance or risk management domain knowledge -- gap, 5/5.** Previously recorded as an honest corpus limit. Source material now identified: the CIC FY23 deck shows two Nationwide engagements: a Transformer application modernization and a ways-of-working academy. Corpus verdict is currently correct (no story exists), but this is not a permanent gap -- material is available. Decision path: (a) new STAR story using Nationwide as anchor.
+- **Additional gaps from archived 080 doc, section 5 (August 12, 2026):**
+  - `[Open]` **D18 Strategic Partnerships.** Confirmed corpus gap as of the June 30 check. Blocked pending verification of the resume claim it sources. No decision on fix path until that verification is done.
+  - `[Open]` **Norfolk Southern Conway's Law / product mindset.** Marked "needs decision, explicit go/no-go pending" since January. "The CIC's First Engagement" is adjacent but does not own the frame. Explicit go/no-go required before any story work is filed.
 - **Workflow:** When a new Role Match assessment surfaces a gap not in this list, append it to the "Known gaps" section above with the surfacing JD context. When a gap is prioritized for action, file the sibling ticket (story / profile / resume) and link it back here.
 - **Cross-references:**
   - **MATTGPT-080** — `matt_profile.json` restructure; addresses gaps better fit for structured skill assertions
   - **MATTGPT-081** — Role Match engine corrective-actions output; categorizes gaps systematically going forward
   - **MATTGPT-022** — Data Quality Cleanup Journey Story (sibling story-writing ticket)
   - **MATTGPT-078** — AI Enablement Before It Had a Name (sibling story-writing ticket; addresses AI enablement gap surfaced during resume Option E work)
+  - **MATTGPT-181** — Early-career story slate (Well Found / F-22, Lockheed STRATCOM, Cendian B2B/EDI); sibling ticket for the Decided gap above
 - **Logged:** May 21, 2026
 
 ---
@@ -2650,15 +2667,23 @@ No behavior change to ranking. The fix corrects the instrument, not the weight.
 ---
 
 ### MATTGPT-179
-**formatting.py schema migration: phantom schema, story_has_metric filter, nine-field remap, three test files to rebuild**
+**formatting.py dead formatters -- both entrances orphaned, phantom schema in unreachable code; consider folding into MATTGPT-176**
 
 - **Status:** Open
-- **Priority:** High
-- **Type:** Bug + Refactor
+- **Priority:** Low
+- **Type:** Refactor
 - **Logged:** August 11, 2026
-- **Sequencing note:** Scope of this ticket depends on whether the typed-command surface is kept. Resolve that decision before starting -- it changes what the migration must cover.
 
-**Issue:** `formatting.py` operates against a phantom schema -- field names the code expects do not match what the JSONL actually carries. The nine-field mapping has been verified against the corpus (August 11, 2026):
+**Issue:** Both entrances to `formatting.py`'s formatter functions are confirmed orphaned:
+
+- Typed alias map at `conversation_view.py:305-312`: originates in the September 2025 monolith, carried through modularization with no design intent. Not reachable by any user-facing path.
+- Deep Dive pill at `conversation_helpers.py:395`: does not render in the UI. Confirmed by inspection August 11, 2026.
+
+Nothing a visitor can reach exercises `_format_narrative`, `_format_key_points`, or `_format_deep_dive`. These are dead code.
+
+**Consider folding into MATTGPT-176** (dead code bundle). They are separate only because the phantom schema finding adds context about what the correct fields are, preserved below in case this code is ever revived.
+
+**Schema mapping (verified August 11, 2026 against corpus):**
 
 | Code field | JSONL field | Type |
 |---|---|---|
@@ -2672,23 +2697,100 @@ No behavior change to ranking. The fix corrects the instrument, not the weight.
 | `star.action` | `Action` | list |
 | `star.result` | `Result` | list |
 
-All list fields are already lists in the JSONL -- no wrapping needed, no design gaps. The mismatch is in field naming, not structure.
+All list fields are already lists in the JSONL. The mismatch is field naming only, not structure.
 
-**`story_has_metric` / `has_metric` filter:** `story_has_metric` is a function in `formatting.py` that reads `s.get("what")` and `s.get("star", {}).get("result")` -- both phantom field names. The JSONL carries `Performance` and `Result`. The function returns False for every story regardless of content. Verified: a story with "Reduced latency by 60%" in `Performance` returns False; `matches_filters(story, {"has_metric": True})` returns False with it. The `has_metric` filter itself is not broken -- it calls `story_has_metric`, which is. After item 1's migration corrects the field names, `story_has_metric` reads `Performance` and `Result` and the filter works. No separate fix needed; item 1 closes this.
+**`story_has_metric` / `has_metric` filter:** `story_has_metric` is a function in `formatting.py` that reads `s.get("what")` and `s.get("star", {}).get("result")` -- both phantom field names. The JSONL carries `Performance` and `Result`. The function returns False for every story regardless of content. If this code is ever revived and field names are corrected, `story_has_metric` reads `Performance` and `Result` and the filter works with no further change.
 
-**Test fixture blind spot:** `test_formatting.py`, `test_filters.py`, and `test_scoring.py:85` use fixture data that was not updated when the JSONL schema was established. Tests pass against the phantom schema, not the live one. A test suite passing against stale fixtures gives false confidence -- these three files need to be rebuilt against the verified nine-field mapping.
+**Severity correction for `_format_narrative` (do not escalate):** `_format_narrative` output feeds `answer_context`, used only at `backend_service.py:1041` -- the API-failure fallback path. It does not enter the LLM prompt on normal query paths. An earlier claim that it "poisons every query" was retracted and verified false. The orphaned-entrances finding above is the correct framing.
 
 **Stale assertions and docstrings from f5641e7 (August 8 W_KW re-enable):**
 - Four assertions in `test_scoring.py` are currently failing (red since August 8): `test_default_weights_use_semantic_only` (got 0.89, expected 0.8), `test_handles_none_pc_score` (got 0.09, expected 0.0), `test_handles_invalid_pc_score_type` (got 0.075, expected 0.0), `test_default_weights_favor_semantic` (got 0.15, expected 0.0). These assert against blend values computed at W_KW=0.0 and have not been updated for W_KW=0.15.
-- The Returns block and Example block in `_hybrid_score` (utils/scoring.py) are stale -- they document the 0.0/1.0 defaults. The Args line was already fixed by f5641e7. Update Returns and Example to reflect 0.15/1.0 and the constants.py sourcing (pending MATTGPT-175's fix).
+- The Returns block and Example block in `_hybrid_score` (`utils/scoring.py`) are stale -- they document the 0.0/1.0 defaults. The Args line was already fixed by f5641e7. Update Returns and Example to reflect 0.15/1.0 and the constants.py sourcing (pending MATTGPT-175's fix).
 
-**Live user-facing surface (confirmed):** Typing `deep dive` in Ask Agy returns a truncated 5PSummary instead of the full STAR breakdown. The path is `conversation_view.py:338`. The RAG path builds the modes dict at `backend_service.py:1437` and `2001`. Phantom field names in `formatting.py` are producing degraded output on this surface now.
+**Work items:**
+1. Delete `formatting.py` formatter functions (or fold entire ticket into MATTGPT-176).
+2. Update the four failing `test_scoring.py` assertions for W_KW=0.15. Update Returns and Example block in `_hybrid_score`.
 
-**Severity correction for `_format_narrative` (do not escalate):** `_format_narrative` output feeds `answer_context`, which is used only at `backend_service.py:1041` -- the API-failure fallback path. It does not enter the LLM prompt on normal query paths. An earlier claim in this investigation that it "poisons every query" was retracted and verified false. The live user-facing surface note above applies to other formatting paths in this migration, not to `_format_narrative` specifically.
+---
 
-**Scope summary (three work items, may split into sub-tickets when sequencing is clear):**
-1. Migrate `formatting.py` field references to the verified nine-field mapping. This also fixes `story_has_metric` -- once it reads `Performance` and `Result`, the `has_metric` filter works with no further change.
-2. Rebuild test fixtures in `test_formatting.py`, `test_filters.py`, `test_scoring.py` against the live schema. Update the four currently-failing `test_scoring.py` assertions for W_KW=0.15.
-3. Update the Returns block and Example block in `_hybrid_score` (utils/scoring.py) to reflect 0.15/1.0 defaults.
+### MATTGPT-180
+**Test fixture blind spot: test_formatting.py, test_filters.py, test_scoring.py:85 pass against phantom schema**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **Logged:** August 11, 2026
+
+**Issue:** Three test files build fixtures using the phantom field names (`why`, `how`, `what`, `star.situation`, etc.) rather than the verified JSONL schema (`Purpose`, `Process`, `Performance`, `Situation`, etc.). Because the tests operate on their own in-memory dicts, they pass against the phantom schema with no coverage of the actual data the production code reads.
+
+Specific location: `test_scoring.py:85` constructs a fixture dict using phantom field names. `test_formatting.py` and `test_filters.py` do the same throughout.
+
+**Why this matters:** This is not a cleanup item. It is the reason the `formatting.py` phantom schema defect was invisible -- a passing test suite is meaningless if the fixtures do not match production data shape. Any refactor or fix that passes these tests is unverified.
+
+**Recurrence prevention rule:** Story fixtures must be built by calling `load_star_stories()` (or an equivalent helper that reads from `data/echo_star_stories_nlp.jsonl`) and selecting by index, Client, Domain, or Era. Inline fixture dicts built from field names guessed from code are not valid. This rule applies to all three files and any future test file that handles story objects.
+
+**Work items:**
+1. Rebuild fixtures in `test_formatting.py`, `test_filters.py`, and `test_scoring.py:85` using `load_star_stories()`.
+2. Confirm previously-passing tests still pass after fixture replacement (a test that breaks on correct fixtures was never actually testing the thing it claimed to test -- investigate each failure before discarding).
+
+---
+
+### MATTGPT-181
+**Early-career story slate: Well Found / F-22, Lockheed Martin STRATCOM, Cendian B2B/EDI -- closes pre-2005 corpus gap**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action (story-writing)
+- **Logged:** August 12, 2026
+- **Parent ticket:** MATTGPT-079 (coverage gaps meta)
+
+**Issue:** The corpus currently starts at 2005 (Solution Architect level). Role Match assessments against requirements like "10+ years professional software development experience" return partial matches because no STAR story anchors the 1997-2005 individual-contributor period. Decision is (a) new STAR stories, not resume or LinkedIn fix. This is committed work with drafts pending.
+
+**Record scope:** Starts at 2000 by Matt's ruling, which extends the 1997-2005 framing from the 2005 resume. No de-aging; the history is the pitch. Drafts from Matt's firsthand account with the 2005 resume as evidence backbone.
+
+**Three-item slate (drafts pending):**
+1. Well Found Technology / F-22 origin -- early-career anchor; aerospace / defense context.
+2. Lockheed Martin STRATCOM -- carries the 2002 TDD and pairing conviction; foundational engineering philosophy thread.
+3. Cendian B2B/EDI -- Norfolk Southern ancestor; supply chain / B2B integration thread.
+
+Adjunct-professor work folds in; placement TBD after drafts surface.
+
+**Work:** Write three STAR drafts from Matt's firsthand account, cross-referenced against the 2005 resume. Before ingestion, verify each draft against the full JSONL authoring schema by reading an existing story from `data/echo_star_stories_nlp.jsonl` -- the authoring schema includes fields like `5PSummary`, `Competencies`, `Theme`, `Era`, and `public_tags` that the -179 code-to-JSONL mapping does not cover. Do not use the -179 table as the authoring spec; it is a formatter code translation, not an ingestion checklist.
+
+**Cross-references:**
+- **MATTGPT-079** -- coverage gaps meta; pre-2005 gap tracked there as `[Decided]`
+- **MATTGPT-022** -- Data Quality Cleanup Journey (sibling story-writing ticket pattern)
+- **MATTGPT-078** -- AI Enablement Before It Had a Name (sibling story-writing ticket)
+
+---
+
+### MATTGPT-182
+**Eval and probe harnesses bypass loader normalization -- public_tags reaches scorer as str, contributing zero keyword tokens in every measurement run**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **Logged:** August 12, 2026
+
+**Issue:** `echo_star_stories_nlp.jsonl` stores `public_tags` as a comma-separated string (verified: type str on schema dump, August 11). `app.py`'s `load_star_stories()` parses it to a list at lines 239-240 via `_split_tags()` before any story reaches the retrieval stack. The app path is correct.
+
+`tests/eval_rag_quality.py` (lines 1328, 1769, 1862) and the four probe scripts (`probe_077_step0.py`, `probe_077_step05.py`, `probe_077_stepA.py`, `probe_assessor.py`) load the corpus with raw `json.loads` and never apply that normalization. All four call `rag_answer()` directly, which reaches `semantic_search` -> `_hybrid_score` -> `_keyword_score_for_story`. In `_keyword_score_for_story`, `' '.join()` over a string character-separates it. Every resulting token fails the `len >= 3` filter in `_tokenize`. `public_tags` contributes zero keyword tokens in every eval and probe run, while contributing normally in the app.
+
+**Verified by direct A/B on the live functions (August 11):** identical story, identical query. Raw dict scores 0.25, loader-normalized dict scores 0.375. Behavior unchanged since 764252b (October 2025).
+
+**Consequence -- the measurement record, not production:**
+- Production is correct. No visitor-facing defect. Do not escalate on that basis.
+- Every probe number and eval score on record was computed with one of nine haystack fields dark, against a production path where it is live.
+- The 64/64 eval run (August 11) is internally consistent and valid as a regression check, but is not measuring the production scorer.
+- MATTGPT-077's Step 0 re-baseline (August 11) has the same property. "P5/P8 still LEAD" was determined tags-dark. Whether they lead in production is unmeasured.
+- f5641e7 calibrated W_KW=0.15 on E1-E4 evidence from this path. The rank flips were real but occurred in a tags-dark regime. Whether 0.15 is right when tags contribute is untested.
+
+**Fix:** Extract `_split_tags()` and `_ensure_list()` from `app.py` into a shared loader that `app.py`, `eval_rag_quality.py`, and all four probes call. Do not duplicate the normalization into each script -- that recreates the same drift in five places.
+
+**Exit criterion:** After the fix, re-run the eval suite and MATTGPT-077 Step 0. Numbers will move. This is instrument correction, not regression. Do not compare results across the fix boundary; establish a new baseline and treat prior probe and eval numbers as belonging to a different regime.
+
+**Blocks:** MATTGPT-077 Phase 2. The cluster cull / rewrite path is scoped against a P5/P8 determination from the miscalibrated instrument. Re-measure before scoping that work.
+
+**Related:** MATTGPT-180 (test fixture blind spot -- same root cause, different surface: fixtures that do not come from the loader).
 
 ---
