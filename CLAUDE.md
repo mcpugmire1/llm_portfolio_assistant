@@ -234,6 +234,8 @@ Always triggers this check:
 
 ## Backlog Maintenance
 
+**Scope:** This process writes to `BACKLOG.md` and `CHANGELOG.md` only. `CLAUDE.md`, `ARCHITECTURE.md`, source files, and all other documents are out of scope. Any finding that would require a `CLAUDE.md` change gets flagged to Matt, not written.
+
 ### Status Enum
 Six values only. Do not invent others.
 
@@ -253,7 +255,7 @@ Six values only. Do not invent others.
 **Creating a ticket:**
 1. Find the current highest ID: `grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1`. New ID = that number + 1. Never eyeball the matrix to guess.
 2. Add matrix row in ID order in the **Active Matrix** table (never the Decided Against table).
-3. Add detail block in ID order under **Detail Blocks > Active Tickets** (never the Decided Against subsection).
+3. Add detail block in ID order under **Detail Blocks > Active Tickets**, inserted at the correct ID position. Never append to end of file. A block that lands after `### Decided Against` is in the wrong place regardless of status.
 4. Required fields: Status, Priority, Type, Issue, Logged.
 5. If it belongs in NOW or NEXT, add it to the roadmap immediately.
 
@@ -284,7 +286,10 @@ Six values only. Do not invent others.
 - **BACKLOG.md:** Everything else - Open, In Progress, Blocked, Parked, Decided Against. None of these move to CHANGELOG.md.
 
 ### Matrix and Detail Block Invariant
-Always in sync. Touch one, touch the other. A matrix row without a detail block is invalid. A detail block without a matrix row is invalid.
+Always in sync. Touch one, touch the other. A matrix row without a detail block is invalid. A detail block without a matrix row is invalid. Matrix row and detail block must land in the same edit with matching Priority and Type fields. Fields that disagree are invalid and must be corrected before the session proceeds.
+
+### Ticket Body Discipline
+Ticket bodies state dated observations, not current architecture. Write "Verified Aug 2026: `_tokenize` returns X" not "The scorer filters stopwords." Architecture descriptions go stale and send future sessions in the wrong direction.
 
 ### Maintenance Pass
 **Trigger:** Before picking up the next item on the NOW list.
