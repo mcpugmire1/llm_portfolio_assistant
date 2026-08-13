@@ -102,7 +102,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-168](#mattgpt-168) | diversify_results picks slot 1 in standard mode but prompt asserts it was ranked highest for the question — mismatch since Jan 2026 | Open | High | Bug | August 5, 2026 |
 | [MATTGPT-169](#mattgpt-169) | Positioning-story attractor on career-shaped queries: "Why Hire Matt?" dominates broad management retrieval independent of technical-noun overlap | Open | High | Investigation + Action | August 5, 2026 |
 | [MATTGPT-171](#mattgpt-171) | Phrase-aware matching: stopword-only phrases invisible to token-overlap scorer at any W_KW weight | Open | Low | Investigation | August 8, 2026 |
-| [MATTGPT-172](#mattgpt-172) | CIC-cluster consolidation: 48% corpus density in 2019-2023 block causes cluster-drift dominance on broad queries | Open | Medium | Action | August 8, 2026 |
+| [MATTGPT-172](#mattgpt-172) | CIC-cluster consolidation: CIC is 52/114 (46%) of corpus; Division concentration causes cluster-drift dominance on broad queries | Open | Medium | Action | August 8, 2026 |
 | [MATTGPT-173](#mattgpt-173) | Role Match JD validation: no defined behavior for malformed or comp-only JD inputs | Open | Medium | Issue | August 8, 2026 |
 | [MATTGPT-174](#mattgpt-174) | Confidence gate mislabels low-signal pools — noise-floor pools clear CONFIDENCE_HIGH and print "high" | Open | Medium | Defect/Design | August 11, 2026 |
 | [MATTGPT-175](#mattgpt-175) | W_KW trace payload reports 0.0 while ranking runs at 0.15 — lying instrument invalidates weight annotations in probe and eval records | Open | High | Bug | August 11, 2026 |
@@ -1866,14 +1866,21 @@ The phrase is not invisible to keyword scoring. It scores on a single stopword t
 ---
 
 ### MATTGPT-172
-**CIC-cluster consolidation: 2019-2023 corpus density causes cluster-drift dominance on broad queries**
+**CIC-cluster consolidation: Division concentration causes cluster-drift dominance on broad queries**
 
 - **Status:** Open
 - **Priority:** Medium
 - **Type:** Action
 - **Logged:** August 8, 2026
 
-**Issue:** 48% of STAR stories are anchored in the 2019-2023 CIC/CloudFirst era. This concentration means any broad query that doesn't trigger entity filtering or narrative mode resolves to whichever CIC-adjacent story is densest for that query's vocabulary. The problem is structural: MATTGPT-094 (closed) documented CIC dominating broad management queries in May 2026, and MATTGPT-169 documents "Why Hire Matt" (CIC-evidence-heavy) dominating career-shaped queries in August 2026. The dominant story changes as the corpus shifts, but the root cause is constant.
+**Verified corpus counts (August 13, 2026):**
+- Cloud Innovation Center: 52 of 114 stories (46%) corpus-wide
+- Era "Enterprise Innovation & Transformation": 56 of 114 (49%)
+- Cross-tab: 51 of that Era's 56 stories are CIC
+
+The concentration is a Division cluster, not a 2019-2023 date block -- Era values in this corpus are named, not dated. The original 48% figure was approximately right in magnitude; the framing was not. The consolidation target is unambiguous: cutting CIC stories moves both the Division count and the Era count together.
+
+**Issue:** CIC at 46% of the corpus means any broad query that doesn't trigger entity filtering or narrative mode resolves to whichever CIC-adjacent story is densest for that query's vocabulary. The problem is structural: MATTGPT-094 (closed) documented CIC dominating broad management queries in May 2026, and MATTGPT-169 documents "Why Hire Matt" (CIC-evidence-heavy) dominating career-shaped queries in August 2026. The dominant story changes as the corpus shifts, but the root cause is constant.
 
 **Proposed action:** Audit the CIC-era story set for semantic redundancy. Stories that cover the same competency (e.g., team leadership, stakeholder management, delivery at scale) at the same client with similar vocabulary are competing rather than complementing. Options: (a) merge redundant stories into a single richer story with a broader evidence base; (b) differentiate vocabulary so each story occupies a distinct retrieval niche; (c) explicitly add pre-2005 and 2005-2013 era stories to reduce the CIC fraction (already tracked in MATTGPT-079 as a coverage gap). Options compose.
 
