@@ -10,17 +10,17 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-08-13)
 
 **NOW**
-1. **-077 Phase 2** — Cluster cull / rewrite path. -182 done, re-baseline ran (August 13). Subject substitution disconfirmed as the lever; Phase 2 targets embedding distance.
-2. **-168** — diversify_results picks slot 1 but prompt tells the model it was ranked highest for the question (false on no-entity path). Independent enough to move earlier if needed -- the false claim is there regardless of which story reached slot 1.
-3. **-181** — Early-career story slate (Well Found / F-22, Lockheed STRATCOM, Cendian B2B/EDI). Parallel corpus work; adds evidence, doesn't reshape retrieval, doesn't block on the measurement thread.
+1. **-168** — slot 1 amplified without regard to margin; prompt falsely asserts relevance ranking. Rewrite or close after Aug 13 investigation (premise was wrong; see ticket). Real defect survives.
+2. **-172** — CIC-cluster consolidation. Moved up: Phase 2 of -077 was the cluster cull, which is this ticket's work. Proceeding without -077 dependency.
+3. **-181** — Early-career story slate (Well Found / F-22, Lockheed STRATCOM, Cendian B2B/EDI). Parallel corpus work; doesn't block on the measurement thread.
 4. **-129 stories 3-5** — AT&T Mobility, Launchpad AWS, Capital One. Stories 1+2 done. Stories 3-5 blocked on elicitation.
 5. **-175** — W_KW trace lie: delete stale module-local weights in pinecone_service.py, move to constants.py. Instrument cleanup.
 
 **NEXT** (queued):
 1. **-015** — JPM Payments IQ differentiation. Cheap data pass; upstream of operational surfacing; feeds cleaner signal for -128.
 2. **-128** — Source faithfulness. Unlocked. Recruiter clicks to verify a claim, gets wrong source cards -- direct trust failure.
-3. **Density re-measure** — Measure corpus density across eras and clients after -077 Phase 2 stabilizes. Gates -172 diagnosis.
-4. **-172** — CIC-cluster consolidation. Needs stable corpus and density measurement before the right consolidation move is clear.
+3. **Density re-measure** — Re-measure corpus density after -172 consolidation lands. Confirms the CIC fraction actually dropped; informs -077 re-measurement.
+4. **-077** — Re-measure P5/P8 after -172 consolidation. Phase 1 shipped (627f6f4). Phase 2 (cluster cull) is -172's work. Phase 3 (BM25) can't reach P5/P8 -- vocabulary mismatch, no stemmer. If -172 changes the pool composition, the problem may partly dissolve; if not, the residual is a vocabulary problem and stemming is the answer. No viable mechanism until -172 lands.
 5. **-169** — Positioning-story attractor on career-shaped queries.
 6. **-180** — Test fixture blind spot (test_formatting.py, test_filters.py, test_scoring.py).
 7. **-161** — Career span hardcoded across surfaces.
@@ -615,7 +615,8 @@ Each detail block uses these fields. Not every field is required for every item.
   - **P5 keyword gap narrowed.** Verified August 13 after MATTGPT-182 fix (loader normalization applied). On P5, Rearchitecting Live Railroad Systems scored kw=0.250 vs. kw=0.125 in the August 12 raw-dict reproduction. One additional token, consistent with a "Refactoring" public_tag reaching the scorer that the story's own prose never contains -- the title says "Rearchitecting" and the tokenizer does no stemming. Speed-Win held at kw=0.375 across both runs: "refactoring" already reached the scorer via its Process bullet, and the scorer intersects token sets, so a duplicate tag adds nothing. Net: P5 keyword gap narrowed from 3-1 to 3-2; blend gap from ~0.078 to ~0.060. Status unchanged at LEAD.
   - **General shape of tag impact:** Tags only move a score where they introduce vocabulary the other eight haystack fields lack. Expect small, concentrated corpus-wide impact rather than broad drift.
   - **Subject substitution disconfirmed as lever for these probes.** Across all four probe pairs (P1/P6, P4/P7, P5/P8, P2/P3), the "How does Matt..." and "How do you..." variants produced identical status. This disconfirms subject substitution (`_substitute_matt_subject`) as the lever for these probes. P5/P8 identity re-confirms the May 19 finding; P1/P6 and P4/P7 are new. It does not rule out query rewriting generally -- a rewrite that adds vocabulary rather than removing a name is untested by this probe set.
-- **Status note:** Phase 1 Green landed at 627f6f4. Phase 2 (cluster cull / rewrite) is blocked on MATTGPT-182 re-baseline. No status change to -077 overall until Phase 2 scope is determined and executed.
+- **Sequencing note (August 13, 2026):** Demoted to NEXT, behind -172. Phase 1 shipped (627f6f4). Phase 2 (cluster cull / rewrite) is -172's work -- proceeding there. Phase 3 (BM25) cannot reach P5/P8: the query says "platform refactoring," Rearchitecting Live Railroad Systems says "rearchitecting" / "rearchitecture" -- no stemmer, no match. What remains in -077 is two probes (P5/P8) with no viable retrieval mechanism until the CIC/Independent Project vocabulary density changes. Re-measure P5/P8 after -172 lands. If consolidation changes the pool composition, the problem may partly dissolve; if not, the residual is a vocabulary problem and adding BM25 with a stemmer (MATTGPT-178) becomes the answer.
+- **Status note:** Phase 1 Green landed at 627f6f4. Phase 2 (cluster cull / rewrite) is -172's work. No further -077 action until -172 lands and P5/P8 are re-measured.
 - **Logged:** May 19, 2026
 
 ---
