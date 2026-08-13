@@ -11,23 +11,21 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 **NOW**
 1. **-168** — slot 1 amplified without regard to margin; prompt falsely asserts relevance ranking. Rewrite or close after Aug 13 investigation (premise was wrong; see ticket). Real defect survives.
-2. **-172** — CIC-cluster consolidation. Moved up: Phase 2 of -077 was the cluster cull, which is this ticket's work. Proceeding without -077 dependency.
-3. **-181** — Early-career story slate (Well Found / F-22, Lockheed STRATCOM, Cendian B2B/EDI). Parallel corpus work; doesn't block on the measurement thread.
-4. **-129 stories 3-5** — AT&T Mobility, Launchpad AWS, Capital One. Stories 1+2 done. Stories 3-5 blocked on elicitation.
-5. **-175** — W_KW trace lie: delete stale module-local weights in pinecone_service.py, move to constants.py. Instrument cleanup.
+2. **-181** — Early-career story slate (Well Found / F-22, Lockheed STRATCOM, Cendian B2B/EDI). Parallel corpus work; doesn't block on the measurement thread.
+3. **-129 stories 3-5** — AT&T Mobility, Launchpad AWS, Capital One. Stories 1+2 done. Stories 3-5 blocked on elicitation.
+4. **-175** — W_KW trace lie: delete stale module-local weights in pinecone_service.py, move to constants.py. Instrument cleanup.
 
 **NEXT** (queued):
 1. **-015** — JPM Payments IQ differentiation. Cheap data pass; upstream of operational surfacing; feeds cleaner signal for -128.
 2. **-128** — Source faithfulness. Unlocked. Recruiter clicks to verify a claim, gets wrong source cards -- direct trust failure.
-3. **Density re-measure** — Re-measure corpus density after -172 consolidation lands. Confirms the CIC fraction actually dropped; informs -077 re-measurement.
-4. **-077** — Re-measure P5/P8 after -172 consolidation. Phase 1 shipped (627f6f4). Phase 2 (cluster cull) is -172's work. Phase 3 (BM25) can't reach P5/P8 -- vocabulary mismatch, no stemmer. If -172 changes the pool composition, the problem may partly dissolve; if not, the residual is a vocabulary problem and stemming is the answer. No viable mechanism until -172 lands.
-5. **-169** — Positioning-story attractor on career-shaped queries.
-6. **-180** — Test fixture blind spot (test_formatting.py, test_filters.py, test_scoring.py).
-7. **-161** — Career span hardcoded across surfaces.
-8. **-097** — Career-intent refresh. Below -172: career-intent reframing changes corpus shape, and -172 needs a stable corpus to be diagnosed against.
-9. **-089** — Logistics filter class: location / work-model / availability. Atlanta + relocation-open status currently dropped silently.
-10. **-074** — Entity cluster synthesis forcing. "How did you build the CIC" returns a survey instead of depth on a marquee query.
-11. **-096** — Methodology-context preservation. The methodology is what makes the metrics credible to an engineer.
+3. **-077** — Re-measure P5/P8 after -181 corpus additions. Phase 1 shipped (627f6f4). Phase 2 (cluster cull) premise disconfirmed via -172 parking. Phase 3 (BM25) can't reach P5/P8 -- vocabulary mismatch, no stemmer. If -181 changes the pool composition, the problem may partly dissolve; if not, the residual is a vocabulary problem and stemming is the answer.
+4. **-169** — Positioning-story attractor on career-shaped queries.
+5. **-180** — Test fixture blind spot (test_formatting.py, test_filters.py, test_scoring.py).
+6. **-161** — Career span hardcoded across surfaces.
+7. **-097** — Career-intent refresh.
+8. **-089** — Logistics filter class: location / work-model / availability. Atlanta + relocation-open status currently dropped silently.
+9. **-074** — Entity cluster synthesis forcing. "How did you build the CIC" returns a survey instead of depth on a marquee query.
+10. **-096** — Methodology-context preservation. The methodology is what makes the metrics credible to an engineer.
 
 (Everything else defaults to LATER, including -179, -183.)
 
@@ -100,7 +98,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-168](#mattgpt-168) | diversify_results picks slot 1 in standard mode but prompt asserts it was ranked highest for the question — mismatch since Jan 2026 | Open | High | Bug | August 5, 2026 |
 | [MATTGPT-169](#mattgpt-169) | Positioning-story attractor on career-shaped queries: "Why Hire Matt?" dominates broad management retrieval independent of technical-noun overlap | Open | High | Investigation + Action | August 5, 2026 |
 | [MATTGPT-171](#mattgpt-171) | Phrase-aware matching: stopword-only phrases invisible to token-overlap scorer at any W_KW weight | Open | Low | Investigation | August 8, 2026 |
-| [MATTGPT-172](#mattgpt-172) | CIC-cluster consolidation: CIC is 52/114 (46%) of corpus; Division concentration causes cluster-drift dominance on broad queries | Open | Medium | Action | August 8, 2026 |
+| [MATTGPT-172](#mattgpt-172) | CIC-cluster consolidation: CIC is 52/114 (46%) of corpus; Division concentration causes cluster-drift dominance on broad queries | Parked | Medium | Action | August 8, 2026 |
 | [MATTGPT-173](#mattgpt-173) | Role Match JD validation: no defined behavior for malformed or comp-only JD inputs | Open | Medium | Issue | August 8, 2026 |
 | [MATTGPT-175](#mattgpt-175) | W_KW trace payload reports 0.0 while ranking runs at 0.15 | Open | High | Bug | August 11, 2026 |
 | [MATTGPT-176](#mattgpt-176) | Dead code: zero-caller function, 200-line commented block, duplicate typed-alias map | Open | Low | Refactor | August 11, 2026 |
@@ -1885,25 +1883,46 @@ The phrase is not invisible to keyword scoring. It scores on a single stopword t
 ### MATTGPT-172
 **CIC-cluster consolidation: Division concentration causes cluster-drift dominance on broad queries**
 
-- **Status:** Open
+- **Status:** Parked -- premise disconfirmed, August 13, 2026
 - **Priority:** Medium
 - **Type:** Action
 - **Logged:** August 8, 2026
 
-**Verified corpus counts (August 13, 2026):**
+**Parked (August 13, 2026):** The ticket asserts CIC density (46% of corpus) causes cluster-drift dominance on broad queries. Two measurements disconfirm this; a third is directionally consistent.
+
+1. **July 2, 2026 raw retrieval probe.** Tested directly across four broad queries. CIC was absent from the cloud-transformation top ten and rank 7 on leadership. Cosine similarity is scale-invariant; CIC's greater story length could not inflate its score, and the data confirmed it did not. If CIC was over-surfacing, the cause had to be downstream (pinning, synthesis assembly, diversify_results), not raw retrieval.
+
+2. **August 13, 2026 live traces.** Zero CIC stories in the Sev-1 query pool; six of ten were Independent Project.
+
+3. **August 13 count over query_log_parsed.csv (43 rows), leading story by Division:**
+
+   | Division | Leading queries | Corpus share |
+   |---|---|---|
+   | Sabbatical | 13 | 9 stories, 8% |
+   | Cloud Innovation Center | 11 | 52 stories, 46% |
+   | Cross-Division | 9 | 9 stories, 8% |
+   | Technology | 5 | -- |
+   | Financial Services Technology Consulting | 3 | -- |
+   | Atlanta Liquid Studio | 2 | -- |
+
+   CIC leads 26% of queries against 46% corpus share. Under-represented, not dominant.
+
+The downstream mechanisms the July probe could not measure have since been fixed: CIC normalization (March 2026) and the diversify_results pinning bug (MATTGPT-021, closed May 2026 via MATTGPT-073). The ticket's own supporting evidence, MATTGPT-094, dates from May 2026 and predates both fixes.
+
+**Sample limitation (recorded, not resolved):** The 43 rows in query_log_parsed.csv are a 7% slice of the 609-query production log and skew toward queries typed during testing. The Google Sheet log carries no leading-story column, so the Division count cannot be run over full traffic. Measurement 3 is supporting evidence, not decisive. Measurements 1 and 2 stand on their own.
+
+**Actual overrepresentation:** The Independent Project / MattGPT cluster (MATTGPT-077) and the Professional Narrative cluster (MATTGPT-169). Nine stories each, 8% of corpus each, together leading 51% of queries in the sampled rows.
+
+**Reopen condition:** Leading-story column added to the query logger (MATTGPT-174 shipped this for top_score; a leading-story / Division column is the next step) and full-traffic analysis shows CIC leading disproportionately.
+
+**Verified corpus counts (August 13, 2026, preserved for reference):**
 - Cloud Innovation Center: 52 of 114 stories (46%) corpus-wide
 - Era "Enterprise Innovation & Transformation": 56 of 114 (49%)
 - Cross-tab: 51 of that Era's 56 stories are CIC
 
-The concentration is a Division cluster, not a 2019-2023 date block -- Era values in this corpus are named, not dated. The original 48% figure was approximately right in magnitude; the framing was not. The consolidation target is unambiguous: cutting CIC stories moves both the Division count and the Era count together.
+The concentration is real. The retrieval dominance claim is not supported by the evidence.
 
-**Issue:** CIC at 46% of the corpus means any broad query that doesn't trigger entity filtering or narrative mode resolves to whichever CIC-adjacent story is densest for that query's vocabulary. The problem is structural: MATTGPT-094 (closed) documented CIC dominating broad management queries in May 2026, and MATTGPT-169 documents "Why Hire Matt" (CIC-evidence-heavy) dominating career-shaped queries in August 2026. The dominant story changes as the corpus shifts, but the root cause is constant.
-
-**Proposed action:** Audit the CIC-era story set for semantic redundancy. Stories that cover the same competency (e.g., team leadership, stakeholder management, delivery at scale) at the same client with similar vocabulary are competing rather than complementing. Options: (a) merge redundant stories into a single richer story with a broader evidence base; (b) differentiate vocabulary so each story occupies a distinct retrieval niche; (c) explicitly add pre-2005 and 2005-2013 era stories to reduce the CIC fraction (already tracked in MATTGPT-079 as a coverage gap). Options compose.
-
-**Scope clarification:** This is a corpus-composition action, not a retrieval tuning ticket. Do not address by changing W_KW, diversification parameters, or retrieval logic -- the density is the underlying variable. Retrieval tuning on a dense corpus produces MATTGPT-094's whack-a-mole outcome.
-
-**Cross-references:** MATTGPT-094 (closed -- documented the CIC dominance pattern and whack-a-mole diagnosis), MATTGPT-169 (positioning-story attractor, same root cause), MATTGPT-181 (early-career story slate -- adding pre-2005 stories is one consolidation lever).
+**Cross-references:** MATTGPT-094 (closed -- documented the CIC dominance pattern in May 2026, predates the downstream fixes), MATTGPT-077 and MATTGPT-169 (now carry the actual concentration finding), MATTGPT-181 (early-career story slate was listed here as consolidation lever (c); stands on its own merits, unaffected by this parking).
 
 ---
 
