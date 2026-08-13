@@ -2103,6 +2103,8 @@ All list fields are already lists in the JSONL. The mismatch is field naming onl
 **Work items:**
 1. Delete the four dead functions from `formatting.py`: `_format_narrative`, `_format_key_points`, `_format_deep_dive`, `strongest_metric_line`. Do not delete `build_5p_summary` (live -- imported by `utils/scoring.py`) or `story_has_metric` (live defect -- see MATTGPT-183). The module stays.
 
+**Sequencing note:** MATTGPT-183 also touches `formatting.py` (fixes `story_has_metric`'s field names). Both tickets edit the same file. Do them in the same commit or ensure -183's fix is applied before -179's deletion pass so the diff is clean. Do not let -179's deletion accidentally remove `story_has_metric`.
+
 ---
 
 ### MATTGPT-180
@@ -2203,7 +2205,7 @@ Adjunct-professor work folds in; placement TBD after drafts surface.
 
 **Note:** `story_has_metric` was previously described in MATTGPT-179 as unreachable code. That was wrong -- it is imported and called on the live filter path. MATTGPT-179 is dead formatters; this defect is separate.
 
-**Cross-references:** MATTGPT-179 (dead formatters in formatting.py -- module context), MATTGPT-180 (test fixture blind spot -- test_filters.py fixtures may not catch this because they use phantom schema).
+**Cross-references:** MATTGPT-179 (dead formatters in formatting.py -- both tickets edit the same file; coordinate or combine into one commit; -179 deletes `strongest_metric_line` which has the same phantom-field pattern as `story_has_metric` but is dead code, not live), MATTGPT-180 (test fixture blind spot -- test_filters.py fixtures may not catch this because they use phantom schema).
 
 ---
 
