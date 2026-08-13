@@ -1960,10 +1960,11 @@ Lines 97-98 define module-local constants W_PC=1.0 and W_KW=0.0. Line 281 emits 
 
 **Violation:** `config/constants.py` opens with "NEVER duplicate these values in other files." W_PC and W_KW are not in `constants.py`; they are in `utils/scoring.py` as defaults. The module-local copies in `pinecone_service.py` are the duplication the rule was written to prevent, and they diverged silently.
 
-**Fix:** Three steps, in order:
+**Fix:** Four steps, in order:
 1. Add W_PC and W_KW to `config/constants.py` as the single authoritative source.
 2. Update `utils/scoring.py` to import W_PC and W_KW from `constants.py` rather than defining them as defaults.
 3. Delete `pinecone_service.py` lines 97-98. Line 281's trace payload then reads whatever `constants.py` holds and will be accurate.
+4. In the same edit as step 2: update the `_hybrid_score` Returns and Example block in `utils/scoring.py` to reflect W_KW=0.15. Update the four failing `test_scoring.py` assertions (`test_default_weights_use_semantic_only`, `test_handles_none_pc_score`, `test_handles_invalid_pc_score_type`, `test_default_weights_favor_semantic`) for W_KW=0.15. Context: these four assertions were correct when written against the W_KW=0.0 default. They became wrong on August 8 when f5641e7 raised W_KW to 0.15 without updating them. This is stale-test cleanup trailing from that commit, not a new defect. Step 4 belongs with steps 2-3 in a single edit to `utils/scoring.py`.
 
 No behavior change to ranking. The fix corrects the instrument, not the weight.
 
@@ -2089,13 +2090,8 @@ All list fields are already lists in the JSONL. The mismatch is field naming onl
 
 **Severity correction for `_format_narrative` (do not escalate):** `_format_narrative` output feeds `answer_context`, used only at `backend_service.py:1041` -- the API-failure fallback path. It does not enter the LLM prompt on normal query paths. An earlier claim that it "poisons every query" was retracted and verified false. The orphaned-entrances finding above is the correct framing.
 
-**Stale assertions and docstrings from f5641e7 (August 8 W_KW re-enable):**
-- Four assertions in `test_scoring.py` are currently failing (red since August 8): `test_default_weights_use_semantic_only` (got 0.89, expected 0.8), `test_handles_none_pc_score` (got 0.09, expected 0.0), `test_handles_invalid_pc_score_type` (got 0.075, expected 0.0), `test_default_weights_favor_semantic` (got 0.15, expected 0.0). These assert against blend values computed at W_KW=0.0 and have not been updated for W_KW=0.15.
-- The Returns block and Example block in `_hybrid_score` (`utils/scoring.py`) are stale -- they document the 0.0/1.0 defaults. The Args line was already fixed by f5641e7. Update Returns and Example to reflect 0.15/1.0 and the constants.py sourcing (pending MATTGPT-175's fix).
-
 **Work items:**
 1. Delete `formatting.py` formatter functions (or fold entire ticket into MATTGPT-176).
-2. Update the four failing `test_scoring.py` assertions for W_KW=0.15. Update Returns and Example block in `_hybrid_score`.
 
 ---
 
