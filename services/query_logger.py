@@ -40,6 +40,7 @@ HEADERS = [
     "Session ID",
     "Story Title",
     "Client",
+    "Top Score",
 ]
 
 _headers_checked = False
@@ -157,6 +158,8 @@ def log_query(
     confidence: str = "",
     result_count: int = 0,
     redirect_reason: str = "",
+    top_score: float
+    | str = "",  # "" = no search ran; 0.0 = search ran, no hits; float = real score
 ):
     # Skip logging for known monitoring bots (HeadlessChrome regression runs,
     # UptimeRobot keep-alive pings, etc.). Mirrors the page_load filter in
@@ -181,6 +184,7 @@ def log_query(
             "Redirect Reason": redirect_reason,
             "User-Agent": user_agent,
             "Screen Width": screen_size,
+            "Top Score": top_score,
         },
     )
     Thread(target=_append_row, args=(row,), daemon=True).start()

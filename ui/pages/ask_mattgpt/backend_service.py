@@ -1678,6 +1678,7 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
                 confidence=confidence,
                 result_count=len(pool),
                 redirect_reason="low_confidence",
+                top_score=search_result.get("top_score", 0.0),
             )
             st.session_state["ask_last_reason"] = "low_confidence"
             st.session_state["ask_last_query"] = question or ""
@@ -1739,6 +1740,7 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
                     confidence=confidence,
                     result_count=0,
                     redirect_reason="low_confidence",
+                    top_score=search_result.get("top_score", 0.0),
                 )
                 st.session_state["ask_last_reason"] = "low_confidence"
                 st.session_state["ask_last_query"] = question or ""
@@ -2032,6 +2034,7 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
         intent_family=intent_family,
         confidence=confidence,
         result_count=len(ranked),
+        top_score=search_result.get("top_score", 0.0),
     )
 
     return {

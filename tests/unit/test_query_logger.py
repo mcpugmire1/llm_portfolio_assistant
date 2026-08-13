@@ -123,3 +123,55 @@ class TestLogQueryBotFilter:
         ):
             query_logger.log_query("How did Matt scale teams?", page="Ask Agy")
             mock_thread.assert_called_once()
+
+
+class TestLogQueryTopScore:
+    """log_query() must record top_score in the Top Score column."""
+
+    REAL_UA = (
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/147.0.0.0 Safari/537.36"
+    )
+
+    def _mock_context(self, user_agent: str) -> MagicMock:
+        ctx = MagicMock()
+        ctx.headers.get.return_value = user_agent
+        ctx.timezone = "America/New_York"
+        return ctx
+
+    def _captured_row(self, mock_thread) -> list:
+        return mock_thread.call_args.kwargs["args"][0]
+
+    def test_top_score_is_last_header(self):
+        from services.query_logger import HEADERS
+
+        assert HEADERS[-1] == "Top Score"
+
+    def test_top_score_written_when_supplied(self):
+        from services import query_logger
+
+        ctx = self._mock_context(self.REAL_UA)
+        with (
+            patch.object(query_logger.st, "context", ctx),
+            patch.object(query_logger, "Thread") as mock_thread,
+        ):
+            query_logger.log_query("test", top_score=0.847)
+            row = self._captured_row(mock_thread)
+        from services.query_logger import HEADERS
+
+        assert row[HEADERS.index("Top Score")] == 0.847
+
+    def test_top_score_defaults_to_empty_string(self):
+        from services import query_logger
+
+        ctx = self._mock_context(self.REAL_UA)
+        with (
+            patch.object(query_logger.st, "context", ctx),
+            patch.object(query_logger, "Thread") as mock_thread,
+        ):
+            query_logger.log_query("test")
+            row = self._captured_row(mock_thread)
+        from services.query_logger import HEADERS
+
+        assert row[HEADERS.index("Top Score")] == ""
