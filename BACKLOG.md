@@ -15,7 +15,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 3. **-077 Phase 2** — Cluster cull / rewrite path, now scoped against accurate re-baseline. P5/P8 determination was tags-dark; re-measure before scoping the work.
 4. **-168** — diversify_results picks slot 1 but prompt tells the model it was ranked highest for the question (false on no-entity path). Sits after re-baseline: -077 and -168 compound on the same query, so you want -077's real state before judging how much -168 matters on its own. Independent enough to move earlier if needed -- the false claim is there regardless of which story reached slot 1.
 5. **-181** — Early-career story slate (Well Found / F-22, Lockheed STRATCOM, Cendian B2B/EDI). Parallel corpus work; adds evidence, doesn't reshape retrieval, doesn't block on the measurement thread.
-6. **-129 stories 1+2** — AT&T SE CRM + Fiserv expand-from-logged stories. Parallel corpus work alongside -181, same reasoning.
+6. **-129 stories 3-5** — AT&T Mobility, Launchpad AWS, Capital One. Stories 1+2 acceptance criterion met (confirmed August 12, 2026). Stories 3-5 blocked on elicitation.
 7. **-175** — W_KW trace lie: delete stale module-local weights in pinecone_service.py, move to constants.py. Instrument cleanup; pairs with the re-baseline work.
 
 **NEXT** (queued):
@@ -1135,9 +1135,9 @@ For each client-specific probe query, assert `client_name in [s.get("Client") fo
 **Acceptance criteria:**
 - Each story reaches STAR depth: Situation (context + stakes), Task (scope + constraints), Action (what Matt specifically did), Result (quantified outcome).
 - No story references are expanded by paraphrasing existing thin content — only confirmed facts.
-- Stories 1 and 2 (expand-from-logged) completed before Stories 3–5 (recovery-dependent).
+- Stories 1 and 2 (expand-from-logged) completed before Stories 3–5 (recovery-dependent). **[Met -- August 12, 2026.]** AT&T SE CRM and Fiserv both confirmed at STAR depth against corpus. All key facts from the ticket present and quantified.
 
-**Sequencing:** Stories 3–5 are blocked on elicitation. Do not let recovery stories block Stories 1 and 2.
+**Sequencing:** Stories 3–5 are blocked on elicitation. Stories 1 and 2 done; do not conflate their status with 3–5.
 
 **Candidate additions (July 29, 2026 -080 session):** CIC-era hands-on technical stories flagged as under-written: Spring Boot (if hands-on); AI-enablement work outside Liquid Studio/CIC scope (distinct from MATTGPT-078). Evaluate for addition to this list or as separate story tickets before next elaboration pass.
 
