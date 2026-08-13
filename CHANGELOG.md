@@ -8,6 +8,16 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Ask Agy
 
+**August 13, 2026 — MATTGPT-168 closed -- premise disconfirmed; surviving defect refiled as MATTGPT-186**
+
+`diversify_results` (`backend_service.py:1246-1319`) was read in full: line 1289 does `pinned = stories[0]` unconditionally and never reorders. The function partitions `stories[1:]` by Client bucket; it never reads a score. Since the input arrives score-sorted from Pinecone, slot 1 is the top-scored story on every path. The original ticket's code-path table ("Standard mode, no entity: slot 1 is diversification output") was incorrect; the prompt's claim is accurate everywhere. Fix A (extract `candidates[0]` before diversification) was a no-op -- the code already does this internally.
+
+The surviving defect -- slot 1 amplified without regard to margin -- is filed as MATTGPT-186. The Aug 3 exhibit (0.476 tie) and Aug 13 Sev-1 exhibit (0.020 margin in 0.054-wide pool) both belong there.
+
+Side finding preserved: two `TestDiversifyResults` tests asserting max-one-per-client and score ordering have been failing (verified pre-existing by git stash). `diversify_results` concatenates `duplicate_overflow` rather than dropping it and orders by client bucket rather than score. Tests assert a contract the docstring implies and the code does not implement.
+
+---
+
 **August 13, 2026 — Top Score column added to query logger; confidence gate mechanism confirmed (MATTGPT-174)** -- `bc72fba`
 
 Investigation confirmed the confidence gate reads `max(h["score"] for h in hits)` -- pure Pinecone cosine similarity, keyword term never enters the gate. Production query log (532 rows): 512 high, 12 low, 8 none; 96% high; every low/none row is a greeting, test string, or gibberish. Both constants sat below the operating range (real pools bottom at ~0.30; CONFIDENCE_LOW=0.20 prunes nothing, CONFIDENCE_HIGH=0.25 is cleared by everything). Gate was functioning as a second nonsense filter, not a match-strength signal.

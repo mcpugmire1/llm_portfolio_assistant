@@ -10,7 +10,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-08-13)
 
 **NOW**
-1. **-168** — slot 1 amplified without regard to margin; prompt falsely asserts relevance ranking. Rewrite or close after Aug 13 investigation (premise was wrong; see ticket). Real defect survives.
+1. **-186** — slot 1 amplified without regard to margin; tie or near-tie at slot 1 gets 80% of the answer. Exhibits: 0.476 tie (Aug 3), 0.020 gap in 0.054-wide pool (Aug 13). Descended from -168 (closed).
 2. **-181** — Early-career story slate (Well Found / F-22, Lockheed STRATCOM, Cendian B2B/EDI). Parallel corpus work; doesn't block on the measurement thread.
 3. **-129 stories 3-5** — AT&T Mobility, Launchpad AWS, Capital One. Stories 1+2 done. Stories 3-5 blocked on elicitation.
 4. **-175** — W_KW trace lie: delete stale module-local weights in pinecone_service.py, move to constants.py. Instrument cleanup.
@@ -95,7 +95,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-165](#mattgpt-165) | nonsense_filters.jsonl has two live generations — gen-1 blocks legitimate queries gen-2 was meant to permit | Open | Medium | Bug | August 3, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories invisible to entity-scoped queries — Fortune 500 Clients / Cross-Division placeholder metadata excluded from client filters | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
-| [MATTGPT-168](#mattgpt-168) | diversify_results picks slot 1 in standard mode but prompt asserts it was ranked highest for the question — mismatch since Jan 2026 | Open | High | Bug | August 5, 2026 |
+| [MATTGPT-186](#mattgpt-186) | Slot 1 is amplified without regard to margin -- tie or near-tie at slot 1 gets 80% of the answer | Open | High | Bug | August 13, 2026 |
 | [MATTGPT-169](#mattgpt-169) | Positioning-story attractor on career-shaped queries: "Why Hire Matt?" dominates broad management retrieval independent of technical-noun overlap | Open | High | Investigation + Action | August 5, 2026 |
 | [MATTGPT-171](#mattgpt-171) | Phrase-aware matching: stopword-only phrases invisible to token-overlap scorer at any W_KW weight | Open | Low | Investigation | August 8, 2026 |
 | [MATTGPT-172](#mattgpt-172) | CIC-cluster consolidation: CIC is 52/114 (46%) of corpus; Division concentration causes cluster-drift dominance on broad queries | Parked | Medium | Action | August 8, 2026 |
@@ -1773,56 +1773,6 @@ Option A recalibrates the classifier. Option B adds an upstream gate. They compo
 
 ---
 
-### MATTGPT-168
-**diversify_results picks slot 1 in standard mode but prompt asserts it was ranked highest for the question**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Bug
-- **Files:** `ui/pages/ask_mattgpt/backend_service.py` (line 1934), `ui/pages/ask_mattgpt/prompts.py` (lines 75-80)
-- **Logged:** August 5, 2026
-
-**Issue:** In standard mode with no entity match and non-narrative intent, `diversify_results(candidates)` runs over all candidates and its output becomes `ranked_stories`. `ranked_stories[0]` is wrapped in `<primary_story>` and the prompt tells the model: "the primary story was ranked highest for this question -- build your entire response around it and resist supporting stories even if they seem more interesting."
-
-That is a factual claim to the model that is false on this path. `diversify_results` optimizes for client variety, not relevance. Slot 1 is whichever story survives client-diversity filtering first. The model is then instructed to resist better evidence -- the management story, the correct answer -- on the basis of a ranking that never happened. That's not a cosmetic comment problem; it's the system actively overriding the right answer using a false premise.
-
-**Code path (confirmed):**
-- Entity mode: `ranked = [pinned] + diversify_results(others)` -- slot 1 IS the top entity-relevant story. Prompt claim is accurate here.
-- Narrative mode: `ranked = sorted(candidates, key=pc, reverse=True)` -- slot 1 IS the top Pinecone score. Prompt claim is accurate here.
-- Standard mode, no entity: `ranked = diversify_results(candidates)` -- slot 1 is diversification output. Prompt claim is **false**.
-
-**Concrete exhibit (August 3 trace):** Query "Has Matt directly managed engineering teams?" -- no entity detected, non-narrative intent. Why Hire Matt and the management story both score 0.476. Why Hire Matt was already first in Pinecone ordering. `diversify_results` kept it at slot 1 and moved the management story from position 2 to position 4 by inserting AT&T and Capital One for client variety. The prompt then instructed the LLM to build the entire response around Why Hire Matt and actively resist the management story. The LLM complied. The result was a Professional Narrative answer to a direct operational question.
-
-**Design gap, not regression:** Confirmed via `git log -S "primary_story"`. The XML isolation and slot-1 designation were introduced together in commit 1c96315 (Jan 23, 2026). The entity path was implemented correctly from day one: `[pinned] + diversify_results(others)` -- pin first, then diversify the rest. The no-entity path was always `diversify_results(candidates)` with no pre-diversification pin. The asymmetry is in the same file, same function, same commit. The entity path got the right pattern; the no-entity path didn't. That's what makes the fix obvious: apply the same pattern.
-
-**Fix options:**
-- **A (preferred):** Apply the entity-pin pattern to the no-entity path. Extract `candidates[0]` (top Pinecone score) before diversification, pin to slot 1, run `diversify_results` on the rest. Makes the prompt claim accurate. One line change at line 1934.
-- **B:** Update the prompt to remove the relevance-ordering claim for non-entity paths. Honest but doesn't fix the behavioral problem -- the LLM still builds around whichever story diversification happens to put first.
-
-Option A is the right fix. Option B is a prerequisite comment correction that should ship regardless.
-
-**Compounds with MATTGPT-077 on the same query:** -077 is why Why Hire Matt reaches 0.476 on "Has Matt directly managed engineering teams?" (retrieval contamination). -168 is why the LLM then builds its entire answer around it (false relevance claim + resist instruction). The two defects hit the same query at different pipeline stages. Working -077 alone reduces the probability of the wrong story reaching slot 1 but doesn't close this gap -- any query where diversification reorders is still affected regardless of retrieval quality.
-
-**Pre-registered validation (required before merge):** Pinning slot 1 changes what the LLM builds every standard-mode answer around -- not just the queries where diversification currently misfires. Run the full eval golden suite before and after the fix. If answers shift on queries unrelated to this defect, that movement is worth seeing before it reaches production. A passing eval doesn't mean the fix is neutral; read the diff on changed answers, not just the pass count.
-
-**Verified Aug 13, 2026 -- premise is wrong. Rewrite or close.**
-
-`diversify_results` (`backend_service.py:1246-1319`) was read in full. Line 1289 does `pinned = stories[0]` unconditionally and never reorders it. The function partitions `stories[1:]` into named / generic / duplicate buckets by Client name and concatenates. It never reads a score. Since the input list arrives score-sorted from Pinecone, slot 1 is the top-scored story on every path. The code-path table's third row -- "Standard mode, no entity: slot 1 is diversification output. Prompt claim is false" -- is incorrect. The prompt's claim is accurate everywhere.
-
-Fix A is therefore a no-op. "Extract candidates[0] before diversification, pin to slot 1, run diversify_results on the rest" is exactly what the function already does internally. Applying it at line 1934 changes nothing.
-
-The ticket's own Aug 3 exhibit stated this without flagging it: "Why Hire Matt was already first in Pinecone ordering. diversify_results kept it at slot 1." Kept, not selected.
-
-**What survives, and is a different defect:** Index 0 is treated as authoritative regardless of margin. `prompts.py:171` requires at least 80% of the response to come from the primary story and forbids building around a supporting story. Nothing checks whether slot 1's win was decisive. Aug 3: a 0.000 gap (both stories at 0.476). Aug 13 Sev-1: 0.020 gap in a 0.054-wide pool. Both get the same pin and the same 80% floor as a 0.072 gap on a clean entity query. Lowering the 80% floor would not change either outcome -- the response would still be mostly the wrong story. Only a different slot 1 changes the answer, which makes this a ranking and gating question, not a prompt question.
-
-**Disposition:** Close -168, or rewrite it as "slot 1 is amplified without regard to margin" and carry both exhibits. Either way, remove Fix A -- it will read as scoped work and change nothing.
-
-**TestDiversifyResults test failures (pre-existing, verified by git stash):** Two tests asserting max-one-per-client and score ordering have been failing. `diversify_results` concatenates `duplicate_overflow` onto the result rather than dropping it, and orders by client bucket rather than score. The tests assert a contract the docstring implies and the code does not implement. Same finding: the function is client-partitioning, not ranking.
-
-**Cross-references:** MATTGPT-077 (retrieval contamination, upstream cause), MATTGPT-074 (entity-cluster promotion overriding relevance, different mechanism, same post-retrieval override theme), MATTGPT-174 (the gate is where margin information could live), MATTGPT-172 (concentration is why the wrong story reaches slot 1 on no-entity queries).
-
----
-
 ### MATTGPT-169
 **Positioning-story attractor on career-shaped queries: "Why Hire Matt?" dominates broad management retrieval independent of technical-noun overlap**
 
@@ -1849,11 +1799,11 @@ The ticket's own Aug 3 exhibit stated this without flagging it: "Why Hire Matt w
 
 **Escape routes (inherited from MATTGPT-094):**
 - **Route 1 -- Fan-out on broad queries:** On queries where no entity is detected and intent is not narrative, retrieve from multiple clusters (management, delivery, technical, leadership) rather than a single top-k result. Reduces the probability of any one story dominating. Implementation approach unresolved -- needs scoping.
-- **Route 2 -- Break the rank-verdict coupling:** Decouple which story the LLM receives as primary from diversification output order. MATTGPT-094 gated this route on -080 (complete) and -088 (closed August 5, 2026). Both gates are now clear. Reassess whether the mechanism is still the right design, or whether MATTGPT-168 (false relevance claim in the slot-1 prompt instruction) is the more surgical fix for the same coupling. Route 2 and -168 may overlap -- read -168 before scoping Route 2 independently.
+- **Route 2 -- Break the rank-verdict coupling:** Decouple which story the LLM receives as primary from diversification output order. MATTGPT-094 gated this route on -080 (complete) and -088 (closed August 5, 2026). Both gates are now clear. The defect to scope around: a tie or near-tie at slot 1 gets 80% of the answer. The Aug 5 evidence is a 0.476 tie (Why Hire Matt tied with the management story); the Aug 13 Sev-1 trace is 0.020 margin in a 0.054-wide pool. Both get the same 80% floor as a clean decisive win. Route 2 means answering whether the LLM should receive a different primary story when slot 1's margin was not decisive.
 
 **CIC concentration consequence:** When "Why Hire Matt?" wins as primary story, the answer draws from four years of CIC evidence and under-represents the earlier career. This is a distinct problem from retrieval dominance and should be documented in MATTGPT-079 if not already there -- the story itself may need scope expansion or the diversification must be career-span-aware rather than client-variety-aware.
 
-**Cross-references:** MATTGPT-077 (retrieval contamination, different mechanism -- noun-overlap vs. positioning-story density), MATTGPT-168 (slot-1 false relevance claim compounds this defect at the prompting layer), MATTGPT-079 (Role Match coverage gaps -- CIC concentration in evidence is a related corpus-shape issue).
+**Cross-references:** MATTGPT-077 (retrieval contamination, different mechanism -- noun-overlap vs. positioning-story density), MATTGPT-079 (Role Match coverage gaps -- CIC concentration in evidence is a related corpus-shape issue).
 
 ---
 
@@ -2267,6 +2217,36 @@ Confirmed live, do not delete: `get_context_story`, `story_modes`, `is_empty_con
 **User impact:** A visitor who notices the portfolio leaning on a side project and tries to redirect gets the same answer, more emphatically, each time they try.
 
 **Cross-references:** MATTGPT-077 (Independent Project / MattGPT vocabulary concentration is why MattGPT dominates these pools in the first place), MATTGPT-172 (CIC consolidation -- reducing Independent Project density is the upstream lever; this ticket handles the explicit-exclusion case).
+
+---
+
+### MATTGPT-186
+**Slot 1 is amplified without regard to margin -- tie or near-tie at slot 1 gets 80% of the answer**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **Files:** `ui/pages/ask_mattgpt/prompts.py` (line 171), `ui/pages/ask_mattgpt/backend_service.py` (line 829)
+- **Logged:** August 13, 2026
+- **Descended from:** MATTGPT-168 (closed -- original premise disconfirmed; this ticket carries the surviving defect)
+
+**Issue:** `ranked_stories[0]` is wrapped in `<primary_story>` and `prompts.py:171` requires at least 80% of the response to come from it, forbidding the model from building around a supporting story. Nothing in the pipeline checks whether slot 1's win was decisive. A story that leads by 0.000 gets the same treatment as one leading by 0.072.
+
+**Exhibit 1 (August 3, 2026):** "Has Matt directly managed engineering teams?" Why Hire Matt and the management story both scored 0.476 -- a tie. Why Hire Matt held slot 1 by Pinecone ordering. The model built the entire answer around it; the result was a Professional Narrative response to a direct operational question.
+
+**Exhibit 2 (August 13, 2026):** "how did Matt handle a Sev-1 defect?" Pool spanned 0.298 to 0.352. Leader was 0.020 clear of second in a 0.054-wide band. Slot 1 was a MattGPT story; the Fiserv story with actual Sev-1 evidence sat at rank 5, reached the LLM at position 2, and was capped at 20% by the floor.
+
+Compare a clean case: the Fiserv entity query led at 0.580 with a 0.072 gap to second. Same pin, same 80% floor, decisively different margin.
+
+**What will not fix it:** Lowering the 80% floor. On both exhibits the response would still be mostly the wrong story. Only a different slot 1 changes the answer.
+
+**Floor consistency note:** The floor does not always bind. On "Tell me about a Sev-1 Matt handled" (August 13), MattGPT led at 0.303 and the model answered from Fiserv at slot 3 anyway. The floor's effect is inconsistent and not fully characterized.
+
+**Do not fix by re-pinning:** MATTGPT-168 proposed extracting `candidates[0]` before diversification; `diversify_results` already pins `stories[0]` unconditionally at line 1289. That change is a no-op. See MATTGPT-168 (closed) for the full disconfirmation.
+
+**Where margin information could live:** The confidence gate (MATTGPT-174 shipped Top Score logging). The gate is currently the only stage positioned to carry spread as well as level. A gate that reads both could conditionally suppress the 80% floor or widen the primary story window when slot 1's margin is below a threshold.
+
+**Cross-references:** MATTGPT-174 (gate calibration -- margin information needs to be computed somewhere; this is the candidate), MATTGPT-077 and MATTGPT-169 (why the wrong story reaches slot 1 in the first place), MATTGPT-168 (closed, premise disconfirmed -- original framing incorrect).
 
 ---
 
