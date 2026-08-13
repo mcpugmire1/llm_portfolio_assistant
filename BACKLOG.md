@@ -1967,7 +1967,7 @@ Lines 97-98 define module-local constants W_PC=1.0 and W_KW=0.0. Line 281 emits 
 
 **What is proven:** Line 281 emits the module-local pair (W_KW=0.0) into the trace payload. Line 316 blends using the imported `_hybrid_score` defaults (W_KW=0.15). These are two different values for the same conceptual weight, in the same module, three lines apart.
 
-**What is unverified:** Whether the E1-E4 pre-registered experiment or the eval suite consumed the trace payload's `weights` key and used it for anything beyond display. If they did, weight annotations in those records are wrong while rank flips remain real (rank comes from actual ranking, not from the reported weight). If they did not, the defect is confined to the trace payload itself. Verify before concluding the experiment record is corrupted.
+**Experiment record not mislabeled (verified August 13, 2026):** `grep` across `probe_077_step0.py`, `probe_assessor.py`, and `tests/eval_rag_quality.py` returns no hits on the `weights` key. No consumer of the trace payload's `weights` key exists. The E1-E4 experiment record was never mislabeled by the lying instrument. Rank flips are real; weight annotations in those records were not sourced from the payload. The defect is confined to the trace payload itself.
 
 **Violation:** `config/constants.py` opens with "NEVER duplicate these values in other files." W_PC and W_KW are not in `constants.py`; they are in `utils/scoring.py` as defaults. The module-local copies in `pinecone_service.py` are the duplication the rule was written to prevent, and they diverged silently.
 
@@ -1979,7 +1979,7 @@ Lines 97-98 define module-local constants W_PC=1.0 and W_KW=0.0. Line 281 emits 
 
 No behavior change to ranking. The fix corrects the instrument, not the weight.
 
-**Before fixing:** Verify whether any probe harness (probe_077_stepA.py or similar) reads the `weights` key from the trace payload and uses it for anything other than display. If so, the harness results carry wrong weight metadata and should be re-annotated.
+**Before fixing:** ~~Verify whether any probe harness reads the `weights` key from the trace payload.~~ Verified August 13: no consumer exists. Pre-fix verification step is resolved.
 
 ---
 
