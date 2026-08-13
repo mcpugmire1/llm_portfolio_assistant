@@ -253,7 +253,7 @@ Six values only. Do not invent others.
 **Creating a ticket:**
 1. Find the current highest ID: `grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1`. New ID = that number + 1. Never eyeball the matrix to guess.
 2. Add matrix row in ID order in the **Active Matrix** table (never the Decided Against table).
-3. Add detail block in ID order under **Detail Blocks > Active Tickets** (never the Decided Against subsection). **Never append to end-of-file.** The `### Decided Against` section is near the end of the file; end-of-file appends land inside it. Insert the new block before the `### Decided Against` header. (August 2026: 31 active blocks accumulated below the DA header from repeated EOF appends.)
+3. Add detail block in ID order under **Detail Blocks > Active Tickets** (never the Decided Against subsection).
 4. Required fields: Status, Priority, Type, Issue, Logged.
 5. If it belongs in NOW or NEXT, add it to the roadmap immediately.
 
