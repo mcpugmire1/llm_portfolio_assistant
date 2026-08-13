@@ -1828,11 +1828,11 @@ Compare a clean case: the Fiserv entity query led at 0.580 with a 0.072 gap to s
 
 **Escape routes (inherited from MATTGPT-094):**
 - **Route 1 -- Fan-out on broad queries:** On queries where no entity is detected and intent is not narrative, retrieve from multiple clusters (management, delivery, technical, leadership) rather than a single top-k result. Reduces the probability of any one story dominating. Implementation approach unresolved -- needs scoping.
-- **Route 2 -- Break the rank-verdict coupling:** Decouple which story the LLM receives as primary from diversification output order. MATTGPT-094 gated this route on -080 (complete) and -088 (closed August 5, 2026). Both gates are now clear. The defect to scope around: a tie or near-tie at slot 1 gets 80% of the answer. The Aug 5 evidence is a 0.476 tie (Why Hire Matt tied with the management story); the Aug 13 Sev-1 trace is 0.020 margin in a 0.054-wide pool. Both get the same 80% floor as a clean decisive win. Route 2 means answering whether the LLM should receive a different primary story when slot 1's margin was not decisive.
+- **Route 2 -- Break the rank-verdict coupling:** Decouple which story the LLM receives as primary from raw Pinecone rank order. MATTGPT-094 gated this route on -080 (complete) and -088 (closed August 5, 2026). Both gates are now clear. The defect to scope around: a tie or near-tie at slot 1 gets 80% of the answer. The Aug 5 evidence is a 0.476 tie (Why Hire Matt tied with the management story); the Aug 13 Sev-1 trace is 0.020 margin in a 0.054-wide pool. Both get the same 80% floor as a clean decisive win. Route 2 means answering whether the LLM should receive a different primary story when slot 1's margin was not decisive.
 
 **CIC concentration consequence:** When "Why Hire Matt?" wins as primary story, the answer draws from four years of CIC evidence and under-represents the earlier career. This is a distinct problem from retrieval dominance and should be documented in MATTGPT-079 if not already there -- the story itself may need scope expansion or the diversification must be career-span-aware rather than client-variety-aware.
 
-**Cross-references:** MATTGPT-077 (retrieval contamination, different mechanism -- noun-overlap vs. positioning-story density), MATTGPT-079 (Role Match coverage gaps -- CIC concentration in evidence is a related corpus-shape issue).
+**Cross-references:** MATTGPT-077 (retrieval contamination, different mechanism -- noun-overlap vs. positioning-story density), MATTGPT-168 (margin-blind 80% floor -- Route 2 and -168 describe the same defect from different angles; both exhibits are shared), MATTGPT-079 (Role Match coverage gaps -- CIC concentration in evidence is a related corpus-shape issue).
 
 ---
 
