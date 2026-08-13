@@ -153,6 +153,12 @@ Each `st.markdown()` call creates a DOM element. On pages using `.conversation-h
 ### On estimates
 - **Headline number = raw implementation time only.** BDD overhead and discovery risk are listed as explicit add-ons, not folded into the headline. A 30-min change is quoted as 30 min, not "2-3 hours."
 
+### On evidence and verification
+- **Re-measure any recorded number before it scopes work.** A figure from an earlier pass may be wrong, stale, or from a broken command. Measure fresh before committing to it.
+- **Grep for importers before proposing a deletion, and read the file a ticket names before writing about it.** Key presence in a file isn't the same as the file being safe to remove.
+- **Verify against the shape production passes in, not the shape at rest.** A field that exists in the JSONL may not survive the pipeline transformation the LLM actually receives.
+- **Distinguish what a command proved from what you concluded from it.** Key presence isn't field-access correctness. A grep without `-r` isn't a repo search. State what the evidence actually shows, not what you inferred from it.
+
 ### On debugging and diagnosis
 - **A repeated, specific, concrete observation is a constraint the diagnosis must satisfy, not an anecdote to explain away.** When instrument data and a consistent human observation conflict, the observation usually means the instrument is measuring the wrong thing, not that the observation is noise.
 - **"The framework" is not a stopping point.** Framework-internal is often partly true and always unactionable. Keep going until the explanation accounts for the specific named symptom, which always lands somewhere project-side.
