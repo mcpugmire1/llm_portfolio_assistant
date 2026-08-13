@@ -8,6 +8,14 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Ask Agy
 
+**August 13, 2026 — Top Score column added to query logger; confidence gate mechanism confirmed (MATTGPT-174)** -- `bc72fba`
+
+Investigation confirmed the confidence gate reads `max(h["score"] for h in hits)` -- pure Pinecone cosine similarity, keyword term never enters the gate. Production query log (532 rows): 512 high, 12 low, 8 none; 96% high; every low/none row is a greeting, test string, or gibberish. Both constants sat below the operating range (real pools bottom at ~0.30; CONFIDENCE_LOW=0.20 prunes nothing, CONFIDENCE_HIGH=0.25 is cleared by everything). Gate was functioning as a second nonsense filter, not a match-strength signal.
+
+Fix: added "Top Score" column to `services/query_logger.py` so production traffic accumulates the pc distribution. First value logged post-deploy: 0.358673066 for "how did Matt handle a Sev-1 defect?" 8/8 BDD passing. Threshold redesign (two-factor gate using level and spread) waits on data from this column accumulating. Also resolved MATTGPT-157 step 4 outright: raising W_KW cannot shift the gated value; no recalibration needed from that source.
+
+---
+
 **August 8, 2026 — W_KW re-enabled at tested weight; keyword scoring live in hybrid retrieval (MATTGPT-157 / MATTGPT-170)** -- `f5641e7`
 
 Investigation (MATTGPT-157) completed per the predict-then-test method: blended scores computed arithmetically from existing trace values at candidate weights before any code change; holdout run against a working query (P&L), an operational query (Sev-1), a name-bearing query, and the "innovation" canary. Prediction confirmed -- specific-term class improved, canary held, name-bearing queries did not inflate narrative stories. Code change proceeded.

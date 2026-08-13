@@ -102,7 +102,6 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-171](#mattgpt-171) | Phrase-aware matching: stopword-only phrases invisible to token-overlap scorer at any W_KW weight | Open | Low | Investigation | August 8, 2026 |
 | [MATTGPT-172](#mattgpt-172) | CIC-cluster consolidation: CIC is 52/114 (46%) of corpus; Division concentration causes cluster-drift dominance on broad queries | Open | Medium | Action | August 8, 2026 |
 | [MATTGPT-173](#mattgpt-173) | Role Match JD validation: no defined behavior for malformed or comp-only JD inputs | Open | Medium | Issue | August 8, 2026 |
-| [MATTGPT-174](#mattgpt-174) | Confidence gate mislabels low-signal pools — noise-floor pools clear CONFIDENCE_HIGH and print "high" | Open | Medium | Defect/Design | August 11, 2026 |
 | [MATTGPT-175](#mattgpt-175) | W_KW trace payload reports 0.0 while ranking runs at 0.15 | Open | High | Bug | August 11, 2026 |
 | [MATTGPT-176](#mattgpt-176) | Dead code: zero-caller function, 200-line commented block, duplicate typed-alias map | Open | Low | Refactor | August 11, 2026 |
 | [MATTGPT-177](#mattgpt-177) | token_overlap_ratio bound violation — repeated in-vocab tokens inflate ratio above 1.0; docstring example independently wrong | Open | Medium | Bug | August 11, 2026 |
@@ -1925,49 +1924,6 @@ The concentration is a Division cluster, not a 2019-2023 date block -- Era value
 **Fix shape (after investigation):** Likely a pre-extraction validation gate that checks minimum text length, presence of requirement-shaped language, and optionally warns the user if comp-only content is detected. Should not silently proceed with an extraction the gate suspects is malformed.
 
 **Cross-references:** MATTGPT-089 (location/work-model/availability parsing -- adjacent input-handling gap), MATTGPT-099 (closed DA -- comp handling on chatbot side; Role Match side is distinct).
-
----
-
-### MATTGPT-174
-**Confidence gate mislabels low-signal pools -- noise-floor pools clear CONFIDENCE_HIGH and print "high"**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Defect/Design
-- **Files:** `config/constants.py` (CONFIDENCE_HIGH, CONFIDENCE_LOW), `rag_service.py` (gate logic -- verify coupling note below before touching)
-- **Related:** MATTGPT-162 (null-vector / embedding exception mislabeled -- same orbit)
-- **Logged:** August 11, 2026
-
-**Issue:** RAG confidence labels answer "is there any signal at all" (noise-floor gate) but present to the user as match strength. `CONFIDENCE_HIGH = 0.25` in `config/constants.py` was calibrated to filter phantom-similarity noise; corpus evidence puts genuinely strong matches at 0.4–0.6. A flat noise-band pool where every story scores 0.20–0.29 clears the bar and the UI prints "high." The label is technically accurate by the gate's own standard and misleading by the user's reasonable interpretation.
-
-**Evidence, three cases:**
-
-1. **"I do, we do, you do"** (August 11, 2026): top_score 0.260, gated as high. Target story absent from top 10. Pool flat; nothing in the pool is actually relevant.
-
-2. **"Matt?" step-A probe** (August 11, 2026): top_score 0.291, gated as high. Pool flat 0.20–0.29. 5 of 10 pool hits and 4 of 7 LLM stories self-referential Independent Project stories. Router scored 0.797 valid (family=background) -- router measures on-topic-ness; a bare name is maximally on-topic with zero retrievable intent. The confidence gate is the only downstream protection and it does not fire.
-
-3. **MATTGPT-162 null-vector shape**: existing ticket; same gate-clears-on-noise failure mode, different upstream cause.
-
-4. **Sev-1 trace (August 13, 2026):** Pool spanned 0.298 to 0.352; leader 0.020 clear of second (0.054-wide pool). Labeled high. Top story was wrong; the correct story was present in the pool at rank 5. That distinction -- wrong on slot 1, arguably fine on pool membership -- is what makes this a reordering problem as much as a gating problem.
-
-**Mechanism confirmed (August 13, 2026, rag_service.py:108):** `top_score = max(h["score"] for h in hits)` -- pure Pinecone cosine similarity across pool hits. The keyword term never enters the gate. W_KW elects which story's pc the gate reads (kw=1.0 on a single-token query maxes keyword overlap, electing why-hire-matt), but the gated number is always the pc component.
-
-**Production query log (532 rows, August 13, 2026):** 512 high, 12 low, 8 none. 96% high. Every low or none row is a greeting ("hi" x8), a test string, "Peanuts," or one gibberish string repeated seven times. No legitimate query has ever been labeled anything but high. Both constants sit below the operating range: real pools bottom out near 0.30, so CONFIDENCE_LOW = 0.20 prunes nothing (also filters the pool at rag_service.py:129 -- prunes nothing there either), and CONFIDENCE_HIGH = 0.25 is cleared by everything. The gate is functioning as a second nonsense filter downstream of `is_nonsense()`, not as a match-strength signal.
-
-**MATTGPT-157 step 4 resolved outright (August 13, 2026):** Confirmed from rag_service.py:108: the gate reads the pc component only. Raising W_KW cannot shift the gated value. The step 4 calibration obligation dissolves. No recalibration is needed from W_KW re-enable as a source. The threshold audit below covers the question independently.
-
-**Design direction (updated August 13, 2026 -- not a spec; calibrate from data, no numbers in the ticket):** Two signals live in the same pool numbers and the gate reads one. Floor alone is insufficient: the enablement query was flat at 0.51-0.56 and correct, while the Sev-1 pool was flat at 0.30-0.35 and wrong. Any rule needs level and spread together. Design target: two-factor gate using absolute bands first, distribution gap consulted only in the ambiguous middle band.
-
-- The ambiguous middle band (between the noise floor and the genuine-match floor) is where distribution gap adds signal -- a tightly bunched mid-band pool with no clear leader is a different confidence picture than the same mean score with one clear outlier.
-- Do not move the numbers before running the calibration pass. Moving CONFIDENCE_HIGH without a distribution audit risks false rejections on legitimate niche queries.
-
-**Calibration precondition (August 13, 2026):** Do not calibrate from existing traces. Constants must be derived from logged score distributions, and those distributions do not exist yet: `tests/eval_results/` holds three January files predating the current corpus, W_KW=0.15, and MATTGPT-182. The query logger records the confidence label only -- it does not record top_score. Next step in progress: adding a "Top Score" column to `services/query_logger.py` so production traffic accumulates the pc distribution. Threshold analysis waits on that data.
-
-**Labeling guidance (August 13, 2026):** When labeling traces for analysis, record two facts: (1) whether the top story was right, and (2) whether any story in the pool was right. The Aug 13 Sev-1 trace is wrong on (1) and arguably fine on (2) -- the correct story was present at rank 5. That distinction decides whether a gate should reject the query or reorder the pool. Label from the answer, never from the score.
-
-**Evidence provenance:** Cases 1 and 2 surfaced during MATTGPT-077 Phase 1 step-A probe session (August 11, 2026). Case 4 surfaced during August 13 Sev-1 trace session. See -077 Step A probe results note for retrieval and router details on cases 1-2.
-
-**Cross-references:** MATTGPT-162 (same gate orbit, embedding-exception upstream cause), MATTGPT-077 (step-A probe session -- evidence provenance), MATTGPT-171 (phrase-aware matching -- "I do, we do, you do" is Case 1's query).
 
 ---
 
