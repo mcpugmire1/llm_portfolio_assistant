@@ -2032,6 +2032,23 @@ The concentration is real. The retrieval dominance claim is not supported by the
 
 **Additional finding (note -- may warrant a separate ticket):** `_STOPWORDS` is defined in this module and used only by `token_overlap_ratio`, not by `_tokenize`. As a result, the keyword scorer treats "how," "you," and other stopwords as content tokens when building the overlap. Whether this is a defect or intended behavior depends on the scorer's design intent. If `_STOPWORDS` was meant to apply to all tokenization in this module, that's a third bug here. If it was intentionally scoped to `token_overlap_ratio` only, document that intent explicitly so future editors don't "fix" it.
 
+**Live exhibit (August 14, 2026):** Query "how did Matt handle a Sev-1 defect?" against two competing stories:
+
+| Story | kw | Matching tokens |
+|---|---|---|
+| Fiserv (Recovering $8.5M White-Label Card Portal) | 0.167 | defect, sev-1 |
+| Independent Project (My Chatbot Kept Flattering Me) | 0.250 | how, matt |
+
+The story matching the two content words scores lower than the story matching a stopword and the subject's own name. "how" counts twice because it appears in the chatbot story's title, which `_keyword_score_for_story` double-weights.
+
+`_STOPWORDS` is defined at `validation.py:16` and contains "how" at line 35. It is applied in `token_overlap_ratio` (line 217) and never in `_tokenize` (line 89), which applies only the `len >= 3` filter.
+
+**"matt" as a noise token:** "matt" is not in `_STOPWORDS` and would need adding as a corpus-specific term. Every story in the corpus is about Matt, so the token has zero discriminating power and systematically favors first-person narrative stories -- whichever story happens to mention his name most.
+
+**Interaction with MATTGPT-077 (_substitute_matt_subject):** On technical, team_scaling, and agile_transformation families, substitution replaces "Matt" with "he" (2 chars), which fails the `len >= 3` filter and drops the token. On behavioral queries substitution does not fire and "matt" survives. The substitution mechanism is partially doing the job a stopword list should do, inconsistently across intent families.
+
+**Effect of applying stopwords on this exhibit:** Dropping stopwords reduces the chatbot story to kw=0.0 and leaves Fiserv at kw=0.167. However, pc still favors the chatbot story (0.359 vs 0.315), so the blend does not flip (0.359 vs 0.340 after keyword correction). The stopword fix is correct and insufficient on its own for this query -- ranking requires a pc change as well.
+
 ---
 
 ### MATTGPT-179
