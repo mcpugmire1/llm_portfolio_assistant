@@ -1796,11 +1796,20 @@ Compare a clean case: the Fiserv entity query led at 0.580 with a 0.072 gap to s
 
 **Floor consistency note:** The floor does not always bind. On "Tell me about a Sev-1 Matt handled" (August 13), MattGPT led at 0.303 and the model answered from Fiserv at slot 3 anyway. The floor's effect is inconsistent and not fully characterized.
 
-**Do not fix by re-pinning:** The original ticket (August 5) proposed extracting `candidates[0]` before diversification. Verified August 13: `diversify_results` already pins `stories[0]` unconditionally at line 1289. The function partitions `stories[1:]` by Client bucket; it never reads a score. Input arrives score-sorted from Pinecone, so slot 1 is the top-scored story on every path. The proposed pin is a no-op.
+**Corrected history (August 13, 2026):** The original ticket stated the design gap was introduced in `1c96315` (Jan 23, 2026) and never fixed. That is wrong. February traces showed `diversify_results` genuinely promoting named clients over better-scored generic stories -- AmEx (0.501) to slot 1 over Row 40 (0.672), Capital One bumping Row 103 to slot 4 -- because the function partitions by client bucket without reading scores. The original -168 premise was describing real pre-March behavior. The fix was `3aa3050` (March 2026): "slot 1 is sacred, pin the top Pinecone score, diversify 2-5." That commit added `pinned = stories[0]` unconditionally and is why slot 1 is now always the top-scored story. The 80% floor was reasoning about that pin: "slot 1 is the best retrieval match; instruct the model to build 80% around it." Pin and floor were designed as a pair for the fixed world.
 
-**Where margin information could live:** The confidence gate (MATTGPT-174 shipped Top Score logging). The gate is currently the only stage positioned to carry spread as well as level. A gate that reads both could conditionally suppress the 80% floor or widen the primary story window when slot 1's margin is below a threshold.
+What -168 originally named was real in February and fixed in March. What survives is what the pin-and-amplify pair assumes: slot 1 deserves it. In February that assumption was violated by diversification. Now it's violated by ties and near-ties.
 
-**Cross-references:** MATTGPT-174 (gate calibration -- margin information needs to be computed somewhere; this is the candidate), MATTGPT-077 and MATTGPT-169 (why the wrong story reaches slot 1 in the first place).
+**Do not fix by re-pinning:** The pin (`stories[0]` unconditionally) was the March fix. Re-proposing it is a no-op.
+
+**Disposition options (August 13, 2026):**
+- **Do nothing.** Ties and near-ties mean the two stories are genuinely close; picking either is defensible. Consistent with the subtraction principle.
+- **Conditional pin.** When the gap between slot 1 and slot 2 is below a threshold, drop the 80% floor and let the model use both. Not a new retrieval gate -- a softening of an existing prompt instruction. Requires a threshold, which needs the Top Score distribution that MATTGPT-174 is now accumulating. Block behind that data.
+- **Cheap probe.** Remove the "resist supporting stories" sentence from the prompt. One edit, one query ("how did Matt handle a Sev-1 defect?"), immediate signal on whether the instruction is what's binding on Exhibit 2.
+
+**Where margin information could live:** The confidence gate (MATTGPT-174 shipped Top Score logging). The only stage currently positioned to carry spread as well as level.
+
+**Cross-references:** MATTGPT-174 (gate calibration -- Top Score distribution is what any conditional-pin threshold must be derived from), MATTGPT-077 and MATTGPT-169 (why the wrong story reaches slot 1 in the first place).
 
 ---
 
