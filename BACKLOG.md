@@ -1805,7 +1805,22 @@ What -168 originally named was real in February and fixed in March. What survive
 **Disposition options (August 13, 2026):**
 - **Do nothing.** Ties and near-ties mean the two stories are genuinely close; picking either is defensible. Consistent with the subtraction principle.
 - **Conditional pin.** When the gap between slot 1 and slot 2 is below a threshold, drop the 80% floor and let the model use both. Not a new retrieval gate -- a softening of an existing prompt instruction. Requires a threshold, which needs the Top Score distribution that MATTGPT-174 is now accumulating. Block behind that data.
-- **Cheap probe.** Remove the "resist supporting stories" sentence from the prompt. One edit, one query ("how did Matt handle a Sev-1 defect?"), immediate signal on whether the instruction is what's binding on Exhibit 2.
+- ~~**Cheap probe.** Remove the "resist supporting stories" sentence.~~ **Tested August 14, 2026 -- ruled out.** See findings below.
+
+**Prompt-change findings (August 14, 2026):**
+
+Removing the "resist" line from the CONTEXT ISOLATION block had no effect on either exhibit. Q1 still answers entirely from the chatbot story at slot 1. Ruled out as the mechanism.
+
+Observed in the same run: the 80% rule is not reliably followed in either direction. Three cases:
+- "Tell me about a Sev-1 Matt handled" -- model bypassed slot 1, answered from slot 3 (correct).
+- "Has Matt directly managed engineering teams?" -- bypassed slot 1, answered from slot 4 (also correct).
+- "how did Matt handle a Sev-1 defect?" -- stayed on slot 1 (wrong).
+
+Compliance is inconsistent and uncorrelated with correctness.
+
+**Working hypothesis:** The model overrides the primary when the primary cannot answer the question, and stays on it when it can. The chatbot story is a genuine defect story (32.3% failure rate, root cause diagnosis, structural fix) -- it closes the content gap that would otherwise force a fall-through. Q3's primary (MattGPT Product Vision) cannot answer a Sev-1 question, so the model falls through to Fiserv at slot 3.
+
+**Consequence:** Prompt changes cannot fix Q1. The fix must be ranking: either the chatbot story ranks lower or Fiserv ranks higher.
 
 **Where margin information could live:** The confidence gate (MATTGPT-174 shipped Top Score logging). The only stage currently positioned to carry spread as well as level.
 
