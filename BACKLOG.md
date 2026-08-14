@@ -100,7 +100,6 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-171](#mattgpt-171) | Phrase-aware matching: stopword-only phrases invisible to token-overlap scorer at any W_KW weight | Open | Low | Investigation | August 8, 2026 |
 | [MATTGPT-172](#mattgpt-172) | CIC-cluster consolidation: CIC is 52/114 (46%) of corpus; Division concentration causes cluster-drift dominance on broad queries | Parked | Medium | Action | August 8, 2026 |
 | [MATTGPT-173](#mattgpt-173) | Role Match JD validation: no defined behavior for malformed or comp-only JD inputs | Open | Medium | Issue | August 8, 2026 |
-| [MATTGPT-175](#mattgpt-175) | W_KW trace payload reports 0.0 while ranking runs at 0.15 | Open | High | Bug | August 11, 2026 |
 | [MATTGPT-176](#mattgpt-176) | Dead code: zero-caller function, 200-line commented block, duplicate typed-alias map | Open | Low | Refactor | August 11, 2026 |
 | [MATTGPT-177](#mattgpt-177) | token_overlap_ratio bound violation — repeated in-vocab tokens inflate ratio above 1.0; docstring example independently wrong | Open | Medium | Bug | August 11, 2026 |
 | [MATTGPT-178](#mattgpt-178) | Tokenizer divergence in utils/validation.py — _tokenize and token_overlap_ratio split on different character sets, undercounting technical-term overlap | Open | High | Bug | August 11, 2026 |
@@ -1927,39 +1926,6 @@ The concentration is real. The retrieval dominance claim is not supported by the
 **Fix shape (after investigation):** Likely a pre-extraction validation gate that checks minimum text length, presence of requirement-shaped language, and optionally warns the user if comp-only content is detected. Should not silently proceed with an extraction the gate suspects is malformed.
 
 **Cross-references:** MATTGPT-089 (location/work-model/availability parsing -- adjacent input-handling gap), MATTGPT-099 (closed DA -- comp handling on chatbot side; Role Match side is distinct).
-
----
-
-### MATTGPT-175
-**W_KW trace payload reports 0.0 while ranking runs at 0.15**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Bug
-- **Files:** `services/pinecone_service.py` (lines 97-98, 281), `config/constants.py`, `utils/scoring.py`
-- **Logged:** August 11, 2026
-
-**Issue:** `pinecone_service.py` imports `_hybrid_score` from `utils.scoring` (line 19) and calls it at line 316 with no weight arguments. The function picks up its defaults -- W_PC=1.0, W_KW=0.15 -- from `utils/scoring.py`. That is the live blend.
-
-Lines 97-98 define module-local constants W_PC=1.0 and W_KW=0.0. Line 281 emits these into a trace/debug payload as `{"W_PC": W_PC, "W_KW": W_KW}`. The payload reports keyword weighting is off; the ranking one line later runs it at 0.15. The instrument lies.
-
-**Arithmetic proof (Fiserv trace, August 11):** pc=0.580, kw=0.667, blend=0.680. `0.580 + 0.15 × 0.667 = 0.680` exactly. The live path used 0.15. The trace payload reported 0.0.
-
-**What is proven:** Line 281 emits the module-local pair (W_KW=0.0) into the trace payload. Line 316 blends using the imported `_hybrid_score` defaults (W_KW=0.15). These are two different values for the same conceptual weight, in the same module, three lines apart.
-
-**Experiment record not mislabeled (verified August 13, 2026):** `grep` across `probe_077_step0.py`, `probe_assessor.py`, and `tests/eval_rag_quality.py` returns no hits on the `weights` key. No consumer of the trace payload's `weights` key exists. The E1-E4 experiment record was never mislabeled by the lying instrument. Rank flips are real; weight annotations in those records were not sourced from the payload. The defect is confined to the trace payload itself.
-
-**Violation:** `config/constants.py` opens with "NEVER duplicate these values in other files." W_PC and W_KW are not in `constants.py`; they are in `utils/scoring.py` as defaults. The module-local copies in `pinecone_service.py` are the duplication the rule was written to prevent, and they diverged silently.
-
-**Fix:** Four steps, in order:
-1. Add W_PC and W_KW to `config/constants.py` as the single authoritative source.
-2. Update `utils/scoring.py` to import W_PC and W_KW from `constants.py` rather than defining them as defaults.
-3. Delete `pinecone_service.py` lines 97-98 and add `from config.constants import W_PC, W_KW` at the top of the file. Line 281's trace payload then reads whatever `constants.py` holds and will be accurate. (Without the import, deleting lines 97-98 leaves line 281 with a NameError.)
-4. In the same edit as step 2: update the `_hybrid_score` Returns and Example block in `utils/scoring.py` to reflect W_KW=0.15. Update the four failing `test_scoring.py` assertions (`test_default_weights_use_semantic_only`, `test_handles_none_pc_score`, `test_handles_invalid_pc_score_type`, `test_default_weights_favor_semantic`) for W_KW=0.15. Context: these four assertions were correct when written against the W_KW=0.0 default. They became wrong on August 8 when f5641e7 raised W_KW to 0.15 without updating them. This is stale-test cleanup trailing from that commit, not a new defect. Step 4 belongs with steps 2-3 in a single edit to `utils/scoring.py`.
-
-No behavior change to ranking. The fix corrects the instrument, not the weight.
-
-**Before fixing:** ~~Verify whether any probe harness reads the `weights` key from the trace payload.~~ Verified August 13: no consumer exists. Pre-fix verification step is resolved.
 
 ---
 

@@ -8,6 +8,14 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Ask Agy
 
+**August 13, 2026 — W_KW trace payload corrected; weights centralized in constants.py (MATTGPT-175)** -- `d8dcbe7`
+
+W_PC and W_KW added to `config/constants.py` as the single authoritative source. `utils/scoring.py` updated to import from constants rather than define defaults. `pinecone_service.py` lines 97-98 (module-local W_KW=0.0 shadow copy) deleted; import added so line 281's trace payload now reads the live value. No ranking behavior change -- the fix corrects the instrument, not the weight. Arithmetic proof: pc=0.580, kw=0.667, blend=0.680 confirmed `0.580 + 0.15 × 0.667 = 0.680` before the fix; trace reported 0.0.
+
+Step 4 (docstring and stale assertion cleanup) shipped in the same commit: `_hybrid_score` Returns and Example block updated for W_KW=0.15; four `test_scoring.py` assertions updated (`test_default_weights_use_semantic_only`, `test_handles_none_pc_score`, `test_handles_invalid_pc_score_type`, `test_default_weights_favor_semantic`) -- these were correct when written against W_KW=0.0 and went stale when f5641e7 raised the weight. A `test_weights_have_single_source` regression guard was also added (not in the original ticket scope) to prevent future silent divergence between the constants source and any module-local copy.
+
+---
+
 **August 13, 2026 — Top Score column added to query logger; confidence gate mechanism confirmed (MATTGPT-174)** -- `bc72fba`
 
 Investigation confirmed the confidence gate reads `max(h["score"] for h in hits)` -- pure Pinecone cosine similarity, keyword term never enters the gate. Production query log (532 rows): 512 high, 12 low, 8 none; 96% high; every low/none row is a greeting, test string, or gibberish. Both constants sat below the operating range (real pools bottom at ~0.30; CONFIDENCE_LOW=0.20 prunes nothing, CONFIDENCE_HIGH=0.25 is cleared by everything). Gate was functioning as a second nonsense filter, not a match-strength signal.
