@@ -1805,26 +1805,41 @@ What -168 originally named was real in February and fixed in March. What survive
 **Disposition options (August 13, 2026):**
 - **Do nothing.** Ties and near-ties mean the two stories are genuinely close; picking either is defensible. Consistent with the subtraction principle.
 - **Conditional pin.** When the gap between slot 1 and slot 2 is below a threshold, drop the 80% floor and let the model use both. Not a new retrieval gate -- a softening of an existing prompt instruction. Requires a threshold, which needs the Top Score distribution that MATTGPT-174 is now accumulating. Block behind that data.
-- ~~**Cheap probe.** Remove the "resist supporting stories" sentence.~~ **Tested August 14, 2026 -- ruled out.** See findings below.
+- ~~**Cheap probe.** Remove the "resist supporting stories" sentence.~~ **Tested August 14 -- ruled out.**
+- ~~**Soften the 80% floor.**~~ **Tested August 14 -- ruled out, and possibly counterproductive.**
 
-**Prompt-change findings (August 14, 2026):**
+**Prompt experiment 1 (August 14, 2026): resist-line removal**
 
-Removing the "resist" line from the CONTEXT ISOLATION block had no effect on either exhibit. Q1 still answers entirely from the chatbot story at slot 1. Ruled out as the mechanism.
+Removing the "resist" line from the CONTEXT ISOLATION block had no effect on either exhibit. Q1 still answers entirely from the chatbot story at slot 1.
 
-Observed in the same run: the 80% rule is not reliably followed in either direction. Three cases:
+Observed in the same run: the 80% rule is not reliably followed in either direction:
 - "Tell me about a Sev-1 Matt handled" -- model bypassed slot 1, answered from slot 3 (correct).
 - "Has Matt directly managed engineering teams?" -- bypassed slot 1, answered from slot 4 (also correct).
 - "how did Matt handle a Sev-1 defect?" -- stayed on slot 1 (wrong).
 
-Compliance is inconsistent and uncorrelated with correctness.
+Compliance is inconsistent and uncorrelated with correctness. **Working hypothesis:** the model overrides the primary when the primary cannot answer the question, and stays on it when it can. The chatbot story is a genuine defect story (32.3% failure rate, root cause diagnosis, structural fix) -- it closes the content gap that would otherwise force a fall-through.
 
-**Working hypothesis:** The model overrides the primary when the primary cannot answer the question, and stays on it when it can. The chatbot story is a genuine defect story (32.3% failure rate, root cause diagnosis, structural fix) -- it closes the content gap that would otherwise force a fall-through. Q3's primary (MattGPT Product Vision) cannot answer a Sev-1 question, so the model falls through to Fiserv at slot 3.
+**Prompt experiment 2 (August 14, 2026): floor softening**
 
-**Consequence:** Prompt changes cannot fix Q1. The fix must be ranking: either the chatbot story ranks lower or Fiserv ranks higher.
+Changed "at least 80% of your response must come from this story. Do NOT build your response around a supporting story" to "it should be the main subject of your response. Draw on supporting content where it answers more directly." 6 runs of Q1 -- all 6 answered from the chatbot story. Before the change: 1 in 4 correct. After: 0 in 6.
+
+Hypothesis: the hard floor ("do NOT") was the explicit permission-to-deviate framing that the soft version removed. With "draw on supporting where it answers more directly," the model sees no reason to leave the chatbot story -- because the chatbot story IS about fixing a defect. It's topically correct, just the wrong context.
+
+**Sample size caveat:** 0/6 vs 1/4 at these sample sizes is not strong evidence softening made things worse. The defensible claim is that it did not fix Q1. Controls held on both experiments: P5 answered from Norfolk Southern, Sev-1 on-call from AT&T, "Tell me about a Sev-1" from Fiserv.
+
+Prompt reverted to original. Two experiments now closed, both negative.
+
+**Hardened conclusion:** No prompt edit reaches this. The chatbot story leads pc 0.360 to 0.326 and the model behaves consistently with that gap. The fix must be ranking: Fiserv needs to lead the pool.
+
+**Proposed ranking fix (August 14, 2026):** Strengthen Fiserv's Use Case in the corpus. Current Use Case is 414 chars and buries the defect vocabulary in a trailing clause: "while resolving Sev-1 defects in live payment processing." Rail went from 0.484 to 0.526 by leading its Use Case with the query vocabulary. Same pattern applies. Proposed edit (verified to stay within the story's honest claim -- the Action already notes the deployment fix is a companion story):
+
+> "Recover a failing $8.5M multi-vendor platform program: stabilize delivery, manage SOA transition from mainframe to API architecture, and coordinate globally dispersed teams through crisis to completion. Own the $8.5M program budget through the recovery, delivering under budget and avoiding contractual penalties on a rescued release. Handle Sev-1 defects in live payment processing: triage, resolve, and drive production quality recovery on a platform serving 2M+ cardholders."
+
+After stopword fix: keyword scores already inverted correctly (Fiserv 0.250, chatbot 0.125). pc is the remaining gap (0.363 vs 0.317, difference 0.046). Rail's Use Case edit moved its pc ~0.040 -- same order of magnitude. Worth trying before concluding anything needs cutting.
 
 **Where margin information could live:** The confidence gate (MATTGPT-174 shipped Top Score logging). The only stage currently positioned to carry spread as well as level.
 
-**Cross-references:** MATTGPT-174 (gate calibration -- Top Score distribution is what any conditional-pin threshold must be derived from), MATTGPT-077 and MATTGPT-169 (why the wrong story reaches slot 1 in the first place).
+**Cross-references:** MATTGPT-174 (gate calibration -- Top Score distribution is what any conditional-pin threshold must be derived from), MATTGPT-077 and MATTGPT-169 (why the wrong story reaches slot 1 in the first place), MATTGPT-178 (stopword fix already inverted keyword scores; pc is the remaining gap).
 
 ---
 
