@@ -12,11 +12,11 @@ class TestTokenize:
     """Tests for _tokenize() function."""
 
     def test_tokenizes_simple_text(self):
-        """Should tokenize text into lowercase tokens."""
+        """Should tokenize text into lowercase tokens, excluding stopwords."""
         from utils.validation import _tokenize
 
         result = _tokenize("Platform Engineering with AWS")
-        assert result == ["platform", "engineering", "with", "aws"]
+        assert result == ["platform", "engineering", "aws"]  # "with" is a stopword
 
     def test_filters_short_tokens(self):
         """Should filter tokens shorter than 3 characters."""

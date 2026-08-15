@@ -66,27 +66,33 @@ _NONSENSE_RULES: list[dict] = []
 
 
 def _tokenize(text: str) -> list[str]:
-    """Tokenize text into normalized words (3+ chars).
+    """Tokenize text into normalized words (3+ chars, excluding stopwords).
 
     Extracts alphanumeric tokens (including +, #, -, _, .) from text,
-    lowercases them, and filters to tokens with length >= 3 characters.
-    Used for keyword matching and vocabulary overlap calculations.
+    lowercases them, filters to tokens with length >= 3 characters, and
+    removes stopwords. Used for keyword matching and vocabulary overlap
+    calculations.
 
     Args:
         text: Input text to tokenize. None or empty strings handled gracefully.
 
     Returns:
-        List of lowercase tokens with length >= 3. Empty list if no valid tokens.
+        List of lowercase tokens with length >= 3, stopwords excluded.
+        Empty list if no valid tokens.
 
     Example:
         >>> _tokenize("Platform Engineering with AWS")
-        ['platform', 'engineering', 'with', 'aws']
+        ['platform', 'engineering', 'aws']  # 'with' is a stopword
         >>> _tokenize("C# and .NET")
-        []  # Tokens too short after filtering
+        ['.net']  # '.net' is 4 chars and not a stopword; 'and' is filtered
         >>> _tokenize("")
         []
     """
-    return [t.lower() for t in _WORD_RX.findall(text or "") if len(t) >= 3]
+    return [
+        t.lower()
+        for t in _WORD_RX.findall(text or "")
+        if len(t) >= 3 and t.lower() not in _STOPWORDS
+    ]
 
 
 def _load_nonsense_rules(path: str = "nonsense_filters.jsonl") -> list[dict[str, Any]]:
