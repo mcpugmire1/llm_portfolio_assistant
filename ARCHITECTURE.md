@@ -113,6 +113,7 @@ llm_portfolio_assistant/
 │
 ├── utils/                          # Shared utilities
 │   ├── __init__.py
+│   ├── corpus_loader.py            # load_stories(), normalize_story() — normalization source of truth
 │   ├── formatting.py               # build_5p_summary, _format_* helpers
 │   ├── validation.py               # is_nonsense, token_overlap_ratio
 │   ├── scoring.py                  # _keyword_score, _hybrid_score
@@ -203,10 +204,12 @@ The application initialization order is critical—later steps depend on earlier
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│  1. load_star_stories(DATA_FILE)                             │
+│  1. load_star_stories(DATA_FILE)  [app.py:206]               │
 │     - Reads echo_star_stories_nlp.jsonl                      │
-│     - Returns STORIES list (100+ dicts)                      │
-│     - Enforces stable IDs, normalizes list fields            │
+│     - Skips records where id is None, empty, or 0            │
+│     - Coerces 8 PascalCase list fields via _ensure_list      │
+│     - Parses public_tags from comma-separated str to list    │
+│     - Normalization contract lives in utils/corpus_loader.py │
 └──────────────────────────────────────────────────────────────┘
                               ↓
 ┌──────────────────────────────────────────────────────────────┐
@@ -1178,8 +1181,6 @@ LAST_QUERY = "__explore_last_query__"         # Query that produced cache
 - Capability → exact match on `s["Solution / Offering"]`
 - Era → exact match on `s["Era"]`
 - Clients, Domains, Roles → IN list (OR logic)
-- Tags → case-insensitive intersection
-- has_metric → `story_has_metric(s)`
 - q (keyword) → token-based ALL match on Title, Client, Purpose, Process, Performance, tags
 
 ### Explore Stories Two-Row Filter Bar (MATTGPT-065)
@@ -1400,7 +1401,7 @@ Stories are stored in `echo_star_stories_nlp.jsonl` (100+ entries). Each line is
 | `End_Date` | `str` | End date (YYYY-MM) |
 | `Competencies` | `list[str]` | Skills demonstrated |
 | `Use Case(s)` | `list[str]` | Interview scenarios |
-| `public_tags` | `str` | Comma-separated search tags |
+| `public_tags` | `list[str]` | Search tags (str in JSONL; coerced to list by corpus_loader.py `normalize_story()`) |
 | `content` | `str` | Empty (reserved for future) |
 
 **Special Values:**
@@ -1416,10 +1417,11 @@ Stories are stored in `echo_star_stories_nlp.jsonl` (100+ entries). Each line is
 
 | Module | Purpose | Key Functions |
 |--------|---------|---------------|
+| **corpus_loader.py** | Normalization source of truth for eval harnesses and probe scripts | `load_stories()`, `normalize_story()` |
 | **client_utils.py** | Client classification | `is_generic_client()` — pattern-based detection of placeholder clients |
-| **validation.py** | Query validation, tokenization, nonsense detection | `is_nonsense()`, `_tokenize()`, `vocab_overlap_ratio()` |
+| **validation.py** | Query validation, tokenization, nonsense detection | `is_nonsense()`, `_tokenize()`, `token_overlap_ratio()` |
 | **filters.py** | Story filtering for Explore Stories | `matches_filters(story, filters)` |
-| **formatting.py** | Story presentation, metric extraction | `story_has_metric()`, `strongest_metric_line()`, `build_5p_summary()`, `_format_narrative()` |
+| **formatting.py** | Story presentation, metric extraction | `story_has_metric()` (broken -- reads `what`/`star.result`, fields never present in corpus; MATTGPT-183), `build_5p_summary()`, `_format_narrative()` (unreachable in production; MATTGPT-179), `_format_key_points()`, `_format_deep_dive()` |
 | **scoring.py** | Hybrid scoring (semantic + keyword) | `_keyword_score_for_story()`, `_hybrid_score()` |
 | **ui_helpers.py** | Debug logging, branch-aware rejection banner | `dbg()`, `safe_container()`, `render_no_match_banner()`, `BANNER_COPY` / `RULE_CHIPS` / `PERSONAL_CHIPS` / `OUT_OF_SCOPE_CHIPS` |
 
@@ -1431,6 +1433,32 @@ def is_generic_client(client: str) -> bool:
     Examples: 'Multiple Clients', 'Fortune 500 Clients', 'Independent Project'."""
 ```
 
+**corpus_loader.py Contract:**
+
+Normalization source of truth extracted from `app.py`. Use in eval harnesses and probe scripts -- no Streamlit dependency.
+
+```python
+_LIST_FIELDS = (
+    "Situation", "Task", "Action", "Result",
+    "Process", "Performance", "Competencies", "Use Case(s)",
+)  # 8 PascalCase list fields coerced via _ensure_list()
+
+def normalize_story(story: dict) -> dict:
+    """Coerce list fields and public_tags in-place.
+    - Coerces present _LIST_FIELDS from str or None to list
+    - Parses public_tags from comma-separated str to list[str]
+    - Does not add absent fields"""
+
+def load_stories(path: str) -> list[dict]:
+    """Load and normalize a JSONL corpus file.
+    - Skips empty lines silently
+    - Skips records where id is None, empty string, or 0
+    - Strips whitespace from id; casts to str
+    - Applies normalize_story() to each kept record"""
+```
+
+`app.py:load_star_stories()` mirrors this contract exactly. Nine call sites across eval and probe scripts use `corpus_loader.load_stories()` directly.
+
 **validation.py Key Functions:**
 ```python
 def is_nonsense(query: str) -> tuple[bool, str | None]:
@@ -1438,9 +1466,9 @@ def is_nonsense(query: str) -> tuple[bool, str | None]:
     Returns (is_nonsense, category) where category is e.g., 'profanity', 'meta', 'gibberish'."""
 
 def _tokenize(text: str) -> list[str]:
-    """Tokenize text into normalized words (3+ chars, lowercase)."""
+    """Tokenize text: lowercase, 3+ chars, filtered through _STOPWORDS set."""
 
-def vocab_overlap_ratio(query: str, corpus_vocab: set[str]) -> float:
+def token_overlap_ratio(query: str, corpus_vocab: set[str]) -> float:
     """Calculate what % of query tokens appear in corpus vocabulary."""
 ```
 
@@ -1448,14 +1476,17 @@ def vocab_overlap_ratio(query: str, corpus_vocab: set[str]) -> float:
 ```python
 def matches_filters(s: dict, F: dict | None = None) -> bool:
     """Check if story matches all active filters. F reads from st.session_state['filters'] if None.
-    Supports: industry, capability, era, clients, domains, roles, tags, has_metric, q (keyword)."""
+    Supports: industry, capability, era, clients, domains, roles, q (keyword)."""
 ```
 
-**scoring.py Weights:**
+**Scoring weights** (`config/constants.py`, lines 60-61):
 ```python
 W_PC = 1.0  # Semantic (Pinecone) weight
-W_KW = 0.15  # Keyword weight. Activated in commit f5641e7 via pre-registered experiment; results recorded in CHANGELOG (-157/-170). blend = 1.0·pc + 0.15·kw where kw is naive token overlap from _keyword_score_for_story().
+W_KW = 0.15  # Keyword weight. Activated in commit f5641e7 via pre-registered experiment; results recorded in CHANGELOG (-157/-170).
 ```
+
+**`_keyword_score_for_story()` haystack (9 fields):**
+Title, Client, Role, Sub-category, Competencies (joined), public_tags (joined), build_5p_summary(400 chars), Process (joined), Performance (joined). Title and Sub-category are double-weighted: hits in those two fields count twice in the numerator. Normalizes by `len(query_tokens) * 2`. Tokenization via `_tokenize()` (applies `_STOPWORDS`).
 
 ---
 
