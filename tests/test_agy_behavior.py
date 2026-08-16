@@ -2,6 +2,21 @@
 BDD/TDD Tests for MattGPT Agy Behavior
 Comprehensive Suite: Intent, Voice, RAG Depth, and Professional Scope.
 Run: pytest tests/test_agy_behavior.py -v
+
+INTENTIONALLY STOCHASTIC TESTS -- DO NOT RE-TRIAGE AS REGRESSIONS
+-------------------------------------------------------------------
+Three tests assert on gpt-4o output at temperature 0.4 and pass or fail
+randomly. They are intentionally red and are not regressions:
+
+  test_out_of_scope_redirect[retail sales work]   (this file)
+  test_no_meta_commentary[Q45_meta]               (test_structural_assertions.py)
+  test_structural_checks[Q32_structural]          (test_structural_assertions.py)
+
+Verified Aug 15, 2026: three consecutive runs on identical code gave
+fail, fail, pass. See MATTGPT-193 (Decided Against).
+
+Do not investigate these as caused by a change under test. Do not label
+other failures pre-existing without an isolation run.
 """
 
 import json

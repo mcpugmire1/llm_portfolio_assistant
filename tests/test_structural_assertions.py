@@ -10,6 +10,23 @@ Usage:
     pytest tests/test_structural_assertions.py -v
     pytest tests/test_structural_assertions.py -k "meta_commentary" -v
     python tests/test_structural_assertions.py --report
+
+INTENTIONALLY STOCHASTIC TESTS -- DO NOT RE-TRIAGE AS REGRESSIONS
+-------------------------------------------------------------------
+Two tests in this file assert on gpt-4o output at temperature 0.4 and
+pass or fail randomly. They are intentionally red and are not regressions:
+
+  test_no_meta_commentary[Q45_meta]
+  test_structural_checks[Q32_structural]
+
+A third stochastic test lives in test_agy_behavior.py:
+  test_out_of_scope_redirect[retail sales work]
+
+Verified Aug 15, 2026: three consecutive runs on identical code gave
+fail, fail, pass. See MATTGPT-193 (Decided Against).
+
+Do not investigate these as caused by a change under test. Do not label
+other failures pre-existing without an isolation run.
 """
 
 import json
