@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: 1de2e9d -->
+<!-- last-backlog-sync: f0d8870 -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -7,13 +7,12 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 ---
 
-## Value Prioritized Roadmap (updated 2026-08-13)
+## Value Prioritized Roadmap (updated 2026-08-16)
 
 **NOW**
-1. **-168** — slot 1 amplified without regard to margin; tie or near-tie at slot 1 gets 80% of the answer. Exhibits: 0.476 tie (Aug 3), 0.020 gap in 0.054-wide pool (Aug 13). Original premise disconfirmed (Fix A was a no-op); rewritten in place August 13.
+1. **-168** — slot 1 amplified without regard to margin; tie or near-tie at slot 1 gets 80% of the answer. Fiserv corpus edit applied Aug 15 (pc 0.317→0.326); Q1 still fails -- pc gap remains. Original premise disconfirmed (Fix A was a no-op); rewritten in place August 13.
 2. **-181** — Early-career story slate (Well Found / F-22, Lockheed STRATCOM, Cendian B2B/EDI). Parallel corpus work; doesn't block on the measurement thread.
 3. **-129 stories 3-5** — AT&T Mobility, Launchpad AWS, Capital One. Stories 1+2 done. Stories 3-5 blocked on elicitation.
-4. **-175** — W_KW trace lie: delete stale module-local weights in pinecone_service.py, move to constants.py. Instrument cleanup.
 
 **NEXT** (queued):
 1. **-015** — JPM Payments IQ differentiation. Cheap data pass; upstream of operational surfacing; feeds cleaner signal for -128.
@@ -27,7 +26,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 9. **-074** — Entity cluster synthesis forcing. "How did you build the CIC" returns a survey instead of depth on a marquee query.
 10. **-096** — Methodology-context preservation. The methodology is what makes the metrics credible to an engineer.
 
-(Everything else defaults to LATER, including -179, -183, -184.)
+(Everything else defaults to LATER, including -179, -183, -184, -190 through -194, -195.)
 
 ---
 
@@ -63,24 +62,18 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-096](#mattgpt-096) | Methodology context dropped during synthesis — TDD/BDD and ways-of-working substance gets compressed out of metric claims (hypothesis to verify) | Open | Medium | Issue | May 28, 2026 |
 | [MATTGPT-097](#mattgpt-097) | Career-intent framing refresh — corpus predates current role taxonomy; refresh framing AND tighten register | Open | Medium | Action | May 28, 2026 |
 | [MATTGPT-099](#mattgpt-099) | Role Match — assess and decide comp handling on JDs that include comp expectations | Open | Medium | Investigation + Action | May 29, 2026 |
-| [MATTGPT-115](#mattgpt-115) | Lock icon — browser console warning: password field not in native form (st.popover portal breaks form containment) | Open | Low | Issue | June 6, 2026 |
-| [MATTGPT-121](#mattgpt-121) | Why Agy dialog — mobile layout fix (375px viewport); one rule remaining: title font-size 24px → 20px, selector confirmed | Open | Low | Bug | June 9, 2026 |
 | [MATTGPT-122](#mattgpt-122) | My Work — Cards view BDD timing: test_view_switching_preserves_open_story_detail fails (components.html iframe listener not attached at click time) | Open | Low | Issue | June 10, 2026 |
 | [MATTGPT-126](#mattgpt-126) | Ask Agy landing — input border flash on load; emotion-class guard retained as insurance | Parked | Low | Issue | June 12, 2026 |
 | [MATTGPT-128](#mattgpt-128) | Displayed-source faithfulness — source cards must substantiate the claims in the answer | Open | High | Issue | June 14, 2026 |
 | [MATTGPT-129](#mattgpt-129) | Content elaboration per era — expand 5 under-documented operational stories | Open | High | Action | June 14, 2026 |
 | [MATTGPT-130](#mattgpt-130) | "practitioners" canonical everywhere — UI, eval golden set, corpus re-embed in lockstep | Open | Medium | Action | June 14, 2026 |
 | [MATTGPT-131](#mattgpt-131) | BDD selector bug — `test_industry_and_capability_labels_visible_inline_on_mobile` fails in marathon run | Open | Low | Bug | June 15, 2026 |
-| [MATTGPT-136](#mattgpt-136) | Dark mode design system audit — --accent-purple not overridden in body.dark-theme | Open | Low | Refactor | June 18, 2026 |
 | [MATTGPT-140](#mattgpt-140) | Fix hardcoded model names in backend_service.py and jd_assessor.py — use constants.py | Open | Low | Refactor | June 20, 2026 |
 | [MATTGPT-141](#mattgpt-141) | Remove dead ENTITY_GATE_THRESHOLD constant from config/constants.py | Open | Low | Refactor | June 22, 2026 |
 | [MATTGPT-142](#mattgpt-142) | BDD sequential rejection test: wait_for_banner is not count-aware, assertion runs before second rejection renders | Open | Low | Bug | June 23, 2026 |
 | [MATTGPT-143](#mattgpt-143) | BDD app_url fixture hardcodes port 8501 with no env-var override | Parked | Low | Bug | June 23, 2026 |
 | [MATTGPT-145](#mattgpt-145) | Mobile filter breakpoints overlap — r2-label show/hide depends on !important cascade order, not design | Open | Low | Refactor | Jun 24, 2026 |
 | [MATTGPT-146](#mattgpt-146) | Professional Narrative stories leak into My Work via filter and search paths — must be excluded from all My Work paths | Open | Medium | Bug | Jun 25, 2026 |
-| [MATTGPT-147](#mattgpt-147) | Stale `@pytest.mark.skip` on `test_mobile_desktop_only_message` — decorator predates step def | Open | Low | Bug | July 1, 2026 |
-| [MATTGPT-148](#mattgpt-148) | `.main` selector sweep — 36 dead selectors in `global_styles.py` need swapping to `.stMain` | Open | Low | Refactor | July 1, 2026 |
-| [MATTGPT-149](#mattgpt-149) | Rejection bubble dark mode — `[class*='_rejection_bubble']` uses `var(--banner-info-bg)` with no dark mode override | Open | Low | Bug | July 1, 2026 |
 | [MATTGPT-150](#mattgpt-150) | MATTGPT-144 test fallout — decouple BDD assertions from display copy and stranded AgGrid selectors | Open | Medium | Refactor / Test | July 1, 2026 |
 | [MATTGPT-152](#mattgpt-152) | Move debug output from UI sidecar to terminal log only | Parked | Low | Refactor | July 16, 2026 |
 | [MATTGPT-153](#mattgpt-153) | Q64 eval stochastic — replace phrase-cluster with concept-cluster robust to story-selection variance | Open | Low | Refactor / Test | July 16, 2026 |
@@ -98,21 +91,18 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-168](#mattgpt-168) | Slot 1 is amplified without regard to margin -- tie or near-tie at slot 1 gets 80% of the answer | Open | High | Bug | August 5, 2026 |
 | [MATTGPT-169](#mattgpt-169) | Positioning-story attractor on career-shaped queries: "Why Hire Matt?" dominates broad management retrieval independent of technical-noun overlap | Open | High | Investigation + Action | August 5, 2026 |
 | [MATTGPT-171](#mattgpt-171) | Phrase-aware matching: stopword-only phrases invisible to token-overlap scorer at any W_KW weight | Open | Low | Investigation | August 8, 2026 |
-| [MATTGPT-172](#mattgpt-172) | CIC-cluster consolidation: CIC is 52/114 (46%) of corpus; Division concentration causes cluster-drift dominance on broad queries | Parked | Medium | Action | August 8, 2026 |
 | [MATTGPT-173](#mattgpt-173) | Role Match JD validation: no defined behavior for malformed or comp-only JD inputs | Open | Medium | Issue | August 8, 2026 |
 | [MATTGPT-176](#mattgpt-176) | Dead code: zero-caller function, 200-line commented block, duplicate typed-alias map | Open | Low | Refactor | August 11, 2026 |
 | [MATTGPT-177](#mattgpt-177) | token_overlap_ratio bound violation — repeated in-vocab tokens inflate ratio above 1.0; docstring example independently wrong | Open | Medium | Bug | August 11, 2026 |
-| [MATTGPT-178](#mattgpt-178) | Tokenizer divergence in utils/validation.py — _tokenize and token_overlap_ratio split on different character sets, undercounting technical-term overlap | Open | High | Bug | August 11, 2026 |
-| [MATTGPT-179](#mattgpt-179) | Dead formatters in formatting.py — both entrances orphaned, phantom schema in unreachable code; consider folding into MATTGPT-176 | Open | Low | Refactor | August 11, 2026 |
 | [MATTGPT-180](#mattgpt-180) | Test fixture blind spot: test_formatting.py, test_filters.py, test_scoring.py build on phantom schema and pass against it | Open | High | Bug | August 11, 2026 |
 | [MATTGPT-181](#mattgpt-181) | Early-career story slate (Well Found / F-22, Lockheed STRATCOM, Cendian B2B/EDI) -- closes pre-2005 corpus gap | Open | Medium | Action | August 12, 2026 |
-| [MATTGPT-182](#mattgpt-182) | Eval and probe harnesses bypass loader normalization -- public_tags reaches scorer as str, contributing zero keyword tokens in every measurement run | Open | High | Bug | August 12, 2026 |
 | [MATTGPT-183](#mattgpt-183) | has_metric filter dead -- nothing in UI sets it to True; remove rather than fix | Open | Low | Refactor | August 13, 2026 |
-| [MATTGPT-184](#mattgpt-184) | ask_mattgpt/utils.py module audit -- six dead functions, four duplicating live helpers elsewhere | Open | Low | Refactor | August 13, 2026 |
 | [MATTGPT-185](#mattgpt-185) | Query negation unsupported -- "outside of MattGPT" returns MattGPT stories | Open | Medium | Enhancement | August 13, 2026 |
 | [MATTGPT-187](#mattgpt-187) | diversify_results max_per_client parameter is documented but never implemented | Open | Medium | Bug | August 13, 2026 |
 | [MATTGPT-188](#mattgpt-188) | Semantic router accepts off-topic queries about other people | Open | Medium | Bug | August 13, 2026 |
-| [MATTGPT-189](#mattgpt-189) | test_global_styles_no_cdn asserts a feature removed in 2cbe5f5 | Open | Low | Test | August 13, 2026 |
+| [MATTGPT-190](#mattgpt-190) | Tokenizer character-set divergence: _tokenize keeps +#-. while token_overlap_ratio splits on non-\w | Open | Medium | Bug | August 16, 2026 |
+| [MATTGPT-195](#mattgpt-195) | Production incident queries scatter across six intent families -- delivery family has no incident vocabulary | Open | Medium | Bug | August 16, 2026 |
+| [MATTGPT-196](#mattgpt-196) | Defensive pytest.skip in test_explore_stories.py masks UI regressions as green runs | Open | Medium | Bug | August 16, 2026 |
 
 ---
 
@@ -159,11 +149,26 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-075](#mattgpt-075) | Developer debug surfaces leak to user-facing UI (sidebar print, telemetry badge) | Decided Against | Medium | Issue | May 18, 2026 |
 | [MATTGPT-090](#mattgpt-090) | System prompt — decline cleanly on comp / off-scope queries (no silent fallback) | Decided Against | Medium | Action | May 28, 2026 |
 | [MATTGPT-103](#mattgpt-103) | Agy intro line — resolve "20+ years of work" inconsistency with stats bar (Years tile dropped) | Decided Against | Low | Refactor | May 30, 2026 |
+| [MATTGPT-115](#mattgpt-115) | Lock icon — browser console warning: password field not in native form (st.popover portal breaks form containment) | Decided Against | Low | Issue | June 6, 2026 |
+| [MATTGPT-121](#mattgpt-121) | Why Agy dialog — mobile layout fix (375px viewport); one rule remaining: title font-size 24px → 20px, selector confirmed | Decided Against | Low | Bug | June 9, 2026 |
 | [MATTGPT-127](#mattgpt-127) | Replace hardcoded `ASSESSMENT_MODEL` in `jd_assessor.py` with `get_conf()` env var pattern | Decided Against | Low | Refactor | June 12, 2026 |
 | [MATTGPT-133](#mattgpt-133) | BDD skip — `test_ask_agy_works_from_table_view` skips when AgGrid iframe row interaction doesn't open detail panel | Decided Against | Low | Bug | June 16, 2026 |
 | [MATTGPT-134](#mattgpt-134) | BDD skip — `test_deeplink_respects_view_mode` skips because deeplink navigation does not preserve pre-set view mode | Decided Against | Low | Bug | June 16, 2026 |
+| [MATTGPT-136](#mattgpt-136) | Dark mode design system audit — --accent-purple not overridden in body.dark-theme | Decided Against | Low | Refactor | June 18, 2026 |
 | [MATTGPT-138](#mattgpt-138) | BDD: page teardown invariant + CLS budget guard (MATTGPT-018 regression lock) | Decided Against | Medium | Action | June 19, 2026 |
+| [MATTGPT-147](#mattgpt-147) | Stale `@pytest.mark.skip` on `test_mobile_desktop_only_message` — decorator predates step def | Decided Against | Low | Bug | July 1, 2026 |
+| [MATTGPT-148](#mattgpt-148) | `.main` selector sweep — 36 dead selectors in `global_styles.py` need swapping to `.stMain` | Decided Against | Low | Refactor | July 1, 2026 |
+| [MATTGPT-149](#mattgpt-149) | Rejection bubble dark mode — `[class*='_rejection_bubble']` uses `var(--banner-info-bg)` with no dark mode override | Decided Against | Low | Bug | July 1, 2026 |
 | [MATTGPT-164](#mattgpt-164) | Wrong-person queries reach retrieval — Satya Nadella passes all gates, returns Accenture content | Decided Against | High | Bug | August 3, 2026 |
+
+| [MATTGPT-172](#mattgpt-172) | CIC-cluster consolidation: CIC is 52/114 (46%) of corpus; Division concentration causes cluster-drift dominance on broad queries | Decided Against | Medium | Action | August 8, 2026 |
+| [MATTGPT-179](#mattgpt-179) | Dead formatters in formatting.py — both entrances orphaned, phantom schema in unreachable code; consider folding into MATTGPT-176 | Decided Against | Low | Refactor | August 11, 2026 |
+| [MATTGPT-184](#mattgpt-184) | ask_mattgpt/utils.py module audit -- six dead functions, four duplicating live helpers elsewhere | Decided Against | Low | Refactor | August 13, 2026 |
+| [MATTGPT-189](#mattgpt-189) | test_global_styles_no_cdn asserts a feature removed in 2cbe5f5 | Decided Against | Low | Test | August 13, 2026 |
+| [MATTGPT-191](#mattgpt-191) | test_synthesis_pool_size fails because SYNTHESIS_THEMES is never populated in test context | Decided Against | Low | Bug | August 16, 2026 |
+| [MATTGPT-192](#mattgpt-192) | Semantic router returns out_of_scope for entity-scoped queries (amex) | Decided Against | Medium | Bug | August 16, 2026 |
+| [MATTGPT-193](#mattgpt-193) | LLM-output tests are stochastic at temperature 0.4 | Decided Against | Low | Test | August 16, 2026 |
+| [MATTGPT-194](#mattgpt-194) | slugify defined three times across three modules -- consolidate to one | Decided Against | Low | Refactor | August 16, 2026 |
 
 ## Schema
 
@@ -535,7 +540,7 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Type:** Issue
 - **Execution split (May 28, 2026; updated August 12, 2026 — see Value Prioritized Roadmap at top of BACKLOG.md):**
   - **Phase 1 — Query-side mitigation (done, Green at 627f6f4).** Strip "Matt" from embedded queries on technical-noun shapes; preserve "Matt" in the prompt sent to the LLM. Cheap, reversible, sufficient for moderate-overlap nouns (monolith, MVP). NOT sufficient for severe-overlap nouns (refactoring). Maps to Fix-path option 2 below.
-  - **Phase 2 — Cluster cull / rewrite (NOW, blocked on re-baseline).** Scope determined by P5/P8 Step 0 measurement. Blocked on MATTGPT-182 (eval/probe harnesses use tags-dark scorer; P5/P8 determination was made in that regime). Re-run Step 0 after -182 fix before scoping this work.
+  - **Phase 2 — Cluster cull / rewrite (NOW).** Scope determined by P5/P8 Step 0 measurement. MATTGPT-182 closed (275ff1f, August 15) -- re-baseline run August 13; P5/P8 still LEAD (findings in post-182 section below). Phase 2 is unblocked.
   - **Phase 3 — Full hybrid retrieval.** BM25 + semantic; keyword weighting on "client", "Fortune 500", "enterprise" pushes named-client stories above MattGPT for queries containing those keywords. Handles severe-overlap nouns. **Lowest empirical risk path** given the May 16 story-side rewrite backfire (see Finding 3 caveat). Also addresses MATTGPT-061 residual. Maps to Fix-path option 3 below. **Note (August 13, 2026): BM25 cannot reach P5/P8's specific problem.** P5 and P8 query "platform refactoring." Rearchitecting Live Railroad Systems does not contain "refactoring" -- its title says "Rearchitecting" and its prose uses "rearchitecture" and "refactor." No enterprise story whose subject is restructuring uses the query's exact vocabulary. A term-matching mechanism has nothing to match. BM25 plus a stemmer would address the no-stemming limitation in MATTGPT-178 and would help queries whose vocabulary the corpus does carry -- but Phase 3 should not be scoped as the fix for P5/P8.
   - The detailed Fix-path ordering section below remains the canonical reference for option specifics; this annotation adds sequencing decisions made during the May 28, 2026 prioritization pass.
 - **Finding 1 (noun-overlap spectrum + subject-pronoun modifier):** Free-text queries with "Matt" as the subject systematically contaminate retrieval when the noun overlaps MattGPT or Strangler Fig story vocabulary. Subject pronoun is a *modifier*, not a binary gate — moderate-overlap nouns are rescued by switching "Matt" → "you"; severe-overlap nouns are not.
@@ -1001,54 +1006,6 @@ Each detail block uses these fields. Not every field is required for every item.
 
 ---
 
-### MATTGPT-115
-**Lock icon — browser console warning: password field not in native form**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Issue
-- **Issue:** Chrome fires `[DOM] Password field is not contained in a form` when the Role Match lock icon popover is open. `st.popover` uses a portal — it teleports its DOM nodes to a different location in the document. `st.form` creates a native `<form>` element, but the portal moves the children (including the `<input type="password">`) outside the form's DOM subtree. Chrome's password-manager detection fires because the containment check fails.
-- **Functional impact:** None. Streamlit's form submission logic is Python-level. The password check, fail-closed behavior, and session state update all work correctly. The warning is purely Chrome's password manager saying it can't hook into the field.
-- **Desirability of fix:** Low. Password manager NOT saving this internal access code is actually correct behavior. `autocomplete="new-password"` is already set by Streamlit on `type="password"` fields; the containment check fires before Chrome reads autocomplete.
-- **Fix options (all non-trivial):**
-  1. Replace `st.form` + `st.form_submit_button` with `st.text_input` + `st.button` + widget-key versioning for clear-on-submit. Does not fix the containment warning (still no native form wrapping).
-  2. Replace the entire popover body with a `components.html` custom form — full control over HTML structure, native `<form>` wrapping possible, but requires a JS bridge to report submission back to Streamlit.
-- **Affects:** `ui/components/lock_icon.py` — `st.popover` + `st.form` combination.
-- **Logged:** June 6, 2026
-
----
-
-### MATTGPT-121
-**Why Agy dialog — mobile layout fix (375px viewport)**
-
-- **Status:** Open
-- **Priority:** Low (downgraded from Medium — heavy lifting done, one line remains)
-- **Type:** Bug / Polish
-- **File:** `ui/components/why_agy_dialog.py`
-- **Logged:** June 9, 2026
-
-**Already shipped (commit `ad3b72f`):** `@media (max-width: 480px)` block in `why_agy_dialog.py` lines 107–124:
-- `[role="dialog"]` → `max-height: 88vh; overflow-y: auto` (scroll safety)
-- `.why-agy-avatar-row` → `flex-direction: column; align-items: center; gap: 12px` (stacks image above text)
-- `.why-agy-illustration` → `max-width: 70px; width: 70px !important` (shrinks image)
-- `.why-agy-body p` → `font-size: 14px; line-height: 1.6` (reduces body copy)
-
-Note: image is in a flex row (`display: flex; gap: 20px; flex-shrink: 0`), not a float — ticket originally said "floats right," which was wrong.
-
-**Remaining — one CSS rule:** Dialog title `"Hi, I'm Agy 🐾"` (renamed in commit `56230f2`, before the mobile fix) renders at 24px, font-weight 600 on mobile. Target: 20px.
-
-Selector confirmed via live DOM inspection (Chrome Claude, June 2026). Title `<p>` sits inside `[data-testid="stMarkdownContainer"]` in the dialog's title area, structurally separate from `.why-agy-body` paragraphs. Safe selector:
-
-```css
-[role="dialog"] [data-testid="stMarkdownContainer"] p {
-    font-size: 20px !important;
-}
-```
-
-Add this to the existing `@media (max-width: 480px)` block. `[role="dialog"] p:first-of-type` (original proposal) is fragile and should not be used.
-
----
-
 ### MATTGPT-122
 **My Work — Cards view BDD timing failure: test_view_switching_preserves_open_story_detail**
 
@@ -1177,6 +1134,7 @@ For each client-specific probe query, assert `client_name in [s.get("Client") fo
 - **Status:** Open
 - **Priority:** Low
 - **Type:** Bug (test only)
+- **Run note (August 16, 2026):** Single run showed 233 passed, no failure here -- consistent with this being a marathon-only timing issue (scenario 18 of 54, at ~31 min). Cannot disposition from a single run. Needs 3-4 repeated full-suite runs to characterize pass/fail distribution.
 - **Logged:** June 15, 2026
 
 **Context:** `test_industry_and_capability_labels_visible_inline_on_mobile` fails in the full BDD suite marathon run (52 passed, 1 failed). The feature is correct in both local and production at 375px — Chrome Claude confirmed `st-key-facet_industry_v2`, `stWidgetLabel`, `display: flex`, `visibility: visible`, bounding rect 48x14px fully within viewport. The label is present and Playwright-visible in the live app.
@@ -1184,24 +1142,6 @@ For each client-specific probe query, assert `client_name in [s.get("Client") fo
 **Root cause:** Not yet confirmed. Candidates: (1) the selector hardcodes `facet_industry_v2` but `_widget_version_industry` in a fresh BDD session starts at 0 (`facet_industry_v0`), making the substring match fail; (2) marathon-run resource pressure causes the DOM assertion to fire before the label renders after a 375px viewport resize. Scenario 18 of 54, fires at 31 min into a 31-min run.
 
 **Acceptance criterion:** Scenario passes in isolation (`pytest tests/bdd/steps/test_explore_stories.py::test_industry_and_capability_labels_visible_inline_on_mobile -v`) and in the full suite without flake.
-
----
-
-### MATTGPT-136
-**Dark mode design system audit — --accent-purple not overridden in body.dark-theme**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Refactor
-- **Logged:** June 18, 2026
-
-**Context:** `body.dark-theme` in `global_styles.py` overrides `--accent-purple-text` to `#A78BFA` (lighter purple for dark backgrounds) but does NOT override `--accent-purple` or `--accent-purple-bg`. There are 41 usages of `var(--accent-purple)` across the stylesheet spanning text, borders, opaque backgrounds, and semi-transparent tints. In dark mode all 41 resolve to the same `#8B5CF6` as light mode, which may have contrast issues on dark backgrounds.
-
-**Why deferred:** A blanket override of `--accent-purple` to `#A78BFA` in dark mode affects all 41 usages simultaneously. The usages split into three semantic categories with different risk profiles: (1) text/interactive — genuinely need lighter value for contrast; (2) opaque fills/buttons — design choice, either can work; (3) semi-transparent tints derived from the variable — hue change could look off. Changing blindly risks breaking categories 2 and 3 while fixing 1.
-
-**Fix approach:** Visual audit in dark mode across all pages before adding the override. Document which of the 41 usages fall into each category. Override `--accent-purple` only if a majority of usages are category 1, or introduce a new `--accent-purple-accessible` variable for text contexts.
-
-**Acceptance criterion:** Dark mode visual review complete, override decision documented, no contrast failures on text usages of --accent-purple in dark mode.
 
 ---
 
@@ -1251,6 +1191,7 @@ queries"). Fix: delete the constant and its comment.
 - **Status:** Open
 - **Priority:** Low
 - **Type:** Bug
+- **Run note (August 16, 2026):** Passed in the August 16 run. Cannot disposition from a single pass -- need to confirm whether the underlying code was fixed (would close Done) or the test structure changed (Parked/DA). Verify before closing.
 - **Issue:** `test_sequential_rejections_swap_chip_sets_per_branch` fails because `wait_for_banner` waits for `.no-match-banner` to exist, not for a new one. After the first rejection renders a banner, subsequent `wait_for_banner` calls return immediately. The `all PERSONAL_CHIPS should be visible` assertion runs before the second rejection has processed, so `get_visible_chip_labels` sees only the first rejection's RULE_CHIPS (highest transcript_banner_N is still the first rejection's index).
 - **Root cause:** `wait_for_banner` is not count-aware. `then_banner_displayed` also only checks `.no-match-banner` presence without verifying it is the banner for the current query.
 - **Production behavior:** Correct. "Is Matt married?" returns "I'm focused on Matt's professional experience." and PERSONAL_CHIPS render as expected (confirmed manually June 23, 2026).
@@ -1281,6 +1222,7 @@ queries"). Fix: delete the constant and its comment.
 - **Type:** Refactor
 - **Logged:** June 24, 2026
 - **File:** `ui/styles/global_styles.py`
+- **Run note (August 16, 2026):** Mobile filter rendering passed in August 16 BDD run. Cannot disposition from a single run -- need to verify whether the CSS cascade fragility was resolved by a code change or whether the test is not exercising the fragile path. Manual visual check at 375px and 481-767px range before closing.
 
 **Issue:** The mobile filter layout uses three overlapping media blocks that fight over the same properties at phone widths. Code-reviewed against the repo June 2026 — line numbers confirmed exact.
 
@@ -1352,70 +1294,6 @@ Professional Narrative stories remain fully available to Ask Agy's Pinecone retr
 **Note:** Effort estimate intentionally omitted — small, but requires careful splitting. Validate in the browser after the change, not from source (source-order reasoning is exactly what's fragile here).
 
 **Related -- code adjacency:** MATTGPT-166 (Arc stories invisible to entity-scoped queries via Fortune 500 Clients / Cross-Division placeholder metadata) is a different symptom but touches the same metadata-driven filtering code. Whoever works either ticket will be in the same module. Read both detail blocks before starting either.
-
----
-
-### MATTGPT-147
-**Stale `@pytest.mark.skip` on `test_mobile_desktop_only_message` — decorator predates step def**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Bug
-- **File:** `tests/bdd/steps/test_role_match.py`
-- **Logged:** July 1, 2026
-
-**Issue:** `test_mobile_desktop_only_message` is skipped by a stale decorator at lines 170–175. The skip reason says "Needs hamburger interaction" — but that interaction was implemented at lines 403–416 (`given_viewport_at_explicit_width`). The decorator was written before the step def existed and was never removed.
-
-**Action:** Remove the `@pytest.mark.skip` decorator at lines 170–175. Run in isolation:
-```
-pytest tests/bdd/steps/test_role_match.py::test_mobile_desktop_only_message -v
-```
-If it passes, commit. If it fails, the step def has a bug — diagnose before committing.
-
-**Acceptance criteria:**
-- `test_mobile_desktop_only_message` passes in isolation and in the full suite with no skip decorator.
-
----
-
-### MATTGPT-148
-**`.main` selector sweep — 36 dead selectors in `global_styles.py` need swapping to `.stMain`**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Refactor
-- **File:** `ui/styles/global_styles.py`
-- **Logged:** July 1, 2026
-
-**Issue:** `.main` does not exist in current Streamlit. The correct selector is `.stMain`. `global_styles.py` contains 36 rules scoped to `.main[^a-zA-Z]` — all dead selectors that match nothing. Any layout or spacing rules under these selectors are silently not applying.
-
-**Action:**
-1. Confirm count: `grep -n "\.main[^a-zA-Z]" ui/styles/global_styles.py`
-2. Review each occurrence — verify intent is `.stMain` before swapping (some may be legitimate class names that happen to start with `.main`).
-3. Swap confirmed dead selectors to `.stMain`.
-4. Smoke-test desktop and mobile after change — dead selectors becoming live may reveal previously masked layout shifts.
-
-**Acceptance criteria:**
-- Zero `.main` selectors in `global_styles.py` that should be `.stMain`.
-- No visual regression at desktop and 375px mobile after the swap.
-
----
-
-### MATTGPT-149
-**Rejection bubble dark mode — `[class*='_rejection_bubble']` missing dark mode override**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Bug
-- **File:** `ui/styles/global_styles.py` (or wherever `_rejection_bubble` is defined)
-- **Logged:** July 1, 2026
-
-**Issue:** The rejection bubble component uses `var(--banner-info-bg)` for its background. There is no `body.dark-theme` override for this variable or this selector, so the bubble renders with the light-mode background color in dark mode.
-
-**Fix:** Add a `body.dark-theme` override — either for `--banner-info-bg` directly (if it's safe to change globally) or scoped to `[class*='_rejection_bubble']` specifically. Confirm the override value against the dark mode palette in `global_styles.py` before applying.
-
-**Acceptance criteria:**
-- Rejection bubble background is visually appropriate in both light and dark mode.
-- No other surfaces that use `var(--banner-info-bg)` are unintentionally affected.
 
 ---
 
@@ -1837,9 +1715,11 @@ Prompt reverted to original. Two experiments now closed, both negative.
 
 After stopword fix: keyword scores already inverted correctly (Fiserv 0.250, chatbot 0.125). pc is the remaining gap (0.363 vs 0.317, difference 0.046). Rail's Use Case edit moved its pc ~0.040 -- same order of magnitude. Worth trying before concluding anything needs cutting.
 
+**Fiserv Use Case edit result (August 15, 2026):** Edit applied. Sev-1 handling moved into its own sentence; a parenthetical cross-reference to another story's title was removed (that title was embedding in Fiserv's vector, adding noise). pc moved 0.317 → 0.326. Chatbot still leads (pc 0.360 vs 0.326, gap now 0.034, down from 0.046). Q1 still fails -- chatbot answers. Direction confirmed correct; gap insufficient to flip the pool. The next intervention must be larger or different.
+
 **Where margin information could live:** The confidence gate (MATTGPT-174 shipped Top Score logging). The only stage currently positioned to carry spread as well as level.
 
-**Cross-references:** MATTGPT-174 (gate calibration -- Top Score distribution is what any conditional-pin threshold must be derived from), MATTGPT-077 and MATTGPT-169 (why the wrong story reaches slot 1 in the first place), MATTGPT-178 (stopword fix already inverted keyword scores; pc is the remaining gap).
+**Cross-references:** MATTGPT-174 (gate calibration -- Top Score distribution is what any conditional-pin threshold must be derived from), MATTGPT-077 and MATTGPT-169 (why the wrong story reaches slot 1 in the first place), MATTGPT-178 (closed -- stopword fix inverted keyword scores at 049e203; pc gap is the remaining work in this ticket), MATTGPT-190 (character-set divergence, split from -178).
 
 ---
 
@@ -1894,57 +1774,12 @@ The phrase is not invisible to keyword scoring. It scores on a single stopword t
 
 **Revised consequence:** The original test instruction ("confirm W_KW=0 and W_KW=current produce identical rankings") may not hold, since "you" is a real scoring token. The affected query class is not zero-token phrases but single-token phrases where the surviving token is a stopword with broad corpus distribution.
 
-**Coupling to MATTGPT-178 open stopword question:** MATTGPT-178 notes that `_STOPWORDS` is used only by `token_overlap_ratio` and raises the question of whether it was intended to apply to `_tokenize` as well. If `_tokenize` gains the `_STOPWORDS` filter to address that question, "you" would drop from this example and the original empty-token premise would become true retroactively. These two investigations should not be resolved independently -- the stopword scoping decision in -178 directly determines the mechanism this ticket is investigating.
+**Coupling to MATTGPT-178 (closed):** MATTGPT-178 raised the question of whether `_STOPWORDS` was intended to apply to `_tokenize` as well as `token_overlap_ratio`. That question is resolved: -178 shipped at 049e203 (August 13, 2026) and `_tokenize` now applies `_STOPWORDS`. As a consequence, "you" now drops from the example above, and the original empty-token-set framing becomes retroactively true for any phrase where all tokens are stopwords or shorter than 3 chars. The mechanism this ticket is investigating has shifted -- see revised scope below.
 
-**Investigation scope (revised):** (1) Verify "you" matching behavior in the scorer against real corpus stories. (2) Determine whether single-surviving-stopword queries surface retrieval problems in production. (3) Do not design a fix before the -178 stopword scoping question is resolved -- the fix space depends on that answer.
-
----
-
-### MATTGPT-172
-**CIC-cluster consolidation: Division concentration causes cluster-drift dominance on broad queries**
-
-- **Status:** Parked -- premise disconfirmed, August 13, 2026
-- **Priority:** Medium
-- **Type:** Action
-- **Logged:** August 8, 2026
-
-**Parked (August 13, 2026):** The ticket asserts CIC density (46% of corpus) causes cluster-drift dominance on broad queries. Two measurements disconfirm this; a third is directionally consistent.
-
-1. **July 2, 2026 raw retrieval probe.** Tested directly across four broad queries. CIC was absent from the cloud-transformation top ten and rank 7 on leadership. Cosine similarity is scale-invariant; CIC's greater story length could not inflate its score, and the data confirmed it did not. If CIC was over-surfacing, the cause had to be downstream (pinning, synthesis assembly, diversify_results), not raw retrieval.
-
-2. **August 13, 2026 live traces.** Zero CIC stories in the Sev-1 query pool; six of ten were Independent Project.
-
-3. **August 13 count over query_log_parsed.csv (43 rows), leading story by Division:**
-
-   | Division | Leading queries | Corpus share |
-   |---|---|---|
-   | Sabbatical | 13 | 9 stories, 8% |
-   | Cloud Innovation Center | 11 | 52 stories, 46% |
-   | Cross-Division | 9 | 9 stories, 8% |
-   | Technology | 5 | -- |
-   | Financial Services Technology Consulting | 3 | -- |
-   | Atlanta Liquid Studio | 2 | -- |
-
-   CIC leads 26% of queries against 46% corpus share. Under-represented, not dominant.
-
-The downstream mechanisms the July probe could not measure have since been fixed: CIC normalization (March 2026) and the diversify_results pinning bug (MATTGPT-021, closed May 2026 via MATTGPT-073). The ticket's own supporting evidence, MATTGPT-094, dates from May 2026 and predates both fixes.
-
-**Sample limitation (recorded, not resolved):** The 43 rows in query_log_parsed.csv are a 7% slice of the 609-query production log and skew toward queries typed during testing. The Google Sheet log carries no leading-story column, so the Division count cannot be run over full traffic. Measurement 3 is supporting evidence, not decisive. Measurements 1 and 2 stand on their own.
-
-**Actual overrepresentation:** The Independent Project / MattGPT cluster (MATTGPT-077) and the Professional Narrative cluster (MATTGPT-169). Nine stories each, 8% of corpus each, together leading 51% of queries in the sampled rows.
-
-**Reopen condition:** Leading-story column added to the query logger (MATTGPT-174 shipped this for top_score; a leading-story / Division column is the next step) and full-traffic analysis shows CIC leading disproportionately.
-
-**Verified corpus counts (August 13, 2026, preserved for reference):**
-- Cloud Innovation Center: 52 of 114 stories (46%) corpus-wide
-- Era "Enterprise Innovation & Transformation": 56 of 114 (49%)
-- Cross-tab: 51 of that Era's 56 stories are CIC
-
-The concentration is real. The retrieval dominance claim is not supported by the evidence.
-
-**Cross-references:** MATTGPT-094 (closed -- documented the CIC dominance pattern in May 2026, predates the downstream fixes), MATTGPT-077 and MATTGPT-169 (now carry the actual concentration finding), MATTGPT-181 (early-career story slate was listed here as consolidation lever (c); stands on its own merits, unaffected by this parking).
+**Investigation scope (updated August 16, 2026):** (1) With "you" now filtered by `_STOPWORDS`, re-verify what `_tokenize("I do, we do, you do")` returns. (2) Determine whether single-surviving-stopword queries that are now fully invisible to keyword scoring surface retrieval problems in production. (3) Assess whether the -178 fix changes the severity of this ticket -- if phrases that previously scored on a stopword now score zero, that may improve or worsen real query behavior depending on the phrase class.
 
 ---
+
 
 ### MATTGPT-173
 **Role Match JD validation: no defined behavior for malformed or atypical JD inputs**
@@ -2013,100 +1848,10 @@ The concentration is real. The retrieval dominance claim is not supported by the
 
 **Severity gate (verify before closing):** Grep all callers of `token_overlap_ratio`. If any caller gates on a value near 1.0 (e.g., `if ratio > 0.8: reject`), an inflated ratio passes a gate it shouldn't. That would upgrade severity from Medium to High. If no caller thresholds against a near-1.0 value, the defect is a correctness issue without a confirmed downstream behavioral consequence.
 
-**Cross-references:** MATTGPT-178 (tokenizer divergence in the same function -- fix both together; they interact at the character-class level before this arithmetic runs).
+**Cross-references:** MATTGPT-190 (character-set divergence in the same function -- fix both together; they interact at the character-class level before this arithmetic runs). MATTGPT-178 closed -- stopword fix shipped at 049e203; character-set issue is now -190.
 
 ---
 
-### MATTGPT-178
-**Tokenizer divergence in utils/validation.py -- _tokenize and token_overlap_ratio split on different character sets, undercounting technical-term overlap**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Bug
-- **File:** `utils/validation.py`
-- **Related:** MATTGPT-157 (closed -- specific-term query swamping; same term class affected here), MATTGPT-177 (bound violation in the same function)
-- **Logged:** August 11, 2026
-
-**Issue:** Two tokenizers in the same module disagree on symbol-bearing characters.
-
-- `_tokenize` uses `_WORD_RX = [A-Za-z0-9+#\-_.]+` -- keeps `+`, `#`, `-`, `.` as word characters.
-- `token_overlap_ratio` uses `re.split(r"[^\w]+")` where `\w = [A-Za-z0-9_]` -- those same characters become separators.
-
-**Verified divergence:**
-
-| Input | `_tokenize` output | `token_overlap_ratio` tokens |
-|---|---|---|
-| `c++` | `['c++']` | `[]` |
-| `.net` | `['.net']` | `['net']` |
-| `node.js` | `['node.js']` | `['node']` |
-| `ci/cd` | `[]` | `[]` |
-
-**Retrieval consequence:** If the vocab is built with `_tokenize` (as the docstring at line 199 states), symbol-bearing technical terms exist in the vocab in a form `token_overlap_ratio` can never produce. Overlap is systematically undercounted for exactly the technical vocabulary the scorer exists to recognize -- `c++`, `.net`, `node.js`, and similar terms contribute zero overlap regardless of their presence in the story. This is the same term class MATTGPT-157 diagnosed as getting swamped in retrieval.
-
-**Unverified prerequisite (verify before fixing):** Confirm that `initialize_vocab` actually builds the vocab using `_tokenize`. The docstring asserts this; the function itself was not read during this investigation. The answer determines which tokenizer is the wrong one: if vocab is built with `_tokenize`, fix `token_overlap_ratio` to use the same regex. If vocab is built with `re.split(r"[^\w]+")`, fix `_tokenize` (and accept that `c++` becomes `['c']`).
-
-**Additional finding (note -- may warrant a separate ticket):** `_STOPWORDS` is defined in this module and used only by `token_overlap_ratio`, not by `_tokenize`. As a result, the keyword scorer treats "how," "you," and other stopwords as content tokens when building the overlap. Whether this is a defect or intended behavior depends on the scorer's design intent. If `_STOPWORDS` was meant to apply to all tokenization in this module, that's a third bug here. If it was intentionally scoped to `token_overlap_ratio` only, document that intent explicitly so future editors don't "fix" it.
-
-**Live exhibit (August 14, 2026):** Query "how did Matt handle a Sev-1 defect?" against two competing stories:
-
-| Story | kw | Matching tokens |
-|---|---|---|
-| Fiserv (Recovering $8.5M White-Label Card Portal) | 0.167 | defect, sev-1 |
-| Independent Project (My Chatbot Kept Flattering Me) | 0.250 | how, matt |
-
-The story matching the two content words scores lower than the story matching a stopword and the subject's own name. "how" counts twice because it appears in the chatbot story's title, which `_keyword_score_for_story` double-weights.
-
-`_STOPWORDS` is defined at `validation.py:16` and contains "how" at line 35. It is applied in `token_overlap_ratio` (line 217) and never in `_tokenize` (line 89), which applies only the `len >= 3` filter.
-
-**"matt" as a noise token:** "matt" is not in `_STOPWORDS` and would need adding as a corpus-specific term. Every story in the corpus is about Matt, so the token has zero discriminating power and systematically favors first-person narrative stories -- whichever story happens to mention his name most.
-
-**Interaction with MATTGPT-077 (_substitute_matt_subject):** On technical, team_scaling, and agile_transformation families, substitution replaces "Matt" with "he" (2 chars), which fails the `len >= 3` filter and drops the token. On behavioral queries substitution does not fire and "matt" survives. The substitution mechanism is partially doing the job a stopword list should do, inconsistently across intent families.
-
-**Effect of applying stopwords on this exhibit:** Dropping stopwords reduces the chatbot story to kw=0.0 and leaves Fiserv at kw=0.167. However, pc still favors the chatbot story (0.359 vs 0.315), so the blend does not flip (0.359 vs 0.340 after keyword correction). The stopword fix is correct and insufficient on its own for this query -- ranking requires a pc change as well.
-
----
-
-### MATTGPT-179
-**formatting.py dead formatters -- both entrances orphaned, phantom schema in unreachable code; consider folding into MATTGPT-176**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Refactor
-- **Logged:** August 11, 2026
-
-**Issue:** Both entrances to `formatting.py`'s formatter functions are confirmed orphaned:
-
-- Typed alias map at `conversation_view.py:305-312`: originates in the September 2025 monolith, carried through modularization with no design intent. Not reachable by any user-facing path.
-- Deep Dive pill at `conversation_helpers.py:395`: does not render in the UI. Confirmed by inspection August 11, 2026.
-
-Nothing a visitor can reach exercises `_format_narrative`, `_format_key_points`, or `_format_deep_dive`. These three are dead code. The module stays -- `build_5p_summary` is imported by `utils/scoring.py:11` as one of the nine haystack parts in `_keyword_score_for_story`; `strongest_metric_line` is called by `build_5p_summary` at line 120 and is therefore also live; `story_has_metric` is imported by `utils/filters.py` (see MATTGPT-183).
-
-**Consider folding into MATTGPT-176** (dead code bundle). They are separate only because the phantom schema finding adds context about what the correct fields are, preserved below in case this code is ever revived.
-
-**Schema mapping (verified August 11, 2026 against corpus):**
-
-| Code field | JSONL field | Type |
-|---|---|---|
-| `why` | `Purpose` | str |
-| `how` | `Process` | list |
-| `what` | `Performance` | list |
-| `title` | `Title` | str |
-| `client` | `Client` | str |
-| `star.situation` | `Situation` | list |
-| `star.task` | `Task` | list |
-| `star.action` | `Action` | list |
-| `star.result` | `Result` | list |
-
-All list fields are already lists in the JSONL. The mismatch is field naming only, not structure.
-
-**Severity correction for `_format_narrative` (do not escalate):** `_format_narrative` output feeds `answer_context`, used only at `backend_service.py:1041` -- the API-failure fallback path. It does not enter the LLM prompt on normal query paths. An earlier claim that it "poisons every query" was retracted and verified false. The orphaned-entrances finding above is the correct framing.
-
-**Work items:**
-1. Delete the three dead functions from `formatting.py`: `_format_narrative`, `_format_key_points`, `_format_deep_dive`. Do not touch `build_5p_summary` (live -- imported by `utils/scoring.py:11`), `strongest_metric_line` (live -- called by `build_5p_summary` at line 120), or `story_has_metric` (live defect -- see MATTGPT-183). The module stays.
-
-**Sequencing note:** MATTGPT-183 removes the `has_metric` filter branch, which removes `story_has_metric`'s only importer. Once -183 lands, `story_has_metric` in `formatting.py` becomes dead and moves to this ticket's deletion list. Until -183 lands, leave `story_has_metric` alone.
-
----
 
 ### MATTGPT-180
 **Test fixture blind spot: test_formatting.py, test_filters.py, test_scoring.py:85 pass against phantom schema**
@@ -2159,37 +1904,6 @@ Adjunct-professor work folds in; placement TBD after drafts surface.
 
 ---
 
-### MATTGPT-182
-**Eval and probe harnesses bypass loader normalization -- public_tags reaches scorer as str, contributing zero keyword tokens in every measurement run**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Bug
-- **Logged:** August 12, 2026
-
-**Issue:** `echo_star_stories_nlp.jsonl` stores `public_tags` as a comma-separated string (verified: type str on schema dump, August 11). `app.py`'s `load_star_stories()` parses it to a list at lines 239-240 via `_split_tags()` before any story reaches the retrieval stack. The app path is correct.
-
-`tests/eval_rag_quality.py` (lines 1328, 1769, 1862) and the four probe scripts (`probe_077_step0.py`, `probe_077_step05.py`, `probe_077_stepA.py`, `probe_assessor.py`) load the corpus with raw `json.loads` and never apply that normalization. All four call `rag_answer()` directly, which reaches `semantic_search` -> `_hybrid_score` -> `_keyword_score_for_story`. In `_keyword_score_for_story`, `' '.join()` over a string character-separates it. Every resulting token fails the `len >= 3` filter in `_tokenize`. `public_tags` contributes zero keyword tokens in every eval and probe run, while contributing normally in the app.
-
-**Verified by direct A/B on the live functions (August 11):** identical story, identical query. Raw dict scores 0.25, loader-normalized dict scores 0.375. Behavior unchanged since 764252b (October 2025).
-
-**Consequence -- the measurement record, not production:**
-- Production is correct. No visitor-facing defect. Do not escalate on that basis.
-- Every probe number and eval score on record was computed with one of nine haystack fields dark, against a production path where it is live.
-- The 64/64 eval run (August 11) is internally consistent and valid as a regression check, but is not measuring the production scorer.
-- MATTGPT-077's Step 0 re-baseline (August 11) has the same property. "P5/P8 still LEAD" was determined tags-dark. Whether they lead in production is unmeasured.
-- f5641e7 calibrated W_KW=0.15 on E1-E4 evidence from this path. The rank flips were real but occurred in a tags-dark regime. Whether 0.15 is right when tags contribute is untested.
-
-**Fix:** Extract `_split_tags()` and `_ensure_list()` from `app.py` into a shared loader that `app.py`, `eval_rag_quality.py`, and all four probes call. Do not duplicate the normalization into each script -- that recreates the same drift in five places.
-
-**Exit criterion:** After the fix, re-run the eval suite and MATTGPT-077 Step 0. Numbers will move. This is instrument correction, not regression. Do not compare results across the fix boundary; establish a new baseline and treat prior probe and eval numbers as belonging to a different regime.
-
-**Blocks:** MATTGPT-077 Phase 2. The cluster cull / rewrite path is scoped against a P5/P8 determination from the miscalibrated instrument. Re-measure before scoping that work.
-
-**Related:** MATTGPT-180 (test fixture blind spot -- same root cause, different surface: fixtures that do not come from the loader).
-
----
-
 ### MATTGPT-183
 **has_metric filter dead -- remove rather than fix**
 
@@ -2209,42 +1923,14 @@ Adjunct-professor work folds in; placement TBD after drafts surface.
 2. Remove the chip and clear logic from `explore_stories.py` (lines 362-363, 410-411).
 3. Remove `has_metric` key from both filter initializers (`explore_stories.py:129`, `:725`).
 4. Delete `test_filters.py:116` (tests the dead branch against a phantom-schema fixture; passing tells you nothing).
-5. `story_has_metric` in `formatting.py` then has no importer and becomes dead code -- add it to MATTGPT-179's deletion list.
+5. `story_has_metric` in `formatting.py` then has no importer and becomes dead code -- delete it inline as part of this ticket. MATTGPT-179 is DA; do not route this to that ticket's deletion list.
 
 **Note -- personas:** `personas` in `filters.py` is already self-documented as dead ("not used -- field doesn't exist in data"). `conversation_helpers.py:121` reads it for badge rendering; the badges never render because the field is absent from corpus stories. Same class; not in scope for this ticket but worth a cleanup pass alongside it.
 
-**Cross-references:** MATTGPT-179 (once -183's removal lands, `story_has_metric` in `formatting.py` becomes dead -- add to -179's deletion list at that point), MATTGPT-180 (test_filters.py:116 is a phantom-schema fixture that should be deleted, not rebuilt).
+**Cross-references:** MATTGPT-180 (test_filters.py:116 is a phantom-schema fixture that should be deleted, not rebuilt). Note: MATTGPT-179 is DA -- the three dead formatters (`_format_narrative`, `_format_key_points`, `_format_deep_dive`) are documented there as a finding; `story_has_metric` deletion is in scope for this ticket as step 5 above.
 
 ---
 
-### MATTGPT-184
-**ask_mattgpt/utils.py module audit -- six dead functions, four duplicating live helpers elsewhere**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Refactor
-- **Logged:** August 13, 2026
-
-**Issue:** Verified August 13, 2026 by recursive grep from repo root (excluding venv and archive). Each of the following six functions appears only at its own definition and in `tests/unit/test_utils.py`. No production caller.
-
-| Function | Location | Notes |
-|---|---|---|
-| `choose_story_for_ask` | `utils.py:89` | Dead |
-| `related_stories` | `utils.py:128` | Dead -- not the Related Projects feature. That feature is live in `conversation_helpers.py:629`, built from `sources`/`src_idx`, not this function. |
-| `story_has_metric` | `utils.py:168` | Dead -- reads `Performance` correctly (unlike the `formatting.py` sibling), but has no caller. See MATTGPT-183. |
-| `split_tags` | `utils.py:298` | Dead -- duplicates `utils/corpus_loader._split_tags` (live, see MATTGPT-182) |
-| `slug` | `utils.py:315` | Dead -- duplicates `utils/ui_helpers._slug` (live, called at `:246`). Note: a separate `slugify` function exists twice more (`scripts/utils.py:10`, `generate_jsonl_from_excel.py:65`) -- out of scope here but worth a consolidation pass. |
-| `shorten_middle` | `utils.py:328` | Dead -- duplicates `utils/ui_helpers._shorten_middle` (live, called at `:137`, `:245`) |
-
-Confirmed live, do not delete: `get_context_story`, `story_modes`, `is_empty_conversation`, `ensure_ask_bootstrap`, `push_assistant_turn`, `push_conversational_answer`, `push_user_turn`. Imported by `conversation_view.py:39`, `conversation_helpers.py:18`, `__init__.py:24`.
-
-**Work:** Delete the six dead functions and their corresponding test classes in `tests/unit/test_utils.py`.
-
-**Framing note:** This module was a local grab-bag that was partly superseded as shared helpers moved to `utils/`. The deletion is cleanup; it does not address the accumulation pattern.
-
-**Cross-references:** MATTGPT-180 (tests passing against code production never exercises -- same pattern), MATTGPT-176 (dead code bundle, consider folding), MATTGPT-183 (`story_has_metric` in `formatting.py` becomes fully dead once -183 removes the `has_metric` branch -- unrelated to the sibling in this module).
-
----
 
 ### MATTGPT-185
 **Query negation unsupported -- "outside of MattGPT" returns MattGPT stories**
@@ -2326,10 +2012,213 @@ Note: the eval suite already contains "Tell me about Elon Musk" as a golden quer
 
 ---
 
+
+### MATTGPT-190
+**Tokenizer character-set divergence: _tokenize keeps +#-. while token_overlap_ratio splits on non-\w**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `utils/validation.py`
+- **Descended from:** MATTGPT-178 (closed -- stopword fix shipped at 049e203; character-set issue separated into this ticket)
+- **Related:** MATTGPT-177 (bound violation in the same function)
+- **Logged:** August 16, 2026
+
+**Issue:** The two tokenizers in `utils/validation.py` use incompatible character sets:
+- `_tokenize` uses `_WORD_RX = [A-Za-z0-9+#\-_.]+` -- keeps `+`, `#`, `-`, `.` as word characters.
+- `token_overlap_ratio` uses `re.split(r"[^\w]+")` where `\w = [A-Za-z0-9_]` -- those same characters become separators.
+
+**Verified divergence:**
+
+| Input | `_tokenize` output | `token_overlap_ratio` tokens |
+|---|---|---|
+| `c++` | `['c++']` | `[]` |
+| `.net` | `['.net']` | `['net']` |
+| `node.js` | `['node.js']` | `['node']` |
+| `ci/cd` | `[]` | `[]` |
+
+**Consequence:** Technical terms containing these characters are tokenized differently on the indexing side (`_tokenize` builds the vocab) vs. the scoring side (`token_overlap_ratio` does the overlap calculation). Queries containing `c++`, `.net`, `node.js` etc. undercount technical-term overlap against stories that contain them.
+
+**Prerequisite (verify before fixing):** Confirm that `initialize_vocab` builds the vocab using `_tokenize`. The docstring asserts this; the function itself was not read during investigation. The answer determines which tokenizer is wrong: if vocab is built with `_tokenize`, fix `token_overlap_ratio` to use the same regex. If vocab is built with `re.split(r"[^\w]+")`, fix `_tokenize` (and accept that `c++` becomes `['c']`).
+
+**Cross-references:** MATTGPT-177 (bound violation in the same function -- fix both together; they interact at the character-class level), MATTGPT-178 (closed -- stopword fix; this ticket carries the remaining character-set finding).
+
+---
+
+
+
+
+
+### MATTGPT-195
+**Production incident queries scatter across six intent families -- delivery family has no incident vocabulary**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `services/semantic_router.py` (`VALID_INTENTS["delivery"]`)
+- **Logged:** August 16, 2026
+
+**Issue:** Ten queries about production incidents, tested across two probe batches, landed in six distinct intent families: behavioral, background, narrative, technical, leadership, stakeholders. No query landed in delivery. Family determines substitution eligibility, the pin rule applied in `prompts.py`, and retrieval emphasis. The same question receives different pipeline treatment depending on phrasing.
+
+**Ten-query family scatter (August 16, 2026):**
+
+| Query | Family | Score | Valid |
+|---|---|---|---|
+| Walk me through the last major production incident you owned | behavioral | 0.454 | yes |
+| What's the root cause, and what systemic fix prevents this class of failure permanently? | behavioral | 0.445 | yes |
+| How long did it take between detection, engagement, and resolution? | behavioral | 0.339 | no |
+| What was the actual customer impact and blast radius? | behavioral | 0.316 | no |
+| Who is running point on the incident command, and what's the external communication status? | leadership | 0.305 | no |
+| Walk me through a major production incident Matt owned | background | 0.667 | yes |
+| How does Matt approach root cause analysis and preventing repeat failures? | narrative | 0.603 | yes |
+| How does Matt handle incident detection and resolution time? | narrative | 0.570 | yes |
+| Tell me about a production outage and its customer impact | technical | 0.409 | yes |
+| How does Matt run incident command during a major outage? | stakeholders | 0.552 | yes |
+
+**Root cause:** `VALID_INTENTS["delivery"]` contains six phrases focused on delivery acceleration and team velocity. No phrase covers production incidents, Sev-1 response, on-call ownership, or resolution. The absence is total, not present-but-underweighted.
+
+**Confidence gate note:** All ten queries returned `confidence=high` from Pinecone and would pass the gate regardless of `semantic_valid`. The consequence of wrong-family routing is retrieval mismatch and phrasing variance, not rejection.
+
+**Two retrieval gaps confirmed in probe:**
+1. "Production incident" without "outage" retrieves Fortune 500/Assumptions story (delivery language, not incident-specific). The Aug 15 corpus edits to AT&T and Fiserv improved the vocabulary but were insufficient.
+2. "Root cause / systemic fix / prevent failures" retrieves the chatbot story -- same mechanism as MATTGPT-168's Sev-1 failure. The chatbot story is explicitly about root cause analysis and preventing repeat failures; it is topically correct but the wrong context.
+
+**Proposed fix:** Add 6-8 phrases to `VALID_INTENTS["delivery"]` covering production incident vocabulary. Requires deleting `data/intent_embeddings.json` to regenerate the cache. Requires eval run before commit -- phrase additions shift scores across all families, not just delivery.
+
+**Complexity budget note:** Adding phrases is the same shape as what Jan-Feb subtraction work removed (Entity Gate, classify_query_intent, banned phrases). The subtraction history does not block this fix, but it raises the standard: eval pass/fail gate required, not visual inspection.
+
+**Cross-references:** MATTGPT-168 (slot 1 amplification -- chatbot root-cause contamination is the same mechanism), MATTGPT-192 (amex router failure -- same router layer), MATTGPT-154 (operational vocabulary tagging -- corpus side of the same gap).
+
+---
+
+### MATTGPT-196
+**Defensive pytest.skip in test_explore_stories.py masks UI regressions as green runs**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `tests/bdd/steps/test_explore_stories.py`
+- **Logged:** August 16, 2026
+
+**Issue:** Four `pytest.skip()` calls in step definitions convert missing UI elements into skips rather than failures. A card grid that fails to render, a missing button, or absent timeline links would all appear as additional skips in the run total rather than test failures. Real UI regressions become invisible.
+
+**Confirmed locations (August 16, 2026 BDD run):**
+- Line 240: `pytest.skip("No clickable story elements found")` -- in the `@when` step that clicks a card. A missing card grid is a regression, not an environment constraint.
+- Line 555: `pytest.skip("No close button or selected card found")` -- tries to close a detail panel; skips if nothing to close.
+- Line 586: `pytest.skip("Ask Agy button not found")` -- missing Ask Agy button becomes a skip.
+- Line 693: `pytest.skip("No Timeline explore links found")` -- absent timeline links become a skip.
+
+**The correct pattern is already in the file:** Line 589 (`click_share`) uses `pytest.fail("Share button not found after 15s")` -- same situation, right outcome.
+
+**Exception:** Line 1247 (`pytest.skip` for clipboard API) is a genuine headless Chromium constraint (clipboard requires HTTPS or a browser flag). This one stays as skip.
+
+**Fix:** Change lines 240, 555, 586, 693 from `pytest.skip(...)` to `pytest.fail(...)`. No logic change -- only the outcome when the element is absent changes from skip to fail.
+
+**Acceptance criteria:**
+- Running the BDD suite with cards not rendering produces a failure, not an additional skip.
+- Line 1247 clipboard skip unchanged.
+- All currently-passing scenarios still pass.
+
+**Cross-references:** MATTGPT-122 (Cards view BDD timing -- line 240 is the same step; if -122 is fixed, line 240 becomes safe to convert without risk of false red).
+
+---
+
+### Decided Against
+
+> **Read only -- do not add blocks here directly.**
+> Blocks are moved here from Active Tickets above when a ticket's status changes to Decided Against. New tickets always start in Active Tickets. See CLAUDE.md § Backlog Maintenance for the full lifecycle.
+
+### MATTGPT-194
+**slugify defined three times across three modules -- consolidate to one**
+
+- **Status:** Decided Against (August 16, 2026)
+- **Why not:** Slugify copies in scripts; no queued consolidation. Finding preserved here.
+- **Priority:** Low
+- **Type:** Refactor
+- **Logged:** August 16, 2026
+
+**Issue:** A slug-generating function exists in three places:
+- `scripts/utils.py:10` -- `slugify`
+- `generate_jsonl_from_excel.py:65` -- `slugify`
+- `ui/pages/ask_mattgpt/utils.py:315` -- `slug` (dead; duplicates `utils/ui_helpers._slug`, the live version called at `ui_helpers.py:246`)
+
+The `utils/ui_helpers._slug` is the live production instance. The `scripts/utils.py` and `generate_jsonl_from_excel.py` copies are standalone script utilities and may not be identical in behavior.
+
+**Fix:** Audit all three against `utils/ui_helpers._slug`. Consolidate to a single shared utility or leave scripts self-contained with a comment noting the canonical version.
+
+**Note:** The dead `slug` in `ask_mattgpt/utils.py:315` is already in scope for MATTGPT-184's deletion list.
+
+**Cross-references:** MATTGPT-184 (ask_mattgpt/utils.py module audit -- the dead `slug` function is in scope for deletion there; this ticket covers the scripts copies), MATTGPT-176 (dead code bundle).
+
+---
+
+### MATTGPT-193
+**LLM-output tests are stochastic at temperature 0.4**
+
+- **Status:** Decided Against (August 16, 2026)
+- **Why not:** Stochastic at temperature 0.4; not a regression. Tests remain red by design -- failing runs are sampling variance, not defects. Not triaging further.
+- **Priority:** Low
+- **Type:** Test
+- **Logged:** August 16, 2026
+
+**Issue:** Three tests assert on gpt-4o output and pass or fail randomly:
+- `test_out_of_scope_redirect[retail sales work]`
+- `test_no_meta_commentary[Q45_meta]`
+- `test_structural_checks[Q32_structural]`
+
+**Verified August 15, 2026:** Three consecutive runs of the first test on identical code gave: fail, fail, pass. The meta-commentary tests hit different query IDs on different runs.
+
+These are not regressions and should not be triaged as such. Any future failure of these three tests is sampling variance until proven otherwise by a reproducible deterministic failure.
+
+**Note:** No xfail is queued. Tests are red by design. If a future session decides to mark them xfail(strict=False) to suppress re-triage noise, that is a one-line change at each test site.
+
+**Cross-references:** MATTGPT-153 (Q64 eval stochastic -- same category, known stochastic flap set).
+
+---
+
+### MATTGPT-192
+**Semantic router returns out_of_scope for entity-scoped queries (amex)**
+
+- **Status:** Decided Against (August 16, 2026)
+- **Why not:** Pre-existing; confidence gate intercepts before visitor impact on confirmed queries. Not queued pending concrete evidence of visitor impact.
+- **Priority:** Medium
+- **Type:** Bug
+- **Logged:** August 16, 2026
+
+**Issue:** `test_legitimate_queries_pass[amex]` fails: "Tell me about Matt's amex work" routes to `out_of_scope` at score 0.696, despite entity detection firing on `Client=American Express`.
+
+**Verified pre-existing:** Confirmed August 15, 2026 by stash run against pre-MATTGPT-178 code.
+
+**Live consequence unclear:** `semantic_valid` is advisory and the Pinecone confidence gate is what rejects low-confidence queries. All confirmed amex queries returned `confidence=high` from Pinecone, so they would pass the gate regardless of router verdict. Determine what a visitor asking this actually receives before scoping a fix.
+
+**Cross-references:** MATTGPT-188 (router accepts off-topic queries -- same router layer, opposite failure mode), MATTGPT-195 (incident vocabulary routing -- router classification inconsistency, same category).
+
+---
+
+### MATTGPT-191
+**test_synthesis_pool_size fails because SYNTHESIS_THEMES is never populated in test context**
+
+- **Status:** Decided Against (August 16, 2026)
+- **Why not:** Test setup flaw; no production consequence. Not queued.
+- **Priority:** Low
+- **Type:** Bug
+- **Logged:** August 16, 2026
+
+**Issue:** `SYNTHESIS_THEMES` is `[]` at module init in `backend_service.py:115` and is only populated by `sync_portfolio_metadata()` via `_bootstrap_agy()`. The test fixture never calls it, so `executor.map(search_theme, [])` produces an empty pool and the pool-size assertion fails.
+
+**Verified pre-existing:** Confirmed August 15, 2026 by stash run against pre-MATTGPT-178 code.
+
+**Fix:** Either an autouse fixture that bootstraps themes from the corpus, or convert to an integration-style test that runs the bootstrap.
+
+**Cross-references:** MATTGPT-180 (test fixture blind spot -- same pattern: tests assuming runtime initialization that doesn't happen in test context).
+
+---
+
 ### MATTGPT-189
 **test_global_styles_no_cdn asserts a feature removed in 2cbe5f5**
 
-- **Status:** Open
+- **Status:** Decided Against (August 16, 2026)
+- **Why not:** One-line test deletion not queued. Finding preserved here.
 - **Priority:** Low
 - **Type:** Test
 - **File:** `tests/unit/test_base64_precomputation.py:19`
@@ -2343,10 +2232,125 @@ Note: the eval suite already contains "Tell me about Elon Musk" as a golden quer
 
 ---
 
-### Decided Against
+### MATTGPT-184
+**ask_mattgpt/utils.py module audit -- six dead functions, four duplicating live helpers elsewhere**
 
-> **Read only -- do not add blocks here directly.**
-> Blocks are moved here from Active Tickets above when a ticket's status changes to Decided Against. New tickets always start in Active Tickets. See CLAUDE.md § Backlog Maintenance for the full lifecycle.
+- **Status:** Decided Against (August 16, 2026)
+- **Why not:** Six dead functions documented; no queued deletion work. Backlog is a queue, not a record. Finding preserved here.
+- **Priority:** Low
+- **Type:** Refactor
+- **Logged:** August 13, 2026
+
+**Issue:** Verified August 13, 2026 by recursive grep from repo root (excluding venv and archive). Each of the following six functions appears only at its own definition and in `tests/unit/test_utils.py`. No production caller.
+
+| Function | Location | Notes |
+|---|---|---|
+| `choose_story_for_ask` | `utils.py:89` | Dead |
+| `related_stories` | `utils.py:128` | Dead -- not the Related Projects feature. That feature is live in `conversation_helpers.py:629`, built from `sources`/`src_idx`, not this function. |
+| `story_has_metric` | `utils.py:168` | Dead -- reads `Performance` correctly (unlike the `formatting.py` sibling), but has no caller. See MATTGPT-183. |
+| `split_tags` | `utils.py:298` | Dead -- duplicates `utils/corpus_loader._split_tags` (live, see MATTGPT-182) |
+| `slug` | `utils.py:315` | Dead -- duplicates `utils/ui_helpers._slug` (live, called at `:246`). Note: a separate `slugify` function exists twice more (`scripts/utils.py:10`, `generate_jsonl_from_excel.py:65`) -- out of scope here but worth a consolidation pass. |
+| `shorten_middle` | `utils.py:328` | Dead -- duplicates `utils/ui_helpers._shorten_middle` (live, called at `:137`, `:245`) |
+
+Confirmed live, do not delete: `get_context_story`, `story_modes`, `is_empty_conversation`, `ensure_ask_bootstrap`, `push_assistant_turn`, `push_conversational_answer`, `push_user_turn`. Imported by `conversation_view.py:39`, `conversation_helpers.py:18`, `__init__.py:24`.
+
+**Work:** Delete the six dead functions and their corresponding test classes in `tests/unit/test_utils.py`.
+
+**Framing note:** This module was a local grab-bag that was partly superseded as shared helpers moved to `utils/`. The deletion is cleanup; it does not address the accumulation pattern.
+
+**Cross-references:** MATTGPT-180 (tests passing against code production never exercises -- same pattern), MATTGPT-176 (dead code bundle, consider folding), MATTGPT-183 (`story_has_metric` in `formatting.py` becomes fully dead once -183 removes the `has_metric` branch -- unrelated to the sibling in this module).
+
+---
+
+### MATTGPT-179
+**formatting.py dead formatters -- both entrances orphaned, phantom schema in unreachable code; consider folding into MATTGPT-176**
+
+- **Status:** Decided Against (August 16, 2026)
+- **Why not:** Dead code finding; no queued deletion work. Finding documented via Architecture Sync handoff. MATTGPT-183 sequencing note is self-contained -- when -183 ships, Code adds inline deletion without a standing ticket.
+- **Priority:** Low
+- **Type:** Refactor
+- **Logged:** August 11, 2026
+
+**Issue:** Both entrances to `formatting.py`'s formatter functions are confirmed orphaned:
+
+- Typed alias map at `conversation_view.py:305-312`: originates in the September 2025 monolith, carried through modularization with no design intent. Not reachable by any user-facing path.
+- Deep Dive pill at `conversation_helpers.py:395`: does not render in the UI. Confirmed by inspection August 11, 2026.
+
+Nothing a visitor can reach exercises `_format_narrative`, `_format_key_points`, or `_format_deep_dive`. These three are dead code. The module stays -- `build_5p_summary` is imported by `utils/scoring.py:11` as one of the nine haystack parts in `_keyword_score_for_story`; `strongest_metric_line` is called by `build_5p_summary` at line 120 and is therefore also live; `story_has_metric` is imported by `utils/filters.py` (see MATTGPT-183).
+
+**Consider folding into MATTGPT-176** (dead code bundle). They are separate only because the phantom schema finding adds context about what the correct fields are, preserved below in case this code is ever revived.
+
+**Schema mapping (verified August 11, 2026 against corpus):**
+
+| Code field | JSONL field | Type |
+|---|---|---|
+| `why` | `Purpose` | str |
+| `how` | `Process` | list |
+| `what` | `Performance` | list |
+| `title` | `Title` | str |
+| `client` | `Client` | str |
+| `star.situation` | `Situation` | list |
+| `star.task` | `Task` | list |
+| `star.action` | `Action` | list |
+| `star.result` | `Result` | list |
+
+All list fields are already lists in the JSONL. The mismatch is field naming only, not structure.
+
+**Severity correction for `_format_narrative` (do not escalate):** `_format_narrative` output feeds `answer_context`, used only at `backend_service.py:1041` -- the API-failure fallback path. It does not enter the LLM prompt on normal query paths. An earlier claim that it "poisons every query" was retracted and verified false. The orphaned-entrances finding above is the correct framing.
+
+**Work items:**
+1. Delete the three dead functions from `formatting.py`: `_format_narrative`, `_format_key_points`, `_format_deep_dive`. Do not touch `build_5p_summary` (live -- imported by `utils/scoring.py:11`), `strongest_metric_line` (live -- called by `build_5p_summary` at line 120), or `story_has_metric` (live defect -- see MATTGPT-183). The module stays.
+
+**Sequencing note:** MATTGPT-183 removes the `has_metric` filter branch, which removes `story_has_metric`'s only importer. Once -183 lands, `story_has_metric` in `formatting.py` becomes dead and moves to this ticket's deletion list. Until -183 lands, leave `story_has_metric` alone.
+
+---
+
+### MATTGPT-172
+**CIC-cluster consolidation: Division concentration causes cluster-drift dominance on broad queries**
+
+- **Status:** Decided Against (August 16, 2026)
+- **Why not:** Premise disconfirmed by three measurements; unpark condition (leading-story column in logger) has no implementation timeline. Evidence preserved in this block.
+- **Priority:** Medium
+- **Type:** Action
+- **Logged:** August 8, 2026
+
+**Parked (August 13, 2026):** The ticket asserts CIC density (46% of corpus) causes cluster-drift dominance on broad queries. Two measurements disconfirm this; a third is directionally consistent.
+
+1. **July 2, 2026 raw retrieval probe.** Tested directly across four broad queries. CIC was absent from the cloud-transformation top ten and rank 7 on leadership. Cosine similarity is scale-invariant; CIC's greater story length could not inflate its score, and the data confirmed it did not. If CIC was over-surfacing, the cause had to be downstream (pinning, synthesis assembly, diversify_results), not raw retrieval.
+
+2. **August 13, 2026 live traces.** Zero CIC stories in the Sev-1 query pool; six of ten were Independent Project.
+
+3. **August 13 count over query_log_parsed.csv (43 rows), leading story by Division:**
+
+   | Division | Leading queries | Corpus share |
+   |---|---|---|
+   | Sabbatical | 13 | 9 stories, 8% |
+   | Cloud Innovation Center | 11 | 52 stories, 46% |
+   | Cross-Division | 9 | 9 stories, 8% |
+   | Technology | 5 | -- |
+   | Financial Services Technology Consulting | 3 | -- |
+   | Atlanta Liquid Studio | 2 | -- |
+
+   CIC leads 26% of queries against 46% corpus share. Under-represented, not dominant.
+
+The downstream mechanisms the July probe could not measure have since been fixed: CIC normalization (March 2026) and the diversify_results pinning bug (MATTGPT-021, closed May 2026 via MATTGPT-073). The ticket's own supporting evidence, MATTGPT-094, dates from May 2026 and predates both fixes.
+
+**Sample limitation (recorded, not resolved):** The 43 rows in query_log_parsed.csv are a 7% slice of the 609-query production log and skew toward queries typed during testing. The Google Sheet log carries no leading-story column, so the Division count cannot be run over full traffic. Measurement 3 is supporting evidence, not decisive. Measurements 1 and 2 stand on their own.
+
+**Actual overrepresentation:** The Independent Project / MattGPT cluster (MATTGPT-077) and the Professional Narrative cluster (MATTGPT-169). Nine stories each, 8% of corpus each, together leading 51% of queries in the sampled rows.
+
+**Reopen condition:** Leading-story column added to the query logger (MATTGPT-174 shipped this for top_score; a leading-story / Division column is the next step) and full-traffic analysis shows CIC leading disproportionately.
+
+**Verified corpus counts (August 13, 2026, preserved for reference):**
+- Cloud Innovation Center: 52 of 114 stories (46%) corpus-wide
+- Era "Enterprise Innovation & Transformation": 56 of 114 (49%)
+- Cross-tab: 51 of that Era's 56 stories are CIC
+
+The concentration is real. The retrieval dominance claim is not supported by the evidence.
+
+**Cross-references:** MATTGPT-094 (closed -- documented the CIC dominance pattern in May 2026, predates the downstream fixes), MATTGPT-077 and MATTGPT-169 (now carry the actual concentration finding), MATTGPT-181 (early-career story slate was listed here as consolidation lever (c); stands on its own merits, unaffected by this parking).
+
+---
 
 ### MATTGPT-010
 **Cross-Browser Testing**
@@ -2957,4 +2961,139 @@ Cold-load CLS ceiling: 0.25 (observed ~0.24 in DevTools — locks "no worse than
 
 ---
 
+### MATTGPT-115
+**Lock icon — browser console warning: password field not in native form**
+
+- **Status:** Decided Against (August 16, 2026)
+- **Why not:** Console warning only; password manager not saving the access code is correct behavior. No functional impact; fix options (HTML form bridge) are non-trivial for no user-visible gain.
+- **Priority:** Low
+- **Type:** Issue
+- **Issue:** Chrome fires `[DOM] Password field is not contained in a form` when the Role Match lock icon popover is open. `st.popover` uses a portal — it teleports its DOM nodes to a different location in the document. `st.form` creates a native `<form>` element, but the portal moves the children (including the `<input type="password">`) outside the form's DOM subtree. Chrome's password-manager detection fires because the containment check fails.
+- **Functional impact:** None. Streamlit's form submission logic is Python-level. The password check, fail-closed behavior, and session state update all work correctly. The warning is purely Chrome's password manager saying it can't hook into the field.
+- **Desirability of fix:** Low. Password manager NOT saving this internal access code is actually correct behavior. `autocomplete="new-password"` is already set by Streamlit on `type="password"` fields; the containment check fires before Chrome reads autocomplete.
+- **Fix options (all non-trivial):**
+  1. Replace `st.form` + `st.form_submit_button` with `st.text_input` + `st.button` + widget-key versioning for clear-on-submit. Does not fix the containment warning (still no native form wrapping).
+  2. Replace the entire popover body with a `components.html` custom form — full control over HTML structure, native `<form>` wrapping possible, but requires a JS bridge to report submission back to Streamlit.
+- **Affects:** `ui/components/lock_icon.py` — `st.popover` + `st.form` combination.
+- **Logged:** June 6, 2026
+
+---
+
+### MATTGPT-121
+**Why Agy dialog — mobile layout fix (375px viewport)**
+
+- **Status:** Decided Against (August 16, 2026)
+- **Why not:** One-line mobile polish (confirmed selector documented in body); not scheduled.
+- **Priority:** Low
+- **Type:** Bug / Polish
+- **File:** `ui/components/why_agy_dialog.py`
+- **Logged:** June 9, 2026
+
+**Already shipped (commit `ad3b72f`):** `@media (max-width: 480px)` block in `why_agy_dialog.py` lines 107–124:
+- `[role="dialog"]` → `max-height: 88vh; overflow-y: auto` (scroll safety)
+- `.why-agy-avatar-row` → `flex-direction: column; align-items: center; gap: 12px` (stacks image above text)
+- `.why-agy-illustration` → `max-width: 70px; width: 70px !important` (shrinks image)
+- `.why-agy-body p` → `font-size: 14px; line-height: 1.6` (reduces body copy)
+
+Note: image is in a flex row (`display: flex; gap: 20px; flex-shrink: 0`), not a float — ticket originally said "floats right," which was wrong.
+
+**Remaining — one CSS rule:** Dialog title `"Hi, I'm Agy 🐾"` (renamed in commit `56230f2`, before the mobile fix) renders at 24px, font-weight 600 on mobile. Target: 20px.
+
+Selector confirmed via live DOM inspection (Chrome Claude, June 2026). Title `<p>` sits inside `[data-testid="stMarkdownContainer"]` in the dialog's title area, structurally separate from `.why-agy-body` paragraphs. Safe selector:
+
+```css
+[role="dialog"] [data-testid="stMarkdownContainer"] p {
+    font-size: 20px !important;
+}
+```
+
+Add this to the existing `@media (max-width: 480px)` block. `[role="dialog"] p:first-of-type` (original proposal) is fragile and should not be used.
+
+---
+
+### MATTGPT-136
+**Dark mode design system audit — --accent-purple not overridden in body.dark-theme**
+
+- **Status:** Decided Against (August 16, 2026)
+- **Why not:** Dark mode audit requires visual review of 41 usages across three semantic categories before any override can be made safely. Not scheduled.
+- **Priority:** Low
+- **Type:** Refactor
+- **Logged:** June 18, 2026
+
+**Context:** `body.dark-theme` in `global_styles.py` overrides `--accent-purple-text` to `#A78BFA` (lighter purple for dark backgrounds) but does NOT override `--accent-purple` or `--accent-purple-bg`. There are 41 usages of `var(--accent-purple)` across the stylesheet spanning text, borders, opaque backgrounds, and semi-transparent tints. In dark mode all 41 resolve to the same `#8B5CF6` as light mode, which may have contrast issues on dark backgrounds.
+
+**Why deferred:** A blanket override of `--accent-purple` to `#A78BFA` in dark mode affects all 41 usages simultaneously. The usages split into three semantic categories with different risk profiles: (1) text/interactive — genuinely need lighter value for contrast; (2) opaque fills/buttons — design choice, either can work; (3) semi-transparent tints derived from the variable — hue change could look off. Changing blindly risks breaking categories 2 and 3 while fixing 1.
+
+**Fix approach:** Visual audit in dark mode across all pages before adding the override. Document which of the 41 usages fall into each category. Override `--accent-purple` only if a majority of usages are category 1, or introduce a new `--accent-purple-accessible` variable for text contexts.
+
+**Acceptance criterion:** Dark mode visual review complete, override decision documented, no contrast failures on text usages of --accent-purple in dark mode.
+
+---
+
+### MATTGPT-147
+**Stale `@pytest.mark.skip` on `test_mobile_desktop_only_message` — decorator predates step def**
+
+- **Status:** Decided Against (August 16, 2026)
+- **Why not:** Stale skip; step def exists (lines 403-416). One-line delete + isolation run. Not scheduled.
+- **Priority:** Low
+- **Type:** Bug
+- **File:** `tests/bdd/steps/test_role_match.py`
+- **Logged:** July 1, 2026
+
+**Issue:** `test_mobile_desktop_only_message` is skipped by a stale decorator at lines 170–175. The skip reason says "Needs hamburger interaction" — but that interaction was implemented at lines 403–416 (`given_viewport_at_explicit_width`). The decorator was written before the step def existed and was never removed.
+
+**Action:** Remove the `@pytest.mark.skip` decorator at lines 170–175. Run in isolation:
+```
+pytest tests/bdd/steps/test_role_match.py::test_mobile_desktop_only_message -v
+```
+If it passes, commit. If it fails, the step def has a bug — diagnose before committing.
+
+**Acceptance criteria:**
+- `test_mobile_desktop_only_message` passes in isolation and in the full suite with no skip decorator.
+
+---
+
+### MATTGPT-148
+**`.main` selector sweep — 36 dead selectors in `global_styles.py` need swapping to `.stMain`**
+
+- **Status:** Decided Against (August 16, 2026)
+- **Why not:** 36 dead .main selectors; layout works through other means. Swap path (grep + review + .stMain) documented. Not scheduled.
+- **Priority:** Low
+- **Type:** Refactor
+- **File:** `ui/styles/global_styles.py`
+- **Logged:** July 1, 2026
+
+**Issue:** `.main` does not exist in current Streamlit. The correct selector is `.stMain`. `global_styles.py` contains 36 rules scoped to `.main[^a-zA-Z]` — all dead selectors that match nothing. Any layout or spacing rules under these selectors are silently not applying.
+
+**Action:**
+1. Confirm count: `grep -n "\.main[^a-zA-Z]" ui/styles/global_styles.py`
+2. Review each occurrence — verify intent is `.stMain` before swapping (some may be legitimate class names that happen to start with `.main`).
+3. Swap confirmed dead selectors to `.stMain`.
+4. Smoke-test desktop and mobile after change — dead selectors becoming live may reveal previously masked layout shifts.
+
+**Acceptance criteria:**
+- Zero `.main` selectors in `global_styles.py` that should be `.stMain`.
+- No visual regression at desktop and 375px mobile after the swap.
+
+---
+
+### MATTGPT-149
+**Rejection bubble dark mode — `[class*='_rejection_bubble']` missing dark mode override**
+
+- **Status:** Decided Against (August 16, 2026)
+- **Why not:** Dark mode visual; dark mode not actively tested. Fix path (body.dark-theme override for --banner-info-bg) documented. Not scheduled.
+- **Priority:** Low
+- **Type:** Bug
+- **File:** `ui/styles/global_styles.py` (or wherever `_rejection_bubble` is defined)
+- **Logged:** July 1, 2026
+
+**Issue:** The rejection bubble component uses `var(--banner-info-bg)` for its background. There is no `body.dark-theme` override for this variable or this selector, so the bubble renders with the light-mode background color in dark mode.
+
+**Fix:** Add a `body.dark-theme` override — either for `--banner-info-bg` directly (if it's safe to change globally) or scoped to `[class*='_rejection_bubble']` specifically. Confirm the override value against the dark mode palette in `global_styles.py` before applying.
+
+**Acceptance criteria:**
+- Rejection bubble background is visually appropriate in both light and dark mode.
+- No other surfaces that use `var(--banner-info-bg)` are unintentionally affected.
+
+---
 

@@ -8,6 +8,44 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Ask Agy
 
+**August 15, 2026 — Eval/probe harnesses normalized; public_tags contributes keyword tokens in measurement (MATTGPT-182)** -- `275ff1f`
+
+Nine call sites in `tests/eval_rag_quality.py` and four probe scripts bypassed `app.py`'s `_split_tags()` normalization, loading corpus stories via raw `json.loads`. `public_tags` reached `_keyword_score_for_story` as a comma-separated string; `.join()` over a string character-separates it; every resulting token failed the `len >= 3` filter. Tags contributed zero keyword tokens in every eval and probe run since October 2025, while contributing normally in production.
+
+Fix: `_split_tags()` and `_ensure_list()` extracted into a shared corpus loader; all nine call sites updated to use it. 12/12 BDD passing. Eval re-baselined at 70/70. P5 keyword gap narrowed from 3-1 to 3-2 post-normalization (P5/P8 still LEAD; results in MATTGPT-077 findings). MATTGPT-077 Phase 2 unblocked.
+
+Measurement boundary: eval and probe numbers recorded before 275ff1f were produced with tags dark and do not compare to numbers after it. This includes the E1-E4 evidence behind W_KW=0.15 (f5641e7) and the MATTGPT-077 Step 0 baseline. Re-baselined Aug 15; treat prior figures as a separate regime.
+
+---
+
+**August 15, 2026 — Corpus vocabulary edits: Rail, AT&T Mobility, Fiserv Recovering (MATTGPT-077 / MATTGPT-168)**
+
+Three stories rewritten for query vocabulary alignment:
+
+Norfolk Southern Rail (MATTGPT-077 Phase 1): "platform refactoring" added explicitly to Use Case. pc on P5 ("How did Matt approach platform refactoring?") 0.484 → 0.526; pc on P8 ("What does Matt's experience with platform refactoring look like?") 0.506 → 0.549. P5/P8 now answer from Norfolk Southern.
+
+AT&T Mobility: "Sev defect management" vocabulary strengthened to "Sev-1 defect and incident response" with on-call tags and one Interview Question added. Story was absent from the Sev-1 query pool before the edit; now reaches rank 3.
+
+Fiserv Recovering: Sev-1 handling moved into its own sentence, parenthetical cross-reference to another story's title removed (that title was embedding in Fiserv's vector). pc on Q1 ("how did Matt handle a Sev-1 defect?") 0.317 → 0.326. Q1 still fails -- chatbot leads at 0.360 vs 0.326. Ranking fix continues in MATTGPT-168.
+
+---
+
+**August 2026 — evidence_fidelity BDD suite: no hallucinated clients, metrics traceable, no cross-contamination**
+
+The `evidence_fidelity.feature` suite validated three properties across the Ask Agy pipeline: (1) no hallucinated clients -- answers cite only clients from the retrieved story pool; (2) metrics traceable to source -- figures in responses map back to a specific story's data; (3) no cross-contamination -- stories do not bleed evidence from adjacent stories. All three pass. Strongest BDD evidence of response fidelity in the repo; surfaced during a targeted investigation rather than routine coverage work.
+
+---
+
+**August 13, 2026 — _tokenize stopword fix; keyword noise tokens eliminated from scoring (MATTGPT-178)** -- `049e203`
+
+`_STOPWORDS` was defined thirty lines above `_tokenize` in `utils/validation.py` and used only by `token_overlap_ratio` -- an accident of the October 2025 Phase 3 extraction, never a decision. Dormant for nine months while `W_KW = 0.0` made it inert; live since MATTGPT-157 re-enabled keyword scoring on August 8. Fix: one line -- `_tokenize` now applies `_STOPWORDS` before the `len >= 3` filter.
+
+Validated against Q1 ("how did Matt handle a Sev-1 defect?"): keyword scores inverted -- Fiserv 0.250 (sev-1, defect match), chatbot 0.125 (how, matt). pc remains the controlling factor; pc gap work continues in MATTGPT-168.
+
+The character-set divergence between `_tokenize` (keeps `+#-.`) and `token_overlap_ratio` (splits on non-`\w`) is a separate defect filed as MATTGPT-190.
+
+---
+
 **August 13, 2026 — W_KW trace payload corrected; weights centralized in constants.py (MATTGPT-175)** -- `d8dcbe7`
 
 W_PC and W_KW added to `config/constants.py` as the single authoritative source. `utils/scoring.py` updated to import from constants rather than define defaults. `pinecone_service.py` lines 97-98 (module-local W_KW=0.0 shadow copy) deleted; import added so line 281's trace payload now reads the live value. No ranking behavior change -- the fix corrects the instrument, not the weight. Arithmetic proof: pc=0.580, kw=0.667, blend=0.680 confirmed `0.580 + 0.15 × 0.667 = 0.680` before the fix; trace reported 0.0.
