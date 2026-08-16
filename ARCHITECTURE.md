@@ -1421,7 +1421,7 @@ Stories are stored in `echo_star_stories_nlp.jsonl` (100+ entries). Each line is
 | **client_utils.py** | Client classification | `is_generic_client()` — pattern-based detection of placeholder clients |
 | **validation.py** | Query validation, tokenization, nonsense detection | `is_nonsense()`, `_tokenize()`, `token_overlap_ratio()` |
 | **filters.py** | Story filtering for Explore Stories | `matches_filters(story, filters)` |
-| **formatting.py** | Story presentation, metric extraction | `story_has_metric()` (broken -- reads `what`/`star.result`, fields never present in corpus; MATTGPT-183), `build_5p_summary()`, `_format_narrative()` (unreachable in production; MATTGPT-179), `_format_key_points()`, `_format_deep_dive()` |
+| **formatting.py** | Story presentation, metric extraction | `strongest_metric_line()` (no reachable caller, but load-bearing for `_format_key_points` and `_format_narrative` -- do not delete; MATTGPT-179), `build_5p_summary()` (live), `story_has_metric()` (dead filter path -- nothing in the UI sets `has_metric`; and broken if called -- reads `what`/`star.result`, fields never present in the corpus; MATTGPT-183), `_format_narrative()` / `_format_key_points()` / `_format_deep_dive()` (unreachable -- typed alias map at `conversation_view.py:305-312` and Deep Dive pill at `conversation_helpers.py:395` are both orphaned; MATTGPT-179) |
 | **scoring.py** | Hybrid scoring (semantic + keyword) | `_keyword_score_for_story()`, `_hybrid_score()` |
 | **ui_helpers.py** | Debug logging, branch-aware rejection banner | `dbg()`, `safe_container()`, `render_no_match_banner()`, `BANNER_COPY` / `RULE_CHIPS` / `PERSONAL_CHIPS` / `OUT_OF_SCOPE_CHIPS` |
 
