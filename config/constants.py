@@ -73,13 +73,6 @@ SEARCH_TOP_K = 10  # Stories to fetch from Pinecone (headroom for reranking/filt
 SUBSTITUTION_FAMILIES = frozenset({"technical", "team_scaling", "agile_transformation"})
 
 # =============================================================================
-# ENTITY GATE THRESHOLD
-# =============================================================================
-# Used by backend_service.py to decide if a query passes the semantic gate
-
-ENTITY_GATE_THRESHOLD = 0.30  # Lowered from 0.55 to allow narrative queries (Jan 2026)
-
-# =============================================================================
 # META-COMMENTARY PATTERNS
 # =============================================================================
 # LLM talking ABOUT the story instead of answering.
