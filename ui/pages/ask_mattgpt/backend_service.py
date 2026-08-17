@@ -39,9 +39,9 @@ from utils.formatting import (
     _format_narrative,
     build_5p_summary,
 )
-from utils.scoring import _build_retrieval_query
+from utils.scoring import _build_retrieval_query, _keyword_score_for_story
 from utils.ui_helpers import dbg
-from utils.validation import is_nonsense, token_overlap_ratio
+from utils.validation import _tokenize, is_nonsense, token_overlap_ratio
 
 from .prompts import (
     build_system_prompt,
@@ -1629,28 +1629,51 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
         # (e.g., "What did Matt do at RBC?"). Promote to synthesis so the LLM
         # narrates across all stories instead of focusing on a single primary.
         #
-        # kw uniformity gate (MATTGPT-074): suppress promotion when kw scores
-        # are dispersed across entity stories. Dispersed kw means the query
-        # contains specific content tokens that discriminate one story from
-        # the rest ("production incident at AT&T" vs "what did Matt do at AT&T").
-        # Uniform kw (including all-zero) signals a broad entity query where
-        # synthesis is the right mode.
+        # Content-kw gate (MATTGPT-074): strip entity tokens (canonical value +
+        # any matched alias keys) from retrieval_q, recompute kw per entity
+        # story, and promote only if the recomputed values are uniform.
+        # Matching the entity name is expected on an entity query and carries
+        # no signal about specificity: "what did Matt do at AT&T" scores the
+        # entity everywhere. What matters is whether other tokens differentiate
+        # ("production incident at AT&T" scores one story much higher).
+        # Empty content_toks after stripping is trivially uniform and promotes.
         if entity_match and not is_synthesis:
             ef, ev = entity_match
             entity_stories = [s for s in pool if s.get(ef) == ev]
             entity_pool_count = len(entity_stories)
             if entity_pool_count >= 3:
-                kw_vals = [round(s.get("kw", 0.0), 3) for s in entity_stories]
-                kw_uniform = len(set(kw_vals)) <= 1
-                if kw_uniform:
+                entity_toks = set(_tokenize(ev))
+                # Union of ALL matching alias tokens, not first-by-dict-order.
+                # Multiple aliases may map to the same entity (jpm, jpmc,
+                # jpmorgan, jp morgan all -> JP Morgan Chase); a query using
+                # any of them must have all matching-key tokens stripped.
+                retrieval_lower = retrieval_q.lower()
+                alias_toks = {
+                    tok
+                    for k, v in ENTITY_ALIASES.items()
+                    if v == entity_match and k in retrieval_lower
+                    for tok in _tokenize(k)
+                }
+                content_toks = set(_tokenize(retrieval_q)) - entity_toks - alias_toks
+                if not content_toks:
+                    content_kw_vals = []
+                    content_kw_uniform = True
+                else:
+                    stripped_q = " ".join(sorted(content_toks))
+                    content_kw_vals = [
+                        round(_keyword_score_for_story(s, stripped_q), 3)
+                        for s in entity_stories
+                    ]
+                    content_kw_uniform = len(set(content_kw_vals)) <= 1
+                if content_kw_uniform:
                     is_synthesis = True
                     if DEBUG:
                         print(
-                            f"DEBUG: Entity cluster promotion: {ef}={ev} has {entity_pool_count} stories, kw uniform ({kw_vals[0]}) -> synthesis"
+                            f"DEBUG: Entity cluster promotion: {ef}={ev} has {entity_pool_count} stories, content_kw uniform {content_kw_vals} -> synthesis"
                         )
                 elif DEBUG:
                     print(
-                        f"DEBUG: Entity cluster promotion suppressed: {ef}={ev} has {entity_pool_count} stories, kw dispersed {kw_vals} -> standard"
+                        f"DEBUG: Entity cluster promotion suppressed: {ef}={ev} has {entity_pool_count} stories, content_kw dispersed {content_kw_vals} -> standard"
                     )
         st.session_state["__ask_query_intent__"] = intent_family  # Use router family
 
