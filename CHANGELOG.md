@@ -8,6 +8,22 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Ask Agy
 
+**August 17, 2026 — Professional Narrative exclusion from technical-query pools; ten-story scope confirmed (MATTGPT-169)** -- `6a581d5`
+
+Professional Narrative stories (ten total) are now excluded from the candidate pool in standard-mode retrieval when `intent_family` is in `_PN_EXCLUDED_FAMILIES = frozenset({"technical", "delivery", "domain_payments", "domain_healthcare", "agile_transformation"})`. Implemented at the top of the standard-mode else block in `backend_service.py`, before entity pinning. Guard: if the filter would empty the pool, it does not apply. Narrative and synthesis paths are untouched -- they have their own branches at lines 1850 and 1944.
+
+Allowlist rather than denylist by design. The semantic router misclassifies frequently -- ten incident-management queries landed across six different families on Aug 16; "Tell me about a production incident at AT&T" classified as `family=innovation` at 0.389 invalid. An allowlist means a misrouted query keeps prior behavior rather than losing ten positioning stories.
+
+Scope correction: ten Professional Narrative stories, not seven as prior notes in this ticket stated. The three not previously listed -- "What I Learned About Assumptions", "What I Learned About Sustainable Leadership", "Why Early Failure Is a Feature, Not a Bug" -- include the story that was leading the production-incident query at 0.451; their inclusion matters.
+
+Corpus-side fix disconfirmed as a lever: AT&T Southeast CRM was given outage vocabulary on Aug 17 and registered kw=0.333 against 0.000 for the other four AT&T stories on incident queries, but still lost to positioning stories at 0.417 vs. 0.451 on a career-phrased query. Query shape, not vocabulary absence, favored positioning content. The code exclusion was the required fix.
+
+Verified in app (DEBUG, Aug 17): "How does Matt do platform refactoring?" (technical) -- pool of 10, zero PN stories, Rail leads at 0.599. Three controls (synthesis, narrative x2) correctly bypass the filter. Verified by probe harness: PN in pool=0, PN in sources=0 on technical query; PN in sources 1-2 on all three controls. Artifact `probe_pn_exclusion.py` retained -- deterministic, re-runnable after any retrieval change.
+
+BDD: `tests/bdd/features/pn_exclusion.feature`, 3 scenarios, 3/3 green. Eval: 70/70 before and after. MATTGPT-168 (slot-1 amplification) remains open.
+
+---
+
 **August 15, 2026 — Eval/probe harnesses normalized; public_tags contributes keyword tokens in measurement (MATTGPT-182)** -- `275ff1f`
 
 Nine call sites in `tests/eval_rag_quality.py` and four probe scripts bypassed `app.py`'s `_split_tags()` normalization, loading corpus stories via raw `json.loads`. `public_tags` reached `_keyword_score_for_story` as a comma-separated string; `.join()` over a string character-separates it; every resulting token failed the `len >= 3` filter. Tags contributed zero keyword tokens in every eval and probe run since October 2025, while contributing normally in production.
