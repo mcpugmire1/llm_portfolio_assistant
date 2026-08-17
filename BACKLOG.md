@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: f0d8870 -->
+<!-- last-backlog-sync: 9e7341b -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -2087,7 +2087,9 @@ Note: the eval suite already contains "Tell me about Elon Musk" as a golden quer
 
 **Complexity budget note:** Adding phrases is the same shape as what Jan-Feb subtraction work removed (Entity Gate, classify_query_intent, banned phrases). The subtraction history does not block this fix, but it raises the standard: eval pass/fail gate required, not visual inspection.
 
-**Cross-references:** MATTGPT-168 (slot 1 amplification -- chatbot root-cause contamination is the same mechanism), MATTGPT-192 (amex router failure -- same router layer), MATTGPT-154 (operational vocabulary tagging -- corpus side of the same gap).
+**Retrieval consequence (August 17, 2026):** `background` and `delivery` are functionally identical in the pipeline. `grep -n 'intent_family ==' backend_service.py` shows branching on `out_of_scope`, `personal`, `synthesis`, `behavioral`, `error_fallback`, and `narrative` only -- `background` and `delivery` both fall through to standard mode with entity pin and diversify. Fixing -195 changes a logged label and nothing downstream. It is routing hygiene, not a retrieval lever. Do not work this ticket expecting a query-outcome change. The actual levers for incident-query quality are MATTGPT-169 (positioning-story attractor) and MATTGPT-168 (slot-1 amplification).
+
+**Cross-references:** MATTGPT-168 (slot 1 amplification -- chatbot root-cause contamination is the same mechanism), MATTGPT-192 (amex router failure -- same router layer), MATTGPT-154 (operational vocabulary tagging -- corpus side of the same gap), MATTGPT-169 (positioning-story attractor -- the actual retrieval lever for incident queries misrouted to background).
 
 ---
 
