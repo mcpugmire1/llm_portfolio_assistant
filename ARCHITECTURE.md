@@ -505,11 +505,14 @@ DRY_RUN=False  # Set to True for preview
 def build_embedding_text(story):
     """
     Combines multiple fields into rich semantic representation:
-    - Title (story title - improves keyword matching)  # Added Jan 2026
+    - Title (improves keyword matching)  # Added Jan 2026
     - Theme + Industry + Sub-category (behavioral context)
     - 5P Summary (concise overview)
-    - STAR fields: Situation, Task, Action, Result (2-3 items each)
-    - Process details (max 3 items)
+    - Use Case(s) (600 chars) — front-loaded; strongest retrieval signal
+    - STAR fields: Situation (2000 chars), Task (1500), Action (2500), Result (2000)
+    - Process (1500 chars)
+    - Competencies (600 chars)
+    - Interview Questions (1200 chars)
     - Public tags (comma-separated)
 
     Result: ~200-400 token text optimized for behavioral queries
@@ -763,7 +766,7 @@ Per the CLAUDE.md "No Hardcoded Enums for Data-Derived Values" rule, the prior s
 - **Triggers:** Intent = client, behavioral, technical, background, general
 - **Retrieval:**
   1. User query → OpenAI embedding
-  2. Pinecone vector search (top 100) with multi-field entity filter if detected
+  2. Pinecone vector search (top 10, SEARCH_TOP_K) with multi-field entity filter if detected
   3. Confidence gating
   4. **Entity pinning:** If entity detected, pin matching story to #1 (title substring match for Division/Project, Pinecone score for Client/Employer)
   5. `diversify_results()` on remaining stories → named clients first, max 1 per client
@@ -855,7 +858,7 @@ Checks fields in order: Client, Employer, Division (Project and Place excluded �
 
 **1. Pinecone Search (services/pinecone_service.py)**
 ```
-query_vector → Pinecone.query(top_k=100, filter=entity_filters)
+query_vector → Pinecone.query(top_k=SEARCH_TOP_K, filter=entity_filters)  # 10
 ↓
 Returns: [(story_id, score, metadata), ...] sorted by cosine similarity
 ```
@@ -872,7 +875,7 @@ If entity detected AND matching story found:
 Standard/Behavioral modes only:
   - Pin #1 from Pinecone retrieval (highest semantic relevance)
   - For slots #2+: named clients first, then generic, then duplicates
-  - Limiting stories per client (max_per_client param)
+  - `max_per_client` is accepted but never read. The implementation prioritizes one story per client, then appends remaining same-client stories at the end of the result rather than dropping them. See MATTGPT-187.
   - Skip for narrative mode (trust Pinecone semantic ranking)
   - NO cross-query session state — diversify is deterministic per query
     (removed May 18, 2026 per ADR 019 / MATTGPT-073)
@@ -1461,9 +1464,9 @@ def load_stories(path: str) -> list[dict]:
 
 **validation.py Key Functions:**
 ```python
-def is_nonsense(query: str) -> tuple[bool, str | None]:
+def is_nonsense(query: str) -> str | None:
     """Check if query matches nonsense patterns from nonsense_filters.jsonl.
-    Returns (is_nonsense, category) where category is e.g., 'profanity', 'meta', 'gibberish'."""
+    Returns the matched category string (e.g., 'profanity', 'meta', 'gibberish') or None."""
 
 def _tokenize(text: str) -> list[str]:
     """Tokenize text: lowercase, 3+ chars, filtered through _STOPWORDS set."""
