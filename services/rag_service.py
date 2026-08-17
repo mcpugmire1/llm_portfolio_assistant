@@ -161,6 +161,7 @@ def semantic_search(
     for h in confident_hits:
         story = h["story"].copy()  # Don't mutate original
         story["pc"] = h.get("pc_score", 0.0) or 0.0
+        story["kw"] = h.get("kw_score", 0.0) or 0.0
         if matches_filters(story, ui_filters):
             filtered_stories.append(story)
 

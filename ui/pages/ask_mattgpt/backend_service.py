@@ -1628,14 +1628,29 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
         # detected entity, the user is asking about a client/division broadly
         # (e.g., "What did Matt do at RBC?"). Promote to synthesis so the LLM
         # narrates across all stories instead of focusing on a single primary.
+        #
+        # kw uniformity gate (MATTGPT-074): suppress promotion when kw scores
+        # are dispersed across entity stories. Dispersed kw means the query
+        # contains specific content tokens that discriminate one story from
+        # the rest ("production incident at AT&T" vs "what did Matt do at AT&T").
+        # Uniform kw (including all-zero) signals a broad entity query where
+        # synthesis is the right mode.
         if entity_match and not is_synthesis:
             ef, ev = entity_match
-            entity_pool_count = sum(1 for s in pool if s.get(ef) == ev)
+            entity_stories = [s for s in pool if s.get(ef) == ev]
+            entity_pool_count = len(entity_stories)
             if entity_pool_count >= 3:
-                is_synthesis = True
-                if DEBUG:
+                kw_vals = [round(s.get("kw", 0.0), 3) for s in entity_stories]
+                kw_uniform = len(set(kw_vals)) <= 1
+                if kw_uniform:
+                    is_synthesis = True
+                    if DEBUG:
+                        print(
+                            f"DEBUG: Entity cluster promotion: {ef}={ev} has {entity_pool_count} stories, kw uniform ({kw_vals[0]}) -> synthesis"
+                        )
+                elif DEBUG:
                     print(
-                        f"DEBUG: Entity cluster promotion: {ef}={ev} has {entity_pool_count} stories in pool -> synthesis"
+                        f"DEBUG: Entity cluster promotion suppressed: {ef}={ev} has {entity_pool_count} stories, kw dispersed {kw_vals} -> standard"
                     )
         st.session_state["__ask_query_intent__"] = intent_family  # Use router family
 
