@@ -168,17 +168,26 @@ EXCLUDED_DIVISION_VALUES = {"Technology"}  # "technology experience" ≠ Divisio
 # =============================================================================
 # ENTITY ALIASES
 # =============================================================================
-# Acronyms and abbreviations that should resolve to canonical entity values.
-# The entity matcher does exact substring matching against Division/Client values
-# from story data. Acronyms like "CIC" don't appear as Division values, so they
-# need explicit aliases. Format: {"acronym": ("Field", "Canonical Value")}
+# Shorthand strings that should resolve to canonical entity values. The entity
+# matcher does exact substring matching against Division/Client values from
+# story data, so any commonly-typed form that doesn't literally appear in those
+# values needs an explicit alias. Format: {"shorthand": ("Field", "Canonical Value")}.
+#
+# Two categories live here:
+# 1. Acronyms and abbreviations that don't appear in canonical values --
+#    "cic", "amex", "jpmc", "jpm", "nsc", "att".
+# 2. Shortened forms of longer canonical values that visitors actually type --
+#    "liquid studio" for "Atlanta Liquid Studio"; "jpmorgan", "jp morgan",
+#    "cap one" for their longer canonical names.
 
 ENTITY_ALIASES = {
     "cic": ("Division", "Cloud Innovation Center"),
+    "liquid studio": ("Division", "Atlanta Liquid Studio"),
     "amex": ("Client", "American Express"),
     "jpmc": ("Client", "JP Morgan Chase"),
     "jpm": ("Client", "JP Morgan Chase"),
     "jpmorgan": ("Client", "JP Morgan Chase"),
+    "jp morgan": ("Client", "JP Morgan Chase"),
     "cap one": ("Client", "Capital One"),
     "nsc": ("Client", "Norfolk Southern"),
     "att": ("Client", "AT&T"),

@@ -625,14 +625,14 @@ GOLDEN_QUERIES = {
             "note": "CIC alias resolves to Division:Cloud Innovation Center",
             "category": "entity_detection",
         },
+        # SHOULD scope (exact full names in query or alias-mapped shortened forms)
         {
             "id": 36,
             "query": "What did Matt do at JP Morgan?",
-            "expect_no_entity_scope": True,
-            "note": "Partial name 'JP Morgan' doesn't match 'JP Morgan Chase' - semantic search handles",
+            "expect_entity": ("Client", "JP Morgan Chase"),
+            "note": "'jp morgan' alias resolves to canonical Client:JP Morgan Chase (shortened form of long client name)",
             "category": "entity_detection",
         },
-        # SHOULD scope (exact full names in query)
         {
             "id": 37,
             "query": "Tell me about Matt's work at RBC",
@@ -1506,11 +1506,13 @@ class TestEntityDetection:
         [q for q in GOLDEN_QUERIES["entity_detection"] if q.get("expect_entity")],
         ids=lambda q: f"Q{q['id']}_should_scope",
     )
-    def test_proper_nouns_do_scope(self, query_spec, stories, detect_entity_fn):
-        """Verify proper nouns correctly trigger entity scoping.
+    def test_entities_do_scope(self, query_spec, stories, detect_entity_fn):
+        """Verify proper nouns and alias-mapped shortened forms trigger entity scoping.
 
-        Client names (JP Morgan, RBC) and specific divisions (Cloud Innovation Center)
-        should trigger entity filtering to return focused results.
+        Full client/division names (RBC, JP Morgan Chase, Cloud Innovation Center)
+        and alias-mapped shortened forms (CIC → Cloud Innovation Center, JP Morgan →
+        JP Morgan Chase, amex → American Express) should trigger entity filtering
+        to return focused results.
         """
         query = query_spec["query"]
         expected_field, expected_value = query_spec["expect_entity"]
