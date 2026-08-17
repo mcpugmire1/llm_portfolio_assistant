@@ -114,6 +114,19 @@ def get_narrative_titles(stories: list[dict]) -> list[str]:
 # NOTE: Dynamically derived from stories at startup via sync_portfolio_metadata()
 SYNTHESIS_THEMES: list[str] = []
 
+# MATTGPT-169: allowlist of families where Professional Narrative stories are
+# excluded from retrieval. Allowlist (not denylist) -- misrouted queries keep
+# current behavior rather than losing seven positioning stories.
+_PN_EXCLUDED_FAMILIES: frozenset[str] = frozenset(
+    {
+        "technical",
+        "delivery",
+        "domain_payments",
+        "domain_healthcare",
+        "agile_transformation",
+    }
+)
+
 # Themes to exclude from synthesis (too generic or internal-only)
 EXCLUDED_THEMES = {
     "Internal",
@@ -1869,6 +1882,15 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
                 ranked = diversify_results(candidates) or (pool[:1] if pool else [])
         else:
             # Standard mode: Entity-pinned + Client diversity ranking
+            # MATTGPT-169: exclude Professional Narrative stories on unambiguous
+            # technical queries. Guard: skip filter if it would empty the pool.
+            if intent_family in _PN_EXCLUDED_FAMILIES:
+                non_pn = [
+                    c for c in candidates if c.get("Theme") != "Professional Narrative"
+                ]
+                if non_pn:
+                    candidates = non_pn
+
             # If entity gate detected a match, pin the matching story to #1
             # before diversity reordering (prevents "Multiple Clients" demotion)
             if entity_match:
