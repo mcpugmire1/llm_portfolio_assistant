@@ -8,6 +8,42 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Ask Agy
 
+**August 17, 2026 — Entity cluster promotion gate refined: content-kw uniformity replaces count-only heuristic (MATTGPT-074)** -- `c67c8b7`
+
+Two-iteration fix. The original gate promoted any entity query to synthesis mode when Pinecone returned 3+ stories from the same entity, treating corpus density as a proxy for user intent. Depth questions ("How did you build the CIC?", "Who reported to Matt at the CIC?") were force-promoted to thematic survey responses.
+
+Refinement: the gate now strips entity tokens -- canonical value plus the union of all matching alias keys -- from the retrieval query, recomputes `_keyword_score_for_story` per entity story against what remains, and promotes only when those content-kw values are uniform. Empty content tokens after stripping is trivially uniform and promotes. The 3-story count check is retained; both conditions apply.
+
+Iteration 1 (`771828b`): read stored kw values. Suppressed promotion on broad queries when a story title contained the entity name ("What did Matt do at liquid studio?" -- kw [1.0, 0.5, 0.5, 0.5, 0.5, 0.0]). Title-entity matching carries no specificity signal.
+
+Iteration 2 (`c67c8b7`): strip entity name before measuring. Fixes the title-contamination in iteration 1.
+
+Prerequisite: `services/rag_service.py` now propagates `kw_score` into story dicts alongside `pc_score`. The gate recomputes rather than reading that field -- confirm whether `story["kw"]` has any remaining consumer.
+
+Verified in app (Aug 17): "What did Matt do at liquid studio?" -- uniform → synthesis. "Tell me about Matt's work at Fiserv" -- uniform → synthesis. "Tell me about a production incident at AT&T" -- content_kw [0.5,0,0,0,0] → standard. "What did Matt do at RBC?" -- uniform → synthesis. "What did Matt do at amex?" -- uniform, alias stripped → synthesis. "What did Matt do at AT&T?" -- uniform → synthesis.
+
+BDD: `tests/bdd/features/cluster_promotion_kw.feature`, 8 scenarios, Red `f6b84a8`, step defs `eb7e5cb`, Green `c67c8b7`. Full BDD 241 passed / 3 failed / 36 skipped; 3 failures pre-existing or ticketed (MATTGPT-197/-198). Unit 569 passed / 13 failed; all pre-existing or ticketed. Eval: 70/70 after Q36 correction.
+
+---
+
+**August 17, 2026 — Entity aliases expanded; AT&T client rename; Fiserv DevOps vocabulary; Q36 corrected** -- `f090e8f`
+
+`ENTITY_ALIASES` additions: "jp morgan" (→ Client "JP Morgan Chase") and "liquid studio" (→ Division "Atlanta Liquid Studio"). Header comment rewritten -- the table now holds acronyms and shortened forms of longer canonical values, not acronyms alone.
+
+AT&T Mobility: client value changed from "AT&T Mobility" to "AT&T". The business unit was Cingular at the time and later became AT&T Mobility; recording it as a separate client made the story unreachable on AT&T entity queries. Story ID changed from `building-att-mobilitys-service-delivery-platform|att-mobility` to `building-atts-service-delivery-platform|att`. AT&T entity queries now return 6 stories.
+
+Fiserv DevOps: Change Failure Rate Reduction, Production Stability, and Incident Prevention added to Competencies; Use Case extended to name the hotfix-and-rollback cycle. Both backed by existing Situation and Result content.
+
+Q36 (eval): asserted that partial names should not scope -- stale given that client values are canonical long forms and aliases cover shortened forms. Q36 now expects `("Client", "JP Morgan Chase")`. `test_proper_nouns_do_scope` renamed to `test_entities_do_scope`.
+
+---
+
+**August 17, 2026 — Dead ENTITY_GATE_THRESHOLD constant removed from config/constants.py (MATTGPT-141)** -- `3fcb447`
+
+`ENTITY_GATE_THRESHOLD = 0.30` was never imported outside `config/constants.py`. The Entity Gate was removed January 2026; the constant was a leftover with a misleading inline comment ("Used by backend_service.py to decide if a query passes the semantic gate" -- false). Verified clean: `grep -rn "ENTITY_GATE_THRESHOLD" --include="*.py" .` returns zero matches outside venv. Constant and comment deleted.
+
+---
+
 **August 17, 2026 — Professional Narrative exclusion from technical-query pools; ten-story scope confirmed (MATTGPT-169)** -- `6a581d5`
 
 Professional Narrative stories (ten total) are now excluded from the candidate pool in standard-mode retrieval when `intent_family` is in `_PN_EXCLUDED_FAMILIES = frozenset({"technical", "delivery", "domain_payments", "domain_healthcare", "agile_transformation"})`. Implemented at the top of the standard-mode else block in `backend_service.py`, before entity pinning. Guard: if the filter would empty the pool, it does not apply. Narrative and synthesis paths are untouched -- they have their own branches at lines 1850 and 1944.

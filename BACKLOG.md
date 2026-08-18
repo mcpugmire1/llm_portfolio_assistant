@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: fff9deb -->
+<!-- last-backlog-sync: c67c8b7 -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -7,26 +7,36 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 ---
 
-## Value Prioritized Roadmap (updated 2026-08-16)
+## Value Prioritized Roadmap (updated 2026-08-17)
 
 **NOW**
-1. **-168** — slot 1 amplified without regard to margin; tie or near-tie at slot 1 gets 80% of the answer. Fiserv corpus edit applied Aug 15 (pc 0.317→0.326); Q1 still fails -- pc gap remains. Original premise disconfirmed (Fix A was a no-op); rewritten in place August 13.
-2. **-181** — Early-career story slate (Well Found / F-22, Lockheed STRATCOM, Cendian B2B/EDI). Parallel corpus work; doesn't block on the measurement thread.
-3. **-129 stories 3-5** — AT&T Mobility, Launchpad AWS, Capital One. Stories 1+2 done. Stories 3-5 blocked on elicitation.
+1. **-165** — Nonsense filter gen-1 blocks legitimate queries. The app refuses valid input.
+2. **-163** — Professional org questions intercepted as private-family. Same class.
+3. **-162** — Embedding exception renders as no-match. Visitor concludes the corpus is thin when the app broke.
+4. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+5. **-181** — WellFound F-22, Lockheed STRATCOM, Cendian B2B/EDI. Closes a JD-surfaced gap; practitioner vocabulary nothing else owns.
+6. **-128** — Source faithfulness. Never run. Last unverified thing on the runway; gates Role Match since Role Match is evidence-backed ratings.
+7. **-146** — Professional Narrative leaks into My Work despite the design excluding them.
 
-**NEXT** (queued):
-1. **-015** — JPM Payments IQ differentiation. Cheap data pass; upstream of operational surfacing; feeds cleaner signal for -128.
-2. **-128** — Source faithfulness. Unlocked. Recruiter clicks to verify a claim, gets wrong source cards -- direct trust failure.
-3. **-077** — Re-measure P5/P8 after -181 corpus additions. Phase 1 shipped (627f6f4). Phase 2 (MattGPT cluster cull -- 9 stories, 3.8x corpus share -- still the target; distinct from the CIC cull in -172, which was parked). Phase 3 (BM25) can't reach P5/P8 -- vocabulary mismatch, no stemmer. If -181 changes the pool composition, the problem may partly dissolve; if not, Phase 2 scoping proceeds and Phase 3 becomes the vocabulary answer.
-4. **-169** — Positioning-story attractor on career-shaped queries.
-5. **-180** — Test fixture blind spot (test_formatting.py, test_filters.py, test_scoring.py).
-6. **-161** — Career span hardcoded across surfaces.
-7. **-097** — Career-intent refresh.
-8. **-089** — Logistics filter class: location / work-model / availability. Atlanta + relocation-open status currently dropped silently.
-9. **-074** — Entity cluster synthesis forcing. "How did you build the CIC" returns a survey instead of depth on a marquee query.
-10. **-096** — Methodology-context preservation. The methodology is what makes the metrics credible to an engineer.
+**NEXT** — Role Match, once the runway clears
+-160 (extractor dropping qualifiers on 7 of 23) · -173 (malformed and comp-only JD behavior) · -159 (sequential gpt-4o loop) · -014 (34 skipped integration scenarios) · -089 (location, work-model, availability) · -012 (Private View Phase 4) · -081 (corrective actions by asset type) · -099 (comp handling) · -017 (logging scenarios)
 
-(Everything else defaults to LATER, including -179, -183, -184, -190 through -194, -195.)
+**LATER — tier 1:** real defects with known fixes
+-177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -180 (fixture blind spot) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene)
+
+**LATER — tier 2:** corpus work
+Register passes batched as one edit cycle: -154, -095, -097, -015, -161, -130
+New stories: -078, -091, -155, -022
+Meta: -079, -156, -096
+
+**LATER — tier 3:** blocked or dependent
+-168 (needs Top Score distribution) · -077 (re-measure after -181) · -171 (coupled to -190) · -185 (negation)
+
+**LATER — tier 4:** hygiene
+Dead code: -176, -183, -199, -201
+BDD flakes: -122, -131, -142, -145, -197, -198
+Small refactors: -072, -140, -153, -086, -062, -082, -083, -084, -150, -060
+Infrastructure: -035, -039, -040, -045
 
 ---
 
@@ -47,7 +57,6 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-062](#mattgpt-062) | Semantic router cache silently uses stale embeddings when VALID_INTENTS changes | Open | Medium | Refactor | May 14, 2026 |
 | [MATTGPT-063](#mattgpt-063) | Wrong-person queries with names outside nonsense regex produce confused-context RAG answers | Open | Medium | Issue | May 14, 2026 |
 | [MATTGPT-072](#mattgpt-072) | `generate_public_tags.py` — case-insensitive tag dedup | Open | Low | Refactor | May 16, 2026 |
-| [MATTGPT-074](#mattgpt-074) | Entity cluster promotion forces synthesis mode when users want depth (e.g., "How did you build the CIC?") | Open | Medium | Issue | May 18, 2026 |
 | [MATTGPT-077](#mattgpt-077) | Subject-pronoun + noun-overlap retrieval contamination — "Matt + X" pulls MattGPT/Strangler Fig stories when X overlaps their vocabulary | Open | Medium-High | Issue | May 19, 2026 |
 | [MATTGPT-078](#mattgpt-078) | New corpus story — "AI Enablement Before It Had a Name" (resume Option E retrieval anchor) | Open | Medium | Action | May 21, 2026 |
 | [MATTGPT-079](#mattgpt-079) | Role Match coverage gaps — corpus story anchors needed (meta-ticket) | Open | Medium | Action | May 21, 2026 |
@@ -69,7 +78,6 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-130](#mattgpt-130) | "practitioners" canonical everywhere — UI, eval golden set, corpus re-embed in lockstep | Open | Medium | Action | June 14, 2026 |
 | [MATTGPT-131](#mattgpt-131) | BDD selector bug — `test_industry_and_capability_labels_visible_inline_on_mobile` fails in marathon run | Open | Low | Bug | June 15, 2026 |
 | [MATTGPT-140](#mattgpt-140) | Fix hardcoded model names in backend_service.py and jd_assessor.py — use constants.py | Open | Low | Refactor | June 20, 2026 |
-| [MATTGPT-141](#mattgpt-141) | Remove dead ENTITY_GATE_THRESHOLD constant from config/constants.py | Open | Low | Refactor | June 22, 2026 |
 | [MATTGPT-142](#mattgpt-142) | BDD sequential rejection test: wait_for_banner is not count-aware, assertion runs before second rejection renders | Open | Low | Bug | June 23, 2026 |
 | [MATTGPT-143](#mattgpt-143) | BDD app_url fixture hardcodes port 8501 with no env-var override | Parked | Low | Bug | June 23, 2026 |
 | [MATTGPT-145](#mattgpt-145) | Mobile filter breakpoints overlap — r2-label show/hide depends on !important cascade order, not design | Open | Low | Refactor | Jun 24, 2026 |
@@ -105,8 +113,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-197](#mattgpt-197) | BDD suite-order flake: test_tapping_filters_toggle_shows_row_2_on_mobile fails in marathon, passes in isolation | Open | Low | Bug | August 17, 2026 |
 | [MATTGPT-198](#mattgpt-198) | BDD suite-order flake: test_clicking_a_nav_label_still_routes_to_its_surface_no_regression fails in marathon, passes in isolation | Open | Low | Bug | August 17, 2026 |
 | [MATTGPT-199](#mattgpt-199) | Entity-name-untrimmable hole in MATTGPT-074 content-kw gate: AT&T tokenizes to empty set, strip never fires | Open | Low | Bug | August 17, 2026 |
-| [MATTGPT-200](#mattgpt-200) | top_per_theme=3 caps synthesis pool when all entity stories share one Theme; AT&T returns 3 of 6 stories | Open | Medium | Bug | August 17, 2026 |
-| [MATTGPT-201](#mattgpt-201) | Entity pin for Client/Employer uses blend order while code comment and debug label state pc-order intent | Open | Medium | Bug | August 17, 2026 |
+| [MATTGPT-201](#mattgpt-201) | Entity pin for Client/Employer uses blend order while code comment and debug label state pc-order intent | Open | Low | Refactor | August 17, 2026 |
 
 ---
 
@@ -173,6 +180,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 | [MATTGPT-192](#mattgpt-192) | Semantic router returns out_of_scope for entity-scoped queries (amex) | Decided Against | Medium | Bug | August 16, 2026 |
 | [MATTGPT-193](#mattgpt-193) | LLM-output tests are stochastic at temperature 0.4 | Decided Against | Low | Test | August 16, 2026 |
 | [MATTGPT-194](#mattgpt-194) | slugify defined three times across three modules -- consolidate to one | Decided Against | Low | Refactor | August 16, 2026 |
+| [MATTGPT-200](#mattgpt-200) | top_per_theme=3 caps synthesis pool when all entity stories share one Theme; AT&T returns 3 of 6 stories | Decided Against | Medium | Bug | August 17, 2026 |
 
 ## Schema
 
@@ -496,43 +504,6 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Instance note (August 5, 2026):** The Making It Stick story's `public_tags` were hand-normalized for casing after a mixed-case generation run. Those hand-fixes are at risk when the script next runs. Preserve on regeneration.
 - **Open decision this ticket owns:** Canonical casing convention for generated tags. Current generated output is mixed (e.g., `Pair Programming` title case alongside `client upskilling` lowercase). Options: lowercase everywhere (matches retrieval-surface role and eliminates display-layer ambiguity); title case everywhere (display-friendly but retrieval-irrelevant); first-seen wins (script-convenient but unpredictable). Decide and encode in the script before the next enrichment run.
 - **Logged:** May 16, 2026
-
----
-
-### MATTGPT-074
-**Entity cluster promotion forces synthesis mode when users want depth (e.g., "How did you build the CIC?")**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Issue
-- **Issue:** The entity cluster promotion logic in `backend_service.py:1617-1629` automatically converts a query to synthesis mode when Pinecone returns 3+ stories from the same entity. The intent is to handle broad client/division questions ("What did Matt do at RBC?") by narrating across all stories rather than focusing on one. But the same mechanism fires for questions where the user wants DEPTH on the primary story, not BREADTH across the corpus.
-- **Concrete failure case (from MEMORY.md):**
-  - **Query:** *"How did you build the CIC?"*
-  - **Expected behavior:** depth on the primary "Building Cloud Innovation Centers" story (the founding narrative), with supporting details from the CIC scaling work
-  - **Actual behavior:** entity cluster promotion fires (10 CIC stories detected), synthesis mode activates, response spans CIC scaling + Atlanta hub + capability development + cross-functional teams + culture work — a thematic survey instead of the foundational depth the question asks for
-- **Code location:** `backend_service.py:1617-1629`
-  ```python
-  # Entity cluster promotion: if Pinecone returned 3+ stories from the
-  # detected entity, the user is asking about a client/division broadly
-  if entity_match and not is_synthesis:
-      ef, ev = entity_match
-      entity_pool_count = sum(1 for s in pool if s.get(ef) == ev)
-      if entity_pool_count >= 3:
-          is_synthesis = True
-  ```
-- **Why the heuristic is wrong:** "3+ entity stories in pool" is a property of CORPUS COMPOSITION, not USER INTENT. A user can ask a depth-question about a client with many stories AND get force-promoted to synthesis because the pool happens to be large. The mechanism is detecting an artifact (corpus density) and treating it as a signal (user intent for breadth).
-- **Affected entities (per corpus audit):** Any client/division with ≥3 stories. Most likely to fire: Accenture (37 stories under Cloud Innovation Center project), JP Morgan Chase (multiple stories under ACCESS Next Generation and Asset Management), Norfolk Southern (multiple stories under Revenue and Shipment Planning), Fiserv (multiple stories under White-Label Card Portal). Any depth-question about these gets converted to synthesis.
-- **Fix options (open):**
-  - **A.** Raise the threshold. 3+ is too low — for Accenture's 37 stories or CIC's 10+ stories, the pool will hit 3+ on almost any broad-leaning Accenture query. Higher threshold (5? 7?) would only force synthesis on the most clearly-breadth queries.
-  - **B.** Use intent_family instead of pool size. Promote to synthesis only when `intent_family == "synthesis"` (already in semantic router) or when the question is structurally a survey ("what did Matt do at X", "tell me about X's work"). Depth questions ("how did you build X", "walk me through X's design") should NOT promote.
-  - **C.** Query-shape detection. Heuristic: "How did you build X" / "Walk me through X" / "Why did you choose X" suggest depth. "What did Matt do at X" / "Tell me about X" / "Show me X's work" suggest breadth. Could be regex-based or another semantic router intent.
-  - **D.** Remove the promotion entirely. Trust the semantic router's intent_family classification. If `intent_family == "synthesis"`, run synthesis mode. Otherwise, run standard mode with the natural entity-anchored pool. The depth-vs-breadth decision moves entirely to the router.
-- **Recommendation:** Likely **B or D** based on the same "no compensation logic on top of Pinecone" principle that's been guiding -061. The router already classifies queries; promoting based on pool composition is a layered compensation that fires in ways the router didn't intend. Eval the router's behavior on depth queries against the affected entities before deciding.
-- **Eval validation required:** Sample of CIC depth queries, RBC depth queries, JPM depth queries — measure response quality (depth vs breadth) before and after any fix. The 61-query golden suite may not cover this case; add depth-specific queries if not.
-- **Related:** MATTGPT-021 (diversify_results pinning bugs), MATTGPT-073 (session-state contamination, same file). Same module (`backend_service.py`); same broader theme of compensation-layer mechanisms with side effects beyond their stated intent.
-- **Discovered during:** Originally observed during the January 2026 pipeline cleanup (per MEMORY.md "Known Open Issues"). Re-surfaced May 18, 2026 during MATTGPT-073 investigation when Matt asked whether the agentic multi-story-per-client design was being touched by the diversify changes. Confirmed it isn't — but the entity cluster mechanism has its own known issue worth filing as a distinct ticket.
-- **Additional exhibit (August 3, 2026):** Query: "who reported to Matt at the Cloud Innovation Center" -- entity detected on Division (Cloud Innovation Center), promoted to synthesis with 10 stories in pool, returned a themed portfolio survey opening with "Looking across Matt's portfolio, I see clear patterns." A specific factual question about direct reports was answered with breadth across the entire CIC portfolio. Cleaner exhibit than the "How did you build the CIC?" case above because the question's scope is unambiguous -- the user asked for a person-list, not a narrative. Same mechanism, same wrong outcome.
-- **Logged:** May 18, 2026
 
 ---
 
@@ -1167,25 +1138,6 @@ For each client-specific probe query, assert `client_name in [s.get("Client") fo
 **Note (from MATTGPT-127):** `gpt-4o` is the correct model for `jd_assessor.py` in production — `gpt-4o-mini` produces subpar assessment reasoning. Do not substitute mini when replacing the literal.
 
 **Acceptance criteria:** No model name string literal in any production file outside `config/constants.py`.
-
----
-
-### MATTGPT-141
-**Remove dead ENTITY_GATE_THRESHOLD constant from config/constants.py**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Refactor
-- **Logged:** June 22, 2026
-
-`ENTITY_GATE_THRESHOLD = 0.30` at line 62 of `config/constants.py` is never imported
-or referenced outside that file. The Entity Gate was removed Jan 2026; this constant
-is a leftover with a misleading history comment ("Lowered from 0.55 to allow narrative
-queries"). Fix: delete the constant and its comment.
-
-**Confirmed August 11, 2026:** `grep -rn "ENTITY_GATE_THRESHOLD" --include="*.py"` finds only `config/constants.py`. The constant's own inline comment ("Used by backend_service.py to decide if a query passes the semantic gate") is false -- it is not imported by backend_service.py or any other file. The ticket's premise and fix (delete constant and its comment) are correct. The constants.py comment is the thing to delete, not a source of conflicting evidence.
-
-**Acceptance criteria:** `ENTITY_GATE_THRESHOLD` does not appear in any file in the repo.
 
 ---
 
@@ -2125,9 +2077,9 @@ Note: the eval suite already contains "Tell me about Elon Musk" as a golden quer
 
 **Observation (August 17, 2026):** Fails in full BDD suite with `AssertionError: Nav button labeled 'My Work' not found`. MATTGPT-100 renamed Explore Stories → My Work; MATTGPT-106 must preserve the label. Passes on isolation retry -- the label exists and the selector logic is correct.
 
-**Suspected mechanism:** A prior scenario in the suite mutates session state such that the navbar renders a stale label set. Selector and label are both correct in isolation; the failure is an ordering artifact.
+**Diagnosed (August 17, 2026):** The test navigates by URL (e.g., `/my_work`) rather than clicking the nav label. Streamlit routing does not respond to arbitrary URL paths in this manner; navigation does not land where the test expects. The marathon failure is likely this URL routing gap, not session state mutation.
 
-**Related:** MATTGPT-100 (Explore Stories → My Work rename), MATTGPT-106 (navbar refactor).
+**Related:** MATTGPT-100 (Explore Stories → My Work rename), MATTGPT-106 (navbar refactor). Same marathon-run failure class as MATTGPT-142, MATTGPT-145, MATTGPT-197 -- four instances.
 
 **Evidence:** Full-suite failure at `eb7e5cb` + MATTGPT-074 refinement uncommitted; isolation-run pass with gate refactor restored.
 
@@ -2161,10 +2113,34 @@ Note: the eval suite already contains "Tell me about Elon Musk" as a golden quer
 
 ---
 
+### MATTGPT-201
+**Entity pin for Client/Employer uses blend order while code comment and debug label state pc-order intent**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Refactor
+- **File:** `ui/pages/ask_mattgpt/backend_service.py`
+- **Logged:** August 17, 2026
+
+**Issue:** The entity pin for Client/Employer takes `entity_candidates[0]`, assuming the list arrives pc-sorted. The comment at lines 1948-1949 states "For Client/Employer, Pinecone score ordering is already semantically correct..." and the debug label at lines 1978-1979 reads "using top Pinecone score:". But the list actually arrives blend-sorted, so `[0]` is the top-blend story, not the top-pc story.
+
+**Verified August 17, 2026:** AT&T incident trace pinned Southeast CRM (pc=0.481, blend=0.531) over Defining System Interfaces (pc=0.497, blend=0.497). Southeast CRM has kw=0.333 from the Aug 17 corpus edit; that inflated its blend above the pc-preferred story. Comment and behavior disagree.
+
+**Historical note:** The pool likely arrived pc-sorted from an older `pinecone_service` and shifted to blend-sorted without the pin code being audited. Confirm by tracing when `pinecone_service` began sorting by blend.
+
+**Behavior is correct; the label is wrong.** The AT&T incident trace shows Southeast CRM was the right pin. Verified August 17, 2026.
+
+**Fix (option 1):** Update the comment at lines 1948-1949 and the debug label at lines 1978-1979 from "top Pinecone score" to "top blend score." No behavior change. Requires confirming blend-order pinning is the intended semantic for Client/Employer entities generally before committing.
+
+**Cross-references:** MATTGPT-168 (slot-1 amplification -- which story gets pinned determines what takes 80% of the response; this ticket affects the pin selection, not the 80% floor).
+
+---
+
 ### MATTGPT-200
 **top_per_theme=3 caps synthesis pool when all entity stories share one Theme; AT&T returns 3 of 6 stories**
 
-- **Status:** Open
+- **Status:** Decided Against (August 17, 2026)
+- **Why not:** Matt judged the AT&T 3-of-6 behavior acceptable given the corpus. Filed for the record; fix options documented.
 - **Priority:** Medium
 - **Type:** Bug
 - **File:** `ui/pages/ask_mattgpt/backend_service.py` (`get_synthesis_stories`)
@@ -2182,32 +2158,6 @@ Note: the eval suite already contains "Tell me about Elon Musk" as a golden quer
 3. Scale cap by number of themes present (`cap = max(3, N_TOTAL // num_themes)`).
 
 **Acceptance criterion:** "What did Matt do at AT&T?" synthesis pool includes all 6 AT&T stories (or at minimum the top-pc stories are not excluded by a theme uniformity artifact).
-
----
-
-### MATTGPT-201
-**Entity pin for Client/Employer uses blend order while code comment and debug label state pc-order intent**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Bug
-- **File:** `ui/pages/ask_mattgpt/backend_service.py`
-- **Logged:** August 17, 2026
-
-**Issue:** The entity pin for Client/Employer takes `entity_candidates[0]`, assuming the list arrives pc-sorted. The comment at lines 1948-1949 states "For Client/Employer, Pinecone score ordering is already semantically correct..." and the debug label at lines 1978-1979 reads "using top Pinecone score:". But the list actually arrives blend-sorted, so `[0]` is the top-blend story, not the top-pc story.
-
-**Verified August 17, 2026:** AT&T incident trace pinned Southeast CRM (pc=0.481, blend=0.531) over Defining System Interfaces (pc=0.497, blend=0.497). Southeast CRM has kw=0.333 from the Aug 17 corpus edit; that inflated its blend above the pc-preferred story. Comment and behavior disagree.
-
-**Historical note:** The pool likely arrived pc-sorted from an older `pinecone_service` and shifted to blend-sorted without the pin code being audited. Confirm by tracing when `pinecone_service` began sorting by blend.
-
-**Fix options (design call required):**
-1. **Adopt blend as intent** -- update comment and debug label to state "top blend score." Behavior stays. Acknowledges kw-informed pinning as correct for Client/Employer. Smallest change; recommended if blend-order pinning is the intended semantic across all Client/Employer cases.
-2. **Restore pc as intent** -- sort `entity_candidates` by pc descending before taking `[0]`. Comment and label stay. Behavior changes; would pin Defining System Interfaces over Southeast CRM on the AT&T incident trace, which is arguably worse for that query.
-3. **Explicit ranker** -- pick pin using a documented rule combining pc, kw, and title-substring for Client/Employer entities. Larger scope.
-
-**Note:** Option 1 is the smallest change and matches observed-good behavior on the AT&T trace. Requires confirming blend-order pinning is correct across all Client/Employer cases before adopting.
-
-**Cross-references:** MATTGPT-168 (slot-1 amplification -- which story gets pinned determines what takes 80% of the response; this ticket affects the pin selection, not the 80% floor).
 
 ---
 
