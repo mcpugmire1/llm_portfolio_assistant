@@ -122,7 +122,10 @@ def _load_nonsense_rules(path: str = "nonsense_filters.jsonl") -> list[dict[str,
         >>> rules[0].keys()
         dict_keys(['pattern', 'category'])
     """
-    rules = []
+    # Phase 1: I/O + JSON parsing. Malformed JSON lines are skipped silently
+    # (existing behavior; not in scope for MATTGPT-165 guards). File I/O errors
+    # log via dbg and return whatever was parsed so far.
+    parsed: list[tuple[int, Any]] = []
     try:
         if os.path.exists(path):
             with open(path, encoding="utf-8") as f:
@@ -131,17 +134,71 @@ def _load_nonsense_rules(path: str = "nonsense_filters.jsonl") -> list[dict[str,
                     if not line:
                         continue
                     try:
-                        rules.append(json.loads(line))
+                        parsed.append((i, json.loads(line)))
                     except Exception as e:
                         dbg(f"[rules] JSON error on line {i}: {e}")
         else:
             dbg(f"[rules] file not found: {path}")
     except Exception as e:
         dbg(f"[rules] load exception: {e}")
+
+    # Phase 2: Schema + dedup guards (MATTGPT-165). Validated post-loop so
+    # ValueErrors propagate rather than being swallowed by the I/O try/except
+    # above. Line numbers preserved from the read loop for actionable errors.
+    seen: dict[tuple[str, str], int] = {}
+    for lineno, rule in parsed:
+        if not isinstance(rule, dict):
+            raise ValueError(
+                f"[rules] line {lineno}: rule is not a dict "
+                f"(got {type(rule).__name__}: {rule!r})"
+            )
+        cat = rule.get("category")
+        pat = rule.get("pattern")
+        if not isinstance(cat, str) or not isinstance(pat, str):
+            missing = [
+                f
+                for f, v in (("category", cat), ("pattern", pat))
+                if not isinstance(v, str)
+            ]
+            raise ValueError(
+                f"[rules] line {lineno}: rule missing required string "
+                f"field(s) {missing}: {rule!r}"
+            )
+        try:
+            re.compile(pat)
+        except re.error as e:
+            raise ValueError(
+                f"[rules] line {lineno}: pattern does not compile as regex "
+                f"({e}): {pat!r}"
+            ) from e
+        key = (cat, pat)
+        if key in seen:
+            raise ValueError(
+                f"[rules] line {lineno}: duplicate rule (category={cat!r}, "
+                f"pattern={pat!r}) -- already seen at line {seen[key]}"
+            )
+        seen[key] = lineno
+
+    rules = [rule for _, rule in parsed]
     dbg(f"[rules] loaded: {len(rules)}")
     if rules[:2]:
         dbg("[rules] first items →", rules[:2])
     return rules
+
+
+def preload_nonsense_rules() -> None:
+    """Eagerly load nonsense rules at startup so guard failures surface at
+    import/startup time rather than on the first query.
+
+    Called from app.py at module top level. If the rules file violates any
+    guard in _load_nonsense_rules (duplicate, non-dict, missing fields,
+    uncompilable regex), the ValueError propagates and startup fails loudly.
+
+    Side Effects:
+        Populates the _NONSENSE_RULES global cache used by is_nonsense.
+    """
+    global _NONSENSE_RULES
+    _NONSENSE_RULES = _load_nonsense_rules()
 
 
 def is_nonsense(query: str) -> str | None:

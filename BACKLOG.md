@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: aa1df1f -->
+<!-- last-backlog-sync: 0ba3e54 -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -35,6 +35,7 @@ Meta: -079, -156, -096
 **LATER — tier 4:** hygiene
 Dead code: -176, -183, -199, -201
 BDD flakes: -122, -131, -142, -145, -197, -198
+Wrong-assertion test: -203
 Small refactors: -072, -140, -153, -086, -062, -082, -083, -084, -150, -060
 Infrastructure: -035, -039, -040, -045
 
@@ -115,6 +116,7 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-199](#mattgpt-199) | Entity-name-untrimmable hole in MATTGPT-074 content-kw gate: AT&T tokenizes to empty set, strip never fires | Open | Low | Bug | August 17, 2026 |
 | [MATTGPT-201](#mattgpt-201) | Entity pin for Client/Employer uses blend order while code comment and debug label state pc-order intent | Open | Low | Refactor | August 17, 2026 |
 | [MATTGPT-202](#mattgpt-202) | id-skip predicate copied verbatim in app.py and corpus_loader.py -- divergence risk, no shared source | Open | Medium | Bug | August 18, 2026 |
+| [MATTGPT-203](#mattgpt-203) | Chip grid disable test asserts the wrong mechanism | Open | Low | Bug (Test) | August 18, 2026 |
 
 ---
 
@@ -2266,6 +2268,27 @@ Note: the eval suite already contains "Tell me about Elon Musk" as a golden quer
 **Pre-flight before implementing:** Read both functions in full and trace current callers of each before proposing a helper location or signature. `corpus_loader.py` line 58 docstring says "Replicates app.py id enforcement" -- that comment should be removed or updated when the helper is in place.
 
 **Cross-references:** MATTGPT-182 (same class: normalize_story divergence across call sites; fixed August 15 at 275ff1f).
+
+---
+
+### MATTGPT-203
+**Chip grid disable test asserts the wrong mechanism**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Bug (Test)
+- **Files:** `tests/bdd/features/landing_page.feature:51-55`, `tests/bdd/steps/test_landing_page.py:213-221`
+- **Logged:** August 18, 2026
+
+**Issue:** The scenario "Chip grid is not interactive during processing" waits for `.thinking-modal`, then asserts each of the six hidden receiver buttons (`st-key-suggested_0` through `_5`) carries the `disabled` attribute. The assertion tests an implementation detail that is not the actual mechanism.
+
+**Verified manually in the app (August 18, 2026):** Clicking a chip during processing disables the entire Ask Agy landing page. Three rapid clicks produced one request -- the double-submit guard works. It does not operate by setting `disabled` on those six receivers.
+
+**Consequence:** The assertion can pass or fail without telling you whether a double-submit is possible. A green result here is not evidence of guard correctness; a red result may reflect a DOM timing artifact rather than a broken guard.
+
+**Fix:** Rewrite the scenario to assert what was manually verified -- a second chip click during processing produces no second request -- or delete it. Either is acceptable. Do not repair the existing `disabled`-attribute assertion; it is the wrong check regardless of whether it passes.
+
+**Distinction from MATTGPT-197 and MATTGPT-198:** Those are timing flakes on scenarios with valid assertions. This scenario has an invalid assertion. The intermittency observed in pre-A1 and post-A1+B full BDD runs is incidental to the wrong-assertion problem; fixing the timing would not fix what the scenario is actually testing.
 
 ---
 

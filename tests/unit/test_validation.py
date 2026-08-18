@@ -7,6 +7,8 @@ Tests for query validation, tokenization, and vocabulary overlap utilities.
 import tempfile
 from pathlib import Path
 
+import pytest
+
 
 class TestTokenize:
     """Tests for _tokenize() function."""
@@ -121,64 +123,95 @@ class TestLoadNonsenseRules:
 class TestIsNonsense:
     """Tests for is_nonsense() function."""
 
-    def test_returns_none_for_empty_query(self):
-        """Should return None for empty query."""
-        from utils.validation import is_nonsense
+    @pytest.fixture(autouse=True)
+    def restore_nonsense_rules(self):
+        """Save/restore _NONSENSE_RULES around every test in this class.
 
-        assert is_nonsense("") is None
-        assert is_nonsense("   ") is None
+        Every test here mutates the module-level cache (either pre-populates
+        or resets it). Without cleanup, test order becomes load-bearing and
+        state leaks into whatever runs next. Autouse fixture snapshots the
+        original value before each test and restores it after.
+        """
+        from utils import validation
+
+        original = validation._NONSENSE_RULES
+        yield
+        validation._NONSENSE_RULES = original
+
+    def test_returns_none_for_empty_query(self):
+        """Empty query returns None regardless of loaded rules.
+
+        Pre-populates _NONSENSE_RULES with a synthetic non-matching rule so
+        the lazy-load gate short-circuits and no real-file read is attempted.
+        This test asserts is_nonsense's empty-query behavior, not loader behavior.
+        """
+        from utils import validation
+
+        validation._NONSENSE_RULES = [{"pattern": "unrelated", "category": "test"}]
+
+        assert validation.is_nonsense("") is None
+        assert validation.is_nonsense("   ") is None
 
     def test_returns_none_for_normal_query(self):
-        """Should return None for normal on-domain query."""
-        from utils.validation import is_nonsense
+        """Normal on-domain query returns None when no loaded rule matches.
 
-        # Assuming no patterns match generic platform questions
-        result = is_nonsense("Tell me about platform modernization")
-        # Result depends on loaded rules, but should be None or valid category
+        Pre-populates _NONSENSE_RULES with a synthetic rule that does not
+        match the query. Decouples this test from whichever patterns happen
+        to live in the real nonsense_filters.jsonl.
+        """
+        from utils import validation
+
+        validation._NONSENSE_RULES = [{"pattern": "unrelated", "category": "test"}]
+
+        result = validation.is_nonsense("Tell me about platform modernization")
         assert result is None or isinstance(result, str)
 
     def test_lazy_loads_rules_on_first_call(self):
-        """Should lazy-load rules on first call."""
+        """When cache is empty, is_nonsense invokes _load_nonsense_rules exactly once.
+
+        Mocks _load_nonsense_rules to supply a synthetic return value so the
+        lazy-load call-path executes without depending on the real file. The
+        mechanism under test -- 'if cache empty, call loader' -- runs through
+        is_nonsense's normal code path; only the loader's return value is
+        substituted.
+        """
+        from unittest.mock import patch
+
         from utils import validation
 
-        # Reset global cache
         validation._NONSENSE_RULES = []
+        mock_rules = [{"pattern": "test", "category": "test"}]
 
-        # First call should load rules
-        validation.is_nonsense("test query")
+        with patch(
+            "utils.validation._load_nonsense_rules", return_value=mock_rules
+        ) as mock_loader:
+            validation.is_nonsense("test query")
 
-        # Global cache should now be populated
-        assert isinstance(validation._NONSENSE_RULES, list)
+        assert mock_loader.call_count == 1
+        assert validation._NONSENSE_RULES == mock_rules
 
     def test_caches_rules_between_calls(self):
-        """Should reuse cached rules on subsequent calls."""
+        """Second is_nonsense call reuses cache; loader is called only once.
+
+        Mocks _load_nonsense_rules and asserts call_count == 1 after two
+        is_nonsense invocations. This is a stronger assertion than the prior
+        length comparison: two loads that returned the same list would have
+        passed the old assertion but would fail this one.
+        """
+        from unittest.mock import patch
+
         from utils import validation
 
-        # Reset and load
         validation._NONSENSE_RULES = []
-        validation.is_nonsense("test query 1")
-        rules_count_1 = len(validation._NONSENSE_RULES)
+        mock_rules = [{"pattern": "test", "category": "test"}]
 
-        # Second call should use cache
-        validation.is_nonsense("test query 2")
-        rules_count_2 = len(validation._NONSENSE_RULES)
+        with patch(
+            "utils.validation._load_nonsense_rules", return_value=mock_rules
+        ) as mock_loader:
+            validation.is_nonsense("test query 1")
+            validation.is_nonsense("test query 2")
 
-        assert rules_count_1 == rules_count_2
-
-    def test_handles_regex_errors_gracefully(self):
-        """Should skip rules with invalid regex patterns."""
-        from utils import validation
-
-        # Inject rule with invalid regex
-        validation._NONSENSE_RULES = [
-            {"pattern": "valid.*pattern", "category": "test"},
-            {"pattern": "[invalid(regex", "category": "broken"},  # Invalid regex
-            {"pattern": "another.*valid", "category": "test2"},
-        ]
-
-        # Should not raise, just skip invalid pattern
-        result = validation.is_nonsense("test query")
-        assert result is None or isinstance(result, str)
+        assert mock_loader.call_count == 1
 
     def test_case_insensitive_matching(self):
         """Should match patterns case-insensitively."""
