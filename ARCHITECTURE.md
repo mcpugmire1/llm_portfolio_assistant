@@ -104,7 +104,7 @@
 The MattGPT Portfolio Assistant is built with a component-based architecture emphasizing separation of concerns and modularity.
 
 llm_portfolio_assistant/
-├── app.py                          # Pure router (284 lines) ✅ Minimal & clean
+├── app.py                          # Application entry (466 lines as of Aug 2026): router, load_star_stories, first-mount telemetry, UTM parsing, deep-link handling, nav-slug mapping, _clear_explore_state, build_facets
 │
 ├── config/
 │   ├── __init__.py
@@ -1460,7 +1460,7 @@ def load_stories(path: str) -> list[dict]:
     - Applies normalize_story() to each kept record"""
 ```
 
-`app.py:load_star_stories()` mirrors this contract exactly. Nine call sites across eval and probe scripts use `corpus_loader.load_stories()` directly.
+`app.py:load_star_stories()` wraps `normalize_story()` with Streamlit-specific error handling: `st.warning` on file-not-found (returns `[]`), `st.warning` per malformed line (continues). corpus_loader raises instead -- intentional split for the eval/probe context where fail-fast is correct. Nine call sites across eval and probe scripts use `corpus_loader.load_stories()` directly.
 
 **validation.py Key Functions:**
 ```python
