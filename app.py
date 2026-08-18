@@ -27,6 +27,7 @@ from ui.components.navbar import render_navbar
 from ui.pages.home import render_home_page
 from ui.styles.global_styles import apply_global_styles
 from utils.corpus_loader import normalize_story
+from utils.validation import preload_nonsense_rules
 
 # =========================
 # UI — Home / Stories / Ask / About
@@ -227,15 +228,75 @@ if not STORIES:
     st.error(f"❌ Failed to load stories from {DATA_FILE}. Check file path and format.")
     st.stop()
 
-# Initialize search vocabulary at startup
-initialize_vocab(STORIES)
+# Startup init: initialize search vocabulary, preload nonsense filter rules
+# (MATTGPT-165), sync portfolio metadata. Any failure here means the app cannot
+# safely serve requests. Rather than let a broken deploy render a working
+# navbar over a blank page -- which looks like a live site that does nothing --
+# catch any exception, log the traceback for server-side diagnosis, and show
+# a user-safe fallback message. NOTE: sync_portfolio_metadata import is
+# deferred to avoid a circular dependency (backend_service <- conversation_view
+# <- __init__).
+try:
+    initialize_vocab(STORIES)
+    preload_nonsense_rules()
+    from ui.pages.ask_mattgpt.backend_service import (  # noqa: E402
+        sync_portfolio_metadata,
+    )
 
-# Sync portfolio metadata (MATT_DNA, SYNTHESIS_THEMES) from story data
-# This ensures grounding prompt and themes never drift from JSONL
-# NOTE: Deferred import to avoid circular dependency (backend_service ← conversation_view ← __init__)
-from ui.pages.ask_mattgpt.backend_service import sync_portfolio_metadata  # noqa: E402
+    sync_portfolio_metadata(STORIES)
+except Exception:
+    import logging
 
-sync_portfolio_metadata(STORIES)
+    logging.exception("Fatal startup error during app.py init")
+    # Design 1A per handoff spec. st.error is invisible in this app: global CSS
+    # at ui/styles/global_styles.py:190-196 hides .stAlert unless the node
+    # contains a thinking-ball element. Render via st.markdown with inline HTML
+    # (the pattern the CSS comment calls "our custom markdown"). Colors bind to
+    # DS variables so light/dark modes work with no second code path. The one
+    # literal (#8B5CF6 on the primary button) matches footer.py:28. Fonts
+    # inherit the app stack; the footnote mono stack matches global_styles.py:1150.
+    st.markdown(
+        """
+<div style="max-width:min(480px,100%);margin:clamp(56px,12vw,76px) auto;
+            padding:0 20px;display:flex;flex-direction:column;
+            align-items:center;text-align:center;gap:16px;">
+  <div style="width:52px;height:52px;border-radius:50%;background:var(--accent-purple-bg);
+              border:1px solid var(--accent-purple-light);display:flex;
+              align-items:center;justify-content:center;flex-shrink:0;">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+         stroke="var(--accent-purple-text)" stroke-width="1.75"
+         stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 9v4"></path><path d="M12 17h.01"></path>
+      <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+    </svg>
+  </div>
+  <h2 style="margin:0;font-size:clamp(20px,5vw,22px);font-weight:600;
+             color:var(--text-heading);letter-spacing:-0.01em;text-wrap:balance;">
+    MattGPT is temporarily unavailable</h2>
+  <p style="margin:0;font-size:15px;line-height:1.6;color:var(--text-secondary);
+            text-wrap:pretty;">
+    Something went wrong while starting up. This is on my end, not yours.
+    The issue has been logged and I'll get to it shortly.</p>
+  <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:16px;
+              margin-top:4px;width:100%;">
+    <a href="/" style="flex:1 1 140px;min-height:44px;display:flex;align-items:center;
+              justify-content:center;padding:12px 28px;background:#8B5CF6;color:white;
+              border-radius:8px;font-weight:600;text-decoration:none;
+              transition:all 0.2s ease;">Try again</a>
+    <a href="mailto:matthew.c.pugmire+MattGPT@gmail.com?subject=MattGPT is down"
+       style="flex:1 1 140px;min-height:44px;display:flex;align-items:center;
+              justify-content:center;padding:12px 28px;background:var(--bg-card);
+              color:var(--text-primary);border:1px solid var(--border-color);
+              border-radius:8px;font-weight:600;text-decoration:none;
+              transition:all 0.2s ease;">Email Me</a>
+  </div>
+  <p style="margin:6px 0 0;font-size:12.5px;color:var(--text-muted);
+            font-family:'JetBrains Mono','Fira Code',monospace;">startup_init &middot; logged server-side</p>
+</div>
+""",
+        unsafe_allow_html=True,
+    )
+    st.stop()
 
 # =========================
 # Session state

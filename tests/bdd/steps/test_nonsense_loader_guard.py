@@ -124,8 +124,6 @@ def when_load(ctx):
 @when("its AST is inspected for preload_nonsense_rules call sites")
 def when_inspect_ast(ctx):
     tree = ast.parse(ctx["app_source"])
-    top_level_calls = []
-    nested_calls = []
 
     def _is_preload_call(node):
         if not isinstance(node, ast.Call):
@@ -137,31 +135,58 @@ def when_inspect_ast(ctx):
             return True
         return False
 
-    # Top-level: walk module body, look for bare expression statements at depth 0.
+    def _handler_names(handler):
+        """Return the set of call names invoked inside an except handler."""
+        names = set()
+        for node in ast.walk(handler):
+            if isinstance(node, ast.Call):
+                fn = node.func
+                if isinstance(fn, ast.Attribute):
+                    names.add(fn.attr)
+                elif isinstance(fn, ast.Name):
+                    names.add(fn.id)
+        return names
+
+    # Enforced pattern: a Try whose parent is the module body (NOT nested inside
+    # a function, class, if, while, for, or with), containing a bare
+    # preload_nonsense_rules() call in its try body, and an except handler that
+    # calls both st.markdown and st.stop for user-safe error presentation.
+    #
+    # st.markdown (not st.error) is required because global CSS at
+    # ui/styles/global_styles.py:190-196 hides .stAlert and [data-testid="stAlert"]
+    # unless they contain a thinking-ball element. st.error renders invisibly.
+    # The codebase's user-visible pattern is st.markdown(..., unsafe_allow_html=True).
+    #
+    # Only iterate tree.body so a try nested inside a function does not
+    # satisfy the assertion by accident.
+    wrapped_call_sites = []
     for stmt in tree.body:
-        if isinstance(stmt, ast.Expr) and _is_preload_call(stmt.value):
-            top_level_calls.append(stmt.lineno)
+        if not isinstance(stmt, ast.Try):
+            continue
+        preload_in_body = [
+            s
+            for s in stmt.body
+            if isinstance(s, ast.Expr) and _is_preload_call(s.value)
+        ]
+        if not preload_in_body:
+            continue
+        handler_ok = any(
+            {"markdown", "stop"}.issubset(_handler_names(h)) for h in stmt.handlers
+        )
+        if handler_ok:
+            wrapped_call_sites.append(preload_in_body[0].lineno)
 
-    # Nested: any preload call inside a FunctionDef, AsyncFunctionDef, ClassDef,
-    # If, Try, While, For, or With counts as nested (conditional / wrapped).
-    NESTING_TYPES = (
-        ast.FunctionDef,
-        ast.AsyncFunctionDef,
-        ast.ClassDef,
-        ast.If,
-        ast.Try,
-        ast.While,
-        ast.For,
-        ast.With,
-    )
+    # Diagnostic: preload calls anywhere else (bare at top level with no wrap,
+    # or nested inside function/class/conditional). Used only for error messages.
+    other_call_sites = []
     for node in ast.walk(tree):
-        if isinstance(node, NESTING_TYPES):
-            for child in ast.walk(node):
-                if _is_preload_call(child):
-                    nested_calls.append(getattr(child, "lineno", -1))
+        if _is_preload_call(node):
+            lineno = getattr(node, "lineno", -1)
+            if lineno not in wrapped_call_sites:
+                other_call_sites.append(lineno)
 
-    ctx["top_level_calls"] = top_level_calls
-    ctx["nested_calls"] = nested_calls
+    ctx["wrapped_call_sites"] = wrapped_call_sites
+    ctx["other_call_sites"] = other_call_sites
 
 
 # =============================================================================
@@ -214,11 +239,16 @@ def then_raises_invalid_regex(ctx):
 
 
 @then(
-    "at least one call appears as a module top-level statement"
-    " not nested in any function, class, if, or try block"
+    "at least one call appears as a bare statement in the body of a try"
+    " that is itself a top-level statement in app.py"
+    " and whose except handler calls both st.markdown and st.stop"
 )
-def then_call_at_top_level(ctx):
-    assert ctx["top_level_calls"], (
-        "Expected preload_nonsense_rules() to be called at app.py module top level,"
-        f" but found no such call. Nested calls found at lines: {ctx['nested_calls']}"
+def then_call_wrapped_at_top_level(ctx):
+    assert ctx["wrapped_call_sites"], (
+        "Expected preload_nonsense_rules() to be called inside a module-level"
+        " try/except at app.py, with the except handler calling both st.markdown"
+        " and st.stop for user-safe error presentation (st.error is hidden by"
+        " global CSS at ui/styles/global_styles.py:190-196). Found no such call."
+        f" Other preload calls (not wrapped or not at module scope) at lines:"
+        f" {ctx['other_call_sites']}"
     )

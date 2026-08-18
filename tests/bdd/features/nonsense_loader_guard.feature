@@ -20,7 +20,7 @@ Feature: Nonsense filter loader guards (MATTGPT-165 loader hardening)
     When _load_nonsense_rules is called
     Then it raises ValueError identifying the pattern as invalid
 
-  Scenario: preload_nonsense_rules is invoked unconditionally at app.py module top level
+  Scenario: preload_nonsense_rules is invoked at app.py module top level inside user-safe error handling
     Given the app.py source file at project root
     When its AST is inspected for preload_nonsense_rules call sites
-    Then at least one call appears as a module top-level statement not nested in any function, class, if, or try block
+    Then at least one call appears as a bare statement in the body of a try that is itself a top-level statement in app.py and whose except handler calls both st.markdown and st.stop
