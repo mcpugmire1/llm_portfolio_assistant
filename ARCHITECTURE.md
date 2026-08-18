@@ -82,7 +82,7 @@
 **Project:** MattGPT Portfolio Assistant - AI-powered career story search and chat interface
 **Tech Stack:** Streamlit, OpenAI GPT-4o, Pinecone vector DB, Python 3.11+
 **Data Corpus:** 100+ STAR-formatted transformation project stories
-**Last Updated:** August 9, 2026
+**Last Updated:** August 18, 2026
 
 ### What This Document Contains
 
