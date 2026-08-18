@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: c67c8b7 -->
+<!-- last-backlog-sync: 0c5eb9e -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -14,18 +14,18 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 2. **-163** — Professional org questions intercepted as private-family. Same class.
 3. **-162** — Embedding exception renders as no-match. Visitor concludes the corpus is thin when the app broke.
 4. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
-5. **-181** — WellFound F-22, Lockheed STRATCOM, Cendian B2B/EDI. Closes a JD-surfaced gap; practitioner vocabulary nothing else owns.
-6. **-128** — Source faithfulness. Never run. Last unverified thing on the runway; gates Role Match since Role Match is evidence-backed ratings.
-7. **-146** — Professional Narrative leaks into My Work despite the design excluding them.
+5. **-161** — Career span hardcoded as 2005 in MATT_DNA. Gates -181: ship the early-career stories first and Agy reports a career starting five years after the earliest story.
+6. **-181** — WellFound F-22, Lockheed STRATCOM, Cendian B2B/EDI. Closes a JD-surfaced gap; practitioner vocabulary nothing else owns. Depends on -161.
+7. **-128** — Source faithfulness. Never run. Last unverified thing on the runway; gates Role Match since Role Match is evidence-backed ratings.
 
 **NEXT** — Role Match, once the runway clears
 -160 (extractor dropping qualifiers on 7 of 23) · -173 (malformed and comp-only JD behavior) · -159 (sequential gpt-4o loop) · -014 (34 skipped integration scenarios) · -089 (location, work-model, availability) · -012 (Private View Phase 4) · -081 (corrective actions by asset type) · -099 (comp handling) · -017 (logging scenarios)
 
 **LATER — tier 1:** real defects with known fixes
--177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -180 (fixture blind spot) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene)
+-177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -180 (fixture blind spot) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -146 (PN leaks into My Work)
 
 **LATER — tier 2:** corpus work
-Register passes batched as one edit cycle: -154, -095, -097, -015, -161, -130
+Register passes batched as one edit cycle: -154, -095, -097, -015, -130
 New stories: -078, -091, -155, -022
 Meta: -079, -156, -096
 
@@ -1468,6 +1468,9 @@ Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consiste
 - **Type:** Refactor
 - **Files:** `services/backend_service.py` (lines 245, 254 confirmed), `data/matt_profile.json` (`career_summary` -- removed August 3), design-spec repo (public-facing; scan needed)
 - **Logged:** August 3, 2026
+- **Dependencies:** None (gates MATTGPT-181)
+
+**Gating note (August 18, 2026):** This ticket now gates MATTGPT-181 (early-career story slate). `MATT_DNA` in `backend_service.py` hardcodes "Accenture: March 2005 - September 2023 (18+ years)" and computes span as `current_year - 2005`. Once the -181 slate lands, the corpus starts in 2000 and Agy reports a career starting five years after the earliest story. -161 must ship before -181. This is not general hygiene -- it's the specific value that would contradict the new corpus.
 
 **Problem:** The same derived value is implemented independently in multiple places with different values, some wrong. `backend_service.py` computes `current_year - 2005` for the startup banner and `MATT_DNA`, hardcodes "18+ years" at line 245, and hardcodes "2023-2026" at line 254 (goes stale in January). `career_summary` in `matt_profile.json` carried "18+ years at Accenture" until removed August 3 -- the assessor was citing that string as profile evidence on tenure requirements, surfaced during MATTGPT-158 validation. This is the fourth instance this week of a value stated once and quoted forward past its validity. Violates the no-hardcoded-data-derived-values rule in CLAUDE.md and the anti-patterns section in ARCHITECTURE.md.
 
@@ -1478,7 +1481,7 @@ Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consiste
    - `constants.py` -- fits the file's role but means hardcoding or placing corpus logic in config.
    - Environment configuration -- the honest option if the value cannot be derived.
 
-   This depends on an unsettled question: the corpus starts in 2005, but the 2005 resume shows the career starting in 1997. If pre-2005 stories are added, derivation from the corpus works. If not, the anchor must be configured. **Decide this once and record the decision.** Do not resolve it implicitly in multiple places again.
+   The unsettled question from August 3 is now resolved: the -181 slate extends the corpus start to 2000. Derivation from the corpus is the right approach -- `sync_portfolio_metadata()` can derive the earliest story year from the JSONL on startup. **Decide the specific field and derivation logic once and record it.** Do not resolve implicitly in multiple places again.
 
 2. **Whether it surfaces at all.** Separate from where it lives. `about_matt.py` establishes depth through named programs, scale metrics, and date ranges without stating a total. That is the established pattern, consistent with the ageism-signal rule applied to the resume, corpus, and `career_summary`. A consolidated value may exist and be referenced nowhere visible to users.
 
@@ -1537,7 +1540,7 @@ Option A recalibrates the classifier. Option B adds an upstream gate. They compo
 ---
 
 ### MATTGPT-165
-**nonsense_filters.jsonl has two live generations -- gen-1 blocks legitimate queries gen-2 was meant to permit**
+**nonsense_filters.jsonl: gen-1 originals still fire alongside gen-2; two narrowings block legitimate queries; loader accepts corrupt rules silently**
 
 - **Status:** Open
 - **Priority:** Medium
@@ -1545,15 +1548,89 @@ Option A recalibrates the classifier. Option B adds an upstream gate. They compo
 - **Note:** If MATTGPT-163 is implemented via Approach B (keyword pre-filter adding patterns to this file), this ticket should land first. If MATTGPT-163 is implemented via Approach A (semantic anchor recalibration in `semantic_router.py`), no ordering dependency exists.
 - **Logged:** August 3, 2026
 
-**Issue:** A December commit appended an improved second block of patterns to `nonsense_filters.jsonl` without removing the original first block. Both generations are now loaded and evaluated. This creates a harmful narrowing defect: `credit card` in gen-1 was intentionally tightened to `credit card number` in gen-2 (to stop blocking product-domain queries), but gen-1 still fires. "Tell me about the credit card portal work" is blocked by the gen-1 pattern and never reaches retrieval, even though gen-2 was explicitly written to allow it.
+**File structure (verified August 18, 2026 by programmatic scan, cross-checked):**
 
-**Two deliverables (must ship together):**
-1. Deduplicate `nonsense_filters.jsonl` -- keep gen-2 versions, remove gen-1 originals where a gen-2 supersedes them.
-2. Add a loader guard in the filter-loading path (`services/rag_service.py` or wherever the file is parsed at startup) that asserts no exact-duplicate patterns exist. Raises at startup, not silently at query time.
+`nonsense_filters.jsonl` is 79 lines across three blocks. Block 2 duplicates most of block 1. Block 3 adds 23 new patterns across 18 new categories that neither earlier block had.
 
-**Dependency note:** Any privacy-category additions to `nonsense_filters.jsonl` (e.g., MATTGPT-163 Option B keyword pre-filter) must land AFTER this deduplication. Writing new patterns into a file with two live generations risks the same problem recurring.
+- Block 1: lines 1-27 (original generation)
+- Block 2: lines 28-55 (second generation; supersedes block 1)
+- Block 3: lines 56-79 (additional categories, no block-1 counterpart)
 
-**Validation:** "Tell me about the credit card portal work" must reach retrieval after fix. Loader guard must raise on a manually introduced duplicate pattern in a test run.
+**21 duplicate pairs, block 1 to block 2 at offset +28.** 19 are byte-identical. Lines 14/42 and 15/43 differ in JSON key order only and load to identical rules:
+
+Lines 6/34, 8/36, 9/37, 10/38, 11/39, 12/40, 13/41, 14/42, 15/43, 16/44, 17/45, 18/46, 19/47, 20/48, 21/49, 22/50, 23/51, 24/52, 25/53, 26/54, 27/55. Redundant only. Removing the block-1 original changes nothing.
+
+**5 widenings where gen-2 is broader than gen-1.** Removing the block-1 original is safe:
+
+| Block-1 line | Block-2 line | Category | What gen-2 added |
+|---|---|---|---|
+| 1 | 29 | weather | +sunny, cloudy, humidity |
+| 2 | 30 | sports | +MLB, NHL, and all terms from line 16 |
+| 3 | 31 | stocks_crypto | +bitcoin, ethereum, trading, invest in |
+| 5 | 33 | retail_price | +ebay |
+| 7 | 35 | random_fun | +tarot, +fortune with negative lookahead for "500" (preserves "Fortune 500" references) |
+
+**2 narrowings -- the defects.** Gen-1 pattern is broader and still fires, nullifying the tightening gen-2 introduced:
+
+Line 4 (`personal_sensitive`): `(SSN|social security|passport|driver's license|credit card)` vs. line 32: `(SSN|social security|passport|driver's license|credit card number)`. Line 4 blocks "Tell me about the credit card portal work." Four Fiserv card-portal stories are unreachable via the phrasing a recruiter would naturally use.
+
+Line 28 (`celebrity`): bare tokens `swift|gaga|cardi|doja|ariana|miley|britney|jlo` vs. line 56: full names (`taylor swift, lady gaga, cardi b, doja cat, ariana grande, miley cyrus, britney spears, jennifer lopez`). The bare `swift` token blocks SWIFT payment rails -- a standard that appears explicitly in the JPM Gateway story's Competencies (`SWIFT/NACHA Messaging Standards`). Word-boundary analysis (verified by corpus grep): `\bswift\b` matches `SWIFT` in `SWIFT/NACHA` because `/` is a word boundary. The other seven bare tokens (`gaga`, `cardi`, `doja`, `ariana`, `miley`, `britney`, `jlo`) also use word boundaries and do not produce false matches against collateral terms (`cardiac`, etc.) -- leaving them in place is correct. Fix: edit line 28 to remove `|swift` from the alternation. Do not delete the line -- line 56 catches full names (`taylor swift`) so Taylor Swift queries stay blocked; line 28 minus `swift` retains the other seven.
+
+**No orphan patterns.** Every block-1 pattern has a block-2 or block-3 counterpart.
+
+**Note on `recruiter_logistics` patterns (lines 21-25, duplicated at 49-53):** These blocks on location, salary expectations, availability, notice period, and relocation queries are intentional privacy filters for a public portfolio surface -- not a defect. The standard dedup in deliverable 1 removes the block-1 originals (lines 21-25); the block-2 counterparts (lines 49-53) stay and continue enforcing the intended behavior. No follow-up ticket.
+
+**Three deliverables, three sequential Red/Green cycles:**
+
+**Commit A -- Loader hardening (no file change; zero user-facing impact):**
+- `utils/validation.py:_load_nonsense_rules` gains three guards, all loud-at-load-time, no query-path cost:
+  - Duplicate guard: raise `ValueError` on any duplicate `(category, pattern)` tuple. Key on the tuple, not raw line bytes -- a byte-wise comparison misses 14/42 and 15/43. Error message names the offending line number.
+  - Type guard: raise `ValueError` on any parsed rule that is not a dict with both `category` and `pattern` as string fields. Bare strings, lists, and dicts missing required fields fail loudly instead of blowing up mid-query with `AttributeError` in `is_nonsense`.
+  - Regex guard: call `re.compile(rule["pattern"])` in the loader. A structurally valid dict with an invalid regex pattern passes the type check but then `re.search` raises at query time.
+- Loader invocation decision (resolved): add an eager call in `app.py` at startup. `_load_nonsense_rules` is currently lazy -- `is_nonsense` invokes it on first query, so a guard failure hits the first visitor after deploy. Startup-time detection is preferred. After commit A verify app still starts.
+
+**Commit B -- 26-line dedup (behavior-neutral, verified):**
+- Delete block-1 originals of the 21 duplicate pairs: lines 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27.
+- Delete block-1 originals of the 5 widenings: lines 1, 2, 3, 5, 7.
+- Total: 26 lines removed. After deletion verify file is 53 lines (79 - 26) and every category retains at least one pattern.
+- Behavior-neutral confirmed: all 21 pairs share identical category + pattern; 5 widenings are set-supersets. Removing block-1 originals changes nothing a query resolves to. Run eval after commit B; verify it holds at 70/70.
+
+**Commit C -- 2 narrowings resolved (the only intentional behavior changes):**
+- Delete line 4 (`personal_sensitive` credit card narrowing). After commit B this line renumbers; re-verify position before deleting. Unblocks "credit card portal work" and related Fiserv card-portal queries. Corpus grep confirmed: exactly one story carries the bare "credit card" phrase (Fiserv white-label card portal). No other corpus content surfaces.
+- Edit line 28 (`celebrity` bare-token narrowing): remove `|swift` from the alternation, leaving `gaga|cardi|doja|ariana|miley|britney|jlo`. Do not delete the line. After commit B this line also renumbers; re-verify position. Unblocks SWIFT payment rails queries. Corpus grep confirmed: only the JPM Gateway story (`SWIFT/NACHA Messaging Standards` in Competencies) carries `swift`. Taylor Swift queries remain blocked via full-name match at line 56. After commit C run the validation queries manually in the app.
+
+**Dependency note:** Any additions to `nonsense_filters.jsonl` (e.g., MATTGPT-163 Option B keyword pre-filter) must land after this deduplication. Writing new patterns into a file with multiple live generations risks the same problem recurring. The loader guard prevents recurrence going forward.
+
+**Validation queries (manual, post Commit C):**
+- "Tell me about the credit card portal work" must reach retrieval
+- A query containing "SWIFT" or "swift" in a payment-rails sense must reach retrieval
+- "Does Matt know Taylor Swift" must still be blocked (line 56 full-name match)
+- "qzwxvnpfrk plmqcvjxk floogerblerg" must still be blocked
+- "hi" must still be blocked
+- A genuine celebrity query (e.g., "kim kardashian gossip") must still be blocked
+
+**BDD scenarios (three cycles, one feature file):**
+
+Cycle A -- loader guard:
+- Loader raises on a duplicate (category, pattern) pair
+- Loader raises on a non-dict rule (bare string)
+- Loader raises on a non-dict rule (list)
+- Loader raises on a dict missing the category field
+- Loader raises on a dict missing the pattern field
+- Loader raises on a dict with a pattern that does not compile
+
+Cycle B -- dedup behavior-neutral:
+- Credit card portal query still blocked (gen-2 personal_sensitive rule active)
+- Standard nonsense still blocked
+
+Cycle C -- narrowing fixes:
+- "Tell me about the credit card portal work" reaches retrieval
+- SWIFT payment-rails query reaches retrieval
+- "Does Matt know Taylor Swift" is blocked
+- Genuine celebrity query is blocked
+- Standard nonsense blocked
+
+**Provenance note:** This ticket was originally filed from an analysis naming one narrowing with incorrect line numbers, then "corrected" with three narrowings, two of which described patterns absent from the file. Both versions were produced without reading the file. The audit above was produced by programmatic scan and cross-checked.
 
 ---
 
@@ -1805,6 +1882,7 @@ Specific location: `test_scoring.py:85` constructs a fixture dict using phantom 
 - **Type:** Action (story-writing)
 - **Logged:** August 12, 2026
 - **Parent ticket:** MATTGPT-079 (coverage gaps meta)
+- **Dependencies:** MATTGPT-161 (must ship before ingestion)
 
 **Issue:** The corpus currently starts at 2005 (Solution Architect level). Role Match assessments against requirements like "10+ years professional software development experience" return partial matches because no STAR story anchors the 1997-2005 individual-contributor period. Decision is (a) new STAR stories, not resume or LinkedIn fix. This is committed work with drafts pending.
 
@@ -1815,11 +1893,42 @@ Specific location: `test_scoring.py:85` constructs a fixture dict using phantom 
 2. Lockheed Martin STRATCOM -- carries the 2002 TDD and pairing conviction; foundational engineering philosophy thread.
 3. Cendian B2B/EDI -- Norfolk Southern ancestor; supply chain / B2B integration thread.
 
-Adjunct-professor work folds in; placement TBD after drafts surface.
+**Primary source (August 18, 2026):** `MPugmire_Resume_2005.doc`, created January 12, 2005 -- the resume that produced the Accenture offer. Contemporaneous, not reconstructed from memory. Use as the evidence backbone for all three stories.
+
+**Slate detail from the resume:**
+
+WellFound Technology, F-22 CSAS/ECRS (06/00-12/01, Atlanta): Sustained and enhanced the daily ETL process for a hierarchical as-built parts-assembly configuration tracing database on the F-22 program. Oracle 8i stored procedures, packages, triggers, tables, views, functions in PL/SQL and SQL. C shell scripts orchestrating ETL execution. ERWIN for schema documentation. TIBCO InConcert infrastructure.
+
+Lockheed Martin STRATCOM / Mission Control Systems (11/02-10/03, Omaha): Real-time web-based Gantt chart application. Applet and JSP front end, TIBCO InConcert APIs, TIBCO BPM, Integration Manager, Active Database Adapter, Oracle 9i Application Server, Oracle 8i RDBMS. Oracle 8i PL/SQL packages, stored procedures, performance tuning. Use cases, sequence diagrams, test plans. The TDD and pairing conviction is confirmed verbatim in the 2005 document: "Performed test-driven development or unit testing at end of each development spiral, engaging customer, and practicing paired-programming concept." That is 2002-2003 practice, written down in 2005.
+
+Cendian Corporation (12/03-02/05): B2B and EAI integration for a global multi-modal logistics network serving chemical industry clients. ASC X12 EDIFACT transaction sets named explicitly: 214, 315, 210, 310, 410, 824, 990, across marine, rail, and truck modes. CIDX standards. WebMethods Trading Networks, Integration Server, Broker. Canonical business objects normalizing trading exchanges of different types into one XML format. Struts portal for carriers unable to integrate via EDI or XML. Transaction tracking system using web services, JAXB, JMS queue, message-driven bean on JBoss. XSL-FO document generation. This is the Norfolk Southern ancestor: rail transaction sets, multi-modal logistics, B2B integration.
+
+**Not currently in the slate -- decide before drafting:**
+- Adjunct Professor, American Intercontinental University (11/03-02/04): Taught entry-level HTML and Java Enterprise (Servlets, JSP, Tomcat, MVC architecture). Placement TBD after drafts surface.
+- Oracle Certified Professional (8i): This is the credential MATTGPT-079 flagged as evidence for the depth-of-experience gap. Decide whether it appears in a story body or surfaces only as a corpus tag.
+
+**Consequence for Role Match (August 18, 2026):** Requirement #7 in `structured_jd.txt` reads "Experience with modern relational and NoSQL databases (SQL Server, PostgreSQL, or Redis)" and currently scores partial (MATTGPT-080 verification, July 31). The resume carries SQL Server 2000 schema design and DDL at Accredited Home Lenders, Oracle 8i/9i across three engagements with PL/SQL packages and performance tuning, and Oracle Certified Professional. The slate should move Requirement #7 from partial toward strong on the relational side. PostgreSQL and Redis remain honest gaps.
+
+**Writing standard (August 18, 2026):** Use Case is front-loaded in `build_embedding_text` and capped at 600 characters -- write it in the vocabulary a hiring manager would type, not internal shorthand. Evidence from the Aug 15-17 vocabulary work: "Sev defect management" did not surface on Sev-1 queries; "Sev-1 defect and incident response" did. These stories should carry PL/SQL, ETL, EDI, ASC X12, XSD, XSLT, TDD, and pair programming explicitly, since nothing else in the corpus owns those terms.
+
+**Record scope note (confirmed August 18):** Starts at 2000 by Matt's ruling. Pre-2000 work at North Atlanta Medical Associates (05/97-06/00) is in the 2005 resume and out of scope for the slate.
+
+**UI/structure decisions (August 13-18, 2026):**
+
+Era decision -- resolved: Use option 1, extend "Integration & Platform Foundations" back from 2005 to 2000. The taxonomy already covers core engineering and integration foundations -- F-22 ETL, STRATCOM, and Cendian B2B fit exactly. No `ERA_ORDER` change needed in `timeline_view.py` (the value already exists); one field edit per new story. Set the Era field before ingestion; writing stories without it means a retroactive edit and re-embed.
+
+What self-populates (no code change needed): client dropdown in Explore Stories (Lockheed Martin, GE, Cendian auto-appear on next load), role dropdown, embedding schema, filter infrastructure, sort behavior, Pinecone metadata schema.
+
+What requires a code change: `MATT_DNA` in `backend_service.py` -- hardcodes "Accenture: March 2005 - September 2023 (18+ years)" and computes span as `current_year - 2005`. Once this slate lands, the corpus starts in 2000 and Agy reports a career starting five years after the earliest story. MATTGPT-161 is the fix. It must ship before ingestion -- that dependency is why -161 moved to NOW.
+
+Well Found structural note: Two stints with a layoff gap in the middle (06/00-12/01 and 11/02-10/03, with the Lockheed Martin STRATCOM engagement in between). The Employer/Client pattern maps cleanly -- Well Found as employer, F-22 program as client context. Whether the two Well Found stints are one story or two is an editorial call to make before drafting, not after.
+
+Cendian distinction: Product/services company rather than pure consultancy -- closer to building Cendian's own platform than being placed at a client site. That's a different claim than the Accenture delivery pattern and may matter for product-role JDs. Preserve this distinction explicitly in the story framing.
 
 **Work:** Write three STAR drafts from Matt's firsthand account, cross-referenced against the 2005 resume. Before ingestion, verify each draft against the full JSONL authoring schema by reading an existing story from `data/echo_star_stories_nlp.jsonl` -- the authoring schema includes fields like `5PSummary`, `Competencies`, `Theme`, `Era`, and `public_tags` that the -179 code-to-JSONL mapping does not cover. Do not use the -179 table as the authoring spec; it is a formatter code translation, not an ingestion checklist.
 
 **Cross-references:**
+- **MATTGPT-161** -- career span hardcoded; must ship before ingestion (gating dependency)
 - **MATTGPT-079** -- coverage gaps meta; pre-2005 gap tracked there as `[Decided]`
 - **MATTGPT-022** -- Data Quality Cleanup Journey (sibling story-writing ticket pattern)
 - **MATTGPT-078** -- AI Enablement Before It Had a Name (sibling story-writing ticket)
