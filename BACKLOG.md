@@ -22,7 +22,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 -160 (extractor dropping qualifiers on 7 of 23) · -173 (malformed and comp-only JD behavior) · -159 (sequential gpt-4o loop) · -014 (34 skipped integration scenarios) · -089 (location, work-model, availability) · -012 (Private View Phase 4) · -081 (corrective actions by asset type) · -099 (comp handling) · -017 (logging scenarios)
 
 **LATER — tier 1:** real defects with known fixes
--177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -180 (fixture blind spot) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -146 (PN leaks into My Work)
+-177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -180 (fixture blind spot) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -146 (PN leaks into My Work) · -202 (id-skip predicate divergence)
 
 **LATER — tier 2:** corpus work
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
@@ -114,6 +114,7 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-198](#mattgpt-198) | BDD suite-order flake: test_clicking_a_nav_label_still_routes_to_its_surface_no_regression fails in marathon, passes in isolation | Open | Low | Bug | August 17, 2026 |
 | [MATTGPT-199](#mattgpt-199) | Entity-name-untrimmable hole in MATTGPT-074 content-kw gate: AT&T tokenizes to empty set, strip never fires | Open | Low | Bug | August 17, 2026 |
 | [MATTGPT-201](#mattgpt-201) | Entity pin for Client/Employer uses blend order while code comment and debug label state pc-order intent | Open | Low | Refactor | August 17, 2026 |
+| [MATTGPT-202](#mattgpt-202) | id-skip predicate copied verbatim in app.py and corpus_loader.py -- divergence risk, no shared source | Open | Medium | Bug | August 18, 2026 |
 
 ---
 
@@ -2165,7 +2166,7 @@ Note: the eval suite already contains "Tell me about Elon Musk" as a golden quer
 - **File:** `tests/bdd/steps/test_explore_stories.py`
 - **Logged:** August 17, 2026
 
-**Observation (August 17, 2026):** Fails in full BDD suite run (`pytest tests/bdd/steps/`, 3 failed / 241 passed / 36 skipped, 19-minute run at commit `eb7e5cb` + MATTGPT-074 refinement uncommitted). Passes on isolation retry with the same code.
+**Observation (August 17, 2026):** Fails in full BDD suite run (`pytest tests/bdd/steps/`, 3 failed / 241 passed / 36 skipped, 19-minute run at commit `eb7e5cb` + MATTGPT-074 refinement uncommitted at that run; MATTGPT-074 has since closed at c67c8b7). Passes on isolation retry with the same code.
 
 **Suspected mechanism:** A prior scenario in the suite leaves Streamlit session state or viewport in a condition that suppresses row-2 rendering. The test is not measuring a code defect -- it is sensitive to suite execution order.
 
@@ -2190,7 +2191,7 @@ Note: the eval suite already contains "Tell me about Elon Musk" as a golden quer
 
 **Related:** MATTGPT-100 (Explore Stories → My Work rename), MATTGPT-106 (navbar refactor). Same marathon-run failure class as MATTGPT-142, MATTGPT-145, MATTGPT-197 -- four instances.
 
-**Evidence:** Full-suite failure at `eb7e5cb` + MATTGPT-074 refinement uncommitted; isolation-run pass with gate refactor restored.
+**Evidence:** Full-suite failure at `eb7e5cb` + MATTGPT-074 refinement uncommitted at that run (MATTGPT-074 has since closed at c67c8b7); isolation-run pass with gate refactor restored.
 
 **Acceptance criterion:** Passes consistently in the full suite without isolation, or root cause confirmed and documented.
 
@@ -2211,7 +2212,7 @@ Note: the eval suite already contains "Tell me about Elon Musk" as a golden quer
 
 **Consequence:** AT&T is the only current corpus entity affected. Any entity whose canonical name is ≤2 chars or contains `&` (or other non-`[A-Za-z0-9+#\-_.]` punctuation) has the same behavior. Hypothetical: "L3", "T&E", etc.
 
-**Test impact (August 17, 2026):** MATTGPT-074 scenario 2 (content tokens beyond entity name still disperse kw) passes at both Red and Green for the wrong reason -- AT&T `entity_toks` are empty either way, so the gate cannot differentiate a broad AT&T query from a specific one. The scenario is a regression guard on content-kw dispersion generally, not a proof of AT&T entity stripping. Documented in scenario comment. Not blocking MATTGPT-074 refinement Green.
+**Test impact (August 17, 2026):** MATTGPT-074 scenario 2 (content tokens beyond entity name still disperse kw) passes at both Red and Green for the wrong reason -- AT&T `entity_toks` are empty either way, so the gate cannot differentiate a broad AT&T query from a specific one. The scenario is a regression guard on content-kw dispersion generally, not a proof of AT&T entity stripping. Documented in scenario comment. MATTGPT-074 has since closed (c67c8b7, August 17).
 
 **Fix options (for later scoping):**
 1. Widen `_WORD_RX` to preserve `&` -- corpus-wide effect on all scoring; requires its own gate and eval run.
@@ -2245,6 +2246,29 @@ Note: the eval suite already contains "Tell me about Elon Musk" as a golden quer
 
 ---
 
+### MATTGPT-202
+**id-skip predicate copied verbatim in app.py and corpus_loader.py -- divergence risk, no shared source**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **Files:** `app.py` (`load_star_stories`), `corpus_loader.py` (`load_stories`)
+- **Logged:** August 18, 2026
+
+**Issue:** Both `load_star_stories` in `app.py` and `load_stories` in `corpus_loader.py` implement the same id-enforcement predicate: `story_id in (None, "", 0)`, `str(story_id).strip()`, and a call to `normalize_story`. The predicate is byte-for-byte identical in both files with no shared source. If someone fixes a bug in one path they must remember to update the other -- the same class of silent divergence that MATTGPT-182 fixed in the normalize_story call.
+
+**What this is not:** An incomplete extraction. The `corpus_loader` module was created August 13 specifically for non-Streamlit call sites (tests, probes). The Green commit message explicitly documented the intentional split: `load_star_stories` retains a `json.JSONDecodeError` try/except that surfaces `st.warning` in the Streamlit UI; `corpus_loader.load_stories` raises on malformed lines. That behavioral difference belongs in `app.py` (Streamlit context) and not in the shared library. The error-handling separation is correct.
+
+**The actual risk:** Only the id-skip predicate. It has no shared source and sits in both files as a copy-paste. A future bug fix to the predicate (new skip condition, edge case in `str(story_id).strip()`) hits one file without automatically flagging the other.
+
+**Fix:** Extract the id-enforcement predicate into a single shared helper -- e.g., `corpus_loader.is_valid_story_id(story_id)` or a utility function in `utils/`. Both `load_star_stories` and `load_stories` call the helper. Error handling and debug output remain where they are; only the skip-logic ownership changes.
+
+**Pre-flight before implementing:** Read both functions in full and trace current callers of each before proposing a helper location or signature. `corpus_loader.py` line 58 docstring says "Replicates app.py id enforcement" -- that comment should be removed or updated when the helper is in place.
+
+**Cross-references:** MATTGPT-182 (same class: normalize_story divergence across call sites; fixed August 15 at 275ff1f).
+
+---
+
 ### MATTGPT-200
 **top_per_theme=3 caps synthesis pool when all entity stories share one Theme; AT&T returns 3 of 6 stories**
 
@@ -2259,7 +2283,7 @@ Note: the eval suite already contains "Tell me about Elon Musk" as a golden quer
 
 **Verified August 17, 2026 (production debug trace):** "What did Matt do at AT&T?" -- synthesis pool: 3 unique stories across 7 themes on a 6-story entity pool. Southeast CRM (arguably the most substantial AT&T story) is dropped because its pc for that broad phrasing ranked 6th in the pool.
 
-**Origin note:** The `top_per_theme=3` cap predates MATTGPT-074. The refinement made the cap reachable on AT&T because the previous kw-uniformity gate had suppressed AT&T promotion. Not caused by the gate change; surfaced by it.
+**Origin note:** The `top_per_theme=3` cap predates MATTGPT-074 (closed, c67c8b7, August 17). That refinement made the cap reachable on AT&T because the previous kw-uniformity gate had suppressed AT&T promotion. Not caused by the gate change; surfaced by it.
 
 **Fix options (later scoping):**
 1. Raise the per-theme cap when the entity pool is theme-uniform.
