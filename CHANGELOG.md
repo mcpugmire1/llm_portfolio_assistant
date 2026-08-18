@@ -8,6 +8,22 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Ask Agy
 
+**August 18, 2026 — nonsense_filters.jsonl deduplicated; loader hardened; two narrowings fixed (MATTGPT-165)** -- `a6d5145`, `766a138`, `7566a13`
+
+Three-commit sequence resolving a multi-generation filter file and two active query-blocking defects.
+
+Commit A (`a6d5145`, `766a138`) -- Loader hardening and eager preload. `_load_nonsense_rules` in `utils/validation.py` gains three load-time guards: duplicate guard (raises `ValueError` on any duplicate `(category, pattern)` tuple, keying on parsed tuple not raw bytes to catch JSON-key-order variants), type guard (raises on non-dict rules -- bare strings and lists that would cause `AttributeError` in `is_nonsense` at query time), and regex guard (`re.compile` on load to catch patterns that would raise at query time). `app.py` now calls the loader eagerly at startup so a corrupt file fails at boot rather than on the first visitor's query.
+
+Commit B (`a6d5145`) -- 26-line dedup. The file had three blocks: block 1 (lines 1-27, original generation), block 2 (lines 28-55, second generation), block 3 (lines 56-79, new categories). Block 2 duplicates most of block 1. Removed 21 byte-identical (or JSON-key-order-only-different) duplicate pairs by deleting the block-1 originals, and removed 5 block-1 originals where block-2 was a superset widening. Behavior-neutral: all 21 pairs shared identical category and pattern; the 5 widenings are set-supersets. Eval held at 70/70. File: 79 lines → 53 lines.
+
+Commit C (`7566a13`) -- Two narrowings fixed. Line 1 of the 53-line file (`personal_sensitive`, `credit card` bare token) was broader than its block-2 counterpart (`credit card number`) and blocked "Tell me about the credit card portal work" -- four Fiserv card-portal stories were unreachable. Deleted. Line 2 (`celebrity` bare tokens `swift|gaga|...`) blocked SWIFT payment rails queries; `\bswift\b` matches `SWIFT` in `SWIFT/NACHA` because `/` is a word boundary. Edited to remove `|swift` from the alternation; the other seven bare tokens and the full-name block-3 counterpart (line 56: `taylor swift`, etc.) remain. Taylor Swift queries stay blocked. SWIFT payment rails queries now reach retrieval. File confirmed at 52 lines post-edit.
+
+Corpus grep verified before commit C: "credit card" appears in exactly one story (Fiserv white-label card portal); "swift" appears in exactly one story (JPM Gateway, `SWIFT/NACHA Messaging Standards` in Competencies). No unexpected surface area.
+
+BDD: three cycles, one feature file. Cycle A: six loader-guard scenarios. Cycle B: dedup behavior-neutral checks. Cycle C: both narrowing fix scenarios plus celebrity and nonsense regression guards.
+
+---
+
 **August 17, 2026 — Entity cluster promotion gate refined: content-kw uniformity replaces count-only heuristic (MATTGPT-074)** -- `c67c8b7`
 
 Two-iteration fix. The original gate promoted any entity query to synthesis mode when Pinecone returned 3+ stories from the same entity, treating corpus density as a proxy for user intent. Depth questions ("How did you build the CIC?", "Who reported to Matt at the CIC?") were force-promoted to thematic survey responses.
