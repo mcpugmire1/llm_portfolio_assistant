@@ -33,7 +33,7 @@ Meta: -079, -156, -096
 -168 (needs Top Score distribution) · -077 (re-measure after -181) · -171 (coupled to -190) · -185 (negation)
 
 **LATER — tier 4:** hygiene
-Dead code: -176, -183, -199, -201
+Dead code: -176, -183, -199, -201 · Hidden error: -204
 BDD flakes: -122, -131, -142, -145, -197, -198
 Wrong-assertion test: -203
 Small refactors: -072, -140, -153, -086, -062, -082, -083, -084, -150, -060
@@ -117,6 +117,7 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-201](#mattgpt-201) | Entity pin for Client/Employer uses blend order while code comment and debug label state pc-order intent | Open | Low | Refactor | August 17, 2026 |
 | [MATTGPT-202](#mattgpt-202) | id-skip predicate copied verbatim in app.py and corpus_loader.py -- divergence risk, no shared source | Open | Medium | Bug | August 18, 2026 |
 | [MATTGPT-203](#mattgpt-203) | Chip grid disable test asserts the wrong mechanism | Open | Low | Bug (Test) | August 18, 2026 |
+| [MATTGPT-204](#mattgpt-204) | load_star_stories error fallback uses st.error -- silently invisible under current CSS | Open | Low | Bug | August 18, 2026 |
 
 ---
 
@@ -2268,6 +2269,25 @@ Note: the eval suite already contains "Tell me about Elon Musk" as a golden quer
 **Pre-flight before implementing:** Read both functions in full and trace current callers of each before proposing a helper location or signature. `corpus_loader.py` line 58 docstring says "Replicates app.py id enforcement" -- that comment should be removed or updated when the helper is in place.
 
 **Cross-references:** MATTGPT-182 (same class: normalize_story divergence across call sites; fixed August 15 at 275ff1f).
+
+---
+
+### MATTGPT-204
+**load_star_stories error fallback uses st.error -- silently invisible under current CSS**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Bug
+- **File:** `app.py:228`
+- **Logged:** August 18, 2026
+
+**Issue:** `load_star_stories` at `app.py:228` calls `st.error` on its JSON parse or file-not-found fallback. A CSS rule currently makes `st.error` elements invisible on this surface. The error fires and renders to a hidden element -- the user sees nothing and has no indication the corpus failed to load.
+
+**Surfaced during:** MATTGPT-165 Cycle A session (August 18, 2026). Out of scope for -165.
+
+**Fix:** Replace `st.error` at line 228 with a mechanism that is actually visible on this surface, or audit the CSS rule hiding `st.error` and determine whether suppressing it was intentional. Pre-flight must confirm which CSS rule is responsible before proposing a change.
+
+**Cross-references:** MATTGPT-202 (same function -- `load_star_stories` error handling is the Streamlit-context concern that was intentionally kept in `app.py` rather than pushed to `corpus_loader`; this ticket is about that error handling being broken).
 
 ---
 
