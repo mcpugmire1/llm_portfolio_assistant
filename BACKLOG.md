@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: 0ba3e54 -->
+<!-- last-backlog-sync: 79f6d90 -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -13,15 +13,14 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 1. **-163** — Professional org questions intercepted as private-family. Same class.
 2. **-162** — Embedding exception renders as no-match. Visitor concludes the corpus is thin when the app broke.
 3. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
-4. **-161** — Career span hardcoded as 2005 in MATT_DNA. Gates -181: ship the early-career stories first and Agy reports a career starting five years after the earliest story.
-5. **-181** — WellFound F-22, Lockheed STRATCOM, Cendian B2B/EDI. Closes a JD-surfaced gap; practitioner vocabulary nothing else owns. Depends on -161.
-6. **-128** — Source faithfulness. Never run. Last unverified thing on the runway; gates Role Match since Role Match is evidence-backed ratings.
+4. **-181** — WellFound F-22, Lockheed STRATCOM, Cendian B2B/EDI. Closes a JD-surfaced gap; practitioner vocabulary nothing else owns.
+5. **-128** — Source faithfulness. Never run. Last unverified thing on the runway; gates Role Match since Role Match is evidence-backed ratings.
 
 **NEXT** — Role Match, once the runway clears
 -160 (extractor dropping qualifiers on 7 of 23) · -173 (malformed and comp-only JD behavior) · -159 (sequential gpt-4o loop) · -014 (34 skipped integration scenarios) · -089 (location, work-model, availability) · -012 (Private View Phase 4) · -081 (corrective actions by asset type) · -099 (comp handling) · -017 (logging scenarios)
 
 **LATER — tier 1:** real defects with known fixes
--177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -180 (fixture blind spot) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -146 (PN leaks into My Work) · -202 (id-skip predicate divergence)
+-177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -180 (fixture blind spot) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -146 (PN leaks into My Work) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28)
 
 **LATER — tier 2:** corpus work
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
@@ -33,7 +32,7 @@ Meta: -079, -156, -096
 
 **LATER — tier 4:** hygiene
 Dead code: -176, -183, -199, -201 · Hidden error: -204
-BDD flakes: -122, -131, -142, -145, -197, -198
+BDD flakes: -122, -131, -142, -145, -197, -198, -205
 Wrong-assertion test: -203
 Small refactors: -072, -140, -153, -086, -062, -082, -083, -084, -150, -060
 Infrastructure: -035, -039, -040, -045
@@ -90,7 +89,6 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-156](#mattgpt-156) | Vendor commercial/spend management gap — decide whether corpus-zero on invoice/rate-card/procurement is a real claim or honest gap | Open | Low | Investigation | July 29, 2026 |
 | [MATTGPT-159](#mattgpt-159) | Role Match performance — parallelize per-requirement assessor calls; sequential gpt-4o loop is the bottleneck | Open | Medium | Performance | July 31, 2026 |
 | [MATTGPT-160](#mattgpt-160) | JD extractor clause-dropping — 7 of 23 requirements on demo JD lose qualifiers during extraction | Open | Medium | Bug | July 31, 2026 |
-| [MATTGPT-161](#mattgpt-161) | Career span duplicated and hardcoded across surfaces — consolidate to a single derived or configured source | Open | High | Refactor | August 3, 2026 |
 | [MATTGPT-162](#mattgpt-162) | Embedding exception misclassified as low-confidence rejection — visitor sees no-match banner instead of error message | Open | High | Bug | August 3, 2026 |
 | [MATTGPT-163](#mattgpt-163) | Personal-query guard false positive — professional org questions intercepted as private family | Open | High | Bug | August 3, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories invisible to entity-scoped queries — Fortune 500 Clients / Cross-Division placeholder metadata excluded from client filters | Open | Medium | Issue | August 3, 2026 |
@@ -116,6 +114,8 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-202](#mattgpt-202) | id-skip predicate copied verbatim in app.py and corpus_loader.py -- divergence risk, no shared source | Open | Medium | Bug | August 18, 2026 |
 | [MATTGPT-203](#mattgpt-203) | Chip grid disable test asserts the wrong mechanism | Open | Low | Bug (Test) | August 18, 2026 |
 | [MATTGPT-204](#mattgpt-204) | Two Explore Stories blank-state defects: corpus-load failure silent; Table view missing empty-state guard | Open | Low | Bug | August 18, 2026 |
+| [MATTGPT-205](#mattgpt-205) | BDD marathon flake: test_error_state_extraction_failure fails in marathon, passes in isolation | Open | Low | Bug (Test) | August 19, 2026 |
+| [MATTGPT-206](#mattgpt-206) | Eval suite ~1-in-70 stochastic flap; Q28 confirmed non-deterministic | Open | Medium | Bug (Test) | August 19, 2026 |
 
 ---
 
@@ -1472,42 +1472,6 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 
 ---
 
-### MATTGPT-161
-**Career span duplicated and hardcoded across surfaces -- consolidate to a single derived or configured source**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Refactor
-- **Files:** `services/backend_service.py` (lines 245, 254 confirmed), `data/matt_profile.json` (`career_summary` -- removed August 3), design-spec repo (public-facing; scan needed)
-- **Logged:** August 3, 2026
-- **Dependencies:** None (gates MATTGPT-181)
-
-**Gating note (August 18, 2026):** This ticket now gates MATTGPT-181 (early-career story slate). `MATT_DNA` in `backend_service.py` hardcodes "Accenture: March 2005 - September 2023 (18+ years)" and computes span as `current_year - 2005`. Once the -181 slate lands, the corpus starts in 2000 and Agy reports a career starting five years after the earliest story. -161 must ship before -181. This is not general hygiene -- it's the specific value that would contradict the new corpus.
-
-**Problem:** The same derived value is implemented independently in multiple places with different values, some wrong. `backend_service.py` computes `current_year - 2005` for the startup banner and `MATT_DNA`, hardcodes "18+ years" at line 245, and hardcodes "2023-2026" at line 254 (goes stale in January). `career_summary` in `matt_profile.json` carried "18+ years at Accenture" until removed August 3 -- the assessor was citing that string as profile evidence on tenure requirements, surfaced during MATTGPT-158 validation. This is the fourth instance this week of a value stated once and quoted forward past its validity. Violates the no-hardcoded-data-derived-values rule in CLAUDE.md and the anti-patterns section in ARCHITECTURE.md.
-
-**Two decisions, in this order:**
-
-1. **Where the value comes from.** Three candidates:
-   - Derived at startup in `sync_portfolio_metadata()` alongside `SYNTHESIS_THEMES` and `_KNOWN_CLIENTS` -- matches the existing pattern for corpus-derived globals.
-   - `constants.py` -- fits the file's role but means hardcoding or placing corpus logic in config.
-   - Environment configuration -- the honest option if the value cannot be derived.
-
-   The unsettled question from August 3 is now resolved: the -181 slate extends the corpus start to 2000. Derivation from the corpus is the right approach -- `sync_portfolio_metadata()` can derive the earliest story year from the JSONL on startup. **Decide the specific field and derivation logic once and record it.** Do not resolve implicitly in multiple places again.
-
-2. **Whether it surfaces at all.** Separate from where it lives. `about_matt.py` establishes depth through named programs, scale metrics, and date ranges without stating a total. That is the established pattern, consistent with the ageism-signal rule applied to the resume, corpus, and `career_summary`. A consolidated value may exist and be referenced nowhere visible to users.
-
-**Known consumers (confirmed and suspected):**
-- `backend_service.py` lines 245 and 254 -- startup banner and `MATT_DNA`
-- `matt_profile.json` `career_summary` -- removed August 3 (was also reaching the assessor as citable grounding)
-- Design-spec repo -- public-facing, scan required
-
-**Required work:** Repo-wide scan for year-count patterns (`\d{2}\+?\s*years`, `current_year\s*-\s*20\d{2}`, literal "2005") across this repo and the design-spec repo before implementing anything.
-
-**Constraint:** Tenure requirements on JDs are legitimate and the right answer is the assessor reasoning from story dates (demonstrated working on Fiserv requirement #8 -- see MATTGPT-088). Do not reintroduce a hardcoded span to compensate for tenure-inference variance. These are separate problems with separate fixes.
-
----
-
 ### MATTGPT-162
 **Embedding exception misclassified as low-confidence rejection -- visitor sees no-match banner instead of error message**
 
@@ -1799,7 +1763,7 @@ Specific location: `test_scoring.py:85` constructs a fixture dict using phantom 
 - **Type:** Action (story-writing)
 - **Logged:** August 12, 2026
 - **Parent ticket:** MATTGPT-079 (coverage gaps meta)
-- **Dependencies:** MATTGPT-161 (must ship before ingestion)
+- **Dependencies:** None (MATTGPT-161 closed, 79f6d90, August 19)
 
 **Issue:** The corpus currently starts at 2005 (Solution Architect level). Role Match assessments against requirements like "10+ years professional software development experience" return partial matches because no STAR story anchors the 1997-2005 individual-contributor period. Decision is (a) new STAR stories, not resume or LinkedIn fix. This is committed work with drafts pending.
 
@@ -1836,7 +1800,7 @@ Era decision -- resolved: Use option 1, extend "Integration & Platform Foundatio
 
 What self-populates (no code change needed): client dropdown in Explore Stories (Lockheed Martin, GE, Cendian auto-appear on next load), role dropdown, embedding schema, filter infrastructure, sort behavior, Pinecone metadata schema.
 
-What requires a code change: `MATT_DNA` in `backend_service.py` -- hardcodes "Accenture: March 2005 - September 2023 (18+ years)" and computes span as `current_year - 2005`. Once this slate lands, the corpus starts in 2000 and Agy reports a career starting five years after the earliest story. MATTGPT-161 is the fix. It must ship before ingestion -- that dependency is why -161 moved to NOW.
+MATT_DNA fix: MATTGPT-161 closed at 79f6d90 (August 19). `_CAREER_START_YEAR`, `_CAREER_END_YEAR`, and `_CAREER_SPAN_YEARS` are now derived in `sync_portfolio_metadata()` from the JSONL. Once the -181 slate lands, `_CAREER_START_YEAR` moves from 2005 to 2000 automatically.
 
 Well Found structural note: Two stints with a layoff gap in the middle (06/00-12/01 and 11/02-10/03, with the Lockheed Martin STRATCOM engagement in between). The Employer/Client pattern maps cleanly -- Well Found as employer, F-22 program as client context. Whether the two Well Found stints are one story or two is an editorial call to make before drafting, not after.
 
@@ -1845,7 +1809,7 @@ Cendian distinction: Product/services company rather than pure consultancy -- cl
 **Work:** Write three STAR drafts from Matt's firsthand account, cross-referenced against the 2005 resume. Before ingestion, verify each draft against the full JSONL authoring schema by reading an existing story from `data/echo_star_stories_nlp.jsonl` -- the authoring schema includes fields like `5PSummary`, `Competencies`, `Theme`, `Era`, and `public_tags` that the -179 code-to-JSONL mapping does not cover. Do not use the -179 table as the authoring spec; it is a formatter code translation, not an ingestion checklist.
 
 **Cross-references:**
-- **MATTGPT-161** -- career span hardcoded; must ship before ingestion (gating dependency)
+- **MATTGPT-161** -- career span derivation shipped at 79f6d90 (Aug 19); no longer a dependency
 - **MATTGPT-079** -- coverage gaps meta; pre-2005 gap tracked there as `[Decided]`
 - **MATTGPT-022** -- Data Quality Cleanup Journey (sibling story-writing ticket pattern)
 - **MATTGPT-078** -- AI Enablement Before It Had a Name (sibling story-writing ticket)
@@ -2214,6 +2178,51 @@ Fix (full): Cards and Timeline both use `st.info` for the empty-state message, w
 **Surfaced during:** MATTGPT-165 Cycle A session (August 18, 2026). Out of scope for -165.
 
 **Cross-references:** MATTGPT-202 (`load_star_stories` error handling -- the Streamlit-context concern intentionally kept in `app.py`; defect 1 is that handling being broken).
+
+---
+
+### MATTGPT-205
+**BDD marathon flake: test_error_state_extraction_failure fails in marathon, passes in isolation**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Bug (Test)
+- **File:** `tests/bdd/steps/test_role_match.py:890`, `tests/bdd/features/role_match.feature:535-542`
+- **Logged:** August 19, 2026
+
+**Issue:** `test_error_state_extraction_failure` passes in isolation and at file scope but fails intermittently in the full BDD marathon. Same class as MATTGPT-197, MATTGPT-198, MATTGPT-203 -- browser tests with suite-order sensitivity.
+
+**Bisect artifact (August 19, 2026):** Pre-Green marathon at HEAD=2c4f5e2 (b9nw3kuyv): PASSED. Post-Green marathon run 1 (boysul2ff): FAILED. Post-Green marathon run 2 (bf1npksc5): PASSED. Same command, same HEAD; working tree diff = Green applied vs stashed. Failure was intermittent, not deterministic with Green. Isolation retry with Green applied: PASSES (9.96s). Confirms suite-order sensitivity, not a Green regression.
+
+**Mechanism not measured.** See MATTGPT-197 and MATTGPT-198 for prior work on the same class.
+
+---
+
+### MATTGPT-206
+**Eval suite ~1-in-70 stochastic flap; Q28 confirmed non-deterministic**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug (Test)
+- **File:** `tests/eval_rag_quality.py` (ground-truth concept-cluster assertions)
+- **Logged:** August 19, 2026
+
+**Issue:** The eval suite has an observed ~1-in-70 flap rate on ground-truth-match queries. Q28 is confirmed stochastic -- it failed in both pre-Green and post-Green runs on different days, ruling out a regression cause.
+
+**Evidence (August 19, 2026, MATTGPT-161 verification):**
+- Pre-Green run 1 (bi4s8nlke): 70/70
+- Pre-Green run 2 (bha0kkcrp): 70/70
+- Pre-Green run 3 (bbo7aajay): 69/70 -- Q28 failed
+- Post-Green run 1 (bh3mfbbnw): 69/70 -- Q64 failed
+- Post-Green run 2 (bjtxaif0r): 69/70 -- Q28 failed
+
+**Q28 pattern:** Asserts ground-truth concept cluster for "rapid prototyping for client products." Matched `prototype` alone in failing runs; second required phrase absent. Root cause is retrieval non-determinism or LLM sampling variance in concept-match extraction.
+
+**Q64 pattern:** 3 pre-Green passes, 1 post-Green fail, 1 post-Green pass -- inconclusive. Per eval discipline, 1 fail + 1 pass = noise. Not attributable to MATTGPT-161.
+
+**Gate reliability consequence:** A single clean 70/70 run does not prove correctness; a single failure does not prove regression. The eval gate requires multiple runs to be meaningful for any ticket that touches retrieval or LLM paths.
+
+**Context:** The eval suite now has three tests with documented stochastic behavior: Q1_voice, Q45_structural (marked in `tests/test_structural_assertions.py` header per f0d8870), and Q28 (this finding). Not a MATTGPT-161 regression -- Q28 failed in pre-Green runs.
 
 ---
 
@@ -3005,7 +3014,7 @@ The concentration is real. The retrieval dominance claim is not supported by the
 - **Status:** Decided Against (May 30, 2026)
 - **Priority:** Low
 - **Type:** Refactor
-- **Decided Against (May 30, 2026):** The "inconsistency" framing was wrong. The stats bar and the Agy intro line are different surfaces doing different jobs. The stats bar is a credentialing surface (recruiter 5-second scan) where the anti-bias play matters most — that's why the Years tile was dropped in MATTGPT-092. The Agy intro line is grounding-the-AI-assistant copy — it tells the user that Agy has a real corpus of career experience to draw from. The "20+ years of work" token there reads as *corpus scope* (how much data the AI has), not as *personal positioning* (how old the candidate is). The anti-bias play that drove the Years tile drop doesn't transfer to a surface doing different work. Closing without a code change; the line stays as-is in `ui/components/hero.py:174`.
+- **Decided Against (May 30, 2026):** The "inconsistency" framing was wrong. The stats bar and the Agy intro line are different surfaces doing different jobs. The stats bar is a credentialing surface (recruiter 5-second scan) where the anti-bias play matters most — that's why the Years tile was dropped in MATTGPT-092. The Agy intro line is grounding-the-AI-assistant copy — it tells the user that Agy has a real corpus of career experience to draw from. The "20+ years of work" token there reads as *corpus scope* (how much data the AI has), not as *personal positioning* (how old the candidate is). The anti-bias play that drove the Years tile drop doesn't transfer to a surface doing different work. Closing without a code change. Note (August 19, 2026): `hero.py:174` is a stale reference -- the hero copy has been rewritten; line 174 is now a `</div>` closing tag. Current framing is "my full project history" at approximately line 182, with no year count. The year-count copy this ticket was filed about no longer exists.
 - **Earlier framing (superseded):** Home hero Agy intro line currently reads *"That's Agy, my Plott Hound and AI assistant, ready to track down insights from 20+ years of work."* The *"20+ years"* signal is the same one that was dropped from the stats bar's Years tile (May 29, 2026, MATTGPT-092) for ageism + non-positioning reasons. Leaving the years number in the Agy intro partially undoes that mitigation.
 - **Decision (open — three working options):**
   1. **Drop the number:** *"That's Agy, my Plott Hound and AI assistant, ready to track down insights from across Matt's career."*

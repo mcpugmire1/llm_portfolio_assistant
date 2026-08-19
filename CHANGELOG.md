@@ -8,6 +8,18 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Ask Agy
 
+**August 19, 2026 — Career span derived from corpus; hardcoded year-count removed from MATT_DNA (MATTGPT-161)** -- `79f6d90`
+
+`_CAREER_START_YEAR`, `_CAREER_END_YEAR`, and `_CAREER_SPAN_YEARS` are now derived in `sync_portfolio_metadata()` from the JSONL at startup alongside `SYNTHESIS_THEMES` and `_KNOWN_CLIENTS`. `MATT_DNA` prose updated: "18+ years" removed from the Accenture line; "+ years" removed from the Career Arc line. Accenture date range preserved. Debug print updated to read derived values.
+
+When MATTGPT-181 (early-career story slate) lands, `_CAREER_START_YEAR` moves from 2005 to 2000 automatically -- no code change needed at that point.
+
+Surfaces not touched: home hero (already clean -- "my full project history" framing, no year count), `test_home_seniority.py:72` (out of scope per MATTGPT-103 carve-out), README.md, mattgpt_system_prompt.md, design-spec repo.
+
+BDD: `tests/bdd/features/matt_dna_career_span.feature`, 4/4 scenarios passing. Red scenarios `7c5049d`, Red step defs `2c4f5e2`, Green `79f6d90`.
+
+---
+
 **August 18, 2026 — nonsense_filters.jsonl deduplicated; loader hardened; two narrowings fixed (MATTGPT-165)** -- `a6d5145`, `766a138`, `7566a13`
 
 Three-commit sequence resolving a multi-generation filter file and two active query-blocking defects.
