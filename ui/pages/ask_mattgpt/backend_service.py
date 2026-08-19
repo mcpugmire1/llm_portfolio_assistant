@@ -141,6 +141,17 @@ EXCLUDED_THEMES = {
 # NOTE: Dynamically generated at startup via sync_portfolio_metadata()
 MATT_DNA: str = ""
 
+# Career-span constants derived from corpus dates at startup via
+# sync_portfolio_metadata() (MATTGPT-161). Available to consumers that need
+# the math (e.g., Role Match assessor reasoning about JD tenure requirements).
+# NOT rendered into MATT_DNA prose -- the ageism-signal rule applied to the
+# resume, About page, and matt_profile.json extends to the LLM grounding
+# surface. When MATTGPT-181 lands with pre-2005 stories, _CAREER_START_YEAR
+# moves from 2005 to 2000 and _CAREER_SPAN_YEARS updates automatically.
+_CAREER_START_YEAR: int = 0
+_CAREER_END_YEAR: int = 0
+_CAREER_SPAN_YEARS: int = 0
+
 
 def sync_portfolio_metadata(stories: list[dict]) -> None:
     """Startup sync to derive system metadata from JSONL.
@@ -151,7 +162,13 @@ def sync_portfolio_metadata(stories: list[dict]) -> None:
     Args:
         stories: The loaded story corpus from JSONL.
     """
-    global SYNTHESIS_THEMES, _KNOWN_CLIENTS, MATT_DNA
+    global \
+        SYNTHESIS_THEMES, \
+        _KNOWN_CLIENTS, \
+        MATT_DNA, \
+        _CAREER_START_YEAR, \
+        _CAREER_END_YEAR, \
+        _CAREER_SPAN_YEARS
 
     # 1. Derive Themes (Fix for Theme Fragility)
     # Automatically picks up new themes or renames in the JSONL
@@ -170,7 +187,15 @@ def sync_portfolio_metadata(stories: list[dict]) -> None:
     # Uses existing helper to ensure intent classification stays in sync
     _KNOWN_CLIENTS = get_known_clients(stories)
 
-    # 3. Dynamic DNA Generation
+    # 3. Derive career-span constants from corpus dates (MATTGPT-161).
+    # min(Start_Date) and max(End_Date) as YYYY-MM strings are safe under
+    # string sort because the format is zero-padded. Not rendered into
+    # MATT_DNA prose; consumed by callers that need the math.
+    _CAREER_START_YEAR = int(min(s["Start_Date"] for s in stories)[:4])
+    _CAREER_END_YEAR = int(max(s["End_Date"] for s in stories)[:4])
+    _CAREER_SPAN_YEARS = _CAREER_END_YEAR - _CAREER_START_YEAR
+
+    # 4. Dynamic DNA Generation
     # Injects real-time stats into the system prompt to prevent hallucination
     MATT_DNA = generate_dynamic_dna(stories, _KNOWN_CLIENTS)
 
@@ -180,7 +205,9 @@ def sync_portfolio_metadata(stories: list[dict]) -> None:
         print("\n🐾 AGY STARTUP SANITY CHECK:")
         print(f"   - Themes Detected:  {len(SYNTHESIS_THEMES)} {SYNTHESIS_THEMES}")
         print(f"   - Clients Loaded:   {len(_KNOWN_CLIENTS)}")
-        print(f"   - Career Span:      {datetime.now().year - 2005} years")
+        print(
+            f"   - Career Span:      {_CAREER_SPAN_YEARS} years ({_CAREER_START_YEAR}-{_CAREER_END_YEAR})"
+        )
         print("   - DNA Status:       [DYNAMICALLY SYNCED]\n")
 
 
@@ -212,8 +239,6 @@ def generate_dynamic_dna(stories: list[dict], clients: set[str]) -> str:
 
     # Build client list
     client_list = ", ".join(sorted(clients)) if clients else "Various clients"
-    current_year = datetime.now().year
-    career_span = current_year - 2005
 
     # Derive themes list for the prompt
     themes_text = "\n".join(
@@ -257,9 +282,9 @@ def generate_dynamic_dna(stories: list[dict], clients: set[str]) -> str:
 **Identity:**
 "I build what's next, modernize what's not, and grow teams along the way."
 
-**Career Arc ({career_span}+ years):**
+**Career Arc:**
 Software Engineer → Solution Architect → Director → Cloud Innovation Center Leader
-- Accenture: March 2005 - September 2023 (18+ years)
+- Accenture: March 2005 - September 2023
 - Built CIC from 0 to {p_count}+ practitioners (Atlanta, Tampa)
 - Currently: Sabbatical, building MattGPT, targeting senior product engineering leadership roles
 
