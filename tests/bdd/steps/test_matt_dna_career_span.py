@@ -161,6 +161,10 @@ def _run_sync(ctx):
 
 @then(parsers.parse("_CAREER_START_YEAR is {year:d}"))
 def then_career_start_year(ctx, year):
+    # This assertion tracks the corpus, not a constant. It was 2005 until the
+    # Sparkfly story (Start_Date 2000-06) landed Aug 20 2026. Expect it to fail
+    # again if a story predating 2000-06 is added -- that failure is the tripwire
+    # working, not a regression. Update the year and the scenario name when it fires.
     bs = ctx["backend_service"]
     actual = getattr(bs, "_CAREER_START_YEAR", None)
     assert actual == year, (

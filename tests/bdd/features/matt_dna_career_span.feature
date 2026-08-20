@@ -13,10 +13,10 @@ Feature: MATT_DNA career-span derivation and prose (MATTGPT-161)
     When sync_portfolio_metadata is called with that story list
     Then _CAREER_START_YEAR is 2000
 
-  Scenario: derivation returns 2005 on the current story corpus
+  Scenario: derivation returns 2000, the current corpus earliest start year
     Given the current production story corpus is loaded
     When sync_portfolio_metadata is called with the production stories
-    Then _CAREER_START_YEAR is 2005
+    Then _CAREER_START_YEAR is 2000
 
   Scenario: MATT_DNA output contains no "+ years" assertion
     Given the current production story corpus is loaded

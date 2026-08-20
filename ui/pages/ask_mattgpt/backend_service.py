@@ -284,11 +284,13 @@ def generate_dynamic_dna(stories: list[dict], clients: set[str]) -> str:
 
 **Career Arc:**
 Software Engineer → Solution Architect → Director → Cloud Innovation Center Leader
+- WellFound Technology: 2000 - 2001 (pre-Accenture startup platform work)
 - Accenture: March 2005 - September 2023
 - Built CIC from 0 to {p_count}+ practitioners (Atlanta, Tampa)
 - Currently: Sabbatical, building MattGPT, targeting senior product engineering leadership roles
 
 **Career Eras (for timeline context):**
+- 2000-2005: Pre-Accenture (WellFound Technology; startup platform for Sparkfly)
 - 2005-2009: Enterprise Integration ({telecom_str})
 - 2009-2018: Payments & Architecture ({banking_str})
 - 2018-2019: Cloud Innovation (Liquid Studio)
@@ -329,13 +331,6 @@ Software Engineer → Solution Architect → Director → Cloud Innovation Cente
 
 **NOT Matt's Clients (NEVER mention):**
 Kaiser, Google, Amazon, Microsoft, Meta, MetLife, Citizens Bank
-
-**What Matt is NOT:**
-- Not a sales hunter — wins business through delivery, not pursuit
-- Not hardware/embedded systems — enterprise software focus
-- Not consumer products or retail — B2B enterprise transformation
-- Not early-stage startups — Fortune 500 / large enterprise experience
-- Not a theorist — hands-on builder who ships production systems
 
 **Core Values:**
 Empathy, Authenticity, Curiosity, Integrity, Leadership
