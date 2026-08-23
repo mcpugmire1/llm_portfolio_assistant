@@ -1,11 +1,15 @@
 # --------------------------------------------------------
-# REMINDER:
-# Before running, update:
-#   INPUT_EXCEL_FILE – path to the latest Excel export
-#   SHEET_NAME – usually "STAR Stories - Interview Ready"
-#   DRY_RUN – set to False to write output / True to preview only
-# Only run if new or updated stories need to be synced.
-# This script PRESERVES existing public_tags, content, and IDs.
+# Ingestion: Excel master -> echo_star_stories.jsonl
+#
+# Input:    the current master xlsx in repo root, auto-detected by glob.
+#           Run refresh_master.py DDMONYY first to place it.
+# Sheet:    SHEET_NAME below (usually "STAR Stories - Interview Ready").
+# Dry-run:  set DRY_RUN = True to preview without writing.
+# Backups:  the previous JSONL is copied to archive/jsonl-backups/ before
+#           overwrite. Repo root stays clean.
+#
+# Preserves existing public_tags, content, and IDs.
+# Only run when new or updated stories need to be synced.
 # --------------------------------------------------------
 
 import json
@@ -13,15 +17,31 @@ import os
 import re
 import shutil
 from datetime import UTC, datetime
+from pathlib import Path
 
 import pandas as pd
 
 # ---------- config ----------
 
-INPUT_EXCEL_FILE = "MPugmire - STAR Stories - 16AUG26.xlsx"  # <-- update as needed
+# Auto-detect the current master. refresh_master.py enforces that
+# exactly one file matches this pattern in the repo root by archiving any
+# previous master before copying the new one in. If this assertion fails,
+# either two masters are present (run refresh_master again) or none are
+# (run refresh_master with the current date).
+_MASTER_MATCHES = sorted(Path(".").glob("MPugmire - STAR Stories - *.xlsx"))
+if len(_MASTER_MATCHES) != 1:
+    raise SystemExit(
+        f"Expected exactly one master xlsx in repo root, found {len(_MASTER_MATCHES)}: "
+        f"{[m.name for m in _MASTER_MATCHES]}. "
+        "Run refresh_master.py DDMONYY to normalize."
+    )
+INPUT_EXCEL_FILE = str(_MASTER_MATCHES[0])
 OUTPUT_JSONL_FILE = "echo_star_stories.jsonl"
 SHEET_NAME = "STAR Stories - Interview Ready"
 DRY_RUN = False  # ✅ Change to False when ready to write output
+
+# Backups land in archive/jsonl-backups/ (gitignored). Repo root stays clean.
+ARCHIVE_BACKUPS_DIR = Path("archive/jsonl-backups")
 
 # ---------- helpers ----------
 
@@ -50,7 +70,9 @@ def load_existing_jsonl(path: str):
 def backup_file(path: str):
     if os.path.exists(path):
         ts = datetime.now(UTC).strftime("%Y-%m-%dT%H_%M_%SZ")
-        backup_path = f"{path}.bak-{ts}"
+        # Write directly into archive/jsonl-backups/ so backups never
+        # accumulate in repo root. Directory is expected to exist.
+        backup_path = str(ARCHIVE_BACKUPS_DIR / f"{Path(path).name}.bak-{ts}")
         shutil.copy2(path, backup_path)
         print(f"🛟 Backup written: {backup_path}")
 

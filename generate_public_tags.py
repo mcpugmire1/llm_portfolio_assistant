@@ -16,6 +16,7 @@ import json
 import os
 import shutil
 from datetime import UTC, datetime
+from pathlib import Path
 
 from dotenv import load_dotenv
 from openai import OpenAI
@@ -32,6 +33,9 @@ client = OpenAI(api_key=api_key, project=project_id, organization=org_id)
 INPUT_FILE = "echo_star_stories.jsonl"
 OUTPUT_FILE = "echo_star_stories_nlp.jsonl"  # Overwrites original after backup
 MODEL = "gpt-4o"  # Use GPT-4o for richer tags
+
+# Backups land in archive/jsonl-backups/ (gitignored). Repo root stays clean.
+ARCHIVE_BACKUPS_DIR = Path("archive/jsonl-backups")
 
 # Stories with these Era values describe independent/solo product engineering
 # work — no external client, no organizational stakeholders to coordinate.
@@ -172,9 +176,11 @@ def enrich_stories_with_nlp_tags():
             story["public_tags"] = ", ".join(sorted(all_tags))
             enriched_records.append(story)
 
-    # Backup before overwriting
+    # Backup before overwriting. Write directly into archive/jsonl-backups/
+    # so backups never accumulate in repo root. Directory is expected to exist.
     timestamp = datetime.now(UTC).strftime("%Y%m%d_%H%M%S")
-    backup_file = f"{OUTPUT_FILE.replace('.jsonl', '')}_backup_{timestamp}.jsonl"
+    backup_name = f"{OUTPUT_FILE.replace('.jsonl', '')}_backup_{timestamp}.jsonl"
+    backup_file = str(ARCHIVE_BACKUPS_DIR / backup_name)
     shutil.copy(INPUT_FILE, backup_file)
     print(f"\n📦 Backup created: {backup_file}")
 
