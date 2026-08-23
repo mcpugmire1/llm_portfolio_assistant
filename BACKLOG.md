@@ -91,7 +91,7 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-160](#mattgpt-160) | JD extractor clause-dropping — 7 of 23 requirements on demo JD lose qualifiers during extraction | Open | Medium | Bug | July 31, 2026 |
 | [MATTGPT-162](#mattgpt-162) | Embedding exception misclassified as low-confidence rejection — visitor sees no-match banner instead of error message | Open | High | Bug | August 3, 2026 |
 | [MATTGPT-163](#mattgpt-163) | Personal-query guard false positive — professional org questions intercepted as private family | Open | High | Bug | August 3, 2026 |
-| [MATTGPT-166](#mattgpt-166) | Arc stories invisible to entity-scoped queries — Fortune 500 Clients / Cross-Division placeholder metadata excluded from client filters | Open | Medium | Issue | August 3, 2026 |
+| [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
 | [MATTGPT-168](#mattgpt-168) | Slot 1 is amplified without regard to margin -- tie or near-tie at slot 1 gets 80% of the answer | Open | High | Bug | August 5, 2026 |
 | [MATTGPT-171](#mattgpt-171) | Phrase-aware matching: stopword-only phrases invisible to token-overlap scorer at any W_KW weight | Open | Low | Investigation | August 8, 2026 |
@@ -1516,25 +1516,25 @@ Option A recalibrates the classifier. Option B adds an upstream gate. They compo
 ---
 
 ### MATTGPT-166
-**Arc stories invisible to entity-scoped queries -- Fortune 500 Clients / Cross-Division placeholder metadata excluded from client filters**
+**Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect**
 
 - **Status:** Open
 - **Priority:** Medium
 - **Type:** Issue
 - **Logged:** August 3, 2026
 
-**Issue:** Arc stories -- corpus stories that document career-wide patterns rather than a single named engagement -- use `Client: Fortune 500 Clients` and `Division: Cross-Division` as metadata placeholders. These values do not match any specific client entity. When a query triggers entity filtering on a named client (JP Morgan, RBC, Fiserv, HSBC), arc stories are excluded from the retrieval pool entirely.
+**Reframing (August 19, 2026):** The original framing called this a defect. It isn't. `Fortune 500 Clients` and `Cross-Division` are intentional placeholders -- used for stories that cover NDA-protected engagements or multi-client patterns where no single client name applies. Putting a placeholder in the field was the right call; the code then needed to know that placeholder values are not real entity names. `is_generic_client()` in `client_utils.py` exists for exactly this reason. The exclusion from entity-filtered queries is a consequence of a deliberate authoring decision, not a gap.
 
-**Concrete example:** "Owning the P&L" is a story about financial accountability and commercial ownership across large engagements. It is directly relevant to JP Morgan, RBC, Fiserv, and HSBC client-scoped queries. It never surfaces for any of them because its Client metadata is `Fortune 500 Clients`, not a matching entity value.
+**The real question:** Whether arc stories should bypass entity filters -- not because they were miscategorized, but because they document patterns that are genuinely relevant to named-client queries even though no specific client is listed. "Owning the P&L" covers financial accountability across JP Morgan, RBC, Fiserv, and HSBC engagements. A visitor asking about JP Morgan can't find it by client filter because there is no JP Morgan entry to match.
 
-**Impact:** Queries scoped to any large named client miss arc stories that may be the most directly relevant content for demonstrating cross-engagement patterns (P&L ownership, executive stakeholder management, program governance). The entity filter, intended to tighten retrieval, is instead excluding high-signal stories.
+**Concrete example:** "Owning the P&L" -- P&L ownership, commercial accountability, cross-engagement financial governance. Relevant to any large named-client query. Unreachable via entity filter because `Client: Fortune 500 Clients` does not match any entity value.
 
 **Decision required -- three paths (do not implement before choosing):**
 - **A. Accept the tradeoff.** Arc stories are corpus-wide by design; entity filtering is for single-engagement precision. The two modes are intentionally separate. No fix.
-- **B. Wildcard arc-story metadata.** Entity filters return arc stories alongside entity-specific stories when their placeholder values match a defined arc-story pattern (e.g., `Client == "Fortune 500 Clients"` always passes entity filters). Simpler implementation; risk is surfacing arc stories on narrow queries where they reduce precision.
+- **B. Wildcard arc-story metadata.** Entity filters pass arc stories alongside entity-specific stories when `is_generic_client()` returns True. Simpler implementation; risk is surfacing arc stories on narrow queries where they reduce precision.
 - **C. Compound metadata.** Arc stories carry both the placeholder AND a list of the specific clients they cover. Entity filters match against the compound list. Most precise; most implementation effort; requires a corpus audit to populate the client lists.
 
-**Recommendation:** Evaluate Option A honestly first. If arc stories genuinely document patterns that are client-agnostic, excluding them from client-scoped queries may be the right behavior. If they are materially relevant to named-client queries (as the P&L story appears to be), Option B is the lowest-risk fix.
+**Recommendation:** Evaluate Option A honestly first. If arc stories genuinely document patterns that are client-agnostic, excluding them from client-scoped queries is correct behavior. If they are materially relevant to named-client queries (as the P&L story is), Option B is the lowest-risk fix. Option C is only worth the corpus work if precision matters enough to justify it.
 
 **Related -- code adjacency:** MATTGPT-146 (Professional Narrative stories leak into My Work via filter and search paths) is a different symptom but touches the same metadata-driven filtering code. Whoever works either ticket will be in the same module. Read both detail blocks before starting either.
 
