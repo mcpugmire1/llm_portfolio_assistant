@@ -115,7 +115,6 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-204](#mattgpt-204) | Two Explore Stories blank-state defects: corpus-load failure silent; Table view missing empty-state guard | Open | Low | Bug | August 18, 2026 |
 | [MATTGPT-205](#mattgpt-205) | BDD marathon flake: test_error_state_extraction_failure fails in marathon, passes in isolation | Open | Low | Bug (Test) | August 19, 2026 |
 | [MATTGPT-206](#mattgpt-206) | Eval suite ~1-in-70 stochastic flap; Q28 confirmed non-deterministic | Open | Medium | Bug (Test) | August 19, 2026 |
-| [MATTGPT-207](#mattgpt-207) | MATT_DNA grounding overhaul: employer chronology, client grouping, drift guards, fabrication fix | Done | Medium | Action | August 22, 2026 |
 | [MATTGPT-208](#mattgpt-208) | Career-shaped queries retrieve PN and Independent Project stories over actual work stories | Open | High | Bug | August 24, 2026 |
 | [MATTGPT-209](#mattgpt-209) | MATT_DNA drift guard passes for wrong reason: employer check searches whole string, not Career Arc block | Open | Low | Bug (Test) | August 24, 2026 |
 
@@ -2119,31 +2118,6 @@ Fix (full): Cards and Timeline both use `st.info` for the empty-state message, w
 **Surfaced during:** MATTGPT-165 Cycle A session (August 18, 2026). Out of scope for -165.
 
 **Cross-references:** MATTGPT-202 (`load_star_stories` error handling -- the Streamlit-context concern intentionally kept in `app.py`; defect 1 is that handling being broken).
-
----
-
-### MATTGPT-207
-**MATT_DNA grounding overhaul: employer chronology, client grouping, drift guards, fabrication fix**
-
-- **Status:** Done
-- **Priority:** Medium
-- **Type:** Action
-- **Files:** `services/backend_service.py` (MATT_DNA), `utils/validation.py` (drift guards)
-- **Logged:** August 22, 2026
-- **Resolved:** August 22, 2026 -- `d2618f3`
-
-**Scope shipped:**
-- WellFound Technology added to grounding as a named pre-Accenture employer.
-- "What Matt is NOT" block removed from MATT_DNA.
-- Career Arc rows restructured: one row per employer with dates (four employers total).
-- Career Eras first row now names the three pre-Accenture organizations explicitly.
-- Currently line replaced with the hero copy (consistent framing across surfaces).
-- Flat client list replaced with clients grouped by employer.
-- Drift guards added: assertions that catch stale grounding content at load time.
-
-**Fabrication fixed:** "What did Matt do before Accenture?" was asserting Matt worked at AT&T before Accenture -- a misread of an Accenture engagement that happened to involve AT&T as a client. The employer chronology restructure makes pre-Accenture work unambiguous.
-
-**Drift guard caveat (August 24, 2026):** The Employer check searches the whole MATT_DNA string, so an employer that is also a client (Cendian, AIU) passes via the client list without appearing in the Career Arc. The assertion should check the Career Arc or Career Eras blocks specifically. Filed as MATTGPT-209.
 
 ---
 
