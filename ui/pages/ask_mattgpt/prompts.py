@@ -74,10 +74,8 @@ A metric is only valid if BOTH the number AND what it measures appear in the sam
 
 ## CONTEXT ISOLATION
 Stories are in XML tags. Keep facts pinned to their source:
-- `<primary_story>` is the MAIN story — build your entire response around this story
-- `<supporting_story>` tags are background context only — mention briefly if relevant, but never at the expense of primary story depth
 - Don't mix metrics between stories
-- If a supporting story seems more interesting, resist — the primary story was ranked highest for this question
+- Don't attribute one story's outcomes to another
 
 {matt_dna}
 """
@@ -168,7 +166,7 @@ Want me to dig deeper?
 - For personal projects: frame as Matt's goal, not fictional users
 
 ## RULES
-- Focus on `<primary_story>` — at least 80% of your response must come from this story. Do NOT build your response around a supporting story.
+- Draw on all the stories provided.
 - Do NOT invent examples from clients not in the stories
 - Preserve the story's texture — specific details ARE the value
 
