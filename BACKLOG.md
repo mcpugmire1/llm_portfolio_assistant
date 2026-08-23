@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: 79f6d90 -->
+<!-- last-backlog-sync: 4c8d900 -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -10,10 +10,10 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-08-17)
 
 **NOW**
-1. **-163** — Professional org questions intercepted as private-family. Same class.
-2. **-162** — Embedding exception renders as no-match. Visitor concludes the corpus is thin when the app broke.
-3. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
-4. **-181** — WellFound F-22, Lockheed STRATCOM, Cendian B2B/EDI. Closes a JD-surfaced gap; practitioner vocabulary nothing else owns.
+1. **-208** — Career-shaped queries retrieve PN/Independent Project stories over actual work. High; affects the most common portfolio query pattern.
+2. **-163** — Professional org questions intercepted as private-family. Same class.
+3. **-162** — Embedding exception renders as no-match. Visitor concludes the corpus is thin when the app broke.
+4. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 5. **-128** — Source faithfulness. Never run. Last unverified thing on the runway; gates Role Match since Role Match is evidence-backed ratings.
 
 **NEXT** — Role Match, once the runway clears
@@ -24,7 +24,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 **LATER — tier 2:** corpus work
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
-New stories: -078, -091, -155, -022
+New stories: -078, -091, -155, -022 (-181 closed Aug 19)
 Meta: -079, -156, -096
 
 **LATER — tier 3:** blocked or dependent
@@ -33,7 +33,7 @@ Meta: -079, -156, -096
 **LATER — tier 4:** hygiene
 Dead code: -176, -183, -199, -201 · Hidden error: -204
 BDD flakes: -122, -131, -142, -145, -197, -198, -205
-Wrong-assertion test: -203
+Wrong-assertion test: -203 · -209 (drift guard searches wrong scope)
 Small refactors: -072, -140, -153, -086, -062, -082, -083, -084, -150, -060
 Infrastructure: -035, -039, -040, -045
 
@@ -99,7 +99,6 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-176](#mattgpt-176) | Dead code: zero-caller function, 200-line commented block, duplicate typed-alias map | Open | Low | Refactor | August 11, 2026 |
 | [MATTGPT-177](#mattgpt-177) | token_overlap_ratio bound violation — repeated in-vocab tokens inflate ratio above 1.0; docstring example independently wrong | Open | Medium | Bug | August 11, 2026 |
 | [MATTGPT-180](#mattgpt-180) | Test fixture blind spot: test_formatting.py, test_filters.py, test_scoring.py build on phantom schema and pass against it | Open | High | Bug | August 11, 2026 |
-| [MATTGPT-181](#mattgpt-181) | Early-career story slate (Well Found / F-22, Lockheed STRATCOM, Cendian B2B/EDI) -- closes pre-2005 corpus gap | Open | Medium | Action | August 12, 2026 |
 | [MATTGPT-183](#mattgpt-183) | has_metric filter dead -- nothing in UI sets it to True; remove rather than fix | Open | Low | Refactor | August 13, 2026 |
 | [MATTGPT-185](#mattgpt-185) | Query negation unsupported -- "outside of MattGPT" returns MattGPT stories | Open | Medium | Enhancement | August 13, 2026 |
 | [MATTGPT-187](#mattgpt-187) | diversify_results max_per_client parameter is documented but never implemented | Open | Medium | Bug | August 13, 2026 |
@@ -116,6 +115,9 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-204](#mattgpt-204) | Two Explore Stories blank-state defects: corpus-load failure silent; Table view missing empty-state guard | Open | Low | Bug | August 18, 2026 |
 | [MATTGPT-205](#mattgpt-205) | BDD marathon flake: test_error_state_extraction_failure fails in marathon, passes in isolation | Open | Low | Bug (Test) | August 19, 2026 |
 | [MATTGPT-206](#mattgpt-206) | Eval suite ~1-in-70 stochastic flap; Q28 confirmed non-deterministic | Open | Medium | Bug (Test) | August 19, 2026 |
+| [MATTGPT-207](#mattgpt-207) | MATT_DNA grounding overhaul: employer chronology, client grouping, drift guards, fabrication fix | Done | Medium | Action | August 22, 2026 |
+| [MATTGPT-208](#mattgpt-208) | Career-shaped queries retrieve PN and Independent Project stories over actual work stories | Open | High | Bug | August 24, 2026 |
+| [MATTGPT-209](#mattgpt-209) | MATT_DNA drift guard passes for wrong reason: employer check searches whole string, not Career Arc block | Open | Low | Bug (Test) | August 24, 2026 |
 
 ---
 
@@ -1755,67 +1757,6 @@ Specific location: `test_scoring.py:85` constructs a fixture dict using phantom 
 
 ---
 
-### MATTGPT-181
-**Early-career story slate: Well Found / F-22, Lockheed Martin STRATCOM, Cendian B2B/EDI -- closes pre-2005 corpus gap**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Action (story-writing)
-- **Logged:** August 12, 2026
-- **Parent ticket:** MATTGPT-079 (coverage gaps meta)
-- **Dependencies:** None (MATTGPT-161 closed, 79f6d90, August 19)
-
-**Issue:** The corpus currently starts at 2005 (Solution Architect level). Role Match assessments against requirements like "10+ years professional software development experience" return partial matches because no STAR story anchors the 1997-2005 individual-contributor period. Decision is (a) new STAR stories, not resume or LinkedIn fix. This is committed work with drafts pending.
-
-**Record scope:** Starts at 2000 by Matt's ruling, which extends the 1997-2005 framing from the 2005 resume. No de-aging; the history is the pitch. Drafts from Matt's firsthand account with the 2005 resume as evidence backbone.
-
-**Three-item slate (drafts pending):**
-1. Well Found Technology / F-22 origin -- early-career anchor; aerospace / defense context.
-2. Lockheed Martin STRATCOM -- carries the 2002 TDD and pairing conviction; foundational engineering philosophy thread.
-3. Cendian B2B/EDI -- Norfolk Southern ancestor; supply chain / B2B integration thread.
-
-**Primary source (August 18, 2026):** `MPugmire_Resume_2005.doc`, created January 12, 2005 -- the resume that produced the Accenture offer. Contemporaneous, not reconstructed from memory. Use as the evidence backbone for all three stories.
-
-**Slate detail from the resume:**
-
-WellFound Technology, F-22 CSAS/ECRS (06/00-12/01, Atlanta): Sustained and enhanced the daily ETL process for a hierarchical as-built parts-assembly configuration tracing database on the F-22 program. Oracle 8i stored procedures, packages, triggers, tables, views, functions in PL/SQL and SQL. C shell scripts orchestrating ETL execution. ERWIN for schema documentation. TIBCO InConcert infrastructure.
-
-Lockheed Martin STRATCOM / Mission Control Systems (11/02-10/03, Omaha): Real-time web-based Gantt chart application. Applet and JSP front end, TIBCO InConcert APIs, TIBCO BPM, Integration Manager, Active Database Adapter, Oracle 9i Application Server, Oracle 8i RDBMS. Oracle 8i PL/SQL packages, stored procedures, performance tuning. Use cases, sequence diagrams, test plans. The TDD and pairing conviction is confirmed verbatim in the 2005 document: "Performed test-driven development or unit testing at end of each development spiral, engaging customer, and practicing paired-programming concept." That is 2002-2003 practice, written down in 2005.
-
-Cendian Corporation (12/03-02/05): B2B and EAI integration for a global multi-modal logistics network serving chemical industry clients. ASC X12 EDIFACT transaction sets named explicitly: 214, 315, 210, 310, 410, 824, 990, across marine, rail, and truck modes. CIDX standards. WebMethods Trading Networks, Integration Server, Broker. Canonical business objects normalizing trading exchanges of different types into one XML format. Struts portal for carriers unable to integrate via EDI or XML. Transaction tracking system using web services, JAXB, JMS queue, message-driven bean on JBoss. XSL-FO document generation. This is the Norfolk Southern ancestor: rail transaction sets, multi-modal logistics, B2B integration.
-
-**Not currently in the slate -- decide before drafting:**
-- Adjunct Professor, American Intercontinental University (11/03-02/04): Taught entry-level HTML and Java Enterprise (Servlets, JSP, Tomcat, MVC architecture). Placement TBD after drafts surface.
-- Oracle Certified Professional (8i): This is the credential MATTGPT-079 flagged as evidence for the depth-of-experience gap. Decide whether it appears in a story body or surfaces only as a corpus tag.
-
-**Consequence for Role Match (August 18, 2026):** Requirement #7 in `structured_jd.txt` reads "Experience with modern relational and NoSQL databases (SQL Server, PostgreSQL, or Redis)" and currently scores partial (MATTGPT-080 verification, July 31). The resume carries SQL Server 2000 schema design and DDL at Accredited Home Lenders, Oracle 8i/9i across three engagements with PL/SQL packages and performance tuning, and Oracle Certified Professional. The slate should move Requirement #7 from partial toward strong on the relational side. PostgreSQL and Redis remain honest gaps.
-
-**Writing standard (August 18, 2026):** Use Case is front-loaded in `build_embedding_text` and capped at 600 characters -- write it in the vocabulary a hiring manager would type, not internal shorthand. Evidence from the Aug 15-17 vocabulary work: "Sev defect management" did not surface on Sev-1 queries; "Sev-1 defect and incident response" did. These stories should carry PL/SQL, ETL, EDI, ASC X12, XSD, XSLT, TDD, and pair programming explicitly, since nothing else in the corpus owns those terms.
-
-**Record scope note (confirmed August 18):** Starts at 2000 by Matt's ruling. Pre-2000 work at North Atlanta Medical Associates (05/97-06/00) is in the 2005 resume and out of scope for the slate.
-
-**UI/structure decisions (August 13-18, 2026):**
-
-Era decision -- resolved: Use option 1, extend "Integration & Platform Foundations" back from 2005 to 2000. The taxonomy already covers core engineering and integration foundations -- F-22 ETL, STRATCOM, and Cendian B2B fit exactly. No `ERA_ORDER` change needed in `timeline_view.py` (the value already exists); one field edit per new story. Set the Era field before ingestion; writing stories without it means a retroactive edit and re-embed.
-
-What self-populates (no code change needed): client dropdown in Explore Stories (Lockheed Martin, GE, Cendian auto-appear on next load), role dropdown, embedding schema, filter infrastructure, sort behavior, Pinecone metadata schema.
-
-MATT_DNA fix: MATTGPT-161 closed at 79f6d90 (August 19). `_CAREER_START_YEAR`, `_CAREER_END_YEAR`, and `_CAREER_SPAN_YEARS` are now derived in `sync_portfolio_metadata()` from the JSONL. Once the -181 slate lands, `_CAREER_START_YEAR` moves from 2005 to 2000 automatically.
-
-Well Found structural note: Two stints with a layoff gap in the middle (06/00-12/01 and 11/02-10/03, with the Lockheed Martin STRATCOM engagement in between). The Employer/Client pattern maps cleanly -- Well Found as employer, F-22 program as client context. Whether the two Well Found stints are one story or two is an editorial call to make before drafting, not after.
-
-Cendian distinction: Product/services company rather than pure consultancy -- closer to building Cendian's own platform than being placed at a client site. That's a different claim than the Accenture delivery pattern and may matter for product-role JDs. Preserve this distinction explicitly in the story framing.
-
-**Work:** Write three STAR drafts from Matt's firsthand account, cross-referenced against the 2005 resume. Before ingestion, verify each draft against the full JSONL authoring schema by reading an existing story from `data/echo_star_stories_nlp.jsonl` -- the authoring schema includes fields like `5PSummary`, `Competencies`, `Theme`, `Era`, and `public_tags` that the -179 code-to-JSONL mapping does not cover. Do not use the -179 table as the authoring spec; it is a formatter code translation, not an ingestion checklist.
-
-**Cross-references:**
-- **MATTGPT-161** -- career span derivation shipped at 79f6d90 (Aug 19); no longer a dependency
-- **MATTGPT-079** -- coverage gaps meta; pre-2005 gap tracked there as `[Decided]`
-- **MATTGPT-022** -- Data Quality Cleanup Journey (sibling story-writing ticket pattern)
-- **MATTGPT-078** -- AI Enablement Before It Had a Name (sibling story-writing ticket)
-
----
-
 ### MATTGPT-183
 **has_metric filter dead -- remove rather than fix**
 
@@ -2180,6 +2121,76 @@ Fix (full): Cards and Timeline both use `st.info` for the empty-state message, w
 **Cross-references:** MATTGPT-202 (`load_star_stories` error handling -- the Streamlit-context concern intentionally kept in `app.py`; defect 1 is that handling being broken).
 
 ---
+
+### MATTGPT-207
+**MATT_DNA grounding overhaul: employer chronology, client grouping, drift guards, fabrication fix**
+
+- **Status:** Done
+- **Priority:** Medium
+- **Type:** Action
+- **Files:** `services/backend_service.py` (MATT_DNA), `utils/validation.py` (drift guards)
+- **Logged:** August 22, 2026
+- **Resolved:** August 22, 2026 -- `d2618f3`
+
+**Scope shipped:**
+- WellFound Technology added to grounding as a named pre-Accenture employer.
+- "What Matt is NOT" block removed from MATT_DNA.
+- Career Arc rows restructured: one row per employer with dates (four employers total).
+- Career Eras first row now names the three pre-Accenture organizations explicitly.
+- Currently line replaced with the hero copy (consistent framing across surfaces).
+- Flat client list replaced with clients grouped by employer.
+- Drift guards added: assertions that catch stale grounding content at load time.
+
+**Fabrication fixed:** "What did Matt do before Accenture?" was asserting Matt worked at AT&T before Accenture -- a misread of an Accenture engagement that happened to involve AT&T as a client. The employer chronology restructure makes pre-Accenture work unambiguous.
+
+**Drift guard caveat (August 24, 2026):** The Employer check searches the whole MATT_DNA string, so an employer that is also a client (Cendian, AIU) passes via the client list without appearing in the Career Arc. The assertion should check the Career Arc or Career Eras blocks specifically. Filed as MATTGPT-209.
+
+---
+
+### MATTGPT-208
+**Career-shaped queries retrieve PN and Independent Project stories over actual work stories**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **Logged:** August 24, 2026
+
+**Issue:** On "tell me about Matt's career" and "tell me about Matt's early career", Professional Narrative and Independent Project stories occupy the top of the retrieval pool; actual work stories sit at ranks 6 and below. The visitor asking the most natural portfolio question gets positioning content instead of engagement evidence.
+
+**Four experiments, all measured, none resolved (August 23-24, 2026):**
+
+1. Removed all position-based amplification from `prompts.py`. Q4 answer composition shifted; Q1/Q2/Q3 unchanged. Eval 70/70. Committed `7ae53d5`. Does not fix the retrieval ranking.
+
+2. Disabled the narrative-mode Professional Narrative boost in `backend_service.py`. Slot 1 unchanged; slots 2-5 reordered; AT&T story moved from slot 3 to slot 2, which triggered an employer fabrication ("Matt worked at AT&T before Accenture"). Reverted. The boost was suppressing that failure by accident -- removing it exposed a latent grounding problem, not a retrieval fix.
+
+3. Moved the chronology sentence from Use Case tail into Situation opener on eight pre-2005 stories. Scores moved by 5-7 thousandths against a 0.11 gap. Text placement is not the lever.
+
+4. Added "background" to `_PN_EXCLUDED_FAMILIES`. Sparkfly and AIU moved up as intended, but MattGPT stories inherited the top of the pool and Q4 lost all Accenture content. Reverted. Excluding one class of meta-story promotes another.
+
+**Remaining untried:** Query-time boost on chronology markers for stories with early `Start_Date`. Not yet attempted.
+
+**Methodology note (August 23-24, 2026):** Single runs at temperature 0.4 cannot distinguish a real change from variance. Identical LLM calls produced materially different answers across runs; both the session and Code read signal into what was noise. Same class as the eval flap rate (MATTGPT-206, Q28 failed in both pre- and post-change states). Any fix attempt must use multiple runs before drawing conclusions.
+
+**Cross-references:** MATTGPT-206 (eval stochastic behavior -- same measurement discipline applies here).
+
+---
+
+### MATTGPT-209
+**MATT_DNA drift guard passes for wrong reason: employer check searches whole string, not Career Arc block**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Bug (Test)
+- **File:** `utils/validation.py` (drift guard assertions)
+- **Logged:** August 24, 2026
+
+**Issue:** The drift guard's Employer check searches the entire MATT_DNA string. An employer that is also a client (Cendian, AIU) passes the check via the client list without appearing in the Career Arc section. The assertion is satisfied for the wrong reason -- it cannot distinguish "employer appears in Career Arc" from "employer appears anywhere in the string."
+
+**Verified August 24, 2026:** Cendian and AIU currently pass this way. The Career Arc may or may not list them correctly; the guard cannot tell.
+
+**Fix:** Scope the assertion to the Career Arc or Career Eras block specifically. Parse or slice the relevant section before checking.
+
+**Cross-references:** MATTGPT-207 (drift guards shipped here; this is the known gap in that work).
 
 ### MATTGPT-205
 **BDD marathon flake: test_error_state_extraction_failure fails in marathon, passes in isolation**

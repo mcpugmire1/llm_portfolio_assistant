@@ -8,6 +8,16 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Ask Agy
 
+**August 22-24, 2026 — MATT_DNA grounding overhaul; nine early-career stories ingested; ingestion pipeline (MATTGPT-207, MATTGPT-181)** -- `d2618f3`, `4c8d900`
+
+MATTGPT-207 (`d2618f3`): MATT_DNA restructured. Career Arc rows now one per employer with dates (four employers: WellFound Technology 2000-2002, Lockheed Martin / Cendian 2002-2005, Accenture 2005-2023, Independent 2023-present). Career Eras first row names pre-Accenture organizations explicitly. "What Matt is NOT" block removed. Currently line replaced with hero copy. Flat client list replaced with clients grouped by employer. WellFound added to grounding as a named pre-Accenture employer. Drift guards added in `utils/validation.py`. Fixed a production fabrication: "what did Matt do before Accenture?" was returning AT&T as a pre-Accenture employer (misread of an Accenture-AT&T engagement). Known gap in drift guards filed as MATTGPT-209.
+
+MATTGPT-181 (`4c8d900`): Nine early-career STAR stories ingested covering 2000-2005: Sparkfly (pre-Accenture individual contributor anchor), F-22 / WellFound (ETL, PL/SQL, TIBCO), STRATCOM / Lockheed Martin (real-time Gantt, TDD and pairing verbatim from 2005 resume), Cendant Mortgage, Accredited Home Lenders, AIU (adjunct professor), and three Cendian B2B/EDI stories (ASC X12, WebMethods, multi-modal logistics -- Norfolk Southern ancestor). Corpus: 123 stories, 17 clients, five employers. Career span now reads 2000-2026; `_CAREER_START_YEAR` derived correctly from JSONL as intended by MATTGPT-161. Era "Technical Foundations & Enterprise Integration, 2000-2005" added to `ERA_ORDER` in `timeline_view.py`.
+
+Architecture standing rule (for Code to document in ARCHITECTURE.md): The Employer field carries two meanings -- who employed Matt during the work, and what period the story covers. For engagement stories these coincide. For arc stories they do not: "Why Hire Matt", "Transition Story", and "Career Intent" all carry `Employer=Accenture` but span dates beyond 2023. Any derivation driven by Employer must filter `Theme == "Professional Narrative"` to avoid returning stale end dates. Verified: that filter produces Accenture 2005-03 to 2023-09; unfiltered derivation returns 2026-08. Same principle applies to placeholder Client values (`Fortune 500 Clients`, `Independent Project`): deliberate, not mis-tagged.
+
+---
+
 **August 19, 2026 — Career span derived from corpus; hardcoded year-count removed from MATT_DNA (MATTGPT-161)** -- `79f6d90`
 
 `_CAREER_START_YEAR`, `_CAREER_END_YEAR`, and `_CAREER_SPAN_YEARS` are now derived in `sync_portfolio_metadata()` from the JSONL at startup alongside `SYNTHESIS_THEMES` and `_KNOWN_CLIENTS`. `MATT_DNA` prose updated: "18+ years" removed from the Accenture line; "+ years" removed from the Career Arc line. Accenture date range preserved. Debug print updated to read derived values.
