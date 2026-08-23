@@ -80,10 +80,15 @@ def then_every_employer_in_dna(ctx):
     assert not missing, (
         f"Employers present in the corpus but absent from MATT_DNA: {missing}."
         f" MATT_DNA is anti-hallucination grounding; an Employer that appears in"
-        f" the corpus but not in MATT_DNA lets the model reconcile that employer's"
-        f" stories against a stale timeline (Aug 20 2026 Sparkfly incident:"
-        f" WellFound Technology missing, model asserted AT&T-before-Accenture)."
-        f" Add the Employer to Career Arc and Career Eras in generate_dynamic_dna."
+        f" the corpus but not in MATT_DNA lets the model misclassify that"
+        f" employer's stories against a stale employer list. Aug 20 2026"
+        f" Sparkfly incident: Wellfound Technology was missing from MATT_DNA;"
+        f" on 'what did Matt do before Accenture' the model retrieved the AT&T"
+        f" Network Engineering story (Matt's first Accenture engagement,"
+        f" Employer=Accenture, Client=AT&T) and misclassified it as pre-Accenture"
+        f" *employment* rather than an Accenture engagement serving AT&T as a"
+        f" client. Add the Employer to Career Arc and Career Eras in"
+        f" generate_dynamic_dna."
     )
 
 

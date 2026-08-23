@@ -237,8 +237,46 @@ def generate_dynamic_dna(stories: list[dict], clients: set[str]) -> str:
     )
     p_count = practitioner_match.group(1) if practitioner_match else "150"
 
-    # Build client list
-    client_list = ", ".join(sorted(clients)) if clients else "Various clients"
+    # Derive clients grouped by employer (Aug 24 2026). Flat client list let
+    # the model infer employment from whichever client name dominated a story
+    # (verified: "his role at Sparkfly" on a Wellfound story; "At AT&T, Matt
+    # served as a Solution Architect" on an Accenture story). Grouping by
+    # employer establishes the mapping explicitly so the model can distinguish
+    # client engagement from employer.
+    #
+    # Employers whose only Client value equals the Employer itself
+    # (Cendian Chemical Logistics, American Intercontinental University) are
+    # omitted from this block -- they had no external clients, and the Career
+    # Arc row already establishes them as employers.
+    clients_by_employer: dict[str, set[str]] = {}
+    for s in stories:
+        emp = s.get("Employer", "")
+        client = s.get("Client", "")
+        if not emp or not client or client == emp:
+            continue
+        # Filter placeholder client values (Fortune 500 Clients, Independent
+        # Project). These are intentional -- they stand in for NDA and
+        # multi-client work -- so they belong in the corpus but not in a
+        # per-client list.
+        if is_generic_client(client):
+            continue
+        # Filter Professional Narrative arc stories. The Employer field
+        # carries two meanings: who employed Matt during the work, and what
+        # period the story covers. For engagement stories those coincide.
+        # For arc stories they do not -- "Why Hire Matt?" summarizes 18 years
+        # at Accenture; "Transition Story" spans 2023-09 to 2026-08 under
+        # Employer=Accenture. The schema cannot express this, so any
+        # derivation driven by Employer must exclude Professional Narrative.
+        # Verified Aug 21 2026 during MATTGPT-161 pre-flight.
+        if s.get("Theme") == "Professional Narrative":
+            continue
+        clients_by_employer.setdefault(emp, set()).add(client)
+
+    clients_by_employer_lines = "\n".join(
+        f"- {emp}: {', '.join(sorted(clients_by_employer[emp]))}"
+        for emp in sorted(clients_by_employer.keys())
+        if clients_by_employer[emp]
+    )
 
     # Derive themes list for the prompt
     themes_text = "\n".join(
@@ -284,13 +322,15 @@ def generate_dynamic_dna(stories: list[dict], clients: set[str]) -> str:
 
 **Career Arc:**
 Software Engineer → Solution Architect → Director → Cloud Innovation Center Leader
-- WellFound Technology: 2000 - 2001 (pre-Accenture startup platform work)
+- Wellfound Technology: 2000-2001, 2002-2003
+- American Intercontinental University: 2003-2004 (adjunct, taught alongside full-time work)
+- Cendian Chemical Logistics: 2003-2005
 - Accenture: March 2005 - September 2023
 - Built CIC from 0 to {p_count}+ practitioners (Atlanta, Tampa)
-- Currently: Sabbatical, building MattGPT, targeting senior product engineering leadership roles
+- Currently: Sabbatical, building MattGPT. In active search for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job.
 
 **Career Eras (for timeline context):**
-- 2000-2005: Pre-Accenture (WellFound Technology; startup platform for Sparkfly)
+- 2000-2005: Pre-Accenture (Wellfound Technology, American Intercontinental University, Cendian Chemical Logistics)
 - 2005-2009: Enterprise Integration ({telecom_str})
 - 2009-2018: Payments & Architecture ({banking_str})
 - 2018-2019: Cloud Innovation (Liquid Studio)
@@ -326,8 +366,8 @@ Software Engineer → Solution Architect → Director → Cloud Innovation Cente
 - Contributed to $189M cloud modernization win for a major public health agency (2022)
 - Builds capabilities that win work — differentiation through execution, not pursuit
 
-**Clients Matt Has Worked With (ONLY cite these):**
-{client_list}
+**Clients by Employer (ONLY cite these):**
+{clients_by_employer_lines}
 
 **NOT Matt's Clients (NEVER mention):**
 Kaiser, Google, Amazon, Microsoft, Meta, MetLife, Citizens Bank

@@ -4,10 +4,10 @@ Feature: MATT_DNA grounding drift guards + What-Matt-is-NOT removal (MATTGPT-207
   71c3d31 to fix a Kaiser/JPMorgan confabulation). The Sparkfly ingest on
   Aug 20 2026 exposed two drift classes:
 
-  1. Corpus content the grounding does not name (WellFound Technology is a
+  1. Corpus content the grounding does not name (Wellfound Technology is a
      new Employer; the block terminates at Accenture). The model reconciled
      an AT&T story against the stale grounding and asserted AT&T-before-
-     Accenture. Fix: add WellFound rows to Career Arc and Career Eras.
+     Accenture. Fix: add Wellfound rows to Career Arc and Career Eras.
 
   2. A hand-maintained "What Matt is NOT" block that has gone stale against
      the corpus and now overrides evidence. Verified in production Aug 20:
