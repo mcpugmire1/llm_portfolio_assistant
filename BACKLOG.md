@@ -2137,17 +2137,29 @@ Fix (full): Cards and Timeline both use `st.info` for the empty-state message, w
 
 **Two distinct failure modes -- treat separately.**
 
-**Case A: Broad career queries (no temporal marker)**
+**Case A: Broad career queries (no temporal marker) -- functionally done (August 24, 2026)**
 
 Example: "tell me about Matt's career"
 
-Current LLM set (verified August 24, 2026): Why Hire Matt, Cendian wind-down, AIU, MattGPT product vision, Owning the P&L. Four of five are positioning or meta-stories.
+Current LLM set (verified August 24, 2026, pre-fix): Why Hire Matt, Cendian wind-down, AIU, MattGPT product vision, Owning the P&L. Four of five are positioning or meta-stories.
 
 Pass condition: the set contains at least three engagement stories spanning at least three different eras. One positioning story as an anchor is acceptable.
 
-Candidate lever, untried: `diversify_results` currently spreads across clients. On broad career queries, spreading across Era would produce the breadth the query is asking for. No keyword matching required.
+**Green: era+kind diversify branch (August 24, 2026)**
 
-**Case B: Chronology queries (temporal marker present)**
+Full commit sequence:
+- Red: `f38cca1` -- 10 unit tests for target behavior
+- 3a: `75e3be5` -- SEARCH_TOP_K 10 to 25
+- 3b Green: `4309b38` -- era+kind diversify branch
+
+Lever: `diversify_results` now spreads across Era (and kind) on broad career queries in addition to clients. No keyword matching.
+
+Retrieval probe confirms Case A pass condition met. Three pre-push gates remain:
+1. In-app test: verify Ask Agy UI renders sensibly end-to-end for "tell me about Matt's career" and "tell me about Matt's early career". Probe confirms retrieval-side set; only the UI confirms the answer reads well.
+2. One clean eval run (per updated cost-consciousness rule). Single failure triaged against MATTGPT-206, not re-run to distinguish signal from noise.
+3. ARCHITECTURE.md sync: Green added a new diversify mode with a kind-classification pattern. Architecture Sync pass picks it up from the commit message. Not pushed.
+
+**Case B: Chronology queries (temporal marker present) -- open**
 
 Examples: "tell me about Matt's early career", "what did Matt do before Accenture"
 
