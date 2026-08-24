@@ -65,7 +65,7 @@ W_KW = 0.15  # Keyword overlap weight (raised from 0.0 Aug 8, 2026 -- f5641e7)
 # =============================================================================
 
 PINECONE_MIN_SIM = 0.15  # Minimum similarity for Pinecone results
-SEARCH_TOP_K = 10  # Stories to fetch from Pinecone (headroom for reranking/filtering)
+SEARCH_TOP_K = 25  # Stories to fetch from Pinecone (headroom for reranking/filtering)
 
 # Intent families where "Matt"/"Matt's" is substituted with "he"/"his" in the
 # retrieval query so self-referential name tokens don't bias embeddings toward
