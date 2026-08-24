@@ -82,7 +82,7 @@
 **Project:** MattGPT Portfolio Assistant - AI-powered career story search and chat interface
 **Tech Stack:** Streamlit, OpenAI GPT-4o, Pinecone vector DB, Python 3.11+
 **Data Corpus:** 100+ STAR-formatted transformation project stories
-**Last Updated:** August 18, 2026
+**Last Updated:** August 24, 2026
 
 ### What This Document Contains
 
@@ -280,11 +280,12 @@ def handle_ask_about_this(detail: dict):
 ```python
 # Era configuration
 ERA_ORDER = [
-    "Independent Product Development",           # 2024-2025
-    "Enterprise Innovation & Transformation",    # 2019-2023
-    "Cloud-Native Prototyping & Product Shaping", # 2018-2019
-    "Financial Services Platform Modernization", # 2008-2018
-    "Integration & Platform Foundations",        # 2005-2008
+    "Independent Product Development",                    # 2024-2025
+    "Enterprise Innovation & Transformation",             # 2019-2023
+    "Cloud-Native Prototyping & Product Shaping",         # 2018-2019
+    "Financial Services Platform Modernization",          # 2008-2018
+    "Integration & Platform Foundations",                 # 2005-2008
+    "Technical Foundations & Enterprise Integration",     # 2000-2005
 ]
 EXCLUDED_ERA = "Leadership & Professional Narrative"  # Not shown in timeline
 MAX_STORIES_PER_ERA = 6
@@ -595,7 +596,7 @@ User Query
 │ - Entity filter ($or across 6 fields) if hard   │
 │ - Title: NO filter (semantic search ranks it)   │
 │ - UI filters (industry, domain, role)           │
-│ - Returns top 10 candidates (SEARCH_TOP_K)      │
+│ - Returns top 25 candidates (SEARCH_TOP_K)      │
 │ - blend = 1.0·pc + 0.15·kw applied to ranking  │
 └─────────────────────────────────────────────────┘
     ↓
@@ -766,7 +767,7 @@ Per the CLAUDE.md "No Hardcoded Enums for Data-Derived Values" rule, the prior s
 - **Triggers:** Intent = client, behavioral, technical, background, general
 - **Retrieval:**
   1. User query → OpenAI embedding
-  2. Pinecone vector search (top 10, SEARCH_TOP_K) with multi-field entity filter if detected
+  2. Pinecone vector search (top 25, SEARCH_TOP_K) with multi-field entity filter if detected
   3. Confidence gating
   4. **Entity pinning:** If entity detected, pin matching story to #1 (title substring match for Division/Project, Pinecone score for Client/Employer)
   5. `diversify_results()` on remaining stories → named clients first, max 1 per client
@@ -858,7 +859,7 @@ Checks fields in order: Client, Employer, Division (Project and Place excluded �
 
 **1. Pinecone Search (services/pinecone_service.py)**
 ```
-query_vector → Pinecone.query(top_k=SEARCH_TOP_K, filter=entity_filters)  # 10
+query_vector → Pinecone.query(top_k=SEARCH_TOP_K, filter=entity_filters)  # 25
 ↓
 Returns: [(story_id, score, metadata), ...] sorted by cosine similarity
 ```
@@ -872,13 +873,28 @@ If entity detected AND matching story found:
 
 **3. Diversity Reordering (backend_service.py:diversify_results)**
 ```
-Standard/Behavioral modes only:
+Default (client-based) — standard/behavioral modes:
   - Pin #1 from Pinecone retrieval (highest semantic relevance)
   - For slots #2+: named clients first, then generic, then duplicates
-  - `max_per_client` is accepted but never read. The implementation prioritizes one story per client, then appends remaining same-client stories at the end of the result rather than dropping them. See MATTGPT-187.
-  - Skip for narrative mode (trust Pinecone semantic ranking)
-  - NO cross-query session state — diversify is deterministic per query
-    (removed May 18, 2026 per ADR 019 / MATTGPT-073)
+  - `max_per_client` is accepted but never read. Prioritizes one story
+    per client; additional same-client stories appended, not dropped.
+    See MATTGPT-187.
+  - NO cross-query session state — deterministic per query (MATTGPT-073)
+
+family="background" branch (MATTGPT-208, Aug 2026):
+  - Groups by Era instead of Client
+  - Why: client-based diversify treats each Client value as distinct,
+    so four Wellfound engagements filled four slots while collapsing to
+    one era. Verified Aug 24 -- Q_BROAD returned 6 of 7 slots from
+    Technical Foundations before this fix.
+  - Caps: <=1 Professional Narrative (counting pin), <=1 Independent
+    Project. ENGAGE era-duplicates fill remaining slots up to 7 by
+    blend order.
+  - Wired at: standard non-narrative no-entity path + empty-ranked
+    fallback. Entity-pinned and narrative paths retain client-based
+    behavior.
+
+Skip for narrative mode (trust Pinecone semantic ranking).
 ```
 
 **4. Final Selection**
@@ -1414,6 +1430,12 @@ Stories are stored in `echo_star_stories_nlp.jsonl` (100+ entries). Each line is
 - `Theme="Professional Narrative"` → Identity/philosophy stories
 - `Era="Leadership & Professional Narrative"` → Excluded from Timeline view
 
+**Employer field — dual meaning (standing rule, rediscovered three times):**
+`Employer` carries two meanings: who employed Matt during the work, and what period the story covers. For engagement stories these coincide. For arc stories they do not -- "Why Hire Matt" summarizes eighteen years at Accenture, "Transition Story" spans 2023-09 to 2026-08, "Career Intent" starts 2005-03, all tagged `Employer=Accenture`. These are not mis-tagged. Any derivation driven by `Employer` must filter `Theme == "Professional Narrative"` to exclude arc stories. An unfiltered derivation returns 2026-08 as the latest Accenture date; filtered returns 2023-09.
+
+**Placeholder Client values (standing rule):**
+`"Fortune 500 Clients"` and `"Independent Project"` are deliberate, standing in for NDA-protected and multi-client work. They are not miscategorizations. `is_generic_client()` exists precisely because of this choice. Do not "correct" them.
+
 ---
 
 ### Utils Modules (`utils/`)
@@ -1881,7 +1903,7 @@ Role Match columns (added April 2026):
 
 **Key Functions:**
 ```python
-def semantic_search(query: str, top_k: int = 10, filters: dict = None):
+def semantic_search(query: str, top_k: int = SEARCH_TOP_K, filters: dict = None):
     """
     1. Embed query with OpenAI
     2. Query Pinecone index
@@ -1894,7 +1916,7 @@ def get_pinecone_index():
 ```
 
 **Search Parameters:**
-- `top_k`: 10 (retrieve top 10 matches, from `SEARCH_TOP_K` in config/constants.py)
+- `top_k`: 25 (retrieve top 25 matches, from `SEARCH_TOP_K` in config/constants.py)
 - `min_similarity`: 0.15 (from `PINECONE_MIN_SIM` in config/constants.py)
 - `namespace`: "default"
 
@@ -1927,7 +1949,7 @@ filters = {
 def semantic_search(q: str, stories: list, top_k: int = SEARCH_TOP_K, filters: dict = None):
     """
     1. Embed query with text-embedding-3-small
-    2. Pinecone vector search (top_k from constants, default 10)
+    2. Pinecone vector search (top_k from constants, default 25)
     3. Confidence gating (HIGH=0.25, LOW=0.20)
     4. Return ranked stories with scores and confidence level
     """
