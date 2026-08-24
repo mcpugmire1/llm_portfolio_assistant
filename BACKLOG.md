@@ -2165,11 +2165,9 @@ Candidate lever, untried: query-time boost on chronology markers for stories wit
 
 **Methodology note (August 23-24, 2026):** Single runs at temperature 0.4 cannot distinguish a real change from variance. Identical LLM calls produced materially different answers across runs; both the session and Code read signal into what was noise. Same class as the eval flap rate (MATTGPT-206, Q28 failed in both pre- and post-change states). Any fix attempt must use multiple runs before drawing conclusions.
 
-**Q44 pattern (August 24, 2026 -- observed once, unconfirmed):** During MATTGPT-208 Case A verification, Q44_landing failed once in the third of three eval runs (69/70) with the same concept-cluster mechanism as Q28. Required 2 matches from ['permit to fail', 'psychological safety', 'failure', 'resistance', 'early failure']; LLM produced only 'permit to fail'. Runs 1 and 2 on identical code both passed Q44 in 70/70. One data point; not a pattern until reproduced across multiple states.
-
 **Gate reliability consequence:** A single clean 70/70 run does not prove correctness; a single failure does not prove regression. The eval gate requires multiple runs to be meaningful for any ticket that touches retrieval or LLM paths.
 
-**Cross-references:** MATTGPT-206 (eval stochastic behavior -- same measurement discipline applies here).
+**Cross-references:** MATTGPT-206 (eval stochastic behavior -- same measurement discipline applies here; Q44 stochastic observation logged there).
 
 ---
 
@@ -2228,6 +2226,8 @@ Candidate lever, untried: query-time boost on chronology markers for stories wit
 **Q28 pattern:** Asserts ground-truth concept cluster for "rapid prototyping for client products." Matched `prototype` alone in failing runs; second required phrase absent. Root cause is retrieval non-determinism or LLM sampling variance in concept-match extraction.
 
 **Q64 pattern:** 3 pre-Green passes, 1 post-Green fail, 1 post-Green pass -- inconclusive. Per eval discipline, 1 fail + 1 pass = noise. Not attributable to MATTGPT-161.
+
+**Q44 pattern (August 24, 2026 -- observed once, unconfirmed):** During MATTGPT-208 Case A verification, Q44_landing failed once in the third of three eval runs (69/70) with the same concept-cluster mechanism as Q28. Required 2 matches from ['permit to fail', 'psychological safety', 'failure', 'resistance', 'early failure']; LLM produced only 'permit to fail'. Runs 1 and 2 on identical code both passed Q44 in 70/70. One data point; not a pattern until reproduced across multiple states.
 
 **Gate reliability consequence:** A single clean 70/70 run does not prove correctness; a single failure does not prove regression. The eval gate requires multiple runs to be meaningful for any ticket that touches retrieval or LLM paths.
 
