@@ -1,0 +1,258 @@
+{
+  "query": "tell me about Matt's early career",
+  "top_k": 25,
+  "captured_from": "generate_208_fixtures.py",
+  "story_count": 25,
+  "pool": [
+    {
+      "id": "why-hire-matt|accenture",
+      "Title": "Why Hire Matt?",
+      "Client": "Accenture",
+      "Employer": "Accenture",
+      "Era": "Leadership & Professional Narrative",
+      "Theme": "Professional Narrative",
+      "pc": 0.4335,
+      "kw": 0.5
+    },
+    {
+      "id": "about-matt-my-leadership-journey|accenture",
+      "Title": "About Matt \u2013 My Leadership Journey",
+      "Client": "Accenture",
+      "Employer": "Accenture",
+      "Era": "Leadership & Professional Narrative",
+      "Theme": "Professional Narrative",
+      "pc": 0.4268,
+      "kw": 0.5
+    },
+    {
+      "id": "transition-story-why-im-exploring-opportunities|accenture",
+      "Title": "Transition Story \u2013 Why I\u2019m Exploring Opportunities",
+      "Client": "Accenture",
+      "Employer": "Accenture",
+      "Era": "Leadership & Professional Narrative",
+      "Theme": "Professional Narrative",
+      "pc": 0.4049,
+      "kw": 0.25
+    },
+    {
+      "id": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project",
+      "Title": "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+      "Client": "Independent Project",
+      "Employer": "Sabbatical",
+      "Era": "Independent Product Development",
+      "Theme": "Execution & Delivery",
+      "pc": 0.4026,
+      "kw": 0.125
+    },
+    {
+      "id": "mattgpt-human-centered-ux-design-information-architecture|independent-project",
+      "Title": "MattGPT: Human-Centered UX Design & Information Architecture",
+      "Client": "Independent Project",
+      "Employer": "Sabbatical",
+      "Era": "Independent Product Development",
+      "Theme": "Strategic & Advisory",
+      "pc": 0.3558,
+      "kw": 0.125
+    },
+    {
+      "id": "building-sparkflys-platform-alongside-its-founder|sparkfly",
+      "Title": "Building Sparkfly's Platform Alongside Its Founder",
+      "Client": "Sparkfly",
+      "Employer": "Wellfound Technology",
+      "Era": "Technical Foundations & Enterprise Integration",
+      "Theme": "Execution & Delivery",
+      "pc": 0.3307,
+      "kw": 0.25
+    },
+    {
+      "id": "delivering-through-a-companys-wind-down|cendian-chemical-logistics",
+      "Title": "Delivering Through a Company's Wind-Down",
+      "Client": "Cendian Chemical Logistics",
+      "Employer": "Cendian Chemical Logistics",
+      "Era": "Technical Foundations & Enterprise Integration",
+      "Theme": "Professional Narrative",
+      "pc": 0.2958,
+      "kw": 0.25
+    },
+    {
+      "id": "building-effective-ai-assisted-development-workflows|independent-project",
+      "Title": "Building Effective AI-Assisted Development Workflows",
+      "Client": "Independent Project",
+      "Employer": "Sabbatical",
+      "Era": "Independent Product Development",
+      "Theme": "Emerging Tech",
+      "pc": 0.3274,
+      "kw": 0.0
+    },
+    {
+      "id": "teaching-entry-level-developers-to-build-their-first-java-web-application|american-intercontinental-university",
+      "Title": "Teaching Entry-Level Developers to Build Their First Java Web Application",
+      "Client": "American Intercontinental University",
+      "Employer": "American Intercontinental University",
+      "Era": "Technical Foundations & Enterprise Integration",
+      "Theme": "Talent & Enablement",
+      "pc": 0.326,
+      "kw": 0.0
+    },
+    {
+      "id": "career-intent-what-im-looking-for-next|independent-project",
+      "Title": "Career Intent \u2013 What I\u2019m Looking For Next",
+      "Client": "Independent Project",
+      "Employer": "Accenture",
+      "Era": "Leadership & Professional Narrative",
+      "Theme": "Professional Narrative",
+      "pc": 0.2821,
+      "kw": 0.25
+    },
+    {
+      "id": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients",
+      "Title": "Leading People: From Delivery Teams to a 150-Person Organization",
+      "Client": "Fortune 500 Clients",
+      "Employer": "Accenture",
+      "Era": "Enterprise Innovation & Transformation",
+      "Theme": "Talent & Enablement",
+      "pc": 0.2981,
+      "kw": 0.125
+    },
+    {
+      "id": "what-i-learned-about-assumptions|fortune-500-clients",
+      "Title": "What I Learned About Assumptions",
+      "Client": "Fortune 500 Clients",
+      "Employer": "Accenture",
+      "Era": "Leadership & Professional Narrative",
+      "Theme": "Professional Narrative",
+      "pc": 0.2775,
+      "kw": 0.25
+    },
+    {
+      "id": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture",
+      "Title": "Why Early Failure Is a Feature, Not a Bug, in Innovation",
+      "Client": "Accenture",
+      "Employer": "Accenture",
+      "Era": "Leadership & Professional Narrative",
+      "Theme": "Professional Narrative",
+      "pc": 0.2725,
+      "kw": 0.25
+    },
+    {
+      "id": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients",
+      "Title": "Owning the P&L: From Engagement Margin to Center Cost Base",
+      "Client": "Fortune 500 Clients",
+      "Employer": "Accenture",
+      "Era": "Enterprise Innovation & Transformation",
+      "Theme": "Execution & Delivery",
+      "pc": 0.3019,
+      "kw": 0.0
+    },
+    {
+      "id": "mentoring-underserved-high-school-students-into-technology-careers|accenture",
+      "Title": "Mentoring Underserved High School Students into Technology Careers",
+      "Client": "Accenture",
+      "Employer": "Accenture",
+      "Era": "Enterprise Innovation & Transformation",
+      "Theme": "Talent & Enablement",
+      "pc": 0.2704,
+      "kw": 0.125
+    },
+    {
+      "id": "keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin",
+      "Title": "Keeping the F-22's As-Built Configuration Data Accurate",
+      "Client": "Lockheed Martin",
+      "Employer": "Wellfound Technology",
+      "Era": "Technical Foundations & Enterprise Integration",
+      "Theme": "Execution & Delivery",
+      "pc": 0.2859,
+      "kw": 0.0
+    },
+    {
+      "id": "i-let-speed-win-over-structure-heres-how-i-fixed-it|independent-project",
+      "Title": "I Let Speed Win Over Structure. Here's How I Fixed It.",
+      "Client": "Independent Project",
+      "Employer": "Sabbatical",
+      "Era": "Independent Product Development",
+      "Theme": "Execution & Delivery",
+      "pc": 0.2837,
+      "kw": 0.0
+    },
+    {
+      "id": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture",
+      "Title": "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Client": "Accenture",
+      "Employer": "Accenture",
+      "Era": "Enterprise Innovation & Transformation",
+      "Theme": "Talent & Enablement",
+      "pc": 0.2828,
+      "kw": 0.0
+    },
+    {
+      "id": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage",
+      "Title": "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+      "Client": "Cendant Mortgage",
+      "Employer": "Wellfound Technology",
+      "Era": "Technical Foundations & Enterprise Integration",
+      "Theme": "Execution & Delivery",
+      "pc": 0.2822,
+      "kw": 0.0
+    },
+    {
+      "id": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders",
+      "Title": "Building an HR Portal for a Subprime Lender Scaling Faster Than It Could Hire",
+      "Client": "Accredited Home Lenders",
+      "Employer": "Wellfound Technology",
+      "Era": "Technical Foundations & Enterprise Integration",
+      "Theme": "Execution & Delivery",
+      "pc": 0.2704,
+      "kw": 0.0
+    },
+    {
+      "id": "driving-modern-software-engineering-with-project-octane|accenture",
+      "Title": "Driving Modern Software Engineering with Project Octane",
+      "Client": "Accenture",
+      "Employer": "Accenture",
+      "Era": "Cloud-Native Prototyping & Product Shaping",
+      "Theme": "Execution & Delivery",
+      "pc": 0.2624,
+      "kw": 0.0
+    },
+    {
+      "id": "launching-a-self-paced-learning-program-for-emerging-technologies|accenture",
+      "Title": "Launching a Self-Paced Learning Program for Emerging Technologies",
+      "Client": "Accenture",
+      "Employer": "Accenture",
+      "Era": "Enterprise Innovation & Transformation",
+      "Theme": "Talent & Enablement",
+      "pc": 0.2606,
+      "kw": 0.0
+    },
+    {
+      "id": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture",
+      "Title": "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+      "Client": "Accenture",
+      "Employer": "Accenture",
+      "Era": "Cloud-Native Prototyping & Product Shaping",
+      "Theme": "Talent & Enablement",
+      "pc": 0.2605,
+      "kw": 0.0
+    },
+    {
+      "id": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern",
+      "Title": "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Client": "Norfolk Southern",
+      "Employer": "Accenture",
+      "Era": "Enterprise Innovation & Transformation",
+      "Theme": "Org & Working-Model Transformation",
+      "pc": 0.2603,
+      "kw": 0.0
+    },
+    {
+      "id": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc",
+      "Title": "Driving HSBC's Mortgage Transformation from Assessment to $10M Contract",
+      "Client": "HSBC",
+      "Employer": "Accenture",
+      "Era": "Financial Services Platform Modernization",
+      "Theme": "Strategic & Advisory",
+      "pc": 0.2602,
+      "kw": 0.0
+    }
+  ]
+}

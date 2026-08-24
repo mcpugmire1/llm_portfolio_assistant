@@ -109,7 +109,7 @@ class TestScoreStoryForPrompt:
             pytest.skip("_score_story_for_prompt not available")
 
         score = _score_story_for_prompt(sample_stories[0], "test query")
-        assert isinstance(score, (int, float))
+        assert isinstance(score, int | float)
         assert score >= 0
 
     def test_zero_score_for_no_matches(self):
@@ -209,6 +209,165 @@ class TestDiversifyResults:
 
         diversified = diversify_results(diverse_results, max_per_client=2)
         assert len(diversified) == 3
+
+
+class TestDiversifyResultsBackgroundFamily:
+    """Tests for diversify_results(family="background") — MATTGPT-208 Case A.
+
+    Case A pass condition: at least three engagement stories spanning at least
+    three eras across the first five slots, with at most one positioning
+    (META-PN) story. The pin at slot 1 counts as the positioning anchor.
+
+    Kind classification:
+    - META-PN:  Theme == "Professional Narrative"
+    - META-IND: Employer == "Sabbatical"
+    - ENGAGE:   everything else
+
+    Rule under family="background":
+    - Pin slot 1 (top blend). Record its kind toward the cap.
+    - Walk rest in blend order:
+        - Drop if META-PN cap consumed (>=1 total counting pin)
+        - Drop if META-IND cap consumed (>=1 total)
+        - Keep if era is new (advance kind cap counters)
+        - Drop if era already seen AND story is META
+        - Defer to overflow if era already seen AND story is ENGAGE
+    - Fill remaining slots up to 7 total from deferred ENGAGE duplicates
+      in blend order.
+    """
+
+    @staticmethod
+    def _load_pool(name):
+        import json
+        from pathlib import Path
+
+        path = Path(__file__).parent / "fixtures" / f"mattgpt208_pool_{name}.json"
+        return json.loads(path.read_text())["pool"]
+
+    @staticmethod
+    def _kind(story):
+        if story.get("Theme") == "Professional Narrative":
+            return "META-PN"
+        if story.get("Employer") == "Sabbatical":
+            return "META-IND"
+        return "ENGAGE"
+
+    # --- Q_BROAD: "tell me about Matt's career" ---
+
+    def test_broad_engagement_count_in_first_five(self):
+        from ui.pages.ask_mattgpt.backend_service import diversify_results
+
+        pool = self._load_pool("broad")
+        result = diversify_results(pool, family="background")
+        first_five = result[:5]
+        engagement = [s for s in first_five if self._kind(s) == "ENGAGE"]
+        assert len(engagement) >= 3, (
+            f"Case A requires >=3 engagement stories in first 5, got {len(engagement)}. "
+            f"Kinds: {[self._kind(s) for s in first_five]}. "
+            f"Titles: {[s.get('Title') for s in first_five]}"
+        )
+
+    def test_broad_era_diversity_in_first_five(self):
+        from ui.pages.ask_mattgpt.backend_service import diversify_results
+
+        pool = self._load_pool("broad")
+        result = diversify_results(pool, family="background")
+        eras = {s.get("Era") for s in result[:5]}
+        assert (
+            len(eras) >= 3
+        ), f"Case A requires >=3 distinct eras in first 5, got {len(eras)}: {eras}"
+
+    def test_broad_positioning_capped_at_one(self):
+        from ui.pages.ask_mattgpt.backend_service import diversify_results
+
+        pool = self._load_pool("broad")
+        result = diversify_results(pool, family="background")
+        positioning = [s for s in result if self._kind(s) == "META-PN"]
+        assert len(positioning) <= 1, (
+            f"Case A requires <=1 positioning (META-PN), got {len(positioning)}. "
+            f"Titles: {[s.get('Title') for s in positioning]}"
+        )
+
+    def test_broad_meta_ind_capped_at_one(self):
+        from ui.pages.ask_mattgpt.backend_service import diversify_results
+
+        pool = self._load_pool("broad")
+        result = diversify_results(pool, family="background")
+        meta_ind = [s for s in result if self._kind(s) == "META-IND"]
+        assert len(meta_ind) <= 1, (
+            f"META-IND cap is 1, got {len(meta_ind)}. "
+            f"Titles: {[s.get('Title') for s in meta_ind]}"
+        )
+
+    # --- Q_EARLY: "tell me about Matt's early career" ---
+    # (This is Case B territory for chronology; Case A pass conditions still apply.)
+
+    def test_early_engagement_count_in_first_five(self):
+        from ui.pages.ask_mattgpt.backend_service import diversify_results
+
+        pool = self._load_pool("early")
+        result = diversify_results(pool, family="background")
+        first_five = result[:5]
+        engagement = [s for s in first_five if self._kind(s) == "ENGAGE"]
+        assert len(engagement) >= 3, (
+            f"Case A requires >=3 engagement stories in first 5, got {len(engagement)}. "
+            f"Kinds: {[self._kind(s) for s in first_five]}. "
+            f"Titles: {[s.get('Title') for s in first_five]}"
+        )
+
+    def test_early_era_diversity_in_first_five(self):
+        from ui.pages.ask_mattgpt.backend_service import diversify_results
+
+        pool = self._load_pool("early")
+        result = diversify_results(pool, family="background")
+        eras = {s.get("Era") for s in result[:5]}
+        assert (
+            len(eras) >= 3
+        ), f"Case A requires >=3 distinct eras in first 5, got {len(eras)}: {eras}"
+
+    def test_early_positioning_capped_at_one(self):
+        from ui.pages.ask_mattgpt.backend_service import diversify_results
+
+        pool = self._load_pool("early")
+        result = diversify_results(pool, family="background")
+        positioning = [s for s in result if self._kind(s) == "META-PN"]
+        assert len(positioning) <= 1, (
+            f"Case A requires <=1 positioning (META-PN), got {len(positioning)}. "
+            f"Titles: {[s.get('Title') for s in positioning]}"
+        )
+
+    def test_early_meta_ind_capped_at_one(self):
+        from ui.pages.ask_mattgpt.backend_service import diversify_results
+
+        pool = self._load_pool("early")
+        result = diversify_results(pool, family="background")
+        meta_ind = [s for s in result if self._kind(s) == "META-IND"]
+        assert len(meta_ind) <= 1
+
+    # --- Regression: non-background family preserves current client-based path ---
+
+    def test_family_none_matches_default_client_based(self, sample_search_results):
+        """When family is None, existing client-based logic runs unchanged."""
+        from ui.pages.ask_mattgpt.backend_service import diversify_results
+
+        result_default = diversify_results(sample_search_results, max_per_client=1)
+        result_none = diversify_results(
+            sample_search_results, max_per_client=1, family=None
+        )
+        assert [s.get("id") for s in result_default] == [
+            s.get("id") for s in result_none
+        ]
+
+    def test_non_background_family_uses_client_based(self, sample_search_results):
+        """A family other than 'background' behaves same as no family."""
+        from ui.pages.ask_mattgpt.backend_service import diversify_results
+
+        result_default = diversify_results(sample_search_results, max_per_client=1)
+        result_tech = diversify_results(
+            sample_search_results, max_per_client=1, family="technical"
+        )
+        assert [s.get("id") for s in result_default] == [
+            s.get("id") for s in result_tech
+        ]
 
 
 class TestLogOffdomain:
@@ -375,10 +534,7 @@ class TestSendToBackend:
     def test_delegates_to_rag_answer(self, sample_stories, mock_streamlit):
         """Should delegate to rag_answer() function."""
         try:
-            from ui.pages.ask_mattgpt.backend_service import (
-                rag_answer,
-                send_to_backend,
-            )
+            from ui.pages.ask_mattgpt.backend_service import send_to_backend
         except ImportError:
             pytest.skip("send_to_backend not available")
 
