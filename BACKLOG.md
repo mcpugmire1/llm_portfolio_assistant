@@ -10,11 +10,10 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-08-17)
 
 **NOW**
-1. **-208** — Career-shaped queries retrieve PN/Independent Project stories over actual work. High; affects the most common portfolio query pattern.
-2. **-163** — Professional org questions intercepted as private-family. Same class.
-3. **-162** — Embedding exception renders as no-match. Visitor concludes the corpus is thin when the app broke.
-4. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
-5. **-128** — Source faithfulness. Never run. Last unverified thing on the runway; gates Role Match since Role Match is evidence-backed ratings.
+1. **-163** — Professional org questions intercepted as private-family. High; same class as -208.
+2. **-162** — Embedding exception renders as no-match. Visitor concludes the corpus is thin when the app broke.
+3. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+4. **-128** — Source faithfulness. Never run. Last unverified thing on the runway; gates Role Match since Role Match is evidence-backed ratings.
 
 **NEXT** — Role Match, once the runway clears
 -160 (extractor dropping qualifiers on 7 of 23) · -173 (malformed and comp-only JD behavior) · -159 (sequential gpt-4o loop) · -014 (34 skipped integration scenarios) · -089 (location, work-model, availability) · -012 (Private View Phase 4) · -081 (corrective actions by asset type) · -099 (comp handling) · -017 (logging scenarios)
@@ -115,8 +114,8 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-204](#mattgpt-204) | Two Explore Stories blank-state defects: corpus-load failure silent; Table view missing empty-state guard | Open | Low | Bug | August 18, 2026 |
 | [MATTGPT-205](#mattgpt-205) | BDD marathon flake: test_error_state_extraction_failure fails in marathon, passes in isolation | Open | Low | Bug (Test) | August 19, 2026 |
 | [MATTGPT-206](#mattgpt-206) | Eval suite ~1-in-70 stochastic flap; Q28 confirmed non-deterministic | Open | Medium | Bug (Test) | August 19, 2026 |
-| [MATTGPT-208](#mattgpt-208) | Career-shaped queries retrieve PN and Independent Project stories over actual work stories | Open | High | Bug | August 24, 2026 |
 | [MATTGPT-209](#mattgpt-209) | MATT_DNA drift guard passes for wrong reason: employer check searches whole string, not Career Arc block | Open | Low | Bug (Test) | August 24, 2026 |
+| [MATTGPT-210](#mattgpt-210) | Ask Agy landing page suggestion chips are static; stories like STRATCOM invisible on career queries | Open | Low | Enhancement | August 24, 2026 |
 
 ---
 
@@ -2127,67 +2126,6 @@ Fix (full): Cards and Timeline both use `st.info` for the empty-state message, w
 
 ---
 
-### MATTGPT-208
-**Career-shaped queries retrieve PN and Independent Project stories over actual work stories**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Bug
-- **Logged:** August 24, 2026
-
-**Two distinct failure modes -- treat separately.**
-
-**Case A: Broad career queries (no temporal marker) -- functionally done (August 24, 2026)**
-
-Example: "tell me about Matt's career"
-
-Current LLM set (verified August 24, 2026, pre-fix): Why Hire Matt, Cendian wind-down, AIU, MattGPT product vision, Owning the P&L. Four of five are positioning or meta-stories.
-
-Pass condition: the set contains at least three engagement stories spanning at least three different eras. One positioning story as an anchor is acceptable.
-
-**Green: era+kind diversify branch (August 24, 2026)**
-
-Full commit sequence:
-- Red: `f38cca1` -- 10 unit tests for target behavior
-- 3a: `75e3be5` -- SEARCH_TOP_K 10 to 25
-- 3b Green: `4309b38` -- era+kind diversify branch
-
-Lever: `diversify_results` now spreads across Era (and kind) on broad career queries in addition to clients. No keyword matching.
-
-Retrieval probe confirms Case A pass condition met. Three pre-push gates remain:
-1. In-app test: verify Ask Agy UI renders sensibly end-to-end for "tell me about Matt's career" and "tell me about Matt's early career". Probe confirms retrieval-side set; only the UI confirms the answer reads well.
-2. One clean eval run (per updated cost-consciousness rule). Single failure triaged against MATTGPT-206, not re-run to distinguish signal from noise.
-3. ARCHITECTURE.md sync: Green added a new diversify mode with a kind-classification pattern. Architecture Sync pass picks it up from the commit message. Not pushed.
-
-**Case B: Chronology queries (temporal marker present) -- open**
-
-Examples: "tell me about Matt's early career", "what did Matt do before Accenture"
-
-Current LLM set on "early career" (verified August 24, 2026): Why Hire Matt, Sparkfly, AIU, MattGPT, Leading People. Two of nine early stories reach the pool, both at ranks 6 and 8.
-
-Pass condition: at least three pre-2005 stories in the set, spanning more than one employer.
-
-Candidate lever, untried: query-time boost on chronology markers for stories with early `Start_Date`. Note this reintroduces keyword matching, the pattern removed in the January simplification work.
-
-**Production observation (August 24, 2026):** On "what did Matt do before Accenture", the answer is currently correct and comes almost entirely from MATT_DNA's Career Arc rows, not from retrieval. The pool contains no pre-2005 stories. This means chronology questions are partly a metadata question the grounding can answer; the retrieval fix would add texture and evidence rather than correctness.
-
-**Four experiments, all measured, none resolved (August 23-24, 2026):**
-
-1. Removed all position-based amplification from `prompts.py`. Q4 answer composition shifted; Q1/Q2/Q3 unchanged. Eval 70/70. Committed `7ae53d5`. Does not fix the retrieval ranking.
-
-2. Disabled the narrative-mode Professional Narrative boost in `backend_service.py`. Slot 1 unchanged; slots 2-5 reordered; AT&T story moved from slot 3 to slot 2, which triggered an employer fabrication ("Matt worked at AT&T before Accenture"). Reverted. The boost was suppressing that failure by accident -- removing it exposed a latent grounding problem, not a retrieval fix.
-
-3. Moved the chronology sentence from Use Case tail into Situation opener on eight pre-2005 stories. Scores moved by 5-7 thousandths against a 0.11 gap. Text placement is not the lever.
-
-4. Added "background" to `_PN_EXCLUDED_FAMILIES`. Sparkfly and AIU moved up as intended, but MattGPT stories inherited the top of the pool and Q4 lost all Accenture content. Reverted. Excluding one class of meta-story promotes another.
-
-**Methodology note (August 23-24, 2026):** Single runs at temperature 0.4 cannot distinguish a real change from variance. Identical LLM calls produced materially different answers across runs; both the session and Code read signal into what was noise. Same class as the eval flap rate (MATTGPT-206, Q28 failed in both pre- and post-change states). Any fix attempt must use multiple runs before drawing conclusions.
-
-**Gate reliability consequence:** A single clean 70/70 run does not prove correctness; a single failure does not prove regression. The eval gate requires multiple runs to be meaningful for any ticket that touches retrieval or LLM paths.
-
-**Cross-references:** MATTGPT-206 (eval stochastic behavior -- same measurement discipline applies here; Q44 stochastic observation logged there).
-
----
 
 ### MATTGPT-209
 **MATT_DNA drift guard passes for wrong reason: employer check searches whole string, not Career Arc block**
@@ -2205,6 +2143,27 @@ Candidate lever, untried: query-time boost on chronology markers for stories wit
 **Fix:** Scope the assertion to the Career Arc or Career Eras block specifically. Parse or slice the relevant section before checking.
 
 **Cross-references:** MATTGPT-207 (drift guards shipped here; this is the known gap in that work).
+
+### MATTGPT-210
+**Ask Agy landing page suggestion chips are static; stories like STRATCOM invisible on career queries**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Enhancement
+- **File:** `ui/pages/ask_mattgpt/landing_view.py` (suggestion chip rendering)
+- **Logged:** August 24, 2026
+
+**Issue:** The six suggestion chips on the Ask Agy landing page are static. Stories that are perfectly retrievable by their own vocabulary are invisible on broad career queries because they are too specific to appear in top-k results for a generic prompt, and no static chip surfaces them. STRATCOM is the observed example: ranks 1 on "STRATCOM", 1 on "operational plans", and 1 on "military work" -- perfectly retrievable by its own terms -- but a visitor asking "tell me about Matt's career" will never see it.
+
+**Discovery context (August 24, 2026):** Surfaced during MATTGPT-208 Case B analysis. Text placement and ranker changes cannot close the score gap (STRATCOM sits at rank 44 with a 0.018 gap to the pool, three to four times larger than any corpus text edit has produced). The right mechanism is discovery, not ranking.
+
+**Proposed fix:** Rotate the suggestion chips across a curated set so that each session surfaces different entry points into the corpus. A rotating set would expose stories nobody knows to ask about without changing retrieval logic.
+
+**Scope:** Landing page chip rendering only. Does not touch retrieval, diversify logic, or MATT_DNA.
+
+**Cross-references:** MATTGPT-208 (discovery context).
+
+---
 
 ### MATTGPT-205
 **BDD marathon flake: test_error_state_extraction_failure fails in marathon, passes in isolation**

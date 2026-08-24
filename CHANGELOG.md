@@ -8,6 +8,16 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Ask Agy
 
+**August 24, 2026 — Career-shaped query retrieval fixed for broad queries; Case B decided against (MATTGPT-208)** -- `75e3be5`, `4309b38`
+
+Case A (broad career queries, no temporal marker): SEARCH_TOP_K raised from 10 to 25 (`75e3be5`). `diversify_results` gained a `family="background"` branch that groups by Era instead of Client, with a kind cap of at most one Professional Narrative story and at most one Independent Project story (`4309b38`). Ten unit tests. Eval 70/70 at push gate. Before: "tell me about Matt's career" returned 2 distinct eras, 6 of 7 slots from Technical Foundations, 4 of those WellFound engagements under different Client values. After: 5 distinct eras in the first five, three engagement stories, one positioning anchor.
+
+Case B (chronology queries with temporal marker) decided against. Three reasons: (1) Correctness already handled -- "what did Matt do before Accenture" returns the right answer today from MATT_DNA Career Arc rows, not retrieval; verified in production August 24. (2) Fix would undermine Case A -- era diversity is what makes the broad career query work; depth-in-one-era overrides the rule Case A depends on, requiring a router family and a second diversify branch to undo the branch just added. (3) Text placement cannot close the gap -- measured twice; moving the chronology sentence moved scores by 5-7 thousandths against a 0.018 gap (STRATCOM rank 44). The lever does not exist on the retrieval side.
+
+Discovery gap filed as MATTGPT-210: stories like STRATCOM are perfectly retrievable by their own vocabulary but invisible on broad career queries. Fix is rotating suggestion chips on the Ask Agy landing page, not a ranker change.
+
+---
+
 **August 22-24, 2026 — MATT_DNA grounding overhaul; nine early-career stories ingested; ingestion pipeline (MATTGPT-207, MATTGPT-181)** -- `d2618f3`, `4c8d900`
 
 MATTGPT-207 (`d2618f3`): MATT_DNA restructured. Career Arc rows now one per employer with dates (four employers: WellFound Technology 2000-2002, Lockheed Martin / Cendian 2002-2005, Accenture 2005-2023, Independent 2023-present). Career Eras first row names pre-Accenture organizations explicitly. "What Matt is NOT" block removed. Currently line replaced with hero copy. Flat client list replaced with clients grouped by employer. WellFound added to grounding as a named pre-Accenture employer. Drift guards added in `utils/validation.py`. Fixed a production fabrication: "what did Matt do before Accenture?" was returning AT&T as a pre-Accenture employer (misread of an Accenture-AT&T engagement). Known gap in drift guards filed as MATTGPT-209.
