@@ -2129,7 +2129,29 @@ Fix (full): Cards and Timeline both use `st.info` for the empty-state message, w
 - **Type:** Bug
 - **Logged:** August 24, 2026
 
-**Issue:** On "tell me about Matt's career" and "tell me about Matt's early career", Professional Narrative and Independent Project stories occupy the top of the retrieval pool; actual work stories sit at ranks 6 and below. The visitor asking the most natural portfolio question gets positioning content instead of engagement evidence.
+**Two distinct failure modes -- treat separately.**
+
+**Case A: Broad career queries (no temporal marker)**
+
+Example: "tell me about Matt's career"
+
+Current LLM set (verified August 24, 2026): Why Hire Matt, Cendian wind-down, AIU, MattGPT product vision, Owning the P&L. Four of five are positioning or meta-stories.
+
+Pass condition: the set contains at least three engagement stories spanning at least three different eras. One positioning story as an anchor is acceptable.
+
+Candidate lever, untried: `diversify_results` currently spreads across clients. On broad career queries, spreading across Era would produce the breadth the query is asking for. No keyword matching required.
+
+**Case B: Chronology queries (temporal marker present)**
+
+Examples: "tell me about Matt's early career", "what did Matt do before Accenture"
+
+Current LLM set on "early career" (verified August 24, 2026): Why Hire Matt, Sparkfly, AIU, MattGPT, Leading People. Two of nine early stories reach the pool, both at ranks 6 and 8.
+
+Pass condition: at least three pre-2005 stories in the set, spanning more than one employer.
+
+Candidate lever, untried: query-time boost on chronology markers for stories with early `Start_Date`. Note this reintroduces keyword matching, the pattern removed in the January simplification work.
+
+**Production observation (August 24, 2026):** On "what did Matt do before Accenture", the answer is currently correct and comes almost entirely from MATT_DNA's Career Arc rows, not from retrieval. The pool contains no pre-2005 stories. This means chronology questions are partly a metadata question the grounding can answer; the retrieval fix would add texture and evidence rather than correctness.
 
 **Four experiments, all measured, none resolved (August 23-24, 2026):**
 
@@ -2140,8 +2162,6 @@ Fix (full): Cards and Timeline both use `st.info` for the empty-state message, w
 3. Moved the chronology sentence from Use Case tail into Situation opener on eight pre-2005 stories. Scores moved by 5-7 thousandths against a 0.11 gap. Text placement is not the lever.
 
 4. Added "background" to `_PN_EXCLUDED_FAMILIES`. Sparkfly and AIU moved up as intended, but MattGPT stories inherited the top of the pool and Q4 lost all Accenture content. Reverted. Excluding one class of meta-story promotes another.
-
-**Remaining untried:** Query-time boost on chronology markers for stories with early `Start_Date`. Not yet attempted.
 
 **Methodology note (August 23-24, 2026):** Single runs at temperature 0.4 cannot distinguish a real change from variance. Identical LLM calls produced materially different answers across runs; both the session and Code read signal into what was noise. Same class as the eval flap rate (MATTGPT-206, Q28 failed in both pre- and post-change states). Any fix attempt must use multiple runs before drawing conclusions.
 
