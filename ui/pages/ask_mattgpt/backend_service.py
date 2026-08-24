@@ -1316,15 +1316,109 @@ def _generate_agy_response(
 #         return f"🐾 Let me show you what I found...\n\n{answer_context}"
 
 
-def diversify_results(
-    stories: list[dict[str, Any]], max_per_client: int = 1
-) -> list[dict[str, Any]]:
-    """Ensure client variety in top results, prioritizing named clients.
+def _kind_of(story: dict) -> str:
+    """Classify a story for MATTGPT-208 Case A diversify.
 
-    Implements client diversity by:
-    1. PRESERVING the #1 Pinecone result as primary (highest semantic match)
-    2. Prioritizing real named clients over generic ones for slots #2+
-    3. Limiting stories per client
+    META-PN:  Theme="Professional Narrative" (positioning/arc stories)
+    META-IND: Employer="Sabbatical" (independent-project stories, e.g. MattGPT)
+    ENGAGE:   everything else (real client engagements)
+    """
+    if story.get("Theme") == "Professional Narrative":
+        return "META-PN"
+    if story.get("Employer") == "Sabbatical":
+        return "META-IND"
+    return "ENGAGE"
+
+
+def _diversify_for_background(stories: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Era-based diversify with kind cap for the background family (MATTGPT-208).
+
+    Broad career queries ("tell me about Matt's career") route to the
+    background family. Client-based diversify treats each client-field value
+    as a distinct client, which spreads across clients but collapses eras --
+    verified Aug 24, 2026: Q_BROAD at top_k=25 with client-based diversify
+    yields 6 of 7 slots from Technical Foundations era, 4 of those Wellfound
+    Technology stories under different client-field values. Era-based
+    diversify with a kind cap addresses this: at most one positioning story
+    (Why Hire pinned) and at most one independent-project story, then unique
+    eras fill slots 2+.
+
+    Rule:
+    1. Pin slot 1 (top blend). Record its kind toward the cap.
+    2. Walk rest in blend order:
+       - Drop if META-PN cap consumed (>=1 counting pin)
+       - Drop if META-IND cap consumed (>=1)
+       - Keep if era is new (advance kind cap counters)
+       - Drop if era already seen AND story is META
+       - Defer to overflow if era already seen AND story is ENGAGE
+    3. Fill remaining slots up to 7 total from deferred ENGAGE duplicates
+       in blend order.
+    """
+    pinned = stories[0]
+    pinned_kind = _kind_of(pinned)
+    pinned_era = pinned.get("Era", "Unknown")
+
+    seen_eras: set[str] = {pinned_era}
+    meta_pn_used = 1 if pinned_kind == "META-PN" else 0
+    meta_ind_used = 1 if pinned_kind == "META-IND" else 0
+
+    era_slots: list[dict] = []
+    engage_overflow: list[dict] = []
+
+    for s in stories[1:]:
+        kind = _kind_of(s)
+        era = s.get("Era", "Unknown")
+
+        if kind == "META-PN" and meta_pn_used >= 1:
+            continue
+        if kind == "META-IND" and meta_ind_used >= 1:
+            continue
+
+        if era not in seen_eras:
+            era_slots.append(s)
+            seen_eras.add(era)
+            if kind == "META-PN":
+                meta_pn_used += 1
+            elif kind == "META-IND":
+                meta_ind_used += 1
+        elif kind == "ENGAGE":
+            engage_overflow.append(s)
+        # else: META era-duplicate, drop
+
+    result = ([pinned] + era_slots + engage_overflow)[:7]
+
+    if DEBUG:
+        print(
+            f"DEBUG diversify_results[background]: "
+            f"era_slots={len(era_slots)}, engage_overflow={len(engage_overflow)}, "
+            f"meta_pn_used={meta_pn_used}, meta_ind_used={meta_ind_used}"
+        )
+        print(
+            f"DEBUG diversify_results[background]: "
+            f"eras={[s.get('Era') for s in result]}"
+        )
+        print(
+            f"DEBUG diversify_results[background]: "
+            f"kinds={[_kind_of(s) for s in result]}"
+        )
+
+    return result
+
+
+def diversify_results(
+    stories: list[dict[str, Any]],
+    max_per_client: int = 1,
+    family: str | None = None,
+) -> list[dict[str, Any]]:
+    """Ensure diversity in top results.
+
+    Two ranking modes:
+    - family="background" (MATTGPT-208 Case A): era-based grouping with
+      kind caps (<=1 META-PN, <=1 META-IND). Positioning duplicates dropped;
+      ENGAGE era-duplicates fill overflow up to 7 slots. See
+      _diversify_for_background for the full rule.
+    - Otherwise: client-based (existing behavior). Pin slot 1, name-diverse
+      clients #2+, generic clients after, duplicates last, capped at 7 total.
 
     Note (May 18, 2026): cross-query session-state diversification was removed
     per MATTGPT-073. The previous mechanism stored the slot-#1 client in
@@ -1341,17 +1435,21 @@ def diversify_results(
 
     Args:
         stories: List of candidate stories (typically from semantic_search).
-        max_per_client: Maximum stories per client in results. Defaults to 1.
+        max_per_client: Maximum stories per client in results (client-based mode).
+        family: Optional intent family. When "background", uses era+kind rule
+            instead of client-based rule.
 
     Returns:
-        List of up to 7 diversified stories with client variety, named clients first
-        for slots #2+.
+        List of up to 7 diversified stories.
 
     Side Effects:
         None.
     """
     if not stories:
         return []
+
+    if family == "background":
+        return _diversify_for_background(stories)
 
     if DEBUG:
         print(
@@ -2075,7 +2173,9 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
                             f"(pc={ranked[0].get('pc', 0.0):.3f})"
                         )
                 else:
-                    ranked = diversify_results(candidates) or (pool[:1] if pool else [])
+                    ranked = diversify_results(candidates, family=intent_family) or (
+                        pool[:1] if pool else []
+                    )
             if DEBUG and ranked:
                 dbg(f"ask: ranked first_ids={[s.get('id') for s in ranked]}")
 
@@ -2087,7 +2187,9 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
         )
 
     if not ranked:
-        ranked = diversify_results(pool) or (pool[:1] if pool else [])
+        ranked = diversify_results(pool, family=intent_family) or (
+            pool[:1] if pool else []
+        )
         is_synthesis = False
         if DEBUG:
             print(
