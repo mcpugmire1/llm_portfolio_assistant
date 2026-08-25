@@ -10,16 +10,18 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-08-17)
 
 **NOW**
-1. **-163** — Professional org questions intercepted as private-family. High; same class as -208.
-2. **-162** — Embedding exception renders as no-match. Visitor concludes the corpus is thin when the app broke.
-3. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
-4. **-128** — Source faithfulness. Never run. Last unverified thing on the runway; gates Role Match since Role Match is evidence-backed ratings.
+1. **-211** — Tag generator backup copies the wrong file; NLP output destroyed with no snapshot on every run. Two-line fix.
+2. **-072** — Tag generator efficiency: hash skip, case-insensitive dedup, parallelization, model evaluation. Causing live cost issues (~$4/run, Aug 17: 2,237 requests).
+3. **-163** — Professional org questions intercepted as private-family. High; same class as -208.
+4. **-162** — Embedding exception renders as no-match. Visitor concludes the corpus is thin when the app broke.
+5. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+6. **-128** — Source faithfulness. Never run. Last unverified thing on the runway; gates Role Match since Role Match is evidence-backed ratings.
 
 **NEXT** — Role Match, once the runway clears
 -160 (extractor dropping qualifiers on 7 of 23) · -173 (malformed and comp-only JD behavior) · -159 (sequential gpt-4o loop) · -014 (34 skipped integration scenarios) · -089 (location, work-model, availability) · -012 (Private View Phase 4) · -081 (corrective actions by asset type) · -099 (comp handling) · -017 (logging scenarios)
 
 **LATER — tier 1:** real defects with known fixes
--177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -180 (fixture blind spot) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -146 (PN leaks into My Work) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -211 (tag generator backup defect)
+-177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -180 (fixture blind spot) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -146 (PN leaks into My Work) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28)
 
 **LATER — tier 2:** corpus work
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
@@ -33,7 +35,7 @@ Meta: -079, -156, -096
 Dead code: -176, -183, -199, -201 · Hidden error: -204
 BDD flakes: -122, -131, -142, -145, -197, -198, -205
 Wrong-assertion test: -203 · -209 (drift guard searches wrong scope)
-Small refactors: -072, -140, -153, -086, -062, -082, -083, -084, -150, -060
+Small refactors: -140, -153, -086, -062, -082, -083, -084, -150, -060
 Infrastructure: -035, -039, -040, -045
 
 ---
@@ -2185,8 +2187,6 @@ Fix (full): Cards and Timeline both use `st.info` for the empty-state message, w
 **Consequence:** Three tag-generator runs on August 17 each destroyed the prior NLP state. No snapshot of any prior `echo_star_stories_nlp.jsonl` exists from those runs.
 
 **Fix:** Two lines. Change the backup source from `INPUT_FILE` to `OUTPUT_FILE` (i.e., `echo_star_stories_nlp.jsonl`). Add an existence guard so the script does not proceed if `OUTPUT_FILE` is absent.
-
-**Placement note (August 24, 2026):** Placed in LATER tier 1 (waits behind Role Match). Arguable as NOW: two-line fix protecting against unrecoverable data loss, and the exposure is live every time the tag generator runs. Tier 1 is the call; this note exists so the case isn't lost.
 
 **Cross-references:** MATTGPT-072 (tag generator efficiency -- separate scope, same script).
 
