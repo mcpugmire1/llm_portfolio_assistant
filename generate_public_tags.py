@@ -67,8 +67,8 @@ def _prompt_view(story: dict) -> dict:
         "Project Scope / Complexity": story.get("Project Scope / Complexity", ""),
         "Competencies": story.get("Competencies", ""),
         "Use Case(s)": story.get("Use Case(s)", ""),
-        "Situation": (story.get("Situation") or [""])[0],
-        "Task": (story.get("Task") or [""])[0],
+        "Situation": " ".join(story.get("Situation") or []),
+        "Task": " ".join(story.get("Task") or []),
         "Action": " ".join(story.get("Action") or []),
         "Result": " ".join(story.get("Result") or []),
         "Process": " ".join(story.get("Process") or []),
@@ -166,45 +166,77 @@ def enrich_stories_with_nlp_tags():
         print("   Please run generate_jsonl_from_excel.py first.")
         return
 
-    # Count stories and estimate cost
-    story_count = 0
+    # Load all input stories, preserving order.
     with open(INPUT_FILE, encoding="utf-8") as infile:
-        for _line in infile:
-            story_count += 1
+        input_stories = [json.loads(line) for line in infile if line.strip()]
+
+    # Load prior OUTPUT_FILE keyed by id, empty dict on first run.
+    prior_by_id: dict[str, dict] = {}
+    if os.path.exists(OUTPUT_FILE):
+        with open(OUTPUT_FILE, encoding="utf-8") as f:
+            for line in f:
+                if line.strip():
+                    rec = json.loads(line)
+                    prior_by_id[rec.get("id")] = rec
+
+    # Partition: skip stories whose _prompt_view matches prior. public_tags
+    # is excluded from the comparison implicitly (not a _prompt_view field),
+    # matching generate_jsonl_from_excel.py's diff-loop convention.
+    to_tag = []
+    for story in input_stories:
+        prior = prior_by_id.get(story.get("id"))
+        if prior is None or _prompt_view(story) != _prompt_view(prior):
+            to_tag.append(story)
+
+    total_count = len(input_stories)
+    tag_count = len(to_tag)
+    skip_count = total_count - tag_count
 
     # Cost estimation (gpt-4o pricing: ~$2.50 per 1M input tokens, ~$10 per 1M output tokens)
-    # Rough estimate: ~1000 tokens input + ~100 tokens output per story
-    estimated_cost = story_count * ((1000 * 2.50 / 1_000_000) + (100 * 10 / 1_000_000))
+    # Rough estimate: ~1000 tokens input + ~100 tokens output per story.
+    # Count only stories that need re-tagging, not the full corpus.
+    estimated_cost = tag_count * ((1000 * 2.50 / 1_000_000) + (100 * 10 / 1_000_000))
 
-    print(f"\n📊 Found {story_count} stories to process")
+    print(
+        f"\n📊 Found {total_count} stories; "
+        f"{tag_count} need re-tagging, {skip_count} unchanged"
+    )
     print(f"💰 Estimated cost: ${estimated_cost:.2f} (using {MODEL})")
-    print(f"⚠️  This will make {story_count} API calls to OpenAI\n")
+    print(f"⚠️  This will make {tag_count} API calls to OpenAI\n")
+
+    if tag_count == 0:
+        print("✅ All stories match prior output. Nothing to do.")
+        return
 
     confirm = input("Continue? (y/n): ").strip().lower()
     if confirm != 'y':
         print("❌ Cancelled by user")
         return
 
+    # Tag changed/new stories via LLM. Mutates story dicts in place.
+    for story in to_tag:
+        print(f"🔍 Processing story ID {story.get('id')}...")
+        tags = extract_semantic_tags(story)
+        existing_tags = story.get("public_tags", "")
+
+        # Combine and deduplicate
+        new_tag_list = [tag.strip() for tag in tags.split(",") if tag.strip()]
+        existing_tag_list = [
+            tag.strip() for tag in existing_tags.split(",") if tag.strip()
+        ]
+        all_tags = set(new_tag_list + existing_tag_list)
+        story["public_tags"] = ", ".join(sorted(all_tags))
+
+    # Assemble final list in original input order. Stories in to_tag are
+    # already mutated in place. Skipped stories carry prior public_tags
+    # forward (guaranteed present since only prior-matching stories were
+    # excluded from to_tag).
+    to_tag_ids = {s.get("id") for s in to_tag}
     enriched_records = []
-
-    with open(INPUT_FILE, encoding="utf-8") as infile:
-        for line in infile:
-            story = json.loads(line)
-
-            print(f"🔍 Processing story ID {story.get('id')}...")
-
-            tags = extract_semantic_tags(story)
-            existing_tags = story.get("public_tags", "")
-
-            # Combine and deduplicate
-            new_tag_list = [tag.strip() for tag in tags.split(",") if tag.strip()]
-            existing_tag_list = [
-                tag.strip() for tag in existing_tags.split(",") if tag.strip()
-            ]
-            all_tags = set(new_tag_list + existing_tag_list)
-
-            story["public_tags"] = ", ".join(sorted(all_tags))
-            enriched_records.append(story)
+    for story in input_stories:
+        if story.get("id") not in to_tag_ids:
+            story["public_tags"] = prior_by_id[story.get("id")].get("public_tags", "")
+        enriched_records.append(story)
 
     # Backup before overwriting. Source must be OUTPUT_FILE -- the file that
     # gets overwritten below -- not INPUT_FILE, which this script only reads.
