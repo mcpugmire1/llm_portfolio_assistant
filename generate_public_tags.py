@@ -176,13 +176,18 @@ def enrich_stories_with_nlp_tags():
             story["public_tags"] = ", ".join(sorted(all_tags))
             enriched_records.append(story)
 
-    # Backup before overwriting. Write directly into archive/jsonl-backups/
-    # so backups never accumulate in repo root. Directory is expected to exist.
+    # Backup before overwriting. Source must be OUTPUT_FILE -- the file that
+    # gets overwritten below -- not INPUT_FILE, which this script only reads.
+    # Guard for first-ever runs where no prior OUTPUT_FILE exists to preserve.
     timestamp = datetime.now(UTC).strftime("%Y%m%d_%H%M%S")
     backup_name = f"{OUTPUT_FILE.replace('.jsonl', '')}_backup_{timestamp}.jsonl"
     backup_file = str(ARCHIVE_BACKUPS_DIR / backup_name)
-    shutil.copy(INPUT_FILE, backup_file)
-    print(f"\n📦 Backup created: {backup_file}")
+    if os.path.exists(OUTPUT_FILE):
+        shutil.copy(OUTPUT_FILE, backup_file)
+        print(f"\n📦 Backup created: {backup_file}")
+    else:
+        print(f"\nℹ️  No prior {OUTPUT_FILE} to back up (first run)")
+        backup_file = None
 
     # Write enriched records
     with open(OUTPUT_FILE, "w", encoding="utf-8") as outfile:
@@ -193,7 +198,8 @@ def enrich_stories_with_nlp_tags():
         f"\n🎉 Done! Successfully enriched {len(enriched_records)} stories with AI-generated tags."
     )
     print(f"📄 Output file: {OUTPUT_FILE}")
-    print(f"📦 Backup file: {backup_file}")
+    if backup_file:
+        print(f"📦 Backup file: {backup_file}")
 
 
 # ---------------------------
