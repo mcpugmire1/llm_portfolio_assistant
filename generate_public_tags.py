@@ -47,15 +47,45 @@ TECHNICAL_ONLY_ERAS = {"Independent Product Development"}
 
 
 # ---------------------------
+# Helper: single source of truth for what the LLM sees per story
+# ---------------------------
+def _prompt_view(story: dict) -> dict:
+    """The exact fields and projections the tag prompt reads.
+
+    Returned by field name (e.g., "Project Scope / Complexity", "Use Case(s)")
+    so change-detection can key lookups against the raw story dict. The tag
+    prompt renders labels from this view.
+    """
+    return {
+        "Era": story.get("Era", ""),
+        "Title": story.get("Title", ""),
+        "Role": story.get("Role", ""),
+        "Industry": story.get("Industry", ""),
+        "Theme": story.get("Theme", ""),
+        "Category": story.get("Category", ""),
+        "Sub-category": story.get("Sub-category", ""),
+        "Project Scope / Complexity": story.get("Project Scope / Complexity", ""),
+        "Competencies": story.get("Competencies", ""),
+        "Use Case(s)": story.get("Use Case(s)", ""),
+        "Situation": (story.get("Situation") or [""])[0],
+        "Task": (story.get("Task") or [""])[0],
+        "Action": " ".join(story.get("Action") or []),
+        "Result": " ".join(story.get("Result") or []),
+        "Process": " ".join(story.get("Process") or []),
+        "Performance": " ".join(story.get("Performance") or []),
+    }
+
+
+# ---------------------------
 # Helper: NLP-based tagger
 # ---------------------------
 def extract_semantic_tags(story):
     # For Independent Product Development stories, append a context note so
     # the LLM doesn't hallucinate stakeholder/change-management/coordination
     # tags from solo technical work. See TECHNICAL_ONLY_ERAS comment above.
-    era = story.get("Era", "")
+    view = _prompt_view(story)
     context_note = ""
-    if era in TECHNICAL_ONLY_ERAS:
+    if view["Era"] in TECHNICAL_ONLY_ERAS:
         context_note = (
             "\n**CONTEXT FOR THIS STORY:**\n"
             "This story documents independent product engineering work — solo or "
@@ -96,21 +126,21 @@ def extract_semantic_tags(story):
         "indicate behavioral competencies - tag them\n"
         "4. Balance technical and behavioral tags - most stories have both dimensions\n"
         "5. Be specific and avoid generic terms like 'leadership' - use 'stakeholder alignment' or 'team coaching' instead\n\n"
-        f"Title: {story.get('Title', '')}\n"
-        f"Role: {story.get('Role', '')}\n"
-        f"Industry: {story.get('Industry', '')}\n"
-        f"Theme: {story.get('Theme', '')}\n"
-        f"Category: {story.get('Category', '')}\n"
-        f"Sub-category: {story.get('Sub-category', '')}\n"
-        f"Project Scope: {story.get('Project Scope / Complexity', '')}\n"
-        f"Competencies: { story.get('Competencies', '')}\n"
-        f"Use Cases: {story.get('Use Case(s)', '')}\n"
-        f"Situation: {story.get('Situation', [''])[0]}\n"
-        f"Task: {story.get('Task', [''])[0]}\n"
-        f"Action: {' '.join(story.get('Action', []))}\n"
-        f"Result: {' '.join(story.get('Result', []))}\n"
-        f"Process: {' '.join(story.get('Process', []))}\n"
-        f"Performance: {' '.join(story.get('Performance', []))}\n\n"
+        f"Title: {view['Title']}\n"
+        f"Role: {view['Role']}\n"
+        f"Industry: {view['Industry']}\n"
+        f"Theme: {view['Theme']}\n"
+        f"Category: {view['Category']}\n"
+        f"Sub-category: {view['Sub-category']}\n"
+        f"Project Scope: {view['Project Scope / Complexity']}\n"
+        f"Competencies: {view['Competencies']}\n"
+        f"Use Cases: {view['Use Case(s)']}\n"
+        f"Situation: {view['Situation']}\n"
+        f"Task: {view['Task']}\n"
+        f"Action: {view['Action']}\n"
+        f"Result: {view['Result']}\n"
+        f"Process: {view['Process']}\n"
+        f"Performance: {view['Performance']}\n\n"
         + context_note
         + "Output only the semantic tags as a comma-separated string. "
         "Aim for 8-15 tags that balance behavioral and technical dimensions."
