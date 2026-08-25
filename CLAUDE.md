@@ -175,7 +175,11 @@ When multiple Claude Code sessions run concurrently, they share one git working 
 
 ## Testing Protocol
 
-**The non-negotiable:** BDD scenarios are written and committed before any implementation code. No exceptions. If a spec is provided, scenarios come first.
+**The non-negotiable:** Tests are written and committed before any implementation code. No exceptions. If a spec is provided, tests come first.
+
+### When to use BDD vs unit tests
+- **BDD:** UI behavior, user-facing flows, anything Playwright can observe in the DOM. Write `.feature` scenarios.
+- **Unit tests:** Pure functions, batch scripts, pipeline stages with no DOM surface. Write pytest functions directly. Do not write `.feature` files for batch scripts or functions with no UI interaction.
 
 ### Red-Green cycle
 One "go" from Matt ships the full cycle without re-asking between gates. Re-ask only on substantive new design decisions.
@@ -184,6 +188,9 @@ One "go" from Matt ships the full cycle without re-asking between gates. Re-ask 
 - **Red (step defs commit):** Write step definitions. Confirm scenarios run end-to-end and fail with assertion errors (not undefined-step or import errors). Commit message proof: `Red (step defs): N scenarios bound, N assertion failures, 0 undefined-step / import errors.`
 - **Green (production code commit):** Write minimum production code to pass. Confirm all pass. Commit message proof: `Green: N / N scenarios passing.`
 - **Refactor (optional):** Clean up while keeping tests passing.
+
+### Unit test Red-Green cycle
+The two-Red split applies to BDD where `.feature` and `test_X.py` are separate artifacts with a meaningful intermediate state. For unit tests, one Red commit: tests written fully, failing on assertion errors (not import errors). Any minimal production plumbing needed for imports to succeed goes in the same Red commit. Green is still a separate commit. The non-negotiable is the same: tests exist before implementation and fail for the right reason.
 
 ### Validation rules
 - **Paste literal pytest output at every gate** - never self-summarize (see Critical Rules)
