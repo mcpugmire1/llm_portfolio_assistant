@@ -19,7 +19,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 -160 (extractor dropping qualifiers on 7 of 23) · -173 (malformed and comp-only JD behavior) · -159 (sequential gpt-4o loop) · -014 (34 skipped integration scenarios) · -089 (location, work-model, availability) · -012 (Private View Phase 4) · -081 (corrective actions by asset type) · -099 (comp handling) · -017 (logging scenarios)
 
 **LATER — tier 1:** real defects with known fixes
--177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -180 (fixture blind spot) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -146 (PN leaks into My Work) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28)
+-177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -180 (fixture blind spot) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -146 (PN leaks into My Work) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -211 (tag generator backup defect)
 
 **LATER — tier 2:** corpus work
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
@@ -116,6 +116,7 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-206](#mattgpt-206) | Eval suite ~1-in-70 stochastic flap; Q28 confirmed non-deterministic | Open | Medium | Bug (Test) | August 19, 2026 |
 | [MATTGPT-209](#mattgpt-209) | MATT_DNA drift guard passes for wrong reason: employer check searches whole string, not Career Arc block | Open | Low | Bug (Test) | August 24, 2026 |
 | [MATTGPT-210](#mattgpt-210) | Ask Agy landing page suggestion chips are static; stories like STRATCOM invisible on career queries | Open | Low | Enhancement | August 24, 2026 |
+| [MATTGPT-211](#mattgpt-211) | `generate_public_tags.py` backup copies the wrong file; `echo_star_stories_nlp.jsonl` is destroyed with no snapshot | Open | Medium | Bug | August 24, 2026 |
 
 ---
 
@@ -504,10 +505,10 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Additional scope items (July 16, 2026; updated August 24, 2026):** Script re-tags all stories on every run, sequentially, with gpt-4o -- even stories that haven't changed. Three primary scope items alongside case-dedup:
   1. **Hash-based skip:** Hash the prompt-relevant fields (Title, Role, Industry, Theme, Competencies, Use Case(s), Situation, Task, Action, Result, Process, Performance) per story; load existing `echo_star_stories_nlp.jsonl` at startup; if a story's hash matches the prior run, copy existing `public_tags` and skip the API call. Only re-tag stories where content changed.
   2. **Parallelism:** Parallelize remaining API calls with `ThreadPoolExecutor` (10 concurrent).
-  3. **Model swap (gpt-4o to gpt-4o-mini):** Promoted from tertiary to primary scope item based on two converging findings:
-     - **Quality signal (August 22, 2026):** Sparkfly story generated tags the story text doesn't support. gpt-4o's headroom appears to be enabling extrapolation beyond source fields, not extractive tagging. gpt-4o-mini would likely produce better-scoped tags; the "better-scoped" claim is now supported by observation, not just a runtime hunch.
-     - **Cost signal (August 17-24, 2026):** OpenAI dashboard shows August 17 hit 2,237 requests in one day. Three `echo_star_stories_nlp_backup_20260817_*.jsonl` files in `archive/jsonl-backups/` confirm the tag generator ran 3 times that day. 3 x 123 stories = 369 gpt-4o requests from this script alone on that day. All three current line items are gpt-4o. Attribution is arithmetic from backup filenames; dashboard confirms August 17 total but does not attribute per-script.
-     - Verification needed before swap: identify the specific Sparkfly tags not supported by Situation/Task/Action/Result fields (qualitative, cite the tags).
+  3. **Model evaluation (August 24, 2026):** Promoted from tertiary to primary scope item based on two converging findings. Do not name a specific model before running the evaluation -- a prior recommendation named gpt-4o-mini based on reading marketing names off a screenshot, which is not a basis for a model decision.
+     - **Quality signal (August 22, 2026):** Sparkfly story generated tags the story text doesn't support. gpt-4o's headroom appears to be enabling extrapolation beyond source fields, not extractive tagging. A cheaper model would likely produce better-scoped tags; the "better-scoped" claim is now supported by observation, not just a runtime hunch.
+     - **Cost signal (August 17-24, 2026):** OpenAI dashboard shows August 17 hit 2,237 requests in one day. Three `echo_star_stories_nlp_backup_20260817_*.jsonl` files in `archive/jsonl-backups/` confirm the tag generator ran 3 times that day. 3 x 123 stories = 369 gpt-4o requests from this script alone on that day. Attribution is arithmetic from backup filenames; dashboard confirms August 17 total but does not attribute per-script.
+     - **Evaluation protocol:** Run the cheapest available general-purpose model against a 5-10 story sample. Reject any output that claims content not present in the source Situation/Task/Action/Result fields. Pass/fail is qualitative; cite the specific tags and the fields they do or don't appear in.
 - **Vocabulary additions to preserve through dedupe (August 5, 2026):** The following tags were added to corpus stories but are not yet in the script's canonical vocabulary, so they risk being dropped or case-clobbered on the next enrichment run. Preserve these through whatever normalization the fix applies: `refactor`, `rearchitect` (from handoff notes), `Pair Rotation`, `Remote Pairing`, `Backlog Quality`, `User Story Writing`, `Definition of Done`, `Team Working Agreement` (from Making It Stick story, hand-cased August 5).
 - **Instance note (August 5, 2026):** The Making It Stick story's `public_tags` were hand-normalized for casing after a mixed-case generation run. Those hand-fixes are at risk when the script next runs. Preserve on regeneration.
 - **Open decision this ticket owns:** Canonical casing convention for generated tags. Current generated output is mixed (e.g., `Pair Programming` title case alongside `client upskilling` lowercase). Options: lowercase everywhere (matches retrieval-surface role and eliminates display-layer ambiguity); title case everywhere (display-friendly but retrieval-irrelevant); first-seen wins (script-convenient but unpredictable). Decide and encode in the script before the next enrichment run.
@@ -2162,6 +2163,27 @@ Fix (full): Cards and Timeline both use `st.info` for the empty-state message, w
 **Scope:** Landing page chip rendering only. Does not touch retrieval, diversify logic, or MATT_DNA.
 
 **Cross-references:** MATTGPT-208 (discovery context).
+
+---
+
+### MATTGPT-211
+**`generate_public_tags.py` backup copies the wrong file; `echo_star_stories_nlp.jsonl` is destroyed with no snapshot**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `generate_public_tags.py:184`
+- **Logged:** August 24, 2026
+
+**Issue:** `generate_public_tags.py:184` calls `shutil.copy(INPUT_FILE, backup_file)`. `INPUT_FILE` is `echo_star_stories.jsonl` (the raw corpus). The backup filename reads `echo_star_stories_nlp_backup_<timestamp>.jsonl`, implying it is snapshotting the NLP output file. It is not. The file actually overwritten -- `echo_star_stories_nlp.jsonl` -- is destroyed with no snapshot taken. Any tag regression is unrecoverable.
+
+**Verified (August 24, 2026):** Aug 23 backup SHA matches `echo_star_stories.jsonl` byte-for-byte and differs from `echo_star_stories_nlp.jsonl`. The three sibling enrichment scripts do this correctly because they read and write the same file; the copied line was right in all three and wrong in the one where input and output differ.
+
+**Consequence:** Three tag-generator runs on August 17 each destroyed the prior NLP state. No snapshot of any prior `echo_star_stories_nlp.jsonl` exists from those runs.
+
+**Fix:** Two lines. Change the backup source from `INPUT_FILE` to `OUTPUT_FILE` (i.e., `echo_star_stories_nlp.jsonl`). Add an existence guard so the script does not proceed if `OUTPUT_FILE` is absent.
+
+**Cross-references:** MATTGPT-072 (tag generator efficiency -- separate scope, same script).
 
 ---
 
