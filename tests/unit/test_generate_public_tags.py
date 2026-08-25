@@ -62,7 +62,7 @@ class TestGeneratePublicTagsBackup:
         # Mock OpenAI so no API call fires
         mock_completion = MagicMock()
         mock_completion.choices = [
-            MagicMock(message=MagicMock(content="freshly-generated-tag"))
+            MagicMock(message=MagicMock(content='{"tags": ["freshly-generated-tag"]}'))
         ]
         monkeypatch.setattr(
             g.client.chat.completions,
@@ -206,6 +206,52 @@ class TestPromptView:
         )
 
 
+class TestTitleCaseDedup:
+    """MATTGPT-072: case-insensitive dedup. Title case wins; acronyms preserved."""
+
+    def test_title_case_wins_over_lowercase(self):
+        from generate_public_tags import _dedupe_title_case_wins
+
+        result = _dedupe_title_case_wins(["Client Engagement", "client engagement"])
+        assert result == ["Client Engagement"]
+
+    def test_lowercase_first_seen_replaced_by_title_case(self):
+        """First-seen order does not matter; more-uppercase wins."""
+        from generate_public_tags import _dedupe_title_case_wins
+
+        result = _dedupe_title_case_wins(["client engagement", "Client Engagement"])
+        assert result == ["Client Engagement"]
+
+    def test_acronym_preserved_over_lowercase(self):
+        from generate_public_tags import _dedupe_title_case_wins
+
+        result = _dedupe_title_case_wins(["aws", "AWS"])
+        assert result == ["AWS"]
+
+    def test_hyphenated_title_case_wins(self):
+        from generate_public_tags import _dedupe_title_case_wins
+
+        result = _dedupe_title_case_wins(
+            ["cross-functional collaboration", "Cross-Functional Collaboration"]
+        )
+        assert result == ["Cross-Functional Collaboration"]
+
+    def test_single_variant_passes_through(self):
+        from generate_public_tags import _dedupe_title_case_wins
+
+        result = _dedupe_title_case_wins(
+            ["Client Engagement", "Delivery Excellence", "AWS"]
+        )
+        assert set(result) == {"Client Engagement", "Delivery Excellence", "AWS"}
+
+    def test_tie_keeps_first_seen(self):
+        """When uppercase counts tie, first-seen wins."""
+        from generate_public_tags import _dedupe_title_case_wins
+
+        result = _dedupe_title_case_wins(["Data Governance", "Data governance"])
+        assert result == ["Data Governance"]
+
+
 class TestSkipUnchangedStories:
     """MATTGPT-072 Change 2: skip stories whose _prompt_view is unchanged
     against the prior OUTPUT_FILE. Copy prior public_tags forward, no API
@@ -235,7 +281,7 @@ class TestSkipUnchangedStories:
 
         mock_completion = MagicMock()
         mock_completion.choices = [
-            MagicMock(message=MagicMock(content="freshly-generated-tag"))
+            MagicMock(message=MagicMock(content='{"tags": ["freshly-generated-tag"]}'))
         ]
         mock_create = MagicMock(return_value=mock_completion)
         monkeypatch.setattr(g.client.chat.completions, "create", mock_create)

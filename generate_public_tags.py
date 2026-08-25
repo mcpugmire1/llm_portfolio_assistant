@@ -49,6 +49,32 @@ TECHNICAL_ONLY_ERAS = {"Independent Product Development"}
 # ---------------------------
 # Helper: single source of truth for what the LLM sees per story
 # ---------------------------
+def _dedupe_title_case_wins(tags: list[str]) -> list[str]:
+    """Case-insensitive dedup preferring the more uppercase-heavy variant.
+
+    When two tags collide case-insensitively, keep the one with more uppercase
+    characters. Handles both title-case-vs-lowercase ("Client Engagement" over
+    "client engagement") and acronyms ("AWS" over "aws"). Ties keep first-seen.
+
+    Known edge case: proper nouns whose official style is title case rather than
+    all-caps -- e.g., Atlassian styles it "Jira", not "JIRA". This heuristic
+    would pick "JIRA" over "Jira" (4 vs 1 uppercase). The master corpus is
+    curated to the correct form; this note exists so a future generator run
+    that emits both variants is understood as a known limitation, not a bug.
+    """
+    by_lower: dict[str, str] = {}
+    for tag in tags:
+        key = tag.lower()
+        if key not in by_lower:
+            by_lower[key] = tag
+            continue
+        current_upper = sum(1 for c in by_lower[key] if c.isupper())
+        new_upper = sum(1 for c in tag if c.isupper())
+        if new_upper > current_upper:
+            by_lower[key] = tag
+    return list(by_lower.values())
+
+
 def _prompt_view(story: dict) -> dict:
     """The exact fields and projections the tag prompt reads.
 
@@ -79,7 +105,12 @@ def _prompt_view(story: dict) -> dict:
 # ---------------------------
 # Helper: NLP-based tagger
 # ---------------------------
-def extract_semantic_tags(story):
+def extract_semantic_tags(story) -> list[str]:
+    """Generate discovery-vocabulary tags for a story.
+
+    Returns a list of tag strings parsed from the LLM's JSON response.
+    Empty list on API or parse error.
+    """
     # For Independent Product Development stories, append a context note so
     # the LLM doesn't hallucinate stakeholder/change-management/coordination
     # tags from solo technical work. See TECHNICAL_ONLY_ERAS comment above.
@@ -87,45 +118,28 @@ def extract_semantic_tags(story):
     context_note = ""
     if view["Era"] in TECHNICAL_ONLY_ERAS:
         context_note = (
-            "\n**CONTEXT FOR THIS STORY:**\n"
-            "This story documents independent product engineering work — solo or "
+            "\n\n**CONTEXT FOR THIS STORY:**\n"
+            "This story documents independent product engineering work: solo or "
             "small-team development with no external client and no organizational "
             "stakeholders to coordinate across. Use product engineering and technical "
-            "vocabulary. Avoid business strategy and organizational leadership phrasing — "
-            "do not infer stakeholder coordination, change management, or cross-functional "
-            "dynamics where the work was independent.\n\n"
+            "vocabulary. Avoid business strategy and organizational leadership phrasing. "
+            "Do not infer stakeholder coordination, change management, or cross-functional "
+            "dynamics where the work was independent."
         )
 
-    prompt = (
-        "You are an intelligent assistant that analyzes STAR stories for professional tagging.\n\n"
-        "Given the following data, generate a concise, comma-separated list of **semantic tags** that capture:\n\n"
-        "**Behavioral & Leadership (CRITICAL - include these when present in Action/Result):**\n"
-        "- Stakeholder management, trust-building, influencing without authority\n"
-        "- Coaching, mentoring, capability building, knowledge transfer\n"
-        "- Navigating resistance, organizational politics, conflict resolution\n"
-        "- Team dynamics, psychological safety, culture change\n"
-        "- Cross-functional collaboration, alignment, consensus-building\n"
-        "- Change management, overcoming skepticism, building credibility\n\n"
-        "**Technical & Methodological:**\n"
-        "- Technical skills, architectures, platforms, tools\n"
-        "- Methodologies (Agile, TDD, DevOps, CI/CD, etc.)\n"
-        "- Engineering practices and patterns\n\n"
-        "**Business & Outcomes:**\n"
-        "- Business capabilities and measurable outcomes\n"
-        "- Industry-specific terminology\n"
-        "- Transformation types (digital, agile, cloud, etc.)\n\n"
-        "**Keyword Alignment:**\n"
-        "- Use terminology aligned with SFIA, O*NET, LinkedIn Skills, and Accenture Tech Vision\n"
-        "- Include synonyms that recruiters and hiring managers search for\n"
-        "- Ensure tags are discoverable via semantic search\n\n"
-        "**IMPORTANT RULES:**\n"
-        "1. Read the Action and Result fields carefully for behavioral signals\n"
-        "2. If the story describes navigating politics, coaching stakeholders, building trust, "
-        "or overcoming resistance - those behaviors MUST appear in tags\n"
-        "3. Phrases like 'coached', 'mentored', 'navigated', 'aligned', 'influenced', 'facilitated' "
-        "indicate behavioral competencies - tag them\n"
-        "4. Balance technical and behavioral tags - most stories have both dimensions\n"
-        "5. Be specific and avoid generic terms like 'leadership' - use 'stakeholder alignment' or 'team coaching' instead\n\n"
+    system_msg = (
+        "You are generating discovery vocabulary for a portfolio of STAR stories.\n\n"
+        "public_tags are search terms: words a reader might type into a search box "
+        "to find this story. They are NOT a claim about what the practitioner is "
+        "skilled at; capability is captured separately in the Competencies field, "
+        "which this prompt does not produce.\n\n"
+        "Given the story data provided by the user, generate distinct tags naming "
+        "what the story is ABOUT: topics, technologies, domains, methodologies, "
+        "and concepts a reader might use to search for it. Do not produce multiple "
+        "phrasings of the same concept."
+    )
+
+    user_msg = (
         f"Title: {view['Title']}\n"
         f"Role: {view['Role']}\n"
         f"Industry: {view['Industry']}\n"
@@ -140,20 +154,44 @@ def extract_semantic_tags(story):
         f"Action: {view['Action']}\n"
         f"Result: {view['Result']}\n"
         f"Process: {view['Process']}\n"
-        f"Performance: {view['Performance']}\n\n"
-        + context_note
-        + "Output only the semantic tags as a comma-separated string. "
-        "Aim for 8-15 tags that balance behavioral and technical dimensions."
+        f"Performance: {view['Performance']}" + context_note
     )
 
     try:
         response = client.chat.completions.create(
-            model=MODEL, messages=[{"role": "user", "content": prompt}], temperature=0.3
+            model=MODEL,
+            messages=[
+                {"role": "system", "content": system_msg},
+                {"role": "user", "content": user_msg},
+            ],
+            temperature=0.3,
+            response_format={
+                "type": "json_schema",
+                "json_schema": {
+                    "name": "story_tags",
+                    "strict": True,
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "tags": {
+                                "type": "array",
+                                "items": {"type": "string"},
+                                "minItems": 8,
+                                "maxItems": 15,
+                            },
+                        },
+                        "required": ["tags"],
+                        "additionalProperties": False,
+                    },
+                },
+            },
         )
-        return response.choices[0].message.content.strip()
+        payload = json.loads(response.choices[0].message.content)
+        tags = payload.get("tags") or []
+        return [str(t).strip() for t in tags if str(t).strip()]
     except Exception as e:
         print(f"❌ Error generating tags for story ID {story.get('id')}: {e}")
-        return ""
+        return []
 
 
 # ---------------------------
@@ -216,16 +254,16 @@ def enrich_stories_with_nlp_tags():
     # Tag changed/new stories via LLM. Mutates story dicts in place.
     for story in to_tag:
         print(f"🔍 Processing story ID {story.get('id')}...")
-        tags = extract_semantic_tags(story)
+        new_tag_list = extract_semantic_tags(story)
         existing_tags = story.get("public_tags", "")
 
-        # Combine and deduplicate
-        new_tag_list = [tag.strip() for tag in tags.split(",") if tag.strip()]
+        # Combine with existing (from Excel column) and case-insensitive dedupe.
+        # Title case wins on collision; acronyms preserved via uppercase-count.
         existing_tag_list = [
             tag.strip() for tag in existing_tags.split(",") if tag.strip()
         ]
-        all_tags = set(new_tag_list + existing_tag_list)
-        story["public_tags"] = ", ".join(sorted(all_tags))
+        deduped = _dedupe_title_case_wins(new_tag_list + existing_tag_list)
+        story["public_tags"] = ", ".join(sorted(deduped))
 
     # Assemble final list in original input order. Stories in to_tag are
     # already mutated in place. Skipped stories carry prior public_tags
