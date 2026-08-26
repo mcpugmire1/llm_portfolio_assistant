@@ -12,10 +12,11 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 **NOW**
 1. **-211** — Tag generator backup copies the wrong file; NLP output destroyed with no snapshot on every run. Two-line fix.
 2. **-072** — Tag generator efficiency: hash skip, case-insensitive dedup, parallelization, model evaluation. Causing live cost issues (~$4/run, Aug 17: 2,237 requests).
-3. **-163** — Professional org questions intercepted as private-family. High; same class as -208.
-4. **-162** — Embedding exception renders as no-match. Visitor concludes the corpus is thin when the app broke.
-5. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
-6. **-128** — Source faithfulness. Never run. Last unverified thing on the runway; gates Role Match since Role Match is evidence-backed ratings.
+3. **-212** — Story detail sidebar: Core Competencies renders as single-column list; outruns content at 900px on tech-heavy stories. Render as wrapping outlined pills, drop [:10] tag cap.
+4. **-163** — Professional org questions intercepted as private-family. High; same class as -208.
+5. **-162** — Embedding exception renders as no-match. Visitor concludes the corpus is thin when the app broke.
+6. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+7. **-128** — Source faithfulness. Never run. Last unverified thing on the runway; gates Role Match since Role Match is evidence-backed ratings.
 
 **NEXT** — Role Match, once the runway clears
 -160 (extractor dropping qualifiers on 7 of 23) · -173 (malformed and comp-only JD behavior) · -159 (sequential gpt-4o loop) · -014 (34 skipped integration scenarios) · -089 (location, work-model, availability) · -012 (Private View Phase 4) · -081 (corrective actions by asset type) · -099 (comp handling) · -017 (logging scenarios)
@@ -119,6 +120,7 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-209](#mattgpt-209) | MATT_DNA drift guard passes for wrong reason: employer check searches whole string, not Career Arc block | Open | Low | Bug (Test) | August 24, 2026 |
 | [MATTGPT-210](#mattgpt-210) | Ask Agy landing page suggestion chips are static; stories like STRATCOM invisible on career queries | Open | Low | Enhancement | August 24, 2026 |
 | [MATTGPT-211](#mattgpt-211) | `generate_public_tags.py` backup copies the wrong file; `echo_star_stories_nlp.jsonl` is destroyed with no snapshot | Open | Medium | Bug | August 24, 2026 |
+| [MATTGPT-212](#mattgpt-212) | Story detail sidebar: Core Competencies renders as single-column list; sidebar outruns content on tech-heavy stories | Open | Medium | UI / Bug | August 24, 2026 |
 
 ---
 
@@ -2168,6 +2170,54 @@ Fix (full): Cards and Timeline both use `st.info` for the empty-state message, w
 **Scope:** Landing page chip rendering only. Does not touch retrieval, diversify logic, or MATT_DNA.
 
 **Cross-references:** MATTGPT-208 (discovery context).
+
+---
+
+### MATTGPT-212
+**Story detail sidebar: Core Competencies renders as single-column list; sidebar outruns content on tech-heavy stories**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** UI / Bug
+- **Component:** `ui/components/story_detail.py`
+- **Logged:** August 24, 2026
+
+**Problem:** Core Competencies renders as a single-column list, one `st.markdown` call per item, with no cap. On tech-heavy stories the sidebar runs ~900px tall and outruns the story content it annotates -- the Cendian integration story has 28 competencies. Technologies & Practices directly above it is capped at 10 and renders as wrapping pills, so two sections of the same kind of content use two different treatments and two different length behaviors.
+
+**Vocabulary overlap finding (August 24, 2026; not in scope):** The two sections share roughly 60% vocabulary on tech-heavy stories (B2B Integration, Canonical Data Modeling, Java Development, Service-Oriented Architecture appear in both). The labels are also arguably backwards: Core Competencies holds the technologies and `public_tags` holds the practices. Neither finding is being fixed here -- the overlap stops reading as redundant once both sections are chips, and there is no reliable rule in the data to split the fields (Service-Oriented Architecture is both, EDI is a standard, Document Generation names no technology; any automatic split would misclassify roughly a third of the values). Recorded so it isn't rediscovered.
+
+**Change:**
+Render competencies as wrapping pills using the same flex container as `public_tags`, styled as outlined rather than filled so the two sections stay visually distinct. Build the markup as one string and emit a single `st.markdown` call rather than one per item.
+
+New design-system tokens in `ui/styles/global_styles.py`:
+- `:root`: `--pill-outline-border: #D1D5DB;` and `--pill-outline-text: #4B5563;`
+- `body.dark-theme`: `--pill-outline-border: #374151;` and `--pill-outline-text: #9CA3AF;`
+
+Both values are mode-specific: at `#E5E7EB` on a white card the outline is too faint, and `#374151` is too dark to read on light.
+
+Replace the competencies loop in `story_detail.py` (~line 623):
+```python
+comps_html = '<div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;">'
+for comp in competencies:
+    if comp:
+        comps_html += f'<span style="background: transparent; border: 1px solid var(--pill-outline-border); padding: 6px 12px; border-radius: 12px; font-size: 12px; color: var(--pill-outline-text); font-weight: 500;">{comp}</span>'
+comps_html += '</div>'
+st.markdown(comps_html, unsafe_allow_html=True)
+```
+
+Drop the `[:10]` on the tags loop (~line 613). The cap existed only because the sidebar was already too tall; with both sections wrapping, neither needs truncating.
+
+**Out of scope:** Renaming either section, deduplicating tags against competencies, splitting the two fields by "technology vs capability."
+
+**Design reference:** `Story Detail Sidebar.dc.html`, option 3E -- real Cendian data at the production 380px sidebar width. 3C is the current behavior for scale; 3D shows why the light-mode outline needs its own value.
+
+**Acceptance:**
+1. Competencies wrap as outlined pills (`--pill-outline-border`, `#D1D5DB` light / `#374151` dark) in both modes; no single-column list remains.
+2. Cendian story sidebar height drops from ~900px to under 400px.
+3. Outline is clearly visible in light mode against the white card and in dark against `--bg-card`.
+4. Tags render uncapped; a story with 15 tags shows all 15.
+5. Grep `padding: 8px 0; font-size: 13px` for other instances of the old list treatment (Cards view, Ask Agy answer pane) and confirm none render competencies the old way.
+6. Mobile at 375px: pills wrap without horizontal overflow.
 
 ---
 
