@@ -2163,6 +2163,8 @@ st.markdown(comps_html, unsafe_allow_html=True)
 
 Drop the `[:10]` on the tags loop (~line 613). The cap existed only because the sidebar was already too tall; with both sections wrapping, neither needs truncating.
 
+**Also in scope:** `story_detail.py:372` caps tags at 10 in the Export/print render. Tags are alphabetized, so every story with 11+ tags silently drops the tail of the alphabet from a document that reads as complete -- a recruiter who exports the Cendian story gets 10 of 15 tags with no ellipsis, no count, and no indication anything was removed. Silent truncation is worse in a print artifact than on screen: on screen a cap is a display choice; a printed story detail reads as authoritative. Drop the cap. 15 tags comma-joined is roughly 180 characters -- two lines of body text in a 900px print column, and competencies beside it are already uncapped at 28 items. One-line change on the same field this ticket already touches.
+
 **Out of scope:** Renaming either section, deduplicating tags against competencies, splitting the two fields by "technology vs capability."
 
 **Design reference:** `Story Detail Sidebar.dc.html`, option 3E -- real Cendian data at the production 380px sidebar width. 3C is the current behavior for scale; 3D shows why the light-mode outline needs its own value.
@@ -2174,6 +2176,7 @@ Drop the `[:10]` on the tags loop (~line 613). The cap existed only because the 
 4. Tags render uncapped; a story with 15 tags shows all 15.
 5. Grep `padding: 8px 0; font-size: 13px` for other instances of the old list treatment (Cards view, Ask Agy answer pane) and confirm none render competencies the old way.
 6. Mobile at 375px: pills wrap without horizontal overflow.
+7. Export the Cendian story; all 15 tags appear in the printed Technologies & Practices line.
 
 ---
 
