@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: 4c8d900 -->
+<!-- last-backlog-sync: 3bb3691 -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -10,13 +10,11 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-08-17)
 
 **NOW**
-1. **-211** — Tag generator backup copies the wrong file; NLP output destroyed with no snapshot on every run. Two-line fix.
-2. **-072** — Tag generator efficiency: hash skip, case-insensitive dedup, parallelization, model evaluation. Causing live cost issues (~$4/run, Aug 17: 2,237 requests).
-3. **-212** — Story detail sidebar: Core Competencies renders as single-column list; outruns content at 900px on tech-heavy stories. Render as wrapping outlined pills, drop [:10] tag cap.
-4. **-163** — Professional org questions intercepted as private-family. High; same class as -208.
-5. **-162** — Embedding exception renders as no-match. Visitor concludes the corpus is thin when the app broke.
-6. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
-7. **-128** — Source faithfulness. Never run. Last unverified thing on the runway; gates Role Match since Role Match is evidence-backed ratings.
+1. **-212** — Story detail sidebar: Core Competencies renders as single-column list; outruns content at 900px on tech-heavy stories. Render as wrapping outlined pills, drop [:10] tag cap.
+2. **-163** — Professional org questions intercepted as private-family. High; same class as -208.
+3. **-162** — Embedding exception renders as no-match. Visitor concludes the corpus is thin when the app broke.
+4. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+5. **-128** — Source faithfulness. Never run. Last unverified thing on the runway; gates Role Match since Role Match is evidence-backed ratings.
 
 **NEXT** — Role Match, once the runway clears
 -160 (extractor dropping qualifiers on 7 of 23) · -173 (malformed and comp-only JD behavior) · -159 (sequential gpt-4o loop) · -014 (34 skipped integration scenarios) · -089 (location, work-model, availability) · -012 (Private View Phase 4) · -081 (corrective actions by asset type) · -099 (comp handling) · -017 (logging scenarios)
@@ -57,7 +55,6 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-060](#mattgpt-060) | BDD coverage gap — assert post-navigation page state, not just navigation | Open | Medium | Action | May 12, 2026 |
 | [MATTGPT-062](#mattgpt-062) | Semantic router cache silently uses stale embeddings when VALID_INTENTS changes | Open | Medium | Refactor | May 14, 2026 |
 | [MATTGPT-063](#mattgpt-063) | Wrong-person queries with names outside nonsense regex produce confused-context RAG answers | Open | Medium | Issue | May 14, 2026 |
-| [MATTGPT-072](#mattgpt-072) | `generate_public_tags.py` — case-insensitive tag dedup | Open | Low | Refactor | May 16, 2026 |
 | [MATTGPT-077](#mattgpt-077) | Subject-pronoun + noun-overlap retrieval contamination — "Matt + X" pulls MattGPT/Strangler Fig stories when X overlaps their vocabulary | Open | Medium-High | Issue | May 19, 2026 |
 | [MATTGPT-078](#mattgpt-078) | New corpus story — "AI Enablement Before It Had a Name" (resume Option E retrieval anchor) | Open | Medium | Action | May 21, 2026 |
 | [MATTGPT-079](#mattgpt-079) | Role Match coverage gaps — corpus story anchors needed (meta-ticket) | Open | Medium | Action | May 21, 2026 |
@@ -119,7 +116,6 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-206](#mattgpt-206) | Eval suite ~1-in-70 stochastic flap; Q28 confirmed non-deterministic | Open | Medium | Bug (Test) | August 19, 2026 |
 | [MATTGPT-209](#mattgpt-209) | MATT_DNA drift guard passes for wrong reason: employer check searches whole string, not Career Arc block | Open | Low | Bug (Test) | August 24, 2026 |
 | [MATTGPT-210](#mattgpt-210) | Ask Agy landing page suggestion chips are static; stories like STRATCOM invisible on career queries | Open | Low | Enhancement | August 24, 2026 |
-| [MATTGPT-211](#mattgpt-211) | `generate_public_tags.py` backup copies the wrong file; `echo_star_stories_nlp.jsonl` is destroyed with no snapshot | Open | Medium | Bug | August 24, 2026 |
 | [MATTGPT-212](#mattgpt-212) | Story detail sidebar: Core Competencies renders as single-column list; sidebar outruns content on tech-heavy stories | Open | Medium | UI / Bug | August 24, 2026 |
 
 ---
@@ -482,46 +478,6 @@ Each detail block uses these fields. Not every field is required for every item.
 
 ---
 
-### MATTGPT-072
-**`generate_public_tags.py` — case-insensitive tag dedup**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Refactor
-- **Issue:** The merge logic in `generate_public_tags.py` (lines 141-147) uses Python `set()` for dedup, which is exact-string-match only. Case variants of the same concept survive as separate tags. Across multiple enrichment cycles (with LLM casing variation across runs), duplicates accumulate.
-- **Concrete example (NS Mainframe story, May 16, 2026):** the `public_tags` field carries all of: `Agile Transformation` + `agile transformation`, `CI/CD Automation` + `CI/CD automation` (and `CI/CD Pipelines` as a third variant), `Continuous Improvement` + `continuous improvement`, `Lean Engineering` + `lean engineering`, `Developer Enablement` + `developer enablement`, `Test-Driven Development` + `test-driven development`, `Culture Shift` + `cultural change` + `culture change`. 31 tags where ~16 unique concepts would suffice.
-- **Impact:** Not a contamination bug (none of these tags introduce retrieval contamination on their own), but inflates the embedding's keyword surface area for the same concept, creating duplicate semantic weight. Over time, the corpus accumulates noise.
-- **Fix:** Replace `all_tags = set(new_tag_list + existing_tag_list)` with case-insensitive dedup that preserves a canonical casing (e.g., first-seen wins):
-  ```python
-  seen = {}
-  for tag in new_tag_list + existing_tag_list:
-      key = tag.lower()
-      if key not in seen:
-          seen[key] = tag  # preserve original casing
-  all_tags = sorted(seen.values(), key=lambda t: t.lower())
-  ```
-- **Scope:** ~5 lines in `generate_public_tags.py`. Single change. No tests beyond a unit test for the dedup helper (if extracted).
-- **Cleanup propagation:** After landing the script fix, a one-time pass over `echo_star_stories_nlp.jsonl` to dedupe existing case-variant tags would clean up the corpus state. Could be a small standalone script (`tools/dedupe_case_variants.py`) that runs once, OR can be folded into the next regular `generate_public_tags.py` invocation if the dedup logic processes existing tags as well as new ones.
-- **Out of scope:**
-  - Changing the additive-merge contract (`set()` behavior is what's intentional — preserve all distinct tags). This ticket only addresses the case-sensitivity flaw within that contract.
-  - Cleaning up the Excel master tags — those will get normalized on next enrichment pass once the script is fixed.
-- **Discovered during:** MATTGPT-061 deep investigation (May 16, 2026) when reviewing the NS Mainframe story's public_tags. Matt asked: *"Is the script duplicating? I thought it was comparing and appending if missing."* Investigation confirmed the script DOES dedupe — but only on exact string match, missing case variants.
-- **Additional scope items (July 16, 2026; updated August 24, 2026):** Script re-tags all stories on every run, sequentially, with gpt-4o -- even stories that haven't changed. Three primary scope items alongside case-dedup:
-  1. **Hash-based skip:** Hash the prompt-relevant fields (Title, Role, Industry, Theme, Competencies, Use Case(s), Situation, Task, Action, Result, Process, Performance) per story; load existing `echo_star_stories_nlp.jsonl` at startup; if a story's hash matches the prior run, copy existing `public_tags` and skip the API call. Only re-tag stories where content changed.
-  2. **Parallelism:** Parallelize remaining API calls with `ThreadPoolExecutor` (10 concurrent).
-  3. **Model evaluation (August 24, 2026):** Promoted from tertiary to primary scope item based on two converging findings. Do not name a specific model before running the evaluation -- a prior recommendation named gpt-4o-mini based on reading marketing names off a screenshot, which is not a basis for a model decision.
-     - **Quality signal (August 22, 2026):** Sparkfly story generated tags the story text doesn't support. gpt-4o's headroom appears to be enabling extrapolation beyond source fields, not extractive tagging. A cheaper model would likely produce better-scoped tags; the "better-scoped" claim is now supported by observation, not just a runtime hunch.
-     - **Cost signal (August 17-24, 2026):** OpenAI dashboard shows August 17 hit 2,237 requests in one day. Three `echo_star_stories_nlp_backup_20260817_*.jsonl` files in `archive/jsonl-backups/` confirm the tag generator ran 3 times that day. 3 x 123 stories = 369 gpt-4o requests from this script alone on that day. Attribution is arithmetic from backup filenames; dashboard confirms August 17 total but does not attribute per-script.
-     - **Unexplained requests (August 24, 2026):** Aug 17 total was 2,237; 369 is accounted for by tag-generator runs. Remaining ~1,870 is unexplained. The query logger Google Sheet would settle it -- sheet ID `1Xxsh7hBx6yh8K2Vn1r6ST6JTACIblUBOGbQ2QBvrAk4` (from `services/query_logger.py:8`).
-     - **Evaluation protocol:** Run the cheapest available general-purpose model against a 5-10 story sample. Reject any output that claims content not present in the source Situation/Task/Action/Result fields. Pass/fail is qualitative; cite the specific tags and the fields they do or don't appear in.
-
-**Two deliverables, separate gates (August 24, 2026):** Hash skip, case-insensitive dedup, and parallelization are testable with unit tests -- standard Red-Green cycle. Model evaluation requires a manual sample review that no automated test can perform. These must be sequenced separately; combining them in one cycle means the model swap blocks the efficiency fix or the efficiency fix ships without a validated model. Pick up the efficiency work first; gate model swap on the manual sample review independently.
-- **Vocabulary additions to preserve through dedupe (August 5, 2026):** The following tags were added to corpus stories but are not yet in the script's canonical vocabulary, so they risk being dropped or case-clobbered on the next enrichment run. Preserve these through whatever normalization the fix applies: `refactor`, `rearchitect` (from handoff notes), `Pair Rotation`, `Remote Pairing`, `Backlog Quality`, `User Story Writing`, `Definition of Done`, `Team Working Agreement` (from Making It Stick story, hand-cased August 5).
-- **Instance note (August 5, 2026):** The Making It Stick story's `public_tags` were hand-normalized for casing after a mixed-case generation run. Those hand-fixes are at risk when the script next runs. Preserve on regeneration.
-- **Open decision this ticket owns:** Canonical casing convention for generated tags. Current generated output is mixed (e.g., `Pair Programming` title case alongside `client upskilling` lowercase). Options: lowercase everywhere (matches retrieval-surface role and eliminates display-layer ambiguity); title case everywhere (display-friendly but retrieval-irrelevant); first-seen wins (script-convenient but unpredictable). Decide and encode in the script before the next enrichment run.
-- **Logged:** May 16, 2026
-
----
 
 ### MATTGPT-077
 **Subject-pronoun + noun-overlap retrieval contamination — "Matt + X" pulls MattGPT/Strangler Fig stories when X overlaps their vocabulary**
@@ -2221,26 +2177,6 @@ Drop the `[:10]` on the tags loop (~line 613). The cap existed only because the 
 
 ---
 
-### MATTGPT-211
-**`generate_public_tags.py` backup copies the wrong file; `echo_star_stories_nlp.jsonl` is destroyed with no snapshot**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Bug
-- **File:** `generate_public_tags.py:184`
-- **Logged:** August 24, 2026
-
-**Issue:** `generate_public_tags.py:184` calls `shutil.copy(INPUT_FILE, backup_file)`. `INPUT_FILE` is `echo_star_stories.jsonl` (the raw corpus). The backup filename reads `echo_star_stories_nlp_backup_<timestamp>.jsonl`, implying it is snapshotting the NLP output file. It is not. The file actually overwritten -- `echo_star_stories_nlp.jsonl` -- is destroyed with no snapshot taken. Any tag regression is unrecoverable.
-
-**Verified (August 24, 2026):** Aug 23 backup SHA matches `echo_star_stories.jsonl` byte-for-byte and differs from `echo_star_stories_nlp.jsonl`. The three sibling enrichment scripts do this correctly because they read and write the same file; the copied line was right in all three and wrong in the one where input and output differ.
-
-**Consequence:** Three tag-generator runs on August 17 each destroyed the prior NLP state. No snapshot of any prior `echo_star_stories_nlp.jsonl` exists from those runs.
-
-**Fix:** Two lines. Change the backup source from `INPUT_FILE` to `OUTPUT_FILE` (i.e., `echo_star_stories_nlp.jsonl`). Add an existence guard so the script does not proceed if `OUTPUT_FILE` is absent.
-
-**Cross-references:** MATTGPT-072 (tag generator efficiency -- separate scope, same script).
-
----
 
 ### MATTGPT-205
 **BDD marathon flake: test_error_state_extraction_failure fails in marathon, passes in isolation**

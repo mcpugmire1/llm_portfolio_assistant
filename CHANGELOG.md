@@ -8,6 +8,16 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Ask Agy
 
+**August 26, 2026 — Tag generator: skip-unchanged partition, discovery-vocabulary prompt, post-processing normalization, backup defect fixed (MATTGPT-072, MATTGPT-211)** -- `3bb3691`
+
+MATTGPT-072: Four changes shipped together. (1) Skip-unchanged partition: `_prompt_view` is now the single source of truth for LLM inputs; when a story's prompt-relevant fields hash to the same value as the prior run, the API call is skipped and existing tags are copied. Cost drops from ~$0.36 (full corpus) to $0.00 when nothing changed. Partition categories recorded at partition time: no prior tags / Excel cleared / content changed. (2) Discovery-vocabulary system prompt: tags are asserted as search terms a reader might type, not capability claims. Capability is captured separately in Competencies. `maxItems=15` enforced via JSON schema with `strict:true`. (3) Post-processing normalization applied to all tags from both Excel and LLM: acronym-parenthetical stripping, title-case with small-word rule (and/or/the/a/an/of/for/in/to/with lowercased except when first token; applies to hyphen and slash segments), case-insensitive dedup preferring uppercase-heavy variant. (4) Excel-authoritative for `public_tags`: removed the preserve-on-blank rule in `_merge_with_existing` (blank Excel now produces blank JSONL); removed `public_tags` from the diff-loop exclusion so changes appear in the ingest report.
+
+MATTGPT-211: Backup step at `generate_public_tags.py:184` was calling `shutil.copy(INPUT_FILE, backup_file)` -- copying `echo_star_stories.jsonl` under a filename that implied it was snapshotting the NLP output. Fixed: backup source is now `OUTPUT_FILE` (`echo_star_stories_nlp.jsonl`). Existence guard added for first runs when no prior output exists. Every previous run had been destroying the prior NLP state with no recoverable snapshot.
+
+Architecture sync candidates (Code to document in ARCHITECTURE.md from commit range): skip-unchanged partition and `_prompt_view` as LLM input source of truth; discovery-vocabulary framing for `public_tags`; post-processing normalization pipeline; Excel-authoritative ingest behavior for `public_tags`. ARCHITECTURE.md also has an unstaged modification predating this ticket; separate question whether to fold into the same sync pass.
+
+---
+
 **August 24, 2026 — Career-shaped query retrieval fixed for broad queries; Case B decided against (MATTGPT-208)** -- `75e3be5`, `4309b38`
 
 Case A (broad career queries, no temporal marker): SEARCH_TOP_K raised from 10 to 25 (`75e3be5`). `diversify_results` gained a `family="background"` branch that groups by Era instead of Client, with a kind cap of at most one Professional Narrative story and at most one Independent Project story (`4309b38`). Ten unit tests. Eval 70/70 at push gate. Before: "tell me about Matt's career" returned 2 distinct eras, 6 of 7 slots from Technical Foundations, 4 of those WellFound engagements under different Client values. After: 5 distinct eras in the first five, three engagement stories, one positioning anchor.
