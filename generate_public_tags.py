@@ -14,6 +14,7 @@ This is step 2 in the data pipeline:
 
 import json
 import os
+import re
 import shutil
 from datetime import UTC, datetime
 from pathlib import Path
@@ -49,6 +50,89 @@ TECHNICAL_ONLY_ERAS = {"Independent Product Development"}
 # ---------------------------
 # Helper: single source of truth for what the LLM sees per story
 # ---------------------------
+def _strip_paren_acronym(tag: str) -> str:
+    """Collapse "phrase (ACRONYM)" tags to just the acronym.
+
+    "large language models (LLM)" -> "LLM"
+    "enterprise service bus (ESB)" -> "ESB"
+
+    Fires only when the parenthetical at the end is a short all-caps token
+    (acronym pattern). Non-acronym parentheticals are left alone.
+    """
+    m = re.match(r"^.+\s+\(([A-Z]{2,}[A-Z0-9]*)\)$", tag.strip())
+    return m.group(1) if m else tag
+
+
+_SMALL_WORDS = {"and", "or", "the", "a", "an", "of", "for", "in", "to", "with"}
+
+
+def _normalize_tag_case(tag: str) -> str:
+    """Title-case each word, preserving acronyms and mixed-case proper nouns.
+
+    - "agile transformation" -> "Agile Transformation"
+    - "AWS" -> "AWS" (all-caps preserved)
+    - "DevOps" -> "DevOps" (any uppercase char -> preserve)
+    - "cross-functional collaboration" -> "Cross-Functional Collaboration"
+    - "CI/CD pipelines" -> "CI/CD Pipelines"
+    - "Docker And Kubernetes" -> "Docker and Kubernetes" (standard title case)
+    - "And Docker" -> "And Docker" (small word capitalized when first)
+
+    Splits on spaces first, then further on hyphens and slashes so acronyms
+    around those separators are preserved individually (CI/CD, cross-XYZ).
+    Small words (and, or, the, a, an, of, for, in, to, with) are lowercased
+    unless they are the first token of the tag; check applies to hyphen and
+    slash segments too, so "Cross-And-Effect" -> "Cross-and-Effect". Small-word
+    override wins over uppercase preservation, so "Docker AND Kubernetes"
+    still normalizes to "Docker and Kubernetes".
+
+    Rule is otherwise "preserve anything with an uppercase char" rather than
+    "title-case unless all-caps" -- means a half-cased LLM output like "agile
+    Transformation" stays half-cased. Not seen in practice; the models return
+    either all-lower or already-cased.
+    """
+
+    def _norm_token(t: str, *, is_first: bool) -> str:
+        if not t:
+            return t
+        if not is_first and t.lower() in _SMALL_WORDS:
+            return t.lower()
+        if any(c.isupper() for c in t):
+            return t  # acronym or proper noun preserved
+        return t[0].upper() + t[1:].lower()
+
+    result_words = []
+    first_seen = False
+    for word in tag.split():
+        parts = re.split(r"([-/])", word)
+        out = []
+        for p in parts:
+            if p in "-/" or not p:
+                out.append(p)
+                continue
+            out.append(_norm_token(p, is_first=not first_seen))
+            first_seen = True
+        result_words.append("".join(out))
+    return " ".join(result_words)
+
+
+def _drop_restated_fields(tags: list[str], story: dict) -> list[str]:
+    """Drop tags that exactly restate the story's Industry, Sub-category,
+    Category, or Project (case-insensitive).
+
+    Those fields are separately filterable in the UI, so a tag that repeats
+    them is a duplicate route to the same story and a wasted slot out of 15.
+    Verified: "telecommunications" on a story whose Industry is
+    Telecommunications; "career narrative" on a story whose Project is
+    Career Narrative.
+    """
+    restated = {
+        str(story.get(f, "") or "").strip().lower()
+        for f in ("Industry", "Sub-category", "Category", "Project")
+    }
+    restated.discard("")
+    return [t for t in tags if t.strip().lower() not in restated]
+
+
 def _dedupe_title_case_wins(tags: list[str]) -> list[str]:
     """Case-insensitive dedup preferring the more uppercase-heavy variant.
 
@@ -187,8 +271,14 @@ def extract_semantic_tags(story) -> list[str]:
             },
         )
         payload = json.loads(response.choices[0].message.content)
-        tags = payload.get("tags") or []
-        return [str(t).strip() for t in tags if str(t).strip()]
+        raw_tags = [
+            str(t).strip() for t in (payload.get("tags") or []) if str(t).strip()
+        ]
+        # Only _drop_restated_fields runs here -- it's LLM-specific (the
+        # generator shouldn't emit tags that just restate story metadata).
+        # Case normalization and paren-acronym stripping run later in the
+        # main flow so they apply to Excel input tags too.
+        return _drop_restated_fields(raw_tags, story)
     except Exception as e:
         print(f"❌ Error generating tags for story ID {story.get('id')}: {e}")
         return []
@@ -217,23 +307,44 @@ def enrich_stories_with_nlp_tags():
                     rec = json.loads(line)
                     prior_by_id[rec.get("id")] = rec
 
-    # Partition: skip stories whose _prompt_view matches prior. public_tags
-    # is excluded from the comparison implicitly (not a _prompt_view field),
-    # matching generate_jsonl_from_excel.py's diff-loop convention.
+    # Partition: three ways a story lands in to_tag; record the reason during
+    # the check so the audit report can print the actual cause rather than
+    # inferring it after the fact (MATTGPT-072).
+    #
+    # Skip fires only when input has tags AND prior has tags AND _prompt_view
+    # matches. Input has tags = Excel populated; skipping preserves Excel-
+    # authoritative content forward with no API call.
     to_tag = []
+    tag_reason_by_id: dict[str, str] = {}
     for story in input_stories:
-        prior = prior_by_id.get(story.get("id"))
-        if prior is None or _prompt_view(story) != _prompt_view(prior):
+        sid = story.get("id")
+        prior = prior_by_id.get(sid)
+        prior_has_tags = prior is not None and bool(
+            str(prior.get("public_tags", "") or "").strip()
+        )
+        input_has_tags = bool(str(story.get("public_tags", "")).strip())
+
+        if not prior_has_tags:
             to_tag.append(story)
+            tag_reason_by_id[sid] = "no prior tags"
+        elif not input_has_tags:
+            to_tag.append(story)
+            tag_reason_by_id[sid] = "Excel cleared"
+        elif _prompt_view(story) != _prompt_view(prior):
+            to_tag.append(story)
+            tag_reason_by_id[sid] = "content changed"
+        # else: skip (input has tags, prior has tags, _prompt_view matches)
 
     total_count = len(input_stories)
     tag_count = len(to_tag)
     skip_count = total_count - tag_count
 
-    # Cost estimation (gpt-4o pricing: ~$2.50 per 1M input tokens, ~$10 per 1M output tokens)
-    # Rough estimate: ~1000 tokens input + ~100 tokens output per story.
-    # Count only stories that need re-tagging, not the full corpus.
-    estimated_cost = tag_count * ((1000 * 2.50 / 1_000_000) + (100 * 10 / 1_000_000))
+    # Cost estimation (gpt-4o pricing: $2.50 per 1M input tokens, $10 per 1M output tokens)
+    # Measured 2026-08-26 via tiktoken (probe_072_token_measurement.py):
+    #   Input: corpus mean 872, median 770, p90 1273, max 2839 tokens/story.
+    #   Output: 15-tag JSON payload averages 72 tokens (bounded by maxItems=15).
+    # Using mean input and rounded output. Count only stories being re-tagged.
+    estimated_cost = tag_count * ((872 * 2.50 / 1_000_000) + (75 * 10 / 1_000_000))
 
     print(
         f"\n📊 Found {total_count} stories; "
@@ -243,38 +354,109 @@ def enrich_stories_with_nlp_tags():
     print(f"⚠️  This will make {tag_count} API calls to OpenAI\n")
 
     if tag_count == 0:
-        print("✅ All stories match prior output. Nothing to do.")
-        return
-
-    confirm = input("Continue? (y/n): ").strip().lower()
-    if confirm != 'y':
-        print("❌ Cancelled by user")
-        return
+        # No LLM calls needed, but check for Excel tag edits on unchanged
+        # stories -- those still need to persist to the output file since
+        # input.public_tags is authoritative on skip (MATTGPT-072).
+        tag_edits = [
+            s
+            for s in input_stories
+            if str(s.get("public_tags", "")).strip()
+            != str(prior_by_id.get(s.get("id"), {}).get("public_tags", "")).strip()
+        ]
+        if not tag_edits:
+            print("✅ All stories match prior output. Nothing to do.")
+            return
+        print(
+            f"ℹ️  No LLM calls needed. {len(tag_edits)} stories have Excel "
+            f"public_tags edits to persist; writing without prompt."
+        )
+    else:
+        confirm = input("Continue? (y/n): ").strip().lower()
+        if confirm != 'y':
+            print("❌ Cancelled by user")
+            return
 
     # Tag changed/new stories via LLM. Mutates story dicts in place.
+    # Naive merge here (LLM tags + Excel input tags); post-processing pass
+    # below normalizes and dedupes across every story regardless of source.
     for story in to_tag:
         print(f"🔍 Processing story ID {story.get('id')}...")
         new_tag_list = extract_semantic_tags(story)
         existing_tags = story.get("public_tags", "")
-
-        # Combine with existing (from Excel column) and case-insensitive dedupe.
-        # Title case wins on collision; acronyms preserved via uppercase-count.
         existing_tag_list = [
             tag.strip() for tag in existing_tags.split(",") if tag.strip()
         ]
-        deduped = _dedupe_title_case_wins(new_tag_list + existing_tag_list)
-        story["public_tags"] = ", ".join(sorted(deduped))
+        story["public_tags"] = ", ".join(new_tag_list + existing_tag_list)
 
-    # Assemble final list in original input order. Stories in to_tag are
-    # already mutated in place. Skipped stories carry prior public_tags
-    # forward (guaranteed present since only prior-matching stories were
-    # excluded from to_tag).
+    # Assemble final list in original input order. Tagged stories were
+    # mutated in place above. Skipped stories carry input.public_tags
+    # forward -- Excel is authoritative, no overwrite from prior nlp file
+    # (MATTGPT-072).
     to_tag_ids = {s.get("id") for s in to_tag}
-    enriched_records = []
+    enriched_records = list(input_stories)
+
+    # Post-processing: strip parenthetical acronyms, title-case each word,
+    # and dedupe case-insensitively. Applied to every story's public_tags
+    # regardless of source (Excel input or LLM output) so both follow the
+    # same rules. The rule "title case on every tag" needs to hold even for
+    # tags Matt pastes into Excel; running this inside extract_semantic_tags
+    # would leave Excel tags uncorrected.
+    for story in enriched_records:
+        raw = str(story.get("public_tags", "") or "")
+        if not raw.strip():
+            continue
+        parts = [t.strip() for t in raw.split(",") if t.strip()]
+        parts = [_strip_paren_acronym(t) for t in parts]
+        parts = [_normalize_tag_case(t) for t in parts]
+        parts = _dedupe_title_case_wins(parts)
+        story["public_tags"] = ", ".join(sorted(parts))
+
+    # Per-story audit report. Matches the shape of generate_jsonl_from_excel.py's
+    # diff report: one block per story, OLD/NEW for anything that changed.
+    # Reason for tagging comes from tag_reason_by_id (recorded at partition
+    # time, not inferred here).
+    print("\n--- 🔍 Per-story Report ---")
+    counts = {
+        "no prior tags": 0,
+        "Excel cleared": 0,
+        "content changed": 0,
+        "tags unchanged": 0,
+        "using Excel tags": 0,
+    }
     for story in input_stories:
-        if story.get("id") not in to_tag_ids:
-            story["public_tags"] = prior_by_id[story.get("id")].get("public_tags", "")
-        enriched_records.append(story)
+        sid = story.get("id")
+        prior = prior_by_id.get(sid) or {}
+        prior_tags = str(prior.get("public_tags", "") or "").strip()
+        final_tags = str(story.get("public_tags", "") or "").strip()
+
+        if sid in to_tag_ids:
+            reason = tag_reason_by_id[sid]
+            counts[reason] += 1
+            print(f"\n[id={sid}] Tagged: {reason}")
+            print("  • public_tags:")
+            print(f"    OLD: {prior_tags!r}")
+            print(f"    NEW: {final_tags!r}")
+        else:
+            if final_tags == prior_tags:
+                counts["tags unchanged"] += 1
+                print(f"\n[id={sid}] Skipped: tags unchanged")
+            else:
+                counts["using Excel tags"] += 1
+                print(f"\n[id={sid}] Skipped: using Excel tags")
+                print("  • public_tags:")
+                print(f"    OLD: {prior_tags!r}")
+                print(f"    NEW: {final_tags!r}")
+
+    print(
+        f"\n📊 Total: {total_count}   "
+        f"Tagged: {len(to_tag)} "
+        f"({counts['no prior tags']} no prior tags, "
+        f"{counts['Excel cleared']} Excel cleared, "
+        f"{counts['content changed']} content changed)   "
+        f"Skipped: {total_count - len(to_tag)} "
+        f"({counts['tags unchanged']} unchanged, "
+        f"{counts['using Excel tags']} Excel tag edits)"
+    )
 
     # Backup before overwriting. Source must be OUTPUT_FILE -- the file that
     # gets overwritten below -- not INPUT_FILE, which this script only reads.

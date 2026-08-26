@@ -252,6 +252,100 @@ class TestTitleCaseDedup:
         assert result == ["Data Governance"]
 
 
+class TestStripParenAcronym:
+    """MATTGPT-072: collapse 'phrase (ACRONYM)' to just the acronym."""
+
+    def test_parenthetical_acronym_stripped(self):
+        from generate_public_tags import _strip_paren_acronym
+
+        assert _strip_paren_acronym("large language models (LLM)") == "LLM"
+        assert _strip_paren_acronym("enterprise service bus (ESB)") == "ESB"
+
+    def test_non_acronym_parenthetical_unchanged(self):
+        """Only trailing all-caps parentheticals are treated as acronym
+        expansions. Non-acronym parentheticals (lowercase, mixed, phrases)
+        stay intact."""
+        from generate_public_tags import _strip_paren_acronym
+
+        assert (
+            _strip_paren_acronym("prototype (early stage)") == "prototype (early stage)"
+        )
+
+
+class TestNormalizeTagCase:
+    """MATTGPT-072: title-case each word, preserve acronyms and mixed-case
+    proper nouns."""
+
+    def test_lowercase_to_title_case(self):
+        from generate_public_tags import _normalize_tag_case
+
+        assert _normalize_tag_case("agile transformation") == "Agile Transformation"
+
+    def test_all_caps_acronym_preserved(self):
+        from generate_public_tags import _normalize_tag_case
+
+        assert _normalize_tag_case("AWS") == "AWS"
+        assert _normalize_tag_case("EDI") == "EDI"
+
+    def test_hyphenated_words(self):
+        from generate_public_tags import _normalize_tag_case
+
+        assert (
+            _normalize_tag_case("cross-functional collaboration")
+            == "Cross-Functional Collaboration"
+        )
+
+    def test_slashed_acronym(self):
+        from generate_public_tags import _normalize_tag_case
+
+        assert _normalize_tag_case("CI/CD pipelines") == "CI/CD Pipelines"
+
+    def test_small_word_lowercased_between_words(self):
+        from generate_public_tags import _normalize_tag_case
+
+        assert _normalize_tag_case("Docker And Kubernetes") == "Docker and Kubernetes"
+        assert _normalize_tag_case("Aerospace And Defense") == "Aerospace and Defense"
+        assert (
+            _normalize_tag_case("Training and Enablement") == "Training and Enablement"
+        )
+
+    def test_small_word_capitalized_when_first(self):
+        from generate_public_tags import _normalize_tag_case
+
+        assert _normalize_tag_case("And Docker") == "And Docker"
+        assert _normalize_tag_case("the platform") == "The Platform"
+
+    def test_small_word_lowercased_in_hyphen_segment(self):
+        from generate_public_tags import _normalize_tag_case
+
+        assert _normalize_tag_case("Cross-And-Effect") == "Cross-and-Effect"
+
+    def test_uppercase_small_word_still_lowercased(self):
+        from generate_public_tags import _normalize_tag_case
+
+        assert _normalize_tag_case("Docker AND Kubernetes") == "Docker and Kubernetes"
+
+    def test_acronym_preserved_next_to_small_word(self):
+        from generate_public_tags import _normalize_tag_case
+
+        assert _normalize_tag_case("AWS and GCP") == "AWS and GCP"
+
+
+class TestDropRestatedFields:
+    """MATTGPT-072: tags that exactly restate Industry/Sub-category/Category/
+    Project are duplicate routes and get dropped."""
+
+    def test_tag_matching_industry_is_dropped(self):
+        from generate_public_tags import _drop_restated_fields
+
+        story = {"Industry": "Telecommunications"}
+        tags = ["Data Architecture", "Telecommunications", "Order Management"]
+        assert _drop_restated_fields(tags, story) == [
+            "Data Architecture",
+            "Order Management",
+        ]
+
+
 class TestSkipUnchangedStories:
     """MATTGPT-072 Change 2: skip stories whose _prompt_view is unchanged
     against the prior OUTPUT_FILE. Copy prior public_tags forward, no API
@@ -306,15 +400,20 @@ class TestSkipUnchangedStories:
             return [json.loads(line) for line in f if line.strip()]
 
     def test_no_api_calls_when_every_story_matches_prior(self, env):
-        """3 stories, prior output has 3 identical prompt-views. Zero API
-        calls; prior public_tags carried forward verbatim."""
+        """3 stories, prior output has 3 identical prompt-views, input has
+        non-empty public_tags. Zero API calls; input.public_tags carried
+        forward on skip (Excel is authoritative, MATTGPT-072)."""
         input_records = [
-            {"id": "s1", "Title": "A", "Situation": ["ax"]},
-            {"id": "s2", "Title": "B", "Situation": ["bx"]},
-            {"id": "s3", "Title": "C", "Situation": ["cx"]},
+            {"id": "s1", "Title": "A", "Situation": ["ax"], "public_tags": "input-s1"},
+            {"id": "s2", "Title": "B", "Situation": ["bx"], "public_tags": "input-s2"},
+            {"id": "s3", "Title": "C", "Situation": ["cx"], "public_tags": "input-s3"},
         ]
         prior_records = [
-            {**r, "public_tags": f"prior-{r['id']}"} for r in input_records
+            {
+                **{k: v for k, v in r.items() if k != "public_tags"},
+                "public_tags": f"prior-{r['id']}",
+            }
+            for r in input_records
         ]
         self._write_jsonl(env.input_path, input_records)
         self._write_jsonl(env.output_path, prior_records)
@@ -325,21 +424,39 @@ class TestSkipUnchangedStories:
             f"No LLM calls expected when all prompt-views match prior; "
             f"got {env.mock_create.call_count}"
         )
+        # Post-processing title-cases every tag; check content survives
+        # case-insensitively so this test doesn't fight the normalizer.
         out = {r["id"]: r for r in self._read_jsonl(env.output_path)}
         for sid in ("s1", "s2", "s3"):
-            assert out[sid]["public_tags"] == f"prior-{sid}", (
-                f"Prior tags must carry forward on skip; "
+            assert out[sid]["public_tags"].lower() == f"input-{sid}", (
+                f"Input.public_tags must carry forward on skip (Excel authoritative); "
                 f"{sid} got {out[sid]['public_tags']!r}"
             )
 
     def test_api_called_only_for_changed_stories(self, env):
         """3 stories, prior has s1 and s3 matching but s2's Title changed.
-        Expect exactly 1 API call. s1 and s3 keep prior tags; s2 gets the
-        freshly-generated tag."""
+        Expect exactly 1 API call. s1 and s3 keep input.public_tags (Excel
+        authoritative on skip); s2 gets the freshly-generated tag merged
+        with its input tag."""
         input_records = [
-            {"id": "s1", "Title": "A", "Situation": ["ax"]},
-            {"id": "s2", "Title": "B-CHANGED", "Situation": ["bx"]},
-            {"id": "s3", "Title": "C", "Situation": ["cx"]},
+            {
+                "id": "s1",
+                "Title": "A",
+                "Situation": ["ax"],
+                "public_tags": "input-s1",
+            },
+            {
+                "id": "s2",
+                "Title": "B-CHANGED",
+                "Situation": ["bx"],
+                "public_tags": "input-s2",
+            },
+            {
+                "id": "s3",
+                "Title": "C",
+                "Situation": ["cx"],
+                "public_tags": "input-s3",
+            },
         ]
         prior_records = [
             {
@@ -371,10 +488,17 @@ class TestSkipUnchangedStories:
             f"got {env.mock_create.call_count}"
         )
         out = {r["id"]: r for r in self._read_jsonl(env.output_path)}
-        assert out["s1"]["public_tags"] == "prior-s1"
-        assert out["s3"]["public_tags"] == "prior-s3"
-        assert "freshly-generated-tag" in out["s2"]["public_tags"], (
+        # Post-processing normalizes all tags regardless of source; check
+        # content survives case-insensitively.
+        assert out["s1"]["public_tags"].lower() == "input-s1"
+        assert out["s3"]["public_tags"].lower() == "input-s3"
+        s2_tags_lower = out["s2"]["public_tags"].lower()
+        assert "freshly-generated-tag" in s2_tags_lower, (
             f"s2 should have the fresh LLM-generated tag; "
+            f"got {out['s2']['public_tags']!r}"
+        )
+        assert "input-s2" in s2_tags_lower, (
+            f"s2's input.public_tags must survive the re-tag merge (union); "
             f"got {out['s2']['public_tags']!r}"
         )
 
@@ -397,9 +521,8 @@ class TestSkipUnchangedStories:
 
     def test_public_tags_change_alone_does_not_trigger_retag(self, env):
         """Only public_tags differs between input and prior; all prompt-view
-        fields identical. Skip should fire; prior public_tags carries forward.
-        (Matches generate_jsonl_from_excel.py's exclusion of public_tags
-        from its diff for the same reason.)"""
+        fields identical. Skip fires (no LLM call); input.public_tags carries
+        forward (Excel authoritative on skip, MATTGPT-072)."""
         input_record = {
             "id": "s1",
             "Title": "T",
@@ -422,8 +545,9 @@ class TestSkipUnchangedStories:
             "skip should fire when prompt-view fields are identical"
         )
         out = self._read_jsonl(env.output_path)
-        assert out[0]["public_tags"] == "prior-generated-tag", (
-            f"Prior tags must carry forward on skip; " f"got {out[0]['public_tags']!r}"
+        assert out[0]["public_tags"].lower() == "excel-tag-updated", (
+            f"Input.public_tags must carry forward on skip (Excel authoritative); "
+            f"got {out[0]['public_tags']!r}"
         )
 
     def test_situation_second_item_change_triggers_retag(self, env):

@@ -67,6 +67,34 @@ def load_existing_jsonl(path: str):
     return records, by_key
 
 
+def _merge_with_existing(record: dict, existing: dict) -> dict:
+    """Merge a fresh-from-Excel record with any prior JSONL record.
+
+    Excel is authoritative for public_tags: blank in Excel means blank in
+    the JSONL. Content is preserved from prior when Excel does not supply
+    it (LLM/downstream fills content later). Any other prior-only fields
+    survive to accommodate future enrichments not tracked in Excel.
+
+    Prior to Aug 2026 this block also preserved public_tags when Excel was
+    blank, which meant a cleared Excel column was silently overridden by
+    the tag generator's prior output. The master could not express "no
+    tags." Removed as part of MATTGPT-072.
+    """
+    if not existing:
+        return record
+
+    # Preserve content if Excel does not supply it (it usually doesn't)
+    if not record.get("content") and "content" in existing:
+        record["content"] = existing.get("content", "")
+
+    # Preserve any other prior-only fields (future enrichments not in Excel)
+    for k, v in existing.items():
+        if k not in record:
+            record[k] = v
+
+    return record
+
+
 def backup_file(path: str):
     if os.path.exists(path):
         ts = datetime.now(UTC).strftime("%Y-%m-%dT%H_%M_%SZ")
@@ -211,7 +239,6 @@ def excel_to_jsonl():
             "content": "",  # placeholder; may be preserved from existing
         }
 
-        # Merge with existing (preserve id, public_tags, content when Excel is blank)
         existing = existing_by_key.get(key, {})
 
         record = {}
@@ -222,19 +249,7 @@ def excel_to_jsonl():
         # Copy all base fields from Excel first
         record.update(rec_from_excel)
 
-        # Preserve public_tags if Excel is blank
-        if not record["public_tags"] and "public_tags" in existing:
-            record["public_tags"] = existing.get("public_tags", "")
-
-        # Preserve content if Excel doesn't supply it (it usually doesn't)
-        if not record.get("content") and "content" in existing:
-            record["content"] = existing.get("content", "")
-
-        # Also preserve any fields we’re not explicitly setting but exist in the old record
-        # (e.g., future enrichments)
-        for k, v in existing.items():
-            if k not in record:
-                record[k] = v
+        record = _merge_with_existing(record, existing)
 
         out_records.append(record)
         if existing:
@@ -266,7 +281,7 @@ def excel_to_jsonl():
 
         diffs = []
         for field in rec:
-            if field in ["id", "content", "public_tags"]:
+            if field in ["id", "content"]:
                 continue
             new_val = rec[field]
             old_val = old.get(field)
@@ -297,7 +312,7 @@ def excel_to_jsonl():
         print("✅ JSONL export complete.")
         print(f"📄 Output file: {OUTPUT_JSONL_FILE}")
         print(
-            "📌 Safe to run content/tag enrichment next; preserves existing data when Excel is blank."
+            "📌 Safe to run content/tag enrichment next. Excel is authoritative for public_tags; content is preserved from prior JSONL when Excel does not supply it."
         )
 
 
