@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: 3bb3691 -->
+<!-- last-backlog-sync: e307d6d -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -10,7 +10,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-08-17)
 
 **NOW**
-1. **-212** — Story detail sidebar: Core Competencies renders as single-column list; outruns content at 900px on tech-heavy stories. Render as wrapping outlined pills, drop [:10] tag cap.
+1. **-215** — Key Metrics sidebar parse heuristic surfaces bogus renders (year-as-metric, counted nouns, value precision loss) on ~10 stories. User-visible on live Cendian story since MATTGPT-212 reduced sidebar height.
 2. **-163** — Professional org questions intercepted as private-family. High; same class as -208.
 3. **-162** — Embedding exception renders as no-match. Visitor concludes the corpus is thin when the app broke.
 4. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
@@ -37,7 +37,7 @@ Wrong-assertion test: -203 · -209 (drift guard searches wrong scope)
 Small refactors: -140, -153, -086, -062, -082, -083, -084, -150, -060
 BDD structure: -213 (shared step definitions)
 Correctness audit: -214 (parameters, comments, constants, copied blocks)
-Infrastructure: -035, -039, -040, -045
+Infrastructure: -035, -039, -040, -045, -216 (unit test gate)
 
 ---
 
@@ -118,9 +118,10 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-206](#mattgpt-206) | Eval suite ~1-in-70 stochastic flap; Q28 confirmed non-deterministic | Open | Medium | Bug (Test) | August 19, 2026 |
 | [MATTGPT-209](#mattgpt-209) | MATT_DNA drift guard passes for wrong reason: employer check searches whole string, not Career Arc block | Open | Low | Bug (Test) | August 24, 2026 |
 | [MATTGPT-210](#mattgpt-210) | Ask Agy landing page suggestion chips are static; stories like STRATCOM invisible on career queries | Open | Low | Enhancement | August 24, 2026 |
-| [MATTGPT-212](#mattgpt-212) | Story detail sidebar: Core Competencies renders as single-column list; sidebar outruns content on tech-heavy stories | Open | Medium | UI / Bug | August 24, 2026 |
 | [MATTGPT-213](#mattgpt-213) | BDD suite: navigation step definitions duplicated across modules; no shared step module | Open | Low | Refactor / Test | August 26, 2026 |
 | [MATTGPT-214](#mattgpt-214) | Targeted audit: parameters never referenced, comments asserting absent behavior, constants unused, copied blocks with stale variable names | Open | Low | Refactor | August 26, 2026 |
+| [MATTGPT-215](#mattgpt-215) | Key Metrics sidebar parse heuristic surfaces bogus renders on ~10 stories | Open | High | Bug | August 26, 2026 |
+| [MATTGPT-216](#mattgpt-216) | Unit test suite not part of commit/push gate; 5 failures accumulated invisibly | Open | Medium | Infrastructure | August 26, 2026 |
 
 ---
 
@@ -182,7 +183,6 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-172](#mattgpt-172) | CIC-cluster consolidation: CIC is 52/114 (46%) of corpus; Division concentration causes cluster-drift dominance on broad queries | Decided Against | Medium | Action | August 8, 2026 |
 | [MATTGPT-179](#mattgpt-179) | Dead formatters in formatting.py — both entrances orphaned, phantom schema in unreachable code; consider folding into MATTGPT-176 | Decided Against | Low | Refactor | August 11, 2026 |
 | [MATTGPT-184](#mattgpt-184) | ask_mattgpt/utils.py module audit -- six dead functions, four duplicating live helpers elsewhere | Decided Against | Low | Refactor | August 13, 2026 |
-| [MATTGPT-189](#mattgpt-189) | test_global_styles_no_cdn asserts a feature removed in 2cbe5f5 | Decided Against | Low | Test | August 13, 2026 |
 | [MATTGPT-191](#mattgpt-191) | test_synthesis_pool_size fails because SYNTHESIS_THEMES is never populated in test context | Decided Against | Low | Bug | August 16, 2026 |
 | [MATTGPT-192](#mattgpt-192) | Semantic router returns out_of_scope for entity-scoped queries (amex) | Decided Against | Medium | Bug | August 16, 2026 |
 | [MATTGPT-193](#mattgpt-193) | LLM-output tests are stochastic at temperature 0.4 | Decided Against | Low | Test | August 16, 2026 |
@@ -2133,57 +2133,6 @@ Fix (full): Cards and Timeline both use `st.info` for the empty-state message, w
 
 ---
 
-### MATTGPT-212
-**Story detail sidebar: Core Competencies renders as single-column list; sidebar outruns content on tech-heavy stories**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** UI / Bug
-- **Component:** `ui/components/story_detail.py`
-- **Logged:** August 24, 2026
-
-**Problem:** Core Competencies renders as a single-column list, one `st.markdown` call per item, with no cap. On tech-heavy stories the sidebar runs ~900px tall and outruns the story content it annotates -- the Cendian integration story has 28 competencies. Technologies & Practices directly above it is capped at 10 and renders as wrapping pills, so two sections of the same kind of content use two different treatments and two different length behaviors.
-
-**Vocabulary overlap finding (August 24, 2026; not in scope):** The two sections share roughly 60% vocabulary on tech-heavy stories (B2B Integration, Canonical Data Modeling, Java Development, Service-Oriented Architecture appear in both). The labels are also arguably backwards: Core Competencies holds the technologies and `public_tags` holds the practices. Neither finding is being fixed here -- the overlap stops reading as redundant once both sections are chips, and there is no reliable rule in the data to split the fields (Service-Oriented Architecture is both, EDI is a standard, Document Generation names no technology; any automatic split would misclassify roughly a third of the values). Recorded so it isn't rediscovered.
-
-**Change:**
-Render competencies as wrapping pills using the same flex container as `public_tags`, styled as outlined rather than filled so the two sections stay visually distinct. Build the markup as one string and emit a single `st.markdown` call rather than one per item.
-
-New design-system tokens in `ui/styles/global_styles.py`:
-- `:root`: `--pill-outline-border: #D1D5DB;` and `--pill-outline-text: #4B5563;`
-- `body.dark-theme`: `--pill-outline-border: #374151;` and `--pill-outline-text: #9CA3AF;`
-
-Both values are mode-specific: at `#E5E7EB` on a white card the outline is too faint, and `#374151` is too dark to read on light.
-
-Replace the competencies loop in `story_detail.py` (~line 623):
-```python
-comps_html = '<div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;">'
-for comp in competencies:
-    if comp:
-        comps_html += f'<span style="background: transparent; border: 1px solid var(--pill-outline-border); padding: 6px 12px; border-radius: 12px; font-size: 12px; color: var(--pill-outline-text); font-weight: 500;">{comp}</span>'
-comps_html += '</div>'
-st.markdown(comps_html, unsafe_allow_html=True)
-```
-
-Drop the `[:10]` on the tags loop (~line 613). The cap existed only because the sidebar was already too tall; with both sections wrapping, neither needs truncating.
-
-**Also in scope:** `story_detail.py:372` caps tags at 10 in the Export/print render. Tags are alphabetized, so every story with 11+ tags silently drops the tail of the alphabet from a document that reads as complete -- a recruiter who exports the Cendian story gets 10 of 15 tags with no ellipsis, no count, and no indication anything was removed. Silent truncation is worse in a print artifact than on screen: on screen a cap is a display choice; a printed story detail reads as authoritative. Drop the cap. 15 tags comma-joined is roughly 180 characters -- two lines of body text in a 900px print column, and competencies beside it are already uncapped at 28 items. One-line change on the same field this ticket already touches.
-
-**Out of scope:** Renaming either section, deduplicating tags against competencies, splitting the two fields by "technology vs capability."
-
-**Design reference:** `Story Detail Sidebar.dc.html`, option 3E -- real Cendian data at the production 380px sidebar width. 3C is the current behavior for scale; 3D shows why the light-mode outline needs its own value.
-
-**Acceptance:**
-1. Competencies wrap as outlined pills (`--pill-outline-border`, `#D1D5DB` light / `#374151` dark) in both modes; no single-column list remains.
-2. Cendian story sidebar height drops from ~900px to under 400px.
-3. Outline is clearly visible in light mode against the white card and in dark against `--bg-card`.
-4. Tags render uncapped; a story with 15 tags shows all 15.
-5. Grep `padding: 8px 0; font-size: 13px` for other instances of the old list treatment (Cards view, Ask Agy answer pane) and confirm none render competencies the old way.
-6. Mobile at 375px: pills wrap without horizontal overflow.
-7. Export the Cendian story; all 15 tags appear in the printed Technologies & Practices line.
-
----
-
 
 ### MATTGPT-213
 **BDD suite: navigation step definitions duplicated across modules; no shared step module**
@@ -2200,7 +2149,9 @@ Drop the `[:10]` on the tags loop (~line 613). The cap existed only because the 
 
 **Pre-scope inventory required:** How many step definitions are duplicated across modules, and how many copies of each. That number determines whether this is worth doing.
 
-**Likely fix:** Move shared steps into `conftest.py` or a `common_steps.py`. Structural change to how the suite is organized -- not a small ticket.
+**pytest-bdd resolution finding (August 26, 2026):** pytest-bdd does not resolve step definitions across modules via import. Path B experiment confirmed: importing `navigate_with_params` from `test_explore_stories.py` into `test_story_detail_sidebar.py` failed to register the step -- only the collecting module's namespace is scanned. This rules out a simple import-based fix; shared steps must live in a module that pytest-bdd collects, i.e., `conftest.py` or a file explicitly loaded via `conftest.py`. The third copy of the "navigate to My Work + open story via deeplink" pattern now exists in `tests/bdd/steps/test_story_detail_sidebar.py`; a docstring in that file references this ticket to catch a fourth-copy attempt.
+
+**Likely fix:** Move shared steps into `conftest.py` or a `common_steps.py` loaded from there. Structural change to how the suite is organized -- not a small ticket.
 
 **Pattern context (August 26, 2026):** Instance of the broader pattern of code that gets replicated because it was there. Other instances this week: `max_per_client` documented and never implemented (MATTGPT-187), tag generator backing up the wrong file because the line was copied from three sibling scripts where it was correct (MATTGPT-211), `public_tags` excluded from the ingestion diff report.
 
@@ -2225,6 +2176,55 @@ Drop the `[:10]` on the tags loop (~line 613). The cap existed only because the 
 **Output:** A list of findings with file and line. No fix within this ticket -- each finding is evaluated separately for risk before touching.
 
 **Pattern context (August 26, 2026):** Suggested alongside MATTGPT-213. Both are instances of the same class as MATTGPT-187 and MATTGPT-211.
+
+---
+
+### MATTGPT-215
+**Key Metrics sidebar parse heuristic surfaces bogus renders on ~10 stories**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **Component:** `ui/components/story_detail.py` (Key Metrics sidebar section)
+- **Logged:** August 26, 2026
+
+**Discovery context:** Surfaced post-MATTGPT-212. MATTGPT-212 dropped sidebar height ~900px to ~130px; Key Metrics became the most prominent element and the parse failures became visible. Audit probe `probe_212_key_metrics_audit.py` catalogued 46 total trigger hits across the corpus; ~10 are clearly-bogus renders.
+
+**Failure categories (verified August 26, 2026):**
+- **Year-as-metric (2 stories):** "Launched April 2011 as part of ACCESS Next Generation" renders 2011 as a huge value
+- **Counted noun:** "15+ Fortune 500 engagements", "12 countries", "341 CIB SOX/SSAE16 applications", "150+ trained practitioners" -- the number is a count of things, not a delivery outcome
+- **Value precision loss:** `99.9%+→99`, `$100M+→100`, `3-4x→3`, `5,765 lines→5`, `11,400 lines→11`, `Sev-1 outages dropped 50%+→1`, `15-35% cost reduction→15`
+- **False-positive trigger (bare substring):** Cendian's "3 canonical business objects normalizing multiple trading exchange formats" triggers on "x" in "exchange", not on any metric marker
+- **Label truncation mid-word:** `perf[:50]` cuts phrases like "Financial Data Pro[tection Standards]", "4X velocity compared to clien[t internal teams]"
+
+**Immediate mitigations:**
+- Tighten trigger to require actual metric markers (`\b\d+(\.\d+)?%|\b\d+x\b|\b\d+\s*(month|week)s?\b`) -- no bare x/month/week substring
+- Capture decimals, commas, currency `$`, ranges, and `+` suffix in the value regex
+- Exclude 4-digit years (`\b\d{4}\b` near month names)
+- Strip leading `- ` before label truncation
+- Word-boundary label truncation
+
+**Deeper fix if warranted:** Dedicated Metrics field in the story schema. Performance stays free-form for retrieval -- it's load-bearing in `build_embedding_text` and keyword scoring, so no Excel migration for that field.
+
+**Audit artifact:** `probe_212_key_metrics_audit.py` in repo root (uncommitted as of August 26). Either commit as audit artifact or delete after ticket has the categorization.
+
+---
+
+### MATTGPT-216
+**Unit test suite not part of commit/push gate; 5 failures accumulated invisibly**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Infrastructure
+- **Logged:** August 26, 2026
+
+**Issue:** Pre-commit hooks are ruff + ruff-format + mypy + whitespace only. Pre-push discipline is `tests/eval_rag_quality.py`, not `tests/unit/`. Unit suite has been degrading since May 2026 -- MATTGPT-016 test scaffold, June `2cbe5f5` base64 change, August MATTGPT-180/-187 -- with each failure invisible to normal flow. 9 failures accumulated before the August 26 session; 5 remain after cleanup.
+
+**Options:**
+A. Fold `pytest tests/unit/` into the pre-push hook alongside the eval
+B. Fold into a pre-commit hook with fast-only scoping (skip slow tests)
+
+**Priority:** Medium -- no active regression, but the gate is empirically not catching them.
 
 ---
 
@@ -2412,23 +2412,6 @@ These are not regressions and should not be triaged as such. Any future failure 
 
 ---
 
-### MATTGPT-189
-**test_global_styles_no_cdn asserts a feature removed in 2cbe5f5**
-
-- **Status:** Decided Against (August 16, 2026)
-- **Why not:** One-line test deletion not queued. Finding preserved here.
-- **Priority:** Low
-- **Type:** Test
-- **File:** `tests/unit/test_base64_precomputation.py:19`
-- **Logged:** August 13, 2026
-
-**Issue:** The test asserts `'data:image/webp;base64'` appears in `global_styles._CSS`. The Chase sprite base64 images were added in 5089ec6 and deliberately removed in 2cbe5f5 (June 24, 2026), which replaced the GIF thinking indicator with a pure CSS emoji animation. The test was not updated and now asserts the presence of something intentionally deleted.
-
-**Fix:** Delete the test. Also check whether the rest of `test_base64_precomputation.py` still covers live behavior or whether the whole file is stale.
-
-**Cross-references:** MATTGPT-177 (untracked test failures -- same category), MATTGPT-180 (test fixture blind spot -- tests passing against code production never exercises).
-
----
 
 ### MATTGPT-184
 **ask_mattgpt/utils.py module audit -- six dead functions, four duplicating live helpers elsewhere**
@@ -2571,7 +2554,7 @@ The concentration is real. The retrieval dominance claim is not supported by the
   1. **Production already rejects these queries** via `nonsense_filters.jsonl` regex (catches `elon musk`, `jeff bezos`, `tell me a joke`, etc.) — completely upstream of the semantic router. The 3 failing unit tests call `is_portfolio_query_semantic()` in isolation, bypassing the actual production pipeline. The tests were aimed at the wrong gate.
   2. **The proposed canonical-phrases fix doesn't generalize.** During implementation, added wrong-person phrases to `out_of_scope` + family-based `is_valid` logic. Made the 3 specific tests pass. But the query "What's it like to work with Donald Trump?" still produced a confused-context RAG answer in BOTH production and local-with-fix — Trump isn't in the nonsense regex AND the canonical phrases don't generalize to the "What's it like to work with X" structural shape. So the fix adds redundant coverage for exact shapes already covered upstream while failing to address the real failure mode (names outside the regex with structural shapes outside the canonical phrases).
 - **Real unsolved problem:** filed separately as MATTGPT-063 with the Trump query as evidence.
-- **Action taken:** code changes from the in-progress fix reverted. Test scaffold from Step 1 (commit `bc280a2`) remains in main; cleanup of the 3 wrong-layer test cases + Step 1 speculative scaffolding deferred to a future small commit.
+- **Action taken:** code changes from the in-progress fix reverted. Test scaffold from Step 1 (commit `bc280a2`) remains in main; cleanup of the 3 wrong-layer test cases + Step 1 speculative scaffolding deferred to a future small commit. Partial cleanup landed August 26, 2026 (e307d6d): 3 wrong-layer test cases removed. Remaining: ~80 lines of xfail scaffolding (SHOULD_BE_REJECTED_LOWERCASE, SHOULD_BE_ACCEPTED_CLIENT_NAMES, SHOULD_BE_ACCEPTED_TECH_TERMS lists, 3 xfail test methods, MATTGPT-016 comment block) intentionally left in place -- can land in its own small commit; not gating anything.
 - **Original ticket context (preserved below for history):**
 - **Issue:** Queries about other people score high against valid intent families. Bezos leadership query scores 0.664 as "leadership" — strong match to a wrong subject.
 - **Root cause:** Semantic router has no entity/person detection. Only checks embedding similarity to intent families.
