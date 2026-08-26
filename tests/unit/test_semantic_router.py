@@ -218,6 +218,59 @@ class TestSemanticRouter:
             )
 
     # =========================================================================
+    # MATTGPT-163 — Personal-family false-positive on org-shape queries
+    #
+    # "How X Matt Y" queries structurally match the personal-family anchor
+    # shapes ("How old is Matt", "How much does Matt make"). Short variants
+    # ("how many direct reports") and entity-anchored variants ("how many
+    # people reported to Matt at the CIC") pass; the full-form bare query
+    # ("How many direct reports did Matt have") is pulled into personal.
+    #
+    # Tests use the full-form string verbatim from the ticket. Short/anchored
+    # variants pass today (0.302/stakeholders, 0.439/stakeholders) and would
+    # give a false green. Salary probe stays as regression guard — A1 fix
+    # (adding to team_scaling) must not weaken the personal-family detection
+    # on legitimate privacy queries.
+    # =========================================================================
+
+    def test_direct_reports_query_not_personal(self):
+        """MATTGPT-163: 'How many direct reports did Matt have' is an org
+        structure question, not a privacy-sensitive personal query. Must
+        classify to a professional family (team_scaling expected) so it
+        reaches retrieval."""
+        query = "How many direct reports did Matt have"
+        is_valid, score, intent, family = self.classifier(query)
+        assert family != "personal", (
+            f"Org-shape query pulled into personal family: '{query}' "
+            f"(score: {score:.3f}, family: {family}, intent: {intent})"
+        )
+
+    def test_cic_reporting_query_not_personal(self):
+        """MATTGPT-163 regression guard: 'How many people reported to Matt
+        at the CIC' passes today via entity anchoring (CIC alias → Division).
+        Must continue to reach retrieval after A1 lands."""
+        query = "How many people reported to Matt at the CIC"
+        is_valid, score, intent, family = self.classifier(query)
+        assert family != "personal", (
+            f"Entity-anchored org query pulled into personal family: '{query}' "
+            f"(score: {score:.3f}, family: {family}, intent: {intent})"
+        )
+
+    def test_salary_query_stays_personal(self):
+        """MATTGPT-163 regression guard: 'How much money did Matt make at
+        Accenture' is a legitimate personal-family query and must remain
+        blocked. A1 (adding professional counter-examples) must not weaken
+        detection here — if the salary query bleeds to a professional
+        family, the fix has traded a false positive for a worse false
+        negative."""
+        query = "How much money did Matt make at Accenture"
+        is_valid, score, intent, family = self.classifier(query)
+        assert family == "personal", (
+            f"Salary probe lost personal classification: '{query}' "
+            f"(score: {score:.3f}, family: {family}, intent: {intent})"
+        )
+
+    # =========================================================================
     # MATTGPT-016 — Wrong-person query detection (xfail until detector lands)
     #
     # Contract change: router will reject out_of_scope / personal /
