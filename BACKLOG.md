@@ -35,6 +35,8 @@ Dead code: -176, -183, -199, -201 · Hidden error: -204
 BDD flakes: -122, -131, -142, -145, -197, -198, -205
 Wrong-assertion test: -203 · -209 (drift guard searches wrong scope)
 Small refactors: -140, -153, -086, -062, -082, -083, -084, -150, -060
+BDD structure: -213 (shared step definitions)
+Correctness audit: -214 (parameters, comments, constants, copied blocks)
 Infrastructure: -035, -039, -040, -045
 
 ---
@@ -117,6 +119,8 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-209](#mattgpt-209) | MATT_DNA drift guard passes for wrong reason: employer check searches whole string, not Career Arc block | Open | Low | Bug (Test) | August 24, 2026 |
 | [MATTGPT-210](#mattgpt-210) | Ask Agy landing page suggestion chips are static; stories like STRATCOM invisible on career queries | Open | Low | Enhancement | August 24, 2026 |
 | [MATTGPT-212](#mattgpt-212) | Story detail sidebar: Core Competencies renders as single-column list; sidebar outruns content on tech-heavy stories | Open | Medium | UI / Bug | August 24, 2026 |
+| [MATTGPT-213](#mattgpt-213) | BDD suite: navigation step definitions duplicated across modules; no shared step module | Open | Low | Refactor / Test | August 26, 2026 |
+| [MATTGPT-214](#mattgpt-214) | Targeted audit: parameters never referenced, comments asserting absent behavior, constants unused, copied blocks with stale variable names | Open | Low | Refactor | August 26, 2026 |
 
 ---
 
@@ -2180,6 +2184,49 @@ Drop the `[:10]` on the tags loop (~line 613). The cap existed only because the 
 
 ---
 
+
+### MATTGPT-213
+**BDD suite: navigation step definitions duplicated across modules; no shared step module**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Refactor / Test
+- **File:** `tests/bdd/steps/` (all step modules)
+- **Logged:** August 26, 2026
+
+**Issue:** The BDD suite has no shared step-definition module. Navigation steps are identical across modules and get copied rather than reused. Concretely: "the user navigates to the My Work page", "the page has finished loading", and "the user has opened story {id}" all live in `tests/bdd/steps/test_explore_stories.py`. Any new module testing a story detail surface needs them; the current answer is to paste them in. Surfaced August 26 during MATTGPT-212 when a third copy was about to be created.
+
+**Cost:** When the page changes, every copy needs finding and updating. A stale copy fails for a reason unrelated to what it tests.
+
+**Pre-scope inventory required:** How many step definitions are duplicated across modules, and how many copies of each. That number determines whether this is worth doing.
+
+**Likely fix:** Move shared steps into `conftest.py` or a `common_steps.py`. Structural change to how the suite is organized -- not a small ticket.
+
+**Pattern context (August 26, 2026):** Instance of the broader pattern of code that gets replicated because it was there. Other instances this week: `max_per_client` documented and never implemented (MATTGPT-187), tag generator backing up the wrong file because the line was copied from three sibling scripts where it was correct (MATTGPT-211), `public_tags` excluded from the ingestion diff report.
+
+---
+
+### MATTGPT-214
+**Targeted audit: parameters never referenced, comments asserting absent behavior, constants unused, copied blocks with stale variable names**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Refactor
+- **Logged:** August 26, 2026
+
+**Issue:** A pattern surfaced this week: code that reads correctly and isn't, or gets replicated because it was there. Instances: `max_per_client` accepted and never referenced (MATTGPT-187), tag generator backup copying the wrong file because the line was copied from three sibling scripts where it was correct (MATTGPT-211), `public_tags` excluded from the ingestion diff report so a cleared column reported "no changes detected." Each was greppable and none required judgment; they were found by inspection only when a related symptom appeared.
+
+**Scope:** A targeted grep-driven pass over the codebase for:
+1. Parameters accepted by functions and never referenced in the body
+2. Comments asserting behavior the code does not have (documented contracts that aren't implemented)
+3. Constants defined in `config/` and never imported
+4. Copied blocks where a variable name survived a context change and now refers to the wrong thing
+
+**Output:** A list of findings with file and line. No fix within this ticket -- each finding is evaluated separately for risk before touching.
+
+**Pattern context (August 26, 2026):** Suggested alongside MATTGPT-213. Both are instances of the same class as MATTGPT-187 and MATTGPT-211.
+
+---
 
 ### MATTGPT-205
 **BDD marathon flake: test_error_state_extraction_failure fails in marathon, passes in isolation**
