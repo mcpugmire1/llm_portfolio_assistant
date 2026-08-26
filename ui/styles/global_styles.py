@@ -49,6 +49,8 @@ _CSS = """
             /* Components */
             --pill-bg: #F3F4F6;
             --pill-text: #4B5563;
+            --pill-outline-border: #D1D5DB;
+            --pill-outline-text: #6B7280;
             --success-color: #10B981;
             --banner-info-bg: rgba(139, 92, 246, 0.05);
             --banner-info-border: #8B5CF6;
@@ -123,6 +125,8 @@ _CSS = """
             /* Components */
             --pill-bg: #374151;
             --pill-text: #E5E7EB;
+            --pill-outline-border: #374151;
+            --pill-outline-text: #9CA3AF;
             --banner-info-bg: rgba(139, 92, 246, 0.15);
             --banner-info-border: #A78BFA;
             --banner-info-text: #C4B5FD;

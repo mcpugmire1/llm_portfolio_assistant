@@ -369,7 +369,7 @@ def render_story_detail(
 
         if export_clicked:
             # Format tags
-            tags_html = ', '.join(public_tags[:10]) if public_tags else 'N/A'
+            tags_html = ', '.join(public_tags) if public_tags else 'N/A'
 
             # Format competencies
             comp_html = ', '.join(competencies) if competencies else 'N/A'
@@ -610,7 +610,7 @@ def render_story_detail(
                 unsafe_allow_html=True,
             )
             tags_html = '<div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;">'
-            for tag in public_tags[:10]:
+            for tag in public_tags:
                 if tag:
                     tags_html += f'<span style="background: var(--pill-bg); padding: 6px 12px; border-radius: 12px; font-size: 12px; color: var(--pill-text); font-weight: 500;">{tag}</span>'
             tags_html += '</div>'
@@ -626,12 +626,12 @@ def render_story_detail(
                 '<div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px;">CORE COMPETENCIES</div>',
                 unsafe_allow_html=True,
             )
+            comps_html = '<div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;">'
             for comp in competencies:
                 if comp:
-                    st.markdown(
-                        f'<div style="padding: 8px 0; font-size: 13px; color: var(--text-secondary);">{comp}</div>',
-                        unsafe_allow_html=True,
-                    )
+                    comps_html += f'<span style="background: transparent; border: 1px solid var(--pill-outline-border); padding: 6px 12px; border-radius: 12px; font-size: 12px; color: var(--pill-outline-text); font-weight: 500;">{comp}</span>'
+            comps_html += '</div>'
+            st.markdown(comps_html, unsafe_allow_html=True)
 
             st.markdown(
                 '<div style="border-bottom: 1px solid var(--border-color); margin: 24px 0;"></div>',
