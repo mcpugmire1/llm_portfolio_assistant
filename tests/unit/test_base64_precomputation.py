@@ -12,11 +12,13 @@ Green phase: after refactoring to module-level pre-computation, all 8 constants 
 B64_MARKER = "data:image/webp;base64"
 
 
-def test_global_styles_no_cdn():
-    """global_styles._CSS must be pre-computed at module level with base64 Chase sprites."""
-    from ui.styles import global_styles
-
-    assert B64_MARKER in global_styles._CSS
+# MATTGPT-189 (Decided Against Aug 13, 2026): test_global_styles_no_cdn
+# removed. It asserted `B64_MARKER in global_styles._CSS` — the Chase sprite
+# base64 was deliberately deleted in 2cbe5f5 (June 24, 2026) when the GIF
+# thinking indicator was replaced by a pure CSS emoji animation. The test
+# guarded a feature that no longer exists. Remaining tests in this file
+# still guard live base64 embedding in hero / why_agy_dialog / about_matt /
+# role_match / loading_animation modules (verified passing).
 
 
 def test_hero_no_cdn():

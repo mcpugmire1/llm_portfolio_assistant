@@ -78,15 +78,17 @@ SHOULD_BE_REJECTED = [
     "Explain quantum physics",
     # Creative requests
     "Write me a poem about cats",
-    "Tell me a joke",
     "Write a story about dragons",
     # Unrelated topics
     "How do I cook pasta?",
     "What's Bitcoin worth?",
     "Recommend a good movie",
-    # Other people
-    "Tell me about Elon Musk",
-    "What's Jeff Bezos's leadership style?",
+    # MATTGPT-016 (Decided Against May 14, 2026): three wrong-person / joke
+    # cases removed here. Production rejects them via nonsense_filters.jsonl
+    # upstream of the semantic router, so router-level unit assertions were
+    # aimed at the wrong gate. See BACKLOG.md MATTGPT-016 for the full
+    # investigation. The xfail-marked MATTGPT-016 scaffolding further down
+    # in this file is left in place; a broader cleanup can remove it later.
 ]
 
 # =============================================================================
