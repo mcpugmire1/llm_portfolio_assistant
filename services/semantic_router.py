@@ -74,6 +74,17 @@ VALID_INTENTS = {
         "How did Matt build high-performing teams?",
         "Tell me about Matt's team building experience",
         "How does Matt grow engineering organizations?",
+        # MATTGPT-163: org-size / reporting-scope anchors carry "Matt" in
+        # the anchor text so full-form queries like "How many direct reports
+        # did Matt have" (which structurally matched personal-family shapes)
+        # pull toward team_scaling in the similarity contest. Short variants
+        # ("how many direct reports") already routed to stakeholders; these
+        # anchors target the failing full-form phrasings specifically.
+        "How many direct reports did Matt have",
+        "How many people reported to Matt",
+        "How big was Matt's team",
+        "How large was Matt's organization",
+        "How many people did Matt manage",
     ],
     "leadership": [
         "What's Matt's leadership style?",

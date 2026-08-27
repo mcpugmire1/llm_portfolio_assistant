@@ -50,3 +50,5 @@
 {"category":"html_garbage","pattern":"<[a-zA-Z][^>]*/\\s*>"}
 {"category":"html_garbage","pattern":"&(nbsp|lt|gt|amp|quot|apos);"}
 {"category":"code_garbage","pattern":"^\\s*[{\\[].*[}\\]]\\s*$"}
+{"category":"personal_compensation","pattern":"\\b(salary|salaries|compensation|income|earnings?|wages?|bonus(?:es)?|paycheck)\\b"}
+{"category":"personal_compensation","pattern":"\\bhow much money\\b.{1,25}?\\b(make|makes|made|earn|earns|earned|paid|paying)\\b"}

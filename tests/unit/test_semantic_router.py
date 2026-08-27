@@ -256,19 +256,12 @@ class TestSemanticRouter:
             f"(score: {score:.3f}, family: {family}, intent: {intent})"
         )
 
-    def test_salary_query_stays_personal(self):
-        """MATTGPT-163 regression guard: 'How much money did Matt make at
-        Accenture' is a legitimate personal-family query and must remain
-        blocked. A1 (adding professional counter-examples) must not weaken
-        detection here — if the salary query bleeds to a professional
-        family, the fix has traded a false positive for a worse false
-        negative."""
-        query = "How much money did Matt make at Accenture"
-        is_valid, score, intent, family = self.classifier(query)
-        assert family == "personal", (
-            f"Salary probe lost personal classification: '{query}' "
-            f"(score: {score:.3f}, family: {family}, intent: {intent})"
-        )
+    # Note: the salary-probe block ("How much money did Matt make at
+    # Accenture") is tested in tests/unit/test_validation.py against
+    # is_nonsense() rather than here. B (nonsense-filter pre-gate) fires
+    # upstream of the semantic router, so a router-level family assertion
+    # would be aimed at the wrong gate — same failure class MATTGPT-016
+    # was Decided Against for.
 
     # =========================================================================
     # MATTGPT-016 — Wrong-person query detection (xfail until detector lands)

@@ -243,6 +243,60 @@ class TestIsNonsense:
         result = validation.is_nonsense("match this pattern")
         assert result == "other"
 
+    # =========================================================================
+    # MATTGPT-163 — personal_compensation hard-block (Approach B)
+    #
+    # Compensation queries about Matt route through the nonsense filter, not
+    # the semantic router. Pattern A blocks unambiguous compensation nouns
+    # (salary, compensation, income, earnings, wages, bonus, paycheck).
+    # Pattern B blocks the "how much money [Matt] make/earn/paid" idiom
+    # bounded to ~25 chars between "money" and the earning verb to avoid
+    # false-positives on "how much money did Matt save the client".
+    #
+    # Tests force a real-file load (_NONSENSE_RULES = None triggers lazy
+    # reload) so the assertions run against the production patterns in
+    # nonsense_filters.jsonl, not synthetic rules.
+    # =========================================================================
+
+    def test_compensation_noun_blocked_by_personal_compensation_filter(self):
+        """Pattern A: bare compensation nouns hard-block regardless of context."""
+        from utils import validation
+
+        validation._NONSENSE_RULES = None
+        assert (
+            validation.is_nonsense("What is Matt's salary") == "personal_compensation"
+        )
+
+    def test_salary_earnings_idiom_blocked_by_personal_compensation_filter(self):
+        """Pattern B: ticket-cited query 'How much money did Matt make at
+        Accenture' must be blocked by the personal_compensation filter. The
+        semantic router routes this to family=narrative (0.789) via the 'at
+        Accenture' entity anchor -- the upstream nonsense filter is the
+        deterministic gate."""
+        from utils import validation
+
+        validation._NONSENSE_RULES = None
+        assert (
+            validation.is_nonsense("How much money did Matt make at Accenture")
+            == "personal_compensation"
+        )
+
+    def test_pattern_b_does_not_match_professional_money_idiom(self):
+        """Pattern B guard: 'how much money did Matt save the client' must
+        NOT match personal_compensation -- 'save' is not an earning verb and
+        the earning verb 'pay' appears >25 chars downstream. Regression guard
+        against the loose .* between anchors that Matt caught during review."""
+        from utils import validation
+
+        validation._NONSENSE_RULES = None
+        result = validation.is_nonsense(
+            "how much money did Matt save the client, and did that pay off"
+        )
+        assert result != "personal_compensation", (
+            f"Professional 'money save' idiom falsely blocked as "
+            f"personal_compensation (got: {result!r})"
+        )
+
 
 class TestTokenOverlapRatio:
     """Tests for token_overlap_ratio() function."""
