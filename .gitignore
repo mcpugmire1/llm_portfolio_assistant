@@ -105,3 +105,6 @@ facts.json
 probe_pinecone_nouns.csv
 query_log_parsed.csv
 retrieval_gap_flags.csv
+
+# Auto-memory (per-user, written under ~/.claude/... — this stray dir is a misconfig guard)
+memory/
