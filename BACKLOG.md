@@ -2177,12 +2177,30 @@ Fix (full): Cards and Timeline both use `st.info` for the empty-state message, w
 - **False-positive trigger (bare substring):** Cendian's "3 canonical business objects normalizing multiple trading exchange formats" triggers on "x" in "exchange", not on any metric marker
 - **Label truncation mid-word:** `perf[:50]` cuts phrases like "Financial Data Pro[tection Standards]", "4X velocity compared to clien[t internal teams]"
 
-**Immediate mitigations:**
-- Tighten trigger to require actual metric markers (`\b\d+(\.\d+)?%|\b\d+x\b|\b\d+\s*(month|week)s?\b`) -- no bare x/month/week substring
-- Capture decimals, commas, currency `$`, ranges, and `+` suffix in the value regex
-- Exclude 4-digit years (`\b\d{4}\b` near month names)
-- Strip leading `- ` before label truncation
-- Word-boundary label truncation
+**Pre-flight finding (August 26, 2026): existing infrastructure already solves most of this.**
+
+Files in scope: `ui/components/story_detail.py:641-668` (sidebar Key Metrics inline heuristic -- the buggy one).
+
+`utils/formatting.py:12` defines `METRIC_RX`:
+```
+\b\d{1,3}\s?% | \$\s?\d[\d,\.]*\b | \b\d+x\b | \b\d+(?:\.\d+)?\s?(pts|pp|bps)\b
+```
+Proper marker-based regex. Handles percentages, currency, multipliers, points/bps. Same file has `_extract_metric_value(text)` and `story_has_metric(s)` -- both use `METRIC_RX`. The latter is filter-gate-grade (used by `filters.py:115`). Test coverage exists at `test_scoring_contracts.py::test_story_has_metric_detects_percentage_in_performance` -- currently failing under MATTGPT-180 (phantom schema), not a `METRIC_RX` defect.
+
+**`METRIC_RX` resolves 4 of 5 failure categories automatically:**
+- False-positive on bare x ("exchange") -- solved (`\b\d+x\b` requires digit before x)
+- Year-as-metric ("April 2011") -- solved (no bare-year branch in the regex)
+- Value precision loss on `$100M`, `99.9%`, `3x` -- solved (currency + decimals + multipliers captured)
+- Counted noun ("15+ Fortune 500 engagements") -- solved (no marker, no match)
+
+**Doesn't cover:**
+- Range `3-4x` -- matches `4x`, drops the range. Acceptable: either "4x" or "3-4x" is reasonable display
+- Label truncation mid-word (`perf[:50]` cut mid-phrase) -- orthogonal, separate fix
+- Leading `- ` prefix wasting label chars -- orthogonal
+
+**Third variant (not necessarily in scope):** `ui/pages/ask_mattgpt/utils.py:165-185` has its own `story_has_metric` with a different regex (`\d+[%xX]|\d+\s*(?:days?|weeks?|months?|years?)`). Stricter than the sidebar's inline logic, looser than `METRIC_RX`. Three functionally-overlapping metric-detection variants across the codebase. Consolidation could ship in this ticket or defer.
+
+**Recommended fix shape:** Replace the sidebar's inline heuristic with `METRIC_RX` from `utils/formatting.py`. The three orthogonal label issues (truncation mid-word, leading `- ` prefix) are one-line fixes alongside the regex swap. Decision on third-variant consolidation is in scope but optional.
 
 **Deeper fix if warranted:** Dedicated Metrics field in the story schema. Performance stays free-form for retrieval -- it's load-bearing in `build_embedding_text` and keyword scoring, so no Excel migration for that field.
 
