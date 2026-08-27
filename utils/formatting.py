@@ -229,6 +229,27 @@ def _extract_metric_value(text: str) -> tuple[float, str] | None:
     return best
 
 
+def _extract_metric_display(perf: str, label_max: int = 50) -> tuple[str, str] | None:
+    """Extract metric value + display label from a Performance bullet.
+
+    Returns None if the text contains no metric marker (percentage, currency,
+    multiplier, pts/pp/bps). Otherwise returns (value, label):
+
+    - value: the raw METRIC_RX match token (e.g., "99.9%", "$100M+", "4x")
+    - label: the source text stripped of any leading "- " bullet prefix,
+      truncated at the last word boundary within label_max characters
+
+    For strings with multiple metric matches, returns the first match's
+    token as value (leftmost is typically the primary claim).
+
+    Ticket: MATTGPT-215. Replaces the buggy inline heuristic in
+    story_detail.py's Key Metrics sidebar section, which extracted a bare
+    number and 50-char hard-cut label from any string containing "x",
+    "month", "week", or "%" as substrings.
+    """
+    return None
+
+
 def _format_narrative(s: dict[str, Any]) -> str:
     """Format story as 1-paragraph recruiter-friendly narrative.
 

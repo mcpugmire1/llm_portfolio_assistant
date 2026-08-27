@@ -399,3 +399,150 @@ class TestExtractMetricValue:
         assert result is not None
         score, _ = result
         assert score > 1000  # Percentage score
+
+
+class TestExtractMetricDisplay:
+    """Tests for _extract_metric_display() -- MATTGPT-215.
+
+    Replaces the story_detail.py sidebar Key Metrics inline heuristic. Returns
+    (value, label) pairs for rendering, or None when the text has no metric
+    marker. Uses METRIC_RX so decimals, currency with unit suffix (K/M/B), +
+    suffix, and multipliers are all captured; bare digits, years, and counted
+    nouns produce None.
+    """
+
+    def test_returns_none_for_cendian_false_positive(self):
+        """MATTGPT-215: '3 canonical business objects normalizing multiple
+        trading exchange formats' must NOT match. The old heuristic triggered
+        on the 'x' in 'exchange'; METRIC_RX requires a digit-adjacent marker."""
+        from utils.formatting import _extract_metric_display
+
+        result = _extract_metric_display(
+            "- 3 canonical business objects normalizing multiple trading exchange formats"
+        )
+        assert result is None, f"Cendian false positive still fires: {result!r}"
+
+    def test_returns_none_for_year_reference(self):
+        """MATTGPT-215: 'Launched April 2011 as part of ACCESS Next Generation'
+        must NOT render 2011 as a metric value."""
+        from utils.formatting import _extract_metric_display
+
+        result = _extract_metric_display(
+            "- Launched April 2011 as part of ACCESS Next Generation"
+        )
+        assert result is None, f"Year rendered as metric: {result!r}"
+
+    def test_returns_none_for_counted_noun(self):
+        """MATTGPT-215: '15+ Fortune 500 engagements' is a count of things,
+        not a delivery metric. No metric marker in the text -> None."""
+        from utils.formatting import _extract_metric_display
+
+        result = _extract_metric_display(
+            "- 15+ Fortune 500 engagements, reducing lead time from weeks to days"
+        )
+        assert result is None, f"Counted noun rendered as metric: {result!r}"
+
+    def test_extracts_decimal_percentage_precisely(self):
+        """MATTGPT-215: '99.9% uptime' must extract '99.9%' as value, not '9%'
+        or '99'. The old METRIC_RX matched only trailing '9%' because '.'
+        broke the word boundary."""
+        from utils.formatting import _extract_metric_display
+
+        result = _extract_metric_display(
+            "- Achieved 99.9% system uptime through automated recovery"
+        )
+        assert result is not None
+        value, _ = result
+        assert value == "99.9%", f"Decimal precision lost: {value!r}"
+
+    def test_extracts_currency_with_unit_suffix(self):
+        """MATTGPT-215: '$100M+ repeat business' must extract '$100M+' as
+        value. The old METRIC_RX dropped the M+ because \\b after [\\d,\\.]*
+        failed on the letter transition."""
+        from utils.formatting import _extract_metric_display
+
+        result = _extract_metric_display("- $100M+ in repeat business")
+        assert result is not None
+        value, _ = result
+        assert value == "$100M+", f"Currency unit/suffix lost: {value!r}"
+
+    def test_extracts_currency_with_decimal_and_unit(self):
+        """MATTGPT-215: '$5.2M platform savings' must extract '$5.2M', not
+        '$5.'."""
+        from utils.formatting import _extract_metric_display
+
+        result = _extract_metric_display("- $5.2M platform savings realized")
+        assert result is not None
+        value, _ = result
+        assert value == "$5.2M", f"Decimal currency mishandled: {value!r}"
+
+    def test_extracts_upper_bound_of_range(self):
+        """MATTGPT-215: '3-4x faster' extracts '4x' (upper bound per ticket
+        decision -- the claim the reader would make anyway)."""
+        from utils.formatting import _extract_metric_display
+
+        result = _extract_metric_display("- Delivered features 3-4x faster")
+        assert result is not None
+        value, _ = result
+        assert value == "4x", f"Range extraction wrong: {value!r}"
+
+    def test_picks_correct_metric_from_sev_pattern(self):
+        """MATTGPT-215: 'Sev-1 outages dropped 50%+' must extract '50%', not
+        '1' from 'Sev-1'. Old heuristic grabbed the first digit; METRIC_RX
+        requires a marker so only 50% qualifies."""
+        from utils.formatting import _extract_metric_display
+
+        result = _extract_metric_display(
+            "- Sev-1 outages dropped 50%+, stabilizing production"
+        )
+        assert result is not None
+        value, _ = result
+        assert value == "50%", f"Sev-1 pattern extracted wrong value: {value!r}"
+
+    def test_strips_leading_bullet_dash_from_label(self):
+        """MATTGPT-215: Performance bullets start with '- ' in the Excel
+        source. That prefix wastes 2 chars of the label truncation window
+        and reads oddly in the uppercase-transformed label. Strip it."""
+        from utils.formatting import _extract_metric_display
+
+        result = _extract_metric_display("- 4x delivery velocity")
+        assert result is not None
+        _, label = result
+        assert not label.startswith(
+            "- "
+        ), f"Leading '- ' bullet prefix not stripped: {label!r}"
+        assert label == "4x delivery velocity"
+
+    def test_truncates_label_at_word_boundary(self):
+        """MATTGPT-215: label_max defaults to 50 chars; truncation must land
+        on a word boundary, not mid-word. Old code cut '4X velocity compared
+        to client internal teams' at 'clien[t]' -- ugly."""
+        from utils.formatting import _extract_metric_display
+
+        result = _extract_metric_display(
+            "- 4X velocity compared to client internal teams through reduced rework",
+            label_max=50,
+        )
+        assert result is not None
+        _, label = result
+        # Label should end at a word boundary within 50 chars (after '- ' strip).
+        assert len(label) <= 50, f"Label exceeds max: {len(label)} chars"
+        assert not label.rstrip().endswith(
+            ("clien", "compare", "compa")
+        ), f"Mid-word truncation: {label!r}"
+
+    def test_label_shorter_than_max_returns_full_text(self):
+        """MATTGPT-215: strings shorter than label_max should return the full
+        text (post dash-strip), not get artificially truncated."""
+        from utils.formatting import _extract_metric_display
+
+        result = _extract_metric_display("- 4x delivery velocity", label_max=50)
+        assert result is not None
+        _, label = result
+        assert label == "4x delivery velocity"
+
+    def test_returns_none_for_empty_string(self):
+        from utils.formatting import _extract_metric_display
+
+        assert _extract_metric_display("") is None
+        assert _extract_metric_display("   ") is None
