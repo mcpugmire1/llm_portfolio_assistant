@@ -11,9 +11,10 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 **NOW**
 1. **-215** — Key Metrics sidebar parse heuristic surfaces bogus renders (year-as-metric, counted nouns, value precision loss) on ~10 stories. User-visible on live Cendian story since MATTGPT-212 reduced sidebar height.
-2. **-162** — Embedding exception renders as no-match. Visitor concludes the corpus is thin when the app broke.
-3. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
-4. **-128** — Source faithfulness. Never run. Last unverified thing on the runway; gates Role Match since Role Match is evidence-backed ratings.
+2. **-216** — Unit test gate missing from pre-push hook; 9 tests degraded since May undetected. Config change to add pytest; prevents future invisible failures.
+3. **-162** — Embedding exception renders as no-match. Visitor concludes the corpus is thin when the app broke.
+4. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+5. **-128** — Source faithfulness. Never run. Last unverified thing on the runway; gates Role Match since Role Match is evidence-backed ratings.
 
 **NEXT** — Role Match, once the runway clears
 -160 (extractor dropping qualifiers on 7 of 23) · -173 (malformed and comp-only JD behavior) · -159 (sequential gpt-4o loop) · -014 (34 skipped integration scenarios) · -089 (location, work-model, availability) · -012 (Private View Phase 4) · -081 (corrective actions by asset type) · -099 (comp handling) · -017 (logging scenarios)
@@ -36,7 +37,7 @@ Wrong-assertion test: -203 · -209 (drift guard searches wrong scope)
 Small refactors: -140, -153, -086, -062, -082, -083, -084, -150, -060, -217 (pronoun grammar in substitution)
 BDD structure: -213 (shared step definitions)
 Correctness audit: -214 (parameters, comments, constants, copied blocks)
-Infrastructure: -035, -039, -040, -045, -216 (unit test gate)
+Infrastructure: -035, -039, -040, -045
 
 ---
 
