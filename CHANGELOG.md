@@ -8,6 +8,16 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Ask Agy
 
+**August 26, 2026 — Personal-query guard false positive fixed; professional org questions now route correctly (MATTGPT-163)** -- `9a05af0`
+
+Two bugs fixed. (1) "How many direct reports did Matt have" scored 0.616 / personal and was blocked. Fix A1 added five team_scaling anchors carrying "Matt" in the anchor text; the query now scores 1.000 / team_scaling and answers with the 11-13 direct reports and the flat two-layer structure. (2) "How much money did Matt make at Accenture" scored 0.789 / narrative and was reaching retrieval. Fix B added two personal_compensation patterns to `nonsense_filters.jsonl`: bare compensation nouns, and a "how much money" plus earning-verb idiom bounded to a 25-character gap so it does not catch "how much money did Matt save the client." The query now blocks via is_nonsense. Verified in production after push.
+
+Methodology finding (August 26, 2026): The salary bug only reproduced on the ticket's full-form string. "How much money did Matt make" (shorter form) scored 0.921 personal and blocked correctly -- testing that form would have closed the ticket while the bug stayed live. The router embeds the exact string; a few words changes the measurement. Any router work needs the verbatim failing query, not a paraphrase.
+
+`probe_163_substitution_impact.py` committed as `b9cd2ef` -- measures substitution impact across five queries (Jaccard 0.25 to 0.67). Re-runnable benchmark for MATTGPT-077 Phase 2/Phase 3.
+
+---
+
 **August 26, 2026 — Story detail sidebar: Core Competencies as wrapping pills; Export tag cap removed (MATTGPT-212)** -- `a653b05`
 
 Core Competencies section in `story_detail.py` rendered as a single-column list with no cap; the Cendian story's 28 competencies pushed the sidebar to ~900px. Replaced with a flex wrapping pill container using outlined pills (outlined rather than filled to stay visually distinct from `public_tags`). Two new design tokens in `global_styles.py`: `--pill-outline-border` and `--pill-outline-text`, with separate light/dark values. Design deviation from ticket spec: light-mode `--pill-outline-text` shipped as `#6B7280` (matching `--text-secondary`) instead of the specified `#4B5563`. Production filled pills are grey-on-grey-tint, not purple as the 3E mock implied; using the same text color as the filled variant would have produced no fill/outline hierarchy. Also removed `[:10]` tag cap in the Export/print render (`story_detail.py:372`): the cap silently dropped the tail of the alphabet from a document that reads as complete, with no ellipsis or count. `test_global_styles_no_cdn` (asserting a feature removed in `2cbe5f5`) deleted in `e307d6d`; remaining 5 tests in `test_base64_precomputation.py` verified still guarding live base64 embedding.

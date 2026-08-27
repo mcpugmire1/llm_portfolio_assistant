@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: e307d6d -->
+<!-- last-backlog-sync: b9cd2ef -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -11,10 +11,9 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 **NOW**
 1. **-215** — Key Metrics sidebar parse heuristic surfaces bogus renders (year-as-metric, counted nouns, value precision loss) on ~10 stories. User-visible on live Cendian story since MATTGPT-212 reduced sidebar height.
-2. **-163** — Professional org questions intercepted as private-family. High; same class as -208.
-3. **-162** — Embedding exception renders as no-match. Visitor concludes the corpus is thin when the app broke.
-4. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
-5. **-128** — Source faithfulness. Never run. Last unverified thing on the runway; gates Role Match since Role Match is evidence-backed ratings.
+2. **-162** — Embedding exception renders as no-match. Visitor concludes the corpus is thin when the app broke.
+3. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+4. **-128** — Source faithfulness. Never run. Last unverified thing on the runway; gates Role Match since Role Match is evidence-backed ratings.
 
 **NEXT** — Role Match, once the runway clears
 -160 (extractor dropping qualifiers on 7 of 23) · -173 (malformed and comp-only JD behavior) · -159 (sequential gpt-4o loop) · -014 (34 skipped integration scenarios) · -089 (location, work-model, availability) · -012 (Private View Phase 4) · -081 (corrective actions by asset type) · -099 (comp handling) · -017 (logging scenarios)
@@ -34,7 +33,7 @@ Meta: -079, -156, -096
 Dead code: -176, -183, -199, -201 · Hidden error: -204
 BDD flakes: -122, -131, -142, -145, -197, -198, -205
 Wrong-assertion test: -203 · -209 (drift guard searches wrong scope)
-Small refactors: -140, -153, -086, -062, -082, -083, -084, -150, -060
+Small refactors: -140, -153, -086, -062, -082, -083, -084, -150, -060, -217 (pronoun grammar in substitution)
 BDD structure: -213 (shared step definitions)
 Correctness audit: -214 (parameters, comments, constants, copied blocks)
 Infrastructure: -035, -039, -040, -045, -216 (unit test gate)
@@ -91,7 +90,6 @@ Infrastructure: -035, -039, -040, -045, -216 (unit test gate)
 | [MATTGPT-159](#mattgpt-159) | Role Match performance — parallelize per-requirement assessor calls; sequential gpt-4o loop is the bottleneck | Open | Medium | Performance | July 31, 2026 |
 | [MATTGPT-160](#mattgpt-160) | JD extractor clause-dropping — 7 of 23 requirements on demo JD lose qualifiers during extraction | Open | Medium | Bug | July 31, 2026 |
 | [MATTGPT-162](#mattgpt-162) | Embedding exception misclassified as low-confidence rejection — visitor sees no-match banner instead of error message | Open | High | Bug | August 3, 2026 |
-| [MATTGPT-163](#mattgpt-163) | Personal-query guard false positive — professional org questions intercepted as private family | Open | High | Bug | August 3, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
 | [MATTGPT-168](#mattgpt-168) | Slot 1 is amplified without regard to margin -- tie or near-tie at slot 1 gets 80% of the answer | Open | High | Bug | August 5, 2026 |
@@ -122,6 +120,7 @@ Infrastructure: -035, -039, -040, -045, -216 (unit test gate)
 | [MATTGPT-214](#mattgpt-214) | Targeted audit: parameters never referenced, comments asserting absent behavior, constants unused, copied blocks with stale variable names | Open | Low | Refactor | August 26, 2026 |
 | [MATTGPT-215](#mattgpt-215) | Key Metrics sidebar parse heuristic surfaces bogus renders on ~10 stories | Open | High | Bug | August 26, 2026 |
 | [MATTGPT-216](#mattgpt-216) | Unit test suite not part of commit/push gate; 5 failures accumulated invisibly | Open | Medium | Infrastructure | August 26, 2026 |
+| [MATTGPT-217](#mattgpt-217) | `_substitute_matt_subject` produces subject pronoun in object position ("reported to he at the CIC") | Open | Low | Bug | August 26, 2026 |
 
 ---
 
@@ -444,6 +443,7 @@ Each detail block uses these fields. Not every field is required for every item.
   - **B.** Incremental top-up — compute embeddings only for phrases missing from the cache; write the updated cache back to disk. Cheaper than full regen; preserves embeddings for unchanged phrases.
   - **C.** Hash-based cache key — derive the cache filename from a hash of `VALID_INTENTS` contents (e.g., `intent_embeddings.<sha256>.json`). A cache miss is automatic and unambiguous when the inputs change. Old cache files can be garbage-collected on a schedule.
 - **Recommendation:** Option B is the right long-term shape — cheap, transparent, no silent stale state. Option A is a one-line safety net that could ship first as a guard.
+- **Priority review note (July 29, 2026):** Warranted before any next VALID_INTENTS change. That change happened (MATTGPT-163, 9a05af0, August 26, 2026) and followed the manual delete-and-rebuild workflow cleanly -- footgun did not fire. Underlying fix still worth doing to remove the remember-to-do-it step.
 - **Out of scope for MATTGPT-016:** The current wrong-person fix follows the existing "delete and regenerate" workflow (the documented contract) and commits a regenerated cache. This ticket addresses the underlying fragility, not the immediate fix.
 - **Status note (July 29, 2026):** Staleness risk confirmed active -- no longer hypothetical. VALID_INTENTS changes occurred during July 2026 -080 validation sessions. Priority review warranted before next VALID_INTENTS change.
 - **Logged:** May 14, 2026 (surfaced during MATTGPT-016 implementation scoping)
@@ -491,7 +491,7 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Type:** Issue
 - **Execution split (May 28, 2026; updated August 12, 2026 — see Value Prioritized Roadmap at top of BACKLOG.md):**
   - **Phase 1 — Query-side mitigation (done, Green at 627f6f4).** Strip "Matt" from embedded queries on technical-noun shapes; preserve "Matt" in the prompt sent to the LLM. Cheap, reversible, sufficient for moderate-overlap nouns (monolith, MVP). NOT sufficient for severe-overlap nouns (refactoring). Maps to Fix-path option 2 below.
-  - **Phase 2 — Cluster cull / rewrite (NOW).** Scope determined by P5/P8 Step 0 measurement. MATTGPT-182 closed (275ff1f, August 15) -- re-baseline run August 13; P5/P8 still LEAD (findings in post-182 section below). Phase 2 is unblocked.
+  - **Phase 2 — Cluster cull / rewrite (NOW).** Scope determined by P5/P8 Step 0 measurement. MATTGPT-182 closed (275ff1f, August 15) -- re-baseline run August 13; P5/P8 still LEAD (findings in post-182 section below). Phase 2 is unblocked. **Benchmark artifact (August 26, 2026):** `probe_163_substitution_impact.py` (committed b9cd2ef) measures substitution impact across five queries. Jaccard similarity 0.25 to 0.67; the direct-reports query is the strongest case: seven of ten portfolio-narrative stories without substitution, ten of ten org-delivery stories with it. Re-runnable as a before-and-after benchmark when Phase 2 or Phase 3 lands.
   - **Phase 3 — Full hybrid retrieval.** BM25 + semantic; keyword weighting on "client", "Fortune 500", "enterprise" pushes named-client stories above MattGPT for queries containing those keywords. Handles severe-overlap nouns. **Lowest empirical risk path** given the May 16 story-side rewrite backfire (see Finding 3 caveat). Also addresses MATTGPT-061 residual. Maps to Fix-path option 3 below. **Note (August 13, 2026): BM25 cannot reach P5/P8's specific problem.** P5 and P8 query "platform refactoring." Rearchitecting Live Railroad Systems does not contain "refactoring" -- its title says "Rearchitecting" and its prose uses "rearchitecture" and "refactor." No enterprise story whose subject is restructuring uses the query's exact vocabulary. A term-matching mechanism has nothing to match. BM25 plus a stemmer would address the no-stemming limitation in MATTGPT-178 and would help queries whose vocabulary the corpus does carry -- but Phase 3 should not be scoped as the fix for P5/P8.
   - The detailed Fix-path ordering section below remains the canonical reference for option specifics; this annotation adds sequencing decisions made during the May 28, 2026 prioritization pass.
 - **Finding 1 (noun-overlap spectrum + subject-pronoun modifier):** Free-text queries with "Matt" as the subject systematically contaminate retrieval when the noun overlaps MattGPT or Strangler Fig story vocabulary. Subject pronoun is a *modifier*, not a binary gate — moderate-overlap nouns are rescued by switching "Matt" → "you"; severe-overlap nouns are not.
@@ -1467,27 +1467,6 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 
 ---
 
-### MATTGPT-163
-**Personal-query guard false positive -- professional org questions intercepted as private family**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Bug
-- **Logged:** August 3, 2026
-
-**Issue:** "How many direct reports did Matt have" is intercepted by the personal-query family classifier with score 0.618, classified as `family=personal`. The visitor sees an out-of-scope rejection. The query is a legitimate organizational question about management scope -- not a privacy-sensitive personal query (salary, SSN, home address, family composition).
-
-**Compound failure pattern from August 3 trace session:** The same personal family is producing errors in both directions. July trace: "How much money did Matt make at Accenture" was classified as `family=delivery` (false negative -- should be personal). August trace: "How many direct reports did Matt have" classified as `family=personal` (false positive -- should reach retrieval). The family boundary is miscalibrated in both directions.
-
-**Fix options (compose; may ship together or sequentially):**
-- **A.** Add professional counter-examples to the personal family semantic anchors -- queries about org size, team composition, reporting relationships, and headcount should score low against the personal family anchor. Touches `semantic_router.py`. Independent of MATTGPT-165. **However: adding counter-examples changes `VALID_INTENTS`, which triggers the stale-cache defect described in MATTGPT-062. Verify -062 is closed or manually invalidate the cache before deploying Approach A.**
-- **B.** Build a deterministic keyword pre-filter for genuine privacy categories (salary / compensation, SSN, DOB, home address, relationship/family status) that fires before the semantic classifier. Hard-blocks privacy-sensitive patterns; leaves org-structure queries to the router. Touches `nonsense_filters.jsonl`. **MATTGPT-165 (nonsense_filters.jsonl dedup) is closed (7566a13, August 18). Safe to add new patterns to the file.**
-
-Option A recalibrates the classifier. Option B adds an upstream gate. They compose -- A alone risks residual false positives on edge cases; B alone doesn't fix the miscalibration. Recommended: A first (independent, unblocked), then B after MATTGPT-165 closes (closed, 7566a13, August 18).
-
-**Validation:** After fix, "How many direct reports did Matt have" must reach retrieval. "How much money did Matt make at Accenture" must be blocked (personal family, correct outcome). "How many people reported to Matt at the CIC" must reach retrieval.
-
----
 
 ### MATTGPT-166
 **Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect**
@@ -2225,6 +2204,21 @@ A. Fold `pytest tests/unit/` into the pre-push hook alongside the eval
 B. Fold into a pre-commit hook with fast-only scoping (skip slow tests)
 
 **Priority:** Medium -- no active regression, but the gate is empirically not catching them.
+
+---
+
+### MATTGPT-217
+**`_substitute_matt_subject` produces subject pronoun in object position**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Bug
+- **File:** `services/rag_service.py` or `backend_service.py` (`_substitute_matt_subject`)
+- **Logged:** August 26, 2026
+
+**Issue:** The substitution produces "reported to he at the CIC" -- subject pronoun ("he") used in object position (should be "him"). Cosmetic today: only the embedding sees the substituted query, and the August 26, 2026 probe confirms retrieval is unaffected. Filed rather than deferred on "if a future path leaks retrieval_q to a user-facing surface" -- that condition is not checked for at change time.
+
+**Discovery context:** Surfaced during MATTGPT-163 session, August 26, 2026.
 
 ---
 
