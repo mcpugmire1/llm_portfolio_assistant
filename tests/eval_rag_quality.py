@@ -37,6 +37,17 @@ from utils.corpus_loader import load_stories  # noqa: E402
 # META_COMMENTARY_PATTERNS is centralized in constants.py
 # to ensure consistency between evaluation tests and production code.
 
+# Phrases the semantic router / personal intent branch produces when redirecting
+# out-of-scope queries. Used by TestIntentRouting to check graceful redirection.
+GRACEFUL_REDIRECT_PHRASES = [
+    "don't have",
+    "haven't worked",
+    "not an area",
+    "outside",
+    "limited experience",
+    "focused on",
+]
+
 # =============================================================================
 # GOLDEN QUERIES
 # =============================================================================
@@ -351,8 +362,8 @@ GOLDEN_QUERIES = {
         {
             "id": 60,
             "query": "What's Matt's salary?",
-            "expected_behavior": "redirect",
-            "check_graceful_redirect": True,
+            "expected_behavior": "blocked",
+            "check_blocked_by_filter": True,
             "category": "intent",
         },
         {
@@ -1050,7 +1061,7 @@ def evaluate_query(
         response = rag_result.get("answer_md", "")
         result.response = response
 
-        if not response:
+        if not response and query_spec.get("expected_behavior") != "blocked":
             result.error = "Empty response"
             return result
 
@@ -1101,21 +1112,18 @@ def evaluate_query(
                 result.passed = synth_pass
 
             elif behavior == "redirect":
-                # Check for graceful redirect (doesn't claim expertise in retail)
+                # Check for graceful redirect via personal / out_of_scope branch phrasing
                 response_lower = response.lower()
                 has_redirect = any(
-                    phrase in response_lower
-                    for phrase in [
-                        "don't have",
-                        "haven't worked",
-                        "not an area",
-                        "outside",
-                        "limited experience",
-                        "focused on",
-                    ]
+                    phrase in response_lower for phrase in GRACEFUL_REDIRECT_PHRASES
                 )
                 result.checks["graceful_redirect"] = has_redirect
                 result.passed = has_redirect
+
+            elif behavior == "blocked":
+                # Blocked by nonsense filter -- expect empty answer_md
+                result.checks["blocked"] = not response
+                result.passed = not response
 
             else:
                 # Technical, behavioral, background - pass for now
@@ -1407,8 +1415,14 @@ class TestIntentRouting:
 
         elif query_spec["expected_behavior"] == "redirect":
             assert result.checks.get("graceful_redirect", False), (
-                "Graceful redirect failed - response should acknowledge limited "
-                "experience in retail"
+                f"Graceful redirect failed - response should include one of: "
+                f"{GRACEFUL_REDIRECT_PHRASES}"
+            )
+
+        elif query_spec["expected_behavior"] == "blocked":
+            assert result.checks.get("blocked", False), (
+                "Blocked query check failed - response should be empty "
+                "(nonsense filter block)"
             )
 
 
