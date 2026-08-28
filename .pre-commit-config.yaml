@@ -39,3 +39,24 @@ repos:
       - id: check-toml
       - id: mixed-line-ending
         args: [--fix=lf]
+
+  # Unit test suite (MATTGPT-216) -- runs on `git push`, not every commit.
+  #
+  # Install locally with: pre-commit install --hook-type pre-push
+  #
+  # Runs on push (not commit) because ~48s is too slow for every commit but
+  # fine as a push gate. The eval suite (tests/eval_rag_quality.py) stays
+  # as manual pre-push discipline -- it costs API tokens and takes ~4
+  # minutes; automating both would push total gate time past the threshold
+  # at which --no-verify becomes tempting. Pytest catches structural
+  # regressions; the eval catches retrieval-quality regressions. Different
+  # failure classes; keeping them at different gates preserves both.
+  - repo: local
+    hooks:
+      - id: pytest-unit
+        name: pytest tests/unit
+        entry: python -m pytest tests/unit/ -q
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-push]

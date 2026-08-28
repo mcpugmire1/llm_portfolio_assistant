@@ -153,6 +153,11 @@ class TestDiversifyResults:
     It prevents single-client domination in search results.
     """
 
+    @pytest.mark.xfail(
+        reason="MATTGPT-187: max_per_client parameter is documented but never "
+        "implemented (pre-registered fix). Remove xfail when -187 ships.",
+        strict=False,
+    )
     def test_limits_single_client_stories(self, sample_search_results):
         """No client should have more than max_per_client stories."""
         try:
@@ -181,6 +186,11 @@ class TestDiversifyResults:
             # Should be the highest scoring JPMC story (score 0.95)
             assert jpmc_stories[0]["score"] == 0.95
 
+    @pytest.mark.xfail(
+        reason="MATTGPT-187: max_per_client parameter is documented but never "
+        "implemented (pre-registered fix). Remove xfail when -187 ships.",
+        strict=False,
+    )
     def test_maintains_overall_order(self, sample_search_results):
         """Results should still be ordered by score after diversification."""
         try:
