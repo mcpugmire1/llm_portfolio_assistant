@@ -570,7 +570,6 @@ class TestSendToBackend:
 class TestRAGAnswer:
     """Tests for rag_answer() integration."""
 
-    @pytest.mark.integration
     def test_returns_response_dict(self, sample_stories, mock_streamlit):
         """Should return a dictionary with expected keys."""
         try:

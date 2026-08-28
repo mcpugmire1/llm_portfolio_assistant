@@ -54,8 +54,8 @@ repos:
   - repo: local
     hooks:
       - id: pytest-unit
-        name: pytest tests/unit
-        entry: python -m pytest tests/unit/ -q
+        name: pytest tests/unit + tests/integration (excluding network-bound)
+        entry: python -m pytest tests/unit/ tests/integration/ -m "not network" -q
         language: system
         pass_filenames: false
         always_run: true

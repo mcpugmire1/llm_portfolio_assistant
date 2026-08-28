@@ -14,13 +14,23 @@ This is step 2 in the data pipeline:
 
 import json
 import os
-import re
 import shutil
 from datetime import UTC, datetime
 from pathlib import Path
 
 from dotenv import load_dotenv
 from openai import OpenAI
+
+# Pure helpers moved to utils/formatting.py (MATTGPT-216) so unit tests can
+# exercise them without importing this module and triggering the eager
+# OpenAI() client construction below.
+from utils.formatting import (
+    _dedupe_title_case_wins,
+    _drop_restated_fields,
+    _normalize_tag_case,
+    _prompt_view,
+    _strip_paren_acronym,
+)
 
 # Load environment variables
 load_dotenv()
@@ -45,145 +55,6 @@ ARCHIVE_BACKUPS_DIR = Path("archive/jsonl-backups")
 # cross-functional dynamics from technical product content (OKRs, user
 # journeys, scope decisions). See MATTGPT-061 for diagnosis.
 TECHNICAL_ONLY_ERAS = {"Independent Product Development"}
-
-
-# ---------------------------
-# Helper: single source of truth for what the LLM sees per story
-# ---------------------------
-def _strip_paren_acronym(tag: str) -> str:
-    """Collapse "phrase (ACRONYM)" tags to just the acronym.
-
-    "large language models (LLM)" -> "LLM"
-    "enterprise service bus (ESB)" -> "ESB"
-
-    Fires only when the parenthetical at the end is a short all-caps token
-    (acronym pattern). Non-acronym parentheticals are left alone.
-    """
-    m = re.match(r"^.+\s+\(([A-Z]{2,}[A-Z0-9]*)\)$", tag.strip())
-    return m.group(1) if m else tag
-
-
-_SMALL_WORDS = {"and", "or", "the", "a", "an", "of", "for", "in", "to", "with"}
-
-
-def _normalize_tag_case(tag: str) -> str:
-    """Title-case each word, preserving acronyms and mixed-case proper nouns.
-
-    - "agile transformation" -> "Agile Transformation"
-    - "AWS" -> "AWS" (all-caps preserved)
-    - "DevOps" -> "DevOps" (any uppercase char -> preserve)
-    - "cross-functional collaboration" -> "Cross-Functional Collaboration"
-    - "CI/CD pipelines" -> "CI/CD Pipelines"
-    - "Docker And Kubernetes" -> "Docker and Kubernetes" (standard title case)
-    - "And Docker" -> "And Docker" (small word capitalized when first)
-
-    Splits on spaces first, then further on hyphens and slashes so acronyms
-    around those separators are preserved individually (CI/CD, cross-XYZ).
-    Small words (and, or, the, a, an, of, for, in, to, with) are lowercased
-    unless they are the first token of the tag; check applies to hyphen and
-    slash segments too, so "Cross-And-Effect" -> "Cross-and-Effect". Small-word
-    override wins over uppercase preservation, so "Docker AND Kubernetes"
-    still normalizes to "Docker and Kubernetes".
-
-    Rule is otherwise "preserve anything with an uppercase char" rather than
-    "title-case unless all-caps" -- means a half-cased LLM output like "agile
-    Transformation" stays half-cased. Not seen in practice; the models return
-    either all-lower or already-cased.
-    """
-
-    def _norm_token(t: str, *, is_first: bool) -> str:
-        if not t:
-            return t
-        if not is_first and t.lower() in _SMALL_WORDS:
-            return t.lower()
-        if any(c.isupper() for c in t):
-            return t  # acronym or proper noun preserved
-        return t[0].upper() + t[1:].lower()
-
-    result_words = []
-    first_seen = False
-    for word in tag.split():
-        parts = re.split(r"([-/])", word)
-        out = []
-        for p in parts:
-            if p in "-/" or not p:
-                out.append(p)
-                continue
-            out.append(_norm_token(p, is_first=not first_seen))
-            first_seen = True
-        result_words.append("".join(out))
-    return " ".join(result_words)
-
-
-def _drop_restated_fields(tags: list[str], story: dict) -> list[str]:
-    """Drop tags that exactly restate the story's Industry, Sub-category,
-    Category, or Project (case-insensitive).
-
-    Those fields are separately filterable in the UI, so a tag that repeats
-    them is a duplicate route to the same story and a wasted slot out of 15.
-    Verified: "telecommunications" on a story whose Industry is
-    Telecommunications; "career narrative" on a story whose Project is
-    Career Narrative.
-    """
-    restated = {
-        str(story.get(f, "") or "").strip().lower()
-        for f in ("Industry", "Sub-category", "Category", "Project")
-    }
-    restated.discard("")
-    return [t for t in tags if t.strip().lower() not in restated]
-
-
-def _dedupe_title_case_wins(tags: list[str]) -> list[str]:
-    """Case-insensitive dedup preferring the more uppercase-heavy variant.
-
-    When two tags collide case-insensitively, keep the one with more uppercase
-    characters. Handles both title-case-vs-lowercase ("Client Engagement" over
-    "client engagement") and acronyms ("AWS" over "aws"). Ties keep first-seen.
-
-    Known edge case: proper nouns whose official style is title case rather than
-    all-caps -- e.g., Atlassian styles it "Jira", not "JIRA". This heuristic
-    would pick "JIRA" over "Jira" (4 vs 1 uppercase). The master corpus is
-    curated to the correct form; this note exists so a future generator run
-    that emits both variants is understood as a known limitation, not a bug.
-    """
-    by_lower: dict[str, str] = {}
-    for tag in tags:
-        key = tag.lower()
-        if key not in by_lower:
-            by_lower[key] = tag
-            continue
-        current_upper = sum(1 for c in by_lower[key] if c.isupper())
-        new_upper = sum(1 for c in tag if c.isupper())
-        if new_upper > current_upper:
-            by_lower[key] = tag
-    return list(by_lower.values())
-
-
-def _prompt_view(story: dict) -> dict:
-    """The exact fields and projections the tag prompt reads.
-
-    Returned by field name (e.g., "Project Scope / Complexity", "Use Case(s)")
-    so change-detection can key lookups against the raw story dict. The tag
-    prompt renders labels from this view.
-    """
-    return {
-        "Era": story.get("Era", ""),
-        "Title": story.get("Title", ""),
-        "Role": story.get("Role", ""),
-        "Industry": story.get("Industry", ""),
-        "Theme": story.get("Theme", ""),
-        "Category": story.get("Category", ""),
-        "Sub-category": story.get("Sub-category", ""),
-        "Project Scope / Complexity": story.get("Project Scope / Complexity", ""),
-        "Competencies": story.get("Competencies", ""),
-        "Use Case(s)": story.get("Use Case(s)", ""),
-        "Situation": " ".join(story.get("Situation") or []),
-        "Task": " ".join(story.get("Task") or []),
-        "Action": " ".join(story.get("Action") or []),
-        "Result": " ".join(story.get("Result") or []),
-        "Process": " ".join(story.get("Process") or []),
-        "Performance": " ".join(story.get("Performance") or []),
-    }
 
 
 # ---------------------------

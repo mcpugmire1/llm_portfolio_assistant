@@ -1,21 +1,26 @@
-"""Unit tests for generate_public_tags.py (MATTGPT-211, MATTGPT-072).
+"""End-to-end tests for generate_public_tags.py.
 
-MATTGPT-211: the backup step at line 184 must copy OUTPUT_FILE (the file
-overwritten) not INPUT_FILE (only read). Guarded for first runs.
+MATTGPT-216 (Aug 28, 2026): moved from tests/unit/ to tests/integration/
+because these tests import generate_public_tags at the top of their
+fixtures, which triggers the script's eager OpenAI(api_key=...) client
+construction at module load. That construction is correct for the
+script's real invocation (`python generate_public_tags.py` fails loud
+when the key is missing) but incompatible with a hermetic CI unit gate.
 
-MATTGPT-072 first pass:
-- Change 1 (_prompt_view helper): the LLM prompt reads Situation and Task
-  as [0] only while joining the other list fields. Fix reads them in full
-  so tags derive from the same slice as the embedding.
-- Change 2 (skip unchanged): re-tagging all 123 stories on every run is
-  the cost driver. Compare _prompt_view(input) against _prompt_view(prior)
-  and only call the LLM for changed or new stories. public_tags is
-  excluded from the comparison (matches generate_jsonl_from_excel.py's
-  diff-loop convention).
+These tests mock the OpenAI client method before any real call fires, so
+they do not hit the network -- but they DO require the module to import,
+which requires OPENAI_API_KEY to be present in the environment
+(any value; the SDK validates presence at construction, not validity).
+Locally, .env supplies this; the pre-push hook picks them up. GH Actions
+CI runs only tests/unit/ and does not carry the key.
 
-All tests mock the OpenAI client and the input() prompt to exercise the
-real enrich_stories_with_nlp_tags() flow end-to-end against tmp files.
-No paid API calls; no repo-file writes.
+No `pytestmark` here -- the directory placement is the signal ("this
+lives in integration"). The `network` marker is reserved for tests that
+hit real external services; these mock everything.
+
+Test coverage preserved:
+- MATTGPT-211 backup contract (was TestGeneratePublicTagsBackup)
+- MATTGPT-072 skip-unchanged logic (was TestSkipUnchangedStories)
 """
 
 import json
@@ -119,231 +124,6 @@ class TestGeneratePublicTagsBackup:
             f"got {[p.name for p in backup_files]}"
         )
         assert output_path.exists(), "OUTPUT_FILE should be written on first run"
-
-
-class TestPromptView:
-    """MATTGPT-072 Change 1: _prompt_view exposes the exact fields and
-    projections the LLM tag prompt reads. Situation and Task must be read
-    in full (not [0] only) so tags derive from the same slice the embedding
-    is built from.
-    """
-
-    def test_reads_full_situation_not_just_first_item(self):
-        """Situation is a list; the LLM should see all items joined,
-        not just [0]. Sparkfly has a two-paragraph Situation and its
-        second paragraph never reaches the tag prompt today."""
-        from generate_public_tags import _prompt_view
-
-        story = {
-            "Situation": [
-                "First paragraph of situation.",
-                "Second paragraph with distinct content.",
-                "Third paragraph too.",
-            ]
-        }
-        rendered = _prompt_view(story)["Situation"]
-        assert (
-            "Second paragraph" in rendered
-        ), f"Situation must include all items, got: {rendered!r}"
-        assert "Third paragraph" in rendered
-
-    def test_reads_full_task_not_just_first_item(self):
-        from generate_public_tags import _prompt_view
-
-        story = {"Task": ["First task item.", "Second task item."]}
-        rendered = _prompt_view(story)["Task"]
-        assert (
-            "Second task item" in rendered
-        ), f"Task must include all items, got: {rendered!r}"
-
-    def test_covers_all_sixteen_prompt_fields(self):
-        """Every field the prompt reads must appear in _prompt_view. Missing
-        a field means the change-detector would silently skip stories whose
-        LLM-relevant content did change -- the worst failure mode."""
-        from generate_public_tags import _prompt_view
-
-        story = {
-            "Era": "e",
-            "Title": "t",
-            "Role": "r",
-            "Industry": "i",
-            "Theme": "th",
-            "Category": "c",
-            "Sub-category": "sc",
-            "Project Scope / Complexity": "psc",
-            "Competencies": "co",
-            "Use Case(s)": "uc",
-            "Situation": ["s"],
-            "Task": ["ta"],
-            "Action": ["a1", "a2"],
-            "Result": ["r1"],
-            "Process": ["p"],
-            "Performance": ["pe"],
-        }
-        view = _prompt_view(story)
-        expected = {
-            "Era",
-            "Title",
-            "Role",
-            "Industry",
-            "Theme",
-            "Category",
-            "Sub-category",
-            "Project Scope / Complexity",
-            "Competencies",
-            "Use Case(s)",
-            "Situation",
-            "Task",
-            "Action",
-            "Result",
-            "Process",
-            "Performance",
-        }
-        assert set(view.keys()) == expected, (
-            f"_prompt_view field set drift. "
-            f"Missing: {expected - set(view.keys())}. "
-            f"Extra: {set(view.keys()) - expected}."
-        )
-
-
-class TestTitleCaseDedup:
-    """MATTGPT-072: case-insensitive dedup. Title case wins; acronyms preserved."""
-
-    def test_title_case_wins_over_lowercase(self):
-        from generate_public_tags import _dedupe_title_case_wins
-
-        result = _dedupe_title_case_wins(["Client Engagement", "client engagement"])
-        assert result == ["Client Engagement"]
-
-    def test_lowercase_first_seen_replaced_by_title_case(self):
-        """First-seen order does not matter; more-uppercase wins."""
-        from generate_public_tags import _dedupe_title_case_wins
-
-        result = _dedupe_title_case_wins(["client engagement", "Client Engagement"])
-        assert result == ["Client Engagement"]
-
-    def test_acronym_preserved_over_lowercase(self):
-        from generate_public_tags import _dedupe_title_case_wins
-
-        result = _dedupe_title_case_wins(["aws", "AWS"])
-        assert result == ["AWS"]
-
-    def test_hyphenated_title_case_wins(self):
-        from generate_public_tags import _dedupe_title_case_wins
-
-        result = _dedupe_title_case_wins(
-            ["cross-functional collaboration", "Cross-Functional Collaboration"]
-        )
-        assert result == ["Cross-Functional Collaboration"]
-
-    def test_single_variant_passes_through(self):
-        from generate_public_tags import _dedupe_title_case_wins
-
-        result = _dedupe_title_case_wins(
-            ["Client Engagement", "Delivery Excellence", "AWS"]
-        )
-        assert set(result) == {"Client Engagement", "Delivery Excellence", "AWS"}
-
-    def test_tie_keeps_first_seen(self):
-        """When uppercase counts tie, first-seen wins."""
-        from generate_public_tags import _dedupe_title_case_wins
-
-        result = _dedupe_title_case_wins(["Data Governance", "Data governance"])
-        assert result == ["Data Governance"]
-
-
-class TestStripParenAcronym:
-    """MATTGPT-072: collapse 'phrase (ACRONYM)' to just the acronym."""
-
-    def test_parenthetical_acronym_stripped(self):
-        from generate_public_tags import _strip_paren_acronym
-
-        assert _strip_paren_acronym("large language models (LLM)") == "LLM"
-        assert _strip_paren_acronym("enterprise service bus (ESB)") == "ESB"
-
-    def test_non_acronym_parenthetical_unchanged(self):
-        """Only trailing all-caps parentheticals are treated as acronym
-        expansions. Non-acronym parentheticals (lowercase, mixed, phrases)
-        stay intact."""
-        from generate_public_tags import _strip_paren_acronym
-
-        assert (
-            _strip_paren_acronym("prototype (early stage)") == "prototype (early stage)"
-        )
-
-
-class TestNormalizeTagCase:
-    """MATTGPT-072: title-case each word, preserve acronyms and mixed-case
-    proper nouns."""
-
-    def test_lowercase_to_title_case(self):
-        from generate_public_tags import _normalize_tag_case
-
-        assert _normalize_tag_case("agile transformation") == "Agile Transformation"
-
-    def test_all_caps_acronym_preserved(self):
-        from generate_public_tags import _normalize_tag_case
-
-        assert _normalize_tag_case("AWS") == "AWS"
-        assert _normalize_tag_case("EDI") == "EDI"
-
-    def test_hyphenated_words(self):
-        from generate_public_tags import _normalize_tag_case
-
-        assert (
-            _normalize_tag_case("cross-functional collaboration")
-            == "Cross-Functional Collaboration"
-        )
-
-    def test_slashed_acronym(self):
-        from generate_public_tags import _normalize_tag_case
-
-        assert _normalize_tag_case("CI/CD pipelines") == "CI/CD Pipelines"
-
-    def test_small_word_lowercased_between_words(self):
-        from generate_public_tags import _normalize_tag_case
-
-        assert _normalize_tag_case("Docker And Kubernetes") == "Docker and Kubernetes"
-        assert _normalize_tag_case("Aerospace And Defense") == "Aerospace and Defense"
-        assert (
-            _normalize_tag_case("Training and Enablement") == "Training and Enablement"
-        )
-
-    def test_small_word_capitalized_when_first(self):
-        from generate_public_tags import _normalize_tag_case
-
-        assert _normalize_tag_case("And Docker") == "And Docker"
-        assert _normalize_tag_case("the platform") == "The Platform"
-
-    def test_small_word_lowercased_in_hyphen_segment(self):
-        from generate_public_tags import _normalize_tag_case
-
-        assert _normalize_tag_case("Cross-And-Effect") == "Cross-and-Effect"
-
-    def test_uppercase_small_word_still_lowercased(self):
-        from generate_public_tags import _normalize_tag_case
-
-        assert _normalize_tag_case("Docker AND Kubernetes") == "Docker and Kubernetes"
-
-    def test_acronym_preserved_next_to_small_word(self):
-        from generate_public_tags import _normalize_tag_case
-
-        assert _normalize_tag_case("AWS and GCP") == "AWS and GCP"
-
-
-class TestDropRestatedFields:
-    """MATTGPT-072: tags that exactly restate Industry/Sub-category/Category/
-    Project are duplicate routes and get dropped."""
-
-    def test_tag_matching_industry_is_dropped(self):
-        from generate_public_tags import _drop_restated_fields
-
-        story = {"Industry": "Telecommunications"}
-        tags = ["Data Architecture", "Telecommunications", "Order Management"]
-        assert _drop_restated_fields(tags, story) == [
-            "Data Architecture",
-            "Order Management",
-        ]
 
 
 class TestSkipUnchangedStories:

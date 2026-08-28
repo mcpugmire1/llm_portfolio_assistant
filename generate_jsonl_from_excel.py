@@ -22,20 +22,13 @@ from pathlib import Path
 import pandas as pd
 
 # ---------- config ----------
+# MATTGPT-216 (Aug 28, 2026): master-xlsx auto-detection moved into
+# excel_to_jsonl() below so importing this module does not raise
+# SystemExit when the master isn't present (breaks CI + unit tests that
+# only import _merge_with_existing). Script UX unchanged -- running
+# `python generate_jsonl_from_excel.py` still fails immediately with the
+# same message when the master is missing.
 
-# Auto-detect the current master. refresh_master.py enforces that
-# exactly one file matches this pattern in the repo root by archiving any
-# previous master before copying the new one in. If this assertion fails,
-# either two masters are present (run refresh_master again) or none are
-# (run refresh_master with the current date).
-_MASTER_MATCHES = sorted(Path(".").glob("MPugmire - STAR Stories - *.xlsx"))
-if len(_MASTER_MATCHES) != 1:
-    raise SystemExit(
-        f"Expected exactly one master xlsx in repo root, found {len(_MASTER_MATCHES)}: "
-        f"{[m.name for m in _MASTER_MATCHES]}. "
-        "Run refresh_master.py DDMONYY to normalize."
-    )
-INPUT_EXCEL_FILE = str(_MASTER_MATCHES[0])
 OUTPUT_JSONL_FILE = "echo_star_stories.jsonl"
 SHEET_NAME = "STAR Stories - Interview Ready"
 DRY_RUN = False  # ✅ Change to False when ready to write output
@@ -166,6 +159,20 @@ def split_bullets(value: str):
 
 
 def excel_to_jsonl():
+    # Auto-detect the current master. refresh_master.py enforces that
+    # exactly one file matches this pattern in the repo root by archiving any
+    # previous master before copying the new one in. If this assertion fails,
+    # either two masters are present (run refresh_master again) or none are
+    # (run refresh_master with the current date).
+    master_matches = sorted(Path(".").glob("MPugmire - STAR Stories - *.xlsx"))
+    if len(master_matches) != 1:
+        raise SystemExit(
+            f"Expected exactly one master xlsx in repo root, found {len(master_matches)}: "
+            f"{[m.name for m in master_matches]}. "
+            "Run refresh_master.py DDMONYY to normalize."
+        )
+    input_excel_file = str(master_matches[0])
+
     print(
         f"\n🚦 DRY_RUN = {DRY_RUN} — {'No file will be written' if DRY_RUN else 'Output will be saved to disk'}"
     )
@@ -177,7 +184,7 @@ def excel_to_jsonl():
     backup_file(OUTPUT_JSONL_FILE)
 
     # Load Excel
-    df = pd.read_excel(INPUT_EXCEL_FILE, sheet_name=SHEET_NAME)
+    df = pd.read_excel(input_excel_file, sheet_name=SHEET_NAME)
 
     # Drop rows with no Title (assumes finalized stories always have one)
     df = df[df["Title"].notna()].copy()
