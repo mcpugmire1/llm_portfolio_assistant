@@ -56,31 +56,45 @@ PINECONE_TRY_DEFAULT_NS = str(
     get_conf("PINECONE_TRY_DEFAULT_NS", "false")
 ).strip().lower() in {"1", "true", "yes", "on"}
 
-# Guard: Require Pinecone config ONLY if VECTOR_BACKEND == "pinecone"
-if VECTOR_BACKEND == "pinecone":
-    missing = []
-    if not PINECONE_API_KEY:
-        missing.append("PINECONE_API_KEY")
-    if not PINECONE_INDEX_NAME:
-        missing.append("PINECONE_INDEX_NAME")
-    if not PINECONE_NAMESPACE:
-        missing.append("PINECONE_NAMESPACE")
+# MATTGPT-216 (Aug 28, 2026): eager config guard + eager client construction
+# removed from module load. Both were hostile at import time -- the guard
+# raised RuntimeError during any import of this module (broke CLI scripts
+# and hermetic tests), and the client construction called st.warning() on
+# failure, which triggered "missing ScriptRunContext" chatter to stderr in
+# bare mode. Config validation now lives in validate_pinecone_config()
+# (called explicitly by app.py at startup) and in _init_pinecone() (raises
+# at first-use for any code path that reaches Pinecone without going
+# through app.py -- scripts, eval, build_custom_embeddings). Runtime
+# failures (network, transient API errors) still return None so callers
+# degrade gracefully.
+#
+# The module-level `pinecone_index` variable was removed with the eager
+# block. Grep confirmed zero external importers (services/, ui/, scripts/,
+# tests/, top-level generators, app.py). Any future need for a module-level
+# handle should use _init_pinecone() instead.
+
+
+def validate_pinecone_config() -> None:
+    """Raise RuntimeError if VECTOR_BACKEND=pinecone but required config is missing.
+
+    Intended for explicit invocation from app.py startup so misconfigured
+    deployments fail fast with a legible traceback rather than serving
+    empty results at first request. No-op when VECTOR_BACKEND is anything
+    other than "pinecone".
+    """
+    if VECTOR_BACKEND != "pinecone":
+        return
+    missing = [
+        k
+        for k in ("PINECONE_API_KEY", "PINECONE_INDEX_NAME", "PINECONE_NAMESPACE")
+        if not get_conf(k)
+    ]
     if missing:
         raise RuntimeError(
-            f"Missing required Pinecone config: {', '.join(missing)}. Set them in st.secrets or .env"
+            f"Missing required Pinecone config: {', '.join(missing)}. "
+            "Set them in st.secrets or .env"
         )
 
-# Lazy Pinecone init only if selected
-pinecone_index = None
-if VECTOR_BACKEND == "pinecone":
-    try:
-        from pinecone import Pinecone
-
-        pc = Pinecone(api_key=PINECONE_API_KEY)
-        pinecone_index = pc.Index(PINECONE_INDEX_NAME)
-    except Exception as e:
-        st.warning(f"Pinecone init failed at startup; will retry lazily. ({e})")
-        pinecone_index = None
 
 # =========================
 # Embedding config
@@ -114,12 +128,34 @@ _PC_INDEX = None
 
 
 def _init_pinecone():
-    """Lazy init of Pinecone client + index."""
+    """Lazy init of Pinecone client + index.
+
+    Two failure classes, split behavior (MATTGPT-216, Aug 28, 2026):
+      - Misconfiguration (VECTOR_BACKEND=pinecone with missing config, or
+        pinecone package unavailable): raise RuntimeError with legible
+        message. Fail-fast, developer-actionable. Backs the app.py startup
+        validator for code paths that reach Pinecone without going through
+        it (scripts, eval, build_custom_embeddings).
+      - Runtime failure (network, transient API errors, missing index at
+        the remote): return None with a DEBUG log line. Callers degrade
+        gracefully -- an outage should not crash the UI.
+
+    Returns None cleanly when VECTOR_BACKEND != "pinecone" (unchanged).
+    """
     global _PC, _PC_INDEX
     if _PC_INDEX is not None:
         return _PC_INDEX
-    if not (_PINECONE_API_KEY and Pinecone):
+    if VECTOR_BACKEND != "pinecone":
         return None
+
+    # Misconfiguration -> loud
+    validate_pinecone_config()
+    if Pinecone is None:
+        raise RuntimeError(
+            "pinecone package not installed. Install with: pip install pinecone-client"
+        )
+
+    # Runtime failure -> silent None
     try:
         _PC = Pinecone(api_key=_PINECONE_API_KEY)
         idx_list = _PC.list_indexes().indexes

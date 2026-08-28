@@ -1,0 +1,50 @@
+name: Unit tests
+
+# MATTGPT-216: remote enforcement of the unit suite. Pairs with the local
+# pre-push hook in .pre-commit-config.yaml -- the local hook catches most
+# mistakes before push and saves the round trip; this workflow is the
+# un-bypassable gate. Nothing merges to main without the suite passing.
+#
+# Runs on push to main and on every PR to main. Also exposes a manual
+# workflow_dispatch trigger.
+#
+# No secrets required. Unit suite runs against no external services --
+# verified by measurement:
+#   env -i HOME PATH OPENAI_API_KEY=sk-invalid PINECONE_API_KEY=pc-invalid \
+#     python -m pytest tests/unit -q
+# yields 362 passed / 5 xfailed / 0 failed in ~2s. Integration tests that
+# require real embeddings (semantic router end-to-end) moved to
+# tests/integration/ under MATTGPT-216 and are not part of this gate. If
+# a future unit test needs an API key, that becomes a decision about
+# putting secrets in CI; today it doesn't.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          # Match local dev interpreter (3.13). Mismatch between CI and
+          # local surfaces as failures unrelated to the code change --
+          # avoid that class of noise by pinning to the version the
+          # code is actually developed and tested on. pyproject.toml
+          # targets py311 for lint/format; ruff enforces that so any
+          # 3.13-only syntax gets caught at commit time regardless.
+          python-version: "3.13"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run unit tests
+        run: python -m pytest tests/unit/ -q

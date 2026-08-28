@@ -244,6 +244,15 @@ try:
     )
 
     sync_portfolio_metadata(STORIES)
+
+    # MATTGPT-216: fail-fast on Pinecone misconfigure at deploy time (was
+    # previously enforced by an eager module-load guard in
+    # services/pinecone_service.py that got removed for import hermeticity).
+    # RuntimeError falls into the handler below -- server log gets a legible
+    # traceback, user sees the "temporarily unavailable" page.
+    from services.pinecone_service import validate_pinecone_config  # noqa: E402
+
+    validate_pinecone_config()
 except Exception:
     import logging
 

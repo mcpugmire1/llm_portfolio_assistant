@@ -316,6 +316,39 @@ def _get_intent_embeddings() -> dict[str, list[float]]:
     return _intent_embeddings_cache
 
 
+def _classify_embedding(
+    query_embedding: list[float],
+    intent_embeddings: dict[str, list[float]],
+    hard_threshold: float = HARD_ACCEPT,
+    soft_threshold: float = SOFT_ACCEPT,
+) -> tuple[bool, float, str, str]:
+    """Pure classification: pick the best-matching intent for a query embedding.
+
+    Given an already-computed query embedding and the map of intent-anchor
+    embeddings, iterates all anchors, tracks the highest cosine similarity,
+    returns (is_valid, max_score, best_intent, family) with is_valid decided
+    by soft_threshold.
+
+    Extracted from is_portfolio_query_semantic (MATTGPT-216) so the
+    classification logic is unit-testable against fixture vectors without
+    an OpenAI call. The composed public function still handles embed +
+    classify + borderline log + fail-open error path.
+    """
+    max_similarity = 0.0
+    best_intent = ""
+
+    for intent, intent_emb in intent_embeddings.items():
+        similarity = _cosine_similarity(query_embedding, intent_emb)
+        if similarity > max_similarity:
+            max_similarity = similarity
+            best_intent = intent
+
+    family = INTENT_TO_FAMILY.get(best_intent, "unknown")
+    is_valid = max_similarity >= soft_threshold
+
+    return is_valid, max_similarity, best_intent, family
+
+
 def is_portfolio_query_semantic(
     query: str,
     hard_threshold: float = HARD_ACCEPT,
@@ -342,18 +375,9 @@ def is_portfolio_query_semantic(
     try:
         query_embedding = _get_embedding(query)
         intent_embeddings = _get_intent_embeddings()
-
-        max_similarity = 0.0
-        best_intent = ""
-
-        for intent, intent_emb in intent_embeddings.items():
-            similarity = _cosine_similarity(query_embedding, intent_emb)
-            if similarity > max_similarity:
-                max_similarity = similarity
-                best_intent = intent
-
-        family = INTENT_TO_FAMILY.get(best_intent, "unknown")
-        is_valid = max_similarity >= soft_threshold
+        is_valid, max_similarity, best_intent, family = _classify_embedding(
+            query_embedding, intent_embeddings, hard_threshold, soft_threshold
+        )
 
         # Log borderline cases for review
         if soft_threshold <= max_similarity < hard_threshold:
