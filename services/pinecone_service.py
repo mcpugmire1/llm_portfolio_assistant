@@ -260,8 +260,21 @@ def pinecone_semantic_search(
                 f"DEBUG Pinecone: Entity search filter applied - entity={entity_value} across {ENTITY_SEARCH_FIELDS}"
             )
 
+    # MATTGPT-162: narrow catch around _embed so an OpenAI failure signals
+    # via session state rather than reaching Pinecone with a null vector.
     try:
         qvec = _embed(query)
+    except Exception as e:
+        print(
+            f"[API_ERROR_DETECTED] source=embed_failure, "
+            f"query={(query or '')[:50]}..."
+        )
+        if DEBUG:
+            print(f"DEBUG OpenAI embedding error: {e}")
+        _safe_session_set("__embed_failure__", True)
+        return None
+
+    try:
         if DEBUG:
             print(f"DEBUG Embeddings: qvec_dim={len(qvec)} model={EMBEDDING_MODEL}")
             print(
@@ -420,19 +433,18 @@ def _embed(text: str) -> list[float]:
     """
     Generate query embedding using OpenAI text-embedding-3-small.
     Must match the model used in build_custom_embeddings.py.
+
+    Raises the underlying OpenAI exception on failure. Callers must catch
+    and signal via st.session_state["__embed_failure__"] so rag_answer can
+    route to the API error handler (MATTGPT-162). A prior version swallowed
+    and returned zeros, which produced spurious low_pinecone rejections.
     """
     if not text:
         return [0.0] * _DEF_DIM
 
-    try:
-        client = _get_openai_client()
-        response = client.embeddings.create(model=EMBEDDING_MODEL, input=text)
-        return response.data[0].embedding
-    except Exception as e:
-        if DEBUG:
-            print(f"DEBUG OpenAI embedding error: {e}")
-        # Return zero vector on error (will result in poor matches but won't crash)
-        return [0.0] * _DEF_DIM
+    client = _get_openai_client()
+    response = client.embeddings.create(model=EMBEDDING_MODEL, input=text)
+    return response.data[0].embedding
 
 
 def _extract_match_fields(m) -> tuple[str, float, dict]:

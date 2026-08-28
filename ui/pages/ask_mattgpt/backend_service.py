@@ -515,11 +515,44 @@ def get_synthesis_stories(
         )
 
     # Use USER'S query for semantic search, not fixed theme keywords
-    user_query_vector = _embed(query) if query else None
+    # MATTGPT-162: narrow catch so an OpenAI failure signals via session state
+    # and returns [] instead of running synthesis with a null vector.
+    user_query_vector = None
+    if query:
+        try:
+            user_query_vector = _embed(query)
+        except Exception as e:
+            print(
+                f"[API_ERROR_DETECTED] source=synthesis_query_embed, "
+                f"query={query[:50]}..."
+            )
+            if DEBUG:
+                print(f"DEBUG synthesis query embed error: {e}")
+            try:
+                st.session_state["__embed_failure__"] = True
+            except Exception:
+                pass
+            return []
 
     def search_theme(theme: str) -> list[dict]:
         # Use user's query embedding for relevance, filter by theme for coverage
-        query_vector = user_query_vector if user_query_vector else _embed(theme)
+        if user_query_vector:
+            query_vector = user_query_vector
+        else:
+            try:
+                query_vector = _embed(theme)
+            except Exception as e:
+                print(
+                    f"[API_ERROR_DETECTED] source=synthesis_theme_embed, "
+                    f"theme={theme}"
+                )
+                if DEBUG:
+                    print(f"DEBUG synthesis theme embed error: {e}")
+                try:
+                    st.session_state["__embed_failure__"] = True
+                except Exception:
+                    pass
+                return []
 
         try:
             # If entity detected, try entity+theme filter first
@@ -595,6 +628,16 @@ def get_synthesis_stories(
     # Search all themes in parallel
     with ThreadPoolExecutor(max_workers=4) as executor:
         theme_results = list(executor.map(search_theme, SYNTHESIS_THEMES))
+
+    # MATTGPT-162: if any theme's embed call failed, __embed_failure__ was set.
+    # Return [] so the contract holds regardless of whether other themes produced
+    # partial results -- callers outside rag_answer must not silently consume
+    # partial output when an embed call raised.
+    try:
+        if st.session_state.get("__embed_failure__"):
+            return []
+    except Exception:
+        pass
 
     # Flatten and deduplicate
     seen_ids = set()
@@ -1769,6 +1812,26 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
             stories=stories,
             top_k=SEARCH_TOP_K,
         )
+
+        # MATTGPT-162: Embedding-failure short-circuit.
+        # Pop immediately after semantic_search so nothing downstream can route
+        # around it (trusted-behavioral bypass, local-keyword fallback,
+        # synthesis path). Popping (not just reading) prevents the flag from
+        # leaking into the next query as a false error.
+        if st.session_state.pop("__embed_failure__", False):
+            print(
+                f"[API_ERROR_DETECTED] router=embed_failure, "
+                f"query={(question or '')[:50]}..."
+            )
+            if DEBUG:
+                print("DEBUG: API error detected (OpenAI embedding failed)")
+            return {
+                "answer_md": "🐾 I need a quick breather — please try again in a moment!",
+                "sources": [],
+                "modes": {},
+                "default_mode": "narrative",
+            }
+
         pool = search_result["results"]
         confidence = search_result["confidence"]
 
@@ -2014,6 +2077,22 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
             synthesis_pool = get_synthesis_stories(
                 stories, top_per_theme=3, query=question
             )
+
+            # MATTGPT-162: same short-circuit as the search path. get_synthesis_stories
+            # sets __embed_failure__ on OpenAI failure -- route to the API error handler.
+            if st.session_state.pop("__embed_failure__", False):
+                print(
+                    f"[API_ERROR_DETECTED] router=embed_failure, "
+                    f"source=synthesis, query={(question or '')[:50]}..."
+                )
+                if DEBUG:
+                    print("DEBUG: API error detected in synthesis path")
+                return {
+                    "answer_md": "🐾 I need a quick breather — please try again in a moment!",
+                    "sources": [],
+                    "modes": {},
+                    "default_mode": "narrative",
+                }
 
             # Q17 Fix: Prioritize named clients over generic ones in synthesis ranking
             # Same logic as diversify_results but preserves score-based ordering within groups
