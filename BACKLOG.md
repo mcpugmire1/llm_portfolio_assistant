@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: 099e6ee -->
+<!-- last-backlog-sync: 6c01218 -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -7,13 +7,12 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 ---
 
-## Value Prioritized Roadmap (updated 2026-08-17)
+## Value Prioritized Roadmap (updated 2026-08-28)
 
 **NOW**
-1. **-216** — Unit test gate missing from pre-push hook; 9 tests degraded since May undetected. Config change to add pytest; prevents future invisible failures.
-2. **-162** — Embedding exception renders as no-match. Visitor concludes the corpus is thin when the app broke.
-3. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
-4. **-128** — Source faithfulness. Never run. Last unverified thing on the runway; gates Role Match since Role Match is evidence-backed ratings.
+1. **-162** — Embedding exception renders as no-match. Visitor concludes the corpus is thin when the app broke.
+2. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+3. **-128** — Source faithfulness. Never run. Last unverified thing on the runway; gates Role Match since Role Match is evidence-backed ratings.
 
 **NEXT** — Role Match, once the runway clears
 -160 (extractor dropping qualifiers on 7 of 23) · -173 (malformed and comp-only JD behavior) · -159 (sequential gpt-4o loop) · -014 (34 skipped integration scenarios) · -089 (location, work-model, availability) · -012 (Private View Phase 4) · -081 (corrective actions by asset type) · -099 (comp handling) · -017 (logging scenarios)
@@ -118,7 +117,6 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-210](#mattgpt-210) | Ask Agy landing page suggestion chips are static; stories like STRATCOM invisible on career queries | Open | Low | Enhancement | August 24, 2026 |
 | [MATTGPT-213](#mattgpt-213) | BDD suite: navigation step definitions duplicated across modules; no shared step module | Open | Low | Refactor / Test | August 26, 2026 |
 | [MATTGPT-214](#mattgpt-214) | Targeted audit: parameters never referenced, comments asserting absent behavior, constants unused, copied blocks with stale variable names | Open | Low | Refactor | August 26, 2026 |
-| [MATTGPT-216](#mattgpt-216) | Unit test suite not part of commit/push gate; 5 failures accumulated invisibly | Open | Medium | Infrastructure | August 26, 2026 |
 | [MATTGPT-217](#mattgpt-217) | `_substitute_matt_subject` produces subject pronoun in object position ("reported to he at the CIC") | Open | Low | Bug | August 26, 2026 |
 
 ---
@@ -2158,23 +2156,6 @@ Fix (full): Cards and Timeline both use `st.info` for the empty-state message, w
 ---
 
 
-### MATTGPT-216
-**Unit test suite not part of commit/push gate; 5 failures accumulated invisibly**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Infrastructure
-- **Logged:** August 26, 2026
-
-**Issue:** Pre-commit hooks are ruff + ruff-format + mypy + whitespace only. Pre-push discipline is `tests/eval_rag_quality.py`, not `tests/unit/`. Unit suite has been degrading since May 2026 -- MATTGPT-016 test scaffold, June `2cbe5f5` base64 change, August MATTGPT-180/-187 -- with each failure invisible to normal flow. 9 failures accumulated before the August 26 session; 5 remain after cleanup.
-
-**Options:**
-A. Fold `pytest tests/unit/` into the pre-push hook alongside the eval
-B. Fold into a pre-commit hook with fast-only scoping (skip slow tests)
-
-**Priority:** Medium -- no active regression, but the gate is empirically not catching them.
-
----
 
 ### MATTGPT-217
 **`_substitute_matt_subject` produces subject pronoun in object position**

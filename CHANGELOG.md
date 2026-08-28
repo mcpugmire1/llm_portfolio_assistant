@@ -8,6 +8,16 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Ask Agy
 
+**August 26-27, 2026 — Unit test gate added to pre-push hook and CI; hermetic suite; router refactor (MATTGPT-216)** -- `86e114f`, `6c01218`
+
+Two-commit scope. `86e114f`: local pre-push hook extended to run `pytest tests/unit/ -x -q` before any push; xfail markers applied to the 5 remaining known-failure tests so they register as expected rather than silently degrading. `6c01218`: extended scope -- hermetic unit suite (network calls stubbed so tests pass without live credentials), router refactor extracting `_classify_embedding` as a named "network boundary" helper, GitHub Actions workflow (`.github/workflows/test.yml`) enforcing the same gate on every push to main, and a bare-mode config fix uncovered during hermeticity work.
+
+The local hook is opt-in per clone (`pre-commit install --hook-type pre-push`). The GH Action is the real enforcement gate; subsequent runs use pip cache, expect ~1-2 min wall time with ~2s pytest.
+
+Architecture Sync candidates for Code: two-class split in `_init_pinecone()` (misconfiguration raises at startup, runtime failure returns None); `_classify_embedding` extraction as a "network boundary" pattern for future router work.
+
+---
+
 **August 26, 2026 — Key Metrics sidebar bogus renders fixed; metric detection consolidated to METRIC_RX (MATTGPT-215)** -- `402ff30`, `099e6ee`
 
 Replaced the sidebar's inline metric heuristic in `story_detail.py:641-668` with `METRIC_RX` from `utils/formatting.py`. All five failure categories resolved: Cendian bogus render eliminated (bare-x false positive); JP Morgan ACCESS 2011 no longer surfaces as a metric (year-as-metric); value precision preserved for `$100M+` and `4X` (currency, multipliers, decimals now captured); counted nouns ("15+ Fortune 500 engagements") no longer trigger (no metric marker). Label truncation fixed with word-boundary truncation and leading `- ` strip. Range display (`3-4x` → `4x`) acceptable per ticket.
