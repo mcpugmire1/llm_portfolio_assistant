@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: b9cd2ef -->
+<!-- last-backlog-sync: 099e6ee -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -10,11 +10,10 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-08-17)
 
 **NOW**
-1. **-215** — Key Metrics sidebar parse heuristic surfaces bogus renders (year-as-metric, counted nouns, value precision loss) on ~10 stories. User-visible on live Cendian story since MATTGPT-212 reduced sidebar height.
-2. **-216** — Unit test gate missing from pre-push hook; 9 tests degraded since May undetected. Config change to add pytest; prevents future invisible failures.
-3. **-162** — Embedding exception renders as no-match. Visitor concludes the corpus is thin when the app broke.
-4. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
-5. **-128** — Source faithfulness. Never run. Last unverified thing on the runway; gates Role Match since Role Match is evidence-backed ratings.
+1. **-216** — Unit test gate missing from pre-push hook; 9 tests degraded since May undetected. Config change to add pytest; prevents future invisible failures.
+2. **-162** — Embedding exception renders as no-match. Visitor concludes the corpus is thin when the app broke.
+3. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+4. **-128** — Source faithfulness. Never run. Last unverified thing on the runway; gates Role Match since Role Match is evidence-backed ratings.
 
 **NEXT** — Role Match, once the runway clears
 -160 (extractor dropping qualifiers on 7 of 23) · -173 (malformed and comp-only JD behavior) · -159 (sequential gpt-4o loop) · -014 (34 skipped integration scenarios) · -089 (location, work-model, availability) · -012 (Private View Phase 4) · -081 (corrective actions by asset type) · -099 (comp handling) · -017 (logging scenarios)
@@ -119,7 +118,6 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-210](#mattgpt-210) | Ask Agy landing page suggestion chips are static; stories like STRATCOM invisible on career queries | Open | Low | Enhancement | August 24, 2026 |
 | [MATTGPT-213](#mattgpt-213) | BDD suite: navigation step definitions duplicated across modules; no shared step module | Open | Low | Refactor / Test | August 26, 2026 |
 | [MATTGPT-214](#mattgpt-214) | Targeted audit: parameters never referenced, comments asserting absent behavior, constants unused, copied blocks with stale variable names | Open | Low | Refactor | August 26, 2026 |
-| [MATTGPT-215](#mattgpt-215) | Key Metrics sidebar parse heuristic surfaces bogus renders on ~10 stories | Open | High | Bug | August 26, 2026 |
 | [MATTGPT-216](#mattgpt-216) | Unit test suite not part of commit/push gate; 5 failures accumulated invisibly | Open | Medium | Infrastructure | August 26, 2026 |
 | [MATTGPT-217](#mattgpt-217) | `_substitute_matt_subject` produces subject pronoun in object position ("reported to he at the CIC") | Open | Low | Bug | August 26, 2026 |
 
@@ -2159,54 +2157,6 @@ Fix (full): Cards and Timeline both use `st.info` for the empty-state message, w
 
 ---
 
-### MATTGPT-215
-**Key Metrics sidebar parse heuristic surfaces bogus renders on ~10 stories**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Bug
-- **Component:** `ui/components/story_detail.py` (Key Metrics sidebar section)
-- **Logged:** August 26, 2026
-
-**Discovery context:** Surfaced post-MATTGPT-212. MATTGPT-212 dropped sidebar height ~900px to ~130px; Key Metrics became the most prominent element and the parse failures became visible. Audit probe `probe_212_key_metrics_audit.py` catalogued 46 total trigger hits across the corpus; ~10 are clearly-bogus renders.
-
-**Failure categories (verified August 26, 2026):**
-- **Year-as-metric (2 stories):** "Launched April 2011 as part of ACCESS Next Generation" renders 2011 as a huge value
-- **Counted noun:** "15+ Fortune 500 engagements", "12 countries", "341 CIB SOX/SSAE16 applications", "150+ trained practitioners" -- the number is a count of things, not a delivery outcome
-- **Value precision loss:** `99.9%+→99`, `$100M+→100`, `3-4x→3`, `5,765 lines→5`, `11,400 lines→11`, `Sev-1 outages dropped 50%+→1`, `15-35% cost reduction→15`
-- **False-positive trigger (bare substring):** Cendian's "3 canonical business objects normalizing multiple trading exchange formats" triggers on "x" in "exchange", not on any metric marker
-- **Label truncation mid-word:** `perf[:50]` cuts phrases like "Financial Data Pro[tection Standards]", "4X velocity compared to clien[t internal teams]"
-
-**Pre-flight finding (August 26, 2026): existing infrastructure already solves most of this.**
-
-Files in scope: `ui/components/story_detail.py:641-668` (sidebar Key Metrics inline heuristic -- the buggy one).
-
-`utils/formatting.py:12` defines `METRIC_RX`:
-```
-\b\d{1,3}\s?% | \$\s?\d[\d,\.]*\b | \b\d+x\b | \b\d+(?:\.\d+)?\s?(pts|pp|bps)\b
-```
-Proper marker-based regex. Handles percentages, currency, multipliers, points/bps. Same file has `_extract_metric_value(text)` and `story_has_metric(s)` -- both use `METRIC_RX`. The latter is filter-gate-grade (used by `filters.py:115`). Test coverage exists at `test_scoring_contracts.py::test_story_has_metric_detects_percentage_in_performance` -- currently failing under MATTGPT-180 (phantom schema), not a `METRIC_RX` defect.
-
-**`METRIC_RX` resolves 4 of 5 failure categories automatically:**
-- False-positive on bare x ("exchange") -- solved (`\b\d+x\b` requires digit before x)
-- Year-as-metric ("April 2011") -- solved (no bare-year branch in the regex)
-- Value precision loss on `$100M`, `99.9%`, `3x` -- solved (currency + decimals + multipliers captured)
-- Counted noun ("15+ Fortune 500 engagements") -- solved (no marker, no match)
-
-**Doesn't cover:**
-- Range `3-4x` -- matches `4x`, drops the range. Acceptable: either "4x" or "3-4x" is reasonable display
-- Label truncation mid-word (`perf[:50]` cut mid-phrase) -- orthogonal, separate fix
-- Leading `- ` prefix wasting label chars -- orthogonal
-
-**Third variant (not necessarily in scope):** `ui/pages/ask_mattgpt/utils.py:165-185` has its own `story_has_metric` with a different regex (`\d+[%xX]|\d+\s*(?:days?|weeks?|months?|years?)`). Stricter than the sidebar's inline logic, looser than `METRIC_RX`. Three functionally-overlapping metric-detection variants across the codebase. Consolidation could ship in this ticket or defer.
-
-**Recommended fix shape:** Replace the sidebar's inline heuristic with `METRIC_RX` from `utils/formatting.py`. The three orthogonal label issues (truncation mid-word, leading `- ` prefix) are one-line fixes alongside the regex swap. Decision on third-variant consolidation is in scope but optional.
-
-**Deeper fix if warranted:** Dedicated Metrics field in the story schema. Performance stays free-form for retrieval -- it's load-bearing in `build_embedding_text` and keyword scoring, so no Excel migration for that field.
-
-**Audit artifact:** `probe_212_key_metrics_audit.py` in repo root (uncommitted as of August 26). Either commit as audit artifact or delete after ticket has the categorization.
-
----
 
 ### MATTGPT-216
 **Unit test suite not part of commit/push gate; 5 failures accumulated invisibly**

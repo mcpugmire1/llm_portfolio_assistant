@@ -8,6 +8,16 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Ask Agy
 
+**August 26, 2026 — Key Metrics sidebar bogus renders fixed; metric detection consolidated to METRIC_RX (MATTGPT-215)** -- `402ff30`, `099e6ee`
+
+Replaced the sidebar's inline metric heuristic in `story_detail.py:641-668` with `METRIC_RX` from `utils/formatting.py`. All five failure categories resolved: Cendian bogus render eliminated (bare-x false positive); JP Morgan ACCESS 2011 no longer surfaces as a metric (year-as-metric); value precision preserved for `$100M+` and `4X` (currency, multipliers, decimals now captured); counted nouns ("15+ Fortune 500 engagements") no longer trigger (no metric marker). Label truncation fixed with word-boundary truncation and leading `- ` strip. Range display (`3-4x` → `4x`) acceptable per ticket.
+
+Consolidation: `story_has_metric` in `ui/pages/ask_mattgpt/utils.py` deleted -- zero production callers confirmed. `METRIC_RX` in `utils/formatting.py` is now the single source of truth for metric detection across the codebase. Downstream behavior shift: time-duration inputs ("3 months") no longer count as metrics; no user-facing impact because the deleted function had no callers. 12 unit tests for `_extract_metric_display` at `402ff30`.
+
+Verified in production: Cendian section absent (no real metric); JP Morgan ACCESS 2011 eliminated; CIC positive cases render `$100M+` and `4X` with full precision and clean word-boundary labels.
+
+---
+
 **August 26, 2026 — Personal-query guard false positive fixed; professional org questions now route correctly (MATTGPT-163)** -- `9a05af0`
 
 Two bugs fixed. (1) "How many direct reports did Matt have" scored 0.616 / personal and was blocked. Fix A1 added five team_scaling anchors carrying "Matt" in the anchor text; the query now scores 1.000 / team_scaling and answers with the 11-13 direct reports and the flat two-layer structure. (2) "How much money did Matt make at Accenture" scored 0.789 / narrative and was reaching retrieval. Fix B added two personal_compensation patterns to `nonsense_filters.jsonl`: bare compensation nouns, and a "how much money" plus earning-verb idiom bounded to a 25-character gap so it does not catch "how much money did Matt save the client." The query now blocks via is_nonsense. Verified in production after push.
