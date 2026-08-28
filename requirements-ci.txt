@@ -1,0 +1,41 @@
+# CI-only dependency list for the hermetic unit-test gate.
+#
+# THIS IS NOT THE RUNTIME DEPENDENCY LIST. Production runtime uses
+# requirements.txt. This file exists solely to install the minimum set
+# needed to `pytest tests/unit/` in the GH Actions workflow (.github/
+# workflows/test.yml) without pulling torch, CUDA wheels, sentence-
+# transformers, faiss, pinecone, keras, langchain, or aggrid -- none of
+# which the hermetic unit suite imports, but which together add ~2 GB
+# of downloads and ~1.5 minutes to every CI run.
+#
+# Contents determined by measurement (MATTGPT-216 follow-up):
+# fresh venv, iteratively added deps until `pytest tests/unit/`
+# collected + ran 355 passed / 5 xfailed with zero ImportError.
+# See MATTGPT ticket for method.
+#
+# DRIFT RISK: if a unit test starts importing a module not covered here,
+# CI will fail with ModuleNotFoundError -- add the direct dep, do not
+# fold it into requirements.txt to "share" the pin. The two files serve
+# different gates and must stay independent.
+#
+# Deliberately unpinned: unit tests exercise pure logic (filters,
+# formatters, routers with mocked embeddings) and are insensitive to
+# minor-version drift in these libraries. Pinning here would create a
+# second source of truth for versions already pinned in requirements.txt.
+#
+# If CI turns red without a code change, check the failing run's
+# `pip install` log against a prior green run -- a new streamlit/openai/
+# etc. release is the first suspect, not your diff. Look for a version
+# bump before touching any code.
+
+# Test infrastructure
+pytest
+pytest-bdd
+pytest-cov
+
+# Direct imports from tests/unit/ and the app modules those tests import
+streamlit
+numpy
+python-dotenv
+openai
+gspread
