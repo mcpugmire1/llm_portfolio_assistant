@@ -8,6 +8,20 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Ask Agy
 
+**August 28, 2026 — Embedding failure now surfaces correct API error message instead of no-match banner (MATTGPT-162)** -- `e4ddad3`, `d2216c0`
+
+`_embed` in `services/pinecone_service.py` previously caught OpenAI failures and returned a null 1536-dim vector, which reached Pinecone as a real query, produced `pool_size=115` with `top_score=0.000`, and fired `[QUERY_REJECTED] reason=low_pinecone`. Visitors saw the no-match banner ("I could not find anything") when the actual failure was an upstream API outage.
+
+`_embed` now propagates the OpenAI exception. Narrow catches at three call sites set `st.session_state["__embed_failure__"] = True` and return the empty-shape signal: `pinecone_semantic_search` (before Pinecone is called); `get_synthesis_stories` query embed (line 518); and `get_synthesis_stories` theme embed (line 522, previously uncovered -- the pre-existing theme `try/except` started at line 524, after the embed call). A post-`executor.map` check was also added so callers outside `rag_answer` cannot silently consume partial results when one theme's embed raised.
+
+`rag_answer` pops `__embed_failure__` immediately after `semantic_search` returns and again after `get_synthesis_stories`, short-circuiting to the existing January "quick breather" API error response. Pop, not read -- the flag cannot leak into the next query as a false error. Pinecone-side failures continue to return `None` without setting the flag, remaining distinct from embed failures.
+
+Call sites examined, no change made: `probe_assessor.py:96` uses `_embed`; exception now propagates and crashes the probe run loudly (intended -- silent zero-vector probes were producing meaningless rankings). `build_custom_embeddings.py` does not use `_embed`; uses its own `get_openai_embeddings`, not affected.
+
+`d2216c0`: eval sweep owed by MATTGPT-163 (Aug 27 behavior change without corresponding eval update). Q60 moved to `blocked` expected behavior; `blocked` framework support added; `GRACEFUL_REDIRECT_PHRASES` extracted to module-level constant; stale "retail"-hardcoded assertion message fixed. Eval: 70/70 (up from 69/70).
+
+---
+
 **August 26-27, 2026 — Unit test gate added to pre-push hook and CI; hermetic suite; router refactor (MATTGPT-216)** -- `86e114f`, `6c01218`
 
 Two-commit scope. `86e114f`: local pre-push hook extended to run `pytest tests/unit/ -x -q` before any push; xfail markers applied to the 5 remaining known-failure tests so they register as expected rather than silently degrading. `6c01218`: extended scope -- hermetic unit suite (network calls stubbed so tests pass without live credentials), router refactor extracting `_classify_embedding` as a named "network boundary" helper, GitHub Actions workflow (`.github/workflows/test.yml`) enforcing the same gate on every push to main, and a bare-mode config fix uncovered during hermeticity work.

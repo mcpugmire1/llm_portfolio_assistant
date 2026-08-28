@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: 6c01218 -->
+<!-- last-backlog-sync: d2216c0 -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -10,9 +10,8 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-08-28)
 
 **NOW**
-1. **-162** — Embedding exception renders as no-match. Visitor concludes the corpus is thin when the app broke.
-2. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
-3. **-128** — Source faithfulness. Never run. Last unverified thing on the runway; gates Role Match since Role Match is evidence-backed ratings.
+1. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+2. **-128** — Source faithfulness. Never run. Last unverified thing on the runway; gates Role Match since Role Match is evidence-backed ratings.
 
 **NEXT** — Role Match, once the runway clears
 -160 (extractor dropping qualifiers on 7 of 23) · -173 (malformed and comp-only JD behavior) · -159 (sequential gpt-4o loop) · -014 (34 skipped integration scenarios) · -089 (location, work-model, availability) · -012 (Private View Phase 4) · -081 (corrective actions by asset type) · -099 (comp handling) · -017 (logging scenarios)
@@ -88,7 +87,6 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-156](#mattgpt-156) | Vendor commercial/spend management gap — decide whether corpus-zero on invoice/rate-card/procurement is a real claim or honest gap | Open | Low | Investigation | July 29, 2026 |
 | [MATTGPT-159](#mattgpt-159) | Role Match performance — parallelize per-requirement assessor calls; sequential gpt-4o loop is the bottleneck | Open | Medium | Performance | July 31, 2026 |
 | [MATTGPT-160](#mattgpt-160) | JD extractor clause-dropping — 7 of 23 requirements on demo JD lose qualifiers during extraction | Open | Medium | Bug | July 31, 2026 |
-| [MATTGPT-162](#mattgpt-162) | Embedding exception misclassified as low-confidence rejection — visitor sees no-match banner instead of error message | Open | High | Bug | August 3, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
 | [MATTGPT-168](#mattgpt-168) | Slot 1 is amplified without regard to margin -- tie or near-tie at slot 1 gets 80% of the answer | Open | High | Bug | August 5, 2026 |
@@ -1440,27 +1438,6 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 **Probe script:** `probe_db_extraction.py` (repo root) contains tooling for investigating this defect. It runs `extract_requirements()` on the structured JD, compares extracted text to source, and tests full-text vs stripped retrieval through Pinecone at top-40. Re-use this rather than building a new probe.
 
 **Constraint:** This is a separate defect from MATTGPT-157 (W_KW keyword weighting). The clause-dropping happens at extraction time, before retrieval scoring. Do not conflate.
-
----
-
-### MATTGPT-162
-**Embedding exception misclassified as low-confidence rejection -- visitor sees no-match banner instead of error message**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Bug
-- **File:** `services/rag_service.py` (embedding call + Pinecone query path)
-- **Logged:** August 3, 2026
-
-**Issue:** When the semantic router succeeds but the OpenAI embedding call fails, the system catches the exception, continues with a null vector, queries Pinecone, gets `pool_size=115` with `top_score=0.000`, and fires `[QUERY_REJECTED] reason=low_pinecone`. Visitor sees the no-match banner instead of the "quick breather" API error message. The failure is silent and misattributed.
-
-**Discriminator already in logs:** `pool_size=115` with `top_score=0.000` is only produced by a null vector. Genuine low-confidence retrieval returns `pool_size=10` with non-zero scores. This makes the condition detectable post-hoc from logs, but the visitor experience is wrong in real time.
-
-**Context from August 3 trace session:** An earlier "Speak to a specific client engagement" failure in the same session produced the same null-vector condition but showed the correct response because the router had also failed, which triggered `[API_ERROR_DETECTED]` upstream. The January observability work only covers the router-fails-too case. When the router succeeds and only the embedding call fails, the error path is not reached.
-
-**Fix direction:** Short-circuit to the API error response at the embedding exception, before Pinecone is called. The null vector should never reach the retrieval stage.
-
-**Acceptance:** Simulate an embedding failure with the router succeeding; confirm visitor sees the "quick breather" message, not the no-match banner. Confirm genuine low-confidence queries (non-null vector, non-zero scores, small pool) are unaffected.
 
 ---
 
