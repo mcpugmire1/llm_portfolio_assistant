@@ -590,3 +590,46 @@ class TestRAGAnswer:
             )
 
             assert isinstance(result, dict)
+
+
+class TestGetSynthesisStoriesEmbedFailure:
+    """MATTGPT-162: get_synthesis_stories() must propagate embed failures via __embed_failure__ flag."""
+
+    @patch("ui.pages.ask_mattgpt.backend_service._init_pinecone")
+    @patch("ui.pages.ask_mattgpt.backend_service._embed")
+    @patch("ui.pages.ask_mattgpt.backend_service.st")
+    def test_query_embed_failure_sets_flag_and_returns_empty(
+        self, mock_st, mock_embed, mock_init
+    ):
+        """Query-side _embed failure at line 518 must set __embed_failure__ and return []."""
+        from ui.pages.ask_mattgpt.backend_service import get_synthesis_stories
+
+        mock_st.session_state = {}
+        mock_init.return_value = MagicMock()  # Pinecone present
+        mock_embed.side_effect = RuntimeError("openai boom")
+
+        stories = [{"id": "s1", "Title": "T", "Client": "C"}]
+        result = get_synthesis_stories(stories, query="a query")
+
+        assert result == []
+        assert mock_st.session_state.get("__embed_failure__") is True
+
+    @patch("ui.pages.ask_mattgpt.backend_service.SYNTHESIS_THEMES", ["Leadership"])
+    @patch("ui.pages.ask_mattgpt.backend_service._init_pinecone")
+    @patch("ui.pages.ask_mattgpt.backend_service._embed")
+    @patch("ui.pages.ask_mattgpt.backend_service.st")
+    def test_theme_embed_failure_sets_flag_and_returns_empty(
+        self, mock_st, mock_embed, mock_init
+    ):
+        """Theme-fallback _embed failure at line 522 (query=None path) must set flag and return []."""
+        from ui.pages.ask_mattgpt.backend_service import get_synthesis_stories
+
+        mock_st.session_state = {}
+        mock_init.return_value = MagicMock()
+        mock_embed.side_effect = RuntimeError("openai boom")
+
+        stories = [{"id": "s1", "Title": "T", "Client": "C"}]
+        result = get_synthesis_stories(stories, query=None)
+
+        assert result == []
+        assert mock_st.session_state.get("__embed_failure__") is True
