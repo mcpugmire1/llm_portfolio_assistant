@@ -19,6 +19,8 @@ from typing import Any
 # Corpus-wide dry-run against real Performance/Result bullets: 35 strings
 # improve (decimal precision restored, currency-with-unit captured), zero
 # regressions (widened pattern is a strict superset of the previous form).
+# See probe_215_metric_rx_widening.py for the runnable measurement; re-run
+# after any further METRIC_RX change to confirm the direction still holds.
 METRIC_RX = re.compile(
     r"(\b\d{1,3}(?:\.\d+)?\s?%|\$\s?\d[\d,\.]*[KMB]?[+]?|\b\d+x\b|\b\d+(?:\.\d+)?\s?(pts|pp|bps)\b)",
     re.I,
