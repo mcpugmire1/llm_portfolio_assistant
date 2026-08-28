@@ -1013,6 +1013,17 @@ For each client-specific probe query, assert `client_name in [s.get("Client") fo
 
 **Note:** -080 has shipped (STAR stories and positioning docs now separated in the index). Option A is unblocked on that dependency. Do not close this ticket with Option B alone unless Option A is explicitly decided against.
 
+**August 28, 2026 framing correction:** The June symptom was not a Fiserv entity-filtering problem. The query log shows the actual question was "What is the total revenue or commercial impact Matt has been personally responsible for?" -- no "Fiserv" in it, which is why the Fiserv story never entered the pool while the numbers came from Why Hire Matt. The ticket's Fiserv framing was wrong.
+
+Tested August 28: "what was the commercial impact of the Fiserv work" now returns four Fiserv stories and nothing else -- the entity filter constrains the pool before ranking, so the June symptom can't recur on entity-constrained queries. That path is working.
+
+The unconstrained path (no entity to filter on) is where the design fork actually lives. Three queries from the June log are the real test:
+1. "What is the total revenue or commercial impact Matt has been personally responsible for? Did he own it or contribute to it?" -- untested as of Aug 28
+2. "What is the largest team Matt has directly led?" -- untested as of Aug 28
+3. "What did Matt work on early in his career, before the cloud and innovation work? Be specific about clients and years." -- tested Aug 28, now answers well (Wellfound, Sparkfly, F-22, Cendant Mortgage, Cendian, with years) as a result of -181 and -208.
+
+Do not decide the Option A / Option B design fork until queries 1 and 2 are run.
+
 ---
 
 ### MATTGPT-129
