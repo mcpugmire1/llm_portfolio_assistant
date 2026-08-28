@@ -76,29 +76,11 @@ class TestRelatedStories:
         assert source.get("id") not in result_ids
 
 
-class TestStoryHasMetric:
-    """Tests for story_has_metric() function."""
-
-    def test_detects_percentage(self):
-        """Should detect percentage metrics."""
-        from ui.pages.ask_mattgpt.utils import story_has_metric
-
-        story_with_metric = {"Performance": ["Reduced costs by 60%"]}
-        assert story_has_metric(story_with_metric) == True
-
-    def test_detects_time_metrics(self):
-        """Should detect time-based metrics."""
-        from ui.pages.ask_mattgpt.utils import story_has_metric
-
-        story_with_metric = {"Performance": ["Delivered in 3 months"]}
-        assert story_has_metric(story_with_metric) == True
-
-    def test_returns_false_for_no_metrics(self):
-        """Should return False when no metrics present."""
-        from ui.pages.ask_mattgpt.utils import story_has_metric
-
-        story_without_metric = {"Performance": ["Successfully delivered the project"]}
-        assert story_has_metric(story_without_metric) == False
+# MATTGPT-215: TestStoryHasMetric removed. ui/pages/ask_mattgpt/utils.py's
+# story_has_metric was dead code (zero production callers) and got deleted
+# during the metric-detection consolidation. Percentage/duration coverage
+# for the canonical utils.formatting.story_has_metric is exercised by
+# tests/unit/test_formatting.py::TestStoryHasMetric.
 
 
 class TestSplitTags:
@@ -219,7 +201,7 @@ class TestIsEmptyConversation:
 
         result = is_empty_conversation()
 
-        assert result == True
+        assert result is True
 
     def test_nonempty_transcript_returns_false(self, monkeypatch):
         """Should return False for non-empty transcript."""
@@ -240,4 +222,4 @@ class TestIsEmptyConversation:
 
         result = is_empty_conversation()
 
-        assert result == False
+        assert result is False

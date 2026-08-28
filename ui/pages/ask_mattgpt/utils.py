@@ -162,27 +162,13 @@ def related_stories(s: dict, stories: list[dict], max_items: int = 3) -> list[di
     return [t for _, t in scored[:max_items]]
 
 
-def story_has_metric(s: dict) -> bool:
-    """
-    Check if story has quantifiable metrics.
-
-    Args:
-        s: Story dictionary
-
-    Returns:
-        True if metrics found
-    """
-    perf = s.get("Performance", [])
-    if isinstance(perf, list):
-        text = " ".join(str(p) for p in perf)
-    else:
-        text = str(perf or "")
-
-    # Look for numbers, percentages, time periods
-    has_numbers = bool(
-        re.search(r'\d+[%xX]|\d+\s*(?:days?|weeks?|months?|years?)', text)
-    )
-    return has_numbers
+# MATTGPT-215 (Aug 27, 2026): local `story_has_metric` deleted. It had zero
+# production callers (only its own tests referenced it), carried a third
+# regex variant distinct from utils.formatting.METRIC_RX and the sidebar
+# heuristic in story_detail.py, and would have shifted behavior on time-
+# duration inputs ("Delivered in 3 months") if consolidated. Dead code
+# removed rather than kept in sync. Restore by importing story_has_metric
+# from utils.formatting if a real caller ever surfaces here.
 
 
 # ========== TRANSCRIPT MANAGEMENT ==========

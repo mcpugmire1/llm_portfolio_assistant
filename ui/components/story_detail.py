@@ -9,6 +9,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 from services.query_logger import log_feedback
+from utils.formatting import _extract_metric_display
 
 
 # Handle deep-link to specific story via ?story= query param
@@ -638,20 +639,14 @@ def render_story_detail(
                 unsafe_allow_html=True,
             )
 
-        # KEY METRICS
+        # KEY METRICS -- MATTGPT-215: uses METRIC_RX-based helper so bare "x"
+        # in "exchange", years like "2011", and counted nouns like
+        # "15+ Fortune 500 engagements" no longer trigger bogus renders.
         metrics = []
         for perf in performance:
-            if perf and (
-                "%" in perf
-                or "x" in perf.lower()
-                or "month" in perf.lower()
-                or "week" in perf.lower()
-            ):
-                import re
-
-                match = re.search(r'(\d+[%xX]?|\d+\+?)', perf)
-                if match:
-                    metrics.append((match.group(1), perf[:50]))
+            display = _extract_metric_display(perf or "")
+            if display:
+                metrics.append(display)
 
         if metrics:
             st.markdown(

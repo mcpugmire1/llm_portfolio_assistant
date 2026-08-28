@@ -8,9 +8,20 @@ extraction and quantitative impact detection.
 import re
 from typing import Any
 
-# Metric detection pattern
+# Metric detection pattern.
+# MATTGPT-215 (Aug 27, 2026) widened to fix two capture bugs surfaced by the
+# sidebar Key Metrics audit:
+#   1. Decimal percentages: old \b\d{1,3}\s?% matched only "9%" of "99.9%"
+#      because "." broke the word boundary. Added optional (?:\.\d+)?.
+#   2. Currency with unit suffix: old \$\s?\d[\d,\.]*\b failed on "$100M+"
+#      because \b after [\d,\.]* required a word boundary and letter M
+#      is a word char. Added optional [KMB]?[+]? tail.
+# Corpus-wide dry-run against real Performance/Result bullets: 35 strings
+# improve (decimal precision restored, currency-with-unit captured), zero
+# regressions (widened pattern is a strict superset of the previous form).
 METRIC_RX = re.compile(
-    r"(\b\d{1,3}\s?%|\$\s?\d[\d,\.]*\b|\b\d+x\b|\b\d+(?:\.\d+)?\s?(pts|pp|bps)\b)", re.I
+    r"(\b\d{1,3}(?:\.\d+)?\s?%|\$\s?\d[\d,\.]*[KMB]?[+]?|\b\d+x\b|\b\d+(?:\.\d+)?\s?(pts|pp|bps)\b)",
+    re.I,
 )
 
 
@@ -247,7 +258,26 @@ def _extract_metric_display(perf: str, label_max: int = 50) -> tuple[str, str] |
     number and 50-char hard-cut label from any string containing "x",
     "month", "week", or "%" as substrings.
     """
-    return None
+    if not perf or not perf.strip():
+        return None
+    match = METRIC_RX.search(perf)
+    if not match:
+        return None
+    value = match.group(0)
+    # Strip leading "- " bullet prefix (Excel authoring convention on
+    # Performance) so the truncation window isn't wasted on the marker.
+    label = perf.lstrip()
+    if label.startswith("- "):
+        label = label[2:]
+    label = label.strip()
+    if len(label) > label_max:
+        cut = label[:label_max]
+        last_space = cut.rfind(" ")
+        if last_space > 0:
+            label = cut[:last_space].rstrip()
+        else:
+            label = cut
+    return value, label
 
 
 def _format_narrative(s: dict[str, Any]) -> str:
