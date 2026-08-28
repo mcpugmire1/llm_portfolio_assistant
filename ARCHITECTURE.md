@@ -82,7 +82,7 @@
 **Project:** MattGPT Portfolio Assistant - AI-powered career story search and chat interface
 **Tech Stack:** Streamlit, OpenAI GPT-4o, Pinecone vector DB, Python 3.11+
 **Data Corpus:** 100+ STAR-formatted transformation project stories
-**Last Updated:** August 25, 2026
+**Last Updated:** August 27, 2026
 
 ### What This Document Contains
 
@@ -651,6 +651,7 @@ This section defines the **job, rules, and constraints** for each retrieval comp
 - **Lives in:** `nonsense_filters.jsonl` + `utils/validation.py:is_nonsense()`
 - **Cost:** Zero (pure regex, no API calls)
 - **Rule:** Runs FIRST before any embedding or LLM cost
+- **Categories (Aug 2026):** `celebrity_earnings` (salary/net-worth questions about named public figures), `recruiter_logistics` (compensation range or expectation questions framed as recruiter screens), `personal_compensation` (Matt's own pay). `personal_compensation` uses two patterns: a broad-vocabulary pattern covering salary terminology and a contextual pattern covering indirect phrasings ("how much money does he make"). Two patterns are needed because the indirect form bypasses the broad-vocabulary match.
 
 #### Semantic Router
 - **Job:** Embedding-based intent classification to reject borderline off-topic queries
@@ -1536,6 +1537,12 @@ W_KW = 0.15  # Keyword weight. Activated in commit f5641e7 via pre-registered ex
 
 **`_keyword_score_for_story()` haystack (9 fields):**
 Title, Client, Role, Sub-category, Competencies (joined), public_tags (joined), build_5p_summary(400 chars), Process (joined), Performance (joined). Title and Sub-category are double-weighted: hits in those two fields count twice in the numerator. Normalizes by `len(query_tokens) * 2`. Tokenization via `_tokenize()` (applies `_STOPWORDS`).
+
+**Query Substitution (`_substitute_matt_subject`):**
+
+Lives in `utils/scoring.py`, controlled by `SUBSTITUTION_FAMILIES` in `config/constants.py`. Replaces "Matt" with "he" and "Matt's" with "his" in the retrieval query so self-referential name tokens don't bias embeddings toward Independent Project stories. The LLM receives the original query verbatim; only the retrieval string is modified. Enabled families (Aug 2026): `technical`, `team_scaling`, `agile_transformation`.
+
+**Constraint:** Adding or removing a family from `SUBSTITUTION_FAMILIES` changes which queries reach the substituted-string path through both the embedding and keyword scorer. Impact must be re-measured before the change is committed. `probe_163_substitution_impact.py` at repo root runs that measurement: compares top-10 Pinecone hits on original vs. substituted strings for a query set, printing rank-delta and score-delta per story. Attach the output to the commit.
 
 ---
 
