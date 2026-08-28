@@ -524,10 +524,11 @@ def get_synthesis_stories(
         except Exception as e:
             print(
                 f"[API_ERROR_DETECTED] source=synthesis_query_embed, "
+                f"exc={type(e).__name__}: {e}, "
                 f"query={query[:50]}..."
             )
             if DEBUG:
-                print(f"DEBUG synthesis query embed error: {e}")
+                print(f"DEBUG synthesis query embed error: {type(e).__name__}: {e}")
             try:
                 st.session_state["__embed_failure__"] = True
             except Exception:
@@ -544,10 +545,11 @@ def get_synthesis_stories(
             except Exception as e:
                 print(
                     f"[API_ERROR_DETECTED] source=synthesis_theme_embed, "
+                    f"exc={type(e).__name__}: {e}, "
                     f"theme={theme}"
                 )
                 if DEBUG:
-                    print(f"DEBUG synthesis theme embed error: {e}")
+                    print(f"DEBUG synthesis theme embed error: {type(e).__name__}: {e}")
                 try:
                     st.session_state["__embed_failure__"] = True
                 except Exception:

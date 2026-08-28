@@ -267,10 +267,11 @@ def pinecone_semantic_search(
     except Exception as e:
         print(
             f"[API_ERROR_DETECTED] source=embed_failure, "
+            f"exc={type(e).__name__}: {e}, "
             f"query={(query or '')[:50]}..."
         )
         if DEBUG:
-            print(f"DEBUG OpenAI embedding error: {e}")
+            print(f"DEBUG OpenAI embedding error: {type(e).__name__}: {e}")
         _safe_session_set("__embed_failure__", True)
         return None
 
