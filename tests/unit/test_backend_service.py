@@ -633,3 +633,49 @@ class TestGetSynthesisStoriesEmbedFailure:
 
         assert result == []
         assert mock_st.session_state.get("__embed_failure__") is True
+
+
+class TestRagAnswerEmbedFailureRouting:
+    """MATTGPT-162: rag_answer must read __embed_failure__ and route to the quick-breather handler."""
+
+    @patch("ui.pages.ask_mattgpt.backend_service.detect_entity")
+    @patch("ui.pages.ask_mattgpt.backend_service.is_portfolio_query_semantic")
+    @patch("ui.pages.ask_mattgpt.backend_service.is_nonsense")
+    @patch("ui.pages.ask_mattgpt.backend_service.semantic_search")
+    @patch("ui.pages.ask_mattgpt.backend_service.st")
+    def test_embed_failure_flag_routes_to_quick_breather_and_is_popped(
+        self,
+        mock_st,
+        mock_semantic_search,
+        mock_is_nonsense,
+        mock_router,
+        mock_detect_entity,
+    ):
+        """Flag set during semantic_search must trigger the quick-breather response AND be popped."""
+        from ui.pages.ask_mattgpt.backend_service import rag_answer
+
+        session: dict = {}
+        mock_st.session_state = session
+
+        # Bypass upstream gates so control reaches semantic_search
+        mock_is_nonsense.return_value = None
+        mock_router.return_value = (True, 0.8, "test-intent", "narrative")
+        mock_detect_entity.return_value = None
+
+        # semantic_search sets the embed-failure flag (simulating the signal from
+        # pinecone_semantic_search) and returns the local-fallback empty shape.
+        def fake_semantic_search(*args, **kwargs):
+            session["__embed_failure__"] = True
+            return {"results": [], "confidence": "none", "top_score": 0.0}
+
+        mock_semantic_search.side_effect = fake_semantic_search
+
+        stories = [{"id": "s1", "Title": "T", "Client": "C", "5PSummary": "s"}]
+        result = rag_answer(
+            "tell me about payments", {"q": "tell me about payments"}, stories
+        )
+
+        assert "quick breather" in result["answer_md"]
+        assert result["sources"] == []
+        # Critical: flag must be popped so it does not leak into the next query
+        assert "__embed_failure__" not in session
