@@ -10,8 +10,9 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-08-28)
 
 **NOW**
-1. **-128** — Source card truncation: panel shows 3 of 5 grounded stories. Root cause confirmed (three mismatched caps). Fix: cap in `rag_answer` before return; delete `SOURCES_MAX_SURGICAL` and `SOURCES_MAX_SYNTHESIS`.
-2. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+1. **-218** — "Why hire Matt?" collapses synthesis pool to 1 story; Title soft-filter missing from `get_synthesis_stories`. Port existing logic from `rag_answer`. Highest-value query on the site.
+2. **-128** — Source card truncation: panel shows 3 of 5 grounded stories. Root cause confirmed (three mismatched caps). Fix: cap in `rag_answer` before return; delete `SOURCES_MAX_SURGICAL` and `SOURCES_MAX_SYNTHESIS`.
+3. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT** — Role Match, once the runway clears
 -160 (extractor dropping qualifiers on 7 of 23) · -173 (malformed and comp-only JD behavior) · -159 (sequential gpt-4o loop) · -014 (34 skipped integration scenarios) · -089 (location, work-model, availability) · -012 (Private View Phase 4) · -081 (corrective actions by asset type) · -099 (comp handling) · -017 (logging scenarios)
@@ -116,6 +117,7 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-213](#mattgpt-213) | BDD suite: navigation step definitions duplicated across modules; no shared step module | Open | Low | Refactor / Test | August 26, 2026 |
 | [MATTGPT-214](#mattgpt-214) | Targeted audit: parameters never referenced, comments asserting absent behavior, constants unused, copied blocks with stale variable names | Open | Low | Refactor | August 26, 2026 |
 | [MATTGPT-217](#mattgpt-217) | `_substitute_matt_subject` produces subject pronoun in object position ("reported to he at the CIC") | Open | Low | Bug | August 26, 2026 |
+| [MATTGPT-218](#mattgpt-218) | "Why hire Matt?" collapses synthesis pool to 1 story; Title soft-filter missing from `get_synthesis_stories` | Open | High | Bug | August 28, 2026 |
 
 ---
 
@@ -2137,19 +2139,54 @@ Fix (full): Cards and Timeline both use `st.info` for the empty-state message, w
 
 **Issue:** A pattern surfaced this week: code that reads correctly and isn't, or gets replicated because it was there. Instances: `max_per_client` accepted and never referenced (MATTGPT-187), tag generator backup copying the wrong file because the line was copied from three sibling scripts where it was correct (MATTGPT-211), `public_tags` excluded from the ingestion diff report so a cleared column reported "no changes detected." Each was greppable and none required judgment; they were found by inspection only when a related symptom appeared.
 
-**Scope:** A targeted grep-driven pass over the codebase for:
+**Scope:** Two classes of audit. Both output a list of findings with file and line; no fix within this ticket -- each finding is evaluated separately for risk.
+
+**Class 1 — Greppable dead/misnamed code:**
 1. Parameters accepted by functions and never referenced in the body
 2. Comments asserting behavior the code does not have (documented contracts that aren't implemented)
 3. Constants defined in `config/` and never imported
 4. Copied blocks where a variable name survived a context change and now refers to the wrong thing
 
-**Output:** A list of findings with file and line. No fix within this ticket -- each finding is evaluated separately for risk before touching.
+**Class 2 — Rules applied in one path, missing in another (August 28, 2026):**
+A rule implemented in one code path and absent in another the rule arguably covers. Not greppable -- finding these requires reading both paths. Code is the right tool: for each special case or exclusion rule, report every site where it is applied and every site where it arguably should be and is not. Report only; Matt decides which gaps are deliberate.
+
+Four rules to start with:
+- `Theme == "Professional Narrative"` exclusion (standing rule in ARCHITECTURE.md for Employer-driven derivations)
+- `is_generic_client` -- placeholder Client values (`Fortune 500 Clients`, `Independent Project`)
+- Title soft-filter from `f1285f1` (Jan 30, 2026) -- pin the story, keep the pool -- applied in `rag_answer`, absent in `get_synthesis_stories`
+- `_PN_EXCLUDED_FAMILIES`
+
+**Concrete instance (August 28, 2026):** `f1285f1` added Title-entity detection and made `rag_answer` treat a Title match as a soft filter. `get_synthesis_stories` kept treating Title like Client (hard per-theme filter). Latent until Feb 3 when "Why Hire Matt?" was added to the corpus. Since then, the query "Why hire Matt?" collapses the synthesis pool to one story and returns a single source card. "Why should I hire Matt" does not match the substring and behaves normally with a 21-story pool. Same day, same code, different phrasing. The Title synthesis fix is filed separately as MATTGPT-218.
 
 **Pattern context (August 26, 2026):** Suggested alongside MATTGPT-213. Both are instances of the same class as MATTGPT-187 and MATTGPT-211.
 
 ---
 
 
+
+### MATTGPT-218
+**"Why hire Matt?" collapses synthesis pool to 1 story; Title soft-filter missing from `get_synthesis_stories`**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **File:** `services/rag_service.py` or `services/backend_service.py` (`get_synthesis_stories`)
+- **Logged:** August 28, 2026
+
+**Root cause:** `f1285f1` (Jan 30, 2026) added Title-entity detection and made `rag_answer` treat a Title match as a soft filter -- pin the story, keep the pool. `get_synthesis_stories` was not updated; it kept treating Title like Client and applies it as a hard per-theme filter. Latent until February 3, when "Why Hire Matt?" was added to the corpus.
+
+**Symptom:** The query "Why hire Matt?" matches the substring in "Why Hire Matt?" and collapses the synthesis pool to that one story, returning a single source card. "Why should I hire Matt" does not match the substring and behaves normally with a 21-story pool. Same day, same code, different phrasing.
+
+**Fix:** Port the existing soft-filter case from `rag_answer` into `get_synthesis_stories`. No new logic -- restore the February principle: scope the search, do not reject the query.
+
+**Acceptance criteria:**
+1. "Why hire Matt?" returns a synthesis answer grounded in more than one story.
+2. The "Why Hire Matt?" positioning story appears (it is still pinned) but is not the only source.
+3. "Why should I hire Matt" behavior unchanged.
+
+**Cross-references:** MATTGPT-214 (Class 2 audit -- this instance documents the Title rule as a rule applied in one path and missing in another).
+
+---
 
 ### MATTGPT-217
 **`_substitute_matt_subject` produces subject pronoun in object position**
