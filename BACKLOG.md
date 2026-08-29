@@ -10,8 +10,8 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-08-28)
 
 **NOW**
-1. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
-2. **-128** — Source faithfulness. Never run. Last unverified thing on the runway; gates Role Match since Role Match is evidence-backed ratings.
+1. **-128** — Source card truncation: panel shows 3 of 5 grounded stories. Root cause confirmed (three mismatched caps). Fix: cap in `rag_answer` before return; delete `SOURCES_MAX_SURGICAL` and `SOURCES_MAX_SYNTHESIS`.
+2. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT** — Role Match, once the runway clears
 -160 (extractor dropping qualifiers on 7 of 23) · -173 (malformed and comp-only JD behavior) · -159 (sequential gpt-4o loop) · -014 (34 skipped integration scenarios) · -089 (location, work-model, availability) · -012 (Private View Phase 4) · -081 (corrective actions by asset type) · -099 (comp handling) · -017 (logging scenarios)
@@ -995,23 +995,29 @@ Originally flagged as removable dead code (emotion hashes drift between builds a
 - **Logged:** June 14, 2026
 - **Depends on:** ~~MATTGPT-080~~ (shipped)
 
-**Symptom (production-confirmed June 14, 2026):** Agy answered a Fiserv commercial-impact query with accurate numbers ($8.5M, 3% under budget, $500K penalties avoided) but the displayed source cards showed JP Morgan and Norfolk Southern — not the Fiserv STAR story. A recruiter who clicks to verify a claim finds the wrong sources. Observed across multiple probes: "Why Hire Matt" was cited as a source for a largest-team question AND an early-career telecom question, neither of which it substantiates.
+**Root cause (confirmed August 28, 2026):** Three caps that do not agree.
+- After `diversify_results`: 7 non-synthesis, 9 synthesis stories
+- LLM prompt in `_generate_agy_response`: 5 non-synthesis, 7 synthesis
+- UI panel in `conversation_helpers`: 3 non-synthesis, 6 synthesis (`SOURCES_MAX_SURGICAL`, `SOURCES_MAX_SYNTHESIS`)
 
-**Root cause (design fork — must be resolved before implementation):**
-Source cards currently display Pinecone retrieval top-k by score. That is a different set from what the LLM actually grounded the answer in. The likely Fiserv mechanism: the specific numbers came from the "Why Hire Matt" aggregate positioning doc (which summarizes wins across clients and ranks high on almost every query), while the Fiserv STAR story never entered the top-k. The cards honestly showed what was retrieved; the honest set was wrong.
+Verified on the revenue query: the answer was grounded in 5 stories; the panel showed 3. JP Morgan Entitlement and AT&T Southeast CRM reached the LLM and were dropped from the display. The design fork (Option A / Option B) is closed -- the problem is cap drift, not retrieval.
 
-Two design options:
-- **Option A — Fix retrieval so the right story enters top-k.** Depends on -094 (retrieval diversity). -080 (positioning docs separated from STAR stories) has shipped; that blocker is cleared. Cards continue to show top-k; faithfulness improves as a consequence. No new display logic.
-- **Option B — Display what the answer was grounded in.** Requires the LLM to emit provenance (story IDs it drew from) alongside the answer, then surface those as the source cards. Decouples display from retrieval ranking. More engineering; higher faithfulness ceiling.
+**Fix (scoped, August 28, 2026):** Cap sources in `rag_answer` at `ranked[:story_limit]` before returning, so the LLM cap and the display cap cannot drift independently. One number, one place.
+
+Do not fix by raising `SOURCES_MAX_SURGICAL` -- that leaves two constants that must be kept in agreement by hand.
+
+`SOURCES_MAX_SURGICAL` and `SOURCES_MAX_SYNTHESIS` become dead once the list arrives pre-capped. Remove them and the slicing in `conversation_helpers`. Verify nothing else reads those constants before deleting.
+
+**Unit tests on the cap.** BDD if the panel count is cleanly assertable, but do not force it -- the existing story-detail scenarios show what that costs.
+
+**Out of scope (decided August 28, 2026):**
+- Fiserv figures in "Owning the P&L" story: deliberate authoring choice. Numbers are Matt's. No corpus change.
+- Routing question: closed. Revenue query routes to background consistently -- two runs two days apart produced byte-identical retrieval. The earlier "synthesis yesterday" claim was a conflation with the Why Hire Matt trace.
 
 **Acceptance criteria:**
-- For a set of client-specific queries (Fiserv, RBC, Capital One, AT&T), the named client's STAR story appears in the displayed source cards.
-- "Why Hire Matt" and MattGPT positioning docs do not appear as the sole sources for client-specific factual claims.
-
-**Eval to add:**
-For each client-specific probe query, assert `client_name in [s.get("Client") for s in displayed_sources]`. Mirrors the client-attribution pattern in Q15.
-
-**Note:** -080 has shipped (STAR stories and positioning docs now separated in the index). Option A is unblocked on that dependency. Do not close this ticket with Option B alone unless Option A is explicitly decided against.
+- Revenue query: panel shows 5 stories, not 3. JP Morgan Entitlement and AT&T Southeast CRM appear.
+- Unit test: `len(returned_sources) == story_limit` for both non-synthesis and synthesis paths.
+- `SOURCES_MAX_SURGICAL` and `SOURCES_MAX_SYNTHESIS` deleted; no remaining references.
 
 **August 28, 2026 framing correction:** The June symptom was not a Fiserv entity-filtering problem. The query log shows the actual question was "What is the total revenue or commercial impact Matt has been personally responsible for?" -- no "Fiserv" in it, which is why the Fiserv story never entered the pool while the numbers came from Why Hire Matt. The ticket's Fiserv framing was wrong.
 
