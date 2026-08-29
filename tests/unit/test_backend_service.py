@@ -679,3 +679,90 @@ class TestRagAnswerEmbedFailureRouting:
         assert result["sources"] == []
         # Critical: flag must be popped so it does not leak into the next query
         assert "__embed_failure__" not in session
+
+
+class TestBuildSourcesCap:
+    """MATTGPT-128: source panel must show exactly the stories the LLM saw."""
+
+    def _make_ranked(self, n: int) -> list[dict]:
+        return [
+            {"id": f"s{i}", "Title": f"Title {i}", "Client": f"Client {i}"}
+            for i in range(n)
+        ]
+
+    def test_build_sources_caps_at_standard_for_non_synthesis(self):
+        from ui.pages.ask_mattgpt.backend_service import (
+            LLM_STORY_LIMIT_STANDARD,
+            _build_sources,
+        )
+
+        ranked = self._make_ranked(9)
+        sources = _build_sources(ranked, is_synthesis=False)
+        assert len(sources) == LLM_STORY_LIMIT_STANDARD == 5
+
+    def test_build_sources_caps_at_synthesis_for_synthesis(self):
+        from ui.pages.ask_mattgpt.backend_service import (
+            LLM_STORY_LIMIT_SYNTHESIS,
+            _build_sources,
+        )
+
+        ranked = self._make_ranked(9)
+        sources = _build_sources(ranked, is_synthesis=True)
+        assert len(sources) == LLM_STORY_LIMIT_SYNTHESIS == 7
+
+    def test_build_sources_shorter_ranked_not_padded(self):
+        from ui.pages.ask_mattgpt.backend_service import _build_sources
+
+        ranked = self._make_ranked(3)
+        sources = _build_sources(ranked, is_synthesis=False)
+        assert len(sources) == 3
+
+    def test_build_sources_preserves_order(self):
+        from ui.pages.ask_mattgpt.backend_service import _build_sources
+
+        ranked = self._make_ranked(6)
+        sources = _build_sources(ranked, is_synthesis=False)
+        assert [s["id"] for s in sources] == ["s0", "s1", "s2", "s3", "s4"]
+
+    def test_build_sources_projects_id_title_client_shape(self):
+        from ui.pages.ask_mattgpt.backend_service import _build_sources
+
+        ranked = [{"id": "abc", "Title": "My Story", "Client": "Acme Co"}]
+        sources = _build_sources(ranked, is_synthesis=False)
+        assert sources == [{"id": "abc", "title": "My Story", "client": "Acme Co"}]
+
+    def test_build_sources_no_cap_returns_all_ranked(self):
+        """apply_llm_cap=False (simple_mode / fatal_fallback) returns all of ranked."""
+        from ui.pages.ask_mattgpt.backend_service import _build_sources
+
+        ranked = self._make_ranked(9)
+        sources = _build_sources(ranked, is_synthesis=False, apply_llm_cap=False)
+        assert len(sources) == 9
+
+    def test_build_sources_null_safe_on_missing_id(self):
+        """Story dict without 'id' must not KeyError -- fatal_fallback path's defense."""
+        from ui.pages.ask_mattgpt.backend_service import _build_sources
+
+        ranked = [{"Title": "T", "Client": "C"}]
+        sources = _build_sources(ranked, is_synthesis=False, apply_llm_cap=False)
+        assert sources == [{"id": None, "title": "T", "client": "C"}]
+
+    def test_build_sources_null_safe_on_missing_title(self):
+        from ui.pages.ask_mattgpt.backend_service import _build_sources
+
+        ranked = [{"id": "x", "Client": "C"}]
+        sources = _build_sources(ranked, is_synthesis=False, apply_llm_cap=False)
+        assert sources == [{"id": "x", "title": None, "client": "C"}]
+
+    def test_build_sources_filters_non_dict_entries(self):
+        """Non-dict entries (None, str, etc.) must be filtered -- fatal_fallback's isinstance guard."""
+        from ui.pages.ask_mattgpt.backend_service import _build_sources
+
+        ranked = [
+            {"id": "a", "Title": "TA", "Client": "CA"},
+            None,
+            "not a dict",
+            {"id": "b", "Title": "TB", "Client": "CB"},
+        ]
+        sources = _build_sources(ranked, is_synthesis=False, apply_llm_cap=False)
+        assert [s["id"] for s in sources] == ["a", "b"]

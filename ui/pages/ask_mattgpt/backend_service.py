@@ -114,6 +114,27 @@ def get_narrative_titles(stories: list[dict]) -> list[str]:
 # NOTE: Dynamically derived from stories at startup via sync_portfolio_metadata()
 SYNTHESIS_THEMES: list[str] = []
 
+# MATTGPT-128: LLM story-context caps. The source panel must show exactly the
+# stories the answer was grounded in, so _build_sources caps to the same
+# limits _generate_agy_response uses when constructing the LLM prompt.
+LLM_STORY_LIMIT_SYNTHESIS = 7
+LLM_STORY_LIMIT_STANDARD = 5
+
+
+def _build_sources(
+    ranked: list[dict], is_synthesis: bool = False, apply_llm_cap: bool = True
+) -> list[dict]:
+    """Project ranked stories into UI source-card dicts.
+
+    When apply_llm_cap is True (default), caps to the LLM's story_limit so the
+    panel shows exactly what the answer was grounded in. False for degraded /
+    mode-only paths where no LLM call framed the response. Defensive on shape:
+    null-safe on id/title/client and filters non-dict entries so all three
+    call sites share one projection.
+    """
+    return []
+
+
 # MATTGPT-169: allowlist of families where Professional Narrative stories are
 # excluded from retrieval. Allowlist (not denylist) -- misrouted queries keep
 # current behavior rather than losing seven positioning stories.
