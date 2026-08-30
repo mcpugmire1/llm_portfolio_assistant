@@ -2162,6 +2162,20 @@ Four rules to start with:
 
 **Concrete instance (August 28, 2026):** `f1285f1` added Title-entity detection and made `rag_answer` treat a Title match as a soft filter. `get_synthesis_stories` kept treating Title like Client (hard per-theme filter). Latent until Feb 3 when "Why Hire Matt?" was added to the corpus. Since then, the query "Why hire Matt?" collapses the synthesis pool to one story and returns a single source card. "Why should I hire Matt" does not match the substring and behaves normally with a 21-story pool. Same day, same code, different phrasing. The Title synthesis fix is filed separately as MATTGPT-218.
 
+**Concrete instance closed (August 30, 2026):** The Title soft-filter gap above was fixed and shipped as MATTGPT-218 (`040b785`). Update the Class 2 rules list to mark that instance resolved before auditing the remaining three.
+
+**Class 3 -- Silent exception swallowing (August 30, 2026):**
+A third pattern has surfaced three times this week: a `try/except` that makes the immediate problem disappear and moves the failure somewhere harder to find. Greppable. Add to the audit inventory alongside Class 1.
+
+Three instances that shipped or were caught this week:
+- `_embed` in `pinecone_service.py`: caught OpenAI failure, returned a zero 1536-dim vector, reached Pinecone as a real query. Fixed in MATTGPT-162.
+- Tag generator backup in `generate_public_tags.py`: swallowed the OpenAI error, wrote an empty tags column, reported "no changes detected." Fixed in MATTGPT-211.
+- Test fixture for the unit suite: bare `except Exception: pass` on `load_stories`. Missing corpus file would have silently produced an empty story list; every test would have passed vacuously. Fixed August 30 by removing the catch -- missing file now raises, fixture fails, and the actual cause is visible.
+
+The corpus dependency note from that fix: the fixture now loads `echo_star_stories_nlp.jsonl` on every unit test session. The file is committed, so a fresh clone has it, and the failure is loud if it is not there. That is the right behavior.
+
+Grep targets for Class 3: `except Exception: pass`, `except: pass`, bare `except:`, `except Exception as`, and `except (` where the handler body is only `pass`, `return None`, or a log-and-return-empty pattern. Each hit is reviewed -- some are legitimate boundary conditions. The question is whether the caller can distinguish "not found" from "failed silently."
+
 **Pattern context (August 26, 2026):** Suggested alongside MATTGPT-213. Both are instances of the same class as MATTGPT-187 and MATTGPT-211.
 
 ---
