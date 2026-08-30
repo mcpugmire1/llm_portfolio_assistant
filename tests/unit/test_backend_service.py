@@ -866,3 +866,128 @@ class TestGetSynthesisStoriesTitleSoftFilter:
         for call in mock_idx.query.call_args_list:
             pinecone_filter = call.kwargs.get("filter", {})
             assert set(pinecone_filter.keys()) == {"Theme"}
+
+
+class TestRagAnswerPoolSize:
+    """MATTGPT-218: rag_answer exposes pool_size in return dict for the eval framework.
+
+    Semantics (Option B): pool_size is the *operative* retrieval pool the LLM saw.
+    - Standard path: len(pool) from semantic_search (Pinecone results)
+    - Synthesis path: len(synthesis_pool) from get_synthesis_stories
+
+    Under the -218 bug the synthesis pool collapsed to 1; under the fix it re-expands
+    to ~21. Q65 asserts min_pool_size >= 10 to catch a regression.
+    """
+
+    @patch("ui.pages.ask_mattgpt.backend_service._generate_agy_response")
+    @patch("ui.pages.ask_mattgpt.backend_service.detect_entity")
+    @patch("ui.pages.ask_mattgpt.backend_service.is_portfolio_query_semantic")
+    @patch("ui.pages.ask_mattgpt.backend_service.is_nonsense")
+    @patch("ui.pages.ask_mattgpt.backend_service.semantic_search")
+    @patch("ui.pages.ask_mattgpt.backend_service.st")
+    def test_standard_path_pool_size_equals_semantic_search_pool(
+        self,
+        mock_st,
+        mock_semantic_search,
+        mock_is_nonsense,
+        mock_router,
+        mock_detect_entity,
+        mock_generate,
+    ):
+        from ui.pages.ask_mattgpt.backend_service import rag_answer
+
+        mock_st.session_state = {}
+        mock_is_nonsense.return_value = None
+        mock_router.return_value = (True, 0.8, "test-intent", "technical")
+        mock_detect_entity.return_value = None
+        mock_generate.return_value = "stub answer"
+
+        pool = [
+            {
+                "id": f"s{i}",
+                "Title": f"T{i}",
+                "Client": f"C{i}",
+                "5PSummary": "sum",
+                "pc": 0.5,
+                "kw": 0.1,
+                "score": 0.5,
+            }
+            for i in range(25)
+        ]
+        mock_semantic_search.return_value = {
+            "results": pool,
+            "confidence": "high",
+            "top_score": 0.5,
+        }
+
+        result = rag_answer("a technical question", {"q": "a technical question"}, pool)
+
+        assert "pool_size" in result, "rag_answer must expose pool_size in return dict"
+        assert (
+            result["pool_size"] == 25
+        ), f"standard path pool_size should equal len(pool) = 25; got {result['pool_size']}"
+
+    @patch("ui.pages.ask_mattgpt.backend_service.get_synthesis_stories")
+    @patch("ui.pages.ask_mattgpt.backend_service._generate_agy_response")
+    @patch("ui.pages.ask_mattgpt.backend_service.detect_entity")
+    @patch("ui.pages.ask_mattgpt.backend_service.is_portfolio_query_semantic")
+    @patch("ui.pages.ask_mattgpt.backend_service.is_nonsense")
+    @patch("ui.pages.ask_mattgpt.backend_service.semantic_search")
+    @patch("ui.pages.ask_mattgpt.backend_service.st")
+    def test_synthesis_path_pool_size_equals_synthesis_pool(
+        self,
+        mock_st,
+        mock_semantic_search,
+        mock_is_nonsense,
+        mock_router,
+        mock_detect_entity,
+        mock_generate,
+        mock_get_synthesis,
+    ):
+        """Synthesis path -- pool_size reflects the post-synthesis (theme-diverse) pool."""
+        from ui.pages.ask_mattgpt.backend_service import rag_answer
+
+        mock_st.session_state = {}
+        mock_is_nonsense.return_value = None
+        mock_router.return_value = (True, 0.9, "test-intent", "synthesis")
+        mock_detect_entity.return_value = None
+        mock_generate.return_value = "stub answer"
+
+        pool = [
+            {
+                "id": f"s{i}",
+                "Title": f"T{i}",
+                "Client": f"C{i}",
+                "5PSummary": "sum",
+                "pc": 0.5,
+                "kw": 0.1,
+                "score": 0.5,
+            }
+            for i in range(25)
+        ]
+        mock_semantic_search.return_value = {
+            "results": pool,
+            "confidence": "high",
+            "top_score": 0.5,
+        }
+
+        # 21-story synthesis pool -- what the fix produces for the Why hire Matt query.
+        synthesis_pool = [
+            {
+                "id": f"sp{i}",
+                "Title": f"ST{i}",
+                "Client": f"SC{i}",
+                "5PSummary": "sum",
+                "_search_score": 0.4,
+                "_matched_theme": "Theme",
+            }
+            for i in range(21)
+        ]
+        mock_get_synthesis.return_value = synthesis_pool
+
+        result = rag_answer("Why hire Matt?", {"q": "Why hire Matt?"}, pool)
+
+        assert "pool_size" in result, "rag_answer must expose pool_size in return dict"
+        assert (
+            result["pool_size"] == 21
+        ), f"synthesis path pool_size should equal len(synthesis_pool) = 21; got {result['pool_size']}"
