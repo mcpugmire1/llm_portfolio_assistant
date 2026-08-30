@@ -373,6 +373,26 @@ GOLDEN_QUERIES = {
             "check_graceful_redirect": True,
             "category": "intent",
         },
+        {
+            "id": 65,
+            "query": "Why hire Matt?",
+            "expected_behavior": "synthesis",
+            "min_pool_size": 10,
+            "note": (
+                "MATTGPT-218: Title substring match must not collapse the "
+                "synthesis pool. Under the pre-fix bug this query matched "
+                'the story titled "Why Hire Matt?" and get_synthesis_stories '
+                "applied Title as a hard per-theme Pinecone filter, "
+                "producing a 1-story pool. Under the fix, Title falls "
+                "through to theme-only filter and the pool re-expands to "
+                "~21. Threshold 10 sits well above the collapse (1) and "
+                "well below the natural pool (21), so it fires loudly on "
+                "regression without tripping on normal pool variation. "
+                "min_clients does not work here -- see Red addendum "
+                "(min_clients reads LLM naming choice, not pool composition)."
+            ),
+            "category": "intent",
+        },
     ],
     # Edge Cases (4) - Robustness
     "edge": [
@@ -1060,6 +1080,10 @@ def evaluate_query(
 
         response = rag_result.get("answer_md", "")
         result.response = response
+        # MATTGPT-218: surface pool_size for min_pool_size assertions.
+        # rag_answer exposes the operative retrieval pool (Pinecone results for
+        # standard, synthesis_pool for synthesis).
+        result.details["pool_size"] = rag_result.get("pool_size", 0)
 
         if not response and query_spec.get("expected_behavior") != "blocked":
             result.error = "Empty response"
@@ -1104,11 +1128,34 @@ def evaluate_query(
             behavior = query_spec["expected_behavior"]
 
             if behavior == "synthesis":
-                synth_pass, client_count = check_synthesis_mode(
-                    response, query_spec.get("min_clients", 3)
-                )
-                result.checks["synthesis_mode"] = synth_pass
-                result.details["client_count"] = client_count
+                # Synthesis can be asserted on named-client diversity in the response
+                # (min_clients) and/or the operative pool size (min_pool_size).
+                # Both are optional; whichever is specified must pass.
+                # Guard: at least one must be specified so new synthesis queries
+                # don't fall through and pass trivially.
+                if (
+                    "min_clients" not in query_spec
+                    and "min_pool_size" not in query_spec
+                ):
+                    raise ValueError(
+                        f"Synthesis query Q{query_spec.get('id')} must specify "
+                        "at least one of min_clients or min_pool_size"
+                    )
+                synth_pass = True
+                if "min_clients" in query_spec:
+                    client_pass, client_count = check_synthesis_mode(
+                        response, query_spec["min_clients"]
+                    )
+                    result.checks["synthesis_mode"] = client_pass
+                    result.details["client_count"] = client_count
+                    synth_pass = synth_pass and client_pass
+                if "min_pool_size" in query_spec:
+                    # MATTGPT-218: pool_size assertion catches pool collapse
+                    # (e.g. Title substring match hard-filtering synthesis themes).
+                    pool_size = result.details.get("pool_size", 0)
+                    pool_pass = pool_size >= query_spec["min_pool_size"]
+                    result.checks["pool_size_check"] = pool_pass
+                    synth_pass = synth_pass and pool_pass
                 result.passed = synth_pass
 
             elif behavior == "redirect":
@@ -1408,10 +1455,18 @@ class TestIntentRouting:
         result = evaluate_query(query_spec, rag_fn, stories)
 
         if query_spec["expected_behavior"] == "synthesis":
-            assert result.checks.get("synthesis_mode", False), (
-                f"Synthesis mode failed - only {result.details.get('client_count', 0)} "
-                f"clients mentioned, need {query_spec.get('min_clients', 3)}"
-            )
+            if "min_clients" in query_spec:
+                assert result.checks.get("synthesis_mode", False), (
+                    f"Synthesis client-diversity failed - only "
+                    f"{result.details.get('client_count', 0)} clients mentioned, "
+                    f"need {query_spec['min_clients']}"
+                )
+            if "min_pool_size" in query_spec:
+                assert result.checks.get("pool_size_check", False), (
+                    f"Synthesis pool_size failed - only "
+                    f"{result.details.get('pool_size', 0)} stories in operative "
+                    f"pool, need {query_spec['min_pool_size']}"
+                )
 
         elif query_spec["expected_behavior"] == "redirect":
             assert result.checks.get("graceful_redirect", False), (

@@ -578,8 +578,12 @@ def get_synthesis_stories(
                 return []
 
         try:
-            # If entity detected, try entity+theme filter first
-            if entity_match:
+            # If a Client/Employer/Division/Project/Place entity detected, apply
+            # entity+theme hard filter. Title entities fall through to theme-only:
+            # symmetric with rag_answer:1806, which scopes soft on Title so the
+            # matched story pins by score rather than constraining the pool
+            # (MATTGPT-218).
+            if entity_match and entity_match[0] != "Title":
                 entity_field, entity_value = entity_match
                 pc_field = entity_field.lower()
                 pc_value = (
@@ -606,7 +610,11 @@ def get_synthesis_stories(
                         )
                     return []  # Return empty for this theme - don't pollute with other entities
             else:
-                # No client detected - use theme-only filter
+                if DEBUG and entity_match:
+                    print(
+                        f"DEBUG synthesis: Title entity '{entity_match[1][:50]}...' "
+                        "-- using soft filtering (theme-only, MATTGPT-218)"
+                    )
                 results = idx.query(
                     vector=query_vector,
                     filter={"Theme": {"$eq": theme}},
@@ -1857,6 +1865,11 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
 
         pool = search_result["results"]
         confidence = search_result["confidence"]
+        # MATTGPT-218: pool_size exposed in the return dict so the eval framework
+        # can assert on pool composition (min_pool_size). Semantics: the operative
+        # retrieval space the LLM was drawing from. Standard path = the semantic
+        # search pool; overridden in the synthesis branch below to len(synthesis_pool).
+        pool_size = len(pool)
 
         # Store confidence for conversation_view to use
         st.session_state["__ask_confidence__"] = confidence
@@ -2100,6 +2113,11 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
             synthesis_pool = get_synthesis_stories(
                 stories, top_per_theme=3, query=question
             )
+            # MATTGPT-218: synthesis pool is the operative retrieval space for
+            # synthesis intents. Override the standard pool_size so the return
+            # dict reflects the number that pool-breadth assertions actually care
+            # about (bug: 1; fix: ~21).
+            pool_size = len(synthesis_pool)
 
             # MATTGPT-162: same short-circuit as the search path. get_synthesis_stories
             # sets __embed_failure__ on OpenAI failure -- route to the API error handler.
@@ -2367,4 +2385,5 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
         "modes": modes,
         "default_mode": "narrative",
         "degraded": False,
+        "pool_size": pool_size,
     }
