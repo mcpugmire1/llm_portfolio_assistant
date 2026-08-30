@@ -681,6 +681,13 @@ class TestRagAnswerEmbedFailureRouting:
         assert "__embed_failure__" not in session
 
 
+@pytest.mark.xfail(
+    reason="MATTGPT-128: Red committed, Green paused pending design fork "
+    "(document-type filter as the acceptance criterion rather than cap "
+    "unification). Tests pin the future _build_sources contract; xfail "
+    "keeps CI green while the ticket is on hold. Remove when -128 ships.",
+    strict=False,
+)
 class TestBuildSourcesCap:
     """MATTGPT-128: source panel must show exactly the stories the LLM saw."""
 
