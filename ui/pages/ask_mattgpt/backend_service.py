@@ -1645,6 +1645,19 @@ def rag_answer(
     st.session_state["__ask_dbg_from_suggestion"] = bool(from_suggestion)
     st.session_state["__ask_dbg_force_answer"] = bool(force_answer)
 
+    # Retrieval observables exposed in every return dict for tests that need to
+    # assert on router decisions without proxying through LLM-response text.
+    # Populated as the pipeline runs; values are None if that stage did not
+    # execute (e.g. router did not run because the nonsense filter fired first).
+    # rejection_reason mirrors ask_last_reason strings exactly so a reader can
+    # trace the same value between the return dict and session state.
+    _obs: dict = {
+        "intent_family": None,
+        "confidence": None,
+        "entity_match": None,
+        "rejection_reason": None,
+    }
+
     if DEBUG:
         dbg(
             f"ask: from_suggestion={from_suggestion} q='{(question or '').strip()[:60]}'"
@@ -1692,6 +1705,7 @@ def rag_answer(
             "sources": sources,
             "modes": modes,
             "default_mode": sel,
+            **_obs,
         }
 
     try:
@@ -1713,11 +1727,13 @@ def rag_answer(
             st.session_state["ask_last_query"] = question or ""
             st.session_state["ask_last_overlap"] = None
             st.session_state["__ask_dbg_decision"] = f"rule:{cat}"
+            _obs["rejection_reason"] = f"rule:{cat}"
             return {
                 "answer_md": "",
                 "sources": [],
                 "modes": {},
                 "default_mode": "narrative",
+                **_obs,
             }
 
         # Step 2: Semantic router (embedding-based intent classification)
@@ -1730,6 +1746,7 @@ def rag_answer(
             semantic_valid, semantic_score, matched_intent, intent_family = (
                 is_portfolio_query_semantic(question or "")
             )
+            _obs["intent_family"] = intent_family
             if DEBUG:
                 print(
                     f"DEBUG: Semantic router: valid={semantic_valid}, score={semantic_score:.3f}, family={intent_family}"
@@ -1742,6 +1759,7 @@ def rag_answer(
         # NOTE: Entity gate (bouncer) REMOVED Jan 2026 - let Pinecone confidence
         # be the sole decider. Nonsense filters catch off-topic queries.
         entity_match = detect_entity(question or "", stories)
+        _obs["entity_match"] = entity_match
         if DEBUG and entity_match:
             print(f"DEBUG: Entity detected - {entity_match[0]}:{entity_match[1]}")
 
@@ -1770,11 +1788,13 @@ Would you like to explore how his work in **platform modernization**, **payments
             )
             st.session_state["ask_last_reason"] = "semantic_router:out_of_scope"
             st.session_state["ask_last_query"] = question or ""
+            _obs["rejection_reason"] = "semantic_router:out_of_scope"
             return {
                 "answer_md": out_of_scope_response,
                 "sources": [],
                 "modes": {"narrative": out_of_scope_response},
                 "default_mode": "narrative",
+                **_obs,
             }
 
         # PERSONAL CHECK (Mar 2026 - Semantic Router)
@@ -1795,11 +1815,13 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
             )
             st.session_state["ask_last_reason"] = "semantic_router:personal"
             st.session_state["ask_last_query"] = question or ""
+            _obs["rejection_reason"] = "semantic_router:personal"
             return {
                 "answer_md": personal_response,
                 "sources": [],
                 "modes": {"narrative": personal_response},
                 "default_mode": "narrative",
+                **_obs,
             }
 
         # Entity-first sovereignty: if entity detected, add to filters for Pinecone
@@ -1861,10 +1883,12 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
                 "sources": [],
                 "modes": {},
                 "default_mode": "narrative",
+                **_obs,
             }
 
         pool = search_result["results"]
         confidence = search_result["confidence"]
+        _obs["confidence"] = confidence
         # MATTGPT-218: pool_size exposed in the return dict so the eval framework
         # can assert on pool composition (min_pool_size). Semantics: the operative
         # retrieval space the LLM was drawing from. Standard path = the semantic
@@ -1967,6 +1991,7 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
                     "sources": [],
                     "modes": {},
                     "default_mode": "narrative",
+                    **_obs,
                 }
 
             # Log for observability - helps diagnose "I can't help" issues
@@ -1994,11 +2019,13 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
             st.session_state["__ask_dbg_decision"] = (
                 f"pinecone_reject:{search_result['top_score']:.3f}"
             )
+            _obs["rejection_reason"] = "low_confidence"
             return {
                 "answer_md": "",
                 "sources": [],
                 "modes": {},
                 "default_mode": "narrative",
+                **_obs,
             }
 
         # Widen pool for suggestions
@@ -2037,6 +2064,7 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
                     "sources": [],
                     "modes": {},
                     "default_mode": "narrative",
+                    **_obs,
                 }
 
             if st.session_state.get("__pc_suppressed__"):
@@ -2054,11 +2082,16 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
                 st.session_state["ask_last_query"] = question or ""
                 st.session_state["ask_last_overlap"] = overlap
                 st.session_state["__ask_dbg_decision"] = "low_conf"
+                _obs["rejection_reason"] = "low_confidence"
+            else:
+                st.session_state["ask_last_reason"] = "empty_pool"
+                _obs["rejection_reason"] = "empty_pool"
             return {
                 "answer_md": "",
                 "sources": [],
                 "modes": {},
                 "default_mode": "narrative",
+                **_obs,
             }
 
     except Exception as e:
@@ -2082,6 +2115,7 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
                 "modes": {},
                 "default_mode": "narrative",
                 "degraded": True,
+                **_obs,
             }
 
         st.session_state["__ask_dbg_decision"] = "fatal_fallback"
@@ -2099,6 +2133,7 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
             "modes": modes,
             "default_mode": "narrative",
             "degraded": True,
+            **_obs,
         }
 
     # Rank stories based on intent type
@@ -2133,6 +2168,7 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
                     "sources": [],
                     "modes": {},
                     "default_mode": "narrative",
+                    **_obs,
                 }
 
             # Q17 Fix: Prioritize named clients over generic ones in synthesis ranking
@@ -2355,6 +2391,7 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
             "sources": [],
             "modes": {},
             "default_mode": "narrative",
+            **_obs,
         }
 
     except Exception as e:
@@ -2386,4 +2423,5 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
         "default_mode": "narrative",
         "degraded": False,
         "pool_size": pool_size,
+        **_obs,
     }
