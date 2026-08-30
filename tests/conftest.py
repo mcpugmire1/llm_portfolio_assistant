@@ -9,6 +9,46 @@ from typing import Any
 import pytest
 
 # =============================================================================
+# MODULE-STATE SYNC (autouse, session-scoped)
+# =============================================================================
+# app.py:246 calls sync_portfolio_metadata(STORIES) at Streamlit startup to
+# populate module-level state (SYNTHESIS_THEMES, MATT_DNA client/employer
+# derivations, career-span constants) from the corpus. Under pytest, that
+# startup step never runs, so the module state stays empty and any test
+# that reads SYNTHESIS_THEMES fails deterministically in isolation (see
+# test_agy_behavior.py::TestRAGExecution::test_synthesis_pool_size).
+#
+# Historically eval_rag_quality.py and test_structural_assertions.py called
+# sync_portfolio_metadata themselves; their test-ordering side effects hid
+# the bug from other test files whose position in the collection happened
+# to be after them. Autouse fixture ensures state is populated once per
+# pytest session, regardless of ordering or which test file runs in
+# isolation.
+#
+# Safe for the hermetic CI gate: sync_portfolio_metadata (line 177 of
+# backend_service.py) is pure computation over the stories list -- no
+# network, no OpenAI, no Pinecone. Its st.session_state touch is
+# DEBUG-guarded so it does not fire under pytest with DEBUG=False.
+
+
+@pytest.fixture(autouse=True, scope="session")
+def _sync_portfolio_metadata_once():
+    """Populate SYNTHESIS_THEMES and related module state before any test runs.
+
+    Mirrors app.py:246's startup call. Session-scoped so the sync runs at
+    most once regardless of collection order. Failures propagate -- a
+    missing corpus file or a broken sync is worth knowing about, not
+    swallowing (same discipline as MATTGPT-162's _embed fix).
+    """
+    from ui.pages.ask_mattgpt.backend_service import sync_portfolio_metadata
+    from utils.corpus_loader import load_stories
+
+    stories = load_stories("echo_star_stories_nlp.jsonl")
+    sync_portfolio_metadata(stories)
+    yield
+
+
+# =============================================================================
 # MOCK STORY DATA
 # =============================================================================
 
