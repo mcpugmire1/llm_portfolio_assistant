@@ -766,3 +766,103 @@ class TestBuildSourcesCap:
         ]
         sources = _build_sources(ranked, is_synthesis=False, apply_llm_cap=False)
         assert [s["id"] for s in sources] == ["a", "b"]
+
+
+class TestGetSynthesisStoriesTitleSoftFilter:
+    """MATTGPT-218: Title entity_match must use soft filtering in get_synthesis_stories.
+
+    Symmetric with rag_answer:1806. Title matches pin the story via score-based ranking
+    but must not constrain the per-theme Pinecone pool -- otherwise a query like
+    'Why hire Matt?' that substring-matches a story title collapses the synthesis pool
+    to a single story.
+    """
+
+    @patch("ui.pages.ask_mattgpt.backend_service.SYNTHESIS_THEMES", ["Leadership"])
+    @patch("ui.pages.ask_mattgpt.backend_service.detect_entity")
+    @patch("ui.pages.ask_mattgpt.backend_service._init_pinecone")
+    @patch("ui.pages.ask_mattgpt.backend_service._embed")
+    @patch("ui.pages.ask_mattgpt.backend_service.st")
+    def test_title_entity_uses_soft_filter_not_hard_per_theme(
+        self, mock_st, mock_embed, mock_init, mock_detect
+    ):
+        from ui.pages.ask_mattgpt.backend_service import get_synthesis_stories
+
+        mock_st.session_state = {}
+        mock_embed.return_value = [0.1] * 1536
+        mock_detect.return_value = ("Title", "Why Hire Matt?")
+
+        mock_idx = MagicMock()
+        mock_idx.query.return_value = MagicMock(matches=[])
+        mock_init.return_value = mock_idx
+
+        stories = [{"id": "s1", "Title": "Why Hire Matt?", "Client": "Accenture"}]
+        get_synthesis_stories(stories, top_per_theme=3, query="Why hire Matt?")
+
+        assert mock_idx.query.called
+        for call in mock_idx.query.call_args_list:
+            pinecone_filter = call.kwargs.get("filter", {})
+            assert (
+                "title" not in pinecone_filter
+            ), f"Title must not appear as per-theme filter key; got {pinecone_filter}"
+            assert (
+                set(pinecone_filter.keys()) == {"Theme"}
+            ), f"Theme should be the only filter key for Title entities; got {pinecone_filter}"
+
+    @patch("ui.pages.ask_mattgpt.backend_service.SYNTHESIS_THEMES", ["Leadership"])
+    @patch("ui.pages.ask_mattgpt.backend_service.detect_entity")
+    @patch("ui.pages.ask_mattgpt.backend_service._init_pinecone")
+    @patch("ui.pages.ask_mattgpt.backend_service._embed")
+    @patch("ui.pages.ask_mattgpt.backend_service.st")
+    def test_client_entity_still_applies_hard_per_theme_filter(
+        self, mock_st, mock_embed, mock_init, mock_detect
+    ):
+        """Regression guard: non-Title entities must still add hard per-theme filter."""
+        from ui.pages.ask_mattgpt.backend_service import get_synthesis_stories
+
+        mock_st.session_state = {}
+        mock_embed.return_value = [0.1] * 1536
+        mock_detect.return_value = ("Client", "JPMC")
+
+        mock_idx = MagicMock()
+        mock_idx.query.return_value = MagicMock(matches=[])
+        mock_init.return_value = mock_idx
+
+        stories = [{"id": "s1", "Title": "T", "Client": "JPMC"}]
+        get_synthesis_stories(
+            stories, top_per_theme=3, query="What did Matt do at JPMC"
+        )
+
+        assert mock_idx.query.called
+        for call in mock_idx.query.call_args_list:
+            pinecone_filter = call.kwargs.get("filter", {})
+            assert (
+                pinecone_filter.get("client") == {"$eq": "JPMC"}
+            ), f"Client entity should still add hard per-theme filter; got {pinecone_filter}"
+            assert "Theme" in pinecone_filter
+
+    @patch("ui.pages.ask_mattgpt.backend_service.SYNTHESIS_THEMES", ["Leadership"])
+    @patch("ui.pages.ask_mattgpt.backend_service.detect_entity")
+    @patch("ui.pages.ask_mattgpt.backend_service._init_pinecone")
+    @patch("ui.pages.ask_mattgpt.backend_service._embed")
+    @patch("ui.pages.ask_mattgpt.backend_service.st")
+    def test_no_entity_uses_theme_only_filter(
+        self, mock_st, mock_embed, mock_init, mock_detect
+    ):
+        """Regression guard: no entity -> theme-only filter (unchanged)."""
+        from ui.pages.ask_mattgpt.backend_service import get_synthesis_stories
+
+        mock_st.session_state = {}
+        mock_embed.return_value = [0.1] * 1536
+        mock_detect.return_value = None
+
+        mock_idx = MagicMock()
+        mock_idx.query.return_value = MagicMock(matches=[])
+        mock_init.return_value = mock_idx
+
+        stories = [{"id": "s1", "Title": "T", "Client": "C"}]
+        get_synthesis_stories(stories, top_per_theme=3, query="broad career question")
+
+        assert mock_idx.query.called
+        for call in mock_idx.query.call_args_list:
+            pinecone_filter = call.kwargs.get("filter", {})
+            assert set(pinecone_filter.keys()) == {"Theme"}
