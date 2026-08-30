@@ -10,9 +10,8 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-08-28)
 
 **NOW**
-1. **-218** — "Why hire Matt?" collapses synthesis pool to 1 story; Title soft-filter missing from `get_synthesis_stories`. Port existing logic from `rag_answer`. Highest-value query on the site.
-2. **-128** — Source card truncation: panel shows 3 of 5 grounded stories. Root cause confirmed (three mismatched caps). Fix: cap in `rag_answer` before return; delete `SOURCES_MAX_SURGICAL` and `SOURCES_MAX_SYNTHESIS`.
-3. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+1. **-128** — Source card truncation: three mismatched caps confirmed. Fix direction revised (see detail block). Design decision pending before Code picks it up.
+2. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT** — Role Match, once the runway clears
 -160 (extractor dropping qualifiers on 7 of 23) · -173 (malformed and comp-only JD behavior) · -159 (sequential gpt-4o loop) · -014 (34 skipped integration scenarios) · -089 (location, work-model, availability) · -012 (Private View Phase 4) · -081 (corrective actions by asset type) · -099 (comp handling) · -017 (logging scenarios)
@@ -117,7 +116,6 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-213](#mattgpt-213) | BDD suite: navigation step definitions duplicated across modules; no shared step module | Open | Low | Refactor / Test | August 26, 2026 |
 | [MATTGPT-214](#mattgpt-214) | Targeted audit: parameters never referenced, comments asserting absent behavior, constants unused, copied blocks with stale variable names | Open | Low | Refactor | August 26, 2026 |
 | [MATTGPT-217](#mattgpt-217) | `_substitute_matt_subject` produces subject pronoun in object position ("reported to he at the CIC") | Open | Low | Bug | August 26, 2026 |
-| [MATTGPT-218](#mattgpt-218) | "Why hire Matt?" collapses synthesis pool to 1 story; Title soft-filter missing from `get_synthesis_stories` | Open | High | Bug | August 28, 2026 |
 
 ---
 
@@ -2156,22 +2154,18 @@ Four rules to start with:
 ### MATTGPT-218
 **"Why hire Matt?" collapses synthesis pool to 1 story; Title soft-filter missing from `get_synthesis_stories`**
 
-- **Status:** Open
+- **Status:** Done
 - **Priority:** High
 - **Type:** Bug
 - **File:** `services/rag_service.py` or `services/backend_service.py` (`get_synthesis_stories`)
 - **Logged:** August 28, 2026
+- **Resolved:** August 30, 2026 -- `040b785`
 
 **Root cause:** `f1285f1` (Jan 30, 2026) added Title-entity detection and made `rag_answer` treat a Title match as a soft filter -- pin the story, keep the pool. `get_synthesis_stories` was not updated; it kept treating Title like Client and applies it as a hard per-theme filter. Latent until February 3, when "Why Hire Matt?" was added to the corpus.
 
 **Symptom:** The query "Why hire Matt?" matches the substring in "Why Hire Matt?" and collapses the synthesis pool to that one story, returning a single source card. "Why should I hire Matt" does not match the substring and behaves normally with a 21-story pool. Same day, same code, different phrasing.
 
-**Fix:** Port the existing soft-filter case from `rag_answer` into `get_synthesis_stories`. No new logic -- restore the February principle: scope the search, do not reject the query.
-
-**Acceptance criteria:**
-1. "Why hire Matt?" returns a synthesis answer grounded in more than one story.
-2. The "Why Hire Matt?" positioning story appears (it is still pinned) but is not the only source.
-3. "Why should I hire Matt" behavior unchanged.
+**Fix:** Ported the existing soft-filter case from `rag_answer` into `get_synthesis_stories`. Also pinned `pool_size` in the `rag_answer` return dict. Q65 ("Why hire Matt?") added to eval suite.
 
 **Cross-references:** MATTGPT-214 (Class 2 audit -- this instance documents the Title rule as a rule applied in one path and missing in another).
 

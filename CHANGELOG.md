@@ -8,6 +8,14 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Ask Agy
 
+**August 30, 2026 — "Why hire Matt?" synthesis pool restored; Title soft-filter ported to `get_synthesis_stories` (MATTGPT-218)** -- `1633ae4`, `ffac391`, `040b785`
+
+`f1285f1` (Jan 30, 2026) added Title-entity detection and made `rag_answer` treat a Title match as a soft filter: pin the story, keep the pool. `get_synthesis_stories` was not updated at the time; it treated Title like Client and applied it as a hard per-theme filter. The bug was latent until Feb 3 when "Why Hire Matt?" was added to the corpus. From that point, the query "Why hire Matt?" matched the substring and collapsed the synthesis pool to one story. "Why should I hire Matt" (no substring match) continued to return a normal 21-story pool. Same code, different phrasing.
+
+Fix: ported the soft-filter case from `rag_answer` into `get_synthesis_stories` so both paths apply the same principle -- scope the search, do not reject the query. `pool_size` also pinned in the `rag_answer` return dict. Q65 ("Why hire Matt?") added to the eval suite.
+
+---
+
 **August 28, 2026 — Embedding failure now surfaces correct API error message instead of no-match banner (MATTGPT-162)** -- `e4ddad3`, `d2216c0`
 
 `_embed` in `services/pinecone_service.py` previously caught OpenAI failures and returned a null 1536-dim vector, which reached Pinecone as a real query, produced `pool_size=115` with `top_score=0.000`, and fired `[QUERY_REJECTED] reason=low_pinecone`. Visitors saw the no-match banner ("I could not find anything") when the actual failure was an upstream API outage.
