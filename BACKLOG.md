@@ -997,40 +997,29 @@ Originally flagged as removable dead code (emotion hashes drift between builds a
 - **Logged:** June 14, 2026
 - **Depends on:** ~~MATTGPT-080~~ (shipped)
 
-**Root cause (confirmed August 28, 2026):** Three caps that do not agree.
-- After `diversify_results`: 7 non-synthesis, 9 synthesis stories
-- LLM prompt in `_generate_agy_response`: 5 non-synthesis, 7 synthesis
-- UI panel in `conversation_helpers`: 3 non-synthesis, 6 synthesis (`SOURCES_MAX_SURGICAL`, `SOURCES_MAX_SYNTHESIS`)
+**Analysis (August 28, 2026) -- four findings, fix direction revised from earlier today:**
 
-Verified on the revenue query: the answer was grounded in 5 stories; the panel showed 3. JP Morgan Entitlement and AT&T Southeast CRM reached the LLM and were dropped from the display. The design fork (Option A / Option B) is closed -- the problem is cap drift, not retrieval.
+**1. Cap fix does not work in either direction.**
+Three caps don't agree: after `diversify_results` (7 non-synthesis, 9 synthesis), LLM prompt in `_generate_agy_response` (5 non-synthesis, 7 synthesis), UI panel in `conversation_helpers` (3 non-synthesis, 6 synthesis via `SOURCES_MAX_SURGICAL` / `SOURCES_MAX_SYNTHESIS`). Earlier today the fix was scoped as "cap sources in `rag_answer` before returning." That direction is wrong. Raising the panel to match the LLM gives ragged grids: 5 renders as 3+2, 7 renders as 3+3+1 with an orphan card. Capping the LLM to match the panel would reduce roughly twenty broad questions from 5 stories to 3 -- measured: synthesis fires on 2 of 64 eval queries (3.1%) because breadth competes with eleven topic families for one slot and topic always wins. "Why should I hire Matt", "Tell me about Matt's leadership journey", "What evidence shows Matt can operate at Director level" all route standard. The classifier is not a bottleneck; it is a wall.
 
-**Fix (scoped, August 28, 2026):** Cap sources in `rag_answer` at `ranked[:story_limit]` before returning, so the LLM cap and the display cap cannot drift independently. One number, one place.
+**2. The panel is navigation, not citation.** Every card is a button that navigates to a story. There is no mapping from any sentence to any card, no excerpt, no quoted passage. The SOURCES label promises claim-level attribution the panel cannot deliver. A reader tracing "$100M in repeat business" to six titles has no way to confirm any of them contains it -- which is worse than not inviting the audit. The January 19, 2026 decision chose SOURCES over RELATED PROJECTS because "related" felt passive. That objection does not apply to an active-voice alternative like SEE THE WORK or GO DEEPER.
 
-Do not fix by raising `SOURCES_MAX_SURGICAL` -- that leaves two constants that must be kept in agreement by hand.
+**3. Positioning documents appear as sources for client-specific factual claims (still live).** Verified August 28: an answer claiming a $10M HSBC contract, 4X velocity, and $100M in repeat business showed "Why Hire Matt", "Transition Story", and "About Matt" as its first three cards. The predicate to fix this already exists: `_kind_of` in `backend_service.py` classifies stories as `META-PN` (Theme == "Professional Narrative"), `META-IND` (Employer == "Sabbatical"), or `ENGAGE` otherwise. Panel shows `ENGAGE` only. Positioning docs still feed the answer for voice and framing; they stop being offered as receipts.
 
-`SOURCES_MAX_SURGICAL` and `SOURCES_MAX_SYNTHESIS` become dead once the list arrives pre-capped. Remove them and the slicing in `conversation_helpers`. Verify nothing else reads those constants before deleting.
+**4. Caution before shipping the ENGAGE filter.** A positioning doc under a dollar figure is visibly not a project record -- a reader clicks, sees framing prose, and concludes the panel is loose. An unrelated engagement story under the same claim looks exactly like a valid receipt: it has a client, a title, a project shape, and no signal that it does not contain the number. If the filter promotes engagement stories that do not substantiate the claim, the panel becomes more credible and less accurate at once. Check retrieval first; do not ship the ENGAGE filter without verifying what fills the vacated slots.
 
-**Unit tests on the cap.** BDD if the panel count is cleanly assertable, but do not force it -- the existing story-detail scenarios show what that costs.
+**Longer-term path: `get_cited_stories`.** Sketched January 19, 2026, never built. The LLM names which stories it drew from, those become the cards, and the panel self-trims without a cap. Would not fix the positioning-doc problem on its own -- if the model genuinely drew framing from "Why Hire Matt" it would honestly cite it -- so document type has to be part of the rule regardless.
+
+**Existing Red commit:** `220d14d` has nine unit tests encoding the cap invariant. Leave committed. Tests get rewritten when -128 comes back, against whatever the final design is.
 
 **Out of scope (decided August 28, 2026):**
 - Fiserv figures in "Owning the P&L" story: deliberate authoring choice. Numbers are Matt's. No corpus change.
-- Routing question: closed. Revenue query routes to background consistently -- two runs two days apart produced byte-identical retrieval. The earlier "synthesis yesterday" claim was a conflation with the Why Hire Matt trace.
+- June Fiserv framing correction: the original query was "What is the total revenue or commercial impact Matt has been personally responsible for?" -- no "Fiserv" in it. Entity-constrained path tested August 28 and works: "what was the commercial impact of the Fiserv work" returns four Fiserv stories and nothing else.
+- Routing question: closed. Revenue query routes to background consistently -- two runs two days apart produced byte-identical retrieval.
 
-**Acceptance criteria:**
-- Revenue query: panel shows 5 stories, not 3. JP Morgan Entitlement and AT&T Southeast CRM appear.
-- Unit test: `len(returned_sources) == story_limit` for both non-synthesis and synthesis paths.
-- `SOURCES_MAX_SURGICAL` and `SOURCES_MAX_SYNTHESIS` deleted; no remaining references.
-
-**August 28, 2026 framing correction:** The June symptom was not a Fiserv entity-filtering problem. The query log shows the actual question was "What is the total revenue or commercial impact Matt has been personally responsible for?" -- no "Fiserv" in it, which is why the Fiserv story never entered the pool while the numbers came from Why Hire Matt. The ticket's Fiserv framing was wrong.
-
-Tested August 28: "what was the commercial impact of the Fiserv work" now returns four Fiserv stories and nothing else -- the entity filter constrains the pool before ranking, so the June symptom can't recur on entity-constrained queries. That path is working.
-
-The unconstrained path (no entity to filter on) is where the design fork actually lives. Three queries from the June log are the real test:
-1. "What is the total revenue or commercial impact Matt has been personally responsible for? Did he own it or contribute to it?" -- untested as of Aug 28
-2. "What is the largest team Matt has directly led?" -- untested as of Aug 28
-3. "What did Matt work on early in his career, before the cloud and innovation work? Be specific about clients and years." -- tested Aug 28, now answers well (Wellfound, Sparkfly, F-22, Cendant Mortgage, Cendian, with years) as a result of -181 and -208.
-
-Do not decide the Option A / Option B design fork until queries 1 and 2 are run.
+**Queries still untested from the June log:**
+1. "What is the total revenue or commercial impact Matt has been personally responsible for? Did he own it or contribute to it?"
+2. "What is the largest team Matt has directly led?"
 
 ---
 
