@@ -10,7 +10,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-08-28)
 
 **NOW**
-1. **-128** — Source card truncation: three mismatched caps confirmed. Fix direction revised (see detail block). Design decision pending before Code picks it up.
+1. **-128** — Split source panel by kind (project records / positioning docs), extract reason lines from figures, drop trailing question. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
 2. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT** — Role Match, once the runway clears
@@ -987,7 +987,7 @@ Originally flagged as removable dead code (emotion hashes drift between builds a
 
 
 ### MATTGPT-128
-**Displayed-source faithfulness — source cards must substantiate the claims in the answer**
+**Displayed-source faithfulness -- split panel by source kind, extract reason lines, drop trailing question**
 
 - **Status:** Open
 - **Priority:** High
@@ -995,29 +995,46 @@ Originally flagged as removable dead code (emotion hashes drift between builds a
 - **Logged:** June 14, 2026
 - **Depends on:** ~~MATTGPT-080~~ (shipped)
 
-**Analysis (August 28, 2026) -- four findings, fix direction revised from earlier today:**
+**Problem statement (settled August 30, 2026):**
+The panel flattens two kinds of source into one list under one label, implying all of them substantiate everything equally. They do not. A broad answer is a blend: framing from positioning documents, figures from project records. Both are real sources. The panel cannot say so.
 
-**1. Cap fix does not work in either direction.**
-Three caps don't agree: after `diversify_results` (7 non-synthesis, 9 synthesis), LLM prompt in `_generate_agy_response` (5 non-synthesis, 7 synthesis), UI panel in `conversation_helpers` (3 non-synthesis, 6 synthesis via `SOURCES_MAX_SURGICAL` / `SOURCES_MAX_SYNTHESIS`). Earlier today the fix was scoped as "cap sources in `rag_answer` before returning." That direction is wrong. Raising the panel to match the LLM gives ragged grids: 5 renders as 3+2, 7 renders as 3+3+1 with an orphan card. Capping the LLM to match the panel would reduce roughly twenty broad questions from 5 stories to 3 -- measured: synthesis fires on 2 of 64 eval queries (3.1%) because breadth competes with eleven topic families for one slot and topic always wins. "Why should I hire Matt", "Tell me about Matt's leadership journey", "What evidence shows Matt can operate at Director level" all route standard. The classifier is not a bottleneck; it is a wall.
+**Design (August 30, 2026):**
 
-**2. The panel is navigation, not citation.** Every card is a button that navigates to a story. There is no mapping from any sentence to any card, no excerpt, no quoted passage. The SOURCES label promises claim-level attribution the panel cannot deliver. A reader tracing "$100M in repeat business" to six titles has no way to confirm any of them contains it -- which is worse than not inviting the audit. The January 19, 2026 decision chose SOURCES over RELATED PROJECTS because "related" felt passive. That objection does not apply to an active-voice alternative like SEE THE WORK or GO DEEPER.
+Two groups, both rendered as cards, introduced by Agy in voice rather than by uppercase headers:
 
-**3. Positioning documents appear as sources for client-specific factual claims (still live).** Verified August 28: an answer claiming a $10M HSBC contract, 4X velocity, and $100M in repeat business showed "Why Hire Matt", "Transition Story", and "About Matt" as its first three cards. The predicate to fix this already exists: `_kind_of` in `backend_service.py` classifies stories as `META-PN` (Theme == "Professional Narrative"), `META-IND` (Employer == "Sabbatical"), or `ENGAGE` otherwise. Panel shows `ENGAGE` only. Positioning docs still feed the answer for voice and framing; they stop being offered as receipts.
+- "Here is where those numbers come from:" -- project-record cards (`_kind_of == ENGAGE`)
+- "Matt's own framing on this:" -- positioning-document cards (`_kind_of == META-PN`)
 
-**4. Caution before shipping the ENGAGE filter.** A positioning doc under a dollar figure is visibly not a project record -- a reader clicks, sees framing prose, and concludes the panel is loose. An unrelated engagement story under the same claim looks exactly like a valid receipt: it has a client, a title, a project shape, and no signal that it does not contain the number. If the filter promotes engagement stories that do not substantiate the claim, the panel becomes more credible and less accurate at once. Check retrieval first; do not ship the ENGAGE filter without verifying what fills the vacated slots.
+Nothing is removed. The earlier direction to filter positioning documents out was wrong: those documents were written to answer exactly the questions that surface them, and "Why hire Matt?" is the clearest case.
 
-**Longer-term path: `get_cited_stories`.** Sketched January 19, 2026, never built. The LLM names which stories it drew from, those become the cards, and the panel self-trims without a cap. Would not fix the positioning-doc problem on its own -- if the model genuinely drew framing from "Why Hire Matt" it would honestly cite it -- so document type has to be part of the rule regardless.
+**Reason lines (project-record cards only, extracted not generated):**
+For each figure in the answer, look for that literal token in the cited story and show the containing sentence, capped near twenty words. A card with no matchable figure renders bare. This cannot hallucinate because it is a substring of authored text selected by string match.
 
-**Existing Red commit:** `220d14d` has nine unit tests encoding the cap invariant. Leave committed. Tests get rewritten when -128 comes back, against whatever the final design is.
+Two implementation constraints:
+1. Sort the answer's figures longest-string first so `$100M` claims its sentence before `$10M` is tested.
+2. Require the match is not flanked by a digit or magnitude suffix. Without both, `$10M` matches inside `$100M` and the HSBC line lands on the wrong card looking entirely plausible.
 
-**Out of scope (decided August 28, 2026):**
-- Fiserv figures in "Owning the P&L" story: deliberate authoring choice. Numbers are Matt's. No corpus change.
-- June Fiserv framing correction: the original query was "What is the total revenue or commercial impact Matt has been personally responsible for?" -- no "Fiserv" in it. Entity-constrained path tested August 28 and works: "what was the commercial impact of the Fiserv work" returns four Fiserv stories and nothing else.
-- Routing question: closed. Revenue query routes to background consistently -- two runs two days apart produced byte-identical retrieval.
+**Trailing question removed:**
+Answers currently end with "Want me to dive deeper into any of these themes?" -- a second invitation below cards that the lead-in already introduced. The cards are the mechanism; clicking one sends "Tell me more about: `<title>`", the most-used interaction on the page (41 clicks, 24 sessions). The closings are `random.choice` over static lists at `backend_service.py` lines 1000-1006 and 1025-1035, injected via `build_user_prompt`. Remove them.
 
-**Queries still untested from the June log:**
-1. "What is the total revenue or commercial impact Matt has been personally responsible for? Did he own it or contribute to it?"
-2. "What is the largest team Matt has directly led?"
+**Vocabulary and caps:**
+Use Role Match's `evidence_type` field names (`profile`, `story`) rather than inventing a second pair. Take the per-type caps: a cap per kind means a noisy retrieval cannot crowd out the framing, which no single global cap achieves.
+
+Role Match renders profile evidence as a prose block rather than a card -- do not port that. There it is the model arguing that evidence satisfies a requirement, which is legitimately generated prose. Here a positioning document is a destination, and prose de-emphasizes the click. The same distinction explains why Role Match generates relevance strings while this panel extracts: argument surfaces generate, verification surfaces extract. Preserve this distinction in comments so neither side gets "fixed" to match the other.
+
+**Existing Red commit:** `220d14d` has nine unit tests encoding the old cap invariant. They stay xfailed until this ships, then get rewritten against the new contract.
+
+**Open before shipping:**
+1. Thin-answer shape. A single-source answer, or one where every source is the same kind, loses one of the two sections and the trailing lead-in for it. The Fiserv commercial impact query is the test case: four sources, all project record, exercises the single-label shape.
+2. Retrieval check (owed August 29, still unexecuted). Before this ships, confirm that the project-record cards on a given answer actually substantiate its claims. An unrelated engagement story under a dollar figure looks exactly like a valid receipt and has no tell. This needs a dedicated eval query, not just a manual DEBUG run. Zero of the 65 current eval queries exercise this -- the same coverage gap that let MATTGPT-218 sit live since February.
+
+**Design reference:** Story Detail Sidebar.dc.html turn 8B, at production width, with real card and bubble values.
+
+**Historical context (closed, do not re-litigate):**
+- Cap fix direction: capping in `rag_answer` and deleting `SOURCES_MAX_SURGICAL` / `SOURCES_MAX_SYNTHESIS` was the fix as of August 28 morning. Invalidated August 28 afternoon: raising the panel gives ragged grids (5 renders 3+2, 7 renders 3+3+1 orphan); capping the LLM loses breadth (synthesis fires on 3.1% of queries, classifier is a wall not a bottleneck). Design supersedes this entirely.
+- ENGAGE-only filter direction: also invalidated August 28. Would have promoted unrelated engagement stories that look credible but do not substantiate the claim. Design addresses this correctly by keeping both groups, labeled.
+- Fiserv figures in "Owning the P&L": deliberate authoring choice. No corpus change.
+- Revenue query routing: closed. Routes to background consistently, two runs two days apart, byte-identical retrieval.
 
 ---
 
