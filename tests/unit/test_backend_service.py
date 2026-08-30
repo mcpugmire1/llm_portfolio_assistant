@@ -998,3 +998,161 @@ class TestRagAnswerPoolSize:
         assert (
             result["pool_size"] == 21
         ), f"synthesis path pool_size should equal len(synthesis_pool) = 21; got {result['pool_size']}"
+
+
+class TestRagAnswerRetrievalObservables:
+    """Bucket A conversion: rag_answer exposes retrieval-side decisions
+    (intent_family, confidence, entity_match, rejection_reason) in the return
+    dict so tests can assert on router behavior directly rather than proxying
+    through LLM-response text.
+
+    Same shape as MATTGPT-218's pool_size extension. Enables the
+    TestEntityGateThreshold and TestOutOfScope conversions.
+
+    rejection_reason values mirror ask_last_reason strings exactly:
+      - "rule:<category>" for nonsense-filter rejections
+      - "semantic_router:out_of_scope" for out-of-scope routing
+      - "semantic_router:personal" for personal routing
+      - "low_confidence" for retrieval-side rejection
+      - None when the query reached the LLM
+    """
+
+    def _mock_pool(self, n: int = 5) -> list[dict]:
+        return [
+            {
+                "id": f"s{i}",
+                "Title": f"T{i}",
+                "Client": f"C{i}",
+                "5PSummary": "sum",
+                "pc": 0.5,
+                "kw": 0.1,
+                "score": 0.5,
+            }
+            for i in range(n)
+        ]
+
+    @patch("ui.pages.ask_mattgpt.backend_service._generate_agy_response")
+    @patch("ui.pages.ask_mattgpt.backend_service.detect_entity")
+    @patch("ui.pages.ask_mattgpt.backend_service.is_portfolio_query_semantic")
+    @patch("ui.pages.ask_mattgpt.backend_service.is_nonsense")
+    @patch("ui.pages.ask_mattgpt.backend_service.semantic_search")
+    @patch("ui.pages.ask_mattgpt.backend_service.st")
+    def test_success_path_populates_all_observables(
+        self,
+        mock_st,
+        mock_semantic_search,
+        mock_is_nonsense,
+        mock_router,
+        mock_detect_entity,
+        mock_generate,
+    ):
+        """Normal query -- all four fields populated, rejection_reason is None."""
+        from ui.pages.ask_mattgpt.backend_service import rag_answer
+
+        mock_st.session_state = {}
+        mock_is_nonsense.return_value = None
+        mock_router.return_value = (True, 0.8, "test-intent", "technical")
+        mock_detect_entity.return_value = ("Client", "JPMC")
+        mock_generate.return_value = "stub answer"
+
+        pool = self._mock_pool()
+        mock_semantic_search.return_value = {
+            "results": pool,
+            "confidence": "high",
+            "top_score": 0.5,
+        }
+
+        result = rag_answer("technical q about JPMC", {"q": "..."}, pool)
+
+        assert (
+            result.get("intent_family") == "technical"
+        ), f"intent_family should be router family; got {result.get('intent_family')!r}"
+        assert (
+            result.get("confidence") == "high"
+        ), f"confidence should mirror semantic_search value; got {result.get('confidence')!r}"
+        assert (
+            result.get("entity_match") == ("Client", "JPMC")
+        ), f"entity_match should mirror detect_entity return; got {result.get('entity_match')!r}"
+        assert (
+            result.get("rejection_reason") is None
+        ), f"rejection_reason should be None on success; got {result.get('rejection_reason')!r}"
+
+    @patch("ui.pages.ask_mattgpt.backend_service._generate_agy_response")
+    @patch("ui.pages.ask_mattgpt.backend_service.detect_entity")
+    @patch("ui.pages.ask_mattgpt.backend_service.is_portfolio_query_semantic")
+    @patch("ui.pages.ask_mattgpt.backend_service.is_nonsense")
+    @patch("ui.pages.ask_mattgpt.backend_service.semantic_search")
+    @patch("ui.pages.ask_mattgpt.backend_service.st")
+    def test_entity_match_none_when_no_entity_detected(
+        self,
+        mock_st,
+        mock_semantic_search,
+        mock_is_nonsense,
+        mock_router,
+        mock_detect_entity,
+        mock_generate,
+    ):
+        """Regression guard: entity_match is explicitly None when no entity detected."""
+        from ui.pages.ask_mattgpt.backend_service import rag_answer
+
+        mock_st.session_state = {}
+        mock_is_nonsense.return_value = None
+        mock_router.return_value = (True, 0.8, "test-intent", "narrative")
+        mock_detect_entity.return_value = None
+        mock_generate.return_value = "stub"
+
+        pool = self._mock_pool()
+        mock_semantic_search.return_value = {
+            "results": pool,
+            "confidence": "high",
+            "top_score": 0.5,
+        }
+
+        result = rag_answer("broad q", {"q": "broad q"}, pool)
+
+        assert "entity_match" in result
+        assert (
+            result["entity_match"] is None
+        ), f"entity_match should be None when no entity detected; got {result.get('entity_match')!r}"
+
+    @patch("ui.pages.ask_mattgpt.backend_service.is_nonsense")
+    @patch("ui.pages.ask_mattgpt.backend_service.st")
+    def test_nonsense_filter_sets_rejection_reason(self, mock_st, mock_is_nonsense):
+        """Nonsense filter rejection: rejection_reason == 'rule:<category>', intent_family is None (router did not run)."""
+        from ui.pages.ask_mattgpt.backend_service import rag_answer
+
+        mock_st.session_state = {}
+        mock_is_nonsense.return_value = "personal_trivia"
+
+        result = rag_answer("What is Matt's favorite food?", {}, [])
+
+        assert (
+            result.get("rejection_reason") == "rule:personal_trivia"
+        ), f"rejection_reason should mirror ask_last_reason string; got {result.get('rejection_reason')!r}"
+        assert (
+            result.get("intent_family") is None
+        ), f"intent_family should be None when router did not run; got {result.get('intent_family')!r}"
+
+    @patch("ui.pages.ask_mattgpt.backend_service.detect_entity")
+    @patch("ui.pages.ask_mattgpt.backend_service.is_portfolio_query_semantic")
+    @patch("ui.pages.ask_mattgpt.backend_service.is_nonsense")
+    @patch("ui.pages.ask_mattgpt.backend_service.st")
+    def test_out_of_scope_router_sets_rejection_reason_and_intent(
+        self, mock_st, mock_is_nonsense, mock_router, mock_detect_entity
+    ):
+        """Out-of-scope router rejection: rejection_reason == 'semantic_router:out_of_scope', intent_family == 'out_of_scope'."""
+        from ui.pages.ask_mattgpt.backend_service import rag_answer
+
+        mock_st.session_state = {}
+        mock_is_nonsense.return_value = None
+        mock_router.return_value = (True, 0.9, "test-intent", "out_of_scope")
+        mock_detect_entity.return_value = None
+
+        result = rag_answer("Tell me about Matt's retail sales work", {}, [])
+
+        assert (
+            result.get("rejection_reason") == "semantic_router:out_of_scope"
+        ), f"rejection_reason should mirror ask_last_reason string; got {result.get('rejection_reason')!r}"
+        assert (
+            result.get("intent_family") == "out_of_scope"
+        ), f"intent_family should be the router family even on early rejection; got {result.get('intent_family')!r}"
