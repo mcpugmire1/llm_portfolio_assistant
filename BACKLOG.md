@@ -10,8 +10,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-08-30)
 
 **NOW**
-1. **-225** — Landing page chat input border lost sporadically. Root cause confirmed: emotion atomic class hash drift causes a transparent override to win over the border rule. Fix: delete the hashed selector group, replace with stable data-baseweb selectors. Live production, primary surface.
-2. **-224** — Explore Stories rejection calls st.stop() before grid renders, destroying the browsing context. Every rejection on that page, including correct ones. Live visitor harm.
+1. **-224** — Explore Stories rejection calls st.stop() before grid renders, destroying the browsing context. Every rejection on that page, including correct ones. Live visitor harm.
 3. **-221** — Environment stamp on every log write: Env column replaces the five-tier heuristic filter used for visitor identification.
 4. **-222** — Three operational alarms: zero-score (would have caught Jan 29 index outage on first occurrence), anchor-cache drift (sixteen family:unknown rows in Jan 2026), out_of_scope on known entity alias (partially covered by -219 score gate).
 5. **-223** — Sheet migration: retire borderline and offdomain CSVs to Sheet events. Nine and twelve months of production behavior currently local-only.
@@ -38,7 +37,7 @@ BDD flakes: -122, -131, -142, -145, -197, -198, -205
 Wrong-assertion test: -203 · -209 (drift guard searches wrong scope)
 Small refactors: -140, -153, -086, -062, -082, -083, -084, -150, -060, -217 (pronoun grammar in substitution)
 BDD structure: -213 (shared step definitions)
-Correctness audit: -214 (parameters, comments, constants, copied blocks)
+Correctness audit: -214 (parameters, comments, constants, copied blocks) · -226 (dead `.main` selectors, ~299 declarations matching 0 elements)
 Infrastructure: -035, -039, -040, -045
 
 ---
@@ -122,7 +121,7 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-213](#mattgpt-213) | BDD suite: navigation step definitions duplicated across modules; no shared step module | Open | Low | Refactor / Test | August 26, 2026 |
 | [MATTGPT-214](#mattgpt-214) | Targeted audit: parameters never referenced, comments asserting absent behavior, constants unused, copied blocks with stale variable names | Open | Low | Refactor | August 26, 2026 |
 | [MATTGPT-217](#mattgpt-217) | `_substitute_matt_subject` produces subject pronoun in object position ("reported to he at the CIC") | Open | Low | Bug | August 26, 2026 |
-| [MATTGPT-225](#mattgpt-225) | Landing page chat input border lost sporadically: emotion atomic classes land on `<input>` and override border-color transparent | Open | High | Bug | August 30, 2026 |
+| [MATTGPT-226](#mattgpt-226) | Dead `.main` selectors across `ui/styles/` after `.main → .stMain` refactor: 31 selectors, ~299 declarations, all matching 0 elements | Open | Medium | Refactor / Tech debt | August 31, 2026 |
 | [MATTGPT-221](#mattgpt-221) | Environment stamp on every log write: add Env column to query_logger.py, archive existing CSVs | Open | High | Enhancement | August 30, 2026 |
 | [MATTGPT-222](#mattgpt-222) | Three operational alarms: zero-score, anchor-cache drift, out_of_scope on known entity | Open | High | Enhancement | August 30, 2026 |
 | [MATTGPT-223](#mattgpt-223) | Sheet migration: retire borderline and offdomain CSVs in favor of Sheet events with Event Type column | Open | Medium | Enhancement | August 30, 2026 |
@@ -2404,11 +2403,12 @@ Fallback if no entity is detected: surviving-family membership (`background`, `n
 ### MATTGPT-225
 **Landing page chat input border lost sporadically: emotion atomic classes land on `<input>` and override border-color transparent**
 
-- **Status:** Open
+- **Status:** Done
 - **Priority:** High
 - **Type:** Bug
-- **File:** CSS rule group in `ui/styles/global_styles.py` or `ui/pages/ask_mattgpt/styles.py` (source line not yet confirmed; see fix below)
+- **File:** CSS rule group in `ui/styles/global_styles.py` or `ui/pages/ask_mattgpt/styles.py`
 - **Logged:** August 30, 2026
+- **Resolved:** August 31, 2026 -- shakeout complete, six-of-six per spec
 
 **Root cause (confirmed in DevTools, August 30, 2026):**
 
@@ -2442,6 +2442,53 @@ Computed border on the landing page chat input is `2px solid rgba(0,0,0,0)` -- w
 **Pre-flight before touching the file:** identify the current line(s) holding the `.st-bz/.st-c0/.st-c1/.st-c2` group. Verify no other rule in the file targets the same hashes for a different purpose. The fix scope is narrow -- do not disturb other sections of the landing input CSS block.
 
 **CLAUDE.md rule this violates:** "Streamlit class names like `st-emotion-cache-*` change between versions -- target `data-testid` or `.st-key-*` instead." The `st-XX` two-character hashes are the same class of build artifact; they drift on version bumps.
+
+---
+
+### MATTGPT-226
+**Dead `.main` selectors across `ui/styles/` after `.main → .stMain` refactor: 31 selectors, ~299 declarations, all matching 0 elements**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Refactor / Tech debt
+- **Files:** `ui/styles/global_styles.py` (33 selectors), `ui/styles/mobile_overrides.py` (1 selector)
+- **Logged:** August 31, 2026
+
+**Severity:** Silent today. Every affected element is currently styled by a live fallback rule elsewhere, so no visible break. The risk is twofold: the fallbacks are unaudited, and the dead rules read as authoritative to anyone editing the file.
+
+**Measurement (CSSOM scan of production, Ask Agy page, app stylesheets only, Streamlit's emotion sheet excluded, August 31, 2026):**
+
+```
+document.querySelectorAll('.main')     → 0
+document.querySelectorAll('.stMain')   → 1  (SECTION[data-testid="stMain"])
+app-CSS rules scanned                  → 1309
+distinct .main-anchored selectors      → 31   (all matching 0 elements)
+declarations inside them               → ~299
+```
+
+Source-side count (grep of `ui/styles/`) is 34 raw occurrences -- the delta of 3 vs the CSSOM's 31 is a mix of duplicate declarations that CSSOM deduplicates, and `mobile_overrides.py`'s single selector which may not have been in scope on desktop.
+
+**Full selector list (from CSSOM):** `.main`, `.main .block-container`, `.main .stTextInput > div > div > input` (+`:focus`), `.main .stSelectbox > div > div` (+`:focus-within`), `.main .stMultiSelect > div > div` (+`:focus-within`), `.main .stButton > button` (+`:hover`), `.main table/thead/th/td/td a`, `.main [data-testid="stDataFrame"]`, `.main .ag-root-wrapper`, `.main [data-testid="stForm"]`, `.main [data-testid="stFormSubmitButton"] button`, `.main label[data-testid="stWidgetLabel"]`, `.main [data-testid="stVerticalBlock"] > div`.
+
+**Doubly dead:** `.main .ag-root-wrapper` is dead twice over -- AgGrid was removed in MATTGPT-144.
+
+**Why it's more than dead code:** During MATTGPT-225 diagnosis, `global_styles.py:2704-2714` (`.main .stTextInput > div > div > input` border block) initially looked like the source of the landing input border bug. It wasn't -- the actual culprit was an `.st-XX` hashed selector group elsewhere. But ~299 declarations that look authoritative and do nothing will keep sending debugging down the wrong path, and any not silently backstopped is a live visual defect nobody has noticed yet.
+
+**Work:**
+1. For each of the ~31 selectors, determine whether a live rule already supplies the same properties. Method: re-anchor to `.stMain`, diff the rendered result against current production per page.
+2. Where a fallback exists: delete the dead rule.
+3. Where no fallback exists: that is a real regression; re-anchor to `.stMain` and log it.
+4. Add a guard: fail the build (or add a BDD/lint check) on any CSS selector containing `.main` that is not `.stMain`.
+
+**Caveat on scope:** The 31-selector count is from one page (Ask Agy). `.main` matching zero is version-global (Streamlit 1.50.0 emits `.stMain`, not `.main`), so all 31 are dead everywhere. But the CSSOM scan only saw stylesheets loaded on Ask Agy. Re-run the scan on My Work, Role Match, and My Profile before calling the list complete -- additional `.main` rules may live in scoped stylesheets that only inject on those pages.
+
+**Suggested companion CLAUDE.md CSS rule** (unifying both anti-patterns surfaced August 31, 2026):
+> CSS selectors may only anchor on `data-testid`, `data-baseweb`, or app-authored class names. Never on Streamlit's internal structural classes (`.main`, `.block-container`) or emotion-hashed atomics (`.st-bz`, `.st-c2`). Both categories are build artifacts and change without notice across Streamlit versions. The August 31, 2026 chat-input defect (MATTGPT-225) was one of each: `.st-bz` migrated onto `<input>` and killed the border; `.main .stTextInput > div > div > input` was dead code that misled diagnosis.
+
+**Cross-references:**
+- MATTGPT-225 (border bug that surfaced this pattern; fixed via a different mechanism)
+- MATTGPT-144 (AgGrid removal; makes `.main .ag-root-wrapper` doubly dead)
+- CLAUDE.md Critical Rule (June 2026): "A structural refactor invalidates values and selectors anchored to the old structure ... `.main → .stMain` killed every `.main` rule." Rule was added; audit was not completed at that time. This ticket is that audit.
 
 ---
 

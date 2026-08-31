@@ -8,6 +8,16 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Ask Agy
 
+**August 31, 2026 — Landing page chat input border fixed; dead `.main` selector audit filed (MATTGPT-225, MATTGPT-226)**
+
+Root cause (MATTGPT-225): Streamlit's emotion atomic classes `.st-bz` and `.st-c2` migrated onto the `<input>` element itself on a version bump. An existing CSS rule `.st-key-landing_input .st-bz, .st-c2 { border-*-color: transparent }` -- written to strip BaseWeb wrapper chrome -- matched the input and overrode the intended `2px solid var(--border-color)` border at higher specificity. Computed border color was `rgba(0,0,0,0)`: width present, color transparent.
+
+Fix: deleted the hashed selector group; replaced with stable `data-baseweb` selectors for wrapper chrome suppression and `div[data-testid="stTextInput"] input` for the border rule. Shakeout confirmed six-of-six: amex (3 American Express stories, Virtual Payments Platform narrative), AT&T (Network Engineering Platform + Order Management both cited), Norfolk Southern (revenue modernization, CIC Academy, mainframe hybrid, microservices all threaded), on-call rotations (reached JPM Dynamics stabilization + AT&T CRM incident response; LLM surfaced adjacent operational-continuity work rather than hedging with "not explicitly mentioned"), raspberry pi (Liquid Studio connected-devices, robotic bartender and container-breach callouts), retail (correctly hard-stops at 0.835, above HARD_ACCEPT). No unexpected regressions.
+
+MATTGPT-226 filed alongside: the diagnosis exposed 31 dead `.main`-anchored selectors (~299 declarations) in `ui/styles/` that match zero DOM elements since the `.main → .stMain` refactor. Silent now but misled the -225 investigation. Audit and guard planned.
+
+---
+
 **August 30, 2026 — Score gate: out_of_scope rejection now requires HARD_ACCEPT; five answerable queries restored (MATTGPT-219)** -- `b8bd59b`
 
 `backend_service.py:1777` fired the "I don't have experience in that industry" hard stop for any query classified as `out_of_scope`, regardless of confidence. Five queries were failing live: "Tell me about Matt's amex work" (0.696, failing since 2026-03-24 -- five months), "Tell me about Matt's AT&T work" (0.666), "Tell me about Matt's Norfolk Southern work" (0.624), "Has Matt run on-call rotations?" (0.546), and "Tell me about Matt's experience with raspberry pi" (0.611). None cleared the 0.80 `HARD_ACCEPT` threshold. The rejection ignored its own confidence.
