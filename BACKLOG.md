@@ -10,8 +10,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-08-30)
 
 **NOW**
-1. **-219** — Score gate: out_of_scope fires below HARD_ACCEPT; single change fixes five answerable queries including amex (failing since 2026-03-24). Live visitor harm.
-2. **-224** — Explore Stories rejection calls st.stop() before grid renders, destroying the browsing context. Every rejection on that page, including correct ones. Live visitor harm.
+1. **-224** — Explore Stories rejection calls st.stop() before grid renders, destroying the browsing context. Every rejection on that page, including correct ones. Live visitor harm.
 3. **-221** — Environment stamp on every log write: Env column replaces the five-tier heuristic filter used for visitor identification.
 4. **-222** — Three operational alarms: zero-score (would have caught Jan 29 index outage on first occurrence), anchor-cache drift (sixteen family:unknown rows in Jan 2026), out_of_scope on known entity alias (partially covered by -219 score gate).
 5. **-223** — Sheet migration: retire borderline and offdomain CSVs to Sheet events. Nine and twelve months of production behavior currently local-only.
@@ -122,7 +121,6 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-213](#mattgpt-213) | BDD suite: navigation step definitions duplicated across modules; no shared step module | Open | Low | Refactor / Test | August 26, 2026 |
 | [MATTGPT-214](#mattgpt-214) | Targeted audit: parameters never referenced, comments asserting absent behavior, constants unused, copied blocks with stale variable names | Open | Low | Refactor | August 26, 2026 |
 | [MATTGPT-217](#mattgpt-217) | `_substitute_matt_subject` produces subject pronoun in object position ("reported to he at the CIC") | Open | Low | Bug | August 26, 2026 |
-| [MATTGPT-219](#mattgpt-219) | Score gate: out_of_scope rejection fires below HARD_ACCEPT, blocking five answerable queries including amex since March | Open | High | Bug | August 30, 2026 |
 | [MATTGPT-221](#mattgpt-221) | Environment stamp on every log write: add Env column to query_logger.py, archive existing CSVs | Open | High | Enhancement | August 30, 2026 |
 | [MATTGPT-222](#mattgpt-222) | Three operational alarms: zero-score, anchor-cache drift, out_of_scope on known entity | Open | High | Enhancement | August 30, 2026 |
 | [MATTGPT-223](#mattgpt-223) | Sheet migration: retire borderline and offdomain CSVs in favor of Sheet events with Event Type column | Open | Medium | Enhancement | August 30, 2026 |
@@ -2217,11 +2215,12 @@ Grep targets for Class 3: `except Exception: pass`, `except: pass`, bare `except
 ### MATTGPT-219
 **Score gate: out_of_scope rejection fires below HARD_ACCEPT, blocking five answerable queries including amex since March**
 
-- **Status:** Open
+- **Status:** Done
 - **Priority:** High
 - **Type:** Bug
 - **File:** `services/backend_service.py:1777`
 - **Logged:** August 30, 2026
+- **Resolved:** August 30, 2026 -- `b8bd59b`
 
 **Rescoped August 30, 2026.** Original framing was a misroute fix dependent on -220's taxonomy cleanup. The actual fix is smaller and independent: a single score gate, no taxonomy change.
 
@@ -2349,7 +2348,7 @@ Fallback if no entity is detected: surviving-family membership (`background`, `n
 
 **Alarm 2 -- anchor-cache drift:** Assert at startup that `intent_embeddings.json` and `VALID_INTENTS` hold the same keys. The sixteen `family:unknown` rows across 2026-01-18 to 2026-01-21 are that hazard firing silently in production. Startup assertion means the next drift surfaces on deploy, not in the log.
 
-**Alarm 3 -- out_of_scope on known entity alias:** Fire when a query that contains a known entity alias routes to `out_of_scope`. Becomes largely redundant if the MATTGPT-219 score gate ships first, since the gate prevents the rejection from firing. File as covered once -219 is done; do not remove the alarm, as the gate could be bypassed by future anchor additions.
+**Alarm 3 -- out_of_scope on known entity alias:** Covered by MATTGPT-219 (`b8bd59b`, August 30, 2026). The score gate prevents the rejection from firing for queries that do not clear HARD_ACCEPT. Keep the alarm as a guard: the gate could be bypassed by future anchor additions that raise a valid out_of_scope score above 0.80.
 
 ---
 

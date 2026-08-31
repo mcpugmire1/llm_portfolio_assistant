@@ -8,6 +8,18 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Ask Agy
 
+**August 30, 2026 — Score gate: out_of_scope rejection now requires HARD_ACCEPT; five answerable queries restored (MATTGPT-219)** -- `b8bd59b`
+
+`backend_service.py:1777` fired the "I don't have experience in that industry" hard stop for any query classified as `out_of_scope`, regardless of confidence. Five queries were failing live: "Tell me about Matt's amex work" (0.696, failing since 2026-03-24 -- five months), "Tell me about Matt's AT&T work" (0.666), "Tell me about Matt's Norfolk Southern work" (0.624), "Has Matt run on-call rotations?" (0.546), and "Tell me about Matt's experience with raspberry pi" (0.611). None cleared the 0.80 `HARD_ACCEPT` threshold. The rejection ignored its own confidence.
+
+Fix: do not fire the rejection unless the score clears `HARD_ACCEPT`. One condition, no taxonomy change. Three xfailed tests (amex, AT&T, Norfolk Southern) go XPASS with this commit. Alarm 3 in MATTGPT-222 is now covered by this gate.
+
+Log context: across twelve months of production, eight visitor questions the corpus could have answered and did not. Six were fixed by targeted work before August 30. The remaining two were these score gate cases.
+
+Known limitation (no ticket): "Tell me more about the Pivotal Labs partnership" retrieves cleanly at 0.423 and returns a fluent paragraph about Accenture's Georgia Tech innovation hub. It never fabricates a Pivotal relationship, and it never says it does not have one. Pivotal is a deliberate corpus gap. The answer is confidently non-responsive -- a third category, not a routing bug and not fixable by a threshold.
+
+---
+
 **August 30, 2026 — Router topical taxonomy inventory complete; three-commit remediation plan documented (MATTGPT-220)**
 
 The router's 15 anchor families were inventoried against their actual consumers. Finding: 9 of 11 topical families serve only two set-membership tests (`_PN_EXCLUDED_FAMILIES` and `SUBSTITUTION_FAMILIES`), and three reach nothing at all. No branch reads a topical family label for its topic. Both set memberships proxy for questions the code never asks directly: is this query about the work, or about who Matt is?
