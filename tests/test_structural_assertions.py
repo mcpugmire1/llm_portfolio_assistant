@@ -11,22 +11,44 @@ Usage:
     pytest tests/test_structural_assertions.py -k "meta_commentary" -v
     python tests/test_structural_assertions.py --report
 
-INTENTIONALLY STOCHASTIC TESTS -- DO NOT RE-TRIAGE AS REGRESSIONS
--------------------------------------------------------------------
-Two tests in this file assert on gpt-4o output at temperature 0.4 and
-pass or fail randomly. They are intentionally red and are not regressions:
+INTENTIONALLY STOCHASTIC TEST CLASSES -- DO NOT RE-TRIAGE AS REGRESSIONS
+------------------------------------------------------------------------
+The following test classes in this file assert on gpt-4o output at
+temperature 0.4. The stochasticity is a property of the *class*, not any
+specific parametrized instance: any query in the parametrize set can pass
+on one run and fail on the next due to LLM word choice. Do not treat a
+failure of a previously-passing instance as a regression -- treat it as
+expected class behavior.
 
-  test_no_meta_commentary[Q45_meta]
-  test_structural_checks[Q32_structural]
+  TestNoMetaCommentary     (71 parametrized queries)
+  TestAgyVoice             (71 parametrized queries)
+  TestAllStructuralChecks  (71 parametrized queries)
 
-A third stochastic test lives in test_agy_behavior.py:
-  test_out_of_scope_redirect[retail sales work]
+Total surface here: ~213 tests, all sharing the same LLM-text-assertion
+brittleness at the class level.
 
-Verified Aug 15, 2026: three consecutive runs on identical code gave
-fail, fail, pass. See MATTGPT-193 (Decided Against).
+Historical observations:
+- Aug 15, 2026: Q45_meta and Q32_structural named as specific instances.
+  Three consecutive runs on identical code gave fail, fail, pass on those
+  two. See MATTGPT-193 (Decided Against) for the not-a-regression
+  disposition.
+- Aug 30, 2026: full-suite run failed on Q6_meta, Q20_meta, and
+  Q45_structural -- none previously named. Isolation of each showed
+  deterministic pass at HEAD and pre-fix, confirming the same class-level
+  stochasticity, not any specific ticket regression.
 
 Do not investigate these as caused by a change under test. Do not label
 other failures pre-existing without an isolation run.
+
+Bucket A conversion history:
+- Aug 30, 2026: TestEntityGateThreshold moved from LLM-text assertions
+  (refusal-phrase list, length > 50) to retrieval-observable assertions
+  (rag_answer's rejection_reason field). Now deterministic; no longer on
+  this list. Three cases (amex alias, AT&T, Norfolk Southern) xfail
+  against MATTGPT-219 -- router misroutes real clients to out_of_scope,
+  surfaced by the deterministic assertion.
+- test_out_of_scope_redirect (in test_agy_behavior.py) also converted in
+  the same commit and is now deterministic.
 """
 
 import json
@@ -445,6 +467,12 @@ class TestAllStructuralChecks:
 # Queries calibrated from semantic score analysis (Jan 2026)
 # Off-topic queries score 0.11-0.22, legitimate queries score 0.30+
 # These tests catch if someone bumps the threshold and breaks legitimate queries
+#
+# xfail_reason: if set, the test case is marked xfail via pytest.mark.xfail
+# on the parametrize entry. Used for cases that surface a known bug the
+# converted retrieval-observable assertion catches deterministically -- see
+# MATTGPT-219 for the router-misroute cases (AT&T, Norfolk Southern, amex
+# alias). Remove xfail_reason when the underlying bug ships.
 THRESHOLD_TEST_QUERIES = [
     # Should PASS (legitimate queries that were blocked at 0.50 threshold)
     {"query": "Tell me about the CIC", "should_pass": True, "note": "CIC=0.41"},
@@ -463,13 +491,56 @@ THRESHOLD_TEST_QUERIES = [
         "query": "Tell me about Matt's amex work",
         "should_pass": True,
         "note": "score=0.45",
+        "xfail_reason": (
+            "MATTGPT-219: router misroutes the 'amex' alias to out_of_scope. "
+            "Canonical 'American Express' routes to domain_payments correctly "
+            "(the router works on raw text; ENTITY_ALIASES does not feed into "
+            "the router's embedding space). Remove xfail_reason when -219 ships."
+        ),
     },
     {"query": "leadership", "should_pass": True, "note": "score=0.49"},
+    # Real clients that misroute to out_of_scope on the "Tell me about Matt's
+    # <client> work" pattern -- surfaced during Bucket A conversion when the
+    # deterministic assertion replaced the LLM-text proxy. See MATTGPT-219.
+    {
+        "query": "Tell me about Matt's AT&T work",
+        "should_pass": True,
+        "note": "router=out_of_scope (0.666); detect_entity finds Client:AT&T",
+        "xfail_reason": (
+            "MATTGPT-219: router's out_of_scope anchors over-fire on AT&T "
+            "(a real telecom client in the portfolio). The out_of_scope "
+            "redirect response text explicitly lists Telecom as in-scope, "
+            "so the classification contradicts the redirect. Remove "
+            "xfail_reason when -219 ships."
+        ),
+    },
+    {
+        "query": "Tell me about Matt's Norfolk Southern work",
+        "should_pass": True,
+        "note": "router=out_of_scope (0.624); detect_entity finds Client:Norfolk Southern",
+        "xfail_reason": (
+            "MATTGPT-219: router's out_of_scope anchors over-fire on Norfolk "
+            "Southern (a real rail/logistics client in the portfolio). Same "
+            "class of misroute as AT&T. Remove xfail_reason when -219 ships."
+        ),
+    },
     # Should FAIL (garbage/off-topic)
     {"query": "What's the weather today?", "should_pass": False, "note": "score=0.11"},
     {"query": "Best pizza in Atlanta", "should_pass": False, "note": "score=0.17"},
     {"query": "asdf jkl qwerty", "should_pass": False, "note": "gibberish"},
 ]
+
+
+def _threshold_param(test_case: dict):
+    """Wrap a THRESHOLD_TEST_QUERIES entry as a pytest.param, applying
+    xfail marker if xfail_reason is set. Keeps the data structure a plain
+    list of dicts while allowing per-instance xfail marks."""
+    if "xfail_reason" in test_case:
+        return pytest.param(
+            test_case,
+            marks=pytest.mark.xfail(reason=test_case["xfail_reason"], strict=False),
+        )
+    return test_case
 
 
 class TestEntityGateThreshold:
@@ -478,15 +549,22 @@ class TestEntityGateThreshold:
     These tests catch threshold miscalibration. If someone bumps the threshold
     back up (e.g., from 0.30 to 0.50), these tests will fail because legitimate
     queries like "Tell me about the CIC" will be incorrectly blocked.
+
+    Assertions read the retrieval-observable ``rejection_reason`` field from
+    the rag_answer return dict. That field is None iff the query reached the
+    LLM (retrieval side didn't reject it), and mirrors ask_last_reason exactly
+    on every rejection path. Previous versions asserted on LLM response text
+    (refusal phrase list, length > 50), which flaked on LLM word choice --
+    see the "amex" intermittent that surfaced during the -218 coverage work.
     """
 
     @pytest.mark.parametrize(
         "test_case",
-        [t for t in THRESHOLD_TEST_QUERIES if t["should_pass"]],
+        [_threshold_param(t) for t in THRESHOLD_TEST_QUERIES if t["should_pass"]],
         ids=lambda t: f"pass_{t['query'][:30]}",
     )
     def test_legitimate_queries_pass(self, test_case, stories, rag_fn):
-        """Verify legitimate queries return real answers, not refusals."""
+        """Verify legitimate queries reach retrieval and are not rejected."""
         query = test_case["query"]
         filters = {
             "industry": "",
@@ -499,42 +577,23 @@ class TestEntityGateThreshold:
         }
 
         rag_result = rag_fn(query, filters, stories)
-        response = rag_result.get("answer_md", "")
 
-        # Check for refusal patterns
-        refusal_patterns = [
-            "I can't help with that",
-            "I can only discuss Matt's",
-            "out of scope",
-            "off-topic",
-            "I don't have experience",
-        ]
-
-        is_refusal = any(
-            pattern.lower() in response.lower() for pattern in refusal_patterns
-        )
-
-        assert not is_refusal, (
-            f"Legitimate query was refused (threshold too high?)\n"
+        assert rag_result.get("rejection_reason") is None, (
+            f"Legitimate query was rejected (threshold too high?)\n"
             f"Query: {query}\n"
             f"Note: {test_case['note']}\n"
-            f"Response: {response[:200]}..."
-        )
-
-        # Also verify we got a real response
-        assert len(response) > 50, (
-            f"Response too short - likely empty or error\n"
-            f"Query: {query}\n"
-            f"Response: {response}"
+            f"rejection_reason: {rag_result.get('rejection_reason')!r}\n"
+            f"intent_family: {rag_result.get('intent_family')!r}\n"
+            f"confidence: {rag_result.get('confidence')!r}"
         )
 
     @pytest.mark.parametrize(
         "test_case",
-        [t for t in THRESHOLD_TEST_QUERIES if not t["should_pass"]],
+        [_threshold_param(t) for t in THRESHOLD_TEST_QUERIES if not t["should_pass"]],
         ids=lambda t: f"block_{t['query'][:30]}",
     )
     def test_garbage_queries_blocked(self, test_case, stories, rag_fn):
-        """Verify garbage queries are rejected, not answered."""
+        """Verify garbage queries hit a rejection gate before reaching the LLM."""
         query = test_case["query"]
         filters = {
             "industry": "",
@@ -547,27 +606,14 @@ class TestEntityGateThreshold:
         }
 
         rag_result = rag_fn(query, filters, stories)
-        response = rag_result.get("answer_md", "")
 
-        # Should be refused or empty
-        refusal_patterns = [
-            "I can't help with that",
-            "I can only discuss Matt's",
-            "out of scope",
-            "off-topic",
-            "I don't have experience",
-        ]
-
-        is_refusal = any(
-            pattern.lower() in response.lower() for pattern in refusal_patterns
-        )
-        is_empty = len(response.strip()) < 50
-
-        assert is_refusal or is_empty, (
+        assert rag_result.get("rejection_reason") is not None, (
             f"Garbage query was NOT blocked (threshold too low?)\n"
             f"Query: {query}\n"
             f"Note: {test_case['note']}\n"
-            f"Response: {response[:200]}..."
+            f"intent_family: {rag_result.get('intent_family')!r}\n"
+            f"confidence: {rag_result.get('confidence')!r}\n"
+            f"answer_md[:200]: {rag_result.get('answer_md', '')[:200]!r}"
         )
 
 
