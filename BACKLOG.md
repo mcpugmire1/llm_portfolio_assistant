@@ -7,15 +7,15 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 ---
 
-## Value Prioritized Roadmap (updated 2026-08-30)
+## Value Prioritized Roadmap (updated 2026-08-31)
 
 **NOW**
 1. **-224** — Explore Stories rejection calls st.stop() before grid renders, destroying the browsing context. Every rejection on that page, including correct ones. Live visitor harm.
-3. **-221** — Environment stamp on every log write: Env column replaces the five-tier heuristic filter used for visitor identification.
-4. **-222** — Three operational alarms: zero-score (would have caught Jan 29 index outage on first occurrence), anchor-cache drift (sixteen family:unknown rows in Jan 2026), out_of_scope on known entity alias (partially covered by -219 score gate).
-5. **-223** — Sheet migration: retire borderline and offdomain CSVs to Sheet events. Nine and twelve months of production behavior currently local-only.
-6. **-128** — Split source panel by kind (project records / positioning docs), extract reason lines from figures, drop trailing question. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
-7. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+2. **-221** — Environment stamp on every log write: Env column replaces the five-tier heuristic filter used for visitor identification.
+3. **-222** — Three operational alarms: zero-score (would have caught Jan 29 index outage on first occurrence), anchor-cache drift (sixteen family:unknown rows in Jan 2026), out_of_scope on known entity alias (partially covered by -219 score gate).
+4. **-223** — Sheet migration: retire borderline and offdomain CSVs to Sheet events. Nine and twelve months of production behavior currently local-only.
+5. **-128** — Split source panel by kind (project records / positioning docs), extract reason lines from figures, drop trailing question. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
+6. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT** — Role Match, once the runway clears
 -160 (extractor dropping qualifiers on 7 of 23) · -173 (malformed and comp-only JD behavior) · -159 (sequential gpt-4o loop) · -014 (34 skipped integration scenarios) · -089 (location, work-model, availability) · -012 (Private View Phase 4) · -081 (corrective actions by asset type) · -099 (comp handling) · -017 (logging scenarios)
