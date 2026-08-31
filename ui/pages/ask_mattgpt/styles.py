@@ -384,21 +384,6 @@ def get_landing_css() -> str:
             border-color: transparent !important;
         }
 
-        /* Guards against Streamlit emotion classes setting a pink/red inner border
-           on the landing input. Hashes (.st-bz etc.) drift between builds and may
-           not currently match any live DOM classes, but the cost if they return is
-           high: this required multi-iteration remediation historically. Keep as
-           insurance; unmatched selectors are a no-op. */
-        .st-key-landing_input .st-bz,
-        .st-key-landing_input .st-c0,
-        .st-key-landing_input .st-c1,
-        .st-key-landing_input .st-c2 {
-            border-left-color: transparent !important;
-            border-right-color: transparent !important;
-            border-top-color: transparent !important;
-            border-bottom-color: transparent !important;
-        }
-
         /* ASK AGY BUTTON - Purple background with WHITE text */
         button[key="landing_ask"],
         .st-key-landing_ask button,
