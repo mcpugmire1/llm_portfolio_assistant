@@ -10,8 +10,10 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-08-28)
 
 **NOW**
-1. **-128** — Split source panel by kind (project records / positioning docs), extract reason lines from figures, drop trailing question. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
-2. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+1. **-219** — Router rejects AT&T, Norfolk Southern, and "amex" as out_of_scope while correctly resolving their entities; family assignments wrong on 14 of 17 clients. Three xfailed tests pinned against this ticket.
+2. **-220** — Router and nonsense filter use hand-written taxonomies where corpus fields (Industry, Category, Sub-category, Theme) already carry the answer. Reading exercise: confirm the shape of the gap before proposing a fix.
+3. **-128** — Split source panel by kind (project records / positioning docs), extract reason lines from figures, drop trailing question. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
+4. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT** — Role Match, once the runway clears
 -160 (extractor dropping qualifiers on 7 of 23) · -173 (malformed and comp-only JD behavior) · -159 (sequential gpt-4o loop) · -014 (34 skipped integration scenarios) · -089 (location, work-model, availability) · -012 (Private View Phase 4) · -081 (corrective actions by asset type) · -099 (comp handling) · -017 (logging scenarios)
@@ -116,6 +118,8 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-213](#mattgpt-213) | BDD suite: navigation step definitions duplicated across modules; no shared step module | Open | Low | Refactor / Test | August 26, 2026 |
 | [MATTGPT-214](#mattgpt-214) | Targeted audit: parameters never referenced, comments asserting absent behavior, constants unused, copied blocks with stale variable names | Open | Low | Refactor | August 26, 2026 |
 | [MATTGPT-217](#mattgpt-217) | `_substitute_matt_subject` produces subject pronoun in object position ("reported to he at the CIC") | Open | Low | Bug | August 26, 2026 |
+| [MATTGPT-219](#mattgpt-219) | Router misclassifies real clients as out_of_scope; family assignments do not match the engagement | Open | High | Bug | August 30, 2026 |
+| [MATTGPT-220](#mattgpt-220) | Router and nonsense filter use hand-written taxonomies where the corpus data model already has the answer | Open | Medium | Refactor / Analysis | August 30, 2026 |
 
 ---
 
@@ -2199,6 +2203,72 @@ Grep targets for Class 3: `except Exception: pass`, `except: pass`, bare `except
 **Fix:** Ported the existing soft-filter case from `rag_answer` into `get_synthesis_stories`. Also pinned `pool_size` in the `rag_answer` return dict. Q65 ("Why hire Matt?") added to eval suite.
 
 **Cross-references:** MATTGPT-214 (Class 2 audit -- this instance documents the Title rule as a rule applied in one path and missing in another).
+
+---
+
+### MATTGPT-219
+**Router misclassifies real clients as out_of_scope; family assignments do not match the engagement**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **File:** `services/rag_service.py` (`is_portfolio_query_semantic`, intent families)
+- **Logged:** August 30, 2026
+
+**Verified August 30, 2026:** All 17 named clients run through `is_portfolio_query_semantic` as "Tell me about Matt's `<client>` work".
+
+Three route to out_of_scope:
+- AT&T at 0.666
+- Norfolk Southern at 0.624
+- "amex" at 0.696
+
+In every case `detect_entity` resolves the client correctly (Client:AT&T, Client:Norfolk Southern, Client:American Express). The entity is found; the router rejects the query anyway. A visitor asking about either engagement is told Matt has no experience in that industry, while the redirect message itself lists Telecom as in-scope.
+
+Alias asymmetry: "American Express" routes to domain_payments at 0.673; "amex" routes to out_of_scope at 0.696. The router works on raw text and never consults `ENTITY_ALIASES`, so any short alias can drift independently of its canonical name.
+
+Family assignments on the remaining 14 are also wrong -- this is the larger finding:
+- HSBC, Accredited Home Lenders, and Cendant Mortgage all route to domain_payments. None are payments work: HSBC was mortgage transformation, the other two mortgage origination. The router appears to be matching the client's sector rather than what the engagement was.
+- Lockheed Martin routes to technical rather than anything aerospace or defense.
+- Cendian routes to innovation rather than logistics integration.
+- Major U.S. Health System routes to agile_transformation rather than anything health-related.
+
+**Discovery:** The Bucket A conversion replaced an LLM-text assertion with a retrieval-observable one. The old assertion checked whether the response contained refusal phrasing, which flaked on word choice and masked a deterministic misclassification. The conversion exposed it on its first run.
+
+**Three tests xfailed against this ticket:**
+- The "amex" case in `THRESHOLD_TEST_QUERIES`
+- AT&T case added alongside it
+- Norfolk Southern case added alongside it
+
+When the router is fixed, all three go XPASS.
+
+**Cross-references:** MATTGPT-220 (data-model review -- the root cause is that the router never consults the corpus fields that encode what the engagement actually was).
+
+---
+
+### MATTGPT-220
+**Router and nonsense filter use hand-written taxonomies where the corpus data model already has the answer**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Refactor / Analysis
+- **Logged:** August 30, 2026
+
+**Issue:** The router maintains eleven hand-written intent families with hand-written anchor strings. None of them relate to the fields every story already carries: Industry, Category, Sub-category, Theme, Solution/Offering, Competencies. HSBC routes to domain_payments while its own corpus record says Industry: Financial Services and Category: Strategic & Advisory. The right answer was in the data model; the router never looked.
+
+**This is a reading exercise, not a grep.** For each hand-written taxonomy, confirm whether a corpus-derived equivalent exists and what the gap looks like. Report findings; do not propose fixes until the full picture is on the table.
+
+**Three areas to examine:**
+1. **Intent families (eleven, hand-written):** For each family, identify which corpus fields overlap and whether deriving the routing from those fields would produce more accurate results.
+2. **Nonsense filter patterns (`nonsense_filters.jsonl`):** Same question -- are any patterns approximating something the data model already expresses exactly?
+3. **`ENTITY_ALIASES`:** How does it relate to the Client field in the corpus? The router's alias blindness (MATTGPT-219: "amex" vs "American Express") is a symptom here.
+
+**`SYNTHESIS_THEMES` is the positive model:** It is the one place that does derive from the corpus and is worth using as the reference for what the others could look like.
+
+**Related finding (August 30, 2026):** Synthesis fires on 2 of 64 eval queries because breadth competes with eleven topic families for one slot. If those families are also mislabeling the work, the taxonomy is doing less than it appears on both axes -- fewer synthesis queries and wrongly classified standard queries.
+
+**Distinction from MATTGPT-214:** -214 looks for rules applied in one path and missing in another. This looks for parallel taxonomies where the data model would have served -- a different kind of redundancy.
+
+**Cross-references:** MATTGPT-219 (the out_of_scope misclassification is a concrete instance of what this ticket is looking for).
 
 ---
 
