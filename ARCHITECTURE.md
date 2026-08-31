@@ -82,7 +82,7 @@
 **Project:** MattGPT Portfolio Assistant - AI-powered career story search and chat interface
 **Tech Stack:** Streamlit, OpenAI GPT-4o, Pinecone vector DB, Python 3.11+
 **Data Corpus:** 100+ STAR-formatted transformation project stories
-**Last Updated:** August 27, 2026
+**Last Updated:** August 31, 2026
 
 ### What This Document Contains
 
@@ -661,6 +661,7 @@ This section defines the **job, rules, and constraints** for each retrieval comp
 - **Cost:** ~$0.0000002 per query (one embedding)
 - **Rule:** Fail-open on errors (accept query if embedding fails)
 - **Do not remove:** Saves LLM cost, prevents garbage-in
+- **`out_of_scope` gating rule:** Rejection fires only when `router_score >= HARD_ACCEPT`. A score below HARD_ACCEPT with family `out_of_scope` passes through -- the low score means the router isn't confident it's out of scope. This gate is applied at both call sites in `backend_service.py`. `personal` is not gated: any router score that resolves to `personal` rejects immediately. Do not add a score gate to `personal` without re-running the full rejection eval -- the asymmetry is intentional.
 
 #### Observability Logging (Jan 2026)
 
