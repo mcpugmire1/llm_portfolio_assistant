@@ -7,13 +7,15 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 ---
 
-## Value Prioritized Roadmap (updated 2026-08-28)
+## Value Prioritized Roadmap (updated 2026-08-30)
 
 **NOW**
-1. **-220** — Router topical taxonomy: 9 of 11 families serve only two set-membership lines; replace with corpus-derived rules. Three-commit plan (delete inert families, rewire rules to real questions, remove topic axis). Replay diff prerequisite.
-2. **-219** — Out_of_scope misroutes and wrong PN exclusions are symptoms of -220's topology. Three xfailed tests (AT&T, Norfolk Southern, amex) go XPASS as a side effect of -220. Depends on -220 for fix direction.
-3. **-128** — Split source panel by kind (project records / positioning docs), extract reason lines from figures, drop trailing question. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
-4. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+1. **-219** — Score gate: out_of_scope fires below HARD_ACCEPT; single change fixes five answerable queries including amex (failing since 2026-03-24). Live visitor harm.
+2. **-221** — Environment stamp on every log write: Env column replaces the five-tier heuristic filter used for visitor identification.
+3. **-222** — Three operational alarms: zero-score (would have caught Jan 29 index outage on first occurrence), anchor-cache drift (sixteen family:unknown rows in Jan 2026), out_of_scope on known entity alias (partially covered by -219 score gate).
+4. **-223** — Sheet migration: retire borderline and offdomain CSVs to Sheet events. Nine and twelve months of production behavior currently local-only.
+5. **-128** — Split source panel by kind (project records / positioning docs), extract reason lines from figures, drop trailing question. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
+6. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT** — Role Match, once the runway clears
 -160 (extractor dropping qualifiers on 7 of 23) · -173 (malformed and comp-only JD behavior) · -159 (sequential gpt-4o loop) · -014 (34 skipped integration scenarios) · -089 (location, work-model, availability) · -012 (Private View Phase 4) · -081 (corrective actions by asset type) · -099 (comp handling) · -017 (logging scenarios)
@@ -118,8 +120,10 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-213](#mattgpt-213) | BDD suite: navigation step definitions duplicated across modules; no shared step module | Open | Low | Refactor / Test | August 26, 2026 |
 | [MATTGPT-214](#mattgpt-214) | Targeted audit: parameters never referenced, comments asserting absent behavior, constants unused, copied blocks with stale variable names | Open | Low | Refactor | August 26, 2026 |
 | [MATTGPT-217](#mattgpt-217) | `_substitute_matt_subject` produces subject pronoun in object position ("reported to he at the CIC") | Open | Low | Bug | August 26, 2026 |
-| [MATTGPT-219](#mattgpt-219) | Router out_of_scope misroutes and wrong PN exclusions -- symptom of -220's topology; three tests xfailed | Open | High | Bug | August 30, 2026 |
-| [MATTGPT-220](#mattgpt-220) | Router topical taxonomy: 9 of 11 families serve only two set-membership lines; replace with corpus-derived rules | Open | High | Refactor | August 30, 2026 |
+| [MATTGPT-219](#mattgpt-219) | Score gate: out_of_scope rejection fires below HARD_ACCEPT, blocking five answerable queries including amex since March | Open | High | Bug | August 30, 2026 |
+| [MATTGPT-221](#mattgpt-221) | Environment stamp on every log write: add Env column to query_logger.py, archive existing CSVs | Open | High | Enhancement | August 30, 2026 |
+| [MATTGPT-222](#mattgpt-222) | Three operational alarms: zero-score, anchor-cache drift, out_of_scope on known entity | Open | High | Enhancement | August 30, 2026 |
+| [MATTGPT-223](#mattgpt-223) | Sheet migration: retire borderline and offdomain CSVs in favor of Sheet events with Event Type column | Open | Medium | Enhancement | August 30, 2026 |
 
 ---
 
@@ -2207,48 +2211,45 @@ Grep targets for Class 3: `except Exception: pass`, `except: pass`, bare `except
 ---
 
 ### MATTGPT-219
-**Router out_of_scope misroutes and wrong PN exclusions -- symptom of -220's topology; three tests xfailed**
+**Score gate: out_of_scope rejection fires below HARD_ACCEPT, blocking five answerable queries including amex since March**
 
 - **Status:** Open
 - **Priority:** High
 - **Type:** Bug
-- **File:** `services/semantic_router.py`, `services/backend_service.py`
+- **File:** `services/backend_service.py:1777`
 - **Logged:** August 30, 2026
-- **Depends on:** MATTGPT-220 (fix direction determined by the -220 plan; these symptoms resolve as a side effect)
 
-**Rescoped August 30, 2026:** The original framing ("misroute fix") was wrong. The misroutes are real, but fixing anchors directly would be tuning a system the -220 inventory concluded shouldn't work that way. The symptoms here resolve through -220's three-commit plan.
+**Rescoped August 30, 2026.** Original framing was a misroute fix dependent on -220's taxonomy cleanup. The actual fix is smaller and independent: a single score gate, no taxonomy change.
 
-**Verified symptoms (August 30, 2026):** All 17 named clients run through `is_portfolio_query_semantic` as "Tell me about Matt's `<client>` work".
+**Confirmed live in production (August 30, 2026):** Five queries hard-stop at `backend_service.py:1777` with the canned "I don't have experience in that industry" response. All five are answerable from the corpus:
+- "Tell me about Matt's amex work" -- 0.696 (failing since 2026-03-24, five months)
+- "Tell me about Matt's AT&T work" -- 0.666
+- "Tell me about Matt's Norfolk Southern work" -- 0.624
+- "Has Matt run on-call rotations?" -- 0.546
+- "Tell me about Matt's experience with raspberry pi" -- 0.611
 
-Three route to out_of_scope:
-- AT&T at 0.666
-- Norfolk Southern at 0.624
-- "amex" at 0.696
+None clear 0.80. A rejection that ignores its own confidence is a bug on its own terms.
 
-In every case `detect_entity` resolves the client correctly. The entity is found; the router rejects the query anyway. A visitor asking about AT&T is told Matt has no experience in that industry while the redirect message lists Telecom as in-scope.
+**Fix:** Do not fire the out_of_scope rejection unless the score clears `HARD_ACCEPT`. One condition. This does not touch the taxonomy.
 
-Alias asymmetry: "American Express" routes to domain_payments at 0.673; "amex" routes to out_of_scope at 0.696. The router never consults `ENTITY_ALIASES`.
+**Three tests xfailed against this ticket** (amex, AT&T, Norfolk Southern in `THRESHOLD_TEST_QUERIES`). All go XPASS when the gate ships.
 
-Wrong PN exclusion: HSBC routes to domain_payments, `domain_payments ∈ _PN_EXCLUDED_FAMILIES`, so positioning stories are stripped from the HSBC pool for a reason unrelated to HSBC. HSBC's own corpus record (Industry: Financial Services / Banking, Sub-category: Technology Strategy & Advisory Services) is never consulted. This is the live behavior consequence of the misroute -- not the label, but the pool exclusion it triggers.
+**Context -- log analysis (August 30, 2026):** Across twelve months of production, eight visitor questions the corpus could have answered and did not. Six were fixed by targeted work before today. The remaining two are these score gate cases.
 
-**Three tests xfailed against this ticket:**
-- The "amex" case in `THRESHOLD_TEST_QUERIES`
-- AT&T case added alongside it
-- Norfolk Southern case added alongside it
+**Known limitation (no ticket):** "Tell me more about the Pivotal Labs partnership" retrieves cleanly at 0.423 and returns a fluent paragraph about Accenture's Georgia Tech innovation hub. It never fabricates a Pivotal relationship, and it never says it does not have one. Pivotal is a deliberate corpus gap. The answer is confidently non-responsive -- a third category, not a routing bug, not a corpus gap to fill, and not fixable by a threshold. Recorded here as a known limitation rather than a ticket.
 
-All three go XPASS as a side effect of MATTGPT-220 commit 2 (rewire `_PN_EXCLUDED_FAMILIES` to the entity-detection rule).
-
-**Discovery:** The Bucket A conversion replaced an LLM-text assertion with a retrieval-observable one. The old assertion checked whether the response contained refusal phrasing, which flaked on word choice and masked a deterministic misclassification. The conversion exposed it on its first run.
+**HSBC / taxonomy note (not this ticket):** HSBC routes to domain_payments, which is in `_PN_EXCLUDED_FAMILIES`, stripping positioning stories for a reason unrelated to HSBC. That behavior is addressed by MATTGPT-220's commit 2 (rewire `_PN_EXCLUDED_FAMILIES` to entity-detection). The score gate here does not change that behavior.
 
 ---
 
 ### MATTGPT-220
 **Router topical taxonomy: 9 of 11 families serve only two set-membership lines; replace with corpus-derived rules**
 
-- **Status:** Open
+- **Status:** Done
 - **Priority:** High
 - **Type:** Refactor
 - **Logged:** August 30, 2026
+- **Resolved:** August 30, 2026 -- inventory complete; remediation plan documented in this block and handed to Code
 
 **Inventory (August 30, 2026):**
 
@@ -2303,6 +2304,68 @@ Fallback if no entity is detected: surviving-family membership (`background`, `n
 **Reference models doing this right:** `SYNTHESIS_THEMES` (reads Theme at boot), `_KNOWN_CLIENTS` (reads Client through a pattern rule), `get_narrative_titles()`, `_CAREER_*_YEAR`, `CAPABILITY_SUBTITLES` (derived key universe + curated prose).
 
 **Cross-references:** MATTGPT-219 (symptoms that resolve through commit 2 of this plan).
+
+---
+
+### MATTGPT-221
+**Environment stamp on every log write: add Env column to query_logger.py, archive existing CSVs**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Enhancement
+- **File:** `config/environment.py` (new), `services/query_logger.py`
+- **Logged:** August 30, 2026
+
+**Why:** Log analysis needed a five-tier heuristic filter to separate Matt's traffic from visitors, reached 96 percent, and could not do better because nothing records who is asking. After this, one column comparison replaces the whole filter.
+
+**Two commits:**
+
+**Commit 1:** Add `config/environment.py` reading `MATTGPT_ENV` via `get_conf`. Add a startup print so a wrong value shows up on the first deploy rather than silently. `MATTGPT_ENV` is already set to "cloud" in Streamlit secrets and "local" in `.env`.
+
+**Commit 2:** Archive both CSVs to `data/archive/` with a date stamp. Append `Env` to the end of `HEADERS` in `query_logger.py` -- end, not middle, or every historical row misaligns. Inject it centrally in `_build_row` so call sites do not change. Add the column to both CSV writers.
+
+**Acceptance criteria:**
+- `MATTGPT_ENV` logged on every row.
+- Wrong or missing value raises at startup, not silently.
+- Historical rows preserved with date-stamped archive before schema changes.
+- No call site changes required -- injection is in `_build_row`.
+
+---
+
+### MATTGPT-222
+**Three operational alarms: zero-score, anchor-cache drift, out_of_scope on known entity**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Enhancement
+- **File:** `services/query_logger.py`, `services/semantic_router.py`
+- **Logged:** August 30, 2026
+
+**Alarm 1 -- zero-score:** Fire when `top_score` is exactly 0.000. This is an empty result set, not a weak match. Would have caught the 2026-01-29 index outage on the first occurrence instead of the sixty-first, and the two August recurrences the day they happened.
+
+**Alarm 2 -- anchor-cache drift:** Assert at startup that `intent_embeddings.json` and `VALID_INTENTS` hold the same keys. The sixteen `family:unknown` rows across 2026-01-18 to 2026-01-21 are that hazard firing silently in production. Startup assertion means the next drift surfaces on deploy, not in the log.
+
+**Alarm 3 -- out_of_scope on known entity alias:** Fire when a query that contains a known entity alias routes to `out_of_scope`. Becomes largely redundant if the MATTGPT-219 score gate ships first, since the gate prevents the rejection from firing. File as covered once -219 is done; do not remove the alarm, as the gate could be bypassed by future anchor additions.
+
+---
+
+### MATTGPT-223
+**Sheet migration: retire borderline and offdomain CSVs in favor of Sheet events with Event Type column**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Enhancement
+- **File:** `services/query_logger.py`
+- **Logged:** August 30, 2026
+
+**Why:** `borderline_queries.csv` and `offdomain_queries.csv` are gitignored and local-only. Nine and twelve months of production behavior exist in one place with no redundancy and no Session ID or User-Agent. The Sheet already carries both; it survives a redeploy; it is where Matt already looks.
+
+**Plan:** Add an `Event Type` column to the Sheet writer. Retire both CSVs by routing the same write calls to Sheet events. Historical CSV data: evaluate for one-time import before deleting the files.
+
+**Acceptance criteria:**
+- Borderline and off-domain events appear in the Sheet with Event Type populated.
+- Both CSVs no longer written after migration.
+- Session ID and User-Agent recorded alongside each event (already in Sheet schema).
 
 ---
 

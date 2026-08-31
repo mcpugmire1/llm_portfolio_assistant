@@ -8,6 +8,16 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Ask Agy
 
+**August 30, 2026 — Router topical taxonomy inventory complete; three-commit remediation plan documented (MATTGPT-220)**
+
+The router's 15 anchor families were inventoried against their actual consumers. Finding: 9 of 11 topical families serve only two set-membership tests (`_PN_EXCLUDED_FAMILIES` and `SUBSTITUTION_FAMILIES`), and three reach nothing at all. No branch reads a topical family label for its topic. Both set memberships proxy for questions the code never asks directly: is this query about the work, or about who Matt is?
+
+Remediation plan (three commits, handed to Code): (1) delete the 3 inert families (`leadership`, `stakeholders`, `innovation`); (2) rewire `_PN_EXCLUDED_FAMILIES` to an entity-detection rule and `SUBSTITUTION_FAMILIES` to the same or unconditional, measured by `probe_163_substitution_impact.py`; (3) remove the 6 topic-axis families after replay diff confirms safe redistribution. Anchors surviving: `background`, `behavioral`, `synthesis`, `narrative`, `personal`, `out_of_scope` -- the query-shape axis, legitimately hand-maintained.
+
+Inventory finding also exposed MATTGPT-219's true fix: the score gate, not the taxonomy. Logged separately.
+
+---
+
 **August 30, 2026 — "Why hire Matt?" synthesis pool restored; Title soft-filter ported to `get_synthesis_stories` (MATTGPT-218)** -- `1633ae4`, `ffac391`, `040b785`
 
 `f1285f1` (Jan 30, 2026) added Title-entity detection and made `rag_answer` treat a Title match as a soft filter: pin the story, keep the pool. `get_synthesis_stories` was not updated at the time; it treated Title like Client and applied it as a hard per-theme filter. The bug was latent until Feb 3 when "Why Hire Matt?" was added to the corpus. From that point, the query "Why hire Matt?" matched the substring and collapsed the synthesis pool to one story. "Why should I hire Matt" (no substring match) continued to return a normal 21-story pool. Same code, different phrasing.
