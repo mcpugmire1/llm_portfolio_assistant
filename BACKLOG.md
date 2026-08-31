@@ -10,7 +10,8 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-08-30)
 
 **NOW**
-1. **-224** — Explore Stories rejection calls st.stop() before grid renders, destroying the browsing context. Every rejection on that page, including correct ones. Live visitor harm.
+1. **-225** — Landing page chat input border lost sporadically. Root cause confirmed: emotion atomic class hash drift causes a transparent override to win over the border rule. Fix: delete the hashed selector group, replace with stable data-baseweb selectors. Live production, primary surface.
+2. **-224** — Explore Stories rejection calls st.stop() before grid renders, destroying the browsing context. Every rejection on that page, including correct ones. Live visitor harm.
 3. **-221** — Environment stamp on every log write: Env column replaces the five-tier heuristic filter used for visitor identification.
 4. **-222** — Three operational alarms: zero-score (would have caught Jan 29 index outage on first occurrence), anchor-cache drift (sixteen family:unknown rows in Jan 2026), out_of_scope on known entity alias (partially covered by -219 score gate).
 5. **-223** — Sheet migration: retire borderline and offdomain CSVs to Sheet events. Nine and twelve months of production behavior currently local-only.
@@ -121,6 +122,7 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-213](#mattgpt-213) | BDD suite: navigation step definitions duplicated across modules; no shared step module | Open | Low | Refactor / Test | August 26, 2026 |
 | [MATTGPT-214](#mattgpt-214) | Targeted audit: parameters never referenced, comments asserting absent behavior, constants unused, copied blocks with stale variable names | Open | Low | Refactor | August 26, 2026 |
 | [MATTGPT-217](#mattgpt-217) | `_substitute_matt_subject` produces subject pronoun in object position ("reported to he at the CIC") | Open | Low | Bug | August 26, 2026 |
+| [MATTGPT-225](#mattgpt-225) | Landing page chat input border lost sporadically: emotion atomic classes land on `<input>` and override border-color transparent | Open | High | Bug | August 30, 2026 |
 | [MATTGPT-221](#mattgpt-221) | Environment stamp on every log write: add Env column to query_logger.py, archive existing CSVs | Open | High | Enhancement | August 30, 2026 |
 | [MATTGPT-222](#mattgpt-222) | Three operational alarms: zero-score, anchor-cache drift, out_of_scope on known entity | Open | High | Enhancement | August 30, 2026 |
 | [MATTGPT-223](#mattgpt-223) | Sheet migration: retire borderline and offdomain CSVs in favor of Sheet events with Event Type column | Open | Medium | Enhancement | August 30, 2026 |
@@ -2396,6 +2398,50 @@ Fallback if no entity is detected: surviving-family membership (`background`, `n
 **Priority note:** This fires on every rejection on that page, including correct ones. It is the worst visitor-facing state found on August 30. Predates the AgGrid swap -- `st.stop()` halts execution before any grid code runs, so no overlay could ever have masked it.
 
 **Distinct from MATTGPT-204:** -204 covers the zero-filter-match case, where the grid runs but renders empty (and `st.dataframe` lacks the empty-state overlay AgGrid had). -224's `st.stop()` halts before any grid code; the two defects share a symptom and have unrelated causes.
+
+---
+
+### MATTGPT-225
+**Landing page chat input border lost sporadically: emotion atomic classes land on `<input>` and override border-color transparent**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **File:** CSS rule group in `ui/styles/global_styles.py` or `ui/pages/ask_mattgpt/styles.py` (source line not yet confirmed; see fix below)
+- **Logged:** August 30, 2026
+
+**Root cause (confirmed in DevTools, August 30, 2026):**
+
+Computed border on the landing page chat input is `2px solid rgba(0,0,0,0)` -- width is present, color is transparent. Three `!important` rules match the input; the transparent killer wins:
+
+- `div[data-testid="stTextInput"] input` -- `border: 2px solid var(--border-color)` (specificity 0,1,2)
+- `.st-key-landing_input .st-bz, .st-c0, .st-c1, .st-c2` -- `border-*-color: transparent` (specificity 0,2,0) -- **wins**
+
+`--border-color` resolves correctly to `#E5E7EB`. The intended rule is fine. The transparent killer is targeting Streamlit's emotion atomic classes, and those hashes now sometimes land directly on the `<input>` element rather than on the wrapper. When they do, the transparent override strips the border. When they do not (prior builds, or some renders), the rule only hits the wrapper and the border survives.
+
+**Why it's sporadic:** Emotion atomic class hashes get reshuffled on Streamlit version bumps and can move between elements. The rule was written against a class layout that no longer consistently holds.
+
+**Proof:** Injecting `.st-key-landing_input div[data-testid="stTextInput"] input { border: 2px solid var(--border-color) !important }` flipped computed `borderColor` to `rgb(229,231,235)` and the border rendered. Probe removed, page left clean.
+
+**Fix:** Delete the `.st-bz/.st-c0/.st-c1/.st-c2` selector group. Replace with stable `data-baseweb` selectors that cover its one legitimate purpose (stripping BaseWeb wrapper chrome):
+
+```css
+.st-key-landing_input div[data-baseweb="input"],
+.st-key-landing_input div[data-baseweb="base-input"],
+.st-key-landing_input div[data-baseweb="input"]:hover,
+.st-key-landing_input div[data-baseweb="input"]:focus-within {
+    border: none !important;
+    background: transparent !important;
+}
+
+.st-key-landing_input div[data-testid="stTextInput"] input {
+    border: 2px solid var(--border-color) !important;
+}
+```
+
+**Pre-flight before touching the file:** identify the current line(s) holding the `.st-bz/.st-c0/.st-c1/.st-c2` group. Verify no other rule in the file targets the same hashes for a different purpose. The fix scope is narrow -- do not disturb other sections of the landing input CSS block.
+
+**CLAUDE.md rule this violates:** "Streamlit class names like `st-emotion-cache-*` change between versions -- target `data-testid` or `.st-key-*` instead." The `st-XX` two-character hashes are the same class of build artifact; they drift on version bumps.
 
 ---
 
