@@ -10,8 +10,8 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-08-28)
 
 **NOW**
-1. **-219** — Router rejects AT&T, Norfolk Southern, and "amex" as out_of_scope while correctly resolving their entities; family assignments wrong on 14 of 17 clients. Three xfailed tests pinned against this ticket.
-2. **-220** — Router and nonsense filter use hand-written taxonomies where corpus fields (Industry, Category, Sub-category, Theme) already carry the answer. Reading exercise: confirm the shape of the gap before proposing a fix.
+1. **-220** — Router and nonsense filter use hand-written taxonomies where corpus fields (Industry, Category, Sub-category, Theme) already carry the answer. Reading exercise: confirm the shape of the gap before proposing a fix. Tells you whether the router should be tuned or replaced before -219 touches anchors.
+2. **-219** — Router rejects AT&T, Norfolk Southern, and "amex" as out_of_scope while correctly resolving their entities; family assignments wrong on 14 of 17 clients. Three xfailed tests pinned against this ticket. Blocked on -220 for fix direction.
 3. **-128** — Split source panel by kind (project records / positioning docs), extract reason lines from figures, drop trailing question. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
 4. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
@@ -2214,6 +2214,7 @@ Grep targets for Class 3: `except Exception: pass`, `except: pass`, bare `except
 - **Type:** Bug
 - **File:** `services/rag_service.py` (`is_portfolio_query_semantic`, intent families)
 - **Logged:** August 30, 2026
+- **Depends on:** MATTGPT-220 (review determines whether router anchors are worth tuning or the system needs rethinking)
 
 **Verified August 30, 2026:** All 17 named clients run through `is_portfolio_query_semantic` as "Tell me about Matt's `<client>` work".
 
