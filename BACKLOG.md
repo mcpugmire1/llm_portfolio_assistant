@@ -10,8 +10,8 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-08-28)
 
 **NOW**
-1. **-220** — Router and nonsense filter use hand-written taxonomies where corpus fields (Industry, Category, Sub-category, Theme) already carry the answer. Reading exercise: confirm the shape of the gap before proposing a fix. Tells you whether the router should be tuned or replaced before -219 touches anchors.
-2. **-219** — Router rejects AT&T, Norfolk Southern, and "amex" as out_of_scope while correctly resolving their entities; family assignments wrong on 14 of 17 clients. Three xfailed tests pinned against this ticket. Blocked on -220 for fix direction.
+1. **-220** — Router topical taxonomy: 9 of 11 families serve only two set-membership lines; replace with corpus-derived rules. Three-commit plan (delete inert families, rewire rules to real questions, remove topic axis). Replay diff prerequisite.
+2. **-219** — Out_of_scope misroutes and wrong PN exclusions are symptoms of -220's topology. Three xfailed tests (AT&T, Norfolk Southern, amex) go XPASS as a side effect of -220. Depends on -220 for fix direction.
 3. **-128** — Split source panel by kind (project records / positioning docs), extract reason lines from figures, drop trailing question. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
 4. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
@@ -118,8 +118,8 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-213](#mattgpt-213) | BDD suite: navigation step definitions duplicated across modules; no shared step module | Open | Low | Refactor / Test | August 26, 2026 |
 | [MATTGPT-214](#mattgpt-214) | Targeted audit: parameters never referenced, comments asserting absent behavior, constants unused, copied blocks with stale variable names | Open | Low | Refactor | August 26, 2026 |
 | [MATTGPT-217](#mattgpt-217) | `_substitute_matt_subject` produces subject pronoun in object position ("reported to he at the CIC") | Open | Low | Bug | August 26, 2026 |
-| [MATTGPT-219](#mattgpt-219) | Router misclassifies real clients as out_of_scope; family assignments do not match the engagement | Open | High | Bug | August 30, 2026 |
-| [MATTGPT-220](#mattgpt-220) | Router and nonsense filter use hand-written taxonomies where the corpus data model already has the answer | Open | Medium | Refactor / Analysis | August 30, 2026 |
+| [MATTGPT-219](#mattgpt-219) | Router out_of_scope misroutes and wrong PN exclusions -- symptom of -220's topology; three tests xfailed | Open | High | Bug | August 30, 2026 |
+| [MATTGPT-220](#mattgpt-220) | Router topical taxonomy: 9 of 11 families serve only two set-membership lines; replace with corpus-derived rules | Open | High | Refactor | August 30, 2026 |
 
 ---
 
@@ -2207,69 +2207,102 @@ Grep targets for Class 3: `except Exception: pass`, `except: pass`, bare `except
 ---
 
 ### MATTGPT-219
-**Router misclassifies real clients as out_of_scope; family assignments do not match the engagement**
+**Router out_of_scope misroutes and wrong PN exclusions -- symptom of -220's topology; three tests xfailed**
 
 - **Status:** Open
 - **Priority:** High
 - **Type:** Bug
-- **File:** `services/rag_service.py` (`is_portfolio_query_semantic`, intent families)
+- **File:** `services/semantic_router.py`, `services/backend_service.py`
 - **Logged:** August 30, 2026
-- **Depends on:** MATTGPT-220 (review determines whether router anchors are worth tuning or the system needs rethinking)
+- **Depends on:** MATTGPT-220 (fix direction determined by the -220 plan; these symptoms resolve as a side effect)
 
-**Verified August 30, 2026:** All 17 named clients run through `is_portfolio_query_semantic` as "Tell me about Matt's `<client>` work".
+**Rescoped August 30, 2026:** The original framing ("misroute fix") was wrong. The misroutes are real, but fixing anchors directly would be tuning a system the -220 inventory concluded shouldn't work that way. The symptoms here resolve through -220's three-commit plan.
+
+**Verified symptoms (August 30, 2026):** All 17 named clients run through `is_portfolio_query_semantic` as "Tell me about Matt's `<client>` work".
 
 Three route to out_of_scope:
 - AT&T at 0.666
 - Norfolk Southern at 0.624
 - "amex" at 0.696
 
-In every case `detect_entity` resolves the client correctly (Client:AT&T, Client:Norfolk Southern, Client:American Express). The entity is found; the router rejects the query anyway. A visitor asking about either engagement is told Matt has no experience in that industry, while the redirect message itself lists Telecom as in-scope.
+In every case `detect_entity` resolves the client correctly. The entity is found; the router rejects the query anyway. A visitor asking about AT&T is told Matt has no experience in that industry while the redirect message lists Telecom as in-scope.
 
-Alias asymmetry: "American Express" routes to domain_payments at 0.673; "amex" routes to out_of_scope at 0.696. The router works on raw text and never consults `ENTITY_ALIASES`, so any short alias can drift independently of its canonical name.
+Alias asymmetry: "American Express" routes to domain_payments at 0.673; "amex" routes to out_of_scope at 0.696. The router never consults `ENTITY_ALIASES`.
 
-Family assignments on the remaining 14 are also wrong -- this is the larger finding:
-- HSBC, Accredited Home Lenders, and Cendant Mortgage all route to domain_payments. None are payments work: HSBC was mortgage transformation, the other two mortgage origination. The router appears to be matching the client's sector rather than what the engagement was.
-- Lockheed Martin routes to technical rather than anything aerospace or defense.
-- Cendian routes to innovation rather than logistics integration.
-- Major U.S. Health System routes to agile_transformation rather than anything health-related.
-
-**Discovery:** The Bucket A conversion replaced an LLM-text assertion with a retrieval-observable one. The old assertion checked whether the response contained refusal phrasing, which flaked on word choice and masked a deterministic misclassification. The conversion exposed it on its first run.
+Wrong PN exclusion: HSBC routes to domain_payments, `domain_payments ∈ _PN_EXCLUDED_FAMILIES`, so positioning stories are stripped from the HSBC pool for a reason unrelated to HSBC. HSBC's own corpus record (Industry: Financial Services / Banking, Sub-category: Technology Strategy & Advisory Services) is never consulted. This is the live behavior consequence of the misroute -- not the label, but the pool exclusion it triggers.
 
 **Three tests xfailed against this ticket:**
 - The "amex" case in `THRESHOLD_TEST_QUERIES`
 - AT&T case added alongside it
 - Norfolk Southern case added alongside it
 
-When the router is fixed, all three go XPASS.
+All three go XPASS as a side effect of MATTGPT-220 commit 2 (rewire `_PN_EXCLUDED_FAMILIES` to the entity-detection rule).
 
-**Cross-references:** MATTGPT-220 (data-model review -- the root cause is that the router never consults the corpus fields that encode what the engagement actually was).
+**Discovery:** The Bucket A conversion replaced an LLM-text assertion with a retrieval-observable one. The old assertion checked whether the response contained refusal phrasing, which flaked on word choice and masked a deterministic misclassification. The conversion exposed it on its first run.
 
 ---
 
 ### MATTGPT-220
-**Router and nonsense filter use hand-written taxonomies where the corpus data model already has the answer**
+**Router topical taxonomy: 9 of 11 families serve only two set-membership lines; replace with corpus-derived rules**
 
 - **Status:** Open
-- **Priority:** Medium
-- **Type:** Refactor / Analysis
+- **Priority:** High
+- **Type:** Refactor
 - **Logged:** August 30, 2026
 
-**Issue:** The router maintains eleven hand-written intent families with hand-written anchor strings. None of them relate to the fields every story already carries: Industry, Category, Sub-category, Theme, Solution/Offering, Competencies. HSBC routes to domain_payments while its own corpus record says Industry: Financial Services and Category: Strategic & Advisory. The right answer was in the data model; the router never looked.
+**Inventory (August 30, 2026):**
 
-**This is a reading exercise, not a grep.** For each hand-written taxonomy, confirm whether a corpus-derived equivalent exists and what the gap looks like. Report findings; do not propose fixes until the full picture is on the table.
+`services/semantic_router.py:32-224` holds 15 hand-typed anchor families. `_classify_embedding` (`:319-349`) flattens every anchor into one dict, takes a global argmax, and reports whichever family the winning anchor belongs to. The family label is a byproduct of the argmax, not a per-family contest.
 
-**Three areas to examine:**
-1. **Intent families (eleven, hand-written):** For each family, identify which corpus fields overlap and whether deriving the routing from those fields would produce more accurate results.
-2. **Nonsense filter patterns (`nonsense_filters.jsonl`):** Same question -- are any patterns approximating something the data model already expresses exactly?
-3. **`ENTITY_ALIASES`:** How does it relate to the Client field in the corpus? The router's alias blindness (MATTGPT-219: "amex" vs "American Express") is a symptom here.
+Of the 11 topical families:
 
-**`SYNTHESIS_THEMES` is the positive model:** It is the one place that does derive from the corpus and is worth using as the reference for what the others could look like.
+| Count | Families | Consumer |
+|---|---|---|
+| 3 | `leadership`, `stakeholders`, `innovation` | none -- telemetry only |
+| 6 | `technical`, `delivery`, `team_scaling`, `agile_transformation`, `domain_payments`, `domain_healthcare` | the two set-membership tests only |
+| 2 | `background`, `behavioral` | real branches (`diversify_results` `backend_service.py:1525`; `is_trusted_behavioral` `:1970`) |
 
-**Related finding (August 30, 2026):** Synthesis fires on 2 of 64 eval queries because breadth competes with eleven topic families for one slot. If those families are also mislabeling the work, the taxonomy is doing less than it appears on both axes -- fewer synthesis queries and wrongly classified standard queries.
+The two sets, verbatim:
+- `SUBSTITUTION_FAMILIES` = `{technical, team_scaling, agile_transformation}` -- `config/constants.py:73`
+- `_PN_EXCLUDED_FAMILIES` = `{technical, delivery, domain_payments, domain_healthcare, agile_transformation}` -- `backend_service.py:141-149`
 
-**Distinction from MATTGPT-214:** -214 looks for rules applied in one path and missing in another. This looks for parallel taxonomies where the data model would have served -- a different kind of redundancy.
+Union = the 6 topic-axis families exactly. `technical` and `agile_transformation` are in both.
 
-**Cross-references:** MATTGPT-219 (the out_of_scope misclassification is a concrete instance of what this ticket is looking for).
+Six hand-maintained families of anchor strings exist to evaluate two set-membership lines, and three exist to be written to a log column. Nothing reads a topical family for its topic.
+
+**Why the HSBC case looks like a misroute but isn't -- and why it still matters:**
+`domain_payments` anchors include "financial services" and "banking" (`:107-112`), so an HSBC query lands there. Nothing branches on topic, so the wrong label causes no topic error -- but `domain_payments ∈ _PN_EXCLUDED_FAMILIES`, so positioning stories are stripped from the pool for a reason unrelated to HSBC. HSBC's own record (Industry: Financial Services / Banking, Sub-category: Technology Strategy & Advisory Services) is never consulted.
+
+Both list memberships are proxies for questions the code never asks directly:
+- `_PN_EXCLUDED_FAMILIES` wants: should a summary count as evidence for this query?
+- `SUBSTITUTION_FAMILIES` wants: what voice should the answer use?
+
+**Caveat on corpus-field substitution:** Field-existence is not classification. No single corpus field substitutes directly: Theme has 7 values (5 map), Category puts 86/123 stories in one bucket, Industry puts 57/123 in "Cross Industry". The anchors are a bridge into the taxonomy, built without reading the labels on the far side. The right replacement is a rule that asks the right question, not a field lookup.
+
+**Plan -- Option B (stop classifying topic):**
+
+Prerequisite: replay diff. Run borderline log, off-domain log, and eval suite through the reduced anchor pool and diff family assignments. Embeddings only, cache hit, no LLM. Because the argmax is global, removing anchors makes affected queries fall to their second-best anchor (necessarily a query-shape family that branches). The 0.8 floor is safe -- the pool only shrinks and behavioral anchors stay -- but risk is silent reclassification, not recalibration. Result may reshape commit 3.
+
+**Commit 1:** Delete the 3 inert families (`leadership`, `stakeholders`, `innovation`). No consumer for the label; no rule-behavior change. Their anchor strings still compete in the argmax, so same replay hygiene applies at smaller scale.
+
+**Commit 2:** Rewire the two rules to their real question. This is the only commit with a behavior change.
+
+`_PN_EXCLUDED_FAMILIES` -- replace with entity-detection rule: if the query names a real Client / Employer / Division, it is an evidence query and summaries are excluded; otherwise summaries are eligible. Detection already exists via `ENTITY_DETECTION_FIELDS` (`constants.py:130`) against corpus values. Corpus-derived, not hand-typed. Also fixes the MATTGPT-219 symptoms head-on: "what did Matt do at HSBC?" names an entity, so the exclusion fires for the right reason.
+
+Fallback if no entity is detected: surviving-family membership (`background`, `narrative`, `personal`, `synthesis` are about-Matt shapes; unknown defaults to evidence-mode). This reintroduces a hand-maintained set at smaller scale; replay diff is the gate for choosing members honestly.
+
+`SUBSTITUTION_FAMILIES` -- whether this should be unconditional is measurable, not a judgment call. Rerun `probe_163_substitution_impact.py` with substitution applied to every query instead of the three gated families and compare. Do this alongside the replay diff.
+
+**Commit 3:** Remove the 6 topic-axis families. Only a deletion once nothing reads the labels; shape depends on the replay diff.
+
+**Anchors surviving:** `background`, `behavioral`, `synthesis`, `narrative`, `personal`, `out_of_scope` -- the query-shape axis, which has no corpus field to derive from and is legitimately hand-maintained.
+
+**Not findings (legitimately hand-maintained or orthogonal):**
+`nonsense_filters.jsonl`, `INVALID_INTENTS`, `EXCLUDED_THEMES`, `EXCLUDED_DIVISION_VALUES`, `META_COMMENTARY_PATTERNS`, `MONITORING_BOT_SIGNATURES`. `ENTITY_ALIASES` is partly derivable (~7 of 10 follow initials / drop-ampersand rules on canonical Client/Division values); the rest are true nicknames -- separate, smaller ticket.
+
+**Reference models doing this right:** `SYNTHESIS_THEMES` (reads Theme at boot), `_KNOWN_CLIENTS` (reads Client through a pattern rule), `get_narrative_titles()`, `_CAREER_*_YEAR`, `CAPABILITY_SUBTITLES` (derived key universe + curated prose).
+
+**Cross-references:** MATTGPT-219 (symptoms that resolve through commit 2 of this plan).
 
 ---
 
