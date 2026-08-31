@@ -27,6 +27,7 @@ import streamlit.components.v1.components  # noqa: F401 — pre-import so the
 # auto-import the submodule; AgGrid 0.3.4.post3 assumes it does.
 from dotenv import load_dotenv
 
+from config.constants import HARD_ACCEPT
 from config.debug import DEBUG
 from services.query_logger import log_query
 from services.rag_service import semantic_search
@@ -949,20 +950,31 @@ def render_explore_stories(
             st.session_state["last_results"] = []
             st.stop()
         else:
-            # Semantic router gate — catch personal/out_of_scope before Pinecone
-            _, _, _, intent_family = is_portfolio_query_semantic(current_query)
-            if intent_family in ("personal", "out_of_scope"):
+            # Semantic router gate — catch personal/out_of_scope before Pinecone.
+            # MATTGPT-219: out_of_scope is gated on HARD_ACCEPT so low-confidence
+            # misroutes (Amex/AT&T/NSC/on-call/raspberry pi) fall through to
+            # Pinecone. Personal stays unconditional -- no misroute class
+            # observed there.
+            _, semantic_score, _, intent_family = is_portfolio_query_semantic(
+                current_query
+            )
+            reject_reason = None
+            if intent_family == "personal":
+                reject_reason = "personal"
+            elif intent_family == "out_of_scope" and semantic_score >= HARD_ACCEPT:
+                reject_reason = "out_of_scope"
+            if reject_reason:
                 log_query(
                     current_query,
                     "My Work",
                     intent_family=intent_family,
-                    redirect_reason=f"semantic_router:{intent_family}",
+                    redirect_reason=f"semantic_router:{reject_reason}",
                 )
                 st.session_state.pop(LAST_RESULTS, None)
                 st.session_state.pop(LAST_CONFIDENCE, None)
                 st.session_state.pop(LAST_QUERY, None)
                 render_no_match_banner(
-                    reason=f"semantic_router:{intent_family}",
+                    reason=f"semantic_router:{reject_reason}",
                     query=current_query,
                     overlap=None,
                     suppressed=True,

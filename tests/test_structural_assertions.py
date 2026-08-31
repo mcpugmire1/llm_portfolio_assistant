@@ -490,38 +490,63 @@ THRESHOLD_TEST_QUERIES = [
     {
         "query": "Tell me about Matt's amex work",
         "should_pass": True,
-        "note": "score=0.45",
-        "xfail_reason": (
-            "MATTGPT-219: router misroutes the 'amex' alias to out_of_scope. "
-            "Canonical 'American Express' routes to domain_payments correctly "
-            "(the router works on raw text; ENTITY_ALIASES does not feed into "
-            "the router's embedding space). Remove xfail_reason when -219 ships."
+        "note": (
+            "router=out_of_scope@0.696 (below HARD_ACCEPT); MATTGPT-219 score "
+            "gate lets it fall through to Pinecone where American Express "
+            "stories match."
         ),
     },
     {"query": "leadership", "should_pass": True, "note": "score=0.49"},
+    {
+        "query": "What industries has Matt worked in?",
+        "should_pass": True,
+        "note": (
+            "Now routes to background@~1.0 (verbatim anchor). Historical: "
+            "misrouted to out_of_scope@0.764 on 2026-07-30 before the same-day "
+            "cache rebuild in commit fe2ec2c. Regression test — prevents "
+            "recurrence if the anchor is removed or the cache goes stale again."
+        ),
+    },
     # Real clients that misroute to out_of_scope on the "Tell me about Matt's
     # <client> work" pattern -- surfaced during Bucket A conversion when the
     # deterministic assertion replaced the LLM-text proxy. See MATTGPT-219.
     {
         "query": "Tell me about Matt's AT&T work",
         "should_pass": True,
-        "note": "router=out_of_scope (0.666); detect_entity finds Client:AT&T",
-        "xfail_reason": (
-            "MATTGPT-219: router's out_of_scope anchors over-fire on AT&T "
-            "(a real telecom client in the portfolio). The out_of_scope "
-            "redirect response text explicitly lists Telecom as in-scope, "
-            "so the classification contradicts the redirect. Remove "
-            "xfail_reason when -219 ships."
+        "note": (
+            "router=out_of_scope@0.666 (below HARD_ACCEPT); MATTGPT-219 gate "
+            "lets it through. detect_entity finds Client:AT&T; corpus has 6 "
+            "AT&T stories."
         ),
     },
     {
         "query": "Tell me about Matt's Norfolk Southern work",
         "should_pass": True,
-        "note": "router=out_of_scope (0.624); detect_entity finds Client:Norfolk Southern",
-        "xfail_reason": (
-            "MATTGPT-219: router's out_of_scope anchors over-fire on Norfolk "
-            "Southern (a real rail/logistics client in the portfolio). Same "
-            "class of misroute as AT&T. Remove xfail_reason when -219 ships."
+        "note": (
+            "router=out_of_scope@0.624 (below HARD_ACCEPT); MATTGPT-219 gate "
+            "lets it through. detect_entity finds Client:Norfolk Southern; "
+            "corpus has 6 NSC stories."
+        ),
+    },
+    # Same out_of_scope over-fire class as AT&T/NSC, but on non-client
+    # queries the corpus can still answer -- operational practice and
+    # hardware technology. Surfaced during MATTGPT-219 log analysis;
+    # protected by the same HARD_ACCEPT score gate.
+    {
+        "query": "Has Matt run on-call rotations?",
+        "should_pass": True,
+        "note": (
+            "router=out_of_scope@0.546 (below HARD_ACCEPT); MATTGPT-219 gate "
+            "lets it through. Corpus has 7 on-call mentions across 6 stories."
+        ),
+    },
+    {
+        "query": "Tell me about Matt's experience with raspberry pi",
+        "should_pass": True,
+        "note": (
+            "router=out_of_scope@0.611 (below HARD_ACCEPT); MATTGPT-219 gate "
+            "lets it through. Liquid Studio connected-devices story matches "
+            "at pc=0.336."
         ),
     },
     # Should FAIL (garbage/off-topic)

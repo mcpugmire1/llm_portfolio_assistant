@@ -19,6 +19,7 @@ from config.constants import (
     ENTITY_ALIASES,
     ENTITY_DETECTION_FIELDS,
     EXCLUDED_DIVISION_VALUES,
+    HARD_ACCEPT,
     META_COMMENTARY_REGEX_PATTERNS,
     PINECONE_LOWERCASE_FIELDS,
     SEARCH_TOP_K,
@@ -1774,7 +1775,17 @@ def rag_answer(
         # This uses embedding similarity (free, fast) instead of LLM calls.
         # Checked BEFORE Pinecone to avoid unnecessary search costs.
         # =================================================================
-        if intent_family == "out_of_scope" and not from_suggestion:
+        # MATTGPT-219: Gate on router confidence. Below HARD_ACCEPT the router
+        # is admitting uncertainty; the canned rejection fires only when the
+        # router is genuinely confident this is off-topic. Real clients (Amex,
+        # AT&T, NSC) and legitimate technical queries (on-call, raspberry pi)
+        # sat at 0.55-0.70 and were being hard-stopped despite the corpus
+        # holding the answer. Above HARD_ACCEPT the rejection behaves as before.
+        if (
+            intent_family == "out_of_scope"
+            and semantic_score >= HARD_ACCEPT
+            and not from_suggestion
+        ):
             out_of_scope_response = """🐾 I don't have experience in that industry. Matt's work is primarily in **Financial Services**, **Healthcare/Life Sciences**, **Telecom**, and **Technology/SaaS**.
 
 Would you like to explore how his work in **platform modernization**, **payments systems**, or **enterprise transformation** might apply to your context?"""
