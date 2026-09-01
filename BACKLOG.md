@@ -10,7 +10,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-09-01, evening)
 
 **NOW**
-1. **-230** — My Work search silently degrades to keyword fallback for the life of a session. Visitor sees "No strong matches" on work that exists, with no way to know the app is broken rather than the corpus empty. Latches; only a new session recovers.
+1. **-230** — Zero-result fallback returns a false denial during Pinecone downtime. Log confirmed a single 3:37 outage window Sept 1; no latch, no session state. Scope: log line records why (not just that), error banner replaces false "no results."
 2. **-234** — `personal` branch hard-stops generic off-topic queries before the overlap gate fires, with rejection copy that reads as though the visitor asked something personal. One line at two call sites, same pattern as -219. ARCHITECTURE.md:664 constraint: re-run the rejection eval as the acceptance condition.
 3. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
 4. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
@@ -131,7 +131,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-144](#mattgpt-144) | Regression: `explore_stories.py:1187,1199` still says "projects" after June 30 count-noun fix; no singular form | Open | Medium | Bug | August 31, 2026 |
 | [MATTGPT-228](#mattgpt-228) | Deep link param never consumed: `?story=<id>` re-applies on refresh, no in-app escape; offset inherited across searches | Open | High | Bug | August 31, 2026 |
 | [MATTGPT-229](#mattgpt-229) | Asking Agy "why hire matt" flashes My Work table view before landing on conversation | Open | Medium | Bug | September 1, 2026 |
-| [MATTGPT-230](#mattgpt-230) | My Work search silently degrades to keyword fallback for the life of a session; visitor sees "No strong matches" on work that exists | Open | High | Bug | September 1, 2026 |
+| [MATTGPT-230](#mattgpt-230) | Zero-result fallback writes misleading log row and returns false denial when Pinecone is down; log line should record why, not just that | Open | Medium | Bug | September 1, 2026 |
 | [MATTGPT-232](#mattgpt-232) | `requirements_temp.txt` in repo root -- remove | Open | Low | Hygiene | September 1, 2026 |
 | [MATTGPT-233](#mattgpt-233) | Phase 2: extend pre-push gate to BDD suite, `test_agy_behavior.py`, `test_structural_assertions.py` | Open | Medium | Infra | September 1, 2026 |
 | [MATTGPT-234](#mattgpt-234) | `personal` router branch hard-stops generic off-topic queries before overlap gate fires; wrong rejection copy | Open | Medium | Bug | September 1, 2026 |
@@ -2430,30 +2430,31 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 ---
 
 ### MATTGPT-230
-**My Work search silently degrades to keyword fallback for the life of a session; visitor sees "No strong matches" on work that exists**
+**Zero-result fallback writes misleading log row and returns false denial when Pinecone is down; log line should record why, not just that**
 
 - **Status:** Open
-- **Priority:** High
+- **Priority:** Medium
 - **Type:** Bug
-- **File:** Unknown -- likely `services/rag_service.py` or `services/pinecone_service.py` embedding path
+- **File:** `services/rag_service.py:96` (log line), `ui/pages/explore_stories.py` (banner path)
 - **Logged:** September 1, 2026
 
-**Observation (production, two sessions, September 1, 2026):** My Work search runs in two modes with no visitor-visible distinction. Healthy: "Found N matching stories," ranked results. Degraded: "Showing closest matches, relevance may be low" or "No strong matches," zero results, apparent keyword-only fallback.
+**What the log settled (verified September 1, 2026):** The query logger shows a 3:37 upstream outage window -- everything between 15:47:18 and 15:50:55 returned zero. The same query ran clean at 16:15:49, 25 minutes after the window closed. Session B's apparent "fix" was coincidence; the outage had already ended. This is a single occurrence in four months of logs. July, August, and the rest of September 1 show only scattered honest misses (`humana`, `cendia`, typo tests). No latch, no replica divergence, no session state to unwind -- a 3.5-minute upstream blip.
 
-Session 1: "Tell me about Matt's AT&T work" and "How did Matt scale a Cloud Innovation Center?" both returned zero with "No strong matches." Reset filters did not recover. Only a new session did. Session 2 (minutes later, same build): both queries returned 25. The first query in session 1 was already degraded -- nothing the visitor did caused it. Bare keywords like "Cloud Innovation Center" still returned rows in the degraded session, consistent with keyword fallback active and embeddings not firing.
+**What the defect actually is:** At 15:50:30, "why should i hire matt" returned zero results with "Matt may not have worked with this client or topic." That is the flagship query producing a false denial during a Pinecone outage. The fallback engaged but was indistinguishable from a correct no-results response. Cheap to make honest, worth doing on principle regardless of frequency.
 
-**Hypothesis:** An embedding call fails or rate-limits early in the session. The app catches the exception silently, falls back to keyword matching, and that fallback latches for the life of the session. The visitor sees a bad-result banner rather than an error.
+**The logging problem that made diagnosis slow:** Three different causes -- compensation filter, -219 hard-stop, and the zero-result fallback -- all wrote the same row shape to the query logger. The only way to distinguish them was manual pattern-matching across timestamps. The log line at `rag_service.py:96` should record why the result was zero, not just that it was. The same argument applies to the existing `log_query` call: one row shape for all zero outcomes means the next analysis repeats today's pattern-matching exercise.
 
-**Visitor impact:** A recruiter searching for a specific client or topic sees "Matt may not have worked with this client or topic" on work he demonstrably did. No in-app signal that the app is broken rather than the corpus empty. High priority because the degraded session is indistinguishable from a correct "no results."
+**Scope (no mechanism hunt, no recovery logic):**
+1. Unconditional log line at `rag_service.py:96`: write the cause to `redirect_reason` so the next incident leaves a distinguishable trace.
+2. Error banner instead of confidence banner when the fallback engages: "search is temporarily unavailable" rather than "Matt may not have worked with this client or topic."
+3. No session flag, no latch unwiring -- the log confirms there is no persistent degraded state to address.
 
-**Diagnostic handle:** The low-relevance banner ("Showing closest matches, relevance may be low") is the tell. If it appears on a query with known matches, or a known-match query returns zero, the session is degraded.
-
-**Related:** MATTGPT-162 fixed the same class of silent failure on Ask Agy -- `_embed` was swallowing exceptions and returning a zero vector. Check whether My Work's embedding path has the same defect before diagnosing further.
+**Open question (separate investigation):** Ask Agy rows show "Tell me about Matt's AT&T work" returning zero on August 31 and an Accenture query returning zero twice in late August. Both are outside the September 1 window. Either a second upstream incident nobody noticed, or a genuine retrieval gap on that phrasing. Re-run both queries -- if they return results today, the log has an earlier outage that is unaccounted for.
 
 **Acceptance:**
-- Identify the fallback path and what triggers it.
-- Either recover on the next query (don't latch the bad state) or surface a visible error rather than returning silently degraded results.
-- Log at the moment of fallback so the next incident leaves a trace.
+- Zero-result fallback writes a distinguishable `redirect_reason` to the query log.
+- Visitor sees an error banner, not a false "no results" denial, when the fallback engages.
+- No change to session management or embedding path.
 
 ---
 
