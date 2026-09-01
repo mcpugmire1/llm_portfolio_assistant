@@ -355,6 +355,15 @@ def _render_confidence_banner(query: str, confidence: str, results: list[dict]):
     )
 
 
+def _render_degraded_banner(query: str, *, has_results: bool) -> None:
+    """MATTGPT-230: render honest-copy banner during Pinecone downtime.
+
+    Two shapes based on whether the keyword fallback returned rows.
+    Stub -- Red commit only; Green fills in the markdown call.
+    """
+    raise NotImplementedError("MATTGPT-230")
+
+
 def _default_view(stories: list[dict], F: dict) -> list[dict]:
     """Return the fallback story view when a rejected query needs a default.
 

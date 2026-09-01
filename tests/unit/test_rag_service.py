@@ -448,3 +448,135 @@ class TestSemanticSearchNoRegression:
             in mock_st.session_state["__pc_snippets__"]["story-1|jpmc"]
         )
         assert "story-1|jpmc" in mock_st.session_state["__last_ranked_sources__"]
+
+
+class TestSemanticSearchFallbackReason:
+    """MATTGPT-230: preserve pinecone_semantic_search's None vs [] distinction.
+
+    None means Pinecone failed upstream; [] means Pinecone ran and found nothing.
+    Only the None case adds reason="pinecone_unavailable" to the return dict so
+    the UI can render an honest-copy banner instead of a misleading confidence
+    banner.
+    """
+
+    @patch("services.rag_service.pinecone_semantic_search")
+    @patch("services.rag_service.st")
+    def test_pinecone_returns_none_with_keyword_hits_sets_reason(
+        self, mock_st, mock_pinecone, sample_stories_with_industry
+    ):
+        """Pinecone upstream failure with a query that keyword-matches: reason set, keyword rows returned."""
+        mock_st.session_state = {}
+        mock_pinecone.return_value = (
+            None  # Upstream failure (embed raise, init None, query raise)
+        )
+
+        # q="payments" keyword-matches story-1|jpmc via Title "Payments Platform"
+        filters = {
+            "industry": "",
+            "capability": "",
+            "era": "",
+            "clients": [],
+            "domains": [],
+            "roles": [],
+            "tags": [],
+            "q": "payments",
+        }
+
+        result = semantic_search(
+            query="payments",
+            filters=filters,
+            stories=sample_stories_with_industry,
+        )
+
+        assert result["reason"] == "pinecone_unavailable"
+        assert len(result["results"]) >= 1
+        assert result["confidence"] == "low"
+
+    @patch("services.rag_service.pinecone_semantic_search")
+    @patch("services.rag_service.st")
+    def test_pinecone_returns_none_with_no_keyword_hits_sets_reason(
+        self, mock_st, mock_pinecone, sample_stories_with_industry
+    ):
+        """Pinecone upstream failure with a query that keyword-matches nothing: reason set, empty results."""
+        mock_st.session_state = {}
+        mock_pinecone.return_value = None
+
+        filters = {
+            "industry": "",
+            "capability": "",
+            "era": "",
+            "clients": [],
+            "domains": [],
+            "roles": [],
+            "tags": [],
+            "q": "zzznonexistenttoken",
+        }
+
+        result = semantic_search(
+            query="zzznonexistenttoken",
+            filters=filters,
+            stories=sample_stories_with_industry,
+        )
+
+        assert result["reason"] == "pinecone_unavailable"
+        assert result["results"] == []
+        assert result["confidence"] == "none"
+
+    @patch("services.rag_service.pinecone_semantic_search")
+    @patch("services.rag_service.st")
+    def test_pinecone_returns_empty_list_omits_reason(
+        self, mock_st, mock_pinecone, sample_stories_with_industry
+    ):
+        """Pinecone alive but zero matches (regression guard): no reason -- distinguishable from outage."""
+        mock_st.session_state = {}
+        mock_pinecone.return_value = []  # Pinecone healthy, no matches
+
+        filters = {
+            "industry": "",
+            "capability": "",
+            "era": "",
+            "clients": [],
+            "domains": [],
+            "roles": [],
+            "tags": [],
+            "q": "zzznonexistenttoken",
+        }
+
+        result = semantic_search(
+            query="zzznonexistenttoken",
+            filters=filters,
+            stories=sample_stories_with_industry,
+        )
+
+        assert "reason" not in result
+        assert result["results"] == []
+        assert result["confidence"] == "none"
+
+    @patch("services.rag_service.pinecone_semantic_search")
+    @patch("services.rag_service.st")
+    def test_pinecone_returns_hits_omits_reason(
+        self, mock_st, mock_pinecone, sample_stories_with_industry, mock_pinecone_hits
+    ):
+        """Healthy Pinecone response (regression guard): no reason on the healthy path."""
+        mock_st.session_state = {}
+        mock_pinecone.return_value = mock_pinecone_hits
+
+        filters = {
+            "industry": "",
+            "capability": "",
+            "era": "",
+            "clients": [],
+            "domains": [],
+            "roles": [],
+            "tags": [],
+        }
+
+        result = semantic_search(
+            query="transformation",
+            filters=filters,
+            stories=sample_stories_with_industry,
+        )
+
+        assert "reason" not in result
+        assert len(result["results"]) >= 1
+        assert result["confidence"] == "high"

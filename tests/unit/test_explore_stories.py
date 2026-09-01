@@ -465,3 +465,41 @@ class TestResetFiltersPreservesReturnToLanding:
         assert "_some_widget_state" not in session_state, "Other state should clear"
         # return_to_landing still preserved
         assert session_state["return_to_landing"] == "banking"
+
+
+# ============================================================================
+# MATTGPT-230: _render_degraded_banner
+# ============================================================================
+from unittest.mock import patch  # noqa: E402
+
+
+class TestRenderDegradedBanner:
+    """MATTGPT-230: honest-copy banner replaces the misleading 'closest matches'
+    framing during Pinecone downtime. Two shapes based on whether keyword
+    fallback returned rows.
+    """
+
+    @patch("ui.pages.explore_stories.st")
+    def test_degraded_banner_with_results_renders_degraded_copy(self, mock_st):
+        """Fallback returned rows: banner says degraded, keyword matches only."""
+        from ui.pages.explore_stories import _render_degraded_banner
+
+        _render_degraded_banner("payments", has_results=True)
+
+        rendered = " ".join(str(c) for c in mock_st.markdown.call_args_list)
+        assert (
+            "Search is temporarily degraded. Showing keyword matches only: "
+            "try again shortly for full results."
+        ) in rendered
+
+    @patch("ui.pages.explore_stories.st")
+    def test_degraded_banner_without_results_renders_unavailable_copy(self, mock_st):
+        """Fallback returned nothing: banner says unavailable, no false denial."""
+        from ui.pages.explore_stories import _render_degraded_banner
+
+        _render_degraded_banner("payments", has_results=False)
+
+        rendered = " ".join(str(c) for c in mock_st.markdown.call_args_list)
+        assert (
+            "Search is temporarily unavailable. Please try again shortly."
+        ) in rendered
