@@ -2459,7 +2459,21 @@ Fallback if no entity is detected: surviving-family membership (`background`, `n
 
 **Loose end:** A script counted 8 Accenture PN stories; only 5 appear in the filtered result. Likely a `Client` vs `Employer` field discrepancy -- PN stories may carry `Employer=Accenture` rather than `Client=Accenture`. Confirm before scoping the fix.
 
-**Implementation:** Add the PN exclusion to `_default_view`'s filtered return and have PATH 3's `has_filters` branch call the helper rather than duplicating the literal. A load-time filter was tried during MATTGPT-224 and backed out because it broke deep links -- do not reintroduce it.
+**Implementation:** Settled pattern -- hoist `non_pn` so the literal appears exactly once, then branch on filters:
+
+```python
+non_pn = [s for s in stories if s.get("Theme") != "Professional Narrative"]
+filters_without_q = {k: v for k, v in F.items() if k != "q"}
+if any(filters_without_q.values()):
+    return [s for s in non_pn if matches_filters(s, filters_without_q)]
+return sorted(non_pn, key=lambda s: s.get("Start_Date", ""), reverse=True)
+```
+
+Change 2: Replace PATH 3's `has_filters` block with a single `_default_view(stories, F)` call. Fully remove the `has_filters` variable and its `else` branch -- do not leave them computing something nothing reads. Add docstring note that PATH 3 calls this function so the "one canonical location" claim is literally true.
+
+A load-time filter was tried during MATTGPT-224 and backed out because it broke deep links -- do not reintroduce it.
+
+**Commit sequencing:** MATTGPT-224 ships first as its own commit (already green). This fix ships as a separate commit against MATTGPT-227 only.
 
 **Tests:** Accenture filter returns no PN titles; search still returns them; `?story=why-hire-matt|accenture` renders the story detail.
 
