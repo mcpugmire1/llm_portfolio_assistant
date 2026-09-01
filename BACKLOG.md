@@ -2449,8 +2449,6 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 2. Error banner instead of confidence banner when the fallback engages: "search is temporarily unavailable" rather than "Matt may not have worked with this client or topic."
 3. No session flag, no latch unwiring -- the log confirms there is no persistent degraded state to address.
 
-**Open question (separate investigation):** Ask Agy rows show "Tell me about Matt's AT&T work" returning zero on August 31 and an Accenture query returning zero twice in late August. Both are outside the September 1 window. Either a second upstream incident nobody noticed, or a genuine retrieval gap on that phrasing. Re-run both queries -- if they return results today, the log has an earlier outage that is unaccounted for.
-
 **Acceptance:**
 - Zero-result fallback writes a distinguishable `redirect_reason` to the query log.
 - Visitor sees an error banner, not a false "no results" denial, when the fallback engages.
