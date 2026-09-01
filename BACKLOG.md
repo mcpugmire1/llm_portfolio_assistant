@@ -1239,7 +1239,13 @@ The bug is that Blocks A and B have no lower bound, so they leak into the ≤480
 
 Live example: filtering to Accenture shows "🐾 Showing 41 Accenture projects." This is a factual error -- 41 stories across Accenture engagements is not 41 projects; one project can have multiple stories. A technical reader filtering by client will notice. Line 1199 also has no singular form, so one result reads "Showing 1 Adjunct Professor projects."
 
-**Fix:** Two lines. Replace "projects" with `"story" if len(view) == 1 else "stories"` at line 1199 and "stories" at line 1187 (zero-match case, plural always appropriate). Same pattern as line 337 in the same file.
+**Fix:** Three parts, not two lines.
+
+1. Define a `STORY_NOUN` constant (or `story_noun(n)` helper) in `config/constants.py` that returns "story" / "stories" based on count. Both the page and the tests read from it.
+2. Replace the hardcoded "projects" at lines 1187 and 1199 with that constant.
+3. Update the three test files that hardcode the count noun to use the same constant.
+
+Fixing only the two lines produces the third regression with the same shape as the first two: the next build touches the wording somewhere else, tests still pass, and the noun drifts again. A single `STORY_NOUN` source means any site not using it becomes visibly inconsistent at read time.
 
 **Root cause of incomplete fix (June 30 session note):** Count noun was hardcoded in three separate test files rather than pulled from a shared constant. The fix landed on the observed-broken lines and missed 1187 and 1199. The acceptance criterion that would have caught it: name every site that labels a story count, verify all of them. That criterion was stated at close time and not applied.
 
