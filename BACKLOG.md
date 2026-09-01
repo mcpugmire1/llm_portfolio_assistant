@@ -41,7 +41,7 @@ Wrong-assertion test: -203 · -209 (drift guard searches wrong scope)
 Small refactors: -140, -153, -086, -062, -082, -083, -084, -150, -060, -217 (pronoun grammar in substitution)
 BDD structure: -213 (shared step definitions)
 Correctness audit: -214 (parameters, comments, constants, copied blocks) · -226 (dead `.main` selectors, ~299 declarations matching 0 elements)
-Infrastructure: -035, -039, -040, -045 · -231 (integration scope added to pre-push hook, no ticket) · -232 (requirements_temp.txt removal)
+Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/agy-behavior/structural suites) · -232 (requirements_temp.txt removal)
 
 ---
 
@@ -126,8 +126,8 @@ Infrastructure: -035, -039, -040, -045 · -231 (integration scope added to pre-p
 | [MATTGPT-228](#mattgpt-228) | Deep link param never consumed: `?story=<id>` re-applies on refresh, no in-app escape; offset inherited across searches | Open | High | Bug | August 31, 2026 |
 | [MATTGPT-229](#mattgpt-229) | Asking Agy "why hire matt" flashes My Work table view before landing on conversation | Open | Medium | Bug | September 1, 2026 |
 | [MATTGPT-230](#mattgpt-230) | My Work search silently degrades to keyword fallback for the life of a session; visitor sees "No strong matches" on work that exists | Open | High | Bug | September 1, 2026 |
-| [MATTGPT-231](#mattgpt-231) | Pre-push hook widened to include integration tests without a ticket | Open | Low | Infra | September 1, 2026 |
 | [MATTGPT-232](#mattgpt-232) | `requirements_temp.txt` in repo root -- remove | Open | Low | Hygiene | September 1, 2026 |
+| [MATTGPT-233](#mattgpt-233) | Phase 2: extend pre-push gate to BDD suite, `test_agy_behavior.py`, `test_structural_assertions.py` | Open | Medium | Infra | September 1, 2026 |
 | [MATTGPT-226](#mattgpt-226) | Dead `.main` selectors across `ui/styles/` after `.main → .stMain` refactor: 31 selectors, ~299 declarations, all matching 0 elements | Open | Medium | Refactor / Tech debt | August 31, 2026 |
 | [MATTGPT-221](#mattgpt-221) | Environment stamp on every log write: add Env column to query_logger.py, archive existing CSVs | Open | High | Enhancement | August 30, 2026 |
 | [MATTGPT-222](#mattgpt-222) | Three operational alarms: zero-score, anchor-cache drift, out_of_scope on known entity | Open | High | Enhancement | August 30, 2026 |
@@ -142,6 +142,7 @@ Infrastructure: -035, -039, -040, -045 · -231 (integration scope added to pre-p
 
 | ID | Title | Status | Priority | Type | Logged |
 |---|---|---|---|---|---|
+| [MATTGPT-231](#mattgpt-231) | Pre-push hook widened to include integration tests -- filed on false premise; widening was `8d1f4ce` under MATTGPT-216 | Decided Against | Low | Infra | September 1, 2026 |
 | [MATTGPT-227](#mattgpt-227) | Professional Narrative stories appear in filtered My Work results | Decided Against | Medium | Bug | August 31, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-016](#mattgpt-016) | Semantic Router — Wrong-Person Query Detection | Decided Against | High | Issue | Apr 2026 |
@@ -2463,6 +2464,23 @@ Session 1: "Tell me about Matt's AT&T work" and "How did Matt scale a Cloud Inno
 
 ---
 
+### MATTGPT-233
+**Phase 2: extend pre-push gate to BDD suite, `test_agy_behavior.py`, `test_structural_assertions.py`**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Infra
+- **File:** `.pre-commit-config.yaml`, pytest configuration
+- **Logged:** September 1, 2026
+
+**Context:** MATTGPT-216 extended the pre-push gate to `tests/unit/` and `tests/integration/ -m "not network"`. Phase 2 covers the remaining test surfaces not yet in the gate: the 38 BDD feature files (`tests/bdd/`), `test_agy_behavior.py`, and `test_structural_assertions.py`.
+
+**Blocker:** Some tests in these suites use LLM text assertions that are stochastic -- a gate that fails non-deterministically gets disabled with `--no-verify`. The LLM-text strategy (Bucket B) must be decided before these can be gated safely. That decision gates this ticket.
+
+**Acceptance:** All three surfaces run in the pre-push hook without stochastic failures; any test requiring live API calls is either marked `network` or restructured to be hermetic.
+
+---
+
 ### MATTGPT-232
 **`requirements_temp.txt` in repo root -- remove**
 
@@ -2473,21 +2491,6 @@ Session 1: "Tell me about Matt's AT&T work" and "How did Matt scale a Cloud Inno
 - **Logged:** September 1, 2026
 
 Stale file in repo root. No callers, no CI reference. Remove.
-
----
-
-### MATTGPT-231
-**Pre-push hook widened to include integration tests without a ticket**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Infra
-- **File:** `.pre-commit-config.yaml`
-- **Logged:** September 1, 2026
-
-The MATTGPT-216 hook shipped as `python -m pytest tests/unit/ -q`. The hook entry now reads `python -m pytest tests/unit/ tests/integration/ -m "not network" -q`. The scope widening to `tests/integration/` happened without a ticket and is not documented in CHANGELOG. This ticket is the paper trail; the CHANGELOG entry for -216 references it.
-
-**Action:** Document what commit made the change, confirm the `-m "not network"` marker covers all tests that require live credentials, and write the CHANGELOG entry against this ticket.
 
 ---
 
@@ -2716,6 +2719,17 @@ Source-side count (grep of `ui/styles/`) is 34 raw occurrences -- the delta of 3
 
 > **Read only -- do not add blocks here directly.**
 > Blocks are moved here from Active Tickets above when a ticket's status changes to Decided Against. New tickets always start in Active Tickets. See CLAUDE.md § Backlog Maintenance for the full lifecycle.
+
+### MATTGPT-231
+**Pre-push hook widened to include integration tests -- filed on false premise**
+
+- **Status:** Decided Against (September 1, 2026)
+- **Priority:** Low
+- **Type:** Infra
+- **Logged:** September 1, 2026
+- **Why not:** Filed on the premise that the widening (`tests/integration/ -m "not network"`) happened without a ticket. Verified the same session: `8d1f4ce` (MATTGPT-216) did it -- the commit that introduced the `network` marker to make widening safe also widened the hook in the same diff. Widening was part of -216. CHANGELOG entry for -216 updated to include `8d1f4ce` and describe the change. The real Phase 2 gap (BDD files, `test_agy_behavior.py`, `test_structural_assertions.py`) is tracked under MATTGPT-233.
+
+---
 
 ### MATTGPT-227
 **Professional Narrative stories appear in filtered My Work results**
