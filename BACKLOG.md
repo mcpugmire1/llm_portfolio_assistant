@@ -13,7 +13,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 1. **-224** — Explore Stories rejection calls st.stop() before grid renders, destroying the browsing context. Every rejection on that page, including correct ones. Live visitor harm.
 2. **-228** — Deep link param never consumed: `?story=<id>` re-applies on refresh, Reset Filters doesn't clear it, no in-app exit. Hits hiring managers -- exact audience for forwarded links -- who then can't browse. Offset inherited across searches as a second symptom.
 3. **-144 (reopened)** -- `explore_stories.py:1187,1199` still say "projects." Factual error; no singular form. Fix: `STORY_NOUN` constant in `config/constants.py` read by page and tests.
-4. **-227** -- PN stories appear in filtered results. Default (112) excludes them; Client=Accenture (41) adds 5 that weren't there. Narrowing a filter adds stories browsing doesn't show.
+4. **-146** -- PN stories appear in filtered results (filter branch only; search stays as-is). Default (112) excludes them; Client=Accenture (41) adds 5 that weren't there. Fix: `_default_view` exclusion, PATH 3 calls the helper.
 5. **-221** — Environment stamp on every log write: Env column replaces the five-tier heuristic filter used for visitor identification.
 3. **-222** — Three operational alarms: zero-score (would have caught Jan 29 index outage on first occurrence), anchor-cache drift (sixteen family:unknown rows in Jan 2026), out_of_scope on known entity alias (partially covered by -219 score gate).
 4. **-223** — Sheet migration: retire borderline and offdomain CSVs to Sheet events. Nine and twelve months of production behavior currently local-only.
@@ -24,7 +24,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 -160 (extractor dropping qualifiers on 7 of 23) · -173 (malformed and comp-only JD behavior) · -159 (sequential gpt-4o loop) · -014 (34 skipped integration scenarios) · -089 (location, work-model, availability) · -012 (Private View Phase 4) · -081 (corrective actions by asset type) · -099 (comp handling) · -017 (logging scenarios)
 
 **LATER — tier 1:** real defects with known fixes
--177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -180 (fixture blind spot) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -146 (PN leaks into My Work) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28)
+-177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -180 (fixture blind spot) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28)
 
 **LATER — tier 2:** corpus work
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
@@ -85,7 +85,7 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-142](#mattgpt-142) | BDD sequential rejection test: wait_for_banner is not count-aware, assertion runs before second rejection renders | Open | Low | Bug | June 23, 2026 |
 | [MATTGPT-143](#mattgpt-143) | BDD app_url fixture hardcodes port 8501 with no env-var override | Parked | Low | Bug | June 23, 2026 |
 | [MATTGPT-145](#mattgpt-145) | Mobile filter breakpoints overlap — r2-label show/hide depends on !important cascade order, not design | Open | Low | Refactor | Jun 24, 2026 |
-| [MATTGPT-146](#mattgpt-146) | Professional Narrative stories leak into My Work via filter and search paths — must be excluded from all My Work paths | Open | Medium | Bug | Jun 25, 2026 |
+| [MATTGPT-146](#mattgpt-146) | Professional Narrative stories leak into My Work filtered results — filter branch leaks; search stays as-is | Open | Medium | Bug | Jun 25, 2026 |
 | [MATTGPT-150](#mattgpt-150) | MATTGPT-144 test fallout — decouple BDD assertions from display copy and stranded AgGrid selectors | Open | Medium | Refactor / Test | July 1, 2026 |
 | [MATTGPT-152](#mattgpt-152) | Move debug output from UI sidecar to terminal log only | Parked | Low | Refactor | July 16, 2026 |
 | [MATTGPT-153](#mattgpt-153) | Q64 eval stochastic — replace phrase-cluster with concept-cluster robust to story-selection variance | Open | Low | Refactor / Test | July 16, 2026 |
@@ -125,7 +125,6 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-214](#mattgpt-214) | Targeted audit: parameters never referenced, comments asserting absent behavior, constants unused, copied blocks with stale variable names | Open | Low | Refactor | August 26, 2026 |
 | [MATTGPT-217](#mattgpt-217) | `_substitute_matt_subject` produces subject pronoun in object position ("reported to he at the CIC") | Open | Low | Bug | August 26, 2026 |
 | [MATTGPT-144](#mattgpt-144) | Regression: `explore_stories.py:1187,1199` still says "projects" after June 30 count-noun fix; no singular form | Open | Medium | Bug | August 31, 2026 |
-| [MATTGPT-227](#mattgpt-227) | Professional Narrative stories appear in filtered My Work results -- narrowing a filter adds stories the default view excludes | Open | Medium | Bug | August 31, 2026 |
 | [MATTGPT-228](#mattgpt-228) | Deep link param never consumed: `?story=<id>` re-applies on refresh, no in-app escape; offset inherited across searches | Open | High | Bug | August 31, 2026 |
 | [MATTGPT-226](#mattgpt-226) | Dead `.main` selectors across `ui/styles/` after `.main → .stMain` refactor: 31 selectors, ~299 declarations, all matching 0 elements | Open | Medium | Refactor / Tech debt | August 31, 2026 |
 | [MATTGPT-221](#mattgpt-221) | Environment stamp on every log write: add Env column to query_logger.py, archive existing CSVs | Open | High | Enhancement | August 30, 2026 |
@@ -141,6 +140,7 @@ Infrastructure: -035, -039, -040, -045
 
 | ID | Title | Status | Priority | Type | Logged |
 |---|---|---|---|---|---|
+| [MATTGPT-227](#mattgpt-227) | Professional Narrative stories appear in filtered My Work results | Decided Against | Medium | Bug | August 31, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
 | [MATTGPT-016](#mattgpt-016) | Semantic Router — Wrong-Person Query Detection | Decided Against | High | Issue | Apr 2026 |
 | [MATTGPT-020](#mattgpt-020) | Simplify backend_service.py | Decided Against | Medium | Refactor | Pre-Jan 2026 |
@@ -1258,7 +1258,7 @@ Fixing only the two lines produces the third regression with the same shape as t
 ---
 
 ### MATTGPT-146
-**Professional Narrative stories leak into My Work via filter and search paths**
+**Professional Narrative stories leak into My Work filtered results**
 
 - **Status:** Open
 - **Priority:** Medium
@@ -1266,29 +1266,36 @@ Fixing only the two lines produces the third regression with the same shape as t
 - **Logged:** June 25, 2026
 - **File:** `ui/pages/explore_stories.py`
 
-**Issue:** Professional Narrative stories (Category == "Professional Narrative") are Ask Agy content: they exist so Agy can answer questions about Matt in conversation (leadership journey, background, work philosophy, career intent, etc.). They are not projects and were never intended to appear in My Work, which is the project portfolio surface. The current implementation (MATTGPT-098) scoped the exclusion to the default view only (Path 3, no filters active). Filter-active path (Path 3 with `has_filters=True`) and semantic search paths (Path 1 and Path 2) do not apply the exclusion, so a recruiter filtering by Industry or searching My Work can surface "About Matt – My Leadership Journey" as if it were a browseable project.
+**Issue:** Professional Narrative stories (Theme == "Professional Narrative") are Ask Agy content: they exist so Agy can answer questions about Matt in conversation (leadership journey, background, work philosophy, career intent, etc.). They are not projects and were never intended to appear in My Work browse. The current implementation (MATTGPT-098) scoped the exclusion to the default view only (PATH 3, no filters active). PATH 3's filter-active branch does not apply the exclusion, so a recruiter filtering by Client or Industry surfaces "Why Hire Matt?", "About Matt", and similar narrative pieces alongside real project stories.
 
-**Corpus check (confirmed June 25, 2026):** 10 stories carry Category == "Professional Narrative" across 113 total. All 10 are genuinely Ask Agy narrative pieces (leadership journey, leadership philosophy, career intent, transition story, work philosophy, "Why Hire Matt?", etc.). No real projects are miscategorized. The fix is safe to apply.
+**Corpus check (confirmed June 25, 2026; count updated August 31, 2026):** 11 stories carry Theme == "Professional Narrative" across ~123 total. All are genuinely Ask Agy narrative pieces (leadership journey, leadership philosophy, career intent, transition story, work philosophy, "Why Hire Matt?", etc.). No real projects are miscategorized. The fix is safe to apply.
 
-**Intended behavior:** Professional Narrative category is excluded from the My Work corpus entirely, across all three paths:
-- Path 3 default (already done in MATTGPT-098)
-- Path 3 filter-active (currently leaks)
-- Path 1 semantic search + Path 2 cached search (currently leak)
+**Scope (updated August 31, 2026):** Filter branch only. Search stays as-is -- PN stories are often the correct top results for career-intent queries. Top three results for "why should I hire Matt?" are exactly those PN stories, correctly ranked. Excluding them from search makes My Work worse at a question it answers well. The exclusion applies to PATH 3's filter-active branch only.
 
-Professional Narrative stories remain fully available to Ask Agy's Pinecone retrieval — the exclusion is My Work surface only.
+**Fix:** Add the PN exclusion to `_default_view`'s filtered return and have PATH 3's `has_filters` branch call the helper. Settled pattern:
 
-**Fix:** Move the exclusion from the per-path default-view check to the top of `render_explore_stories`, filtering `stories` before any path branches. Replace the two inline `[s for s in stories if s.get("Category") != "Professional Narrative"]` guards (lines ~904 and ~1084) with a single pre-filter applied to the `stories` list at the top of the view logic, so all three paths inherit it automatically. One place, one rule.
+```python
+non_pn = [s for s in stories if s.get("Theme") != "Professional Narrative"]
+filters_without_q = {k: v for k, v in F.items() if k != "q"}
+if any(filters_without_q.values()):
+    return [s for s in non_pn if matches_filters(s, filters_without_q)]
+return sorted(non_pn, key=lambda s: s.get("Start_Date", ""), reverse=True)
+```
 
-**Deeplink edge case (decide before implementing):** If someone has a direct `?story=about-matt-my-leadership-journey` deeplink, should My Work resolve it (render the detail) or redirect? Given the intent (narrative stories are not My Work projects), the story should not render as a My Work detail. Simplest behavior: deeplink to a narrative story on My Work silently shows the default view (story not found), consistent with how any unknown story ID resolves. No active redirect needed.
+Change 2: Replace PATH 3's `has_filters` block with a single `_default_view(stories, F)` call. Fully remove the `has_filters` variable and its `else` branch -- do not leave them computing something nothing reads. Add docstring note that PATH 3 calls this function so the "one canonical location" claim is literally true.
+
+A load-time filter was tried during MATTGPT-224 and backed out because it broke deep links -- do not reintroduce it.
+
+**Deeplink decision (updated August 31, 2026):** PN deep links must resolve. A `?story=why-hire-matt` link is a referral -- a recruiter forwards it to a hiring manager. Silently showing the default view breaks that handoff. The load-time filter approach violated this constraint, which is exactly why it was backed out. Deep links stay resolvable for all stories; the exclusion is browse-only.
 
 **Acceptance criteria:**
 - Filtering My Work by any filter (Industry, Capability, Client, Role, Domain) never returns a Professional Narrative story.
-- Searching My Work (semantic search) never returns a Professional Narrative story.
-- Default My Work view (no filters, no search) continues to exclude Professional Narrative stories (existing behavior preserved).
+- Default My Work view (no filters, no search) continues to exclude Professional Narrative stories (existing behavior, MATTGPT-098).
+- Search returns Professional Narrative stories when they are the correct semantic match -- assert "why should I hire Matt?" or "leadership journey" returns PN results, not zero.
+- `?story=why-hire-matt` (or any PN story ID) renders the story detail, not a default view.
 - Professional Narrative stories remain retrievable by Ask Agy (Pinecone query path is unaffected).
-- BDD: scenario asserting that searching My Work for "leadership journey" or "leadership philosophy" returns zero results (or a no-match banner), not the narrative story.
 
-**Note:** Effort estimate intentionally omitted — small, but requires careful splitting. Validate in the browser after the change, not from source (source-order reasoning is exactly what's fragile here).
+**Note:** Effort estimate intentionally omitted -- small, but requires careful splitting. Validate in the browser after the change, not from source (source-order reasoning is exactly what's fragile here).
 
 **Related -- code adjacency:** MATTGPT-166 (Arc stories invisible to entity-scoped queries via Fortune 500 Clients / Cross-Division placeholder metadata) is a different symptom but touches the same metadata-driven filtering code. Whoever works either ticket will be in the same module. Read both detail blocks before starting either.
 
@@ -2444,40 +2451,6 @@ Fallback if no entity is detected: surviving-family membership (`background`, `n
 
 ---
 
-### MATTGPT-227
-**Professional Narrative stories appear in filtered My Work results -- narrowing a filter adds stories the default view excludes**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Bug
-- **File:** `ui/pages/explore_stories.py` (PATH 3 `has_filters` branch)
-- **Logged:** August 31, 2026
-
-**Issue:** Default view shows 112 stories with no PN stories (MATTGPT-098 exclusion). Filtering Client = Accenture drops to 41 but adds five that were not in the 112: Why Hire Matt?, About Matt, Transition Story, Leadership Philosophy, Work Philosophy. Narrowing a filter adds stories that browsing without filters doesn't show. The behavior is counterintuitive and factually wrong for a hiring manager comparing the filtered view to the default.
-
-**Scope:** Filter branch only. Search stays as-is -- PN stories are often the right answer there; top three results for "why should I hire Matt?" are exactly those. Deep links stay resolvable for all stories -- a forwarded referral link cannot dead-end.
-
-**Loose end:** A script counted 8 Accenture PN stories; only 5 appear in the filtered result. Likely a `Client` vs `Employer` field discrepancy -- PN stories may carry `Employer=Accenture` rather than `Client=Accenture`. Confirm before scoping the fix.
-
-**Implementation:** Settled pattern -- hoist `non_pn` so the literal appears exactly once, then branch on filters:
-
-```python
-non_pn = [s for s in stories if s.get("Theme") != "Professional Narrative"]
-filters_without_q = {k: v for k, v in F.items() if k != "q"}
-if any(filters_without_q.values()):
-    return [s for s in non_pn if matches_filters(s, filters_without_q)]
-return sorted(non_pn, key=lambda s: s.get("Start_Date", ""), reverse=True)
-```
-
-Change 2: Replace PATH 3's `has_filters` block with a single `_default_view(stories, F)` call. Fully remove the `has_filters` variable and its `else` branch -- do not leave them computing something nothing reads. Add docstring note that PATH 3 calls this function so the "one canonical location" claim is literally true.
-
-A load-time filter was tried during MATTGPT-224 and backed out because it broke deep links -- do not reintroduce it.
-
-**Commit sequencing:** MATTGPT-224 ships first as its own commit (already green). This fix ships as a separate commit against MATTGPT-227 only.
-
-**Tests:** Accenture filter returns no PN titles; search still returns them; `?story=why-hire-matt|accenture` renders the story detail.
-
-**Cross-references:** MATTGPT-098 (original PN exclusion on default view), MATTGPT-228 (deep link escape -- same filter-state and navigation surface).
 
 ---
 
@@ -2503,7 +2476,7 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 1. Consume and clear the query param in `app.py` (~358-365): set state, then clear `?story` from the URL. The initial jump behavior (checking the row, making it visible) is preserved; only the persistence is removed.
 2. Reset `page_offset` when the result set changes identity (new search, new filter state). Keep the initial jump; remove cross-context inheritance.
 
-**Cross-references:** MATTGPT-227 (same filter-state surface), MATTGPT-204 (explore_stories.py navigation behavior).
+**Cross-references:** MATTGPT-146 (PN filter leak, same filter-state surface), MATTGPT-204 (explore_stories.py navigation behavior).
 
 ---
 
@@ -2711,6 +2684,17 @@ Source-side count (grep of `ui/styles/`) is 34 raw occurrences -- the delta of 3
 
 > **Read only -- do not add blocks here directly.**
 > Blocks are moved here from Active Tickets above when a ticket's status changes to Decided Against. New tickets always start in Active Tickets. See CLAUDE.md § Backlog Maintenance for the full lifecycle.
+
+### MATTGPT-227
+**Professional Narrative stories appear in filtered My Work results**
+
+- **Status:** Decided Against (August 31, 2026)
+- **Priority:** Medium
+- **Type:** Bug
+- **Logged:** August 31, 2026
+- **Why not:** Duplicate of MATTGPT-146. -146 is the survivor: it has the corpus check, the related-ticket link, and the settled implementation. All findings from -227 (scope, fix pattern, commit sequencing, deep-link decision) have been merged into -146's detail block.
+
+---
 
 ### MATTGPT-194
 **slugify defined three times across three modules -- consolidate to one**
