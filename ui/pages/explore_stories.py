@@ -355,6 +355,33 @@ def _render_confidence_banner(query: str, confidence: str, results: list[dict]):
     )
 
 
+def _default_view(stories: list[dict], F: dict) -> list[dict]:
+    """Return the fallback story view when a rejected query needs a default.
+
+    MATTGPT-224: called from the shared rejection-render block and from
+    the initial view seed near line 902. A rejected query is equivalent
+    to no query -- apply the visitor's non-query filters (Client, Industry,
+    etc) if any are set, else return the default sorted corpus with
+    positioning stories excluded. F.get("q") is explicitly excluded so
+    the rejected query text is not applied as a keyword filter.
+
+    Uses `any(filters_without_q.values())` rather than a hardcoded key
+    list so it cannot drift when a filter key is added or removed later.
+    Equivalent to PATH 3's has_filters check for the current F shape.
+
+    Positioning-story exclusion uses Theme == "Professional Narrative"
+    per the -169 / DNA canonical hook.
+    """
+    filters_without_q = {k: v for k, v in F.items() if k != "q"}
+    if any(filters_without_q.values()):
+        return [s for s in stories if matches_filters(s, filters_without_q)]
+    return sorted(
+        [s for s in stories if s.get("Theme") != "Professional Narrative"],
+        key=lambda s: s.get("Start_Date", ""),
+        reverse=True,
+    )
+
+
 def render_filter_chips(filters: dict, stories: list[dict]) -> bool:
     """Render active filter chips. Returns True if state changed."""
     chips = []
@@ -898,11 +925,11 @@ def render_explore_stories(
     # sort by clicking AgGrid column headers; this only changes the default
     # state. Narrative stories remain in the corpus + reachable via search
     # / Sub-category filter / direct deep-link, just not in the default view.
-    view = sorted(
-        [s for s in stories if s.get("Category") != "Professional Narrative"],
-        key=lambda s: s.get("Start_Date", ""),
-        reverse=True,
-    )
+    # Delegates to _default_view so the exclusion field (Theme per -169)
+    # stays consistent with the rejection-block fallback below. Passes {}
+    # because this is the pre-search seed -- the paths below apply the
+    # visitor's actual filters.
+    view = _default_view(stories, {})
 
     # Cache keys for readability
     LAST_RESULTS = "__last_search_results__"
@@ -910,7 +937,15 @@ def render_explore_stories(
     LAST_QUERY = "__last_search_query__"
 
     if current_query and search_triggered:
-        # --- PATH 1: Intentional Search (Run Pinecone) ---
+        # --- PATH 1a: Rejection detection (runs only on new submit) ---
+        # MATTGPT-224: no longer calls st.stop() or renders banner here.
+        # Sets session-state keys that survive across reruns. The shared
+        # rejection-render block below handles banner + default view both
+        # on this run and on every subsequent rerun where current_query
+        # still matches the stored rejected query. page_offset resets to
+        # 0 here (on new rejection) rather than in the shared block --
+        # putting it in the shared block would reset the offset on every
+        # rerun and prevent pagination.
 
         # SURGICAL FIX: Clear active_story ONLY when search query actually changes
         # This prevents showing stale story detail from a previous search
@@ -923,32 +958,20 @@ def render_explore_stories(
             st.session_state.pop("active_story_client", None)
 
         nonsense_check = is_nonsense(current_query)
+        intent_family = None
 
         if nonsense_check:
-            st.session_state["__nonsense_reason__"] = nonsense_check
-            # Clear cache to prevent showing old results if the user cancels this search
-            st.session_state.pop(LAST_RESULTS, None)
-            st.session_state.pop(LAST_CONFIDENCE, None)
-            st.session_state.pop(LAST_QUERY, None)
-
-            # Display rejection banner and stop execution immediately.
             # is_nonsense() returns the bare category string (e.g.,
             # "jokes_riddles"). render_no_match_banner expects the
             # "rule:<category>" prefix for the BANNER_COPY["rule"] branch
-            # to fire (mirrors the Ask Agy convention at
-            # backend_service.py:1463). Without this prefix, rule:*
-            # nonsense queries on My Work fell through to the
-            # legacy catch-all banner copy. May 23, 2026 fix.
-            render_no_match_banner(
-                reason=f"rule:{nonsense_check}",
-                query=current_query,
-                overlap=None,
-                suppressed=True,
-                filters=F,
-                context="explore",
-            )
-            st.session_state["last_results"] = []
-            st.stop()
+            # (mirrors the Ask Agy convention at backend_service.py:1463).
+            # May 23, 2026 fix.
+            st.session_state["__query_rejected__"] = current_query
+            st.session_state["__query_rejected_reason__"] = f"rule:{nonsense_check}"
+            st.session_state["page_offset"] = 0
+            st.session_state.pop(LAST_RESULTS, None)
+            st.session_state.pop(LAST_CONFIDENCE, None)
+            st.session_state.pop(LAST_QUERY, None)
         else:
             # Semantic router gate — catch personal/out_of_scope before Pinecone.
             # MATTGPT-219: out_of_scope is gated on HARD_ACCEPT so low-confidence
@@ -970,72 +993,104 @@ def render_explore_stories(
                     intent_family=intent_family,
                     redirect_reason=f"semantic_router:{reject_reason}",
                 )
+                st.session_state["__query_rejected__"] = current_query
+                st.session_state["__query_rejected_reason__"] = (
+                    f"semantic_router:{reject_reason}"
+                )
+                st.session_state["page_offset"] = 0
                 st.session_state.pop(LAST_RESULTS, None)
                 st.session_state.pop(LAST_CONFIDENCE, None)
                 st.session_state.pop(LAST_QUERY, None)
-                render_no_match_banner(
-                    reason=f"semantic_router:{reject_reason}",
-                    query=current_query,
-                    overlap=None,
-                    suppressed=True,
-                    filters=F,
-                    context="explore",
-                )
-                st.session_state["last_results"] = []
-                st.stop()
 
-            # Run expensive semantic search
-            search_container = st.empty()
-            with search_container:
-                render_thinking_indicator()
-            try:
-                search_result = semantic_search(
-                    current_query, filters=F, stories=stories
-                )
-                view = search_result["results"]
-                confidence = search_result["confidence"]
+    # --- Central rejection check (MATTGPT-224) ---
+    # Session-state signal survives across reruns until current_query
+    # changes. Every rerun (filter change, pagination, view switch,
+    # row click) that keeps the same current_query hits this check and
+    # re-renders the banner + default view. Gate requires BOTH keys
+    # present -- a missing reason means the state is inconsistent, and
+    # inconsistent state is safer treated as not-rejected than guessed.
+    stored_rejected = st.session_state.get("__query_rejected__")
+    stored_reason = st.session_state.get("__query_rejected_reason__")
+    query_is_rejected = bool(
+        current_query and stored_reason and stored_rejected == current_query
+    )
 
-                # Cache results
-                st.session_state[LAST_RESULTS] = view
-                st.session_state[LAST_CONFIDENCE] = confidence
-                st.session_state[LAST_QUERY] = current_query
-                log_query(
-                    current_query,
-                    "My Work",
-                    intent_family=intent_family,
-                    confidence=confidence,
-                    result_count=len(view),
-                )
+    if query_is_rejected:
+        # Clear F["q"] so downstream code (render_filter_chips at :1150,
+        # PATH 3's has_filters logic, _default_view's filter chain) all
+        # see the rejected query as absent. One line covers the chip,
+        # the helper, and the has_filters flag. F["q"] gets re-populated
+        # from the search-input widget on the next rerun (line 798), so
+        # this clear is per-rerun scoped -- the widget still shows what
+        # the visitor typed; only the filter state is corrected.
+        F["q"] = ""
+        render_no_match_banner(
+            reason=stored_reason,
+            query=current_query,
+            overlap=None,
+            suppressed=True,
+            filters=F,
+            context="explore",
+        )
+        # A rejected query is equivalent to no query -- apply the visitor's
+        # other filters (Client, Industry, etc.) but never the rejected
+        # query text as a keyword. _default_view strips F["q"] internally.
+        view = _default_view(stories, F)
+        st.session_state["__last_q__"] = current_query
+        # page_offset intentionally NOT reset here -- resets only on new
+        # rejection (PATH 1a branches above), otherwise pagination breaks.
 
-            finally:
-                search_container.empty()
+    elif current_query and search_triggered:
+        # --- PATH 1b: Non-rejection Pinecone search body ---
+        # Run expensive semantic search
+        search_container = st.empty()
+        with search_container:
+            render_thinking_indicator()
+        try:
+            search_result = semantic_search(current_query, filters=F, stories=stories)
+            view = search_result["results"]
+            confidence = search_result["confidence"]
 
-            # Check if filters blocked all results but matches exist elsewhere
-            relaxed_count = search_result.get("relaxed_count", 0)
-            active_filters = search_result.get("active_filters", [])
+            # Cache results
+            st.session_state[LAST_RESULTS] = view
+            st.session_state[LAST_CONFIDENCE] = confidence
+            st.session_state[LAST_QUERY] = current_query
+            log_query(
+                current_query,
+                "My Work",
+                intent_family=intent_family,
+                confidence=confidence,
+                result_count=len(view),
+            )
 
-            if relaxed_count > 0 and not view:
-                # Show helpful banner with option to clear restrictive filters
-                filter_names = " + ".join([f[1] for f in active_filters])
-                st.markdown(
-                    f"""
-                    <div style="background: #F3E8FF; border-left: 4px solid #8B5CF6; padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;">
-                        <span style="color: #6B21A8; font-size: 14px;">
-                            🐾 No matches. Matt has {relaxed_count} "{current_query}" stories, but none in {filter_names}.
-                        </span>
-                    </div>
-                    """,
-                    unsafe_allow_html=True,
-                )
-            else:
-                _render_confidence_banner(current_query, confidence, view)
+        finally:
+            search_container.empty()
 
-            if confidence == "none":
-                view = []
+        # Check if filters blocked all results but matches exist elsewhere
+        relaxed_count = search_result.get("relaxed_count", 0)
+        active_filters = search_result.get("active_filters", [])
 
-            st.session_state["__nonsense_reason__"] = None
-            st.session_state["page_offset"] = 0
-            st.session_state["__last_q__"] = current_query
+        if relaxed_count > 0 and not view:
+            # Show helpful banner with option to clear restrictive filters
+            filter_names = " + ".join([f[1] for f in active_filters])
+            st.markdown(
+                f"""
+                <div style="background: #F3E8FF; border-left: 4px solid #8B5CF6; padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;">
+                    <span style="color: #6B21A8; font-size: 14px;">
+                        🐾 No matches. Matt has {relaxed_count} "{current_query}" stories, but none in {filter_names}.
+                    </span>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+        else:
+            _render_confidence_banner(current_query, confidence, view)
+
+        if confidence == "none":
+            view = []
+
+        st.session_state["page_offset"] = 0
+        st.session_state["__last_q__"] = current_query
 
     elif current_query and st.session_state.get(LAST_QUERY) == current_query:
         # --- PATH 2: Reuse Cached Results (Filter Interaction - NO Pinecone Call) ---
@@ -1046,9 +1101,6 @@ def render_explore_stories(
         cached_view = st.session_state.get(LAST_RESULTS, [])
         confidence = st.session_state.get(LAST_CONFIDENCE, "none")
 
-        # Show banner based on cached confidence level
-        _render_confidence_banner(current_query, confidence, cached_view)
-
         if confidence == "none":
             cached_view = []
 
@@ -1057,6 +1109,13 @@ def render_explore_stories(
         # contain the exact query tokens (e.g., "Truist" search returning RBC stories).
         filters_without_q = {k: v for k, v in F.items() if k != "q"}
         view = [s for s in cached_view if matches_filters(s, filters_without_q)]
+
+        # MATTGPT-224 fold-in: pass filtered view (post-UI-filter) rather
+        # than cached_view (pre-UI-filter) so the "Found N matching stories"
+        # count matches the "Showing 1-N of N stories" count immediately
+        # below. Previously: banner said "Found 25" while count-below said
+        # "Showing 1-4 of 4" for the same page.
+        _render_confidence_banner(current_query, confidence, view)
 
     else:
         # --- PATH 3: No Active Query (F["q"] is empty) or Query changed but not submitted ---
@@ -1087,10 +1146,12 @@ def render_explore_stories(
         else:
             # MATTGPT-098: default view (no filters active) applies the
             # Professional Narrative exclusion + Start_Date desc sort.
-            # Mirrors the initial default at line 1935 above; both branches
-            # must apply the default state to avoid resetting it here.
+            # Kept in sync with _default_view helper -- both must use the
+            # same exclusion field. Exclusion uses Theme per the -169 /
+            # DNA canonical hook (Category was silently-correct by 100%
+            # overlap on the current corpus).
             view = sorted(
-                [s for s in stories if s.get("Category") != "Professional Narrative"],
+                [s for s in stories if s.get("Theme") != "Professional Narrative"],
                 key=lambda s: s.get("Start_Date", ""),
                 reverse=True,
             )

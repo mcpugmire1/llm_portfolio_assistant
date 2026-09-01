@@ -312,6 +312,41 @@ Feature: My Work
     Then the rejection banner should be displayed
     And the story grid should still be visible
 
+  # MATTGPT-224: rejection state persists across reruns. Filter changes,
+  # view switches, pagination clicks, and row clicks all preserve the
+  # banner + default view without applying the rejected query text as a
+  # keyword filter. The failing case that Green attempt 664dd03 shipped:
+  # every post-rejection interaction collapsed the grid to 0-0 of 0
+  # because `rejected` was a local flag that only lived one rerun.
+  Scenario: Filter change after rejection preserves banner and shows filtered corpus
+    Given the user has submitted the rejected query "Is Matt married?"
+    When the user selects "AT&T" from the Client filter
+    Then the rejection banner should be displayed
+    And the story grid should still be visible
+    And all displayed stories should have Client "AT&T"
+
+  Scenario: Filter first then rejected query preserves banner and filtered corpus
+    Given the user has selected "AT&T" from the Client filter
+    When the user types "Is Matt married?" in the search box
+    And the user presses Enter
+    Then the rejection banner should be displayed
+    And the story grid should still be visible
+    And all displayed stories should have Client "AT&T"
+
+  Scenario: Valid query after rejection returns clean results
+    Given the user has submitted the rejected query "Is Matt married?"
+    When the user types "payments transformation" in the search box
+    And the user presses Enter
+    Then the rejection banner should not be displayed
+    And the results count should update
+
+  Scenario: Reset after rejection restores full corpus
+    Given the user has submitted the rejected query "Is Matt married?"
+    When the user clicks the Reset button
+    Then the rejection banner should not be displayed
+    And the search box should be empty
+    And all stories should be displayed
+
   # =============================================================================
   # TWO-ROW FILTER BAR (MATTGPT-065)
   # =============================================================================

@@ -1726,3 +1726,33 @@ def story_grid_visible(browser_page):
         f"Expected story grid or cards to be visible after rejection, "
         f"found {dataframe_count} stDataFrame widget(s) + {story_cards} story card(s)"
     )
+
+
+@given(parsers.parse('the user has submitted the rejected query "{query}"'))
+def user_has_submitted_rejected_query(browser_page, query):
+    """MATTGPT-224 compound setup: types the query, presses Enter, waits
+    for the rejection banner to render. Used as Given in scenarios that
+    test what happens AFTER a rejection, so the interesting interaction
+    is the When clause rather than the rejection itself (which scenarios
+    at :303, :309, :399 already lock). Mirrors the existing
+    user_has_searched locator pattern, then additionally waits for the
+    banner to confirm the rejection path fired."""
+    search_input = browser_page.locator(
+        "input[placeholder*='modern platforms'], input[placeholder*='Find stories']"
+    ).first
+    search_input.fill(query)
+    search_input.press("Enter")
+    wait_for_streamlit_rerun(browser_page)
+    browser_page.wait_for_selector(".no-match-banner", timeout=10000)
+
+
+@then("the rejection banner should not be displayed")
+def rejection_banner_not_displayed(browser_page):
+    """MATTGPT-224 negation of rejection_banner_displayed. Asserts the
+    banner is gone after recovery (valid query typed, Reset clicked,
+    etc). Anti-vacuous: temporarily flip the assertion and confirm it
+    fails on a page that IS showing a banner."""
+    banner_count = browser_page.locator(".no-match-banner").count()
+    assert (
+        banner_count == 0
+    ), f"Expected no rejection banner after recovery, found {banner_count}"
