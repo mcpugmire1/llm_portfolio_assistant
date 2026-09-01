@@ -82,7 +82,7 @@
 **Project:** MattGPT Portfolio Assistant - AI-powered career story search and chat interface
 **Tech Stack:** Streamlit, OpenAI GPT-4o, Pinecone vector DB, Python 3.11+
 **Data Corpus:** 100+ STAR-formatted transformation project stories
-**Last Updated:** August 31, 2026
+**Last Updated:** September 1, 2026
 
 ### What This Document Contains
 
@@ -661,7 +661,7 @@ This section defines the **job, rules, and constraints** for each retrieval comp
 - **Cost:** ~$0.0000002 per query (one embedding)
 - **Rule:** Fail-open on errors (accept query if embedding fails)
 - **Do not remove:** Saves LLM cost, prevents garbage-in
-- **`out_of_scope` gating rule:** Rejection fires only when `router_score >= HARD_ACCEPT`. A score below HARD_ACCEPT with family `out_of_scope` passes through -- the low score means the router isn't confident it's out of scope. This gate is applied at both call sites in `backend_service.py`. `personal` is not gated: any router score that resolves to `personal` rejects immediately. Do not add a score gate to `personal` without re-running the full rejection eval -- the asymmetry is intentional.
+- **`out_of_scope` gating rule:** Rejection fires only when `router_score >= HARD_ACCEPT`. A score below HARD_ACCEPT with family `out_of_scope` passes through -- the low score means the router isn't confident it's out of scope. This gate is applied at both call sites in `backend_service.py` (`backend_service.py:1815`, `explore_stories.py:987`). `personal` is currently ungated: `backend_service.py:1815` and `explore_stories.py:985` reject on family alone regardless of score. A low-confidence `personal` classification (e.g., 0.223) fires the hard-stop before the downstream `overlap:0.00` path can run, producing wrong rejection copy for generic off-topic queries. MATTGPT-234 tracks extending the HARD_ACCEPT gate to the `personal` branch; its acceptance condition requires a clean rejection eval before shipping.
 
 #### Observability Logging (Jan 2026)
 
@@ -720,7 +720,7 @@ Structured logs added to diagnose "I can't help with that" issues in production.
   ]}
   ```
 - **Why:** Fixes "entity blind spot" where stories with `Client="Confidential"` but `Employer="Accenture"` weren't found
-- **⚠️ Note (Feb 2026):** `get_synthesis_stories()` uses PascalCase `"Theme"` in Pinecone filters (line ~444). This works currently (Pinecone metadata was uploaded with PascalCase `Theme` key) but is inconsistent with the lowercase field name convention used elsewhere. If entity-scoped synthesis returns unexpected zero results, check this field name casing first.
+- **⚠️ Note (Feb 2026, verified Aug 2026):** `get_synthesis_stories()` uses PascalCase `"Theme"` in Pinecone filters (`backend_service.py` lines ~598, ~621). This works because Pinecone metadata was uploaded with PascalCase `Theme` key, but is inconsistent with the lowercase field name convention used elsewhere. If entity-scoped synthesis returns unexpected zero results, check this field name casing first.
 
 #### Excluded Entities & Clients
 
@@ -789,6 +789,27 @@ Per the CLAUDE.md "No Hardcoded Enums for Data-Derived Values" rule, the prior s
 #### Synthesis Mode
 - **Job:** Answer "what are Matt's themes/patterns/philosophy" questions
 - **Triggers:** Intent = `synthesis` (no entity + cross-cutting question)
+
+#### rag_answer Return Contract
+
+All 14 return points in `rag_answer()` (after commits `9395a68`, `3c5d00a`, `040b785`) include retrieval observables. Tests in `tests/unit/` and `tests/integration/` assert against this shape; a silent breaking change here will fail the gate without an obvious error message.
+
+```python
+{
+    "answer_md":       str,           # rendered markdown answer
+    "sources":         list[dict],    # story metadata for citations
+    "modes":           dict,          # {"narrative": str, ...} alternate renders
+    "default_mode":    str,           # which mode to show first
+    # Retrieval observables (always present, may be None):
+    "rejection_reason": str | None,   # e.g. "semantic_router:out_of_scope"
+    "intent_family":    str | None,   # router family ("background", "technical", ...)
+    "entity_match":     tuple | None, # (field, value) e.g. ("Client", "Accenture")
+    "confidence":       str | None,   # "high" | "low" | "none"
+    "pool_size":        int | None,   # stories in pool before LLM truncation
+}
+```
+
+`rejection_reason` mirrors `ask_last_reason` strings exactly. `pool_size` reflects the operative pool: synthesis overrides to `len(synthesis_pool)` at the synthesis branch.
 
 **Intent Classification (Semantic Router Only - Jan 29, 2026):**
 
@@ -1385,7 +1406,7 @@ Stories are stored in `echo_star_stories_nlp.jsonl` (100+ entries). Each line is
 
 | Group | Fields | Purpose |
 |-------|--------|---------|
-| **Hierarchy / Context** | Category, Sub-category, Employer, Division, Client, Project, Role | Places the story within Matt's career. Used for filtering, browsing, and grounding responses. Category controls higher-level navigation (Professional Narrative excluded from default browsing). |
+| **Hierarchy / Context** | Category, Sub-category, Employer, Division, Client, Project, Role | Places the story within Matt's career. Used for filtering, browsing, and grounding responses. |
 | **Classification** | Industry, Solution / Offering, Theme, Era, Project Scope / Complexity, Competencies | Classifies the work across dimensions. Theme and Sub-category strengthen semantic retrieval. Era provides temporal grouping. Competencies supplies explicit skill evidence for tagging and skill matching. |
 | **Retrieval-Critical** | Use Case(s), 5P Summary | Primary semantic search signals. Use Case(s) is the strongest retrieval cue -- it most directly matches interview questions and is front-loaded in the embedding. 5P Summary is the condensed semantic representation and embedding anchor. |
 | **STAR Narrative** | Situation, Task, Action, Result | The evidence. Action contains most capability evidence; Result contains business impact. Primary source material for composing interview responses. |
@@ -1407,7 +1428,7 @@ Retrieval is driven primarily by Use Case(s) and 5P Summary; STAR fields provide
 |-------|------|---------|-------------|
 | `id` | `str` | `"platform-modernization\|jpmc"` | Unique ID (title\|client) |
 | `Title` | `str` | `"Platform Modernization for Payments"` | Story title |
-| `Category` | `str` | `"Technology & Cloud Solutions"` | Top-level story classification; drives broad browsing and narrative exclusion logic |
+| `Category` | `str` | `"Technology & Cloud Solutions"` | Top-level story classification; drives broad browsing. `Theme == "Professional Narrative"` controls PN exclusion from default browsing (see `explore_stories.py:379`, `:1154`) -- not `Category`. |
 | `Client` | `str` | `"JPMorgan Chase"` | Client name |
 | `Employer` | `str` | `"Accenture"` | Employer |
 | `Division` | `str` | `"Technology"` | Division/business unit |
@@ -1970,6 +1991,18 @@ filters = {
 
 **Multi-Field Entity Gate:** When `entity_field` and `entity_value` are provided, the service builds a Pinecone `$or` clause that searches across `client`, `employer`, `division`, `project`, `place`, and `title` fields simultaneously. See Component Contracts → Multi-Field Entity Gate for details.
 
+**`_init_pinecone()` two-class failure split (Aug 2026):**
+
+Two failure classes with distinct behavior:
+- **Misconfiguration** (`VECTOR_BACKEND=pinecone` with missing config, or `pinecone` package unavailable): raises `RuntimeError` with legible message. Fail-fast and developer-actionable. Backs the `app.py` startup validator for code paths that reach Pinecone without going through it (scripts, eval, build scripts).
+- **Runtime failure** (network error, transient API failure, missing index at the remote): returns `None` with a DEBUG log line. Callers degrade gracefully -- an outage should not crash the UI.
+
+Returns `None` cleanly when `VECTOR_BACKEND != "pinecone"` (unchanged).
+
+**`_classify_embedding()` — network boundary pattern (Aug 2026):**
+
+Extracted from `is_portfolio_query_semantic()` (`services/semantic_router.py`) so the classification logic is unit-testable against fixture vectors without an OpenAI call. Takes an already-computed query embedding and the intent-anchor embedding map; returns `(is_valid, max_score, best_intent, family)`. The composed public function still handles embed + classify + borderline log + fail-open error path. Use this pattern as the model for any future router work that needs to be testable without live API calls.
+
 ---
 
 #### 2. RAG Service ([services/rag_service.py](services/rag_service.py))
@@ -2497,6 +2530,17 @@ pytest tests/unit -v
 - `test_structural_assertions.py` - Threshold boundary tests
 - `test_filters.py` - Filter logic
 - `test_formatting.py` - STAR story formatting
+
+**Test Gate Topology (Aug 2026):**
+
+Two automated gates enforce the hermetic unit suite:
+
+- **Local pre-push hook** (`.pre-commit-config.yaml`, `stages: [pre-push]`): runs `pytest tests/unit/ tests/integration/ -m "not network" -q` on every `git push`. Opt-in per clone: `pre-commit install --hook-type pre-push`.
+- **GitHub Actions** (`.github/workflows/test.yml`): same command, runs on every push to main. Uses `requirements-ci.txt` (strips torch/CUDA/faiss wheels) to keep cold-cache install under 20s.
+
+**`network` marker:** Tests that hit real external services (OpenAI, Pinecone) are tagged `@pytest.mark.network` and excluded from both gates via `-m "not network"`. Run manually with `pytest tests/integration/ -m network`. Do not add live API calls to tests that lack this marker -- they will silently break the hermetic gate.
+
+**xfail markers:** 5 known-failure tests carry `@pytest.mark.xfail` so they register as expected failures rather than silently degrading the pass count. If a new persistent failure appears, add `xfail` with a ticket reference rather than deleting the test.
 
 ### st.dataframe Canvas Constraint (MATTGPT-144)
 
