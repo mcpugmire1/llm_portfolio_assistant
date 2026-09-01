@@ -11,7 +11,8 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 **NOW**
 1. **-224** — Explore Stories rejection calls st.stop() before grid renders, destroying the browsing context. Every rejection on that page, including correct ones. Live visitor harm.
-2. **-221** — Environment stamp on every log write: Env column replaces the five-tier heuristic filter used for visitor identification.
+2. **-144 (reopened)** — `explore_stories.py:1187,1199` still say "projects" after the June 30 count-noun fix. Factual error: 41 stories across Accenture is not 41 projects. No singular form either -- one result reads "Showing 1 Adjunct Professor projects." Two lines, one fix.
+3. **-221** — Environment stamp on every log write: Env column replaces the five-tier heuristic filter used for visitor identification.
 3. **-222** — Three operational alarms: zero-score (would have caught Jan 29 index outage on first occurrence), anchor-cache drift (sixteen family:unknown rows in Jan 2026), out_of_scope on known entity alias (partially covered by -219 score gate).
 4. **-223** — Sheet migration: retire borderline and offdomain CSVs to Sheet events. Nine and twelve months of production behavior currently local-only.
 5. **-128** — Split source panel by kind (project records / positioning docs), extract reason lines from figures, drop trailing question. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
@@ -121,6 +122,7 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-213](#mattgpt-213) | BDD suite: navigation step definitions duplicated across modules; no shared step module | Open | Low | Refactor / Test | August 26, 2026 |
 | [MATTGPT-214](#mattgpt-214) | Targeted audit: parameters never referenced, comments asserting absent behavior, constants unused, copied blocks with stale variable names | Open | Low | Refactor | August 26, 2026 |
 | [MATTGPT-217](#mattgpt-217) | `_substitute_matt_subject` produces subject pronoun in object position ("reported to he at the CIC") | Open | Low | Bug | August 26, 2026 |
+| [MATTGPT-144](#mattgpt-144) | Regression: `explore_stories.py:1187,1199` still says "projects" after June 30 count-noun fix; no singular form | Open | Medium | Bug | August 31, 2026 |
 | [MATTGPT-226](#mattgpt-226) | Dead `.main` selectors across `ui/styles/` after `.main → .stMain` refactor: 31 selectors, ~299 declarations, all matching 0 elements | Open | Medium | Refactor / Tech debt | August 31, 2026 |
 | [MATTGPT-221](#mattgpt-221) | Environment stamp on every log write: add Env column to query_logger.py, archive existing CSVs | Open | High | Enhancement | August 30, 2026 |
 | [MATTGPT-222](#mattgpt-222) | Three operational alarms: zero-score, anchor-cache drift, out_of_scope on known entity | Open | High | Enhancement | August 30, 2026 |
@@ -1216,6 +1218,32 @@ The bug is that Blocks A and B have no lower bound, so they leak into the ≤480
 **Cross-references:**
 - The mobile filter CSS this refactors was added in the explore_stories mobile-fix work (validated and committed June 24, 2026). Do this as the opening move of any future session that touches mobile filter CSS — it makes the cascade safe before edits land on top of it.
 - MATTGPT-123, MATTGPT-119 — prior mobile filter work that established the current block structure.
+
+---
+
+### MATTGPT-144
+**Regression: `explore_stories.py:1187,1199` still says "projects" after June 30 count-noun fix; no singular form**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `ui/pages/explore_stories.py:1187, 1199`
+- **Logged:** June 2026 (original); reopened August 31, 2026
+
+**History:** The June 30 session bundled a count-noun fix into the MATTGPT-144 AgGrid → st.dataframe swap: "count markup changed from projects to stories with separators." The standard was confirmed as "Stories" to match the hero copy ("100+ transformation stories"). The fix landed on some lines but missed `1187` and `1199`.
+
+**Regression confirmed August 31, 2026:** `explore_stories.py:1294` already says "stories" (correct). Lines 1187 and 1199 still say "projects":
+
+- Line 1187: `🐾 No projects match {filter_desc}.`
+- Line 1199: `🐾 Showing {len(view)} {filter_desc} projects.`
+
+Live example: filtering to Accenture shows "🐾 Showing 41 Accenture projects." This is a factual error -- 41 stories across Accenture engagements is not 41 projects; one project can have multiple stories. A technical reader filtering by client will notice. Line 1199 also has no singular form, so one result reads "Showing 1 Adjunct Professor projects."
+
+**Fix:** Two lines. Replace "projects" with `"story" if len(view) == 1 else "stories"` at line 1199 and "stories" at line 1187 (zero-match case, plural always appropriate). Same pattern as line 337 in the same file.
+
+**Root cause of incomplete fix (June 30 session note):** Count noun was hardcoded in three separate test files rather than pulled from a shared constant. The fix landed on the observed-broken lines and missed 1187 and 1199. The acceptance criterion that would have caught it: name every site that labels a story count, verify all of them. That criterion was stated at close time and not applied.
+
+**Cross-references:** MATTGPT-204 (same file, st.dataframe empty-state behavior -- different defect, same `explore_stories.py` surface).
 
 ---
 

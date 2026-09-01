@@ -365,7 +365,7 @@ Re-added CSS rule to `global_styles.py` hiding Ask Agy landing hero containers d
 
 ### My Work
 
-**June 2026 — My Work Table view: migrate from st_aggrid (iframe) to st.dataframe / Glide Data Grid (MATTGPT-144)** — `77dc1cb`
+**June 2026 — My Work Table view: migrate from st_aggrid (iframe) to st.dataframe / Glide Data Grid (MATTGPT-144)** -- `77dc1cb` -- **Reopened August 31, 2026: count-noun fix incomplete; see BACKLOG**
 Replaced st_aggrid with st.dataframe (Glide Data Grid) in the My Work Table view. Eliminates the AgGrid custom-component iframe re-init on filter rerun (the -144 symptom) and removes the AgGrid bootstrap.min.css 195ms revalidation round-trip on page nav. BDD: 55/55 passing, 0 skipped. Key test changes: removed all AgGrid iframe / `.ag-row` / `frame_locator` assertions; added `st.dataframe` canvas-mount proxy (`data-grid-canvas`); replaced `networkidle` waits with `wait_for_streamlit_rerun` (Glide Data Grid's continuous XHR never settles networkidle); converted empty `pass` stubs to count-direction logic via `_read_count()`; added Cards-view-switch fallback in `click_story_card` (3 scenarios now run instead of skip); added Share "Copied!" confirmation scenario. Deleted 2 scenarios: Table-row Ask Agy (canvas row-click undriveable, redundant with Cards) and deeplink-respects-view-mode (non-feature: deeplinks intentionally start fresh session). Guard proof: breaking `no_story_results_shown` fails both rejection scenarios; non-vacuous.
 
 **June 2026 — AgGrid bootstrap.min.css render-blocking resolved as side effect of st.dataframe migration (MATTGPT-137)**
