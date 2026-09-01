@@ -22,7 +22,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 **NEXT**
 10. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
-11. **-221** — Environment stamp on every log write. Makes every future log analysis exact rather than heuristic.
+11. **-086** — Environment stamp on every log write. Makes every future log analysis exact rather than heuristic.
 12. **-222** — Three operational alarms. Zero-score alarm would have surfaced -230 rather than it being found by hand during a shakeout.
 13. **-223** — Sheet migration, retires local-only borderline and offdomain CSVs.
 14. **-089** — Role Match: location, work model, availability. May 22 recruiter finding; Role Match is the surface that does a recruiter's job in thirty seconds.
@@ -44,7 +44,7 @@ Dead code: -176, -183, -199, -201 · Hidden error: -204 (zero-filter-match only 
 Untraced flash: -229 (My Work flashes before Ask Agy conversation -- needs DevTools trace)
 BDD flakes: -122, -131, -142, -145, -197, -198, -205
 Wrong-assertion test: -203 · -209 (drift guard searches wrong scope)
-Small refactors: -140, -153, -086, -062, -082, -083, -084, -150, -060, -217 (pronoun grammar in substitution)
+Small refactors: -140, -153, -062, -082, -083, -084, -150, -060, -217 (pronoun grammar in substitution)
 BDD structure: -213 (shared step definitions)
 Correctness audit: -214 (parameters, comments, constants, copied blocks) · -226 (dead `.main` selectors, ~299 declarations matching 0 elements)
 Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/agy-behavior/structural suites) · -232 (requirements_temp.txt removal)
@@ -74,7 +74,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-082](#mattgpt-082) | Q15 eval assertion is over-specified — checks literal client name presence rather than response correctness | Open | Medium | Refactor | May 22, 2026 |
 | [MATTGPT-083](#mattgpt-083) | Spinner inconsistency — Explore Stories doesn't show thinking indicator for rejected queries (Ask MattGPT does) | Open | Medium | Issue | May 23, 2026 |
 | [MATTGPT-084](#mattgpt-084) | Ask MattGPT BDD scenarios — chip-click + low_confidence banner-render timing flakes under full-suite load | Open | Medium | Issue | May 23, 2026 |
-| [MATTGPT-086](#mattgpt-086) | Query logger — add environment annotation column + filter dev/test traffic out of production analytics | Open | Low | Issue | May 23, 2026 |
+| [MATTGPT-086](#mattgpt-086) | Query logger — add environment annotation column + filter dev/test traffic out of production analytics | Open | High | Enhancement | May 23, 2026 |
 | [MATTGPT-089](#mattgpt-089) | Role Match — parse location, work-model, availability as distinct filter class | Open | High | Issue | May 28, 2026 |
 | [MATTGPT-091](#mattgpt-091) | Add a credible failure story to the corpus (sibling to -022 / -078 pattern) | Open | Medium | Action | May 28, 2026 |
 | [MATTGPT-095](#mattgpt-095) | Anti-consulting bias in story framing — corpus reads "consulting" as default register when it shouldn't | Open | Medium | Action | May 28, 2026 |
@@ -138,7 +138,6 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-235](#mattgpt-235) | Resolve LLM-text assertion classes so pre-push gate can widen to agy-behavior and structural suites | Open | High | Refactor / Test | September 1, 2026 |
 | [MATTGPT-236](#mattgpt-236) | Remove router topical family dimension: delete 3 inert families, rewire 2 set memberships, remove 6 topic-axis families | Open | Medium | Refactor | September 1, 2026 |
 | [MATTGPT-226](#mattgpt-226) | Dead `.main` selectors across `ui/styles/` after `.main → .stMain` refactor: 31 selectors, ~299 declarations, all matching 0 elements | Open | Medium | Refactor / Tech debt | August 31, 2026 |
-| [MATTGPT-221](#mattgpt-221) | Environment stamp on every log write: add Env column to query_logger.py, archive existing CSVs | Open | High | Enhancement | August 30, 2026 |
 | [MATTGPT-222](#mattgpt-222) | Three operational alarms: zero-score, anchor-cache drift, out_of_scope on known entity | Open | High | Enhancement | August 30, 2026 |
 | [MATTGPT-223](#mattgpt-223) | Sheet migration: retire borderline and offdomain CSVs in favor of Sheet events with Event Type column | Open | Medium | Enhancement | August 30, 2026 |
 
@@ -151,6 +150,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 
 | ID | Title | Status | Priority | Type | Logged |
 |---|---|---|---|---|---|
+| [MATTGPT-221](#mattgpt-221) | Environment stamp on every log write: add Env column to query_logger.py, archive existing CSVs | Decided Against | High | Enhancement | August 30, 2026 |
 | [MATTGPT-231](#mattgpt-231) | Pre-push hook widened to include integration tests -- filed on false premise; widening was `8d1f4ce` under MATTGPT-216 | Decided Against | Low | Infra | September 1, 2026 |
 | [MATTGPT-227](#mattgpt-227) | Professional Narrative stories appear in filtered My Work results | Decided Against | Medium | Bug | August 31, 2026 |
 | [MATTGPT-010](#mattgpt-010) | Cross-Browser Testing | Decided Against | Low | Action | Pre-2026 |
@@ -782,19 +782,26 @@ Each detail block uses these fields. Not every field is required for every item.
 **Query logger — add environment annotation column + filter dev/test traffic out of production analytics**
 
 - **Status:** Open
-- **Priority:** Low
-- **Type:** Issue
-- **Issue:** The Google Sheets query log mixes traffic from all environments — production (real users at `askmattgpt.streamlit.app`), local dev (Matt's testing), BDD test runs (Playwright submitting queries against local Streamlit) — with no column distinguishing the source. Conversion / bounce / usage analytics on the log can't separate signal from noise.
-- **Existing precedent:** Bot filter already removes UptimeRobot, HeadlessChrome, and Chrome/103 probes via `MONITORING_BOT_SIGNATURES` in `config/constants.py`. This is the same shape of concern — local dev + test traffic should be filtered or annotated for production analytics integrity.
-- **Fix-path options:**
-  - **(A) Add `env` column to query_logger schema.** Detect environment via Streamlit Cloud env var (e.g., `STREAMLIT_ENV`) OR via request hostname (`askmattgpt.streamlit.app` vs `localhost:8501`). Write `prod` / `local` / `ci` per row. Analytics filter on the column. Schema becomes 33 columns.
-  - **(B) Skip logging when env is not prod.** No new column; local + test runs simply don't write to the Sheet. Loses local-debug observability but cleanest for production analytics.
-  - **(C) Use a separate Sheet for non-prod traffic.** Add env-aware Sheet selection in query_logger. Cleanest separation but doubles maintenance overhead.
-- **Recommendation:** (A) — preserves all data, adds discriminator that analytics can filter on. (B) is acceptable if local-debug Sheets observability has low value.
-- **Stop-gap until prioritized:** Manually delete test/dev rows from the Sheet during analytics work.
-- **What counts as "junk":** TBD during ticket work. Likely includes BDD test queries (e.g., "Tell me a joke about Matt's career" submitted by Playwright during pytest runs), local dev exploration queries during feature work, manual test queries.
-- **Discovered during:** May 23, 2026 — Matt verified GCP service account key rotation worked locally by triggering a real query and confirming the row appeared in the Sheet. Observed the broader Sheets log filling up with local + test traffic indistinguishable from production user traffic.
-- **Logged:** May 23, 2026
+- **Priority:** High
+- **Type:** Enhancement
+- **Files:** `config/environment.py` (new), `services/query_logger.py`
+- **Issue:** The Google Sheets query log mixes traffic from all environments -- production (real users at `askmattgpt.streamlit.app`), local dev (Matt's testing), BDD test runs (Playwright submitting queries against local Streamlit) -- with no column distinguishing the source. Conversion / bounce / usage analytics on the log can't separate signal from noise. Log analysis needed a five-tier heuristic filter to separate Matt's traffic from visitors, reached 96%, and could not do better because nothing records who is asking. After this ticket, one column comparison replaces the whole filter.
+- **Existing precedent:** Bot filter already removes UptimeRobot, HeadlessChrome, and Chrome/103 probes via `MONITORING_BOT_SIGNATURES` in `config/constants.py`. This is the same shape of concern.
+
+**Implementation (two commits):**
+
+**Commit 1:** Add `config/environment.py` reading `MATTGPT_ENV` via `get_conf`. Add a startup print so a wrong value shows up on the first deploy rather than silently. `MATTGPT_ENV` is already set to "cloud" in Streamlit secrets and "local" in `.env`.
+
+**Commit 2:** Archive both CSVs to `data/archive/` with a date stamp. Append `Env` to the end of `HEADERS` in `query_logger.py` -- end, not middle, or every historical row misaligns. Inject it centrally in `_build_row` so call sites do not change. Add the column to both CSV writers.
+
+**Acceptance criteria:**
+- `MATTGPT_ENV` logged on every row.
+- Wrong or missing value raises at startup, not silently.
+- Historical rows preserved with date-stamped archive before schema changes.
+- No call site changes required -- injection is in `_build_row`.
+
+- **Discovered during:** May 23, 2026 -- Matt verified GCP service account key rotation worked locally by triggering a real query and confirming the row appeared in the Sheet. Observed the broader Sheets log filling up with local + test traffic indistinguishable from production user traffic.
+- **Logged:** May 23, 2026 (implementation plan merged from MATTGPT-221, closed September 1, 2026)
 
 ---
 
@@ -2356,29 +2363,6 @@ Fallback if no entity is detected: surviving-family membership (`background`, `n
 
 ---
 
-### MATTGPT-221
-**Environment stamp on every log write: add Env column to query_logger.py, archive existing CSVs**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Enhancement
-- **File:** `config/environment.py` (new), `services/query_logger.py`
-- **Logged:** August 30, 2026
-
-**Why:** Log analysis needed a five-tier heuristic filter to separate Matt's traffic from visitors, reached 96 percent, and could not do better because nothing records who is asking. After this, one column comparison replaces the whole filter.
-
-**Two commits:**
-
-**Commit 1:** Add `config/environment.py` reading `MATTGPT_ENV` via `get_conf`. Add a startup print so a wrong value shows up on the first deploy rather than silently. `MATTGPT_ENV` is already set to "cloud" in Streamlit secrets and "local" in `.env`.
-
-**Commit 2:** Archive both CSVs to `data/archive/` with a date stamp. Append `Env` to the end of `HEADERS` in `query_logger.py` -- end, not middle, or every historical row misaligns. Inject it centrally in `_build_row` so call sites do not change. Add the column to both CSV writers.
-
-**Acceptance criteria:**
-- `MATTGPT_ENV` logged on every row.
-- Wrong or missing value raises at startup, not silently.
-- Historical rows preserved with date-stamped archive before schema changes.
-- No call site changes required -- injection is in `_build_row`.
-
 ---
 
 ### MATTGPT-222
@@ -2804,6 +2788,17 @@ Source-side count (grep of `ui/styles/`) is 34 raw occurrences -- the delta of 3
 
 > **Read only -- do not add blocks here directly.**
 > Blocks are moved here from Active Tickets above when a ticket's status changes to Decided Against. New tickets always start in Active Tickets. See CLAUDE.md § Backlog Maintenance for the full lifecycle.
+
+### MATTGPT-221
+**Environment stamp on every log write: add Env column to query_logger.py, archive existing CSVs**
+
+- **Status:** Decided Against (September 1, 2026)
+- **Priority:** High
+- **Type:** Enhancement
+- **Logged:** August 30, 2026
+- **Why not:** Duplicate of MATTGPT-086. -086 is the survivor: it predates this ticket by three months and covers the same problem (dev/test traffic mixing with production in the query log). Implementation plan from this ticket (two-commit sequence, `config/environment.py`, `_build_row` injection, acceptance criteria, `MATTGPT_ENV` already in secrets/`.env`) merged into -086's detail block. Priority on -086 updated to High.
+
+---
 
 ### MATTGPT-231
 **Pre-push hook widened to include integration tests -- filed on false premise**
