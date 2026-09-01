@@ -24,7 +24,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 -160 (extractor dropping qualifiers on 7 of 23) · -173 (malformed and comp-only JD behavior) · -159 (sequential gpt-4o loop) · -014 (34 skipped integration scenarios) · -089 (location, work-model, availability) · -012 (Private View Phase 4) · -081 (corrective actions by asset type) · -099 (comp handling) · -017 (logging scenarios)
 
 **LATER — tier 1:** real defects with known fixes
--177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -180 (fixture blind spot) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28)
+-177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -180 (fixture blind spot) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -230 (My Work search silently degrades to keyword fallback; visitor sees no results on existing work)
 
 **LATER — tier 2:** corpus work
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
@@ -128,6 +128,7 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-144](#mattgpt-144) | Regression: `explore_stories.py:1187,1199` still says "projects" after June 30 count-noun fix; no singular form | Open | Medium | Bug | August 31, 2026 |
 | [MATTGPT-228](#mattgpt-228) | Deep link param never consumed: `?story=<id>` re-applies on refresh, no in-app escape; offset inherited across searches | Open | High | Bug | August 31, 2026 |
 | [MATTGPT-229](#mattgpt-229) | Asking Agy "why hire matt" flashes My Work table view before landing on conversation | Open | Medium | Bug | September 1, 2026 |
+| [MATTGPT-230](#mattgpt-230) | My Work search silently degrades to keyword fallback for the life of a session; visitor sees "No strong matches" on work that exists | Open | High | Bug | September 1, 2026 |
 | [MATTGPT-226](#mattgpt-226) | Dead `.main` selectors across `ui/styles/` after `.main → .stMain` refactor: 31 selectors, ~299 declarations, all matching 0 elements | Open | Medium | Refactor / Tech debt | August 31, 2026 |
 | [MATTGPT-221](#mattgpt-221) | Environment stamp on every log write: add Env column to query_logger.py, archive existing CSVs | Open | High | Enhancement | August 30, 2026 |
 | [MATTGPT-222](#mattgpt-222) | Three operational alarms: zero-score, anchor-cache drift, out_of_scope on known entity | Open | High | Enhancement | August 30, 2026 |
@@ -2479,6 +2480,34 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 2. Reset `page_offset` when the result set changes identity (new search, new filter state). Keep the initial jump; remove cross-context inheritance.
 
 **Cross-references:** MATTGPT-146 (PN filter leak, same filter-state surface), MATTGPT-204 (explore_stories.py navigation behavior).
+
+---
+
+### MATTGPT-230
+**My Work search silently degrades to keyword fallback for the life of a session; visitor sees "No strong matches" on work that exists**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **File:** Unknown -- likely `services/rag_service.py` or `services/pinecone_service.py` embedding path
+- **Logged:** September 1, 2026
+
+**Observation (production, two sessions, September 1, 2026):** My Work search runs in two modes with no visitor-visible distinction. Healthy: "Found N matching stories," ranked results. Degraded: "Showing closest matches, relevance may be low" or "No strong matches," zero results, apparent keyword-only fallback.
+
+Session 1: "Tell me about Matt's AT&T work" and "How did Matt scale a Cloud Innovation Center?" both returned zero with "No strong matches." Reset filters did not recover. Only a new session did. Session 2 (minutes later, same build): both queries returned 25. The first query in session 1 was already degraded -- nothing the visitor did caused it. Bare keywords like "Cloud Innovation Center" still returned rows in the degraded session, consistent with keyword fallback active and embeddings not firing.
+
+**Hypothesis:** An embedding call fails or rate-limits early in the session. The app catches the exception silently, falls back to keyword matching, and that fallback latches for the life of the session. The visitor sees a bad-result banner rather than an error.
+
+**Visitor impact:** A recruiter searching for a specific client or topic sees "Matt may not have worked with this client or topic" on work he demonstrably did. No in-app signal that the app is broken rather than the corpus empty. High priority because the degraded session is indistinguishable from a correct "no results."
+
+**Diagnostic handle:** The low-relevance banner ("Showing closest matches, relevance may be low") is the tell. If it appears on a query with known matches, or a known-match query returns zero, the session is degraded.
+
+**Related:** MATTGPT-162 fixed the same class of silent failure on Ask Agy -- `_embed` was swallowing exceptions and returning a zero vector. Check whether My Work's embedding path has the same defect before diagnosing further.
+
+**Acceptance:**
+- Identify the fallback path and what triggers it.
+- Either recover on the next query (don't latch the bad state) or surface a visible error rather than returning silently degraded results.
+- Log at the moment of fallback so the next incident leaves a trace.
 
 ---
 
