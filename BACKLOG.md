@@ -7,7 +7,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 ---
 
-## Value Prioritized Roadmap (updated 2026-09-01)
+## Value Prioritized Roadmap (updated 2026-09-01, evening)
 
 **NOW**
 1. **-228** — Deep link param never consumed: `?story=<id>` re-applies on refresh, Reset Filters doesn't clear it, no in-app exit. Hits hiring managers -- exact audience for forwarded links -- who then can't browse. Offset inherited across searches as a second symptom.
@@ -19,11 +19,12 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 7. **-128** — Split source panel by kind (project records / positioning docs), extract reason lines from figures, drop trailing question. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
 8. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
-**NEXT** — Role Match, once the runway clears
--160 (extractor dropping qualifiers on 7 of 23) · -173 (malformed and comp-only JD behavior) · -159 (sequential gpt-4o loop) · -014 (34 skipped integration scenarios) · -089 (location, work-model, availability) · -012 (Private View Phase 4) · -081 (corrective actions by asset type) · -099 (comp handling) · -017 (logging scenarios)
+**NEXT**
+-235 (Bucket B: resolve LLM-text assertion classes -- unblocks -233 gate widening; three defects shipped this week through the gap it leaves)
+Role Match, once the runway clears: -160 (extractor dropping qualifiers on 7 of 23) · -173 (malformed and comp-only JD behavior) · -159 (sequential gpt-4o loop) · -014 (34 skipped integration scenarios) · -089 (location, work-model, availability) · -012 (Private View Phase 4) · -081 (corrective actions by asset type) · -099 (comp handling) · -017 (logging scenarios)
 
 **LATER — tier 1:** real defects with known fixes
--177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -180 (fixture blind spot) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -230 (My Work search silently degrades to keyword fallback; visitor sees no results on existing work) · -234 (personal branch hard-stops generic off-topic before overlap gate; wrong copy)
+-177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -180 (fixture blind spot) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -230 (My Work search silently degrades to keyword fallback; visitor sees no results on existing work) · -234 (personal branch hard-stops generic off-topic before overlap gate; wrong copy) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families)
 
 **LATER — tier 2:** corpus work
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
@@ -129,6 +130,8 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-232](#mattgpt-232) | `requirements_temp.txt` in repo root -- remove | Open | Low | Hygiene | September 1, 2026 |
 | [MATTGPT-233](#mattgpt-233) | Phase 2: extend pre-push gate to BDD suite, `test_agy_behavior.py`, `test_structural_assertions.py` | Open | Medium | Infra | September 1, 2026 |
 | [MATTGPT-234](#mattgpt-234) | `personal` router branch hard-stops generic off-topic queries before overlap gate fires; wrong rejection copy | Open | Medium | Bug | September 1, 2026 |
+| [MATTGPT-235](#mattgpt-235) | Resolve LLM-text assertion classes so pre-push gate can widen to agy-behavior and structural suites | Open | High | Refactor / Test | September 1, 2026 |
+| [MATTGPT-236](#mattgpt-236) | Remove router topical family dimension: delete 3 inert families, rewire 2 set memberships, remove 6 topic-axis families | Open | Medium | Refactor | September 1, 2026 |
 | [MATTGPT-226](#mattgpt-226) | Dead `.main` selectors across `ui/styles/` after `.main → .stMain` refactor: 31 selectors, ~299 declarations, all matching 0 elements | Open | Medium | Refactor / Tech debt | August 31, 2026 |
 | [MATTGPT-221](#mattgpt-221) | Environment stamp on every log write: add Env column to query_logger.py, archive existing CSVs | Open | High | Enhancement | August 30, 2026 |
 | [MATTGPT-222](#mattgpt-222) | Three operational alarms: zero-score, anchor-cache drift, out_of_scope on known entity | Open | High | Enhancement | August 30, 2026 |
@@ -2487,6 +2490,55 @@ Session 1: "Tell me about Matt's AT&T work" and "How did Matt scale a Cloud Inno
 **Acceptance:** (1) Re-run the rejection eval before and after the fix; confirm no legitimate personal-query rejections are lifted. (2) A banana-type query produces the correct off-topic rejection copy, not "I'm focused on Matt's professional experience."
 
 **Related:** MATTGPT-219 (out_of_scope branch HARD_ACCEPT gate, same pattern already applied).
+
+---
+
+### MATTGPT-236
+**Remove router topical family dimension: delete 3 inert families, rewire 2 set memberships, remove 6 topic-axis families**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Refactor
+- **File:** `services/semantic_router.py`, `config/constants.py`, `services/backend_service.py`
+- **Logged:** September 1, 2026
+- **Dependencies:** MATTGPT-220 (inventory complete, conclusion untracked until this ticket)
+
+**Finding (MATTGPT-220 inventory):** 11 topical families produce a label that no branch reads for its topic content. Three (`leadership`, `stakeholders`, `innovation`) reach no branch at all -- they exist only as anchor strings and a log column. Six (`technical`, `delivery`, `team_scaling`, `agile_transformation`, `domain_payments`, `domain_healthcare`) appear only in `SUBSTITUTION_FAMILIES` and `_PN_EXCLUDED_FAMILIES`, where the code cares whether the family is in the set, not which one. Two (`background`, `behavioral`) sit in the topical group but are query-shape families that do branch. Both set memberships proxy for a question the code never asks directly: is this query about the work, or about who Matt is? The story-side half is already answered by `Theme == "Professional Narrative"`.
+
+**Three-commit plan:**
+1. Delete the 3 inert families (`leadership`, `stakeholders`, `innovation`) from anchors and `VALID_INTENTS`.
+2. Rewire `_PN_EXCLUDED_FAMILIES` and `SUBSTITUTION_FAMILIES` to ask their real question directly (entity-detection or unconditional), measured by `probe_163_substitution_impact.py`.
+3. Remove the 6 topic-axis families after replay diff confirms safe redistribution.
+
+**Critical constraint on commit 3:** Removing any anchor redistributes queries onto the global argmax runner-up. The out_of_scope anchors are the negative complement of the topical ones -- straight deletion misroutes ~474 payments queries to a canned rejection (confirmed by replay against borderline and offdomain logs). Commit 3 requires a fresh replay diff rerun before it ships.
+
+**Surviving families post-refactor:** `background`, `behavioral`, `synthesis`, `narrative`, `personal`, `out_of_scope` -- the query-shape axis, legitimately hand-maintained.
+
+**Reference:** Router anatomy diagram, panels 1-6.
+
+---
+
+### MATTGPT-235
+**Resolve LLM-text assertion classes so pre-push gate can widen to agy-behavior and structural suites**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Refactor / Test
+- **File:** `tests/test_agy_behavior.py`, `tests/test_structural_assertions.py`
+- **Logged:** September 1, 2026
+- **Blocks:** MATTGPT-233 (Phase 2 gate widening)
+
+**Issue:** ~213 tests across `test_structural_assertions.py` and `test_agy_behavior.py` assert on gpt-4o response text and flake at the class level -- any parametrized instance can pass on one run and fail the next. `TestNoMetaCommentary`, `TestAgyVoice`, and `TestAllStructuralChecks` are ~71 tests each; `TestAllStructuralChecks` is a superset of the other two, so roughly a third are duplicates. Widening the pre-push gate to these files today would make every push red.
+
+**Not a Bucket A conversion.** Bucket A moved tests that used LLM text as a proxy for retrieval behavior; these are genuinely about response text (voice, structure, meta-commentary). Retrieval observables cannot replace them.
+
+**Two directions (not settled):**
+1. Reduce the surface -- 71 queries times 3 classes may not earn its keep against a smaller representative sample; cutting count cuts flake rate proportionally.
+2. Tighten assertions so they fail on real voice violations rather than word-choice variance.
+
+The duplication between the superset class and its two components should be resolved either way.
+
+**Acceptance:** `test_agy_behavior.py` and `test_structural_assertions.py` can be added to the pre-push hook without producing non-deterministic failures.
 
 ---
 
