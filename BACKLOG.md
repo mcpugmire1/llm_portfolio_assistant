@@ -2445,19 +2445,22 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 
 **Scope (no mechanism hunt, no recovery logic):**
 1. At `rag_service.py:81`, preserve the `None` vs empty-list distinction that `pinecone_semantic_search` already returns -- currently both are flattened to empty list. `None` means Pinecone failed; `[]` means it ran and found nothing. This is the signal that separates an infrastructure failure from a genuine zero-result query.
-2. Replace "Showing closest matches, relevance may be low" with honest copy that branches on the signal. Rows are kept -- hiding keyword results makes the app less useful precisely when it's already degraded, and the visitor can't distinguish "outage" from "nothing here." The defect is the framing, not the rows.
-3. No session flag, no latch unwiring -- the log confirms there is no persistent degraded state to address.
+2. Replace "Showing closest matches, relevance may be low" with the existing breather copy from `backend_service.py`. One string, not two -- the row count carries the difference between the degraded-with-rows and degraded-with-nothing cases. Rows are kept when available; hiding keyword results makes the app less useful precisely when it's already degraded.
+3. When the fallback returns nothing, suppress the story count, the grid, and both affordance lines (the pair of lines inviting the visitor to select a row that does not exist). The breather should be the only element on the page in that state. Contrast with MATTGPT-224: that ticket removed `st.stop()` so a rejected query keeps the browsable grid underneath the banner -- a rejected query still has 123 stories worth browsing. A failed search has nothing. Same principle (show what you have), opposite outcome.
+4. No session flag, no latch unwiring -- the log confirms there is no persistent degraded state to address.
 
-**Banner shapes (same `reason` branch, same code path):**
-- Fallback returns rows: "Search is temporarily degraded. Showing keyword matches only: try again shortly for full results." Rows render. (Colon, not em dash; matches breather copy pattern in `backend_service.py`.)
-- Fallback returns nothing: "Search is temporarily unavailable. Please try again shortly." No false denial.
+**Banner copy (both shapes, same string):**
+"🐾 I need a quick breather: please try again in a moment!" Colon, not em dash. Paw emoji. Matches the existing breather in `backend_service.py`.
 
 **Dependency:** MATTGPT-222 Alarm 1 reads the `None` vs empty-list signal to fire an operational alarm on upstream failure. -230 can ship alone, but until -222 lands, an outage leaves no trace anywhere.
 
+**Open (file separately if confirmed):** The search input shows a red border during fallback. That reads as a validation error on the query when the query was fine. Likely a separate ticket -- do not scope into this change.
+
 **Acceptance:**
 - `rag_service.py:81` preserves `None` vs empty-list from `pinecone_semantic_search`; does not flatten both to empty list.
-- "Showing closest matches, relevance may be low" removed in both fallback shapes; replaced by the copy above.
-- Keyword rows are not hidden -- they render under the degraded banner.
+- "Showing closest matches, relevance may be low" removed; replaced by the breather copy above in both fallback shapes.
+- Fallback with rows: keyword rows render under the breather banner.
+- Fallback with nothing: story count, grid, and affordance lines suppressed; breather is the only element on the page.
 - No change to session management or embedding path.
 
 ---
