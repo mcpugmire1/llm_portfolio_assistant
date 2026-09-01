@@ -11,8 +11,10 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 **NOW**
 1. **-224** — Explore Stories rejection calls st.stop() before grid renders, destroying the browsing context. Every rejection on that page, including correct ones. Live visitor harm.
-2. **-144 (reopened)** — `explore_stories.py:1187,1199` still say "projects" after the June 30 count-noun fix. Factual error: 41 stories across Accenture is not 41 projects. No singular form either -- one result reads "Showing 1 Adjunct Professor projects." Two lines, one fix.
-3. **-221** — Environment stamp on every log write: Env column replaces the five-tier heuristic filter used for visitor identification.
+2. **-228** — Deep link param never consumed: `?story=<id>` re-applies on refresh, Reset Filters doesn't clear it, no in-app exit. Hits hiring managers -- exact audience for forwarded links -- who then can't browse. Offset inherited across searches as a second symptom.
+3. **-144 (reopened)** -- `explore_stories.py:1187,1199` still say "projects." Factual error; no singular form. Fix: `STORY_NOUN` constant in `config/constants.py` read by page and tests.
+4. **-227** -- PN stories appear in filtered results. Default (112) excludes them; Client=Accenture (41) adds 5 that weren't there. Narrowing a filter adds stories browsing doesn't show.
+5. **-221** — Environment stamp on every log write: Env column replaces the five-tier heuristic filter used for visitor identification.
 3. **-222** — Three operational alarms: zero-score (would have caught Jan 29 index outage on first occurrence), anchor-cache drift (sixteen family:unknown rows in Jan 2026), out_of_scope on known entity alias (partially covered by -219 score gate).
 4. **-223** — Sheet migration: retire borderline and offdomain CSVs to Sheet events. Nine and twelve months of production behavior currently local-only.
 5. **-128** — Split source panel by kind (project records / positioning docs), extract reason lines from figures, drop trailing question. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
@@ -123,6 +125,8 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-214](#mattgpt-214) | Targeted audit: parameters never referenced, comments asserting absent behavior, constants unused, copied blocks with stale variable names | Open | Low | Refactor | August 26, 2026 |
 | [MATTGPT-217](#mattgpt-217) | `_substitute_matt_subject` produces subject pronoun in object position ("reported to he at the CIC") | Open | Low | Bug | August 26, 2026 |
 | [MATTGPT-144](#mattgpt-144) | Regression: `explore_stories.py:1187,1199` still says "projects" after June 30 count-noun fix; no singular form | Open | Medium | Bug | August 31, 2026 |
+| [MATTGPT-227](#mattgpt-227) | Professional Narrative stories appear in filtered My Work results -- narrowing a filter adds stories the default view excludes | Open | Medium | Bug | August 31, 2026 |
+| [MATTGPT-228](#mattgpt-228) | Deep link param never consumed: `?story=<id>` re-applies on refresh, no in-app escape; offset inherited across searches | Open | High | Bug | August 31, 2026 |
 | [MATTGPT-226](#mattgpt-226) | Dead `.main` selectors across `ui/styles/` after `.main → .stMain` refactor: 31 selectors, ~299 declarations, all matching 0 elements | Open | Medium | Refactor / Tech debt | August 31, 2026 |
 | [MATTGPT-221](#mattgpt-221) | Environment stamp on every log write: add Env column to query_logger.py, archive existing CSVs | Open | High | Enhancement | August 30, 2026 |
 | [MATTGPT-222](#mattgpt-222) | Three operational alarms: zero-score, anchor-cache drift, out_of_scope on known entity | Open | High | Enhancement | August 30, 2026 |
@@ -2437,6 +2441,55 @@ Fallback if no entity is detected: surviving-family membership (`background`, `n
 **Priority note:** This fires on every rejection on that page, including correct ones. It is the worst visitor-facing state found on August 30. Predates the AgGrid swap -- `st.stop()` halts execution before any grid code runs, so no overlay could ever have masked it.
 
 **Distinct from MATTGPT-204:** -204 covers the zero-filter-match case, where the grid runs but renders empty (and `st.dataframe` lacks the empty-state overlay AgGrid had). -224's `st.stop()` halts before any grid code; the two defects share a symptom and have unrelated causes.
+
+---
+
+### MATTGPT-227
+**Professional Narrative stories appear in filtered My Work results -- narrowing a filter adds stories the default view excludes**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `ui/pages/explore_stories.py` (PATH 3 `has_filters` branch)
+- **Logged:** August 31, 2026
+
+**Issue:** Default view shows 112 stories with no PN stories (MATTGPT-098 exclusion). Filtering Client = Accenture drops to 41 but adds five that were not in the 112: Why Hire Matt?, About Matt, Transition Story, Leadership Philosophy, Work Philosophy. Narrowing a filter adds stories that browsing without filters doesn't show. The behavior is counterintuitive and factually wrong for a hiring manager comparing the filtered view to the default.
+
+**Scope:** Filter branch only. Search stays as-is -- PN stories are often the right answer there; top three results for "why should I hire Matt?" are exactly those. Deep links stay resolvable for all stories -- a forwarded referral link cannot dead-end.
+
+**Loose end:** A script counted 8 Accenture PN stories; only 5 appear in the filtered result. Likely a `Client` vs `Employer` field discrepancy -- PN stories may carry `Employer=Accenture` rather than `Client=Accenture`. Confirm before scoping the fix.
+
+**Implementation:** Add the PN exclusion to `_default_view`'s filtered return and have PATH 3's `has_filters` branch call the helper rather than duplicating the literal. A load-time filter was tried during MATTGPT-224 and backed out because it broke deep links -- do not reintroduce it.
+
+**Tests:** Accenture filter returns no PN titles; search still returns them; `?story=why-hire-matt|accenture` renders the story detail.
+
+**Cross-references:** MATTGPT-098 (original PN exclusion on default view), MATTGPT-228 (deep link escape -- same filter-state and navigation surface).
+
+---
+
+### MATTGPT-228
+**Deep link param never consumed: `?story=<id>` re-applies on refresh, no in-app escape; offset inherited across searches**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **File:** `app.py:~358-365`
+- **Logged:** August 31, 2026
+
+**Issue:** `?story=<id>` sets state and jumps `page_offset` to make the checked row visible, but the param is never consumed. Consequences:
+- Reset Filters does not clear it.
+- Refresh re-applies it.
+- There is no in-app way out other than manually editing the URL.
+
+This hits the exact audience deep links serve: a hiring manager who follows a forwarded referral link, reads the story, then wants to browse the rest of the work. They cannot.
+
+**Second symptom:** `page_offset` is inherited when the result set changes identity. A search performed after arriving via deep link showed "10-19 of 25" on page 1 because the offset from the deep link jump was carried forward.
+
+**Fix:**
+1. Consume and clear the query param in `app.py` (~358-365): set state, then clear `?story` from the URL. The initial jump behavior (checking the row, making it visible) is preserved; only the persistence is removed.
+2. Reset `page_offset` when the result set changes identity (new search, new filter state). Keep the initial jump; remove cross-context inheritance.
+
+**Cross-references:** MATTGPT-227 (same filter-state surface), MATTGPT-204 (explore_stories.py navigation behavior).
 
 ---
 
