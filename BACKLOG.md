@@ -41,7 +41,7 @@ Wrong-assertion test: -203 · -209 (drift guard searches wrong scope)
 Small refactors: -140, -153, -086, -062, -082, -083, -084, -150, -060, -217 (pronoun grammar in substitution)
 BDD structure: -213 (shared step definitions)
 Correctness audit: -214 (parameters, comments, constants, copied blocks) · -226 (dead `.main` selectors, ~299 declarations matching 0 elements)
-Infrastructure: -035, -039, -040, -045
+Infrastructure: -035, -039, -040, -045 · -231 (integration scope added to pre-push hook, no ticket) · -232 (requirements_temp.txt removal)
 
 ---
 
@@ -126,6 +126,8 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-228](#mattgpt-228) | Deep link param never consumed: `?story=<id>` re-applies on refresh, no in-app escape; offset inherited across searches | Open | High | Bug | August 31, 2026 |
 | [MATTGPT-229](#mattgpt-229) | Asking Agy "why hire matt" flashes My Work table view before landing on conversation | Open | Medium | Bug | September 1, 2026 |
 | [MATTGPT-230](#mattgpt-230) | My Work search silently degrades to keyword fallback for the life of a session; visitor sees "No strong matches" on work that exists | Open | High | Bug | September 1, 2026 |
+| [MATTGPT-231](#mattgpt-231) | Pre-push hook widened to include integration tests without a ticket | Open | Low | Infra | September 1, 2026 |
+| [MATTGPT-232](#mattgpt-232) | `requirements_temp.txt` in repo root -- remove | Open | Low | Hygiene | September 1, 2026 |
 | [MATTGPT-226](#mattgpt-226) | Dead `.main` selectors across `ui/styles/` after `.main → .stMain` refactor: 31 selectors, ~299 declarations, all matching 0 elements | Open | Medium | Refactor / Tech debt | August 31, 2026 |
 | [MATTGPT-221](#mattgpt-221) | Environment stamp on every log write: add Env column to query_logger.py, archive existing CSVs | Open | High | Enhancement | August 30, 2026 |
 | [MATTGPT-222](#mattgpt-222) | Three operational alarms: zero-score, anchor-cache drift, out_of_scope on known entity | Open | High | Enhancement | August 30, 2026 |
@@ -2458,6 +2460,34 @@ Session 1: "Tell me about Matt's AT&T work" and "How did Matt scale a Cloud Inno
 - Identify the fallback path and what triggers it.
 - Either recover on the next query (don't latch the bad state) or surface a visible error rather than returning silently degraded results.
 - Log at the moment of fallback so the next incident leaves a trace.
+
+---
+
+### MATTGPT-232
+**`requirements_temp.txt` in repo root -- remove**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Hygiene
+- **File:** `requirements_temp.txt`
+- **Logged:** September 1, 2026
+
+Stale file in repo root. No callers, no CI reference. Remove.
+
+---
+
+### MATTGPT-231
+**Pre-push hook widened to include integration tests without a ticket**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Infra
+- **File:** `.pre-commit-config.yaml`
+- **Logged:** September 1, 2026
+
+The MATTGPT-216 hook shipped as `python -m pytest tests/unit/ -q`. The hook entry now reads `python -m pytest tests/unit/ tests/integration/ -m "not network" -q`. The scope widening to `tests/integration/` happened without a ticket and is not documented in CHANGELOG. This ticket is the paper trail; the CHANGELOG entry for -216 references it.
+
+**Action:** Document what commit made the change, confirm the `-m "not network"` marker covers all tests that require live credentials, and write the CHANGELOG entry against this ticket.
 
 ---
 

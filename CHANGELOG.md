@@ -52,7 +52,7 @@ Inventory finding also exposed MATTGPT-219's true fix: the score gate, not the t
 
 ---
 
-**August 30, 2026 — "Why hire Matt?" synthesis pool restored; Title soft-filter ported to `get_synthesis_stories` (MATTGPT-218)** -- `1633ae4`, `ffac391`, `040b785`
+**August 30, 2026 — "Why hire Matt?" synthesis pool restored; Title soft-filter ported to `get_synthesis_stories` (MATTGPT-218)** -- `9395a68`, `3c5d00a`, `1633ae4`, `ffac391`, `040b785`
 
 `f1285f1` (Jan 30, 2026) added Title-entity detection and made `rag_answer` treat a Title match as a soft filter: pin the story, keep the pool. `get_synthesis_stories` was not updated at the time; it treated Title like Client and applied it as a hard per-theme filter. The bug was latent until Feb 3 when "Why Hire Matt?" was added to the corpus. From that point, the query "Why hire Matt?" matched the substring and collapsed the synthesis pool to one story. "Why should I hire Matt" (no substring match) continued to return a normal 21-story pool. Same code, different phrasing.
 
@@ -74,11 +74,11 @@ Call sites examined, no change made: `probe_assessor.py:96` uses `_embed`; excep
 
 ---
 
-**August 26-27, 2026 — Unit test gate added to pre-push hook and CI; hermetic suite; router refactor (MATTGPT-216)** -- `86e114f`, `6c01218`
+**August 26-27, 2026 — Unit test gate added to pre-push hook and CI; hermetic suite; router refactor (MATTGPT-216)** -- `86e114f`, `6c01218`, `646b4da`, `332b772`
 
-Two-commit scope. `86e114f`: local pre-push hook extended to run `pytest tests/unit/ -x -q` before any push; xfail markers applied to the 5 remaining known-failure tests so they register as expected rather than silently degrading. `6c01218`: extended scope -- hermetic unit suite (network calls stubbed so tests pass without live credentials), router refactor extracting `_classify_embedding` as a named "network boundary" helper, GitHub Actions workflow (`.github/workflows/test.yml`) enforcing the same gate on every push to main, and a bare-mode config fix uncovered during hermeticity work.
+Four-commit scope. `86e114f`: local pre-push hook (`.pre-commit-config.yaml` local stage) added to run `python -m pytest tests/unit/ -q` on push; xfail markers applied to the 5 remaining known-failure tests so they register as expected rather than silently degrading. Hook install is opt-in per clone: `pre-commit install --hook-type pre-push`. `6c01218`: hermetic unit suite (network calls stubbed so tests pass without live credentials), router refactor extracting `_classify_embedding` as a named "network boundary" helper, GitHub Actions workflow (`.github/workflows/test.yml`) enforcing the same gate on every push to main, and a bare-mode config fix uncovered during hermeticity work. Hermetic run: 362 passed, 5 xfailed, 2.23s. `646b4da`: CI fix -- added `requirements-dev.txt` install step so pytest is available in the workflow (requirements.txt is runtime only). `332b772`: trimmed CI cold-cache install from ~2m to <20s via `requirements-ci.txt` (stripped torch/CUDA/faiss/nvidia wheels not needed for unit tests).
 
-The local hook is opt-in per clone (`pre-commit install --hook-type pre-push`). The GH Action is the real enforcement gate; subsequent runs use pip cache, expect ~1-2 min wall time with ~2s pytest.
+Note: the hook's scope was subsequently widened to include `tests/integration/ -m "not network"` without a ticket. That change is tracked as MATTGPT-231.
 
 Architecture Sync candidates for Code: two-class split in `_init_pinecone()` (misconfiguration raises at startup, runtime failure returns None); `_classify_embedding` extraction as a "network boundary" pattern for future router work.
 
