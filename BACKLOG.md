@@ -10,21 +10,25 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-09-01, evening)
 
 **NOW**
-1. **-228** — Deep link param never consumed: `?story=<id>` re-applies on refresh, Reset Filters doesn't clear it, no in-app exit. Hits hiring managers -- exact audience for forwarded links -- who then can't browse. Offset inherited across searches as a second symptom.
-2. **-144 (reopened)** -- `explore_stories.py:1187,1199` still say "projects." Factual error; no singular form. Fix: `STORY_NOUN` constant in `config/constants.py` read by page and tests.
-3. **-146** -- PN stories appear in filtered results (filter branch only; search stays as-is). Default (112) excludes them; Client=Accenture (41) adds 5 that weren't there. Fix: `_default_view` exclusion, PATH 3 calls the helper.
-4. **-221** — Environment stamp on every log write: Env column replaces the five-tier heuristic filter used for visitor identification.
-5. **-222** — Three operational alarms: zero-score (would have caught Jan 29 index outage on first occurrence), anchor-cache drift (sixteen family:unknown rows in Jan 2026), out_of_scope on known entity alias (partially covered by -219 score gate).
-6. **-223** — Sheet migration: retire borderline and offdomain CSVs to Sheet events. Nine and twelve months of production behavior currently local-only.
-7. **-128** — Split source panel by kind (project records / positioning docs), extract reason lines from figures, drop trailing question. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
+1. **-230** — My Work search silently degrades to keyword fallback for the life of a session. Visitor sees "No strong matches" on work that exists, with no way to know the app is broken rather than the corpus empty. Latches; only a new session recovers.
+2. **-234** — `personal` branch hard-stops generic off-topic queries before the overlap gate fires, with rejection copy that reads as though the visitor asked something personal. One line at two call sites, same pattern as -219. ARCHITECTURE.md:664 constraint: re-run the rejection eval as the acceptance condition.
+3. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
+4. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
+5. **-144** -- "projects" mislabel at `explore_stories.py:1187,1199`. Adjacent to -146, same file.
+6. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
+7. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
 8. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT**
--235 (Bucket B: resolve LLM-text assertion classes -- unblocks -233 gate widening; three defects shipped this week through the gap it leaves)
-Role Match, once the runway clears: -160 (extractor dropping qualifiers on 7 of 23) · -173 (malformed and comp-only JD behavior) · -159 (sequential gpt-4o loop) · -014 (34 skipped integration scenarios) · -089 (location, work-model, availability) · -012 (Private View Phase 4) · -081 (corrective actions by asset type) · -099 (comp handling) · -017 (logging scenarios)
+9. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
+10. **-221** — Environment stamp on every log write. Makes every future log analysis exact rather than heuristic.
+11. **-222** — Three operational alarms. Zero-score alarm would have surfaced -230 rather than it being found by hand during a shakeout.
+12. **-223** — Sheet migration, retires local-only borderline and offdomain CSVs.
+13. **-089** — Role Match: location, work model, availability. May 22 recruiter finding; Role Match is the surface that does a recruiter's job in thirty seconds.
+14. Rest of Role Match: **-160**, -173, -159, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
--177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -180 (fixture blind spot) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -230 (My Work search silently degrades to keyword fallback; visitor sees no results on existing work) · -234 (personal branch hard-stops generic off-topic before overlap gate; wrong copy) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families)
+-177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families)
 
 **LATER — tier 2:** corpus work
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
