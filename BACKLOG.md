@@ -10,15 +10,14 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-09-01)
 
 **NOW**
-1. **-224** — Explore Stories rejection calls st.stop() before grid renders, destroying the browsing context. Every rejection on that page, including correct ones. Live visitor harm.
-2. **-228** — Deep link param never consumed: `?story=<id>` re-applies on refresh, Reset Filters doesn't clear it, no in-app exit. Hits hiring managers -- exact audience for forwarded links -- who then can't browse. Offset inherited across searches as a second symptom.
-3. **-144 (reopened)** -- `explore_stories.py:1187,1199` still say "projects." Factual error; no singular form. Fix: `STORY_NOUN` constant in `config/constants.py` read by page and tests.
-4. **-146** -- PN stories appear in filtered results (filter branch only; search stays as-is). Default (112) excludes them; Client=Accenture (41) adds 5 that weren't there. Fix: `_default_view` exclusion, PATH 3 calls the helper.
-5. **-221** — Environment stamp on every log write: Env column replaces the five-tier heuristic filter used for visitor identification.
-3. **-222** — Three operational alarms: zero-score (would have caught Jan 29 index outage on first occurrence), anchor-cache drift (sixteen family:unknown rows in Jan 2026), out_of_scope on known entity alias (partially covered by -219 score gate).
-4. **-223** — Sheet migration: retire borderline and offdomain CSVs to Sheet events. Nine and twelve months of production behavior currently local-only.
-5. **-128** — Split source panel by kind (project records / positioning docs), extract reason lines from figures, drop trailing question. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
-6. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+1. **-228** — Deep link param never consumed: `?story=<id>` re-applies on refresh, Reset Filters doesn't clear it, no in-app exit. Hits hiring managers -- exact audience for forwarded links -- who then can't browse. Offset inherited across searches as a second symptom.
+2. **-144 (reopened)** -- `explore_stories.py:1187,1199` still say "projects." Factual error; no singular form. Fix: `STORY_NOUN` constant in `config/constants.py` read by page and tests.
+3. **-146** -- PN stories appear in filtered results (filter branch only; search stays as-is). Default (112) excludes them; Client=Accenture (41) adds 5 that weren't there. Fix: `_default_view` exclusion, PATH 3 calls the helper.
+4. **-221** — Environment stamp on every log write: Env column replaces the five-tier heuristic filter used for visitor identification.
+5. **-222** — Three operational alarms: zero-score (would have caught Jan 29 index outage on first occurrence), anchor-cache drift (sixteen family:unknown rows in Jan 2026), out_of_scope on known entity alias (partially covered by -219 score gate).
+6. **-223** — Sheet migration: retire borderline and offdomain CSVs to Sheet events. Nine and twelve months of production behavior currently local-only.
+7. **-128** — Split source panel by kind (project records / positioning docs), extract reason lines from figures, drop trailing question. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
+8. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT** — Role Match, once the runway clears
 -160 (extractor dropping qualifiers on 7 of 23) · -173 (malformed and comp-only JD behavior) · -159 (sequential gpt-4o loop) · -014 (34 skipped integration scenarios) · -089 (location, work-model, availability) · -012 (Private View Phase 4) · -081 (corrective actions by asset type) · -099 (comp handling) · -017 (logging scenarios)
@@ -35,7 +34,7 @@ Meta: -079, -156, -096
 -168 (needs Top Score distribution) · -077 (re-measure after -181) · -171 (coupled to -190) · -185 (negation)
 
 **LATER — tier 4:** hygiene
-Dead code: -176, -183, -199, -201 · Hidden error: -204 (zero-filter-match only -- st.stop() blanking is MATTGPT-224, NOW)
+Dead code: -176, -183, -199, -201 · Hidden error: -204 (zero-filter-match only -- st.stop() blanking was MATTGPT-224, shipped `92370b3`)
 Untraced flash: -229 (My Work flashes before Ask Agy conversation -- needs DevTools trace)
 BDD flakes: -122, -131, -142, -145, -197, -198, -205
 Wrong-assertion test: -203 · -209 (drift guard searches wrong scope)
@@ -77,7 +76,6 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-097](#mattgpt-097) | Career-intent framing refresh — corpus predates current role taxonomy; refresh framing AND tighten register | Open | Medium | Action | May 28, 2026 |
 | [MATTGPT-099](#mattgpt-099) | Role Match — assess and decide comp handling on JDs that include comp expectations | Open | Medium | Investigation + Action | May 29, 2026 |
 | [MATTGPT-122](#mattgpt-122) | My Work — Cards view BDD timing: test_view_switching_preserves_open_story_detail fails (components.html iframe listener not attached at click time) | Open | Low | Issue | June 10, 2026 |
-| [MATTGPT-126](#mattgpt-126) | Ask Agy landing — input border flash on load; emotion-class guard retained as insurance | Parked | Low | Issue | June 12, 2026 |
 | [MATTGPT-128](#mattgpt-128) | Displayed-source faithfulness — source cards must substantiate the claims in the answer | Open | High | Issue | June 14, 2026 |
 | [MATTGPT-129](#mattgpt-129) | Content elaboration per era — expand 5 under-documented operational stories | Open | High | Action | June 14, 2026 |
 | [MATTGPT-130](#mattgpt-130) | "practitioners" canonical everywhere — UI, eval golden set, corpus re-embed in lockstep | Open | Medium | Action | June 14, 2026 |
@@ -117,7 +115,6 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-202](#mattgpt-202) | id-skip predicate copied verbatim in app.py and corpus_loader.py -- divergence risk, no shared source | Open | Medium | Bug | August 18, 2026 |
 | [MATTGPT-203](#mattgpt-203) | Chip grid disable test asserts the wrong mechanism | Open | Low | Bug (Test) | August 18, 2026 |
 | [MATTGPT-204](#mattgpt-204) | Explore Stories zero-filter-match: Table view renders empty grid chrome; Cards/Timeline empty-state text hidden by CSS | Open | Low | Bug | August 18, 2026 |
-| [MATTGPT-224](#mattgpt-224) | Explore Stories rejection calls st.stop() before grid renders -- blanks the entire page | Open | High | Bug | August 30, 2026 |
 | [MATTGPT-205](#mattgpt-205) | BDD marathon flake: test_error_state_extraction_failure fails in marathon, passes in isolation | Open | Low | Bug (Test) | August 19, 2026 |
 | [MATTGPT-206](#mattgpt-206) | Eval suite ~1-in-70 stochastic flap; Q28 confirmed non-deterministic | Open | Medium | Bug (Test) | August 19, 2026 |
 | [MATTGPT-209](#mattgpt-209) | MATT_DNA drift guard passes for wrong reason: employer check searches whole string, not Career Arc block | Open | Low | Bug (Test) | August 24, 2026 |
@@ -982,26 +979,6 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Note:** This test was never green before MATTGPT-105 — it always failed at an earlier step for different reasons. -105 advanced the failure mode to expose the timing issue. Not a -105 regression.
 - **Logged:** June 10, 2026
 
-### MATTGPT-126
-**Ask Agy landing — input border flash on load; emotion-class guard retained as insurance**
-
-- **Status:** Parked
-- **Priority:** Low
-- **Type:** Issue
-- **File:** `ui/pages/ask_mattgpt/styles.py` (original ticket had wrong file: global_styles.py)
-- **Logged:** June 12, 2026
-
-**Symptom:** Ask Agy landing input (`key="landing_input"`) intermittently renders without a visible border on initial page load. Not reproducible as of June 2026 — parked until it reappears.
-
-**Code-reviewed June 2026 (Chrome Claude):**
-- The `div[data-testid="stTextInput"] input` rule lives in `styles.py` line 348, not `global_styles.py`.
-- `!important` is already on the border rule at line 352. The originally proposed fix was already shipped before the ticket was filed.
-- If the flash returns, investigate `div[data-baseweb="input"]` wrapper border suppression (`styles.py` lines 373–378), not the `<input>` border rule.
-
-**On the .st-bz/.st-c0/.st-c1/.st-c2 block (`styles.py` lines 388–396):**
-Originally flagged as removable dead code (emotion hashes drift between builds and may not currently match live DOM classes). Reversal: do NOT remove. The original comment "Kill Streamlit's atomic border classes" documents that something was alive and needed killing — a pink/red inner border that required multi-iteration remediation. Streamlit upgrades can regenerate hashes that collide with old ones; an unmatched selector is a no-op, but an absent guard when the hashes return means re-paying the remediation cost. Comment updated in commit `598b14c` to document the intent explicitly. Block stays.
-
----
 
 
 ### MATTGPT-128
@@ -2133,7 +2110,7 @@ Chrome Claude's test report under "The five interactions that collapsed the grid
 
 **Surfaced during:** MATTGPT-165 Cycle A session (August 18, 2026). Out of scope for -165. Defect 3 surfaced August 31, 2026 in Chrome Claude test report.
 
-**Cross-references:** MATTGPT-202 (`load_star_stories` error handling -- the Streamlit-context concern intentionally kept in `app.py`; defect 1 is that handling being broken). MATTGPT-224 (st.stop() rejection blanking -- different cause, same symptom on screen).
+**Cross-references:** MATTGPT-202 (`load_star_stories` error handling -- the Streamlit-context concern intentionally kept in `app.py`; defect 1 is that handling being broken). MATTGPT-224 (st.stop() rejection blanking -- different cause, same symptom on screen; shipped `92370b3`).
 
 ---
 
@@ -2429,35 +2406,6 @@ Fallback if no entity is detected: surviving-family membership (`background`, `n
 
 ---
 
-### MATTGPT-224
-**Explore Stories rejection calls st.stop() before grid renders -- blanks the entire page**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Bug
-- **File:** `ui/pages/explore_stories.py` (both rejection branches)
-- **Logged:** August 30, 2026
-
-**Issue:** Both rejection branches in `explore_stories.py` set `last_results = []` and call `st.stop()`. The story grid renders around line 1373, so it never runs. A visitor types one off-topic query into Find Stories and all 123 browsable stories disappear, replaced by a one-line banner above roughly 900px of white space. No grid, no pagination, no footer. Because `render_no_match_banner` suppresses chips when context is "explore", there is nothing else on screen either -- no suggestions, no stories, no way forward except retyping.
-
-**Confirmed visually (August 30, 2026):** "Can you sell me tickets to Madonna?" produces the banner, the debug line, an advice line telling the visitor to search for clients or technologies, and nothing else. The five filter dropdowns directly above already list every valid client, role, and domain -- the advice is asking the visitor to think of something the page is already displaying.
-
-**Compare:** In Ask Agy, a rejection is a message in a transcript. Prior turns stay, the input is right there, nothing is destroyed. Explore Stories destroys the browsing context that is the point of the page.
-
-**Fix:** Do not `st.stop()`. Render the banner, let the grid render underneath with filter state intact. The visitor sees the message above work they can still browse, and the escape hatch is the page itself.
-
-**Two follow-ons, only after the fix lands:**
-1. The advice line ("search for clients or technologies") becomes redundant once the corpus is visible. Revisit copy -- may need no change at all once the grid stays.
-2. The search field renders with a red outline on rejection, framing a playful off-topic query as a validation failure. A rejected query is not invalid input. `BANNER_COPY` is locked under MATTGPT-071; the copy may not need to change once the grid stays.
-
-**Priority note:** This fires on every rejection on that page, including correct ones. It is the worst visitor-facing state found on August 30. Predates the AgGrid swap -- `st.stop()` halts execution before any grid code runs, so no overlay could ever have masked it.
-
-**Distinct from MATTGPT-204:** -204 covers the zero-filter-match case, where the grid runs but renders empty (and `st.dataframe` lacks the empty-state overlay AgGrid had). -224's `st.stop()` halts before any grid code; the two defects share a symptom and have unrelated causes.
-
----
-
-
----
 
 ### MATTGPT-228
 **Deep link param never consumed: `?story=<id>` re-applies on refresh, no in-app escape; offset inherited across searches**

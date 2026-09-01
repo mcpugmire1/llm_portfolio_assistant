@@ -4,11 +4,23 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ---
 
+## September 2026
+
+### My Work
+
+**September 1, 2026 — Explore Stories rejection no longer blanks the browsing context (MATTGPT-224)** -- `92370b3`
+
+`st.stop()` in both rejection branches of `explore_stories.py` halted execution before the story grid rendered (~line 1373). A single off-topic query replaced 123 browsable stories with a one-line banner above ~900px of white space -- no grid, no pagination, no escape except retyping. Because `render_no_match_banner` suppresses chips in the "explore" context, there was nothing else on screen either. Fix: removed both `st.stop()` calls. The banner renders; the grid renders underneath with filter state intact. Visitor sees the rejection message above work they can still browse.
+
+Eight-phase production shakeout confirmed September 1, 2026. Red commit `fbcbb7e`; reverted incomplete Green attempt `664dd03`, `841a961`; final Green `92370b3`.
+
+---
+
 ## August 2026
 
 ### Ask Agy
 
-**August 31, 2026 — Landing page chat input border fixed; dead `.main` selector audit filed (MATTGPT-225, MATTGPT-226)**
+**August 31, 2026 — Landing page chat input border fixed; dead `.main` selector audit filed (MATTGPT-225, MATTGPT-226; also closes MATTGPT-126)**
 
 Root cause (MATTGPT-225): Streamlit's emotion atomic classes `.st-bz` and `.st-c2` migrated onto the `<input>` element itself on a version bump. An existing CSS rule `.st-key-landing_input .st-bz, .st-c2 { border-*-color: transparent }` -- written to strip BaseWeb wrapper chrome -- matched the input and overrode the intended `2px solid var(--border-color)` border at higher specificity. Computed border color was `rgba(0,0,0,0)`: width present, color transparent.
 
