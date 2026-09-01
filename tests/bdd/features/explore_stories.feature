@@ -298,17 +298,19 @@ Feature: My Work
     Then no error should be displayed
     And the query should be processed
 
+  # MATTGPT-224: rejection banners no longer blank the page. The grid must
+  # remain visible underneath so the visitor still has browsing context.
   Scenario: Personal question is rejected before Pinecone
     When the user types "Is Matt married?" in the search box
     And the user presses Enter
     Then the rejection banner should be displayed
-    And no story results should be shown
+    And the story grid should still be visible
 
   Scenario: Out of scope industry is rejected before Pinecone
     When the user types "Tell me about Matt's retail experience" in the search box
     And the user presses Enter
     Then the rejection banner should be displayed
-    And no story results should be shown
+    And the story grid should still be visible
 
   # =============================================================================
   # TWO-ROW FILTER BAR (MATTGPT-065)
@@ -399,4 +401,4 @@ Feature: My Work
     And the user presses Enter
     Then the rejection banner should be displayed
     And the banner displays the rule:* copy from BANNER_COPY
-    And no story results should be shown
+    And the story grid should still be visible

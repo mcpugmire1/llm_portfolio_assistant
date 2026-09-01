@@ -1698,10 +1698,31 @@ def no_story_results_shown(browser_page):
     """After a rejected query, story rendering must be absent.
     st.dataframe replaces AgGrid; proxy is the stDataFrame widget + card count.
     Anti-vacuous check: temporarily remove either assert and this step passes on
-    a page with stories — restore immediately after confirming failure."""
+    a page with stories — restore immediately after confirming failure.
+
+    Kept in place for MATTGPT-204's zero-filter-match scenarios (empty grid
+    is correct there). MATTGPT-224 removed this step from the three
+    rejection scenarios (personal, out_of_scope, nonsense) -- those now
+    assert the-story-grid-should-still-be-visible instead."""
     dataframe_count = browser_page.locator('[data-testid="stDataFrame"]').count()
     story_cards = browser_page.locator(".es-fixed-height-card, .es-story-card").count()
     assert dataframe_count == 0 and story_cards == 0, (
         f"Expected zero story results after rejection, "
+        f"found {dataframe_count} stDataFrame widget(s) + {story_cards} story card(s)"
+    )
+
+
+@then("the story grid should still be visible")
+def story_grid_visible(browser_page):
+    """MATTGPT-224 positive inverse of no_story_results_shown. Rejected
+    queries now render the banner AND keep the story grid visible
+    underneath so the visitor keeps browsing context. Covers all three
+    view modes: Table (stDataFrame), Cards (es-fixed-height-card),
+    Timeline (es-story-card). Any one is sufficient; requiring all three
+    would fail on view-mode-specific runs."""
+    dataframe_count = browser_page.locator('[data-testid="stDataFrame"]').count()
+    story_cards = browser_page.locator(".es-fixed-height-card, .es-story-card").count()
+    assert dataframe_count >= 1 or story_cards >= 1, (
+        f"Expected story grid or cards to be visible after rejection, "
         f"found {dataframe_count} stDataFrame widget(s) + {story_cards} story card(s)"
     )
