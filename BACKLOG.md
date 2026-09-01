@@ -1298,6 +1298,8 @@ A load-time filter was tried during MATTGPT-224 and backed out because it broke 
 - `?story=why-hire-matt` (or any PN story ID) renders the story detail, not a default view.
 - Professional Narrative stories remain retrievable by Ask Agy (Pinecone query path is unaffected).
 
+**Loose end (confirm before marking acceptance done):** A script counted 8 Accenture PN stories; only 5 appeared in the Client=Accenture filtered result. Likely a `Client` vs `Employer` field discrepancy -- those PN stories may carry `Employer=Accenture` rather than `Client=Accenture`. The acceptance criterion "filtering by Client never returns a PN story" needs the correct count to write a meaningful BDD assertion. Confirm the field before implementation.
+
 **Note:** Effort estimate intentionally omitted -- small, but requires careful splitting. Validate in the browser after the change, not from source (source-order reasoning is exactly what's fragile here).
 
 **Related -- code adjacency:** MATTGPT-166 (Arc stories invisible to entity-scoped queries via Fortune 500 Clients / Cross-Division placeholder metadata) is a different symptom but touches the same metadata-driven filtering code. Whoever works either ticket will be in the same module. Read both detail blocks before starting either.
