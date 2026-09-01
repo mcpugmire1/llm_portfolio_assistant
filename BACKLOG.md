@@ -23,7 +23,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 -160 (extractor dropping qualifiers on 7 of 23) · -173 (malformed and comp-only JD behavior) · -159 (sequential gpt-4o loop) · -014 (34 skipped integration scenarios) · -089 (location, work-model, availability) · -012 (Private View Phase 4) · -081 (corrective actions by asset type) · -099 (comp handling) · -017 (logging scenarios)
 
 **LATER — tier 1:** real defects with known fixes
--177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -180 (fixture blind spot) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -230 (My Work search silently degrades to keyword fallback; visitor sees no results on existing work)
+-177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -180 (fixture blind spot) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -230 (My Work search silently degrades to keyword fallback; visitor sees no results on existing work) · -234 (personal branch hard-stops generic off-topic before overlap gate; wrong copy)
 
 **LATER — tier 2:** corpus work
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
@@ -128,6 +128,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-230](#mattgpt-230) | My Work search silently degrades to keyword fallback for the life of a session; visitor sees "No strong matches" on work that exists | Open | High | Bug | September 1, 2026 |
 | [MATTGPT-232](#mattgpt-232) | `requirements_temp.txt` in repo root -- remove | Open | Low | Hygiene | September 1, 2026 |
 | [MATTGPT-233](#mattgpt-233) | Phase 2: extend pre-push gate to BDD suite, `test_agy_behavior.py`, `test_structural_assertions.py` | Open | Medium | Infra | September 1, 2026 |
+| [MATTGPT-234](#mattgpt-234) | `personal` router branch hard-stops generic off-topic queries before overlap gate fires; wrong rejection copy | Open | Medium | Bug | September 1, 2026 |
 | [MATTGPT-226](#mattgpt-226) | Dead `.main` selectors across `ui/styles/` after `.main → .stMain` refactor: 31 selectors, ~299 declarations, all matching 0 elements | Open | Medium | Refactor / Tech debt | August 31, 2026 |
 | [MATTGPT-221](#mattgpt-221) | Environment stamp on every log write: add Env column to query_logger.py, archive existing CSVs | Open | High | Enhancement | August 30, 2026 |
 | [MATTGPT-222](#mattgpt-222) | Three operational alarms: zero-score, anchor-cache drift, out_of_scope on known entity | Open | High | Enhancement | August 30, 2026 |
@@ -2461,6 +2462,27 @@ Session 1: "Tell me about Matt's AT&T work" and "How did Matt scale a Cloud Inno
 - Identify the fallback path and what triggers it.
 - Either recover on the next query (don't latch the bad state) or surface a visible error rather than returning silently degraded results.
 - Log at the moment of fallback so the next incident leaves a trace.
+
+---
+
+### MATTGPT-234
+**`personal` router branch hard-stops generic off-topic queries before overlap gate fires; wrong rejection copy**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `services/backend_service.py` (personal branch hard-stop, two call sites)
+- **Logged:** September 1, 2026
+
+**Issue:** Generic off-topic queries ("how much are bananas?") score low on the `personal` router family (score 0.223) and hit the personal hard-stop before the downstream `overlap:0.00` gate can run. The hard-stop returns "I'm focused on Matt's professional experience" -- copy that reads as though the user asked a personal question about Matt, not an unrelated query. The overlap gate would have produced a correct off-topic rejection.
+
+**Historical context (verified September 1, 2026 against Sept 2025 CSV):** This is not a nonsense-filter regression. The `retail_price` filter rule has always required a retailer word (e.g., "Walmart"); bare forms like "how much are bananas?" always passed the filter and were rejected downstream by `overlap:0.00`. The change is in the router: the personal branch now fires a hard-stop at low confidence before overlap can run.
+
+**Evidence:** 28 banana rows in the Sept 2025 CSV -- 17 caught by `rule:retail_price` (retailer-attached forms), 7 rejected by `overlap:0.00` (bare forms). No banana-adjacent rule has ever existed in nonsense_filters across 12 commits. The filter is not the fix.
+
+**Fix:** Extend MATTGPT-219's HARD_ACCEPT gate to the personal branch. Same one-line pattern, two call sites. Score 0.223 does not clear HARD_ACCEPT (0.80), so the personal hard-stop does not fire, and the query falls through to Pinecone → overlap:0.00 → correct off-topic rejection.
+
+**Related:** MATTGPT-219 (out_of_scope branch HARD_ACCEPT gate, same pattern already applied).
 
 ---
 
