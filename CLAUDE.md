@@ -89,7 +89,7 @@ data/
 2. **Never use generic selectors** - `div[data-testid="stColumn"]` leaks everywhere
 3. **Mobile changes go in `@media (max-width: 767px)` blocks** - don't touch desktop rules
 4. **Test at breakpoints:** 375px (iPhone SE), 767px (tablet boundary), 1024px+ (desktop)
-5. **Streamlit class names like `st-emotion-cache-*` change between versions** - target `data-testid` or `.st-key-*` instead
+5. **Never target Streamlit's dynamically-hashed class names** - `st-emotion-cache-*`, `.st-bz`, `.st-c0`, and any short `.st-XX` atomic classes change between builds and can migrate onto different DOM elements. Even "unmatched no-op" selectors are risky: they become active overrides the moment the hash drifts onto a new element. Target `data-testid`, `data-baseweb`, or `.st-key-*` instead. (Aug 2026: `.st-bz/.st-c2` migrated onto the landing input and killed its border via a rule that had been "insurance" for months.)
 6. **Use existing CSS variables** - check `global_styles.py` for `--bg-card`, `--border-color`, `--text-primary`, `--accent-purple`, etc.
 7. **Container keys for targeting** - `st.container(key="my_container")` then target `.st-key-my_container`
 8. **DevTools before any CSS proposal** - see Critical Rules. Applies to layout, alignment, positioning, sizing, color, and typography.
