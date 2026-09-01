@@ -2075,7 +2075,13 @@ Fix (incremental): add the same early-return empty-state guard to the Table bran
 
 Fix (full): Cards and Timeline both use `st.info` for the empty-state message, which is also suppressed by the same `.stAlert` CSS rule at `global_styles.py:190-196`. The Clear filters button renders because it is a `st.button`, not an alert -- so both views have been showing a button with invisible text and nobody noticed because the button alone is enough to be usable. Adding the guard to Table produces three views with invisible text, not three views with a working empty state. The complete fix replaces `st.info` with `st.markdown` across all three views. Implement the guard first to unblock Table; follow immediately with the `st.markdown` conversion across all three. Do not close this ticket on the guard alone.
 
-**Surfaced during:** MATTGPT-165 Cycle A session (August 18, 2026). Out of scope for -165.
+**Defect 3 -- transient blank grid on pagination (unconfirmed, August 31, 2026):**
+
+Chrome Claude's test report under "The five interactions that collapsed the grid last time" -- Page 2 item: "for ~6 seconds the table area rendered as a tall blank white box with the count already showing 11-20; it filled in on its own." Repeated under free exploration as "Transient blank grid." Same class as defect 2 (`st.dataframe` render behavior), grouped here rather than as a separate ticket.
+
+**Status of this finding:** Unconfirmed. A local dev machine under load can produce transient rendering delays that do not reproduce in production, and the observation source is a single test run. Do not treat as a confirmed defect until it reproduces. If it reproduces: the count updating before the grid fills in suggests the pagination state and the grid render are decoupled -- the page counter reflects the new window before `st.dataframe` has finished painting. This is a render-ordering issue, not a data issue.
+
+**Surfaced during:** MATTGPT-165 Cycle A session (August 18, 2026). Out of scope for -165. Defect 3 surfaced August 31, 2026 in Chrome Claude test report.
 
 **Cross-references:** MATTGPT-202 (`load_star_stories` error handling -- the Streamlit-context concern intentionally kept in `app.py`; defect 1 is that handling being broken). MATTGPT-224 (st.stop() rejection blanking -- different cause, same symptom on screen).
 
