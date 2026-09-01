@@ -7,7 +7,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 ---
 
-## Value Prioritized Roadmap (updated 2026-08-31)
+## Value Prioritized Roadmap (updated 2026-09-01)
 
 **NOW**
 1. **-224** — Explore Stories rejection calls st.stop() before grid renders, destroying the browsing context. Every rejection on that page, including correct ones. Live visitor harm.
