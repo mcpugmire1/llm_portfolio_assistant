@@ -36,6 +36,7 @@ Meta: -079, -156, -096
 
 **LATER — tier 4:** hygiene
 Dead code: -176, -183, -199, -201 · Hidden error: -204 (zero-filter-match only -- st.stop() blanking is MATTGPT-224, NOW)
+Untraced flash: -229 (My Work flashes before Ask Agy conversation -- needs DevTools trace)
 BDD flakes: -122, -131, -142, -145, -197, -198, -205
 Wrong-assertion test: -203 · -209 (drift guard searches wrong scope)
 Small refactors: -140, -153, -086, -062, -082, -083, -084, -150, -060, -217 (pronoun grammar in substitution)
@@ -126,6 +127,7 @@ Infrastructure: -035, -039, -040, -045
 | [MATTGPT-217](#mattgpt-217) | `_substitute_matt_subject` produces subject pronoun in object position ("reported to he at the CIC") | Open | Low | Bug | August 26, 2026 |
 | [MATTGPT-144](#mattgpt-144) | Regression: `explore_stories.py:1187,1199` still says "projects" after June 30 count-noun fix; no singular form | Open | Medium | Bug | August 31, 2026 |
 | [MATTGPT-228](#mattgpt-228) | Deep link param never consumed: `?story=<id>` re-applies on refresh, no in-app escape; offset inherited across searches | Open | High | Bug | August 31, 2026 |
+| [MATTGPT-229](#mattgpt-229) | Asking Agy "why hire matt" flashes My Work table view before landing on conversation | Open | Medium | Bug | September 1, 2026 |
 | [MATTGPT-226](#mattgpt-226) | Dead `.main` selectors across `ui/styles/` after `.main → .stMain` refactor: 31 selectors, ~299 declarations, all matching 0 elements | Open | Medium | Refactor / Tech debt | August 31, 2026 |
 | [MATTGPT-221](#mattgpt-221) | Environment stamp on every log write: add Env column to query_logger.py, archive existing CSVs | Open | High | Enhancement | August 30, 2026 |
 | [MATTGPT-222](#mattgpt-222) | Three operational alarms: zero-score, anchor-cache drift, out_of_scope on known entity | Open | High | Enhancement | August 30, 2026 |
@@ -2477,6 +2479,27 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 2. Reset `page_offset` when the result set changes identity (new search, new filter state). Keep the initial jump; remove cross-context inheritance.
 
 **Cross-references:** MATTGPT-146 (PN filter leak, same filter-state surface), MATTGPT-204 (explore_stories.py navigation behavior).
+
+---
+
+### MATTGPT-229
+**Asking Agy "why hire matt" flashes My Work table view before landing on conversation**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** Unknown -- needs DevTools trace
+- **Logged:** September 1, 2026
+
+**Observation (untraced, production incognito, September 1, 2026):** Asked Ask Agy "why hire matt." My Work table view rendered briefly, then the page landed on `ask_mattgpt/conversation_view.py`. The flash was fast -- no time to capture a traceback.
+
+**Hypotheses (not yet validated -- need DevTools trace to confirm):**
+- `active_tab` is momentarily set to My Work before being overridden by the router.
+- The deep-link handler fires on a title match ("why hire matt" matching a story title) and briefly activates the explore surface before the conversational route takes over.
+
+**What to capture in the next reproduction:** Network waterfall, `st.session_state` at the moment of the flash, which path set `active_tab`, and whether a `?story=` param appears transiently in the URL.
+
+**Not for now.** File is insurance against the sequence being hard to reproduce.
 
 ---
 
