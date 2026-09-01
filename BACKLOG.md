@@ -21,12 +21,12 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 9. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT**
-9. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
-10. **-221** — Environment stamp on every log write. Makes every future log analysis exact rather than heuristic.
-11. **-222** — Three operational alarms. Zero-score alarm would have surfaced -230 rather than it being found by hand during a shakeout.
-12. **-223** — Sheet migration, retires local-only borderline and offdomain CSVs.
-13. **-089** — Role Match: location, work model, availability. May 22 recruiter finding; Role Match is the surface that does a recruiter's job in thirty seconds.
-14. Rest of Role Match: **-160**, -173, -159, -014, -012, -081, -099, -017.
+10. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
+11. **-221** — Environment stamp on every log write. Makes every future log analysis exact rather than heuristic.
+12. **-222** — Three operational alarms. Zero-score alarm would have surfaced -230 rather than it being found by hand during a shakeout.
+13. **-223** — Sheet migration, retires local-only borderline and offdomain CSVs.
+14. **-089** — Role Match: location, work model, availability. May 22 recruiter finding; Role Match is the surface that does a recruiter's job in thirty seconds.
+15. Rest of Role Match: **-160**, -173, -159, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
 -177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families)
