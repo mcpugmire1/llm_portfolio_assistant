@@ -2386,7 +2386,7 @@ Fallback if no entity is detected: surviving-family membership (`background`, `n
 
 **Alarm 2 -- anchor-cache drift:** Assert at startup that `intent_embeddings.json` and `VALID_INTENTS` hold the same keys. The sixteen `family:unknown` rows across 2026-01-18 to 2026-01-21 are that hazard firing silently in production. Startup assertion means the next drift surfaces on deploy, not in the log.
 
-**Alarm 3 -- out_of_scope on known entity alias:** Covered by MATTGPT-219 (`b8bd59b`, August 30, 2026). The score gate prevents the rejection from firing for queries that do not clear HARD_ACCEPT. Keep the alarm as a guard: the gate could be bypassed by future anchor additions that raise a valid out_of_scope score above 0.80.
+**Alarm 3 -- out_of_scope on known entity alias:** Covered by MATTGPT-219 (`b8bd59b`, August 30, 2026). The score gate prevents the rejection from firing for queries that do not clear HARD_ACCEPT. Keep the alarm as a guard: the gate could be bypassed by future anchor additions that raise a valid out_of_scope score above 0.80. Note: the same preemption pattern applies to the `personal` branch -- MATTGPT-234 tracks extending the HARD_ACCEPT gate there.
 
 ---
 
@@ -2501,9 +2501,11 @@ Session 1: "Tell me about Matt's AT&T work" and "How did Matt scale a Cloud Inno
 
 **Context:** MATTGPT-216 extended the pre-push gate to `tests/unit/` and `tests/integration/ -m "not network"`. Phase 2 covers the remaining test surfaces not yet in the gate: the 38 BDD feature files (`tests/bdd/`), `test_agy_behavior.py`, and `test_structural_assertions.py`.
 
+**Prerequisite -- document the retrieval observables contract:** The BDD suite and agy-behavior tests bind to five fields in the `rag_answer` return dict: `rejection_reason`, `intent_family`, `entity_match`, `confidence`, and `pool_size`. None of these are documented outside the test assertions themselves. Documenting the contract (expected types, None conditions, and what each field covers per code path) is part of this ticket's scope -- it is a prerequisite of the conversion work, not a parallel task. `9395a68`/`3c5d00a` (MATTGPT-218) pinned the first four fields; confirm `rejection_reason` is covered before conversion begins.
+
 **Blocker:** Some tests in these suites use LLM text assertions that are stochastic -- a gate that fails non-deterministically gets disabled with `--no-verify`. The LLM-text strategy (Bucket B) must be decided before these can be gated safely. That decision gates this ticket.
 
-**Acceptance:** All three surfaces run in the pre-push hook without stochastic failures; any test requiring live API calls is either marked `network` or restructured to be hermetic.
+**Acceptance:** Contract documented; all three surfaces run in the pre-push hook without stochastic failures; any test requiring live API calls is either marked `network` or restructured to be hermetic.
 
 ---
 

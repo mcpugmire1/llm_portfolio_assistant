@@ -58,6 +58,8 @@ Inventory finding also exposed MATTGPT-219's true fix: the score gate, not the t
 
 Fix: ported the soft-filter case from `rag_answer` into `get_synthesis_stories` so both paths apply the same principle -- scope the search, do not reject the query. `pool_size` also pinned in the `rag_answer` return dict. Q65 ("Why hire Matt?") added to the eval suite.
 
+`9395a68` (Red) and `3c5d00a` (Green): Bucket A conversion prep. Pinned four retrieval observables in the `rag_answer` return dict so test suites can assert on router decisions without proxying through LLM-response text: `intent_family` (router family, or None if router did not run), `entity_match` (detected entity, or None), `confidence` (router score), and `pool_size` (stories reaching the LLM). `TestRagAnswerRetrievalObservables` added at `9395a68`; fields populated in all code paths at `3c5d00a`.
+
 ---
 
 **August 28, 2026 — Embedding failure now surfaces correct API error message instead of no-match banner (MATTGPT-162)** -- `e4ddad3`, `d2216c0`
