@@ -355,6 +355,43 @@ def _render_confidence_banner(query: str, confidence: str, results: list[dict]):
     )
 
 
+def _default_view(stories: list[dict], F: dict) -> list[dict]:
+    """Return the fallback story view when a rejected query needs a default.
+
+    MATTGPT-224: rejection branches no longer st.stop(); they render the
+    banner and fall through to the grid. A rejected query is treated as
+    equivalent to no query -- apply any non-query filters the visitor has
+    set, otherwise return the default sorted corpus with positioning
+    stories excluded. F.get("q") is explicitly excluded so the rejected
+    query text is not applied as a keyword filter.
+
+    Positioning-story exclusion uses Theme == "Professional Narrative"
+    per the -169 / DNA convention. Category happens to match today
+    (100% overlap) but Theme is the canonical field.
+    """
+    filters_without_q = {k: v for k, v in F.items() if k != "q"}
+    has_other_filters = any(
+        filters_without_q.get(k)
+        for k in (
+            "industry",
+            "capability",
+            "clients",
+            "domains",
+            "roles",
+            "tags",
+            "era",
+            "has_metric",
+        )
+    )
+    if has_other_filters:
+        return [s for s in stories if matches_filters(s, filters_without_q)]
+    return sorted(
+        [s for s in stories if s.get("Theme") != "Professional Narrative"],
+        key=lambda s: s.get("Start_Date", ""),
+        reverse=True,
+    )
+
+
 def render_filter_chips(filters: dict, stories: list[dict]) -> bool:
     """Render active filter chips. Returns True if state changed."""
     chips = []
@@ -924,21 +961,28 @@ def render_explore_stories(
 
         nonsense_check = is_nonsense(current_query)
 
+        # MATTGPT-224: rejection no longer calls st.stop(). The rejection
+        # branches set a flag; the Pinecone body is gated on `not rejected`.
+        # A rejected query is equivalent to no query -- render the banner
+        # above, then fall through to the default view underneath so the
+        # visitor keeps browsing context (previously st.stop() blanked the
+        # entire page).
+        rejected = False
+        rejected_nonsense_reason = None
+
         if nonsense_check:
-            st.session_state["__nonsense_reason__"] = nonsense_check
             # Clear cache to prevent showing old results if the user cancels this search
             st.session_state.pop(LAST_RESULTS, None)
             st.session_state.pop(LAST_CONFIDENCE, None)
             st.session_state.pop(LAST_QUERY, None)
 
-            # Display rejection banner and stop execution immediately.
-            # is_nonsense() returns the bare category string (e.g.,
-            # "jokes_riddles"). render_no_match_banner expects the
-            # "rule:<category>" prefix for the BANNER_COPY["rule"] branch
-            # to fire (mirrors the Ask Agy convention at
-            # backend_service.py:1463). Without this prefix, rule:*
-            # nonsense queries on My Work fell through to the
-            # legacy catch-all banner copy. May 23, 2026 fix.
+            # Display rejection banner. is_nonsense() returns the bare
+            # category string (e.g., "jokes_riddles"). render_no_match_banner
+            # expects the "rule:<category>" prefix for the BANNER_COPY["rule"]
+            # branch to fire (mirrors the Ask Agy convention at
+            # backend_service.py:1463). Without this prefix, rule:* nonsense
+            # queries on My Work fell through to the legacy catch-all banner
+            # copy. May 23, 2026 fix.
             render_no_match_banner(
                 reason=f"rule:{nonsense_check}",
                 query=current_query,
@@ -947,8 +991,8 @@ def render_explore_stories(
                 filters=F,
                 context="explore",
             )
-            st.session_state["last_results"] = []
-            st.stop()
+            rejected = True
+            rejected_nonsense_reason = nonsense_check
         else:
             # Semantic router gate — catch personal/out_of_scope before Pinecone.
             # MATTGPT-219: out_of_scope is gated on HARD_ACCEPT so low-confidence
@@ -981,9 +1025,9 @@ def render_explore_stories(
                     filters=F,
                     context="explore",
                 )
-                st.session_state["last_results"] = []
-                st.stop()
+                rejected = True
 
+        if not rejected:
             # Run expensive semantic search
             search_container = st.empty()
             with search_container:
@@ -1034,6 +1078,17 @@ def render_explore_stories(
                 view = []
 
             st.session_state["__nonsense_reason__"] = None
+            st.session_state["page_offset"] = 0
+            st.session_state["__last_q__"] = current_query
+        else:
+            # MATTGPT-224: rejected query -- render default view underneath the
+            # banner so the visitor keeps browsing context. Update the state
+            # trackers explicitly (previously done inline by the PATH 1 success
+            # body which is now skipped). __nonsense_reason__ is set to the
+            # nonsense category on the nonsense path, None on the router path
+            # -- neither path leaves it to inherit a stale value.
+            view = _default_view(stories, F)
+            st.session_state["__nonsense_reason__"] = rejected_nonsense_reason
             st.session_state["page_offset"] = 0
             st.session_state["__last_q__"] = current_query
 
@@ -1087,10 +1142,11 @@ def render_explore_stories(
         else:
             # MATTGPT-098: default view (no filters active) applies the
             # Professional Narrative exclusion + Start_Date desc sort.
-            # Mirrors the initial default at line 1935 above; both branches
-            # must apply the default state to avoid resetting it here.
+            # Exclusion uses Theme per the -169 / DNA canonical hook.
+            # (Category was silently-correct by 100% overlap on the current
+            # corpus; Theme is the field the convention actually names.)
             view = sorted(
-                [s for s in stories if s.get("Category") != "Professional Narrative"],
+                [s for s in stories if s.get("Theme") != "Professional Narrative"],
                 key=lambda s: s.get("Start_Date", ""),
                 reverse=True,
             )
