@@ -2435,7 +2435,7 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 - **Status:** Open
 - **Priority:** Medium
 - **Type:** Bug
-- **File:** `services/rag_service.py:96` (log line), `ui/pages/explore_stories.py` (banner path)
+- **File:** `services/rag_service.py:81-96` (split at :81, fallback body at :96), `ui/pages/explore_stories.py` (banner path)
 - **Logged:** September 1, 2026
 
 **What the log settled (verified September 1, 2026):** The query logger shows a 3:37 upstream outage window -- everything between 15:47:18 and 15:50:55 returned zero. The same query ran clean at 16:15:49, 25 minutes after the window closed. Session B's apparent "fix" was coincidence; the outage had already ended. This is a single occurrence in four months of logs. July, August, and the rest of September 1 show only scattered honest misses (`humana`, `cendia`, typo tests). No latch, no replica divergence, no session state to unwind -- a 3.5-minute upstream blip.
@@ -2446,12 +2446,17 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 
 **Scope (no mechanism hunt, no recovery logic):**
 1. Unconditional log line at `rag_service.py:96`: write the cause to `redirect_reason` so the next incident leaves a distinguishable trace.
-2. Error banner instead of confidence banner when the fallback engages: "search is temporarily unavailable" rather than "Matt may not have worked with this client or topic."
+2. Replace the "Showing closest matches, relevance may be low" banner with honest copy that branches on whether the fallback produced rows. Rows are kept -- hiding keyword results makes the app less useful precisely when it's already degraded, and the visitor can't distinguish "outage" from "nothing here." The defect is the framing, not the rows.
 3. No session flag, no latch unwiring -- the log confirms there is no persistent degraded state to address.
+
+**Banner shapes (same `reason` branch, same code path):**
+- Fallback returns rows: "Search is temporarily degraded. Showing keyword matches only -- try again shortly for full results." Rows render.
+- Fallback returns nothing: "Search is temporarily unavailable. Please try again shortly." No false denial.
 
 **Acceptance:**
 - Zero-result fallback writes a distinguishable `redirect_reason` to the query log.
-- Visitor sees an error banner, not a false "no results" denial, when the fallback engages.
+- "Showing closest matches, relevance may be low" is removed in both fallback shapes; replaced by the copy above.
+- Keyword rows are not hidden -- they render under the degraded banner.
 - No change to session management or embedding path.
 
 ---
