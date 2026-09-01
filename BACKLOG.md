@@ -2482,6 +2482,10 @@ Session 1: "Tell me about Matt's AT&T work" and "How did Matt scale a Cloud Inno
 
 **Fix:** Extend MATTGPT-219's HARD_ACCEPT gate to the personal branch. Same one-line pattern, two call sites. Score 0.223 does not clear HARD_ACCEPT (0.80), so the personal hard-stop does not fire, and the query falls through to Pinecone → overlap:0.00 → correct off-topic rejection.
 
+**Architecture constraint:** `ARCHITECTURE.md:664` (note written ~4 minutes after the -219 fix) says explicitly not to gate `personal` without re-running the rejection eval first. The note was written by Code or Design during the -219 session, anticipating this exact follow-on. The eval is an acceptance condition, not a blocker -- file the fix, but gate the commit on a clean eval run.
+
+**Acceptance:** (1) Re-run the rejection eval before and after the fix; confirm no legitimate personal-query rejections are lifted. (2) A banana-type query produces the correct off-topic rejection copy, not "I'm focused on Matt's professional experience."
+
 **Related:** MATTGPT-219 (out_of_scope branch HARD_ACCEPT gate, same pattern already applied).
 
 ---
