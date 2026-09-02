@@ -8,7 +8,17 @@ Feature: Ask Agy — Nonsense rejection banner + contextual chip sets
   #   rule:*         → banner + RULE_CHIPS (capability verbs)
   #   personal       → banner + PERSONAL_CHIPS (character questions)
   #   out_of_scope   → banner + OUT_OF_SCOPE_CHIPS (named anchors)
-  #   low_confidence → banner + rephrase prompt, NO chips
+  #   low_confidence → banner + rephrase prompt + OUT_OF_SCOPE_CHIPS
+  #     (MATTGPT-234 reversal: the no-chips rule was right while low_confidence
+  #     meant near-miss only. -234 routed off-topic fall-through queries into
+  #     this same path, where a rephrase prompt cannot help; chips give the
+  #     visitor a way forward. OUT_OF_SCOPE_CHIPS was chosen because its four
+  #     named anchors (JP Morgan payments, the CIC, scaling teams 4→150+,
+  #     modernizing legacy platforms) read correctly under both readings --
+  #     as "here are the topics Matt actually works in" for the off-topic
+  #     case, and as "try one of these more specific queries" for the near-
+  #     miss case. That robustness is what let the chips ship ahead of the
+  #     copy split. Copy split still pending -239.)
   #
   # Chip prompts were empirically validated against production on May 19, 2026.
   # See MATTGPT-077 for the phrasing-sensitivity findings that informed the
@@ -100,11 +110,11 @@ Feature: Ask Agy — Nonsense rejection banner + contextual chip sets
   # because (a) corpus changes would break a stable trigger query and
   # (b) production-side debug flags would leak test infra into prod code.
 
-  Scenario: low_confidence rejection shows rephrase prompt and NO chips
+  Scenario: low_confidence rejection shows rephrase prompt and OUT_OF_SCOPE_CHIPS
     When the user submits a query that scores below the confidence threshold
     Then the low_confidence rejection banner should be displayed
     And the banner displays the low_confidence copy from BANNER_COPY
-    And zero chips should be visible
+    And all OUT_OF_SCOPE_CHIPS should be visible
     And a rephrase prompt should be displayed
 
   # ---------------------------------------------------------------------------
