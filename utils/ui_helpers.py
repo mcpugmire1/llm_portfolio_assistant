@@ -22,6 +22,17 @@ from utils.formatting import _format_deep_dive, _format_key_points, _format_narr
 #
 # As of Red-B commit, render_no_match_banner does not yet consume these
 # constants — branch-aware rendering lands in the Blue commit.
+#
+# September 2, 2026: MATTGPT-234 reversed the no-chips rule on the
+# low_confidence branch. The three chip constants themselves stay
+# locked; the reversal is about which reason routes to which locked
+# set. low_confidence now routes to OUT_OF_SCOPE_CHIPS. Rationale:
+# the no-chips rule was right while low_confidence meant near-miss
+# only; -234 routed off-topic fall-through queries (bananas at 0.186
+# → Pinecone → confidence=none) into the same path, where a rephrase
+# prompt cannot help. OUT_OF_SCOPE_CHIPS reads correctly under both
+# interpretations, which is what let the chips ship ahead of the copy
+# split (-239, blocked on -238).
 # ============================================================================
 
 RULE_CHIPS = [
@@ -496,6 +507,7 @@ def render_no_match_banner(
             white-space: normal !important;
             min-height: 56px !important;
             width: 100% !important;
+            max-width: 320px !important;
             line-height: 1.3 !important;
         }
         /* Lock inner text-element styling — Streamlit wraps button text
@@ -541,14 +553,19 @@ def render_no_match_banner(
         banner_html += "</div>"
         st.markdown(banner_html, unsafe_allow_html=True)
 
-        # Chips render INSIDE the bubble. Branch-aware chip selection;
-        # low_confidence shows no chips (spec).
-        if context == "ask" and reason != "low_confidence":
+        # Chips render INSIDE the bubble. Branch-aware chip selection.
+        # MATTGPT-234: low_confidence now routes to OUT_OF_SCOPE_CHIPS
+        # (see the -234 note at the chip constants above). Explicit
+        # elif rather than falling through to the else so it survives
+        # Move 3's cleanup of the inline legacy set unambiguously.
+        if context == "ask":
             if reason.startswith("rule:"):
                 suggestions = RULE_CHIPS
             elif reason == "semantic_router:personal":
                 suggestions = PERSONAL_CHIPS
             elif reason == "semantic_router:out_of_scope":
+                suggestions = OUT_OF_SCOPE_CHIPS
+            elif reason == "low_confidence":
                 suggestions = OUT_OF_SCOPE_CHIPS
             else:
                 # Unknown reason — legacy generic chip set as defensive fallback
