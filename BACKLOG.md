@@ -10,14 +10,15 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-09-02)
 
 **NOW**
-1. **-234** — `personal` branch hard-stops generic off-topic queries before the overlap gate fires, with rejection copy that reads as though the visitor asked something personal. One line at two call sites, same pattern as -219. ARCHITECTURE.md:664 constraint: re-run the rejection eval as the acceptance condition.
-2. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
-3. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
-4. **-144** -- "projects" mislabel at `explore_stories.py:1187,1199`. Adjacent to -146, same file.
-5. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
-6. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
-7. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
-8. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+1. **-238** — Log router decisions below SOFT_ACCEPT. Nine months of data has a hole at 0.00-0.40; prerequisite for deciding whether a confidence floor is viable. Add event column; coordinate with -223 before building.
+2. **-234** — `personal` branch hard-stops generic off-topic queries before the overlap gate fires, with rejection copy that reads as though the visitor asked something personal. One line at two call sites, same pattern as -219. ARCHITECTURE.md:664 constraint: re-run the rejection eval as the acceptance condition.
+3. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
+4. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
+5. **-144** -- "projects" mislabel at `explore_stories.py:1187,1199`. Adjacent to -146, same file.
+6. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
+7. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
+8. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
+9. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT**
 10. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
@@ -135,6 +136,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-234](#mattgpt-234) | `personal` router branch hard-stops generic off-topic queries before overlap gate fires; wrong rejection copy | Open | Medium | Bug | September 1, 2026 |
 | [MATTGPT-235](#mattgpt-235) | Resolve LLM-text assertion classes so pre-push gate can widen to agy-behavior and structural suites | Open | High | Refactor / Test | September 1, 2026 |
 | [MATTGPT-236](#mattgpt-236) | Remove router topical family dimension: delete 3 inert families, rewire 2 set memberships, remove 6 topic-axis families | Open | Medium | Refactor | September 1, 2026 |
+| [MATTGPT-238](#mattgpt-238) | Log router decisions below SOFT_ACCEPT; add event column so bands are distinguishable in file | Open | High | Enhancement | September 2, 2026 |
 | [MATTGPT-226](#mattgpt-226) | Dead `.main` selectors across `ui/styles/` after `.main → .stMain` refactor: 31 selectors, ~299 declarations, all matching 0 elements | Open | Medium | Refactor / Tech debt | August 31, 2026 |
 | [MATTGPT-222](#mattgpt-222) | Three operational alarms: zero-score, anchor-cache drift, out_of_scope on known entity | Open | High | Enhancement | August 30, 2026 |
 | [MATTGPT-223](#mattgpt-223) | Sheet migration: retire borderline and offdomain CSVs in favor of Sheet events with Event Type column | Open | Medium | Enhancement | August 30, 2026 |
@@ -2475,6 +2477,33 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 **Surviving families post-refactor:** `background`, `behavioral`, `synthesis`, `narrative`, `personal`, `out_of_scope` -- the query-shape axis, legitimately hand-maintained.
 
 **Reference:** Router anatomy diagram, panels 1-6.
+
+---
+
+### MATTGPT-238
+**Log router decisions below SOFT_ACCEPT; add event column so bands are distinguishable in file**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Enhancement
+- **File:** `services/semantic_router.py` (`_log_borderline`)
+- **Logged:** September 2, 2026
+- **Dependencies:** MATTGPT-223 (Sheet migration -- coordinate before building so the new rows land in the right destination)
+
+**Why this is a hole:** `_log_borderline` writes a row only when the score lands between SOFT_ACCEPT (0.40) and HARD_ACCEPT (0.80). Everything below 0.40 has never been recorded. Nine months of data, 5,452 rows, and the region that matters for a confidence floor decision is empty.
+
+**What the probe found and why it is not enough:** In a 10-query probe, junk topped at 0.255 ("who won the world series?") and legitimate queries started at 0.326 ("Norfolk Suffolk transformation"). A 0.07 gap -- real on that sample, thin, and an embedding model update could close it. Production has never said what lands at 0.25 or 0.35. Three eval queries and ten off-topic strings is not a decision surface.
+
+**Scope:**
+- Log below SOFT_ACCEPT only. The middle band (0.40-0.80) already has nine months of data and answers nothing new. The unknown is 0.00 to 0.40.
+- Add an `event` column to the log row so bands are distinguishable in the file rather than inferred from the score.
+- Do not widen to the full range. Below HARD_ACCEPT is most traffic -- 41 of 65 eval queries land under 0.80. August alone wrote 2,628 rows in the middle band. Below-SOFT volume should be smaller but measure after one week before assuming.
+- Coordinate with MATTGPT-223 before building. -223 migrates these CSVs to the Sheet; no point adding rows to a format being retired.
+
+**Acceptance:**
+- A query known to score below SOFT_ACCEPT (0.40) appears in the log with the correct `event` value.
+- Queries in the middle band (0.40-0.80) are unaffected.
+- Log volume below SOFT_ACCEPT is measured after one week and reported before any confidence floor work begins.
 
 ---
 
