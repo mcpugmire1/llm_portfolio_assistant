@@ -44,7 +44,7 @@ Dead code: -176, -183, -199, -201 · Hidden error: -204 (zero-filter-match only 
 Untraced flash: -229 (My Work flashes before Ask Agy conversation -- needs DevTools trace)
 BDD flakes: -122, -131, -142, -145, -197, -198, -205
 Wrong-assertion test: -203 · -209 (drift guard searches wrong scope)
-Small refactors: -140, -153, -062, -082, -083, -084, -150, -060, -217 (pronoun grammar in substitution)
+Small refactors: -140, -153, -062, -082, -083, -084, -150, -060, -217 (pronoun grammar in substitution) · -237 (detail-pane empty state)
 BDD structure: -213 (shared step definitions)
 Correctness audit: -214 (parameters, comments, constants, copied blocks) · -226 (dead `.main` selectors, ~299 declarations matching 0 elements)
 Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/agy-behavior/structural suites) · -232 (requirements_temp.txt removal)
@@ -137,6 +137,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-234](#mattgpt-234) | `personal` router branch hard-stops generic off-topic queries before overlap gate fires; wrong rejection copy | Open | Medium | Bug | September 1, 2026 |
 | [MATTGPT-235](#mattgpt-235) | Resolve LLM-text assertion classes so pre-push gate can widen to agy-behavior and structural suites | Open | High | Refactor / Test | September 1, 2026 |
 | [MATTGPT-236](#mattgpt-236) | Remove router topical family dimension: delete 3 inert families, rewire 2 set memberships, remove 6 topic-axis families | Open | Medium | Refactor | September 1, 2026 |
+| [MATTGPT-237](#mattgpt-237) | My Work detail-pane empty state: replace paw banner with dashed slot; drop accent stripe, stale card copy, purple rule above | Open | Low | Enhancement | September 2, 2026 |
 | [MATTGPT-226](#mattgpt-226) | Dead `.main` selectors across `ui/styles/` after `.main → .stMain` refactor: 31 selectors, ~299 declarations, all matching 0 elements | Open | Medium | Refactor / Tech debt | August 31, 2026 |
 | [MATTGPT-222](#mattgpt-222) | Three operational alarms: zero-score, anchor-cache drift, out_of_scope on known entity | Open | High | Enhancement | August 30, 2026 |
 | [MATTGPT-223](#mattgpt-223) | Sheet migration: retire borderline and offdomain CSVs in favor of Sheet events with Event Type column | Open | Medium | Enhancement | August 30, 2026 |
@@ -2512,6 +2513,41 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 **Surviving families post-refactor:** `background`, `behavioral`, `synthesis`, `narrative`, `personal`, `out_of_scope` -- the query-shape axis, legitimately hand-maintained.
 
 **Reference:** Router anatomy diagram, panels 1-6.
+
+---
+
+### MATTGPT-237
+**My Work detail-pane empty state: replace paw banner with dashed slot; drop accent stripe, stale card copy, purple rule above**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Enhancement
+- **File:** `ui/components/story_detail.py:261`, `ui/pages/explore_stories.py` (purple rule before detail render)
+- **Logged:** September 2, 2026
+
+**Current state:** `story_detail.py:261` renders "🐾 Check a row or click a card above to view details." as a banner with an accent stripe and square corners. Three problems: (1) it reads as Agy speaking rather than furniture labeling an empty slot; (2) "or click a card above" is stale -- Table view has no cards, and Cards view has its own affordance; (3) the banner styling (icon-margin span, corner radius) was also missing the two fixes applied to the other five banner sites, so the paw sits flush against "Check" and the corners are square.
+
+**Replacement:** A dashed empty-state slot -- convention for "content lands here." No paw, no accent stripe, no bold.
+
+```html
+<div style="height: 200px; border: 1px dashed var(--border-color);
+            border-radius: 8px; display: flex; align-items: center;
+            justify-content: center;">
+  <span style="font-size: 14px; color: var(--text-muted);">Select a story above to read the full detail</span>
+</div>
+```
+
+**Also remove:** The purple rule (`border-bottom` divider in `explore_stories.py`) rendered above the detail region. The dashed slot already separates the grid from the footer; the rule adds visual weight for no reason.
+
+**Design rationale:** A banner is a message about the page; an empty state is a placeholder standing in for content. The spatial relationship ("the thing goes here") replaces the announcement. Muted text at 14px, no paw, no bold -- quieter than real content. 200px is enough to read as a region without dominating a page where the filled detail is ~900px.
+
+**Accepted option:** 1b from the September 2 mockup (dashed outline, one centered muted line).
+
+**Acceptance:**
+- `story_detail.py:261` renders the dashed slot instead of the paw banner.
+- Copy reads "Select a story above to read the full detail" -- no paw, no "or click a card."
+- Purple rule above the detail region removed from `explore_stories.py`.
+- Slot renders correctly in both light and dark mode (CSS variable fill).
 
 ---
 
