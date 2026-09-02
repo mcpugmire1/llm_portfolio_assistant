@@ -2522,7 +2522,7 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 - **Status:** Open
 - **Priority:** Low
 - **Type:** Enhancement
-- **File:** `ui/components/story_detail.py:261`, `ui/pages/explore_stories.py` (purple rule before detail render)
+- **File:** `ui/components/story_detail.py:261` (banner and purple rule both in this file, not explore_stories.py)
 - **Logged:** September 2, 2026
 
 **Current state:** `story_detail.py:261` renders "🐾 Check a row or click a card above to view details." as a banner with an accent stripe and square corners. Three problems: (1) it reads as Agy speaking rather than furniture labeling an empty slot; (2) "or click a card above" is stale -- Table view has no cards, and Cards view has its own affordance; (3) the banner styling (icon-margin span, corner radius) was also missing the two fixes applied to the other five banner sites, so the paw sits flush against "Check" and the corners are square.
@@ -2530,23 +2530,26 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 **Replacement:** A dashed empty-state slot -- convention for "content lands here." No paw, no accent stripe, no bold.
 
 ```html
-<div style="height: 200px; border: 1px dashed var(--border-color);
+<div style="height: 140px; border: 1px dashed var(--border-color);
             border-radius: 8px; display: flex; align-items: center;
             justify-content: center;">
-  <span style="font-size: 14px; color: var(--text-muted);">Select a story above to read the full detail</span>
+  <span style="font-size: 15px; color: var(--text-secondary);">Select a story above to read the full detail</span>
 </div>
 ```
 
-**Also remove:** The purple rule (`border-bottom` divider in `explore_stories.py`) rendered above the detail region. The dashed slot already separates the grid from the footer; the rule adds visual weight for no reason.
+Note: shipped values differ from the mockup (200px / 14px / --text-muted). After eyeballing against the live grid, 140px / 15px / --text-secondary were approved as the correct values.
 
-**Design rationale:** A banner is a message about the page; an empty state is a placeholder standing in for content. The spatial relationship ("the thing goes here") replaces the announcement. Muted text at 14px, no paw, no bold -- quieter than real content. 200px is enough to read as a region without dominating a page where the filled detail is ~900px.
+**Also remove:** The purple rule (`border-bottom` divider) rendered above the detail region in `story_detail.py`. The dashed slot already separates the grid from the footer; the rule adds visual weight for no reason.
+
+**Design rationale:** A banner is a message about the page; an empty state is a placeholder standing in for content. The spatial relationship ("the thing goes here") replaces the announcement. Muted text, no bold -- quieter than real content.
 
 **Accepted option:** 1b from the September 2 mockup (dashed outline, one centered muted line).
 
 **Acceptance:**
 - `story_detail.py:261` renders the dashed slot instead of the paw banner.
 - Copy reads "Select a story above to read the full detail" -- no paw, no "or click a card."
-- Purple rule above the detail region removed from `explore_stories.py`.
+- Slot is 140px tall, 15px text, `--text-secondary` color, 8px border-radius, 1px dashed `--border-color`.
+- Purple rule above the detail region removed from `story_detail.py`.
 - Slot renders correctly in both light and dark mode (CSS variable fill).
 
 ---
