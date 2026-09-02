@@ -399,6 +399,33 @@ def is_portfolio_query_semantic(
         return True, 1.0, "", "error_fallback"
 
 
+# MATTGPT-234: Families for which a HARD_ACCEPT-confident classification
+# fires a canned rejection. -219 established the gate for out_of_scope
+# after five months of legitimate portfolio queries (Amex, AT&T, NSC,
+# on-call, raspberry pi) hard-stopped at low confidence. -234 extends
+# the same gate to personal after the same misroute pattern surfaced
+# there (bananas at 0.186 hitting the personal hard-stop).
+ROUTER_REJECTING_FAMILIES = {"out_of_scope", "personal"}
+
+
+def router_rejection_reason(intent_family: str, semantic_score: float) -> str | None:
+    """Return the family name if the router is confident enough to fire a
+    canned rejection, else None.
+
+    Consolidates -219 (out_of_scope) and -234 (personal) into one gate so
+    the rule lives in one place rather than being duplicated across the
+    Ask Agy and My Work call sites. Callers still apply per-surface
+    guards (e.g., from_suggestion on Ask Agy) outside this function.
+
+    Future work (MATTGPT-239): a low-confidence floor rejects across all
+    families below some threshold, independent of family membership. That
+    is a distinct mechanism from this family-based gate but the same
+    decision point -- extend this function with the score-floor case
+    rather than adding a parallel gate at either call site.
+    """
+    raise NotImplementedError("MATTGPT-234 Green")
+
+
 def _log_borderline(query: str, score: float, intent: str, family: str):
     """Log borderline queries for later review."""
     import csv
