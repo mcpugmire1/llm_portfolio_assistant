@@ -2385,6 +2385,8 @@ Fallback if no entity is detected: surviving-family membership (`background`, `n
 
 **Alarm 3 -- out_of_scope on known entity alias:** Covered by MATTGPT-219 (`b8bd59b`, August 30, 2026). The score gate prevents the rejection from firing for queries that do not clear HARD_ACCEPT. Keep the alarm as a guard: the gate could be bypassed by future anchor additions that raise a valid out_of_scope score above 0.80. Note: the same preemption pattern was applied to the `personal` branch in MATTGPT-234 (shipped September 2, 2026; commits `4c3cde3`, `a2e7e7a`, `824e59e`).
 
+**Alarm 4 -- below-SOFT_ACCEPT log staleness:** Alert if `router_low_confidence.csv` (written by MATTGPT-238) has no new rows in seven days. If logging silently stops, MATTGPT-239's confidence-floor decision arrives at an empty file weeks later with no signal about why. Same failure shape as MATTGPT-230. "No rows in N days" is a cheap check that covers it.
+
 ---
 
 ### MATTGPT-223
