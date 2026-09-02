@@ -27,11 +27,13 @@ import streamlit.components.v1.components  # noqa: F401 — pre-import so the
 # auto-import the submodule; AgGrid 0.3.4.post3 assumes it does.
 from dotenv import load_dotenv
 
-from config.constants import HARD_ACCEPT
 from config.debug import DEBUG
 from services.query_logger import log_query
 from services.rag_service import semantic_search
-from services.semantic_router import is_portfolio_query_semantic
+from services.semantic_router import (
+    is_portfolio_query_semantic,
+    router_rejection_reason,
+)
 from ui.components.how_i_built_dialog import render_how_i_built_dialog
 from ui.components.story_detail import render_story_detail
 from ui.components.thinking_indicator import render_thinking_indicator
@@ -301,13 +303,22 @@ def get_context_story(stories: list[dict]) -> dict | None:
 # =============================================================================
 # HELPER FUNCTIONS - UI Components
 # =============================================================================
-def _render_confidence_banner(query: str, confidence: str, results: list[dict]):
+def _render_confidence_banner(
+    query: str,
+    confidence: str,
+    results: list[dict],
+    *,
+    filter_narrowed_pool: bool = False,
+):
     """Render the tiered confidence banner for search results.
 
     Args:
         query: The search query string
         confidence: "high", "low", or "none"
         results: List of result dicts (with Title field) - needed to detect exact title match
+        filter_narrowed_pool: True when a non-query filter was active. Suppresses
+            the generic "Found N" render on the high branch; the exact-match render
+            and the count line below the grid still fire.
     """
     BANNER_STYLE = "background: var(--banner-info-bg); border-left: 4px solid var(--banner-info-border); padding: 12px 16px; margin: 16px 0;"
     TEXT_COLOR_SUCCESS = "var(--banner-info-text)"
@@ -334,6 +345,8 @@ def _render_confidence_banner(query: str, confidence: str, results: list[dict]):
                 message = f"Found your story + {related_count} related stories"
         else:
             # Generic search - show total count
+            if filter_narrowed_pool:
+                return
             plural = "story" if result_count == 1 else "stories"
             message = f"Found {result_count} matching {plural} for \"{query}\""
     elif confidence == "low":
@@ -1012,18 +1025,14 @@ def render_explore_stories(
             st.session_state.pop(LAST_QUERY, None)
         else:
             # Semantic router gate — catch personal/out_of_scope before Pinecone.
-            # MATTGPT-219: out_of_scope is gated on HARD_ACCEPT so low-confidence
-            # misroutes (Amex/AT&T/NSC/on-call/raspberry pi) fall through to
-            # Pinecone. Personal stays unconditional -- no misroute class
-            # observed there.
+            # MATTGPT-219 (out_of_scope) + MATTGPT-234 (personal): both branches
+            # gated on HARD_ACCEPT via router_rejection_reason. Below that the
+            # query falls through to Pinecone; any real off-topic case is caught
+            # by the overlap:0.00 gate downstream.
             _, semantic_score, _, intent_family = is_portfolio_query_semantic(
                 current_query
             )
-            reject_reason = None
-            if intent_family == "personal":
-                reject_reason = "personal"
-            elif intent_family == "out_of_scope" and semantic_score >= HARD_ACCEPT:
-                reject_reason = "out_of_scope"
+            reject_reason = router_rejection_reason(intent_family, semantic_score)
             if reject_reason:
                 log_query(
                     current_query,
@@ -1126,11 +1135,40 @@ def render_explore_stories(
                 """,
                 unsafe_allow_html=True,
             )
+        elif confidence == "none":
+            # MATTGPT-234 Move 1: route zero-confidence Pinecone results
+            # through the rejection-path treatment. Without this, a fall-
+            # through query (bananas after -234, or any query Pinecone
+            # returns nothing confident for) rendered the "No strong
+            # matches" line over an empty grid, phantom row, and empty
+            # detail slot. Same shape as the router-rejection path at
+            # :1054: clear F["q"], render_no_match_banner, browsable
+            # corpus via _default_view. Sets __query_rejected__ so
+            # subsequent reruns (filter change, view switch, pagination)
+            # keep the same shape via the shared rejection block above.
+            # Interim state: "trail-lost, try rephrasing" copy is wrong-
+            # voice for fell-through queries; correct copy split waits on
+            # MATTGPT-239's confidence floor.
+            st.session_state["__query_rejected__"] = current_query
+            st.session_state["__query_rejected_reason__"] = "low_confidence"
+            F["q"] = ""
+            render_no_match_banner(
+                reason="low_confidence",
+                query=current_query,
+                overlap=None,
+                suppressed=True,
+                filters=F,
+                context="explore",
+            )
+            view = _default_view(stories, F)
         else:
-            _render_confidence_banner(current_query, confidence, view)
-
-        if confidence == "none":
-            view = []
+            filter_narrowed_pool = any(v for k, v in F.items() if k != "q")
+            _render_confidence_banner(
+                current_query,
+                confidence,
+                view,
+                filter_narrowed_pool=filter_narrowed_pool,
+            )
 
         st.session_state["page_offset"] = 0
         st.session_state["__last_q__"] = current_query
@@ -1158,7 +1196,12 @@ def render_explore_stories(
         # count matches the "Showing 1-N of N stories" count immediately
         # below. Previously: banner said "Found 25" while count-below said
         # "Showing 1-4 of 4" for the same page.
-        _render_confidence_banner(current_query, confidence, view)
+        _render_confidence_banner(
+            current_query,
+            confidence,
+            view,
+            filter_narrowed_pool=any(filters_without_q.values()),
+        )
 
     else:
         # --- PATH 3: No Active Query (F["q"] is empty) or Query changed but not submitted ---
