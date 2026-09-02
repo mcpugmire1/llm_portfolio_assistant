@@ -423,7 +423,9 @@ def router_rejection_reason(intent_family: str, semantic_score: float) -> str | 
     decision point -- extend this function with the score-floor case
     rather than adding a parallel gate at either call site.
     """
-    raise NotImplementedError("MATTGPT-234 Green")
+    if intent_family in ROUTER_REJECTING_FAMILIES and semantic_score >= HARD_ACCEPT:
+        return intent_family
+    return None
 
 
 def _log_borderline(query: str, score: float, intent: str, family: str):

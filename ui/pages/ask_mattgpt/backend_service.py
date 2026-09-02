@@ -19,7 +19,6 @@ from config.constants import (
     ENTITY_ALIASES,
     ENTITY_DETECTION_FIELDS,
     EXCLUDED_DIVISION_VALUES,
-    HARD_ACCEPT,
     META_COMMENTARY_REGEX_PATTERNS,
     PINECONE_LOWERCASE_FIELDS,
     SEARCH_TOP_K,
@@ -32,7 +31,10 @@ from services.pinecone_service import (
 )
 from services.query_logger import log_query
 from services.rag_service import semantic_search
-from services.semantic_router import is_portfolio_query_semantic
+from services.semantic_router import (
+    is_portfolio_query_semantic,
+    router_rejection_reason,
+)
 from utils.client_utils import is_generic_client
 from utils.formatting import (
     _format_deep_dive,
@@ -1770,22 +1772,18 @@ def rag_answer(
             dbg(f"ask: overlap={overlap:.2f}")
 
         # =================================================================
-        # OUT_OF_SCOPE CHECK (Jan 2026 - Semantic Router)
-        # Gracefully redirect queries about industries Matt doesn't work in.
-        # This uses embedding similarity (free, fast) instead of LLM calls.
-        # Checked BEFORE Pinecone to avoid unnecessary search costs.
+        # OUT_OF_SCOPE / PERSONAL CHECK (Semantic Router)
+        # Gracefully redirect queries the router is confident don't belong.
+        # Embedding similarity (free, fast) instead of LLM calls, checked
+        # BEFORE Pinecone to avoid unnecessary search costs.
+        # MATTGPT-219 (out_of_scope) + MATTGPT-234 (personal): both branches
+        # gated on HARD_ACCEPT via router_rejection_reason. Below that the
+        # router isn't confident; the query falls through to Pinecone and
+        # any real off-topic case is caught by the overlap:0.00 gate with
+        # correct rejection copy. See helper docstring for full rationale.
         # =================================================================
-        # MATTGPT-219: Gate on router confidence. Below HARD_ACCEPT the router
-        # is admitting uncertainty; the canned rejection fires only when the
-        # router is genuinely confident this is off-topic. Real clients (Amex,
-        # AT&T, NSC) and legitimate technical queries (on-call, raspberry pi)
-        # sat at 0.55-0.70 and were being hard-stopped despite the corpus
-        # holding the answer. Above HARD_ACCEPT the rejection behaves as before.
-        if (
-            intent_family == "out_of_scope"
-            and semantic_score >= HARD_ACCEPT
-            and not from_suggestion
-        ):
+        rejection_family = router_rejection_reason(intent_family, semantic_score)
+        if rejection_family == "out_of_scope" and not from_suggestion:
             out_of_scope_response = """🐾 I don't have experience in that industry. Matt's work is primarily in **Financial Services**, **Healthcare/Life Sciences**, **Telecom**, and **Technology/SaaS**.
 
 Would you like to explore how his work in **platform modernization**, **payments systems**, or **enterprise transformation** might apply to your context?"""
@@ -1810,9 +1808,9 @@ Would you like to explore how his work in **platform modernization**, **payments
 
         # PERSONAL CHECK (Mar 2026 - Semantic Router)
         # Warm redirect for personal questions (age, family, salary, identity).
-        # Same treatment for all — no category differences.
+        # Gate shared with out_of_scope above via router_rejection_reason.
         # =================================================================
-        if intent_family == "personal" and not from_suggestion:
+        if rejection_family == "personal" and not from_suggestion:
             personal_response = """🐾 I'm focused on Matt's professional experience — the projects, the teams, the outcomes.
 
 Ask me about his **transformation work**, **platform engineering**, or **how he builds teams** and I'll dig up the details."""
