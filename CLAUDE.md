@@ -250,6 +250,8 @@ Always triggers this check:
 
 **Scope:** This process writes to `BACKLOG.md` and `CHANGELOG.md` only. `CLAUDE.md`, `ARCHITECTURE.md`, source files, and all other documents are out of scope. Any finding that would require a `CLAUDE.md` change gets flagged to Matt, not written.
 
+**Who runs it:** The dedicated Backlog Maintenance Cowork process, not Code. Code's job is to write descriptive commit messages. Code never creates, modifies, or closes tickets directly.
+
 ### Status Enum
 Six values only. Do not invent others.
 
