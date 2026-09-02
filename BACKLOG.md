@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: d2216c0 -->
+<!-- last-backlog-sync: a43ee80 -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -10,24 +10,23 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-09-02)
 
 **NOW**
-1. **-238** — Log router decisions below SOFT_ACCEPT. Nine months of data has a hole at 0.00-0.40; prerequisite for deciding whether a confidence floor is viable. Add event column; coordinate with -223 before building.
-2. **-240** — Role Match has no rejection contract: no gate before the LLM call, and the failure path stores the error in a variable that is never read. Recruiter-facing gap with no logging. Pair with -089 (same file, same pass).
-3. **-089** — Role Match: location, work model, availability. May 22 recruiter finding. Paired with -240 -- both touch Role Match, cheaper to do in one visit than two.
-4. **-242** — Streamlit theme defaults leak into widget chrome after `[theme]` block removal Sep 2. `#FF4B4B` focus borders read as validation errors; wrapper backgrounds and widget labels using Streamlit defaults. Fix shape verified live: CSS with `--accent-purple` and app tokens in `global_styles.py`.
-5. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
-6. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
-7. **-144** -- "projects" mislabel at `explore_stories.py:1187,1199`. Adjacent to -146, same file.
-8. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
-9. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
-10. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
-11. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+1. **-240** — Role Match has no rejection contract: no gate before the LLM call, and the failure path stores the error in a variable that is never read. Recruiter-facing gap with no logging. Pair with -089 (same file, same pass).
+2. **-089** — Role Match: location, work model, availability. May 22 recruiter finding. Paired with -240 -- both touch Role Match, cheaper to do in one visit than two.
+3. **-242** — Streamlit theme defaults leak into widget chrome after `[theme]` block removal Sep 2. `#FF4B4B` focus borders read as validation errors; wrapper backgrounds and widget labels using Streamlit defaults. Fix shape verified live: CSS with `--accent-purple` and app tokens in `global_styles.py`.
+4. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
+5. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
+6. **-144** -- "projects" mislabel at `explore_stories.py:1187,1199`. Adjacent to -146, same file.
+7. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
+8. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
+9. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
+10. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT**
-12. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
-13. **-086** — Environment stamp on every log write. Makes every future log analysis exact rather than heuristic.
-14. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row.
-15. **-223** — Sheet migration, retires local-only borderline and offdomain CSVs.
-16. Rest of Role Match: **-160**, -173, -159, -014, -012, -081, -099, -017.
+11. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
+12. **-086** — Environment stamp on every log write. Makes every future log analysis exact rather than heuristic.
+13. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row.
+14. **-223** — Add router_score and router_family columns to Sheet query row. Unblocks -239's floor threshold decision.
+15. Rest of Role Match: **-160**, -173, -159, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
 -177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families)
@@ -38,7 +37,7 @@ New stories: -078, -091, -155, -022 (-181 closed Aug 19)
 Meta: -079, -156, -096
 
 **LATER — tier 3:** blocked or dependent
--077 (re-measure after -181) · -171 (coupled to -190) · -185 (negation) · -239 (router confidence floor, blocked on -238 data)
+-077 (re-measure after -181) · -171 (coupled to -190) · -185 (negation) · -239 (router confidence floor, blocked on -223 Sheet data)
 
 **LATER — tier 4:** hygiene
 Dead code: -176, -183, -199, -201 · -241 (dead prose: out_of_scope_response + personal_response, backend_service.py:1789,1816) · Hidden error: -204 (zero-filter-match only -- st.stop() blanking was MATTGPT-224, shipped `92370b3`)
@@ -136,14 +135,13 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-233](#mattgpt-233) | Phase 2: extend pre-push gate to BDD suite, `test_agy_behavior.py`, `test_structural_assertions.py` | Open | Medium | Infra | September 1, 2026 |
 | [MATTGPT-235](#mattgpt-235) | Resolve LLM-text assertion classes so pre-push gate can widen to agy-behavior and structural suites | Open | High | Refactor / Test | September 1, 2026 |
 | [MATTGPT-236](#mattgpt-236) | Remove router topical family dimension: delete 3 inert families, rewire 2 set memberships, remove 6 topic-axis families | Open | Medium | Refactor | September 1, 2026 |
-| [MATTGPT-238](#mattgpt-238) | Log router decisions below SOFT_ACCEPT; add event column so bands are distinguishable in file | Open | High | Enhancement | September 2, 2026 |
 | [MATTGPT-239](#mattgpt-239) | Router confidence floor: reject queries that score below a threshold across all families before Pinecone query | Blocked | Medium | Enhancement | September 2, 2026 |
 | [MATTGPT-240](#mattgpt-240) | Role Match rejection contract: no gate before LLM call, failure path never read; same shape as MATTGPT-230 | Open | High | Bug | September 2, 2026 |
 | [MATTGPT-241](#mattgpt-241) | Dead prose in backend_service.py: out_of_scope_response and personal_response built but never rendered | Open | Low | Hygiene | September 2, 2026 |
 | [MATTGPT-242](#mattgpt-242) | Streamlit theme defaults leak into widget chrome after [theme] block removal: focus borders, wrapper backgrounds, widget labels | Open | High | Bug | September 2, 2026 |
 | [MATTGPT-226](#mattgpt-226) | Dead `.main` selectors across `ui/styles/` after `.main → .stMain` refactor: 31 selectors, ~299 declarations, all matching 0 elements | Open | Medium | Refactor / Tech debt | August 31, 2026 |
 | [MATTGPT-222](#mattgpt-222) | Three operational alarms: zero-score, anchor-cache drift, out_of_scope on known entity | Open | High | Enhancement | August 30, 2026 |
-| [MATTGPT-223](#mattgpt-223) | Sheet migration: retire borderline and offdomain CSVs in favor of Sheet events with Event Type column | Open | Medium | Enhancement | August 30, 2026 |
+| [MATTGPT-223](#mattgpt-223) | Add router_score and router_family columns to Sheet query row | Open | Medium | Enhancement | August 30, 2026 |
 
 ---
 
@@ -2385,27 +2383,33 @@ Fallback if no entity is detected: surviving-family membership (`background`, `n
 
 **Alarm 3 -- out_of_scope on known entity alias:** Covered by MATTGPT-219 (`b8bd59b`, August 30, 2026). The score gate prevents the rejection from firing for queries that do not clear HARD_ACCEPT. Keep the alarm as a guard: the gate could be bypassed by future anchor additions that raise a valid out_of_scope score above 0.80. Note: the same preemption pattern was applied to the `personal` branch in MATTGPT-234 (shipped September 2, 2026; commits `4c3cde3`, `a2e7e7a`, `824e59e`).
 
-**Alarm 4 -- below-SOFT_ACCEPT log staleness:** Alert if `router_low_confidence.csv` (written by MATTGPT-238) has no new rows in seven days. If logging silently stops, MATTGPT-239's confidence-floor decision arrives at an empty file weeks later with no signal about why. Same failure shape as MATTGPT-230. "No rows in N days" is a cheap check that covers it.
+**Alarm 4 -- router_score column staleness:** Alert if the Sheet's `router_score` column (written by MATTGPT-223) has no new rows in seven days. If the column stops filling, MATTGPT-239's confidence-floor decision arrives with no production signal. Same failure shape as MATTGPT-230. "No rows in N days" is a cheap check that covers it. Note: MATTGPT-238 wrote `router_low_confidence.csv` for local development only -- Streamlit Cloud's ephemeral filesystem makes that CSV unreadable in production; the Sheet is the only durable path.
 
 ---
 
 ### MATTGPT-223
-**Sheet migration: retire borderline and offdomain CSVs in favor of Sheet events with Event Type column**
+**Add router_score and router_family columns to Sheet query row**
 
 - **Status:** Open
 - **Priority:** Medium
 - **Type:** Enhancement
 - **File:** `services/query_logger.py`
-- **Logged:** August 30, 2026
+- **Logged:** August 30, 2026 (scope corrected September 2, 2026)
 
-**Why:** `borderline_queries.csv` and `offdomain_queries.csv` are gitignored and local-only. Nine and twelve months of production behavior exist in one place with no redundancy and no Session ID or User-Agent. The Sheet already carries both; it survives a redeploy; it is where Matt already looks.
+**Why (corrected September 2, 2026):** The original scope assumed the CSVs held production data. MATTGPT-238's verification established they are gitignored and local-only -- Streamlit Cloud's container filesystem is ephemeral, so any CSV written in production is unreadable. The only path by which production data reaches Matt is `query_logger.py` writing to the Google Sheet. A router score is an attribute of a visitor query (what they asked, what the system thought it was) and belongs on the existing query row, not in a separate log.
 
-**Plan:** Add an `Event Type` column to the Sheet writer. Retire both CSVs by routing the same write calls to Sheet events. Historical CSV data: evaluate for one-time import before deleting the files.
+**Scope:** Append `router_score` and `router_family` as two new columns to the end of `HEADERS` in `query_logger.py`. Inject both values in `_build_row` -- the same injection point used by MATTGPT-086 for the `Env` column. Every query row carries both columns; this gives a full score distribution across all traffic, not just one band. No CSV migration, no new sink, no Event Type taxonomy.
 
-**Acceptance criteria:**
-- Borderline and off-domain events appear in the Sheet with Event Type populated.
-- Both CSVs no longer written after migration.
-- Session ID and User-Agent recorded alongside each event (already in Sheet schema).
+**Implementation notes:**
+- Columns must append at the end of HEADERS. Inserting mid-list misaligns every historical row (same constraint as MATTGPT-086 / -223's original Env column).
+- Code should verify the call sites before treating as settled -- router values should be in scope where `log_query` is called on both surfaces, but confirm rather than assume.
+
+**Unblocks:** MATTGPT-239 (confidence floor), which needs production router score distribution to pick a threshold. The Sheet delivers that; the local CSV does not.
+
+**Acceptance:**
+- `router_score` and `router_family` appear on every Sheet query row.
+- Columns are appended at the end of HEADERS; historical rows are not misaligned.
+- Call sites confirmed -- both surfaces pass the values at the `log_query` call.
 
 ---
 
@@ -2461,33 +2465,6 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 
 ---
 
-### MATTGPT-238
-**Log router decisions below SOFT_ACCEPT; add event column so bands are distinguishable in file**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Enhancement
-- **File:** `services/semantic_router.py` (`_log_borderline`)
-- **Logged:** September 2, 2026
-- **Dependencies:** MATTGPT-223 (Sheet migration -- coordinate before building so the new rows land in the right destination)
-
-**Why this is a hole:** `_log_borderline` writes a row only when the score lands between SOFT_ACCEPT (0.40) and HARD_ACCEPT (0.80). Everything below 0.40 has never been recorded. Nine months of data, 5,452 rows, and the region that matters for a confidence floor decision is empty.
-
-**What the probe found and why it is not enough:** In a 10-query probe, junk topped at 0.255 ("who won the world series?") and legitimate queries started at 0.326 ("Norfolk Suffolk transformation"). A 0.07 gap -- real on that sample, thin, and an embedding model update could close it. Production has never said what lands at 0.25 or 0.35. Three eval queries and ten off-topic strings is not a decision surface.
-
-**Scope:**
-- Log below SOFT_ACCEPT only. The middle band (0.40-0.80) already has nine months of data and answers nothing new. The unknown is 0.00 to 0.40.
-- Add an `event` column to the log row so bands are distinguishable in the file rather than inferred from the score.
-- Do not widen to the full range. Below HARD_ACCEPT is most traffic -- 41 of 65 eval queries land under 0.80. August alone wrote 2,628 rows in the middle band. Below-SOFT volume should be smaller but measure after one week before assuming.
-- Coordinate with MATTGPT-223 before building. -223 migrates these CSVs to the Sheet; no point adding rows to a format being retired.
-
-**Acceptance:**
-- A query known to score below SOFT_ACCEPT (0.40) appears in the log with the correct `event` value.
-- Queries in the middle band (0.40-0.80) are unaffected.
-- Log volume below SOFT_ACCEPT is measured after one week and reported before any confidence floor work begins.
-
----
-
 ### MATTGPT-239
 **Router confidence floor: reject queries that score below a threshold across all families before Pinecone query**
 
@@ -2496,7 +2473,7 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 - **Type:** Enhancement
 - **File:** `services/semantic_router.py`
 - **Logged:** September 2, 2026
-- **Dependencies:** MATTGPT-238 (must accumulate production data below SOFT_ACCEPT before a threshold can be chosen)
+- **Dependencies:** MATTGPT-223 (must accumulate production router score distribution via Sheet before a threshold can be chosen; -238 is local-only)
 
 **What the floor does:** When the router's best match scores very low across all families, the family it returns is noise -- the argmax picked something, but nothing was close. Today these queries fall through to Pinecone and get rejected by `overlap:0.00`, which produces the right outcome for the wrong reason: it works because no story happens to share vocabulary with the query. Add a story mentioning bananas and it stops working. The floor makes "the router has no confident opinion" an explicit decision rather than something the retrieval layer cleans up by accident.
 
@@ -2504,7 +2481,7 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 
 **Scope:** All families, not just `personal` and `out_of_scope`. "Who won the world series?" lands on `team_scaling` at 0.186 -- family assignment is meaningless at that score.
 
-**Candidate threshold (September 2, 2026 probe):** 0.30, mid-gap. Do not treat that as settled. Probe found junk topped at 0.255 and legitimate queries started at 0.326 -- a 0.07 gap on three curated eval queries and ten off-topic strings. The asymmetry favors going lower: rejecting a legitimate query is worse than letting junk through to a retrieval path that catches it anyway. Pick the floor once -238 has a few weeks of production data.
+**Candidate threshold (September 2, 2026 probe):** 0.30, mid-gap. Do not treat that as settled. Probe found junk topped at 0.255 and legitimate queries started at 0.326 -- a 0.07 gap on three curated eval queries and ten off-topic strings written for a probe -- not production traffic. The asymmetry favors going lower: rejecting a legitimate query is worse than letting junk through to a retrieval path that catches it anyway. Pick the floor once -223 has accumulated a few weeks of Sheet data showing where real visitor queries land.
 
 **Copy discipline:** The floor must produce the same rejection copy as the existing `overlap:0.00` off-topic rejection path -- no new variant. Three different ways to say "not in Matt's work" is how you end up with the `out_of_scope` string that says "not in that industry" when the industry is in-scope. Same string, same code path if possible.
 
@@ -2516,7 +2493,7 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 **Acceptance:**
 - Queries scoring below the floor are rejected before the Pinecone call.
 - Rejection copy for the floor matches the existing `overlap:0.00` off-topic path exactly -- no new string introduced.
-- Threshold is chosen from -238 production data, not the probe value.
+- Threshold is chosen from -223 Sheet data, not the probe value.
 - `low_confidence` near-miss (score at or above floor): trail copy, no chips. Near-miss behavior is unchanged.
 - `low_confidence` fell-through (score below floor): Plott Hound line with chips, reusing `BANNER_COPY["rule"]` and `RULE_CHIPS`.
 - Legitimate queries at 0.326 and above are unaffected (verified against the probe set and a sample of production queries).

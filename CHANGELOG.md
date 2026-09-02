@@ -24,6 +24,12 @@ Query log verified a 3:37 upstream outage window on September 1 (15:47:18 to 15:
 
 ---
 
+**September 2, 2026 — Below-SOFT_ACCEPT router logging probe (MATTGPT-238)** -- `a43ee80`
+
+`_log_borderline` in `services/semantic_router.py` was widened to capture decisions below SOFT_ACCEPT (0.40) in addition to the 0.40-0.80 middle band already logged. Probed 10 queries: junk topped at 0.255, legitimate queries started at 0.326. Value as shipped: local development tool only. Streamlit Cloud's container filesystem is ephemeral; any CSV written in production is unreadable by the next request. The probe established the 0.07 gap and the candidate 0.30 threshold; it did not produce a production data surface. Production router score distribution requires MATTGPT-223 (Sheet integration). MATTGPT-239's confidence-floor threshold decision blocks on -223, not on this ticket.
+
+---
+
 **September 2, 2026 — My Work detail-pane empty state: dashed slot replaces paw banner (MATTGPT-237)** -- `31f20c9`
 
 `story_detail.py:261` previously rendered "🐾 Check a row or click a card above to view details." as a banner with an accent stripe and square corners. Three problems: Agy's voice used for furniture, "or click a card" stale in Table view, and the icon-margin span and corner radius that were fixed at the other five banner sites were never applied here. Replaced with a 140px dashed empty-state slot (1px dashed `--border-color`, 8px border-radius, centered 15px `--text-secondary` text: "Select a story above to read the full detail"). Purple rule above the detail region removed from the same file -- the slot already separates grid from footer. Mockup settled September 2 (option 1b); shipped values 140px / 15px / `--text-secondary` approved against live grid, differing from the 200px / 14px / `--text-muted` mockup defaults.
