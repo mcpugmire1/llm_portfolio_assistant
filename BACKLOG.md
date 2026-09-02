@@ -10,8 +10,8 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-09-02)
 
 **NOW**
-1. **-238** — Log router decisions below SOFT_ACCEPT. Nine months of data has a hole at 0.00-0.40; prerequisite for deciding whether a confidence floor is viable. Add event column; coordinate with -223 before building.
-2. **-234** — `personal` branch hard-stops generic off-topic queries before the overlap gate fires, with rejection copy that reads as though the visitor asked something personal. One line at two call sites, same pattern as -219. ARCHITECTURE.md:664 constraint: re-run the rejection eval as the acceptance condition.
+1. **-234** — `personal` branch hard-stops generic off-topic queries before the overlap gate fires, with rejection copy that reads as though the visitor asked something personal. One line at two call sites, same pattern as -219. ARCHITECTURE.md:664 constraint: re-run the rejection eval as the acceptance condition.
+2. **-238** — Log router decisions below SOFT_ACCEPT. Nine months of data has a hole at 0.00-0.40; prerequisite for deciding whether a confidence floor is viable. Add event column; coordinate with -223 before building.
 3. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
 4. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
 5. **-144** -- "projects" mislabel at `explore_stories.py:1187,1199`. Adjacent to -146, same file.
@@ -37,7 +37,7 @@ New stories: -078, -091, -155, -022 (-181 closed Aug 19)
 Meta: -079, -156, -096
 
 **LATER — tier 3:** blocked or dependent
--077 (re-measure after -181) · -171 (coupled to -190) · -185 (negation)
+-077 (re-measure after -181) · -171 (coupled to -190) · -185 (negation) · -239 (router confidence floor, blocked on -238 data)
 
 **LATER — tier 4:** hygiene
 Dead code: -176, -183, -199, -201 · Hidden error: -204 (zero-filter-match only -- st.stop() blanking was MATTGPT-224, shipped `92370b3`)
@@ -137,6 +137,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-235](#mattgpt-235) | Resolve LLM-text assertion classes so pre-push gate can widen to agy-behavior and structural suites | Open | High | Refactor / Test | September 1, 2026 |
 | [MATTGPT-236](#mattgpt-236) | Remove router topical family dimension: delete 3 inert families, rewire 2 set memberships, remove 6 topic-axis families | Open | Medium | Refactor | September 1, 2026 |
 | [MATTGPT-238](#mattgpt-238) | Log router decisions below SOFT_ACCEPT; add event column so bands are distinguishable in file | Open | High | Enhancement | September 2, 2026 |
+| [MATTGPT-239](#mattgpt-239) | Router confidence floor: reject queries that score below a threshold across all families before Pinecone query | Blocked | Medium | Enhancement | September 2, 2026 |
 | [MATTGPT-226](#mattgpt-226) | Dead `.main` selectors across `ui/styles/` after `.main → .stMain` refactor: 31 selectors, ~299 declarations, all matching 0 elements | Open | Medium | Refactor / Tech debt | August 31, 2026 |
 | [MATTGPT-222](#mattgpt-222) | Three operational alarms: zero-score, anchor-cache drift, out_of_scope on known entity | Open | High | Enhancement | August 30, 2026 |
 | [MATTGPT-223](#mattgpt-223) | Sheet migration: retire borderline and offdomain CSVs in favor of Sheet events with Event Type column | Open | Medium | Enhancement | August 30, 2026 |
@@ -2504,6 +2505,34 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 - A query known to score below SOFT_ACCEPT (0.40) appears in the log with the correct `event` value.
 - Queries in the middle band (0.40-0.80) are unaffected.
 - Log volume below SOFT_ACCEPT is measured after one week and reported before any confidence floor work begins.
+
+---
+
+### MATTGPT-239
+**Router confidence floor: reject queries that score below a threshold across all families before Pinecone query**
+
+- **Status:** Blocked
+- **Priority:** Medium
+- **Type:** Enhancement
+- **File:** `services/semantic_router.py`
+- **Logged:** September 2, 2026
+- **Dependencies:** MATTGPT-238 (must accumulate production data below SOFT_ACCEPT before a threshold can be chosen)
+
+**What the floor does:** When the router's best match scores very low across all families, the family it returns is noise -- the argmax picked something, but nothing was close. Today these queries fall through to Pinecone and get rejected by `overlap:0.00`, which produces the right outcome for the wrong reason: it works because no story happens to share vocabulary with the query. Add a story mentioning bananas and it stops working. The floor makes "the router has no confident opinion" an explicit decision rather than something the retrieval layer cleans up by accident.
+
+**Operational note:** The floor saves the Pinecone query, not the embedding -- the score comes from the embedding, so that cost is already paid by the time the floor could fire.
+
+**Scope:** All families, not just `personal` and `out_of_scope`. "Who won the world series?" lands on `team_scaling` at 0.186 -- family assignment is meaningless at that score.
+
+**Candidate threshold (September 2, 2026 probe):** 0.30, mid-gap. Do not treat that as settled. Probe found junk topped at 0.255 and legitimate queries started at 0.326 -- a 0.07 gap on three curated eval queries and ten off-topic strings. The asymmetry favors going lower: rejecting a legitimate query is worse than letting junk through to a retrieval path that catches it anyway. Pick the floor once -238 has a few weeks of production data.
+
+**Copy discipline:** The floor must produce the same rejection copy as the existing `overlap:0.00` off-topic rejection path -- no new variant. Three different ways to say "not in Matt's work" is how you end up with the `out_of_scope` string that says "not in that industry" when the industry is in-scope. Same string, same code path if possible.
+
+**Acceptance:**
+- Queries scoring below the floor are rejected before the Pinecone call.
+- Rejection copy matches the existing `overlap:0.00` off-topic path exactly -- no new string introduced.
+- Threshold is chosen from -238 production data, not the probe value.
+- Legitimate queries at 0.326 and above are unaffected (verified against the probe set and a sample of production queries).
 
 ---
 
