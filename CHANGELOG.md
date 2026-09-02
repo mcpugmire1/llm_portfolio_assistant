@@ -8,6 +8,18 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### My Work
 
+**September 2, 2026 — My Work fallback banner made honest during Pinecone downtime (MATTGPT-230)** -- `013d9ac`
+
+Query log verified a 3:37 upstream outage window on September 1 (15:47:18 to 15:50:55): "why should i hire matt" returned zero results with "Matt may not have worked with this client or topic." The fallback was indistinguishable from a correct no-results response. Fix: preserved the `None` vs `[]` distinction that `pinecone_semantic_search` already returns but `rag_service.py:81` was flattening away. `None` (Pinecone failed) vs `[]` (ran, found nothing) now routes two honest banner shapes off the same branch. Fallback with rows: breather banner above keyword results ("🐾 I need a quick breather: please try again in a moment!"); "Showing closest matches, relevance may be low" removed. Fallback with nothing: breather only; story count, grid, and affordance lines suppressed so the page does not confidently describe an empty result set. Red `b8c6caa`; Green `013d9ac`. MATTGPT-222 Alarm 1 will read the same signal to fire an operational alarm on upstream failure.
+
+---
+
+**September 2, 2026 — My Work detail-pane empty state: dashed slot replaces paw banner (MATTGPT-237)** -- `31f20c9`
+
+`story_detail.py:261` previously rendered "🐾 Check a row or click a card above to view details." as a banner with an accent stripe and square corners. Three problems: Agy's voice used for furniture, "or click a card" stale in Table view, and the icon-margin span and corner radius that were fixed at the other five banner sites were never applied here. Replaced with a 140px dashed empty-state slot (1px dashed `--border-color`, 8px border-radius, centered 15px `--text-secondary` text: "Select a story above to read the full detail"). Purple rule above the detail region removed from the same file -- the slot already separates grid from footer. Mockup settled September 2 (option 1b); shipped values 140px / 15px / `--text-secondary` approved against live grid, differing from the 200px / 14px / `--text-muted` mockup defaults.
+
+---
+
 **September 1, 2026 — Explore Stories rejection no longer blanks the browsing context (MATTGPT-224)** -- `92370b3`
 
 `st.stop()` in both rejection branches of `explore_stories.py` halted execution before the story grid rendered (~line 1373). A single off-topic query replaced 123 browsable stories with a one-line banner above ~900px of white space -- no grid, no pagination, no escape except retyping. Because `render_no_match_banner` suppresses chips in the "explore" context, there was nothing else on screen either. Fix: removed both `st.stop()` calls. The banner renders; the grid renders underneath with filter state intact. Visitor sees the rejection message above work they can still browse.

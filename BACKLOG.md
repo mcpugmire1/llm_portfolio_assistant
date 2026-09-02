@@ -7,23 +7,22 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 ---
 
-## Value Prioritized Roadmap (updated 2026-09-01, evening)
+## Value Prioritized Roadmap (updated 2026-09-02)
 
 **NOW**
-1. **-230** — Fallback banner misleads visitor during Pinecone downtime. Scope: preserve None vs empty-list at rag_service.py:81, render honest degraded vs unavailable copy. No log column, no session state.
-2. **-234** — `personal` branch hard-stops generic off-topic queries before the overlap gate fires, with rejection copy that reads as though the visitor asked something personal. One line at two call sites, same pattern as -219. ARCHITECTURE.md:664 constraint: re-run the rejection eval as the acceptance condition.
-3. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
-4. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
-5. **-144** -- "projects" mislabel at `explore_stories.py:1187,1199`. Adjacent to -146, same file.
-6. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
-7. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
-8. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
-9. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+1. **-234** — `personal` branch hard-stops generic off-topic queries before the overlap gate fires, with rejection copy that reads as though the visitor asked something personal. One line at two call sites, same pattern as -219. ARCHITECTURE.md:664 constraint: re-run the rejection eval as the acceptance condition.
+2. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
+3. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
+4. **-144** -- "projects" mislabel at `explore_stories.py:1187,1199`. Adjacent to -146, same file.
+5. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
+6. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
+7. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
+8. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT**
 10. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
 11. **-086** — Environment stamp on every log write. Makes every future log analysis exact rather than heuristic.
-12. **-222** — Three operational alarms. Zero-score alarm would have surfaced -230 rather than it being found by hand during a shakeout.
+12. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row.
 13. **-223** — Sheet migration, retires local-only borderline and offdomain CSVs.
 14. **-089** — Role Match: location, work model, availability. May 22 recruiter finding; Role Match is the surface that does a recruiter's job in thirty seconds.
 15. Rest of Role Match: **-160**, -173, -159, -014, -012, -081, -099, -017.
@@ -44,7 +43,7 @@ Dead code: -176, -183, -199, -201 · Hidden error: -204 (zero-filter-match only 
 Untraced flash: -229 (My Work flashes before Ask Agy conversation -- needs DevTools trace)
 BDD flakes: -122, -131, -142, -145, -197, -198, -205
 Wrong-assertion test: -203 · -209 (drift guard searches wrong scope)
-Small refactors: -140, -153, -062, -082, -083, -084, -150, -060, -217 (pronoun grammar in substitution) · -237 (detail-pane empty state)
+Small refactors: -140, -153, -062, -082, -083, -084, -150, -060, -217 (pronoun grammar in substitution)
 BDD structure: -213 (shared step definitions)
 Correctness audit: -214 (parameters, comments, constants, copied blocks) · -226 (dead `.main` selectors, ~299 declarations matching 0 elements)
 Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/agy-behavior/structural suites) · -232 (requirements_temp.txt removal)
@@ -131,13 +130,11 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-144](#mattgpt-144) | Regression: `explore_stories.py:1187,1199` still says "projects" after June 30 count-noun fix; no singular form | Open | Medium | Bug | August 31, 2026 |
 | [MATTGPT-228](#mattgpt-228) | Deep link param never consumed: `?story=<id>` re-applies on refresh, no in-app escape; offset inherited across searches | Open | High | Bug | August 31, 2026 |
 | [MATTGPT-229](#mattgpt-229) | Asking Agy "why hire matt" flashes My Work table view before landing on conversation | Open | Medium | Bug | September 1, 2026 |
-| [MATTGPT-230](#mattgpt-230) | Fallback banner misleads visitor during Pinecone downtime; preserve None vs empty-list to render honest copy | Open | Medium | Bug | September 1, 2026 |
 | [MATTGPT-232](#mattgpt-232) | `requirements_temp.txt` in repo root -- remove | Open | Low | Hygiene | September 1, 2026 |
 | [MATTGPT-233](#mattgpt-233) | Phase 2: extend pre-push gate to BDD suite, `test_agy_behavior.py`, `test_structural_assertions.py` | Open | Medium | Infra | September 1, 2026 |
 | [MATTGPT-234](#mattgpt-234) | `personal` router branch hard-stops generic off-topic queries before overlap gate fires; wrong rejection copy | Open | Medium | Bug | September 1, 2026 |
 | [MATTGPT-235](#mattgpt-235) | Resolve LLM-text assertion classes so pre-push gate can widen to agy-behavior and structural suites | Open | High | Refactor / Test | September 1, 2026 |
 | [MATTGPT-236](#mattgpt-236) | Remove router topical family dimension: delete 3 inert families, rewire 2 set memberships, remove 6 topic-axis families | Open | Medium | Refactor | September 1, 2026 |
-| [MATTGPT-237](#mattgpt-237) | My Work detail-pane empty state: replace paw banner with dashed slot; drop accent stripe, stale card copy, purple rule above | Open | Low | Enhancement | September 2, 2026 |
 | [MATTGPT-226](#mattgpt-226) | Dead `.main` selectors across `ui/styles/` after `.main → .stMain` refactor: 31 selectors, ~299 declarations, all matching 0 elements | Open | Medium | Refactor / Tech debt | August 31, 2026 |
 | [MATTGPT-222](#mattgpt-222) | Three operational alarms: zero-score, anchor-cache drift, out_of_scope on known entity | Open | High | Enhancement | August 30, 2026 |
 | [MATTGPT-223](#mattgpt-223) | Sheet migration: retire borderline and offdomain CSVs in favor of Sheet events with Event Type column | Open | Medium | Enhancement | August 30, 2026 |
@@ -2431,41 +2428,6 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 
 ---
 
-### MATTGPT-230
-**Fallback banner misleads visitor during Pinecone downtime; preserve None vs empty-list to render honest copy**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Bug
-- **File:** `services/rag_service.py:81-96` (`:81` currently flattens `None` to empty list; fallback body at `:96`), `ui/pages/explore_stories.py` (banner path)
-- **Logged:** September 1, 2026
-
-**What the log settled (verified September 1, 2026):** The query logger shows a 3:37 upstream outage window -- everything between 15:47:18 and 15:50:55 returned zero. The same query ran clean at 16:15:49, 25 minutes after the window closed. Session B's apparent "fix" was coincidence; the outage had already ended. This is a single occurrence in four months of logs. July, August, and the rest of September 1 show only scattered honest misses (`humana`, `cendia`, typo tests). No latch, no replica divergence, no session state to unwind -- a 3.5-minute upstream blip.
-
-**What the defect actually is:** At 15:50:30, "why should i hire matt" returned zero results with "Matt may not have worked with this client or topic." That is the flagship query producing a false denial during a Pinecone outage. The fallback engaged but was indistinguishable from a correct no-results response. Cheap to make honest, worth doing on principle regardless of frequency.
-
-**Scope (no mechanism hunt, no recovery logic):**
-1. At `rag_service.py:81`, preserve the `None` vs empty-list distinction that `pinecone_semantic_search` already returns -- currently both are flattened to empty list. `None` means Pinecone failed; `[]` means it ran and found nothing. This is the signal that separates an infrastructure failure from a genuine zero-result query.
-2. Replace "Showing closest matches, relevance may be low" with the existing breather copy from `backend_service.py`. One string, not two -- the row count carries the difference between the degraded-with-rows and degraded-with-nothing cases. Rows are kept when available; hiding keyword results makes the app less useful precisely when it's already degraded.
-3. When the fallback returns nothing, suppress the story count, the grid, and both affordance lines (the pair of lines inviting the visitor to select a row that does not exist). The breather should be the only element on the page in that state. Contrast with MATTGPT-224: that ticket removed `st.stop()` so a rejected query keeps the browsable grid underneath the banner -- a rejected query still has 123 stories worth browsing. A failed search has nothing. Same principle (show what you have), opposite outcome.
-4. No session flag, no latch unwiring -- the log confirms there is no persistent degraded state to address.
-
-**Banner copy (both shapes, same string):**
-"🐾 I need a quick breather: please try again in a moment!" Colon, not em dash. Paw emoji. Matches the existing breather in `backend_service.py`.
-
-**Dependency:** MATTGPT-222 Alarm 1 reads the `None` vs empty-list signal to fire an operational alarm on upstream failure. -230 can ship alone, but until -222 lands, an outage leaves no trace anywhere.
-
-**Open (file separately if confirmed):** The search input shows a red border during fallback. That reads as a validation error on the query when the query was fine. Likely a separate ticket -- do not scope into this change.
-
-**Acceptance:**
-- `rag_service.py:81` preserves `None` vs empty-list from `pinecone_semantic_search`; does not flatten both to empty list.
-- "Showing closest matches, relevance may be low" removed; replaced by the breather copy above in both fallback shapes.
-- Fallback with rows: keyword rows render under the breather banner.
-- Fallback with nothing: story count, grid, and affordance lines suppressed; breather is the only element on the page.
-- No change to session management or embedding path.
-
----
-
 ### MATTGPT-234
 **`personal` router branch hard-stops generic off-topic queries before overlap gate fires; wrong rejection copy**
 
@@ -2513,44 +2475,6 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 **Surviving families post-refactor:** `background`, `behavioral`, `synthesis`, `narrative`, `personal`, `out_of_scope` -- the query-shape axis, legitimately hand-maintained.
 
 **Reference:** Router anatomy diagram, panels 1-6.
-
----
-
-### MATTGPT-237
-**My Work detail-pane empty state: replace paw banner with dashed slot; drop accent stripe, stale card copy, purple rule above**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Enhancement
-- **File:** `ui/components/story_detail.py:261` (banner and purple rule both in this file, not explore_stories.py)
-- **Logged:** September 2, 2026
-
-**Current state:** `story_detail.py:261` renders "🐾 Check a row or click a card above to view details." as a banner with an accent stripe and square corners. Three problems: (1) it reads as Agy speaking rather than furniture labeling an empty slot; (2) "or click a card above" is stale -- Table view has no cards, and Cards view has its own affordance; (3) the banner styling (icon-margin span, corner radius) was also missing the two fixes applied to the other five banner sites, so the paw sits flush against "Check" and the corners are square.
-
-**Replacement:** A dashed empty-state slot -- convention for "content lands here." No paw, no accent stripe, no bold.
-
-```html
-<div style="height: 140px; border: 1px dashed var(--border-color);
-            border-radius: 8px; display: flex; align-items: center;
-            justify-content: center;">
-  <span style="font-size: 15px; color: var(--text-secondary);">Select a story above to read the full detail</span>
-</div>
-```
-
-Note: shipped values differ from the mockup (200px / 14px / --text-muted). After eyeballing against the live grid, 140px / 15px / --text-secondary were approved as the correct values.
-
-**Also remove:** The purple rule (`border-bottom` divider) rendered above the detail region in `story_detail.py`. The dashed slot already separates the grid from the footer; the rule adds visual weight for no reason.
-
-**Design rationale:** A banner is a message about the page; an empty state is a placeholder standing in for content. The spatial relationship ("the thing goes here") replaces the announcement. Muted text, no bold -- quieter than real content.
-
-**Accepted option:** 1b from the September 2 mockup (dashed outline, one centered muted line).
-
-**Acceptance:**
-- `story_detail.py:261` renders the dashed slot instead of the paw banner.
-- Copy reads "Select a story above to read the full detail" -- no paw, no "or click a card."
-- Slot is 140px tall, 15px text, `--text-secondary` color, 8px border-radius, 1px dashed `--border-color`.
-- Purple rule above the detail region removed from `story_detail.py`.
-- Slot renders correctly in both light and dark mode (CSS variable fill).
 
 ---
 
