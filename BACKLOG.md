@@ -15,7 +15,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 3. **-242** — Streamlit theme defaults leak into widget chrome after `[theme]` block removal Sep 2. `#FF4B4B` focus borders read as validation errors; wrapper backgrounds and widget labels using Streamlit defaults. Fix shape verified live: CSS with `--accent-purple` and app tokens in `global_styles.py`.
 4. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
 5. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
-6. **-144** -- "projects" mislabel at `explore_stories.py:1187,1199`. Adjacent to -146, same file.
+6. **-144** -- Bucket A shipped (4 banner sites). Remaining work: expose project count as a distinct metric so Bucket D copy sites can use the accurate number. Adjacent to -146, same file.
 7. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
 8. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
 9. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
@@ -128,7 +128,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-213](#mattgpt-213) | BDD suite: navigation step definitions duplicated across modules; no shared step module | Open | Low | Refactor / Test | August 26, 2026 |
 | [MATTGPT-214](#mattgpt-214) | Targeted audit: parameters never referenced, comments asserting absent behavior, constants unused, copied blocks with stale variable names | Open | Low | Refactor | August 26, 2026 |
 | [MATTGPT-217](#mattgpt-217) | `_substitute_matt_subject` produces subject pronoun in object position ("reported to he at the CIC") | Open | Low | Bug | August 26, 2026 |
-| [MATTGPT-144](#mattgpt-144) | Regression: `explore_stories.py:1187,1199` still says "projects" after June 30 count-noun fix; no singular form | Open | Medium | Bug | August 31, 2026 |
+| [MATTGPT-144](#mattgpt-144) | "projects" count sites conflate story count with project count; Bucket A shipped; Bucket D requires exposing project count as a distinct metric | Open | Medium | Enhancement | August 31, 2026 |
 | [MATTGPT-228](#mattgpt-228) | Deep link param never consumed: `?story=<id>` re-applies on refresh, no in-app escape; offset inherited across searches | Open | High | Bug | August 31, 2026 |
 | [MATTGPT-229](#mattgpt-229) | Asking Agy "why hire matt" flashes My Work table view before landing on conversation | Open | Medium | Bug | September 1, 2026 |
 | [MATTGPT-232](#mattgpt-232) | `requirements_temp.txt` in repo root -- remove | Open | Low | Hygiene | September 1, 2026 |
@@ -1227,34 +1227,50 @@ The bug is that Blocks A and B have no lower bound, so they leak into the ≤480
 ---
 
 ### MATTGPT-144
-**Regression: `explore_stories.py:1187,1199` still says "projects" after June 30 count-noun fix; no singular form**
+**"projects" count sites conflate story count with project count; Bucket A shipped; Bucket D requires exposing project count as a distinct metric**
 
 - **Status:** Open
 - **Priority:** Medium
-- **Type:** Bug
-- **File:** `ui/pages/explore_stories.py:1187, 1199`
-- **Logged:** June 2026 (original); reopened August 31, 2026
+- **Type:** Enhancement
+- **File:** `ui/pages/explore_stories.py`, `ui/pages/banking_landing.py`, `ui/pages/cross_industry_landing.py`
+- **Logged:** June 2026 (original); inventory September 2, 2026
 
-**History:** The June 30 session bundled a count-noun fix into the MATTGPT-144 AgGrid → st.dataframe swap: "count markup changed from projects to stories with separators." The standard was confirmed as "Stories" to match the hero copy ("100+ transformation stories"). The fix landed on some lines but missed `1187` and `1199`.
+**What changed from original framing (September 2, 2026):** The ticket was filed as a text swap -- "replace 'projects' with 'stories' at two missed lines." A full inventory revealed that framing is wrong. "Project" is a real entity with a one-to-many relationship to stories; the defect is not the word, it is counting stories and labeling that count as projects. The fix is a data-model change, not a rename.
 
-**Regression confirmed August 31, 2026:** `explore_stories.py:1294` already says "stories" (correct). Lines 1187 and 1199 still say "projects":
+**Inventory results:**
 
-- Line 1187: `🐾 No projects match {filter_desc}.`
-- Line 1199: `🐾 Showing {len(view)} {filter_desc} projects.`
+**Bucket A -- broken (story count labeled as project count, filter-banner context) -- SHIPPED September 2, 2026:**
+- `explore_stories.py:1271` -- filter empty banner
+- `explore_styles.py:1283` -- filter results banner
+- `banking_landing.py:147` -- hero subtitle `{total_projects} projects across ...`
+- `cross_industry_landing.py:137` -- same shape
 
-Live example: filtering to Accenture shows "🐾 Showing 41 Accenture projects." This is a factual error -- 41 stories across Accenture engagements is not 41 projects; one project can have multiple stories. A technical reader filtering by client will notice. Line 1199 also has no singular form, so one result reads "Showing 1 Adjunct Professor projects."
+**Bucket B -- structural (Project as Pinecone/JSONL entity name) -- do not touch:**
+- `backend_service.py:78, 282, 584, 1400, 1420, 1844, 2261, 2269` -- Client/Employer/Division/Project/Place filter axis and Independent Project value
+- `story_intelligence.py:137, 174, 178, 179` -- "personal project" data category
 
-**Fix:** Three parts, not two lines.
+**Bucket C -- env/config, unrelated to portfolio labeling -- do not touch:**
+- `backend_service.py:830, 957`, `jd_assessor.py:193` -- `project=os.getenv("OPENAI_PROJECT_ID")`
+- `backend_service.py:1137` -- regex `projects?` in bolding rule
+- `backend_service.py:804, 839, 1351` -- LLM prompt copy about "technology projects"
+- `backend_service.py:1913` -- comment about rejected "valid projects"
+- `prompts.py:166` -- "personal projects"
 
-1. Define a `STORY_NOUN` constant (or `story_noun(n)` helper) in `config/constants.py` that returns "story" / "stories" based on count. Both the page and the tests read from it.
-2. Replace the hardcoded "projects" at lines 1187 and 1199 with that constant.
-3. Update the three test files that hardcode the count noun to use the same constant.
+**Bucket D -- visitor-facing copy using "project(s)" as a synonym for story -- PARKED, data-model fix required:**
+- `hero.py:288, 369` -- "Projects Delivered" stat (backed by story count)
+- `explore_stories.py:675` -- `<h1>Matt's Project Portfolio</h1>`
+- `banking_landing.py:161`, `cross_industry_landing.py:151` -- "Projects Delivered" stat label
+- `banking_landing.py:594`, `cross_industry_landing.py:574` -- "Browse {browseable_total} banking projects..."
+- `banking_landing.py:622`, `cross_industry_landing.py:598` -- "banking project{plural}"
+- `category_cards.py:624`, `how_i_built_dialog.py:46, 176`, `hero.py:182`, `thinking_indicator.py:21`, `story_detail.py:203, 674`, `role_match.py:646, 648, 1733`, `landing_view.py:314`, `how_agy_dialog.py:185`
 
-Fixing only the two lines produces the third regression with the same shape as the first two: the next build touches the wording somewhere else, tests still pass, and the noun drifts again. A single `STORY_NOUN` source means any site not using it becomes visibly inconsistent at read time.
+**Why Bucket D is not a rename:** "Pawing through projects" is not wrong. "Project Experience" is not wrong. A story is a case study of a project. The one-to-many relationship means these copy sites may be accurate -- but only if they measure the project count, not the story count. "Projects Delivered" backed by `len(stories)` is the defect; "Projects Delivered" backed by `len(unique_projects)` would be correct.
 
-**Root cause of incomplete fix (June 30 session note):** Count noun was hardcoded in three separate test files rather than pulled from a shared constant. The fix landed on the observed-broken lines and missed 1187 and 1199. The acceptance criterion that would have caught it: name every site that labels a story count, verify all of them. That criterion was stated at close time and not applied.
+**Remaining fix:** Expose `len(unique_projects)` (distinct `Project` field values from the story corpus) as a metric available to copy sites alongside `len(stories)`. Then let each Bucket D site use whichever count is accurate for its claim. This is a data derivation, not a text swap -- the `Project` field already exists in the JSONL; this is `len({s["Project"] for s in stories})`.
 
-**Cross-references:** MATTGPT-204 (same file, st.dataframe empty-state behavior -- different defect, same `explore_stories.py` surface).
+**Acceptance:** Each Bucket D copy site either (a) uses `len(stories)` and says "stories" or (b) uses `len(unique_projects)` and may say "projects." No site measures one and labels the other.
+
+**Cross-references:** MATTGPT-204 (same file, `st.dataframe` empty-state -- different defect, same `explore_stories.py` surface).
 
 ---
 
