@@ -16,11 +16,15 @@ data/intent_embeddings.json to regenerate the cache. Otherwise the router
 will use stale embeddings that don't match the new intent definitions.
 """
 
+import logging
 import os
 
 import numpy as np
 
 from config.constants import DEFAULT_EMBEDDING_MODEL, HARD_ACCEPT, SOFT_ACCEPT
+from config.settings import get_conf
+
+logger = logging.getLogger(__name__)
 
 # Thresholds imported from config/constants.py
 # HARD_ACCEPT = 0.80  # Clearly on-topic, no question
@@ -382,6 +386,23 @@ def is_portfolio_query_semantic(
         # Log borderline cases for review
         if soft_threshold <= max_similarity < hard_threshold:
             _log_borderline(query, max_similarity, best_intent, family)
+        # MATTGPT-238: log below-SOFT queries to a separate file. Nine
+        # months of borderline_queries.csv covers [SOFT, HARD); the
+        # [0, SOFT) region is the unknown that MATTGPT-239's confidence-
+        # floor decision needs data on. Separate file keeps legacy
+        # analysis working and avoids a schema migration. env comes from
+        # get_conf so -239 can filter local/testing traffic from real
+        # visitor queries at read time (MATTGPT-086 only threads Env
+        # into the query logger, not into these CSVs).
+        elif max_similarity < soft_threshold:
+            _log_router_low_confidence(
+                query,
+                max_similarity,
+                best_intent,
+                family,
+                soft_threshold,
+                get_conf("MATTGPT_ENV", "local"),
+            )
 
         return is_valid, max_similarity, best_intent, family
 
@@ -451,8 +472,70 @@ def _log_borderline(query: str, score: float, intent: str, family: str):
                     family,
                 ]
             )
-    except Exception:
-        pass  # Don't break the app for logging
+    except Exception as e:
+        # MATTGPT-238: don't break the router, but don't swallow the
+        # failure either -- a silently-empty log is the -230 shape.
+        # stderr surfaces the failure where MATTGPT-222's alarms can
+        # read it.
+        logger.warning("borderline log write failed: %s", e, exc_info=True)
+
+
+def _log_router_low_confidence(
+    query: str,
+    score: float,
+    intent: str,
+    family: str,
+    soft_accept: float,
+    env: str,
+) -> None:
+    """MATTGPT-238: log router decisions below SOFT_ACCEPT.
+
+    Separate file from _log_borderline (which covers the [SOFT, HARD)
+    middle band) so legacy analysis of borderline_queries.csv keeps
+    working and no schema migration is needed. soft_accept is written
+    into each row so the row stays self-describing if the threshold
+    moves (e.g., via MATTGPT-239). env comes from the caller
+    (get_conf("MATTGPT_ENV", "local")) so -239 can filter local/testing
+    traffic from real visitor queries at read time; MATTGPT-086 only
+    threads Env into the query logger, not into these CSVs.
+    """
+    import csv
+    from datetime import UTC, datetime
+
+    path = "data/router_low_confidence.csv"
+    try:
+        os.makedirs("data", exist_ok=True)
+        write_header = not os.path.exists(path)
+
+        with open(path, "a", newline="", encoding="utf-8") as f:
+            w = csv.writer(f)
+            if write_header:
+                w.writerow(
+                    [
+                        "timestamp",
+                        "query",
+                        "score",
+                        "soft_accept",
+                        "matched_intent",
+                        "family",
+                        "env",
+                    ]
+                )
+            w.writerow(
+                [
+                    datetime.now(UTC).isoformat(timespec="seconds"),
+                    query,
+                    f"{score:.3f}",
+                    f"{soft_accept:.3f}",
+                    intent,
+                    family,
+                    env,
+                ]
+            )
+    except Exception as e:
+        # MATTGPT-238: don't break the router, but don't swallow the
+        # failure either. Same rationale as _log_borderline above.
+        logger.warning("router low-confidence log write failed: %s", e, exc_info=True)
 
 
 def warm_cache():
