@@ -454,7 +454,7 @@ class TestSemanticSearchFallbackReason:
     """MATTGPT-230: preserve pinecone_semantic_search's None vs [] distinction.
 
     None means Pinecone failed upstream; [] means Pinecone ran and found nothing.
-    Only the None case adds reason="pinecone_unavailable" to the return dict so
+    Only the None case adds reason="fallback:pinecone_unavailable" to the return dict so
     the UI can render an honest-copy banner instead of a misleading confidence
     banner.
     """
@@ -488,7 +488,7 @@ class TestSemanticSearchFallbackReason:
             stories=sample_stories_with_industry,
         )
 
-        assert result["reason"] == "pinecone_unavailable"
+        assert result["reason"] == "fallback:pinecone_unavailable"
         assert len(result["results"]) >= 1
         assert result["confidence"] == "low"
 
@@ -518,7 +518,7 @@ class TestSemanticSearchFallbackReason:
             stories=sample_stories_with_industry,
         )
 
-        assert result["reason"] == "pinecone_unavailable"
+        assert result["reason"] == "fallback:pinecone_unavailable"
         assert result["results"] == []
         assert result["confidence"] == "none"
 

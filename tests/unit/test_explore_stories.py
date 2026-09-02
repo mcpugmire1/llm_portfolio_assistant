@@ -475,31 +475,82 @@ from unittest.mock import patch  # noqa: E402
 
 class TestRenderDegradedBanner:
     """MATTGPT-230: honest-copy banner replaces the misleading 'closest matches'
-    framing during Pinecone downtime. Two shapes based on whether keyword
-    fallback returned rows.
+    framing during Pinecone downtime. Reuses the -162 breather copy so the same
+    failure speaks with the same voice across surfaces.
     """
 
     @patch("ui.pages.explore_stories.st")
-    def test_degraded_banner_with_results_renders_degraded_copy(self, mock_st):
-        """Fallback returned rows: banner says degraded, keyword matches only."""
+    def test_degraded_banner_renders_breather_copy(self, mock_st):
+        """Single string, row count carries the sub-shape at the call site."""
         from ui.pages.explore_stories import _render_degraded_banner
 
-        _render_degraded_banner("payments", has_results=True)
+        _render_degraded_banner()
 
         rendered = " ".join(str(c) for c in mock_st.markdown.call_args_list)
+        # Emoji and message asserted separately because emoji is wrapped in a
+        # margin-right span and the two are not literally adjacent in the source.
+        assert "🐾" in rendered
+        assert "I need a quick breather: please try again in a moment!" in rendered
+
+
+class TestShouldSuppressPageUI:
+    """MATTGPT-230: whenever the fallback engaged, suppress the count, grid,
+    affordance lines, filter chips, and story detail -- regardless of whether
+    keyword matches were found. One rule, one state: reason set means breather
+    only. Healthy states (zero-results, hits) render normally.
+    """
+
+    def test_outage_with_no_rows_suppresses(self):
+        from ui.pages.explore_stories import _should_suppress_page_ui
+
         assert (
-            "Search is temporarily degraded. Showing keyword matches only: "
-            "try again shortly for full results."
-        ) in rendered
+            _should_suppress_page_ui(
+                {
+                    "reason": "fallback:pinecone_unavailable",
+                    "results": [],
+                    "confidence": "none",
+                    "top_score": 0.0,
+                }
+            )
+            is True
+        )
 
-    @patch("ui.pages.explore_stories.st")
-    def test_degraded_banner_without_results_renders_unavailable_copy(self, mock_st):
-        """Fallback returned nothing: banner says unavailable, no false denial."""
-        from ui.pages.explore_stories import _render_degraded_banner
+    def test_outage_with_rows_also_suppresses(self):
+        """Keyword rows are fallback output too -- rendering them ranked by
+        nothing with the same count and pagination as semantic results is the
+        same false-confidence problem the ticket exists to fix."""
+        from ui.pages.explore_stories import _should_suppress_page_ui
 
-        _render_degraded_banner("payments", has_results=False)
-
-        rendered = " ".join(str(c) for c in mock_st.markdown.call_args_list)
         assert (
-            "Search is temporarily unavailable. Please try again shortly."
-        ) in rendered
+            _should_suppress_page_ui(
+                {
+                    "reason": "fallback:pinecone_unavailable",
+                    "results": [{"id": "x"}],
+                    "confidence": "low",
+                    "top_score": 0.0,
+                }
+            )
+            is True
+        )
+
+    def test_healthy_zero_results_does_not_suppress(self):
+        """Pinecone up but genuinely no matches: keep the browsable grid + filter feedback."""
+        from ui.pages.explore_stories import _should_suppress_page_ui
+
+        assert (
+            _should_suppress_page_ui(
+                {"results": [], "confidence": "none", "top_score": 0.0}
+            )
+            is False
+        )
+
+    def test_healthy_hits_does_not_suppress(self):
+        """Healthy path (regression guard)."""
+        from ui.pages.explore_stories import _should_suppress_page_ui
+
+        assert (
+            _should_suppress_page_ui(
+                {"results": [{"id": "x"}], "confidence": "high", "top_score": 0.85}
+            )
+            is False
+        )

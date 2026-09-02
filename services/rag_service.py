@@ -77,8 +77,15 @@ def semantic_search(
     if not q:
         return {"results": [], "confidence": "none", "top_score": 0.0}
 
-    # 1) Try Pinecone first
-    hits = pinecone_semantic_search(q, filters, stories, top_k=top_k) or []
+    # 1) Try Pinecone first.
+    # MATTGPT-230: preserve the None vs [] distinction. None = upstream failure
+    # (embed raise, init None, query raise); [] = Pinecone ran and found nothing.
+    # Both still fall through to the keyword fallback, but only the None case
+    # sets reason="fallback:pinecone_unavailable" so the UI can render honest-copy banner
+    # instead of the misleading "closest matches" framing.
+    raw_hits = pinecone_semantic_search(q, filters, stories, top_k=top_k)
+    pinecone_unavailable = raw_hits is None
+    hits = raw_hits or []
     st.session_state["__pc_suppressed__"] = False
 
     # 2) No hits from Pinecone
@@ -90,7 +97,10 @@ def semantic_search(
                 "__ask_from_suggestion__"
             ):
                 st.session_state["__dbg_pc_hits"] = 0
-                return {"results": [], "confidence": "none", "top_score": 0.0}
+                result = {"results": [], "confidence": "none", "top_score": 0.0}
+                if pinecone_unavailable:
+                    result["reason"] = "fallback:pinecone_unavailable"
+                return result
 
         # Local keyword fallback
         local = [s for s in stories if matches_filters(s, filters)]
@@ -98,11 +108,14 @@ def semantic_search(
         st.session_state["__last_ranked_sources__"] = [s["id"] for s in local[:10]]
 
         # Local results get "low" confidence (no semantic validation)
-        return {
+        result = {
             "results": local,
             "confidence": "low" if local else "none",
             "top_score": 0.0,
         }
+        if pinecone_unavailable:
+            result["reason"] = "fallback:pinecone_unavailable"
+        return result
 
     # 3) Calculate confidence from top Pinecone score
     top_score = max(h.get("pc_score", 0.0) or 0.0 for h in hits)

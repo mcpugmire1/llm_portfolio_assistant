@@ -309,9 +309,9 @@ def _render_confidence_banner(query: str, confidence: str, results: list[dict]):
         confidence: "high", "low", or "none"
         results: List of result dicts (with Title field) - needed to detect exact title match
     """
-    BANNER_STYLE = "background: #F3E8FF; border-left: 4px solid #8B5CF6; padding: 12px 16px; margin: 16px 0;"
-    TEXT_COLOR_SUCCESS = "#6B21A8"
-    TEXT_COLOR_CAUTION = "#4A1D7A"
+    BANNER_STYLE = "background: var(--banner-info-bg); border-left: 4px solid var(--banner-info-border); padding: 12px 16px; margin: 16px 0;"
+    TEXT_COLOR_SUCCESS = "var(--banner-info-text)"
+    TEXT_COLOR_CAUTION = "var(--banner-info-text)"
     TEXT_STYLE_COMMON = "font-size: 14px; font-weight: 600;"
 
     icon = "🐾"
@@ -337,31 +337,55 @@ def _render_confidence_banner(query: str, confidence: str, results: list[dict]):
             plural = "story" if result_count == 1 else "stories"
             message = f"Found {result_count} matching {plural} for \"{query}\""
     elif confidence == "low":
-        icon = "⚠️"
+        icon = "🐾"
         message = f"Showing closest matches for \"{query}\". Relevance may be low."
-        text_style_final = (
-            f"color: {TEXT_COLOR_CAUTION}; {TEXT_STYLE_COMMON}; font-style: italic;"
-        )
+        text_style_final = f"color: {TEXT_COLOR_CAUTION}; {TEXT_STYLE_COMMON}"
     else:  # confidence == "none"
         message = f"No strong matches for \"{query}\". Matt may not have worked with this client or topic."
 
     st.markdown(
         f"""
     <div style="{BANNER_STYLE}">
-        <span style="{text_style_final}">{icon} {message}</span>
+        <span style="{text_style_final}"><span style="margin-right: 6px;">{icon}</span>{message}</span>
     </div>
     """,
         unsafe_allow_html=True,
     )
 
 
-def _render_degraded_banner(query: str, *, has_results: bool) -> None:
+def _should_suppress_page_ui(search_result: dict) -> bool:
+    """MATTGPT-230: suppress the story count, grid, affordance lines, filter
+    chips, and story detail whenever the fallback engaged -- regardless of
+    whether keyword matches were found.
+
+    Rationale: keyword rows are fallback output too. Lexical matches ranked by
+    nothing, presented with the same count and pagination as semantic results,
+    are the same false-confidence problem the ticket exists to fix. One rule,
+    one state: reason set means breather only.
+
+    Healthy states render normally (healthy zero-results keeps the browsable
+    grid + filter feedback; healthy hits render as usual).
+    """
+    return search_result.get("reason") == "fallback:pinecone_unavailable"
+
+
+def _render_degraded_banner() -> None:
     """MATTGPT-230: render honest-copy banner during Pinecone downtime.
 
-    Two shapes based on whether the keyword fallback returned rows.
-    Stub -- Red commit only; Green fills in the markdown call.
+    Reuses the -162 "quick breather" copy from Ask Agy so the same failure mode
+    speaks with the same voice across surfaces. Replaces the misleading "closest
+    matches, relevance may be low" framing that turned an outage into an
+    apparent content gap. Keyword rows still render below when present -- row
+    count carries the sub-shape, not the copy.
     """
-    raise NotImplementedError("MATTGPT-230")
+    st.markdown(
+        """
+    <div style="background: var(--banner-info-bg); border-left: 4px solid var(--banner-info-border); padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;">
+        <span style="color: var(--banner-info-text); font-size: 14px; font-weight: 600;"><span style="margin-right: 6px;">🐾</span>I need a quick breather: please try again in a moment!</span>
+    </div>
+    """,
+        unsafe_allow_html=True,
+    )
 
 
 def _default_view(stories: list[dict], F: dict) -> list[dict]:
@@ -928,6 +952,11 @@ def render_explore_stories(
     # Check if search was intentionally triggered (by form submission)
     search_triggered = st.session_state.pop("__search_triggered__", False)
     current_query = F["q"].strip()
+
+    # MATTGPT-230: initialize so the suppression check below is safe on every
+    # path. Only PATH 1b assigns a real dict; PATH 2 and PATH 3 leave it empty,
+    # and the pure helper returns False on an empty dict.
+    search_result: dict = {}
     # MATTGPT-098: default view excludes Professional Narrative stories
     # (matching Timeline's EXCLUDED_ERA convention at timeline_view.py:42)
     # and sorts by Start_Date descending (most-recent-first). User can still
@@ -1079,14 +1108,19 @@ def render_explore_stories(
         relaxed_count = search_result.get("relaxed_count", 0)
         active_filters = search_result.get("active_filters", [])
 
-        if relaxed_count > 0 and not view:
+        # MATTGPT-230: Pinecone unavailable takes precedence over the other
+        # banner branches -- the relaxed_count math assumes Pinecone ran, and
+        # the confidence banner would misframe an outage as a content gap.
+        if search_result.get("reason") == "fallback:pinecone_unavailable":
+            _render_degraded_banner()
+        elif relaxed_count > 0 and not view:
             # Show helpful banner with option to clear restrictive filters
             filter_names = " + ".join([f[1] for f in active_filters])
             st.markdown(
                 f"""
-                <div style="background: #F3E8FF; border-left: 4px solid #8B5CF6; padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;">
-                    <span style="color: #6B21A8; font-size: 14px;">
-                        🐾 No matches. Matt has {relaxed_count} "{current_query}" stories, but none in {filter_names}.
+                <div style="background: var(--banner-info-bg); border-left: 4px solid var(--banner-info-border); padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;">
+                    <span style="color: var(--banner-info-text); font-size: 14px;">
+                        <span style="margin-right: 6px;">🐾</span>No matches. Matt has {relaxed_count} "{current_query}" stories, but none in {filter_names}.
                     </span>
                 </div>
                 """,
@@ -1191,7 +1225,7 @@ def render_explore_stories(
                     f"""
                     <div style="background: var(--banner-info-bg); border-left: 4px solid var(--accent-purple); padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;">
                         <span style="color: var(--accent-purple-text); font-size: 14px;">
-                            🐾 No projects match {filter_desc}.
+                            <span style="margin-right: 6px;">🐾</span>No projects match {filter_desc}.
                         </span>
                         <br><span style="color: var(--accent-purple-text); font-size: 13px; opacity: 0.8;">Try removing a filter or broadening your search.</span>
                     </div>
@@ -1203,7 +1237,7 @@ def render_explore_stories(
                     f"""
                     <div style="background: var(--banner-info-bg); border-left: 4px solid var(--accent-purple); padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;">
                         <span style="color: var(--accent-purple-text); font-size: 14px;">
-                            🐾 Showing {len(view)} {filter_desc} projects.
+                            <span style="margin-right: 6px;">🐾</span>Showing {len(view)} {filter_desc} projects.
                         </span>
                     </div>
                     """,
@@ -1216,6 +1250,23 @@ def render_explore_stories(
     # =========================================================================
     # END SEARCH & FILTERING LOGIC
     # =========================================================================
+
+    # MATTGPT-230: whenever the fallback engaged, the breather is the only
+    # honest thing to render. Suppress filter chips, count, grid, affordance
+    # lines, and story detail regardless of whether keyword matches were found.
+    # Keyword rows are fallback output too -- rendering them with the same
+    # count and pagination as semantic results is the same false-confidence
+    # problem the ticket exists to fix.
+    #
+    # Filter chips specifically: the filter panel above the banner still shows
+    # Client/Industry/etc state and provides the removal affordance, so chips
+    # would be a redundant echo. State is not lost -- it is just not doubly
+    # rendered in an outage state.
+    if _should_suppress_page_ui(search_result):
+        from ui.components.footer import render_footer
+
+        render_footer()
+        return
 
     render_filter_chips(F, stories)
 
@@ -1396,7 +1447,7 @@ def render_explore_stories(
         if not st.session_state.get("active_story"):
             st.markdown(
                 "<p style='font-size:13px; color:var(--text-secondary); margin:0 0 8px 0;'>"
-                "🐾 Check any row to read the full story.</p>",
+                '<span style="margin-right: 6px;">🐾</span>Check any row to read the full story.</p>',
                 unsafe_allow_html=True,
             )
 
