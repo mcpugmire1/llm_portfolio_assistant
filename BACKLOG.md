@@ -12,21 +12,21 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 **NOW**
 1. **-234** — `personal` branch hard-stops generic off-topic queries before the overlap gate fires, with rejection copy that reads as though the visitor asked something personal. One line at two call sites, same pattern as -219. ARCHITECTURE.md:664 constraint: re-run the rejection eval as the acceptance condition. Also routes My Work zero-result through `render_no_match_banner` (PATH 1b ~line 1130) to prevent empty-grid regression.
 2. **-238** — Log router decisions below SOFT_ACCEPT. Nine months of data has a hole at 0.00-0.40; prerequisite for deciding whether a confidence floor is viable. Add event column; coordinate with -223 before building.
-3. **-240** — Role Match has no rejection contract: no gate before the LLM call, and the failure path stores the error in a variable that is never read. Recruiter-facing gap with no logging.
-4. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
-5. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
-6. **-144** -- "projects" mislabel at `explore_stories.py:1187,1199`. Adjacent to -146, same file.
-7. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
-8. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
-9. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
-10. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+3. **-240** — Role Match has no rejection contract: no gate before the LLM call, and the failure path stores the error in a variable that is never read. Recruiter-facing gap with no logging. Pair with -089 (same file, same pass).
+4. **-089** — Role Match: location, work model, availability. May 22 recruiter finding. Paired with -240 -- both touch Role Match, cheaper to do in one visit than two.
+5. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
+6. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
+7. **-144** -- "projects" mislabel at `explore_stories.py:1187,1199`. Adjacent to -146, same file.
+8. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
+9. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
+10. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
+11. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT**
-11. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
-12. **-086** — Environment stamp on every log write. Makes every future log analysis exact rather than heuristic.
-13. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row.
-14. **-223** — Sheet migration, retires local-only borderline and offdomain CSVs.
-15. **-089** — Role Match: location, work model, availability. May 22 recruiter finding; Role Match is the surface that does a recruiter's job in thirty seconds.
+12. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
+13. **-086** — Environment stamp on every log write. Makes every future log analysis exact rather than heuristic.
+14. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row.
+15. **-223** — Sheet migration, retires local-only borderline and offdomain CSVs.
 16. Rest of Role Match: **-160**, -173, -159, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
@@ -2558,7 +2558,7 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 - **Type:** Bug
 - **File:** Role Match surface (file TBD -- confirm during pre-flight)
 - **Logged:** September 2, 2026
-- **Related:** MATTGPT-173 (sits alongside, not subsumed -- -173 covers input quality and validation for well-intentioned but malformed JDs; this ticket covers the missing gate and silent failure path)
+- **Related:** MATTGPT-173 (sits alongside, not subsumed -- -173 covers input quality and validation for well-intentioned but malformed JDs; this ticket covers the missing gate and silent failure path). MATTGPT-089 (location/work-model/availability parsing -- same file, pair in one pass rather than two visits).
 
 **Two gaps (September 2, 2026 rejection-contract audit):**
 
