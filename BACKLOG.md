@@ -10,25 +10,24 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-09-02)
 
 **NOW**
-1. **-234** — `personal` branch hard-stops generic off-topic queries before the overlap gate fires, with rejection copy that reads as though the visitor asked something personal. One line at two call sites, same pattern as -219. ARCHITECTURE.md:664 constraint: re-run the rejection eval as the acceptance condition. Also routes My Work zero-result through `render_no_match_banner` (PATH 1b ~line 1130) to prevent empty-grid regression.
-2. **-238** — Log router decisions below SOFT_ACCEPT. Nine months of data has a hole at 0.00-0.40; prerequisite for deciding whether a confidence floor is viable. Add event column; coordinate with -223 before building.
-3. **-240** — Role Match has no rejection contract: no gate before the LLM call, and the failure path stores the error in a variable that is never read. Recruiter-facing gap with no logging. Pair with -089 (same file, same pass).
-4. **-089** — Role Match: location, work model, availability. May 22 recruiter finding. Paired with -240 -- both touch Role Match, cheaper to do in one visit than two.
-5. **-242** — Streamlit theme defaults leak into widget chrome after `[theme]` block removal Sep 2. `#FF4B4B` focus borders read as validation errors; wrapper backgrounds and widget labels using Streamlit defaults. Fix shape verified live: CSS with `--accent-purple` and app tokens in `global_styles.py`.
-6. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
-7. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
-8. **-144** -- "projects" mislabel at `explore_styles.py:1187,1199`. Adjacent to -146, same file.
-9. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
-10. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
-11. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
-12. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+1. **-238** — Log router decisions below SOFT_ACCEPT. Nine months of data has a hole at 0.00-0.40; prerequisite for deciding whether a confidence floor is viable. Add event column; coordinate with -223 before building.
+2. **-240** — Role Match has no rejection contract: no gate before the LLM call, and the failure path stores the error in a variable that is never read. Recruiter-facing gap with no logging. Pair with -089 (same file, same pass).
+3. **-089** — Role Match: location, work model, availability. May 22 recruiter finding. Paired with -240 -- both touch Role Match, cheaper to do in one visit than two.
+4. **-242** — Streamlit theme defaults leak into widget chrome after `[theme]` block removal Sep 2. `#FF4B4B` focus borders read as validation errors; wrapper backgrounds and widget labels using Streamlit defaults. Fix shape verified live: CSS with `--accent-purple` and app tokens in `global_styles.py`.
+5. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
+6. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
+7. **-144** -- "projects" mislabel at `explore_stories.py:1187,1199`. Adjacent to -146, same file.
+8. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
+9. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
+10. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
+11. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT**
-13. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
-14. **-086** — Environment stamp on every log write. Makes every future log analysis exact rather than heuristic.
-15. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row.
-16. **-223** — Sheet migration, retires local-only borderline and offdomain CSVs.
-17. Rest of Role Match: **-160**, -173, -159, -014, -012, -081, -099, -017.
+12. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
+13. **-086** — Environment stamp on every log write. Makes every future log analysis exact rather than heuristic.
+14. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row.
+15. **-223** — Sheet migration, retires local-only borderline and offdomain CSVs.
+16. Rest of Role Match: **-160**, -173, -159, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
 -177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families)
@@ -135,7 +134,6 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-229](#mattgpt-229) | Asking Agy "why hire matt" flashes My Work table view before landing on conversation | Open | Medium | Bug | September 1, 2026 |
 | [MATTGPT-232](#mattgpt-232) | `requirements_temp.txt` in repo root -- remove | Open | Low | Hygiene | September 1, 2026 |
 | [MATTGPT-233](#mattgpt-233) | Phase 2: extend pre-push gate to BDD suite, `test_agy_behavior.py`, `test_structural_assertions.py` | Open | Medium | Infra | September 1, 2026 |
-| [MATTGPT-234](#mattgpt-234) | `personal` router branch hard-stops generic off-topic queries before overlap gate fires; wrong rejection copy | Open | Medium | Bug | September 1, 2026 |
 | [MATTGPT-235](#mattgpt-235) | Resolve LLM-text assertion classes so pre-push gate can widen to agy-behavior and structural suites | Open | High | Refactor / Test | September 1, 2026 |
 | [MATTGPT-236](#mattgpt-236) | Remove router topical family dimension: delete 3 inert families, rewire 2 set memberships, remove 6 topic-axis families | Open | Medium | Refactor | September 1, 2026 |
 | [MATTGPT-238](#mattgpt-238) | Log router decisions below SOFT_ACCEPT; add event column so bands are distinguishable in file | Open | High | Enhancement | September 2, 2026 |
@@ -2385,7 +2383,7 @@ Fallback if no entity is detected: surviving-family membership (`background`, `n
 
 **Alarm 2 -- anchor-cache drift:** Assert at startup that `intent_embeddings.json` and `VALID_INTENTS` hold the same keys. The sixteen `family:unknown` rows across 2026-01-18 to 2026-01-21 are that hazard firing silently in production. Startup assertion means the next drift surfaces on deploy, not in the log.
 
-**Alarm 3 -- out_of_scope on known entity alias:** Covered by MATTGPT-219 (`b8bd59b`, August 30, 2026). The score gate prevents the rejection from firing for queries that do not clear HARD_ACCEPT. Keep the alarm as a guard: the gate could be bypassed by future anchor additions that raise a valid out_of_scope score above 0.80. Note: the same preemption pattern applies to the `personal` branch -- MATTGPT-234 tracks extending the HARD_ACCEPT gate there.
+**Alarm 3 -- out_of_scope on known entity alias:** Covered by MATTGPT-219 (`b8bd59b`, August 30, 2026). The score gate prevents the rejection from firing for queries that do not clear HARD_ACCEPT. Keep the alarm as a guard: the gate could be bypassed by future anchor additions that raise a valid out_of_scope score above 0.80. Note: the same preemption pattern was applied to the `personal` branch in MATTGPT-234 (shipped September 2, 2026; commits `4c3cde3`, `a2e7e7a`, `824e59e`).
 
 ---
 
@@ -2433,35 +2431,6 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 2. Reset `page_offset` when the result set changes identity (new search, new filter state). Keep the initial jump; remove cross-context inheritance.
 
 **Cross-references:** MATTGPT-146 (PN filter leak, same filter-state surface), MATTGPT-204 (explore_stories.py navigation behavior).
-
----
-
-### MATTGPT-234
-**`personal` router branch hard-stops generic off-topic queries before overlap gate fires; wrong rejection copy**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Bug
-- **File:** `services/backend_service.py` (personal branch hard-stop, two call sites), `ui/pages/explore_stories.py` (PATH 1b zero-result case ~line 1130)
-- **Logged:** September 1, 2026
-
-**Issue:** Generic off-topic queries ("how much are bananas?") score low on the `personal` router family (score 0.223) and hit the personal hard-stop before the downstream `overlap:0.00` gate can run. The hard-stop returns "I'm focused on Matt's professional experience" -- copy that reads as though the user asked a personal question about Matt, not an unrelated query. The overlap gate would have produced a correct off-topic rejection.
-
-**Historical context (verified September 1, 2026 against Sept 2025 CSV):** This is not a nonsense-filter regression. The `retail_price` filter rule has always required a retailer word (e.g., "Walmart"); bare forms like "how much are bananas?" always passed the filter and were rejected downstream by `overlap:0.00`. The change is in the router: the personal branch now fires a hard-stop at low confidence before overlap can run.
-
-**Evidence:** 28 banana rows in the Sept 2025 CSV -- 17 caught by `rule:retail_price` (retailer-attached forms), 7 rejected by `overlap:0.00` (bare forms). No banana-adjacent rule has ever existed in nonsense_filters across 12 commits. The filter is not the fix.
-
-**Fix (backend_service.py):** Extend MATTGPT-219's HARD_ACCEPT gate to the personal branch. Same one-line pattern, two call sites. Score 0.223 does not clear HARD_ACCEPT (0.80), so the personal hard-stop does not fire, and the query falls through to Pinecone → overlap:0.00 → correct off-topic rejection.
-
-**Architecture constraint:** `ARCHITECTURE.md:664` (note written ~4 minutes after the -219 fix) says explicitly not to gate `personal` without re-running the rejection eval first. The note was written by Code or Design during the -219 session, anticipating this exact follow-on. The eval is an acceptance condition, not a blocker -- file the fix, but gate the commit on a clean eval run.
-
-**Additional scope (explore_stories.py PATH 1b):** After the HARD_ACCEPT fix, bananas falls through to Pinecone and lands on the `confidence == "none"` case at ~line 1130 -- the My Work zero-result path. Today that path renders through `_render_confidence_banner` with different copy, no hint line, and an empty grid with a phantom cell, rather than through `render_no_match_banner` with the default corpus underneath. Route PATH 1b through `render_no_match_banner` and render the default corpus underneath, mirroring the three router rejection paths around line 1054. This is the visible regression -234 would otherwise introduce.
-
-**Known interim state (acceptable):** After this fix, bananas will read "I picked up a scent but lost the trail, try rephrasing" over a browsable corpus -- wrong advice for a genuinely off-topic query, but adjacent to 112 stories rather than adjacent to nothing. MATTGPT-239 (confidence floor) splits `low_confidence` into near-miss and fell-through cases and gives each the right copy.
-
-**Acceptance:** (1) Re-run the rejection eval before and after the fix; confirm no legitimate personal-query rejections are lifted. (2) A banana-type query produces the correct off-topic rejection copy, not "I'm focused on Matt's professional experience." (3) After the HARD_ACCEPT gate, the My Work zero-result state renders through `render_no_match_banner` with the browsable corpus underneath, not an empty grid.
-
-**Related:** MATTGPT-219 (out_of_scope branch HARD_ACCEPT gate, same pattern already applied). MATTGPT-239 (confidence floor -- resolves the interim `low_confidence` copy).
 
 ---
 

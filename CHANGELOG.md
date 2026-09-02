@@ -8,6 +8,16 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### My Work
 
+**September 2, 2026 — personal branch HARD_ACCEPT gate + My Work zero-result routing (MATTGPT-234)** -- `4c3cde3`, `a2e7e7a`, `824e59e`
+
+Generic off-topic queries (bananas, world series) were scoring low on the `personal` family (0.223) and hitting the personal hard-stop before `overlap:0.00` could run, returning "I'm focused on Matt's professional experience" -- copy that implied the query was personal rather than off-topic. Fix (same one-line pattern as MATTGPT-219): HARD_ACCEPT gate at both personal branch call sites. Score 0.223 does not clear 0.80, so the hard-stop does not fire and the query falls through to the overlap gate. Rejection eval run before and after; all eight real personal queries still clear 0.80; no legitimate rejections lifted.
+
+Second scope item in the same ticket: after the gate fix, off-topic queries reaching `confidence == "none"` at My Work PATH 1b (~line 1130) were landing on `_render_confidence_banner` with an empty grid and a phantom cell rather than on `render_no_match_banner` with the browsable corpus underneath. Routed PATH 1b through the standard rejection renderer; default corpus now renders beneath the banner. Known interim: low-confidence fell-through queries see trail copy ("I picked up a scent but lost the trail") over 112 stories -- correct structure, interim copy. MATTGPT-239 splits the `low_confidence` reason and assigns the right copy to each case.
+
+Three-commit Green: `4c3cde3` (helper impl + Ask Agy wiring), `a2e7e7a` (explore_stories.py extraction + PATH 1b routing + filter suppression), `824e59e` (chip unlock).
+
+---
+
 **September 2, 2026 — My Work fallback banner made honest during Pinecone downtime (MATTGPT-230)** -- `013d9ac`
 
 Query log verified a 3:37 upstream outage window on September 1 (15:47:18 to 15:50:55): "why should i hire matt" returned zero results with "Matt may not have worked with this client or topic." The fallback was indistinguishable from a correct no-results response. Fix: preserved the `None` vs `[]` distinction that `pinecone_semantic_search` already returns but `rag_service.py:81` was flattening away. `None` (Pinecone failed) vs `[]` (ran, found nothing) now routes two honest banner shapes off the same branch. Fallback with rows: breather banner above keyword results ("🐾 I need a quick breather: please try again in a moment!"); "Showing closest matches, relevance may be low" removed. Fallback with nothing: breather only; story count, grid, and affordance lines suppressed so the page does not confidently describe an empty result set. Red `b8c6caa`; Green `013d9ac`. MATTGPT-222 Alarm 1 will read the same signal to fire an operational alarm on upstream failure.
