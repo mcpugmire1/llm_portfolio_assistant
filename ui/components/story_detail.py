@@ -251,14 +251,18 @@ def render_story_detail(
     # Story IDs use | delimiter (e.g., "title|client") but Streamlit keys don't support it
     key_suffix = key_suffix.replace('|', '-').replace(' ', '-')
 
-    hr_style = "margin: 16px 0 12px 0; border: none; border-top: 4px solid #8B5CF6; box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);"
-    st.markdown(f"<hr style='{hr_style}'>", unsafe_allow_html=True)
+    # MATTGPT-237: purple <hr> rule above the detail region removed
+    # unconditionally. In the empty state the dashed slot below carries the
+    # separation; in the filled state the detail's own header provides it.
 
     if not detail:
+        # MATTGPT-237: empty-state slot -- furniture labeling where content
+        # will land, not Agy speaking. Dashed edge is the convention for
+        # "content lands here"; CSS vars carry both light and dark modes.
         st.markdown(
             """
-            <div style="background: var(--banner-info-bg); border-left: 4px solid var(--accent-purple); padding: 12px 16px; margin: 16px 0;">
-                <span style="color: var(--accent-purple); font-size: 14px;">🐾 Check a row or click a card above to view details.</span>
+            <div style="height: 140px; border: 1px dashed var(--border-color); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+              <span style="font-size: 15px; color: var(--text-secondary);">Select a story above to read the full detail</span>
             </div>
             """,
             unsafe_allow_html=True,

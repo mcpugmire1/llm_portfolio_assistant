@@ -239,3 +239,38 @@ class TestRenderStoryDetailIntegration:
         assert sanitized1 != sanitized2
         assert sanitized1 == "payments-platform-jpmc"
         assert sanitized2 == "agile-transformation-jpmc"
+
+
+class TestRenderStoryDetailEmptyState:
+    """MATTGPT-237: empty state (detail=None) renders a dashed empty-state
+    slot instead of the paw banner, and the purple <hr> rule above the
+    detail region is gone (removed unconditionally, affects filled state too).
+    """
+
+    @patch("ui.components.story_detail.st")
+    def test_empty_state_renders_dashed_slot(self, mock_st):
+        """Copy is furniture, not Agy speaking: dashed border, muted text,
+        no paw, no 'click a card' reference."""
+        from ui.components.story_detail import render_story_detail
+
+        render_story_detail(None, "test", [])
+
+        rendered = " ".join(str(c) for c in mock_st.markdown.call_args_list)
+        assert "Select a story above to read the full detail" in rendered
+        assert "border: 1px dashed var(--border-color)" in rendered
+        assert "color: var(--text-secondary)" in rendered
+        assert "🐾" not in rendered
+        assert "click a card" not in rendered
+
+    @patch("ui.components.story_detail.st")
+    def test_empty_state_omits_purple_rule(self, mock_st):
+        """Purple <hr> rule above the detail region removed. Assertion pins
+        the rule's specific style pattern, not the accent color itself --
+        the accent may legitimately appear elsewhere in the empty state later.
+        """
+        from ui.components.story_detail import render_story_detail
+
+        render_story_detail(None, "test", [])
+
+        rendered = " ".join(str(c) for c in mock_st.markdown.call_args_list)
+        assert "border-top: 4px solid" not in rendered
