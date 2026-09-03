@@ -134,7 +134,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_cross_trigger"
         </div>
         <div class="conversation-header-text">
             <h1>Matt's Cross-Industry Expertise</h1>
-            <p>{total_projects} projects across 6 industries. Trust Agy 🐾 to surface the patterns that travel.</p>
+            <p>{total_projects} stories across 6 industries. Trust Agy 🐾 to surface the patterns that travel.</p>
         </div>
     </div>
 </div>
@@ -571,7 +571,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_cross_trigger"
         unsafe_allow_html=True,
     )
     st.markdown(
-        f'<p class="subtitle">Browse {browseable_total} cross-industry projects organized by transformation approach and methodology</p>',
+        f'<p class="subtitle">Browse {browseable_total} cross-industry stories organized by transformation approach and methodology</p>',
         unsafe_allow_html=True,
     )
 

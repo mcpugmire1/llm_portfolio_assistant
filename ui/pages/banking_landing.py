@@ -144,7 +144,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_banking_trigge
         </div>
         <div class="conversation-header-text">
             <h1>Matt's Financial Services Expertise</h1>
-            <p>{total_projects} projects across {num_capabilities} specialized areas. Trust Agy 🐾 to filter decades of domain experience.</p>
+            <p>{total_projects} stories across {num_capabilities} specialized areas. Trust Agy 🐾 to filter decades of domain experience.</p>
         </div>
     </div>
 </div>
@@ -591,7 +591,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_banking_trigge
         unsafe_allow_html=True,
     )
     st.markdown(
-        f'<p class="subtitle">Browse {browseable_total} banking projects organized by specialty area</p>',
+        f'<p class="subtitle">Browse {browseable_total} banking stories organized by specialty area</p>',
         unsafe_allow_html=True,
     )
 

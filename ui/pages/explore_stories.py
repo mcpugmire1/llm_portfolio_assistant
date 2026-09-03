@@ -1268,7 +1268,7 @@ def render_explore_stories(
                     f"""
                     <div style="background: var(--banner-info-bg); border-left: 4px solid var(--accent-purple); padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;">
                         <span style="color: var(--accent-purple-text); font-size: 14px;">
-                            <span style="margin-right: 6px;">🐾</span>No projects match {filter_desc}.
+                            <span style="margin-right: 6px;">🐾</span>No stories match {filter_desc}.
                         </span>
                         <br><span style="color: var(--accent-purple-text); font-size: 13px; opacity: 0.8;">Try removing a filter or broadening your search.</span>
                     </div>
@@ -1280,7 +1280,7 @@ def render_explore_stories(
                     f"""
                     <div style="background: var(--banner-info-bg); border-left: 4px solid var(--accent-purple); padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;">
                         <span style="color: var(--accent-purple-text); font-size: 14px;">
-                            <span style="margin-right: 6px;">🐾</span>Showing {len(view)} {filter_desc} projects.
+                            <span style="margin-right: 6px;">🐾</span>Showing {len(view)} {filter_desc} stories.
                         </span>
                     </div>
                     """,
