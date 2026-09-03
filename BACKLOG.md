@@ -1241,7 +1241,7 @@ The bug is that Blocks A and B have no lower bound, so they leak into the ≤480
 
 **Bucket A -- broken (story count labeled as project count, filter-banner context) -- SHIPPED September 2, 2026:**
 - `explore_stories.py:1271` -- filter empty banner
-- `explore_styles.py:1283` -- filter results banner
+- `explore_stories.py:1283` -- filter results banner
 - `banking_landing.py:147` -- hero subtitle `{total_projects} projects across ...`
 - `cross_industry_landing.py:137` -- same shape
 
