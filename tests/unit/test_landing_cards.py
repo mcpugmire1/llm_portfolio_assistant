@@ -32,24 +32,28 @@ SAMPLE_STORIES = [
         "Solution / Offering": "Global Payments & Treasury Solutions",
         "Era": "Financial Services Platform Modernization",
         "Client": "JPMC",
+        "Project": "P1",
     },
     {
         "Industry": "Financial Services / Banking",
         "Solution / Offering": "Global Payments & Treasury Solutions",
         "Era": "Financial Services Platform Modernization",
         "Client": "JPMC",
+        "Project": "P2",
     },
     {
         "Industry": "Financial Services / Banking",
         "Solution / Offering": "Global Payments & Treasury Solutions",
         "Era": "Enterprise Innovation & Transformation",
         "Client": "Fiserv",
+        "Project": "P3",
     },
     {
         "Industry": "Financial Services / Banking",
         "Solution / Offering": "Global Payments & Treasury Solutions",
         "Era": "Enterprise Innovation & Transformation",
         "Client": "HSBC",
+        "Project": "P4",
     },
     # Banking + Modern Engineering (3)
     {
@@ -57,18 +61,21 @@ SAMPLE_STORIES = [
         "Solution / Offering": "Modern Engineering Practices & Solutions",
         "Era": "Enterprise Innovation & Transformation",
         "Client": "RBC",
+        "Project": "P5",
     },
     {
         "Industry": "Financial Services / Banking",
         "Solution / Offering": "Modern Engineering Practices & Solutions",
         "Era": "Enterprise Innovation & Transformation",
         "Client": "RBC",
+        "Project": "P6",
     },
     {
         "Industry": "Financial Services / Banking",
         "Solution / Offering": "Modern Engineering Practices & Solutions",
         "Era": "Enterprise Innovation & Transformation",
         "Client": "AmEx",
+        "Project": "P7",
     },
     # Banking + Digital Product (2 — Specialized)
     {
@@ -76,12 +83,14 @@ SAMPLE_STORIES = [
         "Solution / Offering": "Digital Product Development",
         "Era": "Enterprise Innovation & Transformation",
         "Client": "JPMC",
+        "Project": "P8",
     },
     {
         "Industry": "Financial Services / Banking",
         "Solution / Offering": "Digital Product Development",
         "Era": "Enterprise Innovation & Transformation",
         "Client": "JPMC",
+        "Project": "P9",
     },
     # Banking + Security (1 — Specialized)
     {
@@ -89,6 +98,7 @@ SAMPLE_STORIES = [
         "Solution / Offering": "Security & Compliance Solutions",
         "Era": "Enterprise Innovation & Transformation",
         "Client": "Capital One",
+        "Project": "P10",
     },
     # Banking + EXCLUDED ERA (must NOT appear in cards)
     {
@@ -96,6 +106,7 @@ SAMPLE_STORIES = [
         "Solution / Offering": "Leadership Philosophy",
         "Era": "Leadership & Professional Narrative",
         "Client": "Various",
+        "Project": "P11",
     },
     # Non-banking (must be excluded by industry filter)
     {
@@ -103,12 +114,14 @@ SAMPLE_STORIES = [
         "Solution / Offering": "Modern Engineering Practices & Solutions",
         "Era": "Enterprise Innovation & Transformation",
         "Client": "Various",
+        "Project": "P12",
     },
     {
         "Industry": "Healthcare / Life Sciences",
         "Solution / Offering": "Digital Product Development",
         "Era": "Independent Product Development",
         "Client": "Pfizer",
+        "Project": "P13",
     },
 ]
 
@@ -214,6 +227,7 @@ class TestBuildLandingCards:
                 "Solution / Offering": "Fake Uncurated Capability",
                 "Era": "Enterprise Innovation & Transformation",
                 "Client": "X",
+                "Project": "P1",
             },
         ]
         from utils.landing_cards import build_landing_cards

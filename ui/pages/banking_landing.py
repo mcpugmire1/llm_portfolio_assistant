@@ -39,23 +39,20 @@ def render_banking_landing(stories: list[dict]):
         if s.get("Industry") == "Financial Services / Banking"
         and s.get("Category") != "Professional Narrative"
     ]
-    total_projects = len(banking_stories)
+    total_stories = len(banking_stories)
 
-    # Client counts (excluding generic clients)
+    # Distinct projects (Project field on each story)
+    num_projects = len({s["Project"] for s in banking_stories})
+
+    # Client counts (excluding generic clients). Counter + named_clients feed
+    # the client pill rendering below; num_clients also feeds the header.
     client_counter = Counter(
         s.get("Client", "Unknown")
         for s in banking_stories
         if not is_generic_client(s.get("Client"))
     )
     named_clients = [(client, count) for client, count in client_counter.most_common()]
-
-    # Capability areas (unique Solution / Offering values)
-    capabilities = set(
-        s.get("Solution / Offering", "")
-        for s in banking_stories
-        if s.get("Solution / Offering")
-    )
-    num_capabilities = len(capabilities)
+    num_clients = len(named_clients)
 
     # === END DYNAMIC COUNTS ===
 
@@ -143,7 +140,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_banking_trigge
         </div>
         <div class="conversation-header-text">
             <h1>Matt's Financial Services Expertise</h1>
-            <p>{total_projects} stories across {num_capabilities} specialized areas. Trust Agy 🐾 to filter decades of domain experience.</p>
+            <p>{total_stories} stor{"y" if total_stories == 1 else "ies"} across {num_projects} project{"" if num_projects == 1 else "s"} and {num_clients} client{"" if num_clients == 1 else "s"}. Trust Agy 🐾 to filter decades of domain experience.</p>
         </div>
     </div>
 </div>
@@ -578,7 +575,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_banking_trigge
     cards = build_landing_cards(stories, industry="Financial Services / Banking")
     core_cards = [c for c in cards if c["tier"] == "core"]
     specialized_cards = [c for c in cards if c["tier"] == "specialized"]
-    # Browseable total = sum of card counts. Differs from total_projects
+    # Browseable total = sum of card counts. Differs from total_stories
     # (which includes Era-excluded narrative stories) by the count of narrative
     # banking stories. Used in the subtitle below so the "Browse N" claim
     # matches what's actually reachable via the cards.
@@ -612,20 +609,29 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_banking_trigge
                     continue
                 card = card_list[idx]
                 with cols[offset]:
-                    # Meta line — signal-driven: only show client count when
-                    # card has >1 project (avoids trivially-redundant "1 client"
-                    # repetition that adds no signal).
-                    project_plural = "s" if card["count"] != 1 else ""
-                    meta = (
-                        f'<span class="card-count">{card["count"]} '
-                        f"banking project{project_plural}</span>"
-                    )
-                    if card["count"] > 1:
-                        client_plural = "s" if card["clients"] != 1 else ""
-                        meta += (
-                            f'<span class="card-clients">· {card["clients"]} '
-                            f"client{client_plural}</span>"
+                    # Meta line — elision rule:
+                    # - 1 story: "1 story" (project=client=1 trivially)
+                    # - projects == stories: drop the projects lead (redundant)
+                    # - projects < stories: show all three, projects leads
+                    # Clients only rendered when > 1 (avoids "· 1 client").
+                    if card["count"] == 1:
+                        meta = '<span class="card-count">1 story</span>'
+                    elif card["project_count"] == card["count"]:
+                        meta = (
+                            f'<span class="card-count">{card["count"]} stories</span>'
                         )
+                        if card["clients"] > 1:
+                            meta += f'<span class="card-clients">· {card["clients"]} clients</span>'
+                    else:
+                        proj = card["project_count"]
+                        proj_plural = "s" if proj != 1 else ""
+                        meta = (
+                            f'<span class="card-count">{proj} '
+                            f"banking project{proj_plural}</span>"
+                            f'<span class="card-clients">· {card["count"]} stories</span>'
+                        )
+                        if card["clients"] > 1:
+                            meta += f'<span class="card-clients">· {card["clients"]} clients</span>'
 
                     # Subtitle from CAPABILITY_SUBTITLES, empty-string fallback.
                     # Mirrors ERA_SUBTITLES.get(era, "") in timeline_view.py.

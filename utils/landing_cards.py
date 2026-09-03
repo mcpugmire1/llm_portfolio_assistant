@@ -67,11 +67,13 @@ def build_landing_cards(
     for offering, group in by_offering.items():
         count = len(group)
         clients = {s.get("Client") for s in group if s.get("Client")}
+        projects = {s["Project"] for s in group}
         tier = "core" if count >= CORE_TIER_THRESHOLD else "specialized"
         cards.append(
             {
                 "title": offering,
                 "count": count,
+                "project_count": len(projects),
                 "clients": len(clients),
                 "subtitle": CAPABILITY_SUBTITLES.get(offering, ""),
                 "tier": tier,

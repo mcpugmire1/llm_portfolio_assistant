@@ -35,11 +35,15 @@ def render_cross_industry_landing(stories: list[dict]):
         if s.get("Industry") == "Cross Industry"
         and s.get("Category") != "Professional Narrative"
     ]
-    total_projects = len(cross_industry_stories)
+    total_stories = len(cross_industry_stories)
 
-    # Unique industries across all stories
-    all_industries = set(s.get("Industry", "") for s in stories if s.get("Industry"))
-    num_industries = len(all_industries)
+    # Distinct projects (Project field on each story). Client count is
+    # deliberately absent from this page's header -- cross-industry work
+    # is client-anonymized (stories attribute to "Fortune 500 Clients" and
+    # similar placeholders), so a filtered-then-derived client count would
+    # surface the anonymization as a wrong-looking number rather than
+    # information.
+    num_projects = len({s["Project"] for s in cross_industry_stories})
 
     # === END DYNAMIC COUNTS ===
 
@@ -126,7 +130,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_cross_trigger"
         </div>
         <div class="conversation-header-text">
             <h1>Matt's Cross-Industry Expertise</h1>
-            <p>{total_projects} stories across {num_industries} industries. Trust Agy 🐾 to surface the patterns that travel.</p>
+            <p>{total_stories} stor{"y" if total_stories == 1 else "ies"} across {num_projects} project{"" if num_projects == 1 else "s"}. Trust Agy 🐾 to surface the patterns that travel.</p>
         </div>
     </div>
 </div>
@@ -553,7 +557,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_cross_trigger"
     specialized_cards = [c for c in cards if c["tier"] == "specialized"]
     # Subtitle uses card-derived total so the "Browse N" claim matches what's
     # actually reachable via cards (post Era exclusion). Differs from
-    # total_projects (which includes narrative stories) by the count of
+    # total_stories (which includes narrative stories) by the count of
     # cross-industry narrative stories.
     browseable_total = sum(c["count"] for c in cards)
 
@@ -583,18 +587,29 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_cross_trigger"
                     continue
                 card = card_list[idx]
                 with cols[offset]:
-                    # Meta line — signal-driven client count
-                    project_plural = "s" if card["count"] != 1 else ""
-                    meta = (
-                        f'<span class="card-count">{card["count"]} '
-                        f"cross-industry project{project_plural}</span>"
-                    )
-                    if card["count"] > 1:
-                        client_plural = "s" if card["clients"] != 1 else ""
-                        meta += (
-                            f'<span class="card-clients">· {card["clients"]} '
-                            f"client{client_plural}</span>"
+                    # Meta line — elision rule:
+                    # - 1 story: "1 story" (project=client=1 trivially)
+                    # - projects == stories: drop the projects lead (redundant)
+                    # - projects < stories: show all three, projects leads
+                    # Clients only rendered when > 1 (avoids "· 1 client").
+                    if card["count"] == 1:
+                        meta = '<span class="card-count">1 story</span>'
+                    elif card["project_count"] == card["count"]:
+                        meta = (
+                            f'<span class="card-count">{card["count"]} stories</span>'
                         )
+                        if card["clients"] > 1:
+                            meta += f'<span class="card-clients">· {card["clients"]} clients</span>'
+                    else:
+                        proj = card["project_count"]
+                        proj_plural = "s" if proj != 1 else ""
+                        meta = (
+                            f'<span class="card-count">{proj} '
+                            f"cross-industry project{proj_plural}</span>"
+                            f'<span class="card-clients">· {card["count"]} stories</span>'
+                        )
+                        if card["clients"] > 1:
+                            meta += f'<span class="card-clients">· {card["clients"]} clients</span>'
 
                     # Subtitle from CAPABILITY_SUBTITLES (empty-string fallback)
                     subtitle_html = (

@@ -295,7 +295,7 @@ def render_stats_bar():
         <style>
         .stats-bar {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             border-bottom: 2px solid var(--border-color);
             margin-bottom: 30px;
             margin-top: 1px;
@@ -358,19 +358,12 @@ def render_stats_bar():
         </style>
         <div class="stats-bar">
             <div class="stat">
-                <div class="stat-number">
-                    <span class="stat-desktop">Product engineering</span>
-                    <span class="stat-mobile">Product eng</span>
-                </div>
-                <div class="stat-label">Leadership</div>
+                <div class="stat-number">150+</div>
+                <div class="stat-label">Team Scaled</div>
             </div>
             <div class="stat">
-                <div class="stat-number">100+</div>
-                <div class="stat-label">Projects Delivered</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number">300+</div>
-                <div class="stat-label">Professionals Trained</div>
+                <div class="stat-number">$100M+</div>
+                <div class="stat-label">Repeat Business</div>
             </div>
             <div class="stat">
                 <div class="stat-number">15+</div>
