@@ -24,6 +24,18 @@ Query log verified a 3:37 upstream outage window on September 1 (15:47:18 to 15:
 
 ---
 
+**September 2, 2026 — Surface project count as a distinct metric across landing pages; hero stat restructure (MATTGPT-144)** -- `c6b6786`
+
+Full inventory found four buckets. Bucket A (4 broken filter-banner sites counting stories under a "projects" label) shipped earlier in the session by Matt. Bucket B (Project as Pinecone/JSONL entity name) and Bucket C (env/config) untouched. Bucket D (visitor-facing copy using "projects" as a synonym for stories) resolved by surfacing the missing metric rather than renaming.
+
+`utils/landing_cards.py`: card dict now carries `project_count` as a distinct count from story count (`len({s["Project"] for s in group})`). `banking_landing.py`: renamed `total_projects` to `total_stories` (variable now matches what it measures); added `num_projects` (distinct Project values across banking stories); restored `num_clients`; deleted dead capabilities block; header now reads "N stories across M projects and C clients" with inline pluralization for all three. `cross_industry_landing.py`: same rename; added `num_projects`; client count deliberately absent because cross-industry stories attribute to anonymized placeholders -- a filtered derivation would surface the anonymization as a wrong-looking number. Card meta elision rule (both pages): 1 story shows "1 story"; N stories where projects == stories shows "N stories" (plus client count if >1); N stories where projects < stories shows "N projects · N stories" (plus client count if >1).
+
+`hero.py`: reshuffled hand-authored career stats to drop "Projects Delivered" (was story count under a project-count label, same category of error as the landing pages). Replaced with "150+ Team Scaled" and "$100M+ Repeat Business." Rule: hand-authored career claims stay editorial; corpus-derived stats must match their label.
+
+`tests/unit/test_landing_cards.py`: fixtures gain a `Project` field on every story so `build_landing_cards`'s new `project_count` derivation does not KeyError. 10/10 pass.
+
+---
+
 **September 2, 2026 — Below-SOFT_ACCEPT router logging probe (MATTGPT-238)** -- `a43ee80`
 
 `_log_borderline` in `services/semantic_router.py` was widened to capture decisions below SOFT_ACCEPT (0.40) in addition to the 0.40-0.80 middle band already logged. Probed 10 queries: junk topped at 0.255, legitimate queries started at 0.326. Value as shipped: local development tool only. Streamlit Cloud's container filesystem is ephemeral; any CSV written in production is unreadable by the next request. The probe established the 0.07 gap and the candidate 0.30 threshold; it did not produce a production data surface. Production router score distribution requires MATTGPT-223 (Sheet integration). MATTGPT-239's confidence-floor threshold decision blocks on -223, not on this ticket.

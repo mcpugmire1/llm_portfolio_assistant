@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: a43ee80 -->
+<!-- last-backlog-sync: c6b6786 -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -15,18 +15,17 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 3. **-242** — Streamlit theme defaults leak into widget chrome after `[theme]` block removal Sep 2. `#FF4B4B` focus borders read as validation errors; wrapper backgrounds and widget labels using Streamlit defaults. Fix shape verified live: CSS with `--accent-purple` and app tokens in `global_styles.py`.
 4. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
 5. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
-6. **-144** -- Bucket A shipped (4 banner sites). Remaining work: expose project count as a distinct metric so Bucket D copy sites can use the accurate number. Adjacent to -146, same file.
-7. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
-8. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
-9. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
-10. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+6. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
+7. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
+8. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
+9. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT**
-11. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
-12. **-086** — Environment stamp on every log write. Makes every future log analysis exact rather than heuristic.
-13. **-223** — Add router_score and router_family columns to Sheet query row. Two columns, seven call sites. Unblocks -239's floor threshold decision; clean env stamps make future log analysis exact rather than heuristic.
-14. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
-15. Rest of Role Match: **-160**, -173, -159, -014, -012, -081, -099, -017.
+10. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
+11. **-086** — Environment stamp on every log write. Makes every future log analysis exact rather than heuristic.
+12. **-223** — Add router_score and router_family columns to Sheet query row. Two columns, seven call sites. Unblocks -239's floor threshold decision; clean env stamps make future log analysis exact rather than heuristic.
+13. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
+14. Rest of Role Match: **-160**, -173, -159, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
 -177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families)
@@ -128,7 +127,6 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-213](#mattgpt-213) | BDD suite: navigation step definitions duplicated across modules; no shared step module | Open | Low | Refactor / Test | August 26, 2026 |
 | [MATTGPT-214](#mattgpt-214) | Targeted audit: parameters never referenced, comments asserting absent behavior, constants unused, copied blocks with stale variable names | Open | Low | Refactor | August 26, 2026 |
 | [MATTGPT-217](#mattgpt-217) | `_substitute_matt_subject` produces subject pronoun in object position ("reported to he at the CIC") | Open | Low | Bug | August 26, 2026 |
-| [MATTGPT-144](#mattgpt-144) | "projects" count sites conflate story count with project count; Bucket A shipped; Bucket D requires exposing project count as a distinct metric | Open | Medium | Enhancement | August 31, 2026 |
 | [MATTGPT-228](#mattgpt-228) | Deep link param never consumed: `?story=<id>` re-applies on refresh, no in-app escape; offset inherited across searches | Open | High | Bug | August 31, 2026 |
 | [MATTGPT-229](#mattgpt-229) | Asking Agy "why hire matt" flashes My Work table view before landing on conversation | Open | Medium | Bug | September 1, 2026 |
 | [MATTGPT-232](#mattgpt-232) | `requirements_temp.txt` in repo root -- remove | Open | Low | Hygiene | September 1, 2026 |
@@ -1223,54 +1221,6 @@ The bug is that Blocks A and B have no lower bound, so they leak into the ≤480
 **Cross-references:**
 - The mobile filter CSS this refactors was added in the explore_stories mobile-fix work (validated and committed June 24, 2026). Do this as the opening move of any future session that touches mobile filter CSS — it makes the cascade safe before edits land on top of it.
 - MATTGPT-123, MATTGPT-119 — prior mobile filter work that established the current block structure.
-
----
-
-### MATTGPT-144
-**"projects" count sites conflate story count with project count; Bucket A shipped; Bucket D requires exposing project count as a distinct metric**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Enhancement
-- **File:** `ui/pages/explore_stories.py`, `ui/pages/banking_landing.py`, `ui/pages/cross_industry_landing.py`
-- **Logged:** June 2026 (original); inventory September 2, 2026
-
-**What changed from original framing (September 2, 2026):** The ticket was filed as a text swap -- "replace 'projects' with 'stories' at two missed lines." A full inventory revealed that framing is wrong. "Project" is a real entity with a one-to-many relationship to stories; the defect is not the word, it is counting stories and labeling that count as projects. The fix is a data-model change, not a rename.
-
-**Inventory results:**
-
-**Bucket A -- broken (story count labeled as project count, filter-banner context) -- SHIPPED September 2, 2026:**
-- `explore_stories.py:1271` -- filter empty banner
-- `explore_stories.py:1283` -- filter results banner
-- `banking_landing.py:147` -- hero subtitle `{total_projects} projects across ...`
-- `cross_industry_landing.py:137` -- same shape
-
-**Bucket B -- structural (Project as Pinecone/JSONL entity name) -- do not touch:**
-- `backend_service.py:78, 282, 584, 1400, 1420, 1844, 2261, 2269` -- Client/Employer/Division/Project/Place filter axis and Independent Project value
-- `story_intelligence.py:137, 174, 178, 179` -- "personal project" data category
-
-**Bucket C -- env/config, unrelated to portfolio labeling -- do not touch:**
-- `backend_service.py:830, 957`, `jd_assessor.py:193` -- `project=os.getenv("OPENAI_PROJECT_ID")`
-- `backend_service.py:1137` -- regex `projects?` in bolding rule
-- `backend_service.py:804, 839, 1351` -- LLM prompt copy about "technology projects"
-- `backend_service.py:1913` -- comment about rejected "valid projects"
-- `prompts.py:166` -- "personal projects"
-
-**Bucket D -- visitor-facing copy using "project(s)" as a synonym for story -- PARKED, data-model fix required:**
-- `hero.py:288, 369` -- "Projects Delivered" stat (backed by story count)
-- `explore_stories.py:675` -- `<h1>Matt's Project Portfolio</h1>`
-- `banking_landing.py:161`, `cross_industry_landing.py:151` -- "Projects Delivered" stat label
-- `banking_landing.py:594`, `cross_industry_landing.py:574` -- "Browse {browseable_total} banking projects..."
-- `banking_landing.py:622`, `cross_industry_landing.py:598` -- "banking project{plural}"
-- `category_cards.py:624`, `how_i_built_dialog.py:46, 176`, `hero.py:182`, `thinking_indicator.py:21`, `story_detail.py:203, 674`, `role_match.py:646, 648, 1733`, `landing_view.py:314`, `how_agy_dialog.py:185`
-
-**Why Bucket D is not a rename:** "Pawing through projects" is not wrong. "Project Experience" is not wrong. A story is a case study of a project. The one-to-many relationship means these copy sites may be accurate -- but only if they measure the project count, not the story count. "Projects Delivered" backed by `len(stories)` is the defect; "Projects Delivered" backed by `len(unique_projects)` would be correct.
-
-**Remaining fix:** Expose `len(unique_projects)` (distinct `Project` field values from the story corpus) as a metric available to copy sites alongside `len(stories)`. Then let each Bucket D site use whichever count is accurate for its claim. This is a data derivation, not a text swap -- the `Project` field already exists in the JSONL; this is `len({s["Project"] for s in stories})`.
-
-**Acceptance:** Each Bucket D copy site either (a) uses `len(stories)` and says "stories" or (b) uses `len(unique_projects)` and may say "projects." No site measures one and labels the other.
-
-**Cross-references:** MATTGPT-204 (same file, `st.dataframe` empty-state -- different defect, same `explore_stories.py` surface).
 
 ---
 
