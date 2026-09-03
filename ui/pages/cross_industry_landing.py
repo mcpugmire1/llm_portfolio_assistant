@@ -41,14 +41,6 @@ def render_cross_industry_landing(stories: list[dict]):
     all_industries = set(s.get("Industry", "") for s in stories if s.get("Industry"))
     num_industries = len(all_industries)
 
-    # Capability areas (unique Solution / Offering values)
-    capabilities = set(
-        s.get("Solution / Offering", "")
-        for s in cross_industry_stories
-        if s.get("Solution / Offering")
-    )
-    num_capabilities = len(capabilities)
-
     # === END DYNAMIC COUNTS ===
 
     # Scroll to top on page load
@@ -134,7 +126,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_cross_trigger"
         </div>
         <div class="conversation-header-text">
             <h1>Matt's Cross-Industry Expertise</h1>
-            <p>{total_projects} stories across 6 industries. Trust Agy 🐾 to surface the patterns that travel.</p>
+            <p>{total_projects} stories across {num_industries} industries. Trust Agy 🐾 to surface the patterns that travel.</p>
         </div>
     </div>
 </div>
@@ -143,25 +135,25 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_cross_trigger"
     )
 
     # Stats bar - using same pattern as hero.py
-    st.markdown(
-        f'''
-    <div class="stats-bar">
-        <div class="stat">
-            <div class="stat-number">{total_projects}</div>
-            <div class="stat-label">Projects Delivered</div>
-        </div>
-        <div class="stat">
-            <div class="stat-number">{num_capabilities}</div>
-            <div class="stat-label">Capability Areas</div>
-        </div>
-        <div class="stat">
-            <div class="stat-number">{num_industries}</div>
-            <div class="stat-label">Industries</div>
-        </div>
-    </div>
-    ''',
-        unsafe_allow_html=True,
-    )
+    # st.markdown(
+    #     f'''
+    # <div class="stats-bar">
+    #     <div class="stat">
+    #         <div class="stat-number">{total_projects}</div>
+    #         <div class="stat-label">Projects Delivered</div>
+    #     </div>
+    #     <div class="stat">
+    #         <div class="stat-number">{num_capabilities}</div>
+    #         <div class="stat-label">Capability Areas</div>
+    #     </div>
+    #     <div class="stat">
+    #         <div class="stat-number">{num_industries}</div>
+    #         <div class="stat-label">Industries</div>
+    #     </div>
+    # </div>
+    # ''',
+    #     unsafe_allow_html=True,
+    # )
 
     # Inject CSS for this page
     st.markdown(
@@ -614,13 +606,11 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_cross_trigger"
                     # ID referenced by build_card_wiring_js JS bridge.
                     card_id = f"card-cross-industry-{key_prefix}-{idx}"
                     st.markdown(
-                        f"""
-                    <div class="capability-card{muted_cls}" id="{card_id}" data-title="{card["title"]}">
-                        <div class="card-title">{card["title"]}</div>
-                        {subtitle_html}
-                        <div>{meta}</div>
-                    </div>
-                    """,
+                        f'<div class="capability-card{muted_cls}" id="{card_id}" data-title="{card["title"]}">'
+                        f'<div class="card-title">{card["title"]}</div>'
+                        f'{subtitle_html}'
+                        f'<div>{meta}</div>'
+                        f'</div>',
                         unsafe_allow_html=True,
                     )
 

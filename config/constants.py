@@ -261,6 +261,7 @@ CAPABILITY_SUBTITLES: dict[str, str] = {
     "Security & Compliance Solutions": "Regulatory frameworks, audit support, risk management",
     "VPP Adoption Enablement & Developer Toolkit": "Developer experience, tooling, productivity platforms",
     "Program Recovery & Vendor Delivery Management": "Troubled program recovery, vendor governance, delivery rescue",
+    "Enterprise Application Integration": "System connectivity, middleware, message brokers",
     # Cross-Industry-specific
     "Client Enablement & Sustainable Innovation": "Knowledge transfer, capability building, sustainable practices",
     "Product Management & Innovation Labs": "Innovation programs, experimentation, lean startup methodology",
@@ -268,4 +269,5 @@ CAPABILITY_SUBTITLES: dict[str, str] = {
     "Platform Optimization & Cloud-Native Development": "Platform engineering, developer experience, service catalogs",
     "Modern Product Engineering Methodology": "Product thinking, rapid prototyping, product-market fit",
     "AI & Machine Learning Solutions": "AI strategy, ML platforms, intelligent automation",
+    "Rapid Prototyping & Innovation Enablement": "Design sprints, MVP prototyping, innovation coaching",
 }

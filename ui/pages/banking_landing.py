@@ -48,7 +48,6 @@ def render_banking_landing(stories: list[dict]):
         if not is_generic_client(s.get("Client"))
     )
     named_clients = [(client, count) for client, count in client_counter.most_common()]
-    num_clients = len(named_clients)
 
     # Capability areas (unique Solution / Offering values)
     capabilities = set(
@@ -152,26 +151,26 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_banking_trigge
         unsafe_allow_html=True,
     )
 
-    # Stats bar - using same pattern as hero.py
-    st.markdown(
-        f'''
-    <div class="stats-bar">
-        <div class="stat">
-            <div class="stat-number">{total_projects}</div>
-            <div class="stat-label">Projects Delivered</div>
-        </div>
-        <div class="stat">
-            <div class="stat-number">{num_capabilities}</div>
-            <div class="stat-label">Capability Areas</div>
-        </div>
-        <div class="stat">
-            <div class="stat-number">{num_clients}</div>
-            <div class="stat-label">Banking Clients</div>
-        </div>
-    </div>
-    ''',
-        unsafe_allow_html=True,
-    )
+    # # Stats bar - using same pattern as hero.py
+    # st.markdown(
+    #     f'''
+    # <div class="stats-bar">
+    #     <div class="stat">
+    #         <div class="stat-number">{total_projects}</div>
+    #         <div class="stat-label">Projects Delivered</div>
+    #     </div>
+    #     <div class="stat">
+    #         <div class="stat-number">{num_capabilities}</div>
+    #         <div class="stat-label">Capability Areas</div>
+    #     </div>
+    #     <div class="stat">
+    #         <div class="stat-number">{num_clients}</div>
+    #         <div class="stat-label">Banking Clients</div>
+    #     </div>
+    # </div>
+    # ''',
+    #     unsafe_allow_html=True,
+    # )
 
     # Inject CSS for this page
     st.markdown(
@@ -642,13 +641,11 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_banking_trigge
                     # pairs to wire clicks.
                     card_id = f"card-banking-{key_prefix}-{idx}"
                     st.markdown(
-                        f"""
-                    <div class="capability-card{muted_cls}" id="{card_id}" data-title="{card["title"]}">
-                        <div class="card-title">{card["title"]}</div>
-                        {subtitle_html}
-                        <div>{meta}</div>
-                    </div>
-                    """,
+                        f'<div class="capability-card{muted_cls}" id="{card_id}" data-title="{card["title"]}">'
+                        f'<div class="card-title">{card["title"]}</div>'
+                        f'{subtitle_html}'
+                        f'<div>{meta}</div>'
+                        f'</div>',
                         unsafe_allow_html=True,
                     )
 
