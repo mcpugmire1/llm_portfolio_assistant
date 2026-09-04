@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: c6b6786 -->
+<!-- last-backlog-sync: 3adf12d -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -12,20 +12,19 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 **NOW**
 1. **-240** — Role Match has no rejection contract: no gate before the LLM call, and the failure path stores the error in a variable that is never read. Recruiter-facing gap with no logging. Pair with -089 (same file, same pass).
 2. **-089** — Role Match: location, work model, availability. May 22 recruiter finding. Paired with -240 -- both touch Role Match, cheaper to do in one visit than two.
-3. **-242** — Streamlit theme defaults leak into widget chrome after `[theme]` block removal Sep 2. `#FF4B4B` focus borders read as validation errors; wrapper backgrounds and widget labels using Streamlit defaults. Fix shape verified live: CSS with `--accent-purple` and app tokens in `global_styles.py`.
-4. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
-5. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
-6. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
-7. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
-8. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
-9. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+3. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
+4. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
+5. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
+6. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
+7. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
+8. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT**
-10. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
-11. **-086** — Environment stamp on every log write. Makes every future log analysis exact rather than heuristic.
-12. **-223** — Add router_score and router_family columns to Sheet query row. Two columns, seven call sites. Unblocks -239's floor threshold decision; clean env stamps make future log analysis exact rather than heuristic.
-13. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
-14. Rest of Role Match: **-160**, -173, -159, -014, -012, -081, -099, -017.
+9. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
+10. **-086** — Environment stamp on every log write. Makes every future log analysis exact rather than heuristic.
+11. **-223** — Add router_score and router_family columns to Sheet query row. Two columns, seven call sites. Unblocks -239's floor threshold decision; clean env stamps make future log analysis exact rather than heuristic.
+12. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
+13. Rest of Role Match: **-160**, -173, -159, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
 -177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families)
@@ -136,7 +135,6 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-239](#mattgpt-239) | Router confidence floor: reject queries that score below a threshold across all families before Pinecone query | Blocked | Medium | Enhancement | September 2, 2026 |
 | [MATTGPT-240](#mattgpt-240) | Role Match rejection contract: no gate before LLM call, failure path never read; same shape as MATTGPT-230 | Open | High | Bug | September 2, 2026 |
 | [MATTGPT-241](#mattgpt-241) | Dead prose in backend_service.py: out_of_scope_response and personal_response built but never rendered | Open | Low | Hygiene | September 2, 2026 |
-| [MATTGPT-242](#mattgpt-242) | Streamlit theme defaults leak into widget chrome after [theme] block removal: focus borders, wrapper backgrounds, widget labels | Open | High | Bug | September 2, 2026 |
 | [MATTGPT-226](#mattgpt-226) | Dead `.main` selectors across `ui/styles/` after `.main → .stMain` refactor: 31 selectors, ~299 declarations, all matching 0 elements | Open | Medium | Refactor / Tech debt | August 31, 2026 |
 | [MATTGPT-222](#mattgpt-222) | Three operational alarms: zero-score, anchor-cache drift, out_of_scope on known entity | Open | High | Enhancement | August 30, 2026 |
 | [MATTGPT-223](#mattgpt-223) | Add router_score and router_family columns to Sheet query row | Open | Medium | Enhancement | August 30, 2026 |
@@ -2506,41 +2504,6 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 
 ---
 
-### MATTGPT-242
-**Streamlit theme defaults leak into widget chrome after `[theme]` block removal: focus borders, wrapper backgrounds, widget labels**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Bug
-- **File:** `ui/styles/global_styles.py`
-- **Logged:** September 2, 2026
-
-**What happened:** `config.toml`'s `[theme]` block held `primaryColor = "#8B5CF6"` and was removed on September 2 to fix an app-wide font regression (`ab3a1c5` added it; removal restored the font). Removing it dropped the app back to Streamlit's built-in theme defaults for all four theme values. Anywhere the app relied on the theme object rather than its own CSS, Streamlit defaults now show -- most visibly as `#FF4B4B` focus borders, which read as validation errors on inputs that were accepted and processed.
-
-**Not restoring the theme block.** Adding `primaryColor` alone changed the app font via an unexplained mechanism. Reproducing an unexplained regression to fix a known one is not the trade. The app already does its theming in CSS with light/dark tokens; the missing coverage belongs there.
-
-**Three values audited in-browser (September 2, 2026), all five nav pages:**
-
-- **`primaryColor` (#FF4B4B):** My Work search input focus border; all six filter dropdowns and the page-size select. Fix: `div[data-baseweb="input"]:focus-within, div[data-baseweb="select"] > div:focus-within { border-color: var(--accent-purple) !important; box-shadow: 0 0 0 1px var(--accent-purple) !important; }`. Rules go in both `:root` blocks (light and dark). Verified live -- search input and two separate dropdowns confirmed purple after fix.
-- **`secondaryBackgroundColor` (#F0F2F6):** Search input wrapper background and border; every selectbox wrapper; one 0×0 input inside a Role Match popover (surfaces when popover opens). Target: `--bg-input` / `--bg-surface`.
-- **`textColor` (#31333F):** 13 elements on My Work -- six widget labels, six "All" values, "SHOW:", "10". Target: `--text-primary`.
-- **`backgroundColor`:** Untestable from browser -- default `#FFFFFF` is identical to `--bg-primary` and `--bg-card`. Requires source read to confirm the app sets it explicitly rather than inheriting.
-
-**Use tokens, not the literal hex from the console test.**
-
-**Out of scope -- dataframe canvas (already handled):** The dataframe is canvas-rendered; Glide paints from the theme object and no CSS selector reaches it. The existing `hue-rotate(262deg) saturate(0.88)` filter on `canvas.data-grid-canvas` renders the checkbox and row highlight purple on screen. A `getImageData` probe will report raw red because it reads the pre-filter backing store -- verify visually, not by pixel read.
-
-**Note for the next reader:** Role Match's `st.text_area` and the Ask Agy input both compute `border: 0px none` on focus today, so the Streamlit primary has no surface to paint. If that zeroing ever comes off, both go red.
-
-**Acceptance:**
-- No Streamlit default color (`#FF4B4B`, `#F0F2F6`, `#31333F`) computes on any widget on any of the five pages, light or dark.
-- Focus states on inputs and selects use `--accent-purple`.
-- Wrapper backgrounds use the app's input token (`--bg-input` / `--bg-surface`).
-- Widget labels and values use `--text-primary`.
-- `backgroundColor` confirmed set in source rather than inherited (source read, not browser probe).
-
----
-
 ### MATTGPT-235
 **Resolve LLM-text assertion classes so pre-push gate can widen to agy-behavior and structural suites**
 
@@ -2702,6 +2665,14 @@ Source-side count (grep of `ui/styles/`) is 34 raw occurrences -- the delta of 3
 
 **Suggested companion CLAUDE.md CSS rule** (unifying both anti-patterns surfaced August 31, 2026):
 > CSS selectors may only anchor on `data-testid`, `data-baseweb`, or app-authored class names. Never on Streamlit's internal structural classes (`.main`, `.block-container`) or emotion-hashed atomics (`.st-bz`, `.st-c2`). Both categories are build artifacts and change without notice across Streamlit versions. The August 31, 2026 chat-input defect (MATTGPT-225) was one of each: `.st-bz` migrated onto `<input>` and killed the border; `.main .stTextInput > div > div > input` was dead code that misled diagnosis.
+
+**Additional findings from MATTGPT-242 verification (September 2, 2026):**
+
+Two more inert-selector patterns confirmed during the -242 dark-mode scan:
+
+1. **`section[data-testid="stAppViewContainer"]` matches nothing** in this Streamlit version. The block at `global_styles.py:330-350` is inert in its entirety, including the `div[class*="SingleValue"]` rule it contains. This is almost certainly why those widget leaks existed in the first place -- someone fixed them inside a container that was never selected. Re-scope to `[data-testid="stApp"]` or delete. Add to the selector audit when this ticket runs.
+
+2. **Read tokens from `document.body`, not `documentElement`.** Light tokens are declared on `:root`; dark tokens are declared on `body.dark-theme`. `getComputedStyle(document.documentElement)` reports the `:root` (light) values in both themes, making dark-mode checks look wrong when they are correct. This sent the -242 diagnosis sideways for three probes. Add a comment to the CSS variables block at `global_styles.py:20` so the next person reads it before measuring, not after: "Dark overrides live on `body.dark-theme`, not `:root`. Read tokens from `document.body` in DevTools, not `document.documentElement`."
 
 **Cross-references:**
 - MATTGPT-225 (border bug that surfaced this pattern; fixed via a different mechanism)

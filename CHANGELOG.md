@@ -24,6 +24,16 @@ Query log verified a 3:37 upstream outage window on September 1 (15:47:18 to 15:
 
 ---
 
+**September 2, 2026 — Streamlit theme defaults coverage: focus borders, wrapper backgrounds, widget labels (MATTGPT-242)** -- `3adf12d`
+
+`config.toml`'s `[theme]` block was removed September 2 to fix a font regression, dropping the app back to Streamlit defaults (`#FF4B4B` focus borders, `#F0F2F6` wrapper backgrounds, `#31333F` widget labels). Fix in `ui/styles/global_styles.py`: `div[data-baseweb="input"]:focus-within` and `div[data-baseweb="select"] > div:focus-within` get `border-color: var(--accent-purple)` and matching `box-shadow`; selectbox wrappers get `--bg-surface`; widget labels and values get `--text-primary`. Rules placed in both `:root` blocks (light and dark). `div[data-baseweb="base-input"]` deliberately left uncovered -- it tracks Streamlit's secondary background and is the right behavior.
+
+Verified in both modes via computed-style scan of 401 visible elements under `[data-testid="stApp"]`: zero `#FF4B4B`, `#F0F2F6`, or `#31333F` hits in light or dark. Focus border resolves `#8B5CF6` (`--accent-purple`) on real click in both themes. Dark mode: selects and input wrapper `#262633` (`--bg-surface`), labels `#E5E7EB` (`--text-primary`). Light mode: selects and input wrapper `#F9FAFB`, labels `#1F2937`. `body.dark-theme` confirmed: one element, all descendants inherit dark tokens.
+
+Two findings added to MATTGPT-226 scope: `section[data-testid="stAppViewContainer"]` matches nothing; the block at `global_styles.py:330-350` is inert. Token reads must come from `document.body`, not `documentElement` (`getComputedStyle(document.documentElement)` reports `:root` light values in both themes).
+
+---
+
 **September 2, 2026 — Surface project count as a distinct metric across landing pages; hero stat restructure (MATTGPT-144)** -- `c6b6786`
 
 Full inventory found four buckets. Bucket A (4 broken filter-banner sites counting stories under a "projects" label) shipped earlier in the session by Matt. Bucket B (Project as Pinecone/JSONL entity name) and Bucket C (env/config) untouched. Bucket D (visitor-facing copy using "projects" as a synonym for stories) resolved by surfacing the missing metric rather than renaming.
