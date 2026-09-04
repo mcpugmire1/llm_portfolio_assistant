@@ -1400,7 +1400,7 @@ def render_explore_stories(
     with col2:
         visibility = "visible" if view_mode == "Table" else "hidden"
         st.markdown(
-            f'<div style="display: flex; align-items: center; min-height: 44px; font-size: 14px; font-weight: 500; visibility: {visibility};">SHOW:</div>',
+            f'<div style="display: flex; align-items: center; min-height: 44px; font-size: 14px; font-weight: 500; visibility: {visibility};"><span class="es-show-label">SHOW:</span></div>',
             unsafe_allow_html=True,
         )
 

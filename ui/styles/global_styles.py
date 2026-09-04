@@ -366,6 +366,52 @@ _CSS = """
             text-overflow: clip !important;
         }
 
+        /* MATTGPT-242: Streamlit theme defaults leak through after
+           config.toml [theme] removal (Sept 2, 2026). Route each leak
+           through app tokens so both light and dark inherit correctly.
+           Selectors use stable hooks per MATTGPT-225 constraint
+           (data-baseweb, data-testid, app-authored class names). */
+
+        /* primaryColor (#FF4B4B) leak: red focus border on inputs and
+           selects. Streamlit sets border-color only -- matching the
+           leak means not adding a box-shadow ring that wasn't there. */
+        div[data-baseweb="input"]:focus-within,
+        div[data-baseweb="select"] > div:focus-within {
+            border-color: var(--accent-purple) !important;
+        }
+
+        /* secondaryBackgroundColor (#F0F2F6) leak: wrapper backgrounds
+           on inputs and selects. --bg-surface preserves today's gray;
+           --bg-input would flip filter chrome white in light mode. */
+        div[data-baseweb="input"],
+        div[data-baseweb="select"] > div {
+            background-color: var(--bg-surface) !important;
+        }
+
+        /* textColor (#31333F) leak: widget labels, selectbox displayed
+           values, and the "SHOW:" label on My Work. div[value] targets
+           the BaseWeb-authored value attribute on selectbox displays
+           (six matches: five filters + page-size "10"). .es-show-label
+           is the class added to explore_stories.py:1403 for the one
+           label that had no stable hook of its own. */
+        label[data-testid="stWidgetLabel"],
+        [data-testid="stWidgetLabel"],
+        div[data-baseweb="select"] div[value],
+        .es-show-label {
+            color: var(--text-primary) !important;
+        }
+
+        /* backgroundColor: acceptance criterion 5 originally asked for an
+           explicit app-side body background. First attempt used
+           `body { background: var(--bg-primary) !important; }` and broke
+           dark mode -- the theme-detection JS at navbar.py:316-323 reads
+           body's computed background to decide whether to add
+           .dark-theme; overriding body with our token before that class
+           lands resolves --bg-primary to the light value and the JS
+           never flips. Left inheriting from Streamlit's default, which
+           coincides with --bg-primary in both light (#FFFFFF) and dark
+           (#0E1117 = rgb(14,17,23)) modes anyway. No visible leak. */
+
         /* Bottom-align filter controls */
         [data-testid="column"] {
             display: flex;
