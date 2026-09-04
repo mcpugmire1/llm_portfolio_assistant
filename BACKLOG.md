@@ -10,21 +10,22 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-09-02)
 
 **NOW**
-1. **-240** — Role Match has no rejection contract: no gate before the LLM call, and the failure path stores the error in a variable that is never read. Recruiter-facing gap with no logging. Pair with -089 (same file, same pass).
-2. **-089** — Role Match: location, work model, availability. May 22 recruiter finding. Paired with -240 -- both touch Role Match, cheaper to do in one visit than two.
-3. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
-4. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
-5. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
-6. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
-7. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
-8. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+1. **-240** — Role Match has no rejection contract: no gate before the LLM call, and the failure path stores the error in a variable that is never read. Recruiter-facing gap with no logging. In flight.
+2. **-159** — Role Match cold-path: 84.7s click-to-results (Sep 2, 2026 measurement, cache-busted JD, Streamlit rerun included). Sub-second on cache hit. A recruiter's full profile visit is ~90s; this consumes it. Parallelize the sequential gpt-4o assessor loop.
+3. **-089** — Role Match: location, work model, availability. May 22 recruiter finding. Pair with -240 in the same pass once rejection contract is solid.
+4. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
+5. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
+6. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
+7. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
+8. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
+9. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT**
-9. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
-10. **-086** — Environment stamp on every log write. Makes every future log analysis exact rather than heuristic.
-11. **-223** — Add router_score and router_family columns to Sheet query row. Two columns, seven call sites. Unblocks -239's floor threshold decision; clean env stamps make future log analysis exact rather than heuristic.
-12. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
-13. Rest of Role Match: **-160**, -173, -159, -014, -012, -081, -099, -017.
+10. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
+11. **-086** — Environment stamp on every log write. Makes every future log analysis exact rather than heuristic.
+12. **-223** — Add router_score and router_family columns to Sheet query row. Two columns, seven call sites. Unblocks -239's floor threshold decision; clean env stamps make future log analysis exact rather than heuristic.
+13. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
+14. Rest of Role Match: **-160**, -173, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
 -177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families)
@@ -95,7 +96,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-154](#mattgpt-154) | Operational-breadth tagging pass — surface operational ownership into all corpus stories where it's genuinely true | Open | Medium | Action | July 16, 2026 |
 | [MATTGPT-155](#mattgpt-155) | New corpus story — sell-side commercial story (HSBC-anchored): pricing/costing, resourcing, outcome-based contracting | Open | Medium | Action | July 29, 2026 |
 | [MATTGPT-156](#mattgpt-156) | Vendor commercial/spend management gap — decide whether corpus-zero on invoice/rate-card/procurement is a real claim or honest gap | Open | Low | Investigation | July 29, 2026 |
-| [MATTGPT-159](#mattgpt-159) | Role Match performance — parallelize per-requirement assessor calls; sequential gpt-4o loop is the bottleneck | Open | Medium | Performance | July 31, 2026 |
+| [MATTGPT-159](#mattgpt-159) | Role Match performance — parallelize per-requirement assessor calls; sequential gpt-4o loop is the bottleneck | Open | High | Performance | July 31, 2026 |
 | [MATTGPT-160](#mattgpt-160) | JD extractor clause-dropping — 7 of 23 requirements on demo JD lose qualifiers during extraction | Open | Medium | Bug | July 31, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -1439,7 +1440,7 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 **Role Match performance -- parallelize per-requirement assessor calls; sequential gpt-4o loop is the bottleneck**
 
 - **Status:** Open
-- **Priority:** Medium
+- **Priority:** High
 - **Type:** Performance
 - **File:** `services/jd_assessor.py`
 - **Surfaced:** June 16, 2026 (during -067 release-gate work; classified backend optimization, kept out of that gate)
@@ -1448,7 +1449,19 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 
 **Issue:** `jd_assessor.py` makes one sequential `gpt-4o` call per JD requirement. The demo JD has roughly 23 requirements. The `assess` loop dominates; `extract` is a large N-independent cost (~22s local on the demo JD) and is the floor regardless of parallelism.
 
-**Historical measurement:** 336 seconds end to end, measured June 16, 2026 at TOP_K=3. This predates the TOP_K=5 change made July 31, 2026, which increases context per call. The current sequential cost is higher than the recorded figure. Re-measure before optimizing; do not quote 336s as the current number.
+**Measured cold-path latency (September 2, 2026):**
+
+- Run 1 (example JD, first ever): bracketed at 82-145s by polling -- too loose to report.
+- Run 2 (same JD, immediate retry): ~0.7s cache hit. Output identical (17✓/1~).
+- Run 3 (cache-busted by appending a one-line `Req ID` suffix): **84.66s**. Output differed (16✓/2~, 3 discussion points), confirming a real LLM call.
+
+Method: timestamped click in-page; polled Streamlit status widget at 50ms; marked done when absent for 1.5s continuously. Two caveats: Run 3's JD was the example plus 23 characters, so the cold path is measured on a slightly longer JD than stock; and 84.7s includes Streamlit rerun overhead, not just the model call.
+
+**Why 84.7s is disqualifying:** A recruiter's full profile visit is ~90s. Role Match consuming all of it before rendering anything is not a usability edge case -- it is the default experience for any novel JD.
+
+**Cache behavior and why it hid this:** The cache means anyone who clicks "Try an example" after the first person gets a sub-second response. Testing consistently with the stock JD produces cache hits; the cold path only surfaces on a genuinely new JD. This masked the latency from in-session testing until the Sep 2 cache-bust measurement.
+
+**Historical measurement:** 336 seconds end to end, measured June 16, 2026 at TOP_K=3. This predates the TOP_K=5 change made July 31, 2026, which increases context per call. The Sep 2 figure (84.7s) is the current benchmark; use it, not 336s.
 
 **Root cause and fix:** Sequential per-requirement calls with `gpt-4o` is the confirmed root cause. The fix is concurrency -- parallelize the `assess` calls using `asyncio` or a `ThreadPoolExecutor` -- not a model downgrade. Per-requirement reasoning with `gpt-4o` is what makes the scorer credible (confirmed in MATTGPT-088 scope work: mini produces subpar assessment reasoning). Dropping to mini would make -088 worse, not better. Estimated improvement after parallelization: two to three minutes down to fifteen to twenty seconds (June 2026 estimate; re-validate after implementation).
 
