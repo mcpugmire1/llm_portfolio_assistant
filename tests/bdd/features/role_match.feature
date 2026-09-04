@@ -530,16 +530,22 @@ Feature: Role Match page
     And the "✕ Clear" button is not visible
     And the "Try an example →" link is visible
 
-  # MATTGPT-067 — Error state (extraction failure)
+  # MATTGPT-067 / MATTGPT-240 — Rejection contract (gate before LLM)
 
-  Scenario: Submitting a non-JD text shows extraction error with no summary and no CTA
+  Scenario: Submitting a non-JD text is rejected by the gate with no summary and no CTA
     Given I navigate to the Role Match page
     When I type a 35-word non-JD placeholder text into the JD textarea
     And I click "Match this role 🐾"
-    Then the right panel shows "Couldn't extract any requirements from this job description."
+    Then the right panel shows "That doesn't read like a job description."
     And no "SUMMARY" section is visible in the right panel
     And no "Have questions about the results?" CTA is visible
     And the button label reads "Match this role 🐾"
+
+  @slow
+  Scenario: A real JD passes the gate (regression guard)
+    Given I have submitted a job description and results are displayed
+    Then match results are displayed in the right panel
+    And the right panel does not show "That doesn't read like a job description."
 
   # MATTGPT-067 — Post-result CTA
 

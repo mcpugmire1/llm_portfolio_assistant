@@ -885,9 +885,18 @@ def test_clear_returns_to_state_1_full():
 
 @scenario(
     "../features/role_match.feature",
-    "Submitting a non-JD text shows extraction error with no summary and no CTA",
+    "Submitting a non-JD text is rejected by the gate with no summary and no CTA",
 )
-def test_error_state_extraction_failure():
+def test_non_jd_rejected_by_gate():
+    pass
+
+
+@pytest.mark.slow
+@scenario(
+    "../features/role_match.feature",
+    "A real JD passes the gate (regression guard)",
+)
+def test_real_jd_passes_gate():
     pass
 
 
@@ -1578,6 +1587,17 @@ def then_right_panel_shows_text(browser_page, text):
     assert (
         browser_page.get_by_text(text).count() > 0
     ), f"Expected right panel to contain: {text!r}"
+
+
+@then(parsers.parse('the right panel does not show "{text}"'))
+def then_right_panel_does_not_show_text(browser_page, text):
+    """MATTGPT-240: regression-guard negative assertion for the gate.
+    Paired with a positive assertion in the same scenario (match results
+    visible) so a page crash doesn't produce a false pass."""
+    count = browser_page.get_by_text(text).count()
+    assert (
+        count == 0
+    ), f"Expected right panel to NOT contain: {text!r}; found {count} match(es)"
 
 
 @then('the "✕ Clear" button is not visible')
