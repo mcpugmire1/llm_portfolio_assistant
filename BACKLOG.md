@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: be92933 -->
+<!-- last-backlog-sync: ef10385 -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -28,7 +28,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 14. Rest of Role Match: **-160**, -173, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
--177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families)
+-177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -244 (Role Match assessor calibration: ~80% strong on AT&T with genuine gaps; prompt is too generous)
 
 **LATER — tier 2:** corpus work
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
@@ -36,7 +36,7 @@ New stories: -078, -091, -155, -022 (-181 closed Aug 19)
 Meta: -079, -156, -096
 
 **LATER — tier 3:** blocked or dependent
--077 (re-measure after -181) · -171 (coupled to -190) · -185 (negation) · -239 (router confidence floor, blocked on -223 Sheet data)
+-077 (re-measure after -181) · -171 (coupled to -190) · -185 (negation) · -239 (router confidence floor, blocked on -223 Sheet data) · -245 (Role Match streaming per-requirement render, blocked on -243)
 
 **LATER — tier 4:** hygiene
 Dead code: -176, -183, -199, -201 · -241 (dead prose: out_of_scope_response + personal_response, backend_service.py:1789,1816) · Hidden error: -204 (zero-filter-match only -- st.stop() blanking was MATTGPT-224, shipped `92370b3`)
@@ -98,6 +98,8 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-156](#mattgpt-156) | Vendor commercial/spend management gap — decide whether corpus-zero on invoice/rate-card/procurement is a real claim or honest gap | Open | Low | Investigation | July 29, 2026 |
 | [MATTGPT-160](#mattgpt-160) | JD extraction rewrite: qualifier stripping, requirement-count variance, coverage miss, wall clock floor -- all one prompt | Open | High | Bug / Performance | July 31, 2026 |
 | [MATTGPT-243](#mattgpt-243) | Role Match parallelization: as_completed concurrency 10, return_exceptions, top_k measurement, up-to-two citation fix | Open | High | Performance | September 2, 2026 |
+| [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: both arms score ~80% strong on AT&T with genuine JD gaps; scoring is too generous | Open | Medium | Issue | September 2, 2026 |
+| [MATTGPT-245](#mattgpt-245) | Role Match streaming: render each requirement row as it lands via as_completed; blocked on -243 | Open | Medium | Enhancement | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
 | [MATTGPT-168](#mattgpt-168) | Slot 1 is amplified without regard to margin -- tie or near-tie at slot 1 gets 80% of the answer | Open | High | Bug | August 5, 2026 |
@@ -1467,6 +1469,63 @@ Two findings retracted from earlier probe sessions: (1) stability differences at
 - MATTGPT-159 (closed; decision record and full audit history there)
 - MATTGPT-160 (extraction rewrite; separate ticket, same file -- do not conflate)
 - MATTGPT-083 (spinner inconsistency; perceived-performance half; worth landing regardless of when -243 ships)
+- MATTGPT-245 (streaming progressive render; cross-reference only -- separate ticket, blocked on -243 shipping `as_completed`)
+
+---
+
+### MATTGPT-244
+**Role Match assessor prompt calibration: both arms score ~80% strong on AT&T with genuine JD gaps; scoring is too generous**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Issue
+- **File:** `services/jd_assessor.py` (assessment prompt)
+- **Logged:** September 2, 2026
+- **Dependencies:** None
+
+**Finding (September 2, 2026 AT&T audit):** Both the fan-out arm and the long-context arm returned ~80% SUPPORTED on the AT&T JD. The JD had genuine technical gaps (Kafka/IXBUS specificity, IXBUS is AT&T-proprietary tooling) where a well-calibrated assessor should return HONEST GAP or partial credit. Instead both arms marked most requirements SUPPORTED. The assessment prompt is too generous -- it credits adjacent skills as direct matches.
+
+**Why it's independent:** Both arms failed identically, which means this is the assessment prompt, not architecture. MATTGPT-243 (parallelization) and MATTGPT-160 (extraction rewrite) do not touch the assessment prompt. Calibration work is safe to land before or after either.
+
+**Warning on vocabulary collision:** `grep "calibration" BACKLOG.md` returns results for MATTGPT-174 and ADR 018 -- those are Ask Agy router-threshold calibration (semantic similarity scoring). Different surface, different mechanism, nothing shared. Do not conflate. This ticket is about the Role Match per-requirement assessor prompt.
+
+**Scope:** Tighten the assessment prompt so that adjacent skills and topical proximity do not count as SUPPORTED without direct evidence. The AT&T row-level audit is the benchmark: run it before and after the prompt change and confirm the HONEST GAP rate rises on requirements with genuine technical gaps.
+
+**Acceptance:**
+- AT&T row 10 (Kafka + IXBUS) returns HONEST GAP after calibration (it did in the long-context arm; extraction coverage fix in -160 may be required first to expose the requirement to the assessor).
+- SUPPORTED rate on the AT&T JD drops below 75% when genuine gaps are present.
+- No regression on the demo JD (requirements with clear corpus evidence still return SUPPORTED).
+
+**Cross-references:**
+- MATTGPT-243 (parallelization; does not touch assessment prompt)
+- MATTGPT-160 (extraction rewrite; required first if Kafka/IXBUS coverage miss hides the requirement from the assessor)
+
+---
+
+### MATTGPT-245
+**Role Match streaming: render each requirement row as it lands via as_completed; blocked on -243**
+
+- **Status:** Blocked
+- **Priority:** Medium
+- **Type:** Enhancement
+- **File:** `ui/pages/role_match.py`, `services/jd_assessor.py`
+- **Logged:** September 2, 2026
+- **Dependencies:** MATTGPT-243 (`as_completed` must ship before the UI can consume per-requirement results)
+
+**What this is not:** MATTGPT-083 is spinner inconsistency -- the loading indicator shown while waiting for a result. This ticket is about the absence of waiting: requirement rows appearing at ~20s and filling in as each `gpt-4o` call completes. Cross-referencing -083 is correct; folding this into -083 is not. If this scope lands inside -083, whoever picks it up will scope it as "fix the spinner" and the actual rendering change won't happen.
+
+**Why `as_completed` enables it:** The current sequential pipeline must wait for all 23 calls before rendering anything. Once -243 parallelizes with `as_completed`, individual requirement results are available as they land (~3-5s per wave of 10 concurrent calls). The UI can render each row as soon as its result arrives, producing a progressive fill from ~5s rather than an 85s blank wait.
+
+**Scope:** Wire the `as_completed` results from the parallelized assessor into a Streamlit streaming-compatible render loop. Each requirement row renders as its assessment completes rather than after the full list returns. Handle the error-row case from `-243`'s `return_exceptions=True`: error rows render with a visible placeholder rather than blocking the rest.
+
+**Acceptance:**
+- First requirement rows visible within 10s of submission on a cold-path JD.
+- All rows render in the same final state as the current full-assessment render.
+- Error rows show a placeholder (not a blank or a crash).
+
+**Cross-references:**
+- MATTGPT-243 (parallelization; must ship first -- this ticket has no value on the sequential pipeline)
+- MATTGPT-083 (spinner inconsistency; perceived-performance half; independent, worth landing regardless)
 
 ---
 
