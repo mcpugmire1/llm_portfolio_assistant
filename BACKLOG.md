@@ -12,23 +12,25 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 **NOW**
 1. **-240** — Role Match has no rejection contract: no gate before the LLM call, and the failure path stores the error in a variable that is never read. Recruiter-facing gap with no logging. In flight.
 2. **-243** — Role Match parallelization: architecture decided (fan-out, 31s vs 51s, citations tie on two JDs). `as_completed` concurrency 10, `return_exceptions=True`, top_k measured at 10 vs AT&T row 6 in same pass, "up to two" citation fix. (MATTGPT-159 closed as decided.)
-3. **-089** — Role Match: location, work model, availability. May 22 recruiter finding. Pair with -240 in the same pass once rejection contract is solid.
-4. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
-5. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
-6. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
-7. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
-8. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
-9. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+3. **-244** — Role Match assessor calibration: both arms at ~80% strong on a JD with real gaps. A recruiter reading "strong" on a requirement the corpus doesn't cover discounts the other twenty-two rows. Prompt edit, no architecture dependency.
+4. **-089** — Role Match: location, work model, availability. May 22 recruiter finding. Pair with -240 in the same pass once rejection contract is solid.
+5. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
+6. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
+7. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
+8. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
+9. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
+10. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT**
-10. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
-11. **-086** — Environment stamp on every log write. Makes every future log analysis exact rather than heuristic.
-12. **-223** — Add router_score and router_family columns to Sheet query row. Two columns, seven call sites. Unblocks -239's floor threshold decision; clean env stamps make future log analysis exact rather than heuristic.
-13. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
-14. Rest of Role Match: **-160**, -173, -014, -012, -081, -099, -017.
+11. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
+12. **-086** — Environment stamp on every log write. Makes every future log analysis exact rather than heuristic.
+13. **-223** — Add router_score and router_family columns to Sheet query row. Two columns, seven call sites. Unblocks -239's floor threshold decision; clean env stamps make future log analysis exact rather than heuristic.
+14. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
+15. **-245** — Role Match streaming: requirement rows appear at ~5s and fill in as each call lands. Blocked on -243. 31s-to-first-content is the marginal gain once -243 ships.
+16. Rest of Role Match: **-160**, -173, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
--177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -244 (Role Match assessor calibration: ~80% strong on AT&T with genuine gaps; prompt is too generous)
+-177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families)
 
 **LATER — tier 2:** corpus work
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
@@ -36,7 +38,7 @@ New stories: -078, -091, -155, -022 (-181 closed Aug 19)
 Meta: -079, -156, -096
 
 **LATER — tier 3:** blocked or dependent
--077 (re-measure after -181) · -171 (coupled to -190) · -185 (negation) · -239 (router confidence floor, blocked on -223 Sheet data) · -245 (Role Match streaming per-requirement render, blocked on -243)
+-077 (re-measure after -181) · -171 (coupled to -190) · -185 (negation) · -239 (router confidence floor, blocked on -223 Sheet data)
 
 **LATER — tier 4:** hygiene
 Dead code: -176, -183, -199, -201 · -241 (dead prose: out_of_scope_response + personal_response, backend_service.py:1789,1816) · Hidden error: -204 (zero-filter-match only -- st.stop() blanking was MATTGPT-224, shipped `92370b3`)
@@ -98,7 +100,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-156](#mattgpt-156) | Vendor commercial/spend management gap — decide whether corpus-zero on invoice/rate-card/procurement is a real claim or honest gap | Open | Low | Investigation | July 29, 2026 |
 | [MATTGPT-160](#mattgpt-160) | JD extraction rewrite: qualifier stripping, requirement-count variance, coverage miss, wall clock floor -- all one prompt | Open | High | Bug / Performance | July 31, 2026 |
 | [MATTGPT-243](#mattgpt-243) | Role Match parallelization: as_completed concurrency 10, return_exceptions, top_k measurement, up-to-two citation fix | Open | High | Performance | September 2, 2026 |
-| [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: both arms score ~80% strong on AT&T with genuine JD gaps; scoring is too generous | Open | Medium | Issue | September 2, 2026 |
+| [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: both arms score ~80% strong on AT&T with genuine JD gaps; scoring is too generous | Open | High | Issue | September 2, 2026 |
 | [MATTGPT-245](#mattgpt-245) | Role Match streaming: render each requirement row as it lands via as_completed; blocked on -243 | Open | Medium | Enhancement | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -1477,7 +1479,7 @@ Two findings retracted from earlier probe sessions: (1) stability differences at
 **Role Match assessor prompt calibration: both arms score ~80% strong on AT&T with genuine JD gaps; scoring is too generous**
 
 - **Status:** Open
-- **Priority:** Medium
+- **Priority:** High
 - **Type:** Issue
 - **File:** `services/jd_assessor.py` (assessment prompt)
 - **Logged:** September 2, 2026
