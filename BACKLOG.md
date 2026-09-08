@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: 3adf12d -->
+<!-- last-backlog-sync: be92933 -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -11,7 +11,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 **NOW**
 1. **-240** — Role Match has no rejection contract: no gate before the LLM call, and the failure path stores the error in a variable that is never read. Recruiter-facing gap with no logging. In flight.
-2. **-159** — Role Match cold-path: 84.7s click-to-results (Sep 2, 2026 measurement, cache-busted JD, Streamlit rerun included). Sub-second on cache hit. A recruiter's full profile visit is ~90s; this consumes it. Parallelize the sequential gpt-4o assessor loop.
+2. **-243** — Role Match parallelization: architecture decided (fan-out, 31s vs 51s, citations tie on two JDs). `as_completed` concurrency 10, `return_exceptions=True`, top_k measured at 10 vs AT&T row 6 in same pass, "up to two" citation fix. (MATTGPT-159 closed as decided.)
 3. **-089** — Role Match: location, work model, availability. May 22 recruiter finding. Pair with -240 in the same pass once rejection contract is solid.
 4. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
 5. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
@@ -96,8 +96,8 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-154](#mattgpt-154) | Operational-breadth tagging pass — surface operational ownership into all corpus stories where it's genuinely true | Open | Medium | Action | July 16, 2026 |
 | [MATTGPT-155](#mattgpt-155) | New corpus story — sell-side commercial story (HSBC-anchored): pricing/costing, resourcing, outcome-based contracting | Open | Medium | Action | July 29, 2026 |
 | [MATTGPT-156](#mattgpt-156) | Vendor commercial/spend management gap — decide whether corpus-zero on invoice/rate-card/procurement is a real claim or honest gap | Open | Low | Investigation | July 29, 2026 |
-| [MATTGPT-159](#mattgpt-159) | Role Match performance — parallelize per-requirement assessor calls; sequential gpt-4o loop is the bottleneck | Open | High | Performance | July 31, 2026 |
-| [MATTGPT-160](#mattgpt-160) | JD extractor clause-dropping — 7 of 23 requirements on demo JD lose qualifiers during extraction | Open | Medium | Bug | July 31, 2026 |
+| [MATTGPT-160](#mattgpt-160) | JD extraction rewrite: qualifier stripping, requirement-count variance, coverage miss, wall clock floor -- all one prompt | Open | High | Bug / Performance | July 31, 2026 |
+| [MATTGPT-243](#mattgpt-243) | Role Match parallelization: as_completed concurrency 10, return_exceptions, top_k measurement, up-to-two citation fix | Open | High | Performance | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
 | [MATTGPT-168](#mattgpt-168) | Slot 1 is amplified without regard to margin -- tie or near-tie at slot 1 gets 80% of the answer | Open | High | Bug | August 5, 2026 |
@@ -1436,65 +1436,70 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 
 ---
 
-### MATTGPT-159
-**Role Match performance -- parallelize per-requirement assessor calls; sequential gpt-4o loop is the bottleneck**
+### MATTGPT-243
+**Role Match parallelization: as_completed concurrency 10, return_exceptions, top_k measurement, up-to-two citation fix**
 
 - **Status:** Open
 - **Priority:** High
 - **Type:** Performance
 - **File:** `services/jd_assessor.py`
-- **Surfaced:** June 16, 2026 (during -067 release-gate work; classified backend optimization, kept out of that gate)
-- **First documented:** June 26, 2026 backlog prioritization session
-- **Logged:** July 31, 2026
+- **Logged:** September 2, 2026
+- **Decided:** Architecture audit complete (MATTGPT-159 closed). Parallelize existing pipeline.
 
-**Issue:** `jd_assessor.py` makes one sequential `gpt-4o` call per JD requirement. The demo JD has roughly 23 requirements. The `assess` loop dominates; `extract` is a large N-independent cost (~22s local on the demo JD) and is the floor regardless of parallelism.
+**Decision record (from MATTGPT-159 closure):** Two-arm audit across demo JD and AT&T JD. Fan-out (Arm 1) ~31s wall clock vs long-context (Arm 2) ~51s. Citation grounding tied across both JDs -- 8 SUPPORTED vs 7 SUPPORTED on AT&T, different failure rows, 0 UNSUPPORTED in either arm. No architecture migration, no new prompt surface, streaming per requirement stays available because per-requirement structure is unchanged. Long-context rejected.
 
-**Measured cold-path latency (September 2, 2026):**
+Two findings retracted from earlier probe sessions: (1) stability differences attributed to architecture were extraction nondeterminism, not fan-out vs long-context; (2) fan-out's citation-grounding advantage on the demo JD did not generalize -- AT&T row 6 (calm/decisive incident leadership) was a retrieval-window failure that long-context's whole-corpus visibility caught, not an architecture quality difference. Both are now recorded here; do not re-litigate either.
 
-- Run 1 (example JD, first ever): bracketed at 82-145s by polling -- too loose to report.
-- Run 2 (same JD, immediate retry): ~0.7s cache hit. Output identical (17✓/1~).
-- Run 3 (cache-busted by appending a one-line `Req ID` suffix): **84.66s**. Output differed (16✓/2~, 3 discussion points), confirming a real LLM call.
+**Scope:**
+- Parallelize `assess` calls using `asyncio.as_completed` (or `ThreadPoolExecutor`) at concurrency 10. Per-requirement reasoning with `gpt-4o` stays unchanged -- this is a concurrency change only.
+- `return_exceptions=True` with per-requirement error rows. One failed call must not kill the full assessment.
+- **top_k: measure at 10 in this same pass.** AT&T row 6 (calm/decisive leadership during incidents) is the test case -- does the JP Morgan Dynamics crisis story appear in the candidate set at top_k=10? Run is cheap in parallel (larger candidate set costs tokens per call; wall clock impact is near zero across four waves). Ship whichever value the measurement supports; do not default to the old value without measuring.
+- Change "exactly two citations" to "up to two citations" in the assessment prompt. "Exactly two" forced a second citation on requirements that had only one strong story, producing the RELATED reach seen in demo JD row 9 (Arm 1) and -088 audit.
+- `re-run all three JDs` to confirm verdicts unchanged after parallelization.
 
-Method: timestamped click in-page; polled Streamlit status widget at 50ms; marked done when absent for 1.5s continuously. Two caveats: Run 3's JD was the example plus 23 characters, so the cold path is measured on a slightly longer JD than stock; and 84.7s includes Streamlit rerun overhead, not just the model call.
-
-**Why 84.7s is disqualifying:** A recruiter's full profile visit is ~90s. Role Match consuming all of it before rendering anything is not a usability edge case -- it is the default experience for any novel JD.
-
-**Cache behavior and why it hid this:** The cache means anyone who clicks "Try an example" after the first person gets a sub-second response. Testing consistently with the stock JD produces cache hits; the cold path only surfaces on a genuinely new JD. This masked the latency from in-session testing until the Sep 2 cache-bust measurement.
-
-**Historical measurement:** 336 seconds end to end, measured June 16, 2026 at TOP_K=3. This predates the TOP_K=5 change made July 31, 2026, which increases context per call. The Sep 2 figure (84.7s) is the current benchmark; use it, not 336s.
-
-**Root cause and fix:** Sequential per-requirement calls with `gpt-4o` is the confirmed root cause. The fix is concurrency -- parallelize the `assess` calls using `asyncio` or a `ThreadPoolExecutor` -- not a model downgrade. Per-requirement reasoning with `gpt-4o` is what makes the scorer credible (confirmed in MATTGPT-088 scope work: mini produces subpar assessment reasoning). Dropping to mini would make -088 worse, not better. Estimated improvement after parallelization: two to three minutes down to fifteen to twenty seconds (June 2026 estimate; re-validate after implementation).
-
-**Why this went unfiled twice:** Surfaced June 16, 2026 during -067 release-gate work and classified as backend optimization rather than UI polish -- correctly kept out of that gate, but not filed. Sat as a latency reference note in -088 and -099 without an owner through June 26, when it was identified as unfiled in a backlog prioritization session and still not filed. Same pattern as MATTGPT-155 (sell-side story) and MATTGPT-156 (vendor spend): context notes in other tickets are not tickets, and findings without an owner evaporate. Filed here so it has one.
-
-**Perceived-performance half (independent of the concurrency fix):** What the user sees during a two-minute wait -- whether it looks like progress or like a hang -- is a separate concern that can land even if concurrency work slips. Connects to MATTGPT-083 (spinner inconsistency). Worth addressing regardless of when the async fix ships.
-
-**Constraints:**
-- Do not swap `gpt-4o` for `gpt-4o-mini`. This is a concurrency change, not a prompt or scoring change.
-- Keep per-requirement judgment logic identical.
-- Re-run all three JDs to confirm verdicts are unchanged after parallelization.
+**Acceptance:**
+- Cold-path wall clock at or below 35s on a novel JD (cache-busted). Measure by the same method as the 84.7s baseline: timestamped click, Streamlit status poll at 50ms, done when absent for 1.5s.
+- No verdict changes from the pre-parallelization baseline on the demo and AT&T JDs (verdicts may shift on rows that get more candidates from a raised top_k -- that is expected and correct, not a regression).
+- Per-requirement error rows render rather than killing the full assessment when one call fails.
+- top_k value documented in a comment at the call site with the AT&T row 6 test result.
 
 **Cross-references:**
-- Latency context noted (not ticketed) in MATTGPT-088 and MATTGPT-099 detail blocks.
-- MATTGPT-083 -- spinner inconsistency; perceived-performance half connects here.
-- MATTGPT-160 -- extraction clause-dropping; separate defect in the same file.
+- MATTGPT-159 (closed; decision record and full audit history there)
+- MATTGPT-160 (extraction rewrite; separate ticket, same file -- do not conflate)
+- MATTGPT-083 (spinner inconsistency; perceived-performance half; worth landing regardless of when -243 ships)
 
 ---
 
 ### MATTGPT-160
-**JD extractor clause-dropping -- 7 of 23 requirements on demo JD lose qualifiers during extraction**
+**JD extraction rewrite: qualifier stripping, requirement-count variance, coverage miss, wall clock floor -- all one prompt**
 
 - **Status:** Open
-- **Priority:** Medium
-- **Type:** Bug
+- **Priority:** High
+- **Type:** Bug / Performance
 - **File:** `services/jd_assessor.py` (`extract_requirements()`)
-- **Logged:** July 31, 2026
+- **Logged:** July 31, 2026 (scope expanded September 2, 2026)
 
-**Issue:** `extract_requirements()` drops qualifiers from JD requirements during extraction. On the demo JD, 7 of 23 requirements lost qualifiers -- the extracted text is narrower than what the JD actually requires. Downstream effect: the assessor evaluates a stripped version of the requirement, which can produce verdicts (strong, partial, gap) that don't reflect what the hiring manager wrote.
+**Why one ticket:** Four symptoms, one call, one prompt. Fixing them separately risks each patch undoing the previous one. The extraction wrapper (`extract_requirements()`) is the highest-value target left in the Role Match line of work: it accounts for 55-65% of total wall clock even after -243 ships, and it is the single point of failure for all four of the following.
 
-**Probe script:** `probe_db_extraction.py` (repo root) contains tooling for investigating this defect. It runs `extract_requirements()` on the structured JD, compares extracted text to source, and tests full-text vs stripped retrieval through Pinecone at top-40. Re-use this rather than building a new probe.
+**Four symptoms:**
 
-**Constraint:** This is a separate defect from MATTGPT-157 (W_KW keyword weighting). The clause-dropping happens at extraction time, before retrieval scoring. Do not conflate.
+1. **Qualifier stripping:** On the demo JD, 7 of 23 requirements lost qualifiers during extraction -- the extracted text is narrower than what the JD actually requires. Downstream: assessor evaluates a stripped requirement and can produce verdicts that don't reflect what the hiring manager wrote. (Original -160 scope.)
+
+2. **Requirement-count variance (±15%):** The same AT&T JD input produced 17 requirements on one run and 18 on another. The extraction prompt is nondeterministic -- the same JD produces a different requirement list on each cold-path call. Downstream: cache hits mask this; every novel JD gets a different extraction, and verdicts on the volatile requirement are unrepeatable.
+
+3. **Coverage miss:** AT&T JD "Kafka + IXBUS technical leadership" was not extracted as a requirement at all (MATTGPT-159 audit, Arm 1/row 10). The story "Cloud-Native Architecture" mentions event-driven systems with Kafka and was available in the corpus -- Arm 1 produced UNMATCHED because extraction never handed the requirement to the assessor. Root cause: wrapper prompt differs from the production prompt used in the probe (same issue Probe A identified; still unresolved).
+
+4. **Wall clock floor:** ~22s on the demo JD. `extract_requirements()` is a single sequential call; parallelizing the `assess` loop in -243 does not reduce this floor. Lowering it requires a prompt or call-structure change in extraction itself.
+
+**Probe script:** `probe_db_extraction.py` (repo root) runs `extract_requirements()` on the structured JD, compares extracted text to source, and tests full-text vs stripped retrieval through Pinecone at top-40. Re-use this rather than building a new probe.
+
+**Acceptance:**
+- Qualifier retention: extracted requirements match source qualifiers on the demo JD (7-of-23 miss rate reduced to 0 or near-0).
+- Count stability: same JD produces the same requirement count across three consecutive cold-path runs.
+- Coverage: "Kafka + IXBUS" extracted as a requirement from the AT&T JD.
+- Wall clock floor: extraction completes in under 15s on the demo JD.
+
+**Constraint:** Separate defect from MATTGPT-157 (W_KW keyword weighting). Clause-dropping happens at extraction time, before retrieval scoring. Do not conflate. Do not conflate with -243 (assessor parallelization) -- these are different functions in the same file.
 
 ---
 

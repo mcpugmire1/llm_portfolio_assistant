@@ -24,6 +24,18 @@ Query log verified a 3:37 upstream outage window on September 1 (15:47:18 to 15:
 
 ---
 
+**September 2, 2026 — Role Match architecture decision: parallelize existing pipeline (MATTGPT-159 closed)**
+
+Investigation complete after a two-JD citation audit (demo JD + AT&T JD). Architecture decided: parallelize the existing per-requirement `gpt-4o` pipeline. Implementation is MATTGPT-243.
+
+Evidence: fan-out arm ~31s wall clock vs long-context arm ~51s. Citation grounding tied across both JDs -- 8 SUPPORTED vs 7 SUPPORTED on AT&T, 0 UNSUPPORTED in either arm. No migration, no new prompt surface, streaming stays available. Long-context rejected.
+
+Two earlier findings retracted and recorded: (1) stability differences attributed to fan-out vs long-context were extraction nondeterminism -- the architecture comparison was measuring the wrong thing; (2) fan-out's citation-grounding advantage on the demo JD did not generalize -- AT&T row 6 (calm/decisive incident leadership) was a retrieval-window failure (the JP Morgan Dynamics crisis story exists and Arm 2 found it via whole-corpus context; Arm 1 missed it because retrieval never surfaced it), not an architecture quality difference. Row 6 is an argument for raising `DEFAULT_TOP_K`, measured in MATTGPT-243.
+
+AT&T audit also surfaced: calibration is too generous in both arms (~80% strong on a JD with genuine technical gaps); extraction nondeterminism (±15% requirement count, same JD) is independent of architecture; and the extraction wrapper prompt diverges from the production prompt (coverage miss on Kafka/IXBUS). All three land in MATTGPT-160 (expanded scope) or remain open as unscheduled.
+
+---
+
 **September 2, 2026 — Streamlit theme defaults coverage: focus borders, wrapper backgrounds, widget labels (MATTGPT-242)** -- `3adf12d`
 
 `config.toml`'s `[theme]` block was removed September 2 to fix a font regression, dropping the app back to Streamlit defaults (`#FF4B4B` focus borders, `#F0F2F6` wrapper backgrounds, `#31333F` widget labels). Fix in `ui/styles/global_styles.py`: `div[data-baseweb="input"]:focus-within` and `div[data-baseweb="select"] > div:focus-within` get `border-color: var(--accent-purple)` and matching `box-shadow`; selectbox wrappers get `--bg-surface`; widget labels and values get `--text-primary`. Rules placed in both `:root` blocks (light and dark). `div[data-baseweb="base-input"]` deliberately left uncovered -- it tracks Streamlit's secondary background and is the right behavior.
