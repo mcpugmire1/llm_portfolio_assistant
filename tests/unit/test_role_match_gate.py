@@ -14,16 +14,19 @@ import logging
 
 
 class TestLooksLikeJD:
-    """Loose gate: bias toward false negatives (letting through). Long
-    paste (>= 80 words) passes on length alone; short paste passes only
-    if any JD-shape term appears."""
+    """Gate requires a JD-shape term on a word boundary. Length does not
+    bypass the shape check -- a long paste of pure filler (recipe, article)
+    rejects the same as a short one."""
 
-    def test_long_paste_no_shape_terms_passes(self):
+    def test_long_paste_no_shape_terms_rejects(self):
+        """Length no longer bypasses the shape check. 85 words of pure
+        filler with no JD-shape terms must fail the gate. This is the
+        zucchini-recipe class: > 80 words, no shape signal, previously
+        passed on length alone and burned an LLM call."""
         from ui.pages.role_match import _looks_like_jd
 
-        # 85 words of pure filler, none of which are JD-shape terms.
         text = " ".join(["alpha"] * 85)
-        assert _looks_like_jd(text) is True
+        assert _looks_like_jd(text) is False
 
     def test_short_paste_with_shape_term_passes(self):
         from ui.pages.role_match import _looks_like_jd
@@ -47,12 +50,12 @@ class TestLooksLikeJD:
             is False
         )
 
-    def test_80_word_boundary(self):
+    def test_length_alone_does_not_bypass_shape_check(self):
+        """No length bypass: word count doesn't affect the shape check.
+        Both sides of the old 80-word threshold reject on no-shape-term."""
         from ui.pages.role_match import _looks_like_jd
 
-        # Exactly 80 words with no shape term -> passes (long-paste rule)
-        assert _looks_like_jd(" ".join(["alpha"] * 80)) is True
-        # 79 words with no shape term -> rejects (short + no shape)
+        assert _looks_like_jd(" ".join(["alpha"] * 80)) is False
         assert _looks_like_jd(" ".join(["alpha"] * 79)) is False
 
 
@@ -78,6 +81,18 @@ class TestIsRetryableError:
             pass
 
         assert _is_retryable_error(BadRequestError("bad payload")) is False
+
+    def test_internal_server_error_is_retryable(self):
+        """MATTGPT-240 close-out: openai/_exceptions.py defines
+        InternalServerError as a distinct APIStatusError sibling of
+        RateLimitError. 5xx failures are transient; the visitor should
+        see the "quick breather" copy, not "Something broke on my end.\" """
+        from ui.pages.role_match import _is_retryable_error
+
+        class InternalServerError(Exception):
+            pass
+
+        assert _is_retryable_error(InternalServerError("upstream 500")) is True
 
 
 class TestHandleAssessmentError:

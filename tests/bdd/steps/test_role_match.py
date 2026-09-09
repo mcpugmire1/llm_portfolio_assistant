@@ -885,7 +885,7 @@ def test_clear_returns_to_state_1_full():
 
 @scenario(
     "../features/role_match.feature",
-    "Submitting a non-JD text is rejected by the gate with no summary and no CTA",
+    "Submitting a recipe is rejected by the gate with no summary and no CTA",
 )
 def test_non_jd_rejected_by_gate():
     pass
@@ -1415,13 +1415,38 @@ _LONG_JD_30_PLUS = (
     "development for a large multi-team engineering organization serving millions of users."
 )
 # 35+ words of lorem ipsum — not a real JD; should produce 0 requirements
-_ERROR_FIXTURE_JD = (
-    "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor "
-    "incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud "
-    "exercitation ullamco laboris nisi aliquip ex commodo."
+# MATTGPT-240 gate-rejection fixture. A zucchini bread recipe: 110+ words
+# so it clears the 30-word floor with margin, and carries none of the
+# JD-shape terms in _JD_SHAPE_TERMS. That combination exclusively tests
+# the shape branch of _looks_like_jd -- the branch where the recipe class
+# of failures actually surfaced in the browser. The earlier lorem ipsum
+# fixture was 33 words against a 30-word floor, so it straddled the two
+# branches and let the shape-check regression that shipped as the two-
+# click bug hide behind a passing suite.
+_RECIPE_FIXTURE = (
+    "Preheat the oven to 325 degrees. Grease and flour two 8x4-inch loaf pans. "
+    "Sift flour, salt, baking powder, baking soda, and cinnamon together in a "
+    "large bowl. Beat eggs, oil, sugar, and vanilla together in a separate bowl "
+    "with an electric mixer until combined; add flour mixture and beat well. "
+    "Stir in shredded zucchini and chopped walnuts until well combined. Pour "
+    "batter into the prepared pans. Bake in the preheated oven until a toothpick "
+    "inserted into the center comes out clean, about 40 to 60 minutes. Cool in "
+    "the pans on a wire rack for 20 minutes. Run a table knife around the edges "
+    "to loosen. Invert carefully onto a wire rack and let cool completely."
 )
 
 LLM_TIMEOUT = 300000  # 300s for real LLM calls (demo JD: 18 gpt-4o calls × ~8-10s each)
+GATE_TIMEOUT = 5000  # 5s -- gate path is synchronous, no LLM call. Short so copy mismatches fail in seconds instead of hanging on LLM_TIMEOUT.
+
+# MATTGPT-240 terminal-state substrings. Single source of truth so a copy edit
+# touches one place instead of drifting across multiple wait_for_function calls.
+# The full messages carry an emoji prefix (🐾) which Playwright's body.innerText
+# handles as a normal character; we match on substrings past the emoji.
+_TERMINAL_STATE_JS = (
+    'body.includes("couldn\'t find a job description") '
+    '|| body.includes("quick breather") '
+    '|| body.includes("Something broke on my end")'
+)
 
 
 # --- GIVEN ---
@@ -1449,7 +1474,7 @@ def given_jd_submitted_and_results_displayed(browser_page, app_url):
         f"  if (btn.innerText.includes('Update Match')) return true;"
         f"  if (document.querySelector('{ROLE_MATCH_LEGEND_SELECTOR}')) return true;"
         f"  const body = document.body.innerText;"
-        f"  return body.includes(\"Something went wrong\") || body.includes(\"Couldn't extract\");"
+        f"  return {_TERMINAL_STATE_JS};"
         f"}}",
         timeout=LLM_TIMEOUT,
     )
@@ -1481,10 +1506,14 @@ def when_click_demo_jd_link(browser_page):
 
 @when('I click "Match this role 🐾"')
 def when_click_match_this_role(browser_page):
-    """Submit the JD. Waits for Streamlit to finish processing (either results or error)."""
+    """Submit the JD. Waits for Streamlit to finish processing (either results or terminal-state copy).
+
+    Terminal states after MATTGPT-240 rejection contract:
+      - Success: button flips to "Update Match"
+      - Gate rejection / retryable failure / not-retryable failure: any _TERMINAL_STATE_JS substring
+    """
     browser_page.locator(ROLE_MATCH_SUBMIT_SELECTOR).first.click()
-    # Poll until LLM call completes: button flips to "Update Match" (success) OR error text
-    # appears in DOM. Streamlit does not visually disable the button during script exec —
+    # Streamlit does not visually disable the button during script exec:
     # !btn.disabled fires immediately before the LLM returns; use semantic state signals only.
     browser_page.wait_for_function(
         f"() => {{"
@@ -1492,16 +1521,36 @@ def when_click_match_this_role(browser_page):
         f"  if (!btn) return false;"
         f"  if (btn.innerText.includes('Update Match')) return true;"
         f"  const body = document.body.innerText;"
-        f"  return body.includes(\"Something went wrong\") || body.includes(\"Couldn't extract\");"
+        f"  return {_TERMINAL_STATE_JS};"
         f"}}",
         timeout=LLM_TIMEOUT,
     )
     wait_for_streamlit_rerun(browser_page)
 
 
-@when("I type a 35-word non-JD placeholder text into the JD textarea")
-def when_type_non_jd_placeholder(browser_page):
-    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.fill(_ERROR_FIXTURE_JD)
+@when('I click "Match this role 🐾" expecting the gate to fire')
+def when_click_expecting_gate(browser_page):
+    """Gate-scenario variant of the submit click. Gate path is synchronous
+    (no LLM call), so this uses GATE_TIMEOUT (5s) instead of LLM_TIMEOUT
+    (300s). A copy mismatch fails in seconds rather than hanging for five
+    minutes.
+
+    Polls for any of the MATTGPT-240 terminal-state substrings; the
+    subsequent Then step asserts which one actually rendered."""
+    browser_page.locator(ROLE_MATCH_SUBMIT_SELECTOR).first.click()
+    browser_page.wait_for_function(
+        f"() => {{"
+        f"  const body = document.body.innerText;"
+        f"  return {_TERMINAL_STATE_JS};"
+        f"}}",
+        timeout=GATE_TIMEOUT,
+    )
+    wait_for_streamlit_rerun(browser_page)
+
+
+@when("I paste a recipe into the JD textarea")
+def when_paste_recipe(browser_page):
+    browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.fill(_RECIPE_FIXTURE)
     browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.press("Tab")
     wait_for_streamlit_rerun(browser_page)
 
@@ -1598,6 +1647,28 @@ def then_right_panel_does_not_show_text(browser_page, text):
     assert (
         count == 0
     ), f"Expected right panel to NOT contain: {text!r}; found {count} match(es)"
+
+
+@then(parsers.parse('the page shows "{text}"'))
+def then_page_shows_text(browser_page, text):
+    """Page-wide text assertion. Used for content that is not tied to
+    a specific panel (e.g., MATTGPT-240 gate rejection banner in the
+    left column). Prefer the more specific right-panel variant when
+    the assertion is about where the content renders."""
+    assert (
+        browser_page.get_by_text(text).count() > 0
+    ), f"Expected page to contain: {text!r}"
+
+
+@then(parsers.parse('the page does not show "{text}"'))
+def then_page_does_not_show_text(browser_page, text):
+    """Page-wide negative text assertion. Used by the MATTGPT-240 @slow
+    regression guard to prove the gate did not wrongly fire on a real
+    JD -- the rejection copy must not appear anywhere on the page."""
+    count = browser_page.get_by_text(text).count()
+    assert (
+        count == 0
+    ), f"Expected page to NOT contain: {text!r}; found {count} match(es)"
 
 
 @then('the "✕ Clear" button is not visible')

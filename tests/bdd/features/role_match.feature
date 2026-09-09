@@ -532,11 +532,11 @@ Feature: Role Match page
 
   # MATTGPT-067 / MATTGPT-240 — Rejection contract (gate before LLM)
 
-  Scenario: Submitting a non-JD text is rejected by the gate with no summary and no CTA
+  Scenario: Submitting a recipe is rejected by the gate with no summary and no CTA
     Given I navigate to the Role Match page
-    When I type a 35-word non-JD placeholder text into the JD textarea
-    And I click "Match this role 🐾"
-    Then the right panel shows "That doesn't read like a job description."
+    When I paste a recipe into the JD textarea
+    And I click "Match this role 🐾" expecting the gate to fire
+    Then the page shows "I couldn't find a job description here."
     And no "SUMMARY" section is visible in the right panel
     And no "Have questions about the results?" CTA is visible
     And the button label reads "Match this role 🐾"
@@ -545,7 +545,7 @@ Feature: Role Match page
   Scenario: A real JD passes the gate (regression guard)
     Given I have submitted a job description and results are displayed
     Then match results are displayed in the right panel
-    And the right panel does not show "That doesn't read like a job description."
+    And the page does not show "I couldn't find a job description here."
 
   # MATTGPT-067 — Post-result CTA
 

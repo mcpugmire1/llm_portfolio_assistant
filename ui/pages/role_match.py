@@ -8,6 +8,8 @@ Architecture: See ADR 016 and services/jd_assessor.py
 """
 
 import html
+import logging
+import re
 from pathlib import Path
 from urllib.parse import urlencode
 
@@ -25,6 +27,151 @@ from ui.components.story_detail import render_story_detail
 from ui.components.thinking_indicator import render_thinking_indicator
 from ui.components.why_agy_dialog import render_why_agy_dialog
 from ui.image_assets import AGY_AVATAR_64_B64
+
+logger = logging.getLogger(__name__)
+
+
+# =============================================================================
+# MATTGPT-240: Rejection contract (gate + failure branch)
+# =============================================================================
+
+_JD_SHAPE_TERMS = (
+    "responsibilities",
+    "requirements",
+    "experience",
+    "years",
+    "qualifications",
+    "job",
+    "role",
+    "position",
+    "skills",
+    "candidate",
+    "salary",
+    "compensation",
+    "benefits",
+    "apply",
+    "reporting to",
+)
+
+# Word-boundary matcher (pins the "casserole should not match role" test).
+# "reporting to" is a two-word phrase; \b boundaries wrap the whole
+# alternation so `\breporting to\b` matches the phrase cleanly.
+_JD_SHAPE_RE = re.compile(r"\b(?:" + "|".join(_JD_SHAPE_TERMS) + r")\b", re.IGNORECASE)
+
+# String comparison against e.__class__.__name__ keeps role_match.py free
+# of an openai import. APIError deliberately excluded -- it's the base
+# class for many OpenAI exceptions including BadRequestError, so a bare
+# APIError may carry a non-transient fault. InternalServerError is a
+# sibling of RateLimitError (both APIStatusError subclasses in
+# openai/_exceptions.py) and is 5xx-transient, so it belongs here even
+# though the shared APIStatusError base is not name-comparable to a
+# single retryable/not-retryable outcome.
+_RETRYABLE_ERROR_CLASSES = frozenset(
+    {
+        "RateLimitError",
+        "APIConnectionError",
+        "APITimeoutError",
+        "InternalServerError",
+    }
+)
+
+# Retryable copy matches -230's canonical form at explore_stories.py:397
+# (colon, not em dash). Not-retryable matches app.py:288's startup-error
+# pattern ("has been logged").
+_RETRYABLE_MSG = "🐾 I need a quick breather: please try again in a moment!"
+_NOT_RETRYABLE_MSG = "🐾 Something broke on my end. The issue has been logged."
+_GATE_REJECT_MSG = (
+    "🐾 I couldn't find a job description here. I look for "
+    "responsibilities, requirements, or qualifications."
+)
+
+
+def _looks_like_jd(text: str) -> bool:
+    """JD gate. Every input must match at least one JD-shape term on a
+    word boundary. Length does not bypass the shape check -- a 500-word
+    recipe rejects the same as a 20-word one. Word-boundary matching
+    means substrings (e.g., "role" inside "casserole") do not pass."""
+    return _JD_SHAPE_RE.search(text) is not None
+
+
+def _is_retryable_error(e: Exception) -> bool:
+    """Classify an OpenAI exception for the UI's two-state failure copy."""
+    return e.__class__.__name__ in _RETRYABLE_ERROR_CLASSES
+
+
+def _handle_assessment_error(e: Exception) -> str:
+    """Log the failure with error class name and return the UI-facing
+    message. Never leaks str(e) into the returned message (that was the
+    -240 defect)."""
+    err_class = e.__class__.__name__
+    logger.warning(
+        "role_match assessment failure [%s]: %s", err_class, e, exc_info=True
+    )
+    return _RETRYABLE_MSG if _is_retryable_error(e) else _NOT_RETRYABLE_MSG
+
+
+# Word-count floor below which we do not send text to the LLM. The extractor
+# needs enough surface area to produce a useful requirement list; below this
+# it consistently returns near-empty results that read as failed assessments.
+# Enforced in _handle_submit_click as a gate rejection so the visitor gets
+# the same banner treatment as a wrong-shape rejection -- from their side,
+# a 25-word paste and a recipe are the same problem.
+_MIN_JD_WORDS = 30
+
+
+def _handle_submit_click() -> None:
+    """form_submit_button on_click callback. Runs BEFORE Streamlit reruns
+    the script, so any session_state changes are visible when input_col's
+    banner code reads them on the same pass. This is the reliable ordering
+    fix -- a prior st.rerun() from inside the submit handler ran on the
+    same pass where input_col had already rendered without the banner,
+    forcing a second click to see the rejection.
+
+    Also paired with st.form so the textarea value commits atomically with
+    the submit click. Without the form, uncommitted textarea content let
+    the first click consume the widget commit without registering as a
+    submit -- same two-click failure surfaced from a different direction.
+
+    Handles the gate path only. The LLM path stays in main script flow so
+    the loading indicator renders correctly (callbacks cannot render UI).
+    Main script's submit branch guards on role_match_gate_error so the LLM
+    path skips when the gate rejects.
+
+    Empty text is a no-op: the textarea already carries the "Paste a job
+    description below" label, so a rejection banner saying the same thing
+    would be redundant."""
+    jd_text = st.session_state.get("role_match_jd_input") or ""
+    if not jd_text.strip():
+        return
+    words = len(jd_text.split())
+    looks_like = _looks_like_jd(jd_text)
+    if words < _MIN_JD_WORDS or not looks_like:
+        logger.warning(
+            "role_match gate: rejected non-JD input (words=%d, looks_like_jd=%s)",
+            words,
+            looks_like,
+        )
+        for _k in (
+            "role_match_result",
+            "role_match_matched_jd",
+            "role_match_active_evidence",
+            "role_match_error",
+        ):
+            st.session_state.pop(_k, None)
+        st.session_state["role_match_gate_error"] = _GATE_REJECT_MSG
+        # Persist the raw paste so the textarea restores on
+        # navigation-return, matching the LLM-success path. Without
+        # this, a rejected visitor returns to a rejection banner over
+        # an empty textarea -- same inconsistency the LLM-success
+        # jd_persisted write prevents for results. Same variable name
+        # (jd_text) as the LLM path so the two persist sites are
+        # trivially comparable.
+        st.session_state["role_match_jd_persisted"] = jd_text
+    else:
+        # Gate passes -- clear any prior gate rejection so a stale banner
+        # doesn't linger over a fresh valid submission.
+        st.session_state.pop("role_match_gate_error", None)
+
 
 _HEADER_HTML = f"""
 <div class="conversation-header">
@@ -932,7 +1079,10 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_role_match_tri
 [class*="st-key-lock_icon"] {
     display: none !important;
 }
-/* Clear — st.button styled as a text link (inline affordance, not a CTA) */
+/* Clear -- st.button styled as a text link (inline affordance, not a
+   CTA). Serves every rejection state: gate, retryable failure, and
+   not-retryable failure. Sits directly below the banner so the
+   rejection message is read first and the affordance follows. */
 [class*="st-key-role_match_clear"] button {
     background: none !important;
     border: none !important;
@@ -950,6 +1100,32 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_role_match_tri
     border: none !important;
     box-shadow: none !important;
     text-decoration: underline !important;
+}
+
+/* MATTGPT-240: shared banner treatment. Used by the gate rejection in
+   the left column and by the assessment-failure copy in the right panel.
+   Matches -230's "quick breather" left-stripe bubble in explore_stories.py:
+   --banner-info-bg fill, 4px --accent-purple left stripe, rounded on the
+   right (0 8px 8px 0), --banner-info-text for the message. Container key
+   selector applies the stripe/fill to the whole st.container so any
+   inline button (the gate branch's ✕ Clear and paste again) lands
+   visually inside the banner region.
+   Margin: 12px above so the banner is not attached to the heading
+   preceding it; 0 below so it sits directly against the following
+   element. Both branches read the same on-screen. */
+[class*="st-key-role_match_banner"] {
+    background: var(--banner-info-bg);
+    border-left: 4px solid var(--accent-purple);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    margin: 12px 0 0;
+}
+.role-match-banner-msg {
+    color: var(--banner-info-text);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 10px;
 }
 
 /* Demo JD and post-result CTA — outlined buttons, footer-matched treatment.
@@ -1558,50 +1734,79 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
                     "role_match_jd_persisted",
                     "role_match_active_evidence",
                     "role_match_error",
+                    "role_match_gate_error",
                 ):
                     st.session_state.pop(_k, None)
 
             jd_preview = st.session_state.get("role_match_jd_input", "")
+            gate_error_msg = st.session_state.get("role_match_gate_error")
+            failure_error_msg = st.session_state.get("role_match_error")
+            banner_msg = gate_error_msg or failure_error_msg
             st.markdown(
                 '<p class="role-match-jd-hint">Paste a job description below.</p>',
                 unsafe_allow_html=True,
             )
+
+            # MATTGPT-240: one banner location for every rejection.
+            # Gate (input problem), retryable failure, and not-retryable
+            # failure all render here in the left column above the
+            # textarea. Each state has its own copy (_GATE_REJECT_MSG,
+            # _RETRYABLE_MSG, _NOT_RETRYABLE_MSG) -- different causes,
+            # different words -- but the arrangement is identical:
+            # hint -> banner -> ✕ Clear -> textarea. One position, one
+            # control, one label. No inline action inside the banner;
+            # the ✕ Clear below serves every rejection state.
+            if banner_msg:
+                _emoji_prefix = "🐾 "
+                _msg_body = banner_msg
+                if banner_msg.startswith(_emoji_prefix):
+                    _msg_body = banner_msg[len(_emoji_prefix) :]
+                with st.container(key="role_match_banner"):
+                    st.markdown(
+                        f'<div class="role-match-banner-msg">'
+                        f'<span style="margin-right: 6px;">🐾</span>'
+                        f'{html.escape(_msg_body)}'
+                        f'</div>',
+                        unsafe_allow_html=True,
+                    )
+
+            # Top ✕ Clear: shown whenever there is text in the textarea,
+            # regardless of banner state. Sits below the banner so the
+            # rejection message is read first and the affordance follows.
             if jd_preview.strip():
                 if st.button("✕ Clear", key="role_match_clear"):
                     st.session_state["role_match_clear_flag"] = True
                     st.rerun()
 
-            jd_text = st.text_area(
-                "Job description",
-                height=400,
-                key="role_match_jd_input",
-                label_visibility="collapsed",
-            )
-
+            # MATTGPT-240: st.form wraps the textarea + submit so the widget
+            # value commits atomically with the click -- kills the two-click
+            # bug where uncommitted textarea content let the first click
+            # consume the widget commit without registering as a submit.
+            # Button is always enabled: validation lives in the on_click
+            # callback (_handle_submit_click), which fires BEFORE the rerun
+            # so any gate rejection is visible to input_col's banner code
+            # on the same pass. The old word-count disable ate the click
+            # silently below 30 words.
             _result_payload = st.session_state.get("role_match_result") or {}
-            has_results = bool(_result_payload.get("results"))
-            if len(jd_text.split()) < 30:
-                btn_label, btn_type, btn_disabled = (
-                    "Match this role 🐾",
-                    "primary",
-                    True,
+            btn_label = (
+                "Update Match 🐾"
+                if _result_payload.get("results")
+                else "Match this role 🐾"
+            )
+            with st.form(key="role_match_form", clear_on_submit=False, border=False):
+                jd_text = st.text_area(
+                    "Job description",
+                    height=400,
+                    key="role_match_jd_input",
+                    label_visibility="collapsed",
                 )
-            elif has_results:
-                btn_label, btn_type, btn_disabled = "Update Match 🐾", "primary", False
-            else:
-                btn_label, btn_type, btn_disabled = (
-                    "Match this role 🐾",
-                    "primary",
-                    False,
-                )
-
-            with st.container(key="role_match_submit"):
-                submit_clicked = st.button(
-                    btn_label,
-                    type=btn_type,
-                    use_container_width=True,
-                    disabled=btn_disabled,
-                )
+                with st.container(key="role_match_submit"):
+                    submit_clicked = st.form_submit_button(
+                        btn_label,
+                        type="primary",
+                        use_container_width=True,
+                        on_click=_handle_submit_click,
+                    )
 
             if not jd_text.strip():
                 st.markdown(
@@ -1624,8 +1829,17 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
 
                 render_lock_icon()
 
-            # Process click first so the thinking indicator appears before results render
-            if submit_clicked and jd_text.strip():
+            # Process click first so the thinking indicator appears before results render.
+            # MATTGPT-240: guard on role_match_gate_error -- _handle_submit_click
+            # (form_submit_button on_click callback) sets that state BEFORE the
+            # rerun that lands here, so a gate rejection short-circuits the LLM
+            # path without a second pass. The gate is owned by the callback;
+            # this branch is the LLM path only.
+            if (
+                submit_clicked
+                and jd_text.strip()
+                and not st.session_state.get("role_match_gate_error")
+            ):
                 # Match the Ask Agy pattern: st.empty() container + render_thinking_indicator()
                 # The indicator is a fixed-position overlay so it covers the whole viewport.
                 loading_container = st.empty()
@@ -1638,7 +1852,8 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
                 # during the call (Streamlit renders incrementally).
                 height_anchor = st.empty()
                 height_anchor.markdown(
-                    '<div style="min-height:400px;"></div>', unsafe_allow_html=True
+                    '<div style="min-height:400px;"></div>',
+                    unsafe_allow_html=True,
                 )
                 try:
                     from services.jd_assessor import run_assessment
@@ -1654,15 +1869,45 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
                     # role_match_result survives because it's a regular
                     # session_state key. Without this persisted copy the
                     # user comes back to an empty textarea sitting next
-                    # to populated results — a confusing inconsistency.
+                    # to populated results, a confusing inconsistency.
                     st.session_state["role_match_jd_persisted"] = jd_text
                     st.session_state.pop("role_match_error", None)
                 except Exception as e:  # noqa: BLE001
-                    st.session_state["role_match_error"] = str(e)
-                    st.session_state.pop("role_match_result", None)
+                    # MATTGPT-240: distinguish retryable from not in the
+                    # UI copy; log with error-class granularity. str(e)
+                    # never reaches the visitor (was the original -240
+                    # defect -- see the failure-branch unit tests).
+                    # Cleanup mirrors the gate branch. Pops
+                    # role_match_gate_error too: gate rejection and
+                    # assessment failure are mutually exclusive states.
+                    # Persists jd_text so the visitor can retry without
+                    # re-pasting after navigation-return -- same reason
+                    # the success branch persists (see comment above).
+                    for _k in (
+                        "role_match_result",
+                        "role_match_matched_jd",
+                        "role_match_active_evidence",
+                        "role_match_gate_error",
+                    ):
+                        st.session_state.pop(_k, None)
+                    st.session_state["role_match_error"] = _handle_assessment_error(e)
+                    st.session_state["role_match_jd_persisted"] = jd_text
+                    _failure_needs_rerun = True
+                else:
+                    _failure_needs_rerun = False
                 finally:
                     loading_container.empty()
                     height_anchor.empty()
+                if _failure_needs_rerun:
+                    # MATTGPT-240: failure banner lives in the left column;
+                    # the state we just set is invisible to this pass
+                    # because input_col has already rendered. Rerun so the
+                    # left-column banner code picks it up on the fresh
+                    # pass. Same reason on_click handles gate rejection --
+                    # LLM path can't use on_click (needs the loading
+                    # indicator), so rerun after the exception is the
+                    # counterpart move.
+                    st.rerun()
 
                 # Log OUTSIDE try/except so a logging failure can't
                 # interfere with the assessment result. Only log when
@@ -1707,14 +1952,15 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
                                 if r.get("match_status") == "gap"
                             ),
                         )
-            # Render: error → results → empty state, in priority order
-            if st.session_state.get("role_match_error"):
-                st.markdown(
-                    '<div style="padding: 24px; color: var(--text-secondary);">'
-                    "<strong>Something went wrong. Please try again.</strong></div>",
-                    unsafe_allow_html=True,
-                )
-            elif st.session_state.get("role_match_result"):
+            # Render: results → empty state. MATTGPT-240: all three
+            # rejection states (gate, retryable failure, not-retryable
+            # failure) render as a banner in the left column above the
+            # textarea, not here. The visitor experiences one thing on any
+            # rejection -- something went wrong and the next action is on
+            # the left -- so both error keys live at the left banner and
+            # the right panel keeps its empty state, which is honest: no
+            # assessment exists.
+            if st.session_state.get("role_match_result"):
                 _render_results_panel(st.session_state["role_match_result"], stories)
                 if st.session_state["role_match_result"].get("results"):
                     with st.container(key="role_match_followup_block"):
