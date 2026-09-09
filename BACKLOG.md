@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: ef10385 -->
+<!-- last-backlog-sync: 4b6ea57 -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -1551,7 +1551,7 @@ Two findings retracted from earlier probe sessions: (1) stability differences at
 
 3. **Gap icon is a red dot, not a circled-X.** UI renders gaps as a red circled-X badge (consistent with strong green circled-check and partial yellow circled-tilde). Export dropped the shape. Align to circled-X.
 
-4. **UI summary line is weaker than the export's.** Export: "10 strong, 1 gap." UI: "10 1." Fix flows from export to UI: align UI summary to the export's wording.
+4. **UI summary line is weaker than the export's.** Export: "10 ✓ strong, 1 ✗ gap." UI: "10 ✓ 1 ✗." Fix flows from export to UI: align UI summary to the export's wording.
 
 **Report / share text (`_build_share_text`, :435) deltas:**
 
