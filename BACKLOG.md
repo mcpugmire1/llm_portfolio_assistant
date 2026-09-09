@@ -30,7 +30,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 16. Rest of Role Match: **-160**, -173, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
--177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families)
+-177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -246 (Role Match export: em dash in title, missing legend, gap icon mismatch, UI summary weaker than export)
 
 **LATER — tier 2:** corpus work
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
@@ -102,6 +102,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-243](#mattgpt-243) | Role Match parallelization: as_completed concurrency 10, return_exceptions, top_k measurement, up-to-two citation fix | Open | High | Performance | September 2, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: both arms score ~80% strong on AT&T with genuine JD gaps; scoring is too generous | Open | High | Issue | September 2, 2026 |
 | [MATTGPT-245](#mattgpt-245) | Role Match streaming: render each requirement row as it lands via as_completed; blocked on -243 | Open | Medium | Enhancement | September 2, 2026 |
+| [MATTGPT-246](#mattgpt-246) | Role Match export mismatches: em dash in title, missing legend, gap icon differs, UI summary less descriptive than export | Open | Medium | Bug | September 9, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
 | [MATTGPT-168](#mattgpt-168) | Slot 1 is amplified without regard to margin -- tie or near-tie at slot 1 gets 80% of the answer | Open | High | Bug | August 5, 2026 |
@@ -1528,6 +1529,39 @@ Two findings retracted from earlier probe sessions: (1) stability differences at
 **Cross-references:**
 - MATTGPT-243 (parallelization; must ship first -- this ticket has no value on the sequential pipeline)
 - MATTGPT-083 (spinner inconsistency; perceived-performance half; independent, worth landing regardless)
+
+---
+
+### MATTGPT-246
+**Role Match export mismatches: em dash in title, missing legend, gap icon differs, UI summary less descriptive than export**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `ui/pages/role_match.py:522` (`_build_export_html`)
+- **Logged:** September 9, 2026
+
+**Why this matters:** The printable export is what gets forwarded. Four small mismatches between the on-screen panel and the PDF make the forwarded artifact read as a different product from what the recruiter saw.
+
+**Four deltas:**
+
+1. **Em dash in export title.** Rendered string: "Role Match -- Director of Product Engineering." Violates the repo-wide no-em-dash rule (CLAUDE.md Critical Rules). Slipped through because the em dash lives in the generated HTML string, not the Python source -- `grep -Pn "\xe2\x80\x94" *.py` would miss it. Fix: replace with a colon ("Role Match: Director of Product Engineering"). Add a test that greps the generated export string for em dashes so this class of violation surfaces at the unit level.
+
+2. **Legend missing from the export.** On-screen panel has a legend explaining strong/partial/gap and the story-vs-profile evidence distinction. The exported PDF has neither. Icons appear with no key. Matters more in the export than in the UI: a PDF gets forwarded without the session context around it.
+
+3. **Gap icon differs across surfaces.** UI renders gaps as a red circled-X badge; export renders a red dot. The circled shape matches the strong (green circled-check) and partial (yellow circled-tilde) treatment on-screen -- the export dropped the shape but kept the color. Align to the circled-X.
+
+4. **UI summary line is less descriptive than the export's.** Export: "10 strong, 1 gap." UI: "10 1." The export already names what each glyph means. Align the UI summary to match the export wording, not the reverse. Both the summary construct and the consistency goal are in the same scope, so this fix belongs in this ticket.
+
+**Acceptance:**
+- Export title uses a colon separator, no em dash. A test asserts the generated export HTML does not contain an em dash character.
+- Export includes the legend block from the on-screen panel (strong/partial/gap definitions and evidence distinction).
+- Gap icon in the export matches the UI's circled-X badge.
+- UI summary line names verdicts: "N strong, N gap" matches the export's existing wording.
+
+**Cross-references:**
+- MATTGPT-067 (Role Match parent: input controls + summary block)
+- MATTGPT-240 (rejection contract; adjacent surface, shipping around the same time)
 
 ---
 
