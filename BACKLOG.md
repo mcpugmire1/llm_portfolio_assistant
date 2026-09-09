@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: 4b6ea57 -->
+<!-- last-backlog-sync: 3adf475 -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -30,7 +30,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 16. Rest of Role Match: **-160**, -173, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
--177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -246 (Role Match export + share: em dash in titles, missing legend, missing evidence chips + summary in report, gap icon mismatch in export)
+-177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -246 (Role Match export + share: em dash in titles, missing legend, missing evidence chips + summary in report, gap icon mismatch in export) · -247 (Role Match failure paths write no Sheet row; API failures leave no production trace)
 
 **LATER — tier 2:** corpus work
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
@@ -103,11 +103,12 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: both arms score ~80% strong on AT&T with genuine JD gaps; scoring is too generous | Open | High | Issue | September 2, 2026 |
 | [MATTGPT-245](#mattgpt-245) | Role Match streaming: render each requirement row as it lands via as_completed; blocked on -243 | Open | Medium | Enhancement | September 2, 2026 |
 | [MATTGPT-246](#mattgpt-246) | Role Match export + share surfaces diverge from UI: em dash in titles, missing legend, missing evidence chips, missing summary block, gap icon mismatch | Open | Medium | Bug | September 9, 2026 |
+| [MATTGPT-247](#mattgpt-247) | Role Match assessment failure paths write no Sheet row; API failures leave no production trace | Open | High | Bug | September 9, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
 | [MATTGPT-168](#mattgpt-168) | Slot 1 is amplified without regard to margin -- tie or near-tie at slot 1 gets 80% of the answer | Open | High | Bug | August 5, 2026 |
 | [MATTGPT-171](#mattgpt-171) | Phrase-aware matching: stopword-only phrases invisible to token-overlap scorer at any W_KW weight | Open | Low | Investigation | August 8, 2026 |
-| [MATTGPT-173](#mattgpt-173) | Role Match JD validation: no defined behavior for malformed or comp-only JD inputs | Open | Medium | Issue | August 8, 2026 |
+| [MATTGPT-173](#mattgpt-173) | Role Match JD validation: comp-heavy JD behavior unverified (short JD and non-JD input now handled by gate) | Open | Medium | Issue | August 8, 2026 |
 | [MATTGPT-176](#mattgpt-176) | Dead code: zero-caller function, 200-line commented block, duplicate typed-alias map | Open | Low | Refactor | August 11, 2026 |
 | [MATTGPT-177](#mattgpt-177) | token_overlap_ratio bound violation — repeated in-vocab tokens inflate ratio above 1.0; docstring example independently wrong | Open | Medium | Bug | August 11, 2026 |
 | [MATTGPT-180](#mattgpt-180) | Test fixture blind spot: test_formatting.py, test_filters.py, test_scoring.py build on phantom schema and pass against it | Open | High | Bug | August 11, 2026 |
@@ -1580,6 +1581,35 @@ Two findings retracted from earlier probe sessions: (1) stability differences at
 
 ---
 
+### MATTGPT-247
+**Role Match assessment failure paths write no Sheet row; API failures leave no production trace**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **File:** Role Match surface (file TBD -- confirm during pre-flight; same file as -240)
+- **Logged:** September 9, 2026
+
+**Finding:** The `_handle_assessment_error` handler and the JD-gate rejection path write only `logger.warning`, not `query_logger`. The success path calls `log_role_match_assessment`, so the happy path is logged; failure paths are invisible. On Streamlit Cloud, the container filesystem is ephemeral -- `logger.warning` output is gone after the session. An API rate limit, a network outage, or a malformed JSON response leaves no production trace.
+
+**Same shape as MATTGPT-230:** -230 was filed to end this exact pattern (missing Sheet row on failure) for the Ask Agy pipeline. Role Match has the same gap.
+
+**Split from -240:** This criterion was originally part of the -240 acceptance list ("An API failure writes a log row distinguishing the failure type"). It was split into a separate ticket because the gate/voice fix and the logging fix are independent -- a reviewer closing -240 should not need to verify Sheet writes to do so.
+
+**Scope:** All Role Match failure paths -- `_handle_assessment_error`, gate rejection (non-JD input), and any other path that currently skips `query_logger`. Each failure path should write a distinguishing row: failure type (rate limit, outage, gate rejection, malformed JSON) and enough context to diagnose in production.
+
+**Acceptance:**
+- An API failure (rate limit, outage, malformed JSON) writes a Sheet row via `query_logger` with the failure type in a distinguishing field.
+- A gate rejection (non-JD input rejected before LLM call) writes a Sheet row with reason "gate_rejection".
+- The success path is unchanged.
+- All rows visible in the production Sheet within the normal `query_logger` flush window.
+
+**Cross-references:**
+- MATTGPT-230 (query logger: same missing-on-failure pattern, Ask Agy pipeline)
+- MATTGPT-240 (gate + voice fix; this ticket is the logging half split from -240's original acceptance list)
+
+---
+
 ### MATTGPT-160
 **JD extraction rewrite: qualifier stripping, requirement-count variance, coverage miss, wall clock floor -- all one prompt**
 
@@ -1761,24 +1791,24 @@ The phrase is not invisible to keyword scoring. It scores on a single stopword t
 
 
 ### MATTGPT-173
-**Role Match JD validation: no defined behavior for malformed or atypical JD inputs**
+**Role Match JD validation: comp-heavy JD behavior unverified (short JD and non-JD input now handled by gate)**
 
 - **Status:** Open
 - **Priority:** Medium
 - **Type:** Issue
-- **Logged:** August 8, 2026
+- **Logged:** August 8, 2026 (scope narrowed September 9, 2026)
 
-**Issue:** Role Match's JD intake has no validation layer. The pipeline assumes a well-formed JD with requirements, qualifications, and role context. Observed failure modes and undefined behaviors:
+**Original scope (three failure modes):** comp-heavy JDs, extremely short JDs, non-JD input. Two are now handled by MATTGPT-240's gate: `_MIN_JD_WORDS = 30` in `_handle_submit_click` covers extremely short JDs; `_looks_like_jd` covers non-JD input. Both return a rejection before the LLM call. One failure mode remains.
 
-- **Comp-only JDs or JDs leading with salary ranges:** MATTGPT-099 (closed as Decided Against) established that the chatbot handles comp decline correctly. The Role Match assessment path is separate -- behavior on a JD where comp dominates the text is unverified. May silently drop, hallucinate a match, or emit a confusing assessment.
-- **Extremely short JDs:** A one-paragraph job post has insufficient signal for the extractor. Current behavior on extraction failure is unverified.
-- **Non-JD input:** Pasting a company overview, a recruiter note, or a requirements doc instead of a JD. Extractor may return requirements; assessment may proceed with misleading output.
+**Remaining scope -- comp-heavy JD:** A JD that leads with or is dominated by salary ranges and comp expectations clears the word-count and shape gates but may produce a misleading assessment. The pipeline will extract "requirements" from comp text and score them. Behavior is unverified.
 
-**Investigation first:** Before designing validation, run the three failure-mode inputs (comp-heavy JD, short JD, non-JD text) through the current pipeline and document actual behavior. The fix depends on what the pipeline does, not what it's assumed to do.
+**Note on cross-reference:** An earlier version of this ticket cited "MATTGPT-099 (closed as Decided Against)" for chatbot-side comp handling. -099 is Open (Role Match comp decision is unresolved). The Decided Against ticket for chatbot comp decline is MATTGPT-090 (May 29, 2026).
 
-**Fix shape (after investigation):** Likely a pre-extraction validation gate that checks minimum text length, presence of requirement-shaped language, and optionally warns the user if comp-only content is detected. Should not silently proceed with an extraction the gate suspects is malformed.
+**Investigation:** Run a comp-heavy JD (one that leads with base salary range, OTE, equity vesting schedule) through the current pipeline and document what the extractor produces and what the assessor emits. The fix depends on observed behavior.
 
-**Cross-references:** MATTGPT-089 (location/work-model/availability parsing -- adjacent input-handling gap), MATTGPT-099 (closed DA -- comp handling on chatbot side; Role Match side is distinct).
+**Fix shape (after investigation):** Either detect comp-dominant text at the gate and reject before extraction, or add a post-extraction check that fires when extracted requirements read as comp items rather than role criteria.
+
+**Cross-references:** MATTGPT-089 (location/work-model/availability parsing -- adjacent input-handling gap), MATTGPT-090 (Decided Against, May 29, 2026 -- chatbot-side comp decline; Role Match side is this ticket), MATTGPT-099 (Open -- Role Match comp decision, not yet settled), MATTGPT-240 (gate that handled short JD and non-JD paths).
 
 ---
 
@@ -2610,8 +2640,11 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 
 **Acceptance:**
 - A non-JD input (a recipe, a single word) is rejected before the LLM call with an honest message in Agy's voice.
-- An API failure writes a log row distinguishing the failure type (rate limit, outage, malformed JSON).
 - The error message on failure is in Agy's voice, not a generic system string.
+
+**Note on logging criterion:** An earlier version of this ticket included "An API failure writes a log row distinguishing the failure type." That criterion was split into MATTGPT-247. -240 closes when the gate and voice criteria above are met; -247 closes when the failure-path logging is in place.
+
+**Cross-references:** MATTGPT-173 (JD input validation -- sits alongside, not subsumed), MATTGPT-089 (location/work-model/availability parsing -- same file, pair in one pass), MATTGPT-247 (logging criterion split from this ticket).
 
 ---
 
