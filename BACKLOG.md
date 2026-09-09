@@ -30,7 +30,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 16. Rest of Role Match: **-160**, -173, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
--177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -246 (Role Match export: em dash in title, missing legend, gap icon mismatch, UI summary weaker than export)
+-177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -246 (Role Match export + share: em dash in titles, missing legend, missing evidence chips + summary in report, gap icon mismatch in export)
 
 **LATER — tier 2:** corpus work
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
@@ -102,7 +102,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-243](#mattgpt-243) | Role Match parallelization: as_completed concurrency 10, return_exceptions, top_k measurement, up-to-two citation fix | Open | High | Performance | September 2, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: both arms score ~80% strong on AT&T with genuine JD gaps; scoring is too generous | Open | High | Issue | September 2, 2026 |
 | [MATTGPT-245](#mattgpt-245) | Role Match streaming: render each requirement row as it lands via as_completed; blocked on -243 | Open | Medium | Enhancement | September 2, 2026 |
-| [MATTGPT-246](#mattgpt-246) | Role Match export mismatches: em dash in title, missing legend, gap icon differs, UI summary less descriptive than export | Open | Medium | Bug | September 9, 2026 |
+| [MATTGPT-246](#mattgpt-246) | Role Match export + share surfaces diverge from UI: em dash in titles, missing legend, missing evidence chips, missing summary block, gap icon mismatch | Open | Medium | Bug | September 9, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
 | [MATTGPT-168](#mattgpt-168) | Slot 1 is amplified without regard to margin -- tie or near-tie at slot 1 gets 80% of the answer | Open | High | Bug | August 5, 2026 |
@@ -1533,31 +1533,46 @@ Two findings retracted from earlier probe sessions: (1) stability differences at
 ---
 
 ### MATTGPT-246
-**Role Match export mismatches: em dash in title, missing legend, gap icon differs, UI summary less descriptive than export**
+**Role Match export + share surfaces diverge from UI: em dash in titles, missing legend, missing evidence chips, missing summary block, gap icon mismatch**
 
 - **Status:** Open
 - **Priority:** Medium
 - **Type:** Bug
-- **File:** `ui/pages/role_match.py:522` (`_build_export_html`)
+- **Files:** `ui/pages/role_match.py:435` (`_build_share_text`), `ui/pages/role_match.py:522` (`_build_export_html`)
 - **Logged:** September 9, 2026
 
-**Why this matters:** The printable export is what gets forwarded. Four small mismatches between the on-screen panel and the PDF make the forwarded artifact read as a different product from what the recruiter saw.
+**Two surfaces, one ticket.** Both the printable Export HTML and the shareable Report/clipboard text are built from the on-screen assessment and diverge from it. They are adjacent functions in the same file; fixing one without the other produces a three-way inconsistency.
 
-**Four deltas:**
+**Export HTML (`_build_export_html`, :522) deltas:**
 
-1. **Em dash in export title.** Rendered string: "Role Match -- Director of Product Engineering." Violates the repo-wide no-em-dash rule (CLAUDE.md Critical Rules). Slipped through because the em dash lives in the generated HTML string, not the Python source -- `grep -Pn "\xe2\x80\x94" *.py` would miss it. Fix: replace with a colon ("Role Match: Director of Product Engineering"). Add a test that greps the generated export string for em dashes so this class of violation surfaces at the unit level.
+1. **Em dash in export title.** Rendered string: "Role Match -- Director of Product Engineering." Violates the repo-wide no-em-dash rule (CLAUDE.md Critical Rules). The em dash lives in the generated HTML string, not the Python source -- `grep` on `.py` files misses it. Fix: colon separator ("Role Match: Director of Product Engineering"). Add a unit test asserting the generated export HTML contains no em dash.
 
-2. **Legend missing from the export.** On-screen panel has a legend explaining strong/partial/gap and the story-vs-profile evidence distinction. The exported PDF has neither. Icons appear with no key. Matters more in the export than in the UI: a PDF gets forwarded without the session context around it.
+2. **Legend missing.** On-screen panel has a legend explaining strong/partial/gap and the story-vs-profile evidence distinction. Export PDF has neither; icons appear with no key. Matters more in a forwarded PDF than in the UI, which has session context around it.
 
-3. **Gap icon differs across surfaces.** UI renders gaps as a red circled-X badge; export renders a red dot. The circled shape matches the strong (green circled-check) and partial (yellow circled-tilde) treatment on-screen -- the export dropped the shape but kept the color. Align to the circled-X.
+3. **Gap icon is a red dot, not a circled-X.** UI renders gaps as a red circled-X badge (consistent with strong green circled-check and partial yellow circled-tilde). Export dropped the shape. Align to circled-X.
 
-4. **UI summary line is less descriptive than the export's.** Export: "10 strong, 1 gap." UI: "10 1." The export already names what each glyph means. Align the UI summary to match the export wording, not the reverse. Both the summary construct and the consistency goal are in the same scope, so this fix belongs in this ticket.
+4. **UI summary line is weaker than the export's.** Export: "10 strong, 1 gap." UI: "10 1." Fix flows from export to UI: align UI summary to the export's wording.
+
+**Report / share text (`_build_share_text`, :435) deltas:**
+
+5. **Em dash in report title.** Rendered string: "Matt Pugmire -- Director of Product Engineering fit assessment" (line :467). Same CLAUDE.md violation as the export title, different exact string. Fix: colon. Same unit test coverage as item 1 should cover both generated strings.
+
+6. **Legend missing from report.** Plain-text report has check and cross marks with no key. Same issue as item 2; more constrained in plain text but the legend can be appended as a footer line ("Key: strong / partial ~ / gap").
+
+7. **Evidence chips absent from report.** The on-screen panel shows 10-20 story chips per requirement -- the primary evidence surface. The report has requirement text and verdict only, no evidence. This is the most significant information loss: the forwarded artifact strips the part that makes the assessment credible.
+
+8. **Summary block absent from report.** The on-screen panel has a SUMMARY box (e.g., "Strong: 10, Gap: Experience reporting to CTO"). The report output does not include this block. Confirm absence by checking whether `_build_share_text` appends the summary or only the per-requirement list.
+
+**Gap icon on Report (not a delta):** Report uses plain (matching the UI's mark, minus the circle chrome). Reasonable for plain text; not a defect.
 
 **Acceptance:**
-- Export title uses a colon separator, no em dash. A test asserts the generated export HTML does not contain an em dash character.
-- Export includes the legend block from the on-screen panel (strong/partial/gap definitions and evidence distinction).
-- Gap icon in the export matches the UI's circled-X badge.
-- UI summary line names verdicts: "N strong, N gap" matches the export's existing wording.
+- Both generated strings (export title, report title) contain no em dash character. A unit test asserts this for each.
+- Export includes the legend block.
+- Export gap icon matches UI circled-X.
+- UI summary line wording matches export ("N strong, N gap").
+- Report includes evidence chips per requirement (or a story-title list if chips are HTML-only).
+- Report includes the summary block.
+- Report includes a plain-text legend footer.
 
 **Cross-references:**
 - MATTGPT-067 (Role Match parent: input controls + summary block)
