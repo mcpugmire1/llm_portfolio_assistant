@@ -190,9 +190,12 @@ One "go" from Matt ships the full cycle without re-asking between gates. Re-ask 
 - **Refactor (optional):** Clean up while keeping tests passing.
 
 ### Unit test Red-Green cycle
-The two-Red split applies to BDD where `.feature` and `test_X.py` are separate artifacts with a meaningful intermediate state. For unit tests, one Red commit: tests written fully, failing on assertion errors (not import errors). Any minimal production plumbing needed for imports to succeed goes in the same Red commit. Green is still a separate commit. The non-negotiable is the same: tests exist before implementation and fail for the right reason.
+The two-Red split applies to BDD where `.feature` and `test_X.py` are separate artifacts with a meaningful intermediate state. For unit tests, one Red commit: tests written fully, failing on assertion errors (not import errors). Green is still a separate commit. The non-negotiable is the same: tests exist before implementation and fail for the right reason.
+
+When testing a new function that doesn't exist yet, the Red commit includes the test file plus stub signatures raising `NotImplementedError` -- nothing else. Tests then fail on assertion errors, not import errors. A stub is a function signature and `raise NotImplementedError` only: no logic, no returns, no constants.
 
 ### Validation rules
+- **When reporting test results, state explicitly what was tested and what was not.** A pass count covers the scenarios run -- it does not validate untested changes in the same commit. Never present partial coverage as full validation.
 - **Paste literal pytest output at every gate** - never self-summarize (see Critical Rules)
 - **Scope per-gate runs to the relevant test file** - `pytest tests/bdd/steps/test_X.py -v`, not the full suite
 - **A `.feature` file without its `test_*.py` binding is documentation, not a test**
