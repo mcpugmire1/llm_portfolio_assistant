@@ -140,7 +140,6 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-235](#mattgpt-235) | Resolve LLM-text assertion classes so pre-push gate can widen to agy-behavior and structural suites | Open | High | Refactor / Test | September 1, 2026 |
 | [MATTGPT-236](#mattgpt-236) | Remove router topical family dimension: delete 3 inert families, rewire 2 set memberships, remove 6 topic-axis families | Open | Medium | Refactor | September 1, 2026 |
 | [MATTGPT-239](#mattgpt-239) | Router confidence floor: reject queries that score below a threshold across all families before Pinecone query | Blocked | Medium | Enhancement | September 2, 2026 |
-| [MATTGPT-240](#mattgpt-240) | Role Match rejection contract: no gate before LLM call, failure path never read; same shape as MATTGPT-230 | Open | High | Bug | September 2, 2026 |
 | [MATTGPT-241](#mattgpt-241) | Dead prose in backend_service.py: out_of_scope_response and personal_response built but never rendered | Open | Low | Hygiene | September 2, 2026 |
 | [MATTGPT-226](#mattgpt-226) | Dead `.main` selectors across `ui/styles/` after `.main → .stMain` refactor: 31 selectors, ~299 declarations, all matching 0 elements | Open | Medium | Refactor / Tech debt | August 31, 2026 |
 | [MATTGPT-222](#mattgpt-222) | Three operational alarms: zero-score, anchor-cache drift, out_of_scope on known entity | Open | High | Enhancement | August 30, 2026 |
@@ -2619,32 +2618,6 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 - `low_confidence` near-miss (score at or above floor): trail copy, no chips. Near-miss behavior is unchanged.
 - `low_confidence` fell-through (score below floor): Plott Hound line with chips, reusing `BANNER_COPY["rule"]` and `RULE_CHIPS`.
 - Legitimate queries at 0.326 and above are unaffected (verified against the probe set and a sample of production queries).
-
----
-
-### MATTGPT-240
-**Role Match rejection contract: no gate before LLM call, failure path never read; same shape as MATTGPT-230**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Bug
-- **File:** Role Match surface (file TBD -- confirm during pre-flight)
-- **Logged:** September 2, 2026
-- **Related:** MATTGPT-173 (sits alongside, not subsumed -- -173 covers input quality and validation for well-intentioned but malformed JDs; this ticket covers the missing gate and silent failure path). MATTGPT-089 (location/work-model/availability parsing -- same file, pair in one pass rather than two visits).
-
-**Two gaps (September 2, 2026 rejection-contract audit):**
-
-**Gap 1 -- no gate before the LLM call:** Any pasted text buys a real LLM call and renders a requirement table with the same confidence as a genuine assessment. A recipe, a paragraph, one word -- all proceed through the full pipeline. The fix likely needs no new machinery: `is_nonsense` and the router already exist, and a JD is long enough that a cheap length-and-shape check catches most junk before either fires.
-
-**Gap 2 -- failure path is never read:** The `except Exception` branch stores `str(e)` in `role_match_error`, which is never read. An API outage, a rate limit, and malformed JSON all render "Something went wrong. Please try again." in nobody's voice, and none of them log. Same shape as MATTGPT-230: a failure that leaves no trace.
-
-**Acceptance:**
-- A non-JD input (a recipe, a single word) is rejected before the LLM call with an honest message in Agy's voice.
-- The error message on failure is in Agy's voice, not a generic system string.
-
-**Note on logging criterion:** An earlier version of this ticket included "An API failure writes a log row distinguishing the failure type." That criterion was split into MATTGPT-247. -240 closes when the gate and voice criteria above are met; -247 closes when the failure-path logging is in place.
-
-**Cross-references:** MATTGPT-173 (JD input validation -- sits alongside, not subsumed), MATTGPT-089 (location/work-model/availability parsing -- same file, pair in one pass), MATTGPT-247 (logging criterion split from this ticket).
 
 ---
 

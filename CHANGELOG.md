@@ -8,6 +8,18 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### My Work
 
+**September 10, 2026 — Role Match rejection contract: gate before LLM call, failure branch speaks in Agy voice (MATTGPT-240)** -- `0f08f10`
+
+Two gaps closed. Gap 1: any pasted text previously bought a real LLM call regardless of content. `_looks_like_jd` now rejects at the gate on a word-boundary match against 15 JD-shape terms (`responsibilities`, `requirements`, `experience`, `years`, `qualifications`, `job`, `role`, `position`, `skills`, `candidate`, `salary`, `compensation`, `benefits`, `apply`, `reporting to`); a 500-word recipe fails the same as a 20-word one. `_MIN_JD_WORDS = 30` short-circuits trivially short inputs before the shape check. Gate rejection copy: "I couldn't find a job description here. I look for responsibilities, requirements, or qualifications." -- names what happened and what is expected; ✕ Clear below carries the next step, so no instruction needed in the banner.
+
+Gap 2: the `except Exception` branch stored `str(e)` in `role_match_error`, which was never read, rendering a generic system string in nobody's voice. `_handle_assessment_error` now returns one of two visitor-facing strings based on error class: retryable (`RateLimitError`, `APIConnectionError`, `APITimeoutError`, `InternalServerError`) shows the "quick breather" copy from MATTGPT-230; not-retryable shows "Something broke on my end." `str(e)` never reaches the visitor; `logger.warning` tags class and payload for local diagnostics. Production Sheet writes for failure paths are tracked in MATTGPT-247.
+
+`st.form` wraps the textarea and submit button so widget value commits atomically with the click, killing a two-click bug where uncommitted textarea content let the first click consume the widget commit without registering as a submit. Gate, retryable failure, and not-retryable failure all render in the left column above the textarea in the same arrangement. `role_match_jd_persisted` is written on all rejection paths so paste survives navigation-away-and-back, matching success-path behavior.
+
+Test contract: 10 unit tests pass in 0.53s; fast BDD gate scenario passes in 8.17s with a recipe fixture (110+ words, no shape terms); slow BDD real-JD pass scenario passes in 22.25s. Banner placement and removal of inline Clear are manually verified only -- layout assertions are not in CI.
+
+---
+
 **September 2, 2026 — personal branch HARD_ACCEPT gate + My Work zero-result routing (MATTGPT-234)** -- `4c3cde3`, `a2e7e7a`, `824e59e`
 
 Generic off-topic queries (bananas, world series) were scoring low on the `personal` family (0.223) and hitting the personal hard-stop before `overlap:0.00` could run, returning "I'm focused on Matt's professional experience" -- copy that implied the query was personal rather than off-topic. Fix (same one-line pattern as MATTGPT-219): HARD_ACCEPT gate at both personal branch call sites. Score 0.223 does not clear 0.80, so the hard-stop does not fire and the query falls through to the overlap gate. Rejection eval run before and after; all eight real personal queries still clear 0.80; no legitimate rejections lifted.
