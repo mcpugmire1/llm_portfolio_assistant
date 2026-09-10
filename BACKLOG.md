@@ -10,23 +10,23 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-09-02)
 
 **NOW**
-1. **-240** — Role Match has no rejection contract: no gate before the LLM call, and the failure path stores the error in a variable that is never read. Recruiter-facing gap with no logging. In flight.
-2. **-243** — Role Match parallelization: architecture decided (fan-out, 31s vs 51s, citations tie on two JDs). `as_completed` concurrency 10, `return_exceptions=True`, top_k measured at 10 vs AT&T row 6 in same pass, "up to two" citation fix. (MATTGPT-159 closed as decided.)
-3. **-244** — Role Match assessor calibration: both arms at ~80% strong on a JD with real gaps. A recruiter reading "strong" on a requirement the corpus doesn't cover discounts the other twenty-two rows. Prompt edit, no architecture dependency.
-4. **-089** — Role Match: location, work model, availability. May 22 recruiter finding. Pair with -240 in the same pass once rejection contract is solid.
-5. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
-6. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
-7. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
-8. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
-9. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
-10. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+1. **-243** — Role Match parallelization: architecture decided (fan-out, 31s vs 51s, citations tie on two JDs). `as_completed` concurrency 10, `asyncio.to_thread`, DEFAULT_TOP_K 5->10 (AT&T row 6 assertion), "up to two" citation fix. Exceptions propagate as today. (MATTGPT-159 closed as decided.)
+2. **-248** — Role Match partial-failure: `return_exceptions=True` plus seven render/export/log surfaces. Design pass before Code opens the file. Blocked on -243; ships immediately after.
+3. **-245** — Role Match streaming: requirement rows appear at ~5s and fill in as each call lands. Blocked on -243 and -248.
+4. **-244** — Role Match assessor calibration: both arms at ~80% strong on a JD with real gaps. A recruiter reading "strong" on a requirement the corpus doesn't cover discounts the other twenty-two rows. Prompt edit, no architecture dependency.
+5. **-089** — Role Match: location, work model, availability. May 22 recruiter finding.
+6. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
+7. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
+8. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
+9. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
+10. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
+11. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT**
-11. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
-12. **-086** — Environment stamp on every log write. Makes every future log analysis exact rather than heuristic.
-13. **-223** — Add router_score and router_family columns to Sheet query row. Two columns, seven call sites. Unblocks -239's floor threshold decision; clean env stamps make future log analysis exact rather than heuristic.
-14. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
-15. **-245** — Role Match streaming: requirement rows appear at ~5s and fill in as each call lands. Blocked on -243. 31s-to-first-content is the marginal gain once -243 ships.
+12. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
+13. **-086** — Environment stamp on every log write. Makes every future log analysis exact rather than heuristic.
+14. **-223** — Add router_score and router_family columns to Sheet query row. Two columns, seven call sites. Unblocks -239's floor threshold decision; clean env stamps make future log analysis exact rather than heuristic.
+15. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
 16. Rest of Role Match: **-160**, -173, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
@@ -99,7 +99,8 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-155](#mattgpt-155) | New corpus story — sell-side commercial story (HSBC-anchored): pricing/costing, resourcing, outcome-based contracting | Open | Medium | Action | July 29, 2026 |
 | [MATTGPT-156](#mattgpt-156) | Vendor commercial/spend management gap — decide whether corpus-zero on invoice/rate-card/procurement is a real claim or honest gap | Open | Low | Investigation | July 29, 2026 |
 | [MATTGPT-160](#mattgpt-160) | JD extraction rewrite: qualifier stripping, requirement-count variance, coverage miss, wall clock floor -- all one prompt | Open | High | Bug / Performance | July 31, 2026 |
-| [MATTGPT-243](#mattgpt-243) | Role Match parallelization: as_completed concurrency 10, return_exceptions, top_k measurement, up-to-two citation fix | Open | High | Performance | September 2, 2026 |
+| [MATTGPT-243](#mattgpt-243) | Role Match parallelization: as_completed concurrency 10, asyncio.to_thread, DEFAULT_TOP_K 5->10, up-to-two citation fix | Open | High | Performance | September 2, 2026 |
+| [MATTGPT-248](#mattgpt-248) | Role Match partial-failure handling: return_exceptions=True, seven render/export/log surfaces, panel-level claim guard | Open | High | Bug | September 10, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: both arms score ~80% strong on AT&T with genuine JD gaps; scoring is too generous | Open | High | Issue | September 2, 2026 |
 | [MATTGPT-245](#mattgpt-245) | Role Match streaming: render each requirement row as it lands via as_completed; blocked on -243 | Open | Medium | Enhancement | September 2, 2026 |
 | [MATTGPT-246](#mattgpt-246) | Role Match export + share surfaces diverge from UI: em dash in titles, missing legend, missing evidence chips, missing summary block, gap icon mismatch | Open | Medium | Bug | September 9, 2026 |
@@ -1442,13 +1443,13 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 ---
 
 ### MATTGPT-243
-**Role Match parallelization: as_completed concurrency 10, return_exceptions, top_k measurement, up-to-two citation fix**
+**Role Match parallelization: as_completed concurrency 10, asyncio.to_thread, DEFAULT_TOP_K 5->10, up-to-two citation fix**
 
 - **Status:** Open
 - **Priority:** High
 - **Type:** Performance
 - **File:** `services/jd_assessor.py`
-- **Logged:** September 2, 2026
+- **Logged:** September 2, 2026 (scope narrowed September 10, 2026)
 - **Decided:** Architecture audit complete (MATTGPT-159 closed). Parallelize existing pipeline.
 
 **Decision record (from MATTGPT-159 closure):** Two-arm audit across demo JD and AT&T JD. Fan-out (Arm 1) ~31s wall clock vs long-context (Arm 2) ~51s. Citation grounding tied across both JDs -- 8 SUPPORTED vs 7 SUPPORTED on AT&T, different failure rows, 0 UNSUPPORTED in either arm. No architecture migration, no new prompt surface, streaming per requirement stays available because per-requirement structure is unchanged. Long-context rejected.
@@ -1456,23 +1457,25 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 Two findings retracted from earlier probe sessions: (1) stability differences attributed to architecture were extraction nondeterminism, not fan-out vs long-context; (2) fan-out's citation-grounding advantage on the demo JD did not generalize -- AT&T row 6 (calm/decisive incident leadership) was a retrieval-window failure that long-context's whole-corpus visibility caught, not an architecture quality difference. Both are now recorded here; do not re-litigate either.
 
 **Scope:**
-- Parallelize `assess` calls using `asyncio.as_completed` (or `ThreadPoolExecutor`) at concurrency 10. Per-requirement reasoning with `gpt-4o` stays unchanged -- this is a concurrency change only.
-- `return_exceptions=True` with per-requirement error rows. One failed call must not kill the full assessment.
-- **top_k: measure at 10 in this same pass.** AT&T row 6 (calm/decisive leadership during incidents) is the test case -- does the JP Morgan Dynamics crisis story appear in the candidate set at top_k=10? Run is cheap in parallel (larger candidate set costs tokens per call; wall clock impact is near zero across four waves). Ship whichever value the measurement supports; do not default to the old value without measuring.
-- Change "exactly two citations" to "up to two citations" in the assessment prompt. "Exactly two" forced a second citation on requirements that had only one strong story, producing the RELATED reach seen in demo JD row 9 (Arm 1) and -088 audit.
-- `re-run all three JDs` to confirm verdicts unchanged after parallelization.
+- Parallelize `assess` calls using `asyncio.as_completed` at concurrency 10, wrapping the sync OpenAI client via `asyncio.to_thread`. Per-requirement `gpt-4o` reasoning is unchanged; this is a concurrency change only.
+- Exceptions propagate as today: one failure fails the full assessment, `_failure_needs_rerun` fires, and the existing banner renders. `return_exceptions=True` and per-requirement error-row handling are scoped to MATTGPT-248, which ships immediately after.
+- **DEFAULT_TOP_K: raise from 5 to 10.** AT&T row 6 (calm/decisive incident leadership) is the test case. Assert: JP Morgan Dynamics crisis story ID present in the Pinecone candidate set at top_k=10 and absent at top_k=5, using the AT&T incident-leadership requirement text as the query. No LLM call in this test -- retrieval only. There are three `DEFAULT_TOP_K` call sites; identify them during pre-flight and place the comment at the Role Match retrieval call site only (the site that actually queries Pinecone for this pipeline), not at the constant definition or any other consumer.
+- Change "exactly two citations" to "up to two citations" in the assessment prompt. "Exactly two" forced a second citation on requirements with only one strong story, producing RELATED reach seen in demo JD row 9 (Arm 1) and -088 audit.
+- Re-run demo and AT&T JDs after parallelization to confirm verdicts unchanged (verdict shifts on rows with more candidates from raised top_k are expected and correct).
 
 **Acceptance:**
 - Cold-path wall clock at or below 35s on a novel JD (cache-busted). Measure by the same method as the 84.7s baseline: timestamped click, Streamlit status poll at 50ms, done when absent for 1.5s.
-- No verdict changes from the pre-parallelization baseline on the demo and AT&T JDs (verdicts may shift on rows that get more candidates from a raised top_k -- that is expected and correct, not a regression).
-- Per-requirement error rows render rather than killing the full assessment when one call fails.
-- top_k value documented in a comment at the call site with the AT&T row 6 test result.
+- No verdict regressions from the pre-parallelization baseline on demo and AT&T JDs.
+- One failed call fails the full assessment (unchanged behavior). `_failure_needs_rerun` fires. Banner unchanged.
+- JP Morgan Dynamics crisis story ID present at top_k=10, absent at top_k=5, for AT&T incident-leadership requirement text. No LLM call.
+- Comment at the Role Match retrieval call site names the AT&T row 6 test result and identifies which of the three `DEFAULT_TOP_K` sites this is.
 
 **Cross-references:**
 - MATTGPT-159 (closed; decision record and full audit history there)
 - MATTGPT-160 (extraction rewrite; separate ticket, same file -- do not conflate)
 - MATTGPT-083 (spinner inconsistency; perceived-performance half; worth landing regardless of when -243 ships)
-- MATTGPT-245 (streaming progressive render; cross-reference only -- separate ticket, blocked on -243 shipping `as_completed`)
+- MATTGPT-248 (partial-failure handling; `return_exceptions=True` and error-row surfaces split here; ships immediately after)
+- MATTGPT-245 (streaming progressive render; blocked on -243 and -248)
 
 ---
 
@@ -1506,28 +1509,29 @@ Two findings retracted from earlier probe sessions: (1) stability differences at
 ---
 
 ### MATTGPT-245
-**Role Match streaming: render each requirement row as it lands via as_completed; blocked on -243**
+**Role Match streaming: render each requirement row as it lands via as_completed; blocked on -243 and -248**
 
 - **Status:** Blocked
 - **Priority:** Medium
 - **Type:** Enhancement
 - **File:** `ui/pages/role_match.py`, `services/jd_assessor.py`
 - **Logged:** September 2, 2026
-- **Dependencies:** MATTGPT-243 (`as_completed` must ship before the UI can consume per-requirement results)
+- **Dependencies:** MATTGPT-243 (`as_completed` must ship before the UI can consume per-requirement results), MATTGPT-248 (partial-failure surfaces must be defined before the streaming render loop can handle error rows)
 
 **What this is not:** MATTGPT-083 is spinner inconsistency -- the loading indicator shown while waiting for a result. This ticket is about the absence of waiting: requirement rows appearing at ~20s and filling in as each `gpt-4o` call completes. Cross-referencing -083 is correct; folding this into -083 is not. If this scope lands inside -083, whoever picks it up will scope it as "fix the spinner" and the actual rendering change won't happen.
 
 **Why `as_completed` enables it:** The current sequential pipeline must wait for all 23 calls before rendering anything. Once -243 parallelizes with `as_completed`, individual requirement results are available as they land (~3-5s per wave of 10 concurrent calls). The UI can render each row as soon as its result arrives, producing a progressive fill from ~5s rather than an 85s blank wait.
 
-**Scope:** Wire the `as_completed` results from the parallelized assessor into a Streamlit streaming-compatible render loop. Each requirement row renders as its assessment completes rather than after the full list returns. Handle the error-row case from `-243`'s `return_exceptions=True`: error rows render with a visible placeholder rather than blocking the rest.
+**Scope:** Wire the `as_completed` results from the parallelized assessor into a Streamlit streaming-compatible render loop. Each requirement row renders as its assessment completes rather than after the full list returns. Error-row rendering uses the placeholder defined in -248.
 
 **Acceptance:**
 - First requirement rows visible within 10s of submission on a cold-path JD.
 - All rows render in the same final state as the current full-assessment render.
-- Error rows show a placeholder (not a blank or a crash).
+- Error rows show the placeholder defined in -248 (not a blank or a crash).
 
 **Cross-references:**
 - MATTGPT-243 (parallelization; must ship first -- this ticket has no value on the sequential pipeline)
+- MATTGPT-248 (partial-failure handling; must ship first -- error-row placeholder is defined there)
 - MATTGPT-083 (spinner inconsistency; perceived-performance half; independent, worth landing regardless)
 
 ---
@@ -1606,6 +1610,48 @@ Two findings retracted from earlier probe sessions: (1) stability differences at
 **Cross-references:**
 - MATTGPT-230 (query logger: same missing-on-failure pattern, Ask Agy pipeline)
 - MATTGPT-240 (gate + voice fix; this ticket is the logging half split from -240's original acceptance list)
+
+---
+
+### MATTGPT-248
+**Role Match partial-failure handling: return_exceptions=True, seven render/export/log surfaces, panel-level claim guard**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **File:** `ui/pages/role_match.py`, `services/jd_assessor.py`, `ui/components/role_match_summary.py`
+- **Logged:** September 10, 2026
+- **Dependencies:** MATTGPT-243 (`as_completed` must ship before per-requirement results are individually addressable)
+
+**What this is:** Once -243 ships `as_completed`, individual requirement results are available as they complete. This ticket wires `return_exceptions=True` so one failed call does not kill the full assessment, and updates every downstream surface that must handle a mix of assessed and error rows.
+
+**Design pass required before Code opens the file.** The worst case this ticket exists to prevent: "strong match across all requirements" appearing above rows that were never assessed, in a forwarded PDF. That sentence in the report becomes a liability. The panel-level claim (the summary box and the recommendation line) must not assert anything about requirements whose assessment result is an exception. The design question is what a partially-assessed match claims -- not whether to show error rows, but what the header says when some rows are errors.
+
+**Seven surfaces that must handle error rows (September 10, 2026 audit):**
+1. `compute_recommendation` -- recommendation logic must exclude error rows from its strong/gap counts; must not produce a recommendation if error rows are present above a threshold.
+2. `_render_requirement_card` -- error row needs a visible placeholder (not a blank, not a crash).
+3. Badge CSS -- strong/partial/gap badge rendering; error row needs its own visual state.
+4. `_render_section` and export CSS -- section grouping logic must handle a row that has no verdict; export HTML must render the error state without breaking layout.
+5. `_build_share_text` -- share text must omit or flag error rows; must not forward a verdict that does not exist.
+6. The legend -- must include an error-row entry if error rows can appear in the output.
+7. `log_role_match_assessment` -- must log partial-assessment events with the error count; must not log a full-assessment row when some requirements errored.
+
+**`role_match_summary.py` guard:** Both functions in this module must include a guard so the zero-assessed case cannot fire with errors present. If all rows errored, the summary must not render as if zero requirements were found.
+
+**Acceptance:**
+- `return_exceptions=True` in the `as_completed` loop. One failed requirement call does not kill the full assessment.
+- Error rows render with a visible placeholder in the UI. No blank rows, no crashes.
+- `compute_recommendation` excludes error rows from strong/gap counts.
+- Panel-level claim (summary box, recommendation line) does not assert coverage of requirements whose result is an exception. Design decision on exact copy must be made before implementation starts.
+- `_build_share_text` does not include a verdict for error rows.
+- `log_role_match_assessment` logs the error count alongside assessed counts.
+- Zero-assessed guard in `role_match_summary.py`: cannot fire if errors are present.
+- Export HTML renders without layout breakage when error rows are present.
+
+**Cross-references:**
+- MATTGPT-243 (parallelization; `as_completed` is the prerequisite -- this ticket has no value on the sequential pipeline)
+- MATTGPT-245 (streaming progressive render; also blocked on -243 and this ticket)
+- MATTGPT-246 (export + share surface audit; overlapping file, coordinate landing order)
 
 ---
 
