@@ -1694,13 +1694,30 @@ Requirement: "Calm, decisive leadership during incidents, escalations, and high-
 Target: "Rescuing and Stabilizing JP Morgan's TS Dynamics CRM Program" (`rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase`).
 Result: target at rank 18, score 0.3733. Ranks 1-8 are general leadership stories with no incident-specific vocabulary.
 
-**Full ranked 25 (paste from probe output -- not regenerated here; run `probe_243_top_k_rank.py` against current corpus):**
+**Top 8 and target (September 2026, `probe_243_top_k_rank.py`, top_k=25):**
 
 ```
-[paste full ranked-25 output here]
+rank  score   id-slug                                                          client
+----  ------  ---------------------------------------------------------------  --------------------
+   1  0.4583  leadership-philosophy-how-i-lead                                 accenture
+   2  0.4278  what-i-learned-about-sustainable-leadership                      accenture
+   3  0.4143  leading-people-from-delivery-teams-to-a-150-person-organization  fortune-500-clients
+   4  0.3966  integrating-play-into-work-to-enhance-team-motivation            accenture
+   5  0.4019  about-matt-my-leadership-journey                                 accenture
+   6  0.3939  making-it-safe-to-take-risks-and-be-wrong                        accenture
+   7  0.3833  confronting-a-quality-crisis-through-coaching-and-culture-change norfolk-southern
+   8  0.3904  empowering-teams-through-decentralized-decision-making           accenture
+  ...
+  18  0.3733  rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program      jp-morgan-chase  <== target
 ```
 
-**This is not a top_k problem.** Widening to top_k=20 would hand the assessor the story at rank 18, but at roughly 4x the per-call token cost and with eighteen candidates rather than five -- buying nothing on any other row. The root cause is the ranker placing a topically dead-on story below eight weaker ones, not the window cutting off a story that sits just outside the cutoff.
+Full ranked 25 available from `probe_243_top_k_rank.py` (re-runnable against current corpus).
+
+**Pattern in the top 8:** 6 Accenture, 1 Fortune 500 Clients arc-story placeholder (MATTGPT-166), 1 Norfolk Southern. Seven of eight are internal-titled or arc stories; only rank 7 ("Confronting a Quality Crisis through Coaching and Culture Change" -- Norfolk Southern) is a real client-engagement crisis story. The target JP Morgan crisis story at rank 18 is a second real client-engagement crisis story.
+
+**The ranker is not ignoring the crisis signal entirely.** Rank 7 is crisis-adjacent. The pattern looks more like Accenture-title clustering promoting internal leadership prose above two out of two real client-crisis stories. Whether this maps to -168 (general outranking specific at slot 1), -077 (noun-overlap contamination), or reproduces -146 (Professional Narrative leakage into filtered results) is an open question. The raw data above is the diagnostic starting point.
+
+**This is not a top_k problem.** Widening the window to top_k=20 would surface the target at rank 18, but at roughly 4x the per-call token cost and with eighteen candidates rather than five, buying nothing on any other row. The root cause is the ranker placing a topically dead-on story below eight weaker ones.
 
 **Third retraction from -159 probe sessions:** The original hypothesis was "a retrieval-window failure that long-context's whole-corpus visibility caught." The rank-18 measurement disconfirms this. A window failure means the story sits just outside the cutoff; rank 18 at top_k=25 means the ranker is the problem. Do not re-derive the window hypothesis. top_k was removed from -243's scope on this finding.
 
