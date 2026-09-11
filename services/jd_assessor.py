@@ -13,13 +13,12 @@ Architecture: Three-step pipeline (see ADR 016)
 import asyncio
 import json
 import os
+import time
 from pathlib import Path
 
 from openai import OpenAI
 
-from config.debug import (
-    DEBUG,  # noqa: F401  # referenced by Green timing prints; import lands in Red so the test wiring fails loudly if it is ever removed
-)
+from config.debug import DEBUG
 from services.pinecone_service import pinecone_semantic_search
 
 # =============================================================================
@@ -339,7 +338,9 @@ def run_assessment(jd_text: str, stories: list[dict]) -> dict:
     client = _get_openai_client()
 
     # Stage 1
+    _t_extract_start = time.perf_counter()
     extraction = extract_requirements(client, jd_text)
+    _t_extract_ms = (time.perf_counter() - _t_extract_start) * 1000.0
 
     # Build flat list with category attached so the UI can group by required vs preferred
     all_requirements = []
@@ -355,11 +356,25 @@ def run_assessment(jd_text: str, stories: list[dict]) -> dict:
     for r in extraction.get("implicit_requirements", []) or []:
         all_requirements.append({"text": r["requirement"], "category": "required"})
 
+    if DEBUG:
+        print(
+            f"[jd_assessor] extraction_ms={_t_extract_ms:.1f} "
+            f"n_reqs={len(all_requirements)}"
+        )
+
     # Stages 2 + 3 -- MATTGPT-243: parallel fan-out via asyncio.as_completed
     # at concurrency _CONCURRENCY, wrapping the sync OpenAI and Pinecone
     # clients with asyncio.to_thread. Sequential loop stays available in
     # git history if the rewrite ever needs to be reverted.
+    _t_fanout_start = time.perf_counter()
     match_results = asyncio.run(_fan_out_assessments(client, all_requirements, stories))
+    _t_fanout_ms = (time.perf_counter() - _t_fanout_start) * 1000.0
+
+    if DEBUG:
+        print(
+            f"[jd_assessor] fan_out_ms={_t_fanout_ms:.1f} "
+            f"n_reqs={len(all_requirements)}"
+        )
 
     return {
         "extraction": extraction,
