@@ -8,6 +8,18 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### My Work
 
+**September 11, 2026 — Role Match parallelization: as_completed concurrency 10, per-stage timing, alternating-arm closeout (MATTGPT-243)** -- `9d51a77` (Green), `8d37405` (closeout)
+
+Sequential per-requirement assessment loop replaced with `asyncio.as_completed` at concurrency 10, wrapping the sync OpenAI client via `asyncio.to_thread`. Per-requirement `gpt-4o` reasoning unchanged; this is a concurrency-only change. On exception, pending futures are cancelled before propagation so abandoned futures do not emit "Task exception was never retrieved" on stderr. One failed call still fails the full assessment; `_failure_needs_rerun` fires; banner unchanged. `return_exceptions=True` and per-requirement error-row handling are deferred to MATTGPT-248.
+
+Follow-on commits added DEBUG-gated per-stage timing (`run_assessment` extraction vs assessment split, attributable concurrent-retrieval output, click-to-render wall clock, per-call `assess_call_ms` emission) and an alternating-arm concurrency probe on the SEL JD (concurrency 10 vs 5). All timing instrumentation is DEBUG-gated and does not affect production output.
+
+"Up to two citations" wording was confirmed pre-existing in `JD_ASSESSMENT_PROMPT_TEMPLATE`; no prompt edit was made. `DEFAULT_TOP_K` stayed at 5; the proposed raise was removed when `probe_243_top_k_rank.py` showed the JP Morgan crisis story at rank 18 at top_k=25 -- a ranker problem, not a window problem, filed as MATTGPT-249.
+
+Eleven commits: `5871943` (loop characterization test, earlier session), `9d51a77` through `8d37405` (today). Decision record and three retracted findings are in the closed MATTGPT-159 ticket.
+
+---
+
 **September 10, 2026 — Role Match rejection contract: gate before LLM call, failure branch speaks in Agy voice (MATTGPT-240)** -- `0f08f10`
 
 Two gaps closed. Gap 1: any pasted text previously bought a real LLM call regardless of content. `_looks_like_jd` now rejects at the gate on a word-boundary match against 15 JD-shape terms (`responsibilities`, `requirements`, `experience`, `years`, `qualifications`, `job`, `role`, `position`, `skills`, `candidate`, `salary`, `compensation`, `benefits`, `apply`, `reporting to`); a 500-word recipe fails the same as a 20-word one. `_MIN_JD_WORDS = 30` short-circuits trivially short inputs before the shape check. Gate rejection copy: "I couldn't find a job description here. I look for responsibilities, requirements, or qualifications." -- names what happened and what is expected; ✕ Clear below carries the next step, so no instruction needed in the banner.
