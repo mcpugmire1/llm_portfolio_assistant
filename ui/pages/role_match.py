@@ -15,6 +15,9 @@ from urllib.parse import urlencode
 
 import streamlit as st
 
+from config.debug import (
+    DEBUG,  # noqa: F401  # referenced by Green in _debug_print_click_to_render; import lands in Red so the wiring test fails loudly if it is ever removed
+)
 from scripts.utils import slugify
 from services.role_match_summary import build_discussion_points, compute_summary_counts
 from ui.components.action_buttons import (
@@ -117,6 +120,24 @@ def _handle_assessment_error(e: Exception) -> str:
 # the same banner treatment as a wrong-shape rejection -- from their side,
 # a 25-word paste and a recipe are the same problem.
 _MIN_JD_WORDS = 30
+
+
+def _debug_print_click_to_render(total_ms: float, n_reqs: int) -> None:
+    """Click-to-render timing emit for Role Match.
+
+    Green will print `[role_match] total_ms=<float:.1f> n_reqs=<int>` when
+    DEBUG=True and be a no-op when False. The number captures the full
+    submit-branch + _render_results_panel span, so it ALWAYS exceeds
+    extraction_ms + fan_out_ms; the delta is the Streamlit render-tree-build
+    cost and any small pre/post overhead. Browser paint is on top of that
+    and out of scope for a Python-side timer.
+
+    Extracted so it can be unit-tested with capsys under a plain patch of
+    the DEBUG flag on ui.pages.role_match, without needing a Streamlit
+    runtime. The wiring around _render_results_panel is exercised
+    end-to-end by manual runs and BDD.
+    """
+    raise NotImplementedError
 
 
 def _handle_submit_click() -> None:
