@@ -11,8 +11,8 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 **NOW**
 1. **-243** — Role Match parallelization: architecture decided (fan-out, 31s vs 51s, citations tie on two JDs). `as_completed` concurrency 10, `asyncio.to_thread`, DEFAULT_TOP_K 5->10 (AT&T row 6 assertion), "up to two" citation fix. Exceptions propagate as today. (MATTGPT-159 closed as decided.)
-2. **-248** — Role Match partial-failure: `return_exceptions=True` plus seven render/export/log surfaces. Design pass before Code opens the file. Blocked on -243; ships immediately after.
-3. **-245** — Role Match streaming: requirement rows appear at ~5s and fill in as each call lands. Blocked on -243 and -248.
+2. **-248 + -246 + -247** — Role Match partial-failure pass. -248: `return_exceptions=True`, error-row rendering, honest count across all three summary surfaces, `build_discussion_points` guard. -246 folds in: em dashes in both titles, missing legend, missing evidence chips and summary in report, gap icon in export -- `_ex_count_line` and `_build_share_text` are already open. -247 folds in: failure-path Sheet write via `query_logger` belongs in the same branch -248 rewrites. Blocked on -243; ships immediately after.
+3. **-245** — Role Match streaming: requirement rows appear at ~20s (extraction is 14-20s; nothing renders before it completes) and fill in as each call lands. Blocked on -243 and -248.
 4. **-244** — Role Match assessor calibration: both arms at ~80% strong on a JD with real gaps. A recruiter reading "strong" on a requirement the corpus doesn't cover discounts the other twenty-two rows. Prompt edit, no architecture dependency.
 5. **-089** — Role Match: location, work model, availability. May 22 recruiter finding.
 6. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
@@ -30,7 +30,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 16. Rest of Role Match: **-160**, -173, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
--177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -246 (Role Match export + share: em dash in titles, missing legend, missing evidence chips + summary in report, gap icon mismatch in export) · -247 (Role Match failure paths write no Sheet row; API failures leave no production trace)
+-177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families)
 
 **LATER — tier 2:** corpus work
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
@@ -1522,12 +1522,12 @@ Two findings retracted from earlier probe sessions: (1) stability differences at
 
 **What this is not:** MATTGPT-083 is spinner inconsistency -- the loading indicator shown while waiting for a result. This ticket is about the absence of waiting: requirement rows appearing at ~20s and filling in as each `gpt-4o` call completes. Cross-referencing -083 is correct; folding this into -083 is not. If this scope lands inside -083, whoever picks it up will scope it as "fix the spinner" and the actual rendering change won't happen.
 
-**Why `as_completed` enables it:** The current sequential pipeline must wait for all 23 calls before rendering anything. Once -243 parallelizes with `as_completed`, individual requirement results are available as they land (~3-5s per wave of 10 concurrent calls). The UI can render each row as soon as its result arrives, producing a progressive fill from ~5s rather than an 85s blank wait.
+**Why `as_completed` enables it:** The current sequential pipeline must wait for all 23 calls before rendering anything. Once -243 parallelizes with `as_completed`, individual requirement results are available as they land (~3-5s per wave of 10 concurrent calls). The UI can render each row as soon as its result arrives. Extraction is 14-20s and nothing can render before it completes, so first content appears at ~20s rather than ~85s -- not ~5s.
 
 **Scope:** Wire the `as_completed` results from the parallelized assessor into a Streamlit streaming-compatible render loop. Each requirement row renders as its assessment completes rather than after the full list returns. Error-row rendering uses the placeholder defined in -248.
 
 **Acceptance:**
-- First requirement rows visible within 10s of submission on a cold-path JD.
+- First requirement rows visible within 25s of submission on a cold-path JD (extraction floor is 14-20s; measure from click, not from extraction complete).
 - All rows render in the same final state as the current full-assessment render.
 - Error rows show the placeholder defined in -248 (not a blank or a crash).
 
