@@ -1511,6 +1511,7 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 - **Type:** Bug
 - **Files:** `ui/pages/role_match.py:435` (`_build_share_text`), `ui/pages/role_match.py:522` (`_build_export_html`)
 - **Logged:** September 9, 2026
+- **Note:** All items fold into MATTGPT-248's branch (decision September 11, 2026). -248 is already opening `_build_export_html` and `_build_share_text`; landing -246 separately means two passes over the same code. -246 closes with -248.
 
 **Two surfaces, one ticket.** Both the printable Export HTML and the shareable Report/clipboard text are built from the on-screen assessment and diverge from it. They are adjacent functions in the same file; fixing one without the other produces a three-way inconsistency.
 
@@ -1597,11 +1598,11 @@ The worst case this ticket exists to prevent: "strong match across all requireme
 
 **Four things that change on the public surface:**
 
-**1. Rows render, including failed ones.** Every assessed row is unchanged. Failed rows get a visible treatment: the badge, an icon, and a line stating the assessment failed for that requirement. Today a failed row is a white `?` on a transparent circle with no evidence block and no gap text, because both are gated on the three known statuses (`SUPPORTED`, `PARTIAL`, `GAP`). The legend gains the matching entry in the same change.
+**1. Rows render, including unassessed ones.** Every assessed row is unchanged. Unassessed rows get a visible treatment: the badge, an icon, and a line stating the assessment could not complete for that requirement. Today an unassessed row is a white `?` on a transparent circle with no evidence block and no gap text, because both are gated on the three known statuses (`SUPPORTED`, `PARTIAL`, `GAP`). The legend gains the matching entry in the same change.
 
 **2. Counts render with the missing number.** "Required: 10 ✓ 1 ✗ 2 not assessed." Real arithmetic with the gap named rather than absorbed. The count line appears on all three summary surfaces (see below).
 
-**3. The zero-case guard moves inside `build_discussion_points`.** That function returns "No items to flag -- strong match across all requirements" when nothing was included. Under partial failure that is the worst possible output; on total failure it asserts a perfect match over requirements that were never assessed. The guard belongs inside `build_discussion_points`, which already receives `results` -- no signature change, no second call site. It reads the error count from `results` before deciding whether to claim a clean sweep.
+**3. The zero-case guard moves inside `build_discussion_points`.** That function returns "No items to flag -- strong match across all requirements" when nothing was included. Under partial failure that is the worst possible output; on total failure it asserts a perfect match over requirements that were never assessed. The guard belongs inside `build_discussion_points`, which already receives `results` -- no signature change, no second call site. It reads the unassessed count from `results` before deciding whether to claim a clean sweep.
 
 **4. All three summary surfaces render identically.** `_count_spans` on screen, `_ex_count_line` in the export, and `_build_share_text` -- which has no summary block today, so this adds one. Same four numbers, same wording, three renderers. The share text is the artifact most likely to be pasted into an email without the page around it; a list of verdicts with no tally is the weakest of the three.
 
@@ -1613,7 +1614,7 @@ Field contract for the unassessed row: on the success path the requirement text 
 
 **Badge treatment for unassessed rows:** grey pill, `⋯` glyph, `--pill-bg` fill, `--text-secondary` glyph color. Status literal in the row dict and the `unassessed` key in `compute_summary_counts` must both use the string `"unassessed"` -- not `"error"`.
 
-**Scope delineation with -246:** Item 8 of -246 (summary block absent from `_build_share_text`) is already covered by -248 item 4 above; do not re-implement in -246. Items 1-7 remain separate -246 work: em dash in export title, export legend, gap icon shape in export, UI summary wording alignment, em dash in report title, plain-text legend footer, evidence chips in report.
+**Scope delineation with -246:** All eight -246 items land in this branch. Every one touches `_build_export_html`, `_build_share_text`, or the legend/badge system -- the same files -248 is already opening. Landing them separately means two passes over the same code. Items folded in: em dash in export title, export legend, gap icon shape in export, UI summary wording alignment, em dash in report title, plain-text legend footer, evidence chips in report, summary block in `_build_share_text` (item 8, already -248 item 4). -246 closes with this ticket.
 
 **Decision on -247 (`query_logger` failure-path writes):** -247 lands in -248's branch. -248 is already rewriting `_handle_assessment_error` and the gate rejection path -- the exact code paths -247 would add `query_logger` writes to. Opening those paths twice in separate tickets adds coordination cost for no benefit. -247 closes alongside -248; its acceptance criteria carry over as additional items in -248's acceptance list. Remove -247 from the NOW roadmap as a standalone entry.
 
@@ -1626,15 +1627,21 @@ A "retry the failed requirements" action. That is the affordance a visitor can a
 `compute_recommendation`. Dead code with no call site in the app. It is not gated to the private view -- it is simply never wired. -012 adds the first production call site; that is where its partial-failure behavior gets addressed. Do not touch it here.
 
 **Acceptance:**
-- `return_exceptions=True` in the `as_completed` loop. One failed requirement call does not kill the full assessment.
-- Failed rows render with badge, icon, and failure line. No blank rows, no crashes.
+- `return_exceptions=True` in the `as_completed` loop. One unassessed requirement does not kill the full assessment.
+- Unassessed rows render with badge, icon, and failure line. No blank rows, no crashes.
 - Count line reads "Required: N ✓ N ✗ N not assessed" (or equivalent) on all three surfaces: `_count_spans`, `_ex_count_line`, `_build_share_text`.
-- `build_discussion_points` does not emit the clean-sweep string when any error rows are present in `results`.
+- `build_discussion_points` does not emit the clean-sweep string when any unassessed rows are present in `results`.
 - `compute_summary_counts` returns eight keys (adds `unassessed` under `required` and `preferred`). `test_summary_block.py` and both count builders updated.
-- Error row carries `category` and requirement text from the source requirement dict.
-- Legend includes the error-row entry.
+- Unassessed row carries `category` and requirement text from the source requirement dict.
+- Legend includes the unassessed-row entry.
 - `_build_share_text` includes a summary block (this is new).
+- `_build_share_text` (report) lists the supporting story for each non-gap requirement.
 - Export HTML renders without layout breakage when unassessed rows are present.
+- Both generated strings (export title, report title) contain no em dash. Unit test asserts this for each.
+- Export includes the legend block.
+- Export gap icon matches UI circled-X.
+- UI summary line wording matches export ("N strong, N gap").
+- Report includes a plain-text legend footer.
 - An API failure (rate limit, outage, malformed JSON) writes a Sheet row via `query_logger` with the failure type in a distinguishing field. (from -247)
 - A gate rejection (non-JD input rejected before LLM call) writes a Sheet row with reason "gate_rejection". (from -247)
 - The success path `query_logger` write is unchanged. (from -247)
@@ -1643,7 +1650,7 @@ A "retry the failed requirements" action. That is the affordance a visitor can a
 **Cross-references:**
 - MATTGPT-243 (parallelization; `as_completed` is the prerequisite -- this ticket has no value on the sequential pipeline)
 - MATTGPT-245 (streaming progressive render; also blocked on -243 and this ticket)
-- MATTGPT-246 (export + share surface audit; overlapping file, coordinate landing order; only item 8 folds into this ticket)
+- MATTGPT-246 (export + share surface audit; all eight items fold into this branch -- -246 closes with -248)
 - MATTGPT-247 (logger writes; accepted into this branch -- -247 closes with this ticket)
 - MATTGPT-012 (private view; `compute_recommendation` wiring and its `total = len(match_results)` bug land there, not here)
 
