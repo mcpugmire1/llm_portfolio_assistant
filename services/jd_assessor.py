@@ -17,6 +17,9 @@ from pathlib import Path
 
 from openai import OpenAI
 
+from config.debug import (
+    DEBUG,  # noqa: F401  # referenced by Green timing prints; import lands in Red so the test wiring fails loudly if it is ever removed
+)
 from services.pinecone_service import pinecone_semantic_search
 
 # =============================================================================
