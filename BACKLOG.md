@@ -1503,12 +1503,15 @@ Three findings retracted from earlier probe sessions: (1) stability differences 
 
 **Warning on vocabulary collision:** `grep "calibration" BACKLOG.md` returns results for MATTGPT-174 and ADR 018 -- those are Ask Agy router-threshold calibration (semantic similarity scoring). Different surface, different mechanism, nothing shared. Do not conflate. This ticket is about the Role Match per-requirement assessor prompt.
 
-**Scope:** Tighten the assessment prompt so that adjacent skills and topical proximity do not count as SUPPORTED without direct evidence. The AT&T row-level audit is the benchmark: run it before and after the prompt change and confirm the HONEST GAP rate rises on requirements with genuine technical gaps.
+**Scope:**
+- Tighten the assessment prompt so that adjacent skills and topical proximity do not count as SUPPORTED without direct evidence. The AT&T row-level audit is the benchmark: run it before and after the prompt change and confirm the HONEST GAP rate rises on requirements with genuine technical gaps.
+- **Delete the `confidence` field entirely.** It is generated on every assessment row, read nowhere in the application, and measured as carrying no independent signal. Tabulation of 587 rows (September 2026) found zero contradictions between `confidence` and `verdict`. The only apparent split -- 4 gap/low vs 4 gap/high rows -- did not survive inspection: the same requirement flipped `high` to `low` across arms on identical absence, which is architecture nondeterminism rather than a meaningful distinction. A gap the model is sure about and a gap it is uncertain about rendered identically. Remove `confidence` from the assessment prompt, the response schema, and any downstream code that reads or forwards the field. Do not re-run the tabulation to confirm; the September 2026 measurement is the record.
 
 **Acceptance:**
 - AT&T row 10 (Kafka + IXBUS) returns HONEST GAP after calibration (it did in the long-context arm; extraction coverage fix in -160 may be required first to expose the requirement to the assessor).
 - SUPPORTED rate on the AT&T JD drops below 75% when genuine gaps are present.
 - No regression on the demo JD (requirements with clear corpus evidence still return SUPPORTED).
+- `confidence` field absent from assessment prompt, response schema, and all downstream consumers. No references to `confidence` remain in the Role Match pipeline.
 
 **Cross-references:**
 - MATTGPT-243 (parallelization; does not touch assessment prompt)
