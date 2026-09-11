@@ -30,7 +30,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 16. Rest of Role Match: **-160**, -173, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
--177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -249 (retrieval ranking: general leadership outranks crisis story on incident-leadership requirements)
+-177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -249 (retrieval ranking: crisis story at rank 18 on incident-leadership requirement; ranking problem confirmed, not corpus gap)
 
 **LATER — tier 2:** corpus work
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
@@ -100,7 +100,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-156](#mattgpt-156) | Vendor commercial/spend management gap — decide whether corpus-zero on invoice/rate-card/procurement is a real claim or honest gap | Open | Low | Investigation | July 29, 2026 |
 | [MATTGPT-160](#mattgpt-160) | JD extraction rewrite: qualifier stripping, requirement-count variance, coverage miss, wall clock floor -- all one prompt | Open | High | Bug / Performance | July 31, 2026 |
 | [MATTGPT-243](#mattgpt-243) | Role Match parallelization: as_completed concurrency 10, asyncio.to_thread, pending-future cancellation | Open | High | Performance | September 2, 2026 |
-| [MATTGPT-249](#mattgpt-249) | Role Match retrieval: eight general leadership stories outrank the topically-specific crisis story on incident-leadership requirements | Open | Medium | Bug | September 11, 2026 |
+| [MATTGPT-249](#mattgpt-249) | Role Match retrieval: crisis story at rank 18 on incident-leadership requirement; target carries incident vocabulary; ranking problem confirmed | Open | Medium | Bug | September 11, 2026 |
 | [MATTGPT-248](#mattgpt-248) | Role Match partial-failure handling: return_exceptions=True, seven render/export/log surfaces, panel-level claim guard | Open | High | Bug | September 10, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: both arms score ~80% strong on AT&T with genuine JD gaps; scoring is too generous | Open | High | Issue | September 2, 2026 |
 | [MATTGPT-245](#mattgpt-245) | Role Match streaming: render each requirement row as it lands via as_completed; blocked on -243 | Open | Medium | Enhancement | September 2, 2026 |
@@ -1679,7 +1679,7 @@ A "retry the failed requirements" action. That is the affordance a visitor can a
 ---
 
 ### MATTGPT-249
-**Role Match retrieval: eight general leadership stories outrank the topically-specific crisis story on incident-leadership requirements**
+**Role Match retrieval: crisis story at rank 18 on incident-leadership requirement; target carries incident vocabulary; this is a ranking problem**
 
 - **Status:** Open
 - **Priority:** Medium
@@ -1691,42 +1691,47 @@ A "retry the failed requirements" action. That is the affordance a visitor can a
 **Finding (September 2026, `probe_243_top_k_rank.py` at top_k=25):**
 
 Requirement: "Calm, decisive leadership during incidents, escalations, and high-pressure situations" (AT&T JD, row 6).
-Target: "Rescuing and Stabilizing JP Morgan's TS Dynamics CRM Program" (`rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase`).
-Result: target at rank 18, score 0.3733. Ranks 1-8 are general leadership stories with no incident-specific vocabulary.
+Target: "Rescuing and Stabilizing JP Morgan's TS Dynamics CRM Program" (`rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase`), Theme: Org & Working-Model Transformation.
+Result: target at rank 18, score 0.3733.
 
-**Top 8 and target (September 2026, `probe_243_top_k_rank.py`, top_k=25):**
+**Top 8 with Theme (September 2026, `probe_243_top_k_rank.py`, top_k=25):**
 
 ```
-rank  score   id-slug                                                          client
-----  ------  ---------------------------------------------------------------  --------------------
-   1  0.4583  leadership-philosophy-how-i-lead                                 accenture
-   2  0.4278  what-i-learned-about-sustainable-leadership                      accenture
-   3  0.4143  leading-people-from-delivery-teams-to-a-150-person-organization  fortune-500-clients
-   4  0.3966  integrating-play-into-work-to-enhance-team-motivation            accenture
-   5  0.4019  about-matt-my-leadership-journey                                 accenture
-   6  0.3939  making-it-safe-to-take-risks-and-be-wrong                        accenture
-   7  0.3833  confronting-a-quality-crisis-through-coaching-and-culture-change norfolk-southern
-   8  0.3904  empowering-teams-through-decentralized-decision-making           accenture
+rank  score   id-slug                                                          client                Theme
+----  ------  ---------------------------------------------------------------  --------------------  ---------------------------------
+   1  0.4583  leadership-philosophy-how-i-lead                                 accenture             Professional Narrative
+   2  0.4278  what-i-learned-about-sustainable-leadership                      accenture             Professional Narrative
+   3  0.4143  leading-people-from-delivery-teams-to-a-150-person-organization  fortune-500-clients   Talent & Enablement
+   4  0.3966  integrating-play-into-work-to-enhance-team-motivation            accenture             Org & Working-Model Transformation
+   5  0.4019  about-matt-my-leadership-journey                                 accenture             Professional Narrative
+   6  0.3939  making-it-safe-to-take-risks-and-be-wrong                        accenture             Talent & Enablement
+   7  0.3833  confronting-a-quality-crisis-through-coaching-and-culture-change norfolk-southern      Org & Working-Model Transformation
+   8  0.3904  empowering-teams-through-decentralized-decision-making           accenture             Org & Working-Model Transformation
   ...
-  18  0.3733  rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program      jp-morgan-chase  <== target
+  18  0.3733  rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program      jp-morgan-chase       Org & Working-Model Transformation  <== target
 ```
 
 Full ranked 25 available from `probe_243_top_k_rank.py` (re-runnable against current corpus).
 
-**Pattern in the top 8:** 6 Accenture, 1 Fortune 500 Clients arc-story placeholder (MATTGPT-166), 1 Norfolk Southern. Seven of eight are internal-titled or arc stories; only rank 7 ("Confronting a Quality Crisis through Coaching and Culture Change" -- Norfolk Southern) is a real client-engagement crisis story. The target JP Morgan crisis story at rank 18 is a second real client-engagement crisis story.
+**The target shares its Theme (Org & Working-Model Transformation) with three stories that outrank it (ranks 4, 7, 8).** This rules out Theme-based fixes before anyone reaches for one, and it is the reason the PN exclusion from -169 does not port over as the answer here. Even removing the three PN stories at ranks 1, 2, and 5 would leave the target behind five non-PN stories.
 
-**The ranker is not ignoring the crisis signal entirely.** Rank 7 is crisis-adjacent. The pattern looks more like Accenture-title clustering promoting internal leadership prose above two out of two real client-crisis stories. Whether this maps to -168 (general outranking specific at slot 1), -077 (noun-overlap contamination), or reproduces -146 (Professional Narrative leakage into filtered results) is an open question. The raw data above is the diagnostic starting point.
+**PN structural gap (checkable, not asserted):** `retrieve_stories` calls `pinecone_semantic_search` with `filters={}`, so Professional Narrative stories are not excluded on the Role Match path. Grep `pinecone_service.py` for the `filters` argument in the Role Match call path to confirm. The PN absence is a real gap independent of this ticket, but it does not explain rank 18.
 
-**This is not a top_k problem.** Widening the window to top_k=20 would surface the target at rank 18, but at roughly 4x the per-call token cost and with eighteen candidates rather than five, buying nothing on any other row. The root cause is the ranker placing a topically dead-on story below eight weaker ones.
+**Rank 7 is crisis-adjacent, not a general leadership story.** "Confronting a Quality Crisis through Coaching and Culture Change" (Norfolk Southern, Org & Working-Model Transformation) carries crisis vocabulary and outranks the target. The ranker is not ignoring crisis signal entirely.
+
+**The target story carries incident vocabulary.** Grep confirmed: "crisis," "escalation," and "CIO-level escalation" appear across Situation, Action, and Result. "In active crisis," "3x daily stabilization calls," "vendor credibility near zero" are in the story text. The vocabulary gap hypothesis is eliminated. This is a ranking problem: the story has the right content; the ranker is not surfacing it.
+
+**Hypothesis (not yet measured):** The ranker weights broad leadership vocabulary (which the PN and Talent & Enablement stories carry at high density) over incident-specific vocabulary (which the JP Morgan story carries but the top-ranked stories do not). Whether this is an embedding distance issue or a corpus-composition issue -- the JP Morgan story is competing against many more general-leadership stories than crisis-specific ones -- is the open question. The probe is the before-and-after measurement for any fix.
+
+**This is not a top_k problem.** Widening the window to top_k=20 would surface the target, but at roughly 4x the per-call token cost and with eighteen candidates rather than five, buying nothing on any other row. The root cause is the ranker scoring a topically dead-on story below stories that match on leadership vocabulary broadly.
 
 **Third retraction from -159 probe sessions:** The original hypothesis was "a retrieval-window failure that long-context's whole-corpus visibility caught." The rank-18 measurement disconfirms this. A window failure means the story sits just outside the cutoff; rank 18 at top_k=25 means the ranker is the problem. Do not re-derive the window hypothesis. top_k was removed from -243's scope on this finding.
 
-**Open question:** Whether the fix is corpus vocabulary (tagging the JP Morgan crisis story with incident/escalation/high-pressure vocabulary so the embedder places it closer to the requirement) or ranking (reweighting or re-ranking so topically specific stories surface above topically general ones). The probe is the before-and-after measurement either way.
-
 **Cross-references:**
-- MATTGPT-195 (incident queries scatter because the delivery family carries no incident vocabulary -- corpus-side and retrieval-side half of the same gap)
-- MATTGPT-154 (operational-breadth tagging pass; corpus-side vocabulary enrichment that may move this rank)
+- MATTGPT-195 (incident queries scatter because the delivery family carries no incident vocabulary -- same vocabulary gap from the router side)
+- MATTGPT-154 (operational-breadth tagging pass; corpus-side vocabulary enrichment; will not move this rank since the story already carries the vocabulary)
 - MATTGPT-168 (topically-correct-but-general stories outranking specifically-right ones -- same class of retrieval quality problem)
+- MATTGPT-169 (positioning-story attractor finding; PN exclusion absent on Role Match path is the structural half of what -169 tracks)
 - MATTGPT-243 (parallelization; top_k removed from that ticket on this finding)
 
 ---
