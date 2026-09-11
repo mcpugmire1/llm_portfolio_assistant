@@ -445,9 +445,23 @@ async def _assess_one_with_index(
         candidates = await _to_thread_with_ctx(
             retrieve_stories, req["text"], stories, DEFAULT_TOP_K, f"[req {index}]"
         )
+        # Per-call timing (DEBUG-gated): wraps only the assess_requirement
+        # await so the measurement excludes Pinecone retrieval and
+        # excludes semaphore queuing (semaphore is acquired at the top of
+        # this function, outside the timed region). It does NOT exclude
+        # shared-endpoint contention: N calls in flight against the same
+        # OpenAI endpoint have coupled latencies, so a per-call number
+        # measured at concurrency 10 is not the same as one measured
+        # alone. That matters when comparing arms of a concurrency probe.
+        # Emit tagged with req_idx so N calls produce N grep-legible
+        # samples for mean and spread analysis.
+        _t_assess_start = time.perf_counter()
         assessment = await _to_thread_with_ctx(
             assess_requirement, client, req["text"], candidates
         )
+        _t_assess_ms = (time.perf_counter() - _t_assess_start) * 1000.0
+        if DEBUG:
+            print(f"[jd_assessor] assess_call_ms={_t_assess_ms:.1f} req_idx={index}")
         assessment["category"] = req["category"]
         return index, assessment
 
