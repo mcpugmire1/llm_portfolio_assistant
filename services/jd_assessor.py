@@ -10,6 +10,7 @@ Architecture: Three-step pipeline (see ADR 016)
   3. LLM assessment pass — requirements + candidate stories → match report
 """
 
+import asyncio
 import json
 import os
 from pathlib import Path
@@ -185,6 +186,19 @@ ASSESSMENT_MODEL = "gpt-4o"
 ASSESSMENT_TEMPERATURE = 0.0
 DEFAULT_TOP_K = 5
 
+# MATTGPT-243: fan-out concurrency for the Stages 2+3 parallel loop.
+# Chosen to sit well below OpenAI's rate-limit ceiling while giving the
+# event loop enough in-flight work to hide per-call latency. Reasoning,
+# not measurement.
+#
+# Measured effect on the AT&T JD at DEFAULT_TOP_K=5, three runs each:
+#   Sequential (probe_159_att_output/summary.json): 125.5s mean.
+#   Parallel   (probe_159d_output/summary.json):     31.0s mean.
+# The -243 acceptance's 84.7s baseline is a separate Streamlit Cloud
+# click-to-render measurement on demo_jd.txt and is not directly
+# comparable to either.
+_CONCURRENCY = 10
+
 
 def _get_openai_client() -> OpenAI:
     """Build an OpenAI client using the same env-var pattern as the rest of the app."""
@@ -338,18 +352,136 @@ def run_assessment(jd_text: str, stories: list[dict]) -> dict:
     for r in extraction.get("implicit_requirements", []) or []:
         all_requirements.append({"text": r["requirement"], "category": "required"})
 
-    # Stages 2 + 3
-    match_results = []
-    for req in all_requirements:
-        candidates = retrieve_stories(req["text"], stories, top_k=DEFAULT_TOP_K)
-        assessment = assess_requirement(client, req["text"], candidates)
-        assessment["category"] = req["category"]
-        match_results.append(assessment)
+    # Stages 2 + 3 -- MATTGPT-243: parallel fan-out via asyncio.as_completed
+    # at concurrency _CONCURRENCY, wrapping the sync OpenAI and Pinecone
+    # clients with asyncio.to_thread. Sequential loop stays available in
+    # git history if the rewrite ever needs to be reverted.
+    match_results = asyncio.run(_fan_out_assessments(client, all_requirements, stories))
 
     return {
         "extraction": extraction,
         "results": match_results,
     }
+
+
+async def _to_thread_with_ctx(func, *args):
+    """asyncio.to_thread with Streamlit's ScriptRunContext attached to
+    the worker thread so it does not emit 'missing ScriptRunContext'
+    warnings that would flood stderr and trip MATTGPT-222's alarms.
+
+    Import is local rather than module-level so services.jd_assessor
+    stays runnable outside Streamlit and unit tests do not inherit an
+    internal-path dependency on streamlit.runtime.scriptrunner (same
+    class of coupling as st-emotion-cache selectors -- Streamlit may
+    rename it between minor versions). If Streamlit is not importable,
+    or the caller lacks a ScriptRunContext, falls back to plain
+    asyncio.to_thread. Verification: if the missing-ctx warnings still
+    appear after Streamlit restart, ctx was None on this call path and
+    the wrapper is a silent no-op."""
+    try:
+        import threading
+
+        from streamlit.runtime.scriptrunner import (
+            add_script_run_ctx,
+            get_script_run_ctx,
+        )
+
+        ctx = get_script_run_ctx()
+    except ImportError:
+        ctx = None
+
+    if ctx is None:
+        return await asyncio.to_thread(func, *args)
+
+    def _with_ctx():
+        add_script_run_ctx(threading.current_thread(), ctx)
+        return func(*args)
+
+    return await asyncio.to_thread(_with_ctx)
+
+
+async def _assess_one_with_index(
+    index: int,
+    semaphore: asyncio.Semaphore,
+    client: OpenAI,
+    req: dict,
+    stories: list[dict],
+) -> tuple[int, dict]:
+    """Retrieve candidates + assess one requirement, under the semaphore.
+
+    Returns (submission_index, assessment_dict) so the caller can rebuild
+    the ordered results list after asyncio.as_completed yields in
+    completion order. Wraps sync retrieve_stories and assess_requirement
+    via _to_thread_with_ctx so the event loop stays free during the
+    blocking HTTP calls to Pinecone and OpenAI, and Streamlit's
+    ScriptRunContext propagates to the worker threads."""
+    async with semaphore:
+        candidates = await _to_thread_with_ctx(
+            retrieve_stories, req["text"], stories, DEFAULT_TOP_K
+        )
+        assessment = await _to_thread_with_ctx(
+            assess_requirement, client, req["text"], candidates
+        )
+        assessment["category"] = req["category"]
+        return index, assessment
+
+
+async def _fan_out_assessments(
+    client: OpenAI, all_requirements: list[dict], stories: list[dict]
+) -> list[dict]:
+    """Run per-requirement retrieve + assess concurrently at _CONCURRENCY.
+
+    Returns a list of assessment dicts in submission order, independent
+    of completion order. Exceptions propagate as today: on the first task
+    exception, pending tasks are cancelled and drained before the
+    exception re-raises. Error rows and return_exceptions=True are
+    MATTGPT-248, not this ticket."""
+    semaphore = asyncio.Semaphore(_CONCURRENCY)
+    tasks = [
+        asyncio.create_task(_assess_one_with_index(i, semaphore, client, req, stories))
+        for i, req in enumerate(all_requirements)
+    ]
+
+    results_by_index: dict[int, dict] = {}
+    try:
+        for done in asyncio.as_completed(tasks):
+            index, assessment = await done
+            results_by_index[index] = assessment
+    except BaseException:
+        # MATTGPT-243: three things worth naming at this raise site.
+        #
+        # 1. `except BaseException` is deliberate. asyncio.CancelledError
+        #    no longer derives from Exception in modern Python, and the
+        #    handler is cleanup followed by a bare `raise`. Narrowing to
+        #    `Exception` would let a cancellation propagate through this
+        #    loop without draining pending tasks, defeating the point of
+        #    the whole block.
+        #
+        # 2. Cancel pending tasks before propagating. Abandoned tasks that
+        #    later complete with an exception and no reader print
+        #    "Task exception was never retrieved" to stderr, and
+        #    MATTGPT-222's operational alarms read stderr. The
+        #    asyncio.gather with return_exceptions=True below drains the
+        #    cancelled tasks so their exceptions are consumed rather than
+        #    left dangling.
+        #
+        # 3. Under asyncio.as_completed the exception surfaced from this
+        #    loop is first-by-completion, not first-by-requirement-order.
+        #    Two racing failure types (e.g., a RateLimitError on req_3 and
+        #    a BadRequestError on req_7) can produce different visitor
+        #    banners on the same input depending on which finishes first.
+        #    The banner is honest either way, but the non-determinism
+        #    deserves a comment.
+        for task in tasks:
+            if not task.done():
+                task.cancel()
+        await asyncio.gather(*tasks, return_exceptions=True)
+        raise
+
+    # Re-sort by submission index. This preserves the contract the loop
+    # characterization test's reverse-sleep fixture asserts on: order
+    # matches submission, independent of which task completes first.
+    return [results_by_index[i] for i in range(len(all_requirements))]
 
 
 # =============================================================================
