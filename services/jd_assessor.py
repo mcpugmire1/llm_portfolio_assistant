@@ -229,18 +229,26 @@ def extract_requirements(client: OpenAI, jd_text: str) -> dict:
 
 
 def retrieve_stories(
-    requirement_text: str, stories: list, top_k: int = DEFAULT_TOP_K
+    requirement_text: str,
+    stories: list,
+    top_k: int = DEFAULT_TOP_K,
+    debug_tag: str | None = None,
 ) -> list:
     """Stage 2 — query Pinecone for candidate stories matching a requirement.
 
     Returns a list of trimmed story dicts (title, client, id, score, STAR fields)
     suitable for inclusion in the assessment prompt. Empty list if no hits.
+
+    debug_tag threads a per-caller identifier (e.g. "[req 5]") into
+    pinecone_semantic_search's DEBUG output so concurrent callers under
+    the Role Match fan-out remain attributable when their lines interleave.
     """
     results = pinecone_semantic_search(
         query=requirement_text,
         filters={},
         stories=stories,
         top_k=top_k,
+        debug_tag=debug_tag,
     )
     if not results:
         return []
@@ -435,7 +443,7 @@ async def _assess_one_with_index(
     ScriptRunContext propagates to the worker threads."""
     async with semaphore:
         candidates = await _to_thread_with_ctx(
-            retrieve_stories, req["text"], stories, DEFAULT_TOP_K
+            retrieve_stories, req["text"], stories, DEFAULT_TOP_K, f"[req {index}]"
         )
         assessment = await _to_thread_with_ctx(
             assess_requirement, client, req["text"], candidates

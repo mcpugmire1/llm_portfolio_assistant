@@ -212,13 +212,22 @@ def _summarize_index_stats(stats: dict) -> dict:
 
 
 def pinecone_semantic_search(
-    query: str, filters: dict, stories: list, top_k: int = SEARCH_TOP_K
+    query: str,
+    filters: dict,
+    stories: list,
+    top_k: int = SEARCH_TOP_K,
+    debug_tag: str | None = None,
 ) -> list[dict] | None:
+    # Prefix for DEBUG lines so concurrent callers (Role Match fan-out)
+    # remain attributable when their DEBUG output interleaves on stdout.
+    # Empty when debug_tag is None so single-caller flows are unchanged.
+    _dtag = f"{debug_tag} " if debug_tag else ""
+
     idx = _init_pinecone()
     if not idx or not query:
         if DEBUG:
             print(
-                f"DEBUG Pinecone: skipped (idx={'present' if idx else 'none'}, query_len={len(query or '')})"
+                f"{_dtag}DEBUG Pinecone: skipped (idx={'present' if idx else 'none'}, query_len={len(query or '')})"
             )
         return None
 
@@ -257,7 +266,7 @@ def pinecone_semantic_search(
         pc_filter["$or"] = or_clauses
         if DEBUG:
             print(
-                f"DEBUG Pinecone: Entity search filter applied - entity={entity_value} across {ENTITY_SEARCH_FIELDS}"
+                f"{_dtag}DEBUG Pinecone: Entity search filter applied - entity={entity_value} across {ENTITY_SEARCH_FIELDS}"
             )
 
     # MATTGPT-162: narrow catch around _embed so an OpenAI failure signals
@@ -271,15 +280,17 @@ def pinecone_semantic_search(
             f"query={(query or '')[:50]}..."
         )
         if DEBUG:
-            print(f"DEBUG OpenAI embedding error: {type(e).__name__}: {e}")
+            print(f"{_dtag}DEBUG OpenAI embedding error: {type(e).__name__}: {e}")
         _safe_session_set("__embed_failure__", True)
         return None
 
     try:
         if DEBUG:
-            print(f"DEBUG Embeddings: qvec_dim={len(qvec)} model={EMBEDDING_MODEL}")
             print(
-                f"DEBUG Pinecone query → index={_PINECONE_INDEX or PINECONE_INDEX_NAME}, namespace={PINECONE_NAMESPACE}"
+                f"{_dtag}DEBUG Embeddings: qvec_dim={len(qvec)} model={EMBEDDING_MODEL}"
+            )
+            print(
+                f"{_dtag}DEBUG Pinecone query → index={_PINECONE_INDEX or PINECONE_INDEX_NAME}, namespace={PINECONE_NAMESPACE}"
             )
 
         res = idx.query(
@@ -333,7 +344,7 @@ def pinecone_semantic_search(
                     },
                 )
             except Exception as e:
-                print("DEBUG: Pinecone snapshot error:", e)
+                print(f"{_dtag}DEBUG: Pinecone snapshot error:", e)
         # --- end DEBUG snapshot ---
 
         hits = []
@@ -374,7 +385,7 @@ def pinecone_semantic_search(
                     title_dbg = (story.get("title") or "")[:60]
                     client_dbg = story.get("client") or ""
                     print(
-                        f"DEBUG Hit: id={sid} pc={score:.3f} kw={kw:.3f} blend={blended:.3f}  [{client_dbg}] {title_dbg}"
+                        f"{_dtag}DEBUG Hit: id={sid} pc={score:.3f} kw={kw:.3f} blend={blended:.3f}  [{client_dbg}] {title_dbg}"
                     )
                 except Exception:
                     pass
@@ -412,7 +423,7 @@ def pinecone_semantic_search(
 
     except Exception as e:
         if DEBUG:
-            print(f"DEBUG Pinecone query error: {e}")
+            print(f"{_dtag}DEBUG Pinecone query error: {e}")
         return None
 
 
