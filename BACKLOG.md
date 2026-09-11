@@ -297,6 +297,8 @@ Each detail block uses these fields. Not every field is required for every item.
 - Comp alignment tile → private only. Verdict/recommendation (Apply/Consider/Pass) → private only.
 - Lock icon: `ti-lock` (closed) in public state; `ti-lock-open` (open) in private state with purple-tinted active state.
 
+**`compute_recommendation` note (September 11, 2026):** `compute_recommendation` in `services/jd_assessor.py` is not gated to the private view -- it is simply never wired. `role_match.py` imports only `run_assessment` from `jd_assessor`; the function's sole callers are the CLI and a patched test. -012 adds the first production call site rather than moving an existing one. It also inherits a bug at that point: `total = len(match_results)` counts unassessed rows toward nothing, dragging the recommendation toward Pass. Fix belongs here when -012 lands; do not fix it in -248.
+
 ---
 
 ### MATTGPT-014
@@ -1614,44 +1616,59 @@ Two findings retracted from earlier probe sessions: (1) stability differences at
 ---
 
 ### MATTGPT-248
-**Role Match partial-failure handling: return_exceptions=True, seven render/export/log surfaces, panel-level claim guard**
+**Role Match partial-failure handling: assessed rows render, honest count, no completeness claim**
 
 - **Status:** Open
 - **Priority:** High
 - **Type:** Bug
 - **File:** `ui/pages/role_match.py`, `services/jd_assessor.py`, `ui/components/role_match_summary.py`
-- **Logged:** September 10, 2026
+- **Logged:** September 10, 2026 (design decision recorded September 11, 2026)
 - **Dependencies:** MATTGPT-243 (`as_completed` must ship before per-requirement results are individually addressable)
 
-**What this is:** Once -243 ships `as_completed`, individual requirement results are available as they complete. This ticket wires `return_exceptions=True` so one failed call does not kill the full assessment, and updates every downstream surface that must handle a mix of assessed and error rows.
+**Decision:** A partially-failed assessment renders its assessed rows and an honest count. It does not suppress the summary, and it does not claim completeness.
 
-**Design pass required before Code opens the file.** The worst case this ticket exists to prevent: "strong match across all requirements" appearing above rows that were never assessed, in a forwarded PDF. That sentence in the report becomes a liability. The panel-level claim (the summary box and the recommendation line) must not assert anything about requirements whose assessment result is an exception. The design question is what a partially-assessed match claims -- not whether to show error rows, but what the header says when some rows are errors.
+The worst case this ticket exists to prevent: "strong match across all requirements" appearing above rows that were never assessed, in a forwarded PDF. The fix is not to hide the summary -- the summary is the most useful part for a recruiter reading offline. The fix is to make the count honest and keep the discussion-points guard from asserting a clean sweep when it isn't.
 
-**Seven surfaces that must handle error rows (September 10, 2026 audit):**
-1. `compute_recommendation` -- recommendation logic must exclude error rows from its strong/gap counts; must not produce a recommendation if error rows are present above a threshold.
-2. `_render_requirement_card` -- error row needs a visible placeholder (not a blank, not a crash).
-3. Badge CSS -- strong/partial/gap badge rendering; error row needs its own visual state.
-4. `_render_section` and export CSS -- section grouping logic must handle a row that has no verdict; export HTML must render the error state without breaking layout.
-5. `_build_share_text` -- share text must omit or flag error rows; must not forward a verdict that does not exist.
-6. The legend -- must include an error-row entry if error rows can appear in the output.
-7. `log_role_match_assessment` -- must log partial-assessment events with the error count; must not log a full-assessment row when some requirements errored.
+**Four things that change on the public surface:**
 
-**`role_match_summary.py` guard:** Both functions in this module must include a guard so the zero-assessed case cannot fire with errors present. If all rows errored, the summary must not render as if zero requirements were found.
+**1. Rows render, including failed ones.** Every assessed row is unchanged. Failed rows get a visible treatment: the badge, an icon, and a line stating the assessment failed for that requirement. Today a failed row is a white `?` on a transparent circle with no evidence block and no gap text, because both are gated on the three known statuses (`SUPPORTED`, `PARTIAL`, `GAP`). The legend gains the matching entry in the same change.
+
+**2. Counts render with the missing number.** "Required: 10 ✓ 1 ✗ 2 not assessed." Real arithmetic with the gap named rather than absorbed. The count line appears on all three summary surfaces (see below).
+
+**3. The zero-case guard moves inside `build_discussion_points`.** That function returns "No items to flag -- strong match across all requirements" when nothing was included. Under partial failure that is the worst possible output; on total failure it asserts a perfect match over requirements that were never assessed. The guard belongs inside `build_discussion_points`, which already receives `results` -- no signature change, no second call site. It reads the error count from `results` before deciding whether to claim a clean sweep.
+
+**4. All three summary surfaces render identically.** `_count_spans` on screen, `_ex_count_line` in the export, and `_build_share_text` -- which has no summary block today, so this adds one. Same four numbers, same wording, three renderers. The share text is the artifact most likely to be pasted into an email without the page around it; a list of verdicts with no tally is the weakest of the three.
+
+**Contract changes (name these in the ticket for Code):**
+
+`compute_summary_counts` returns a fixed six keys -- `strong`, `partial`, `gap` under each of `required` and `preferred` -- and its `if cat in counts and status in counts[cat]` guard is what silently drops error rows today. It becomes eight keys (adding `error` under each of `required` and `preferred`). That change hits `test_summary_block.py` plus both existing count builders.
+
+Field contract for the error row: on the success path the requirement text arrives inside the LLM's JSON and only `category` is stamped by the caller. An exception has no JSON, so the error row must carry both `category` and the requirement text off the source requirement dict -- otherwise it renders with an empty title next to an invisible badge.
+
+**Explicitly out of scope:**
+
+Application-level retry. The OpenAI SDK already retries twice with exponential backoff on 429 and 5xx. A third attempt adds latency to the failure path -- the retry sits inside the semaphore slot -- to catch a case that is now rare. Raising `max_retries` on the shared client is the wrong lever: it serves extraction and Ask Agy too, so a rate-limited extraction would silently retry four times while the visitor watches a spinner.
+
+A "retry the failed requirements" action. That is the affordance a visitor can actually use, and it is strictly better than an invisible third attempt -- but it is a separate ticket, filed behind -248.
+
+`compute_recommendation`. Dead code with no call site in the app. It is not gated to the private view -- it is simply never wired. -012 adds the first production call site; that is where its partial-failure behavior gets addressed. Do not touch it here.
 
 **Acceptance:**
 - `return_exceptions=True` in the `as_completed` loop. One failed requirement call does not kill the full assessment.
-- Error rows render with a visible placeholder in the UI. No blank rows, no crashes.
-- `compute_recommendation` excludes error rows from strong/gap counts.
-- Panel-level claim (summary box, recommendation line) does not assert coverage of requirements whose result is an exception. Design decision on exact copy must be made before implementation starts.
-- `_build_share_text` does not include a verdict for error rows.
-- `log_role_match_assessment` logs the error count alongside assessed counts.
-- Zero-assessed guard in `role_match_summary.py`: cannot fire if errors are present.
+- Failed rows render with badge, icon, and failure line. No blank rows, no crashes.
+- Count line reads "Required: N ✓ N ✗ N not assessed" (or equivalent) on all three surfaces: `_count_spans`, `_ex_count_line`, `_build_share_text`.
+- `build_discussion_points` does not emit the clean-sweep string when any error rows are present in `results`.
+- `compute_summary_counts` returns eight keys (adds `error` under `required` and `preferred`). `test_summary_block.py` and both count builders updated.
+- Error row carries `category` and requirement text from the source requirement dict.
+- Legend includes the error-row entry.
+- `_build_share_text` includes a summary block (this is new).
 - Export HTML renders without layout breakage when error rows are present.
 
 **Cross-references:**
 - MATTGPT-243 (parallelization; `as_completed` is the prerequisite -- this ticket has no value on the sequential pipeline)
 - MATTGPT-245 (streaming progressive render; also blocked on -243 and this ticket)
 - MATTGPT-246 (export + share surface audit; overlapping file, coordinate landing order)
+- MATTGPT-012 (private view; `compute_recommendation` wiring and its `total = len(match_results)` bug land there, not here)
 
 ---
 
