@@ -22,6 +22,7 @@ re-sort by submission order.
 are -248. The propagation assertion here pins that contract.
 """
 
+import re
 import time
 from unittest.mock import patch
 
@@ -146,3 +147,65 @@ class TestRunAssessmentLoop:
                 RuntimeError, match="simulated upstream failure on req_2"
             ):
                 jd_assessor.run_assessment("fake jd text", [])
+
+
+class TestRunAssessmentTiming:
+    """MATTGPT-243 timing instrumentation. `run_assessment` prints per-stage
+    elapsed times to stdout when `config.debug.DEBUG` is True and stays
+    silent when False. Print rather than dbg() because -152 is moving debug
+    output off the Streamlit sidecar; the terminal is the new sink."""
+
+    def test_extraction_line_carries_ms_and_n_reqs_when_debug_true(self, capsys):
+        """DEBUG=True: the extraction line carries both `extraction_ms=<float>`
+        and `n_reqs=<int>` on the same line so extraction cost and the
+        requirement count it produced are grep-legible together.
+
+        Patches without create=True so a missing or misnamed DEBUG import
+        in services.jd_assessor fails loudly at patch time rather than
+        silently creating an attribute production never reads."""
+        p1, p2, p3, p4 = _patched_loop_context(_fake_assess_success)
+        with patch.object(jd_assessor, "DEBUG", True), p1, p2, p3, p4:
+            jd_assessor.run_assessment("fake jd text", [])
+        captured = capsys.readouterr()
+        lines = [ln for ln in captured.out.splitlines() if "extraction_ms=" in ln]
+        assert lines, f"expected an extraction_ms line, got: {captured.out!r}"
+        line = lines[0]
+        assert re.search(
+            r"extraction_ms=\d+\.\d+", line
+        ), f"expected 'extraction_ms=<float>' on line, got: {line!r}"
+        assert re.search(
+            r"n_reqs=\d+", line
+        ), f"expected 'n_reqs=<int>' on the extraction line, got: {line!r}"
+
+    def test_fan_out_line_carries_ms_and_n_reqs_when_debug_true(self, capsys):
+        """DEBUG=True: the fan-out line carries both `fan_out_ms=<float>`
+        and `n_reqs=<int>` on the same line so per-requirement time is
+        derivable without needing the extraction dict."""
+        p1, p2, p3, p4 = _patched_loop_context(_fake_assess_success)
+        with patch.object(jd_assessor, "DEBUG", True), p1, p2, p3, p4:
+            jd_assessor.run_assessment("fake jd text", [])
+        captured = capsys.readouterr()
+        lines = [ln for ln in captured.out.splitlines() if "fan_out_ms=" in ln]
+        assert lines, f"expected a fan_out_ms line, got: {captured.out!r}"
+        line = lines[0]
+        assert re.search(
+            r"fan_out_ms=\d+\.\d+", line
+        ), f"expected 'fan_out_ms=<float>' on line, got: {line!r}"
+        assert re.search(
+            r"n_reqs=\d+", line
+        ), f"expected 'n_reqs=<int>' on the fan-out line, got: {line!r}"
+
+    def test_no_timing_output_when_debug_false(self, capsys):
+        """DEBUG=False: neither timing token appears. Guards against a
+        Green implementation that forgets the gate and prints on every
+        production request."""
+        p1, p2, p3, p4 = _patched_loop_context(_fake_assess_success)
+        with patch.object(jd_assessor, "DEBUG", False), p1, p2, p3, p4:
+            jd_assessor.run_assessment("fake jd text", [])
+        captured = capsys.readouterr()
+        assert (
+            "extraction_ms" not in captured.out
+        ), f"expected no 'extraction_ms' when DEBUG=False, got: {captured.out!r}"
+        assert (
+            "fan_out_ms" not in captured.out
+        ), f"expected no 'fan_out_ms' when DEBUG=False, got: {captured.out!r}"
