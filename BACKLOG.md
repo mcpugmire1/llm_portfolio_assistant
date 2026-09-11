@@ -10,7 +10,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-09-11)
 
 **NOW**
-1. **-243** — Role Match parallelization: architecture decided (fan-out, 31s vs 51s, citations tie on two JDs). `as_completed` concurrency 10, `asyncio.to_thread`, DEFAULT_TOP_K 5->10 (AT&T row 6 assertion), "up to two" citation fix. Exceptions propagate as today. (MATTGPT-159 closed as decided.)
+1. **-243** — Role Match parallelization: `as_completed` concurrency 10, `asyncio.to_thread`, pending-future cancellation. Exceptions propagate as today. top_k stays at 5 (rank-18 finding is a ranker problem, not a window problem -- filed as -249). (MATTGPT-159 closed as decided.)
 2. **-248 + -246 + -247** — Role Match partial-failure pass. -248: `return_exceptions=True`, error-row rendering, honest count across all three summary surfaces, `build_discussion_points` guard. -246 folds in: em dashes in both titles, missing legend, missing evidence chips and summary in report, gap icon in export -- `_ex_count_line` and `_build_share_text` are already open. -247 folds in: failure-path Sheet write via `query_logger` belongs in the same branch -248 rewrites. Blocked on -243; ships immediately after.
 3. **-245** — Role Match streaming: requirement rows appear at ~20s (extraction is 14-20s; nothing renders before it completes) and fill in as each call lands. Blocked on -243 and -248.
 4. **-244** — Role Match assessor calibration: both arms at ~80% strong on a JD with real gaps. A recruiter reading "strong" on a requirement the corpus doesn't cover discounts the other twenty-two rows. Prompt edit, no architecture dependency.
@@ -30,7 +30,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 16. Rest of Role Match: **-160**, -173, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
--177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families)
+-177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -249 (retrieval ranking: general leadership outranks crisis story on incident-leadership requirements)
 
 **LATER — tier 2:** corpus work
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
@@ -99,7 +99,8 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-155](#mattgpt-155) | New corpus story — sell-side commercial story (HSBC-anchored): pricing/costing, resourcing, outcome-based contracting | Open | Medium | Action | July 29, 2026 |
 | [MATTGPT-156](#mattgpt-156) | Vendor commercial/spend management gap — decide whether corpus-zero on invoice/rate-card/procurement is a real claim or honest gap | Open | Low | Investigation | July 29, 2026 |
 | [MATTGPT-160](#mattgpt-160) | JD extraction rewrite: qualifier stripping, requirement-count variance, coverage miss, wall clock floor -- all one prompt | Open | High | Bug / Performance | July 31, 2026 |
-| [MATTGPT-243](#mattgpt-243) | Role Match parallelization: as_completed concurrency 10, asyncio.to_thread, DEFAULT_TOP_K 5->10, up-to-two citation fix | Open | High | Performance | September 2, 2026 |
+| [MATTGPT-243](#mattgpt-243) | Role Match parallelization: as_completed concurrency 10, asyncio.to_thread, pending-future cancellation | Open | High | Performance | September 2, 2026 |
+| [MATTGPT-249](#mattgpt-249) | Role Match retrieval: eight general leadership stories outrank the topically-specific crisis story on incident-leadership requirements | Open | Medium | Bug | September 11, 2026 |
 | [MATTGPT-248](#mattgpt-248) | Role Match partial-failure handling: return_exceptions=True, seven render/export/log surfaces, panel-level claim guard | Open | High | Bug | September 10, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: both arms score ~80% strong on AT&T with genuine JD gaps; scoring is too generous | Open | High | Issue | September 2, 2026 |
 | [MATTGPT-245](#mattgpt-245) | Role Match streaming: render each requirement row as it lands via as_completed; blocked on -243 | Open | Medium | Enhancement | September 2, 2026 |
@@ -1445,32 +1446,36 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 ---
 
 ### MATTGPT-243
-**Role Match parallelization: as_completed concurrency 10, asyncio.to_thread, DEFAULT_TOP_K 5->10, up-to-two citation fix**
+**Role Match parallelization: as_completed concurrency 10, asyncio.to_thread, pending-future cancellation**
 
 - **Status:** Open
 - **Priority:** High
 - **Type:** Performance
 - **File:** `services/jd_assessor.py`
-- **Logged:** September 2, 2026 (scope narrowed September 10, 2026)
+- **Logged:** September 2, 2026 (scope narrowed September 11, 2026)
 - **Decided:** Architecture audit complete (MATTGPT-159 closed). Parallelize existing pipeline.
 
 **Decision record (from MATTGPT-159 closure):** Two-arm audit across demo JD and AT&T JD. Fan-out (Arm 1) ~31s wall clock vs long-context (Arm 2) ~51s. Citation grounding tied across both JDs -- 8 SUPPORTED vs 7 SUPPORTED on AT&T, different failure rows, 0 UNSUPPORTED in either arm. No architecture migration, no new prompt surface, streaming per requirement stays available because per-requirement structure is unchanged. Long-context rejected.
 
-Two findings retracted from earlier probe sessions: (1) stability differences attributed to architecture were extraction nondeterminism, not fan-out vs long-context; (2) fan-out's citation-grounding advantage on the demo JD did not generalize -- AT&T row 6 (calm/decisive incident leadership) was a retrieval-window failure that long-context's whole-corpus visibility caught, not an architecture quality difference. Both are now recorded here; do not re-litigate either.
+Three findings retracted from earlier probe sessions: (1) stability differences attributed to architecture were extraction nondeterminism, not fan-out vs long-context; (2) fan-out's citation-grounding advantage on the demo JD did not generalize; (3) AT&T row 6 (calm/decisive incident leadership) was described as "a retrieval-window failure that long-context's whole-corpus visibility caught." The rank-18 measurement from `probe_243_top_k_rank.py` disconfirms this. A window failure means the story sits just outside the cutoff; the ranker placed a topically dead-on story below eight weaker ones. This is a ranking problem, not a window problem. Filed as MATTGPT-249. Do not re-litigate any of the three.
 
 **Scope:**
 - Parallelize `assess` calls using `asyncio.as_completed` at concurrency 10, wrapping the sync OpenAI client via `asyncio.to_thread`. Per-requirement `gpt-4o` reasoning is unchanged; this is a concurrency change only.
-- Exceptions propagate as today: one failure fails the full assessment, `_failure_needs_rerun` fires, and the existing banner renders. `return_exceptions=True` and per-requirement error-row handling are scoped to MATTGPT-248, which ships immediately after.
-- **DEFAULT_TOP_K: raise from 5 to 10.** AT&T row 6 (calm/decisive incident leadership) is the test case. Assert: JP Morgan Dynamics crisis story ID present in the Pinecone candidate set at top_k=10 and absent at top_k=5, using the AT&T incident-leadership requirement text as the query. No LLM call in this test -- retrieval only. There are three `DEFAULT_TOP_K` call sites; identify them during pre-flight and place the comment at the Role Match retrieval call site only (the site that actually queries Pinecone for this pipeline), not at the constant definition or any other consumer.
-- Change "exactly two citations" to "up to two citations" in the assessment prompt. "Exactly two" forced a second citation on requirements with only one strong story, producing RELATED reach seen in demo JD row 9 (Arm 1) and -088 audit.
-- Re-run demo and AT&T JDs after parallelization to confirm verdicts unchanged (verdict shifts on rows with more candidates from raised top_k are expected and correct).
+- Exceptions propagate as today: one failure fails the full assessment, `_failure_needs_rerun` fires, and the existing banner renders. Before propagating, cancel all pending futures. Abandoned futures emit "Task exception was never retrieved" on stderr, which -222's alarms read.
+- `return_exceptions=True` and per-requirement error-row handling are scoped to MATTGPT-248, which ships immediately after.
+- "Up to two citations" in the assessment prompt: `JD_ASSESSMENT_PROMPT_TEMPLATE` already reads "Include up to 2 evidence items maximum." Check git history on that line before editing -- if the wording is already correct, the edit is a no-op and should be skipped. Do not make a no-op edit to confirm.
+- `DEFAULT_TOP_K` stays at 5. The top_k raise was removed from this ticket when `probe_243_top_k_rank.py` showed the JP Morgan crisis story at rank 18 -- widening the window does not fix a ranker placing a dead-on story below eight weaker ones. Filed as MATTGPT-249.
+- Re-run demo and AT&T JDs after parallelization to confirm no verdict regressions.
+- Loop characterization test in `tests/unit/` verifying `as_completed` fanout behavior (does not require LLM or Pinecone).
 
 **Acceptance:**
-- Cold-path wall clock at or below 35s on a novel JD (cache-busted). Measure by the same method as the 84.7s baseline: timestamped click, Streamlit status poll at 50ms, done when absent for 1.5s.
+- Cold-path wall clock at or below 35s on a novel JD (cache-busted). Measure by the same method as the 84.7s baseline: timestamped click, Streamlit status poll at 50ms, done when absent for 1.5s. Both the 84.7s baseline and the 31s parallel measurement were taken at `top_k=5` in `probe_159d_parallel.py`, so dropping the top_k change removes a variable from the comparison rather than invalidating it. Roughly 14-20s of the 35s budget is extraction.
 - No verdict regressions from the pre-parallelization baseline on demo and AT&T JDs.
-- One failed call fails the full assessment (unchanged behavior). `_failure_needs_rerun` fires. Banner unchanged.
-- JP Morgan Dynamics crisis story ID present at top_k=10, absent at top_k=5, for AT&T incident-leadership requirement text. No LLM call.
-- Comment at the Role Match retrieval call site names the AT&T row 6 test result and identifies which of the three `DEFAULT_TOP_K` sites this is.
+- One failed call fails the full assessment (unchanged behavior). `_failure_needs_rerun` fires. Pending futures cancelled before propagation. Banner unchanged.
+- No "Task exception was never retrieved" on stderr on a simulated failure.
+- Loop characterization test passes.
+
+**Known gap:** Nothing tests pending-future cancellation in CI. A timing-dependent assertion would flake, and the failure mode is log noise rather than visitor-facing behavior. The code comment carries it.
 
 **Cross-references:**
 - MATTGPT-159 (closed; decision record and full audit history there)
@@ -1478,6 +1483,7 @@ Two findings retracted from earlier probe sessions: (1) stability differences at
 - MATTGPT-083 (spinner inconsistency; perceived-performance half; worth landing regardless of when -243 ships)
 - MATTGPT-248 (partial-failure handling; `return_exceptions=True` and error-row surfaces split here; ships immediately after)
 - MATTGPT-245 (streaming progressive render; blocked on -243 and -248)
+- MATTGPT-249 (retrieval ranking gap; top_k raise removed from this ticket because rank 18 is a ranker problem, not a window problem)
 
 ---
 
@@ -1669,6 +1675,42 @@ A "retry the failed requirements" action. That is the affordance a visitor can a
 - MATTGPT-245 (streaming progressive render; also blocked on -243 and this ticket)
 - MATTGPT-246 (export + share surface audit; overlapping file, coordinate landing order)
 - MATTGPT-012 (private view; `compute_recommendation` wiring and its `total = len(match_results)` bug land there, not here)
+
+---
+
+### MATTGPT-249
+**Role Match retrieval: eight general leadership stories outrank the topically-specific crisis story on incident-leadership requirements**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `services/jd_assessor.py` (`retrieve_stories`), corpus (`echo_star_stories_nlp.jsonl`)
+- **Logged:** September 11, 2026
+- **Benchmark:** `probe_243_top_k_rank.py` at repo root. Re-runnable before-and-after measurement. Same role `probe_163_substitution_impact.py` plays for -077.
+
+**Finding (September 2026, `probe_243_top_k_rank.py` at top_k=25):**
+
+Requirement: "Calm, decisive leadership during incidents, escalations, and high-pressure situations" (AT&T JD, row 6).
+Target: "Rescuing and Stabilizing JP Morgan's TS Dynamics CRM Program" (`rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase`).
+Result: target at rank 18, score 0.3733. Ranks 1-8 are general leadership stories with no incident-specific vocabulary.
+
+**Full ranked 25 (paste from probe output -- not regenerated here; run `probe_243_top_k_rank.py` against current corpus):**
+
+```
+[paste full ranked-25 output here]
+```
+
+**This is not a top_k problem.** Widening to top_k=20 would hand the assessor the story at rank 18, but at roughly 4x the per-call token cost and with eighteen candidates rather than five -- buying nothing on any other row. The root cause is the ranker placing a topically dead-on story below eight weaker ones, not the window cutting off a story that sits just outside the cutoff.
+
+**Third retraction from -159 probe sessions:** The original hypothesis was "a retrieval-window failure that long-context's whole-corpus visibility caught." The rank-18 measurement disconfirms this. A window failure means the story sits just outside the cutoff; rank 18 at top_k=25 means the ranker is the problem. Do not re-derive the window hypothesis. top_k was removed from -243's scope on this finding.
+
+**Open question:** Whether the fix is corpus vocabulary (tagging the JP Morgan crisis story with incident/escalation/high-pressure vocabulary so the embedder places it closer to the requirement) or ranking (reweighting or re-ranking so topically specific stories surface above topically general ones). The probe is the before-and-after measurement either way.
+
+**Cross-references:**
+- MATTGPT-195 (incident queries scatter because the delivery family carries no incident vocabulary -- corpus-side and retrieval-side half of the same gap)
+- MATTGPT-154 (operational-breadth tagging pass; corpus-side vocabulary enrichment that may move this rank)
+- MATTGPT-168 (topically-correct-but-general stories outranking specifically-right ones -- same class of retrieval quality problem)
+- MATTGPT-243 (parallelization; top_k removed from that ticket on this finding)
 
 ---
 
