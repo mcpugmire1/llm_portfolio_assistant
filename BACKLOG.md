@@ -7,7 +7,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 ---
 
-## Value Prioritized Roadmap (updated 2026-09-02)
+## Value Prioritized Roadmap (updated 2026-09-11)
 
 **NOW**
 1. **-243** — Role Match parallelization: architecture decided (fan-out, 31s vs 51s, citations tie on two JDs). `as_completed` concurrency 10, `asyncio.to_thread`, DEFAULT_TOP_K 5->10 (AT&T row 6 assertion), "up to two" citation fix. Exceptions propagate as today. (MATTGPT-159 closed as decided.)
