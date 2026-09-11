@@ -1559,6 +1559,7 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 - **Type:** Bug
 - **File:** Role Match surface (file TBD -- confirm during pre-flight; same file as -240)
 - **Logged:** September 9, 2026
+- **Note:** Closes in -248's branch (decision September 11, 2026). -248 rewrites `_handle_assessment_error` and the gate rejection path; adding `query_logger` writes there rather than reopening those paths in a second ticket. Acceptance criteria folded into -248.
 
 **Finding:** The `_handle_assessment_error` handler and the JD-gate rejection path write only `logger.warning`, not `query_logger`. The success path calls `log_role_match_assessment`, so the happy path is logged; failure paths are invisible. On Streamlit Cloud, the container filesystem is ephemeral -- `logger.warning` output is gone after the session. An API rate limit, a network outage, or a malformed JSON response leaves no production trace.
 
@@ -1606,9 +1607,15 @@ The worst case this ticket exists to prevent: "strong match across all requireme
 
 **Contract changes (name these in the ticket for Code):**
 
-`compute_summary_counts` returns a fixed six keys -- `strong`, `partial`, `gap` under each of `required` and `preferred` -- and its `if cat in counts and status in counts[cat]` guard is what silently drops error rows today. It becomes eight keys (adding `error` under each of `required` and `preferred`). That change hits `test_summary_block.py` plus both existing count builders.
+`compute_summary_counts` returns a fixed six keys -- `strong`, `partial`, `gap` under each of `required` and `preferred` -- and its `if cat in counts and status in counts[cat]` guard is what silently drops unassessed rows today. It becomes eight keys (adding `unassessed` under each of `required` and `preferred`). That change hits `test_summary_block.py` plus both existing count builders.
 
-Field contract for the error row: on the success path the requirement text arrives inside the LLM's JSON and only `category` is stamped by the caller. An exception has no JSON, so the error row must carry both `category` and the requirement text off the source requirement dict -- otherwise it renders with an empty title next to an invisible badge.
+Field contract for the unassessed row: on the success path the requirement text arrives inside the LLM's JSON and only `category` is stamped by the caller. An exception has no JSON, so the unassessed row must carry both `category` and the requirement text off the source requirement dict -- otherwise it renders with an empty title next to an invisible badge.
+
+**Badge treatment for unassessed rows:** grey pill, `⋯` glyph, `--pill-bg` fill, `--text-secondary` glyph color. Status literal in the row dict and the `unassessed` key in `compute_summary_counts` must both use the string `"unassessed"` -- not `"error"`.
+
+**Scope delineation with -246:** Item 8 of -246 (summary block absent from `_build_share_text`) is already covered by -248 item 4 above; do not re-implement in -246. Items 1-7 remain separate -246 work: em dash in export title, export legend, gap icon shape in export, UI summary wording alignment, em dash in report title, plain-text legend footer, evidence chips in report.
+
+**Decision on -247 (`query_logger` failure-path writes):** -247 lands in -248's branch. -248 is already rewriting `_handle_assessment_error` and the gate rejection path -- the exact code paths -247 would add `query_logger` writes to. Opening those paths twice in separate tickets adds coordination cost for no benefit. -247 closes alongside -248; its acceptance criteria carry over as additional items in -248's acceptance list. Remove -247 from the NOW roadmap as a standalone entry.
 
 **Explicitly out of scope:**
 
@@ -1623,16 +1630,21 @@ A "retry the failed requirements" action. That is the affordance a visitor can a
 - Failed rows render with badge, icon, and failure line. No blank rows, no crashes.
 - Count line reads "Required: N ✓ N ✗ N not assessed" (or equivalent) on all three surfaces: `_count_spans`, `_ex_count_line`, `_build_share_text`.
 - `build_discussion_points` does not emit the clean-sweep string when any error rows are present in `results`.
-- `compute_summary_counts` returns eight keys (adds `error` under `required` and `preferred`). `test_summary_block.py` and both count builders updated.
+- `compute_summary_counts` returns eight keys (adds `unassessed` under `required` and `preferred`). `test_summary_block.py` and both count builders updated.
 - Error row carries `category` and requirement text from the source requirement dict.
 - Legend includes the error-row entry.
 - `_build_share_text` includes a summary block (this is new).
-- Export HTML renders without layout breakage when error rows are present.
+- Export HTML renders without layout breakage when unassessed rows are present.
+- An API failure (rate limit, outage, malformed JSON) writes a Sheet row via `query_logger` with the failure type in a distinguishing field. (from -247)
+- A gate rejection (non-JD input rejected before LLM call) writes a Sheet row with reason "gate_rejection". (from -247)
+- The success path `query_logger` write is unchanged. (from -247)
+- All rows visible in the production Sheet within the normal `query_logger` flush window. (from -247)
 
 **Cross-references:**
 - MATTGPT-243 (parallelization; `as_completed` is the prerequisite -- this ticket has no value on the sequential pipeline)
 - MATTGPT-245 (streaming progressive render; also blocked on -243 and this ticket)
-- MATTGPT-246 (export + share surface audit; overlapping file, coordinate landing order)
+- MATTGPT-246 (export + share surface audit; overlapping file, coordinate landing order; only item 8 folds into this ticket)
+- MATTGPT-247 (logger writes; accepted into this branch -- -247 closes with this ticket)
 - MATTGPT-012 (private view; `compute_recommendation` wiring and its `total = len(match_results)` bug land there, not here)
 
 ---
