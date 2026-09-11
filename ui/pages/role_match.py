@@ -10,14 +10,13 @@ Architecture: See ADR 016 and services/jd_assessor.py
 import html
 import logging
 import re
+import time
 from pathlib import Path
 from urllib.parse import urlencode
 
 import streamlit as st
 
-from config.debug import (
-    DEBUG,  # noqa: F401  # referenced by Green in _debug_print_click_to_render; import lands in Red so the wiring test fails loudly if it is ever removed
-)
+from config.debug import DEBUG
 from scripts.utils import slugify
 from services.role_match_summary import build_discussion_points, compute_summary_counts
 from ui.components.action_buttons import (
@@ -137,7 +136,8 @@ def _debug_print_click_to_render(total_ms: float, n_reqs: int) -> None:
     runtime. The wiring around _render_results_panel is exercised
     end-to-end by manual runs and BDD.
     """
-    raise NotImplementedError
+    if DEBUG:
+        print(f"[role_match] total_ms={total_ms:.1f} n_reqs={n_reqs}")
 
 
 def _handle_submit_click() -> None:
@@ -1840,6 +1840,14 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
 
         # ----- RIGHT: results area — Agy thinking indicator during processing, results or empty state otherwise -----
         with results_col:
+            # Click-to-render timing (DEBUG-gated): start captured inside the
+            # submit branch below, stop computed after _render_results_panel
+            # returns. Declared here so both siblings in this results_col
+            # scope can see it. None on any pass where submit did not fire
+            # (navigation-return, empty-state render), so the emit is
+            # naturally suppressed on non-submit passes.
+            _click_start = None
+
             # Phase 4 lock icon — always visible at top-right of the results
             # column so the user can unlock before submitting a JD. Local
             # import is intentional: keeps the Phase 4 component's growing
@@ -1861,6 +1869,11 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
                 and jd_text.strip()
                 and not st.session_state.get("role_match_gate_error")
             ):
+                # Click-to-render timing: capture start before run_assessment
+                # so the full submit-branch + render span is measured. Stop is
+                # computed after _render_results_panel returns below.
+                _click_start = time.perf_counter()
+
                 # Match the Ask Agy pattern: st.empty() container + render_thinking_indicator()
                 # The indicator is a fixed-position overlay so it covers the whole viewport.
                 loading_container = st.empty()
@@ -1983,6 +1996,16 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
             # assessment exists.
             if st.session_state.get("role_match_result"):
                 _render_results_panel(st.session_state["role_match_result"], stories)
+                # Click-to-render emit: fires only on the pass that submitted,
+                # because _click_start is only set inside the submit branch
+                # above. Navigation-return renders (result in state, no submit
+                # this pass) leave _click_start = None and skip the emit.
+                if _click_start is not None:
+                    _total_ms = (time.perf_counter() - _click_start) * 1000.0
+                    _n_reqs = len(
+                        st.session_state["role_match_result"].get("results") or []
+                    )
+                    _debug_print_click_to_render(_total_ms, _n_reqs)
                 if st.session_state["role_match_result"].get("results"):
                     with st.container(key="role_match_followup_block"):
                         st.markdown(
