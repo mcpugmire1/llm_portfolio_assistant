@@ -1515,6 +1515,13 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 
 **Two surfaces, one ticket.** Both the printable Export HTML and the shareable Report/clipboard text are built from the on-screen assessment and diverge from it. They are adjacent functions in the same file; fixing one without the other produces a three-way inconsistency.
 
+**Parity rule:** Facts identical across all three surfaces. Affordances described only where they exist. Actions only where the reader can take them.
+
+Applied to this ticket:
+- **Count wording** ("N not assessed", "N strong, N gap") is a fact and must be word-for-word identical on screen, in the export, and in the report. The drift between `_count_spans` and `_ex_count_line` is exactly what this rule flags.
+- **Unassessed message**: screen shows "Try again for the full picture" -- the visitor sitting at the app can act. Report (emailed plain text) and export (printed PDF) readers cannot. Variant for both offline surfaces: "🐾 I couldn't get to N of these M requirements." Fact only, no instruction.
+- **Legend**: on screen, 🔗 signals a clickable link to a project. In the export and report it does not -- the link affordance doesn't exist. The legend must not describe 🔗 as clickable in offline surfaces. The plain-text legend footer lists the verdict symbols only ("Key: ✓ strong / ~ partial / ✗ gap"), not the interactive ones.
+
 **Export HTML (`_build_export_html`, :522) deltas:**
 
 1. **Em dash in export title.** Rendered string: "Role Match -- Director of Product Engineering." Violates the repo-wide no-em-dash rule (CLAUDE.md Critical Rules). The em dash lives in the generated HTML string, not the Python source -- `grep` on `.py` files misses it. Fix: colon separator ("Role Match: Director of Product Engineering"). Add a unit test asserting the generated export HTML contains no em dash.
