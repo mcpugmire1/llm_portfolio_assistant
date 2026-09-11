@@ -209,3 +209,57 @@ class TestRunAssessmentTiming:
         assert (
             "fan_out_ms" not in captured.out
         ), f"expected no 'fan_out_ms' when DEBUG=False, got: {captured.out!r}"
+
+
+class TestAssessCallTiming:
+    """MATTGPT-243 per-call timing: one `assess_call_ms=<float:.1f>
+    req_idx=<int>` line per requirement, emitted from inside
+    `_assess_one_with_index` around the assess_requirement await.
+
+    Purpose is to isolate a single gpt-4o call's latency from the fan-out
+    wall time so wave math becomes measured instead of inferred. Same
+    DEBUG gate and same patch shape as the extraction / fan-out timers."""
+
+    def test_assess_call_line_carries_ms_and_req_idx_when_debug_true(self, capsys):
+        """DEBUG=True: at least one line contains both `assess_call_ms=<float:.1f>`
+        and `req_idx=<int>` on the same line so per-call latency is
+        grep-legible and attributable to a specific requirement."""
+        p1, p2, p3, p4 = _patched_loop_context(_fake_assess_success)
+        with patch.object(jd_assessor, "DEBUG", True), p1, p2, p3, p4:
+            jd_assessor.run_assessment("fake jd text", [])
+        captured = capsys.readouterr()
+        lines = [ln for ln in captured.out.splitlines() if "assess_call_ms=" in ln]
+        assert lines, f"expected assess_call_ms lines, got: {captured.out!r}"
+        line = lines[0]
+        assert re.search(
+            r"assess_call_ms=\d+\.\d+", line
+        ), f"expected 'assess_call_ms=<float>' on line, got: {line!r}"
+        assert re.search(
+            r"req_idx=\d+", line
+        ), f"expected 'req_idx=<int>' on line, got: {line!r}"
+
+    def test_one_assess_call_line_per_requirement_when_debug_true(self, capsys):
+        """DEBUG=True: N requirements produce N assess_call_ms lines.
+        Guards against a Green that emits per-wave rather than per-call
+        (which would collapse the sample count and defeat the point of
+        the per-call measurement)."""
+        p1, p2, p3, p4 = _patched_loop_context(_fake_assess_success)
+        with patch.object(jd_assessor, "DEBUG", True), p1, p2, p3, p4:
+            jd_assessor.run_assessment("fake jd text", [])
+        captured = capsys.readouterr()
+        lines = [ln for ln in captured.out.splitlines() if "assess_call_ms=" in ln]
+        assert len(lines) == _N_REQS, (
+            f"expected {_N_REQS} assess_call_ms lines (one per requirement), "
+            f"got {len(lines)}: {captured.out!r}"
+        )
+
+    def test_no_assess_call_line_when_debug_false(self, capsys):
+        """DEBUG=False: no assess_call_ms lines. Guards against a Green
+        that forgets the gate and prints on every production request."""
+        p1, p2, p3, p4 = _patched_loop_context(_fake_assess_success)
+        with patch.object(jd_assessor, "DEBUG", False), p1, p2, p3, p4:
+            jd_assessor.run_assessment("fake jd text", [])
+        captured = capsys.readouterr()
+        assert (
+            "assess_call_ms" not in captured.out
+        ), f"expected no 'assess_call_ms' when DEBUG=False, got: {captured.out!r}"
