@@ -468,6 +468,74 @@ def _render_requirement_card(
             )
 
 
+def _count_spans(counts: dict) -> str:
+    """MATTGPT-248: render the screen-surface count line as HTML spans
+    for one category's counts dict.
+
+    Currently defined nested inside `_render_results_panel` so it can
+    close over `_gs`/`_ga`/`_gr` style constants. Cycle 1 Green promotes
+    it to module scope (inlining the style constants) so the same
+    function is called from the render path AND from unit tests, which
+    is the only way to assert the screen surface stays word-identical
+    with the two off-screen count builders.
+
+    Output form (verbose, word-identical with `_ex_count_line` and the
+    new share-text count builder):
+
+        10 ✓ strong &nbsp;1 ~ partial &nbsp;2 ✗ gap &nbsp;2 ⋯ unassessed
+
+    Zero counts are omitted from the fragment sequence, so a counts
+    dict with only strong entries renders "N ✓ strong" without any
+    trailing joiners or empty fragments.
+    """
+    raise NotImplementedError
+
+
+def _incomplete_notice_text(counts: dict, total: int, *, surface: str) -> str | None:
+    """MATTGPT-248: format the partial-failure notice for a given surface.
+
+    Returns None when no unassessed rows are present (no notice to render).
+    Otherwise returns the surface-appropriate copy. Per the parity rule,
+    facts are identical across surfaces; the action clause appears only
+    on the screen surface, where "try again" is a real affordance. The
+    PDF and clipboard artifacts drop the action clause because the reader
+    cannot retry from those surfaces.
+
+    Callers pass surface="print" for both _build_export_html and
+    _build_share_text since the copy is the same for those two surfaces.
+    """
+    raise NotImplementedError
+
+
+def _dp_lines(points: list[dict], *, surface: str) -> list[str]:
+    """MATTGPT-248: render the discussion-points section for a given
+    surface as a list of lines/HTML fragments. Returns [] on empty
+    input; callers skip emitting a section header when the return is
+    empty.
+
+    Centralizes branch 4 handling across screen, export, and share so
+    the omission behavior is enforced in one place.
+    """
+    raise NotImplementedError
+
+
+def _legend_entries(*, surface: str) -> list[str]:
+    """MATTGPT-248: return the ordered legend entries for a given surface
+    as a list of rendered strings (HTML fragments for screen/export,
+    plain text for share).
+
+    Order (fixed): strong -> partial -> gap -> unassessed -> project
+    evidence -> profile.
+
+    Static by construction -- the signature has no `results` argument
+    because legend content does not depend on assessment content. Per-
+    surface filter: 🔗 icon appears on screen only. Export and report
+    use plain-text prefixes ("Project evidence:" / "Profile:") for the
+    evidence-type entries.
+    """
+    raise NotImplementedError
+
+
 def _build_share_text(result_payload: dict) -> str:
     """Build a plain-text summary of the assessment for clipboard sharing.
 
