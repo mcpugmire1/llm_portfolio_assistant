@@ -916,3 +916,246 @@ class TestIncompleteNoticeOrdering:
             f"the notice between summary and requirements reads as a "
             f"footnote, not a headline signal"
         )
+
+
+# ---------------------------------------------------------------------------
+# MATTGPT-248 Cycle 1 follow-up Red: defects surfaced by inspecting the
+# rendered artifacts after Green landed. Each fails for a distinct reason
+# the Green-blessed tests missed:
+#   * TestEntityEscapingRoundTrip -- fixtures in Green were plain ASCII,
+#     so the html.escape path never got exercised. Real corpus titles
+#     arrive pre-escaped from upstream ingestion.
+#   * TestExportLegendPositionStructural -- Green's "Key:" anchor was
+#     substring-anywhere, which passed on stray template text in the
+#     body. Structural position pin catches that.
+#   * TestStatusBadgeStyleFallbackInvariant -- Green asserted glyph
+#     presence in the string, not visual rendering. A CSS var without
+#     a hex fallback resolves to nothing on the export document (no
+#     :root for CSS vars to bind against).
+#   * TestBuildExportHtmlGapNoEvidence -- share text has this pin;
+#     export doesn't. Adding it before the guard drifts.
+
+
+class TestEntityEscapingRoundTrip:
+    """MATTGPT-248 Cycle 1 follow-up: escape treatment differs by surface,
+    and the fixture represents upstream pre-escaped state (story titles
+    stored with HTML entities from ingestion).
+
+    Share text is plain-text destined for email/clipboard. The upstream
+    `&amp;` in a title must decode back to `&` so a recruiter pasting
+    the report does not see `P&amp;L`.
+
+    Export is HTML. The same title must render as `&amp;` in generated
+    markup because raw `&` in HTML is invalid. That's the round-trip:
+    unescape upstream to raw, then re-escape for HTML.
+
+    Same fixture, opposite assertions per surface. Two tests pin the
+    intentional difference; either alone would let a regression on one
+    surface silently mirror the other.
+
+    Load-bearing pair on the export test: `_UPSTREAM_TITLE in output`
+    catches both raw-passthrough (no escape happened) and double-escape
+    (`&amp;amp;`) directly, because "Behavior &amp; Test-Driven..."
+    is not a substring of "Behavior &amp;amp; Test-Driven...". The
+    explicit `&amp;amp;` negative is defense-in-depth if a future
+    simplification narrows the positive assertion to just `&amp;`,
+    which would then be satisfied by `&amp;amp;` as a substring. Keep
+    both."""
+
+    _UPSTREAM_TITLE = "Behavior &amp; Test-Driven Development"
+    _CANONICAL_TITLE = "Behavior & Test-Driven Development"
+
+    def _payload_with_pre_escaped_title(self) -> dict:
+        return _payload(
+            _row(
+                "required",
+                "strong",
+                "Some requirement",
+                evidence=[
+                    {
+                        "evidence_type": "story",
+                        "story_title": self._UPSTREAM_TITLE,
+                        "client": "Fortune 500 Clients",
+                    }
+                ],
+            ),
+        )
+
+    def test_share_text_decodes_ampersand_to_plain(self):
+        """Share text output must show the canonical `&`, not the
+        upstream `&amp;`. Round-trip: unescape before rendering to
+        plain text."""
+        from ui.pages.role_match import _build_share_text
+
+        output = _build_share_text(self._payload_with_pre_escaped_title())
+        assert self._CANONICAL_TITLE in output, (
+            f"share text missing canonical title "
+            f"{self._CANONICAL_TITLE!r}; upstream `&amp;` did not decode"
+        )
+        assert "&amp;" not in output, (
+            "share text contains raw entity `&amp;`; plain-text output "
+            "must decode HTML entities from upstream before rendering"
+        )
+
+    def test_export_html_escapes_ampersand_for_html(self):
+        """Export output must show `&amp;` in the generated HTML, not
+        `&amp;amp;` (double-escape from failing to decode upstream
+        first) and not raw `&` (invalid in HTML). Round-trip: unescape
+        upstream to canonical, then html.escape for HTML output.
+
+        See class docstring on the load-bearing nature of these two
+        assertions; do not simplify the positive assertion to just
+        `&amp;` without keeping the double-escape negative."""
+        from ui.pages.role_match import _build_export_html
+
+        output = _build_export_html(self._payload_with_pre_escaped_title())
+        assert self._UPSTREAM_TITLE in output, (
+            f"export html missing HTML-escaped title "
+            f"{self._UPSTREAM_TITLE!r}; either upstream `&amp;` did not "
+            f"decode before html.escape, or html.escape did not run"
+        )
+        assert "&amp;amp;" not in output, (
+            "export html contains double-escaped `&amp;amp;`; upstream "
+            "was not decoded before html.escape ran"
+        )
+
+
+class TestExportLegendPositionStructural:
+    """MATTGPT-248 Cycle 1 follow-up: `Key:` legend anchor must appear
+    between the `</h1>` document header close and the first
+    `<h2 class="section-title">` block in the export HTML.
+
+    Green's test asserted `Key:` appeared anywhere in the output.
+    That passed on a stray Python-as-text line in the body containing
+    the substring. Structural position bounded on `</h1>` (lower) and
+    the first section-title `<h2>` (upper) catches stray artifacts
+    landing anywhere else.
+
+    Upper bound is the first `<h2 class="section-title">`, which in
+    the export template is the SUMMARY block header. This test
+    therefore enforces "legend precedes the SUMMARY block" -- the
+    stronger claim, since SUMMARY renders before the requirement
+    sections. If legend ever drifts to after SUMMARY (as a footer)
+    or between SUMMARY and REQUIRED, this test fails, which is the
+    intended catch: the legend's glyphs need to be readable by the
+    time a reader hits the SUMMARY line."""
+
+    def test_key_anchor_between_h1_close_and_first_section_title(self):
+        from ui.pages.role_match import _build_export_html
+
+        payload = _payload(_row("required", "strong", "A requirement"))
+        output = _build_export_html(payload)
+        h1_close = output.find("</h1>")
+        key_pos = output.find("Key:")
+        first_section = output.find('<h2 class="section-title"')
+        assert h1_close >= 0, "export html missing </h1>"
+        assert key_pos >= 0, "export html missing 'Key:' legend anchor"
+        assert (
+            first_section >= 0
+        ), 'export html missing first `<h2 class="section-title">`'
+        assert h1_close < key_pos, (
+            f"Key: anchor at {key_pos} must appear after </h1> close at "
+            f"{h1_close}; a legend rendered before the document header "
+            f"is out of place"
+        )
+        assert key_pos < first_section, (
+            f"Key: anchor at {key_pos} must appear before the first "
+            f'section title `<h2 class="section-title">` (SUMMARY) at '
+            f"{first_section}; the legend must precede the SUMMARY "
+            f"block so the glyphs in its count line are readable"
+        )
+
+
+class TestStatusBadgeStyleFallbackInvariant:
+    """MATTGPT-248 Cycle 1 follow-up: every string value in
+    `_STATUS_BADGE_STYLE` must be renderable in a document with no
+    `:root` (the export HTML). Concretely, if a string contains
+    `var(...)`, that var() call must carry a hex fallback inside.
+
+    This is a property of the map, NOT per-status. A new status added
+    to the map inherits the check without a new test case. Do not
+    unroll this into per-status assertions -- the whole point is that
+    new statuses stay covered automatically.
+
+    Regression this exists to catch: strong badge invisible in export
+    because `var(--success-color)` had no hex fallback and the export
+    document has no `:root`. Partial and gap survived only because
+    their vars carried hex fallbacks by coincidence.
+
+    Iterates each value directly rather than zipping to `(background,
+    glyph_color)` labels. A label-zip assumption is exactly the shape
+    trap this test exists to prevent: if the map later stores dicts,
+    3-tuples with a border, or reorders, zip would silently truncate
+    or mispair and the test would pass while checking nothing. The
+    invariant is on every string in the map, regardless of tuple
+    shape or key ordering."""
+
+    def test_every_var_reference_has_hex_fallback(self):
+        import re
+
+        from ui.pages.role_match import _STATUS_BADGE_STYLE
+
+        var_pattern = re.compile(r"var\(([^)]*)\)")
+        hex_pattern = re.compile(r"#[0-9A-Fa-f]{3,8}")
+
+        for status, values in _STATUS_BADGE_STYLE.items():
+            # Iterate values without positional labels so the test
+            # doesn't assume 2-tuple / (background, glyph_color) shape.
+            for value in values:
+                if not isinstance(value, str):
+                    # If the shape ever grows to nested structures,
+                    # descend explicitly rather than pretending strings.
+                    # For now, only strings are expected.
+                    raise AssertionError(
+                        f"_STATUS_BADGE_STYLE[{status!r}] contains "
+                        f"non-string value {value!r}; shape assumption "
+                        f"changed and this test needs updating"
+                    )
+                for var_match in var_pattern.finditer(value):
+                    inner = var_match.group(1)
+                    assert hex_pattern.search(inner), (
+                        f"_STATUS_BADGE_STYLE[{status!r}] value uses "
+                        f"var({inner!r}) without a hex fallback -- "
+                        f"would render invisible on the export HTML "
+                        f"surface, which has no :root for CSS vars "
+                        f"to bind to. Full value: {value!r}"
+                    )
+
+
+class TestBuildExportHtmlGapNoEvidence:
+    """MATTGPT-248 Cycle 1 follow-up: mirror of
+    TestBuildShareTextSupportingEvidence's gap-no-evidence pin, applied
+    to export HTML.
+
+    Export renders evidence for strong/partial rows via
+    `if status in ("strong", "partial")` in `_render_section`. That
+    guard could drift (a future refactor conflates gap with partial),
+    and share text has this pin but export doesn't. Adding the pin
+    before the drift happens."""
+
+    def test_export_html_does_not_list_evidence_for_gap_requirement(self):
+        from ui.pages.role_match import _build_export_html
+
+        adjacent_title = "Unrelated Adjacent Story"
+        payload = _payload(
+            _row(
+                "required",
+                "gap",
+                "Something we cannot do",
+                evidence=[
+                    {
+                        "evidence_type": "story",
+                        "story_title": adjacent_title,
+                        "client": "Some Client",
+                    }
+                ],
+                gap_explanation="Note: no direct experience",
+            ),
+        )
+        output = _build_export_html(payload)
+        assert adjacent_title not in output, (
+            f"export html listed evidence for a gap row: "
+            f"{adjacent_title!r} -- gap rows have nothing supporting "
+            f"them and evidence rendering must be gated on non-gap "
+            f"status"
+        )
