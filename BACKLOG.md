@@ -1592,11 +1592,12 @@ Applied to this ticket:
 ### MATTGPT-248
 **Role Match partial-failure handling: assessed rows render, honest count, no completeness claim**
 
-- **Status:** Open
+- **Status:** In Progress
 - **Priority:** High
 - **Type:** Bug
 - **File:** `ui/pages/role_match.py`, `services/jd_assessor.py`, `ui/components/role_match_summary.py`
 - **Logged:** September 10, 2026 (design decision recorded September 11, 2026)
+- **Cycle 1 Green:** 0c1189f (September 14, 2026) -- 92/92 tests passing, +481/-216
 - **Dependencies:** MATTGPT-243 (`as_completed` must ship before per-requirement results are individually addressable)
 
 **Decision:** A partially-failed assessment renders its assessed rows and an honest count. It does not suppress the summary, and it does not claim completeness.
@@ -1653,6 +1654,13 @@ A "retry the failed requirements" action. That is the affordance a visitor can a
 - A gate rejection (non-JD input rejected before LLM call) writes a Sheet row with reason "gate_rejection". (from -247)
 - The success path `query_logger` write is unchanged. (from -247)
 - All rows visible in the production Sheet within the normal `query_logger` flush window. (from -247)
+
+**Cycle 2 Red -- four pending tests (September 14, 2026):**
+
+1. **Entity round-trip.** Fixture title "Behavior & Test-Driven Development". Assert `"Behavior & Test-Driven Development"` in `_build_share_text` output AND `"&amp;"` not in output. Guards both failure modes: missing entity and double-encoding.
+2. **Legend position (structural).** In `_build_export_html`, assert `"Key:"` appears after `"</h1>"` and before the first requirement's text. Fails if the legend is Python string interpolated into the body rather than placed structurally.
+3. **Badge fallback invariant.** For every value in `_STATUS_BADGE_STYLE`, assert either `"var("` is absent OR a hex `#RRGGBB` fallback appears inside the `var(...)`. Property-tests the map; generalizes to any status added later without a separate test.
+4. **Export gap-no-evidence pin.** Mirror of the share-text test: gap row's `evidence[0].story_title` does not appear in `_build_export_html` output. Pins gap-row isolation on the export surface.
 
 **Cross-references:**
 - MATTGPT-243 (parallelization; `as_completed` is the prerequisite -- this ticket has no value on the sequential pipeline)
