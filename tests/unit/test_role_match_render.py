@@ -919,12 +919,15 @@ class TestIncompleteNoticeOrdering:
 
 
 # ---------------------------------------------------------------------------
-# MATTGPT-248 Cycle 1 follow-up Red: defects surfaced by inspecting the
-# rendered artifacts after Green landed. Each fails for a distinct reason
-# the Green-blessed tests missed:
-#   * TestEntityEscapingRoundTrip -- fixtures in Green were plain ASCII,
-#     so the html.escape path never got exercised. Real corpus titles
-#     arrive pre-escaped from upstream ingestion.
+# MATTGPT-248 Cycle 1 follow-up: regression pins for invariants Green did
+# not lock in. Surfaced by inspecting the rendered artifacts after Green
+# landed. Each pins a distinct property the Green-blessed tests missed:
+#   * TestEntityEscapingBySurface -- a title with raw `&` (as stored in
+#     the corpus) must render raw in plain-text share and escaped as
+#     `&amp;` in HTML export. Both surfaces meet the invariant today;
+#     the tests guard against a "let's escape everything consistently"
+#     refactor that would break share, or removal of html.escape from
+#     the export title path.
 #   * TestExportLegendPositionStructural -- Green's "Key:" anchor was
 #     substring-anywhere, which passed on stray template text in the
 #     body. Structural position pin catches that.
@@ -936,36 +939,62 @@ class TestIncompleteNoticeOrdering:
 #     export doesn't. Adding it before the guard drifts.
 
 
-class TestEntityEscapingRoundTrip:
-    """MATTGPT-248 Cycle 1 follow-up: escape treatment differs by surface,
-    and the fixture represents upstream pre-escaped state (story titles
-    stored with HTML entities from ingestion).
+class TestEntityEscapingBySurface:
+    """MATTGPT-248 Cycle 1 follow-up: entity escape treatment differs
+    by surface, and both surfaces already honor the invariant.
 
-    Share text is plain-text destined for email/clipboard. The upstream
-    `&amp;` in a title must decode back to `&` so a recruiter pasting
-    the report does not see `P&amp;L`.
+    Corpus reality (verified against echo_star_stories_nlp.jsonl):
+    titles containing `&` are stored as raw characters, not as
+    pre-escaped `&amp;`. There is no upstream escape to decode and no
+    round-trip.
 
-    Export is HTML. The same title must render as `&amp;` in generated
-    markup because raw `&` in HTML is invalid. That's the round-trip:
-    unescape upstream to raw, then re-escape for HTML.
+    Invariant, per surface:
+      * Export is HTML. A title with raw `&` must render as `&amp;`
+        in the generated markup, because raw `&` in HTML is invalid.
+        _build_export_html applies html.escape to titles today.
+      * Share text is plain-text destined for email/clipboard. The
+        same raw `&` must appear as `&` in the output.
+        _build_share_text does not escape titles today.
 
     Same fixture, opposite assertions per surface. Two tests pin the
-    intentional difference; either alone would let a regression on one
-    surface silently mirror the other.
+    intentional difference; either alone would let a regression on
+    one surface silently mirror the other. The class exists to catch
+    the class of refactor that flattens both paths to a single escape
+    policy ("escape everything for safety") or removes the export
+    path's escape ("titles are trusted, drop it").
 
-    Load-bearing pair on the export test: `_UPSTREAM_TITLE in output`
-    catches both raw-passthrough (no escape happened) and double-escape
-    (`&amp;amp;`) directly, because "Behavior &amp; Test-Driven..."
-    is not a substring of "Behavior &amp;amp; Test-Driven...". The
-    explicit `&amp;amp;` negative is defense-in-depth if a future
-    simplification narrows the positive assertion to just `&amp;`,
-    which would then be satisfied by `&amp;amp;` as a substring. Keep
-    both."""
+    Provenance: the `&amp;` that motivated this class was observed in
+    a clipboard paste into a chat transcript, not in the app itself.
+    Chat transports HTML-escape entities in transit; the UTM URL in
+    the same paste also showed `&amp;` separators despite no code
+    path escaping them, which is what disproved the in-code defect.
+    Tests stay as regression pins for the invariant they surfaced.
 
-    _UPSTREAM_TITLE = "Behavior &amp; Test-Driven Development"
-    _CANONICAL_TITLE = "Behavior & Test-Driven Development"
+    Assertions are title-scoped rather than whole-output. Whole-output
+    checks would false-fire on ambient content unrelated to the title
+    escape:
+      * The export footer contains a UTM-tagged share URL whose query
+        separators are raw `&` from urllib.parse.urlencode. A whole-
+        output "no bare &" negative would fail correct output.
+      * The share footer could grow a URL builder that emits `&amp;`
+        in the future. A whole-output "no `&amp;`" negative would
+        then fail for a reason unrelated to titles.
+    Title-scoped substrings (positive: exact escape form present;
+    negative: exact wrong form absent) pin the escape decision at
+    the point that matters without picking up ambient content.
 
-    def _payload_with_pre_escaped_title(self) -> dict:
+    Load-bearing pair on the export test: the full-title positive
+    catches both raw-passthrough and title-position double-escape
+    directly, because "Behavior &amp; Test-Driven Development" is
+    not a substring of "Behavior &amp;amp; Test-Driven Development"
+    (the char after `&amp;` differs: space vs `a`). The explicit
+    double-escape negative is defense-in-depth if a future
+    simplification narrows the positive to just `&amp;`, which would
+    then be satisfied by `&amp;amp;` as a substring. Keep both."""
+
+    _TITLE = "Behavior & Test-Driven Development"
+
+    def _payload(self) -> dict:
         return _payload(
             _row(
                 "required",
@@ -974,49 +1003,56 @@ class TestEntityEscapingRoundTrip:
                 evidence=[
                     {
                         "evidence_type": "story",
-                        "story_title": self._UPSTREAM_TITLE,
+                        "story_title": self._TITLE,
                         "client": "Fortune 500 Clients",
                     }
                 ],
             ),
         )
 
-    def test_share_text_decodes_ampersand_to_plain(self):
-        """Share text output must show the canonical `&`, not the
-        upstream `&amp;`. Round-trip: unescape before rendering to
-        plain text."""
+    def test_share_text_preserves_raw_ampersand(self):
+        """Share text is plain text. A title with raw `&` must appear
+        verbatim; no html.escape may run on titles in the share path.
+
+        Title-scoped negative: the `&amp;`-containing title form must
+        not appear, rather than "no `&amp;` anywhere in output" (see
+        class docstring on future footer URL builders)."""
         from ui.pages.role_match import _build_share_text
 
-        output = _build_share_text(self._payload_with_pre_escaped_title())
-        assert self._CANONICAL_TITLE in output, (
-            f"share text missing canonical title "
-            f"{self._CANONICAL_TITLE!r}; upstream `&amp;` did not decode"
+        output = _build_share_text(self._payload())
+        escaped_title = "Behavior &amp; Test-Driven Development"
+        assert self._TITLE in output, (
+            f"share text missing raw title {self._TITLE!r}; likely "
+            f"html.escape ran on the title in the share path"
         )
-        assert "&amp;" not in output, (
-            "share text contains raw entity `&amp;`; plain-text output "
-            "must decode HTML entities from upstream before rendering"
+        assert escaped_title not in output, (
+            f"share text contains escaped title form "
+            f"{escaped_title!r}; plain-text output for clipboard must "
+            f"preserve the raw `&` character in titles"
         )
 
-    def test_export_html_escapes_ampersand_for_html(self):
-        """Export output must show `&amp;` in the generated HTML, not
-        `&amp;amp;` (double-escape from failing to decode upstream
-        first) and not raw `&` (invalid in HTML). Round-trip: unescape
-        upstream to canonical, then html.escape for HTML output.
+    def test_export_html_escapes_ampersand(self):
+        """Export is HTML. A title with raw `&` must render as
+        `&amp;` in the generated markup, and must not be
+        double-escaped (`&amp;amp;`).
 
-        See class docstring on the load-bearing nature of these two
-        assertions; do not simplify the positive assertion to just
-        `&amp;` without keeping the double-escape negative."""
+        Title-scoped double-escape negative rather than
+        `"&amp;amp;" not in output`: the export footer's UTM URL
+        contains raw `&` separators from urlencode, and any future
+        change touching that footer must not have to work around this
+        test. See class docstring."""
         from ui.pages.role_match import _build_export_html
 
-        output = _build_export_html(self._payload_with_pre_escaped_title())
-        assert self._UPSTREAM_TITLE in output, (
-            f"export html missing HTML-escaped title "
-            f"{self._UPSTREAM_TITLE!r}; either upstream `&amp;` did not "
-            f"decode before html.escape, or html.escape did not run"
+        output = _build_export_html(self._payload())
+        expected = "Behavior &amp; Test-Driven Development"
+        double_escaped = "Behavior &amp;amp; Test-Driven Development"
+        assert expected in output, (
+            f"export html missing HTML-escaped title {expected!r}; "
+            f"html.escape did not run on the title in the export path"
         )
-        assert "&amp;amp;" not in output, (
-            "export html contains double-escaped `&amp;amp;`; upstream "
-            "was not decoded before html.escape ran"
+        assert double_escaped not in output, (
+            f"export html contains double-escaped title "
+            f"{double_escaped!r}; html.escape ran twice on the title"
         )
 
 
