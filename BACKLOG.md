@@ -1736,11 +1736,25 @@ Full ranked 25 available from `probe_243_top_k_rank.py` (re-runnable against cur
 
 1. **Qualifier stripping:** On the demo JD, 7 of 23 requirements lost qualifiers during extraction -- the extracted text is narrower than what the JD actually requires. Downstream: assessor evaluates a stripped requirement and can produce verdicts that don't reflect what the hiring manager wrote. (Original -160 scope.)
 
+   **Strongest single example -- Kubernetes row (September 2026):** The JD required Kubernetes, service mesh, and container orchestration at production scale. Extraction kept "at production scale" and dropped the three named capabilities. The stripped requirement looks specific (production scale is a qualifier) but is unfailable: any story that mentions scale at all will satisfy it, and the three capabilities that would actually discriminate the assessment are gone. This is the clearest case where stripping is not lossy compression -- it removes the test.
+
+   **Diagnosis pending:** Whether stripping is model-side (the LLM omitting qualifiers from its JSON) or code-side (post-extraction handling dropping them) is unresolved. The raw extraction JSON at the boundary -- before any downstream handling -- is the single line of evidence that settles it.
+
 2. **Requirement-count variance (±15%):** The same AT&T JD input produced 17 requirements on one run and 18 on another. The extraction prompt is nondeterministic -- the same JD produces a different requirement list on each cold-path call. Downstream: cache hits mask this; every novel JD gets a different extraction, and verdicts on the volatile requirement are unrepeatable.
 
 3. **Coverage miss:** AT&T JD "Kafka + IXBUS technical leadership" was not extracted as a requirement at all (MATTGPT-159 audit, Arm 1/row 10). The story "Cloud-Native Architecture" mentions event-driven systems with Kafka and was available in the corpus -- Arm 1 produced UNMATCHED because extraction never handed the requirement to the assessor. Root cause: wrapper prompt differs from the production prompt used in the probe (same issue Probe A identified; still unresolved).
 
 4. **Wall clock floor:** ~22s on the demo JD. `extract_requirements()` is a single sequential call; parallelizing the `assess` loop in -243 does not reduce this floor. Lowering it requires a prompt or call-structure change in extraction itself.
+
+**Pre-flight instrumentation (land before opening this ticket, not inside it):**
+
+Three additions to the existing logging, costing one DEBUG line and two fields:
+
+1. `DEBUG extraction: <json>` at the extraction boundary -- the raw JSON as returned by the model, before any downstream handling. This is the single line that settles whether stripping is model-side or code-side, and it must exist before the first attempt at a fix, not after.
+2. Requirement text (truncated to 40 characters) on each existing `req N` log line. Without it, indices cannot be mapped to rows and per-requirement findings are not attributable.
+3. Category (`required` / `preferred` / `implicit`) on each `req N` log line. The two under-called requirements from the September 2026 audit both appeared to be implicit; that pattern is not checkable without category in the log.
+
+These are a pre-condition for -160 Red, not part of -160 scope.
 
 **Probe script:** `probe_db_extraction.py` (repo root) runs `extract_requirements()` on the structured JD, compares extracted text to source, and tests full-text vs stripped retrieval through Pinecone at top-40. Re-use this rather than building a new probe.
 
