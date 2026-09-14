@@ -216,7 +216,87 @@ _HEADER_HTML = f"""
 # render the recruiter view (status icons, evidence chips, gap explanations).
 # Phase 2: recruiter view only — no fit score / recommendation / private section.
 
-_STATUS_ICON = {"strong": "✓", "partial": "~", "gap": "✗"}
+_STATUS_ICON = {"strong": "✓", "partial": "~", "gap": "✗", "unassessed": "⋯"}
+
+# MATTGPT-248: statuses the render sites accept without coercion. Anything
+# else (missing key, unknown value) coerces to "unassessed" via
+# `_normalize_row_status` and logs a warning naming the offending value.
+# Matches services.role_match_summary._ASSESSED_STATUSES + ("unassessed",)
+# so the render layer and the count layer stay word-identical.
+_KNOWN_MATCH_STATUSES = ("strong", "partial", "gap", "unassessed")
+
+# MATTGPT-248: per-status treatment maps. Three statuses are verdicts and
+# render as a white glyph on a saturated fill; `unassessed` is deliberately
+# quieter -- --text-secondary on --pill-bg -- because it is an absence of
+# information rather than a verdict. --success-color is defined in
+# global_styles.py; --warning-color/--error-color are not, so the hex
+# fallbacks carry those two (same note as _render_results_panel).
+_STATUS_ORDER = ("strong", "partial", "gap", "unassessed")
+
+_STATUS_LABEL = {
+    "strong": "Strong match",
+    "partial": "Partial",
+    "gap": "Gap",
+    "unassessed": "Unassessed",
+}
+
+_STATUS_BADGE_STYLE = {
+    "strong": ("var(--success-color,#10B981)", "white"),
+    "partial": ("var(--warning-color,#F59E0B)", "white"),
+    "gap": ("var(--error-color,#EF4444)", "white"),
+    "unassessed": ("var(--pill-bg,#F3F4F6)", "var(--text-secondary,#6B7280)"),
+}
+
+_STATUS_TEXT_COLOR = {
+    "strong": "var(--success-color,#10B981)",
+    "partial": "var(--warning-color,#F59E0B)",
+    "gap": "var(--error-color,#EF4444)",
+    "unassessed": "var(--text-secondary,#6B7280)",
+}
+
+
+def _normalize_row_status(row: dict) -> str:
+    """MATTGPT-248: coerce a row's match_status to one of
+    strong/partial/gap/unassessed. A missing key or unknown value
+    coerces to 'unassessed' and logs a warning naming the offending
+    value so the producer bug is diagnosable. The row still renders
+    (with the unassessed badge) and still counts.
+
+    The developer-facing log phrase is 'malformed row', distinct from
+    Cycle 2's caught-exception log wording, so the two producer-side
+    causes are grep-distinguishable.
+    """
+    status = row.get("match_status")
+    if status in _KNOWN_MATCH_STATUSES:
+        return status
+    logger.warning(
+        "role_match malformed row: match_status %r not in %r; "
+        "coercing to 'unassessed'. Requirement: %r",
+        status,
+        _KNOWN_MATCH_STATUSES,
+        (row.get("requirement") or "")[:60],
+    )
+    return "unassessed"
+
+
+def _normalize_row_category(row: dict) -> str:
+    """MATTGPT-248: coerce a row's category to 'required' or 'preferred'.
+    Any other value coerces to 'required' and logs a warning naming
+    the offending value. Matches
+    services.role_match_summary.compute_summary_counts's category
+    coercion so the count layer and the rendered rows agree on both
+    axes.
+    """
+    cat = row.get("category")
+    if cat in ("required", "preferred"):
+        return cat
+    logger.warning(
+        "role_match malformed row: category %r not in "
+        "('required', 'preferred'); coercing to 'required'. Requirement: %r",
+        cat,
+        (row.get("requirement") or "")[:60],
+    )
+    return "required"
 
 
 def _find_story_by_title_client(
@@ -468,27 +548,174 @@ def _render_requirement_card(
             )
 
 
-def _count_spans(counts: dict) -> str:
-    """MATTGPT-248: render the screen-surface count line as HTML spans
-    for one category's counts dict.
+def _count_fragments(counts: dict) -> list[str]:
+    """MATTGPT-248: the single source of truth for count-line wording.
 
-    Currently defined nested inside `_render_results_panel` so it can
-    close over `_gs`/`_ga`/`_gr` style constants. Cycle 1 Green promotes
-    it to module scope (inlining the style constants) so the same
-    function is called from the render path AND from unit tests, which
-    is the only way to assert the screen surface stays word-identical
-    with the two off-screen count builders.
+    Returns plain-text fragments in fixed status order, omitting any
+    status whose count is zero:
 
-    Output form (verbose, word-identical with `_ex_count_line` and the
-    new share-text count builder):
+        ["16 ✓ strong", "2 ~ partial"]
 
-        10 ✓ strong &nbsp;1 ~ partial &nbsp;2 ✗ gap &nbsp;2 ⋯ unassessed
-
-    Zero counts are omitted from the fragment sequence, so a counts
-    dict with only strong entries renders "N ✓ strong" without any
-    trailing joiners or empty fragments.
+    Every surface builds its count line from these fragments and owns
+    only its joiner and its decoration. That is what makes the three
+    surfaces word-identical -- the words live in exactly one place, so
+    they cannot drift the way _count_spans and _ex_count_line did.
     """
-    raise NotImplementedError
+    return [
+        f"{counts[status]} {_STATUS_ICON[status]} {status}"
+        for status in _STATUS_ORDER
+        if counts.get(status, 0) > 0
+    ]
+
+
+def _count_spans(counts: dict) -> str:
+    """MATTGPT-248: screen count line as colored HTML spans.
+
+    Promoted from a nested closure in _render_results_panel to module
+    scope so the parity tests can compare its fragments against the
+    off-screen builder's. Style constants inlined rather than closed over.
+
+    The ,&nbsp; joiner is screen-only, matching the export's ", " on punctuation
+    while keeping the space non-breaking. Off-screen surfaces read _count_fragments
+    directly so no HTML entity reaches a plain-text surface.
+
+
+    """
+    parts = [
+        f'<span class="count-{status}" '
+        f'style="color:{_STATUS_TEXT_COLOR[status]};font-weight:600;">'
+        f"{counts[status]} {_STATUS_ICON[status]} {status}</span>"
+        for status in _STATUS_ORDER
+        if counts.get(status, 0) > 0
+    ]
+    return ",&nbsp;".join(parts)
+
+
+def _ex_count_line(label: str, counts: dict) -> str:
+    """MATTGPT-248: count line for both off-screen surfaces, plain text.
+
+    Promoted to module scope from a nested closure in _build_export_html
+    so _build_share_text can share it. Export and report take identical
+    count copy because neither reader can act on it.
+    """
+    fragments = _count_fragments(counts)
+    return f"{label}: {', '.join(fragments)}" if fragments else ""
+
+
+def _dp_lines(points: list[dict], *, surface: str) -> list[str]:
+    """MATTGPT-248: discussion-points section for one surface.
+
+    Returns [] on empty input; callers skip the section header when the
+    return is empty. That is what makes branch 4 (all rows unassessed,
+    so no honest discussion points exist) safe on all three surfaces
+    without three separate empty guards.
+
+    Three branches because the three surfaces genuinely differ: screen
+    carries inline styles, export relies on its own stylesheet, report
+    is plain text. One function keeps them from drifting apart.
+    """
+    if not points:
+        return []
+    lines = []
+    for pt in points:
+        text = pt["text"]
+        label = pt.get("label_type") or ""
+        if surface == "share":
+            prefix = f"{label}: " if label and not pt.get("is_zero_case") else ""
+            lines.append(f"   {prefix}{text}")
+        elif surface == "export":
+            esc = html.escape(text)
+            if pt.get("is_zero_case"):
+                lines.append(f"<li>{esc}</li>")
+            elif pt.get("is_overflow_indicator"):
+                lines.append(f"<li><em>{esc}</em></li>")
+            else:
+                lines.append(f"<li><strong>{html.escape(label)}:</strong> {esc}</li>")
+        else:
+            esc = html.escape(text)
+            if pt.get("is_zero_case"):
+                lines.append(
+                    '<li style="list-style:none;padding:2px 0;'
+                    f'color:var(--success-color);">{esc}</li>'
+                )
+            elif pt.get("is_overflow_indicator"):
+                lines.append(
+                    '<li style="list-style:none;padding:2px 0;'
+                    f'color:var(--text-secondary);font-style:italic;">{esc}</li>'
+                )
+            else:
+                color = (
+                    _STATUS_TEXT_COLOR["gap"]
+                    if "Gap" in label
+                    else _STATUS_TEXT_COLOR["partial"]
+                )
+                lines.append(
+                    '<li style="list-style:none;padding:2px 0;">'
+                    f'<span style="font-size:11px;font-weight:700;'
+                    f'color:{color};margin-right:6px;">'
+                    f"{html.escape(label)}</span>{esc}</li>"
+                )
+    return lines
+
+
+def _legend_entries(*, surface: str) -> list[str]:
+    """MATTGPT-248: ordered legend entries for one surface.
+
+    Order is fixed: strong, partial, gap, unassessed, then the two
+    evidence types. Static by construction -- no `results` argument,
+    because a legend that appeared and disappeared with assessment
+    content would be a second thing for the reader to interpret.
+
+    The 🔗 icon is the only per-surface difference. It marks a clickable
+    chip, and nothing is clickable in a PDF or a pasted email, so the
+    off-screen surfaces name the evidence type in words instead.
+    """
+    entries = []
+    for status in _STATUS_ORDER:
+        label = _STATUS_LABEL[status]
+        if surface == "share":
+            entries.append(f"{_STATUS_ICON[status]} {label}")
+            continue
+        fill, glyph_color = _STATUS_BADGE_STYLE[status]
+        entries.append(
+            '<div style="display:inline-flex;align-items:center;gap:6px;">'
+            '<span style="display:inline-flex;align-items:center;'
+            "justify-content:center;width:16px;height:16px;border-radius:50%;"
+            f"background:{fill};color:{glyph_color};font-size:10px;"
+            f'font-weight:700;line-height:1;">{_STATUS_ICON[status]}</span>'
+            f"{label}</div>"
+        )
+
+    if surface == "share":
+        entries.append("Project evidence: a story from the portfolio")
+        entries.append("Profile: background from Matt's profile")
+        return entries
+
+    entries.append(
+        '<span style="width:1px;height:14px;background:var(--border-color);'
+        'display:inline-block;"></span>'
+    )
+    if surface == "screen":
+        entries.append(
+            '<div style="display:inline-flex;align-items:center;gap:6px;">'
+            "🔗 = project evidence</div>"
+        )
+        entries.append(
+            '<div style="display:inline-flex;align-items:center;gap:6px;">'
+            '<span style="width:8px;height:8px;border-radius:50%;'
+            'background:var(--text-secondary);display:inline-block;"></span>'
+            " = profile</div>"
+        )
+    else:
+        entries.append(
+            '<div style="display:inline-flex;align-items:center;gap:6px;">'
+            "Project evidence: a story from the portfolio</div>"
+        )
+        entries.append(
+            '<div style="display:inline-flex;align-items:center;gap:6px;">'
+            "Profile: background from Matt's profile</div>"
+        )
+    return entries
 
 
 def _incomplete_notice_text(counts: dict, total: int, *, surface: str) -> str | None:
@@ -503,37 +730,18 @@ def _incomplete_notice_text(counts: dict, total: int, *, surface: str) -> str | 
 
     Callers pass surface="print" for both _build_export_html and
     _build_share_text since the copy is the same for those two surfaces.
+
+    N is the combined unassessed count across required + preferred.
     """
-    raise NotImplementedError
-
-
-def _dp_lines(points: list[dict], *, surface: str) -> list[str]:
-    """MATTGPT-248: render the discussion-points section for a given
-    surface as a list of lines/HTML fragments. Returns [] on empty
-    input; callers skip emitting a section header when the return is
-    empty.
-
-    Centralizes branch 4 handling across screen, export, and share so
-    the omission behavior is enforced in one place.
-    """
-    raise NotImplementedError
-
-
-def _legend_entries(*, surface: str) -> list[str]:
-    """MATTGPT-248: return the ordered legend entries for a given surface
-    as a list of rendered strings (HTML fragments for screen/export,
-    plain text for share).
-
-    Order (fixed): strong -> partial -> gap -> unassessed -> project
-    evidence -> profile.
-
-    Static by construction -- the signature has no `results` argument
-    because legend content does not depend on assessment content. Per-
-    surface filter: 🔗 icon appears on screen only. Export and report
-    use plain-text prefixes ("Project evidence:" / "Profile:") for the
-    evidence-type entries.
-    """
-    raise NotImplementedError
+    required_unassessed = counts.get("required", {}).get("unassessed", 0)
+    preferred_unassessed = counts.get("preferred", {}).get("unassessed", 0)
+    n = required_unassessed + preferred_unassessed
+    if n <= 0:
+        return None
+    base = f"🐾 I couldn't get to {n} of these {total} requirements."
+    if surface == "screen":
+        return f"{base} Try again for the full picture."
+    return base
 
 
 def _build_share_text(result_payload: dict) -> str:
@@ -565,25 +773,87 @@ def _build_share_text(result_payload: dict) -> str:
     company = extraction.get("company") or ""
 
     results = result_payload.get("results") or []
-    required = [r for r in results if r.get("category") == "required"]
-    preferred = [r for r in results if r.get("category") == "preferred"]
+    # MATTGPT-248: category coercion aligned with
+    # services.role_match_summary.compute_summary_counts so a row with
+    # an unrecognized category falls into 'required' rather than being
+    # silently dropped from both sections. Also normalizes match_status
+    # so each row carries a known value before the render loop touches
+    # it -- the ? sentinel fallback is retired because it has no legend
+    # entry on any surface.
+    required: list[dict] = []
+    preferred: list[dict] = []
+    for r in results:
+        if _normalize_row_category(r) == "required":
+            required.append(r)
+        else:
+            preferred.append(r)
 
-    lines = [f"Matt Pugmire — {role} fit assessment"]
+    lines = [f"Matt Pugmire: {role} fit assessment"]
     if company:
         lines.append(company)
     lines.append("")
+    # MATTGPT-248: the report had no summary, so a forwarded assessment
+    # opened on the first requirement and gave the reader no top-line
+    # read. Counts route through _ex_count_line so the wording is
+    # identical to the export's.
+    _counts = compute_summary_counts(results)
+    _points = build_discussion_points(results)
+    _notice = _incomplete_notice_text(_counts, len(results), surface="print")
+    if _notice:
+        lines.append(_notice)
+        lines.append("")
+    _count_lines = [
+        line
+        for line in [
+            _ex_count_line("Required", _counts["required"]),
+            _ex_count_line("Preferred", _counts["preferred"]),
+        ]
+        if line
+    ]
+    if _count_lines:
+        lines.append("SUMMARY")
+        lines.append("  |  ".join(_count_lines))
+        _dp = _dp_lines(_points, surface="share")
+        if _dp:
+            _dp_count = sum(
+                1
+                for p in _points
+                if not p.get("is_overflow_indicator") and not p.get("is_zero_case")
+            )
+            lines.append(f"Discussion points ({_dp_count})")
+            lines.extend(_dp)
+        lines.append("")
 
     def _section(title: str, items: list[dict]) -> None:
         if not items:
             return
         lines.append(f"{title} ({len(items)})")
         for r in items:
-            icon = _STATUS_ICON.get(r.get("match_status", "gap"), "?")
+            status = _normalize_row_status(r)
+            icon = _STATUS_ICON[status]
             lines.append(f"{icon} {r.get('requirement', '')}")
-            if r.get("match_status") in ("partial", "gap"):
+            # MATTGPT-248: supporting evidence per non-gap row. The report
+            # is the artifact most likely to be forwarded to a second
+            # reader, and it was the one surface listing verdicts with no
+            # proof behind them. Three-space indent matches the gap note
+            # below so evidence reads as support for the requirement
+            # rather than as a peer of it.
+            if status in ("strong", "partial"):
+                for ev in (r.get("evidence") or [])[:2]:
+                    if ev.get("evidence_type") == "profile":
+                        rel = (ev.get("relevance") or "").strip()
+                        if rel:
+                            lines.append(f"   Profile: {rel}")
+                    else:
+                        ev_title = ev.get("story_title") or "Untitled"
+                        ev_client = ev.get("client") or ""
+                        suffix = f" ({ev_client})" if ev_client else ""
+                        lines.append(f"   Project evidence: {ev_title}{suffix}")
+
+            if status in ("partial", "gap"):
                 gap = (r.get("gap_explanation") or "").strip()
                 if gap:
-                    # Indent only — no "Gap:" prefix. The LLM's gap_explanation
+                    # Indent only, no "Gap:" prefix. The LLM's gap_explanation
                     # already starts with "Note:" (per the assessment prompt),
                     # so a "Gap:" prefix produces the redundant "Gap: Note: ..."
                     # in the clipboard output. The 3-space indent visually
@@ -617,6 +887,13 @@ def _build_share_text(result_payload: dict) -> str:
         utm_params["utm_content"] = content_slug
     portfolio_url = f"https://askmattgpt.streamlit.app/?{urlencode(utm_params)}"
 
+    # MATTGPT-248: plain-text key. Same argument as the export legend,
+    # sharper here: a pasted email has no styling at all, so the glyphs
+    # are the only structure the second reader gets.
+    lines.append("Key:")
+    for _entry in _legend_entries(surface="share"):
+        lines.append(f"  {_entry}")
+
     lines.append("")
     lines.append(f"Explore Matt's full portfolio: {portfolio_url}")
 
@@ -636,8 +913,16 @@ def _build_export_html(result_payload: dict) -> str:
     header_meta = company if company else ""
 
     results = result_payload.get("results") or []
-    required = [r for r in results if r.get("category") == "required"]
-    preferred = [r for r in results if r.get("category") == "preferred"]
+    # MATTGPT-248: category coercion aligned with services layer so
+    # a row with an unrecognized category renders under 'required'
+    # rather than being silently dropped from both sections.
+    required: list[dict] = []
+    preferred: list[dict] = []
+    for r in results:
+        if _normalize_row_category(r) == "required":
+            required.append(r)
+        else:
+            preferred.append(r)
 
     def _render_section(title: str, items: list[dict]) -> str:
         if not items:
@@ -645,8 +930,12 @@ def _build_export_html(result_payload: dict) -> str:
         rows = []
         rows.append(f'<h2 class="section-title">{title} ({len(items)})</h2>')
         for r in items:
-            status = r.get("match_status", "gap")
-            icon = _STATUS_ICON.get(status, "?")
+            # MATTGPT-248: coerce status through _normalize_row_status so
+            # malformed rows render with the unassessed badge (not a "?"
+            # sentinel and not silently coerced to gap). Log fires from
+            # the normalizer.
+            status = _normalize_row_status(r)
+            icon = _STATUS_ICON[status]
             req_text = html.escape(r.get("requirement", ""))
             rows.append(
                 f'<div class="req"><span class="status {status}">{icon}</span><span class="req-text">{req_text}</span></div>'
@@ -658,7 +947,7 @@ def _build_export_html(result_payload: dict) -> str:
                     if ev_type == "profile":
                         relevance = html.escape(ev.get("relevance", ""))
                         rows.append(
-                            f'<div class="evidence profile"><strong>Profile</strong> — {relevance}</div>'
+                            f'<div class="evidence profile"><strong>Profile:</strong> {relevance}</div>'
                         )
                     else:
                         title_text = html.escape(ev.get("story_title") or "Untitled")
@@ -683,16 +972,6 @@ def _build_export_html(result_payload: dict) -> str:
     _ex_rc = _ex_counts["required"]
     _ex_pc = _ex_counts["preferred"]
 
-    def _ex_count_line(label: str, c: dict) -> str:
-        parts = []
-        if c["strong"] > 0:
-            parts.append(f'{c["strong"]} ✓ strong')
-        if c["partial"] > 0:
-            parts.append(f'{c["partial"]} ~ partial')
-        if c["gap"] > 0:
-            parts.append(f'{c["gap"]} ✗ gap')
-        return f"{label}: {', '.join(parts)}" if parts else ""
-
     _ex_count_lines = [
         line
         for line in [
@@ -706,30 +985,47 @@ def _build_export_html(result_payload: dict) -> str:
         for p in _ex_points
         if not p.get("is_overflow_indicator") and not p.get("is_zero_case")
     )
-    _ex_point_rows = []
-    for _pt in _ex_points:
-        if _pt.get("is_zero_case"):
-            _ex_point_rows.append(f'<li>{html.escape(_pt["text"])}</li>')
-        elif _pt.get("is_overflow_indicator"):
-            _ex_point_rows.append(f'<li><em>{html.escape(_pt["text"])}</em></li>')
-        else:
-            _ex_point_rows.append(
-                f'<li><strong>{html.escape(_pt["label_type"])}</strong> — {html.escape(_pt["text"])}</li>'
-            )
+    _ex_dp_count = sum(
+        1
+        for p in _ex_points
+        if not p.get("is_overflow_indicator") and not p.get("is_zero_case")
+    )
+    _ex_point_rows = _dp_lines(_ex_points, surface="export")
+    _ex_dp_html = (
+        f"<p><strong>Discussion points ({_ex_dp_count})</strong></p>"
+        f'<ul>{"".join(_ex_point_rows)}</ul>'
+        if _ex_point_rows
+        else ""
+    )
+    _ex_notice = _incomplete_notice_text(_ex_counts, len(results), surface="print")
+    _ex_notice_html = (
+        f'<p class="incomplete-notice">{html.escape(_ex_notice)}</p>'
+        if _ex_notice
+        else ""
+    )
+
+    # MATTGPT-248: the export carried bare ✓ ~ ✗ glyphs with nothing
+    # explaining them. A printed assessment has no hover, no tooltip,
+    # and no page to scroll back to, so the key has to travel with it.
+    legend_export_html = (
+        '<div class="legend"><strong>Key:</strong>'
+        + "".join(_legend_entries(surface="export"))
+        + "</div>"
+    )
+
     summary_export_html = (
         '<div class="summary-section">'
         '<h2 class="section-title">SUMMARY</h2>'
-        f'<p class="summary-counts">{"  |  ".join(_ex_count_lines)}</p>'
-        f'<p><strong>Discussion points ({_ex_dp_count})</strong></p>'
-        f'<ul>{"".join(_ex_point_rows)}</ul>'
-        "</div>"
+        + f'<p class="summary-counts">{"  |  ".join(_ex_count_lines)}</p>'
+        + _ex_dp_html
+        + "</div>"
     )
 
     return f"""
         <!DOCTYPE html>
         <html>
         <head>
-            <title>Role Match — {role}</title>
+            <title>Role Match: {role}</title>
             <style>
                 body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 40px; max-width: 900px; margin: 0 auto; color: #1F2937; }}
                 h1 {{ color: #1F2937; font-size: 24px; margin-bottom: 4px; }}
@@ -737,9 +1033,11 @@ def _build_export_html(result_payload: dict) -> str:
                 .section-title {{ color: #8B5CF6; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin: 24px 0 12px 0; }}
                 .summary-section {{ margin-bottom: 24px; padding: 16px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 8px; }}
                 .summary-counts {{ font-size: 13px; color: #6B7280; margin: 0 0 8px 0; }}
+                .legend {{ display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 10px 14px; border: 1px solid #E5E7EB; border-radius: 10px; margin-bottom: 14px; font-size: 11px; color: #6B7280; }}
+                .incomplete-notice {{ font-size: 12px; color: #6B7280; margin: 0 0 8px 0; }}
                 .req {{ display: flex; gap: 10px; align-items: center; margin: 0 0 4px 0; padding: 12px 0 0 0; }}
                 .req-text {{ font-size: 14px; font-weight: 500; color: #1F2937; line-height: 1.45; margin: 0; padding: 0; }}
-                /* Status badge — explicit margin/padding zero and line-height
+                /* Status badge: explicit margin/padding zero and line-height
                    lock so the badge sits identically across strong/partial/gap
                    regardless of how the inner glyph (✓ ~ ✗) renders in the
                    browser's print font. */
@@ -750,11 +1048,14 @@ def _build_export_html(result_payload: dict) -> str:
                 .evidence {{ margin-left: 32px; margin-top: 6px; padding: 6px 10px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 6px; font-size: 12px; color: #1F2937; }}
                 .evidence.profile {{ background: rgba(139, 92, 246, 0.08); border-color: rgba(139, 92, 246, 0.2); }}
                 .gap {{ margin-left: 32px; margin-top: 6px; font-size: 12px; color: #6B7280; }}
+
             </style>
         </head>
         <body>
-            <h1>Role Match — {role}</h1>
+            <h1>Role Match: {role}</h1>
             <div class="meta">{header_meta}</div>
+            {_ex_notice_html}
+            {legend_export_html}
             {summary_export_html}
             {required_html}
             {preferred_html}
@@ -856,65 +1157,16 @@ def _render_results_panel(result_payload: dict, stories: list[dict]) -> None:
         "padding:10px 14px;background:var(--bg-card);"
         "border:1px solid var(--border-color);border-radius:10px;"
         'margin-bottom:14px;font-size:11px;color:var(--text-secondary);">'
-        # ✓ Strong match
-        '<div style="display:inline-flex;align-items:center;gap:6px;">'
-        '<span style="display:inline-flex;align-items:center;justify-content:center;'
-        "width:16px;height:16px;border-radius:50%;background:var(--success-color);"
-        'color:white;font-size:10px;font-weight:700;line-height:1;">✓</span>'
-        "Strong match</div>"
-        # ~ Partial
-        '<div style="display:inline-flex;align-items:center;gap:6px;">'
-        '<span style="display:inline-flex;align-items:center;justify-content:center;'
-        "width:16px;height:16px;border-radius:50%;"
-        "background:var(--warning-color,#F59E0B);"
-        'color:white;font-size:10px;font-weight:700;line-height:1;">~</span>'
-        "Partial</div>"
-        # ✗ Gap
-        '<div style="display:inline-flex;align-items:center;gap:6px;">'
-        '<span style="display:inline-flex;align-items:center;justify-content:center;'
-        "width:16px;height:16px;border-radius:50%;"
-        "background:var(--error-color,#EF4444);"
-        'color:white;font-size:10px;font-weight:700;line-height:1;">✗</span>'
-        "Gap</div>"
-        # divider
-        '<span style="width:1px;height:14px;background:var(--border-color);'
-        'display:inline-block;"></span>'
-        # 🔗 = project evidence
-        '<div style="display:inline-flex;align-items:center;gap:6px;">'
-        "🔗 = project evidence</div>"
-        # ● = profile
-        '<div style="display:inline-flex;align-items:center;gap:6px;">'
-        '<span style="width:8px;height:8px;border-radius:50%;'
-        'background:var(--text-secondary);display:inline-block;"></span>'
-        " = profile</div>"
-        "</div>"
+        + "".join(_legend_entries(surface="screen"))
+        + "</div>"
     )
     st.markdown(legend_html, unsafe_allow_html=True)
 
-    # Summary block — counts line + discussion points, between legend and sections.
+    # Summary block — counts line + discussion points, between legend and sections.su
     _counts = compute_summary_counts(results)
     _points = build_discussion_points(results)
     _rc = _counts["required"]
     _pc = _counts["preferred"]
-    # --success-color is in global_styles.py; --warning-color/--error-color are not → keep fallbacks.
-    _gs = "color:var(--success-color);font-weight:600;"
-    _ga = "color:var(--warning-color,#F59E0B);font-weight:600;"
-    _gr = "color:var(--error-color,#EF4444);font-weight:600;"
-
-    def _count_spans(c: dict) -> str:
-        """Render colored count spans, omitting any count that is zero."""
-        parts = []
-        if c["strong"] > 0:
-            parts.append(
-                f'<span class="count-strong" style="{_gs}">{c["strong"]} ✓</span>'
-            )
-        if c["partial"] > 0:
-            parts.append(
-                f'<span class="count-partial" style="{_ga}">{c["partial"]} ~</span>'
-            )
-        if c["gap"] > 0:
-            parts.append(f'<span class="count-gap" style="{_gr}">{c["gap"]} ✗</span>')
-        return "&nbsp;".join(parts)
 
     _req_spans = _count_spans(_rc)
     _pref_spans = _count_spans(_pc)
@@ -930,44 +1182,46 @@ def _render_results_panel(result_payload: dict, stories: list[dict]) -> None:
         + "</div>"
     )
 
+    # MATTGPT-248: the notice sits above the count line because under
+    # branch 4 -- every row unassessed, so no honest discussion points
+    # exist -- it is the only visible signal that the assessment is
+    # incomplete. Screen takes the action clause; the two off-screen
+    # surfaces do not, because their readers cannot retry.
+    _notice = _incomplete_notice_text(_counts, len(results), surface="screen")
+    _notice_html = (
+        f'<div style="font-size:12px;color:var(--text-secondary);'
+        f'margin:0 0 8px 0;">{html.escape(_notice)}</div>'
+        if _notice
+        else ""
+    )
+
     _dp_count = sum(
         1
         for p in _points
         if not p.get("is_overflow_indicator") and not p.get("is_zero_case")
     )
-    _point_items = []
-    for _pt in _points:
-        _txt = html.escape(_pt["text"])
-        if _pt.get("is_zero_case"):
-            _point_items.append(
-                f'<li style="list-style:none;padding:2px 0;color:var(--success-color);">{_txt}</li>'
-            )
-        elif _pt.get("is_overflow_indicator"):
-            _point_items.append(
-                f'<li style="list-style:none;padding:2px 0;color:var(--text-secondary);font-style:italic;">{_txt}</li>'
-            )
-        else:
-            _lc = (
-                "var(--error-color,#EF4444)"
-                if "Gap" in _pt["label_type"]
-                else "var(--warning-color,#F59E0B)"
-            )
-            _point_items.append(
-                f'<li style="list-style:none;padding:2px 0;">'
-                f'<span style="font-size:11px;font-weight:700;color:{_lc};margin-right:6px;">'
-                f"{html.escape(_pt['label_type'])}</span>{_txt}</li>"
-            )
+    _point_items = _dp_lines(_points, surface="screen")
+    _dp_html = (
+        f'<div style="font-size:12px;font-weight:600;'
+        f'color:var(--text-secondary);margin:8px 0 4px 0;">'
+        f"Discussion points ({_dp_count})</div>"
+        f'<ul style="margin:0;padding:0;font-size:13px;'
+        f'color:var(--text-primary);">{"".join(_point_items)}</ul>'
+        if _point_items
+        else ""
+    )
     _summary_html = (
         '<div class="role-match-summary"'
         ' style="background:var(--bg-card);border:1px solid var(--border-color);'
         'border-radius:10px;padding:12px 16px;margin-bottom:14px;">'
         '<div style="font-size:11px;font-weight:700;text-transform:uppercase;'
         'letter-spacing:0.08em;color:var(--text-secondary);margin-bottom:6px;">SUMMARY</div>'
+        + _notice_html
         + _counts_line
-        + f'<div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin:8px 0 4px 0;">Discussion points ({_dp_count})</div>'
-        f'<ul style="margin:0;padding:0;font-size:13px;color:var(--text-primary);">{"".join(_point_items)}</ul>'
-        "</div>"
+        + _dp_html
+        + "</div>"
     )
+
     st.markdown(_summary_html, unsafe_allow_html=True)
 
     # Hint text lives in the LEFT column above the textarea (rendered in
@@ -1605,51 +1859,8 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
 
 /* Legend bar — static row at the top of the results panel above the
    first section header. */
-.role-match-legend {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 16px;
-    padding: 10px 14px;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    margin-bottom: 14px;
-    font-size: 11px;
-    color: var(--text-secondary);
-}
-.role-match-legend .legend-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-.role-match-legend .legend-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    color: white;
-    font-size: 10px;
-    font-weight: 700;
-    line-height: 1;
-}
-.role-match-legend .legend-badge.strong  { background: var(--success-color); }
-.role-match-legend .legend-badge.partial { background: var(--warning-color); }
-.role-match-legend .legend-badge.gap     { background: var(--error-color); }
-.role-match-legend .legend-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--success-color);
-    display: inline-block;
-}
-.role-match-legend .legend-divider {
-    width: 1px;
-    height: 14px;
-    background: var(--border-color);
-}
+/* .role-match-legend removed as dead code */
+
 
 /* ----- Subtle card treatment on both columns — uses existing variables ----- */
 .st-key-role_match_workspace [data-testid="stColumn"] {
