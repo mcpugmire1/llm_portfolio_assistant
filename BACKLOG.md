@@ -1575,12 +1575,29 @@ Applied to this ticket:
 
 **Split from -240:** This criterion was originally part of the -240 acceptance list ("An API failure writes a log row distinguishing the failure type"). It was split into a separate ticket because the gate/voice fix and the logging fix are independent -- a reviewer closing -240 should not need to verify Sheet writes to do so.
 
-**Scope:** All Role Match failure paths -- `_handle_assessment_error`, gate rejection (non-JD input), and any other path that currently skips `query_logger`. Each failure path should write a distinguishing row: failure type (rate limit, outage, gate rejection, malformed JSON) and enough context to diagnose in production.
+**Scope (settled September 2026):**
+
+One Sheet row per run. The Sheet is visitor analytics; multiple rows per submission breaks the aggregate shape and makes every count over it wrong.
+
+**`unassessed_count` is a correctness fix, not additive telemetry.** Since Cycle 2 of -248 shipped, `strong + partial + gap` no longer sums to `required_count + preferred_count` whenever unassessed rows exist, so every Sheet row written during a partial outage already understates the total. Same defect class as the three render surfaces.
+
+**`failure_type` field -- three explicit values:**
+- `gate_rejected`: visitor pasted something that isn't a JD; no requirements extracted, no counts.
+- `retrieval_failed`: backend broke during assessment.
+- `ok` (or `none`): the normal success case. Must be an explicit value, not an empty cell. Empty already means "row written before this column existed" for every historical row, and that ambiguity can't be fixed retroactively.
+
+**`HEADERS` change: append-only.** Two new columns appended at the end. The test asserts `HEADERS[:N] == [the historical column list]` -- not a suffix check, because a suffix assertion passes when someone inserts mid-list and shifts everything, which is exactly the -086 failure mode.
+
+**Gate rejection event shape.** No requirements extracted, no counts. Decide during pre-flight whether gate rejection is a distinct event type with a sparse row or whether the five count columns are structurally empty (`0` or `None`). Do not pretend it into the assessment shape.
+
+**Mode 4 (total failure) call site.** Total failure propagates out of `run_assessment` to `role_match.py`'s outer `except Exception`, where `_handle_assessment_error` runs. The failure-path write call site is outside the assessment try/except -- same structural position as the success write -- so a logging failure cannot interfere with the assessment result.
 
 **Acceptance:**
-- An API failure (rate limit, outage, malformed JSON) writes a Sheet row via `query_logger` with the failure type in a distinguishing field.
-- A gate rejection (non-JD input rejected before LLM call) writes a Sheet row with reason "gate_rejection".
-- The success path is unchanged.
+- One Sheet row written per run on every path: success, partial failure, total failure, gate rejection.
+- `unassessed_count` column present on success and partial-failure rows. Value equals the number of `unassessed` rows in results. `strong + partial + gap + unassessed_count == required_count + preferred_count` for every non-gate-rejection row.
+- `failure_type` column present on all rows. Values: `ok` on success, `retrieval_failed` on API/backend failure, `gate_rejected` on gate rejection. No empty cells on new rows.
+- `HEADERS[:N]` equals the historical column list exactly. Unit test asserts this as a prefix, not a suffix.
+- Gate rejection row shape decided and consistent: either sparse (count columns absent/null) or structurally zero. Not mixed.
 - All rows visible in the production Sheet within the normal `query_logger` flush window.
 
 **Cross-references:**
