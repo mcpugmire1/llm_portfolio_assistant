@@ -752,10 +752,25 @@ def _incomplete_notice_text(counts: dict, total: int, *, surface: str) -> str | 
     n = required_unassessed + preferred_unassessed
     if n <= 0:
         return None
-    base = f"🐾 I couldn't get to {n} of these {total} requirements."
+    # Cycle 2 follow-up: "N of these N requirements" reads awkward when
+    # n == total (a total outage); "any of these N requirements" is
+    # cleaner. Keep the subset form when n < total because the two
+    # numbers there carry different information (what failed vs how
+    # much there was).
+    if n == total:
+        body = f"I couldn't get to any of these {total} requirements."
+    else:
+        body = f"I couldn't get to {n} of these {total} requirements."
+    # Cycle 2 follow-up: paw appears on screen only. In the export PDF
+    # the codepoint falls back to a system font with no guarantee of
+    # what glyph the reader gets (observed clipped / substituted at
+    # the header size during a manual Mode 2 test). Agy's voice
+    # survives in the first-person copy; the paw is decoration that
+    # renders reliably only on screen. The export legend already
+    # carries the status glyphs.
     if surface == "screen":
-        return f"{base} Try again for the full picture."
-    return base
+        return f"🐾 {body} Try again for the full picture."
+    return body
 
 
 def _build_share_text(result_payload: dict) -> str:

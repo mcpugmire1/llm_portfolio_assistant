@@ -1087,9 +1087,18 @@ class TestIncompleteNoticeOrdering:
     ASCII or update both surface anchors together."""
 
     def _payload_with_unassessed(self):
+        # Fixture is n(2) < total(3) so the notice takes the subset
+        # branch ("2 of these 3 requirements.") -- the "2 of these"
+        # anchor below depends on it. Cycle 2 follow-up added an
+        # n == total branch that emits "any of these N requirements."
+        # instead, which would leave the anchor with nothing to find.
+        # Fixing the fixture keeps this test focused on ordering
+        # rather than notice copy; the copy branches are covered by
+        # TestIncompleteNoticeText.
         return _payload(
             _row("required", "unassessed", "First unassessed req"),
             _row("required", "unassessed", "Second unassessed req"),
+            _row("required", "strong", "One assessed req"),
         )
 
     def test_share_text_notice_appears_before_summary_block(self):
