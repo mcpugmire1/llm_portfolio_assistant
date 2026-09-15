@@ -23,8 +23,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 **NEXT**
 11. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
-12. **-086** — Environment stamp on every log write. Makes every future log analysis exact rather than heuristic.
-13. **-223** — Add router_score and router_family columns to Sheet query row. Two columns, seven call sites. Unblocks -239's floor threshold decision; clean env stamps make future log analysis exact rather than heuristic.
+12. **-086 + -223** — Land together: one `query_logger.py` schema change instead of two. -086: environment stamp on every row (failure rows from -247 are uninterpretable until this exists). -223: router_score and router_family columns; unblocks -239's floor threshold decision.
 14. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
 15. Rest of Role Match: **-160**, -173, -014, -012, -081, -099, -017.
 
@@ -805,6 +804,10 @@ Each detail block uses these fields. Not every field is required for every item.
 - Wrong or missing value raises at startup, not silently.
 - Historical rows preserved with date-stamped archive before schema changes.
 - No call site changes required -- injection is in `_build_row`.
+
+**Urgency note (September 2026):** -247 makes this more urgent rather than less. -247 adds two new columns and two new event types (retrieval failure, gate rejection). The failure rows are exactly the ones you'd most want to filter your own testing out of -- a failure row written during dev looks identical to a production outage until `Env` exists. Every failure row -247 writes before -086 lands is uninterpretable on that dimension.
+
+**Land with -223 (same pass).** Both -086 and -223 are `query_logger.py` `HEADERS` appends. One pass = one schema change instead of two. The `HEADERS[:N]` prefix test -247 is adding guards both appends in the same assertion.
 
 - **Discovered during:** May 23, 2026 -- Matt verified GCP service account key rotation worked locally by triggering a real query and confirming the row appeared in the Sheet. Observed the broader Sheets log filling up with local + test traffic indistinguishable from production user traffic.
 - **Logged:** May 23, 2026 (implementation plan merged from MATTGPT-221, closed September 1, 2026)
@@ -2707,6 +2710,8 @@ Fallback if no entity is detected: surviving-family membership (`background`, `n
 - Code should verify the call sites before treating as settled -- router values should be in scope where `log_query` is called on both surfaces, but confirm rather than assume.
 
 **Unblocks:** MATTGPT-239 (confidence floor), which needs production router score distribution to pick a threshold. The Sheet delivers that; the local CSV does not.
+
+**Land with -086 (same pass).** Both -086 and -223 are `query_logger.py` `HEADERS` appends. One pass = one schema change instead of two, and the `HEADERS[:N]` prefix test -247 is adding covers both appends.
 
 **Acceptance:**
 - `router_score` and `router_family` appear on every Sheet query row.
