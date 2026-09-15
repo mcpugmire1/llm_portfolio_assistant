@@ -143,10 +143,15 @@ class TestLogQueryTopScore:
     def _captured_row(self, mock_thread) -> list:
         return mock_thread.call_args.kwargs["args"][0]
 
-    def test_top_score_is_last_header(self):
-        from services.query_logger import HEADERS
-
-        assert HEADERS[-1] == "Top Score"
+    # `test_top_score_is_last_header` retired by MATTGPT-247: it pinned
+    # `HEADERS[-1] == "Top Score"` on the premise that Top Score was
+    # the most recently appended column. -247 appended `Unassessed
+    # Count` and `Failure Type` after it, so that assertion is now
+    # false-by-design. The stronger form of the same invariant --
+    # Top Score at its historical position (index 32) -- is pinned by
+    # TestHeadersPrefixInvariant::test_headers_prefix_matches_historical_snapshot
+    # below, which asserts the full 33-entry prefix and catches any
+    # mid-list insertion regardless of which column moved.
 
     def test_top_score_written_when_supplied(self):
         from services import query_logger

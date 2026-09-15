@@ -18,6 +18,11 @@ import streamlit as st
 
 from config.debug import DEBUG
 from scripts.utils import slugify
+from services.query_logger import (
+    is_bot,
+    log_role_match_assessment,
+    log_role_match_gate_rejection,
+)
 from services.role_match_summary import build_discussion_points, compute_summary_counts
 from ui.components.action_buttons import (
     get_action_buttons_css,
@@ -118,7 +123,21 @@ def _build_role_match_log_kwargs(extraction: dict, results: list[dict]) -> dict:
     `compute_summary_counts(results)` pass, so the invariant holds
     by construction as long as every status is forwarded to the log
     kwargs. Test 8 in test_query_logger.py pins that forwarding."""
-    raise NotImplementedError
+    counts = compute_summary_counts(results)
+    r = counts["required"]
+    p = counts["preferred"]
+    return {
+        "role_title": extraction.get("role_title") or "",
+        "company": extraction.get("company") or "",
+        "jd_format": extraction.get("jd_format") or "",
+        "required_count": sum(r.values()),
+        "preferred_count": sum(p.values()),
+        "strong_count": r["strong"] + p["strong"],
+        "partial_count": r["partial"] + p["partial"],
+        "gap_count": r["gap"] + p["gap"],
+        "unassessed_count": r["unassessed"] + p["unassessed"],
+        "failure_type": "ok",
+    }
 
 
 def _log_role_match_success(result_payload: dict) -> None:
@@ -132,18 +151,51 @@ def _log_role_match_success(result_payload: dict) -> None:
 
     Extracted so the wiring itself is unit-testable rather than being
     an inline block inside the submit branch that requires a full
-    Streamlit fixture to exercise."""
-    raise NotImplementedError
+    Streamlit fixture to exercise.
+
+    MATTGPT-247: the is_bot skip emits a WARNING so a bot-filtered
+    skip is distinguishable from a Sheet-write failure. The three
+    silent-skip sites in this flow (is_bot here, `get_sheet() returns
+    None` in _append_row, `except Exception` in _append_row) each
+    have their own log phrase so a missing Sheet row can be
+    diagnosed from terminal output in one test cycle."""
+    if is_bot():
+        logger.warning("[role_match] Sheet write skipped: is_bot() returned True")
+        return
+    extraction = result_payload.get("extraction") or {}
+    results = result_payload.get("results") or []
+    log_role_match_assessment(**_build_role_match_log_kwargs(extraction, results))
 
 
 def _handle_assessment_error(e: Exception) -> str:
-    """Log the failure with error class name and return the UI-facing
-    message. Never leaks str(e) into the returned message (that was the
-    -240 defect)."""
+    """Log the failure with error class name, write a Sheet row via
+    log_role_match_assessment with failure_type='retrieval_failed' and
+    all counts zero (no requirements were assessed), and return the
+    UI-facing message. Never leaks str(e) into the returned message
+    (that was the -240 defect).
+
+    MATTGPT-247: the Sheet write is bot-gated at the call site, parallel
+    to the success path. Sits outside the assessment try/except, so a
+    logging failure can't interfere with the assessment result. Uses
+    the module-scope import of log_role_match_assessment / is_bot so
+    the tests can patch at role_match's namespace."""
     err_class = e.__class__.__name__
     logger.warning(
         "role_match assessment failure [%s]: %s", err_class, e, exc_info=True
     )
+    if not is_bot():
+        log_role_match_assessment(
+            role_title="",
+            company="",
+            jd_format="",
+            required_count=0,
+            preferred_count=0,
+            strong_count=0,
+            partial_count=0,
+            gap_count=0,
+            unassessed_count=0,
+            failure_type="retrieval_failed",
+        )
     return _RETRYABLE_MSG if _is_retryable_error(e) else _NOT_RETRYABLE_MSG
 
 
@@ -207,6 +259,13 @@ def _handle_submit_click() -> None:
             words,
             looks_like,
         )
+        # MATTGPT-247: Sheet write for the gate-rejected event. Bot-gated
+        # at the call site (parallel to the two other role_match write
+        # paths); no unit-test coverage on this call site. Manual check
+        # for Green: paste a non-JD, confirm the Sheet row lands with
+        # Event Type='role_match_gate_rejection' and Failure Type='gate_rejected'.
+        if not is_bot():
+            log_role_match_gate_rejection()
         for _k in (
             "role_match_result",
             "role_match_matched_jd",
@@ -2302,47 +2361,17 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
 
                 # Log OUTSIDE try/except so a logging failure can't
                 # interfere with the assessment result. Only log when
-                # a result was successfully stored.
+                # a result was successfully stored. MATTGPT-247: the
+                # inline sum() block was extracted into
+                # _log_role_match_success + _build_role_match_log_kwargs
+                # so unassessed_count (Cycle 2 producer) enters the
+                # log call and the arithmetic invariant
+                # (strong+partial+gap+unassessed == required+preferred)
+                # can be tested without a Streamlit fixture. Delayed
+                # import removed -- the module-scope import at line 21
+                # is what test 9 and test 10 patches bind to.
                 if st.session_state.get("role_match_result"):
-                    from services.query_logger import (
-                        is_bot,
-                        log_role_match_assessment,
-                    )
-
-                    if not is_bot():
-                        result = st.session_state["role_match_result"]
-                        extraction = result.get("extraction") or {}
-                        results_list = result.get("results") or []
-                        log_role_match_assessment(
-                            role_title=extraction.get("role_title") or "",
-                            company=extraction.get("company") or "",
-                            jd_format=extraction.get("jd_format") or "",
-                            required_count=sum(
-                                1
-                                for r in results_list
-                                if r.get("category") == "required"
-                            ),
-                            preferred_count=sum(
-                                1
-                                for r in results_list
-                                if r.get("category") == "preferred"
-                            ),
-                            strong_count=sum(
-                                1
-                                for r in results_list
-                                if r.get("match_status") == "strong"
-                            ),
-                            partial_count=sum(
-                                1
-                                for r in results_list
-                                if r.get("match_status") == "partial"
-                            ),
-                            gap_count=sum(
-                                1
-                                for r in results_list
-                                if r.get("match_status") == "gap"
-                            ),
-                        )
+                    _log_role_match_success(st.session_state["role_match_result"])
             # Render: results → empty state. MATTGPT-240: all three
             # rejection states (gate, retryable failure, not-retryable
             # failure) render as a banner in the left column above the

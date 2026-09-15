@@ -1,9 +1,12 @@
+import logging
 from datetime import datetime
 from threading import Thread
 
 import gspread
 import streamlit as st
 from google.oauth2.service_account import Credentials
+
+logger = logging.getLogger(__name__)
 
 SHEET_ID = "1Xxsh7hBx6yh8K2Vn1r6ST6JTACIblUBOGbQ2QBvrAk4"
 HEADERS = [
@@ -41,6 +44,12 @@ HEADERS = [
     "Story Title",
     "Client",
     "Top Score",
+    # MATTGPT-247 columns (added Sept 2026). Appended, not inserted --
+    # mid-list insertions change the column position of every historical
+    # row in the Sheet (the -086 failure mode). See
+    # tests/unit/test_query_logger.py::TestHeadersPrefixInvariant.
+    "Unassessed Count",
+    "Failure Type",
 ]
 
 _headers_checked = False
@@ -126,16 +135,29 @@ def _capture_context():
 def _append_row(row):
     """Append a single row to the sheet. Called from daemon threads.
     To suppress logging during evals, set st.session_state['__suppress_logging__'] = True
-    in the eval runner before calling any log_* functions."""
+    in the eval runner before calling any log_* functions.
+
+    MATTGPT-247: both silent-fail paths now emit a WARNING so a
+    missing Sheet row can be distinguished from a bot-filtered skip.
+    Listed alongside `_embed`'s zero-vector return in -214's Class 3
+    (silent excepts that hide operational failures)."""
     try:
         sheet = get_sheet()
         if sheet:
             _ensure_headers(sheet)
             sheet.append_row(row)
         else:
-            pass
-    except Exception:
-        pass
+            logger.warning(
+                "[query_logger] Sheet write skipped: get_sheet() returned None "
+                "(credentials or client init failed); row=%r",
+                row[:2],
+            )
+    except Exception as exc:
+        logger.warning(
+            "[query_logger] Sheet write failed: %r; row=%r",
+            exc,
+            row[:2],
+        )
 
 
 def _build_row(event_type, **fields):
@@ -258,8 +280,19 @@ def log_role_match_assessment(
     strong_count: int,
     partial_count: int,
     gap_count: int,
+    unassessed_count: int,
+    failure_type: str,
 ) -> None:
-    """Log a successful Role Match assessment. Called after run_assessment()."""
+    """Log a Role Match assessment run. Called after run_assessment() on
+    the success path (failure_type="ok") and after _handle_assessment_error
+    on the retrieval-failed path (failure_type="retrieval_failed"). Gate
+    rejections use log_role_match_gate_rejection() instead -- distinct
+    event type, different row shape.
+
+    MATTGPT-247: unassessed_count and failure_type are both required
+    (no defaults). A default would let callers who forgot to set them
+    silently write "ok" (or 0), which is exactly the ambiguity the
+    failure_type field exists to remove."""
     user_agent, screen_size, timezone, referrer = _capture_context()
     session_id = ""
     utm_source = ""
@@ -294,6 +327,8 @@ def log_role_match_assessment(
             "UTM Medium": utm_medium,
             "UTM Campaign": utm_campaign,
             "UTM Content": utm_content,
+            "Unassessed Count": str(unassessed_count),
+            "Failure Type": failure_type,
         },
     )
     Thread(target=_append_row, args=(row,), daemon=True).start()
@@ -314,8 +349,38 @@ def log_role_match_gate_rejection() -> None:
     there is no extraction, no requirement list, no counts. Diagnostic
     subfields (word count, looks_like_jd flag) are additive and can
     grow later if operational analysis needs them; leaving them off
-    keeps the failure path minimum-shape."""
-    raise NotImplementedError
+    keeps the failure path minimum-shape.
+
+    No internal bot filter: the gate lives at the call site
+    (parallel to log_role_match_assessment). The caller in
+    _handle_submit_click wraps this in `if not is_bot():`. That
+    call site has no unit test coverage; manual check for Green:
+    paste a non-JD, confirm the Sheet row lands with
+    Failure Type='gate_rejected'."""
+    user_agent, screen_size, timezone, referrer = _capture_context()
+    session_id = ""
+    try:
+        session_id = st.session_state.get("_session_id", "")
+    except Exception:
+        pass
+    row = _build_row(
+        "role_match_gate_rejection",
+        Timezone=timezone,
+        Referrer=referrer,
+        **{
+            "User-Agent": user_agent,
+            "Screen Width": screen_size,
+            "Required Count": "0",
+            "Preferred Count": "0",
+            "Strong Count": "0",
+            "Partial Count": "0",
+            "Gap Count": "0",
+            "Session ID": session_id,
+            "Unassessed Count": "0",
+            "Failure Type": "gate_rejected",
+        },
+    )
+    Thread(target=_append_row, args=(row,), daemon=True).start()
 
 
 def log_role_match_chip_click(
