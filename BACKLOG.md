@@ -1565,7 +1565,7 @@ Applied to this ticket:
 - **Status:** Open
 - **Priority:** High
 - **Type:** Bug
-- **File:** Role Match surface (file TBD -- confirm during pre-flight; same file as -240)
+- **File:** `ui/pages/role_match.py` (`:169` gate, `:104` `_handle_assessment_error`, `:2281` success), `utils/query_logger.py` (`log_role_match_assessment`, new `log_role_match_gate_rejection`)
 - **Logged:** September 9, 2026
 - **Note:** Closes in -248's branch (decision September 11, 2026). -248 rewrites `_handle_assessment_error` and the gate rejection path; adding `query_logger` writes there rather than reopening those paths in a second ticket. Acceptance criteria folded into -248.
 
@@ -1579,25 +1579,54 @@ Applied to this ticket:
 
 One Sheet row per run. The Sheet is visitor analytics; multiple rows per submission breaks the aggregate shape and makes every count over it wrong.
 
-**`unassessed_count` is a correctness fix, not additive telemetry.** Since Cycle 2 of -248 shipped, `strong + partial + gap` no longer sums to `required_count + preferred_count` whenever unassessed rows exist, so every Sheet row written during a partial outage already understates the total. Same defect class as the three render surfaces.
+**`unassessed_count` is a correctness fix, not additive telemetry.** Since Cycle 2 of -248 shipped, `strong + partial + gap` no longer sums to `required_count + preferred_count` whenever unassessed rows exist, so every Sheet row written during a partial outage already understates the total. Same defect class as the three render surfaces (fixed at 9b0ddc8), still live in the Sheet.
 
-**`failure_type` field -- three explicit values:**
-- `gate_rejected`: visitor pasted something that isn't a JD; no requirements extracted, no counts.
+**`HEADERS` change: append-only, 33 to 35.** Two new columns appended in this order: `Unassessed Count`, `Failure Type`. The test asserts `HEADERS[:33] == [the historical column list]` -- not a suffix check, because a suffix assertion passes when someone inserts mid-list and shifts everything, which is the -086 failure mode.
+
+**`failure_type` field -- three explicit values, no empty:**
+- `ok`: success path. Explicit string, not empty -- empty already means "row written before this column existed" for every historical row.
+- `gate_rejected`: visitor pasted something that isn't a JD; no requirements extracted.
 - `retrieval_failed`: backend broke during assessment.
-- `ok` (or `none`): the normal success case. Must be an explicit value, not an empty cell. Empty already means "row written before this column existed" for every historical row, and that ambiguity can't be fixed retroactively.
 
-**`HEADERS` change: append-only.** Two new columns appended at the end. The test asserts `HEADERS[:N] == [the historical column list]` -- not a suffix check, because a suffix assertion passes when someone inserts mid-list and shifts everything, which is exactly the -086 failure mode.
+**Function surface:**
+- `log_role_match_assessment(..., unassessed_count: int, failure_type: str)` -- both required, no defaults. Defaults would hide callers that forgot to set them; `failure_type` is exactly the field where "forgot to set" and "meant ok" must be distinguishable.
+- `log_role_match_gate_rejection()` -- new, zero-argument. Event Type = `role_match_gate_rejection`, Failure Type = `gate_rejected`, all count columns explicit `0` (not empty -- the ambiguity rule still applies).
 
-**Gate rejection event shape.** No requirements extracted, no counts. Decide during pre-flight whether gate rejection is a distinct event type with a sparse row or whether the five count columns are structurally empty (`0` or `None`). Do not pretend it into the assessment shape.
+**Call sites:**
+- Gate rejection: `role_match.py:169`, inside `_handle_submit_click` at the rejection branch, after the Python logger call.
+- Retrieval failure: `role_match.py:104`, inside `_handle_assessment_error`, after the Python logger call. Outside the outer assessment try/except -- invariant holds.
+- Success: `role_match.py:2281`, existing `log_role_match_assessment` call, extended to pass `unassessed_count` (real count) and `failure_type="ok"`.
 
-**Mode 4 (total failure) call site.** Total failure propagates out of `run_assessment` to `role_match.py`'s outer `except Exception`, where `_handle_assessment_error` runs. The failure-path write call site is outside the assessment try/except -- same structural position as the success write -- so a logging failure cannot interfere with the assessment result.
+**Mode 4 (total failure) call site.** Total failure propagates out of `run_assessment` to `role_match.py`'s outer `except Exception`, where `_handle_assessment_error` runs. The failure-path write sits outside the assessment try/except -- same structural position as the success write -- so a logging failure cannot interfere with the assessment result.
+
+**Red scenarios (8 tests, September 2026):**
+
+`tests/unit/test_query_logger.py`, class `TestLogRoleMatchAssessmentExtensions`:
+1. `test_log_role_match_assessment_signature_requires_unassessed_count_and_failure_type` -- signature inspection or a call missing the args raises `TypeError`. Pinned so no future caller silently gets defaults.
+2. `test_unassessed_count_written_to_correct_column` -- mock the sheet, call with `unassessed_count=3`, assert the row's `Unassessed Count` column carries `"3"`.
+3. `test_failure_type_written_to_correct_column` -- same shape, `failure_type="retrieval_failed"`, assert column carries the literal.
+4. `test_failure_type_ok_is_explicit_not_empty` -- success path call with `failure_type="ok"` writes `"ok"`, not `""`. Guards against a Green that defaults to empty and reintroduces the historical-row ambiguity.
+
+Class `TestLogRoleMatchGateRejection`:
+5. `test_gate_rejection_writes_distinct_event_type` -- call `log_role_match_gate_rejection()`, assert row Event Type = `"role_match_gate_rejection"`.
+6. `test_gate_rejection_sets_failure_type_and_zero_counts` -- same call, assert `Failure Type = "gate_rejected"` and all count columns (Required Count, Preferred Count, Strong Count, Partial Count, Gap Count, Unassessed Count) = `"0"` explicit.
+
+Class `TestHeadersPrefixInvariant`:
+7. `test_headers_prefix_matches_historical_snapshot` -- snapshot the current 33 headers as a module-level frozen list, assert `HEADERS[:33] == _HEADERS_HISTORICAL`. Passes today AND after Green (Green appends, doesn't insert). The -086 guard: a mid-list insertion at index 10 breaks the prefix assertion.
+
+`tests/unit/test_role_match_logging.py`, class `TestFailureHandlerCallsLogger`:
+8. `test_handle_assessment_error_calls_log_role_match_assessment_with_retrieval_failed` -- patch `ui.pages.role_match.log_role_match_assessment`, drive `_handle_assessment_error(RuntimeError("simulated"))`, assert one call with `failure_type="retrieval_failed"` and counts all zero. No Streamlit runtime needed.
+
+**Deliberately out of scope for Red (add if manual test reveals gaps):**
+- Gate rejection call-site wiring (`_handle_submit_click`): requires Streamlit session-state fixture; verification via inspection + manual test (paste a non-JD, check the Sheet).
+- `is_bot()` gating on failure paths: standard call-site pattern, verified via inspection alongside the wiring.
 
 **Acceptance:**
 - One Sheet row written per run on every path: success, partial failure, total failure, gate rejection.
-- `unassessed_count` column present on success and partial-failure rows. Value equals the number of `unassessed` rows in results. `strong + partial + gap + unassessed_count == required_count + preferred_count` for every non-gate-rejection row.
-- `failure_type` column present on all rows. Values: `ok` on success, `retrieval_failed` on API/backend failure, `gate_rejected` on gate rejection. No empty cells on new rows.
-- `HEADERS[:N]` equals the historical column list exactly. Unit test asserts this as a prefix, not a suffix.
-- Gate rejection row shape decided and consistent: either sparse (count columns absent/null) or structurally zero. Not mixed.
+- `unassessed_count` column (`HEADERS[33]`) present. On success/partial-failure rows, value equals the number of `unassessed` rows in results. `strong + partial + gap + unassessed_count == required_count + preferred_count` for every non-gate-rejection row.
+- `failure_type` column (`HEADERS[34]`) present. Values: `"ok"` on success, `"retrieval_failed"` on API/backend failure, `"gate_rejected"` on gate rejection. No empty cells on new rows.
+- `HEADERS[:33]` equals the historical column list exactly.
+- All count columns on gate-rejection rows are explicit `"0"`, not empty.
 - All rows visible in the production Sheet within the normal `query_logger` flush window.
 
 **Cross-references:**
