@@ -299,6 +299,20 @@ def _normalize_row_category(row: dict) -> str:
     return "required"
 
 
+def _owes_explanation(status: str) -> bool:
+    """MATTGPT-248 Cycle 1 follow-up: the render-gate rule -- anything
+    short of a strong match owes the reader an explanation. Consumed
+    at three render sites (`_render_requirement_card` for the panel,
+    `_section` in `_build_share_text`, `_render_section` in
+    `_build_export_html`) so the rule lives in one place and can't
+    drift the way the literal `status in ('partial', 'gap')` tuple
+    did once already.
+
+    Expects a status already normalized via `_normalize_row_status`.
+    Callers pass the coerced value; this predicate does not re-coerce."""
+    raise NotImplementedError
+
+
 def _find_story_by_title_client(
     stories: list[dict], title: str | None, client: str | None
 ) -> dict | None:

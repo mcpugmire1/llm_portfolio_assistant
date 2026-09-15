@@ -581,6 +581,175 @@ class TestMalformedMatchStatusCoercion:
 
 
 # ---------------------------------------------------------------------------
+# MATTGPT-248 Cycle 1 follow-up: unassessed reaches the render gate
+# ---------------------------------------------------------------------------
+
+
+class TestUnassessedGapExplanationReachesRenderGate:
+    """MATTGPT-248 Cycle 1 follow-up: the three render sites currently
+    gate `gap_explanation` on `status in ('partial', 'gap')`, which
+    excludes `unassessed`. Cycle 2's producer will populate
+    gap_explanation on unassessed rows with a per-mode message so
+    mixed runs (retrieval up, some calls rate-limited) are
+    distinguishable from a total outage on the surface. The gate
+    widens by delegating to `_owes_explanation(status)` at all three
+    sites (`_section` in `_build_share_text`, `_render_section` in
+    `_build_export_html`, and `_render_requirement_card` for the
+    panel), so the rule lives in one place.
+
+    Sites B (share text) and C (export html) have string surfaces and
+    the gate's effect is covered directly below. Site A (the panel
+    card) has no string output, but the rule it consumes is covered
+    independently by `TestOwesExplanationPredicate`. Site A's job
+    reduces to calling `_owes_explanation` with the normalized
+    status; the predicate test verifies what the call returns for
+    each status."""
+
+    def test_unassessed_row_gap_explanation_reaches_share_text(self):
+        from ui.pages.role_match import _build_share_text
+
+        payload = _payload(
+            _row(
+                "required",
+                "unassessed",
+                "Marker requirement",
+                gap_explanation="I couldn't reach the story corpus for this one.",
+            )
+        )
+        output = _build_share_text(payload)
+        assert "I couldn't reach the story corpus for this one." in output, (
+            f"unassessed row's gap_explanation did not reach the share "
+            f"text -- gate in _section (build_share_text) still excludes "
+            f"unassessed. output: {output!r}"
+        )
+
+    def test_unassessed_row_gap_explanation_reaches_export_html(self):
+        """Export is HTML. `_build_export_html` calls `html.escape` on
+        the gap text (default `quote=True`), so the apostrophe renders
+        as `&#x27;`. Asserted as a single positive check rather than
+        as an or-across-encodings, matching
+        `test_export_html_escapes_ampersand`."""
+        from ui.pages.role_match import _build_export_html
+
+        payload = _payload(
+            _row(
+                "required",
+                "unassessed",
+                "Marker requirement",
+                gap_explanation="I couldn't finish assessing this one.",
+            )
+        )
+        output = _build_export_html(payload)
+        assert "I couldn&#x27;t finish assessing this one." in output, (
+            f"unassessed row's gap_explanation did not reach the export "
+            f"html -- gate in _render_section (build_export_html) still "
+            f"excludes unassessed. output: {output!r}"
+        )
+
+
+class TestOwesExplanationPredicate:
+    """MATTGPT-248 Cycle 1 follow-up: the render-gate rule -- 'anything
+    short of a strong match owes the reader an explanation' -- lives
+    in one predicate that all three render sites consume, so a fifth
+    status can't cause the three sites to drift again.
+
+    Tested independent of the render sites so Site A's Streamlit-ness
+    stops mattering: the rule is verified here, and each site's job
+    reduces to calling the predicate on a normalized status."""
+
+    def test_strong_owes_nothing(self):
+        from ui.pages.role_match import _owes_explanation
+
+        assert _owes_explanation("strong") is False, (
+            "strong is the one status that fully meets the requirement; "
+            "no explanation is owed"
+        )
+
+    def test_partial_owes(self):
+        from ui.pages.role_match import _owes_explanation
+
+        assert _owes_explanation("partial") is True
+
+    def test_gap_owes(self):
+        from ui.pages.role_match import _owes_explanation
+
+        assert _owes_explanation("gap") is True
+
+    def test_unassessed_owes(self):
+        from ui.pages.role_match import _owes_explanation
+
+        assert _owes_explanation("unassessed") is True, (
+            "the whole point of the Cycle 1 follow-up: unassessed rows "
+            "carry a Cycle 2 producer-populated gap_explanation and "
+            "must reach the render gate"
+        )
+
+    def test_unknown_status_returns_true_and_callers_must_normalize(self):
+        """The predicate does not re-coerce -- it treats any non-'strong'
+        value as owing an explanation. That means an uncoerced status
+        (missing key, unknown value, None passed through) silently
+        gets a gap_explanation gate it wouldn't get if the caller had
+        normalized first. Every caller is responsible for running the
+        status through `_normalize_row_status` before calling this
+        predicate. This case documents the behavior rather than the
+        (unenforceable-from-here) contract."""
+        from ui.pages.role_match import _owes_explanation
+
+        assert _owes_explanation("not-a-real-status") is True
+
+
+class TestNormalizeRowStatusReturnContract:
+    """MATTGPT-248 Cycle 1 follow-up: `_normalize_row_status` returns a
+    status from `_KNOWN_MATCH_STATUSES` for every input shape a
+    producer could emit (missing key, unknown value, None, empty
+    string). Paired with the subset property below -- every value the
+    normalizer can return is a key in `_STATUS_ICON` -- this makes
+    Site A's `"?"` sentinel in `_render_requirement_card`'s icon
+    lookup provably unreachable, so Green can delete it and let the
+    lookup use `_STATUS_ICON[status]` directly.
+
+    Both tests pass today; they are the invariant record of what
+    licenses the sentinel deletion Green ships. Landing them in Red
+    keeps the deletion justified by a test written before the code
+    was removed, rather than by a test written to match the removal."""
+
+    def test_normalizer_returns_known_status_for_every_input_shape(self):
+        from ui.pages.role_match import _KNOWN_MATCH_STATUSES, _normalize_row_status
+
+        cases = [
+            ("missing_key", {}),
+            ("none_value", {"match_status": None}),
+            ("empty_string", {"match_status": ""}),
+            ("unknown_value", {"match_status": "not-a-real-status"}),
+        ]
+        for label, row in cases:
+            result = _normalize_row_status(row)
+            assert result in _KNOWN_MATCH_STATUSES, (
+                f"[{label}] _normalize_row_status({row!r}) returned "
+                f"{result!r}, not in _KNOWN_MATCH_STATUSES "
+                f"{_KNOWN_MATCH_STATUSES!r}"
+            )
+
+    def test_every_known_status_is_a_key_in_status_icon(self):
+        """Structural property of the two structures together. A fifth
+        status added to `_KNOWN_MATCH_STATUSES` and not to
+        `_STATUS_ICON` fails this. Together with the return-contract
+        test above, this makes the sentinel deletion in
+        `_render_requirement_card` provably safe: every value the
+        normalizer can produce has an icon, so the icon lookup can
+        never miss."""
+        from ui.pages.role_match import _KNOWN_MATCH_STATUSES, _STATUS_ICON
+
+        missing = set(_KNOWN_MATCH_STATUSES) - set(_STATUS_ICON.keys())
+        assert not missing, (
+            f"_STATUS_ICON is missing icon entries for known statuses: "
+            f"{missing!r}. _KNOWN_MATCH_STATUSES = "
+            f"{_KNOWN_MATCH_STATUSES!r}; _STATUS_ICON keys = "
+            f"{tuple(_STATUS_ICON.keys())!r}"
+        )
+
+
+# ---------------------------------------------------------------------------
 # _incomplete_notice_text helper: per-surface copy, None when no unassessed
 # ---------------------------------------------------------------------------
 
