@@ -101,6 +101,41 @@ def _is_retryable_error(e: Exception) -> bool:
     return e.__class__.__name__ in _RETRYABLE_ERROR_CLASSES
 
 
+def _build_role_match_log_kwargs(extraction: dict, results: list[dict]) -> dict:
+    """MATTGPT-247: build the kwargs for a successful-run
+    `log_role_match_assessment` call.
+
+    Extracted from the inline counting logic in the submit branch so
+    the arithmetic invariant (`strong + partial + gap + unassessed
+    == required + preferred`) can be tested without a Streamlit
+    fixture. The extraction is itself the correctness fix -- the
+    inline code hardcoded per-status `sum()` calls that structurally
+    omitted `unassessed_count`, so partial-outage rows have been
+    understating the total since Cycle 2 shipped.
+
+    Derives all four status counts (strong/partial/gap/unassessed)
+    and both category totals (required/preferred) from a single
+    `compute_summary_counts(results)` pass, so the invariant holds
+    by construction as long as every status is forwarded to the log
+    kwargs. Test 8 in test_query_logger.py pins that forwarding."""
+    raise NotImplementedError
+
+
+def _log_role_match_success(result_payload: dict) -> None:
+    """MATTGPT-247: extracted wiring for the success-path Sheet write.
+
+    Called from the submit branch when `role_match_result` is present
+    in session state. Checks the bot filter (parallel to
+    `_handle_assessment_error`'s bot handling), builds the log kwargs
+    via `_build_role_match_log_kwargs`, and forwards to
+    `log_role_match_assessment`.
+
+    Extracted so the wiring itself is unit-testable rather than being
+    an inline block inside the submit branch that requires a full
+    Streamlit fixture to exercise."""
+    raise NotImplementedError
+
+
 def _handle_assessment_error(e: Exception) -> str:
     """Log the failure with error class name and return the UI-facing
     message. Never leaks str(e) into the returned message (that was the

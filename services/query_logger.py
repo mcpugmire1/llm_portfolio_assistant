@@ -299,6 +299,25 @@ def log_role_match_assessment(
     Thread(target=_append_row, args=(row,), daemon=True).start()
 
 
+def log_role_match_gate_rejection() -> None:
+    """MATTGPT-247: log a role-match gate rejection to the Sheet.
+
+    Called from `_handle_submit_click` when the paste is rejected as
+    non-JD (too few words or `_looks_like_jd` returns False). Writes a
+    row with Event Type `role_match_gate_rejection`, Failure Type
+    `gate_rejected`, and all six count columns explicit `"0"` (not
+    empty -- empty carries the historical semantic of `"column did not
+    exist yet"`, which the ambiguity rule in this ticket exists to
+    remove).
+
+    Zero-argument by design: the visitor never got past the gate, so
+    there is no extraction, no requirement list, no counts. Diagnostic
+    subfields (word count, looks_like_jd flag) are additive and can
+    grow later if operational analysis needs them; leaving them off
+    keeps the failure path minimum-shape."""
+    raise NotImplementedError
+
+
 def log_role_match_chip_click(
     story_title: str,
     client: str,
