@@ -1635,7 +1635,7 @@ A "retry the failed requirements" action. That is the affordance a visitor can a
 `compute_recommendation`. Dead code with no call site in the app. It is not gated to the private view -- it is simply never wired. -012 adds the first production call site; that is where its partial-failure behavior gets addressed. Do not touch it here.
 
 **Acceptance:**
-- `return_exceptions=True` in the `as_completed` loop. One unassessed requirement does not kill the full assessment.
+- Per-call exception handling inside `_assess_one_with_index`. One unassessed requirement does not kill the full assessment. (Mechanism: try/except per call, not `return_exceptions=True` in the loop -- that is what was built at Cycle 1 Green.)
 - Unassessed rows render with badge, icon, and failure line. No blank rows, no crashes.
 - Count line reads "Required: N ✓ N ✗ N not assessed" (or equivalent) on all three surfaces: `_count_spans`, `_ex_count_line`, `_build_share_text`.
 - `build_discussion_points` does not emit the clean-sweep string when any unassessed rows are present in `results`.
@@ -1655,12 +1655,7 @@ A "retry the failed requirements" action. That is the affordance a visitor can a
 - The success path `query_logger` write is unchanged. (from -247)
 - All rows visible in the production Sheet within the normal `query_logger` flush window. (from -247)
 
-**Cycle 2 Red -- four pending tests (September 14, 2026):**
-
-1. **Entity round-trip.** Fixture title "Behavior & Test-Driven Development". Assert `"Behavior & Test-Driven Development"` in `_build_share_text` output AND `"&amp;"` not in output. Guards both failure modes: missing entity and double-encoding.
-2. **Legend position (structural).** In `_build_export_html`, assert `"Key:"` appears after `"</h1>"` and before the first requirement's text. Fails if the legend is Python string interpolated into the body rather than placed structurally.
-3. **Badge fallback invariant.** For every value in `_STATUS_BADGE_STYLE`, assert either `"var("` is absent OR a hex `#RRGGBB` fallback appears inside the `var(...)`. Property-tests the map; generalizes to any status added later without a separate test.
-4. **Export gap-no-evidence pin.** Mirror of the share-text test: gap row's `evidence[0].story_title` does not appear in `_build_export_html` output. Pins gap-row isolation on the export surface.
+**Cycle 2 Green -- four tests landed at 0beef60 (September 15, 2026):** entity round-trip, legend position (structural), badge fallback invariant, export gap-no-evidence pin.
 
 **Cross-references:**
 - MATTGPT-243 (parallelization; `as_completed` is the prerequisite -- this ticket has no value on the sequential pipeline)
