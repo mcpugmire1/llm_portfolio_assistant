@@ -310,7 +310,7 @@ def _owes_explanation(status: str) -> bool:
 
     Expects a status already normalized via `_normalize_row_status`.
     Callers pass the coerced value; this predicate does not re-coerce."""
-    raise NotImplementedError
+    return status != "strong"
 
 
 def _find_story_by_title_client(
@@ -404,8 +404,8 @@ def _render_requirement_card(
       - Click same chip again → pop the active key (close)
       - Click different chip → overwrite the active key (switch)
     """
-    status = result.get("match_status", "gap")
-    icon = _STATUS_ICON.get(status, "?")
+    status = _normalize_row_status(result)
+    icon = _STATUS_ICON[status]
     requirement_text = html.escape(result.get("requirement", ""))
 
     with st.container(key=f"role_match_req_{req_idx}"):
@@ -555,7 +555,7 @@ def _render_requirement_card(
         # 3. .gap-text — markup copied verbatim from mockup (line 213):
         #     <div class="gap-text">...</div>
         gap_text = (result.get("gap_explanation") or "").strip()
-        if status in ("partial", "gap") and gap_text:
+        if _owes_explanation(status) and gap_text:
             st.markdown(
                 f'<div class="role-match-gap-text">{html.escape(gap_text)}</div>',
                 unsafe_allow_html=True,
@@ -864,7 +864,7 @@ def _build_share_text(result_payload: dict) -> str:
                         suffix = f" ({ev_client})" if ev_client else ""
                         lines.append(f"   Project evidence: {ev_title}{suffix}")
 
-            if status in ("partial", "gap"):
+            if _owes_explanation(status):
                 gap = (r.get("gap_explanation") or "").strip()
                 if gap:
                     # Indent only, no "Gap:" prefix. The LLM's gap_explanation
@@ -972,8 +972,14 @@ def _build_export_html(result_payload: dict) -> str:
                         )
 
             gap = (r.get("gap_explanation") or "").strip()
-            if status in ("partial", "gap") and gap:
-                rows.append(f'<div class="gap"><em>{html.escape(gap)}</em></div>')
+            if _owes_explanation(status) and gap:
+                # Class is `gap-note`, not `gap`, to avoid a same-specificity
+                # collision with `.status.gap` on the badge: the bare `.gap`
+                # rule below carries margin/font-size/color that would leak
+                # onto any element also named `gap`, including the gap-status
+                # badge span. The badge modifier stays `.status.gap`;
+                # the note-block gets its own name.
+                rows.append(f'<div class="gap-note"><em>{html.escape(gap)}</em></div>')
 
         return "\n".join(rows)
 
@@ -1061,7 +1067,15 @@ def _build_export_html(result_payload: dict) -> str:
                 .status.gap {{ background: #EF4444; }}
                 .evidence {{ margin-left: 32px; margin-top: 6px; padding: 6px 10px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 6px; font-size: 12px; color: #1F2937; }}
                 .evidence.profile {{ background: rgba(139, 92, 246, 0.08); border-color: rgba(139, 92, 246, 0.2); }}
-                .gap {{ margin-left: 32px; margin-top: 6px; font-size: 12px; color: #6B7280; }}
+                /* Note block for any status that owes an explanation
+                   (currently partial and gap; unassessed once Cycle 2's
+                   producer ships). Named `gap-note` (not `.gap`) so the
+                   rule can't collide with `.status.gap` on the badge
+                   span at same specificity and leak margin/font-size/
+                   color onto the badge. The class name is a historical
+                   scar from the original gap-only version, not a
+                   status filter. */
+                .gap-note {{ margin-left: 32px; margin-top: 6px; font-size: 12px; color: #6B7280; }}
 
             </style>
         </head>
