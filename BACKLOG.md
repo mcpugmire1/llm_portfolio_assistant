@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: 3adf475 -->
+<!-- last-backlog-sync: 43ca523 -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -7,25 +7,24 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 ---
 
-## Value Prioritized Roadmap (updated 2026-09-11)
+## Value Prioritized Roadmap (updated 2026-09-15)
 
 **NOW**
-1. **-248 + -246 + -247** — Role Match partial-failure pass. -248: `return_exceptions=True`, error-row rendering, honest count across all three summary surfaces, `build_discussion_points` guard. -246 folds in: em dashes in both titles, missing legend, missing evidence chips and summary in report, gap icon in export -- `_ex_count_line` and `_build_share_text` are already open. -247 folds in: failure-path Sheet write via `query_logger` belongs in the same branch -248 rewrites.
-2. **-245** — Role Match streaming: requirement rows appear at ~20s (extraction is 14-20s; nothing renders before it completes) and fill in as each call lands. Blocked on -248.
-3. **-244** — Role Match assessor calibration: both arms at ~80% strong on a JD with real gaps. A recruiter reading "strong" on a requirement the corpus doesn't cover discounts the other twenty-two rows. Prompt edit plus `confidence` field deletion. No architecture dependency.
-4. **-089** — Role Match: location, work model, availability. May 22 recruiter finding.
-5. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
-6. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
-7. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
-8. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
-9. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
-10. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+1. **-245** — Role Match streaming: requirement rows appear at ~20s (extraction is 14-20s; nothing renders before it completes) and fill in as each call lands. Blocker cleared (-248 shipped `43ca523`).
+2. **-244** — Role Match assessor calibration: both arms at ~80% strong on a JD with real gaps. A recruiter reading "strong" on a requirement the corpus doesn't cover discounts the other twenty-two rows. Prompt edit plus `confidence` field deletion. No architecture dependency.
+3. **-089** — Role Match: location, work model, availability. May 22 recruiter finding.
+4. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
+5. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
+6. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
+7. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
+8. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
+9. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT**
-11. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
-12. **-086 + -223** — Land together: one `query_logger.py` schema change instead of two. -086: environment stamp on every row (failure rows from -247 are uninterpretable until this exists). -223: router_score and router_family columns; unblocks -239's floor threshold decision.
-14. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
-15. Rest of Role Match: **-160**, -173, -014, -012, -081, -099, -017.
+10. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
+11. **-086 + -223** — Land together: one `query_logger.py` schema change instead of two. -086: environment stamp on every row (failure rows from -247 are uninterpretable until this exists). -223: router_score and router_family columns; unblocks -239's floor threshold decision.
+12. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
+13. Rest of Role Match: **-160**, -173, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
 -177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -249 (retrieval ranking: crisis story at rank 18 on incident-leadership requirement; ranking problem confirmed, not corpus gap)
@@ -98,11 +97,8 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-156](#mattgpt-156) | Vendor commercial/spend management gap — decide whether corpus-zero on invoice/rate-card/procurement is a real claim or honest gap | Open | Low | Investigation | July 29, 2026 |
 | [MATTGPT-160](#mattgpt-160) | JD extraction rewrite: qualifier stripping, requirement-count variance, coverage miss, wall clock floor -- all one prompt | Open | High | Bug / Performance | July 31, 2026 |
 | [MATTGPT-249](#mattgpt-249) | Role Match retrieval: crisis story at rank 18 on incident-leadership requirement; target carries incident vocabulary; ranking problem confirmed | Open | Medium | Bug | September 11, 2026 |
-| [MATTGPT-248](#mattgpt-248) | Role Match partial-failure handling: return_exceptions=True, seven render/export/log surfaces, panel-level claim guard | Open | High | Bug | September 10, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: both arms score ~80% strong on AT&T with genuine JD gaps; scoring is too generous | Open | High | Issue | September 2, 2026 |
 | [MATTGPT-245](#mattgpt-245) | Role Match streaming: render each requirement row as it lands via as_completed; blocked on -243 | Open | Medium | Enhancement | September 2, 2026 |
-| [MATTGPT-246](#mattgpt-246) | Role Match export + share surfaces diverge from UI: em dash in titles, missing legend, missing evidence chips, missing summary block, gap icon mismatch | Open | Medium | Bug | September 9, 2026 |
-| [MATTGPT-247](#mattgpt-247) | Role Match assessment failure paths write no Sheet row; API failures leave no production trace | Open | High | Bug | September 9, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
 | [MATTGPT-168](#mattgpt-168) | Slot 1 is amplified without regard to margin -- tie or near-tie at slot 1 gets 80% of the answer | Open | High | Bug | August 5, 2026 |
@@ -1479,14 +1475,14 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 ---
 
 ### MATTGPT-245
-**Role Match streaming: render each requirement row as it lands via as_completed; blocked on -243 and -248**
+**Role Match streaming: render each requirement row as it lands via as_completed**
 
-- **Status:** Blocked
+- **Status:** Open
 - **Priority:** Medium
 - **Type:** Enhancement
 - **File:** `ui/pages/role_match.py`, `services/jd_assessor.py`
 - **Logged:** September 2, 2026
-- **Dependencies:** MATTGPT-243 (`as_completed` must ship before the UI can consume per-requirement results), MATTGPT-248 (partial-failure surfaces must be defined before the streaming render loop can handle error rows)
+- **Dependencies:** MATTGPT-243 (shipped `8d37405`), MATTGPT-248 (shipped `43ca523`) -- both blockers cleared September 2026
 
 **What this is not:** MATTGPT-083 is spinner inconsistency -- the loading indicator shown while waiting for a result. This ticket is about the absence of waiting: requirement rows appearing at ~20s and filling in as each `gpt-4o` call completes. Cross-referencing -083 is correct; folding this into -083 is not. If this scope lands inside -083, whoever picks it up will scope it as "fix the spinner" and the actual rendering change won't happen.
 
@@ -1500,224 +1496,9 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 - Error rows show the placeholder defined in -248 (not a blank or a crash).
 
 **Cross-references:**
-- MATTGPT-243 (parallelization; must ship first -- this ticket has no value on the sequential pipeline)
-- MATTGPT-248 (partial-failure handling; must ship first -- error-row placeholder is defined there)
+- MATTGPT-243 (parallelization; shipped `8d37405`)
+- MATTGPT-248 (partial-failure handling; shipped `43ca523` -- error-row placeholder and unassessed badge defined there)
 - MATTGPT-083 (spinner inconsistency; perceived-performance half; independent, worth landing regardless)
-
----
-
-### MATTGPT-246
-**Role Match export + share surfaces diverge from UI: em dash in titles, missing legend, missing evidence chips, missing summary block, gap icon mismatch**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Bug
-- **Files:** `ui/pages/role_match.py:435` (`_build_share_text`), `ui/pages/role_match.py:522` (`_build_export_html`)
-- **Logged:** September 9, 2026
-- **Note:** All items fold into MATTGPT-248's branch (decision September 11, 2026). -248 is already opening `_build_export_html` and `_build_share_text`; landing -246 separately means two passes over the same code. -246 closes with -248.
-
-**Two surfaces, one ticket.** Both the printable Export HTML and the shareable Report/clipboard text are built from the on-screen assessment and diverge from it. They are adjacent functions in the same file; fixing one without the other produces a three-way inconsistency.
-
-**Parity rule:** Facts identical across all three surfaces. Affordances described only where they exist. Actions only where the reader can take them.
-
-Applied to this ticket:
-- **Count wording** ("N not assessed", "N strong, N gap") is a fact and must be word-for-word identical on screen, in the export, and in the report. The drift between `_count_spans` and `_ex_count_line` is exactly what this rule flags.
-- **Unassessed message**: screen shows "Try again for the full picture" -- the visitor sitting at the app can act. Report (emailed plain text) and export (printed PDF) readers cannot. Variant for both offline surfaces: "🐾 I couldn't get to N of these M requirements." Fact only, no instruction.
-- **Legend**: on screen, 🔗 signals a clickable link to a project. In the export and report it does not -- the link affordance doesn't exist. The legend must not describe 🔗 as clickable in offline surfaces. The plain-text legend footer lists the verdict symbols only ("Key: ✓ strong / ~ partial / ✗ gap"), not the interactive ones.
-
-**Export HTML (`_build_export_html`, :522) deltas:**
-
-1. **Em dash in export title.** Rendered string: "Role Match -- Director of Product Engineering." Violates the repo-wide no-em-dash rule (CLAUDE.md Critical Rules). The em dash lives in the generated HTML string, not the Python source -- `grep` on `.py` files misses it. Fix: colon separator ("Role Match: Director of Product Engineering"). Add a unit test asserting the generated export HTML contains no em dash.
-
-2. **Legend missing.** On-screen panel has a legend explaining strong/partial/gap and the story-vs-profile evidence distinction. Export PDF has neither; icons appear with no key. Matters more in a forwarded PDF than in the UI, which has session context around it.
-
-3. **Gap icon is a red dot, not a circled-X.** UI renders gaps as a red circled-X badge (consistent with strong green circled-check and partial yellow circled-tilde). Export dropped the shape. Align to circled-X.
-
-4. **UI summary line is weaker than the export's.** Export: "10 ✓ strong, 1 ✗ gap." UI: "10 ✓ 1 ✗." Fix flows from export to UI: align UI summary to the export's wording.
-
-**Report / share text (`_build_share_text`, :435) deltas:**
-
-5. **Em dash in report title.** Rendered string: "Matt Pugmire -- Director of Product Engineering fit assessment" (line :467). Same CLAUDE.md violation as the export title, different exact string. Fix: colon. Same unit test coverage as item 1 should cover both generated strings.
-
-6. **Legend missing from report.** Plain-text report has check and cross marks with no key. Same issue as item 2; more constrained in plain text but the legend can be appended as a footer line ("Key: strong / partial ~ / gap").
-
-7. **Evidence chips absent from report.** The on-screen panel shows 10-20 story chips per requirement -- the primary evidence surface. The report has requirement text and verdict only, no evidence. This is the most significant information loss: the forwarded artifact strips the part that makes the assessment credible.
-
-8. **Summary block absent from report.** The on-screen panel has a SUMMARY box (e.g., "Strong: 10, Gap: Experience reporting to CTO"). The report output does not include this block. Confirm absence by checking whether `_build_share_text` appends the summary or only the per-requirement list.
-
-**Gap icon on Report (not a delta):** Report uses plain (matching the UI's mark, minus the circle chrome). Reasonable for plain text; not a defect.
-
-**Acceptance:**
-- Both generated strings (export title, report title) contain no em dash character. A unit test asserts this for each.
-- Export includes the legend block.
-- Export gap icon matches UI circled-X.
-- UI summary line wording matches export ("N strong, N gap").
-- Report includes evidence chips per requirement (or a story-title list if chips are HTML-only).
-- Report includes the summary block.
-- Report includes a plain-text legend footer.
-
-**Cross-references:**
-- MATTGPT-067 (Role Match parent: input controls + summary block)
-- MATTGPT-240 (rejection contract; adjacent surface, shipping around the same time)
-
----
-
-### MATTGPT-247
-**Role Match assessment failure paths write no Sheet row; API failures leave no production trace**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Bug
-- **File:** `ui/pages/role_match.py` (`:169` gate, `:104` `_handle_assessment_error`, `:2281` success), `utils/query_logger.py` (`log_role_match_assessment`, new `log_role_match_gate_rejection`)
-- **Logged:** September 9, 2026
-- **Note:** Closes in -248's branch (decision September 11, 2026). -248 rewrites `_handle_assessment_error` and the gate rejection path; adding `query_logger` writes there rather than reopening those paths in a second ticket. Acceptance criteria folded into -248.
-
-**Finding:** The `_handle_assessment_error` handler and the JD-gate rejection path write only `logger.warning`, not `query_logger`. The success path calls `log_role_match_assessment`, so the happy path is logged; failure paths are invisible. On Streamlit Cloud, the container filesystem is ephemeral -- `logger.warning` output is gone after the session. An API rate limit, a network outage, or a malformed JSON response leaves no production trace.
-
-**Same shape as MATTGPT-230:** -230 was filed to end this exact pattern (missing Sheet row on failure) for the Ask Agy pipeline. Role Match has the same gap.
-
-**Split from -240:** This criterion was originally part of the -240 acceptance list ("An API failure writes a log row distinguishing the failure type"). It was split into a separate ticket because the gate/voice fix and the logging fix are independent -- a reviewer closing -240 should not need to verify Sheet writes to do so.
-
-**Scope (settled September 2026):**
-
-One Sheet row per run. The Sheet is visitor analytics; multiple rows per submission breaks the aggregate shape and makes every count over it wrong.
-
-**`unassessed_count` is a correctness fix, not additive telemetry.** Since Cycle 2 of -248 shipped, `strong + partial + gap` no longer sums to `required_count + preferred_count` whenever unassessed rows exist, so every Sheet row written during a partial outage already understates the total. Same defect class as the three render surfaces (fixed at 9b0ddc8), still live in the Sheet.
-
-**`HEADERS` change: append-only, 33 to 35.** Two new columns appended in this order: `Unassessed Count`, `Failure Type`. The test asserts `HEADERS[:33] == [the historical column list]` -- not a suffix check, because a suffix assertion passes when someone inserts mid-list and shifts everything, which is the -086 failure mode.
-
-**`failure_type` field -- three explicit values, no empty:**
-- `ok`: success path. Explicit string, not empty -- empty already means "row written before this column existed" for every historical row.
-- `gate_rejected`: visitor pasted something that isn't a JD; no requirements extracted.
-- `retrieval_failed`: backend broke during assessment.
-
-**Function surface:**
-- `log_role_match_assessment(..., unassessed_count: int, failure_type: str)` -- both required, no defaults. Defaults would hide callers that forgot to set them; `failure_type` is exactly the field where "forgot to set" and "meant ok" must be distinguishable.
-- `log_role_match_gate_rejection()` -- new, zero-argument. Event Type = `role_match_gate_rejection`, Failure Type = `gate_rejected`, all count columns explicit `0` (not empty -- the ambiguity rule still applies).
-
-**Call sites:**
-- Gate rejection: `role_match.py:169`, inside `_handle_submit_click` at the rejection branch, after the Python logger call.
-- Retrieval failure: `role_match.py:104`, inside `_handle_assessment_error`, after the Python logger call. Outside the outer assessment try/except -- invariant holds.
-- Success: `role_match.py:2281`, existing `log_role_match_assessment` call, extended to pass `unassessed_count` (real count) and `failure_type="ok"`.
-
-**Mode 4 (total failure) call site.** Total failure propagates out of `run_assessment` to `role_match.py`'s outer `except Exception`, where `_handle_assessment_error` runs. The failure-path write sits outside the assessment try/except -- same structural position as the success write -- so a logging failure cannot interfere with the assessment result.
-
-**Red scenarios (8 tests, September 2026):**
-
-`tests/unit/test_query_logger.py`, class `TestLogRoleMatchAssessmentExtensions`:
-1. `test_log_role_match_assessment_signature_requires_unassessed_count_and_failure_type` -- signature inspection or a call missing the args raises `TypeError`. Pinned so no future caller silently gets defaults.
-2. `test_unassessed_count_written_to_correct_column` -- mock the sheet, call with `unassessed_count=3`, assert the row's `Unassessed Count` column carries `"3"`.
-3. `test_failure_type_written_to_correct_column` -- same shape, `failure_type="retrieval_failed"`, assert column carries the literal.
-4. `test_failure_type_ok_is_explicit_not_empty` -- success path call with `failure_type="ok"` writes `"ok"`, not `""`. Guards against a Green that defaults to empty and reintroduces the historical-row ambiguity.
-
-Class `TestLogRoleMatchGateRejection`:
-5. `test_gate_rejection_writes_distinct_event_type` -- call `log_role_match_gate_rejection()`, assert row Event Type = `"role_match_gate_rejection"`.
-6. `test_gate_rejection_sets_failure_type_and_zero_counts` -- same call, assert `Failure Type = "gate_rejected"` and all count columns (Required Count, Preferred Count, Strong Count, Partial Count, Gap Count, Unassessed Count) = `"0"` explicit.
-
-Class `TestHeadersPrefixInvariant`:
-7. `test_headers_prefix_matches_historical_snapshot` -- snapshot the current 33 headers as a module-level frozen list, assert `HEADERS[:33] == _HEADERS_HISTORICAL`. Passes today AND after Green (Green appends, doesn't insert). The -086 guard: a mid-list insertion at index 10 breaks the prefix assertion.
-
-`tests/unit/test_role_match_logging.py`, class `TestFailureHandlerCallsLogger`:
-8. `test_handle_assessment_error_calls_log_role_match_assessment_with_retrieval_failed` -- patch `ui.pages.role_match.log_role_match_assessment`, drive `_handle_assessment_error(RuntimeError("simulated"))`, assert one call with `failure_type="retrieval_failed"` and counts all zero. No Streamlit runtime needed.
-
-**Deliberately out of scope for Red (add if manual test reveals gaps):**
-- Gate rejection call-site wiring (`_handle_submit_click`): requires Streamlit session-state fixture; verification via inspection + manual test (paste a non-JD, check the Sheet).
-- `is_bot()` gating on failure paths: standard call-site pattern, verified via inspection alongside the wiring.
-
-**Acceptance:**
-- One Sheet row written per run on every path: success, partial failure, total failure, gate rejection.
-- `unassessed_count` column (`HEADERS[33]`) present. On success/partial-failure rows, value equals the number of `unassessed` rows in results. `strong + partial + gap + unassessed_count == required_count + preferred_count` for every non-gate-rejection row.
-- `failure_type` column (`HEADERS[34]`) present. Values: `"ok"` on success, `"retrieval_failed"` on API/backend failure, `"gate_rejected"` on gate rejection. No empty cells on new rows.
-- `HEADERS[:33]` equals the historical column list exactly.
-- All count columns on gate-rejection rows are explicit `"0"`, not empty.
-- All rows visible in the production Sheet within the normal `query_logger` flush window.
-
-**Cross-references:**
-- MATTGPT-230 (query logger: same missing-on-failure pattern, Ask Agy pipeline)
-- MATTGPT-240 (gate + voice fix; this ticket is the logging half split from -240's original acceptance list)
-
----
-
-### MATTGPT-248
-**Role Match partial-failure handling: assessed rows render, honest count, no completeness claim**
-
-- **Status:** In Progress
-- **Priority:** High
-- **Type:** Bug
-- **File:** `ui/pages/role_match.py`, `services/jd_assessor.py`, `ui/components/role_match_summary.py`
-- **Logged:** September 10, 2026 (design decision recorded September 11, 2026)
-- **Cycle 1 Green:** 0c1189f (September 14, 2026) -- 92/92 tests passing, +481/-216
-- **Dependencies:** MATTGPT-243 (`as_completed` must ship before per-requirement results are individually addressable)
-
-**Decision:** A partially-failed assessment renders its assessed rows and an honest count. It does not suppress the summary, and it does not claim completeness.
-
-The worst case this ticket exists to prevent: "strong match across all requirements" appearing above rows that were never assessed, in a forwarded PDF. The fix is not to hide the summary -- the summary is the most useful part for a recruiter reading offline. The fix is to make the count honest and keep the discussion-points guard from asserting a clean sweep when it isn't.
-
-**Four things that change on the public surface:**
-
-**1. Rows render, including unassessed ones.** Every assessed row is unchanged. Unassessed rows get a visible treatment: the badge, an icon, and a line stating the assessment could not complete for that requirement. Today an unassessed row is a white `?` on a transparent circle with no evidence block and no gap text, because both are gated on the three known statuses (`SUPPORTED`, `PARTIAL`, `GAP`). The legend gains the matching entry in the same change.
-
-**2. Counts render with the missing number.** "Required: 10 ✓ 1 ✗ 2 not assessed." Real arithmetic with the gap named rather than absorbed. The count line appears on all three summary surfaces (see below).
-
-**3. The zero-case guard moves inside `build_discussion_points`.** That function returns "No items to flag -- strong match across all requirements" when nothing was included. Under partial failure that is the worst possible output; on total failure it asserts a perfect match over requirements that were never assessed. The guard belongs inside `build_discussion_points`, which already receives `results` -- no signature change, no second call site. It reads the unassessed count from `results` before deciding whether to claim a clean sweep.
-
-**4. All three summary surfaces render identically.** `_count_spans` on screen, `_ex_count_line` in the export, and `_build_share_text` -- which has no summary block today, so this adds one. Same four numbers, same wording, three renderers. The share text is the artifact most likely to be pasted into an email without the page around it; a list of verdicts with no tally is the weakest of the three.
-
-**Contract changes (name these in the ticket for Code):**
-
-`compute_summary_counts` returns a fixed six keys -- `strong`, `partial`, `gap` under each of `required` and `preferred` -- and its `if cat in counts and status in counts[cat]` guard is what silently drops unassessed rows today. It becomes eight keys (adding `unassessed` under each of `required` and `preferred`). That change hits `test_summary_block.py` plus both existing count builders.
-
-Field contract for the unassessed row: on the success path the requirement text arrives inside the LLM's JSON and only `category` is stamped by the caller. An exception has no JSON, so the unassessed row must carry both `category` and the requirement text off the source requirement dict -- otherwise it renders with an empty title next to an invisible badge.
-
-**Badge treatment for unassessed rows:** grey pill, `⋯` glyph, `--pill-bg` fill, `--text-secondary` glyph color. Status literal in the row dict and the `unassessed` key in `compute_summary_counts` must both use the string `"unassessed"` -- not `"error"`.
-
-**Scope delineation with -246:** All eight -246 items land in this branch. Every one touches `_build_export_html`, `_build_share_text`, or the legend/badge system -- the same files -248 is already opening. Landing them separately means two passes over the same code. Items folded in: em dash in export title, export legend, gap icon shape in export, UI summary wording alignment, em dash in report title, plain-text legend footer, evidence chips in report, summary block in `_build_share_text` (item 8, already -248 item 4). -246 closes with this ticket.
-
-**Decision on -247 (`query_logger` failure-path writes):** -247 lands in -248's branch. -248 is already rewriting `_handle_assessment_error` and the gate rejection path -- the exact code paths -247 would add `query_logger` writes to. Opening those paths twice in separate tickets adds coordination cost for no benefit. -247 closes alongside -248; its acceptance criteria carry over as additional items in -248's acceptance list. Remove -247 from the NOW roadmap as a standalone entry.
-
-**What this cycle introduced (September 2026, verified against Cycle 1-2 Green commits):**
-
-- **Log phrase vocabulary.** Three sentinel strings in `_assess_one_with_index`: `assess-caught` (exception caught in the per-call try/except), `retrieval-returned-None` (Pinecone returned no results), `retrieval-raised` (retrieval itself threw). These are the exact strings to grep in production logs when diagnosing unassessed rows.
-- **Per-mode `gap_explanation` strings.** `GAP` rows carry a mode-specific explanation rather than a single generic string. Relevant to any downstream work that reads or renders `gap_explanation`.
-- **`retrieve_stories` None-collapse fix.** `retrieve_stories` previously returned `None` on a Pinecone miss rather than an empty list, which caused the caller to fail downstream. Now collapses to `[]`. The `retrieval-returned-None` log phrase fires before the collapse so production traces still distinguish a None-return from a genuine empty result.
-
-**Explicitly out of scope:**
-
-Application-level retry. The OpenAI SDK already retries twice with exponential backoff on 429 and 5xx. A third attempt adds latency to the failure path -- the retry sits inside the semaphore slot -- to catch a case that is now rare. Raising `max_retries` on the shared client is the wrong lever: it serves extraction and Ask Agy too, so a rate-limited extraction would silently retry four times while the visitor watches a spinner.
-
-A "retry the failed requirements" action. That is the affordance a visitor can actually use, and it is strictly better than an invisible third attempt -- but it is a separate ticket, filed behind -248.
-
-`compute_recommendation`. Dead code with no call site in the app. It is not gated to the private view -- it is simply never wired. -012 adds the first production call site; that is where its partial-failure behavior gets addressed. Do not touch it here.
-
-**Acceptance:**
-- Per-call exception handling inside `_assess_one_with_index`. One unassessed requirement does not kill the full assessment. (Mechanism: try/except per call, not `return_exceptions=True` in the loop -- that is what was built at Cycle 1 Green.)
-- Unassessed rows render with badge, icon, and failure line. No blank rows, no crashes.
-- Count line reads "Required: N ✓ N ✗ N not assessed" (or equivalent) on all three surfaces: `_count_spans`, `_ex_count_line`, `_build_share_text`.
-- `build_discussion_points` does not emit the clean-sweep string when any unassessed rows are present in `results`.
-- `compute_summary_counts` returns eight keys (adds `unassessed` under `required` and `preferred`). `test_summary_block.py` and both count builders updated.
-- Unassessed row carries `category` and requirement text from the source requirement dict.
-- Legend includes the unassessed-row entry.
-- `_build_share_text` includes a summary block (this is new).
-- `_build_share_text` (report) lists the supporting story for each non-gap requirement.
-- Export HTML renders without layout breakage when unassessed rows are present.
-- Both generated strings (export title, report title) contain no em dash. Unit test asserts this for each.
-- Export includes the legend block.
-- Export gap icon matches UI circled-X.
-- UI summary line wording matches export ("N strong, N gap").
-- Report includes a plain-text legend footer.
-- An API failure (rate limit, outage, malformed JSON) writes a Sheet row via `query_logger` with the failure type in a distinguishing field. (from -247)
-- A gate rejection (non-JD input rejected before LLM call) writes a Sheet row with reason "gate_rejection". (from -247)
-- The success path `query_logger` write is unchanged. (from -247)
-- All rows visible in the production Sheet within the normal `query_logger` flush window. (from -247)
-
-**Cycle 2 Green -- four tests landed at 0beef60 (September 15, 2026):** entity round-trip, legend position (structural), badge fallback invariant, export gap-no-evidence pin.
-
-**Cross-references:**
-- MATTGPT-243 (parallelization; `as_completed` is the prerequisite -- this ticket has no value on the sequential pipeline)
-- MATTGPT-245 (streaming progressive render; also blocked on -243 and this ticket)
-- MATTGPT-246 (export + share surface audit; all eight items fold into this branch -- -246 closes with -248)
-- MATTGPT-247 (logger writes; accepted into this branch -- -247 closes with this ticket)
-- MATTGPT-012 (private view; `compute_recommendation` wiring and its `total = len(match_results)` bug land there, not here)
 
 ---
 
