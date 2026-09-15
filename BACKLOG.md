@@ -1626,6 +1626,12 @@ Field contract for the unassessed row: on the success path the requirement text 
 
 **Decision on -247 (`query_logger` failure-path writes):** -247 lands in -248's branch. -248 is already rewriting `_handle_assessment_error` and the gate rejection path -- the exact code paths -247 would add `query_logger` writes to. Opening those paths twice in separate tickets adds coordination cost for no benefit. -247 closes alongside -248; its acceptance criteria carry over as additional items in -248's acceptance list. Remove -247 from the NOW roadmap as a standalone entry.
 
+**What this cycle introduced (September 2026, verified against Cycle 1-2 Green commits):**
+
+- **Log phrase vocabulary.** Three sentinel strings in `_assess_one_with_index`: `assess-caught` (exception caught in the per-call try/except), `retrieval-returned-None` (Pinecone returned no results), `retrieval-raised` (retrieval itself threw). These are the exact strings to grep in production logs when diagnosing unassessed rows.
+- **Per-mode `gap_explanation` strings.** `GAP` rows carry a mode-specific explanation rather than a single generic string. Relevant to any downstream work that reads or renders `gap_explanation`.
+- **`retrieve_stories` None-collapse fix.** `retrieve_stories` previously returned `None` on a Pinecone miss rather than an empty list, which caused the caller to fail downstream. Now collapses to `[]`. The `retrieval-returned-None` log phrase fires before the collapse so production traces still distinguish a None-return from a genuine empty result.
+
 **Explicitly out of scope:**
 
 Application-level retry. The OpenAI SDK already retries twice with exponential backoff on 429 and 5xx. A third attempt adds latency to the failure path -- the retry sits inside the semaphore slot -- to catch a case that is now rare. Raising `max_retries` on the shared client is the wrong lever: it serves extraction and Ask Agy too, so a rate-limited extraction would silently retry four times while the visitor watches a spinner.
