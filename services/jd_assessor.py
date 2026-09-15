@@ -12,6 +12,7 @@ Architecture: Three-step pipeline (see ADR 016)
 
 import asyncio
 import json
+import logging
 import os
 import time
 from pathlib import Path
@@ -20,6 +21,8 @@ from openai import OpenAI
 
 from config.debug import DEBUG
 from services.pinecone_service import pinecone_semantic_search
+
+logger = logging.getLogger(__name__)
 
 # =============================================================================
 # JD EXTRACTION PROMPT
@@ -188,6 +191,16 @@ ASSESSMENT_MODEL = "gpt-4o"
 ASSESSMENT_TEMPERATURE = 0.0
 DEFAULT_TOP_K = 5
 
+# MATTGPT-248 Cycle 2: per-mode unassessed row copy. Populated on
+# gap_explanation so a mixed run (retrieval up, one call rate-limited)
+# is distinguishable from a total outage on the render surface. First
+# person, no action clause, no paw emoji -- the "🐾 I couldn't get to
+# N of these M requirements" incomplete notice above the summary
+# carries the paw once, and these row-level messages travel into the
+# export and share surfaces where the reader can't retry.
+_MODE_1_GAP_TEXT = "I couldn't finish assessing this one."
+_MODE_2_GAP_TEXT = "I couldn't reach the story corpus for this one."
+
 # MATTGPT-243: fan-out concurrency for the Stages 2+3 parallel loop.
 # Chosen to sit well below OpenAI's rate-limit ceiling while giving the
 # event loop enough in-flight work to hide per-call latency. Reasoning,
@@ -250,6 +263,15 @@ def retrieve_stories(
         top_k=top_k,
         debug_tag=debug_tag,
     )
+    # MATTGPT-248 Cycle 2: propagate the None-on-failure signal from
+    # pinecone_semantic_search rather than collapsing it into []. The
+    # collapse (`if not results: return []`) once discarded the only
+    # signal `_assess_one_with_index` had for telling a Pinecone
+    # outage (None) apart from a real empty match ([]). Mode 2 needs
+    # the distinction: None becomes an unassessed row with no LLM
+    # call; [] proceeds to the LLM on the grounding-only path.
+    if results is None:
+        return None
     if not results:
         return []
     return [
@@ -426,6 +448,39 @@ async def _to_thread_with_ctx(func, *args):
     return await asyncio.to_thread(_with_ctx)
 
 
+def _unassessed_row(req: dict, gap_text: str) -> dict:
+    """MATTGPT-248 Cycle 2: build an unassessed row for the producer-
+    side partial-failure paths (Mode 1 assess-caught and Mode 2
+    retrieval-returned-None).
+
+    Category and requirement text come from the source req dict
+    because the LLM's JSON never arrived -- nothing is inferred. The
+    empty evidence list and per-mode gap_explanation land the row on
+    the consumer surface via `_owes_explanation` (Cycle 1 follow-up),
+    which routes any non-strong status through the note-block gate.
+    Confidence is intentionally omitted: nothing downstream reads it,
+    and stamping a value for a verdict we didn't reach would be a
+    fabrication.
+
+    `req["text"]` and `req["category"]` are bare subscripts (not
+    `.get`) deliberately. `run_assessment`'s flattening loop builds
+    the req dict locally at every append site with both keys
+    populated, so a KeyError here would mean a future caller fed
+    this an LLM-derived dict (which carries `"requirement"`, not
+    `"text"`) and the crash is the right failure to surface. But
+    this function runs inside an except handler in the fan-out
+    loop, so any exception here propagates out and takes down the
+    whole assessment. Only call `_unassessed_row` with a req dict
+    built by the flattening loop."""
+    return {
+        "requirement": req["text"],
+        "match_status": "unassessed",
+        "evidence": [],
+        "gap_explanation": gap_text,
+        "category": req["category"],
+    }
+
+
 async def _assess_one_with_index(
     index: int,
     semaphore: asyncio.Semaphore,
@@ -440,11 +495,50 @@ async def _assess_one_with_index(
     completion order. Wraps sync retrieve_stories and assess_requirement
     via _to_thread_with_ctx so the event loop stays free during the
     blocking HTTP calls to Pinecone and OpenAI, and Streamlit's
-    ScriptRunContext propagates to the worker threads."""
+    ScriptRunContext propagates to the worker threads.
+
+    MATTGPT-248 Cycle 2: three per-call failure branches, each with a
+    distinct log phrase so the causes stay grep-separable:
+
+    - Mode 4 (`retrieval-raised`): retrieve_stories raised. Log and
+      re-raise; the exception propagates through _fan_out_assessments'
+      cancel-and-drain BaseException handler and out of run_assessment.
+      `except Exception` (not BaseException) so cancellation reaches
+      the fan-out handler unlogged rather than being reported as a
+      retrieval bug. Deliberately different from Mode 2: an exception
+      is a bug, a None return is an expected outage signal.
+    - Mode 2 (`retrieval-returned-None`): pinecone_semantic_search
+      returned None (outage). Emit an unassessed row directly without
+      calling the LLM. During a total Pinecone outage on an
+      N-requirement JD this avoids paying N gpt-4o calls that would
+      each produce 'gap' verdicts the reader would have to disbelieve
+      row-by-row.
+    - Mode 1 (`assess-caught`): assess_requirement raised (rate limit,
+      malformed JSON, transient 5xx). Caught per-call so a single
+      failed requirement doesn't take down the whole assessment. Emit
+      an unassessed row and continue."""
     async with semaphore:
-        candidates = await _to_thread_with_ctx(
-            retrieve_stories, req["text"], stories, DEFAULT_TOP_K, f"[req {index}]"
-        )
+        try:
+            candidates = await _to_thread_with_ctx(
+                retrieve_stories, req["text"], stories, DEFAULT_TOP_K, f"[req {index}]"
+            )
+        except Exception as exc:
+            logger.warning(
+                "[jd_assessor] retrieval-raised req_idx=%d req_text=%r exc=%r",
+                index,
+                req["text"],
+                exc,
+            )
+            raise
+
+        if candidates is None:
+            logger.warning(
+                "[jd_assessor] retrieval-returned-None req_idx=%d req_text=%r",
+                index,
+                req["text"],
+            )
+            return index, _unassessed_row(req, _MODE_2_GAP_TEXT)
+
         # Per-call timing (DEBUG-gated): wraps only the assess_requirement
         # await so the measurement excludes Pinecone retrieval and
         # excludes semaphore queuing (semaphore is acquired at the top of
@@ -455,13 +549,41 @@ async def _assess_one_with_index(
         # alone. That matters when comparing arms of a concurrency probe.
         # Emit tagged with req_idx so N calls produce N grep-legible
         # samples for mean and spread analysis.
+        #
+        # MATTGPT-248 Cycle 2 note on sample count: Mode 2
+        # (retrieval-returned-None) and Mode 4 (retrieval-raised)
+        # return/raise before this timer is set, so no
+        # assess_call_ms sample is emitted for a requirement that
+        # never reached the LLM. That's correct -- the sample count
+        # equals the number of requirements that actually called
+        # gpt-4o, not the number of requirements submitted. A short
+        # sample count during a Pinecone outage is honest, not a
+        # dropped measurement. Mode 1 (assess-caught) DOES emit a
+        # sample: a call that hangs for 30s then raises is exactly
+        # the sample the distribution most needs, and silently
+        # dropping it would bias the mean toward the fast tail.
         _t_assess_start = time.perf_counter()
-        assessment = await _to_thread_with_ctx(
-            assess_requirement, client, req["text"], candidates
-        )
+        caught_exc: Exception | None = None
+        try:
+            assessment = await _to_thread_with_ctx(
+                assess_requirement, client, req["text"], candidates
+            )
+        except Exception as exc:
+            caught_exc = exc
+
         _t_assess_ms = (time.perf_counter() - _t_assess_start) * 1000.0
         if DEBUG:
             print(f"[jd_assessor] assess_call_ms={_t_assess_ms:.1f} req_idx={index}")
+
+        if caught_exc is not None:
+            logger.warning(
+                "[jd_assessor] assess-caught req_idx=%d req_text=%r exc=%r",
+                index,
+                req["text"],
+                caught_exc,
+            )
+            return index, _unassessed_row(req, _MODE_1_GAP_TEXT)
+
         assessment["category"] = req["category"]
         return index, assessment
 
@@ -472,10 +594,13 @@ async def _fan_out_assessments(
     """Run per-requirement retrieve + assess concurrently at _CONCURRENCY.
 
     Returns a list of assessment dicts in submission order, independent
-    of completion order. Exceptions propagate as today: on the first task
-    exception, pending tasks are cancelled and drained before the
-    exception re-raises. Error rows and return_exceptions=True are
-    MATTGPT-248, not this ticket."""
+    of completion order. Exceptions propagate on the first task
+    exception; pending tasks are cancelled and drained before the
+    exception re-raises. MATTGPT-248 Cycle 2 ended up catching Mode 1
+    (assess raise) and Mode 2 (retrieve None) per-call inside
+    `_assess_one_with_index` rather than using
+    `return_exceptions=True` here, so the only exceptions still
+    reaching this loop are Mode 4 (retrieve raise) and cancellation."""
     semaphore = asyncio.Semaphore(_CONCURRENCY)
     tasks = [
         asyncio.create_task(_assess_one_with_index(i, semaphore, client, req, stories))
@@ -488,7 +613,8 @@ async def _fan_out_assessments(
             index, assessment = await done
             results_by_index[index] = assessment
     except BaseException:
-        # MATTGPT-243: three things worth naming at this raise site.
+        # MATTGPT-243 + MATTGPT-248 Cycle 2: three things worth naming
+        # at this raise site.
         #
         # 1. `except BaseException` is deliberate. asyncio.CancelledError
         #    no longer derives from Exception in modern Python, and the
@@ -507,11 +633,18 @@ async def _fan_out_assessments(
         #
         # 3. Under asyncio.as_completed the exception surfaced from this
         #    loop is first-by-completion, not first-by-requirement-order.
-        #    Two racing failure types (e.g., a RateLimitError on req_3 and
-        #    a BadRequestError on req_7) can produce different visitor
-        #    banners on the same input depending on which finishes first.
-        #    The banner is honest either way, but the non-determinism
-        #    deserves a comment.
+        #    Cycle 2 narrows what can reach this handler: assess_requirement
+        #    exceptions (Mode 1, rate limit / malformed JSON / transient
+        #    5xx) are now caught per-call inside `_assess_one_with_index`
+        #    and converted to unassessed rows, so the only remaining
+        #    routes are Mode 4 (retrieve_stories raise) and cancellation.
+        #    The trim is deliberate: the previous example about racing
+        #    assess-side error types (RateLimit on req_3 vs BadRequest on
+        #    req_7) no longer applies. Non-determinism still exists for
+        #    two racing Mode 4 retrieval failures on different
+        #    requirements, or for cancellation racing a Mode 4 raise --
+        #    the banner is honest either way, but the ordering deserves
+        #    the comment.
         for task in tasks:
             if not task.done():
                 task.cancel()
