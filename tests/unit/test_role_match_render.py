@@ -822,7 +822,22 @@ class TestIncompleteNoticeText:
             "Try again" not in result
         ), f"print copy has an action clause it shouldn't: {result!r}"
 
-    def test_screen_and_print_both_open_with_paw_emoji(self):
+    def test_screen_opens_with_paw_emoji_print_omits_it(self):
+        """MATTGPT-248 Cycle 2 follow-up: the paw appears on screen
+        only. In the export PDF the emoji falls back to a system font
+        with no guarantee what glyph the reader gets (observed
+        clipped / substituted in the header of a manual-test export),
+        so the print surface drops it and starts the copy at
+        'I couldn't get to...'. Agy's voice survives in the
+        first-person copy; the paw is decoration that reliably
+        renders only on screen. Consistent with the established
+        rule: the paw appears once per surface, and in the export
+        the legend already carries the status glyphs.
+
+        `printed.startswith("I couldn't")` catches a stray leading
+        space or artifact left over from the paw removal --
+        `"🐾" not in printed` alone would accept `" I couldn't..."`
+        with a leading space and the surface would look broken."""
         from ui.pages.role_match import _incomplete_notice_text
 
         screen = _incomplete_notice_text(
@@ -832,8 +847,43 @@ class TestIncompleteNoticeText:
             self._counts_with_unassessed(2), total=22, surface="print"
         )
         assert screen is not None and printed is not None
-        assert "🐾" in screen
-        assert "🐾" in printed
+        assert "🐾" in screen, f"screen notice should carry the paw; got {screen!r}"
+        assert "🐾" not in printed, (
+            f"print notice should NOT carry the paw (PDF font substitution); "
+            f"got {printed!r}"
+        )
+        assert printed.startswith("I couldn't"), (
+            f"print notice should start with 'I couldn't' (no leading space "
+            f"or artifact from paw removal); got {printed!r}"
+        )
+
+    def test_all_unassessed_uses_any_of_these_on_both_surfaces(self):
+        """MATTGPT-248 Cycle 2 follow-up: when n == total (total
+        outage on every requirement), the copy reads 'any of these N
+        requirements' rather than 'N of these N requirements'.
+        Grammatical either way, awkward when the two numbers are
+        equal ('21 of these 21') and clean when the subset form is
+        replaced ('any of these 21'). Applies on both surfaces; the
+        action-clause split (screen has 'Try again', print doesn't)
+        stays as it is."""
+        from ui.pages.role_match import _incomplete_notice_text
+
+        screen = _incomplete_notice_text(
+            self._counts_with_unassessed(5), total=5, surface="screen"
+        )
+        printed = _incomplete_notice_text(
+            self._counts_with_unassessed(5), total=5, surface="print"
+        )
+        for name, result in (("screen", screen), ("print", printed)):
+            assert result is not None, f"[{name}] returned None"
+            assert "any of these 5" in result, (
+                f"[{name}] should read 'any of these 5' when n == total; "
+                f"got {result!r}"
+            )
+            assert "5 of these 5" not in result, (
+                f"[{name}] should not read '5 of these 5' when n == total; "
+                f"got {result!r}"
+            )
 
     def test_counts_sum_across_required_and_preferred(self):
         """When unassessed rows exist under both categories, the notice
