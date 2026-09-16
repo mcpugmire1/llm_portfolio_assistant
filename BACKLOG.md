@@ -25,7 +25,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 **NEXT**
 10. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
-11. **-086 + -223** — (If -086 shipped as pre-push gate above, -223 lands here alone.) Add router_score and router_family columns to Sheet query row; unblocks -239's floor threshold decision.
+11. **-223** — Add router_score and router_family columns to Sheet query row; unblocks -239's floor threshold decision.
 12. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
 13. Rest of Role Match: **-160**, -173, -014, -012, -081, -099, -017.
 
