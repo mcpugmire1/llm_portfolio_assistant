@@ -10,12 +10,12 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-09-16)
 
 **PRE-PUSH GATE**
-**-086** — Environment stamp. Dark window opened at -247 Green (`43ca523`): every row written until -086 lands carries no way to distinguish testing from a visitor's outage. Window is currently zero (nothing pushed). One `HEADERS` append + `_build_row` injection, fully specced. Land this before the push; -223 does not need to ride along. Note: -247's prefix test pins `HEADERS[:33]`; if any of -247's column assertions index by position rather than name, adding `Environment` shifts them -- verify before appending.
+**-086** — Environment stamp. Window opens on deploy: every row written after the first push will carry no way to distinguish testing from a visitor's outage. Window is currently zero (nothing pushed). One `HEADERS` append + `_build_row` injection, fully specced. Land this before the push; -223 does not need to ride along. Index-shift check resolved: -247's column assertions use `HEADERS.index(col)` (name-based, safe); the prefix test pins `HEADERS[:33]` exactly, and appending `Environment` at position 35 leaves that untouched. Both lookups are safe.
 
 **NOW**
 1. **-244** — Role Match assessor calibration: both arms at ~80% strong on a JD with real gaps. A recruiter reading "strong" on a requirement the corpus doesn't cover discounts the other twenty-two rows. Prompt edit plus `confidence` field deletion. No architecture dependency. Land before -249 (see -249 ordering constraint).
 2. **-089** — Role Match: location, work model, availability. May 22 recruiter finding.
-3. **-245** — Role Match streaming. Acceptance: AT&T fixture at 39 requirements, four waves, where progressive fill is visible -- not the demo JD where the win is ~2s. Extraction gates first content at 14-20s regardless; streaming's value is the fill-in across the remaining 8s. Blockers cleared (-243 `8d37405`, -248 `43ca523`).
+3. **-245** — Role Match streaming. Acceptance: AT&T fixture, multiple visible waves between extraction complete and full-assessment render (count varies by run; -160 is the fix). Not the demo JD where streaming moves first content by ~2s. Blockers cleared (-243 `8d37405`, -248 `43ca523`).
 4. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
 5. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
 6. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
@@ -808,7 +808,7 @@ Each detail block uses these fields. Not every field is required for every item.
 
 **-223 decoupled.** -223 (router columns) does not need to land at the same time. Its data is useful but not made urgent by anything shipping. One schema change vs two was the argument for pairing; landing -086 alone before the push eliminates a permanent gap in the data, which is worth more. -223 stays at NEXT.
 
-**Index-shift warning for Code:** -247's prefix test asserts `HEADERS[:33] == _HEADERS_HISTORICAL_SNAPSHOT`. Adding `Env` appends at index 33 -- the test still holds. But if any of -247's column-value assertions index the row by position rather than by header name, they will shift. Verify before appending, not after -- that is the -086 failure mode reappearing inside the fix for it.
+**Index-shift resolved (September 2026):** -247's column-value assertions use `HEADERS.index(col)` -- name-based lookups, not positional. The prefix test pins `HEADERS[:33]` exactly; appending `Environment` at position 35 leaves that untouched. Both are safe. No pre-append check required.
 
 - **Discovered during:** May 23, 2026 -- Matt verified GCP service account key rotation worked locally by triggering a real query and confirming the row appeared in the Sheet. Observed the broader Sheets log filling up with local + test traffic indistinguishable from production user traffic.
 - **Logged:** May 23, 2026 (implementation plan merged from MATTGPT-221, closed September 1, 2026)
