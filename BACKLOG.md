@@ -7,12 +7,15 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 ---
 
-## Value Prioritized Roadmap (updated 2026-09-15)
+## Value Prioritized Roadmap (updated 2026-09-16)
+
+**PRE-PUSH GATE**
+**-086** — Environment stamp. Dark window opened at -247 Green (`43ca523`): every row written until -086 lands carries no way to distinguish testing from a visitor's outage. Window is currently zero (nothing pushed). One `HEADERS` append + `_build_row` injection, fully specced. Land this before the push; -223 does not need to ride along. Note: -247's prefix test pins `HEADERS[:33]`; if any of -247's column assertions index by position rather than name, adding `Environment` shifts them -- verify before appending.
 
 **NOW**
-1. **-245** — Role Match streaming: requirement rows appear at ~20s (extraction is 14-20s; nothing renders before it completes) and fill in as each call lands. Blocker cleared (-248 shipped `43ca523`).
-2. **-244** — Role Match assessor calibration: both arms at ~80% strong on a JD with real gaps. A recruiter reading "strong" on a requirement the corpus doesn't cover discounts the other twenty-two rows. Prompt edit plus `confidence` field deletion. No architecture dependency.
-3. **-089** — Role Match: location, work model, availability. May 22 recruiter finding.
+1. **-244** — Role Match assessor calibration: both arms at ~80% strong on a JD with real gaps. A recruiter reading "strong" on a requirement the corpus doesn't cover discounts the other twenty-two rows. Prompt edit plus `confidence` field deletion. No architecture dependency. Land before -249 (see -249 ordering constraint).
+2. **-089** — Role Match: location, work model, availability. May 22 recruiter finding.
+3. **-245** — Role Match streaming. Acceptance: AT&T fixture at 39 requirements, four waves, where progressive fill is visible -- not the demo JD where the win is ~2s. Extraction gates first content at 14-20s regardless; streaming's value is the fill-in across the remaining 8s. Blockers cleared (-243 `8d37405`, -248 `43ca523`).
 4. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
 5. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
 6. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
@@ -22,12 +25,12 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 **NEXT**
 10. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
-11. **-086 + -223** — Land together: one `query_logger.py` schema change instead of two. -086: environment stamp on every row (failure rows from -247 are uninterpretable until this exists). -223: router_score and router_family columns; unblocks -239's floor threshold decision.
+11. **-086 + -223** — (If -086 shipped as pre-push gate above, -223 lands here alone.) Add router_score and router_family columns to Sheet query row; unblocks -239's floor threshold decision.
 12. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
 13. Rest of Role Match: **-160**, -173, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
--177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -249 (retrieval ranking: crisis story at rank 18 on incident-leadership requirement; ranking problem confirmed, not corpus gap)
+-177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- see -249 ordering constraint)
 
 **LATER — tier 2:** corpus work
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
@@ -801,9 +804,11 @@ Each detail block uses these fields. Not every field is required for every item.
 - Historical rows preserved with date-stamped archive before schema changes.
 - No call site changes required -- injection is in `_build_row`.
 
-**Urgency note (September 2026):** -247 makes this more urgent rather than less. -247 adds two new columns and two new event types (retrieval failure, gate rejection). The failure rows are exactly the ones you'd most want to filter your own testing out of -- a failure row written during dev looks identical to a production outage until `Env` exists. Every failure row -247 writes before -086 lands is uninterpretable on that dimension.
+**Dark window (September 2026):** Nothing has been pushed to production, so no ambiguous rows exist yet -- the window is currently zero. It opens on the first deploy and widens with every subsequent run. Every row written after that point carries `ok`, `gate_rejected`, or `retrieval_failed` with no way to tell your testing from a visitor's outage, and nothing retroactively fixes them -- same permanent-ambiguity shape as the empty-cell problem -247 just solved. This is the argument for landing -086 before the push rather than at NEXT slot 11: the window can be kept at zero if this lands first.
 
-**Land with -223 (same pass).** Both -086 and -223 are `query_logger.py` `HEADERS` appends. One pass = one schema change instead of two. The `HEADERS[:N]` prefix test -247 is adding guards both appends in the same assertion.
+**-223 decoupled.** -223 (router columns) does not need to land at the same time. Its data is useful but not made urgent by anything shipping. One schema change vs two was the argument for pairing; landing -086 alone before the push eliminates a permanent gap in the data, which is worth more. -223 stays at NEXT.
+
+**Index-shift warning for Code:** -247's prefix test asserts `HEADERS[:33] == _HEADERS_HISTORICAL_SNAPSHOT`. Adding `Env` appends at index 33 -- the test still holds. But if any of -247's column-value assertions index the row by position rather than by header name, they will shift. Verify before appending, not after -- that is the -086 failure mode reappearing inside the fix for it.
 
 - **Discovered during:** May 23, 2026 -- Matt verified GCP service account key rotation worked locally by triggering a real query and confirming the row appeared in the Sheet. Observed the broader Sheets log filling up with local + test traffic indistinguishable from production user traffic.
 - **Logged:** May 23, 2026 (implementation plan merged from MATTGPT-221, closed September 1, 2026)
@@ -1490,10 +1495,11 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 
 **Scope:** Wire the `as_completed` results from the parallelized assessor into a Streamlit streaming-compatible render loop. Each requirement row renders as its assessment completes rather than after the full list returns. Error-row rendering uses the placeholder defined in -248.
 
-**Acceptance:**
-- First requirement rows visible within 25s of submission on a cold-path JD (extraction floor is 14-20s; measure from click, not from extraction complete).
-- All rows render in the same final state as the current full-assessment render.
-- Error rows show the placeholder defined in -248 (not a blank or a crash).
+**Acceptance (AT&T fixture, not the demo JD):** The primary validation is the AT&T JD. Extraction nondeterminism means requirement count varies run to run (-160 is the fix; -245 ships before it), so the acceptance criterion is multiple visible render waves between extraction complete and full-assessment render -- not a specific count. On the demo JD, extraction dominates at 14-20s and streaming moves first content by ~2s on a wait the visitor is already committed to; that is not the acceptance target.
+
+- AT&T fixture: multiple distinct render waves observable between extraction complete and full-assessment render.
+- All rows render in the same final state as the current non-streaming render.
+- Error rows show the unassessed placeholder defined in -248 (`43ca523`), not a blank or a crash.
 
 **Cross-references:**
 - MATTGPT-243 (parallelization; shipped `8d37405`)
@@ -1511,6 +1517,8 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 - **File:** `services/jd_assessor.py` (`retrieve_stories`), corpus (`echo_star_stories_nlp.jsonl`)
 - **Logged:** September 11, 2026
 - **Benchmark:** `probe_243_top_k_rank.py` at repo root. Re-runnable before-and-after measurement. Same role `probe_163_substitution_impact.py` plays for -077.
+
+**Ordering constraint (September 2026):** -244 must land before this ticket. The assessor currently licenses over-calling by scoring too generously -- improving ranking while that definition stands makes the over-calling worse, because more topically-correct stories surface into an assessment that still calls gaps "strong." The gap rate will drop after -249 ships in a way that looks like a regression against -244's baseline; it isn't one, but only if -244 has already run. Do not pick up -249 until -244 is Done.
 
 **Finding (September 2026, `probe_243_top_k_rank.py` at top_k=25):**
 
@@ -2492,7 +2500,7 @@ Fallback if no entity is detected: surviving-family membership (`background`, `n
 
 **Unblocks:** MATTGPT-239 (confidence floor), which needs production router score distribution to pick a threshold. The Sheet delivers that; the local CSV does not.
 
-**Land with -086 (same pass).** Both -086 and -223 are `query_logger.py` `HEADERS` appends. One pass = one schema change instead of two, and the `HEADERS[:N]` prefix test -247 is adding covers both appends.
+**Decoupled from -086 (September 2026).** Originally planned to land together as one schema change. -086 was pulled ahead as a pre-push gate (dark window open since -247 Green). -223 does not share that urgency; router columns are useful but not time-sensitive. -223 lands alone at NEXT.
 
 **Acceptance:**
 - `router_score` and `router_family` appear on every Sheet query row.
