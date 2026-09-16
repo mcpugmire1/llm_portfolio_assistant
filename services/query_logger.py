@@ -6,6 +6,8 @@ import gspread
 import streamlit as st
 from google.oauth2.service_account import Credentials
 
+from config.settings import get_conf
+
 logger = logging.getLogger(__name__)
 
 SHEET_ID = "1Xxsh7hBx6yh8K2Vn1r6ST6JTACIblUBOGbQ2QBvrAk4"
@@ -50,6 +52,15 @@ HEADERS = [
     # tests/unit/test_query_logger.py::TestHeadersPrefixInvariant.
     "Unassessed Count",
     "Failure Type",
+    # MATTGPT-086 column (added Sept 2026). Environment stamp so
+    # analytics can filter local/dev/BDD traffic from real visitor
+    # traffic in the Sheet. Injected centrally in `_build_row` via
+    # `get_conf("MATTGPT_ENV", "local")`, so no call site changes on
+    # the eight log_* functions. Landed before the first push --
+    # every row from day one carries the stamp; no permanent-ambiguity
+    # window opens the way it did for -247's pre-column rows. Same
+    # append-only rule as above.
+    "Env",
 ]
 
 _headers_checked = False
@@ -161,13 +172,23 @@ def _append_row(row):
 
 
 def _build_row(event_type, **fields):
-    """Build a row list matching HEADERS order. Missing fields default to empty."""
+    """Build a row list matching HEADERS order. Missing fields default to empty.
+
+    MATTGPT-086: `Env` is injected here alongside Event Type and
+    Timestamp so every caller inherits the environment stamp without
+    call-site changes. Default `"local"` fires when MATTGPT_ENV is
+    unset -- that's the substitute for a startup-validation module
+    (the -086 default-fires unit test pins it), so if the Cloud
+    secret is missing the row carries `"local"` explicitly rather
+    than empty."""
     row = []
     for header in HEADERS:
         if header == "Event Type":
             row.append(event_type)
         elif header == "Timestamp":
             row.append(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        elif header == "Env":
+            row.append(get_conf("MATTGPT_ENV", "local"))
         else:
             row.append(fields.get(header, ""))
     return row
