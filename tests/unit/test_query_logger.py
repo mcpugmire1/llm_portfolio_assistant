@@ -411,6 +411,137 @@ class TestLogRoleMatchAssessmentExtensions:
             f"writes must not add to that ambiguity; got {row[idx]!r}"
         )
 
+    # ----- Per-category count columns (Sheet reads required vs preferred) -----
+    #
+    # -247 shipped four combined count columns (`Strong Count`,
+    # `Partial Count`, `Gap Count`, `Unassessed Count`) that sum
+    # required + preferred. The Sheet cannot distinguish
+    # required-strong from preferred-strong from those columns alone,
+    # which is the distinction fit assessment actually turns on.
+    # This ticket adds eight per-category columns alongside the four
+    # combined ones. `_build_role_match_log_kwargs` derives all
+    # twelve from the same `compute_summary_counts` pass; the
+    # signature and column-write tests below pin the wire path.
+
+    _NEW_PER_CATEGORY_KWARGS = (
+        "required_strong_count",
+        "required_partial_count",
+        "required_gap_count",
+        "required_unassessed_count",
+        "preferred_strong_count",
+        "preferred_partial_count",
+        "preferred_gap_count",
+        "preferred_unassessed_count",
+    )
+
+    _NEW_PER_CATEGORY_COLUMNS = (
+        "Required Strong Count",
+        "Required Partial Count",
+        "Required Gap Count",
+        "Required Unassessed Count",
+        "Preferred Strong Count",
+        "Preferred Partial Count",
+        "Preferred Gap Count",
+        "Preferred Unassessed Count",
+    )
+
+    def test_signature_requires_eight_per_category_count_kwargs(self):
+        """All eight per-category kwargs must be present in the
+        signature and have no defaults. Same forgot-to-set discipline
+        as `unassessed_count` and `failure_type`: a default lets a
+        caller silently pass 0 for a category count when it meant to
+        derive from real data."""
+        import inspect
+
+        from services.query_logger import log_role_match_assessment
+
+        sig = inspect.signature(log_role_match_assessment)
+        params = sig.parameters
+        for kwarg in self._NEW_PER_CATEGORY_KWARGS:
+            assert kwarg in params, (
+                f"missing {kwarg!r} parameter on "
+                f"log_role_match_assessment; got {list(params.keys())!r}"
+            )
+            assert params[kwarg].default is inspect.Parameter.empty, (
+                f"{kwarg!r} should have no default so a forgot-to-set "
+                f"caller is visible at call time; got default "
+                f"{params[kwarg].default!r}"
+            )
+
+    def test_per_category_kwargs_land_in_correct_columns(self):
+        """Each of the eight per-category kwargs must land in its
+        corresponding HEADERS column. Uses eight unique sentinel
+        values across all eight columns so a same-status swap (e.g.,
+        Green wires `required_strong_count` into `Preferred Strong
+        Count` by copy-paste error) is caught. Reused sentinels per
+        status would pass on such a swap and silently ship a
+        mis-wired column."""
+        import inspect
+
+        from services import query_logger
+        from services.query_logger import HEADERS
+
+        # Preconditions: signature and HEADERS must have the new
+        # kwargs / columns.
+        sig_params = inspect.signature(
+            query_logger.log_role_match_assessment
+        ).parameters
+        for kwarg in self._NEW_PER_CATEGORY_KWARGS:
+            assert kwarg in sig_params, f"precondition: signature must accept {kwarg!r}"
+        for col in self._NEW_PER_CATEGORY_COLUMNS:
+            assert col in HEADERS, f"precondition: HEADERS must include {col!r} column"
+
+        # Eight unique sentinels, one per (category, status) pair.
+        # 100-series for required, 200-series for preferred; status
+        # varies within each series so no two kwargs share a value.
+        sentinels = {
+            "required_strong_count": 101,
+            "required_partial_count": 102,
+            "required_gap_count": 103,
+            "required_unassessed_count": 104,
+            "preferred_strong_count": 201,
+            "preferred_partial_count": 202,
+            "preferred_gap_count": 203,
+            "preferred_unassessed_count": 204,
+        }
+        col_for_kwarg = dict(
+            zip(
+                self._NEW_PER_CATEGORY_KWARGS,
+                self._NEW_PER_CATEGORY_COLUMNS,
+                strict=False,
+            )
+        )
+
+        with (
+            patch.object(query_logger.st, "context", _mock_real_user_context()),
+            patch.object(query_logger, "Thread") as mock_thread,
+        ):
+            query_logger.log_role_match_assessment(
+                role_title="Test Role",
+                company="Test Co",
+                jd_format="hybrid",
+                required_count=410,  # 101 + 102 + 103 + 104
+                preferred_count=810,  # 201 + 202 + 203 + 204
+                strong_count=302,  # 101 + 201
+                partial_count=304,  # 102 + 202
+                gap_count=306,  # 103 + 203
+                unassessed_count=308,  # 104 + 204
+                failure_type="ok",
+                **sentinels,
+            )
+            row = _captured_row(mock_thread)
+
+        for kwarg, sentinel in sentinels.items():
+            col = col_for_kwarg[kwarg]
+            idx = HEADERS.index(col)
+            assert row[idx] == str(sentinel), (
+                f"kwarg {kwarg!r}={sentinel} should land at column "
+                f"{col!r} (index {idx}). Got {row[idx]!r}. If a value "
+                f"from another sentinel appeared here, Green wired "
+                f"the wrong kwarg into this column -- classic same-"
+                f"status swap (required_strong <-> preferred_strong)."
+            )
+
 
 class TestLogRoleMatchGateRejection:
     """MATTGPT-247: `log_role_match_gate_rejection()` is a new
@@ -467,6 +598,23 @@ class TestLogRoleMatchGateRejection:
             f"expected Failure Type 'gate_rejected'; got "
             f"{row[HEADERS.index('Failure Type')]!r}"
         )
+        # Precondition: HEADERS must include the eight per-category
+        # count columns. Without this, the loop below would raise
+        # ValueError from HEADERS.index() rather than a clean
+        # assertion. Same precondition pattern as -247's Test 2/3.
+        for new_col in (
+            "Required Strong Count",
+            "Required Partial Count",
+            "Required Gap Count",
+            "Required Unassessed Count",
+            "Preferred Strong Count",
+            "Preferred Partial Count",
+            "Preferred Gap Count",
+            "Preferred Unassessed Count",
+        ):
+            assert (
+                new_col in HEADERS
+            ), f"precondition: HEADERS must include {new_col!r} column"
         for col in (
             "Required Count",
             "Preferred Count",
@@ -474,6 +622,19 @@ class TestLogRoleMatchGateRejection:
             "Partial Count",
             "Gap Count",
             "Unassessed Count",
+            # Per-category columns added alongside the four combined
+            # counts. Same ambiguity rule as above: empty carries
+            # "column did not exist yet" for historical rows, so a
+            # gate-rejection row must write explicit "0" on every
+            # count column, not skip the eight new ones.
+            "Required Strong Count",
+            "Required Partial Count",
+            "Required Gap Count",
+            "Required Unassessed Count",
+            "Preferred Strong Count",
+            "Preferred Partial Count",
+            "Preferred Gap Count",
+            "Preferred Unassessed Count",
         ):
             idx = HEADERS.index(col)
             assert row[idx] == "0", (
@@ -489,18 +650,28 @@ class TestHeadersPrefixInvariant:
     never mid-list. This class pins that Green appends rather than
     inserting.
 
-    Prefix, not suffix. A suffix assertion (`HEADERS[-N:] ==
-    <expected>`) still passes when someone inserts at index 10 and
-    shifts everything down -- which is the -086 failure mode. The
-    prefix comparison catches that.
+    Two tests together cover the -086 failure mode:
 
-    Snapshot history:
-    - -247 Red (1e9be74): 33 entries, pre-247.
-    - -086 Red: extended to 35 entries to include -247's `Unassessed
-      Count` and `Failure Type`. -086 appends `Env` at index 35 in
-      Green, leaving `HEADERS[:35]` untouched. Every extension of
-      the snapshot happens on the Red for the ticket that ADDED the
-      columns, one commit behind the current HEAD."""
+    1. `test_headers_prefix_matches_historical_snapshot` pins the
+       historical prefix at 35 entries. Prefix, not suffix -- a
+       suffix assertion still passes when someone inserts at index
+       10 and shifts everything down, which is exactly the -086
+       failure. The prefix comparison catches insertions or renames
+       within positions 0-34.
+
+    2. `test_headers_length_matches_current_schema` pins the current
+       total length. Catches insertions, removals, or additions at
+       any position that the prefix doesn't cover -- including
+       positions 35+ where Env and any subsequent columns live
+       outside the historical prefix.
+
+    Snapshot is frozen at 35 (state as of -086's landing) and does
+    NOT extend for new columns. The pattern of "extend the snapshot
+    on the next ticket's Red" was retired -- an ever-growing
+    snapshot ends up as a running count, not a historical record.
+    New-column additions are covered by the length pin, which
+    updates once as part of the ticket that adds them; the prefix
+    stays put."""
 
     # Frozen snapshot of HEADERS as of Sept 16, 2026 (35 entries,
     # pre-086 Green). Produced by piping HEADERS through Python and
@@ -569,6 +740,37 @@ class TestHeadersPrefixInvariant:
             f"row in the Sheet. Diff:\n"
             f"  expected: {self._HEADERS_HISTORICAL_SNAPSHOT!r}\n"
             f"  actual:   {actual_prefix!r}"
+        )
+
+    # Current-schema length pin. Updated ONCE, as part of the ticket
+    # that adds columns. Together with the frozen prefix above:
+    #   - Prefix pins positions 0-34 by name and order.
+    #   - Length pins the total count.
+    # Combined, an insert/remove/rename anywhere in HEADERS is caught:
+    # positions 0-34 by prefix; positions 35+ by length change.
+    _CURRENT_SCHEMA_LENGTH = 36
+
+    def test_headers_length_matches_current_schema(self):
+        """Length pin. Passes when `len(HEADERS)` equals the schema
+        length declared here. Fails when a column is added, removed,
+        or the schema drifts. Update `_CURRENT_SCHEMA_LENGTH` above
+        as part of the ticket that changed HEADERS.
+
+        Rationale: the historical prefix at 35 does not cover
+        positions 35+ (Env and beyond). Without this pin, an insert
+        after position 34 shifts every subsequent column silently --
+        the exact -086 failure mode. This pin catches it because
+        insertion changes the total count."""
+        from services.query_logger import HEADERS
+
+        assert len(HEADERS) == self._CURRENT_SCHEMA_LENGTH, (
+            f"HEADERS length changed unexpectedly: got {len(HEADERS)}, "
+            f"pin expects {self._CURRENT_SCHEMA_LENGTH}. If this is "
+            f"intentional (a ticket added/removed columns), update "
+            f"_CURRENT_SCHEMA_LENGTH above as part of the same commit "
+            f"that changed HEADERS. If this fired unexpectedly, "
+            f"something inserted or removed a column mid-list and the "
+            f"prefix invariant may also be affected."
         )
 
 
@@ -727,3 +929,44 @@ class TestBuildRoleMatchLogKwargsArithmeticInvariant:
                 f"\n"
                 f"Counts: {counts!r}"
             )
+
+            # Per-status split invariant: for each status, the combined
+            # count must equal required + preferred for that status.
+            # Catches a Green that computes the four combined columns
+            # correctly (the invariant above still holds) but swaps or
+            # miswires the eight new per-category kwargs. Without
+            # this, a swap between required_strong_count and
+            # preferred_strong_count leaves combined strong_count
+            # correct and the whole-total invariant intact, but the
+            # per-category columns on the Sheet mislead the recruiter
+            # analyst about where the strong matches actually landed.
+            #
+            # Precondition: the eight per-category keys must be
+            # present in the helper's return dict. Without this
+            # check the split loop would raise KeyError rather than
+            # a clean assertion.
+            for status in ("strong", "partial", "gap", "unassessed"):
+                for key_name in (
+                    f"required_{status}_count",
+                    f"preferred_{status}_count",
+                ):
+                    assert key_name in counts, (
+                        f"[{payload_name}] precondition: helper must "
+                        f"return {key_name!r} key. Got keys: "
+                        f"{sorted(counts.keys())!r}"
+                    )
+            for status in ("strong", "partial", "gap", "unassessed"):
+                combined = counts[f"{status}_count"]
+                required = counts[f"required_{status}_count"]
+                preferred = counts[f"preferred_{status}_count"]
+                assert combined == required + preferred, (
+                    f"[{payload_name}] per-status split invariant "
+                    f"broken for {status!r}: combined "
+                    f"{status}_count={combined} != "
+                    f"required_{status}_count={required} + "
+                    f"preferred_{status}_count={preferred}. "
+                    f"Either the combined count is wrong, one of the "
+                    f"per-category counts is wrong, or they were "
+                    f"derived from different passes over the results "
+                    f"list. Full counts: {counts!r}"
+                )
