@@ -244,7 +244,19 @@ def log_page_load(
     utm_content: str = "",
     utm_term: str = "",
 ):
-    """Log a page_load event. Called once per session from the first-mount guard."""
+    """Log a page_load event. Called once per session from the first-mount guard.
+
+    Session ID is read from st.session_state (populated at app.py:108
+    inside the same first-mount guard, before this function is called)
+    so page_load rows can be grouped with subsequent role_match and
+    query events by session. Same read pattern as
+    log_role_match_assessment; try/except fail-open so a missing
+    session_state key doesn't block the write."""
+    session_id = ""
+    try:
+        session_id = st.session_state.get("_session_id", "")
+    except Exception:
+        pass
     row = _build_row(
         "page_load",
         Referrer=referrer,
@@ -257,6 +269,7 @@ def log_page_load(
             "UTM Campaign": utm_campaign,
             "UTM Content": utm_content,
             "UTM Term": utm_term,
+            "Session ID": session_id,
         },
     )
     Thread(target=_append_row, args=(row,), daemon=True).start()
