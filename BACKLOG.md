@@ -796,12 +796,13 @@ Each detail block uses these fields. Not every field is required for every item.
 
 **Commit 1:** Add `config/environment.py` reading `MATTGPT_ENV` via `get_conf`. Add a startup print so a wrong value shows up on the first deploy rather than silently. `MATTGPT_ENV` is already set to "cloud" in Streamlit secrets and "local" in `.env`.
 
-**Commit 2:** Archive both CSVs to `data/archive/` with a date stamp. Append `Env` to the end of `HEADERS` in `query_logger.py` -- end, not middle, or every historical row misaligns. Inject it centrally in `_build_row` so call sites do not change. Add the column to both CSV writers.
+**Commit 2:** Append `Env` to the end of `HEADERS` in `query_logger.py` -- end, not middle, or every historical row misaligns. Inject it centrally in `_build_row` so call sites do not change.
+
+Note: the CSV archiving step ("archive both CSVs to `data/archive/`") was drift from the MATTGPT-221 merge. MATTGPT-238 verified the CSVs are gitignored and local-only; Streamlit Cloud's container filesystem is ephemeral, so there is nothing production-side to archive. The archive step is moot and does not belong in this ticket.
 
 **Acceptance criteria:**
 - `MATTGPT_ENV` logged on every row.
 - Wrong or missing value raises at startup, not silently.
-- Historical rows preserved with date-stamped archive before schema changes.
 - No call site changes required -- injection is in `_build_row`.
 
 **Dark window (September 2026):** Nothing has been pushed to production, so no ambiguous rows exist yet -- the window is currently zero. It opens on the first deploy and widens with every subsequent run. Every row written after that point carries `ok`, `gate_rejected`, or `retrieval_failed` with no way to tell your testing from a visitor's outage, and nothing retroactively fixes them -- same permanent-ambiguity shape as the empty-cell problem -247 just solved. This is the argument for landing -086 before the push rather than at NEXT slot 11: the window can be kept at zero if this lands first.
