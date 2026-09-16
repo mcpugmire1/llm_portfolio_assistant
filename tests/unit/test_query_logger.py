@@ -485,17 +485,25 @@ class TestLogRoleMatchGateRejection:
 
 
 class TestHeadersPrefixInvariant:
-    """MATTGPT-247: `HEADERS` grows by two columns
-    (`Unassessed Count`, `Failure Type`) appended at the end. This
-    class pins that Green appends rather than inserting mid-list.
+    """MATTGPT-247 + MATTGPT-086: `HEADERS` grows by appending only,
+    never mid-list. This class pins that Green appends rather than
+    inserting.
 
     Prefix, not suffix. A suffix assertion (`HEADERS[-N:] ==
     <expected>`) still passes when someone inserts at index 10 and
     shifts everything down -- which is the -086 failure mode. The
-    prefix comparison catches that."""
+    prefix comparison catches that.
 
-    # Frozen snapshot of HEADERS as of Sept 15, 2026 (33 entries,
-    # pre-247). Produced by piping HEADERS through Python and
+    Snapshot history:
+    - -247 Red (1e9be74): 33 entries, pre-247.
+    - -086 Red: extended to 35 entries to include -247's `Unassessed
+      Count` and `Failure Type`. -086 appends `Env` at index 35 in
+      Green, leaving `HEADERS[:35]` untouched. Every extension of
+      the snapshot happens on the Red for the ticket that ADDED the
+      columns, one commit behind the current HEAD."""
+
+    # Frozen snapshot of HEADERS as of Sept 16, 2026 (35 entries,
+    # pre-086 Green). Produced by piping HEADERS through Python and
     # copying the literal output, not transcribed by hand, to avoid
     # encoding a typo as the historical record:
     #
@@ -539,15 +547,17 @@ class TestHeadersPrefixInvariant:
         "Story Title",
         "Client",
         "Top Score",
+        "Unassessed Count",
+        "Failure Type",
     )
 
     def test_headers_prefix_matches_historical_snapshot(self):
-        """Test 7. `HEADERS[:33]` must exactly match the frozen
-        snapshot. Passes today (HEADERS length 33) and after Green
-        (Green appends, doesn't insert). Fails if someone inserts
-        `"Unassessed Count"` at index 30 to keep related columns
-        adjacent, which is a defensible instinct but breaks every
-        historical row's column semantics."""
+        """`HEADERS[:35]` must exactly match the frozen snapshot.
+        Passes today (HEADERS length 35) and after -086 Green
+        (Green appends `Env`, doesn't insert). Fails if someone
+        inserts `"Env"` mid-list to group it with related columns,
+        which is a defensible instinct but breaks every historical
+        row's column semantics."""
         from services.query_logger import HEADERS
 
         n = len(self._HEADERS_HISTORICAL_SNAPSHOT)
@@ -559,6 +569,58 @@ class TestHeadersPrefixInvariant:
             f"row in the Sheet. Diff:\n"
             f"  expected: {self._HEADERS_HISTORICAL_SNAPSHOT!r}\n"
             f"  actual:   {actual_prefix!r}"
+        )
+
+
+class TestEnvInjection:
+    """MATTGPT-086: `_build_row` injects the `Env` column from
+    `get_conf("MATTGPT_ENV", "local")` at row-build time, so every
+    caller inherits the environment stamp without call-site changes.
+
+    Two tests pin the injection: one for the set case (MATTGPT_ENV
+    provided) and one for the unset case (default fires). The
+    default-fires test is the substitute for the startup validation
+    scope that was dropped from -086; if MATTGPT_ENV is missing in
+    Cloud secrets or the .env file, rows carry `"local"` explicitly
+    rather than empty."""
+
+    def test_build_row_injects_env_from_get_conf_when_set(self, monkeypatch):
+        """Set MATTGPT_ENV to a distinctive value, call `_build_row`,
+        assert the Env column carries that value. `get_conf` in bare
+        mode (pytest without Streamlit runtime) skips st.secrets
+        entirely and reads os.getenv directly (see MATTGPT-216 fix
+        in config/settings.py), so monkeypatch.setenv is
+        deterministic."""
+        from services.query_logger import HEADERS, _build_row
+
+        assert "Env" in HEADERS, "precondition: HEADERS must include 'Env' column"
+
+        monkeypatch.setenv("MATTGPT_ENV", "test-env-value")
+        row = _build_row("test_event")
+
+        assert row[HEADERS.index("Env")] == "test-env-value", (
+            f"expected 'test-env-value' at Env column "
+            f"(index {HEADERS.index('Env')}); got "
+            f"{row[HEADERS.index('Env')]!r}"
+        )
+
+    def test_build_row_env_defaults_to_local_when_var_unset(self, monkeypatch):
+        """Unset MATTGPT_ENV, call `_build_row`, assert Env carries
+        `"local"` (the get_conf default). Substitute for the
+        startup-validation scope dropped from -086: if the Cloud
+        secret is missing, the default fires rather than the row
+        carrying an empty cell."""
+        from services.query_logger import HEADERS, _build_row
+
+        assert "Env" in HEADERS, "precondition: HEADERS must include 'Env' column"
+
+        monkeypatch.delenv("MATTGPT_ENV", raising=False)
+        row = _build_row("test_event")
+
+        assert row[HEADERS.index("Env")] == "local", (
+            f"expected 'local' default at Env column "
+            f"(index {HEADERS.index('Env')}) when MATTGPT_ENV is "
+            f"unset; got {row[HEADERS.index('Env')]!r}"
         )
 
 
