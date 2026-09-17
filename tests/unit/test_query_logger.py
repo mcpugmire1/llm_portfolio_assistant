@@ -292,9 +292,16 @@ class TestLogRoleMatchAssessmentExtensions:
         unassessed_count: int,
         failure_type: str,
     ):
-        """Shared call shape for tests 2-4. Fills all required kwargs
-        with placeholder values so the tests focus on the two new
-        columns rather than repeating the eight existing ones."""
+        """Shared call shape for the -247 tests. Fills all required
+        kwargs with placeholder values so the tests focus on
+        unassessed_count and failure_type rather than repeating the
+        eight existing counts.
+
+        Post-086 tangential Green extended the signature with eight
+        per-category count kwargs -- passed here as 0 placeholders
+        since these -247 tests do not exercise per-category
+        semantics. The dedicated per-category coverage lives in
+        test_per_category_kwargs_land_in_correct_columns."""
         query_logger.log_role_match_assessment(
             role_title="Test Role",
             company="Test Co",
@@ -306,6 +313,14 @@ class TestLogRoleMatchAssessmentExtensions:
             gap_count=0,
             unassessed_count=unassessed_count,
             failure_type=failure_type,
+            required_strong_count=0,
+            required_partial_count=0,
+            required_gap_count=0,
+            required_unassessed_count=0,
+            preferred_strong_count=0,
+            preferred_partial_count=0,
+            preferred_gap_count=0,
+            preferred_unassessed_count=0,
         )
 
     def test_unassessed_count_written_to_correct_column(self):
@@ -748,7 +763,7 @@ class TestHeadersPrefixInvariant:
     #   - Length pins the total count.
     # Combined, an insert/remove/rename anywhere in HEADERS is caught:
     # positions 0-34 by prefix; positions 35+ by length change.
-    _CURRENT_SCHEMA_LENGTH = 36
+    _CURRENT_SCHEMA_LENGTH = 44
 
     def test_headers_length_matches_current_schema(self):
         """Length pin. Passes when `len(HEADERS)` equals the schema

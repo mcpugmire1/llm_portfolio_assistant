@@ -137,6 +137,21 @@ def _build_role_match_log_kwargs(extraction: dict, results: list[dict]) -> dict:
         "gap_count": r["gap"] + p["gap"],
         "unassessed_count": r["unassessed"] + p["unassessed"],
         "failure_type": "ok",
+        # Per-category counts (added post-086): all twelve derive from
+        # the same `compute_summary_counts(results)` pass so the split
+        # invariant (combined == required + preferred per status) holds
+        # by construction. Recruiter analytics filter on the Sheet's
+        # per-category columns to distinguish required-strong from
+        # preferred-strong -- the distinction fit assessment actually
+        # turns on.
+        "required_strong_count": r["strong"],
+        "required_partial_count": r["partial"],
+        "required_gap_count": r["gap"],
+        "required_unassessed_count": r["unassessed"],
+        "preferred_strong_count": p["strong"],
+        "preferred_partial_count": p["partial"],
+        "preferred_gap_count": p["gap"],
+        "preferred_unassessed_count": p["unassessed"],
     }
 
 
@@ -195,6 +210,14 @@ def _handle_assessment_error(e: Exception) -> str:
             gap_count=0,
             unassessed_count=0,
             failure_type="retrieval_failed",
+            required_strong_count=0,
+            required_partial_count=0,
+            required_gap_count=0,
+            required_unassessed_count=0,
+            preferred_strong_count=0,
+            preferred_partial_count=0,
+            preferred_gap_count=0,
+            preferred_unassessed_count=0,
         )
     return _RETRYABLE_MSG if _is_retryable_error(e) else _NOT_RETRYABLE_MSG
 

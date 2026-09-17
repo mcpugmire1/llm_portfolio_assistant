@@ -61,6 +61,24 @@ HEADERS = [
     # window opens the way it did for -247's pre-column rows. Same
     # append-only rule as above.
     "Env",
+    # Per-category count columns (added Sept 2026, post-086). The
+    # existing four combined counts (Strong / Partial / Gap /
+    # Unassessed) sum required + preferred, so the Sheet cannot tell
+    # required-strong from preferred-strong -- the distinction fit
+    # assessment actually turns on. These eight columns preserve the
+    # combined counts (backwards compatible) and add per-category
+    # visibility. Populated from the same compute_summary_counts pass
+    # in _build_role_match_log_kwargs so the arithmetic invariant
+    # (combined == required + preferred per status) holds by
+    # construction. Same append-only rule as above.
+    "Required Strong Count",
+    "Required Partial Count",
+    "Required Gap Count",
+    "Required Unassessed Count",
+    "Preferred Strong Count",
+    "Preferred Partial Count",
+    "Preferred Gap Count",
+    "Preferred Unassessed Count",
 ]
 
 _headers_checked = False
@@ -316,6 +334,14 @@ def log_role_match_assessment(
     gap_count: int,
     unassessed_count: int,
     failure_type: str,
+    required_strong_count: int,
+    required_partial_count: int,
+    required_gap_count: int,
+    required_unassessed_count: int,
+    preferred_strong_count: int,
+    preferred_partial_count: int,
+    preferred_gap_count: int,
+    preferred_unassessed_count: int,
 ) -> None:
     """Log a Role Match assessment run. Called after run_assessment() on
     the success path (failure_type="ok") and after _handle_assessment_error
@@ -363,6 +389,14 @@ def log_role_match_assessment(
             "UTM Content": utm_content,
             "Unassessed Count": str(unassessed_count),
             "Failure Type": failure_type,
+            "Required Strong Count": str(required_strong_count),
+            "Required Partial Count": str(required_partial_count),
+            "Required Gap Count": str(required_gap_count),
+            "Required Unassessed Count": str(required_unassessed_count),
+            "Preferred Strong Count": str(preferred_strong_count),
+            "Preferred Partial Count": str(preferred_partial_count),
+            "Preferred Gap Count": str(preferred_gap_count),
+            "Preferred Unassessed Count": str(preferred_unassessed_count),
         },
     )
     Thread(target=_append_row, args=(row,), daemon=True).start()
@@ -412,6 +446,14 @@ def log_role_match_gate_rejection() -> None:
             "Session ID": session_id,
             "Unassessed Count": "0",
             "Failure Type": "gate_rejected",
+            "Required Strong Count": "0",
+            "Required Partial Count": "0",
+            "Required Gap Count": "0",
+            "Required Unassessed Count": "0",
+            "Preferred Strong Count": "0",
+            "Preferred Partial Count": "0",
+            "Preferred Gap Count": "0",
+            "Preferred Unassessed Count": "0",
         },
     )
     Thread(target=_append_row, args=(row,), daemon=True).start()
