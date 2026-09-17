@@ -73,8 +73,7 @@ utils/                  # Helpers
 config/                 # Settings
   debug.py, settings.py, constants.py
 
-data/
-  echo_star_stories_nlp.jsonl   # STAR story corpus (source of truth)
+echo_star_stories_nlp.jsonl   # STAR story corpus (source of truth, repo root)
 ```
 
 ## Code Conventions
