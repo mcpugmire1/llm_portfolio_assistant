@@ -82,7 +82,7 @@
 **Project:** MattGPT Portfolio Assistant - AI-powered career story search and chat interface
 **Tech Stack:** Streamlit, OpenAI GPT-4o, Pinecone vector DB, Python 3.11+
 **Data Corpus:** 100+ STAR-formatted transformation project stories
-**Last Updated:** September 1, 2026
+**Last Updated:** September 16, 2026
 
 ### What This Document Contains
 
@@ -1268,15 +1268,28 @@ with st.container(key="r2_row"):
 JD Input
   → Stage 1: Extraction          gpt-4o, one call
   → Stage 2: Retrieval           Pinecone per requirement, DEFAULT_TOP_K = 5
-  → Stage 3: Assessment          gpt-4o, one call per requirement (sequential)
+  → Stage 3: Assessment          gpt-4o, one call per requirement; parallelized via asyncio
   → compute_recommendation()     Aggregates verdicts to Strong / Likely / Partial / Gap
 ```
 
-Stage 3 is sequential, not parallelized: one GPT-4o call per extracted requirement. For a JD with 10 requirements, that is 10 serial LLM calls. This is the primary latency driver on longer JDs.
+Stage 3 is parallelized via `asyncio.as_completed` at `_CONCURRENCY = 10`, wrapping the sync OpenAI and Pinecone clients with `asyncio.to_thread`. Measured on the AT&T JD at DEFAULT_TOP_K=5, three runs each: sequential mean 125.5s, parallel mean 31.0s (`jd_assessor.py:204-214`). The pre-243 sequential implementation is in git history (recoverable via revert if the parallel path ever needs to be undone); not a live fallback.
 
 #### Retrieval Parameters
 
 `DEFAULT_TOP_K = 5`, raised from 3 on July 31, 2026. The mismatch that surfaced the calibration gap: Role Match was retrieving at TOP_K=3 while Ask Agy retrieves 10 stories, passes them through `diversify_results()` (which returns 7), and feeds 5 to the LLM. Two surfaces reading at different depths -- Role Match underretrieved relative to Ask Agy's calibrated depth.
+
+`retrieve_stories` propagates `None` from `pinecone_semantic_search`'s outage signal rather than collapsing it to `[]`. The `None`/`[]` distinction is the only signal `_assess_one_with_index` has to separate a Pinecone outage (Mode 2) from a real empty match (Mode 3). Do not add `if not results: return []` here.
+
+#### Partial Failure Handling
+
+Four failure modes at `_assess_one_with_index`, each with a distinct log phrase so causes are grep-separable:
+
+- **Mode 1 (assess-caught):** `assess_requirement` raised (rate limit, malformed JSON, transient 5xx). Caught per-call. Emits an unassessed row with `gap_explanation = _MODE_1_GAP_TEXT`. Assessment continues for remaining requirements.
+- **Mode 2 (retrieval-returned-None):** `retrieve_stories` returned `None` (Pinecone outage signal). Emits an unassessed row with `gap_explanation = _MODE_2_GAP_TEXT` without calling the LLM. During a total Pinecone outage on an N-requirement JD, avoids N spurious gap verdicts.
+- **Mode 3 (retrieve []):** `retrieve_stories` returned empty list (real empty match). LLM proceeds with no candidates. The assessor correctly returns a gap verdict grounded in the fact that the corpus has no matching stories. This is the right answer if the corpus genuinely has no match -- Mode 3 and Mode 2 produce very different rows from the same empty-looking condition, which is why the None/[] distinction exists.
+- **Mode 4 (retrieval-raised):** `retrieve_stories` raised. Re-raised out of `_assess_one_with_index`; propagates through `_fan_out_assessments` cancel-and-drain `BaseException` handler and out of `run_assessment`. Handled by `_handle_assessment_error` in `ui/pages/role_match.py`.
+
+Unassessed row shape (Mode 1/2): `match_status="unassessed"`, `category` and `requirement` from source, empty evidence, per-mode `gap_explanation`.
 
 #### Assessment Grounding (load_matt_profile)
 
@@ -1306,11 +1319,12 @@ Single-condition probe script at repo root (`probe_assessor.py`). Freezes Stage 
 
 #### Query Logger Events (Role Match)
 
-Three event types (see Query Logger section for column definitions):
+Four event types (see Query Logger section for column definitions):
 
 | Event | Trigger | Key Fields |
 |-------|---------|------------|
-| `role_match_assessment` | Successful assessment submission | role_title, company, jd_format, required/preferred/strong/partial/gap counts, session_id |
+| `role_match_assessment` | Successful assessment or retrieval-failed path | role_title, company, jd_format, required/preferred/strong/partial/gap counts, unassessed_count, failure_type, all 8 per-category counts, session_id |
+| `role_match_gate_rejection` | Non-JD paste rejected before extraction (too short or fails `_looks_like_jd`) | failure_type="gate_rejected", all count columns explicit "0", session_id |
 | `role_match_chip_click` | Story chip expanded (open path only, not close) | story_title, client, session_id |
 | `role_match_action` | Action button click (helpful/copy_report/export) | rating=action, role_title, session_id |
 
@@ -1845,8 +1859,10 @@ META_PATTERNS = [
 - `detect_entity()` → Returns `None` if no entity found; Title entities use soft filtering
 
 **Layer 3 (Retrieval):**
-- `semantic_search()` → Returns empty results on Pinecone error
+- `semantic_search()` (Ask Agy path) -- returns `{"results": [], "confidence": "none", "top_score": 0.0}` on Pinecone error. A caller on this path cannot distinguish an outage from a query that genuinely returned no matches; both surfaces as `confidence: "none"`.
 - `get_synthesis_stories()` → Returns empty list on error
+- `retrieve_stories()` (Role Match path) -- propagates `None` on Pinecone outage; returns `[]` on real empty match. See Partial Failure Handling in the Role Match section.
+- `_handle_assessment_error` (`ui/pages/role_match.py:185`, Mode 4) -- logs via `logger.warning` with error class name, writes a `role_match_assessment` Sheet row with `failure_type="retrieval_failed"` and all counts zero, returns retryable or not-retryable banner string. Never leaks `str(e)` into the returned message.
 
 **Layer 4 (Confidence Gate):**
 - `confidence == "none"` → Returns "I couldn't find relevant stories" message
@@ -1886,16 +1902,23 @@ Query logging to Google Sheets, capturing enriched data for every search across 
 **Architecture:**
 - **Service:** `services/query_logger.py`
 - **Backend:** Google Sheets via `gspread` + Google service account
-- **Threading:** Fire-and-forget daemon thread — Google Sheets API latency never blocks user response
-- **Error handling:** Silent failure (try/except pass) — logging should never break the app
-- **Browser context:** Captured in main Streamlit thread before spawning daemon (st.context is thread-local)
+- **Threading:** Fire-and-forget daemon thread -- Google Sheets API latency never blocks user response
+- **Error handling:** `_append_row` never raises. Both failure paths emit `WARNING` logs so a missing Sheet row is diagnosable from terminal output: `"[query_logger] Sheet write skipped: get_sheet() returned None ..."` (credentials/client init path); `"[query_logger] Sheet write failed: ..."` (exception path). Module-level `logger` added Sept 2026.
+- **Browser context:** Captured in main Streamlit thread before spawning daemon (`st.context` is thread-local)
+- **`_build_row` central injection:** All log functions call `_build_row(event_type, **fields)`. `Env` is injected centrally here via `get_conf("MATTGPT_ENV", "local")` -- no call-site changes required when a new event type is added.
+- **`log_role_match_gate_rejection`:** Distinct function and event type for non-JD paste rejections. All count columns explicit `"0"` (not empty -- empty carries the historical semantic of "column did not exist yet").
+- **Session ID semantics:** `log_page_load` also writes Session ID (Sept 2026, commit c8d0983). Previously Role Match only. Enables session-grouping analytics across page load and query events.
 
-**Schema (32 columns — source of truth: `services/query_logger.py:HEADERS`):**
+**Schema (44 columns -- source of truth: `services/query_logger.py:HEADERS`):**
+
+Why 44: an absent value must never be indistinguishable from a meaningful one. Three of this week's additions exist for that reason: `Env` (local dev traffic looks identical to a real visitor's without it), `Failure Type` (an empty cell already means "pre-column row" in the historical data -- empty can't also mean "ok"), and the 8 per-category counts (`Required Strong`, etc. -- the four combined counts summed required + preferred, hiding the split that assessment fit analysis turns on). Collapsing any of these back to empty would reintroduce the ambiguity they were added to resolve.
+
+Schema is append-only. Mid-list insertions change the column position of every historical row in the Sheet (the -086 failure mode). See HEADERS Invariants below.
 
 Core event columns (all event types):
 | Column | Source | Notes |
 |--------|--------|-------|
-| Event Type | log function | "query", "page_load", "feedback", "role_match_assessment", etc. |
+| Event Type | log function | "query", "page_load", "feedback", "role_match_assessment", "role_match_gate_rejection", etc. |
 | Timestamp | `datetime.now()` | Server-side UTC |
 | Query | function param | User's search text |
 | Page | function param | "Ask Agy" or "Explore Stories" |
@@ -1923,20 +1946,46 @@ Role Match columns (added April 2026):
 | Role Title | JD-extracted role |
 | Company | JD-extracted company |
 | JD Format | Format classification |
-| Required Count | Requirement counts from assessment |
-| Preferred Count | |
-| Strong Count | Story match counts |
+| Required Count | Combined required requirement count |
+| Preferred Count | Combined preferred requirement count |
+| Strong Count | Combined story match counts |
 | Partial Count | |
 | Gap Count | |
-| Session ID | |
-| Story Title | Matched story |
+| Session ID | Groups page_load + role_match + query events for a visitor |
+| Story Title | Matched story (chip_click events) |
 | Client | Matched story client |
+| Top Score | Top Pinecone score for the assessment |
+
+Sept 2026 additions (appended, not inserted):
+| Column | Notes |
+|--------|-------|
+| Unassessed Count | Requirements not assessed (Mode 1 or Mode 2 failure) |
+| Failure Type | "ok", "retrieval_failed", "gate_rejected" |
+| Env | "local", "dev", "production" -- injected centrally by `_build_row` |
+| Required Strong Count | Per-category count |
+| Required Partial Count | |
+| Required Gap Count | |
+| Required Unassessed Count | |
+| Preferred Strong Count | |
+| Preferred Partial Count | |
+| Preferred Gap Count | |
+| Preferred Unassessed Count | |
+
+**HEADERS Invariants (`tests/unit/test_query_logger.py::TestHeadersPrefixInvariant`):**
+
+Two tests enforce append-only discipline:
+
+- **Prefix pin** (`test_headers_prefix_matches_historical_snapshot`): Asserts `HEADERS[:35]` matches a frozen 35-entry snapshot (positions 0-34, frozen at the -086 landing, Sept 2026). Catches insertions or renames within the historical columns. The snapshot does NOT extend for new columns -- an ever-growing snapshot becomes a running count, not a historical record.
+- **Length pin** (`test_headers_length_matches_current_schema`): Asserts `len(HEADERS) == _CURRENT_SCHEMA_LENGTH` (currently 44). Covers positions 35+ where the prefix doesn't reach. Update `_CURRENT_SCHEMA_LENGTH` once per ticket that changes HEADERS; the prefix stays frozen.
+
+Together: a mid-list insert shifts positions 0-34 (prefix fails) and changes the total count (length fails). An append at position 35+ doesn't shift historical positions (prefix passes) but changes the total (length fails until `_CURRENT_SCHEMA_LENGTH` is updated).
 
 **Logging Points:**
 | Location | Count | Points |
 |----------|-------|--------|
 | `backend_service.py` | 6 | Nonsense filter, out_of_scope, personal, low_confidence, empty_pool, success |
 | `explore_stories.py` | 2 | Personal/OOS redirect, search results |
+| `query_logger.py` | 2 | `log_role_match_gate_rejection`, `log_role_match_assessment` (failure path via `_handle_assessment_error`) |
 
 **Dependencies:** `gspread`, `google-auth` (in requirements.txt)
 
@@ -2444,6 +2493,12 @@ Use `visibility: hidden` (not `display: none`) to suppress the paint without rem
 
 ---
 
+### Pattern 8: Sibling Class Collision Avoidance (`.gap-note`)
+
+When a new class is needed for an element that lives alongside an element that already carries a related class, do not reuse the bare name. The `_build_export_html` export in `role_match.py` uses `.gap-note` for gap-explanation divs, not `.gap`. Reason: `.status.gap` already exists on the badge `<span>` in the same HTML. The bare `.gap` selector would match the badge, not the explanation div, at equal specificity. The badge modifier stays `.status.gap`; the explanation div gets `.gap-note`. A comment at the CSS rule names the collision reason so renaming it back is not a drive-by cleanup.
+
+---
+
 ## Testing Strategy
 
 ### BDD/E2E Tests (Explore Stories)
@@ -2530,6 +2585,15 @@ pytest tests/unit -v
 - `test_structural_assertions.py` - Threshold boundary tests
 - `test_filters.py` - Filter logic
 - `test_formatting.py` - STAR story formatting
+
+**HEADERS two-invariant pattern (Sept 2026):**
+
+`tests/unit/test_query_logger.py::TestHeadersPrefixInvariant` enforces append-only discipline on the Sheet schema via two complementary tests. Documented here because the pattern is reusable for any append-only schema with a historical data contract:
+
+- **Prefix pin** pins `HEADERS[:35]` against a frozen 35-entry snapshot (positions 0-34, frozen at the -086 landing). Catches insertions or renames within the historical columns. The snapshot does NOT extend for new columns -- extend-on-next-ticket ends up as a running count, not a historical record.
+- **Length pin** pins `len(HEADERS)` at `_CURRENT_SCHEMA_LENGTH` (44 as of Sept 2026). Covers positions 35+ where the prefix doesn't reach. Updated once per ticket that changes HEADERS.
+
+A mid-list insert shifts positions 0-34 (prefix fails) and changes the total count (length fails). An append at position 35+ passes the prefix but changes the total (length fails until `_CURRENT_SCHEMA_LENGTH` is updated). Together they catch any insert, remove, or rename at any position.
 
 **Test Gate Topology (Aug 2026):**
 
