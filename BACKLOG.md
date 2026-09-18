@@ -73,7 +73,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-082](#mattgpt-082) | Q15 eval assertion is over-specified — checks literal client name presence rather than response correctness | Open | Medium | Refactor | May 22, 2026 |
 | [MATTGPT-083](#mattgpt-083) | Spinner inconsistency — Explore Stories doesn't show thinking indicator for rejected queries (Ask MattGPT does) | Open | Medium | Issue | May 23, 2026 |
 | [MATTGPT-084](#mattgpt-084) | Ask MattGPT BDD scenarios — chip-click + low_confidence banner-render timing flakes under full-suite load | Open | Medium | Issue | May 23, 2026 |
-| [MATTGPT-089](#mattgpt-089) | Role Match — parse location, work-model, availability as distinct filter class | Open | High | Issue | May 28, 2026 |
+| [MATTGPT-089](#mattgpt-089) | Role Match — Location & Availability strip above SUMMARY (static facts from matt_profile.json; no JD comparison) | Open | High | Enhancement | May 28, 2026 |
 | [MATTGPT-091](#mattgpt-091) | Add a credible failure story to the corpus (sibling to -022 / -078 pattern) | Open | Medium | Action | May 28, 2026 |
 | [MATTGPT-095](#mattgpt-095) | Anti-consulting bias in story framing — corpus reads "consulting" as default register when it shouldn't | Open | Medium | Action | May 28, 2026 |
 | [MATTGPT-096](#mattgpt-096) | Methodology context dropped during synthesis — TDD/BDD and ways-of-working substance gets compressed out of metric claims (hypothesis to verify) | Open | Medium | Issue | May 28, 2026 |
@@ -780,27 +780,58 @@ Each detail block uses these fields. Not every field is required for every item.
 
 
 ### MATTGPT-089
-**Role Match — parse location, work-model, availability as distinct filter class**
+**Role Match — Location & Availability strip above SUMMARY**
 
 - **Status:** Open
 - **Priority:** High
-- **Type:** Issue
-- **Issue:** Role Match's JD parser drops location, work-model, and availability requirements silently. Recruiter persona pasted a JD with *"Hybrid in NYC, SF, or Atlanta (3 days/week onsite)"* — Role Match parsed 11 qualifications and dropped that one entirely. Other JD requirements all came through clean. The tool answers *"can he do the job"* but not *"can we hire him"* — which means a hiring manager doing first-pass filtering gets an incomplete picture.
-- **Audience impact:** Recruiter persona: *"It is strong at experience matching, blind to logistical filters (location, comp, availability, work model). Those are exactly the filters that get a candidate moved or killed at first pass."* Atlanta-based + "Open to Atlanta and beyond" in the footer would have been a perfect location-match flag if the parser had caught it.
-- **Fix:** Extend Role Match JD parser to recognize a distinct filter class for logistical requirements:
-  - Location / geographic constraints
-  - Work model (remote / hybrid / on-site)
-  - Availability / notice period
-  - Visa / work authorization
-  - (Skip comp — see MATTGPT-090 for separate handling)
+- **Type:** Enhancement
+- **Files:** `ui/pages/role_match.py`, `data/matt_profile.json`
+- **Logged:** May 28, 2026 (scope replaced September 18, 2026)
 
-  Match these against Matt's profile data (Atlanta + relocation openness from `data/matt_profile.json` or footer copy). Output as a separate section in the Role Match results panel so the hiring manager sees both *"can he do the job"* AND *"can we hire him"* without scrolling.
-- **Effort:** Medium. Parser extension + result panel layout addition + profile data plumbing.
-- **Cross-references:**
-  - MATTGPT-067 — Role Match result panel polish bundle (could fold this in or land as sibling)
-  - MATTGPT-079 — coverage gaps meta (location/work-model are profile data, not story-anchored — different fix path)
-  - MATTGPT-090 — chatbot-side of the same logistical-data gap (comp specifically declined cleanly there; location/work-model surfaced as match output here)
-- **Logged:** May 28, 2026
+**Scope (September 18, 2026 replacement):** Render a four-cell strip above the SUMMARY section in the Role Match results panel on every assessment. Section header: "Location & Availability." Read all values from `data/matt_profile.json` under a `logistics` key.
+
+**Four cells, left to right:**
+
+| Label | Value | Subline |
+|---|---|---|
+| Location | Atlanta, GA | Open to relocation and travel |
+| Work model | In-office preferred | Hybrid or remote fine |
+| Availability | Immediate | No notice period |
+| Authorization | US citizen | No sponsorship needed |
+
+Labels are design vocabulary and stay in code, not data. The same four labels appear on three surfaces (panel, export, report); putting them in data would require keeping three references in sync with no benefit.
+
+**Parity rule:** Same facts, same order, in the export and the report. Parity covers the four data values and their sublines; affordance decisions (styling, section placement within the document) are surface-specific.
+
+**Explicitly out of scope:**
+- No `logistical_requirements` extraction from the JD.
+- No comparison against the JD.
+- No verdict badges.
+
+An onsite-only Seattle role is not a capability gap. Rendering it in the capability vocabulary (strong / partial / gap) would say exactly that. The recruiter reads the four facts and makes the call in two seconds. Adding JD comparison would require a new LLM surface, a new failure mode, and a third verdict state to design -- for a judgment the reader already makes faster and more accurately than the model would.
+
+**Schema (matt_profile.json):** Nested under a `logistics` key. Each cell has `value` and `subline`. Example shape:
+
+```json
+{
+  "logistics": {
+    "location": { "value": "Atlanta, GA", "subline": "Open to relocation and travel" },
+    "work_model": { "value": "In-office preferred", "subline": "Hybrid or remote fine" },
+    "availability": { "value": "Immediate", "subline": "No notice period" },
+    "authorization": { "value": "US citizen", "subline": "No sponsorship needed" }
+  }
+}
+```
+
+**Design reference:** Option 1a in `Role Match Logistics.dc.html`, mocked at 855px production panel width.
+
+**Open implementation detail:** Four cells drop to two columns below roughly 600px. Existing Role Match breakpoints are at 768px; this adds one at approximately 600px. Exact breakpoint value is a visual call during implementation.
+
+**Independence from -160:** This ticket does not touch the extraction prompt. The prior scope (logistical_requirements extraction) is replaced by the static-display approach above. -089 and -160 are independent; the sequencing note that previously appeared in -160 no longer applies.
+
+**Cross-references:**
+- MATTGPT-090 (chatbot-side logistical-data gap; comp specifically)
+- MATTGPT-079 (coverage gaps meta; location/work-model are profile data, not story-anchored)
 
 ---
 
@@ -1591,9 +1622,7 @@ These are a pre-condition for -160 Red, not part of -160 scope.
 - Count stability: same JD produces the same requirement count across three consecutive cold-path runs. (This is the measurable performance criterion; wall-clock floor dropped -- see above.)
 - Coverage: "Kafka + IXBUS" extracted as a requirement from the AT&T JD.
 
-**Constraint:** Separate defect from MATTGPT-157 (W_KW keyword weighting). Clause-dropping happens at extraction time, before retrieval scoring. Do not conflate. Do not conflate with -243 (assessor parallelization) -- these are different functions in the same file.
-
-**Ordering note (MATTGPT-089):** -089 edits the extraction prompt to add a `logistical_requirements` output field. -160 rewrites the same prompt. Landing -089 first means -160 inherits the new output shape rather than a second pass undoing the logistical-field work. The roadmap order (-089 at slot 1, -160 at slot 5) is correct; this note exists so the rewrite author knows to read -089's diff before touching the prompt.
+**Constraint:** Separate defect from MATTGPT-157 (W_KW keyword weighting). Clause-dropping happens at extraction time, before retrieval scoring. Do not conflate. Do not conflate with -243 (assessor parallelization) -- these are different functions in the same file. **-089 is independent:** the September 18 scope replacement removed logistical_requirements extraction from -089; it no longer touches this prompt. The two tickets share no implementation surface.
 
 ---
 
