@@ -1556,7 +1556,7 @@ Full ranked 25 available from `probe_243_top_k_rank.py` (re-runnable against cur
 - **Logged:** July 31, 2026 (scope expanded September 2, 2026)
 - **Gates:** MATTGPT-244. Three of the five over-called rows on the -244 corpus audit are unfalsifiable until extraction preserves qualifiers: "Modern technology stack fluency" cannot be judged against React and Node.js if those words were stripped during extraction. -244's acceptance criteria cannot be evaluated until -160 lands.
 
-**Why one ticket:** Four symptoms, one call, one prompt. Fixing them separately risks each patch undoing the previous one. The extraction wrapper (`extract_requirements()`) is the highest-value target left in the Role Match line of work: it accounts for 55-65% of total wall clock even after -243 ships, and it is the single point of failure for all four of the following.
+**Why one ticket:** Four symptoms, one call, one prompt. Fixing them separately risks each patch undoing the previous one. The extraction wrapper (`extract_requirements()`) is the highest-value target left in the Role Match line of work: it accounts for 40-55% of total wall clock even after -243 ships (9-14s extraction against 22-25s total, measured on the AT&T JD; earlier 55-65% figures predate -243's parallelization of the assess loop), and it is the single point of failure for all four of the following.
 
 **Four symptoms:**
 
@@ -1568,7 +1568,7 @@ Full ranked 25 available from `probe_243_top_k_rank.py` (re-runnable against cur
 
    **Diagnosis pending:** Whether stripping is model-side (the LLM omitting qualifiers from its JSON) or code-side (post-extraction handling dropping them) is unresolved. The raw extraction JSON at the boundary -- before any downstream handling -- is the single line of evidence that settles it.
 
-2. **Requirement-count variance (±15%):** The same AT&T JD input produced 17 requirements on one run and 18 on another. The extraction prompt is nondeterministic -- the same JD produces a different requirement list on each cold-path call. Downstream: cache hits mask this; every novel JD gets a different extraction, and verdicts on the volatile requirement are unrepeatable.
+2. **Requirement-count variance (±15%):** The extraction prompt is nondeterministic -- the same JD produces a different requirement list on each cold-path call. Demo JD: 17 on one run, 18 on another. AT&T JD: 32, 35, and 39 across three runs. ±15% holds across both. Downstream: cache hits mask this; every novel JD gets a different extraction, and verdicts on the volatile requirement are unrepeatable.
 
 3. **Coverage miss:** AT&T JD "Kafka + IXBUS technical leadership" was not extracted as a requirement at all (MATTGPT-159 audit, Arm 1/row 10). The story "Cloud-Native Architecture" mentions event-driven systems with Kafka and was available in the corpus -- Arm 1 produced UNMATCHED because extraction never handed the requirement to the assessor. Root cause: wrapper prompt differs from the production prompt used in the probe (same issue Probe A identified; still unresolved).
 
