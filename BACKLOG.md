@@ -1547,7 +1547,7 @@ Full ranked 25 available from `probe_243_top_k_rank.py` (re-runnable against cur
 ---
 
 ### MATTGPT-160
-**JD extraction rewrite: qualifier stripping, requirement-count variance, coverage miss -- all one prompt**
+**JD extraction rewrite: qualifier stripping, requirement-count variance, coverage miss, wall clock floor -- all one prompt**
 
 - **Status:** Open
 - **Priority:** High
@@ -1556,13 +1556,15 @@ Full ranked 25 available from `probe_243_top_k_rank.py` (re-runnable against cur
 - **Logged:** July 31, 2026 (scope expanded September 2, 2026)
 - **Gates:** MATTGPT-244. Three of the five over-called rows on the -244 corpus audit are unfalsifiable until extraction preserves qualifiers: "Modern technology stack fluency" cannot be judged against React and Node.js if those words were stripped during extraction. -244's acceptance criteria cannot be evaluated until -160 lands.
 
-**Why one ticket:** Three symptoms, one call, one prompt. (Wall-clock floor was a fourth symptom; its acceptance criterion was dropped September 2026 when six repeat runs showed a 2.4s noise floor at fixed input and count, making the sub-15s target unmeasurable.) Fixing them separately risks each patch undoing the previous one. The extraction wrapper (`extract_requirements()`) is the highest-value target left in the Role Match line of work: it accounts for 55-65% of total wall clock even after -243 ships, and it is the single point of failure for all four of the following.
+**Why one ticket:** Four symptoms, one call, one prompt. Fixing them separately risks each patch undoing the previous one. The extraction wrapper (`extract_requirements()`) is the highest-value target left in the Role Match line of work: it accounts for 55-65% of total wall clock even after -243 ships, and it is the single point of failure for all four of the following.
 
-**Three symptoms (wall-clock floor dropped from scope September 2026 -- see above):**
+**Four symptoms:**
 
 1. **Qualifier stripping:** On the demo JD, 7 of 23 requirements lost qualifiers during extraction -- the extracted text is narrower than what the JD actually requires. Downstream: assessor evaluates a stripped requirement and can produce verdicts that don't reflect what the hiring manager wrote. (Original -160 scope.)
 
-   **Strongest single example -- Kubernetes row (September 2026):** The JD required Kubernetes, service mesh, and container orchestration at production scale. Extraction kept "at production scale" and dropped the three named capabilities. The stripped requirement looks specific (production scale is a qualifier) but is unfailable: any story that mentions scale at all will satisfy it, and the three capabilities that would actually discriminate the assessment are gone. This is the clearest case where stripping is not lossy compression -- it removes the test.
+   **Strongest single example -- row 11 (September 2026 audit):** The JD required "React or equivalent, Python/Node.js/Go, containerized microservices." Extraction produced a generic technology-fluency requirement; the named technologies were gone. The stripped requirement is unfailable: any story about modern software development will satisfy it, and the specific technologies that would actually discriminate the assessment are gone. This is the clearest case where stripping removes the test rather than compressing it.
+
+   **Note on the Kubernetes row (row 15):** The Kubernetes, service mesh, and container orchestration example from the -159 audit is no longer the illustration. The September 2026 corpus audit cleared that row: arm2 correctly cited Norfolk Southern, `partial` is honest, and service mesh and multi-tenant are absent corpus-wide regardless of what extraction kept. Stripping happened on that row, but the verdict would be the same either way.
 
    **Diagnosis pending:** Whether stripping is model-side (the LLM omitting qualifiers from its JSON) or code-side (post-extraction handling dropping them) is unresolved. The raw extraction JSON at the boundary -- before any downstream handling -- is the single line of evidence that settles it.
 
@@ -1570,7 +1572,7 @@ Full ranked 25 available from `probe_243_top_k_rank.py` (re-runnable against cur
 
 3. **Coverage miss:** AT&T JD "Kafka + IXBUS technical leadership" was not extracted as a requirement at all (MATTGPT-159 audit, Arm 1/row 10). The story "Cloud-Native Architecture" mentions event-driven systems with Kafka and was available in the corpus -- Arm 1 produced UNMATCHED because extraction never handed the requirement to the assessor. Root cause: wrapper prompt differs from the production prompt used in the probe (same issue Probe A identified; still unresolved).
 
-4. **Wall clock floor:** ~22s on the demo JD. `extract_requirements()` is a single sequential call; parallelizing the `assess` loop in -243 does not reduce this floor. Lowering it requires a prompt or call-structure change in extraction itself.
+4. **Wall clock floor:** 9-14s measured for `extract_requirements()` alone on the AT&T JD. `extract_requirements()` is a single sequential call; parallelizing the `assess` loop in -243 does not reduce this floor. Lowering it requires a prompt or call-structure change in extraction itself. **Acceptance criterion dropped (September 2026):** Six repeat runs showed a 2.4s noise floor at fixed input and count, making a sub-15s gate unmeasurable. The floor is real and recorded here for calibration; it is not a pass/fail criterion in -160's acceptance.
 
 **Pre-flight instrumentation (land before opening this ticket, not inside it):**
 
