@@ -890,7 +890,7 @@ def _incomplete_notice_text(counts: dict, total: int, *, surface: str) -> str | 
     return body
 
 
-def _build_share_text(result_payload: dict) -> str:
+def _build_share_text(result_payload: dict, profile: dict | None = None) -> str:
     """Build a plain-text summary of the assessment for clipboard sharing.
 
     Recipients of this text get a self-contained, readable fit assessment
@@ -1046,7 +1046,7 @@ def _build_share_text(result_payload: dict) -> str:
     return "\n".join(lines).rstrip() + "\n"
 
 
-def _build_export_html(result_payload: dict) -> str:
+def _build_export_html(result_payload: dict, profile: dict | None = None) -> str:
     """Build a printable HTML document for the Export action.
 
     Mirrors the structure of the on-screen results panel but laid out for

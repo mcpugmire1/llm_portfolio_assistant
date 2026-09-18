@@ -39,6 +39,7 @@ Each raises NotImplementedError per CLAUDE.md line 195. Cycle 1 Green
 implements them and threads the three surface builders through them.
 """
 
+import html
 import logging
 
 # ---------------------------------------------------------------------------
@@ -1422,4 +1423,265 @@ class TestBuildExportHtmlGapNoEvidence:
             f"{adjacent_title!r} -- gap rows have nothing supporting "
             f"them and evidence rendering must be gated on non-gap "
             f"status"
+        )
+
+
+# ---------------------------------------------------------------------------
+# MATTGPT-089: Location & Availability block above SUMMARY
+# ---------------------------------------------------------------------------
+# Fixed-content strip of four cells (Location / Work model / Availability /
+# Authorization) that renders on every Role Match assessment. Facts only,
+# no LLM, no JD comparison, no verdict badges. Parity rule: same block on
+# share text and export html (screen surface tested manually only).
+#
+# Schema: profile["logistics"][<field>] = {"value": ..., "subline": ...}
+# Labels live in the renderer (design vocabulary, not data), values +
+# sublines live in the profile (visitor-facing facts).
+
+
+class TestLocationAvailabilityBlock:
+    """MATTGPT-089: Location & Availability block on share text and
+    export html. Full logistics profile injected via the `profile`
+    kwarg so tests don't depend on `data/matt_profile.json` schema
+    state -- that's a separate data concern."""
+
+    _FULL_LOGISTICS_PROFILE = {
+        "logistics": {
+            "location": {
+                "value": "Atlanta, GA",
+                "subline": "Open to relocation and travel",
+            },
+            "work_model": {
+                "value": "In-office preferred",
+                "subline": "Hybrid or remote fine",
+            },
+            "availability": {
+                "value": "Immediate",
+                "subline": "No notice period",
+            },
+            "authorization": {
+                "value": "US citizen",
+                "subline": "No sponsorship needed",
+            },
+        },
+    }
+
+    # Canonical visitor-facing header. Share text surfaces this
+    # literally; export html surfaces it via html.escape (the raw '&'
+    # becomes '&amp;' per the convention pinned by
+    # test_export_html_escapes_ampersand). Tests apply html.escape
+    # at the export surface's assertion boundary.
+    _HEADER_TEXT = "Location & Availability"
+    _CELL_LABELS = ("Location", "Work model", "Availability", "Authorization")
+
+    def _payload(self):
+        """Minimal payload for a single-requirement assessment. The
+        block is invariant to the assessment content."""
+        return _payload(_row("required", "strong", "Some requirement"))
+
+    def _cell_body_slice(self, output: str, header_str: str) -> str:
+        """Slice from AFTER the block header to the SUMMARY anchor.
+        Prevents label substring matches from colliding with the
+        header itself -- 'Location' and 'Availability' both appear
+        in the header string, so a naive `assert "Location" in
+        output` would pass on the header alone even if the Location
+        cell never rendered. Same shape as the legend-substring
+        problem from earlier ordering tests.
+
+        Caller passes the surface-appropriate header form: raw for
+        share text, html.escape()d for export html."""
+        header_pos = output.find(header_str)
+        summary_pos = output.find("SUMMARY")
+        assert (
+            header_pos >= 0
+        ), f"precondition: header {header_str!r} must appear in output"
+        assert summary_pos >= 0, "precondition: 'SUMMARY' anchor must appear in output"
+        assert header_pos < summary_pos, (
+            f"precondition: header must appear before SUMMARY "
+            f"(header_pos={header_pos}, summary_pos={summary_pos})"
+        )
+        return output[header_pos + len(header_str) : summary_pos]
+
+    # ----- Share text (plain text) -----
+
+    def test_share_text_includes_location_and_availability_header_above_summary(
+        self,
+    ):
+        """Ordering pin, same discipline as
+        TestIncompleteNoticeOrdering: block header appears before the
+        SUMMARY anchor. Substring presence alone would pass if the
+        block landed at the bottom, which is not the design."""
+        from ui.pages.role_match import _build_share_text
+
+        output = _build_share_text(
+            self._payload(), profile=self._FULL_LOGISTICS_PROFILE
+        )
+        header_pos = output.find(self._HEADER_TEXT)
+        summary_pos = output.find("SUMMARY")
+
+        assert header_pos >= 0, (
+            f"share text missing {self._HEADER_TEXT!r} header. " f"Output: {output!r}"
+        )
+        assert (
+            summary_pos >= 0
+        ), f"share text missing 'SUMMARY' anchor. Output: {output!r}"
+        assert header_pos < summary_pos, (
+            f"{self._HEADER_TEXT!r} at pos {header_pos} must appear "
+            f"before 'SUMMARY' at pos {summary_pos} in share text. "
+            f"The block belongs above the summary, not below it."
+        )
+
+    def test_share_text_includes_all_four_cells(self):
+        """Each of the four cells' label + value + subline appears in
+        the share text output. Labels match against a post-header
+        slice to avoid header-collision on 'Location' and
+        'Availability'. Values and sublines are unique strings and
+        can match anywhere in the output."""
+        from ui.pages.role_match import _build_share_text
+
+        output = _build_share_text(
+            self._payload(), profile=self._FULL_LOGISTICS_PROFILE
+        )
+        body = self._cell_body_slice(output, self._HEADER_TEXT)
+
+        for field_key, expected in self._FULL_LOGISTICS_PROFILE["logistics"].items():
+            assert expected["value"] in output, (
+                f"share text missing value {expected['value']!r} for "
+                f"cell {field_key!r}"
+            )
+            assert expected["subline"] in output, (
+                f"share text missing subline {expected['subline']!r} "
+                f"for cell {field_key!r}"
+            )
+        for label in self._CELL_LABELS:
+            assert label in body, (
+                f"share text missing cell label {label!r} in the cell "
+                f"body slice (between the block header and SUMMARY). "
+                f"Substring match against the full output would pass "
+                f"on the header text alone for {label!r}."
+            )
+
+    # ----- Export html -----
+
+    def test_export_html_includes_location_and_availability_header_above_summary(
+        self,
+    ):
+        """Ordering pin for the export surface. Header search uses
+        html.escape() form (raw '&' escapes to '&amp;' per the
+        existing test_export_html_escapes_ampersand convention).
+        `SUMMARY` search is case-sensitive per the existing
+        convention (matches the `<h2>SUMMARY</h2>` body text, not
+        the lowercase CSS class `.summary-section`)."""
+        from ui.pages.role_match import _build_export_html
+
+        output = _build_export_html(
+            self._payload(), profile=self._FULL_LOGISTICS_PROFILE
+        )
+        escaped_header = html.escape(self._HEADER_TEXT)
+        header_pos = output.find(escaped_header)
+        summary_pos = output.find("SUMMARY")
+
+        assert header_pos >= 0, (
+            f"export html missing {escaped_header!r} header "
+            f"(html-escaped form of {self._HEADER_TEXT!r})"
+        )
+        assert summary_pos >= 0, "export html missing 'SUMMARY' anchor"
+        assert header_pos < summary_pos, (
+            f"{escaped_header!r} at pos {header_pos} must appear "
+            f"before 'SUMMARY' at pos {summary_pos} in export html. "
+            f"The block belongs above the summary, not below it."
+        )
+
+    def test_export_html_includes_all_four_cells(self):
+        """Each cell's label + value + subline appears in the export
+        html. Same substring approach as the share-text sibling,
+        with the same header-slice precaution for labels (using the
+        html.escape()d header form). Green's specific HTML markup
+        and class names are its own choice; test pins the copy
+        landing, not the markup shape."""
+        from ui.pages.role_match import _build_export_html
+
+        output = _build_export_html(
+            self._payload(), profile=self._FULL_LOGISTICS_PROFILE
+        )
+        body = self._cell_body_slice(output, html.escape(self._HEADER_TEXT))
+
+        for field_key, expected in self._FULL_LOGISTICS_PROFILE["logistics"].items():
+            assert expected["value"] in output, (
+                f"export html missing value {expected['value']!r} for "
+                f"cell {field_key!r}"
+            )
+            assert expected["subline"] in output, (
+                f"export html missing subline {expected['subline']!r} "
+                f"for cell {field_key!r}"
+            )
+        for label in self._CELL_LABELS:
+            assert label in body, (
+                f"export html missing cell label {label!r} in the cell "
+                f"body slice (between the block header and SUMMARY). "
+                f"Substring match against the full output would pass "
+                f"on the header text alone for {label!r}."
+            )
+
+    # ----- Missing-field contract -----
+
+    def test_location_block_omits_cell_when_field_missing_from_profile(self):
+        """When a logistics field is absent from the profile, the
+        renderer omits that cell entirely -- not just the value, but
+        the label too. A cell that renders label-only or as an empty
+        box would break the grid visually and confuse the reader.
+
+        Load-bearing negative: `'Work model' not in output`. A cell
+        that renders `<label>Work model</label>` with an empty value
+        slot would pass a 'three cells appear' check but fail this
+        one. 'Work model' does not appear in the block header, so
+        the whole-output substring check is safe here (no header
+        collision like 'Location' or 'Availability')."""
+        from ui.pages.role_match import _build_share_text
+
+        # work_model deliberately absent; other three cells populated
+        partial_profile = {
+            "logistics": {
+                "location": {
+                    "value": "Atlanta, GA",
+                    "subline": "Open to relocation and travel",
+                },
+                # work_model absent
+                "availability": {
+                    "value": "Immediate",
+                    "subline": "No notice period",
+                },
+                "authorization": {
+                    "value": "US citizen",
+                    "subline": "No sponsorship needed",
+                },
+            },
+        }
+        output = _build_share_text(self._payload(), profile=partial_profile)
+
+        # Positive: block still renders
+        assert (
+            self._HEADER_TEXT in output
+        ), "block header should still render when one cell is absent"
+
+        # Positive: the three populated cells' values appear (values
+        # are unique enough to check without label collision)
+        for expected_value in (
+            "Atlanta, GA",
+            "Immediate",
+            "US citizen",
+        ):
+            assert expected_value in output, (
+                f"expected populated value {expected_value!r} in output; "
+                f"got {output!r}"
+            )
+
+        # Load-bearing negative: the omitted cell's label must NOT
+        # appear. A stray label without a value is the "blank box"
+        # failure mode this test exists to catch.
+        assert "Work model" not in output, (
+            f"'Work model' label appeared in output despite absence "
+            f"from profile -- cell should be omitted entirely, not "
+            f"rendered as an empty slot with just the label. "
+            f"Output: {output!r}"
         )
