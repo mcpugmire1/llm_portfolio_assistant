@@ -1593,6 +1593,8 @@ These are a pre-condition for -160 Red, not part of -160 scope.
 
 **Constraint:** Separate defect from MATTGPT-157 (W_KW keyword weighting). Clause-dropping happens at extraction time, before retrieval scoring. Do not conflate. Do not conflate with -243 (assessor parallelization) -- these are different functions in the same file.
 
+**Ordering note (MATTGPT-089):** -089 edits the extraction prompt to add a `logistical_requirements` output field. -160 rewrites the same prompt. Landing -089 first means -160 inherits the new output shape rather than a second pass undoing the logistical-field work. The roadmap order (-089 at slot 1, -160 at slot 5) is correct; this note exists so the rewrite author knows to read -089's diff before touching the prompt.
+
 ---
 
 
