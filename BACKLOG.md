@@ -825,6 +825,8 @@ An onsite-only Seattle role is not a capability gap. Rendering it in the capabil
 
 **Design reference:** Option 1a in `Role Match Logistics.dc.html`, mocked at 855px production panel width.
 
+**Missing-field behavior (decided):** If a key is absent from the `logistics` block, omit that cell entirely and let the grid reflow to three (or fewer) cells. Do not render a placeholder. A placeholder invents a fact; omission is honest. Code's Red set must include a test for this: strip one key from the fixture and assert the remaining three cells render and no placeholder appears.
+
 **Open implementation detail:** Four cells drop to two columns below roughly 600px. Existing Role Match breakpoints are at 768px; this adds one at approximately 600px. Exact breakpoint value is a visual call during implementation.
 
 **Independence from -160:** This ticket does not touch the extraction prompt. The prior scope (logistical_requirements extraction) is replaced by the static-display approach above. -089 and -160 are independent; the sequencing note that previously appeared in -160 no longer applies.
