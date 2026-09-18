@@ -339,7 +339,7 @@ class TestAssessCallTiming:
 
 
 _MODE_1_GAP_TEXT = "I couldn't finish assessing this one."
-_MODE_2_GAP_TEXT = "I couldn't reach the story corpus for this one."
+_MODE_2_GAP_TEXT = "I couldn't reach Matt's work history for this one."
 _LOGGER_NAME = "services.jd_assessor"
 
 

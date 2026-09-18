@@ -613,11 +613,11 @@ class TestUnassessedGapExplanationReachesRenderGate:
                 "required",
                 "unassessed",
                 "Marker requirement",
-                gap_explanation="I couldn't reach the story corpus for this one.",
+                gap_explanation="I couldn't reach Matt's work history for this one.",
             )
         )
         output = _build_share_text(payload)
-        assert "I couldn't reach the story corpus for this one." in output, (
+        assert "I couldn't reach Matt's work history for this one." in output, (
             f"unassessed row's gap_explanation did not reach the share "
             f"text -- gate in _section (build_share_text) still excludes "
             f"unassessed. output: {output!r}"

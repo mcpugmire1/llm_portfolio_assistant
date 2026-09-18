@@ -141,7 +141,7 @@ class TestSuccessPathCallsLogger:
                     "match_status": "unassessed",
                     "evidence": [],
                     "gap_explanation": (
-                        "I couldn't reach the story corpus for this one."
+                        "I couldn't reach Matt's work history for this one."
                     ),
                 },
                 {
@@ -164,7 +164,7 @@ class TestSuccessPathCallsLogger:
                     "match_status": "unassessed",
                     "evidence": [],
                     "gap_explanation": (
-                        "I couldn't reach the story corpus for this one."
+                        "I couldn't reach Matt's work history for this one."
                     ),
                 },
             ],
