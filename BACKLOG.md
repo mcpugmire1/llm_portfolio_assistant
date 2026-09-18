@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: 43ca523 -->
+<!-- last-backlog-sync: 206306e -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -7,27 +7,25 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 ---
 
-## Value Prioritized Roadmap (updated 2026-09-16)
-
-**PRE-PUSH GATE**
-**-086** — Environment stamp. Window opens on deploy: every row written after the first push will carry no way to distinguish testing from a visitor's outage. Window is currently zero (nothing pushed). One `HEADERS` append + `_build_row` injection, fully specced. Land this before the push; -223 does not need to ride along. Index-shift check resolved: -247's column assertions use `HEADERS.index(col)` (name-based, safe); the prefix test pins `HEADERS[:33]` exactly, and appending `Environment` at position 35 leaves that untouched. Both lookups are safe.
+## Value Prioritized Roadmap (updated 2026-09-18)
 
 **NOW**
-1. **-244** — Role Match assessor calibration: both arms at ~80% strong on a JD with real gaps. A recruiter reading "strong" on a requirement the corpus doesn't cover discounts the other twenty-two rows. Prompt edit plus `confidence` field deletion. No architecture dependency. Land before -249 (see -249 ordering constraint).
-2. **-089** — Role Match: location, work model, availability. May 22 recruiter finding.
-3. **-245** — Role Match streaming. Acceptance: AT&T fixture, multiple visible waves between extraction complete and full-assessment render (count varies by run; -160 is the fix). Not the demo JD where streaming moves first content by ~2s. Blockers cleared (-243 `8d37405`, -248 `43ca523`).
-4. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
-5. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
-6. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
-7. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
-8. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
-9. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+1. **-089** — Role Match: location, work model, availability. May 22 recruiter finding.
+2. **-245** — Role Match streaming. Acceptance: AT&T fixture, multiple visible waves between extraction complete and full-assessment render. Extraction sets a ~12s floor on first content; streaming moves first content from ~22s to ~12s, not to zero. Blockers cleared (-243 `8d37405`, -248 `43ca523`).
+3. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
+4. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
+5. **-160** — JD extraction rewrite: qualifier stripping, count variance, coverage miss. Three of the five over-called rows on the -244 audit are unfalsifiable until qualifiers are preserved; gates -244.
+6. **-244** — Role Match assessor calibration: three rows where cited evidence doesn't address the specific claim; `confidence` field deletion. Corpus audit September 2026: 22% strong, not 80%. -160 must land first. Land before -249 (see -249 ordering constraint).
+7. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
+8. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
+9. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
+10. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT**
-10. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
-11. **-223** — Add router_score and router_family columns to Sheet query row; unblocks -239's floor threshold decision.
-12. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
-13. Rest of Role Match: **-160**, -173, -014, -012, -081, -099, -017.
+11. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
+12. **-223** — Add router_score and router_family columns to Sheet query row; unblocks -239's floor threshold decision.
+13. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
+14. Rest of Role Match: -173, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
 -177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- see -249 ordering constraint)
@@ -75,7 +73,6 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-082](#mattgpt-082) | Q15 eval assertion is over-specified — checks literal client name presence rather than response correctness | Open | Medium | Refactor | May 22, 2026 |
 | [MATTGPT-083](#mattgpt-083) | Spinner inconsistency — Explore Stories doesn't show thinking indicator for rejected queries (Ask MattGPT does) | Open | Medium | Issue | May 23, 2026 |
 | [MATTGPT-084](#mattgpt-084) | Ask MattGPT BDD scenarios — chip-click + low_confidence banner-render timing flakes under full-suite load | Open | Medium | Issue | May 23, 2026 |
-| [MATTGPT-086](#mattgpt-086) | Query logger — add environment annotation column + filter dev/test traffic out of production analytics | Open | High | Enhancement | May 23, 2026 |
 | [MATTGPT-089](#mattgpt-089) | Role Match — parse location, work-model, availability as distinct filter class | Open | High | Issue | May 28, 2026 |
 | [MATTGPT-091](#mattgpt-091) | Add a credible failure story to the corpus (sibling to -022 / -078 pattern) | Open | Medium | Action | May 28, 2026 |
 | [MATTGPT-095](#mattgpt-095) | Anti-consulting bias in story framing — corpus reads "consulting" as default register when it shouldn't | Open | Medium | Action | May 28, 2026 |
@@ -782,40 +779,6 @@ Each detail block uses these fields. Not every field is required for every item.
 ---
 
 
-### MATTGPT-086
-**Query logger — add environment annotation column + filter dev/test traffic out of production analytics**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Enhancement
-- **Files:** `config/environment.py` (new), `services/query_logger.py`
-- **Issue:** The Google Sheets query log mixes traffic from all environments -- production (real users at `askmattgpt.streamlit.app`), local dev (Matt's testing), BDD test runs (Playwright submitting queries against local Streamlit) -- with no column distinguishing the source. Conversion / bounce / usage analytics on the log can't separate signal from noise. Log analysis needed a five-tier heuristic filter to separate Matt's traffic from visitors, reached 96%, and could not do better because nothing records who is asking. After this ticket, one column comparison replaces the whole filter.
-- **Existing precedent:** Bot filter already removes UptimeRobot, HeadlessChrome, and Chrome/103 probes via `MONITORING_BOT_SIGNATURES` in `config/constants.py`. This is the same shape of concern.
-
-**Implementation (two commits):**
-
-**Commit 1:** Add `config/environment.py` reading `MATTGPT_ENV` via `get_conf`. Add a startup print so a wrong value shows up on the first deploy rather than silently. `MATTGPT_ENV` is already set to "cloud" in Streamlit secrets and "local" in `.env`.
-
-**Commit 2:** Append `Env` to the end of `HEADERS` in `query_logger.py` -- end, not middle, or every historical row misaligns. Inject it centrally in `_build_row` so call sites do not change.
-
-Note: the CSV archiving step ("archive both CSVs to `data/archive/`") was drift from the MATTGPT-221 merge. MATTGPT-238 verified the CSVs are gitignored and local-only; Streamlit Cloud's container filesystem is ephemeral, so there is nothing production-side to archive. The archive step is moot and does not belong in this ticket.
-
-**Acceptance criteria:**
-- `MATTGPT_ENV` logged on every row.
-- Wrong or missing value raises at startup, not silently.
-- No call site changes required -- injection is in `_build_row`.
-
-**Dark window (September 2026):** Nothing has been pushed to production, so no ambiguous rows exist yet -- the window is currently zero. It opens on the first deploy and widens with every subsequent run. Every row written after that point carries `ok`, `gate_rejected`, or `retrieval_failed` with no way to tell your testing from a visitor's outage, and nothing retroactively fixes them -- same permanent-ambiguity shape as the empty-cell problem -247 just solved. This is the argument for landing -086 before the push rather than at NEXT slot 11: the window can be kept at zero if this lands first.
-
-**-223 decoupled.** -223 (router columns) does not need to land at the same time. Its data is useful but not made urgent by anything shipping. One schema change vs two was the argument for pairing; landing -086 alone before the push eliminates a permanent gap in the data, which is worth more. -223 stays at NEXT.
-
-**Index-shift resolved (September 2026):** -247's column-value assertions use `HEADERS.index(col)` -- name-based lookups, not positional. The prefix test pins `HEADERS[:33]` exactly; appending `Environment` at position 35 leaves that untouched. Both are safe. No pre-append check required.
-
-- **Discovered during:** May 23, 2026 -- Matt verified GCP service account key rotation worked locally by triggering a real query and confirming the row appeared in the Sheet. Observed the broader Sheets log filling up with local + test traffic indistinguishable from production user traffic.
-- **Logged:** May 23, 2026 (implementation plan merged from MATTGPT-221, closed September 1, 2026)
-
----
-
 ### MATTGPT-089
 **Role Match — parse location, work-model, availability as distinct filter class**
 
@@ -1449,34 +1412,47 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 ---
 
 ### MATTGPT-244
-**Role Match assessor prompt calibration: both arms score ~80% strong on AT&T with genuine JD gaps; scoring is too generous**
+**Role Match assessor prompt calibration: three rows where cited evidence doesn't address the specific claim**
 
 - **Status:** Open
 - **Priority:** High
 - **Type:** Issue
 - **File:** `services/jd_assessor.py` (assessment prompt)
 - **Logged:** September 2, 2026
-- **Dependencies:** None
+- **Dependencies:** MATTGPT-160 (must land first; qualifier stripping makes three over-called rows unfalsifiable until extraction is fixed)
 
-**Finding (September 2, 2026 AT&T audit):** Both the fan-out arm and the long-context arm returned ~80% SUPPORTED on the AT&T JD. The JD had genuine technical gaps (Kafka/IXBUS specificity, IXBUS is AT&T-proprietary tooling) where a well-calibrated assessor should return HONEST GAP or partial credit. Instead both arms marked most requirements SUPPORTED. The assessment prompt is too generous -- it credits adjacent skills as direct matches.
+**Finding (corpus-text audit, September 18, 2026, `probe_244_audit.py`):** 17 honest, 5 over-called, 1 borderline across 23 rows on the AT&T JD. 22% strong, not the ~80% figure from the earlier -159 probe output. The five over-called rows split into two shapes:
 
-**Why it's independent:** Both arms failed identically, which means this is the assessment prompt, not architecture. MATTGPT-243 (parallelization) and MATTGPT-160 (extraction rewrite) do not touch the assessment prompt. Calibration work is safe to land before or after either.
+**Shape A -- corpus-writing gap (rows 10 and 21). NOT -244 scope.** Both cite a solo project for an org-level requirement. The corpus has exactly one AI-assisted-development story and it is independent work; there is no org-level story to cite. Not fixable by prompt; the evidence simply does not exist. Both belong in MATTGPT-154 (operational-breadth tagging pass).
+
+**Shape B -- cited evidence doesn't address the specific claim (rows 7, 11, 22). This is -244.** The cited evidence exists in the corpus but is wrong for the requirement: row 22 cites a Build-Measure-Learn excerpt for "partnering with C-suite"; row 11 cites a Python/Streamlit story for "React, Node.js, Go." Those verdicts are wrong regardless of what Matt has actually done, because the evidence on the page doesn't support the row.
+
+**Fixtures verified as not -244 cases:**
+- Row 15 (Kubernetes, service mesh, container orchestration): arm2 correctly cited Norfolk Southern, which has real orchestration work. `partial` is honest; service mesh and multi-tenant are absent corpus-wide. Not miscalibrated.
+- Row 17 (published thought leadership): correct `gap`. Matt has I&TL accountability, PoVs, and the NEW IT SKILLS NOW program; none of it is written up. Corpus gap -- add to MATTGPT-154.
+
+**Framing:** -244 makes the page honest about the corpus. MATTGPT-154 makes the corpus honest about Matt.
+
+**Why it's independent of architecture:** Both arms failed identically on Shape B rows, which means this is the assessment prompt, not architecture. MATTGPT-243 (parallelization) does not touch the assessment prompt.
 
 **Warning on vocabulary collision:** `grep "calibration" BACKLOG.md` returns results for MATTGPT-174 and ADR 018 -- those are Ask Agy router-threshold calibration (semantic similarity scoring). Different surface, different mechanism, nothing shared. Do not conflate. This ticket is about the Role Match per-requirement assessor prompt.
 
 **Scope:**
-- Tighten the assessment prompt so that adjacent skills and topical proximity do not count as SUPPORTED without direct evidence. The AT&T row-level audit is the benchmark: run it before and after the prompt change and confirm the HONEST GAP rate rises on requirements with genuine technical gaps.
+- Add a rule requiring cited evidence to address the specific claim, not merely the topic area. Benchmark: rows 7, 11, and 22 on the AT&T fixture must return HONEST GAP or `partial` (not SUPPORTED) after the prompt change.
 - **Delete the `confidence` field entirely.** It is generated on every assessment row, read nowhere in the application, and measured as carrying no independent signal. Tabulation of 587 rows (September 2026) found zero contradictions between `confidence` and `verdict`. The only apparent split -- 4 gap/low vs 4 gap/high rows -- did not survive inspection: the same requirement flipped `high` to `low` across arms on identical absence, which is architecture nondeterminism rather than a meaningful distinction. A gap the model is sure about and a gap it is uncertain about rendered identically. Remove `confidence` from the assessment prompt, the response schema, and any downstream code that reads or forwards the field. Do not re-run the tabulation to confirm; the September 2026 measurement is the record.
 
 **Acceptance:**
-- AT&T row 10 (Kafka + IXBUS) returns HONEST GAP after calibration (it did in the long-context arm; extraction coverage fix in -160 may be required first to expose the requirement to the assessor).
-- SUPPORTED rate on the AT&T JD drops below 75% when genuine gaps are present.
+- AT&T row 22 ("partnering with C-suite") no longer returns SUPPORTED with a Build-Measure-Learn citation.
+- AT&T row 11 ("React, Node.js, Go") no longer returns SUPPORTED with a Python/Streamlit citation.
+- AT&T row 7 assessed correctly relative to corpus evidence actually present.
 - No regression on the demo JD (requirements with clear corpus evidence still return SUPPORTED).
 - `confidence` field absent from assessment prompt, response schema, and all downstream consumers. No references to `confidence` remain in the Role Match pipeline.
 
 **Cross-references:**
+- MATTGPT-160 (extraction rewrite; must land first -- qualifier stripping makes rows 7 and 11 unfalsifiable until extraction preserves the named technologies)
+- MATTGPT-154 (corpus-writing gap; Shape A rows 10 and 21 belong here, not in -244)
 - MATTGPT-243 (parallelization; does not touch assessment prompt)
-- MATTGPT-160 (extraction rewrite; required first if Kafka/IXBUS coverage miss hides the requirement from the assessor)
+- MATTGPT-249 (retrieval ranking; -244 must land before -249)
 
 ---
 
@@ -1492,13 +1468,14 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 
 **What this is not:** MATTGPT-083 is spinner inconsistency -- the loading indicator shown while waiting for a result. This ticket is about the absence of waiting: requirement rows appearing at ~20s and filling in as each `gpt-4o` call completes. Cross-referencing -083 is correct; folding this into -083 is not. If this scope lands inside -083, whoever picks it up will scope it as "fix the spinner" and the actual rendering change won't happen.
 
-**Why `as_completed` enables it:** The current sequential pipeline must wait for all 23 calls before rendering anything. Once -243 parallelizes with `as_completed`, individual requirement results are available as they land (~3-5s per wave of 10 concurrent calls). The UI can render each row as soon as its result arrives. Extraction is 14-20s and nothing can render before it completes, so first content appears at ~20s rather than ~85s -- not ~5s.
+**Why `as_completed` enables it:** The current sequential pipeline must wait for all 23 calls before rendering anything. Once -243 parallelizes with `as_completed`, individual requirement results are available as they land (~3-5s per wave of 10 concurrent calls). The UI can render each row as soon as its result arrives. Extraction is 9-14s measured and nothing can render before it completes, so first content appears at ~12s rather than ~22s -- not ~5s, not zero. Streaming cuts roughly half the blank screen.
 
 **Scope:** Wire the `as_completed` results from the parallelized assessor into a Streamlit streaming-compatible render loop. Each requirement row renders as its assessment completes rather than after the full list returns. Error-row rendering uses the placeholder defined in -248.
 
-**Acceptance (AT&T fixture, not the demo JD):** The primary validation is the AT&T JD. Extraction nondeterminism means requirement count varies run to run (-160 is the fix; -245 ships before it), so the acceptance criterion is multiple visible render waves between extraction complete and full-assessment render -- not a specific count. On the demo JD, extraction dominates at 14-20s and streaming moves first content by ~2s on a wait the visitor is already committed to; that is not the acceptance target.
+**Acceptance (AT&T fixture, not the demo JD):** The primary validation is the AT&T JD. Extraction nondeterminism means requirement count varies run to run (-160 is the fix; -245 ships before it), so the acceptance criterion is multiple visible render waves between extraction complete and full-assessment render -- not a specific count. Extraction sets a ~12s floor on first content (9-14s measured); first content appears at ~12s rather than ~22s. That is the number to name when describing what ships, so it is not a surprise.
 
 - AT&T fixture: multiple distinct render waves observable between extraction complete and full-assessment render.
+- First content appears at approximately the extraction floor (~12s), not at full-assessment completion (~22s).
 - All rows render in the same final state as the current non-streaming render.
 - Error rows show the unassessed placeholder defined in -248 (`43ca523`), not a blank or a crash.
 
@@ -1570,17 +1547,18 @@ Full ranked 25 available from `probe_243_top_k_rank.py` (re-runnable against cur
 ---
 
 ### MATTGPT-160
-**JD extraction rewrite: qualifier stripping, requirement-count variance, coverage miss, wall clock floor -- all one prompt**
+**JD extraction rewrite: qualifier stripping, requirement-count variance, coverage miss -- all one prompt**
 
 - **Status:** Open
 - **Priority:** High
 - **Type:** Bug / Performance
 - **File:** `services/jd_assessor.py` (`extract_requirements()`)
 - **Logged:** July 31, 2026 (scope expanded September 2, 2026)
+- **Gates:** MATTGPT-244. Three of the five over-called rows on the -244 corpus audit are unfalsifiable until extraction preserves qualifiers: "Modern technology stack fluency" cannot be judged against React and Node.js if those words were stripped during extraction. -244's acceptance criteria cannot be evaluated until -160 lands.
 
-**Why one ticket:** Four symptoms, one call, one prompt. Fixing them separately risks each patch undoing the previous one. The extraction wrapper (`extract_requirements()`) is the highest-value target left in the Role Match line of work: it accounts for 55-65% of total wall clock even after -243 ships, and it is the single point of failure for all four of the following.
+**Why one ticket:** Three symptoms, one call, one prompt. (Wall-clock floor was a fourth symptom; its acceptance criterion was dropped September 2026 when six repeat runs showed a 2.4s noise floor at fixed input and count, making the sub-15s target unmeasurable.) Fixing them separately risks each patch undoing the previous one. The extraction wrapper (`extract_requirements()`) is the highest-value target left in the Role Match line of work: it accounts for 55-65% of total wall clock even after -243 ships, and it is the single point of failure for all four of the following.
 
-**Four symptoms:**
+**Three symptoms (wall-clock floor dropped from scope September 2026 -- see above):**
 
 1. **Qualifier stripping:** On the demo JD, 7 of 23 requirements lost qualifiers during extraction -- the extracted text is narrower than what the JD actually requires. Downstream: assessor evaluates a stripped requirement and can produce verdicts that don't reflect what the hiring manager wrote. (Original -160 scope.)
 
@@ -1608,9 +1586,8 @@ These are a pre-condition for -160 Red, not part of -160 scope.
 
 **Acceptance:**
 - Qualifier retention: extracted requirements match source qualifiers on the demo JD (7-of-23 miss rate reduced to 0 or near-0).
-- Count stability: same JD produces the same requirement count across three consecutive cold-path runs.
+- Count stability: same JD produces the same requirement count across three consecutive cold-path runs. (This is the measurable performance criterion; wall-clock floor dropped -- see above.)
 - Coverage: "Kafka + IXBUS" extracted as a requirement from the AT&T JD.
-- Wall clock floor: extraction completes in under 15s on the demo JD.
 
 **Constraint:** Separate defect from MATTGPT-157 (W_KW keyword weighting). Clause-dropping happens at extraction time, before retrieval scoring. Do not conflate. Do not conflate with -243 (assessor parallelization) -- these are different functions in the same file.
 

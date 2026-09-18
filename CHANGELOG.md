@@ -6,6 +6,18 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ## September 2026
 
+### Query Logger
+
+**September 2026 — Query logger environment annotation (MATTGPT-086)** -- `9955ac6` (Red), `4affa9b` (Green)
+
+`Env` column appended to the end of `HEADERS` in `query_logger.py`, injected centrally in `_build_row` via `get_conf("MATTGPT_ENV")` so no call sites change. Reads `cloud` on Streamlit Cloud and `local` from `.env`. A startup print catches a wrong or missing value at deploy time rather than silently. Verified in production September 2026: Sheet rows show `cloud` on all production rows and `local` on all development rows. Eliminates the permanent-ambiguity window: every row now carries a legible environment stamp regardless of whether it arrived from a real visitor, a dev run, or a BDD test. `HEADERS` prefix test extended to 35 entries (was 33 after -247); separate length pin at 44.
+
+**September 2026 — Per-category count columns (no ticket)** -- `66f6358` (Red), `89a3774` (Green)
+
+Eight columns appended to `HEADERS` in `query_logger.py`: `Required Strong Count`, `Required Partial Count`, `Required Gap Count`, `Required Unassessed Count`, `Preferred Strong Count`, `Preferred Partial Count`, `Preferred Gap Count`, `Preferred Unassessed Count`. The four combined counts that existed before this change summed required and preferred, so the Sheet could not distinguish a required-strong from a preferred-strong. Split was decided during the -248 session; filed under no ticket by session decision. Separate length pin at 44 added alongside the existing prefix test. `HEADERS` now 44 entries total.
+
+---
+
 ### My Work
 
 **September 2026 — Role Match partial-failure handling, export/share surface parity, failure-path Sheet writes (MATTGPT-248 + MATTGPT-246 + MATTGPT-247)** -- `0c1189f` through `43ca523` (eight Green commits)
