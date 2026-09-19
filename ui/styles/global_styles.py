@@ -4204,8 +4204,37 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_my_work_trigge
         .thinking-text { color: var(--text-primary); font-weight: 500; font-size: 15px; }
         .thinking-paw  { font-size: 20px; margin-right: 6px; }
 
+        /* MATTGPT-245: inline mount modifier. Overrides the .thinking-modal
+           rule above so the modal renders in normal flow at its call site
+           instead of as a fixed-position overlay. Drops the pill styling
+           (background, border, shadow, padding) because there's no
+           backdrop scrim behind it -- the message sits directly on the
+           page. The overlay default is unchanged for the 5 other callers;
+           only Role Match uses mount="inline".
+
+           display: flex / align-items / gap are RESTATED explicitly.
+           Streamlit's stMarkdown wrapper breaks the inherited flex layout
+           on the inline mount (ball ends up stacked above the text
+           rather than beside it). Explicit restatement holds the
+           horizontal layout regardless of the parent context. */
+        .thinking-inline {
+            position: static;
+            transform: none;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
         @media (max-width: 767px) {
-            .thinking-modal {
+            /* Scoped :not(.thinking-inline) so the overlay-specific
+               positioning (bottom: 100px) and width constraint
+               (max-width: 90vw) don't leak into the inline mount.
+               The ball/text/paw sizing below applies to both mounts. */
+            .thinking-modal:not(.thinking-inline) {
                 padding: 12px 16px; gap: 8px;
                 bottom: 100px; max-width: 90vw; white-space: normal;
             }

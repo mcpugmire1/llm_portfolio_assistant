@@ -36,15 +36,33 @@ def get_thinking_message():
     return message
 
 
-def render_thinking_indicator(message=None):
-    """Render animated thinking indicator with backdrop."""
+def render_thinking_indicator(message=None, mount="overlay"):
+    """Render animated thinking indicator.
+
+    mount="overlay" (default): centered fixed-position modal with a
+    full-viewport backdrop scrim. Used by Ask Agy conversation, Ask
+    Agy landing, and Explore Stories.
+
+    mount="inline": no scrim, no fixed positioning -- the modal
+    renders in normal flow at its call site. Used by Role Match to
+    render the indicator inside the results column. Preserves nav
+    and form interactivity during the assessment; the scrim's
+    incidental click-blocking is replaced by explicit disabled=
+    guards on Clear and Submit."""
     if message is None:
         message = get_thinking_message()
 
+    if mount == "inline":
+        backdrop = ""
+        modal_classes = "thinking-modal thinking-inline"
+    else:
+        backdrop = '<div class="thinking-backdrop"></div>'
+        modal_classes = "thinking-modal"
+
     st.markdown(
         f"""
-        <div class="thinking-backdrop"></div>
-        <div class="thinking-modal">
+        {backdrop}
+        <div class="{modal_classes}">
             <div class="thinking-ball">🎾</div>
             <span class="thinking-text">
                 <span class="thinking-paw">🐾</span>{message}

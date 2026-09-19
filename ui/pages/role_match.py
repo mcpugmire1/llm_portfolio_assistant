@@ -253,10 +253,17 @@ def _debug_print_click_to_render(total_ms: float, n_reqs: int) -> None:
 
 def _consume_assessment_in_progress_flag() -> bool:
     """MATTGPT-245: read AND clear the assessment-in-progress flag in
-    one step. Green implements the pop; Red is a stub so
-    tests/unit/test_role_match_assessment_flag.py::test_consume_returns_true_first_then_false
-    fails on the call, not on an AttributeError."""
-    raise NotImplementedError
+    one step. Called on each render pass before Clear + Submit render
+    so they receive the flag value once and it does not leak to
+    subsequent reruns.
+
+    Returns True on the render pass immediately after
+    _handle_submit_click fired for a passing gate (the pass that
+    also runs the LLM); False on all other passes.
+
+    Must be .pop, not .get -- if the flag persists across reruns,
+    Clear + Submit stay disabled forever after the first assessment."""
+    return st.session_state.pop("role_match_assessment_in_progress", False)
 
 
 def _handle_submit_click() -> None:
@@ -318,6 +325,12 @@ def _handle_submit_click() -> None:
         # Gate passes -- clear any prior gate rejection so a stale banner
         # doesn't linger over a fresh valid submission.
         st.session_state.pop("role_match_gate_error", None)
+        # MATTGPT-245: set the assessment-in-progress flag so the render
+        # pass that follows (same rerun as this callback) renders Clear
+        # and Submit with disabled=True. Cleared by
+        # _consume_assessment_in_progress_flag on read so it fires once,
+        # on the render pass that also runs the LLM.
+        st.session_state["role_match_assessment_in_progress"] = True
 
 
 _HEADER_HTML = f"""
@@ -1775,6 +1788,14 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_role_match_tri
     box-shadow: none !important;
     text-decoration: underline !important;
 }
+/* MATTGPT-245: the base rule above uses !important on color/cursor,
+   which masks Streamlit's default disabled visual. Restore the
+   affordance explicitly so the disabled state reads. */
+[class*="st-key-role_match_clear"] button:disabled {
+    opacity: 0.4 !important;
+    cursor: not-allowed !important;
+    text-decoration: none !important;
+}
 
 /* MATTGPT-240: shared banner treatment. Used by the gate rejection in
    the left column and by the assessment-failure copy in the right panel.
@@ -2265,6 +2286,16 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
     font-weight: 600 !important;
     margin: 0 !important;
 }
+/* MATTGPT-245: the base rule above uses !important on
+   background/color/cursor, which masks Streamlit's default disabled
+   visual. Restore the affordance explicitly so the disabled state
+   reads. transform: none prevents the hover scale from taking effect
+   if a hover fires on a disabled state via touchscreen tap. */
+.st-key-role_match_submit button:disabled {
+    opacity: 0.4 !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+}
 
 /* =============================================================================
    PHASE 4 — SLICE 1: LOCK ICON (top-right of results panel)
@@ -2369,6 +2400,16 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
                 ):
                     st.session_state.pop(_k, None)
 
+            # MATTGPT-245: read the assessment-in-progress flag once per
+            # render pass. True on the pass immediately after a passing
+            # gate (the same pass that runs the blocking LLM call);
+            # False on all other passes. Wires into disabled= on Clear
+            # and Submit so an accidental click during the ~20s
+            # assessment can't discard the JD or start a second run.
+            # The consume pops the flag so it doesn't leak across
+            # reruns.
+            _assessment_in_progress = _consume_assessment_in_progress_flag()
+
             jd_preview = st.session_state.get("role_match_jd_input", "")
             gate_error_msg = st.session_state.get("role_match_gate_error")
             failure_error_msg = st.session_state.get("role_match_error")
@@ -2405,7 +2446,11 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
             # regardless of banner state. Sits below the banner so the
             # rejection message is read first and the affordance follows.
             if jd_preview.strip():
-                if st.button("✕ Clear", key="role_match_clear"):
+                if st.button(
+                    "✕ Clear",
+                    key="role_match_clear",
+                    disabled=_assessment_in_progress,
+                ):
                     st.session_state["role_match_clear_flag"] = True
                     st.rerun()
 
@@ -2430,6 +2475,7 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
                     height=400,
                     key="role_match_jd_input",
                     label_visibility="collapsed",
+                    disabled=_assessment_in_progress,
                 )
                 with st.container(key="role_match_submit"):
                     submit_clicked = st.form_submit_button(
@@ -2437,6 +2483,7 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
                         type="primary",
                         use_container_width=True,
                         on_click=_handle_submit_click,
+                        disabled=_assessment_in_progress,
                     )
 
             if not jd_text.strip():
@@ -2484,11 +2531,15 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
                 # computed after _render_results_panel returns below.
                 _click_start = time.perf_counter()
 
-                # Match the Ask Agy pattern: st.empty() container + render_thinking_indicator()
-                # The indicator is a fixed-position overlay so it covers the whole viewport.
+                # MATTGPT-245: mount="inline" renders the indicator in the
+                # results column in normal flow -- no fixed-position
+                # overlay, no scrim. Clear + Submit disabled= guards
+                # (wired above) replace the scrim's incidental
+                # click-blocking. Ask Agy / Explore Stories still use the
+                # overlay default.
                 loading_container = st.empty()
                 with loading_container:
-                    render_thinking_indicator()
+                    render_thinking_indicator(mount="inline")
                 # Height anchor: render_thinking_indicator() is fixed-position and
                 # contributes no flow height. Without this, the right column collapses
                 # to near-zero during the blocking LLM call, floating the footer up.
@@ -2566,6 +2617,29 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
                 # is what test 9 and test 10 patches bind to.
                 if st.session_state.get("role_match_result"):
                     _log_role_match_success(st.session_state["role_match_result"])
+                    # MATTGPT-245: rerun after success so input_col
+                    # re-renders on a fresh pass. Without this, the
+                    # pass that runs the LLM is also the pass that
+                    # consumed the assessment_in_progress flag (True)
+                    # and drew Clear + Submit disabled and the label
+                    # "Match this role" -- and no subsequent rerun
+                    # fires to redraw them enabled with "Update
+                    # Match". Symmetric with _failure_needs_rerun
+                    # above: both success and failure end with a
+                    # rerun so state changes made mid-pass become
+                    # visible on the fresh pass.
+                    #
+                    # Persist _click_start across the rerun so the
+                    # click-to-render telemetry (fired inside
+                    # _render_results_panel below on the fresh pass)
+                    # still measures the full submit-branch + render
+                    # span. Without the persist, the fresh pass sees
+                    # _click_start = None (local) and skips the emit.
+                    if _click_start is not None:
+                        st.session_state["_role_match_click_start_pending"] = (
+                            _click_start
+                        )
+                    st.rerun()
             # Render: results → empty state. MATTGPT-240: all three
             # rejection states (gate, retryable failure, not-retryable
             # failure) render as a banner in the left column above the
@@ -2576,12 +2650,20 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
             # assessment exists.
             if st.session_state.get("role_match_result"):
                 _render_results_panel(st.session_state["role_match_result"], stories)
-                # Click-to-render emit: fires only on the pass that submitted,
-                # because _click_start is only set inside the submit branch
-                # above. Navigation-return renders (result in state, no submit
-                # this pass) leave _click_start = None and skip the emit.
-                if _click_start is not None:
-                    _total_ms = (time.perf_counter() - _click_start) * 1000.0
+                # Click-to-render emit: fires on the submit-triggered pass
+                # OR on the fresh pass that follows the MATTGPT-245
+                # post-success rerun. On the submit-triggered pass,
+                # _click_start is set locally (line inside the submit
+                # branch above). On the fresh pass after the rerun,
+                # _click_start is None (local) but the pre-rerun code
+                # persisted it to session state; pop it here.
+                # Navigation-return renders (result in state, no submit,
+                # no pre-rerun persist) leave both None and skip the emit.
+                _emit_start = _click_start or st.session_state.pop(
+                    "_role_match_click_start_pending", None
+                )
+                if _emit_start is not None:
+                    _total_ms = (time.perf_counter() - _emit_start) * 1000.0
                     _n_reqs = len(
                         st.session_state["role_match_result"].get("results") or []
                     )
