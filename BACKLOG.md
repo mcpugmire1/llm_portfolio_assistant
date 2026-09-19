@@ -73,7 +73,6 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-082](#mattgpt-082) | Q15 eval assertion is over-specified — checks literal client name presence rather than response correctness | Open | Medium | Refactor | May 22, 2026 |
 | [MATTGPT-083](#mattgpt-083) | Spinner inconsistency — Explore Stories doesn't show thinking indicator for rejected queries (Ask MattGPT does) | Open | Medium | Issue | May 23, 2026 |
 | [MATTGPT-084](#mattgpt-084) | Ask MattGPT BDD scenarios — chip-click + low_confidence banner-render timing flakes under full-suite load | Open | Medium | Issue | May 23, 2026 |
-| [MATTGPT-089](#mattgpt-089) | Role Match — Location & Availability strip above SUMMARY (static facts from matt_profile.json; no JD comparison) | Open | High | Enhancement | May 28, 2026 |
 | [MATTGPT-091](#mattgpt-091) | Add a credible failure story to the corpus (sibling to -022 / -078 pattern) | Open | Medium | Action | May 28, 2026 |
 | [MATTGPT-095](#mattgpt-095) | Anti-consulting bias in story framing — corpus reads "consulting" as default register when it shouldn't | Open | Medium | Action | May 28, 2026 |
 | [MATTGPT-096](#mattgpt-096) | Methodology context dropped during synthesis — TDD/BDD and ways-of-working substance gets compressed out of metric claims (hypothesis to verify) | Open | Medium | Issue | May 28, 2026 |
@@ -778,64 +777,6 @@ Each detail block uses these fields. Not every field is required for every item.
 
 ---
 
-
-### MATTGPT-089
-**Role Match — Location & Availability strip above SUMMARY**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Enhancement
-- **Files:** `ui/pages/role_match.py`, `data/matt_profile.json`
-- **Logged:** May 28, 2026 (scope replaced September 18, 2026)
-
-**Scope (September 18, 2026 replacement):** Render a four-cell strip above the SUMMARY section in the Role Match results panel on every assessment. Section header: "Location & Availability." Read all values from `data/matt_profile.json` under a `logistics` key.
-
-**Four cells, left to right:**
-
-| Label | Value | Subline |
-|---|---|---|
-| Location | Atlanta, GA | Open to relocation and travel |
-| Work model | In-office preferred | Hybrid or remote fine |
-| Availability | Immediate | No notice period |
-| Authorization | US citizen | No sponsorship needed |
-
-Labels are design vocabulary and stay in code, not data. The same four labels appear on three surfaces (panel, export, report); putting them in data would require keeping three references in sync with no benefit.
-
-**Parity rule:** Same facts, same order, in the export and the report. Parity covers the four data values and their sublines; affordance decisions (styling, section placement within the document) are surface-specific.
-
-**Explicitly out of scope:**
-- No `logistical_requirements` extraction from the JD.
-- No comparison against the JD.
-- No verdict badges.
-
-An onsite-only Seattle role is not a capability gap. Rendering it in the capability vocabulary (strong / partial / gap) would say exactly that. The recruiter reads the four facts and makes the call in two seconds. Adding JD comparison would require a new LLM surface, a new failure mode, and a third verdict state to design -- for a judgment the reader already makes faster and more accurately than the model would.
-
-**Schema (matt_profile.json):** Nested under a `logistics` key. Each cell has `value` and `subline`. Example shape:
-
-```json
-{
-  "logistics": {
-    "location": { "value": "Atlanta, GA", "subline": "Open to relocation and travel" },
-    "work_model": { "value": "In-office preferred", "subline": "Hybrid or remote fine" },
-    "availability": { "value": "Immediate", "subline": "No notice period" },
-    "authorization": { "value": "US citizen", "subline": "No sponsorship needed" }
-  }
-}
-```
-
-**Design reference:** Option 1a in `Role Match Logistics.dc.html`, mocked at 855px production panel width.
-
-**Missing-field behavior (decided):** If a key is absent from the `logistics` block, omit that cell entirely and let the grid reflow to three (or fewer) cells. Do not render a placeholder. A placeholder invents a fact; omission is honest. Code's Red set must include a test for this: strip one key from the fixture and assert the remaining three cells render and no placeholder appears.
-
-**Open implementation detail:** Four cells drop to two columns below roughly 600px. Existing Role Match breakpoints are at 768px; this adds one at approximately 600px. Exact breakpoint value is a visual call during implementation.
-
-**Independence from -160:** This ticket does not touch the extraction prompt. The prior scope (logistical_requirements extraction) is replaced by the static-display approach above. -089 and -160 are independent; the sequencing note that previously appeared in -160 no longer applies.
-
-**Cross-references:**
-- MATTGPT-090 (chatbot-side logistical-data gap; comp specifically)
-- MATTGPT-079 (coverage gaps meta; location/work-model are profile data, not story-anchored)
-
----
 
 ### MATTGPT-091
 **Failure stories — audit existing corpus content first, then write only if needed (re-scoped May 28, 2026)**

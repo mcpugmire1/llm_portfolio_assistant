@@ -20,6 +20,12 @@ Eight columns appended to `HEADERS` in `query_logger.py`: `Required Strong Count
 
 ### My Work
 
+**September 19, 2026 — Role Match Location & Availability block (MATTGPT-089)** -- `c4daab4` (Green)
+
+Fixed-content four-cell strip added above the SUMMARY section in the Role Match results panel, rendered on every assessment. Section header: "Location & Availability." Four cells (Location, Work model, Availability, Authorization), each with a value and a subline, read from `data/matt_profile.json` under a `logistics` key. Labels are design vocabulary in code, not data. Missing-field behavior: a key absent from the `logistics` block omits the cell and reflowes the grid to three; no placeholder renders. Parity rule applied: same facts, same order in the export HTML and share text. No JD comparison, no extraction, no verdict badges -- the recruiter reads four facts and makes the call; comparison would add a new LLM surface and a third verdict state for a judgment the reader already makes faster and more accurately. Four cells drop to two columns below ~600px (new breakpoint alongside the existing 768px Role Match breakpoints).
+
+---
+
 **September 2026 — Role Match partial-failure handling, export/share surface parity, failure-path Sheet writes (MATTGPT-248 + MATTGPT-246 + MATTGPT-247)** -- `0c1189f` through `43ca523` (eight Green commits)
 
 Three tickets closed in one branch. MATTGPT-246 (export + share surface divergences) and MATTGPT-247 (failure-path Sheet writes) folded into MATTGPT-248 because all three touched `_handle_assessment_error`, `_build_export_html`, and `_build_share_text` in the same file; landing them separately would have meant two passes over the same code.
