@@ -17,5 +17,23 @@
     "Microsoft Certified Professional (MCP) - Oracle",
     "AWS Launchpad Champion",
     "AWS Certified Solutions Architect - Associate"
-  ]
+  ],
+  "logistics": {
+    "location": {
+      "value": "Atlanta, GA",
+      "subline": "Open to relocation and travel"
+    },
+    "work_model": {
+      "value": "In-office preferred",
+      "subline": "Hybrid or remote fine"
+    },
+    "availability": {
+      "value": "Immediate",
+      "subline": "No notice period"
+    },
+    "authorization": {
+      "value": "US citizen",
+      "subline": "No sponsorship needed"
+    }
+  }
 }

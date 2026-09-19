@@ -8,6 +8,7 @@ Architecture: See ADR 016 and services/jd_assessor.py
 """
 
 import html
+import json
 import logging
 import re
 import time
@@ -890,6 +891,138 @@ def _incomplete_notice_text(counts: dict, total: int, *, surface: str) -> str | 
     return body
 
 
+# =============================================================================
+# MATTGPT-089: Location & Availability block
+# =============================================================================
+# Fixed-content four-cell strip rendered above SUMMARY on all three surfaces
+# (screen panel, share text, export html). Facts only, no LLM, no JD
+# comparison, no verdict badges. Labels live here (design vocabulary);
+# values + sublines live in data/matt_profile.json under the "logistics" key.
+
+_LOCATION_HEADER = "Location & Availability"
+
+# Shared CSS: one source, two consumers. Export template splices it
+# into its <style> block; screen render injects it via st.markdown once
+# per panel. Same parity discipline as the count builders -- edit here,
+# both surfaces update.
+#
+# `var(--token, #hex)` follows the _STATUS_BADGE_STYLE pattern: screen
+# resolves to the CSS variable (light + dark palettes in
+# global_styles.py), export falls back to the literal since the
+# standalone HTML has no :root. Do not switch to bare hex -- that
+# breaks dark mode on the panel.
+_LOCATION_BLOCK_CSS = """
+.loc-block { margin-bottom: 24px; padding: 16px; background: var(--bg-surface, #F9FAFB); border: 1px solid var(--border-color, #E5E7EB); border-radius: 8px; }
+.loc-block .section-title { color: var(--accent-purple, #8B5CF6); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 12px 0; }
+.loc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.loc-cell { display: flex; flex-direction: column; gap: 4px; }
+.loc-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary, #6B7280); font-weight: 600; }
+.loc-value { font-size: 14px; font-weight: 700; color: var(--text-primary, #1F2937); }
+.loc-subline { font-size: 12px; color: var(--text-secondary, #6B7280); }
+@media (max-width: 600px) { .loc-grid { grid-template-columns: repeat(2, 1fr); } }
+"""
+
+# Cell order pinned here; labels displayed to visitors. Field keys match
+# data/matt_profile.json["logistics"] structure.
+_LOCATION_CELL_ORDER = (
+    ("location", "Location"),
+    ("work_model", "Work model"),
+    ("availability", "Availability"),
+    ("authorization", "Authorization"),
+)
+
+
+def _load_matt_profile_dict() -> dict:
+    """Load matt_profile.json as a dict. Empty dict on failure so the
+    render surfaces degrade gracefully (no block rendered, no crash).
+    Distinct from services.jd_assessor.load_matt_profile which returns
+    a formatted string for the assessment prompt."""
+    profile_path = Path(__file__).parent.parent.parent / "data" / "matt_profile.json"
+    try:
+        with open(profile_path) as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
+def _iter_location_cells(profile: dict) -> list[tuple[str, str, str]]:
+    """Return [(label, value, subline), ...] for populated logistics
+    cells only, in fixed order. Cells whose field is absent from the
+    profile's logistics dict, or whose value is empty/missing, are
+    omitted entirely -- MATTGPT-089's omit-cleanly contract, pinned
+    by test_location_block_omits_cell_when_field_missing_from_profile.
+    A cell that rendered label-only with an empty value would be the
+    'blank box' failure mode."""
+    logistics = (profile or {}).get("logistics") or {}
+    cells: list[tuple[str, str, str]] = []
+    for field_key, label in _LOCATION_CELL_ORDER:
+        cell_data = logistics.get(field_key)
+        if not cell_data:
+            continue
+        value = str(cell_data.get("value", "")).strip()
+        subline = str(cell_data.get("subline", "")).strip()
+        if not value:
+            continue
+        cells.append((label, value, subline))
+    return cells
+
+
+def _render_location_block_share_text(cells: list[tuple[str, str, str]]) -> str:
+    """Plain-text Location & Availability block for the share
+    surface. Returns empty string when no cells to render, so
+    callers can concatenate unconditionally without producing
+    stray blank lines."""
+    if not cells:
+        return ""
+    lines = [_LOCATION_HEADER]
+    for label, value, subline in cells:
+        lines.append(f"{label}: {value}")
+        if subline:
+            lines.append(f"   {subline}")
+    return "\n".join(lines)
+
+
+def _render_location_block_html(cells: list[tuple[str, str, str]]) -> str:
+    """HTML Location & Availability block for both the export
+    surface and the screen panel. Header ampersand is html.escape'd
+    per the convention pinned by
+    test_export_html_escapes_ampersand. Returns empty string when no
+    cells to render.
+
+    Screen and export share this output plus _LOCATION_BLOCK_CSS.
+    Screen injects the CSS via st.markdown once per panel; export
+    splices it into its <style> block. The two surfaces stay in
+    sync by construction, not by memory.
+
+    Subline div is gated on subline being non-empty -- an empty
+    `<div class="loc-subline"></div>` produces phantom vertical
+    space on cells with values but no sublines. Same omit-cleanly
+    shape as the missing-cell contract, one level down."""
+    if not cells:
+        return ""
+    header_escaped = html.escape(_LOCATION_HEADER)
+    cell_divs = []
+    for label, value, subline in cells:
+        subline_html = (
+            f'<div class="loc-subline">{html.escape(subline)}</div>' if subline else ""
+        )
+        cell_divs.append(
+            '<div class="loc-cell">'
+            f'<div class="loc-label">{html.escape(label)}</div>'
+            f'<div class="loc-value">{html.escape(value)}</div>'
+            f"{subline_html}"
+            "</div>"
+        )
+    return (
+        '<div class="loc-block">'
+        f'<h2 class="section-title">{header_escaped}</h2>'
+        '<div class="loc-grid">'
+        f'{"".join(cell_divs)}'
+        "</div>"
+        "</div>"
+    )
+
+
 def _build_share_text(result_payload: dict, profile: dict | None = None) -> str:
     """Build a plain-text summary of the assessment for clipboard sharing.
 
@@ -947,6 +1080,15 @@ def _build_share_text(result_payload: dict, profile: dict | None = None) -> str:
     _notice = _incomplete_notice_text(_counts, len(results), surface="print")
     if _notice:
         lines.append(_notice)
+        lines.append("")
+    # MATTGPT-089: Location & Availability block above SUMMARY.
+    # Fixed content, always renders (unless the profile is empty
+    # and every cell is skipped). Parity with the export html
+    # placement.
+    _location_cells = _iter_location_cells(profile or _load_matt_profile_dict())
+    _location_block = _render_location_block_share_text(_location_cells)
+    if _location_block:
+        lines.append(_location_block)
         lines.append("")
     _count_lines = [
         line
@@ -1173,6 +1315,13 @@ def _build_export_html(result_payload: dict, profile: dict | None = None) -> str
         + "</div>"
     )
 
+    # MATTGPT-089: Location & Availability block above SUMMARY.
+    # Fixed content, always renders (unless the profile is empty
+    # and every cell is skipped). Parity with the share text
+    # placement.
+    _location_cells = _iter_location_cells(profile or _load_matt_profile_dict())
+    location_html = _render_location_block_html(_location_cells)
+
     return f"""
         <!DOCTYPE html>
         <html>
@@ -1185,6 +1334,7 @@ def _build_export_html(result_payload: dict, profile: dict | None = None) -> str
                 .section-title {{ color: #8B5CF6; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin: 24px 0 12px 0; }}
                 .summary-section {{ margin-bottom: 24px; padding: 16px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 8px; }}
                 .summary-counts {{ font-size: 13px; color: #6B7280; margin: 0 0 8px 0; }}
+                {_LOCATION_BLOCK_CSS}
                 .legend {{ display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 10px 14px; border: 1px solid #E5E7EB; border-radius: 10px; margin-bottom: 14px; font-size: 11px; color: #6B7280; }}
                 .incomplete-notice {{ font-size: 12px; color: #6B7280; margin: 0 0 8px 0; }}
                 .req {{ display: flex; gap: 10px; align-items: center; margin: 0 0 4px 0; padding: 12px 0 0 0; }}
@@ -1216,6 +1366,7 @@ def _build_export_html(result_payload: dict, profile: dict | None = None) -> str
             <div class="meta">{header_meta}</div>
             {_ex_notice_html}
             {legend_export_html}
+            {location_html}
             {summary_export_html}
             {required_html}
             {preferred_html}
@@ -1382,7 +1533,19 @@ def _render_results_panel(result_payload: dict, stories: list[dict]) -> None:
         + "</div>"
     )
 
-    st.markdown(_summary_html, unsafe_allow_html=True)
+    # MATTGPT-089: Location & Availability block above SUMMARY. Style +
+    # block concatenated into the same st.markdown call as _summary_html
+    # so total call count is unchanged (screen layout tuning depends on
+    # it, per CLAUDE.md).
+    _location_cells = _iter_location_cells(_load_matt_profile_dict())
+    _location_block_html = _render_location_block_html(_location_cells)
+    _location_screen_html = (
+        f"<style>{_LOCATION_BLOCK_CSS}</style>{_location_block_html}"
+        if _location_block_html
+        else ""
+    )
+
+    st.markdown(_location_screen_html + _summary_html, unsafe_allow_html=True)
 
     # Hint text lives in the LEFT column above the textarea (rendered in
     # render_role_match), NOT in the right column above the results panel.
