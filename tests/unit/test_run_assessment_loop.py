@@ -604,3 +604,208 @@ class TestRetrieveStoriesNoneVsEmpty:
             f"expected [] to stay [] (real empty match, not an outage); "
             f"got {result!r}"
         )
+
+
+# =============================================================================
+# MATTGPT-245 phase two: on_row callback on _fan_out_assessments
+# =============================================================================
+# The service layer gains an optional on_row(index, assessment) callback
+# invoked as each coroutine completes. The Role Match UI passes a closure
+# that writes into a per-requirement st.empty() slot for progressive
+# row-fill. The service stays Streamlit-free -- on_row is a plain Python
+# callable, and the return contract (submission-ordered assessment dicts)
+# is unchanged whether or not on_row is provided.
+#
+# Tests 1-5 fail on Red with TypeError: unexpected keyword argument
+# 'on_row'. Test 6 fails on Red on the with-callback branch (same TypeError).
+class TestFanOutOnRowCallback:
+    """MATTGPT-245 phase two."""
+
+    _FIXTURE_REQS = [
+        {"text": f"req_{i}", "category": "required"} for i in range(_N_REQS)
+    ]
+
+    def _run_fanout(
+        self, on_row=None, assess_side_effect=None, retrieve_side_effect=None
+    ):
+        """Helper: run _fan_out_assessments with the standard patches.
+        on_row is passed only when provided so tests can exercise both
+        the omit-callback and pass-callback shapes cleanly."""
+        import asyncio
+
+        assess = assess_side_effect or _fake_assess_success
+        retrieve_kwargs = (
+            {"side_effect": retrieve_side_effect}
+            if retrieve_side_effect is not None
+            else {"return_value": []}
+        )
+        kwargs = {"on_row": on_row} if on_row is not None else {}
+        with (
+            patch.object(jd_assessor, "retrieve_stories", **retrieve_kwargs),
+            patch.object(jd_assessor, "assess_requirement", side_effect=assess),
+        ):
+            return asyncio.run(
+                jd_assessor._fan_out_assessments(None, self._FIXTURE_REQS, [], **kwargs)
+            )
+
+    def test_on_row_fires_once_per_requirement(self):
+        """Test 1. on_row(index, assessment) invoked exactly N times for
+        N submitted requirements. Success path (all rows return
+        assessment dicts, no failures)."""
+        received: list[tuple[int, dict]] = []
+
+        def _capture(index, assessment):
+            received.append((index, assessment))
+
+        self._run_fanout(on_row=_capture)
+
+        assert len(received) == _N_REQS, (
+            f"expected on_row to fire exactly {_N_REQS} times "
+            f"(one per submitted requirement); got {len(received)}. "
+            f"Received: {received!r}"
+        )
+
+    def test_on_row_receives_every_submission_index_exactly_once(self):
+        """Test 2. Every index in [0, N-1] arrives via on_row exactly
+        once. Guards against a Green that skips indices, double-fires,
+        or fires with out-of-range indices."""
+        received_indices: list[int] = []
+
+        def _capture(index, _assessment):
+            received_indices.append(index)
+
+        self._run_fanout(on_row=_capture)
+
+        assert sorted(received_indices) == list(range(_N_REQS)), (
+            f"expected every submission index in [0, {_N_REQS - 1}] to "
+            f"appear exactly once; got sorted={sorted(received_indices)!r}. "
+            f"Full received order: {received_indices!r}"
+        )
+
+    def test_on_row_index_matches_submission_position_not_completion_order(
+        self,
+    ):
+        """Test 3. on_row receives the SUBMISSION index, not the
+        completion order. Load-bearing: the UI's slot-writer closure
+        indexes into a submission-ordered list of st.empty()
+        placeholders; a Green that passes completion-order indices
+        would write results into the wrong slots.
+
+        The reverse-sleep fixture makes completion order deliberately
+        different from submission order (req_{N-1} completes first,
+        req_0 last), so a Green that fires on_row with the completion
+        counter instead of the submission index would break the
+        (index, requirement_text) self-consistency asserted below.
+
+        The assertion is pair-consistency, not arrival sequence:
+        req_N carries the text f'req_{N}' regardless of when it
+        arrives. Pins index correctness without pinning wall-clock
+        timing, so the fixture's sleep values can drift without
+        making the test flake on CI."""
+        received: list[tuple[int, str]] = []
+
+        def _capture(index, assessment):
+            received.append((index, assessment["requirement"]))
+
+        self._run_fanout(on_row=_capture)
+
+        # Primary invariant: every (index, requirement_text) pair is
+        # self-consistent (req_N carries "req_N"). Iterated per-pair
+        # so a mismatch names the offending index.
+        for index, requirement_text in received:
+            assert requirement_text == f"req_{index}", (
+                f"on_row received (index={index}, requirement={requirement_text!r}), "
+                f"but the requirement text should encode the SUBMISSION "
+                f"index (expected 'req_{index}'). A Green that fires "
+                f"on_row with completion-order counters instead of the "
+                f"submission index would produce this mismatch. Full "
+                f"received: {received!r}"
+            )
+
+    def test_on_row_fires_for_mode_1_assess_caught_with_unassessed_row(self):
+        """Test 4. Mode 1 (assess_requirement raises on req_2):
+        _assess_one_with_index catches the exception and returns an
+        unassessed row. on_row must still fire for index 2, with that
+        unassessed row -- not skipped, not with the raised exception.
+        Load-bearing: the UI slot for req_2 would otherwise stay at
+        the pending state indefinitely."""
+        received: dict[int, dict] = {}
+
+        def _capture(index, assessment):
+            received[index] = assessment
+
+        self._run_fanout(on_row=_capture, assess_side_effect=_fake_assess_one_raises)
+
+        assert 2 in received, (
+            f"expected on_row to fire for index 2 even though "
+            f"assess_requirement raised on req_2. Received indices: "
+            f"{sorted(received.keys())!r}"
+        )
+        assert received[2].get("match_status") == "unassessed", (
+            f"expected the on_row payload for index 2 to be an unassessed "
+            f"row (Mode 1 assess-caught); got match_status="
+            f"{received[2].get('match_status')!r}. Full row: {received[2]!r}"
+        )
+
+    def test_on_row_fires_for_mode_2_retrieval_none_with_unassessed_row(self):
+        """Test 5. Mode 2 (retrieve_stories returns None for req_2):
+        _assess_one_with_index emits an unassessed row directly
+        without calling the LLM. on_row must still fire for index 2
+        with that unassessed row. Same load-bearing reason as test 4
+        (UI slot must not stay pending)."""
+        received: dict[int, dict] = {}
+
+        def _capture(index, assessment):
+            received[index] = assessment
+
+        self._run_fanout(
+            on_row=_capture,
+            retrieve_side_effect=_fake_retrieve_returns_none_for_req_2,
+        )
+
+        assert 2 in received, (
+            f"expected on_row to fire for index 2 even though "
+            f"retrieve_stories returned None on req_2. Received "
+            f"indices: {sorted(received.keys())!r}"
+        )
+        assert received[2].get("match_status") == "unassessed", (
+            f"expected the on_row payload for index 2 to be an unassessed "
+            f"row (Mode 2 retrieval-returned-None); got match_status="
+            f"{received[2].get('match_status')!r}. Full row: {received[2]!r}"
+        )
+
+    def test_fan_out_return_contract_unchanged_with_or_without_on_row(self):
+        """Test 6. Pin the return contract for callers of
+        _fan_out_assessments (via run_assessment, e.g.
+        scripts/assess_jd.py). Adding the on_row callback must not
+        change what the function returns -- it's a side channel, not
+        a replacement. Same fixture on both runs, so the returned
+        assessment lists must be equal element-for-element.
+
+        Existing tests exercise the on_row=None path implicitly.
+        This test's job is to make the contract-preservation
+        explicit: 'implicitly covered' is how a contract change gets
+        shipped unnoticed."""
+        result_no_callback = self._run_fanout()
+
+        received: list[int] = []
+        result_with_callback = self._run_fanout(
+            on_row=lambda idx, _r: received.append(idx)
+        )
+
+        assert result_no_callback == result_with_callback, (
+            f"expected _fan_out_assessments return value to be identical "
+            f"whether on_row is provided or omitted (deterministic assess "
+            f"fixture, same inputs).\n"
+            f"no_callback: {result_no_callback!r}\n"
+            f"with_callback: {result_with_callback!r}"
+        )
+        # Sanity: the with-callback run actually invoked the callback,
+        # so we know the equality holds despite on_row firing (not
+        # because on_row was silently no-op'd).
+        assert len(received) == _N_REQS, (
+            f"sanity: with-callback run should have fired on_row {_N_REQS} "
+            f"times; got {len(received)}. If this fails but the equality "
+            f"above passes, Green implemented on_row as a no-op and the "
+            f"return-contract pin is meaningless."
+        )

@@ -1003,6 +1003,14 @@ def _render_location_block_share_text(cells: list[tuple[str, str, str]]) -> str:
     return "\n".join(lines)
 
 
+def _render_pending_row_html(requirement_text: str) -> str:
+    """MATTGPT-245 phase two: pending-state HTML for one requirement
+    slot. Green implements the hollow-ring + text markup; Red is a
+    stub so tests/unit/test_role_match_pending_row.py fails on the
+    call, not on an AttributeError."""
+    raise NotImplementedError
+
+
 def _render_location_block_html(cells: list[tuple[str, str, str]]) -> str:
     """HTML Location & Availability block for both the export
     surface and the screen panel. Header ampersand is html.escape'd
