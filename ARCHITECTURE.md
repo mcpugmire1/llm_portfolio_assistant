@@ -2499,6 +2499,29 @@ When a new class is needed for an element that lives alongside an element that a
 
 ---
 
+### Pattern 9: `var(--token, #hex)` Fallback -- One Rule Serves Themed Screen and Unthemed Export
+
+Some surfaces render both to the themed Streamlit app (which mounts `global_styles.py` and swaps CSS variables on `body.dark-theme`) and to a standalone HTML document (the Role Match export, which ships with its own `<style>` block and no `:root`). A bare hex color works only on the export; a bare `var(--token)` reference works only on the screen. The fallback form `var(--token, #hex)` resolves to the CSS variable on the themed surface (picking up the dark-mode swap) and falls back to the literal on the unthemed surface. One rule serves both surfaces without duplication.
+
+**Instances:**
+- `_STATUS_BADGE_STYLE` in `ui/pages/role_match.py`: status-badge fill/glyph colors (`var(--success-color,#10B981)`, etc., no space after comma -- code convention for this constant). Rendered via `build_legend_entries` (line 811) as an inline-styled HTML `<span>` badge (circular background, glyph character; no SVG). One shared render path via `build_legend_entries` serves both screen panel and export HTML.
+- `_STATUS_TEXT_COLOR` in `ui/pages/role_match.py` (lines 368-373): verdict text colors (`var(--success-color,#10B981)`, `var(--warning-color,#F59E0B)`, `var(--error-color,#EF4444)`, `var(--text-secondary,#6B7280)`). Consumed at line 718 (in-conversation status text) and line 780 (Discussion Points fallback color). Same no-space convention as `_STATUS_BADGE_STYLE`.
+- `_LOCATION_BLOCK_CSS` in `ui/pages/role_match.py`: the Location & Availability block's background, borders, and text colors (`var(--bg-surface, #F9FAFB)`, `var(--text-primary, #1F2937)`, etc., space after comma -- this constant's convention differs from the two above). Consumed by both the screen panel injection (via `st.markdown` `<style>`, line 1547) and the export template's style block (via f-string interpolation, line 1335).
+
+Note: `_STATUS_BADGE_STYLE` and `_STATUS_TEXT_COLOR` write `var(--token,#hex)` with no space after the comma; `_LOCATION_BLOCK_CSS` writes `var(--token, #hex)` with a space. CSS parses both identically, but a reader searching the codebase for the exact string in this doc will miss one or the other depending on which form they search for.
+
+**Rule:** when a color rule must serve both a themed Streamlit surface and a standalone HTML surface (export, share preview, email template), write the color as `var(--token, #hex)`, not as bare hex. Bare hex on the screen breaks dark mode; bare `var(--token)` on the export renders as `initial` (no theme, no color).
+
+**`_render_location_block_html` -- dual-caller constraint:**
+
+Renamed from `_render_location_block_export_html` before the second caller landed. Called from both the export template and the screen panel. The screen call concatenates the block into the same `st.markdown` call as the summary panel -- do not split them into separate calls. Total markdown call count on this page affects layout (the negative margin tuning described in Streamlit Markdown Call Count Affects Layout applies here); adding a call shifts subsequent elements.
+
+**`.loc-block .section-title` intentional margin override:**
+
+`.loc-block .section-title` overrides the export's general `.section-title` rule, reducing top margin from 24px to 0. The block already has 16px top padding; without the override the header double-spaces at the top of the block. The scoped selector (`.loc-block .section-title`, not `.section-title`) keeps the override from affecting other section titles in the export.
+
+---
+
 ## Testing Strategy
 
 ### BDD/E2E Tests (Explore Stories)
