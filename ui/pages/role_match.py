@@ -251,6 +251,14 @@ def _debug_print_click_to_render(total_ms: float, n_reqs: int) -> None:
         print(f"[role_match] total_ms={total_ms:.1f} n_reqs={n_reqs}")
 
 
+def _consume_assessment_in_progress_flag() -> bool:
+    """MATTGPT-245: read AND clear the assessment-in-progress flag in
+    one step. Green implements the pop; Red is a stub so
+    tests/unit/test_role_match_assessment_flag.py::test_consume_returns_true_first_then_false
+    fails on the call, not on an AttributeError."""
+    raise NotImplementedError
+
+
 def _handle_submit_click() -> None:
     """form_submit_button on_click callback. Runs BEFORE Streamlit reruns
     the script, so any session_state changes are visible when input_col's
