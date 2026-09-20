@@ -585,6 +585,25 @@ async def _assess_one_with_index(
             return index, _unassessed_row(req, _MODE_1_GAP_TEXT)
 
         assessment["category"] = req["category"]
+        # MATTGPT-245 phase two: overwrite the LLM's
+        # `assessment["requirement"]` (JSON output, not passthrough of
+        # input) with `req["text"]` so the resolved row's requirement
+        # text matches the pending row's within a single assessment
+        # run. Without this, the progressive fill can flip requirement
+        # wording as each row resolves (assess LLM sometimes copies
+        # verbatim, sometimes paraphrases), producing the same
+        # requirement reading two ways in the same panel. Removes the
+        # assess-side source of paraphrase variance; extraction-side
+        # nondeterminism is separately tracked in -160.
+        #
+        # Consistency notes:
+        # - Mode 1 and Mode 2 unassessed rows already use req["text"]
+        #   via _unassessed_row(req, ...), so those exit paths are
+        #   already passthrough -- no symmetric change needed.
+        # - _build_share_text and _build_export_html read
+        #   `requirement` off the row, so they inherit this fix
+        #   without further changes.
+        assessment["requirement"] = req["text"]
         return index, assessment
 
 
