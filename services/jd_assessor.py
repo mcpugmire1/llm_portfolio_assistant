@@ -589,7 +589,10 @@ async def _assess_one_with_index(
 
 
 async def _fan_out_assessments(
-    client: OpenAI, all_requirements: list[dict], stories: list[dict]
+    client: OpenAI,
+    all_requirements: list[dict],
+    stories: list[dict],
+    on_row=None,
 ) -> list[dict]:
     """Run per-requirement retrieve + assess concurrently at _CONCURRENCY.
 
@@ -600,7 +603,24 @@ async def _fan_out_assessments(
     (assess raise) and Mode 2 (retrieve None) per-call inside
     `_assess_one_with_index` rather than using
     `return_exceptions=True` here, so the only exceptions still
-    reaching this loop are Mode 4 (retrieve raise) and cancellation."""
+    reaching this loop are Mode 4 (retrieve raise) and cancellation.
+
+    MATTGPT-245 phase two: `on_row(index, assessment)` is an optional
+    per-completion callback. Fires in completion order (whichever task
+    finished, whatever order that is) with the SUBMISSION index and
+    the full assessment dict. The Role Match UI passes a closure that
+    writes into a per-requirement st.empty() slot for progressive
+    row-fill; the service stays Streamlit-free by taking a plain
+    Python callable. Return value is unchanged whether on_row is
+    provided or omitted -- the callback is a side channel, not a
+    replacement (test 6 in TestFanOutOnRowCallback pins this).
+
+    Mode 1 and Mode 2 unassessed rows fire the callback like any
+    other completion (tests 4 and 5) -- otherwise the corresponding
+    UI slot would stay in the pending state indefinitely. An
+    exception raised inside on_row propagates through the loop and
+    into the BaseException cancel-and-drain handler; the UI callback
+    is expected to be a simple slot write and not raise."""
     semaphore = asyncio.Semaphore(_CONCURRENCY)
     tasks = [
         asyncio.create_task(_assess_one_with_index(i, semaphore, client, req, stories))
@@ -612,6 +632,8 @@ async def _fan_out_assessments(
         for done in asyncio.as_completed(tasks):
             index, assessment = await done
             results_by_index[index] = assessment
+            if on_row is not None:
+                on_row(index, assessment)
     except BaseException:
         # MATTGPT-243 + MATTGPT-248 Cycle 2: three things worth naming
         # at this raise site.

@@ -1005,10 +1005,22 @@ def _render_location_block_share_text(cells: list[tuple[str, str, str]]) -> str:
 
 def _render_pending_row_html(requirement_text: str) -> str:
     """MATTGPT-245 phase two: pending-state HTML for one requirement
-    slot. Green implements the hollow-ring + text markup; Red is a
-    stub so tests/unit/test_role_match_pending_row.py fails on the
-    call, not on an AttributeError."""
-    raise NotImplementedError
+    slot. Each per-requirement st.empty() is seeded with this HTML
+    before the fan-out starts; the on_row callback overwrites the
+    slot with the finished-row HTML as each assessment completes.
+
+    Emits a hollow purple ring (CSS-styled via .role-match-pending-ring
+    to match the resolved status-badge footprint, so nothing shifts
+    when the ring resolves to a badge) beside the requirement text.
+    Deliberately omits .role-match-status-badge, evidence chips, and
+    the U+22EF ellipsis glyph -- pending must be visually distinct
+    from the unassessed terminal state (tests 8a and 8b guard this)."""
+    return (
+        '<div class="role-match-pending-row">'
+        '<span class="role-match-pending-ring"></span>'
+        f'<span class="role-match-pending-text">{html.escape(requirement_text)}</span>'
+        "</div>"
+    )
 
 
 def _render_location_block_html(cells: list[tuple[str, str, str]]) -> str:
@@ -1404,16 +1416,48 @@ def _build_export_html(result_payload: dict, profile: dict | None = None) -> str
     """
 
 
-def _render_results_header(result_payload: dict) -> None:
+def _render_results_header(result_payload: dict, include_actions: bool = True) -> None:
     """Render the results header bar: extracted role title + action buttons.
 
     The header is a flex container with the role title on the left and the
     shared Helpful / Share / Export buttons on the right (per story_detail
     pattern). Buttons appear only when there is a result to act on.
+
+    MATTGPT-245 phase two: `include_actions` gates the three action
+    buttons (Helpful, Share, Export). The interleaved submit path calls
+    this with include_actions=False during the pre-fanout render because
+    (a) results is an empty placeholder at that point, so share/export
+    would produce truncated output, and (b) clicking any of the three
+    triggers a Streamlit rerun that abandons the running fan-out. Same
+    guard shape as Clear/Submit/textarea. Post-rerun the stable render
+    via _render_results_panel uses the default (include_actions=True)
+    and the buttons behave normally.
     """
     extraction = result_payload.get("extraction") or {}
     role = html.escape(extraction.get("role_title") or "Untitled Role")
     company = html.escape(extraction.get("company") or "")
+
+    company_html = (
+        f'<div class="role-match-results-company">{company}</div>' if company else ""
+    )
+
+    if not include_actions:
+        # Pre-fanout render: title only, no buttons, no handlers.
+        # An accidental click on Share/Export/Helpful during the ~20s
+        # fan-out would trigger a rerun that abandons the running
+        # assessment and leaves the panel with half its rings unfilled.
+        st.markdown(
+            f"""
+            <div class="role-match-results-header">
+                <div class="role-match-results-title-section">
+                    <div class="role-match-results-title">{role}</div>
+                    {company_html}
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        return
 
     # Stable per-assessment id so the helpful-confirmed flag resets on a new
     # assessment. id() is stable for the lifetime of the dict in session_state.
@@ -1426,9 +1470,6 @@ def _render_results_header(result_payload: dict) -> None:
         is_helpful_confirmed=is_helpful_confirmed,
     )
 
-    company_html = (
-        f'<div class="role-match-results-company">{company}</div>' if company else ""
-    )
     st.markdown(
         f"""
         <div class="role-match-results-header">
@@ -1452,6 +1493,105 @@ def _render_results_header(result_payload: dict) -> None:
         confirmed_key=confirmed_key,
         feedback_msg_hash=assessment_id % 100000,
         context="role_match",
+    )
+
+
+def _build_legend_screen_html() -> str:
+    """MATTGPT-245 phase two: legend markup as a pure string, no
+    Streamlit calls. Extracted from _render_results_panel so the
+    interleaved submit path (pre-fanout render) and the stable
+    _render_results_panel (post-rerun render) share one source.
+
+    IMPORTANT: inline styles are load-bearing (not class selectors).
+    An earlier class-based version rendered stacked vertically because
+    Streamlit's markdown parser broke the inline-flex layout. Inline
+    styles bypass the parser entirely."""
+    return (
+        '<div class="role-match-legend" '
+        'style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;'
+        "padding:10px 14px;background:var(--bg-card);"
+        "border:1px solid var(--border-color);border-radius:10px;"
+        'margin-bottom:14px;font-size:11px;color:var(--text-secondary);">'
+        + "".join(_legend_entries(surface="screen"))
+        + "</div>"
+    )
+
+
+def _build_summary_screen_html(result_payload: dict) -> str:
+    """MATTGPT-245 phase two: SUMMARY block markup as a pure string,
+    no Streamlit calls. Extracted from _render_results_panel so the
+    interleaved submit path (post-fanout render) and the stable
+    _render_results_panel share one source. Handles the same three
+    inputs as the inline version: counts (via compute_summary_counts),
+    incomplete notice, and discussion points."""
+    results = result_payload.get("results") or []
+    _counts = compute_summary_counts(results)
+    _points = build_discussion_points(results)
+    _rc = _counts["required"]
+    _pc = _counts["preferred"]
+
+    _req_spans = _count_spans(_rc)
+    _pref_spans = _count_spans(_pc)
+    _section_parts = []
+    if _req_spans:
+        _section_parts.append(f"Required:&nbsp;{_req_spans}")
+    if _pref_spans:
+        _section_parts.append(f"Preferred:&nbsp;{_pref_spans}")
+    _counts_line = (
+        '<div class="role-match-summary-counts"'
+        ' style="font-size:13px;color:var(--text-secondary);margin:6px 0 10px 0;">'
+        + "&nbsp;&nbsp;|&nbsp;&nbsp;".join(_section_parts)
+        + "</div>"
+    )
+
+    _notice = _incomplete_notice_text(_counts, len(results), surface="screen")
+    _notice_html = (
+        f'<div style="font-size:12px;color:var(--text-secondary);'
+        f'margin:0 0 8px 0;">{html.escape(_notice)}</div>'
+        if _notice
+        else ""
+    )
+
+    _dp_count = sum(
+        1
+        for p in _points
+        if not p.get("is_overflow_indicator") and not p.get("is_zero_case")
+    )
+    _point_items = _dp_lines(_points, surface="screen")
+    _dp_html = (
+        f'<div style="font-size:12px;font-weight:600;'
+        f'color:var(--text-secondary);margin:8px 0 4px 0;">'
+        f"Discussion points ({_dp_count})</div>"
+        f'<ul style="margin:0;padding:0;font-size:13px;'
+        f'color:var(--text-primary);">{"".join(_point_items)}</ul>'
+        if _point_items
+        else ""
+    )
+    return (
+        '<div class="role-match-summary"'
+        ' style="background:var(--bg-card);border:1px solid var(--border-color);'
+        'border-radius:10px;padding:12px 16px;margin-bottom:14px;">'
+        '<div style="font-size:11px;font-weight:700;text-transform:uppercase;'
+        'letter-spacing:0.08em;color:var(--text-secondary);margin-bottom:6px;">SUMMARY</div>'
+        + _notice_html
+        + _counts_line
+        + _dp_html
+        + "</div>"
+    )
+
+
+def _build_location_screen_html_with_style() -> str:
+    """MATTGPT-245 phase two: Location & Availability block markup
+    (with the shared _LOCATION_BLOCK_CSS style block prefix) as a
+    pure string. Extracted so the interleaved submit path and the
+    stable _render_results_panel share one source. Returns empty
+    string when the profile has no logistics cells."""
+    _location_cells = _iter_location_cells(_load_matt_profile_dict())
+    _location_block_html = _render_location_block_html(_location_cells)
+    return (
+        f"<style>{_LOCATION_BLOCK_CSS}</style>{_location_block_html}"
+        if _location_block_html
+        else ""
     )
 
 
@@ -1483,98 +1623,22 @@ def _render_results_panel(result_payload: dict, stories: list[dict]) -> None:
     # Header bar with role title + action buttons (Helpful / Share / Export)
     _render_results_header(result_payload)
 
-    # Legend bar — sits between the results header and the first section
-    # header, gives the recruiter a key to the badges and chip affordances
-    # (✓ ~ ✗ status, 🔗 = clickable story, ● = profile evidence).
-    #
-    # IMPORTANT: rendered with INLINE styles, not class selectors. An
-    # earlier class-based version rendered stacked vertically because
-    # Streamlit's markdown parser broke the inline-flex layout. Inline
-    # styles bypass the parser entirely.
-    legend_html = (
-        '<div class="role-match-legend" '
-        'style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;'
-        "padding:10px 14px;background:var(--bg-card);"
-        "border:1px solid var(--border-color);border-radius:10px;"
-        'margin-bottom:14px;font-size:11px;color:var(--text-secondary);">'
-        + "".join(_legend_entries(surface="screen"))
-        + "</div>"
-    )
-    st.markdown(legend_html, unsafe_allow_html=True)
-
-    # Summary block — counts line + discussion points, between legend and sections.su
-    _counts = compute_summary_counts(results)
-    _points = build_discussion_points(results)
-    _rc = _counts["required"]
-    _pc = _counts["preferred"]
-
-    _req_spans = _count_spans(_rc)
-    _pref_spans = _count_spans(_pc)
-    _section_parts = []
-    if _req_spans:
-        _section_parts.append(f"Required:&nbsp;{_req_spans}")
-    if _pref_spans:
-        _section_parts.append(f"Preferred:&nbsp;{_pref_spans}")
-    _counts_line = (
-        '<div class="role-match-summary-counts"'
-        ' style="font-size:13px;color:var(--text-secondary);margin:6px 0 10px 0;">'
-        + "&nbsp;&nbsp;|&nbsp;&nbsp;".join(_section_parts)
-        + "</div>"
-    )
-
-    # MATTGPT-248: the notice sits above the count line because under
-    # branch 4 -- every row unassessed, so no honest discussion points
-    # exist -- it is the only visible signal that the assessment is
-    # incomplete. Screen takes the action clause; the two off-screen
-    # surfaces do not, because their readers cannot retry.
-    _notice = _incomplete_notice_text(_counts, len(results), surface="screen")
-    _notice_html = (
-        f'<div style="font-size:12px;color:var(--text-secondary);'
-        f'margin:0 0 8px 0;">{html.escape(_notice)}</div>'
-        if _notice
-        else ""
-    )
-
-    _dp_count = sum(
-        1
-        for p in _points
-        if not p.get("is_overflow_indicator") and not p.get("is_zero_case")
-    )
-    _point_items = _dp_lines(_points, surface="screen")
-    _dp_html = (
-        f'<div style="font-size:12px;font-weight:600;'
-        f'color:var(--text-secondary);margin:8px 0 4px 0;">'
-        f"Discussion points ({_dp_count})</div>"
-        f'<ul style="margin:0;padding:0;font-size:13px;'
-        f'color:var(--text-primary);">{"".join(_point_items)}</ul>'
-        if _point_items
-        else ""
-    )
-    _summary_html = (
-        '<div class="role-match-summary"'
-        ' style="background:var(--bg-card);border:1px solid var(--border-color);'
-        'border-radius:10px;padding:12px 16px;margin-bottom:14px;">'
-        '<div style="font-size:11px;font-weight:700;text-transform:uppercase;'
-        'letter-spacing:0.08em;color:var(--text-secondary);margin-bottom:6px;">SUMMARY</div>'
-        + _notice_html
-        + _counts_line
-        + _dp_html
-        + "</div>"
-    )
+    # MATTGPT-245 phase two: legend markup extracted into
+    # _build_legend_screen_html so the interleaved submit path (pre-fanout
+    # render) and this stable render share one source. Behavior identical
+    # to the previous inline version.
+    st.markdown(_build_legend_screen_html(), unsafe_allow_html=True)
 
     # MATTGPT-089: Location & Availability block above SUMMARY. Style +
     # block concatenated into the same st.markdown call as _summary_html
     # so total call count is unchanged (screen layout tuning depends on
-    # it, per CLAUDE.md).
-    _location_cells = _iter_location_cells(_load_matt_profile_dict())
-    _location_block_html = _render_location_block_html(_location_cells)
-    _location_screen_html = (
-        f"<style>{_LOCATION_BLOCK_CSS}</style>{_location_block_html}"
-        if _location_block_html
-        else ""
+    # it, per CLAUDE.md). Both extracted into helpers (MATTGPT-245 phase
+    # two) so the interleaved submit path can share them.
+    st.markdown(
+        _build_location_screen_html_with_style()
+        + _build_summary_screen_html(result_payload),
+        unsafe_allow_html=True,
     )
-
-    st.markdown(_location_screen_html + _summary_html, unsafe_allow_html=True)
 
     # Hint text lives in the LEFT column above the textarea (rendered in
     # render_role_match), NOT in the right column above the results panel.
@@ -2125,6 +2189,45 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
     margin-top: 2px;
 }
 
+/* MATTGPT-245 phase two — pending row for the per-requirement st.empty()
+   slot seeded before the fan-out. Hollow purple ring in the exact
+   footprint of the resolved status badge (22px, same margin-top, same
+   flex behavior) so nothing shifts when the on_row callback overwrites
+   the slot with the finished-row markup. Deliberately not sharing the
+   .role-match-status-badge selector -- pending is a distinct visual
+   state, not a badge variant. Text uses --text-secondary (dimmer than
+   the resolved --text-primary) as an intensity signal only -- no
+   font-style change, so the only visual transition on resolve is the
+   ring filling to a colored badge. */
+.role-match-pending-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 4px 0;
+}
+@keyframes rmpr-pulse {
+    0%, 100% { opacity: 0.35; }
+    50%      { opacity: 1; }
+}
+.role-match-pending-ring {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: transparent;
+    border: 2px solid var(--accent-purple, #8B5CF6);
+    box-sizing: border-box;
+    margin-top: 1px;
+    animation: rmpr-pulse 1.4s infinite ease-in-out;
+}
+.role-match-pending-text {
+    flex: 1;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    margin-top: 2px;
+}
+
 /* Evidence row — st.container(key="role_match_evidence_X") wraps every
    chip for a given requirement. We turn the container into a horizontal
    flex-wrap row and force its inner stElementContainers to size to
@@ -2539,29 +2642,135 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
                 # computed after _render_results_panel returns below.
                 _click_start = time.perf_counter()
 
-                # MATTGPT-245: mount="inline" renders the indicator in the
-                # results column in normal flow -- no fixed-position
-                # overlay, no scrim. Clear + Submit disabled= guards
-                # (wired above) replace the scrim's incidental
-                # click-blocking. Ask Agy / Explore Stories still use the
-                # overlay default.
+                # MATTGPT-245 phase two: interleaved sequence replaces the
+                # single blocking run_assessment call. Extraction runs
+                # under the in-flow indicator; when it returns, the
+                # indicator disappears and header + legend + Location +
+                # N pending rows render. Fan-out then fills each slot in
+                # place via the on_row callback. Post-fanout summary +
+                # discussion render below the rows. All transient --
+                # post-success rerun (below) redraws the full stable
+                # panel via _render_results_panel.
                 loading_container = st.empty()
                 with loading_container:
                     render_thinking_indicator(mount="inline")
-                # Height anchor: render_thinking_indicator() is fixed-position and
-                # contributes no flow height. Without this, the right column collapses
-                # to near-zero during the blocking LLM call, floating the footer up.
-                # Must be rendered BEFORE run_assessment() blocks so it's in the DOM
-                # during the call (Streamlit renders incrementally).
+                # Height anchor kept from phase one for the brief window
+                # between extraction return and pending-row render.
+                # Rendered BEFORE the blocking extract_requirements call
+                # so it's in the DOM (Streamlit renders incrementally).
                 height_anchor = st.empty()
                 height_anchor.markdown(
                     '<div style="min-height:400px;"></div>',
                     unsafe_allow_html=True,
                 )
                 try:
-                    from services.jd_assessor import run_assessment
+                    import asyncio as _asyncio
 
-                    result = run_assessment(jd_text, stories)
+                    from services.jd_assessor import (
+                        _fan_out_assessments,
+                        _get_openai_client,
+                        extract_requirements,
+                    )
+
+                    # Stage 1: extraction (indicator visible during this).
+                    _client = _get_openai_client()
+                    _extraction = extract_requirements(_client, jd_text)
+
+                    # Flatten to submission-ordered requirement list. Same
+                    # three-block order as run_assessment (required +
+                    # preferred + implicit-to-required) so a shared
+                    # invariant holds across both call paths.
+                    _all_requirements = []
+                    for _r in _extraction.get("required_qualifications", []) or []:
+                        _all_requirements.append(
+                            {"text": _r["requirement"], "category": "required"}
+                        )
+                    for _r in _extraction.get("preferred_qualifications", []) or []:
+                        _all_requirements.append(
+                            {"text": _r["requirement"], "category": "preferred"}
+                        )
+                    for _r in _extraction.get("implicit_requirements", []) or []:
+                        _all_requirements.append(
+                            {"text": _r["requirement"], "category": "required"}
+                        )
+
+                    # Hide indicator + height anchor; pending rows now
+                    # provide real flow content.
+                    loading_container.empty()
+                    height_anchor.empty()
+
+                    # Pre-fanout render: header + legend + Location.
+                    # include_actions=False so Helpful/Share/Export don't
+                    # render during the fan-out -- any click on those
+                    # buttons triggers a Streamlit rerun that abandons
+                    # the running assessment and leaves the panel with
+                    # half its rings unfilled. The post-success rerun
+                    # redraws the header via _render_results_panel (which
+                    # uses the default include_actions=True) so the
+                    # actions come back on the stable render.
+                    _placeholder_payload = {
+                        "extraction": _extraction,
+                        "results": [],
+                    }
+                    _render_results_header(_placeholder_payload, include_actions=False)
+                    st.markdown(_build_legend_screen_html(), unsafe_allow_html=True)
+                    st.markdown(
+                        _build_location_screen_html_with_style(),
+                        unsafe_allow_html=True,
+                    )
+
+                    # Create per-requirement st.empty() slots, seeded
+                    # with the pending-state HTML (hollow ring + text).
+                    _slots = []
+                    for _req in _all_requirements:
+                        _slot = st.empty()
+                        with _slot:
+                            st.markdown(
+                                _render_pending_row_html(_req["text"]),
+                                unsafe_allow_html=True,
+                            )
+                        _slots.append(_slot)
+
+                    # on_row closure: minimal in-slot render (badge +
+                    # text only). Evidence chips and gap explanation
+                    # come back on the post-success rerun when
+                    # _render_results_panel takes over -- putting
+                    # st.button-based chips inside a mid-fanout slot is
+                    # untested territory and this isn't the moment to
+                    # find out. Uses html.escape on the requirement text
+                    # for the same reason _render_pending_row_html does.
+                    def _on_row(idx, assessment):
+                        _status = _normalize_row_status(assessment)
+                        _icon = _STATUS_ICON[_status]
+                        _req_html = html.escape(assessment.get("requirement", ""))
+                        _slots[idx].empty()
+                        with _slots[idx]:
+                            st.markdown(
+                                f'<div class="role-match-req-title-row">'
+                                f'<div class="role-match-status-badge '
+                                f'{_status}">{_icon}</div>'
+                                f'<span class="role-match-req-title">'
+                                f"{_req_html}</span></div>",
+                                unsafe_allow_html=True,
+                            )
+
+                    # Stages 2+3: fan-out with per-completion callback.
+                    _match_results = _asyncio.run(
+                        _fan_out_assessments(
+                            _client,
+                            _all_requirements,
+                            stories,
+                            on_row=_on_row,
+                        )
+                    )
+
+                    # Post-fanout: build result, persist to session
+                    # state (same keys as before), render summary +
+                    # discussion below the filled rows.
+                    result = {
+                        "extraction": _extraction,
+                        "results": _match_results,
+                    }
                     st.session_state["role_match_result"] = result
                     st.session_state["role_match_matched_jd"] = jd_text.strip()
                     # Persist the JD text in a NON-widget session key so
@@ -2575,6 +2784,11 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
                     # to populated results, a confusing inconsistency.
                     st.session_state["role_match_jd_persisted"] = jd_text
                     st.session_state.pop("role_match_error", None)
+
+                    st.markdown(
+                        _build_summary_screen_html(result),
+                        unsafe_allow_html=True,
+                    )
                 except Exception as e:  # noqa: BLE001
                     # MATTGPT-240: distinguish retryable from not in the
                     # UI copy; log with error-class granularity. str(e)
