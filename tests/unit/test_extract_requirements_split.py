@@ -349,14 +349,20 @@ class TestExtractRequirementsSplit:
             f"corrupt the Apply/Consider/Pass recommendation math."
         )
 
-    def test_schema_omits_unused_key_responsibilities_and_seniority_signals(self):
-        """`key_responsibilities` and `seniority_signals` appear in the
-        current JD_EXTRACTION_PROMPT schema block (lines 63-64) but are
-        read nowhere in `services/` or `ui/` (grep-confirmed September
-        2026). Generating output nothing reads is directly against the
-        count-stability mechanism this ticket targets. None of the
-        three split prompts may mention either field in its JSON
-        schema."""
+    def test_schema_omits_unused_seniority_signals(self):
+        """`seniority_signals` appears in the pre-split JD_EXTRACTION_PROMPT
+        schema but has no design intent recorded anywhere -- not in the
+        origin commit (c64bd3a, 'JD extraction prompt v1', March 2026),
+        not in ADR 016 (which names four planned extraction outputs:
+        required, preferred, responsibilities, implicit signals), and
+        not in chat history. Triple-negative for a field that is also
+        unused downstream. Split prompts drop it.
+
+        `key_responsibilities` is deliberately NOT asserted absent
+        here -- it maps to ADR 016's `responsibilities` planned output
+        and is preserved in `_REQUIRED_EXTRACTION_PROMPT` for the -012
+        Phase 4 private overlay work, where its consumption path is
+        an open design decision."""
         client = _make_client(_routing_side_effect())
         jd_assessor.extract_requirements(client, "fake JD text")
 
@@ -364,13 +370,9 @@ class TestExtractRequirementsSplit:
         system_prompts = [c.kwargs["messages"][0]["content"] for c in calls]
         combined = "\n".join(system_prompts)
 
-        assert "key_responsibilities" not in combined, (
-            "key_responsibilities is unused downstream; it must not "
-            "appear in any of the three split prompts' schemas. "
-            "Someone re-added it during a prompt edit."
-        )
         assert "seniority_signals" not in combined, (
-            "seniority_signals is unused downstream; it must not appear "
-            "in any of the three split prompts' schemas. Someone "
-            "re-added it during a prompt edit."
+            "seniority_signals has no design intent recorded (commit "
+            "c64bd3a, ADR 016, chat history all silent) and is unused "
+            "downstream. It must not appear in any of the three split "
+            "prompts' schemas."
         )

@@ -31,6 +31,14 @@ logger = logging.getLogger(__name__)
 # Validated against 4 JD formats: structured, narrative, hybrid, mixed.
 # See tests/jd_extraction_test.py for validation results.
 
+# MATTGPT-160: Retained as the pre-split reference prompt so historical
+# probes that measured against it (probe_159a_extraction.py,
+# probe_159b_evidence.py, probe_159_long_context.py,
+# probe_159d_parallel.py) remain runnable for before/after comparisons.
+# Production extraction no longer uses this constant; see
+# _REQUIRED_EXTRACTION_PROMPT / _PREFERRED_EXTRACTION_PROMPT /
+# _IMPLICIT_EXTRACTION_PROMPT below and the two-wave extract_requirements
+# implementation.
 JD_EXTRACTION_PROMPT = """You are analyzing a job description to extract structured requirements for a candidate fit assessment.
 
 Extract the following as JSON:
@@ -97,6 +105,153 @@ Rules:
 - Do not invent requirements -- only extract what is stated or clearly implied
 - Keep source_text short -- just enough to verify the extraction
 - Output valid JSON only, no preamble"""
+
+
+# =============================================================================
+# SPLIT EXTRACTION PROMPTS -- MATTGPT-160
+# =============================================================================
+# Three section-scoped prompts, one per output section. Each carries a
+# `=== SECTION: <name> ===` marker line so test dispatchers can identify
+# which call is which without relying on schema-key substrings (the
+# implicit prompt legitimately mentions the other sections when
+# describing its wave-1 context, so a schema-key classifier would
+# misclassify it).
+#
+# key_responsibilities and seniority_signals from the pre-split schema
+# are intentionally omitted: nothing in services/ or ui/ reads them
+# (grep-confirmed September 2026), and generating output nothing reads
+# is directly against the count-stability mechanism this split targets.
+
+
+_REQUIRED_EXTRACTION_PROMPT = """=== SECTION: required ===
+
+You are analyzing a job description to extract the required qualifications and JD-level metadata for a candidate fit assessment.
+
+Extract the following as JSON:
+
+{
+  "role_title": "string",
+  "company": "string",
+  "jd_format": "narrative | bulleted | hybrid",
+  "required_qualifications": [
+    {
+      "requirement": "normalized requirement statement",
+      "source_text": "original text from JD",
+      "type": "experience | skill | education | domain"
+    }
+  ],
+  "key_responsibilities": ["string"]
+}
+
+Rules:
+- Extract company name from anywhere in the full JD text including company description and closing sections. If truly undisclosed, use "Undisclosed".
+- Populate `key_responsibilities` with the JD's stated responsibilities (what the role does, not what the candidate must have). One item per distinct responsibility. Empty list if none are stated.
+- Normalize requirements into clear, testable statements.
+- Keep source_text short -- just enough to verify the extraction.
+- Do not invent requirements -- only extract what is stated or clearly implied.
+- DO NOT extract logistics as requirements: location, work mode (onsite/remote/hybrid), salary, visa, interview process, start date. These are filters, not capability fit signals.
+
+Classify the JD format FIRST:
+- Is there an explicit "Required:" or "Requirements:" section header followed by bullets? Is there a "Preferred:" or "Nice to have:" section?
+- If YES, this is a bulleted JD -- follow the bullet structure rules.
+- If NO, this is a narrative JD -- mine the body paragraphs aggressively.
+- Hybrid JDs (some bullets, some prose body content) should mine both.
+
+If no Required/Preferred split exists, classify based on language signals -- "must have", "required", "proven" = required.
+
+HANDLE NARRATIVE JDs: Many job descriptions are written as prose without explicit "Required:" or "Preferred:" sections. For these JDs, you MUST mine the body paragraphs for requirements. Do not stop at 2-3 explicit "must have" sentences -- a narrative JD with substantial body content should produce 5-12 requirements just like a bulleted JD would.
+
+MINE BODY PARAGRAPHS for these signal categories and extract each as a requirement:
+- Team scope: team size, team composition (e.g. "lead a team of 40 across AI, ML, data science") -> "Experience leading teams of N+ across X disciplines"
+- Technical scope: what they're building (e.g. "production-grade systems around large language models") -> "Experience building production-grade LLM systems"
+- Ownership level: strategy / architecture / hands-on / all-of-above -> "Experience owning strategy, architecture, AND hands-on delivery"
+- Stakeholder environment: who they partner with (e.g. "senior stakeholders who care deeply about ROI") -> "Experience partnering with senior business stakeholders on ROI-driven outcomes"
+- Domain context: industry, scale, regulatory environment (e.g. "asset management, trillions in AUM") -> "Experience in financial services / asset management at scale"
+- Specific responsibilities: incubation, transformation, modernization, scaling -> one requirement per distinct capability
+
+TARGET COUNT FOR NARRATIVE JDs: A pure narrative JD (no Required/Preferred sections, content delivered as prose paragraphs) with substantial body content should produce 5-12 requirements via prose mining. Below 5 means you missed signals in the body paragraphs -- go back and mine more. The 12 ceiling exists to prevent fragmentation -- consolidate related signals into thematic requirements rather than producing 25 atomic micro-requirements.
+
+BULLETED JDs HAVE NO ARTIFICIAL CAP: When the JD has an explicit Required: section with bullet lists, follow the bullet structure. Consolidate bullets into thematic requirements when they describe related capabilities (e.g. three separate bullets about "delivery", "on-time", "within budget" become one "delivery accountability" requirement), but do NOT artificially cap the count to fit a 5-12 range. A bulleted JD with 15 legitimately distinct required items should produce 15.
+
+PROTECT EXPLICIT REQUIRED BULLETS: When the JD has an explicit Required: section with bullets, EVERY bullet in that section MUST be extracted as a requirement in `required_qualifications`. Do not drop, omit, or reword-away explicit Required bullets even when body content covers similar themes. The body-mining rules ADD to the explicit Required list -- they NEVER replace or remove from it. Dropping an explicit Required bullet because "the body covers it" is a violation of this rule.
+
+For narrative JDs, place mined requirements in `required_qualifications`. For hybrid JDs that have BOTH a clear Required section AND prose body content, place explicit-bullet items in `required_qualifications` -- the separate implicit extraction call will handle body-mined items in that case.
+
+Output valid JSON only, no preamble."""
+
+
+_PREFERRED_EXTRACTION_PROMPT = """=== SECTION: preferred ===
+
+You are analyzing a job description to extract the preferred qualifications for a candidate fit assessment.
+
+Extract the following as JSON:
+
+{
+  "preferred_qualifications": [
+    {
+      "requirement": "normalized requirement statement",
+      "source_text": "original text from JD",
+      "type": "experience | skill | education | domain"
+    }
+  ]
+}
+
+Rules:
+- Normalize requirements into clear, testable statements.
+- Keep source_text short -- just enough to verify the extraction.
+- Do not invent requirements -- only extract what is stated or clearly implied.
+- DO NOT extract logistics as requirements: location, work mode (onsite/remote/hybrid), salary, visa, interview process, start date.
+
+If no Required/Preferred split exists, classify based on language signals -- "plus", "preferred", "ideal", "nice to have" = preferred.
+
+PROTECT EXPLICIT PREFERRED BULLETS: When the JD has an explicit Preferred: (or "Nice to have:") section with bullets, EVERY bullet in that section MUST be extracted as a requirement in `preferred_qualifications`. Do not drop, omit, or reword-away explicit Preferred bullets even when body content covers similar themes.
+
+BULLETED JDs HAVE NO ARTIFICIAL CAP: When the JD has an explicit Preferred section, follow the bullet structure. Consolidate related bullets into thematic requirements but do NOT artificially cap the count.
+
+If the JD has no Preferred section and no "plus / nice to have / ideal" language, return an empty list. Do not fabricate preferred qualifications where none exist.
+
+Output valid JSON only, no preamble."""
+
+
+_IMPLICIT_EXTRACTION_PROMPT = """=== SECTION: implicit ===
+
+You are analyzing a job description to extract implicit requirements -- capabilities inferred from responsibilities that no explicit required or preferred qualification already covers.
+
+You will receive:
+- The full job description
+- The list of already-extracted required qualifications
+- The list of already-extracted preferred qualifications
+
+Extract implicit requirements as JSON:
+
+{
+  "implicit_requirements": [
+    {
+      "requirement": "inferred requirement",
+      "inferred_from": "what text led to this inference",
+      "confidence": "high | medium | low"
+    }
+  ]
+}
+
+Rules:
+- Extract implicit requirements from responsibilities when no explicit qualification already covers them. If a responsibility maps to an already-extracted required or preferred item, DO NOT re-extract it as implicit -- the dedup happens here at extraction time.
+- Do not invent requirements -- only extract what is stated or clearly implied.
+- DO NOT extract logistics as requirements: location, work mode (onsite/remote/hybrid), salary, visa, interview process, start date.
+
+When to produce implicit requirements:
+- Hybrid JDs with BOTH an explicit Required section AND substantive body content: body-mined items that aren't already in the explicit lists go here.
+- Pure structured JDs with only bullet lists: usually produces an empty list; the bullets are the requirements.
+- Pure narrative JDs: usually produces an empty list because the narrative body was already mined directly into the required list.
+
+confidence:
+- high: the responsibility text directly implies the requirement.
+- medium: the requirement is a reasonable inference from context.
+- low: the requirement is possible but not clearly indicated.
+
+If there are no implicit requirements to add beyond what's already extracted, return an empty list. Do not force items into implicit that duplicate the explicit lists.
+
+Output valid JSON only, no preamble."""
 
 # =============================================================================
 # JD ASSESSMENT PROMPT
@@ -225,20 +380,157 @@ def _get_openai_client() -> OpenAI:
 
 
 def extract_requirements(client: OpenAI, jd_text: str) -> dict:
-    """Stage 1 — extract structured requirements from a job description.
+    """Stage 1 -- extract structured requirements from a job description
+    as a two-wave split.
 
-    Returns the parsed JSON object produced by JD_EXTRACTION_PROMPT.
+    Wave 1: required + preferred concurrently via asyncio.gather.
+    Wave 2: implicit, seeded with wave 1 output in its user message so
+    the LLM's dedup rule ("extract implicit requirements from
+    responsibilities when no explicit qualification covers them") has
+    the explicit lists to evaluate against.
+
+    The split reduces requirement-count variance on long JDs; the
+    driver of remaining variance has not been isolated by measurement,
+    only characterized as summarization on dense multi-item bullets
+    that is uncorrelated with input or output length in what's been
+    measured.
+
+    Section-failure semantics: any of the three calls raising raises
+    out of this function. asyncio.gather without return_exceptions
+    propagates wave 1 failures before wave 2 fires. Partial degradation
+    is rejected because a missing section shrinks the recommendation-
+    math denominator silently.
+
+    Returns a dict with required_qualifications, preferred_qualifications,
+    implicit_requirements, key_responsibilities, role_title, company,
+    and jd_format. Return shape is compatible with the pre-split
+    implementation.
     """
+    return asyncio.run(_extract_all_sections(client, jd_text))
+
+
+async def _extract_all_sections(client: OpenAI, jd_text: str) -> dict:
+    """Two-wave orchestration for extract_requirements. Wave 1's tasks
+    are created explicitly and drained via return_exceptions=True
+    after a failure so any completed-but-unretrieved sibling exception
+    is consumed rather than left dangling (dangling exceptions print
+    'Task exception was never retrieved' to stderr and would trip
+    -222's operational alarms). Same shape as _fan_out_assessments'
+    BaseException handler.
+
+    task.cancel() before the drain is a best-effort at the async
+    layer; it does NOT abort an in-flight to_thread HTTP request
+    because Python threads aren't cancellable from the outside. If
+    the sibling call is already inside client.chat.completions.create
+    when cancel() fires, that HTTP request runs to completion and its
+    result is discarded. The drain (return_exceptions=True gather) is
+    the load-bearing part; the cancel just avoids scheduling more
+    work at the async layer if the coroutine hasn't started its
+    to_thread call yet."""
+    required_task = asyncio.create_task(
+        _to_thread_with_ctx(_call_required, client, jd_text)
+    )
+    preferred_task = asyncio.create_task(
+        _to_thread_with_ctx(_call_preferred, client, jd_text)
+    )
+    try:
+        required_result, preferred_result = await asyncio.gather(
+            required_task, preferred_task
+        )
+    except BaseException:
+        for task in (required_task, preferred_task):
+            if not task.done():
+                task.cancel()
+        await asyncio.gather(required_task, preferred_task, return_exceptions=True)
+        raise
+
+    # Wave 2 fires only after wave 1 succeeded. A wave-1 failure raises
+    # out of the gather above and this line is never reached, which is
+    # what test_wave_1_failure_prevents_wave_2_and_propagates pins.
+    implicit_result = await _to_thread_with_ctx(
+        _call_implicit, client, jd_text, required_result, preferred_result
+    )
+
+    return {
+        "role_title": required_result.get("role_title", ""),
+        "company": required_result.get("company", "Undisclosed"),
+        "jd_format": required_result.get("jd_format", ""),
+        "required_qualifications": required_result.get("required_qualifications", [])
+        or [],
+        "preferred_qualifications": preferred_result.get("preferred_qualifications", [])
+        or [],
+        "implicit_requirements": implicit_result.get("implicit_requirements", []) or [],
+        "key_responsibilities": required_result.get("key_responsibilities", []) or [],
+    }
+
+
+def _call_required(client: OpenAI, jd_text: str) -> dict:
+    """Wave 1 required-section call. Carries role_title, company,
+    jd_format metadata in addition to required_qualifications so a
+    fourth metadata-only call isn't needed."""
     response = client.chat.completions.create(
         model=ASSESSMENT_MODEL,
         messages=[
-            {"role": "system", "content": JD_EXTRACTION_PROMPT},
+            {"role": "system", "content": _REQUIRED_EXTRACTION_PROMPT},
             {"role": "user", "content": jd_text},
         ],
         temperature=ASSESSMENT_TEMPERATURE,
         response_format={"type": "json_object"},
     )
     return json.loads(response.choices[0].message.content)
+
+
+def _call_preferred(client: OpenAI, jd_text: str) -> dict:
+    """Wave 1 preferred-section call."""
+    response = client.chat.completions.create(
+        model=ASSESSMENT_MODEL,
+        messages=[
+            {"role": "system", "content": _PREFERRED_EXTRACTION_PROMPT},
+            {"role": "user", "content": jd_text},
+        ],
+        temperature=ASSESSMENT_TEMPERATURE,
+        response_format={"type": "json_object"},
+    )
+    return json.loads(response.choices[0].message.content)
+
+
+def _call_implicit(
+    client: OpenAI,
+    jd_text: str,
+    required_result: dict,
+    preferred_result: dict,
+) -> dict:
+    """Wave 2 implicit-section call. Wave 1's requirement text lands in
+    the user message so the LLM's dedup rule has the already-extracted
+    lists to evaluate against."""
+    user_message = (
+        f"Job description:\n{jd_text}\n\n"
+        f"Already-extracted qualifications (do not duplicate):\n"
+        f"{_format_already_extracted(required_result, preferred_result)}"
+    )
+    response = client.chat.completions.create(
+        model=ASSESSMENT_MODEL,
+        messages=[
+            {"role": "system", "content": _IMPLICIT_EXTRACTION_PROMPT},
+            {"role": "user", "content": user_message},
+        ],
+        temperature=ASSESSMENT_TEMPERATURE,
+        response_format={"type": "json_object"},
+    )
+    return json.loads(response.choices[0].message.content)
+
+
+def _format_already_extracted(required_result: dict, preferred_result: dict) -> str:
+    """Format wave 1 output as the 'already-extracted' block for the
+    implicit call's user message."""
+    lines = ["Required:"]
+    for r in required_result.get("required_qualifications", []) or []:
+        lines.append(f"- {r.get('requirement', '')}")
+    lines.append("")
+    lines.append("Preferred:")
+    for r in preferred_result.get("preferred_qualifications", []) or []:
+        lines.append(f"- {r.get('requirement', '')}")
+    return "\n".join(lines)
 
 
 def retrieve_stories(
