@@ -7,25 +7,23 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 ---
 
-## Value Prioritized Roadmap (updated 2026-09-18)
+## Value Prioritized Roadmap (updated 2026-09-20)
 
 **NOW**
-1. **-089** — Role Match: location, work model, availability. May 22 recruiter finding.
-2. **-245** — Role Match streaming. Acceptance: AT&T fixture, multiple visible waves between extraction complete and full-assessment render. Extraction sets a ~12s floor on first content; streaming moves first content from ~22s to ~12s, not to zero. Blockers cleared (-243 `8d37405`, -248 `43ca523`).
-3. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
-4. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
-5. **-160** — JD extraction rewrite: qualifier stripping, count variance, coverage miss. Three of the five over-called rows on the -244 audit are unfalsifiable until qualifiers are preserved; gates -244.
-6. **-244** — Role Match assessor calibration: three rows where cited evidence doesn't address the specific claim; `confidence` field deletion. Corpus audit September 2026: 22% strong, not 80%. -160 must land first. Land before -249 (see -249 ordering constraint).
-7. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
-8. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
-9. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
-10. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+1. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
+2. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
+3. **-160** — JD extraction: split into three concurrent calls (required / preferred / implicit) to stabilize requirement count on long JDs; gates -244.
+4. **-244** — Role Match assessor calibration: three rows where cited evidence doesn't address the specific claim; `confidence` field deletion. Corpus audit September 2026: 22% strong, not 80%. -160 must land first. Land before -249 (see -249 ordering constraint).
+5. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
+6. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
+7. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
+8. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT**
-11. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
-12. **-223** — Add router_score and router_family columns to Sheet query row; unblocks -239's floor threshold decision.
-13. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
-14. Rest of Role Match: -173, -014, -012, -081, -099, -017.
+9. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
+10. **-223** — Add router_score and router_family columns to Sheet query row; unblocks -239's floor threshold decision.
+11. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
+12. Rest of Role Match: -173, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
 -177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- see -249 ordering constraint)
