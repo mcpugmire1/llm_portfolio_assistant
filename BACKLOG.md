@@ -12,8 +12,8 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 **NOW**
 1. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
 2. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
-3. **-160** — JD extraction: split into three concurrent calls (required / preferred / implicit) to stabilize requirement count on long JDs; gates -244 rows 7 and 11.
-4. **-244** — Role Match assessor calibration: three rows where cited evidence doesn't address the specific claim; `confidence` field deletion. Corpus audit September 2026: 22% strong, not 80%. -160 must land first (rows 7 and 11 are unfalsifiable until qualifiers survive extraction). Land before -249 (see -249 ordering constraint).
+3. **-160** — JD extraction: split into three concurrent calls (required / preferred / implicit) to stabilize requirement count on long JDs. May incidentally preserve qualifiers on AT&T rows 7 and 11 -- unmeasured; probe determines this after the fix lands.
+4. **-244** — Role Match assessor calibration: cited evidence doesn't address the specific claim; `confidence` field deletion. Corpus audit September 2026: 22% strong, not 80%. -160 must land first; fixture count conditional on -160's after-measurement (3 fixtures if qualifiers preserved on rows 7 and 11, row 22 only if not). Land before -249 (see -249 ordering constraint).
 5. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
 6. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
 7. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
