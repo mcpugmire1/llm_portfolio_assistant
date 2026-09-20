@@ -1390,7 +1390,7 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 - **Type:** Issue
 - **File:** `services/jd_assessor.py` (assessment prompt)
 - **Logged:** September 2, 2026
-- **Dependencies:** MATTGPT-160 (must land first for rows 7 and 11). Row 11 ("React, Node.js, Go" cited with a Python/Streamlit story) is only demonstrable if those technologies survive extraction -- strip them to "Modern technology stack fluency" and a Python story is defensible evidence and the row isn't wrong. Same logic applies to row 7. Row 22 ("partnering with C-suite" cited with Build-Measure-Learn) has no qualifier dependency and is falsifiable today. Verdicts are deterministic at `ASSESSMENT_TEMPERATURE = 0.0` once the correct requirement text reaches the assessor.
+- **Dependencies:** MATTGPT-160 (must land first). Row 11 ("React, Node.js, Go" cited with a Python/Streamlit story) is only demonstrable if those technologies survive extraction -- strip them to "Modern technology stack fluency" and a Python story is defensible evidence and the row isn't wrong. Same for row 7. Row 22 ("partnering with C-suite" cited with Build-Measure-Learn) has no qualifier dependency and is falsifiable today. Fixture count is conditional on -160's probe results: if the split-by-section change incidentally preserves qualifiers on rows 7 and 11, all three fixtures are live; if not, -244 ships with row 22 only and qualifier preservation needs explicit work.
 
 **Finding (corpus-text audit, September 18, 2026, `probe_244_audit.py`):** 17 honest, 5 over-called, 1 borderline across 23 rows on the AT&T JD. 22% strong, not the ~80% figure from the earlier -159 probe output. The five over-called rows split into two shapes:
 
@@ -1499,11 +1499,13 @@ Full ranked 25 available from `probe_243_top_k_rank.py` (re-runnable against cur
 
 **Scope:** Split `extract_requirements()` into three concurrent calls, one per section -- required, preferred, implicit. Each call sees only its section. This stops requirement-count drop on long JDs, where a single call over-length input causes the model to drop items. The felt-wait improvement (parallel I/O instead of one sequential call) comes along as a consequence of the same change, not as a separate target.
 
-**Evidence (`probe_160_extraction_variance.py`, September 2026):** Six JDs, five extractions each. Count spread is 1-2 across the 242-706 word range. At 1113 words (AT&T fixture) the spread jumps to 4-7. Threshold effect near 1000 words -- not a gradual linear scaling. AT&T fixture identity confirmed: 32-39 across runs, matching earlier hand observations. This is the before-measurement; the same probe is the after-measurement.
+**Evidence (`probe_160_extraction_variance.py`, September 2026):** Six JDs, five extractions each. Count spread is 1-2 across the 242-706 word range. At 1113 words (AT&T fixture) the spread jumps to 4-7. Threshold effect near 1000 words -- not a gradual linear scaling. AT&T fixture identity confirmed: 32-39 across runs, matching earlier hand observations. This is the before-measurement; the after-measurement is AT&T alone at five runs (the probe takes a path argument -- running all six JDs again is unnecessary for after-check).
+
+**Open question gating MATTGPT-244:** The split-by-section change (fewer requirements per prompt, less compression pressure) may incidentally fix qualifier stripping on AT&T rows 7 and 11 -- not guaranteed, but worth measuring before -244 begins. Run the AT&T fixture through the after-measurement probe and inspect whether "React, Node.js, Go" and the row 7 qualifiers survive. If they do, -244 has three fixtures. If they don't, -244 narrows to row 22 (no qualifier dependency) and qualifier preservation needs explicit scope -- either here or a new ticket.
 
 **Out of scope (with reasoning -- do not re-derive):**
 
-- **Text paraphrase drift.** The extracted text of a given requirement varies across runs on the same JD. Real defect; not worth building. A recruiter runs the tool once and never observes run-to-run variance in text. The count problem is visible in the count display; text drift is invisible in normal use.
+- **Text paraphrase drift (as an explicit target).** The extracted text of a given requirement varies across runs on the same JD. Real defect; not worth building as a primary goal. A recruiter runs the tool once and never observes run-to-run variance in text. The count problem is visible in the count display; text drift is invisible in normal use. Note: if the split incidentally fixes it (see open question above), that's a benefit, not a scope change.
 - **Pending-vs-resolved disagreement.** Both surfaces (screen and export) now render the extraction text directly via the passthrough at `ab75192`. This disagreement is closed; no extraction change is needed to address it.
 
 **Rejected fixes (do not re-derive):**
@@ -1518,7 +1520,7 @@ Full ranked 25 available from `probe_243_top_k_rank.py` (re-runnable against cur
 
 **Correction (structural, not empirical):** Concurrency cannot affect extraction. `extract_requirements()` is a single serial call that completes before any fan-out concurrency takes effect. Earlier notes framed this as needing more runs to establish. It does not -- the design settles it. Do not re-run for an answer the architecture already gives.
 
-**Probe script:** `probe_160_extraction_variance.py` (repo root). Six-JD, five-run battery. Re-run before and after the fix to confirm spread narrows on the AT&T fixture.
+**Probe script:** `probe_160_extraction_variance.py` (repo root). Takes a path argument. Before-measurement: six JDs, five runs each (already done). After-measurement: AT&T fixture only, five runs -- no need to re-run all six JDs.
 
 **Acceptance:**
 - Count spread on the AT&T fixture narrows to 1-2 across five cold-path runs (from the current 4-7). Code defines the exact pass threshold at Red time.
