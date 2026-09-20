@@ -94,7 +94,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-154](#mattgpt-154) | Operational-breadth tagging pass — surface operational ownership into all corpus stories where it's genuinely true | Open | Medium | Action | July 16, 2026 |
 | [MATTGPT-155](#mattgpt-155) | New corpus story — sell-side commercial story (HSBC-anchored): pricing/costing, resourcing, outcome-based contracting | Open | Medium | Action | July 29, 2026 |
 | [MATTGPT-156](#mattgpt-156) | Vendor commercial/spend management gap — decide whether corpus-zero on invoice/rate-card/procurement is a real claim or honest gap | Open | Low | Investigation | July 29, 2026 |
-| [MATTGPT-160](#mattgpt-160) | JD extraction rewrite: qualifier stripping, requirement-count variance, coverage miss, wall clock floor -- all one prompt | Open | High | Bug / Performance | July 31, 2026 |
+| [MATTGPT-160](#mattgpt-160) | JD extraction: split into three concurrent calls (required / preferred / implicit) to stabilize requirement count on long JDs | Open | High | Bug | July 31, 2026 |
 | [MATTGPT-249](#mattgpt-249) | Role Match retrieval: crisis story at rank 18 on incident-leadership requirement; target carries incident vocabulary; ranking problem confirmed | Open | Medium | Bug | September 11, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: both arms score ~80% strong on AT&T with genuine JD gaps; scoring is too generous | Open | High | Issue | September 2, 2026 |
 | [MATTGPT-245](#mattgpt-245) | Role Match streaming: render each requirement row as it lands via as_completed; blocked on -243 | Open | Medium | Enhancement | September 2, 2026 |
@@ -1521,49 +1521,41 @@ Full ranked 25 available from `probe_243_top_k_rank.py` (re-runnable against cur
 ---
 
 ### MATTGPT-160
-**JD extraction rewrite: qualifier stripping, requirement-count variance, coverage miss, wall clock floor -- all one prompt**
+**JD extraction: split into three concurrent calls (required / preferred / implicit) to stabilize requirement count on long JDs**
 
 - **Status:** Open
 - **Priority:** High
-- **Type:** Bug / Performance
+- **Type:** Bug
 - **File:** `services/jd_assessor.py` (`extract_requirements()`)
-- **Logged:** July 31, 2026 (scope expanded September 2, 2026)
-- **Gates:** MATTGPT-244. Three of the five over-called rows on the -244 corpus audit are unfalsifiable until extraction preserves qualifiers: "Modern technology stack fluency" cannot be judged against React and Node.js if those words were stripped during extraction. -244's acceptance criteria cannot be evaluated until -160 lands.
+- **Logged:** July 31, 2026 (scope narrowed September 20, 2026)
+- **Gates:** MATTGPT-244. Count instability on long JDs makes -244's per-row acceptance unrepeatable: if the AT&T fixture produces 32 requirements on one run and 39 on another, the rows being evaluated shift. -244's acceptance criteria cannot be reliably evaluated until -160 lands.
 
-**Why one ticket:** Four symptoms, one call, one prompt. Fixing them separately risks each patch undoing the previous one. The extraction wrapper (`extract_requirements()`) is the highest-value target left in the Role Match line of work: it accounts for 40-55% of total wall clock even after -243 ships (9-14s extraction against 22-25s total, measured on the AT&T JD; earlier 55-65% figures predate -243's parallelization of the assess loop), and it is the single point of failure for all four of the following.
+**Scope:** Split `extract_requirements()` into three concurrent calls, one per section -- required, preferred, implicit. Each call sees only its section. This stops requirement-count drop on long JDs, where a single call over-length input causes the model to drop items. The felt-wait improvement (parallel I/O instead of one sequential call) comes along as a consequence of the same change, not as a separate target.
 
-**Four symptoms:**
+**Evidence (`probe_160_extraction_variance.py`, September 2026):** Six JDs, five extractions each. Count spread is 1-2 across the 242-706 word range. At 1113 words (AT&T fixture) the spread jumps to 4-7. Threshold effect near 1000 words -- not a gradual linear scaling. AT&T fixture identity confirmed: 32-39 across runs, matching earlier hand observations. This is the before-measurement; the same probe is the after-measurement.
 
-1. **Qualifier stripping:** On the demo JD, 7 of 23 requirements lost qualifiers during extraction -- the extracted text is narrower than what the JD actually requires. Downstream: assessor evaluates a stripped requirement and can produce verdicts that don't reflect what the hiring manager wrote. (Original -160 scope.)
+**Out of scope (with reasoning -- do not re-derive):**
 
-   **Strongest single example -- row 11 (September 2026 audit):** The JD required "React or equivalent, Python/Node.js/Go, containerized microservices." Extraction produced a generic technology-fluency requirement; the named technologies were gone. The stripped requirement is unfailable: any story about modern software development will satisfy it, and the specific technologies that would actually discriminate the assessment are gone. This is the clearest case where stripping removes the test rather than compressing it.
+- **Text paraphrase drift.** The extracted text of a given requirement varies across runs on the same JD. Real defect; not worth building. A recruiter runs the tool once and never observes run-to-run variance in text. The count problem is visible in the count display; text drift is invisible in normal use.
+- **Pending-vs-resolved disagreement.** Both surfaces (screen and export) now render the extraction text directly via the passthrough at `ab75192`. This disagreement is closed; no extraction change is needed to address it.
 
-   **Note on the Kubernetes row (row 15):** The Kubernetes, service mesh, and container orchestration example from the -159 audit is no longer the illustration. The September 2026 corpus audit cleared that row: arm2 correctly cited Norfolk Southern, `partial` is honest, and service mesh and multi-tenant are absent corpus-wide regardless of what extraction kept. Stripping happened on that row, but the verdict would be the same either way.
+**Rejected fixes (do not re-derive):**
 
-   **Diagnosis pending:** Whether stripping is model-side (the LLM omitting qualifiers from its JSON) or code-side (post-extraction handling dropping them) is unresolved. The raw extraction JSON at the boundary -- before any downstream handling -- is the single line of evidence that settles it.
+- **Source-span return:** Prose JDs are 0% verbatim -- there is nothing in the source to point a span at. A mixed contract (span for structured JDs, text for prose) means two render paths with the same drift on the prose half. Dead end.
+- **Verbatim-quote prompt instruction:** Only reaches the synthetic slice on structured JDs, where 45-80% of requirements are already literal copies and stable by construction. Doesn't help the input population that has the problem.
 
-2. **Requirement-count variance (±15%):** The extraction prompt is nondeterministic -- the same JD produces a different requirement list on each cold-path call. Demo JD: 17 on one run, 18 on another. AT&T JD: 32, 35, and 39 across three runs. ±15% holds across both. Downstream: cache hits mask this; every novel JD gets a different extraction, and verdicts on the volatile requirement are unrepeatable.
+**Findings from -244 probe (recorded here to close open questions):**
 
-3. **Coverage miss:** AT&T JD "Kafka + IXBUS technical leadership" was not extracted as a requirement at all (MATTGPT-159 audit, Arm 1/row 10). The story "Cloud-Native Architecture" mentions event-driven systems with Kafka and was available in the corpus -- Arm 1 produced UNMATCHED because extraction never handed the requirement to the assessor. Root cause: wrapper prompt differs from the production prompt used in the probe (same issue Probe A identified; still unresolved).
+- **Verdicts are deterministic at `ASSESSMENT_TEMPERATURE = 0.0`:** Zero verdict flips and zero evidence swaps across five runs per arm on the demo JD. -244 keeps per-row assertions as its acceptance method. Do not re-run to verify; this is the record.
+- **Identical cited-story sets under concurrency 10 and 1:** Pinecone returns the same candidates regardless of load. The upstream retrieval hypothesis (concurrency causing different stories to surface, driving verdict variance) is ruled out.
 
-4. **Wall clock floor:** 9-14s measured for `extract_requirements()` alone on the AT&T JD. `extract_requirements()` is a single sequential call; parallelizing the `assess` loop in -243 does not reduce this floor. Lowering it requires a prompt or call-structure change in extraction itself. **Acceptance criterion dropped (September 2026):** Six repeat runs showed a 2.4s noise floor at fixed input and count, making a sub-15s gate unmeasurable. The floor is real and recorded here for calibration; it is not a pass/fail criterion in -160's acceptance.
+**Correction (structural, not empirical):** Concurrency cannot affect extraction. `extract_requirements()` is a single serial call that completes before any fan-out concurrency takes effect. Earlier notes framed this as needing more runs to establish. It does not -- the design settles it. Do not re-run for an answer the architecture already gives.
 
-**Pre-flight instrumentation (land before opening this ticket, not inside it):**
-
-Three additions to the existing logging, costing one DEBUG line and two fields:
-
-1. `DEBUG extraction: <json>` at the extraction boundary -- the raw JSON as returned by the model, before any downstream handling. This is the single line that settles whether stripping is model-side or code-side, and it must exist before the first attempt at a fix, not after.
-2. Requirement text (truncated to 40 characters) on each existing `req N` log line. Without it, indices cannot be mapped to rows and per-requirement findings are not attributable.
-3. Category (`required` / `preferred` / `implicit`) on each `req N` log line. The two under-called requirements from the September 2026 audit both appeared to be implicit; that pattern is not checkable without category in the log.
-
-These are a pre-condition for -160 Red, not part of -160 scope.
-
-**Probe script:** `probe_db_extraction.py` (repo root) runs `extract_requirements()` on the structured JD, compares extracted text to source, and tests full-text vs stripped retrieval through Pinecone at top-40. Re-use this rather than building a new probe.
+**Probe script:** `probe_160_extraction_variance.py` (repo root). Six-JD, five-run battery. Re-run before and after the fix to confirm spread narrows on the AT&T fixture.
 
 **Acceptance:**
-- Qualifier retention: extracted requirements match source qualifiers on the demo JD (7-of-23 miss rate reduced to 0 or near-0).
-- Count stability: same JD produces the same requirement count across three consecutive cold-path runs. (This is the measurable performance criterion; wall-clock floor dropped -- see above.)
-- Coverage: "Kafka + IXBUS" extracted as a requirement from the AT&T JD.
+- Count spread on the AT&T fixture narrows to 1-2 across five cold-path runs (from the current 4-7). Code defines the exact pass threshold at Red time.
+- No wall-clock target. The 2.4s noise floor at fixed input makes timing claims unsupportable; this was settled September 2026 and is not re-opened here.
 
 **Constraint:** Separate defect from MATTGPT-157 (W_KW keyword weighting). Clause-dropping happens at extraction time, before retrieval scoring. Do not conflate. Do not conflate with -243 (assessor parallelization) -- these are different functions in the same file. **-089 is independent:** the September 18 scope replacement removed logistical_requirements extraction from -089; it no longer touches this prompt. The two tickets share no implementation surface.
 
