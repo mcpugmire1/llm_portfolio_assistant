@@ -193,6 +193,13 @@ The two-Red split applies to BDD where `.feature` and `test_X.py` are separate a
 
 When testing a new function that doesn't exist yet, the Red commit includes the test file plus stub signatures raising `NotImplementedError` -- nothing else. Tests then fail on assertion errors, not import errors. A stub is a function signature and `raise NotImplementedError` only: no logic, no returns, no constants.
 
+### Probes and PoCs
+Probes and PoCs are exploratory measuring instruments, exempt from the Red gate. They stay untracked and never import into production. The exemption ends the moment probe code moves into `services/` or `ui/`: at that point it's production and the full protocol applies.
+
+**A probe result is one measurement.** Before it scopes work or changes a conclusion, verify it against an independent source: a different field, a different file, a different derivation. Two derivations that agree is a finding. One derivation is a reading.
+
+**A causal claim needs the comparison that isolates the cause.** "X caused Y" requires a measurement with X absent. Without it, say "Y is present under X" and name what measurement would settle it. Either the before-state was measured or it wasn't.
+
 ### Validation rules
 - **When reporting test results, state explicitly what was tested and what was not.** A pass count covers the scenarios run -- it does not validate untested changes in the same commit. Never present partial coverage as full validation.
 - **Paste literal pytest output at every gate** - never self-summarize (see Critical Rules)
