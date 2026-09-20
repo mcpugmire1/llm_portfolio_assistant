@@ -97,7 +97,6 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-160](#mattgpt-160) | JD extraction: split into three concurrent calls (required / preferred / implicit) to stabilize requirement count on long JDs | Open | High | Bug | July 31, 2026 |
 | [MATTGPT-249](#mattgpt-249) | Role Match retrieval: crisis story at rank 18 on incident-leadership requirement; target carries incident vocabulary; ranking problem confirmed | Open | Medium | Bug | September 11, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: both arms score ~80% strong on AT&T with genuine JD gaps; scoring is too generous | Open | High | Issue | September 2, 2026 |
-| [MATTGPT-245](#mattgpt-245) | Role Match streaming: render each requirement row as it lands via as_completed; blocked on -243 | Open | Medium | Enhancement | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
 | [MATTGPT-168](#mattgpt-168) | Slot 1 is amplified without regard to margin -- tie or near-tie at slot 1 gets 80% of the answer | Open | High | Bug | August 5, 2026 |
@@ -1427,36 +1426,6 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 - MATTGPT-154 (corpus-writing gap; Shape A rows 10 and 21 belong here, not in -244)
 - MATTGPT-243 (parallelization; does not touch assessment prompt)
 - MATTGPT-249 (retrieval ranking; -244 must land before -249)
-
----
-
-### MATTGPT-245
-**Role Match streaming: render each requirement row as it lands via as_completed**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Enhancement
-- **File:** `ui/pages/role_match.py`, `services/jd_assessor.py`
-- **Logged:** September 2, 2026
-- **Dependencies:** MATTGPT-243 (shipped `8d37405`), MATTGPT-248 (shipped `43ca523`) -- both blockers cleared September 2026
-
-**What this is not:** MATTGPT-083 is spinner inconsistency -- the loading indicator shown while waiting for a result. This ticket is about the absence of waiting: requirement rows appearing at ~20s and filling in as each `gpt-4o` call completes. Cross-referencing -083 is correct; folding this into -083 is not. If this scope lands inside -083, whoever picks it up will scope it as "fix the spinner" and the actual rendering change won't happen.
-
-**Why `as_completed` enables it:** The current sequential pipeline must wait for all 23 calls before rendering anything. Once -243 parallelizes with `as_completed`, individual requirement results are available as they land (~3-5s per wave of 10 concurrent calls). The UI can render each row as soon as its result arrives. Extraction is 9-14s measured and nothing can render before it completes, so first content appears at ~12s rather than ~22s -- not ~5s, not zero. Streaming cuts roughly half the blank screen.
-
-**Scope:** Wire the `as_completed` results from the parallelized assessor into a Streamlit streaming-compatible render loop. Each requirement row renders as its assessment completes rather than after the full list returns. Error-row rendering uses the placeholder defined in -248.
-
-**Acceptance (AT&T fixture, not the demo JD):** The primary validation is the AT&T JD. Extraction nondeterminism means requirement count varies run to run (-160 is the fix; -245 ships before it), so the acceptance criterion is multiple visible render waves between extraction complete and full-assessment render -- not a specific count. Extraction sets a ~12s floor on first content (9-14s measured); first content appears at ~12s rather than ~22s. That is the number to name when describing what ships, so it is not a surprise.
-
-- AT&T fixture: multiple distinct render waves observable between extraction complete and full-assessment render.
-- First content appears at approximately the extraction floor (~12s), not at full-assessment completion (~22s).
-- All rows render in the same final state as the current non-streaming render.
-- Error rows show the unassessed placeholder defined in -248 (`43ca523`), not a blank or a crash.
-
-**Cross-references:**
-- MATTGPT-243 (parallelization; shipped `8d37405`)
-- MATTGPT-248 (partial-failure handling; shipped `43ca523` -- error-row placeholder and unassessed badge defined there)
-- MATTGPT-083 (spinner inconsistency; perceived-performance half; independent, worth landing regardless)
 
 ---
 

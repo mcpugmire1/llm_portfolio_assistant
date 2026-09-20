@@ -26,6 +26,12 @@ Fixed-content four-cell strip added above the SUMMARY section in the Role Match 
 
 ---
 
+**September 20, 2026 — Role Match progressive row rendering (MATTGPT-245)** -- `458d0a1` through `ab75192` (five commits)
+
+Requirement rows now fill in as each `gpt-4o` call completes rather than after the full assessment finishes. First content appears at approximately the extraction floor (~12s) instead of at full-assessment completion (~22s); each subsequent wave lands as concurrency-10 batches resolve. Built in two phases. Phase one (`458d0a1` / `c9939ab`): in-flow indicator during assessment and a guard preventing assessment from starting before extraction completes. Phase two (`673fa9e` / `493809d`): `on_row` callback wired into the `as_completed` loop; pending-row helper renders a placeholder until the result arrives. Follow-up (`ab75192`): passthrough of `req.text` on resolved rows, fixing a pending-vs-resolved disagreement where the two surfaces showed different extraction text.
+
+---
+
 **September 2026 — Role Match partial-failure handling, export/share surface parity, failure-path Sheet writes (MATTGPT-248 + MATTGPT-246 + MATTGPT-247)** -- `0c1189f` through `43ca523` (eight Green commits)
 
 Three tickets closed in one branch. MATTGPT-246 (export + share surface divergences) and MATTGPT-247 (failure-path Sheet writes) folded into MATTGPT-248 because all three touched `_handle_assessment_error`, `_build_export_html`, and `_build_share_text` in the same file; landing them separately would have meant two passes over the same code.
