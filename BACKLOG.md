@@ -12,8 +12,8 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 **NOW**
 1. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
 2. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
-3. **-160** — JD extraction: split into three concurrent calls (required / preferred / implicit) to stabilize requirement count on long JDs; gates -244.
-4. **-244** — Role Match assessor calibration: three rows where cited evidence doesn't address the specific claim; `confidence` field deletion. Corpus audit September 2026: 22% strong, not 80%. -160 must land first. Land before -249 (see -249 ordering constraint).
+3. **-244** — Role Match assessor calibration: three rows where cited evidence doesn't address the specific claim; `confidence` field deletion. Corpus audit September 2026: 22% strong, not 80%. Land before -249 (see -249 ordering constraint).
+4. **-160** — JD extraction: split into three concurrent calls (required / preferred / implicit) to stabilize requirement count on long JDs.
 5. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
 6. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
 7. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
@@ -26,7 +26,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 12. Rest of Role Match: -173, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
--177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- see -249 ordering constraint)
+-177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- better ranking surfaces more adjacent candidates into verdict definitions that still absorb them as partial, so ranking before calibrating makes over-calling worse before better; full constraint in -249 detail block)
 
 **LATER — tier 2:** corpus work
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
@@ -1390,7 +1390,7 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 - **Type:** Issue
 - **File:** `services/jd_assessor.py` (assessment prompt)
 - **Logged:** September 2, 2026
-- **Dependencies:** MATTGPT-160 (must land first; qualifier stripping makes three over-called rows unfalsifiable until extraction is fixed)
+- **Dependencies:** None. The three audit fixtures (rows 7, 11, 22) are verdict-level checks -- they assert that specific cited evidence doesn't address the specific claim, not that extraction text is stable. Verdicts are deterministic at `ASSESSMENT_TEMPERATURE = 0.0` (zero flips across five runs per arm; confirmed via -244 probe). -160 (count stabilization) is independent and can land before or after.
 
 **Finding (corpus-text audit, September 18, 2026, `probe_244_audit.py`):** 17 honest, 5 over-called, 1 borderline across 23 rows on the AT&T JD. 22% strong, not the ~80% figure from the earlier -159 probe output. The five over-called rows split into two shapes:
 
@@ -1495,7 +1495,7 @@ Full ranked 25 available from `probe_243_top_k_rank.py` (re-runnable against cur
 - **Type:** Bug
 - **File:** `services/jd_assessor.py` (`extract_requirements()`)
 - **Logged:** July 31, 2026 (scope narrowed September 20, 2026)
-- **Gates:** MATTGPT-244. Count instability on long JDs makes -244's per-row acceptance unrepeatable: if the AT&T fixture produces 32 requirements on one run and 39 on another, the rows being evaluated shift. -244's acceptance criteria cannot be reliably evaluated until -160 lands.
+- **Dependencies:** None. Independent of MATTGPT-244: the three audit fixtures are verdict-level and deterministic at temperature 0.0; count instability doesn't affect which verdict a given cited-evidence pair produces.
 
 **Scope:** Split `extract_requirements()` into three concurrent calls, one per section -- required, preferred, implicit. Each call sees only its section. This stops requirement-count drop on long JDs, where a single call over-length input causes the model to drop items. The felt-wait improvement (parallel I/O instead of one sequential call) comes along as a consequence of the same change, not as a separate target.
 
