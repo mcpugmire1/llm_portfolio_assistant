@@ -2668,6 +2668,7 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
 
                     from services.jd_assessor import (
                         _fan_out_assessments,
+                        _flatten_extraction,
                         _get_openai_client,
                         extract_requirements,
                     )
@@ -2676,23 +2677,11 @@ div[class*="st-key-role_match_req_"][data-testid="stVerticalBlock"] {
                     _client = _get_openai_client()
                     _extraction = extract_requirements(_client, jd_text)
 
-                    # Flatten to submission-ordered requirement list. Same
-                    # three-block order as run_assessment (required +
-                    # preferred + implicit-to-required) so a shared
-                    # invariant holds across both call paths.
-                    _all_requirements = []
-                    for _r in _extraction.get("required_qualifications", []) or []:
-                        _all_requirements.append(
-                            {"text": _r["requirement"], "category": "required"}
-                        )
-                    for _r in _extraction.get("preferred_qualifications", []) or []:
-                        _all_requirements.append(
-                            {"text": _r["requirement"], "category": "preferred"}
-                        )
-                    for _r in _extraction.get("implicit_requirements", []) or []:
-                        _all_requirements.append(
-                            {"text": _r["requirement"], "category": "required"}
-                        )
+                    # Flatten to submission-ordered requirement list via the
+                    # shared helper (also used by run_assessment). Selects
+                    # source_text for required/preferred and requirement for
+                    # implicit -- see _flatten_extraction docstring.
+                    _all_requirements = _flatten_extraction(_extraction)
 
                     # Hide indicator + height anchor; pending rows now
                     # provide real flow content.

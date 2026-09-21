@@ -147,7 +147,7 @@ Rules:
 - Extract company name from anywhere in the full JD text including company description and closing sections. If truly undisclosed, use "Undisclosed".
 - Populate `key_responsibilities` with the JD's stated responsibilities (what the role does, not what the candidate must have). One item per distinct responsibility. Empty list if none are stated.
 - Normalize requirements into clear, testable statements.
-- Keep source_text short -- just enough to verify the extraction.
+- Copy source_text as the entire JD bullet or sentence, verbatim and complete. Do not shorten, summarize, or truncate.
 - Do not invent requirements -- only extract what is stated or clearly implied.
 - DO NOT extract logistics as requirements: location, work mode (onsite/remote/hybrid), salary, visa, interview process, start date. These are filters, not capability fit signals.
 
@@ -198,7 +198,7 @@ Extract the following as JSON:
 
 Rules:
 - Normalize requirements into clear, testable statements.
-- Keep source_text short -- just enough to verify the extraction.
+- Copy source_text as the entire JD bullet or sentence, verbatim and complete. Do not shorten, summarize, or truncate.
 - Do not invent requirements -- only extract what is stated or clearly implied.
 - DO NOT extract logistics as requirements: location, work mode (onsite/remote/hybrid), salary, visa, interview process, start date.
 
@@ -406,7 +406,34 @@ def extract_requirements(client: OpenAI, jd_text: str) -> dict:
     and jd_format. Return shape is compatible with the pre-split
     implementation.
     """
-    return asyncio.run(_extract_all_sections(client, jd_text))
+    result = asyncio.run(_extract_all_sections(client, jd_text))
+    if DEBUG:
+        # One line per requirement so source_text (and inferred_from for
+        # implicit) are visible in the trace at the same granularity the
+        # rest of the trace uses. req_idx here matches req_idx on
+        # downstream assess_call_ms and retrieval [req N] lines because
+        # the iteration order (required, preferred, implicit->required)
+        # is the same order _flatten_extraction produces. Implicit rows
+        # carry category='required' matching the flatten's category
+        # assignment; the trailing field name (source_text vs
+        # inferred_from) disambiguates implicit from required-proper for
+        # a reader who needs the distinction.
+        _idx = 0
+        for _section, _src_field, _category in (
+            ("required_qualifications", "source_text", "required"),
+            ("preferred_qualifications", "source_text", "preferred"),
+            ("implicit_requirements", "inferred_from", "required"),
+        ):
+            for _r in result.get(_section, []) or []:
+                _req_text = _r.get("requirement", "")
+                _src_text = _r.get(_src_field, "")
+                print(
+                    f"[jd_assessor] extraction_item req_idx={_idx} "
+                    f"category={_category} requirement={_req_text!r} "
+                    f"{_src_field}={_src_text!r}"
+                )
+                _idx += 1
+    return result
 
 
 async def _extract_all_sections(client: OpenAI, jd_text: str) -> dict:
@@ -664,19 +691,7 @@ def run_assessment(jd_text: str, stories: list[dict]) -> dict:
     extraction = extract_requirements(client, jd_text)
     _t_extract_ms = (time.perf_counter() - _t_extract_start) * 1000.0
 
-    # Build flat list with category attached so the UI can group by required vs preferred
-    all_requirements = []
-    for r in extraction.get("required_qualifications", []) or []:
-        all_requirements.append({"text": r["requirement"], "category": "required"})
-    for r in extraction.get("preferred_qualifications", []) or []:
-        all_requirements.append({"text": r["requirement"], "category": "preferred"})
-    # Implicit requirements (mined from prose body of hybrid JDs that have
-    # both explicit Required sections AND substantive body content) get
-    # appended to the required list. Pure narrative JDs route mined
-    # requirements directly to required_qualifications via the extraction
-    # prompt rules, so this branch only fires for hybrid JDs.
-    for r in extraction.get("implicit_requirements", []) or []:
-        all_requirements.append({"text": r["requirement"], "category": "required"})
+    all_requirements = _flatten_extraction(extraction)
 
     if DEBUG:
         print(
@@ -702,6 +717,51 @@ def run_assessment(jd_text: str, stories: list[dict]) -> dict:
         "extraction": extraction,
         "results": match_results,
     }
+
+
+def _flatten_extraction(extraction: dict) -> list[dict]:
+    """Flatten the three-block extraction into an ordered list of
+    per-requirement dicts for retrieval + assessment.
+
+    Text-field selection per section:
+    - required, preferred: source_text (verbatim JD clause). The
+      assessor judges match against the JD's own wording rather than
+      the model's compressed restatement, which was the compression
+      -244's rows 7 and 11 flagged. Falls back to requirement if
+      source_text is missing or empty; the 234/234 verbatim rate
+      measured September 2026 across three JDs (bulleted, hybrid,
+      narrative) makes the fallback rare, but keeping it defensive
+      avoids taking down the whole assessment for one anomalous row.
+    - implicit: requirement (the model's inferred capability). Not
+      inferred_from -- that field holds the text that led to the
+      inference, not the requirement itself, so sending it would ask
+      the assessor to judge evidence against a responsibility instead
+      of against a capability.
+
+    Category assignment: implicit rows carry category='required'
+    (not a distinct 'implicit' category). Implicit is populated only
+    for hybrid JDs that have BOTH an explicit Required section AND
+    substantive body content -- pure narrative JDs route body-mined
+    requirements directly into required_qualifications via the
+    extraction prompt rules. Grouping implicit under required for the
+    downstream fanout and recommendation math reflects that implicit
+    is functionally an extension of required, not a third weighted
+    class.
+
+    Callers: run_assessment (service path) and ui/pages/role_match.py
+    (progressive-fill UI path). The shared helper is what stops the
+    two sites drifting apart -- a prior version had two copies of
+    this block and they diverged."""
+    out: list[dict] = []
+    for r in extraction.get("required_qualifications", []) or []:
+        text = r.get("source_text") or r.get("requirement", "")
+        out.append({"text": text, "category": "required"})
+    for r in extraction.get("preferred_qualifications", []) or []:
+        text = r.get("source_text") or r.get("requirement", "")
+        out.append({"text": text, "category": "preferred"})
+    for r in extraction.get("implicit_requirements", []) or []:
+        out.append({"text": r.get("requirement", ""), "category": "required"})
+    return out
 
 
 async def _to_thread_with_ctx(func, *args):
