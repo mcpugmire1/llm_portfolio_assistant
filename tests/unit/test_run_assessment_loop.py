@@ -809,3 +809,225 @@ class TestFanOutOnRowCallback:
             f"above passes, Green implemented on_row as a no-op and the "
             f"return-contract pin is meaningless."
         )
+
+
+# ---------------------------------------------------------------------------
+# MATTGPT-244 prep: flatten passes source_text (not requirement) to the
+# assessor for required/preferred rows. Implicit continues passing
+# requirement because inferred_from is the source of inference, not the
+# requirement itself.
+# ---------------------------------------------------------------------------
+
+
+def _extraction_with_distinct_source():
+    """Fake extraction where source_text (and inferred_from) differ from
+    requirement so tests can distinguish which field the flatten passes
+    downstream. A row's category is inferable from its text prefix:
+    'req_' -> required-proper, 'pref_' -> preferred, 'impl_' -> implicit.
+    Text values are unique across sections so a single row can be located
+    by content without depending on ordering."""
+    return {
+        "required_qualifications": [
+            {
+                "requirement": "req_compressed",
+                "source_text": "req_verbatim clause",
+                "type": "skill",
+            },
+        ],
+        "preferred_qualifications": [
+            {
+                "requirement": "pref_compressed",
+                "source_text": "pref_verbatim clause",
+                "type": "skill",
+            },
+        ],
+        "implicit_requirements": [
+            {
+                "requirement": "impl_capability",
+                "inferred_from": "impl_source clause",
+                "confidence": "medium",
+            },
+        ],
+    }
+
+
+class TestFlattenSourceTextPassthrough:
+    """MATTGPT-244 flatten fix: required and preferred pass source_text
+    (verbatim JD clause) downstream to retrieve_stories,
+    assess_requirement, and the render surface. Implicit keeps passing
+    requirement (the model's inferred capability) because inferred_from
+    is the source of inference, not the requirement itself.
+
+    Test 1, 2, 4 are change tests -- fail on Red, pass on Green.
+    Test 3, 5 are characterization tests -- pass on Red as guards that
+    Green does not accidentally switch implicit to inferred_from.
+
+    Fixture (`_extraction_with_distinct_source`) makes requirement and
+    source_text distinguishable per section, so tests can locate the
+    right row by content without depending on ordering across the
+    three-block flatten."""
+
+    def _run_with_tracking(self):
+        """Run run_assessment against the distinct-source fixture with
+        tracking mocks on retrieve_stories and assess_requirement.
+        Returns (out, retrieve_texts, assess_texts).
+
+        Both mocks record the first positional argument -- for
+        retrieve_stories that's requirement_text; for
+        assess_requirement it's requirement. The distinct-source
+        fixture uses unique text values so a text appearing in the
+        recorded list uniquely identifies which row produced the
+        call."""
+        retrieve_texts: list[str] = []
+        assess_texts: list[str] = []
+
+        def _tracked_retrieve(text, *args, **kwargs):
+            retrieve_texts.append(text)
+            return []
+
+        def _tracked_assess(client, requirement, candidates):
+            assess_texts.append(requirement)
+            return {
+                "requirement": requirement,
+                "match_status": "strong",
+                "evidence": [],
+                "gap_explanation": "",
+                "confidence": "high",
+            }
+
+        with (
+            patch.object(jd_assessor, "_get_openai_client", return_value=None),
+            patch.object(
+                jd_assessor,
+                "extract_requirements",
+                side_effect=lambda *_a, **_kw: _extraction_with_distinct_source(),
+            ),
+            patch.object(
+                jd_assessor, "retrieve_stories", side_effect=_tracked_retrieve
+            ),
+            patch.object(
+                jd_assessor, "assess_requirement", side_effect=_tracked_assess
+            ),
+        ):
+            out = jd_assessor.run_assessment("fake jd", [])
+
+        return out, retrieve_texts, assess_texts
+
+    def test_required_row_passes_source_text_to_retrieve_and_assess(self):
+        """Required-section row: retrieve_stories and assess_requirement
+        both receive `source_text` (verbatim JD clause), not the
+        compressed `requirement` field. Change test -- fails on Red."""
+        _, retrieve_texts, assess_texts = self._run_with_tracking()
+
+        assert "req_verbatim clause" in retrieve_texts, (
+            f"expected retrieve_stories to receive the required row's "
+            f"source_text ('req_verbatim clause'); got retrieve texts "
+            f"{retrieve_texts!r}"
+        )
+        assert "req_verbatim clause" in assess_texts, (
+            f"expected assess_requirement to receive the required row's "
+            f"source_text ('req_verbatim clause'); got assess texts "
+            f"{assess_texts!r}"
+        )
+        assert "req_compressed" not in retrieve_texts, (
+            f"required row's compressed requirement ('req_compressed') "
+            f"leaked into retrieval; got {retrieve_texts!r}"
+        )
+        assert "req_compressed" not in assess_texts, (
+            f"required row's compressed requirement ('req_compressed') "
+            f"leaked into assessor; got {assess_texts!r}"
+        )
+
+    def test_preferred_row_passes_source_text_to_retrieve_and_assess(self):
+        """Preferred-section row: same as required. Change test."""
+        _, retrieve_texts, assess_texts = self._run_with_tracking()
+
+        assert "pref_verbatim clause" in retrieve_texts, (
+            f"expected retrieve_stories to receive the preferred row's "
+            f"source_text; got {retrieve_texts!r}"
+        )
+        assert "pref_verbatim clause" in assess_texts, (
+            f"expected assess_requirement to receive the preferred row's "
+            f"source_text; got {assess_texts!r}"
+        )
+        assert "pref_compressed" not in retrieve_texts, (
+            f"preferred row's compressed requirement leaked into "
+            f"retrieval; got {retrieve_texts!r}"
+        )
+        assert "pref_compressed" not in assess_texts, (
+            f"preferred row's compressed requirement leaked into "
+            f"assessor; got {assess_texts!r}"
+        )
+
+    def test_implicit_row_passes_requirement_to_retrieve_and_assess(self):
+        """Implicit-section row: retrieve_stories and assess_requirement
+        both receive `requirement` (the model's inferred capability),
+        NOT `inferred_from`. inferred_from is the text that led to the
+        inference, not the requirement itself -- sending it as the
+        requirement would ask the assessor to judge evidence against a
+        responsibility instead of against a capability.
+
+        Characterization test -- passes on Red as a guard against Green
+        accidentally switching implicit to inferred_from."""
+        _, retrieve_texts, assess_texts = self._run_with_tracking()
+
+        assert "impl_capability" in retrieve_texts, (
+            f"expected retrieve_stories to receive the implicit row's "
+            f"requirement ('impl_capability'); got {retrieve_texts!r}"
+        )
+        assert "impl_capability" in assess_texts, (
+            f"expected assess_requirement to receive the implicit row's "
+            f"requirement ('impl_capability'); got {assess_texts!r}"
+        )
+        assert "impl_source clause" not in retrieve_texts, (
+            f"implicit row's inferred_from leaked into retrieval "
+            f"(should only send requirement for implicit); got "
+            f"{retrieve_texts!r}"
+        )
+        assert "impl_source clause" not in assess_texts, (
+            f"implicit row's inferred_from leaked into assessor "
+            f"(should only send requirement for implicit); got "
+            f"{assess_texts!r}"
+        )
+
+    def test_non_implicit_row_requirement_field_is_source_text(self):
+        """Render surface pin: after -245 phase-two passthrough
+        (`assessment['requirement'] = req['text']`), the final row's
+        `requirement` field is what recruiter-facing surfaces render.
+        For required and preferred rows, this must be source_text.
+        Change test -- fails on Red."""
+        out, _, _ = self._run_with_tracking()
+        rendered = [r.get("requirement") for r in out["results"]]
+
+        assert "req_verbatim clause" in rendered, (
+            f"required row's rendered requirement should be source_text; "
+            f"got {rendered!r}"
+        )
+        assert "pref_verbatim clause" in rendered, (
+            f"preferred row's rendered requirement should be source_text; "
+            f"got {rendered!r}"
+        )
+        assert "req_compressed" not in rendered, (
+            f"required row's compressed requirement leaked to the render "
+            f"surface; got {rendered!r}"
+        )
+        assert "pref_compressed" not in rendered, (
+            f"preferred row's compressed requirement leaked to the render "
+            f"surface; got {rendered!r}"
+        )
+
+    def test_implicit_row_requirement_field_is_requirement(self):
+        """Render surface pin for implicit: the row's `requirement`
+        field is the model's inferred capability, NOT inferred_from.
+        Characterization test -- passes on Red."""
+        out, _, _ = self._run_with_tracking()
+        rendered = [r.get("requirement") for r in out["results"]]
+
+        assert "impl_capability" in rendered, (
+            f"implicit row's rendered requirement should be the "
+            f"inferred capability; got {rendered!r}"
+        )
+        assert "impl_source clause" not in rendered, (
+            f"implicit row's inferred_from leaked to the render surface; "
+            f"got {rendered!r}"
+        )
