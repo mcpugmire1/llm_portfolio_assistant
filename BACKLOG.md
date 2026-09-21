@@ -1508,18 +1508,22 @@ Full ranked 25 available from `probe_243_top_k_rank.py` (re-runnable against cur
 
 **What was agreed but never built:** A profile fact injection layer -- when a query matches a known profile field category (education, certifications, work authorization, location), the RAG backend supplements the semantic search result with the structured profile fact before passing context to the LLM. Not a Pinecone record. Not a corpus story. A direct read from `matt_profile.json` at query time, conditional on the query routing to the right intent family.
 
-**Concrete failure:** "Is Matt certified?" Ask Agy returns nothing or hedges. `matt_profile.json` carries four certifications (AWS, PMP, Oracle, and one other). The AWS certification is incidentally anchored in the Launchpad story corpus; the others are not. Agy can only retrieve what it can retrieve -- no profile read means the other three are invisible.
+**Concrete failure (September 21, 2026):** "Is Matt certified?" Ask Agy confabulated -- asserted the certifications "aren't explicitly mentioned in the stories provided," then substituted F-22 and CIC work as evidence of expertise in the domain. Not a hedge; improvised career narrative in place of an answer. `matt_profile.json` carries four certifications: SAFe 4 Certified Agilist, Microsoft Certified Professional (MCP) - Oracle, AWS Launchpad Champion, AWS Certified Solutions Architect - Associate. The AWS credentials are incidentally anchored in the Launchpad story corpus; the others are not. No profile read means three of four certifications are invisible to Agy.
 
 **Scope:**
-- Identify the intent routing point where profile-category queries can be detected (education, certifications, work authorization, location/relocation).
+- Add a `languages` field to `matt_profile.json` (French: BA in French Language and Literature, Queens University of Charlotte; exchange year, Université Paul Valéry, Montpellier via UNC Chapel Hill; graduate TA, French 101-103, University of Georgia). Also add a `matt_profile.json` education entry for the UGA graduate coursework -- it is currently missing.
+- Identify the intent routing point where profile-category queries can be detected (education, certifications, work authorization, location/relocation, languages).
 - Add a profile fact read at that point: load the relevant section of `matt_profile.json` and inject it as structured context alongside semantic search results.
 - The injected context must be framed so the LLM presents it as fact, not inference -- it's attested identity data, not evidence-grounded synthesis.
 - Role Match already has this behavior; check whether the Role Match path can serve as a reference or be extracted into a shared utility.
 
 **Out of scope:** Embedding profile facts in Pinecone, creating provenance story stubs -- both explicitly rejected in the July 2 session and documented in the 080 working doc.
 
+**Open question (must decide before implementation):** How injection interacts with the rejection gates. "Does Matt speak French?" is rejected before any answer path runs -- low-confidence out-of-scope gate fires first. A profile-fact lookup placed after routing never fires for this query. Either (a) the rejection gate needs a profile-category bypass that checks for profile-answerable query shapes before rejecting, or (b) profile injection happens earlier in the pipeline, before routing. These are architecturally different: (a) adds a pre-gate classifier; (b) restructures the pipeline entry point. Needs deciding before Code picks this up.
+
 **Acceptance:**
-- "Is Matt certified?" on Ask Agy returns the four certifications with correct names, not a hedge or empty response.
+- "Is Matt certified?" on Ask Agy returns all four certifications with correct names (SAFe 4 Certified Agilist, MCP - Oracle, AWS Launchpad Champion, AWS Certified Solutions Architect - Associate), not confabulated narrative.
+- "Does Matt speak French?" returns the French background (BA, exchange year, graduate TA) rather than a rejection or confabulation.
 - "What's Matt's education background?" returns degree and institution.
 - No regression on skills queries (corpus-grounded answers remain corpus-grounded).
 
