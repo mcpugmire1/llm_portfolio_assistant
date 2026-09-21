@@ -94,6 +94,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-156](#mattgpt-156) | Vendor commercial/spend management gap — decide whether corpus-zero on invoice/rate-card/procurement is a real claim or honest gap | Open | Low | Investigation | July 29, 2026 |
 | [MATTGPT-160](#mattgpt-160) | JD extraction: split into three concurrent calls (required / preferred / implicit) to stabilize requirement count on long JDs | Open | High | Bug | July 31, 2026 |
 | [MATTGPT-249](#mattgpt-249) | Role Match retrieval: crisis story at rank 18 on incident-leadership requirement; target carries incident vocabulary; ranking problem confirmed | Open | Medium | Bug | September 11, 2026 |
+| [MATTGPT-250](#mattgpt-250) | Ask Agy cannot answer queries about education or certifications -- profile fact injection layer never shipped | Open | High | Issue | September 21, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | Open | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -1488,6 +1489,43 @@ Full ranked 25 available from `probe_243_top_k_rank.py` (re-runnable against cur
 - MATTGPT-168 (topically-correct-but-general stories outranking specifically-right ones -- same class of retrieval quality problem)
 - MATTGPT-169 (positioning-story attractor finding; PN exclusion absent on Role Match path is the structural half of what -169 tracks)
 - MATTGPT-243 (parallelization; top_k removed from that ticket on this finding)
+
+---
+
+### MATTGPT-250
+**Ask Agy cannot answer queries about education or certifications -- profile fact injection layer never shipped**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Issue
+- **File:** `ui/pages/ask_mattgpt/backend_service.py`, `services/rag_service.py`
+- **Logged:** September 21, 2026
+- **Dependencies:** None.
+
+**Root cause:** Ask Agy reads only the STAR corpus. Education and certifications live in `matt_profile.json` permanently by design -- they are not STAR stories and never will be. Degree requirements and certification checkboxes are structured identity facts, not narratives. So "Is Matt certified?" returns nothing on Ask Agy, while Role Match correctly affirms "Oracle Certified Professional" because it reads `matt_profile.json` directly.
+
+**Architecture history (July 2 session, confirmed in `docs/working/080_Skill_Evidence_Approach.md` Section 5):** The parity mandate was established July 2: "The two surfaces read from different evidence bases. Role Match grounds on `matt_profile.json`, which contains claims about you that were never committed to the STAR corpus." Two approaches were evaluated: (1) provenance records in Pinecone -- rejected because provenance has no STAR fields, renders as broken empty stories in shared search, and attests claims rather than demonstrating them; (2) profile skills migrated to story narratives -- shipped for skills, correct for skills, but wrong for facts like certifications and degrees. The agreed end state per the doc: profile legitimately holds identity facts, education, and certifications permanently; the backend reads them at answer-generation time for queries that match.
+
+**What was agreed but never built:** A profile fact injection layer -- when a query matches a known profile field category (education, certifications, work authorization, location), the RAG backend supplements the semantic search result with the structured profile fact before passing context to the LLM. Not a Pinecone record. Not a corpus story. A direct read from `matt_profile.json` at query time, conditional on the query routing to the right intent family.
+
+**Concrete failure:** "Is Matt certified?" Ask Agy returns nothing or hedges. `matt_profile.json` carries four certifications (AWS, PMP, Oracle, and one other). The AWS certification is incidentally anchored in the Launchpad story corpus; the others are not. Agy can only retrieve what it can retrieve -- no profile read means the other three are invisible.
+
+**Scope:**
+- Identify the intent routing point where profile-category queries can be detected (education, certifications, work authorization, location/relocation).
+- Add a profile fact read at that point: load the relevant section of `matt_profile.json` and inject it as structured context alongside semantic search results.
+- The injected context must be framed so the LLM presents it as fact, not inference -- it's attested identity data, not evidence-grounded synthesis.
+- Role Match already has this behavior; check whether the Role Match path can serve as a reference or be extracted into a shared utility.
+
+**Out of scope:** Embedding profile facts in Pinecone, creating provenance story stubs -- both explicitly rejected in the July 2 session and documented in the 080 working doc.
+
+**Acceptance:**
+- "Is Matt certified?" on Ask Agy returns the four certifications with correct names, not a hedge or empty response.
+- "What's Matt's education background?" returns degree and institution.
+- No regression on skills queries (corpus-grounded answers remain corpus-grounded).
+
+**Cross-references:**
+- `docs/working/080_Skill_Evidence_Approach.md` Section 5 (implementation gap documented here)
+- MATTGPT-080 (skill evidence architecture; this ticket is the remaining unshipped piece)
 
 ---
 
