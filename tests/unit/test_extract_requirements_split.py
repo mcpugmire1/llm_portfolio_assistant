@@ -376,3 +376,45 @@ class TestExtractRequirementsSplit:
             "downstream. It must not appear in any of the three split "
             "prompts' schemas."
         )
+
+    def test_split_prompts_require_verbatim_source_text(self):
+        """Required and preferred prompts must instruct the model to
+        copy source_text as the entire JD bullet verbatim.
+
+        The prior "Keep source_text short -- just enough to verify the
+        extraction" instruction caused a 27% truncation rate across the
+        demo JD (probe_244_source_text_instruction.py, September 2026,
+        23 truncations / 85 items under control), with consistent
+        parenthetical drops on Kubernetes and Product company bullets.
+        Replacing the instruction with a verbatim-required version
+        eliminated all truncations across 5 interleaved runs (23 -> 0).
+        This test guards the replacement against accidental regression
+        via future prompt-copy edits.
+
+        Implicit prompt intentionally NOT asserted: inferred_from
+        feeds the render (not the assessor), was not part of the probe,
+        and its instruction wording is separate scope."""
+        from services.jd_assessor import (
+            _PREFERRED_EXTRACTION_PROMPT,
+            _REQUIRED_EXTRACTION_PROMPT,
+        )
+
+        old_marker = "Keep source_text short"
+        new_marker = "verbatim and complete"
+
+        for name, prompt in (
+            ("_REQUIRED_EXTRACTION_PROMPT", _REQUIRED_EXTRACTION_PROMPT),
+            ("_PREFERRED_EXTRACTION_PROMPT", _PREFERRED_EXTRACTION_PROMPT),
+        ):
+            assert old_marker not in prompt, (
+                f"{name} contains the old 'Keep source_text short' "
+                f"instruction that caused 27% truncation. Restore the "
+                f"verbatim-required instruction. See "
+                f"probe_244_source_text_instruction.py."
+            )
+            assert new_marker in prompt, (
+                f"{name} missing the 'verbatim and complete' instruction. "
+                f"Without it the model reverts to summarizing source_text "
+                f"and downstream verdicts on parenthetical-bearing rows "
+                f"(Kubernetes, Product company) become unreliable."
+            )
