@@ -94,7 +94,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-156](#mattgpt-156) | Vendor commercial/spend management gap — decide whether corpus-zero on invoice/rate-card/procurement is a real claim or honest gap | Open | Low | Investigation | July 29, 2026 |
 | [MATTGPT-160](#mattgpt-160) | JD extraction: split into three concurrent calls (required / preferred / implicit) to stabilize requirement count on long JDs | Open | High | Bug | July 31, 2026 |
 | [MATTGPT-249](#mattgpt-249) | Role Match retrieval: crisis story at rank 18 on incident-leadership requirement; target carries incident vocabulary; ranking problem confirmed | Open | Medium | Bug | September 11, 2026 |
-| [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: both arms score ~80% strong on AT&T with genuine JD gaps; scoring is too generous | Open | High | Issue | September 2, 2026 |
+| [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | Open | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
 | [MATTGPT-168](#mattgpt-168) | Slot 1 is amplified without regard to margin -- tie or near-tie at slot 1 gets 80% of the answer | Open | High | Bug | August 5, 2026 |
@@ -1383,20 +1383,24 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 ---
 
 ### MATTGPT-244
-**Role Match assessor prompt calibration: three rows where cited evidence doesn't address the specific claim**
+**Role Match assessor prompt calibration: cited evidence doesn't address the specific claim**
 
 - **Status:** Open
 - **Priority:** High
 - **Type:** Issue
 - **File:** `services/jd_assessor.py` (assessment prompt)
 - **Logged:** September 2, 2026
-- **Dependencies:** MATTGPT-160 (must land first). Row 11 ("React, Node.js, Go" cited with a Python/Streamlit story) is only demonstrable if those technologies survive extraction -- strip them to "Modern technology stack fluency" and a Python story is defensible evidence and the row isn't wrong. Same for row 7. Row 22 ("partnering with C-suite" cited with Build-Measure-Learn) has no qualifier dependency and is falsifiable today. Fixture count is conditional on -160's probe results: if the split-by-section change incidentally preserves qualifiers on rows 7 and 11, all three fixtures are live; if not, -244 ships with row 22 only and qualifier preservation needs explicit work.
+- **Dependencies:** None. The conditional on MATTGPT-160's split-by-section results has resolved differently than expected: split-by-section did not preserve qualifiers; the `source_text` instruction change shipped at `5aee8a4` and `b28a080` did. Rows 7 and 11 are now falsifiable. Row 22 was always qualifier-independent.
 
-**Finding (corpus-text audit, September 18, 2026, `probe_244_audit.py`):** 17 honest, 5 over-called, 1 borderline across 23 rows on the AT&T JD. 22% strong, not the ~80% figure from the earlier -159 probe output. The five over-called rows split into two shapes:
+**Finding (corpus-text audit, September 18, 2026, `probe_244_audit.py`):** 17 honest, 5 over-called, 1 borderline across 23 rows on the demo JD. Two separate metrics: 20/23 strong (87% strong); 5/23 over-called (22% over-called). The ~80% strong figure in the earlier -159 probe output was measuring a different question. **Note on fixture identification:** `probe_244_audit.py:18` hardcodes `probe_159_output/arm2_run1.json`; the `jd_path` field in that file's summary reports `demo_jd.txt` despite folder naming suggesting otherwise. These are demo JD rows, not AT&T rows. Identify fixtures by requirement text and cited-evidence content, not by `jd_path` or folder name. The five over-called rows split into two shapes:
 
 **Shape A -- corpus-writing gap (rows 10 and 21). NOT -244 scope.** Both cite a solo project for an org-level requirement. The corpus has exactly one AI-assisted-development story and it is independent work; there is no org-level story to cite. Not fixable by prompt; the evidence simply does not exist. Both belong in MATTGPT-154 (operational-breadth tagging pass).
 
-**Shape B -- cited evidence doesn't address the specific claim (rows 7, 11, 22). This is -244.** The cited evidence exists in the corpus but is wrong for the requirement: row 22 cites a Build-Measure-Learn excerpt for "partnering with C-suite"; row 11 cites a Python/Streamlit story for "React, Node.js, Go." Those verdicts are wrong regardless of what Matt has actually done, because the evidence on the page doesn't support the row.
+**Shape B -- cited evidence doesn't address the specific claim. This is -244.** Three rows identified in the September audit:
+
+- **Demo JD row 22 ("partnering with C-suite" cited with Build-Measure-Learn):** Confirmed -244 scope. Build-Measure-Learn is a delivery methodology excerpt, not a C-suite partnership story. No qualifier dependency. Falsifiable today.
+- **Demo JD row 11 ("React, Node.js, Go" cited with Python/Streamlit story):** Resolved as pipeline defect, not calibration. Extraction truncated `source_text` at 27% of rows under the old "keep source_text short" instruction; flatten passed the compressed `requirement` field without the parenthetical. Fixed at `5aee8a4` (instruction change) and `b28a080` (flatten fix). Kubernetes now returns `partial` with "No mention of service mesh or multi-tenant orchestration," held across two browser runs. **Row 11 is closed as a -244 fixture.**
+- **Demo JD row 7 (CI/CD-qualifier shape):** Unchecked. Same structure as row 11 -- a qualifier that was likely being truncated by the old instruction. May have resolved identically after `5aee8a4`/`b28a080`. Not yet verified; needs one browser run before fixture count is final.
 
 **Fixtures verified as not -244 cases:**
 - Row 15 (Kubernetes, service mesh, container orchestration): arm2 correctly cited Norfolk Southern, which has real orchestration work. `partial` is honest; service mesh and multi-tenant are absent corpus-wide. Not miscalibrated.
@@ -1409,18 +1413,18 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 **Warning on vocabulary collision:** `grep "calibration" BACKLOG.md` returns results for MATTGPT-174 and ADR 018 -- those are Ask Agy router-threshold calibration (semantic similarity scoring). Different surface, different mechanism, nothing shared. Do not conflate. This ticket is about the Role Match per-requirement assessor prompt.
 
 **Scope:**
-- Add a rule requiring cited evidence to address the specific claim, not merely the topic area. Benchmark: rows 7, 11, and 22 on the AT&T fixture must return HONEST GAP or `partial` (not SUPPORTED) after the prompt change.
+- Verify row 7 still over-calls after `5aee8a4`/`b28a080` before starting. If row 7 resolved the same way as row 11, -244 is a one-fixture ticket and the 22%-over-called figure must be recomputed against current behavior before being cited.
+- Add a rule requiring cited evidence to address the specific claim, not merely the topic area. Benchmark: demo JD row 22 must return `gap` or `partial` (not SUPPORTED) after the prompt change. Row 7 added to benchmark if verified still over-calling.
 - **Delete the `confidence` field entirely.** It is generated on every assessment row, read nowhere in the application, and measured as carrying no independent signal. Tabulation of 587 rows (September 2026) found zero contradictions between `confidence` and `verdict`. The only apparent split -- 4 gap/low vs 4 gap/high rows -- did not survive inspection: the same requirement flipped `high` to `low` across arms on identical absence, which is architecture nondeterminism rather than a meaningful distinction. A gap the model is sure about and a gap it is uncertain about rendered identically. Remove `confidence` from the assessment prompt, the response schema, and any downstream code that reads or forwards the field. Do not re-run the tabulation to confirm; the September 2026 measurement is the record.
 
 **Acceptance:**
-- AT&T row 22 ("partnering with C-suite") no longer returns SUPPORTED with a Build-Measure-Learn citation.
-- AT&T row 11 ("React, Node.js, Go") no longer returns SUPPORTED with a Python/Streamlit citation.
-- AT&T row 7 assessed correctly relative to corpus evidence actually present.
+- Demo JD row 22 ("partnering with C-suite") no longer returns SUPPORTED with a Build-Measure-Learn citation.
+- Demo JD row 7: if still over-calling after `5aee8a4`/`b28a080`, assessed correctly relative to corpus evidence actually present.
 - No regression on the demo JD (requirements with clear corpus evidence still return SUPPORTED).
 - `confidence` field absent from assessment prompt, response schema, and all downstream consumers. No references to `confidence` remain in the Role Match pipeline.
 
 **Cross-references:**
-- MATTGPT-160 (extraction rewrite; must land first -- qualifier stripping makes rows 7 and 11 unfalsifiable until extraction preserves the named technologies)
+- MATTGPT-160 (extraction rewrite; no longer a gate -- qualifier stripping resolved by `source_text` instruction fix at `5aee8a4`/`b28a080`, not by the split-by-section change)
 - MATTGPT-154 (corpus-writing gap; Shape A rows 10 and 21 belong here, not in -244)
 - MATTGPT-243 (parallelization; does not touch assessment prompt)
 - MATTGPT-249 (retrieval ranking; -244 must land before -249)
@@ -1501,7 +1505,7 @@ Full ranked 25 available from `probe_243_top_k_rank.py` (re-runnable against cur
 
 **Evidence (`probe_160_extraction_variance.py`, September 2026):** Six JDs, five extractions each. Count spread is 1-2 across the 242-706 word range. At 1113 words (AT&T fixture) the spread jumps to 4-7. Threshold effect near 1000 words -- not a gradual linear scaling. AT&T fixture identity confirmed: 32-39 across runs, matching earlier hand observations. This is the before-measurement; the after-measurement is AT&T alone at five runs (the probe takes a path argument -- running all six JDs again is unnecessary for after-check).
 
-**Open question gating MATTGPT-244:** The split-by-section change (fewer requirements per prompt, less compression pressure) may incidentally fix qualifier stripping on AT&T rows 7 and 11 -- not guaranteed, but worth measuring before -244 begins. Run the AT&T fixture through the after-measurement probe and inspect whether "React, Node.js, Go" and the row 7 qualifiers survive. If they do, -244 has three fixtures. If they don't, -244 narrows to row 22 (no qualifier dependency) and qualifier preservation needs explicit scope -- either here or a new ticket.
+**Resolved: open question on -244 fixtures.** The split-by-section change did not incidentally fix qualifier stripping. Qualifier preservation was resolved by the `source_text` instruction change shipped at `5aee8a4` and `b28a080`. Demo JD row 11 is now closed as a pipeline defect; row 7 is unchecked but same shape. -244 carries row 22 as its confirmed fixture and row 7 as pending verification. This gating question is closed.
 
 **Out of scope (with reasoning -- do not re-derive):**
 
