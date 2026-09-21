@@ -1399,8 +1399,8 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 **Shape B -- cited evidence doesn't address the specific claim. This is -244.** Three rows identified in the September audit:
 
 - **Demo JD row 22 ("partnering with C-suite" cited with Build-Measure-Learn):** Confirmed -244 scope. Build-Measure-Learn is a delivery methodology excerpt, not a C-suite partnership story. No qualifier dependency. Falsifiable today.
-- **Demo JD row 11 ("React, Node.js, Go" cited with Python/Streamlit story):** Resolved as pipeline defect, not calibration. Extraction truncated `source_text` at 27% of rows under the old "keep source_text short" instruction; flatten passed the compressed `requirement` field without the parenthetical. Fixed at `5aee8a4` (instruction change) and `b28a080` (flatten fix). Kubernetes now returns `partial` with "No mention of service mesh or multi-tenant orchestration," held across two browser runs. **Row 11 is closed as a -244 fixture.**
-- **Demo JD row 7 (CI/CD-qualifier shape):** Unchecked. Same structure as row 11 -- a qualifier that was likely being truncated by the old instruction. May have resolved identically after `5aee8a4`/`b28a080`. Not yet verified; needs one browser run before fixture count is final.
+- **"Hands-on Kubernetes experience at production scale (cluster management, service mesh, multi-tenant orchestration)":** Resolved as pipeline defect, not calibration. Extraction truncated `source_text` at 27% of rows under the old "keep source_text short" instruction; flatten passed the compressed `requirement` field without the parenthetical qualifiers. Fixed at `5aee8a4` (instruction change) and `b28a080` (flatten fix). Now returns `partial` with "No mention of service mesh or multi-tenant orchestration," held across two browser runs. **Closed as a -244 fixture. Do not identify by audit row index -- the audit index for this requirement is unresolved (both row 11 and row 15 are Kubernetes-adjacent in the fixture list).**
+- **CI/CD-qualifier requirement (audit index unresolved):** Unchecked. Same structure as the Kubernetes row -- a qualifier that was likely being truncated by the old instruction. May have resolved identically after `5aee8a4`/`b28a080`. Not yet verified; needs one browser run before fixture count is final.
 
 **Fixtures verified as not -244 cases:**
 - Row 15 (Kubernetes, service mesh, container orchestration): arm2 correctly cited Norfolk Southern, which has real orchestration work. `partial` is honest; service mesh and multi-tenant are absent corpus-wide. Not miscalibrated.
@@ -1413,13 +1413,13 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 **Warning on vocabulary collision:** `grep "calibration" BACKLOG.md` returns results for MATTGPT-174 and ADR 018 -- those are Ask Agy router-threshold calibration (semantic similarity scoring). Different surface, different mechanism, nothing shared. Do not conflate. This ticket is about the Role Match per-requirement assessor prompt.
 
 **Scope:**
-- Verify row 7 still over-calls after `5aee8a4`/`b28a080` before starting. If row 7 resolved the same way as row 11, -244 is a one-fixture ticket and the 22%-over-called figure must be recomputed against current behavior before being cited.
+- Verify the CI/CD-qualifier requirement still over-calls after `5aee8a4`/`b28a080` before starting. If it resolved the same way as the Kubernetes row, -244 is a one-fixture ticket and the 22%-over-called figure must be recomputed against current behavior before being cited.
 - Add a rule requiring cited evidence to address the specific claim, not merely the topic area. Benchmark: demo JD row 22 must return `gap` or `partial` (not SUPPORTED) after the prompt change. Row 7 added to benchmark if verified still over-calling.
 - **Delete the `confidence` field entirely.** It is generated on every assessment row, read nowhere in the application, and measured as carrying no independent signal. Tabulation of 587 rows (September 2026) found zero contradictions between `confidence` and `verdict`. The only apparent split -- 4 gap/low vs 4 gap/high rows -- did not survive inspection: the same requirement flipped `high` to `low` across arms on identical absence, which is architecture nondeterminism rather than a meaningful distinction. A gap the model is sure about and a gap it is uncertain about rendered identically. Remove `confidence` from the assessment prompt, the response schema, and any downstream code that reads or forwards the field. Do not re-run the tabulation to confirm; the September 2026 measurement is the record.
 
 **Acceptance:**
 - Demo JD row 22 ("partnering with C-suite") no longer returns SUPPORTED with a Build-Measure-Learn citation.
-- Demo JD row 7: if still over-calling after `5aee8a4`/`b28a080`, assessed correctly relative to corpus evidence actually present.
+- CI/CD-qualifier requirement: if still over-calling after `5aee8a4`/`b28a080`, assessed correctly relative to corpus evidence actually present.
 - No regression on the demo JD (requirements with clear corpus evidence still return SUPPORTED).
 - `confidence` field absent from assessment prompt, response schema, and all downstream consumers. No references to `confidence` remain in the Role Match pipeline.
 
