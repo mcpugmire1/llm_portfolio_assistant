@@ -1498,7 +1498,7 @@ Full ranked 25 available from `probe_243_top_k_rank.py` (re-runnable against cur
 - **Status:** Open
 - **Priority:** High
 - **Type:** Issue
-- **File:** `ui/pages/ask_mattgpt/backend_service.py` (prompt assembly, citation rules, low-confidence gate), `load_matt_profile()` (loader format -- check location before touching), `matt_profile.json` (languages field, UGA education entry)
+- **File:** `services/rag_service.py` (`semantic_search` -- profile_facts return key), `ui/pages/ask_mattgpt/backend_service.py` (prompt consumption, citation rules, low-confidence gate), `load_matt_profile()` (loader format -- check location before touching)
 - **Logged:** September 21, 2026
 - **Dependencies:** None.
 
@@ -1520,7 +1520,7 @@ Not fixed in PoC:
 
 **Scope -- four changes:**
 
-1. **Profile block in Ask Agy's system prompt.** Load `matt_profile.json` via the same `load_matt_profile()` Role Match uses. Place the rendered block before the grounding rules. Unconditional -- no category detection, no routing. The decision is only whether to include ~80 tokens of facts; being wrong costs nothing.
+1. **`semantic_search` returns `profile_facts` as a new key alongside Pinecone hits.** Unconditional -- always present in the return, not mixed into `results`. Both callers (Ask Agy and My Work) get profile facts from one place, which makes convergence structural rather than two implementations agreeing. Ask Agy reads the key and injects the block into its prompt before the grounding rules. My Work receives it and renders per the deferred design in `Profile Facts Surfacing.dc.html`.
 
 2. **Citation rules 0a and 0b.**
    - 0a: facts in the block are attested; cite them directly and verbatim. No inference clause: state what the block says, do not infer capability or meaning from it.
@@ -1537,7 +1537,6 @@ Not fixed in PoC:
 - **Text matching against profile fields.** Those strings contain AWS, Oracle, SAFe, and French -- core corpus topics -- so it fires on story searches constantly.
 - **LLM classifier.** Accurate but costs a round trip per query. `classify_query_intent` was removed January 2026 for this reason.
 - **Facts as corpus stories.** Rejected July 2 in `080_Skill_Evidence_Approach.md` -- no STAR fields, attests rather than demonstrates.
-- **Routing profile facts through `semantic_search`'s return.** The profile payload does not depend on the query; a search function is the wrong delivery point. Ask Agy calls the loader directly.
 
 **Still deferred (not in scope here):** My Work rendering. Mock in `Profile Facts Surfacing.dc.html` -- profile answer in the banner family, one line above the grid framing the corpus as browse rather than evidence. Ask Agy's sources panel inherits the -128 profile-dot split, with the fact entry non-clickable.
 
