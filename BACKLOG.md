@@ -94,7 +94,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-156](#mattgpt-156) | Vendor commercial/spend management gap — decide whether corpus-zero on invoice/rate-card/procurement is a real claim or honest gap | Open | Low | Investigation | July 29, 2026 |
 | [MATTGPT-160](#mattgpt-160) | JD extraction: split into three concurrent calls (required / preferred / implicit) to stabilize requirement count on long JDs | Open | High | Bug | July 31, 2026 |
 | [MATTGPT-249](#mattgpt-249) | Role Match retrieval: crisis story at rank 18 on incident-leadership requirement; target carries incident vocabulary; ranking problem confirmed | Open | Medium | Bug | September 11, 2026 |
-| [MATTGPT-250](#mattgpt-250) | Ask Agy cannot answer queries about education or certifications -- profile fact injection layer never shipped | Open | High | Issue | September 21, 2026 |
+| [MATTGPT-250](#mattgpt-250) | Ask Agy cannot answer queries about education, certifications, or languages -- profile block missing from Ask Agy's system prompt | Open | High | Issue | September 21, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | Open | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -1493,43 +1493,70 @@ Full ranked 25 available from `probe_243_top_k_rank.py` (re-runnable against cur
 ---
 
 ### MATTGPT-250
-**Ask Agy cannot answer queries about education or certifications -- profile fact injection layer never shipped**
+**Ask Agy cannot answer queries about education, certifications, or languages -- profile block missing from Ask Agy's system prompt**
 
 - **Status:** Open
 - **Priority:** High
 - **Type:** Issue
-- **File:** `ui/pages/ask_mattgpt/backend_service.py`, `services/rag_service.py`
+- **File:** `ui/pages/ask_mattgpt/backend_service.py` (prompt assembly, citation rules, low-confidence gate), `load_matt_profile()` (loader format -- check location before touching), `matt_profile.json` (languages field, UGA education entry)
 - **Logged:** September 21, 2026
 - **Dependencies:** None.
 
-**Root cause:** Ask Agy reads only the STAR corpus. Education and certifications live in `matt_profile.json` permanently by design -- they are not STAR stories and never will be. Degree requirements and certification checkboxes are structured identity facts, not narratives. So "Is Matt certified?" returns nothing on Ask Agy, while Role Match correctly affirms "Oracle Certified Professional" because it reads `matt_profile.json` directly.
+**Root cause:** Ask Agy's system prompt does not include the profile block. Role Match loads `matt_profile.json` via `load_matt_profile()` and passes it as grounding context; Ask Agy does not. Education, certifications, and languages are structured identity facts -- not STAR stories, never will be -- so Ask Agy confabulates or rejects instead of answering.
 
-**Architecture history (July 2 session, confirmed in `docs/working/080_Skill_Evidence_Approach.md` Section 5):** The parity mandate was established July 2: "The two surfaces read from different evidence bases. Role Match grounds on `matt_profile.json`, which contains claims about you that were never committed to the STAR corpus." Two approaches were evaluated: (1) provenance records in Pinecone -- rejected because provenance has no STAR fields, renders as broken empty stories in shared search, and attests claims rather than demonstrating them; (2) profile skills migrated to story narratives -- shipped for skills, correct for skills, but wrong for facts like certifications and degrees. The agreed end state per the doc: profile legitimately holds identity facts, education, and certifications permanently; the backend reads them at answer-generation time for queries that match.
+**Concrete failure (September 21, 2026):** "Is Matt certified?" -- Ask Agy asserted certifications "aren't explicitly mentioned in the stories provided," then substituted F-22 and CIC work as evidence of expertise. Confabulation, not a hedge. Four certifications in `matt_profile.json`: SAFe 4 Certified Agilist, Microsoft Certified Professional (MCP) - Oracle, AWS Launchpad Champion, AWS Certified Solutions Architect - Associate. No PMP.
 
-**What was agreed but never built:** A profile fact injection layer -- when a query matches a known profile field category (education, certifications, work authorization, location), the RAG backend supplements the semantic search result with the structured profile fact before passing context to the LLM. Not a Pinecone record. Not a corpus story. A direct read from `matt_profile.json` at query time, conditional on the query routing to the right intent family.
+**Evidence (`probe_250_output/20260922_091818/`, September 22, 2026):** PoC run through the real `rag_answer` pipeline. 10 queries × 2 conditions (WITH / WITHOUT profile block) × 2 runs. 8 of 10 queries behaved as intended.
 
-**Concrete failure (September 21, 2026):** "Is Matt certified?" Ask Agy confabulated -- asserted the certifications "aren't explicitly mentioned in the stories provided," then substituted F-22 and CIC work as evidence of expertise in the domain. Not a hedge; improvised career narrative in place of an answer. `matt_profile.json` carries four certifications: SAFe 4 Certified Agilist, Microsoft Certified Professional (MCP) - Oracle, AWS Launchpad Champion, AWS Certified Solutions Architect - Associate. The AWS credentials are incidentally anchored in the Launchpad story corpus; the others are not. No profile read means three of four certifications are invisible to Agy.
+Fixed:
+- "Is Matt certified?" and "What certifications does Matt hold?" -- named all four certifications verbatim in both WITH runs; baseline ended with "they do not explicitly mention any certifications he personally holds."
+- "Does Matt have a PMP?" -- returned honest gap in WITH condition.
 
-**Scope:**
-- Add a `languages` field to `matt_profile.json` (French: BA in French Language and Literature, Queens University of Charlotte; exchange year, Université Paul Valéry, Montpellier via UNC Chapel Hill; graduate TA, French 101-103, University of Georgia). Also add a `matt_profile.json` education entry for the UGA graduate coursework -- it is currently missing.
-- Identify the intent routing point where profile-category queries can be detected (education, certifications, work authorization, location/relocation, languages).
-- Add a profile fact read at that point: load the relevant section of `matt_profile.json` and inject it as structured context alongside semantic search results.
-- The injected context must be framed so the LLM presents it as fact, not inference -- it's attested identity data, not evidence-grounded synthesis.
-- Role Match already has this behavior; check whether the Role Match path can serve as a reference or be extracted into a shared utility.
+No drift (control): five story queries (JPMorgan payments, leadership philosophy, why hire Matt, the failure story, the AWS program) were unchanged across conditions. AWS program query answered as a story in both -- no fact recital. This is the control that killed the router approach: a story query about AWS scored higher on profile-fact anchors than on the nearest story, so routing on profile-category text matches fires on story searches constantly.
 
-**Out of scope:** Embedding profile facts in Pinecone, creating provenance story stubs -- both explicitly rejected in the July 2 session and documented in the 080 working doc.
+Not fixed in PoC:
+- "Where did Matt get his degree?" -- gated in all four runs. `pinecone_score=0.218` against `CONFIDENCE_HIGH=0.25`; rejected before the prompt is built. Deterministic. Gate bypass not implemented in PoC; it is in scope here.
+- "Does Matt speak French?" -- both WITH runs opened "Matt speaks French." The profile does not say that and it is not true. Same class of over-inference appeared on two other rows: "AWS Launchpad Champion reflecting his role in leading cloud enablement programs" and "MCP-Oracle complements his technical background." None of those glosses are in the file. The no-inference citation rule addresses this.
 
-**Open question (must decide before implementation):** How injection interacts with the rejection gates. "Does Matt speak French?" is rejected before any answer path runs -- low-confidence out-of-scope gate fires first. A profile-fact lookup placed after routing never fires for this query. Either (a) the rejection gate needs a profile-category bypass that checks for profile-answerable query shapes before rejecting, or (b) profile injection happens earlier in the pipeline, before routing. These are architecturally different: (a) adds a pre-gate classifier; (b) restructures the pipeline entry point. Needs deciding before Code picks this up.
+**Scope -- four changes:**
+
+1. **Profile block in Ask Agy's system prompt.** Load `matt_profile.json` via the same `load_matt_profile()` Role Match uses. Place the rendered block before the grounding rules. Unconditional -- no category detection, no routing. The decision is only whether to include ~80 tokens of facts; being wrong costs nothing.
+
+2. **Citation rules 0a and 0b.**
+   - 0a: facts in the block are attested; cite them directly and verbatim. No inference clause: state what the block says, do not infer capability or meaning from it.
+   - 0b: if a fact question is not covered by the block, respond "That's not something Matt has shared publicly" -- do not synthesize from story evidence.
+
+3. **Loader format fix.** `load_matt_profile()` currently renders three degrees in one sentence then appends three unattributed notes, so a teaching note never carries its institution. Reformat so each note stays with its entry. **Regression check required before merging:** `load_matt_profile()` is Role Match's grounding input; reformatting changes what the assessor reads, including the Master's equivalence note. Run one Role Match pass on a JD with a CS-degree requirement and confirm the equivalence still lands. `tests/bdd/features/profile_grounding.feature` covers part of this.
+
+4. **Low-confidence gate bypass for profile-answerable queries.** "Where did Matt get his degree?" scores `pinecone_score=0.218` against `CONFIDENCE_HIGH=0.25` and is rejected before the prompt is built -- deterministic, four runs. The gate fires before the profile block would help. Add a bypass: if the query matches a profile-answerable shape (education, certification, language, work authorization, location), skip the low-confidence rejection and proceed to prompt assembly with the profile block loaded.
+
+**Data changes to `matt_profile.json` (prerequisite -- ship before or with the prompt change):**
+- Add a `languages` field: French. Entries: BA in French Language and Literature, Queens University of Charlotte; exchange year, Université Paul Valéry, Montpellier via UNC Chapel Hill; graduate TA, French 101-103, University of Georgia.
+- Add a `matt_profile.json` education entry for the UGA graduate coursework -- currently missing.
+
+**Rejected approaches (do not re-derive):**
+- **Router family (`profile_facts`).** Control query "How did Matt build the AWS certification program" scored 0.786 for `profile_facts` against 0.569 for the nearest story anchor -- the story query loses to the fact anchors. Router fires on story searches.
+- **Text matching against profile fields.** Those strings contain AWS, Oracle, SAFe, and French -- core corpus topics -- so it fires on story searches constantly.
+- **LLM classifier.** Accurate but costs a round trip per query. `classify_query_intent` was removed January 2026 for this reason.
+- **Facts as corpus stories.** Rejected July 2 in `080_Skill_Evidence_Approach.md` -- no STAR fields, attests rather than demonstrates.
+- **Routing profile facts through `semantic_search`'s return.** The profile payload does not depend on the query; a search function is the wrong delivery point. Ask Agy calls the loader directly.
+
+**Still deferred (not in scope here):** My Work rendering. Mock in `Profile Facts Surfacing.dc.html` -- profile answer in the banner family, one line above the grid framing the corpus as browse rather than evidence. Ask Agy's sources panel inherits the -128 profile-dot split, with the fact entry non-clickable.
 
 **Acceptance:**
-- "Is Matt certified?" on Ask Agy returns all four certifications with correct names (SAFe 4 Certified Agilist, MCP - Oracle, AWS Launchpad Champion, AWS Certified Solutions Architect - Associate), not confabulated narrative.
-- "Does Matt speak French?" returns the French background (BA, exchange year, graduate TA) rather than a rejection or confabulation.
-- "What's Matt's education background?" returns degree and institution.
-- No regression on skills queries (corpus-grounded answers remain corpus-grounded).
+- "Is Matt certified?" returns all four certifications verbatim (SAFe 4 Certified Agilist, MCP - Oracle, AWS Launchpad Champion, AWS Certified Solutions Architect - Associate). No confabulation.
+- "Does Matt have a PMP?" returns honest gap.
+- "Does Matt speak French?" returns French background (BA, exchange year, graduate TA) -- does not assert "Matt speaks French."
+- "Where did Matt get his degree?" is not gated; returns degree and institution.
+- Five story control queries (JPMorgan payments, leadership philosophy, why hire Matt, the failure story, the AWS program) unchanged from baseline.
+- Role Match equivalence note still lands on a CS-degree-requirement JD after the loader reformat.
 
 **Cross-references:**
-- `docs/working/080_Skill_Evidence_Approach.md` Section 5 (implementation gap documented here)
+- `probe_250_output/20260922_091818/output.txt` (517 lines, 72KB -- literal run output)
+- `probe_250_output/20260922_091818/poc.py` (PoC script; directory is gitignored via `probe_*_output/` pattern)
+- `docs/working/080_Skill_Evidence_Approach.md` Section 5 (original gap documentation)
 - MATTGPT-080 (skill evidence architecture; this ticket is the remaining unshipped piece)
+- MATTGPT-128 (sources panel profile-dot split; Ask Agy's sources panel rendering deferred here)
 
 ---
 
