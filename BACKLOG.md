@@ -37,7 +37,7 @@ Meta: -079, -156, -096
 -077 (re-measure after -181) · -171 (coupled to -190) · -185 (negation) · -239 (router confidence floor, blocked on -223 Sheet data)
 
 **LATER — tier 4:** hygiene
-Dead code: -176, -183, -199, -201 · -241 (dead prose: out_of_scope_response + personal_response, backend_service.py:1789,1816) · Hidden error: -204 (zero-filter-match only -- st.stop() blanking was MATTGPT-224, shipped `92370b3`)
+Dead code: -176, -183, -199, -201 · -241 (dead prose: out_of_scope_response + personal_response, backend_service.py (out_of_scope_response + personal_response in rag_answer())) · Hidden error: -204 (zero-filter-match only -- st.stop() blanking was MATTGPT-224, shipped `92370b3`)
 Untraced flash: -229 (My Work flashes before Ask Agy conversation -- needs DevTools trace)
 BDD flakes: -122, -131, -142, -145, -197, -198, -205
 Wrong-assertion test: -203 · -209 (drift guard searches wrong scope)
@@ -241,7 +241,7 @@ Each detail block uses these fields. Not every field is required for every item.
 
 **Phase 4 progress (May 4, 2026)**
 - BDD scenarios committed as `0d6285b` — 20 scenarios appended to `tests/bdd/features/role_match.feature` covering: password gate edge cases (4), lock icon affordances (4), session persistence (3), agentic bypass (3), recommendation matrix (4), locked↔unlocked transitions (2). Total Phase 4 scenarios in the design contract: 28 (8 prior + 20 new).
-- **Recommendation thresholds anchor to `compute_recommendation()` in `services/jd_assessor.py:367`.** All branches present (Apply / Consider / Pass + 0-requirements edge case); no missing branches to flag.
+- **Recommendation thresholds anchor to `compute_recommendation()` in `services/jd_assessor.py`.** All branches present (Apply / Consider / Pass + 0-requirements edge case); no missing branches to flag.
 - **Bypass mechanism:** `X-Mattgpt-Bypass-Token` request header compared against `MATTGPT_PRIVATE_BYPASS_TOKEN` env var. Both are referenced as named constants in code per CLAUDE.md (no magic strings in guards). Refresh re-locks; tab-scoped; env var unset fails closed silently.
 - **Step definitions deferred.** Scenarios are unbound (no `@scenario(...)` decorators yet). Implementation slices co-author with step definitions and bindings per CLAUDE.md testing protocol — implement password gate, then bind those scenarios; implement bypass header, then bind those; etc.
 
@@ -382,7 +382,7 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Soft dependencies (do these first):**
   - **MATTGPT-014** (reframed May 14 2026 as Action) — audit + split the 17 skipped Role Match BDD scenarios into structural (mocked) and content (evals). Until that lands, CI either fails on skipped tests or skips them silently — neither outcome is useful protection.
   - **MATTGPT-017** (reframed May 14 2026 as Action) — same shape; 6 skipped logging BDD scenarios need wiring before CI can include them.
-- **Fix:** After 014 + 017 land, wire `eval_rag_quality.py` and `tests/unit/` + BDD into a tiered GitHub Actions workflow. Spec has example YAML at `11-testing-and-quality.md` lines 502-512 (use as starting point; layer the tiers above on top).
+- **Fix:** After 014 + 017 land, wire `eval_rag_quality.py` and `tests/unit/` + BDD into a tiered GitHub Actions workflow. Spec has example YAML in `11-testing-and-quality.md` (the tiered GitHub Actions section) (use as starting point; layer the tiers above on top).
 - **Source:** Cross-reference of design spec vs. implementation, April 29, 2026
 - **Logged:** April 29, 2026 / **Refined:** May 14, 2026
 
@@ -394,7 +394,7 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Status:** Open
 - **Priority:** Medium
 - **Type:** Action
-- **Issue:** Eval suite validates first-turn behavior at 98.1% but has zero coverage of multi-turn conversation context. The `multi_turn` test case exists with `"followup": "Tell me more about that project"` but is explicitly skipped (see `eval_rag_quality.py` lines 1057-1060: "For multi-turn, we'd need to call twice - skip for now").
+- **Issue:** Eval suite validates first-turn behavior at 98.1% but has zero coverage of multi-turn conversation context. The `multi_turn` test case exists with `"followup": "Tell me more about that project"` but is explicitly skipped (see `eval_rag_quality.py` (multi-turn skip comment: "For multi-turn, we'd need to call twice - skip for now")).
 - **Root cause:** Multi-turn evaluation requires simulating conversation state — prior query + response feeding into follow-up. Current harness is single-shot.
 - **Fix:** Build multi-turn eval harness that runs first query, captures response and source state, then runs follow-up query with that state, evaluates final response against ground truth.
 - **Affects:** Eval coverage of "Ask Agy About This" button flow, Related Projects follow-ups, conversational drilling.
@@ -455,7 +455,7 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Status:** Open
 - **Priority:** Medium
 - **Type:** Refactor
-- **Issue:** `services/semantic_router.py::_get_intent_embeddings()` (lines 270-285) loads `data/intent_embeddings.json` if it exists and returns immediately — no drift check. If new canonical phrases are added to `VALID_INTENTS` without first deleting the cache file, the new phrases are silently absent from the embeddings map. The router iterates over cache keys only (line 335), so the new phrases are never checked against incoming queries. No error, no warning — the only signal is "the fix doesn't work and tests still fail."
+- **Issue:** `_get_intent_embeddings()` in `services/semantic_router.py` loads `data/intent_embeddings.json` if it exists and returns immediately — no drift check. If new canonical phrases are added to `VALID_INTENTS` without first deleting the cache file, the new phrases are silently absent from the embeddings map. The router iterates over cache keys only, so the new phrases are never checked against incoming queries. No error, no warning — the only signal is "the fix doesn't work and tests still fail."
 - **Why it matters:** The current contract is documented in the module docstring ("If you modify VALID_INTENTS, you MUST delete data/intent_embeddings.json to regenerate"), but it's a "you must remember" footgun, not a guardrail. Easy to skip during the wrong-person fix (MATTGPT-016) and produce a fix that compiles but doesn't take effect.
 - **Recurring impact:** Every future change to `VALID_INTENTS` carries this drift risk. The cache file is also ~4.3 MB and currently committed to git, so each regeneration creates a substantial commit diff (see commit `a0e7d58` for prior example, and the MATTGPT-016 commit that will follow).
 - **Fix options:**
@@ -713,7 +713,7 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Status:** Open
 - **Priority:** Medium
 - **Type:** Refactor
-- **Issue:** The Q15 test in `tests/eval_rag_quality.py:285-290` checks whether the literal string `"Fiserv"` appears in the response to the query `"Matt's work at Fiserv"`. It currently fails because the LLM describes the Fiserv work in granular detail (white-label card portal, $8.5M project, 47 acceptance criteria, $45M transactions, ADA/AODA compliance, DevOps modernization with Hudson + SonarQube) but doesn't echo the literal client name.
+- **Issue:** The Q15 test in the Q15 Fiserv test in `tests/eval_rag_quality.py` checks whether the literal string `"Fiserv"` appears in the response to the query `"Matt's work at Fiserv"`. It currently fails because the LLM describes the Fiserv work in granular detail (white-label card portal, $8.5M project, 47 acceptance criteria, $45M transactions, ADA/AODA compliance, DevOps modernization with Hudson + SonarQube) but doesn't echo the literal client name.
 - **Why this is an eval problem, not a product problem (May 22, 2026 production validation):** Matt tested the query against production and assessed the response as correct and useful for a recruiter — the response accurately describes the Fiserv engagement with specific metrics and project anchors. A recruiter asking *"Matt's work at Fiserv"* gets a substantively correct, detailed answer about that exact engagement. The literal-name match is a poor proxy for response quality.
 - **Mischaracterization in memory:** MEMORY.md previously listed this as `"Q15 Fiserv — LLM doesn't name 'Fiserv' in response. Pre-existing, low priority."` This framing treated it as a product defect (LLM should name the client) that was just deprioritized. Wrong framing — it's a test-quality issue (eval is checking the wrong thing). The "pre-existing low priority" label was never validated as a defect; it was carried forward as a self-citation across sessions until Matt's May 22 production check surfaced the actual response quality.
 - **Fix shape:** Restructure Q15 to check for **response correctness** (does the response describe the Fiserv engagement?) rather than literal client name presence. Approaches:
@@ -737,14 +737,14 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Type:** Issue
 - **Issue:** The thinking indicator (`render_thinking_indicator()`) appears for **all queries** on Ask MattGPT — rejected and successful — but only appears for **non-rejected queries** on Explore Stories. Visual inconsistency between the two surfaces.
 - **Root cause:**
-  - **Ask MattGPT** (`ui/pages/ask_mattgpt/conversation_view.py:198-204`): spinner rendered BEFORE the entire `send_to_backend()` call. The backend call contains all the gates (nonsense_check, semantic_router, Pinecone, LLM), so the spinner covers everything including rejections.
-  - **Explore Stories** (`ui/pages/explore_stories.py:1962-2022`): spinner rendered AFTER the rejection gates. Specifically, `is_nonsense()` check and semantic_router check both fire BEFORE the spinner code at line 1999. When either rejects the query, `st.stop()` or `return` exits the script before the spinner is reached.
+  - **Ask MattGPT** (`ui/pages/ask_mattgpt/conversation_view.py`, within the processing loop in `render_conversation()`): spinner rendered BEFORE the entire `send_to_backend()` call. The backend call contains all the gates (nonsense_check, semantic_router, Pinecone, LLM), so the spinner covers everything including rejections.
+  - **Explore Stories** (`ui/pages/explore_stories.py`, within `render_explore_stories()`): spinner rendered AFTER the rejection gates. Specifically, `is_nonsense()` check and semantic_router check both fire BEFORE the spinner block. When either rejects the query, `st.stop()` or `return` exits the script before the spinner is reached.
 - **User-facing impact:** On Explore Stories, rejected queries appear to "snap" to the banner with no transition. On Ask MattGPT, the same query type shows the spinner briefly before the banner appears. Inconsistent UX across surfaces.
 - **Fix shape:** Move the spinner code BEFORE the rejection gates in `explore_stories.py`. Wrap all three (nonsense_check, semantic_router, semantic_search) inside the spinner block. Subtleties to handle:
   - `st.stop()` calls in the current rejection branches skip `finally` blocks — flip those to early-return or restructure the flow so `search_container.empty()` always runs.
   - Need to ensure the spinner appears even for very-fast rejections (~10ms regex match) so the user perceives the system "thinking" before saying no.
 - **BDD coverage analysis (May 23, 2026):**
-  - 2 existing scenarios in `tests/bdd/features/explore_stories.feature:311-321` for personal + out_of_scope rejection — neither has step definitions. They're documented-but-pending under the MATTGPT-060 pattern.
+  - 2 existing scenarios in the personal + out_of_scope rejection scenarios in `tests/bdd/features/explore_stories.feature` for personal + out_of_scope rejection — neither has step definitions. They're documented-but-pending under the MATTGPT-060 pattern.
   - **Zero scenarios** anywhere assert spinner-during-rejection behavior. Coverage gap.
   - This ticket should land with new BDD scenarios that explicitly assert spinner presence during rejection on Explore Stories, AND optionally bind the 2 existing rejection-banner scenarios that have been pending step defs.
 - **Cross-references:**
@@ -915,7 +915,7 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Priority:** Medium
 - **Type:** Investigation + Action
 - **Issue:** Role Match's JD parser currently has no defined behavior for JDs that include comp expectations (e.g., *"Salary: $200-280K base + equity"*). Likely current behavior is silent drop (consistent with how location / work-model / availability are silently dropped per MATTGPT-089's findings), but this is unverified — could also be hallucinated match, surfaced as a gap, or treated as a qualification requiring an answer. No ticket previously owned this — MATTGPT-089 explicitly excluded comp (*"Skip comp — see MATTGPT-090 for separate handling"*), and MATTGPT-090 (closed Decided Against May 29, 2026) only covered the chatbot-side comp decline. The Role Match-side gap fell between the two tickets.
-- **Why this is its own ticket (not folded into -089):** Comp can't be **matched** against profile data — only **declined** — because Matt doesn't disclose comp publicly (per the Personal Intent Family decision codified in `services/semantic_router.py:192-209`). Location / work-model / availability (the -089 scope) can match against profile data (Atlanta + relocation openness from `data/matt_profile.json` or footer copy). Different UX shape, different fix path.
+- **Why this is its own ticket (not folded into -089):** Comp can't be **matched** against profile data — only **declined** — because Matt doesn't disclose comp publicly (per the Personal Intent Family decision codified in the personal-family anchors block in `services/semantic_router.py`). Location / work-model / availability (the -089 scope) can match against profile data (Atlanta + relocation openness from `data/matt_profile.json` or footer copy). Different UX shape, different fix path.
 - **Working direction (May 29, 2026 — exact language TBD):** Surface comp as a recognized JD requirement with a non-disclosure treatment — e.g., *"Not assessed publicly — direct conversation"* — rather than silently dropping it (which produces the same recruiter confusion as the chat-side silent fallback that drove the original -090 framing). Exact copy and result-panel placement are open design calls.
 - **Phased scope:**
   - **Phase 1 — Audit current behavior:** Paste 3-5 JDs that include comp into Role Match. Capture exactly what happens: silently dropped, hallucinated match, surfaced as gap, or other. Document in a probe results note.
@@ -926,7 +926,7 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Latency context (measured June 24, 2026, `jd_assessor.py`):** 1+N sequential gpt-4o calls; loop is linear in N requirements. `assess` dominates; `extract` is a large N-independent cost (~22s local on the demo JD). Parallelizing `assess` buys ~3-4x but `extract` is the floor. Relevant when deciding where comp handling sits in the call sequence.
 - **Cross-references:**
   - MATTGPT-089 — sibling JD-parser ticket (location / work-model / availability); -089 explicitly excludes comp, -099 owns it
-  - MATTGPT-090 — Decided Against, but its closure note points here for the Role Match-side gap; consistency with `services/semantic_router.py:192-209` is the cross-surface anchor
+  - MATTGPT-090 — Decided Against, but its closure note points here for the Role Match-side gap; consistency with the personal-family anchors block in `services/semantic_router.py` is the cross-surface anchor
   - MATTGPT-088 — Role Match scorer honesty discipline (the "no Strong Match when chat would say no" principle applies here too: Role Match shouldn't silently disclose what chat declines)
 - **Logged:** May 29, 2026
 
@@ -975,7 +975,7 @@ Two implementation constraints:
 2. Require the match is not flanked by a digit or magnitude suffix. Without both, `$10M` matches inside `$100M` and the HSBC line lands on the wrong card looking entirely plausible.
 
 **Trailing question removed:**
-Answers currently end with "Want me to dive deeper into any of these themes?" -- a second invitation below cards that the lead-in already introduced. The cards are the mechanism; clicking one sends "Tell me more about: `<title>`", the most-used interaction on the page (41 clicks, 24 sessions). The closings are `random.choice` over static lists at `backend_service.py` lines 1000-1006 and 1025-1035, injected via `build_user_prompt`. Remove them.
+Answers currently end with "Want me to dive deeper into any of these themes?" -- a second invitation below cards that the lead-in already introduced. The cards are the mechanism; clicking one sends "Tell me more about: `<title>`", the most-used interaction on the page (41 clicks, 24 sessions). The closings are `random.choice` over static lists at `_generate_agy_response()` in `backend_service.py` (synthesis and standard closings lists), injected via `build_user_prompt`. Remove them.
 
 **Vocabulary and caps:**
 Use Role Match's `evidence_type` field names (`profile`, `story`) rather than inventing a second pair. Take the per-type caps: a cap per kind means a noisy retrieval cannot crowd out the framing, which no single global cap achieves.
@@ -1083,9 +1083,9 @@ Role Match renders profile evidence as a prose block rather than a card -- do no
 - **Logged:** June 20, 2026
 
 `constants.py` defines `DEFAULT_CHAT_MODEL = "gpt-4o"` and `DEFAULT_CLASSIFICATION_MODEL = "gpt-4o-mini"` with a usage comment pointing to `get_conf()`. Neither is imported in production callers:
-- `backend_service.py` line 952: `model="gpt-4o"` hardcoded
-- `backend_service.py` line 681: `model="gpt-4o-mini"` hardcoded
-- `jd_assessor.py` line 185: `ASSESSMENT_MODEL = "gpt-4o"` hardcoded locally
+- `model="gpt-4o"` hardcoded in `_generate_agy_response()` in `backend_service.py`
+- `model="gpt-4o-mini"` hardcoded in `is_query_on_topic_llm()` in `backend_service.py`
+- `ASSESSMENT_MODEL = "gpt-4o"` defined locally in `services/jd_assessor.py` (not imported from config)
 
 `pinecone_service.py` and `semantic_router.py` correctly import `DEFAULT_EMBEDDING_MODEL`. Fix: import `DEFAULT_CHAT_MODEL` in `backend_service.py` and `jd_assessor.py` and replace the string literals. Also remove or repurpose `DEFAULT_CLASSIFICATION_MODEL` — the `classify_query_intent` LLM call it was built for was removed Jan 2026.
 
@@ -1136,9 +1136,9 @@ Role Match renders profile evidence as a prose block rather than a card -- do no
 
 **Issue:** The mobile filter layout uses three overlapping media blocks that fight over the same properties at phone widths. Code-reviewed against the repo June 2026 — line numbers confirmed exact.
 
-- **Block A** `@media (max-width: 767px)` lines 2189–2325: sets r2 labels to `display: none !important` (line 2223); injects field name via `::before` (lines 2227–2253); "prevent crushing" rule at lines 2255–2260.
-- **Block B** `@media (max-width: 767px)` lines 2327–2335: a standalone second 767px block (not a 480px block). Comment: "::before suppression must come AFTER the 767px block that injects content". Sets `::before` to `content: none !important` and `display: none !important` — cancels Block A's injection. Also fires at ≤480px, making the cascade three-deep at phone widths.
-- **Block C** `@media (max-width: 480px)` lines 2338–2396: sets r2 labels to `display: block !important` (line 2376).
+- **Block A** `@media (max-width: 767px)` (r2-label injection block): sets r2 labels to `display: none !important` (`display: none !important` rule); injects field name via `::before` (`::before` injection rules); "prevent crushing" rule ("prevent crushing" rule).
+- **Block B** (standalone second `@media (max-width: 767px)` block, comment: "::before suppression must come AFTER the 767px block that injects content"): a standalone second 767px block (not a 480px block). Comment: "::before suppression must come AFTER the 767px block that injects content". Sets `::before` to `content: none !important` and `display: none !important` — cancels Block A's injection. Also fires at ≤480px (same block), making the cascade three-deep at phone widths.
+- **Block C** `@media (max-width: 480px)` (r2-label block): sets r2 labels to `display: block !important` (`display: block !important` rule).
 
 All three fire simultaneously at ≤480px. All carry `!important` at equal specificity — source order decides. Block C sits last, so `display: block` currently wins and phone rendering is correct, but only by accident of file position.
 
@@ -1155,7 +1155,7 @@ The bug is that Blocks A and B have no lower bound, so they leak into the ≤480
 1. Floor the conflicting mid-band rules by moving ONLY these from Block A into a new `@media (min-width: 481px) and (max-width: 767px)` block:
    - r2-label hide (lines ~2220–2223)
    - `::before` field-name injection for r2 (lines ~2227–2246) and paired "prevent crushing" rule (lines ~2255–2260)
-2. With the injection floored at 481px, Block B (the standalone 767px suppression block at lines 2327–2335) becomes redundant — it exists only to cancel the injection at ≤480px, and the injection no longer fires there. Delete it. Note: Block B is a 767px block, not a 480px block — don't go looking for it in the 480px section.
+2. With the injection floored at 481px, Block B (the standalone second `@media (max-width: 767px)` block) becomes redundant — it exists only to cancel the injection at ≤480px, and the injection no longer fires there. Delete it. Note: Block B is a 767px block, not a 480px block — don't go looking for it in the 480px section.
 3. **Do NOT rebound the rest of Block A.** `stForm` label hide (~2191), Industry/Capability label sizing (~2203), and general mobile filter-bar layout are genuine all-mobile compensation that must stay active at 375px. Only the three r2 rules that Block C reverses get the floor.
 
 **Acceptance criteria:**
@@ -1228,19 +1228,19 @@ A load-time filter was tried during MATTGPT-224 and backed out because it broke 
 **Issue:** The AgGrid → st.dataframe migration left three coupling problems in the BDD suite caught reactively during a full-suite run. Production functionality is confirmed working. This ticket addresses the test debt.
 
 **Finding 1: Count noun is not a shared constant.**
-`explore_stories.py:1219` renders the noun `stories` as an inline literal inside the `.es-results-count` HTML string. Three tests (`test_banking_landing.py`, `test_cross_industry_landing.py`, `test_home.py`) match against it with the regex prefix `of\s+(\d+)\s+stor`. A copy change in that one line breaks all three tests silently. Additionally, `test_home.py:146` has a stale docstring still reading "projects" from before the migration.
+`render_explore_stories()` in `explore_stories.py` renders the noun `stories` as an inline literal inside the `.es-results-count` HTML string. Three tests (`test_banking_landing.py`, `test_cross_industry_landing.py`, `test_home.py`) match against it with the regex prefix `of\s+(\d+)\s+stor`. A copy change there breaks all three tests silently. Additionally, `test_home.py` has a stale docstring still reading "projects" from before the migration.
 
-Action: extract the noun to a named constant in `explore_stories.py`, import and reference it in the three test files. Fix the stale docstring in `test_home.py:146`.
+Action: extract the noun to a named constant in `explore_stories.py`, import and reference it in the three test files. Fix the stale docstring in `test_home.py`.
 
 **Partial progress (commit `1be5953`):** Regex fixed in all three test files (`of\s+(\d+)\s+project` → `of\s+(\d+)\s+stor`). Constant extraction and `test_home.py:146` docstring fix still open.
 
 **Finding 2: Sort-order assertion is now a canvas-mount check only.**
-`test_explore_stories_default_state.py::assert_sort_descending` (lines 158–169) was rewritten to wait for `[data-testid="stDataFrame"]` and `[data-testid="data-grid-canvas"]`. It no longer verifies sort order — that is a manual visual check per the ARCHITECTURE.md canvas constraint. Production sort confirmed working visually.
+`assert_sort_descending` in `test_explore_stories_default_state.py` was rewritten to wait for `[data-testid="stDataFrame"]` and `[data-testid="data-grid-canvas"]`. It no longer verifies sort order — that is a manual visual check per the ARCHITECTURE.md canvas constraint. Production sort confirmed working visually.
 
 Action: add a data-layer assertion in `test_explore_stories_default_state.py` that verifies `Start_Date` values in `view_paginated` are descending before the dataframe receives them. The corpus is already loaded in that file. This covers the behavior without touching the canvas.
 
 **Finding 3: Stranded `.ag-root-wrapper` / `.ag-row` waits in a silent `try/except`.**
-`test_explore_stories_default_state.py:123–124` still waits for `.ag-root-wrapper` and `.ag-row` inside a `try/except` that swallows the timeout. These selectors will never match now that `st.dataframe` replaced AgGrid. They produce a ~30s silent wait on every run of that test.
+The AgGrid selector wait block in `test_explore_stories_default_state.py` still waits for `.ag-root-wrapper` and `.ag-row` inside a `try/except` that swallows the timeout. These selectors will never match now that `st.dataframe` replaced AgGrid. They produce a ~30s silent wait on every run of that test.
 
 Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consistent with the rest of the file. Remove the `try/except` — the dataframe mount is the correct gate and should fail loudly if it times out.
 
@@ -1264,11 +1264,11 @@ Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consiste
 - **File:** `utils/ui_helpers.py`, `services/backend_service.py`, `ui/pages/ask_mattgpt/conversation_view.py`
 - **Logged:** July 16, 2026
 
-**Issue:** Debug output currently appears in the Streamlit UI sidebar as well as the terminal. When `DEBUG=True`, `dbg()` in `utils/ui_helpers.py` calls `st.sidebar.write("🧪", *args)` at four call sites in `backend_service.py` (lines 1400, 1502, 1694, 1936). A second debug block in `conversation_view.py` (lines 140-152) renders a static `st.caption` showing `VECTOR_BACKEND`, `PINECONE_INDEX_NAME`, and `PINECONE_NAMESPACE`. Goal is terminal-only.
+**Issue:** Debug output currently appears in the Streamlit UI sidebar as well as the terminal. When `DEBUG=True`, `dbg()` in `utils/ui_helpers.py` calls `st.sidebar.write("🧪", *args)` at four call sites in `backend_service.py` (search: `dbg(` in that file). A second debug block in `conversation_view.py` (the `# DEBUG INFO` block) renders a static `st.caption` showing `VECTOR_BACKEND`, `PINECONE_INDEX_NAME`, and `PINECONE_NAMESPACE`. Goal is terminal-only.
 
 **Proposed change (3 files, confirmed low-risk):**
 
-1. `utils/ui_helpers.py:75` -- `st.sidebar.write("🧪", *args)` to `print("🧪", *args)`. Redirects all four `dbg()` call sites to stdout.
+1. `st.sidebar.write` in `dbg()` in `utils/ui_helpers.py` -- change to `print("🧪", *args)` to `print("🧪", *args)`. Redirects all four `dbg()` call sites to stdout.
 2. `services/backend_service.py` -- add `PINECONE_INDEX_NAME`, `VECTOR_BACKEND` to the `pinecone_service` import and log them in the startup sanity check block (after DNA Status line), so the config values that are currently sidecar-only land in the terminal instead.
 3. `conversation_view.py:140-152` -- remove the entire `# DEBUG INFO` block. After step 2, these values are in the terminal log and the sidecar block is redundant.
 
@@ -1292,7 +1292,7 @@ Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consiste
 **Issue:** Q64 ("How does Matt manage resistance when leading enterprise transformation programs?") is stochastic. The LLM alternates between surfacing CloudFirst/Ways of Working (which contains "resistance" but not "Norfolk" or "stabilize") and other stories, producing variable phrase-match counts across runs. The test requires 2 of 5 phrases; variable story selection means the threshold is not reliably met.
 
 **Evidence:**
-- Failing in July 16, 2026 eval (68/70). Failure documented in test comment at line 218.
+- Failing in July 16, 2026 eval (68/70). Failure documented in a test comment in `eval_rag_quality.py`.
 - Prior passing run: July 15, 2026 (70/70).
 - Stochastic behavior first noted May 23, 2026.
 - July 31, 2026: failing again. Full-suite run matched 1/2 phrases ("resistance"); isolation run matched 0/2. Two runs minutes apart, different phrase hit counts. Confirms story-selection variance as root cause.
@@ -1520,7 +1520,7 @@ Not fixed in PoC:
 
 **Scope -- four changes:**
 
-1. **`semantic_search` returns `profile_facts` as a new key alongside Pinecone hits, loaded via `load_matt_profile()`.** Unconditional -- always present in the return, not mixed into `results` (both callers have story-shaped assumptions; a fact dict has none of those fields). `semantic_search` is the right seam because one shared function makes convergence structural rather than dependent on two callers staying in sync. The payload being query-independent is not an argument against this -- it means the loader runs once per call and both consumers get it automatically. Ask Agy reads the key and injects the block into its prompt before the grounding rules. My Work receives it; rendering stays deferred per `Profile Facts Surfacing.dc.html`. **Six-site constraint:** `semantic_search` constructs its return at six sites -- lines 78, 103, 118, 138, 200, and 208 in `services/rag_service.py`. `profile_facts` must land on all six, not just the happy path. Lines 103 and 118 are the Pinecone-unavailable fallbacks; lines 78 and 138 are the zero-result paths -- which is exactly where a low-scoring profile question lands after the gate bypass in item 4.
+1. **`semantic_search` returns `profile_facts` as a new key alongside Pinecone hits, loaded via `load_matt_profile()`.** Unconditional -- always present in the return, not mixed into `results` (both callers have story-shaped assumptions; a fact dict has none of those fields). `semantic_search` is the right seam because one shared function makes convergence structural rather than dependent on two callers staying in sync. The payload being query-independent is not an argument against this -- it means the loader runs once per call and both consumers get it automatically. Ask Agy reads the key and injects the block into its prompt before the grounding rules. My Work receives it; rendering stays deferred per `Profile Facts Surfacing.dc.html`. **Six-site constraint:** `semantic_search()` in `services/rag_service.py` has six return sites: the empty-query early exit, the `enforce_overlap`/token-overlap rejection, the no-Pinecone-hits local-fallback return, the `confidence == "none"` rejection, the active-filters zero-result return, and the happy-path return. `profile_facts` must land on all six, not just the happy path. The `enforce_overlap` and local-fallback sites are the Pinecone-unavailable fallbacks; the empty-query and `confidence == "none"` returns are the zero-result paths -- exactly where a low-scoring profile question lands after the gate bypass in item 4.
 
 2. **Citation rules 0a and 0b.**
    - 0a: facts in the block are attested; cite them directly and verbatim. No inference clause: state what the block says, do not infer capability or meaning from it.
@@ -1659,10 +1659,10 @@ Not fixed in PoC:
 - **Status:** Open (rewritten August 13, 2026 -- original premise disconfirmed; see investigation below)
 - **Priority:** High
 - **Type:** Bug
-- **Files:** `ui/pages/ask_mattgpt/prompts.py` (line 171), `ui/pages/ask_mattgpt/backend_service.py` (line 829)
+- **Files:** `ui/pages/ask_mattgpt/prompts.py` (primary-story floor instruction -- verify current location; may have moved since logged), `ui/pages/ask_mattgpt/backend_service.py` (`<primary_story>` XML wrapping in `_generate_agy_response()`)
 - **Logged:** August 5, 2026
 
-**Issue:** `ranked_stories[0]` is wrapped in `<primary_story>` and `prompts.py:171` requires at least 80% of the response to come from it, forbidding the model from building around a supporting story. Nothing in the pipeline checks whether slot 1's win was decisive. A story that leads by 0.000 gets the same treatment as one leading by 0.072.
+**Issue:** `ranked_stories[0]` is wrapped in `<primary_story>` and `prompts.py` requires at least 80% of the response to come from it, forbidding the model from building around a supporting story. Nothing in the pipeline checks whether slot 1's win was decisive. A story that leads by 0.000 gets the same treatment as one leading by 0.072.
 
 **Exhibit 1 (August 3, 2026):** "Has Matt directly managed engineering teams?" Why Hire Matt and the management story both scored 0.476 -- a tie. Why Hire Matt held slot 1 by Pinecone ordering. The model built the entire answer around it; the result was a Professional Narrative response to a direct operational question.
 
@@ -1775,18 +1775,18 @@ The phrase is not invisible to keyword scoring. It scores on a single stopword t
 - **Status:** Open
 - **Priority:** Low
 - **Type:** Refactor
-- **Files:** `ui/pages/ask_mattgpt/utils.py` (line 237), `ui/pages/ask_mattgpt/backend_service.py` (lines 1044-1243, 1412-1421), `ui/pages/ask_mattgpt/conversation_view.py` (line 305)
+- **Files:** `ask_mattgpt/utils.py` (`push_card_snapshot_from_state`), `ui/pages/ask_mattgpt/backend_service.py` (`_generate_agy_response` commented-out block; `_diversify_for_background()` typed-alias map), `ui/pages/ask_mattgpt/conversation_view.py` (cmd_map)
 - **Logged:** August 11, 2026
 
 **Three items -- work independently, ship together or separately:**
 
-1. **Dead function:** `push_card_snapshot_from_state` at `utils.py:237` has zero callers. Confirmed via grep. Remove the function and any imports that exist solely for it.
+1. **Dead function:** `push_card_snapshot_from_state` in `ask_mattgpt/utils.py` has zero callers. Confirmed via grep. Remove the function and any imports that exist solely for it.
 
-2. **Commented-out legacy block:** `_generate_agy_response` at `backend_service.py:1044-1243` -- 200 lines of legacy response-generation logic, commented out. Survived the `6cba8d9` cleanup pass that removed 430 similar lines from the same file. Note for whoever picks this up: `6cba8d9` claimed to have cleared this class of commented-out legacy code; this block's survival was not intentional, it was missed. Remove. If git history is needed, it is in the commit log; commented-out code in a live module is not a backup strategy.
+2. **Commented-out legacy block:** `_generate_agy_response` (200-line commented-out legacy block in `backend_service.py`) -- 200 lines of legacy response-generation logic, commented out. Survived the `6cba8d9` cleanup pass that removed 430 similar lines from the same file. Note for whoever picks this up: `6cba8d9` claimed to have cleared this class of commented-out legacy code; this block's survival was not intentional, it was missed. Remove. If git history is needed, it is in the commit log; commented-out code in a live module is not a backup strategy.
 
-3. **Duplicate typed-alias map:** `backend_service.py:1412-1421` contains a typed-alias map independent of the one at `conversation_view.py:305`. Two implementations of the same feature with no documented reason for divergence. Before removing either copy: (a) confirm both maps are identical in content; if they differ, the divergence is a separate bug to file. (b) Identify which call path uses which copy and make `conversation_view.py:305` the canonical one, or document why the backend copy must exist.
+3. **Duplicate typed-alias map:** `_diversify_for_background()` in `backend_service.py` contains a typed-alias map independent of the cmd_map in `conversation_view.py`. Two implementations of the same feature with no documented reason for divergence. Before removing either copy: (a) confirm both maps are identical in content; if they differ, the divergence is a separate bug to file. (b) Identify which call path uses which copy and make `conversation_view.py` (cmd_map) the canonical one, or document why the backend copy must exist.
 
-**Note on `_format_narrative`:** An earlier claim in this investigation that `_format_narrative` output "poisons every query" was retracted. Verified: `_format_narrative` feeds `answer_context`, used only at `backend_service.py:1041`, the API-failure fallback path. It does not enter the LLM prompt on normal query paths. No ticket warranted; noted here for provenance since the retraction happened in the same investigation session.
+**Note on `_format_narrative`:** An earlier claim in this investigation that `_format_narrative` output "poisons every query" was retracted. Verified: `_format_narrative` feeds `answer_context`, used only in the API-failure fallback path in `rag_answer()` in `backend_service.py`, the API-failure fallback path. It does not enter the LLM prompt on normal query paths. No ticket warranted; noted here for provenance since the retraction happened in the same investigation session.
 
 ---
 
@@ -1849,7 +1849,7 @@ Specific location: `test_scoring.py:85` constructs a fixture dict using phantom 
 - **Type:** Refactor
 - **Logged:** August 13, 2026
 
-**Issue:** `has_metric` is initialized to `False` at `explore_stories.py:129` and `:725`, read at `:362` and `:1069`, and cleared at `:411`. Nothing in the UI ever sets it to `True`. The chip at line 362 can never render. The filter key is dead.
+**Issue:** `has_metric` is initialized to `False` in both filter initializers in `explore_stories.py`, read in `render_filter_chips()` and the results-filter block in `render_explore_stories()`, and cleared in `remove_filter_value()`. Nothing in the UI ever sets it to `True`. The chip in `render_filter_chips()` can never render. The filter key is dead.
 
 `utils/filters.py` imports `story_has_metric` from `formatting.py` to gate this branch. `story_has_metric` reads phantom field names (`what`, `star.result`) and returns False for every story -- but that doesn't matter, because the branch is unreachable regardless. The defect is the dead filter, not the broken function.
 
@@ -1857,12 +1857,12 @@ Specific location: `test_scoring.py:85` constructs a fixture dict using phantom 
 
 **Fix (removal, not repair):**
 1. Remove the `has_metric` branch from `matches_filters` in `utils/filters.py`.
-2. Remove the chip and clear logic from `explore_stories.py` (lines 362-363, 410-411).
-3. Remove `has_metric` key from both filter initializers (`explore_stories.py:129`, `:725`).
-4. Delete `test_filters.py:116` (tests the dead branch against a phantom-schema fixture; passing tells you nothing).
+2. Remove the chip and clear logic from `render_filter_chips()` and `remove_filter_value()` in `explore_stories.py`.
+3. Remove `has_metric` key from both filter initializers in `explore_stories.py`.
+4. Delete the `has_metric` phantom-fixture test in `test_filters.py` (tests the dead branch against a phantom-schema fixture; passing tells you nothing).
 5. `story_has_metric` in `formatting.py` then has no importer and becomes dead code -- delete it inline as part of this ticket. MATTGPT-179 is DA; do not route this to that ticket's deletion list.
 
-**Note -- personas:** `personas` in `filters.py` is already self-documented as dead ("not used -- field doesn't exist in data"). `conversation_helpers.py:121` reads it for badge rendering; the badges never render because the field is absent from corpus stories. Same class; not in scope for this ticket but worth a cleanup pass alongside it.
+**Note -- personas:** `personas` in `filters.py` is already self-documented as dead ("not used -- field doesn't exist in data"). `conversation_helpers.py` reads it for badge rendering (search: `personas` in that file); the badges never render because the field is absent from corpus stories. Same class; not in scope for this ticket but worth a cleanup pass alongside it.
 
 **Cross-references:** MATTGPT-180 (test_filters.py:116 is a phantom-schema fixture that should be deleted, not rebuilt). Note: MATTGPT-179 is DA -- the three dead formatters (`_format_narrative`, `_format_key_points`, `_format_deep_dive`) are documented there as a finding; `story_has_metric` deletion is in scope for this ticket as step 5 above.
 
@@ -1903,7 +1903,7 @@ Specific location: `test_scoring.py:85` constructs a fixture dict using phantom 
 - **Status:** Open
 - **Priority:** Medium
 - **Type:** Bug
-- **File:** `ui/pages/ask_mattgpt/backend_service.py:1246-1319`
+- **File:** `rag_answer()` in `backend_service.py` (dedup / client-cap logic)
 - **Logged:** August 13, 2026
 
 **Issue:** The signature takes `max_per_client: int = 1` and the docstring says "Limiting stories per client." The parameter is never referenced in the body. Stories beyond the first per client go into `duplicate_overflow` and are concatenated onto the result rather than dropped.
@@ -1912,7 +1912,7 @@ Two failing tests assert the documented contract:
 - `test_limits_single_client_stories` -- asserts `jpmc_count <= 1`, gets 2. Input `[JPMC, JPMC, Capital One, Takeda, AmEx]` returns `[JPMC, Capital One, Takeda, AmEx, JPMC]`.
 - `test_maintains_overall_order` -- asserts descending score order, gets `[0.95, 0.82, 0.78, 0.75, 0.88]`. The duplicate JPMC at 0.88 is bumped to the end.
 
-**Decision required before fixing:** Is the intent to drop duplicates or to demote them? The tests assert drop. The code demotes. Callers pass `max_per_client=3` at `backend_service.py:1937`, which only means something under the drop interpretation.
+**Decision required before fixing:** Is the intent to drop duplicates or to demote them? The tests assert drop. The code demotes. Callers pass `max_per_client=3` at `rag_answer()` in `backend_service.py`, which only means something under the drop interpretation.
 
 Note the second test also asserts score ordering, which the function cannot preserve by design -- it partitions by client bucket and never reads a score. That assertion may be testing the wrong contract regardless of how the first question is resolved.
 
@@ -2051,14 +2051,14 @@ Note: the eval suite already contains "Tell me about Elon Musk" as a golden quer
 
 **Exception:** Line 1247 (`pytest.skip` for clipboard API) is a genuine headless Chromium constraint (clipboard requires HTTPS or a browser flag). This one stays as skip.
 
-**Fix:** Change lines 240, 555, 586, 693 from `pytest.skip(...)` to `pytest.fail(...)`. No logic change -- only the outcome when the element is absent changes from skip to fail.
+**Fix:** Change the four `pytest.skip(...)` call sites (search: `pytest.skip` in `tests/bdd/steps/`) from `pytest.skip(...)` to `pytest.fail(...)`. No logic change -- only the outcome when the element is absent changes from skip to fail.
 
 **Acceptance criteria:**
 - Running the BDD suite with cards not rendering produces a failure, not an additional skip.
 - Line 1247 clipboard skip unchanged.
 - All currently-passing scenarios still pass.
 
-**Cross-references:** MATTGPT-122 (Cards view BDD timing -- line 240 is the same step; if -122 is fixed, line 240 becomes safe to convert without risk of false red).
+**Cross-references:** MATTGPT-122 (Cards view BDD timing -- one of the skip sites is the same step; if -122 is fixed, that skip site becomes safe to convert without risk of false red).
 
 ---
 
@@ -2108,12 +2108,12 @@ Note: the eval suite already contains "Tell me about Elon Musk" as a golden quer
 - **Status:** Open
 - **Priority:** Low
 - **Type:** Bug
-- **File:** `ui/pages/ask_mattgpt/backend_service.py` (content-kw gate, ~line 1638), `utils/validation.py:62`
+- **File:** `is_query_on_topic_llm()` in `backend_service.py`, `utils/validation.py` (`_WORD_RX` and `_tokenize()`)
 - **Logged:** August 17, 2026
 
 **Issue:** The content-kw gate strips `entity_toks = set(_tokenize(entity_value))` from `retrieval_q` before recomputing kw. For entities whose canonical name tokenizes to `set()`, nothing gets stripped, so any content token disperses kw and suppresses synthesis -- identical to the broad-query behavior the gate was designed to catch.
 
-**Verified August 17, 2026:** `_WORD_RX = re.compile(r"[A-Za-z0-9+#\-_.]+")` at `utils/validation.py:62` does not include `&`. `_tokenize("AT&T")` splits into `["at", "t"]`, both dropped by the `len(t) >= 3` filter at line 94. `entity_toks = set()`.
+**Verified August 17, 2026:** `_WORD_RX = re.compile(r"[A-Za-z0-9+#\-_.]+")` in `utils/validation.py` does not include `&`. `_tokenize("AT&T")` splits into `["at", "t"]`, both dropped by the `len(t) >= 3` filter in `_tokenize()`. `entity_toks = set()`.
 
 **Consequence:** AT&T is the only current corpus entity affected. Any entity whose canonical name is ≤2 chars or contains `&` (or other non-`[A-Za-z0-9+#\-_.]` punctuation) has the same behavior. Hypothetical: "L3", "T&E", etc.
 
@@ -2170,7 +2170,7 @@ Note: the eval suite already contains "Tell me about Elon Musk" as a golden quer
 
 **Naming caution:** A leading underscore on the helper (e.g., `_is_valid_story_id`) signals private to the module, but `app.py` would import it -- a convention violation. Either use a public name (no leading underscore) or document the deliberate violation in a comment. Decide before implementing.
 
-**Pre-flight before implementing:** Read both functions in full and trace current callers of each before proposing a helper location or signature. `corpus_loader.py` line 58 docstring says "Replicates app.py id enforcement" -- that comment should be removed or updated when the helper is in place.
+**Pre-flight before implementing:** Read both functions in full and trace current callers of each before proposing a helper location or signature. `corpus_loader.py` docstring says "Replicates app.py id enforcement" -- that comment should be removed or updated when the helper is in place.
 
 **Cross-references:** MATTGPT-182 (same class: normalize_story divergence across call sites; fixed August 15 at 275ff1f).
 
@@ -2190,7 +2190,7 @@ Note: the eval suite already contains "Tell me about Elon Musk" as a golden quer
 
 **Defect 1 -- corpus-load failure is a blank page:**
 
-`load_star_stories` at `app.py:228` calls `st.error` on JSON parse failure or file-not-found. `global_styles.py:190-196` hides `.stAlert` unless it contains a thinking-ball element. The error renders into a hidden element; the visitor sees a blank page with no indication the corpus failed to load.
+`load_star_stories()` in `app.py` calls `st.error` on JSON parse failure or file-not-found. the `.stAlert` visibility rule in `global_styles.py` hides `.stAlert` unless it contains a thinking-ball element. The error renders into a hidden element; the visitor sees a blank page with no indication the corpus failed to load.
 
 Fix: mirror the design-1A `st.markdown` block used in the startup handler, with `corpus_load` as the correlation handle. Do not touch the `.stAlert` CSS rule -- suppressing alerts globally is intentional on this surface.
 
@@ -2200,7 +2200,7 @@ When no stories match the active filters, Cards view returns early with "No stor
 
 Fix (incremental): add the same early-return empty-state guard to the Table branch before the row hint and before `st.dataframe`. Same copy and Clear filters button as Cards/Timeline. `render_pagination` already no-ops at ≤1 page; no change needed there.
 
-Fix (full): Cards and Timeline both use `st.info` for the empty-state message, which is also suppressed by the same `.stAlert` CSS rule at `global_styles.py:190-196`. The Clear filters button renders because it is a `st.button`, not an alert -- so both views have been showing a button with invisible text and nobody noticed because the button alone is enough to be usable. Adding the guard to Table produces three views with invisible text, not three views with a working empty state. The complete fix replaces `st.info` with `st.markdown` across all three views. Implement the guard first to unblock Table; follow immediately with the `st.markdown` conversion across all three. Do not close this ticket on the guard alone.
+Fix (full): Cards and Timeline both use `st.info` for the empty-state message, which is also suppressed by the same `.stAlert` visibility rule in `global_styles.py`. The Clear filters button renders because it is a `st.button`, not an alert -- so both views have been showing a button with invisible text and nobody noticed because the button alone is enough to be usable. Adding the guard to Table produces three views with invisible text, not three views with a working empty state. The complete fix replaces `st.info` with `st.markdown` across all three views. Implement the guard first to unblock Table; follow immediately with the `st.markdown` conversion across all three. Do not close this ticket on the guard alone.
 
 **Defect 3 -- transient blank grid on pagination (unconfirmed, August 31, 2026):**
 
@@ -2352,13 +2352,13 @@ Grep targets for Class 3: `except Exception: pass`, `except: pass`, bare `except
 - **Status:** Done
 - **Priority:** High
 - **Type:** Bug
-- **File:** `services/backend_service.py:1777`
+- **File:** `rag_answer()` in `backend_service.py` (hard-stop at the out-of-scope response)
 - **Logged:** August 30, 2026
 - **Resolved:** August 30, 2026 -- `b8bd59b`
 
 **Rescoped August 30, 2026.** Original framing was a misroute fix dependent on -220's taxonomy cleanup. The actual fix is smaller and independent: a single score gate, no taxonomy change.
 
-**Confirmed live in production (August 30, 2026):** Five queries hard-stop at `backend_service.py:1777` with the canned "I don't have experience in that industry" response. All five are answerable from the corpus:
+**Confirmed live in production (August 30, 2026):** Five queries hard-stop in `rag_answer()` in `backend_service.py` with the canned "I don't have experience in that industry" response. All five are answerable from the corpus:
 - "Tell me about Matt's amex work" -- 0.696 (failing since 2026-03-24, five months)
 - "Tell me about Matt's AT&T work" -- 0.666
 - "Tell me about Matt's Norfolk Southern work" -- 0.624
@@ -2390,7 +2390,7 @@ None clear 0.80. A rejection that ignores its own confidence is a bug on its own
 
 **Inventory (August 30, 2026):**
 
-`services/semantic_router.py:32-224` holds 15 hand-typed anchor families. `_classify_embedding` (`:319-349`) flattens every anchor into one dict, takes a global argmax, and reports whichever family the winning anchor belongs to. The family label is a byproduct of the argmax, not a per-family contest.
+The intent anchors dict in `services/semantic_router.py` holds 15 hand-typed anchor families. `_classify_embedding()` in `semantic_router.py` flattens every anchor into one dict, takes a global argmax, and reports whichever family the winning anchor belongs to. The family label is a byproduct of the argmax, not a per-family contest.
 
 Of the 11 topical families:
 
@@ -2398,18 +2398,18 @@ Of the 11 topical families:
 |---|---|---|
 | 3 | `leadership`, `stakeholders`, `innovation` | none -- telemetry only |
 | 6 | `technical`, `delivery`, `team_scaling`, `agile_transformation`, `domain_payments`, `domain_healthcare` | the two set-membership tests only |
-| 2 | `background`, `behavioral` | real branches (`diversify_results` `backend_service.py:1525`; `is_trusted_behavioral` `:1970`) |
+| 2 | `background`, `behavioral` | real branches (`diversify_results()` in `backend_service.py`; `is_trusted_behavioral` (local variable in `rag_answer()`)) |
 
 The two sets, verbatim:
 - `SUBSTITUTION_FAMILIES` = `{technical, team_scaling, agile_transformation}` -- `config/constants.py:73`
-- `_PN_EXCLUDED_FAMILIES` = `{technical, delivery, domain_payments, domain_healthcare, agile_transformation}` -- `backend_service.py:141-149`
+- `_PN_EXCLUDED_FAMILIES` in `backend_service.py`
 
 Union = the 6 topic-axis families exactly. `technical` and `agile_transformation` are in both.
 
 Six hand-maintained families of anchor strings exist to evaluate two set-membership lines, and three exist to be written to a log column. Nothing reads a topical family for its topic.
 
 **Why the HSBC case looks like a misroute but isn't -- and why it still matters:**
-`domain_payments` anchors include "financial services" and "banking" (`:107-112`), so an HSBC query lands there. Nothing branches on topic, so the wrong label causes no topic error -- but `domain_payments ∈ _PN_EXCLUDED_FAMILIES`, so positioning stories are stripped from the pool for a reason unrelated to HSBC. HSBC's own record (Industry: Financial Services / Banking, Sub-category: Technology Strategy & Advisory Services) is never consulted.
+`domain_payments` anchors include "financial services" and "banking" in `semantic_router.py`, so an HSBC query lands there. Nothing branches on topic, so the wrong label causes no topic error -- but `domain_payments ∈ _PN_EXCLUDED_FAMILIES`, so positioning stories are stripped from the pool for a reason unrelated to HSBC. HSBC's own record (Industry: Financial Services / Banking, Sub-category: Technology Strategy & Advisory Services) is never consulted.
 
 Both list memberships are proxies for questions the code never asks directly:
 - `_PN_EXCLUDED_FAMILIES` wants: should a summary count as evidence for this query?
@@ -2425,7 +2425,7 @@ Prerequisite: replay diff. Run borderline log, off-domain log, and eval suite th
 
 **Commit 2:** Rewire the two rules to their real question. This is the only commit with a behavior change.
 
-`_PN_EXCLUDED_FAMILIES` -- replace with entity-detection rule: if the query names a real Client / Employer / Division, it is an evidence query and summaries are excluded; otherwise summaries are eligible. Detection already exists via `ENTITY_DETECTION_FIELDS` (`constants.py:130`) against corpus values. Corpus-derived, not hand-typed. Also fixes the MATTGPT-219 symptoms head-on: "what did Matt do at HSBC?" names an entity, so the exclusion fires for the right reason.
+`_PN_EXCLUDED_FAMILIES` -- replace with entity-detection rule: if the query names a real Client / Employer / Division, it is an evidence query and summaries are excluded; otherwise summaries are eligible. Detection already exists via `ENTITY_DETECTION_FIELDS` in `config/constants.py` against corpus values. Corpus-derived, not hand-typed. Also fixes the MATTGPT-219 symptoms head-on: "what did Matt do at HSBC?" names an entity, so the exclusion fires for the right reason.
 
 Fallback if no entity is detected: surviving-family membership (`background`, `narrative`, `personal`, `synthesis` are about-Matt shapes; unknown defaults to evidence-mode). This reintroduces a hand-maintained set at smaller scale; replay diff is the gate for choosing members honestly.
 
@@ -2587,10 +2587,10 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 - **Status:** Open
 - **Priority:** Low
 - **Type:** Hygiene
-- **File:** `services/backend_service.py:1789,1816`, `ui/pages/ask_mattgpt/conversation_view.py:218`
+- **File:** `services/backend_service.py (out_of_scope_response + personal_response in rag_answer())`, `ui/pages/ask_mattgpt/conversation_view.py:218`
 - **Logged:** September 2, 2026
 
-**Finding (September 2, 2026 rejection-contract audit):** `backend_service.py` constructs `out_of_scope_response` (~line 1789) and `personal_response` (~line 1816), and both set `ask_last_reason`. The transcript branch at `conversation_view.py:218` takes the banner path whenever a reason is set, so the prose is never rendered. Warm, well-written copy that no visitor has ever read.
+**Finding (September 2, 2026 rejection-contract audit):** `rag_answer()` in `backend_service.py` constructs `out_of_scope_response` and `personal_response`, and both set `ask_last_reason`. The transcript branch in `render_conversation()` in `conversation_view.py` takes the banner path whenever a reason is set, so the prose is never rendered. Warm, well-written copy that no visitor has ever read.
 
 **Fix:** Either delete the prose and keep the banner path, or route to the prose and delete the banner twins. Both are acceptable; both existing is the problem.
 
@@ -2747,7 +2747,7 @@ Source-side count (grep of `ui/styles/`) is 34 raw occurrences -- the delta of 3
 
 **Doubly dead:** `.main .ag-root-wrapper` is dead twice over -- AgGrid was removed in MATTGPT-144.
 
-**Why it's more than dead code:** During MATTGPT-225 diagnosis, `global_styles.py:2704-2714` (`.main .stTextInput > div > div > input` border block) initially looked like the source of the landing input border bug. It wasn't -- the actual culprit was an `.st-XX` hashed selector group elsewhere. But ~299 declarations that look authoritative and do nothing will keep sending debugging down the wrong path, and any not silently backstopped is a live visual defect nobody has noticed yet.
+**Why it's more than dead code:** During MATTGPT-225 diagnosis, the `.main .stTextInput > div > div > input` selector block in `global_styles.py` initially looked like the source of the landing input border bug. It wasn't -- the actual culprit was an `.st-XX` hashed selector group elsewhere. But ~299 declarations that look authoritative and do nothing will keep sending debugging down the wrong path, and any not silently backstopped is a live visual defect nobody has noticed yet.
 
 **Work:**
 1. For each of the ~31 selectors, determine whether a live rule already supplies the same properties. Method: re-anchor to `.stMain`, diff the rendered result against current production per page.
@@ -2764,7 +2764,7 @@ Source-side count (grep of `ui/styles/`) is 34 raw occurrences -- the delta of 3
 
 Two more inert-selector patterns confirmed during the -242 dark-mode scan:
 
-1. **`section[data-testid="stAppViewContainer"]` matches nothing** in this Streamlit version. The block at `global_styles.py:330-350` is inert in its entirety, including the `div[class*="SingleValue"]` rule it contains. This is almost certainly why those widget leaks existed in the first place -- someone fixed them inside a container that was never selected. Re-scope to `[data-testid="stApp"]` or delete. Add to the selector audit when this ticket runs.
+1. **`section[data-testid="stAppViewContainer"]` matches nothing** in this Streamlit version. The `section[data-testid="stAppViewContainer"]` block in `global_styles.py` is inert in its entirety, including the `div[class*="SingleValue"]` rule it contains. This is almost certainly why those widget leaks existed in the first place -- someone fixed them inside a container that was never selected. Re-scope to `[data-testid="stApp"]` or delete. Add to the selector audit when this ticket runs.
 
 2. **Read tokens from `document.body`, not `documentElement`.** Light tokens are declared on `:root`; dark tokens are declared on `body.dark-theme`. `getComputedStyle(document.documentElement)` reports the `:root` (light) values in both themes, making dark-mode checks look wrong when they are correct. This sent the -242 diagnosis sideways for three probes. Add a comment to the CSS variables block at `global_styles.py:20` so the next person reads it before measuring, not after: "Dark overrides live on `body.dark-theme`, not `:root`. Read tokens from `document.body` in DevTools, not `document.documentElement`."
 
@@ -2796,7 +2796,7 @@ Two more inert-selector patterns confirmed during the -242 dark-mode scan:
 - **Status:** Open
 - **Priority:** Low
 - **Type:** Bug (Test)
-- **File:** `tests/bdd/steps/test_role_match.py:890`, `tests/bdd/features/role_match.feature:535-542`
+- **File:** the relevant step in `tests/bdd/steps/test_role_match.py`, the relevant scenario in `tests/bdd/features/role_match.feature`
 - **Logged:** August 19, 2026
 
 **Issue:** `test_error_state_extraction_failure` passes in isolation and at file scope but fails intermittently in the full BDD marathon. Same class as MATTGPT-197, MATTGPT-198, MATTGPT-203 -- browser tests with suite-order sensitivity.
@@ -2843,7 +2843,7 @@ Two more inert-selector patterns confirmed during the -242 dark-mode scan:
 - **Status:** Open
 - **Priority:** Low
 - **Type:** Bug (Test)
-- **Files:** `tests/bdd/features/landing_page.feature:51-55`, `tests/bdd/steps/test_landing_page.py:213-221`
+- **Files:** the relevant scenario in `tests/bdd/features/landing_page.feature`, the corresponding step definitions in `tests/bdd/steps/test_landing_page.py`
 - **Logged:** August 18, 2026
 
 **Issue:** The scenario "Chip grid is not interactive during processing" waits for `.thinking-modal`, then asserts each of the six hidden receiver buttons (`st-key-suggested_0` through `_5`) carries the `disabled` attribute. The assertion tests an implementation detail that is not the actual mechanism.
@@ -2939,7 +2939,7 @@ The `utils/ui_helpers._slug` is the live production instance. The `scripts/utils
 
 **Fix:** Audit all three against `utils/ui_helpers._slug`. Consolidate to a single shared utility or leave scripts self-contained with a comment noting the canonical version.
 
-**Note:** The dead `slug` in `ask_mattgpt/utils.py:315` is already in scope for MATTGPT-184's deletion list.
+**Note:** The dead `slug` in `ask_mattgpt/utils.py` is already in scope for MATTGPT-184's deletion list.
 
 **Cross-references:** MATTGPT-184 (ask_mattgpt/utils.py module audit -- the dead `slug` function is in scope for deletion there; this ticket covers the scripts copies), MATTGPT-176 (dead code bundle).
 
@@ -2997,7 +2997,7 @@ These are not regressions and should not be triaged as such. Any future failure 
 - **Type:** Bug
 - **Logged:** August 16, 2026
 
-**Issue:** `SYNTHESIS_THEMES` is `[]` at module init in `backend_service.py:115` and is only populated by `sync_portfolio_metadata()` via `_bootstrap_agy()`. The test fixture never calls it, so `executor.map(search_theme, [])` produces an empty pool and the pool-size assertion fails.
+**Issue:** `SYNTHESIS_THEMES` is `[]` at module init in `backend_service.py` and is only populated by `sync_portfolio_metadata()` via `_bootstrap_agy()`. The test fixture never calls it, so `executor.map(search_theme, [])` produces an empty pool and the pool-size assertion fails.
 
 **Verified pre-existing:** Confirmed August 15, 2026 by stash run against pre-MATTGPT-178 code.
 
@@ -3021,14 +3021,14 @@ These are not regressions and should not be triaged as such. Any future failure 
 
 | Function | Location | Notes |
 |---|---|---|
-| `choose_story_for_ask` | `utils.py:89` | Dead |
-| `related_stories` | `utils.py:128` | Dead -- not the Related Projects feature. That feature is live in `conversation_helpers.py:629`, built from `sources`/`src_idx`, not this function. |
-| `story_has_metric` | `utils.py:168` | Dead -- reads `Performance` correctly (unlike the `formatting.py` sibling), but has no caller. See MATTGPT-183. |
-| `split_tags` | `utils.py:298` | Dead -- duplicates `utils/corpus_loader._split_tags` (live, see MATTGPT-182) |
-| `slug` | `utils.py:315` | Dead -- duplicates `utils/ui_helpers._slug` (live, called at `:246`). Note: a separate `slugify` function exists twice more (`scripts/utils.py:10`, `generate_jsonl_from_excel.py:65`) -- out of scope here but worth a consolidation pass. |
-| `shorten_middle` | `utils.py:328` | Dead -- duplicates `utils/ui_helpers._shorten_middle` (live, called at `:137`, `:245`) |
+| `choose_story_for_ask` | `ask_mattgpt/utils.py` | Dead |
+| `related_stories` | `ask_mattgpt/utils.py` | Dead -- not the Related Projects feature. That feature is live in `conversation_helpers.py` (`_render_ask_transcript()`, Related Projects section), built from `sources`/`src_idx`, not this function. |
+| `story_has_metric` | `ask_mattgpt/utils.py` | Dead -- reads `Performance` correctly (unlike the `formatting.py` sibling), but has no caller. See MATTGPT-183. |
+| `split_tags` | `ask_mattgpt/utils.py` | Dead -- duplicates `utils/corpus_loader._split_tags` (live, see MATTGPT-182) |
+| `slug` | `ask_mattgpt/utils.py` | Dead -- duplicates `utils/ui_helpers._slug` (live). Note: a separate `slugify` function exists twice more in `scripts/utils.py` and `generate_jsonl_from_excel.py` -- out of scope here but worth a consolidation pass. |
+| `shorten_middle` | `ask_mattgpt/utils.py` | Dead -- duplicates `utils/ui_helpers._shorten_middle` (live, called at `:137`, `:245`) |
 
-Confirmed live, do not delete: `get_context_story`, `story_modes`, `is_empty_conversation`, `ensure_ask_bootstrap`, `push_assistant_turn`, `push_conversational_answer`, `push_user_turn`. Imported by `conversation_view.py:39`, `conversation_helpers.py:18`, `__init__.py:24`.
+Confirmed live, do not delete: `get_context_story`, `story_modes`, `is_empty_conversation`, `ensure_ask_bootstrap`, `push_assistant_turn`, `push_conversational_answer`, `push_user_turn`. Imported by `conversation_view.py`, `conversation_helpers.py`, and `__init__.py`.
 
 **Work:** Delete the six dead functions and their corresponding test classes in `tests/unit/test_utils.py`.
 
@@ -3049,10 +3049,10 @@ Confirmed live, do not delete: `get_context_story`, `story_modes`, `is_empty_con
 
 **Issue:** Both entrances to `formatting.py`'s formatter functions are confirmed orphaned:
 
-- Typed alias map at `conversation_view.py:305-312`: originates in the September 2025 monolith, carried through modularization with no design intent. Not reachable by any user-facing path.
-- Deep Dive pill at `conversation_helpers.py:395`: does not render in the UI. Confirmed by inspection August 11, 2026.
+- Typed alias map in `conversation_view.py` (the `cmd_map` dict): originates in the September 2025 monolith, carried through modularization with no design intent. Not reachable by any user-facing path.
+- Deep Dive pill in `conversation_helpers.py`: does not render in the UI. Confirmed by inspection August 11, 2026.
 
-Nothing a visitor can reach exercises `_format_narrative`, `_format_key_points`, or `_format_deep_dive`. These three are dead code. The module stays -- `build_5p_summary` is imported by `utils/scoring.py:11` as one of the nine haystack parts in `_keyword_score_for_story`; `strongest_metric_line` is called by `build_5p_summary` at line 120 and is therefore also live; `story_has_metric` is imported by `utils/filters.py` (see MATTGPT-183).
+Nothing a visitor can reach exercises `_format_narrative`, `_format_key_points`, or `_format_deep_dive`. These three are dead code. The module stays -- `build_5p_summary` is imported by `utils/scoring.py` as one of the nine haystack parts in `_keyword_score_for_story`; `strongest_metric_line` is called by `build_5p_summary` and is therefore also live; `story_has_metric` is imported by `utils/filters.py` (see MATTGPT-183).
 
 **Consider folding into MATTGPT-176** (dead code bundle). They are separate only because the phantom schema finding adds context about what the correct fields are, preserved below in case this code is ever revived.
 
@@ -3072,10 +3072,10 @@ Nothing a visitor can reach exercises `_format_narrative`, `_format_key_points`,
 
 All list fields are already lists in the JSONL. The mismatch is field naming only, not structure.
 
-**Severity correction for `_format_narrative` (do not escalate):** `_format_narrative` output feeds `answer_context`, used only at `backend_service.py:1041` -- the API-failure fallback path. It does not enter the LLM prompt on normal query paths. An earlier claim that it "poisons every query" was retracted and verified false. The orphaned-entrances finding above is the correct framing.
+**Severity correction for `_format_narrative` (do not escalate):** `_format_narrative` output feeds `answer_context`, used only in the API-failure fallback path in `rag_answer()` in `backend_service.py`. It does not enter the LLM prompt on normal query paths. An earlier claim that it "poisons every query" was retracted and verified false. The orphaned-entrances finding above is the correct framing.
 
 **Work items:**
-1. Delete the three dead functions from `formatting.py`: `_format_narrative`, `_format_key_points`, `_format_deep_dive`. Do not touch `build_5p_summary` (live -- imported by `utils/scoring.py:11`), `strongest_metric_line` (live -- called by `build_5p_summary` at line 120), or `story_has_metric` (live defect -- see MATTGPT-183). The module stays.
+1. Delete the three dead functions from `formatting.py`: `_format_narrative`, `_format_key_points`, `_format_deep_dive`. Do not touch `build_5p_summary` (live -- imported by `utils/scoring.py`), `strongest_metric_line` (live -- called by `build_5p_summary`), or `story_has_metric` (live defect -- see MATTGPT-183). The module stays.
 
 **Sequencing note:** MATTGPT-183 removes the `has_metric` filter branch, which removes `story_has_metric`'s only importer. Once -183 lands, `story_has_metric` in `formatting.py` becomes dead and moves to this ticket's deletion list. Until -183 lands, leave `story_has_metric` alone.
 
@@ -3215,7 +3215,7 @@ The concentration is real. The retrieval dominance claim is not supported by the
 - **Status:** Decided Against (May 14, 2026)
 - **Priority:** Low (was)
 - **Type:** Action
-- **Why not:** Error handling already exists in production code (FAIL OPEN patterns in semantic_router.py:350, try/except in query_logger.py, etc.). The gap is "tests for those paths," not "the handling itself." No production bugs traceable to missing error-path tests. "Add tests for error paths" is a coding norm/habit, not a discrete ticket — opportunistically add error-path unit tests when wiring up broader test coverage (e.g., during MATTGPT-014 / MATTGPT-017 work). Standing ticket for an undriven coverage gap was just backlog cruft.
+- **Why not:** Error handling already exists in production code (FAIL OPEN patterns in `_classify_embedding()` in `semantic_router.py`, try/except in query_logger.py, etc.). The gap is "tests for those paths," not "the handling itself." No production bugs traceable to missing error-path tests. "Add tests for error paths" is a coding norm/habit, not a discrete ticket — opportunistically add error-path unit tests when wiring up broader test coverage (e.g., during MATTGPT-014 / MATTGPT-017 work). Standing ticket for an undriven coverage gap was just backlog cruft.
 - **Original framing (preserved):**
 - **Issue:** Test suite only covers happy path.
 - **Fix:** Add tests for rate limits, timeouts, embedding failures.
@@ -3285,7 +3285,7 @@ The concentration is real. The retrieval dominance claim is not supported by the
 - **Status:** Decided Against (May 14, 2026)
 - **Priority:** Low (was)
 - **Type:** Action
-- **Why not:** Same shape as MATTGPT-025 (Add Error Handling Tests, killed May 14): semantic_router.py already has FAIL OPEN error handling at line 350. The gap is tests for it, not the handling itself. No production driver. Opportunistically add error-path tests when wiring up broader coverage during MATTGPT-014 / MATTGPT-017 work; standing "test coverage gap" tickets without a driver are backlog cruft.
+- **Why not:** Same shape as MATTGPT-025 (Add Error Handling Tests, killed May 14): semantic_router.py already has FAIL OPEN error handling in `_classify_embedding()`. The gap is tests for it, not the handling itself. No production driver. Opportunistically add error-path tests when wiring up broader coverage during MATTGPT-014 / MATTGPT-017 work; standing "test coverage gap" tickets without a driver are backlog cruft.
 - **Original framing (preserved):**
 - **Issue:** Limited test coverage for semantic router error handling paths.
 - **Closed:** May 14, 2026
@@ -3379,8 +3379,8 @@ The concentration is real. The retrieval dominance claim is not supported by the
 - **Why not (informed):** Same pattern as MATTGPT-042 — the ticket itself flagged the risk that "implementing deterministic intent-to-tone mapping risks reintroducing meta-commentary patterns that the current architecture deliberately removed." The previous `theme_guidance` architecture was closer to this vision and was removed in commit `c47ad1f` (Jan 26, 2026 BASE_PROMPT + DELTA refactor) for anti-meta-commentary discipline. The Spike question ("worth the risk?") has the same answer as 042: no, given the previous attempt regressed into the exact problem the refactor fixed. If specific intent-tone failures surface in production with evidence that prescribed mapping (without meta-commentary regression) would fix them, re-file.
 - **Original framing (preserved):**
 - **Issue:** Voice guide describes intent-specific response framing — Agy detects why someone is asking (interview prep vs. vetting vs. curiosity vs. hiring pitch vs. networking) and adapts tone, framing language, and offers accordingly. Specific intent-to-tone mapping is not implemented.
-- **Current state:** Spirit exists via random focus angles in `_generate_agy_response()` (lines 888-896) which inject emphasis on human impact, methodology, scale, leadership, outcomes, or innovation. But this is random, not intent-driven.
-- **Tradeoff:** Implementing deterministic intent-to-tone mapping risks reintroducing meta-commentary patterns that the current architecture deliberately removed. The previous prompt architecture had a `theme_guidance` variable closer to this vision but was replaced for anti-meta-commentary discipline (see commented-out prompt at `backend_service.py` lines 1040-1164).
+- **Current state:** Spirit exists via random focus angles in `_generate_agy_response()` in `backend_service.py` which inject emphasis on human impact, methodology, scale, leadership, outcomes, or innovation. But this is random, not intent-driven.
+- **Tradeoff:** Implementing deterministic intent-to-tone mapping risks reintroducing meta-commentary patterns that the current architecture deliberately removed. The previous prompt architecture had a `theme_guidance` variable closer to this vision but was replaced for anti-meta-commentary discipline (see commented-out prompt at `backend_service.py` (commented-out legacy prompt in `_generate_agy_response()`)).
 - **Spike: Evaluate whether deterministic intent-to-tone mapping is worth the anti-meta-commentary risk.**
 - **Source:** Voice Guide Implementation Audit, April 29, 2026
 - **Logged:** April 29, 2026
@@ -3548,7 +3548,7 @@ The concentration is real. The retrieval dominance claim is not supported by the
 - **Type:** Refactor
 - **Why not (May 13, 2026):** Reframed after the May 12 dead-closure card-click investigation. The `setInterval(detectTheme, 500)` polling lives inside a `components.html` iframe, and Streamlit destroys and recreates that iframe on every rerun. A `MutationObserver` attached from inside the iframe loses its callback closure the moment the iframe is recreated, leaving the theme class to drift out of sync — same dead-closure bug shape that caused the Cross-Industry card-click failure. The 500ms polling is iframe-rewire defense: it re-asserts the class from a live closure regardless of how many iframe destroy/create cycles have happened. The `how_agy_modal.py` MutationObserver pattern referenced in the original analysis works there because that observer is attached to a long-lived parent-doc element from a context that survives reruns differently — not transferable to this iframe. Polling is the correct pattern here.
 - **What lives in code now:** an explanatory comment at `ui/components/category_cards.py` near the `setInterval(detectTheme, 500)` line, warning future readers not to "replace polling with MutationObserver" without understanding the iframe lifecycle.
-- **Original analysis (preserved):** `category_cards.py` (line 506) and `navbar.py` (line 238) each run `setInterval(detectTheme, 500)` that reads parent body's computed background color and toggles `body.dark-theme` class. Polling was introduced in commit `548f1bf` (Dec 8 2025: "enhance dark mode support") as a FOUC remediation. The duplication with `navbar.py` is defense-in-depth: if either iframe fails, the other keeps the class maintained.
+- **Original analysis (preserved):** `category_cards.py` and `navbar.py` each run `setInterval(detectTheme, 500)` that reads parent body's computed background color and toggles `body.dark-theme` class. Polling was introduced in commit `548f1bf` (Dec 8 2025: "enhance dark mode support") as a FOUC remediation. The duplication with `navbar.py` is defense-in-depth: if either iframe fails, the other keeps the class maintained.
 - **Lesson:** Understand WHY a pattern exists before proposing a replacement. Same lesson as the theme detection research that triggered this ticket — both times the "anti-pattern" was actually a defense against a specific failure mode.
 - **Logged:** May 12, 2026 / **Closed:** May 13, 2026
 
@@ -3583,11 +3583,11 @@ The concentration is real. The retrieval dominance claim is not supported by the
 - **Status:** Decided Against — Not Reproducible (June 9, 2026)
 - **Priority:** Low
 - **Type:** Issue
-- **Issue:** The 6 suggestion buttons on the Ask MattGPT landing page (`ui/pages/ask_mattgpt/landing_view.py:97-135`) are real `st.button(type="secondary")` calls. The CSS rule at `ui/pages/ask_mattgpt/styles.py:288-309` styles them as cards (border, background, padding, hover background) but **does not declare `cursor: pointer`**. Adjacent buttons in the same file DO declare it explicitly (lines 443, 1290, 1399), so it's not being relied upon to inherit from Streamlit defaults. Live testing (May 15, 2026) confirms the pointer does not change on hover — cards appear interactive (purple text, border) but the cursor stays as the default arrow.
+- **Issue:** The 6 suggestion buttons on the Ask MattGPT landing page in `landing_view.py` are real `st.button(type="secondary")` calls. The `button[key^="suggested_"]` rule in `ask_mattgpt/styles.py` styles them as cards (border, background, padding, hover background) but **does not declare `cursor: pointer`**. Adjacent buttons in the same file DO declare it explicitly, so it's not being relied upon to inherit from Streamlit defaults. Live testing (May 15, 2026) confirms the pointer does not change on hover — cards appear interactive (purple text, border) but the cursor stays as the default arrow.
 - **Audience impact:** First-time visitor cannot visually confirm the cards are clickable until they actually click one. Cheap trust erosion at the first interaction moment.
-- **Fix:** Add `cursor: pointer !important;` to the existing `button[key^="suggested_"]` rule at lines 288-309. ~1 line.
-- **Closed June 9, 2026 — not reproducible.** DevTools inspection confirmed all 6 buttons already compute `cursor: pointer` from Streamlit's base stylesheet. Root cause: `button[key^="suggested_"]` is a dead selector — Streamlit renders the `key=` param as a class on the container (`.st-key-suggested_0`), not as an HTML attribute on the `<button>` element. The entire rule block at `styles.py:288-309` matches 0 elements in the live DOM. No fix needed; cursor is correct via Streamlit's own CSS.
-- **Out of scope (closed per May 15 assessment):** Input field below the fold (the 6 suggestion buttons are themselves real CTAs that submit queries — input is the secondary path, defensible as-is); status bar developer-facing copy (design call for a technical-leaning portfolio); conversation export/share (already deferred to React migration per `conversation_helpers.py:470` TODO).
+- **Fix:** Add `cursor: pointer !important;` to the `button[key^="suggested_"]` rule in `styles.py`. ~1 line.
+- **Closed June 9, 2026 — not reproducible.** DevTools inspection confirmed all 6 buttons already compute `cursor: pointer` from Streamlit's base stylesheet. Root cause: `button[key^="suggested_"]` is a dead selector — Streamlit renders the `key=` param as a class on the container (`.st-key-suggested_0`), not as an HTML attribute on the `<button>` element. The entire `button[key^="suggested_"]` rule block in `styles.py` matches 0 elements in the live DOM. No fix needed; cursor is correct via Streamlit's own CSS.
+- **Out of scope (closed per May 15 assessment):** Input field below the fold (the 6 suggestion buttons are themselves real CTAs that submit queries — input is the secondary path, defensible as-is); status bar developer-facing copy (design call for a technical-leaning portfolio); conversation export/share (already deferred to React migration per `conversation_helpers.py` (TODO comment near the share/export path)).
 - **Logged:** May 15, 2026
 
 ---
@@ -3619,7 +3619,7 @@ The concentration is real. The retrieval dominance claim is not supported by the
 - **Status:** Decided Against (May 29, 2026)
 - **Priority:** Medium
 - **Type:** Action
-- **Decided Against (May 29, 2026):** Production behavior already handles this cleanly. The `personal` intent family in `services/semantic_router.py:192-209` includes salary canonical phrases (*"What's Matt's salary"*, *"How much does Matt make"*) alongside age/identity/etc., and produces the warm-decline pivot (*"🐾 I'm focused on Matt's professional experience"*). Production-verified May 29, 2026 during wireframe review — the silent-fallback failure mode described in the original Issue does not reproduce. The ticket's premise that comp needs a *different* decline copy than age/identity (because comp IS legitimately answered elsewhere) is theoretically defensible but didn't survive the production check — the existing warm pivot is sufficient. **The remaining asymmetry** splits into two tickets: MATTGPT-089 (parse location / work-model / availability as a distinct filter class — explicitly excludes comp) and **MATTGPT-099** (assess and decide Role Match's comp handling on JDs that include comp expectations — different fix path because comp can't be matched against profile data, only declined). The earlier framing that pointed all of the asymmetry at -089 was wrong; -089's body explicitly says *"Skip comp — see MATTGPT-090 for separate handling,"* so a separate ticket was needed once -090 itself was closed.
+- **Decided Against (May 29, 2026):** Production behavior already handles this cleanly. The personal family in `services/semantic_router.py` includes salary canonical phrases (*"What's Matt's salary"*, *"How much does Matt make"*) alongside age/identity/etc., and produces the warm-decline pivot (*"🐾 I'm focused on Matt's professional experience"*). Production-verified May 29, 2026 during wireframe review — the silent-fallback failure mode described in the original Issue does not reproduce. The ticket's premise that comp needs a *different* decline copy than age/identity (because comp IS legitimately answered elsewhere) is theoretically defensible but didn't survive the production check — the existing warm pivot is sufficient. **The remaining asymmetry** splits into two tickets: MATTGPT-089 (parse location / work-model / availability as a distinct filter class — explicitly excludes comp) and **MATTGPT-099** (assess and decide Role Match's comp handling on JDs that include comp expectations — different fix path because comp can't be matched against profile data, only declined). The earlier framing that pointed all of the asymmetry at -089 was wrong; -089's body explicitly says *"Skip comp — see MATTGPT-090 for separate handling,"* so a separate ticket was needed once -090 itself was closed.
 - **Issue (original framing — superseded):** When Agy is asked something Matt shouldn't answer publicly (e.g., comp expectation), it currently produces a soft non-answer rather than a clean decline. Recruiter persona example: asked target role + comp + geo, got 4 paragraphs of narrative — comp went **silent**, relocation got a *"the story does not provide specific details… however, his focus on the right org fit suggests he might consider relocation"* (a dressed-up guess). The silent failure mode is worse than an honest decline because the recruiter can't tell whether the data is missing or being withheld.
 - **Audience impact:** Recruiter persona, verbatim: *"For a recruiter this is the single biggest miss. I cannot pitch Matt to a hiring manager without a comp anchor; I'll burn a screening call to get it... The bot's failure mode there is the real finding: it should decline cleanly ('Matt handles comp conversations directly — reach out') instead of going silent and letting the recruiter guess whether the data is missing or being withheld."*
 - **Fix:** System prompt addition (`prompts.py` or wherever Agy's primary system instruction lives) covering:
@@ -3641,7 +3641,7 @@ The concentration is real. The retrieval dominance claim is not supported by the
 - **Status:** Decided Against (May 30, 2026)
 - **Priority:** Low
 - **Type:** Refactor
-- **Decided Against (May 30, 2026):** The "inconsistency" framing was wrong. The stats bar and the Agy intro line are different surfaces doing different jobs. The stats bar is a credentialing surface (recruiter 5-second scan) where the anti-bias play matters most — that's why the Years tile was dropped in MATTGPT-092. The Agy intro line is grounding-the-AI-assistant copy — it tells the user that Agy has a real corpus of career experience to draw from. The "20+ years of work" token there reads as *corpus scope* (how much data the AI has), not as *personal positioning* (how old the candidate is). The anti-bias play that drove the Years tile drop doesn't transfer to a surface doing different work. Closing without a code change. Note (August 19, 2026): `hero.py:174` is a stale reference -- the hero copy has been rewritten; line 174 is now a `</div>` closing tag. Current framing is "my full project history" at approximately line 182, with no year count. The year-count copy this ticket was filed about no longer exists.
+- **Decided Against (May 30, 2026):** The "inconsistency" framing was wrong. The stats bar and the Agy intro line are different surfaces doing different jobs. The stats bar is a credentialing surface (recruiter 5-second scan) where the anti-bias play matters most — that's why the Years tile was dropped in MATTGPT-092. The Agy intro line is grounding-the-AI-assistant copy — it tells the user that Agy has a real corpus of career experience to draw from. The "20+ years of work" token there reads as *corpus scope* (how much data the AI has), not as *personal positioning* (how old the candidate is). The anti-bias play that drove the Years tile drop doesn't transfer to a surface doing different work. Closing without a code change. Note (August 19, 2026): `hero.py` is a stale reference -- the hero copy has been rewritten. Current framing is "my full project history", with no year count. The year-count copy this ticket was filed about no longer exists.
 - **Earlier framing (superseded):** Home hero Agy intro line currently reads *"That's Agy, my Plott Hound and AI assistant, ready to track down insights from 20+ years of work."* The *"20+ years"* signal is the same one that was dropped from the stats bar's Years tile (May 29, 2026, MATTGPT-092) for ageism + non-positioning reasons. Leaving the years number in the Agy intro partially undoes that mitigation.
 - **Decision (open — three working options):**
   1. **Drop the number:** *"That's Agy, my Plott Hound and AI assistant, ready to track down insights from across Matt's career."*
@@ -3677,7 +3677,7 @@ The concentration is real. The retrieval dominance claim is not supported by the
 - **Type:** Bug
 - **Logged:** June 16, 2026
 
-**Context:** Scenario skips at `pytest.skip("Ask Agy button not found")` in `tests/bdd/steps/test_explore_stories.py` (line 546). The scenario follows: `Given the user is in Table view` → `When the user clicks on a story row`. After the row click, the step looks for `#btn-ask-story` inside the story detail panel, but the element is not reliably found. The AgGrid iframe interaction sequence (frame_locator → `.ag-row` click → detail panel open → Ask Agy button visible) is fragile in headless Playwright. The equivalent Cards-view scenario (`test_ask_agy_works_from_cards_view`) passes reliably.
+**Context:** Scenario skips at `pytest.skip("Ask Agy button not found")` in `test_explore_stories.py`. The scenario follows: `Given the user is in Table view` → `When the user clicks on a story row`. After the row click, the step looks for `#btn-ask-story` inside the story detail panel, but the element is not reliably found. The AgGrid iframe interaction sequence (frame_locator → `.ag-row` click → detail panel open → Ask Agy button visible) is fragile in headless Playwright. The equivalent Cards-view scenario (`test_ask_agy_works_from_cards_view`) passes reliably.
 
 **Acceptance criterion:** `test_ask_agy_works_from_table_view` passes reliably in isolation and as part of the full BDD suite, with no `pytest.skip` guard.
 
@@ -3691,7 +3691,7 @@ The concentration is real. The retrieval dominance claim is not supported by the
 - **Type:** Bug
 - **Logged:** June 16, 2026
 
-**Context:** Scenario skips at `pytest.skip("Cards view content not found")` in `tests/bdd/steps/test_explore_stories.py` (line 1294). The scenario sets Cards view preference (`Given the user preference is Cards view`), then navigates via deeplink (`When the user navigates to "?story=..."`). The `Then the view should be Cards view` step finds zero `.es-fixed-height-card` elements — the deeplink navigation reverts to Table (the default view) instead of preserving the pre-navigation Cards preference.
+**Context:** Scenario skips at `pytest.skip("Cards view content not found")` in `test_explore_stories.py`. The scenario sets Cards view preference (`Given the user preference is Cards view`), then navigates via deeplink (`When the user navigates to "?story=..."`). The `Then the view should be Cards view` step finds zero `.es-fixed-height-card` elements — the deeplink navigation reverts to Table (the default view) instead of preserving the pre-navigation Cards preference.
 
 **Acceptance criterion:** Either (a) deeplink preserves the active view mode and the scenario passes end-to-end, or (b) the behavior is confirmed intentional (deeplinks always start in Table view) and the scenario is updated to match the confirmed behavior.
 
@@ -3765,7 +3765,7 @@ Cold-load CLS ceiling: 0.25 (observed ~0.24 in DevTools — locks "no worse than
 - **File:** `ui/components/why_agy_dialog.py`
 - **Logged:** June 9, 2026
 
-**Already shipped (commit `ad3b72f`):** `@media (max-width: 480px)` block in `why_agy_dialog.py` lines 107–124:
+**Already shipped (commit `ad3b72f`):** `@media (max-width: 480px)` block in `why_agy_dialog.py`:
 - `[role="dialog"]` → `max-height: 88vh; overflow-y: auto` (scroll safety)
 - `.why-agy-avatar-row` → `flex-direction: column; align-items: center; gap: 12px` (stacks image above text)
 - `.why-agy-illustration` → `max-width: 70px; width: 70px !important` (shrinks image)
@@ -3810,15 +3810,15 @@ Add this to the existing `@media (max-width: 480px)` block. `[role="dialog"] p:f
 **Stale `@pytest.mark.skip` on `test_mobile_desktop_only_message` — decorator predates step def**
 
 - **Status:** Decided Against (August 16, 2026)
-- **Why not:** Stale skip; step def exists (lines 403-416). One-line delete + isolation run. Not scheduled.
+- **Why not:** Stale skip; step def exists (`given_viewport_at_explicit_width`). One-line delete + isolation run. Not scheduled.
 - **Priority:** Low
 - **Type:** Bug
 - **File:** `tests/bdd/steps/test_role_match.py`
 - **Logged:** July 1, 2026
 
-**Issue:** `test_mobile_desktop_only_message` is skipped by a stale decorator at lines 170–175. The skip reason says "Needs hamburger interaction" — but that interaction was implemented at lines 403–416 (`given_viewport_at_explicit_width`). The decorator was written before the step def existed and was never removed.
+**Issue:** `test_mobile_desktop_only_message` is skipped by a stale `@pytest.mark.skip` decorator on `test_mobile_desktop_only_message`. The skip reason says "Needs hamburger interaction" — but that interaction was implemented in `given_viewport_at_explicit_width` step def (`given_viewport_at_explicit_width`). The decorator was written before the step def existed and was never removed.
 
-**Action:** Remove the `@pytest.mark.skip` decorator at lines 170–175. Run in isolation:
+**Action:** Remove the `@pytest.mark.skip` decorator on `test_mobile_desktop_only_message`. Run in isolation:
 ```
 pytest tests/bdd/steps/test_role_match.py::test_mobile_desktop_only_message -v
 ```
