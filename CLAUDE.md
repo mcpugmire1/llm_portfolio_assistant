@@ -21,9 +21,15 @@ Read these before every session. Each one has caused a real incident.
 - **Bug findings lead with the defect and the fix, never with origin.** All bugs in this repo are ours. Code age or provenance is stated only when it gates a live decision (push safety, revert scope) and only after the fix is on the table. Leading with "pre-existing confirmed" or "not introduced by this branch" is deflection regardless of whether it's true. (July 2026: Code led with innocence on a synthesis bug while the fix was an afterthought.)
 - **Any assertion about file contents must be accompanied by the command that produced it and that command's literal output, pasted in the response.** This covers: what a file contains, what it does not contain, what a function does. "I read X and it says Y" is not sufficient. This applies with particular force to claims of absence -- a search that returns nothing is not a finding until the command and its empty output are visible, because a malformed search also returns nothing. If there is no command, the assertion does not get made.
 - **Working notes do not replace BACKLOG tickets.** Any bug, regression, or unvalidated behavior written to a working note must also produce a BACKLOG entry before the session proceeds. A finding that only exists in `docs/working/` or a notes file has no owner and will not be acted on. "I noted it" is not the same as "it is tracked."
+- **Cite functions and constants by name, not line number.** Line numbers go stale between sessions and across commits. `load_matt_profile()` is stable; "line 152" is not. Applies to CLAUDE.md, ARCHITECTURE.md, tickets, and chat. (Sept 2026: `load_matt_profile()` cited at ~152, actually at 307.)
 - **A structural refactor invalidates values and selectors anchored to the old structure.** Navbar height, container classes, DOM nesting: when these change, re-audit what's calibrated to them. (June 2026: navbar refactor orphaned the `-48px` header calibration; `.main` → `.stMain` killed every `.main` rule. Both surfaced in production, not at change time.)
 
 ---
+
+## Document Ownership
+- **CLAUDE.md:** Matt directly. No automated process writes to this file. Code and Cowork flag proposed changes; they never write them.
+- **BACKLOG.md / CHANGELOG.md:** Backlog Maintenance Cowork process (see Backlog Maintenance).
+- **ARCHITECTURE.md:** Architecture Sync Cowork process (see Architecture Sync).
 
 ## Tech Stack
 See [Design Specification](https://mcpugmire1.github.io/mattgpt-design-spec/) for the canonical tech stack and system architecture. Do not duplicate tech stack facts here.
@@ -119,10 +125,10 @@ echo_star_stories_nlp.jsonl   # STAR story corpus (source of truth, repo root)
 Two proven patterns exist. Use them in this order:
 
 **Pattern 1 (default): `st.button` + scoped CSS**
-See `ui/pages/ask_mattgpt/conversation_helpers.py` around line 626. Plain `st.button` styled via CSS targeting `[class*="st-key-{stable_key}"] button`. No JS bridge. No hidden trigger. This is the right starting point for any clickable element.
+See `_render_ask_transcript()` in `ui/pages/ask_mattgpt/conversation_helpers.py`, the `"conversational"` message-type branch. Plain `st.button` with a `stable_key`, styled via CSS targeting `[class*="st-key-{stable_key}"] button`. No JS bridge. No hidden trigger. This is the right starting point for any clickable element.
 
 **Pattern 2 (when Pattern 1 genuinely can't meet the visual requirement): delegated `parentDoc` listener**
-See `ui/pages/explore_stories.py`, Cards view rendering (~lines 2393-2487). Listener on `parentDoc`, not individual elements, so it survives React DOM reconciliation across reruns.
+See `ui/pages/explore_stories.py`, Cards view rendering. Listener on `parentDoc`, not individual elements, so it survives React DOM reconciliation across reruns.
 
 Do not build a third pattern without a documented reason why neither of these works. April 2026: ~100 lines of JS bridge code were written and then abandoned when switching to Pattern 1 fixed the problem.
 
