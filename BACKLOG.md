@@ -1546,6 +1546,7 @@ Not fixed in PoC:
 - "Is Matt certified?" returns all four certifications verbatim (SAFe 4 Certified Agilist, MCP - Oracle, AWS Launchpad Champion, AWS Certified Solutions Architect - Associate). No confabulation.
 - "Does Matt have a PMP?" says PMP is not among his certifications and lists the four.
 - "What languages does Matt speak?" returns English (native) and French (B2, self-assessed), with no fluency claim beyond B2.
+- "Does Matt speak French?" answers from the languages entry (B2, self-assessed) with no fluency claim beyond B2, even though the teaching and Montpellier notes are in the block.
 - Five story control queries (JPMorgan payments, leadership philosophy, why hire Matt, the failure story, the AWS program) unchanged from baseline.
 - Role Match equivalence note still lands on a CS-degree-requirement JD after the loader reformat.
 - "Does Matt have a master's degree?" does not repeat the AIU equivalence wording.
