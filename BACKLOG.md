@@ -1524,7 +1524,7 @@ Not fixed in PoC:
 
 2. **Citation rules 0a and 0b.**
    - 0a: facts in the block are attested; cite them directly and verbatim. No inference clause: state what the block says, do not infer capability or meaning from it.
-   - 0b: if a fact question is not covered by the block, respond [Matt's pick] -- do not synthesize from story evidence.
+   - 0b: if a fact question is not covered by the block, respond "Nothing I know about Matt covers that" -- do not synthesize from story evidence.
 
 3. **Loader format fix.** `load_matt_profile()` currently renders three degrees in one sentence then appends three unattributed notes, so a teaching note never carries its institution. Reformat so each note stays with its entry. Also render languages (each entry on its own line, native vs B2 distinction preserved). One rendering used by both Role Match and Ask Agy. **Regression check required before merging:** `load_matt_profile()` is Role Match's grounding input; reformatting changes what the assessor reads, including the Master's equivalence note. Run one Role Match pass on a JD with a CS-degree requirement and confirm the equivalence still lands. `tests/bdd/features/profile_grounding.feature` covers part of this.
 
