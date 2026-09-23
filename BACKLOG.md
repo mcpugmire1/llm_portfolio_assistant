@@ -95,6 +95,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-160](#mattgpt-160) | JD extraction: split into three concurrent calls (required / preferred / implicit) to stabilize requirement count on long JDs | Open | High | Bug | July 31, 2026 |
 | [MATTGPT-249](#mattgpt-249) | Role Match retrieval: crisis story at rank 18 on incident-leadership requirement; target carries incident vocabulary; ranking problem confirmed | Open | Medium | Bug | September 11, 2026 |
 | [MATTGPT-250](#mattgpt-250) | Ask Agy cannot answer queries about education, certifications, or languages -- profile block missing from Ask Agy's system prompt | Open | High | Issue | September 21, 2026 |
+| [MATTGPT-251](#mattgpt-251) | Ask Agy treats adjacent retrieved stories as evidence for the question asked | Open | [Matt] | Issue | September 23, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | Open | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -1559,6 +1560,30 @@ Not fixed in PoC:
 - `docs/working/080_Skill_Evidence_Approach.md` Section 5 (original gap documentation)
 - MATTGPT-080 (skill evidence architecture; this ticket is the remaining unshipped piece)
 - MATTGPT-128 (sources panel profile-dot split; Ask Agy's sources panel rendering deferred here)
+
+---
+
+### MATTGPT-251
+**Ask Agy treats adjacent retrieved stories as evidence for the question asked**
+
+- **Status:** Open
+- **Priority:** [Matt]
+- **Type:** Issue
+- **Logged:** September 23, 2026
+
+**Observed (September 23, 2026; `probe_250_output/20260923_125734/stage1_output.txt` and a Code rerun the same day):**
+
+1. **Over-claim.** "Has Matt worked in real estate?" returned "Matt has worked in the real estate sector, specifically through his engagement with Cendant Mortgage." Reproduced on the rerun. In the retrieved pool, Cendant Mortgage underwriting ranked #5 and HSBC mortgage transformation #6. The answer mapped mortgage lending onto real estate. The rerun also added "These engagements highlight Matt's involvement in real estate-related projects" -- that sentence matches the `META_COMMENTARY_REGEX_PATTERNS` addition in MATTGPT-250 ("highlight Matt's"), so the post-processing strip will remove it. It is not separate synthesis evidence.
+
+2. **Padding on "no" answers.** "Has Matt worked with SAP?" said the stories "does not mention any direct work with SAP," then gave three paragraphs on JPMC, Accredited, and Cendant. No profile fact covers SAP, so MATTGPT-250 does not change this.
+
+Same class as the no-inference clause in MATTGPT-250: retrieved text that sits next to the topic is treated as support for a claim about Matt.
+
+**Open question:** Would a general rule cover the over-claim? Candidate rule: claim an industry or domain only when a retrieved story's `Industry` or `Domain` field names it. Neither run captured the Cendant story's `Industry` value. Confirm the field value before writing a rule that depends on it.
+
+**Rejected (do not re-derive):** Pairwise rules such as "do not treat mortgage as real estate." Each one fixes a single pairing and misses the next.
+
+**Out of scope:** Agriculture under-claim (September 23, 2026). The Liquid Studio story was not in the top 25 for that query -- retrieval miss, not synthesis, and it covers a single PoC mention.
 
 ---
 
