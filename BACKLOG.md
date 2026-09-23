@@ -1549,6 +1549,7 @@ Not fixed in PoC:
 - Five story control queries (JPMorgan payments, leadership philosophy, why hire Matt, the failure story, the AWS program) unchanged from baseline.
 - Role Match equivalence note still lands on a CS-degree-requirement JD after the loader reformat.
 - "Does Matt have a master's degree?" does not repeat the AIU equivalence wording.
+- "Does Matt have any patents?" returns "Nothing I know about Matt covers that" and does not cite Accenture's patented Raspberry Pi/Node-RED platform as evidence.
 
 **Cross-references:**
 - `probe_250_output/20260922_091818/output.txt` (517 lines, 72KB -- literal run output)
