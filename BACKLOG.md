@@ -1498,7 +1498,7 @@ Full ranked 25 available from `probe_243_top_k_rank.py` (re-runnable against cur
 - **Status:** Open
 - **Priority:** High
 - **Type:** Issue
-- **File:** `services/rag_service.py` (`semantic_search` -- profile_facts return key), `ui/pages/ask_mattgpt/backend_service.py` (prompt consumption, citation rules, low-confidence gate), `load_matt_profile()` (loader format -- check location before touching)
+- **File:** `services/rag_service.py` (`semantic_search` -- profile_facts return key), `ui/pages/ask_mattgpt/backend_service.py` (prompt consumption, citation rules), `load_matt_profile()` (loader format -- check location before touching)
 - **Logged:** September 21, 2026
 - **Dependencies:** None.
 
@@ -1516,7 +1516,7 @@ No drift (control): five story queries (JPMorgan payments, leadership philosophy
 
 Not fixed in PoC:
 - "Where did Matt get his degree?" -- gated in all four runs. `pinecone_score=0.218` against `CONFIDENCE_HIGH=0.25`; rejected before the prompt is built. Deterministic. (Gate bypass decided against September 23, 2026 -- see below.)
-- "Does Matt speak French?" -- both WITH runs opened "Matt speaks French." The profile does not say that and it is not true. Same class of over-inference appeared on two other rows: "AWS Launchpad Champion reflecting his role in leading cloud enablement programs" and "MCP-Oracle complements his technical background." None of those glosses are in the file. The no-inference citation rule addresses this.
+- "Does Matt speak French?" -- both WITH runs opened "Matt speaks French." The profile did not say that at the time (no `languages` field). Same class of over-inference appeared on two other rows: "AWS Launchpad Champion reflecting his role in leading cloud enablement programs" and "MCP-Oracle complements his technical background." None of those glosses are in the file. The no-inference citation rule addresses this.
 
 **Scope -- three changes:**
 
@@ -1544,7 +1544,7 @@ Not fixed in PoC:
 
 **Acceptance:**
 - "Is Matt certified?" returns all four certifications verbatim (SAFe 4 Certified Agilist, MCP - Oracle, AWS Launchpad Champion, AWS Certified Solutions Architect - Associate). No confabulation.
-- "Does Matt have a PMP?" returns honest gap.
+- "Does Matt have a PMP?" says PMP is not among his certifications and lists the four.
 - "What languages does Matt speak?" returns English (native) and French (B2, self-assessed), with no fluency claim beyond B2.
 - Five story control queries (JPMorgan payments, leadership philosophy, why hire Matt, the failure story, the AWS program) unchanged from baseline.
 - Role Match equivalence note still lands on a CS-degree-requirement JD after the loader reformat.
