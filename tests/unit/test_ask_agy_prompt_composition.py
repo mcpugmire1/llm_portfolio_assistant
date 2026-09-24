@@ -1,6 +1,8 @@
 """MATTGPT-250 Red: Ask Agy consumes profile_facts and injects rules 0a/0b.
 
-Class C: citation rules 0a and 0b appear in the captured Agy system message.
+Class C: citation rules 0a and 0b appear in the captured Agy system message,
+  and rule 0a also appears in the captured Agy user message after the
+  question.
 Class G: with semantic_search returning a known profile_facts, Ask Agy's
   captured system message contains the four certifications and
   "French (B2, self-assessed)", positioned before **GROUNDING RULES:**.
@@ -104,11 +106,21 @@ def real_stories():
 
 @pytest.fixture
 def captured_agy_system_message(real_stories):
+    return _capture_agy_message(real_stories, "system")
+
+
+@pytest.fixture
+def captured_agy_user_message(real_stories):
+    return _capture_agy_message(real_stories, "user")
+
+
+def _capture_agy_message(real_stories, role):
     """Runs rag_answer with semantic_search mocked (happy path,
     profile_facts set) and openai.OpenAI patched globally to return a
     fake client. After rag_answer completes, searches
     create.call_args_list for the call whose system message contains
-    the Agy persona anchor. Returns that system message.
+    the Agy persona anchor. Returns that call's message for `role`
+    ("system" or "user").
 
     Does not assume how many OpenAI calls rag_answer makes or in what
     order. The anchor is what identifies Agy.
@@ -149,14 +161,17 @@ def captured_agy_system_message(real_stories):
     # Find Agy's create() call by anchor match. Do not assume ordering
     # or count -- rag_answer may make any number of OpenAI calls.
     matching_system_messages: list[str] = []
+    matching_role_messages: list[str] = []
     for call in fake_openai.chat.completions.create.call_args_list:
         messages = call.kwargs.get("messages", [])
         system_msgs = [
             m.get("content", "") for m in messages if m.get("role") == "system"
         ]
+        role_msgs = [m.get("content", "") for m in messages if m.get("role") == role]
         for content in system_msgs:
             if _AGY_ANCHOR in content:
                 matching_system_messages.append(content)
+                matching_role_messages.append("\n".join(role_msgs))
 
     if len(matching_system_messages) == 0:
         pytest.fail(
@@ -174,12 +189,34 @@ def captured_agy_system_message(real_stories):
             f"message. Fixture cannot uniquely identify the Agy call. "
             f"Not a Class C or Class G failure."
         )
-    return matching_system_messages[0]
+    return matching_role_messages[0]
 
 
 # ---------------------------------------------------------------------------
 # Class C: rules 0a and 0b appear in the captured Agy system message
 # ---------------------------------------------------------------------------
+
+
+class TestRule0aInCapturedUserMessage:
+    """Rule 0a is also carried in the Agy user message, after the
+    question. The system-message copy (asserted below) stays."""
+
+    def test_rule_0a_clauses_present_in_user_message_after_question(
+        self, captured_agy_user_message
+    ):
+        question_pos = captured_agy_user_message.find(_JPMORGAN_QUERY)
+        assert question_pos >= 0, (
+            f"question {_JPMORGAN_QUERY!r} not in captured Agy user message. "
+            f"Head: {captured_agy_user_message[:600]!r}"
+        )
+        for clause in (_RULE_0A_NO_STORY_CONNECT, _RULE_0A_NO_INFERENCE):
+            clause_pos = captured_agy_user_message.find(clause)
+            assert clause_pos > question_pos, (
+                f"rule 0a clause {clause!r} not found after the question in "
+                f"captured Agy user message (clause at {clause_pos}, "
+                f"question at {question_pos}). Head: "
+                f"{captured_agy_user_message[:600]!r}"
+            )
 
 
 class TestCitationRulesInCapturedSystemMessage:
