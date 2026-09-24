@@ -77,6 +77,24 @@ _RULE_0A_DIRECT_NO = "an item not in the list gets a direct no"
 _RULE_0A_NO_STORY_CONNECT = (
     "Do not say what a fact indicates or connect it to a story unless asked"
 )
+# Added Sept 24, 2026 after the 0a-in-user-message acceptance run: source
+# leaks ("According to the About Matt block"), paraphrased certifications,
+# and French stated without its level.
+_RULE_0A_NO_SOURCE = (
+    "Never tell the visitor where a fact comes from. State it as a fact about Matt."
+)
+_RULE_0A_CERTS_EXACT = (
+    "Quote each certification exactly as written, including its dates. "
+    "None is current."
+)
+_RULE_0A_LANGUAGE_LEVEL = (
+    "When stating a language, state its level in the same sentence."
+)
+_RULE_0A_NEW_MARKERS = [
+    _RULE_0A_NO_SOURCE,
+    _RULE_0A_CERTS_EXACT,
+    _RULE_0A_LANGUAGE_LEVEL,
+]
 _RULE_0B_MARKER = "Nothing I know about Matt covers that"
 # New at 9d5f575: for absent categories, Agy must not pad the honest gap
 # with story evidence.
@@ -218,6 +236,18 @@ class TestRule0aInCapturedUserMessage:
                 f"{captured_agy_user_message[:600]!r}"
             )
 
+    @pytest.mark.parametrize("marker", _RULE_0A_NEW_MARKERS)
+    def test_rule_0a_new_marker_present_in_user_message_after_question(
+        self, captured_agy_user_message, marker
+    ):
+        question_pos = captured_agy_user_message.find(_JPMORGAN_QUERY)
+        marker_pos = captured_agy_user_message.find(marker)
+        assert question_pos >= 0 and marker_pos > question_pos, (
+            f"rule 0a marker {marker!r} not found after the question in "
+            f"captured Agy user message (marker at {marker_pos}, question "
+            f"at {question_pos})."
+        )
+
 
 class TestCitationRulesInCapturedSystemMessage:
     """Rules 0a and 0b appear in the runtime Agy system prompt.
@@ -266,6 +296,15 @@ class TestCitationRulesInCapturedSystemMessage:
             f"rule 0a no-story-connect clause {_RULE_0A_NO_STORY_CONNECT!r} "
             f"not found in captured Agy system message. Head: "
             f"{captured_agy_system_message[:600]!r}"
+        )
+
+    @pytest.mark.parametrize("marker", _RULE_0A_NEW_MARKERS)
+    def test_rule_0a_new_marker_present_in_system_message(
+        self, captured_agy_system_message, marker
+    ):
+        assert marker in captured_agy_system_message, (
+            f"rule 0a marker {marker!r} not found in captured Agy system "
+            f"message. Head: {captured_agy_system_message[:600]!r}"
         )
 
     def test_rule_0b_reply_only_clause_present_in_system_message(
