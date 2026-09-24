@@ -70,7 +70,7 @@ _LANGUAGES_VERBATIM = "French (B2, self-assessed)"
 # Rule 0a and 0b wording from BACKLOG.md::MATTGPT-250 (9d5f575).
 # 0a has three testable fragments; 0b has two.
 _RULE_0A_NO_INFERENCE = (
-    "state what the block says, do not infer capability or meaning from it"
+    "state what the facts say, do not infer capability or meaning from it"
 )
 _RULE_0A_DIRECT_NO = "an item not in the list gets a direct no"
 # New at 9d5f575: Agy must answer from the block only, not join facts to stories.
@@ -94,11 +94,19 @@ _RULE_0A_LANGUAGE_LEVEL = (
 _RULE_0A_OPENING = (
     "The facts about Matt above are accurate; cite them directly and verbatim."
 )
+# "the block" removed from the rest of 0a; the master's answer repeated the
+# AIU equivalence note in acceptance.
+_RULE_0A_FACTS_ONLY = "Answer from these facts only."
+_RULE_0A_NO_NOTE_WORDING = (
+    "Do not repeat requirement or eligibility wording from an education note."
+)
 _RULE_0A_NEW_MARKERS = [
     _RULE_0A_OPENING,
     _RULE_0A_NO_SOURCE,
     _RULE_0A_CERTS_EXACT,
     _RULE_0A_LANGUAGE_LEVEL,
+    _RULE_0A_FACTS_ONLY,
+    _RULE_0A_NO_NOTE_WORDING,
 ]
 _RULE_0B_MARKER = "Nothing I know about Matt covers that"
 # New at 9d5f575: for absent categories, Agy must not pad the honest gap
