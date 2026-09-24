@@ -32,6 +32,17 @@ SOURCES_COLS_PER_ROW = 3
 SOURCES_MAX_SYNTHESIS = 6  # Broad queries: show more sources (forest view)
 SOURCES_MAX_SURGICAL = 3  # Targeted queries: show fewer sources (tree view)
 
+
+def _sources_layout(
+    categories: list[str], sources: list[dict], is_synthesis: bool
+) -> dict:
+    raise NotImplementedError
+
+
+def _fact_card_html(display_name: str) -> str:
+    raise NotImplementedError
+
+
 # ============================================================================
 # STATE MANAGEMENT
 # ============================================================================

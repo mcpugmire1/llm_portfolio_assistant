@@ -100,6 +100,16 @@ _RULE_0A_FACTS_ONLY = "Answer from these facts only."
 _RULE_0A_NO_NOTE_WORDING = (
     "Do not repeat requirement or eligibility wording from an education note."
 )
+# MATTGPT-250 item 4: 0a tells Agy to put a category marker on its own line
+# before the closer; post-processing strips it and the Sources fact row
+# renders one card per category.
+_RULE_0A_CATEGORY_MARKERS = [
+    "[[profile:certifications]]",
+    "[[profile:education]]",
+    "[[profile:languages]]",
+]
+# Placement per mock #3b: markers sit on their own line before the closer.
+_RULE_0A_MARKER_PLACEMENT = "on its own line before the closing line"
 _RULE_0A_NEW_MARKERS = [
     _RULE_0A_OPENING,
     _RULE_0A_NO_SOURCE,
@@ -107,6 +117,8 @@ _RULE_0A_NEW_MARKERS = [
     _RULE_0A_LANGUAGE_LEVEL,
     _RULE_0A_FACTS_ONLY,
     _RULE_0A_NO_NOTE_WORDING,
+    *_RULE_0A_CATEGORY_MARKERS,
+    _RULE_0A_MARKER_PLACEMENT,
 ]
 _RULE_0B_MARKER = "Nothing I know about Matt covers that"
 # New at 9d5f575: for absent categories, Agy must not pad the honest gap

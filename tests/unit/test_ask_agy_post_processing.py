@@ -15,7 +15,10 @@ Class F: META_COMMENTARY_REGEX_PATTERNS strip additions. Each input is
   (F6 rule: neighbor survives in every F case, folded into each
   assertion pair).
 
-Every test uses _run_agy_with_llm_text so the whole post-processing
+Class S: _extract_profile_markers strips [[profile:*]] markers and returns
+  the known categories (MATTGPT-250 item 4).
+
+Every E/F test uses _run_agy_with_llm_text so the whole post-processing
 pipeline runs. No pattern-in-list checks.
 """
 
@@ -209,3 +212,63 @@ class TestMetaCommentaryStripAdditions:
             "estate-related projects."
         )
         self._assert_stripped_and_neighbor_survives(observed, real_story)
+
+
+# ---------------------------------------------------------------------------
+# Class S: profile category markers (MATTGPT-250 item 4)
+# ---------------------------------------------------------------------------
+# _extract_profile_markers(text) -> (clean_text, categories). Rule 0a puts
+# each marker on its own line before the closer; the extractor removes it,
+# returns the category, and leaves no blank-line gap where the line was.
+
+_OPENER = "🐾 Found it!"
+_BODY = "Matt holds four certifications."
+_CLOSER = "What else can I track down for you?"
+_CLEAN = f"{_OPENER}\n\n{_BODY}\n\n{_CLOSER}"
+
+
+def _with_marker_line(marker: str) -> str:
+    return f"{_OPENER}\n\n{_BODY}\n\n{marker}\n\n{_CLOSER}"
+
+
+def _assert_marker_line_removed(clean_text: str) -> None:
+    assert "[[" not in clean_text, f"marker residue left: {clean_text!r}"
+    assert (
+        "\n\n\n" not in clean_text
+    ), f"blank-line gap left where the marker line was: {clean_text!r}"
+    assert clean_text == _CLEAN, f"expected {_CLEAN!r}, got {clean_text!r}"
+
+
+class TestProfileMarkerExtraction:
+    @pytest.mark.parametrize(
+        "marker, category",
+        [
+            ("[[profile:certifications]]", "certifications"),
+            ("[[profile:education]]", "education"),
+            ("[[profile:languages]]", "languages"),
+        ],
+    )
+    def test_s1_s3_category_marker_line_stripped_and_category_returned(
+        self, marker, category
+    ):
+        clean_text, categories = bs._extract_profile_markers(_with_marker_line(marker))
+        _assert_marker_line_removed(clean_text)
+        assert categories == [category]
+
+    @pytest.mark.parametrize("marker", ["[[profile:patents]]", "[[profile-only]]"])
+    def test_s5_unknown_marker_line_stripped_no_category(self, marker):
+        clean_text, categories = bs._extract_profile_markers(_with_marker_line(marker))
+        _assert_marker_line_removed(clean_text)
+        assert categories == [], f"unknown marker {marker!r} produced {categories!r}"
+
+    def test_s6_inline_marker_stripped_sentence_intact(self):
+        text = (
+            f"{_OPENER}\n\nMatt holds four certifications [[profile:certifications]] "
+            f"from AWS, SAFe and Oracle.\n\n{_CLOSER}"
+        )
+        clean_text, categories = bs._extract_profile_markers(text)
+        assert clean_text == (
+            f"{_OPENER}\n\nMatt holds four certifications from AWS, SAFe and "
+            f"Oracle.\n\n{_CLOSER}"
+        ), f"sentence not intact: {clean_text!r}"
+        assert categories == ["certifications"]

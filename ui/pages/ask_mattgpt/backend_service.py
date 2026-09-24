@@ -905,6 +905,10 @@ def _score_story_for_prompt(story: dict[str, Any], prompt: str) -> float:
     return score
 
 
+def _extract_profile_markers(text: str) -> tuple[str, list[str]]:
+    raise NotImplementedError
+
+
 def _generate_agy_response(
     question: str,
     ranked_stories: list[dict[str, Any]],
