@@ -1072,7 +1072,6 @@ Stories are wrapped in XML tags before injection into the LLM prompt:
 **Post-processing:**
 - Auto-bold all known client names (derived from story corpus)
 - Auto-bold numbers/metrics: $50M, 30%, 4x, 150+ engineers, etc.
-- Fix LLM's malformed bolding (e.g., **1**0%** → **10%**)
 - ~~Remove banned phrases that LLM ignores (BANNED_PHRASES_CLEANUP list)~~ ✅ **REMOVED (Jan 26):** BASE_PROMPT now instructs "delete and state the fact"
 
 **Meta-Commentary Safety Net** ✅ **LARGELY RESOLVED (Jan 26):**
@@ -1313,7 +1312,7 @@ Unassessed row shape (Mode 1/2): `match_status="unassessed"`, `category` and `re
 
 #### Assessment Grounding (load_matt_profile)
 
-`load_matt_profile()` emits **education and certifications only**. It does NOT emit the skills array or career_summary:
+`load_matt_profile()` emits **education, certifications, and languages**. Each education entry renders on its own line so per-entry notes stay attached to the degree they describe. It does NOT emit the skills array or career_summary:
 
 - Skills array removed: assertion surface competes with corpus evidence. If profile skills are injected, the LLM uses them to assert verdicts rather than finding grounding in STAR stories.
 - career_summary excluded: the LLM cited both the career_summary and story evidence, but paraphrased the profile prose into citations with no traceable source. Removing it forces all citation grounding to the corpus.
@@ -1684,11 +1683,15 @@ Clean prompt architecture that prevents meta-commentary by keeping Agy in REPORT
 
 **Key Functions:**
 ```python
-def build_system_prompt(is_synthesis: bool, matt_dna: str, client_list: str) -> str:
-    """Build complete system prompt: BASE_PROMPT + mode-specific DELTA + OFF_TOPIC_GUARD."""
+def build_system_prompt(is_synthesis: bool, matt_dna: str, client_list: str = "", profile_facts: str = "") -> str:
+    """Build complete system prompt: BASE_PROMPT + mode-specific DELTA + OFF_TOPIC_GUARD.
+    When profile_facts is non-empty, injects the attested-facts block before
+    **GROUNDING RULES:** and citation rules 0a/0b immediately after it."""
 
-def build_user_message(question, story_context, opening, closing, is_synthesis, ...) -> str:
-    """Build user message with stories and response instructions."""
+def build_user_message(question, story_context, opening, closing, is_synthesis, ..., profile_facts: str = "") -> str:
+    """Build user message with stories and response instructions.
+    When profile_facts is non-empty, citation rule 0a is appended at the end of the message.
+    The attested-facts block and rule 0b stay in the system prompt only."""
 
 def get_verbatim_requirement(summary: str) -> str:
     """Extract required verbatim phrases from Professional Narrative stories."""
