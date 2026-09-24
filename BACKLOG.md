@@ -1529,7 +1529,7 @@ Not fixed in PoC:
 
 3. **Loader format fix.** `load_matt_profile()` currently renders three degrees in one sentence then appends three unattributed notes, so a teaching note never carries its institution. Reformat so each note stays with its entry. Also render languages (each entry on its own line, native vs B2 distinction preserved). One rendering used by both Role Match and Ask Agy. **Regression check required before merging:** `load_matt_profile()` is Role Match's grounding input; reformatting changes what the assessor reads, including the Master's equivalence note. Run one Role Match pass on a JD with a CS-degree requirement and confirm the equivalence still lands. `tests/bdd/features/profile_grounding.feature` covers part of this.
 
-4. **Ask Agy Sources: profile fact row** (decided September 23, 2026; mock `Profile Facts Surfacing.dc.html` #2g, design project).
+4. **Ask Agy Sources: profile fact row** (decided September 23, 2026; mocks `Profile Facts Surfacing.dc.html` #2g and #2h, design project).
 
    - **Marker.** Rule 0a also tells Agy to append a category marker whenever it cites the block: `[[profile:certifications]]`, `[[profile:education]]`, `[[profile:languages]]`. Post-processing strips every variant before display.
    - **Fact row.** One card per cited category, rendered above the Sources story grid. Cards are column width, at most three, and never wrap. Visual design for every case is mock #2g. Rule 0a also tells Agy to append `[[profile-only]]` when the answer draws only on the About Matt block and cites no story. Post-processing strips it. Rendering:
@@ -1540,9 +1540,9 @@ Not fixed in PoC:
       Red: a strip test for `[[profile-only]]`, and render tests for all three cases.
       Acceptance: "Is Matt certified?" shows the fact row only. "Why hire Matt?" with a certification mention shows the fact row plus the story grid.
    - **Fact card.** Styled like the Location & Availability cells in `role_match.py`. Small-caps label "FROM MATT'S PROFILE" in `--text-secondary` with the profile dot; category name in `--text-primary`, 700 weight. Background `--banner-info-bg` (themed: 0.05 light, 0.15 dark). No border, no button, no hover, no expand state.
-   - **Story cards.** All six kept. The fact card does not count toward `SOURCES_MAX_SYNTHESIS` or `SOURCES_MAX_SURGICAL`. Story cards left-aligned with `10px 14px` padding: change `justify-content: flex-start` and `padding: 10px 14px` on the button, and `text-align: left` on `button p`, in the `[class*="st-key-related_proj"] button` rule in `conversation_helpers.py`. That rule is scoped to Ask Agy Sources only; My Work and Role Match are untouched. **DevTools check required:** confirm the `p` alignment before writing CSS -- do not assume Streamlit's default.
+   - **Story cards.** All six kept. The fact card does not count toward `SOURCES_MAX_SYNTHESIS` or `SOURCES_MAX_SURGICAL`. All story cards kept, up to the existing cap (`SOURCES_MAX_SURGICAL` or `SOURCES_MAX_SYNTHESIS`). Left-aligned with `10px 14px` padding: change `justify-content: flex-start` and `padding: 10px 14px` on the button, and `text-align: left` on `button p`, in the `[class*="st-key-related_proj"] button` rule in `conversation_helpers.py`. That rule is scoped to Ask Agy Sources only; My Work and Role Match are untouched. **DevTools check required:** confirm the `p` alignment before writing CSS -- do not assume Streamlit's default.
    - **Not touched.** `render_story_detail()` (shared with My Work and Role Match). The existing My Work and Role Match detail BDD scenarios must pass unchanged.
-   - **Red.** One strip test per category marker. A render test for the fact row and card count with no story grid on a profile-only answer. A captured-prompt test that 0a includes the marker instruction.
+   - **Red.** One strip test per category marker. One strip test for `[[profile-only]]`. Render tests for all three cases (see Fact row). A captured-prompt test that 0a includes both the category marker and the `[[profile-only]]` instructions.
    - **1a (My Work).** On hold until the MATTGPT-157 keyword-scoring fix is measured.
 
 **Gate bypass -- decided against (September 23, 2026).** No fallback at the low-confidence gate; Stage 2 dropped. Evidence: `probe_250_output/20260923_125734/`. Of 16 queries, only 2 reached the gate -- both education questions (`top_score` 0.218 and 0.221). No control query reached it.
@@ -1557,7 +1557,7 @@ Not fixed in PoC:
 - **LLM classifier.** Accurate but costs a round trip per query. `classify_query_intent` was removed January 2026 for this reason.
 - **Facts as corpus stories.** Rejected July 2 in `080_Skill_Evidence_Approach.md` -- no STAR fields, attests rather than demonstrates.
 
-**Still deferred (not in scope here):** My Work rendering. Mock in `Profile Facts Surfacing.dc.html` (lives in the design project, not the repo) -- profile answer in the banner family, one line above the grid framing the corpus as browse rather than evidence. Ask Agy Sources fact row is in scope here (item 4). My Work fact row and the -128 profile-dot split for My Work remain deferred.
+**Still deferred (not in scope here):** My Work rendering. On hold. "Is Matt certified?" lands in the high-confidence state with Launchpad at #11; the cause is keyword scoring (MATTGPT-157), not rendering. Revisit after that fix is measured. Ask Agy Sources fact row is in scope here (item 4).
 
 **Acceptance:**
 - "Is Matt certified?" returns all four certifications verbatim (SAFe 4 Certified Agilist, MCP - Oracle, AWS Launchpad Champion, AWS Certified Solutions Architect - Associate). No confabulation.
