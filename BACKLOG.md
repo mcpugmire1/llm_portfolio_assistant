@@ -195,7 +195,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-138](#mattgpt-138) | BDD: page teardown invariant + CLS budget guard (MATTGPT-018 regression lock) | Decided Against | Medium | Action | June 19, 2026 |
 | [MATTGPT-147](#mattgpt-147) | Stale `@pytest.mark.skip` on `test_mobile_desktop_only_message` — decorator predates step def | Decided Against | Low | Bug | July 1, 2026 |
 | [MATTGPT-148](#mattgpt-148) | `.main` selector sweep — 36 dead selectors in `global_styles.py` need swapping to `.stMain` | Decided Against | Low | Refactor | July 1, 2026 |
-| [MATTGPT-149](#mattgpt-149) | Rejection bubble dark mode — `[class*='_rejection_bubble']` uses `var(--banner-info-bg)` with no dark mode override | Decided Against | Low | Bug | July 1, 2026 |
+| [MATTGPT-149](#mattgpt-149) | Rejection bubble dark mode — `[class*='_rejection_bubble']` uses `var(--banner-info-bg)`; `--banner-info-bg` already has a dark override (548f1bfb, Dec 2025) | Decided Against | Low | Bug | July 1, 2026 |
 | [MATTGPT-164](#mattgpt-164) | Wrong-person queries reach retrieval — Satya Nadella passes all gates, returns Accenture content | Decided Against | High | Bug | August 3, 2026 |
 
 | [MATTGPT-172](#mattgpt-172) | CIC-cluster consolidation: CIC is 52/114 (46%) of corpus; Division concentration causes cluster-drift dominance on broad queries | Decided Against | Medium | Action | August 8, 2026 |
@@ -3894,18 +3894,16 @@ If it passes, commit. If it fails, the step def has a bug — diagnose before co
 ---
 
 ### MATTGPT-149
-**Rejection bubble dark mode — `[class*='_rejection_bubble']` missing dark mode override**
+**Rejection bubble dark mode — `[class*='_rejection_bubble']` uses `var(--banner-info-bg)`; dark override already present**
 
 - **Status:** Decided Against (August 16, 2026)
-- **Why not:** Dark mode visual; dark mode not actively tested. Fix path (body.dark-theme override for --banner-info-bg) documented. Not scheduled.
+- **Why not:** Moot. `--banner-info-bg` already has a `body.dark-theme` override (0.15) since `548f1bfb` (Dec 2025). No fix needed. Decided against on corrected information (September 24, 2026).
 - **Priority:** Low
 - **Type:** Bug
 - **File:** `ui/styles/global_styles.py` (or wherever `_rejection_bubble` is defined)
 - **Logged:** July 1, 2026
 
-**Issue:** The rejection bubble component uses `var(--banner-info-bg)` for its background. There is no `body.dark-theme` override for this variable or this selector, so the bubble renders with the light-mode background color in dark mode.
-
-**Fix:** Add a `body.dark-theme` override — either for `--banner-info-bg` directly (if it's safe to change globally) or scoped to `[class*='_rejection_bubble']` specifically. Confirm the override value against the dark mode palette in `global_styles.py` before applying.
+**Correction (September 24, 2026):** `--banner-info-bg` has had a `body.dark-theme` override (0.15) since commit `548f1bfb` (December 8, 2025). The original issue statement was wrong -- the variable is already themed. The rejection bubble in dark mode uses the dark-overridden value. No fix is needed; this ticket is decided against on corrected information.
 
 **Acceptance criteria:**
 - Rejection bubble background is visually appropriate in both light and dark mode.
