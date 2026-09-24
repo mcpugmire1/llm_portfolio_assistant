@@ -1532,7 +1532,13 @@ Not fixed in PoC:
 4. **Ask Agy Sources: profile fact row** (decided September 23, 2026; mock `Profile Facts Surfacing.dc.html` #2g, design project).
 
    - **Marker.** Rule 0a also tells Agy to append a category marker whenever it cites the block: `[[profile:certifications]]`, `[[profile:education]]`, `[[profile:languages]]`. Post-processing strips every variant before display.
-   - **Fact row.** One card per cited category, rendered above the Sources story grid. Cards are column width, at most three, and never wrap. A profile-only answer shows the fact row with no story grid.
+   - **Fact row.** One card per cited category, rendered above the Sources story grid. Cards are column width, at most three, and never wrap. Visual design for every case is mock #2g. Rule 0a also tells Agy to append `[[profile-only]]` when the answer draws only on the About Matt block and cites no story. Post-processing strips it. Rendering:
+      - Profile marker(s) without `[[profile-only]]`: fact row plus story grid (#2g).
+      - `[[profile-only]]`: fact row only, no story grid (#2h).
+      - No markers: story grid only, unchanged.
+      The SOURCES label always renders.
+      Red: a strip test for `[[profile-only]]`, and render tests for all three cases.
+      Acceptance: "Is Matt certified?" shows the fact row only. "Why hire Matt?" with a certification mention shows the fact row plus the story grid.
    - **Fact card.** Styled like the Location & Availability cells in `role_match.py`. Small-caps label "FROM MATT'S PROFILE" in `--text-secondary` with the profile dot; category name in `--text-primary`, 700 weight. Background `--banner-info-bg` (themed: 0.05 light, 0.15 dark). No border, no button, no hover, no expand state.
    - **Story cards.** All six kept. The fact card does not count toward `SOURCES_MAX_SYNTHESIS` or `SOURCES_MAX_SURGICAL`. Story cards left-aligned with `10px 14px` padding: change `justify-content: flex-start` and `padding: 10px 14px` on the button, and `text-align: left` on `button p`, in the `[class*="st-key-related_proj"] button` rule in `conversation_helpers.py`. That rule is scoped to Ask Agy Sources only; My Work and Role Match are untouched. **DevTools check required:** confirm the `p` alignment before writing CSS -- do not assume Streamlit's default.
    - **Not touched.** `render_story_detail()` (shared with My Work and Role Match). The existing My Work and Role Match detail BDD scenarios must pass unchanged.
