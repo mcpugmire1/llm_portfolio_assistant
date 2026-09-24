@@ -190,6 +190,28 @@ class TestLoaderPerEntryLines:
             f"Full output: {loader_output!r}"
         )
 
+    def test_real_matt_profile_json_contains_updated_certifications_verbatim(self):
+        """Reads the real data/matt_profile.json (no mock_open). All four
+        certification strings from BACKLOG.md::MATTGPT-250 (9d5f575) must
+        appear verbatim in load_matt_profile() output -- expiry dates
+        included, none current. Guards against a data-file edit that
+        drops or paraphrases any of the four entries."""
+        real_output = load_matt_profile()
+        expected = [
+            "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+            "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+            "SAFe 4 Certified Agilist (issued 2017, expired)",
+            (
+                "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, "
+                "Architecture and Administration, Backup and Recovery (2002)"
+            ),
+        ]
+        missing = [c for c in expected if c not in real_output]
+        assert not missing, (
+            f"real matt_profile.json missing verbatim certifications: "
+            f"{missing!r}. Full loader output: {real_output!r}"
+        )
+
 
 # ---------------------------------------------------------------------------
 # Class H: languages reach Role Match's build_assessment_prompt() output

@@ -38,33 +38,47 @@ logging.getLogger("streamlit").setLevel(logging.ERROR)
 
 _TEST_PROFILE_FACTS_MARKER = (
     "TEST_MARKER_START\n"
-    "He holds a Master's degree, Information Technology from American "
+    "Education: Master's degree, Information Technology, American "
     "InterContinental University.\n"
-    "Certifications: SAFe 4 Certified Agilist, Microsoft Certified "
-    "Professional (MCP) - Oracle, AWS Launchpad Champion, AWS Certified "
-    "Solutions Architect - Associate.\n"
+    "Certifications: AWS Certified Solutions Architect - Associate "
+    "(issued 2020, expired 2023), AWS Certified Cloud Practitioner "
+    "(issued 2019, expired 2023), SAFe 4 Certified Agilist (issued "
+    "2017, expired), Oracle 8i DBA exams passed (OCP track): SQL and "
+    "PL/SQL, Architecture and Administration, Backup and Recovery "
+    "(2002).\n"
     "Languages: English (native), French (B2, self-assessed).\n"
     "TEST_MARKER_END"
 )
 
 # Four certifications must appear verbatim in the Agy system message
-# per acceptance query 1.
+# per acceptance query 1. Wording updated Sept 24, 2026 (ticket 9d5f575):
+# expiry dates included, none current, PMP still absent.
 _CERTIFICATIONS_VERBATIM = [
-    "SAFe 4 Certified Agilist",
-    "Microsoft Certified Professional (MCP) - Oracle",
-    "AWS Launchpad Champion",
-    "AWS Certified Solutions Architect - Associate",
+    "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "SAFe 4 Certified Agilist (issued 2017, expired)",
+    (
+        "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, "
+        "Architecture and Administration, Backup and Recovery (2002)"
+    ),
 ]
 
 _LANGUAGES_VERBATIM = "French (B2, self-assessed)"
 
-# Rule 0a and 0b wording from BACKLOG.md::MATTGPT-250 (ea20de2).
-# 0a has two clauses. Both must reach the system message.
+# Rule 0a and 0b wording from BACKLOG.md::MATTGPT-250 (9d5f575).
+# 0a has three testable fragments; 0b has two.
 _RULE_0A_NO_INFERENCE = (
     "state what the block says, do not infer capability or meaning from it"
 )
 _RULE_0A_DIRECT_NO = "an item not in the list gets a direct no"
+# New at 9d5f575: Agy must answer from the block only, not join facts to stories.
+_RULE_0A_NO_STORY_CONNECT = (
+    "Do not say what a fact indicates or connect it to a story unless asked"
+)
 _RULE_0B_MARKER = "Nothing I know about Matt covers that"
+# New at 9d5f575: for absent categories, Agy must not pad the honest gap
+# with story evidence.
+_RULE_0B_REPLY_ONLY = "Reply with that sentence only"
 
 _GROUNDING_HEADER = "**GROUNDING RULES:**"
 
@@ -202,6 +216,32 @@ class TestCitationRulesInCapturedSystemMessage:
         assert _RULE_0B_MARKER in captured_agy_system_message, (
             f"rule 0b marker {_RULE_0B_MARKER!r} not found in captured "
             f"Agy system message. Head: {captured_agy_system_message[:600]!r}"
+        )
+
+    def test_rule_0a_no_story_connect_clause_present_in_system_message(
+        self, captured_agy_system_message
+    ):
+        """0a addition at 9d5f575: Agy answers from the block only and
+        does not join a fact to a story unless asked. Blocks the class
+        of over-inference PoC 1 caught ('AWS Launchpad Champion
+        reflecting his role in leading cloud enablement programs')."""
+        assert _RULE_0A_NO_STORY_CONNECT in captured_agy_system_message, (
+            f"rule 0a no-story-connect clause {_RULE_0A_NO_STORY_CONNECT!r} "
+            f"not found in captured Agy system message. Head: "
+            f"{captured_agy_system_message[:600]!r}"
+        )
+
+    def test_rule_0b_reply_only_clause_present_in_system_message(
+        self, captured_agy_system_message
+    ):
+        """0b addition at 9d5f575: for absent categories, Agy replies
+        with the honest-gap sentence only and does not pad with story
+        evidence. Blocks the SAP-style three-paragraph pad on 'no'
+        answers (see MATTGPT-251)."""
+        assert _RULE_0B_REPLY_ONLY in captured_agy_system_message, (
+            f"rule 0b reply-only clause {_RULE_0B_REPLY_ONLY!r} not "
+            f"found in captured Agy system message. Head: "
+            f"{captured_agy_system_message[:600]!r}"
         )
 
 
