@@ -1529,20 +1529,14 @@ Not fixed in PoC:
 
 3. **Loader format fix.** `load_matt_profile()` currently renders three degrees in one sentence then appends three unattributed notes, so a teaching note never carries its institution. Reformat so each note stays with its entry. Also render languages (each entry on its own line, native vs B2 distinction preserved). One rendering used by both Role Match and Ask Agy. **Regression check required before merging:** `load_matt_profile()` is Role Match's grounding input; reformatting changes what the assessor reads, including the Master's equivalence note. Run one Role Match pass on a JD with a CS-degree requirement and confirm the equivalence still lands. `tests/bdd/features/profile_grounding.feature` covers part of this.
 
-4. **Ask Agy Sources: profile fact row** (decided September 23, 2026; mocks `Profile Facts Surfacing.dc.html` #2g and #2h, design project).
+4. **Ask Agy Sources: profile fact row** (decided September 23, 2026; mock `Profile Facts Surfacing.dc.html` #3b, design project).
 
    - **Marker.** Rule 0a also tells Agy to append a category marker whenever it cites the block: `[[profile:certifications]]`, `[[profile:education]]`, `[[profile:languages]]`. Post-processing strips every variant before display.
-   - **Fact row.** One card per cited category, rendered above the Sources story grid. Cards are column width, at most three, and never wrap. Visual design for every case is mock #2g. Rule 0a also tells Agy to append `[[profile-only]]` when the answer draws only on the About Matt block and cites no story. Post-processing strips it. Rendering:
-      - Profile marker(s) without `[[profile-only]]`: fact row plus story grid (#2g).
-      - `[[profile-only]]`: fact row only, no story grid (#2h).
-      - No markers: story grid only, unchanged.
-      The SOURCES label always renders.
-      Red: a strip test for `[[profile-only]]`, and render tests for all three cases.
-      Acceptance: "Is Matt certified?" shows the fact row only. "Why hire Matt?" with a certification mention shows the fact row plus the story grid.
+   - **Fact row.** One card per cited category, rendered above the story grid. Cards are column width, at most three, and never wrap. Visual design is mock #3b. Markers go on their own line before the response closer. The story grid always renders. Fact cards render only when category markers are present. The SOURCES label always renders.
    - **Fact card.** Styled like the Location & Availability cells in `role_match.py`. Small-caps label "FROM MATT'S PROFILE" in `--text-secondary` with the profile dot; category name in `--text-primary`, 700 weight. Background `--banner-info-bg` (themed: 0.05 light, 0.15 dark). No border, no button, no hover, no expand state.
    - **Story cards.** The fact card does not count toward `SOURCES_MAX_SYNTHESIS` or `SOURCES_MAX_SURGICAL`. All story cards kept, up to the existing cap (`SOURCES_MAX_SURGICAL` or `SOURCES_MAX_SYNTHESIS`). Left-aligned with `10px 14px` padding: change `justify-content: flex-start` and `padding: 10px 14px` on the button, and `text-align: left` on `button p`, in the `[class*="st-key-related_proj"] button` rule in `conversation_helpers.py`. That rule is scoped to Ask Agy Sources only; My Work and Role Match are untouched. **DevTools check required:** confirm the `p` alignment before writing CSS -- do not assume Streamlit's default.
    - **Not touched.** `render_story_detail()` (shared with My Work and Role Match). The existing My Work and Role Match detail BDD scenarios must pass unchanged.
-   - **Red.** One strip test per category marker. One strip test for `[[profile-only]]`. Render tests for all three cases (see Fact row). A captured-prompt test that 0a includes both the category marker and the `[[profile-only]]` instructions.
+   - **Red.** One strip test per category marker. A render test for the fact row (markers present) and for story-grid-only (no markers). A captured-prompt test that 0a includes the category marker instruction.
    - **1a (My Work).** On hold until the MATTGPT-157 keyword-scoring fix is measured.
 
 **Gate bypass -- decided against (September 23, 2026).** No fallback at the low-confidence gate; Stage 2 dropped. Evidence: `probe_250_output/20260923_125734/`. Of 16 queries, only 2 reached the gate -- both education questions (`top_score` 0.218 and 0.221). No control query reached it.
