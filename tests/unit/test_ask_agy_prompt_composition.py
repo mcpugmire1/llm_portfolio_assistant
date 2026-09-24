@@ -90,7 +90,12 @@ _RULE_0A_CERTS_EXACT = (
 _RULE_0A_LANGUAGE_LEVEL = (
     "When stating a language, state its level in the same sentence."
 )
+# Opening no longer names the "About Matt" block (source-leak fix).
+_RULE_0A_OPENING = (
+    "The facts about Matt above are accurate; cite them directly and verbatim."
+)
 _RULE_0A_NEW_MARKERS = [
+    _RULE_0A_OPENING,
     _RULE_0A_NO_SOURCE,
     _RULE_0A_CERTS_EXACT,
     _RULE_0A_LANGUAGE_LEVEL,
