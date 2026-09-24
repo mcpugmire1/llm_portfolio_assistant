@@ -125,6 +125,24 @@ class TestNumberPatternsBoldScaleUnits:
             f"result. Result: {result!r}"
         )
 
+    def test_e4_pre_bolded_percent_plus_stays_unchanged(self, real_story):
+        """LLM pre-bolds '**40%+**'. The current number_patterns lookbehind
+        `(?<!\\*\\*)` rejects the '4' start (chars before are '**') but the
+        `\\d+%\\+?` alternative can start at '0' (char before is '4', not
+        '**'), match '0%' by backing off '+' to satisfy the closing
+        `(?!\\*\\*)`, and emit '**4**0%**+**' (the band-aid then rejoins
+        to '**40%**+**', still broken because '+' escapes the bold).
+        Green must not touch a pre-bolded percent+plus phrase."""
+        llm_text = "Adoption reached **40%+** last quarter."
+        result = _run_agy_with_llm_text(llm_text, real_story)
+        assert "**40%+**" in result, (
+            f"'**40%+**' not present in post-processed result. " f"Result: {result!r}"
+        )
+        assert "**4**0" not in result, (
+            f"malformed split '**4**0' found in result -- number pattern "
+            f"broke '40' apart. Result: {result!r}"
+        )
+
 
 # ---------------------------------------------------------------------------
 # Class F: META_COMMENTARY_REGEX_PATTERNS strip additions
