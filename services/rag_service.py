@@ -4,6 +4,7 @@ import streamlit as st
 
 from config.constants import CONFIDENCE_HIGH, CONFIDENCE_LOW, SEARCH_TOP_K
 from config.debug import DEBUG
+from services.jd_assessor import load_matt_profile
 from services.pinecone_service import pinecone_semantic_search
 from utils.formatting import build_5p_summary
 from utils.validation import _tokenize
@@ -73,9 +74,19 @@ def semantic_search(
 
     q = (query or "").strip()
 
+    # MATTGPT-250: profile_facts (education, certifications, languages) is
+    # attached to every return so Ask Agy and Role Match get identity facts
+    # regardless of which branch fires. Loaded once per call.
+    profile_facts = load_matt_profile()
+
     # Default return for empty query
     if not q:
-        return {"results": [], "confidence": "none", "top_score": 0.0}
+        return {
+            "results": [],
+            "confidence": "none",
+            "top_score": 0.0,
+            "profile_facts": profile_facts,
+        }
 
     # 1) Try Pinecone first.
     # MATTGPT-230: preserve the None vs [] distinction. None = upstream failure
@@ -97,7 +108,12 @@ def semantic_search(
                 "__ask_from_suggestion__"
             ):
                 st.session_state["__dbg_pc_hits"] = 0
-                result = {"results": [], "confidence": "none", "top_score": 0.0}
+                result = {
+                    "results": [],
+                    "confidence": "none",
+                    "top_score": 0.0,
+                    "profile_facts": profile_facts,
+                }
                 if pinecone_unavailable:
                     result["reason"] = "fallback:pinecone_unavailable"
                 return result
@@ -112,6 +128,7 @@ def semantic_search(
             "results": local,
             "confidence": "low" if local else "none",
             "top_score": 0.0,
+            "profile_facts": profile_facts,
         }
         if pinecone_unavailable:
             result["reason"] = "fallback:pinecone_unavailable"
@@ -135,7 +152,12 @@ def semantic_search(
         # Don't return garbage results
         st.session_state["__pc_suppressed__"] = True
         st.session_state["__dbg_pc_hits"] = len(hits)
-        return {"results": [], "confidence": "none", "top_score": top_score}
+        return {
+            "results": [],
+            "confidence": "none",
+            "top_score": top_score,
+            "profile_facts": profile_facts,
+        }
 
     # 5) For high/low confidence, filter stories above minimum threshold
     confident_hits = [
@@ -203,10 +225,12 @@ def semantic_search(
             "top_score": top_score,
             "relaxed_count": relaxed_count,
             "active_filters": active_filters,
+            "profile_facts": profile_facts,
         }
 
     return {
         "results": filtered_stories,
         "confidence": confidence,
         "top_score": top_score,
+        "profile_facts": profile_facts,
     }

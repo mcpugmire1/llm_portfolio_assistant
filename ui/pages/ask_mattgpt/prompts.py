@@ -244,6 +244,7 @@ def build_system_prompt(
     is_synthesis: bool,
     matt_dna: str,
     client_list: str = "",
+    profile_facts: str = "",
 ) -> str:
     """Build the complete system prompt for the given mode.
 
@@ -251,12 +252,20 @@ def build_system_prompt(
         is_synthesis: True for synthesis mode, False for standard mode
         matt_dna: The MATT_DNA ground truth string
         client_list: Comma-separated list of clients from retrieved stories
+        profile_facts: MATTGPT-250 attested identity facts (education,
+            certifications, languages). When present, injected as an
+            "About Matt (attested facts):" block immediately before
+            "**GROUNDING RULES:**", with citation rules 0a and 0b
+            inserted immediately after the header.
 
     Returns:
         Complete system prompt string
     """
     # Start with base prompt
     prompt = BASE_PROMPT.format(matt_dna=matt_dna)
+
+    if profile_facts:
+        prompt = _inject_profile_block_and_citation_rules(prompt, profile_facts)
 
     # Add mode-specific delta
     if is_synthesis:
@@ -272,6 +281,54 @@ def build_system_prompt(
     return prompt
 
 
+# MATTGPT-250: attested-facts block + citation rules 0a/0b, injected around
+# the "**GROUNDING RULES:**" header at prompt-composition time. Wording
+# taken verbatim from the ticket detail block. Case-sensitive markers
+# ("state what the block says..." lowercase) are load-bearing -- the Red
+# tests match on lowercase and PMP acceptance depends on the direct-no
+# clause reaching the LLM.
+_GROUNDING_RULES_HEADER = "**GROUNDING RULES:**"
+_ATTESTED_FACTS_HEADER = "**About Matt (attested facts):**"
+_CITATION_RULE_0A = (
+    "0a. The facts about Matt above are accurate; cite them directly "
+    "and verbatim. No inference clause: state what the facts say, do not "
+    "infer capability or meaning from it. Answer from these facts only. Do "
+    "not say what a fact indicates or connect it to a story unless asked. "
+    "For a category the profile holds (certifications, education, "
+    "languages), an item not in the list gets a direct no, followed by "
+    "what the list does contain. Never tell the visitor where a fact comes "
+    "from. State it as a fact about Matt. Quote each certification exactly "
+    "as written, including its dates. None is current. When stating a "
+    "language, state its level in the same sentence. Do not repeat "
+    "requirement or eligibility wording from an education note.\n"
+)
+_CITATION_RULES_0A_0B = _CITATION_RULE_0A + (
+    "0b. If the question is about a category the profile has no key for "
+    '(patents, publications), respond "Nothing I know about Matt covers '
+    'that". Reply with that sentence only -- do not synthesize from '
+    "story evidence.\n"
+)
+
+
+def _inject_profile_block_and_citation_rules(prompt: str, profile_facts: str) -> str:
+    """Place the attested-facts block before **GROUNDING RULES:** and
+    rules 0a/0b immediately after the header. If the header is absent
+    for any reason, append the block + rules at the end so identity
+    facts still reach the LLM rather than silently dropping."""
+    profile_block = f"{_ATTESTED_FACTS_HEADER}\n{profile_facts}\n\n"
+    if _GROUNDING_RULES_HEADER in prompt:
+        before, after = prompt.split(_GROUNDING_RULES_HEADER, 1)
+        return (
+            before
+            + profile_block
+            + _GROUNDING_RULES_HEADER
+            + "\n"
+            + _CITATION_RULES_0A_0B
+            + after.lstrip("\n")
+        )
+    return prompt + "\n\n" + profile_block + _CITATION_RULES_0A_0B
+
+
 def build_user_message(
     question: str,
     story_context: str,
@@ -280,6 +337,7 @@ def build_user_message(
     is_synthesis: bool,
     verbatim_requirement: str = "",
     focus_angle: str = "",
+    profile_facts: str = "",
 ) -> str:
     """Build the user message with stories and instructions.
 
@@ -291,6 +349,9 @@ def build_user_message(
         is_synthesis: True for synthesis mode, False for standard mode
         verbatim_requirement: Optional verbatim phrase requirements
         focus_angle: Optional focus angle for variety (standard mode only)
+        profile_facts: MATTGPT-250. When non-empty, citation rule 0a is
+            appended at the very end of the message. The profile block
+            and rule 0b stay in the system prompt only.
 
     Returns:
         Complete user message string
@@ -298,6 +359,7 @@ def build_user_message(
     focus_line = (
         f"\n**FOCUS:** {focus_angle}" if focus_angle and not is_synthesis else ""
     )
+    rule_0a = f"\n{_CITATION_RULE_0A}" if profile_facts else ""
 
     return f"""User Question: {question}
 
@@ -319,4 +381,4 @@ Write natural prose paragraphs between the opening and closing. No section heade
 **Bold ALL client names and numbers.**
 
 State facts. Do not evaluate Matt.
-"""
+{rule_0a}"""

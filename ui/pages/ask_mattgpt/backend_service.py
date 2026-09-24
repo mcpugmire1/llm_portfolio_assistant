@@ -910,6 +910,7 @@ def _generate_agy_response(
     ranked_stories: list[dict[str, Any]],
     answer_context: str,
     is_synthesis: bool = False,
+    profile_facts: str = "",
 ) -> str:
     """Generate an Agy-voiced response using OpenAI GPT-4o-mini.
 
@@ -1082,6 +1083,7 @@ def _generate_agy_response(
             is_synthesis=is_synthesis,
             matt_dna=MATT_DNA,
             client_list=client_list,
+            profile_facts=profile_facts,
         )
 
         user_message = build_user_message(
@@ -1092,6 +1094,7 @@ def _generate_agy_response(
             is_synthesis=is_synthesis,
             verbatim_requirement=verbatim_requirement,
             focus_angle=chosen_focus if not is_synthesis else "",
+            profile_facts=profile_facts,
         )
 
         # Call OpenAI API
@@ -1130,12 +1133,18 @@ def _generate_agy_response(
 
         # Bold numbers/metrics that aren't already bolded
         # Matches: 30%, $50M, 4x, 150+, 12 countries, 5 months, etc.
+        #
+        # MATTGPT-250: leading lookbehind `(?<![\*\d])` rejects any match
+        # start that sits mid-number or immediately after `**`. The prior
+        # `(?<!\*\*)` only guarded the exact "**" prefix, which admitted
+        # mid-number starts on pre-bolded input (e.g. "**16 weeks**" ->
+        # "**1**6 week**s**", "**40%+**" -> "**4**0%**+**").
         number_patterns = [
-            r'(?<!\*\*)(\$[\d,.]+[MBK]?)(?!\*\*)',  # $50M, $300K, $1.2B
-            r'(?<!\*\*)(\d+%\+?)(?!\*\*)',  # 30%, 40%+
-            r'(?<!\*\*)(\d+[xX])(?=\s)(?!\*\*)',  # 4x, 10X (lookahead for space, don't capture it)
-            r'(?<!\*\*)(\d+\+?\s*(?:engineers?|teams?|members?|practitioners?|countries|regions?|clients?|projects?|months?|weeks?|days?|hours?))(?!\*\*)',  # 150+ engineers, 12 countries
-            r'(?<!\*\*)(\d+[.,]?\d*\s*(?:reduction|increase|improvement|faster|slower))(?!\*\*)',  # 30% reduction
+            r'(?<![\*\d])(\$[\d,.]+[MBK]?)(?!\*\*)',  # $50M, $300K, $1.2B
+            r'(?<![\*\d])(\d+%\+?)(?!\*\*)',  # 30%, 40%+
+            r'(?<![\*\d])(\d+[xX])(?=\s)(?!\*\*)',  # 4x, 10X (lookahead for space, don't capture it)
+            r'(?<![\*\d])(\d+\+?\s*(?:engineers?|teams?|members?|practitioners?|professionals?|countries|regions?|clients?|projects?|months?|weeks?|days?|hours?))(?!\*\*)',  # 150+ engineers, 12 countries, 150 professionals
+            r'(?<![\*\d])(\d+[.,]?\d*\s*(?:reduction|increase|improvement|faster|slower))(?!\*\*)',  # 30% reduction
         ]
 
         for pattern in number_patterns:
@@ -1145,12 +1154,6 @@ def _generate_agy_response(
 
         # Clean up any double-bolding that might have occurred
         response_text = re.sub(r'\*\*\*\*+', '**', response_text)
-
-        # Fix LLM's malformed number bolding: **1**0%** → **10%**
-        # This handles cases where LLM splits numbers incorrectly
-        response_text = re.sub(
-            r'\*\*(\d)\*\*(\d+%?\+?)\*\*', r'**\1\2**', response_text
-        )
 
         # =====================================================================
         # POST-PROCESSING: Strip meta-commentary patterns
@@ -2372,7 +2375,11 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
         # Generate Agy-voiced response
         narrative = _format_narrative(primary)
         agy_response = _generate_agy_response(
-            question, ranked, narrative, is_synthesis=is_synthesis
+            question,
+            ranked,
+            narrative,
+            is_synthesis=is_synthesis,
+            profile_facts=search_result.get("profile_facts", ""),
         )
 
         # Build modes

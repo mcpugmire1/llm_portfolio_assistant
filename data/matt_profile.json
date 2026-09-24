@@ -8,15 +8,25 @@
       "note": "Master's degree in Information Technology satisfies requirements for 'Bachelor's degree in Computer Science or related field': IT is a recognized CS-related discipline and a Master's exceeds a Bachelor's requirement."
     },
     {
+      "degree": "Graduate coursework, Romance Languages (Linguistics)",
+      "institution": "University of Georgia",
+      "note": "Teaching assistant; taught French 101, 102, and 103."
+    },
+    {
       "degree": "BA, French Language and Literature",
-      "institution": "Queens University of Charlotte"
+      "institution": "Queens University of Charlotte",
+      "note": "Included a year abroad at Université Paul Valéry, Montpellier, France, through an exchange program with the University of North Carolina at Chapel Hill."
     }
   ],
   "certifications": [
-    "SAFe 4 Certified Agilist",
-    "Microsoft Certified Professional (MCP) - Oracle",
-    "AWS Launchpad Champion",
-    "AWS Certified Solutions Architect - Associate"
+    "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)"
+  ],
+  "languages": [
+    "English (native)",
+    "French (B2, self-assessed)"
   ],
   "logistics": {
     "location": {

@@ -305,28 +305,34 @@ Rules:
 
 
 def load_matt_profile() -> str:
-    """Load Matt's profile from data/matt_profile.json and build grounding context string."""
+    """Load Matt's profile from data/matt_profile.json and build grounding
+    context string.
+
+    Each education entry renders on its own line so that per-entry notes
+    (e.g., the Master's equivalence note, the UGA teaching note, the
+    Queens abroad note) stay attached to the degree they describe rather
+    than trailing after the last degree in a shared "notes" section.
+    """
     profile_path = Path(__file__).parent.parent / "data" / "matt_profile.json"
     with open(profile_path) as f:
         profile = json.load(f)
 
-    education_parts = []
-    education_notes = []
-    for e in profile["education"]:
-        education_parts.append(f"{e['degree']} from {e['institution']}")
+    lines = []
+    for e in profile.get("education", []):
+        line = f"Education: {e['degree']}, {e['institution']}."
         if e.get("note"):
-            education_notes.append(e["note"])
-    education = " and ".join(education_parts)
+            line += f" {e['note']}"
+        lines.append(line)
 
     certs = ", ".join(profile.get("certifications", []))
-
-    result = f"He holds a {education}."
-    for note in education_notes:
-        result += f" {note}"
     if certs:
-        result += f" Certifications: {certs}."
+        lines.append(f"Certifications: {certs}.")
 
-    return result
+    languages = profile.get("languages", [])
+    if languages:
+        lines.append(f"Languages: {', '.join(languages)}.")
+
+    return "\n".join(lines)
 
 
 def build_assessment_prompt() -> str:
