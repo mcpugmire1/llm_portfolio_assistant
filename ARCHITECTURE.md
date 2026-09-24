@@ -82,7 +82,7 @@
 **Project:** MattGPT Portfolio Assistant - AI-powered career story search and chat interface
 **Tech Stack:** Streamlit, OpenAI GPT-4o, Pinecone vector DB, Python 3.11+
 **Data Corpus:** 100+ STAR-formatted transformation project stories
-**Last Updated:** September 16, 2026
+**Last Updated:** September 24, 2026
 
 ### What This Document Contains
 
@@ -397,18 +397,16 @@ See **ADR 017** in `docs/ADR.md` for the full decision record.
 The data engineering flow transforms Excel-based STAR stories into vector embeddings that power semantic search:
 
 ```
-Excel Master Sheet
+Manual enrichment (Matt, in Excel)
       ↓
-[generate_jsonl_from_excel.py]
-      ↓
+OneDrive master xlsx  (MPugmire - STAR Stories - DDMONYY.xlsx)
+      ↓  refresh_master.py DDMONYY
+Local master xlsx (repo root)
+      ↓  generate_jsonl_from_excel.py
 echo_star_stories.jsonl (raw)
-      ↓
-[Manual enrichment + LLM processing]
-      ↓
+      ↓  generate_public_tags.py
 echo_star_stories_nlp.jsonl (enriched)
-      ↓
-[build_custom_embeddings.py]
-      ↓
+      ↓  build_custom_embeddings.py   (Matt runs; Code never runs this)
 OpenAI text-embedding-3-small (1536 dims)
       ↓
 Pinecone Index (matt-portfolio-v2)
@@ -417,6 +415,28 @@ Pinecone Index (matt-portfolio-v2)
       ↓
 Semantic Search Results → RAG → GPT-4o → User
 ```
+
+---
+
+### Stage 0: OneDrive to Local Repo
+
+**Script:** `refresh_master.py DDMONYY` (root-level)
+
+**Purpose:** Pull the dated master xlsx from OneDrive into the repo root so downstream stages have a local copy to read.
+
+**Input:**
+- `~/OneDrive/Documents/Career Hub/Content Vault/Storytelling & Anecdotes/MPugmire - STAR Stories - {DDMONYY}.xlsx`
+
+**Output:**
+- `MPugmire - STAR Stories - {DDMONYY}.xlsx` at repo root (picked up by Stage 1 via glob-and-assert)
+
+**Guardrails (all enforced at runtime, not git):**
+- Asserts the named file exists at the OneDrive source; exits non-zero if missing.
+- Refuses to overwrite: exits non-zero if the same filename already exists in repo root.
+- Archives any existing `MPugmire - STAR Stories - *.xlsx` in repo root to `archive/star-stories-versions/` before copying; refuses to overwrite an existing archive entry.
+- Nothing writes to git. `archive/star-stories-versions/` is gitignored.
+
+**Introduced:** commit `4c8d900`
 
 ---
 
@@ -468,11 +488,11 @@ DRY_RUN=False  # Set to True for preview
 
 ---
 
-### Stage 2: Manual Enrichment
+### Stage 2: Semantic Tag Generation
 
 **Script:** `generate_public_tags.py` (171 lines, root-level)
 
-**Purpose:** Add semantic metadata and public-facing tags.
+**Purpose:** Generate semantic metadata and public-facing tags via GPT-4o.
 
 **Enrichment Process:**
 1. **Persona Tagging** - Map stories to interview personas (e.g., "Product Leader", "Technical Architect")
