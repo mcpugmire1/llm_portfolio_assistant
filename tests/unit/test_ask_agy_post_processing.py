@@ -272,3 +272,32 @@ class TestProfileMarkerExtraction:
             f"Oracle.\n\n{_CLOSER}"
         ), f"sentence not intact: {clean_text!r}"
         assert categories == ["certifications"]
+
+    def test_s7_no_markers_text_unchanged(self):
+        text = (
+            f"{_OPENER}\n\nMatt holds four certifications:\n\n"
+            "  - AWS Certified Solutions Architect - Associate\n"
+            "  - SAFe 4 Certified Agilist\n\n"
+            f"{_CLOSER}"
+        )
+        clean_text, categories = bs._extract_profile_markers(text)
+        assert clean_text == text, f"unmarked text altered: {clean_text!r}"
+        assert categories == []
+
+    @pytest.mark.parametrize("sep", [", ", " "], ids=["comma", "space"])
+    @pytest.mark.parametrize("placement", ["after_closer", "own_line"])
+    def test_s8_marker_run_removed_with_separators(self, sep, placement):
+        """Two markers in a run, separated by a comma or spaces. Observed
+        Sept 25, 2026: the LLM put "[[profile:education]], [[profile:languages]]"
+        inline after the closer and the comma survived stripping."""
+        run = f"[[profile:education]]{sep}[[profile:languages]]"
+        if placement == "after_closer":
+            text = f"{_OPENER}\n\n{_BODY}\n\n{_CLOSER} {run}"
+        else:
+            text = f"{_OPENER}\n\n{_BODY}\n\n{run}\n\n{_CLOSER}"
+        clean_text, categories = bs._extract_profile_markers(text)
+        assert clean_text == _CLEAN, f"expected {_CLEAN!r}, got {clean_text!r}"
+        assert not clean_text.rstrip("?").endswith(
+            (",", " ", "\t")
+        ), f"trailing separator left: {clean_text!r}"
+        assert categories == ["education", "languages"]
