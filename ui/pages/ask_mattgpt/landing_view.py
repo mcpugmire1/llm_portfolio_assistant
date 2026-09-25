@@ -394,6 +394,7 @@ def render_landing_page(stories: list[dict]):
                     "text": answer_text,
                     "sources": sources,
                     "query_intent": query_intent,
+                    "profile_categories": result.get("profile_categories") or [],
                 }
             )
 

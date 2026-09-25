@@ -5,6 +5,7 @@ Rendering helpers specific to Ask Agy conversation view.
 Extracted from monolithic ask_mattgpt.py in Phase 5.1.
 """
 
+import html
 import math
 
 import streamlit as st
@@ -36,11 +37,40 @@ SOURCES_MAX_SURGICAL = 3  # Targeted queries: show fewer sources (tree view)
 def _sources_layout(
     categories: list[str], sources: list[dict], is_synthesis: bool
 ) -> dict:
-    raise NotImplementedError
+    """MATTGPT-250 item 4: what the Ask Agy Sources block renders.
+
+    Fact cards (one per cited profile category, in cited order) sit above
+    the story grid and do not count toward the story cap.
+    """
+    cap = SOURCES_MAX_SYNTHESIS if is_synthesis else SOURCES_MAX_SURGICAL
+    return {
+        "show_label": True,
+        "fact_cards": [c.capitalize() for c in categories],
+        "story_count": min(len(sources), cap),
+    }
 
 
 def _fact_card_html(display_name: str) -> str:
-    raise NotImplementedError
+    """MATTGPT-250 item 4: one Sources fact card (mock #2g). Styled like the
+    Role Match Location & Availability cells (small-caps label in
+    --text-secondary, value in --text-primary 700) on --banner-info-bg,
+    with min-height matching the story cards. Not a link: no border, no
+    hover, no click target."""
+    return (
+        '<div style="display: flex; flex-direction: column; justify-content: center; '
+        "gap: 4px; min-height: 56px; padding: 10px 14px; border-radius: 8px; "
+        'background: var(--banner-info-bg); box-sizing: border-box; cursor: default;">'
+        '<div style="display: flex; align-items: center; gap: 6px; font-size: 11px; '
+        "font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; "
+        'color: var(--text-secondary);">'
+        '<span style="flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; '
+        'background: var(--text-secondary);"></span>'
+        "FROM MATT'S PROFILE</div>"
+        '<div style="font-size: 14px; font-weight: 700; line-height: 1.3; '
+        'color: var(--text-primary);">'
+        f"{html.escape(display_name)}</div>"
+        "</div>"
+    )
 
 
 # ============================================================================
@@ -516,7 +546,8 @@ def _render_ask_transcript(stories: list[dict]):
 
                 # Show Related Projects in wireframe style
                 sources = m.get("sources", []) or []
-                if sources:
+                profile_categories = m.get("profile_categories") or []
+                if sources or profile_categories:
                     st.markdown(
                         f'''
                     <div class="sources-tight">
@@ -563,7 +594,7 @@ def _render_ask_transcript(stories: list[dict]):
                             color: var(--accent-purple) !important;
                             font-size: 14px !important;
                             font-weight: 500 !important;
-                            padding: 6px 12px !important;
+                            padding: 6px 14px !important;
                             border-radius: 8px !important;
                             width: 100% !important;
                             height: auto !important;
@@ -571,7 +602,7 @@ def _render_ask_transcript(stories: list[dict]):
                             transition: all 0.2s ease !important;
                             display: flex !important;
                             align-items: center !important;
-                            justify-content: center !important;
+                            justify-content: flex-start !important;
                         }
                         [class*="st-key-container_related_proj"] button:hover,
                         [class*="st-key-related_proj"] button:hover {
@@ -584,6 +615,14 @@ def _render_ask_transcript(stories: list[dict]):
                             font-size: 14px !important;
                             margin: 0 !important;
                             line-height: 1.4 !important;
+                            text-align: left !important;
+                        }
+                        /* The chat-wide stMarkdownContainer align-self: flex-start
+                           (styles.py) pins one-line titles to the top of the card;
+                           re-center the label vertically inside Sources buttons only. */
+                        [class*="st-key-container_related_proj"] button > [data-testid="stMarkdownContainer"],
+                        [class*="st-key-related_proj"] button > [data-testid="stMarkdownContainer"] {
+                            align-self: center !important;
                         }
                         </style>
                         """,
@@ -595,10 +634,23 @@ def _render_ask_transcript(stories: list[dict]):
                     # - Surgical (specific story): 3 sources (tree view)
                     msg_query_intent = m.get("query_intent")
                     is_synthesis = msg_query_intent == "synthesis"
-                    max_sources = (
-                        SOURCES_MAX_SYNTHESIS if is_synthesis else SOURCES_MAX_SURGICAL
-                    )
-                    display_sources = sources[:max_sources]
+                    layout = _sources_layout(profile_categories, sources, is_synthesis)
+
+                    # MATTGPT-250 item 4: fact row above the story grid, one
+                    # column-width card per cited profile category (max three,
+                    # so it never wraps). Not counted toward the story cap.
+                    if layout["fact_cards"]:
+                        with st.container(key=f"sources_facts_{i}_{msg_hash}"):
+                            fact_cols = st.columns(SOURCES_COLS_PER_ROW)
+                            for col, name in zip(
+                                fact_cols, layout["fact_cards"], strict=False
+                            ):
+                                with col:
+                                    st.markdown(
+                                        _fact_card_html(name), unsafe_allow_html=True
+                                    )
+
+                    display_sources = sources[: layout["story_count"]]
                     rows_needed = math.ceil(len(display_sources) / SOURCES_COLS_PER_ROW)
 
                     with st.container(key=f"sources_grid_{i}_{msg_hash}"):

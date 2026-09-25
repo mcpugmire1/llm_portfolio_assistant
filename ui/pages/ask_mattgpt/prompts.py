@@ -9,6 +9,8 @@ SYNTHESIS_DELTA: Structure for multi-story responses (breadth)
 STANDARD_DELTA: Structure for single-story responses (WHY→HOW→WHAT)
 """
 
+from config.constants import PROFILE_FACT_CATEGORIES
+
 # =============================================================================
 # BASE_PROMPT - The Agy Voice (Shared Across All Modes)
 # =============================================================================
@@ -289,6 +291,15 @@ def build_system_prompt(
 # clause reaching the LLM.
 _GROUNDING_RULES_HEADER = "**GROUNDING RULES:**"
 _ATTESTED_FACTS_HEADER = "**About Matt (attested facts):**"
+# MATTGPT-250 item 4: category markers feed the Ask Agy Sources fact row.
+# Post-processing strips them before display (_extract_profile_markers).
+_PROFILE_MARKERS = [f"[[profile:{c}]]" for c in PROFILE_FACT_CATEGORIES]
+_MARKER_INSTRUCTION = (
+    "When you state a fact from the facts about Matt above, put its "
+    "category marker on its own line before the closing line: "
+    f"{', '.join(_PROFILE_MARKERS[:-1])} or {_PROFILE_MARKERS[-1]}, once "
+    "per category stated."
+)
 _CITATION_RULE_0A = (
     "0a. The facts about Matt above are accurate; cite them directly "
     "and verbatim. No inference clause: state what the facts say, do not "
@@ -300,7 +311,8 @@ _CITATION_RULE_0A = (
     "from. State it as a fact about Matt. Quote each certification exactly "
     "as written, including its dates. None is current. When stating a "
     "language, state its level in the same sentence. Do not repeat "
-    "requirement or eligibility wording from an education note.\n"
+    "requirement or eligibility wording from an education note. "
+    f"{_MARKER_INSTRUCTION}\n"
 )
 _CITATION_RULES_0A_0B = _CITATION_RULE_0A + (
     "0b. If the question is about a category the profile has no key for "

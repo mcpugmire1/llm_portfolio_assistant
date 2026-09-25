@@ -21,6 +21,7 @@ from config.constants import (
     EXCLUDED_DIVISION_VALUES,
     META_COMMENTARY_REGEX_PATTERNS,
     PINECONE_LOWERCASE_FIELDS,
+    PROFILE_FACT_CATEGORIES,
     SEARCH_TOP_K,
 )
 from config.debug import DEBUG
@@ -905,8 +906,40 @@ def _score_story_for_prompt(story: dict[str, Any], prompt: str) -> float:
     return score
 
 
+# MATTGPT-250 item 4: a run of one or more [[...]] tokens, with the spaces
+# or tabs before it and any comma/space separators between tokens, removed
+# as one unit ("? [[profile:education]], [[profile:languages]]" -> "?").
+# Known [[profile:<category>]] markers become fact-row categories; every
+# token, known or not, is removed so no marker residue reaches the visitor.
+_MARKER_RE = re.compile(r"[ \t]*\[\[[^\[\]]*\]\](?:[ \t]*,?[ \t]*\[\[[^\[\]]*\]\])*")
+_PROFILE_MARKER_RE = re.compile(r"\[\[\s*profile:\s*([a-z_]+)\s*\]\]", re.IGNORECASE)
+
+
 def _extract_profile_markers(text: str) -> tuple[str, list[str]]:
-    raise NotImplementedError
+    """Strip [[...]] markers from raw LLM output and return the cited
+    profile categories in first-cited order.
+
+    A line holding only markers is dropped together with the blank line
+    before it, so no blank-line gap is left. An inline marker is removed
+    with its leading whitespace ("SAFe [[profile:certifications]] and
+    Oracle" -> "SAFe and Oracle"). Unknown markers ([[profile:patents]],
+    [[profile-only]]) are removed without adding a category. Text with no
+    markers is returned byte-identical.
+    """
+    categories: list[str] = []
+    for match in _PROFILE_MARKER_RE.finditer(text):
+        category = match.group(1).lower()
+        if category in PROFILE_FACT_CATEGORIES and category not in categories:
+            categories.append(category)
+
+    kept_lines: list[str] = []
+    for line in text.split("\n"):
+        if line.strip() and not _MARKER_RE.sub("", line).strip():
+            if kept_lines and not kept_lines[-1].strip():
+                kept_lines.pop()
+            continue
+        kept_lines.append(line)
+    return _MARKER_RE.sub("", "\n".join(kept_lines)), categories
 
 
 def _generate_agy_response(
@@ -915,8 +948,15 @@ def _generate_agy_response(
     answer_context: str,
     is_synthesis: bool = False,
     profile_facts: str = "",
+    profile_categories_out: list[str] | None = None,
 ) -> str:
     """Generate an Agy-voiced response using OpenAI GPT-4o-mini.
+
+    profile_categories_out: MATTGPT-250 item 4. When a list is passed, the
+    profile categories cited by [[profile:<category>]] markers are appended
+    to it. Markers are extracted from the raw LLM text before bolding and
+    the meta-commentary strip, so a sentence strip cannot take a marker
+    with it.
 
     Uses a merged Agy prompt combining:
     - V1 Voice Guide: Warmth, personality variety, opening/closing options
@@ -1120,6 +1160,11 @@ def _generate_agy_response(
         )
 
         response_text = response.choices[0].message.content
+
+        # MATTGPT-250 item 4: strip profile markers from the raw text first.
+        response_text, cited_categories = _extract_profile_markers(response_text)
+        if profile_categories_out is not None:
+            profile_categories_out.extend(cited_categories)
 
         # =====================================================================
         # POST-PROCESSING: Auto-bold numbers and client names
@@ -2374,6 +2419,7 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
     st.session_state["__last_ranked_sources__"] = [s["id"] for s in ranked]
 
     primary = ranked[0]
+    profile_categories: list[str] = []
 
     try:
         # Generate Agy-voiced response
@@ -2384,6 +2430,7 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
             narrative,
             is_synthesis=is_synthesis,
             profile_facts=search_result.get("profile_facts", ""),
+            profile_categories_out=profile_categories,
         )
 
         # Build modes
@@ -2439,6 +2486,7 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
     return {
         "answer_md": answer_md,
         "sources": sources,
+        "profile_categories": profile_categories,
         "modes": modes,
         "default_mode": "narrative",
         "degraded": False,

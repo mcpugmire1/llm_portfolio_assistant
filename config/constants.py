@@ -118,6 +118,13 @@ META_COMMENTARY_REGEX_PATTERNS = [
     r"\bhighlight Matt's\b",
 ]
 
+# MATTGPT-250 item 4: profile categories Agy cites with a
+# [[profile:<category>]] marker. These are the data/matt_profile.json keys
+# load_matt_profile() renders. The marker instruction in rule 0a, the
+# marker extractor, and the Sources fact row all read this tuple; the
+# fact card display name is category.capitalize().
+PROFILE_FACT_CATEGORIES = ("certifications", "education", "languages")
+
 # =============================================================================
 # ENTITY DETECTION FIELDS
 # =============================================================================

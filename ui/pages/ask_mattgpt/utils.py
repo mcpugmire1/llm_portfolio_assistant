@@ -196,7 +196,10 @@ def push_assistant_turn(text: str):
 
 
 def push_conversational_answer(
-    answer_text: str, sources: list[dict], query_intent: str | None = None
+    answer_text: str,
+    sources: list[dict],
+    query_intent: str | None = None,
+    profile_categories: list[str] | None = None,
 ):
     """
     Add conversational AI response to transcript with sources.
@@ -205,6 +208,8 @@ def push_conversational_answer(
         answer_text: Agy's response
         sources: Related story sources
         query_intent: Intent type ("synthesis", "client", etc.) for card rendering
+        profile_categories: Profile categories Agy cited (MATTGPT-250 item 4),
+            rendered as the Sources fact row
     """
     st.session_state["ask_transcript"].append(
         {
@@ -213,6 +218,7 @@ def push_conversational_answer(
             "text": answer_text,
             "sources": sources,
             "query_intent": query_intent,
+            "profile_categories": profile_categories or [],
         }
     )
 
