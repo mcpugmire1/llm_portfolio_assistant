@@ -94,12 +94,18 @@ _RULE_0A_LANGUAGE_LEVEL = (
 _RULE_0A_OPENING = (
     "The facts about Matt above are accurate; cite them directly and verbatim."
 )
-# "the block" removed from the rest of 0a; the master's answer repeated the
-# AIU equivalence note in acceptance.
-_RULE_0A_FACTS_ONLY = "Answer from these facts only."
-_RULE_0A_NO_NOTE_WORDING = (
-    "Do not repeat requirement or eligibility wording from an education note."
+# Clause 1 narrowed Sept 25, 2026 (Phase 1 probe): "answer from these facts
+# only" applies to questions about a fact about Matt, not to story answers.
+_RULE_0A_FACTS_ONLY = (
+    "When the question is about a fact about Matt, answer from these facts only."
 )
+# Removed Sept 25, 2026: the unscoped clause 1, and the no-note-wording
+# clause (the AIU note in data/matt_profile.json is now neutral, so Agy
+# may quote it). Asserted absent from both messages.
+_RULE_0A_REMOVED = [
+    "Answer from these facts only.",
+    "Do not repeat requirement or eligibility wording from an education note.",
+]
 # MATTGPT-250 item 4: 0a tells Agy to put a category marker on its own line
 # before the closer; post-processing strips it and the Sources fact row
 # renders one card per category.
@@ -116,7 +122,6 @@ _RULE_0A_NEW_MARKERS = [
     _RULE_0A_CERTS_EXACT,
     _RULE_0A_LANGUAGE_LEVEL,
     _RULE_0A_FACTS_ONLY,
-    _RULE_0A_NO_NOTE_WORDING,
     *_RULE_0A_CATEGORY_MARKERS,
     _RULE_0A_MARKER_PLACEMENT,
 ]
@@ -273,6 +278,14 @@ class TestRule0aInCapturedUserMessage:
             f"at {question_pos})."
         )
 
+    @pytest.mark.parametrize("removed", _RULE_0A_REMOVED)
+    def test_rule_0a_removed_text_absent_from_user_message(
+        self, captured_agy_user_message, removed
+    ):
+        assert (
+            removed not in captured_agy_user_message
+        ), f"removed rule 0a text {removed!r} still in captured Agy user message"
+
 
 class TestCitationRulesInCapturedSystemMessage:
     """Rules 0a and 0b appear in the runtime Agy system prompt.
@@ -331,6 +344,14 @@ class TestCitationRulesInCapturedSystemMessage:
             f"rule 0a marker {marker!r} not found in captured Agy system "
             f"message. Head: {captured_agy_system_message[:600]!r}"
         )
+
+    @pytest.mark.parametrize("removed", _RULE_0A_REMOVED)
+    def test_rule_0a_removed_text_absent_from_system_message(
+        self, captured_agy_system_message, removed
+    ):
+        assert (
+            removed not in captured_agy_system_message
+        ), f"removed rule 0a text {removed!r} still in captured Agy system message"
 
     def test_rule_0b_reply_only_clause_present_in_system_message(
         self, captured_agy_system_message

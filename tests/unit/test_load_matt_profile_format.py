@@ -212,6 +212,22 @@ class TestLoaderPerEntryLines:
             f"{missing!r}. Full loader output: {real_output!r}"
         )
 
+    def test_real_matt_profile_json_masters_note_is_neutral(self):
+        """Reads the real data/matt_profile.json (no mock_open). The AIU
+        note is a neutral fact both Role Match and Ask Agy read, replacing
+        the JD-requirement wording (Sept 25, 2026)."""
+        real_output = load_matt_profile()
+        neutral_note = (
+            "Information Technology is a recognized Computer Science-related "
+            "discipline, and a Master's degree exceeds a Bachelor's."
+        )
+        assert (
+            neutral_note in real_output
+        ), f"neutral AIU note missing. Full loader output: {real_output!r}"
+        assert (
+            "satisfies requirements" not in real_output
+        ), f"old requirement wording still present. Full loader output: {real_output!r}"
+
 
 # ---------------------------------------------------------------------------
 # Class H: languages reach Role Match's build_assessment_prompt() output
