@@ -34,7 +34,9 @@ EDUCATION = [
     }
 ]
 
-CERTIFICATIONS = ["AWS Certified Solutions Architect"]
+CERTIFICATIONS = [
+    {"name": "AWS Certified Solutions Architect", "issued": 2020, "expired": 2023}
+]
 
 DISCRETE_FACTS_FRAGMENT = "Only discrete facts are citable as profile evidence"
 COUNTERFACTUAL_CLAUSE = "Omitting profile evidence must not change the verdict"
@@ -123,9 +125,10 @@ def output_has_education(context):
 
 @then("the output contains the certifications text")
 def output_has_certifications(context):
+    name = CERTIFICATIONS[0]["name"]
     assert (
-        CERTIFICATIONS[0] in context["result"]
-    ), f"Certification '{CERTIFICATIONS[0]}' missing from output:\n{context['result']}"
+        name in context["result"]
+    ), f"Certification '{name}' missing from output:\n{context['result']}"
 
 
 @then('the output contains "match_status" and "gap_explanation"')

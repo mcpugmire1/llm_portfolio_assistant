@@ -86,14 +86,12 @@ def _fixture_profile() -> dict:
             },
         ],
         "certifications": [
-            "SAFe 4 Certified Agilist",
-            "Microsoft Certified Professional (MCP) - Oracle",
-            "AWS Launchpad Champion",
-            "AWS Certified Solutions Architect - Associate",
+            {"name": "SAFe 4 Certified Agilist", "issued": 2017, "expired": True},
+            {"name": "AWS Certified Solutions Architect - Associate", "issued": 2020},
         ],
         "languages": [
-            "English (native)",
-            "French (B2, self-assessed)",
+            {"language": "English", "level": "native"},
+            {"language": "French", "level": "B2, self-assessed"},
         ],
         "logistics": {
             "location": {"value": "Atlanta, GA", "subline": ""},
@@ -326,7 +324,6 @@ class TestLoaderLocationAvailability:
     def test_l5_role_match_and_loader_share_one_field_list(self):
         from config import constants
         from services import jd_assessor
-        from ui.pages import role_match
 
         shared = getattr(constants, "PROFILE_LOCATION_AVAILABILITY_FIELDS", None)
         assert (
@@ -335,9 +332,95 @@ class TestLoaderLocationAvailability:
         assert (
             getattr(jd_assessor, "PROFILE_LOCATION_AVAILABILITY_FIELDS", None) is shared
         ), "jd_assessor does not read the shared field list"
+        # Fact card Red: the cell iterator moved to services.matt_profile,
+        # shared by Role Match's block and the Ask Agy fact card.
+        from services import matt_profile
+
         assert (
-            getattr(role_match, "PROFILE_LOCATION_AVAILABILITY_FIELDS", None) is shared
-        ), "role_match does not read the shared field list"
-        assert not hasattr(
-            role_match, "_LOCATION_CELL_ORDER"
-        ), "role_match still defines its own _LOCATION_CELL_ORDER"
+            getattr(matt_profile, "PROFILE_LOCATION_AVAILABILITY_FIELDS", None)
+            is shared
+        ), "services.matt_profile does not read the shared field list"
+
+    def test_l6_role_match_defines_no_own_location_helpers(self):
+        from ui.pages import role_match
+
+        for own_helper in (
+            "_iter_location_cells",
+            "_load_matt_profile_dict",
+            "_LOCATION_CELL_ORDER",
+        ):
+            assert not hasattr(
+                role_match, own_helper
+            ), f"role_match still defines its own {own_helper}"
+
+
+# ---------------------------------------------------------------------------
+# Class C: structured certifications and languages (fact card, mock #4a)
+# ---------------------------------------------------------------------------
+# data/matt_profile.json stores certifications as {name, issued, expired}
+# and languages as {language, level}. load_matt_profile() rebuilds today's
+# sentence strings from those fields; the real-file certification test
+# above is the round-trip proof that Role Match and Agy see the same text.
+
+_EXPECTED_CERTS = [
+    {
+        "name": "AWS Certified Solutions Architect - Associate",
+        "issued": 2020,
+        "expired": 2023,
+    },
+    {"name": "AWS Certified Cloud Practitioner", "issued": 2019, "expired": 2023},
+    {"name": "SAFe 4 Certified Agilist", "issued": 2017, "expired": True},
+    {
+        "name": (
+            "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, "
+            "Architecture and Administration, Backup and Recovery"
+        ),
+        "issued": 2002,
+    },
+]
+_EXPECTED_LANGUAGES = [
+    {"language": "English", "level": "native"},
+    {"language": "French", "level": "B2, self-assessed"},
+]
+_CERT_SENTENCES = [
+    "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "SAFe 4 Certified Agilist (issued 2017, expired)",
+    (
+        "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, "
+        "Architecture and Administration, Backup and Recovery (2002)"
+    ),
+]
+_CERT_DATE_LABELS = ["2020–2023", "2019–2023", "2017", "2002"]
+
+
+class TestStructuredProfileFacts:
+    def test_c1_real_file_stores_structured_certifications_and_languages(self):
+        from pathlib import Path
+
+        path = Path(__file__).resolve().parents[2] / "data" / "matt_profile.json"
+        data = json.loads(path.read_text(encoding="utf-8"))
+        assert data["certifications"] == _EXPECTED_CERTS, data["certifications"]
+        assert data["languages"] == _EXPECTED_LANGUAGES, data["languages"]
+
+    @pytest.mark.parametrize(
+        "entry, sentence", list(zip(_EXPECTED_CERTS, _CERT_SENTENCES, strict=True))
+    )
+    def test_c2_certification_sentence_round_trip(self, entry, sentence):
+        from services import matt_profile
+
+        assert matt_profile.certification_sentence(entry) == sentence
+
+    @pytest.mark.parametrize(
+        "entry, label", list(zip(_EXPECTED_CERTS, _CERT_DATE_LABELS, strict=True))
+    )
+    def test_c3_certification_date_label(self, entry, label):
+        from services import matt_profile
+
+        assert matt_profile.cert_date_label(entry) == label
+
+    def test_c4_real_file_languages_round_trip(self):
+        real_output = load_matt_profile()
+        assert (
+            "Languages: English (native), French (B2, self-assessed)." in real_output
+        ), real_output

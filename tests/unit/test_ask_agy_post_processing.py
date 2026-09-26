@@ -213,6 +213,15 @@ class TestMetaCommentaryStripAdditions:
         )
         self._assert_stripped_and_neighbor_survives(observed, real_story)
 
+    def test_s9_reflect_his_certifications_sentence_stripped(self, real_story):
+        """Observed Sept 25, 2026 (acceptance_0a3): plural "reflect his"
+        slips past the singular \\breflects his\\b pattern."""
+        observed = (
+            "These certifications reflect his engagement with cloud and "
+            "database technologies."
+        )
+        self._assert_stripped_and_neighbor_survives(observed, real_story)
+
 
 # ---------------------------------------------------------------------------
 # Class S: profile category markers (MATTGPT-250 item 4)
