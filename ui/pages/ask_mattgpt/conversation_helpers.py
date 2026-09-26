@@ -80,6 +80,7 @@ def _fact_card_entries(category: str, profile: dict) -> list[list[tuple[str, str
     if category == "education":
         return [
             [("primary", e["degree"]), ("secondary", e["institution"])]
+            + ([("secondary", e["note"])] if e.get("note") else [])
             for e in profile.get("education", [])
         ]
     if category == "languages":
