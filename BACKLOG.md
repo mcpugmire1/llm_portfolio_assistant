@@ -97,6 +97,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-250](#mattgpt-250) | Ask Agy cannot answer queries about education, certifications, or languages -- profile block missing from Ask Agy's system prompt | Open | High | Issue | September 21, 2026 |
 | [MATTGPT-251](#mattgpt-251) | Ask Agy treats adjacent retrieved stories as evidence for the question asked | Open | [Matt] | Issue | September 23, 2026 |
 | [MATTGPT-252](#mattgpt-252) | Ask Agy writes evaluative sentences about Matt despite repeated prompt instructions against it | Open | High | Issue | September 26, 2026 |
+| [MATTGPT-253](#mattgpt-253) | Profile-fact queries near the story-confidence threshold rejected before profile injection runs | Open | Medium | Issue | September 26, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | Open | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -1638,6 +1639,45 @@ Same class as the no-inference clause in MATTGPT-250: retrieved text that sits n
 **Scope note:** If the probe implicates those sections, the fix is removing them, not replacing them with different guidance (`c47ad1f` precedent). The rest of MATT_DNA stays. `_inject_profile_block_and_citation_rules()` in `backend_service.py` anchors rule 0a/0b injection on the **GROUNDING RULES:** header, so removal is safe. MATT_DNA is read only by Ask Agy (`prompts.py`), so Role Match is unaffected.
 
 **Out of scope:** MATTGPT-250 and MATTGPT-251. No new regex patterns in the meantime.
+
+---
+
+### MATTGPT-253
+**Profile-fact queries near the story-confidence threshold rejected before profile injection runs**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Issue
+- **Logged:** September 26, 2026
+
+**Background:** The confidence gate in `rag_answer()` runs before the profile block is injected. A profile-fact question that returns low Pinecone similarity is rejected before the LLM sees the block. The MATTGPT-250 gate bypass was decided against September 23, 2026 on a 16-query run in which 2 queries hit the gate. This ticket re-examines the decision with additional probe data and a narrower candidate fix.
+
+Prior context: August 11, 2026, the thresholds were calibrated for "any signal" rather than strong matches. July 2, 2026, fact questions were scoped to My Profile only; MATTGPT-250 reversed that.
+
+**Evidence (probes, not visitor traffic; `probe_250_output/20260926_122021/`):**
+
+Rejected at gate:
+- "Where does Matt live?" top_score 0.242
+- "Where did Matt get his degree?" top_score 0.218
+- "What did Matt study in college?" top_score 0.221
+
+Passed near the gate:
+- "Does Matt speak French?" top_score 0.250
+- "Where is Matt located?" top_score 0.265
+
+Most location questions pass (0.265-0.406). This is a band around the threshold, not a whole category failing. The MATTGPT-250 known misses ("Where did Matt get his degree?" and "What did Matt study in college?") are confirmed here. "Where does Matt live?" is a new miss.
+
+The profile injection works whenever the LLM runs: categories returned correctly in `probe_250_output/20260926_122021/`. The gate runs before it.
+
+**Candidate fix:** A narrow bypass that fires only when `semantic_search()` returns low confidence AND the query string matches a profile-answerable shape. Distinct from the rejected router approach (MATTGPT-250 Rejected approaches): the router pre-classified on query semantics and caught the AWS control (0.786) because story queries outscore their story anchors. This bypass fires on the search result, not the query, so it can't fire before Pinecone runs. It cannot touch queries above the threshold.
+
+**First step:** Measure real visitor rejections from `log_query` records with `redirect_reason="low_confidence"` -- not `data/offdomain_queries.csv`, which is local and full of probe rows. Confirm where `log_query` writes in production before querying.
+
+**Open questions:**
+1. What fraction of visitor queries with `redirect_reason="low_confidence"` are profile-answerable vs. genuinely off-domain? That ratio determines whether a bypass is worth the risk.
+2. What is the right shape predicate? A keyword list (safe -- false positive means story query + profile block it ignores, see MATTGPT-250 scope note) or something narrower?
+
+**Relationship to MATTGPT-250:** The MATTGPT-250 DA note covers Stage 2 being dropped and the gate bypass being decided against. If this ticket produces evidence for the bypass, MATTGPT-250 item 4 (Sources rendering) ships first, and this bypass is a separate follow-on.
 
 ---
 
