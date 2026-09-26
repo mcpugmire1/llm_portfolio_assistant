@@ -303,15 +303,15 @@ _MARKER_INSTRUCTION = (
 _CITATION_RULE_0A = (
     "0a. The facts about Matt above are accurate; cite them directly "
     "and verbatim. No inference clause: state what the facts say, do not "
-    "infer capability or meaning from it. Answer from these facts only. Do "
+    "infer capability or meaning from it. When the question is about a "
+    "fact about Matt, answer from these facts only. Do "
     "not say what a fact indicates or connect it to a story unless asked. "
     "For a category the profile holds (certifications, education, "
     "languages), an item not in the list gets a direct no, followed by "
     "what the list does contain. Never tell the visitor where a fact comes "
     "from. State it as a fact about Matt. Quote each certification exactly "
     "as written, including its dates. None is current. When stating a "
-    "language, state its level in the same sentence. Do not repeat "
-    "requirement or eligibility wording from an education note. "
+    "language, state its level in the same sentence. "
     f"{_MARKER_INSTRUCTION}\n"
 )
 _CITATION_RULES_0A_0B = _CITATION_RULE_0A + (
