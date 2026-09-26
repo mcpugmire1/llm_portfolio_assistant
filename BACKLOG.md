@@ -1671,7 +1671,7 @@ The profile injection works whenever the LLM runs: categories returned correctly
 
 **Candidate fix:** A narrow bypass that fires only when `semantic_search()` returns low confidence AND the query string matches a profile-answerable shape. Distinct from the rejected router approach (MATTGPT-250 Rejected approaches): the router pre-classified on query semantics and caught the AWS control (0.786) because story queries outscore their story anchors. This bypass fires on the search result, not the query, so it can't fire before Pinecone runs. It cannot touch queries above the threshold.
 
-**First step:** Measure real visitor rejections from `log_query` records with `redirect_reason="low_confidence"` -- not `data/offdomain_queries.csv`, which is local and full of probe rows. Confirm where `log_query` writes in production before querying.
+**First step:** Measure real visitor rejections from `log_query` records with `redirect_reason="low_confidence"` -- not `data/offdomain_queries.csv`. Caveat on that file: probes patch `log_query` but not `log_offdomain`, so probe runs write test rows into `data/offdomain_queries.csv` (e.g. Sept 22 PoC lines 751-755 and the Sept 26 salary rows). The file is local, and production rejections likely never reach it. Confirm where `log_query` writes in production before querying.
 
 **Open questions:**
 1. What fraction of visitor queries with `redirect_reason="low_confidence"` are profile-answerable vs. genuinely off-domain? That ratio determines whether a bypass is worth the risk.
