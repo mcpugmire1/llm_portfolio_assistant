@@ -28,8 +28,9 @@
 ### 📊 Data Pipeline & RAG
 - [Data Pipeline & RAG Architecture](#data-pipeline--rag-architecture)
   - [Pipeline Overview](#pipeline-overview)
+  - [Stage 0: OneDrive to Local Repo](#stage-0-onedrive-to-local-repo)
   - [Stage 1: Excel to JSONL](#stage-1-excel-to-jsonl)
-  - [Stage 2: Manual Enrichment](#stage-2-manual-enrichment)
+  - [Stage 2: Semantic Tag Generation](#stage-2-semantic-tag-generation)
   - [Stage 3: Embedding Generation](#stage-3-embedding-generation)
   - [Production RAG Pipeline](#production-rag-pipeline)
   - [Component Contracts (Ask Agy)](#component-contracts-updated-january-2026)
