@@ -420,13 +420,16 @@ class TestValidationConstants:
 
 
 # ---------------------------------------------------------------------------
-# MATTGPT-250: Location & Availability questions reach the LLM
+# MATTGPT-250: Location & Availability questions are not rule-rejected
 # ---------------------------------------------------------------------------
 # recruiter_logistics keeps only its salary pattern; the location,
 # relocation/remote, start-date and availability/timeline patterns are
-# removed so these questions reach the profile facts. Salary stays filtered.
+# removed so these questions are not rule-rejected. Salary stays filtered.
+# This checks the rule filter only; the router and the Pinecone confidence
+# gate are separate ("Where does Matt live?" passes here but is rejected
+# by the confidence gate at top_score 0.242).
 
-_REACH_LLM = [
+_NOT_RULE_REJECTED = [
     "where is Matt located?",
     "Where does Matt live?",
     "Is Matt open to relocation?",
@@ -454,7 +457,7 @@ class TestLocationAvailabilityRuleFilter:
         yield
         validation._NONSENSE_RULES = saved
 
-    @pytest.mark.parametrize("query", _REACH_LLM)
+    @pytest.mark.parametrize("query", _NOT_RULE_REJECTED)
     def test_rl1_location_availability_question_not_rule_rejected(self, query):
         from utils.validation import is_nonsense
 

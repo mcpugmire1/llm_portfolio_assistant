@@ -212,7 +212,8 @@ VALID_INTENTS = {
         "What's Matt's age",
         "Is Matt married",
         "Does Matt have kids",
-        "Where does Matt live",
+        # MATTGPT-250: "Where does Matt live" removed. Location is a profile
+        # fact (Location & Availability); an address question falls to 0b.
         "What's Matt's salary",
         "How much does Matt make",
         "What does Matt look like",

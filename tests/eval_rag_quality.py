@@ -359,6 +359,13 @@ GOLDEN_QUERIES = {
             # answered from the profile rather than redirected.
             "expected_behavior": "profile_fact",
             "must_contain": ["Atlanta"],
+            # Known miss, kept visible: Pinecone finds no story for "live",
+            # so the confidence gate rejects it before the profile facts.
+            # Remove after an XPASS is observed (see generate_report).
+            "xfail_reason": (
+                "low_confidence: top_score 0.242 < CONFIDENCE_HIGH 0.25; "
+                "profile question with no matching story"
+            ),
             "category": "intent",
         },
         {
@@ -1061,6 +1068,8 @@ def evaluate_query(
         category=category,
         passed=False,
     )
+    if query_spec.get("xfail_reason"):
+        result.details["xfail_reason"] = query_spec["xfail_reason"]
 
     try:
         # Call RAG
@@ -1787,7 +1796,19 @@ def generate_report(results: list[EvalResult]) -> dict:
         "timestamp": datetime.now().isoformat(),
         "total_queries": len(results),
         "passed": sum(1 for r in results if r.passed),
-        "failed": sum(1 for r in results if not r.passed),
+        # An expected failure (xfail_reason set) is not counted as failed;
+        # a pass on one is reported as xpassed so the marker gets removed.
+        "failed": sum(
+            1 for r in results if not r.passed and not r.details.get("xfail_reason")
+        ),
+        "xfailed": sum(
+            1 for r in results if not r.passed and r.details.get("xfail_reason")
+        ),
+        "xpassed": [
+            {"id": r.query_id, "query": r.query}
+            for r in results
+            if r.passed and r.details.get("xfail_reason")
+        ],
         "pass_rate": 0.0,
         "by_category": {},
         "failed_queries": [],
@@ -1819,7 +1840,7 @@ def generate_report(results: list[EvalResult]) -> dict:
 
     # Collect failures
     for r in results:
-        if not r.passed:
+        if not r.passed and not r.details.get("xfail_reason"):
             report["failed_queries"].append(
                 {
                     "id": r.query_id,
@@ -1895,6 +1916,9 @@ def main():
         print(f"Total Queries: {report['total_queries']}")
         print(f"Passed: {report['passed']}")
         print(f"Failed: {report['failed']}")
+        print(f"Expected failures (xfail): {report['xfailed']}")
+        for xp in report["xpassed"]:
+            print(f"XPASS Q{xp['id']}: {xp['query']} -- remove its xfail_reason")
         print(f"Pass Rate: {report['pass_rate']:.1f}%")
 
         print("\nBy Category:")

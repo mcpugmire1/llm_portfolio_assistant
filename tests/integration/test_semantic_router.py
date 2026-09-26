@@ -529,9 +529,10 @@ if __name__ == "__main__":
 # MATTGPT-250: Location & Availability questions are not rejected by the
 # router's personal gate. "Where does Matt live" is removed from the
 # personal anchors; the router scores against data/intent_embeddings.json.
+# This checks the router only; the Pinecone confidence gate is separate.
 # ---------------------------------------------------------------------------
 
-LOCATION_AVAILABILITY_REACH_LLM = [
+_NOT_ROUTER_REJECTED = [
     "where is Matt located?",
     "Where does Matt live?",
     "Is Matt open to relocation?",
@@ -542,7 +543,7 @@ LOCATION_AVAILABILITY_REACH_LLM = [
 ]
 
 
-@pytest.mark.parametrize("query", LOCATION_AVAILABILITY_REACH_LLM)
+@pytest.mark.parametrize("query", _NOT_ROUTER_REJECTED)
 def test_rl3_location_availability_question_not_router_rejected(query):
     from services.semantic_router import (
         is_portfolio_query_semantic,
