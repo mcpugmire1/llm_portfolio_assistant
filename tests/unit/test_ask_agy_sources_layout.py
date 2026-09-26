@@ -200,21 +200,25 @@ class TestFactCardContent:
         ), "card did not read entries from the profile loader"
 
     def test_k8_fact_card_grid_has_mobile_class_and_desktop_style_unchanged(self):
-        # The class is the hook for the mobile rule; the inline two-column
-        # style is desktop and stays as it is.
+        # The classes are the hooks for the mobile rule; the inline desktop
+        # styles (card box, two-column grid) stay as they are.
         html_out = ch._fact_card_html("education")
+        assert html_out.startswith(
+            '<div class="fact-card" style="width: 100%; padding: 10px 14px; '
+        ), html_out
         assert (
             '<div class="fact-card-grid" style="display: grid; '
             "grid-template-columns: repeat(2, minmax(0, 1fr));"
         ) in html_out, html_out
 
     def test_k9_transcript_styles_stack_fact_cards_on_mobile(self):
-        # Mobile only: one column at 767px and below. !important is needed
-        # to override the inline desktop style.
+        # Mobile only, at 767px and below: a top gap under the SOURCES label
+        # and one column. !important is needed to override the inline
+        # desktop grid style.
         src = re.sub(r"\s+", " ", inspect.getsource(ch._render_ask_transcript))
         rule = (
-            "@media (max-width: 767px) { .fact-card-grid { "
-            "grid-template-columns: 1fr !important; } }"
+            "@media (max-width: 767px) { .fact-card { margin-top: 8px; } "
+            ".fact-card-grid { grid-template-columns: 1fr !important; } }"
         )
         assert rule in src, "mobile fact-card rule missing from the Sources styles"
 
