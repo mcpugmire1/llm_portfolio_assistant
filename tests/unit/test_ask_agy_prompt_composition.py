@@ -113,7 +113,13 @@ _RULE_0A_CATEGORY_MARKERS = [
     "[[profile:certifications]]",
     "[[profile:education]]",
     "[[profile:languages]]",
+    "[[profile:location_availability]]",
 ]
+# MATTGPT-250 step 2: 0a's direct-no category list names Location &
+# Availability alongside the other profile categories.
+_RULE_0A_DIRECT_NO_CATEGORIES = (
+    "(certifications, education, languages, location & availability)"
+)
 # Placement per mock #3b: markers sit on their own line before the closer.
 _RULE_0A_MARKER_PLACEMENT = "on its own line before the closing line"
 _RULE_0A_NEW_MARKERS = [
@@ -124,6 +130,7 @@ _RULE_0A_NEW_MARKERS = [
     _RULE_0A_FACTS_ONLY,
     *_RULE_0A_CATEGORY_MARKERS,
     _RULE_0A_MARKER_PLACEMENT,
+    _RULE_0A_DIRECT_NO_CATEGORIES,
 ]
 _RULE_0B_MARKER = "Nothing I know about Matt covers that"
 # New at 9d5f575: for absent categories, Agy must not pad the honest gap

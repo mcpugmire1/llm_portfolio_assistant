@@ -85,3 +85,33 @@ class TestSourcesLayout:
             layout["fact_cards"] == []
         ), f"no markers must render no fact cards, got {layout['fact_cards']!r}"
         assert layout["story_count"] == min(n_sources, _cap(is_synthesis))
+
+
+class TestLocationAvailabilityFactCard:
+    """MATTGPT-250 step 2: location_availability is a profile fact
+    category. Its display name comes from the display-name map in
+    config/constants.py, not from str.capitalize()."""
+
+    def test_display_name_map_defines_location_availability(self):
+        from config import constants
+
+        names = getattr(constants, "PROFILE_FACT_DISPLAY_NAMES", None)
+        assert (
+            names is not None
+        ), "config.constants.PROFILE_FACT_DISPLAY_NAMES not defined"
+        assert names.get("location_availability") == "Location & Availability"
+
+    def test_layout_shows_location_and_availability_card(self):
+        layout = ch._sources_layout(["location_availability"], _sources(3), False)
+        assert layout["fact_cards"] == [
+            "Location & Availability"
+        ], f"got {layout['fact_cards']!r}"
+
+    def test_fact_card_html_shows_location_and_availability(self):
+        html_out = ch._fact_card_html("Location & Availability")
+        # The card escapes the display name, so the ampersand is &amp; in
+        # HTML and renders as "&" in the browser.
+        assert "Location &amp; Availability" in html_out, html_out
+        assert _FACT_CARD_LABEL in html_out
+        for forbidden in ("<a", "href", "related_proj"):
+            assert forbidden not in html_out

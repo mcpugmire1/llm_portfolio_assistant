@@ -257,3 +257,87 @@ class TestAssessmentPromptContainsLanguages:
             f"build_assessment_prompt() output. "
             f"Head of prompt: {assessment_prompt_output[:800]!r}"
         )
+
+
+# ---------------------------------------------------------------------------
+# Class L: Location & Availability in the shared loader (MATTGPT-250 step 2)
+# ---------------------------------------------------------------------------
+# The profile's JSON key for this group is "logistics"; the visitor-facing
+# name (Role Match header) is "Location & Availability". The loader renders
+# one line per populated field, "Label: value. subline.", in the order of
+# config.constants.PROFILE_LOCATION_AVAILABILITY_FIELDS, which Role Match's
+# _iter_location_cells() also reads.
+
+_LOC_FIXTURE = {
+    "location": {"value": "Atlanta, GA", "subline": "Open to relocation and travel"},
+    "work_model": {"value": "In-office preferred", "subline": "Hybrid or remote fine"},
+    "availability": {"value": "Immediate", "subline": ""},
+    "authorization": {"value": "", "subline": "No sponsorship needed"},
+}
+_LOC_EXPECTED_LINES = [
+    "Location: Atlanta, GA. Open to relocation and travel.",
+    "Work model: In-office preferred. Hybrid or remote fine.",
+    "Availability: Immediate.",
+]
+
+
+def _loc_patched_open():
+    profile = _fixture_profile()
+    profile["logistics"] = _LOC_FIXTURE
+    return patch("builtins.open", mock_open(read_data=json.dumps(profile)))
+
+
+class TestLoaderLocationAvailability:
+    def test_l1_populated_fields_render_one_line_each_in_order(self):
+        with _loc_patched_open():
+            output = load_matt_profile()
+        lines = output.splitlines()
+        missing = [e for e in _LOC_EXPECTED_LINES if e not in lines]
+        assert not missing, f"missing lines {missing!r}. Output: {output!r}"
+        positions = [lines.index(e) for e in _LOC_EXPECTED_LINES]
+        assert positions == sorted(positions), f"field order wrong: {output!r}"
+
+    def test_l2_empty_value_field_omitted(self):
+        with _loc_patched_open():
+            output = load_matt_profile()
+        assert "Authorization:" not in output, (
+            f"field with empty value must be omitted (omit-cleanly, as in "
+            f"_iter_location_cells). Output: {output!r}"
+        )
+
+    def test_l3_real_file_contains_location_and_availability(self):
+        real_output = load_matt_profile()
+        for expected in (
+            "Location: Atlanta, GA. Open to relocation and travel.",
+            "Availability: Immediate. No notice period.",
+        ):
+            assert (
+                expected in real_output
+            ), f"{expected!r} missing from real loader output: {real_output!r}"
+
+    def test_l4_assessment_prompt_contains_location_and_availability(self):
+        with _loc_patched_open():
+            prompt = build_assessment_prompt()
+        for expected in (_LOC_EXPECTED_LINES[0], _LOC_EXPECTED_LINES[2]):
+            assert (
+                expected in prompt
+            ), f"{expected!r} missing from build_assessment_prompt() output"
+
+    def test_l5_role_match_and_loader_share_one_field_list(self):
+        from config import constants
+        from services import jd_assessor
+        from ui.pages import role_match
+
+        shared = getattr(constants, "PROFILE_LOCATION_AVAILABILITY_FIELDS", None)
+        assert (
+            shared is not None
+        ), "config.constants.PROFILE_LOCATION_AVAILABILITY_FIELDS not defined"
+        assert (
+            getattr(jd_assessor, "PROFILE_LOCATION_AVAILABILITY_FIELDS", None) is shared
+        ), "jd_assessor does not read the shared field list"
+        assert (
+            getattr(role_match, "PROFILE_LOCATION_AVAILABILITY_FIELDS", None) is shared
+        ), "role_match does not read the shared field list"
+        assert not hasattr(
+            role_match, "_LOCATION_CELL_ORDER"
+        ), "role_match still defines its own _LOCATION_CELL_ORDER"

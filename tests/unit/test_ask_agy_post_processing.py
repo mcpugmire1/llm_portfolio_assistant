@@ -246,6 +246,7 @@ class TestProfileMarkerExtraction:
             ("[[profile:certifications]]", "certifications"),
             ("[[profile:education]]", "education"),
             ("[[profile:languages]]", "languages"),
+            ("[[profile:location_availability]]", "location_availability"),
         ],
     )
     def test_s1_s3_category_marker_line_stripped_and_category_returned(
