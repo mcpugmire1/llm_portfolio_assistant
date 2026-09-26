@@ -1621,13 +1621,21 @@ Same class as the no-inference clause in MATTGPT-250: retrieved text that sits n
 **Verified September 26, 2026:**
 
 - `META_COMMENTARY_REGEX_PATTERNS` in `config/constants.py` has 14 patterns, including "reflects his" and "reflect his" but not "showcasing".
-- In `ui/pages/ask_mattgpt/prompts.py`, the anti-evaluation rule appears in BASE_PROMPT (5 places), SYNTHESIS_DELTA (2 places), and the user message from `build_user_message()` ("State facts. Do not evaluate Matt."). Rule 0a is appended after it.
+- In `ui/pages/ask_mattgpt/prompts.py`, the anti-evaluation rule appears 8 times: BASE_PROMPT (5 places), SYNTHESIS_DELTA (2 places), and the user message from `build_user_message()` (1 place: "State facts. Do not evaluate Matt."). Rule 0a is appended after it.
 - `generate_dynamic_dna()` in `backend_service.py` puts evaluative prose under "Ground Truth" in every system prompt: "Execution & Delivery is Matt's primary strength", "Matt builds people, not just systems", "Builder's mindset, coach's heart".
-- Probe outputs save post-strip `answer_md`. Only `masters_diag_output.txt` captured raw text, so counts from probes undercount.
 
-**Hypothesis (not measured):** The evaluative "Ground Truth" content in `generate_dynamic_dna()` drives the behavior: MATT_DNA's strengths and values lines, the Professional Narrative stories, `get_verbatim_requirement`, and the STANDARD_DELTA focus angles are the suspects.
+**Prior art (verified September 26, 2026):**
 
-**First step:** An isolating probe that captures raw LLM text before strip. Run the 5 story controls plus "Why hire Matt?" as a baseline, then one condition per suspect (MATT_DNA evaluative sections removed; verbatim requirement off; focus angle fixed), 2+ runs each.
+- MATTGPT-023 (logged April 2026, Decided Against May 14, 2026): "showcases his" on "Who is Matt Pugmire?". Recorded root cause: "LLM occasionally ignores the 'never evaluate Matt' prompt instruction." Closure rested on "monitor -- if it becomes consistent, ..."; nothing monitored it.
+- `c47ad1f` (January 26, 2026): removed `get_theme_guidance()` because its "Emphasize:" instructions conflicted with the anti-evaluation rules. MATTGPT-042, -043, and -044 were Decided Against on the same reasoning. That conflict is the same mechanism now suspected in `generate_dynamic_dna()`, making it the strongest supporting evidence for that suspect.
+
+**Measurement gap:** Probe outputs in `probe_250_output/` save `answer_md` after the strip, so they count phrases the strip list missed, not how often the model evaluates. The only raw-text capture is `masters_diag_output.txt` (one query, 3 runs, raw equal to final in all three). The baseline run establishes the raw rate before any condition is tested.
+
+**Leading hypothesis (not measured):** The evaluative sections of `generate_dynamic_dna()` -- Theme Strengths, Leadership Philosophy, Core Values, and possibly the Identity quote -- sit under "Ground Truth" in every Ask Agy system prompt alongside eight anti-evaluation instructions. They are consistent with standard-mode answers evaluating (master's, is_synthesis=False), but a run with those sections removed has to confirm it. The rest of MATT_DNA (Clients by Employer, Career Arc, GROUNDING RULES) is not a suspect.
+
+**First step:** An isolating probe that captures raw LLM text before strip. Baseline: 5 story controls plus "Why hire Matt?", 2+ runs. Then one condition per suspect (evaluative sections of `generate_dynamic_dna()` removed; verbatim requirement off; focus angle fixed), 2+ runs each.
+
+**Scope note:** If the probe implicates those sections, the fix is removing them, not replacing them with different guidance (`c47ad1f` precedent). The rest of MATT_DNA stays. `_inject_profile_block_and_citation_rules()` in `backend_service.py` anchors rule 0a/0b injection on the **GROUNDING RULES:** header, so removal is safe. MATT_DNA is read only by Ask Agy (`prompts.py`), so Role Match is unaffected.
 
 **Out of scope:** MATTGPT-250 and MATTGPT-251. No new regex patterns in the meantime.
 
