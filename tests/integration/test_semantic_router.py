@@ -523,3 +523,33 @@ def run_standalone_tests():
 if __name__ == "__main__":
     exit_code = run_standalone_tests()
     sys.exit(exit_code)
+
+
+# ---------------------------------------------------------------------------
+# MATTGPT-250: Location & Availability questions are not rejected by the
+# router's personal gate. "Where does Matt live" is removed from the
+# personal anchors; the router scores against data/intent_embeddings.json.
+# ---------------------------------------------------------------------------
+
+LOCATION_AVAILABILITY_REACH_LLM = [
+    "where is Matt located?",
+    "Where does Matt live?",
+    "Is Matt open to relocation?",
+    "What's Matt's availability?",
+    "Where are you based?",
+    "Are you open to relocation?",
+    "When can you start?",
+]
+
+
+@pytest.mark.parametrize("query", LOCATION_AVAILABILITY_REACH_LLM)
+def test_rl3_location_availability_question_not_router_rejected(query):
+    from services.semantic_router import (
+        is_portfolio_query_semantic,
+        router_rejection_reason,
+    )
+
+    _, score, anchor, family = is_portfolio_query_semantic(query)
+    assert (
+        router_rejection_reason(family, score) is None
+    ), f"{query!r} rejected as {family} (score {score:.3f}, anchor {anchor!r})"

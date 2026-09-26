@@ -140,3 +140,26 @@ class TestClassifyEmbeddingEdgeCases:
         assert isinstance(score, float)
         assert isinstance(intent, str)
         assert isinstance(family, str)
+
+
+# ---------------------------------------------------------------------------
+# MATTGPT-250: the router scores against data/intent_embeddings.json, so the
+# cached anchors must be exactly the source anchors. A removed anchor that
+# survives in the cache keeps rejecting queries.
+# ---------------------------------------------------------------------------
+
+
+def test_rl4_embedding_cache_keys_match_valid_intents():
+    import json
+    from pathlib import Path
+
+    from services.semantic_router import ALL_VALID_INTENTS
+
+    cache_path = Path(__file__).resolve().parents[2] / "data" / "intent_embeddings.json"
+    data = json.loads(cache_path.read_text())
+    cached = set(data.get("embeddings", data))
+    source = set(ALL_VALID_INTENTS)
+    assert cached == source, (
+        f"cache-only anchors: {sorted(cached - source)}; "
+        f"source-only anchors: {sorted(source - cached)}"
+    )

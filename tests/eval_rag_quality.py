@@ -355,8 +355,10 @@ GOLDEN_QUERIES = {
         {
             "id": 59,
             "query": "Where does Matt live?",
-            "expected_behavior": "redirect",
-            "check_graceful_redirect": True,
+            # MATTGPT-250: location is a profile fact (Location & Availability),
+            # answered from the profile rather than redirected.
+            "expected_behavior": "profile_fact",
+            "must_contain": ["Atlanta"],
             "category": "intent",
         },
         {
@@ -1171,6 +1173,19 @@ def evaluate_query(
                 # Blocked by nonsense filter -- expect empty answer_md
                 result.checks["blocked"] = not response
                 result.passed = not response
+
+            elif behavior == "profile_fact":
+                # MATTGPT-250: answered from the profile facts -- every
+                # must_contain string appears in the answer.
+                missing = [
+                    m
+                    for m in query_spec.get("must_contain", [])
+                    if m.lower() not in response.lower()
+                ]
+                result.checks["profile_fact"] = bool(response) and not missing
+                if missing:
+                    result.details["missing"] = missing
+                result.passed = result.checks["profile_fact"]
 
             else:
                 # Technical, behavioral, background - pass for now

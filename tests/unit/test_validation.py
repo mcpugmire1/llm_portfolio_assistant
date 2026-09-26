@@ -417,3 +417,53 @@ class TestValidationConstants:
         from utils.validation import _WORD_RX
 
         assert isinstance(_WORD_RX, re.Pattern)
+
+
+# ---------------------------------------------------------------------------
+# MATTGPT-250: Location & Availability questions reach the LLM
+# ---------------------------------------------------------------------------
+# recruiter_logistics keeps only its salary pattern; the location,
+# relocation/remote, start-date and availability/timeline patterns are
+# removed so these questions reach the profile facts. Salary stays filtered.
+
+_REACH_LLM = [
+    "where is Matt located?",
+    "Where does Matt live?",
+    "Is Matt open to relocation?",
+    "What's Matt's availability?",
+    "Where are you based?",
+    "Are you open to relocation?",
+    "When can you start?",
+    "What was the project timeline at JP Morgan?",
+]
+_SALARY_STILL_FILTERED = [
+    ("What are your salary expectations?", "personal_compensation"),
+    ("What's Matt's salary range?", "recruiter_logistics"),
+]
+
+
+class TestLocationAvailabilityRuleFilter:
+    @pytest.fixture(autouse=True)
+    def real_rules(self):
+        """Load the real nonsense_filters.jsonl for these tests, then
+        restore the module cache so other tests are unaffected."""
+        from utils import validation
+
+        saved = validation._NONSENSE_RULES
+        validation._NONSENSE_RULES = []
+        yield
+        validation._NONSENSE_RULES = saved
+
+    @pytest.mark.parametrize("query", _REACH_LLM)
+    def test_rl1_location_availability_question_not_rule_rejected(self, query):
+        from utils.validation import is_nonsense
+
+        assert (
+            is_nonsense(query) is None
+        ), f"{query!r} is still rule-rejected as {is_nonsense(query)!r}"
+
+    @pytest.mark.parametrize("query, category", _SALARY_STILL_FILTERED)
+    def test_rl2_salary_question_still_rule_rejected(self, query, category):
+        from utils.validation import is_nonsense
+
+        assert is_nonsense(query) == category
