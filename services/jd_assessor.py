@@ -19,6 +19,7 @@ from pathlib import Path
 
 from openai import OpenAI
 
+from config.constants import PROFILE_LOCATION_AVAILABILITY_FIELDS
 from config.debug import DEBUG
 from services.pinecone_service import pinecone_semantic_search
 
@@ -331,6 +332,18 @@ def load_matt_profile() -> str:
     languages = profile.get("languages", [])
     if languages:
         lines.append(f"Languages: {', '.join(languages)}.")
+
+    # MATTGPT-250 step 2: Location & Availability (JSON key "logistics"),
+    # one line per populated field in the shared field order. A field with
+    # an empty value is omitted, as in Role Match's _iter_location_cells().
+    location_availability = profile.get("logistics") or {}
+    for field_key, label in PROFILE_LOCATION_AVAILABILITY_FIELDS:
+        cell = location_availability.get(field_key) or {}
+        value = str(cell.get("value", "")).strip()
+        if not value:
+            continue
+        subline = str(cell.get("subline", "")).strip()
+        lines.append(f"{label}: {value}." + (f" {subline}." if subline else ""))
 
     return "\n".join(lines)
 

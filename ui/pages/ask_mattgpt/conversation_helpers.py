@@ -10,6 +10,7 @@ import math
 
 import streamlit as st
 
+from config.constants import PROFILE_FACT_DISPLAY_NAMES
 from config.debug import DEBUG
 from ui.components.story_detail import render_story_detail
 from ui.image_assets import AGY_ASK_MATTGPT_B64, MATT_CARTOON_B64
@@ -45,7 +46,7 @@ def _sources_layout(
     cap = SOURCES_MAX_SYNTHESIS if is_synthesis else SOURCES_MAX_SURGICAL
     return {
         "show_label": True,
-        "fact_cards": [c.capitalize() for c in categories],
+        "fact_cards": [PROFILE_FACT_DISPLAY_NAMES[c] for c in categories],
         "story_count": min(len(sources), cap),
     }
 

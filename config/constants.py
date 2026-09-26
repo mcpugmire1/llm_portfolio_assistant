@@ -122,8 +122,30 @@ META_COMMENTARY_REGEX_PATTERNS = [
 # [[profile:<category>]] marker. These are the data/matt_profile.json keys
 # load_matt_profile() renders. The marker instruction in rule 0a, the
 # marker extractor, and the Sources fact row all read this tuple; the
-# fact card display name is category.capitalize().
-PROFILE_FACT_CATEGORIES = ("certifications", "education", "languages")
+# fact card display names come from PROFILE_FACT_DISPLAY_NAMES.
+PROFILE_FACT_CATEGORIES = (
+    "certifications",
+    "education",
+    "languages",
+    "location_availability",
+)
+PROFILE_FACT_DISPLAY_NAMES = {
+    "certifications": "Certifications",
+    "education": "Education",
+    "languages": "Languages",
+    "location_availability": "Location & Availability",
+}
+
+# MATTGPT-250 step 2: Location & Availability fields, in display order, as
+# (JSON key under data/matt_profile.json["logistics"], visitor label).
+# Read by Role Match's _iter_location_cells() and by load_matt_profile(),
+# so the screen block and the shared loader cannot drift.
+PROFILE_LOCATION_AVAILABILITY_FIELDS = (
+    ("location", "Location"),
+    ("work_model", "Work model"),
+    ("availability", "Availability"),
+    ("authorization", "Authorization"),
+)
 
 # =============================================================================
 # ENTITY DETECTION FIELDS

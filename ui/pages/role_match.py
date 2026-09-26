@@ -17,6 +17,7 @@ from urllib.parse import urlencode
 
 import streamlit as st
 
+from config.constants import PROFILE_LOCATION_AVAILABILITY_FIELDS
 from config.debug import DEBUG
 from scripts.utils import slugify
 from services.query_logger import (
@@ -943,14 +944,10 @@ _LOCATION_BLOCK_CSS = """
 @media (max-width: 600px) { .loc-grid { grid-template-columns: repeat(2, 1fr); } }
 """
 
-# Cell order pinned here; labels displayed to visitors. Field keys match
+# Cell order and visitor labels come from
+# config.constants.PROFILE_LOCATION_AVAILABILITY_FIELDS (shared with
+# load_matt_profile() since MATTGPT-250 step 2). Field keys match
 # data/matt_profile.json["logistics"] structure.
-_LOCATION_CELL_ORDER = (
-    ("location", "Location"),
-    ("work_model", "Work model"),
-    ("availability", "Availability"),
-    ("authorization", "Authorization"),
-)
 
 
 def _load_matt_profile_dict() -> dict:
@@ -976,7 +973,7 @@ def _iter_location_cells(profile: dict) -> list[tuple[str, str, str]]:
     'blank box' failure mode."""
     logistics = (profile or {}).get("logistics") or {}
     cells: list[tuple[str, str, str]] = []
-    for field_key, label in _LOCATION_CELL_ORDER:
+    for field_key, label in PROFILE_LOCATION_AVAILABILITY_FIELDS:
         cell_data = logistics.get(field_key)
         if not cell_data:
             continue

@@ -115,3 +115,14 @@ class TestLocationAvailabilityFactCard:
         assert _FACT_CARD_LABEL in html_out
         for forbidden in ("<a", "href", "related_proj"):
             assert forbidden not in html_out
+
+    def test_every_fact_category_has_a_display_name(self):
+        """_sources_layout() indexes the map directly; a category added to
+        PROFILE_FACT_CATEGORIES without a display name must fail here, not
+        raise KeyError at render time."""
+        from config.constants import PROFILE_FACT_CATEGORIES, PROFILE_FACT_DISPLAY_NAMES
+
+        missing = set(PROFILE_FACT_CATEGORIES) - set(PROFILE_FACT_DISPLAY_NAMES)
+        assert set(PROFILE_FACT_CATEGORIES) <= set(
+            PROFILE_FACT_DISPLAY_NAMES
+        ), f"categories without a display name: {sorted(missing)}"
