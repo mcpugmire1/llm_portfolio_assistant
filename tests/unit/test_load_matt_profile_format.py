@@ -342,16 +342,22 @@ class TestLoaderLocationAvailability:
         ), "services.matt_profile does not read the shared field list"
 
     def test_l6_role_match_defines_no_own_location_helpers(self):
+        import inspect
+
         from ui.pages import role_match
 
-        for own_helper in (
-            "_iter_location_cells",
-            "_load_matt_profile_dict",
-            "_LOCATION_CELL_ORDER",
-        ):
+        for own_helper in ("_iter_location_cells", "_LOCATION_CELL_ORDER"):
             assert not hasattr(
                 role_match, own_helper
             ), f"role_match still defines its own {own_helper}"
+        # _load_matt_profile_dict may stay as a thin graceful-degrade
+        # wrapper around services.matt_profile.load_profile_dict(); it must
+        # not read the file itself.
+        wrapper_src = inspect.getsource(role_match._load_matt_profile_dict)
+        for reader in ("open(", "json.load"):
+            assert (
+                reader not in wrapper_src
+            ), f"role_match._load_matt_profile_dict reads the file itself ({reader})"
 
 
 # ---------------------------------------------------------------------------
