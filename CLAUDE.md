@@ -182,9 +182,10 @@ When multiple Claude Code sessions run concurrently, they share one git working 
 
 **The non-negotiable:** Tests are written and committed before any implementation code. No exceptions. If a spec is provided, tests come first.
 
-### When to use BDD vs unit tests
+### Choosing the test shape
 - **BDD:** UI behavior, user-facing flows, anything Playwright can observe in the DOM. Write `.feature` scenarios.
 - **Unit tests:** Pure functions, batch scripts, pipeline stages with no DOM surface. Write pytest functions directly. Do not write `.feature` files for batch scripts or functions with no UI interaction.
+- **Live acceptance runs:** For changes to prompts, retrieval, or anything else whose output depends on the LLM. A live acceptance run is a probe script in `probe_<ticket>_output/<timestamp>/`. It runs the acceptance queries through the real pipeline (`rag_answer()` or `assess_requirement()`, with `log_query` patched out and stderr in its own file), at least 2 runs per query, and it pastes the full answer text for each run. It includes the story controls when the change touches a shared prompt. It supplements unit tests and doesn't replace them: unit tests prove the text reaches the prompt, and the live run shows what the model does with it.
 
 ### Red-Green cycle
 One "go" from Matt ships the full cycle without re-asking between gates. Re-ask only on substantive new design decisions.
@@ -209,6 +210,7 @@ Probes and PoCs are exploratory measuring instruments, exempt from the Red gate.
 ### Validation rules
 - **When reporting test results, state explicitly what was tested and what was not.** A pass count covers the scenarios run -- it does not validate untested changes in the same commit. Never present partial coverage as full validation.
 - **Paste literal pytest output at every gate** - never self-summarize (see Critical Rules)
+- **Green commits only after every validation relevant to the change has run.** Name the applicable gates before committing: whichever test shape the change called for (BDD for UI behavior, unit tests for pure functions and scripts, live acceptance runs for prompt or retrieval changes), plus a browser check on a restarted Streamlit when rendered output changed. "Not run" on a gate you named as relevant is not acceptable in a Green commit message. If a relevant gate can't run, stop and ask rather than committing around it. (Sept 2026)
 - **Scope per-gate runs to the relevant test file** - `pytest tests/bdd/steps/test_X.py -v`, not the full suite
 - **A `.feature` file without its `test_*.py` binding is documentation, not a test**
 - **BDD scenarios must assert DOM-observable behavior** - Playwright cannot read `st.session_state`; assert navigation visible + user-message echo + assistant-response streaming
