@@ -122,13 +122,6 @@ _RULE_0A_DIRECT_NO_CATEGORIES = (
 )
 # Placement per mock #3b: markers sit on their own line before the closer.
 _RULE_0A_MARKER_PLACEMENT = "on its own line before the closing line"
-# Sept 26, 2026: "Does Matt have a CS degree?" led with "does not have a
-# degree in Computer Science" and dropped half the AIU note. A note that
-# addresses the item asked about is the answer, not a trailing detail.
-_RULE_0A_NOTE_FIRST = (
-    "If an entry's note addresses the item asked about, answer from that "
-    "note first; do not lead with a no."
-)
 _RULE_0A_NEW_MARKERS = [
     _RULE_0A_OPENING,
     _RULE_0A_NO_SOURCE,
@@ -138,7 +131,6 @@ _RULE_0A_NEW_MARKERS = [
     *_RULE_0A_CATEGORY_MARKERS,
     _RULE_0A_MARKER_PLACEMENT,
     _RULE_0A_DIRECT_NO_CATEGORIES,
-    _RULE_0A_NOTE_FIRST,
 ]
 _RULE_0B_MARKER = "Nothing I know about Matt covers that"
 # New at 9d5f575: for absent categories, Agy must not pad the honest gap
