@@ -121,6 +121,35 @@ class TestFactCardContent:
             ), f"institution {e['institution']!r} not after degree"
         _assert_not_a_link(html_out)
 
+    def test_k2_education_card_note_under_its_institution(self):
+        # Each entry's note renders verbatim as a secondary line after its
+        # own institution and before the next entry's degree.
+        profile = matt_profile.load_profile_dict()
+        html_out = ch._fact_card_html("education")
+        aiu_note = _esc(
+            "Information Technology is a recognized Computer Science-related "
+            "discipline, and a Master's degree exceeds a Bachelor's."
+        )
+        assert aiu_note in html_out, html_out
+        entries = profile["education"]
+        for idx, e in enumerate(entries):
+            if not e.get("note"):
+                continue
+            secondary = ch._FACT_TEXT_STYLES["secondary"]
+            note_pos = html_out.find(
+                f'<div style="{secondary}">{_esc(e["note"])}</div>'
+            )
+            inst_pos = html_out.find(_esc(e["institution"]))
+            assert note_pos >= 0, f"note for {e['institution']!r} missing"
+            assert (
+                note_pos > inst_pos
+            ), f"note for {e['institution']!r} not after institution"
+            if idx + 1 < len(entries):
+                next_degree_pos = html_out.find(_esc(entries[idx + 1]["degree"]))
+                assert (
+                    note_pos < next_degree_pos
+                ), f"note for {e['institution']!r} not before next degree"
+
     def test_k3_languages_card_language_over_level(self):
         profile = matt_profile.load_profile_dict()
         html_out = ch._fact_card_html("languages")
