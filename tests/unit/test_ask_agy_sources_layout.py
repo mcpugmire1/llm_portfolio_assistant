@@ -19,10 +19,12 @@ same escaping the card uses: &, < and > are escaped, apostrophes are not.
 
 R1: category markers present -> fact cards plus story grid.
 R2: no markers -> story grid only.
-K1-K7: fact card content.
+K1-K9: fact card content and mobile layout.
 """
 
 import html
+import inspect
+import re
 from unittest.mock import patch
 
 import pytest
@@ -196,6 +198,25 @@ class TestFactCardContent:
         assert (
             "AWS Certified" not in html_out
         ), "card did not read entries from the profile loader"
+
+    def test_k8_fact_card_grid_has_mobile_class_and_desktop_style_unchanged(self):
+        # The class is the hook for the mobile rule; the inline two-column
+        # style is desktop and stays as it is.
+        html_out = ch._fact_card_html("education")
+        assert (
+            '<div class="fact-card-grid" style="display: grid; '
+            "grid-template-columns: repeat(2, minmax(0, 1fr));"
+        ) in html_out, html_out
+
+    def test_k9_transcript_styles_stack_fact_cards_on_mobile(self):
+        # Mobile only: one column at 767px and below. !important is needed
+        # to override the inline desktop style.
+        src = re.sub(r"\s+", " ", inspect.getsource(ch._render_ask_transcript))
+        rule = (
+            "@media (max-width: 767px) { .fact-card-grid { "
+            "grid-template-columns: 1fr !important; } }"
+        )
+        assert rule in src, "mobile fact-card rule missing from the Sources styles"
 
 
 class TestLocationAvailabilityFactCard:
