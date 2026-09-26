@@ -96,6 +96,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-249](#mattgpt-249) | Role Match retrieval: crisis story at rank 18 on incident-leadership requirement; target carries incident vocabulary; ranking problem confirmed | Open | Medium | Bug | September 11, 2026 |
 | [MATTGPT-250](#mattgpt-250) | Ask Agy cannot answer queries about education, certifications, or languages -- profile block missing from Ask Agy's system prompt | Open | High | Issue | September 21, 2026 |
 | [MATTGPT-251](#mattgpt-251) | Ask Agy treats adjacent retrieved stories as evidence for the question asked | Open | [Matt] | Issue | September 23, 2026 |
+| [MATTGPT-252](#mattgpt-252) | Ask Agy writes evaluative sentences about Matt despite repeated prompt instructions against it | Open | High | Issue | September 26, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | Open | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -1601,6 +1602,34 @@ Same class as the no-inference clause in MATTGPT-250: retrieved text that sits n
 **Rejected (do not re-derive):** Pairwise rules such as "do not treat mortgage as real estate." Each one fixes a single pairing and misses the next.
 
 **Out of scope:** Agriculture under-claim (September 23, 2026). The Liquid Studio story was not in the top 25 for that query -- retrieval miss, not synthesis, and it covers a single PoC mention.
+
+---
+
+### MATTGPT-252
+**Ask Agy writes evaluative sentences about Matt despite repeated prompt instructions against it**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Issue
+- **Logged:** September 26, 2026
+
+**Evidence:**
+
+- **September 24, 2026** (`probe_250_output/20260924_135758/acceptance_0a5_run1.txt`): "Does Matt have a master's degree?" (family=out_of_scope, is_synthesis=False). Final text contains "...showcasing his commitment...".
+- **September 26, 2026** (browser runs only, not on disk, mode unverified): "These certifications reflect his engagement..." and "...is demonstrated through his consistent impact..." ("Why hire Matt?").
+
+**Verified September 26, 2026:**
+
+- The anti-evaluation rule appears in BASE_PROMPT (5 places), SYNTHESIS_DELTA (2), and the user message from `build_user_message()` ("State facts. Do not evaluate Matt.").
+- `META_COMMENTARY_REGEX_PATTERNS` has 14 patterns, including "reflects his" and "reflect his" but not "showcasing".
+- `generate_dynamic_dna()` puts evaluative prose under "Ground Truth" in every system prompt: "Execution & Delivery is Matt's primary strength", "Matt builds people, not just systems", "Builder's mindset, coach's heart".
+- Probe outputs save post-strip `answer_md`. Only `masters_diag_output.txt` captured raw text, so counts from probes undercount.
+
+**Hypothesis (not measured):** The evaluative "Ground Truth" content in `generate_dynamic_dna()` drives the behavior: MATT_DNA's strengths and values lines, the Professional Narrative stories, `get_verbatim_requirement`, and the STANDARD_DELTA focus angles are the suspects.
+
+**First step:** An isolating probe that captures raw LLM text before strip. Run the 5 story controls plus "Why hire Matt?" as a baseline, then one condition per suspect (MATT_DNA evaluative sections removed; verbatim requirement off; focus angle fixed), 2+ runs each.
+
+**Out of scope:** MATTGPT-250 and MATTGPT-251. No new regex patterns in the meantime.
 
 ---
 
