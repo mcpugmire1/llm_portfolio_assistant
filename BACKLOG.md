@@ -985,6 +985,13 @@ Role Match renders profile evidence as a prose block rather than a card -- do no
 
 **Existing Red commit:** `220d14d` has nine unit tests encoding the old cap invariant. They stay xfailed until this ships, then get rewritten against the new contract.
 
+**New evidence (September 26, 2026):** With the -250 fact row in place, pure fact answers show unrelated story cards below the fact card. Observed on local 8501:
+
+- "Where is Matt based?" (answer from Location & Availability only): showed Why Hire Matt?, Building the Payment Engine Behind JP Morgan ACCESS, MattGPT: Human-Centered UX Design.
+- "Is Matt certified?" (answer from Certifications only): showed Why Hire Matt?, Keeping the F-22's As-Built Configuration Data Accurate, MattGPT: Product Vision.
+
+None of these stories is cited in the answer. This is the "retrieved, not cited" behavior -128 covers. The fact card now carries the real attestation (-250 mock #4a), so the uncited story cards read as false evidence next to it. The "story grid always renders" rule in -250 item 4 stands until -128 decides which stories count as cited.
+
 **Open before shipping:**
 1. Thin-answer shape. A single-source answer, or one where every source is the same kind, loses one of the two sections and the trailing lead-in for it. The Fiserv commercial impact query is the test case: four sources, all project record, exercises the single-label shape.
 2. Retrieval check (owed August 29, still unexecuted). Before this ships, confirm that the project-record cards on a given answer actually substantiate its claims. An unrelated engagement story under a dollar figure looks exactly like a valid receipt and has no tell. This needs a dedicated eval query, not just a manual DEBUG run. Zero of the 65 current eval queries exercise this -- the same coverage gap that let MATTGPT-218 sit live since February.
