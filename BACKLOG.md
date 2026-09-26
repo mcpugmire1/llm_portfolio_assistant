@@ -1675,6 +1675,8 @@ The profile injection works whenever the LLM runs: categories returned correctly
 
 **First step:** Measure real visitor rejections from `log_query` records with `redirect_reason="low_confidence"` -- not `data/offdomain_queries.csv`. Caveat on that file: probes patch `log_query` but not `log_offdomain`, so probe runs write test rows into `data/offdomain_queries.csv` (e.g. Sept 22 PoC lines 751-755 and the Sept 26 salary rows). The file is local, and production rejections likely never reach it. Confirm where `log_query` writes in production before querying.
 
+**Constraint (September 26, 2026):** `CONFIDENCE_HIGH` and `CONFIDENCE_LOW` gate both surfaces differently. "Where does Matt live?" at top_score 0.242: Ask Agy returns the low_confidence banner; My Work shows 4 stories under "Showing closest matches... Relevance may be low." A fix must not change the thresholds themselves. The candidate bypass acts only inside `rag_answer()` after search returns, leaving My Work untouched. Any threshold proposal needs before/after evidence from both surfaces.
+
 **Open questions:**
 1. What fraction of visitor queries with `redirect_reason="low_confidence"` are profile-answerable vs. genuinely off-domain? That ratio determines whether a bypass is worth the risk.
 2. What does the LLM answer for past low_confidence queries that are not profile questions? Is 0b's gap sentence acceptable there, versus the current banner?
