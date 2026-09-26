@@ -19,14 +19,14 @@
     }
   ],
   "certifications": [
-    "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
-    "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
-    "SAFe 4 Certified Agilist (issued 2017, expired)",
-    "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)"
+    {"name": "AWS Certified Solutions Architect - Associate", "issued": 2020, "expired": 2023},
+    {"name": "AWS Certified Cloud Practitioner", "issued": 2019, "expired": 2023},
+    {"name": "SAFe 4 Certified Agilist", "issued": 2017, "expired": true},
+    {"name": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery", "issued": 2002}
   ],
   "languages": [
-    "English (native)",
-    "French (B2, self-assessed)"
+    {"language": "English", "level": "native"},
+    {"language": "French", "level": "B2, self-assessed"}
   ],
   "logistics": {
     "location": {

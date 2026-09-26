@@ -8,7 +8,6 @@ Architecture: See ADR 016 and services/jd_assessor.py
 """
 
 import html
-import json
 import logging
 import re
 import time
@@ -17,9 +16,9 @@ from urllib.parse import urlencode
 
 import streamlit as st
 
-from config.constants import PROFILE_LOCATION_AVAILABILITY_FIELDS
 from config.debug import DEBUG
 from scripts.utils import slugify
+from services import matt_profile
 from services.query_logger import (
     is_bot,
     log_role_match_assessment,
@@ -944,45 +943,21 @@ _LOCATION_BLOCK_CSS = """
 @media (max-width: 600px) { .loc-grid { grid-template-columns: repeat(2, 1fr); } }
 """
 
-# Cell order and visitor labels come from
-# config.constants.PROFILE_LOCATION_AVAILABILITY_FIELDS (shared with
-# load_matt_profile() since MATTGPT-250 step 2). Field keys match
+# Location & Availability cells come from
+# services.matt_profile.iter_location_cells(), shared with the Ask Agy
+# fact card (MATTGPT-250). Field keys match
 # data/matt_profile.json["logistics"] structure.
 
 
 def _load_matt_profile_dict() -> dict:
-    """Load matt_profile.json as a dict. Empty dict on failure so the
-    render surfaces degrade gracefully (no block rendered, no crash).
-    Distinct from services.jd_assessor.load_matt_profile which returns
-    a formatted string for the assessment prompt."""
-    profile_path = Path(__file__).parent.parent.parent / "data" / "matt_profile.json"
+    """Profile dict for the Location & Availability block. Empty dict on
+    failure so the render surfaces degrade gracefully (no block
+    rendered, no crash). Reads through services.matt_profile, the only
+    function that opens the profile file."""
     try:
-        with open(profile_path) as f:
-            return json.load(f)
+        return matt_profile.load_profile_dict()
     except Exception:
         return {}
-
-
-def _iter_location_cells(profile: dict) -> list[tuple[str, str, str]]:
-    """Return [(label, value, subline), ...] for populated logistics
-    cells only, in fixed order. Cells whose field is absent from the
-    profile's logistics dict, or whose value is empty/missing, are
-    omitted entirely -- MATTGPT-089's omit-cleanly contract, pinned
-    by test_location_block_omits_cell_when_field_missing_from_profile.
-    A cell that rendered label-only with an empty value would be the
-    'blank box' failure mode."""
-    logistics = (profile or {}).get("logistics") or {}
-    cells: list[tuple[str, str, str]] = []
-    for field_key, label in PROFILE_LOCATION_AVAILABILITY_FIELDS:
-        cell_data = logistics.get(field_key)
-        if not cell_data:
-            continue
-        value = str(cell_data.get("value", "")).strip()
-        subline = str(cell_data.get("subline", "")).strip()
-        if not value:
-            continue
-        cells.append((label, value, subline))
-    return cells
 
 
 def _render_location_block_share_text(cells: list[tuple[str, str, str]]) -> str:
@@ -1123,7 +1098,9 @@ def _build_share_text(result_payload: dict, profile: dict | None = None) -> str:
     # Fixed content, always renders (unless the profile is empty
     # and every cell is skipped). Parity with the export html
     # placement.
-    _location_cells = _iter_location_cells(profile or _load_matt_profile_dict())
+    _location_cells = matt_profile.iter_location_cells(
+        profile or _load_matt_profile_dict()
+    )
     _location_block = _render_location_block_share_text(_location_cells)
     if _location_block:
         lines.append(_location_block)
@@ -1357,7 +1334,9 @@ def _build_export_html(result_payload: dict, profile: dict | None = None) -> str
     # Fixed content, always renders (unless the profile is empty
     # and every cell is skipped). Parity with the share text
     # placement.
-    _location_cells = _iter_location_cells(profile or _load_matt_profile_dict())
+    _location_cells = matt_profile.iter_location_cells(
+        profile or _load_matt_profile_dict()
+    )
     location_html = _render_location_block_html(_location_cells)
 
     return f"""
@@ -1583,7 +1562,7 @@ def _build_location_screen_html_with_style() -> str:
     pure string. Extracted so the interleaved submit path and the
     stable _render_results_panel share one source. Returns empty
     string when the profile has no logistics cells."""
-    _location_cells = _iter_location_cells(_load_matt_profile_dict())
+    _location_cells = matt_profile.iter_location_cells(_load_matt_profile_dict())
     _location_block_html = _render_location_block_html(_location_cells)
     return (
         f"<style>{_LOCATION_BLOCK_CSS}</style>{_location_block_html}"

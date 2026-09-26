@@ -111,6 +111,7 @@ META_COMMENTARY_REGEX_PATTERNS = [
     r"\bthis illustrates\b",
     r"\bdemonstrates his\b",
     r"\breflects his\b",
+    r"\breflect his\b",
     r"\bdemonstrates a pattern\b",
     r"\bis evident\b",
     r"\bshowcases his\b",

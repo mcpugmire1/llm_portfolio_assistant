@@ -136,10 +136,13 @@ class TestFactCardContent:
         cells = matt_profile.iter_location_cells(matt_profile.load_profile_dict())
         assert len(cells) == 4, cells
         html_out = ch._fact_card_html("location_availability")
-        assert _esc(f"{_LABEL_PREFIX}Location & Availability") in html_out, html_out
-        last = -1
+        title = _esc(f"{_LABEL_PREFIX}Location & Availability")
+        assert title in html_out, html_out
+        # Search after the title: the cell labels "Location" and
+        # "Availability" also occur inside it.
+        last = html_out.find(title) + len(title)
         for label, value, subline in cells:
-            pos = html_out.find(_esc(label))
+            pos = html_out.find(_esc(label), last)
             assert pos > last, f"cell {label!r} missing or out of Role Match order"
             assert _esc(value) in html_out, f"value {value!r} missing"
             if subline:

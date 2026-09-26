@@ -15,12 +15,12 @@ import json
 import logging
 import os
 import time
-from pathlib import Path
 
 from openai import OpenAI
 
 from config.constants import PROFILE_LOCATION_AVAILABILITY_FIELDS
 from config.debug import DEBUG
+from services import matt_profile
 from services.pinecone_service import pinecone_semantic_search
 
 logger = logging.getLogger(__name__)
@@ -306,17 +306,15 @@ Rules:
 
 
 def load_matt_profile() -> str:
-    """Load Matt's profile from data/matt_profile.json and build grounding
-    context string.
+    """Build the grounding context string from Matt's profile, read
+    through services.matt_profile.load_profile_dict().
 
     Each education entry renders on its own line so that per-entry notes
     (e.g., the Master's equivalence note, the UGA teaching note, the
     Queens abroad note) stay attached to the degree they describe rather
     than trailing after the last degree in a shared "notes" section.
     """
-    profile_path = Path(__file__).parent.parent / "data" / "matt_profile.json"
-    with open(profile_path) as f:
-        profile = json.load(f)
+    profile = matt_profile.load_profile_dict()
 
     lines = []
     for e in profile.get("education", []):
@@ -325,17 +323,25 @@ def load_matt_profile() -> str:
             line += f" {e['note']}"
         lines.append(line)
 
-    certs = ", ".join(profile.get("certifications", []))
+    # Certifications are {name, issued, expired}; certification_sentence()
+    # rebuilds the grounding text ("Name (issued 2020, expired 2023)").
+    certs = ", ".join(
+        matt_profile.certification_sentence(c)
+        for c in profile.get("certifications", [])
+    )
     if certs:
         lines.append(f"Certifications: {certs}.")
 
-    languages = profile.get("languages", [])
+    # Languages are {language, level}, rendered "English (native)".
+    languages = [
+        f"{lang['language']} ({lang['level']})" for lang in profile.get("languages", [])
+    ]
     if languages:
         lines.append(f"Languages: {', '.join(languages)}.")
 
     # MATTGPT-250 step 2: Location & Availability (JSON key "logistics"),
     # one line per populated field in the shared field order. A field with
-    # an empty value is omitted, as in Role Match's _iter_location_cells().
+    # an empty value is omitted, as in services.matt_profile.iter_location_cells().
     location_availability = profile.get("logistics") or {}
     for field_key, label in PROFILE_LOCATION_AVAILABILITY_FIELDS:
         cell = location_availability.get(field_key) or {}
