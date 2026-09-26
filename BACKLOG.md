@@ -991,6 +991,7 @@ Role Match renders profile evidence as a prose block rather than a card -- do no
 
 - "Where is Matt based?" (answer from Location & Availability only): showed Why Hire Matt?, Building the Payment Engine Behind JP Morgan ACCESS, MattGPT: Human-Centered UX Design.
 - "Is Matt certified?" (answer from Certifications only): showed Why Hire Matt?, Keeping the F-22's As-Built Configuration Data Accurate, MattGPT: Product Vision.
+- "Where is Matt located?" (September 26, 2026): 2 story cards, neither relating to location. Card count varies with how many sources return. Additional confirmation that the story grid shows retrieved stories, not cited ones.
 
 None of these stories is cited in the answer. This is the "retrieved, not cited" behavior -128 covers. The fact card now carries the real attestation (-250 mock #4a), so the uncited story cards read as false evidence next to it. The "story grid always renders" rule in -250 item 4 stands until -128 decides which stories count as cited.
 
@@ -1618,6 +1619,7 @@ Same class as the no-inference clause in MATTGPT-250: retrieved text that sits n
 
 - **September 24, 2026** (`probe_250_output/20260924_135758/acceptance_0a5_run1.txt`): "Does Matt have a master's degree?" (family=out_of_scope, is_synthesis=False). Final text contains "...showcasing his commitment...".
 - **September 26, 2026** (browser runs only, not on disk, mode unverified): "These certifications reflect his engagement..." and "...is demonstrated through his consistent impact..." ("Why hire Matt?").
+- **September 26, 2026** (browser, not on disk): "Is Matt a sales person?" contains "Matt's career narrative highlights his role in technology and innovation leadership." Not stripped -- "highlights his" is not in `META_COMMENTARY_REGEX_PATTERNS`.
 
 **Verified September 26, 2026:**
 
