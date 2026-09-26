@@ -1620,9 +1620,9 @@ Same class as the no-inference clause in MATTGPT-250: retrieved text that sits n
 
 **Verified September 26, 2026:**
 
-- The anti-evaluation rule appears in BASE_PROMPT (5 places), SYNTHESIS_DELTA (2), and the user message from `build_user_message()` ("State facts. Do not evaluate Matt.").
-- `META_COMMENTARY_REGEX_PATTERNS` has 14 patterns, including "reflects his" and "reflect his" but not "showcasing".
-- `generate_dynamic_dna()` puts evaluative prose under "Ground Truth" in every system prompt: "Execution & Delivery is Matt's primary strength", "Matt builds people, not just systems", "Builder's mindset, coach's heart".
+- `META_COMMENTARY_REGEX_PATTERNS` in `config/constants.py` has 14 patterns, including "reflects his" and "reflect his" but not "showcasing".
+- In `ui/pages/ask_mattgpt/prompts.py`, the anti-evaluation rule appears in BASE_PROMPT (5 places), SYNTHESIS_DELTA (2 places), and the user message from `build_user_message()` ("State facts. Do not evaluate Matt."). Rule 0a is appended after it.
+- `generate_dynamic_dna()` in `backend_service.py` puts evaluative prose under "Ground Truth" in every system prompt: "Execution & Delivery is Matt's primary strength", "Matt builds people, not just systems", "Builder's mindset, coach's heart".
 - Probe outputs save post-strip `answer_md`. Only `masters_diag_output.txt` captured raw text, so counts from probes undercount.
 
 **Hypothesis (not measured):** The evaluative "Ground Truth" content in `generate_dynamic_dna()` drives the behavior: MATT_DNA's strengths and values lines, the Professional Narrative stories, `get_verbatim_requirement`, and the STANDARD_DELTA focus angles are the suspects.
