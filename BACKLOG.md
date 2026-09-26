@@ -98,6 +98,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-251](#mattgpt-251) | Ask Agy treats adjacent retrieved stories as evidence for the question asked | Open | [Matt] | Issue | September 23, 2026 |
 | [MATTGPT-252](#mattgpt-252) | Ask Agy writes evaluative sentences about Matt despite repeated prompt instructions against it | Open | High | Issue | September 26, 2026 |
 | [MATTGPT-253](#mattgpt-253) | Profile-fact queries near the story-confidence threshold rejected before profile injection runs | Open | Medium | Issue | September 26, 2026 |
+| [MATTGPT-254](#mattgpt-254) | Five Role Match BDD scenarios stale after 30-word gate shipped; CHANGELOG entry has em dash | Open | Medium | Bug | September 26, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | Open | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -1682,6 +1683,34 @@ The profile injection works whenever the LLM runs: categories returned correctly
 2. What does the LLM answer for past low_confidence queries that are not profile questions? Is 0b's gap sentence acceptable there, versus the current banner?
 
 **Relationship to MATTGPT-250:** The MATTGPT-250 DA note covers Stage 2 being dropped and the gate bypass being decided against. MATTGPT-250 item 4 is committed (`d98f63c`, `bbeaa01`). This bypass is a separate follow-on.
+
+---
+
+### MATTGPT-254
+**Five Role Match BDD scenarios stale after 30-word gate shipped; CHANGELOG entry has em dash**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `tests/bdd/features/role_match.feature`, `CHANGELOG.md`
+- **Logged:** September 26, 2026
+
+**Issue 1 -- stale scenarios.** Five scenarios in `role_match.feature` describe the old 30-word gate behavior, which was replaced when the gate shipped. They are xfailed or passing against stale assertions; neither outcome proves the current behavior is tested.
+
+Scenarios by name:
+- "Empty text area disables the match button"
+- "Match button is disabled when the JD textarea is empty"
+- "Clicking clear empties the textarea and disables the match button"
+- "Match button stays disabled below 30-word threshold"
+- "Clicking Clear returns to State 1 including right panel and Sample JD link"
+
+**Issue 2 -- CHANGELOG em dash.** The CHANGELOG entry for the 30-word gate (`CHANGELOG.md` line 569 at time of filing) contains "-- honest framing that doesn't imply Agy has result context", which was written with an em dash before the repo rule was added. Fix: replace with a comma or rewrite.
+
+**Fix scope:**
+1. Rewrite or delete the five stale scenarios to assert current behavior (or confirm they are already correct and remove the xfail).
+2. Fix the em dash in the CHANGELOG entry.
+
+**Constraint:** CHANGELOG.md is append-only for new entries; in-place corrections to existing entries are allowed for factual errors and rule violations. The em dash is a rule violation. Fix it in place.
 
 ---
 
