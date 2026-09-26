@@ -1669,15 +1669,15 @@ Most location questions pass (0.265-0.406). This is a band around the threshold,
 
 The profile injection works whenever the LLM runs: categories returned correctly in `probe_250_output/20260926_122021/`. The gate runs before it.
 
-**Candidate fix:** A narrow bypass that fires only when `semantic_search()` returns low confidence AND the query string matches a profile-answerable shape. Distinct from the rejected router approach (MATTGPT-250 Rejected approaches): the router pre-classified on query semantics and caught the AWS control (0.786) because story queries outscore their story anchors. This bypass fires on the search result, not the query, so it can't fire before Pinecone runs. It cannot touch queries above the threshold.
+**Candidate fix:** A narrow bypass: when `semantic_search()` returns low confidence, run the LLM with the profile block and rules 0a/0b instead of returning the low_confidence banner. No query-shape predicate. A weak story query gets 0b's honest gap; a profile query gets its fact. Distinct from the rejected router approach (MATTGPT-250 Rejected approaches): the router pre-classified on query semantics and caught the AWS control (0.786) because story queries outscore their story anchors. This bypass fires on the search result, after Pinecone, and cannot touch queries above the threshold.
 
 **First step:** Measure real visitor rejections from `log_query` records with `redirect_reason="low_confidence"` -- not `data/offdomain_queries.csv`. Caveat on that file: probes patch `log_query` but not `log_offdomain`, so probe runs write test rows into `data/offdomain_queries.csv` (e.g. Sept 22 PoC lines 751-755 and the Sept 26 salary rows). The file is local, and production rejections likely never reach it. Confirm where `log_query` writes in production before querying.
 
 **Open questions:**
 1. What fraction of visitor queries with `redirect_reason="low_confidence"` are profile-answerable vs. genuinely off-domain? That ratio determines whether a bypass is worth the risk.
-2. What is the right shape predicate? A keyword list (safe -- false positive means story query + profile block it ignores, see MATTGPT-250 scope note) or something narrower?
+2. What does the LLM answer for past low_confidence queries that are not profile questions? Is 0b's gap sentence acceptable there, versus the current banner?
 
-**Relationship to MATTGPT-250:** The MATTGPT-250 DA note covers Stage 2 being dropped and the gate bypass being decided against. If this ticket produces evidence for the bypass, MATTGPT-250 item 4 (Sources rendering) ships first, and this bypass is a separate follow-on.
+**Relationship to MATTGPT-250:** The MATTGPT-250 DA note covers Stage 2 being dropped and the gate bypass being decided against. MATTGPT-250 item 4 is committed (`d98f63c`, `bbeaa01`). This bypass is a separate follow-on.
 
 ---
 
