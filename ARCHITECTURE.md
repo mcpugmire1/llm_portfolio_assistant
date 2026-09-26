@@ -125,8 +125,9 @@ llm_portfolio_assistant/
 ├── services/                       # Business logic & external APIs
 │   ├── __init__.py
 │   ├── jd_assessor.py              # Role Match engine (extraction → retrieval → assessment + compute_recommendation())
+│   ├── matt_profile.py             # Shared reader for data/matt_profile.json (load_profile_dict, iter_location_cells, certification_sentence, cert_date_label)
 │   ├── pinecone_service.py         # Pinecone client & vector search
-│   ├── query_logger.py             # 32-column event logger → Google Sheets
+│   ├── query_logger.py             # 44-column event logger → Google Sheets
 │   ├── rag_service.py              # Semantic search orchestration
 │   ├── semantic_router.py          # Query routing & validation
 │   └── story_service.py            # Story retrieval logic (placeholder)
@@ -672,17 +673,17 @@ This section defines the **job, rules, and constraints** for each retrieval comp
 - **Lives in:** `nonsense_filters.jsonl` + `utils/validation.py:is_nonsense()`
 - **Cost:** Zero (pure regex, no API calls)
 - **Rule:** Runs FIRST before any embedding or LLM cost
-- **Categories (Aug 2026):** `celebrity_earnings` (salary/net-worth questions about named public figures), `recruiter_logistics` (compensation range or expectation questions framed as recruiter screens), `personal_compensation` (Matt's own pay). `personal_compensation` uses two patterns: a broad-vocabulary pattern covering salary terminology and a contextual pattern covering indirect phrasings ("how much money does he make"). Two patterns are needed because the indirect form bypasses the broad-vocabulary match.
+- **Categories (Aug 2026):** `celebrity_earnings` (salary/net-worth questions about named public figures), `recruiter_logistics` (compensation range or expectation questions framed as recruiter screens), `personal_compensation` (Matt's own pay). `personal_compensation` uses two patterns: a broad-vocabulary pattern covering salary terminology and a contextual pattern covering indirect phrasings ("how much money does he make"). Two patterns are needed because the indirect form bypasses the broad-vocabulary match. `recruiter_logistics` was reduced to compensation-only in Sept 2026: four location/relocation/start-date/availability patterns were removed when those topics moved to the profile fact surface. Only the salary/compensation expectation pattern remains.
 
 #### Semantic Router
 - **Job:** Embedding-based intent classification to reject borderline off-topic queries
 - **Lives in:** `services/semantic_router.py`
 - **Thresholds:** HARD_ACCEPT=0.80, SOFT_ACCEPT=0.40 (calibrated Jan 2026)
-- **Intent Families:** 15 families (background, behavioral, delivery, team_scaling, leadership, technical, domain_payments, domain_healthcare, stakeholders, innovation, agile_transformation, narrative, synthesis, out_of_scope, personal)
+- **Intent Families:** 15 families (background, behavioral, delivery, team_scaling, leadership, technical, domain_payments, domain_healthcare, stakeholders, innovation, agile_transformation, narrative, synthesis, out_of_scope, personal). The `personal` "Where does Matt live" anchor was removed from `data/intent_embeddings.json` in Sept 2026 (134 keys after regeneration).
 - **Cost:** ~$0.0000002 per query (one embedding)
 - **Rule:** Fail-open on errors (accept query if embedding fails)
 - **Do not remove:** Saves LLM cost, prevents garbage-in
-- **`out_of_scope` gating rule:** Rejection fires only when `router_score >= HARD_ACCEPT`. A score below HARD_ACCEPT with family `out_of_scope` passes through -- the low score means the router isn't confident it's out of scope. This gate is applied at both call sites in `backend_service.py` (`backend_service.py:1815`, `explore_stories.py:987`). `personal` is currently ungated: `backend_service.py:1815` and `explore_stories.py:985` reject on family alone regardless of score. A low-confidence `personal` classification (e.g., 0.223) fires the hard-stop before the downstream `overlap:0.00` path can run, producing wrong rejection copy for generic off-topic queries. Extending the HARD_ACCEPT gate to the `personal` branch requires a clean rejection eval before shipping.
+- **Router rejection gate:** `router_rejection_reason(intent_family, semantic_score)` in `services/semantic_router.py` is the single gate for both `out_of_scope` and `personal`. Rejection fires only when `intent_family in ROUTER_REJECTING_FAMILIES` and `semantic_score >= HARD_ACCEPT`. A score below HARD_ACCEPT passes through regardless of family. Both call sites (Ask Agy and My Work) call this function -- the rule is not duplicated.
 
 #### Observability Logging (Jan 2026)
 
@@ -827,10 +828,12 @@ All 14 return points in `rag_answer()` (after commits `9395a68`, `3c5d00a`, `040
     "entity_match":     tuple | None, # (field, value) e.g. ("Client", "Accenture")
     "confidence":       str | None,   # "high" | "low" | "none"
     "pool_size":        int | None,   # stories in pool before LLM truncation
+    # Conditional (LLM-answer return only):
+    "profile_categories": list[str],  # cited profile categories; absent on all other return paths -- read with .get()
 }
 ```
 
-`rejection_reason` mirrors `ask_last_reason` strings exactly. `pool_size` reflects the operative pool: synthesis overrides to `len(synthesis_pool)` at the synthesis branch.
+`rejection_reason` mirrors `ask_last_reason` strings exactly. `pool_size` reflects the operative pool: synthesis overrides to `len(synthesis_pool)` at the synthesis branch. `profile_categories` is present only on the LLM-answer return path; all other return points omit it. Consumers (`conversation_view.py`, `landing_view.py`, `conversation_helpers.py`) read it with `.get()` or `[]` as default.
 
 **Intent Classification (Semantic Router Only - Jan 29, 2026):**
 
@@ -1313,7 +1316,7 @@ Unassessed row shape (Mode 1/2): `match_status="unassessed"`, `category` and `re
 
 #### Assessment Grounding (load_matt_profile)
 
-`load_matt_profile()` emits **education, certifications, and languages**. Each education entry renders on its own line so per-entry notes stay attached to the degree they describe. It does NOT emit the skills array or career_summary:
+`load_matt_profile()` emits **education, certifications, languages, and Location & Availability**. Each education entry renders on its own line so per-entry notes stay attached to the degree they describe. Certifications are structured `{name, issued, expired}` records, rendered via `certification_sentence()`. Languages are `{language, level}` records, rendered as "Language (level)". Location & Availability lines come from `profile["logistics"]` via `PROFILE_LOCATION_AVAILABILITY_FIELDS`, one line per populated field. It reads through `services.matt_profile.load_profile_dict()`, which raises on failure; `role_match._load_matt_profile_dict()` wraps it in try/except. It does NOT emit the skills array or career_summary:
 
 - Skills array removed: assertion surface competes with corpus evidence. If profile skills are injected, the LLM uses them to assert verdicts rather than finding grounding in STAR stories.
 - career_summary excluded: the LLM cited both the career_summary and story evidence, but paraphrased the profile prose into citations with no traceable source. Removing it forces all citation grounding to the corpus.
@@ -1359,6 +1362,7 @@ Bot filter: `is_bot()` in `query_logger.py` checks User-Agent against `MONITORIN
 3. **Ground truth fidelity:** LLM paraphrases instead of quoting verbatim despite `[[CORE BRAND DNA]]` markers.
 4. **Deprecated documentation:** `mattgpt_system_prompt.md` documents the original "MattGPT" persona (pre-Agy). The current Agy voice is documented in this file under Component Contracts → Agy Voice Generator.
 5. **LLM stochasticity:** Eval may show occasional failures due to LLM response variability. Re-running typically passes. Semantic similarity scoring would address this (see BACKLOG.md → MATTGPT-035 (Eval Modernization — Semantic Scoring)).
+6. **"Where does Matt live" stops at the confidence gate.** Score 0.242 is below CONFIDENCE_HIGH=0.25, so Ask Agy refuses while My Work lists the closest stories.
 
 ---
 
@@ -1698,7 +1702,17 @@ def get_verbatim_requirement(summary: str) -> str:
     """Extract required verbatim phrases from Professional Narrative stories."""
 ```
 
-**Why This Architecture:** BASE_PROMPT + DELTA separates universal voice rules from contextual variations. Each module has a single job: `build_system_prompt()` selects the mode-appropriate delta, `build_user_message()` injects story context and response instructions, and `get_verbatim_requirement()` enforces identity-phrase fidelity. The result is a prompt that can't contradict itself — Agy's role as messenger (not evaluator) is structurally enforced.
+**Profile Fact Markers:**
+
+Rule 0a instructs the LLM to place `[[profile:<category>]]` on its own line before the closing line, once per category stated. `_extract_profile_markers(text)` in `backend_service.py` strips these markers from the raw LLM output before bolding and meta-strip run, and returns `(cleaned_text, cited_categories)` in first-cited order. Unknown markers (`[[profile:patents]]`, malformed forms) are removed without adding a category. A line holding only markers is dropped together with the blank line before it. The marker instruction is part of rule 0a's text, so it reaches the LLM whenever `build_user_message()` appends rule 0a (i.e., when `profile_facts` is non-empty).
+
+**Sources Fact Cards (MATTGPT-250):**
+
+`_sources_layout(categories, sources, is_synthesis)` in `conversation_helpers.py` returns `{"show_label": True, "fact_cards": list(categories), "story_count": min(len(sources), cap)}`. Fact cards do not count toward the story cap.
+
+`_fact_card_html(category)` renders one full-width card per cited category. Label: "From Matt's profile · <display name>" (from `PROFILE_FACT_DISPLAY_NAMES`). Entries are in a two-column grid via `_fact_card_entries()`, which reads directly from the profile dict (not from the answer text). The render call site wraps in try/except; `logger.exception` logs the failure and skips the cards rather than breaking the transcript.
+
+**Why This Architecture:** BASE_PROMPT + DELTA separates universal voice rules from contextual variations. Each module has a single job: `build_system_prompt()` selects the mode-appropriate delta, `build_user_message()` injects story context and response instructions, and `get_verbatim_requirement()` enforces identity-phrase fidelity. The result is a prompt that can't contradict itself -- Agy's role as messenger (not evaluator) is structurally enforced.
 
 ---
 
@@ -2602,13 +2616,17 @@ def wait_for_streamlit_rerun(page):
 
 ### RAG Eval Tests
 
-**Location:** `tests/eval/`
+**Location:** `tests/eval_rag_quality.py` (root-level script, not under `tests/eval/`)
 **Framework:** pytest + OpenAI embeddings
 **Runtime:** ~2-3 minutes
 
 ```bash
 # Run eval suite
-pytest tests/eval/test_eval_rag_quality.py -v
+pytest tests/eval_rag_quality.py -v
+pytest tests/eval_rag_quality.py -k "narrative" -v
+
+# Full report with optional JSON output
+python tests/eval_rag_quality.py --report [--output FILE]
 ```
 
 **Coverage:** 64 unique queries (70 test items; Q43-Q49 parametrized) testing:
@@ -2617,7 +2635,9 @@ pytest tests/eval/test_eval_rag_quality.py -v
 - Response quality (no hallucinations)
 - Intent classification
 
-**Current Score:** 70/70 (100%) as of Aug 8–9, 2026 runs (subject to LLM stochasticity; see Known Limitations)
+**Scoring:** xfailed and xpassed results are counted separately from failures. An expected failure (`xfail_reason` set on the query spec) is not counted as failed; a pass on an xfailed item reports as xpassed so the marker can be reviewed. Q59 carries `xfail_reason` (low_confidence, score 0.242 < 0.25). The "70/70" pass count predates this xfail and is no longer a clean figure.
+
+**`profile_fact` behavior:** A query spec with `"expected_behavior": "profile_fact"` passes when every `must_contain` string appears in the answer. Q59 uses this with `must_contain: ["Atlanta"]`.
 
 ### Unit Tests
 
@@ -2734,12 +2754,16 @@ The following constants are now in a single source of truth:
 | **Thresholds** | `HARD_ACCEPT`, `SOFT_ACCEPT`, `CONFIDENCE_HIGH`, `CONFIDENCE_LOW`, `PINECONE_MIN_SIM`, `ENTITY_GATE_THRESHOLD` | config/constants.py |
 | **Voice Quality** | `BANNED_PHRASES`, `META_COMMENTARY_PATTERNS`, `META_COMMENTARY_REGEX_PATTERNS` | config/constants.py |
 | **Entity Detection** | `ENTITY_DETECTION_FIELDS`, `ENTITY_SEARCH_FIELDS`, `EXCLUDED_DIVISION_VALUES`, `PINECONE_LOWERCASE_FIELDS` | config/constants.py |
+| **Profile Facts** | `PROFILE_FACT_CATEGORIES`, `PROFILE_FACT_DISPLAY_NAMES`, `PROFILE_LOCATION_AVAILABILITY_FIELDS` | config/constants.py |
 
 Files that import from constants.py:
 - `ui/pages/ask_mattgpt/backend_service.py`
+- `ui/pages/ask_mattgpt/prompts.py`
+- `ui/pages/ask_mattgpt/conversation_helpers.py`
 - `services/rag_service.py`
 - `services/semantic_router.py`
 - `services/pinecone_service.py`
+- `services/matt_profile.py`
 - `tests/eval_rag_quality.py`
 
 ---
@@ -2753,7 +2777,7 @@ Files that import from constants.py:
 Hardcoded in semantic_router.py - 15 intent families with ~20 example phrases each.
 These should be reviewed quarterly for relevance.
 
-**DEPENDENCY WARNING:** If you modify `VALID_INTENTS`, delete `data/intent_embeddings.json` to regenerate cache.
+**DEPENDENCY WARNING:** If you modify `VALID_INTENTS`, delete `data/intent_embeddings.json` to regenerate cache. `test_rl4_embedding_cache_keys_match_valid_intents` in `tests/unit/test_semantic_router.py` asserts cache keys == `ALL_VALID_INTENTS`; a stale cache fails the test run.
 
 **3. Sacred Vocabulary (Verbatim Phrases)**
 
