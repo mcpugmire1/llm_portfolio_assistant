@@ -121,7 +121,8 @@ def _fact_card_html(category: str) -> str:
         for entry in _fact_card_entries(category, profile)
     )
     return (
-        '<div style="width: 100%; padding: 10px 14px; border-radius: 8px; '
+        '<div class="fact-card" style="width: 100%; padding: 10px 14px; '
+        "border-radius: 8px; "
         "background: var(--banner-info-bg); box-sizing: border-box; "
         'cursor: default; margin-bottom: 8px;">'
         f'<div style="display: flex; align-items: center; gap: 6px; '
@@ -129,7 +130,8 @@ def _fact_card_html(category: str) -> str:
         '<span style="flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; '
         'background: var(--text-secondary);"></span>'
         f"{label}</div>"
-        '<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); '
+        '<div class="fact-card-grid" style="display: grid; '
+        "grid-template-columns: repeat(2, minmax(0, 1fr)); "
         'gap: 10px 20px;">'
         f"{entries_html}</div>"
         "</div>"
@@ -686,6 +688,13 @@ def _render_ask_transcript(stories: list[dict]):
                         [class*="st-key-container_related_proj"] button > [data-testid="stMarkdownContainer"],
                         [class*="st-key-related_proj"] button > [data-testid="stMarkdownContainer"] {
                             align-self: center !important;
+                        }
+                        /* Fact cards on mobile: a gap under the SOURCES label and one
+                           column. !important overrides the inline two-column desktop
+                           grid style in _fact_card_html(). */
+                        @media (max-width: 767px) {
+                            .fact-card { margin-top: 8px; }
+                            .fact-card-grid { grid-template-columns: 1fr !important; }
                         }
                         </style>
                         """,
