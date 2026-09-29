@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: 206306e -->
+<!-- last-backlog-sync: 31ae450 -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -7,23 +7,28 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 ---
 
-## Value Prioritized Roadmap (updated 2026-09-20)
+## Value Prioritized Roadmap (updated 2026-09-29)
 
 **NOW**
-1. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
-2. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
-3. **-160** — JD extraction: split into three concurrent calls (required / preferred / implicit) to stabilize requirement count on long JDs. May incidentally preserve qualifiers on AT&T rows 7 and 11 -- unmeasured; probe determines this after the fix lands.
-4. **-244** — Role Match assessor calibration: cited evidence doesn't address the specific claim; `confidence` field deletion. Corpus audit September 2026: 22% strong, not 80%. -160 must land first; fixture count conditional on -160's after-measurement (3 fixtures if qualifiers preserved on rows 7 and 11, row 22 only if not). Land before -249 (see -249 ordering constraint).
-5. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
-6. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
-7. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
-8. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+1. **-250** — In Progress. Ask Agy cannot answer education, certification, or language questions; profile facts never reached its prompt. Steps 5 and 6 still open.
+2. **-251** — Ask Agy treats adjacent retrieved stories as evidence for the question asked. Visitor-visible correctness defect: unsupported claims (real estate sector from Cendant Mortgage; "including France" with no source) read as fact to recruiters.
+3. **-228** — Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
+4. **-146** — Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
+5. **-160** — In Progress. JD extraction split into three concurrent calls (required / preferred / implicit) landed at `5aee8a4`. After-measurement on the AT&T fixture (count spread 1-2 across five runs) not yet recorded. No longer gates -244.
+6. **-244** — In Progress; prep Greens landed. Role Match assessor calibration: cited evidence doesn't address the specific claim; `confidence` field deletion. Not gated on -160: qualifier preservation was resolved by the `source_text` instruction fix (`5aee8a4`/`b28a080`), not the split. Next: verify the CI/CD-qualifier row after that fix; fixture count and the 22% over-called figure depend on it. Land before -249 (see -249 ordering constraint).
+7. **-168** — Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
+8. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
+9. **-128** — Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
+10. **-129 stories 3-5** — Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT**
-9. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
-10. **-223** — Add router_score and router_family columns to Sheet query row; unblocks -239's floor threshold decision.
-11. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
-12. Rest of Role Match: -173, -014, -012, -081, -099, -017.
+11. **-252** — Ask Agy writes evaluative sentences about Matt despite prompt instructions against it. Visitor-visible; isolating probe spec in the detail block.
+12. **-253** — Profile-fact queries near the story-confidence threshold rejected before -250's profile injection runs. Follows -250.
+13. **-254** — Five Role Match BDD scenarios describe the old 30-word gate behavior; passing or xfailed against stale assertions, so current behavior is untested. Also an em dash in a CHANGELOG entry.
+14. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
+15. **-223** — Add router_score and router_family columns to Sheet query row; unblocks -239's floor threshold decision.
+16. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
+17. Rest of Role Match: -173, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
 -177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- better ranking surfaces more adjacent candidates into verdict definitions that still absorb them as partial, so ranking before calibrating makes over-calling worse before better; full constraint in -249 detail block)
@@ -92,14 +97,14 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-154](#mattgpt-154) | Operational-breadth tagging pass — surface operational ownership into all corpus stories where it's genuinely true | Open | Medium | Action | July 16, 2026 |
 | [MATTGPT-155](#mattgpt-155) | New corpus story — sell-side commercial story (HSBC-anchored): pricing/costing, resourcing, outcome-based contracting | Open | Medium | Action | July 29, 2026 |
 | [MATTGPT-156](#mattgpt-156) | Vendor commercial/spend management gap — decide whether corpus-zero on invoice/rate-card/procurement is a real claim or honest gap | Open | Low | Investigation | July 29, 2026 |
-| [MATTGPT-160](#mattgpt-160) | JD extraction: split into three concurrent calls (required / preferred / implicit) to stabilize requirement count on long JDs | Open | High | Bug | July 31, 2026 |
+| [MATTGPT-160](#mattgpt-160) | JD extraction: split into three concurrent calls (required / preferred / implicit) to stabilize requirement count on long JDs | In Progress | High | Bug | July 31, 2026 |
 | [MATTGPT-249](#mattgpt-249) | Role Match retrieval: crisis story at rank 18 on incident-leadership requirement; target carries incident vocabulary; ranking problem confirmed | Open | Medium | Bug | September 11, 2026 |
-| [MATTGPT-250](#mattgpt-250) | Ask Agy cannot answer queries about education, certifications, or languages -- profile block missing from Ask Agy's system prompt | Open | High | Issue | September 21, 2026 |
-| [MATTGPT-251](#mattgpt-251) | Ask Agy treats adjacent retrieved stories as evidence for the question asked | Open | [Matt] | Issue | September 23, 2026 |
+| [MATTGPT-250](#mattgpt-250) | Ask Agy cannot answer queries about education, certifications, or languages -- profile block missing from Ask Agy's system prompt | In Progress | High | Issue | September 21, 2026 |
+| [MATTGPT-251](#mattgpt-251) | Ask Agy treats adjacent retrieved stories as evidence for the question asked | Open | High | Issue | September 23, 2026 |
 | [MATTGPT-252](#mattgpt-252) | Ask Agy writes evaluative sentences about Matt despite repeated prompt instructions against it | Open | High | Issue | September 26, 2026 |
 | [MATTGPT-253](#mattgpt-253) | Profile-fact queries near the story-confidence threshold rejected before profile injection runs | Open | Medium | Issue | September 26, 2026 |
 | [MATTGPT-254](#mattgpt-254) | Five Role Match BDD scenarios stale after 30-word gate shipped; CHANGELOG entry has em dash | Open | Medium | Bug | September 26, 2026 |
-| [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | Open | High | Issue | September 2, 2026 |
+| [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
 | [MATTGPT-168](#mattgpt-168) | Slot 1 is amplified without regard to margin -- tie or near-tie at slot 1 gets 80% of the answer | Open | High | Bug | August 5, 2026 |
@@ -396,7 +401,7 @@ Each detail block uses these fields. Not every field is required for every item.
 **Eval Coverage Gaps — Follow-up Queries**
 
 - **Status:** Open
-- **Priority:** Medium
+- **Priority:** Low
 - **Type:** Action
 - **Issue:** Eval suite validates first-turn behavior at 98.1% but has zero coverage of multi-turn conversation context. The `multi_turn` test case exists with `"followup": "Tell me more about that project"` but is explicitly skipped (see `eval_rag_quality.py` (multi-turn skip comment: "For multi-turn, we'd need to call twice - skip for now")).
 - **Root cause:** Multi-turn evaluation requires simulating conversation state — prior query + response feeding into follow-up. Current harness is single-shot.
@@ -783,9 +788,9 @@ Each detail block uses these fields. Not every field is required for every item.
 ### MATTGPT-091
 **Failure stories — audit existing corpus content first, then write only if needed (re-scoped May 28, 2026)**
 
-- **Status:** Open (re-scoped May 28, 2026 — see Reconciliation note below)
+- **Status:** Open
 - **Priority:** Medium
-- **Type:** Investigation + conditional Action
+- **Type:** Action
 - **Reconciliation (May 28, 2026):** Original framing assumed failure stories needed to be written from scratch. Matt's review of persona findings flagged that some failure content may already exist in the corpus but not surface on failure-shaped queries — which would make this primarily a retrieval / surfacing problem (MATTGPT-094 family) rather than a write-from-scratch problem. Ticket scope re-structured into phased work: audit existing content first, then either close-and-redirect to -094 OR proceed to write-task. Original write-task content preserved as Phase 3 fallback below.
 - **Issue (original framing):** None of the 113 STAR stories obviously surfaces a failure, a hire that didn't work, an architecture call that was wrong, a program that got killed, or a leadership decision in hindsight when queried directly. Every arc on Agy reads positive. The only nod to failure is "early failure and experimentation approach" as a suggested chat prompt — neutered language for what should be a leadership lesson with specifics.
 - **Audience impact:** CTO persona flagged this as a structural leadership blind-spot signal: *"Senior leaders who don't talk about who they fought with, what they killed, or who didn't make it on their team are often leaders who avoid the hard conversation. In a VP Eng seat that translates to tolerating mediocre senior reports too long, postponing performance conversations, and protecting reputations over the team's pace."* VP-of-People persona (forwarded scenario, also from CTO transcript) picked up the same signal independently as a hiring concern.
@@ -812,6 +817,8 @@ Each detail block uses these fields. Not every field is required for every item.
   - MATTGPT-022, MATTGPT-078 — sibling story-writing tickets (Phase 3 pattern if write-task scope returns)
   - MATTGPT-079 — Role Match coverage gaps meta (track this story addition as it closes the "failure narrative" gap, whether by surfacing or by write)
 - **Logged:** May 28, 2026 (original); re-scoped May 28, 2026 (post-persona-review reconciliation)
+
+**Scope note (May 28, 2026):** Re-scoped; see the Reconciliation bullet above. Work shape is investigation first, then a conditional action.
 
 ---
 
@@ -845,7 +852,7 @@ Each detail block uses these fields. Not every field is required for every item.
 ### MATTGPT-096
 **Methodology context dropped during synthesis — TDD/BDD and ways-of-working substance gets compressed out of metric claims (hypothesis to verify)**
 
-- **Status:** Open — hypothesis to verify before fix
+- **Status:** Open
 - **Priority:** Medium
 - **Type:** Issue
 - **Issue:** Top-line corpus metrics (*"4x faster delivery," "zero production defects across 150 engineers," "82% reduction in defect-escape rate"*) are not standalone consulting-deck claims — they're outcomes produced by specific methodology (TDD, BDD, pair programming, hypothesis-driven development, "New Ways of Working" capability development). The methodology IS the story; the numbers are the proof. But when Agy synthesizes responses for queries about delivery acceleration, engineering practices, or transformation outcomes, the numbers tend to surface as headline claims while the methodology context that makes them credible gets compressed out. Result: numbers read as marketing-deck headers rather than evidence-of-substance.
@@ -877,6 +884,8 @@ Each detail block uses these fields. Not every field is required for every item.
   - MATTGPT-088 — Role Match scorer alignment (different surface; -096 is the Ask MattGPT chat side of related credibility concern)
   - CTO persona "metric hygiene" finding — adjacent but distinct fix path (footnotes vs methodology preservation)
 - **Logged:** May 28, 2026
+
+**Status note:** Hypothesis to verify before fix.
 
 ---
 
@@ -1074,9 +1083,11 @@ None of these stories is cited in the answer. This is the "retrieved, not cited"
 
 - **Status:** Open
 - **Priority:** Low
-- **Type:** Bug (test only)
+- **Type:** Bug
 - **Run note (August 16, 2026):** Single run showed 233 passed, no failure here -- consistent with this being a marathon-only timing issue (scenario 18 of 54, at ~31 min). Cannot disposition from a single run. Needs 3-4 repeated full-suite runs to characterize pass/fail distribution.
 - **Logged:** June 15, 2026
+
+**Scope note:** Test-only defect; no production code change.
 
 **Context:** `test_industry_and_capability_labels_visible_inline_on_mobile` fails in the full BDD suite marathon run (52 passed, 1 failed). The feature is correct in both local and production at 375px — Chrome Claude confirmed `st-key-facet_industry_v2`, `stWidgetLabel`, `display: flex`, `visibility: visible`, bounding rect 48x14px fully within viewport. The label is present and Playwright-visible in the live app.
 
@@ -1398,7 +1409,7 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 ### MATTGPT-244
 **Role Match assessor prompt calibration: cited evidence doesn't address the specific claim**
 
-- **Status:** Open
+- **Status:** In Progress
 - **Priority:** High
 - **Type:** Issue
 - **File:** `services/jd_assessor.py` (assessment prompt)
@@ -1507,7 +1518,7 @@ Full ranked 25 available from `probe_243_top_k_rank.py` (re-runnable against cur
 ### MATTGPT-250
 **Ask Agy cannot answer queries about education, certifications, or languages -- profile block missing from Ask Agy's system prompt**
 
-- **Status:** Open
+- **Status:** In Progress
 - **Priority:** High
 - **Type:** Issue
 - **File:** `services/rag_service.py` (`semantic_search` -- profile_facts return key), `ui/pages/ask_mattgpt/backend_service.py` (prompt consumption, citation rules), `load_matt_profile()` (loader format -- check location before touching)
@@ -1588,7 +1599,7 @@ Not fixed in PoC:
 **Ask Agy treats adjacent retrieved stories as evidence for the question asked**
 
 - **Status:** Open
-- **Priority:** [Matt]
+- **Priority:** High
 - **Type:** Issue
 - **Logged:** September 23, 2026
 
@@ -1717,7 +1728,7 @@ Scenarios by name:
 ### MATTGPT-160
 **JD extraction: split into three concurrent calls (required / preferred / implicit) to stabilize requirement count on long JDs**
 
-- **Status:** Open
+- **Status:** In Progress
 - **Priority:** High
 - **Type:** Bug
 - **File:** `services/jd_assessor.py` (`extract_requirements()`)
@@ -1813,11 +1824,13 @@ Scenarios by name:
 ### MATTGPT-168
 **Slot 1 is amplified without regard to margin -- tie or near-tie at slot 1 gets 80% of the answer**
 
-- **Status:** Open (rewritten August 13, 2026 -- original premise disconfirmed; see investigation below)
+- **Status:** Open
 - **Priority:** High
 - **Type:** Bug
 - **Files:** `ui/pages/ask_mattgpt/prompts.py` (primary-story floor instruction -- verify current location; may have moved since logged), `ui/pages/ask_mattgpt/backend_service.py` (`<primary_story>` XML wrapping in `_generate_agy_response()`)
 - **Logged:** August 5, 2026
+
+**Rewritten August 13, 2026:** Original premise disconfirmed; see investigation below.
 
 **Issue:** `ranked_stories[0]` is wrapped in `<primary_story>` and `prompts.py` requires at least 80% of the response to come from it, forbidding the model from building around a supporting story. Nothing in the pipeline checks whether slot 1's win was decisive. A story that leads by 0.000 gets the same treatment as one leading by 0.072.
 
@@ -2483,126 +2496,6 @@ Grep targets for Class 3: `except Exception: pass`, `except: pass`, bare `except
 
 
 
-### MATTGPT-218
-**"Why hire Matt?" collapses synthesis pool to 1 story; Title soft-filter missing from `get_synthesis_stories`**
-
-- **Status:** Done
-- **Priority:** High
-- **Type:** Bug
-- **File:** `services/rag_service.py` or `services/backend_service.py` (`get_synthesis_stories`)
-- **Logged:** August 28, 2026
-- **Resolved:** August 30, 2026 -- `040b785`
-
-**Root cause:** `f1285f1` (Jan 30, 2026) added Title-entity detection and made `rag_answer` treat a Title match as a soft filter -- pin the story, keep the pool. `get_synthesis_stories` was not updated; it kept treating Title like Client and applies it as a hard per-theme filter. Latent until February 3, when "Why Hire Matt?" was added to the corpus.
-
-**Symptom:** The query "Why hire Matt?" matches the substring in "Why Hire Matt?" and collapses the synthesis pool to that one story, returning a single source card. "Why should I hire Matt" does not match the substring and behaves normally with a 21-story pool. Same day, same code, different phrasing.
-
-**Fix:** Ported the existing soft-filter case from `rag_answer` into `get_synthesis_stories`. Also pinned `pool_size` in the `rag_answer` return dict. Q65 ("Why hire Matt?") added to eval suite.
-
-**Cross-references:** MATTGPT-214 (Class 2 audit -- this instance documents the Title rule as a rule applied in one path and missing in another).
-
----
-
-### MATTGPT-219
-**Score gate: out_of_scope rejection fires below HARD_ACCEPT, blocking five answerable queries including amex since March**
-
-- **Status:** Done
-- **Priority:** High
-- **Type:** Bug
-- **File:** `rag_answer()` in `backend_service.py` (hard-stop at the out-of-scope response)
-- **Logged:** August 30, 2026
-- **Resolved:** August 30, 2026 -- `b8bd59b`
-
-**Rescoped August 30, 2026.** Original framing was a misroute fix dependent on -220's taxonomy cleanup. The actual fix is smaller and independent: a single score gate, no taxonomy change.
-
-**Confirmed live in production (August 30, 2026):** Five queries hard-stop in `rag_answer()` in `backend_service.py` with the canned "I don't have experience in that industry" response. All five are answerable from the corpus:
-- "Tell me about Matt's amex work" -- 0.696 (failing since 2026-03-24, five months)
-- "Tell me about Matt's AT&T work" -- 0.666
-- "Tell me about Matt's Norfolk Southern work" -- 0.624
-- "Has Matt run on-call rotations?" -- 0.546
-- "Tell me about Matt's experience with raspberry pi" -- 0.611
-
-None clear 0.80. A rejection that ignores its own confidence is a bug on its own terms.
-
-**Fix:** Do not fire the out_of_scope rejection unless the score clears `HARD_ACCEPT`. One condition. This does not touch the taxonomy.
-
-**Three tests xfailed against this ticket** (amex, AT&T, Norfolk Southern in `THRESHOLD_TEST_QUERIES`). All go XPASS when the gate ships.
-
-**Context -- log analysis (August 30, 2026):** Across twelve months of production, eight visitor questions the corpus could have answered and did not. Six were fixed by targeted work before today. The remaining two are these score gate cases.
-
-**Known limitation (no ticket):** "Tell me more about the Pivotal Labs partnership" retrieves cleanly at 0.423 and returns a fluent paragraph about Accenture's Georgia Tech innovation hub. It never fabricates a Pivotal relationship, and it never says it does not have one. Pivotal is a deliberate corpus gap. The answer is confidently non-responsive -- a third category, not a routing bug, not a corpus gap to fill, and not fixable by a threshold. Recorded here as a known limitation rather than a ticket.
-
-**HSBC / taxonomy note (not this ticket):** HSBC routes to domain_payments, which is in `_PN_EXCLUDED_FAMILIES`, stripping positioning stories for a reason unrelated to HSBC. That behavior is addressed by MATTGPT-220's commit 2 (rewire `_PN_EXCLUDED_FAMILIES` to entity-detection). The score gate here does not change that behavior.
-
----
-
-### MATTGPT-220
-**Router topical taxonomy: 9 of 11 families serve only two set-membership lines; replace with corpus-derived rules**
-
-- **Status:** Done
-- **Priority:** High
-- **Type:** Refactor
-- **Logged:** August 30, 2026
-- **Resolved:** August 30, 2026 -- inventory complete; remediation plan documented in this block and handed to Code
-
-**Inventory (August 30, 2026):**
-
-The intent anchors dict in `services/semantic_router.py` holds 15 hand-typed anchor families. `_classify_embedding()` in `semantic_router.py` flattens every anchor into one dict, takes a global argmax, and reports whichever family the winning anchor belongs to. The family label is a byproduct of the argmax, not a per-family contest.
-
-Of the 11 topical families:
-
-| Count | Families | Consumer |
-|---|---|---|
-| 3 | `leadership`, `stakeholders`, `innovation` | none -- telemetry only |
-| 6 | `technical`, `delivery`, `team_scaling`, `agile_transformation`, `domain_payments`, `domain_healthcare` | the two set-membership tests only |
-| 2 | `background`, `behavioral` | real branches (`diversify_results()` in `backend_service.py`; `is_trusted_behavioral` (local variable in `rag_answer()`)) |
-
-The two sets, verbatim:
-- `SUBSTITUTION_FAMILIES` = `{technical, team_scaling, agile_transformation}` -- `config/constants.py:73`
-- `_PN_EXCLUDED_FAMILIES` in `backend_service.py`
-
-Union = the 6 topic-axis families exactly. `technical` and `agile_transformation` are in both.
-
-Six hand-maintained families of anchor strings exist to evaluate two set-membership lines, and three exist to be written to a log column. Nothing reads a topical family for its topic.
-
-**Why the HSBC case looks like a misroute but isn't -- and why it still matters:**
-`domain_payments` anchors include "financial services" and "banking" in `semantic_router.py`, so an HSBC query lands there. Nothing branches on topic, so the wrong label causes no topic error -- but `domain_payments ∈ _PN_EXCLUDED_FAMILIES`, so positioning stories are stripped from the pool for a reason unrelated to HSBC. HSBC's own record (Industry: Financial Services / Banking, Sub-category: Technology Strategy & Advisory Services) is never consulted.
-
-Both list memberships are proxies for questions the code never asks directly:
-- `_PN_EXCLUDED_FAMILIES` wants: should a summary count as evidence for this query?
-- `SUBSTITUTION_FAMILIES` wants: what voice should the answer use?
-
-**Caveat on corpus-field substitution:** Field-existence is not classification. No single corpus field substitutes directly: Theme has 7 values (5 map), Category puts 86/123 stories in one bucket, Industry puts 57/123 in "Cross Industry". The anchors are a bridge into the taxonomy, built without reading the labels on the far side. The right replacement is a rule that asks the right question, not a field lookup.
-
-**Plan -- Option B (stop classifying topic):**
-
-Prerequisite: replay diff. Run borderline log, off-domain log, and eval suite through the reduced anchor pool and diff family assignments. Embeddings only, cache hit, no LLM. Because the argmax is global, removing anchors makes affected queries fall to their second-best anchor (necessarily a query-shape family that branches). The 0.8 floor is safe -- the pool only shrinks and behavioral anchors stay -- but risk is silent reclassification, not recalibration. Result may reshape commit 3.
-
-**Commit 1:** Delete the 3 inert families (`leadership`, `stakeholders`, `innovation`). No consumer for the label; no rule-behavior change. Their anchor strings still compete in the argmax, so same replay hygiene applies at smaller scale.
-
-**Commit 2:** Rewire the two rules to their real question. This is the only commit with a behavior change.
-
-`_PN_EXCLUDED_FAMILIES` -- replace with entity-detection rule: if the query names a real Client / Employer / Division, it is an evidence query and summaries are excluded; otherwise summaries are eligible. Detection already exists via `ENTITY_DETECTION_FIELDS` in `config/constants.py` against corpus values. Corpus-derived, not hand-typed. Also fixes the MATTGPT-219 symptoms head-on: "what did Matt do at HSBC?" names an entity, so the exclusion fires for the right reason.
-
-Fallback if no entity is detected: surviving-family membership (`background`, `narrative`, `personal`, `synthesis` are about-Matt shapes; unknown defaults to evidence-mode). This reintroduces a hand-maintained set at smaller scale; replay diff is the gate for choosing members honestly.
-
-`SUBSTITUTION_FAMILIES` -- whether this should be unconditional is measurable, not a judgment call. Rerun `probe_163_substitution_impact.py` with substitution applied to every query instead of the three gated families and compare. Do this alongside the replay diff.
-
-**Commit 3:** Remove the 6 topic-axis families. Only a deletion once nothing reads the labels; shape depends on the replay diff.
-
-**Anchors surviving:** `background`, `behavioral`, `synthesis`, `narrative`, `personal`, `out_of_scope` -- the query-shape axis, which has no corpus field to derive from and is legitimately hand-maintained.
-
-**Not findings (legitimately hand-maintained or orthogonal):**
-`nonsense_filters.jsonl`, `INVALID_INTENTS`, `EXCLUDED_THEMES`, `EXCLUDED_DIVISION_VALUES`, `META_COMMENTARY_PATTERNS`, `MONITORING_BOT_SIGNATURES`. `ENTITY_ALIASES` is partly derivable (~7 of 10 follow initials / drop-ampersand rules on canonical Client/Division values); the rest are true nicknames -- separate, smaller ticket.
-
-**Reference models doing this right:** `SYNTHESIS_THEMES` (reads Theme at boot), `_KNOWN_CLIENTS` (reads Client through a pattern rule), `get_narrative_titles()`, `_CAREER_*_YEAR`, `CAPABILITY_SUBTITLES` (derived key universe + curated prose).
-
-**Cross-references:** MATTGPT-219 (symptoms that resolve through commit 2 of this plan).
-
----
-
----
-
 ### MATTGPT-222
 **Three operational alarms: zero-score, anchor-cache drift, out_of_scope on known entity**
 
@@ -2694,6 +2587,16 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 1. Delete the 3 inert families (`leadership`, `stakeholders`, `innovation`) from anchors and `VALID_INTENTS`.
 2. Rewire `_PN_EXCLUDED_FAMILIES` and `SUBSTITUTION_FAMILIES` to ask their real question directly (entity-detection or unconditional), measured by `probe_163_substitution_impact.py`.
 3. Remove the 6 topic-axis families after replay diff confirms safe redistribution.
+
+**Carried from MATTGPT-220 (closed August 30, 2026; block removed from backlog in the September 29, 2026 sync):**
+
+Prerequisite: replay diff. Run borderline log, off-domain log, and eval suite through the reduced anchor pool and diff family assignments. Embeddings only, cache hit, no LLM. Because the argmax is global, removing anchors makes affected queries fall to their second-best anchor (necessarily a query-shape family that branches). The 0.8 floor is safe -- the pool only shrinks and behavioral anchors stay -- but risk is silent reclassification, not recalibration. Result may reshape commit 3.
+
+Commit 2 detail: `_PN_EXCLUDED_FAMILIES` -- replace with entity-detection rule: if the query names a real Client / Employer / Division, it is an evidence query and summaries are excluded; otherwise summaries are eligible. Detection already exists via `ENTITY_DETECTION_FIELDS` in `config/constants.py` against corpus values. Corpus-derived, not hand-typed. Also fixes the MATTGPT-219 symptoms head-on: "what did Matt do at HSBC?" names an entity, so the exclusion fires for the right reason.
+
+Fallback if no entity is detected: surviving-family membership (`background`, `narrative`, `personal`, `synthesis` are about-Matt shapes; unknown defaults to evidence-mode). This reintroduces a hand-maintained set at smaller scale; replay diff is the gate for choosing members honestly.
+
+**Caveat on corpus-field substitution:** Field-existence is not classification. No single corpus field substitutes directly: Theme has 7 values (5 map), Category puts 86/123 stories in one bucket, Industry puts 57/123 in "Cross Industry". The anchors are a bridge into the taxonomy, built without reading the labels on the far side. The right replacement is a rule that asks the right question, not a field lookup.
 
 **Critical constraint on commit 3:** Removing any anchor redistributes queries onto the global argmax runner-up. The out_of_scope anchors are the negative complement of the topical ones -- straight deletion misroutes ~474 payments queries to a canned rejection (confirmed by replay against borderline and offdomain logs). Commit 3 requires a fresh replay diff rerun before it ships.
 
@@ -2829,51 +2732,6 @@ Stale file in repo root. No callers, no CI reference. Remove.
 **What to capture in the next reproduction:** Network waterfall, `st.session_state` at the moment of the flash, which path set `active_tab`, and whether a `?story=` param appears transiently in the URL.
 
 **Not for now.** File is insurance against the sequence being hard to reproduce.
-
----
-
-### MATTGPT-225
-**Landing page chat input border lost sporadically: emotion atomic classes land on `<input>` and override border-color transparent**
-
-- **Status:** Done
-- **Priority:** High
-- **Type:** Bug
-- **File:** CSS rule group in `ui/styles/global_styles.py` or `ui/pages/ask_mattgpt/styles.py`
-- **Logged:** August 30, 2026
-- **Resolved:** August 31, 2026 -- shakeout complete, six-of-six per spec
-
-**Root cause (confirmed in DevTools, August 30, 2026):**
-
-Computed border on the landing page chat input is `2px solid rgba(0,0,0,0)` -- width is present, color is transparent. Three `!important` rules match the input; the transparent killer wins:
-
-- `div[data-testid="stTextInput"] input` -- `border: 2px solid var(--border-color)` (specificity 0,1,2)
-- `.st-key-landing_input .st-bz, .st-c0, .st-c1, .st-c2` -- `border-*-color: transparent` (specificity 0,2,0) -- **wins**
-
-`--border-color` resolves correctly to `#E5E7EB`. The intended rule is fine. The transparent killer is targeting Streamlit's emotion atomic classes, and those hashes now sometimes land directly on the `<input>` element rather than on the wrapper. When they do, the transparent override strips the border. When they do not (prior builds, or some renders), the rule only hits the wrapper and the border survives.
-
-**Why it's sporadic:** Emotion atomic class hashes get reshuffled on Streamlit version bumps and can move between elements. The rule was written against a class layout that no longer consistently holds.
-
-**Proof:** Injecting `.st-key-landing_input div[data-testid="stTextInput"] input { border: 2px solid var(--border-color) !important }` flipped computed `borderColor` to `rgb(229,231,235)` and the border rendered. Probe removed, page left clean.
-
-**Fix:** Delete the `.st-bz/.st-c0/.st-c1/.st-c2` selector group. Replace with stable `data-baseweb` selectors that cover its one legitimate purpose (stripping BaseWeb wrapper chrome):
-
-```css
-.st-key-landing_input div[data-baseweb="input"],
-.st-key-landing_input div[data-baseweb="base-input"],
-.st-key-landing_input div[data-baseweb="input"]:hover,
-.st-key-landing_input div[data-baseweb="input"]:focus-within {
-    border: none !important;
-    background: transparent !important;
-}
-
-.st-key-landing_input div[data-testid="stTextInput"] input {
-    border: 2px solid var(--border-color) !important;
-}
-```
-
-**Pre-flight before touching the file:** identify the current line(s) holding the `.st-bz/.st-c0/.st-c1/.st-c2` group. Verify no other rule in the file targets the same hashes for a different purpose. The fix scope is narrow -- do not disturb other sections of the landing input CSS block.
-
-**CLAUDE.md rule this violates:** "Streamlit class names like `st-emotion-cache-*` change between versions -- target `data-testid` or `.st-key-*` instead." The `st-XX` two-character hashes are the same class of build artifact; they drift on version bumps.
 
 ---
 
@@ -3015,6 +2873,11 @@ Two more inert-selector patterns confirmed during the -242 dark-mode scan:
 
 ---
 
+### Decided Against
+
+> **Read only -- do not add blocks here directly.**
+> Blocks are moved here from Active Tickets above when a ticket's status changes to Decided Against. New tickets always start in Active Tickets. See CLAUDE.md § Backlog Maintenance for the full lifecycle.
+
 ### MATTGPT-200
 **top_per_theme=3 caps synthesis pool when all entity stories share one Theme; AT&T returns 3 of 6 stories**
 
@@ -3039,11 +2902,6 @@ Two more inert-selector patterns confirmed during the -242 dark-mode scan:
 **Acceptance criterion:** "What did Matt do at AT&T?" synthesis pool includes all 6 AT&T stories (or at minimum the top-pc stories are not excluded by a theme uniformity artifact).
 
 ---
-
-### Decided Against
-
-> **Read only -- do not add blocks here directly.**
-> Blocks are moved here from Active Tickets above when a ticket's status changes to Decided Against. New tickets always start in Active Tickets. See CLAUDE.md § Backlog Maintenance for the full lifecycle.
 
 ### MATTGPT-221
 **Environment stamp on every log write: add Env column to query_logger.py, archive existing CSVs**
