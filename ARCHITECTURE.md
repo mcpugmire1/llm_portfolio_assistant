@@ -83,7 +83,7 @@
 **Project:** MattGPT Portfolio Assistant - AI-powered career story search and chat interface
 **Tech Stack:** Streamlit, OpenAI GPT-4o, Pinecone vector DB, Python 3.11+
 **Data Corpus:** 100+ STAR-formatted transformation project stories
-**Last Updated:** September 24, 2026
+**Last Updated:** September 29, 2026
 
 ### What This Document Contains
 
@@ -263,7 +263,7 @@ Reusable UI components shared across multiple pages.
 | **why_agy_dialog.py** | "Why Agy?" identity + origin story | Ask MattGPT, Home footer | `render_why_agy_dialog()` |
 | **how_agy_dialog.py** | "How Agy Searches" 3-step RAG flow | Ask MattGPT, Home footer | `render_how_agy_dialog()` |
 | **how_i_built_dialog.py** | "How I Built MattGPT" technical deep-dive — architecture, pipeline, CTA chips → Ask Agy | Ask MattGPT, Home footer | `render_how_i_built_dialog()` |
-| **thinking_indicator.py** | Animated loading indicator | Ask MattGPT, Explore Stories | `render_thinking_indicator()` |
+| **thinking_indicator.py** | Animated loading indicator. `mount="overlay"` (default): fixed modal + backdrop scrim. `mount="inline"`: in-flow, no scrim; `.thinking-inline` in `global_styles.py` resets position and restates flex layout; the mobile `.thinking-modal` rule is scoped `:not(.thinking-inline)` | Ask MattGPT, Explore Stories (overlay); Role Match (inline) | `render_thinking_indicator(message=None, mount="overlay")` |
 
 **story_detail.py Key Pattern:**
 ```python
@@ -1289,13 +1289,21 @@ with st.container(key="r2_row"):
 
 ```
 JD Input
-  → Stage 1: Extraction          gpt-4o, one call
+  → Stage 1: Extraction          gpt-4o, three section-scoped calls in two waves
   → Stage 2: Retrieval           Pinecone per requirement, DEFAULT_TOP_K = 5
   → Stage 3: Assessment          gpt-4o, one call per requirement; parallelized via asyncio
   → compute_recommendation()     Aggregates verdicts to Strong / Likely / Partial / Gap
 ```
 
-Stage 3 is parallelized via `asyncio.as_completed` at `_CONCURRENCY = 10`, wrapping the sync OpenAI and Pinecone clients with `asyncio.to_thread`. Measured on the AT&T JD at DEFAULT_TOP_K=5, three runs each: sequential mean 125.5s, parallel mean 31.0s (`jd_assessor.py:204-214`). The pre-243 sequential implementation is in git history (recoverable via revert if the parallel path ever needs to be undone); not a live fallback.
+Stage 1 runs through `extract_requirements()` → `_extract_all_sections()`. Wave 1 runs `_call_required` and `_call_preferred` concurrently via `asyncio.gather`; the required call also returns the JD-level metadata (role_title, company, jd_format, key_responsibilities). Wave 2 runs `_call_implicit`, with the wave 1 lists injected into its user message so its dedup rule can check them. If any section call raises, the error leaves `extract_requirements`. Wave 2 never starts when wave 1 fails. The wave 1 siblings are cancelled and then drained with a `return_exceptions=True` gather; the drain is the load-bearing part, because `to_thread` workers can't be cancelled from outside. Each prompt constant (`_REQUIRED_EXTRACTION_PROMPT`, `_PREFERRED_EXTRACTION_PROMPT`, `_IMPLICIT_EXTRACTION_PROMPT`) has a `=== SECTION: <name> ===` marker line that tests use to classify calls. `JD_EXTRACTION_PROMPT` stays only as the pre-split reference for historical probes; production doesn't use it. The return shape didn't change: three requirement lists, key_responsibilities, role_title, company, jd_format. `seniority_signals` was dropped (no consumer). `key_responsibilities` was kept (the planned responsibilities output in ADR 016, not consumed yet).
+
+Stage 3 is parallelized via `asyncio.as_completed` at `_CONCURRENCY = 10` in `_fan_out_assessments`, wrapping the sync OpenAI and Pinecone clients with `asyncio.to_thread`. Measured on the AT&T JD at DEFAULT_TOP_K=5, three runs each: sequential mean 125.5s, parallel mean 31.0s. The pre-243 sequential implementation is in git history (recoverable via revert if the parallel path ever needs to be undone); not a live fallback.
+
+#### Requirement Text: Flatten and Passthrough
+
+`_flatten_extraction()` is the one place that turns the extraction dict into the submission-ordered requirement list. Both `run_assessment` (used by `scripts/assess_jd.py`) and the Role Match page call it. Required and preferred rows use `source_text` as their `text`, falling back to `requirement` if it's missing. Implicit rows use `requirement`, not `inferred_from`, and get `category="required"`. The required and preferred prompts tell the model to copy `source_text` as the entire JD bullet or sentence, verbatim and complete. On Sept 20 a matched-sample probe on the same JD compared the old and new instruction: truncations went from 23/85 to 0/85. So the assessor now sees full JD bullets on required and preferred, parentheticals included. Check source_text fidelity with exact match against JD lines, not substring containment; a truncated span still passes a containment check.
+
+`_assess_one_with_index` overwrites `assessment["requirement"]` with the input `req["text"]` on the success path. The input text is what gets displayed, and any paraphrase from the assess LLM is discarded. Mode 1 and 2 unassessed rows already use `req["text"]`. Share text and export read `requirement` off the row, so all surfaces show the same string within a run. Verdict fields (`match_status`, evidence, `gap_explanation`) are still whatever the assess LLM returned.
 
 #### Retrieval Parameters
 
@@ -1314,6 +1322,27 @@ Four failure modes at `_assess_one_with_index`, each with a distinct log phrase 
 
 Unassessed row shape (Mode 1/2): `match_status="unassessed"`, `category` and `requirement` from source, empty evidence, per-mode `gap_explanation`.
 
+#### Progressive Row Rendering (MATTGPT-245)
+
+The Role Match page doesn't call `run_assessment`. Its submit branch calls `extract_requirements` → `_flatten_extraction` → `_fan_out_assessments(..., on_row=...)` directly, and draws in between:
+
+1. In-flow thinking indicator (`mount="inline"`) while extraction runs
+2. Hide the indicator and height anchor
+3. Pre-fanout render: `_render_results_header(payload, include_actions=False)`, `_build_legend_screen_html()`, `_build_location_screen_html_with_style()`
+4. One `st.empty()` slot per requirement, seeded with `_render_pending_row_html()`: a hollow 22px `--accent-purple` ring with a pulsing opacity and `--text-secondary` text. The ring has the same footprint as the resolved badge, so nothing moves when it resolves. It has no status badge, chips or unassessed glyph, so pending looks different from the unassessed end state.
+5. The fan-out runs with an `on_row` closure that rewrites `slot[index]` with badge and text only. Evidence chips and gap explanation wait for the stable render.
+6. Persist `role_match_result`, render `_build_summary_screen_html(result)` under the filled rows, then `st.rerun()`
+
+**`on_row` contract:** optional `on_row(index, assessment)` on `_fan_out_assessments`. It fires in completion order with the submission index, after the result is stored. Mode 1 and Mode 2 unassessed rows fire it too, so no slot stays pending. The return value doesn't depend on whether `on_row` is passed. The callback is a plain callable, so the service layer stays free of Streamlit. An exception raised inside `on_row` propagates out of the loop.
+
+**Shared build helpers:** `_build_legend_screen_html`, `_build_summary_screen_html` and `_build_location_screen_html_with_style` return plain strings. Both the interleaved submit path and `_render_results_panel` use them.
+
+**In-progress guards:** `_handle_submit_click` sets `role_match_assessment_in_progress` only when the gate passes, so a rejected visitor can still click Clear. `_consume_assessment_in_progress_flag()` pops the flag rather than reading it; if it were a get, the flag would persist and the controls would stay disabled after the first assessment. For the pass right after a passing submit, Clear, Submit and the JD textarea get `disabled=`, and the Helpful/Share/Export actions are left out (`include_actions=False`); a click during the fan-out would rerun and abandon the assessment partway. Explicit `:disabled` CSS rules (opacity 0.4, `cursor: not-allowed`, `!important`) bring back the disabled look, which the buttons' own `!important` site rules were hiding.
+
+**Post-success rerun is required:** the pass that runs the assessment is also the pass that consumed the flag as True and drew the controls disabled. Without a closing `st.rerun()`, the controls stay disabled and the Submit label never changes to "Update Match". Success and failure both end with a rerun. `_role_match_click_start_pending` carries the click timestamp across that rerun, so click-to-render telemetry still covers the whole span.
+
+**Guards must reach the DOM:** twice (Sept 19), a guard was correct in code but didn't show on the page: CSS hid the disabled state, and `include_actions=False` was never passed at the one call site that needed it. Unit tests don't reach the DOM, so any new guard on this page needs a browser check.
+
 #### Assessment Grounding (load_matt_profile)
 
 `load_matt_profile()` emits **education, certifications, languages, and Location & Availability**. Each education entry renders on its own line so per-entry notes stay attached to the degree they describe. Certifications are structured `{name, issued, expired}` records, rendered via `certification_sentence()`. Languages are `{language, level}` records, rendered as "Language (level)". Location & Availability lines come from `profile["logistics"]` via `PROFILE_LOCATION_AVAILABILITY_FIELDS`, one line per populated field. It reads through `services.matt_profile.load_profile_dict()`, which raises on failure; `role_match._load_matt_profile_dict()` wraps it in try/except. It does NOT emit the skills array or career_summary:
@@ -1331,7 +1360,7 @@ Both removals enforce the same principle: grounding must come from retrieved cor
 
 #### Known Defects
 
-1. **Extraction drops qualifying clauses:** On paragraph-format JDs, extraction coarsens requirements and drops qualifiers. Observed examples from the demo JD: "including hands-on development earlier in career," "AWS, Azure, or GCP," "in production environments without business disruption." On bulleted JDs this is rare (1-2 drops vs. 7 on the demo JD). Verdicts are therefore scored against softer requirements than the JD states.
+1. **Extraction drops qualifying clauses:** On paragraph-format JDs, extraction coarsens requirements and drops qualifiers. Observed examples from the demo JD: "including hands-on development earlier in career," "AWS, Azure, or GCP," "in production environments without business disruption." On bulleted JDs this is rare (1-2 drops vs. 7 on the demo JD). Verdicts are therefore scored against softer requirements than the JD states. Since Sept 20, required and preferred rows reach the assessor as verbatim JD bullets (see Requirement Text: Flatten and Passthrough), so the assessor sees those qualifiers. The `requirement` field itself is still compressed, and implicit rows are inferred text by design.
 2. **No extraction validation gate:** Stage 2 and 3 run on whatever Stage 1 returns. There is no schema check or minimum-requirement count guard before retrieval begins.
 
 #### Probe Harness (probe_assessor.py)
@@ -1433,6 +1462,12 @@ Central reference for all session state keys used across the application.
 | Key | Type | Purpose |
 |-----|------|---------|
 | `active_tab` | `str` | Current page ("Home", "Explore Stories", "Ask MattGPT", "About Matt") |
+
+**Role Match Keys:**
+| Key | Type | Purpose |
+|-----|------|---------|
+| `role_match_assessment_in_progress` | `bool` | Set on passing submit; popped by `_consume_assessment_in_progress_flag()` to disable Clear/Submit/textarea for one pass |
+| `_role_match_click_start_pending` | `float` | Click timestamp carried across the post-success rerun; popped at the telemetry emit site |
 
 ---
 
@@ -1710,7 +1745,7 @@ Rule 0a instructs the LLM to place `[[profile:<category>]]` on its own line befo
 
 `_sources_layout(categories, sources, is_synthesis)` in `conversation_helpers.py` returns `{"show_label": True, "fact_cards": list(categories), "story_count": min(len(sources), cap)}`. Fact cards do not count toward the story cap.
 
-`_fact_card_html(category)` renders one full-width card per cited category. Label: "From Matt's profile · <display name>" (from `PROFILE_FACT_DISPLAY_NAMES`). Entries are in a two-column grid via `_fact_card_entries()`, which reads directly from the profile dict (not from the answer text). The render call site wraps in try/except; `logger.exception` logs the failure and skips the cards rather than breaking the transcript.
+`_fact_card_html(category)` renders one full-width card per cited category. Label: "From Matt's profile · <display name>" (from `PROFILE_FACT_DISPLAY_NAMES`). Entries come from `_fact_card_entries()`, which reads directly from the profile dict (not from the answer text). Education entries show the degree as the primary line, then the institution and the entry's `note` when it has one, both in the text-secondary style. The outer div has class `fact-card` and the grid has class `fact-card-grid`. The grid is two columns inline. At 767px and below, a rule in the Sources `<style>` block in `_render_ask_transcript` stacks it to one column (`grid-template-columns: 1fr !important`) and adds `margin-top: 8px` under SOURCES. Desktop is unchanged. The render call site wraps in try/except; `logger.exception` logs the failure and skips the cards rather than breaking the transcript.
 
 **Why This Architecture:** BASE_PROMPT + DELTA separates universal voice rules from contextual variations. Each module has a single job: `build_system_prompt()` selects the mode-appropriate delta, `build_user_message()` injects story context and response instructions, and `get_verbatim_requirement()` enforces identity-phrase fidelity. The result is a prompt that can't contradict itself -- Agy's role as messenger (not evaluator) is structurally enforced.
 
@@ -1900,7 +1935,7 @@ META_PATTERNS = [
 - `semantic_search()` (Ask Agy path) -- returns `{"results": [], "confidence": "none", "top_score": 0.0}` on Pinecone error. A caller on this path cannot distinguish an outage from a query that genuinely returned no matches; both surfaces as `confidence: "none"`.
 - `get_synthesis_stories()` → Returns empty list on error
 - `retrieve_stories()` (Role Match path) -- propagates `None` on Pinecone outage; returns `[]` on real empty match. See Partial Failure Handling in the Role Match section.
-- `_handle_assessment_error` (`ui/pages/role_match.py:185`, Mode 4) -- logs via `logger.warning` with error class name, writes a `role_match_assessment` Sheet row with `failure_type="retrieval_failed"` and all counts zero, returns retryable or not-retryable banner string. Never leaks `str(e)` into the returned message.
+- `_handle_assessment_error` (`ui/pages/role_match.py`, Mode 4) -- logs via `logger.warning` with error class name, writes a `role_match_assessment` Sheet row with `failure_type="retrieval_failed"` and all counts zero, returns retryable or not-retryable banner string. Never leaks `str(e)` into the returned message.
 
 **Layer 4 (Confidence Gate):**
 - `confidence == "none"` → Returns "I couldn't find relevant stories" message
@@ -2542,9 +2577,9 @@ When a new class is needed for an element that lives alongside an element that a
 Some surfaces render both to the themed Streamlit app (which mounts `global_styles.py` and swaps CSS variables on `body.dark-theme`) and to a standalone HTML document (the Role Match export, which ships with its own `<style>` block and no `:root`). A bare hex color works only on the export; a bare `var(--token)` reference works only on the screen. The fallback form `var(--token, #hex)` resolves to the CSS variable on the themed surface (picking up the dark-mode swap) and falls back to the literal on the unthemed surface. One rule serves both surfaces without duplication.
 
 **Instances:**
-- `_STATUS_BADGE_STYLE` in `ui/pages/role_match.py`: status-badge fill/glyph colors (`var(--success-color,#10B981)`, etc., no space after comma -- code convention for this constant). Rendered via `build_legend_entries` (line 811) as an inline-styled HTML `<span>` badge (circular background, glyph character; no SVG). One shared render path via `build_legend_entries` serves both screen panel and export HTML.
-- `_STATUS_TEXT_COLOR` in `ui/pages/role_match.py` (lines 368-373): verdict text colors (`var(--success-color,#10B981)`, `var(--warning-color,#F59E0B)`, `var(--error-color,#EF4444)`, `var(--text-secondary,#6B7280)`). Consumed at line 718 (in-conversation status text) and line 780 (Discussion Points fallback color). Same no-space convention as `_STATUS_BADGE_STYLE`.
-- `_LOCATION_BLOCK_CSS` in `ui/pages/role_match.py`: the Location & Availability block's background, borders, and text colors (`var(--bg-surface, #F9FAFB)`, `var(--text-primary, #1F2937)`, etc., space after comma -- this constant's convention differs from the two above). Consumed by both the screen panel injection (via `st.markdown` `<style>`, line 1547) and the export template's style block (via f-string interpolation, line 1335).
+- `_STATUS_BADGE_STYLE` in `ui/pages/role_match.py`: status-badge fill/glyph colors (`var(--success-color,#10B981)`, etc., no space after comma -- code convention for this constant). Rendered via `build_legend_entries` as an inline-styled HTML `<span>` badge (circular background, glyph character; no SVG). One shared render path via `build_legend_entries` serves both screen panel and export HTML.
+- `_STATUS_TEXT_COLOR` in `ui/pages/role_match.py`: verdict text colors (`var(--success-color,#10B981)`, `var(--warning-color,#F59E0B)`, `var(--error-color,#EF4444)`, `var(--text-secondary,#6B7280)`). Consumed by `_count_spans()` (the summary's colored verdict counts) and `_dp_lines()` (Discussion Points gap and partial line colors). Same no-space convention as `_STATUS_BADGE_STYLE`.
+- `_LOCATION_BLOCK_CSS` in `ui/pages/role_match.py`: the Location & Availability block's background, borders, and text colors (`var(--bg-surface, #F9FAFB)`, `var(--text-primary, #1F2937)`, etc., space after comma -- this constant's convention differs from the two above). Consumed by both the screen panel injection (via `_build_location_screen_html_with_style()`) and the export template's style block (via f-string interpolation in `_build_export_html`).
 
 Note: `_STATUS_BADGE_STYLE` and `_STATUS_TEXT_COLOR` write `var(--token,#hex)` with no space after the comma; `_LOCATION_BLOCK_CSS` writes `var(--token, #hex)` with a space. CSS parses both identically, but a reader searching the codebase for the exact string in this doc will miss one or the other depending on which form they search for.
 
@@ -2552,7 +2587,7 @@ Note: `_STATUS_BADGE_STYLE` and `_STATUS_TEXT_COLOR` write `var(--token,#hex)` w
 
 **`_render_location_block_html` -- dual-caller constraint:**
 
-Renamed from `_render_location_block_export_html` before the second caller landed. Called from both the export template and the screen panel. The screen call concatenates the block into the same `st.markdown` call as the summary panel -- do not split them into separate calls. Total markdown call count on this page affects layout (the negative margin tuning described in Streamlit Markdown Call Count Affects Layout applies here); adding a call shifts subsequent elements.
+Renamed from `_render_location_block_export_html` before the second caller landed. Called from both the export template and the screen panel. In `_render_results_panel` the location block and summary are joined into one `st.markdown` call. Don't split them. The interleaved submit path renders the location block before the fan-out and the summary after it, as separate calls, because the pending rows sit between them. Total markdown call count on this page affects layout (the negative margin tuning described in Streamlit Markdown Call Count Affects Layout applies here); adding a call shifts subsequent elements.
 
 **`.loc-block .section-title` intentional margin override:**
 
