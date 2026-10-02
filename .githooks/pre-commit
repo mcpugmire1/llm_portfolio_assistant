@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Repo pre-commit checks. Checks added lines only, so existing content is not retroactively blocked.
+EMDASH=$(printf '\342\200\224')
+status=0
+
+while IFS= read -r f; do
+  [ -z "$f" ] && continue
+  added=$(git diff --cached -U0 --no-color -- "$f" | grep '^+' | grep -v '^+++')
+  [ -z "$added" ] && continue
+  if printf '%s\n' "$added" | grep -Fq -e "$EMDASH"; then
+    echo "pre-commit: em dash in added lines of $f. Use a colon, comma, or rewrite." >&2
+    status=1
+  fi
+  case "$f" in
+    ui/*|app.py)
+      if printf '%s\n' "$added" | grep -Eq -e 'st-emotion-cache|\.st-[a-z][a-z0-9]([^a-z0-9-]|$)'; then
+        echo "pre-commit: dynamically-hashed Streamlit class in added lines of $f. Target data-testid, data-baseweb, or .st-key-* (CSS Rule 5)." >&2
+        status=1
+      fi
+      ;;
+  esac
+done < <(git diff --cached --name-only --diff-filter=ACM)
+
+if git diff --cached --name-only | grep -qx 'CLAUDE.md'; then
+  lines=$(git show :CLAUDE.md | wc -l | tr -d ' ')
+  if [ "$lines" -gt 200 ]; then
+    echo "pre-commit: CLAUDE.md is $lines lines; the budget is 200. Cut before adding (mattgpt-rules-maintainer skill)." >&2
+    status=1
+  fi
+fi
+
+exit $status

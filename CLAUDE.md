@@ -9,6 +9,7 @@ Read these before every session. Each one has caused a real incident.
 - **Before citing a constraint as the reason for an approach, verify the constraint exists in the actual file.** Show the evidence. If the constraint doesn't exist, use the simplest direct substitution: f-string with the constant inline. (June 2026: .replace() pattern built for a CSS brace problem that affected 3 lines, not 4000.)
 - **Push is a separate gate from commit, always.** `git push origin main` triggers a production deploy on Streamlit Cloud. A commit approval is not a push approval. Stop after committing and wait for an explicit "push" instruction. Never chain `git commit && git push`. (April 2026)
 - **Tests before any implementation code, no exceptions.** BDD for UI behavior; unit tests for pure functions and scripts. See Testing Protocol for the right shape and Red-Green discipline for each. (May 2026)
+- **Subtract before you add, in the answer pipeline.** Before adding a prompt clause, post-processing step (regex strip, bolding), or gate: read ARCHITECTURE.md's record of removed layers, confirm the output is actually wrong rather than just changed, name the observed failure, check whether the fix belongs in the data instead (`matt_profile.json` or the story corpus), and show a live acceptance run that fixes it, including the story controls it wasn't written for (see Testing Protocol). When one causes a new failure, try removing it before adding an exception. (Jan-Feb 2026: the Entity Gate, `classify_query_intent`, and the banned-phrases list were each added to fix observed output and later backed out. Sept 2026, MATTGPT-250: rule 0a and the strip list grew clause by clause. The CS degree answer began leading with a no that Role Match doesn't give, likely from the direct-no clause written for PMP (not isolated). Rewording the AIU note in `matt_profile.json` got the full equivalence into the answer; the leading no is still open.)
 - **Paste literal test output at every gate, never self-summarize.** "Looks good, ready to commit?" is not a gate. Paste the literal `pytest` output before requesting commit approval at every Red and Green commit.
 - **One "go" ships the full Red → Red → Green cycle.** After Matt says "go" on a ticket, run all three gates without re-asking between them. Re-ask only when a substantive new design decision surfaces mid-cycle.
 - **Pre-flight before touching any existing file.** Name the files the ticket touches, the patterns those files use, any cross-surface couplings, and existing test coverage, before proposing anything. (June 2026)
@@ -28,8 +29,8 @@ Read these before every session. Each one has caused a real incident.
 
 ## Document Ownership
 - **CLAUDE.md:** Matt directly. No automated process writes to this file. Code and Cowork flag proposed changes; they never write them.
-- **BACKLOG.md / CHANGELOG.md:** Backlog Maintenance Cowork process (see Backlog Maintenance).
-- **ARCHITECTURE.md:** Architecture Sync Cowork process (see Architecture Sync).
+- **BACKLOG.md / CHANGELOG.md:** Backlog Maintenance Cowork process (skill `mattgpt-backlog-maintenance`).
+- **ARCHITECTURE.md:** Architecture Sync Cowork process (skill `mattgpt-architecture-sync`).
 
 ## Tech Stack
 See [Design Specification](https://mcpugmire1.github.io/mattgpt-design-spec/) for the canonical tech stack and system architecture. Do not duplicate tech stack facts here.
@@ -263,105 +264,8 @@ Always triggers this check:
 - Pipeline stage added/removed/renamed
 - Schema change in story corpus, query logger, or any `config_*.json`
 
-## Backlog Maintenance
-
-**Scope:** This process writes to `BACKLOG.md` and `CHANGELOG.md` only. `CLAUDE.md`, `ARCHITECTURE.md`, source files, and all other documents are out of scope. Any finding that would require a `CLAUDE.md` change gets flagged to Matt, not written.
-
-**Who runs it:** The dedicated Backlog Maintenance Cowork process, not Code. Code's job is to write descriptive commit messages. Code never creates, modifies, or closes tickets directly.
-
-### Status Enum
-Six values only. Do not invent others.
-
-| Status | Meaning |
-|--------|---------|
-| Open | Not started, no blocker |
-| In Progress | Actively being worked |
-| Blocked | Waiting on a specific ticket - name it in `Dependencies:` |
-| Done | Shipped. Remove from BACKLOG.md, write to CHANGELOG.md |
-| Parked | Valid but on conscious hold. No specific blocker, just not now |
-| Decided Against | Ruled out with documented reasoning. Permanent |
-
-"Resolved" is not a valid status.
-
-### Ticket Lifecycle
-
-**Creating a ticket:**
-1. Find the current highest ID: `grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1`. New ID = that number + 1. Never eyeball the matrix to guess.
-2. Add matrix row in ID order in the **Active Matrix** table (never the Decided Against table).
-3. Add detail block in ID order under **Detail Blocks > Active Tickets**, inserted at the correct ID position. Never append to end of file. A block that lands after `### Decided Against` is in the wrong place regardless of status.
-4. Required fields: Status, Priority, Type, Issue, Logged.
-5. If it belongs in NOW or NEXT, add it to the roadmap immediately.
-
-**Status transitions:**
-- Open → In Progress → Done
-- Open / In Progress → Blocked (add blocking ticket ID to `Dependencies:`)
-- Blocked → Open (when the blocking ticket closes)
-- Any active status → Parked or Decided Against
-
-**When marking Done:**
-- Add `Resolved: <date> + <commit hash>` to the detail block.
-- Remove the matrix row AND the detail block from BACKLOG.md.
-- Write a CHANGELOG.md entry (paragraph + commit hash + ticket ref).
-- All three in the same edit. Never partial.
-
-**When marking Decided Against:**
-- Add a one-line reason to the detail block. Required - future context depends on it.
-- Move the matrix row from the Active Matrix table to the **Decided Against** table below it.
-- Move the detail block from **Detail Blocks > Active Tickets** to **Detail Blocks > Decided Against**.
-- Both moves happen in the same edit. Never partial.
-
-**When marking Blocked:**
-- Name the blocking ticket in `Dependencies:` in the detail block.
-- Do not mark a ticket Done while any listed dependency is not Done or Decided Against.
-
-### What Goes Where
-- **CHANGELOG.md:** Done items only. Ship record.
-- **BACKLOG.md:** Everything else - Open, In Progress, Blocked, Parked, Decided Against. None of these move to CHANGELOG.md.
-
-### Matrix and Detail Block Invariant
-Always in sync. Touch one, touch the other. A matrix row without a detail block is invalid. A detail block without a matrix row is invalid. Matrix row and detail block must land in the same edit with matching Priority and Type fields. Fields that disagree are invalid and must be corrected before the session proceeds.
-
-### Ticket Body Discipline
-Ticket bodies state dated observations, not current architecture. Write "Verified Aug 2026: `_tokenize` returns X" not "The scorer filters stopwords." Architecture descriptions go stale and send future sessions in the wrong direction.
-
-### Maintenance Pass
-**Trigger:** Before picking up the next item on the NOW list.
-
-**Sync anchor:** `BACKLOG.md` contains `<!-- last-backlog-sync: <sha> -->` at the top. Read this, run `git log <sha>..HEAD --oneline` for the commit range, then update the comment. If the SHA is missing or unresolvable, prompt Matt before proceeding; do not default to diffing the entire history.
-
-**Inputs:** `BACKLOG.md`, `CHANGELOG.md`, `git log <sha>..HEAD --oneline` since last sync.
-
-**Actions (propose before writing anything):**
-1. Check for any tickets marked Done in the matrix that still have a detail block in BACKLOG.md or are missing a CHANGELOG.md entry - these were not fully closed at ship time. Complete the cleanup now: remove matrix row AND detail block, write CHANGELOG.md entry.
-2. Architecture Sync: run the Architecture Sync pass (see section below) using the same commit range. The two passes share one anchor and one approval gate.
-3. Update `<!-- last-backlog-sync: <sha> -->` to HEAD.
-4. Nothing writes until Matt approves the proposed diff.
-
-## Architecture Sync
-
-**Trigger:** Run alongside the Backlog Maintenance pass, or on demand. Uses the same `<!-- last-backlog-sync: <sha> -->` anchor and commit range.
-
-**Who runs it:** The dedicated Architecture Sync Cowork process, not Code. Code's job is to write a commit message that fully describes any structural change. That commit message is the handoff. The sync process reads the commit range and proposes ARCHITECTURE.md updates for Matt's approval before writing anything. Code never edits ARCHITECTURE.md directly.
-
-**Inputs:** `ARCHITECTURE.md`, `git log <sha>..HEAD --oneline` (same range as the backlog pass).
-
-**Step 1: Classify commits**
-For each commit in the range, classify:
-- New file in `services/`, `ui/pages/`, `ui/components/`, `utils/`, `config/` - likely needs ARCHITECTURE.md update
-- Change to an existing pattern (click handling, session state, CSS architecture, RAG pipeline) - likely needs ARCHITECTURE.md update
-- New constraint discovered (canvas BDD, widget key rules, etc.) - needs ARCHITECTURE.md entry
-- Bug fix or style tweak with no structural implication - skip
-
-**Step 2: Propose specific text**
-For each structural change: name the section and paste the exact proposed text. Nothing vague. If the right section does not exist, propose the section header too.
-
-**Step 3: Approval gate**
-Nothing writes until Matt approves the full proposed diff. One approval covers all ARCHITECTURE.md changes from this pass.
-
-**ARCHITECTURE.md content rules:**
-- No ticket numbers in body text. They function as changelog entries and cause bloat. History belongs in CHANGELOG.md; ARCHITECTURE.md describes current state.
-- Ticket numbers are allowed in section headers only as provenance anchors.
-- Entries cite date and outcome, not ticket numbers. If traceability to a specific change is needed, use the commit hash.
+## Cowork Passes
+Code never writes BACKLOG.md, CHANGELOG.md, or ARCHITECTURE.md. Cowork's passes own them (skills `mattgpt-backlog-maintenance` and `mattgpt-architecture-sync`). Commit messages are the handoff.
 
 ## Documentation Restraint
 Default to **not** creating new markdown files. Most findings belong in commit messages, BACKLOG entries, ADRs, or inline updates to existing docs.

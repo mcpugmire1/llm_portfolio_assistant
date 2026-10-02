@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Commit message checks.
+EMDASH=$(printf '\342\200\224')
+body=$(grep -v '^#' "$1")
+status=0
+
+if printf '%s\n' "$body" | grep -Fq -e "$EMDASH"; then
+  echo "commit-msg: em dash in commit message. Use a colon, comma, or rewrite." >&2
+  status=1
+fi
+if printf '%s\n' "$body" | grep -q -e 'Green:' && printf '%s\n' "$body" | grep -iq -e 'not run'; then
+  echo "commit-msg: a Green commit may not report a relevant gate as Not run. Run it, or stop and ask Matt." >&2
+  status=1
+fi
+
+exit $status
