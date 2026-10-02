@@ -1,6 +1,6 @@
 # Pre-commit hooks for code quality
 # Install: pip install pre-commit
-# Setup: pre-commit install
+# Setup: pre-commit install --hook-type pre-commit --hook-type commit-msg --hook-type pre-push
 # Run manually: pre-commit run --all-files
 
 repos:
@@ -60,3 +60,17 @@ repos:
         pass_filenames: false
         always_run: true
         stages: [pre-push]
+  - repo: local
+    hooks:
+      - id: repo-rules
+        name: repo rules (em dashes, hashed classes, CLAUDE.md budget)
+        entry: .githooks/pre-commit
+        language: script
+        pass_filenames: false
+        always_run: true
+        stages: [pre-commit]
+      - id: repo-rules-commit-msg
+        name: repo rules (commit message)
+        entry: .githooks/commit-msg
+        language: script
+        stages: [commit-msg]
