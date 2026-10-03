@@ -103,7 +103,20 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-251](#mattgpt-251) | Ask Agy treats adjacent retrieved stories as evidence for the question asked | Open | High | Issue | September 23, 2026 |
 | [MATTGPT-252](#mattgpt-252) | Ask Agy writes evaluative sentences about Matt despite repeated prompt instructions against it | Open | High | Issue | September 26, 2026 |
 | [MATTGPT-253](#mattgpt-253) | Profile-fact queries near the story-confidence threshold rejected before profile injection runs | Open | Medium | Issue | September 26, 2026 |
-| [MATTGPT-254](#mattgpt-254) | Five Role Match BDD scenarios stale after 30-word gate shipped; CHANGELOG entry has em dash | Open | Medium | Bug | September 26, 2026 |
+| [MATTGPT-254](#mattgpt-254) | Stale BDD scenarios in role_match.feature and jd_extraction.feature; CHANGELOG em dash | Open | Medium | Bug | September 26, 2026 |
+| [MATTGPT-255](#mattgpt-255) | Meta-commentary strip regex corrupts decimal amounts and merges paragraphs | Open | High | Bug | October 2, 2026 |
+| [MATTGPT-256](#mattgpt-256) | Synthesis opening "Great question" contradicts BASE_PROMPT VOICE rule; 154 commented-out lines and stale prompts.py comment also pending | Open | Medium | Bug | October 2, 2026 |
+| [MATTGPT-257](#mattgpt-257) | Delete "None is current." from rule 0a -- certification entries already carry expiry dates | Open | Medium | Issue | October 2, 2026 |
+| [MATTGPT-258](#mattgpt-258) | Architecture fitness tests: dependency direction and coupling limits have no automated enforcement | Open | Medium | Action | October 2, 2026 |
+| [MATTGPT-259](#mattgpt-259) | Answer pipeline lives in UI layer -- rag_answer() and callers in backend_service.py should move to services/ | Open | High | Refactor | October 2, 2026 |
+| [MATTGPT-260](#mattgpt-260) | Services read and write st.session_state -- forces tests to mock Streamlit 34 times | Open | High | Refactor | October 2, 2026 |
+| [MATTGPT-261](#mattgpt-261) | Five OpenAI client creation sites need one shared factory | Open | Medium | Refactor | October 2, 2026 |
+| [MATTGPT-262](#mattgpt-262) | DATA_FILE defined three times, two story loaders, dead place field, stale constants.py comments | Open | Medium | Bug | October 2, 2026 |
+| [MATTGPT-263](#mattgpt-263) | Test removing duplicate bolding instructions and OFF_TOPIC_GUARD before acting on them | Open | Medium | Issue | October 2, 2026 |
+| [MATTGPT-264](#mattgpt-264) | Move non-rendering functions out of role_match.py to services/ | Open | Medium | Refactor | October 2, 2026 |
+| [MATTGPT-265](#mattgpt-265) | Move ~50 root probe_*, check_*, and generate_* scripts to scripts/probes/ | Open | Low | Action | October 2, 2026 |
+| [MATTGPT-266](#mattgpt-266) | Role Match labels responsibility-derived rows as Required Qualifications | Open | High | Bug | October 3, 2026 |
+| [MATTGPT-267](#mattgpt-267) | Have model return line numbers; Python fills source_text from JD -- saves ~1.7s on long JDs | Open | Medium | Refactor | October 3, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -1698,12 +1711,12 @@ The profile injection works whenever the LLM runs: categories returned correctly
 ---
 
 ### MATTGPT-254
-**Five Role Match BDD scenarios stale after 30-word gate shipped; CHANGELOG entry has em dash**
+**Stale BDD scenarios in role_match.feature and jd_extraction.feature; CHANGELOG em dash**
 
 - **Status:** Open
 - **Priority:** Medium
 - **Type:** Bug
-- **File:** `tests/bdd/features/role_match.feature`, `CHANGELOG.md`
+- **File:** `tests/bdd/features/role_match.feature`, `tests/bdd/features/jd_extraction.feature`, `CHANGELOG.md`
 - **Logged:** September 26, 2026
 
 **Issue 1 -- stale scenarios.** Five scenarios in `role_match.feature` describe the old 30-word gate behavior, which was replaced when the gate shipped. They are xfailed or passing against stale assertions; neither outcome proves the current behavior is tested.
@@ -1717,11 +1730,267 @@ Scenarios by name:
 
 **Issue 2 -- CHANGELOG em dash.** The CHANGELOG entry for the 30-word gate (`CHANGELOG.md` line 569 at time of filing) contains "-- honest framing that doesn't imply Agy has result context", which was written with an em dash before the repo rule was added. Fix: replace with a comma or rewrite.
 
+**Issue 3 -- stale `jd_extraction.feature` (folded in, Oct 3, 2026).** `tests/bdd/features/jd_extraction.feature` still asserts `key_responsibilities` and `seniority_signals`. Both were removed from the extraction schema. The feature file passes because the assertions are no longer reached, not because the behavior is correct. Fix: update or remove the stale assertions.
+
 **Fix scope:**
 1. Rewrite or delete the five stale scenarios to assert current behavior (or confirm they are already correct and remove the xfail).
 2. Fix the em dash in the CHANGELOG entry.
 
 **Constraint:** CHANGELOG.md is append-only for new entries; in-place corrections to existing entries are allowed for factual errors and rule violations. The em dash is a rule violation. Fix it in place.
+
+---
+
+### MATTGPT-255
+**Meta-commentary strip regex corrupts decimal amounts and merges paragraphs**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **File:** `config/constants.py` (`META_COMMENTARY_REGEX_PATTERNS`), `ui/pages/ask_mattgpt/backend_service.py` (strip call site)
+- **Logged:** October 2, 2026
+
+**Issue:** The meta-commentary strip uses a `[^.]*{pattern}[^.]*\.` structure that treats any period as a sentence boundary. A decimal amount like `$2.5M, which reflects his...` is matched as two fragments; the result is `**$2.` with an unclosed bold. The same regex also merges paragraphs across `\n\n` boundaries. The prompt already forbids meta-commentary in three places; ARCHITECTURE.md records failures dropping from 10/31 to 1-2/31 after the January 2026 prompt fix. The strip is post-processing scaffolding for a problem the prompt already handles.
+
+**Fix:** Remove the strip. Run structural meta-commentary tests without it, then a live acceptance run on stories with decimal amounts, including story controls.
+
+**Unverified Oct 2:** Check whether `_log_bandaid` exists and what it shows before removing anything.
+
+**Candidate removals (test before acting):**
+Double-bolding (prompt asks for bold three times alongside the regex) and `OFF_TOPIC_GUARD` are candidate removals tracked in MATTGPT-263; each needs a live acceptance run first.
+
+---
+
+### MATTGPT-256
+**Synthesis opening "Great question" contradicts BASE_PROMPT VOICE rule; 154 commented-out lines and stale prompts.py comment also pending**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `ui/pages/ask_mattgpt/backend_service.py` (`_generate_agy_response()`), `ui/pages/ask_mattgpt/prompts.py` (`_GROUNDING_RULES_HEADER`)
+- **Logged:** October 2, 2026
+
+**Issue 1 -- contradictory opening.** `_generate_agy_response()` includes `"🐾 Great question -- let me pull together the big picture."` in its synthesis openings list, and `build_user_message()` requires the model to start with that exact text. BASE_PROMPT's VOICE section bans "Great question!". Whenever that opening is chosen, the two instructions contradict each other.
+
+**Fix 1:** Delete that one opening from the list.
+
+**Issue 2 -- dead commented-out code.** Verified Oct 2: 154 commented-out lines of the old `_generate_agy_response()` remain below the live function in `backend_service.py`. No behavior; pure dead weight.
+
+**Fix 2:** Delete the 154 commented-out lines.
+
+**Issue 3 -- stale comment.** The comment above `_GROUNDING_RULES_HEADER` in `prompts.py` cites "state what the block says..." The rule now reads "state what the facts say." The comment is stale.
+
+**Fix 3:** Update the comment to match the current rule text.
+
+---
+
+### MATTGPT-257
+**Delete "None is current." from rule 0a -- certification entries already carry expiry dates**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Issue
+- **File:** `ui/pages/ask_mattgpt/prompts.py` (rule 0a in Ask Agy system prompt), `data/matt_profile.json` (`certifications`)
+- **Logged:** October 2, 2026
+
+**Issue:** Rule 0a in the Ask Agy system prompt hardcodes `"None is current."` as a fact about the certifications. The `certifications` entries in `matt_profile.json` already carry `expired` fields with dated evidence. The hardcoded sentence is redundant and will drift if the data changes. This is the same class of fix that resolved the CS degree answer in MATTGPT-250: the fact belongs in the data, not the prompt.
+
+**Fix:** Delete `"None is current."` from rule 0a. The dated entries say it already.
+
+**Regression check:** Confirm Role Match reads the certification entries correctly after the prompt change.
+
+---
+
+### MATTGPT-258
+**Architecture fitness tests: dependency direction and coupling limits have no automated enforcement**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **File:** `tests/test_structural_assertions.py` (add checks alongside existing constant-vs-JSONL checks)
+- **Logged:** October 2, 2026
+
+**Issue:** Nothing enforces dependency direction or coupling limits between commits. Drift only surfaces in a manual audit. Add deterministic pytest checks using plain grep or AST walks -- no new dependencies.
+
+**Four checks with Oct 2, 2026 baselines:**
+
+a. No `ui` imports from `services/`, `utils/`, or `config/`. Baseline: 0 violations (passes today).
+
+b. `streamlit` import count per folder stays at or below today's count: `services/` = 4 files (rag_service, pinecone_service, query_logger, jd_assessor); `utils/` = 2 files (ui_helpers, filters); `config/` = 1 file (settings). Counter may only decrease.
+
+c. Live `OpenAI(` client creation sites = 5 or fewer (ignoring commented-out code). Today: pinecone_service, jd_assessor, semantic_router, two in backend_service.
+
+d. `DATA_FILE` defined in exactly one place. Fails today (app.py, services/pinecone_service.py, ui/pages/explore_stories.py). Mark xfail until MATTGPT-262 lands.
+
+e. Source-vs-output check: for each fixture JD, the row count and wording under each heading match the JD's own sections. Added Oct 3, 2026. Baseline: measure at Red time.
+
+**Acceptance:** Checks a-c and e pass; check d is xfail. Each failure message names the offending file.
+
+**Out of scope:** The fixes themselves. Each lowered limit is accepted by the corresponding refactor ticket.
+
+---
+
+### MATTGPT-259
+**Answer pipeline lives in UI layer -- rag_answer() and callers in backend_service.py should move to services/**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Refactor
+- **File:** `ui/pages/ask_mattgpt/backend_service.py` (2,495 lines, 22 commits since June 1, 2026)
+- **Logged:** October 2, 2026
+
+**Issue:** `backend_service.py` contains `rag_answer()`, `_generate_agy_response()`, `get_synthesis_stories()`, `detect_entity()`, `diversify_results()`, and two live `OpenAI(` client creation sites. Pipeline logic in the UI layer means tests must mock UI state, and any session that edits the pipeline touches a UI file. Move these to `services/`; leave the page as a thin caller. No behavior change.
+
+**Requires:** Pre-flight names all callers; acceptance run covers story controls; ARCHITECTURE.md pre-commit checklist triggers. Depends on coordination with MATTGPT-260 to avoid moving the session-state coupling into the wrong layer.
+
+---
+
+### MATTGPT-260
+**Services read and write st.session_state -- forces tests to mock Streamlit 34 times**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Refactor
+- **File:** `services/rag_service.py`, `services/pinecone_service.py`, `services/query_logger.py`, `utils/filters.py`, `config/settings.py`
+- **Logged:** October 2, 2026
+
+**Issue:** Verified Oct 2, 2026: `services/rag_service.py`, `services/pinecone_service.py`, and `services/query_logger.py` import `streamlit` and read or write `st.session_state` (keys include `__pc_suppressed__`, `__dbg_pc_hits`, `last_results`, `_session_id`). `utils/filters.py` and `config/settings.py` also import Streamlit. This forces tests to mock `services.rag_service.st` (22 times) and `backend_service.st` (12 times) to test service logic.
+
+**Fix:** Have the functions return hits and flags instead of writing state; let the UI caller decide what to store. Each removal lowers the MATTGPT-258 check-b counter.
+
+**Dependency:** MATTGPT-259 (pipeline move) should land first to avoid moving the coupling into the wrong layer.
+
+---
+
+### MATTGPT-261
+**Five OpenAI client creation sites need one shared factory**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Refactor
+- **File:** `services/pinecone_service.py`, `services/jd_assessor.py`, `ui/pages/ask_mattgpt/backend_service.py` (two sites), `services/semantic_router.py` (verify location)
+- **Logged:** October 2, 2026
+
+**Issue:** Verified Oct 2, 2026: five places create a live `OpenAI(` client independently. Each carries its own settings reference. No single place enforces consistent configuration.
+
+**Fix:** One factory in `services/` or `config/`, imported everywhere. Lowers the MATTGPT-258 check-c counter to 1.
+
+---
+
+### MATTGPT-262
+**DATA_FILE defined three times, two story loaders, dead place field, stale constants.py comments**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `app.py`, `services/pinecone_service.py`, `ui/pages/explore_stories.py`, `config/constants.py`, entity detection code
+- **Logged:** October 2, 2026
+
+**Four cleanup items from Oct 2, 2026 audit:**
+
+1. `DATA_FILE = os.getenv("STORIES_JSONL", ...)` is defined in app.py, `services/pinecone_service.py`, and `ui/pages/explore_stories.py`. Configuration Rules: "hardcoded values duplicated across files are a bug. Centralize immediately." Consolidate to `config/constants.py`. MATTGPT-258 check-d is xfail until this lands.
+
+2. Two story loaders: `load_star_stories()` in `app.py` and `load_stories()` in `utils/corpus_loader.py`. Consolidate to `utils/corpus_loader.load_stories()`.
+
+3. `place` is in `ENTITY_SEARCH_FIELDS` and `PINECONE_LOWERCASE_FIELDS` but `build_custom_embeddings.py` never stores it, so its `$or` clause can never match. Remove the dead field.
+
+4. Stale comments in `constants.py`: `'5 fields'` (the list has 6) and `'from CLAUDE.md'`. Correct in place.
+
+---
+
+### MATTGPT-263
+**Test removing duplicate bolding instructions and OFF_TOPIC_GUARD before acting on them**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Issue
+- **File:** `ui/pages/ask_mattgpt/prompts.py`, `config/constants.py` (`META_COMMENTARY_REGEX_PATTERNS`), `ui/pages/ask_mattgpt/backend_service.py` (`OFF_TOPIC_GUARD`)
+- **Logged:** October 2, 2026
+
+**Issue:** Two candidate removals surfaced in the Oct 2 audit, each needing a live acceptance run before any code change.
+
+**Candidate 1 -- duplicate bolding.** The prompt asks for bold formatting three times; the meta-commentary regex in `config/constants.py` also bolds output. Four bolding instructions for the same output create collision risk (unclosed `**` on decimal amounts, per MATTGPT-255). Removing the regex bolding (as part of MATTGPT-255) may be sufficient; the three prompt instructions may or may not be redundant.
+
+**Candidate 2 -- OFF_TOPIC_GUARD.** `OFF_TOPIC_GUARD` is a fourth off-topic check that runs after the semantic router, the filters, and `is_query_on_topic_llm()`. It is unknown from logs whether its canned reply has ever appeared in production.
+
+**First step for each:** Run an acceptance probe that includes the story controls and check whether the guard's canned reply appears in any log record with `redirect_reason`. Do not remove either without that measurement.
+
+---
+
+### MATTGPT-264
+**Move non-rendering functions out of role_match.py to services/**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Refactor
+- **File:** `ui/pages/role_match.py`
+- **Logged:** October 2, 2026
+
+**Issue:** `role_match.py` contains `_resolve_evidence_stories()`, `_normalize_row_status()`, `_build_share_text()`, and `_find_story_by_title_client()` -- none of which render UI. `role_match_summary()` was already moved to `services/` as prior art. These four functions follow the same pattern and belong in `services/` for the same reason: services should be testable without a Streamlit runtime.
+
+**Fix:** Move the four functions to `services/`. No behavior change. Pre-flight names all callers before moving.
+
+**Additional scope (Oct 3, 2026):** `role_match.py` imports three underscore functions directly from `services/jd_assessor.py` (`_fan_out_assessments`, `_flatten_extraction`, `_get_openai_client`) and runs the extract → flatten → fan-out sequence itself. Since MATTGPT-245's row-by-row rendering, the pipeline's control flow lives in two files. Add to this ticket: create one public entry point in `jd_assessor` that takes the `on_row` callback, so `role_match.py` stops importing underscore names and the pipeline sequence has one home.
+
+**Evidence:** Churn report for `206306e..31ae450`: `role_match.py` and `jd_assessor.py` co-changed in 4 of the top commit pairs.
+
+**Sequencing:** After the mislabeled-rows fix (MATTGPT-266), which touches `_flatten_extraction` and the rendering -- both files again.
+
+---
+
+### MATTGPT-265
+**Move ~50 root probe_*, check_*, and generate_* scripts to scripts/probes/**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Action
+- **File:** Repo root (`probe_*.py`, `check_*.py`, `generate_*.py`)
+- **Logged:** October 2, 2026
+
+**Issue:** Approximately 50 probe, check, and generate scripts live at repo root alongside `app.py`. They are not production code but they clutter the root and make it harder to distinguish what runs in production from what is exploratory tooling.
+
+**Fix:** Move to `scripts/probes/`. Update any path references in BACKLOG.md detail blocks that cite these scripts by filename (they are cited as exploratory instruments, not as imports, so no production code changes). No behavior change.
+
+---
+
+### MATTGPT-266
+**Role Match labels responsibility-derived rows as Required Qualifications**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **File:** `services/jd_assessor.py` (`_flatten_extraction()`), `ui/pages/role_match.py` (rendering)
+- **Logged:** October 3, 2026
+
+**Issue:** `_flatten_extraction()` maps rows from the `key_responsibilities` section of the extraction output into the Required Qualifications group in the UI. Responsibility-derived rows carry a different confidence profile than genuine required qualifications (they describe the job's duties, not the candidate's must-have credentials), so labeling them as Required Qualifications overstates the match signal for that category.
+
+**Two decisions recorded (Oct 3, 2026):**
+
+1. The fix lives in `_flatten_extraction()`, not in the prompt. The extraction correctly separates responsibilities from qualifications; the label collapse happens downstream at flatten time.
+
+2. This ticket is not folded into MATTGPT-244 (assessor prompt calibration -- cited evidence doesn't address the claim). The two bugs are in different stages: MATTGPT-244 is in the verdict/evidence stage; this is in the row-labeling stage.
+
+**Sequencing:** MATTGPT-264 (public entry point in jd_assessor) touches `_flatten_extraction()` and the rendering. Coordinate: if 264 lands first, implement this fix against the refactored function signature.
+
+---
+
+### MATTGPT-267
+**Have model return line numbers; Python fills source_text from JD -- saves ~1.7s on long JDs**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Refactor
+- **File:** `services/jd_assessor.py` (`extract_requirements()`, `source_text` handling)
+- **Logged:** October 3, 2026
+
+**Issue:** `extract_requirements()` currently asks the model to return the verbatim `source_text` for each requirement. On long JDs the model must copy large text spans, which adds latency (measured ~1.7s on long JDs in `probe_extraction_step0_output/`). The model knows the line number; Python can fill `source_text` from the JD in a post-processing step.
+
+**Fix:** Change the extraction prompt to return a line number (or start/end char offset) instead of verbatim text. After the model responds, Python looks up the span from the original JD string and populates `source_text`. The produced `source_text` value is identical to what the model would have returned.
+
+**Replaces:** The verbatim-source test added in `b28a080`. That test verified the model copied text correctly; the replacement test verifies the Python lookup produces the correct span.
+
+**Evidence:** `probe_extraction_step0_output/` (repo root). Measure before and after on the AT&T fixture (the long-JD case from MATTGPT-160).
+
+**Constraint:** Do not implement before confirming the line-number approach is reliable across structured and prose JDs. Prose JDs have no guaranteed line boundaries; the offset approach may be safer. Settle the indexing strategy at Red time.
 
 ---
 
