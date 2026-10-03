@@ -140,7 +140,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_banking_trigge
         </div>
         <div class="conversation-header-text">
             <h1>Matt's Financial Services Expertise</h1>
-            <p>{total_stories} stor{"y" if total_stories == 1 else "ies"} across {num_projects} project{"" if num_projects == 1 else "s"} and {num_clients} client{"" if num_clients == 1 else "s"}. Trust Agy 🐾 to filter decades of domain experience.</p>
+            <p>{total_stories} stor{"y" if total_stories == 1 else "ies"} across {num_projects} project{"" if num_projects == 1 else "s"} and {num_clients} client{"" if num_clients == 1 else "s"}. Trust Agy 🐾 to find the work that fits.</p>
         </div>
     </div>
 </div>
@@ -587,7 +587,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_banking_trigge
         unsafe_allow_html=True,
     )
     st.markdown(
-        f'<p class="subtitle">Browse {browseable_total} banking stories organized by specialty area</p>',
+        f'<p class="subtitle">Browse {browseable_total} stories organized by specialty area</p>',
         unsafe_allow_html=True,
     )
 
@@ -627,7 +627,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_banking_trigge
                         proj_plural = "s" if proj != 1 else ""
                         meta = (
                             f'<span class="card-count">{proj} '
-                            f"banking project{proj_plural}</span>"
+                            f"project{proj_plural}</span>"
                             f'<span class="card-clients">· {card["count"]} stories</span>'
                         )
                         if card["clients"] > 1:
@@ -692,7 +692,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_banking_trigge
         """
     <div class="cta-section">
         <h2 class="cta-heading">Can't find what you're looking for?</h2>
-        <p class="cta-subtext">Ask Agy 🐾 about Matt's banking experience — get conversational answers tailored to your needs</p>
+        <p class="cta-subtext">Ask Agy 🐾 about Matt's financial services work. Get conversational answers tailored to your needs.</p>
         <div style="margin-top: 24px;">
             <a id="btn-banking-cta" class="card-btn-primary">Ask Agy 🐾</a>
         </div>
