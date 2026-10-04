@@ -75,9 +75,13 @@ _RULE_0A_NO_INFERENCE = (
 # MATTGPT-268 (Oct 4, 2026): the category-wide direct-no sentence made CS
 # degree answers lead with a no (9/10 with it, 0/10 without;
 # probe_268_output/20261004_095649/). Deleting it outright cost PMP its
-# certifications marker in 8/20 runs. Scoped to certifications, PMP keeps
-# marker and list 10/10 and CS leads with a no 0/20
-# (probe_268_output/20261004_104354/). The category-wide form is asserted
+# certifications marker in 8/20 runs. Scoped to certifications, PMP had 0
+# failures in 20 ("does matt have a pmp" and "Does Matt have a PMP?", 10
+# each: leading no, all four certifications, marker, no story pivot;
+# probe_268_output/20261004_104755/) and CS led with a no in 8/50 on this
+# tree (20261004_104606/ 1/10, 20261004_104903/ 3/20, 20261004_105523/ arm a
+# 4/20), from the scoped sentence itself (105523: 4/20 with it, 0/20
+# without). The category-wide form is asserted
 # absent via _RULE_0A_REMOVED; the certifications form present via
 # _RULE_0A_NEW_MARKERS.
 _RULE_0A_DIRECT_NO = "For a category the profile holds"

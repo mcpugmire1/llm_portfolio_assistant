@@ -9,7 +9,7 @@ SYNTHESIS_DELTA: Structure for multi-story responses (breadth)
 STANDARD_DELTA: Structure for single-story responses (WHY→HOW→WHAT)
 """
 
-from config.constants import PROFILE_FACT_CATEGORIES, PROFILE_FACT_DISPLAY_NAMES
+from config.constants import PROFILE_FACT_CATEGORIES
 
 # =============================================================================
 # BASE_PROMPT - The Agy Voice (Shared Across All Modes)
@@ -286,19 +286,13 @@ def build_system_prompt(
 # MATTGPT-250: attested-facts block + citation rules 0a/0b, injected around
 # the "**GROUNDING RULES:**" header at prompt-composition time. Wording
 # taken verbatim from the ticket detail block. Case-sensitive markers
-# ("state what the block says..." lowercase) are load-bearing -- the Red
-# tests match on lowercase and PMP acceptance depends on the direct-no
-# clause reaching the LLM.
+# ("state what the facts say..." lowercase) are load-bearing: the tests
+# match on lowercase.
 _GROUNDING_RULES_HEADER = "**GROUNDING RULES:**"
 _ATTESTED_FACTS_HEADER = "**About Matt (attested facts):**"
 # MATTGPT-250 item 4: category markers feed the Ask Agy Sources fact row.
 # Post-processing strips them before display (_extract_profile_markers).
 _PROFILE_MARKERS = [f"[[profile:{c}]]" for c in PROFILE_FACT_CATEGORIES]
-# Direct-no category list in 0a, from the display names (lowercased), so a
-# new profile category reaches the rule without a second edit.
-_PROFILE_CATEGORY_LIST = ", ".join(
-    PROFILE_FACT_DISPLAY_NAMES[c].lower() for c in PROFILE_FACT_CATEGORIES
-)
 _MARKER_INSTRUCTION = (
     "When you state a fact from the facts about Matt above, put its "
     "category marker on its own line before the closing line: "
@@ -311,9 +305,9 @@ _CITATION_RULE_0A = (
     "infer capability or meaning from it. When the question is about a "
     "fact about Matt, answer from these facts only. Do "
     "not say what a fact indicates or connect it to a story unless asked. "
-    f"For a category the profile holds ({_PROFILE_CATEGORY_LIST}), an "
-    "item not in the list gets a direct no, followed by "
-    "what the list does contain. Never tell the visitor where a fact comes "
+    "For certifications, an item not in the list gets a direct no, "
+    "followed by what the list does contain. "
+    "Never tell the visitor where a fact comes "
     "from. State it as a fact about Matt. Quote each certification exactly "
     "as written, including its dates. None is current. When stating a "
     "language, state its level in the same sentence. "
