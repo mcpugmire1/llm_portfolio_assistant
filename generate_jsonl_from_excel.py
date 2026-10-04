@@ -8,7 +8,8 @@
 # Backups:  the previous JSONL is copied to archive/jsonl-backups/ before
 #           overwrite. Repo root stays clean.
 #
-# Preserves existing public_tags, content, and IDs.
+# Excel is authoritative for public_tags (blank in Excel means blank).
+# Prior content is kept when Excel has none; id is the Title|Client slug.
 # Only run when new or updated stories need to be synced.
 # --------------------------------------------------------
 
