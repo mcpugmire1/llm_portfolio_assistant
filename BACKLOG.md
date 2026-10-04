@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: 64ff2d6 -->
+<!-- last-backlog-sync: 404e2b3 -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -117,6 +117,10 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-265](#mattgpt-265) | Move ~50 root probe_*, check_*, and generate_* scripts to scripts/probes/ | Open | Low | Action | October 2, 2026 |
 | [MATTGPT-266](#mattgpt-266) | Role Match labels responsibility-derived rows as Required Qualifications | Open | High | Bug | October 3, 2026 |
 | [MATTGPT-267](#mattgpt-267) | Have model return line numbers; Python fills source_text from JD -- saves ~1.7s on long JDs | Open | Medium | Refactor | October 3, 2026 |
+| [MATTGPT-268](#mattgpt-268) | "Does Matt have a CS degree?" leads with a no that Role Match doesn't give -- parity fix | Open | High | Bug | October 4, 2026 |
+| [MATTGPT-269](#mattgpt-269) | MATT_DNA carries ungrounded and stale facts in generate_dynamic_dna() | Open | High | Bug | October 4, 2026 |
+| [MATTGPT-270](#mattgpt-270) | generate_jsonl_from_excel.py summary counters wrong (Created/Updated/Unchanged miscount) | Open | Low | Bug | October 4, 2026 |
+| [MATTGPT-271](#mattgpt-271) | Near-duplicate public_tags from re-tagging pass in master Excel | Open | Low | Corpus | October 4, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -1991,6 +1995,95 @@ e. Source-vs-output check: for each fixture JD, the row count and wording under 
 **Evidence:** `probe_extraction_step0_output/` (repo root). Measure before and after on the AT&T fixture (the long-JD case from MATTGPT-160).
 
 **Constraint:** Do not implement before confirming the line-number approach is reliable across structured and prose JDs. Prose JDs have no guaranteed line boundaries; the offset approach may be safer. Settle the indexing strategy at Red time.
+
+---
+
+### MATTGPT-268
+**"Does Matt have a CS degree?" leads with a no that Role Match doesn't give -- parity fix**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **File:** `ui/pages/ask_mattgpt/prompts.py` (rule 0a, AIU note R3)
+- **Logged:** October 4, 2026
+
+**Issue:** Ask Agy leads with a no on CS degree phrasings ("Does Matt have a CS degree?", "What did Matt study?"). Role Match does not lead with a no on the same queries. The inconsistency comes from rule 0a's direct-no sentence (R1), which was written for PMP but applies to all list items, including education. The CS degree answer is a known miss from MATTGPT-250 (see Evidence section there).
+
+**Ablation result (Oct 4, 2026):** Deleting R1 (the direct-no sentence): PMP still produces a no on 15 of 15 runs without it. The sentence is not load-bearing for PMP. Removing it is safe.
+
+**Step 1:** Measure the current lead-with-no rate on the CS degree phrasings (live acceptance run, at least 2 runs per phrasing).
+
+**Step 2:** Delete R1 (direct-no sentence from rule 0a). Run acceptance again on CS phrasings, PMP, and the story controls.
+
+**Step 3 (conditional):** If the CS lead is still wrong after R1 removal, reword the AIU note (R3) only. No new prompt clause, per the Subtract rule.
+
+**Open decision D1:** Framing call for the CS response is still open (Matt's call). File the decision before the Green commit.
+
+**Acceptance:** CS phrasings no longer lead with a no; PMP still produces a no; story controls unchanged.
+
+---
+
+### MATTGPT-269
+**MATT_DNA carries ungrounded and stale facts in generate_dynamic_dna()**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **File:** `ui/pages/ask_mattgpt/backend_service.py` (`generate_dynamic_dna()`), `data/matt_profile.json`
+- **Logged:** October 4, 2026
+
+**Issue:** `generate_dynamic_dna()` hardcodes facts that are either not in any story, were deliberately removed from the corpus, or are stale. These reach the LLM in every system prompt.
+
+**Specific removals (Oct 4, 2026):**
+
+1. `"$300M+ annual sales by FY23"` -- not in any story. Remove.
+2. `"$189M cloud modernization win"` -- not in any story. Remove.
+3. `"30-60% cycle time"` -- documented figure is 30% time-to-market; "30-60%" is ungrounded. Remove or correct to match the corpus figure.
+4. Hardcoded `"NOT Matt's Clients"` list. Kaiser is now clean across corpus and Pinecone; the list protects nothing. Remove.
+5. `"How Matt Wins Business"` heading -- drop or reword. The grounded `$100M+` line under it may be kept if it traces to a story.
+
+**Moves to data (derive or load, not hardcode):**
+
+- Employer dates, status, identity line, and values: move to `matt_profile.json` so they have one home and are loaded, not hardcoded.
+- Era ranges and industry rankings: derive from the corpus rather than hardcoding.
+
+**Acceptance:** Run the story controls and "Why hire Matt?" Verify no figure appears in any answer that is not in a story.
+
+---
+
+### MATTGPT-270
+**generate_jsonl_from_excel.py summary counters wrong (Created/Updated/Unchanged miscount)**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Bug
+- **File:** `generate_jsonl_from_excel.py` (summary counter logic)
+- **Logged:** October 4, 2026
+
+**Issue:** Verified Oct 4, 2026: the script printed "Created: 123, Updated: 0, Unchanged: 120" when 3 stories changed and none were new. The JSONL output itself is correct. The counter logic misclassifies which rows changed.
+
+**Fix:** Identify the comparison logic producing the wrong counts and correct it. The output correctness confirms the diff detection itself works; only the reporting is wrong.
+
+---
+
+### MATTGPT-271
+**Near-duplicate public_tags from re-tagging pass in master Excel**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Corpus
+- **File:** Master Excel (via corpus maintenance skill)
+- **Logged:** October 4, 2026
+
+**Issue:** The re-tagging pass produced near-duplicate tag variants across stories (Oct 4, 2026):
+
+- "Discovery & Framing" and "Discovery and Framing"
+- "Prototyping" and "Rapid Prototyping"
+- "Financial Services" and "Financial Services Industry"
+
+These only affect behavior if tags feed filters or counts. Fix is in the master Excel: pick one canonical form per pair and update all stories to use it.
+
+**Fix:** Corpus maintenance pass -- Matt consolidates in the master, then regenerates the JSONL.
 
 ---
 
