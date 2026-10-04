@@ -3,6 +3,10 @@
 # Setup: pre-commit install --hook-type pre-commit --hook-type commit-msg --hook-type pre-push
 # Run manually: pre-commit run --all-files
 
+# docs/evidence/ holds frozen copies of probe output cited by decisions
+# (MATTGPT-265). No hook may rewrite them: they stay byte-identical to the run.
+exclude: ^docs/evidence/
+
 repos:
   # Ruff - Fast Python linter and formatter (replaces black, isort, flake8, etc.)
   - repo: https://github.com/astral-sh/ruff-pre-commit
