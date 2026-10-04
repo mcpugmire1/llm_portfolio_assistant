@@ -1026,6 +1026,15 @@ None of these stories is cited in the answer. This is the "retrieved, not cited"
 **Open before shipping:**
 1. Thin-answer shape. A single-source answer, or one where every source is the same kind, loses one of the two sections and the trailing lead-in for it. The Fiserv commercial impact query is the test case: four sources, all project record, exercises the single-label shape.
 2. Retrieval check (owed August 29, still unexecuted). Before this ships, confirm that the project-record cards on a given answer actually substantiate its claims. An unrelated engagement story under a dollar figure looks exactly like a valid receipt and has no tell. This needs a dedicated eval query, not just a manual DEBUG run. Zero of the 65 current eval queries exercise this -- the same coverage gap that let MATTGPT-218 sit live since February.
+3. META-IND group membership (Oct 4, 2026 -- from spec review). The design above assigns the framing lead-in only to `_kind_of == META-PN`. The committed spec (`docs/specs/MATTGPT-128-sources-panel.md`) puts META-IND under the same framing lead-in. Decide which is correct before implementing the group split.
+4. Retrieval check scope and count (Oct 4, 2026 -- from spec review). The spec frames the retrieval check narrowly: confirm the HSBC stories are present in `ranked` for the broad revenue query, and calls it a separate ticket, citing 64 eval queries with zero coverage. Item 2 above generalizes it (project-record cards substantiate claims; 65 eval queries). Settle whether this is one check or two, and which count is current, before the retrieval-check commit.
+5. Fact-row reconciliation (Oct 4, 2026). The spec predates MATTGPT-250's fact row (mock #3b). The "story grid always renders" rule in -250 item 4 defers to -128 on which stories count as cited. Once the cited-vs-retrieved distinction lands here, -250 item 4 needs a corresponding update.
+
+**Implementation order when resumed (Oct 4, 2026):** No deliberate pause; displaced by September work. 128 is in NOW and does not need reprioritizing.
+1. Retrieval check eval (item 2 above) -- oldest open item, owed since Aug 29; decides whether the design holds.
+2. Thin-answer shape (item 1 above) -- Fiserv case.
+3. Reconcile spec with -250 fact row (item 5 above).
+4. Green -- removes the xfail at `220d14d`.
 
 **Design reference:** Story Detail Sidebar.dc.html turn 8B, at production width, with real card and bubble values.
 
