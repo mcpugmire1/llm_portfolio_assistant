@@ -21,8 +21,37 @@ fi
 if has 'core\.hooksPath'; then
   block "changing core.hooksPath disables the repo's git hooks."
 fi
-if has 'grep[[:space:]]+([^|;&]*[[:space:]])?(-[a-zA-Z]*v|--invert-match)' \
-   && printf '%s' "$cmd" | grep -Eiq -e 'secret|credential|token|\.env|service[-_]?account'; then
-  block "grep -v on a secrets file. Use positive include filters that print key names only."
-fi
+# grep -v on a secrets file: block only when grep -v reads a secrets file, in the
+# same pipeline segment or downstream of a segment that names one (cat .env | grep -v X).
+# Pipelines split on unquoted ; & && || newline, segments on unquoted |, so
+# "grep -v ... ; something .env" and patterns like "a|b" are judged correctly.
+GREPV_RE='(^|[[:space:]])[a-z]*grep[[:space:]]+([^[:space:]]+[[:space:]]+)*(-[[:alnum:]]*v[[:alnum:]]*|--invert-match)([[:space:]]|$)'
+SECRET_FILE_RE='(^|[[:space:]=<"'"'"'])[^[:space:]"'"'"']*(\.env(\.[[:alnum:]_-]+)?|\.pem|\.key|(secret|credential|token|service[-_]?account)[^[:space:]"'"'"'/]*\.(toml|json|ya?ml|env|txt|ini|cfg))["'"'"']?([[:space:]]|$)'
+split_cmd() {
+  awk -v sq="'" '{
+    out=""; q=""; n=length($0)
+    for (i=1; i<=n; i++) {
+      c=substr($0,i,1); nx=substr($0,i+1,1); pv=substr($0,i-1,1)
+      if (q=="") {
+        if (c=="\"" || c==sq) { q=c }
+        else if (c=="|" && nx=="|") { c="\n"; i++ }
+        else if (c=="|") { c="\037" }
+        else if (c==";") { c="\n" }
+        else if (c=="&" && (pv==">" || nx==">")) { }
+        else if (c=="&") { c="\n"; if (nx=="&") i++ }
+      } else if (c==q) { q="" }
+      out=out c
+    }
+    print out
+  }'
+}
+while IFS= read -r pipeline; do
+  secret_seen=0
+  while IFS= read -r seg; do
+    printf '%s' "$seg" | grep -Eiq -e "$SECRET_FILE_RE" && secret_seen=1
+    if [ "$secret_seen" = 1 ] && printf '%s' "$seg" | grep -Eq -e "$GREPV_RE"; then
+      block "grep -v on a secrets file. Use positive include filters that print key names only."
+    fi
+  done < <(printf '%s\n' "$pipeline" | tr '\037' '\n')
+done < <(printf '%s\n' "$cmd" | split_cmd)
 exit 0
