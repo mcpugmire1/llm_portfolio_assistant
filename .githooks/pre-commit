@@ -5,6 +5,7 @@ status=0
 
 while IFS= read -r f; do
   [ -z "$f" ] && continue
+  case "$f" in docs/evidence/*) continue ;; esac   # frozen probe output; see .pre-commit-config.yaml
   added=$(git diff --cached -U0 --no-color -- "$f" | grep '^+' | grep -v '^+++')
   [ -z "$added" ] && continue
   if printf '%s\n' "$added" | grep -Fq -e "$EMDASH"; then
