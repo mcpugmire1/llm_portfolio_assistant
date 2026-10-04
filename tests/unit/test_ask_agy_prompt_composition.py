@@ -72,11 +72,19 @@ _LANGUAGES_VERBATIM = "French (B2, self-assessed)"
 _RULE_0A_NO_INFERENCE = (
     "state what the facts say, do not infer capability or meaning from it"
 )
-# Removed Oct 4, 2026 (MATTGPT-268): the direct-no sentence made CS degree
-# answers lead with a no (9/10 with it, 0/10 without), while PMP led with a no
-# in 10/10 either way (probe_268_output/20261004_095649/). Asserted absent
-# from both messages via _RULE_0A_REMOVED.
-_RULE_0A_DIRECT_NO = "an item not in the list gets a direct no"
+# MATTGPT-268 (Oct 4, 2026): the category-wide direct-no sentence made CS
+# degree answers lead with a no (9/10 with it, 0/10 without;
+# probe_268_output/20261004_095649/). Deleting it outright cost PMP its
+# certifications marker in 8/20 runs. Scoped to certifications, PMP keeps
+# marker and list 10/10 and CS leads with a no 0/20
+# (probe_268_output/20261004_104354/). The category-wide form is asserted
+# absent via _RULE_0A_REMOVED; the certifications form present via
+# _RULE_0A_NEW_MARKERS.
+_RULE_0A_DIRECT_NO = "For a category the profile holds"
+_RULE_0A_CERTS_DIRECT_NO = (
+    "For certifications, an item not in the list gets a direct no, "
+    "followed by what the list does contain."
+)
 # New at 9d5f575: Agy must answer from the block only, not join facts to stories.
 _RULE_0A_NO_STORY_CONNECT = (
     "Do not say what a fact indicates or connect it to a story unless asked"
@@ -130,6 +138,7 @@ _RULE_0A_NEW_MARKERS = [
     _RULE_0A_FACTS_ONLY,
     *_RULE_0A_CATEGORY_MARKERS,
     _RULE_0A_MARKER_PLACEMENT,
+    _RULE_0A_CERTS_DIRECT_NO,
 ]
 _RULE_0B_MARKER = "Nothing I know about Matt covers that"
 # New at 9d5f575: for absent categories, Agy must not pad the honest gap
@@ -297,9 +306,10 @@ class TestCitationRulesInCapturedSystemMessage:
     """Rules 0a and 0b appear in the runtime Agy system prompt.
 
     0a's no-inference clause (state what the block says, do not infer
-    capability or meaning) is asserted here. The direct-no clause was
-    removed in MATTGPT-268 and is asserted absent via _RULE_0A_REMOVED:
-    PMP leads with a no without it."""
+    capability or meaning) is asserted here. MATTGPT-268 scoped the
+    direct-no clause to certifications: the category-wide form is asserted
+    absent via _RULE_0A_REMOVED, the certifications form present via
+    _RULE_0A_NEW_MARKERS."""
 
     def test_rule_0a_no_inference_clause_present_in_system_message(
         self, captured_agy_system_message
