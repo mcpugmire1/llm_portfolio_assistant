@@ -114,7 +114,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-262](#mattgpt-262) | DATA_FILE defined three times, two story loaders, dead place field, stale constants.py comments | Open | Medium | Bug | October 2, 2026 |
 | [MATTGPT-263](#mattgpt-263) | Test removing duplicate bolding instructions and OFF_TOPIC_GUARD before acting on them | Open | Medium | Issue | October 2, 2026 |
 | [MATTGPT-264](#mattgpt-264) | Move non-rendering functions out of role_match.py to services/ | Open | Medium | Refactor | October 2, 2026 |
-| [MATTGPT-265](#mattgpt-265) | Move ~50 root probe_*, check_*, and generate_* scripts to scripts/probes/ | Open | Low | Action | October 2, 2026 |
+| [MATTGPT-265](#mattgpt-265) | Move ~50 root probe_*, check_*, and generate_* scripts to probes/; preserve cited evidence in docs/evidence/ | Open | Low | Action | October 2, 2026 |
 | [MATTGPT-266](#mattgpt-266) | Role Match labels responsibility-derived rows as Required Qualifications | Open | High | Bug | October 3, 2026 |
 | [MATTGPT-267](#mattgpt-267) | Have model return line numbers; Python fills source_text from JD -- saves ~1.7s on long JDs | Open | Medium | Refactor | October 3, 2026 |
 | [MATTGPT-268](#mattgpt-268) | "Does Matt have a CS degree?" leads with a no that Role Match doesn't give -- parity fix | Open | High | Bug | October 4, 2026 |
@@ -1943,17 +1943,32 @@ e. Source-vs-output check: for each fixture JD, the row count and wording under 
 ---
 
 ### MATTGPT-265
-**Move ~50 root probe_*, check_*, and generate_* scripts to scripts/probes/**
+**Move ~50 root probe_*, check_*, and generate_* scripts to probes/; preserve cited evidence in docs/evidence/**
 
 - **Status:** Open
 - **Priority:** Low
 - **Type:** Action
-- **File:** Repo root (`probe_*.py`, `check_*.py`, `generate_*.py`)
+- **File:** Repo root (`probe_*.py`, `check_*.py`, `generate_*.py`), `.gitignore`, `docs/evidence/`
 - **Logged:** October 2, 2026
+- **Updated:** October 4, 2026
 
-**Issue:** Approximately 50 probe, check, and generate scripts live at repo root alongside `app.py`. They are not production code but they clutter the root and make it harder to distinguish what runs in production from what is exploratory tooling.
+> **Until step 1 lands:** the cited folders below exist only on Matt's disk, untracked. Do not delete, clean, or move any `probe_*_output/` folder before the `docs/evidence/` copy is committed.
 
-**Fix:** Move to `scripts/probes/`. Update any path references in BACKLOG.md detail blocks that cite these scripts by filename (they are cited as exploratory instruments, not as imports, so no production code changes). No behavior change.
+**Scope (in order):**
+
+**Step 1 -- Preserve cited evidence (own commit, run first).** Copy the following into `docs/evidence/<ticket>/` and confirm `docs/evidence/` is not gitignored (`docs/working/` is; verify separately):
+
+- `docs/evidence/268/`: `probe_250_output/20260926_165950/`, `probe_250_output/20260926_172156/cs.json`, `probe_250_output/20260925_092116/step1_output.txt`
+- `docs/evidence/267/`: `probe_extraction_step0_output/extraction_calls.json`, `first_pending_row.json`
+- `docs/evidence/266/`: `probe_244_source_text_output/loop_20260921_125949/`
+
+**Step 2 -- `.gitignore`.** Add root-level output patterns: `probe_*_raw_results.json`, `probe_*_output.txt`, `probes/output/`.
+
+**Step 3 -- Move scripts.** Move probe, check, and generate scripts to `probes/`. Output goes to `probes/output/<ticket>/<timestamp>/`. Fix any Step 0 probes with a fixed output path to use the new layout. Update BACKLOG.md path references (cited as instruments, not imports -- no production code changes).
+
+**Step 4 -- `probe_extraction_088_*.json` (3 files).** Matt decides: frozen fixtures (commit next to the others) or leftovers (delete).
+
+**Acceptance:** `git status` shows no untracked probe files at root; every cited path in steps 1a-1c resolves under `docs/evidence/`.
 
 ---
 
