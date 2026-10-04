@@ -1,0 +1,26 @@
+{
+  "role_title": "Engineering Leader",
+  "company": "Undisclosed",
+  "jd_format": "bulleted",
+  "required_qualifications": [
+    {
+      "requirement": "5-10 years of experience managing a large engineering organization directly as the accountable leader",
+      "source_text": "5-10 years of experience managing a large engineering organization directly as the accountable leader.",
+      "type": "experience"
+    }
+  ],
+  "preferred_qualifications": [],
+  "implicit_requirements": [
+    {
+      "requirement": "Experience with direct people management in large organizations",
+      "inferred_from": "We are seeking an engineering leader with direct people management experience running large organizations.",
+      "confidence": "high"
+    }
+  ],
+  "key_responsibilities": [],
+  "seniority_signals": [
+    "Engineering leader",
+    "Direct people management experience",
+    "Running large organizations"
+  ]
+}

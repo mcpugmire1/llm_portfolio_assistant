@@ -1,0 +1,9 @@
+We are seeking a VP of Engineering to lead a product engineering organization focused on in-house software development. This role requires direct accountability for building and running an internal engineering team.
+
+Responsibilities:
+- Build and lead an in-house product engineering organization.
+- Own hiring, performance management, compensation, and career development for the engineering staff.
+- Drive software delivery through direct management of engineering teams.
+
+Required:
+- Experience running an in-house engineering organization of 60+ engineers as a direct accountable leader.
