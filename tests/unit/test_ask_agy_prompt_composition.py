@@ -72,6 +72,10 @@ _LANGUAGES_VERBATIM = "French (B2, self-assessed)"
 _RULE_0A_NO_INFERENCE = (
     "state what the facts say, do not infer capability or meaning from it"
 )
+# Removed Oct 4, 2026 (MATTGPT-268): the direct-no sentence made CS degree
+# answers lead with a no (9/10 with it, 0/10 without), while PMP led with a no
+# in 10/10 either way (probe_268_output/20261004_095649/). Asserted absent
+# from both messages via _RULE_0A_REMOVED.
 _RULE_0A_DIRECT_NO = "an item not in the list gets a direct no"
 # New at 9d5f575: Agy must answer from the block only, not join facts to stories.
 _RULE_0A_NO_STORY_CONNECT = (
@@ -105,6 +109,7 @@ _RULE_0A_FACTS_ONLY = (
 _RULE_0A_REMOVED = [
     "Answer from these facts only.",
     "Do not repeat requirement or eligibility wording from an education note.",
+    _RULE_0A_DIRECT_NO,
 ]
 # MATTGPT-250 item 4: 0a tells Agy to put a category marker on its own line
 # before the closer; post-processing strips it and the Sources fact row
@@ -115,11 +120,6 @@ _RULE_0A_CATEGORY_MARKERS = [
     "[[profile:languages]]",
     "[[profile:location_availability]]",
 ]
-# MATTGPT-250 step 2: 0a's direct-no category list names Location &
-# Availability alongside the other profile categories.
-_RULE_0A_DIRECT_NO_CATEGORIES = (
-    "(certifications, education, languages, location & availability)"
-)
 # Placement per mock #3b: markers sit on their own line before the closer.
 _RULE_0A_MARKER_PLACEMENT = "on its own line before the closing line"
 _RULE_0A_NEW_MARKERS = [
@@ -130,7 +130,6 @@ _RULE_0A_NEW_MARKERS = [
     _RULE_0A_FACTS_ONLY,
     *_RULE_0A_CATEGORY_MARKERS,
     _RULE_0A_MARKER_PLACEMENT,
-    _RULE_0A_DIRECT_NO_CATEGORIES,
 ]
 _RULE_0B_MARKER = "Nothing I know about Matt covers that"
 # New at 9d5f575: for absent categories, Agy must not pad the honest gap
@@ -297,11 +296,10 @@ class TestRule0aInCapturedUserMessage:
 class TestCitationRulesInCapturedSystemMessage:
     """Rules 0a and 0b appear in the runtime Agy system prompt.
 
-    0a has two clauses per the ticket: (a) no-inference (state what the
-    block says, do not infer capability or meaning) and (b) direct-no
-    (an item not in the list of a known category gets a direct no
-    followed by what the list does contain -- this is what PMP
-    acceptance depends on)."""
+    0a's no-inference clause (state what the block says, do not infer
+    capability or meaning) is asserted here. The direct-no clause was
+    removed in MATTGPT-268 and is asserted absent via _RULE_0A_REMOVED:
+    PMP leads with a no without it."""
 
     def test_rule_0a_no_inference_clause_present_in_system_message(
         self, captured_agy_system_message
@@ -310,18 +308,6 @@ class TestCitationRulesInCapturedSystemMessage:
             f"rule 0a no-inference clause {_RULE_0A_NO_INFERENCE!r} not "
             f"found in captured Agy system message. Head: "
             f"{captured_agy_system_message[:600]!r}"
-        )
-
-    def test_rule_0a_direct_no_clause_present_in_system_message(
-        self, captured_agy_system_message
-    ):
-        """PMP acceptance depends on this clause: 'Does Matt have a PMP?'
-        must return a direct no plus the list of certifications, which
-        only fires if the rule is present."""
-        assert _RULE_0A_DIRECT_NO in captured_agy_system_message, (
-            f"rule 0a direct-no clause {_RULE_0A_DIRECT_NO!r} not found "
-            f"in captured Agy system message. PMP acceptance depends on "
-            f"this clause. Head: {captured_agy_system_message[:600]!r}"
         )
 
     def test_rule_0b_present_in_system_message(self, captured_agy_system_message):
