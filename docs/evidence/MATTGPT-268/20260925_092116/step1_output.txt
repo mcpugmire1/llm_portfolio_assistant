@@ -1,0 +1,104 @@
+working tree: step 1 Green uncommitted (clause 1 narrowed, neutral AIU note, no-note-wording clause removed); item 4 committed d98f63c.
+====================================================================================================
+[AGY] Does Matt have a CS degree? (run 1)
+  family='technical' rejection=None profile_categories=['education']
+  |🐾 Found it!
+  |
+  |Matt does not have a Computer Science degree. He holds a Master's degree in Information Technology from **American InterContinental University**. Information Technology is recognized as a discipline related to Computer Science, and a Master's degree exceeds a Bachelor's. Additionally, Matt completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia, where he served as a teaching assistant for French courses. He also holds a BA in French Language and Literature from Queens University of Charlotte, which included a year abroad at Université Paul Valéry, Montpellier, France, through an exchange program with the University of North Carolina at Chapel Hill.
+  |
+  |Happy to explore similar work in other industries.
+
+====================================================================================================
+[AGY] Does Matt have a CS degree? (run 2)
+  family='technical' rejection=None profile_categories=['education']
+  |🐾 Here's a great example.
+  |
+  |Matt does not have a degree specifically in Computer Science. He holds a Master's degree in Information Technology from **American InterContinental University**. Information Technology is a recognized discipline related to Computer Science, and a Master's degree exceeds a Bachelor's. Additionally, he has completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia and holds a BA in French Language and Literature from Queens University of Charlotte.
+  |
+  |I can show you related patterns if that's helpful.
+
+====================================================================================================
+[AGY] Does Matt have a master's degree? (run 1)
+  family='out_of_scope' rejection=None profile_categories=['education']
+  |Got it! 🐾
+  |
+  |Matt holds a Master's degree in Information Technology from **American InterContinental University**.
+  |
+  |Want me to dig deeper into the technical approach?
+
+====================================================================================================
+[AGY] Does Matt have a master's degree? (run 2)
+  family='out_of_scope' rejection=None profile_categories=['education']
+  |🐾 This is a strong one.
+  |
+  |Matt holds a Master's degree in Information Technology from **American InterContinental University**.
+  |
+  |Happy to explore similar work in other industries.
+
+====================================================================================================
+[AGY] Tell me about Matt's payments work at JPMorgan (run 1)
+  family='domain_payments' rejection=None profile_categories=[]
+  |🐾 Found it!
+  |
+  |At **JP Morgan Chase**, Matt played a pivotal role in building the ACCESS Next Generation platform, a unified global corporate banking portal. The challenge was to create a system that could support **135,000+** clients across **180+** countries, far exceeding the capabilities of the out-of-box WebSeries platform. Matt led a team of over **40** professionals, working closely with Bottomline Technologies to design and deliver bespoke payment modules and security features.
+  |
+  |Matt's innovative approach involved designing ACH, wire, FX/cross-border, and EFTPS tax payment modules, each tailored to meet specific formatting, compliance, and workflow requirements. He implemented a Message Authentication Code (MAC) security layer to ensure payment integrity and built a contextual help system to reduce errors. Additionally, Matt developed payment-type-specific entitlement controls, enhancing the platform's role-based access control (RBAC) model.
+  |
+  |The platform's integration with JP Morgan's transaction monitoring system allowed for real-time global reporting and compliance validation. Matt's work enabled corporate treasurers to initiate cross-currency payments with embedded rate visibility and connectivity to international clearing systems. The ACCESS platform launched in April 2011, consolidating previously separate regional systems into a single digital experience. It has since been recognized as the #1 digital channel by Coalition Greenwich, transforming the corporate treasurer experience at JP Morgan.
+  |
+  |Shall I find more examples like this?
+
+====================================================================================================
+[AGY] What's Matt's leadership philosophy? (run 1)
+  family='narrative' rejection=None profile_categories=[]
+  |🐾 Here's a great example.
+  |
+  |Matt's leadership philosophy is centered on creating an environment where teams can thrive by removing barriers and fostering trust, clarity, and shared purpose. Across his roles, including leading a **150-person** Cloud Innovation Center at **Accenture**, he observed that successful teams are built not just on processes or tools, but on psychological safety and empowerment. He focused on building a culture where people could speak honestly, take risks, and make decisions closest to their work. This approach led to significant improvements, such as a **4x** acceleration in delivery once teams embraced lean product and modern engineering practices.
+  |
+  |Matt's leadership style blends empathy, clarity, and modern engineering rigor. He leads with purpose and makes intent explicit, ensuring transparency, direct feedback, and open communication. By grounding engineering culture in automation, continuous delivery, and quality-first practices, he coaches teams to think clearly and own their outcomes. This philosophy has enabled teams to improve quality, strengthen cross-functional trust, and deliver meaningful work with pride and ownership.
+  |
+  |His approach to leadership is consistent across various engagements, whether scaling the Cloud Innovation Center or modernizing platforms. He listens first, aligns around purpose, and moves intentionally, which has resulted in a career defined by impact, including **\$100M+** in repeat business through delivery excellence and trusted client relationships.
+  |
+  |Let me know if you'd like the deep dive on this one.
+
+====================================================================================================
+[AGY] Why hire Matt? (run 1)
+  family='synthesis' rejection=None profile_categories=[]
+  |🐾 Stepping back to see the themes, Matt's career is marked by a consistent pattern of building and transforming organizations to achieve remarkable outcomes. At **Accenture**, he built the Cloud Innovation Center from scratch, scaling it to over **150 professionals** and delivering at four times the velocity with zero-defect deployments. This achievement was grounded in modern engineering practices like test-driven development and automated pipelines, which contributed to **\$100M**+ in repeat business through delivery excellence. His leadership style is rooted in servant leadership and creating high-trust teams, which has led to lasting impacts beyond his direct involvement. By conducting on-site workshops and developing a target state architecture, he secured a **\$10M** implementation contract, aligning business and IT teams on a unified transformation approach.
+  |
+  |In addition to his technical and strategic capabilities, Matt has a strong focus on building ecosystems and partnerships. At **Accenture**, he established an innovation ecosystem that connected Fortune **500 clients** with emerging technology through strategic partnerships with institutions like Georgia Tech. This initiative improved solution relevance and client retention, positioning the Cloud Innovation Center as a bridge between enterprise needs and cutting-edge technology. His work spans across industries, including financial services, telecommunications, and transportation, consistently delivering measurable results. Which pattern would you like to explore further?
+
+====================================================================================================
+[AGY] Tell me about a time Matt failed (run 1)
+  family='behavioral' rejection=None profile_categories=[]
+  |🐾 Perfect — here's what I found.
+  |
+  |During a platform modernization delivery for a **Fortune 500 financial services** client, Matt faced a significant failure. He was the tech lead responsible for ensuring a safe environment setup across multiple environments, including dev, QA, UAT, and production. Under delivery pressure, he assumed that the IAM controls, environment boundaries, and data masking were correctly implemented based on inherited documentation. Unfortunately, these assumptions led to a serious incident where an offshore tester accidentally triggered an email job in UAT, sending communications with unmasked production data to thousands of real clients.
+  |
+  |Matt took full accountability for the incident and led the team through a root cause analysis and remediation process. He learned that assumptions are risks in disguise and that IAM validation, environment verification, PII scrubbing, and risk ownership should be day-one leadership responsibilities. The incident resulted in the client demanding the removal of the tester from the project, highlighting a systemic failure that had individual consequences. This experience reinforced Matt's belief that leaders must own the environment their teams operate in, ensuring that such failures do not recur.
+  |
+  |Happy to explore similar work in other industries.
+
+====================================================================================================
+[AGY] How did Matt build the AWS certification program? (run 1)
+  family='technical' rejection=None profile_categories=[]
+  |🐾 Here's a great example.
+  |
+  |At **Accenture's** Liquid Studio, traditional training programs couldn't keep up with rapidly evolving AWS technologies, leading to skill gaps and slowing cloud adoption. To address this, Matt led the AWS Launchpad program, aimed at building deep cloud competencies across the organization. He collaborated with AWS to design structured learning paths and certification programs focused on AWS core services like Lambda, API Gateway, DynamoDB, Kubernetes, and ECS/Fargate. The program emphasized practical application through interactive workshops and labs, immersing engineers in real-world AWS environments.
+  |
+  |Matt established mentorship teams to embed best practices and foster institutional knowledge, supporting over **200 professionals** in earning AWS certifications, including AWS Solutions Architect and DevOps Engineer. This initiative not only accelerated cloud adoption but also positioned **Accenture** as a leader in AWS competency, enhancing market credibility and the ability to secure cloud-native engagements. The program fostered a sustainable learning culture, ensuring ongoing cloud innovation and capability-building across teams.
+  |
+  |Let me know if you'd like the deep dive on this one.
+
+====================================================================================================
+[ROLE MATCH] Bachelor's degree in Computer Science or related field (run 1)
+  match_status='strong' confidence='high'
+  evidence_type='profile' story=None
+    relevance: Matt holds a Master's degree in Information Technology, a related field.
+  gap_explanation: ''
+====================================================================================================
+[ROLE MATCH] Bachelor's degree in Computer Science or related field (run 2)
+  match_status='strong' confidence='high'
+  evidence_type='profile' story=None
+    relevance: Matt holds a Master's degree in Information Technology, a related field.
+  gap_explanation: ''

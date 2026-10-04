@@ -1,0 +1,275 @@
+{
+  "extraction": {
+    "role_title": "Senior Engineering Leader, Product Platform",
+    "company": "Undisclosed",
+    "jd_format": "bulleted",
+    "required_qualifications": [
+      {
+        "requirement": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+        "source_text": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+        "type": "experience"
+      },
+      {
+        "requirement": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+        "source_text": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+        "type": "experience"
+      },
+      {
+        "requirement": "Experience building or scaling an engineering organization from early stage to 100+ or inheriting and restructuring an existing org",
+        "source_text": "Demonstrated experience building or scaling an engineering organization (from early stage to 100+ or inheriting and restructuring an existing org)",
+        "type": "experience"
+      },
+      {
+        "requirement": "Cloud-native architecture experience at the platform level with AWS, Azure, or GCP",
+        "source_text": "Cloud-native architecture experience (AWS, Azure, or GCP) at the platform level",
+        "type": "skill"
+      },
+      {
+        "requirement": "Track record of legacy platform modernization in production environments without business disruption",
+        "source_text": "Track record of legacy platform modernization in production environments without business disruption",
+        "type": "experience"
+      },
+      {
+        "requirement": "Cross-functional leadership experience with engineering, product, and design operating as integrated units",
+        "source_text": "Cross-functional leadership experience \u2014 engineering, product, and design operating as integrated units",
+        "type": "experience"
+      },
+      {
+        "requirement": "Experience establishing or maturing engineering delivery practices such as CI/CD, automated testing, observability, and release management",
+        "source_text": "Experience establishing or maturing engineering delivery practices (CI/CD, automated testing, observability, release management)",
+        "type": "experience"
+      },
+      {
+        "requirement": "Experience in a regulated industry such as financial services, healthcare, government, or equivalent complexity",
+        "source_text": "Regulated industry experience (financial services, healthcare, government, or equivalent complexity)",
+        "type": "domain"
+      },
+      {
+        "requirement": "Ability to translate business strategy into engineering roadmap and organizational structure",
+        "source_text": "Demonstrated ability to translate business strategy into engineering roadmap and organizational structure",
+        "type": "skill"
+      },
+      {
+        "requirement": "Practical experience introducing AI-assisted development practices into an engineering organization",
+        "source_text": "AI/ML adoption strategy \u2014 practical experience introducing AI-assisted development practices into an engineering organization",
+        "type": "experience"
+      },
+      {
+        "requirement": "Fluency in modern technology stack across frontend and backend, including React or equivalent, Python/Node.js/Go, and containerized microservices",
+        "source_text": "Modern technology stack fluency across frontend and backend (React or equivalent, Python/Node.js/Go, containerized microservices)",
+        "type": "skill"
+      },
+      {
+        "requirement": "Budget ownership or P&L accountability for an engineering function",
+        "source_text": "Budget ownership or P&L accountability for an engineering function",
+        "type": "experience"
+      }
+    ],
+    "preferred_qualifications": [
+      {
+        "requirement": "Experience in a product company such as SaaS, platform, or marketplace",
+        "source_text": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+        "type": "experience"
+      },
+      {
+        "requirement": "Domain knowledge in healthcare, insurance, or life sciences",
+        "source_text": "Healthcare, insurance, or life sciences domain knowledge",
+        "type": "domain"
+      },
+      {
+        "requirement": "Hands-on Kubernetes experience at production scale, including cluster management, service mesh, and multi-tenant orchestration",
+        "source_text": "Hands-on Kubernetes experience at production scale (cluster management, service mesh, multi-tenant orchestration)",
+        "type": "skill"
+      },
+      {
+        "requirement": "Graduate degree in a technical field such as Computer Science, Engineering, or Information Technology",
+        "source_text": "Graduate degree in a technical field (Computer Science, Engineering, Information Technology, or related)",
+        "type": "education"
+      },
+      {
+        "requirement": "Published thought leadership or conference speaking on engineering culture, modernization, or AI adoption",
+        "source_text": "Published thought leadership or conference speaking on engineering culture, modernization, or AI adoption",
+        "type": "experience"
+      }
+    ],
+    "implicit_requirements": [
+      {
+        "requirement": "Ability to lead and scale a large cross-functional product engineering organization",
+        "inferred_from": "Lead and scale a cross-functional product engineering organization (150-300 engineers, product managers, and designers)",
+        "confidence": "high"
+      },
+      {
+        "requirement": "Experience in defining engineering operating models, including hiring philosophy, team structure, delivery practices, quality standards, and career development",
+        "inferred_from": "Define the engineering operating model: hiring philosophy, team structure, delivery practices, quality standards, and career development",
+        "confidence": "high"
+      },
+      {
+        "requirement": "Capability to establish AI-assisted engineering practices with guardrails for quality, security, and responsible adoption",
+        "inferred_from": "Establish AI-assisted engineering practices with guardrails for quality, security, and responsible adoption",
+        "confidence": "high"
+      },
+      {
+        "requirement": "Ability to build a culture of sustainable delivery with high throughput without heroics",
+        "inferred_from": "Build a culture of sustainable delivery \u2014 high throughput without heroics",
+        "confidence": "high"
+      }
+    ],
+    "key_responsibilities": [
+      "Lead and scale a cross-functional product engineering organization (150-300 engineers, product managers, and designers)",
+      "Define the engineering operating model: hiring philosophy, team structure, delivery practices, quality standards, and career development",
+      "Drive platform modernization across a legacy core while maintaining business continuity",
+      "Establish AI-assisted engineering practices with guardrails for quality, security, and responsible adoption",
+      "Partner with C-suite to translate business strategy into technical roadmap and organizational priorities",
+      "Build a culture of sustainable delivery \u2014 high throughput without heroics"
+    ]
+  },
+  "results": [
+    {
+      "requirement": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+      "match_status": "unassessed",
+      "evidence": [],
+      "gap_explanation": "I couldn't finish assessing this one.",
+      "category": "required"
+    },
+    {
+      "requirement": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+      "match_status": "unassessed",
+      "evidence": [],
+      "gap_explanation": "I couldn't finish assessing this one.",
+      "category": "required"
+    },
+    {
+      "requirement": "Demonstrated experience building or scaling an engineering organization (from early stage to 100+ or inheriting and restructuring an existing org)",
+      "match_status": "unassessed",
+      "evidence": [],
+      "gap_explanation": "I couldn't finish assessing this one.",
+      "category": "required"
+    },
+    {
+      "requirement": "Cloud-native architecture experience (AWS, Azure, or GCP) at the platform level",
+      "match_status": "unassessed",
+      "evidence": [],
+      "gap_explanation": "I couldn't finish assessing this one.",
+      "category": "required"
+    },
+    {
+      "requirement": "Track record of legacy platform modernization in production environments without business disruption",
+      "match_status": "unassessed",
+      "evidence": [],
+      "gap_explanation": "I couldn't finish assessing this one.",
+      "category": "required"
+    },
+    {
+      "requirement": "Cross-functional leadership experience \u2014 engineering, product, and design operating as integrated units",
+      "match_status": "unassessed",
+      "evidence": [],
+      "gap_explanation": "I couldn't finish assessing this one.",
+      "category": "required"
+    },
+    {
+      "requirement": "Experience establishing or maturing engineering delivery practices (CI/CD, automated testing, observability, release management)",
+      "match_status": "unassessed",
+      "evidence": [],
+      "gap_explanation": "I couldn't finish assessing this one.",
+      "category": "required"
+    },
+    {
+      "requirement": "Regulated industry experience (financial services, healthcare, government, or equivalent complexity)",
+      "match_status": "unassessed",
+      "evidence": [],
+      "gap_explanation": "I couldn't finish assessing this one.",
+      "category": "required"
+    },
+    {
+      "requirement": "Demonstrated ability to translate business strategy into engineering roadmap and organizational structure",
+      "match_status": "unassessed",
+      "evidence": [],
+      "gap_explanation": "I couldn't finish assessing this one.",
+      "category": "required"
+    },
+    {
+      "requirement": "AI/ML adoption strategy \u2014 practical experience introducing AI-assisted development practices into an engineering organization",
+      "match_status": "unassessed",
+      "evidence": [],
+      "gap_explanation": "I couldn't finish assessing this one.",
+      "category": "required"
+    },
+    {
+      "requirement": "Modern technology stack fluency across frontend and backend (React or equivalent, Python/Node.js/Go, containerized microservices)",
+      "match_status": "unassessed",
+      "evidence": [],
+      "gap_explanation": "I couldn't finish assessing this one.",
+      "category": "required"
+    },
+    {
+      "requirement": "Budget ownership or P&L accountability for an engineering function",
+      "match_status": "unassessed",
+      "evidence": [],
+      "gap_explanation": "I couldn't finish assessing this one.",
+      "category": "required"
+    },
+    {
+      "requirement": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+      "match_status": "unassessed",
+      "evidence": [],
+      "gap_explanation": "I couldn't finish assessing this one.",
+      "category": "preferred"
+    },
+    {
+      "requirement": "Healthcare, insurance, or life sciences domain knowledge",
+      "match_status": "unassessed",
+      "evidence": [],
+      "gap_explanation": "I couldn't finish assessing this one.",
+      "category": "preferred"
+    },
+    {
+      "requirement": "Hands-on Kubernetes experience at production scale (cluster management, service mesh, multi-tenant orchestration)",
+      "match_status": "unassessed",
+      "evidence": [],
+      "gap_explanation": "I couldn't finish assessing this one.",
+      "category": "preferred"
+    },
+    {
+      "requirement": "Graduate degree in a technical field (Computer Science, Engineering, Information Technology, or related)",
+      "match_status": "unassessed",
+      "evidence": [],
+      "gap_explanation": "I couldn't finish assessing this one.",
+      "category": "preferred"
+    },
+    {
+      "requirement": "Published thought leadership or conference speaking on engineering culture, modernization, or AI adoption",
+      "match_status": "unassessed",
+      "evidence": [],
+      "gap_explanation": "I couldn't finish assessing this one.",
+      "category": "preferred"
+    },
+    {
+      "requirement": "Ability to lead and scale a large cross-functional product engineering organization",
+      "match_status": "unassessed",
+      "evidence": [],
+      "gap_explanation": "I couldn't finish assessing this one.",
+      "category": "required"
+    },
+    {
+      "requirement": "Experience in defining engineering operating models, including hiring philosophy, team structure, delivery practices, quality standards, and career development",
+      "match_status": "unassessed",
+      "evidence": [],
+      "gap_explanation": "I couldn't finish assessing this one.",
+      "category": "required"
+    },
+    {
+      "requirement": "Capability to establish AI-assisted engineering practices with guardrails for quality, security, and responsible adoption",
+      "match_status": "unassessed",
+      "evidence": [],
+      "gap_explanation": "I couldn't finish assessing this one.",
+      "category": "required"
+    },
+    {
+      "requirement": "Ability to build a culture of sustainable delivery with high throughput without heroics",
+      "match_status": "unassessed",
+      "evidence": [],
+      "gap_explanation": "I couldn't finish assessing this one.",
+      "category": "required"
+    }
+  ]
+}

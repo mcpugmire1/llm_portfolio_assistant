@@ -1,0 +1,306 @@
+{
+  "att_principal": [
+    {
+      "wall_extract_s": 13.537059542257339,
+      "req_counts": {
+        "required": 19,
+        "preferred": 10,
+        "implicit": 5
+      },
+      "jd_format": "hybrid",
+      "calls": [
+        {
+          "section": "required",
+          "start_s": 0.00037737516686320305,
+          "end_s": 11.464518500026315,
+          "duration_s": 11.464141124859452,
+          "completion_tokens": 1439,
+          "prompt_tokens": 2601,
+          "field_tokens": {
+            "source_text": 317,
+            "key_responsibilities": 288,
+            "inferred_from": 0
+          }
+        },
+        {
+          "section": "preferred",
+          "start_s": 0.001470167189836502,
+          "end_s": 3.783935292158276,
+          "duration_s": 3.7824651249684393,
+          "completion_tokens": 544,
+          "prompt_tokens": 1911,
+          "field_tokens": {
+            "source_text": 151,
+            "key_responsibilities": 0,
+            "inferred_from": 0
+          }
+        },
+        {
+          "section": "implicit",
+          "start_s": 11.465376125182956,
+          "end_s": 13.534969124943018,
+          "duration_s": 2.0695929997600615,
+          "completion_tokens": 269,
+          "prompt_tokens": 2444,
+          "field_tokens": {
+            "source_text": 0,
+            "key_responsibilities": 0,
+            "inferred_from": 92
+          }
+        }
+      ]
+    },
+    {
+      "wall_extract_s": 11.665477166883647,
+      "req_counts": {
+        "required": 19,
+        "preferred": 10,
+        "implicit": 5
+      },
+      "jd_format": "hybrid",
+      "calls": [
+        {
+          "section": "required",
+          "start_s": 0.0006991671398282051,
+          "end_s": 9.757901541888714,
+          "duration_s": 9.757202374748886,
+          "completion_tokens": 1440,
+          "prompt_tokens": 2601,
+          "field_tokens": {
+            "source_text": 317,
+            "key_responsibilities": 288,
+            "inferred_from": 0
+          }
+        },
+        {
+          "section": "preferred",
+          "start_s": 0.0027772500179708004,
+          "end_s": 3.808769542258233,
+          "duration_s": 3.805992292240262,
+          "completion_tokens": 544,
+          "prompt_tokens": 1911,
+          "field_tokens": {
+            "source_text": 151,
+            "key_responsibilities": 0,
+            "inferred_from": 0
+          }
+        },
+        {
+          "section": "implicit",
+          "start_s": 9.758830917067826,
+          "end_s": 11.664398167282343,
+          "duration_s": 1.9055672502145171,
+          "completion_tokens": 273,
+          "prompt_tokens": 2445,
+          "field_tokens": {
+            "source_text": 0,
+            "key_responsibilities": 0,
+            "inferred_from": 92
+          }
+        }
+      ]
+    },
+    {
+      "wall_extract_s": 10.327015957795084,
+      "req_counts": {
+        "required": 19,
+        "preferred": 10,
+        "implicit": 5
+      },
+      "jd_format": "hybrid",
+      "calls": [
+        {
+          "section": "required",
+          "start_s": 0.0005324576050043106,
+          "end_s": 8.587257749866694,
+          "duration_s": 8.58672529226169,
+          "completion_tokens": 1440,
+          "prompt_tokens": 2601,
+          "field_tokens": {
+            "source_text": 317,
+            "key_responsibilities": 288,
+            "inferred_from": 0
+          }
+        },
+        {
+          "section": "preferred",
+          "start_s": 0.002268499694764614,
+          "end_s": 3.3628925406374037,
+          "duration_s": 3.360624040942639,
+          "completion_tokens": 544,
+          "prompt_tokens": 1911,
+          "field_tokens": {
+            "source_text": 151,
+            "key_responsibilities": 0,
+            "inferred_from": 0
+          }
+        },
+        {
+          "section": "implicit",
+          "start_s": 8.587773624807596,
+          "end_s": 10.325780832674354,
+          "duration_s": 1.738007207866758,
+          "completion_tokens": 268,
+          "prompt_tokens": 2445,
+          "field_tokens": {
+            "source_text": 0,
+            "key_responsibilities": 0,
+            "inferred_from": 95
+          }
+        }
+      ]
+    }
+  ],
+  "demo_jd": [
+    {
+      "wall_extract_s": 7.359195041004568,
+      "req_counts": {
+        "required": 12,
+        "preferred": 5,
+        "implicit": 4
+      },
+      "jd_format": "bulleted",
+      "calls": [
+        {
+          "section": "required",
+          "start_s": 0.0007442082278430462,
+          "end_s": 5.397635625209659,
+          "duration_s": 5.396891416981816,
+          "completion_tokens": 864,
+          "prompt_tokens": 1663,
+          "field_tokens": {
+            "source_text": 207,
+            "key_responsibilities": 96,
+            "inferred_from": 0
+          }
+        },
+        {
+          "section": "preferred",
+          "start_s": 0.0033334163017570972,
+          "end_s": 2.08502083318308,
+          "duration_s": 2.081687416881323,
+          "completion_tokens": 297,
+          "prompt_tokens": 973,
+          "field_tokens": {
+            "source_text": 84,
+            "key_responsibilities": 0,
+            "inferred_from": 0
+          }
+        },
+        {
+          "section": "implicit",
+          "start_s": 5.398785333149135,
+          "end_s": 7.357824666425586,
+          "duration_s": 1.9590393332764506,
+          "completion_tokens": 252,
+          "prompt_tokens": 1316,
+          "field_tokens": {
+            "source_text": 0,
+            "key_responsibilities": 0,
+            "inferred_from": 71
+          }
+        }
+      ]
+    },
+    {
+      "wall_extract_s": 8.073129875119776,
+      "req_counts": {
+        "required": 12,
+        "preferred": 5,
+        "implicit": 4
+      },
+      "jd_format": "bulleted",
+      "calls": [
+        {
+          "section": "required",
+          "start_s": 0.0008206660859286785,
+          "end_s": 6.186605541035533,
+          "duration_s": 6.185784874949604,
+          "completion_tokens": 865,
+          "prompt_tokens": 1663,
+          "field_tokens": {
+            "source_text": 207,
+            "key_responsibilities": 96,
+            "inferred_from": 0
+          }
+        },
+        {
+          "section": "preferred",
+          "start_s": 0.002352125011384487,
+          "end_s": 1.9393265000544488,
+          "duration_s": 1.9369743750430644,
+          "completion_tokens": 298,
+          "prompt_tokens": 973,
+          "field_tokens": {
+            "source_text": 84,
+            "key_responsibilities": 0,
+            "inferred_from": 0
+          }
+        },
+        {
+          "section": "implicit",
+          "start_s": 6.187216165941209,
+          "end_s": 8.071718832943588,
+          "duration_s": 1.88450266700238,
+          "completion_tokens": 252,
+          "prompt_tokens": 1318,
+          "field_tokens": {
+            "source_text": 0,
+            "key_responsibilities": 0,
+            "inferred_from": 71
+          }
+        }
+      ]
+    },
+    {
+      "wall_extract_s": 7.838065457995981,
+      "req_counts": {
+        "required": 12,
+        "preferred": 5,
+        "implicit": 5
+      },
+      "jd_format": "bulleted",
+      "calls": [
+        {
+          "section": "required",
+          "start_s": 0.000568208284676075,
+          "end_s": 5.68913345830515,
+          "duration_s": 5.688565250020474,
+          "completion_tokens": 865,
+          "prompt_tokens": 1663,
+          "field_tokens": {
+            "source_text": 207,
+            "key_responsibilities": 96,
+            "inferred_from": 0
+          }
+        },
+        {
+          "section": "preferred",
+          "start_s": 0.0015564579516649246,
+          "end_s": 2.0479149580933154,
+          "duration_s": 2.0463585001416504,
+          "completion_tokens": 295,
+          "prompt_tokens": 973,
+          "field_tokens": {
+            "source_text": 84,
+            "key_responsibilities": 0,
+            "inferred_from": 0
+          }
+        },
+        {
+          "section": "implicit",
+          "start_s": 5.689604707993567,
+          "end_s": 7.8366610002703965,
+          "duration_s": 2.1470562922768295,
+          "completion_tokens": 308,
+          "prompt_tokens": 1315,
+          "field_tokens": {
+            "source_text": 0,
+            "key_responsibilities": 0,
+            "inferred_from": 85
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+[
+ {
+  "group": "cs",
+  "query": "Does Matt have a CS degree?",
+  "run": 1,
+  "sys_note_first": true,
+  "user_note_first": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e Found it!\n\nMatt does not have a degree specifically in Computer Science. He holds a Master's degree in Information Technology from **American InterContinental University**, which is a recognized Computer Science-related discipline and exceeds a Bachelor's degree. Additionally, he has a BA in French Language and Literature from Queens University of Charlotte, which included a year abroad at Universit\u00e9 Paul Val\u00e9ry, Montpellier, France, through an exchange program with the University of North Carolina at Chapel Hill. He also completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia, where he taught French 101, 102, and 103 as a teaching assistant.\n\nWant to see how Matt applied this elsewhere?"
+ },
+ {
+  "group": "cs",
+  "query": "Does Matt have a CS degree?",
+  "run": 2,
+  "sys_note_first": true,
+  "user_note_first": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e I know just the story.\n\nMatt holds a Master's degree in Information Technology from **American InterContinental University**. Information Technology is a recognized Computer Science-related discipline, and a Master's degree exceeds a Bachelor's. Additionally, he has a BA in French Language and Literature from Queens University of Charlotte. \n\nWhat else can I track down for you?"
+ },
+ {
+  "group": "cs",
+  "query": "Does Matt have a CS degree?",
+  "run": 3,
+  "sys_note_first": true,
+  "user_note_first": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e On it!\n\nMatt holds a Master's degree in Information Technology from **American InterContinental University**. Information Technology is a recognized Computer Science-related discipline, and a Master's degree exceeds a Bachelor's. Additionally, he completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia, where he taught French 101, 102, and 103 as a teaching assistant. He also earned a BA in French Language and Literature from Queens University of Charlotte, which included a year abroad at Universit\u00e9 Paul Val\u00e9ry, Montpellier, France, through an exchange program with the University of North Carolina at Chapel Hill.\n\nI can show you related patterns if that's helpful."
+ },
+ {
+  "group": "cs",
+  "query": "Does Matt have a computer science degree?",
+  "run": 1,
+  "sys_note_first": true,
+  "user_note_first": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e On it!\n\nMatt holds a Master's degree in Information Technology from **American InterContinental University**. Information Technology is a recognized Computer Science-related discipline, and a Master's degree exceeds a Bachelor's. Additionally, he has completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia and holds a BA in French Language and Literature from Queens University of Charlotte. His education included a year abroad at Universit\u00e9 Paul Val\u00e9ry, Montpellier, France, through an exchange program with the University of North Carolina at Chapel Hill.\n\nI can show you related patterns if that's helpful."
+ },
+ {
+  "group": "cs",
+  "query": "Does Matt have a computer science degree?",
+  "run": 2,
+  "sys_note_first": true,
+  "user_note_first": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e Here's a great example.\n\nMatt does not have a degree specifically in computer science. He holds a Master's degree in Information Technology from **American InterContinental University**, which is a recognized Computer Science-related discipline. Additionally, Matt has completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia, where he served as a teaching assistant for French courses. He also holds a Bachelor of Arts in French Language and Literature from Queens University of Charlotte, which included a year abroad at Universit\u00e9 Paul Val\u00e9ry, Montpellier, France.\n\nWant me to dig deeper into the technical approach?"
+ },
+ {
+  "group": "cs",
+  "query": "Does Matt have a computer science degree?",
+  "run": 3,
+  "sys_note_first": true,
+  "user_note_first": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e Perfect \u2014 here's what I found.\n\nMatt holds a Master's degree in Information Technology from **American InterContinental University**. Information Technology is a recognized Computer Science-related discipline, and a Master's degree exceeds a Bachelor's. \n\nShall I find more examples like this?"
+ },
+ {
+  "group": "cs",
+  "query": "Does Matt have a Bachelor's in CS?",
+  "run": 1,
+  "sys_note_first": true,
+  "user_note_first": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "Got it! \ud83d\udc3e\n\nMatt does not have a Bachelor's degree in Computer Science. He holds a BA in French Language and Literature from Queens University of Charlotte, which included a year abroad at Universit\u00e9 Paul Val\u00e9ry, Montpellier, France. Additionally, he earned a Master's degree in Information Technology from **American InterContinental University**. Information Technology is a recognized Computer Science-related discipline, and a Master's degree exceeds a Bachelor's.\n\nShall I find more examples like this?"
+ },
+ {
+  "group": "cs",
+  "query": "Does Matt have a Bachelor's in CS?",
+  "run": 2,
+  "sys_note_first": true,
+  "user_note_first": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e On it!\n\nMatt does not have a Bachelor's degree in Computer Science. He holds a BA in French Language and Literature from Queens University of Charlotte, which included a year abroad at Universit\u00e9 Paul Val\u00e9ry, Montpellier, France. Additionally, he has a Master's degree in Information Technology from **American InterContinental University**. Information Technology is recognized as a Computer Science-related discipline, and a Master's degree exceeds a Bachelor's. \n\nWant me to dig deeper into the technical approach?"
+ },
+ {
+  "group": "cs",
+  "query": "Does Matt have a Bachelor's in CS?",
+  "run": 3,
+  "sys_note_first": true,
+  "user_note_first": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e Found it!\n\nMatt does not have a Bachelor's degree in Computer Science. Instead, he holds a BA in French Language and Literature from Queens University of Charlotte. His education also includes a Master's degree in Information Technology from **American InterContinental University**, which is a recognized Computer Science-related discipline and exceeds a Bachelor's. Additionally, he has completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia.\n\nShall I find more examples like this?"
+ }
+]

@@ -1,0 +1,558 @@
+{
+  "extraction": {
+    "role_title": "Senior Engineering Leader, Product Platform",
+    "company": "Undisclosed",
+    "jd_format": "hybrid",
+    "required_qualifications": [
+      {
+        "requirement": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+        "source_text": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+        "type": "experience"
+      },
+      {
+        "requirement": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+        "source_text": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+        "type": "experience"
+      },
+      {
+        "requirement": "Experience building or scaling an engineering organization from early stage to 100+ or inheriting and restructuring an existing org",
+        "source_text": "Demonstrated experience building or scaling an engineering organization (from early stage to 100+ or inheriting and restructuring an existing org)",
+        "type": "experience"
+      },
+      {
+        "requirement": "Cloud-native architecture experience with AWS, Azure, or GCP at the platform level",
+        "source_text": "Cloud-native architecture experience (AWS, Azure, or GCP) at the platform level",
+        "type": "skill"
+      },
+      {
+        "requirement": "Track record of legacy platform modernization in production environments without business disruption",
+        "source_text": "Track record of legacy platform modernization in production environments without business disruption",
+        "type": "experience"
+      },
+      {
+        "requirement": "Cross-functional leadership experience with engineering, product, and design operating as integrated units",
+        "source_text": "Cross-functional leadership experience \u2014 engineering, product, and design operating as integrated units",
+        "type": "experience"
+      },
+      {
+        "requirement": "Experience establishing or maturing engineering delivery practices such as CI/CD, automated testing, observability, and release management",
+        "source_text": "Experience establishing or maturing engineering delivery practices (CI/CD, automated testing, observability, release management)",
+        "type": "experience"
+      },
+      {
+        "requirement": "Experience in a regulated industry such as financial services, healthcare, or government",
+        "source_text": "Regulated industry experience (financial services, healthcare, government, or equivalent complexity)",
+        "type": "domain"
+      },
+      {
+        "requirement": "Ability to translate business strategy into engineering roadmap and organizational structure",
+        "source_text": "Demonstrated ability to translate business strategy into engineering roadmap and organizational structure",
+        "type": "skill"
+      },
+      {
+        "requirement": "Practical experience introducing AI-assisted development practices into an engineering organization",
+        "source_text": "AI/ML adoption strategy \u2014 practical experience introducing AI-assisted development practices into an engineering organization",
+        "type": "experience"
+      },
+      {
+        "requirement": "Fluency in modern technology stack across frontend and backend, including React or equivalent, Python/Node.js/Go, and containerized microservices",
+        "source_text": "Modern technology stack fluency across frontend and backend (React or equivalent, Python/Node.js/Go, containerized microservices)",
+        "type": "skill"
+      },
+      {
+        "requirement": "Budget ownership or P&L accountability for an engineering function",
+        "source_text": "Budget ownership or P&L accountability for an engineering function",
+        "type": "experience"
+      }
+    ],
+    "preferred_qualifications": [
+      {
+        "requirement": "Experience in a product company such as SaaS, platform, or marketplace",
+        "source_text": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+        "type": "experience"
+      },
+      {
+        "requirement": "Domain knowledge in healthcare, insurance, or life sciences",
+        "source_text": "Healthcare, insurance, or life sciences domain knowledge",
+        "type": "domain"
+      },
+      {
+        "requirement": "Hands-on Kubernetes experience at production scale, including cluster management, service mesh, and multi-tenant orchestration",
+        "source_text": "Hands-on Kubernetes experience at production scale (cluster management, service mesh, multi-tenant orchestration)",
+        "type": "skill"
+      },
+      {
+        "requirement": "Graduate degree in a technical field such as Computer Science, Engineering, or Information Technology",
+        "source_text": "Graduate degree in a technical field (Computer Science, Engineering, Information Technology, or related)",
+        "type": "education"
+      },
+      {
+        "requirement": "Published thought leadership or conference speaking on engineering culture, modernization, or AI adoption",
+        "source_text": "Published thought leadership or conference speaking on engineering culture, modernization, or AI adoption",
+        "type": "experience"
+      }
+    ],
+    "implicit_requirements": [
+      {
+        "requirement": "Ability to lead and scale a large cross-functional product engineering organization",
+        "inferred_from": "Lead and scale a cross-functional product engineering organization (150-300 engineers, product managers, and designers)",
+        "confidence": "high"
+      },
+      {
+        "requirement": "Experience in defining engineering operating models, including hiring philosophy, team structure, delivery practices, quality standards, and career development",
+        "inferred_from": "Define the engineering operating model: hiring philosophy, team structure, delivery practices, quality standards, and career development",
+        "confidence": "high"
+      },
+      {
+        "requirement": "Ability to establish AI-assisted engineering practices with guardrails for quality, security, and responsible adoption",
+        "inferred_from": "Establish AI-assisted engineering practices with guardrails for quality, security, and responsible adoption",
+        "confidence": "high"
+      },
+      {
+        "requirement": "Experience partnering with C-suite to translate business strategy into technical roadmap and organizational priorities",
+        "inferred_from": "Partner with C-suite to translate business strategy into technical roadmap and organizational priorities",
+        "confidence": "high"
+      },
+      {
+        "requirement": "Ability to build a culture of sustainable delivery with high throughput without heroics",
+        "inferred_from": "Build a culture of sustainable delivery \u2014 high throughput without heroics",
+        "confidence": "high"
+      }
+    ],
+    "key_responsibilities": [
+      "Lead and scale a cross-functional product engineering organization (150-300 engineers, product managers, and designers)",
+      "Define the engineering operating model: hiring philosophy, team structure, delivery practices, quality standards, and career development",
+      "Drive platform modernization across a legacy core while maintaining business continuity",
+      "Establish AI-assisted engineering practices with guardrails for quality, security, and responsible adoption",
+      "Partner with C-suite to translate business strategy into technical roadmap and organizational priorities",
+      "Build a culture of sustainable delivery \u2014 high throughput without heroics"
+    ]
+  },
+  "results": [
+    {
+      "requirement": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+      "match_status": "strong",
+      "evidence": [
+        {
+          "evidence_type": "story",
+          "story_title": "Why Hire Matt?",
+          "client": "Accenture",
+          "relevance": "Describes progression from engineer to Director, indicating extensive experience."
+        },
+        {
+          "evidence_type": "story",
+          "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+          "client": "Sparkfly",
+          "relevance": "Details early career hands-on development, showing foundational engineering experience."
+        }
+      ],
+      "gap_explanation": "",
+      "confidence": "high",
+      "category": "required"
+    },
+    {
+      "requirement": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+      "match_status": "strong",
+      "evidence": [
+        {
+          "evidence_type": "story",
+          "story_title": "Leading People: From Delivery Teams to a 150-Person Organization",
+          "client": "Fortune 500 Clients",
+          "relevance": "Matt led a 150+ person organization with 11-13 direct-report practice and client leads."
+        }
+      ],
+      "gap_explanation": "",
+      "confidence": "high",
+      "category": "required"
+    },
+    {
+      "requirement": "Demonstrated experience building or scaling an engineering organization (from early stage to 100+ or inheriting and restructuring an existing org)",
+      "match_status": "strong",
+      "evidence": [
+        {
+          "evidence_type": "story",
+          "story_title": "Leading People: From Delivery Teams to a 150-Person Organization",
+          "client": "Fortune 500 Clients",
+          "relevance": "Matt grew an organization from a 10-person pilot to 150+ practitioners."
+        },
+        {
+          "evidence_type": "story",
+          "story_title": "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "client": "Accenture",
+          "relevance": "Matt built the Cloud Innovation Centers from 0 to 150+ practitioners."
+        }
+      ],
+      "gap_explanation": "",
+      "confidence": "high",
+      "category": "required"
+    },
+    {
+      "requirement": "Cloud-native architecture experience (AWS, Azure, or GCP) at the platform level",
+      "match_status": "strong",
+      "evidence": [
+        {
+          "evidence_type": "story",
+          "story_title": "Driving Cloud-Native Innovation through TICARA Framework",
+          "client": "Accenture",
+          "relevance": "Demonstrates AWS/Azure platform-level architecture using Terraform and Serverless Framework."
+        },
+        {
+          "evidence_type": "story",
+          "story_title": "Driving Modern Software Engineering with Project Octane",
+          "client": "Accenture",
+          "relevance": "Shows AWS platform-level architecture with Terraform, CloudFormation, and serverless services."
+        }
+      ],
+      "gap_explanation": "",
+      "confidence": "high",
+      "category": "required"
+    },
+    {
+      "requirement": "Track record of legacy platform modernization in production environments without business disruption",
+      "match_status": "strong",
+      "evidence": [
+        {
+          "evidence_type": "story",
+          "story_title": "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "client": "Norfolk Southern",
+          "relevance": "Led incremental modernization of mainframe systems to microservices without disrupting operations."
+        },
+        {
+          "evidence_type": "story",
+          "story_title": "Transforming Legacy Systems through Incremental App Modernization",
+          "client": "Fortune 500 Clients",
+          "relevance": "Implemented incremental modernization strategies ensuring zero downtime during deployments."
+        }
+      ],
+      "gap_explanation": "",
+      "confidence": "high",
+      "category": "required"
+    },
+    {
+      "requirement": "Cross-functional leadership experience \u2014 engineering, product, and design operating as integrated units",
+      "match_status": "strong",
+      "evidence": [
+        {
+          "evidence_type": "story",
+          "story_title": "Breaking Silos Between Engineering, Design, and Product",
+          "client": "Accenture",
+          "relevance": "Describes building balanced teams with engineers, product managers, and UX architects for shared accountability."
+        },
+        {
+          "evidence_type": "story",
+          "story_title": "User-Centered Design - Embedding Customer Journey in Enterprise Product Development",
+          "client": "Fortune 500 Clients",
+          "relevance": "Details integrating human-centered designers into product teams alongside product managers and engineers."
+        }
+      ],
+      "gap_explanation": "",
+      "confidence": "high",
+      "category": "required"
+    },
+    {
+      "requirement": "Experience establishing or maturing engineering delivery practices (CI/CD, automated testing, observability, release management)",
+      "match_status": "strong",
+      "evidence": [
+        {
+          "evidence_type": "story",
+          "story_title": "Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD",
+          "client": "Fortune 500 Clients",
+          "relevance": "Matt established CI pipelines, automated testing, and observability practices, maturing delivery practices."
+        },
+        {
+          "evidence_type": "story",
+          "story_title": "Building Self-Healing Systems through Resilience Engineering",
+          "client": "Fortune 500 Clients",
+          "relevance": "Matt led adoption of CI/CD pipeline optimization and blue-green deployments, enhancing release management."
+        }
+      ],
+      "gap_explanation": "",
+      "confidence": "high",
+      "category": "required"
+    },
+    {
+      "requirement": "Regulated industry experience (financial services, healthcare, government, or equivalent complexity)",
+      "match_status": "strong",
+      "evidence": [
+        {
+          "evidence_type": "story",
+          "story_title": "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout",
+          "client": "JP Morgan Chase",
+          "relevance": "Demonstrates experience with financial services compliance across multiple jurisdictions."
+        },
+        {
+          "evidence_type": "story",
+          "story_title": "De-Risking RBC\u2019s Corporate Banking Platform Investment",
+          "client": "RBC",
+          "relevance": "Involves architecture assessment in the financial services industry, highlighting regulatory considerations."
+        }
+      ],
+      "gap_explanation": "",
+      "confidence": "high",
+      "category": "required"
+    },
+    {
+      "requirement": "Demonstrated ability to translate business strategy into engineering roadmap and organizational structure",
+      "match_status": "strong",
+      "evidence": [
+        {
+          "evidence_type": "story",
+          "story_title": "Keeping Roadmaps Alive When Priorities Keep Shifting",
+          "client": "Fortune 500 Clients",
+          "relevance": "Developed adaptable, data-driven product roadmaps aligning with business goals and market demands."
+        },
+        {
+          "evidence_type": "story",
+          "story_title": "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "client": "Accenture",
+          "relevance": "Built Cloud Innovation Centers, translating strategy into scalable engineering practices and structure."
+        }
+      ],
+      "gap_explanation": "",
+      "confidence": "high",
+      "category": "required"
+    },
+    {
+      "requirement": "AI/ML adoption strategy \u2014 practical experience introducing AI-assisted development practices into an engineering organization",
+      "match_status": "strong",
+      "evidence": [
+        {
+          "evidence_type": "story",
+          "story_title": "Building Effective AI-Assisted Development Workflows",
+          "client": "Independent Project",
+          "relevance": "Matt developed AI-assisted development practices, treating AI as a development partner."
+        },
+        {
+          "evidence_type": "story",
+          "story_title": "Delivering AI-Powered Chronic Disease Management for Healthcare",
+          "client": "Major U.S. Health System",
+          "relevance": "Led AI-powered capabilities integration, demonstrating practical AI/ML adoption in healthcare."
+        }
+      ],
+      "gap_explanation": "",
+      "confidence": "high",
+      "category": "required"
+    },
+    {
+      "requirement": "Modern technology stack fluency across frontend and backend (React or equivalent, Python/Node.js/Go, containerized microservices)",
+      "match_status": "strong",
+      "evidence": [
+        {
+          "evidence_type": "story",
+          "story_title": "Driving Modern Software Engineering with Project Octane",
+          "client": "Accenture",
+          "relevance": "Demonstrates fluency in React, Node.js, and containerized microservices through standardized architecture practices."
+        },
+        {
+          "evidence_type": "story",
+          "story_title": "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "client": "Norfolk Southern",
+          "relevance": "Shows experience with containerized microservices using Docker and Kubernetes."
+        }
+      ],
+      "gap_explanation": "",
+      "confidence": "high",
+      "category": "required"
+    },
+    {
+      "requirement": "Budget ownership or P&L accountability for an engineering function",
+      "match_status": "strong",
+      "evidence": [
+        {
+          "evidence_type": "story",
+          "story_title": "Owning the P&L: From Engagement Margin to Center Cost Base",
+          "client": "Fortune 500 Clients",
+          "relevance": "Matt owned engagement margins and cost bases, demonstrating P&L accountability."
+        }
+      ],
+      "gap_explanation": "",
+      "confidence": "high",
+      "category": "required"
+    },
+    {
+      "requirement": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+      "match_status": "strong",
+      "evidence": [
+        {
+          "evidence_type": "story",
+          "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+          "client": "Sparkfly",
+          "relevance": "Matt built a platform for Sparkfly, a product company, indicating product company experience."
+        },
+        {
+          "evidence_type": "story",
+          "story_title": "Why Hire Matt?",
+          "client": "Accenture",
+          "relevance": "Matt's work at Accenture involved building platforms, indicating experience beyond consulting."
+        }
+      ],
+      "gap_explanation": "",
+      "confidence": "high",
+      "category": "preferred"
+    },
+    {
+      "requirement": "Healthcare, insurance, or life sciences domain knowledge",
+      "match_status": "strong",
+      "evidence": [
+        {
+          "evidence_type": "story",
+          "story_title": "Delivering AI-Powered Chronic Disease Management for Healthcare",
+          "client": "Major U.S. Health System",
+          "relevance": "Demonstrates healthcare domain knowledge through AI-powered chronic disease management project."
+        },
+        {
+          "evidence_type": "story",
+          "story_title": "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+          "client": "Major U.S. Health System",
+          "relevance": "Shows healthcare domain expertise by ensuring HIPAA compliance in AI initiatives."
+        }
+      ],
+      "gap_explanation": "",
+      "confidence": "high",
+      "category": "preferred"
+    },
+    {
+      "requirement": "Hands-on Kubernetes experience at production scale (cluster management, service mesh, multi-tenant orchestration)",
+      "match_status": "partial",
+      "evidence": [
+        {
+          "evidence_type": "story",
+          "story_title": "Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD",
+          "client": "Fortune 500 Clients",
+          "relevance": "Mentions containerization with Kubernetes, indicating some experience with Kubernetes."
+        }
+      ],
+      "gap_explanation": "Note: No mention of service mesh or multi-tenant orchestration.",
+      "confidence": "medium",
+      "category": "preferred"
+    },
+    {
+      "requirement": "Graduate degree in a technical field (Computer Science, Engineering, Information Technology, or related)",
+      "match_status": "strong",
+      "evidence": [
+        {
+          "evidence_type": "profile",
+          "story_title": null,
+          "client": null,
+          "relevance": "Matt holds a Master's degree in Information Technology, a recognized technical field."
+        }
+      ],
+      "gap_explanation": "",
+      "confidence": "high",
+      "category": "preferred"
+    },
+    {
+      "requirement": "Published thought leadership or conference speaking on engineering culture, modernization, or AI adoption",
+      "match_status": "gap",
+      "evidence": [],
+      "gap_explanation": "Note: No evidence of published thought leadership or conference speaking.",
+      "confidence": "high",
+      "category": "preferred"
+    },
+    {
+      "requirement": "Ability to lead and scale a large cross-functional product engineering organization",
+      "match_status": "strong",
+      "evidence": [
+        {
+          "evidence_type": "story",
+          "story_title": "Leading People: From Delivery Teams to a 150-Person Organization",
+          "client": "Fortune 500 Clients",
+          "relevance": "Matt led and scaled a 150+ person organization with a flat structure and low attrition."
+        },
+        {
+          "evidence_type": "story",
+          "story_title": "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "client": "Accenture",
+          "relevance": "Matt built and scaled Cloud Innovation Centers, growing to 150+ practitioners."
+        }
+      ],
+      "gap_explanation": "",
+      "confidence": "high",
+      "category": "required"
+    },
+    {
+      "requirement": "Experience in defining engineering operating models, including hiring philosophy, team structure, delivery practices, quality standards, and career development",
+      "match_status": "strong",
+      "evidence": [
+        {
+          "evidence_type": "story",
+          "story_title": "Leading People: From Delivery Teams to a 150-Person Organization",
+          "client": "Fortune 500 Clients",
+          "relevance": "Describes building an operating model with hiring, team structure, and delivery practices."
+        },
+        {
+          "evidence_type": "story",
+          "story_title": "Enhancing Team Proficiency through Servant Leadership and Mentorship",
+          "client": "Accenture",
+          "relevance": "Focuses on career development and quality standards through mentorship and structured programs."
+        }
+      ],
+      "gap_explanation": "",
+      "confidence": "high",
+      "category": "required"
+    },
+    {
+      "requirement": "Ability to establish AI-assisted engineering practices with guardrails for quality, security, and responsible adoption",
+      "match_status": "strong",
+      "evidence": [
+        {
+          "evidence_type": "story",
+          "story_title": "Building Effective AI-Assisted Development Workflows",
+          "client": "Independent Project",
+          "relevance": "Describes establishing AI practices with quality and security guardrails."
+        },
+        {
+          "evidence_type": "story",
+          "story_title": "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+          "client": "Major U.S. Health System",
+          "relevance": "Shows experience in responsible AI adoption with security and compliance focus."
+        }
+      ],
+      "gap_explanation": "",
+      "confidence": "high",
+      "category": "required"
+    },
+    {
+      "requirement": "Experience partnering with C-suite to translate business strategy into technical roadmap and organizational priorities",
+      "match_status": "partial",
+      "evidence": [
+        {
+          "evidence_type": "story",
+          "story_title": "Keeping Roadmaps Alive When Priorities Keep Shifting",
+          "client": "Fortune 500 Clients",
+          "relevance": "Demonstrates aligning product development with business goals using agile roadmaps."
+        },
+        {
+          "evidence_type": "story",
+          "story_title": "Scaling CIC Impact Through Intentional Client Engagement",
+          "client": "Accenture",
+          "relevance": "Shows proactive client engagement aligning delivery with client needs."
+        }
+      ],
+      "gap_explanation": "Note: Direct C-suite partnership evidence is missing.",
+      "confidence": "medium",
+      "category": "required"
+    },
+    {
+      "requirement": "Ability to build a culture of sustainable delivery with high throughput without heroics",
+      "match_status": "strong",
+      "evidence": [
+        {
+          "evidence_type": "story",
+          "story_title": "Building a Sustainable Delivery Rhythm for Work-Life Balance",
+          "client": "Accenture",
+          "relevance": "Matt established a predictable delivery rhythm, improving morale and reducing burnout."
+        },
+        {
+          "evidence_type": "story",
+          "story_title": "Escaping the Velocity Trap for Sustainable Delivery",
+          "client": "Accenture",
+          "relevance": "Matt shifted focus to actionable metrics, reducing burnout and improving team engagement."
+        }
+      ],
+      "gap_explanation": "",
+      "confidence": "high",
+      "category": "required"
+    }
+  ]
+}

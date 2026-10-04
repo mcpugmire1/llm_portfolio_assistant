@@ -1,0 +1,30 @@
+{
+  "att_principal": [
+    {
+      "click_to_first_pending_row_s": 11.933155500330031,
+      "pending_rows_at_first_seen": 34
+    },
+    {
+      "click_to_first_pending_row_s": 10.90231812465936,
+      "pending_rows_at_first_seen": 34
+    },
+    {
+      "click_to_first_pending_row_s": 11.409617041237652,
+      "pending_rows_at_first_seen": 34
+    }
+  ],
+  "demo_jd": [
+    {
+      "click_to_first_pending_row_s": 7.391847332939506,
+      "pending_rows_at_first_seen": 21
+    },
+    {
+      "click_to_first_pending_row_s": 6.365611250046641,
+      "pending_rows_at_first_seen": 21
+    },
+    {
+      "click_to_first_pending_row_s": 7.877540125045925,
+      "pending_rows_at_first_seen": 21
+    }
+  ]
+}
