@@ -21,6 +21,8 @@ fi
 if has 'core\.hooksPath'; then
   block "changing core.hooksPath disables the repo's git hooks."
 fi
+# Known limit: heredoc bodies are scanned as commands. A commit message that
+# quotes grep -v and .env together will block; commit it with -F <file>.
 # grep -v on a secrets file: block only when grep -v reads a secrets file, in the
 # same pipeline segment or downstream of a segment that names one (cat .env | grep -v X).
 # Pipelines split on unquoted ; & && || newline, segments on unquoted |, so
