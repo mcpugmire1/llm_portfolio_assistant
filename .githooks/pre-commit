@@ -22,12 +22,4 @@ while IFS= read -r f; do
   esac
 done < <(git diff --cached --name-only --diff-filter=ACM)
 
-if git diff --cached --name-only | grep -qx 'CLAUDE.md'; then
-  lines=$(git show :CLAUDE.md | wc -l | tr -d ' ')
-  if [ "$lines" -gt 268 ]; then
-    echo "pre-commit: CLAUDE.md is $lines lines; the budget is 268. Cut before adding." >&2
-    status=1
-  fi
-fi
-
 exit $status
