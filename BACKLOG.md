@@ -121,6 +121,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-269](#mattgpt-269) | MATT_DNA carries ungrounded and stale facts in generate_dynamic_dna() | Open | High | Bug | October 4, 2026 |
 | [MATTGPT-270](#mattgpt-270) | generate_jsonl_from_excel.py summary counters wrong (Created/Updated/Unchanged miscount) | Open | Low | Bug | October 4, 2026 |
 | [MATTGPT-271](#mattgpt-271) | Near-duplicate public_tags from re-tagging pass in master Excel | Open | Low | Corpus | October 4, 2026 |
+| [MATTGPT-272](#mattgpt-272) | Corpus gap: zero thought leadership / PoV stories; Role Match returns blanket gap on the requirement | Open | Medium | Issue | October 4, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -2084,6 +2085,31 @@ e. Source-vs-output check: for each fixture JD, the row count and wording under 
 These only affect behavior if tags feed filters or counts. Fix is in the master Excel: pick one canonical form per pair and update all stories to use it.
 
 **Fix:** Corpus maintenance pass -- Matt consolidates in the master, then regenerates the JSONL.
+
+---
+
+### MATTGPT-272
+**Corpus gap: zero thought leadership / PoV stories; Role Match returns blanket gap on the requirement**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Issue
+- **File:** Master Excel (via corpus maintenance skill), then re-export and re-embed
+- **Logged:** October 4, 2026
+
+**Observation (Oct 4, 2026):** Role Match returns a gap on "Published thought leadership or conference speaking" in every run. The corpus has zero stories matching thought leadership, PoV, point of view, white paper, or I&TL. All near-hits confirmed as false positives: status reports, the ARISE conference (attendance, not speaking), and Accenture's patent.
+
+**Evidence on hand:** Lean Startup PoV deck, April 9, 2021. Co-authored across Houston, Dallas, and Atlanta CIC. Matt owns 5 of 11 content slides plus the Big Pharma case study; the Big Pharma case study overlaps row 110.
+
+**Two story candidates:**
+
+1. **I&TL mandate:** Formal accountability for thought leadership at Accenture, with deliverables. Note: NITSN ran under CloudFirst from 2016-09 and row 62 already owns it -- NITSN predates the I&TL role. Decide which story owns NITSN before writing; don't give it two homes.
+
+2. **Thought leadership practice:** PoVs across FS clients, Liquid Studio, and CIC. Only evidential with named artifacts (client, year, subject). The April 2021 deck is the first confirmed artifact. Open question: can Matt name 3-4 specific PoVs? That decides whether candidate 2 is its own story or a paragraph inside candidate 1.
+
+**Cross-era template if needed:** "Owning the P&L" (Fortune 500 Clients, 2009-2023) -- multi-engagement arc story.
+
+**Acceptance:** After re-export and re-embed, Role Match no longer returns a blanket gap on the thought-leadership requirement. No claim in any new story lacks a named artifact.
 
 ---
 
