@@ -444,7 +444,7 @@ Semantic Search Results → RAG → GPT-4o → User
 
 ### Stage 1: Excel to JSONL
 
-**Script:** `generate_jsonl_from_excel.py` (259 lines, root-level)
+**Script:** `generate_jsonl_from_excel.py` (root-level)
 
 **Purpose:** Convert Excel master sheet to structured JSONL format while preserving existing data.
 
@@ -456,10 +456,10 @@ Semantic Search Results → RAG → GPT-4o → User
 - `echo_star_stories.jsonl` (100+ records)
 
 **Key Features:**
-- **Merge strategy:** Preserves existing `public_tags`, `content`, `id` fields
-- **Backup:** Auto-creates `.bak` file before overwriting
+- **Merge strategy:** Excel is authoritative for `public_tags` (blank in Excel means blank in the JSONL). `content` is kept from the prior JSONL when Excel doesn't supply it. `id` is `Title|Client` slugs.
+- **Backup:** Writes `archive/jsonl-backups/<name>.bak-<timestamp>` (gitignored) before overwriting
 - **Normalization:** Slug-based key matching (`Title|Client`)
-- **Dry-run mode:** Preview changes before committing
+- **Dry-run mode:** Edit `DRY_RUN = True` in the script to preview without writing (a constant, not a flag)
 
 **Fields Extracted:**
 ```python
@@ -492,24 +492,20 @@ DRY_RUN=False  # Set to True for preview
 
 ### Stage 2: Semantic Tag Generation
 
-**Script:** `generate_public_tags.py` (171 lines, root-level)
+**Script:** `generate_public_tags.py` (root-level)
 
-**Purpose:** Generate semantic metadata and public-facing tags via GPT-4o.
+**Purpose:** Generate `public_tags` with GPT-4o. This is the only field it writes; `Theme` is read as prompt input, not generated. New GPT-4o tags are merged with the story's Excel `public_tags` from the Stage 1 output. The prior `echo_star_stories_nlp.jsonl` (matched by `id`) only decides which stories are re-tagged: no prior tags, Excel cleared, or prompt content changed. Unchanged stories are skipped with no API call. The prior output is backed up to `archive/jsonl-backups/` before it is overwritten.
 
-**Enrichment Process:**
-1. **Persona Tagging** - Map stories to interview personas (e.g., "Product Leader", "Technical Architect")
-2. **5P Summaries** - Generate concise 5-paragraph summaries for quick scanning
-3. **Public Tags** - Create user-friendly tags from technical metadata
-4. **Theme Assignment** - Categorize stories by transformation themes
+**Required, not optional:** this script writes `echo_star_stories_nlp.jsonl`, the file the app and Stage 3 read. Skipping it means no Excel edit from Stage 1 reaches the app or Pinecone; both keep serving the previous file.
 
 **Output:**
-- `echo_star_stories_nlp.jsonl` (enriched with semantic metadata)
+- `echo_star_stories_nlp.jsonl` (Stage 1 records with `public_tags` added)
 
 ---
 
 ### Stage 3: Embedding Generation
 
-**Script:** `build_custom_embeddings.py` (291 lines, root-level)
+**Script:** `build_custom_embeddings.py` (root-level)
 
 **Purpose:** Generate vector embeddings and upsert to Pinecone for semantic search.
 
@@ -2182,19 +2178,22 @@ def semantic_search(q: str, stories: list, top_k: int = SEARCH_TOP_K, filters: d
 
 ```bash
 # 1. Update Excel master sheet
-# 2. Export to JSONL
+# 2. Pull the dated master from OneDrive into the repo root
+python refresh_master.py DDMONYY
+
+# 3. Export to JSONL
 python generate_jsonl_from_excel.py
 
-# 3. Enrich with LLM (manual or scripted)
+# 4. Generate public_tags (required: writes the _nlp.jsonl the app and Stage 3 read)
 python generate_public_tags.py
 
-# 4. Generate embeddings and upsert
+# 5. Generate embeddings and upsert
 python build_custom_embeddings.py
 
-# 5. Verify Pinecone index
+# 6. Verify Pinecone index
 python scripts/validate_pinecone_data.py
 
-# 6. Test in app
+# 7. Test in app
 streamlit run app.py
 ```
 
@@ -2341,20 +2340,20 @@ Data flows one direction: **Excel → JSONL → Pinecone → App**
 └─────────────────────────────────────────────────────────────────┘
                               ↓
 ┌─────────────────────────────────────────────────────────────────┐
-│  2. Copy Excel to environment                                   │
-│     - Place in project root                                     │
+│  2. Pull master from OneDrive                                   │
+│     python refresh_master.py DDMONYY                            │
 └─────────────────────────────────────────────────────────────────┘
                               ↓
 ┌─────────────────────────────────────────────────────────────────┐
 │  3. Run ingestion pipeline                                      │
 │     python generate_jsonl_from_excel.py                         │
-│     python generate_public_tags.py      # Optional enrichment   │
+│     python generate_public_tags.py      # Required: writes _nlp │
 │     python build_custom_embeddings.py   # Upsert to Pinecone    │
 └─────────────────────────────────────────────────────────────────┘
                               ↓
 ┌─────────────────────────────────────────────────────────────────┐
 │  4. echo_star_stories_nlp.jsonl is regenerated                  │
-│     - Previous JSONL is backed up (.bak)                        │
+│     - Prior JSONLs backed up to archive/jsonl-backups/          │
 │     - All downstream consumers see updated data                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
