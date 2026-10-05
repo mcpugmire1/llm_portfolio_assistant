@@ -239,28 +239,28 @@ def pinecone_semantic_search(
         pc_filter["client"] = {"$in": filters["clients"]}
 
     # Entity-first sovereignty: if entity detected, search across ALL entity fields
-    # Uses Pinecone $or operator to check client, employer, division, project, place
+    # Uses Pinecone $or operator across every field in ENTITY_SEARCH_FIELDS
     # This catches cases like Accenture stories where Client="Confidential Healthcare"
     # but Employer="Accenture" (Multi-Field Entity Blind Spot fix)
     #
     # Pinecone metadata field/value case rules:
     #   - Field names: always lowercase
     #   - Values: 'division', 'employer', 'project', 'place' are lowercase
-    #   - Values: 'client' keeps PascalCase
+    #   - Values: 'client' and 'title' keep their stored case
     entity_field = filters.get(
         "entity_field"
     )  # Original field where entity was detected
     entity_value = filters.get("entity_value")
     if entity_field and entity_value:
         # Entity search fields imported from config/constants.py
-        # See constants.py for documentation on why search (5 fields) differs from detection (3 fields)
+        # See constants.py for why search uses more fields than detection
         or_clauses = []
         for field in ENTITY_SEARCH_FIELDS:
             # Apply appropriate casing per field (rules from constants.py)
             if field in PINECONE_LOWERCASE_FIELDS:
                 field_value = entity_value.lower()
             else:
-                field_value = entity_value  # client keeps PascalCase
+                field_value = entity_value  # client and title keep their stored case
             or_clauses.append({field: {"$eq": field_value}})
 
         pc_filter["$or"] = or_clauses

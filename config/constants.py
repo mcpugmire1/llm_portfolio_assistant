@@ -170,7 +170,7 @@ ENTITY_DETECTION_FIELDS = ["Client", "Employer", "Division"]
 # Once an entity is confirmed by detect_entity(), search broadly across these fields.
 # INTENTIONALLY different from ENTITY_DETECTION_FIELDS.
 #
-# Why 5 fields here vs 3 in detection:
+# Why more fields here than in detection:
 # - Detection is CONSERVATIVE (avoid false positives like "Technology")
 # - Search is LIBERAL (maximize recall once we have a confirmed entity)
 #

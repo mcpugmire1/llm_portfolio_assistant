@@ -416,8 +416,8 @@ Empathy, Authenticity, Curiosity, Integrity, Leadership
 """
 
 
-# Entity detection fields and exclusions imported from config/constants.py
-# See constants.py for documentation on why detection (3 fields) differs from search (5 fields)
+# Entity detection fields imported from config/constants.py; EXCLUSION_PREFIXES is defined in detect_entity()
+# See constants.py for why detection uses fewer fields than search
 
 
 def detect_entity(query: str, stories: list[dict]) -> tuple[str, str] | None:
