@@ -13,11 +13,11 @@ paths:
 Query → Nonsense Filters → Semantic Router → out_of_scope check → Pinecone → Confidence Gate → LLM
 ```
 
-**Intent families:** background, behavioral, delivery, team_scaling, leadership, technical, domain_payments, domain_healthcare, stakeholders, innovation, agile_transformation, narrative, synthesis, out_of_scope, personal. Verify against the router config before relying on this list.
+**Intent families:** defined in `services/semantic_router.py`.
 
 **Entity detection:** `detect_entity()` checks Client, Employer and Division (`ENTITY_DETECTION_FIELDS`), then story titles. A Client, Employer or Division match becomes a hard Pinecone filter: one `$or` across `ENTITY_SEARCH_FIELDS` (client, employer, division, project, place, title) using the detected value. A Title match adds no Pinecone filter (soft filtering). The synthesis path filters on the detected field only. Detection is deliberately narrower than search; see the comments on both constants in `config/constants.py`.
 
-**Context exclusion prefixes:** "after", "leaving", "before", "transition from", "left": prevent entity filtering.
+**Context exclusion prefixes:** `EXCLUSION_PREFIXES` in `ui/pages/ask_mattgpt/backend_service.py` prevent entity filtering.
 
 **Sacred vocabulary:** "builder" is used verbatim in Professional Narrative responses. Preserve it exactly when editing the prompts or code that produce them.
 

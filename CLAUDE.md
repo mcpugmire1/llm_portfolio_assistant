@@ -4,21 +4,20 @@
 Rules marked "Enforced" are also blocked by hooks. If a hook blocks a command, stop and report it to Matt. Never route around a hook: no `--no-verify`, no `core.hooksPath` changes, no alternate command that does the same thing.
 
 - **No em dashes anywhere in this repo.** Not in docs, not in commits, not in this file. Use a colon, comma, or rewrite the sentence. (Enforced on added lines and commit messages.)
-- **Before citing a constraint as the reason for an approach, verify the constraint exists in the actual file.** Show the evidence. If the constraint doesn't exist, use the simplest approach the actual file supports.
-- **Only Matt pushes.** No Claude session runs `git push`, even when asked. `git push origin main` triggers a production deploy on Streamlit Cloud. Stop after committing.
-- **Tests before any implementation code.** BDD for UI behavior; unit tests for pure functions and scripts; look-only CSS changes are the one exception. See Testing Protocol for the right shape and Red-Green discipline for each.
+- **Only Matt pushes.** No Claude session runs `git push`, even when asked. `git push origin main` triggers a production deploy on Streamlit Cloud. Stop after committing. (Enforced.)
+- **Tests before any implementation code.** Shape, exceptions, and Red-Green discipline: see Testing Protocol.
 - **Subtract before you add, in the answer pipeline.** Before adding a prompt clause, post-processing step (regex strip, bolding), or gate: read the removal ADRs in `docs/ADR.md`, confirm the output is actually wrong rather than just changed, name the observed failure, check whether the fix belongs in the data instead (`data/matt_profile.json` or the story corpus), and show a live acceptance run that fixes it, including the story controls it wasn't written for (see Testing Protocol). A clause written for one query type can change answers to others, so the run includes unrelated queries. When one causes a new failure, try removing it before adding an exception.
 - **Paste literal test output at every gate, never self-summarize.** "Looks good, ready to commit?" is not a gate. Paste the literal `pytest` output before requesting commit approval at every Red and Green commit.
 - **One "go" ships the full Red → Red → Green cycle.** After Matt says "go" on a ticket, run all three gates without re-asking between them. Re-ask only when a substantive new design decision surfaces mid-cycle.
 - **Pre-flight before touching any existing file.** Name the files the ticket touches, the patterns those files use, any cross-surface couplings, and existing test coverage, before proposing anything. Check `conversation_helpers.py` before any click handler and `banking_landing.py` before any cross-page navigation. Build on existing patterns; replace one only when you can name in a comment why it fails.
 - **Stage specific files by name, never `git add -A` or `git add .`.** Parallel sessions share one staging area. (Enforced.)
-- **No Co-Authored-By lines in commit messages.** Never add them, in any session.
+- **No Co-Authored-By lines in commit messages.** Never add them, in any session. (Enforced.)
 - **Never use `grep -v` to redact secrets.** Use positive include filters (keys only). Applies to `.streamlit/secrets.toml`, `.env`, any service-account JSON. (Enforced.)
 - **Artifacts for user review go in chat, not /tmp.** Edit tool calls show diffs inline. Writing to /tmp creates a local-only artifact Matt cannot see.
 - **DevTools before any CSS proposal.** For any layout, alignment, positioning, sizing, color, or typography issue: get computed styles before proposing a fix, from Playwright `getComputedStyle` or by asking Matt to paste them from DevTools. Source-code reasoning misses Streamlit's wrapper-layer surprises.
 - **Unexpected test or eval failures are your problem until proven otherwise.** Every failure gets an isolation run and a traceback before anything else. Nothing is labeled pre-existing, stochastic, or a known issue without a git bisect, a prior passing-run artifact, or a validation against production. "I didn't touch that code" is not evidence, and file proximity to the diff is not evidence either way until checked. Presenting options and waiting is not investigating. A known issue that isn't in BACKLOG is an unvalidated note.
 - **Bug findings lead with the defect and the fix, never with origin.** All bugs in this repo are ours. Code age or provenance is stated only when it gates a live decision (push safety, revert scope) and only after the fix is on the table. Leading with "pre-existing confirmed" or "not introduced by this branch" is deflection regardless of whether it's true.
-- **Any assertion about file contents needs a visible source in the response:** a Read or Grep tool call, or the command that produced it and that command's literal output. This covers what a file contains, what it does not contain, and what a function does. It applies with particular force to claims of absence: a search that returns nothing is not a finding until the search and its empty result are visible, because a malformed search also returns nothing. If there is no source, the assertion does not get made.
+- **Any assertion about file contents needs a visible source in the response:** a Read or Grep tool call, or the command that produced it and that command's literal output. This covers what a file contains, what it does not contain, and what a function does. It applies with particular force to claims of absence: a search that returns nothing is not a finding until the search and its empty result are visible, because a malformed search also returns nothing. If there is no source, the assertion does not get made. Before citing a constraint as the reason for an approach, show it in the file; if it isn't there, use the simplest approach the file supports.
 - **Working notes do not replace tracking.** Any bug, regression, or unvalidated behavior written to a working note also goes in the next commit message or gets flagged to Matt before the session proceeds. A finding that only exists in `docs/working/` or a notes file has no owner and will not be acted on. "I noted it" is not the same as "it is tracked."
 - **Cite functions and constants by name, not line number.** Line numbers go stale between sessions and across commits. `load_matt_profile()` is stable; a line number is not. Applies to CLAUDE.md, ARCHITECTURE.md, tickets, and chat.
 - **A structural refactor invalidates values and selectors anchored to the old structure.** Navbar height, container classes, DOM nesting: when these change, re-audit what's calibrated to them. Renaming `.main` to `.stMain` silently kills every rule targeting `.main`, and a changed navbar height orphans every offset calibrated to it. These surface in production, not at change time.
@@ -92,7 +91,7 @@ When multiple Claude Code sessions run concurrently, they share one git working 
 
 ## Testing Protocol
 
-**The non-negotiable:** Tests are written and committed before any implementation code. Look-only CSS changes (spacing, color, layout, with nothing appearing, disappearing, or behaving differently) are the exception: no Red test. Their gates are computed styles before the change (see the DevTools rule) and a browser check at 375px, 767px, and 1024px+ on a restarted Streamlit after it. If anything visible appears, disappears, or responds differently, it's a behavior change and tests come first. If a spec is provided, tests come first.
+**The non-negotiable:** Tests are written and committed before any implementation code. Two exceptions: look-only CSS changes (spacing, color, layout, with nothing appearing, disappearing, or behaving differently) get no Red test, and probes and PoCs are exempt as described under Probes and PoCs. Look-only CSS gates are computed styles before the change (see the DevTools rule) and a browser check at 375px, 767px, and 1024px+ on a restarted Streamlit after it. If anything visible appears, disappears, or responds differently, it's a behavior change and tests come first. If a spec is provided, tests come first.
 
 ### Choosing the test shape
 - **BDD:** UI behavior, user-facing flows, anything Playwright can observe in the DOM. Write `.feature` scenarios.
@@ -100,7 +99,6 @@ When multiple Claude Code sessions run concurrently, they share one git working 
 - **Live acceptance runs:** For changes to prompts, retrieval, or anything else whose output depends on the LLM. A live acceptance run is a probe script in `probe_<ticket>_output/<timestamp>/`. It runs the acceptance queries through the real pipeline (`rag_answer()` or `assess_requirement()`, with all loggers patched out: `log_query`, `log_offdomain`, and the router's two CSV writers, `_log_borderline` and `_log_router_low_confidence`; stderr in its own file), at least 2 runs per query, and it pastes the full answer text for each run. It includes the story controls when the change touches a shared prompt. It supplements unit tests and doesn't replace them: unit tests prove the text reaches the prompt, and the live run shows what the model does with it.
 
 ### Red-Green cycle
-One "go" from Matt ships the full cycle without re-asking between gates. Re-ask only on substantive new design decisions.
 
 - **Red (scenarios commit):** Write scenarios in `tests/bdd/features/X.feature` AND bind via `scenarios("../features/X.feature")` in `tests/bdd/steps/test_X.py`. Run `pytest tests/bdd/steps/test_X.py -v`, confirm all scenarios discovered and all in undefined-step state. Commit message proof: `Red (scenarios): N scenarios discovered, all N undefined-step.`
 - **Red (step defs commit):** Write step definitions. Confirm scenarios run end-to-end and fail with assertion errors (not undefined-step or import errors). Commit message proof: `Red (step defs): N scenarios bound, N assertion failures, 0 undefined-step / import errors.`
@@ -121,9 +119,8 @@ Probes and PoCs are exploratory measuring instruments, exempt from the Red gate.
 
 ### Validation rules
 - **When reporting test results, state explicitly what was tested and what was not.** A pass count covers the scenarios run; it does not validate untested changes in the same commit. Never present partial coverage as full validation.
-- **Paste literal pytest output at every gate:** never self-summarize (see Critical Rules).
-- **Green commits only after every validation relevant to the change has run.** Name the applicable gates before committing: whichever test shape the change called for (BDD for UI behavior, unit tests for pure functions and scripts, live acceptance runs for prompt or retrieval changes), plus a browser check on a restarted Streamlit when rendered output changed. "Not run" on a gate you named as relevant is not acceptable in a Green commit message. If a relevant gate can't run, stop and ask rather than committing around it.
-- **Scope per-gate runs to the relevant test file:** `pytest tests/bdd/steps/test_X.py -v`, not the full suite.
+- **Green commits only after every validation relevant to the change has run.** Name the applicable gates before committing: whichever test shape the change called for (BDD for UI behavior, unit tests for pure functions and scripts, live acceptance runs for prompt or retrieval changes), plus a browser check on a restarted Streamlit when rendered output changed. A Green commit message never says "not run": list the gates that ran and mark the rest "not applicable". (Enforced.) If a relevant gate can't run, stop and ask rather than committing around it.
+- **Scope per-gate runs to the relevant test file:** `pytest tests/bdd/steps/test_X.py -v`, not the full suite, except where a rule below requires the full suite.
 - **A `.feature` file without its `test_*.py` binding is documentation, not a test.**
 - **BDD scenarios must assert DOM-observable behavior.** Playwright cannot read `st.session_state`; assert navigation visible + user-message echo + assistant-response streaming.
 - **After any change to UI files, ask Matt to restart Streamlit before running BDD tests.**
@@ -140,7 +137,7 @@ Probes and PoCs are exploratory measuring instruments, exempt from the Red gate.
 
 ### Canvas-Rendered Grids (st.dataframe): BDD Constraints
 
-`st.dataframe` renders rows, cells, column headers, and selection controls to an HTML canvas, not the DOM. Full explanation, verified selectors, and origin: see `ARCHITECTURE.md` (st.dataframe canvas constraint).
+`st.dataframe` renders rows, cells, column headers, and selection controls to an HTML canvas, not the DOM. Full explanation and verified selectors: see `ARCHITECTURE.md` (st.dataframe canvas constraint).
 
 **CAN assert:** grid mounted (`[data-testid="stDataFrame"]` + `[data-testid="data-grid-canvas"]`, waiting explicitly for canvas paint); filter pipeline worked (count direction from `.es-results-count`); detail pipeline worked (deeplink `?story=id` then assert `.es-detail-header`).
 
@@ -149,7 +146,7 @@ Probes and PoCs are exploratory measuring instruments, exempt from the Red gate.
 Any new `st.dataframe` surface inherits all of the above. If whole-row-click or keyboard row selection is a hard requirement, use self-rendered HTML rows (the Cards pattern).
 
 ## Secrets & Sensitive Output Handling
-1. **Never use `grep -v` to redact secrets** (see Critical Rules). Use positive include filters:
+1. **Positive include filters only** (see Critical Rules):
    - `grep -oE "^[A-Z_][A-Z_0-9]*" .env`: key names only
    - `grep -oE "^[a-z_]+ ?=" secrets.toml`: top-level scalar keys only
 2. **When inspecting any secrets file, extract keys-only by default.** Ask Matt to confirm values rather than printing them.
@@ -167,7 +164,7 @@ Before committing, answer for each:
 If yes to any of the last three: the doc-update commit pairs with this code commit. Same session, same push. Not a follow-up.
 
 Always triggers this check:
-- New file in `services/`, `ui/pages/`, `utils/`, or `config/`
+- New file in `services/`, `ui/pages/`, `ui/components/`, `utils/`, or `config/`
 - Model, embedding, or vector store change
 - Pipeline stage added/removed/renamed
 - Schema change in story corpus, query logger, or any `config_*.json`
@@ -214,6 +211,5 @@ streamlit run app.py        # local
 `git push origin main` deploys to Streamlit Cloud (see the push rule in Critical Rules).
 
 ## Related Documentation
-- [Design Specification](https://mcpugmire1.github.io/mattgpt-design-spec/)
 - [API Reference](https://mcpugmire1.github.io/mattgpt-design-spec/docs/09-api-reference)
 - [Data Model](https://mcpugmire1.github.io/mattgpt-design-spec/docs/10-data-model)
