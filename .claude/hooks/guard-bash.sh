@@ -9,8 +9,8 @@ command -v jq >/dev/null 2>&1 || block "jq is not installed, so commands cannot 
 cmd=$(jq -r '.tool_input.command // ""')
 has() { printf '%s' "$cmd" | grep -Eq -e "$1"; }
 
-if has 'git[[:space:]]+commit' && has 'git[[:space:]]+push'; then
-  block "git commit and git push in one call. Commit, stop, and wait for an explicit push instruction."
+if has 'git([[:space:]]+-[^[:space:]]+([[:space:]]+[^-[:space:]][^[:space:]]*)?)*[[:space:]]+push([[:space:];&|]|$)'; then
+  block "git push. Only Matt pushes. Stop after committing."
 fi
 if has 'git[[:space:]]+add([[:space:]]+[^;&|]*)?[[:space:]](-A|--all|\.)([[:space:];&|]|$)'; then
   block "git add -A, --all, or . stages everything. Stage specific files by name."
