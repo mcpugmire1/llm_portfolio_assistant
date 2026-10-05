@@ -1,13 +1,13 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: 232d9bd -->
-<!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
-<!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
+<!-- last-backlog-sync: 94a1cf2 -->
+<!-- BEFORE EDITING: read the mattgpt-backlog-maintenance skill for status enum, ticket lifecycle, and archiving rules -->
+<!-- Next ticket ID: run grep -ohE 'MATTGPT-[0-9]+' BACKLOG.md CHANGELOG.md docs/ADR.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
 Work state for the MattGPT project. The matrix below is the scannable view. Detail blocks for each item follow, linked by ID. Completed items live in `CHANGELOG.md`. Architectural decisions live in `docs/ADR.md`. Current system state lives in `ARCHITECTURE.md`.
 
 ---
 
-## Value Prioritized Roadmap (updated 2026-09-29)
+## Value Prioritized Roadmap (updated 2026-10-05)
 
 **NOW**
 1. **-250** — In Progress. Ask Agy cannot answer education, certification, or language questions; profile facts never reached its prompt. Steps 5 and 6 still open.
@@ -28,7 +28,8 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 14. **-235** — Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
 15. **-223** — Add router_score and router_family columns to Sheet query row; unblocks -239's floor threshold decision.
 16. **-222** — Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
-17. Rest of Role Match: -173, -014, -012, -081, -099, -017.
+17. **-273** -- Profile-fact answers carry unrequested story context, and follow-ups arrive with no conversation history. "What about PMP" pivots to stories (ADR 030 consequence).
+18. Rest of Role Match: -173, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
 -177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- better ranking surfaces more adjacent candidates into verdict definitions that still absorb them as partial, so ranking before calibrating makes over-calling worse before better; full constraint in -249 detail block)
@@ -123,6 +124,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-271](#mattgpt-271) | Near-duplicate public_tags from re-tagging pass in master Excel | Open | Low | Corpus | October 4, 2026 |
 | [MATTGPT-272](#mattgpt-272) | Corpus gap: zero thought leadership / PoV stories; Role Match returns blanket gap on the requirement | Open | Medium | Issue | October 4, 2026 |
 | [MATTGPT-273](#mattgpt-273) | Profile-fact answers include unrequested story context; follow-up questions have no conversation history | Open | Medium | Bug | October 4, 2026 |
+| [MATTGPT-274](#mattgpt-274) | `eval_rag_quality.py --surgical` calls rag_answer() with the query logger and CSV writers active | Open | Low | Bug | October 5, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -170,7 +172,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 ## Decided Against
 
 > **Read only — do not add tickets here directly.**
-> Rows are moved here from the Active Matrix above when a ticket's status changes to Decided Against. New tickets always start in the Active Matrix. The AI agent (or Matt) moves a row here as part of the status transition. See CLAUDE.md § Backlog Maintenance for the full lifecycle.
+> Decided Against tickets wait here until Architecture Sync writes their Rejected ADR (marker line `**Ticket:** MATTGPT-NNN` in docs/ADR.md), then leave BACKLOG.md. New tickets always start in the Active Matrix. Lifecycle: skill `mattgpt-backlog-maintenance`.
 
 | ID | Title | Status | Priority | Type | Logged |
 |---|---|---|---|---|---|
@@ -224,7 +226,6 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-148](#mattgpt-148) | `.main` selector sweep — 36 dead selectors in `global_styles.py` need swapping to `.stMain` | Decided Against | Low | Refactor | July 1, 2026 |
 | [MATTGPT-149](#mattgpt-149) | Rejection bubble dark mode — `[class*='_rejection_bubble']` uses `var(--banner-info-bg)`; `--banner-info-bg` already has a dark override (548f1bfb, Dec 2025) | Decided Against | Low | Bug | July 1, 2026 |
 | [MATTGPT-164](#mattgpt-164) | Wrong-person queries reach retrieval — Satya Nadella passes all gates, returns Accenture content | Decided Against | High | Bug | August 3, 2026 |
-
 | [MATTGPT-172](#mattgpt-172) | CIC-cluster consolidation: CIC is 52/114 (46%) of corpus; Division concentration causes cluster-drift dominance on broad queries | Decided Against | Medium | Action | August 8, 2026 |
 | [MATTGPT-179](#mattgpt-179) | Dead formatters in formatting.py — both entrances orphaned, phantom schema in unreachable code; consider folding into MATTGPT-176 | Decided Against | Low | Refactor | August 11, 2026 |
 | [MATTGPT-184](#mattgpt-184) | ask_mattgpt/utils.py module audit -- six dead functions, four duplicating live helpers elsewhere | Decided Against | Low | Refactor | August 13, 2026 |
@@ -2047,6 +2048,8 @@ e. Source-vs-output check: for each fixture JD, the row count and wording under 
 
 **Acceptance:** CS phrasings no longer lead with a no; PMP still produces a no; story controls unchanged.
 
+**Update (Oct 4, 2026, b2c85ba):** Rule 0a's direct no scoped to certifications (ADR 030). CS leading no 8/50, down from 9/10; PMP direct phrasings 20/20. Any direct-no wording in rule 0a leaks into education answers (4/20 with the scoped sentence, 0/20 with it removed in memory). The "What about PMP" follow-up pivot moved to MATTGPT-273. Acceptance not fully met; D1 still open.
+
 ---
 
 ### MATTGPT-269
@@ -2153,9 +2156,26 @@ These only affect behavior if tags feed filters or counts. Fix is in the master 
 
 **Issue 2 -- no conversation history for follow-ups.** "What about PMP?" (browser run, Oct 4) had no context from the prior CS degree exchange. Each turn is answered cold; the model cannot resolve a follow-up pronoun or implicit reference against what was just said.
 
-**Evidence:** `probe_268_output/20261004_111121/` (now under `docs/evidence/268/`); "What about PMP?" browser run, October 4, 2026.
+**Evidence:** `probe_268_output/20261004_111121/` (untracked, local only); "What about PMP?" browser run, October 4, 2026.
 
 **Relationship to other tickets:** Issue 1 overlaps with MATTGPT-128's "story grid always renders" rule in MATTGPT-250 item 4, which defers the cited-vs-retrieved question to -128. Issue 2 is independent.
+
+---
+
+### MATTGPT-274
+**`eval_rag_quality.py --surgical` calls rag_answer() with the query logger and CSV writers active**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Bug
+- **File:** `tests/eval_rag_quality.py` (`run_surgical_diagnostics()`)
+- **Logged:** October 5, 2026
+
+**Issue:** Verified Oct 5, 2026: `run_surgical_diagnostics()` patches `streamlit.session_state` and `backend_service.st` only, then calls `rag_answer()` directly. The script does not patch `log_query` (`services/query_logger.py`), `log_offdomain` (`backend_service.py`), or the router CSV writers `_log_borderline` and `_log_router_low_confidence` (`services/semantic_router.py`). A `--surgical` run writes rows to the Sheet and to the local CSVs. `94a1cf2` left it unrun live for this reason.
+
+**Fix:** Patch out `log_query`, `log_offdomain`, `_log_borderline` and `_log_router_low_confidence` for the duration of the run, at the names the callers import.
+
+**Acceptance:** `--surgical` runs end to end with no new Sheet rows and no new rows in `data/offdomain_queries.csv`, `data/borderline_queries.csv` or `data/router_low_confidence.csv`.
 
 ---
 
@@ -3310,7 +3330,7 @@ Two more inert-selector patterns confirmed during the -242 dark-mode scan:
 ### Decided Against
 
 > **Read only -- do not add blocks here directly.**
-> Blocks are moved here from Active Tickets above when a ticket's status changes to Decided Against. New tickets always start in Active Tickets. See CLAUDE.md § Backlog Maintenance for the full lifecycle.
+> Decided Against blocks wait here until Architecture Sync writes their Rejected ADR (marker line `**Ticket:** MATTGPT-NNN` in docs/ADR.md), then leave BACKLOG.md. New tickets always start in Active Tickets. Lifecycle: skill `mattgpt-backlog-maintenance`.
 
 ### MATTGPT-200
 **top_per_theme=3 caps synthesis pool when all entity stories share one Theme; AT&T returns 3 of 6 stories**
