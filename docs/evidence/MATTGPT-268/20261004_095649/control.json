@@ -1,0 +1,272 @@
+[
+ {
+  "arm": "control",
+  "query": "Does Matt have a CS degree?",
+  "run": 1,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e Found it!\n\nMatt does not have a degree specifically in Computer Science. He holds a Master's degree in Information Technology from **American InterContinental University**, which is recognized as a Computer Science-related discipline. Additionally, he has a Bachelor of Arts in French Language and Literature from Queens University of Charlotte. \n\nThere's more to this story if you're curious."
+ },
+ {
+  "arm": "control",
+  "query": "Does Matt have a CS degree?",
+  "run": 2,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e On it!\n\nMatt does not have a degree in Computer Science. He holds a Master's degree in Information Technology from **American InterContinental University**. Information Technology is a recognized Computer Science-related discipline, and a Master's degree exceeds a Bachelor's. Additionally, Matt completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia, where he served as a teaching assistant for French courses. He also earned a BA in French Language and Literature from Queens University of Charlotte, which included a year abroad at Universit\u00e9 Paul Val\u00e9ry, Montpellier, France.\n\nThere's more to this story if you're curious."
+ },
+ {
+  "arm": "control",
+  "query": "Does Matt have a CS degree?",
+  "run": 3,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e Here's a great example.\n\nMatt holds a Master's degree in Information Technology from **American InterContinental University**. This degree is recognized as a Computer Science-related discipline and exceeds a Bachelor's degree. He also completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia, where he taught French as a teaching assistant. Additionally, Matt earned a BA in French Language and Literature from Queens University of Charlotte, which included a year abroad at Universit\u00e9 Paul Val\u00e9ry, Montpellier, France. \n\nI can show you related patterns if that's helpful."
+ },
+ {
+  "arm": "control",
+  "query": "Does Matt have a CS degree?",
+  "run": 4,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e Here's a great example.\n\nMatt does not have a Computer Science degree. He holds a Master's degree in Information Technology from **American InterContinental University**. Information Technology is a recognized Computer Science-related discipline, and a Master's degree exceeds a Bachelor's. Additionally, he has completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia, where he taught French 101, 102, and 103 as a teaching assistant. Matt also holds a Bachelor of Arts in French Language and Literature from Queens University of Charlotte, which included a year abroad at Universit\u00e9 Paul Val\u00e9ry, Montpellier, France, through an exchange program with the University of North Carolina at Chapel Hill.\n\nShall I find more examples like this?"
+ },
+ {
+  "arm": "control",
+  "query": "Does Matt have a CS degree?",
+  "run": 5,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e I know just the story.\n\nMatt does not have a Computer Science degree. He holds a Master's degree in Information Technology from **American InterContinental University**, which is a recognized Computer Science-related discipline. Additionally, he has completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia, where he taught French, and he earned a BA in French Language and Literature from Queens University of Charlotte, which included a year abroad in France. \n\nHappy to explore similar work in other industries."
+ },
+ {
+  "arm": "control",
+  "query": "Does Matt have a computer science degree?",
+  "run": 1,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "Got it! \ud83d\udc3e\n\nMatt does not hold a computer science degree. Instead, he has a Master's degree in Information Technology from **American InterContinental University**, which is a recognized Computer Science-related discipline. Additionally, he completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia, where he also served as a teaching assistant. Matt holds a BA in French Language and Literature from Queens University of Charlotte, which included a year abroad at Universit\u00e9 Paul Val\u00e9ry, Montpellier, France.\n\nHappy to explore similar work in other industries."
+ },
+ {
+  "arm": "control",
+  "query": "Does Matt have a computer science degree?",
+  "run": 2,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e This is a strong one.\n\nMatt does not have a computer science degree. He holds a Master's degree in Information Technology from **American InterContinental University**. Information Technology is a recognized Computer Science-related discipline, and a Master's degree exceeds a Bachelor's. Additionally, he completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia, where he served as a teaching assistant for French courses. He also holds a BA in French Language and Literature from Queens University of Charlotte, which included a year abroad at Universit\u00e9 Paul Val\u00e9ry, Montpellier, France, through an exchange program with the University of North Carolina at Chapel Hill.\n\nLet me know if you'd like the deep dive on this one."
+ },
+ {
+  "arm": "control",
+  "query": "Does Matt have a computer science degree?",
+  "run": 3,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e Here's a great example.\n\nMatt does not have a computer science degree. He holds a Master's degree in Information Technology from **American InterContinental University**. Information Technology is a recognized Computer Science-related discipline, and a Master's degree exceeds a Bachelor's.\n\nThere's more to this story if you're curious."
+ },
+ {
+  "arm": "control",
+  "query": "Does Matt have a computer science degree?",
+  "run": 4,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e On it!\n\nMatt does not have a computer science degree. He holds a Master's degree in Information Technology from **American InterContinental University**. Information Technology is a recognized Computer Science-related discipline, and a Master's degree exceeds a Bachelor's. Additionally, he has completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia, where he served as a teaching assistant for French courses. He also holds a Bachelor of Arts in French Language and Literature from Queens University of Charlotte, which included a year abroad at Universit\u00e9 Paul Val\u00e9ry in Montpellier, France.\n\nI can show you related patterns if that's helpful."
+ },
+ {
+  "arm": "control",
+  "query": "Does Matt have a computer science degree?",
+  "run": 5,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e Here's a great example.\n\nMatt does not have a computer science degree. He holds a Master's degree in Information Technology from **American InterContinental University**, which is a recognized Computer Science-related discipline. Additionally, he completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia, where he served as a teaching assistant for French courses. He also earned a BA in French Language and Literature from Queens University of Charlotte, including a year abroad at Universit\u00e9 Paul Val\u00e9ry in Montpellier, France. \n\nLet me know if you'd like the deep dive on this one."
+ },
+ {
+  "arm": "control",
+  "query": "Does Matt have a PMP?",
+  "run": 1,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e Tracking this down...\n\nMatt does not have a PMP certification. Instead, he holds several other certifications, though none are current. These include the \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), and the \"SAFe 4 Certified Agilist\" (issued 2017, expired). Additionally, he passed Oracle 8i DBA exams on the OCP track, covering SQL and PL/SQL, Architecture and Administration, and Backup and Recovery in 2002.\n\nHappy to explore similar work in other industries."
+ },
+ {
+  "arm": "control",
+  "query": "Does Matt have a PMP?",
+  "run": 2,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e Here's a great example.\n\nMatt does not have a PMP certification. His certifications include \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current.\n\nHappy to explore similar work in other industries."
+ },
+ {
+  "arm": "control",
+  "query": "Does Matt have a PMP?",
+  "run": 3,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e Perfect \u2014 here's what I found.\n\nNo, Matt does not have a PMP. His certifications include \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current.\n\nWant to see how Matt applied this elsewhere?"
+ },
+ {
+  "arm": "control",
+  "query": "Does Matt have a PMP?",
+  "run": 4,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e Found it!\n\nNo, Matt does not have a PMP. His certifications include \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current."
+ },
+ {
+  "arm": "control",
+  "query": "Does Matt have a PMP?",
+  "run": 5,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e This is a strong one.\n\nMatt does not have a PMP certification. His certifications include \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these are current.\n\nHappy to explore similar work in other industries."
+ },
+ {
+  "arm": "control",
+  "query": "Tell me about Matt's payments work at JP Morgan",
+  "run": 1,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e On it!\n\nAt **JP Morgan Chase**, Matt played a pivotal role in building the payment engine behind the ACCESS Next Generation platform. The project aimed to create a unified global corporate banking portal for **135,000+** clients across **180+** countries. The existing platform, Bottomline Technologies' WebSeries, required extensive customization to meet JP Morgan's specific needs, including bespoke payment modules and security controls. Matt was responsible for designing and delivering these custom solutions, managing a blended team of over **40** professionals from **Accenture** and JP Morgan.\n\nMatt's work included developing ACH, wire, FX/cross-border, and EFTPS tax payment modules, each with unique compliance and workflow requirements. He implemented a Message Authentication Code (MAC) security layer to ensure payment integrity and built contextual help features to reduce errors. Additionally, he integrated the payment engine with JP Morgan's transaction monitoring system, enhancing security and compliance.\n\nThe ACCESS platform launched in April 2011, consolidating previously separate regional systems into a single digital experience. It provided real-time global reporting, SSO across treasury functions, and trade finance lifecycle visibility. This transformation led to ACCESS being recognized as the #1 digital channel by Coalition Greenwich.\n\nWant me to dig deeper into the technical approach?"
+ },
+ {
+  "arm": "control",
+  "query": "Tell me about Matt's payments work at JP Morgan",
+  "run": 2,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [],
+  "answer_md": "Got it! \ud83d\udc3e\n\nAt **JP Morgan Chase**, Matt served as the Senior Technology Architecture Manager, where he played a pivotal role in building the payment engine behind the **JP Morgan ACCESS** platform. This initiative was a significant undertaking, as the platform was designed to serve over **135,000** corporations, financial institutions, governments, and municipalities across **180+ countries**. The project aimed to transform JP Morgan's global corporate banking portal by leveraging Bottomline Technologies' WebSeries platform, but the requirements extended far beyond the out-of-box capabilities.\n\nMatt led a blended team of over **40** professionals from **Accenture** and JP Morgan, focusing on designing and delivering bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. His efforts ensured the platform could handle distinct formatting, validation, compliance, and workflow requirements for each payment type. He also implemented a Message Authentication Code (MAC) security layer, contextual help, and payment-type-specific RBAC, enhancing security and user experience.\n\nThe ACCESS platform launched in April 2011, consolidating previously separate regional systems into a single digital experience. It provided real-time global reporting, SSO across treasury functions, and trade finance lifecycle visibility, transforming the corporate treasurer experience. The platform became JP Morgan's flagship corporate digital channel and was recognized as #1 in digital channels by Coalition Greenwich.\n\nI can show you related patterns if that's helpful."
+ },
+ {
+  "arm": "control",
+  "query": "Tell me about Matt's payments work at JP Morgan",
+  "run": 3,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e On it!\n\nAt **JP Morgan Chase**, the challenge was to build the ACCESS Next Generation platform to serve over **135,000** clients across **180+** countries. The existing platform, based on Bottomline Technologies' WebSeries, required significant customization to meet the diverse needs of these clients. Each payment type had unique formatting, validation, compliance, and workflow requirements that needed to be purpose-built for JP Morgan's operational scale. Matt, as the Technology Delivery Lead, managed a team of over **40** across **Accenture** and JP Morgan, working closely with Bottomline Technologies to design and deliver bespoke payment modules, security layers, and platform capabilities.\n\nMatt's efforts included designing the ACH, wire, FX/cross-border, and EFTPS tax payment modules, implementing a Message Authentication Code (MAC) security layer, and developing contextual help and payment-type-specific entitlements. He also integrated the payment engine with JP Morgan's centralized transaction monitoring system, which screened trillions of daily transactions for suspicious activity. The ACCESS platform launched in April 2011, consolidating previously separate regional systems into a single digital experience. It provided real-time global reporting, SSO across treasury functions, and trade finance lifecycle visibility, transforming the corporate treasurer experience and earning recognition as the #1 digital channel by Coalition Greenwich. I can show you related patterns if that's helpful."
+ },
+ {
+  "arm": "control",
+  "query": "Tell me about Matt's payments work at JP Morgan",
+  "run": 4,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e Perfect \u2014 here's what I found.\n\nAt **JP Morgan Chase**, Matt played a pivotal role in building the payment engine behind the **JP Morgan ACCESS** platform. The project was high-stakes, aiming to serve over **135,000** corporations, financial institutions, governments, and municipalities across **180+ countries**. The existing platform, Bottomline Technologies' WebSeries, required extensive customization to meet the diverse needs of JP Morgan's vast client base. As the Technology Delivery Lead, Matt managed a team of **40+** across multiple locations, including the US, Mumbai, and Bangalore, and worked closely with Bottomline Technologies in Portsmouth, NH.\n\nMatt was responsible for designing and delivering bespoke payment modules for ACH, wire, FX/cross-border, and EFTPS tax payments. He implemented a robust MAC security layer, contextual help, and payment-type-specific RBAC, ensuring a secure and user-friendly experience. He also integrated real-time global reporting and trade finance into the platform, providing a comprehensive view of transactions and cash positions. The platform's launch in April 2011 marked the consolidation of separate regional systems into a unified global portal, recognized as the #1 corporate digital channel by Coalition Greenwich.\n\nAdditionally, Matt managed the integration of JP Morgan's centralized transaction monitoring system, which screened trillions of daily transactions for suspicious activity. He incorporated customer risk confidence scores to constrain transactions based on risk profiles, ensuring compliance and security. The successful delivery of the ACCESS platform transformed JP Morgan's corporate banking experience, providing a seamless and efficient digital channel for its global clientele.\n\nLet me know if you'd like the deep dive on this one."
+ },
+ {
+  "arm": "control",
+  "query": "Tell me about Matt's payments work at JP Morgan",
+  "run": 5,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e Tracking this down...\n\nAt **JP Morgan Chase**, Matt played a pivotal role in building the ACCESS Next Generation platform, a flagship corporate digital banking portal. This initiative was driven by the need to consolidate multiple regional systems into a unified global platform capable of serving **135,000+** corporations, financial institutions, governments, and municipalities across **180+ countries**. The existing platforms were disparate, with each payment type requiring distinct formatting, validation, compliance, and workflow requirements that the foundational technology couldn't support out-of-the-box. \n\nMatt, as the Technology Delivery Lead, managed a blended team of over **40** professionals from **Accenture** and JP Morgan, coordinating efforts across the US, Mumbai, and Bangalore. He was embedded at Bottomline Technologies' offices to design and deliver bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. His work included implementing a Message Authentication Code (MAC) security layer, real-time global reporting, and a single sign-on integration, among others. Matt's efforts ensured that the platform could handle complex multi-level approval workflows and payment-type-specific permissions, which were critical for JP Morgan's diverse client base.\n\nThe result was the successful launch of the ACCESS platform in April 2011, which became JP Morgan's unified global corporate banking portal. This platform provided a seamless digital experience, recognized as #1 in digital channels by Coalition Greenwich, and significantly improved operational efficiency and compliance governance. The centralized payments gateway and entitlements engine were standout features, reducing entitlement management from days to minutes and enabling a single entry point for all payment types across regions.\n\nThere's more to this story if you're curious."
+ }
+]

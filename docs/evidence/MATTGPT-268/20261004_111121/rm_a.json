@@ -1,0 +1,77 @@
+[
+ {
+  "arm": "a",
+  "query": "Bachelor's degree in Computer Science or related field",
+  "run": 1,
+  "label": false,
+  "match_status": "strong",
+  "evidence": [
+   {
+    "evidence_type": "profile",
+    "story_title": null,
+    "client": null,
+    "relevance": "Matt has a Master's degree in Information Technology, a recognized related field."
+   }
+  ],
+  "gap_explanation": ""
+ },
+ {
+  "arm": "a",
+  "query": "Bachelor's degree in Computer Science or related field",
+  "run": 2,
+  "label": false,
+  "match_status": "strong",
+  "evidence": [
+   {
+    "evidence_type": "profile",
+    "story_title": null,
+    "client": null,
+    "relevance": "Matt has a Master's degree in Information Technology, a recognized related field."
+   }
+  ],
+  "gap_explanation": ""
+ },
+ {
+  "arm": "a",
+  "query": "Bachelor's degree in Computer Science or related field",
+  "run": 3,
+  "label": false,
+  "match_status": "strong",
+  "evidence": [
+   {
+    "evidence_type": "profile",
+    "story_title": null,
+    "client": null,
+    "relevance": "Matt has a Master's degree in Information Technology, a recognized related field."
+   }
+  ],
+  "gap_explanation": ""
+ },
+ {
+  "arm": "a",
+  "query": "PMP certification required",
+  "run": 1,
+  "label": false,
+  "match_status": "gap",
+  "evidence": [],
+  "gap_explanation": "Note: No evidence of PMP certification"
+ },
+ {
+  "arm": "a",
+  "query": "PMP certification required",
+  "run": 2,
+  "label": false,
+  "match_status": "gap",
+  "evidence": [],
+  "gap_explanation": "Note: No PMP certification mentioned in profile or stories."
+ },
+ {
+  "arm": "a",
+  "query": "PMP certification required",
+  "run": 3,
+  "label": false,
+  "match_status": "gap",
+  "evidence": [],
+  "gap_explanation": "Note: No PMP certification mentioned in profile or stories"
+ }
+]

@@ -1,0 +1,324 @@
+[
+ {
+  "arm": "a",
+  "query": "does matt have a pmp",
+  "run": 1,
+  "direct_no": false,
+  "label": false,
+  "raw": "\ud83d\udc3e I know just the story.\n\nMatt does not hold a Project Management Professional (PMP) certification. However, he has extensive experience in program management and governance, as demonstrated in his roles at **Accenture** and other companies. His leadership roles have involved significant financial accountability and program management responsibilities. For example, as a delivery lead across engagements at **JP Morgan**, **RBC**, **Fiserv**, and **HSBC**, he managed engagement margins, resource pyramids, and scope changes. He also ran two Cloud Innovation Centers with over **150 practitioners**, where he was responsible for the cost base, chargeability, and contractor spend. \n\nMatt's experience includes mobilizing PMO structures, delivering implementation roadmaps, and managing risk in large-scale programs, such as the I&AM Uplift at **JP Morgan Chase**. These roles required a deep understanding of project management principles, even though he does not hold a PMP certification. \n\nWant to see how Matt applied this elsewhere?",
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e I know just the story.\n\nMatt does not hold a Project Management Professional (PMP) certification. However, he has extensive experience in program management and governance, as demonstrated in his roles at **Accenture** and other companies. His leadership roles have involved significant financial accountability and program management responsibilities. For example, as a delivery lead across engagements at **JP Morgan**, **RBC**, **Fiserv**, and **HSBC**, he managed engagement margins, resource pyramids, and scope changes. He also ran two Cloud Innovation Centers with over **150 practitioners**, where he was responsible for the cost base, chargeability, and contractor spend. \n\nMatt's experience includes mobilizing PMO structures, delivering implementation roadmaps, and managing risk in large-scale programs, such as the I&AM Uplift at **JP Morgan Chase**. These roles required a deep understanding of project management principles, even though he does not hold a PMP certification. \n\nWant to see how Matt applied this elsewhere?"
+ },
+ {
+  "arm": "a",
+  "query": "does matt have a pmp",
+  "run": 2,
+  "direct_no": false,
+  "label": false,
+  "raw": "\ud83d\udc3e Found it!\n\nMatt does not hold a PMP certification. However, he has extensive experience in program management and governance, particularly during his time at **Accenture**. He has managed large-scale projects, such as the mobilization of the PMO for **JP Morgan Chase**'s I&AM Uplift across **341 applications** and the recovery of an $8.5M program at **Fiserv**. His roles have involved significant financial accountability, owning engagement margins, and managing resource pyramids across multiple engagements.\n\nHappy to explore similar work in other industries.",
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e Found it!\n\nMatt does not hold a PMP certification. However, he has extensive experience in program management and governance, particularly during his time at **Accenture**. He has managed large-scale projects, such as the mobilization of the PMO for **JP Morgan Chase**'s I&AM Uplift across **341 applications** and the recovery of an **\\$8.5M** program at **Fiserv**. His roles have involved significant financial accountability, owning engagement margins, and managing resource pyramids across multiple engagements.\n\nHappy to explore similar work in other industries."
+ },
+ {
+  "arm": "a",
+  "query": "does matt have a pmp",
+  "run": 3,
+  "direct_no": false,
+  "label": false,
+  "raw": "\ud83d\udc3e Here's a great example.\n\nMatt does not have a PMP certification. His certifications include \"AWS Certified Solutions Architect - Associate (issued 2020, expired 2023),\" \"AWS Certified Cloud Practitioner (issued 2019, expired 2023),\" \"SAFe 4 Certified Agilist (issued 2017, expired),\" and \"Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002).\" None of these certifications are current.\n\nI can show you related patterns if that's helpful. [[profile:certifications]]",
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e Here's a great example.\n\nMatt does not have a PMP certification. His certifications include \"AWS Certified Solutions Architect - Associate (issued 2020, expired 2023),\" \"AWS Certified Cloud Practitioner (issued 2019, expired 2023),\" \"SAFe 4 Certified Agilist (issued 2017, expired),\" and \"Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002).\" None of these certifications are current.\n\nI can show you related patterns if that's helpful."
+ },
+ {
+  "arm": "a",
+  "query": "does matt have a pmp",
+  "run": 4,
+  "direct_no": false,
+  "label": false,
+  "raw": "\ud83d\udc3e This is a strong one.\n\nMatt does not hold a PMP certification. However, he has held various certifications, including the AWS Certified Solutions Architect - Associate (issued 2020, expired 2023), AWS Certified Cloud Practitioner (issued 2019, expired 2023), and SAFe 4 Certified Agilist (issued 2017, expired). Additionally, he passed Oracle 8i DBA exams on the OCP track, covering SQL and PL/SQL, Architecture and Administration, and Backup and Recovery in 2002.\n\n[[profile:certifications]]\n\nShall I find more examples like this?",
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e This is a strong one.\n\nMatt does not hold a PMP certification. However, he has held various certifications, including the AWS Certified Solutions Architect - Associate (issued 2020, expired 2023), AWS Certified Cloud Practitioner (issued 2019, expired 2023), and SAFe 4 Certified Agilist (issued 2017, expired). Additionally, he passed Oracle 8i DBA exams on the OCP track, covering SQL and PL/SQL, Architecture and Administration, and Backup and Recovery in 2002.\n\nShall I find more examples like this?"
+ },
+ {
+  "arm": "a",
+  "query": "does matt have a pmp",
+  "run": 5,
+  "direct_no": false,
+  "label": false,
+  "raw": "\ud83d\udc3e I know just the story.\n\nMatt does not hold a Project Management Professional (PMP) certification. However, his certifications include \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current.\n\n[[profile:certifications]]\n\nWant to see how Matt applied this elsewhere?",
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e I know just the story.\n\nMatt does not hold a Project Management Professional (PMP) certification. However, his certifications include \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current.\n\nWant to see how Matt applied this elsewhere?"
+ },
+ {
+  "arm": "a",
+  "query": "does matt have a pmp",
+  "run": 6,
+  "direct_no": false,
+  "label": false,
+  "raw": "\ud83d\udc3e Found it!\n\nMatt does not hold a Project Management Professional (PMP) certification. However, he has extensive experience in program management and governance, having led multiple large-scale projects and engagements across various industries. For instance, at **Accenture**, he was responsible for the financial accountability of engagements, managing resource pyramids, and ensuring project margins across clients like **JP Morgan**, **RBC**, **Fiserv**, and **HSBC**. He has also mobilized PMO structures, as seen in his work with **JP Morgan Chase** following their 2014 data breach, where he established program structures and delivered implementation roadmaps for a firm-wide security uplift.\n\nShall I find more examples like this?",
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e Found it!\n\nMatt does not hold a Project Management Professional (PMP) certification. However, he has extensive experience in program management and governance, having led multiple large-scale projects and engagements across various industries. For instance, at **Accenture**, he was responsible for the financial accountability of engagements, managing resource pyramids, and ensuring project margins across clients like **JP Morgan**, **RBC**, **Fiserv**, and **HSBC**. He has also mobilized PMO structures, as seen in his work with **JP Morgan Chase** following their 2014 data breach, where he established program structures and delivered implementation roadmaps for a firm-wide security uplift.\n\nShall I find more examples like this?"
+ },
+ {
+  "arm": "a",
+  "query": "does matt have a pmp",
+  "run": 7,
+  "direct_no": false,
+  "label": false,
+  "raw": "\ud83d\udc3e This is a strong one.\n\nMatt does not have a PMP certification. His certifications include \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these are current.\n\nWhat else can I track down for you? \n\n[[profile:certifications]]",
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e This is a strong one.\n\nMatt does not have a PMP certification. His certifications include \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these are current.\n\nWhat else can I track down for you?"
+ },
+ {
+  "arm": "a",
+  "query": "does matt have a pmp",
+  "run": 8,
+  "direct_no": false,
+  "label": false,
+  "raw": "\ud83d\udc3e Here's a great example.\n\nMatt does not have a PMP certification. However, he holds several other certifications, including AWS Certified Solutions Architect - Associate (issued 2020, expired 2023), AWS Certified Cloud Practitioner (issued 2019, expired 2023), SAFe 4 Certified Agilist (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are currently active.\n\nWhat else can I track down for you? \n\n[[profile:certifications]]",
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e Here's a great example.\n\nMatt does not have a PMP certification. However, he holds several other certifications, including AWS Certified Solutions Architect - Associate (issued 2020, expired 2023), AWS Certified Cloud Practitioner (issued 2019, expired 2023), SAFe 4 Certified Agilist (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are currently active.\n\nWhat else can I track down for you?"
+ },
+ {
+  "arm": "a",
+  "query": "does matt have a pmp",
+  "run": 9,
+  "direct_no": false,
+  "label": false,
+  "raw": "Got it! \ud83d\udc3e\n\nMatt does not have a PMP (Project Management Professional) certification. However, he has held significant roles that required managing complex projects and programs. For example, at **JP Morgan Chase**, he mobilized the PMO and established program structure and controls for a firm-wide I&AM Uplift Program following a major data breach. This involved coordinating across 341 applications to meet new security requirements, delivering an implementation roadmap and detailed migration plan, and providing business analysis support to application teams. His work provided JP Morgan with the necessary structure and clarity to proceed with the migration on their timeline.\n\nWant to see how Matt applied this elsewhere?",
+  "profile_categories": [],
+  "answer_md": "Got it! \ud83d\udc3e\n\nMatt does not have a PMP (Project Management Professional) certification. However, he has held significant roles that required managing complex projects and programs. For example, at **JP Morgan Chase**, he mobilized the PMO and established program structure and controls for a firm-wide I&AM Uplift Program following a major data breach. This involved coordinating across 341 applications to meet new security requirements, delivering an implementation roadmap and detailed migration plan, and providing business analysis support to application teams. His work provided JP Morgan with the necessary structure and clarity to proceed with the migration on their timeline.\n\nWant to see how Matt applied this elsewhere?"
+ },
+ {
+  "arm": "a",
+  "query": "does matt have a pmp",
+  "run": 10,
+  "direct_no": false,
+  "label": false,
+  "raw": "\ud83d\udc3e I know just the story.\n\nMatt does not hold a PMP certification. However, he has held significant roles in project and program management throughout his career. For instance, at **JP Morgan Chase**, he mobilized the PMO for a firm-wide I&AM Uplift Program, establishing program structure and controls for **341** applications. This included delivering an implementation roadmap and a detailed migration plan, which enabled the execution of the migration on their timeline. His experience in managing complex projects and programs is extensive, even without a PMP certification. \n\nThere's more to this story if you're curious.",
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e I know just the story.\n\nMatt does not hold a PMP certification. However, he has held significant roles in project and program management throughout his career. For instance, at **JP Morgan Chase**, he mobilized the PMO for a firm-wide I&AM Uplift Program, establishing program structure and controls for **341** applications. This included delivering an implementation roadmap and a detailed migration plan, which enabled the execution of the migration on their timeline. His experience in managing complex projects and programs is extensive, even without a PMP certification. \n\nThere's more to this story if you're curious."
+ },
+ {
+  "arm": "a",
+  "query": "Does Matt have a PMP?",
+  "run": 1,
+  "direct_no": false,
+  "label": false,
+  "raw": "\ud83d\udc3e Found it!\n\nMatt does not hold a PMP certification. However, he has held various roles that involved significant project and program management responsibilities. For example, at **JP Morgan Chase**, he mobilized the PMO, delivered an implementation roadmap, and detailed migration plans following a major data breach. This role required him to establish program structure and controls, enabling the execution of a migration involving **341 applications**. Additionally, his experience as a Director at **Accenture** involved financial accountability and program management across multiple engagements, including recovering troubled programs and managing the resource pyramid to optimize engagement margins.\n\nLet me know if you'd like the deep dive on this one.",
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e Found it!\n\nMatt does not hold a PMP certification. However, he has held various roles that involved significant project and program management responsibilities. For example, at **JP Morgan Chase**, he mobilized the PMO, delivered an implementation roadmap, and detailed migration plans following a major data breach. This role required him to establish program structure and controls, enabling the execution of a migration involving **341 applications**. Additionally, his experience as a Director at **Accenture** involved financial accountability and program management across multiple engagements, including recovering troubled programs and managing the resource pyramid to optimize engagement margins.\n\nLet me know if you'd like the deep dive on this one."
+ },
+ {
+  "arm": "a",
+  "query": "Does Matt have a PMP?",
+  "run": 2,
+  "direct_no": false,
+  "label": false,
+  "raw": "\ud83d\udc3e Here's a great example.\n\nMatt does not hold a PMP certification. However, he has held significant roles in program management and governance, as demonstrated in his work with **JP Morgan Chase** and other Fortune 500 clients. His experience includes mobilizing PMOs, establishing program structures, and delivering implementation roadmaps for large-scale projects. \n\nShall I find more examples like this?",
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e Here's a great example.\n\nMatt does not hold a PMP certification. However, he has held significant roles in program management and governance, as demonstrated in his work with **JP Morgan Chase** and other Fortune **500 clients**. His experience includes mobilizing PMOs, establishing program structures, and delivering implementation roadmaps for large-scale projects. \n\nShall I find more examples like this?"
+ },
+ {
+  "arm": "a",
+  "query": "Does Matt have a PMP?",
+  "run": 3,
+  "direct_no": false,
+  "label": false,
+  "raw": "\ud83d\udc3e I know just the story.\n\nMatt does not hold a PMP certification. His certifications include \"AWS Certified Solutions Architect - Associate (issued 2020, expired 2023),\" \"AWS Certified Cloud Practitioner (issued 2019, expired 2023),\" \"SAFe 4 Certified Agilist (issued 2017, expired),\" and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current.\n\nShall I find more examples like this?",
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e I know just the story.\n\nMatt does not hold a PMP certification. His certifications include \"AWS Certified Solutions Architect - Associate (issued 2020, expired 2023),\" \"AWS Certified Cloud Practitioner (issued 2019, expired 2023),\" \"SAFe 4 Certified Agilist (issued 2017, expired),\" and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current.\n\nShall I find more examples like this?"
+ },
+ {
+  "arm": "a",
+  "query": "Does Matt have a PMP?",
+  "run": 4,
+  "direct_no": false,
+  "label": false,
+  "raw": "\ud83d\udc3e This is a strong one.\n\nMatt does not hold a PMP certification. His certifications include \"AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)\", \"AWS Certified Cloud Practitioner (issued 2019, expired 2023)\", \"SAFe 4 Certified Agilist (issued 2017, expired)\", and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current.\n\n[[profile:certifications]]\n\nHappy to explore similar work in other industries.",
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e This is a strong one.\n\nMatt does not hold a PMP certification. His certifications include \"AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)\", \"AWS Certified Cloud Practitioner (issued 2019, expired 2023)\", \"SAFe 4 Certified Agilist (issued 2017, expired)\", and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current.\n\nHappy to explore similar work in other industries."
+ },
+ {
+  "arm": "a",
+  "query": "Does Matt have a PMP?",
+  "run": 5,
+  "direct_no": false,
+  "label": false,
+  "raw": "Got it! \ud83d\udc3e\n\nMatt does not have a PMP certification. His certifications include \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002).\n\nWant me to dig deeper into the technical approach? [[profile:certifications]]",
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "Got it! \ud83d\udc3e\n\nMatt does not have a PMP certification. His certifications include \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002).\n\nWant me to dig deeper into the technical approach?"
+ },
+ {
+  "arm": "a",
+  "query": "Does Matt have a PMP?",
+  "run": 6,
+  "direct_no": false,
+  "label": false,
+  "raw": "\ud83d\udc3e On it!\n\nMatt does not hold a PMP certification. His certifications include AWS Certified Solutions Architect - Associate (issued 2020, expired 2023), AWS Certified Cloud Practitioner (issued 2019, expired 2023), SAFe 4 Certified Agilist (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current. \n\nHappy to explore similar work in other industries.",
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e On it!\n\nMatt does not hold a PMP certification. His certifications include AWS Certified Solutions Architect - Associate (issued 2020, expired 2023), AWS Certified Cloud Practitioner (issued 2019, expired 2023), SAFe 4 Certified Agilist (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current. \n\nHappy to explore similar work in other industries."
+ },
+ {
+  "arm": "a",
+  "query": "Does Matt have a PMP?",
+  "run": 7,
+  "direct_no": false,
+  "label": false,
+  "raw": "\ud83d\udc3e On it!\n\nMatt does not hold a PMP certification. His certifications include \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current. \n\nI can show you related patterns if that's helpful. [[profile:certifications]]",
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e On it!\n\nMatt does not hold a PMP certification. His certifications include \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current. \n\nI can show you related patterns if that's helpful."
+ },
+ {
+  "arm": "a",
+  "query": "Does Matt have a PMP?",
+  "run": 8,
+  "direct_no": false,
+  "label": false,
+  "raw": "Got it! \ud83d\udc3e\n\nMatt does not have a PMP. His certifications include AWS Certified Solutions Architect - Associate (issued 2020, expired 2023), AWS Certified Cloud Practitioner (issued 2019, expired 2023), and SAFe 4 Certified Agilist (issued 2017, expired). He also passed Oracle 8i DBA exams on the OCP track, which include SQL and PL/SQL, Architecture and Administration, and Backup and Recovery (2002). None of these certifications are current.\n\nShall I find more examples like this? \n\n[[profile:certifications]]",
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "Got it! \ud83d\udc3e\n\nMatt does not have a PMP. His certifications include AWS Certified Solutions Architect - Associate (issued 2020, expired 2023), AWS Certified Cloud Practitioner (issued 2019, expired 2023), and SAFe 4 Certified Agilist (issued 2017, expired). He also passed Oracle 8i DBA exams on the OCP track, which include SQL and PL/SQL, Architecture and Administration, and Backup and Recovery (2002). None of these certifications are current.\n\nShall I find more examples like this?"
+ },
+ {
+  "arm": "a",
+  "query": "Does Matt have a PMP?",
+  "run": 9,
+  "direct_no": false,
+  "label": false,
+  "raw": "\ud83d\udc3e This is a strong one.\n\nMatt does not hold a PMP certification. His certifications include \"AWS Certified Solutions Architect - Associate (issued 2020, expired 2023),\" \"AWS Certified Cloud Practitioner (issued 2019, expired 2023),\" \"SAFe 4 Certified Agilist (issued 2017, expired),\" and \"Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002).\" None of these certifications are current. \n\nLet me know if you'd like the deep dive on this one. \n\n[[profile:certifications]]",
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e This is a strong one.\n\nMatt does not hold a PMP certification. His certifications include \"AWS Certified Solutions Architect - Associate (issued 2020, expired 2023),\" \"AWS Certified Cloud Practitioner (issued 2019, expired 2023),\" \"SAFe 4 Certified Agilist (issued 2017, expired),\" and \"Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002).\" None of these certifications are current. \n\nLet me know if you'd like the deep dive on this one."
+ },
+ {
+  "arm": "a",
+  "query": "Does Matt have a PMP?",
+  "run": 10,
+  "direct_no": false,
+  "label": false,
+  "raw": "\ud83d\udc3e Found it!\n\nMatt does not have a PMP certification. His certifications include AWS Certified Solutions Architect - Associate (issued 2020, expired 2023), AWS Certified Cloud Practitioner (issued 2019, expired 2023), SAFe 4 Certified Agilist (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current.\n\nShall I find more examples like this?",
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e Found it!\n\nMatt does not have a PMP certification. His certifications include AWS Certified Solutions Architect - Associate (issued 2020, expired 2023), AWS Certified Cloud Practitioner (issued 2019, expired 2023), SAFe 4 Certified Agilist (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current.\n\nShall I find more examples like this?"
+ },
+ {
+  "arm": "a",
+  "query": "What about PMP",
+  "run": 1,
+  "direct_no": false,
+  "label": false,
+  "raw": "Got it! \ud83d\udc3e\n\nMatt's work at **RBC** involved establishing a PMO for their Commercial Banking Modernization project. He developed and maintained a comprehensive project management plan that included the project approach, staffing, responsibilities, budget, schedule, and communication plan. This plan was crucial for coordinating program-level measurement and reporting, which aggregated inputs from various management areas like financial and quality management. Matt also designed a structured risk and dependency management framework, ensuring proactive issue identification and resolution.\n\nAt **JP Morgan Chase**, following a significant data breach, Matt mobilized the PMO to support a firm-wide I&AM Uplift Program. He delivered an implementation roadmap and detailed migration plan for 341 applications, which required meeting over 30 new requirements. His efforts provided the necessary structure and clarity for JP Morgan to proceed with the migration on their timeline.\n\nIn both cases, Matt's approach involved creating centralized communication frameworks and task-tracking matrices to improve cross-team coordination and response times. These frameworks enabled predictable execution and strategic alignment across multiple organizations, reducing redundant efforts and ensuring that roles and responsibilities were clearly understood and aligned.\n\nI can show you related patterns if that's helpful.",
+  "profile_categories": [],
+  "answer_md": "Got it! \ud83d\udc3e\n\nMatt's work at **RBC** involved establishing a PMO for their Commercial Banking Modernization project. He developed and maintained a comprehensive project management plan that included the project approach, staffing, responsibilities, budget, schedule, and communication plan. This plan was crucial for coordinating program-level measurement and reporting, which aggregated inputs from various management areas like financial and quality management. Matt also designed a structured risk and dependency management framework, ensuring proactive issue identification and resolution.\n\nAt **JP Morgan Chase**, following a significant data breach, Matt mobilized the PMO to support a firm-wide I&AM Uplift Program. He delivered an implementation roadmap and detailed migration plan for 341 applications, which required meeting over 30 new requirements. His efforts provided the necessary structure and clarity for JP Morgan to proceed with the migration on their timeline.\n\nIn both cases, Matt's approach involved creating centralized communication frameworks and task-tracking matrices to improve cross-team coordination and response times. These frameworks enabled predictable execution and strategic alignment across multiple organizations, reducing redundant efforts and ensuring that roles and responsibilities were clearly understood and aligned.\n\nI can show you related patterns if that's helpful."
+ },
+ {
+  "arm": "a",
+  "query": "What about PMP",
+  "run": 2,
+  "direct_no": false,
+  "label": false,
+  "raw": "\ud83d\udc3e Tracking this down...\n\nMatt Pugmire does not hold a PMP certification. However, he has extensive experience in program management and governance, as demonstrated in his work with **RBC** and **JP Morgan Chase**. At **RBC**, he established the PMO for a complex modernization initiative, developing the project management plan, coordinating program-level measurement and reporting, and maintaining the program road map. His work enabled predictable execution and strategic alignment across multiple organizations. Similarly, at **JP Morgan Chase**, he mobilized the PMO for a firm-wide I&AM Uplift Program, delivering an implementation roadmap and detailed migration plan for 341 applications, which provided the structure and clarity necessary for the migration.\n\nLet me know if you'd like the deep dive on this one.",
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e Tracking this down...\n\nMatt Pugmire does not hold a PMP certification. However, he has extensive experience in program management and governance, as demonstrated in his work with **RBC** and **JP Morgan Chase**. At **RBC**, he established the PMO for a complex modernization initiative, developing the project management plan, coordinating program-level measurement and reporting, and maintaining the program road map. His work enabled predictable execution and strategic alignment across multiple organizations. Similarly, at **JP Morgan Chase**, he mobilized the PMO for a firm-wide I&AM Uplift Program, delivering an implementation roadmap and detailed migration plan for 341 applications, which provided the structure and clarity necessary for the migration.\n\nLet me know if you'd like the deep dive on this one."
+ },
+ {
+  "arm": "a",
+  "query": "What about PMP",
+  "run": 3,
+  "direct_no": false,
+  "label": false,
+  "raw": "Got it! \ud83d\udc3e\n\nMatt Pugmire does not hold a PMP certification. However, he has extensive experience in project management and governance, as demonstrated in his work with **RBC** and **JP Morgan Chase**. At **RBC**, he established the PMO for a complex modernization initiative, developing a project management plan and coordinating program-level measurement and reporting. This governance structure improved cross-team coordination and enabled predictable execution. Similarly, at **JP Morgan Chase**, following a significant data breach, Matt mobilized the PMO and delivered an implementation roadmap and detailed migration plan for 341 applications. This provided the structure and clarity needed for the bank to proceed with its security posture modernization.\n\nWant to see how Matt applied this elsewhere?",
+  "profile_categories": [],
+  "answer_md": "Got it! \ud83d\udc3e\n\nMatt Pugmire does not hold a PMP certification. However, he has extensive experience in project management and governance, as demonstrated in his work with **RBC** and **JP Morgan Chase**. At **RBC**, he established the PMO for a complex modernization initiative, developing a project management plan and coordinating program-level measurement and reporting. This governance structure improved cross-team coordination and enabled predictable execution. Similarly, at **JP Morgan Chase**, following a significant data breach, Matt mobilized the PMO and delivered an implementation roadmap and detailed migration plan for 341 applications. This provided the structure and clarity needed for the bank to proceed with its security posture modernization.\n\nWant to see how Matt applied this elsewhere?"
+ },
+ {
+  "arm": "a",
+  "query": "What about PMP",
+  "run": 4,
+  "direct_no": false,
+  "label": false,
+  "raw": "\ud83d\udc3e This is a strong one.\n\nMatt does not hold a Project Management Professional (PMP) certification. However, he has extensive experience in project management and governance, as demonstrated in his work with **RBC** and **JP Morgan Chase**. At **RBC**, he established a Project Management Office (PMO) for their commercial banking modernization initiative. He developed the project management plan, coordinated program-level measurement and reporting, and built centralized communication frameworks. This governance structure improved cross-team coordination and enabled predictable execution.\n\nSimilarly, at **JP Morgan Chase**, Matt mobilized the PMO for the firm's I&AM Uplift Program following a significant data breach. He delivered an implementation roadmap and detailed migration plan, providing the structure and clarity needed for the migration of 341 applications to meet new security requirements. His work ensured that **JP Morgan** could execute the migration on their timeline, demonstrating his capability in managing complex projects without holding a PMP certification.\n\nThere's more to this story if you're curious.",
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e This is a strong one.\n\nMatt does not hold a Project Management Professional (PMP) certification. However, he has extensive experience in project management and governance, as demonstrated in his work with **RBC** and **JP Morgan Chase**. At **RBC**, he established a Project Management Office (PMO) for their commercial banking modernization initiative. He developed the project management plan, coordinated program-level measurement and reporting, and built centralized communication frameworks. This governance structure improved cross-team coordination and enabled predictable execution.\n\nSimilarly, at **JP Morgan Chase**, Matt mobilized the PMO for the firm's I&AM Uplift Program following a significant data breach. He delivered an implementation roadmap and detailed migration plan, providing the structure and clarity needed for the migration of 341 applications to meet new security requirements. His work ensured that **JP Morgan** could execute the migration on their timeline, demonstrating his capability in managing complex projects without holding a PMP certification.\n\nThere's more to this story if you're curious."
+ },
+ {
+  "arm": "a",
+  "query": "What about PMP",
+  "run": 5,
+  "direct_no": false,
+  "label": false,
+  "raw": "\ud83d\udc3e Here's a great example.\n\nAt **RBC**, Matt played a pivotal role in establishing the Project Management Office (PMO) during a complex modernization initiative. The initiative involved evaluating Bottomline Technologies as the payment hub engine for the Day2Day Corporate Banking platform while sunsetting RBC Express. Given the scale and complexity, a governance framework was essential to coordinate workstreams, manage risks, and align internal teams with external partners. Matt was appointed to lead the PMO setup, leveraging his experience from previous work and his technical architecture expertise.\n\nMatt developed and maintained the project management plan, which included the project approach, staffing, responsibilities, budget, schedule, and communication plan. He coordinated all program-level measurement and reporting, aggregating inputs from financial management, quality management, value measurement, resource management, and individual projects. He also maintained the program roadmap and designed a structured risk and dependency management framework to ensure proactive issue identification and resolution.\n\nThe result was a governance structure that provided visibility and coordination across all workstreams. The PMO framework enabled predictable execution, proactive risk management, and strategic alignment across three organizations. Additionally, the centralized communication framework improved response times and eliminated missed program updates, while the task-tracking matrix reduced redundant efforts and clarified resource assignments across cross-functional teams.\n\nHappy to explore similar work in other industries.",
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e Here's a great example.\n\nAt **RBC**, Matt played a pivotal role in establishing the Project Management Office (PMO) during a complex modernization initiative. The initiative involved evaluating Bottomline Technologies as the payment hub engine for the Day**2Day** Corporate Banking platform while sunsetting **RBC** Express. Given the scale and complexity, a governance framework was essential to coordinate workstreams, manage risks, and align internal teams with external partners. Matt was appointed to lead the PMO setup, leveraging his experience from previous work and his technical architecture expertise.\n\nMatt developed and maintained the project management plan, which included the project approach, staffing, responsibilities, budget, schedule, and communication plan. He coordinated all program-level measurement and reporting, aggregating inputs from financial management, quality management, value measurement, resource management, and individual projects. He also maintained the program roadmap and designed a structured risk and dependency management framework to ensure proactive issue identification and resolution.\n\nThe result was a governance structure that provided visibility and coordination across all workstreams. The PMO framework enabled predictable execution, proactive risk management, and strategic alignment across three organizations. Additionally, the centralized communication framework improved response times and eliminated missed program updates, while the task-tracking matrix reduced redundant efforts and clarified resource assignments across cross-functional teams.\n\nHappy to explore similar work in other industries."
+ },
+ {
+  "arm": "a",
+  "query": "What about PMP",
+  "run": 6,
+  "direct_no": false,
+  "label": false,
+  "raw": "\ud83d\udc3e I know just the story.\n\nAt **RBC**, Matt was responsible for establishing the PMO during a complex modernization initiative. The project involved evaluating Bottomline Technologies as the payment hub engine for RBC's Day2Day Corporate Banking platform while sunsetting RBC Express. Given the scale and complexity, a governance framework was essential to coordinate workstreams, manage risks, and align internal teams with external partners. Matt developed the project management plan, coordinated program-level measurement and reporting, and built centralized communication frameworks. He maintained the program roadmap and inter-dependencies, ensuring proactive issue identification and resolution.\n\nMatt's approach was characterized by a structured risk and dependency management framework and a centralized communication framework. This framework improved response times and eliminated missed program updates. He also created a task-tracking matrix to clarify resource assignments and prevent duplication of efforts. Regular cross-team meetings ensured roles and responsibilities were understood and aligned.\n\nThe result was a governance structure that provided visibility and coordination across all workstreams. The PMO framework enabled predictable execution, proactive risk management, and strategic alignment across **RBC**, Accenture, and fintech partner Bottomline Technologies. The centralized communication framework improved response times, and the task-tracking matrix reduced redundant efforts, clarifying resource assignments across cross-functional teams.\n\nLet me know if you'd like the deep dive on this one.",
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e I know just the story.\n\nAt **RBC**, Matt was responsible for establishing the PMO during a complex modernization initiative. The project involved evaluating Bottomline Technologies as the payment hub engine for **RBC**'s Day**2Day** Corporate Banking platform while sunsetting **RBC** Express. Given the scale and complexity, a governance framework was essential to coordinate workstreams, manage risks, and align internal teams with external partners. Matt developed the project management plan, coordinated program-level measurement and reporting, and built centralized communication frameworks. He maintained the program roadmap and inter-dependencies, ensuring proactive issue identification and resolution.\n\nMatt's approach was characterized by a structured risk and dependency management framework and a centralized communication framework. This framework improved response times and eliminated missed program updates. He also created a task-tracking matrix to clarify resource assignments and prevent duplication of efforts. Regular cross-team meetings ensured roles and responsibilities were understood and aligned.\n\nThe result was a governance structure that provided visibility and coordination across all workstreams. The PMO framework enabled predictable execution, proactive risk management, and strategic alignment across **RBC**, **Accenture**, and fintech partner Bottomline Technologies. The centralized communication framework improved response times, and the task-tracking matrix reduced redundant efforts, clarifying resource assignments across cross-functional teams.\n\nLet me know if you'd like the deep dive on this one."
+ },
+ {
+  "arm": "a",
+  "query": "What about PMP",
+  "run": 7,
+  "direct_no": false,
+  "label": false,
+  "raw": "\ud83d\udc3e This is a strong one.\n\nMatt does not hold a PMP certification. However, he has extensive experience in program management and governance, as demonstrated in his work with **RBC** and **JP Morgan Chase**. At **RBC**, he established the Project Management Office (PMO) for a complex modernization initiative. This involved developing the project management plan, coordinating program-level measurement and reporting, and building centralized communication frameworks. His efforts provided visibility across all workstreams, improved cross-team coordination, and enabled predictable execution. Similarly, at **JP Morgan Chase**, he mobilized the PMO to support a firm-wide security uplift program following a major data breach. He delivered an implementation roadmap and detailed migration plan, providing the structure and clarity needed for the migration of 341 applications.\n\nLet me know if you'd like the deep dive on this one.",
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e This is a strong one.\n\nMatt does not hold a PMP certification. However, he has extensive experience in program management and governance, as demonstrated in his work with **RBC** and **JP Morgan Chase**. At **RBC**, he established the Project Management Office (PMO) for a complex modernization initiative. This involved developing the project management plan, coordinating program-level measurement and reporting, and building centralized communication frameworks. His efforts provided visibility across all workstreams, improved cross-team coordination, and enabled predictable execution. Similarly, at **JP Morgan Chase**, he mobilized the PMO to support a firm-wide security uplift program following a major data breach. He delivered an implementation roadmap and detailed migration plan, providing the structure and clarity needed for the migration of 341 applications.\n\nLet me know if you'd like the deep dive on this one."
+ },
+ {
+  "arm": "a",
+  "query": "What about PMP",
+  "run": 8,
+  "direct_no": false,
+  "label": false,
+  "raw": "\ud83d\udc3e Tracking this down...\n\nMatt has not mentioned holding a Project Management Professional (PMP) certification in the information provided. However, he has extensive experience in program management and governance, as demonstrated by his role in establishing the PMO for **RBC's** Commercial Banking Modernization. In this engagement, he developed the project management plan, coordinated program-level measurement and reporting, and built centralized communication frameworks. This governance structure improved cross-team coordination and enabled predictable execution across multiple workstreams. Additionally, Matt mobilized the PMO for **JP Morgan Chase's** I&AM Uplift Program, delivering an implementation roadmap and detailed migration plan for 341 applications. These experiences highlight his expertise in program management and governance, even though a PMP certification is not explicitly mentioned. \n\nWant me to dig deeper into the technical approach?",
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e Tracking this down...\n\nMatt has not mentioned holding a Project Management Professional (PMP) certification in the information provided. However, he has extensive experience in program management and governance, as demonstrated by his role in establishing the PMO for **RBC's** Commercial Banking Modernization. In this engagement, he developed the project management plan, coordinated program-level measurement and reporting, and built centralized communication frameworks. This governance structure improved cross-team coordination and enabled predictable execution across multiple workstreams. Additionally, Matt mobilized the PMO for **JP Morgan Chase's** I&AM Uplift Program, delivering an implementation roadmap and detailed migration plan for 341 applications. \n\nWant me to dig deeper into the technical approach?"
+ },
+ {
+  "arm": "a",
+  "query": "What about PMP",
+  "run": 9,
+  "direct_no": false,
+  "label": false,
+  "raw": "Got it! \ud83d\udc3e\n\nMatt does not hold a PMP certification. His certifications include AWS Certified Solutions Architect - Associate (issued 2020, expired 2023), AWS Certified Cloud Practitioner (issued 2019, expired 2023), SAFe 4 Certified Agilist (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track) in SQL and PL/SQL, Architecture and Administration, and Backup and Recovery (2002). None of these certifications are current. \n\nHappy to explore similar work in other industries. [[profile:certifications]]",
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "Got it! \ud83d\udc3e\n\nMatt does not hold a PMP certification. His certifications include AWS Certified Solutions Architect - Associate (issued 2020, expired 2023), AWS Certified Cloud Practitioner (issued 2019, expired 2023), SAFe 4 Certified Agilist (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track) in SQL and PL/SQL, Architecture and Administration, and Backup and Recovery (2002). None of these certifications are current. \n\nHappy to explore similar work in other industries."
+ },
+ {
+  "arm": "a",
+  "query": "What about PMP",
+  "run": 10,
+  "direct_no": false,
+  "label": false,
+  "raw": "\ud83d\udc3e This is a strong one.\n\nMatt does not hold a PMP certification. However, he has extensive experience in program management and governance, as demonstrated in his work with **RBC** and **JP Morgan Chase**. At **RBC**, he established a PMO for their Commercial Banking Modernization initiative. This involved developing a comprehensive project management plan, coordinating program-level measurement and reporting, and building centralized communication frameworks. His efforts resulted in a governance structure that provided visibility across all workstreams, improved cross-team coordination, and enabled predictable execution.\n\nSimilarly, at **JP Morgan Chase**, following a significant data breach, Matt mobilized the PMO to support the I&AM Uplift Program. He delivered an implementation roadmap and migration plan for 341 applications, providing the structure and clarity needed for the migration. His work enabled **JP Morgan Chase** to execute the migration according to their timeline.\n\nLet me know if you'd like the deep dive on this one.",
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e This is a strong one.\n\nMatt does not hold a PMP certification. However, he has extensive experience in program management and governance, as demonstrated in his work with **RBC** and **JP Morgan Chase**. At **RBC**, he established a PMO for their Commercial Banking Modernization initiative. This involved developing a comprehensive project management plan, coordinating program-level measurement and reporting, and building centralized communication frameworks. His efforts resulted in a governance structure that provided visibility across all workstreams, improved cross-team coordination, and enabled predictable execution.\n\nSimilarly, at **JP Morgan Chase**, following a significant data breach, Matt mobilized the PMO to support the I&AM Uplift Program. He delivered an implementation roadmap and migration plan for 341 applications, providing the structure and clarity needed for the migration. His work enabled **JP Morgan Chase** to execute the migration according to their timeline.\n\nLet me know if you'd like the deep dive on this one."
+ }
+]

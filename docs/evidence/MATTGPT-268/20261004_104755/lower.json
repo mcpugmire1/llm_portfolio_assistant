@@ -1,0 +1,132 @@
+[
+ {
+  "query": "does matt have a pmp",
+  "run": 1,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e Found it!\n\nNo, Matt does not have a PMP certification. However, he holds several other certifications: \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002).\n\nLet me know if you'd like the deep dive on this one."
+ },
+ {
+  "query": "does matt have a pmp",
+  "run": 2,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "Got it! \ud83d\udc3e\n\nNo, Matt does not have a PMP certification. However, he holds several other certifications, including \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and passed Oracle 8i DBA exams (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002).\n\nThere's more to this story if you're curious."
+ },
+ {
+  "query": "does matt have a pmp",
+  "run": 3,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e On it!\n\nMatt does not have a PMP certification. However, he holds several other certifications: \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current.\n\nHappy to explore similar work in other industries."
+ },
+ {
+  "query": "does matt have a pmp",
+  "run": 4,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e Found it!\n\nNo, Matt does not have a PMP. His certifications include \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current. \n\nThere's more to this story if you're curious."
+ },
+ {
+  "query": "does matt have a pmp",
+  "run": 5,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e Perfect \u2014 here's what I found.\n\nNo, Matt does not have a PMP certification. However, he holds several other certifications, including \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), and \"SAFe 4 Certified Agilist\" (issued 2017, expired). Additionally, he passed Oracle 8i DBA exams on the OCP track, which include SQL and PL/SQL, Architecture and Administration, and Backup and Recovery (2002).\n\nWhat else can I track down for you?"
+ },
+ {
+  "query": "does matt have a pmp",
+  "run": 6,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e I know just the story.\n\nMatt does not have a PMP certification. However, he holds several other certifications, including \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002).\n\nWant to see how Matt applied this elsewhere?"
+ },
+ {
+  "query": "does matt have a pmp",
+  "run": 7,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e Found it!\n\nNo, Matt does not have a PMP certification. However, he holds several other certifications: \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002).\n\nWhat else can I track down for you?"
+ },
+ {
+  "query": "does matt have a pmp",
+  "run": 8,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e Here's a great example.\n\nNo, Matt does not have a PMP certification. His certifications include \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are currently active.\n\nHappy to explore similar work in other industries."
+ },
+ {
+  "query": "does matt have a pmp",
+  "run": 9,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e Tracking this down...\n\nNo, Matt does not have a PMP certification. His certifications include \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current.\n\nLet me know if you'd like the deep dive on this one."
+ },
+ {
+  "query": "does matt have a pmp",
+  "run": 10,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e I know just the story.\n\nMatt does not have a PMP certification. However, he holds several other certifications, including \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current.\n\nThere's more to this story if you're curious."
+ }
+]

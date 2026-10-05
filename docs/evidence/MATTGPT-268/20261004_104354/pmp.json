@@ -1,0 +1,292 @@
+[
+ {
+  "query": "does matt have a pmp",
+  "run": 1,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "sys_scoped": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "user_scoped": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e I know just the story.\n\nMatt does not have a PMP certification. However, he holds several other certifications. These include \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and he passed Oracle 8i DBA exams on the OCP track: SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002).\n\nI can show you related patterns if that's helpful."
+ },
+ {
+  "query": "does matt have a pmp",
+  "run": 2,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "sys_scoped": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "user_scoped": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e Found it!\n\nNo, Matt does not have a PMP certification. His certifications include \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current.\n\nWant to see how Matt applied this elsewhere?"
+ },
+ {
+  "query": "does matt have a pmp",
+  "run": 3,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "sys_scoped": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "user_scoped": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e Here's a great example.\n\nNo, Matt does not have a PMP certification. His certifications include \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current.\n\nI can show you related patterns if that's helpful."
+ },
+ {
+  "query": "does matt have a pmp",
+  "run": 4,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "sys_scoped": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "user_scoped": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e Tracking this down...\n\nNo, Matt does not have a PMP certification. His certifications include \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current.\n\nI can show you related patterns if that's helpful."
+ },
+ {
+  "query": "does matt have a pmp",
+  "run": 5,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "sys_scoped": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "user_scoped": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e Perfect \u2014 here's what I found.\n\nNo, Matt does not have a PMP certification. His certifications include \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002).\n\nI can show you related patterns if that's helpful."
+ },
+ {
+  "query": "Does Matt have a PMP?",
+  "run": 1,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "sys_scoped": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "user_scoped": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e This is a strong one.\n\nNo, Matt does not have a PMP certification. His certifications include \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current.\n\nHappy to explore similar work in other industries."
+ },
+ {
+  "query": "Does Matt have a PMP?",
+  "run": 2,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "sys_scoped": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "user_scoped": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e This is a strong one.\n\nMatt does not have a PMP certification. However, he holds several other certifications, including \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), and \"SAFe 4 Certified Agilist\" (issued 2017, expired). Additionally, he passed Oracle 8i DBA exams on the OCP track, covering SQL and PL/SQL, Architecture and Administration, and Backup and Recovery in 2002.\n\nWant to see how Matt applied this elsewhere?"
+ },
+ {
+  "query": "Does Matt have a PMP?",
+  "run": 3,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "sys_scoped": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "user_scoped": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e Found it!\n\nNo, Matt does not have a PMP. His certifications include \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current.\n\nI can show you related patterns if that's helpful."
+ },
+ {
+  "query": "Does Matt have a PMP?",
+  "run": 4,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "sys_scoped": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "user_scoped": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e This is a strong one.\n\nNo, Matt does not have a PMP certification. His certifications include \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), and \"SAFe 4 Certified Agilist\" (issued 2017, expired). He also passed Oracle 8i DBA exams on the OCP track in SQL and PL/SQL, Architecture and Administration, and Backup and Recovery in 2002. None of these certifications are current.\n\nWant me to dig deeper into the technical approach?"
+ },
+ {
+  "query": "Does Matt have a PMP?",
+  "run": 5,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "sys_scoped": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "user_scoped": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e Perfect \u2014 here's what I found.\n\nNo, Matt does not have a PMP certification. However, he holds several other certifications: \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current.\n\nI can show you related patterns if that's helpful."
+ },
+ {
+  "query": "Is Matt certified?",
+  "run": 1,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "sys_scoped": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "user_scoped": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e Here's a great example.\n\nMatt holds several certifications, though none are current. He was awarded the **AWS Certified Solutions Architect - Associate** in 2020, which expired in 2023. Additionally, he obtained the **AWS Certified Cloud Practitioner** in 2019, which also expired in 2023. Earlier in his career, he was a **SAFe 4 Certified Agilist**, a certification that has since expired. Furthermore, Matt passed the Oracle 8i DBA exams, which were part of the OCP track, covering SQL and PL/SQL, Architecture and Administration, and Backup and Recovery, back in 2002.\n\nLet me know if you'd like the deep dive on this one."
+ },
+ {
+  "query": "Is Matt certified?",
+  "run": 2,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "sys_scoped": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "user_scoped": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e I know just the story.\n\nMatt holds several certifications, though none are current. He was an AWS Certified Solutions Architect - Associate, issued in 2020 and expired in 2023, and an AWS Certified Cloud Practitioner, issued in 2019 and expired in 2023. Additionally, he was a SAFe 4 Certified Agilist, which has also expired. Early in his career, he passed the Oracle 8i DBA exams on the OCP track, covering SQL and PL/SQL, Architecture and Administration, and Backup and Recovery, in 2002.\n\nShall I find more examples like this?"
+ },
+ {
+  "query": "Is Matt certified?",
+  "run": 3,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "sys_scoped": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "user_scoped": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e I know just the story.\n\nMatt has held several certifications over his career. He was an \"AWS Certified Solutions Architect - Associate,\" issued in 2020 and expired in 2023, and an \"AWS Certified Cloud Practitioner,\" issued in 2019 and expired in 2023. Additionally, he was a \"SAFe 4 Certified Agilist,\" which is now expired, and he passed the Oracle 8i DBA exams on the OCP track, covering SQL and PL/SQL, Architecture and Administration, and Backup and Recovery, back in 2002. None of these certifications are currently active.\n\nWhat else can I track down for you?"
+ },
+ {
+  "query": "Is Matt certified?",
+  "run": 4,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "sys_scoped": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "user_scoped": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e Tracking this down...\n\nMatt holds several certifications, although none are currently active. He was awarded the \"AWS Certified Solutions Architect - Associate\" in 2020 and the \"AWS Certified Cloud Practitioner\" in 2019, both of which expired in 2023. Additionally, Matt passed the Oracle 8i DBA exams on the OCP track, which included SQL and PL/SQL, Architecture and Administration, and Backup and Recovery, back in 2002. He also held the \"SAFe 4 Certified Agilist\" certification, which is now expired.\n\nThere's more to this story if you're curious."
+ },
+ {
+  "query": "Is Matt certified?",
+  "run": 5,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "sys_scoped": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "user_scoped": true,
+  "rejection_reason": null,
+  "profile_categories": [
+   "certifications"
+  ],
+  "answer_md": "\ud83d\udc3e I know just the story.\n\nMatt holds several certifications, although none are currently active. He is an \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023) and an \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023). Additionally, he is a \"SAFe 4 Certified Agilist\" (issued 2017, expired) and has passed the Oracle 8i DBA exams on the OCP track, including SQL and PL/SQL, Architecture and Administration, and Backup and Recovery (2002).\n\nHappy to explore similar work in other industries."
+ },
+ {
+  "query": "Tell me about Matt's payments work at JP Morgan",
+  "run": 1,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "sys_scoped": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "user_scoped": true,
+  "rejection_reason": null,
+  "profile_categories": [],
+  "answer_md": "Got it! \ud83d\udc3e\n\nAt **JP Morgan Chase**, Matt took on the role of Senior Technology Architecture Manager to address the challenges faced by their global payments operations. The bank was in the process of building its ACCESS Next Generation platform on Bottomline Technologies' WebSeries platform, but the existing solution couldn't meet the needs of **135,000+** clients across **180+** countries. Each payment type required custom engineering due to distinct formatting, validation, compliance, and workflow requirements, creating a high-pressure environment with aggressive delivery timelines.\n\nMatt led a blended team of over **40** professionals from **Accenture** and JP Morgan, working closely with Bottomline Technologies. He was responsible for designing and delivering bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. He also implemented a Message Authentication Code (MAC) security layer, contextual help, payment-type-specific RBAC, and real-time global reporting. His work ensured that the platform was not just a vanilla deployment but a truly customized JP Morgan product.\n\nThe result was the successful launch of the ACCESS platform in April 2011, consolidating previously separate regional systems into a unified digital experience. This platform provided purpose-built payment modules and became **JP Morgan's** flagship corporate digital channel. It was recognized as the #1 digital channel by Coalition Greenwich, transforming the corporate treasurer experience with enhanced capabilities and security.\n\nThere's more to this story if you're curious."
+ },
+ {
+  "query": "Tell me about Matt's payments work at JP Morgan",
+  "run": 2,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "sys_scoped": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "user_scoped": true,
+  "rejection_reason": null,
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e Found it!\n\nAt **JP Morgan Chase**, the challenge was to build the ACCESS Next Generation platform, a unified global corporate banking portal, on top of Bottomline Technologies' WebSeries platform. The existing system couldn't meet the needs of **135,000+** clients across **180+** countries, as it lacked the necessary payment modules, security controls, and user experience capabilities. Each payment type had distinct requirements, and the project was under pressure due to aggressive Wall Street timelines.\n\nMatt, as the Technology Delivery Lead, managed a team of over **40** professionals from **Accenture** and JP Morgan. He was responsible for designing and delivering bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. He implemented a Message Authentication Code (MAC) security layer and developed contextual help tied to specific payment screens to reduce errors. His approach included building payment-type-specific entitlement controls and integrating the payment engine with JP Morgan's transaction monitoring system. This integration ensured that trillions of daily transactions were screened for suspicious activity, and high-risk transactions were appropriately managed.\n\nThe ACCESS platform launched in April 2011, consolidating previously separate regional systems into a single digital experience. It provided real-time global reporting and a Single Sign-On integration across treasury functions. The platform was recognized as #1 in digital channels by Coalition Greenwich, transforming the corporate treasurer experience by offering a seamless, secure, and efficient banking portal.\n\nHappy to explore similar work in other industries."
+ },
+ {
+  "query": "Tell me about Matt's payments work at JP Morgan",
+  "run": 3,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "sys_scoped": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "user_scoped": true,
+  "rejection_reason": null,
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e Perfect \u2014 here's what I found.\n\nAt **JP Morgan Chase**, Matt played a pivotal role in the development of the ACCESS Next Generation platform, a flagship corporate digital banking portal. The project was driven by the need to consolidate various regional systems into a unified global platform, capable of serving **135,000+** corporations, financial institutions, governments, and municipalities across **180+** countries. The existing systems were fragmented, with each region having distinct payment modules and compliance requirements, which necessitated a bespoke solution beyond the capabilities of the Bottomline Technologies' WebSeries platform.\n\nMatt, as the Technology Delivery Lead, managed a team of over **40** professionals across multiple locations, including the US, Mumbai, and Bangalore. He spent a significant amount of time embedded at Bottomline Technologies' Portsmouth offices to ensure seamless integration and delivery. His responsibilities included designing and delivering custom payment modules such as ACH, wire, FX/cross-border, and EFTPS tax payments, as well as implementing a robust security layer and real-time global reporting capabilities.\n\nThe ACCESS platform launched in April 2011, transforming JP Morgan's corporate banking experience by providing a single entry point for all payment types across regions. It was recognized as the #1 digital channel by Coalition Greenwich. Matt's leadership in coordinating between stakeholders, managing the onshore-offshore engagement model, and driving the integration with JP Morgan's internal systems was crucial to the project's success.\n\nThere's more to this story if you're curious."
+ },
+ {
+  "query": "Tell me about Matt's payments work at JP Morgan",
+  "run": 4,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "sys_scoped": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "user_scoped": true,
+  "rejection_reason": null,
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e This is a strong one.\n\nAt **JP Morgan Chase**, Matt played a pivotal role in building the ACCESS Next Generation platform, a flagship corporate digital banking portal. The challenge was immense: the platform needed to serve over **135,000** clients across **180+** countries, requiring bespoke payment modules and security controls beyond the out-of-box capabilities of Bottomline Technologies' WebSeries platform. As Technology Delivery Lead, Matt managed a blended team of more than **40** professionals across **Accenture** and JP Morgan, working closely with Bottomline Technologies at their Portsmouth, NH offices.\n\nMatt's innovation was in designing and delivering custom payment modules for ACH, wire, FX/cross-border, and EFTPS tax payments, each tailored to meet the distinct formatting, validation, compliance, and workflow requirements of JP Morgan's vast client base. He implemented a Message Authentication Code (MAC) security layer to ensure payment integrity and developed contextual help features that provided inline guidance, reducing errors and support calls. His work also included integrating the payment engine with JP Morgan's centralized transaction monitoring system, enhancing security by incorporating customer risk confidence scores and sanctions screening into the payment flow.\n\nThe result was the successful launch of the ACCESS platform in April 2011, unifying previously separate regional systems into a single digital experience. This transformation provided real-time global reporting, Single Sign-On (SSO) across treasury functions, and trade finance lifecycle visibility. The platform's success was recognized as it became JP Morgan's #1 digital channel, as rated by Coalition Greenwich.\n\nLet me know if you'd like the deep dive on this one."
+ },
+ {
+  "query": "Tell me about Matt's payments work at JP Morgan",
+  "run": 5,
+  "sys_0a": true,
+  "sys_direct_no": true,
+  "sys_scoped": true,
+  "user_0a": true,
+  "user_direct_no": true,
+  "user_scoped": true,
+  "rejection_reason": null,
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e On it!\n\nAt **JP Morgan Chase**, Matt played a pivotal role as the Senior Technology Architecture Manager in building the ACCESS Next Generation platform. The initiative was high-stakes, with aggressive Wall Street delivery timelines and a client base of **135,000+** corporations across **180+** countries requiring bespoke payment modules and security controls. The standard platform from Bottomline Technologies' WebSeries was insufficient for JP Morgan's needs, demanding custom engineering.\n\nMatt led a blended team of over **40** professionals from **Accenture** and JP Morgan, managing the design and delivery of bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax. He also developed a Message Authentication Code (MAC) security layer, real-time global reporting, and a Single Sign-On integration. His leadership extended to managing the onshore-offshore engagement model and serving as the primary technical interface with Bottomline Technologies, spending a significant amount of time at their Portsmouth, NH offices.\n\nThe ACCESS platform launched in April 2011, consolidating previously separate regional systems into a unified global corporate banking portal. It provided purpose-built payment modules and transformed the corporate treasurer experience, eventually being recognized as the #1 digital channel by Coalition Greenwich. Matt's leadership in coordinating the multi-regional compliance and managing the complex stakeholder communication was crucial in delivering this large-scale transformation without disruption to live payment operations.\n\nWant me to dig deeper into the technical approach?"
+ }
+]

@@ -1,0 +1,390 @@
+[
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "does matt have a CS degree",
+  "run": 1,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e Tracking this down...\n\nMatt holds a Master's degree in Information Technology from **American InterContinental University**. This degree satisfies requirements for a 'Bachelor's degree in Computer Science or related field' because IT is a recognized CS-related discipline, and a Master's degree exceeds a Bachelor's requirement. \n\nWant to see how Matt applied this elsewhere?"
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "does matt have a CS degree",
+  "run": 2,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e On it!\n\nMatt holds a Master's degree in Information Technology from **American InterContinental University**. This degree satisfies the requirements for a 'Bachelor's degree in Computer Science or related field,' as Information Technology is recognized as a CS-related discipline, and a Master's degree exceeds a Bachelor's requirement. Additionally, he has completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia and holds a BA in French Language and Literature from Queens University of Charlotte.\n\nWant to see how Matt applied this elsewhere?"
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "does matt have a CS degree",
+  "run": 3,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e Here's a great example.\n\nMatt holds a Master's degree in Information Technology from **American InterContinental University**. This degree satisfies requirements for a 'Bachelor's degree in Computer Science or related field,' as IT is a recognized CS-related discipline and a Master's degree exceeds a Bachelor's requirement. \n\nWhat else can I track down for you?"
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "does matt have a CS degree",
+  "run": 4,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e Found it!\n\nMatt holds a Master's degree in Information Technology from **American InterContinental University**. This degree satisfies the requirements for a 'Bachelor's degree in Computer Science or related field' as Information Technology is recognized as a CS-related discipline, and a Master's degree exceeds a Bachelor's requirement. Additionally, Matt has completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia, where he also served as a teaching assistant for French courses. He also holds a BA in French Language and Literature from Queens University of Charlotte, which included a year abroad at Universit\u00e9 Paul Val\u00e9ry, Montpellier, France, through an exchange program with the University of North Carolina at Chapel Hill.\n\nThere's more to this story if you're curious."
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "does matt have a CS degree",
+  "run": 5,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e This is a strong one.\n\nMatt does not have a traditional Computer Science degree. Instead, he holds a Master's degree in Information Technology from **American InterContinental University**. This degree satisfies requirements for a 'Bachelor's degree in Computer Science or related field' as IT is a recognized CS-related discipline, and a Master's degree exceeds a Bachelor's requirement.\n\nLet me know if you'd like the deep dive on this one."
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "does matt have a CS degree",
+  "run": 6,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e Found it!\n\nMatt does not have a Bachelor's degree in Computer Science. Instead, he holds a Master's degree in Information Technology from **American InterContinental University**. This degree satisfies the requirements for a 'Bachelor's degree in Computer Science or related field' because Information Technology is recognized as a CS-related discipline, and a Master's degree exceeds the requirement for a Bachelor's degree. \n\nThere's more to this story if you're curious."
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "does matt have a CS degree",
+  "run": 7,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e I know just the story.\n\nMatt holds a Master's degree in Information Technology from **American InterContinental University**. This degree satisfies the requirements for a 'Bachelor's degree in Computer Science or related field' because Information Technology is a recognized CS-related discipline, and a Master's degree exceeds the requirements of a Bachelor's degree. He also completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia, where he taught French 101, 102, and 103 as a teaching assistant. Additionally, Matt earned a BA in French Language and Literature from Queens University of Charlotte, which included a year abroad at Universit\u00e9 Paul Val\u00e9ry, Montpellier, France, through an exchange program with the University of North Carolina at Chapel Hill.\n\nThere's more to this story if you're curious."
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "does matt have a CS degree",
+  "run": 8,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e This is a strong one.\n\nMatt holds a Master's degree in Information Technology from **American InterContinental University**. This degree satisfies the requirements for a 'Bachelor's degree in Computer Science or related field' as IT is a recognized CS-related discipline and a Master's exceeds a Bachelor's requirement. Additionally, Matt has completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia and holds a BA in French Language and Literature from Queens University of Charlotte. \n\nWant me to dig deeper into the technical approach?"
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "does matt have a CS degree",
+  "run": 9,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e On it!\n\nMatt does not have a Bachelor's degree in Computer Science. Instead, he holds a Master's degree in Information Technology from **American InterContinental University**. This degree satisfies requirements for a 'Bachelor's degree in Computer Science or related field' as Information Technology is recognized as a CS-related discipline, and a Master's degree exceeds the requirements of a Bachelor's degree. Additionally, he has completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia and holds a BA in French Language and Literature from Queens University of Charlotte.\n\nLet me know if you'd like the deep dive on this one."
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "does matt have a CS degree",
+  "run": 10,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "Got it! \ud83d\udc3e\n\nMatt holds a Master's degree in Information Technology from **American InterContinental University**. This degree satisfies the requirements for a Bachelor's degree in Computer Science or a related field, as Information Technology is a recognized discipline related to Computer Science, and a Master's degree exceeds the requirements of a Bachelor's degree.\n\nI can show you related patterns if that's helpful."
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "Does Matt have a CS degree?",
+  "run": 1,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "Got it! \ud83d\udc3e\n\nMatt holds a Master's degree in Information Technology from **American InterContinental University**. This degree satisfies requirements for a 'Bachelor's degree in Computer Science or related field' as Information Technology is a recognized CS-related discipline, and a Master's degree exceeds a Bachelor's requirement. \n\nWhat else can I track down for you?"
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "Does Matt have a CS degree?",
+  "run": 2,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e Found it!\n\nMatt holds a Master's degree in Information Technology from **American InterContinental University**. This degree satisfies the requirements for a 'Bachelor's degree in Computer Science or related field,' as IT is recognized as a CS-related discipline. Additionally, a Master's degree exceeds the requirements of a Bachelor's degree. \n\nLet me know if you'd like the deep dive on this one."
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "Does Matt have a CS degree?",
+  "run": 3,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "Got it! \ud83d\udc3e\n\nMatt holds a Master's degree in Information Technology from **American InterContinental University**. This degree satisfies the requirements for a 'Bachelor's degree in Computer Science or related field' as IT is a recognized CS-related discipline and a Master's exceeds a Bachelor's requirement. Additionally, he has a BA in French Language and Literature from Queens University of Charlotte, which included a year abroad at Universit\u00e9 Paul Val\u00e9ry, Montpellier, France.\n\nWhat else can I track down for you?"
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "Does Matt have a CS degree?",
+  "run": 4,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e Here's a great example.\n\nMatt holds a master's degree in Information Technology from **American InterContinental University**. This degree satisfies the requirements for a 'Bachelor's degree in Computer Science or related field' as Information Technology is recognized as a CS-related discipline, and a Master's degree exceeds a Bachelor's requirement.\n\nWhat else can I track down for you?"
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "Does Matt have a CS degree?",
+  "run": 5,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e Perfect \u2014 here's what I found.\n\nMatt holds a Master's degree in Information Technology from **American InterContinental University**. This degree satisfies the requirements for a 'Bachelor's degree in Computer Science or related field' as IT is a recognized CS-related discipline, and a Master's degree exceeds the Bachelor's requirement. Additionally, Matt completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia, where he served as a teaching assistant for French courses. He also holds a Bachelor of Arts in French Language and Literature from Queens University of Charlotte, which included a year abroad at Universit\u00e9 Paul Val\u00e9ry, Montpellier, France.\n\nWhat else can I track down for you?"
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "Does Matt have a CS degree?",
+  "run": 6,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e On it!\n\nMatt holds a Master's degree in Information Technology from **American InterContinental University**. This degree satisfies the requirements for a 'Bachelor's degree in Computer Science or related field,' as Information Technology is recognized as a CS-related discipline, and a Master's degree exceeds a Bachelor's requirement. \n\nWhat else can I track down for you?"
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "Does Matt have a CS degree?",
+  "run": 7,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e Tracking this down...\n\nMatt holds a Master's degree in Information Technology from **American InterContinental University**. This degree satisfies requirements for a 'Bachelor's degree in Computer Science or related field' because IT is a recognized CS-related discipline, and a Master's degree exceeds a Bachelor's requirement. Additionally, he has completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia and holds a BA in French Language and Literature from Queens University of Charlotte. \n\nWant me to dig deeper into the technical approach?"
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "Does Matt have a CS degree?",
+  "run": 8,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e On it!\n\nMatt holds a Master's degree in Information Technology from **American InterContinental University**. This degree satisfies the requirements for a 'Bachelor's degree in Computer Science or related field' as Information Technology is recognized as a CS-related discipline, and a Master's degree exceeds a Bachelor's requirement.\n\nHappy to explore similar work in other industries."
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "Does Matt have a CS degree?",
+  "run": 9,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e Tracking this down...\n\nMatt holds a Master's degree in Information Technology from **American InterContinental University**. This degree satisfies the requirements for a 'Bachelor's degree in Computer Science or related field' as IT is a recognized CS-related discipline, and a Master's degree exceeds a Bachelor's requirement.\n\nWant to see how Matt applied this elsewhere?"
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "Does Matt have a CS degree?",
+  "run": 10,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [
+   "education"
+  ],
+  "answer_md": "\ud83d\udc3e On it!\n\nMatt holds a Master's degree in Information Technology from **American InterContinental University**. This degree satisfies the requirements for a 'Bachelor's degree in Computer Science or related field,' as IT is recognized as a CS-related discipline, and a Master's degree exceeds a Bachelor's requirement. Additionally, he completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia and holds a BA in French Language and Literature from Queens University of Charlotte. \n\nWhat else can I track down for you?"
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "Does Matt have a PMP?",
+  "run": 1,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e Perfect \u2014 here's what I found.\n\nNothing I know about Matt covers that.\n\nWant me to dig deeper into the technical approach?"
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "Does Matt have a PMP?",
+  "run": 2,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e I know just the story.\n\nMatt does not hold a PMP certification. However, he has extensive experience in program management and governance, as demonstrated during his time at **Accenture**. He managed financial accountability across multiple engagements, including those at **JP Morgan**, **RBC**, **Fiserv**, and **HSBC**. He owned engagement margins, managed resource pyramids, and handled financial challenges, such as recovering a negative EAC program at **JP Morgan** and delivering an **\\$8.5M** program at **Fiserv** under budget. Matt's experience in program management is rooted in practical, hands-on leadership across complex projects.\n\nHappy to explore similar work in other industries."
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "Does Matt have a PMP?",
+  "run": 3,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e Tracking this down...\n\nMatt does not hold a PMP (Project Management Professional) certification. However, he has held significant roles in program management and governance, particularly during his time at **Accenture**. As a Director, he was responsible for financial accountability and engagement margin across multiple high-profile projects, including those at **JP Morgan**, **RBC**, **Fiserv**, and **HSBC**. He managed the resource pyramid, forecast and variance, and scope changes, demonstrating his capability in project management without holding a formal PMP certification. Matt's roles have involved leading complex programs, mobilizing PMOs, and delivering implementation roadmaps, showcasing his extensive experience in managing and executing large-scale projects.\n\nI can show you related patterns if that's helpful."
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "Does Matt have a PMP?",
+  "run": 4,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e This is a strong one.\n\nMatt does not hold a PMP certification. However, he has held significant roles in program management and governance, such as his work with **JP Morgan Chase** and other major financial institutions, where he managed risk and delivered complex technology strategies. His experience includes mobilizing PMOs, establishing program structures, and delivering implementation roadmaps for large-scale projects. \n\nLet me know if you'd like the deep dive on this one."
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "Does Matt have a PMP?",
+  "run": 5,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e Here's a great example.\n\nMatt does not have a PMP certification. His certifications include \"AWS Certified Solutions Architect - Associate (issued 2020, expired 2023),\" \"AWS Certified Cloud Practitioner (issued 2019, expired 2023),\" \"SAFe 4 Certified Agilist (issued 2017, expired),\" and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current. \n\nShall I find more examples like this?"
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "Tell me about Matt's payments work at JP Morgan",
+  "run": 1,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e Here's a great example.\n\nAt **JP Morgan Chase**, Matt served as the Senior Technology Architecture Manager, leading the development of the ACCESS Next Generation platform. This initiative aimed to create a unified global corporate banking portal for **135,000+** clients across **180+** countries. The challenge was to build bespoke payment modules and security features on top of Bottomline Technologies' WebSeries platform, which required capabilities far beyond its out-of-box offerings. The project was high-stakes, with aggressive Wall Street timelines demanding constant velocity across a complex, multi-workstream program.\n\nMatt was responsible for designing and delivering custom payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. He managed a blended team of over **40** onshore and offshore resources, serving as the primary technical interface with Bottomline Technologies. He spent **70-80%** of his time embedded at their Portsmouth, NH offices to ensure alignment and coordination. Matt implemented a Message Authentication Code (MAC) security layer, contextual help, and payment-type-specific entitlement controls, enhancing the platform's security and user experience. He also integrated the payment engine with JP Morgan's centralized transaction monitoring system, ensuring compliance and risk management.\n\nThe ACCESS platform launched in April 2011, consolidating previously separate regional systems into a single digital experience. It provided real-time global reporting, SSO across treasury functions, and trade finance lifecycle visibility, transforming the corporate treasurer experience. ACCESS became JP Morgan's flagship corporate digital channel and has since been recognized as #1 in digital channels by Coalition Greenwich.\n\nWant me to dig deeper into the technical approach?"
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "Tell me about Matt's payments work at JP Morgan",
+  "run": 2,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e I know just the story.\n\nAt **JP Morgan Chase**, Matt was the Senior Technology Architecture Manager responsible for building the payment engine behind the JP Morgan ACCESS platform. The project aimed to create a unified global corporate banking portal for **135,000+** clients across **180+** countries. The challenge was to tailor Bottomline Technologies' WebSeries platform to meet the complex needs of JP Morgan's extensive client base, which required bespoke payment modules, security controls, and user experience capabilities beyond the out-of-box offering.\n\nMatt led a blended team of over **40** professionals from **Accenture** and JP Morgan, managing the design and delivery of custom payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. He implemented a Message Authentication Code (MAC) security layer and built payment-type-specific entitlement controls to ensure robust security and compliance. Additionally, Matt developed real-time global reporting and integrated trade finance visibility into the platform.\n\nThe ACCESS Next Generation platform launched in April 2011, consolidating previously separate regional systems into a single digital experience. This transformation provided corporate treasurers with a unified entry point for all payment types, enhanced security, and comprehensive global reporting. The platform was recognized as **#1** in digital channels by Coalition Greenwich, underscoring its success in transforming JP Morgan's corporate banking services.\n\nI can show you related patterns if that's helpful."
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "Tell me about Matt's payments work at JP Morgan",
+  "run": 3,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e Found it!\n\nAt **JP Morgan Chase**, Matt served as the Senior Technology Architecture Manager, overseeing the development of the ACCESS Next Generation platform. This initiative aimed to create a unified global corporate banking portal for over **135,000** clients across **180+** countries. The project was high-stakes, with aggressive delivery timelines and required custom payment modules, security controls, and user experience enhancements beyond the capabilities of the Bottomline Technologies' WebSeries platform.\n\nMatt led a blended team of **40+** professionals, managing both onshore and offshore resources. He was instrumental in designing and delivering bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. He also implemented a Message Authentication Code (MAC) security layer, contextual help, and payment-type-specific role-based access controls (RBAC). His work ensured the platform could handle real-time global reporting, trade finance integration, and Single Sign-On (SSO) across treasury functions.\n\nThe ACCESS platform launched in April 2011, consolidating previously separate regional systems into a single digital experience. It became **JP Morgan's** flagship corporate digital channel and was recognized as #1 in digital channels by Coalition Greenwich. The platform provided purpose-built payment modules and transformed the corporate treasurer experience, offering improved visibility and compliance validation.\n\nShall I find more examples like this?"
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "Tell me about Matt's payments work at JP Morgan",
+  "run": 4,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e This is a strong one.\n\nAt **JP Morgan Chase**, Matt was instrumental in building the payment engine behind the ACCESS Next Generation platform. The challenge was significant: **JP Morgan** needed to serve over **135,000** clients across **180+ countries** with a platform that went beyond the capabilities of the Bottomline Technologies' WebSeries platform. The task required designing and delivering bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments, each with distinct compliance and workflow requirements.\n\nMatt's approach was to manage a blended team of over **40** professionals from both **Accenture** and JP Morgan, working closely with Bottomline Technologies. He spent a significant amount of time embedded at their Portsmouth offices to ensure seamless coordination. This hands-on involvement allowed him to design and implement critical features such as the Message Authentication Code (MAC) security layer, real-time global reporting, and payment-type-specific entitlement controls. These features ensured compliance and security while providing a seamless user experience.\n\nThe result was the successful launch of the ACCESS platform in April 2011, which consolidated previously separate regional systems into a unified global portal. This platform has since been recognized as #1 in digital channels by Coalition Greenwich. The project not only enhanced operational efficiency but also provided corporate treasurers with a comprehensive tool for managing their global financial operations.\n\nLet me know if you'd like the deep dive on this one."
+ },
+ {
+  "surface": "agy",
+  "arm": "b",
+  "query": "Tell me about Matt's payments work at JP Morgan",
+  "run": 5,
+  "direct_no": false,
+  "note_in_prompt": true,
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e Here's a great example.\n\nAt **JP Morgan Chase**, Matt played a pivotal role in building the ACCESS Next Generation platform, a unified global corporate banking portal. The challenge was immense, as **135,000+** corporations, financial institutions, governments, and municipalities across **180+ countries** required capabilities far beyond the standard offerings of the Bottomline Technologies' WebSeries platform. Each payment type had unique formatting, validation, compliance, and workflow requirements that needed to be custom-built for JP Morgan's operational scale.\n\nMatt, as the Technology Delivery Lead, managed a team of over **40** professionals, coordinating efforts across the US, Mumbai, and Bangalore. He was responsible for designing and delivering bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. He also implemented a Message Authentication Code (MAC) security layer, contextual help, and payment-type-specific entitlements, ensuring robust security and compliance. His work extended to integrating the payment engine with JP Morgan's centralized transaction monitoring system, enabling real-time global reporting and seamless Single Sign-On (SSO) across treasury functions.\n\nThe result was the successful launch of the ACCESS platform in April 2011, consolidating previously separate regional systems into a single digital experience. This transformation provided corporate treasurers with purpose-built modules and real-time reporting, significantly enhancing their operational capabilities. The platform has since been recognized as the #1 digital channel by Coalition Greenwich, showcasing its impact on JP Morgan's global payments solutions.\n\nThere's more to this story if you're curious."
+ },
+ {
+  "surface": "role_match",
+  "arm": "b",
+  "query": "Bachelor's degree in Computer Science or related field",
+  "run": 1,
+  "match_status": "strong",
+  "evidence": [
+   {
+    "evidence_type": "profile",
+    "story_title": null,
+    "client": null,
+    "relevance": "Master's degree in Information Technology exceeds the Bachelor's requirement in a related field."
+   }
+  ],
+  "gap_explanation": ""
+ },
+ {
+  "surface": "role_match",
+  "arm": "b",
+  "query": "Bachelor's degree in Computer Science or related field",
+  "run": 2,
+  "match_status": "strong",
+  "evidence": [
+   {
+    "evidence_type": "profile",
+    "story_title": null,
+    "client": null,
+    "relevance": "Master's degree in Information Technology exceeds the Bachelor's requirement in a related field."
+   }
+  ],
+  "gap_explanation": ""
+ },
+ {
+  "surface": "role_match",
+  "arm": "b",
+  "query": "Bachelor's degree in Computer Science or related field",
+  "run": 3,
+  "match_status": "strong",
+  "evidence": [
+   {
+    "evidence_type": "profile",
+    "story_title": null,
+    "client": null,
+    "relevance": "Master's degree in Information Technology exceeds the Bachelor's requirement in a related field."
+   }
+  ],
+  "gap_explanation": ""
+ }
+]
