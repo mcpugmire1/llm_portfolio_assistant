@@ -115,7 +115,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-262](#mattgpt-262) | DATA_FILE defined three times, two story loaders, dead place field, stale constants.py comments | Open | Medium | Bug | October 2, 2026 |
 | [MATTGPT-263](#mattgpt-263) | Test removing duplicate bolding instructions and OFF_TOPIC_GUARD before acting on them | Open | Medium | Issue | October 2, 2026 |
 | [MATTGPT-264](#mattgpt-264) | Move non-rendering functions out of role_match.py to services/ | Open | Medium | Refactor | October 2, 2026 |
-| [MATTGPT-265](#mattgpt-265) | Move ~50 root probe_*, check_*, and generate_* scripts to probes/; preserve cited evidence in docs/evidence/ | Open | Low | Action | October 2, 2026 |
+| [MATTGPT-265](#mattgpt-265) | Move root probe_* and check_* files to probes/; preserve cited evidence in docs/evidence/ | Open | Low | Action | October 2, 2026 |
 | [MATTGPT-266](#mattgpt-266) | Role Match labels responsibility-derived rows as Required Qualifications | Open | High | Bug | October 3, 2026 |
 | [MATTGPT-267](#mattgpt-267) | Have model return line numbers; Python fills source_text from JD -- saves ~1.7s on long JDs | Open | Medium | Refactor | October 3, 2026 |
 | [MATTGPT-268](#mattgpt-268) | "Does Matt have a CS degree?" leads with a no that Role Match doesn't give -- parity fix | Open | High | Bug | October 4, 2026 |
@@ -1445,7 +1445,7 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 - **Logged:** September 2, 2026
 - **Dependencies:** None. The conditional on MATTGPT-160's split-by-section results has resolved differently than expected: split-by-section did not preserve qualifiers; the `source_text` instruction change shipped at `5aee8a4` and `b28a080` did. Rows 7 and 11 are now falsifiable. Row 22 was always qualifier-independent.
 
-**Finding (corpus-text audit, September 18, 2026, `probe_244_audit.py`):** 17 honest, 5 over-called, 1 borderline across 23 rows on the demo JD. Two separate metrics: 20/23 strong (87% strong); 5/23 over-called (22% over-called). The ~80% strong figure in the earlier -159 probe output was measuring a different question. **Note on fixture identification:** `probe_244_audit.py:18` hardcodes `probe_159_output/arm2_run1.json`; the `jd_path` field in that file's summary reports `demo_jd.txt` despite folder naming suggesting otherwise. These are demo JD rows, not AT&T rows. Identify fixtures by requirement text and cited-evidence content, not by `jd_path` or folder name. The five over-called rows split into two shapes:
+**Finding (corpus-text audit, September 18, 2026, `probe_244_audit.py`; output: `docs/evidence/MATTGPT-244/probe_244_audit_output.txt`; input: `docs/evidence/MATTGPT-244/arm2_run1.json`):** 17 honest, 5 over-called, 1 borderline across 23 rows on the demo JD. Two separate metrics: 20/23 strong (87% strong); 5/23 over-called (22% over-called). The ~80% strong figure in the earlier -159 probe output was measuring a different question. **Note on fixture identification:** `probe_244_audit.py:18` hardcodes `probe_159_output/arm2_run1.json`; the `jd_path` field in that file's summary reports `demo_jd.txt` despite folder naming suggesting otherwise. These are demo JD rows, not AT&T rows. Identify fixtures by requirement text and cited-evidence content, not by `jd_path` or folder name. The five over-called rows split into two shapes:
 
 **Shape A -- corpus-writing gap (rows 10 and 21). NOT -244 scope.** Both cite a solo project for an org-level requirement. The corpus has exactly one AI-assisted-development story and it is independent work; there is no org-level story to cite. Not fixable by prompt; the evidence simply does not exist. Both belong in MATTGPT-154 (operational-breadth tagging pass).
 
@@ -1558,7 +1558,7 @@ Full ranked 25 available from `probe_243_top_k_rank.py` (re-runnable against cur
 
 **Concrete failure (September 21, 2026):** "Is Matt certified?" -- Ask Agy asserted certifications "aren't explicitly mentioned in the stories provided," then substituted F-22 and CIC work as evidence of expertise. Confabulation, not a hedge. Four certifications in `matt_profile.json` (updated September 24, 2026): "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)", "AWS Certified Cloud Practitioner (issued 2019, expired 2023)", "SAFe 4 Certified Agilist (issued 2017, expired)", "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)". No PMP. None are current.
 
-**Evidence (`probe_250_output/20260922_091818/`, September 22, 2026):** PoC run through the real `rag_answer` pipeline. 10 queries × 2 conditions (WITH / WITHOUT profile block) × 2 runs. 8 of 10 queries behaved as intended. **Coverage note:** the PoC patches `MATT_DNA` in memory and never touches `semantic_search` -- it tested prompt-side behavior only. All findings (confabulation fixed, honest gap working, no drift on story controls, two over-inference failures) hold regardless of delivery path. Two additional things need Red before Green: (a) whether the new `profile_facts` key breaks either caller's result unpacking, and (b) what My Work does with a key it doesn't yet render.
+**Evidence (`docs/evidence/MATTGPT-250/20260922_091818/`, September 22, 2026):** PoC run through the real `rag_answer` pipeline. 10 queries × 2 conditions (WITH / WITHOUT profile block) × 2 runs. 8 of 10 queries behaved as intended. **Coverage note:** the PoC patches `MATT_DNA` in memory and never touches `semantic_search` -- it tested prompt-side behavior only. All findings (confabulation fixed, honest gap working, no drift on story controls, two over-inference failures) hold regardless of delivery path. Two additional things need Red before Green: (a) whether the new `profile_facts` key breaks either caller's result unpacking, and (b) what My Work does with a key it doesn't yet render.
 
 Fixed:
 - "Is Matt certified?" and "What certifications does Matt hold?" -- named all four certifications verbatim in both WITH runs; baseline ended with "they do not explicitly mention any certifications he personally holds."
@@ -1590,7 +1590,7 @@ Not fixed in PoC:
    - **Red.** One strip test per category marker. A render test for the fact row (markers present) and for story-grid-only (no markers). A captured-prompt test that 0a includes the category marker instruction.
    - **1a (My Work).** On hold until the MATTGPT-157 keyword-scoring fix is measured.
 
-**Gate bypass -- decided against (September 23, 2026).** No fallback at the low-confidence gate; Stage 2 dropped. Evidence: `probe_250_output/20260923_125734/`. Of 16 queries, only 2 reached the gate -- both education questions (`top_score` 0.218 and 0.221). No control query reached it.
+**Gate bypass -- decided against (September 23, 2026).** No fallback at the low-confidence gate; Stage 2 dropped. Evidence: `docs/evidence/MATTGPT-250/20260923_125734/`. Of 16 queries, only 2 reached the gate -- both education questions (`top_score` 0.218 and 0.221). No control query reached it.
 
 **Known misses:** "Where did Matt get his degree?" and "What did Matt study in college?" -- gated, deterministic. Not addressed by this ticket.
 
@@ -1615,9 +1615,9 @@ Not fixed in PoC:
 - "Does Matt have any patents?" returns "Nothing I know about Matt covers that" and does not cite Accenture's patented Raspberry Pi/Node-RED platform as evidence.
 
 **Cross-references:**
-- `probe_250_output/20260922_091818/output.txt` (517 lines, 72KB -- literal run output)
-- `probe_250_output/20260922_091818/poc.py` (PoC script; directory is gitignored via `probe_*_output/` pattern)
-- `probe_250_output/20260923_125734/stage1_output.txt` (Stage 1, September 23, 2026; 16 queries; top_score and full answer text on every row. Gate analysis: 2 of 16 queries reached low-confidence gate, both education questions; no control query reached it.)
+- `docs/evidence/MATTGPT-250/20260922_091818/output.txt` (517 lines, 72KB -- literal run output)
+- `probe_250_output/20260922_091818/poc.py` (PoC script; untracked, local only; probe scripts were not copied to docs/evidence/)
+- `docs/evidence/MATTGPT-250/20260923_125734/stage1_output.txt` (Stage 1, September 23, 2026; 16 queries; top_score and full answer text on every row. Gate analysis: 2 of 16 queries reached low-confidence gate, both education questions; no control query reached it.)
 - `docs/working/080_Skill_Evidence_Approach.md` Section 5 (original gap documentation)
 - MATTGPT-080 (skill evidence architecture; this ticket is the remaining unshipped piece)
 - MATTGPT-128 (sources panel profile-dot split; Ask Agy's sources panel rendering deferred here)
@@ -1632,7 +1632,7 @@ Not fixed in PoC:
 - **Type:** Issue
 - **Logged:** September 23, 2026
 
-**Observed (September 23, 2026; `probe_250_output/20260923_125734/stage1_output.txt` and a Code rerun the same day):**
+**Observed (September 23, 2026; `docs/evidence/MATTGPT-250/20260923_125734/stage1_output.txt` and a Code rerun the same day):**
 
 1. **Over-claim.** "Has Matt worked in real estate?" returned "Matt has worked in the real estate sector, specifically through his engagement with Cendant Mortgage." Reproduced on the rerun. In the retrieved pool, Cendant Mortgage underwriting ranked #5 and HSBC mortgage transformation #6. The answer mapped mortgage lending onto real estate. The rerun also added "These engagements highlight Matt's involvement in real estate-related projects" -- that sentence matches the `META_COMMENTARY_REGEX_PATTERNS` addition in MATTGPT-250 ("highlight Matt's"), so the post-processing strip will remove it. It is not separate synthesis evidence.
 
@@ -1658,7 +1658,7 @@ Same class as the no-inference clause in MATTGPT-250: retrieved text that sits n
 
 **Evidence:**
 
-- **September 24, 2026** (`probe_250_output/20260924_135758/acceptance_0a5_run1.txt`): "Does Matt have a master's degree?" (family=out_of_scope, is_synthesis=False). Final text contains "...showcasing his commitment...".
+- **September 24, 2026** (`docs/evidence/MATTGPT-252/20260924_135758/acceptance_0a5_run1.txt`): "Does Matt have a master's degree?" (family=out_of_scope, is_synthesis=False). Final text contains "...showcasing his commitment...".
 - **September 26, 2026** (browser runs only, not on disk, mode unverified): "These certifications reflect his engagement..." and "...is demonstrated through his consistent impact..." ("Why hire Matt?").
 - **September 26, 2026** (browser, not on disk): "Is Matt a sales person?" contains "Matt's career narrative highlights his role in technology and innovation leadership." Not stripped -- "highlights his" is not in `META_COMMENTARY_REGEX_PATTERNS`.
 
@@ -1673,7 +1673,7 @@ Same class as the no-inference clause in MATTGPT-250: retrieved text that sits n
 - MATTGPT-023 (logged April 2026, Decided Against May 14, 2026): "showcases his" on "Who is Matt Pugmire?". Recorded root cause: "LLM occasionally ignores the 'never evaluate Matt' prompt instruction." Closure rested on "monitor -- if it becomes consistent, ..."; nothing monitored it.
 - `c47ad1f` (January 26, 2026): removed `get_theme_guidance()` because its "Emphasize:" instructions conflicted with the anti-evaluation rules. MATTGPT-042, -043, and -044 were Decided Against on the same reasoning. That conflict is the same mechanism now suspected in `generate_dynamic_dna()`, making it the strongest supporting evidence for that suspect.
 
-**Measurement gap:** Probe outputs in `probe_250_output/` save `answer_md` after the strip, so they count phrases the strip list missed, not how often the model evaluates. The only raw-text capture is `masters_diag_output.txt` (one query, 3 runs, raw equal to final in all three). The baseline run establishes the raw rate before any condition is tested.
+**Measurement gap:** Probe outputs in `probe_250_output/` save `answer_md` after the strip, so they count phrases the strip list missed, not how often the model evaluates. The only raw-text capture is `docs/evidence/MATTGPT-252/20260924_135758/masters_diag_output.txt` (one query, 3 runs, raw equal to final in all three). The baseline run establishes the raw rate before any condition is tested.
 
 **Leading hypothesis (not measured):** The evaluative sections of `generate_dynamic_dna()` -- Theme Strengths, Leadership Philosophy, Core Values, and possibly the Identity quote -- sit under "Ground Truth" in every Ask Agy system prompt alongside eight anti-evaluation instructions. They are consistent with standard-mode answers evaluating (master's, is_synthesis=False), but a run with those sections removed has to confirm it. The rest of MATT_DNA (Clients by Employer, Career Arc, GROUNDING RULES) is not a suspect.
 
@@ -1697,7 +1697,7 @@ Same class as the no-inference clause in MATTGPT-250: retrieved text that sits n
 
 Prior context: August 11, 2026, the thresholds were calibrated for "any signal" rather than strong matches. July 2, 2026, fact questions were scoped to My Profile only; MATTGPT-250 reversed that.
 
-**Evidence (probes, not visitor traffic; `probe_250_output/20260926_122021/`):**
+**Evidence (probes, not visitor traffic; `docs/evidence/MATTGPT-253/20260926_122021/`):**
 
 Rejected at gate:
 - "Where does Matt live?" top_score 0.242
@@ -1710,7 +1710,7 @@ Passed near the gate:
 
 Most location questions pass (0.265-0.406). This is a band around the threshold, not a whole category failing. The MATTGPT-250 known misses ("Where did Matt get his degree?" and "What did Matt study in college?") are confirmed here. "Where does Matt live?" is a new miss.
 
-The profile injection works whenever the LLM runs: categories returned correctly in `probe_250_output/20260926_122021/`. The gate runs before it.
+The profile injection works whenever the LLM runs: categories returned correctly in `docs/evidence/MATTGPT-253/20260926_122021/`. The gate runs before it.
 
 **Candidate fix:** A narrow bypass: when `semantic_search()` returns low confidence, run the LLM with the profile block and rules 0a/0b instead of returning the low_confidence banner. No query-shape predicate. A weak story query gets 0b's honest gap; a profile query gets its fact. Distinct from the rejected router approach (MATTGPT-250 Rejected approaches): the router pre-classified on query semantics and caught the AWS control (0.786) because story queries outscore their story anchors. This bypass fires on the search result, after Pinecone, and cannot touch queries above the threshold.
 
@@ -1954,12 +1954,12 @@ e. Source-vs-output check: for each fixture JD, the row count and wording under 
 ---
 
 ### MATTGPT-265
-**Move ~50 root probe_*, check_*, and generate_* scripts to probes/; preserve cited evidence in docs/evidence/**
+**Move root probe_* and check_* files to probes/; preserve cited evidence in docs/evidence/**
 
 - **Status:** Open
 - **Priority:** Low
 - **Type:** Action
-- **File:** Repo root (`probe_*.py`, `check_*.py`, `generate_*.py`), `.gitignore`, `docs/evidence/`
+- **File:** Repo root (`probe_*.py`, `check_*.py`, `probe_extraction_*.json`), `.gitignore`, `docs/evidence/`
 - **Logged:** October 2, 2026
 - **Updated:** October 4, 2026
 
@@ -1967,17 +1967,17 @@ e. Source-vs-output check: for each fixture JD, the row count and wording under 
 
 **Scope (in order):**
 
-**Step 1 -- Preserve cited evidence (own commit, run first).** Copy the following into `docs/evidence/<ticket>/` and confirm `docs/evidence/` is not gitignored (`docs/working/` is; verify separately):
+**Step 1 -- Preserve cited evidence. Done (42ddbe6):** the folders are `docs/evidence/MATTGPT-266/`, `MATTGPT-267/` and `MATTGPT-268/`, not the unprefixed names below. Original instruction: copy the following into `docs/evidence/<ticket>/` and confirm `docs/evidence/` is not gitignored (`docs/working/` is; verify separately):
 
 - `docs/evidence/268/`: `probe_250_output/20260926_165950/`, `probe_250_output/20260926_172156/cs.json`, `probe_250_output/20260925_092116/step1_output.txt`
 - `docs/evidence/267/`: `probe_extraction_step0_output/extraction_calls.json`, `first_pending_row.json`
 - `docs/evidence/266/`: `probe_244_source_text_output/loop_20260921_125949/`
 
-**Step 2 -- `.gitignore`.** Add root-level output patterns: `probe_*_raw_results.json`, `probe_*_output.txt`, `probes/output/`.
+**Step 2 -- `.gitignore`. Done (d3805f3):** `/probes/` covers probe output, so the two root patterns aren't needed. Verified Oct 5, 2026: `probe_244_raw_results.json` and `probe_244_audit_output.txt` are gone from root. `probe_244_source_text_output/` is still at root, ignored by `probe_*_output/`.
 
-**Step 3 -- Move scripts.** Move probe, check, and generate scripts to `probes/`. Output goes to `probes/output/<ticket>/<timestamp>/`. Fix any Step 0 probes with a fixed output path to use the new layout. Update BACKLOG.md path references (cited as instruments, not imports -- no production code changes).
+**Step 3 -- Move scripts.** Move probe and check scripts to `probes/`. Not probes (Oct 5, 2026): `generate_jsonl_from_excel.py` and `generate_public_tags.py` are data pipeline tools and stay at root. Code proposes a per-file disposition (move, keep as fixture, or untrack) before anything moves. Verified Oct 5, 2026: 21 tracked root `probe_*`/`check_*` files, plus four tracked generate scripts on the same list (`generate_208_fixtures.py`, `generate_competencies.py`, `generate_interview_questions.py`, `generate_use_cases.py`). Several are read by tracked code (`probe_assessor.py` reads the `probe_extraction_*.json` caches), so each is checked one at a time. Ignored root output folders (probe_*_output/) move to probes/output/ in the same pass. Output goes to `probes/output/<ticket>/<timestamp>/`. Fix any Step 0 probes with a fixed output path to use the new layout. Update BACKLOG.md path references (cited as instruments, not imports -- no production code changes).
 
-**Step 4 -- `probe_extraction_088_*.json` (3 files).** Matt decides: frozen fixtures (commit next to the others) or leftovers (delete).
+**Step 4 -- `probe_extraction_088_*.json` (3 files). Done (061119d):** committed as frozen fixtures alongside their three JD files in `tests/bdd/fixtures/jd_extraction/`.
 
 **Acceptance:** `git status` shows no untracked probe files at root; every cited path in steps 1a-1c resolves under `docs/evidence/`.
 
@@ -2013,13 +2013,13 @@ e. Source-vs-output check: for each fixture JD, the row count and wording under 
 - **File:** `services/jd_assessor.py` (`extract_requirements()`, `source_text` handling)
 - **Logged:** October 3, 2026
 
-**Issue:** `extract_requirements()` currently asks the model to return the verbatim `source_text` for each requirement. On long JDs the model must copy large text spans, which adds latency (measured ~1.7s on long JDs in `probe_extraction_step0_output/`). The model knows the line number; Python can fill `source_text` from the JD in a post-processing step.
+**Issue:** `extract_requirements()` currently asks the model to return the verbatim `source_text` for each requirement. On long JDs the model must copy large text spans, which adds latency (measured ~1.7s on long JDs in `docs/evidence/MATTGPT-267/`). The model knows the line number; Python can fill `source_text` from the JD in a post-processing step.
 
 **Fix:** Change the extraction prompt to return a line number (or start/end char offset) instead of verbatim text. After the model responds, Python looks up the span from the original JD string and populates `source_text`. The produced `source_text` value is identical to what the model would have returned.
 
 **Replaces:** The verbatim-source test added in `b28a080`. That test verified the model copied text correctly; the replacement test verifies the Python lookup produces the correct span.
 
-**Evidence:** `probe_extraction_step0_output/` (repo root). Measure before and after on the AT&T fixture (the long-JD case from MATTGPT-160).
+**Evidence:** `docs/evidence/MATTGPT-267/` (`extraction_calls.json`, `first_pending_row.json`). Measure before and after on the AT&T fixture (the long-JD case from MATTGPT-160).
 
 **Constraint:** Do not implement before confirming the line-number approach is reliable across structured and prose JDs. Prose JDs have no guaranteed line boundaries; the offset approach may be safer. Settle the indexing strategy at Red time.
 
@@ -2156,7 +2156,7 @@ These only affect behavior if tags feed filters or counts. Fix is in the master 
 
 **Issue 2 -- no conversation history for follow-ups.** "What about PMP?" (browser run, Oct 4) had no context from the prior CS degree exchange. Each turn is answered cold; the model cannot resolve a follow-up pronoun or implicit reference against what was just said.
 
-**Evidence:** `probe_268_output/20261004_111121/` (untracked, local only); "What about PMP?" browser run, October 4, 2026.
+**Evidence:** `docs/evidence/MATTGPT-268/20261004_111121/`; "What about PMP?" browser run, October 4, 2026.
 
 **Relationship to other tickets:** Issue 1 overlaps with MATTGPT-128's "story grid always renders" rule in MATTGPT-250 item 4, which defers the cited-vs-retrieved question to -128. Issue 2 is independent.
 
