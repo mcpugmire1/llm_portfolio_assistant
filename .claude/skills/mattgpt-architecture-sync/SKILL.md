@@ -30,6 +30,10 @@ git log <anchor>..<end> --format='%h%n%(trailers:key=Decision)%(trailers:key=Rej
 **Step 0: Churn report (report only)**
 For the commit range, list the 5 most-changed code files (exclude *.md, tests/, probe_*, data/) and any code-file pairs that changed together in 3+ commits. Flag files over 1,000 lines. Propose nothing; Matt decides whether a flagged file gets a ticket.
 
+**Step 0b: Design spec drift (report only, after Step 1)**
+The design spec repo is checked out at `../mattgpt-design-spec`. First run `git -C ../mattgpt-design-spec fetch` and report whether the local checkout is behind `origin/main` (`git -C ../mattgpt-design-spec rev-list --count HEAD..origin/main`). If it is, say so at the top of the report and search `origin/main` rather than the stale working tree. Report `origin/main`'s last commit date.
+For each structural change Step 1 identifies (a `Decision:` trailer, a removal, a changed pattern), search the spec for the component's name: `git -C ../mattgpt-design-spec grep -n -i "<name>" origin/main -- '*.md'`. List each hit with its file and line, and whether the spec describes the component as current or as removed. Propose nothing; Matt decides whether the spec needs an update. Never write to the design spec repo.
+
 **Step 1: Classify commits**
 For each commit in the range, classify:
 - New file in `services/`, `ui/pages/`, `ui/components/`, `utils/`, `config/`: likely needs an ARCHITECTURE.md update.
