@@ -22,17 +22,28 @@ while IFS= read -r f; do
   esac
 done < <(git diff --cached --name-only --diff-filter=ACM)
 
-# Role check: a docs session commits only the doc files; a dev session commits none of them.
+# Role check: each docs session commits only its own two files; a dev session commits none of the four.
+# MATTGPT_DOCS_SESSION=arch (scripts/arch-sync-session.sh): ARCHITECTURE.md, docs/ADR.md only.
+# MATTGPT_DOCS_SESSION=backlog (scripts/backlog-session.sh): BACKLOG.md, CHANGELOG.md only.
 # Commits from Matt's own terminal (no CLAUDECODE) are not checked.
-DOC_FILES="ARCHITECTURE.md docs/ADR.md BACKLOG.md CHANGELOG.md"
+ARCH_FILES="ARCHITECTURE.md docs/ADR.md"
+BACKLOG_FILES="BACKLOG.md CHANGELOG.md"
 if [ -n "$CLAUDECODE" ]; then
+  role="${MATTGPT_DOCS_SESSION:-dev}"
+  case "$role" in
+    arch) allowed="$ARCH_FILES" ;;
+    backlog) allowed="$BACKLOG_FILES" ;;
+    dev) allowed="" ;;
+    *) echo "pre-commit: unknown MATTGPT_DOCS_SESSION value '$role'; launch scripts/arch-sync-session.sh or scripts/backlog-session.sh." >&2; status=1; allowed="" ;;
+  esac
   while IFS= read -r f; do
     [ -z "$f" ] && continue
-    case " $DOC_FILES " in *" $f "*) is_doc=1 ;; *) is_doc=0 ;; esac
-    if [ -n "$MATTGPT_DOCS_SESSION" ] && [ "$is_doc" = 0 ]; then
-      echo "pre-commit: the docs session commits only doc files; $f is staged." >&2; status=1
-    elif [ -z "$MATTGPT_DOCS_SESSION" ] && [ "$is_doc" = 1 ]; then
-      echo "pre-commit: $f is a doc file; only the docs session (scripts/docs-session.sh) commits it." >&2; status=1
+    case " $ARCH_FILES $BACKLOG_FILES " in *" $f "*) is_doc=1 ;; *) is_doc=0 ;; esac
+    case " $allowed " in *" $f "*) is_allowed=1 ;; *) is_allowed=0 ;; esac
+    if [ "$role" = dev ] && [ "$is_doc" = 1 ]; then
+      echo "pre-commit: $f is a doc file; only its docs session commits it." >&2; status=1
+    elif [ "$role" != dev ] && [ "$is_allowed" = 0 ]; then
+      echo "pre-commit: the $role session commits only $allowed; $f is staged." >&2; status=1
     fi
   done < <(git diff --cached --name-only)
 fi
