@@ -1,89 +1,45 @@
-# MattGPT - Claude Working Agreement
+# MattGPT: Claude Working Agreement
 
 ## Critical Rules
-Each one has caused a real incident. Rules marked "Enforced" are also blocked by hooks. If a hook blocks a command, stop and report it to Matt. Never route around a hook: no `--no-verify`, no `core.hooksPath` changes, no alternate command that does the same thing.
+Rules marked "Enforced" are also blocked by hooks. If a hook blocks a command, stop and report it to Matt. Never route around a hook: no `--no-verify`, no `core.hooksPath` changes, no alternate command that does the same thing.
 
-- **No Co-Authored-By lines in commit messages.** Never add them, in any session.
-- **Read this entire file before proposing any edit to it.** Synthesize across all sections first. Do not add a section after reading two lines.
 - **No em dashes anywhere in this repo.** Not in docs, not in commits, not in this file. Use a colon, comma, or rewrite the sentence. (Enforced on added lines and commit messages.)
-- **Before citing a constraint as the reason for an approach, verify the constraint exists in the actual file.** Show the evidence. If the constraint doesn't exist, use the simplest direct substitution: f-string with the constant inline. (June 2026: .replace() pattern built for a CSS brace problem that affected 3 lines, not 4000.)
-- **Push is a separate gate from commit, always.** `git push origin main` triggers a production deploy on Streamlit Cloud. A commit approval is not a push approval. Stop after committing and wait for an explicit "push" instruction. Never chain `git commit && git push`. (April 2026. Enforced: push asks permission; commit and push in one call is blocked.)
-- **Tests before any implementation code.** BDD for UI behavior; unit tests for pure functions and scripts; look-only CSS changes are the one exception. See Testing Protocol for the right shape and Red-Green discipline for each. (May 2026)
-- **Subtract before you add, in the answer pipeline.** Before adding a prompt clause, post-processing step (regex strip, bolding), or gate: read ARCHITECTURE.md's record of removed layers, confirm the output is actually wrong rather than just changed, name the observed failure, check whether the fix belongs in the data instead (`matt_profile.json` or the story corpus), and show a live acceptance run that fixes it, including the story controls it wasn't written for (see Testing Protocol). When one causes a new failure, try removing it before adding an exception. (Jan-Feb 2026: the Entity Gate, `classify_query_intent`, and the banned-phrases list were each added to fix observed output and later backed out. Sept 2026, MATTGPT-250: rule 0a and the strip list grew clause by clause. The CS degree answer began leading with a no that Role Match doesn't give, likely from the direct-no clause written for PMP (not isolated). Rewording the AIU note in `matt_profile.json` got the full equivalence into the answer; the leading no is still open.)
+- **Before citing a constraint as the reason for an approach, verify the constraint exists in the actual file.** Show the evidence. If the constraint doesn't exist, use the simplest approach the actual file supports.
+- **Only Matt pushes.** No Claude session runs `git push`, even when asked. `git push origin main` triggers a production deploy on Streamlit Cloud. Stop after committing.
+- **Tests before any implementation code.** BDD for UI behavior; unit tests for pure functions and scripts; look-only CSS changes are the one exception. See Testing Protocol for the right shape and Red-Green discipline for each.
+- **Subtract before you add, in the answer pipeline.** Before adding a prompt clause, post-processing step (regex strip, bolding), or gate: read the removal ADRs in `docs/ADR.md`, confirm the output is actually wrong rather than just changed, name the observed failure, check whether the fix belongs in the data instead (`data/matt_profile.json` or the story corpus), and show a live acceptance run that fixes it, including the story controls it wasn't written for (see Testing Protocol). A clause written for one query type can change answers to others, so the run includes unrelated queries. When one causes a new failure, try removing it before adding an exception.
 - **Paste literal test output at every gate, never self-summarize.** "Looks good, ready to commit?" is not a gate. Paste the literal `pytest` output before requesting commit approval at every Red and Green commit.
 - **One "go" ships the full Red → Red → Green cycle.** After Matt says "go" on a ticket, run all three gates without re-asking between them. Re-ask only when a substantive new design decision surfaces mid-cycle.
-- **Pre-flight before touching any existing file.** Name the files the ticket touches, the patterns those files use, any cross-surface couplings, and existing test coverage, before proposing anything. Check `conversation_helpers.py` before any click handler and `banking_landing.py` before any cross-page navigation. Build on existing patterns; replace one only when you can name in a comment why it fails. (April 2026, June 2026)
-- **Stage specific files by name, never `git add -A` or `git add .`.** Parallel sessions share one staging area. (May 2026. Enforced.)
-- **Never use `grep -v` to redact secrets.** Use positive include filters (keys only). Applies to `.streamlit/secrets.toml`, `.env`, any service-account JSON. (May 2026. Enforced.)
-- **Artifacts for user review go in chat, not /tmp.** Edit tool calls show diffs inline. Writing to /tmp creates a local-only artifact Matt cannot see. (June 2026)
-- **DevTools before any CSS proposal.** For any layout, alignment, positioning, sizing, color, or typography issue: get computed styles before proposing a fix, from Playwright `getComputedStyle` or by asking Matt to paste them from DevTools. Source-code reasoning misses Streamlit's wrapper-layer surprises. (May 2026)
-- **Unexpected test failures are your problem until proven otherwise.** When tests fail on code you touched, investigate before labeling anything pre-existing. Run the failures in isolation, read the output, and either fix them or produce evidence they existed before your change. "I didn't touch that code" is not evidence. Presenting options and waiting is not investigating.
-- **Bug findings lead with the defect and the fix, never with origin.** All bugs in this repo are ours. Code age or provenance is stated only when it gates a live decision (push safety, revert scope) and only after the fix is on the table. Leading with "pre-existing confirmed" or "not introduced by this branch" is deflection regardless of whether it's true. (July 2026: Code led with innocence on a synthesis bug while the fix was an afterthought.)
-- **Any assertion about file contents needs a visible source in the response:** a Read or Grep tool call, or the command that produced it and that command's literal output. This covers: what a file contains, what it does not contain, what a function does. This applies with particular force to claims of absence -- a search that returns nothing is not a finding until the search and its empty result are visible, because a malformed search also returns nothing. If there is no source, the assertion does not get made.
+- **Pre-flight before touching any existing file.** Name the files the ticket touches, the patterns those files use, any cross-surface couplings, and existing test coverage, before proposing anything. Check `conversation_helpers.py` before any click handler and `banking_landing.py` before any cross-page navigation. Build on existing patterns; replace one only when you can name in a comment why it fails.
+- **Stage specific files by name, never `git add -A` or `git add .`.** Parallel sessions share one staging area. (Enforced.)
+- **No Co-Authored-By lines in commit messages.** Never add them, in any session.
+- **Never use `grep -v` to redact secrets.** Use positive include filters (keys only). Applies to `.streamlit/secrets.toml`, `.env`, any service-account JSON. (Enforced.)
+- **Artifacts for user review go in chat, not /tmp.** Edit tool calls show diffs inline. Writing to /tmp creates a local-only artifact Matt cannot see.
+- **DevTools before any CSS proposal.** For any layout, alignment, positioning, sizing, color, or typography issue: get computed styles before proposing a fix, from Playwright `getComputedStyle` or by asking Matt to paste them from DevTools. Source-code reasoning misses Streamlit's wrapper-layer surprises.
+- **Unexpected test or eval failures are your problem until proven otherwise.** Every failure gets an isolation run and a traceback before anything else. Nothing is labeled pre-existing, stochastic, or a known issue without a git bisect, a prior passing-run artifact, or a validation against production. "I didn't touch that code" is not evidence, and file proximity to the diff is not evidence either way until checked. Presenting options and waiting is not investigating. A known issue that isn't in BACKLOG is an unvalidated note.
+- **Bug findings lead with the defect and the fix, never with origin.** All bugs in this repo are ours. Code age or provenance is stated only when it gates a live decision (push safety, revert scope) and only after the fix is on the table. Leading with "pre-existing confirmed" or "not introduced by this branch" is deflection regardless of whether it's true.
+- **Any assertion about file contents needs a visible source in the response:** a Read or Grep tool call, or the command that produced it and that command's literal output. This covers what a file contains, what it does not contain, and what a function does. It applies with particular force to claims of absence: a search that returns nothing is not a finding until the search and its empty result are visible, because a malformed search also returns nothing. If there is no source, the assertion does not get made.
 - **Working notes do not replace tracking.** Any bug, regression, or unvalidated behavior written to a working note also goes in the next commit message or gets flagged to Matt before the session proceeds. A finding that only exists in `docs/working/` or a notes file has no owner and will not be acted on. "I noted it" is not the same as "it is tracked."
-- **Cite functions and constants by name, not line number.** Line numbers go stale between sessions and across commits. `load_matt_profile()` is stable; "line 152" is not. Applies to CLAUDE.md, ARCHITECTURE.md, tickets, and chat. (Sept 2026: `load_matt_profile()` cited at ~152, actually at 307.)
-- **A structural refactor invalidates values and selectors anchored to the old structure.** Navbar height, container classes, DOM nesting: when these change, re-audit what's calibrated to them. (June 2026: navbar refactor orphaned the `-48px` header calibration; `.main` → `.stMain` killed every `.main` rule. Both surfaced in production, not at change time.)
+- **Cite functions and constants by name, not line number.** Line numbers go stale between sessions and across commits. `load_matt_profile()` is stable; a line number is not. Applies to CLAUDE.md, ARCHITECTURE.md, tickets, and chat.
+- **A structural refactor invalidates values and selectors anchored to the old structure.** Navbar height, container classes, DOM nesting: when these change, re-audit what's calibrated to them. Renaming `.main` to `.stMain` silently kills every rule targeting `.main`, and a changed navbar height orphans every offset calibrated to it. These surface in production, not at change time.
 
 ---
 
 ## Where Things Live
-- `mattgpt-backlog-maintenance` skill: BACKLOG.md and CHANGELOG.md. Cowork runs it, not Code.
-- `mattgpt-architecture-sync` skill: ARCHITECTURE.md updates from recent commits. Cowork runs it, not Code.
+- `scripts/arch-sync-session.sh` and `scripts/backlog-session.sh`: launch the two docs sessions, one per pass.
+- `mattgpt-architecture-sync` skill (`.claude/skills/`): ARCHITECTURE.md and `docs/ADR.md` from recent commits. Arch sync session only.
+- `mattgpt-backlog-maintenance` skill (`.claude/skills/`): BACKLOG.md and CHANGELOG.md. Backlog session only.
 - `.claude/rules/streamlit-ui.md`: CSS rules and Streamlit patterns. Loads when UI files are read.
 - `.claude/rules/rag-pipeline.md`: RAG pipeline, entity filters, Pinecone casing, nonsense filters. Loads when pipeline files are read.
-- `ARCHITECTURE.md`: full system context.
+- `ARCHITECTURE.md`: full system context, including the file structure.
 - [Design Specification](https://mcpugmire1.github.io/mattgpt-design-spec/): canonical tech stack and system architecture. Do not duplicate tech stack facts here.
 
 ## Document Ownership
-- **CLAUDE.md, `.claude/rules/`, `.claude/settings.json`, `.claude/hooks/`, `.githooks/`:** Matt directly. No automated process writes to these files. Code and Cowork flag proposed changes; they never write them.
-- **BACKLOG.md / CHANGELOG.md:** Backlog Maintenance Cowork process (skill `mattgpt-backlog-maintenance`).
-- **ARCHITECTURE.md:** Architecture Sync Cowork process (skill `mattgpt-architecture-sync`).
-
-## File Structure
-```
-ui/pages/               # Page components
-  explore_stories.py    # Story browsing with Table/Card/Timeline views
-  ask_mattgpt/          # Modular chat interface (8 files)
-    __init__.py         # Router
-    landing_view.py     # Landing page with capability cards
-    conversation_view.py # Chat conversation UI
-    conversation_helpers.py # Message rendering, Related Projects UX
-    backend_service.py  # RAG pipeline integration
-    styles.py           # Chat-specific CSS
-    story_intelligence.py # Theme/persona inference
-    shared_state.py     # Session state management
-    utils.py            # Shared utilities
-  about_matt.py         # About page
-  banking_landing.py    # Banking industry landing
-  cross_industry_landing.py # Cross-industry landing
-
-ui/components/          # Shared components
-  timeline_view.py      # Era-based Timeline (5 career phases)
-  story_detail.py       # Story detail modal
-  how_agy_modal.py      # "How Agy Searches" modal
-  how_i_built_dialog.py # "How I Built MattGPT" dialog
-  ask_mattgpt_header.py # Unified header component
-  category_cards.py     # Landing page capability cards
-  thinking_indicator.py # Loading/processing indicator
-  navbar.py             # Top navigation
-  footer.py             # Footer
-
-ui/styles/              # CSS
-  global_styles.py      # Shared CSS + mobile breakpoints + CSS variables
-  mobile_overrides.py   # Additional mobile CSS
-
-services/               # Business logic
-  rag_service.py        # Semantic search orchestration
-  pinecone_service.py   # Vector database integration
-
-utils/                  # Helpers
-  filters.py, scoring.py, formatting.py, validation.py
-
-config/                 # Settings
-  debug.py, settings.py, constants.py
-
-echo_star_stories_nlp.jsonl   # STAR story corpus (source of truth, repo root)
-```
+- **Read this entire file before proposing any edit to it.** Synthesize across all sections first. Do not add a section after reading two lines.
+- **Current state only.** CLAUDE.md, `.claude/rules/`, and ARCHITECTURE.md hold current rules and current state: no dates, ticket IDs, incident history, or change narrative. History goes to `docs/ADR.md` (decisions, removals, rejections) or CHANGELOG.md (shipped work).
+- **CLAUDE.md and `.claude/rules/`:** Matt writes these himself. No Claude session edits them.
+- **`.claude/settings.json`, `.claude/hooks/`, `.githooks/`, `.pre-commit-config.yaml`:** Matt owns these. No automated process writes to them on its own initiative; Code applies a change only when Matt directs that specific change.
+- **ARCHITECTURE.md and `docs/ADR.md`:** written only by the arch sync session. **BACKLOG.md and CHANGELOG.md:** written only by the backlog session. Dev sessions never write any of the four; their commit messages are the handoff. (Enforced: the pre-commit role check limits each session to its own files.)
 
 ## Code Conventions
 - Filter state lives in `st.session_state["filters"]`
@@ -95,10 +51,10 @@ echo_star_stories_nlp.jsonl   # STAR story corpus (source of truth, repo root)
 ## Behavioral Rules
 
 ### Before starting any ticket
-1. **Pre-flight** (see Critical Rules) - name the files, patterns, couplings, and test coverage
-2. **Pre-implementation reasoning gate** - before proposing any implementation, state in one sentence what the current code does, one sentence what the change does, and one sentence why it's better than the simplest alternative. If that third sentence can't be written confidently, stop and ask. Do not default to the more complex approach.
-3. **Default is build-on-top-of, not replace-with** - extend the existing pattern; only propose replacing when you can name in a comment why it fails
-4. **BDD scenarios first** (see Testing Protocol)
+1. **Pre-flight:** name the files, patterns, couplings, and test coverage (see Critical Rules).
+2. **Pre-implementation reasoning gate:** before proposing any implementation, state in one sentence what the current code does, one sentence what the change does, and one sentence why it's better than the simplest alternative. If that third sentence can't be written confidently, stop and ask. Do not default to the more complex approach.
+3. **Default is build-on-top-of, not replace-with:** extend the existing pattern; only propose replacing when you can name in a comment why it fails.
+4. **Tests first,** in the shape the Testing Protocol calls for.
 
 ### During implementation
 - Give direct solutions immediately after pre-flight
@@ -109,8 +65,8 @@ echo_star_stories_nlp.jsonl   # STAR story corpus (source of truth, repo root)
 - Do not invent new patterns when existing ones work
 
 ### On specs and wireframes
-- **Cross-check the artifact, not just the verbal scope.** When a wireframe/spec AND verbal scope are given, the artifact is truth on copy/structure/sizing. Match it exactly or flag the conflict explicitly. (May 2026)
-- **Visual spacing: give baseline + lever, let Matt call the value.** For margins/gaps/padding, name the controlling rule by selector and file, suggest a starting point, let Matt eyeball and call the final value. (May 2026)
+- **Cross-check the artifact, not just the verbal scope.** When a wireframe/spec AND verbal scope are given, the artifact is truth on copy/structure/sizing. Match it exactly or flag the conflict explicitly.
+- **Visual spacing: give baseline + lever, let Matt call the value.** For margins/gaps/padding, name the controlling rule by selector and file, suggest a starting point, let Matt eyeball and call the final value.
 
 ### On estimates
 - **Headline number = raw implementation time only.** BDD overhead and discovery risk are listed as explicit add-ons, not folded into the headline. A 30-min change is quoted as 30 min, not "2-3 hours."
@@ -141,7 +97,7 @@ When multiple Claude Code sessions run concurrently, they share one git working 
 ### Choosing the test shape
 - **BDD:** UI behavior, user-facing flows, anything Playwright can observe in the DOM. Write `.feature` scenarios.
 - **Unit tests:** Pure functions, batch scripts, pipeline stages with no DOM surface. Write pytest functions directly. Do not write `.feature` files for batch scripts or functions with no UI interaction.
-- **Live acceptance runs:** For changes to prompts, retrieval, or anything else whose output depends on the LLM. A live acceptance run is a probe script in `probe_<ticket>_output/<timestamp>/`. It runs the acceptance queries through the real pipeline (`rag_answer()` or `assess_requirement()`, with `log_query` patched out and stderr in its own file), at least 2 runs per query, and it pastes the full answer text for each run. It includes the story controls when the change touches a shared prompt. It supplements unit tests and doesn't replace them: unit tests prove the text reaches the prompt, and the live run shows what the model does with it.
+- **Live acceptance runs:** For changes to prompts, retrieval, or anything else whose output depends on the LLM. A live acceptance run is a probe script in `probe_<ticket>_output/<timestamp>/`. It runs the acceptance queries through the real pipeline (`rag_answer()` or `assess_requirement()`, with all loggers patched out: `log_query`, `log_offdomain`, and the router's two CSV writers, `_log_borderline` and `_log_router_low_confidence`; stderr in its own file), at least 2 runs per query, and it pastes the full answer text for each run. It includes the story controls when the change touches a shared prompt. It supplements unit tests and doesn't replace them: unit tests prove the text reaches the prompt, and the live run shows what the model does with it.
 
 ### Red-Green cycle
 One "go" from Matt ships the full cycle without re-asking between gates. Re-ask only on substantive new design decisions.
@@ -154,7 +110,7 @@ One "go" from Matt ships the full cycle without re-asking between gates. Re-ask 
 ### Unit test Red-Green cycle
 The two-Red split applies to BDD where `.feature` and `test_X.py` are separate artifacts with a meaningful intermediate state. For unit tests, one Red commit: tests written fully, failing on assertion errors (not import errors). Green is still a separate commit. The non-negotiable is the same: tests exist before implementation and fail for the right reason.
 
-When testing a new function that doesn't exist yet, the Red commit includes the test file plus stub signatures raising `NotImplementedError` -- nothing else. Tests then fail on assertion errors, not import errors. A stub is a function signature and `raise NotImplementedError` only: no logic, no returns, no constants.
+When testing a new function that doesn't exist yet, the Red commit includes the test file plus stub signatures raising `NotImplementedError`, and nothing else. Tests then fail on assertion errors, not import errors. A stub is a function signature and `raise NotImplementedError` only: no logic, no returns, no constants.
 
 ### Probes and PoCs
 Probes and PoCs are exploratory measuring instruments, exempt from the Red gate. They stay untracked and never import into production. The exemption ends the moment probe code moves into `services/` or `ui/`: at that point it's production and the full protocol applies.
@@ -164,26 +120,25 @@ Probes and PoCs are exploratory measuring instruments, exempt from the Red gate.
 **A causal claim needs the comparison that isolates the cause.** "X caused Y" requires a measurement with X absent. Without it, say "Y is present under X" and name what measurement would settle it. Either the before-state was measured or it wasn't.
 
 ### Validation rules
-- **When reporting test results, state explicitly what was tested and what was not.** A pass count covers the scenarios run -- it does not validate untested changes in the same commit. Never present partial coverage as full validation.
-- **Paste literal pytest output at every gate** - never self-summarize (see Critical Rules)
-- **Green commits only after every validation relevant to the change has run.** Name the applicable gates before committing: whichever test shape the change called for (BDD for UI behavior, unit tests for pure functions and scripts, live acceptance runs for prompt or retrieval changes), plus a browser check on a restarted Streamlit when rendered output changed. "Not run" on a gate you named as relevant is not acceptable in a Green commit message. If a relevant gate can't run, stop and ask rather than committing around it. (Sept 2026)
-- **Scope per-gate runs to the relevant test file** - `pytest tests/bdd/steps/test_X.py -v`, not the full suite
-- **A `.feature` file without its `test_*.py` binding is documentation, not a test**
-- **BDD scenarios must assert DOM-observable behavior** - Playwright cannot read `st.session_state`; assert navigation visible + user-message echo + assistant-response streaming
-- **After any change to UI files, restart Streamlit before running BDD tests**
-- **After any change to `explore_stories.py`, run the BDD suite before presenting for review**
+- **When reporting test results, state explicitly what was tested and what was not.** A pass count covers the scenarios run; it does not validate untested changes in the same commit. Never present partial coverage as full validation.
+- **Paste literal pytest output at every gate:** never self-summarize (see Critical Rules).
+- **Green commits only after every validation relevant to the change has run.** Name the applicable gates before committing: whichever test shape the change called for (BDD for UI behavior, unit tests for pure functions and scripts, live acceptance runs for prompt or retrieval changes), plus a browser check on a restarted Streamlit when rendered output changed. "Not run" on a gate you named as relevant is not acceptable in a Green commit message. If a relevant gate can't run, stop and ask rather than committing around it.
+- **Scope per-gate runs to the relevant test file:** `pytest tests/bdd/steps/test_X.py -v`, not the full suite.
+- **A `.feature` file without its `test_*.py` binding is documentation, not a test.**
+- **BDD scenarios must assert DOM-observable behavior.** Playwright cannot read `st.session_state`; assert navigation visible + user-message echo + assistant-response streaming.
+- **After any change to UI files, ask Matt to restart Streamlit before running BDD tests.**
+- **After any change to `explore_stories.py`, run the full BDD suite (`pytest tests/bdd/steps -v`) before presenting for review.**
+- **Every test or eval failure follows the failure rule in Critical Rules.**
 - **On a second Playwright selector timeout, screenshot before iterating:**
   ```python
   try:
       option.click(timeout=5000)
   except Exception:
-      browser_page.screenshot(path='/tmp/pw_debug_selector.png')
+      browser_page.screenshot(path='docs/working/pw_debug_selector.png')
       raise
   ```
-- **Eval failure discipline:** Any eval failure must be validated against production before being labeled "pre-existing" or "stochastic." If a "known issue" isn't in BACKLOG, it's an unvalidated note.
-- **A test run is not complete until every failure has an isolation run and a traceback attached.** No failure may be labeled pre-existing without a git bisect or a prior passing-run artifact proving it predates the current change. "Not touched by my change" is not evidence; file proximity to the diff is not evidence either way until checked. Acknowledging this rule and then waiting is not the same as following it. (June 2026: BDD failures repeatedly classified as pre-existing without isolation runs, after the rule had already been read and stated back.)
 
-### Canvas-Rendered Grids (st.dataframe) - BDD Constraints
+### Canvas-Rendered Grids (st.dataframe): BDD Constraints
 
 `st.dataframe` renders rows, cells, column headers, and selection controls to an HTML canvas, not the DOM. Full explanation, verified selectors, and origin: see `ARCHITECTURE.md` (st.dataframe canvas constraint).
 
@@ -194,22 +149,20 @@ Probes and PoCs are exploratory measuring instruments, exempt from the Red gate.
 Any new `st.dataframe` surface inherits all of the above. If whole-row-click or keyboard row selection is a hard requirement, use self-rendered HTML rows (the Cards pattern).
 
 ## Secrets & Sensitive Output Handling
-Three rules from a real GCP private key exposure (May 2026):
-
 1. **Never use `grep -v` to redact secrets** (see Critical Rules). Use positive include filters:
-   - `grep -oE "^[A-Z_][A-Z_0-9]*" .env` - key names only
-   - `grep -oE "^[a-z_]+ ?=" secrets.toml` - top-level scalar keys only
+   - `grep -oE "^[A-Z_][A-Z_0-9]*" .env`: key names only
+   - `grep -oE "^[a-z_]+ ?=" secrets.toml`: top-level scalar keys only
 2. **When inspecting any secrets file, extract keys-only by default.** Ask Matt to confirm values rather than printing them.
-3. **Hard-cap output for any command touching a secrets file** - pipe to `| head -20`.
+3. **Hard-cap output for any command touching a secrets file:** pipe to `| head -20`.
 
 Applies to: `.streamlit/secrets.toml`, `.env`, `.env.local`, any service-account JSON, any file matching `*secret*` / `*credential*` / `*token*`.
 
 ## Pre-Commit Doc Checklist
 Before committing, answer for each:
-- **ARCHITECTURE.md** - Does this change a pattern, surface, or fact stated here? If yes, the commit message describes the change fully; the Architecture Sync pass updates ARCHITECTURE.md.
-- **mattgpt-design-spec** (Jekyll repo) - Does this change anything in the user-facing spec?
-- **how_agy_modal.py** - Does this change anything described in the Ask MattGPT architecture exposition?
-- **about_matt.py** - Does this change anything described in the "How I Built MattGPT" section?
+- **ARCHITECTURE.md and `docs/ADR.md`:** Does this change a pattern, surface, or fact in ARCHITECTURE.md? Describe the change fully in the commit message. Does it make a design decision, or remove a layer, component, prompt clause, or gate? Add trailers: `--trailer "Decision: <what was decided or removed>" --trailer "Rejected: <alternative> (<why>)"`. The Architecture Sync pass turns both into ARCHITECTURE.md edits and ADRs.
+- **mattgpt-design-spec** (Jekyll repo): Does this change anything in the user-facing spec?
+- **`ui/components/how_agy_dialog.py`:** Does this change anything described in the Ask MattGPT architecture exposition?
+- **about_matt.py:** Does this change anything described in the "How I Built MattGPT" section?
 
 If yes to any of the last three: the doc-update commit pairs with this code commit. Same session, same push. Not a follow-up.
 
@@ -218,9 +171,6 @@ Always triggers this check:
 - Model, embedding, or vector store change
 - Pipeline stage added/removed/renamed
 - Schema change in story corpus, query logger, or any `config_*.json`
-
-## Cowork Passes
-Code never writes BACKLOG.md, CHANGELOG.md, or ARCHITECTURE.md. Cowork's passes own them (skills `mattgpt-backlog-maintenance` and `mattgpt-architecture-sync`). Commit messages are the handoff.
 
 ## Documentation Restraint
 Default to **not** creating new markdown files. Most findings belong in commit messages, BACKLOG entries, ADRs, or inline updates to existing docs.
@@ -246,10 +196,10 @@ Never hardcode specific story titles in eval tests. Use index-based selection; f
 
 ## Configuration Rules
 Priority order:
-1. **Derive from data** - if computable from source data, do that
-2. **Environment variable** - if it changes between environments or is a secret
-3. **`config/constants.py`** - if it's application logic that must be consistent
-4. **Local constant with comment** - only if truly file-specific
+1. **Derive from data:** if computable from source data, do that
+2. **Environment variable:** if it changes between environments or is a secret
+3. **`config/constants.py`:** if it's application logic that must be consistent
+4. **Local constant with comment:** only if truly file-specific
 
 If hardcoded values are duplicated across files, that's a bug. Centralize immediately.
 
@@ -260,8 +210,8 @@ If hardcoded values are duplicated across files, that's a bug. Centralize immedi
 ## Deployment
 ```bash
 streamlit run app.py        # local
-git push origin main        # triggers Streamlit Cloud deploy
 ```
+`git push origin main` deploys to Streamlit Cloud (see the push rule in Critical Rules).
 
 ## Related Documentation
 - [Design Specification](https://mcpugmire1.github.io/mattgpt-design-spec/)
