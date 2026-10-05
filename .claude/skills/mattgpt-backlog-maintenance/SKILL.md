@@ -97,4 +97,4 @@ The end is the SHA after `..` in that trailer. If no `Sync-Range` trailer is new
 4. Update `<!-- last-backlog-sync: <sha> -->` to `<end>`.
 5. Run `python3 .claude/skills/mattgpt-docs-check/check_docs.py` and include the report. Findings in files this pass owns go into this pass's proposed diff; everything else gets flagged to Matt.
 6. Nothing writes until Matt approves the proposed diff.
-7. After Matt approves, write the files, stage `BACKLOG.md` and `CHANGELOG.md` by name, show Matt the commit message, and commit on his OK. Use repeated `-m` arguments for multi-paragraph messages. Never push.
+7. After Matt approves, write the files, stage `BACKLOG.md` and `CHANGELOG.md` by name, show Matt the commit message, and commit on his OK by pathspec, so nothing else that is staged gets included: `git commit -m "<summary>" -m "<body>" -- BACKLOG.md CHANGELOG.md`. Use repeated `-m` arguments for multi-paragraph messages. Never push.
