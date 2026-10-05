@@ -3,6 +3,7 @@
 ## Critical Rules
 Each one has caused a real incident. Rules marked "Enforced" are also blocked by hooks. If a hook blocks a command, stop and report it to Matt. Never route around a hook: no `--no-verify`, no `core.hooksPath` changes, no alternate command that does the same thing.
 
+- **No Co-Authored-By lines in commit messages.** Never add them, in any session.
 - **Read this entire file before proposing any edit to it.** Synthesize across all sections first. Do not add a section after reading two lines.
 - **No em dashes anywhere in this repo.** Not in docs, not in commits, not in this file. Use a colon, comma, or rewrite the sentence. (Enforced on added lines and commit messages.)
 - **Before citing a constraint as the reason for an approach, verify the constraint exists in the actual file.** Show the evidence. If the constraint doesn't exist, use the simplest direct substitution: f-string with the constant inline. (June 2026: .replace() pattern built for a CSS brace problem that affected 3 lines, not 4000.)
