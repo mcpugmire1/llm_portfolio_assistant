@@ -74,7 +74,7 @@ git commit -m "Architecture Sync: <summary>" -m "<body>" --trailer "Sync-Range: 
 If the pass found no changes, make an empty commit that records the range:
 
 ```
-git commit --allow-empty -m "Architecture Sync: no changes" --trailer "Sync-Range: <anchor>..<end>"
+git commit --allow-empty --only -m "Architecture Sync: no changes" --trailer "Sync-Range: <anchor>..<end>"
 ```
 
 Never push. The backlog pass reads this trailer to know where to move the anchor.
