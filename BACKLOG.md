@@ -14,7 +14,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 2. **-273** -- Profile-fact answers carry unrequested story context, and follow-ups arrive with no conversation history. Structural fix behind the -268 residual and the "What about PMP" pivot (ADR 030). Land before -250 steps 5 and 6, which depend on whether fact questions still carry story context. -268 travels with it.
 3. **-251** -- Ask Agy treats adjacent retrieved stories as evidence for the question asked. Visitor-visible correctness defect: unsupported claims (real estate sector from Cendant Mortgage; "including France" with no source) read as fact to recruiters.
 4. **-266** -- Role Match labels responsibility-derived rows as "Required Qualifications". Every visitor sees job duties presented as must-have credentials. Fix is in `_flatten_extraction()`, not the prompt. -264 is sequenced after it.
-5. **-255** -- The meta-commentary strip regex corrupts decimal amounts (`$2.5M` becomes an unclosed `**$2.`) and merges paragraphs. Visible correctness bug. Ticket's fix: remove the strip, run structural meta-commentary tests without it, then a live acceptance run on stories with decimal amounts, including story controls.
+5. **-255** -- The meta-commentary strip regex corrupts decimal amounts (`$2.5M` becomes an unclosed `**$2.`) and merges paragraphs. Visible correctness bug. Ticket's fix: remove the strip, run structural meta-commentary tests without it, then a live acceptance run on stories with decimal amounts, including story controls. Acceptance counts evaluative sentences before and after (252 coupling).
 6. **-228** -- Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
 7. **-146** -- Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
 8. **-160** -- In Progress. JD extraction split into three concurrent calls (required / preferred / implicit) landed at `5aee8a4`. After-measurement on the AT&T fixture (count spread 1-2 across five runs) not yet recorded. No longer gates -244.
@@ -1770,6 +1770,8 @@ Scenarios by name:
 **Issue:** The meta-commentary strip uses a `[^.]*{pattern}[^.]*\.` structure that treats any period as a sentence boundary. A decimal amount like `$2.5M, which reflects his...` is matched as two fragments; the result is `**$2.` with an unclosed bold. The same regex also merges paragraphs across `\n\n` boundaries. The prompt already forbids meta-commentary in three places; ARCHITECTURE.md records failures dropping from 10/31 to 1-2/31 after the January 2026 prompt fix. The strip is post-processing scaffolding for a problem the prompt already handles.
 
 **Fix:** Remove the strip. Run structural meta-commentary tests without it, then a live acceptance run on stories with decimal amounts, including story controls.
+
+**Coupling with MATTGPT-252 (Oct 5, 2026):** The strip also removes some of the evaluative sentences 252 is about (252's measurement gap: probe outputs are counted after the strip). With 255 at NOW #5 and 252 at NEXT #14, removing the strip lets more evaluative sentences through until 252 lands. The acceptance run counts evaluative sentences in raw LLM text and in final `answer_md`, before and after the removal, so the trade is measured, not discovered.
 
 **Unverified Oct 2:** Check whether `_log_bandaid` exists and what it shows before removing anything.
 
