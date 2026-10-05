@@ -107,7 +107,7 @@ Use **Streamlit** as the primary UI framework.
 
 ## ADR 006 — Markdown Backlog and Roadmap (vs. Jira)  
 **Date:** 2025-08-21  
-**Status:** Accepted  
+**Status:** Superseded by ADR 029  
 
 **Context:**  
 We don’t want to maintain an external tool (like Jira) for backlog/roadmap at this stage.  
@@ -478,7 +478,7 @@ Chat avatars use high-specificity CSS with `!important`:
 ## ADR 018 — Confidence Threshold Calibration for Pinecone Semantic Search
 
 **Date:** 2025-12 (original calibration); 2026-05-14 (promoted to ADR)
-**Status:** Accepted
+**Status:** Superseded by ADR 026
 
 **Context:**
 The semantic-search pipeline gates query confidence into three buckets — High / Low / None — using two thresholds applied to Pinecone's raw similarity scores. The original thresholds (~0.50) were badly miscalibrated against the corpus and embedding model: legitimate queries like "What problems does Matt solve?" scored 0.381 and got suppressed as low-confidence, while off-topic queries scored 0.075–0.129 and bypassed the gate's intent. Calibration was painful (December 2025 session) — multiple rounds of empirical tuning against real queries before settling on the current values.
@@ -697,3 +697,180 @@ Delete the script. Threshold-dependent checks import from `config/constants.py`.
 
 **Consequences:**
 - Calibrated thresholds have one definition.
+
+---
+
+## ADR 026: CONFIDENCE_LOW Is 0.20
+
+**Date:** 2026-01-19 (raised); 2026-10-05 (recorded)
+**Status:** Accepted
+**Related tickets:** MATTGPT-029, MATTGPT-024
+
+**Context:**
+ADR 018 records `CONFIDENCE_LOW = 0.15`. The live value is 0.20. It was raised in `services/rag_service.py` on 2026-01-19 with the comment "Raised from 0.15 to filter phantom similarity noise (e.g., "peanut butter")", and moved to `config/constants.py` on 2026-01-29 with the comment "Raised from 0.15 to filter phantom similarity noise". ADR 018 was written in May 2026 and recorded the value from before the raise.
+
+**Decision:**
+- `CONFIDENCE_HIGH = 0.25`: top similarity at or above 0.25 means "found X stories", no warning.
+- `CONFIDENCE_LOW = 0.20`: top similarity at or above 0.20 and below 0.25 shows the "relevance may be low" warning.
+- Below 0.20: `confidence="none"`, logged as `[QUERY_REJECTED] reason=low_pinecone`.
+
+Both constants live in `config/constants.py`. This supersedes ADR 018. Its calibration method, edge cases, and consequences carry forward with the soft band at 0.20 to 0.25.
+
+**Rationale:**
+- Off-topic queries such as "peanut butter" produced phantom similarity scores in the old 0.15 to 0.20 range and got answers with a warning. Raising the floor to 0.20 rejects them.
+- Alternatives considered: not recorded. The commit that made the change does not mention it; the code comment is the only record.
+
+**Consequences:**
+- The soft band is 0.05 wide.
+- `PINECONE_MIN_SIM = 0.15` is a separate constant, the Pinecone retrieval floor, and is unchanged by this decision.
+- Threshold changes still require measurement against the eval suite, as ADR 018 states.
+
+---
+
+## ADR 027: Doc Writes Are Separated From Code Work by Session Role
+
+**Date:** 2026-10-05
+**Status:** Accepted
+**Related tickets:** None
+
+**Context:**
+Code sessions and docs passes share one working tree and one staging area. `ARCHITECTURE.md`, `docs/ADR.md`, `BACKLOG.md`, and `CHANGELOG.md` are owned by the Architecture Sync and Backlog Maintenance passes, and that ownership was enforced only by instruction.
+
+**Decision:**
+The repo-rules check in `.githooks/pre-commit` enforces ownership at commit time for commits made in a Claude Code session (`CLAUDECODE` set):
+- `MATTGPT_DOCS_SESSION=arch` (launched by `scripts/arch-sync-session.sh`) may commit only `ARCHITECTURE.md` and `docs/ADR.md`.
+- `MATTGPT_DOCS_SESSION=backlog` (launched by `scripts/backlog-session.sh`) may commit only `BACKLOG.md` and `CHANGELOG.md`.
+- A session with no value is a dev session and may commit none of the four.
+- Any other value is refused as an unknown role.
+
+Commits from a terminal outside Claude Code are not checked. The first version of the check (same day) had a single docs role, `MATTGPT_DOCS_SESSION=1` from `scripts/docs-session.sh`, allowed all four files; it was split into the arch and backlog roles, and the value 1 is no longer accepted.
+
+**Rationale:**
+- Each docs pass writes only its own two files, so a commit from the wrong session is a mistake the hook can catch mechanically.
+- The hook sees the temporary index for `commit -a` and pathspec commits, so it catches doc files staged by another session.
+- Alternative kept alongside: instruction only (Document Ownership in CLAUDE.md). It stays, but it had no mechanical check.
+- Alternative rejected: three enforcement layers (a file-tool PreToolUse hook, a Bash allow list, and a commit-time check). Over-built; command-string parsing produced false positives.
+- Alternative rejected: a settings file with deny rules, loaded with `--settings`. Deny takes precedence over allow, so "allow four files, deny the rest" can't be expressed.
+- Alternative rejected: a separate git worktree for docs. It needs its own branch and a merge every cycle.
+- Alternative rejected: keep the passes in Cowork, fed by a git digest file or an automatically pushed sync branch. Local Cowork tasks end on 2026-10-06, and an automatic push bypasses the push gate and runs the pre-push test suite on every commit.
+- Alternative replaced: one docs role for all four files (the first version, same day). Split into arch and backlog roles so each pass can commit only its own two files.
+
+**Consequences:**
+- A docs pass must be launched through its script; the Architecture Sync and Backlog Maintenance skills check the role before starting.
+- Matt's own terminal commits bypass the check by design.
+
+---
+
+## ADR 028: Remove the CLAUDE.md Line Budget
+
+**Date:** 2026-10-04
+**Status:** Accepted
+**Related tickets:** None
+
+**Context:**
+The repo-rules pre-commit check counted `CLAUDE.md` lines on every commit and failed above 268.
+
+**Decision:**
+Remove the line budget from `.githooks/pre-commit`; the hook's name in `.pre-commit-config.yaml` drops "CLAUDE.md budget". `CLAUDE.md` stays small by holding current rules only, with history in `docs/ADR.md` or `CHANGELOG.md`. The em dash and hashed-class checks are unchanged. `ARCHITECTURE.md` size is reported, not enforced, by the `mattgpt-docs-check` skill.
+
+**Rationale:**
+- A line count limits length, not content; the content rule (current rules only) addresses what makes the file grow.
+- Alternative rejected: keep the 268-line check. It limits length, not content.
+- Alternative rejected: a hook blocking dates and ticket IDs in current-state files. The report-only `mattgpt-docs-check` skill reports them instead, along with `ARCHITECTURE.md` size.
+
+**Consequences:**
+- No mechanical limit on `CLAUDE.md` length; the docs check reports history markers in it.
+
+---
+
+## ADR 029: The Roadmap Lives in BACKLOG.md
+
+**Date:** 2026-10-04
+**Status:** Accepted
+**Related tickets:** None
+
+**Context:**
+ADR 006 chose Markdown files over Jira and named two files, `Backlog.md` and `Roadmap.md`, in `/docs`. `docs/Roadmap.md` was a 77-line phase roadmap committed once on 2025-09-12 and never updated. The backlog is `BACKLOG.md` at the repo root, and its Value Prioritized Roadmap section replaced the separate roadmap.
+
+**Decision:**
+Delete `docs/Roadmap.md`. `BACKLOG.md` at the repo root holds the backlog, and its Value Prioritized Roadmap section is the single roadmap. The choice of Markdown over Jira from ADR 006 stands. This supersedes ADR 006.
+
+**Rationale:**
+- Two roadmaps drift; the separate file had not been updated since it was committed.
+- Alternatives considered: not recorded in the commit.
+
+**Consequences:**
+- Roadmap changes go through the Backlog Maintenance pass with the rest of `BACKLOG.md`.
+- ADR 003 still names `Roadmap.md` in its context text; that reference is historical.
+
+---
+
+## ADR 030: Rule 0a's Direct No Is Scoped to Certifications
+
+**Date:** 2026-10-04
+**Status:** Accepted
+**Related tickets:** MATTGPT-268, MATTGPT-250, MATTGPT-252, MATTGPT-273
+
+**Context:**
+Citation rule 0a (`_CITATION_RULE_0A` in `ui/pages/ask_mattgpt/prompts.py`) told the LLM that for any category the profile holds, an item not in the list gets a direct no, followed by what the list does contain. `_PROFILE_CATEGORY_LIST` existed only to fill that sentence's category list. Asked whether Matt has a Computer Science degree, Ask Agy led with a no in 9 of 10 runs; with the category-wide sentence removed, 0 of 10.
+
+**Decision:**
+The sentence becomes "For certifications, an item not in the list gets a direct no, followed by what the list does contain." `_PROFILE_CATEGORY_LIST` is removed. `matt_profile.json` is unchanged.
+
+**Rationale:**
+- The category-wide clause made education answers lead with a no that Role Match does not give.
+- Alternative tried: delete the sentence outright. CS answers then led with a no in 0 of 40 runs, but PMP failed 10 of 20 direct phrasings: it answered "no" and narrated program-management stories with no certifications and no fact card.
+- Alternative tried: label the certifications line "(complete list)" in `load_matt_profile()`. PMP still failed 10 of 20.
+- Alternative tried: reword the AIU education note. The current wording gave 0 of 20 leading no; the April "satisfies requirements" wording gave 3 of 20 and broke PMP; a positive rewrite gave 3 of 20.
+- With the scoped sentence, CS led with a no in 8 of 50 runs, and PMP direct phrasings passed 20 of 20.
+
+**Consequences:**
+- Any direct-no wording in rule 0a leaks into education answers: in one batch, the scoped sentence gave 4 of 20 CS leading no, and 0 of 20 with it removed in memory. The CS leading no is reduced, not eliminated.
+- A follow-up such as "What about PMP" still pivots to stories, because `rag_answer()` takes no conversation history and profile-fact answers carry retrieved stories. That is MATTGPT-273.
+- The MATTGPT-268 Green commit names the probe output directories behind these counts. If MATTGPT-252 changes `generate_dynamic_dna()`, rerun this acceptance.
+
+---
+
+## ADR 031: Query Analytics Use a Google Sheets Logger, Not streamlit-analytics2
+
+**Date:** 2026-01-12 (streamlit-analytics2 removed); 2026-03-09 (Sheets logger enabled); 2026-10-05 (recorded)
+**Status:** Accepted
+**Related tickets:** None
+
+**Context:**
+`streamlit-analytics2` was added on 2026-01-10 and logged pageviews. On 2026-01-12 production failed with `AttributeError: st.session_state has no attribute "session_data"`, and the package and its dependencies were removed to restore stability.
+
+**Decision:**
+Query and page-load analytics go to Google Sheets through `services/query_logger.py`, using `gspread` and a service account, written on a fire-and-forget daemon thread. Enabled 2026-03-09 with an enriched schema.
+
+**Rationale:**
+- The third-party package broke production through its use of session state.
+- A logger owned by the repo controls its schema and failure behavior: `_append_row` never raises.
+- Alternatives considered: not recorded.
+
+**Consequences:**
+- The query logger is the only write path in the app.
+- Schema changes are append-only, enforced by the HEADERS invariants in `tests/unit/test_query_logger.py`.
+
+---
+
+## ADR 032: My Work Table Uses st.dataframe, Not AgGrid
+
+**Date:** 2026-06 (migrated); 2026-10-05 (recorded)
+**Status:** Accepted
+**Related tickets:** MATTGPT-144, MATTGPT-064
+
+**Context:**
+The My Work Table view rendered with AgGrid, which runs inside a separate iframe document. CSS injected into the parent page's `<head>` (everything in `global_styles.py`) stopped at the iframe boundary, so styling needed Python-side `rowStyle`, JS injection, and an `.ag-root-wrapper` guard (MATTGPT-064). The iframe intermittently failed to paint rows, leaving a blank grid. The AgGrid BDD suite stayed green while the grid was broken: its assertions were `pass` no-ops, and the one real assertion targeted `.ag-row` inside the iframe.
+
+**Decision:**
+Replace AgGrid with `st.dataframe` in the Table render path. AgGrid is not used by any live component. The ARCHITECTURE.md CSS pattern for AgGrid iframe styling is removed; its implementation is in git history if AgGrid is ever reintroduced.
+
+**Rationale:**
+- `st.dataframe` renders to a canvas in the main document, with no iframe, which removes the blank-grid failure mode and the iframe styling workarounds.
+- Alternatives considered: not recorded.
+
+**Consequences:**
+- Rows, cells, and selection controls are painted to a canvas, so BDD cannot assert row content, row rendering, or canvas-driven selection. Row rendering is covered by a manual visual check (a 20-click filter test). See st.dataframe Canvas Constraint in ARCHITECTURE.md.
+- `wait_for_load_state("networkidle")` never settles on a page with the grid; table steps use `wait_for_streamlit_rerun()`.
+- Whole-row click or keyboard row selection requires self-rendered HTML rows (the Cards pattern).

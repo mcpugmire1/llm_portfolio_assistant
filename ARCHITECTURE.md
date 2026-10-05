@@ -1,18 +1,16 @@
 # Architecture Documentation
 
-> **Naming convention note (May 30-31, 2026 — MATTGPT-100 + MATTGPT-106 + MATTGPT-107):**
+> **Naming note:** User-facing labels and `session_state["active_tab"]` routing values differ from module names:
 >
-> Display labels were renamed via Strategy B (coordinated rename across UI labels + `session_state["active_tab"]` routing values):
+> | Display label | session_state value | Module/file name |
+> |---|---|---|
+> | **My Work** | `"My Work"` | `ui/pages/explore_stories.py` |
+> | **Ask Agy** | `"Ask Agy"` | `ui/pages/ask_mattgpt/` |
+> | **My Profile** | `"My Profile"` | `ui/pages/about_matt.py` |
 >
-> | Old display label | New display label | session_state value | Module/file name |
-> |---|---|---|---|
-> | Explore Stories | **My Work** | `"My Work"` | `ui/pages/explore_stories.py` (unchanged) |
-> | Ask MattGPT | **Ask Agy** | `"Ask Agy"` | `ui/pages/ask_mattgpt/` (unchanged) |
-> | About Matt | **My Profile** | `"My Profile"` | `ui/pages/about_matt.py` (unchanged) |
+> Streamlit converts spaces in keys to dashes for CSS classes: `key="topnav_My Work"` produces class `st-key-topnav_My-Work`. References below to "Ask MattGPT", "Explore Stories", or "About Matt" as module, function, or package names (e.g., `ask_mattgpt_header.py`, `render_about_matt()`, `tests/bdd/features/about_matt.feature`) refer to the code structure; the user-facing labels are the ones in the table.
 >
-> Streamlit converts spaces in keys to dashes for CSS classes: `key="topnav_My Work"` produces class `st-key-topnav_My-Work`. References below to "Ask MattGPT", "Explore Stories", or "About Matt" as MODULE / FUNCTION / PACKAGE names (e.g., `ask_mattgpt_header.py`, `render_about_matt()`, `tests/bdd/features/about_matt.feature`) refer to the unchanged code structure — only the user-facing labels and routing values changed.
->
-> Additionally: Home navbar is now brand-left + space-between layout (MATTGPT-106); category cards are 3-col grid with unified light-bg treatment and whole-card click targets (MATTGPT-107).
+> The Home navbar uses a brand-left, space-between layout; category cards are a 3-column grid with a unified light background and whole-card click targets.
 
 ## Table of Contents
 
@@ -30,7 +28,7 @@
   - [Stage 2: Semantic Tag Generation](#stage-2-semantic-tag-generation)
   - [Stage 3: Embedding Generation](#stage-3-embedding-generation)
   - [Production RAG Pipeline](#production-rag-pipeline)
-  - [Component Contracts (Ask Agy)](#component-contracts-updated-january-2026)
+  - [Component Contracts (Ask Agy)](#component-contracts)
   - [Role Match / JD Assessment Pipeline](#role-match--jd-assessment-pipeline)
   - [Key Services](#key-services)
   - [Cost & Performance](#cost--performance)
@@ -42,7 +40,7 @@
 - [Data Governance & Master Source](#data-governance--master-source)
   - [Principle](#principle)
   - [Hybrid Sovereignty Model](#hybrid-sovereignty-model)
-  - [January 2026 Sovereignty Patterns](#january-2026-sovereignty-patterns)
+  - [Sovereignty Patterns](#sovereignty-patterns)
     - [Dynamic Identity (MATT_DNA)](#1-dynamic-identity-matt_dna)
     - [Multi-Field Entity Search](#2-multi-field-entity-search)
     - [UI Hydration](#3-ui-hydration)
@@ -68,7 +66,7 @@
 - [Future Enhancements](#future-enhancements)
 
 ### 📊 Appendix: RAG Pipeline Audit
-- [RAG Pipeline Audit (January 2026)](#rag-pipeline-audit-january-2026)
+- [RAG Pipeline Audit](#rag-pipeline-audit)
   - [Embedding Analysis](#embedding-analysis)
   - [Architecture Issues](#architecture-issues)
   - [Hardcoded Values Audit](#hardcoded-values-audit)
@@ -80,7 +78,6 @@
 **Project:** MattGPT Portfolio Assistant - AI-powered career story search and chat interface
 **Tech Stack:** Streamlit, OpenAI GPT-4o, Pinecone vector DB, Python 3.11+
 **Data Corpus:** 100+ STAR-formatted transformation project stories
-**Last Updated:** September 29, 2026
 
 ### What This Document Contains
 
@@ -102,7 +99,7 @@
 The MattGPT Portfolio Assistant is built with a component-based architecture emphasizing separation of concerns and modularity.
 
 llm_portfolio_assistant/
-├── app.py                          # Application entry (466 lines as of Aug 2026): router, load_star_stories, first-mount telemetry, UTM parsing, deep-link handling, nav-slug mapping, _clear_explore_state, build_facets
+├── app.py                          # Application entry: router, load_star_stories, first-mount telemetry, UTM parsing, deep-link handling, nav-slug mapping, _clear_explore_state, build_facets
 │
 ├── config/
 │   ├── __init__.py
@@ -138,7 +135,7 @@ llm_portfolio_assistant/
 │   │   ├── ask_mattgpt_header.py      # Unified Ask MattGPT header
 │   │   ├── why_agy_dialog.py          # "Why Agy?" @st.dialog (identity + origin story)
 │   │   ├── how_agy_dialog.py          # "How Agy Searches" @st.dialog (3-step RAG flow)
-│   │   ├── how_i_built_dialog.py      # "How I Built MattGPT" @st.dialog (MATTGPT-102)
+│   │   ├── how_i_built_dialog.py      # "How I Built MattGPT" @st.dialog
 │   │   ├── category_cards.py          # Landing page capability cards
 │   │   ├── hero.py                    # Hero section component
 │   │   ├── lock_icon.py               # Private-view gate (popover + password, fail-closed)
@@ -271,7 +268,7 @@ def handle_ask_about_this(detail: dict):
     st.session_state["active_story_obj"] = detail
     st.session_state["__ctx_locked__"] = True
     st.session_state["__ask_from_suggestion__"] = True
-    st.session_state["active_tab"] = "Ask Agy"  # was "Ask MattGPT" pre-MATTGPT-100
+    st.session_state["active_tab"] = "Ask Agy"
     st.rerun()
 ```
 
@@ -292,7 +289,7 @@ MAX_STORIES_PER_ERA = 6
 # "View in Explore" navigation
 st.session_state["prefilter_era"] = era_name
 st.session_state["prefilter_view_mode"] = "table"
-st.session_state["active_tab"] = "My Work"  # was "Explore Stories" pre-MATTGPT-100
+st.session_state["active_tab"] = "My Work"
 ```
 
 ---
@@ -319,8 +316,8 @@ if st.button(label, key=f"chip_{idx}"):
 **Use when:** The clickable element must be a raw HTML element (not a Streamlit button), and per-element `onclick` would die on React reconciliation.
 
 **Canonical examples:**
-- `ui/components/how_i_built_dialog.py` — `.hib-cta-prompt` chips (MATTGPT-117)
-- `ui/pages/about_matt.py` — Copy snippet + Download PDF spans (MATTGPT-118)
+- `ui/components/how_i_built_dialog.py`: `.hib-cta-prompt` chips
+- `ui/pages/about_matt.py`: Copy snippet + Download PDF spans
 - `ui/pages/explore_stories.py` — Cards view delegated listener
 
 **Key rules:**
@@ -357,17 +354,17 @@ components.html("""
 [class*='st-key-am_download_pdf'] { display: none !important; }
 ```
 
-**Why NOT per-element `onclick`:** React's `dangerouslySetInnerHTML` reconciliation replaces inner DOM nodes on every Streamlit rerun, killing per-element event bindings from the `components.html` iframe's JS context. Delegates on `parentDoc` survive because `parentDoc` is never replaced. See April 2026 incident in CLAUDE.md.
+**Why NOT per-element `onclick`:** React's `dangerouslySetInnerHTML` reconciliation replaces inner DOM nodes on every Streamlit rerun, killing per-element event bindings from the `components.html` iframe's JS context. Delegates on `parentDoc` survive because `parentDoc` is never replaced.
 
 #### Pattern 3 — Per-element `addEventListener` (deprecated, do not use)
 
-Legacy pattern — per-element bindings inside `components.html` iframes. Dies on Streamlit rerun (iframe is recreated, destroying the JS context). **Do not introduce new instances.** See CLAUDE.md "Interactive Click Handling — STOP, Read This First" for the full incident history.
+Per-element bindings inside `components.html` iframes. Dies on Streamlit rerun (iframe is recreated, destroying the JS context). **Do not introduce new instances.** See Interactive Click Handling in `.claude/rules/streamlit-ui.md`.
 
 ---
 
 ### My Profile Page (`ui/pages/about_matt.py`)
 
-**MATTGPT-118 (June 2026):** Added Copy snippet + Download PDF interaction to the "For a referrer" section.
+The "For a referrer" section has two interactions, Copy snippet and Download PDF.
 
 - **Copy snippet:** HTML `<span id="am-copy-snippet-btn">` wired via Pattern 2 delegated listener. Calls `window.parent.navigator.clipboard.writeText()`. Both `.then` and `.catch` change the span label to `✓ Copied!` (green, 2s timeout) so feedback fires regardless of clipboard permission state.
 - **Download PDF:** HTML `<span id="am-download-pdf-btn">` → JS finds `[class*="st-key-am_download_pdf"] button` → `.click()` → Streamlit rerun → Python handler opens `window.open` + `printWindow.print()` with a full printable HTML doc (signals, voice, competencies, How I Lead, career timeline). Pattern matches `action_buttons.py`.
@@ -515,7 +512,7 @@ DRY_RUN=False  # Set to True for preview
 def build_embedding_text(story):
     """
     Combines multiple fields into rich semantic representation:
-    - Title (improves keyword matching)  # Added Jan 2026
+    - Title (improves keyword matching)
     - Theme + Industry + Sub-category (behavioral context)
     - 5P Summary (concise overview)
     - Use Case(s) (600 chars) — front-loaded; strongest retrieval signal
@@ -573,7 +570,7 @@ PINECONE_NAMESPACE=default
 
 ### Production RAG Pipeline
 
-**Query → Response Trace (Updated Jan 29, 2026):**
+**Query → Response Trace:**
 
 ```
 User Query
@@ -649,7 +646,7 @@ User Response
 
 ---
 
-## Component Contracts (Updated January 2026)
+## Component Contracts
 
 This section defines the **job, rules, and constraints** for each retrieval component. Update this when changing retrieval logic.
 
@@ -660,13 +657,13 @@ This section defines the **job, rules, and constraints** for each retrieval comp
 - **Lives in:** `nonsense_filters.jsonl` + `utils/validation.py:is_nonsense()`
 - **Cost:** Zero (pure regex, no API calls)
 - **Rule:** Runs FIRST before any embedding or LLM cost
-- **Categories (Aug 2026):** `celebrity_earnings` (salary/net-worth questions about named public figures), `recruiter_logistics` (compensation range or expectation questions framed as recruiter screens), `personal_compensation` (Matt's own pay). `personal_compensation` uses two patterns: a broad-vocabulary pattern covering salary terminology and a contextual pattern covering indirect phrasings ("how much money does he make"). Two patterns are needed because the indirect form bypasses the broad-vocabulary match. `recruiter_logistics` was reduced to compensation-only in Sept 2026: four location/relocation/start-date/availability patterns were removed when those topics moved to the profile fact surface. Only the salary/compensation expectation pattern remains.
+- **Categories:** `celebrity_earnings` (salary/net-worth questions about named public figures), `recruiter_logistics` (compensation range or expectation questions framed as recruiter screens), `personal_compensation` (Matt's own pay). `personal_compensation` uses two patterns: a broad-vocabulary pattern covering salary terminology and a contextual pattern covering indirect phrasings ("how much money does he make"). Two patterns are needed because the indirect form bypasses the broad-vocabulary match. `recruiter_logistics` covers compensation only; location, relocation, start-date, and availability questions are answered from the profile fact surface.
 
 #### Semantic Router
 - **Job:** Embedding-based intent classification to reject borderline off-topic queries
 - **Lives in:** `services/semantic_router.py`
-- **Thresholds:** HARD_ACCEPT=0.80, SOFT_ACCEPT=0.40 (calibrated Jan 2026)
-- **Intent Families:** 15 families (background, behavioral, delivery, team_scaling, leadership, technical, domain_payments, domain_healthcare, stakeholders, innovation, agile_transformation, narrative, synthesis, out_of_scope, personal). The `personal` "Where does Matt live" anchor was removed from `data/intent_embeddings.json` in Sept 2026 (134 keys after regeneration).
+- **Thresholds:** HARD_ACCEPT=0.80, SOFT_ACCEPT=0.40
+- **Intent Families:** 15 families (background, behavioral, delivery, team_scaling, leadership, technical, domain_payments, domain_healthcare, stakeholders, innovation, agile_transformation, narrative, synthesis, out_of_scope, personal). `data/intent_embeddings.json` holds 134 anchor phrases.
 - **Cost:** ~$0.0000002 per query (one embedding)
 - **Rule:** Fail-open on errors (accept query if embedding fails)
 - **Do not remove:** Saves LLM cost, prevents garbage-in
@@ -729,7 +726,7 @@ Structured logs added to diagnose "I can't help with that" issues in production.
   ]}
   ```
 - **Why:** Fixes "entity blind spot" where stories with `Client="Confidential"` but `Employer="Accenture"` weren't found
-- **⚠️ Note (Feb 2026, verified Aug 2026):** `get_synthesis_stories()` uses PascalCase `"Theme"` in Pinecone filters (`backend_service.py` lines ~598, ~621). This works because Pinecone metadata was uploaded with PascalCase `Theme` key, but is inconsistent with the lowercase field name convention used elsewhere. If entity-scoped synthesis returns unexpected zero results, check this field name casing first.
+- **⚠️ Note:** `get_synthesis_stories()` in `backend_service.py` uses PascalCase `"Theme"` in its Pinecone filters. This works because Pinecone metadata was uploaded with PascalCase `Theme` key, but is inconsistent with the lowercase field name convention used elsewhere. If entity-scoped synthesis returns unexpected zero results, check this field name casing first.
 
 #### Excluded Entities & Clients
 
@@ -912,15 +909,13 @@ Default (client-based) — standard/behavioral modes:
   - For slots #2+: named clients first, then generic, then duplicates
   - `max_per_client` is accepted but never read. Prioritizes one story
     per client; additional same-client stories appended, not dropped.
-    See MATTGPT-187.
-  - NO cross-query session state — deterministic per query (MATTGPT-073)
+  - NO cross-query session state: deterministic per query (ADR 019)
 
-family="background" branch (MATTGPT-208, Aug 2026):
+family="background" branch:
   - Groups by Era instead of Client
   - Why: client-based diversify treats each Client value as distinct,
     so four Wellfound engagements filled four slots while collapsing to
-    one era. Verified Aug 24 -- Q_BROAD returned 6 of 7 slots from
-    Technical Foundations before this fix.
+    one era.
   - Caps: <=1 Professional Narrative (counting pin), <=1 Independent
     Project. ENGAGE era-duplicates fill remaining slots up to 7 by
     blend order.
@@ -964,9 +959,9 @@ Synthesis: up to 9 (3 per theme × 3 themes)
 - 4 synthesis closings ("Which pattern would you like to explore?", etc.)
 - 6 focus angles: human impact, methodology, scale, leadership, outcomes, innovation
 
-**MATT_DNA Ground Truth** (dynamically generated from JSONL — January 2026):
+**MATT_DNA Ground Truth** (dynamically generated from JSONL):
 
-The `MATT_DNA` grounding prompt is now generated dynamically via `generate_dynamic_dna()` in `backend_service.py`. Client names are derived from the JSONL story data, ensuring the prompt never drifts from the source of truth.
+The `MATT_DNA` grounding prompt is generated dynamically via `generate_dynamic_dna()` in `backend_service.py`. Client names are derived from the JSONL story data, ensuring the prompt never drifts from the source of truth.
 
 **Dynamic Elements (derived from JSONL):**
 - **Banking clients:** Derived from stories where `Industry = "Financial Services / Banking"`
@@ -978,7 +973,7 @@ The `MATT_DNA` grounding prompt is now generated dynamically via `generate_dynam
 Identity: "I build what's next, modernize what's not, and grow teams along the way."
 
 Career Arc: Software Engineer → Solution Architect → Director → CIC Leader
-- Accenture: March 2005 - September 2023  # "(18+ years)" annotation is frozen from curation date, not a live computation. Do not restate a year count here -- it will become inaccurate. Duration derives from the date range. (MATTGPT-157-adjacent: same pattern of a computed value hardcoded where it will drift.)
+- Accenture: March 2005 - September 2023  # Duration derives from the date range. Do not restate a year count here; it drifts.
 - Built CIC from 0 to 150+ practitioners
 
 Themes of Matt's Work (dynamically derived from JSONL Theme field):
@@ -1108,7 +1103,7 @@ st.session_state["active_story"] = story_id                      # Story ID for 
 st.session_state["active_story_obj"] = story_dict                # Full story object
 st.session_state["__ctx_locked__"] = True                        # Lock context to this story
 st.session_state["__ask_from_suggestion__"] = True               # Bypass off-domain filters
-st.session_state["active_tab"] = "Ask Agy"  # was "Ask MattGPT" pre-MATTGPT-100. Navigate to Ask Agy
+st.session_state["active_tab"] = "Ask Agy"  # Navigate to Ask Agy
 st.rerun()
 ```
 
@@ -1132,7 +1127,7 @@ if st.session_state.get("__ctx_locked__"):
 # Used by banking_landing.py, cross_industry_landing.py → Explore Stories
 st.session_state["prefilter_industry"] = "Financial Services"
 st.session_state["prefilter_capability"] = "Platform Engineering"
-st.session_state["active_tab"] = "My Work"  # was "Explore Stories" pre-MATTGPT-100
+st.session_state["active_tab"] = "My Work"
 
 # Consumed in explore_stories.py BEFORE widgets render
 if "prefilter_industry" in st.session_state:
@@ -1141,11 +1136,11 @@ if "prefilter_industry" in st.session_state:
 
 **Key Rule:** Set prefilters BEFORE the target page renders, then `pop()` to consume them. Never modify widget-bound session state after the widget renders.
 
-### UI Hydration Pattern (January 2026)
+### UI Hydration Pattern
 
-Landing pages now receive the full `stories` list and compute counts dynamically at render time. This ensures metrics never drift from the JSONL source of truth.
+Landing pages receive the full `stories` list and compute counts dynamically at render time. This ensures metrics never drift from the JSONL source of truth.
 
-**Updated Function Signatures:**
+**Function Signatures:**
 ```python
 # app.py passes STORIES to all landing pages
 render_home_page(STORIES)
@@ -1177,11 +1172,11 @@ def render_banking_landing(stories: list[dict]):
 | `category_cards.py` | Banking/Cross-industry project counts, top 3 client pills |
 | `home.py` | Passes STORIES to category_cards |
 
-**Note on the data-derived card pattern** (Phase 2 refactor, May 11-12, 2026): banking_landing.py and cross_industry_landing.py no longer hardcode capability card lists. Cards are derived at runtime from the story corpus by `build_landing_cards(stories, industry)` — eliminates by construction the regression shape where a hardcoded card promises a curated slice that doesn't exist in the data. See `utils/landing_cards.py` and CHANGELOG May 11-12 entries.
+**Data-derived capability cards:** banking_landing.py and cross_industry_landing.py derive capability cards at runtime from the story corpus with `build_landing_cards(stories, industry)` in `utils/landing_cards.py`, so a card cannot promise a curated slice that doesn't exist in the data.
 
 **Excluded Clients:** "Career Narrative", "Independent", "Multiple Clients" (excluded from counts and pills)
 
-**Why:** Previously had hardcoded counts like "12 projects" that drifted as JSONL changed. Now counts are always accurate.
+**Why:** Counts are computed from the JSONL at render time, so they cannot drift from the data.
 
 ### Explore Stories Search Architecture
 
@@ -1235,13 +1230,13 @@ LAST_QUERY = "__explore_last_query__"         # Query that produced cache
 - Clients, Domains, Roles → IN list (OR logic)
 - q (keyword) → token-based ALL match on Title, Client, Purpose, Process, Performance, tags
 
-### Explore Stories Two-Row Filter Bar (MATTGPT-065)
+### Explore Stories Two-Row Filter Bar
 
-**Shipped:** June 2026. Replaced the collapsible "▸ Advanced Filters" toggle with a permanent two-row filter bar.
+The filter bar is a permanent two-row layout.
 
-**Row 1 (unchanged):** Search box + Industry selectbox + Capability selectbox — `st.columns([2, 1, 1])`.
+**Row 1:** Search box + Industry selectbox + Capability selectbox, in `st.columns([2, 1, 1])`.
 
-**Row 2 (new):** Client + Role + Domain selectboxes + Reset button — always visible on desktop, hidden on mobile via CSS.
+**Row 2:** Client + Role + Domain selectboxes + Reset button, always visible on desktop, hidden on mobile via CSS.
 
 ```python
 # Row 2 container key — used for CSS mobile-hide
@@ -1256,9 +1251,9 @@ with st.container(key="r2_row"):
 
 **CSS mobile pattern** (in `global_styles.py`):
 
-- `[class*="st-key-r2_row"]` hidden on mobile; `[class*="st-key-r2_row_open"]` shown when toggle is active (MATTGPT-119, shipped June 2026).
-- `es_mobile_filters_toggle` button (full-width) sits between Row 1 and Row 2, toggles `es_mobile_r2_open` session state (MATTGPT-119).
-- Row 2 on mobile: 3-column grid, Streamlit labels hidden, field names injected via `::before` pseudo-element on the select control (MATTGPT-123, shipped June 2026).
+- `[class*="st-key-r2_row"]` hidden on mobile; `[class*="st-key-r2_row_open"]` shown when toggle is active.
+- `es_mobile_filters_toggle` button (full-width) sits between Row 1 and Row 2, toggles `es_mobile_r2_open` session state.
+- Row 2 on mobile: 3-column grid, Streamlit labels hidden, field names injected via `::before` pseudo-element on the select control.
 
 **Widget key versioning:** Row 2 selectboxes use `key=f"r2_{field}_v{version}"` so the Reset button can force a widget rebuild by incrementing `st.session_state["_widget_version_clients"]` (and `_roles`, `_domains` equivalents). Without versioning, Streamlit re-uses the old widget value even after session state is cleared.
 
@@ -1294,7 +1289,7 @@ Stage 3 is parallelized via `asyncio.as_completed` at `_CONCURRENCY = 10` in `_f
 
 #### Retrieval Parameters
 
-`DEFAULT_TOP_K = 5`, raised from 3 on July 31, 2026. The mismatch that surfaced the calibration gap: Role Match was retrieving at TOP_K=3 while Ask Agy retrieves 10 stories, passes them through `diversify_results()` (which returns 7), and feeds 5 to the LLM. Two surfaces reading at different depths -- Role Match underretrieved relative to Ask Agy's calibrated depth.
+`DEFAULT_TOP_K = 5` (in `services/jd_assessor.py`) matches the depth Ask Agy feeds the LLM: Ask Agy retrieves 10 stories, passes them through `diversify_results()` (which returns 7), and feeds 5 to the LLM.
 
 `retrieve_stories` propagates `None` from `pinecone_semantic_search`'s outage signal rather than collapsing it to `[]`. The `None`/`[]` distinction is the only signal `_assess_one_with_index` has to separate a Pinecone outage (Mode 2) from a real empty match (Mode 3). Do not add `if not results: return []` here.
 
@@ -1309,7 +1304,7 @@ Four failure modes at `_assess_one_with_index`, each with a distinct log phrase 
 
 Unassessed row shape (Mode 1/2): `match_status="unassessed"`, `category` and `requirement` from source, empty evidence, per-mode `gap_explanation`.
 
-#### Progressive Row Rendering (MATTGPT-245)
+#### Progressive Row Rendering
 
 The Role Match page doesn't call `run_assessment`. Its submit branch calls `extract_requirements` → `_flatten_extraction` → `_fan_out_assessments(..., on_row=...)` directly, and draws in between:
 
@@ -1373,10 +1368,10 @@ Bot filter: `is_bot()` in `query_logger.py` checks User-Agent against `MONITORIN
 
 ### Known Limitations
 
-1. **Synthesis + specific topic:** "Tell me about Matt's rapid prototyping work" classified as synthesis but should find the specific rapid prototyping story. Current workaround: synthesis now uses user query embedding.
+1. **Synthesis + specific topic:** "Tell me about Matt's rapid prototyping work" classified as synthesis but should find the specific rapid prototyping story. Current workaround: synthesis uses the user query embedding.
 2. **Ground truth fidelity:** LLM paraphrases instead of quoting verbatim despite `[[CORE BRAND DNA]]` markers.
 3. **Deprecated documentation:** `mattgpt_system_prompt.md` documents the original "MattGPT" persona (pre-Agy). The current Agy voice is documented in this file under Component Contracts → Agy Voice Generator.
-4. **LLM stochasticity:** Eval may show occasional failures due to LLM response variability. Re-running typically passes. Semantic similarity scoring would address this (see BACKLOG.md → MATTGPT-035 (Eval Modernization: Semantic Scoring)).
+4. **LLM stochasticity:** Eval may show occasional failures due to LLM response variability. Re-running typically passes. Semantic similarity scoring would address this; see BACKLOG.md.
 5. **"Where does Matt live" stops at the confidence gate.** Score 0.242 is below CONFIDENCE_HIGH=0.25, so Ask Agy refuses while My Work lists the closest stories.
 
 ---
@@ -1552,7 +1547,7 @@ Retrieval is driven primarily by Use Case(s) and 5P Summary; STAR fields provide
 | **client_utils.py** | Client classification | `is_generic_client()` — pattern-based detection of placeholder clients |
 | **validation.py** | Query validation, tokenization, nonsense detection | `is_nonsense()`, `_tokenize()`, `token_overlap_ratio()` |
 | **filters.py** | Story filtering for Explore Stories | `matches_filters(story, filters)` |
-| **formatting.py** | Story presentation, metric extraction | `strongest_metric_line()` (no reachable caller, but load-bearing for `_format_key_points` and `_format_narrative` -- do not delete; MATTGPT-179), `build_5p_summary()` (live), `story_has_metric()` (dead filter path -- nothing in the UI sets `has_metric`; and broken if called -- reads `what`/`star.result`, fields never present in the corpus; MATTGPT-183), `_format_narrative()` / `_format_key_points()` / `_format_deep_dive()` (unreachable -- typed alias map at `conversation_view.py:305-312` and Deep Dive pill at `conversation_helpers.py:395` are both orphaned; MATTGPT-179) |
+| **formatting.py** | Story presentation, metric extraction | `strongest_metric_line()` (no reachable caller, but load-bearing for `_format_key_points` and `_format_narrative`; do not delete), `build_5p_summary()` (live), `story_has_metric()` (dead filter path: nothing in the UI sets `has_metric`; and broken if called: reads `what`/`star.result`, fields never present in the corpus), `_format_narrative()` / `_format_key_points()` / `_format_deep_dive()` (unreachable: the typed alias map `cmd_map` in `render_conversation_view()` and the Deep Dive pill in `_render_ask_transcript()` are both orphaned) |
 | **scoring.py** | Hybrid scoring (semantic + keyword) | `_keyword_score_for_story()`, `_hybrid_score()` |
 | **ui_helpers.py** | Debug logging, branch-aware rejection banner | `dbg()`, `safe_container()`, `render_no_match_banner()`, `BANNER_COPY` / `RULE_CHIPS` / `PERSONAL_CHIPS` / `OUT_OF_SCOPE_CHIPS` |
 
@@ -1621,7 +1616,7 @@ Title, Client, Role, Sub-category, Competencies (joined), public_tags (joined), 
 
 **Query Substitution (`_substitute_matt_subject`):**
 
-Lives in `utils/scoring.py`, controlled by `SUBSTITUTION_FAMILIES` in `config/constants.py`. Replaces "Matt" with "he" and "Matt's" with "his" in the retrieval query so self-referential name tokens don't bias embeddings toward Independent Project stories. The LLM receives the original query verbatim; only the retrieval string is modified. Enabled families (Aug 2026): `technical`, `team_scaling`, `agile_transformation`.
+Lives in `utils/scoring.py`, controlled by `SUBSTITUTION_FAMILIES` in `config/constants.py`. Replaces "Matt" with "he" and "Matt's" with "his" in the retrieval query so self-referential name tokens don't bias embeddings toward Independent Project stories. The LLM receives the original query verbatim; only the retrieval string is modified. Enabled families: `technical`, `team_scaling`, `agile_transformation`.
 
 **Constraint:** Adding or removing a family from `SUBSTITUTION_FAMILIES` changes which queries reach the substituted-string path through both the embedding and keyword scorer. Impact must be re-measured before the change is committed. `probe_163_substitution_impact.py` at repo root runs that measurement: compares top-10 Pinecone hits on original vs. substituted strings for a query set, printing rank-delta and score-delta per story. Attach the output to the commit.
 
@@ -1661,9 +1656,8 @@ def infer_story_theme(story: dict) -> str:
     """Get theme from story's Theme field (defaults to THEME_EXECUTION)."""
 
 def get_theme_guidance(theme: str) -> str:
-    """⚠️ DEPRECATED (Jan 26, 2026) - No longer imported by backend_service.py.
-    Had conflicting 'Emphasize:' instructions that caused meta-commentary.
-    Kept for backward compatibility but not used in production."""
+    """No production caller: its call in backend_service.py is commented out.
+    Had conflicting 'Emphasize:' instructions that caused meta-commentary."""
 
 def build_story_context_for_rag(story: dict) -> str:
     """Build WHY→HOW→WHAT context string for RAG prompt injection."""
@@ -1674,7 +1668,7 @@ def get_theme_emoji(theme: str) -> str:
 
 ---
 
-### prompts.py ✅ NEW (Jan 26, 2026)
+### prompts.py
 
 Clean prompt architecture that prevents meta-commentary by keeping Agy in REPORTING mode, not evaluation mode.
 
@@ -1727,7 +1721,7 @@ def get_verbatim_requirement(summary: str) -> str:
 
 Rule 0a instructs the LLM to place `[[profile:<category>]]` on its own line before the closing line, once per category stated. `_extract_profile_markers(text)` in `backend_service.py` strips these markers from the raw LLM output before bolding and meta-strip run, and returns `(cleaned_text, cited_categories)` in first-cited order. Unknown markers (`[[profile:patents]]`, malformed forms) are removed without adding a category. A line holding only markers is dropped together with the blank line before it. The marker instruction is part of rule 0a's text, so it reaches the LLM whenever `build_user_message()` appends rule 0a (i.e., when `profile_facts` is non-empty).
 
-**Sources Fact Cards (MATTGPT-250):**
+**Sources Fact Cards:**
 
 `_sources_layout(categories, sources, is_synthesis)` in `conversation_helpers.py` returns `{"show_label": True, "fact_cards": list(categories), "story_count": min(len(sources), cap)}`. Fact cards do not count toward the story cap.
 
@@ -1847,10 +1841,10 @@ Defined in `ui/styles/global_styles.py`. Use these instead of hardcoding colors.
 |------|---------|
 | `eval_rag_quality.py` | RAG quality evaluation against ground truth |
 | `test_agy_behavior.py` | Agy response behavior tests |
-| `test_structural_assertions.py` | ✅ NEW: Meta-commentary, voice, and drift checks |
+| `test_structural_assertions.py` | Meta-commentary, voice, and drift checks |
 
-**Current Status (March 2026):**
-- RAG quality: 70/70 (100%) as of Aug 8–9, 2026 runs — 64 unique queries across 8 categories; Q43-Q49 parametrized. See Known Limitations re: LLM stochasticity.
+**Last measured:**
+- RAG quality: 70/70 (100%), Aug 8–9, 2026 runs; 64 unique queries across 8 categories; Q43-Q49 parametrized. See Known Limitations re: LLM stochasticity.
 - Structural: 93-97% pass rate (meta-commentary varies with LLM stochasticity)
 
 **eval_rag_quality.py:**
@@ -1907,7 +1901,7 @@ META_PATTERNS = [
 
 ---
 
-### Error Handling Patterns (Updated Jan 29, 2026)
+### Error Handling Patterns
 
 **Layer 1 (Validation):**
 - `is_nonsense()` → Returns rejection message with category
@@ -1933,8 +1927,6 @@ META_PATTERNS = [
   "🐾 I need a quick breather — try again in about 15 seconds!"
   ```
 
-**Removed (Jan 29, 2026):** `classify_query_intent()` error handling — function deleted.
-
 **UI Error Handling:**
 - `send_to_backend()` wraps all errors in try/except
 - Failed responses show generic error message
@@ -1950,23 +1942,17 @@ META_PATTERNS = [
 
 Query logging to Google Sheets, capturing enriched data for every search across Ask MattGPT and Explore Stories.
 
-**History:**
-| Date | Action | Outcome |
-|------|--------|---------|
-| Jan 10, 2026 | Added `streamlit-analytics2` | Working initially (3 pageviews logged) |
-| Jan 12, 2026 | Production failure | `AttributeError: st.session_state has no attribute "session_data"` |
-| Jan 12, 2026 | Removed analytics + dependencies | Quick fix to restore production stability |
-| Mar 9, 2026 | Re-enabled with Google Sheets logger | Enriched schema, fire-and-forget threading |
+See ADR 031 in `docs/ADR.md` for why analytics is a Google Sheets logger rather than `streamlit-analytics2`.
 
 **Architecture:**
 - **Service:** `services/query_logger.py`
 - **Backend:** Google Sheets via `gspread` + Google service account
 - **Threading:** Fire-and-forget daemon thread -- Google Sheets API latency never blocks user response
-- **Error handling:** `_append_row` never raises. Both failure paths emit `WARNING` logs so a missing Sheet row is diagnosable from terminal output: `"[query_logger] Sheet write skipped: get_sheet() returned None ..."` (credentials/client init path); `"[query_logger] Sheet write failed: ..."` (exception path). Module-level `logger` added Sept 2026.
+- **Error handling:** `_append_row` never raises. Both failure paths emit `WARNING` logs so a missing Sheet row is diagnosable from terminal output: `"[query_logger] Sheet write skipped: get_sheet() returned None ..."` (credentials/client init path); `"[query_logger] Sheet write failed: ..."` (exception path).
 - **Browser context:** Captured in main Streamlit thread before spawning daemon (`st.context` is thread-local)
 - **`_build_row` central injection:** All log functions call `_build_row(event_type, **fields)`. `Env` is injected centrally here via `get_conf("MATTGPT_ENV", "local")` -- no call-site changes required when a new event type is added.
 - **`log_role_match_gate_rejection`:** Distinct function and event type for non-JD paste rejections. All count columns explicit `"0"` (not empty -- empty carries the historical semantic of "column did not exist yet").
-- **Session ID semantics:** `log_page_load` also writes Session ID (Sept 2026, commit c8d0983). Previously Role Match only. Enables session-grouping analytics across page load and query events.
+- **Session ID semantics:** `log_page_load` and the Role Match events write Session ID, which enables session-grouping analytics across page load and query events.
 
 **Schema (44 columns -- source of truth: `services/query_logger.py:HEADERS`):**
 
@@ -1999,7 +1985,7 @@ Core event columns (all event types):
 | UTM Content | query string | Campaign tracking |
 | UTM Term | query string | Campaign tracking |
 
-Role Match columns (added April 2026):
+Role Match columns:
 | Column | Notes |
 |--------|-------|
 | Role Title | JD-extracted role |
@@ -2015,7 +2001,7 @@ Role Match columns (added April 2026):
 | Client | Matched story client |
 | Top Score | Top Pinecone score for the assessment |
 
-Sept 2026 additions (appended, not inserted):
+Appended columns (positions 35-43, appended, not inserted):
 | Column | Notes |
 |--------|-------|
 | Unassessed Count | Requirements not assessed (Mode 1 or Mode 2 failure) |
@@ -2034,7 +2020,7 @@ Sept 2026 additions (appended, not inserted):
 
 Two tests enforce append-only discipline:
 
-- **Prefix pin** (`test_headers_prefix_matches_historical_snapshot`): Asserts `HEADERS[:35]` matches a frozen 35-entry snapshot (positions 0-34, frozen at the -086 landing, Sept 2026). Catches insertions or renames within the historical columns. The snapshot does NOT extend for new columns -- an ever-growing snapshot becomes a running count, not a historical record.
+- **Prefix pin** (`test_headers_prefix_matches_historical_snapshot`): Asserts `HEADERS[:35]` matches a frozen 35-entry snapshot (positions 0-34). Catches insertions or renames within the historical columns. The snapshot does NOT extend for new columns -- an ever-growing snapshot becomes a running count, not a historical record.
 - **Length pin** (`test_headers_length_matches_current_schema`): Asserts `len(HEADERS) == _CURRENT_SCHEMA_LENGTH` (currently 44). Covers positions 35+ where the prefix doesn't reach. Update `_CURRENT_SCHEMA_LENGTH` once per ticket that changes HEADERS; the prefix stays frozen.
 
 Together: a mid-list insert shifts positions 0-34 (prefix fails) and changes the total count (length fails). An append at position 35+ doesn't shift historical positions (prefix passes) but changes the total (length fails until `_CURRENT_SCHEMA_LENGTH` is updated).
@@ -2069,7 +2055,7 @@ def semantic_search(query: str, top_k: int = SEARCH_TOP_K, filters: dict = None)
     1. Embed query with OpenAI
     2. Query Pinecone index
     3. Return top_k results with scores
-    4. Apply optional metadata filters (including multi-field entity gate)
+    4. Apply optional metadata filters (including multi-field entity filter)
     """
 
 def get_pinecone_index():
@@ -2089,7 +2075,7 @@ filters = {
     "domain": "Platform Engineering"
 }
 
-# Entity filter (January 2026) - uses $or across 6 fields
+# Entity filter: uses $or across 6 fields
 filters = {
     "entity_field": "client",
     "entity_value": "Accenture"
@@ -2097,17 +2083,17 @@ filters = {
 # Translates to: {"$or": [{client: "Accenture"}, {employer: "accenture"}, ...]}
 ```
 
-**Multi-Field Entity Gate:** When `entity_field` and `entity_value` are provided, the service builds a Pinecone `$or` clause that searches across `client`, `employer`, `division`, `project`, `place`, and `title` fields simultaneously. See Component Contracts → Multi-Field Entity Gate for details.
+**Multi-Field Entity Filter:** When `entity_field` and `entity_value` are provided, the service builds a Pinecone `$or` clause that searches across `client`, `employer`, `division`, `project`, `place`, and `title` fields simultaneously. It narrows retrieval and rejects nothing. See [Component Contracts → Multi-Field Entity Search](#multi-field-entity-search) for details.
 
-**`_init_pinecone()` two-class failure split (Aug 2026):**
+**`_init_pinecone()` two-class failure split:**
 
 Two failure classes with distinct behavior:
 - **Misconfiguration** (`VECTOR_BACKEND=pinecone` with missing config, or `pinecone` package unavailable): raises `RuntimeError` with legible message. Fail-fast and developer-actionable. Backs the `app.py` startup validator for code paths that reach Pinecone without going through it (scripts, eval, build scripts).
 - **Runtime failure** (network error, transient API failure, missing index at the remote): returns `None` with a DEBUG log line. Callers degrade gracefully -- an outage should not crash the UI.
 
-Returns `None` cleanly when `VECTOR_BACKEND != "pinecone"` (unchanged).
+Returns `None` cleanly when `VECTOR_BACKEND != "pinecone"`.
 
-**`_classify_embedding()` — network boundary pattern (Aug 2026):**
+**`_classify_embedding()`: network boundary pattern:**
 
 Extracted from `is_portfolio_query_semantic()` (`services/semantic_router.py`) so the classification logic is unit-testable against fixture vectors without an OpenAI call. Takes an already-computed query embedding and the intent-anchor embedding map; returns `(is_valid, max_score, best_intent, family)`. The composed public function still handles embed + classify + borderline log + fail-open error path. Use this pattern as the model for any future router work that needs to be testable without live API calls.
 
@@ -2239,7 +2225,7 @@ PINECONE_NAMESPACE = "default"
 ```
 
 **External Monitoring:**
-- **UptimeRobot** — HTTP/S monitor configured at https://askmattgpt.streamlit.app. Pings the app every ~5 minutes to prevent Streamlit Cloud sleep. Sends User-Agent containing "UptimeRobot". Filtered from BOTH `page_load` AND `query` event logging via `MONITORING_BOT_SIGNATURES` in `config/constants.py` (checked in `app.py` for page_load and `services/query_logger.py` via `is_bot()` for queries — extended May 13, 2026). The same signature list also catches `HeadlessChrome` (Chrome agent regression runs) and the legacy `Chrome/103.0.0.0` probe pattern. Bot traffic produces zero rows in the Google Sheet log, keeping conversion/bounce analysis based on real visitors only.
+- **UptimeRobot:** HTTP/S monitor configured at https://askmattgpt.streamlit.app. Pings the app every ~5 minutes to prevent Streamlit Cloud sleep. Sends User-Agent containing "UptimeRobot". Filtered from BOTH `page_load` AND `query` event logging via `MONITORING_BOT_SIGNATURES` in `config/constants.py` (checked in `app.py` for page_load and in `services/query_logger.py` via `is_bot()` for queries). The same signature list also catches `HeadlessChrome` (Chrome agent regression runs) and the legacy `Chrome/103.0.0.0` probe pattern. Bot traffic produces zero rows in the Google Sheet log, keeping conversion/bounce analysis based on real visitors only.
 
 **Python Version:** 3.11+
 
@@ -2283,13 +2269,13 @@ MattGPT uses a **Hybrid Sovereignty** approach that balances two complementary s
 | About page timeline | **Curated** | Resume narrative, not raw data |
 | RAG grounding prompt | **Dynamic** | Client names from JSONL prevent hallucination |
 
-### January 2026 Sovereignty Patterns
+### Sovereignty Patterns
 
 Three patterns implement the Dynamic RAG Grounding half of Hybrid Sovereignty:
 
 #### 1. Dynamic Identity (MATT_DNA)
 
-The `MATT_DNA` grounding prompt—injected into every LLM call—is now rendered at runtime from JSONL data rather than hardcoded.
+The `MATT_DNA` grounding prompt, injected into every LLM call, is rendered at runtime from JSONL data rather than hardcoded.
 
 | Element | Source | Example |
 |---------|--------|---------|
@@ -2299,7 +2285,7 @@ The `MATT_DNA` grounding prompt—injected into every LLM call—is now rendered
 
 **Implementation:** `backend_service.py` — `generate_dynamic_dna()`
 
-**Why:** Previously hardcoded "JPMorgan" drifted from JSONL canonical name "JP Morgan Chase". Dynamic derivation ensures the LLM never hallucinates client names that don't exist in the data.
+**Why:** Client names in the prompt are the JSONL canonical names (for example "JP Morgan Chase"), so the LLM never sees client names that don't exist in the data.
 
 #### 2. Multi-Field Entity Search
 
@@ -2307,7 +2293,7 @@ See [Component Contracts → Multi-Field Entity Search](#multi-field-entity-sear
 
 #### 3. UI Hydration
 
-See [Component Contracts → UI Hydration Pattern](#ui-hydration-pattern-january-2026) for the full implementation, code examples, and hydrated page inventory.
+See [Component Contracts → UI Hydration Pattern](#ui-hydration-pattern) for the full implementation, code examples, and hydrated page inventory.
 
 ### Master Data Source
 
@@ -2447,7 +2433,7 @@ st.markdown('<div data-component="navbar">', unsafe_allow_html=True)
 
 ---
 
-### Pattern 4: Page CSS Placement — Rerun Persistence (MATTGPT-068)
+### Pattern 4: Page CSS Placement and Rerun Persistence
 
 **Page CSS belongs in `ui/styles/global_styles.py`**, injected by
 `apply_global_styles()` from `app.py` on every rerun at a stable position in
@@ -2472,11 +2458,11 @@ page-scoped ones — e.g., About Matt's `stats-bar` / `stat-*` / `section-*`
 became `.am-*` so they don't restyle Home / banking / story_detail /
 role_match (which share those class names with different intended styles).
 
-**Precedent:** chip CSS was relocated from `ui/components/category_cards.py`
-first; About Matt's full inline block was relocated under MATTGPT-068;
-My Work / Explore Stories' full inline block was relocated under MATTGPT-105.
+**Precedent:** chip CSS from `ui/components/category_cards.py`, About Matt's
+full inline block, and My Work / Explore Stories' full inline block all live in
+`global_styles.py`.
 
-**Applies within a single page too (MATTGPT-105):** The same stripping occurs
+**Applies within a single page too:** The same stripping occurs
 during mid-rerun pauses *within the same page* — not only on page transitions.
 When `render_thinking_indicator()` fires on My Work (Cards view) after "Ask Agy
 About This", Streamlit partially replaces the DOM during its rerun pause. Inline
@@ -2497,17 +2483,7 @@ changes, pagination).
 
 ---
 
-### Pattern 5: AgGrid Styling — Iframe Boundary Constraint (MATTGPT-064) — SUPERSEDED (MATTGPT-144)
-
-Retired June 2026. My Work Table view migrated off AgGrid to `st.dataframe` (MATTGPT-144). AgGrid is no longer used in the Table render path, so the iframe-boundary styling mechanisms below no longer apply to any live component.
-
-The underlying lesson remains true and is why the migration eliminated a class of bug: AgGrid rendered inside a separate `iframe` document, so CSS injected into the parent page's `<head>` (everything in `global_styles.py`) stopped at the iframe boundary, and the iframe's intermittent failure to paint rows was the MATTGPT-144 blank-grid symptom. `st.dataframe` renders to a canvas in the main document (no iframe), which structurally removes that failure mode but introduces a different constraint (canvas-not-DOM) — see Testing Strategy → st.dataframe Canvas Constraint.
-
-(Original Python-side `rowStyle` / JS-injection / `.ag-root-wrapper` guard / three-fire details removed; recover from git history at commit `3a5e1bc`/`6590450` if AgGrid is ever reintroduced elsewhere.)
-
----
-
-### Pattern 6: Mobile Column Stacker — Exclusion Maintenance
+### Pattern 5: Mobile Column Stacker Exclusion Maintenance
 
 `global_styles.py` contains a mobile CSS rule that forces all `stHorizontalBlock` elements to stack vertically on screens ≤767px. Any horizontal block that must remain horizontal on mobile requires a `:not(:has(...))` exclusion added to **both** the `stHorizontalBlock` rule and the `> div[data-testid="stColumn"]` child rule (same exclusion chain on both).
 
@@ -2529,11 +2505,11 @@ div[data-testid="stHorizontalBlock"]
 
 ---
 
-### Pattern 7: Stale-Element Navigation Ghosting — Visibility Suppression (MATTGPT-018)
+### Pattern 6: Stale-Element Navigation Ghosting and Visibility Suppression
 
 **Streamlit 1.50+ retains prior-run elements in the DOM during a rerun.** Each element's `stElementContainer` carries `data-stale="true"` from the moment the rerun starts until the element is either replaced at its delta-path or pruned at script-finish. Streamlit applies no opacity or visibility treatment to stale content containers: verified in the frontend bundle, where `StyledElementContainer` destructures `isStale` but does not use it in its style body, and only transient widgets (balloons, snow) are hidden when stale via `hideIfStale`. So a stale content element stays painted at full opacity until it is pruned.
 
-The router in `app.py` is a flat dispatch that renders every page into the same main container with no per-page boundary. Combined with the above, content from the outgoing page stays painted over the incoming page during the reconciliation window (~50ms, longer when the destination does data work before its first paint). When the outgoing element is large and visually prominent, this reads as a ghost over the new page. MATTGPT-018 symptom: the Ask Agy landing hero (120px avatar + "Hi, I'm Agy" greeting) ghosting into My Work and bleeding beneath the Role Match header.
+The router in `app.py` is a flat dispatch that renders every page into the same main container with no per-page boundary. Combined with the above, content from the outgoing page stays painted over the incoming page during the reconciliation window (~50ms, longer when the destination does data work before its first paint). When the outgoing element is large and visually prominent, this reads as a ghost over the new page. Observed symptom: the Ask Agy landing hero (120px avatar + "Hi, I'm Agy" greeting) ghosting into My Work and bleeding beneath the Role Match header.
 
 **Mitigation pattern:**
 
@@ -2547,15 +2523,15 @@ Use `visibility: hidden` (not `display: none`) to suppress the paint without rem
 
 **Rules:**
 - Do not hide stale containers broadly and do not target `[data-stale="false"]` — both widen the blast radius to every element on every rerun.
-- Exclude classes that re-render in place on same-page reruns. For MATTGPT-018, `.ask-header-conversation` was excluded because hiding it on in-conversation follow-ups would read as a header blink.
+- Exclude classes that re-render in place on same-page reruns. `.ask-header-conversation` is excluded because hiding it on in-conversation follow-ups would read as a header blink.
 
-**Diagnostic note:** A navigation "blep" of this kind is a stale-content visual artifact, not a timing stall. Performance traces show clean frames and uniform per-navigation reconciliation cost whether or not the artifact is visible. When a user names a specific, repeating symptom ("it's always the avatar"), the diagnosis must account for that symptom, not aggregate numbers. The MATTGPT-018 root cause was found by following the named symptom to a project-side element, after timing analysis had twice concluded "framework-internal."
+**Diagnostic note:** A navigation "blep" of this kind is a stale-content visual artifact, not a timing stall. Performance traces show clean frames and uniform per-navigation reconciliation cost whether or not the artifact is visible. When a user names a specific, repeating symptom ("it's always the avatar"), the diagnosis must account for that symptom, not aggregate numbers.
 
 **Verification:** For any future change to this rule or the hero render path, confirm `data-stale="true"` still lands on the `stElementContainer` wrapping the target (DevTools or the MutationObserver BDD harness in `tests/bdd/.../navigation_stale_hero.feature`). The fix is silently a no-op if Streamlit changes the stale-marking contract on upgrade.
 
 ---
 
-### Pattern 8: Sibling Class Collision Avoidance (`.gap-note`)
+### Pattern 7: Sibling Class Collision Avoidance (`.gap-note`)
 
 When a new class is needed for an element that lives alongside an element that already carries a related class, do not reuse the bare name. The `_build_export_html` export in `role_match.py` uses `.gap-note` for gap-explanation divs, not `.gap`. Reason: `.status.gap` already exists on the badge `<span>` in the same HTML. The bare `.gap` selector would match the badge, not the explanation div, at equal specificity. The badge modifier stays `.status.gap`; the explanation div gets `.gap-note`. A comment at the CSS rule names the collision reason so renaming it back is not a drive-by cleanup.
 
@@ -2600,7 +2576,7 @@ pytest tests/bdd -v
 pytest tests/bdd -k "search_returns_relevant" -v
 ```
 
-**Coverage:** 55 scenarios across search, filters, view switching, story detail/STAR, detail-panel actions (Share/Helpful/Export), Ask Agy navigation, deeplinks, pagination, navigation/reset, responsive layout, two-row filter bar (MATTGPT-065/119/123), and rejection-banner edge cases. The feature file `tests/bdd/features/explore_stories.feature` is the source of truth for the scenario inventory — do not re-hardcode a per-category count here (it has churned repeatedly and drifts). Run `pytest tests/bdd/steps/test_explore_stories.py` for the current pass state.
+**Coverage:** 55 scenarios across search, filters, view switching, story detail/STAR, detail-panel actions (Share/Helpful/Export), Ask Agy navigation, deeplinks, pagination, navigation/reset, responsive layout, two-row filter bar, and rejection-banner edge cases. The feature file `tests/bdd/features/explore_stories.feature` is the source of truth for the scenario inventory; do not hardcode a per-category count here. Run `pytest tests/bdd/steps/test_explore_stories.py` for the current pass state.
 
 **Key Test Patterns:**
 ```python
@@ -2677,16 +2653,9 @@ pytest tests/unit -v
 - `test_filters.py` - Filter logic
 - `test_formatting.py` - STAR story formatting
 
-**HEADERS two-invariant pattern (Sept 2026):**
+**HEADERS two-invariant pattern:** See HEADERS Invariants under Query Logger. The pattern is reusable for any append-only schema with a historical data contract.
 
-`tests/unit/test_query_logger.py::TestHeadersPrefixInvariant` enforces append-only discipline on the Sheet schema via two complementary tests. Documented here because the pattern is reusable for any append-only schema with a historical data contract:
-
-- **Prefix pin** pins `HEADERS[:35]` against a frozen 35-entry snapshot (positions 0-34, frozen at the -086 landing). Catches insertions or renames within the historical columns. The snapshot does NOT extend for new columns -- extend-on-next-ticket ends up as a running count, not a historical record.
-- **Length pin** pins `len(HEADERS)` at `_CURRENT_SCHEMA_LENGTH` (44 as of Sept 2026). Covers positions 35+ where the prefix doesn't reach. Updated once per ticket that changes HEADERS.
-
-A mid-list insert shifts positions 0-34 (prefix fails) and changes the total count (length fails). An append at position 35+ passes the prefix but changes the total (length fails until `_CURRENT_SCHEMA_LENGTH` is updated). Together they catch any insert, remove, or rename at any position.
-
-**Test Gate Topology (Aug 2026):**
+**Test Gate Topology:**
 
 Two automated gates enforce the hermetic unit suite:
 
@@ -2697,7 +2666,9 @@ Two automated gates enforce the hermetic unit suite:
 
 **xfail markers:** 5 known-failure tests carry `@pytest.mark.xfail` so they register as expected failures rather than silently degrading the pass count. If a new persistent failure appears, add `xfail` with a ticket reference rather than deleting the test.
 
-### st.dataframe Canvas Constraint (MATTGPT-144)
+**Commit-time checks (`.githooks/pre-commit`):** Added lines may not contain em dashes, and added lines in `ui/` or `app.py` may not target dynamically hashed Streamlit classes. In a Claude Code session (`CLAUDECODE` set), a role check limits which doc files a commit may contain: `MATTGPT_DOCS_SESSION=arch` (launched by `scripts/arch-sync-session.sh`) commits only `ARCHITECTURE.md` and `docs/ADR.md`; `MATTGPT_DOCS_SESSION=backlog` (`scripts/backlog-session.sh`) commits only `BACKLOG.md` and `CHANGELOG.md`; a session with no value commits none of the four; any other value is refused. Commits from a terminal outside Claude Code are not role-checked. See ADR 027 in `docs/ADR.md`.
+
+### st.dataframe Canvas Constraint
 
 `st.dataframe` renders rows, cells, column headers, and selection controls to an HTML canvas, not the DOM. This has hard consequences for testing that are not obvious and cost a full investigation to establish.
 
@@ -2710,26 +2681,24 @@ Two automated gates enforce the hermetic unit suite:
 **What BDD/Playwright CANNOT verify, ever:**
 
 - Row content (text is painted to canvas, not in the DOM; no selector reaches it).
-- That rows visually rendered (a blank grid and a populated grid are indistinguishable to DOM queries -- this is exactly the MATTGPT-144 failure mode).
+- That rows visually rendered (a blank grid and a populated grid are indistinguishable to DOM queries).
 - Row selection driven from a test. The selection checkbox is canvas-drawn (`checkboxStyle: "square"`), not an `<input>`. Keyboard nav reaches the canvas (focusable, tabIndex 0, main document not iframe) but ArrowDown lands on a data cell and Space opens the cell editor, not the row marker. Coordinate-clicking is brittle (depends on exact row-pixel math and paint timing) and must not be used.
 
 **Rules:**
 
-- Visual row-rendering correctness on any `st.dataframe` surface is covered by manual visual check (the MATTGPT-144 20-click filter test), NOT automated BDD. A green BDD suite does not prove the grid painted its rows. Document this explicitly in any test file that asserts against `st.dataframe` so green is never mistaken for full coverage.
+- Visual row-rendering correctness on any `st.dataframe` surface is covered by manual visual check (a 20-click filter test), NOT automated BDD. A green BDD suite does not prove the grid painted its rows. Document this explicitly in any test file that asserts against `st.dataframe` so green is never mistaken for full coverage.
 - Any new surface that adopts `st.dataframe` inherits all of the above. Plan for manual visual verification of row rendering; do not design BDD that purports to assert canvas row content or canvas-driven selection.
 - If whole-row-click or keyboard row selection is a hard requirement, `st.dataframe` cannot provide it. Self-rendered HTML rows (the Cards pattern) are the accessible, testable alternative.
 
-**Origin:** Established during the MATTGPT-144 AgGrid to st.dataframe migration. The prior AgGrid BDD was green while the grid was broken because its assertions were `pass` no-ops AND the one real assertion targeted `.ag-row` inside an iframe. The canvas constraint means the naive replacement ("assert N rows rendered") is impossible, which is why the manual visual check is load-bearing, not optional.
-
 **`networkidle` never settles (the cascade trap):**
 
-The Glide Data Grid generates continuous background XHR. `page.wait_for_load_state("networkidle")` therefore never reaches idle on any path that renders the grid, and times out at 30s. During the migration this caused cascade failures: one networkidle timeout left the browser in a state that failed every downstream scenario, while each scenario passed in isolation. Every table-rendering/navigation step must use `wait_for_streamlit_rerun()` (watches `data-test-script-state`), not `networkidle`. The only acceptable remaining `networkidle` waits are initial page `goto`s and fresh `new_context` loads, where the grid isn't yet mounted. Incident: MATTGPT-144.
+The Glide Data Grid generates continuous background XHR. `page.wait_for_load_state("networkidle")` therefore never reaches idle on any path that renders the grid, and times out at 30s. One networkidle timeout leaves the browser in a state that fails every downstream scenario, while each scenario passes in isolation. Every table-rendering/navigation step must use `wait_for_streamlit_rerun()` (watches `data-test-script-state`), not `networkidle`. The only acceptable remaining `networkidle` waits are initial page `goto`s and fresh `new_context` loads, where the grid isn't yet mounted.
 
 ---
 
 ## Mobile Responsiveness
 
-Mobile responsive design is shipped via `ui/styles/mobile_overrides.py` (1,520 lines). Breakpoints: <768px (mobile), 768-1023px (tablet), 1024px+ (desktop). All page components, navigation, chat interface, modals, and grids have mobile-specific overrides. See CHANGELOG.md for the Q1 2026 implementation timeline.
+Mobile responsive design is shipped via `ui/styles/mobile_overrides.py` (1,520 lines). Breakpoints: <768px (mobile), 768-1023px (tablet), 1024px+ (desktop). All page components, navigation, chat interface, modals, and grids have mobile-specific overrides.
 
 ---
 
@@ -2739,7 +2708,7 @@ See [BACKLOG.md](BACKLOG.md) for current open work.
 
 ---
 
-## RAG Pipeline Audit (January 2026)
+## RAG Pipeline Audit
 
 Audit of the RAG (Retrieval-Augmented Generation) pipeline covering embedding analysis, architecture issues, and hardcoded values.
 
@@ -2759,10 +2728,10 @@ Audit of the RAG (Retrieval-Augmented Generation) pipeline covering embedding an
 
 Known architectural concerns are tracked in [BACKLOG.md](BACKLOG.md). Current categories:
 
-- **Coupling and complexity** — `backend_service.py` is 2,034 lines with imports from 6+ modules; candidates for extraction (MATTGPT-020)
-- **Boundary clarity** — ranking, intent classification, and formatting ownership split across files (MATTGPT-026)
-- **Hybrid scoring** — Pinecone scores (0.0–1.0) don't map cleanly to confidence buckets (0.15–0.25) (MATTGPT-024)
-- **Error handling** — limited test coverage on error paths; Pinecone timeout and embedding failure lack user notification (MATTGPT-025, MATTGPT-031)
+- **Coupling and complexity:** `backend_service.py` is over 2,400 lines with imports from 6+ modules; candidates for extraction
+- **Boundary clarity:** ranking, intent classification, and formatting ownership split across files
+- **Hybrid scoring:** Pinecone scores (0.0–1.0) don't map cleanly to confidence buckets (0.20–0.25)
+- **Error handling:** limited test coverage on error paths; Pinecone timeout and embedding failure lack user notification
 
 See [BACKLOG.md](BACKLOG.md) detail blocks for fix approaches and status.
 
@@ -2770,7 +2739,7 @@ See [BACKLOG.md](BACKLOG.md) detail blocks for fix approaches and status.
 
 Centralized in `config/constants.py`.
 
-The following constants are now in a single source of truth:
+Constants with a single source of truth:
 
 | Category | Constants | Location |
 |----------|-----------|----------|
