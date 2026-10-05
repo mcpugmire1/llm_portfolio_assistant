@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: 061119d -->
+<!-- last-backlog-sync: 232d9bd -->
 <!-- BEFORE EDITING: read CLAUDE.md § Backlog Maintenance for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -o 'MATTGPT-[0-9]*' BACKLOG.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -122,6 +122,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-270](#mattgpt-270) | generate_jsonl_from_excel.py summary counters wrong (Created/Updated/Unchanged miscount) | Open | Low | Bug | October 4, 2026 |
 | [MATTGPT-271](#mattgpt-271) | Near-duplicate public_tags from re-tagging pass in master Excel | Open | Low | Corpus | October 4, 2026 |
 | [MATTGPT-272](#mattgpt-272) | Corpus gap: zero thought leadership / PoV stories; Role Match returns blanket gap on the requirement | Open | Medium | Issue | October 4, 2026 |
+| [MATTGPT-273](#mattgpt-273) | Profile-fact answers include unrequested story context; follow-up questions have no conversation history | Open | Medium | Bug | October 4, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -2134,6 +2135,27 @@ These only affect behavior if tags feed filters or counts. Fix is in the master 
 **Cross-era template if needed:** "Owning the P&L" (Fortune 500 Clients, 2009-2023) -- multi-engagement arc story.
 
 **Acceptance:** After re-export and re-embed, Role Match no longer returns a blanket gap on the thought-leadership requirement. No claim in any new story lacks a named artifact.
+
+---
+
+### MATTGPT-273
+**Profile-fact answers include unrequested story context; follow-up questions have no conversation history**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `ui/pages/ask_mattgpt/backend_service.py` (`rag_answer()`, story retrieval path), `ui/pages/ask_mattgpt/conversation_helpers.py` (history handling)
+- **Logged:** October 4, 2026
+
+**Two observations from Oct 4, 2026:**
+
+**Issue 1 -- profile-fact answers include story context.** When Ask Agy answers a profile-fact question (CS degree, certifications, location), the answer appends story cards or story context that was not requested and does not relate to the fact. The retrieval pipeline runs and surfaces stories even when the answer comes entirely from the profile block.
+
+**Issue 2 -- no conversation history for follow-ups.** "What about PMP?" (browser run, Oct 4) had no context from the prior CS degree exchange. Each turn is answered cold; the model cannot resolve a follow-up pronoun or implicit reference against what was just said.
+
+**Evidence:** `probe_268_output/20261004_111121/` (now under `docs/evidence/268/`); "What about PMP?" browser run, October 4, 2026.
+
+**Relationship to other tickets:** Issue 1 overlaps with MATTGPT-128's "story grid always renders" rule in MATTGPT-250 item 4, which defers the cited-vs-retrieved question to -128. Issue 2 is independent.
 
 ---
 
