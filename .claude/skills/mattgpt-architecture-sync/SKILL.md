@@ -28,7 +28,7 @@ git log <anchor>..<end> --format='%h%n%(trailers:key=Decision)%(trailers:key=Rej
 ```
 
 **Step 0: Churn report (report only)**
-For the commit range, list the 5 most-changed code files (exclude *.md, tests/, probe_*, data/) and any code-file pairs that changed together in 3+ commits. Flag files over 1,000 lines. Propose nothing; Matt decides whether a flagged file gets a ticket.
+For the commit range, list the 5 most-changed code files (exclude *.md, tests/, probes/, probe_*, data/) and any code-file pairs that changed together in 3+ commits. Flag files over 1,000 lines. Propose nothing; Matt decides whether a flagged file gets a ticket.
 
 **Step 0b: Design spec drift (report only, after Step 1)**
 The design spec repo is checked out at `../mattgpt-design-spec`. First run `git -C ../mattgpt-design-spec fetch` and report whether the local checkout is behind `origin/main` (`git -C ../mattgpt-design-spec rev-list --count HEAD..origin/main`). If it is, say so at the top of the report and search `origin/main` rather than the stale working tree. Report `origin/main`'s last commit date.
