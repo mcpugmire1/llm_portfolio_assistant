@@ -1,0 +1,112 @@
+About the job
+This position requires office presence of a minimum of 5 days per week and is only located in the location(s) posted. No relocation is offered.
+
+AT&T will not hire any applicants for this position who require employer sponsorship now or in the future. 
+
+Join AT&T and reimagine the communications and technologies that connect the world. The Technology Services organization is responsible for advancing information technology performance and delivering solutions with a focus on maximizing ROI, increasing efficiency, and enhancing the experience of end users. Guided by experienced leaders, Corporate Systems seamlessly integrates with advanced Technology and Operations to drive our enterprise forward. Our Systems Reliability and Software Delivery teams are unwavering in their commitment to excellence, ensuring every solution is robust and efficient. When you step into a career with AT&T, you won't just imagine the future, you'll create it.
+
+What You’ll Do
+
+The Principal Systems Engineer is a senior technical leader responsible for the reliability, security, scalability, governance, and strategic direction of critical enterprise platforms and cloud services. They will design, architect, and evolve enterprise-grade applications, platforms, and integration services by transforming business requirements into resilient technical solutions. Provide technical leadership for Kafka and IXBUS platforms, enabling event-driven architectures, real-time data exchange, and enterprise integration capabilities that deliver scalability, reliability, observability, and operational excellence across cloud and on-premises environments.This role influences engineering, operations, architecture, security, and support teams while driving automation, modernization, operational excellence, and continuous improvement.
+
+Serve as the senior technical leader and primary platform steward for critical enterprise platforms and cloud services.
+Define and influence platform strategy, technical direction, architecture alignment, and long-term modernization roadmaps.
+Lead cross-functional initiatives across Engineering, Operations, Architecture, Cybersecurity, Support, and business stakeholders.
+Establish and promote engineering standards, operational best practices, automation principles, and platform governance models.
+Own platform reliability, scalability, resiliency, lifecycle planning, operational readiness, and business continuity posture.
+Lead compliance, cybersecurity, access governance, risk-management, and audit-readiness initiatives.
+Drive automation-first approaches across infrastructure, deployments, operational workflows, support processes, and self-service capabilities.
+Provide strategic oversight for CI/CD pipeline governance, release standards, artifact management, infrastructure automation, and deployment maturity.
+Lead observability, monitoring, alerting, logging, and service health strategies to improve operational visibility and reduce incident impact.
+Act as the highest-level escalation point for complex technical issues, major incidents, and platform-impacting events.
+Lead root cause analysis, problem management, corrective action planning, and prevention of recurring issues.
+Guide capacity planning, cloud cost optimization, licensing strategy, technology lifecycle management, and platform sustainability.
+Own disaster recovery strategy, planning, exercises, documentation, and continuous improvement.
+Mentor senior engineers and technical leads, helping raise the engineering maturity of the broader organization.
+Influence decisions without direct authority by building alignment, communicating tradeoffs, and driving consensus.
+
+What You’ll Need
+
+Required Skills
+
+Deep experience designing, operating, and governing enterprise-scale platforms and cloud infrastructure.
+7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.
+Experience with containerized workloads, orchestration platforms, microservices architectures, and cloud-native deployment patterns.
+Strong understanding of CI/CD pipelines, release automation, artifact management, infrastructure automation, and deployment governance.
+Experience with monitoring, alerting, observability, logging, service health, and operational telemetry strategies.
+Strong knowledge of security controls, access governance, role-based access management, separation of duties, and compliance practices.
+Experience leading platform upgrades, lifecycle management, migration planning, disaster recovery, and resiliency improvements.
+Strong troubleshooting skills across infrastructure, application platforms, integrations, networking, and operational workflows.
+Ability to define standards for SOPs, runbooks, operational playbooks, technical documentation, and support readiness.
+Working knowledge of cost optimization, capacity planning, license management, and technology lifecycle planning.
+Strategic thinker with strong business and technical judgment.
+Proven ability to lead through influence across multiple teams and organizations.
+Strong executive communication, stakeholder management, and decision-framing skills.
+Ability to mentor, coach, and develop engineering talent.
+Strong ownership mindset with accountability for outcomes, reliability, governance, and customer impact.
+Ability to drive alignment across technical, operational, security, and business priorities.
+Calm, decisive leadership during incidents, escalations, and high-pressure situations.
+Strong collaboration skills with Architecture, Development, Operations, Security, Product, and Support teams.
+Ability to simplify complex problems and communicate clear recommendations.
+Commitment to continuous improvement, operational excellence, innovation, and engineering discipline.
+
+Preferred Skills
+
+Experience leading enterprise platform modernization or transformation initiatives.
+Experience defining platform roadmaps, maturity models, service ownership models, or operational governance frameworks.
+Experience applying AI or intelligent automation to improve support operations, engineering productivity, or customer experience.
+Experience with large-scale compliance programs, cybersecurity scorecards, audit preparation, and remediation tracking.
+Experience leading disaster recovery exercises, business continuity planning, and resiliency validation.
+Experience influencing architecture review boards, technology standards, or enterprise engineering practices.
+Experience managing vendor relationships, licensing strategy, or platform service contracts.
+Experience developing metrics and executive dashboards for reliability, cost, risk, and operational performance.
+Experience mentoring technical leads or senior engineers in a matrixed organization.
+Experience driving cultural change toward automation, accountability, reliability, and self-service engineering.
+
+Full-time office role.
+
+Ready to join our team?
+
+Apply today.
+
+Our Principal System Engineering jobs earn between $155,400.00 - $261,100.00 USD Annual. Not to mention all the other amazing rewards that working at AT&T offers. Individual starting salary within this range may depend on geography, experience, expertise, and education/training.
+
+Joining Our Team Comes With Amazing Perks And Benefits
+
+Medical/Dental/Vision coverage
+401(k) plan
+Tuition reimbursement program
+Paid Time Off and Holidays (based on date of hire, at least 23 days of vacation each year and 9 company-designated holidays)
+Paid Parental Leave
+Paid Caregiver Leave
+Additional sick leave beyond what state and local law require may be available but is unprotected
+Adoption Reimbursement
+Disability Benefits (short term and long term)
+Life and Accidental Death Insurance
+Supplemental benefit programs: critical illness/accident hospital indemnity/group legal
+Employee Assistance Programs (EAP)
+Extensive employee wellness programs
+Employee discounts up to 50% off on eligible AT&T mobility plans and accessories, AT&T internet (and fiber where available) and AT&T phone
+
+Weekly Hours
+
+40
+
+Time Type
+
+Regular
+
+Location:
+
+Alpharetta, Georgia, Bedminster, New Jersey, Dallas, Texas, Middletown, New Jersey, Plano, Texas, USA:GA:Atlanta / 1057 Lenox Park Blvd Ne - Adm:1057 Lenox Park Blvd Ne
+
+Salary Range
+
+$155,400.00 - $261,100.00
+
+AT&T and its subsidiaries are committed to equal employment opportunity. All hiring, promotion, and other employment decisions remain merit-based and free from discrimination on the basis of race, color, religion, religious creed, national origin, ancestry, age, sex, sexual orientation, gender, gender identity, gender expression, physical disability, mental disability, pregnancy, medical condition, genetic information, marital status, citizenship status, military status, veteran status, or any other characteristic protected by federal, state, or local laws. In addition, AT&T will provide reasonable accommodations to qualified individuals with disabilities. AT&T is a fair chance employer and does not initiate a background check until an offer is made. Click here to learn more or request an application accommodation here.
+
+
+Benefits found in job post
+
+401(k)
