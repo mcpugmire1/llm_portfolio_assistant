@@ -79,6 +79,8 @@ git commit --allow-empty -m "Architecture Sync: no changes" --trailer "Sync-Rang
 
 Never push. The backlog pass reads this trailer to know where to move the anchor.
 
+Exception: a migration batch commits without the Sync-Range trailer. It doesn't review the commit range, so the trailer would move the backlog anchor past commits nobody reviewed.
+
 **ARCHITECTURE.md content rules:**
 - Current state only: no change narrative, ticket numbers, or commit hashes, and no dates that record when the system changed. Dates that are data, such as career dates and employment ranges, stay.
 - Decisions, removals, and rejections go to `docs/ADR.md`. Shipped work goes to CHANGELOG.md through the backlog pass.
