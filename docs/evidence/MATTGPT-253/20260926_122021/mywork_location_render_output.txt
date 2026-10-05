@@ -1,0 +1,45 @@
+'where is Matt located?'                         rejection_banner=None
+                                                  status_banner=['🐾Found 5 matching stories for "where is Matt located?"']
+                                                  results='Showing 1–5 of 5 stories' grid=True
+'Where does Matt live?'                          rejection_banner=None
+                                                  status_banner=['🐾Showing closest matches for "Where does Matt live?". Relevance may be low.']
+                                                  results='Showing 1–4 of 4 stories' grid=True
+'Is Matt open to relocation?'                    rejection_banner=None
+                                                  status_banner=['🐾Found 25 matching stories for "Is Matt open to relocation?"']
+                                                  results='Showing 1–10 of 25 stories' grid=True
+"What's Matt's availability?"                    rejection_banner=None
+                                                  status_banner=['🐾Found 25 matching stories for "What\'s Matt\'s availability?"']
+                                                  results='Showing 1–10 of 25 stories' grid=True
+'Where are you based?'                           rejection_banner=None
+                                                  status_banner=['🐾Found 25 matching stories for "Where are you based?"']
+                                                  results='Showing 1–10 of 25 stories' grid=True
+'Are you open to relocation?'                    rejection_banner=None
+                                                  status_banner=['🐾Found 25 matching stories for "Are you open to relocation?"']
+                                                  results='Showing 1–10 of 25 stories' grid=True
+'When can you start?'                            rejection_banner=None
+                                                  status_banner=['🐾Found 25 matching stories for "When can you start?"']
+                                                  results='Showing 1–10 of 25 stories' grid=True
+'What was the project timeline at JP Morgan?'    rejection_banner=None
+                                                  status_banner=['🐾Found 25 matching stories for "What was the project timeline at JP Morgan?"']
+                                                  results='Showing 1–10 of 25 stories' grid=True
+'Where is Matt based?'                           rejection_banner=None
+                                                  status_banner=['🐾Found 9 matching stories for "Where is Matt based?"']
+                                                  results='Showing 1–9 of 9 stories' grid=True
+'What city is Matt in?'                          rejection_banner=None
+                                                  status_banner=['🐾Found 7 matching stories for "What city is Matt in?"']
+                                                  results='Showing 1–7 of 7 stories' grid=True
+'Can Matt work remotely?'                        rejection_banner=None
+                                                  status_banner=['🐾Found 25 matching stories for "Can Matt work remotely?"']
+                                                  results='Showing 1–10 of 25 stories' grid=True
+'Does Matt need sponsorship?'                    rejection_banner=None
+                                                  status_banner=['🐾Found 25 matching stories for "Does Matt need sponsorship?"']
+                                                  results='Showing 1–10 of 25 stories' grid=True
+'What are your salary expectations?'             rejection_banner="🐾 Wrong trail. I'm a Plott Hound trained to track Matt's transformation work. Give me a real scent to follow."
+                                                  status_banner=[]
+                                                  results='Showing 1–10 of 112 stories' grid=True
+"What's Matt's salary range?"                    rejection_banner="🐾 Wrong trail. I'm a Plott Hound trained to track Matt's transformation work. Give me a real scent to follow."
+                                                  status_banner=[]
+                                                  results='Showing 1–10 of 112 stories' grid=True
+'Is Matt married?'                               rejection_banner="🐾 I'm focused on Matt's professional experience."
+                                                  status_banner=[]
+                                                  results='Showing 1–10 of 112 stories' grid=True

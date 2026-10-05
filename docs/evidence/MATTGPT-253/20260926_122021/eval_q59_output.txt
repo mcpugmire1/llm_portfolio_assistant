@@ -1,0 +1,4 @@
+[QUERY_REJECTED] reason=low_pinecone, router_family=background, router_score=0.752, pinecone_score=0.242, query=Where does Matt live?...
+spec: {"id": 59, "query": "Where does Matt live?", "expected_behavior": "profile_fact", "must_contain": ["Atlanta"], "xfail_reason": "low_confidence: top_score 0.242 < CONFIDENCE_HIGH 0.25; profile question with no matching story"}
+result.passed: False | checks: {} | details: {'xfail_reason': 'low_confidence: top_score 0.242 < CONFIDENCE_HIGH 0.25; profile question with no matching story', 'pool_size': 0}
+report: {'total_queries': 1, 'passed': 0, 'failed': 0, 'xfailed': 1, 'xpassed': []} | failed_queries: []

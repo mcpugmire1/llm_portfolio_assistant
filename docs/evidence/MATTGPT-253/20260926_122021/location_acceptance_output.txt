@@ -1,0 +1,208 @@
+working tree: location Green uncommitted (4 recruiter_logistics patterns removed, anchor removed, cache regenerated); Red 20433dc.
+[QUERY_REJECTED] reason=low_pinecone, router_family=background, router_score=0.752, pinecone_score=0.242, query=Where does Matt live?...
+[QUERY_REJECTED] reason=low_pinecone, router_family=background, router_score=0.752, pinecone_score=0.242, query=Where does Matt live?...
+TABLE
+group            query                                        run rejection_reason             family       router top    categories
+reach            where is Matt located?                       1   None                         background   0.766  0.265  ['location_availability']
+reach            where is Matt located?                       2   None                         background   0.766  0.265  ['location_availability']
+reach            Where does Matt live?                        1   low_confidence               background   0.752  0.242  None
+reach            Where does Matt live?                        2   low_confidence               background   0.752  0.242  None
+reach            Is Matt open to relocation?                  1   None                         narrative    0.639  0.359  ['location_availability']
+reach            Is Matt open to relocation?                  2   None                         narrative    0.639  0.359  ['location_availability']
+reach            What's Matt's availability?                  1   None                         background   0.684  0.353  ['location_availability']
+reach            What's Matt's availability?                  2   None                         background   0.684  0.353  ['location_availability']
+reach            Where are you based?                         1   None                         narrative    0.267  0.269  ['location_availability']
+reach            Where are you based?                         2   None                         narrative    0.267  0.269  ['location_availability']
+reach            Are you open to relocation?                  1   None                         narrative    0.338  0.296  ['location_availability']
+reach            Are you open to relocation?                  2   None                         narrative    0.338  0.296  ['location_availability']
+reach            When can you start?                          1   None                         narrative    0.272  0.296  ['location_availability']
+reach            When can you start?                          2   None                         narrative    0.272  0.296  ['location_availability']
+reach            What was the project timeline at JP Morgan?  1   None                         domain_payments 0.496  0.567  []
+reach            What was the project timeline at JP Morgan?  2   None                         domain_payments 0.496  0.567  []
+salary           What are your salary expectations?           1   rule:personal_compensation   None         n/a    n/a    None
+salary           What are your salary expectations?           2   rule:personal_compensation   None         n/a    n/a    None
+salary           What's Matt's salary range?                  1   rule:recruiter_logistics     None         n/a    n/a    None
+salary           What's Matt's salary range?                  2   rule:recruiter_logistics     None         n/a    n/a    None
+unchanged        Where is Matt based?                         1   None                         background   0.738  0.306  ['location_availability']
+unchanged        Where is Matt based?                         2   None                         background   0.738  0.306  ['location_availability']
+unchanged        What city is Matt in?                        1   None                         background   0.759  0.285  ['location_availability']
+unchanged        What city is Matt in?                        2   None                         background   0.759  0.285  ['location_availability']
+unchanged        Can Matt work remotely?                      1   None                         synthesis    0.618  0.406  ['location_availability']
+unchanged        Can Matt work remotely?                      2   None                         synthesis    0.618  0.406  ['location_availability']
+unchanged        Does Matt need sponsorship?                  1   None                         narrative    0.596  0.338  ['location_availability']
+unchanged        Does Matt need sponsorship?                  2   None                         narrative    0.596  0.338  ['location_availability']
+personal_control Is Matt married?                             1   semantic_router:personal     personal     0.958  n/a    None
+personal_control Is Matt married?                             2   semantic_router:personal     personal     0.958  n/a    None
+story_control    Tell me about Matt's payments work at JPMorgan 1   None                         domain_payments 0.703  0.562  []
+story_control    What's Matt's leadership philosophy?         1   None                         narrative    1.000  0.557  []
+story_control    Why hire Matt?                               1   None                         synthesis    1.000  0.534  []
+story_control    Tell me about a time Matt failed             1   None                         behavioral   1.000  0.442  []
+story_control    How did Matt build the AWS certification program? 1   None                         technical    0.573  0.570  []
+
+ANSWERS (reach + unchanged groups)
+====================================================================================================
+[reach] where is Matt located? (run 1)
+  |🐾 Found it!
+  |
+  |Matt is located in Atlanta, GA. He is open to relocation and travel, and his preferred work model is in-office, although he is also fine with hybrid or remote arrangements. Matt is available for immediate opportunities and does not require a notice period.
+  |
+  |There's more to this story if you're curious.
+====================================================================================================
+[reach] where is Matt located? (run 2)
+  |🐾 Here's a great example.
+  |
+  |Matt is located in Atlanta, GA. He is open to relocation and travel. His preferred work model is in-office, but he is also fine with hybrid or remote arrangements. Matt is available immediately and does not require a notice period. He is a U.S. citizen and does not need sponsorship.
+  |
+  |Want to see how Matt applied this elsewhere?
+====================================================================================================
+[reach] Where does Matt live? (run 1)
+  |[EMPTY]
+====================================================================================================
+[reach] Where does Matt live? (run 2)
+  |[EMPTY]
+====================================================================================================
+[reach] Is Matt open to relocation? (run 1)
+  |🐾 Here's a great example.
+  |
+  |Matt is open to relocation and travel. He is based in Atlanta, GA, and prefers an in-office work model but is also fine with hybrid or remote arrangements. He is available immediately and does not require any sponsorship as he is a US citizen. 
+  |
+  |Let me know if you'd like the deep dive on this one.
+====================================================================================================
+[reach] Is Matt open to relocation? (run 2)
+  |🐾 Perfect — here's what I found.
+  |
+  |Matt is open to relocation. He is based in Atlanta, GA, and is available for immediate relocation and travel. His preferred work model is in-office, but he is also fine with hybrid or remote arrangements. 
+  |
+  |Shall I find more examples like this?
+====================================================================================================
+[reach] What's Matt's availability? (run 1)
+  |Got it! 🐾
+  |
+  |Matt is available immediately for new opportunities. He is currently on a sabbatical and actively searching for a role where building the product engineering organization, establishing the culture, and delivering results are integral parts of the job. He is open to relocation and travel, preferring an in-office work model, but is also fine with hybrid or remote arrangements. As a U.S. citizen, he does not require sponsorship for employment.
+  |
+  |Want to see how Matt applied this elsewhere?
+====================================================================================================
+[reach] What's Matt's availability? (run 2)
+  |🐾 Perfect — here's what I found.
+  |
+  |Matt is available immediately for new opportunities. He is open to relocation and travel, and while he prefers an in-office work model, he is also fine with hybrid or remote arrangements. As a U.S. citizen, he does not require sponsorship for employment.
+  |
+  |Shall I find more examples like this?
+====================================================================================================
+[reach] Where are you based? (run 1)
+  |🐾 Perfect — here's what I found.
+  |
+  |Matt is based in Atlanta, GA. He is open to relocation and travel and prefers an in-office work model, though he is fine with hybrid or remote arrangements. He is available immediately and does not require a notice period. Matt is a US citizen and does not need sponsorship for employment. 
+  |
+  |Want to see how Matt applied this elsewhere?
+====================================================================================================
+[reach] Where are you based? (run 2)
+  |🐾 On it!
+  |
+  |Matt is based in Atlanta, GA. He is open to relocation and travel. His work model preference is in-office, but he is also fine with hybrid or remote arrangements. Matt is available immediately and does not require a notice period. As a US citizen, he does not need sponsorship for work authorization. 
+  |
+  |Happy to explore similar work in other industries.
+====================================================================================================
+[reach] Are you open to relocation? (run 1)
+  |🐾 This is a strong one.
+  |
+  |Matt is open to relocation and travel. He is currently based in Atlanta, GA, and prefers an in-office work model, though he is also fine with hybrid or remote arrangements. Matt is available immediately and does not require sponsorship, as he is a US citizen. His openness to relocation and travel aligns with his pursuit of senior leadership roles in platform engineering, AI-era transformation, and enterprise modernization, where he aims to be actively involved in building, driving change, and solving complex problems as part of a team.
+  |
+  |I can show you related patterns if that's helpful.
+====================================================================================================
+[reach] Are you open to relocation? (run 2)
+  |🐾 Perfect — here's what I found.
+  |
+  |Matt is open to relocation. He is based in Atlanta, GA, and is open to relocation and travel. Matt is available immediately and does not require a notice period. He prefers an in-office work model but is also fine with hybrid or remote arrangements. 
+  |
+  |Want to see how Matt applied this elsewhere?
+====================================================================================================
+[reach] When can you start? (run 1)
+  |🐾 Tracking this down...
+  |
+  |Matt is available immediately for new opportunities. After his tenure at **Accenture**, where he led a 150-person Cloud Innovation Center, Matt took a sabbatical to recharge and focus on what's next. During this time, he stayed hands-on by building MattGPT using RAG, semantic search, and modern LLM tooling. This period allowed him to deepen his skills in AI and GenAI, rebuild his portfolio, and refine his leadership narrative. Matt has clarified the roles and environments where he can deliver the greatest impact, focusing on platform modernization, product leadership, engineering culture, and cross-functional alignment.
+  |
+  |Matt is pursuing senior leadership roles in platform engineering, AI-era transformation, and enterprise modernization, where he can leverage his strengths in building, taking on change, and solving hard problems as part of a team. He is eager to contribute to organizations where the center of gravity is the work itself, and he is prepared to start immediately.
+  |
+  |Want to see how Matt applied this elsewhere?
+====================================================================================================
+[reach] When can you start? (run 2)
+  |🐾 Here's a great example.
+  |
+  |Matt is currently available to start immediately. After his tenure at **Accenture**, where he grew from an engineer to Director of the Cloud Innovation Center, he took a sabbatical to recharge and focus on what's next. During this time, he stayed hands-on by building MattGPT using RAG, semantic search, and modern LLM tooling. This experience ensured that he remained current and sharp, ready to pursue senior leadership roles in platform engineering, AI-era transformation, and enterprise modernization. His readiness is demonstrated through his work on MattGPT, which serves as proof that his time was spent building, not idling. Matt is eager to take on roles where he can build, tackle change, and solve hard problems as part of a team.
+  |
+  |Want me to dig deeper into the technical approach?
+====================================================================================================
+[reach] What was the project timeline at JP Morgan? (run 1)
+  |🐾 Here's a great example.
+  |
+  |At **JP Morgan Chase**, Matt played a pivotal role in the firm's Identity & Access Management (I&AM) Uplift Program following a significant data breach in 2014. This program required the remediation and implementation of new security controls across **341** CIB SOX/SSAE16 applications. The project faced an aggressive timeline, necessitating centralized tools for tracking remediation progress and coordinating work across hundreds of application teams. Despite Jira being the default Agile tool, it had not been fully adopted, leading to fragmented workflows and limited visibility into remediation status. Matt was tasked with configuring Jira to meet the program's specific needs and ensuring its successful adoption by the team. This involved tailoring Jira workflows, integrating it with existing tools, and leading Agile onboarding sessions to address resistance and build buy-in. As a result, the team successfully adopted Jira, leading to improved collaboration, streamlined workflows, and enhanced delivery tracking. This transformation allowed cross-functional teams to align more effectively on priorities, reducing delays and communication gaps, and establishing Jira as the central tool for Agile workflows.
+  |
+  |The project timeline for the I&AM Uplift was aggressive, but with Matt's efforts in configuring Jira and leading Agile adoption, the team was able to track progress and report transparently, enabling stakeholders to monitor delivery timelines and identify potential risks early. This setup provided JP Morgan with the structure and clarity needed to proceed with the migration on their timeline.
+  |
+  |Want to see how Matt applied this elsewhere?
+====================================================================================================
+[reach] What was the project timeline at JP Morgan? (run 2)
+  |🐾 This is a strong one.
+  |
+  |At **JP Morgan**, following the 2014 data breach, the Identity & Access Management (I&AM) Uplift Program required a transformation across **341** CIB applications on an aggressive timeline. The project aimed to implement new security controls, but the lack of a fully adopted centralized tool like Jira led to fragmented workflows and limited visibility into progress. Matt was tasked with configuring Jira to meet the specific needs of the I&AM program and ensuring its successful adoption by the team. He tailored Jira workflows to manage epics, user stories, and sprints effectively, integrated Jira with existing tools, and led Agile onboarding sessions to address resistance and build buy-in for both Jira and Agile practices.
+  |
+  |The adoption of Jira led to improved collaboration, streamlined workflows, and enhanced delivery tracking. Cross-functional teams aligned more effectively on priorities, reducing delays and communication gaps. Progress tracking and reporting became more transparent, enabling stakeholders to monitor delivery timelines and identify potential risks early. Training and tailored support helped the team adopt Jira quickly, establishing it as the central tool for Agile workflows. The Agile practices combined with Jira's functionality resulted in smoother delivery cycles, boosting stakeholder confidence in the program's execution.
+  |
+  |Happy to explore similar work in other industries.
+====================================================================================================
+[unchanged] Where is Matt based? (run 1)
+  |🐾 Found it!
+  |
+  |Matt is based in Atlanta, GA. He is open to relocation and travel, and he prefers an in-office work model, though hybrid or remote arrangements are also fine. He is available immediately and does not require a notice period. Additionally, Matt is a US citizen and does not need sponsorship.
+  |
+  |I can show you related patterns if that's helpful.
+====================================================================================================
+[unchanged] Where is Matt based? (run 2)
+  |Got it! 🐾
+  |
+  |Matt is based in Atlanta, GA. He is open to relocation and travel, and he prefers an in-office work model but is also fine with hybrid or remote arrangements. He is available immediately and does not require a notice period. Additionally, Matt is a US citizen and does not need sponsorship for employment.
+  |
+  |What else can I track down for you?
+====================================================================================================
+[unchanged] What city is Matt in? (run 1)
+  |🐾 I know just the story.
+  |
+  |Matt is located in Atlanta, GA. He is open to relocation and travel, and he prefers an in-office work model, though he is fine with hybrid or remote arrangements. He is available immediately and does not require sponsorship as he is a US citizen. 
+  |
+  |Let me know if you'd like the deep dive on this one.
+====================================================================================================
+[unchanged] What city is Matt in? (run 2)
+  |Got it! 🐾
+  |
+  |Matt is located in Atlanta, GA. He is open to relocation and travel.
+  |
+  |Want me to dig deeper into the technical approach?
+====================================================================================================
+[unchanged] Can Matt work remotely? (run 1)
+  |🐾 Great question — let me pull together the big picture.
+  |
+  |Matt is open to working remotely. He is currently based in Atlanta, GA, and is open to relocation and travel. While he prefers an in-office work model, he is also fine with hybrid or remote arrangements. Matt is available immediately and does not require a notice period. 
+  |
+  |Which pattern would you like to explore further?
+====================================================================================================
+[unchanged] Can Matt work remotely? (run 2)
+  |🐾 Great question — let me pull together the big picture.
+  |
+  |Matt is open to working remotely. He is currently located in Atlanta, GA, and is open to relocation and travel. While he prefers an in-office work model, he is also fine with hybrid or remote arrangements. Matt is available immediately and does not require a notice period. 
+  |
+  |Which pattern would you like to explore further?
+====================================================================================================
+[unchanged] Does Matt need sponsorship? (run 1)
+  |🐾 I know just the story.
+  |
+  |Matt does not need sponsorship. He is a U.S. citizen, which means he is authorized to work in the United States without requiring any sponsorship. This is a straightforward fact about his work eligibility.
+  |
+  |Want me to dig deeper into the technical approach?
+====================================================================================================
+[unchanged] Does Matt need sponsorship? (run 2)
+  |🐾 This is a strong one.
+  |
+  |Matt does not need sponsorship. He is a U.S. citizen, which means he does not require sponsorship to work in the United States. This status allows him to be available immediately for roles without the need for a visa or work permit. Matt is open to relocation and travel, with a preference for in-office work, though he is also fine with hybrid or remote arrangements. 
+  |
+  |Happy to explore similar work in other industries.

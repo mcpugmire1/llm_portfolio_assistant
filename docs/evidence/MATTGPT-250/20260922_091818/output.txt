@@ -1,0 +1,517 @@
+==============================================================================
+PROFILE_BLOCK (literal, exactly what the WITH condition appended)
+==============================================================================
+**About Matt (attested facts):**
+He holds a Master's degree, Information Technology from American InterContinental University and Graduate coursework, Romance Languages (Linguistics) from University of Georgia and BA, French Language and Literature from Queens University of Charlotte. Master's degree in Information Technology satisfies requirements for 'Bachelor's degree in Computer Science or related field': IT is a recognized CS-related discipline and a Master's exceeds a Bachelor's requirement. Teaching assistant; taught French 101, 102, and 103. Included a year abroad at Université Paul Valéry, Montpellier, France, through an exchange program with the University of North Carolina at Chapel Hill. Certifications: SAFe 4 Certified Agilist, Microsoft Certified Professional (MCP) - Oracle, AWS Launchpad Champion, AWS Certified Solutions Architect - Associate.
+
+==============================================================================
+MATTGPT-250 PoC: WITHOUT profile-facts block
+==============================================================================
+  [WITHOUT] run 1 Q1: conf='high' gated=N sources=7 patch_ok=True
+  [WITHOUT] run 2 Q1: conf='high' gated=N sources=7 patch_ok=True
+  [WITHOUT] run 1 Q2: conf='high' gated=N sources=7 patch_ok=True
+  [WITHOUT] run 2 Q2: conf='high' gated=N sources=7 patch_ok=True
+  [WITHOUT] run 1 Q3: conf='high' gated=N sources=6 patch_ok=True
+  [WITHOUT] run 2 Q3: conf='high' gated=N sources=6 patch_ok=True
+[QUERY_REJECTED] reason=low_pinecone, router_family=technical, router_score=0.649, pinecone_score=0.218, query=Where did Matt get his degree?...
+  [WITHOUT] run 1 Q4: conf='low' gated=Y sources=0 patch_ok=True
+[QUERY_REJECTED] reason=low_pinecone, router_family=technical, router_score=0.649, pinecone_score=0.218, query=Where did Matt get his degree?...
+  [WITHOUT] run 2 Q4: conf='low' gated=Y sources=0 patch_ok=True
+  [WITHOUT] run 1 Q5: conf='high' gated=N sources=7 patch_ok=True
+  [WITHOUT] run 2 Q5: conf='high' gated=N sources=7 patch_ok=True
+  [WITHOUT] run 1 Q6: conf='high' gated=N sources=7 patch_ok=True
+  [WITHOUT] run 2 Q6: conf='high' gated=N sources=7 patch_ok=True
+  [WITHOUT] run 1 Q7: conf='high' gated=N sources=8 patch_ok=True
+  [WITHOUT] run 2 Q7: conf='high' gated=N sources=8 patch_ok=True
+  [WITHOUT] run 1 Q8: conf='high' gated=N sources=8 patch_ok=True
+  [WITHOUT] run 2 Q8: conf='high' gated=N sources=8 patch_ok=True
+  [WITHOUT] run 1 Q9: conf='high' gated=N sources=9 patch_ok=True
+  [WITHOUT] run 2 Q9: conf='high' gated=N sources=9 patch_ok=True
+  [WITHOUT] run 1 Q10: conf='high' gated=N sources=7 patch_ok=True
+  [WITHOUT] run 2 Q10: conf='high' gated=N sources=7 patch_ok=True
+
+==============================================================================
+MATTGPT-250 PoC: WITH profile-facts block + rules 0a/0b
+==============================================================================
+  [WITH] run 1 Q1: conf='high' gated=N sources=7 patch_ok=True
+  [WITH] run 2 Q1: conf='high' gated=N sources=7 patch_ok=True
+  [WITH] run 1 Q2: conf='high' gated=N sources=7 patch_ok=True
+  [WITH] run 2 Q2: conf='high' gated=N sources=7 patch_ok=True
+  [WITH] run 1 Q3: conf='high' gated=N sources=6 patch_ok=True
+  [WITH] run 2 Q3: conf='high' gated=N sources=6 patch_ok=True
+[QUERY_REJECTED] reason=low_pinecone, router_family=technical, router_score=0.649, pinecone_score=0.218, query=Where did Matt get his degree?...
+  [WITH] run 1 Q4: conf='low' gated=Y sources=0 patch_ok=True
+[QUERY_REJECTED] reason=low_pinecone, router_family=technical, router_score=0.649, pinecone_score=0.218, query=Where did Matt get his degree?...
+  [WITH] run 2 Q4: conf='low' gated=Y sources=0 patch_ok=True
+  [WITH] run 1 Q5: conf='high' gated=N sources=7 patch_ok=True
+  [WITH] run 2 Q5: conf='high' gated=N sources=7 patch_ok=True
+  [WITH] run 1 Q6: conf='high' gated=N sources=7 patch_ok=True
+  [WITH] run 2 Q6: conf='high' gated=N sources=7 patch_ok=True
+  [WITH] run 1 Q7: conf='high' gated=N sources=8 patch_ok=True
+  [WITH] run 2 Q7: conf='high' gated=N sources=8 patch_ok=True
+  [WITH] run 1 Q8: conf='high' gated=N sources=8 patch_ok=True
+  [WITH] run 2 Q8: conf='high' gated=N sources=8 patch_ok=True
+  [WITH] run 1 Q9: conf='high' gated=N sources=9 patch_ok=True
+  [WITH] run 2 Q9: conf='high' gated=N sources=9 patch_ok=True
+  [WITH] run 1 Q10: conf='high' gated=N sources=7 patch_ok=True
+  [WITH] run 2 Q10: conf='high' gated=N sources=7 patch_ok=True
+
+==============================================================================
+FULL ANSWERS (all 40 runs)
+==============================================================================
+
+--- [WITHOUT] run 1 Q1 conf='high' gated=N ---
+    query   : Is Matt certified?
+    sources : ['Why Hire Matt?', "Keeping the F-22's As-Built Configuration Data Accurate", 'MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery', 'Owning the P&L: From Engagement Margin to Center Cost Base', 'Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications', 'Delivering Multi-Client Customization and Compliance for the White-Label Card Portal', 'Teaching Entry-Level Developers to Build Their First Java Web Application']
+    🐾 Found it!
+    
+    Matt led the AWS Launchpad program at **Accenture**, which was designed to build deep cloud competencies across the organization. This initiative was developed in collaboration with AWS to address skill gaps and accelerate cloud adoption, which traditional training programs had failed to keep pace with. The program included structured learning paths and certification programs focusing on AWS core services, such as Lambda, API Gateway, DynamoDB, Kubernetes, and ECS/Fargate. Through interactive workshops and real-world labs, engineers were immersed in AWS environments, reinforcing practical application over theory. As a result, over **200** professionals earned AWS certifications, such as AWS Solutions Architect and DevOps Engineer, equipping them to lead cloud transformation projects effectively.
+    
+    Additionally, Matt's work on the **Lockheed Martin** F-22 program required a certified as-built configuration baseline, a formal defense requirement. He owned the daily ETL process, automating the ingestion and ensuring the accuracy of the as-built tree as the program moved toward production. This work was validated through repeated test cycles with Lockheed personnel on site.
+    
+    While these stories highlight Matt's leadership and technical skills, they do not explicitly mention any certifications he personally holds. The focus is more on his role in enabling others to achieve certifications and his technical contributions to projects.
+    
+    What else can I track down for you?
+
+--- [WITHOUT] run 2 Q1 conf='high' gated=N ---
+    query   : Is Matt certified?
+    sources : ['Why Hire Matt?', "Keeping the F-22's As-Built Configuration Data Accurate", 'MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery', 'Owning the P&L: From Engagement Margin to Center Cost Base', 'Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications', 'Delivering Multi-Client Customization and Compliance for the White-Label Card Portal', 'Teaching Entry-Level Developers to Build Their First Java Web Application']
+    🐾 Found it!
+    
+    Matt led the AWS Launchpad program at **Accenture**, which was designed to build deep cloud competencies and align cloud adoption with AWS best practices. The program delivered over **200** AWS certifications, including AWS Solutions Architect and DevOps Engineer, equipping professionals to lead cloud transformation projects effectively. This initiative positioned **Accenture** as a leader in AWS competency, increasing its market credibility and ability to secure cloud-native engagements.
+    
+    In the context of the **Lockheed Martin** F-22 program, Matt was responsible for maintaining the accuracy of the as-built configuration data, a formal defense requirement. He owned the daily ETL process, ensuring the data stayed accurate and current through automated ingestion. This work was validated through repeated test cycles with Lockheed personnel on site.
+    
+    While the stories highlight Matt's leadership in cloud certifications and technical projects, they do not specifically mention any personal certifications that Matt holds. I can show you related patterns if that's helpful.
+
+--- [WITHOUT] run 1 Q2 conf='high' gated=N ---
+    query   : What certifications does Matt hold?
+    sources : ['Why Hire Matt?', 'Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications', 'Building Effective AI-Assisted Development Workflows', "Keeping the F-22's As-Built Configuration Data Accurate", 'Owning the P&L: From Engagement Margin to Center Cost Base', 'Delivering Multi-Client Customization and Compliance for the White-Label Card Portal', 'Teaching Entry-Level Developers to Build Their First Java Web Application']
+    🐾 Found it!
+    
+    Matt holds several certifications, particularly in cloud technologies. During his tenure at **Accenture**, he led the AWS Launchpad program, which was instrumental in building deep cloud competencies across the organization. As part of this initiative, over **200 professionals** earned AWS certifications, including AWS Solutions Architect and DevOps Engineer. This program not only accelerated cloud adoption but also positioned **Accenture** as a leader in AWS competency, enhancing its market credibility and ability to secure cloud-native engagements. The structured learning paths and certification programs he designed focused on AWS core services like Lambda, API Gateway, DynamoDB, Kubernetes, and ECS/Fargate. Through interactive workshops and labs, engineers were immersed in real-world AWS environments, reinforcing practical application over theory. This approach fostered a sustainable learning culture and ensured ongoing cloud innovation across teams.
+    
+    Let me know if you'd like the deep dive on this one.
+
+--- [WITHOUT] run 2 Q2 conf='high' gated=N ---
+    query   : What certifications does Matt hold?
+    sources : ['Why Hire Matt?', 'Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications', 'Building Effective AI-Assisted Development Workflows', "Keeping the F-22's As-Built Configuration Data Accurate", 'Owning the P&L: From Engagement Margin to Center Cost Base', 'Delivering Multi-Client Customization and Compliance for the White-Label Card Portal', 'Teaching Entry-Level Developers to Build Their First Java Web Application']
+    Got it! 🐾
+    
+    Matt holds certifications in AWS, as highlighted in his work with **Accenture**. He led the AWS Launchpad program, which was developed in collaboration with AWS to build deep cloud competencies across **Accenture**. This program focused on certifying engineers and accelerating cloud adoption. As a result, over **200** professionals earned AWS certifications, including AWS Solutions Architect and DevOps Engineer. These certifications equipped them to lead cloud transformation projects effectively.
+    
+    This initiative not only strengthened **Accenture**'s cloud expertise but also positioned the company as a leader in AWS competency, enhancing its market credibility and ability to secure cloud-native engagements. The program fostered a sustainable learning culture, ensuring ongoing cloud innovation and capability-building across teams.
+    
+    Shall I find more examples like this?
+
+--- [WITHOUT] run 1 Q3 conf='high' gated=N ---
+    query   : Does Matt speak French?
+    sources : ['Why Hire Matt?', 'MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery', 'About Matt – My Leadership Journey', 'MattGPT: Human-Centered UX Design & Information Architecture', 'Building Effective AI-Assisted Development Workflows', 'Transition Story – Why I’m Exploring Opportunities']
+    🐾 Tracking this down...
+    
+    The stories provided do not mention Matt speaking French. His career narrative focuses on his extensive experience in technology and innovation leadership, particularly in building and modernizing platforms, leading engineering teams, and executing transformation programs across various industries. While language skills are not highlighted, Matt's work has involved delivering global programs across **12 countries**, which may imply some level of multilingual capability, though French is not specifically mentioned.
+    
+    What else can I track down for you?
+
+--- [WITHOUT] run 2 Q3 conf='high' gated=N ---
+    query   : Does Matt speak French?
+    sources : ['Why Hire Matt?', 'MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery', 'About Matt – My Leadership Journey', 'MattGPT: Human-Centered UX Design & Information Architecture', 'Building Effective AI-Assisted Development Workflows', 'Transition Story – Why I’m Exploring Opportunities']
+    Got it! 🐾
+    
+    The stories provided do not mention Matt speaking French. They focus on his professional achievements, including building and scaling the Cloud Innovation Center at **Accenture**, delivering global programs across **12 countries**, and creating MattGPT during his sabbatical. While these stories highlight his expertise in technology, leadership, and innovation, they do not provide information about his language skills.
+    
+    What else can I track down for you?
+
+--- [WITHOUT] run 1 Q4 conf='low' gated=Y ---
+    query   : Where did Matt get his degree?
+    sources : []
+    answer  : [EMPTY]
+
+--- [WITHOUT] run 2 Q4 conf='low' gated=Y ---
+    query   : Where did Matt get his degree?
+    sources : []
+    answer  : [EMPTY]
+
+--- [WITHOUT] run 1 Q5 conf='high' gated=N ---
+    query   : Does Matt have a PMP?
+    sources : ['Why Hire Matt?', 'MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery', 'Owning the P&L: From Engagement Margin to Center Cost Base', "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications", "Keeping the F-22's As-Built Configuration Data Accurate", 'Driving Modern Software Engineering with Project Octane', "Building the PMO for RBC's Commercial Banking Modernization"]
+    🐾 I know just the story.
+    
+    The stories provided do not mention Matt holding a PMP (Project Management Professional) certification. His career narrative highlights his leadership in building and integrating enterprise platforms, leading payments and banking modernization, and architecting cloud-native systems. Matt's role as a Director at **Accenture** involved financial accountability and managing engagement margins across several high-profile clients, including **JP Morgan**, **RBC**, **Fiserv**, and **HSBC**. He successfully recovered troubled programs and grew the Cloud Innovation Center from 0 to over **150** professionals, delivering at **4x** velocity with zero-defect deployments.
+    
+    In another engagement, Matt mobilized the PMO for **JP Morgan Chase** following a significant data breach. He delivered an implementation roadmap and detailed migration plan, providing the structure and clarity needed for the firm to proceed with their security posture modernization.
+    
+    Want me to dig deeper into the technical approach?
+
+--- [WITHOUT] run 2 Q5 conf='high' gated=N ---
+    query   : Does Matt have a PMP?
+    sources : ['Why Hire Matt?', 'MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery', 'Owning the P&L: From Engagement Margin to Center Cost Base', "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications", "Keeping the F-22's As-Built Configuration Data Accurate", 'Driving Modern Software Engineering with Project Octane', "Building the PMO for RBC's Commercial Banking Modernization"]
+    🐾 I know just the story.
+    
+    There is no mention of Matt holding a PMP certification in the stories provided. Matt's career narrative focuses on his extensive experience in building teams, platforms, and capabilities across various industries. He has held roles that required significant program management and governance skills, such as his work with **JP Morgan Chase** and **Fiserv**, where he managed engagement margins and recovered troubled programs. His financial accountability and ability to manage complex projects are evident, but the stories do not specifically mention a PMP certification.
+    
+    What else can I track down for you?
+
+--- [WITHOUT] run 1 Q6 conf='high' gated=N ---
+    query   : How did Matt build the AWS certification program?
+    sources : ['Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications', 'Teaching Entry-Level Developers to Build Their First Java Web Application', "Keeping the F-22's As-Built Configuration Data Accurate", "Building Sparkfly's Platform Alongside Its Founder", "Unifying Norfolk Southern's Teams Around Cloud-Native Practices", 'Building an HR Portal for a Subprime Lender Scaling Faster Than It Could Hire', 'Scaling Development Capacity with Modern Engineering Practices']
+    🐾 Perfect — here's what I found.
+    
+    At **Accenture's Liquid Studio**, traditional training programs were lagging behind the rapid evolution of AWS technologies, leading to skill gaps and hindering cloud adoption. To address this, Matt led the AWS Launchpad program, which was developed in collaboration with AWS to build deep cloud competencies across **Accenture**. The program was structured around hands-on labs, structured learning paths, and mentor-based training, focusing on core AWS services like Lambda, API Gateway, DynamoDB, Kubernetes, and ECS/Fargate. 
+    
+    Matt's approach emphasized practical application over theory, with interactive workshops immersing engineers in real-world AWS environments. He also established mentorship teams to embed best practices and foster institutional knowledge, ensuring long-term competency growth. Through this program, over **200 professionals** earned AWS certifications, such as AWS Solutions Architect and DevOps Engineer. This not only accelerated cloud adoption but also positioned **Accenture** as a leader in AWS competency, enhancing its market credibility and ability to secure cloud-native engagements.
+    
+    The program fostered a sustainable learning culture, ensuring ongoing cloud innovation and capability-building across teams. This initiative significantly strengthened **Accenture**'s cloud expertise, enabling teams to lead cloud-native transformation projects effectively.
+    
+    Want me to dig deeper into the technical approach?
+
+--- [WITHOUT] run 2 Q6 conf='high' gated=N ---
+    query   : How did Matt build the AWS certification program?
+    sources : ['Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications', 'Teaching Entry-Level Developers to Build Their First Java Web Application', "Keeping the F-22's As-Built Configuration Data Accurate", "Building Sparkfly's Platform Alongside Its Founder", "Unifying Norfolk Southern's Teams Around Cloud-Native Practices", 'Building an HR Portal for a Subprime Lender Scaling Faster Than It Could Hire', 'Scaling Development Capacity with Modern Engineering Practices']
+    Got it! 🐾
+    
+    At **Accenture**, Matt led the AWS Launchpad program to address skill gaps and accelerate cloud adoption. Traditional training methods at **Accenture**'s Liquid Studio were not keeping up with the rapid evolution of AWS technologies, which created obstacles in cloud competency and slowed down adoption. To tackle these challenges, Matt collaborated with AWS to create a tailored enablement program. This program was designed to build deep cloud competencies across **Accenture** and align cloud adoption with AWS best practices.
+    
+    Matt developed structured learning paths and certification programs focusing on AWS core services, such as Lambda, API Gateway, and DynamoDB, among others. He delivered interactive workshops and labs that immersed engineers in real-world AWS environments, emphasizing practical application over theory. To foster long-term competency growth, he established cloud expert mentorship teams and organized group coaching sessions and knowledge-sharing workshops.
+    
+    The AWS Launchpad program resulted in over **200** professionals earning AWS certifications, such as AWS Solutions Architect and DevOps Engineer. This significantly accelerated cloud adoption and strengthened **Accenture**'s cloud expertise, positioning the company as a leader in AWS competency. The program also fostered a sustainable learning culture, ensuring ongoing cloud innovation and capability-building across teams.
+    
+    Shall I find more examples like this?
+
+--- [WITHOUT] run 1 Q7 conf='high' gated=N ---
+    query   : Tell me about Matt's payments work at JPMorgan
+    sources : ['Building the Payment Engine Behind JP Morgan ACCESS', "Building JP Morgan's Global Payments Gateway Across 12 Countries", "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform", 'Overhauling Entitlement Management for JP Morgan ACCESS', "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout", "Designing Cloud Integration Architecture for JP Morgan's Asset Management", "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications", "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation"]
+    🐾 Here's a great example.
+    
+    At **JP Morgan Chase**, Matt played a crucial role in building the ACCESS Next Generation platform, which was designed to serve as the bank's flagship corporate digital banking portal. The challenge was to create a system that could handle the complex requirements of over **135,000** clients across **180+** countries, far exceeding the capabilities of the existing WebSeries platform. As the Technology Delivery Lead, Matt managed a team of over **40** professionals, working closely with Bottomline Technologies to develop bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments.
+    
+    Matt's innovative approach included designing a Message Authentication Code (MAC) security layer, integrating real-time global reporting, and implementing payment-type-specific entitlement controls. He also built the payment engine's integration with JP Morgan's centralized transaction monitoring system, enhancing the platform's ability to screen transactions for suspicious activity. His work ensured that the platform could support complex compliance requirements and provide a seamless user experience for corporate treasurers.
+    
+    The ACCESS platform launched in April 2011, consolidating previously separate regional systems into a single digital experience. It was recognized as the #1 digital channel by Coalition Greenwich, thanks to its robust security features, comprehensive payment modules, and unified global reporting capabilities. What else can I track down for you?
+
+--- [WITHOUT] run 2 Q7 conf='high' gated=N ---
+    query   : Tell me about Matt's payments work at JPMorgan
+    sources : ['Building the Payment Engine Behind JP Morgan ACCESS', "Building JP Morgan's Global Payments Gateway Across 12 Countries", "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform", 'Overhauling Entitlement Management for JP Morgan ACCESS', "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout", "Designing Cloud Integration Architecture for JP Morgan's Asset Management", "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications", "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation"]
+    Got it! 🐾
+    
+    At **JP Morgan Chase**, Matt played a pivotal role in the development of the ACCESS Next Generation platform, a unified global corporate banking portal. The project was driven by the need to consolidate previously separate regional systems into a single digital experience for over **135,000** clients across **180+** countries. The challenge was to build on Bottomline Technologies' WebSeries platform while extending its capabilities to meet the unique requirements of JP Morgan's vast client base.
+    
+    Matt led the design and delivery of bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. Each module required distinct formatting, validation, and compliance features. He implemented a Message Authentication Code (MAC) security layer to ensure payment integrity and developed contextual help to guide users through complex payment processes. The platform also featured payment-type-specific entitlement controls and real-time global reporting, which transformed the corporate treasurer experience.
+    
+    The ACCESS platform launched in April 2011 and became recognized as the #1 digital channel by Coalition Greenwich. It provided a single entry point for all payment types, replacing fragmented legacy integrations and offering a seamless user experience. The project required Matt to manage a blended team of over **40** professionals across multiple locations and to coordinate closely with Bottomline Technologies. His work ensured that the platform met aggressive Wall Street delivery timelines and maintained compliance with global regulatory standards.
+    
+    Happy to explore similar work in other industries.
+
+--- [WITHOUT] run 1 Q8 conf='high' gated=N ---
+    query   : What's Matt's leadership philosophy?
+    sources : ['Leadership Philosophy – How I Lead', 'About Matt – My Leadership Journey', 'Confronting a Quality Crisis Through Coaching and Culture Change', 'Leading People: From Delivery Teams to a 150-Person Organization', 'Building Effective AI-Assisted Development Workflows', 'What I Learned About Sustainable Leadership', 'Work Philosophy – Where I Do My Best Work', 'Why Hire Matt?']
+    🐾 On it!
+    
+    Matt's leadership philosophy centers on creating environments where teams can thrive by removing barriers and fostering trust. He emphasizes psychological safety, allowing team members to speak honestly and take risks. Decisions are pushed to those closest to the work, ensuring that the people with the most context have the authority to make impactful choices. At the **Cloud Innovation Center**, this approach resulted in a **4x delivery acceleration** as teams embraced lean product and modern engineering practices.
+    
+    He believes in leading with purpose and making intent explicit, which helps align teams around a shared goal. Transparency, direct feedback, and open communication are crucial elements of his leadership style, as they build cross-functional trust and enable teams to deliver meaningful work with pride and ownership. Matt's focus on modern engineering rigor, such as automation and continuous delivery, ensures that teams have confidence in what they ship.
+    
+    In his career, Matt has consistently built high-trust engineering cultures, modernized platforms, and helped organizations rethink their approach to technology. His leadership journey includes scaling the **Cloud Innovation Center** from 0 to **150+ professionals**, driving **\$100M+** in repeat business, and delivering **4x faster product delivery** through modern engineering practices. He has managed blended teams across various industries, ensuring that they perform well and grow in their careers.
+    
+    At **Norfolk Southern**, Matt addressed a quality crisis by taking ownership of the failure, conducting a root cause analysis, and implementing hands-on coaching. This approach restored client confidence and demonstrated that cultural transformation requires consistent coaching rather than just process change.
+    
+    Happy to explore similar work in other industries.
+
+--- [WITHOUT] run 2 Q8 conf='high' gated=N ---
+    query   : What's Matt's leadership philosophy?
+    sources : ['Leadership Philosophy – How I Lead', 'About Matt – My Leadership Journey', 'Confronting a Quality Crisis Through Coaching and Culture Change', 'Leading People: From Delivery Teams to a 150-Person Organization', 'Building Effective AI-Assisted Development Workflows', 'What I Learned About Sustainable Leadership', 'Work Philosophy – Where I Do My Best Work', 'Why Hire Matt?']
+    🐾 I know just the story.
+    
+    Matt's leadership philosophy is centered on creating an environment where teams can thrive by embracing trust, clarity, and shared purpose. At **Accenture's** Cloud Innovation Center, he led by removing barriers that hindered team performance, such as over-processing and lack of trust. He emphasized psychological safety, allowing team members to speak honestly and make decisions close to the work. His approach included leading with purpose, fostering open communication, and grounding engineering culture in automation and continuous delivery.
+    
+    This leadership style resulted in a **4x** acceleration in delivery once teams adopted lean product and modern engineering practices. The focus on empathy, clarity, and engineering rigor helped improve quality, strengthen cross-functional trust, and empower teams to deliver meaningful work with pride and ownership.
+    
+    Matt's leadership journey at **Accenture** also involved scaling the Cloud Innovation Center from 0 to **150+** professionals, driving **\$100M+** in repeat business through delivery excellence. His consistent approach of listening first, aligning around purpose, and moving intentionally enabled him to build high-trust engineering cultures and modernize platforms across various industries.
+    
+    Want to see how Matt applied this elsewhere?
+
+--- [WITHOUT] run 1 Q9 conf='high' gated=N ---
+    query   : Why hire Matt?
+    sources : ['Why Hire Matt?', 'Transition Story – Why I’m Exploring Opportunities', 'About Matt – My Leadership Journey', "Driving HSBC's Mortgage Transformation from Assessment to $10M Contract", 'Building an Innovation Ecosystem to Connect Clients with Emerging Technology', 'Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500', 'Scaling CIC Impact Through Intentional Client Engagement', 'Confronting a Quality Crisis Through Coaching and Culture Change', 'Scaling Talent and Practices for Agile Product Innovation']
+    🐾 Let me show you what ties Matt's work together. Across his career, Matt has consistently demonstrated a pattern of building lasting capabilities, whether it's products, platforms, or teams. At **Accenture**, he scaled the Cloud Innovation Center from 0 to over 150 professionals, delivering at **4x** velocity with zero-defect deployments. This achievement was grounded in modern engineering practices like test-driven development and automated pipelines, which not only improved delivery speed but also ensured quality. His leadership resulted in **\$100M**+ in repeat business, showcasing the trust and satisfaction of clients who returned for his team's delivery excellence. For instance, at **HSBC**, he led a technology assessment that resulted in a **\$10M** implementation contract, aligning business and IT teams on a unified transformation approach. His strategic advisory role helped automate workflows and eliminate compliance risks, demonstrating his capability to translate complex challenges into actionable strategies.
+    
+    In addition to his technical acumen, Matt has a knack for fostering innovation ecosystems. He built strategic partnerships at **Accenture**, connecting Fortune **500 clients** with emerging technologies through collaborations with research institutions and startups. This approach not only improved solution relevance but also strengthened client retention, positioning the Cloud Innovation Center as a bridge between enterprise needs and cutting-edge technology.
+    
+    Matt's career is defined by a consistent focus on building and transforming. Whether it's scaling teams, modernizing platforms, or creating environments where cross-functional teams can thrive, his work leaves a lasting impact. Want me to dive deeper into any of these themes?
+
+--- [WITHOUT] run 2 Q9 conf='high' gated=N ---
+    query   : Why hire Matt?
+    sources : ['Why Hire Matt?', 'Transition Story – Why I’m Exploring Opportunities', 'About Matt – My Leadership Journey', "Driving HSBC's Mortgage Transformation from Assessment to $10M Contract", 'Building an Innovation Ecosystem to Connect Clients with Emerging Technology', 'Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500', 'Scaling CIC Impact Through Intentional Client Engagement', 'Confronting a Quality Crisis Through Coaching and Culture Change', 'Scaling Talent and Practices for Agile Product Innovation']
+    🐾 Here's what connects the dots across Matt's work. Throughout his career, Matt has consistently focused on building enduring capabilities, whether through products, platforms, or teams. At **Accenture**, he led the creation of the Cloud Innovation Center, scaling it from zero to over **150 professionals**. This initiative delivered at **4x velocity** with zero-defect deployments, earning over **\$100M** in repeat business. His approach was grounded in modern engineering practices like test-driven development and automated pipelines, which ensured high-quality outcomes and client satisfaction. He led workshops to assess **HSBC**'s mortgage operations, which were under regulatory pressure, and developed a target state architecture that secured a **\$10M** implementation contract. This engagement not only addressed compliance risks but also aligned **HSBC**'s business and IT leadership on a unified transformation approach.
+    
+    In addition to his technical achievements, Matt has been instrumental in fostering innovation ecosystems. He established strategic partnerships with institutions like Georgia Tech, enhancing **Accenture**'s access to emerging technologies and talent. This initiative improved solution relevance and client retention, positioning the Cloud Innovation Center as a bridge between enterprise needs and cutting-edge technology. His career narrative highlights his readiness for senior leadership roles in platform engineering and enterprise modernization, where he can continue to build, drive change, and solve complex problems as part of a team. Which pattern would you like to explore further?
+
+--- [WITHOUT] run 1 Q10 conf='high' gated=N ---
+    query   : Tell me about a time Matt failed
+    sources : ['What I Learned About Assumptions', 'Why Hire Matt?', 'Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern', "Recovering Fiserv's $8.5M White-Label Card Portal", "Keeping the F-22's As-Built Configuration Data Accurate", "Building Sparkfly's Platform Alongside Its Founder", 'Teaching Entry-Level Developers to Build Their First Java Web Application']
+    🐾 Perfect — here's what I found.
+    
+    During a global platform modernization delivery for a **Fortune 500 financial services client**, Matt faced a significant challenge when he assumed that the Identity and Access Management (IAM) controls, environment boundaries, and data masking were correctly configured. This assumption led to an offshore tester accidentally triggering an email job in the User Acceptance Testing (UAT) environment, which sent communications containing unmasked production data to thousands of real clients. The incident highlighted the risks of relying on inherited documentation and assumptions without verification.
+    
+    Matt took full accountability for the incident and led his team through a thorough root cause analysis and remediation process. He recognized that the lack of IAM validation, environment verification, and data scrubbing were critical oversights. As a result, Matt implemented new leadership responsibilities, including IAM validation, environment verification, PII scrubbing, and risk ownership from day one of delivery. This experience reinforced his belief that leaders must own the environments their teams operate in to prevent such failures in the future.
+    
+    The incident had a human impact, as the client demanded the removal of the tester from the project, illustrating the systemic failure that resulted in individual consequences. This experience taught Matt the importance of verifying assumptions and taking proactive measures to ensure the safety and integrity of the systems under his leadership.
+    
+    Happy to explore similar work in other industries.
+
+--- [WITHOUT] run 2 Q10 conf='high' gated=N ---
+    query   : Tell me about a time Matt failed
+    sources : ['What I Learned About Assumptions', 'Why Hire Matt?', 'Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern', "Recovering Fiserv's $8.5M White-Label Card Portal", "Keeping the F-22's As-Built Configuration Data Accurate", "Building Sparkfly's Platform Alongside Its Founder", 'Teaching Entry-Level Developers to Build Their First Java Web Application']
+    🐾 On it!
+    
+    During a platform modernization delivery for a **Fortune 500 financial services client**, Matt faced a significant failure due to assumptions made about the project's infrastructure. He was responsible for ensuring a secure environment setup across multiple environments, including dev, QA, UAT, and production. However, he relied on existing documentation and did not verify the IAM configuration and downstream access controls. This oversight led to an offshore tester accidentally triggering an email job in UAT, which sent unmasked production data to thousands of real clients.
+    
+    Matt took full accountability for the incident and led the team through a root cause analysis and remediation process. He learned that assumptions are risks in disguise and that IAM validation, environment verification, PII scrubbing, and risk ownership should be integral to his leadership responsibilities from day one. Unfortunately, the client demanded the removal of the tester from the project, highlighting a systemic failure that had individual consequences. This experience reinforced Matt's belief that leaders are responsible for the environments in which their teams operate.
+    
+    What else can I track down for you?
+
+--- [WITH] run 1 Q1 conf='high' gated=N ---
+    query   : Is Matt certified?
+    sources : ['Why Hire Matt?', "Keeping the F-22's As-Built Configuration Data Accurate", 'MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery', 'Owning the P&L: From Engagement Margin to Center Cost Base', 'Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications', 'Delivering Multi-Client Customization and Compliance for the White-Label Card Portal', 'Teaching Entry-Level Developers to Build Their First Java Web Application']
+    🐾 Found it!
+    
+    Matt holds several certifications. He is a SAFe 4 Certified Agilist, a Microsoft Certified Professional (MCP) - Oracle, an AWS Launchpad Champion, and an AWS Certified Solutions Architect - Associate. These certifications reflect his commitment to continuous learning and staying current with industry standards. During his time at **Accenture**, he led the AWS Launchpad program, which resulted in over **200** professionals earning AWS certifications, including AWS Solutions Architect and DevOps Engineer. This initiative not only enhanced cloud competencies across the organization but also positioned **Accenture** as a leader in AWS competency, increasing its market credibility.
+    
+    There's more to this story if you're curious.
+
+--- [WITH] run 2 Q1 conf='high' gated=N ---
+    query   : Is Matt certified?
+    sources : ['Why Hire Matt?', "Keeping the F-22's As-Built Configuration Data Accurate", 'MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery', 'Owning the P&L: From Engagement Margin to Center Cost Base', 'Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications', 'Delivering Multi-Client Customization and Compliance for the White-Label Card Portal', 'Teaching Entry-Level Developers to Build Their First Java Web Application']
+    🐾 Here's a great example.
+    
+    Matt holds several certifications that align with his expertise in technology and cloud solutions. He is a **SAFe 4 Certified Agilist**, which supports his leadership in agile methodologies. Additionally, Matt is a **Microsoft Certified Professional (MCP)** with a focus on Oracle, which complements his technical background in software engineering and architecture. His cloud expertise is further validated by his status as an **AWS Launchpad Champion** and an **AWS Certified Solutions Architect - Associate**.
+    
+    Happy to explore similar work in other industries.
+
+--- [WITH] run 1 Q2 conf='high' gated=N ---
+    query   : What certifications does Matt hold?
+    sources : ['Why Hire Matt?', 'Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications', 'Building Effective AI-Assisted Development Workflows', "Keeping the F-22's As-Built Configuration Data Accurate", 'Owning the P&L: From Engagement Margin to Center Cost Base', 'Delivering Multi-Client Customization and Compliance for the White-Label Card Portal', 'Teaching Entry-Level Developers to Build Their First Java Web Application']
+    Got it! 🐾
+    
+    Matt holds several certifications that highlight his expertise in technology and cloud solutions. He is an **AWS Certified Solutions Architect - Associate**, which is a testament to his skills in designing scalable and reliable applications on AWS. Additionally, Matt is a **SAFe 4 Certified Agilist**, showcasing his knowledge in agile methodologies and practices. He is also recognized as a **Microsoft Certified Professional (MCP) - Oracle**, indicating his proficiency with Oracle technologies. Furthermore, Matt has been acknowledged as an **AWS Launchpad Champion**, reflecting his role in leading cloud enablement programs and fostering AWS adoption within organizations.
+    
+    Let me know if you'd like the deep dive on this one.
+
+--- [WITH] run 2 Q2 conf='high' gated=N ---
+    query   : What certifications does Matt hold?
+    sources : ['Why Hire Matt?', 'Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications', 'Building Effective AI-Assisted Development Workflows', "Keeping the F-22's As-Built Configuration Data Accurate", 'Owning the P&L: From Engagement Margin to Center Cost Base', 'Delivering Multi-Client Customization and Compliance for the White-Label Card Portal', 'Teaching Entry-Level Developers to Build Their First Java Web Application']
+    🐾 I know just the story.
+    
+    Matt holds several certifications that highlight his expertise and commitment to professional growth. He is a **SAFe 4 Certified Agilist**, which underscores his proficiency in agile methodologies. Additionally, Matt is a **Microsoft Certified Professional (MCP) - Oracle**, demonstrating his skills in Oracle technologies. His cloud expertise is further validated by his status as an **AWS Launchpad Champion** and an **AWS Certified Solutions Architect - Associate**.
+    
+    What else can I track down for you?
+
+--- [WITH] run 1 Q3 conf='high' gated=N ---
+    query   : Does Matt speak French?
+    sources : ['Why Hire Matt?', 'MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery', 'About Matt – My Leadership Journey', 'MattGPT: Human-Centered UX Design & Information Architecture', 'Building Effective AI-Assisted Development Workflows', 'Transition Story – Why I’m Exploring Opportunities']
+    🐾 Perfect — here's what I found.
+    
+    Matt speaks French. He holds a BA in French Language and Literature from Queens University of Charlotte. Additionally, he has completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia. His studies included a year abroad at Université Paul Valéry, Montpellier, France, through an exchange program with the University of North Carolina at Chapel Hill. During his time as a teaching assistant, he taught French 101, 102, and 103.
+    
+    What else can I track down for you?
+
+--- [WITH] run 2 Q3 conf='high' gated=N ---
+    query   : Does Matt speak French?
+    sources : ['Why Hire Matt?', 'MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery', 'About Matt – My Leadership Journey', 'MattGPT: Human-Centered UX Design & Information Architecture', 'Building Effective AI-Assisted Development Workflows', 'Transition Story – Why I’m Exploring Opportunities']
+    Got it! 🐾
+    
+    Matt speaks French. He holds a BA in French Language and Literature from Queens University of Charlotte. His education included a year abroad at Université Paul Valéry, Montpellier, France, through an exchange program with the University of North Carolina at Chapel Hill. During his time as a teaching assistant, he taught French 101, 102, and 103. This background indicates a strong proficiency in the French language, both academically and practically.
+    
+    Want me to dig deeper into the technical approach?
+
+--- [WITH] run 1 Q4 conf='low' gated=Y ---
+    query   : Where did Matt get his degree?
+    sources : []
+    answer  : [EMPTY]
+
+--- [WITH] run 2 Q4 conf='low' gated=Y ---
+    query   : Where did Matt get his degree?
+    sources : []
+    answer  : [EMPTY]
+
+--- [WITH] run 1 Q5 conf='high' gated=N ---
+    query   : Does Matt have a PMP?
+    sources : ['Why Hire Matt?', 'MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery', 'Owning the P&L: From Engagement Margin to Center Cost Base', "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications", "Keeping the F-22's As-Built Configuration Data Accurate", 'Driving Modern Software Engineering with Project Octane', "Building the PMO for RBC's Commercial Banking Modernization"]
+    🐾 Tracking this down...
+    
+    That's not something Matt has shared publicly. 
+    
+    Shall I find more examples like this?
+
+--- [WITH] run 2 Q5 conf='high' gated=N ---
+    query   : Does Matt have a PMP?
+    sources : ['Why Hire Matt?', 'MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery', 'Owning the P&L: From Engagement Margin to Center Cost Base', "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications", "Keeping the F-22's As-Built Configuration Data Accurate", 'Driving Modern Software Engineering with Project Octane', "Building the PMO for RBC's Commercial Banking Modernization"]
+    🐾 Found it!
+    
+    That's not something Matt has shared publicly. I can show you related patterns if that's helpful.
+
+--- [WITH] run 1 Q6 conf='high' gated=N ---
+    query   : How did Matt build the AWS certification program?
+    sources : ['Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications', 'Teaching Entry-Level Developers to Build Their First Java Web Application', "Keeping the F-22's As-Built Configuration Data Accurate", "Building Sparkfly's Platform Alongside Its Founder", "Unifying Norfolk Southern's Teams Around Cloud-Native Practices", 'Building an HR Portal for a Subprime Lender Scaling Faster Than It Could Hire', 'Scaling Development Capacity with Modern Engineering Practices']
+    🐾 Here's a great example.
+    
+    At **Accenture's Liquid Studio**, traditional training programs were falling behind the rapid advancements in AWS technologies, leading to skill gaps and slowing down cloud adoption. To address this, Matt led the AWS Launchpad program, a comprehensive initiative designed to build deep cloud competencies across the organization. The program was developed in collaboration with AWS and aimed at certifying engineers, accelerating cloud adoption, and embedding an innovation-first mindset.
+    
+    Matt's approach included designing structured learning paths and certification programs focusing on AWS core services such as Lambda, API Gateway, DynamoDB, Kubernetes, and ECS/Fargate. He emphasized practical application over theory by delivering interactive workshops and labs, immersing engineers in real-world AWS environments. Additionally, he established cloud expert mentorship teams to embed best practices and foster institutional knowledge, ensuring long-term competency growth.
+    
+    The AWS Launchpad program supported over **200 professionals** in earning AWS certifications, such as AWS Solutions Architect and DevOps Engineer. This not only accelerated cloud adoption but also strengthened **Accenture's** cloud expertise, positioning the company as a leader in AWS competency. The program fostered a sustainable learning culture, ensuring ongoing cloud innovation and capability-building across teams.
+    
+    What else can I track down for you?
+
+--- [WITH] run 2 Q6 conf='high' gated=N ---
+    query   : How did Matt build the AWS certification program?
+    sources : ['Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications', 'Teaching Entry-Level Developers to Build Their First Java Web Application', "Keeping the F-22's As-Built Configuration Data Accurate", "Building Sparkfly's Platform Alongside Its Founder", "Unifying Norfolk Southern's Teams Around Cloud-Native Practices", 'Building an HR Portal for a Subprime Lender Scaling Faster Than It Could Hire', 'Scaling Development Capacity with Modern Engineering Practices']
+    🐾 Perfect — here's what I found.
+    
+    At **Accenture's Liquid Studio**, traditional training programs were not keeping pace with the rapidly evolving AWS technologies, leading to skill gaps and hindering cloud adoption. To address this, Matt led the AWS Launchpad program at the Atlanta Innovation Hub. This initiative aimed to build deep cloud competencies, accelerate AWS adoption, and foster an innovation-first mindset both internally and with clients. The program was developed in collaboration with AWS and focused on structured learning paths and certification programs that emphasized AWS core services such as Lambda, API Gateway, DynamoDB, Kubernetes, and ECS/Fargate.
+    
+    Matt's approach was hands-on and immersive, involving interactive workshops and labs that placed engineers in real-world AWS environments. This practical application was prioritized over theoretical learning. Additionally, he established cloud expert mentorship teams to embed best practices and foster institutional knowledge, ensuring long-term competency growth. The program supported over **200 professionals** in earning AWS certifications, including AWS Solutions Architect and DevOps Engineer. This effort not only accelerated cloud adoption but also strengthened **Accenture**'s cloud expertise, positioning the company as a leader in AWS competency and increasing its market credibility.
+    
+    The AWS Launchpad program fostered a sustainable learning culture, ensuring ongoing cloud innovation and capability-building across teams. This initiative was a significant step in aligning cloud adoption with AWS best practices and equipping teams to lead cloud-native transformation projects effectively.
+    
+    Want me to dig deeper into the technical approach?
+
+--- [WITH] run 1 Q7 conf='high' gated=N ---
+    query   : Tell me about Matt's payments work at JPMorgan
+    sources : ['Building the Payment Engine Behind JP Morgan ACCESS', "Building JP Morgan's Global Payments Gateway Across 12 Countries", "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform", 'Overhauling Entitlement Management for JP Morgan ACCESS', "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout", "Designing Cloud Integration Architecture for JP Morgan's Asset Management", "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications", "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation"]
+    🐾 Perfect — here's what I found.
+    
+    At **JP Morgan Chase**, the development of the ACCESS Next Generation platform was a critical initiative aimed at unifying the bank's corporate digital banking portal. The challenge was immense, as the platform needed to serve over **135,000** corporations, financial institutions, governments, and municipalities across **180+** countries. The existing systems were fragmented, with disparate payment modules and compliance requirements that couldn't meet the demands of such a vast client base. 
+    
+    Matt, serving as the Senior Technology Architecture Manager, led a **40+** member team to design and deliver bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. He implemented a Message Authentication Code (MAC) security layer and developed payment-type-specific entitlement controls. This allowed for granular permission logic, enhancing security and operational efficiency. His work also included building real-time global reporting capabilities and integrating trade finance functions, providing a seamless user experience for corporate treasurers.
+    
+    The ACCESS platform launched in April 2011, consolidating previously separate regional systems into a single digital experience. It was recognized as the #1 digital channel by Coalition Greenwich, transforming how corporate treasurers managed their operations. The platform's success was not only in its technical achievements but also in how it improved the daily work life of its users by reducing errors, enhancing security, and providing comprehensive visibility into global cash positions.
+    
+    There's more to this story if you're curious.
+
+--- [WITH] run 2 Q7 conf='high' gated=N ---
+    query   : Tell me about Matt's payments work at JPMorgan
+    sources : ['Building the Payment Engine Behind JP Morgan ACCESS', "Building JP Morgan's Global Payments Gateway Across 12 Countries", "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform", 'Overhauling Entitlement Management for JP Morgan ACCESS', "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout", "Designing Cloud Integration Architecture for JP Morgan's Asset Management", "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications", "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation"]
+    Got it! 🐾
+    
+    At **JP Morgan Chase**, Matt led the development of the ACCESS Next Generation platform, a unified global corporate banking portal. The challenge was to build a system that could handle the needs of over **135,000** corporations, financial institutions, governments, and municipalities across **180+** countries. The existing Bottomline Technologies' WebSeries platform required significant customization to meet the specific payment, security, and user experience needs of JP Morgan's diverse client base.
+    
+    As the Technology Delivery Lead, Matt managed a team of over **40** professionals from both **Accenture** and JP Morgan, working across multiple locations including the US, Mumbai, and Bangalore. He was instrumental in designing bespoke payment modules for ACH, wire, FX/cross-border, and EFTPS tax payments. These modules included advanced features like a Message Authentication Code (MAC) security layer, real-time global reporting, and payment-type-specific role-based access controls (RBAC). He also ensured the integration of the platform with JP Morgan's centralized transaction monitoring systems, which screened trillions of daily transactions for suspicious activity.
+    
+    The ACCESS platform launched in April 2011, consolidating previously separate regional systems into a single digital experience. This transformation provided JP Morgan's clients with a seamless interface for managing cash, trade, and investment operations. The platform's success was recognized when it was named #1 in digital channels by Coalition Greenwich. The centralized payments gateway also enabled the processing of payments across **12** countries, eliminating the need for separate local logins and reducing operational complexity.
+    
+    Let me know if you'd like the deep dive on this one.
+
+--- [WITH] run 1 Q8 conf='high' gated=N ---
+    query   : What's Matt's leadership philosophy?
+    sources : ['Leadership Philosophy – How I Lead', 'About Matt – My Leadership Journey', 'Confronting a Quality Crisis Through Coaching and Culture Change', 'Leading People: From Delivery Teams to a 150-Person Organization', 'Building Effective AI-Assisted Development Workflows', 'What I Learned About Sustainable Leadership', 'Work Philosophy – Where I Do My Best Work', 'Why Hire Matt?']
+    🐾 On it!
+    
+    Matt's leadership philosophy centers on creating an environment where teams can thrive by focusing on trust, clarity, and shared purpose. Throughout his career, he has consistently aimed to remove barriers that hinder team performance, such as over-processing and lack of trust. At the **Cloud Innovation Center**, Matt implemented a leadership approach that emphasized psychological safety, empowering teams to take ownership of their work, and pushing decisions to those closest to the tasks. This approach led to a **4x acceleration in delivery** once teams embraced lean product and modern engineering practices.
+    
+    Matt's leadership style is characterized by empathy, clarity, and modern engineering rigor. He leads with purpose, makes intent explicit, and fosters an environment where people can take risks and speak honestly. By grounding engineering culture in automation and quality-first practices, he helps teams build confidence in their outputs. His coaching style encourages teams to think clearly, not just execute tasks, which has resulted in improved quality and strengthened cross-functional trust.
+    
+    At **Accenture**, Matt scaled the Cloud Innovation Center from zero to over **1**50 practitioner**s**, maintaining a flat organizational structure that promoted autonomy and collective ownership. This structure supported a culture of continuous improvement and high performance, with near-zero attrition in the first two years. His leadership approach not only delivered faster product delivery but also built high-trust engineering cultures across various industries.
+    
+    There's more to this story if you're curious.
+
+--- [WITH] run 2 Q8 conf='high' gated=N ---
+    query   : What's Matt's leadership philosophy?
+    sources : ['Leadership Philosophy – How I Lead', 'About Matt – My Leadership Journey', 'Confronting a Quality Crisis Through Coaching and Culture Change', 'Leading People: From Delivery Teams to a 150-Person Organization', 'Building Effective AI-Assisted Development Workflows', 'What I Learned About Sustainable Leadership', 'Work Philosophy – Where I Do My Best Work', 'Why Hire Matt?']
+    Got it! 🐾
+    
+    Matt's leadership philosophy centers on creating an environment where teams can thrive by removing barriers and fostering trust, clarity, and shared purpose. Across his roles, including leading a **150-person Cloud Innovation Center** at **Accenture**, Matt observed that successful teams aren't just built on processes or tools but on a foundation of trust and empowerment. He noticed that many engineering teams he inherited were over-processed and under-trusted, often waiting for permission rather than owning their outcomes. 
+    
+    To address this, Matt implemented a leadership approach blending empathy, clarity, and modern engineering rigor. He emphasized psychological safety, allowing team members to take risks and speak honestly. Decisions were pushed to those closest to the work, ensuring that the people with the most context made the calls. Transparency, direct feedback, and open communication were key components of his strategy. He grounded the engineering culture in automation, continuous delivery, and quality-first practices, coaching teams to think clearly and not just execute tasks. 
+    
+    This approach led to significant improvements, such as a **4x delivery acceleration** once teams embraced lean product and modern engineering practices. The result was not only faster delivery but also improved quality, strengthened cross-functional trust, and teams delivering work they were proud of. Matt's leadership style enabled his teams to accelerate delivery, improve quality, and foster a sense of pride and ownership in their work.
+    
+    Want to see how Matt applied this elsewhere?
+
+--- [WITH] run 1 Q9 conf='high' gated=N ---
+    query   : Why hire Matt?
+    sources : ['Why Hire Matt?', 'Transition Story – Why I’m Exploring Opportunities', 'About Matt – My Leadership Journey', "Driving HSBC's Mortgage Transformation from Assessment to $10M Contract", 'Building an Innovation Ecosystem to Connect Clients with Emerging Technology', 'Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500', 'Scaling CIC Impact Through Intentional Client Engagement', 'Confronting a Quality Crisis Through Coaching and Culture Change', 'Scaling Talent and Practices for Agile Product Innovation']
+    🐾 Great question — let me pull together the big picture.
+    
+    Matt has a proven track record of building and transforming organizations, products, and teams. At **Accenture**, he scaled the Cloud Innovation Center from zero to over **150 professionals**, delivering at **4x velocity** with zero-defect deployments. This achievement was grounded in modern engineering practices like test-driven development and automated pipelines. His leadership resulted in **\$100M+** in repeat business, demonstrating the lasting impact of his work. Matt's approach is not just about delivering projects but creating environments where teams thrive and continue to deliver value beyond his engagement.
+    
+    During his tenure at **HSBC**, Matt led a comprehensive technology assessment and transformation roadmap for their mortgage operations. He conducted on-site workshops, developed a target state architecture, and secured a **\$10M** implementation contract. This engagement not only addressed compliance risks but also aligned business and IT leadership on a unified transformation approach. He built an innovation ecosystem that bridged the gap between Fortune **500 clients** and cutting-edge technology. By partnering with institutions like Georgia Tech and engaging in the local tech community, Matt improved solution relevance and client retention, positioning the CIC as a trusted transformation partner. His work spans industries and geographies, consistently resulting in faster delivery, improved client satisfaction, and long-term business growth. I can show specific examples from any of these areas.
+
+--- [WITH] run 2 Q9 conf='high' gated=N ---
+    query   : Why hire Matt?
+    sources : ['Why Hire Matt?', 'Transition Story – Why I’m Exploring Opportunities', 'About Matt – My Leadership Journey', "Driving HSBC's Mortgage Transformation from Assessment to $10M Contract", 'Building an Innovation Ecosystem to Connect Clients with Emerging Technology', 'Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500', 'Scaling CIC Impact Through Intentional Client Engagement', 'Confronting a Quality Crisis Through Coaching and Culture Change', 'Scaling Talent and Practices for Agile Product Innovation']
+    🐾 Stepping back to see the themes, Matt's career is marked by a consistent pattern of building and transforming organizations to achieve significant outcomes. At **Accenture**, he built the Cloud Innovation Center from the ground up, scaling it from 0 to over 150 professionals. This center delivered at **4x** velocity with zero-defect deployments, contributing to over **\$100M** in repeat business. Matt's approach involved creating high-trust teams grounded in servant leadership and psychological safety, which resulted in sustainable practices that lasted beyond his direct involvement.
+    
+    In his role as a Technology & Innovation Leader, Matt led major modernization programs across various industries, including financial services, where he drove transformation at **HSBC**. He conducted on-site assessment workshops, developed a target state architecture, and secured a **\$10M** implementation contract by aligning business and IT teams on a unified transformation approach. This engagement eliminated compliance-risk manual processes and closed regulatory gaps. By anchoring **Accenture**'s innovation hub on Georgia Tech's campus, he improved solution relevance and increased client retention. His efforts in building a client engagement model focused on partnership over pursuit generated over **\$100M** in repeatable business, establishing the CIC as a trusted transformation partner.
+    
+    Throughout his career, Matt has demonstrated a knack for solving ambiguous problems, modernizing platforms, and building high-trust engineering cultures. His leadership journey reflects a commitment to creating environments where teams can thrive and deliver impactful solutions. Which pattern would you like to explore further?
+
+--- [WITH] run 1 Q10 conf='high' gated=N ---
+    query   : Tell me about a time Matt failed
+    sources : ['What I Learned About Assumptions', 'Why Hire Matt?', 'Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern', "Recovering Fiserv's $8.5M White-Label Card Portal", "Keeping the F-22's As-Built Configuration Data Accurate", "Building Sparkfly's Platform Alongside Its Founder", 'Teaching Entry-Level Developers to Build Their First Java Web Application']
+    Got it! 🐾
+    
+    During a platform modernization delivery for a **Fortune 500** financial services client, Matt faced a significant setback. He was the tech lead responsible for ensuring a safe environment setup across multiple environments, including development, QA, UAT, and production. However, under delivery pressure, he relied on existing documentation and assumptions about IAM controls and environment boundaries instead of verifying them. This oversight led to an offshore tester accidentally triggering an email job in the UAT environment, sending communications containing unmasked production data to thousands of real clients.
+    
+    Matt took full accountability for the incident and led the team through a root cause analysis and remediation process. He learned that assumptions could disguise risks and that thorough validation of IAM controls, environment verification, PII scrubbing, and risk ownership should be day-one leadership responsibilities. This experience reinforced his belief that leaders must own the environment their teams operate in, as the client demanded the removal of the tester from the project—a systemic failure resulting in an individual consequence.
+    
+    As a result, Matt now prioritizes IAM validation, environment verification, and risk ownership in his delivery approach, ensuring that such assumptions are never left unchecked again. Shall I find more examples like this?
+
+--- [WITH] run 2 Q10 conf='high' gated=N ---
+    query   : Tell me about a time Matt failed
+    sources : ['What I Learned About Assumptions', 'Why Hire Matt?', 'Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern', "Recovering Fiserv's $8.5M White-Label Card Portal", "Keeping the F-22's As-Built Configuration Data Accurate", "Building Sparkfly's Platform Alongside Its Founder", 'Teaching Entry-Level Developers to Build Their First Java Web Application']
+    🐾 On it!
+    
+    During his time as a Senior Technology Architecture Manager, Matt encountered a significant challenge while leading a global platform modernization delivery for a **Fortune 500 financial services client**. The project involved multiple environments, including dev, QA, UAT, and production, with offshore teams executing test cycles. Matt assumed that the IAM controls, environment boundaries, and data masking were correctly configured, relying on inherited documentation rather than verifying these critical components himself.
+    
+    This oversight led to an offshore tester accidentally triggering an email job in UAT that sent communications containing unmasked production data to thousands of real clients. The root cause was insufficient IAM checks, unclear environment boundaries, and production data that had not been scrubbed from downstream environments. Matt took full accountability for the incident, leading the team through a thorough root cause analysis and implementing corrective measures.
+    
+    Matt learned that assumptions can be risks in disguise and that IAM validation, environment verification, PII scrubbing, and risk ownership are essential leadership responsibilities from day one. This experience reinforced his belief that leaders must own the environment their teams operate in, ensuring that such systemic failures do not result in individual consequences.
+    
+    I can show you related patterns if that's helpful.
+
+==============================================================================
+TABLE: query x condition x run -> confidence, gated
+==============================================================================
+  Q  condition  run  confidence  gated  query
+---------------------------------------------
+  1  WITHOUT      1  high        N      Is Matt certified?
+  1  WITHOUT      2  high        N      Is Matt certified?
+  1  WITH         1  high        N      Is Matt certified?
+  1  WITH         2  high        N      Is Matt certified?
+  2  WITHOUT      1  high        N      What certifications does Matt hold?
+  2  WITHOUT      2  high        N      What certifications does Matt hold?
+  2  WITH         1  high        N      What certifications does Matt hold?
+  2  WITH         2  high        N      What certifications does Matt hold?
+  3  WITHOUT      1  high        N      Does Matt speak French?
+  3  WITHOUT      2  high        N      Does Matt speak French?
+  3  WITH         1  high        N      Does Matt speak French?
+  3  WITH         2  high        N      Does Matt speak French?
+  4  WITHOUT      1  low         Y      Where did Matt get his degree?
+  4  WITHOUT      2  low         Y      Where did Matt get his degree?
+  4  WITH         1  low         Y      Where did Matt get his degree?
+  4  WITH         2  low         Y      Where did Matt get his degree?
+  5  WITHOUT      1  high        N      Does Matt have a PMP?
+  5  WITHOUT      2  high        N      Does Matt have a PMP?
+  5  WITH         1  high        N      Does Matt have a PMP?
+  5  WITH         2  high        N      Does Matt have a PMP?
+  6  WITHOUT      1  high        N      How did Matt build the AWS certification program?
+  6  WITHOUT      2  high        N      How did Matt build the AWS certification program?
+  6  WITH         1  high        N      How did Matt build the AWS certification program?
+  6  WITH         2  high        N      How did Matt build the AWS certification program?
+  7  WITHOUT      1  high        N      Tell me about Matt's payments work at JPMorgan
+  7  WITHOUT      2  high        N      Tell me about Matt's payments work at JPMorgan
+  7  WITH         1  high        N      Tell me about Matt's payments work at JPMorgan
+  7  WITH         2  high        N      Tell me about Matt's payments work at JPMorgan
+  8  WITHOUT      1  high        N      What's Matt's leadership philosophy?
+  8  WITHOUT      2  high        N      What's Matt's leadership philosophy?
+  8  WITH         1  high        N      What's Matt's leadership philosophy?
+  8  WITH         2  high        N      What's Matt's leadership philosophy?
+  9  WITHOUT      1  high        N      Why hire Matt?
+  9  WITHOUT      2  high        N      Why hire Matt?
+  9  WITH         1  high        N      Why hire Matt?
+  9  WITH         2  high        N      Why hire Matt?
+ 10  WITHOUT      1  high        N      Tell me about a time Matt failed
+ 10  WITHOUT      2  high        N      Tell me about a time Matt failed
+ 10  WITH         1  high        N      Tell me about a time Matt failed
+ 10  WITH         2  high        N      Tell me about a time Matt failed

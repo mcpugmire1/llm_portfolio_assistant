@@ -1,0 +1,131 @@
+[
+ {
+  "query": "where is Matt located?",
+  "banner": null,
+  "status_banner": [
+   "\ud83d\udc3eFound 5 matching stories for \"where is Matt located?\""
+  ],
+  "results_count": "Showing\n\u00a0\n1\u20135\n\u00a0\nof\n\u00a0\n5\n\u00a0\nstories",
+  "grid_mounted": true
+ },
+ {
+  "query": "Where does Matt live?",
+  "banner": null,
+  "status_banner": [
+   "\ud83d\udc3eShowing closest matches for \"Where does Matt live?\". Relevance may be low."
+  ],
+  "results_count": "Showing\n\u00a0\n1\u20134\n\u00a0\nof\n\u00a0\n4\n\u00a0\nstories",
+  "grid_mounted": true
+ },
+ {
+  "query": "Is Matt open to relocation?",
+  "banner": null,
+  "status_banner": [
+   "\ud83d\udc3eFound 25 matching stories for \"Is Matt open to relocation?\""
+  ],
+  "results_count": "Showing\n\u00a0\n1\u201310\n\u00a0\nof\n\u00a0\n25\n\u00a0\nstories",
+  "grid_mounted": true
+ },
+ {
+  "query": "What's Matt's availability?",
+  "banner": null,
+  "status_banner": [
+   "\ud83d\udc3eFound 25 matching stories for \"What's Matt's availability?\""
+  ],
+  "results_count": "Showing\n\u00a0\n1\u201310\n\u00a0\nof\n\u00a0\n25\n\u00a0\nstories",
+  "grid_mounted": true
+ },
+ {
+  "query": "Where are you based?",
+  "banner": null,
+  "status_banner": [
+   "\ud83d\udc3eFound 25 matching stories for \"Where are you based?\""
+  ],
+  "results_count": "Showing\n\u00a0\n1\u201310\n\u00a0\nof\n\u00a0\n25\n\u00a0\nstories",
+  "grid_mounted": true
+ },
+ {
+  "query": "Are you open to relocation?",
+  "banner": null,
+  "status_banner": [
+   "\ud83d\udc3eFound 25 matching stories for \"Are you open to relocation?\""
+  ],
+  "results_count": "Showing\n\u00a0\n1\u201310\n\u00a0\nof\n\u00a0\n25\n\u00a0\nstories",
+  "grid_mounted": true
+ },
+ {
+  "query": "When can you start?",
+  "banner": null,
+  "status_banner": [
+   "\ud83d\udc3eFound 25 matching stories for \"When can you start?\""
+  ],
+  "results_count": "Showing\n\u00a0\n1\u201310\n\u00a0\nof\n\u00a0\n25\n\u00a0\nstories",
+  "grid_mounted": true
+ },
+ {
+  "query": "What was the project timeline at JP Morgan?",
+  "banner": null,
+  "status_banner": [
+   "\ud83d\udc3eFound 25 matching stories for \"What was the project timeline at JP Morgan?\""
+  ],
+  "results_count": "Showing\n\u00a0\n1\u201310\n\u00a0\nof\n\u00a0\n25\n\u00a0\nstories",
+  "grid_mounted": true
+ },
+ {
+  "query": "Where is Matt based?",
+  "banner": null,
+  "status_banner": [
+   "\ud83d\udc3eFound 9 matching stories for \"Where is Matt based?\""
+  ],
+  "results_count": "Showing\n\u00a0\n1\u20139\n\u00a0\nof\n\u00a0\n9\n\u00a0\nstories",
+  "grid_mounted": true
+ },
+ {
+  "query": "What city is Matt in?",
+  "banner": null,
+  "status_banner": [
+   "\ud83d\udc3eFound 7 matching stories for \"What city is Matt in?\""
+  ],
+  "results_count": "Showing\n\u00a0\n1\u20137\n\u00a0\nof\n\u00a0\n7\n\u00a0\nstories",
+  "grid_mounted": true
+ },
+ {
+  "query": "Can Matt work remotely?",
+  "banner": null,
+  "status_banner": [
+   "\ud83d\udc3eFound 25 matching stories for \"Can Matt work remotely?\""
+  ],
+  "results_count": "Showing\n\u00a0\n1\u201310\n\u00a0\nof\n\u00a0\n25\n\u00a0\nstories",
+  "grid_mounted": true
+ },
+ {
+  "query": "Does Matt need sponsorship?",
+  "banner": null,
+  "status_banner": [
+   "\ud83d\udc3eFound 25 matching stories for \"Does Matt need sponsorship?\""
+  ],
+  "results_count": "Showing\n\u00a0\n1\u201310\n\u00a0\nof\n\u00a0\n25\n\u00a0\nstories",
+  "grid_mounted": true
+ },
+ {
+  "query": "What are your salary expectations?",
+  "banner": "\ud83d\udc3e Wrong trail. I'm a Plott Hound trained to track Matt's transformation work. Give me a real scent to follow.",
+  "status_banner": [],
+  "results_count": "Showing\n\u00a0\n1\u201310\n\u00a0\nof\n\u00a0\n112\n\u00a0\nstories",
+  "grid_mounted": true
+ },
+ {
+  "query": "What's Matt's salary range?",
+  "banner": "\ud83d\udc3e Wrong trail. I'm a Plott Hound trained to track Matt's transformation work. Give me a real scent to follow.",
+  "status_banner": [],
+  "results_count": "Showing\n\u00a0\n1\u201310\n\u00a0\nof\n\u00a0\n112\n\u00a0\nstories",
+  "grid_mounted": true
+ },
+ {
+  "query": "Is Matt married?",
+  "banner": "\ud83d\udc3e I'm focused on Matt's professional experience.",
+  "status_banner": [],
+  "results_count": "Showing\n\u00a0\n1\u201310\n\u00a0\nof\n\u00a0\n112\n\u00a0\nstories",
+  "grid_mounted": true
+ }
+]

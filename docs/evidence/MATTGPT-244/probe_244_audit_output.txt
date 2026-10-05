@@ -1,0 +1,753 @@
+# MATTGPT-244 pre-flight audit — probe_159_output/arm2_run1.json
+
+Corpus: 123 stories from echo_star_stories_nlp.jsonl
+Rows: 23
+
+==============================================================================
+
+## Row 1  [required / strong / high]
+REQ: 10+ years of progressive software engineering experience, including hands-on development earlier in career
+EVIDENCE (story): 'About Matt – My Leadership Journey' / 'Accenture'
+  claimed relevance: Matt has extensive experience in software engineering and leadership roles.
+  corpus excerpt (matched 'career'):
+    ...cultures, modernizing platforms, and helping organizations shift how they think about technology. My task throughout my career has been to translate complex technology challenges into clear, people-centered strategies, and to help teams deliver real outcomes, not just artifacts. I buil...
+CORPUS GREP (independent term counts):
+  '10+': 0 stories
+  'career': 20 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 / Accenture
+    - Building Mentorship Programs for Long-Term Growth and Retention / Accenture
+    ... and 17 more
+  'development': 86 stories
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Product Delivery Through Lean Innovation at Capital One / Capital One
+    - Architecting AT&T's Scalable Order Management Platform / AT&T
+    ... and 83 more
+  'earlier': 4 stories
+    - Estimating by Risk and Complexity Instead of Time / Accenture
+    - Matching Task Complexity to Skill Level for Predictable Sprints / Accenture
+    - Transforming Developer Experience for the American Express Virtual Payments Platform / American Express
+    ... and 1 more
+  'engineering': 66 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    ... and 63 more
+  'hands-on': 22 stories
+    - Architecting Enhancements for AT&T's Network Engineering Platform / AT&T
+    - Behavior & Test-Driven Development: Shipping Zero-Defect Code at 4X Velocity / Fortune 500 Clients
+    - Building Smart, Connected Devices at Accenture's Liquid Studio / Accenture
+    ... and 19 more
+
+## Row 2  [required / strong / high]
+REQ: 5+ years leading engineering managers and senior technical leaders in a multi-team environment
+EVIDENCE (story): 'Leading People: From Delivery Teams to a 150-Person Organization' / 'Fortune 500 Clients'
+  claimed relevance: Matt led a 150+ person organization, indicating experience in leading multiple teams.
+  corpus excerpt (matched 'engineering'):
+    ..., and expense approvals when speed demanded it - Designed the CIC organization deliberately flat: engineers reported to engineering practice leads, product managers to product practice leads, and product designers to design practice leads, with 3 practice leads plus 8-10 client delivery lea...
+CORPUS GREP (independent term counts):
+  'engineering': 66 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    ... and 63 more
+  'environment': 22 stories
+    - Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 / Accenture
+    - Building JP Morgan's Global Payments Gateway Across 12 Countries / JP Morgan Chase
+    - Building Mentorship Programs for Long-Term Growth and Retention / Accenture
+    ... and 19 more
+  'leaders': 30 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Architecting AT&T's Scalable Order Management Platform / AT&T
+    - Building Effective AI-Assisted Development Workflows / Independent Project
+    ... and 27 more
+  'leading': 30 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    - Breaking Silos Between Engineering, Design, and Product / Accenture
+    ... and 27 more
+  'managers': 18 stories
+    - Accelerating Product Delivery Through Lean Innovation at Capital One / Capital One
+    - Breaking Silos Between Engineering, Design, and Product / Accenture
+    - Career Intent – What I’m Looking For Next / Independent Project
+    ... and 15 more
+  'multi-team': 0 stories
+
+## Row 3  [required / strong / high]
+REQ: Experience building or scaling an engineering organization from early stage to 100+ or inheriting and restructuring an existing org
+EVIDENCE (story): 'Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500' / 'Accenture'
+  claimed relevance: Matt scaled the Cloud Innovation Center from 0 to 150+ professionals.
+  corpus excerpt (matched 'building'):
+    ...pted for enterprise complexity including legacy systems, compliance requirements, and organizational change management. Building on this proof point, I was tasked with scaling the practice by creating new Cloud Innovation Centers in Atlanta and Tampa from the ground up, establishing repe...
+CORPUS GREP (independent term counts):
+  '100+': 0 stories
+  'building': 52 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Product Delivery Through Lean Innovation at Capital One / Capital One
+    ... and 49 more
+  'early': 26 stories
+    - Balancing Execution Speed with Security and Compliance / Fortune 500 Clients
+    - Building a Sustainable Delivery Rhythm for Work-Life Balance / Accenture
+    - Conducting Discovery and Framing to Build Cross-Functional Alignment / American Express
+    ... and 23 more
+  'engineering': 66 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    ... and 63 more
+  'existing': 15 stories
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Assessing Mobile Readiness for RBC's Corporate Banking Platform / RBC
+    - Behavior & Test-Driven Development: Shipping Zero-Defect Code at 4X Velocity / Fortune 500 Clients
+    ... and 12 more
+  'inheriting': 0 stories
+
+## Row 4  [required / strong / high]
+REQ: Cloud-native architecture experience (AWS, Azure, or GCP) at the platform level
+EVIDENCE (story): 'Driving Cloud-Native Innovation through TICARA Framework' / 'Accenture'
+  claimed relevance: Matt designed TICARA with cloud-agnostic intent using AWS and Azure.
+  corpus excerpt (matched 'AWS'):
+    ...sing Terraform for infrastructure and the Serverless Framework for packaging and deployment, pointed at pre-provisioned AWS/Azure accounts kept ready at the hub, and built a documented developer toolkit spanning serverless functions, API Gateway, Aurora/NoSQL/RDBMS(Oracle, SQL Serve...
+CORPUS GREP (independent term counts):
+  'AWS': 10 stories
+    - Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 / Accenture
+    - Building Smart, Connected Devices at Accenture's Liquid Studio / Accenture
+    - Building Tangible Cloud Tech Skills for HBCU Students / Accenture
+    ... and 7 more
+  'Cloud-native': 25 stories
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Product Delivery Through Lean Innovation at Capital One / Capital One
+    - Balancing Execution Speed with Security and Compliance / Fortune 500 Clients
+    ... and 22 more
+  'GCP': 2 stories
+    - Building Smart, Connected Devices at Accenture's Liquid Studio / Accenture
+    - Delivering Working Prototypes in Days, Not Months / Accenture
+  'architecture': 53 stories
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Architecting AT&T's Scalable Order Management Platform / AT&T
+    - Architecting Enhancements for AT&T's Network Engineering Platform / AT&T
+    ... and 50 more
+  'level': 31 stories
+    - Behavior & Test-Driven Development: Shipping Zero-Defect Code at 4X Velocity / Fortune 500 Clients
+    - Building AT&T's Service Delivery Platform / AT&T
+    - Building Effective AI-Assisted Development Workflows / Independent Project
+    ... and 28 more
+  'platform': 48 stories
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Architecting AT&T's Scalable Order Management Platform / AT&T
+    - Assessing Mobile Readiness for RBC's Corporate Banking Platform / RBC
+    ... and 45 more
+
+## Row 5  [required / strong / high]
+REQ: Track record of legacy platform modernization in production environments without business disruption
+EVIDENCE (story): 'Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices' / 'Norfolk Southern'
+  claimed relevance: Matt led the rearchitecture of Norfolk Southern's systems without disruption.
+  corpus excerpt (matched 'business'):
+    ...ve rail operations five decades on. The applications were monolithic, difficult to scale, and slow to adapt to evolving business needs. This legacy architecture introduced bottlenecks in development, created system fragility under high load, and hindered efforts to modernize operations a...
+CORPUS GREP (independent term counts):
+  'business': 69 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Product Delivery Through Lean Innovation at Capital One / Capital One
+    ... and 66 more
+  'disruption': 4 stories
+    - Building Self-Healing Systems through Resilience Engineering / Fortune 500 Clients
+    - Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform / JP Morgan Chase
+    - Keeping Roadmaps Alive When Priorities Keep Shifting / Fortune 500 Clients
+    ... and 1 more
+  'environments': 20 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Balancing Execution Speed with Security and Compliance / Fortune 500 Clients
+    ... and 17 more
+  'legacy': 32 stories
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Assessing Mobile Readiness for RBC's Corporate Banking Platform / RBC
+    - Behavior & Test-Driven Development: Shipping Zero-Defect Code at 4X Velocity / Fortune 500 Clients
+    ... and 29 more
+  'modernization': 24 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    - Assessing Mobile Readiness for RBC's Corporate Banking Platform / RBC
+    ... and 21 more
+  'platform': 48 stories
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Architecting AT&T's Scalable Order Management Platform / AT&T
+    - Assessing Mobile Readiness for RBC's Corporate Banking Platform / RBC
+    ... and 45 more
+
+## Row 6  [required / strong / high]
+REQ: Cross-functional leadership experience — engineering, product, and design operating as integrated units
+EVIDENCE (story): 'Breaking Silos Between Engineering, Design, and Product' / 'Accenture'
+  claimed relevance: Matt built balanced teams with shared accountability across functions.
+  corpus excerpt (matched 'Cross-functional'):
+    ...resulting in missed opportunities for improvement and team misalignment. Transform team dynamics by creating balanced, cross-functional teams to break down silos, strengthen collaboration, and promote equal ownership. Establish a culture of continuous improvement to sustain high engagement and...
+CORPUS GREP (independent term counts):
+  'Cross-functional': 64 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    ... and 61 more
+  'design': 59 stories
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    - Accelerating Product Delivery Through Lean Innovation at Capital One / Capital One
+    - Architecting AT&T's Scalable Order Management Platform / AT&T
+    ... and 56 more
+  'engineering': 66 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    ... and 63 more
+  'integrated': 28 stories
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    - Architecting AT&T's Scalable Order Management Platform / AT&T
+    - Balancing Execution Speed with Security and Compliance / Fortune 500 Clients
+    ... and 25 more
+  'operating': 9 stories
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Building Effective AI-Assisted Development Workflows / Independent Project
+    - De-Risking RBC’s Corporate Banking Platform Investment / RBC
+    ... and 6 more
+  'product': 49 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Product Delivery Through Lean Innovation at Capital One / Capital One
+    - Behavior & Test-Driven Development: Shipping Zero-Defect Code at 4X Velocity / Fortune 500 Clients
+    ... and 46 more
+
+## Row 7  [required / strong / high]
+REQ: Experience establishing or maturing engineering delivery practices (CI/CD, automated testing, observability, release management)
+EVIDENCE (story): "Modernizing DevOps and Deployment for Fiserv's White-Label Card Portal" / 'Fiserv'
+  claimed relevance: Matt implemented CI/CD and improved deployment practices at Fiserv.
+  corpus excerpt (matched 'automated'):
+    ...igh, and the team frequently needed hotfixes or WAR rollbacks. Code quality was poor with no enforced review process or automated testing. Modernize the build and deployment pipeline to enable predictable, quality-controlled releases across parallel client brands while operating within SO...
+CORPUS GREP (independent term counts):
+  'automated': 22 stories
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Balancing Execution Speed with Security and Compliance / Fortune 500 Clients
+    - Behavior & Test-Driven Development: Shipping Zero-Defect Code at 4X Velocity / Fortune 500 Clients
+    ... and 19 more
+  'delivery': 84 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    ... and 81 more
+  'engineering': 66 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    ... and 63 more
+  'establishing': 23 stories
+    - Balancing Execution Speed with Security and Compliance / Fortune 500 Clients
+    - Behavior & Test-Driven Development: Shipping Zero-Defect Code at 4X Velocity / Fortune 500 Clients
+    - Building a Sustainable Delivery Rhythm for Work-Life Balance / Accenture
+    ... and 20 more
+  'maturing': 0 stories
+  'observability': 1 stories
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+
+## Row 8  [required / strong / high]
+REQ: Regulated industry experience (financial services, healthcare, government, or equivalent complexity)
+EVIDENCE (story): 'Delivering AI-Powered Chronic Disease Management for Healthcare' / 'Major U.S. Health System'
+  claimed relevance: Matt worked on AI-powered solutions in a regulated healthcare environment.
+  corpus excerpt (matched 'healthcare'):
+    ...A leading U.S. healthcare provider relied on reactive care for chronic diseases like diabetes and hypertension, with limited real-time patient insights. I led the initiative to build AI...
+CORPUS GREP (independent term counts):
+  'complexity': 15 stories
+    - Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 / Accenture
+    - Building JP Morgan's Global Payments Gateway Across 12 Countries / JP Morgan Chase
+    - Building the PMO for RBC's Commercial Banking Modernization / RBC
+    ... and 12 more
+  'equivalent': 2 stories
+    - Behavior & Test-Driven Development: Shipping Zero-Defect Code at 4X Velocity / Fortune 500 Clients
+    - Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 / Accenture
+  'financial': 24 stories
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Assessing Mobile Readiness for RBC's Corporate Banking Platform / RBC
+    - Balancing Execution Speed with Security and Compliance / Fortune 500 Clients
+    ... and 21 more
+  'government': 3 stories
+    - Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 / Accenture
+    - Building JP Morgan's Global Payments Gateway Across 12 Countries / JP Morgan Chase
+    - Building the Payment Engine Behind JP Morgan ACCESS / JP Morgan Chase
+  'healthcare': 6 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 / Accenture
+    - Delivering AI-Powered Chronic Disease Management for Healthcare / Major U.S. Health System
+    ... and 3 more
+  'industry': 12 stories
+    - Building an Innovation Ecosystem to Connect Clients with Emerging Technology / Accenture
+    - Building Smart, Connected Devices at Accenture's Liquid Studio / Accenture
+    - Building Tangible Cloud Tech Skills for HBCU Students / Accenture
+    ... and 9 more
+
+## Row 9  [required / strong / high]
+REQ: Demonstrated ability to translate business strategy into engineering roadmap and organizational structure
+EVIDENCE (story): 'Partnering with Clients to Build the Right Product Faster' / 'Fortune 500 Clients'
+  claimed relevance: Matt used Build-Measure-Learn loops to align engineering with business strategy.
+  corpus excerpt (matched 'business'):
+    ...ack loops, replacing ad hoc delivery with a repeatable model that reduced rework and maintained alignment with evolving business goals. - Adopted Lean Product Principles emphasizing the Build-Measure-Learn loop for rapid iterations and data-driven decisions - Applied Hypothesis-Driven De...
+CORPUS GREP (independent term counts):
+  'business': 69 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Product Delivery Through Lean Innovation at Capital One / Capital One
+    ... and 66 more
+  'engineering': 66 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    ... and 63 more
+  'organizational': 8 stories
+    - Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 / Accenture
+    - Designing Cloud Integration Architecture for JP Morgan's Asset Management / JP Morgan Chase
+    - Leading People: From Delivery Teams to a 150-Person Organization / Fortune 500 Clients
+    ... and 5 more
+  'roadmap': 12 stories
+    - Architecting Enhancements for AT&T's Network Engineering Platform / AT&T
+    - Assessing Mobile Readiness for RBC's Corporate Banking Platform / RBC
+    - De-Risking RBC’s Corporate Banking Platform Investment / RBC
+    ... and 9 more
+  'strategy': 35 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Architecting AT&T's Scalable Order Management Platform / AT&T
+    - Architecting Enhancements for AT&T's Network Engineering Platform / AT&T
+    ... and 32 more
+  'structure': 19 stories
+    - Building Effective AI-Assisted Development Workflows / Independent Project
+    - Building the PMO for RBC's Commercial Banking Modernization / RBC
+    - Enhancing Team Proficiency through Servant Leadership and Mentorship / Accenture
+    ... and 16 more
+
+## Row 10  [required / strong / high]
+REQ: AI/ML adoption strategy — practical experience introducing AI-assisted development practices into an engineering organization
+EVIDENCE (story): 'Building Effective AI-Assisted Development Workflows' / 'Independent Project'
+  claimed relevance: Matt developed AI-assisted development practices for MattGPT.
+  corpus excerpt (matched 'AI-assisted'):
+    ...ct as a solo developer at team-level velocity. The skill isn't just prompting. It's building the scaffolding that makes AI-assisted development reliable across complex, long-running projects. Building MattGPT as a solo developer, I used AI coding assistants as a true development partner, no...
+CORPUS GREP (independent term counts):
+  'AI-assisted': 1 stories
+    - Building Effective AI-Assisted Development Workflows / Independent Project
+  'adoption': 24 stories
+    - Assessing Mobile Readiness for RBC's Corporate Banking Platform / RBC
+    - Behavior & Test-Driven Development: Shipping Zero-Defect Code at 4X Velocity / Fortune 500 Clients
+    - Building AT&T's Service Delivery Platform / AT&T
+    ... and 21 more
+  'development': 86 stories
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Product Delivery Through Lean Innovation at Capital One / Capital One
+    - Architecting AT&T's Scalable Order Management Platform / AT&T
+    ... and 83 more
+  'engineering': 66 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    ... and 63 more
+  'introducing': 4 stories
+    - Building the PMO for RBC's Commercial Banking Modernization / RBC
+    - Driving Agile Transformation for Fiserv's Card Portal / Fiserv
+    - Overhauling Entitlement Management for JP Morgan ACCESS / JP Morgan Chase
+    ... and 1 more
+  'organization': 20 stories
+    - Breaking Silos Between Engineering, Design, and Product / Accenture
+    - Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 / Accenture
+    - Building Mentorship Programs for Long-Term Growth and Retention / Accenture
+    ... and 17 more
+
+## Row 11  [required / strong / high]
+REQ: Modern technology stack fluency across frontend and backend (React or equivalent, Python/Node.js/Go, containerized microservices)
+EVIDENCE (story): 'MattGPT: RAG Architecture & Semantic Search Implementation' / 'Independent Project'
+  claimed relevance: Matt implemented a RAG architecture using Python and containerized microservices.
+  corpus excerpt (matched 'technology'):
+    ...c router, and results are gated by confidence levels. Metadata filtering allows users to filter by domain, industry, or technology. GPT-4o-mini classifier validates and routes the query before retrieval, reserving GPT-4o for generation. For the generation layer, I integrated GPT-4o with a...
+CORPUS GREP (independent term counts):
+  'backend': 6 stories
+    - Confronting a Quality Crisis Through Coaching and Culture Change / Norfolk Southern
+    - Delivering Working Prototypes in Days, Not Months / Accenture
+    - Driving Cloud-Native Innovation through TICARA Framework / Accenture
+    ... and 3 more
+  'containerized': 1 stories
+    - Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices / Norfolk Southern
+  'equivalent': 2 stories
+    - Behavior & Test-Driven Development: Shipping Zero-Defect Code at 4X Velocity / Fortune 500 Clients
+    - Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 / Accenture
+  'fluency': 2 stories
+    - Building Effective AI-Assisted Development Workflows / Independent Project
+    - Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern / Norfolk Southern
+  'frontend': 3 stories
+    - Confronting a Quality Crisis Through Coaching and Culture Change / Norfolk Southern
+    - Launching a Self-Paced Learning Program for Emerging Technologies / Accenture
+    - MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery / Independent Project
+  'microservices': 8 stories
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    - Driving Cloud-Native Innovation through TICARA Framework / Accenture
+    ... and 5 more
+
+## Row 12  [required / strong / high]
+REQ: Budget ownership or P&L accountability for an engineering function
+EVIDENCE (story): 'Owning the P&L: From Engagement Margin to Center Cost Base' / 'Fortune 500 Clients'
+  claimed relevance: Matt owned P&L accountability across multiple engagements.
+  corpus excerpt (matched 'P&L'):
+    ...ntractor rule under escalation Accenture engagement and center leadership Program Recovery & Vendor Delivery Management P&L Management Engagement Economics Margin Management Contract Profitability (CCI) Chargeability & Utilization Management Bench & Capacity Optimization Contractor...
+CORPUS GREP (independent term counts):
+  'P&L': 3 stories
+    - Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 / Accenture
+    - Leading People: From Delivery Teams to a 150-Person Organization / Fortune 500 Clients
+    - Owning the P&L: From Engagement Margin to Center Cost Base / Fortune 500 Clients
+  'accountability': 13 stories
+    - Breaking Silos Between Engineering, Design, and Product / Accenture
+    - Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 / Accenture
+    - Building JP Morgan's Global Payments Gateway Across 12 Countries / JP Morgan Chase
+    ... and 10 more
+  'engineering': 66 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    ... and 63 more
+  'function': 3 stories
+    - Behavior & Test-Driven Development: Shipping Zero-Defect Code at 4X Velocity / Fortune 500 Clients
+    - Delivering Global Data Conversion for JP Morgan's TS Dynamics CRM Across Four Regions / JP Morgan Chase
+    - The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine / Norfolk Southern
+  'ownership': 16 stories
+    - Breaking Silos Between Engineering, Design, and Product / Accenture
+    - Building a Sustainable Delivery Rhythm for Work-Life Balance / Accenture
+    - Building the Payment Engine Behind JP Morgan ACCESS / JP Morgan Chase
+    ... and 13 more
+
+## Row 13  [preferred / partial / medium]
+REQ: Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background
+GAP: Note: Limited evidence of SaaS or marketplace experience
+EVIDENCE (story): "Building Sparkfly's Platform Alongside Its Founder" / 'Sparkfly'
+  claimed relevance: Matt built a platform for Sparkfly, a product company.
+  corpus excerpt (matched 'company'):
+    ...ortal home - Built SparkAlerts, the administrative messaging tool, with audience scoping to system, individual user, or company, expiration scheduling, active state, and a role-based permission gate requiring both superuser and fulfillment roles - Built account management including know...
+CORPUS GREP (independent term counts):
+  'addition': 1 stories
+    - Simplifying MattGPT's RAG Pipeline Through Entity Gate Removal / Independent Project
+  'background': 2 stories
+    - MattGPT: Human-Centered UX Design & Information Architecture / Independent Project
+    - Teaching Entry-Level Developers to Build Their First Java Web Application / American Intercontinental University
+  'company': 5 stories
+    - Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 / Accenture
+    - MattGPT: Human-Centered UX Design & Information Architecture / Independent Project
+    - Building Sparkfly's Platform Alongside Its Founder / Sparkfly
+    ... and 2 more
+  'consulting': 6 stories
+    - Behavior & Test-Driven Development: Shipping Zero-Defect Code at 4X Velocity / Fortune 500 Clients
+    - Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 / Accenture
+    - Keeping Products Alive through Continuous Feedback and Adaptation / Fortune 500 Clients
+    ... and 3 more
+  'instead': 21 stories
+    - Building Smart, Connected Devices at Accenture's Liquid Studio / Accenture
+    - Confronting a Quality Crisis Through Coaching and Culture Change / Norfolk Southern
+    - Delivering Working Prototypes in Days, Not Months / Accenture
+    ... and 18 more
+  'marketplace': 0 stories
+
+## Row 14  [preferred / strong / high]
+REQ: Healthcare, insurance, or life sciences domain knowledge
+EVIDENCE (story): 'Delivering AI-Powered Chronic Disease Management for Healthcare' / 'Major U.S. Health System'
+  claimed relevance: Matt worked on healthcare projects involving AI and chronic disease management.
+  corpus excerpt (matched 'domain'):
+    ...rking MVP in 16 weeks through iterative product slicing, real extensible software rather than art-of-the-possible, in a domain where HIPAA and patient-privacy risk made most organizations move cautiously. Outcomes built executive confidence for broader implementation across the health...
+CORPUS GREP (independent term counts):
+  'domain': 17 stories
+    - Architecting AT&T's Scalable Order Management Platform / AT&T
+    - Defining System Interfaces for AT&T's Order Management Platform / AT&T
+    - Delivering AI-Powered Chronic Disease Management for Healthcare / Major U.S. Health System
+    ... and 14 more
+  'insurance': 3 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 / Accenture
+    - Driving Cloud-Native Innovation through TICARA Framework / Accenture
+  'sciences': 1 stories
+    - Building Smart, Connected Devices at Accenture's Liquid Studio / Accenture
+
+## Row 15  [preferred / partial / medium]
+REQ: Hands-on Kubernetes experience at production scale (cluster management, service mesh, multi-tenant orchestration)
+GAP: Note: No specific mention of service mesh or multi-tenant orchestration
+EVIDENCE (story): 'Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices' / 'Norfolk Southern'
+  claimed relevance: Matt used Kubernetes for microservices deployment.
+  corpus excerpt (matched 'orchestration'):
+    ...nd incrementally replaced components on live production using the Strangler pattern - Implemented Docker/Kubernetes for orchestration - Automated CI/CD pipelines, and ensured coexistence via API gateways and reconciliation reporting between legacy and new systems - Faster deployment cycles th...
+CORPUS GREP (independent term counts):
+  'Hands-on': 22 stories
+    - Architecting Enhancements for AT&T's Network Engineering Platform / AT&T
+    - Behavior & Test-Driven Development: Shipping Zero-Defect Code at 4X Velocity / Fortune 500 Clients
+    - Building Smart, Connected Devices at Accenture's Liquid Studio / Accenture
+    ... and 19 more
+  'cluster': 0 stories
+  'multi-tenant': 1 stories
+    - Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout / JP Morgan Chase
+  'orchestration': 1 stories
+    - Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices / Norfolk Southern
+  'production': 36 stories
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Product Delivery Through Lean Innovation at Capital One / Capital One
+    - Balancing Execution Speed with Security and Compliance / Fortune 500 Clients
+    ... and 33 more
+  'scale': 25 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Behavior & Test-Driven Development: Shipping Zero-Defect Code at 4X Velocity / Fortune 500 Clients
+    ... and 22 more
+
+## Row 16  [preferred / strong / high]
+REQ: Graduate degree in a technical field (Computer Science, Engineering, Information Technology, or related)
+EVIDENCE (profile): Matt holds a Master's degree in Information Technology.
+CORPUS GREP (independent term counts):
+  'Computer Science': 0 stories
+  'Information Technology': 1 stories
+    - Delivering Through a Company's Wind-Down / Cendian Chemical Logistics
+  'degree': 0 stories
+  'field': 2 stories
+    - Building the Payment Engine Behind JP Morgan ACCESS / JP Morgan Chase
+    - MattGPT: RAG Architecture & Semantic Search Implementation / Independent Project
+  'related': 7 stories
+    - Enabling New Ways of Working Through Immersive Coaching and Transformation Labs / Accenture
+    - Integrating Play into Work to Enhance Team Motivation / Accenture
+    - MattGPT: RAG Architecture & Semantic Search Implementation / Independent Project
+    ... and 4 more
+  'technical': 57 stories
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Architecting AT&T's Scalable Order Management Platform / AT&T
+    - Architecting Enhancements for AT&T's Network Engineering Platform / AT&T
+    ... and 54 more
+
+## Row 17  [preferred / gap / low]
+REQ: Published thought leadership or conference speaking on engineering culture, modernization, or AI adoption
+GAP: Note: No evidence of published thought leadership or speaking
+EVIDENCE: (none)
+CORPUS GREP (independent term counts):
+  'adoption': 24 stories
+    - Assessing Mobile Readiness for RBC's Corporate Banking Platform / RBC
+    - Behavior & Test-Driven Development: Shipping Zero-Defect Code at 4X Velocity / Fortune 500 Clients
+    - Building AT&T's Service Delivery Platform / AT&T
+    ... and 21 more
+  'conference': 2 stories
+    - Building Tangible Cloud Tech Skills for HBCU Students / Accenture
+    - Driving Modern Software Engineering with Project Octane / Accenture
+  'culture': 30 stories
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    - Breaking Silos Between Engineering, Design, and Product / Accenture
+    ... and 27 more
+  'engineering': 66 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    ... and 63 more
+  'modernization': 24 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    - Assessing Mobile Readiness for RBC's Corporate Banking Platform / RBC
+    ... and 21 more
+  'speaking': 0 stories
+
+## Row 18  [required / strong / high]
+REQ: Experience leading and scaling a cross-functional product engineering organization of 150-300 engineers, product managers, and designers
+EVIDENCE (story): 'Leading People: From Delivery Teams to a 150-Person Organization' / 'Fortune 500 Clients'
+  claimed relevance: Matt led a 150+ person organization, indicating experience in scaling teams.
+  corpus excerpt (matched 'cross-functional'):
+    ...s and designers breaking down a messy client brief, mapping user stories, or pairing on wireframes in real time, plus a cross-functional panel testing execution maturity, client-facing diplomacy, and team chemistry when time allowed - Enforced the loop's integrity: every interviewer logged an in...
+CORPUS GREP (independent term counts):
+  '150-300': 0 stories
+  'cross-functional': 64 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    ... and 61 more
+  'designers': 11 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Cutting Time-to-Market with Lean XP and Balanced Teams Across Fortune 500 Clients / Fortune 500 Clients
+    - Empowering Teams through Decentralized Decision-Making / Accenture
+    ... and 8 more
+  'engineering': 66 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    ... and 63 more
+  'engineers': 29 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Product Delivery Through Lean Innovation at Capital One / Capital One
+    ... and 26 more
+  'leading': 30 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    - Breaking Silos Between Engineering, Design, and Product / Accenture
+    ... and 27 more
+
+## Row 19  [required / strong / high]
+REQ: Experience defining engineering operating models including hiring philosophy, team structure, delivery practices, quality standards, and career development
+EVIDENCE (story): 'Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500' / 'Accenture'
+  claimed relevance: Matt defined operating models for the Cloud Innovation Centers.
+  corpus excerpt (matched 'career'):
+    ...cross product management, customer experience design, and software engineering disciplines over four years. Established career progression frameworks and skill development pathways that retained talent and built depth of expertise - Adapted Silicon Valley Practices for Fortune 500 Ente...
+CORPUS GREP (independent term counts):
+  'career': 20 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 / Accenture
+    - Building Mentorship Programs for Long-Term Growth and Retention / Accenture
+    ... and 17 more
+  'defining': 9 stories
+    - Assessing Mobile Readiness for RBC's Corporate Banking Platform / RBC
+    - Delivering Multi-Client Customization and Compliance for the White-Label Card Portal / Fiserv
+    - Delivering SOA for Level 3's Network Inventory System / Level 3 Communications
+    ... and 6 more
+  'delivery': 84 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    ... and 81 more
+  'development': 86 stories
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Product Delivery Through Lean Innovation at Capital One / Capital One
+    - Architecting AT&T's Scalable Order Management Platform / AT&T
+    ... and 83 more
+  'engineering': 66 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    ... and 63 more
+  'hiring': 7 stories
+    - Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 / Accenture
+    - Implementing Eval-Driven Development for RAG Systems / Independent Project
+    - Leading People: From Delivery Teams to a 150-Person Organization / Fortune 500 Clients
+    ... and 4 more
+
+## Row 20  [required / strong / high]
+REQ: Experience driving platform modernization across a legacy core while maintaining business continuity
+EVIDENCE (story): 'Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices' / 'Norfolk Southern'
+  claimed relevance: Matt led platform modernization without disrupting business operations.
+  corpus excerpt (matched 'business'):
+    ...ve rail operations five decades on. The applications were monolithic, difficult to scale, and slow to adapt to evolving business needs. This legacy architecture introduced bottlenecks in development, created system fragility under high load, and hindered efforts to modernize operations a...
+CORPUS GREP (independent term counts):
+  'business': 69 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Product Delivery Through Lean Innovation at Capital One / Capital One
+    ... and 66 more
+  'continuity': 9 stories
+    - Architecting AT&T's Scalable Order Management Platform / AT&T
+    - Building Effective AI-Assisted Development Workflows / Independent Project
+    - Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform / JP Morgan Chase
+    ... and 6 more
+  'driving': 10 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Building JP Morgan's Global Payments Gateway Across 12 Countries / JP Morgan Chase
+    - Building the PMO for RBC's Commercial Banking Modernization / RBC
+    ... and 7 more
+  'legacy': 32 stories
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Assessing Mobile Readiness for RBC's Corporate Banking Platform / RBC
+    - Behavior & Test-Driven Development: Shipping Zero-Defect Code at 4X Velocity / Fortune 500 Clients
+    ... and 29 more
+  'maintaining': 21 stories
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Building an Innovation Ecosystem to Connect Clients with Emerging Technology / Accenture
+    - Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 / Accenture
+    ... and 18 more
+  'modernization': 24 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    - Assessing Mobile Readiness for RBC's Corporate Banking Platform / RBC
+    ... and 21 more
+
+## Row 21  [required / strong / high]
+REQ: Experience establishing AI-assisted engineering practices with guardrails for quality, security, and responsible adoption
+EVIDENCE (story): 'Building Effective AI-Assisted Development Workflows' / 'Independent Project'
+  claimed relevance: Matt developed AI-assisted development practices with quality and security guardrails.
+  corpus excerpt (matched 'AI-assisted'):
+    ...ct as a solo developer at team-level velocity. The skill isn't just prompting. It's building the scaffolding that makes AI-assisted development reliable across complex, long-running projects. Building MattGPT as a solo developer, I used AI coding assistants as a true development partner, no...
+CORPUS GREP (independent term counts):
+  'AI-assisted': 1 stories
+    - Building Effective AI-Assisted Development Workflows / Independent Project
+  'adoption': 24 stories
+    - Assessing Mobile Readiness for RBC's Corporate Banking Platform / RBC
+    - Behavior & Test-Driven Development: Shipping Zero-Defect Code at 4X Velocity / Fortune 500 Clients
+    - Building AT&T's Service Delivery Platform / AT&T
+    ... and 21 more
+  'engineering': 66 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    ... and 63 more
+  'establishing': 23 stories
+    - Balancing Execution Speed with Security and Compliance / Fortune 500 Clients
+    - Behavior & Test-Driven Development: Shipping Zero-Defect Code at 4X Velocity / Fortune 500 Clients
+    - Building a Sustainable Delivery Rhythm for Work-Life Balance / Accenture
+    ... and 20 more
+  'guardrails': 1 stories
+    - Leading People: From Delivery Teams to a 150-Person Organization / Fortune 500 Clients
+  'quality': 49 stories
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    - Accelerating Product Delivery Through Lean Innovation at Capital One / Capital One
+    ... and 46 more
+
+## Row 22  [required / strong / high]
+REQ: Experience partnering with C-suite to translate business strategy into technical roadmap and organizational priorities
+EVIDENCE (story): 'Partnering with Clients to Build the Right Product Faster' / 'Fortune 500 Clients'
+  claimed relevance: Matt partnered with executives to align engineering with business strategy.
+  corpus excerpt (matched 'business'):
+    ...ack loops, replacing ad hoc delivery with a repeatable model that reduced rework and maintained alignment with evolving business goals. - Adopted Lean Product Principles emphasizing the Build-Measure-Learn loop for rapid iterations and data-driven decisions - Applied Hypothesis-Driven De...
+CORPUS GREP (independent term counts):
+  'C-suite': 0 stories
+  'business': 69 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Product Delivery Through Lean Innovation at Capital One / Capital One
+    ... and 66 more
+  'organizational': 8 stories
+    - Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 / Accenture
+    - Designing Cloud Integration Architecture for JP Morgan's Asset Management / JP Morgan Chase
+    - Leading People: From Delivery Teams to a 150-Person Organization / Fortune 500 Clients
+    ... and 5 more
+  'partnering': 2 stories
+    - Launching a Self-Paced Learning Program for Emerging Technologies / Accenture
+    - Partnering with Clients to Build the Right Product Faster / Fortune 500 Clients
+  'priorities': 19 stories
+    - Accelerating Product Delivery Through Lean Innovation at Capital One / Capital One
+    - Architecting AT&T's Scalable Order Management Platform / AT&T
+    - Building Mentorship Programs for Long-Term Growth and Retention / Accenture
+    ... and 16 more
+  'roadmap': 12 stories
+    - Architecting Enhancements for AT&T's Network Engineering Platform / AT&T
+    - Assessing Mobile Readiness for RBC's Corporate Banking Platform / RBC
+    - De-Risking RBC’s Corporate Banking Platform Investment / RBC
+    ... and 9 more
+
+## Row 23  [required / strong / high]
+REQ: Experience building a culture of sustainable delivery with high throughput without heroics
+EVIDENCE (story): 'Escaping the Velocity Trap for Sustainable Delivery' / 'Accenture'
+  claimed relevance: Matt focused on sustainable delivery practices to improve team morale and productivity.
+  corpus excerpt (matched 'culture'):
+    ...ders to outcome-based thinking - Rather than measuring teams against targets, focused on the quality of the improvement culture itself: number of process experiments, institutional changes driven by experiments, and learning velocity. Productivity follows improvement culture, not the ot...
+CORPUS GREP (independent term counts):
+  'building': 52 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Product Delivery Through Lean Innovation at Capital One / Capital One
+    ... and 49 more
+  'culture': 30 stories
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    - Breaking Silos Between Engineering, Design, and Product / Accenture
+    ... and 27 more
+  'delivery': 84 stories
+    - About Matt – My Leadership Journey / Accenture
+    - Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD / Fortune 500 Clients
+    - Accelerating Modernization with Reusable Solution Patterns / Accenture
+    ... and 81 more
+  'heroics': 1 stories
+    - What I Learned About Sustainable Leadership / Accenture
+  'sustainable': 15 stories
+    - Building a Sustainable Delivery Rhythm for Work-Life Balance / Accenture
+    - Building an Innovation Ecosystem to Connect Clients with Emerging Technology / Accenture
+    - Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 / Accenture
+    ... and 12 more
+  'throughput': 2 stories
+    - Escaping the Velocity Trap for Sustainable Delivery / Accenture
+    - Replacing Velocity Metrics with Lead Time, Cycle Time, and Throughput / Accenture

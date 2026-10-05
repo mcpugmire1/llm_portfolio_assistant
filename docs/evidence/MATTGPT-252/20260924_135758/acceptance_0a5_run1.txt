@@ -1,0 +1,435 @@
+
+🐾 AGY STARTUP SANITY CHECK:
+   - Themes Detected:  7 ['Emerging Tech', 'Execution & Delivery', 'Org & Working-Model Transformation', 'Professional Narrative', 'Risk & Responsible Tech', 'Strategic & Advisory', 'Talent & Enablement']
+   - Clients Loaded:   17
+   - Career Span:      26 years (2000-2026)
+   - DNA Status:       [DYNAMICALLY SYNCED]
+
+DEBUG: query='Is Matt certified?', from_suggestion=False, force_answer=False
+DEBUG: is_nonsense returned cat=None
+DEBUG: Semantic router: valid=True, score=0.672, family=background
+DEBUG substitution: family=background fired=False query='Is Matt certified?'
+DEBUG Embeddings: qvec_dim=1536 model=text-embedding-3-small
+DEBUG Pinecone query → index=matt-portfolio-v2, namespace=default
+DEBUG Hit: id=why-hire-matt|accenture pc=0.353 kw=0.500 blend=0.428  [] 
+DEBUG Hit: id=transition-story-why-im-exploring-opportunities|accenture pc=0.319 kw=0.000 blend=0.319  [] 
+DEBUG Hit: id=mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project pc=0.308 kw=0.000 blend=0.308  [] 
+DEBUG Hit: id=about-matt-my-leadership-journey|accenture pc=0.302 kw=0.500 blend=0.377  [] 
+DEBUG Hit: id=building-effective-ai-assisted-development-workflows|independent-project pc=0.292 kw=0.000 blend=0.292  [] 
+DEBUG Hit: id=keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin pc=0.291 kw=0.250 blend=0.329  [] 
+DEBUG Hit: id=mattgpt-human-centered-ux-design-information-architecture|independent-project pc=0.289 kw=0.000 blend=0.289  [] 
+DEBUG Hit: id=owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients pc=0.276 kw=0.000 blend=0.276  [] 
+DEBUG Hit: id=launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture pc=0.275 kw=0.000 blend=0.275  [] 
+DEBUG Hit: id=teaching-entry-level-developers-to-build-their-first-java-web-application|american-intercontinental-university pc=0.273 kw=0.000 blend=0.273  [] 
+DEBUG Hit: id=confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern pc=0.263 kw=0.000 blend=0.263  [] 
+DEBUG Hit: id=delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv pc=0.257 kw=0.000 blend=0.257  [] 
+DEBUG Hit: id=i-let-speed-win-over-structure-heres-how-i-fixed-it|independent-project pc=0.256 kw=0.000 blend=0.256  [] 
+DEBUG Hit: id=building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase pc=0.256 kw=0.000 blend=0.256  [] 
+DEBUG Hit: id=enabling-new-ways-of-working-through-immersive-coaching-and-transformation-labs|accenture pc=0.255 kw=0.000 blend=0.255  [] 
+DEBUG Hit: id=what-i-learned-about-assumptions|fortune-500-clients pc=0.251 kw=0.000 blend=0.251  [] 
+DEBUG Hit: id=building-tangible-cloud-tech-skills-for-hbcu-students|accenture pc=0.250 kw=0.000 blend=0.250  [] 
+DEBUG Hit: id=building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture pc=0.247 kw=0.000 blend=0.247  [] 
+DEBUG Hit: id=driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc pc=0.247 kw=0.000 blend=0.247  [] 
+DEBUG Hit: id=navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase pc=0.241 kw=0.000 blend=0.241  [] 
+DEBUG Hit: id=driving-modern-software-engineering-with-project-octane|accenture pc=0.239 kw=0.000 blend=0.239  [] 
+DEBUG Hit: id=behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients pc=0.238 kw=0.000 blend=0.238  [] 
+DEBUG Hit: id=implementing-bdd-for-system-behavior-specification|independent-project pc=0.238 kw=0.000 blend=0.238  [] 
+DEBUG Hit: id=integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics pc=0.235 kw=0.000 blend=0.235  [] 
+DEBUG Hit: id=my-chatbot-kept-flattering-me-instead-of-answering-the-question-heres-how-i-fixed-it|independent-project pc=0.234 kw=0.250 blend=0.272  [] 
+DEBUG Confidence: top_score=0.353 -> high
+DEBUG: search confidence=high, top_score=0.353, pool_size=25
+DEBUG: intent_family=background, is_synthesis=False
+DEBUG diversify_results[background]: era_slots=5, engage_overflow=11, meta_pn_used=1, meta_ind_used=1
+DEBUG diversify_results[background]: eras=['Leadership & Professional Narrative', 'Technical Foundations & Enterprise Integration', 'Independent Product Development', 'Enterprise Innovation & Transformation', 'Cloud-Native Prototyping & Product Shaping', 'Financial Services Platform Modernization', 'Technical Foundations & Enterprise Integration']
+DEBUG diversify_results[background]: kinds=['META-PN', 'ENGAGE', 'META-IND', 'ENGAGE', 'ENGAGE', 'ENGAGE', 'ENGAGE']
+DEBUG LLM stories (5 max, 5 actual):
+DEBUG   [1] Accenture: Why Hire Matt?
+DEBUG   [2] Lockheed Martin: Keeping the F-22's As-Built Configuratio
+DEBUG   [3] Independent Project: MattGPT: Product Vision, Roadmap, Scope,
+DEBUG   [4] Fortune 500 Clients: Owning the P&L: From Engagement Margin t
+DEBUG   [5] Accenture: Launchpad:  Empowering Clients and Teams
+DEBUG LLM call: model=gpt-4o, temperature=0.4, is_synthesis=False
+DEBUG system_prompt[:200]: You are Agy 🐾 — Matt Pugmire's Plott Hound assistant.
+
+## YOUR JOB
+Relay the facts from Matt's stories. You are a messenger, not an evaluator.
+
+## WHAT YOU DO
+- Read the stories provided
+- Extract the
+====================================================================================================
+[1  certified] query: Is Matt certified?
+    intent_family='background'  confidence='high'  rejection=None  sources=7
+      - Why Hire Matt?
+      - Keeping the F-22's As-Built Configuration Data Accurate
+      - MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery
+      - Owning the P&L: From Engagement Margin to Center Cost Base
+      - Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications
+      - Delivering Multi-Client Customization and Compliance for the White-Label Card Portal
+      - Teaching Entry-Level Developers to Build Their First Java Web Application
+----------------------------------------------------------------------------------------------------
+    🐾 Here's a great example.
+    
+    Matt holds several certifications, although none are currently active. He was an **AWS Certified Solutions Architect - Associate** (issued in 2020, expired in 2023) and an **AWS Certified Cloud Practitioner** (issued in 2019, expired in 2023). Additionally, he was a **SAFe 4 Certified Agilist** (issued in 2017, expired) and passed the Oracle 8i DBA exams on the OCP track, which included SQL and PL/SQL, Architecture and Administration, and Backup and Recovery (2002).
+    
+    Let me know if you'd like the deep dive on this one.
+
+DEBUG: query='Does Matt have a PMP?', from_suggestion=False, force_answer=False
+DEBUG: is_nonsense returned cat=None
+DEBUG: Semantic router: valid=True, score=0.600, family=background
+DEBUG substitution: family=background fired=False query='Does Matt have a PMP?'
+DEBUG Embeddings: qvec_dim=1536 model=text-embedding-3-small
+DEBUG Pinecone query → index=matt-portfolio-v2, namespace=default
+DEBUG Hit: id=mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project pc=0.399 kw=0.000 blend=0.399  [] 
+DEBUG Hit: id=why-hire-matt|accenture pc=0.391 kw=0.333 blend=0.441  [] 
+DEBUG Hit: id=owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients pc=0.390 kw=0.000 blend=0.390  [] 
+DEBUG Hit: id=mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase pc=0.374 kw=0.000 blend=0.374  [] 
+DEBUG Hit: id=building-the-pmo-for-rbcs-commercial-banking-modernization|rbc pc=0.372 kw=0.000 blend=0.372  [] 
+DEBUG Hit: id=transition-story-why-im-exploring-opportunities|accenture pc=0.361 kw=0.000 blend=0.361  [] 
+DEBUG Hit: id=mattgpt-human-centered-ux-design-information-architecture|independent-project pc=0.346 kw=0.000 blend=0.346  [] 
+DEBUG Hit: id=about-matt-my-leadership-journey|accenture pc=0.345 kw=0.333 blend=0.395  [] 
+DEBUG Hit: id=building-effective-ai-assisted-development-workflows|independent-project pc=0.344 kw=0.000 blend=0.344  [] 
+DEBUG Hit: id=leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase pc=0.333 kw=0.000 blend=0.333  [] 
+DEBUG Hit: id=rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase pc=0.332 kw=0.000 blend=0.332  [] 
+DEBUG Hit: id=recovering-fiservs-85m-white-label-card-portal|fiserv pc=0.328 kw=0.000 blend=0.328  [] 
+DEBUG Hit: id=i-let-speed-win-over-structure-heres-how-i-fixed-it|independent-project pc=0.327 kw=0.000 blend=0.327  [] 
+DEBUG Hit: id=keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin pc=0.323 kw=0.000 blend=0.323  [] 
+DEBUG Hit: id=partnering-with-clients-to-build-the-right-product-faster|fortune-500-clients pc=0.314 kw=0.000 blend=0.314  [] 
+DEBUG Hit: id=launching-a-self-paced-learning-program-for-emerging-technologies|accenture pc=0.310 kw=0.000 blend=0.310  [] 
+DEBUG Hit: id=turning-stratcoms-paper-operational-plans-into-executable-workflow|lockheed-martin pc=0.307 kw=0.000 blend=0.307  [] 
+DEBUG Hit: id=building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase pc=0.305 kw=0.000 blend=0.305  [] 
+DEBUG Hit: id=implementing-bdd-for-system-behavior-specification|independent-project pc=0.303 kw=0.000 blend=0.303  [] 
+DEBUG Hit: id=driving-agile-adoption-for-jp-morgans-identity-access-management-transformation|jp-morgan-chase pc=0.300 kw=0.000 blend=0.300  [] 
+DEBUG Hit: id=driving-modern-software-engineering-with-project-octane|accenture pc=0.300 kw=0.000 blend=0.300  [] 
+DEBUG Hit: id=accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one pc=0.300 kw=0.000 blend=0.300  [] 
+DEBUG Hit: id=leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients pc=0.298 kw=0.000 blend=0.298  [] 
+DEBUG Hit: id=enabling-new-ways-of-working-through-immersive-coaching-and-transformation-labs|accenture pc=0.297 kw=0.000 blend=0.297  [] 
+DEBUG Hit: id=what-i-learned-about-assumptions|fortune-500-clients pc=0.297 kw=0.000 blend=0.297  [] 
+DEBUG Confidence: top_score=0.399 -> high
+DEBUG: search confidence=high, top_score=0.399, pool_size=25
+DEBUG: intent_family=background, is_synthesis=False
+DEBUG diversify_results[background]: era_slots=5, engage_overflow=12, meta_pn_used=1, meta_ind_used=1
+DEBUG diversify_results[background]: eras=['Leadership & Professional Narrative', 'Independent Product Development', 'Enterprise Innovation & Transformation', 'Financial Services Platform Modernization', 'Technical Foundations & Enterprise Integration', 'Cloud-Native Prototyping & Product Shaping', 'Financial Services Platform Modernization']
+DEBUG diversify_results[background]: kinds=['META-PN', 'META-IND', 'ENGAGE', 'ENGAGE', 'ENGAGE', 'ENGAGE', 'ENGAGE']
+DEBUG LLM stories (5 max, 5 actual):
+DEBUG   [1] Accenture: Why Hire Matt?
+DEBUG   [2] Independent Project: MattGPT: Product Vision, Roadmap, Scope,
+DEBUG   [3] Fortune 500 Clients: Owning the P&L: From Engagement Margin t
+DEBUG   [4] JP Morgan Chase: Mobilizing JP Morgan's Corporate I&AM Up
+DEBUG   [5] Lockheed Martin: Keeping the F-22's As-Built Configuratio
+DEBUG LLM call: model=gpt-4o, temperature=0.4, is_synthesis=False
+DEBUG system_prompt[:200]: You are Agy 🐾 — Matt Pugmire's Plott Hound assistant.
+
+## YOUR JOB
+Relay the facts from Matt's stories. You are a messenger, not an evaluator.
+
+## WHAT YOU DO
+- Read the stories provided
+- Extract the
+====================================================================================================
+[2  PMP] query: Does Matt have a PMP?
+    intent_family='background'  confidence='high'  rejection=None  sources=7
+      - Why Hire Matt?
+      - MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery
+      - Owning the P&L: From Engagement Margin to Center Cost Base
+      - Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications
+      - Keeping the F-22's As-Built Configuration Data Accurate
+      - Driving Modern Software Engineering with Project Octane
+      - Building the PMO for RBC's Commercial Banking Modernization
+----------------------------------------------------------------------------------------------------
+    🐾 On it!
+    
+    Matt does not have a PMP certification. His certifications include "AWS Certified Solutions Architect - Associate" (issued 2020, expired 2023), "AWS Certified Cloud Practitioner" (issued 2019, expired 2023), "SAFe 4 Certified Agilist" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current. 
+    
+    Want me to dig deeper into the technical approach?
+
+DEBUG: query='What languages does Matt speak?', from_suggestion=False, force_answer=False
+DEBUG: is_nonsense returned cat=None
+DEBUG: Semantic router: valid=True, score=0.648, family=synthesis
+DEBUG substitution: family=synthesis fired=False query='What languages does Matt speak?'
+DEBUG Embeddings: qvec_dim=1536 model=text-embedding-3-small
+DEBUG Pinecone query → index=matt-portfolio-v2, namespace=default
+DEBUG Hit: id=mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project pc=0.353 kw=0.000 blend=0.353  [] 
+DEBUG Hit: id=mattgpt-human-centered-ux-design-information-architecture|independent-project pc=0.342 kw=0.000 blend=0.342  [] 
+DEBUG Hit: id=building-effective-ai-assisted-development-workflows|independent-project pc=0.336 kw=0.000 blend=0.336  [] 
+DEBUG Hit: id=why-hire-matt|accenture pc=0.335 kw=0.333 blend=0.385  [] 
+DEBUG Hit: id=transition-story-why-im-exploring-opportunities|accenture pc=0.333 kw=0.000 blend=0.333  [] 
+DEBUG Hit: id=about-matt-my-leadership-journey|accenture pc=0.309 kw=0.333 blend=0.359  [] 
+DEBUG Hit: id=implementing-bdd-for-system-behavior-specification|independent-project pc=0.266 kw=0.000 blend=0.266  [] 
+DEBUG Hit: id=my-chatbot-kept-flattering-me-instead-of-answering-the-question-heres-how-i-fixed-it|independent-project pc=0.264 kw=0.167 blend=0.289  [] 
+DEBUG Hit: id=mattgpt-rag-architecture-semantic-search-implementation|independent-project pc=0.252 kw=0.000 blend=0.252  [] 
+DEBUG Hit: id=i-let-speed-win-over-structure-heres-how-i-fixed-it|independent-project pc=0.248 kw=0.000 blend=0.248  [] 
+DEBUG Hit: id=teaching-entry-level-developers-to-build-their-first-java-web-application|american-intercontinental-university pc=0.237 kw=0.000 blend=0.237  [] 
+DEBUG Hit: id=integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics pc=0.226 kw=0.000 blend=0.226  [] 
+DEBUG Hit: id=implementing-eval-driven-development-for-rag-systems|independent-project pc=0.217 kw=0.000 blend=0.217  [] 
+DEBUG Hit: id=behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients pc=0.214 kw=0.000 blend=0.214  [] 
+DEBUG Hit: id=building-smart-connected-devices-at-accentures-liquid-studio|accenture pc=0.213 kw=0.000 blend=0.213  [] 
+DEBUG Hit: id=launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture pc=0.213 kw=0.000 blend=0.213  [] 
+DEBUG Hit: id=launching-a-self-paced-learning-program-for-emerging-technologies|accenture pc=0.210 kw=0.000 blend=0.210  [] 
+DEBUG Hit: id=enabling-new-ways-of-working-through-immersive-coaching-and-transformation-labs|accenture pc=0.210 kw=0.000 blend=0.210  [] 
+DEBUG Hit: id=driving-modern-software-engineering-with-project-octane|accenture pc=0.207 kw=0.000 blend=0.207  [] 
+DEBUG Hit: id=owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients pc=0.204 kw=0.000 blend=0.204  [] 
+DEBUG Hit: id=building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase pc=0.204 kw=0.000 blend=0.204  [] 
+DEBUG Hit: id=architecting-enhancements-for-atts-network-engineering-platform|att pc=0.203 kw=0.000 blend=0.203  [] 
+DEBUG Hit: id=driving-cloud-native-innovation-through-ticara-framework|accenture pc=0.203 kw=0.000 blend=0.203  [] 
+DEBUG Hit: id=delivering-working-prototypes-in-days-not-months|accenture pc=0.202 kw=0.000 blend=0.202  [] 
+DEBUG Hit: id=delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv pc=0.202 kw=0.000 blend=0.202  [] 
+DEBUG Confidence: top_score=0.353 -> high
+DEBUG: search confidence=high, top_score=0.353, pool_size=25
+DEBUG: intent_family=synthesis, is_synthesis=True
+DEBUG synthesis search: Emerging Tech → 3 stories
+DEBUG synthesis search: Risk & Responsible Tech → 3 stories
+DEBUG synthesis search: Strategic & Advisory → 3 stories
+DEBUG synthesis search: Org & Working-Model Transformation → 3 stories
+DEBUG synthesis search: Professional Narrative → 3 stories
+DEBUG synthesis search: Execution & Delivery → 3 stories
+DEBUG synthesis search: Talent & Enablement → 3 stories
+DEBUG synthesis pool: 21 unique stories across 7 themes
+DEBUG synthesis mode - pool=21, named=12, generic=9, ranked=9
+DEBUG synthesis themes covered: {'Strategic & Advisory', 'Professional Narrative', 'Org & Working-Model Transformation', 'Talent & Enablement'}
+DEBUG synthesis ranked (named clients first):
+DEBUG   [1] [NAMED] [Professional Narrative] Accenture: Why Hire Matt? (score=0.335)
+DEBUG   [2] [NAMED] [Professional Narrative] Accenture: Transition Story – Why I’m Exploring Opp (score=0.333)
+DEBUG   [3] [NAMED] [Professional Narrative] Accenture: About Matt – My Leadership Journey (score=0.309)
+DEBUG   [4] [NAMED] [Talent & Enablement] American InterContinental University: Teaching Entry-Level Developers to Build (score=0.237)
+DEBUG   [5] [NAMED] [Talent & Enablement] Accenture: Launchpad:  Empowering Clients and Teams (score=0.213)
+DEBUG   [6] [NAMED] [Talent & Enablement] Accenture: Launching a Self-Paced Learning Program  (score=0.210)
+DEBUG   [7] [NAMED] [Org & Working-Model Transformation] Norfolk Southern: Confronting a Quality Crisis Through Coa (score=0.197)
+DEBUG   [8] [NAMED] [Strategic & Advisory] HSBC: Driving HSBC's Mortgage Transformation f (score=0.196)
+DEBUG   [9] [NAMED] [Org & Working-Model Transformation] JP Morgan Chase: Leading Global Delivery of JP Morgan's A (score=0.185)
+DEBUG LLM stories (7 max, 7 actual):
+DEBUG   [1] Accenture: Why Hire Matt?
+DEBUG   [2] Accenture: Transition Story – Why I’m Exploring Opp
+DEBUG   [3] Accenture: About Matt – My Leadership Journey
+DEBUG   [4] American InterContinental University: Teaching Entry-Level Developers to Build
+DEBUG   [5] Accenture: Launchpad:  Empowering Clients and Teams
+DEBUG   [6] Accenture: Launching a Self-Paced Learning Program 
+DEBUG   [7] Norfolk Southern: Confronting a Quality Crisis Through Coa
+DEBUG LLM call: model=gpt-4o, temperature=0.2, is_synthesis=True
+DEBUG system_prompt[:200]: You are Agy 🐾 — Matt Pugmire's Plott Hound assistant.
+
+## YOUR JOB
+Relay the facts from Matt's stories. You are a messenger, not an evaluator.
+
+## WHAT YOU DO
+- Read the stories provided
+- Extract the
+====================================================================================================
+[3  languages] query: What languages does Matt speak?
+    intent_family='synthesis'  confidence='high'  rejection=None  sources=9
+      - Why Hire Matt?
+      - Transition Story – Why I’m Exploring Opportunities
+      - About Matt – My Leadership Journey
+      - Teaching Entry-Level Developers to Build Their First Java Web Application
+      - Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications
+      - Launching a Self-Paced Learning Program for Emerging Technologies
+      - Confronting a Quality Crisis Through Coaching and Culture Change
+      - Driving HSBC's Mortgage Transformation from Assessment to $10M Contract
+      - Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution
+----------------------------------------------------------------------------------------------------
+    🐾 Let me show you what ties Matt's work together. Matt speaks English at a native level and French at a B2 level, which he self-assessed. Want me to dive deeper into any of these themes?
+
+DEBUG: query='Does Matt speak French?', from_suggestion=False, force_answer=False
+DEBUG: is_nonsense returned cat=None
+DEBUG: Semantic router: valid=True, score=0.541, family=personal
+DEBUG substitution: family=personal fired=False query='Does Matt speak French?'
+DEBUG Embeddings: qvec_dim=1536 model=text-embedding-3-small
+DEBUG Pinecone query → index=matt-portfolio-v2, namespace=default
+DEBUG Hit: id=mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project pc=0.250 kw=0.000 blend=0.250  [] 
+DEBUG Hit: id=why-hire-matt|accenture pc=0.239 kw=0.333 blend=0.289  [] 
+DEBUG Hit: id=mattgpt-human-centered-ux-design-information-architecture|independent-project pc=0.237 kw=0.000 blend=0.237  [] 
+DEBUG Hit: id=building-effective-ai-assisted-development-workflows|independent-project pc=0.232 kw=0.000 blend=0.232  [] 
+DEBUG Hit: id=about-matt-my-leadership-journey|accenture pc=0.219 kw=0.333 blend=0.269  [] 
+DEBUG Hit: id=transition-story-why-im-exploring-opportunities|accenture pc=0.208 kw=0.000 blend=0.208  [] 
+DEBUG Hit: id=my-chatbot-kept-flattering-me-instead-of-answering-the-question-heres-how-i-fixed-it|independent-project pc=0.188 kw=0.167 blend=0.213  [] 
+DEBUG Hit: id=i-let-speed-win-over-structure-heres-how-i-fixed-it|independent-project pc=0.171 kw=0.000 blend=0.171  [] 
+DEBUG Hit: id=implementing-bdd-for-system-behavior-specification|independent-project pc=0.168 kw=0.000 blend=0.168  [] 
+DEBUG Hit: id=owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients pc=0.160 kw=0.000 blend=0.160  [] 
+DEBUG Hit: id=mattgpt-rag-architecture-semantic-search-implementation|independent-project pc=0.152 kw=0.000 blend=0.152  [] 
+DEBUG Hit: id=mentoring-underserved-high-school-students-into-technology-careers|accenture pc=0.143 kw=0.000 blend=0.143  [] 
+DEBUG Hit: id=navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase pc=0.143 kw=0.000 blend=0.143  [] 
+DEBUG Hit: id=building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase pc=0.142 kw=0.000 blend=0.142  [] 
+DEBUG Hit: id=launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture pc=0.140 kw=0.000 blend=0.140  [] 
+DEBUG Hit: id=behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients pc=0.138 kw=0.000 blend=0.138  [] 
+DEBUG Hit: id=confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern pc=0.137 kw=0.000 blend=0.137  [] 
+DEBUG Hit: id=launching-a-self-paced-learning-program-for-emerging-technologies|accenture pc=0.135 kw=0.000 blend=0.135  [] 
+DEBUG Hit: id=driving-modern-software-engineering-with-project-octane|accenture pc=0.134 kw=0.000 blend=0.134  [] 
+DEBUG Hit: id=discovery-framing---de-risking-product-development-at-fortune-500-scale|fortune-500-clients pc=0.134 kw=0.000 blend=0.134  [] 
+DEBUG Hit: id=enabling-new-ways-of-working-through-immersive-coaching-and-transformation-labs|accenture pc=0.133 kw=0.000 blend=0.133  [] 
+DEBUG Hit: id=scaling-development-capacity-with-modern-engineering-practices|capital-one pc=0.132 kw=0.000 blend=0.132  [] 
+DEBUG Hit: id=solving-ambiguous-problems-by-finding-root-causes-not-treating-symptoms|accenture pc=0.132 kw=0.000 blend=0.132  [] 
+DEBUG Hit: id=driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc pc=0.131 kw=0.000 blend=0.131  [] 
+DEBUG Hit: id=leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase pc=0.130 kw=0.000 blend=0.130  [] 
+DEBUG Confidence: top_score=0.250 -> high
+DEBUG: search confidence=high, top_score=0.250, pool_size=6
+DEBUG: intent_family=personal, is_synthesis=False
+DEBUG diversify_results: incoming=['Accenture', 'Accenture', 'Independent Project', 'Independent Project', 'Independent Project', 'Accenture']
+DEBUG diversify_results: named=0, generic=1
+DEBUG diversify_results: result=['Accenture', 'Independent Project', 'Accenture', 'Independent Project', 'Independent Project', 'Accenture']
+DEBUG LLM stories (5 max, 5 actual):
+DEBUG   [1] Accenture: Why Hire Matt?
+DEBUG   [2] Independent Project: MattGPT: Product Vision, Roadmap, Scope,
+DEBUG   [3] Accenture: About Matt – My Leadership Journey
+DEBUG   [4] Independent Project: MattGPT: Human-Centered UX Design & Info
+DEBUG   [5] Independent Project: Building Effective AI-Assisted Developme
+DEBUG LLM call: model=gpt-4o, temperature=0.4, is_synthesis=False
+DEBUG system_prompt[:200]: You are Agy 🐾 — Matt Pugmire's Plott Hound assistant.
+
+## YOUR JOB
+Relay the facts from Matt's stories. You are a messenger, not an evaluator.
+
+## WHAT YOU DO
+- Read the stories provided
+- Extract the
+====================================================================================================
+[4  French] query: Does Matt speak French?
+    intent_family='personal'  confidence='high'  rejection=None  sources=6
+      - Why Hire Matt?
+      - MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery
+      - About Matt – My Leadership Journey
+      - MattGPT: Human-Centered UX Design & Information Architecture
+      - Building Effective AI-Assisted Development Workflows
+      - Transition Story – Why I’m Exploring Opportunities
+----------------------------------------------------------------------------------------------------
+    🐾 This is a strong one.
+    
+    Yes, Matt speaks French at a B2 level, as he has self-assessed. His educational background includes a BA in French Language and Literature from Queens University of Charlotte, which included a year abroad at Université Paul Valéry, Montpellier, France, through an exchange program with the University of North Carolina at Chapel Hill. 
+    
+    Happy to explore similar work in other industries.
+
+DEBUG: query='Does Matt have a master's degree?', from_suggestion=False, force_answer=False
+DEBUG: is_nonsense returned cat=None
+DEBUG: Semantic router: valid=True, score=0.658, family=out_of_scope
+DEBUG substitution: family=out_of_scope fired=False query="Does Matt have a master's degree?"
+DEBUG Embeddings: qvec_dim=1536 model=text-embedding-3-small
+DEBUG Pinecone query → index=matt-portfolio-v2, namespace=default
+DEBUG Hit: id=why-hire-matt|accenture pc=0.322 kw=0.250 blend=0.359  [] 
+DEBUG Hit: id=mattgpt-human-centered-ux-design-information-architecture|independent-project pc=0.287 kw=0.000 blend=0.287  [] 
+DEBUG Hit: id=about-matt-my-leadership-journey|accenture pc=0.286 kw=0.250 blend=0.323  [] 
+DEBUG Hit: id=mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project pc=0.280 kw=0.000 blend=0.280  [] 
+DEBUG Hit: id=transition-story-why-im-exploring-opportunities|accenture pc=0.272 kw=0.000 blend=0.272  [] 
+DEBUG Hit: id=teaching-entry-level-developers-to-build-their-first-java-web-application|american-intercontinental-university pc=0.243 kw=0.125 blend=0.262  [] 
+DEBUG Hit: id=keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin pc=0.233 kw=0.125 blend=0.252  [] 
+DEBUG Hit: id=i-let-speed-win-over-structure-heres-how-i-fixed-it|independent-project pc=0.228 kw=0.000 blend=0.228  [] 
+DEBUG Hit: id=mattgpt-rag-architecture-semantic-search-implementation|independent-project pc=0.220 kw=0.000 blend=0.220  [] 
+DEBUG Hit: id=building-effective-ai-assisted-development-workflows|independent-project pc=0.215 kw=0.000 blend=0.215  [] 
+DEBUG Hit: id=resolving-cross-domain-data-issues-for-atts-order-management|att pc=0.210 kw=0.000 blend=0.210  [] 
+DEBUG Hit: id=owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients pc=0.209 kw=0.000 blend=0.209  [] 
+DEBUG Hit: id=building-sparkflys-platform-alongside-its-founder|sparkfly pc=0.203 kw=0.000 blend=0.203  [] 
+DEBUG Hit: id=my-chatbot-kept-flattering-me-instead-of-answering-the-question-heres-how-i-fixed-it|independent-project pc=0.202 kw=0.125 blend=0.221  [] 
+DEBUG Hit: id=building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase pc=0.202 kw=0.000 blend=0.202  [] 
+DEBUG Hit: id=architecting-enhancements-for-atts-network-engineering-platform|att pc=0.200 kw=0.000 blend=0.200  [] 
+DEBUG Hit: id=building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders pc=0.199 kw=0.000 blend=0.199  [] 
+DEBUG Hit: id=implementing-bdd-for-system-behavior-specification|independent-project pc=0.197 kw=0.000 blend=0.197  [] 
+DEBUG Hit: id=architecting-atts-scalable-order-management-platform|att pc=0.195 kw=0.000 blend=0.195  [] 
+DEBUG Hit: id=building-tangible-cloud-tech-skills-for-hbcu-students|accenture pc=0.191 kw=0.000 blend=0.191  [] 
+DEBUG Hit: id=solving-ambiguous-problems-by-finding-root-causes-not-treating-symptoms|accenture pc=0.191 kw=0.000 blend=0.191  [] 
+DEBUG Hit: id=leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients pc=0.190 kw=0.000 blend=0.190  [] 
+DEBUG Hit: id=launching-a-self-paced-learning-program-for-emerging-technologies|accenture pc=0.188 kw=0.000 blend=0.188  [] 
+DEBUG Hit: id=integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics pc=0.187 kw=0.000 blend=0.187  [] 
+DEBUG Hit: id=mentoring-underserved-high-school-students-into-technology-careers|accenture pc=0.187 kw=0.000 blend=0.187  [] 
+DEBUG Confidence: top_score=0.322 -> high
+DEBUG: search confidence=high, top_score=0.322, pool_size=15
+DEBUG: intent_family=out_of_scope, is_synthesis=False
+DEBUG diversify_results: incoming=['Accenture', 'Accenture', 'Independent Project', 'Independent Project', 'Accenture', 'American InterContinental University', 'Lockheed Martin', 'Independent Project', 'Independent Project', 'Independent Project']
+DEBUG diversify_results: named=5, generic=2
+DEBUG diversify_results: result=['Accenture', 'American InterContinental University', 'Lockheed Martin', 'AT&T', 'Sparkfly', 'JP Morgan Chase', 'Independent Project']
+DEBUG LLM stories (5 max, 5 actual):
+DEBUG   [1] Accenture: Why Hire Matt?
+DEBUG   [2] American InterContinental University: Teaching Entry-Level Developers to Build
+DEBUG   [3] Lockheed Martin: Keeping the F-22's As-Built Configuratio
+DEBUG   [4] AT&T: Resolving Cross-Domain Data Issues for A
+DEBUG   [5] Sparkfly: Building Sparkfly's Platform Alongside I
+DEBUG LLM call: model=gpt-4o, temperature=0.4, is_synthesis=False
+DEBUG system_prompt[:200]: You are Agy 🐾 — Matt Pugmire's Plott Hound assistant.
+
+## YOUR JOB
+Relay the facts from Matt's stories. You are a messenger, not an evaluator.
+
+## WHAT YOU DO
+- Read the stories provided
+- Extract the
+====================================================================================================
+[5  master's] query: Does Matt have a master's degree?
+    intent_family='out_of_scope'  confidence='high'  rejection=None  sources=7
+      - Why Hire Matt?
+      - Teaching Entry-Level Developers to Build Their First Java Web Application
+      - Keeping the F-22's As-Built Configuration Data Accurate
+      - Resolving Cross-Domain Data Issues for AT&T's Order Management
+      - Building Sparkfly's Platform Alongside Its Founder
+      - Building the Payment Engine Behind JP Morgan ACCESS
+      - MattGPT: Human-Centered UX Design & Information Architecture
+----------------------------------------------------------------------------------------------------
+    🐾 Tracking this down...
+    
+    Matt holds a master's degree in Information Technology from **American InterContinental University**. This degree was earned while he was working full-time, balancing his studies with a demanding job. During his time at the university, he also taught as an adjunct professor, sharing his expertise in Enterprise Java with entry-level students. This teaching role was concurrent with his professional engagements, showcasing his commitment to both his education and career development.
+    
+    Want to see how Matt applied this elsewhere?
+
+DEBUG: query='Does Matt have any patents?', from_suggestion=False, force_answer=False
+DEBUG: is_nonsense returned cat=None
+DEBUG: Semantic router: valid=True, score=0.585, family=background
+DEBUG substitution: family=background fired=False query='Does Matt have any patents?'
+DEBUG Embeddings: qvec_dim=1536 model=text-embedding-3-small
+DEBUG Pinecone query → index=matt-portfolio-v2, namespace=default
+DEBUG Hit: id=mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project pc=0.303 kw=0.000 blend=0.303  [] 
+DEBUG Hit: id=why-hire-matt|accenture pc=0.286 kw=0.250 blend=0.324  [] 
+DEBUG Hit: id=mattgpt-human-centered-ux-design-information-architecture|independent-project pc=0.280 kw=0.000 blend=0.280  [] 
+DEBUG Hit: id=building-effective-ai-assisted-development-workflows|independent-project pc=0.271 kw=0.000 blend=0.271  [] 
+DEBUG Hit: id=building-smart-connected-devices-at-accentures-liquid-studio|accenture pc=0.260 kw=0.000 blend=0.260  [] 
+DEBUG Hit: id=transition-story-why-im-exploring-opportunities|accenture pc=0.235 kw=0.000 blend=0.235  [] 
+DEBUG Hit: id=delivering-working-prototypes-in-days-not-months|accenture pc=0.233 kw=0.000 blend=0.233  [] 
+DEBUG Hit: id=my-chatbot-kept-flattering-me-instead-of-answering-the-question-heres-how-i-fixed-it|independent-project pc=0.231 kw=0.125 blend=0.250  [] 
+DEBUG Hit: id=about-matt-my-leadership-journey|accenture pc=0.231 kw=0.250 blend=0.268  [] 
+DEBUG Hit: id=i-let-speed-win-over-structure-heres-how-i-fixed-it|independent-project pc=0.230 kw=0.000 blend=0.230  [] 
+DEBUG Hit: id=owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients pc=0.225 kw=0.000 blend=0.225  [] 
+DEBUG Hit: id=keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin pc=0.224 kw=0.000 blend=0.224  [] 
+DEBUG Hit: id=why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture pc=0.218 kw=0.125 blend=0.237  [] 
+DEBUG Hit: id=building-sparkflys-platform-alongside-its-founder|sparkfly pc=0.218 kw=0.000 blend=0.218  [] 
+DEBUG Hit: id=mattgpt-rag-architecture-semantic-search-implementation|independent-project pc=0.214 kw=0.000 blend=0.214  [] 
+DEBUG Hit: id=delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv pc=0.211 kw=0.000 blend=0.211  [] 
+DEBUG Hit: id=building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase pc=0.210 kw=0.000 blend=0.210  [] 
+DEBUG Hit: id=driving-cloud-native-innovation-through-ticara-framework|accenture pc=0.209 kw=0.000 blend=0.209  [] 
+DEBUG Hit: id=partnering-with-clients-to-build-the-right-product-faster|fortune-500-clients pc=0.207 kw=0.000 blend=0.207  [] 
+DEBUG Hit: id=testing-assumptions-before-committing-resources-with-hypothesis-driven-design|fortune-500-clients pc=0.205 kw=0.000 blend=0.205  [] 
+DEBUG Hit: id=building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology|accenture pc=0.203 kw=0.000 blend=0.203  [] 
+DEBUG Hit: id=navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase pc=0.202 kw=0.000 blend=0.202  [] 
+DEBUG Hit: id=discovery-framing---de-risking-product-development-at-fortune-500-scale|fortune-500-clients pc=0.201 kw=0.000 blend=0.201  [] 
+DEBUG Hit: id=overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase pc=0.199 kw=0.000 blend=0.199  [] 
+DEBUG Hit: id=implementing-bdd-for-system-behavior-specification|independent-project pc=0.199 kw=0.125 blend=0.218  [] 
+DEBUG Confidence: top_score=0.303 -> high
+DEBUG: search confidence=high, top_score=0.303, pool_size=23
+DEBUG: intent_family=background, is_synthesis=False
+DEBUG diversify_results[background]: era_slots=5, engage_overflow=9, meta_pn_used=1, meta_ind_used=1
+DEBUG diversify_results[background]: eras=['Leadership & Professional Narrative', 'Independent Product Development', 'Cloud-Native Prototyping & Product Shaping', 'Enterprise Innovation & Transformation', 'Technical Foundations & Enterprise Integration', 'Financial Services Platform Modernization', 'Cloud-Native Prototyping & Product Shaping']
+DEBUG diversify_results[background]: kinds=['META-PN', 'META-IND', 'ENGAGE', 'ENGAGE', 'ENGAGE', 'ENGAGE', 'ENGAGE']
+DEBUG LLM stories (5 max, 5 actual):
+DEBUG   [1] Accenture: Why Hire Matt?
+DEBUG   [2] Independent Project: MattGPT: Product Vision, Roadmap, Scope,
+DEBUG   [3] Accenture: Building Smart, Connected Devices at Acc
+DEBUG   [4] Fortune 500 Clients: Owning the P&L: From Engagement Margin t
+DEBUG   [5] Lockheed Martin: Keeping the F-22's As-Built Configuratio
+DEBUG LLM call: model=gpt-4o, temperature=0.4, is_synthesis=False
+DEBUG system_prompt[:200]: You are Agy 🐾 — Matt Pugmire's Plott Hound assistant.
+
+## YOUR JOB
+Relay the facts from Matt's stories. You are a messenger, not an evaluator.
+
+## WHAT YOU DO
+- Read the stories provided
+- Extract the
+====================================================================================================
+[6  patents] query: Does Matt have any patents?
+    intent_family='background'  confidence='high'  rejection=None  sources=7
+      - Why Hire Matt?
+      - MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery
+      - Building Smart, Connected Devices at Accenture's Liquid Studio
+      - Owning the P&L: From Engagement Margin to Center Cost Base
+      - Keeping the F-22's As-Built Configuration Data Accurate
+      - Delivering Multi-Client Customization and Compliance for the White-Label Card Portal
+      - Delivering Working Prototypes in Days, Not Months
+----------------------------------------------------------------------------------------------------
+    🐾 Tracking this down...
+    
+    Nothing I know about Matt covers that. Let me know if you'd like the deep dive on this one.
+

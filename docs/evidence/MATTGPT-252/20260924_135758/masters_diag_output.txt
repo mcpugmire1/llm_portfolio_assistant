@@ -1,0 +1,237 @@
+
+🐾 AGY STARTUP SANITY CHECK:
+   - Themes Detected:  7 ['Emerging Tech', 'Execution & Delivery', 'Org & Working-Model Transformation', 'Professional Narrative', 'Risk & Responsible Tech', 'Strategic & Advisory', 'Talent & Enablement']
+   - Clients Loaded:   17
+   - Career Span:      26 years (2000-2026)
+   - DNA Status:       [DYNAMICALLY SYNCED]
+
+DEBUG: query='Does Matt have a master's degree?', from_suggestion=False, force_answer=False
+DEBUG: is_nonsense returned cat=None
+DEBUG: Semantic router: valid=True, score=0.658, family=out_of_scope
+DEBUG substitution: family=out_of_scope fired=False query="Does Matt have a master's degree?"
+DEBUG Embeddings: qvec_dim=1536 model=text-embedding-3-small
+DEBUG Pinecone query → index=matt-portfolio-v2, namespace=default
+DEBUG Hit: id=why-hire-matt|accenture pc=0.322 kw=0.250 blend=0.359  [] 
+DEBUG Hit: id=mattgpt-human-centered-ux-design-information-architecture|independent-project pc=0.287 kw=0.000 blend=0.287  [] 
+DEBUG Hit: id=about-matt-my-leadership-journey|accenture pc=0.286 kw=0.250 blend=0.323  [] 
+DEBUG Hit: id=mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project pc=0.280 kw=0.000 blend=0.280  [] 
+DEBUG Hit: id=transition-story-why-im-exploring-opportunities|accenture pc=0.272 kw=0.000 blend=0.272  [] 
+DEBUG Hit: id=teaching-entry-level-developers-to-build-their-first-java-web-application|american-intercontinental-university pc=0.243 kw=0.125 blend=0.262  [] 
+DEBUG Hit: id=keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin pc=0.233 kw=0.125 blend=0.252  [] 
+DEBUG Hit: id=i-let-speed-win-over-structure-heres-how-i-fixed-it|independent-project pc=0.228 kw=0.000 blend=0.228  [] 
+DEBUG Hit: id=mattgpt-rag-architecture-semantic-search-implementation|independent-project pc=0.220 kw=0.000 blend=0.220  [] 
+DEBUG Hit: id=building-effective-ai-assisted-development-workflows|independent-project pc=0.215 kw=0.000 blend=0.215  [] 
+DEBUG Hit: id=resolving-cross-domain-data-issues-for-atts-order-management|att pc=0.210 kw=0.000 blend=0.210  [] 
+DEBUG Hit: id=owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients pc=0.209 kw=0.000 blend=0.209  [] 
+DEBUG Hit: id=building-sparkflys-platform-alongside-its-founder|sparkfly pc=0.203 kw=0.000 blend=0.203  [] 
+DEBUG Hit: id=my-chatbot-kept-flattering-me-instead-of-answering-the-question-heres-how-i-fixed-it|independent-project pc=0.202 kw=0.125 blend=0.221  [] 
+DEBUG Hit: id=building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase pc=0.202 kw=0.000 blend=0.202  [] 
+DEBUG Hit: id=architecting-enhancements-for-atts-network-engineering-platform|att pc=0.200 kw=0.000 blend=0.200  [] 
+DEBUG Hit: id=building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders pc=0.199 kw=0.000 blend=0.199  [] 
+DEBUG Hit: id=implementing-bdd-for-system-behavior-specification|independent-project pc=0.197 kw=0.000 blend=0.197  [] 
+DEBUG Hit: id=architecting-atts-scalable-order-management-platform|att pc=0.195 kw=0.000 blend=0.195  [] 
+DEBUG Hit: id=building-tangible-cloud-tech-skills-for-hbcu-students|accenture pc=0.191 kw=0.000 blend=0.191  [] 
+DEBUG Hit: id=solving-ambiguous-problems-by-finding-root-causes-not-treating-symptoms|accenture pc=0.191 kw=0.000 blend=0.191  [] 
+DEBUG Hit: id=leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients pc=0.190 kw=0.000 blend=0.190  [] 
+DEBUG Hit: id=launching-a-self-paced-learning-program-for-emerging-technologies|accenture pc=0.188 kw=0.000 blend=0.188  [] 
+DEBUG Hit: id=integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics pc=0.187 kw=0.000 blend=0.187  [] 
+DEBUG Hit: id=mentoring-underserved-high-school-students-into-technology-careers|accenture pc=0.187 kw=0.000 blend=0.187  [] 
+DEBUG Confidence: top_score=0.322 -> high
+DEBUG: search confidence=high, top_score=0.322, pool_size=15
+DEBUG: intent_family=out_of_scope, is_synthesis=False
+DEBUG diversify_results: incoming=['Accenture', 'Accenture', 'Independent Project', 'Independent Project', 'Accenture', 'American InterContinental University', 'Lockheed Martin', 'Independent Project', 'Independent Project', 'Independent Project']
+DEBUG diversify_results: named=5, generic=2
+DEBUG diversify_results: result=['Accenture', 'American InterContinental University', 'Lockheed Martin', 'AT&T', 'Sparkfly', 'JP Morgan Chase', 'Independent Project']
+DEBUG LLM stories (5 max, 5 actual):
+DEBUG   [1] Accenture: Why Hire Matt?
+DEBUG   [2] American InterContinental University: Teaching Entry-Level Developers to Build
+DEBUG   [3] Lockheed Martin: Keeping the F-22's As-Built Configuratio
+DEBUG   [4] AT&T: Resolving Cross-Domain Data Issues for A
+DEBUG   [5] Sparkfly: Building Sparkfly's Platform Alongside I
+DEBUG LLM call: model=gpt-4o, temperature=0.4, is_synthesis=False
+DEBUG system_prompt[:200]: You are Agy 🐾 — Matt Pugmire's Plott Hound assistant.
+
+## YOUR JOB
+Relay the facts from Matt's stories. You are a messenger, not an evaluator.
+
+## WHAT YOU DO
+- Read the stories provided
+- Extract the
+====================================================================================================
+RUN 1: Does Matt have a master's degree?
+    intent_family='out_of_scope'  finish_reason='stop'  llm_called=True  generate_returned=True
+--- RAW LLM OUTPUT (full) (756 chars) ---
+    |🐾 I know just the story.
+    |
+    |Matt holds a master's degree in Information Technology from **American InterContinental University**. This degree is highlighted in his experience as an adjunct professor at the same university, where he taught an entry-level Enterprise Java course. During his time there, he designed a syllabus that guided students with no server-side background to build a working Java web application. This course was structured around practical assignments, culminating in a project that incorporated persistence and session state. His teaching was so impactful that a student reached out a year later, seeking advice for a developer interview, indicating the lasting impression Matt left on his students.
+    |
+    |What else can I track down for you?
+--- FINAL answer_md (full) (756 chars) ---
+    |🐾 I know just the story.
+    |
+    |Matt holds a master's degree in Information Technology from **American InterContinental University**. This degree is highlighted in his experience as an adjunct professor at the same university, where he taught an entry-level Enterprise Java course. During his time there, he designed a syllabus that guided students with no server-side background to build a working Java web application. This course was structured around practical assignments, culminating in a project that incorporated persistence and session state. His teaching was so impactful that a student reached out a year later, seeking advice for a developer interview, indicating the lasting impression Matt left on his students.
+    |
+    |What else can I track down for you?
+--- RAW BODY (first paragraph dropped only if it starts with 🐾) (730 chars) ---
+    |Matt holds a master's degree in Information Technology from **American InterContinental University**. This degree is highlighted in his experience as an adjunct professor at the same university, where he taught an entry-level Enterprise Java course. During his time there, he designed a syllabus that guided students with no server-side background to build a working Java web application. This course was structured around practical assignments, culminating in a project that incorporated persistence and session state. His teaching was so impactful that a student reached out a year later, seeking advice for a developer interview, indicating the lasting impression Matt left on his students.
+    |
+    |What else can I track down for you?
+--- FINAL BODY (opener/closer excluded) (693 chars) ---
+    |Matt holds a master's degree in Information Technology from **American InterContinental University**. This degree is highlighted in his experience as an adjunct professor at the same university, where he taught an entry-level Enterprise Java course. During his time there, he designed a syllabus that guided students with no server-side background to build a working Java web application. This course was structured around practical assignments, culminating in a project that incorporated persistence and session state. His teaching was so impactful that a student reached out a year later, seeking advice for a developer interview, indicating the lasting impression Matt left on his students.
+--- META_COMMENTARY_REGEX_PATTERNS removals ---
+    none
+
+DEBUG: query='Does Matt have a master's degree?', from_suggestion=False, force_answer=False
+DEBUG: is_nonsense returned cat=None
+DEBUG: Semantic router: valid=True, score=0.658, family=out_of_scope
+DEBUG substitution: family=out_of_scope fired=False query="Does Matt have a master's degree?"
+DEBUG Embeddings: qvec_dim=1536 model=text-embedding-3-small
+DEBUG Pinecone query → index=matt-portfolio-v2, namespace=default
+DEBUG Hit: id=why-hire-matt|accenture pc=0.322 kw=0.250 blend=0.359  [] 
+DEBUG Hit: id=mattgpt-human-centered-ux-design-information-architecture|independent-project pc=0.287 kw=0.000 blend=0.287  [] 
+DEBUG Hit: id=about-matt-my-leadership-journey|accenture pc=0.286 kw=0.250 blend=0.323  [] 
+DEBUG Hit: id=mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project pc=0.280 kw=0.000 blend=0.280  [] 
+DEBUG Hit: id=transition-story-why-im-exploring-opportunities|accenture pc=0.272 kw=0.000 blend=0.272  [] 
+DEBUG Hit: id=teaching-entry-level-developers-to-build-their-first-java-web-application|american-intercontinental-university pc=0.243 kw=0.125 blend=0.262  [] 
+DEBUG Hit: id=keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin pc=0.233 kw=0.125 blend=0.252  [] 
+DEBUG Hit: id=i-let-speed-win-over-structure-heres-how-i-fixed-it|independent-project pc=0.228 kw=0.000 blend=0.228  [] 
+DEBUG Hit: id=mattgpt-rag-architecture-semantic-search-implementation|independent-project pc=0.220 kw=0.000 blend=0.220  [] 
+DEBUG Hit: id=building-effective-ai-assisted-development-workflows|independent-project pc=0.215 kw=0.000 blend=0.215  [] 
+DEBUG Hit: id=resolving-cross-domain-data-issues-for-atts-order-management|att pc=0.210 kw=0.000 blend=0.210  [] 
+DEBUG Hit: id=owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients pc=0.209 kw=0.000 blend=0.209  [] 
+DEBUG Hit: id=building-sparkflys-platform-alongside-its-founder|sparkfly pc=0.203 kw=0.000 blend=0.203  [] 
+DEBUG Hit: id=my-chatbot-kept-flattering-me-instead-of-answering-the-question-heres-how-i-fixed-it|independent-project pc=0.202 kw=0.125 blend=0.221  [] 
+DEBUG Hit: id=building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase pc=0.202 kw=0.000 blend=0.202  [] 
+DEBUG Hit: id=architecting-enhancements-for-atts-network-engineering-platform|att pc=0.200 kw=0.000 blend=0.200  [] 
+DEBUG Hit: id=building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders pc=0.199 kw=0.000 blend=0.199  [] 
+DEBUG Hit: id=implementing-bdd-for-system-behavior-specification|independent-project pc=0.197 kw=0.000 blend=0.197  [] 
+DEBUG Hit: id=architecting-atts-scalable-order-management-platform|att pc=0.195 kw=0.000 blend=0.195  [] 
+DEBUG Hit: id=building-tangible-cloud-tech-skills-for-hbcu-students|accenture pc=0.191 kw=0.000 blend=0.191  [] 
+DEBUG Hit: id=solving-ambiguous-problems-by-finding-root-causes-not-treating-symptoms|accenture pc=0.191 kw=0.000 blend=0.191  [] 
+DEBUG Hit: id=leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients pc=0.190 kw=0.000 blend=0.190  [] 
+DEBUG Hit: id=launching-a-self-paced-learning-program-for-emerging-technologies|accenture pc=0.188 kw=0.000 blend=0.188  [] 
+DEBUG Hit: id=integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics pc=0.187 kw=0.000 blend=0.187  [] 
+DEBUG Hit: id=mentoring-underserved-high-school-students-into-technology-careers|accenture pc=0.187 kw=0.000 blend=0.187  [] 
+DEBUG Confidence: top_score=0.322 -> high
+DEBUG: search confidence=high, top_score=0.322, pool_size=15
+DEBUG: intent_family=out_of_scope, is_synthesis=False
+DEBUG diversify_results: incoming=['Accenture', 'Accenture', 'Independent Project', 'Independent Project', 'Accenture', 'American InterContinental University', 'Lockheed Martin', 'Independent Project', 'Independent Project', 'Independent Project']
+DEBUG diversify_results: named=5, generic=2
+DEBUG diversify_results: result=['Accenture', 'American InterContinental University', 'Lockheed Martin', 'AT&T', 'Sparkfly', 'JP Morgan Chase', 'Independent Project']
+DEBUG LLM stories (5 max, 5 actual):
+DEBUG   [1] Accenture: Why Hire Matt?
+DEBUG   [2] American InterContinental University: Teaching Entry-Level Developers to Build
+DEBUG   [3] Lockheed Martin: Keeping the F-22's As-Built Configuratio
+DEBUG   [4] AT&T: Resolving Cross-Domain Data Issues for A
+DEBUG   [5] Sparkfly: Building Sparkfly's Platform Alongside I
+DEBUG LLM call: model=gpt-4o, temperature=0.4, is_synthesis=False
+DEBUG system_prompt[:200]: You are Agy 🐾 — Matt Pugmire's Plott Hound assistant.
+
+## YOUR JOB
+Relay the facts from Matt's stories. You are a messenger, not an evaluator.
+
+## WHAT YOU DO
+- Read the stories provided
+- Extract the
+====================================================================================================
+RUN 2: Does Matt have a master's degree?
+    intent_family='out_of_scope'  finish_reason='stop'  llm_called=True  generate_returned=True
+--- RAW LLM OUTPUT (full) (888 chars) ---
+    |Got it! 🐾
+    |
+    |Matt holds a master's degree in Information Technology from **American InterContinental University**. This educational background played a role in his career, as he taught an entry-level Enterprise Java course at the same university. While teaching, Matt guided students with no server-side experience to build a working Java web application. He structured the course to ensure that students learned by building, not just reading, and used the book "Core Servlets and JavaServer Pages" as a foundation. The course covered everything from setting up the JDK and Apache Tomcat to building a shopping cart application, culminating in the MVC pattern. This teaching experience reflects Matt's commitment to talent enablement and growth, as evidenced by a former student reaching out a year later for interview preparation advice.
+    |
+    |Want me to dig deeper into the technical approach?
+--- FINAL answer_md (full) (888 chars) ---
+    |Got it! 🐾
+    |
+    |Matt holds a master's degree in Information Technology from **American InterContinental University**. This educational background played a role in his career, as he taught an entry-level Enterprise Java course at the same university. While teaching, Matt guided students with no server-side experience to build a working Java web application. He structured the course to ensure that students learned by building, not just reading, and used the book "Core Servlets and JavaServer Pages" as a foundation. The course covered everything from setting up the JDK and Apache Tomcat to building a shopping cart application, culminating in the MVC pattern. This teaching experience reflects Matt's commitment to talent enablement and growth, as evidenced by a former student reaching out a year later for interview preparation advice.
+    |
+    |Want me to dig deeper into the technical approach?
+--- RAW BODY (first paragraph dropped only if it starts with 🐾) (888 chars) ---
+    |Got it! 🐾
+    |
+    |Matt holds a master's degree in Information Technology from **American InterContinental University**. This educational background played a role in his career, as he taught an entry-level Enterprise Java course at the same university. While teaching, Matt guided students with no server-side experience to build a working Java web application. He structured the course to ensure that students learned by building, not just reading, and used the book "Core Servlets and JavaServer Pages" as a foundation. The course covered everything from setting up the JDK and Apache Tomcat to building a shopping cart application, culminating in the MVC pattern. This teaching experience reflects Matt's commitment to talent enablement and growth, as evidenced by a former student reaching out a year later for interview preparation advice.
+    |
+    |Want me to dig deeper into the technical approach?
+--- FINAL BODY (opener/closer excluded) (825 chars) ---
+    |Matt holds a master's degree in Information Technology from **American InterContinental University**. This educational background played a role in his career, as he taught an entry-level Enterprise Java course at the same university. While teaching, Matt guided students with no server-side experience to build a working Java web application. He structured the course to ensure that students learned by building, not just reading, and used the book "Core Servlets and JavaServer Pages" as a foundation. The course covered everything from setting up the JDK and Apache Tomcat to building a shopping cart application, culminating in the MVC pattern. This teaching experience reflects Matt's commitment to talent enablement and growth, as evidenced by a former student reaching out a year later for interview preparation advice.
+--- META_COMMENTARY_REGEX_PATTERNS removals ---
+    none
+
+DEBUG: query='Does Matt have a master's degree?', from_suggestion=False, force_answer=False
+DEBUG: is_nonsense returned cat=None
+DEBUG: Semantic router: valid=True, score=0.658, family=out_of_scope
+DEBUG substitution: family=out_of_scope fired=False query="Does Matt have a master's degree?"
+DEBUG Embeddings: qvec_dim=1536 model=text-embedding-3-small
+DEBUG Pinecone query → index=matt-portfolio-v2, namespace=default
+DEBUG Hit: id=why-hire-matt|accenture pc=0.322 kw=0.250 blend=0.359  [] 
+DEBUG Hit: id=mattgpt-human-centered-ux-design-information-architecture|independent-project pc=0.287 kw=0.000 blend=0.287  [] 
+DEBUG Hit: id=about-matt-my-leadership-journey|accenture pc=0.286 kw=0.250 blend=0.323  [] 
+DEBUG Hit: id=mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project pc=0.280 kw=0.000 blend=0.280  [] 
+DEBUG Hit: id=transition-story-why-im-exploring-opportunities|accenture pc=0.272 kw=0.000 blend=0.272  [] 
+DEBUG Hit: id=teaching-entry-level-developers-to-build-their-first-java-web-application|american-intercontinental-university pc=0.243 kw=0.125 blend=0.262  [] 
+DEBUG Hit: id=keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin pc=0.233 kw=0.125 blend=0.252  [] 
+DEBUG Hit: id=i-let-speed-win-over-structure-heres-how-i-fixed-it|independent-project pc=0.228 kw=0.000 blend=0.228  [] 
+DEBUG Hit: id=mattgpt-rag-architecture-semantic-search-implementation|independent-project pc=0.220 kw=0.000 blend=0.220  [] 
+DEBUG Hit: id=building-effective-ai-assisted-development-workflows|independent-project pc=0.215 kw=0.000 blend=0.215  [] 
+DEBUG Hit: id=resolving-cross-domain-data-issues-for-atts-order-management|att pc=0.210 kw=0.000 blend=0.210  [] 
+DEBUG Hit: id=owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients pc=0.209 kw=0.000 blend=0.209  [] 
+DEBUG Hit: id=building-sparkflys-platform-alongside-its-founder|sparkfly pc=0.203 kw=0.000 blend=0.203  [] 
+DEBUG Hit: id=my-chatbot-kept-flattering-me-instead-of-answering-the-question-heres-how-i-fixed-it|independent-project pc=0.202 kw=0.125 blend=0.221  [] 
+DEBUG Hit: id=building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase pc=0.202 kw=0.000 blend=0.202  [] 
+DEBUG Hit: id=architecting-enhancements-for-atts-network-engineering-platform|att pc=0.200 kw=0.000 blend=0.200  [] 
+DEBUG Hit: id=building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders pc=0.199 kw=0.000 blend=0.199  [] 
+DEBUG Hit: id=implementing-bdd-for-system-behavior-specification|independent-project pc=0.197 kw=0.000 blend=0.197  [] 
+DEBUG Hit: id=architecting-atts-scalable-order-management-platform|att pc=0.195 kw=0.000 blend=0.195  [] 
+DEBUG Hit: id=building-tangible-cloud-tech-skills-for-hbcu-students|accenture pc=0.191 kw=0.000 blend=0.191  [] 
+DEBUG Hit: id=solving-ambiguous-problems-by-finding-root-causes-not-treating-symptoms|accenture pc=0.191 kw=0.000 blend=0.191  [] 
+DEBUG Hit: id=leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients pc=0.190 kw=0.000 blend=0.190  [] 
+DEBUG Hit: id=launching-a-self-paced-learning-program-for-emerging-technologies|accenture pc=0.188 kw=0.000 blend=0.188  [] 
+DEBUG Hit: id=integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics pc=0.187 kw=0.000 blend=0.187  [] 
+DEBUG Hit: id=mentoring-underserved-high-school-students-into-technology-careers|accenture pc=0.187 kw=0.000 blend=0.187  [] 
+DEBUG Confidence: top_score=0.322 -> high
+DEBUG: search confidence=high, top_score=0.322, pool_size=15
+DEBUG: intent_family=out_of_scope, is_synthesis=False
+DEBUG diversify_results: incoming=['Accenture', 'Accenture', 'Independent Project', 'Independent Project', 'Accenture', 'American InterContinental University', 'Lockheed Martin', 'Independent Project', 'Independent Project', 'Independent Project']
+DEBUG diversify_results: named=5, generic=2
+DEBUG diversify_results: result=['Accenture', 'American InterContinental University', 'Lockheed Martin', 'AT&T', 'Sparkfly', 'JP Morgan Chase', 'Independent Project']
+DEBUG LLM stories (5 max, 5 actual):
+DEBUG   [1] Accenture: Why Hire Matt?
+DEBUG   [2] American InterContinental University: Teaching Entry-Level Developers to Build
+DEBUG   [3] Lockheed Martin: Keeping the F-22's As-Built Configuratio
+DEBUG   [4] AT&T: Resolving Cross-Domain Data Issues for A
+DEBUG   [5] Sparkfly: Building Sparkfly's Platform Alongside I
+DEBUG LLM call: model=gpt-4o, temperature=0.4, is_synthesis=False
+DEBUG system_prompt[:200]: You are Agy 🐾 — Matt Pugmire's Plott Hound assistant.
+
+## YOUR JOB
+Relay the facts from Matt's stories. You are a messenger, not an evaluator.
+
+## WHAT YOU DO
+- Read the stories provided
+- Extract the
+====================================================================================================
+RUN 3: Does Matt have a master's degree?
+    intent_family='out_of_scope'  finish_reason='stop'  llm_called=True  generate_returned=True
+--- RAW LLM OUTPUT (full) (661 chars) ---
+    |🐾 Found it!
+    |
+    |Matt holds a master's degree in Information Technology from **American InterContinental University**. He earned this degree while simultaneously working full-time in a consulting engagement. During his time at the university, he also taught an entry-level Enterprise Java course as an adjunct professor, where he developed a curriculum that guided students with no server-side experience to build a working Java web application. This teaching experience highlights Matt's commitment to both his education and professional growth, as he managed to balance his academic pursuits with his career responsibilities. 
+    |
+    |What else can I track down for you?
+--- FINAL answer_md (full) (661 chars) ---
+    |🐾 Found it!
+    |
+    |Matt holds a master's degree in Information Technology from **American InterContinental University**. He earned this degree while simultaneously working full-time in a consulting engagement. During his time at the university, he also taught an entry-level Enterprise Java course as an adjunct professor, where he developed a curriculum that guided students with no server-side experience to build a working Java web application. This teaching experience highlights Matt's commitment to both his education and professional growth, as he managed to balance his academic pursuits with his career responsibilities. 
+    |
+    |What else can I track down for you?
+--- RAW BODY (first paragraph dropped only if it starts with 🐾) (648 chars) ---
+    |Matt holds a master's degree in Information Technology from **American InterContinental University**. He earned this degree while simultaneously working full-time in a consulting engagement. During his time at the university, he also taught an entry-level Enterprise Java course as an adjunct professor, where he developed a curriculum that guided students with no server-side experience to build a working Java web application. This teaching experience highlights Matt's commitment to both his education and professional growth, as he managed to balance his academic pursuits with his career responsibilities. 
+    |
+    |What else can I track down for you?
+--- FINAL BODY (opener/closer excluded) (611 chars) ---
+    |Matt holds a master's degree in Information Technology from **American InterContinental University**. He earned this degree while simultaneously working full-time in a consulting engagement. During his time at the university, he also taught an entry-level Enterprise Java course as an adjunct professor, where he developed a curriculum that guided students with no server-side experience to build a working Java web application. This teaching experience highlights Matt's commitment to both his education and professional growth, as he managed to balance his academic pursuits with his career responsibilities. 
+--- META_COMMENTARY_REGEX_PATTERNS removals ---
+    none
+

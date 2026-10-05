@@ -1,0 +1,462 @@
+[
+ {
+  "query": "where is Matt located?",
+  "group": "reach",
+  "run": 1,
+  "rejection_reason": null,
+  "router_family": "background",
+  "router_score": 0.766481417812916,
+  "router_anchor": "Who is Matt?",
+  "top_score": 0.264720023,
+  "profile_categories": [
+   "location_availability"
+  ],
+  "answer_md": "\ud83d\udc3e Found it!\n\nMatt is located in Atlanta, GA. He is open to relocation and travel, and his preferred work model is in-office, although he is also fine with hybrid or remote arrangements. Matt is available for immediate opportunities and does not require a notice period.\n\nThere's more to this story if you're curious."
+ },
+ {
+  "query": "where is Matt located?",
+  "group": "reach",
+  "run": 2,
+  "rejection_reason": null,
+  "router_family": "background",
+  "router_score": 0.766481417812916,
+  "router_anchor": "Who is Matt?",
+  "top_score": 0.264711201,
+  "profile_categories": [
+   "location_availability"
+  ],
+  "answer_md": "\ud83d\udc3e Here's a great example.\n\nMatt is located in Atlanta, GA. He is open to relocation and travel. His preferred work model is in-office, but he is also fine with hybrid or remote arrangements. Matt is available immediately and does not require a notice period. He is a U.S. citizen and does not need sponsorship.\n\nWant to see how Matt applied this elsewhere?"
+ },
+ {
+  "query": "Where does Matt live?",
+  "group": "reach",
+  "run": 1,
+  "rejection_reason": "low_confidence",
+  "router_family": "background",
+  "router_score": 0.7520663070791244,
+  "router_anchor": "Who is Matt?",
+  "top_score": 0.241581142,
+  "profile_categories": null,
+  "answer_md": ""
+ },
+ {
+  "query": "Where does Matt live?",
+  "group": "reach",
+  "run": 2,
+  "rejection_reason": "low_confidence",
+  "router_family": "background",
+  "router_score": 0.7520663070791244,
+  "router_anchor": "Who is Matt?",
+  "top_score": 0.241646975,
+  "profile_categories": null,
+  "answer_md": ""
+ },
+ {
+  "query": "Is Matt open to relocation?",
+  "group": "reach",
+  "run": 1,
+  "rejection_reason": null,
+  "router_family": "narrative",
+  "router_score": 0.6387623595064221,
+  "router_anchor": "Why is Matt exploring opportunities?",
+  "top_score": 0.358757913,
+  "profile_categories": [
+   "location_availability"
+  ],
+  "answer_md": "\ud83d\udc3e Here's a great example.\n\nMatt is open to relocation and travel. He is based in Atlanta, GA, and prefers an in-office work model but is also fine with hybrid or remote arrangements. He is available immediately and does not require any sponsorship as he is a US citizen. \n\nLet me know if you'd like the deep dive on this one."
+ },
+ {
+  "query": "Is Matt open to relocation?",
+  "group": "reach",
+  "run": 2,
+  "rejection_reason": null,
+  "router_family": "narrative",
+  "router_score": 0.6387623595064221,
+  "router_anchor": "Why is Matt exploring opportunities?",
+  "top_score": 0.358512968,
+  "profile_categories": [
+   "location_availability"
+  ],
+  "answer_md": "\ud83d\udc3e Perfect \u2014 here's what I found.\n\nMatt is open to relocation. He is based in Atlanta, GA, and is available for immediate relocation and travel. His preferred work model is in-office, but he is also fine with hybrid or remote arrangements. \n\nShall I find more examples like this?"
+ },
+ {
+  "query": "What's Matt's availability?",
+  "group": "reach",
+  "run": 1,
+  "rejection_reason": null,
+  "router_family": "background",
+  "router_score": 0.6844408359907226,
+  "router_anchor": "Who is Matt?",
+  "top_score": 0.352646559,
+  "profile_categories": [
+   "location_availability"
+  ],
+  "answer_md": "Got it! \ud83d\udc3e\n\nMatt is available immediately for new opportunities. He is currently on a sabbatical and actively searching for a role where building the product engineering organization, establishing the culture, and delivering results are integral parts of the job. He is open to relocation and travel, preferring an in-office work model, but is also fine with hybrid or remote arrangements. As a U.S. citizen, he does not require sponsorship for employment.\n\nWant to see how Matt applied this elsewhere?"
+ },
+ {
+  "query": "What's Matt's availability?",
+  "group": "reach",
+  "run": 2,
+  "rejection_reason": null,
+  "router_family": "background",
+  "router_score": 0.6844408359907226,
+  "router_anchor": "Who is Matt?",
+  "top_score": 0.352646559,
+  "profile_categories": [
+   "location_availability"
+  ],
+  "answer_md": "\ud83d\udc3e Perfect \u2014 here's what I found.\n\nMatt is available immediately for new opportunities. He is open to relocation and travel, and while he prefers an in-office work model, he is also fine with hybrid or remote arrangements. As a U.S. citizen, he does not require sponsorship for employment.\n\nShall I find more examples like this?"
+ },
+ {
+  "query": "Where are you based?",
+  "group": "reach",
+  "run": 1,
+  "rejection_reason": null,
+  "router_family": "narrative",
+  "router_score": 0.26743617520616664,
+  "router_anchor": "Where does Matt do his best work?",
+  "top_score": 0.268787444,
+  "profile_categories": [
+   "location_availability"
+  ],
+  "answer_md": "\ud83d\udc3e Perfect \u2014 here's what I found.\n\nMatt is based in Atlanta, GA. He is open to relocation and travel and prefers an in-office work model, though he is fine with hybrid or remote arrangements. He is available immediately and does not require a notice period. Matt is a US citizen and does not need sponsorship for employment. \n\nWant to see how Matt applied this elsewhere?"
+ },
+ {
+  "query": "Where are you based?",
+  "group": "reach",
+  "run": 2,
+  "rejection_reason": null,
+  "router_family": "narrative",
+  "router_score": 0.2674761392899793,
+  "router_anchor": "Where does Matt do his best work?",
+  "top_score": 0.268512845,
+  "profile_categories": [
+   "location_availability"
+  ],
+  "answer_md": "\ud83d\udc3e On it!\n\nMatt is based in Atlanta, GA. He is open to relocation and travel. His work model preference is in-office, but he is also fine with hybrid or remote arrangements. Matt is available immediately and does not require a notice period. As a US citizen, he does not need sponsorship for work authorization. \n\nHappy to explore similar work in other industries."
+ },
+ {
+  "query": "Are you open to relocation?",
+  "group": "reach",
+  "run": 1,
+  "rejection_reason": null,
+  "router_family": "narrative",
+  "router_score": 0.3380839754601008,
+  "router_anchor": "Making an Intentional Career Transition After Accenture",
+  "top_score": 0.295638412,
+  "profile_categories": [
+   "location_availability"
+  ],
+  "answer_md": "\ud83d\udc3e This is a strong one.\n\nMatt is open to relocation and travel. He is currently based in Atlanta, GA, and prefers an in-office work model, though he is also fine with hybrid or remote arrangements. Matt is available immediately and does not require sponsorship, as he is a US citizen. His openness to relocation and travel aligns with his pursuit of senior leadership roles in platform engineering, AI-era transformation, and enterprise modernization, where he aims to be actively involved in building, driving change, and solving complex problems as part of a team.\n\nI can show you related patterns if that's helpful."
+ },
+ {
+  "query": "Are you open to relocation?",
+  "group": "reach",
+  "run": 2,
+  "rejection_reason": null,
+  "router_family": "narrative",
+  "router_score": 0.33808763012067883,
+  "router_anchor": "Making an Intentional Career Transition After Accenture",
+  "top_score": 0.295638412,
+  "profile_categories": [
+   "location_availability"
+  ],
+  "answer_md": "\ud83d\udc3e Perfect \u2014 here's what I found.\n\nMatt is open to relocation. He is based in Atlanta, GA, and is open to relocation and travel. Matt is available immediately and does not require a notice period. He prefers an in-office work model but is also fine with hybrid or remote arrangements. \n\nWant to see how Matt applied this elsewhere?"
+ },
+ {
+  "query": "When can you start?",
+  "group": "reach",
+  "run": 1,
+  "rejection_reason": null,
+  "router_family": "narrative",
+  "router_score": 0.27165163398364334,
+  "router_anchor": "Making an Intentional Career Transition After Accenture",
+  "top_score": 0.296007693,
+  "profile_categories": [
+   "location_availability"
+  ],
+  "answer_md": "\ud83d\udc3e Tracking this down...\n\nMatt is available immediately for new opportunities. After his tenure at **Accenture**, where he led a 150-person Cloud Innovation Center, Matt took a sabbatical to recharge and focus on what's next. During this time, he stayed hands-on by building MattGPT using RAG, semantic search, and modern LLM tooling. This period allowed him to deepen his skills in AI and GenAI, rebuild his portfolio, and refine his leadership narrative. Matt has clarified the roles and environments where he can deliver the greatest impact, focusing on platform modernization, product leadership, engineering culture, and cross-functional alignment.\n\nMatt is pursuing senior leadership roles in platform engineering, AI-era transformation, and enterprise modernization, where he can leverage his strengths in building, taking on change, and solving hard problems as part of a team. He is eager to contribute to organizations where the center of gravity is the work itself, and he is prepared to start immediately.\n\nWant to see how Matt applied this elsewhere?"
+ },
+ {
+  "query": "When can you start?",
+  "group": "reach",
+  "run": 2,
+  "rejection_reason": null,
+  "router_family": "narrative",
+  "router_score": 0.27165163398364334,
+  "router_anchor": "Making an Intentional Career Transition After Accenture",
+  "top_score": 0.296007693,
+  "profile_categories": [
+   "location_availability"
+  ],
+  "answer_md": "\ud83d\udc3e Here's a great example.\n\nMatt is currently available to start immediately. After his tenure at **Accenture**, where he grew from an engineer to Director of the Cloud Innovation Center, he took a sabbatical to recharge and focus on what's next. During this time, he stayed hands-on by building MattGPT using RAG, semantic search, and modern LLM tooling. This experience ensured that he remained current and sharp, ready to pursue senior leadership roles in platform engineering, AI-era transformation, and enterprise modernization. His readiness is demonstrated through his work on MattGPT, which serves as proof that his time was spent building, not idling. Matt is eager to take on roles where he can build, tackle change, and solve hard problems as part of a team.\n\nWant me to dig deeper into the technical approach?"
+ },
+ {
+  "query": "What was the project timeline at JP Morgan?",
+  "group": "reach",
+  "run": 1,
+  "rejection_reason": null,
+  "router_family": "domain_payments",
+  "router_score": 0.49587486950244836,
+  "router_anchor": "Show me Matt's work with JPMC",
+  "top_score": 0.566680908,
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e Here's a great example.\n\nAt **JP Morgan Chase**, Matt played a pivotal role in the firm's Identity & Access Management (I&AM) Uplift Program following a significant data breach in 2014. This program required the remediation and implementation of new security controls across **341** CIB SOX/SSAE16 applications. The project faced an aggressive timeline, necessitating centralized tools for tracking remediation progress and coordinating work across hundreds of application teams. Despite Jira being the default Agile tool, it had not been fully adopted, leading to fragmented workflows and limited visibility into remediation status. Matt was tasked with configuring Jira to meet the program's specific needs and ensuring its successful adoption by the team. This involved tailoring Jira workflows, integrating it with existing tools, and leading Agile onboarding sessions to address resistance and build buy-in. As a result, the team successfully adopted Jira, leading to improved collaboration, streamlined workflows, and enhanced delivery tracking. This transformation allowed cross-functional teams to align more effectively on priorities, reducing delays and communication gaps, and establishing Jira as the central tool for Agile workflows.\n\nThe project timeline for the I&AM Uplift was aggressive, but with Matt's efforts in configuring Jira and leading Agile adoption, the team was able to track progress and report transparently, enabling stakeholders to monitor delivery timelines and identify potential risks early. This setup provided JP Morgan with the structure and clarity needed to proceed with the migration on their timeline.\n\nWant to see how Matt applied this elsewhere?"
+ },
+ {
+  "query": "What was the project timeline at JP Morgan?",
+  "group": "reach",
+  "run": 2,
+  "rejection_reason": null,
+  "router_family": "domain_payments",
+  "router_score": 0.49587486950244836,
+  "router_anchor": "Show me Matt's work with JPMC",
+  "top_score": 0.566680908,
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e This is a strong one.\n\nAt **JP Morgan**, following the 2014 data breach, the Identity & Access Management (I&AM) Uplift Program required a transformation across **341** CIB applications on an aggressive timeline. The project aimed to implement new security controls, but the lack of a fully adopted centralized tool like Jira led to fragmented workflows and limited visibility into progress. Matt was tasked with configuring Jira to meet the specific needs of the I&AM program and ensuring its successful adoption by the team. He tailored Jira workflows to manage epics, user stories, and sprints effectively, integrated Jira with existing tools, and led Agile onboarding sessions to address resistance and build buy-in for both Jira and Agile practices.\n\nThe adoption of Jira led to improved collaboration, streamlined workflows, and enhanced delivery tracking. Cross-functional teams aligned more effectively on priorities, reducing delays and communication gaps. Progress tracking and reporting became more transparent, enabling stakeholders to monitor delivery timelines and identify potential risks early. Training and tailored support helped the team adopt Jira quickly, establishing it as the central tool for Agile workflows. The Agile practices combined with Jira's functionality resulted in smoother delivery cycles, boosting stakeholder confidence in the program's execution.\n\nHappy to explore similar work in other industries."
+ },
+ {
+  "query": "What are your salary expectations?",
+  "group": "salary",
+  "run": 1,
+  "rejection_reason": "rule:personal_compensation",
+  "router_family": null,
+  "router_score": null,
+  "router_anchor": null,
+  "top_score": null,
+  "profile_categories": null,
+  "answer_md": ""
+ },
+ {
+  "query": "What are your salary expectations?",
+  "group": "salary",
+  "run": 2,
+  "rejection_reason": "rule:personal_compensation",
+  "router_family": null,
+  "router_score": null,
+  "router_anchor": null,
+  "top_score": null,
+  "profile_categories": null,
+  "answer_md": ""
+ },
+ {
+  "query": "What's Matt's salary range?",
+  "group": "salary",
+  "run": 1,
+  "rejection_reason": "rule:recruiter_logistics",
+  "router_family": null,
+  "router_score": null,
+  "router_anchor": null,
+  "top_score": null,
+  "profile_categories": null,
+  "answer_md": ""
+ },
+ {
+  "query": "What's Matt's salary range?",
+  "group": "salary",
+  "run": 2,
+  "rejection_reason": "rule:recruiter_logistics",
+  "router_family": null,
+  "router_score": null,
+  "router_anchor": null,
+  "top_score": null,
+  "profile_categories": null,
+  "answer_md": ""
+ },
+ {
+  "query": "Where is Matt based?",
+  "group": "unchanged",
+  "run": 1,
+  "rejection_reason": null,
+  "router_family": "background",
+  "router_score": 0.7384637108656975,
+  "router_anchor": "Who is Matt?",
+  "top_score": 0.306112498,
+  "profile_categories": [
+   "location_availability"
+  ],
+  "answer_md": "\ud83d\udc3e Found it!\n\nMatt is based in Atlanta, GA. He is open to relocation and travel, and he prefers an in-office work model, though hybrid or remote arrangements are also fine. He is available immediately and does not require a notice period. Additionally, Matt is a US citizen and does not need sponsorship.\n\nI can show you related patterns if that's helpful."
+ },
+ {
+  "query": "Where is Matt based?",
+  "group": "unchanged",
+  "run": 2,
+  "rejection_reason": null,
+  "router_family": "background",
+  "router_score": 0.7384637108656975,
+  "router_anchor": "Who is Matt?",
+  "top_score": 0.305971563,
+  "profile_categories": [
+   "location_availability"
+  ],
+  "answer_md": "Got it! \ud83d\udc3e\n\nMatt is based in Atlanta, GA. He is open to relocation and travel, and he prefers an in-office work model but is also fine with hybrid or remote arrangements. He is available immediately and does not require a notice period. Additionally, Matt is a US citizen and does not need sponsorship for employment.\n\nWhat else can I track down for you?"
+ },
+ {
+  "query": "What city is Matt in?",
+  "group": "unchanged",
+  "run": 1,
+  "rejection_reason": null,
+  "router_family": "background",
+  "router_score": 0.7587486935799023,
+  "router_anchor": "Who is Matt?",
+  "top_score": 0.284882814,
+  "profile_categories": [
+   "location_availability"
+  ],
+  "answer_md": "\ud83d\udc3e I know just the story.\n\nMatt is located in Atlanta, GA. He is open to relocation and travel, and he prefers an in-office work model, though he is fine with hybrid or remote arrangements. He is available immediately and does not require sponsorship as he is a US citizen. \n\nLet me know if you'd like the deep dive on this one."
+ },
+ {
+  "query": "What city is Matt in?",
+  "group": "unchanged",
+  "run": 2,
+  "rejection_reason": null,
+  "router_family": "background",
+  "router_score": 0.7587992472810138,
+  "router_anchor": "Who is Matt?",
+  "top_score": 0.284882814,
+  "profile_categories": [
+   "location_availability"
+  ],
+  "answer_md": "Got it! \ud83d\udc3e\n\nMatt is located in Atlanta, GA. He is open to relocation and travel.\n\nWant me to dig deeper into the technical approach?"
+ },
+ {
+  "query": "Can Matt work remotely?",
+  "group": "unchanged",
+  "run": 1,
+  "rejection_reason": null,
+  "router_family": "synthesis",
+  "router_score": 0.618264486008324,
+  "router_anchor": "Why hire Matt?",
+  "top_score": 0.405532,
+  "profile_categories": [
+   "location_availability"
+  ],
+  "answer_md": "\ud83d\udc3e Great question \u2014 let me pull together the big picture.\n\nMatt is open to working remotely. He is currently based in Atlanta, GA, and is open to relocation and travel. While he prefers an in-office work model, he is also fine with hybrid or remote arrangements. Matt is available immediately and does not require a notice period. \n\nWhich pattern would you like to explore further?"
+ },
+ {
+  "query": "Can Matt work remotely?",
+  "group": "unchanged",
+  "run": 2,
+  "rejection_reason": null,
+  "router_family": "synthesis",
+  "router_score": 0.6183964645766575,
+  "router_anchor": "Why hire Matt?",
+  "top_score": 0.405532,
+  "profile_categories": [
+   "location_availability"
+  ],
+  "answer_md": "\ud83d\udc3e Great question \u2014 let me pull together the big picture.\n\nMatt is open to working remotely. He is currently located in Atlanta, GA, and is open to relocation and travel. While he prefers an in-office work model, he is also fine with hybrid or remote arrangements. Matt is available immediately and does not require a notice period. \n\nWhich pattern would you like to explore further?"
+ },
+ {
+  "query": "Does Matt need sponsorship?",
+  "group": "unchanged",
+  "run": 1,
+  "rejection_reason": null,
+  "router_family": "narrative",
+  "router_score": 0.5955556194812996,
+  "router_anchor": "Why is Matt exploring opportunities?",
+  "top_score": 0.338262141,
+  "profile_categories": [
+   "location_availability"
+  ],
+  "answer_md": "\ud83d\udc3e I know just the story.\n\nMatt does not need sponsorship. He is a U.S. citizen, which means he is authorized to work in the United States without requiring any sponsorship. This is a straightforward fact about his work eligibility.\n\nWant me to dig deeper into the technical approach?"
+ },
+ {
+  "query": "Does Matt need sponsorship?",
+  "group": "unchanged",
+  "run": 2,
+  "rejection_reason": null,
+  "router_family": "narrative",
+  "router_score": 0.5955265593085363,
+  "router_anchor": "Why is Matt exploring opportunities?",
+  "top_score": 0.33797878,
+  "profile_categories": [
+   "location_availability"
+  ],
+  "answer_md": "\ud83d\udc3e This is a strong one.\n\nMatt does not need sponsorship. He is a U.S. citizen, which means he does not require sponsorship to work in the United States. This status allows him to be available immediately for roles without the need for a visa or work permit. Matt is open to relocation and travel, with a preference for in-office work, though he is also fine with hybrid or remote arrangements. \n\nHappy to explore similar work in other industries."
+ },
+ {
+  "query": "Is Matt married?",
+  "group": "personal_control",
+  "run": 1,
+  "rejection_reason": "semantic_router:personal",
+  "router_family": "personal",
+  "router_score": 0.9581061821155494,
+  "router_anchor": "Is Matt married",
+  "top_score": null,
+  "profile_categories": null,
+  "answer_md": "\ud83d\udc3e I'm focused on Matt's professional experience \u2014 the projects, the teams, the outcomes.\n\nAsk me about his **transformation work**, **platform engineering**, or **how he builds teams** and I'll dig up the details."
+ },
+ {
+  "query": "Is Matt married?",
+  "group": "personal_control",
+  "run": 2,
+  "rejection_reason": "semantic_router:personal",
+  "router_family": "personal",
+  "router_score": 0.9581179102292356,
+  "router_anchor": "Is Matt married",
+  "top_score": null,
+  "profile_categories": null,
+  "answer_md": "\ud83d\udc3e I'm focused on Matt's professional experience \u2014 the projects, the teams, the outcomes.\n\nAsk me about his **transformation work**, **platform engineering**, or **how he builds teams** and I'll dig up the details."
+ },
+ {
+  "query": "Tell me about Matt's payments work at JPMorgan",
+  "group": "story_control",
+  "run": 1,
+  "rejection_reason": null,
+  "router_family": "domain_payments",
+  "router_score": 0.7034840306326592,
+  "router_anchor": "Tell me about Matt's financial services experience",
+  "top_score": 0.562497616,
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e Found it!\n\nAt **JP Morgan Chase**, Matt served as the Senior Technology Architecture Manager, where he played a pivotal role in building the ACCESS Next Generation platform. This initiative was critical as JP Morgan's client base of over **135,000** corporations, financial institutions, governments, and municipalities across **180+ countries** required a highly customized digital banking portal. The existing platform, Bottomline Technologies' WebSeries, was inadequate for the scale and complexity needed. Matt led a blended team of over **40** professionals from **Accenture** and JP Morgan, focusing on creating bespoke payment modules, security layers, and user experience enhancements that went beyond the out-of-box offerings.\n\nMatt's approach was unique in its depth and breadth, involving the design and delivery of payment modules such as ACH, wire, FX/cross-border, and EFTPS tax payments. He implemented a Message Authentication Code (MAC) security layer and built contextual help systems to guide users through complex payment processes. His work also included integrating the payment engine with JP Morgan's centralized transaction monitoring system, ensuring compliance and security across all transactions. The platform's launch in April 2011 marked a significant milestone, consolidating previously separate regional systems into a unified digital experience. This transformation was recognized as #1 in digital channels by Coalition Greenwich.\n\nMatt's work at **JP Morgan Chase** not only addressed the immediate needs of the bank's extensive client base but also established a robust foundation for future digital banking innovations. What else can I track down for you?"
+ },
+ {
+  "query": "What's Matt's leadership philosophy?",
+  "group": "story_control",
+  "run": 1,
+  "rejection_reason": null,
+  "router_family": "narrative",
+  "router_score": 1.0,
+  "router_anchor": "What's Matt's leadership philosophy?",
+  "top_score": 0.55717659,
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e Found it!\n\nMatt's leadership philosophy is deeply rooted in creating environments where teams can thrive by fostering trust, clarity, and shared purpose. Across his roles, including leading a **150-person Cloud Innovation Center** at **Accenture**, Matt observed that successful teams are not just built on process or tools, but on a foundation of trust and clarity. He focuses on removing barriers that hinder team performance, such as over-processing and under-trusting, and instead promotes psychological safety, empowering teams to own their outcomes and make decisions closest to the work.\n\nMatt's approach blends empathy with modern engineering rigor. He leads with purpose, making his intent explicit, and builds psychological safety so people can take risks and speak honestly. Decisions are pushed to those closest to the work, supported by transparency, direct feedback, and open communication. By grounding engineering culture in automation, continuous delivery, and quality-first practices, Matt coaches teams to think clearly and not just execute tasks. This philosophy has led to **4x delivery acceleration**, improved quality, and strengthened cross-functional trust, enabling teams to deliver meaningful work with pride and ownership.\n\nHis leadership journey is marked by solving ambiguous problems, building high-trust engineering cultures, and modernizing platforms. At **Accenture**, he scaled the Cloud Innovation Center from 0 to **150+ professionals** and drove **\\$100M+** in repeat business through delivery excellence. Matt's consistent approach of listening first, aligning around purpose, and moving intentionally has defined his career by impact, fostering teams that trust each other and deliver work they are proud of.\n\nLet me know if you'd like the deep dive on this one."
+ },
+ {
+  "query": "Why hire Matt?",
+  "group": "story_control",
+  "run": 1,
+  "rejection_reason": null,
+  "router_family": "synthesis",
+  "router_score": 0.9999679337828249,
+  "router_anchor": "Why hire Matt?",
+  "top_score": 0.534254,
+  "profile_categories": [],
+  "answer_md": "\ud83d\udc3e Great question \u2014 let me pull together the big picture.\n\nMatt has a proven track record of building and scaling impactful technology solutions and teams. At **Accenture**, he led the creation of the Cloud Innovation Center, growing it from zero to over **150 professionals**. This initiative delivered at four times the velocity with zero-defect deployments, contributing to over **\\$100** million in repeat business. His approach focused on modern engineering practices like test-driven development and automated pipelines, which resulted in sustainable and high-quality delivery outcomes.\n\nIn his role at **HSBC**, Matt led a technology assessment and transformation roadmap for their mortgage operations, which were under regulatory pressure. He conducted on-site workshops and developed a target state architecture that secured a **\\$10** million implementation contract. He has consistently delivered real outcomes across various industries, including financial services, healthcare, and telecommunications. His work at the Cloud Innovation Center not only transformed product development culture at **Accenture** but also influenced client organizations to adopt modern engineering practices.\n\nMatt is currently available for senior leadership roles in platform engineering, AI-era transformation, and enterprise modernization. He is ready to build, drive change, and solve hard problems as part of a team. I can show specific examples from any of these areas."
+ },
+ {
+  "query": "Tell me about a time Matt failed",
+  "group": "story_control",
+  "run": 1,
+  "rejection_reason": null,
+  "router_family": "behavioral",
+  "router_score": 1.0,
+  "router_anchor": "Tell me about a time Matt failed",
+  "top_score": 0.442465812,
+  "profile_categories": [],
+  "answer_md": "Got it! \ud83d\udc3e\n\nDuring a platform modernization delivery for a **Fortune 500** financial services client, Matt encountered a significant failure. He assumed that the IAM controls, environment boundaries, and data masking were correctly set up, relying on inherited documentation from previous phases. This oversight led to an offshore tester accidentally triggering an email job in UAT, which sent communications containing unmasked production data to thousands of real clients. The situation highlighted the risks of making assumptions without verification, especially under delivery pressure.\n\nMatt took full accountability for the incident and led the team through a thorough root cause analysis and remediation process. He recognized that assumptions are risks in disguise and that IAM validation, environment verification, PII scrubbing, and risk ownership should be day-one leadership responsibilities. The client demanded the removal of the tester from the project, a consequence of the systemic failure that underscored the importance of leaders owning the environments their teams operate in.\n\nThis experience taught Matt valuable lessons about the critical need for proactive verification and the dangers of relying on assumptions. He integrated these learnings into his leadership approach, ensuring that such oversights do not recur in future projects.\n\nShall I find more examples like this?"
+ },
+ {
+  "query": "How did Matt build the AWS certification program?",
+  "group": "story_control",
+  "run": 1,
+  "rejection_reason": null,
+  "router_family": "technical",
+  "router_score": 0.5726492833643599,
+  "router_anchor": "What is Matt's experience with modern engineering and cloud platforms?",
+  "top_score": 0.570432961,
+  "profile_categories": [],
+  "answer_md": "Got it! \ud83d\udc3e\n\nAt **Accenture's Liquid Studio**, traditional training programs couldn't keep up with the rapidly evolving AWS technologies, leading to skill gaps and slowing cloud adoption. Matt led the AWS Launchpad program to address these challenges. The program was developed in collaboration with AWS to build deep cloud competencies across **Accenture** and align cloud adoption with AWS best practices. He designed structured learning paths and certification programs focusing on AWS core services like Lambda, API Gateway, DynamoDB, Kubernetes, and ECS/Fargate. \n\nMatt's approach included delivering interactive workshops and labs that immersed engineers in real-world AWS environments, reinforcing practical application over theory. He also established cloud expert mentorship teams, embedding best practices and fostering institutional knowledge for long-term competency growth. This mentor-based training was a key differentiator, ensuring that the knowledge transfer was not just theoretical but deeply practical and sustainable.\n\nThe AWS Launchpad program resulted in over **200 professionals** earning AWS certifications, accelerating adoption and strengthening **Accenture**'s cloud expertise. This positioned **Accenture** as a leader in AWS competency, increasing market credibility and the ability to secure cloud-native engagements. The program fostered a sustainable learning culture, ensuring ongoing cloud innovation and capability-building across teams.\n\nHappy to explore similar work in other industries."
+ }
+]

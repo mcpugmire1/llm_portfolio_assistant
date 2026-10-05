@@ -1,0 +1,192 @@
+============================================================================================================
+MATTGPT-250 PoC 2 -- Stage 1 (revised): which queries reach the low-confidence gate?
+============================================================================================================
+[QUERY_REJECTED] reason=low_pinecone, router_family=technical, router_score=0.649, pinecone_score=0.218, query=Where did Matt get his degree?...
+  [    profile] gated=Y reason='low_confidence' family='technical' router=0.649 top=0.218 conf='low' ms= 3680.6 :: Where did Matt get his degree?
+[QUERY_REJECTED] reason=low_pinecone, router_family=technical, router_score=0.636, pinecone_score=0.221, query=What did Matt study in college?...
+  [    profile] gated=Y reason='low_confidence' family='technical' router=0.636 top=0.221 conf='low' ms= 1271.1 :: What did Matt study in college?
+  [    profile] gated=N reason=None family='out_of_scope' router=0.658 top=0.322 conf='high' ms= 4349.9 :: Does Matt have a master's degree?
+  [    profile] gated=N reason=None family='synthesis' router=0.648 top=0.353 conf='high' ms= 4814.2 :: What languages does Matt speak?
+  [not_profile] gated=N reason='semantic_router:out_of_scope' family='out_of_scope' router=0.835 top=  n/a conf=None ms=  495.1 :: Does Matt have retail experience?
+  [not_profile] gated=Y reason='rule:gaming' family=None router=  n/a top=  n/a conf=None ms=    3.4 :: What has Matt done in the gaming industry?
+  [not_profile] gated=N reason=None family='stakeholders' router=0.619 top=0.430 conf='high' ms= 4991.1 :: Has Matt worked with SAP?
+  [not_profile] gated=N reason=None family='out_of_scope' router=0.713 top=0.376 conf='high' ms= 4325.9 :: Tell me about Matt's work in agriculture
+  [not_profile] gated=N reason=None family='out_of_scope' router=0.757 top=0.363 conf='high' ms= 3773.3 :: Has Matt worked in real estate?
+  [not_profile] gated=N reason=None family='domain_payments' router=0.585 top=0.464 conf='high' ms= 4537.5 :: What's Matt's experience with mainframe COBOL?
+  [not_profile] gated=N reason=None family='agile_transformation' router=0.677 top=0.390 conf='high' ms= 4132.3 :: Tell me about Matt's hospital operations work
+  [not_profile] gated=N reason=None family='technical' router=0.502 top=0.308 conf='high' ms= 5459.7 :: Has Matt used Rust?
+  [not_profile] gated=N reason=None family='background' router=0.612 top=0.402 conf='high' ms= 4501.2 :: What open source projects has Matt contributed to?
+  [profile_gap] gated=N reason=None family='background' router=0.585 top=0.303 conf='high' ms= 3505.4 :: Does Matt have any patents?
+  [   baseline] gated=N reason=None family='domain_payments' router=0.703 top=0.563 conf='high' ms= 4243.0 :: Tell me about Matt's payments work at JPMorgan
+  [   baseline] gated=N reason=None family='narrative' router=1.000 top=0.557 conf='high' ms= 5767.3 :: What's Matt's leadership philosophy?
+
+============================================================================================================
+STAGE 1 TABLE
+============================================================================================================
+shape        gate   rejection_reason             family                router     top conf         ms  query
+------------------------------------------------------------------------------------------------------------
+profile      GATE   low_confidence               technical              0.649   0.218 low      3680.6  Where did Matt get his degree?
+profile      GATE   low_confidence               technical              0.636   0.221 low      1271.1  What did Matt study in college?
+profile      ANS    None                         out_of_scope           0.658   0.322 high     4349.9  Does Matt have a master's degree?
+profile      ANS    None                         synthesis              0.648   0.353 high     4814.2  What languages does Matt speak?
+not_profile  REJ    semantic_router:out_of_scope out_of_scope           0.835     n/a None      495.1  Does Matt have retail experience?
+not_profile  REJ    rule:gaming                  None                     n/a     n/a None        3.4  What has Matt done in the gaming industry?
+not_profile  ANS    None                         stakeholders           0.619   0.430 high     4991.1  Has Matt worked with SAP?
+not_profile  ANS    None                         out_of_scope           0.713   0.376 high     4325.9  Tell me about Matt's work in agriculture
+not_profile  ANS    None                         out_of_scope           0.757   0.363 high     3773.3  Has Matt worked in real estate?
+not_profile  ANS    None                         domain_payments        0.585   0.464 high     4537.5  What's Matt's experience with mainframe COBOL?
+not_profile  ANS    None                         agile_transformation   0.677   0.390 high     4132.3  Tell me about Matt's hospital operations work
+not_profile  ANS    None                         technical              0.502   0.308 high     5459.7  Has Matt used Rust?
+not_profile  ANS    None                         background             0.612   0.402 high     4501.2  What open source projects has Matt contributed to?
+profile_gap  ANS    None                         background             0.585   0.303 high     3505.4  Does Matt have any patents?
+baseline     ANS    None                         domain_payments        0.703   0.563 high     4243.0  Tell me about Matt's payments work at JPMorgan
+baseline     ANS    None                         narrative              1.000   0.557 high     5767.3  What's Matt's leadership philosophy?
+
+Queries that reached the low-confidence gate: 2 of 16
+  [profile] Where did Matt get his degree?
+  [profile] What did Matt study in college?
+
+Queries that answered (baseline timing): 13 of 16
+  [profile]  4349.9 ms :: Does Matt have a master's degree?
+  [profile]  4814.2 ms :: What languages does Matt speak?
+  [not_profile]   495.1 ms :: Does Matt have retail experience?
+  [not_profile]  4991.1 ms :: Has Matt worked with SAP?
+  [not_profile]  4325.9 ms :: Tell me about Matt's work in agriculture
+  [not_profile]  3773.3 ms :: Has Matt worked in real estate?
+  [not_profile]  4537.5 ms :: What's Matt's experience with mainframe COBOL?
+  [not_profile]  4132.3 ms :: Tell me about Matt's hospital operations work
+  [not_profile]  5459.7 ms :: Has Matt used Rust?
+  [not_profile]  4501.2 ms :: What open source projects has Matt contributed to?
+  [profile_gap]  3505.4 ms :: Does Matt have any patents?
+  [baseline]  4243.0 ms :: Tell me about Matt's payments work at JPMorgan
+  [baseline]  5767.3 ms :: What's Matt's leadership philosophy?
+
+============================================================================================================
+FULL ANSWERS PER QUERY
+============================================================================================================
+
+--- [profile] gated=Y reason='low_confidence' :: Where did Matt get his degree? ---
+    [EMPTY]
+
+--- [profile] gated=Y reason='low_confidence' :: What did Matt study in college? ---
+    [EMPTY]
+
+--- [profile] gated=N reason=None :: Does Matt have a master's degree? ---
+    🐾 Tracking this down...
+    
+    Matt earned his master's degree in IT from **American Intercontinental University**. During his time there, he connected with a friend from his cohort who had joined the faculty, which eventually led to Matt teaching an entry-level Enterprise Java course at the university. This teaching engagement ran alongside his full-time consulting work. In this role, Matt developed the course syllabus and guided students with no server-side experience to build a working Java web application. The course was structured to ensure that students learned through practical assignments, culminating in a shopping cart project that integrated various technologies like servlets, JSP, and MySQL. This experience was part of Matt's broader pattern of learning under pressure and then transferring that knowledge to others.
+    
+    Shall I find more examples like this?
+
+--- [profile] gated=N reason=None :: What languages does Matt speak? ---
+    🐾 Stepping back to see the themes, there is no mention of specific languages that Matt speaks in the stories provided. The focus is on his professional journey and accomplishments, such as building the Cloud Innovation Center at **Accenture** from 0 to over **150** professionals and delivering at **4x** velocity. He also taught an entry-level Enterprise Java course at **American Intercontinental University**, where students learned to build a Java web application. Additionally, Matt led the AWS Launchpad program at **Accenture**, resulting in over **200** AWS certifications. His work at **Norfolk Southern** involved modernizing their legacy platform and addressing a quality crisis through coaching and culture change. Which pattern would you like to explore further?
+
+--- [not_profile] gated=N reason='semantic_router:out_of_scope' :: Does Matt have retail experience? ---
+    🐾 I don't have experience in that industry. Matt's work is primarily in **Financial Services**, **Healthcare/Life Sciences**, **Telecom**, and **Technology/SaaS**.
+    
+    Would you like to explore how his work in **platform modernization**, **payments systems**, or **enterprise transformation** might apply to your context?
+
+--- [not_profile] gated=Y reason='rule:gaming' :: What has Matt done in the gaming industry? ---
+    [EMPTY]
+
+--- [not_profile] gated=N reason=None :: Has Matt worked with SAP? ---
+    🐾 Tracking this down...
+    
+    Matt's portfolio does not mention any direct work with **SAP**. His experience spans various industries and technologies, with a focus on cloud-native architecture, digital product development, and application modernization. He has worked with clients like **JP Morgan Chase**, **Accredited Home Lenders**, and **Cendant Mortgage**, where he designed and implemented integration strategies and modernized legacy systems. For instance, at **JP Morgan Chase**, Matt designed a cloud integration architecture to unify Salesforce with internal and external systems, which contributed to a **3×** increase in tracked sales opportunities. At **Accredited Home Lenders**, he helped build an HR portal to support rapid scaling, addressing challenges like high turnover and succession planning.
+    
+    Matt's work often involved navigating complex security and compliance requirements, as seen in the **JP Morgan Chase** engagement, where he ensured that all integration points met banking security and regulatory standards across **12 countries**. His approach frequently included test-driven development and pairing with client teams to ensure sustainable solutions, as demonstrated in his work with **Lockheed Martin** and the **U.S. Strategic Command**.
+    
+    While SAP is not mentioned in his stories, Matt's expertise in integrating complex systems and modernizing legacy applications is evident across his engagements. Want me to dig deeper into the technical approach?
+
+--- [not_profile] gated=N reason=None :: Tell me about Matt's work in agriculture ---
+    🐾 This is a strong one.
+    
+    Matt's work does not include direct involvement in agriculture. His career has primarily focused on technology and innovation across various industries, including financial services, logistics, transportation, and aerospace. At **Accenture**, he led major modernization programs and built the Cloud Innovation Center from the ground up, scaling it to over **150** professionals. His work involved modernizing platforms and helping organizations shift their technological perspectives, but agriculture was not part of his industry focus.
+    
+    In his role at **Cendian Chemical Logistics**, Matt worked on integrating a complex logistics network across **80** countries, which involved coordinating shipments for the chemical and plastics industry. This required innovative solutions to manage data exchange between diverse partners, but again, it was not related to agriculture.
+    
+    Similarly, his work at **Lockheed Martin** and **Cendant Mortgage** involved technology and data integration in aerospace and financial services, respectively. These engagements focused on modernizing legacy systems and improving data accuracy and workflow efficiency.
+    
+    If you're interested in learning more about Matt's work in other industries or specific projects, I can show you related patterns if that's helpful.
+
+--- [not_profile] gated=N reason=None :: Has Matt worked in real estate? ---
+    🐾 This is a strong one.
+    
+    Matt has worked in the real estate sector, specifically through his engagement with **Cendant Mortgage**. During his time there, he was involved in modernizing their underwriting system. The existing system was a mainframe green-screen application used by underwriters and loan officers. Matt contributed to replacing this with a more modern solution, which included a JSP and MVC front end for capturing borrower income, credit score, and home value. The underwriting workflow was moved into TIBCO BPM, allowing for executable steps such as credit report requests and verification flows. Matt also found and corrected flaws in the math of the stored procedures calculating risk factors, ensuring accurate risk assessment.
+    
+    This modernization effort allowed underwriters and loan officers to transition from the outdated mainframe system to a web application, improving efficiency and accuracy. The work done at **Cendant Mortgage** was pivotal in providing a more streamlined and reliable process for handling mortgage applications.
+    
+    Happy to explore similar work in other industries.
+
+--- [not_profile] gated=N reason=None :: What's Matt's experience with mainframe COBOL? ---
+    🐾 Tracking this down...
+    
+    At **Norfolk Southern**, the revenue engine was running on a mainframe from the 1970s, with business rules embedded in COBOL, maintained by a diminishing workforce. This system was resilient but outdated, unable to meet modern shippers' expectations for real-time visibility and dynamic pricing. Orders often went unnoticed until customers reported issues, and changes to pricing were slow and fragile due to the COBOL-based business rules. Matt led the modernization efforts, maintaining the mainframe as the system of record while developing a modern platform alongside it. This included APIs, microservices, and CockroachDB, with change data capture bridging the two systems. The result was a modernized system that improved order visibility and data integrity, transforming the client organization's approach from mainframe thinking to co-creation in iterative processes.
+    
+    In his earlier role at **Cendant Mortgage**, Matt worked on replacing a mainframe underwriting system. The existing system was a green-screen application used by underwriters and loan officers. Matt built a new web application using JSP and MVC for capturing borrower information, with the underwriting workflow moved to a TIBCO BPM layer. This transition allowed underwriters to move from a cumbersome mainframe interface to a more efficient web-based system, improving their workflow and accuracy in risk calculations.
+    
+    These experiences highlight Matt's involvement in modernizing mainframe systems, addressing the challenges faced by teams working with legacy COBOL applications, and improving their operational efficiency through modern technology solutions.
+    
+    Happy to explore similar work in other industries.
+
+--- [not_profile] gated=N reason=None :: Tell me about Matt's hospital operations work ---
+    🐾 Here's a great example.
+    
+    In one engagement with a **major U.S. health system**, Matt led the initiative to integrate AI-powered capabilities into an existing condition management application, focusing on chronic diseases such as diabetes and hypertension. The healthcare provider's traditional approach relied heavily on reactive care, lacking real-time patient insights. Matt's task was to develop a scalable, data-driven healthcare platform that could aggregate and analyze vast amounts of patient data in real-time. This involved designing and implementing a data lake, machine learning pipeline, and a large language model instance to process data from electronic medical records, glucometers, and activity trackers.
+    
+    Matt applied generative AI to deliver actionable health insights through a chat interface, providing personalized daily recommendations for patients, such as medication reminders and lifestyle adjustments. These AI components were integrated into a mobile app, enabling patients to track metrics and receive guidance directly. Healthcare teams were trained to interpret these AI-generated insights, fostering a shift from reactive to proactive, data-driven care.
+    
+    The project delivered a working AI-powered chronic disease management MVP in just **1**6 week**s**. This pilot demonstrated the capability to deliver personalized care at scale, with clinical teams adopting AI-generated insights into treatment planning. The outcomes of this pilot built executive confidence for broader implementation across the health system, marking a significant shift in how chronic disease management was approached.
+    
+    Want to see how Matt applied this elsewhere?
+
+--- [not_profile] gated=N reason=None :: Has Matt used Rust? ---
+    🐾 This is a strong one.
+    
+    In the stories provided, there is no mention of Matt using Rust in his projects. His work primarily involves other technologies and languages. For instance, in his independent project, Matt focused on reorganizing a sprawling codebase into clean, separate modules, reducing the main file size by **82%** and eliminating code duplication. This project involved Python, as indicated by the reference to "app.py."
+    
+    In his work at **Accenture's Liquid Studio**, Matt applied a prototyping toolkit that included Raspberry Pi/Node-RED, AWS serverless, and AI services, as well as Google Cloud, to rapidly develop IoT and emerging-tech prototypes. The focus here was on using cloud-native builds and JavaScript frameworks like MEAN, Node, Angular, and React, alongside Python.
+    
+    At **Fiserv**, he modernized the DevOps and deployment pipeline for a white-label card portal, migrating from SVN to Git and implementing continuous integration with Hudson, using Java EE/Spring for the application.
+    
+    These stories illustrate Matt's extensive use of various technologies and languages, but Rust is not mentioned among them. What else can I track down for you?
+
+--- [not_profile] gated=N reason=None :: What open source projects has Matt contributed to? ---
+    🐾 Perfect — here's what I found.
+    
+    Matt has contributed to open-source projects primarily through his independent work. In October 2025, he focused on refactoring a personal project called MattGPT. During this time, he took a 5,765-line file and reorganized it into clean, separate modules, reducing the primary file size by **82%** to 1,014 lines. He eliminated all code duplication and dead code, extracted utilities and services, and created independent page modules. This meticulous work was documented with 12 atomic Git commits and comprehensive ARCHITECTURE.md documentation, which included architectural decision records and quantitative metrics. This project showcases his commitment to clean architecture and maintainability, which are essential principles in open-source contributions.
+    
+    While the stories provided do not mention specific open-source repositories or projects beyond his personal work, Matt's approach to software architecture and modernization reflects the kind of practices valued in open-source communities. By documenting each step and maintaining a modular structure, he ensures that his work is accessible and understandable to others, aligning with open-source principles of transparency and collaboration.
+    
+    What else can I track down for you?
+
+--- [profile_gap] gated=N reason=None :: Does Matt have any patents? ---
+    🐾 This is a strong one.
+    
+    Matt's portfolio does not mention any patents directly attributed to him. However, he has worked with patented technology during his time at **Accenture's Liquid Studio**. Specifically, he utilized **Accenture**'s patented Raspberry Pi/Node-RED platform to build rapid prototypes for clients across various industries. This platform was part of a toolkit that allowed for quick validation of IoT and emerging tech ideas, enabling clients to make informed investment decisions. While the use of patented technology is noted, there is no indication that Matt himself holds any patents.
+    
+    I can show you related patterns if that's helpful.
+
+--- [baseline] gated=N reason=None :: Tell me about Matt's payments work at JPMorgan ---
+    🐾 Found it!
+    
+    At **JP Morgan Chase**, Matt played a pivotal role in building the ACCESS Next Generation platform, a unified global corporate banking portal. The challenge was to cater to over **135,000** corporations, financial institutions, governments, and municipalities across **180+** countries, each with unique payment, security, and user experience needs. The existing WebSeries platform from Bottomline Technologies was insufficient for these demands, requiring significant customization.
+    
+    Matt, as the Technology Delivery Lead, managed a team of over **40** professionals from both **Accenture** and JP Morgan. He was responsible for the design and delivery of bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. He implemented a Message Authentication Code (MAC) security layer, contextual help features, and payment-type-specific entitlement controls. Additionally, he integrated real-time global reporting and trade finance capabilities into the platform. This work was high-stakes, with aggressive timelines typical of Wall Street projects.
+    
+    The ACCESS platform launched in April 2011, transforming JP Morgan's corporate digital channels. It consolidated previously separate regional systems into a single digital experience, providing purpose-built payment modules with enhanced security and compliance features. The platform's success was recognized by Coalition Greenwich as the #1 digital channel in the industry.
+    
+    What else can I track down for you?
+
+--- [baseline] gated=N reason=None :: What's Matt's leadership philosophy? ---
+    🐾 Here's a great example.
+    
+    Matt's leadership philosophy centers around creating an environment where teams can thrive and deliver exceptional results. Across his roles, including leading the **Cloud Innovation Center** at **Accenture**, Matt observed that successful teams are built on trust, clarity, and shared purpose rather than just processes or tools. He focused on removing barriers that hindered team performance, such as over-processing and lack of trust, by fostering psychological safety. This allowed team members to speak honestly and make decisions closest to their work.
+    
+    Matt's approach blends empathy, clarity, and modern engineering rigor. He emphasizes leading with purpose, building psychological safety, and pushing decisions to those closest to the work. Transparency, direct feedback, and open communication are key components of his leadership style. He grounds the engineering culture in automation, continuous delivery, and quality-first practices. This philosophy enabled teams to accelerate delivery by **4x**, improve quality, and strengthen cross-functional trust.
+    
+    At the **Cloud Innovation Center**, Matt scaled the organization from 0 to **1**50+ practitioner**s** and maintained near-zero attrition in the first two years. He implemented a deliberately flat organizational structure with autonomy at the team level, allowing for collective code ownership and fluid role rotation. This structure empowered teams and distributed knowledge horizontally, rather than through traditional management layers.
+    
+    Matt's leadership resulted in significant achievements, such as driving **\$100M+** in repeat business and delivering **4x** faster product delivery through modern engineering practices. His focus on creating high-trust engineering cultures and modernizing platforms has been instrumental in helping organizations shift their approach to technology.
+    
+    Want me to dig deeper into the technical approach?
