@@ -22,9 +22,6 @@
   - [Current Architecture](#current-architecture)
   - [Startup Sequence](#startup-sequence-apppy)
 
-### 📚 History & Context
-- [Refactoring History](#refactoring-history)
-
 ### 📊 Data Pipeline & RAG
 - [Data Pipeline & RAG Architecture](#data-pipeline--rag-architecture)
   - [Pipeline Overview](#pipeline-overview)
@@ -93,7 +90,7 @@
 4. **Mobile Roadmap:** Known issues, breakpoint strategy, implementation phases
 5. **Future Enhancements:** See [BACKLOG.md](BACKLOG.md)
 
-**For migration history and refactoring details,** see [HISTORY.md](HISTORY.md)
+**For design decisions, removed components, and rejected approaches,** see [docs/ADR.md](docs/ADR.md).
 
 ---
 
@@ -375,12 +372,6 @@ Legacy pattern — per-element bindings inside `components.html` iframes. Dies o
 - **Copy snippet:** HTML `<span id="am-copy-snippet-btn">` wired via Pattern 2 delegated listener. Calls `window.parent.navigator.clipboard.writeText()`. Both `.then` and `.catch` change the span label to `✓ Copied!` (green, 2s timeout) so feedback fires regardless of clipboard permission state.
 - **Download PDF:** HTML `<span id="am-download-pdf-btn">` → JS finds `[class*="st-key-am_download_pdf"] button` → `.click()` → Streamlit rerun → Python handler opens `window.open` + `printWindow.print()` with a full printable HTML doc (signals, voice, competencies, How I Lead, career timeline). Pattern matches `action_buttons.py`.
 - Both interactions share a single `components.html` delegated listener block registered once per page render.
-
----
-
-## Refactoring History
-
-See [HISTORY.md](HISTORY.md) for the full evolution story including the Oct-Nov 2025 component-based migration (app.py 5,765 → 284 lines), RAG pipeline cleanup timeline, and removed component decisions.
 
 ---
 
@@ -681,12 +672,12 @@ This section defines the **job, rules, and constraints** for each retrieval comp
 - **Do not remove:** Saves LLM cost, prevents garbage-in
 - **Router rejection gate:** `router_rejection_reason(intent_family, semantic_score)` in `services/semantic_router.py` is the single gate for both `out_of_scope` and `personal`. Rejection fires only when `intent_family in ROUTER_REJECTING_FAMILIES` and `semantic_score >= HARD_ACCEPT`. A score below HARD_ACCEPT passes through regardless of family. Both call sites (Ask Agy and My Work) call this function -- the rule is not duplicated.
 
-#### Observability Logging (Jan 2026)
+#### Observability Logging
 
 Structured logs added to diagnose "I can't help with that" issues in production.
 
 **Log tags:**
-- `[QUERY_REJECTED]` — Query rejected by entity gate or low Pinecone confidence
+- `[QUERY_REJECTED]`: Query rejected for low Pinecone confidence (`reason=low_pinecone`)
 - `[API_ERROR_DETECTED]` — Router returned `error_fallback` family (connection/timeout issue)
 
 **Log format:**
@@ -713,7 +704,7 @@ Structured logs added to diagnose "I can't help with that" issues in production.
 - **Fields checked (in order):** Client, Employer, Division, Title
 - **Hard filtering:** Client, Employer, Division → Apply Pinecone metadata filter
 - **Soft filtering:** Title → Detected but NO Pinecone filter (semantic search ranks naturally)
-- **Why soft filtering for Title:** Hard filtering returned only 1 result, breaking Related Projects UX
+- **Why soft filtering for Title:** See ADR 022 in `docs/ADR.md`.
 - **Exclusions:** "Multiple Clients", "Independent", "Career Narrative" (too generic to filter)
 - **Returns:** `(field_name, entity_value)` tuple or `None`
 
@@ -831,7 +822,7 @@ All 14 return points in `rag_answer()` (after commits `9395a68`, `3c5d00a`, `040
 
 `rejection_reason` mirrors `ask_last_reason` strings exactly. `pool_size` reflects the operative pool: synthesis overrides to `len(synthesis_pool)` at the synthesis branch. `profile_categories` is present only on the LLM-answer return path; all other return points omit it. Consumers (`conversation_view.py`, `landing_view.py`, `conversation_helpers.py`) read it with `.get()` or `[]` as default.
 
-**Intent Classification (Semantic Router Only - Jan 29, 2026):**
+**Intent Classification (Semantic Router Only):**
 
 All intent classification uses the embedding-based semantic router (`services/semantic_router.py`) which maps queries to 15 intent families without LLM cost. Entity detection runs in parallel to identify company/project/title mentions.
 
@@ -844,7 +835,7 @@ Query → Semantic Router (embedding similarity against intent phrase embeddings
         - innovation, agile_transformation, narrative, synthesis, out_of_scope, personal
 ```
 
-The semantic router handles all intent classification — synthesis detection (`intent_family == "synthesis"`), out_of_scope detection, and all other families — via embedding similarity alone.
+The semantic router handles all intent classification via embedding similarity alone: synthesis detection (`intent_family == "synthesis"`), out_of_scope detection, and all other families. See ADR 020 in `docs/ADR.md`.
 
 **Key Rule:** Entity detection OVERRIDES verb patterns.
 - "How did Matt scale at Accenture?" → `client` (not synthesis)
@@ -871,9 +862,9 @@ The semantic router handles all intent classification — synthesis detection (`
 6. Return top 9 stories
 
 **Entity Detection:**
-Checks fields in order: Client, Employer, Division (Project and Place excluded — semantic search handles those naturally)
+Checks fields in order: Client, Employer, Division. Project and Place are not detected; see ADR 024 in `docs/ADR.md`.
 - "CIC" matches Division: "Cloud Innovation Center"
-- "JPMorgan" matches Client: "JP Morgan Chase"
+- "JPMorgan" matches Client: "JP Morgan Chase" (via `ENTITY_ALIASES`)
 - Excludes generic values: "Multiple Clients", "Independent"
 
 **Synthesis Prompt Mode:**
@@ -1383,11 +1374,10 @@ Bot filter: `is_bot()` in `query_logger.py` checks User-Agent against `MONITORIN
 ### Known Limitations
 
 1. **Synthesis + specific topic:** "Tell me about Matt's rapid prototyping work" classified as synthesis but should find the specific rapid prototyping story. Current workaround: synthesis now uses user query embedding.
-2. ~~**Multi-client stories:** Stories with `Client="Multiple Clients"` won't match entity filters.~~ **FIXED (Jan 2026):** Multi-Field Entity Gate now searches across 6 fields using Pinecone `$or` operator. Entity detection uses 3 hard fields (Client, Employer, Division) plus Title as a soft path.
-3. **Ground truth fidelity:** LLM paraphrases instead of quoting verbatim despite `[[CORE BRAND DNA]]` markers.
-4. **Deprecated documentation:** `mattgpt_system_prompt.md` documents the original "MattGPT" persona (pre-Agy). The current Agy voice is documented in this file under Component Contracts → Agy Voice Generator.
-5. **LLM stochasticity:** Eval may show occasional failures due to LLM response variability. Re-running typically passes. Semantic similarity scoring would address this (see BACKLOG.md → MATTGPT-035 (Eval Modernization — Semantic Scoring)).
-6. **"Where does Matt live" stops at the confidence gate.** Score 0.242 is below CONFIDENCE_HIGH=0.25, so Ask Agy refuses while My Work lists the closest stories.
+2. **Ground truth fidelity:** LLM paraphrases instead of quoting verbatim despite `[[CORE BRAND DNA]]` markers.
+3. **Deprecated documentation:** `mattgpt_system_prompt.md` documents the original "MattGPT" persona (pre-Agy). The current Agy voice is documented in this file under Component Contracts → Agy Voice Generator.
+4. **LLM stochasticity:** Eval may show occasional failures due to LLM response variability. Re-running typically passes. Semantic similarity scoring would address this (see BACKLOG.md → MATTGPT-035 (Eval Modernization: Semantic Scoring)).
+5. **"Where does Matt live" stops at the confidence gate.** Score 0.242 is below CONFIDENCE_HIGH=0.25, so Ask Agy refuses while My Work lists the closest stories.
 
 ---
 
@@ -1880,7 +1870,7 @@ Defined in `ui/styles/global_styles.py`. Use these instead of hardcoding colors.
 | `marketing` | 3 | Marketing/recruiter question handling |
 | `context_story` | 3 | "Ask Agy About This" button flow |
 
-**Current eval pass rate:** 70/70 (100%) as of Aug 8–9, 2026 runs — 64 unique queries, 70 test items (Q43-Q49 parametrized). LLM stochasticity can cause 98.6% ↔ 100% flapping; see Known Limitations. Full progression history in [HISTORY.md](HISTORY.md).
+**Current eval pass rate:** 70/70 (100%) as of Aug 8–9, 2026 runs: 64 unique queries, 70 test items (Q43-Q49 parametrized). LLM stochasticity can cause 98.6% ↔ 100% flapping; see Known Limitations.
 
 **Running Eval:**
 ```bash
@@ -1901,7 +1891,7 @@ Three structural assertion functions that run against all 31 queries:
 |----------|--------|---------------|
 | `assert_no_meta_commentary()` | "Matt's ability to...", "This demonstrates...", etc. | No matches |
 | `assert_agy_voice()` | Multiple 🐾, "we" pronouns, Agy self-reference | Exactly 1 🐾, no "we", no "Agy thinks" |
-| `assert_no_hardcoded_drift()` | ENTITY_NORMALIZATION, client exclusions vs JSONL | All values exist in source |
+| `assert_no_hardcoded_drift()` | Generic-client pattern detection, verbatim phrases vs JSONL | All values exist in source |
 
 **Meta-Commentary Patterns Detected:**
 ```python
@@ -2778,15 +2768,15 @@ See [BACKLOG.md](BACKLOG.md) detail blocks for fix approaches and status.
 
 ### Hardcoded Values Audit
 
-**STATUS UPDATE (Jan 27, 2026):** Centralized in `config/constants.py`
+Centralized in `config/constants.py`.
 
 The following constants are now in a single source of truth:
 
 | Category | Constants | Location |
 |----------|-----------|----------|
 | **Models** | `DEFAULT_CHAT_MODEL`, `DEFAULT_CLASSIFICATION_MODEL`, `DEFAULT_EMBEDDING_MODEL` | config/constants.py |
-| **Thresholds** | `HARD_ACCEPT`, `SOFT_ACCEPT`, `CONFIDENCE_HIGH`, `CONFIDENCE_LOW`, `PINECONE_MIN_SIM`, `ENTITY_GATE_THRESHOLD` | config/constants.py |
-| **Voice Quality** | `BANNED_PHRASES`, `META_COMMENTARY_PATTERNS`, `META_COMMENTARY_REGEX_PATTERNS` | config/constants.py |
+| **Thresholds** | `HARD_ACCEPT`, `SOFT_ACCEPT`, `CONFIDENCE_HIGH`, `CONFIDENCE_LOW`, `PINECONE_MIN_SIM` | config/constants.py |
+| **Voice Quality** | `META_COMMENTARY_PATTERNS`, `META_COMMENTARY_REGEX_PATTERNS` | config/constants.py |
 | **Entity Detection** | `ENTITY_DETECTION_FIELDS`, `ENTITY_SEARCH_FIELDS`, `EXCLUDED_DIVISION_VALUES`, `PINECONE_LOWERCASE_FIELDS` | config/constants.py |
 | **Profile Facts** | `PROFILE_FACT_CATEGORIES`, `PROFILE_FACT_DISPLAY_NAMES`, `PROFILE_LOCATION_AVAILABILITY_FIELDS` | config/constants.py |
 

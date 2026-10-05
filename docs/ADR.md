@@ -558,3 +558,142 @@ Within-query diversity remains the only client-diversity mechanism in the functi
 
 **Methodological note:**
 This ADR was written immediately on resolution per a discipline established May 18, 2026: record the empirical evidence base alongside the decision, not just the decision. The W_KW=0.0 archaeology pattern (digging through git for missing decision context that was never recorded) was repeating before this discipline was articulated. Future decisions on `backend_service.py` orchestration should follow this pattern: write the ADR at the same time as the code change, with the empirical evidence inline.
+
+---
+
+## ADR 020: Remove the classify_query_intent() LLM Intent Fallback
+
+**Date:** 2026-01-30 (removed); 2026-10-05 (recorded)
+**Status:** Accepted
+**Related tickets:** None
+
+**Context:**
+`classify_query_intent()` in `ui/pages/ask_mattgpt/backend_service.py` was an LLM call (GPT-4o-mini, about $0.0001 per query) that classified query intent as a fallback alongside the embedding-based semantic router. It did not recognize project names such as TICARA, and the semantic router already produced every intent it returned.
+
+**Decision:**
+Delete `classify_query_intent()`. The semantic router (`services/semantic_router.py`) is the only intent classifier: synthesis, out_of_scope, and every other intent family come from embedding similarity alone.
+
+**Rationale:**
+- Redundant: every intent it produced, the semantic router already produced without an LLM call.
+- Brittle: it misclassified queries that named projects the model had no context for.
+- Cost: one LLM call per query for no quality gain.
+- Alternative considered: keep it as a fallback only when the router's score is low. Rejected because the confidence gate on Pinecone scores already handles weak queries, and the fallback still had the project-name blind spot.
+
+**Consequences:**
+- Intent classification has no per-query LLM cost.
+- `tests/eval_rag_quality.py` and `tests/debug_trace_query.py` still import `classify_query_intent` from `backend_service.py`; those import paths fail if reached.
+- Reintroducing an LLM classifier needs a named query class the semantic router misroutes, with eval evidence.
+
+---
+
+## ADR 021: Remove the Entity Gate Query Rejection
+
+**Date:** 2026-01-30 (removed); 2026-10-05 (recorded)
+**Status:** Accepted
+**Related tickets:** MATTGPT-141
+
+**Context:**
+The Entity Gate was a runtime rejection step in `rag_answer()`: when `detect_entity()` found no entity and the semantic router score was below `ENTITY_GATE_THRESHOLD`, the query was rejected before retrieval. It rejected valid queries such as TICARA questions, which name no Client, Employer, or Division. This is distinct from the live multi-field entity filter (the Pinecone `$or` across `ENTITY_SEARCH_FIELDS`), which narrows retrieval when an entity is detected and rejects nothing.
+
+**Decision:**
+Remove the Entity Gate rejection. Query rejection comes only from the Pinecone confidence gate (`CONFIDENCE_HIGH` and `CONFIDENCE_LOW` in `config/constants.py`, logged as `[QUERY_REJECTED] reason=low_pinecone`). The dead `ENTITY_GATE_THRESHOLD` constant was later deleted under MATTGPT-141.
+
+**Rationale:**
+- Failing to detect an entity is not evidence that a query is off-topic; many legitimate questions name no client.
+- Alternative tried first: recalibrate the threshold. It was lowered from 0.50 to 0.30 on 2026-01-26 after legitimate queries scored 0.31 to 0.49. Rejected as the fix because the gate's premise, not its number, caused the false rejections.
+- The confidence gate measures retrieval quality directly, which is what the Entity Gate approximated.
+
+**Consequences:**
+- One rejection path instead of two, and fewer thresholds to calibrate.
+- Reintroducing entity-based rejection needs an off-topic query class the confidence gate passes, with eval evidence.
+
+---
+
+## ADR 022: Title Entities Use Soft Filtering, Not a Pinecone Hard Filter
+
+**Date:** 2026-01-30 (removed); 2026-10-05 (recorded)
+**Status:** Accepted
+**Related tickets:** None
+
+**Context:**
+`detect_entity()` matches story titles as well as Client, Employer, and Division. A Title match used to add a Pinecone metadata filter on that title, so retrieval returned only the one matching story. Related Projects then showed 1 result instead of 7.
+
+**Decision:**
+Remove hard filtering for Title. `detect_entity()` still returns `("Title", value)`, but `rag_answer()` skips the Pinecone entity filter when `entity_field` is `"Title"`; semantic search ranks the named story first and related stories fill the remaining slots in the same call. Client, Employer, and Division matches still apply the hard filter.
+
+**Rationale:**
+- A title names one story, so a hard filter can only ever return one result.
+- The title is in the embedding text, so semantic search already ranks the named story first without a filter.
+- Alternative considered: drop Title from detection entirely. Rejected because detection still identifies the named story for the answer.
+
+**Consequences:**
+- Title queries return the named story plus related stories in one retrieval.
+- Any new detected field that identifies a single story should follow the soft path.
+
+---
+
+## ADR 023: Remove the ENTITY_NORMALIZATION Alias Map and Fuzzy Matching
+
+**Date:** 2026-01-26 (removed); 2026-10-05 (recorded)
+**Status:** Accepted
+**Related tickets:** None
+
+**Context:**
+`ENTITY_NORMALIZATION` was a hardcoded dict mapping query variants to canonical client names, backed by fuzzy-matching helpers (`_normalize_for_matching`, `_get_acronym`, and related functions). It drifted from the JSONL corpus as client names changed, and the fuzzy matching added complexity without reliable matches.
+
+**Decision:**
+Delete `ENTITY_NORMALIZATION` and the fuzzy-matching helpers. Query variants are handled by `ENTITY_ALIASES` in `config/constants.py`: a small exact-alias dict, matched on word boundaries and consulted first in `detect_entity()`, limited to acronyms and shortened forms visitors actually type that do not appear in canonical values (for example "cic", "jpmc", "amex", "jp morgan").
+
+**Rationale:**
+- A broad alias map duplicated corpus values and drifted from them.
+- Fuzzy matching produced matches that could not be predicted or tested.
+- At removal, testing showed semantic search returned JP Morgan Chase stories for "JPMC", "JPM", and "Chase" without the map. Acronyms that embeddings cannot resolve to a filter, starting with "CIC", were added back as narrow exact aliases.
+- Alternative considered: keep the map and add a drift test. Rejected because a narrow exact-alias list is smaller to keep current than a broad map with a test.
+
+**Consequences:**
+- `ENTITY_ALIASES` is the one alias source; entries need a demonstrated query that detection misses without them.
+- `ENTITY_ALIASES` is not `ENTITY_NORMALIZATION` reintroduced: no fuzzy matching, only exact aliases absent from canonical values.
+
+---
+
+## ADR 024: Remove Project and Place from Entity Detection
+
+**Date:** 2026-01-26 (removed); 2026-10-05 (recorded)
+**Status:** Accepted
+**Related tickets:** None
+
+**Context:**
+`detect_entity()` checked Project and Place along with Client, Employer, and Division. Project has many generic values ("Innovation", "Methodology", "Personal Growth") that match ordinary query words: "scaled innovation beyond prototypes" matched Project="Innovation" and filtered synthesis to 1 story instead of 5 or 6.
+
+**Decision:**
+`ENTITY_DETECTION_FIELDS` is `["Client", "Employer", "Division"]`. Project and Place are not detected. They stay in `ENTITY_SEARCH_FIELDS`, so a detected entity still searches across them in the Pinecone `$or`.
+
+**Rationale:**
+- Generic field values turn common words into false entity filters.
+- Semantic search handles Project and Place questions without a filter.
+- Alternative kept for a narrower case: Division stays in detection, with `EXCLUDED_DIVISION_VALUES` excluding generic values, because "Cloud Innovation Center" queries need the filter.
+
+**Consequences:**
+- Detection is deliberately narrower than search; the comments on both constants in `config/constants.py` say not to align them.
+- Adding a field to detection needs a check that its values are not common query words.
+
+---
+
+## ADR 025: Delete scripts/test_pinecone_direct.py
+
+**Date:** 2026-01-29 (removed); 2026-10-05 (recorded)
+**Status:** Accepted
+**Related tickets:** None
+
+**Context:**
+`scripts/test_pinecone_direct.py` was a standalone script that queried Pinecone directly. It defined its own `CONFIDENCE_HIGH` and `CONFIDENCE_LOW` instead of importing them, so its thresholds could disagree with the pipeline's after `config/constants.py` became the single source of truth.
+
+**Decision:**
+Delete the script. Threshold-dependent checks import from `config/constants.py`.
+
+**Rationale:**
+- A second copy of calibrated thresholds diverges silently.
+- Alternative considered: update the script to import the shared constants. Not recorded as tried; the eval suite and probe scripts cover direct retrieval checks.
+
+**Consequences:**
+- Calibrated thresholds have one definition.
