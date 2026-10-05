@@ -107,5 +107,8 @@ query_log_parsed.csv
 retrieval_gap_flags.csv
 probe_*_output/
 
+# Runtime log written by _log_router_low_confidence() in services/semantic_router.py
+data/router_low_confidence.csv
+
 # Auto-memory (per-user, written under ~/.claude/... — this stray dir is a misconfig guard)
 memory/
