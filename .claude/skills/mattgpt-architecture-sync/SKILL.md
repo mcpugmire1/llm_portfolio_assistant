@@ -61,10 +61,10 @@ Run `python3 .claude/skills/mattgpt-docs-check/check_docs.py` and include the re
 Nothing writes until Matt approves the full proposed diff. One approval covers all ARCHITECTURE.md and `docs/ADR.md` changes from this pass.
 
 **Step 5: Commit**
-After Matt approves, write the files, stage `ARCHITECTURE.md` and `docs/ADR.md` by name, show Matt the commit message, and commit on his OK. Use repeated `-m` arguments for multi-paragraph messages. Always carry the range as a trailer:
+After Matt approves, write the files, stage `ARCHITECTURE.md` and `docs/ADR.md` by name, show Matt the commit message, and commit on his OK. Use repeated `-m` arguments for multi-paragraph messages. Commit by pathspec, so nothing else that is staged gets included. Always carry the range as a trailer:
 
 ```
-git commit -m "Architecture Sync: <summary>" -m "<body>" --trailer "Sync-Range: <anchor>..<end>"
+git commit -m "Architecture Sync: <summary>" -m "<body>" --trailer "Sync-Range: <anchor>..<end>" -- ARCHITECTURE.md docs/ADR.md
 ```
 
 If the pass found no changes, make an empty commit that records the range:
