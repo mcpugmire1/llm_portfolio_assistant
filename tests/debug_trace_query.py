@@ -77,15 +77,13 @@ def trace_query(query: str):
                 print("[4] ENTITY DETECTION:")
                 print(f"    entity_match={entity_match}\n")
 
-                # --- STEP 5: Query intent classification ---
-                from ui.pages.ask_mattgpt.backend_service import classify_query_intent
-
-                query_intent = classify_query_intent(query, stories)
-                print("[5] QUERY INTENT:")
-                print(f"    query_intent=\"{query_intent}\"\n")
+                # --- STEP 5: Synthesis decision (semantic router only; see ADR 020) ---
+                # rag_answer() can also promote an entity-scoped query to synthesis; this trace shows the router decision.
+                is_synthesis = intent_family == "synthesis"
+                print("[5] SYNTHESIS (router):")
+                print(f"    is_synthesis={is_synthesis}\n")
 
                 # --- STEP 6: Which ranking branch? ---
-                is_synthesis = query_intent == "synthesis"
                 print("[6] RANKING BRANCH:")
                 if is_synthesis:
                     print("    → SYNTHESIS mode")
@@ -102,9 +100,9 @@ def trace_query(query: str):
                         print(
                             f"    → ENTITY PIN mode ({entity_match[0]}={entity_match[1]})"
                         )
-                    elif query_intent == "narrative":
+                    elif intent_family == "narrative":
                         print(
-                            "    → ELSE branch: query_intent=narrative → PC score sort (skip diversity)"
+                            "    → ELSE branch: intent_family=narrative → PC score sort (skip diversity)"
                         )
                     else:
                         print("    → ELSE branch: diversify_results()")

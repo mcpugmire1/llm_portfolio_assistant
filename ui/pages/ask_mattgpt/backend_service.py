@@ -1893,7 +1893,7 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
         if entity_match:
             entity_field, entity_value = entity_match
             # Title uses soft filtering - semantic search handles ranking naturally
-            # Hard filter only for Client/Employer/Division/Project/Place
+            # Hard filter only for Client/Employer/Division matches
             if entity_field != "Title":
                 search_filters["entity_field"] = entity_field
                 search_filters["entity_value"] = entity_value

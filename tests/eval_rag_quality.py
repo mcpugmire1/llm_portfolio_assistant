@@ -1970,7 +1970,6 @@ def run_surgical_diagnostics():
         with patch("ui.pages.ask_mattgpt.backend_service.st", mock_st):
             from services.semantic_router import is_portfolio_query_semantic
             from ui.pages.ask_mattgpt.backend_service import (
-                classify_query_intent,
                 detect_entity,
                 rag_answer,
             )
@@ -2008,12 +2007,7 @@ def run_surgical_diagnostics():
                 else:
                     print("    No entity detected")
 
-                # 3. Intent Classification (LLM)
-                query_intent = classify_query_intent(query)
-                print(f"  Intent Classification (LLM): {query_intent}")
                 expected_intent = query_spec.get("expected_intent", "N/A")
-                if query_intent != expected_intent:
-                    print(f"    ⚠️  Expected: {expected_intent}")
 
                 # 4. RAG Answer (captures confidence)
                 mock_st.session_state = {}  # Reset session state
@@ -2067,7 +2061,6 @@ def run_surgical_diagnostics():
                             "intent_family": intent_family,
                         },
                         "entity_detected": entity_match,
-                        "intent_classification": query_intent,
                         "expected_intent": expected_intent,
                         "confidence": confidence,
                         "sources_count": len(sources),
@@ -2082,19 +2075,6 @@ def run_surgical_diagnostics():
             print("=" * 80)
             passed = sum(1 for d in diagnostics if d["passed"])
             print(f"Passed: {passed}/{len(diagnostics)}")
-
-            # Intent mismatches
-            mismatches = [
-                d
-                for d in diagnostics
-                if d["intent_classification"] != d["expected_intent"]
-            ]
-            if mismatches:
-                print(f"\nIntent Mismatches ({len(mismatches)}):")
-                for m in mismatches:
-                    print(
-                        f"  Q{m['id']}: got '{m['intent_classification']}', expected '{m['expected_intent']}'"
-                    )
 
             # Entity detection failures
             no_entity = [
