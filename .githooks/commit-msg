@@ -12,5 +12,9 @@ if printf '%s\n' "$body" | grep -q -e 'Green:' && printf '%s\n' "$body" | grep -
   echo "commit-msg: a Green commit may not report a relevant gate as Not run. Run it, or stop and ask Matt." >&2
   status=1
 fi
+if printf '%s\n' "$body" | grep -iq -e '^co-authored-by:'; then
+  echo "commit-msg: Co-Authored-By line in commit message. Remove it." >&2
+  status=1
+fi
 
 exit $status
