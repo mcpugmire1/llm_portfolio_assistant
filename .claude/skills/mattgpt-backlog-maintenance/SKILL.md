@@ -45,10 +45,9 @@ Six values only. Do not invent others.
 - Any active status → Parked or Decided Against
 
 **When marking Done:**
-- Add `Resolved: <date> + <commit hash>` to the detail block.
 - Remove the matrix row AND the detail block from BACKLOG.md.
 - Write a CHANGELOG.md entry (paragraph + commit hash + ticket ref).
-- All three in the same edit. Never partial.
+- Both in the same edit. Never partial.
 
 **When marking Decided Against:**
 - Set the status in both the matrix row and the detail block, and add the reason to the detail block: what was proposed, why it was ruled out, and what happens instead, if anything. Required; Architecture Sync builds the Rejected ADR from it.
