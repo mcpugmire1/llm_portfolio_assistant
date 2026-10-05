@@ -107,6 +107,9 @@ query_log_parsed.csv
 retrieval_gap_flags.csv
 probe_*_output/
 
+# Probe scripts, their inputs, and their output: local instruments, never tracked
+/probes/
+
 # Runtime log written by _log_router_low_confidence() in services/semantic_router.py
 data/router_low_confidence.csv
 
