@@ -1,13 +1,13 @@
 ---
 name: "mattgpt-backlog-maintenance"
-description: "Docs session only. Use when running the MattGPT Backlog Maintenance pass or creating, updating, or closing tickets in BACKLOG.md and CHANGELOG.md."
+description: "Backlog session only. Use when running the MattGPT Backlog Maintenance pass or creating, updating, or closing tickets in BACKLOG.md and CHANGELOG.md."
 ---
 
 ## Backlog Maintenance
 
 **Runner check, before anything else:**
-1. Run `printenv MATTGPT_DOCS_SESSION`. If it doesn't print `1`, stop and tell Matt to launch `scripts/docs-session.sh`.
-2. Run `git status --short -- ARCHITECTURE.md docs/ADR.md BACKLOG.md CHANGELOG.md`. If it shows any changes, stop and show Matt the diff. Never stage this pass's edits on top of changes you didn't make.
+1. Run `printenv MATTGPT_DOCS_SESSION`. If it doesn't print `backlog`, stop and tell Matt to launch `scripts/backlog-session.sh`.
+2. Run `git status --short -- BACKLOG.md CHANGELOG.md`. If it shows any changes, stop and show Matt the diff. Never stage this pass's edits on top of changes you didn't make.
 
 Run git and repo commands yourself against the local repo. Never clone the repo or work from any other copy: a clone only sees pushed commits.
 
