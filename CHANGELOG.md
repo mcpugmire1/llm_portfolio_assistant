@@ -4,6 +4,16 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ---
 
+## October 2026
+
+### Process
+
+**October 5-6, 2026 -- Root probes moved to probes/; cited evidence preserved (MATTGPT-265)** -- `42ddbe6`, `d3805f3`, `061119d`, `8cbc58b`, `aba9309`
+
+Cited probe output copied byte-identical into docs/evidence/MATTGPT-<n>/ (42ddbe6, plus e4f54e0 and fc25473 for later citations). /probes/ is gitignored, so probe scripts, inputs and output stay untracked (d3805f3). The three 088 extraction caches were committed as fixtures beside their JD files (061119d). 8cbc58b untracked 14 root probe scripts into probes/, each kept in git history; probe_assessor.py, its six probe_extraction_*.json caches, and the generate_* scripts stay at root. aba9309 points probe_assessor's results CSV at probes/output/. Output lands in probes/output/probe_<n>_output/, not per-ticket folders. BACKLOG citations repointed in cf15859 and d7f28f9.
+
+---
+
 ## September 2026
 
 ### Query Logger

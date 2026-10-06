@@ -117,7 +117,6 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-262](#mattgpt-262) | DATA_FILE defined three times, two story loaders, dead place field, stale constants.py comments | Open | Medium | Bug | October 2, 2026 |
 | [MATTGPT-263](#mattgpt-263) | Test removing duplicate bolding instructions and OFF_TOPIC_GUARD before acting on them | Open | Medium | Issue | October 2, 2026 |
 | [MATTGPT-264](#mattgpt-264) | Move non-rendering functions out of role_match.py to services/ | Open | Medium | Refactor | October 2, 2026 |
-| [MATTGPT-265](#mattgpt-265) | Move root probe_* and check_* files to probes/; preserve cited evidence in docs/evidence/ | Open | Low | Action | October 2, 2026 |
 | [MATTGPT-266](#mattgpt-266) | Role Match labels responsibility-derived rows as Required Qualifications | Open | High | Bug | October 3, 2026 |
 | [MATTGPT-267](#mattgpt-267) | Have model return line numbers; Python fills source_text from JD -- saves ~1.7s on long JDs | Open | Medium | Refactor | October 3, 2026 |
 | [MATTGPT-268](#mattgpt-268) | "Does Matt have a CS degree?" leads with a no that Role Match doesn't give -- parity fix | Open | High | Bug | October 4, 2026 |
@@ -1915,6 +1914,8 @@ e. Source-vs-output check: for each fixture JD, the row count and wording under 
 
 4. Stale comments in `constants.py`: `'5 fields'` (the list has 6) and `'from CLAUDE.md'`. Correct in place.
 
+**Update (Oct 6, 2026, e5492b3):** Item 4 partly done: the '5 fields' comment in constants.py now reads "Why more fields here than in detection". Still open: the 'from CLAUDE.md' comment (constants.py casing-rules header), and items 1-3.
+
 ---
 
 ### MATTGPT-263
@@ -1957,36 +1958,6 @@ e. Source-vs-output check: for each fixture JD, the row count and wording under 
 
 ---
 
-### MATTGPT-265
-**Move root probe_* and check_* files to probes/; preserve cited evidence in docs/evidence/**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Action
-- **File:** Repo root (`probe_*.py`, `check_*.py`, `probe_extraction_*.json`), `.gitignore`, `docs/evidence/`
-- **Logged:** October 2, 2026
-- **Updated:** October 4, 2026
-
-> **Until step 1 lands:** the cited folders below exist only on Matt's disk, untracked. Do not delete, clean, or move any `probe_*_output/` folder before the `docs/evidence/` copy is committed.
-
-**Scope (in order):**
-
-**Step 1 -- Preserve cited evidence. Done (42ddbe6):** the folders are `docs/evidence/MATTGPT-266/`, `MATTGPT-267/` and `MATTGPT-268/`, not the unprefixed names below. Original instruction: copy the following into `docs/evidence/<ticket>/` and confirm `docs/evidence/` is not gitignored (`docs/working/` is; verify separately):
-
-- `docs/evidence/268/`: `probe_250_output/20260926_165950/`, `probe_250_output/20260926_172156/cs.json`, `probe_250_output/20260925_092116/step1_output.txt`
-- `docs/evidence/267/`: `probe_extraction_step0_output/extraction_calls.json`, `first_pending_row.json`
-- `docs/evidence/266/`: `probe_244_source_text_output/loop_20260921_125949/`
-
-**Step 2 -- `.gitignore`. Done (d3805f3):** `/probes/` covers probe output, so the two root patterns aren't needed. Verified Oct 5, 2026: `probe_244_raw_results.json` and `probe_244_audit_output.txt` are gone from root. `probe_244_source_text_output/` is still at root, ignored by `probe_*_output/`.
-
-**Step 3 -- Move scripts.** Move probe and check scripts to `probes/`. Not probes (Oct 5, 2026): `generate_jsonl_from_excel.py` and `generate_public_tags.py` are data pipeline tools and stay at root. Code proposes a per-file disposition (move, keep as fixture, or untrack) before anything moves. Verified Oct 5, 2026: 21 tracked root `probe_*`/`check_*` files, plus four tracked generate scripts on the same list (`generate_208_fixtures.py`, `generate_competencies.py`, `generate_interview_questions.py`, `generate_use_cases.py`). Several are read by tracked code (`probe_assessor.py` reads the `probe_extraction_*.json` caches), so each is checked one at a time. Ignored root output folders (probe_*_output/) move to probes/output/ in the same pass. Output goes to `probes/output/<ticket>/<timestamp>/`. Fix any Step 0 probes with a fixed output path to use the new layout. Update BACKLOG.md path references (cited as instruments, not imports -- no production code changes).
-
-**Step 4 -- `probe_extraction_088_*.json` (3 files). Done (061119d):** committed as frozen fixtures alongside their three JD files in `tests/bdd/fixtures/jd_extraction/`.
-
-**Acceptance:** `git status` shows no untracked probe files at root; every cited path in steps 1a-1c resolves under `docs/evidence/`.
-
----
-
 ### MATTGPT-266
 **Role Match labels responsibility-derived rows as Required Qualifications**
 
@@ -2026,6 +1997,8 @@ e. Source-vs-output check: for each fixture JD, the row count and wording under 
 **Evidence:** `docs/evidence/MATTGPT-267/` (`extraction_calls.json`, `first_pending_row.json`). Measure before and after on the AT&T fixture (the long-JD case from MATTGPT-160).
 
 **Constraint:** Do not implement before confirming the line-number approach is reliable across structured and prose JDs. Prose JDs have no guaranteed line boundaries; the offset approach may be safer. Settle the indexing strategy at Red time.
+
+**Update (Oct 6, 2026, ba8dd48):** The AT&T principal JD is now tracked at data/probe_jd_att_principal.txt as the long-JD measurement input. The source_text fix and its before/after measurement have not landed.
 
 ---
 
