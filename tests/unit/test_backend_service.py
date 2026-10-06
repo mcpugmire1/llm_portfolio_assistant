@@ -541,32 +541,29 @@ class TestGenerateAgyResponse:
 class TestSendToBackend:
     """Tests for send_to_backend() legacy wrapper."""
 
-    def test_delegates_to_rag_answer(self, sample_stories, mock_streamlit):
-        """Should delegate to rag_answer() function."""
-        try:
-            from ui.pages.ask_mattgpt.backend_service import send_to_backend
-        except ImportError:
-            pytest.skip("send_to_backend not available")
-
-        with patch(
-            "ui.pages.ask_mattgpt.backend_service.rag_answer"
-        ) as mock_rag_answer:
-            mock_rag_answer.return_value = {
+    def test_delegates_to_agy_answer(self, sample_stories, mock_streamlit):
+        """Should delegate to agy_answer() (MATTGPT-275), not rag_answer()."""
+        with (
+            patch("ui.pages.ask_mattgpt.backend_service.agy_answer") as mock_agy,
+            patch("ui.pages.ask_mattgpt.backend_service.rag_answer") as mock_rag,
+        ):
+            mock_agy.return_value = {
                 "answer_md": "test",
                 "sources": [],
                 "modes": {},
                 "default_mode": "narrative",
             }
 
+            from ui.pages.ask_mattgpt.backend_service import send_to_backend
+
             result = send_to_backend(
                 prompt="test", filters={}, ctx=None, stories=sample_stories
             )
 
-            # Should have called rag_answer with correct args (ctx dropped).
-            # MATTGPT-273: history comes from ask_transcript; none here.
-            mock_rag_answer.assert_called_once_with(
-                "test", {}, sample_stories, history=[]
-            )
+            # filters and ctx are dropped; history comes from ask_transcript
+            # (MATTGPT-273), none here.
+            mock_agy.assert_called_once_with("test", sample_stories, history=[])
+            mock_rag.assert_not_called()
             assert result["answer_md"] == "test"
 
 

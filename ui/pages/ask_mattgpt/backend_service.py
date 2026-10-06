@@ -1703,6 +1703,14 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
     return None
 
 
+def agy_answer(
+    question: str,
+    stories: list[dict[str, Any]],
+    history: list[dict[str, str]] | None = None,
+) -> dict[str, Any]:
+    raise NotImplementedError
+
+
 def send_to_backend(
     prompt: str,
     filters: dict[str, Any],

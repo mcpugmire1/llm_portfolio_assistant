@@ -12,7 +12,7 @@ Class H (history builder): _build_history_messages() turns transcript
 Class P (captured prompt): rag_answer(..., history=...) sends the history
   as messages, in order, between the system message and the user message.
 Class W (wiring): send_to_backend() reads ask_transcript and passes the
-  built history to rag_answer().
+  built history to agy_answer() (MATTGPT-275; was rag_answer()).
 
 The captured-prompt fixture identifies the Agy call by the MATT_DNA persona
 anchor, as in test_ask_agy_prompt_composition.py.
@@ -183,7 +183,7 @@ class TestHistoryInAgyMessages:
 
 
 # ---------------------------------------------------------------------------
-# Class W: send_to_backend passes the transcript's history to rag_answer
+# Class W: send_to_backend passes the transcript's history to agy_answer
 # ---------------------------------------------------------------------------
 
 
@@ -194,14 +194,13 @@ class TestSendToBackendHistory:
             {"type": "conversational", "Role": "assistant", "text": "a1"},
             {"role": "user", "text": _FOLLOW_UP},
         ]
-        with patch.object(bs, "rag_answer") as mock_rag_answer:
-            mock_rag_answer.return_value = {"answer_md": "ok", "sources": []}
+        with patch.object(bs, "agy_answer") as mock_agy_answer:
+            mock_agy_answer.return_value = {"answer_md": "ok", "sources": []}
             bs.send_to_backend(
                 prompt=_FOLLOW_UP, filters={}, ctx=None, stories=sample_stories
             )
-        mock_rag_answer.assert_called_once_with(
+        mock_agy_answer.assert_called_once_with(
             _FOLLOW_UP,
-            {},
             sample_stories,
             history=[
                 {"role": "user", "content": "q1"},
