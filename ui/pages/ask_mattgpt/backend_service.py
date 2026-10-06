@@ -1591,6 +1591,107 @@ def diversify_results(
     return result
 
 
+def _nonsense_rejection(
+    question: str, from_suggestion: bool, obs: dict[str, Any]
+) -> dict[str, Any] | None:
+    """Rules-based nonsense check. Returns the rejection result, or None.
+
+    On a rule match (and not from a suggestion chip) it logs the query, sets
+    ask_last_reason, ask_last_query and ask_last_overlap for the UI banner,
+    records rejection_reason in obs, and returns the empty rejection result.
+    """
+    cat = is_nonsense(question or "")
+    if DEBUG:
+        print(f"DEBUG: is_nonsense returned cat={cat}")
+
+    if cat and not from_suggestion:
+        log_offdomain(question or "", f"rule:{cat}")
+        log_query(question or "", "Ask Agy", redirect_reason=f"rule:{cat}")
+        st.session_state["ask_last_reason"] = f"rule:{cat}"
+        st.session_state["ask_last_query"] = question or ""
+        st.session_state["ask_last_overlap"] = None
+        st.session_state["__ask_dbg_decision"] = f"rule:{cat}"
+        obs["rejection_reason"] = f"rule:{cat}"
+        return {
+            "answer_md": "",
+            "sources": [],
+            "modes": {},
+            "default_mode": "narrative",
+            **obs,
+        }
+    return None
+
+
+def _router_rejection(
+    question: str,
+    intent_family: str,
+    semantic_score: float,
+    from_suggestion: bool,
+    obs: dict[str, Any],
+) -> dict[str, Any] | None:
+    """Semantic-router out_of_scope / personal redirect. Returns it, or None.
+
+    Gracefully redirect queries the router is confident don't belong.
+    Embedding similarity (free, fast) instead of LLM calls, checked
+    BEFORE Pinecone to avoid unnecessary search costs.
+    MATTGPT-219 (out_of_scope) + MATTGPT-234 (personal): both branches
+    gated on HARD_ACCEPT via router_rejection_reason. Below that the
+    router isn't confident; the query falls through to Pinecone and
+    any real off-topic case is caught by the overlap:0.00 gate with
+    correct rejection copy. See helper docstring for full rationale.
+    """
+    rejection_family = router_rejection_reason(intent_family, semantic_score)
+    if rejection_family == "out_of_scope" and not from_suggestion:
+        out_of_scope_response = """🐾 I don't have experience in that industry. Matt's work is primarily in **Financial Services**, **Healthcare/Life Sciences**, **Telecom**, and **Technology/SaaS**.
+
+Would you like to explore how his work in **platform modernization**, **payments systems**, or **enterprise transformation** might apply to your context?"""
+        if DEBUG:
+            print("DEBUG: out_of_scope detected by semantic router")
+        log_query(
+            question or "",
+            "Ask Agy",
+            intent_family="out_of_scope",
+            redirect_reason="semantic_router:out_of_scope",
+        )
+        st.session_state["ask_last_reason"] = "semantic_router:out_of_scope"
+        st.session_state["ask_last_query"] = question or ""
+        obs["rejection_reason"] = "semantic_router:out_of_scope"
+        return {
+            "answer_md": out_of_scope_response,
+            "sources": [],
+            "modes": {"narrative": out_of_scope_response},
+            "default_mode": "narrative",
+            **obs,
+        }
+
+    # PERSONAL CHECK (Mar 2026 - Semantic Router)
+    # Warm redirect for personal questions (age, family, salary, identity).
+    # Gate shared with out_of_scope above via router_rejection_reason.
+    if rejection_family == "personal" and not from_suggestion:
+        personal_response = """🐾 I'm focused on Matt's professional experience, including the projects, teams, and outcomes.
+
+Ask me about his **transformation work**, **platform engineering**, or **how he builds teams** and I'll dig up the details."""
+        if DEBUG:
+            print("DEBUG: personal query detected by semantic router")
+        log_query(
+            question or "",
+            "Ask Agy",
+            intent_family="personal",
+            redirect_reason="semantic_router:personal",
+        )
+        st.session_state["ask_last_reason"] = "semantic_router:personal"
+        st.session_state["ask_last_query"] = question or ""
+        obs["rejection_reason"] = "semantic_router:personal"
+        return {
+            "answer_md": personal_response,
+            "sources": [],
+            "modes": {"narrative": personal_response},
+            "default_mode": "narrative",
+            **obs,
+        }
+    return None
+
+
 def send_to_backend(
     prompt: str,
     filters: dict[str, Any],
@@ -1768,25 +1869,9 @@ def rag_answer(
             st.session_state["_known_vocab"] = _KNOWN_VOCAB
 
         # Step 1: Rules-based (fast, free)
-        cat = is_nonsense(question or "")
-        if DEBUG:
-            print(f"DEBUG: is_nonsense returned cat={cat}")
-
-        if cat and not from_suggestion:
-            log_offdomain(question or "", f"rule:{cat}")
-            log_query(question or "", "Ask Agy", redirect_reason=f"rule:{cat}")
-            st.session_state["ask_last_reason"] = f"rule:{cat}"
-            st.session_state["ask_last_query"] = question or ""
-            st.session_state["ask_last_overlap"] = None
-            st.session_state["__ask_dbg_decision"] = f"rule:{cat}"
-            _obs["rejection_reason"] = f"rule:{cat}"
-            return {
-                "answer_md": "",
-                "sources": [],
-                "modes": {},
-                "default_mode": "narrative",
-                **_obs,
-            }
+        rejected = _nonsense_rejection(question, from_suggestion, _obs)
+        if rejected:
+            return rejected
 
         # Step 2: Semantic router (embedding-based intent classification)
         semantic_valid = True
@@ -1820,67 +1905,12 @@ def rag_answer(
         if DEBUG:
             dbg(f"ask: overlap={overlap:.2f}")
 
-        # =================================================================
-        # OUT_OF_SCOPE / PERSONAL CHECK (Semantic Router)
-        # Gracefully redirect queries the router is confident don't belong.
-        # Embedding similarity (free, fast) instead of LLM calls, checked
-        # BEFORE Pinecone to avoid unnecessary search costs.
-        # MATTGPT-219 (out_of_scope) + MATTGPT-234 (personal): both branches
-        # gated on HARD_ACCEPT via router_rejection_reason. Below that the
-        # router isn't confident; the query falls through to Pinecone and
-        # any real off-topic case is caught by the overlap:0.00 gate with
-        # correct rejection copy. See helper docstring for full rationale.
-        # =================================================================
-        rejection_family = router_rejection_reason(intent_family, semantic_score)
-        if rejection_family == "out_of_scope" and not from_suggestion:
-            out_of_scope_response = """🐾 I don't have experience in that industry. Matt's work is primarily in **Financial Services**, **Healthcare/Life Sciences**, **Telecom**, and **Technology/SaaS**.
-
-Would you like to explore how his work in **platform modernization**, **payments systems**, or **enterprise transformation** might apply to your context?"""
-            if DEBUG:
-                print("DEBUG: out_of_scope detected by semantic router")
-            log_query(
-                question or "",
-                "Ask Agy",
-                intent_family="out_of_scope",
-                redirect_reason="semantic_router:out_of_scope",
-            )
-            st.session_state["ask_last_reason"] = "semantic_router:out_of_scope"
-            st.session_state["ask_last_query"] = question or ""
-            _obs["rejection_reason"] = "semantic_router:out_of_scope"
-            return {
-                "answer_md": out_of_scope_response,
-                "sources": [],
-                "modes": {"narrative": out_of_scope_response},
-                "default_mode": "narrative",
-                **_obs,
-            }
-
-        # PERSONAL CHECK (Mar 2026 - Semantic Router)
-        # Warm redirect for personal questions (age, family, salary, identity).
-        # Gate shared with out_of_scope above via router_rejection_reason.
-        # =================================================================
-        if rejection_family == "personal" and not from_suggestion:
-            personal_response = """🐾 I'm focused on Matt's professional experience — the projects, the teams, the outcomes.
-
-Ask me about his **transformation work**, **platform engineering**, or **how he builds teams** and I'll dig up the details."""
-            if DEBUG:
-                print("DEBUG: personal query detected by semantic router")
-            log_query(
-                question or "",
-                "Ask Agy",
-                intent_family="personal",
-                redirect_reason="semantic_router:personal",
-            )
-            st.session_state["ask_last_reason"] = "semantic_router:personal"
-            st.session_state["ask_last_query"] = question or ""
-            _obs["rejection_reason"] = "semantic_router:personal"
-            return {
-                "answer_md": personal_response,
-                "sources": [],
-                "modes": {"narrative": personal_response},
-                "default_mode": "narrative",
-                **_obs,
-            }
+        # OUT_OF_SCOPE / PERSONAL CHECK (Semantic Router): see _router_rejection.
+        rejected = _router_rejection(
+            question, intent_family, semantic_score, from_suggestion, _obs
+        )
+        if rejected:
+            return rejected
 
         # Entity-first sovereignty: if entity detected, add to filters for Pinecone
         # This ensures entity-anchored queries prioritize stories from that entity
