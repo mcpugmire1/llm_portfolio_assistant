@@ -46,3 +46,13 @@ def test_no_payments_platform_attributed_by_alphabetical_order(matt_dna):
     Global Payments Gateway Across 12 Countries). MATT_DNA attributed it to
     whichever banking client sorted first; the story carries the fact."""
     assert "payments platform across 12 countries" not in matt_dna.lower()
+
+
+def test_startups_not_listed_as_outside_matts_industries(matt_dna):
+    """The Sparkfly story (a founder's startup, 2000-2001) contradicts
+    "NOT Matt's industries: ... early-stage startups"."""
+    assert "early-stage startups" not in matt_dna.lower()
+
+
+def test_rest_of_not_industries_line_kept(matt_dna):
+    assert "NOT Matt's industries: Consumer products, retail" in matt_dna
