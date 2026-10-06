@@ -703,7 +703,7 @@ Delete the script. Threshold-dependent checks import from `config/constants.py`.
 ## ADR 026: CONFIDENCE_LOW Is 0.20
 
 **Date:** 2026-01-19 (raised); 2026-10-05 (recorded)
-**Status:** Accepted
+**Status:** Superseded by ADR 033
 **Related tickets:** MATTGPT-029, MATTGPT-024
 
 **Context:**
@@ -874,3 +874,172 @@ Replace AgGrid with `st.dataframe` in the Table render path. AgGrid is not used 
 - Rows, cells, and selection controls are painted to a canvas, so BDD cannot assert row content, row rendering, or canvas-driven selection. Row rendering is covered by a manual visual check (a 20-click filter test). See st.dataframe Canvas Constraint in ARCHITECTURE.md.
 - `wait_for_load_state("networkidle")` never settles on a page with the grid; table steps use `wait_for_streamlit_rerun()`.
 - Whole-row click or keyboard row selection requires self-rendered HTML rows (the Cards pattern).
+
+---
+
+## ADR 033: Ask Agy Refuses Below CONFIDENCE_HIGH; the Warning Tier Is My Work Only
+
+**Date:** 2026-10-06 (recorded; the Ask Agy refusal of low confidence dates to 2025-12-05)
+**Status:** Accepted
+**Related tickets:** MATTGPT-273, MATTGPT-253
+
+**Context:**
+ADR 026, like ADR 018 before it, says a top similarity from 0.20 to 0.25 is answered with a "relevance may be low" warning. That is not what Ask Agy does. `semantic_search()` in `services/rag_service.py` buckets the top score as high (at or above `CONFIDENCE_HIGH = 0.25`), low (at or above `CONFIDENCE_LOW = 0.20`), or none, but `rag_answer()` in `backend_service.py` refuses both `low` and `none`. The evaluator probe for MATTGPT-273 (`docs/evidence/MATTGPT-273/tool_vs_pipeline_20261006_140406/`) found the pipeline refusing 25 turns at this gate. The MATTGPT-253 probe (`docs/evidence/MATTGPT-253/current_certs_20261006_163102/`) showed "Are any of those current" refused 3 of 3 at a top score of 0.221 and answered 3 of 3 at 0.252 with a trailing question mark.
+
+**Decision:**
+This records current behavior; no threshold changes.
+- `semantic_search()`: high at or above 0.25; low at or above 0.20; none below 0.20, with empty results. Hits below 0.20 are dropped from low and high results.
+- Ask Agy (`rag_answer()`): refuses `low` and `none`, logged as `[QUERY_REJECTED] reason=low_pinecone`, so any top score below 0.25 is refused. It has no warning tier. Two exceptions pass the gate: suggestion and context-locked queries (`from_suggestion`), and trusted behavioral queries (semantic router score at or above 0.80 with family `behavioral`).
+- My Work (`_render_confidence_banner()` in `ui/pages/explore_stories.py`): `low` shows "Showing closest matches ... Relevance may be low."; `none` shows "No strong matches".
+
+This supersedes ADR 026. The 0.20 value of `CONFIDENCE_LOW` and its reason (filtering phantom similarity noise) carry forward: it sets the none bucket for both surfaces and My Work's warning floor.
+
+**Rationale:**
+- ADRs 018 and 026 described one gate for both surfaces. The surfaces behave differently, and the evaluator scores and the punctuation result depend on Ask Agy's actual 0.25 floor.
+- Alternative considered: correct ADR 026 in place. Not permitted; ADR.md is append-only.
+
+**Consequences:**
+- For Ask Agy, `CONFIDENCE_HIGH` is the refusal threshold, and small wording changes near 0.25 decide whether a question is answered.
+- Any change to Ask Agy's gate is measured against the evaluator conversations in `tests/fixtures/evaluator_conversations.md` as well as the golden eval.
+
+---
+
+## ADR 034: Ask Agy Follow-Ups Carry the Last Two Exchanges
+
+**Date:** 2026-10-06
+**Status:** Accepted
+**Related tickets:** MATTGPT-273, MATTGPT-275
+
+**Context:**
+`rag_answer()` took only the current question, so a follow-up such as "What about PMP" or "how big was the team" reached the response LLM with no prior turn.
+
+**Decision:**
+`send_to_backend()` reads `st.session_state["ask_transcript"]`; `_build_history_messages()` keeps the last `ASK_HISTORY_MAX_MESSAGES = 4` messages (two exchanges), reading both `role` and `Role` keys, skipping banners, and dropping the current question. `rag_answer(history=...)` passes them to `_generate_agy_response()`, which sends them between the system and user messages. Retrieval, the gates, and the semantic router still see only the current question.
+
+**Rationale:**
+- Acceptance (`docs/evidence/MATTGPT-273/acceptance_20261006_131919/`, 3 runs each): team size 3/3 with the JP Morgan referent, PMP 3/3 with no story pivot, AWS 3/3 leading with the two certifications, "what changed" 3/3 with the right referent, topic switch 3/3 with no drag.
+- Rejected: prepending the previous question to the retrieval query. Topic drag in 3 of 3 switches (`docs/evidence/MATTGPT-273/history_20261006_125833/`).
+- Rejected: putting the full corpus in context. About 8x the cost per query, and more narration on fact answers (`docs/evidence/MATTGPT-273/long_context_20261006_124253/`).
+- Rejected: an answer-from-the-conversation prompt instruction. 0 of 3 on the browser pair, and the PMP pivot rose to 2 of 3 (local probe output only).
+- Measured, not adopted: carrying the previous answer's top stories into the context fixed the browser pair 3/3, but as a rule layered over single-shot retrieval.
+
+**Consequences:**
+- Retrieval on a weak follow-up still runs on the bare question and can retrieve unrelated stories, which the model then narrates. Follow-up retrieval is MATTGPT-275 (tool-calling retrieval).
+
+---
+
+## ADR 035: Agy's Closing Offers Are Removed Until Follow-Ups Can Be Honored
+
+**Date:** 2026-10-06
+**Status:** Accepted
+**Related tickets:** MATTGPT-276, MATTGPT-275
+
+**Context:**
+`_generate_agy_response()` ended every answer with a closer picked by `random.choice` from 8 standard or 4 synthesis offers ("Want me to dig deeper?"), and `build_user_message()` instructed the model to end with that exact text. The closers are a deliberate call to action, but an accepted offer is a follow-up, and retrieval runs on the bare follow-up.
+
+**Decision:**
+Remove the closers. `build_user_message()` takes no closing argument; the system prompts drop "End with the closing provided"; rule 0a places profile markers on their own line at the end of the response. The random opener and focus angle stay. The removal is temporary: restoring the closers is part of MATTGPT-275's acceptance.
+
+**Rationale:**
+- Rejected: keeping the closers while retrieval runs on the bare follow-up. Accepted offers retrieved unrelated stories in 3 of 3 browser follow-ups.
+- Acceptance (`docs/evidence/MATTGPT-276/closers_20261006_152350/`): the final paragraph was an offer in 105 of 105 answers before and 0 of 106 after.
+
+**Consequences:**
+- Answers end on content, with no invitation to continue.
+- When MATTGPT-275 lands, a new ADR restores the closers and supersedes this one.
+
+---
+
+## ADR 036: MATT_DNA States Only Facts a Story or the Profile Backs
+
+**Date:** 2026-10-06
+**Status:** Accepted
+**Related tickets:** MATTGPT-269, MATTGPT-273, MATTGPT-275
+
+**Context:**
+`generate_dynamic_dna()` builds the MATT_DNA grounding prompt from the corpus plus curated text. The curated text carried figures and claims no story or profile entry backs, and restated story facts through derived placeholders. The MATTGPT-273 tool-calling probe (`docs/evidence/MATTGPT-273/tool_vs_pipeline_20261006_140406/`) flagged MATT_DNA figures in 6 answers: $300M+ (5), 30-60% (4), $189M (3), teams of 10 delivering like 20 (2). An audit by substance found the last backed by the Building Cloud Innovation Centers story; the other three, plus "MVP in 3 weeks", had no backing.
+
+**Decision:**
+MATT_DNA states only facts backed by a story or `data/matt_profile.json`, and does not restate story facts; the story is the source. Applied in MATTGPT-269:
+- Removed four unbacked figures: $300M+ annual sales by FY23, the $189M cloud modernization win, 30-60% cycle time reduction, and MVP in 3 weeks vs months. The backed claims on the same lines stay (CIC 0 to 150+, 4X faster velocity, zero defects, $100M+ repeat business, teams of 10 delivering the output of 20, from the Building Cloud Innovation Centers story).
+- Removed the "payments platform across 12 countries" line and the `major_banking_client` derivation that existed only for it; the fact stays in its story.
+- Removed the eight-line "Career Eras (for timeline context)" block. The Timeline reads each story's Era field and is unaffected.
+- Theme Strengths are tiered by story count: Execution & Delivery primary (59 stories), Org Transformation a strong secondary theme (19), Strategic Advisory, Talent & Enablement, Emerging Tech, and Risk narrower. "Matt builds people, not just systems" and "Regulatory (one engagement)" are removed.
+- "Early-stage startups" is removed from the industries that are not Matt's; the Sparkfly story contradicts it.
+
+**Rationale:**
+- The model treats MATT_DNA as ground truth and cites it. In a design where the model answers directly from its context, every MATT_DNA line is authoritative.
+- Rejected: keeping figures as unsourced persona context, because the model cites them.
+- Rejected: deriving the 12-countries client from the story, because it keeps a duplicate of a fact the story already holds.
+
+**Consequences:**
+- A new MATT_DNA line needs a backing story or profile entry; `tests/unit/test_matt_dna_grounding.py` and the `matt_dna_grounding_drift` BDD feature pin the removed content.
+- MATT_DNA items that remain hardcoded, including the How Matt Wins Business heading, carry into MATTGPT-275.
+
+---
+
+## ADR 037: Remove the NOT-Clients List From MATT_DNA
+
+**Date:** 2026-10-06 (removed); the list was added 2026-01-19
+**Status:** Accepted
+**Related tickets:** MATTGPT-269, MATTGPT-207
+
+**Context:**
+`generate_dynamic_dna()` emitted "NOT Matt's Clients (NEVER mention): Kaiser, Google, Amazon, Microsoft, Meta, MetLife, Citizens Bank", added on 2026-01-19 to suppress a confabulated Kaiser engagement and pinned by a MATTGPT-207 scenario. This is distinct from the "NOT Matt's industries" line, which stays.
+
+**Decision:**
+Remove the list. Clients by Employer ("ONLY cite these") and grounding rules 1 and 3 cover companies that appear in no story.
+
+**Rationale:**
+- Rejected: keeping the list. Asked "Which clients can't you mention?", Ask Agy recited it in 5 of 5 runs, naming as confidential clients the companies it was meant to suppress.
+- After removal (`docs/evidence/MATTGPT-269/not_clients_20261006_164532/`, 5 runs per question): no recital (0/5); Kaiser denied 10/10, as before, with healthcare described as "a Major U.S. Health System"; MetLife denied 5/5; no client claim for Google or Microsoft; controls and synthesis named no listed company (0/40 in both arms).
+
+**Consequences:**
+- Suppression of a company in no story rests on the positive client list and the grounding rules, not on a negative list.
+- Observed in both arms and not addressed: answers sometimes call Accenture, Matt's employer, a client.
+
+---
+
+## ADR 038: Matt's Self-Description Lives in the Profile, Labeled, for Ask Agy Only
+
+**Date:** 2026-10-06
+**Status:** Accepted
+**Related tickets:** MATTGPT-269
+
+**Context:**
+MATT_DNA carried Matt's self-description inline as fact: an Identity heading and line, a Core Values block, and lines such as "Builder's mindset, coach's heart" and "Teaches teams to fish".
+
+**Decision:**
+`data/matt_profile.json` holds `self_description`: a label and four statements. `generate_dynamic_dna()` reads it through `services.matt_profile.load_profile_dict()` and renders the statements under the label, which marks them as Matt's own words, not independently verified. If the profile can't be read, the block is omitted and the failure is logged with `logger.exception`. `jd_assessor.load_matt_profile()` renders only named keys, so Role Match does not see it. "Leads with empathy, clarity, and purpose" stays in Leadership Philosophy, backed by the Leadership Philosophy and Career Intent stories.
+
+**Rationale:**
+- Rejected: rendering it in `load_matt_profile()`. The assessor would read "coach's heart" as evidence and inflate leadership verdicts.
+- The label lets Ask Agy quote the statements as self-description without presenting them as facts.
+
+**Consequences:**
+- Self-description edits are data edits in `matt_profile.json`, not code edits.
+- Role Match grounding stays limited to backed facts.
+
+---
+
+## ADR 039: Probes Stay Untracked in probes/; Cited Output Is Frozen in docs/evidence/
+
+**Date:** 2026-10-05
+**Status:** Accepted
+**Related tickets:** MATTGPT-265
+
+**Context:**
+Probe scripts and their output accumulated at the repo root, some tracked and some not, and tickets cited probe output by local path. Probes are exploratory instruments and stay untracked, so citations to their output broke when the files moved.
+
+**Decision:**
+- `/probes/` is gitignored, anchored to the root. Probe scripts live there, with output under `probes/output/<ticket>/<timestamp>/`. Fourteen previously tracked root probes were untracked and moved there; each stays in git history.
+- Output that a ticket, commit, or ADR cites is copied byte-identical into `docs/evidence/MATTGPT-<n>/` and tracked. Probe scripts are not copied. The pre-commit em-dash check skips `docs/evidence/`.
+- Tracked at the root: `probe_assessor.py` with its `probe_extraction_*.json` caches (the documented probe harness), the corpus pipeline's `generate_*.py` tools, and `generate_208_fixtures.py` (named as provenance by test fixtures). `probe_assessor.py` writes its results under `probes/output/`.
+
+**Rationale:**
+- Probes stay untracked, and frozen copies keep cited evidence available on a fresh clone.
+- Alternatives considered: not recorded in the commits.
+
+**Consequences:**
+- A citation points at `docs/evidence/`, never at `probes/`, which a fresh clone does not have.
+- Current-state docs describe a measurement by what it does, not by a probe script's path.
