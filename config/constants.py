@@ -72,6 +72,10 @@ SEARCH_TOP_K = 25  # Stories to fetch from Pinecone (headroom for reranking/filt
 # Independent Project stories. The LLM receives the original query verbatim.
 SUBSTITUTION_FAMILIES = frozenset({"technical", "team_scaling", "agile_transformation"})
 
+# Ask Agy conversation history: prior transcript messages sent to the response
+# LLM as user/assistant turns (two exchanges). Retrieval does not use them.
+ASK_HISTORY_MAX_MESSAGES = 4
+
 # =============================================================================
 # META-COMMENTARY PATTERNS
 # =============================================================================

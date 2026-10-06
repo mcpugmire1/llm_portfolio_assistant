@@ -16,6 +16,7 @@ from typing import Any
 import streamlit as st
 
 from config.constants import (
+    ASK_HISTORY_MAX_MESSAGES,
     ENTITY_ALIASES,
     ENTITY_DETECTION_FIELDS,
     EXCLUDED_DIVISION_VALUES,
@@ -959,6 +960,10 @@ def _generate_agy_response(
     the meta-commentary strip, so a sentence strip cannot take a marker
     with it.
 
+    history: MATTGPT-273. Prior user/assistant messages from the
+    conversation, sent between the system message and the current user
+    message. Retrieval does not use them.
+
     Uses a merged Agy prompt combining:
     - V1 Voice Guide: Warmth, personality variety, opening/closing options
     - V2 System Prompt: Start With Why structure, Purpose/Process/Performance flow
@@ -1154,6 +1159,7 @@ def _generate_agy_response(
             model="gpt-4o",
             messages=[
                 {"role": "system", "content": system_prompt},
+                *(history or []),
                 {"role": "user", "content": user_message},
             ],
             temperature=_temp,
@@ -1628,7 +1634,8 @@ def send_to_backend(
 ) -> dict[str, Any]:
     """Legacy wrapper for rag_answer.
 
-    Maintained for backward compatibility. Directly delegates to rag_answer().
+    Maintained for backward compatibility. Delegates to rag_answer(), passing
+    the recent conversation from st.session_state["ask_transcript"] as history.
 
     Args:
         prompt: User query string.
@@ -1639,11 +1646,28 @@ def send_to_backend(
     Returns:
         RAG answer dictionary with keys: answer_md, sources, modes, default_mode.
     """
-    return rag_answer(prompt, filters, stories)
+    history = _build_history_messages(st.session_state.get("ask_transcript", []))
+    return rag_answer(prompt, filters, stories, history=history)
 
 
 def _build_history_messages(transcript: list[dict]) -> list[dict[str, str]]:
-    raise NotImplementedError
+    """Turn ask_transcript entries into prior chat messages for the Agy call.
+
+    Entries carry the role as "role" (push_user_turn, push_assistant_turn) or
+    "Role" (push_conversational_answer, banners); both are read. Entries with
+    no text, such as rejection banners, are skipped. The current question is
+    already the last entry when send_to_backend() runs, so a trailing user
+    message is dropped. Keeps the last ASK_HISTORY_MAX_MESSAGES messages.
+    """
+    messages: list[dict[str, str]] = []
+    for entry in transcript or []:
+        role = entry.get("role") or entry.get("Role")
+        text = entry.get("text")
+        if role in ("user", "assistant") and text:
+            messages.append({"role": role, "content": text})
+    if messages and messages[-1]["role"] == "user":
+        messages.pop()
+    return messages[-ASK_HISTORY_MAX_MESSAGES:]
 
 
 def rag_answer(
@@ -2439,6 +2463,7 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
             is_synthesis=is_synthesis,
             profile_facts=search_result.get("profile_facts", ""),
             profile_categories_out=profile_categories,
+            history=history,
         )
 
         # Build modes
