@@ -27,6 +27,9 @@
 9. Topic switch
 “Tell me about his payments work.” → “What’s his leadership style?” → “Give me an example.” → “How big was the team on that project?”
 
+10. Accepting an offer
+“Tell me about his Norfolk Southern work.” → “Sure, the deep dive on that one.” → “How long did that take?”
+
 ## Acceptance Criteria
 
 Score every conversation on three dimensions:
@@ -71,3 +74,7 @@ A strong implementation should demonstrate that it can answer from profile and c
 - "What's his leadership style?": leadership style with no payments carry-over.
 - "Give me an example.": an example of the leadership style just described, not payments.
 - "How big was the team on that project?": the team size of the project used as the example in the previous turn (for the Cloud Innovation Center, 150+, grown from a 10-person pilot). If that story gives no size, it says so. Fails if it reports the payments team or an unrelated project.
+
+10. Accepting an offer
+- "Sure, the deep dive on that one.": more depth on the same Norfolk Southern engagement from its story (his role, the approach, the outcomes), not a repeat of the first answer and not a different engagement. If the first answer ended with an offer, this delivers what was offered, for that story.
+- "How long did that take?": the duration of that engagement if its story gives one; if not, it says so. Fails if it gives another project's timeline.
