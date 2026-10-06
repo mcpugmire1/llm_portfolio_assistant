@@ -1,0 +1,9 @@
+[QUERY_REJECTED] reason=low_pinecone, router_family=personal, router_score=0.278, pinecone_score=0.221, query=Are any of those current...
+[green] 'Are any of those current'     run 1: GATED low_confidence top=0.22119765 family=personal | ''
+[QUERY_REJECTED] reason=low_pinecone, router_family=personal, router_score=0.278, pinecone_score=0.221, query=Are any of those current...
+[green] 'Are any of those current'     run 2: GATED low_confidence top=0.22119765 family=personal | ''
+[QUERY_REJECTED] reason=low_pinecone, router_family=personal, router_score=0.278, pinecone_score=0.221, query=Are any of those current...
+[green] 'Are any of those current'     run 3: GATED low_confidence top=0.221051991 family=personal | ''
+[green] 'Are any of those current?'    run 1: answered top=0.252065301 family=synthesis | "None of Matt's certifications are currently active. He was an AWS Certified Solutions Arch"
+[green] 'Are any of those current?'    run 2: answered top=0.252168387 family=synthesis | 'None of Matt\'s certifications are currently active. He was awarded the "AWS Certified Solu'
+[green] 'Are any of those current?'    run 3: answered top=0.252065301 family=synthesis | '🐾 None of Matt\'s certifications are currently active. He held the "AWS Certified Solutions'

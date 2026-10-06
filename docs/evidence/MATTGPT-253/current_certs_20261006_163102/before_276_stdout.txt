@@ -1,0 +1,9 @@
+[QUERY_REJECTED] reason=low_pinecone, router_family=personal, router_score=0.278, pinecone_score=0.221, query=Are any of those current...
+[before_276] 'Are any of those current'     run 1: GATED low_confidence top=0.221079484 family=personal | ''
+[QUERY_REJECTED] reason=low_pinecone, router_family=personal, router_score=0.278, pinecone_score=0.221, query=Are any of those current...
+[before_276] 'Are any of those current'     run 2: GATED low_confidence top=0.22119765 family=personal | ''
+[QUERY_REJECTED] reason=low_pinecone, router_family=personal, router_score=0.278, pinecone_score=0.221, query=Are any of those current...
+[before_276] 'Are any of those current'     run 3: GATED low_confidence top=0.22119765 family=personal | ''
+[before_276] 'Are any of those current?'    run 1: answered top=0.252065301 family=synthesis | 'Happy to unpack any of these with concrete stories.'
+[before_276] 'Are any of those current?'    run 2: answered top=0.252318025 family=synthesis | "Let me know if you'd like the deep dive on this one."
+[before_276] 'Are any of those current?'    run 3: answered top=0.252065301 family=synthesis | 'Want me to dive deeper into any of these themes?'
