@@ -1618,7 +1618,7 @@ Title, Client, Role, Sub-category, Competencies (joined), public_tags (joined), 
 
 Lives in `utils/scoring.py`, controlled by `SUBSTITUTION_FAMILIES` in `config/constants.py`. Replaces "Matt" with "he" and "Matt's" with "his" in the retrieval query so self-referential name tokens don't bias embeddings toward Independent Project stories. The LLM receives the original query verbatim; only the retrieval string is modified. Enabled families: `technical`, `team_scaling`, `agile_transformation`.
 
-**Constraint:** Adding or removing a family from `SUBSTITUTION_FAMILIES` changes which queries reach the substituted-string path through both the embedding and keyword scorer. Impact must be re-measured before the change is committed. `probe_163_substitution_impact.py` at repo root runs that measurement: compares top-10 Pinecone hits on original vs. substituted strings for a query set, printing rank-delta and score-delta per story. Attach the output to the commit.
+**Constraint:** Adding or removing a family from `SUBSTITUTION_FAMILIES` changes which queries reach the substituted-string path through both the embedding and keyword scorer. Impact must be re-measured before the change is committed: for a query set, compare the top-10 Pinecone hits on the original and substituted strings and report the rank delta and score delta per story. Attach the output to the commit.
 
 ---
 
