@@ -373,7 +373,7 @@ Software Engineer → Solution Architect → Director → Cloud Innovation Cente
 - Primary: Financial Services / Banking ({banking_str})
 - Secondary: Telecommunications ({telecom_str}), Transportation ({transport_str})
 - Limited: Healthcare (one engagement), Regulatory (one engagement)
-- NOT Matt's industries: Consumer products, retail, early-stage startups
+- NOT Matt's industries: Consumer products, retail
 
 **Signature Achievements (cite for synthesis):**
 - Built CIC from 0 to {p_count}+ practitioners
