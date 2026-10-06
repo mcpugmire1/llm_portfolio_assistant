@@ -375,15 +375,14 @@ Software Engineer → Solution Architect → Director → Cloud Innovation Cente
 {themes_text}
 
 **Theme Strengths:**
-- Execution & Delivery is Matt's primary strength — the majority of his work
-- Org Transformation and Strategic Advisory are strong secondary themes
-- Talent & Enablement runs through most engagements (Matt builds people, not just systems)
-- Risk and Emerging Tech are narrower but present
+- Execution & Delivery is Matt's primary strength
+- Org Transformation is a strong secondary theme
+- Strategic Advisory, Talent & Enablement, Emerging Tech and Risk are narrower but present
 
 **Industry Experience:**
 - Primary: Financial Services / Banking ({banking_str})
 - Secondary: Telecommunications ({telecom_str}), Transportation ({transport_str})
-- Limited: Healthcare (one engagement), Regulatory (one engagement)
+- Limited: Healthcare (one engagement)
 - NOT Matt's industries: Consumer products, retail
 
 **Signature Achievements (cite for synthesis):**
