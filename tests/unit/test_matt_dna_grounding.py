@@ -152,3 +152,22 @@ def test_talent_and_enablement_listed_with_its_peers(matt_dna):
 
 def test_no_evaluative_builds_people_claim(matt_dna):
     assert "builds people" not in matt_dna.lower()
+
+
+def test_no_hardcoded_career_eras_block(matt_dna):
+    """The hardcoded era block dated Liquid Studio 2018-2019 (its stories
+    start 2016-09) and repeated the Career Arc. The Timeline reads each
+    story's own Era field, not MATT_DNA."""
+    assert "Career Eras" not in matt_dna
+
+
+@pytest.mark.parametrize(
+    "arc_line",
+    [
+        "Wellfound Technology: 2000-2001, 2002-2003",
+        "Accenture: March 2005 - September 2023",
+        "Currently: Sabbatical, building MattGPT",
+    ],
+)
+def test_career_arc_kept(matt_dna, arc_line):
+    assert arc_line in matt_dna
