@@ -1,0 +1,38 @@
+=== [green] run 1: passed=True matches=2 matched=['MattGPT', 'Director']
+🐾 Found it!
+
+After his tenure at **Accenture**, Matt transitioned from his role as a Technology & Innovation Leader, where he had grown from an engineer to the Director of the Cloud Innovation Center. During his time there, he scaled the center from 0 to **150+ professionals**, drove **\$100M+** in repeat business, and achieved **4x faster** product delivery through modern engineering practices. This experience allowed him to solve complex problems, build high-trust engineering cultures, and modernize platforms across various industries.
+
+Upon leaving **Accenture**, Matt took a deliberate pause to recharge and focus on his next steps. He used this time to stay hands-on by building MattGPT, utilizing RAG, semantic search, and modern LLM tooling. This project served as proof that his time was spent building, not idling. Matt's transition was marked by a deepening of his skills in AI and GenAI, a refinement of his leadership narrative, and a clarification of the types of roles and environments where he could deliver the greatest impact.
+
+Matt is now pursuing senior leadership roles in platform engineering, AI-era transformation, and enterprise modernization. He is available immediately and eager to engage in roles where he can leverage his strengths in building, taking on change, and solving challenging problems as part of a team.
+=== [green] run 2: passed=True matches=2 matched=['reflect', 'MattGPT']
+🐾 Found it!
+
+After his extensive tenure at **Accenture**, Matt transitioned from his role as a Technology & Innovation Leader, where he had led the Cloud Innovation Center, scaling it from 0 to over **150 professionals** and driving **\$100M+** in repeat business. This period marked a significant chapter in his career, characterized by modernizing platforms and fostering high-trust engineering cultures. Upon concluding his time at **Accenture**, Matt took a purposeful pause to recharge and reflect on his career trajectory. During this sabbatical, he focused on deepening his skills in AI and GenAI, developing a project called MattGPT using RAG, semantic search, and modern LLM tooling. This initiative demonstrated his commitment to staying current and building rather than idling.
+
+Matt's career transition was marked by a strategic reevaluation of where he could deliver the greatest impact. He clarified his guiding principles as a modern engineering leader and identified the environments where he could meaningfully elevate strategy, delivery, and people. His readiness for the next phase is demonstrated through the tangible outcomes of his hands-on work with AI technologies. Matt is now actively pursuing senior leadership roles in platform engineering, AI-era transformation, and enterprise modernization, where he can leverage his strengths in building, embracing change, and solving complex problems as part of a team. He is available immediately for new opportunities.
+=== [green] run 3: passed=False matches=1 matched=['MattGPT']
+🐾 Found it!
+
+After his extensive tenure at **Accenture**, Matt transitioned from his role as a Technology & Innovation Leader to explore new opportunities. During his time at **Accenture**, he led the Cloud Innovation Center, scaling it from 0 to **150+** professionals and driving **\$100M+** in repeat business through delivery excellence. His leadership was characterized by building high-trust engineering cultures, modernizing platforms, and helping organizations rethink their approach to technology. 
+
+Upon leaving **Accenture**, Matt took a deliberate pause to recharge and focus on what's next. He stayed hands-on by building MattGPT, utilizing RAG, semantic search, and modern LLM tooling. This period allowed him to deepen his skills in AI and GenAI, refine his leadership narrative, and clarify the type of work that energizes him, such as platform modernization and cross-functional alignment. Matt is now pursuing senior leadership roles in platform engineering, AI-era transformation, and enterprise modernization. He is available immediately and is ready to take on change and hard problems as part of a team. 
+
+This transition marks a new chapter for Matt, where he aims to leverage his extensive experience and newly honed skills to deliver impactful results in his next role.
+=== [green] run 4: passed=True matches=2 matched=['MattGPT', 'Director']
+🐾 Found it!
+
+After his tenure at **Accenture**, Matt took a deliberate pause to recharge and focus on future opportunities. During his time at **Accenture**, he grew from an engineer to the Director of the Cloud Innovation Center, scaling it from 0 to over **150 professionals**. He was instrumental in delivering **4x faster product delivery** through modern engineering practices and drove over **\$100M** in repeat business through delivery excellence and trusted client relationships. This role allowed him to build high-trust engineering cultures and modernize platforms across various industries.
+
+As his chapter at **Accenture** came to a close, Matt used this transition period to deepen his hands-on skills in AI and GenAI by building MattGPT, a project utilizing RAG, semantic search, and modern LLM tooling. This hands-on work ensured that he stayed current and sharp, proving that his time was spent building, not idling. He focused on clarifying the roles and environments where his strengths would have the most impact, such as platform modernization, product leadership, and engineering culture.
+
+Matt is now pursuing senior leadership roles in platform engineering, AI-era transformation, and enterprise modernization. He is available immediately and seeks opportunities where he can continue to build, tackle change, and solve complex problems as part of a team.
+=== [green] run 5: passed=True matches=2 matched=['MattGPT', 'Director']
+Got it! 🐾
+
+After his tenure at **Accenture**, where Matt transitioned from an engineer to the Director of the Cloud Innovation Center, he decided to step back to recharge and focus on his next career move. During his time at **Accenture**, he built and scaled the Cloud Innovation Center from 0 to **150+ professionals** and drove **\$100M+** in repeat business through delivery excellence. His leadership was marked by the ability to create high-trust engineering cultures and modernize platforms across various industries.
+
+Upon leaving **Accenture**, Matt took the opportunity to deepen his hands-on skills in AI and GenAI by building MattGPT, utilizing RAG, semantic search, and modern LLM tooling. This project served as proof that his time was spent building rather than idling, keeping his skills sharp and current. He also focused on refining his leadership narrative and clarifying his guiding principles as a modern engineering leader.
+
+Matt's transition was intentional, aimed at identifying roles where he could deliver the greatest impact. He clarified the type of work that energizes him, such as platform modernization, product leadership, and engineering culture. He is now pursuing senior leadership roles in platform engineering, AI-era transformation, and enterprise modernization, where he can continue to build, take on change, and solve hard problems as part of a team. Matt is available immediately for these opportunities.
