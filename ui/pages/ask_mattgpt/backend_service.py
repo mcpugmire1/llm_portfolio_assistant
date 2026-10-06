@@ -363,14 +363,6 @@ Software Engineer → Solution Architect → Director → Cloud Innovation Cente
 - Built CIC from 0 to {p_count}+ practitioners (Atlanta, Tampa)
 - Currently: Sabbatical, building MattGPT. In active search for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job.
 
-**Career Eras (for timeline context):**
-- 2000-2005: Pre-Accenture (Wellfound Technology, American InterContinental University, Cendian Chemical Logistics)
-- 2005-2009: Enterprise Integration ({telecom_str})
-- 2009-2018: Payments & Architecture ({banking_str})
-- 2018-2019: Cloud Innovation (Liquid Studio)
-- 2019-2023: CIC Director (scaled 0→{p_count}, Fortune 500 transformation)
-- 2023-2026: Sabbatical (MattGPT, job search)
-
 **The {len(SYNTHESIS_THEMES)} Themes of Matt's Work (use these for synthesis):**
 {themes_text}
 
