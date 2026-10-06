@@ -1,0 +1,156 @@
+[after | 1. Payments experience | run 1 | turn 1] reason=None offer=False last='Additionally, at **American Express**, Matt transformed the '
+[after | 1. Payments experience | run 1 | turn 2] reason=None offer=False last="Across his roles, Matt's management scope grew significantly"
+[after | 1. Payments experience | run 1 | turn 3] reason=None offer=False last='Matt took accountability for the situation and led the team '
+[after | 1. Payments experience | run 2 | turn 1] reason=None offer=False last='The result was the successful launch of the ACCESS platform '
+[after | 1. Payments experience | run 2 | turn 2] reason=None offer=False last='In his work with **JP Morgan Chase**, Matt led a team of ove'
+[after | 1. Payments experience | run 2 | turn 3] reason=None offer=False last='Despite the systemic failure, which unfortunately resulted i'
+[after | 1. Payments experience | run 3 | turn 1] reason=None offer=False last='The ACCESS platform launched in April 2011 and consolidated '
+[after | 1. Payments experience | run 3 | turn 2] reason=None offer=False last='In his work on the JP Morgan ACCESS payment engine, Matt led'
+[after | 1. Payments experience | run 3 | turn 3] reason=None offer=False last='Matt took accountability for the incident and led the team t'
+[after | 1. Payments experience | run 4 | turn 1] reason=None offer=False last='In another engagement with **RBC**, Matt addressed challenge'
+[after | 1. Payments experience | run 4 | turn 2] reason=None offer=False last='At **JP Morgan Chase**, Matt led a team of over **40** profe'
+[after | 1. Payments experience | run 4 | turn 3] reason=None offer=False last='Matt took full accountability for the incident and led his t'
+[after | 1. Payments experience | run 5 | turn 1] reason=None offer=False last='In another engagement with **RBC**, Matt addressed challenge'
+[after | 1. Payments experience | run 5 | turn 2] reason=None offer=False last='Matt led a **40+** person team at **JP Morgan** for the ACCE'
+[after | 1. Payments experience | run 5 | turn 3] reason=None offer=False last='Matt took full accountability for the incident and led the t'
+[after | 2. Education | run 1 | turn 1] reason=None offer=False last='Matt does not have a degree specifically in Computer Science'
+[QUERY_REJECTED] reason=low_pinecone, router_family=synthesis, router_score=0.230, pinecone_score=0.154, query=Why shouldn’t that worry me?...
+[after | 2. Education | run 1 | turn 2] reason=low_confidence offer=False last=''
+[after | 2. Education | run 2 | turn 1] reason=None offer=False last='Matt does not have a degree specifically in Computer Science'
+[QUERY_REJECTED] reason=low_pinecone, router_family=synthesis, router_score=0.230, pinecone_score=0.154, query=Why shouldn’t that worry me?...
+[after | 2. Education | run 2 | turn 2] reason=low_confidence offer=False last=''
+[after | 2. Education | run 3 | turn 1] reason=None offer=False last="Matt holds a Master's degree in Information Technology from "
+[QUERY_REJECTED] reason=low_pinecone, router_family=synthesis, router_score=0.230, pinecone_score=0.154, query=Why shouldn’t that worry me?...
+[after | 2. Education | run 3 | turn 2] reason=low_confidence offer=False last=''
+[after | 2. Education | run 4 | turn 1] reason=None offer=False last='Matt does not have a degree specifically in Computer Science'
+[QUERY_REJECTED] reason=low_pinecone, router_family=synthesis, router_score=0.230, pinecone_score=0.154, query=Why shouldn’t that worry me?...
+[after | 2. Education | run 4 | turn 2] reason=low_confidence offer=False last=''
+[after | 2. Education | run 5 | turn 1] reason=None offer=False last="Matt holds a Master's degree in Information Technology from "
+[QUERY_REJECTED] reason=low_pinecone, router_family=synthesis, router_score=0.230, pinecone_score=0.154, query=Why shouldn’t that worry me?...
+[after | 2. Education | run 5 | turn 2] reason=low_confidence offer=False last=''
+[after | 3. Leadership | run 1 | turn 1] reason=None offer=False last="Matt's leadership philosophy has evolved to include sustaina"
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.463, pinecone_score=0.250, query=Give me an example where that didn’t work....
+[after | 3. Leadership | run 1 | turn 2] reason=low_confidence offer=False last=''
+[after | 3. Leadership | run 2 | turn 1] reason=None offer=False last="Matt's leadership philosophy evolved to include sustainable "
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.463, pinecone_score=0.250, query=Give me an example where that didn’t work....
+[after | 3. Leadership | run 2 | turn 2] reason=low_confidence offer=False last=''
+[after | 3. Leadership | run 3 | turn 1] reason=None offer=False last="Overall, Matt's leadership style is rooted in empathy, clari"
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.463, pinecone_score=0.250, query=Give me an example where that didn’t work....
+[after | 3. Leadership | run 3 | turn 2] reason=low_confidence offer=False last=''
+[after | 3. Leadership | run 4 | turn 1] reason=None offer=False last="Overall, Matt's leadership philosophy is about creating envi"
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.463, pinecone_score=0.250, query=Give me an example where that didn’t work....
+[after | 3. Leadership | run 4 | turn 2] reason=low_confidence offer=False last=''
+[after | 3. Leadership | run 5 | turn 1] reason=None offer=False last='Matt has also redefined his leadership to include boundaries'
+[after | 3. Leadership | run 5 | turn 2] reason=None offer=False last='As a result, the failure rate in the evaluation suite droppe'
+[after | 4. Certifications | run 1 | turn 1] reason=None offer=False last='Matt holds several certifications, though none are current. '
+[after | 4. Certifications | run 1 | turn 2] reason=None offer=False last='Matt does not hold a PMP certification. However, he has seve'
+[after | 4. Certifications | run 1 | turn 3] reason=None offer=False last='None of Matt\'s certifications are current. He was an "AWS Ce'
+[after | 4. Certifications | run 2 | turn 1] reason=None offer=False last='Matt holds several certifications, although none are current'
+[after | 4. Certifications | run 2 | turn 2] reason=None offer=False last='Matt does not hold a PMP certification. However, he has seve'
+[after | 4. Certifications | run 2 | turn 3] reason=None offer=False last='Matt holds several certifications, but none are currently ac'
+[after | 4. Certifications | run 3 | turn 1] reason=None offer=False last='Matt held several certifications, although none are current.'
+[after | 4. Certifications | run 3 | turn 2] reason=None offer=False last='Matt does not hold a PMP certification. However, he has held'
+[after | 4. Certifications | run 3 | turn 3] reason=None offer=False last='None of Matt\'s certifications are current. He was an "AWS Ce'
+[after | 4. Certifications | run 4 | turn 1] reason=None offer=False last='Matt holds several certifications, though none are currently'
+[after | 4. Certifications | run 4 | turn 2] reason=None offer=False last='Matt does not hold a PMP certification. His certifications i'
+[after | 4. Certifications | run 4 | turn 3] reason=None offer=False last="None of Matt's certifications are currently active. He was a"
+[after | 4. Certifications | run 5 | turn 1] reason=None offer=False last='Matt holds several certifications, though none are currently'
+[after | 4. Certifications | run 5 | turn 2] reason=None offer=False last='Matt does not hold a PMP certification. However, he has seve'
+[after | 4. Certifications | run 5 | turn 3] reason=None offer=False last="🐾 None of Matt's certifications are currently active. He hel"
+[QUERY_REJECTED] reason=low_pinecone, router_family=narrative, router_score=0.490, pinecone_score=0.214, query=Why is he looking?...
+[after | 5. Career motivation | run 1 | turn 1] reason=low_confidence offer=False last=''
+[after | 5. Career motivation | run 1 | turn 2] reason=None offer=False last="Matt's transition story highlights his readiness and current"
+[QUERY_REJECTED] reason=low_pinecone, router_family=narrative, router_score=0.490, pinecone_score=0.214, query=Why is he looking?...
+[after | 5. Career motivation | run 2 | turn 1] reason=low_confidence offer=False last=''
+[after | 5. Career motivation | run 2 | turn 2] reason=None offer=False last='His work philosophy emphasizes the importance of a supportiv'
+[QUERY_REJECTED] reason=low_pinecone, router_family=narrative, router_score=0.490, pinecone_score=0.214, query=Why is he looking?...
+[after | 5. Career motivation | run 3 | turn 1] reason=low_confidence offer=False last=''
+[after | 5. Career motivation | run 3 | turn 2] reason=None offer=False last='His decision to explore new opportunities is driven by a des'
+[QUERY_REJECTED] reason=low_pinecone, router_family=narrative, router_score=0.490, pinecone_score=0.214, query=Why is he looking?...
+[after | 5. Career motivation | run 4 | turn 1] reason=low_confidence offer=False last=''
+[after | 5. Career motivation | run 4 | turn 2] reason=None offer=False last='Matt is pursuing senior leadership roles in platform enginee'
+[QUERY_REJECTED] reason=low_pinecone, router_family=narrative, router_score=0.490, pinecone_score=0.214, query=Why is he looking?...
+[after | 5. Career motivation | run 5 | turn 1] reason=low_confidence offer=False last=''
+[after | 5. Career motivation | run 5 | turn 2] reason=None offer=False last='His readiness for new opportunities is demonstrated through '
+[after | 6. Healthcare experience | run 1 | turn 1] reason=None offer=False last='Matt has worked in the healthcare industry. He led an initia'
+[QUERY_REJECTED] reason=low_pinecone, router_family=background, router_score=0.387, pinecone_score=0.248, query=What did he actually do there?...
+[after | 6. Healthcare experience | run 1 | turn 2] reason=low_confidence offer=False last=''
+[after | 6. Healthcare experience | run 2 | turn 1] reason=None offer=False last='The innovation in this project was the integration of genera'
+[QUERY_REJECTED] reason=low_pinecone, router_family=background, router_score=0.387, pinecone_score=0.248, query=What did he actually do there?...
+[after | 6. Healthcare experience | run 2 | turn 2] reason=low_confidence offer=False last=''
+[after | 6. Healthcare experience | run 3 | turn 1] reason=None offer=False last='His methodology involved iterative product slicing and deliv'
+[QUERY_REJECTED] reason=low_pinecone, router_family=background, router_score=0.387, pinecone_score=0.248, query=What did he actually do there?...
+[after | 6. Healthcare experience | run 3 | turn 2] reason=low_confidence offer=False last=''
+[after | 6. Healthcare experience | run 4 | turn 1] reason=None offer=False last='The project delivered a working AI-powered chronic disease m'
+[QUERY_REJECTED] reason=low_pinecone, router_family=background, router_score=0.387, pinecone_score=0.248, query=What did he actually do there?...
+[after | 6. Healthcare experience | run 4 | turn 2] reason=low_confidence offer=False last=''
+[after | 6. Healthcare experience | run 5 | turn 1] reason=None offer=False last='The project was delivered as a working MVP in **16 weeks** t'
+[QUERY_REJECTED] reason=low_pinecone, router_family=background, router_score=0.387, pinecone_score=0.248, query=What did he actually do there?...
+[after | 6. Healthcare experience | run 5 | turn 2] reason=low_confidence offer=False last=''
+[after | 7. Location | run 1 | turn 1] reason=None offer=False last='Matt is based in Atlanta, GA. He is open to relocation and t'
+[after | 7. Location | run 1 | turn 2] reason=None offer=False last='Matt is based in Atlanta, GA, and he is open to relocation a'
+[after | 7. Location | run 2 | turn 1] reason=None offer=False last='Matt is based in Atlanta, GA. He is open to relocation and t'
+[after | 7. Location | run 2 | turn 2] reason=None offer=False last='Matt is indeed open to relocation. He is currently based in '
+[after | 7. Location | run 3 | turn 1] reason=None offer=False last='Matt is based in Atlanta, GA. He is open to relocation and t'
+[after | 7. Location | run 3 | turn 2] reason=None offer=False last='Matt is based in Atlanta, GA, and he is open to relocation a'
+[after | 7. Location | run 4 | turn 1] reason=None offer=False last='Matt is based in Atlanta, GA. He is open to relocation and t'
+[after | 7. Location | run 4 | turn 2] reason=None offer=False last='Matt is based in Atlanta, GA, and he is open to relocation a'
+[after | 7. Location | run 5 | turn 1] reason=None offer=False last='Matt is based in Atlanta, GA. He is open to relocation and t'
+[after | 7. Location | run 5 | turn 2] reason=None offer=False last='Matt is based in Atlanta, GA, and he is open to relocation a'
+[after | 8. Failure and growth | run 1 | turn 1] reason=None offer=False last='Matt took full accountability for the incident and led the t'
+[after | 8. Failure and growth | run 1 | turn 2] reason=None offer=False last="This approach reflected Matt's commitment to transparency an"
+[after | 8. Failure and growth | run 2 | turn 1] reason=None offer=False last='This experience taught Matt the importance of verifying assu'
+[after | 8. Failure and growth | run 2 | turn 2] reason=None offer=False last='Through these experiences, Matt reinforced the necessity of '
+[after | 8. Failure and growth | run 3 | turn 1] reason=None offer=False last='Unfortunately, the client demanded the removal of the tester'
+[after | 8. Failure and growth | run 3 | turn 2] reason=None offer=False last='These efforts resulted in the client no longer finding defec'
+[after | 8. Failure and growth | run 4 | turn 1] reason=None offer=False last='Matt took full accountability for the oversight and led the '
+[after | 8. Failure and growth | run 4 | turn 2] reason=None offer=False last="These experiences reinforced Matt's belief in the necessity "
+[after | 8. Failure and growth | run 5 | turn 1] reason=None offer=False last='Matt took full accountability for the failure and led the te'
+[after | 8. Failure and growth | run 5 | turn 2] reason=None offer=False last='These changes led to a significant drop in defect rates and '
+[after | 9. Topic switch | run 1 | turn 1] reason=None offer=False last='The result was the successful launch of the ACCESS platform '
+[after | 9. Topic switch | run 1 | turn 2] reason=None offer=False last="Matt's leadership extends to organizational growth, as demon"
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.606, pinecone_score=0.247, query=Give me an example....
+[after | 9. Topic switch | run 1 | turn 3] reason=low_confidence offer=False last=''
+[after | 9. Topic switch | run 1 | turn 4] reason=None offer=False last='On the **AT&T Southeast CRM Replacement** project, Matt led '
+[after | 9. Topic switch | run 2 | turn 1] reason=None offer=False last='At **American Express**, Matt focused on enhancing the devel'
+[after | 9. Topic switch | run 2 | turn 2] reason=None offer=False last="Matt's leadership also extends to building and managing larg"
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.606, pinecone_score=0.247, query=Give me an example....
+[after | 9. Topic switch | run 2 | turn 3] reason=low_confidence offer=False last=''
+[after | 9. Topic switch | run 2 | turn 4] reason=None offer=False last='In the **AT&T** Southeast CRM Replacement project, Matt led '
+[after | 9. Topic switch | run 3 | turn 1] reason=None offer=False last='The result was the successful launch of the ACCESS Next Gene'
+[after | 9. Topic switch | run 3 | turn 2] reason=None offer=False last='Matt has also reflected on his leadership journey, recognizi'
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.606, pinecone_score=0.247, query=Give me an example....
+[after | 9. Topic switch | run 3 | turn 3] reason=low_confidence offer=False last=''
+[after | 9. Topic switch | run 3 | turn 4] reason=None offer=False last='On the **AT&T** Southeast CRM Replacement project, Matt led '
+[after | 9. Topic switch | run 4 | turn 1] reason=None offer=False last='The result was the successful launch of the ACCESS platform '
+[after | 9. Topic switch | run 4 | turn 2] reason=None offer=False last="Matt also led a 150+ person organization at **Accenture**'s "
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.606, pinecone_score=0.247, query=Give me an example....
+[after | 9. Topic switch | run 4 | turn 3] reason=low_confidence offer=False last=''
+[after | 9. Topic switch | run 4 | turn 4] reason=None offer=False last='For the **AT&T** Southeast CRM Replacement project, Matt was'
+[after | 9. Topic switch | run 5 | turn 1] reason=None offer=False last='At **American Express**, Matt transformed the developer expe'
+[after | 9. Topic switch | run 5 | turn 2] reason=None offer=False last='Matt has also redefined his leadership to include sustainabl'
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.606, pinecone_score=0.247, query=Give me an example....
+[after | 9. Topic switch | run 5 | turn 3] reason=low_confidence offer=False last=''
+[after | 9. Topic switch | run 5 | turn 4] reason=None offer=False last='In the **AT&T** Southeast CRM Replacement project, Matt led '
+[after | B. Browser session (acce | run 1 | turn 1] reason=None offer=False last='The result was the successful launch of the Integrated Globa'
+[after | B. Browser session (acce | run 1 | turn 2] reason=None offer=False last='At **Accredited Home Lenders**, Matt was part of a team that'
+[after | B. Browser session (acce | run 1 | turn 3] reason=None offer=False last="These examples illustrate Matt's consistent methodology of e"
+[after | B. Browser session (acce | run 1 | turn 4] reason=None offer=False last='The impact of this methodology extended beyond **JP Morgan**'
+[after | B. Browser session (acce | run 2 | turn 1] reason=None offer=False last="The result of Matt's efforts was the Integrated Global Payme"
+[after | B. Browser session (acce | run 2 | turn 2] reason=None offer=False last="In another engagement, Matt shifted clients' focus from IT-c"
+[after | B. Browser session (acce | run 2 | turn 3] reason=None offer=False last='Throughout his career, Matt has focused on translating compl'
+[after | B. Browser session (acce | run 2 | turn 4] reason=None offer=False last='The results were significant: a production-ready application'
+[after | B. Browser session (acce | run 3 | turn 1] reason=None offer=False last='The result was the launch of the Integrated Global Payments '
+[after | B. Browser session (acce | run 3 | turn 2] reason=None offer=False last='At **Accredited Home Lenders**, Matt was part of a team that'
+[after | B. Browser session (acce | run 3 | turn 3] reason=None offer=False last="Matt's methodology was centered on translating complex techn"
+[after | B. Browser session (acce | run 3 | turn 4] reason=None offer=False last='Matt trained over **150** practitioners in this methodology,'
+[after | B. Browser session (acce | run 4 | turn 1] reason=None offer=False last='The result was the successful launch of the Integrated Globa'
+[after | B. Browser session (acce | run 4 | turn 2] reason=None offer=False last='In another instance, Matt worked with **Accredited Home Lend'
+[after | B. Browser session (acce | run 4 | turn 3] reason=None offer=False last="Matt's leadership journey involved translating complex techn"
+[after | B. Browser session (acce | run 4 | turn 4] reason=None offer=False last='The human impact was significant. One attorney, who had been'
+[after | B. Browser session (acce | run 5 | turn 1] reason=None offer=False last="The result of Matt's efforts was the successful delivery of "
+[after | B. Browser session (acce | run 5 | turn 2] reason=None offer=False last='In another engagement, Matt worked with **Fortune **500 Clie'
+[after | B. Browser session (acce | run 5 | turn 3] reason=None offer=False last="The result of Matt's efforts was a career defined by impact,"
+[after | B. Browser session (acce | run 5 | turn 4] reason=None offer=False last='The impact was significant. The methodology saved **\\$1.3M**'
+
+after: answers=106 ending with an offer=0 refused=24

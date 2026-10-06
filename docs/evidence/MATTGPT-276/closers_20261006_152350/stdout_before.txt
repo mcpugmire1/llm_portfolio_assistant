@@ -1,0 +1,157 @@
+[before | 1. Payments experience | run 1 | turn 1] reason=None offer=True last='Shall I find more examples like this?'
+[before | 1. Payments experience | run 1 | turn 2] reason=None offer=True last='What else can I track down for you?'
+[before | 1. Payments experience | run 1 | turn 3] reason=None offer=True last='Through this experience, Matt learned the importance of not '
+[before | 1. Payments experience | run 2 | turn 1] reason=None offer=True last="There's more to this story if you're curious."
+[before | 1. Payments experience | run 2 | turn 2] reason=None offer=True last='Want to see how Matt applied this elsewhere?'
+[before | 1. Payments experience | run 2 | turn 3] reason=None offer=True last='Happy to explore similar work in other industries.'
+[before | 1. Payments experience | run 3 | turn 1] reason=None offer=True last="Let me know if you'd like the deep dive on this one."
+[before | 1. Payments experience | run 3 | turn 2] reason=None offer=True last='What else can I track down for you?'
+[before | 1. Payments experience | run 3 | turn 3] reason=None offer=True last='Want me to dig deeper into the technical approach?'
+[before | 1. Payments experience | run 4 | turn 1] reason=None offer=True last="There's more to this story if you're curious."
+[before | 1. Payments experience | run 4 | turn 2] reason=None offer=True last='Want me to dig deeper into the technical approach?'
+[before | 1. Payments experience | run 4 | turn 3] reason=None offer=True last="I can show you related patterns if that's helpful."
+[before | 1. Payments experience | run 5 | turn 1] reason=None offer=True last="Let me know if you'd like the deep dive on this one."
+[before | 1. Payments experience | run 5 | turn 2] reason=None offer=True last='Want to see how Matt applied this elsewhere?'
+[before | 1. Payments experience | run 5 | turn 3] reason=None offer=True last="There's more to this story if you're curious."
+[before | 2. Education | run 1 | turn 1] reason=None offer=True last='Happy to explore similar work in other industries.'
+[QUERY_REJECTED] reason=low_pinecone, router_family=synthesis, router_score=0.230, pinecone_score=0.154, query=Why shouldn’t that worry me?...
+[before | 2. Education | run 1 | turn 2] reason=low_confidence offer=False last=''
+[before | 2. Education | run 2 | turn 1] reason=None offer=True last='Want me to dig deeper into the technical approach?'
+[QUERY_REJECTED] reason=low_pinecone, router_family=synthesis, router_score=0.230, pinecone_score=0.154, query=Why shouldn’t that worry me?...
+[before | 2. Education | run 2 | turn 2] reason=low_confidence offer=False last=''
+[before | 2. Education | run 3 | turn 1] reason=None offer=True last='Want to see how Matt applied this elsewhere?'
+[QUERY_REJECTED] reason=low_pinecone, router_family=synthesis, router_score=0.230, pinecone_score=0.154, query=Why shouldn’t that worry me?...
+[before | 2. Education | run 3 | turn 2] reason=low_confidence offer=False last=''
+[before | 2. Education | run 4 | turn 1] reason=None offer=True last='Want me to dig deeper into the technical approach?'
+[QUERY_REJECTED] reason=low_pinecone, router_family=synthesis, router_score=0.230, pinecone_score=0.154, query=Why shouldn’t that worry me?...
+[before | 2. Education | run 4 | turn 2] reason=low_confidence offer=False last=''
+[before | 2. Education | run 5 | turn 1] reason=None offer=True last="There's more to this story if you're curious."
+[QUERY_REJECTED] reason=low_pinecone, router_family=synthesis, router_score=0.230, pinecone_score=0.155, query=Why shouldn’t that worry me?...
+[before | 2. Education | run 5 | turn 2] reason=low_confidence offer=False last=''
+[before | 3. Leadership | run 1 | turn 1] reason=None offer=True last='What else can I track down for you?'
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.463, pinecone_score=0.250, query=Give me an example where that didn’t work....
+[before | 3. Leadership | run 1 | turn 2] reason=low_confidence offer=False last=''
+[before | 3. Leadership | run 2 | turn 1] reason=None offer=True last='Want to see how Matt applied this elsewhere?'
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.463, pinecone_score=0.250, query=Give me an example where that didn’t work....
+[before | 3. Leadership | run 2 | turn 2] reason=low_confidence offer=False last=''
+[before | 3. Leadership | run 3 | turn 1] reason=None offer=True last='What else can I track down for you?'
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.463, pinecone_score=0.250, query=Give me an example where that didn’t work....
+[before | 3. Leadership | run 3 | turn 2] reason=low_confidence offer=False last=''
+[before | 3. Leadership | run 4 | turn 1] reason=None offer=True last="I can show you related patterns if that's helpful."
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.463, pinecone_score=0.250, query=Give me an example where that didn’t work....
+[before | 3. Leadership | run 4 | turn 2] reason=low_confidence offer=False last=''
+[before | 3. Leadership | run 5 | turn 1] reason=None offer=True last='Want to see how Matt applied this elsewhere?'
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.463, pinecone_score=0.250, query=Give me an example where that didn’t work....
+[before | 3. Leadership | run 5 | turn 2] reason=low_confidence offer=False last=''
+[before | 4. Certifications | run 1 | turn 1] reason=None offer=True last='Shall I find more examples like this?'
+[before | 4. Certifications | run 1 | turn 2] reason=None offer=True last='Want me to dig deeper into the technical approach?'
+[before | 4. Certifications | run 1 | turn 3] reason=None offer=True last='Which pattern would you like to explore further?'
+[before | 4. Certifications | run 2 | turn 1] reason=None offer=True last="There's more to this story if you're curious."
+[before | 4. Certifications | run 2 | turn 2] reason=None offer=True last="Let me know if you'd like the deep dive on this one."
+[before | 4. Certifications | run 2 | turn 3] reason=None offer=True last='Which pattern would you like to explore further?'
+[before | 4. Certifications | run 3 | turn 1] reason=None offer=True last='Want me to dig deeper into the technical approach?'
+[before | 4. Certifications | run 3 | turn 2] reason=None offer=True last="I can show you related patterns if that's helpful."
+[before | 4. Certifications | run 3 | turn 3] reason=None offer=True last='Happy to unpack any of these with concrete stories.'
+[before | 4. Certifications | run 4 | turn 1] reason=None offer=True last="Let me know if you'd like the deep dive on this one."
+[before | 4. Certifications | run 4 | turn 2] reason=None offer=True last='Want me to dig deeper into the technical approach?'
+[before | 4. Certifications | run 4 | turn 3] reason=None offer=True last='Which pattern would you like to explore further?'
+[before | 4. Certifications | run 5 | turn 1] reason=None offer=True last='Want to see how Matt applied this elsewhere?'
+[before | 4. Certifications | run 5 | turn 2] reason=None offer=True last="I can show you related patterns if that's helpful."
+[before | 4. Certifications | run 5 | turn 3] reason=None offer=True last='Want me to dive deeper into any of these themes?'
+[QUERY_REJECTED] reason=low_pinecone, router_family=narrative, router_score=0.490, pinecone_score=0.214, query=Why is he looking?...
+[before | 5. Career motivation | run 1 | turn 1] reason=low_confidence offer=False last=''
+[before | 5. Career motivation | run 1 | turn 2] reason=None offer=True last='Want me to dive deeper into any of these themes?'
+[QUERY_REJECTED] reason=low_pinecone, router_family=narrative, router_score=0.490, pinecone_score=0.214, query=Why is he looking?...
+[before | 5. Career motivation | run 2 | turn 1] reason=low_confidence offer=False last=''
+[before | 5. Career motivation | run 2 | turn 2] reason=None offer=True last='Want me to dive deeper into any of these themes?'
+[QUERY_REJECTED] reason=low_pinecone, router_family=narrative, router_score=0.490, pinecone_score=0.214, query=Why is he looking?...
+[before | 5. Career motivation | run 3 | turn 1] reason=low_confidence offer=False last=''
+[before | 5. Career motivation | run 3 | turn 2] reason=None offer=True last='Happy to unpack any of these with concrete stories.'
+[QUERY_REJECTED] reason=low_pinecone, router_family=narrative, router_score=0.490, pinecone_score=0.214, query=Why is he looking?...
+[before | 5. Career motivation | run 4 | turn 1] reason=low_confidence offer=False last=''
+[before | 5. Career motivation | run 4 | turn 2] reason=None offer=True last='Want me to dive deeper into any of these themes?'
+[QUERY_REJECTED] reason=low_pinecone, router_family=narrative, router_score=0.490, pinecone_score=0.214, query=Why is he looking?...
+[before | 5. Career motivation | run 5 | turn 1] reason=low_confidence offer=False last=''
+[before | 5. Career motivation | run 5 | turn 2] reason=None offer=True last='Which pattern would you like to explore further?'
+[before | 6. Healthcare experience | run 1 | turn 1] reason=None offer=True last='The project was completed as a working MVP in just **16 week'
+[QUERY_REJECTED] reason=low_pinecone, router_family=background, router_score=0.387, pinecone_score=0.248, query=What did he actually do there?...
+[before | 6. Healthcare experience | run 1 | turn 2] reason=low_confidence offer=False last=''
+[before | 6. Healthcare experience | run 2 | turn 1] reason=None offer=True last='Shall I find more examples like this?'
+[QUERY_REJECTED] reason=low_pinecone, router_family=background, router_score=0.387, pinecone_score=0.248, query=What did he actually do there?...
+[before | 6. Healthcare experience | run 2 | turn 2] reason=low_confidence offer=False last=''
+[before | 6. Healthcare experience | run 3 | turn 1] reason=None offer=True last='Want to see how Matt applied this elsewhere?'
+[QUERY_REJECTED] reason=low_pinecone, router_family=background, router_score=0.387, pinecone_score=0.248, query=What did he actually do there?...
+[before | 6. Healthcare experience | run 3 | turn 2] reason=low_confidence offer=False last=''
+[before | 6. Healthcare experience | run 4 | turn 1] reason=None offer=True last='Shall I find more examples like this?'
+[QUERY_REJECTED] reason=low_pinecone, router_family=background, router_score=0.387, pinecone_score=0.248, query=What did he actually do there?...
+[before | 6. Healthcare experience | run 4 | turn 2] reason=low_confidence offer=False last=''
+[before | 6. Healthcare experience | run 5 | turn 1] reason=None offer=True last="Let me know if you'd like the deep dive on this one."
+[QUERY_REJECTED] reason=low_pinecone, router_family=background, router_score=0.387, pinecone_score=0.248, query=What did he actually do there?...
+[before | 6. Healthcare experience | run 5 | turn 2] reason=low_confidence offer=False last=''
+[before | 7. Location | run 1 | turn 1] reason=None offer=True last='Want me to dig deeper into the technical approach?'
+[before | 7. Location | run 1 | turn 2] reason=None offer=True last="Let me know if you'd like the deep dive on this one."
+[before | 7. Location | run 2 | turn 1] reason=None offer=True last='Shall I find more examples like this?'
+[before | 7. Location | run 2 | turn 2] reason=None offer=True last='Want to see how Matt applied this elsewhere?'
+[before | 7. Location | run 3 | turn 1] reason=None offer=True last='Want to see how Matt applied this elsewhere?'
+[before | 7. Location | run 3 | turn 2] reason=None offer=True last='Want me to dig deeper into the technical approach?'
+[before | 7. Location | run 4 | turn 1] reason=None offer=True last="I can show you related patterns if that's helpful."
+[before | 7. Location | run 4 | turn 2] reason=None offer=True last='Want to see how Matt applied this elsewhere?'
+[before | 7. Location | run 5 | turn 1] reason=None offer=True last="I can show you related patterns if that's helpful."
+[before | 7. Location | run 5 | turn 2] reason=None offer=True last="Let me know if you'd like the deep dive on this one."
+[before | 8. Failure and growth | run 1 | turn 1] reason=None offer=True last="There's more to this story if you're curious."
+[before | 8. Failure and growth | run 1 | turn 2] reason=None offer=True last='In a different context, during his engagement with **Norfolk'
+[before | 8. Failure and growth | run 2 | turn 1] reason=None offer=True last='Happy to explore similar work in other industries.'
+[before | 8. Failure and growth | run 2 | turn 2] reason=None offer=True last="I can show you related patterns if that's helpful."
+[before | 8. Failure and growth | run 3 | turn 1] reason=None offer=True last='What else can I track down for you?'
+[before | 8. Failure and growth | run 3 | turn 2] reason=None offer=True last="These experiences reinforced Matt's approach to embedding ri"
+[before | 8. Failure and growth | run 4 | turn 1] reason=None offer=True last='What else can I track down for you?'
+[before | 8. Failure and growth | run 4 | turn 2] reason=None offer=True last='Happy to explore similar work in other industries.'
+[before | 8. Failure and growth | run 5 | turn 1] reason=None offer=True last='This experience taught Matt the importance of verifying assu'
+[before | 8. Failure and growth | run 5 | turn 2] reason=None offer=True last='In a separate engagement at **Norfolk Southern**, Matt faced'
+[before | 9. Topic switch | run 1 | turn 1] reason=None offer=True last='Want to see how Matt applied this elsewhere?'
+[before | 9. Topic switch | run 1 | turn 2] reason=None offer=True last="There's more to this story if you're curious."
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.606, pinecone_score=0.247, query=Give me an example....
+[before | 9. Topic switch | run 1 | turn 3] reason=low_confidence offer=False last=''
+[before | 9. Topic switch | run 1 | turn 4] reason=None offer=True last="I can show you related patterns if that's helpful."
+[before | 9. Topic switch | run 2 | turn 1] reason=None offer=True last='Want me to dig deeper into the technical approach?'
+[before | 9. Topic switch | run 2 | turn 2] reason=None offer=True last='Want me to dig deeper into the technical approach?'
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.606, pinecone_score=0.247, query=Give me an example....
+[before | 9. Topic switch | run 2 | turn 3] reason=low_confidence offer=False last=''
+[before | 9. Topic switch | run 2 | turn 4] reason=None offer=True last='Want me to dig deeper into the technical approach?'
+[before | 9. Topic switch | run 3 | turn 1] reason=None offer=True last="Let me know if you'd like the deep dive on this one."
+[before | 9. Topic switch | run 3 | turn 2] reason=None offer=True last="I can show you related patterns if that's helpful."
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.606, pinecone_score=0.247, query=Give me an example....
+[before | 9. Topic switch | run 3 | turn 3] reason=low_confidence offer=False last=''
+[before | 9. Topic switch | run 3 | turn 4] reason=None offer=True last='Want to see how Matt applied this elsewhere?'
+[before | 9. Topic switch | run 4 | turn 1] reason=None offer=True last='Shall I find more examples like this?'
+[before | 9. Topic switch | run 4 | turn 2] reason=None offer=True last="Let me know if you'd like the deep dive on this one."
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.606, pinecone_score=0.247, query=Give me an example....
+[before | 9. Topic switch | run 4 | turn 3] reason=low_confidence offer=False last=''
+[before | 9. Topic switch | run 4 | turn 4] reason=None offer=True last="Matt's leadership was instrumental in overcoming significant"
+[before | 9. Topic switch | run 5 | turn 1] reason=None offer=True last='What else can I track down for you?'
+[before | 9. Topic switch | run 5 | turn 2] reason=None offer=True last="Let me know if you'd like the deep dive on this one."
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.606, pinecone_score=0.247, query=Give me an example....
+[before | 9. Topic switch | run 5 | turn 3] reason=low_confidence offer=False last=''
+[before | 9. Topic switch | run 5 | turn 4] reason=None offer=True last="There's more to this story if you're curious."
+[before | B. Browser session (acce | run 1 | turn 1] reason=None offer=True last="I can show you related patterns if that's helpful."
+[before | B. Browser session (acce | run 1 | turn 2] reason=None offer=True last="There's more to this story if you're curious."
+[before | B. Browser session (acce | run 1 | turn 3] reason=None offer=True last='Want to see how Matt applied this elsewhere?'
+[before | B. Browser session (acce | run 1 | turn 4] reason=None offer=True last='Happy to explore similar work in other industries.'
+[before | B. Browser session (acce | run 2 | turn 1] reason=None offer=True last='Happy to explore similar work in other industries.'
+[before | B. Browser session (acce | run 2 | turn 2] reason=None offer=True last='Happy to explore similar work in other industries.'
+[before | B. Browser session (acce | run 2 | turn 3] reason=None offer=True last='Shall I find more examples like this?'
+[before | B. Browser session (acce | run 2 | turn 4] reason=None offer=True last="Let me know if you'd like the deep dive on this one."
+[before | B. Browser session (acce | run 3 | turn 1] reason=None offer=True last='Want me to dig deeper into the technical approach?'
+[before | B. Browser session (acce | run 3 | turn 2] reason=None offer=True last="There's more to this story if you're curious."
+[before | B. Browser session (acce | run 3 | turn 3] reason=None offer=True last='Want me to dig deeper into the technical approach?'
+[before | B. Browser session (acce | run 3 | turn 4] reason=None offer=True last='What else can I track down for you?'
+[before | B. Browser session (acce | run 4 | turn 1] reason=None offer=True last="There's more to this story if you're curious."
+[before | B. Browser session (acce | run 4 | turn 2] reason=None offer=True last='Want to see how Matt applied this elsewhere?'
+[before | B. Browser session (acce | run 4 | turn 3] reason=None offer=True last='Shall I find more examples like this?'
+[before | B. Browser session (acce | run 4 | turn 4] reason=None offer=True last='Happy to explore similar work in other industries.'
+[before | B. Browser session (acce | run 5 | turn 1] reason=None offer=True last="There's more to this story if you're curious."
+[before | B. Browser session (acce | run 5 | turn 2] reason=None offer=True last='Want to see how Matt applied this elsewhere?'
+[before | B. Browser session (acce | run 5 | turn 3] reason=None offer=True last="Let me know if you'd like the deep dive on this one."
+[before | B. Browser session (acce | run 5 | turn 4] reason=None offer=True last="I can show you related patterns if that's helpful."
+
+before: answers=105 ending with an offer=105 refused=25
