@@ -261,8 +261,15 @@ def given_banner_showing(browser_page, reason):
 
 @when(parsers.parse('the user submits "{query}"'))
 def when_user_submits(browser_page, query):
+    # Banners persist in the transcript, so on a second rejection an earlier
+    # banner already matches .no-match-banner. Wait for one more banner than
+    # before the submit, not for any banner.
+    before = browser_page.locator(".no-match-banner").count()
     submit_query(browser_page, query)
-    wait_for_banner(browser_page)
+    browser_page.wait_for_function(
+        f"document.querySelectorAll('.no-match-banner').length > {before}",
+        timeout=LONG_WAIT,
+    )
 
 
 @when("the user submits a query that scores below the confidence threshold")
