@@ -122,18 +122,21 @@ _RULE_0A_REMOVED = [
     "Answer from these facts only.",
     "Do not repeat requirement or eligibility wording from an education note.",
     _RULE_0A_DIRECT_NO,
+    # MATTGPT-276: answers no longer end with a closer, so markers are not
+    # placed relative to one.
+    "on its own line before the closing line",
 ]
 # MATTGPT-250 item 4: 0a tells Agy to put a category marker on its own line
-# before the closer; post-processing strips it and the Sources fact row
-# renders one card per category.
+# at the end of the response; post-processing strips it and the Sources fact
+# row renders one card per category.
 _RULE_0A_CATEGORY_MARKERS = [
     "[[profile:certifications]]",
     "[[profile:education]]",
     "[[profile:languages]]",
     "[[profile:location_availability]]",
 ]
-# Placement per mock #3b: markers sit on their own line before the closer.
-_RULE_0A_MARKER_PLACEMENT = "on its own line before the closing line"
+# Placement: markers sit on their own line at the end of the response.
+_RULE_0A_MARKER_PLACEMENT = "on its own line at the end of the response"
 _RULE_0A_NEW_MARKERS = [
     _RULE_0A_OPENING,
     _RULE_0A_NO_SOURCE,
@@ -437,3 +440,35 @@ class TestAskAgyConsumesProfileFacts:
             f"rule 0a must appear before rule 0b; "
             f"rule 0a at {rule_0a_pos}, rule 0b at {rule_0b_pos}"
         )
+
+
+# ---------------------------------------------------------------------------
+# MATTGPT-276: no random closer. Each closer was an offer ("There's more to
+# this story if you're curious") picked by random.choice, inviting a
+# follow-up the pipeline could not resolve.
+# ---------------------------------------------------------------------------
+
+_CLOSER_USER_INSTRUCTION = "End your response with this exact text"
+_CLOSER_SYSTEM_INSTRUCTION = "End with the closing provided"
+
+
+class TestNoCloser:
+    def test_user_message_has_no_closer_instruction(self, captured_agy_user_message):
+        assert _CLOSER_USER_INSTRUCTION not in captured_agy_user_message
+
+    def test_system_message_has_no_closer_instruction(
+        self, captured_agy_system_message
+    ):
+        assert _CLOSER_SYSTEM_INSTRUCTION not in captured_agy_system_message
+
+    def test_synthesis_system_prompt_has_no_closer_instruction(self):
+        from ui.pages.ask_mattgpt.prompts import build_system_prompt
+
+        assert _CLOSER_SYSTEM_INSTRUCTION not in build_system_prompt(True, "DNA")
+
+    def test_build_user_message_takes_no_closing(self):
+        import inspect
+
+        from ui.pages.ask_mattgpt.prompts import build_user_message
+
+        assert "closing" not in inspect.signature(build_user_message).parameters
