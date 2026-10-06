@@ -11,28 +11,29 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 **NOW**
 1. **-269** -- MATT_DNA carries facts not backed by any story or the profile, and they reach the model in every system prompt. Blocks -275: the tool arm cited unbacked MATT_DNA figures in 6 answers (5f9d9bf).
-2. **-275** -- Ask Agy moves to tool-calling retrieval: answers from profile and conversation, calls search_stories when needed. Evaluator script 101/110 vs 68/110, follow-ups 56/65 vs 29/65 (scoring correction, 50bc068), 0 gate refusals vs 25. Supersedes -273 Issue 1, -253's gate scope, and -128's Sources contract. After -269. -268 travels with -275.
-3. **-250** -- In Progress. Ask Agy cannot answer education, certification, or language questions; profile facts never reached its prompt. Steps 5 and 6 still open and wait on -275.
-4. **-251** -- Ask Agy treats adjacent retrieved stories as evidence for the question asked. Visitor-visible correctness defect: unsupported claims (real estate sector from Cendant Mortgage; "including France" with no source) read as fact to recruiters.
-5. **-266** -- Role Match labels responsibility-derived rows as "Required Qualifications". Every visitor sees job duties presented as must-have credentials. Fix is in `_flatten_extraction()`, not the prompt. -264 is sequenced after it.
-6. **-255** -- The meta-commentary strip regex corrupts decimal amounts (`$2.5M` becomes an unclosed `**$2.`) and merges paragraphs. Visible correctness bug. Ticket's fix: remove the strip, run structural meta-commentary tests without it, then a live acceptance run on stories with decimal amounts, including story controls. Acceptance counts evaluative sentences before and after (252 coupling).
-7. **-228** -- Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
-8. **-146** -- Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
-9. **-160** -- In Progress. JD extraction split into three concurrent calls (required / preferred / implicit) landed at `5aee8a4`. After-measurement on the AT&T fixture (count spread 1-2 across five runs) not yet recorded. No longer gates -244.
-10. **-244** -- In Progress; prep Greens landed. Role Match assessor calibration: cited evidence doesn't address the specific claim; `confidence` field deletion. Not gated on -160: qualifier preservation was resolved by the `source_text` instruction fix (`5aee8a4`/`b28a080`), not the split. Next: verify the CI/CD-qualifier row after that fix; fixture count and the 22% over-called figure depend on it. Land before -249 (see -249 ordering constraint).
-11. **-168** -- Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
-12. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
-13. **-128** -- Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
-14. **-129 stories 3-5** -- Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+2. **-276** -- Agy's closers are random offers (`random.choice(closings)` in `_generate_agy_response()`) that invite follow-ups the pipeline can't resolve. Small visitor-facing removal; ships before -275. Open question on the random opener and focus angle.
+3. **-275** -- Ask Agy moves to tool-calling retrieval: answers from profile and conversation, calls search_stories when needed. Evaluator script 101/110 vs 68/110, follow-ups 56/65 vs 29/65 (scoring correction, 50bc068), 0 gate refusals vs 25. Supersedes -273 Issue 1, -253's gate scope, and -128's Sources contract. After -269. -268 travels with -275.
+4. **-250** -- In Progress. Ask Agy cannot answer education, certification, or language questions; profile facts never reached its prompt. Steps 5 and 6 still open and wait on -275.
+5. **-251** -- Ask Agy treats adjacent retrieved stories as evidence for the question asked. Visitor-visible correctness defect: unsupported claims (real estate sector from Cendant Mortgage; "including France" with no source) read as fact to recruiters.
+6. **-266** -- Role Match labels responsibility-derived rows as "Required Qualifications". Every visitor sees job duties presented as must-have credentials. Fix is in `_flatten_extraction()`, not the prompt. -264 is sequenced after it.
+7. **-255** -- The meta-commentary strip regex corrupts decimal amounts (`$2.5M` becomes an unclosed `**$2.`) and merges paragraphs. Visible correctness bug. Ticket's fix: remove the strip, run structural meta-commentary tests without it, then a live acceptance run on stories with decimal amounts, including story controls. Acceptance counts evaluative sentences before and after (252 coupling).
+8. **-228** -- Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
+9. **-146** -- Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
+10. **-160** -- In Progress. JD extraction split into three concurrent calls (required / preferred / implicit) landed at `5aee8a4`. After-measurement on the AT&T fixture (count spread 1-2 across five runs) not yet recorded. No longer gates -244.
+11. **-244** -- In Progress; prep Greens landed. Role Match assessor calibration: cited evidence doesn't address the specific claim; `confidence` field deletion. Not gated on -160: qualifier preservation was resolved by the `source_text` instruction fix (`5aee8a4`/`b28a080`), not the split. Next: verify the CI/CD-qualifier row after that fix; fixture count and the 22% over-called figure depend on it. Land before -249 (see -249 ordering constraint).
+12. **-168** -- Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
+13. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
+14. **-128** -- Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
+15. **-129 stories 3-5** -- Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT**
-15. **-252** -- Ask Agy writes evaluative sentences about Matt despite prompt instructions against it. Visitor-visible; isolating probe spec in the detail block.
-16. **-253** -- Confidence gate refuses ordinary evaluator questions, including follow-ups scored on bare text, before the LLM sees profile or history. No threshold change; gate scope superseded by -275.
-17. **-254** -- Five Role Match BDD scenarios describe the old 30-word gate behavior; passing or xfailed against stale assertions, so current behavior is untested. Also an em dash in a CHANGELOG entry.
-18. **-235** -- Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
-19. **-223** -- Add router_score and router_family columns to Sheet query row; unblocks -239's floor threshold decision.
-20. **-222** -- Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
-21. Rest of Role Match: -173, -014, -012, -081, -099, -017.
+16. **-252** -- Ask Agy writes evaluative sentences about Matt despite prompt instructions against it. Visitor-visible; isolating probe spec in the detail block.
+17. **-253** -- Confidence gate refuses ordinary evaluator questions, including follow-ups scored on bare text, before the LLM sees profile or history. No threshold change; gate scope superseded by -275.
+18. **-254** -- Five Role Match BDD scenarios describe the old 30-word gate behavior; passing or xfailed against stale assertions, so current behavior is untested. Also an em dash in a CHANGELOG entry.
+19. **-235** -- Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
+20. **-223** -- Add router_score and router_family columns to Sheet query row; unblocks -239's floor threshold decision.
+21. **-222** -- Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
+22. Rest of Role Match: -173, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
 -177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- better ranking surfaces more adjacent candidates into verdict definitions that still absorb them as partial, so ranking before calibrating makes over-calling worse before better; full constraint in -249 detail block)
@@ -127,6 +128,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-272](#mattgpt-272) | Corpus gap: zero thought leadership / PoV stories; Role Match returns blanket gap on the requirement | Open | Medium | Issue | October 4, 2026 |
 | [MATTGPT-274](#mattgpt-274) | `eval_rag_quality.py --surgical` calls rag_answer() with the query logger and CSV writers active | Open | Low | Bug | October 5, 2026 |
 | [MATTGPT-275](#mattgpt-275) | Ask Agy moves to tool-calling retrieval: the model answers from profile and conversation, and calls search_stories when needed | Open | High | Action | October 6, 2026 |
+| [MATTGPT-276](#mattgpt-276) | Agy's closers are random offers that invite follow-ups the pipeline can't resolve | Open | High | Bug | October 6, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -2175,9 +2177,34 @@ These only affect behavior if tags feed filters or counts. Fix is in the master 
 
 **Acceptance:** `tests/fixtures/evaluator_conversations.md`, with its approved expected answers (0f6a465), scored on correct referent, materially correct facts, honest uncertainty and contextual continuity.
 
-Also: accepting one of Agy's own closers ('There's more to this story', 'the deep dive on this one') resolves to the story the closer referred to. Add a closer-acceptance conversation to `tests/fixtures/evaluator_conversations.md` before 275's acceptance run (dev session).
+If the tool design offers a continuation, accepting it resolves to the story it referred to. Add a closer-acceptance conversation to `tests/fixtures/evaluator_conversations.md` before 275's acceptance run (dev session).
 
 **Supersedes:** MATTGPT-273 Issue 1; MATTGPT-253's gate scope; MATTGPT-128's Sources contract (cards become the stories the model actually retrieved).
+
+**Related:** MATTGPT-276 removes today's random closers, which ships before this ticket.
+
+---
+
+### MATTGPT-276
+**Agy's closers are random offers that invite follow-ups the pipeline can't resolve**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **File:** `ui/pages/ask_mattgpt/backend_service.py` (`_generate_agy_response()`), `ui/pages/ask_mattgpt/prompts.py` (`build_user_message()` closing argument)
+- **Logged:** October 6, 2026
+
+**Issue:** Verified Oct 6, 2026: `_generate_agy_response()` picks a closer with `random.choice(closings)` and passes it to `build_user_message()` as `closing`. The standard-mode list has 8 offers, including "Let me know if you'd like the deep dive on this one." and "There's more to this story if you're curious."; the synthesis-mode list has 4 more. Each offer invites a follow-up that retrieval, running on the bare follow-up text, can't resolve.
+
+**Evidence:** Browser, Oct 6, 2026, four-turn session (recorded in MATTGPT-275's evidence): accepting "There's more to this story" retrieved Norfolk Southern and Cendant, neither in the prior turn; accepting "the deep dive on this one" retrieved a third unrelated story.
+
+**Fix:** Remove the closers.
+
+**Acceptance:** Evaluator script (`tests/fixtures/evaluator_conversations.md`) before and after; no answer ends with an offer.
+
+**Open question:** Do the random opener and the random focus angle get the same treatment? `openings` is also a `random.choice()` list (8 standard, 5 synthesis), and "🐾 This is a strong one." can precede a "no". `chosen_focus` is picked from `focus_angles` with `random.choice()` in standard mode, and a randomly chosen angle can steer an answer away from what was asked.
+
+**Related:** MATTGPT-275 (tool-calling retrieval) is the structural fix for follow-ups. This removal ships first; 275's acceptance covers any continuation the tool design offers.
 
 ---
 
