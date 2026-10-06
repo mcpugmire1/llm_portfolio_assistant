@@ -39,3 +39,10 @@ def test_backed_figure_kept(matt_dna, figure):
     assert (
         figure.lower() in matt_dna.lower()
     ), f"{figure!r} is backed by a story and should stay in MATT_DNA"
+
+
+def test_no_payments_platform_attributed_by_alphabetical_order(matt_dna):
+    """The 12-country payments platform is JP Morgan's (Building JP Morgan's
+    Global Payments Gateway Across 12 Countries). MATT_DNA attributed it to
+    whichever banking client sorted first; the story carries the fact."""
+    assert "payments platform across 12 countries" not in matt_dna.lower()
