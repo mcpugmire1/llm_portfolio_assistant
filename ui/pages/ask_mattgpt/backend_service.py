@@ -271,7 +271,7 @@ def generate_dynamic_dna(stories: list[dict], clients: set[str]) -> str:
     # client engagement from employer.
     #
     # Employers whose only Client value equals the Employer itself
-    # (Cendian Chemical Logistics, American Intercontinental University) are
+    # (Cendian Chemical Logistics, American InterContinental University) are
     # omitted from this block -- they had no external clients, and the Career
     # Arc row already establishes them as employers.
     clients_by_employer: dict[str, set[str]] = {}
@@ -349,14 +349,14 @@ def generate_dynamic_dna(stories: list[dict], clients: set[str]) -> str:
 **Career Arc:**
 Software Engineer → Solution Architect → Director → Cloud Innovation Center Leader
 - Wellfound Technology: 2000-2001, 2002-2003
-- American Intercontinental University: 2003-2004 (adjunct, taught alongside full-time work)
+- American InterContinental University: 2003-2004 (adjunct, taught alongside full-time work)
 - Cendian Chemical Logistics: 2003-2005
 - Accenture: March 2005 - September 2023
 - Built CIC from 0 to {p_count}+ practitioners (Atlanta, Tampa)
 - Currently: Sabbatical, building MattGPT. In active search for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job.
 
 **Career Eras (for timeline context):**
-- 2000-2005: Pre-Accenture (Wellfound Technology, American Intercontinental University, Cendian Chemical Logistics)
+- 2000-2005: Pre-Accenture (Wellfound Technology, American InterContinental University, Cendian Chemical Logistics)
 - 2005-2009: Enterprise Integration ({telecom_str})
 - 2009-2018: Payments & Architecture ({banking_str})
 - 2018-2019: Cloud Innovation (Liquid Studio)
@@ -379,17 +379,15 @@ Software Engineer → Solution Architect → Director → Cloud Innovation Cente
 - NOT Matt's industries: Consumer products, retail, early-stage startups
 
 **Signature Achievements (cite for synthesis):**
-- Built CIC from 0 to {p_count}+ practitioners; grew practice to $300M+ annual sales by FY23
-- CIC proven metrics: 4X faster velocity, zero defects, 30-60% cycle time reduction, MVP in 3 weeks vs months
+- Built CIC from 0 to {p_count}+ practitioners
+- CIC proven metrics: 4X faster velocity, zero defects
 - {major_banking_client} payments platform across 12 countries
 - {transport_str} legacy-to-cloud transformation
-- Contributed to $189M cloud modernization win (major public health agency)
 - CIC teams of 10 consistently delivered impact of typical teams of 20
 - AWS cloud-native architecture across engagements
 
 **How Matt Wins Business (NOT a sales role):**
 - Drove $100M+ in repeat business through delivery excellence and customer relationship building
-- Contributed to $189M cloud modernization win for a major public health agency (2022)
 - Builds capabilities that win work — differentiation through execution, not pursuit
 
 **Clients by Employer (ONLY cite these):**
