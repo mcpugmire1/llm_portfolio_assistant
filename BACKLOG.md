@@ -1644,6 +1644,8 @@ Not fixed in PoC:
 
 Same class as the no-inference clause in MATTGPT-250: retrieved text that sits next to the topic is treated as support for a claim about Matt.
 
+**Observed (October 6, 2026, browser, not on disk):** An Ask Agy answer offered the HR portals story as evidence for "other industries", but that work was for Accredited, a mortgage lender, which is still financial services. A financial-services story was presented as evidence of work outside financial services.
+
 **Open question:** Would a general rule cover the over-claim? Candidate rule: claim an industry or domain only when a retrieved story's `Industry` or `Domain` field names it. Neither run captured the Cendant story's `Industry` value. Confirm the field value before writing a rule that depends on it.
 
 **Rejected (do not re-derive):** Pairwise rules such as "do not treat mortgage as real estate." Each one fixes a single pairing and misses the next.
@@ -1665,6 +1667,7 @@ Same class as the no-inference clause in MATTGPT-250: retrieved text that sits n
 - **September 24, 2026** (`docs/evidence/MATTGPT-252/20260924_135758/acceptance_0a5_run1.txt`): "Does Matt have a master's degree?" (family=out_of_scope, is_synthesis=False). Final text contains "...showcasing his commitment...".
 - **September 26, 2026** (browser runs only, not on disk, mode unverified): "These certifications reflect his engagement..." and "...is demonstrated through his consistent impact..." ("Why hire Matt?").
 - **September 26, 2026** (browser, not on disk): "Is Matt a sales person?" contains "Matt's career narrative highlights his role in technology and innovation leadership." Not stripped -- "highlights his" is not in `META_COMMENTARY_REGEX_PATTERNS`.
+- **October 6, 2026** (browser, not on disk): an Ask Agy answer contains "These examples illustrate Matt's consistent methodology...".
 
 **Verified September 26, 2026:**
 
@@ -2164,11 +2167,15 @@ These only affect behavior if tags feed filters or counts. Fix is in the master 
 
 **Evidence (Oct 6, 2026; `docs/evidence/MATTGPT-273/tool_vs_pipeline_20261006_140406/`, 5f9d9bf):** The nine conversations in `tests/fixtures/evaluator_conversations.md`, 5 runs per arm, hand-scored per turn. Tool design 101/110 vs today's pipeline 68/110; follow-ups 56/65 vs 29/65, after the scoring correction in `scoring_correction.md` (50bc068): conversation 9 turn 4 tool run 3 passes. `hand_scores.json` and the 5f9d9bf message carry the uncorrected 100/110 and 55/65. Gate refusals 0 vs 25. Median time to first token 0.56s vs 1.72s (pipeline median over its 85 non-refused turns). The tool arm cited MATT_DNA figures not backed by a story in 6 answers; the pipeline in none (5f9d9bf).
 
+**Browser, Oct 6:** Agy's own closers ('There's more to this story', 'the deep dive on this one') invite follow-ups that retrieve unrelated stories on every turn. The closers promise a continuation the pipeline can't deliver; 275's acceptance should include accepting a closer.
+
 **Requirement:** Everything in the model's context is grounded; MATT_DNA is held to the same story-or-profile backing as retrieval (MATTGPT-269).
 
 **Constraint:** Do not change `CONFIDENCE_HIGH`; the gate leaves the answer path.
 
 **Acceptance:** `tests/fixtures/evaluator_conversations.md`, with its approved expected answers (0f6a465), scored on correct referent, materially correct facts, honest uncertainty and contextual continuity.
+
+Also: accepting one of Agy's own closers ('There's more to this story', 'the deep dive on this one') resolves to the story the closer referred to. Add a closer-acceptance conversation to `tests/fixtures/evaluator_conversations.md` before 275's acceptance run (dev session).
 
 **Supersedes:** MATTGPT-273 Issue 1; MATTGPT-253's gate scope; MATTGPT-128's Sources contract (cards become the stories the model actually retrieved).
 
