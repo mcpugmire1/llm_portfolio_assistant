@@ -949,6 +949,7 @@ def _generate_agy_response(
     is_synthesis: bool = False,
     profile_facts: str = "",
     profile_categories_out: list[str] | None = None,
+    history: list[dict[str, str]] | None = None,
 ) -> str:
     """Generate an Agy-voiced response using OpenAI GPT-4o-mini.
 
@@ -1641,8 +1642,15 @@ def send_to_backend(
     return rag_answer(prompt, filters, stories)
 
 
+def _build_history_messages(transcript: list[dict]) -> list[dict[str, str]]:
+    raise NotImplementedError
+
+
 def rag_answer(
-    question: str, filters: dict[str, Any], stories: list[dict[str, Any]]
+    question: str,
+    filters: dict[str, Any],
+    stories: list[dict[str, Any]],
+    history: list[dict[str, str]] | None = None,
 ) -> dict[str, Any]:
     """Main RAG (Retrieval-Augmented Generation) orchestration function.
 

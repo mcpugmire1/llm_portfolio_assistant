@@ -562,8 +562,11 @@ class TestSendToBackend:
                 prompt="test", filters={}, ctx=None, stories=sample_stories
             )
 
-            # Should have called rag_answer with correct args (ctx dropped)
-            mock_rag_answer.assert_called_once_with("test", {}, sample_stories)
+            # Should have called rag_answer with correct args (ctx dropped).
+            # MATTGPT-273: history comes from ask_transcript; none here.
+            mock_rag_answer.assert_called_once_with(
+                "test", {}, sample_stories, history=[]
+            )
             assert result["answer_md"] == "test"
 
 
