@@ -11,29 +11,28 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 **NOW**
 1. **-269** -- MATT_DNA carries facts not backed by any story or the profile, and they reach the model in every system prompt. Blocks -275: the tool arm cited unbacked MATT_DNA figures in 6 answers (5f9d9bf).
-2. **-275** -- Ask Agy moves to tool-calling retrieval: answers from profile and conversation, calls search_stories when needed. Evaluator script 100/110 vs 68/110, follow-ups 55/65 vs 29/65, 0 gate refusals vs 25. Supersedes -273 Issue 1, -253's gate scope, and -128's Sources contract. After -269.
+2. **-275** -- Ask Agy moves to tool-calling retrieval: answers from profile and conversation, calls search_stories when needed. Evaluator script 101/110 vs 68/110, follow-ups 56/65 vs 29/65 (scoring correction, 50bc068), 0 gate refusals vs 25. Supersedes -273 Issue 1, -253's gate scope, and -128's Sources contract. After -269. -268 travels with -275.
 3. **-250** -- In Progress. Ask Agy cannot answer education, certification, or language questions; profile facts never reached its prompt. Steps 5 and 6 still open and wait on -275.
-4. **-273** -- Profile-fact answers carry unrequested story context, and follow-up retrieval runs on the bare question. History shipped in 8ff287b; next is the tool-calling probe. Structural fix behind the -268 residual and the "What about PMP" pivot (ADR 030). Land before -250 steps 5 and 6, which depend on whether fact questions still carry story context. -268 travels with it.
-5. **-251** -- Ask Agy treats adjacent retrieved stories as evidence for the question asked. Visitor-visible correctness defect: unsupported claims (real estate sector from Cendant Mortgage; "including France" with no source) read as fact to recruiters.
-6. **-266** -- Role Match labels responsibility-derived rows as "Required Qualifications". Every visitor sees job duties presented as must-have credentials. Fix is in `_flatten_extraction()`, not the prompt. -264 is sequenced after it.
-7. **-255** -- The meta-commentary strip regex corrupts decimal amounts (`$2.5M` becomes an unclosed `**$2.`) and merges paragraphs. Visible correctness bug. Ticket's fix: remove the strip, run structural meta-commentary tests without it, then a live acceptance run on stories with decimal amounts, including story controls. Acceptance counts evaluative sentences before and after (252 coupling).
-8. **-228** -- Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
-9. **-146** -- Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
-10. **-160** -- In Progress. JD extraction split into three concurrent calls (required / preferred / implicit) landed at `5aee8a4`. After-measurement on the AT&T fixture (count spread 1-2 across five runs) not yet recorded. No longer gates -244.
-11. **-244** -- In Progress; prep Greens landed. Role Match assessor calibration: cited evidence doesn't address the specific claim; `confidence` field deletion. Not gated on -160: qualifier preservation was resolved by the `source_text` instruction fix (`5aee8a4`/`b28a080`), not the split. Next: verify the CI/CD-qualifier row after that fix; fixture count and the 22% over-called figure depend on it. Land before -249 (see -249 ordering constraint).
-12. **-168** -- Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
-13. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
-14. **-128** -- Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
-15. **-129 stories 3-5** -- Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+4. **-251** -- Ask Agy treats adjacent retrieved stories as evidence for the question asked. Visitor-visible correctness defect: unsupported claims (real estate sector from Cendant Mortgage; "including France" with no source) read as fact to recruiters.
+5. **-266** -- Role Match labels responsibility-derived rows as "Required Qualifications". Every visitor sees job duties presented as must-have credentials. Fix is in `_flatten_extraction()`, not the prompt. -264 is sequenced after it.
+6. **-255** -- The meta-commentary strip regex corrupts decimal amounts (`$2.5M` becomes an unclosed `**$2.`) and merges paragraphs. Visible correctness bug. Ticket's fix: remove the strip, run structural meta-commentary tests without it, then a live acceptance run on stories with decimal amounts, including story controls. Acceptance counts evaluative sentences before and after (252 coupling).
+7. **-228** -- Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
+8. **-146** -- Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
+9. **-160** -- In Progress. JD extraction split into three concurrent calls (required / preferred / implicit) landed at `5aee8a4`. After-measurement on the AT&T fixture (count spread 1-2 across five runs) not yet recorded. No longer gates -244.
+10. **-244** -- In Progress; prep Greens landed. Role Match assessor calibration: cited evidence doesn't address the specific claim; `confidence` field deletion. Not gated on -160: qualifier preservation was resolved by the `source_text` instruction fix (`5aee8a4`/`b28a080`), not the split. Next: verify the CI/CD-qualifier row after that fix; fixture count and the 22% over-called figure depend on it. Land before -249 (see -249 ordering constraint).
+11. **-168** -- Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
+12. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
+13. **-128** -- Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
+14. **-129 stories 3-5** -- Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT**
-16. **-252** -- Ask Agy writes evaluative sentences about Matt despite prompt instructions against it. Visitor-visible; isolating probe spec in the detail block.
-17. **-253** -- Confidence gate refuses ordinary evaluator questions, including follow-ups scored on bare text, before the LLM sees profile or history. No threshold change; pending the -273 tool-calling probe.
-18. **-254** -- Five Role Match BDD scenarios describe the old 30-word gate behavior; passing or xfailed against stale assertions, so current behavior is untested. Also an em dash in a CHANGELOG entry.
-19. **-235** -- Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
-20. **-223** -- Add router_score and router_family columns to Sheet query row; unblocks -239's floor threshold decision.
-21. **-222** -- Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
-22. Rest of Role Match: -173, -014, -012, -081, -099, -017.
+15. **-252** -- Ask Agy writes evaluative sentences about Matt despite prompt instructions against it. Visitor-visible; isolating probe spec in the detail block.
+16. **-253** -- Confidence gate refuses ordinary evaluator questions, including follow-ups scored on bare text, before the LLM sees profile or history. No threshold change; gate scope superseded by -275.
+17. **-254** -- Five Role Match BDD scenarios describe the old 30-word gate behavior; passing or xfailed against stale assertions, so current behavior is untested. Also an em dash in a CHANGELOG entry.
+18. **-235** -- Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
+19. **-223** -- Add router_score and router_family columns to Sheet query row; unblocks -239's floor threshold decision.
+20. **-222** -- Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
+21. Rest of Role Match: -173, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
 -177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- better ranking surfaces more adjacent candidates into verdict definitions that still absorb them as partial, so ranking before calibrating makes over-calling worse before better; full constraint in -249 detail block)
@@ -126,7 +125,6 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-270](#mattgpt-270) | generate_jsonl_from_excel.py summary counters wrong (Created/Updated/Unchanged miscount) | Open | Low | Bug | October 4, 2026 |
 | [MATTGPT-271](#mattgpt-271) | Near-duplicate public_tags from re-tagging pass in master Excel | Open | Low | Corpus | October 4, 2026 |
 | [MATTGPT-272](#mattgpt-272) | Corpus gap: zero thought leadership / PoV stories; Role Match returns blanket gap on the requirement | Open | Medium | Issue | October 4, 2026 |
-| [MATTGPT-273](#mattgpt-273) | Profile-fact and follow-up answers narrate retrieved stories instead of answering what was asked; follow-up retrieval runs on the bare question | Open | High | Bug | October 4, 2026 |
 | [MATTGPT-274](#mattgpt-274) | `eval_rag_quality.py --surgical` calls rag_answer() with the query logger and CSV writers active | Open | Low | Bug | October 5, 2026 |
 | [MATTGPT-275](#mattgpt-275) | Ask Agy moves to tool-calling retrieval: the model answers from profile and conversation, and calls search_stories when needed | Open | High | Action | October 6, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
@@ -2137,35 +2135,6 @@ These only affect behavior if tags feed filters or counts. Fix is in the master 
 
 ---
 
-### MATTGPT-273
-**Profile-fact and follow-up answers narrate retrieved stories instead of answering what was asked; follow-up retrieval runs on the bare question**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Bug
-- **File:** `ui/pages/ask_mattgpt/backend_service.py` (`rag_answer()`, story retrieval path), `ui/pages/ask_mattgpt/conversation_helpers.py` (history handling)
-- **Logged:** October 4, 2026
-
-**Two observations from Oct 4, 2026:**
-
-**Issue 1 -- profile-fact answers include story context.** When Ask Agy answers a profile-fact question (CS degree, certifications, location), the answer appends story cards or story context that was not requested and does not relate to the fact. The retrieval pipeline runs and surfaces stories even when the answer comes entirely from the profile block.
-
-**Issue 2 -- no conversation history for follow-ups.** "What about PMP?" (browser run, Oct 4) had no context from the prior CS degree exchange. Each turn is answered cold; the model cannot resolve a follow-up pronoun or implicit reference against what was just said.
-
-**Issue 2 shipped (Oct 6, 2026, 8ff287b):** the last two exchanges go to the response LLM as prior messages; retrieval, gates and router still see only the current question. Carry-forward of the previous answer's stories and an answer-from-the-conversation instruction were measured and not adopted (8ff287b body; the instruction also has a Rejected: trailer; local, untracked: `probes/output/273/followup_arms_20261006_133622/`).
-
-**Issue 1 stays open.** Named case (Matt's browser check, Oct 6): "Did Matt work at JP Morgan doing payments work?" then "how big was the team" narrates the I&AM Uplift story, though "40+" was in the prior answer. Retrieval runs on the bare follow-up. The confidence gate refusing follow-ups is MATTGPT-253.
-
-**Next step:** The tool-calling probe against `tests/fixtures/evaluator_conversations.md` (ef1da88): today's pipeline with the history Green vs. the tool design, 5 runs per conversation, scored per turn on the three criteria.
-
-**Evidence:** `docs/evidence/MATTGPT-268/20261004_111121/`; "What about PMP?" browser run, October 4, 2026.
-
-**Relationship to other tickets:** Issue 1 overlaps with MATTGPT-128's "story grid always renders" rule in MATTGPT-250 item 4, which defers the cited-vs-retrieved question to -128. Issue 2 is independent.
-
-**Superseded by MATTGPT-275 (Oct 6, 2026):** Issue 1 moves to MATTGPT-275 (tool-calling retrieval).
-
----
-
 ### MATTGPT-274
 **`eval_rag_quality.py --surgical` calls rag_answer() with the query logger and CSV writers active**
 
@@ -2193,7 +2162,7 @@ These only affect behavior if tags feed filters or counts. Fix is in the master 
 - **Logged:** October 6, 2026
 - **Dependencies:** MATTGPT-269
 
-**Evidence (Oct 6, 2026; `docs/evidence/MATTGPT-273/tool_vs_pipeline_20261006_140406/`, 5f9d9bf):** The nine conversations in `tests/fixtures/evaluator_conversations.md`, 5 runs per arm, hand-scored per turn. Tool design 100/110 vs today's pipeline 68/110; follow-ups 55/65 vs 29/65. Gate refusals 0 vs 25. Median time to first token 0.56s vs 1.72s (pipeline median over its 85 non-refused turns). The tool arm cited MATT_DNA figures not backed by a story in 6 answers; the pipeline in none (5f9d9bf).
+**Evidence (Oct 6, 2026; `docs/evidence/MATTGPT-273/tool_vs_pipeline_20261006_140406/`, 5f9d9bf):** The nine conversations in `tests/fixtures/evaluator_conversations.md`, 5 runs per arm, hand-scored per turn. Tool design 101/110 vs today's pipeline 68/110; follow-ups 56/65 vs 29/65, after the scoring correction in `scoring_correction.md` (50bc068): conversation 9 turn 4 tool run 3 passes. `hand_scores.json` and the 5f9d9bf message carry the uncorrected 100/110 and 55/65. Gate refusals 0 vs 25. Median time to first token 0.56s vs 1.72s (pipeline median over its 85 non-refused turns). The tool arm cited MATT_DNA figures not backed by a story in 6 answers; the pipeline in none (5f9d9bf).
 
 **Requirement:** Everything in the model's context is grounded; MATT_DNA is held to the same story-or-profile backing as retrieval (MATTGPT-269).
 

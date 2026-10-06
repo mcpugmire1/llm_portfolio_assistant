@@ -14,6 +14,14 @@ Cited probe output copied byte-identical into docs/evidence/MATTGPT-<n>/ (42ddbe
 
 ---
 
+### Ask Agy
+
+**October 6, 2026 -- Follow-ups carry the last two exchanges (MATTGPT-273)** -- `f8a85b7` (Red), `8ff287b` (Green)
+
+Ask Agy sends the last two exchanges (`ASK_HISTORY_MAX_MESSAGES = 4`) to the response LLM as prior messages; retrieval, gates and router still see only the current question. Live acceptance 3/3 on team size, the PMP follow-up, AWS certifications, "what changed" and a topic switch. Prepending the previous question to retrieval, full corpus in context, carrying the previous answer's stories forward, and an answer-from-the-conversation instruction were measured and not adopted. Issue 1 (answers narrating retrieved stories; follow-up retrieval on the bare question) is superseded by MATTGPT-275, tool-calling retrieval. Evidence: docs/evidence/MATTGPT-273/ (`1dae650`, `5f9d9bf`, `50bc068`).
+
+---
+
 ## September 2026
 
 ### Query Logger
