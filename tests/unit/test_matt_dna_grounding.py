@@ -56,3 +56,54 @@ def test_startups_not_listed_as_outside_matts_industries(matt_dna):
 
 def test_rest_of_not_industries_line_kept(matt_dna):
     assert "NOT Matt's industries: Consumer products, retail" in matt_dna
+
+
+# Self-description: Matt's own words, rendered for Ask Agy under a label that
+# says they are not independently verified. Role Match's grounding does not
+# carry them (they would read as evidence for leadership requirements).
+SELF_DESCRIPTION_LABEL = (
+    "Matt's attested self-description (his own words, not independently verified)"
+)
+SELF_DESCRIPTION_PHRASES = [
+    "I build what's next",
+    "coach's heart",
+    "Teaches teams to fish",
+    "Authenticity, Curiosity",
+]
+
+
+def _split_self_description(matt_dna):
+    """Return (labeled block, rest of MATT_DNA). The block runs from the
+    label heading to the next blank line before a bold heading."""
+    start = matt_dna.find(f"**{SELF_DESCRIPTION_LABEL}:**")
+    if start == -1:
+        return "", matt_dna
+    end = matt_dna.find("\n\n**", start + 1)
+    end = len(matt_dna) if end == -1 else end
+    return matt_dna[start:end], matt_dna[:start] + matt_dna[end:]
+
+
+def test_profile_holds_self_description_with_label():
+    from services.matt_profile import load_profile_dict
+
+    entry = load_profile_dict().get("self_description") or {}
+    assert entry.get("label") == SELF_DESCRIPTION_LABEL
+    statements = " ".join(entry.get("statements") or [])
+    for phrase in SELF_DESCRIPTION_PHRASES:
+        assert phrase in statements, f"{phrase!r} missing from self_description"
+
+
+@pytest.mark.parametrize("phrase", SELF_DESCRIPTION_PHRASES)
+def test_self_description_only_under_its_label(matt_dna, phrase):
+    block, rest = _split_self_description(matt_dna)
+    assert phrase in block, f"{phrase!r} is not under the self-description label"
+    assert phrase not in rest, f"{phrase!r} appears in MATT_DNA outside the label"
+
+
+def test_role_match_grounding_has_no_self_description():
+    from services.jd_assessor import load_matt_profile
+
+    grounding = load_matt_profile()
+    assert SELF_DESCRIPTION_LABEL not in grounding
+    for phrase in SELF_DESCRIPTION_PHRASES:
+        assert phrase not in grounding
