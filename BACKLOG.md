@@ -2163,6 +2163,8 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 
 **Scope (Oct 6, 2026):** Restore Agy's closers (a deliberate call to action) as part of acceptance, once accepted offers resolve to the story they referred to. They were removed for now in MATTGPT-276 (7850ed2).
 
+**On close:** Re-check MATTGPT-251, -252, -253, -255, -168, -128, -268 (MATTGPT-273's residual: the CS leading no and the PMP follow-up pivot) and -278 against the tool path; close or re-scope each with evidence.
+
 ---
 
 ### MATTGPT-277
