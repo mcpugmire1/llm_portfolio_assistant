@@ -10,7 +10,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-10-05)
 
 **NOW**
-1. **-269** -- MATT_DNA carries facts not backed by any story or the profile, and they reach the model in every system prompt. Blocks -275: the tool arm cited unbacked MATT_DNA figures in 6 answers (5f9d9bf).
+1. **-269** -- In Progress. MATT_DNA carries facts not backed by any story or the profile, and they reach the model in every system prompt. Blocks -275: the tool arm cited unbacked MATT_DNA figures in 6 answers (5f9d9bf).
 2. **-276** -- Agy's closers are random offers (`random.choice(closings)` in `_generate_agy_response()`) that invite follow-ups the pipeline can't resolve. Small visitor-facing removal; ships before -275. Open question on the random opener and focus angle.
 3. **-275** -- Ask Agy moves to tool-calling retrieval: answers from profile and conversation, calls search_stories when needed. Evaluator script 101/110 vs 68/110, follow-ups 56/65 vs 29/65 (scoring correction, 50bc068), 0 gate refusals vs 25. Supersedes -273 Issue 1, -253's gate scope, and -128's Sources contract. After -269. -268 travels with -275.
 4. **-250** -- In Progress. Ask Agy cannot answer education, certification, or language questions; profile facts never reached its prompt. Steps 5 and 6 still open and wait on -275.
@@ -122,7 +122,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-266](#mattgpt-266) | Role Match labels responsibility-derived rows as Required Qualifications | Open | High | Bug | October 3, 2026 |
 | [MATTGPT-267](#mattgpt-267) | Have model return line numbers; Python fills source_text from JD -- saves ~1.7s on long JDs | Open | Medium | Refactor | October 3, 2026 |
 | [MATTGPT-268](#mattgpt-268) | "Does Matt have a CS degree?" leads with a no that Role Match doesn't give -- parity fix | Open | High | Bug | October 4, 2026 |
-| [MATTGPT-269](#mattgpt-269) | MATT_DNA carries ungrounded and stale facts in generate_dynamic_dna() | Open | High | Bug | October 4, 2026 |
+| [MATTGPT-269](#mattgpt-269) | MATT_DNA carries ungrounded and stale facts in generate_dynamic_dna() | In Progress | High | Bug | October 4, 2026 |
 | [MATTGPT-270](#mattgpt-270) | generate_jsonl_from_excel.py summary counters wrong (Created/Updated/Unchanged miscount) | Open | Low | Bug | October 4, 2026 |
 | [MATTGPT-271](#mattgpt-271) | Near-duplicate public_tags from re-tagging pass in master Excel | Open | Low | Corpus | October 4, 2026 |
 | [MATTGPT-272](#mattgpt-272) | Corpus gap: zero thought leadership / PoV stories; Role Match returns blanket gap on the requirement | Open | Medium | Issue | October 4, 2026 |
@@ -1775,6 +1775,8 @@ Scenarios by name:
 
 **Constraint:** CHANGELOG.md is append-only for new entries; in-place corrections to existing entries are allowed for factual errors and rule violations. The em dash is a rule violation. Fix it in place.
 
+**Added (Oct 6, 2026, b1adf0d):** post_era_project_counts fails 2 of 3 scenarios: stale assertions against the landing stats bar, commented out since b667d67 (Sept 3). Independent of MATTGPT-269 (landing pages import nothing from backend_service). Decision: drop the stats-bar assertions; keep the hero project-count checks (the stats bar was removed intentionally).
+
 ---
 
 ### MATTGPT-255
@@ -2052,7 +2054,7 @@ e. Source-vs-output check: for each fixture JD, the row count and wording under 
 ### MATTGPT-269
 **MATT_DNA carries ungrounded and stale facts in generate_dynamic_dna()**
 
-- **Status:** Open
+- **Status:** In Progress
 - **Priority:** High
 - **Type:** Bug
 - **File:** `ui/pages/ask_mattgpt/backend_service.py` (`generate_dynamic_dna()`), `data/matt_profile.json`
@@ -2076,6 +2078,8 @@ e. Source-vs-output check: for each fixture JD, the row count and wording under 
 **Acceptance:** Run the story controls and "Why hire Matt?" Verify no figure appears in any answer that is not in a story.
 
 **Blocks MATTGPT-275 (Oct 6, 2026):** 275 requires everything in the model's context to be grounded. In the tool-calling run, the tool arm cited MATT_DNA figures not backed by a story in 6 answers (5f9d9bf).
+
+**Update (Oct 6, 2026):** Landed: items 1-3 (5439c8f); 12-country payments line removed (d94367e); "early-stage startups" dropped from NOT-industries (bbb20d6); self-description moved to matt_profile.json, labeled, Ask Agy only (a3d1015); Theme Strengths tiered by story counts (187c5a5); career-eras block dropped (b1adf0d). Still open: item 4 (NOT Matt's Clients list unchanged); item 5 (How Matt Wins Business heading); moves to data (Career Arc employer dates and status, Leadership Philosophy, the industry tier labels and NOT-industries line are still hardcoded); the acceptance run (story controls and "Why hire Matt?") is not reported in any Green.
 
 ---
 
