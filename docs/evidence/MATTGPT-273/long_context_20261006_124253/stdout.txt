@@ -1,0 +1,168 @@
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | Does Matt have a CS degree? | run 1] prompt=7589 cached=1920 ttft=0.89 total=2.13 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | Does Matt have a CS degree? | run 2] prompt=7587 cached=7040 ttft=0.65 total=1.29 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | Does Matt have a computer science degree? | run 1] prompt=7192 cached=1920 ttft=0.75 total=2.19 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | Does Matt have a computer science degree? | run 2] prompt=7181 cached=6016 ttft=0.88 total=2.04 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | Does Matt have a PMP? | run 1] prompt=6497 cached=2944 ttft=0.77 total=1.65 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | Does Matt have a PMP? | run 2] prompt=6496 cached=6016 ttft=0.63 total=1.8 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | Is Matt certified? | run 1] prompt=6879 cached=1920 ttft=1.24 total=2.9 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | Is Matt certified? | run 2] prompt=6881 cached=6016 ttft=0.62 total=1.73 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | What certifications does Matt hold? | run 1] prompt=7425 cached=1920 ttft=0.76 total=2.57 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | What certifications does Matt hold? | run 2] prompt=7421 cached=6016 ttft=0.7 total=2.79 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | What languages does Matt speak? | run 1] prompt=7565 cached=1920 ttft=0.77 total=1.14 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | What languages does Matt speak? | run 2] prompt=7566 cached=7040 ttft=0.56 total=0.94 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | Does Matt speak French? | run 1] prompt=6412 cached=1920 ttft=0.7 total=1.13 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | Does Matt speak French? | run 2] prompt=6413 cached=6016 ttft=0.79 total=1.2 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | Does Matt have a master's degree? | run 1] prompt=7115 cached=1920 ttft=0.77 total=1.57 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | Does Matt have a master's degree? | run 2] prompt=7121 cached=6016 ttft=0.64 total=1.02 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | Does Matt have any patents? | run 1] prompt=7440 cached=1920 ttft=0.93 total=1.15 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | Does Matt have any patents? | run 2] prompt=7446 cached=7040 ttft=0.61 total=0.82 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | Tell me about Matt's payments work at JPMorgan | run 1] prompt=7589 cached=1920 ttft=0.83 total=4.03 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | Tell me about Matt's payments work at JPMorgan | run 2] prompt=7588 cached=7040 ttft=0.74 total=3.73 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | What's Matt's leadership philosophy? | run 1] prompt=7808 cached=1920 ttft=0.76 total=3.93 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | What's Matt's leadership philosophy? | run 2] prompt=7808 cached=7040 ttft=1.18 total=3.46 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | Why hire Matt? | run 1] prompt=6491 cached=1920 ttft=0.7 total=3.3 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | Why hire Matt? | run 2] prompt=6496 cached=6016 ttft=0.75 total=3.91 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | Tell me about a time Matt failed | run 1] prompt=6950 cached=1920 ttft=0.75 total=3.01 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | Tell me about a time Matt failed | run 2] prompt=6953 cached=6016 ttft=0.71 total=2.7 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | How did Matt build the AWS certification program? | run 1] prompt=7297 cached=1920 ttft=0.77 total=2.87 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[today | How did Matt build the AWS certification program? | run 2] prompt=7296 cached=6016 ttft=0.74 total=2.65 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | Does Matt have a CS degree? | run 1] prompt=84442 cached=0 ttft=3.86 total=5.45 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | Does Matt have a CS degree? | run 2] prompt=84439 cached=83840 ttft=1.18 total=2.22 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | Does Matt have a computer science degree? | run 1] prompt=84443 cached=83840 ttft=1.14 total=2.17 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | Does Matt have a computer science degree? | run 2] prompt=84440 cached=0 ttft=4.45 total=6.08 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | Does Matt have a PMP? | run 1] prompt=84439 cached=83840 ttft=1.22 total=2.61 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | Does Matt have a PMP? | run 2] prompt=84437 cached=83840 ttft=1.1 total=2.04 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | Is Matt certified? | run 1] prompt=84439 cached=83840 ttft=1.12 total=2.5 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | Is Matt certified? | run 2] prompt=84437 cached=83840 ttft=1.19 total=2.3 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | What certifications does Matt hold? | run 1] prompt=84445 cached=83840 ttft=1.12 total=2.45 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | What certifications does Matt hold? | run 2] prompt=84438 cached=83840 ttft=1.51 total=2.66 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | What languages does Matt speak? | run 1] prompt=84435 cached=83840 ttft=1.43 total=2.03 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | What languages does Matt speak? | run 2] prompt=84443 cached=83840 ttft=1.13 total=2.06 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | Does Matt speak French? | run 1] prompt=84441 cached=83840 ttft=1.14 total=3.17 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | Does Matt speak French? | run 2] prompt=84438 cached=0 ttft=4.09 total=5.11 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | Does Matt have a master's degree? | run 1] prompt=84438 cached=83840 ttft=0.94 total=1.47 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | Does Matt have a master's degree? | run 2] prompt=84443 cached=83840 ttft=1.11 total=2.22 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | Does Matt have any patents? | run 1] prompt=84439 cached=83840 ttft=1.11 total=1.16 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | Does Matt have any patents? | run 2] prompt=84436 cached=83840 ttft=1.1 total=1.32 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | Tell me about Matt's payments work at JPMorgan | run 1] prompt=84448 cached=83840 ttft=1.32 total=4.28 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | Tell me about Matt's payments work at JPMorgan | run 2] prompt=84447 cached=83840 ttft=1.06 total=3.33 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | What's Matt's leadership philosophy? | run 1] prompt=84442 cached=83840 ttft=1.02 total=2.86 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | What's Matt's leadership philosophy? | run 2] prompt=84440 cached=83840 ttft=4.11 total=5.76 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | Why hire Matt? | run 1] prompt=84436 cached=83840 ttft=3.63 total=6.28 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | Why hire Matt? | run 2] prompt=84441 cached=83840 ttft=2.55 total=4.76 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | Tell me about a time Matt failed | run 1] prompt=84441 cached=83840 ttft=3.14 total=4.29 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | Tell me about a time Matt failed | run 2] prompt=84442 cached=83840 ttft=4.63 total=6.61 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | How did Matt build the AWS certification program? | run 1] prompt=84444 cached=83840 ttft=3.19 total=4.78 reason=None
+Semantic router error (FAILING OPEN): 'types.SimpleNamespace' object has no attribute 'embeddings'
+  Query will proceed to entity detection and RAG
+[long | How did Matt build the AWS certification program? | run 2] prompt=84441 cached=83840 ttft=4.03 total=5.06 reason=None

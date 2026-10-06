@@ -1,0 +1,9 @@
+[follow_up run 1] reason=None family=domain_payments conf=high top=0.452130347 llm=True
+[follow_up run 2] reason=None family=domain_payments conf=high top=0.452130347 llm=True
+[follow_up run 3] reason=None family=domain_payments conf=high top=0.452130347 llm=True
+[control_direct_pmp run 1] reason=None family=background conf=high top=0.398776501 llm=True
+[control_direct_pmp run 2] reason=None family=background conf=high top=0.398992598 llm=True
+[control_direct_pmp run 3] reason=None family=background conf=high top=0.398776501 llm=True
+[control_first_turn run 1] reason=None family=technical conf=high top=0.288760096 llm=True
+[control_first_turn run 2] reason=None family=technical conf=high top=0.288801581 llm=True
+[control_first_turn run 3] reason=None family=technical conf=high top=0.288760096 llm=True

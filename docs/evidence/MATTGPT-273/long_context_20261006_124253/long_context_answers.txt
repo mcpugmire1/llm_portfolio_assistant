@@ -1,0 +1,472 @@
+
+################ Does Matt have a CS degree? (acc)
+
+=== today run 1 | prompt=7589 cached=1920 ttft=0.89s total=2.13s categories=['education'] reason=None
+🐾 Perfect — here's what I found.
+
+Matt holds a Master's degree in Information Technology from **American InterContinental University**. This degree is recognized as a discipline related to Computer Science, and a Master's degree exceeds a Bachelor's level of education. Additionally, he has completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia and holds a BA in French Language and Literature from Queens University of Charlotte, which included a year abroad at Université Paul Valéry, Montpellier, France.
+
+Want me to dig deeper into the technical approach?
+
+=== today run 2 | prompt=7587 cached=7040 ttft=0.65s total=1.29s categories=['education'] reason=None
+🐾 I know just the story.
+
+Matt does not have a Computer Science degree. He holds a Master's degree in Information Technology from **American InterContinental University**. Information Technology is a recognized Computer Science-related discipline, and a Master's degree exceeds a Bachelor's. Additionally, he completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia, where he also served as a teaching assistant for French courses. He earned a BA in French Language and Literature from Queens University of Charlotte, which included a year abroad at Université Paul Valéry in Montpellier, France.
+
+Want me to dig deeper into the technical approach?
+
+=== long run 1 | prompt=84442 cached=0 ttft=3.86s total=5.45s categories=['education'] reason=None
+🐾 Perfect — here's what I found.
+
+Matt does not have a degree specifically in Computer Science. He holds a Master's degree in Information Technology from **American InterContinental University**, which is recognized as a discipline related to Computer Science. Additionally, he has completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia and holds a BA in French Language and Literature from Queens University of Charlotte.
+
+Happy to explore similar work in other industries.
+
+=== long run 2 | prompt=84439 cached=83840 ttft=1.18s total=2.22s categories=['education'] reason=None
+Got it! 🐾
+
+Matt does not have a Computer Science degree. He holds a Master's degree in Information Technology from **American InterContinental University**, which is a recognized Computer Science-related discipline. Additionally, he has a BA in French Language and Literature from Queens University of Charlotte. His education also includes graduate coursework in Romance Languages (Linguistics) at the University of Georgia, where he was a teaching assistant for French courses. 
+
+Want me to dig deeper into the technical approach?
+
+################ Does Matt have a computer science degree? (acc)
+
+=== today run 1 | prompt=7192 cached=1920 ttft=0.75s total=2.19s categories=['education'] reason=None
+🐾 I know just the story.
+
+Matt does not have a degree specifically in computer science. He holds a Master's degree in Information Technology from **American InterContinental University**. This discipline is recognized as related to computer science. Additionally, Matt has completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia, where he served as a teaching assistant for French courses. He also holds a BA in French Language and Literature from Queens University of Charlotte, which included a year abroad at Université Paul Valéry, Montpellier, France.
+
+Let me know if you'd like the deep dive on this one.
+
+=== today run 2 | prompt=7181 cached=6016 ttft=0.88s total=2.04s categories=['education'] reason=None
+🐾 On it!
+
+Matt holds a Master's degree in Information Technology from **American InterContinental University**. Information Technology is a recognized Computer Science-related discipline, and a Master's degree exceeds a Bachelor's. Additionally, he has completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia, where he also served as a teaching assistant for French courses. His undergraduate degree is a BA in French Language and Literature from Queens University of Charlotte, which included a year abroad at Université Paul Valéry, Montpellier, France.
+
+I can show you related patterns if that's helpful.
+
+=== long run 1 | prompt=84443 cached=83840 ttft=1.14s total=2.17s categories=['education'] reason=None
+🐾 This is a strong one.
+
+Matt does not have a computer science degree. He holds a Master's degree in Information Technology from **American InterContinental University**. Information Technology is recognized as a discipline related to Computer Science, and a Master's degree exceeds a Bachelor's degree. Additionally, Matt has completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia, where he was a teaching assistant for French courses. He also holds a Bachelor of Arts in French Language and Literature from Queens University of Charlotte, which included a year abroad at Université Paul Valéry in Montpellier, France.
+
+Happy to explore similar work in other industries.
+
+=== long run 2 | prompt=84440 cached=0 ttft=4.45s total=6.08s categories=['education'] reason=None
+🐾 Found it!
+
+Matt does not have a degree specifically in computer science. He holds a Master's degree in Information Technology from **American InterContinental University**. Information Technology is recognized as a discipline related to Computer Science, and a Master's degree exceeds a Bachelor's degree. Additionally, Matt has a BA in French Language and Literature from Queens University of Charlotte, which included a year abroad at Université Paul Valéry, Montpellier, France. 
+
+Want me to dig deeper into the technical approach?
+
+################ Does Matt have a PMP? (acc)
+
+=== today run 1 | prompt=6497 cached=2944 ttft=0.77s total=1.65s categories=['certifications'] reason=None
+🐾 This is a strong one.
+
+No, Matt does not have a PMP certification. His certifications include "AWS Certified Solutions Architect - Associate" (issued 2020, expired 2023), "AWS Certified Cloud Practitioner" (issued 2019, expired 2023), "SAFe 4 Certified Agilist" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current. 
+
+Shall I find more examples like this?
+
+=== today run 2 | prompt=6496 cached=6016 ttft=0.63s total=1.8s categories=['certifications'] reason=None
+🐾 This is a strong one.
+
+No, Matt does not have a PMP certification. His certifications include "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)," "AWS Certified Cloud Practitioner (issued 2019, expired 2023)," "SAFe 4 Certified Agilist (issued 2017, expired)," and "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)." None of these certifications are current.
+
+Want me to dig deeper into the technical approach?
+
+=== long run 1 | prompt=84439 cached=83840 ttft=1.22s total=2.61s categories=['certifications'] reason=None
+🐾 Found it!
+
+No, Matt does not have a PMP certification. However, he holds several other certifications: "AWS Certified Solutions Architect - Associate" (issued 2020, expired 2023), "AWS Certified Cloud Practitioner" (issued 2019, expired 2023), "SAFe 4 Certified Agilist" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current.
+
+Want me to dig deeper into the technical approach?
+
+=== long run 2 | prompt=84437 cached=83840 ttft=1.1s total=2.04s categories=['certifications'] reason=None
+🐾 I know just the story.
+
+Matt does not have a PMP certification. However, he holds several other certifications, including "AWS Certified Solutions Architect - Associate" (issued 2020, expired 2023), "AWS Certified Cloud Practitioner" (issued 2019, expired 2023), "SAFe 4 Certified Agilist" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current.
+
+There's more to this story if you're curious.
+
+################ Is Matt certified? (acc)
+
+=== today run 1 | prompt=6879 cached=1920 ttft=1.24s total=2.9s categories=['certifications'] reason=None
+Got it! 🐾
+
+Matt holds several certifications, although none are currently active. He was an **AWS Certified Solutions Architect - Associate** (issued 2020, expired 2023) and an **AWS Certified Cloud Practitioner** (issued 2019, expired 2023). Additionally, he was a **SAFe 4 Certified Agilist** (issued 2017, expired). Earlier in his career, he passed the Oracle 8i DBA exams on the OCP track, including SQL and PL/SQL, Architecture and Administration, and Backup and Recovery in 2002.
+
+Happy to explore similar work in other industries.
+
+=== today run 2 | prompt=6881 cached=6016 ttft=0.62s total=1.73s categories=['certifications'] reason=None
+Got it! 🐾
+
+Matt has held several certifications throughout his career. He was an **AWS Certified Solutions Architect - Associate** (issued 2020, expired 2023) and an **AWS Certified Cloud Practitioner** (issued 2019, expired 2023). Additionally, he was a **SAFe 4 Certified Agilist** (issued 2017, expired) and passed the Oracle 8i DBA exams for SQL and PL/SQL, Architecture and Administration, Backup and Recovery in 2002. None of these certifications are currently active.
+
+What else can I track down for you?
+
+=== long run 1 | prompt=84439 cached=83840 ttft=1.12s total=2.5s categories=['certifications'] reason=None
+🐾 Tracking this down...
+
+Matt holds several certifications, though none are current. He was an "AWS Certified Solutions Architect - Associate" issued in 2020 and expired in 2023, and an "AWS Certified Cloud Practitioner" issued in 2019 and expired in 2023. Additionally, he was a "SAFe 4 Certified Agilist" issued in 2017, which has also expired. Earlier in his career, Matt passed Oracle 8i DBA exams on the OCP track, including SQL and PL/SQL, Architecture and Administration, and Backup and Recovery in 2002.
+
+I can show you related patterns if that's helpful.
+
+=== long run 2 | prompt=84437 cached=83840 ttft=1.19s total=2.3s categories=['certifications'] reason=None
+🐾 Perfect — here's what I found.
+
+Matt holds several certifications, although none are currently active. He was an "AWS Certified Solutions Architect - Associate" (issued 2020, expired 2023) and an "AWS Certified Cloud Practitioner" (issued 2019, expired 2023). Additionally, Matt was a "SAFe 4 Certified Agilist" (issued 2017, expired) and passed Oracle 8i DBA exams on the OCP track, covering SQL and PL/SQL, Architecture and Administration, and Backup and Recovery in 2002.
+
+I can show you related patterns if that's helpful.
+
+################ What certifications does Matt hold? (acc)
+
+=== today run 1 | prompt=7425 cached=1920 ttft=0.76s total=2.57s categories=['certifications'] reason=None
+Got it! 🐾
+
+Matt holds several certifications, though none are current. These include the "AWS Certified Solutions Architect - Associate" issued in 2020 and expired in 2023, the "AWS Certified Cloud Practitioner" issued in 2019 and expired in 2023, and the "SAFe 4 Certified Agilist" which was issued in 2017 and has expired. Additionally, he passed the Oracle 8i DBA exams on the OCP track, covering SQL and PL/SQL, Architecture and Administration, and Backup and Recovery in 2002.
+
+Let me know if you'd like the deep dive on this one.
+
+=== today run 2 | prompt=7421 cached=6016 ttft=0.7s total=2.79s categories=['certifications'] reason=None
+🐾 Perfect — here's what I found.
+
+Matt holds several certifications, though none are current. He was issued the "AWS Certified Solutions Architect - Associate" certification in 2020, which has since expired in 2023. Additionally, he obtained the "AWS Certified Cloud Practitioner" certification in 2019, which also expired in 2023. Earlier in his career, he passed the Oracle 8i DBA exams on the OCP track, specifically in SQL and PL/SQL, Architecture and Administration, and Backup and Recovery in 2002. He also held a "SAFe 4 Certified Agilist" certification, which has expired as well.
+
+I can show you related patterns if that's helpful.
+
+=== long run 1 | prompt=84445 cached=83840 ttft=1.12s total=2.45s categories=['certifications'] reason=None
+🐾 I know just the story.
+
+Matt holds several certifications, though none are current. He is an "AWS Certified Solutions Architect - Associate" (issued 2020, expired 2023) and an "AWS Certified Cloud Practitioner" (issued 2019, expired 2023). Additionally, he is a "SAFe 4 Certified Agilist" (issued 2017, expired). Earlier in his career, Matt passed the Oracle 8i DBA exams on the OCP track, which included SQL and PL/SQL, Architecture and Administration, and Backup and Recovery (2002).
+
+Let me know if you'd like the deep dive on this one.
+
+=== long run 2 | prompt=84438 cached=83840 ttft=1.51s total=2.66s categories=['certifications'] reason=None
+🐾 On it!
+
+Matt holds several certifications, although none are current. He was awarded the "AWS Certified Solutions Architect - Associate" certification, which was issued in 2020 and expired in 2023. Additionally, he obtained the "AWS Certified Cloud Practitioner" certification in 2019, which also expired in 2023. Matt is a "SAFe 4 Certified Agilist," a certification that has since expired. Earlier in his career, he passed the Oracle 8i DBA exams on the OCP track, which included SQL and PL/SQL, Architecture and Administration, and Backup and Recovery, back in 2002.
+
+Happy to explore similar work in other industries.
+
+################ What languages does Matt speak? (acc)
+
+=== today run 1 | prompt=7565 cached=1920 ttft=0.77s total=1.14s categories=['languages'] reason=None
+🐾 Tracking this down...
+
+Matt speaks English at a native level and French at a B2 level, which he has self-assessed. 
+
+What else can I track down for you?
+
+=== today run 2 | prompt=7566 cached=7040 ttft=0.56s total=0.94s categories=['languages'] reason=None
+🐾 Tracking this down...
+
+Matt speaks English at a native level and French at a B2 level, which he self-assessed. 
+
+There's more to this story if you're curious.
+
+=== long run 1 | prompt=84435 cached=83840 ttft=1.43s total=2.03s categories=['languages'] reason=None
+🐾 On it!
+
+Matt speaks English at a native level and French at a B2 level, which he has self-assessed. 
+
+Want me to dig deeper into the technical approach?
+
+=== long run 2 | prompt=84443 cached=83840 ttft=1.13s total=2.06s categories=['languages'] reason=None
+🐾 This is a strong one.
+
+Matt speaks English at a native level and French at a B2 level, which he has self-assessed. These language skills have been part of his professional and educational journey, providing him with the ability to engage in diverse environments and work with varied teams. His proficiency in French, in particular, was developed during his academic years, which included teaching French courses at the University of Georgia.
+
+I can show you related patterns if that's helpful.
+
+################ Does Matt speak French? (acc)
+
+=== today run 1 | prompt=6412 cached=1920 ttft=0.7s total=1.13s categories=['languages'] reason=None
+🐾 On it!
+
+Yes, Matt speaks French at a B2 level, which he self-assesses.
+
+Want me to dig deeper into the technical approach?
+
+=== today run 2 | prompt=6413 cached=6016 ttft=0.79s total=1.2s categories=['languages'] reason=None
+🐾 Perfect — here's what I found.
+
+Matt speaks French at a B2 level, which he self-assesses. 
+
+Want to see how Matt applied this elsewhere?
+
+=== long run 1 | prompt=84441 cached=83840 ttft=1.14s total=3.17s categories=['languages'] reason=None
+🐾 I know just the story.
+
+Matt speaks French at a B2 level, which he has self-assessed. This language skill is part of his broader educational background. He holds a BA in French Language and Literature from Queens University of Charlotte, which included a year abroad at Université Paul Valéry, Montpellier, France, through an exchange program with the University of North Carolina at Chapel Hill. Additionally, he completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia, where he served as a teaching assistant for French 101, 102, and 103.
+
+Want me to dig deeper into the technical approach?
+
+=== long run 2 | prompt=84438 cached=0 ttft=4.09s total=5.11s categories=['languages'] reason=None
+🐾 I know just the story.
+
+Matt speaks French at a B2 level, which he self-assessed. This language skill is part of his diverse background, which includes a BA in French Language and Literature from Queens University of Charlotte. His education included a year abroad at Université Paul Valéry, Montpellier, France, through an exchange program with the University of North Carolina at Chapel Hill. This experience likely contributed to his proficiency in French, allowing him to engage with French-speaking environments and contexts effectively.
+
+Happy to explore similar work in other industries.
+
+################ Does Matt have a master's degree? (acc)
+
+=== today run 1 | prompt=7115 cached=1920 ttft=0.77s total=1.57s categories=['education'] reason=None
+🐾 Found it!
+
+Matt holds a Master's degree in Information Technology from **American InterContinental University**. This degree is recognized as being related to Computer Science and exceeds a Bachelor's degree. During his time at the university, he also taught an entry-level Enterprise Java course as an adjunct professor, leveraging his own learning experiences to guide students in building Java web applications.
+
+Shall I find more examples like this?
+
+=== today run 2 | prompt=7121 cached=6016 ttft=0.64s total=1.02s categories=['education'] reason=None
+🐾 Tracking this down...
+
+Matt holds a master's degree in Information Technology from **American InterContinental University**. This degree is recognized as being related to the field of Computer Science. 
+
+Let me know if you'd like the deep dive on this one.
+
+=== long run 1 | prompt=84438 cached=83840 ttft=0.94s total=1.47s categories=['education'] reason=None
+🐾 On it!
+
+Matt holds a Master's degree in Information Technology from **American InterContinental University**. Information Technology is recognized as a discipline related to Computer Science, and a Master's degree exceeds a Bachelor's.
+
+Want to see how Matt applied this elsewhere?
+
+=== long run 2 | prompt=84443 cached=83840 ttft=1.11s total=2.22s categories=['education'] reason=None
+🐾 I know just the story.
+
+Matt holds a Master's degree in Information Technology from **American InterContinental University**. This degree is recognized as a discipline related to Computer Science, and a Master's degree exceeds a Bachelor's degree. His educational background provided him with the foundation to tackle complex technology challenges throughout his career, allowing him to translate these challenges into clear, people-centered strategies and help teams deliver real outcomes. This academic achievement is part of what has enabled him to build and scale cross-functional teams, lead major modernization programs across various industries, and create environments where engineers, designers, and product teams can thrive.
+
+Happy to explore similar work in other industries.
+
+################ Does Matt have any patents? (acc)
+
+=== today run 1 | prompt=7440 cached=1920 ttft=0.93s total=1.15s categories=[] reason=None
+🐾 Found it!
+
+Nothing I know about Matt covers that.
+
+Want me to dig deeper into the technical approach?
+
+=== today run 2 | prompt=7446 cached=7040 ttft=0.61s total=0.82s categories=[] reason=None
+🐾 I know just the story.
+
+Nothing I know about Matt covers that.
+
+Let me know if you'd like the deep dive on this one.
+
+=== long run 1 | prompt=84439 cached=83840 ttft=1.11s total=1.16s categories=[] reason=None
+🐾 Found it!
+
+Nothing I know about Matt covers that.
+
+What else can I track down for you?
+
+=== long run 2 | prompt=84436 cached=83840 ttft=1.1s total=1.32s categories=[] reason=None
+🐾 Here's a great example.
+
+Nothing I know about Matt covers that.
+
+Happy to explore similar work in other industries.
+
+################ Tell me about Matt's payments work at JPMorgan (control)
+
+=== today run 1 | prompt=7589 cached=1920 ttft=0.83s total=4.03s categories=[] reason=None
+🐾 I know just the story.
+
+At **JP Morgan Chase**, Matt was instrumental in building the ACCESS Next Generation platform, a unified global corporate banking portal. The challenge was significant: the existing platform had to serve **135,000+** corporations, financial institutions, governments, and municipalities across **180+** countries. This required custom engineering beyond the capabilities of the Bottomline Technologies' WebSeries platform. As the Technology Delivery Lead, Matt managed a blended team of over **40** professionals from **Accenture** and JP Morgan, coordinating efforts across locations in the US, Mumbai, and Bangalore.
+
+Matt's leadership was pivotal in designing and delivering bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax, along with a Message Authentication Code (MAC) security layer and real-time global reporting capabilities. He was embedded at Bottomline Technologies' Portsmouth offices, ensuring seamless integration and alignment between JP Morgan's requirements and Bottomline's platform capabilities. His role also involved extensive stakeholder coordination, traveling to Chicago and NY/NJ to align with JP Morgan executives.
+
+The result of these efforts was the successful launch of the ACCESS platform in April 2011. This platform consolidated previously separate regional systems into a single digital experience, transforming the corporate treasurer experience with real-time global reporting and trade finance lifecycle visibility. The platform was recognized as the #1 digital channel by Coalition Greenwich, highlighting its impact and success.
+
+Happy to explore similar work in other industries.
+
+=== today run 2 | prompt=7588 cached=7040 ttft=0.74s total=3.73s categories=[] reason=None
+🐾 Perfect — here's what I found.
+
+At **JP Morgan Chase**, Matt played a pivotal role in building the ACCESS Next Generation platform, a unified global corporate banking portal. The challenge was to create a system that could serve **135,000+** clients across **180+** countries, requiring bespoke payment modules and security controls beyond the standard offerings of Bottomline Technologies' WebSeries platform. Matt managed a blended team of over **40** professionals across multiple locations, including **Accenture** and JP Morgan resources in Mumbai, Bangalore, and the US.
+
+He was responsible for designing and delivering custom payment modules for ACH, wire, FX/cross-border, and EFTPS tax payments. This included implementing a Message Authentication Code (MAC) security layer, contextual help, payment-type-specific RBAC, and Single Sign-On (SSO) for seamless integration of cash, trade, and investment operations. The platform also featured real-time global reporting and trade finance integration, transforming the corporate treasurer experience.
+
+The ACCESS platform launched in April 2011, consolidating previously separate regional systems into a single digital experience. This launch positioned JP Morgan's portal as the #1 in digital channels by Coalition Greenwich. The centralized payments gateway Matt developed enabled corporate treasurers to initiate various payment types across regions, replacing fragmented legacy integrations and reducing operational complexity and compliance risk.
+
+Want me to dig deeper into the technical approach?
+
+=== long run 1 | prompt=84448 cached=83840 ttft=1.32s total=4.28s categories=[] reason=None
+🐾 This is a strong one.
+
+At **JP Morgan Chase**, Matt played a pivotal role in modernizing the bank's global payments infrastructure. He led the development of the Integrated Global Payments Interface, which centralized payment operations across **12 countries**. This initiative addressed the challenge of disparate connectivity and varying message formats, protocols, and regulatory requirements across regions. Matt's approach was characterized by his focus on creating a unified architecture that handled inbound and outbound message transformation, protocol translation, and routing across multiple payment channels such as ACH, Fedwire, and international wire transfers.
+
+Matt also managed a blended team of over **40** professionals, coordinating efforts across onshore and offshore locations. His leadership ensured that the integration points between the payments gateway and JP Morgan's internal systems, such as compliance and settlement, were effectively managed. Matt's methodology emphasized cross-border requirements gathering, which allowed him to map local payment scheme rules and regulatory nuances into the transformation engine. This meticulous approach ensured that the platform could handle payments across different regions seamlessly.
+
+Additionally, Matt was instrumental in the successful migration of legacy payment systems into the ACCESS platform, maintaining compliance traceability and operational continuity. He introduced compliance dashboards that became standard operational tools, providing improved visibility into payment flows and compliance status. This strategic consolidation not only streamlined operations but also enhanced JP Morgan's ability to offer a unified global banking experience to its clients.
+
+I can show you related patterns if that's helpful.
+
+=== long run 2 | prompt=84447 cached=83840 ttft=1.06s total=3.33s categories=[] reason=None
+Got it! 🐾
+
+At **JP Morgan Chase**, Matt led significant efforts in modernizing the global payments infrastructure across multiple projects. He served as the Technology Delivery Lead for the Integrated Global Payments Interface, which centralized payments operations across **12 countries**. This involved designing a gateway architecture that handled message transformation, protocol translation, and routing across various payment types like ACH, Fedwire, and international wire transfers. Matt managed a blended team of over **40** professionals from both **Accenture** and JP Morgan, coordinating across multiple locations including the US, Mumbai, and Bangalore. He spent a significant amount of time embedded at Bottomline Technologies' Portsmouth offices to ensure seamless integration and delivery.
+
+In another project, Matt was responsible for designing and delivering bespoke payment modules for the ACCESS Next Generation platform. This included ACH, wire, FX/cross-border payments, and more. He managed a team of **40+** across **Accenture** and JP Morgan resources, ensuring the platform met the needs of **135,000+** clients globally. His leadership involved aligning various stakeholders, including technical teams and external vendors, to ensure the platform's successful launch in April 2011.
+
+Matt's leadership style focused on bringing together cross-functional teams and aligning them around shared goals. He facilitated collaboration between different regions and business units, ensuring that the platform adhered to regional compliance requirements.
+
+Let me know if you'd like the deep dive on this one.
+
+################ What's Matt's leadership philosophy? (control)
+
+=== today run 1 | prompt=7808 cached=1920 ttft=0.76s total=3.93s categories=[] reason=None
+🐾 This is a strong one.
+
+Matt's leadership philosophy centers on creating environments where teams can thrive by fostering trust, clarity, and shared purpose. Across his roles, from leading modern engineering initiatives to directing a **150-person Cloud Innovation Center** at **Accenture**, he found that successful teams are not built solely on processes or tools. Instead, he emphasizes psychological safety, allowing team members to speak honestly and take risks. He pushes decision-making to those closest to the work, ensuring that the people who understand the challenges best are the ones making key decisions.
+
+At the Cloud Innovation Center, Matt's approach led to a **4x delivery acceleration** as teams embraced lean product and modern engineering practices. His leadership blends empathy, clarity, and modern engineering rigor, focusing on transparency, direct feedback, and open communication. By grounding engineering culture in automation and continuous delivery, he enabled teams to deliver meaningful work with pride and ownership.
+
+In his work with **Norfolk Southern**, Matt faced a quality crisis despite strong test coverage metrics. He took ownership of the issue, conducted a root cause analysis, and implemented a hands-on coaching approach. This involved boot camps, coding katas, and practice learning sessions, which ultimately restored client confidence and reduced defect rates. This experience reinforced his belief that cultural transformation requires consistent coaching, not just process change.
+
+Through these efforts, Matt has consistently built high-trust engineering cultures, modernized platforms, and helped organizations shift their perspectives on technology. His leadership journey has been defined by impact, with teams that trust each other and deliver work they are proud of.
+
+Want to see how Matt applied this elsewhere?
+
+=== today run 2 | prompt=7808 cached=7040 ttft=1.18s total=3.46s categories=[] reason=None
+🐾 This is a strong one.
+
+Matt's leadership philosophy centers on creating environments where teams can thrive by focusing on trust, clarity, and shared purpose. Across his roles, including leading a **150-person Cloud Innovation Center** at **Accenture**, Matt observed that successful teams are not built merely on processes or tools, but on a foundation of psychological safety and empowerment. He found that many engineering teams he inherited were over-processed and under-trusted, which led to a culture of waiting for permission rather than owning outcomes.
+
+To address these challenges, Matt emphasizes empathy, clarity, and modern engineering rigor. He leads with purpose, making intent explicit, and builds psychological safety so team members can take risks and speak honestly. Decisions are pushed to those closest to the work, fostering a sense of ownership and responsibility. Transparency, direct feedback, and open communication are key components of his approach, along with grounding engineering culture in automation, continuous delivery, and quality-first practices. The approach improved quality, strengthened cross-functional trust, and enabled teams to deliver meaningful work with pride and ownership. Matt's philosophy not only accelerates delivery but also enhances the work life of engineers, designers, and product teams by removing barriers and fostering an environment of collaboration and innovation.
+
+Happy to explore similar work in other industries.
+
+=== long run 1 | prompt=84442 cached=83840 ttft=1.02s total=2.86s categories=[] reason=None
+🐾 Perfect — here's what I found.
+
+Matt's leadership philosophy centers on creating an environment where teams can thrive by fostering trust, clarity, and shared purpose. He emphasizes psychological safety, ensuring that team members feel secure to take risks and speak honestly. Matt believes in pushing decisions to the people closest to the work, empowering them to own outcomes and drive innovation. His approach blends empathy, clarity, and modern engineering rigor, using transparency, direct feedback, and open communication to align teams around a common goal. At the **Cloud Innovation Center**, this philosophy enabled teams to accelerate delivery by **4x**, improve quality, and strengthen cross-functional trust.
+
+He has consistently created high-trust teams grounded in servant leadership, where the focus is on building strong teams by improving how they work. Matt's leadership style has been instrumental in scaling teams, modernizing platforms, and building organizations from the ground up, such as the **Cloud Innovation Center**, which grew from 0 to **150+** professionals delivering at **4x** velocity with zero-defect deployments through TDD and automated pipelines.
+
+Want me to dig deeper into the technical approach?
+
+=== long run 2 | prompt=84440 cached=83840 ttft=4.11s total=5.76s categories=[] reason=None
+🐾 This is a strong one.
+
+Matt's leadership philosophy is centered around creating environments where teams can thrive and deliver meaningful work. He emphasizes psychological safety, clarity of purpose, and pushing decisions to the people closest to the work. At **Accenture's Cloud Innovation Center**, he scaled the organization from 0 to **150+ professionals**, driving **4x** delivery acceleration through modern engineering practices. His approach blends empathy, clarity, and engineering rigor, focusing on building high-trust teams that deliver zero-defect deployments through test-driven development and automated pipelines. He prioritizes transparency, direct feedback, and open communication, ensuring teams are aligned and empowered to own their outcomes. This philosophy has enabled teams to improve quality, strengthen cross-functional trust, and deliver impactful results across industries.
+
+Want me to dig deeper into the technical approach?
+
+################ Why hire Matt? (control)
+
+=== today run 1 | prompt=6491 cached=1920 ttft=0.7s total=3.3s categories=[] reason=None
+Got it! 🐾
+
+Matt has a proven track record of building capabilities that last beyond the engagement. At **Accenture**, he grew the Cloud Innovation Center from 0 to over **150 professionals**, delivering projects at **4x velocity** with zero-defect deployments through test-driven development and automated pipelines. This center generated over **\$100M** in repeat business, demonstrating the impact of delivery excellence. His leadership in engineering is grounded in his own experience as an engineer, allowing him to build strong teams by enhancing their work processes.
+
+In his career, Matt has led significant modernization efforts across major financial institutions like **JP Morgan**, **RBC**, **Capital One**, and **HSBC**. He played a key role in the delivery of enterprise payment platforms across **12 countries** and recovered troubled programs. At **HSBC**, he secured a **\$10M** implementation contract by leading a comprehensive technology assessment and developing a transformation roadmap that aligned business and IT leadership on a unified approach. His technical expertise was also crucial in maintaining the accuracy of the F-22's configuration data at **Lockheed Martin**, ensuring airworthiness through automated processes.
+
+Matt is available immediately for senior leadership roles in platform engineering, AI-era transformation, and enterprise modernization, where he can continue to build, drive change, and solve complex problems as part of a team.
+
+Shall I find more examples like this?
+
+=== today run 2 | prompt=6496 cached=6016 ttft=0.75s total=3.91s categories=[] reason=None
+🐾 Perfect — here's what I found.
+
+**Matt** has a proven track record of building sustainable capabilities that extend beyond the duration of his engagements. At **Accenture**, he led the creation and expansion of the Cloud Innovation Center from scratch to a team of over **150** professionals. This team delivered at **4x** the usual velocity with zero-defect deployments, thanks to practices like Test-Driven Development (TDD) and automated pipelines.
+
+His career is marked by significant achievements across various industries. He has modernized payment and banking systems for major financial institutions like **JP Morgan**, **RBC**, **Capital One**, and **HSBC**, including a platform that was rolled out across **12** countries. He has also been instrumental in recovering troubled programs and architecting cloud-native systems. At **HSBC**, he led a comprehensive technology assessment and transformation roadmap, securing a **\$10M** implementation contract by aligning business and IT teams on a unified approach to modernize their mortgage operations.
+
+Matt's leadership style focuses on building high-trust engineering cultures and translating complex technology challenges into clear, people-centered strategies. He has consistently created environments where engineers, designers, and product teams can thrive, resulting in faster product delivery and trusted client relationships.
+
+There's more to this story if you're curious.
+
+=== long run 1 | prompt=84436 cached=83840 ttft=3.63s total=6.28s categories=[] reason=None
+🐾 Found it!
+
+Matt Pugmire has a proven track record of building new capabilities, products, platforms, and teams that endure beyond the initial engagement. He has grown from an engineer to the Director of **Accenture**'s Cloud Innovation Center, scaling the organization from 0 to **150+ professionals**. This growth was achieved through delivering at **4x velocity** with zero-defect deployments, utilizing TDD and automated pipelines. Matt's leadership in the Cloud Innovation Center contributed to generating **\$100M+ in repeat business** through delivery excellence alone.
+
+His career includes leading payments and banking modernization across major financial institutions such as **JP Morgan**, **RBC**, **Capital One**, and **HSBC**, including a product rollout across **12 countries**. His approach to innovation is grounded in practical, real-world applications, evidenced by his hands-on work with AI and GenAI during his sabbatical, where he built MattGPT using RAG architecture, semantic search, and modern LLM tooling.
+
+Matt's focus is on senior leadership roles in platform engineering, AI-era transformation, and enterprise modernization, where he can be deeply involved in the work itself, building and driving change. He is available immediately and is looking for opportunities where he can continue to build strong teams and deliver innovative solutions.
+
+Happy to explore similar work in other industries.
+
+=== long run 2 | prompt=84441 cached=83840 ttft=2.55s total=4.76s categories=[] reason=None
+🐾 This is a strong one.
+
+Matt has a proven track record of building lasting capabilities, products, platforms, and teams that extend beyond the engagement. He has grown from an engineer to the Director of the Cloud Innovation Center at **Accenture**, where he scaled the center from 0 to **150+ professionals**. His teams delivered at **4x velocity** with zero-defect deployments through Test-Driven Development (TDD) and automated pipelines, earning **\$100M+** in repeat business solely through delivery excellence. Matt's approach is distinguished by his deep involvement in the work, not just overseeing it. He has led significant modernization efforts across major financial institutions like **JP Morgan**, **RBC**, **Capital One**, and **HSBC**, including a product rollout across **12 countries**. His methodology emphasizes building high-trust teams grounded in servant leadership and psychological safety, which fosters an environment where teams can thrive and deliver exceptional results.
+
+Matt's leadership style is rooted in his own engineering experience, which allows him to connect with his teams and drive change effectively. His work philosophy focuses on creating environments with psychological safety, clear purpose, and room for challenging existing processes, enabling his teams to perform at their best. Matt is currently seeking senior leadership roles in platform engineering, AI-era transformation, and enterprise modernization, where he can continue to build, drive change, and tackle hard problems alongside his team.
+
+Want me to dig deeper into the technical approach?
+
+################ Tell me about a time Matt failed (control)
+
+=== today run 1 | prompt=6950 cached=1920 ttft=0.75s total=3.01s categories=[] reason=None
+🐾 Here's a great example.
+
+During a project for a **Fortune 500 financial services client**, Matt faced a significant challenge due to assumptions about the existing infrastructure. As the tech lead on a global platform modernization delivery, he was responsible for ensuring a safe environment setup across multiple environments: dev, QA, UAT, and production. However, under delivery pressure, he relied on inherited documentation and assumed that the IAM controls, environment boundaries, and data masking were correctly configured. This oversight led to an offshore tester accidentally triggering an email job in UAT, which sent communications containing unmasked production data to thousands of real clients.
+
+Matt took full accountability for the incident and led his team through a thorough root cause analysis and remediation process. He worked collectively with the team to understand what had happened and implemented corrective controls. This experience taught him that assumptions are risks in disguise. As a result, IAM validation, environment verification, PII scrubbing, and risk ownership became day-one leadership responsibilities in his delivery approach. Unfortunately, the incident led to the client demanding the removal of the tester from the project, highlighting the systemic nature of the failure and reinforcing Matt's belief that leaders own the environment their teams operate in.
+
+Want me to dig deeper into the technical approach?
+
+=== today run 2 | prompt=6953 cached=6016 ttft=0.71s total=2.7s categories=[] reason=None
+🐾 I know just the story.
+
+During a platform modernization project for a **Fortune 500 financial services client**, Matt faced a significant failure due to assumptions he made about the existing IAM controls, environment boundaries, and data masking protocols. The project was under intense delivery pressure, and Matt, as the tech lead, inherited these configurations from prior phases without verifying their accuracy. This oversight led to an offshore tester accidentally triggering an email job in the UAT environment, which sent communications containing unmasked production data to thousands of real clients.
+
+Matt took full accountability for the incident and led his team through a thorough root cause analysis and remediation process. He realized that the assumptions he made were risks in disguise and that he should have verified the IAM configuration and access controls instead of relying on inherited documentation. This experience taught him the importance of validating IAM, verifying environments, scrubbing PII, and owning risks from day one in his delivery approach.
+
+The incident resulted in the client demanding the removal of the tester from the project, highlighting a systemic failure that had individual consequences. This reinforced Matt's belief that leaders are responsible for the environments their teams operate in and cannot rely solely on inherited processes without verification.
+
+Want me to dig deeper into the technical approach?
+
+=== long run 1 | prompt=84441 cached=83840 ttft=3.14s total=4.29s categories=[] reason=None
+🐾 I know just the story.
+
+During a global platform modernization delivery for a **Fortune 500 financial services** client, Matt faced a significant failure related to assumptions about IAM controls, environment boundaries, and data masking. An offshore tester accidentally triggered an email job in UAT that sent communications containing unmasked production data to thousands of real clients. This incident highlighted the risks of relying on assumptions rather than verifying critical configurations. The root cause was insufficient IAM checks, unclear environment boundaries, and production data that had not been scrubbed from downstream environments. Matt took accountability for the incident, led the team through root cause analysis and remediation, and learned that assumptions are risks in disguise. This experience reinforced the importance of IAM validation, environment verification, PII scrubbing, and risk ownership as day-one leadership responsibilities in his delivery approach.
+
+What else can I track down for you?
+
+=== long run 2 | prompt=84442 cached=83840 ttft=4.63s total=6.61s categories=[] reason=None
+🐾 Perfect — here's what I found.
+
+In one instance, Matt faced a significant failure during a global platform modernization delivery for a **Fortune 500** financial services client. The project involved multiple environments, including dev, QA, UAT, and production. Under delivery pressure, Matt assumed that the IAM controls, environment boundaries, and data masking were correctly configured, relying on inherited documentation without verification. This oversight led to an offshore tester accidentally triggering an email job in UAT that sent unmasked production data to thousands of real clients. The root cause was insufficient IAM checks, unclear environment boundaries, and production data that had not been scrubbed from downstream environments.
+
+Matt took accountability for the incident and led the team through root cause analysis and remediation. Unfortunately, the client demanded the removal of the tester involved, highlighting a systemic failure that resulted in individual consequences. Matt learned that assumptions are risks in disguise and that IAM validation, environment verification, PII scrubbing, and risk ownership are critical leadership responsibilities. This experience reinforced his belief that leaders must own the environment their teams operate in.
+
+What else can I track down for you?
+
+################ How did Matt build the AWS certification program? (control)
+
+=== today run 1 | prompt=7297 cached=1920 ttft=0.77s total=2.87s categories=[] reason=None
+🐾 This is a strong one.
+
+At **Accenture's Liquid Studio**, traditional training programs were struggling to keep up with the rapidly evolving AWS technologies, which created skill gaps and slowed cloud adoption. The goal was to position the studio as a leader in cloud-first strategies, necessitating a structured cloud enablement program to upskill engineers and foster innovation. Matt led the AWS Launchpad program to address these challenges, focusing on building deep cloud competencies across **Accenture**. He collaborated with AWS to design structured learning paths and certification programs that emphasized AWS core services like Lambda, API Gateway, and Kubernetes. The program included hands-on labs and mentor-based training, immersing engineers in real-world AWS environments to prioritize practical application over theory.
+
+Matt's approach resulted in over **200 professionals** earning AWS certifications, which significantly accelerated cloud adoption and strengthened **Accenture**'s cloud expertise. This initiative not only positioned **Accenture** as a leader in AWS competency but also fostered a sustainable learning culture that ensured ongoing cloud innovation and capability-building across teams. Engineers and clients at the **Accenture** Innovation Hub benefited from this program, gaining the skills needed to lead cloud-native transformation initiatives effectively.
+
+Want to see how Matt applied this elsewhere?
+
+=== today run 2 | prompt=7296 cached=6016 ttft=0.74s total=2.65s categories=[] reason=None
+Got it! 🐾
+
+At **Accenture's Liquid Studio**, traditional training programs were unable to keep up with the fast-paced evolution of AWS technologies. This gap hindered cloud adoption and innovation both internally and with clients. Matt led the AWS Launchpad program to tackle these challenges directly. The program was developed in collaboration with AWS and focused on building deep cloud competencies across **Accenture**. It included structured learning paths and certification programs centered on AWS core services like Lambda, API Gateway, and Kubernetes. 
+
+Matt implemented hands-on labs and interactive workshops, immersing engineers in real-world AWS environments. This approach emphasized practical application over theoretical learning. He also established mentorship teams to embed best practices and foster institutional knowledge, ensuring long-term competency growth. Through this program, over **200 professionals** earned AWS certifications, such as AWS Solutions Architect and DevOps Engineer. This not only accelerated cloud adoption at **Accenture** but also positioned the company as a leader in AWS competency, enhancing its market credibility and ability to secure cloud-native engagements. 
+
+The program fostered a sustainable learning culture, ensuring ongoing cloud innovation and capability-building across teams. Engineers and clients at the **Accenture Innovation Hub** benefited from this initiative, gaining the skills needed to lead cloud-native transformation projects effectively.
+
+Want me to dig deeper into the technical approach?
+
+=== long run 1 | prompt=84444 cached=83840 ttft=3.19s total=4.78s categories=[] reason=None
+🐾 This is a strong one.
+
+Matt led the AWS Launchpad program at **Accenture's Liquid Studio**, developed in collaboration with AWS, to build deep cloud competencies across the organization. He designed structured learning paths and certification programs focusing on AWS core services, including Lambda, API Gateway, DynamoDB, Kubernetes, and ECS/Fargate, among others, and cloud-native application development. Matt delivered interactive workshops and labs, immersing engineers in real-world AWS environments to reinforce practical application over theory. He established cloud expert mentorship teams, embedding best practices and fostering institutional knowledge to drive long-term competency growth. Through this initiative, over **200 professionals** earned AWS certifications, accelerating adoption and strengthening **Accenture**'s cloud expertise. This positioned **Accenture** as a leader in AWS competency, increasing market credibility and ability to secure cloud-native engagements. Matt's leadership in this program fostered a sustainable learning culture, ensuring ongoing cloud innovation and capability-building across teams.
+
+I can show you related patterns if that's helpful.
+
+=== long run 2 | prompt=84441 cached=83840 ttft=4.03s total=5.06s categories=[] reason=None
+🐾 Perfect — here's what I found.
+
+Matt led the AWS Launchpad program at **Accenture's Liquid Studio** to address the challenge of rapidly evolving AWS technologies, which had created skill gaps and slowed cloud adoption. He developed structured learning paths and certification programs focusing on AWS core services, including Lambda, API Gateway, DynamoDB, Kubernetes, and ECS/Fargate. The program delivered interactive workshops and labs, immersing engineers in real-world AWS environments to reinforce practical application over theory. This initiative resulted in over **200 professionals** earning AWS certifications, accelerating adoption and strengthening **Accenture**'s cloud expertise. The program positioned **Accenture** as a leader in AWS competency, increasing market credibility and the ability to secure cloud-native engagements. There's more to this story if you're curious.

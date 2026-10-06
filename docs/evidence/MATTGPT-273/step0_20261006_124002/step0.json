@@ -1,0 +1,223 @@
+[
+  {
+    "label": "follow_up",
+    "query": "What about PMP?",
+    "run": 1,
+    "seconds": 6.93,
+    "rejection_reason": null,
+    "intent_family": "domain_payments",
+    "confidence": "high",
+    "llm_called": true,
+    "top_score": 0.452130347,
+    "search_called": true,
+    "profile_categories": [
+      "certifications"
+    ],
+    "sources": [
+      "Building the PMO for RBC's Commercial Banking Modernization",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Recovering Fiserv's $8.5M White-Label Card Portal",
+      "Launching a Self-Paced Learning Program for Emerging Technologies",
+      "Turning STRATCOM's Paper Operational Plans into Executable Workflow",
+      "Stabilizing and Delivering AT&T's Southeast CRM Replacement",
+      "Accelerating Product Delivery Through Lean Innovation at Capital One"
+    ],
+    "answer_md": "Got it! 🐾\n\nMatt does not hold a PMP certification. However, his certifications include \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002).\n\nHappy to explore similar work in other industries."
+  },
+  {
+    "label": "follow_up",
+    "query": "What about PMP?",
+    "run": 2,
+    "seconds": 3.9,
+    "rejection_reason": null,
+    "intent_family": "domain_payments",
+    "confidence": "high",
+    "llm_called": true,
+    "top_score": 0.452130347,
+    "search_called": true,
+    "profile_categories": [],
+    "sources": [
+      "Building the PMO for RBC's Commercial Banking Modernization",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Recovering Fiserv's $8.5M White-Label Card Portal",
+      "Launching a Self-Paced Learning Program for Emerging Technologies",
+      "Turning STRATCOM's Paper Operational Plans into Executable Workflow",
+      "Stabilizing and Delivering AT&T's Southeast CRM Replacement",
+      "Accelerating Product Delivery Through Lean Innovation at Capital One"
+    ],
+    "answer_md": "🐾 I know just the story.\n\nMatt does not hold a PMP certification. However, he has extensive experience in program management and governance. For instance, at **RBC**, he established the Project Management Office (PMO) for a complex modernization initiative. This involved developing the project management plan, coordinating program-level measurement and reporting, and building centralized communication frameworks. His efforts provided visibility across all workstreams, improved cross-team coordination, and enabled predictable execution. \n\nSimilarly, at **JP Morgan Chase**, Matt mobilized the PMO to support a firm-wide security posture modernization following a major data breach. He delivered an implementation roadmap and detailed migration plan, providing the structure and clarity needed for the migration of **341** applications to meet new security requirements. \n\nThese examples demonstrate Matt's capability in leading large-scale projects and establishing effective governance frameworks, even without a PMP certification.\n\nWhat else can I track down for you?"
+  },
+  {
+    "label": "follow_up",
+    "query": "What about PMP?",
+    "run": 3,
+    "seconds": 2.95,
+    "rejection_reason": null,
+    "intent_family": "domain_payments",
+    "confidence": "high",
+    "llm_called": true,
+    "top_score": 0.452130347,
+    "search_called": true,
+    "profile_categories": [],
+    "sources": [
+      "Building the PMO for RBC's Commercial Banking Modernization",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Recovering Fiserv's $8.5M White-Label Card Portal",
+      "Launching a Self-Paced Learning Program for Emerging Technologies",
+      "Turning STRATCOM's Paper Operational Plans into Executable Workflow",
+      "Stabilizing and Delivering AT&T's Southeast CRM Replacement",
+      "Accelerating Product Delivery Through Lean Innovation at Capital One"
+    ],
+    "answer_md": "🐾 Perfect — here's what I found.\n\nMatt does not hold a PMP certification. However, he has extensive experience in program management and governance. For instance, at **RBC**, he established the PMO for a complex modernization initiative, developing the project management plan and coordinating program-level measurement and reporting. His work enabled predictable execution and strategic alignment across multiple organizations. Additionally, at **JP Morgan Chase**, he mobilized the PMO to support a firm-wide security uplift, delivering a framework and migration plan within a tight three-month window.\n\nWhat else can I track down for you?"
+  },
+  {
+    "label": "control_direct_pmp",
+    "query": "Does Matt have a PMP?",
+    "run": 1,
+    "seconds": 5.95,
+    "rejection_reason": null,
+    "intent_family": "background",
+    "confidence": "high",
+    "llm_called": true,
+    "top_score": 0.398776501,
+    "search_called": true,
+    "profile_categories": [
+      "certifications"
+    ],
+    "sources": [
+      "Why Hire Matt?",
+      "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+      "Owning the P&L: From Engagement Margin to Center Cost Base",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Keeping the F-22's As-Built Configuration Data Accurate",
+      "Driving Modern Software Engineering with Project Octane",
+      "Building the PMO for RBC's Commercial Banking Modernization"
+    ],
+    "answer_md": "🐾 Perfect — here's what I found.\n\nNo, Matt does not have a PMP certification. His certifications include \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002). None of these certifications are current.\n\nHappy to explore similar work in other industries."
+  },
+  {
+    "label": "control_direct_pmp",
+    "query": "Does Matt have a PMP?",
+    "run": 2,
+    "seconds": 3.32,
+    "rejection_reason": null,
+    "intent_family": "background",
+    "confidence": "high",
+    "llm_called": true,
+    "top_score": 0.398992598,
+    "search_called": true,
+    "profile_categories": [
+      "certifications"
+    ],
+    "sources": [
+      "Why Hire Matt?",
+      "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+      "Owning the P&L: From Engagement Margin to Center Cost Base",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Keeping the F-22's As-Built Configuration Data Accurate",
+      "Driving Modern Software Engineering with Project Octane",
+      "Building the PMO for RBC's Commercial Banking Modernization"
+    ],
+    "answer_md": "🐾 Found it!\n\nNo, Matt does not have a PMP certification. However, he holds several other certifications: \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002).\n\nWhat else can I track down for you?"
+  },
+  {
+    "label": "control_direct_pmp",
+    "query": "Does Matt have a PMP?",
+    "run": 3,
+    "seconds": 3.83,
+    "rejection_reason": null,
+    "intent_family": "background",
+    "confidence": "high",
+    "llm_called": true,
+    "top_score": 0.398776501,
+    "search_called": true,
+    "profile_categories": [
+      "certifications"
+    ],
+    "sources": [
+      "Why Hire Matt?",
+      "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+      "Owning the P&L: From Engagement Margin to Center Cost Base",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Keeping the F-22's As-Built Configuration Data Accurate",
+      "Driving Modern Software Engineering with Project Octane",
+      "Building the PMO for RBC's Commercial Banking Modernization"
+    ],
+    "answer_md": "🐾 I know just the story.\n\nNo, Matt does not have a PMP certification. However, he holds several other certifications, including \"AWS Certified Solutions Architect - Associate\" (issued 2020, expired 2023), \"AWS Certified Cloud Practitioner\" (issued 2019, expired 2023), \"SAFe 4 Certified Agilist\" (issued 2017, expired), and passed the Oracle 8i DBA exams for SQL and PL/SQL, Architecture and Administration, and Backup and Recovery (2002). None of these certifications are current.\n\nThere's more to this story if you're curious."
+  },
+  {
+    "label": "control_first_turn",
+    "query": "Does Matt have a CS degree?",
+    "run": 1,
+    "seconds": 4.12,
+    "rejection_reason": null,
+    "intent_family": "technical",
+    "confidence": "high",
+    "llm_called": true,
+    "top_score": 0.288760096,
+    "search_called": true,
+    "profile_categories": [
+      "education"
+    ],
+    "sources": [
+      "Teaching Entry-Level Developers to Build Their First Java Web Application",
+      "Integrating a Chemical Logistics Network Across Every Partner Capability",
+      "Building AT&T's Service Delivery Platform",
+      "Building Sparkfly's Platform Alongside Its Founder",
+      "Mentoring Underserved High School Students into Technology Careers",
+      "Keeping the F-22's As-Built Configuration Data Accurate",
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices"
+    ],
+    "answer_md": "🐾 On it!\n\nMatt does not have a Computer Science degree. He holds a Master's degree in Information Technology from **American InterContinental University**. Information Technology is recognized as a discipline related to Computer Science, and a Master's degree exceeds the level of a Bachelor's degree. Additionally, Matt completed graduate coursework in Romance Languages (Linguistics) at the University of Georgia, where he served as a teaching assistant for French courses. He also earned a Bachelor of Arts in French Language and Literature from Queens University of Charlotte, which included a year abroad at Université Paul Valéry in Montpellier, France. \n\nWant me to dig deeper into the technical approach?"
+  },
+  {
+    "label": "control_first_turn",
+    "query": "Does Matt have a CS degree?",
+    "run": 2,
+    "seconds": 2.79,
+    "rejection_reason": null,
+    "intent_family": "technical",
+    "confidence": "high",
+    "llm_called": true,
+    "top_score": 0.288801581,
+    "search_called": true,
+    "profile_categories": [
+      "education"
+    ],
+    "sources": [
+      "Teaching Entry-Level Developers to Build Their First Java Web Application",
+      "Integrating a Chemical Logistics Network Across Every Partner Capability",
+      "Building AT&T's Service Delivery Platform",
+      "Building Sparkfly's Platform Alongside Its Founder",
+      "Mentoring Underserved High School Students into Technology Careers",
+      "Keeping the F-22's As-Built Configuration Data Accurate",
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices"
+    ],
+    "answer_md": "🐾 Here's a great example.\n\nMatt holds a Master's degree in Information Technology from **American InterContinental University**. This degree is recognized as a Computer Science-related discipline, and a Master's degree exceeds a Bachelor's degree.\n\nLet me know if you'd like the deep dive on this one."
+  },
+  {
+    "label": "control_first_turn",
+    "query": "Does Matt have a CS degree?",
+    "run": 3,
+    "seconds": 2.54,
+    "rejection_reason": null,
+    "intent_family": "technical",
+    "confidence": "high",
+    "llm_called": true,
+    "top_score": 0.288760096,
+    "search_called": true,
+    "profile_categories": [
+      "education"
+    ],
+    "sources": [
+      "Teaching Entry-Level Developers to Build Their First Java Web Application",
+      "Integrating a Chemical Logistics Network Across Every Partner Capability",
+      "Building AT&T's Service Delivery Platform",
+      "Building Sparkfly's Platform Alongside Its Founder",
+      "Mentoring Underserved High School Students into Technology Careers",
+      "Keeping the F-22's As-Built Configuration Data Accurate",
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices"
+    ],
+    "answer_md": "🐾 Here's a great example.\n\nMatt does not have a degree specifically in Computer Science. He holds a Master's degree in Information Technology from **American InterContinental University**. Information Technology is a recognized discipline related to Computer Science, and a Master's degree exceeds a Bachelor's degree.\n\nShall I find more examples like this?"
+  }
+]
