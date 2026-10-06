@@ -51,7 +51,7 @@ N_RUNS = 5
 TOP_K = 5
 JD_PATH = Path("tests/bdd/fixtures/jd_extraction/structured_jd.txt")
 STORIES_JSONL = Path("echo_star_stories_nlp.jsonl")
-OUTPUT_CSV = Path("probe_088_structured_post_mgmt_results.csv")
+OUTPUT_CSV = Path("probes/output/probe_088_structured_post_mgmt_results.csv")
 # Sidecar: saved once, reused on subsequent runs so requirement text is frozen.
 # Delete this file to force a fresh Stage 1 extraction.
 # Note: probe_158_single_*_results.csv baselines (August 3) predate the management
@@ -344,6 +344,7 @@ def main():
         print("\n(no database requirements detected)")
 
     # --- CSV ---
+    OUTPUT_CSV.parent.mkdir(parents=True, exist_ok=True)
     with open(OUTPUT_CSV, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
         writer.writeheader()
