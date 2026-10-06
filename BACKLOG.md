@@ -542,7 +542,7 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Type:** Issue
 - **Execution split (May 28, 2026; updated August 12, 2026 — see Value Prioritized Roadmap at top of BACKLOG.md):**
   - **Phase 1 — Query-side mitigation (done, Green at 627f6f4).** Strip "Matt" from embedded queries on technical-noun shapes; preserve "Matt" in the prompt sent to the LLM. Cheap, reversible, sufficient for moderate-overlap nouns (monolith, MVP). NOT sufficient for severe-overlap nouns (refactoring). Maps to Fix-path option 2 below.
-  - **Phase 2 — Cluster cull / rewrite (NOW).** Scope determined by P5/P8 Step 0 measurement. MATTGPT-182 closed (275ff1f, August 15) -- re-baseline run August 13; P5/P8 still LEAD (findings in post-182 section below). Phase 2 is unblocked. **Benchmark artifact (August 26, 2026):** `probe_163_substitution_impact.py` (committed b9cd2ef) measures substitution impact across five queries. Jaccard similarity 0.25 to 0.67; the direct-reports query is the strongest case: seven of ten portfolio-narrative stories without substitution, ten of ten org-delivery stories with it. Re-runnable as a before-and-after benchmark when Phase 2 or Phase 3 lands.
+  - **Phase 2: Cluster cull / rewrite (NOW).** Scope determined by P5/P8 Step 0 measurement. MATTGPT-182 closed (275ff1f, August 15) -- re-baseline run August 13; P5/P8 still LEAD (findings in post-182 section below). Phase 2 is unblocked. **Benchmark artifact (August 26, 2026):** `probes/probe_163_substitution_impact.py` (local, untracked; committed b9cd2ef, untracked in 8cbc58b) measures substitution impact across five queries. Jaccard similarity 0.25 to 0.67; the direct-reports query is the strongest case: seven of ten portfolio-narrative stories without substitution, ten of ten org-delivery stories with it. Re-runnable as a before-and-after benchmark when Phase 2 or Phase 3 lands.
   - **Phase 3 — Full hybrid retrieval.** BM25 + semantic; keyword weighting on "client", "Fortune 500", "enterprise" pushes named-client stories above MattGPT for queries containing those keywords. Handles severe-overlap nouns. **Lowest empirical risk path** given the May 16 story-side rewrite backfire (see Finding 3 caveat). Also addresses MATTGPT-061 residual. Maps to Fix-path option 3 below. **Note (August 13, 2026): BM25 cannot reach P5/P8's specific problem.** P5 and P8 query "platform refactoring." Rearchitecting Live Railroad Systems does not contain "refactoring" -- its title says "Rearchitecting" and its prose uses "rearchitecture" and "refactor." No enterprise story whose subject is restructuring uses the query's exact vocabulary. A term-matching mechanism has nothing to match. BM25 plus a stemmer would address the no-stemming limitation in MATTGPT-178 and would help queries whose vocabulary the corpus does carry -- but Phase 3 should not be scoped as the fix for P5/P8.
   - The detailed Fix-path ordering section below remains the canonical reference for option specifics; this annotation adds sequencing decisions made during the May 28, 2026 prioritization pass.
 - **Finding 1 (noun-overlap spectrum + subject-pronoun modifier):** Free-text queries with "Matt" as the subject systematically contaminate retrieval when the noun overlaps MattGPT or Strangler Fig story vocabulary. Subject pronoun is a *modifier*, not a binary gate — moderate-overlap nouns are rescued by switching "Matt" → "you"; severe-overlap nouns are not.
@@ -1447,7 +1447,7 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 - **Logged:** September 2, 2026
 - **Dependencies:** None. The conditional on MATTGPT-160's split-by-section results has resolved differently than expected: split-by-section did not preserve qualifiers; the `source_text` instruction change shipped at `5aee8a4` and `b28a080` did. Rows 7 and 11 are now falsifiable. Row 22 was always qualifier-independent.
 
-**Finding (corpus-text audit, September 18, 2026, `probe_244_audit.py`; output: `docs/evidence/MATTGPT-244/probe_244_audit_output.txt`; input: `docs/evidence/MATTGPT-244/arm2_run1.json`):** 17 honest, 5 over-called, 1 borderline across 23 rows on the demo JD. Two separate metrics: 20/23 strong (87% strong); 5/23 over-called (22% over-called). The ~80% strong figure in the earlier -159 probe output was measuring a different question. **Note on fixture identification:** `probe_244_audit.py:18` hardcodes `probe_159_output/arm2_run1.json`; the `jd_path` field in that file's summary reports `demo_jd.txt` despite folder naming suggesting otherwise. These are demo JD rows, not AT&T rows. Identify fixtures by requirement text and cited-evidence content, not by `jd_path` or folder name. The five over-called rows split into two shapes:
+**Finding (corpus-text audit, September 18, 2026, `probes/probe_244_audit.py` (local, untracked); output: `docs/evidence/MATTGPT-244/probe_244_audit_output.txt`; input: `docs/evidence/MATTGPT-244/arm2_run1.json`):** 17 honest, 5 over-called, 1 borderline across 23 rows on the demo JD. Two separate metrics: 20/23 strong (87% strong); 5/23 over-called (22% over-called). The ~80% strong figure in the earlier -159 probe output was measuring a different question. **Note on fixture identification:** `probes/probe_244_audit.py` (local, untracked) hardcodes `probe_159_output/arm2_run1.json` (tracked copy: `docs/evidence/MATTGPT-244/arm2_run1.json`); the `jd_path` field in that file's summary reports `demo_jd.txt` despite folder naming suggesting otherwise. These are demo JD rows, not AT&T rows. Identify fixtures by requirement text and cited-evidence content, not by `jd_path` or folder name. The five over-called rows split into two shapes:
 
 **Shape A -- corpus-writing gap (rows 10 and 21). NOT -244 scope.** Both cite a solo project for an org-level requirement. The corpus has exactly one AI-assisted-development story and it is independent work; there is no org-level story to cite. Not fixable by prompt; the evidence simply does not exist. Both belong in MATTGPT-154 (operational-breadth tagging pass).
 
@@ -1494,17 +1494,17 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 - **Type:** Bug
 - **File:** `services/jd_assessor.py` (`retrieve_stories`), corpus (`echo_star_stories_nlp.jsonl`)
 - **Logged:** September 11, 2026
-- **Benchmark:** `probe_243_top_k_rank.py` at repo root. Re-runnable before-and-after measurement. Same role `probe_163_substitution_impact.py` plays for -077.
+- **Benchmark:** `probes/probe_243_top_k_rank.py` (local, untracked). Re-runnable before-and-after measurement. Same role `probes/probe_163_substitution_impact.py` (local, untracked) plays for -077.
 
 **Ordering constraint (September 2026):** -244 must land before this ticket. The assessor currently licenses over-calling by scoring too generously -- improving ranking while that definition stands makes the over-calling worse, because more topically-correct stories surface into an assessment that still calls gaps "strong." The gap rate will drop after -249 ships in a way that looks like a regression against -244's baseline; it isn't one, but only if -244 has already run. Do not pick up -249 until -244 is Done.
 
-**Finding (September 2026, `probe_243_top_k_rank.py` at top_k=25):**
+**Finding (September 2026, `probes/probe_243_top_k_rank.py` (local, untracked) at top_k=25):**
 
 Requirement: "Calm, decisive leadership during incidents, escalations, and high-pressure situations" (AT&T JD, row 6).
 Target: "Rescuing and Stabilizing JP Morgan's TS Dynamics CRM Program" (`rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase`), Theme: Org & Working-Model Transformation.
 Result: target at rank 18, score 0.3733.
 
-**Top 8 with Theme (September 2026, `probe_243_top_k_rank.py`, top_k=25):**
+**Top 8 with Theme (September 2026, `probes/probe_243_top_k_rank.py` (local, untracked), top_k=25):**
 
 ```
 rank  score   id-slug                                                          client                Theme
@@ -1521,7 +1521,7 @@ rank  score   id-slug                                                          c
   18  0.3733  rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program      jp-morgan-chase       Org & Working-Model Transformation  <== target
 ```
 
-Full ranked 25 available from `probe_243_top_k_rank.py` (re-runnable against current corpus).
+Full ranked 25 available from `probes/probe_243_top_k_rank.py` (local, untracked; re-runnable against current corpus).
 
 **The target shares its Theme (Org & Working-Model Transformation) with three stories that outrank it (ranks 4, 7, 8).** This rules out Theme-based fixes before anyone reaches for one, and it is the reason the PN exclusion from -169 does not port over as the answer here. Even removing the three PN stories at ranks 1, 2, and 5 would leave the target behind five non-PN stories.
 
@@ -1618,7 +1618,7 @@ Not fixed in PoC:
 
 **Cross-references:**
 - `docs/evidence/MATTGPT-250/20260922_091818/output.txt` (517 lines, 72KB -- literal run output)
-- `probe_250_output/20260922_091818/poc.py` (PoC script; untracked, local only; probe scripts were not copied to docs/evidence/)
+- `probes/output/probe_250_output/20260922_091818/poc.py` (PoC script; local, untracked; probe scripts were not copied to docs/evidence/)
 - `docs/evidence/MATTGPT-250/20260923_125734/stage1_output.txt` (Stage 1, September 23, 2026; 16 queries; top_score and full answer text on every row. Gate analysis: 2 of 16 queries reached low-confidence gate, both education questions; no control query reached it.)
 - `docs/working/080_Skill_Evidence_Approach.md` Section 5 (original gap documentation)
 - MATTGPT-080 (skill evidence architecture; this ticket is the remaining unshipped piece)
@@ -1675,7 +1675,7 @@ Same class as the no-inference clause in MATTGPT-250: retrieved text that sits n
 - MATTGPT-023 (logged April 2026, Decided Against May 14, 2026): "showcases his" on "Who is Matt Pugmire?". Recorded root cause: "LLM occasionally ignores the 'never evaluate Matt' prompt instruction." Closure rested on "monitor -- if it becomes consistent, ..."; nothing monitored it.
 - `c47ad1f` (January 26, 2026): removed `get_theme_guidance()` because its "Emphasize:" instructions conflicted with the anti-evaluation rules. MATTGPT-042, -043, and -044 were Decided Against on the same reasoning. That conflict is the same mechanism now suspected in `generate_dynamic_dna()`, making it the strongest supporting evidence for that suspect.
 
-**Measurement gap:** Probe outputs in `probe_250_output/` save `answer_md` after the strip, so they count phrases the strip list missed, not how often the model evaluates. The only raw-text capture is `docs/evidence/MATTGPT-252/20260924_135758/masters_diag_output.txt` (one query, 3 runs, raw equal to final in all three). The baseline run establishes the raw rate before any condition is tested.
+**Measurement gap:** Probe outputs in `probes/output/probe_250_output/` (local, untracked) save `answer_md` after the strip, so they count phrases the strip list missed, not how often the model evaluates. The only raw-text capture is `docs/evidence/MATTGPT-252/20260924_135758/masters_diag_output.txt` (one query, 3 runs, raw equal to final in all three). The baseline run establishes the raw rate before any condition is tested.
 
 **Leading hypothesis (not measured):** The evaluative sections of `generate_dynamic_dna()` -- Theme Strengths, Leadership Philosophy, Core Values, and possibly the Identity quote -- sit under "Ground Truth" in every Ask Agy system prompt alongside eight anti-evaluation instructions. They are consistent with standard-mode answers evaluating (master's, is_synthesis=False), but a run with those sections removed has to confirm it. The rest of MATT_DNA (Clients by Employer, Career Arc, GROUNDING RULES) is not a suspect.
 
@@ -2195,7 +2195,7 @@ These only affect behavior if tags feed filters or counts. Fix is in the master 
 
 **Scope:** Split `extract_requirements()` into three concurrent calls, one per section -- required, preferred, implicit. Each call sees only its section. This stops requirement-count drop on long JDs, where a single call over-length input causes the model to drop items. The felt-wait improvement (parallel I/O instead of one sequential call) comes along as a consequence of the same change, not as a separate target.
 
-**Evidence (`probe_160_extraction_variance.py`, September 2026):** Six JDs, five extractions each. Count spread is 1-2 across the 242-706 word range. At 1113 words (AT&T fixture) the spread jumps to 4-7. Threshold effect near 1000 words -- not a gradual linear scaling. AT&T fixture identity confirmed: 32-39 across runs, matching earlier hand observations. This is the before-measurement; the after-measurement is AT&T alone at five runs (the probe takes a path argument -- running all six JDs again is unnecessary for after-check).
+**Evidence (`probes/probe_160_extraction_variance.py` (local, untracked), September 2026):** Six JDs, five extractions each. Count spread is 1-2 across the 242-706 word range. At 1113 words (AT&T fixture) the spread jumps to 4-7. Threshold effect near 1000 words -- not a gradual linear scaling. AT&T fixture identity confirmed: 32-39 across runs, matching earlier hand observations. This is the before-measurement; the after-measurement is AT&T alone at five runs (the probe takes a path argument -- running all six JDs again is unnecessary for after-check).
 
 **Resolved: open question on -244 fixtures.** The split-by-section change did not incidentally fix qualifier stripping. Qualifier preservation was resolved by the `source_text` instruction change shipped at `5aee8a4` and `b28a080`. Demo JD row 11 is now closed as a pipeline defect; row 7 is unchecked but same shape. -244 carries row 22 as its confirmed fixture and row 7 as pending verification. This gating question is closed.
 
@@ -2216,7 +2216,7 @@ These only affect behavior if tags feed filters or counts. Fix is in the master 
 
 **Correction (structural, not empirical):** Concurrency cannot affect extraction. `extract_requirements()` is a single serial call that completes before any fan-out concurrency takes effect. Earlier notes framed this as needing more runs to establish. It does not -- the design settles it. Do not re-run for an answer the architecture already gives.
 
-**Probe script:** `probe_160_extraction_variance.py` (repo root). Takes a path argument. Before-measurement: six JDs, five runs each (already done). After-measurement: AT&T fixture only, five runs -- no need to re-run all six JDs.
+**Probe script:** `probes/probe_160_extraction_variance.py` (local, untracked). Takes a path argument. Before-measurement: six JDs, five runs each (already done). After-measurement: AT&T fixture only, five runs -- no need to re-run all six JDs.
 
 **Acceptance:**
 - Count spread on the AT&T fixture narrows to 1-2 across five cold-path runs (from the current 4-7). Code defines the exact pass threshold at Red time.
@@ -3043,7 +3043,7 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 
 **Three-commit plan:**
 1. Delete the 3 inert families (`leadership`, `stakeholders`, `innovation`) from anchors and `VALID_INTENTS`.
-2. Rewire `_PN_EXCLUDED_FAMILIES` and `SUBSTITUTION_FAMILIES` to ask their real question directly (entity-detection or unconditional), measured by `probe_163_substitution_impact.py`.
+2. Rewire `_PN_EXCLUDED_FAMILIES` and `SUBSTITUTION_FAMILIES` to ask their real question directly (entity-detection or unconditional), measured by `probes/probe_163_substitution_impact.py` (local, untracked).
 3. Remove the 6 topic-axis families after replay diff confirms safe redistribution.
 
 **Carried from MATTGPT-220 (closed August 30, 2026; block removed from backlog in the September 29, 2026 sync):**
