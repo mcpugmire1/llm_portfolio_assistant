@@ -45,5 +45,14 @@
       "value": "US citizen",
       "subline": "No sponsorship needed"
     }
+  },
+  "self_description": {
+    "label": "Matt's attested self-description (his own words, not independently verified)",
+    "statements": [
+      "I build what's next, modernize what's not, and grow teams along the way.",
+      "Builder's mindset, coach's heart",
+      "Teaches teams to fish, doesn't just fix problems",
+      "Core values: Empathy, Authenticity, Curiosity, Integrity, Leadership"
+    ]
   }
 }

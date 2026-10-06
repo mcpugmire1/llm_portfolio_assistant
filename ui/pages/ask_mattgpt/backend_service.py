@@ -26,6 +26,7 @@ from config.constants import (
     SEARCH_TOP_K,
 )
 from config.debug import DEBUG
+from services import matt_profile
 from services.pinecone_service import (
     PINECONE_NAMESPACE,
     _embed,
@@ -333,15 +334,25 @@ def generate_dynamic_dna(stories: list[dict], clients: set[str]) -> str:
         if banking_clients
         else "Various financial services clients"
     )
+    # Matt's own words, rendered under the profile's label so the model can
+    # quote them as his self-description, not as verified facts. Role Match's
+    # grounding (jd_assessor.load_matt_profile) does not carry them.
+    try:
+        self_desc = matt_profile.load_profile_dict().get("self_description") or {}
+    except Exception:
+        self_desc = {}
+        logger.exception("MATT_DNA self-description block skipped: profile read failed")
+    self_description_block = ""
+    if self_desc.get("label") and self_desc.get("statements"):
+        statement_lines = "\n".join(f"- {s}" for s in self_desc["statements"])
+        self_description_block = f"**{self_desc['label']}:**\n{statement_lines}\n\n"
+
     telecom_str = ", ".join(telecom_clients) if telecom_clients else "AT&T"
     transport_str = (
         ", ".join(transport_clients) if transport_clients else "Norfolk Southern"
     )
 
     return f"""## Matt Pugmire — Ground Truth (Synced {datetime.now().strftime('%Y-%m')})
-
-**Identity:**
-"I build what's next, modernize what's not, and grow teams along the way."
 
 **Career Arc:**
 Software Engineer → Solution Architect → Director → Cloud Innovation Center Leader
@@ -392,13 +403,8 @@ Software Engineer → Solution Architect → Director → Cloud Innovation Cente
 **NOT Matt's Clients (NEVER mention):**
 Kaiser, Google, Amazon, Microsoft, Meta, MetLife, Citizens Bank
 
-**Core Values:**
-Empathy, Authenticity, Curiosity, Integrity, Leadership
-
-**Leadership Philosophy:**
-- Builder's mindset, coach's heart
+{self_description_block}**Leadership Philosophy:**
 - Leads with empathy, clarity, and purpose
-- Teaches teams to fish — doesn't just fix problems
 - "Permit to fail" learning environment
 - Balanced teams: Product + Engineering + Design together
 
