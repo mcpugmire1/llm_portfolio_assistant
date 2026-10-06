@@ -931,6 +931,77 @@ def _extract_profile_markers(text: str) -> tuple[str, list[str]]:
     return _MARKER_RE.sub("", "\n".join(kept_lines)), categories
 
 
+def _postprocess_agy_text(
+    response_text: str, stories: list[dict[str, Any]]
+) -> tuple[str, list[str]]:
+    """Clean the model's answer text for display. Returns (text, cited_categories).
+
+    Strips profile markers first (MATTGPT-250 item 4), then bolds the clients
+    of the given stories and number patterns, strips meta-commentary,
+    tidies whitespace, and escapes $ last.
+    """
+    response_text, cited_categories = _extract_profile_markers(response_text)
+
+    # =====================================================================
+    # POST-PROCESSING: Auto-bold numbers and client names
+    # GPT frequently ignores bolding instructions, so we fix it here
+    # =====================================================================
+
+    # Bold ALL known client names (derived from story data)
+    known_clients = get_known_clients(stories)
+    for client in known_clients:
+        if client and len(client) > 2:  # Skip very short strings
+            # Match client name not already wrapped in **
+            pattern = rf'(?<!\*\*)({re.escape(client)})(?!\*\*)'
+            response_text = re.sub(pattern, r'**\1**', response_text)
+
+    # Bold numbers/metrics that aren't already bolded
+    # Matches: 30%, $50M, 4x, 150+, 12 countries, 5 months, etc.
+    #
+    # MATTGPT-250: leading lookbehind `(?<![\*\d])` rejects any match
+    # start that sits mid-number or immediately after `**`. The prior
+    # `(?<!\*\*)` only guarded the exact "**" prefix, which admitted
+    # mid-number starts on pre-bolded input (e.g. "**16 weeks**" ->
+    # "**1**6 week**s**", "**40%+**" -> "**4**0%**+**").
+    number_patterns = [
+        r'(?<![\*\d])(\$[\d,.]+[MBK]?)(?!\*\*)',  # $50M, $300K, $1.2B
+        r'(?<![\*\d])(\d+%\+?)(?!\*\*)',  # 30%, 40%+
+        r'(?<![\*\d])(\d+[xX])(?=\s)(?!\*\*)',  # 4x, 10X (lookahead for space, don't capture it)
+        r'(?<![\*\d])(\d+\+?\s*(?:engineers?|teams?|members?|practitioners?|professionals?|countries|regions?|clients?|projects?|months?|weeks?|days?|hours?))(?!\*\*)',  # 150+ engineers, 12 countries, 150 professionals
+        r'(?<![\*\d])(\d+[.,]?\d*\s*(?:reduction|increase|improvement|faster|slower))(?!\*\*)',  # 30% reduction
+    ]
+
+    for pattern in number_patterns:
+        response_text = re.sub(pattern, r'**\1**', response_text, flags=re.IGNORECASE)
+
+    # Clean up any double-bolding that might have occurred
+    response_text = re.sub(r'\*\*\*\*+', '**', response_text)
+
+    # =====================================================================
+    # POST-PROCESSING: Strip meta-commentary patterns
+    # LLM sometimes ignores "don't evaluate Matt" instruction
+    # These patterns talk ABOUT the story instead of answering
+    # Patterns imported from config/constants.py
+    # =====================================================================
+    for pattern in META_COMMENTARY_REGEX_PATTERNS:
+        # Find and remove sentences containing meta-commentary
+        # Match sentence containing the pattern (from capital letter or newline to period/newline)
+        sentence_pattern = rf'[^.]*{pattern}[^.]*\.'
+        response_text = re.sub(sentence_pattern, '', response_text, flags=re.IGNORECASE)
+
+    # Clean up formatting
+    response_text = re.sub(r'  +', ' ', response_text)  # Double spaces
+    response_text = re.sub(r'\n\n\n+', '\n\n', response_text)  # Triple newlines
+    response_text = response_text.strip()
+
+    # Escape dollar signs to prevent Streamlit's markdown renderer
+    # from interpreting $...$ as LaTeX math notation.
+    # Must run AFTER all other post-processing (bolding, meta-strip, etc.)
+    response_text = response_text.replace("$", "\\$")
+
+    return response_text, cited_categories
+
+
 def _generate_agy_response(
     question: str,
     ranked_stories: list[dict[str, Any]],
@@ -1133,72 +1204,12 @@ def _generate_agy_response(
 
         response_text = response.choices[0].message.content
 
-        # MATTGPT-250 item 4: strip profile markers from the raw text first.
-        response_text, cited_categories = _extract_profile_markers(response_text)
+        # MATTGPT-250 item 4: profile markers are stripped first, inside the helper.
+        response_text, cited_categories = _postprocess_agy_text(
+            response_text, ranked_stories
+        )
         if profile_categories_out is not None:
             profile_categories_out.extend(cited_categories)
-
-        # =====================================================================
-        # POST-PROCESSING: Auto-bold numbers and client names
-        # GPT frequently ignores bolding instructions, so we fix it here
-        # =====================================================================
-        import re
-
-        # Bold ALL known client names (derived from story data)
-        known_clients = get_known_clients(ranked_stories)
-        for client in known_clients:
-            if client and len(client) > 2:  # Skip very short strings
-                # Match client name not already wrapped in **
-                pattern = rf'(?<!\*\*)({re.escape(client)})(?!\*\*)'
-                response_text = re.sub(pattern, r'**\1**', response_text)
-
-        # Bold numbers/metrics that aren't already bolded
-        # Matches: 30%, $50M, 4x, 150+, 12 countries, 5 months, etc.
-        #
-        # MATTGPT-250: leading lookbehind `(?<![\*\d])` rejects any match
-        # start that sits mid-number or immediately after `**`. The prior
-        # `(?<!\*\*)` only guarded the exact "**" prefix, which admitted
-        # mid-number starts on pre-bolded input (e.g. "**16 weeks**" ->
-        # "**1**6 week**s**", "**40%+**" -> "**4**0%**+**").
-        number_patterns = [
-            r'(?<![\*\d])(\$[\d,.]+[MBK]?)(?!\*\*)',  # $50M, $300K, $1.2B
-            r'(?<![\*\d])(\d+%\+?)(?!\*\*)',  # 30%, 40%+
-            r'(?<![\*\d])(\d+[xX])(?=\s)(?!\*\*)',  # 4x, 10X (lookahead for space, don't capture it)
-            r'(?<![\*\d])(\d+\+?\s*(?:engineers?|teams?|members?|practitioners?|professionals?|countries|regions?|clients?|projects?|months?|weeks?|days?|hours?))(?!\*\*)',  # 150+ engineers, 12 countries, 150 professionals
-            r'(?<![\*\d])(\d+[.,]?\d*\s*(?:reduction|increase|improvement|faster|slower))(?!\*\*)',  # 30% reduction
-        ]
-
-        for pattern in number_patterns:
-            response_text = re.sub(
-                pattern, r'**\1**', response_text, flags=re.IGNORECASE
-            )
-
-        # Clean up any double-bolding that might have occurred
-        response_text = re.sub(r'\*\*\*\*+', '**', response_text)
-
-        # =====================================================================
-        # POST-PROCESSING: Strip meta-commentary patterns
-        # LLM sometimes ignores "don't evaluate Matt" instruction
-        # These patterns talk ABOUT the story instead of answering
-        # Patterns imported from config/constants.py
-        # =====================================================================
-        for pattern in META_COMMENTARY_REGEX_PATTERNS:
-            # Find and remove sentences containing meta-commentary
-            # Match sentence containing the pattern (from capital letter or newline to period/newline)
-            sentence_pattern = rf'[^.]*{pattern}[^.]*\.'
-            response_text = re.sub(
-                sentence_pattern, '', response_text, flags=re.IGNORECASE
-            )
-
-        # Clean up formatting
-        response_text = re.sub(r'  +', ' ', response_text)  # Double spaces
-        response_text = re.sub(r'\n\n\n+', '\n\n', response_text)  # Triple newlines
-        response_text = response_text.strip()
-
-        # Escape dollar signs to prevent Streamlit's markdown renderer
-        # from interpreting $...$ as LaTeX math notation.
-        # Must run AFTER all other post-processing (bolding, meta-strip, etc.)
-        response_text = response_text.replace("$", "\\$")
 
         return response_text
 
