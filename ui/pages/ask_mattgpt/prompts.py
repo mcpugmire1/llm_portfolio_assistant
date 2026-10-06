@@ -99,7 +99,6 @@ Internally, follow this WHY → HOW → WHAT flow (but don't show these labels t
 - WHY (30-40%): Open with the tension or pattern of difficulty — what keeps failing across organizations, what resistance Matt encountered repeatedly. Use the [SITUATION] fields. Not metrics.
 - HOW (40-50%): What Matt did differently — the repeatable approach across these stories, how it contrasts with standard practice. Include metrics here as evidence of the approach working.
 - WHAT (10-20%): Proof — measurable outcomes across clients, scale, pattern confirmation.
-- End with the closing provided
 
 ## RULES
 - Lead with the tension from the 2-3 most relevant stories. Remaining stories are optional — use them only if they reinforce the thread. Do not force-fit every story.
@@ -132,7 +131,6 @@ Internally, follow this WHY → HOW → WHAT flow (but don't show these labels t
 - WHY (30-40%): The tension — what was broken, who was pushing back, what wasn't working. Use the [SITUATION] field. If it describes resistance or failure, lead with that. The outcome matters because the starting point was hard.
 - HOW (40-50%): What Matt did differently — specific practices, anecdotes, what he did instead of the standard approach. Include metrics here as evidence of the approach working.
 - WHAT (10-20%): The proof — measurable results with bolded numbers, client context, scale.
-- End with the closing provided
 
 **CRITICAL: Your response should read as natural paragraphs, NOT as a template with labeled sections.**
 
@@ -295,7 +293,7 @@ _ATTESTED_FACTS_HEADER = "**About Matt (attested facts):**"
 _PROFILE_MARKERS = [f"[[profile:{c}]]" for c in PROFILE_FACT_CATEGORIES]
 _MARKER_INSTRUCTION = (
     "When you state a fact from the facts about Matt above, put its "
-    "category marker on its own line before the closing line: "
+    "category marker on its own line at the end of the response: "
     f"{', '.join(_PROFILE_MARKERS[:-1])} or {_PROFILE_MARKERS[-1]}, once "
     "per category stated."
 )
@@ -344,7 +342,6 @@ def build_user_message(
     question: str,
     story_context: str,
     opening: str,
-    closing: str,
     is_synthesis: bool,
     verbatim_requirement: str = "",
     focus_angle: str = "",
@@ -356,7 +353,6 @@ def build_user_message(
         question: User's original question
         story_context: Formatted story content with XML tags
         opening: Chosen opening line (includes 🐾)
-        closing: Chosen closing line
         is_synthesis: True for synthesis mode, False for standard mode
         verbatim_requirement: Optional verbatim phrase requirements
         focus_angle: Optional focus angle for variety (standard mode only)
@@ -384,10 +380,9 @@ def build_user_message(
 
 Start your response with this exact text: {opening}
 
-End your response with this exact text: {closing}
 {focus_line}
 {verbatim_requirement}
-Write natural prose paragraphs between the opening and closing. No section headers or labels.
+Write natural prose paragraphs after the opening. No section headers or labels.
 
 **Bold ALL client names and numbers.**
 

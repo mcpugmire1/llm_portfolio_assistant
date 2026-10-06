@@ -956,9 +956,9 @@ def _generate_agy_response(
     message. Retrieval does not use them.
 
     Uses a merged Agy prompt combining:
-    - V1 Voice Guide: Warmth, personality variety, opening/closing options
+    - V1 Voice Guide: Warmth, personality variety, opening options
     - V2 System Prompt: Start With Why structure, Purpose/Process/Performance flow
-    - Python-driven randomization for variety in openings, closings, and focus
+    - Python-driven randomization for variety in openings and focus
 
     For synthesis mode (big-picture questions about themes/patterns), uses expanded
     context from multiple stories and Career Narrative content to provide holistic
@@ -1042,15 +1042,6 @@ def _generate_agy_response(
             ]
             chosen_opening = random.choice(openings)
 
-            # Synthesis mode closings
-            closings = [
-                "Want me to dive deeper into any of these themes?",
-                "I can show specific examples from any of these areas.",
-                "Which pattern would you like to explore further?",
-                "Happy to unpack any of these with concrete stories.",
-            ]
-            chosen_closing = random.choice(closings)
-
             # No focus angle for synthesis — we want breadth
             chosen_focus = "Cover patterns across multiple stories rather than depth on any single one."
         else:
@@ -1066,19 +1057,6 @@ def _generate_agy_response(
                 "🐾 I know just the story.",
             ]
             chosen_opening = random.choice(openings)
-
-            # Standard mode closings
-            closings = [
-                "Want me to dig deeper into the technical approach?",
-                "Happy to explore similar work in other industries.",
-                "What else can I track down for you?",
-                "I can show you related patterns if that's helpful.",
-                "Let me know if you'd like the deep dive on this one.",
-                "Want to see how Matt applied this elsewhere?",
-                "Shall I find more examples like this?",
-                "There's more to this story if you're curious.",
-            ]
-            chosen_closing = random.choice(closings)
 
             # Random focus angle - adds variety to which aspect gets included
             focus_angles = [
@@ -1131,7 +1109,6 @@ def _generate_agy_response(
             question=question,
             story_context=story_context,
             opening=chosen_opening,
-            closing=chosen_closing,
             is_synthesis=is_synthesis,
             verbatim_requirement=verbatim_requirement,
             focus_angle=chosen_focus if not is_synthesis else "",
