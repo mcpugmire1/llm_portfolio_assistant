@@ -16,6 +16,10 @@ Cited probe output copied byte-identical into docs/evidence/MATTGPT-<n>/ (42ddbe
 
 ### Ask Agy
 
+**October 6, 2026 -- MATT_DNA carries only story- or profile-backed facts (MATTGPT-269)** -- Red `a310514`, `771aa52`, `9c2e997`, `d1a8c30`, `f442f24`, `fdd8c4f`, `3143e60`, `c773234`; Green `5439c8f`, `d94367e`, `bbb20d6`, `a3d1015`, `187c5a5`, `b1adf0d`, `9744634`
+
+`generate_dynamic_dna()` no longer states figures no story or profile backs ($300M+ annual sales, the $189M win, 30-60% cycle time, MVP in 3 weeks), the false 12-country payments line, "early-stage startups" among NOT-industries, the hardcoded career-eras block, or the NOT-clients list, which Agy recited on request. Matt's self-description moved to `matt_profile.json` under a not-independently-verified label, Ask Agy only. Theme Strengths are tiered by story counts. Acceptance (docs/evidence/MATTGPT-269/not_clients_20261006_164532/, `b2f2d4a`): figures not in a story or the profile 0/75 before and after; Kaiser and MetLife still denied; controls and synthesis name no listed company. The remaining hardcoded Career Arc, Leadership Philosophy and industry tiers moved to MATTGPT-275's grounding requirement.
+
 **October 6, 2026 -- Agy's random closers removed for now (MATTGPT-276)** -- `e61520e` (Red), `7850ed2` (Green)
 
 `_generate_agy_response()` no longer picks a closing offer with `random.choice` (8 standard, 4 synthesis), and `build_user_message()` takes no closing argument. Each offer invited a follow-up that retrieval, running on the bare follow-up text, could not resolve: accepted offers retrieved unrelated stories in 3 of 3 browser follow-ups. Acceptance: the final paragraph was an offer in 105/105 answers before and 0/106 after (docs/evidence/MATTGPT-276/, `ecb812f`). The closers are a deliberate call to action; restoring them is part of MATTGPT-275's acceptance. The random opener and focus angle are unchanged.
