@@ -5,8 +5,8 @@ Guards MATT_DNA against corpus drift: every Employer and every non-generic
 Client in the corpus must be reachable through the grounding. Also asserts
 the "What Matt is NOT" block is removed (it went stale against the corpus
 and overrode evidence on hardware/embedded and early-stage-startup queries)
-while the "NOT Matt's Clients" block stays (it names specific companies
-the model actually confabulated in January 2026).
+and the "NOT Matt's Clients" list is removed (MATTGPT-269: Agy recited it
+when asked which clients it can't mention).
 """
 
 import sys
@@ -129,15 +129,15 @@ def then_matt_dna_no_heading(ctx, substring):
     )
 
 
-@then(parsers.parse('MATT_DNA contains "{substring}"'))
-def then_matt_dna_contains(ctx, substring):
+@then(parsers.parse('MATT_DNA does not contain "{substring}"'))
+def then_matt_dna_does_not_contain(ctx, substring):
     bs = ctx["backend_service"]
-    assert substring in bs.MATT_DNA, (
-        f"MATT_DNA does not contain {substring!r}. This block names specific"
-        f" companies the model confabulated in January 2026 (Kaiser and a"
-        f" JPMorgan '4x faster delivery' metric that did not exist). It must"
-        f" stay in MATT_DNA even after MATTGPT-207 removes the 'What Matt is"
-        f" NOT' block, because the two blocks do different jobs -- one guards"
-        f" against confabulated CLIENTS by name, the other was enumerating"
-        f" categorical exclusions and went stale against the corpus."
+    assert substring not in bs.MATT_DNA, (
+        f"MATT_DNA still contains {substring!r}. The NOT-clients list was"
+        f" removed for MATTGPT-269: asked 'Which clients can't you mention?',"
+        f" Agy recited all seven names in 5 of 5 runs, once as 'Matt cannot"
+        f" mention clients such as Kaiser...', which reads as confidential"
+        f" clients. Grounding rule 1 ('ONLY cite clients, projects, and"
+        f" metrics that appear in the stories below') covers companies that"
+        f" appear in no story. Remove the list from generate_dynamic_dna."
     )
