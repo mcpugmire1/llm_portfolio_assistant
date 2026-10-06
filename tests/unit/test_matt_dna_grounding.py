@@ -107,3 +107,48 @@ def test_role_match_grounding_has_no_self_description():
     assert SELF_DESCRIPTION_LABEL not in grounding
     for phrase in SELF_DESCRIPTION_PHRASES:
         assert phrase not in grounding
+
+
+# Theme and industry claims must match the corpus: Execution & Delivery is
+# the largest theme but 59 of 123 stories (not a majority); Talent &
+# Enablement is tagged on 12; no story is in a Regulatory industry.
+OVERSTATED = [
+    "the majority of his work",
+    "runs through most engagements",
+    "Regulatory (one engagement)",
+]
+
+
+@pytest.mark.parametrize("claim", OVERSTATED)
+def test_overstated_claim_absent(matt_dna, claim):
+    assert claim.lower() not in matt_dna.lower()
+
+
+@pytest.mark.parametrize(
+    "kept",
+    [
+        "Execution & Delivery is Matt's primary strength",
+        "Limited: Healthcare (one engagement)",
+    ],
+)
+def test_supported_part_of_line_kept(matt_dna, kept):
+    assert kept in matt_dna
+
+
+def _theme_strengths(matt_dna):
+    start = matt_dna.find("**Theme Strengths:**")
+    end = matt_dna.find("\n\n**", start + 1)
+    return matt_dna[start:end]
+
+
+def test_talent_and_enablement_listed_with_its_peers(matt_dna):
+    """Talent & Enablement ties Strategic & Advisory at 12 stories; both sit
+    in the narrower tier, below Org Transformation (19)."""
+    strengths = _theme_strengths(matt_dna)
+    narrower = next((line for line in strengths.splitlines() if "narrower" in line), "")
+    assert "Talent & Enablement" in narrower
+    assert "Strategic" in narrower
+
+
+def test_no_evaluative_builds_people_claim(matt_dna):
+    assert "builds people" not in matt_dna.lower()
