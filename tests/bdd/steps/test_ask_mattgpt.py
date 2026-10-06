@@ -279,13 +279,6 @@ def when_user_submits_low_confidence(browser_page):
     wait_for_banner(browser_page)
 
 
-@when("the response has been generated")
-def when_response_generated(browser_page):
-    """Wait for the LLM response to render after a chip click."""
-    browser_page.wait_for_timeout(LONG_WAIT * 2)
-    browser_page.wait_for_load_state("networkidle")
-
-
 @when(parsers.parse('the user types "{query}" in the search box'))
 def when_user_types_in_search(browser_page, query):
     """My Work search box."""
@@ -340,16 +333,6 @@ def then_rejection_banner_displayed(browser_page):
     """Generic version for My Work context."""
     banner = browser_page.locator(".no-match-banner").first
     assert banner.is_visible(), "Rejection banner not visible"
-
-
-@then("the rule:* rejection banner should NOT be visible")
-def then_rule_banner_not_visible(browser_page):
-    count = browser_page.locator(".no-match-banner").count()
-    assert count == 0, (
-        f"Expected no banner after chip click + response; "
-        f"found {count} banner(s) still visible. "
-        f"__clear_banner_after_answer__ flag may not be firing."
-    )
 
 
 # =============================================================================
@@ -435,16 +418,9 @@ def then_no_rule_chips_visible(browser_page):
     )
 
 
-@then("no chips should be visible")
-def then_no_chips_visible(browser_page):
-    visible = get_visible_chip_labels(browser_page)
-    assert len(visible) == 0, f"Expected no chips; found {len(visible)}: {visible!r}"
-
-
 @then("zero chips should be visible")
 def then_zero_chips_visible(browser_page):
-    """Equivalent to 'no chips' — phrased differently in low_confidence
-    and My Work scenarios for readability."""
+    """No chips visible (low_confidence and My Work scenarios)."""
     visible = get_visible_chip_labels(browser_page)
     assert len(visible) == 0, f"Expected zero chips; found {len(visible)}: {visible!r}"
 
