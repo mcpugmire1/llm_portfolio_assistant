@@ -338,9 +338,6 @@ def generate_dynamic_dna(stories: list[dict], clients: set[str]) -> str:
         ", ".join(transport_clients) if transport_clients else "Norfolk Southern"
     )
 
-    # Find a major banking client for achievements (first alphabetically from banking)
-    major_banking_client = banking_clients[0] if banking_clients else "a major bank"
-
     return f"""## Matt Pugmire — Ground Truth (Synced {datetime.now().strftime('%Y-%m')})
 
 **Identity:**
@@ -381,7 +378,6 @@ Software Engineer → Solution Architect → Director → Cloud Innovation Cente
 **Signature Achievements (cite for synthesis):**
 - Built CIC from 0 to {p_count}+ practitioners
 - CIC proven metrics: 4X faster velocity, zero defects
-- {major_banking_client} payments platform across 12 countries
 - {transport_str} legacy-to-cloud transformation
 - CIC teams of 10 consistently delivered impact of typical teams of 20
 - AWS cloud-native architecture across engagements
