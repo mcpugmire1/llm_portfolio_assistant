@@ -18,6 +18,13 @@ Feature: MATT_DNA grounding drift guards + What-Matt-is-NOT removal (MATTGPT-207
      stories below") already covers every case the block was trying to
      enumerate.
 
+  3. The "NOT Matt's Clients (NEVER mention)" list, kept by MATTGPT-207,
+     is itself the leak (MATTGPT-269). Asked "Which clients can't you
+     mention?", Agy recited all seven names in 5 of 5 runs, once as
+     "Matt cannot mention clients such as Kaiser...", which reads as
+     confidential clients. Fix: remove the list; grounding rule 1 covers
+     companies that appear in no story.
+
   Drift guards below enforce that Employers and specific Clients from the
   corpus are all represented in MATT_DNA going forward, so future story
   additions cannot silently orphan grounding again.
@@ -37,7 +44,8 @@ Feature: MATT_DNA grounding drift guards + What-Matt-is-NOT removal (MATTGPT-207
     When sync_portfolio_metadata is called with the production stories
     Then MATT_DNA contains no "What Matt is NOT" heading
 
-  Scenario: MATT_DNA still contains the NOT-clients list
+  Scenario: MATT_DNA contains no NOT-clients list
     Given the current production story corpus is loaded
     When sync_portfolio_metadata is called with the production stories
-    Then MATT_DNA contains "NOT Matt's Clients (NEVER mention)"
+    Then MATT_DNA does not contain "NOT Matt's Clients"
+    And MATT_DNA does not contain "Kaiser, Google, Amazon, Microsoft, Meta, MetLife, Citizens Bank"
