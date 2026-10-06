@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: 94a1cf2 -->
+<!-- last-backlog-sync: da15d1d -->
 <!-- BEFORE EDITING: read the mattgpt-backlog-maintenance skill for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -ohE 'MATTGPT-[0-9]+' BACKLOG.md CHANGELOG.md docs/ADR.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -126,6 +126,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-274](#mattgpt-274) | `eval_rag_quality.py --surgical` calls rag_answer() with the query logger and CSV writers active | Open | Low | Bug | October 5, 2026 |
 | [MATTGPT-275](#mattgpt-275) | Ask Agy moves to tool-calling retrieval: the model answers from profile and conversation, and calls search_stories when needed | Open | High | Action | October 6, 2026 |
 | [MATTGPT-277](#mattgpt-277) | Stale BDD tests on main: role_match_logging, query_logger_top_score, pn_exclusion background family | Open | Medium | Bug | October 6, 2026 |
+| [MATTGPT-278](#mattgpt-278) | Tool-path and short-form client names go unbolded | Open | Medium | Issue | October 6, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -1943,6 +1944,8 @@ e. Source-vs-output check: for each fixture JD, the row count and wording under 
 
 **Update (Oct 6, 2026, e5492b3):** Item 4 partly done: the '5 fields' comment in constants.py now reads "Why more fields here than in detection". Still open: the 'from CLAUDE.md' comment (constants.py casing-rules header), and items 1-3.
 
+**Stale docstring (Oct 6, 2026; flagged in the Architecture Sync pass, bce67a7):** `_generate_agy_response()` says "using OpenAI GPT-4o-mini"; the call uses `gpt-4o`. Fix: drop the model name from the docstring; the call's model argument (or `DEFAULT_CHAT_MODEL`) is the single source. The hardcoded `model="gpt-4o"` in that call is MATTGPT-140, the same one-home-for-a-value problem as item 1.
+
 ---
 
 ### MATTGPT-263
@@ -2181,6 +2184,26 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 **Also seen (Oct 6, 2026, 7850ed2):** `test_post_result_cta_renders` timed out once in the full Oct 6 run (15s wait for the assessment); passed in isolation. Ticket it if it recurs.
 
 **Related:** MATTGPT-254 (stale BDD scenarios in role_match.feature and jd_extraction.feature). Kept separate because the pn_exclusion failure may be a regression, not a stale test.
+
+---
+
+### MATTGPT-278
+**Tool-path and short-form client names go unbolded**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Issue
+- **File:** `ui/pages/ask_mattgpt/backend_service.py` (`get_known_clients()`, the post-processing bolding in `_generate_agy_response()`)
+- **Logged:** October 6, 2026
+- **Dependencies:** MATTGPT-275
+
+**Observed (Oct 6, 2026):** A tool-path answer given without a search named JP Morgan unbolded ("How big was the team?").
+
+**Verified Oct 6, 2026:** Post-processing bolds exact matches of the full corpus client list. `_KNOWN_CLIENTS` is set from the whole corpus at init, and the per-answer `get_known_clients(ranked_stories)` call returns that cache. The corpus value is "JP Morgan Chase" (14 stories), so "JP Morgan" does not match. The tool path exists only in an untracked probe; whether it applies this post-processing is unchecked.
+
+**Gaps:** (1) short-form client names miss the exact match; (2) MATTGPT-275's tool path must run the same bolding step.
+
+**Candidate:** Match client short forms derived from data, not a hardcoded alias list.
 
 ---
 
