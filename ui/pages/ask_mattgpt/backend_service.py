@@ -391,9 +391,6 @@ Software Engineer → Solution Architect → Director → Cloud Innovation Cente
 **Clients by Employer (ONLY cite these):**
 {clients_by_employer_lines}
 
-**NOT Matt's Clients (NEVER mention):**
-Kaiser, Google, Amazon, Microsoft, Meta, MetLife, Citizens Bank
-
 {self_description_block}**Leadership Philosophy:**
 - Leads with empathy, clarity, and purpose
 - "Permit to fail" learning environment
