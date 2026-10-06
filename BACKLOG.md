@@ -19,9 +19,9 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 7. **-146** -- Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
 8. **-160** -- In Progress. JD extraction split into three concurrent calls (required / preferred / implicit) landed at `5aee8a4`. After-measurement on the AT&T fixture (count spread 1-2 across five runs) not yet recorded. No longer gates -244.
 9. **-244** -- In Progress; prep Greens landed. Role Match assessor calibration: cited evidence doesn't address the specific claim; `confidence` field deletion. Not gated on -160: qualifier preservation was resolved by the `source_text` instruction fix (`5aee8a4`/`b28a080`), not the split. Next: verify the CI/CD-qualifier row after that fix; fixture count and the 22% over-called figure depend on it. Land before -249 (see -249 ordering constraint).
-10. **-168** -- Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data.
+10. **-168** -- Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data. Re-measure after -275 (tunes behavior 275 replaces).
 11. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
-12. **-128** -- Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
+12. **-128** -- Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up. Re-measure after -275 (tunes behavior 275 replaces).
 13. **-129 stories 3-5** -- Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT**
