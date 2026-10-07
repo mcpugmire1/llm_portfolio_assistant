@@ -311,30 +311,30 @@ def generate_dynamic_dna(stories: list[dict], clients: set[str]) -> str:
         f"{i+1}. {theme}" for i, theme in enumerate(SYNTHESIS_THEMES)
     )
 
-    # Derive clients by industry from story data (Single Source of Truth)
+    # Industry Experience, derived entirely from the Industry field
+    # (MATTGPT-279): every industry with its story count, most stories first,
+    # and the non-generic clients of its stories. "Cross Industry" is not an
+    # industry. No tier labels or fallback names, so a new story's industry
+    # reaches the model without a code change.
+    stories_by_industry: dict[str, int] = {}
     clients_by_industry: dict[str, set[str]] = {}
     for s in stories:
         ind = s.get("Industry", "")
+        if not ind or ind == "Cross Industry":
+            continue
+        stories_by_industry[ind] = stories_by_industry.get(ind, 0) + 1
         client = s.get("Client", "")
-        if ind and client and not is_generic_client(client):
-            if ind not in clients_by_industry:
-                clients_by_industry[ind] = set()
-            clients_by_industry[ind].add(client)
+        if client and not is_generic_client(client):
+            clients_by_industry.setdefault(ind, set()).add(client)
 
-    # Build industry-specific client strings
-    banking_clients = sorted(
-        clients_by_industry.get("Financial Services / Banking", set())
-    )
-    telecom_clients = sorted(clients_by_industry.get("Telecommunications", set()))
-    transport_clients = sorted(
-        clients_by_industry.get("Transportation & Logistics", set())
-    )
-
-    banking_str = (
-        ", ".join(banking_clients)
-        if banking_clients
-        else "Various financial services clients"
-    )
+    industry_lines = []
+    for ind in sorted(stories_by_industry, key=lambda i: (-stories_by_industry[i], i)):
+        n = stories_by_industry[ind]
+        line = f"- {ind}: {n} {'story' if n == 1 else 'stories'}"
+        if clients_by_industry.get(ind):
+            line += f" ({', '.join(sorted(clients_by_industry[ind]))})"
+        industry_lines.append(line)
+    industry_experience_lines = "\n".join(industry_lines)
     # Matt's own words, rendered under the profile's label so the model can
     # quote them as his self-description, not as verified facts. Role Match's
     # grounding (jd_assessor.load_matt_profile) does not carry them.
@@ -347,11 +347,6 @@ def generate_dynamic_dna(stories: list[dict], clients: set[str]) -> str:
     if self_desc.get("label") and self_desc.get("statements"):
         statement_lines = "\n".join(f"- {s}" for s in self_desc["statements"])
         self_description_block = f"**{self_desc['label']}:**\n{statement_lines}\n\n"
-
-    telecom_str = ", ".join(telecom_clients) if telecom_clients else "AT&T"
-    transport_str = (
-        ", ".join(transport_clients) if transport_clients else "Norfolk Southern"
-    )
 
     return f"""## Matt Pugmire — Ground Truth (Synced {datetime.now().strftime('%Y-%m')})
 
@@ -372,16 +367,12 @@ Software Engineer → Solution Architect → Director → Cloud Innovation Cente
 - Org Transformation is a strong secondary theme
 - Strategic Advisory, Talent & Enablement, Emerging Tech and Risk are narrower but present
 
-**Industry Experience:**
-- Primary: Financial Services / Banking ({banking_str})
-- Secondary: Telecommunications ({telecom_str}), Transportation ({transport_str})
-- Limited: Healthcare (one engagement)
-- NOT Matt's industries: Consumer products, retail
+**Industry Experience (stories per industry):**
+{industry_experience_lines}
 
 **Signature Achievements (cite for synthesis):**
 - Built CIC from 0 to {p_count}+ practitioners
 - CIC proven metrics: 4X faster velocity, zero defects
-- {transport_str} legacy-to-cloud transformation
 - CIC teams of 10 consistently delivered impact of typical teams of 20
 - AWS cloud-native architecture across engagements
 
