@@ -1048,6 +1048,66 @@ def _choose_opening_and_focus(is_synthesis: bool) -> tuple[str, str]:
     return chosen_opening, chosen_focus
 
 
+def _openai_client():
+    """OpenAI client for Ask Agy's answer calls, from the app's env vars.
+
+    Imported at call time so tests can patch openai.OpenAI.
+    """
+    from dotenv import load_dotenv
+    from openai import OpenAI
+
+    load_dotenv()
+    return OpenAI(
+        api_key=os.getenv("OPENAI_API_KEY"),
+        project=os.getenv("OPENAI_PROJECT_ID"),
+        organization=os.getenv("OPENAI_ORG_ID"),
+    )
+
+
+def _degraded_fallback(
+    question: str, stories: list[dict[str, Any]], obs: dict[str, Any]
+) -> dict[str, Any]:
+    """Degraded answer after a fatal error: the 5P summary of the best keyword
+    match, marked degraded, with the top 3 keyword matches as sources.
+    """
+    try:
+        ranked = sorted(
+            stories,
+            key=lambda s: _score_story_for_prompt(s, question),
+            reverse=True,
+        )[:3]
+    except Exception:
+        ranked = stories[:1]
+
+    if not ranked:
+        return {
+            "answer_md": "No stories available.",
+            "sources": [],
+            "modes": {},
+            "default_mode": "narrative",
+            "degraded": True,
+            **obs,
+        }
+
+    st.session_state["__ask_dbg_decision"] = "fatal_fallback"
+    primary = ranked[0]
+    summary = build_5p_summary(primary, 280)
+    sources = [
+        {"id": s.get("id"), "title": s.get("Title"), "client": s.get("Client", "")}
+        for s in ranked
+        if isinstance(s, dict)
+    ]
+    modes = {"narrative": summary, "key_points": summary, "deep_dive": summary}
+    return {
+        "answer_md": summary,
+        "sources": sources,
+        "modes": modes,
+        "default_mode": "narrative",
+        "degraded": True,
+        **obs,
+    }
+
+
 def _generate_agy_response(
     question: str,
     ranked_stories: list[dict[str, Any]],
@@ -1101,16 +1161,7 @@ def _generate_agy_response(
         True
     """
     try:
-        from dotenv import load_dotenv
-        from openai import OpenAI
-
-        load_dotenv()
-
-        client = OpenAI(
-            api_key=os.getenv("OPENAI_API_KEY"),
-            project=os.getenv("OPENAI_PROJECT_ID"),
-            organization=os.getenv("OPENAI_ORG_ID"),
-        )
+        client = _openai_client()
 
         # Build theme-aware context using story_intelligence
         story_contexts = []
@@ -2214,42 +2265,7 @@ def rag_answer(
         if DEBUG:
             print(f"DEBUG rag_answer fatal error: {e}")
         logger.exception("rag_answer fatal error: %s", e)
-        try:
-            ranked = sorted(
-                stories,
-                key=lambda s: _score_story_for_prompt(s, question),
-                reverse=True,
-            )[:3]
-        except Exception:
-            ranked = stories[:1]
-
-        if not ranked:
-            return {
-                "answer_md": "No stories available.",
-                "sources": [],
-                "modes": {},
-                "default_mode": "narrative",
-                "degraded": True,
-                **_obs,
-            }
-
-        st.session_state["__ask_dbg_decision"] = "fatal_fallback"
-        primary = ranked[0]
-        summary = build_5p_summary(primary, 280)
-        sources = [
-            {"id": s.get("id"), "title": s.get("Title"), "client": s.get("Client", "")}
-            for s in ranked
-            if isinstance(s, dict)
-        ]
-        modes = {"narrative": summary, "key_points": summary, "deep_dive": summary}
-        return {
-            "answer_md": summary,
-            "sources": sources,
-            "modes": modes,
-            "default_mode": "narrative",
-            "degraded": True,
-            **_obs,
-        }
+        return _degraded_fallback(question, stories, _obs)
 
     # Rank stories based on intent type
     try:
