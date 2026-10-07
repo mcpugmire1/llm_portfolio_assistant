@@ -107,7 +107,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-253](#mattgpt-253) | Confidence gate refuses ordinary evaluator questions before the LLM sees profile or history | Blocked | Medium | Issue | September 26, 2026 |
 | [MATTGPT-254](#mattgpt-254) | Stale BDD scenarios in role_match.feature and jd_extraction.feature; CHANGELOG em dash | Open | Medium | Bug | September 26, 2026 |
 | [MATTGPT-255](#mattgpt-255) | Meta-commentary strip regex corrupts decimal amounts and merges paragraphs | Open | High | Bug | October 2, 2026 |
-| [MATTGPT-256](#mattgpt-256) | Synthesis opening "Great question" contradicts BASE_PROMPT VOICE rule; 154 commented-out lines and stale prompts.py comment also pending | Open | Medium | Bug | October 2, 2026 |
+| [MATTGPT-256](#mattgpt-256) | 154 commented-out lines of the old _generate_agy_response() remain in backend_service.py | Open | Medium | Bug | October 2, 2026 |
 | [MATTGPT-257](#mattgpt-257) | Delete "None is current." from rule 0a -- certification entries already carry expiry dates | Open | Medium | Issue | October 2, 2026 |
 | [MATTGPT-258](#mattgpt-258) | Architecture fitness tests: dependency direction and coupling limits have no automated enforcement | Open | Medium | Action | October 2, 2026 |
 | [MATTGPT-259](#mattgpt-259) | Answer pipeline lives in UI layer -- rag_answer() and callers in backend_service.py should move to services/ | Open | High | Refactor | October 2, 2026 |
@@ -1792,7 +1792,7 @@ Double-bolding (prompt asks for bold three times alongside the regex) and `OFF_T
 ---
 
 ### MATTGPT-256
-**Synthesis opening "Great question" contradicts BASE_PROMPT VOICE rule; 154 commented-out lines and stale prompts.py comment also pending**
+**154 commented-out lines of the old _generate_agy_response() remain in backend_service.py**
 
 - **Status:** Open
 - **Priority:** Medium
@@ -1804,6 +1804,8 @@ Double-bolding (prompt asks for bold three times alongside the regex) and `OFF_T
 
 **Fix 1:** Delete that one opening from the list.
 
+**Issue 1 resolved (Oct 6, 2026, f6e750c, MATTGPT-275 Prep C):** The "Great question" synthesis opener is dropped, not reworded; four synthesis openers remain. BASE_PROMPT's VOICE rule ("No sycophantic openers") stays. The only "Great question" left in `backend_service.py` is inside the commented-out block (Issue 2).
+
 **Issue 2 -- dead commented-out code.** Verified Oct 2: 154 commented-out lines of the old `_generate_agy_response()` remain below the live function in `backend_service.py`. No behavior; pure dead weight.
 
 **Fix 2:** Delete the 154 commented-out lines.
@@ -1811,6 +1813,8 @@ Double-bolding (prompt asks for bold three times alongside the regex) and `OFF_T
 **Issue 3 -- stale comment.** The comment above `_GROUNDING_RULES_HEADER` in `prompts.py` cites "state what the block says..." The rule now reads "state what the facts say." The comment is stale.
 
 **Fix 3:** Update the comment to match the current rule text.
+
+**Issue 3 done (b2c85ba):** Verified Oct 6, 2026: the comment above `_GROUNDING_RULES_HEADER` reads ("state what the facts say..." lowercase), matching the rule. Issue 2 is the only open item.
 
 ---
 
