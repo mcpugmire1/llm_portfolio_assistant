@@ -21,6 +21,7 @@ Run with: pytest tests/bdd/steps/test_ask_mattgpt.py -v
 (requires `streamlit run app.py` running on localhost:8501)
 """
 
+import pytest
 from pytest_bdd import given, parsers, scenarios, then, when
 
 from utils.ui_helpers import (
@@ -272,18 +273,27 @@ def when_user_submits(browser_page, query):
     )
 
 
-@when("the user submits a query that scores below the confidence threshold")
-def when_user_submits_low_confidence(browser_page):
-    """High-entropy gibberish that should score below CONFIDENCE_LOW.
+@pytest.fixture
+def ask_turn():
+    """Counts taken before a question is submitted, shared between steps."""
+    return {}
 
-    Red-B note: depends on production code recognizing the query as
-    low-confidence rather than misclassifying as nonsense or matching
-    something semantically. If this proves unstable, Blue may need a
-    debug-mode override (URL flag or session-state hook) for
-    deterministic testing.
-    """
-    submit_query(browser_page, "qzwxvnpfrk plmqcvjxk floogerblerg")
-    wait_for_banner(browser_page)
+
+@when(parsers.parse('the user asks "{query}"'))
+def when_user_asks(browser_page, ask_turn, query):
+    """Submit a question and wait for either outcome: Agy's reply (two new
+    chat messages, the visitor's and Agy's) or a new rejection banner."""
+    messages = browser_page.locator("[data-testid='stChatMessage']")
+    ask_turn["messages_before"] = messages.count()
+    ask_turn["banners_before"] = browser_page.locator(".no-match-banner").count()
+    submit_query(browser_page, query)
+    browser_page.wait_for_function(
+        f"""() => document.querySelectorAll("[data-testid='stChatMessage']").length
+                >= {ask_turn["messages_before"] + 2}
+              || document.querySelectorAll('.no-match-banner').length
+                > {ask_turn["banners_before"]}""",
+        timeout=LONG_WAIT * 20,
+    )
 
 
 @when(parsers.parse('the user types "{query}" in the search box'))
@@ -478,12 +488,37 @@ def then_response_generated(browser_page):
     assert messages.count() > 0, "Expected at least one chat message"
 
 
-@then("a rephrase prompt should be displayed")
-def then_rephrase_prompt_displayed(browser_page):
-    """For low_confidence, the banner copy should hint at rephrasing.
-    The locked low_confidence BANNER_COPY includes 'Try rephrasing'.
-    """
-    banner_text = get_banner_text(browser_page)
+@then("Agy's answer should be displayed")
+def then_agy_answer_displayed(browser_page, ask_turn):
+    """The newest chat message is Agy's: it carries an avatar image that
+    differs from the visitor's message just before it. Both srcs must be
+    non-empty, so a change to either image cannot make this pass vacuously.
+    No text comparison and no hardcoded image."""
+    messages = browser_page.locator("[data-testid='stChatMessage']")
+    count = messages.count()
+    assert count >= ask_turn["messages_before"] + 2, (
+        f"Expected the visitor's message and Agy's reply ({ask_turn['messages_before']}"
+        f" + 2 chat messages); found {count}."
+    )
+    newest_src = messages.nth(count - 1).locator("img").first.get_attribute("src") or ""
+    visitor_src = (
+        messages.nth(count - 2).locator("img").first.get_attribute("src") or ""
+    )
+    assert newest_src and visitor_src, (
+        f"Expected avatar images on both messages; newest src empty={not newest_src},"
+        f" visitor src empty={not visitor_src}."
+    )
     assert (
-        "rephras" in banner_text.lower()
-    ), f"Expected rephrase hint in low_confidence banner; got: {banner_text!r}"
+        newest_src != visitor_src
+    ), "The newest chat message has the visitor's avatar, so it is not Agy's reply."
+
+
+@then("no low_confidence rejection banner should be displayed")
+def then_no_low_confidence_banner(browser_page, ask_turn):
+    """No new rejection banner after the question (MATTGPT-275: low search
+    confidence no longer refuses in Ask Agy)."""
+    banners = browser_page.locator(".no-match-banner").count()
+    assert banners == ask_turn["banners_before"], (
+        f"Expected no new rejection banner; banners went from"
+        f" {ask_turn['banners_before']} to {banners}."
+    )
